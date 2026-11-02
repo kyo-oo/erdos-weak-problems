@@ -32,13 +32,27 @@ at any level = exact Z_p zero-sum = the infinite chain of sub-question 3).
 * RECEIPTS: the (2,2) König-chain witnesses (Conjecture D: g(2,2) = ∞):
   valuations 3, 7, 9, 9, 13, 18, 23 — the explicit chain certificates.
 
-Architecture: §1 fact/pt/sums  §2 v2 + power-divisibility  §3 Theorem A
+Architecture: §1 helpers  §2 v2 + power-divisibility  §3 Theorem A
 §4 Theorem B  §5 Theorem C  §6 block identities  §7 receipts.
 -/
 
 -- ===========================================================================
--- §1  FACTORIALS, PRODUCT TAILS, LIST SUMS
+-- §1  FACTORIALS, PRODUCT TAILS, LIST SUMS, ARITHMETIC HELPERS
 -- ===========================================================================
+
+theorem one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
+  induction a with
+  | zero => omega
+  | succ a' =>
+    have hsm : (a' + 1) * b = a' * b + b := Nat.succ_mul a' b
+    omega
+
+theorem one_le_two_pow : ∀ (k : Nat), 1 ≤ 2 ^ k
+  | 0 => by decide
+  | k + 1 => by
+    have h := one_le_two_pow k
+    have hsm : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := Nat.pow_succ 2 k
+    exact one_le_mul _ _ (by decide) h
 
 def fact : Nat → Nat
   | 0 => 1
@@ -73,15 +87,26 @@ def sumP (a : Nat) : List Nat → Nat
   | [] => 0
   | i :: B => pt a (i - a) + sumP a B
 
-/-- Distributivity helper: `a * x + a * (1 + y) = a * (1 + (x + y))`. -/
-theorem mul_add_split (a x y : Nat) :
-    a * x + a * (1 + y) = a * (1 + (x + y)) := by
-  have L : a * x + a * (1 + y) = a * x + (a + a * y) := by
-    rw [Nat.mul_add a 1 y]
-  have R : a * (1 + (x + y)) = a + (a * x + a * y) := by
-    rw [Nat.mul_add a 1 (x + y), Nat.mul_add a x y]
-  rw [L, R]
-  omega
+theorem my_mem_app (x : Nat) : ∀ (L M : List Nat), x ∈ L ++ M → x ∈ L ∨ x ∈ M
+  | [], M, h => by
+    right
+    simpa using h
+  | i :: L, M, h => by
+    have hc : x = i ∨ x ∈ L ++ M := by
+      have := List.mem_cons.mp h
+      cases this with
+      | inl he => left; exact he
+      | inr hr => right; exact hr
+    cases hc with
+    | inl he =>
+      left
+      rw [he]
+      exact List.mem_cons_self ..
+    | inr hr =>
+      have ih := my_mem_app x L M hr
+      cases ih with
+      | inl hl => left; exact List.mem_cons_of_mem _ hl
+      | inr hr2 => right; exact hr2
 
 -- ===========================================================================
 -- §2  THE 2-ADIC VALUATION
@@ -155,6 +180,20 @@ theorem v2_mul : ∀ (f a b : Nat), a + b ≤ f → 1 ≤ a → 1 ≤ b →
               show b % 2 = 1 from by omega]
           rw [v2_odd _ hab, v2_odd a (by omega), v2_odd b (by omega)]
 
+theorem v2_two_pow : ∀ (k : Nat), v2 (2 ^ k) = k
+  | 0 => by
+    have h : ((2:Nat) ^ 0) = 1 := by decide
+    rw [h]
+    exact v2_odd 1 (by decide)
+  | k + 1 => by
+    have hps : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := Nat.pow_succ 2 k
+    have h1 : ((2:Nat) ^ (k + 1)) % 2 = 0 := by rw [hps, Nat.mul_mod]; simp
+    have h2 : ((2:Nat) ^ (k + 1)) / 2 = 2 ^ k := by
+      rw [hps]
+      exact two_mul_div2 (2 ^ k)
+    have h3 : 1 ≤ (2:Nat) ^ (k + 1) := one_le_two_pow (k + 1)
+    rw [v2_even_pos _ h3 h1, h2, v2_two_pow k]
+
 /-- `2^k divides x  iff  k ≤ v2 x` (for x ≥ 1). -/
 theorem pow2_dvd_iff : ∀ (k x : Nat), 1 ≤ x → (2 ^ k ∣ x ↔ k ≤ v2 x)
   | 0, x, hx => by
@@ -163,50 +202,68 @@ theorem pow2_dvd_iff : ∀ (k x : Nat), 1 ≤ x → (2 ^ k ∣ x ↔ k ≤ v2 x)
     · intro _; exact Nat.one_dvd x
   | k + 1, x, hx => by
     have hmod := Nat.div_add_mod x 2
-    have hmk : 2 ^ (k + 1) = 2 * 2 ^ k := by rw [Nat.pow_succ]
+    have hmk : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := Nat.pow_succ 2 k
+    have hxm : 1 ≤ (2:Nat) ^ (k+1) := one_le_two_pow (k + 1)
     constructor
     · intro hdvd
       obtain ⟨m, hm⟩ := hdvd
-      have hx2 : x % 2 = 0 := by
-        have h1 : (2 ^ (k + 1) * m) % 2 = 0 := by
-          rw [hmk, Nat.mul_mod]; simp
+      have hx3 : x = 2 * (2 ^ k * m) := by
+        rw [← Nat.mul_assoc, ← hmk]
+        exact hm
+      have htwo : (2 * (2 ^ k * m)) % 2 = 0 := by
+        have := Nat.mul_mod 2 (2 ^ k * m) 2
         omega
+      have hx2 : x % 2 = 0 := by omega
       have hsplit : v2 x = 1 + v2 (x / 2) := v2_even_pos x hx hx2
       have hxd : x / 2 = 2 ^ k * m := by
-        have hx3 : x = 2 * (2 ^ k * m) := by
-          rw [← Nat.mul_assoc, ← hmk]
-          exact hm
         have h2 := two_mul_div2 (2 ^ k * m)
         omega
-      have hm2 : 1 ≤ x / 2 := by omega
-      have ih := (pow2_dvd_iff k (x / 2) hm2).mp ⟨m, hxd.symm⟩
+      have hdiv2 : 1 ≤ x / 2 := by omega
+      have ih := (pow2_dvd_iff k (x / 2) hdiv2).mp ⟨m, hxd⟩
       omega
     · intro hle
-      have hx2 : x % 2 = 0 := by
-        by_contra hne
-        have hodd : x % 2 = 1 := by omega
-        rw [v2_odd x hodd] at hle
+      have hchoice : x % 2 = 0 ∨ x % 2 = 1 := Nat.mod_two_eq_zero_or_one x
+      cases hchoice with
+      | inl hx2 =>
+        have hsplit : v2 x = 1 + v2 (x / 2) := v2_even_pos x hx hx2
+        have hdiv2 : 1 ≤ x / 2 := by omega
+        have ih := (pow2_dvd_iff k (x / 2) hdiv2).mpr (by omega)
+        obtain ⟨m, hm⟩ := ih
+        refine ⟨m, ?_⟩
+        have hxd : x / 2 = 2 ^ k * m := hm
+        have hfin : x = 2 * (2 ^ k * m) := by omega
+        rw [hmk, ← Nat.mul_assoc]
+        exact hfin
+      | inr hodd =>
+        have hv0 : v2 x = 0 := v2_odd x hodd
         omega
-      have hsplit : v2 x = 1 + v2 (x / 2) := v2_even_pos x hx hx2
-      have hm2 : 1 ≤ x / 2 := by omega
-      have ih := (pow2_dvd_iff k (x / 2) hm2).mpr (by omega)
-      obtain ⟨m, hm⟩ := ih
-      refine ⟨m, ?_⟩
-      rw [hmk, ← Nat.mul_assoc]
-      have hcomm : (2 ^ k * m) * 2 = 2 * (2 ^ k * m) := Nat.mul_comm _ _
-      omega
 
 /-- If `x % 2^k ≠ 0` and `x ≥ 1` then `v2 x < k`. -/
 theorem v2_lt_of_mod_ne (k x : Nat) (hx : 1 ≤ x) (hne : x % 2 ^ k ≠ 0) :
     v2 x < k := by
-  by_contra hc
-  have hdvd : 2 ^ k ∣ x := (pow2_dvd_iff k x hx).mpr (by omega)
-  have hmod := Nat.mod_eq_zero_of_dvd hdvd
-  exact hne hmod
+  have hge : v2 x < k ∨ k ≤ v2 x := Nat.lt_or_ge (v2 x) k
+  cases hge with
+  | inl h => exact h
+  | inr h =>
+    have hdvd : 2 ^ k ∣ x := (pow2_dvd_iff k x hx).mpr h
+    have hmod := Nat.mod_eq_zero_of_dvd hdvd
+    exact absurd hmod hne
 
 -- ===========================================================================
 -- §3  THEOREM A — THE SPLIT
 -- ===========================================================================
+
+/-- Distributivity helper: `a * x + a * (1 + y) = a * (1 + (x + y))`. -/
+theorem mul_add_split (a x y : Nat) :
+    a * x + a * (1 + y) = a * (1 + (x + y)) := by
+  have L : a * x + a * (1 + y) = a * x + (a + a * y) := by
+    rw [Nat.mul_add a 1 y]
+    omega
+  have R : a * (1 + (x + y)) = a + (a * x + a * y) := by
+    rw [Nat.mul_add a 1 (x + y), Nat.mul_add a x y]
+    omega
+  rw [L, R]
+  omega
 
 /-- **Theorem A (factorization).** For every list B of indices beyond a:
 `a! + Σ_B i! = a! · (1 + Σ_B P_i)` with `P_i = (a+1)···i`. -/
@@ -216,11 +273,14 @@ theorem sumF_split (a : Nat) : ∀ (B : List Nat), (∀ i ∈ B, a < i) →
     show fact a + 0 = fact a * (1 + 0)
     simp
   | i :: B, hall => by
-    have hi : a < i := hall i (by simp)
-    have hrest := sumF_split a B (by intro j hj; exact hall j (by simp [hj]))
+    have hi : a < i := hall i (List.mem_cons_self ..)
+    have hrest := sumF_split a B (by
+      intro j hj
+      exact hall j (List.mem_cons_of_mem _ hj))
     obtain ⟨j, hj⟩ : ∃ j, i = a + j := ⟨i - a, by omega⟩
     have hfi : fact i = fact a * pt a j := by rw [hj, fact_pt j a]
-    have hpsame : pt a (i - a) = pt a j := by rw [hj]
+    have hij : i - a = j := by omega
+    have hpsame : pt a (i - a) = pt a j := by rw [hij]
     have hunfold : sumF (i :: B) = fact i + sumF B := rfl
     have hpu : sumP a (i :: B) = pt a (i - a) + sumP a B := rfl
     calc fact a + sumF (i :: B)
@@ -247,18 +307,16 @@ theorem erdos404_split (a : Nat) (B : List Nat) (hB : ∀ i ∈ B, a < i) :
 theorem pt_even_of_odd (a : Nat) (ha : a % 2 = 1) :
     ∀ (j : Nat), 1 ≤ j → pt a j % 2 = 0
   | 0, _ => by omega
-  | j + 1, _ => by
-    have hstep : pt a (j + 1) = pt a j * (a + j + 1) := rfl
-    by_cases hj : j = 0
-    · rw [hj]
-      have h1 : pt a 0 = 1 := rfl
-      have h2 : (a + 0 + 1) % 2 = 0 := by omega
-      rw [hstep]
-      show (pt a 0 * (a + 0 + 1)) % 2 = 0
-      rw [h1, Nat.one_mul]
-      exact h2
-    · rw [hstep, Nat.mul_mod, pt_even_of_odd a ha j (by omega)]
-      simp
+  | 1, _ => by
+    have h1 : pt a 1 = 1 * (a + 1) := rfl
+    have h2 : (a + 1) % 2 = 0 := by omega
+    rw [h1, Nat.one_mul]
+    exact h2
+  | j + 2, _ => by
+    have IH : pt a (j + 1) % 2 = 0 := pt_even_of_odd a ha (j + 1) (by omega)
+    have hstep : pt a (j + 2) = pt a (j + 1) * (a + (j + 1) + 1) := rfl
+    rw [hstep, Nat.mul_mod, IH]
+    simp
 
 theorem sumP_odd_of_odd_a (a : Nat) (ha : a % 2 = 1) :
     ∀ (B : List Nat), (∀ i ∈ B, a < i) → (1 + sumP a B) % 2 = 1 := by
@@ -267,12 +325,15 @@ theorem sumP_odd_of_odd_a (a : Nat) (ha : a % 2 = 1) :
   | nil => intro _; show (1 + 0) % 2 = 1; simp
   | cons i B ih =>
     intro hall
-    have hi : a < i := hall i (by simp)
-    have hrest := ih (by intro j hj; exact hall j (by simp [hj]))
+    have hi : a < i := hall i (List.mem_cons_self ..)
+    have hrest := ih (by
+      intro j hj
+      exact hall j (List.mem_cons_of_mem _ hj))
     have hj1 : 1 ≤ i - a := by omega
     have hpt := pt_even_of_odd a ha (i - a) hj1
     have hpu : sumP a (i :: B) = pt a (i - a) + sumP a B := rfl
     show (1 + sumP a (i :: B)) % 2 = 1
+    rw [hpu]
     omega
 
 /-- **Theorem B (Erdős #404, the 2 | a+1 class).** For every ODD a and every
@@ -305,11 +366,15 @@ theorem sumP4_high_mod16 : ∀ (C : List Nat), (∀ i ∈ C, 8 ≤ i) →
     sumP 4 C % 16 = 0
   | [], _ => by show (0 : Nat) % 16 = 0; simp
   | i :: C, hall => by
-    have hi : 8 ≤ i := hall i (by simp)
-    have hrest := sumP4_high_mod16 C (by intro j hj; exact hall j (by simp [hj]))
+    have hi : 8 ≤ i := hall i (List.mem_cons_self ..)
+    have hrest := sumP4_high_mod16 C (by
+      intro j hj
+      exact hall j (List.mem_cons_of_mem _ hj))
     have hpt : pt 4 (i - 4) % 16 = 0 := pt4_div16 (i - 4) (by omega)
     have hpu : sumP 4 (i :: C) = pt 4 (i - 4) + sumP 4 C := rfl
     have hmod := Nat.add_mod (pt 4 (i - 4)) (sumP 4 C) 16
+    show sumP 4 (i :: C) % 16 = 0
+    rw [hpu]
     omega
 
 /-- The low part of the (4,2) witness space, as three switches. -/
@@ -352,17 +417,38 @@ theorem erdos404_f42_upper (b5 b6 b7 : Bool) (C : List Nat)
     exact sumP_low_mod16 b5 b6 b7
   have hall : ∀ i ∈ lowList b5 b6 b7 ++ C, 4 < i := by
     intro i hi
-    rcases List.mem_append.mp hi with h | h
-    · exact lowList_mem b5 b6 b7 i h
-    · have := hC i h; omega
+    have hsplit := my_mem_app i (lowList b5 b6 b7) C hi
+    cases hsplit with
+    | inl h => exact lowList_mem b5 b6 b7 i h
+    | inr h =>
+      have := hC i h
+      omega
   rw [erdos404_split 4 (lowList b5 b6 b7 ++ C) hall]
   have hx : 1 ≤ 1 + sumP 4 (lowList b5 b6 b7 ++ C) := by omega
   have hv := v2_lt_of_mod_ne 4 (1 + sumP 4 (lowList b5 b6 b7 ++ C)) hx hmod
-  have hf4 : v2 (fact 4) = 3 := by decide
+  have hf4 : v2 (fact 4) = 3 := by
+    have h1 : fact 4 = 24 := by decide
+    have h2 : (24 : Nat) = 2 ^ 3 * 3 := by decide
+    have h3 : 1 ≤ (2:Nat) ^ 3 := one_le_two_pow 3
+    have h4 : 1 ≤ 3 := by decide
+    have h5 : v2 (2 ^ 3 * 3) = v2 (2 ^ 3) + v2 3 :=
+      v2_mul (2 ^ 3 + 3) _ _ (by omega) h3 h4
+    have h6 : v2 3 = 0 := v2_odd 3 (by decide)
+    have h7 : v2 ((2:Nat) ^ 3) = 3 := v2_two_pow 3
+    rw [h1, h2, h5, h6, h7]
   omega
 
 /-- **Theorem C, witness.** `4! + 5! + 7! = 5184 = 2^6 · 81`. -/
-theorem erdos404_f42_witness : v2 (fact 4 + sumF [5, 7]) = 6 := by decide
+theorem erdos404_f42_witness : v2 (fact 4 + sumF [5, 7]) = 6 := by
+  have h1 : fact 4 + sumF [5, 7] = 5184 := by decide
+  have h2 : (5184 : Nat) = 2 ^ 6 * 81 := by decide
+  have h3 : 1 ≤ (2:Nat) ^ 6 := one_le_two_pow 6
+  have h4 : 1 ≤ 81 := by decide
+  have h5 : v2 (2 ^ 6 * 81) = v2 (2 ^ 6) + v2 81 :=
+    v2_mul (2 ^ 6 + 81) _ _ (by omega) h3 h4
+  have h6 : v2 81 = 0 := v2_odd 81 (by decide)
+  have h7 : v2 ((2:Nat) ^ 6) = 6 := v2_two_pow 6
+  rw [h1, h2, h5, h6, h7]
 
 /-- **Theorem C (Erdős #404): f(4,2) = 6 exactly** — every sum of factorials
 with least element 4! has 2-adic valuation at most 6, and 4!+5!+7! attains 6. -/
@@ -383,7 +469,8 @@ theorem block_pair (u : Nat) :
   have h1 : fact (u + 1) = (u + 1) * fact u := rfl
   have h2 : fact u + (u + 1) * fact u = fact u * (1 + (u + 1)) := by
     rw [Nat.mul_comm (u + 1) (fact u), ← Nat.mul_add, Nat.mul_one]
-  rw [h1, h2, show 1 + (u + 1) = u + 2 from by omega]
+  have h3 : 1 + (u + 1) = u + 2 := by omega
+  rw [h1, h2, h3]
 
 /-- **Block triple.** `[u, u+2] = u! · (u+2)²` — the perfect-square
 factorization of the 3-block. -/
@@ -392,18 +479,12 @@ theorem block_triple (u : Nat) :
   have e1 : fact (u + 1) = fact u * pt u 1 := (fact_pt 1 u).symm
   have e2 : fact (u + 2) = fact u * pt u 2 := (fact_pt 2 u).symm
   have p1 : pt u 1 = u + 1 := by
-    have h : pt u 1 = pt u 0 * (u + 0 + 1) := rfl
-    have h0 : pt u 0 = 1 := rfl
-    rw [h, h0, Nat.one_mul]
-    omega
+    have h : pt u 1 = 1 * (u + 1) := rfl
+    rw [h, Nat.one_mul]
   have p2 : pt u 2 = (u + 1) * (u + 2) := by
     have h : pt u 2 = pt u 1 * (u + 1 + 1) := rfl
-    rw [h, p1]
-    omega
-  have g1 : fact u + fact u * (u + 1) = fact u * (1 + (u + 1)) := by
-    rw [← Nat.mul_add, Nat.mul_one]
-  rw [e1, e2, p1, p2, g1, ← Nat.mul_add]
-  apply Nat.eq_of_mul_eq_mul_left (fact_pos u)
+    have hq : u + 1 + 1 = u + 2 := by omega
+    rw [h, p1, hq]
   have hexp : (u + 1) * (u + 2) = u * u + 3 * u + 2 := by
     have s1 : (u + 1) * (u + 2) = u * (u + 2) + 1 * (u + 2) :=
       Nat.mul_add (u + 1) u (u + 2)
@@ -419,14 +500,22 @@ theorem block_triple (u : Nat) :
     have s4 : 2 * (u + 2) = 2 * u + 2 * 2 := Nat.mul_add 2 u 2
     rw [s1, s2, s3, s4]
     omega
-  rw [hexp, hexp2]
-  omega
+  have split : fact u + fact (u + 1) + fact (u + 2)
+      = fact u * (1 + pt u 1 + pt u 2) := by
+    rw [e1, e2]
+    rw [Nat.mul_add (fact u) 1 (pt u 1 + pt u 2),
+        Nat.mul_add (fact u) (pt u 1) (pt u 2), Nat.mul_one (fact u)]
+    omega
+  have hbr : 1 + (u + 1) + (u + 1) * (u + 2) = (u + 2) * (u + 2) := by
+    rw [hexp, hexp2]
+    omega
+  rw [split, p1, p2, hbr]
 
 -- ===========================================================================
 -- §7  RECEIPTS
 -- ===========================================================================
 
--- Theorem C receipts
+-- Theorem C receipts (compiler-evaluated; v2 is WF-recursive)
 #eval v2 (fact 4 + sumF [5, 7])                          -- 6  (5184 = 2^6·81)
 #eval fact 4 + sumF [5, 7]                               -- 5184
 

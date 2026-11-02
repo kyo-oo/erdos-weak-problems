@@ -65,7 +65,8 @@ theorem jpow_sum_eq (m : Nat) : jpow_sum m = 2 ^ (m + 1) - m - 2 := by
   | zero => simp [jpow_sum]
   | succ m ih =>
     show 2 * jpow_sum m + (m + 1) = 2 ^ (m + 2) - (m + 1) - 2
-    rw [ih, show m + 2 = m + 1 + 1 from by omega, Nat.pow_succ]
+    have hm2 : m + 2 = m + 1 + 1 := by omega
+    rw [ih, hm2, Nat.pow_succ]
     have hpos : 1 ≤ 2 ^ (m + 1) := one_le_two_pow (m + 1)
     omega
 
@@ -100,7 +101,6 @@ theorem bl_of_jpow (n m : Nat) (hj : jpow_sum m = n) :
   have key : n * pow_sum m + n = n * (pow_sum m + 1) := by
     rw [Nat.mul_add, Nat.mul_one]
   rw [key, hps]
-
 /-- **The Borwein–Loring family identity (integer form).** For every m,
 with `n = 2^{m+1} − m − 2` (n = 1, 4, 11, 26, 57, 120, 247, …):
 `Σ_{j=1}^{m} (n+j)·2^{m−j} = n·2^m`.  Dividing by 2^{n+m} (every exponent
