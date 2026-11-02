@@ -76,7 +76,7 @@ jobs:
           grep -F "'Erdos261Tower.erdos261_continuum' depends on axioms: [propext, Quot.sound]" tower.log
           grep -F "'Erdos261Tower.tower_cauchy' depends on axioms: [propext, Quot.sound]" tower.log
           echo TOWER_KERNEL_GREEN=1
-      - name: Kernel 5 - Erdos 404 FULL problem: p-adic reduction + odd-a class + f(4,2)=6
+      - name: "Kernel 5 - Erdos 404 FULL problem (p-adic reduction + odd-a class + f42 exact)"
         shell: bash
         run: |
           set -euo pipefail
@@ -97,7 +97,7 @@ jobs:
           grep -F "'block_pair' depends on axioms" padic-reduction.log
           grep -F "'block_triple' depends on axioms" padic-reduction.log
           echo PADIC_REDUCTION_KERNEL_GREEN=1
-      - name: Kernel 6 - Erdos 261 Q3 bridge: block identity family
+      - name: "Kernel 6 - Erdos 261 Q3 bridge (block identity family)"
         shell: bash
         run: |
           set -euo pipefail
