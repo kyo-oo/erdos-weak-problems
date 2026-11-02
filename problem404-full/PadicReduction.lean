@@ -51,8 +51,9 @@ theorem one_le_two_pow : ∀ (k : Nat), 1 ≤ 2 ^ k
   | 0 => by decide
   | k + 1 => by
     have h := one_le_two_pow k
-    have hsm : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := Nat.pow_succ 2 k
-    exact one_le_mul _ _ (by decide) h
+    have hsm : (2 : Nat) ^ (k + 1) = 2 ^ k * 2 := Nat.pow_succ 2 k
+    rw [hsm]
+    exact one_le_mul _ _ h (by decide)
 
 def fact : Nat → Nat
   | 0 => 1
@@ -186,13 +187,17 @@ theorem v2_two_pow : ∀ (k : Nat), v2 (2 ^ k) = k
     rw [h]
     exact v2_odd 1 (by decide)
   | k + 1 => by
-    have hps : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := Nat.pow_succ 2 k
+    have hps : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := by
+      rw [Nat.mul_comm]
+      exact Nat.pow_succ 2 k
     have h1 : ((2:Nat) ^ (k + 1)) % 2 = 0 := by rw [hps, Nat.mul_mod]; simp
     have h2 : ((2:Nat) ^ (k + 1)) / 2 = 2 ^ k := by
       rw [hps]
       exact two_mul_div2 (2 ^ k)
     have h3 : 1 ≤ (2:Nat) ^ (k + 1) := one_le_two_pow (k + 1)
-    rw [v2_even_pos _ h3 h1, h2, v2_two_pow k]
+    have hrec := v2_two_pow k
+    rw [v2_even_pos _ h3 h1, h2]
+    omega
 
 /-- `2^k divides x  iff  k ≤ v2 x` (for x ≥ 1). -/
 theorem pow2_dvd_iff : ∀ (k x : Nat), 1 ≤ x → (2 ^ k ∣ x ↔ k ≤ v2 x)
@@ -202,7 +207,9 @@ theorem pow2_dvd_iff : ∀ (k x : Nat), 1 ≤ x → (2 ^ k ∣ x ↔ k ≤ v2 x)
     · intro _; exact Nat.one_dvd x
   | k + 1, x, hx => by
     have hmod := Nat.div_add_mod x 2
-    have hmk : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := Nat.pow_succ 2 k
+    have hmk : (2 : Nat) ^ (k + 1) = 2 * 2 ^ k := by
+      rw [Nat.mul_comm]
+      exact Nat.pow_succ 2 k
     have hxm : 1 ≤ (2:Nat) ^ (k+1) := one_le_two_pow (k + 1)
     constructor
     · intro hdvd
@@ -232,7 +239,7 @@ theorem pow2_dvd_iff : ∀ (k x : Nat), 1 ≤ x → (2 ^ k ∣ x ↔ k ≤ v2 x)
         refine ⟨m, ?_⟩
         have hxd : x / 2 = 2 ^ k * m := hm
         have hfin : x = 2 * (2 ^ k * m) := by omega
-        rw [hmk, ← Nat.mul_assoc]
+        rw [hmk, Nat.mul_assoc]
         exact hfin
       | inr hodd =>
         have hv0 : v2 x = 0 := v2_odd x hodd
@@ -344,6 +351,7 @@ theorem erdos404_odd_a (a : Nat) (ha : a % 2 = 1) (B : List Nat)
     v2 (fact a + sumF B) = v2 (fact a) := by
   rw [erdos404_split a B hB,
     v2_odd (1 + sumP a B) (sumP_odd_of_odd_a a ha B hB)]
+  omega
 
 -- ===========================================================================
 -- §5  THEOREM C — f(4,2) = 6 EXACTLY
@@ -468,7 +476,8 @@ theorem block_pair (u : Nat) :
     fact u + fact (u + 1) = fact u * (u + 2) := by
   have h1 : fact (u + 1) = (u + 1) * fact u := rfl
   have h2 : fact u + (u + 1) * fact u = fact u * (1 + (u + 1)) := by
-    rw [Nat.mul_comm (u + 1) (fact u), ← Nat.mul_add, Nat.mul_one]
+    rw [Nat.mul_comm (u + 1) (fact u), Nat.mul_add (fact u) 1 (u + 1),
+        Nat.mul_one (fact u)]
   have h3 : 1 + (u + 1) = u + 2 := by omega
   rw [h1, h2, h3]
 
@@ -476,8 +485,8 @@ theorem block_pair (u : Nat) :
 factorization of the 3-block. -/
 theorem block_triple (u : Nat) :
     fact u + fact (u + 1) + fact (u + 2) = fact u * ((u + 2) * (u + 2)) := by
-  have e1 : fact (u + 1) = fact u * pt u 1 := (fact_pt 1 u).symm
-  have e2 : fact (u + 2) = fact u * pt u 2 := (fact_pt 2 u).symm
+  have e1 : fact (u + 1) = fact u * pt u 1 := fact_pt 1 u
+  have e2 : fact (u + 2) = fact u * pt u 2 := fact_pt 2 u
   have p1 : pt u 1 = u + 1 := by
     have h : pt u 1 = 1 * (u + 1) := rfl
     rw [h, Nat.one_mul]
@@ -486,15 +495,16 @@ theorem block_triple (u : Nat) :
     have hq : u + 1 + 1 = u + 2 := by omega
     rw [h, p1, hq]
   have hexp : (u + 1) * (u + 2) = u * u + 3 * u + 2 := by
-    have s1 : (u + 1) * (u + 2) = u * (u + 2) + 1 * (u + 2) :=
-      Nat.mul_add (u + 1) u (u + 2)
+    have s1 : (u + 1) * (u + 2) = u * (u + 2) + (u + 2) :=
+      Nat.succ_mul u (u + 2)
     have s2 : u * (u + 2) = u * u + u * 2 := Nat.mul_add u u 2
     have s3 : u * 2 = 2 * u := Nat.mul_comm u 2
-    rw [s1, s2, s3, Nat.one_mul]
+    rw [s1, s2, s3]
     omega
   have hexp2 : (u + 2) * (u + 2) = u * u + 4 * u + 4 := by
-    have s1 : (u + 2) * (u + 2) = u * (u + 2) + 2 * (u + 2) :=
-      Nat.mul_add (u + 2) u (u + 2)
+    have s1 : (u + 2) * (u + 2) = u * (u + 2) + 2 * (u + 2) := by
+      rw [Nat.mul_add (u + 2) u 2, Nat.mul_comm (u + 2) u,
+          Nat.mul_comm (u + 2) 2]
     have s2 : u * (u + 2) = u * u + u * 2 := Nat.mul_add u u 2
     have s3 : u * 2 = 2 * u := Nat.mul_comm u 2
     have s4 : 2 * (u + 2) = 2 * u + 2 * 2 := Nat.mul_add 2 u 2
@@ -502,10 +512,10 @@ theorem block_triple (u : Nat) :
     omega
   have split : fact u + fact (u + 1) + fact (u + 2)
       = fact u * (1 + pt u 1 + pt u 2) := by
-    rw [e1, e2]
-    rw [Nat.mul_add (fact u) 1 (pt u 1 + pt u 2),
-        Nat.mul_add (fact u) (pt u 1) (pt u 2), Nat.mul_one (fact u)]
-    omega
+    rw [e1, e2,
+        Nat.mul_add (fact u) (1 + pt u 1) (pt u 2),
+        Nat.mul_add (fact u) 1 (pt u 1),
+        Nat.mul_one (fact u)]
   have hbr : 1 + (u + 1) + (u + 1) * (u + 2) = (u + 2) * (u + 2) := by
     rw [hexp, hexp2]
     omega

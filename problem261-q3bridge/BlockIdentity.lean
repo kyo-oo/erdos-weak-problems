@@ -46,11 +46,18 @@ def pow_sum : Nat → Nat
   | 0 => 0
   | m + 1 => 2 * pow_sum m + 1
 
+theorem one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
+  induction a with
+  | zero => omega
+  | succ a' =>
+    have hsm : (a' + 1) * b = a' * b + b := Nat.succ_mul a' b
+    omega
+
 theorem one_le_two_pow : ∀ (k : Nat), 1 ≤ 2 ^ k
   | 0 => by decide
   | k + 1 => by
     rw [Nat.pow_succ]
-    exact one_le_mul _ _ (by decide) (one_le_two_pow k)
+    exact one_le_mul (2 ^ k) 2 (one_le_two_pow k) (by decide)
 
 theorem pow_sum_eq (m : Nat) : pow_sum m = 2 ^ m - 1 := by
   induction m with
@@ -58,17 +65,33 @@ theorem pow_sum_eq (m : Nat) : pow_sum m = 2 ^ m - 1 := by
   | succ m ih =>
     show 2 * pow_sum m + 1 = 2 ^ (m + 1) - 1
     rw [ih, Nat.pow_succ]
-    omega
+    have key : ∀ t : Nat, 1 ≤ t → 2 * (t - 1) + 1 = t * 2 - 1 := by
+      intro t ht; omega
+    exact key (2 ^ m) (one_le_two_pow m)
+
+theorem two_pow_big : ∀ (k : Nat), k + 2 ≤ 2 ^ (k + 1)
+  | 0 => by decide
+  | k + 1 => by
+    have ih := two_pow_big k
+    have h1 : 1 ≤ 2 ^ (k + 1) := one_le_two_pow (k + 1)
+    have hrel : 2 ^ (k + 2) = 2 ^ (k + 1) * 2 := Nat.pow_succ 2 (k + 1)
+    have key : ∀ a : Nat, 1 ≤ a → k + 2 ≤ a → k + 3 ≤ a * 2 := by
+      intro a ha hk; omega
+    rw [hrel]
+    exact key (2 ^ (k + 1)) h1 ih
 
 theorem jpow_sum_eq (m : Nat) : jpow_sum m = 2 ^ (m + 1) - m - 2 := by
   induction m with
   | zero => simp [jpow_sum]
   | succ m ih =>
     show 2 * jpow_sum m + (m + 1) = 2 ^ (m + 2) - (m + 1) - 2
-    have hm2 : m + 2 = m + 1 + 1 := by omega
-    rw [ih, hm2, Nat.pow_succ]
-    have hpos : 1 ≤ 2 ^ (m + 1) := one_le_two_pow (m + 1)
-    omega
+    have hbig : m + 2 ≤ 2 ^ (m + 1) := two_pow_big m
+    have hrel : 2 ^ (m + 2) = 2 ^ (m + 1) * 2 := Nat.pow_succ 2 (m + 1)
+    rw [ih, hrel]
+    have key : ∀ t : Nat, m + 2 ≤ t →
+        2 * (t - m - 2) + (m + 1) = t * 2 - (m + 1) - 2 := by
+      intro t ht; omega
+    exact key (2 ^ (m + 1)) hbig
 
 -- ===========================================================================
 -- §2  THE REPRESENTATION FAMILY (integer form)
@@ -95,7 +118,11 @@ theorem bl_sum_split (n : Nat) : ∀ (m : Nat),
 then `Σ_{j=1}^{m} (n+j)·2^{m−j} = n·2^m`. -/
 theorem bl_of_jpow (n m : Nat) (hj : jpow_sum m = n) :
     bl_sum n m = n * 2 ^ m := by
-  have hps : pow_sum m + 1 = 2 ^ m := by rw [pow_sum_eq]; omega
+  have hps : pow_sum m + 1 = 2 ^ m := by
+    rw [pow_sum_eq]
+    have key : ∀ t : Nat, 1 ≤ t → t - 1 + 1 = t := by
+      intro t ht; omega
+    exact key (2 ^ m) (one_le_two_pow m)
   have h := bl_sum_split n m
   rw [h, hj]
   have key : n * pow_sum m + n = n * (pow_sum m + 1) := by
