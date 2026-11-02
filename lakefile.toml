@@ -1,0 +1,12 @@
+name = "ErdosWeakProblems"
+version = "0.1.0"
+
+# The one-shot kill campaign: Erdos open problems weaker than #406.
+# Weapons: Kyo-oo's ternary/dyadic mathematics (see README.md).
+# All kills are core-Lean files verified by GitHub CI via `lake env lean`
+# with Mathlib resolved at the pinned toolchain below.
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.0-rc2"

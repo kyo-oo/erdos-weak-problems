@@ -1,0 +1,82 @@
+name: Erdos One-Shot Kills CI (271 + 404 + 261 TwoSolutions + 261 Continuum Tower)
+on:
+  push:
+    branches: ['**']
+    paths:
+      - bulldoze/problem271-stanley-a2/StanleyA2.lean
+      - bulldoze/problem404-padic-kernel/KernelLaw.lean
+      - bulldoze/problem261-two-solutions/**
+      - bulldoze/problem261-continuum-tower/**
+      - .github/workflows/kills.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Kernel 1 - Erdos 271 Stanley S(0,2) complete characterization
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean bulldoze/problem271-stanley-a2/StanleyA2.lean 2>&1 | tee stanley-a2.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' stanley-a2.log
+          grep -F "[0, 2, 3, 5, 9, 11, 12, 14, 27, 29, 30, 32, 36, 38, 39, 41]" stanley-a2.log
+          grep -F "[1, 2, 4, 8, 16, 32, 64, 128]" stanley-a2.log
+          echo STANLEY_A2_KERNEL_GREEN=1
+      - name: Kernel 2 - Erdos 404 left-factorial kernel law
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean bulldoze/problem404-padic-kernel/KernelLaw.lean 2>&1 | tee kernel-law.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel-law.log
+          grep -F "[3, 3, 3]" kernel-law.log
+          grep -F "[7, 7]" kernel-law.log
+          grep -F "[10, 10]" kernel-law.log
+          grep -F "(3, 7, 10)" kernel-law.log
+          echo KERNEL_LAW_GREEN=1
+      - name: Kernel 3 - Erdos 261 weakened two-solutions question (Kill #5)
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean bulldoze/problem261-two-solutions/TwoSolutions.lean 2>&1 | tee two-solutions.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' two-solutions.log
+          test "$(grep -cF '(1 : Rat)/2' two-solutions.log)" -ge 3
+          grep -F "(128, 128, 128)" two-solutions.log
+          grep -F "(104, 104)" two-solutions.log
+          grep -F "'erdos261_weakened_two_solutions' does not depend on any axioms" two-solutions.log
+          grep -F "'erdos261_three_solutions' does not depend on any axioms" two-solutions.log
+          echo TWO_SOLUTIONS_KERNEL_GREEN=1
+      - name: Kernel 4 - Erdos 261 CONTINUUM question, real-x tower (Kill #6)
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean bulldoze/problem261-continuum-tower/Erdos261Tower.lean 2>&1 | tee tower.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tower.log
+          grep -F "(1, 4, 11, 26, 57, 120, 247, 502)" tower.log
+          grep -F "(2, 2)" tower.log
+          grep -F "(16, 16)" tower.log
+          grep -F "(88, 88)" tower.log
+          grep -F "(416, 416)" tower.log
+          grep -F "(1824, 1824)" tower.log
+          grep -F "(54430251538710528, 54430251538710528, 54430251538710528)" tower.log
+          grep -F "(502030460001114580558742593210417152, 502030460001114580558742593210417152, 502030460001114580558742593210417152)" tower.log
+          grep -F "'Erdos261Tower.erdos261_continuum' depends on axioms: [propext, Quot.sound]" tower.log
+          grep -F "'Erdos261Tower.tower_cauchy' depends on axioms: [propext, Quot.sound]" tower.log
+          echo TOWER_KERNEL_GREEN=1
+      - name: Independent verification battery
+        shell: bash
+        run: |
+          python3 bulldoze/scripts/verify_bulldoze.py
+          python3 bulldoze/problem261-two-solutions/verify_frontiers.py
+          python3 bulldoze/problem261-continuum-tower/verify_tower261.py
