@@ -1,4 +1,4 @@
-name: Erdos One-Shot Kills CI (271 + 404 + 261 TwoSolutions + 261 Continuum Tower)
+name: Erdos One-Shot Kills CI (271 + 404 + 261 TwoSolutions + 261 Tower + 261 Funnels + 404 GadgetSupply)
 on:
   push:
     branches: ['**']
@@ -9,6 +9,8 @@ on:
       - bulldoze/problem261-continuum-tower/**
       - problem404-full/**
       - problem261-q3bridge/**
+      - problem404-gadget-supply/**
+      - problem261-funnels/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -112,6 +114,30 @@ jobs:
           grep -F "'jpow_sum_eq' depends on axioms" block-identity.log
           grep -F "'pow_sum_eq' depends on axioms" block-identity.log
           echo BLOCK_IDENTITY_KERNEL_GREEN=1
+      - name: "Kernel 7 - Erdos 404 sub-Q3 gadget-supply program (lift/pair/triple laws)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem404-gadget-supply/GadgetSupply.lean 2>&1 | tee gadget-supply.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gadget-supply.log
+          grep -cF "depends on axioms" gadget-supply.log
+          grep -F "'lift_law' depends on axioms: [propext, Quot.sound]" gadget-supply.log
+          grep -F "'pair_law' depends on axioms: [propext, Quot.sound]" gadget-supply.log
+          grep -F "'triple_law' depends on axioms: [propext, Quot.sound]" gadget-supply.log
+          grep -F "25854571308224545292288" gadget-supply.log
+          grep -xF "23" gadget-supply.log
+          echo GADGET_SUPPLY_KERNEL_GREEN=1
+      - name: "Kernel 8 - Erdos 261 funnels (coalescence determinism + census)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem261-funnels/FunnelStructure.lean 2>&1 | tee funnels.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' funnels.log
+          grep -F "'death_fuel_mono' depends on axioms: [propext, Quot.sound]" funnels.log
+          grep -F "(12231, 393, 217, 12231)" funnels.log
+          grep -xF "192" funnels.log
+          grep -xF "155943" funnels.log
+          echo FUNNELS_KERNEL_GREEN=1
       - name: Independent verification battery
         shell: bash
         run: |
@@ -119,3 +145,5 @@ jobs:
           python3 bulldoze/problem261-two-solutions/verify_frontiers.py
           python3 bulldoze/problem261-continuum-tower/verify_tower261.py
           python3 problem404-full/verify_404.py
+          python3 problem404-gadget-supply/verify_gadgets.py
+          python3 problem261-funnels/funnels.py

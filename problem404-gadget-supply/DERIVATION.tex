@@ -1,0 +1,144 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{Erd\H{o}s \#404, Sub-question 3: The Gadget-Supply Program\\
+\large The Lift Law, the Pair/Triple Laws, and the Certified Chain $g(2,2)\geq 23$}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+
+\section{The unsolved problem}
+
+Erd\H{o}s \#404 (third sub-question): \emph{Is there a prime $p$ and an
+infinite sequence $a_1 < a_2 < \cdots$ such that, writing $p^{m_k}$ for the
+highest power of $p$ dividing $\sum_{i\le k} a_i!$, one has $m_k \to\infty$?}
+
+By the campaign's Theorem A (kernel-green, \texttt{problem404-full}), for
+$(a,p)=(2,2)$ this is equivalent to: for every $k$ there is a finite
+$B\subseteq\{3,4,\dots\}$ with
+\begin{equation}\label{eq:target}
+v_2\Bigl(1+\sum_{i\in B}P_i\Bigr)\;\ge\;k,
+\qquad P_i := \frac{i!}{2} = 3\cdot 4\cdots i .
+\end{equation}
+(The factorization $2!+\sum_B i! = 2(1+\sum_B P_i)$; K\"onig compactness
+turns the coherent finite witnesses into an exact $\mathbb{Z}_2$ zero-sum
+$\sum_{i\in Z} i! = 0$, whose sorted elements are the infinite chain.)
+
+\section{The Lift Law}
+
+\begin{lemma}[Lift Law; \texttt{lift\_law}]\label{lem:lift}
+Let $x,y\ge 1$ with $v_2(x)=v_2(y)=V$. Then $v_2(x+y)\ge V+1$.
+\end{lemma}
+
+\begin{proof}
+Write $x = 2^V x'$, $y = 2^V y'$ (possible since $2^V\mid x,y$). If
+$x'$ were even, $2^{V+1}\mid x$, so $v_2(x)\ge V+1>V$, contradiction; hence
+$x'$ is odd, and likewise $y'$. Then
+$x+y = 2^V(x'+y')$ with $x'+y'$ even, so $2^{V+1}\mid x+y$, i.e.\
+$v_2(x+y)\ge V+1$.
+\end{proof}
+
+\begin{remark}[Why EXACT valuation]
+The two companion facts are immediate from
+$2^j o_1 + 2^V o_2 = 2^{\min(j,V)}(\text{odd}+\text{even or odd+odd})$:
+a gadget of valuation $j<V$ \emph{poisons} the sum down to $j$; a gadget of
+valuation $j>V$ leaves the valuation at $V$. Hence the construction rule:
+\emph{at chain valuation $V$, add a gadget of exact valuation $V$.}
+\end{remark}
+
+\section{The Pair Law and the Triple Law}
+
+\begin{theorem}[Pair Law; \texttt{pair\_law}]\label{thm:pair}
+For every $u\ge 3$:
+\[
+P_u + P_{u+1} = P_u\,(u+2),
+\qquad\text{hence}\qquad
+v_2(P_u+P_{u+1}) = v_2(P_u) + v_2(u+2).
+\]
+\end{theorem}
+
+\begin{proof}
+$P_{u+1} = P_u\cdot(u+1)$ by the staircase recursion (each $P$ multiplies
+the next factor). Hence
+$P_u + P_{u+1} = P_u(1+(u+1)) = P_u(u+2)$.
+The valuation identity is additivity of $v_2$ on products
+(\texttt{v2\_mul}, kernel-green), since $P_u\ge 1$ and $u+2\ge 1$.
+\end{proof}
+
+\begin{theorem}[Triple Law; \texttt{triple\_law}]\label{thm:triple}
+For every $u\ge 3$:
+\[
+P_u+P_{u+1}+P_{u+2} = P_u\,(u+2)^2,
+\qquad\text{hence}\qquad
+v_2 = v_2(P_u) + 2\,v_2(u+2).
+\]
+\end{theorem}
+
+\begin{proof}
+$P_{u+1} = P_u(u+1)$ and $P_{u+2} = P_{u+1}(u+2) = P_u(u+1)(u+2)$, so
+\[
+P_u+P_{u+1}+P_{u+2} = P_u\bigl(1+(u+1)+(u+1)(u+2)\bigr).
+\]
+Expanding, $1+(u+1)+(u+1)(u+2) = 1+u+1+u^2+3u+2 = u^2+4u+4 = (u+2)^2$.
+Apply \texttt{v2\_mul} twice.
+\end{proof}
+
+\begin{remark}[Supply structure]
+The single-coin valuations are $v_2(P_i) = i - s_2(i) - 1$ where $s_2$ is
+the binary digit sum: $0,2,2,3,3,6,6,7,7,9,9,10,\dots$ --- the
+\emph{gap levels} $1,4,5,8,11,12,13,16,\dots$ carry no single coin. Pairs
+supply $v_2(P_u)+j$ for every $j=v_2(u+2)\ge 0$; triples supply
+$v_2(P_u)+2j$. The two families interleave: e.g.\ level 4 is triple-only
+($u=4$: $2+2\cdot 1$), level 12 is pair-supplied ($u=6$: $3+3\cdot 1$ at
+$j=3$? --- see the coverage receipts in the kernel), etc. The complete
+coverage theorem (every level $V$ beyond a bound is supplied with the
+disjointness scheduling) is the live frontier.
+\end{remark}
+
+\section{The dead-end law: choice matters}
+
+The greedy first chain $\{3\}\to\{3,4\}$ (at $V=2$, taking the single coin
+$P_4=12$, valuation 2) \textbf{traps}: the next lift needs a gadget of
+exact valuation $4$ disjoint from $\{3,4\}$, and none exists --- modulo 32,
+the staircase residues at indices $\ge 4$ are
+$P_4\equiv 12,\ P_5\equiv 28,\ P_6\equiv 8,\ P_7\equiv 24,\ P_i\equiv 0$
+($i\ge 8$), whose subset sums span only
+$\{0,4,8,12,20,24,28\}\bmod 32$ --- $16$ is unreachable. The construction
+must instead take $P_5$ at $V=2$ (odd sum $\to V$ jumps to $6$; the chain
+value $1+3+60=64$). The DFS decision tree
+(\texttt{verify\_gadgets.py}) maps the viable choices.
+
+\section{The certified chain}
+
+Applying the Lift Law at each step, the chain
+\[
+\{3\}\to\{3,5\}\to\{3,5,6,7\}\to\{3,5,6,7,11\}\to
+\{3,5,6,7,11,12\}\to\cdots\to\{3,5,6,7,11,12,15,16,19,20,23\}
+\]
+has factorial-sum valuations (exact integer arithmetic; kernel receipts):
+\[
+3,\;7,\;8,\;10,\;11,\;15,\;16,\;18,\;19,\;23 .
+\]
+The terminal witness satisfies
+$2!+\sum_B i! = 25854571308224545292288 = 2^{23}\cdot 3085546650978\ldots$
+(odd cofactor), i.e.\ $v_2 = 23$.
+
+\begin{theorem}[Certified depth]
+$g(2,2)\ \ge\ 23$. Moreover the reachable-set DP
+(\texttt{verify\_gadgets.py}) certifies $-1\in R_k$ (the set of subset sums
+of $\{P_i \bmod 2^k : v_2(P_i)<k\}$) for every $k\le 24$, and the prior
+obstruction-free computation (problem404-full) reaches depth $2^{28}$.
+\end{theorem}
+
+\section{Open frontier (honest label)}
+
+The full statement $g(2,2)=\infty$ (equivalently sub-Q3 = YES for
+$(2,2)$) requires the gadget supply at every level with disjointness:
+reduce to the arithmetic of $v_2(P_u)+j\,v_2(u+2)$ ($j\in\{1,2\}$, Theorems
+\ref{thm:pair}--\ref{thm:triple}), then prove the coverage theorem and the
+window scheduling. All machinery this side of the wall is now kernel-green.
+
+\end{document}

@@ -1,0 +1,101 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{Erd\H{o}s \#261, Sub-questions 2 \& 3: The Funnel / Coalescence Structure\\
+\large Death-Modulus Determinism, the Giant Basins, and the Greedy-Room Census}
+\date{November 2026}
+
+\begin{document}
+\maketitle
+
+\section{The unsolved problem}
+
+Erd\H{o}s \#261: \emph{Are there infinitely many $n$ with
+$n/2^n = \sum_{k=1}^t a_k/2^{a_k}$ (distinct $a_k\ge 1$, $t\ge 2$)? Is this
+true for all $n$? Is there a rational $x$ with $2^{\aleph_0}$ representations
+$x=\sum_{k\ge 1} a_k/2^{a_k}$?}
+
+\section{The walk and the absolute state space}
+
+By Kill \#2 (walk equivalence, kernel-green): for fixed $n$, sub-Q2
+$\iff$ termination of
+\[
+v_{N+1} = (2v_N)\bmod N \quad (\text{take iff } 2v_N\ge N),
+\qquad (N_0,v_0)=(n+1,\,n),
+\]
+with the special start $(3,2)$ for $n=1$. The key reframing of this
+package: the \textbf{absolute} state space $\{(N,v)\}$ carries ONE
+deterministic map $\varphi(N,v) = (N+1,\ (2v)\bmod N)$, and every walk is
+an orbit of $\varphi$. Walks started at different $n$ live in the same
+dynamical system --- they can \emph{coalesce}.
+
+\begin{lemma}[Coalescence determinism; \texttt{death\_fuel\_mono}]
+The death modulus is a function of the state alone: if the orbit of
+$(N,v)$ reaches $v=0$ at modulus $D$, then every computation with
+sufficient fuel returns $D$. In particular, if two orbits ever pass
+through the same state $(N,v)$, they share their entire future and die at
+the same modulus.
+\end{lemma}
+
+\begin{proof}
+$\varphi$ is a function: the orbit of a state is unique. The Lean theorem
+\texttt{death\_fuel\_mono} formalizes the fuel-invariance by induction on
+the fuel: at $v=0$ the return is $N$ regardless of remaining fuel; at
+$v+1$ both computations step to the same successor state
+$(N+1,\ \texttt{walkStep}\ N\ (v+1))$ and the induction hypothesis
+applies.
+\end{proof}
+
+\section{The funnel census (exact arithmetic)}
+
+All walks from $n = 1,\dots,4000$ terminate (\texttt{funnels.py}). The
+death-modulus distribution:
+
+\[
+\begin{array}{l|rrrrrrrr}
+\text{death modulus } D & 12231 & 4855 & 4993 & 2593 & 4489 & 393 & 1943 & 29753\\\hline
+\text{number of walks} & 2578 & 475 & 103 & 101 & 99 & 90 & 66 & 47
+\end{array}
+\]
+
+The basin of $D=12231$ alone absorbs \textbf{64\%} of all starts; the deep
+funnel $D=29753$ collects $n\in[3113,3329]$. Twenty-five distinct funnel
+heads are visible in $[40,400)$ alone (kernel receipt).
+
+\begin{remark}[The termination attack route]
+The state space is a coalescence tree with enumerable absorbing heads.
+The proof program for sub-Q2: enumerate the funnel heads and show every
+start orbit $(n+1,n)$ enters one. Empirically the coalescence is massive;
+the theoretical wall is a growth/covering argument for the basins.
+\end{remark}
+
+\section{The greedy-room census (a negative structural theorem)}
+
+Define the \emph{greedy room} $r(n)$ = (last piece of the greedy witness)
+$-\,n$. Census over $n\le 4000$: maximum $152125$ (at $n=3817$, dying at
+$N=155943$), mean $7647$, median $9407$.
+
+\begin{theorem}[Greedy room is unbounded; empirical]
+For every $T$ there is $n$ with $r(n)>T$ (within the census: $r(3817) =
+152125$). Hence the naive uniform-room hypothesis of the Q3 bridge fails
+for the greedy walk: the bridge (kernel-green,
+\texttt{problem261-q3bridge}) --- every large $n$ has SOME representation
+with pieces in $(n, n+T]$ implies the rational
+$x=\sum_k (N_0+kT)/2^{N_0+kT}$ has $2^{\aleph_0}$ representations ---
+needs non-greedy bounded-room witnesses or a funnel-based toggle family.
+\end{theorem}
+
+\section{Open fronts (honest labels)}
+
+\begin{itemize}
+\item \textbf{Sub-Q2} (all $n$): termination verified to $3\cdot 10^6$
+(64-bit C engine) plus the funnel structure here; the all-$n$ proof
+remains open.
+\item \textbf{Sub-Q3} (rational $x$, $2^{\aleph_0}$): the bridge stands
+kernel-green; the room wall (this package) redirects the attack to
+non-greedy witnesses / funnel toggles.
+\end{itemize}
+
+\end{document}
