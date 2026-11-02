@@ -7,6 +7,8 @@ on:
       - bulldoze/problem404-padic-kernel/KernelLaw.lean
       - bulldoze/problem261-two-solutions/**
       - bulldoze/problem261-continuum-tower/**
+      - problem404-full/**
+      - problem261-q3bridge/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -74,9 +76,46 @@ jobs:
           grep -F "'Erdos261Tower.erdos261_continuum' depends on axioms: [propext, Quot.sound]" tower.log
           grep -F "'Erdos261Tower.tower_cauchy' depends on axioms: [propext, Quot.sound]" tower.log
           echo TOWER_KERNEL_GREEN=1
+      - name: Kernel 5 - Erdos 404 FULL problem: p-adic reduction + odd-a class + f(4,2)=6
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem404-full/PadicReduction.lean 2>&1 | tee padic-reduction.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' padic-reduction.log
+          grep -F "5184" padic-reduction.log
+          grep -F "(1, 1)" padic-reduction.log
+          grep -F "(3, 3)" padic-reduction.log
+          grep -F "(4, 4)" padic-reduction.log
+          grep -F "(5760, 5760)" padic-reduction.log
+          grep -F "(46080, 46080)" padic-reduction.log
+          grep -xF "18" padic-reduction.log
+          grep -xF "23" padic-reduction.log
+          grep -cF "depends on axioms" padic-reduction.log
+          grep -F "'erdos404_split' depends on axioms" padic-reduction.log
+          grep -F "'erdos404_odd_a' depends on axioms" padic-reduction.log
+          grep -F "'erdos404_f42' depends on axioms" padic-reduction.log
+          grep -F "'block_pair' depends on axioms" padic-reduction.log
+          grep -F "'block_triple' depends on axioms" padic-reduction.log
+          echo PADIC_REDUCTION_KERNEL_GREEN=1
+      - name: Kernel 6 - Erdos 261 Q3 bridge: block identity family
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem261-q3bridge/BlockIdentity.lean 2>&1 | tee block-identity.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' block-identity.log
+          grep -F "(16, 16)" block-identity.log
+          grep -F "(88, 88)" block-identity.log
+          grep -F "(416, 416)" block-identity.log
+          grep -F "[1, 4, 11, 26, 57, 120, 247, 502]" block-identity.log
+          grep -F "(128, 128, 128)" block-identity.log
+          grep -F "'bl_family' depends on axioms" block-identity.log
+          grep -F "'jpow_sum_eq' depends on axioms" block-identity.log
+          grep -F "'pow_sum_eq' depends on axioms" block-identity.log
+          echo BLOCK_IDENTITY_KERNEL_GREEN=1
       - name: Independent verification battery
         shell: bash
         run: |
           python3 bulldoze/scripts/verify_bulldoze.py
           python3 bulldoze/problem261-two-solutions/verify_frontiers.py
           python3 bulldoze/problem261-continuum-tower/verify_tower261.py
+          python3 problem404-full/verify_404.py

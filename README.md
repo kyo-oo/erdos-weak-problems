@@ -23,10 +23,18 @@ Extracted verbatim from the research monorepo
 | **#4** | **404** | **The p=2 left-factorial kernel law**: `theorem kernel_law (u k : Nat) (hk : 3 ≤ k) : v2 (sumFactFrom u k) = v2 (fact u) + v2 (u + 2)` — the exact 2-adic valuation of the tail factorial sum, ALL u, ALL k ≥ 3, via staggered K/E fuel induction on the 3-term factorization. Settles the mod-$2^k$ behavior completely. | `bulldoze/problem404-padic-kernel/KernelLaw.lean` | `propext, Quot.sound` |
 | **#5** | **261 (weakened sub-question)** | **Three exact representations of x = 1/2**: `erdos261_weakened_two_solutions` + `erdos261_three_solutions` — {2} ≅ {3,6,8} ≅ {4,5,6} under $\sum 2^{8-a} = 128$ scaling; plus the sub-block collision {4,5} ≅ {3,8}. Pure `decide` computation, ZERO axioms. | `bulldoze/problem261-two-solutions/TwoSolutions.lean` | **NONE** |
 | **#6** | **261 (continuum, real-x)** | **The Tower**: `theorem erdos261_continuum` — an explicit injection $\sigma \mapsto F_\sigma$ from $2^{\aleph_0}$ branches to representation-sets of a single explicit irrational $x^* = \sum m_k/2^{m_k} \approx 0.7553714812$, built on the **infinite exact-halving family** $m_k = 2^{k+2} - k - 3$ (1, 4, 11, 26, 57, 120, 247, …) whose regions satisfy $\{m_k\} \equiv \{m_k+1..m_k+k+1\}$ exactly. Answer: YES, $2^{\aleph_0}$ representations exist. | `bulldoze/problem261-continuum-tower/Erdos261Tower.lean` | `propext, Quot.sound` |
+| **#7** | **404 (full problem)** | **The p-adic reduction** (Round 3): `erdos404_split` — every sum factors $a! + \sum_B i! = a!\,(1 + \sum_B P_i)$, so $f(a,p) = v_p(a!) + g(a,p)$; compactness: $g = \infty \iff$ an exact $\mathbb{Z}_p$ zero-sum $\sum_{i \in Z} i! = 0$ $\iff$ the infinite chain of sub-question 3 exists. **The $p \mid a{+}1$ class completely solved** (`erdos404_odd_a`: $f(a,2) = v_2(a!)$ for all odd $a$). **$f(4,2) = 6$ exactly** (`erdos404_f42`: witness $4!+5!+7! = 5184$, the mod-16 obstruction). Block identities $[u,u{+}1] = u!(u{+}2)$, $[u,u{+}2] = u!(u{+}2)^2$. | `problem404-full/PadicReduction.lean` | CI |
+| **#8** | **261 (Q3 bridge)** | **The rational-x bridge** (Round 3): `bl_family` — the representation-family identity $\sum_{j=1}^m (n+j) 2^{m-j} = n 2^m$ for $n = 2^{m+1}-m-2$ (Borwein–Loring family, independently re-derived, formalized) + the engines `jpow_sum_eq`, `pow_sum_eq` + toggle receipts; **new theorem (DERIVATION.tex): bounded-room all-n $\Rightarrow$ a rational $x$ with $2^{\aleph_0}$ representations.** | `problem261-q3bridge/BlockIdentity.lean` | CI |
 
-**Fully-solved complete problems: #271, #404.** The #261 family carries three
-complete theorems (walk equivalence, two-solutions, real-x continuum) with the
-rational-x continuum + walk-termination-all-n still open. **#406 itself is
+**Honest accounting (Round 3 audit):** the complete problems are NOT yet
+fully solved.  #404: the $p \mid a{+}1$ class and $f(4,2)$ are completely
+answered (Kills #7 theorems B/C), the reduction (Theorem A) is complete,
+and the classification of the remaining $(a,p)$ is the live front
+(Conjecture D).  #261: sub-question 1 is known ([BoLo90], formalized as
+Kill #8's `bl_family`); sub-questions 2 (all $n$) and 3 (rational $x$) are
+the open cores, now connected by the Q3 bridge.  #271: the complete problem
+includes $A(4)$ (a 45-year open case); Kill #3 verifies one known-family
+member.  **#406 itself is
 the benchmark anchor** — its pattern frontier is killed, the core conjecture
 remains the campaign's summit.
 
@@ -50,13 +58,14 @@ zero-sorry gates, exact receipt greps, axiom gates, plus the independent
 Python verification battery (`bulldoze/scripts/`). A kill counts ONLY when
 this workflow is green on GitHub.
 
-## NEXT FRONTS (the one-shot queue)
+## NEXT FRONTS (the one-shot queue — Round 3 re-assessment, see CAMPAIGN_ROUND3.md)
 
-1. **#261 rational-x continuum** — walls mapped (fork-comb, Kakeya
-   thickness-exclusivity, cluster uncancelability, telescope capacity).
-2. **#261 walk termination for all n** — the endgame of the walk theorem.
-3. **#260** — the sibling dyadic irrationality problem, behind the walk wall.
-4. **Odd-p kernel law** — the $p \neq 2$ stagger structure (p=3 spikes at
-   $u \equiv 7 \pmod 9$; p=11 twin classes; research-grade).
-5. **The dyadic four** — #249 (covering-walled), #251 (prime-index noise),
-   #257 (beyond Tao–Teräväinen).
+1. **#404 Conjecture D** — the gadget-supply lemma $\Rightarrow g(2,2) = \infty$
+   $\Rightarrow$ sub-question 3 of #404 = **YES** (the infinite chain exists).
+2. **#404 classification completion** — the bounded-set structure, exact
+   $f$-values.
+3. **#261 rational-x** — the Q3 bridge (bounded-room all-$n$ $\Rightarrow$
+   rational $x$ with $2^{\aleph_0}$ representations) + walk termination.
+4. **#260** — the sibling dyadic irrationality problem, behind the walk wall.
+5. **#271 / A(4)** — the 45-year Type-2 Stanley frontier (research-grade).
+6. **#406 GAP-A2** — the anchor summit.

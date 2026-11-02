@@ -1,0 +1,231 @@
+% ERDŐS #404 — THE p-ADIC FACTORIAL-SUM REDUCTION: COMPLETE DERIVATION
+% Round 3 of the bulldoze campaign (2026-11-02).  Companion kernel:
+% problem404-full/PadicReduction.lean (core Lean 4, CI-verified).
+%
+% THE PROBLEM (verbatim, erdosproblems.com/404):
+%   For which integers a >= 1 and primes p is there a finite upper bound on
+%   those k such that there are a = a_1 < ... < a_n with p^k | (a_1!+...+a_n!)?
+%   If f(a,p) is the greatest such k, how does this function behave?
+%   Is there a prime p and an infinite sequence a_1 < a_2 < ... such that if
+%   p^{m_k} is the highest power of p dividing sum_{i<=k} a_i! then m_k -> inf?
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{conjecture}[theorem]{Conjecture}
+\newcommand{\vpp}{v_p}
+\newcommand{\Zp}{\mathbb{Z}_p}
+
+\begin{document}
+\title{Erd\H{o}s Problem \#404: the $p$-adic factorial-sum reduction,\\
+the $p \mid a{+}1$ class, $f(4,2)=6$, and the unbounded candidates}
+\date{2026-11-02}
+\maketitle
+
+\section{The reduction (Theorem A)}
+
+Fix $a \ge 1$ and let all index sets $B$ range over finite subsets of
+$\{a+1, a+2, \ldots\}$.  Define the \textbf{quotient staircase}
+\[
+  P_i := \frac{i!}{a!} = (a+1)(a+2)\cdots i, \qquad i \ge a+1 .
+\]
+
+\begin{theorem}[Factorization; kernel-green]\label{thm:A}
+For every finite $B \subseteq \{a{+}1, a{+}2,\ldots\}$,
+\[ a! + \sum_{i\in B} i! \;=\; a! \cdot \Bigl(1 + \sum_{i \in B} P_i\Bigr). \]
+Consequently, for every prime $p$,
+\[ \vpp\Bigl(a! + \sum_{i\in B} i!\Bigr) \;=\; \vpp(a!) + \vpp\Bigl(1+\sum_{i\in B}P_i\Bigr). \]
+\end{theorem}
+\begin{proof}
+Each $i! = a!\,P_i$; factor $a!$ out of every term.  The valuation identity
+is the multiplicativity $\vpp(xy) = \vpp(x)+\vpp(y)$ together with $a! \ge 1$
+and $1 + \sum P_i \ge 1$.  (Formalized: \texttt{erdos404\_split}; the $p=2$
+valuation machinery including multiplicativity is in the kernel, mirroring
+the Kill-\#4 \texttt{KernelLaw.lean}.)
+\end{proof}
+
+\begin{definition}
+$f(a,p) := \sup \bigl\{ \vpp(a! + \sum_{i\in B} i!) : B \text{ finite} \bigr\}$
+and $g(a,p) := \sup \bigl\{ \vpp(1 + \sum_{i\in B}P_i) \bigr\} \ge 0$,
+so Theorem~\ref{thm:A} gives
+\[ f(a,p) = \vpp(a!) + g(a,p). \]
+For $k \ge 1$ let $R_k \subseteq \mathbb{Z}/p^k$ be the set of subset sums of
+$\{P_i \bmod p^k : \vpp(P_i) < k\}$ (a \emph{finite} multiset: $\vpp(P_i) \to \infty$).
+\end{definition}
+
+\begin{lemma}[Prefix property]\label{lem:prefix}
+$-1 \in R_{k+1} \Rightarrow -1 \in R_k$.  Hence $\{k : -1 \in R_k\}$ is a
+prefix $\{1,\ldots,g\}$, and $g(a,p) = \max\{k : -1 \in R_k\}$ (or $\infty$).
+\end{lemma}
+\begin{proof}
+Reduce a subset sum that is $\equiv -1 \pmod{p^{k+1}}$ modulo $p^k$.
+\end{proof}
+
+\begin{lemma}[Lift lemma]\label{lem:lift}
+Let $-1 \in R_k$ with witness $B$, and write $\sum_{j\in B}P_j = -1 + p^k c$.
+Suppose there is a \textbf{fresh gadget of exact valuation $k$ with unit part
+$-c$}: a finite set $G$ of indices beyond $a$, disjoint from $B$, with
+$\sum_{i\in G}P_i = p^k u$ where $u \equiv -c \pmod p$ (automatically
+$p \nmid u$ when $p \nmid c$; $u = 0$, i.e.\ $G = \emptyset$, when $p \mid c$).
+Then $B' = B \cup G$ witnesses $-1 \in R_{k+1}$.
+In particular, if the level-$k$ gadget supply contains unit parts covering
+all of $\mathbb{Z}/p$, then $-1 \in R_{k+1}$.
+\end{lemma}
+\begin{proof}
+$\sum_{j \in B'}P_j = -1 + p^k(c + u) \equiv -1 \pmod{p^{k+1}}$ since
+$p \mid c + u$.
+\end{proof}
+
+\begin{theorem}[Compactness / the chain]\label{thm:chain}
+The following are equivalent:
+\begin{enumerate}
+\item $g(a,p) = \infty$ (no level obstructs);
+\item there is a set $Z \subseteq \{a, a{+}1, a{+}2, \ldots\}$ with $a \in Z$
+and $\sum_{i \in Z} i! = 0$ in $\Zp$ (the sum converges since $\vpp(i!) \to \infty$);
+\item there is an infinite chain $a = a_1 < a_2 < \cdots$ (the sorted elements
+of $Z$) with $m_k := \vpp\bigl(\sum_{i \le k} a_i!\bigr) \to \infty$
+--- the third sub-question of Erd\H{o}s \#404, answered \textbf{YES} for this $(a,p)$.
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(1)$\Rightarrow$(2): consider the tree whose nodes at depth $k$ are the
+level-$k$ witnesses ($B \subseteq [a{+}1, i_{\max}(k)]$ with
+$\sum_{j\in B}P_j \equiv -1 \pmod{p^k}$), with an edge from a depth-$(k{+}1)$
+node $B_{k+1}$ to the depth-$k$ node $B_k = B_{k+1} \cap [a{+}1, i_{\max}(k)]$
+(a level-$k$ witness, since terms with $\vpp(P_i) \ge k$ vanish mod $p^k$).
+Every level is nonempty by (1) and each level is finite, so by K\"onig's
+lemma there is an infinite branch $B_1, B_2, \ldots$ with
+$B_k \subseteq B_{k+1}$; let $Z' := \bigcup_k B_k$ and $Z := Z' \cup \{a\}$.
+For every $k$: $\sum_{i \in Z'}P_i \equiv \sum_{i\in B_k}P_i \equiv -1
+\pmod{p^k}$ (terms beyond $i_{\max}(k)$ are $\equiv 0$), hence
+$\sum_{i\in Z'}P_i = -1$ in $\Zp$ and $\sum_{i\in Z}i! =
+a!\,(1 + \sum_{i \in Z'}P_i) = 0$ in $\Zp$.
+(2)$\Rightarrow$(3): the partial sums satisfy
+$\sum_{i \in Z, i \le N} i! = -\sum_{i \in Z, i > N} i!$, and the right side
+is divisible by $\min_{i > N} \vpp(i!) \to \infty$.
+(3)$\Rightarrow$(1): each $m_k$ certifies $-1 \in R_{m_k}$.
+\end{proof}
+
+\section{The $p \mid a{+}1$ class (Theorem B, kernel-green)}
+
+\begin{theorem}\label{thm:B}
+If $p \mid (a+1)$ then $P_i \equiv 0 \pmod p$ for every $i \ge a{+}1$, hence
+$1 + \sum_{i \in B} P_i \equiv 1 \pmod p$ and $\vpp(1+\sum P_i) = 0$ for
+\emph{every} $B$.  Therefore
+\[ \boxed{f(a,p) = \vpp(a!) \quad \text{for all } p \mid a{+}1.} \]
+\end{theorem}
+\begin{proof}
+$P_{a+1} = a{+}1 \equiv 0$ and $P_i = P_{a+1} \cdot (a{+}2)\cdots i$.
+(Formalized for $p = 2$, all odd $a$: \texttt{erdos404\_odd\_a}.)
+\end{proof}
+
+\section{$f(4,2) = 6$ exactly (Theorem C, kernel-green)}
+
+\begin{theorem}\label{thm:C}
+$f(4,2) = 6$: the witness $4! + 5! + 7! = 5184 = 2^6 \cdot 81$, and every
+sum $4! + \sum_B i!$ has $v_2 \le 6$.
+\end{theorem}
+\begin{proof}
+Here $P_5 = 5, P_6 = 30, P_7 = 210$, and $P_i \equiv 0 \pmod{16}$ for all
+$i \ge 8$ (the staircase acquires the factor $16 = 2^4$ at $i = 8$:
+$P_8 = 1680 = 16\cdot 105$, and later terms only accumulate factors).
+Modulo 16 the eight sub-sums $1 + \sum_{i \in S} P_i$ over
+$S \subseteq \{5,6,7\}$ take values
+$\{1, 6, 15, 3\} \cup \{4, 8, 1, 6\}$-class $\subseteq \{1,3,4,6,8,15\}$:
+none $\equiv 0$.  Hence $\vpp(1+\sum_B P) \le 3$ for every $B$, and
+$v_2 \le v_2(4!) + 3 = 6$.  The witness attains 6.
+(Formalized: \texttt{erdos404\_f42}.)
+\end{proof}
+
+\section{The block-identity structure theory}
+
+Consecutive factorial blocks factor exactly (kernel-green, first two):
+\[
+  [u, u{+}1] := u! + (u{+}1)! = u!\,(u+2),
+\]
+\[
+  [u, u{+}2] = u!\,\bigl(1 + (u{+}1) + (u{+}1)(u{+}2)\bigr) = u!\,(u+2)^2,
+\]
+\[
+  [u, u{+}3] = u!\,(u+2)\bigl(u^2 + 5u + 5\bigr),
+\]
+the first by $u! + (u{+}1)! = u!(1 + u + 1)$; the second because
+$1 + (u{+}1) + (u{+}1)(u{+}2) = (u{+}2)^2$; the third because
+$1 + (u{+}1) + (u{+}1)(u{+}2) + (u{+}1)(u{+}2)(u{+}3) = (u+2)(u^2+5u+5)$.
+The \textbf{pair valuation law}
+\[ v_2[u, u{+}1] = v_2(u!) + v_2(u+2) \]
+is precisely the Kill-\#4 kernel law $v_2(\sum_{a\ge u}a!) = v_2(u!) + v_2(u+2)$
+(the tail's valuation is realized by its first two terms).
+These identities structure the gadget supply of Lemma~\ref{lem:lift}:
+singles have valuations $v_2(i!)$ (the set $V = \{i - s_2(i)\}$ with its
+digit-sum gaps), pairs fill $v_2(u!) + v_2(u+2)$, square-triples fill
+$v_2(u!) + 2\,v_2(u+2)$, and the quadratic quads fill
+$v_2(u!) + v_2(u+2) + v_2(u^2+5u+5)$.
+
+\section{The computational classification (exact engines)}
+
+\texttt{classifier.py} computes $g(a,p)$ exactly whenever the first
+obstruction appears within the bitset budget; results
+($a \le 40$, primes $\le 61$; $0^*$ = the Theorem-B class, proven):
+\begin{itemize}
+\item \textbf{p=2:} bounded: $g(4,2)=3,\ g(8,2)=6,\ g(10,2)=6,\ g(12,2)=3,\
+g(20,2)=3,\ g(22,2)=11,\ g(26,2)=6,\ g(28,2)=3,\ g(32,2)=6,\ g(36,2)=3,\
+g(40,2)=7$ (and $g=0$ for all odd $a$, Theorem B).
+Unbounded candidates (no obstruction to depth $2^{28}$):
+$a \in \{2, 6, 14, 16, 18, 24, 30, 34, 38, \ldots\}$.
+\item \textbf{p=3:} bounded: $g(3,3)=2,\ g(6,3)=1,\ g(15,3)=1,\ g(21,3)=3,\
+g(22,3)=3,\ g(24,3)=1,\ g(30,3)=2,\ g(33,3)=1,\ g(39,3)=7$; candidates at
+depth $3^{13}$: most $a \equiv 1 \pmod 3$.
+\item \textbf{p=5,7:} bounded: $g(2,5)=g(7,5)=g(12,5)=g(17,5)=g(22,5)=g(27,5)=g(32,5)=0$
+(the window below 5 is too thin: $\{3!, 4!\} = \{6, 24\} \equiv \{1, 4\} \bmod 5$
+has subset sums $\{0,1,4,0\}$, missing $-1$); $g(2,7)=g(7,7)=g(12,7)=g(13,7)=0$; etc.
+\end{itemize}
+
+\section{Conjecture D and the (2,2) chain}
+
+\begin{conjecture}\label{conj:D}
+$g(2,2) = \infty$ (and $g(6,2) = \infty$).  Equivalently: the set
+$Z \subseteq \{2, 3, \ldots\}$ with $\sum_{i \in Z} i! = 0$ in $\mathbb{Z}_2$
+exists, and the infinite chain of Erd\H{o}s's third sub-question starts
+$2, 3, 5, 6, 7, 8, 9, 11, \ldots$
+\end{conjecture}
+
+\textbf{Evidence.} (i) No obstruction to depth $2^{28}$ (28 consecutive
+levels, complete DP).  (ii) The explicit nested (K\"onig) chain, verified by
+exact big-integer arithmetic (each line: $v_2(2! + \sum i!)$):
+\[
+\{3\}{:}3,\quad \{3,5\}{:}7,\quad \{3,5,8\}{:}9,\quad
+\{3,5,6,7,8,9\}{:}9,\quad \{3,5,6,7,11,13,14\}{:}13,
+\]
+\[
+\{3,5,6,7,11,12,15,16,19\}{:}18,\quad
+\{3,5,6,7,11,12,15,17,19,21\}{:}23.
+\]
+(iii) The structure theory: the level-$k$ lift needs a fresh exact-valuation-$k$
+gadget; the supply census (\texttt{zoo.py}, \texttt{gadget\_plan.json}) shows
+singles/pairs/square-triples cover all $k$ except the digit-sum gaps
+$k \in \{5, 6, 9, 12, 13, 14, \ldots\}$, and the DP proves those levels are
+nonetheless reachable (by non-block subsets, e.g.\ $\{10,11,13\}$ has exact
+valuation 9).  The proof frontier is a closed-form gadget family covering
+every gap $k$ --- the remaining obstacle to a complete unconditional proof.
+
+\section{What remains open toward the full \#404 classification}
+
+\begin{enumerate}
+\item The general classification: characterize $\{(a,p) : g(a,p) = \infty\}$.
+The data suggests a dichotomy with genuinely unbounded cases (Conjecture D)
+and a rich bounded set with exact small $g$-values.
+\item The behavior of $f(a,p)$ on the bounded set (exact $g$-certificates
+exist for every entry in the table; a closed form is not yet isolated).
+\item The gap-valuation gadget families (Lemma~\ref{lem:lift} supply).
+\end{enumerate}
+
+\section{Prior art}
+The site lists the problem as open (last edit 2025-12-01), tags number
+theory / factorials, no proof expositions.  Kill \#4 of this campaign
+(\texttt{problem404-padic-kernel/KernelLaw.lean}) is the full-tail case
+$p = 2$; the present package generalizes to arbitrary index sets and primes.
+
+\end{document}

@@ -1,0 +1,96 @@
+% ERDŐS #261 — THE Q3 BRIDGE: FROM BOUNDED-ROOM ALL-n TO A RATIONAL x WITH
+% 2^{aleph_0} REPRESENTATIONS.  Companion kernel: BlockIdentity.lean.
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\begin{document}
+\title{Erd\H{o}s \#261, sub-question 3: the rational-$x$ bridge}
+\date{2026-11-02}
+\maketitle
+
+\section{Setup}
+
+For a set $A$ of positive integers let $v(A) := \sum_{a \in A} a/2^a$
+(convergent, in $[0,2]$).  Erd\H{o}s \#261 asks (third part) whether some
+\emph{rational} $x$ has $2^{\aleph_0}$ representations $x = v(A)$ over
+infinite increasing sequences (equivalently: infinite sets $A$).
+
+A \textbf{zero-sum toggle} is a pair of disjoint sets $(D, E)$ with
+$v(D) = v(E)$.  Applying a toggle to a representation $A \supseteq D$ with
+$A \cap E = \emptyset$ ($A' = A \setminus D \cup E$) preserves the value.
+\textbf{Independent} toggles (all $D$'s and $E$'s pairwise disjoint) generate
+$2^{\aleph_0}$ distinct representations when infinitely many are applicable
+to one $A$.
+
+\section{The AP rationality engine}
+
+\begin{lemma}[AP sums are rational; kernel-green engines]\label{lem:ap}
+For $r \ge 1$, $T \ge 1$:
+\[ \sum_{k \ge 0} \frac{r + kT}{2^{r+kT}}
+   = 2^{-r}\Bigl( \frac{r}{1 - q} + \frac{Tq}{(1-q)^2} \Bigr) \in
+     \mathbb{Q}, \qquad q := 2^{-T}. \]
+(The finite engine $\sum_{k=0}^{K}(r+kT)2^{K-k} = r(2^{K+1}-1) +
+T(2^{K+1}-K-2)$ is the kernel identity \texttt{jpow\_sum\_eq} +
+\texttt{pow\_sum\_eq}; the infinite form follows by dividing by $2^K$ and
+taking $K \to \infty$.)
+\end{lemma}
+
+\section{The bridge theorem}
+
+\begin{theorem}[Q3 bridge]\label{thm:bridge}
+Suppose there exist $N_0$ and a uniform $T$ such that \emph{every}
+$n \ge N_0$ admits a representation
+\[ \frac{n}{2^n} = \sum_{a \in W_n} \frac{a}{2^a}, \qquad
+   W_n \subseteq \{n+1, \ldots, n+T\}, \quad |W_n| \ge 1, \quad n \notin W_n . \]
+Then $x := \sum_{k \ge 0} \dfrac{N_0 + kT}{2^{N_0+kT}}$ is rational and has
+$2^{\aleph_0}$ representations.
+\end{theorem}
+\begin{proof}
+\emph{Rationality}: Lemma~\ref{lem:ap} with $r = N_0$.
+
+\emph{The representation and the toggles}: let
+$A_0 := \{N_0 + kT : k \ge 0\}$, so $v(A_0) = x$.  For each $k$ the pair
+$\bigl(D_k, E_k\bigr) := \bigl(\{N_0+kT\},\, W_{N_0+kT}\bigr)$ is a
+zero-sum toggle: $v(D_k) = (N_0+kT)/2^{N_0+kT} = v(W_{N_0+kT}) = v(E_k)$ by
+the hypothesis, and $E_k \subseteq (N_0+kT,\, N_0+kT+T]$ while
+$D_{k'} \subseteq [N_0, N_0+k'T+T]$; since the \emph{windows}
+$(N_0+kT,\, N_0+(k+1)T]$ partition $(N_0, \infty)$ and each $E_k$ stays
+inside its own window, the toggles are independent (all $D_k \subseteq A_0$,
+all $E_k \cap A_0 = \emptyset$, all regions pairwise disjoint).  Hence for
+every subset $S \subseteq \mathbb{N}$ the set
+\[ A_S := \bigl(A_0 \setminus \bigcup_{k \in S} D_k\bigr) \cup
+   \bigcup_{k \in S} E_k \]
+satisfies $v(A_S) = x$, and $S \mapsto A_S$ is injective ($A_0 \cap
+\{N_0+kT\}$ recovers $S$).  This gives $2^{\aleph_0}$ distinct
+representations of the rational $x$.
+\end{proof}
+
+\section{The family identity (kernel-green)}
+
+The hypothesis of Theorem~\ref{thm:bridge} holds along the Borwein--Loring
+family with $T = m$ \emph{per family member} (not uniformly): our kernel
+\texttt{bl\_family} proves, for $n = 2^{m+1} - m - 2$,
+\[ \sum_{j=1}^{m} (n+j)\,2^{m-j} = n \cdot 2^m, \]
+which after division by $2^{n+m}$ is the representation
+$n/2^n = \sum_{j=1}^m (n+j)/2^{n+j}$ with witness $W_n = \{n+1, \ldots,
+n+m\} \subseteq (n, n+m]$.  The family $n = 1, 4, 11, 26, 57, 120, 247,
+502, \ldots$ is infinite, which is sub-question 1 ([BoLo90]; re-derived
+independently here and formalized).
+
+\section{What remains open}
+
+\begin{itemize}
+\item \textbf{The uniform-room conjecture}: does some $T$ work for
+\emph{all} large $n$?  The greedy walk's witnesses can have room growing
+with $n$ (e.g.\ $n = 148$'s greedy witness reaches $\approx 12230$), but
+non-greedy representations may be far more compact; the census
+(TUZ20: all $n \le 10^4$; Kill \#2: $\le 10^5$; this round: $\le 3\cdot10^6$
+via the walk) supports termination but not yet uniformity of room.
+\item Sub-question 2 (all $n$) itself: the walk
+$v_{N+1} = (2v_N) \bmod N$ from $(n+1, n)$ — the Kill-\#2 equivalence.
+\item Note: an \emph{irrational} $x$ with $2^{\aleph_0}$ representations is
+known (Kill \#6, the tower); the rational case is the open part.
+\end{itemize}
+
+\end{document}
