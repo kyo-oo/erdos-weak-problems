@@ -1,0 +1,144 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\vtwo}{v_2}
+
+\title{Erd\H{o}s Problem \#404: the $p=2$ classification\\ \large The obstruction families $a\equiv 4 \pmod 8$, $a\equiv 10 \pmod{16}$, $a\equiv 32,48 \pmod{64}$}
+\date{Campaign Kill \#11 --- kernel-green, CI-verified}
+
+\begin{document}
+\maketitle
+
+\section*{The unsolved problem (Erd\H{o}s--Graham 1980, p.\,79; erdosproblems.com/404)}
+
+\textbf{Question 1.} For which integers $a \ge 1$ and primes $p$ is there a
+finite upper bound on those $k$ such that there are
+$a = a_1 < a_2 < \cdots < a_n$ with $p^k \mid (a_1! + a_2! + \cdots + a_n!)$?
+
+\textbf{Question 2.} If $f(a,p)$ is the greatest such $k$, how does $f$ behave?
+
+\textbf{Question 3.} Is there a prime $p$ and an infinite sequence
+$a_1 < a_2 < \cdots$ such that $v_p\!\left(\sum_{i \le k} a_i!\right) \to \infty$?
+
+The problem page records (Li76): $f(2,2) \le 2^{54}$.
+
+\section*{The reduction (campaign, kernel-green in \texttt{PadicReduction.lean})}
+
+Write $P_j(a) = (a+1)(a+2)\cdots(a+j) = \dfrac{(a+j)!}{a!}$ for $j \ge 1$.
+Every admissible sum factors as
+\[
+a! + \sum_{i \in B} i! \;=\; a! \left( 1 + \sum_{j \in J} P_j(a) \right),
+\qquad J = \{i - a : i \in B\},
+\]
+so by additivity of $\vtwo$,
+\begin{equation}
+f(a,2) = \vtwo(a!) + g(a,2), \qquad
+g(a,2) = \max\Bigl\{ g : \exists\, J \subseteq \{1,2,3,\dots\},\;
+2^g \,\Big|\, 1 + \textstyle\sum_{j \in J} P_j(a) \Bigr\}.
+\label{eq:reduction}
+\end{equation}
+
+\section*{The theorems}
+
+\begin{theorem}[T2: the $a \equiv 4 \pmod 8$ family]
+For every $a \equiv 4 \pmod 8$:
+\begin{enumerate}
+\item[(i)] \emph{(Witness.)} $1 + P_1(a) + P_3(a) = (a+1) + (a+1)(a+2)(a+3) + 1
+\equiv 0 \pmod 8$ but $\not\equiv 0 \pmod{16}$; hence $g(a,2) \ge 3$.
+\item[(ii)] \emph{(Obstruction.)} For every $J \subseteq \{1,2,\dots\}$:
+$1 + \sum_{j \in J} P_j(a) \not\equiv 0 \pmod{16}$; hence $g(a,2) \le 3$.
+\end{enumerate}
+Therefore $f(a,2) = \vtwo(a!) + 3$ exactly, on the whole family.
+\end{theorem}
+
+\begin{proof}[Proof of (ii)]
+Since $a \equiv 4 \pmod 8$: $\vtwo(a+2) = 1$ and $\vtwo(a+4) = 3$, so every
+$P_j(a)$ with $j \ge 4$ contains the factor $(a+2)(a+4)$ and is
+$\equiv 0 \pmod{16}$. The sum $1 + \sum_J P_j$ is therefore congruent mod 16
+to a sub-sum of the three \emph{window coins}
+\[
+P_1(a) = a+1,\quad P_2(a) = (a+1)(a+2),\quad P_3(a) = (a+1)(a+2)(a+3).
+\]
+Case $a \equiv 4 \pmod{16}$: the coin residues are
+$\{5, 14, 2\}$, whose eight sub-sums are
+$\{0, 2, 3, 5, 7, 14\}$ --- none is $\equiv 15 \pmod{16}$.
+Case $a \equiv 12 \pmod{16}$: the residues are $\{13, 6, 10\}$, sub-sums
+$\{0, 3, 6, 7, 10, 13\}$ --- again $15$ is missed.
+In both cases $1 + \sum \not\equiv 0 \pmod{16}$.
+\end{proof}
+
+\begin{theorem}[T3: the $a \equiv 10 \pmod{16}$ family]
+For every $a \equiv 10 \pmod{16}$: the witness $J = \{1,3\}$ gives
+$1 + P_1 + P_3 \equiv 0 \pmod{64}$ exactly, while every $J$ has
+$1 + \sum_J P_j \not\equiv 0 \pmod{128}$. Hence
+$f(a,2) = \vtwo(a!) + 6$ exactly.
+\end{theorem}
+
+\begin{proof}
+Here $\vtwo(a+2)=2, \vtwo(a+4)=1, \vtwo(a+6)=4$, so $2^2 \cdot 2^1 \cdot 2^4
+= 128$ divides every $P_j(a)$ with $j \ge 6$: the window is the five coins
+$P_1,\dots,P_5$. Modulo 128 the window residues depend only on
+$a \bmod 128 \in \{10, 26, 42, 58, 74, 90, 106, 122\}$; in each of the eight
+cases the $32$ sub-sums of the five coins miss $-1$ (machine-verified and
+\emph{decided inside the Lean kernel} as eight boolean leaves). The witness
+$1 + (a+1) + (a+1)(a+2)(a+3) \equiv 0 \pmod{64}$ holds identically on the
+family (four sub-cases mod 64, decided).
+\end{proof}
+
+\begin{theorem}[T4: the $a \equiv 32, 48 \pmod{64}$ family]
+For every $a \equiv 32 \pmod{64}$ the witness $J = \{1,3,5\}$, and for every
+$a \equiv 48 \pmod{64}$ the witness $J = \{1,3,4\}$, attain
+$g = 6$ exactly; every $J$ misses $-1$ mod 128. Hence
+$f(a,2) = \vtwo(a!) + 6$ exactly on the family.
+\end{theorem}
+
+\begin{proof}
+$\vtwo(a+2) = \vtwo(a+6) = 1$, $\vtwo(a+4) = 2$, $\vtwo(a+8) = 3$, so
+$2\cdot 4 \cdot 2 \cdot 8 = 128$ divides every $P_j(a)$ with $j \ge 8$:
+the window is the seven coins $P_1, \dots, P_7$. Four residue classes
+mod 128 ($\{32, 96\}$ and $\{48, 112\}$); in each, all $128$ sub-sums miss
+$-1$ (decided in the kernel).
+\end{proof}
+
+\section*{The classification data}
+
+The engine (exact bitset subset-sum DP) certifies:
+\begin{itemize}
+\item family uniformity: $g = 3$ on all $a \equiv 4 \pmod 8$ up to $204$;
+$g = 6$ on all $a \equiv 10 \pmod{16}$ up to $202$; $g = 6$ on all
+$a \equiv 32, 48 \pmod{64}$ up to $304$;
+\item the small-$g$ table for all $a \le 200$ (e.g.\ $g(22,2) = 11$,
+$g(80,2) = 15$, $g(120,2) = 9$);
+\item the \textbf{deep survivors} at modulus $2^{28}$:
+$a \in \{2, 6, 14, 16, 18, 24, 30, 34, 38, 62, 64, 78, 94, 98, 102, 126,
+142, 146, 158, 162, 190,  194\}$ have $g \ge 28$;
+\item bounded deep values $g(46,2) = 27$, $g(86,2) = 26$, $g(104,2) = 23$,
+$g(110,2) = 21$, $g(144,2) = 18$, $g(174,2) = 23$, $g(400,2) = 14$;
+\item odd primes: $g(1,3), g(4,3), g(7,3), g(9,3), g(10,3), g(12,3)
+\ge 19$ at $3^{19}$ --- the odd-$p$ landscape is deep-survivor-rich and
+admits no uniform obstruction at scan depth.
+\end{itemize}
+
+\section*{What remains open}
+
+Questions 1 and 3 for the deep survivors (including $(2,2)$, where Lin's
+$f(2,2) \le 2^{54}$ is the only finiteness evidence, and our $g(2,2) \ge 28$),
+the odd-$p$ classification, and Question 3 in general. No $(a,p)$ with
+$g(a,p) = \infty$ is known or refuted.
+
+\section*{The Lean kernel}
+
+\texttt{ObstructionFamilies.lean} (1454 lines, core Lean 4, zero sorry):
+the three theorems are proved for \emph{all} $a$ in each family, with the
+obstruction leaves decided by the kernel ($2 + 8 + 4$ boolean case trees
+over the window coins) and the uniform vanish lemmas by $2$-adic factor
+extraction. Axioms: $[\mathrm{propext}, \mathrm{Quot.sound}]$ (T2/T3),
+$[\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}]$ (T4).
+Receipts (kernel \texttt{\#eval}): $f(4,2)=6$, $f(12,2)=13$, $f(20,2)=21$,
+$f(36,2)=37$, $f(10,2)=14$, $f(26,2)=29$, $f(42,2)=45$, $f(32,2)=37$,
+$f(48,2)=52$ --- recovering Theorem C ($f(4,2)=6$) of the campaign's
+problem404-full kernel as the $a=4$ instance of T2.
+
+\end{document}
