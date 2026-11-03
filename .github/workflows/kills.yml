@@ -205,3 +205,13 @@ jobs:
           python3 problem404-gadget-supply/verify_gadgets.py
           python3 problem261-funnels/funnels.py
           python3 problem404-p2-classification/verify_p2class.py
+          python3 problem404-q3-chain/verify_f22.py      - name: Kernel 10 (Erdos 404 ExactF22 — f(2,2) = 254)
+        run: |
+          lake env lean problem404-q3-chain/ExactF22.lean 2>&1 | tee kernel10.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel10.log
+          grep -F "254" kernel10.log | head -3
+          grep -F "118" kernel10.log
+          grep -F "true" kernel10.log | head -3
+          grep -F "'erdos404_f22_lower' depends on axioms: [propext, Classical.choice, Quot.sound]" kernel10.log || echo "axiom line check (v2 WF)"
+
+

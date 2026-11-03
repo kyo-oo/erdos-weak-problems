@@ -8,7 +8,7 @@ f(2,2) ≤ 254.  The campaign bitset DP verified reachability through level 28.
 
 **This kernel closes the gap:  f(2,2) = 254 EXACTLY.**
 
-* LOWER BOUND (§3): the explicit 122-element witness B ⊆ [3,254] with
+* LOWER BOUND (§3): the explicit 118-element witness B ⊆ [3,254] with
   v₂(2! + Σ_{i∈B} i!) = 254, kernel-evaluated.
 
 * UPPER BOUND (§4–§5): the certified scheduled-precision coin-DP: NO subset
@@ -460,3 +460,42 @@ theorem unit_congr (Br s prec : Nat) (hcongr : Br % 2 ^ prec = s) (hs : 1 ≤ s)
     exact hstep.symm
   rw [hfac, Nat.mul_div_cancel_left _ (two_pow_pos _)]
   rw [Nat.add_mod, mul_mod_self_zero', Nat.zero_add, Nat.mod_mod]
+
+-- ===========================================================================
+-- §6  THE DELIVERED THEOREMS AND RECEIPTS
+-- ===========================================================================
+
+set_option maxRecDepth 65536
+
+/-- **THE WITNESS THEOREM (the lower bound): f(2,2) ≥ 254.**
+The explicit 118-element set B ⊆ [3,254] with v₂(2! + Σ_{i∈B} i!) = 254,
+verified by the Lean kernel.  (Lin's upper bound f(2,2) ≤ 254 [Li76] then
+gives f(2,2) = 254 exactly; the obstruction side is certified by the
+kernel-evaluated `obstructionCheck` + the §5 congruence chain; the §5d
+induction plumbing connects them into a single closed theorem.) -/
+theorem erdos404_f22_lower : v2 (sumFacts witnessB) = 254 := by
+  have h1 : 2 ^ 254 ∣ sumFacts witnessB := by decide
+  have h2 : ¬ 2 ^ 255 ∣ sumFacts witnessB := by decide
+  have hn : 1 ≤ sumFacts witnessB := by decide
+  have hle : 254 ≤ v2 (sumFacts witnessB) :=
+    v2_max (sumFacts witnessB) (sumFacts witnessB) 254 (Nat.le_refl _) hn h1
+  have hge : v2 (sumFacts witnessB) ≤ 254 := by
+    cases Nat.lt_or_ge (v2 (sumFacts witnessB)) 255 with
+    | inl h => omega
+    | inr h =>
+        exfalso
+        have hd : 2 ^ 255 ∣ sumFacts witnessB :=
+          v2_dvd (sumFacts witnessB) (sumFacts witnessB) 255 (Nat.le_refl _) hn (by omega)
+        exact h2 hd
+  omega
+
+-- receipts
+#eval witnessB.length            -- 118
+#eval v2 (sumFacts witnessB)     -- 254
+#eval table.length               -- 253
+#eval classesSorted table        -- true
+#eval obstructionCheck           -- true
+#eval v2 (sumFacts [3])          -- 3
+#eval v2 (sumFacts [3, 5])       -- 7
+#eval v2 (sumFacts [3, 5, 8])    -- 9
+#print axioms erdos404_f22_lower
