@@ -1,0 +1,28 @@
+V=   0: coins= 1 states=     2 maxevent=1
+V=  40: coins= 0 states=    60 maxevent=49
+V=  80: coins= 2 states=    48 maxevent=87
+V= 120: coins= 2 states=    48 maxevent=124
+V= 160: coins= 0 states=    40 maxevent=169
+V= 200: coins= 2 states=   236 maxevent=209
+V= 240: coins= 2 states=    28 maxevent=244
+V= 280: coins= 0 states=   212 maxevent=286
+V= 320: coins= 0 states=   104 maxevent=329
+V= 360: coins= 2 states=  1976 maxevent=371
+V= 400: coins= 0 states=    88 maxevent=405
+V= 440: coins= 2 states=   380 maxevent=446
+V= 480: coins= 2 states=  1328 maxevent=488
+V= 520: coins= 0 states=    20 maxevent=523
+V= 533: coins= 0 states=     6 maxevent=533
+g(16,2) [C class_dp] = 533
+first UNREACHABLE level = 534
+max event valuation = 533
+capped = 0
+g_interval_crosscheck = 533 (consistent)
+peak_states = 2352
+final_snapshot: states=6 distinct_t=1 max_t=533
+final_t_hist: 533:6
+hashstore = ok levels=0..534 bytes=0MB
+elapsed_s = 0.01
+peak_rss_mb = 2
+WITNESS = VERIFIED |B|=247 Bmin=17 Bmax=548 v2(a!+sum B!)= 548 g-level=533 dfs_nodes=531 hs_loads=530
+WITNESS_LIST 17 19 20 27 28 29 30 32 33 36 38 39 41 42 43 45 46 47 49 51 53 54 56 58 59 67 70 72 73 74 81 82 83 84 86 92 95 96 98 100 102 104 106 107 108 109 115 118 120 121 125 127 128 130 131 132 136 137 138 139 142 145 148 150 152 153 154 156 158 159 161 162 167 171 172 178 179 180 182 185 186 188 190 191 193 195 198 201 203 205 206 207 208 213 218 220 222 226 227 228 229 232 233 239 242 243 245 246 251 256 259 260 262 264 268 269 270 271 272 283 286 287 289 290 297 298 299 303 304 305 306 309 311 317 318 320 321 323 324 326 328 336 337 339 340 343 344 345 346 347 349 350 351 357 358 361 363 364 366 371 375 376 377 378 382 384 386 387 388 392 395 397 399 402 404 407 408 409 410 411 412 415 418 421 423 425 426 429 436 437 438 440 441 444 446 448 450 452 454 457 458 459 461 465 466 467 468 469 470 471 473 474 476 479 481 484 485 487 489 491 495 496 498 499 500 502 505 509 510 512 515 516 517 519 520 524 526 527 528 529 533 536 540 542 544 547 548

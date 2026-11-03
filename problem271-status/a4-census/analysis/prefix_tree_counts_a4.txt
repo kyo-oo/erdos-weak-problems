@@ -1,0 +1,21 @@
+A(4): depth d: #nodes, #nodes/3^d, growth factor vs prev depth
+  d= 1  nodes=      2   nodes/3^d=0.66667   ratio_vs_prev=-
+  d= 2  nodes=      6   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 3  nodes=     18   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 4  nodes=     54   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 5  nodes=    162   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 6  nodes=    486   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 7  nodes=   1458   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 8  nodes=   4374   nodes/3^d=0.66667   ratio_vs_prev=3.0000
+  d= 9  nodes=  13121   nodes/3^d=0.66662   ratio_vs_prev=2.9998
+  d=10  nodes=  38545   nodes/3^d=0.65276   ratio_vs_prev=2.9377
+  d=11  nodes=  99205   nodes/3^d=0.56002   ratio_vs_prev=2.5737
+  d=12  nodes= 195647   nodes/3^d=0.36814   ratio_vs_prev=1.9721
+  d=13  nodes= 277568   nodes/3^d=0.17410   ratio_vs_prev=1.4187
+  d=14  nodes= 317174   nodes/3^d=0.06631   ratio_vs_prev=1.1427
+  d=15  nodes= 329999   nodes/3^d=0.02300   ratio_vs_prev=1.0404
+  d=16  nodes= 325618   nodes/3^d=0.00756   ratio_vs_prev=0.9867
+  d=17  nodes= 308243   nodes/3^d=0.00239   ratio_vs_prev=0.9466
+  d=18  nodes= 281356   nodes/3^d=0.00073   ratio_vs_prev=0.9128
+  d=19  nodes= 239210   nodes/3^d=0.00021   ratio_vs_prev=0.8502
+  d=20  nodes= 170176   nodes/3^d=0.00005   ratio_vs_prev=0.7114

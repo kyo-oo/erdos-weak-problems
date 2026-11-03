@@ -1,1 +1,11 @@
 .lake/
+*.o
+class_dp
+class_dp_w*
+war261
+war261_dbg
+war261b
+stanley_census
+verify_dump
+*_snap.bin
+problem261-funnels/engine/results/dbg_trace.txt

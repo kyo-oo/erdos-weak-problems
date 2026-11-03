@@ -1,0 +1,14 @@
+A(2): same 3-split (expect b1=b0, b2=0):
+  k= 1: c_k=    2 = 1+0+1   B1∩B0=0  B1=B0 exactly? False
+  k= 2: c_k=    4 = 2+2+0   B1∩B0=2  B1=B0 exactly? True
+  k= 3: c_k=    8 = 4+4+0   B1∩B0=4  B1=B0 exactly? True
+  k= 4: c_k=   16 = 8+8+0   B1∩B0=8  B1=B0 exactly? True
+  k= 5: c_k=   32 = 16+16+0   B1∩B0=16  B1=B0 exactly? True
+  k= 6: c_k=   64 = 32+32+0   B1∩B0=32  B1=B0 exactly? True
+  k= 7: c_k=  128 = 64+64+0   B1∩B0=64  B1=B0 exactly? True
+  k= 8: c_k=  256 = 128+128+0   B1∩B0=128  B1=B0 exactly? True
+  k= 9: c_k=  512 = 256+256+0   B1∩B0=256  B1=B0 exactly? True
+  k=10: c_k= 1024 = 512+512+0   B1∩B0=512  B1=B0 exactly? True
+  k=11: c_k= 2048 = 1024+1024+0   B1∩B0=1024  B1=B0 exactly? True
+  k=12: c_k= 4096 = 2048+2048+0   B1∩B0=2048  B1=B0 exactly? True
+  k=13: c_k= 8192 = 4096+4096+0   B1∩B0=4096  B1=B0 exactly? True

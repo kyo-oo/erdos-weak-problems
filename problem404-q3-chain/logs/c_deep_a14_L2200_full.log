@@ -1,0 +1,2213 @@
+V=   0: coins= 1 states=     2 maxevent=4
+V=   1: coins= 0 states=     1 maxevent=4
+V=   2: coins= 0 states=     1 maxevent=4
+V=   3: coins= 0 states=     1 maxevent=4
+V=   4: coins= 2 states=     4 maxevent=12
+V=   5: coins= 2 states=     8 maxevent=12
+V=   6: coins= 0 states=     4 maxevent=12
+V=   7: coins= 2 states=    16 maxevent=12
+V=   8: coins= 2 states=    32 maxevent=15
+V=   9: coins= 0 states=    16 maxevent=15
+V=  10: coins= 0 states=    10 maxevent=15
+V=  11: coins= 2 states=    28 maxevent=21
+V=  12: coins= 2 states=    56 maxevent=21
+V=  13: coins= 0 states=    28 maxevent=21
+V=  14: coins= 2 states=    84 maxevent=21
+V=  15: coins= 2 states=   168 maxevent=21
+V=  16: coins= 0 states=    84 maxevent=21
+V=  17: coins= 0 states=    38 maxevent=21
+V=  18: coins= 0 states=    20 maxevent=21
+V=  19: coins= 0 states=    10 maxevent=21
+V=  20: coins= 2 states=    28 maxevent=26
+V=  21: coins= 2 states=    56 maxevent=28
+V=  22: coins= 0 states=    28 maxevent=28
+V=  23: coins= 2 states=    76 maxevent=36
+V=  24: coins= 2 states=   152 maxevent=36
+V=  25: coins= 0 states=    76 maxevent=36
+V=  26: coins= 0 states=    39 maxevent=36
+V=  27: coins= 2 states=    88 maxevent=36
+V=  28: coins= 2 states=   176 maxevent=39
+V=  29: coins= 0 states=    88 maxevent=39
+V=  30: coins= 2 states=   144 maxevent=39
+V=  31: coins= 2 states=   288 maxevent=39
+V=  32: coins= 0 states=   144 maxevent=39
+V=  33: coins= 0 states=    75 maxevent=39
+V=  34: coins= 0 states=    38 maxevent=39
+V=  35: coins= 2 states=    68 maxevent=41
+V=  36: coins= 2 states=   136 maxevent=43
+V=  37: coins= 0 states=    68 maxevent=43
+V=  38: coins= 2 states=   128 maxevent=47
+V=  39: coins= 2 states=   256 maxevent=48
+V=  40: coins= 0 states=   128 maxevent=48
+V=  41: coins= 0 states=    63 maxevent=48
+V=  42: coins= 2 states=   124 maxevent=48
+V=  43: coins= 2 states=   248 maxevent=50
+V=  44: coins= 0 states=   124 maxevent=50
+V=  45: coins= 2 states=   260 maxevent=53
+V=  46: coins= 2 states=   520 maxevent=54
+V=  47: coins= 0 states=   260 maxevent=54
+V=  48: coins= 0 states=   126 maxevent=54
+V=  49: coins= 0 states=    54 maxevent=54
+V=  50: coins= 0 states=    31 maxevent=54
+V=  51: coins= 0 states=    17 maxevent=54
+V=  52: coins= 2 states=    36 maxevent=59
+V=  53: coins= 2 states=    72 maxevent=60
+V=  54: coins= 0 states=    36 maxevent=60
+V=  55: coins= 2 states=    72 maxevent=60
+V=  56: coins= 2 states=   144 maxevent=62
+V=  57: coins= 0 states=    72 maxevent=62
+V=  58: coins= 0 states=    42 maxevent=62
+V=  59: coins= 2 states=    92 maxevent=65
+V=  60: coins= 2 states=   184 maxevent=68
+V=  61: coins= 0 states=    92 maxevent=68
+V=  62: coins= 2 states=   180 maxevent=68
+V=  63: coins= 2 states=   360 maxevent=70
+V=  64: coins= 0 states=   180 maxevent=70
+V=  65: coins= 0 states=    93 maxevent=70
+V=  66: coins= 0 states=    42 maxevent=70
+V=  67: coins= 2 states=    76 maxevent=70
+V=  68: coins= 2 states=   152 maxevent=76
+V=  69: coins= 0 states=    76 maxevent=76
+V=  70: coins= 2 states=   136 maxevent=77
+V=  71: coins= 2 states=   272 maxevent=79
+V=  72: coins= 0 states=   136 maxevent=79
+V=  73: coins= 0 states=    63 maxevent=79
+V=  74: coins= 2 states=   132 maxevent=82
+V=  75: coins= 2 states=   264 maxevent=82
+V=  76: coins= 0 states=   132 maxevent=82
+V=  77: coins= 2 states=   288 maxevent=87
+V=  78: coins= 2 states=   576 maxevent=89
+V=  79: coins= 0 states=   288 maxevent=89
+V=  80: coins= 0 states=   148 maxevent=89
+V=  81: coins= 0 states=    76 maxevent=89
+V=  82: coins= 0 states=    38 maxevent=89
+V=  83: coins= 2 states=    96 maxevent=89
+V=  84: coins= 2 states=   192 maxevent=90
+V=  85: coins= 0 states=    96 maxevent=90
+V=  86: coins= 2 states=   184 maxevent=94
+V=  87: coins= 2 states=   368 maxevent=96
+V=  88: coins= 0 states=   184 maxevent=96
+V=  89: coins= 0 states=    92 maxevent=96
+V=  90: coins= 2 states=   188 maxevent=96
+V=  91: coins= 2 states=   376 maxevent=98
+V=  92: coins= 0 states=   188 maxevent=98
+V=  93: coins= 2 states=   260 maxevent=102
+V=  94: coins= 2 states=   520 maxevent=106
+V=  95: coins= 0 states=   260 maxevent=106
+V=  96: coins= 0 states=   126 maxevent=106
+V=  97: coins= 0 states=    58 maxevent=106
+V=  98: coins= 2 states=   156 maxevent=106
+V=  99: coins= 2 states=   312 maxevent=111
+V= 100: coins= 0 states=   156 maxevent=111
+V= 101: coins= 2 states=   304 maxevent=111
+V= 102: coins= 2 states=   608 maxevent=111
+V= 103: coins= 0 states=   304 maxevent=111
+V= 104: coins= 0 states=   155 maxevent=111
+V= 105: coins= 2 states=   332 maxevent=114
+V= 106: coins= 2 states=   664 maxevent=117
+V= 107: coins= 0 states=   332 maxevent=117
+V= 108: coins= 2 states=   624 maxevent=118
+V= 109: coins= 2 states=  1248 maxevent=119
+V= 110: coins= 0 states=   624 maxevent=119
+V= 111: coins= 0 states=   316 maxevent=119
+V= 112: coins= 0 states=   156 maxevent=119
+V= 113: coins= 0 states=    64 maxevent=119
+V= 114: coins= 0 states=    42 maxevent=119
+V= 115: coins= 0 states=    26 maxevent=119
+V= 116: coins= 2 states=    60 maxevent=120
+V= 117: coins= 2 states=   120 maxevent=126
+V= 118: coins= 0 states=    60 maxevent=126
+V= 119: coins= 2 states=   112 maxevent=126
+V= 120: coins= 2 states=   224 maxevent=127
+V= 121: coins= 0 states=   112 maxevent=127
+V= 122: coins= 0 states=    51 maxevent=127
+V= 123: coins= 2 states=    92 maxevent=127
+V= 124: coins= 2 states=   184 maxevent=131
+V= 125: coins= 0 states=    92 maxevent=131
+V= 126: coins= 2 states=   164 maxevent=135
+V= 127: coins= 2 states=   328 maxevent=135
+V= 128: coins= 0 states=   164 maxevent=135
+V= 129: coins= 0 states=    77 maxevent=135
+V= 130: coins= 0 states=    35 maxevent=135
+V= 131: coins= 2 states=   104 maxevent=137
+V= 132: coins= 2 states=   208 maxevent=137
+V= 133: coins= 0 states=   104 maxevent=137
+V= 134: coins= 2 states=   184 maxevent=144
+V= 135: coins= 2 states=   368 maxevent=146
+V= 136: coins= 0 states=   184 maxevent=146
+V= 137: coins= 0 states=    90 maxevent=146
+V= 138: coins= 2 states=   156 maxevent=148
+V= 139: coins= 2 states=   312 maxevent=148
+V= 140: coins= 0 states=   156 maxevent=148
+V= 141: coins= 2 states=   364 maxevent=150
+V= 142: coins= 2 states=   728 maxevent=157
+V= 143: coins= 0 states=   364 maxevent=157
+V= 144: coins= 0 states=   181 maxevent=157
+V= 145: coins= 0 states=    95 maxevent=157
+V= 146: coins= 0 states=    48 maxevent=157
+V= 147: coins= 2 states=    88 maxevent=157
+V= 148: coins= 2 states=   176 maxevent=157
+V= 149: coins= 0 states=    88 maxevent=157
+V= 150: coins= 2 states=   200 maxevent=157
+V= 151: coins= 2 states=   400 maxevent=160
+V= 152: coins= 0 states=   200 maxevent=160
+V= 153: coins= 0 states=   101 maxevent=160
+V= 154: coins= 2 states=   204 maxevent=160
+V= 155: coins= 2 states=   408 maxevent=164
+V= 156: coins= 0 states=   204 maxevent=164
+V= 157: coins= 2 states=   452 maxevent=164
+V= 158: coins= 2 states=   904 maxevent=166
+V= 159: coins= 0 states=   452 maxevent=166
+V= 160: coins= 0 states=   205 maxevent=166
+V= 161: coins= 0 states=   104 maxevent=166
+V= 162: coins= 2 states=   188 maxevent=175
+V= 163: coins= 2 states=   376 maxevent=175
+V= 164: coins= 0 states=   188 maxevent=175
+V= 165: coins= 2 states=   320 maxevent=175
+V= 166: coins= 2 states=   640 maxevent=176
+V= 167: coins= 0 states=   320 maxevent=176
+V= 168: coins= 0 states=   145 maxevent=176
+V= 169: coins= 2 states=   292 maxevent=181
+V= 170: coins= 2 states=   584 maxevent=181
+V= 171: coins= 0 states=   292 maxevent=181
+V= 172: coins= 2 states=   644 maxevent=181
+V= 173: coins= 2 states=  1288 maxevent=186
+V= 174: coins= 0 states=   644 maxevent=186
+V= 175: coins= 0 states=   324 maxevent=186
+V= 176: coins= 0 states=   176 maxevent=186
+V= 177: coins= 0 states=    95 maxevent=186
+V= 178: coins= 0 states=    52 maxevent=186
+V= 179: coins= 2 states=   140 maxevent=188
+V= 180: coins= 2 states=   280 maxevent=188
+V= 181: coins= 0 states=   140 maxevent=188
+V= 182: coins= 2 states=   224 maxevent=190
+V= 183: coins= 2 states=   448 maxevent=190
+V= 184: coins= 0 states=   224 maxevent=190
+V= 185: coins= 0 states=   112 maxevent=190
+V= 186: coins= 2 states=   208 maxevent=190
+V= 187: coins= 2 states=   416 maxevent=196
+V= 188: coins= 0 states=   208 maxevent=196
+V= 189: coins= 2 states=   420 maxevent=197
+V= 190: coins= 2 states=   840 maxevent=200
+V= 191: coins= 0 states=   420 maxevent=200
+V= 192: coins= 0 states=   209 maxevent=200
+V= 193: coins= 0 states=    89 maxevent=200
+V= 194: coins= 2 states=   144 maxevent=200
+V= 195: coins= 2 states=   288 maxevent=203
+V= 196: coins= 0 states=   144 maxevent=203
+V= 197: coins= 2 states=   268 maxevent=206
+V= 198: coins= 2 states=   536 maxevent=209
+V= 199: coins= 0 states=   268 maxevent=209
+V= 200: coins= 0 states=   135 maxevent=209
+V= 201: coins= 2 states=   256 maxevent=212
+V= 202: coins= 2 states=   512 maxevent=212
+V= 203: coins= 0 states=   256 maxevent=212
+V= 204: coins= 2 states=   516 maxevent=212
+V= 205: coins= 2 states=  1032 maxevent=213
+V= 206: coins= 0 states=   516 maxevent=213
+V= 207: coins= 0 states=   255 maxevent=213
+V= 208: coins= 0 states=   128 maxevent=213
+V= 209: coins= 0 states=    61 maxevent=213
+V= 210: coins= 2 states=   120 maxevent=219
+V= 211: coins= 2 states=   240 maxevent=221
+V= 212: coins= 0 states=   120 maxevent=221
+V= 213: coins= 2 states=   220 maxevent=223
+V= 214: coins= 2 states=   440 maxevent=223
+V= 215: coins= 0 states=   220 maxevent=223
+V= 216: coins= 0 states=   115 maxevent=223
+V= 217: coins= 2 states=   232 maxevent=225
+V= 218: coins= 2 states=   464 maxevent=231
+V= 219: coins= 0 states=   232 maxevent=231
+V= 220: coins= 2 states=   428 maxevent=232
+V= 221: coins= 2 states=   856 maxevent=232
+V= 222: coins= 0 states=   428 maxevent=232
+V= 223: coins= 0 states=   211 maxevent=232
+V= 224: coins= 0 states=   111 maxevent=232
+V= 225: coins= 2 states=   256 maxevent=235
+V= 226: coins= 2 states=   512 maxevent=238
+V= 227: coins= 0 states=   256 maxevent=238
+V= 228: coins= 2 states=   568 maxevent=240
+V= 229: coins= 2 states=  1136 maxevent=240
+V= 230: coins= 0 states=   568 maxevent=240
+V= 231: coins= 0 states=   281 maxevent=240
+V= 232: coins= 2 states=   572 maxevent=240
+V= 233: coins= 2 states=  1144 maxevent=243
+V= 234: coins= 0 states=   572 maxevent=243
+V= 235: coins= 2 states=  1160 maxevent=244
+V= 236: coins= 2 states=  2320 maxevent=249
+V= 237: coins= 0 states=  1160 maxevent=249
+V= 238: coins= 0 states=   576 maxevent=249
+V= 239: coins= 0 states=   287 maxevent=249
+V= 240: coins= 0 states=   135 maxevent=249
+V= 241: coins= 0 states=    85 maxevent=249
+V= 242: coins= 0 states=    40 maxevent=249
+V= 243: coins= 0 states=    21 maxevent=249
+V= 244: coins= 2 states=    24 maxevent=249
+V= 245: coins= 2 states=    48 maxevent=249
+V= 246: coins= 0 states=    24 maxevent=249
+V= 247: coins= 2 states=    60 maxevent=254
+V= 248: coins= 2 states=   120 maxevent=254
+V= 249: coins= 0 states=    60 maxevent=254
+V= 250: coins= 0 states=    24 maxevent=254
+V= 251: coins= 2 states=    40 maxevent=255
+V= 252: coins= 2 states=    80 maxevent=259
+V= 253: coins= 0 states=    40 maxevent=259
+V= 254: coins= 2 states=    72 maxevent=260
+V= 255: coins= 2 states=   144 maxevent=264
+V= 256: coins= 0 states=    72 maxevent=264
+V= 257: coins= 0 states=    35 maxevent=264
+V= 258: coins= 0 states=    20 maxevent=264
+V= 259: coins= 2 states=    44 maxevent=264
+V= 260: coins= 2 states=    88 maxevent=267
+V= 261: coins= 0 states=    44 maxevent=267
+V= 262: coins= 2 states=    72 maxevent=269
+V= 263: coins= 2 states=   144 maxevent=269
+V= 264: coins= 0 states=    72 maxevent=269
+V= 265: coins= 0 states=    37 maxevent=269
+V= 266: coins= 2 states=    64 maxevent=271
+V= 267: coins= 2 states=   128 maxevent=273
+V= 268: coins= 0 states=    64 maxevent=273
+V= 269: coins= 2 states=   140 maxevent=278
+V= 270: coins= 2 states=   280 maxevent=278
+V= 271: coins= 0 states=   140 maxevent=278
+V= 272: coins= 0 states=    62 maxevent=278
+V= 273: coins= 0 states=    37 maxevent=278
+V= 274: coins= 0 states=    20 maxevent=278
+V= 275: coins= 2 states=    52 maxevent=286
+V= 276: coins= 2 states=   104 maxevent=286
+V= 277: coins= 0 states=    52 maxevent=286
+V= 278: coins= 2 states=   116 maxevent=286
+V= 279: coins= 2 states=   232 maxevent=287
+V= 280: coins= 0 states=   116 maxevent=287
+V= 281: coins= 0 states=    59 maxevent=287
+V= 282: coins= 2 states=   132 maxevent=287
+V= 283: coins= 2 states=   264 maxevent=294
+V= 284: coins= 0 states=   132 maxevent=294
+V= 285: coins= 2 states=   264 maxevent=301
+V= 286: coins= 2 states=   528 maxevent=301
+V= 287: coins= 0 states=   264 maxevent=301
+V= 288: coins= 0 states=   129 maxevent=301
+V= 289: coins= 0 states=    69 maxevent=301
+V= 290: coins= 2 states=   148 maxevent=301
+V= 291: coins= 2 states=   296 maxevent=301
+V= 292: coins= 0 states=   148 maxevent=301
+V= 293: coins= 2 states=   340 maxevent=301
+V= 294: coins= 2 states=   680 maxevent=301
+V= 295: coins= 0 states=   340 maxevent=301
+V= 296: coins= 0 states=   182 maxevent=301
+V= 297: coins= 2 states=   356 maxevent=304
+V= 298: coins= 2 states=   712 maxevent=310
+V= 299: coins= 0 states=   356 maxevent=310
+V= 300: coins= 2 states=   756 maxevent=311
+V= 301: coins= 2 states=  1512 maxevent=311
+V= 302: coins= 0 states=   756 maxevent=311
+V= 303: coins= 0 states=   385 maxevent=311
+V= 304: coins= 0 states=   204 maxevent=311
+V= 305: coins= 0 states=   107 maxevent=311
+V= 306: coins= 0 states=    52 maxevent=311
+V= 307: coins= 2 states=   100 maxevent=319
+V= 308: coins= 2 states=   200 maxevent=319
+V= 309: coins= 0 states=   100 maxevent=319
+V= 310: coins= 2 states=   280 maxevent=319
+V= 311: coins= 2 states=   560 maxevent=324
+V= 312: coins= 0 states=   280 maxevent=324
+V= 313: coins= 0 states=   147 maxevent=324
+V= 314: coins= 2 states=   280 maxevent=324
+V= 315: coins= 2 states=   560 maxevent=325
+V= 316: coins= 0 states=   280 maxevent=325
+V= 317: coins= 2 states=   608 maxevent=330
+V= 318: coins= 2 states=  1216 maxevent=330
+V= 319: coins= 0 states=   608 maxevent=330
+V= 320: coins= 0 states=   297 maxevent=330
+V= 321: coins= 0 states=   150 maxevent=330
+V= 322: coins= 2 states=   300 maxevent=335
+V= 323: coins= 2 states=   600 maxevent=335
+V= 324: coins= 0 states=   300 maxevent=335
+V= 325: coins= 2 states=   572 maxevent=335
+V= 326: coins= 2 states=  1144 maxevent=337
+V= 327: coins= 0 states=   572 maxevent=337
+V= 328: coins= 0 states=   267 maxevent=337
+V= 329: coins= 2 states=   568 maxevent=339
+V= 330: coins= 2 states=  1136 maxevent=341
+V= 331: coins= 0 states=   568 maxevent=341
+V= 332: coins= 2 states=  1148 maxevent=342
+V= 333: coins= 2 states=  2296 maxevent=342
+V= 334: coins= 0 states=  1148 maxevent=342
+V= 335: coins= 0 states=   587 maxevent=342
+V= 336: coins= 0 states=   291 maxevent=342
+V= 337: coins= 0 states=   151 maxevent=342
+V= 338: coins= 2 states=   316 maxevent=345
+V= 339: coins= 2 states=   632 maxevent=350
+V= 340: coins= 0 states=   316 maxevent=350
+V= 341: coins= 2 states=   676 maxevent=350
+V= 342: coins= 2 states=  1352 maxevent=351
+V= 343: coins= 0 states=   676 maxevent=351
+V= 344: coins= 0 states=   335 maxevent=351
+V= 345: coins= 2 states=   716 maxevent=353
+V= 346: coins= 2 states=  1432 maxevent=358
+V= 347: coins= 0 states=   716 maxevent=358
+V= 348: coins= 2 states=  1404 maxevent=358
+V= 349: coins= 2 states=  2808 maxevent=363
+V= 350: coins= 0 states=  1404 maxevent=363
+V= 351: coins= 0 states=   719 maxevent=363
+V= 352: coins= 0 states=   356 maxevent=363
+V= 353: coins= 2 states=   728 maxevent=364
+V= 354: coins= 2 states=  1456 maxevent=364
+V= 355: coins= 0 states=   728 maxevent=364
+V= 356: coins= 2 states=  1576 maxevent=367
+V= 357: coins= 2 states=  3152 maxevent=368
+V= 358: coins= 0 states=  1576 maxevent=368
+V= 359: coins= 0 states=   787 maxevent=368
+V= 360: coins= 2 states=  1512 maxevent=369
+V= 361: coins= 2 states=  3024 maxevent=374
+V= 362: coins= 0 states=  1512 maxevent=374
+V= 363: coins= 2 states=  2940 maxevent=376
+V= 364: coins= 2 states=  5880 maxevent=376
+V= 365: coins= 0 states=  2940 maxevent=376
+V= 366: coins= 0 states=  1453 maxevent=376
+V= 367: coins= 0 states=   679 maxevent=376
+V= 368: coins= 0 states=   336 maxevent=376
+V= 369: coins= 0 states=   178 maxevent=376
+V= 370: coins= 0 states=    99 maxevent=376
+V= 371: coins= 2 states=   188 maxevent=376
+V= 372: coins= 2 states=   376 maxevent=381
+V= 373: coins= 0 states=   188 maxevent=381
+V= 374: coins= 2 states=   440 maxevent=384
+V= 375: coins= 2 states=   880 maxevent=385
+V= 376: coins= 0 states=   440 maxevent=385
+V= 377: coins= 0 states=   224 maxevent=385
+V= 378: coins= 2 states=   520 maxevent=386
+V= 379: coins= 2 states=  1040 maxevent=387
+V= 380: coins= 0 states=   520 maxevent=387
+V= 381: coins= 2 states=   916 maxevent=389
+V= 382: coins= 2 states=  1832 maxevent=394
+V= 383: coins= 0 states=   916 maxevent=394
+V= 384: coins= 0 states=   478 maxevent=394
+V= 385: coins= 0 states=   244 maxevent=394
+V= 386: coins= 2 states=   524 maxevent=394
+V= 387: coins= 2 states=  1048 maxevent=395
+V= 388: coins= 0 states=   524 maxevent=395
+V= 389: coins= 2 states=   972 maxevent=400
+V= 390: coins= 2 states=  1944 maxevent=401
+V= 391: coins= 0 states=   972 maxevent=401
+V= 392: coins= 0 states=   472 maxevent=401
+V= 393: coins= 2 states=   984 maxevent=406
+V= 394: coins= 2 states=  1968 maxevent=406
+V= 395: coins= 0 states=   984 maxevent=406
+V= 396: coins= 2 states=  1960 maxevent=406
+V= 397: coins= 2 states=  3920 maxevent=408
+V= 398: coins= 0 states=  1960 maxevent=408
+V= 399: coins= 0 states=   986 maxevent=408
+V= 400: coins= 0 states=   481 maxevent=408
+V= 401: coins= 0 states=   242 maxevent=408
+V= 402: coins= 2 states=   484 maxevent=411
+V= 403: coins= 2 states=   968 maxevent=415
+V= 404: coins= 0 states=   484 maxevent=415
+V= 405: coins= 2 states=   972 maxevent=415
+V= 406: coins= 2 states=  1944 maxevent=416
+V= 407: coins= 0 states=   972 maxevent=416
+V= 408: coins= 0 states=   482 maxevent=416
+V= 409: coins= 2 states=   900 maxevent=417
+V= 410: coins= 2 states=  1800 maxevent=423
+V= 411: coins= 0 states=   900 maxevent=423
+V= 412: coins= 2 states=  1612 maxevent=424
+V= 413: coins= 2 states=  3224 maxevent=424
+V= 414: coins= 0 states=  1612 maxevent=424
+V= 415: coins= 0 states=   814 maxevent=424
+V= 416: coins= 0 states=   413 maxevent=424
+V= 417: coins= 2 states=   924 maxevent=426
+V= 418: coins= 2 states=  1848 maxevent=430
+V= 419: coins= 0 states=   924 maxevent=430
+V= 420: coins= 2 states=  1760 maxevent=432
+V= 421: coins= 2 states=  3520 maxevent=432
+V= 422: coins= 0 states=  1760 maxevent=432
+V= 423: coins= 0 states=   891 maxevent=432
+V= 424: coins= 2 states=  1744 maxevent=435
+V= 425: coins= 2 states=  3488 maxevent=440
+V= 426: coins= 0 states=  1744 maxevent=440
+V= 427: coins= 2 states=  3400 maxevent=440
+V= 428: coins= 2 states=  6800 maxevent=440
+V= 429: coins= 0 states=  3400 maxevent=440
+V= 430: coins= 0 states=  1704 maxevent=440
+V= 431: coins= 0 states=   824 maxevent=440
+V= 432: coins= 0 states=   387 maxevent=440
+V= 433: coins= 0 states=   215 maxevent=440
+V= 434: coins= 2 states=   476 maxevent=450
+V= 435: coins= 2 states=   952 maxevent=450
+V= 436: coins= 0 states=   476 maxevent=450
+V= 437: coins= 2 states=  1024 maxevent=450
+V= 438: coins= 2 states=  2048 maxevent=450
+V= 439: coins= 0 states=  1024 maxevent=450
+V= 440: coins= 0 states=   517 maxevent=450
+V= 441: coins= 2 states=  1044 maxevent=450
+V= 442: coins= 2 states=  2088 maxevent=451
+V= 443: coins= 0 states=  1044 maxevent=451
+V= 444: coins= 2 states=  2096 maxevent=453
+V= 445: coins= 2 states=  4192 maxevent=458
+V= 446: coins= 0 states=  2096 maxevent=458
+V= 447: coins= 0 states=  1066 maxevent=458
+V= 448: coins= 0 states=   517 maxevent=458
+V= 449: coins= 2 states=  1092 maxevent=458
+V= 450: coins= 2 states=  2184 maxevent=462
+V= 451: coins= 0 states=  1092 maxevent=462
+V= 452: coins= 2 states=  2092 maxevent=464
+V= 453: coins= 2 states=  4184 maxevent=466
+V= 454: coins= 0 states=  2092 maxevent=466
+V= 455: coins= 0 states=  1044 maxevent=466
+V= 456: coins= 2 states=  2048 maxevent=468
+V= 457: coins= 2 states=  4096 maxevent=470
+V= 458: coins= 0 states=  2048 maxevent=470
+V= 459: coins= 2 states=  4176 maxevent=476
+V= 460: coins= 2 states=  8352 maxevent=476
+V= 461: coins= 0 states=  4176 maxevent=476
+V= 462: coins= 0 states=  2086 maxevent=476
+V= 463: coins= 0 states=  1031 maxevent=476
+V= 464: coins= 0 states=   496 maxevent=476
+V= 465: coins= 2 states=   976 maxevent=476
+V= 466: coins= 2 states=  1952 maxevent=477
+V= 467: coins= 0 states=   976 maxevent=477
+V= 468: coins= 2 states=  1960 maxevent=482
+V= 469: coins= 2 states=  3920 maxevent=483
+V= 470: coins= 0 states=  1960 maxevent=483
+V= 471: coins= 0 states=   997 maxevent=483
+V= 472: coins= 2 states=  2064 maxevent=483
+V= 473: coins= 2 states=  4128 maxevent=483
+V= 474: coins= 0 states=  2064 maxevent=483
+V= 475: coins= 2 states=  4048 maxevent=487
+V= 476: coins= 2 states=  8096 maxevent=489
+V= 477: coins= 0 states=  4048 maxevent=489
+V= 478: coins= 0 states=  2019 maxevent=489
+V= 479: coins= 0 states=  1005 maxevent=489
+V= 480: coins= 2 states=  2120 maxevent=491
+V= 481: coins= 2 states=  4240 maxevent=492
+V= 482: coins= 0 states=  2120 maxevent=492
+V= 483: coins= 2 states=  4228 maxevent=495
+V= 484: coins= 2 states=  8456 maxevent=499
+V= 485: coins= 0 states=  4228 maxevent=499
+V= 486: coins= 0 states=  2095 maxevent=499
+V= 487: coins= 2 states=  4112 maxevent=499
+V= 488: coins= 2 states=  8224 maxevent=501
+V= 489: coins= 0 states=  4112 maxevent=501
+V= 490: coins= 2 states=  8380 maxevent=504
+V= 491: coins= 2 states= 16760 maxevent=504
+V= 492: coins= 0 states=  8380 maxevent=504
+V= 493: coins= 0 states=  4200 maxevent=504
+V= 494: coins= 0 states=  2106 maxevent=504
+V= 495: coins= 0 states=  1077 maxevent=504
+V= 496: coins= 0 states=   541 maxevent=504
+V= 497: coins= 0 states=   240 maxevent=504
+V= 498: coins= 0 states=   117 maxevent=504
+V= 499: coins= 0 states=    64 maxevent=504
+V= 500: coins= 2 states=   100 maxevent=506
+V= 501: coins= 2 states=   200 maxevent=506
+V= 502: coins= 0 states=   100 maxevent=506
+V= 503: coins= 2 states=   192 maxevent=507
+V= 504: coins= 2 states=   384 maxevent=511
+V= 505: coins= 0 states=   192 maxevent=511
+V= 506: coins= 0 states=   105 maxevent=511
+V= 507: coins= 2 states=   144 maxevent=514
+V= 508: coins= 2 states=   288 maxevent=514
+V= 509: coins= 0 states=   144 maxevent=514
+V= 510: coins= 2 states=   260 maxevent=519
+V= 511: coins= 2 states=   520 maxevent=519
+V= 512: coins= 0 states=   260 maxevent=519
+V= 513: coins= 0 states=   132 maxevent=519
+V= 514: coins= 0 states=    67 maxevent=519
+V= 515: coins= 2 states=   108 maxevent=523
+V= 516: coins= 2 states=   216 maxevent=527
+V= 517: coins= 0 states=   108 maxevent=527
+V= 518: coins= 2 states=   212 maxevent=527
+V= 519: coins= 2 states=   424 maxevent=527
+V= 520: coins= 0 states=   212 maxevent=527
+V= 521: coins= 0 states=   108 maxevent=527
+V= 522: coins= 2 states=   244 maxevent=529
+V= 523: coins= 2 states=   488 maxevent=531
+V= 524: coins= 0 states=   244 maxevent=531
+V= 525: coins= 2 states=   496 maxevent=535
+V= 526: coins= 2 states=   992 maxevent=535
+V= 527: coins= 0 states=   496 maxevent=535
+V= 528: coins= 0 states=   240 maxevent=535
+V= 529: coins= 0 states=   124 maxevent=535
+V= 530: coins= 0 states=    56 maxevent=535
+V= 531: coins= 2 states=   124 maxevent=539
+V= 532: coins= 2 states=   248 maxevent=540
+V= 533: coins= 0 states=   124 maxevent=540
+V= 534: coins= 2 states=   208 maxevent=540
+V= 535: coins= 2 states=   416 maxevent=545
+V= 536: coins= 0 states=   208 maxevent=545
+V= 537: coins= 0 states=   111 maxevent=545
+V= 538: coins= 2 states=   224 maxevent=545
+V= 539: coins= 2 states=   448 maxevent=549
+V= 540: coins= 0 states=   224 maxevent=549
+V= 541: coins= 2 states=   424 maxevent=551
+V= 542: coins= 2 states=   848 maxevent=552
+V= 543: coins= 0 states=   424 maxevent=552
+V= 544: coins= 0 states=   226 maxevent=552
+V= 545: coins= 0 states=   114 maxevent=552
+V= 546: coins= 2 states=   240 maxevent=554
+V= 547: coins= 2 states=   480 maxevent=557
+V= 548: coins= 0 states=   240 maxevent=557
+V= 549: coins= 2 states=   436 maxevent=559
+V= 550: coins= 2 states=   872 maxevent=561
+V= 551: coins= 0 states=   436 maxevent=561
+V= 552: coins= 0 states=   229 maxevent=561
+V= 553: coins= 2 states=   440 maxevent=561
+V= 554: coins= 2 states=   880 maxevent=568
+V= 555: coins= 0 states=   440 maxevent=568
+V= 556: coins= 2 states=   944 maxevent=568
+V= 557: coins= 2 states=  1888 maxevent=570
+V= 558: coins= 0 states=   944 maxevent=570
+V= 559: coins= 0 states=   474 maxevent=570
+V= 560: coins= 0 states=   239 maxevent=570
+V= 561: coins= 0 states=   112 maxevent=570
+V= 562: coins= 0 states=    66 maxevent=570
+V= 563: coins= 2 states=   156 maxevent=570
+V= 564: coins= 2 states=   312 maxevent=572
+V= 565: coins= 0 states=   156 maxevent=572
+V= 566: coins= 2 states=   324 maxevent=576
+V= 567: coins= 2 states=   648 maxevent=576
+V= 568: coins= 0 states=   324 maxevent=576
+V= 569: coins= 0 states=   153 maxevent=576
+V= 570: coins= 2 states=   288 maxevent=579
+V= 571: coins= 2 states=   576 maxevent=580
+V= 572: coins= 0 states=   288 maxevent=580
+V= 573: coins= 2 states=   588 maxevent=581
+V= 574: coins= 2 states=  1176 maxevent=584
+V= 575: coins= 0 states=   588 maxevent=584
+V= 576: coins= 0 states=   290 maxevent=584
+V= 577: coins= 0 states=   143 maxevent=584
+V= 578: coins= 2 states=   248 maxevent=586
+V= 579: coins= 2 states=   496 maxevent=586
+V= 580: coins= 0 states=   248 maxevent=586
+V= 581: coins= 2 states=   484 maxevent=590
+V= 582: coins= 2 states=   968 maxevent=591
+V= 583: coins= 0 states=   484 maxevent=591
+V= 584: coins= 0 states=   239 maxevent=591
+V= 585: coins= 2 states=   456 maxevent=593
+V= 586: coins= 2 states=   912 maxevent=595
+V= 587: coins= 0 states=   456 maxevent=595
+V= 588: coins= 2 states=   804 maxevent=599
+V= 589: coins= 2 states=  1608 maxevent=599
+V= 590: coins= 0 states=   804 maxevent=599
+V= 591: coins= 0 states=   396 maxevent=599
+V= 592: coins= 0 states=   197 maxevent=599
+V= 593: coins= 0 states=    91 maxevent=599
+V= 594: coins= 2 states=   196 maxevent=602
+V= 595: coins= 2 states=   392 maxevent=605
+V= 596: coins= 0 states=   196 maxevent=605
+V= 597: coins= 2 states=   420 maxevent=605
+V= 598: coins= 2 states=   840 maxevent=608
+V= 599: coins= 0 states=   420 maxevent=608
+V= 600: coins= 0 states=   208 maxevent=608
+V= 601: coins= 2 states=   420 maxevent=610
+V= 602: coins= 2 states=   840 maxevent=611
+V= 603: coins= 0 states=   420 maxevent=611
+V= 604: coins= 2 states=   812 maxevent=613
+V= 605: coins= 2 states=  1624 maxevent=614
+V= 606: coins= 0 states=   812 maxevent=614
+V= 607: coins= 0 states=   412 maxevent=614
+V= 608: coins= 0 states=   224 maxevent=614
+V= 609: coins= 2 states=   452 maxevent=616
+V= 610: coins= 2 states=   904 maxevent=618
+V= 611: coins= 0 states=   452 maxevent=618
+V= 612: coins= 2 states=   940 maxevent=622
+V= 613: coins= 2 states=  1880 maxevent=623
+V= 614: coins= 0 states=   940 maxevent=623
+V= 615: coins= 0 states=   455 maxevent=623
+V= 616: coins= 2 states=   924 maxevent=626
+V= 617: coins= 2 states=  1848 maxevent=631
+V= 618: coins= 0 states=   924 maxevent=631
+V= 619: coins= 2 states=  1740 maxevent=631
+V= 620: coins= 2 states=  3480 maxevent=637
+V= 621: coins= 0 states=  1740 maxevent=637
+V= 622: coins= 0 states=   872 maxevent=637
+V= 623: coins= 0 states=   418 maxevent=637
+V= 624: coins= 0 states=   222 maxevent=637
+V= 625: coins= 0 states=   104 maxevent=637
+V= 626: coins= 0 states=    50 maxevent=637
+V= 627: coins= 2 states=   112 maxevent=637
+V= 628: coins= 2 states=   224 maxevent=637
+V= 629: coins= 0 states=   112 maxevent=637
+V= 630: coins= 2 states=   280 maxevent=640
+V= 631: coins= 2 states=   560 maxevent=640
+V= 632: coins= 0 states=   280 maxevent=640
+V= 633: coins= 0 states=   143 maxevent=640
+V= 634: coins= 2 states=   300 maxevent=642
+V= 635: coins= 2 states=   600 maxevent=644
+V= 636: coins= 0 states=   300 maxevent=644
+V= 637: coins= 2 states=   632 maxevent=646
+V= 638: coins= 2 states=  1264 maxevent=647
+V= 639: coins= 0 states=   632 maxevent=647
+V= 640: coins= 0 states=   330 maxevent=647
+V= 641: coins= 0 states=   173 maxevent=647
+V= 642: coins= 2 states=   368 maxevent=650
+V= 643: coins= 2 states=   736 maxevent=655
+V= 644: coins= 0 states=   368 maxevent=655
+V= 645: coins= 2 states=   728 maxevent=655
+V= 646: coins= 2 states=  1456 maxevent=657
+V= 647: coins= 0 states=   728 maxevent=657
+V= 648: coins= 0 states=   369 maxevent=657
+V= 649: coins= 2 states=   768 maxevent=659
+V= 650: coins= 2 states=  1536 maxevent=659
+V= 651: coins= 0 states=   768 maxevent=659
+V= 652: coins= 2 states=  1508 maxevent=661
+V= 653: coins= 2 states=  3016 maxevent=663
+V= 654: coins= 0 states=  1508 maxevent=663
+V= 655: coins= 0 states=   753 maxevent=663
+V= 656: coins= 0 states=   408 maxevent=663
+V= 657: coins= 0 states=   202 maxevent=663
+V= 658: coins= 2 states=   420 maxevent=664
+V= 659: coins= 2 states=   840 maxevent=667
+V= 660: coins= 0 states=   420 maxevent=667
+V= 661: coins= 2 states=   828 maxevent=669
+V= 662: coins= 2 states=  1656 maxevent=675
+V= 663: coins= 0 states=   828 maxevent=675
+V= 664: coins= 0 states=   414 maxevent=675
+V= 665: coins= 2 states=   768 maxevent=676
+V= 666: coins= 2 states=  1536 maxevent=679
+V= 667: coins= 0 states=   768 maxevent=679
+V= 668: coins= 2 states=  1384 maxevent=679
+V= 669: coins= 2 states=  2768 maxevent=679
+V= 670: coins= 0 states=  1384 maxevent=679
+V= 671: coins= 0 states=   683 maxevent=679
+V= 672: coins= 0 states=   324 maxevent=679
+V= 673: coins= 2 states=   688 maxevent=683
+V= 674: coins= 2 states=  1376 maxevent=689
+V= 675: coins= 0 states=   688 maxevent=689
+V= 676: coins= 2 states=  1476 maxevent=689
+V= 677: coins= 2 states=  2952 maxevent=690
+V= 678: coins= 0 states=  1476 maxevent=690
+V= 679: coins= 0 states=   750 maxevent=690
+V= 680: coins= 2 states=  1500 maxevent=694
+V= 681: coins= 2 states=  3000 maxevent=694
+V= 682: coins= 0 states=  1500 maxevent=694
+V= 683: coins= 2 states=  3008 maxevent=696
+V= 684: coins= 2 states=  6016 maxevent=696
+V= 685: coins= 0 states=  3008 maxevent=696
+V= 686: coins= 0 states=  1492 maxevent=696
+V= 687: coins= 0 states=   723 maxevent=696
+V= 688: coins= 0 states=   377 maxevent=696
+V= 689: coins= 0 states=   190 maxevent=696
+V= 690: coins= 2 states=   408 maxevent=699
+V= 691: coins= 2 states=   816 maxevent=708
+V= 692: coins= 0 states=   408 maxevent=708
+V= 693: coins= 2 states=   936 maxevent=708
+V= 694: coins= 2 states=  1872 maxevent=708
+V= 695: coins= 0 states=   936 maxevent=708
+V= 696: coins= 0 states=   453 maxevent=708
+V= 697: coins= 2 states=   872 maxevent=708
+V= 698: coins= 2 states=  1744 maxevent=708
+V= 699: coins= 0 states=   872 maxevent=708
+V= 700: coins= 2 states=  1848 maxevent=711
+V= 701: coins= 2 states=  3696 maxevent=716
+V= 702: coins= 0 states=  1848 maxevent=716
+V= 703: coins= 0 states=   935 maxevent=716
+V= 704: coins= 0 states=   459 maxevent=716
+V= 705: coins= 2 states=   916 maxevent=716
+V= 706: coins= 2 states=  1832 maxevent=718
+V= 707: coins= 0 states=   916 maxevent=718
+V= 708: coins= 2 states=  1732 maxevent=718
+V= 709: coins= 2 states=  3464 maxevent=721
+V= 710: coins= 0 states=  1732 maxevent=721
+V= 711: coins= 0 states=   866 maxevent=721
+V= 712: coins= 2 states=  1700 maxevent=722
+V= 713: coins= 2 states=  3400 maxevent=724
+V= 714: coins= 0 states=  1700 maxevent=724
+V= 715: coins= 2 states=  3204 maxevent=726
+V= 716: coins= 2 states=  6408 maxevent=728
+V= 717: coins= 0 states=  3204 maxevent=728
+V= 718: coins= 0 states=  1565 maxevent=728
+V= 719: coins= 0 states=   775 maxevent=728
+V= 720: coins= 0 states=   405 maxevent=728
+V= 721: coins= 2 states=   856 maxevent=728
+V= 722: coins= 2 states=  1712 maxevent=735
+V= 723: coins= 0 states=   856 maxevent=735
+V= 724: coins= 2 states=  1744 maxevent=735
+V= 725: coins= 2 states=  3488 maxevent=737
+V= 726: coins= 0 states=  1744 maxevent=737
+V= 727: coins= 0 states=   882 maxevent=737
+V= 728: coins= 2 states=  1708 maxevent=739
+V= 729: coins= 2 states=  3416 maxevent=740
+V= 730: coins= 0 states=  1708 maxevent=740
+V= 731: coins= 2 states=  3444 maxevent=743
+V= 732: coins= 2 states=  6888 maxevent=750
+V= 733: coins= 0 states=  3444 maxevent=750
+V= 734: coins= 0 states=  1746 maxevent=750
+V= 735: coins= 0 states=   850 maxevent=750
+V= 736: coins= 2 states=  1644 maxevent=750
+V= 737: coins= 2 states=  3288 maxevent=750
+V= 738: coins= 0 states=  1644 maxevent=750
+V= 739: coins= 2 states=  3396 maxevent=750
+V= 740: coins= 2 states=  6792 maxevent=754
+V= 741: coins= 0 states=  3396 maxevent=754
+V= 742: coins= 0 states=  1704 maxevent=754
+V= 743: coins= 2 states=  3256 maxevent=755
+V= 744: coins= 2 states=  6512 maxevent=756
+V= 745: coins= 0 states=  3256 maxevent=756
+V= 746: coins= 2 states=  6548 maxevent=760
+V= 747: coins= 2 states= 13096 maxevent=760
+V= 748: coins= 0 states=  6548 maxevent=760
+V= 749: coins= 0 states=  3321 maxevent=760
+V= 750: coins= 0 states=  1711 maxevent=760
+V= 751: coins= 0 states=   848 maxevent=760
+V= 752: coins= 0 states=   402 maxevent=760
+V= 753: coins= 0 states=   196 maxevent=760
+V= 754: coins= 0 states=   112 maxevent=760
+V= 755: coins= 2 states=   212 maxevent=763
+V= 756: coins= 2 states=   424 maxevent=763
+V= 757: coins= 0 states=   212 maxevent=763
+V= 758: coins= 2 states=   424 maxevent=765
+V= 759: coins= 2 states=   848 maxevent=770
+V= 760: coins= 0 states=   424 maxevent=770
+V= 761: coins= 0 states=   207 maxevent=770
+V= 762: coins= 2 states=   484 maxevent=770
+V= 763: coins= 2 states=   968 maxevent=770
+V= 764: coins= 0 states=   484 maxevent=770
+V= 765: coins= 2 states=   936 maxevent=774
+V= 766: coins= 2 states=  1872 maxevent=776
+V= 767: coins= 0 states=   936 maxevent=776
+V= 768: coins= 0 states=   445 maxevent=776
+V= 769: coins= 0 states=   226 maxevent=776
+V= 770: coins= 2 states=   424 maxevent=777
+V= 771: coins= 2 states=   848 maxevent=781
+V= 772: coins= 0 states=   424 maxevent=781
+V= 773: coins= 2 states=   864 maxevent=782
+V= 774: coins= 2 states=  1728 maxevent=784
+V= 775: coins= 0 states=   864 maxevent=784
+V= 776: coins= 0 states=   440 maxevent=784
+V= 777: coins= 2 states=   788 maxevent=787
+V= 778: coins= 2 states=  1576 maxevent=794
+V= 779: coins= 0 states=   788 maxevent=794
+V= 780: coins= 2 states=  1780 maxevent=794
+V= 781: coins= 2 states=  3560 maxevent=795
+V= 782: coins= 0 states=  1780 maxevent=795
+V= 783: coins= 0 states=   901 maxevent=795
+V= 784: coins= 0 states=   459 maxevent=795
+V= 785: coins= 0 states=   228 maxevent=795
+V= 786: coins= 2 states=   396 maxevent=795
+V= 787: coins= 2 states=   792 maxevent=796
+V= 788: coins= 0 states=   396 maxevent=796
+V= 789: coins= 2 states=   704 maxevent=799
+V= 790: coins= 2 states=  1408 maxevent=801
+V= 791: coins= 0 states=   704 maxevent=801
+V= 792: coins= 0 states=   351 maxevent=801
+V= 793: coins= 2 states=   708 maxevent=802
+V= 794: coins= 2 states=  1416 maxevent=802
+V= 795: coins= 0 states=   708 maxevent=802
+V= 796: coins= 2 states=  1376 maxevent=808
+V= 797: coins= 2 states=  2752 maxevent=810
+V= 798: coins= 0 states=  1376 maxevent=810
+V= 799: coins= 0 states=   693 maxevent=810
+V= 800: coins= 0 states=   349 maxevent=810
+V= 801: coins= 2 states=   652 maxevent=812
+V= 802: coins= 2 states=  1304 maxevent=813
+V= 803: coins= 0 states=   652 maxevent=813
+V= 804: coins= 2 states=  1308 maxevent=813
+V= 805: coins= 2 states=  2616 maxevent=814
+V= 806: coins= 0 states=  1308 maxevent=814
+V= 807: coins= 0 states=   651 maxevent=814
+V= 808: coins= 2 states=  1264 maxevent=818
+V= 809: coins= 2 states=  2528 maxevent=821
+V= 810: coins= 0 states=  1264 maxevent=821
+V= 811: coins= 2 states=  2636 maxevent=823
+V= 812: coins= 2 states=  5272 maxevent=827
+V= 813: coins= 0 states=  2636 maxevent=827
+V= 814: coins= 0 states=  1293 maxevent=827
+V= 815: coins= 0 states=   677 maxevent=827
+V= 816: coins= 0 states=   344 maxevent=827
+V= 817: coins= 0 states=   153 maxevent=827
+V= 818: coins= 2 states=   324 maxevent=827
+V= 819: coins= 2 states=   648 maxevent=827
+V= 820: coins= 0 states=   324 maxevent=827
+V= 821: coins= 2 states=   600 maxevent=830
+V= 822: coins= 2 states=  1200 maxevent=830
+V= 823: coins= 0 states=   600 maxevent=830
+V= 824: coins= 0 states=   293 maxevent=830
+V= 825: coins= 2 states=   568 maxevent=833
+V= 826: coins= 2 states=  1136 maxevent=836
+V= 827: coins= 0 states=   568 maxevent=836
+V= 828: coins= 2 states=  1056 maxevent=837
+V= 829: coins= 2 states=  2112 maxevent=838
+V= 830: coins= 0 states=  1056 maxevent=838
+V= 831: coins= 0 states=   547 maxevent=838
+V= 832: coins= 0 states=   277 maxevent=838
+V= 833: coins= 2 states=   600 maxevent=845
+V= 834: coins= 2 states=  1200 maxevent=846
+V= 835: coins= 0 states=   600 maxevent=846
+V= 836: coins= 2 states=  1236 maxevent=846
+V= 837: coins= 2 states=  2472 maxevent=848
+V= 838: coins= 0 states=  1236 maxevent=848
+V= 839: coins= 0 states=   607 maxevent=848
+V= 840: coins= 2 states=  1200 maxevent=849
+V= 841: coins= 2 states=  2400 maxevent=851
+V= 842: coins= 0 states=  1200 maxevent=851
+V= 843: coins= 2 states=  2436 maxevent=854
+V= 844: coins= 2 states=  4872 maxevent=861
+V= 845: coins= 0 states=  2436 maxevent=861
+V= 846: coins= 0 states=  1198 maxevent=861
+V= 847: coins= 0 states=   605 maxevent=861
+V= 848: coins= 0 states=   286 maxevent=861
+V= 849: coins= 2 states=   612 maxevent=861
+V= 850: coins= 2 states=  1224 maxevent=861
+V= 851: coins= 0 states=   612 maxevent=861
+V= 852: coins= 2 states=  1212 maxevent=863
+V= 853: coins= 2 states=  2424 maxevent=863
+V= 854: coins= 0 states=  1212 maxevent=863
+V= 855: coins= 0 states=   607 maxevent=863
+V= 856: coins= 2 states=  1180 maxevent=865
+V= 857: coins= 2 states=  2360 maxevent=867
+V= 858: coins= 0 states=  1180 maxevent=867
+V= 859: coins= 2 states=  2212 maxevent=875
+V= 860: coins= 2 states=  4424 maxevent=875
+V= 861: coins= 0 states=  2212 maxevent=875
+V= 862: coins= 0 states=  1127 maxevent=875
+V= 863: coins= 0 states=   543 maxevent=875
+V= 864: coins= 2 states=  1028 maxevent=875
+V= 865: coins= 2 states=  2056 maxevent=875
+V= 866: coins= 0 states=  1028 maxevent=875
+V= 867: coins= 2 states=  2052 maxevent=877
+V= 868: coins= 2 states=  4104 maxevent=879
+V= 869: coins= 0 states=  2052 maxevent=879
+V= 870: coins= 0 states=  1037 maxevent=879
+V= 871: coins= 2 states=  2052 maxevent=883
+V= 872: coins= 2 states=  4104 maxevent=884
+V= 873: coins= 0 states=  2052 maxevent=884
+V= 874: coins= 2 states=  3884 maxevent=887
+V= 875: coins= 2 states=  7768 maxevent=890
+V= 876: coins= 0 states=  3884 maxevent=890
+V= 877: coins= 0 states=  1978 maxevent=890
+V= 878: coins= 0 states=  1000 maxevent=890
+V= 879: coins= 0 states=   503 maxevent=890
+V= 880: coins= 0 states=   296 maxevent=890
+V= 881: coins= 0 states=   148 maxevent=890
+V= 882: coins= 2 states=   320 maxevent=890
+V= 883: coins= 2 states=   640 maxevent=891
+V= 884: coins= 0 states=   320 maxevent=891
+V= 885: coins= 2 states=   632 maxevent=893
+V= 886: coins= 2 states=  1264 maxevent=894
+V= 887: coins= 0 states=   632 maxevent=894
+V= 888: coins= 0 states=   291 maxevent=894
+V= 889: coins= 2 states=   584 maxevent=898
+V= 890: coins= 2 states=  1168 maxevent=902
+V= 891: coins= 0 states=   584 maxevent=902
+V= 892: coins= 2 states=  1160 maxevent=902
+V= 893: coins= 2 states=  2320 maxevent=903
+V= 894: coins= 0 states=  1160 maxevent=903
+V= 895: coins= 0 states=   574 maxevent=903
+V= 896: coins= 0 states=   289 maxevent=903
+V= 897: coins= 2 states=   608 maxevent=905
+V= 898: coins= 2 states=  1216 maxevent=907
+V= 899: coins= 0 states=   608 maxevent=907
+V= 900: coins= 2 states=  1168 maxevent=913
+V= 901: coins= 2 states=  2336 maxevent=913
+V= 902: coins= 0 states=  1168 maxevent=913
+V= 903: coins= 0 states=   575 maxevent=913
+V= 904: coins= 2 states=  1008 maxevent=913
+V= 905: coins= 2 states=  2016 maxevent=914
+V= 906: coins= 0 states=  1008 maxevent=914
+V= 907: coins= 2 states=  1996 maxevent=917
+V= 908: coins= 2 states=  3992 maxevent=918
+V= 909: coins= 0 states=  1996 maxevent=918
+V= 910: coins= 0 states=  1013 maxevent=918
+V= 911: coins= 0 states=   526 maxevent=918
+V= 912: coins= 0 states=   247 maxevent=918
+V= 913: coins= 2 states=   516 maxevent=929
+V= 914: coins= 2 states=  1032 maxevent=929
+V= 915: coins= 0 states=   516 maxevent=929
+V= 916: coins= 2 states=  1036 maxevent=929
+V= 917: coins= 2 states=  2072 maxevent=929
+V= 918: coins= 0 states=  1036 maxevent=929
+V= 919: coins= 0 states=   530 maxevent=929
+V= 920: coins= 2 states=  1040 maxevent=932
+V= 921: coins= 2 states=  2080 maxevent=934
+V= 922: coins= 0 states=  1040 maxevent=934
+V= 923: coins= 2 states=  1988 maxevent=934
+V= 924: coins= 2 states=  3976 maxevent=934
+V= 925: coins= 0 states=  1988 maxevent=934
+V= 926: coins= 0 states=  1024 maxevent=934
+V= 927: coins= 0 states=   506 maxevent=934
+V= 928: coins= 2 states=   828 maxevent=936
+V= 929: coins= 2 states=  1656 maxevent=941
+V= 930: coins= 0 states=   828 maxevent=941
+V= 931: coins= 2 states=  1712 maxevent=945
+V= 932: coins= 2 states=  3424 maxevent=945
+V= 933: coins= 0 states=  1712 maxevent=945
+V= 934: coins= 0 states=   850 maxevent=945
+V= 935: coins= 2 states=  1716 maxevent=945
+V= 936: coins= 2 states=  3432 maxevent=947
+V= 937: coins= 0 states=  1716 maxevent=947
+V= 938: coins= 2 states=  3480 maxevent=949
+V= 939: coins= 2 states=  6960 maxevent=949
+V= 940: coins= 0 states=  3480 maxevent=949
+V= 941: coins= 0 states=  1756 maxevent=949
+V= 942: coins= 0 states=   882 maxevent=949
+V= 943: coins= 0 states=   464 maxevent=949
+V= 944: coins= 0 states=   229 maxevent=949
+V= 945: coins= 2 states=   416 maxevent=950
+V= 946: coins= 2 states=   832 maxevent=954
+V= 947: coins= 0 states=   416 maxevent=954
+V= 948: coins= 2 states=   860 maxevent=958
+V= 949: coins= 2 states=  1720 maxevent=960
+V= 950: coins= 0 states=   860 maxevent=960
+V= 951: coins= 0 states=   427 maxevent=960
+V= 952: coins= 2 states=   860 maxevent=963
+V= 953: coins= 2 states=  1720 maxevent=963
+V= 954: coins= 0 states=   860 maxevent=963
+V= 955: coins= 2 states=  1764 maxevent=964
+V= 956: coins= 2 states=  3528 maxevent=969
+V= 957: coins= 0 states=  1764 maxevent=969
+V= 958: coins= 0 states=   883 maxevent=969
+V= 959: coins= 0 states=   427 maxevent=969
+V= 960: coins= 2 states=   816 maxevent=972
+V= 961: coins= 2 states=  1632 maxevent=974
+V= 962: coins= 0 states=   816 maxevent=974
+V= 963: coins= 2 states=  1564 maxevent=974
+V= 964: coins= 2 states=  3128 maxevent=974
+V= 965: coins= 0 states=  1564 maxevent=974
+V= 966: coins= 0 states=   782 maxevent=974
+V= 967: coins= 2 states=  1640 maxevent=976
+V= 968: coins= 2 states=  3280 maxevent=982
+V= 969: coins= 0 states=  1640 maxevent=982
+V= 970: coins= 2 states=  3264 maxevent=982
+V= 971: coins= 2 states=  6528 maxevent=986
+V= 972: coins= 0 states=  3264 maxevent=986
+V= 973: coins= 0 states=  1636 maxevent=986
+V= 974: coins= 0 states=   815 maxevent=986
+V= 975: coins= 0 states=   447 maxevent=986
+V= 976: coins= 2 states=   784 maxevent=986
+V= 977: coins= 2 states=  1568 maxevent=987
+V= 978: coins= 0 states=   784 maxevent=987
+V= 979: coins= 2 states=  1584 maxevent=991
+V= 980: coins= 2 states=  3168 maxevent=992
+V= 981: coins= 0 states=  1584 maxevent=992
+V= 982: coins= 0 states=   794 maxevent=992
+V= 983: coins= 2 states=  1644 maxevent=996
+V= 984: coins= 2 states=  3288 maxevent=997
+V= 985: coins= 0 states=  1644 maxevent=997
+V= 986: coins= 2 states=  3152 maxevent=997
+V= 987: coins= 2 states=  6304 maxevent=998
+V= 988: coins= 0 states=  3152 maxevent=998
+V= 989: coins= 0 states=  1585 maxevent=998
+V= 990: coins= 0 states=   804 maxevent=998
+V= 991: coins= 2 states=  1604 maxevent=1001
+V= 992: coins= 2 states=  3208 maxevent=1002
+V= 993: coins= 0 states=  1604 maxevent=1002
+V= 994: coins= 2 states=  3012 maxevent=1007
+V= 995: coins= 2 states=  6024 maxevent=1007
+V= 996: coins= 0 states=  3012 maxevent=1007
+V= 997: coins= 0 states=  1515 maxevent=1007
+V= 998: coins= 2 states=  2940 maxevent=1011
+V= 999: coins= 2 states=  5880 maxevent=1013
+V=1000: coins= 0 states=  2940 maxevent=1013
+V=1001: coins= 2 states=  5956 maxevent=1014
+V=1002: coins= 2 states= 11912 maxevent=1020
+V=1003: coins= 0 states=  5956 maxevent=1020
+V=1004: coins= 0 states=  2954 maxevent=1020
+V=1005: coins= 0 states=  1481 maxevent=1020
+V=1006: coins= 0 states=   739 maxevent=1020
+V=1007: coins= 0 states=   355 maxevent=1020
+V=1008: coins= 0 states=   184 maxevent=1020
+V=1009: coins= 0 states=    96 maxevent=1020
+V=1010: coins= 0 states=    44 maxevent=1020
+V=1011: coins= 0 states=    21 maxevent=1020
+V=1012: coins= 2 states=    56 maxevent=1020
+V=1013: coins= 2 states=   112 maxevent=1020
+V=1014: coins= 0 states=    56 maxevent=1020
+V=1015: coins= 2 states=    68 maxevent=1020
+V=1016: coins= 2 states=   136 maxevent=1023
+V=1017: coins= 0 states=    68 maxevent=1023
+V=1018: coins= 0 states=    37 maxevent=1023
+V=1019: coins= 2 states=    84 maxevent=1023
+V=1020: coins= 2 states=   168 maxevent=1026
+V=1021: coins= 0 states=    84 maxevent=1026
+V=1022: coins= 2 states=   124 maxevent=1032
+V=1023: coins= 2 states=   248 maxevent=1034
+V=1024: coins= 0 states=   124 maxevent=1034
+V=1025: coins= 0 states=    57 maxevent=1034
+V=1026: coins= 0 states=    29 maxevent=1034
+V=1027: coins= 2 states=    56 maxevent=1036
+V=1028: coins= 2 states=   112 maxevent=1036
+V=1029: coins= 0 states=    56 maxevent=1036
+V=1030: coins= 2 states=   136 maxevent=1036
+V=1031: coins= 2 states=   272 maxevent=1040
+V=1032: coins= 0 states=   136 maxevent=1040
+V=1033: coins= 0 states=    65 maxevent=1040
+V=1034: coins= 2 states=   172 maxevent=1042
+V=1035: coins= 2 states=   344 maxevent=1044
+V=1036: coins= 0 states=   172 maxevent=1044
+V=1037: coins= 2 states=   276 maxevent=1044
+V=1038: coins= 2 states=   552 maxevent=1048
+V=1039: coins= 0 states=   276 maxevent=1048
+V=1040: coins= 0 states=   145 maxevent=1048
+V=1041: coins= 0 states=    86 maxevent=1048
+V=1042: coins= 0 states=    35 maxevent=1048
+V=1043: coins= 2 states=    72 maxevent=1052
+V=1044: coins= 2 states=   144 maxevent=1052
+V=1045: coins= 0 states=    72 maxevent=1052
+V=1046: coins= 2 states=   152 maxevent=1053
+V=1047: coins= 2 states=   304 maxevent=1054
+V=1048: coins= 0 states=   152 maxevent=1054
+V=1049: coins= 0 states=    75 maxevent=1054
+V=1050: coins= 2 states=   152 maxevent=1057
+V=1051: coins= 2 states=   304 maxevent=1062
+V=1052: coins= 0 states=   152 maxevent=1062
+V=1053: coins= 2 states=   292 maxevent=1062
+V=1054: coins= 2 states=   584 maxevent=1067
+V=1055: coins= 0 states=   292 maxevent=1067
+V=1056: coins= 0 states=   154 maxevent=1067
+V=1057: coins= 0 states=    69 maxevent=1067
+V=1058: coins= 2 states=   152 maxevent=1067
+V=1059: coins= 2 states=   304 maxevent=1067
+V=1060: coins= 0 states=   152 maxevent=1067
+V=1061: coins= 2 states=   320 maxevent=1067
+V=1062: coins= 2 states=   640 maxevent=1071
+V=1063: coins= 0 states=   320 maxevent=1071
+V=1064: coins= 0 states=   165 maxevent=1071
+V=1065: coins= 2 states=   308 maxevent=1073
+V=1066: coins= 2 states=   616 maxevent=1080
+V=1067: coins= 0 states=   308 maxevent=1080
+V=1068: coins= 2 states=   588 maxevent=1080
+V=1069: coins= 2 states=  1176 maxevent=1080
+V=1070: coins= 0 states=   588 maxevent=1080
+V=1071: coins= 0 states=   297 maxevent=1080
+V=1072: coins= 0 states=   145 maxevent=1080
+V=1073: coins= 0 states=    65 maxevent=1080
+V=1074: coins= 0 states=    23 maxevent=1080
+V=1075: coins= 2 states=    36 maxevent=1080
+V=1076: coins= 2 states=    72 maxevent=1082
+V=1077: coins= 0 states=    36 maxevent=1082
+V=1078: coins= 2 states=    68 maxevent=1082
+V=1079: coins= 2 states=   136 maxevent=1089
+V=1080: coins= 0 states=    68 maxevent=1089
+V=1081: coins= 0 states=    31 maxevent=1089
+V=1082: coins= 2 states=    60 maxevent=1089
+V=1083: coins= 2 states=   120 maxevent=1089
+V=1084: coins= 0 states=    60 maxevent=1089
+V=1085: coins= 2 states=   160 maxevent=1091
+V=1086: coins= 2 states=   320 maxevent=1094
+V=1087: coins= 0 states=   160 maxevent=1094
+V=1088: coins= 0 states=    77 maxevent=1094
+V=1089: coins= 0 states=    37 maxevent=1094
+V=1090: coins= 2 states=    84 maxevent=1096
+V=1091: coins= 2 states=   168 maxevent=1102
+V=1092: coins= 0 states=    84 maxevent=1102
+V=1093: coins= 2 states=   192 maxevent=1102
+V=1094: coins= 2 states=   384 maxevent=1102
+V=1095: coins= 0 states=   192 maxevent=1102
+V=1096: coins= 0 states=    99 maxevent=1102
+V=1097: coins= 2 states=   188 maxevent=1105
+V=1098: coins= 2 states=   376 maxevent=1106
+V=1099: coins= 0 states=   188 maxevent=1106
+V=1100: coins= 2 states=   388 maxevent=1107
+V=1101: coins= 2 states=   776 maxevent=1118
+V=1102: coins= 0 states=   388 maxevent=1118
+V=1103: coins= 0 states=   190 maxevent=1118
+V=1104: coins= 0 states=    97 maxevent=1118
+V=1105: coins= 0 states=    49 maxevent=1118
+V=1106: coins= 2 states=    76 maxevent=1118
+V=1107: coins= 2 states=   152 maxevent=1118
+V=1108: coins= 0 states=    76 maxevent=1118
+V=1109: coins= 2 states=   164 maxevent=1118
+V=1110: coins= 2 states=   328 maxevent=1118
+V=1111: coins= 0 states=   164 maxevent=1118
+V=1112: coins= 0 states=    83 maxevent=1118
+V=1113: coins= 2 states=   132 maxevent=1118
+V=1114: coins= 2 states=   264 maxevent=1120
+V=1115: coins= 0 states=   132 maxevent=1120
+V=1116: coins= 2 states=   260 maxevent=1124
+V=1117: coins= 2 states=   520 maxevent=1126
+V=1118: coins= 0 states=   260 maxevent=1126
+V=1119: coins= 0 states=   122 maxevent=1126
+V=1120: coins= 0 states=    66 maxevent=1126
+V=1121: coins= 2 states=   144 maxevent=1126
+V=1122: coins= 2 states=   288 maxevent=1130
+V=1123: coins= 0 states=   144 maxevent=1130
+V=1124: coins= 2 states=   280 maxevent=1131
+V=1125: coins= 2 states=   560 maxevent=1133
+V=1126: coins= 0 states=   280 maxevent=1133
+V=1127: coins= 0 states=   136 maxevent=1133
+V=1128: coins= 2 states=   240 maxevent=1135
+V=1129: coins= 2 states=   480 maxevent=1137
+V=1130: coins= 0 states=   240 maxevent=1137
+V=1131: coins= 2 states=   460 maxevent=1139
+V=1132: coins= 2 states=   920 maxevent=1142
+V=1133: coins= 0 states=   460 maxevent=1142
+V=1134: coins= 0 states=   230 maxevent=1142
+V=1135: coins= 0 states=   112 maxevent=1142
+V=1136: coins= 0 states=    55 maxevent=1142
+V=1137: coins= 0 states=    34 maxevent=1142
+V=1138: coins= 0 states=    18 maxevent=1142
+V=1139: coins= 2 states=    32 maxevent=1146
+V=1140: coins= 2 states=    64 maxevent=1146
+V=1141: coins= 0 states=    32 maxevent=1146
+V=1142: coins= 2 states=    40 maxevent=1150
+V=1143: coins= 2 states=    80 maxevent=1152
+V=1144: coins= 0 states=    40 maxevent=1152
+V=1145: coins= 0 states=    28 maxevent=1152
+V=1146: coins= 2 states=    60 maxevent=1153
+V=1147: coins= 2 states=   120 maxevent=1153
+V=1148: coins= 0 states=    60 maxevent=1153
+V=1149: coins= 2 states=   132 maxevent=1163
+V=1150: coins= 2 states=   264 maxevent=1163
+V=1151: coins= 0 states=   132 maxevent=1163
+V=1152: coins= 0 states=    69 maxevent=1163
+V=1153: coins= 0 states=    37 maxevent=1163
+V=1154: coins= 2 states=    56 maxevent=1164
+V=1155: coins= 2 states=   112 maxevent=1164
+V=1156: coins= 0 states=    56 maxevent=1164
+V=1157: coins= 2 states=   136 maxevent=1164
+V=1158: coins= 2 states=   272 maxevent=1165
+V=1159: coins= 0 states=   136 maxevent=1165
+V=1160: coins= 0 states=    69 maxevent=1165
+V=1161: coins= 2 states=   148 maxevent=1170
+V=1162: coins= 2 states=   296 maxevent=1171
+V=1163: coins= 0 states=   148 maxevent=1171
+V=1164: coins= 2 states=   284 maxevent=1172
+V=1165: coins= 2 states=   568 maxevent=1176
+V=1166: coins= 0 states=   284 maxevent=1176
+V=1167: coins= 0 states=   161 maxevent=1176
+V=1168: coins= 0 states=    78 maxevent=1176
+V=1169: coins= 0 states=    42 maxevent=1176
+V=1170: coins= 2 states=    96 maxevent=1176
+V=1171: coins= 2 states=   192 maxevent=1178
+V=1172: coins= 0 states=    96 maxevent=1178
+V=1173: coins= 2 states=   144 maxevent=1182
+V=1174: coins= 2 states=   288 maxevent=1184
+V=1175: coins= 0 states=   144 maxevent=1184
+V=1176: coins= 0 states=    71 maxevent=1184
+V=1177: coins= 2 states=   180 maxevent=1185
+V=1178: coins= 2 states=   360 maxevent=1185
+V=1179: coins= 0 states=   180 maxevent=1185
+V=1180: coins= 2 states=   360 maxevent=1188
+V=1181: coins= 2 states=   720 maxevent=1188
+V=1182: coins= 0 states=   360 maxevent=1188
+V=1183: coins= 0 states=   170 maxevent=1188
+V=1184: coins= 0 states=    93 maxevent=1188
+V=1185: coins= 2 states=   184 maxevent=1192
+V=1186: coins= 2 states=   368 maxevent=1194
+V=1187: coins= 0 states=   184 maxevent=1194
+V=1188: coins= 2 states=   380 maxevent=1196
+V=1189: coins= 2 states=   760 maxevent=1196
+V=1190: coins= 0 states=   380 maxevent=1196
+V=1191: coins= 0 states=   181 maxevent=1196
+V=1192: coins= 2 states=   396 maxevent=1198
+V=1193: coins= 2 states=   792 maxevent=1203
+V=1194: coins= 0 states=   396 maxevent=1203
+V=1195: coins= 2 states=   716 maxevent=1204
+V=1196: coins= 2 states=  1432 maxevent=1206
+V=1197: coins= 0 states=   716 maxevent=1206
+V=1198: coins= 0 states=   368 maxevent=1206
+V=1199: coins= 0 states=   178 maxevent=1206
+V=1200: coins= 0 states=    89 maxevent=1206
+V=1201: coins= 0 states=    49 maxevent=1206
+V=1202: coins= 2 states=   108 maxevent=1206
+V=1203: coins= 2 states=   216 maxevent=1211
+V=1204: coins= 0 states=   108 maxevent=1211
+V=1205: coins= 2 states=   192 maxevent=1213
+V=1206: coins= 2 states=   384 maxevent=1218
+V=1207: coins= 0 states=   192 maxevent=1218
+V=1208: coins= 0 states=   102 maxevent=1218
+V=1209: coins= 2 states=   200 maxevent=1218
+V=1210: coins= 2 states=   400 maxevent=1222
+V=1211: coins= 0 states=   200 maxevent=1222
+V=1212: coins= 2 states=   388 maxevent=1222
+V=1213: coins= 2 states=   776 maxevent=1222
+V=1214: coins= 0 states=   388 maxevent=1222
+V=1215: coins= 0 states=   194 maxevent=1222
+V=1216: coins= 0 states=   100 maxevent=1222
+V=1217: coins= 2 states=   180 maxevent=1225
+V=1218: coins= 2 states=   360 maxevent=1225
+V=1219: coins= 0 states=   180 maxevent=1225
+V=1220: coins= 2 states=   392 maxevent=1228
+V=1221: coins= 2 states=   784 maxevent=1233
+V=1222: coins= 0 states=   392 maxevent=1233
+V=1223: coins= 0 states=   197 maxevent=1233
+V=1224: coins= 2 states=   404 maxevent=1235
+V=1225: coins= 2 states=   808 maxevent=1235
+V=1226: coins= 0 states=   404 maxevent=1235
+V=1227: coins= 2 states=   912 maxevent=1236
+V=1228: coins= 2 states=  1824 maxevent=1238
+V=1229: coins= 0 states=   912 maxevent=1238
+V=1230: coins= 0 states=   454 maxevent=1238
+V=1231: coins= 0 states=   227 maxevent=1238
+V=1232: coins= 0 states=   122 maxevent=1238
+V=1233: coins= 2 states=   236 maxevent=1240
+V=1234: coins= 2 states=   472 maxevent=1241
+V=1235: coins= 0 states=   236 maxevent=1241
+V=1236: coins= 2 states=   492 maxevent=1245
+V=1237: coins= 2 states=   984 maxevent=1247
+V=1238: coins= 0 states=   492 maxevent=1247
+V=1239: coins= 0 states=   254 maxevent=1247
+V=1240: coins= 2 states=   520 maxevent=1247
+V=1241: coins= 2 states=  1040 maxevent=1251
+V=1242: coins= 0 states=   520 maxevent=1251
+V=1243: coins= 2 states=   968 maxevent=1258
+V=1244: coins= 2 states=  1936 maxevent=1258
+V=1245: coins= 0 states=   968 maxevent=1258
+V=1246: coins= 0 states=   456 maxevent=1258
+V=1247: coins= 0 states=   231 maxevent=1258
+V=1248: coins= 2 states=   440 maxevent=1258
+V=1249: coins= 2 states=   880 maxevent=1259
+V=1250: coins= 0 states=   440 maxevent=1259
+V=1251: coins= 2 states=   916 maxevent=1260
+V=1252: coins= 2 states=  1832 maxevent=1261
+V=1253: coins= 0 states=   916 maxevent=1261
+V=1254: coins= 0 states=   465 maxevent=1261
+V=1255: coins= 2 states=   876 maxevent=1264
+V=1256: coins= 2 states=  1752 maxevent=1266
+V=1257: coins= 0 states=   876 maxevent=1266
+V=1258: coins= 2 states=  1688 maxevent=1268
+V=1259: coins= 2 states=  3376 maxevent=1271
+V=1260: coins= 0 states=  1688 maxevent=1271
+V=1261: coins= 0 states=   828 maxevent=1271
+V=1262: coins= 0 states=   431 maxevent=1271
+V=1263: coins= 0 states=   205 maxevent=1271
+V=1264: coins= 0 states=   106 maxevent=1271
+V=1265: coins= 0 states=    52 maxevent=1271
+V=1266: coins= 0 states=    30 maxevent=1271
+V=1267: coins= 2 states=    52 maxevent=1271
+V=1268: coins= 2 states=   104 maxevent=1275
+V=1269: coins= 0 states=    52 maxevent=1275
+V=1270: coins= 2 states=   112 maxevent=1275
+V=1271: coins= 2 states=   224 maxevent=1277
+V=1272: coins= 0 states=   112 maxevent=1277
+V=1273: coins= 0 states=    53 maxevent=1277
+V=1274: coins= 2 states=    92 maxevent=1279
+V=1275: coins= 2 states=   184 maxevent=1281
+V=1276: coins= 0 states=    92 maxevent=1281
+V=1277: coins= 2 states=   160 maxevent=1284
+V=1278: coins= 2 states=   320 maxevent=1286
+V=1279: coins= 0 states=   160 maxevent=1286
+V=1280: coins= 0 states=    75 maxevent=1286
+V=1281: coins= 0 states=    36 maxevent=1286
+V=1282: coins= 2 states=    56 maxevent=1289
+V=1283: coins= 2 states=   112 maxevent=1292
+V=1284: coins= 0 states=    56 maxevent=1292
+V=1285: coins= 2 states=   116 maxevent=1294
+V=1286: coins= 2 states=   232 maxevent=1294
+V=1287: coins= 0 states=   116 maxevent=1294
+V=1288: coins= 0 states=    56 maxevent=1294
+V=1289: coins= 2 states=   124 maxevent=1295
+V=1290: coins= 2 states=   248 maxevent=1296
+V=1291: coins= 0 states=   124 maxevent=1296
+V=1292: coins= 2 states=   264 maxevent=1300
+V=1293: coins= 2 states=   528 maxevent=1302
+V=1294: coins= 0 states=   264 maxevent=1302
+V=1295: coins= 0 states=   143 maxevent=1302
+V=1296: coins= 0 states=    75 maxevent=1302
+V=1297: coins= 0 states=    34 maxevent=1302
+V=1298: coins= 2 states=    60 maxevent=1304
+V=1299: coins= 2 states=   120 maxevent=1305
+V=1300: coins= 0 states=    60 maxevent=1305
+V=1301: coins= 2 states=    92 maxevent=1308
+V=1302: coins= 2 states=   184 maxevent=1308
+V=1303: coins= 0 states=    92 maxevent=1308
+V=1304: coins= 0 states=    53 maxevent=1308
+V=1305: coins= 2 states=   108 maxevent=1312
+V=1306: coins= 2 states=   216 maxevent=1312
+V=1307: coins= 0 states=   108 maxevent=1312
+V=1308: coins= 2 states=   212 maxevent=1318
+V=1309: coins= 2 states=   424 maxevent=1318
+V=1310: coins= 0 states=   212 maxevent=1318
+V=1311: coins= 0 states=   103 maxevent=1318
+V=1312: coins= 0 states=    54 maxevent=1318
+V=1313: coins= 2 states=   124 maxevent=1320
+V=1314: coins= 2 states=   248 maxevent=1322
+V=1315: coins= 0 states=   124 maxevent=1322
+V=1316: coins= 2 states=   288 maxevent=1324
+V=1317: coins= 2 states=   576 maxevent=1326
+V=1318: coins= 0 states=   288 maxevent=1326
+V=1319: coins= 0 states=   147 maxevent=1326
+V=1320: coins= 2 states=   320 maxevent=1328
+V=1321: coins= 2 states=   640 maxevent=1331
+V=1322: coins= 0 states=   320 maxevent=1331
+V=1323: coins= 2 states=   660 maxevent=1335
+V=1324: coins= 2 states=  1320 maxevent=1335
+V=1325: coins= 0 states=   660 maxevent=1335
+V=1326: coins= 0 states=   338 maxevent=1335
+V=1327: coins= 0 states=   170 maxevent=1335
+V=1328: coins= 0 states=    81 maxevent=1335
+V=1329: coins= 0 states=    39 maxevent=1335
+V=1330: coins= 2 states=    76 maxevent=1335
+V=1331: coins= 2 states=   152 maxevent=1335
+V=1332: coins= 0 states=    76 maxevent=1335
+V=1333: coins= 2 states=   160 maxevent=1340
+V=1334: coins= 2 states=   320 maxevent=1341
+V=1335: coins= 0 states=   160 maxevent=1341
+V=1336: coins= 0 states=    78 maxevent=1341
+V=1337: coins= 2 states=   124 maxevent=1344
+V=1338: coins= 2 states=   248 maxevent=1346
+V=1339: coins= 0 states=   124 maxevent=1346
+V=1340: coins= 2 states=   288 maxevent=1348
+V=1341: coins= 2 states=   576 maxevent=1349
+V=1342: coins= 0 states=   288 maxevent=1349
+V=1343: coins= 0 states=   156 maxevent=1349
+V=1344: coins= 0 states=    81 maxevent=1349
+V=1345: coins= 2 states=   168 maxevent=1349
+V=1346: coins= 2 states=   336 maxevent=1355
+V=1347: coins= 0 states=   168 maxevent=1355
+V=1348: coins= 2 states=   332 maxevent=1355
+V=1349: coins= 2 states=   664 maxevent=1357
+V=1350: coins= 0 states=   332 maxevent=1357
+V=1351: coins= 0 states=   164 maxevent=1357
+V=1352: coins= 2 states=   336 maxevent=1363
+V=1353: coins= 2 states=   672 maxevent=1363
+V=1354: coins= 0 states=   336 maxevent=1363
+V=1355: coins= 2 states=   656 maxevent=1364
+V=1356: coins= 2 states=  1312 maxevent=1366
+V=1357: coins= 0 states=   656 maxevent=1366
+V=1358: coins= 0 states=   317 maxevent=1366
+V=1359: coins= 0 states=   153 maxevent=1366
+V=1360: coins= 0 states=    75 maxevent=1366
+V=1361: coins= 2 states=   132 maxevent=1369
+V=1362: coins= 2 states=   264 maxevent=1369
+V=1363: coins= 0 states=   132 maxevent=1369
+V=1364: coins= 2 states=   268 maxevent=1370
+V=1365: coins= 2 states=   536 maxevent=1372
+V=1366: coins= 0 states=   268 maxevent=1372
+V=1367: coins= 0 states=   131 maxevent=1372
+V=1368: coins= 2 states=   236 maxevent=1374
+V=1369: coins= 2 states=   472 maxevent=1375
+V=1370: coins= 0 states=   236 maxevent=1375
+V=1371: coins= 2 states=   396 maxevent=1381
+V=1372: coins= 2 states=   792 maxevent=1381
+V=1373: coins= 0 states=   396 maxevent=1381
+V=1374: coins= 0 states=   193 maxevent=1381
+V=1375: coins= 0 states=    92 maxevent=1381
+V=1376: coins= 2 states=   204 maxevent=1383
+V=1377: coins= 2 states=   408 maxevent=1386
+V=1378: coins= 0 states=   204 maxevent=1386
+V=1379: coins= 2 states=   404 maxevent=1388
+V=1380: coins= 2 states=   808 maxevent=1388
+V=1381: coins= 0 states=   404 maxevent=1388
+V=1382: coins= 0 states=   209 maxevent=1388
+V=1383: coins= 2 states=   428 maxevent=1392
+V=1384: coins= 2 states=   856 maxevent=1395
+V=1385: coins= 0 states=   428 maxevent=1395
+V=1386: coins= 2 states=   952 maxevent=1395
+V=1387: coins= 2 states=  1904 maxevent=1397
+V=1388: coins= 0 states=   952 maxevent=1397
+V=1389: coins= 0 states=   490 maxevent=1397
+V=1390: coins= 0 states=   245 maxevent=1397
+V=1391: coins= 0 states=   126 maxevent=1397
+V=1392: coins= 0 states=    49 maxevent=1397
+V=1393: coins= 0 states=    21 maxevent=1397
+V=1394: coins= 2 states=    40 maxevent=1397
+V=1395: coins= 2 states=    80 maxevent=1399
+V=1396: coins= 0 states=    40 maxevent=1399
+V=1397: coins= 2 states=    84 maxevent=1402
+V=1398: coins= 2 states=   168 maxevent=1408
+V=1399: coins= 0 states=    84 maxevent=1408
+V=1400: coins= 0 states=    38 maxevent=1408
+V=1401: coins= 2 states=    76 maxevent=1408
+V=1402: coins= 2 states=   152 maxevent=1408
+V=1403: coins= 0 states=    76 maxevent=1408
+V=1404: coins= 2 states=   152 maxevent=1411
+V=1405: coins= 2 states=   304 maxevent=1412
+V=1406: coins= 0 states=   152 maxevent=1412
+V=1407: coins= 0 states=    72 maxevent=1412
+V=1408: coins= 0 states=    34 maxevent=1412
+V=1409: coins= 2 states=    72 maxevent=1414
+V=1410: coins= 2 states=   144 maxevent=1420
+V=1411: coins= 0 states=    72 maxevent=1420
+V=1412: coins= 2 states=   112 maxevent=1420
+V=1413: coins= 2 states=   224 maxevent=1422
+V=1414: coins= 0 states=   112 maxevent=1422
+V=1415: coins= 0 states=    56 maxevent=1422
+V=1416: coins= 2 states=   100 maxevent=1422
+V=1417: coins= 2 states=   200 maxevent=1425
+V=1418: coins= 0 states=   100 maxevent=1425
+V=1419: coins= 2 states=   256 maxevent=1431
+V=1420: coins= 2 states=   512 maxevent=1434
+V=1421: coins= 0 states=   256 maxevent=1434
+V=1422: coins= 0 states=   133 maxevent=1434
+V=1423: coins= 0 states=    67 maxevent=1434
+V=1424: coins= 0 states=    30 maxevent=1434
+V=1425: coins= 2 states=    68 maxevent=1434
+V=1426: coins= 2 states=   136 maxevent=1438
+V=1427: coins= 0 states=    68 maxevent=1438
+V=1428: coins= 2 states=   148 maxevent=1438
+V=1429: coins= 2 states=   296 maxevent=1438
+V=1430: coins= 0 states=   148 maxevent=1438
+V=1431: coins= 0 states=    75 maxevent=1438
+V=1432: coins= 2 states=   120 maxevent=1440
+V=1433: coins= 2 states=   240 maxevent=1443
+V=1434: coins= 0 states=   120 maxevent=1443
+V=1435: coins= 2 states=   208 maxevent=1443
+V=1436: coins= 2 states=   416 maxevent=1444
+V=1437: coins= 0 states=   208 maxevent=1444
+V=1438: coins= 0 states=   103 maxevent=1444
+V=1439: coins= 0 states=    55 maxevent=1444
+V=1440: coins= 2 states=   100 maxevent=1445
+V=1441: coins= 2 states=   200 maxevent=1451
+V=1442: coins= 0 states=   100 maxevent=1451
+V=1443: coins= 2 states=   172 maxevent=1451
+V=1444: coins= 2 states=   344 maxevent=1452
+V=1445: coins= 0 states=   172 maxevent=1452
+V=1446: coins= 0 states=    88 maxevent=1452
+V=1447: coins= 2 states=   164 maxevent=1458
+V=1448: coins= 2 states=   328 maxevent=1458
+V=1449: coins= 0 states=   164 maxevent=1458
+V=1450: coins= 2 states=   400 maxevent=1461
+V=1451: coins= 2 states=   800 maxevent=1461
+V=1452: coins= 0 states=   400 maxevent=1461
+V=1453: coins= 0 states=   203 maxevent=1461
+V=1454: coins= 0 states=   102 maxevent=1461
+V=1455: coins= 0 states=    58 maxevent=1461
+V=1456: coins= 0 states=    26 maxevent=1461
+V=1457: coins= 2 states=    68 maxevent=1461
+V=1458: coins= 2 states=   136 maxevent=1465
+V=1459: coins= 0 states=    68 maxevent=1465
+V=1460: coins= 2 states=   120 maxevent=1466
+V=1461: coins= 2 states=   240 maxevent=1471
+V=1462: coins= 0 states=   120 maxevent=1471
+V=1463: coins= 0 states=    62 maxevent=1471
+V=1464: coins= 2 states=   116 maxevent=1471
+V=1465: coins= 2 states=   232 maxevent=1473
+V=1466: coins= 0 states=   116 maxevent=1473
+V=1467: coins= 2 states=   208 maxevent=1475
+V=1468: coins= 2 states=   416 maxevent=1475
+V=1469: coins= 0 states=   208 maxevent=1475
+V=1470: coins= 0 states=   107 maxevent=1475
+V=1471: coins= 0 states=    61 maxevent=1475
+V=1472: coins= 2 states=   128 maxevent=1478
+V=1473: coins= 2 states=   256 maxevent=1481
+V=1474: coins= 0 states=   128 maxevent=1481
+V=1475: coins= 2 states=   248 maxevent=1487
+V=1476: coins= 2 states=   496 maxevent=1487
+V=1477: coins= 0 states=   248 maxevent=1487
+V=1478: coins= 0 states=   125 maxevent=1487
+V=1479: coins= 2 states=   224 maxevent=1487
+V=1480: coins= 2 states=   448 maxevent=1489
+V=1481: coins= 0 states=   224 maxevent=1489
+V=1482: coins= 2 states=   412 maxevent=1489
+V=1483: coins= 2 states=   824 maxevent=1496
+V=1484: coins= 0 states=   412 maxevent=1496
+V=1485: coins= 0 states=   209 maxevent=1496
+V=1486: coins= 0 states=   110 maxevent=1496
+V=1487: coins= 0 states=    50 maxevent=1496
+V=1488: coins= 2 states=   112 maxevent=1496
+V=1489: coins= 2 states=   224 maxevent=1497
+V=1490: coins= 0 states=   112 maxevent=1497
+V=1491: coins= 2 states=   172 maxevent=1497
+V=1492: coins= 2 states=   344 maxevent=1498
+V=1493: coins= 0 states=   172 maxevent=1498
+V=1494: coins= 0 states=    91 maxevent=1498
+V=1495: coins= 2 states=   196 maxevent=1504
+V=1496: coins= 2 states=   392 maxevent=1507
+V=1497: coins= 0 states=   196 maxevent=1507
+V=1498: coins= 2 states=   284 maxevent=1507
+V=1499: coins= 2 states=   568 maxevent=1512
+V=1500: coins= 0 states=   284 maxevent=1512
+V=1501: coins= 0 states=   142 maxevent=1512
+V=1502: coins= 0 states=    73 maxevent=1512
+V=1503: coins= 2 states=   148 maxevent=1512
+V=1504: coins= 2 states=   296 maxevent=1512
+V=1505: coins= 0 states=   148 maxevent=1512
+V=1506: coins= 2 states=   316 maxevent=1512
+V=1507: coins= 2 states=   632 maxevent=1515
+V=1508: coins= 0 states=   316 maxevent=1515
+V=1509: coins= 0 states=   167 maxevent=1515
+V=1510: coins= 2 states=   288 maxevent=1520
+V=1511: coins= 2 states=   576 maxevent=1521
+V=1512: coins= 0 states=   288 maxevent=1521
+V=1513: coins= 2 states=   508 maxevent=1521
+V=1514: coins= 2 states=  1016 maxevent=1522
+V=1515: coins= 0 states=   508 maxevent=1522
+V=1516: coins= 0 states=   252 maxevent=1522
+V=1517: coins= 0 states=   111 maxevent=1522
+V=1518: coins= 0 states=    53 maxevent=1522
+V=1519: coins= 0 states=    25 maxevent=1522
+V=1520: coins= 0 states=    14 maxevent=1522
+V=1521: coins= 0 states=     5 maxevent=1522
+V=1522: coins= 0 states=     1 maxevent=1522
+V=1523: coins= 2 states=     0 maxevent=1522
+V=1524: coins= 2 states=     0 maxevent=1522
+V=1525: coins= 0 states=     0 maxevent=1522
+V=1526: coins= 2 states=     0 maxevent=1522
+V=1527: coins= 2 states=     0 maxevent=1522
+V=1528: coins= 0 states=     0 maxevent=1522
+V=1529: coins= 0 states=     0 maxevent=1522
+V=1530: coins= 2 states=     0 maxevent=1522
+V=1531: coins= 2 states=     0 maxevent=1522
+V=1532: coins= 0 states=     0 maxevent=1522
+V=1533: coins= 2 states=     0 maxevent=1522
+V=1534: coins= 2 states=     0 maxevent=1522
+V=1535: coins= 0 states=     0 maxevent=1522
+V=1536: coins= 0 states=     0 maxevent=1522
+V=1537: coins= 0 states=     0 maxevent=1522
+V=1538: coins= 2 states=     0 maxevent=1522
+V=1539: coins= 2 states=     0 maxevent=1522
+V=1540: coins= 0 states=     0 maxevent=1522
+V=1541: coins= 2 states=     0 maxevent=1522
+V=1542: coins= 2 states=     0 maxevent=1522
+V=1543: coins= 0 states=     0 maxevent=1522
+V=1544: coins= 0 states=     0 maxevent=1522
+V=1545: coins= 2 states=     0 maxevent=1522
+V=1546: coins= 2 states=     0 maxevent=1522
+V=1547: coins= 0 states=     0 maxevent=1522
+V=1548: coins= 2 states=     0 maxevent=1522
+V=1549: coins= 2 states=     0 maxevent=1522
+V=1550: coins= 0 states=     0 maxevent=1522
+V=1551: coins= 0 states=     0 maxevent=1522
+V=1552: coins= 0 states=     0 maxevent=1522
+V=1553: coins= 0 states=     0 maxevent=1522
+V=1554: coins= 2 states=     0 maxevent=1522
+V=1555: coins= 2 states=     0 maxevent=1522
+V=1556: coins= 0 states=     0 maxevent=1522
+V=1557: coins= 2 states=     0 maxevent=1522
+V=1558: coins= 2 states=     0 maxevent=1522
+V=1559: coins= 0 states=     0 maxevent=1522
+V=1560: coins= 0 states=     0 maxevent=1522
+V=1561: coins= 2 states=     0 maxevent=1522
+V=1562: coins= 2 states=     0 maxevent=1522
+V=1563: coins= 0 states=     0 maxevent=1522
+V=1564: coins= 2 states=     0 maxevent=1522
+V=1565: coins= 2 states=     0 maxevent=1522
+V=1566: coins= 0 states=     0 maxevent=1522
+V=1567: coins= 0 states=     0 maxevent=1522
+V=1568: coins= 0 states=     0 maxevent=1522
+V=1569: coins= 2 states=     0 maxevent=1522
+V=1570: coins= 2 states=     0 maxevent=1522
+V=1571: coins= 0 states=     0 maxevent=1522
+V=1572: coins= 2 states=     0 maxevent=1522
+V=1573: coins= 2 states=     0 maxevent=1522
+V=1574: coins= 0 states=     0 maxevent=1522
+V=1575: coins= 0 states=     0 maxevent=1522
+V=1576: coins= 2 states=     0 maxevent=1522
+V=1577: coins= 2 states=     0 maxevent=1522
+V=1578: coins= 0 states=     0 maxevent=1522
+V=1579: coins= 2 states=     0 maxevent=1522
+V=1580: coins= 2 states=     0 maxevent=1522
+V=1581: coins= 0 states=     0 maxevent=1522
+V=1582: coins= 0 states=     0 maxevent=1522
+V=1583: coins= 0 states=     0 maxevent=1522
+V=1584: coins= 0 states=     0 maxevent=1522
+V=1585: coins= 0 states=     0 maxevent=1522
+V=1586: coins= 2 states=     0 maxevent=1522
+V=1587: coins= 2 states=     0 maxevent=1522
+V=1588: coins= 0 states=     0 maxevent=1522
+V=1589: coins= 2 states=     0 maxevent=1522
+V=1590: coins= 2 states=     0 maxevent=1522
+V=1591: coins= 0 states=     0 maxevent=1522
+V=1592: coins= 0 states=     0 maxevent=1522
+V=1593: coins= 2 states=     0 maxevent=1522
+V=1594: coins= 2 states=     0 maxevent=1522
+V=1595: coins= 0 states=     0 maxevent=1522
+V=1596: coins= 2 states=     0 maxevent=1522
+V=1597: coins= 2 states=     0 maxevent=1522
+V=1598: coins= 0 states=     0 maxevent=1522
+V=1599: coins= 0 states=     0 maxevent=1522
+V=1600: coins= 0 states=     0 maxevent=1522
+V=1601: coins= 2 states=     0 maxevent=1522
+V=1602: coins= 2 states=     0 maxevent=1522
+V=1603: coins= 0 states=     0 maxevent=1522
+V=1604: coins= 2 states=     0 maxevent=1522
+V=1605: coins= 2 states=     0 maxevent=1522
+V=1606: coins= 0 states=     0 maxevent=1522
+V=1607: coins= 0 states=     0 maxevent=1522
+V=1608: coins= 2 states=     0 maxevent=1522
+V=1609: coins= 2 states=     0 maxevent=1522
+V=1610: coins= 0 states=     0 maxevent=1522
+V=1611: coins= 2 states=     0 maxevent=1522
+V=1612: coins= 2 states=     0 maxevent=1522
+V=1613: coins= 0 states=     0 maxevent=1522
+V=1614: coins= 0 states=     0 maxevent=1522
+V=1615: coins= 0 states=     0 maxevent=1522
+V=1616: coins= 0 states=     0 maxevent=1522
+V=1617: coins= 2 states=     0 maxevent=1522
+V=1618: coins= 2 states=     0 maxevent=1522
+V=1619: coins= 0 states=     0 maxevent=1522
+V=1620: coins= 2 states=     0 maxevent=1522
+V=1621: coins= 2 states=     0 maxevent=1522
+V=1622: coins= 0 states=     0 maxevent=1522
+V=1623: coins= 0 states=     0 maxevent=1522
+V=1624: coins= 2 states=     0 maxevent=1522
+V=1625: coins= 2 states=     0 maxevent=1522
+V=1626: coins= 0 states=     0 maxevent=1522
+V=1627: coins= 2 states=     0 maxevent=1522
+V=1628: coins= 2 states=     0 maxevent=1522
+V=1629: coins= 0 states=     0 maxevent=1522
+V=1630: coins= 0 states=     0 maxevent=1522
+V=1631: coins= 0 states=     0 maxevent=1522
+V=1632: coins= 2 states=     0 maxevent=1522
+V=1633: coins= 2 states=     0 maxevent=1522
+V=1634: coins= 0 states=     0 maxevent=1522
+V=1635: coins= 2 states=     0 maxevent=1522
+V=1636: coins= 2 states=     0 maxevent=1522
+V=1637: coins= 0 states=     0 maxevent=1522
+V=1638: coins= 0 states=     0 maxevent=1522
+V=1639: coins= 2 states=     0 maxevent=1522
+V=1640: coins= 2 states=     0 maxevent=1522
+V=1641: coins= 0 states=     0 maxevent=1522
+V=1642: coins= 2 states=     0 maxevent=1522
+V=1643: coins= 2 states=     0 maxevent=1522
+V=1644: coins= 0 states=     0 maxevent=1522
+V=1645: coins= 0 states=     0 maxevent=1522
+V=1646: coins= 0 states=     0 maxevent=1522
+V=1647: coins= 0 states=     0 maxevent=1522
+V=1648: coins= 0 states=     0 maxevent=1522
+V=1649: coins= 0 states=     0 maxevent=1522
+V=1650: coins= 2 states=     0 maxevent=1522
+V=1651: coins= 2 states=     0 maxevent=1522
+V=1652: coins= 0 states=     0 maxevent=1522
+V=1653: coins= 2 states=     0 maxevent=1522
+V=1654: coins= 2 states=     0 maxevent=1522
+V=1655: coins= 0 states=     0 maxevent=1522
+V=1656: coins= 0 states=     0 maxevent=1522
+V=1657: coins= 2 states=     0 maxevent=1522
+V=1658: coins= 2 states=     0 maxevent=1522
+V=1659: coins= 0 states=     0 maxevent=1522
+V=1660: coins= 2 states=     0 maxevent=1522
+V=1661: coins= 2 states=     0 maxevent=1522
+V=1662: coins= 0 states=     0 maxevent=1522
+V=1663: coins= 0 states=     0 maxevent=1522
+V=1664: coins= 0 states=     0 maxevent=1522
+V=1665: coins= 2 states=     0 maxevent=1522
+V=1666: coins= 2 states=     0 maxevent=1522
+V=1667: coins= 0 states=     0 maxevent=1522
+V=1668: coins= 2 states=     0 maxevent=1522
+V=1669: coins= 2 states=     0 maxevent=1522
+V=1670: coins= 0 states=     0 maxevent=1522
+V=1671: coins= 0 states=     0 maxevent=1522
+V=1672: coins= 2 states=     0 maxevent=1522
+V=1673: coins= 2 states=     0 maxevent=1522
+V=1674: coins= 0 states=     0 maxevent=1522
+V=1675: coins= 2 states=     0 maxevent=1522
+V=1676: coins= 2 states=     0 maxevent=1522
+V=1677: coins= 0 states=     0 maxevent=1522
+V=1678: coins= 0 states=     0 maxevent=1522
+V=1679: coins= 0 states=     0 maxevent=1522
+V=1680: coins= 0 states=     0 maxevent=1522
+V=1681: coins= 2 states=     0 maxevent=1522
+V=1682: coins= 2 states=     0 maxevent=1522
+V=1683: coins= 0 states=     0 maxevent=1522
+V=1684: coins= 2 states=     0 maxevent=1522
+V=1685: coins= 2 states=     0 maxevent=1522
+V=1686: coins= 0 states=     0 maxevent=1522
+V=1687: coins= 0 states=     0 maxevent=1522
+V=1688: coins= 2 states=     0 maxevent=1522
+V=1689: coins= 2 states=     0 maxevent=1522
+V=1690: coins= 0 states=     0 maxevent=1522
+V=1691: coins= 2 states=     0 maxevent=1522
+V=1692: coins= 2 states=     0 maxevent=1522
+V=1693: coins= 0 states=     0 maxevent=1522
+V=1694: coins= 0 states=     0 maxevent=1522
+V=1695: coins= 0 states=     0 maxevent=1522
+V=1696: coins= 2 states=     0 maxevent=1522
+V=1697: coins= 2 states=     0 maxevent=1522
+V=1698: coins= 0 states=     0 maxevent=1522
+V=1699: coins= 2 states=     0 maxevent=1522
+V=1700: coins= 2 states=     0 maxevent=1522
+V=1701: coins= 0 states=     0 maxevent=1522
+V=1702: coins= 0 states=     0 maxevent=1522
+V=1703: coins= 2 states=     0 maxevent=1522
+V=1704: coins= 2 states=     0 maxevent=1522
+V=1705: coins= 0 states=     0 maxevent=1522
+V=1706: coins= 2 states=     0 maxevent=1522
+V=1707: coins= 2 states=     0 maxevent=1522
+V=1708: coins= 0 states=     0 maxevent=1522
+V=1709: coins= 0 states=     0 maxevent=1522
+V=1710: coins= 0 states=     0 maxevent=1522
+V=1711: coins= 0 states=     0 maxevent=1522
+V=1712: coins= 0 states=     0 maxevent=1522
+V=1713: coins= 2 states=     0 maxevent=1522
+V=1714: coins= 2 states=     0 maxevent=1522
+V=1715: coins= 0 states=     0 maxevent=1522
+V=1716: coins= 2 states=     0 maxevent=1522
+V=1717: coins= 2 states=     0 maxevent=1522
+V=1718: coins= 0 states=     0 maxevent=1522
+V=1719: coins= 0 states=     0 maxevent=1522
+V=1720: coins= 2 states=     0 maxevent=1522
+V=1721: coins= 2 states=     0 maxevent=1522
+V=1722: coins= 0 states=     0 maxevent=1522
+V=1723: coins= 2 states=     0 maxevent=1522
+V=1724: coins= 2 states=     0 maxevent=1522
+V=1725: coins= 0 states=     0 maxevent=1522
+V=1726: coins= 0 states=     0 maxevent=1522
+V=1727: coins= 0 states=     0 maxevent=1522
+V=1728: coins= 2 states=     0 maxevent=1522
+V=1729: coins= 2 states=     0 maxevent=1522
+V=1730: coins= 0 states=     0 maxevent=1522
+V=1731: coins= 2 states=     0 maxevent=1522
+V=1732: coins= 2 states=     0 maxevent=1522
+V=1733: coins= 0 states=     0 maxevent=1522
+V=1734: coins= 0 states=     0 maxevent=1522
+V=1735: coins= 2 states=     0 maxevent=1522
+V=1736: coins= 2 states=     0 maxevent=1522
+V=1737: coins= 0 states=     0 maxevent=1522
+V=1738: coins= 2 states=     0 maxevent=1522
+V=1739: coins= 2 states=     0 maxevent=1522
+V=1740: coins= 0 states=     0 maxevent=1522
+V=1741: coins= 0 states=     0 maxevent=1522
+V=1742: coins= 0 states=     0 maxevent=1522
+V=1743: coins= 0 states=     0 maxevent=1522
+V=1744: coins= 2 states=     0 maxevent=1522
+V=1745: coins= 2 states=     0 maxevent=1522
+V=1746: coins= 0 states=     0 maxevent=1522
+V=1747: coins= 2 states=     0 maxevent=1522
+V=1748: coins= 2 states=     0 maxevent=1522
+V=1749: coins= 0 states=     0 maxevent=1522
+V=1750: coins= 0 states=     0 maxevent=1522
+V=1751: coins= 2 states=     0 maxevent=1522
+V=1752: coins= 2 states=     0 maxevent=1522
+V=1753: coins= 0 states=     0 maxevent=1522
+V=1754: coins= 2 states=     0 maxevent=1522
+V=1755: coins= 2 states=     0 maxevent=1522
+V=1756: coins= 0 states=     0 maxevent=1522
+V=1757: coins= 0 states=     0 maxevent=1522
+V=1758: coins= 0 states=     0 maxevent=1522
+V=1759: coins= 2 states=     0 maxevent=1522
+V=1760: coins= 2 states=     0 maxevent=1522
+V=1761: coins= 0 states=     0 maxevent=1522
+V=1762: coins= 2 states=     0 maxevent=1522
+V=1763: coins= 2 states=     0 maxevent=1522
+V=1764: coins= 0 states=     0 maxevent=1522
+V=1765: coins= 0 states=     0 maxevent=1522
+V=1766: coins= 2 states=     0 maxevent=1522
+V=1767: coins= 2 states=     0 maxevent=1522
+V=1768: coins= 0 states=     0 maxevent=1522
+V=1769: coins= 2 states=     0 maxevent=1522
+V=1770: coins= 2 states=     0 maxevent=1522
+V=1771: coins= 0 states=     0 maxevent=1522
+V=1772: coins= 0 states=     0 maxevent=1522
+V=1773: coins= 0 states=     0 maxevent=1522
+V=1774: coins= 0 states=     0 maxevent=1522
+V=1775: coins= 0 states=     0 maxevent=1522
+V=1776: coins= 0 states=     0 maxevent=1522
+V=1777: coins= 0 states=     0 maxevent=1522
+V=1778: coins= 2 states=     0 maxevent=1522
+V=1779: coins= 2 states=     0 maxevent=1522
+V=1780: coins= 0 states=     0 maxevent=1522
+V=1781: coins= 2 states=     0 maxevent=1522
+V=1782: coins= 2 states=     0 maxevent=1522
+V=1783: coins= 0 states=     0 maxevent=1522
+V=1784: coins= 0 states=     0 maxevent=1522
+V=1785: coins= 2 states=     0 maxevent=1522
+V=1786: coins= 2 states=     0 maxevent=1522
+V=1787: coins= 0 states=     0 maxevent=1522
+V=1788: coins= 2 states=     0 maxevent=1522
+V=1789: coins= 2 states=     0 maxevent=1522
+V=1790: coins= 0 states=     0 maxevent=1522
+V=1791: coins= 0 states=     0 maxevent=1522
+V=1792: coins= 0 states=     0 maxevent=1522
+V=1793: coins= 2 states=     0 maxevent=1522
+V=1794: coins= 2 states=     0 maxevent=1522
+V=1795: coins= 0 states=     0 maxevent=1522
+V=1796: coins= 2 states=     0 maxevent=1522
+V=1797: coins= 2 states=     0 maxevent=1522
+V=1798: coins= 0 states=     0 maxevent=1522
+V=1799: coins= 0 states=     0 maxevent=1522
+V=1800: coins= 2 states=     0 maxevent=1522
+V=1801: coins= 2 states=     0 maxevent=1522
+V=1802: coins= 0 states=     0 maxevent=1522
+V=1803: coins= 2 states=     0 maxevent=1522
+V=1804: coins= 2 states=     0 maxevent=1522
+V=1805: coins= 0 states=     0 maxevent=1522
+V=1806: coins= 0 states=     0 maxevent=1522
+V=1807: coins= 0 states=     0 maxevent=1522
+V=1808: coins= 0 states=     0 maxevent=1522
+V=1809: coins= 2 states=     0 maxevent=1522
+V=1810: coins= 2 states=     0 maxevent=1522
+V=1811: coins= 0 states=     0 maxevent=1522
+V=1812: coins= 2 states=     0 maxevent=1522
+V=1813: coins= 2 states=     0 maxevent=1522
+V=1814: coins= 0 states=     0 maxevent=1522
+V=1815: coins= 0 states=     0 maxevent=1522
+V=1816: coins= 2 states=     0 maxevent=1522
+V=1817: coins= 2 states=     0 maxevent=1522
+V=1818: coins= 0 states=     0 maxevent=1522
+V=1819: coins= 2 states=     0 maxevent=1522
+V=1820: coins= 2 states=     0 maxevent=1522
+V=1821: coins= 0 states=     0 maxevent=1522
+V=1822: coins= 0 states=     0 maxevent=1522
+V=1823: coins= 0 states=     0 maxevent=1522
+V=1824: coins= 2 states=     0 maxevent=1522
+V=1825: coins= 2 states=     0 maxevent=1522
+V=1826: coins= 0 states=     0 maxevent=1522
+V=1827: coins= 2 states=     0 maxevent=1522
+V=1828: coins= 2 states=     0 maxevent=1522
+V=1829: coins= 0 states=     0 maxevent=1522
+V=1830: coins= 0 states=     0 maxevent=1522
+V=1831: coins= 2 states=     0 maxevent=1522
+V=1832: coins= 2 states=     0 maxevent=1522
+V=1833: coins= 0 states=     0 maxevent=1522
+V=1834: coins= 2 states=     0 maxevent=1522
+V=1835: coins= 2 states=     0 maxevent=1522
+V=1836: coins= 0 states=     0 maxevent=1522
+V=1837: coins= 0 states=     0 maxevent=1522
+V=1838: coins= 0 states=     0 maxevent=1522
+V=1839: coins= 0 states=     0 maxevent=1522
+V=1840: coins= 0 states=     0 maxevent=1522
+V=1841: coins= 2 states=     0 maxevent=1522
+V=1842: coins= 2 states=     0 maxevent=1522
+V=1843: coins= 0 states=     0 maxevent=1522
+V=1844: coins= 2 states=     0 maxevent=1522
+V=1845: coins= 2 states=     0 maxevent=1522
+V=1846: coins= 0 states=     0 maxevent=1522
+V=1847: coins= 0 states=     0 maxevent=1522
+V=1848: coins= 2 states=     0 maxevent=1522
+V=1849: coins= 2 states=     0 maxevent=1522
+V=1850: coins= 0 states=     0 maxevent=1522
+V=1851: coins= 2 states=     0 maxevent=1522
+V=1852: coins= 2 states=     0 maxevent=1522
+V=1853: coins= 0 states=     0 maxevent=1522
+V=1854: coins= 0 states=     0 maxevent=1522
+V=1855: coins= 0 states=     0 maxevent=1522
+V=1856: coins= 2 states=     0 maxevent=1522
+V=1857: coins= 2 states=     0 maxevent=1522
+V=1858: coins= 0 states=     0 maxevent=1522
+V=1859: coins= 2 states=     0 maxevent=1522
+V=1860: coins= 2 states=     0 maxevent=1522
+V=1861: coins= 0 states=     0 maxevent=1522
+V=1862: coins= 0 states=     0 maxevent=1522
+V=1863: coins= 2 states=     0 maxevent=1522
+V=1864: coins= 2 states=     0 maxevent=1522
+V=1865: coins= 0 states=     0 maxevent=1522
+V=1866: coins= 2 states=     0 maxevent=1522
+V=1867: coins= 2 states=     0 maxevent=1522
+V=1868: coins= 0 states=     0 maxevent=1522
+V=1869: coins= 0 states=     0 maxevent=1522
+V=1870: coins= 0 states=     0 maxevent=1522
+V=1871: coins= 0 states=     0 maxevent=1522
+V=1872: coins= 2 states=     0 maxevent=1522
+V=1873: coins= 2 states=     0 maxevent=1522
+V=1874: coins= 0 states=     0 maxevent=1522
+V=1875: coins= 2 states=     0 maxevent=1522
+V=1876: coins= 2 states=     0 maxevent=1522
+V=1877: coins= 0 states=     0 maxevent=1522
+V=1878: coins= 0 states=     0 maxevent=1522
+V=1879: coins= 2 states=     0 maxevent=1522
+V=1880: coins= 2 states=     0 maxevent=1522
+V=1881: coins= 0 states=     0 maxevent=1522
+V=1882: coins= 2 states=     0 maxevent=1522
+V=1883: coins= 2 states=     0 maxevent=1522
+V=1884: coins= 0 states=     0 maxevent=1522
+V=1885: coins= 0 states=     0 maxevent=1522
+V=1886: coins= 0 states=     0 maxevent=1522
+V=1887: coins= 2 states=     0 maxevent=1522
+V=1888: coins= 2 states=     0 maxevent=1522
+V=1889: coins= 0 states=     0 maxevent=1522
+V=1890: coins= 2 states=     0 maxevent=1522
+V=1891: coins= 2 states=     0 maxevent=1522
+V=1892: coins= 0 states=     0 maxevent=1522
+V=1893: coins= 0 states=     0 maxevent=1522
+V=1894: coins= 2 states=     0 maxevent=1522
+V=1895: coins= 2 states=     0 maxevent=1522
+V=1896: coins= 0 states=     0 maxevent=1522
+V=1897: coins= 2 states=     0 maxevent=1522
+V=1898: coins= 2 states=     0 maxevent=1522
+V=1899: coins= 0 states=     0 maxevent=1522
+V=1900: coins= 0 states=     0 maxevent=1522
+V=1901: coins= 0 states=     0 maxevent=1522
+V=1902: coins= 0 states=     0 maxevent=1522
+V=1903: coins= 0 states=     0 maxevent=1522
+V=1904: coins= 0 states=     0 maxevent=1522
+V=1905: coins= 2 states=     0 maxevent=1522
+V=1906: coins= 2 states=     0 maxevent=1522
+V=1907: coins= 0 states=     0 maxevent=1522
+V=1908: coins= 2 states=     0 maxevent=1522
+V=1909: coins= 2 states=     0 maxevent=1522
+V=1910: coins= 0 states=     0 maxevent=1522
+V=1911: coins= 0 states=     0 maxevent=1522
+V=1912: coins= 2 states=     0 maxevent=1522
+V=1913: coins= 2 states=     0 maxevent=1522
+V=1914: coins= 0 states=     0 maxevent=1522
+V=1915: coins= 2 states=     0 maxevent=1522
+V=1916: coins= 2 states=     0 maxevent=1522
+V=1917: coins= 0 states=     0 maxevent=1522
+V=1918: coins= 0 states=     0 maxevent=1522
+V=1919: coins= 0 states=     0 maxevent=1522
+V=1920: coins= 2 states=     0 maxevent=1522
+V=1921: coins= 2 states=     0 maxevent=1522
+V=1922: coins= 0 states=     0 maxevent=1522
+V=1923: coins= 2 states=     0 maxevent=1522
+V=1924: coins= 2 states=     0 maxevent=1522
+V=1925: coins= 0 states=     0 maxevent=1522
+V=1926: coins= 0 states=     0 maxevent=1522
+V=1927: coins= 2 states=     0 maxevent=1522
+V=1928: coins= 2 states=     0 maxevent=1522
+V=1929: coins= 0 states=     0 maxevent=1522
+V=1930: coins= 2 states=     0 maxevent=1522
+V=1931: coins= 2 states=     0 maxevent=1522
+V=1932: coins= 0 states=     0 maxevent=1522
+V=1933: coins= 0 states=     0 maxevent=1522
+V=1934: coins= 0 states=     0 maxevent=1522
+V=1935: coins= 0 states=     0 maxevent=1522
+V=1936: coins= 2 states=     0 maxevent=1522
+V=1937: coins= 2 states=     0 maxevent=1522
+V=1938: coins= 0 states=     0 maxevent=1522
+V=1939: coins= 2 states=     0 maxevent=1522
+V=1940: coins= 2 states=     0 maxevent=1522
+V=1941: coins= 0 states=     0 maxevent=1522
+V=1942: coins= 0 states=     0 maxevent=1522
+V=1943: coins= 2 states=     0 maxevent=1522
+V=1944: coins= 2 states=     0 maxevent=1522
+V=1945: coins= 0 states=     0 maxevent=1522
+V=1946: coins= 2 states=     0 maxevent=1522
+V=1947: coins= 2 states=     0 maxevent=1522
+V=1948: coins= 0 states=     0 maxevent=1522
+V=1949: coins= 0 states=     0 maxevent=1522
+V=1950: coins= 0 states=     0 maxevent=1522
+V=1951: coins= 2 states=     0 maxevent=1522
+V=1952: coins= 2 states=     0 maxevent=1522
+V=1953: coins= 0 states=     0 maxevent=1522
+V=1954: coins= 2 states=     0 maxevent=1522
+V=1955: coins= 2 states=     0 maxevent=1522
+V=1956: coins= 0 states=     0 maxevent=1522
+V=1957: coins= 0 states=     0 maxevent=1522
+V=1958: coins= 2 states=     0 maxevent=1522
+V=1959: coins= 2 states=     0 maxevent=1522
+V=1960: coins= 0 states=     0 maxevent=1522
+V=1961: coins= 2 states=     0 maxevent=1522
+V=1962: coins= 2 states=     0 maxevent=1522
+V=1963: coins= 0 states=     0 maxevent=1522
+V=1964: coins= 0 states=     0 maxevent=1522
+V=1965: coins= 0 states=     0 maxevent=1522
+V=1966: coins= 0 states=     0 maxevent=1522
+V=1967: coins= 0 states=     0 maxevent=1522
+V=1968: coins= 2 states=     0 maxevent=1522
+V=1969: coins= 2 states=     0 maxevent=1522
+V=1970: coins= 0 states=     0 maxevent=1522
+V=1971: coins= 2 states=     0 maxevent=1522
+V=1972: coins= 2 states=     0 maxevent=1522
+V=1973: coins= 0 states=     0 maxevent=1522
+V=1974: coins= 0 states=     0 maxevent=1522
+V=1975: coins= 2 states=     0 maxevent=1522
+V=1976: coins= 2 states=     0 maxevent=1522
+V=1977: coins= 0 states=     0 maxevent=1522
+V=1978: coins= 2 states=     0 maxevent=1522
+V=1979: coins= 2 states=     0 maxevent=1522
+V=1980: coins= 0 states=     0 maxevent=1522
+V=1981: coins= 0 states=     0 maxevent=1522
+V=1982: coins= 0 states=     0 maxevent=1522
+V=1983: coins= 2 states=     0 maxevent=1522
+V=1984: coins= 2 states=     0 maxevent=1522
+V=1985: coins= 0 states=     0 maxevent=1522
+V=1986: coins= 2 states=     0 maxevent=1522
+V=1987: coins= 2 states=     0 maxevent=1522
+V=1988: coins= 0 states=     0 maxevent=1522
+V=1989: coins= 0 states=     0 maxevent=1522
+V=1990: coins= 2 states=     0 maxevent=1522
+V=1991: coins= 2 states=     0 maxevent=1522
+V=1992: coins= 0 states=     0 maxevent=1522
+V=1993: coins= 2 states=     0 maxevent=1522
+V=1994: coins= 2 states=     0 maxevent=1522
+V=1995: coins= 0 states=     0 maxevent=1522
+V=1996: coins= 0 states=     0 maxevent=1522
+V=1997: coins= 0 states=     0 maxevent=1522
+V=1998: coins= 0 states=     0 maxevent=1522
+V=1999: coins= 2 states=     0 maxevent=1522
+V=2000: coins= 2 states=     0 maxevent=1522
+V=2001: coins= 0 states=     0 maxevent=1522
+V=2002: coins= 2 states=     0 maxevent=1522
+V=2003: coins= 2 states=     0 maxevent=1522
+V=2004: coins= 0 states=     0 maxevent=1522
+V=2005: coins= 0 states=     0 maxevent=1522
+V=2006: coins= 2 states=     0 maxevent=1522
+V=2007: coins= 2 states=     0 maxevent=1522
+V=2008: coins= 0 states=     0 maxevent=1522
+V=2009: coins= 2 states=     0 maxevent=1522
+V=2010: coins= 2 states=     0 maxevent=1522
+V=2011: coins= 0 states=     0 maxevent=1522
+V=2012: coins= 0 states=     0 maxevent=1522
+V=2013: coins= 0 states=     0 maxevent=1522
+V=2014: coins= 2 states=     0 maxevent=1522
+V=2015: coins= 2 states=     0 maxevent=1522
+V=2016: coins= 0 states=     0 maxevent=1522
+V=2017: coins= 2 states=     0 maxevent=1522
+V=2018: coins= 2 states=     0 maxevent=1522
+V=2019: coins= 0 states=     0 maxevent=1522
+V=2020: coins= 0 states=     0 maxevent=1522
+V=2021: coins= 2 states=     0 maxevent=1522
+V=2022: coins= 2 states=     0 maxevent=1522
+V=2023: coins= 0 states=     0 maxevent=1522
+V=2024: coins= 2 states=     0 maxevent=1522
+V=2025: coins= 2 states=     0 maxevent=1522
+V=2026: coins= 0 states=     0 maxevent=1522
+V=2027: coins= 0 states=     0 maxevent=1522
+V=2028: coins= 0 states=     0 maxevent=1522
+V=2029: coins= 0 states=     0 maxevent=1522
+V=2030: coins= 0 states=     0 maxevent=1522
+V=2031: coins= 0 states=     0 maxevent=1522
+V=2032: coins= 0 states=     0 maxevent=1522
+V=2033: coins= 0 states=     0 maxevent=1522
+V=2034: coins= 0 states=     0 maxevent=1522
+V=2035: coins= 0 states=     0 maxevent=1522
+V=2036: coins= 2 states=     0 maxevent=1522
+V=2037: coins= 2 states=     0 maxevent=1522
+V=2038: coins= 0 states=     0 maxevent=1522
+V=2039: coins= 2 states=     0 maxevent=1522
+V=2040: coins= 2 states=     0 maxevent=1522
+V=2041: coins= 0 states=     0 maxevent=1522
+V=2042: coins= 0 states=     0 maxevent=1522
+V=2043: coins= 2 states=     0 maxevent=1522
+V=2044: coins= 2 states=     0 maxevent=1522
+V=2045: coins= 0 states=     0 maxevent=1522
+V=2046: coins= 2 states=     0 maxevent=1522
+V=2047: coins= 2 states=     0 maxevent=1522
+V=2048: coins= 0 states=     0 maxevent=1522
+V=2049: coins= 0 states=     0 maxevent=1522
+V=2050: coins= 0 states=     0 maxevent=1522
+V=2051: coins= 2 states=     0 maxevent=1522
+V=2052: coins= 2 states=     0 maxevent=1522
+V=2053: coins= 0 states=     0 maxevent=1522
+V=2054: coins= 2 states=     0 maxevent=1522
+V=2055: coins= 2 states=     0 maxevent=1522
+V=2056: coins= 0 states=     0 maxevent=1522
+V=2057: coins= 0 states=     0 maxevent=1522
+V=2058: coins= 2 states=     0 maxevent=1522
+V=2059: coins= 2 states=     0 maxevent=1522
+V=2060: coins= 0 states=     0 maxevent=1522
+V=2061: coins= 2 states=     0 maxevent=1522
+V=2062: coins= 2 states=     0 maxevent=1522
+V=2063: coins= 0 states=     0 maxevent=1522
+V=2064: coins= 0 states=     0 maxevent=1522
+V=2065: coins= 0 states=     0 maxevent=1522
+V=2066: coins= 0 states=     0 maxevent=1522
+V=2067: coins= 2 states=     0 maxevent=1522
+V=2068: coins= 2 states=     0 maxevent=1522
+V=2069: coins= 0 states=     0 maxevent=1522
+V=2070: coins= 2 states=     0 maxevent=1522
+V=2071: coins= 2 states=     0 maxevent=1522
+V=2072: coins= 0 states=     0 maxevent=1522
+V=2073: coins= 0 states=     0 maxevent=1522
+V=2074: coins= 2 states=     0 maxevent=1522
+V=2075: coins= 2 states=     0 maxevent=1522
+V=2076: coins= 0 states=     0 maxevent=1522
+V=2077: coins= 2 states=     0 maxevent=1522
+V=2078: coins= 2 states=     0 maxevent=1522
+V=2079: coins= 0 states=     0 maxevent=1522
+V=2080: coins= 0 states=     0 maxevent=1522
+V=2081: coins= 0 states=     0 maxevent=1522
+V=2082: coins= 2 states=     0 maxevent=1522
+V=2083: coins= 2 states=     0 maxevent=1522
+V=2084: coins= 0 states=     0 maxevent=1522
+V=2085: coins= 2 states=     0 maxevent=1522
+V=2086: coins= 2 states=     0 maxevent=1522
+V=2087: coins= 0 states=     0 maxevent=1522
+V=2088: coins= 0 states=     0 maxevent=1522
+V=2089: coins= 2 states=     0 maxevent=1522
+V=2090: coins= 2 states=     0 maxevent=1522
+V=2091: coins= 0 states=     0 maxevent=1522
+V=2092: coins= 2 states=     0 maxevent=1522
+V=2093: coins= 2 states=     0 maxevent=1522
+V=2094: coins= 0 states=     0 maxevent=1522
+V=2095: coins= 0 states=     0 maxevent=1522
+V=2096: coins= 0 states=     0 maxevent=1522
+V=2097: coins= 0 states=     0 maxevent=1522
+V=2098: coins= 0 states=     0 maxevent=1522
+V=2099: coins= 2 states=     0 maxevent=1522
+V=2100: coins= 2 states=     0 maxevent=1522
+V=2101: coins= 0 states=     0 maxevent=1522
+V=2102: coins= 2 states=     0 maxevent=1522
+V=2103: coins= 2 states=     0 maxevent=1522
+V=2104: coins= 0 states=     0 maxevent=1522
+V=2105: coins= 0 states=     0 maxevent=1522
+V=2106: coins= 2 states=     0 maxevent=1522
+V=2107: coins= 2 states=     0 maxevent=1522
+V=2108: coins= 0 states=     0 maxevent=1522
+V=2109: coins= 2 states=     0 maxevent=1522
+V=2110: coins= 2 states=     0 maxevent=1522
+V=2111: coins= 0 states=     0 maxevent=1522
+V=2112: coins= 0 states=     0 maxevent=1522
+V=2113: coins= 0 states=     0 maxevent=1522
+V=2114: coins= 2 states=     0 maxevent=1522
+V=2115: coins= 2 states=     0 maxevent=1522
+V=2116: coins= 0 states=     0 maxevent=1522
+V=2117: coins= 2 states=     0 maxevent=1522
+V=2118: coins= 2 states=     0 maxevent=1522
+V=2119: coins= 0 states=     0 maxevent=1522
+V=2120: coins= 0 states=     0 maxevent=1522
+V=2121: coins= 2 states=     0 maxevent=1522
+V=2122: coins= 2 states=     0 maxevent=1522
+V=2123: coins= 0 states=     0 maxevent=1522
+V=2124: coins= 2 states=     0 maxevent=1522
+V=2125: coins= 2 states=     0 maxevent=1522
+V=2126: coins= 0 states=     0 maxevent=1522
+V=2127: coins= 0 states=     0 maxevent=1522
+V=2128: coins= 0 states=     0 maxevent=1522
+V=2129: coins= 0 states=     0 maxevent=1522
+V=2130: coins= 2 states=     0 maxevent=1522
+V=2131: coins= 2 states=     0 maxevent=1522
+V=2132: coins= 0 states=     0 maxevent=1522
+V=2133: coins= 2 states=     0 maxevent=1522
+V=2134: coins= 2 states=     0 maxevent=1522
+V=2135: coins= 0 states=     0 maxevent=1522
+V=2136: coins= 0 states=     0 maxevent=1522
+V=2137: coins= 2 states=     0 maxevent=1522
+V=2138: coins= 2 states=     0 maxevent=1522
+V=2139: coins= 0 states=     0 maxevent=1522
+V=2140: coins= 2 states=     0 maxevent=1522
+V=2141: coins= 2 states=     0 maxevent=1522
+V=2142: coins= 0 states=     0 maxevent=1522
+V=2143: coins= 0 states=     0 maxevent=1522
+V=2144: coins= 0 states=     0 maxevent=1522
+V=2145: coins= 2 states=     0 maxevent=1522
+V=2146: coins= 2 states=     0 maxevent=1522
+V=2147: coins= 0 states=     0 maxevent=1522
+V=2148: coins= 2 states=     0 maxevent=1522
+V=2149: coins= 2 states=     0 maxevent=1522
+V=2150: coins= 0 states=     0 maxevent=1522
+V=2151: coins= 0 states=     0 maxevent=1522
+V=2152: coins= 2 states=     0 maxevent=1522
+V=2153: coins= 2 states=     0 maxevent=1522
+V=2154: coins= 0 states=     0 maxevent=1522
+V=2155: coins= 2 states=     0 maxevent=1522
+V=2156: coins= 2 states=     0 maxevent=1522
+V=2157: coins= 0 states=     0 maxevent=1522
+V=2158: coins= 0 states=     0 maxevent=1522
+V=2159: coins= 0 states=     0 maxevent=1522
+V=2160: coins= 0 states=     0 maxevent=1522
+V=2161: coins= 0 states=     0 maxevent=1522
+V=2162: coins= 0 states=     0 maxevent=1522
+V=2163: coins= 2 states=     0 maxevent=1522
+V=2164: coins= 2 states=     0 maxevent=1522
+V=2165: coins= 0 states=     0 maxevent=1522
+V=2166: coins= 2 states=     0 maxevent=1522
+V=2167: coins= 2 states=     0 maxevent=1522
+V=2168: coins= 0 states=     0 maxevent=1522
+V=2169: coins= 0 states=     0 maxevent=1522
+V=2170: coins= 2 states=     0 maxevent=1522
+V=2171: coins= 2 states=     0 maxevent=1522
+V=2172: coins= 0 states=     0 maxevent=1522
+V=2173: coins= 2 states=     0 maxevent=1522
+V=2174: coins= 2 states=     0 maxevent=1522
+V=2175: coins= 0 states=     0 maxevent=1522
+V=2176: coins= 0 states=     0 maxevent=1522
+V=2177: coins= 0 states=     0 maxevent=1522
+V=2178: coins= 2 states=     0 maxevent=1522
+V=2179: coins= 2 states=     0 maxevent=1522
+V=2180: coins= 0 states=     0 maxevent=1522
+V=2181: coins= 2 states=     0 maxevent=1522
+V=2182: coins= 2 states=     0 maxevent=1522
+V=2183: coins= 0 states=     0 maxevent=1522
+V=2184: coins= 0 states=     0 maxevent=1522
+V=2185: coins= 2 states=     0 maxevent=1522
+V=2186: coins= 2 states=     0 maxevent=1522
+V=2187: coins= 0 states=     0 maxevent=1522
+V=2188: coins= 2 states=     0 maxevent=1522
+V=2189: coins= 2 states=     0 maxevent=1522
+V=2190: coins= 0 states=     0 maxevent=1522
+V=2191: coins= 0 states=     0 maxevent=1522
+V=2192: coins= 0 states=     0 maxevent=1522
+V=2193: coins= 0 states=     0 maxevent=1522
+V=2194: coins= 2 states=     0 maxevent=1522
+V=2195: coins= 2 states=     0 maxevent=1522
+V=2196: coins= 0 states=     0 maxevent=1522
+V=2197: coins= 2 states=     0 maxevent=1522
+V=2198: coins= 2 states=     0 maxevent=1522
+V=2199: coins= 0 states=     0 maxevent=1522
+g(14,2) [C class_dp] = 1522
+first UNREACHABLE level = 1523
+max event valuation = 1522
+capped = 0
+g_interval_crosscheck = 1522 (consistent)
+peak_states = 16760
+final_snapshot: states=0 distinct_t=0 max_t=-1
+final_t_hist:
+hashstore = ok levels=0..2200 bytes=9MB
+elapsed_s = 0.16
+peak_rss_mb = 12
+WITNESS = VERIFIED |B|=730 Bmin=15 Bmax=1534 v2(a!+sum B!)= 1533 g-level=1522 dfs_nodes=1515 hs_loads=1514
+WITNESS_LIST 15 16 22 28 29 33 34 35 36 38 39 41 43 46 47 49 50 51 53 54 56 58 60 61 62 65 68 70 71 73 75 78 79 83 84 88 89 91 92 93 94 96 97 99 101 102 103 105 106 107 108 111 112 116 118 125 126 128 130 131 134 135 136 137 138 143 144 145 146 150 155 156 157 161 163 164 166 167 170 171 172 174 175 177 178 181 182 191 192 193 198 200 202 205 206 207 208 213 214 217 218 219 220 227 228 229 230 231 233 240 242 243 244 246 248 249 250 251 253 255 256 257 258 259 262 267 268 271 272 274 276 277 280 281 283 284 285 286 288 289 290 291 293 297 298 299 301 302 304 306 307 308 309 311 315 317 318 321 323 330 331 332 333 334 336 337 339 341 345 346 349 354 356 357 358 361 362 365 366 369 370 371 373 374 375 377 378 385 387 393 395 396 404 407 408 409 413 418 419 420 421 424 425 426 427 436 437 441 443 444 445 448 451 452 454 455 460 461 464 466 469 470 472 475 477 481 482 483 484 485 486 487 488 490 491 492 493 495 496 497 500 501 504 506 507 508 510 512 516 517 519 521 522 523 525 528 529 531 533 535 540 541 544 546 547 549 552 555 558 560 566 567 573 574 575 576 577 579 580 585 586 588 591 592 593 595 599 602 603 604 605 609 610 612 613 616 620 625 627 628 629 631 634 636 637 638 639 640 647 648 649 650 652 657 663 665 668 672 674 675 679 681 682 683 684 687 690 691 694 698 701 705 709 710 711 712 713 715 719 723 728 729 731 733 734 736 738 740 741 746 753 758 760 761 762 765 768 769 771 772 773 779 781 784 788 790 792 794 798 799 803 807 808 810 811 812 814 817 819 821 822 824 825 827 830 835 836 837 838 839 840 841 843 844 845 847 848 849 850 851 853 854 855 856 859 861 863 864 866 867 868 869 871 872 873 874 879 882 883 885 886 887 888 891 894 899 900 902 903 904 905 906 909 911 912 913 918 921 923 925 926 927 928 929 930 933 939 942 944 948 950 954 955 956 957 959 961 964 967 969 975 979 980 982 983 984 986 988 991 992 993 997 998 999 1000 1011 1012 1013 1014 1016 1018 1026 1035 1037 1042 1043 1044 1047 1048 1049 1050 1052 1054 1055 1058 1060 1061 1064 1066 1068 1069 1070 1071 1080 1081 1082 1092 1093 1094 1098 1099 1101 1104 1105 1108 1109 1111 1113 1115 1119 1120 1121 1123 1125 1126 1128 1129 1131 1132 1133 1135 1136 1137 1140 1142 1143 1145 1146 1148 1149 1151 1152 1153 1154 1155 1157 1164 1165 1166 1167 1169 1174 1175 1176 1179 1180 1181 1182 1185 1187 1188 1191 1192 1193 1194 1195 1196 1198 1202 1203 1204 1205 1206 1207 1208 1210 1211 1212 1214 1216 1217 1218 1225 1229 1235 1237 1239 1240 1241 1243 1244 1245 1247 1248 1249 1251 1252 1253 1254 1255 1258 1259 1260 1262 1263 1264 1268 1271 1272 1274 1276 1277 1278 1281 1282 1283 1284 1287 1289 1290 1291 1294 1298 1300 1302 1304 1307 1309 1310 1312 1315 1318 1319 1323 1325 1326 1328 1329 1337 1338 1339 1340 1344 1346 1350 1353 1354 1355 1357 1358 1361 1362 1367 1369 1370 1372 1374 1377 1378 1381 1382 1383 1384 1387 1388 1391 1394 1395 1396 1398 1401 1403 1405 1406 1413 1416 1419 1420 1423 1424 1425 1428 1429 1430 1432 1436 1437 1441 1442 1446 1447 1448 1452 1456 1462 1464 1465 1466 1468 1469 1470 1472 1474 1475 1476 1479 1485 1486 1487 1489 1490 1494 1497 1499 1502 1504 1505 1510 1512 1513 1517 1518 1519 1520 1521 1523 1524 1529 1530 1534

@@ -427,7 +427,7 @@ theorem v2_agree (Br s prec : Nat) (hcongr : Br % 2 ^ prec = s) (hs : 1 ≤ s)
       rw [hkey, v2_add_min s _ hs (Nat.mul_pos (two_pow_pos _) hq) (by rw [hvpq]; omega)]
 
 /-- Division identity with the valuation ABSTRACTED (no rw-cascade on s). -/
-theorem div_dvd_eq (s d c : Nat) (hd : 2 ^ d ∣ s) (hc : s = 2 ^ d * c) :
+theorem div_dvd_eq (s d c : Nat) (_hd : 2 ^ d ∣ s) (hc : s = 2 ^ d * c) :
     s / 2 ^ d = c := by
   rw [hc, Nat.mul_div_cancel_left _ (two_pow_pos d)]
 
@@ -484,9 +484,11 @@ theorem erdos404_f22_lower : v2 (sumFacts witnessB) = 254 := by
     | inl h => omega
     | inr h =>
         exfalso
-        have hd : 2 ^ 255 ∣ sumFacts witnessB :=
-          v2_dvd (sumFacts witnessB) (sumFacts witnessB) 255 (Nat.le_refl _) hn (by omega)
-        exact h2 hd
+        have hd0 : 2 ^ (v2 (sumFacts witnessB)) ∣ sumFacts witnessB :=
+          v2_dvd (sumFacts witnessB) (sumFacts witnessB) (v2 (sumFacts witnessB))
+            (Nat.le_refl _) hn rfl
+        have hd1 : 2 ^ 255 ∣ 2 ^ (v2 (sumFacts witnessB)) := Nat.pow_dvd_pow 2 h
+        exact h2 (Nat.dvd_trans hd1 hd0)
   omega
 
 -- receipts

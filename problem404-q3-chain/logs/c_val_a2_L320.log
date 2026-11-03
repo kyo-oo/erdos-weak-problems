@@ -1,0 +1,22 @@
+V=   0: coins= 1 states=     2 maxevent=2
+V=  40: coins= 2 states=    28 maxevent=44
+V=  80: coins= 2 states=    56 maxevent=85
+V= 120: coins= 0 states=   496 maxevent=126
+V= 160: coins= 2 states=    52 maxevent=166
+V= 200: coins= 2 states=   288 maxevent=209
+V= 240: coins= 0 states=   120 maxevent=249
+V= 280: coins= 2 states=     0 maxevent=253
+V= 319: coins= 0 states=     0 maxevent=253
+g(2,2) [C class_dp] = 253
+first UNREACHABLE level = 254
+max event valuation = 253
+capped = 0
+g_interval_crosscheck = 253 (consistent)
+peak_states = 992
+final_snapshot: states=0 distinct_t=0 max_t=-1
+final_t_hist:
+hashstore = ok levels=0..320 bytes=0MB
+elapsed_s = 0.00
+peak_rss_mb = 2
+WITNESS = VERIFIED |B|=118 Bmin=3 Bmax=254 v2(a!+sum B!)= 254 g-level=253 dfs_nodes=247 hs_loads=246
+WITNESS_LIST 3 5 6 7 11 12 15 16 19 21 22 24 25 27 31 33 34 36 39 41 42 44 46 48 52 55 56 57 60 62 63 65 67 68 69 70 71 74 76 77 78 80 81 82 84 85 86 88 89 91 93 94 95 96 99 104 107 110 111 117 118 121 123 126 129 130 134 136 139 141 143 144 145 147 148 149 157 158 161 164 166 167 168 169 170 173 178 183 184 187 189 191 198 200 202 206 207 208 211 215 217 219 221 222 223 224 225 226 227 235 237 240 241 244 245 249 250 254

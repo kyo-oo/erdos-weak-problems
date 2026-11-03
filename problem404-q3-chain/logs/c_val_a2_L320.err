@@ -1,0 +1,9 @@
+# [t=0.0s] V=0 states=2 maxevent=2 rss=2MB
+# [t=0.0s] V=40 states=28 maxevent=44 rss=2MB
+# [t=0.0s] V=80 states=56 maxevent=85 rss=2MB
+# [t=0.0s] V=120 states=496 maxevent=126 rss=2MB
+# [t=0.0s] V=160 states=52 maxevent=166 rss=2MB
+# [t=0.0s] V=200 states=288 maxevent=209 rss=2MB
+# [t=0.0s] V=240 states=120 maxevent=249 rss=2MB
+# [t=0.0s] V=280 states=0 maxevent=253 rss=2MB
+# [t=0.0s] V=319 states=0 maxevent=253 rss=2MB

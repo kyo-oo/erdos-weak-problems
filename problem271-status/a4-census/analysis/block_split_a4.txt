@@ -1,0 +1,21 @@
+A(4): c_k = b0 + b1 + b2 with bi = |A ∩ [i·3^(k-1), (i+1)·3^(k-1))|, and overlap of shifted block with [0,3^(k-1)) set
+  k= 1: c_k=      1 =       1+      0+      0   |B1∩B0|=      0  |B2∩B0|=      0   B1=B0?False  B2=∅?True
+  k= 2: c_k=      4 =       1+      2+      1   |B1∩B0|=      0  |B2∩B0|=      0   B1=B0?False  B2=∅?False
+  k= 3: c_k=      9 =       4+      3+      2   |B1∩B0|=      1  |B2∩B0|=      1   B1=B0?False  B2=∅?False
+  k= 4: c_k=     19 =       9+      6+      4   |B1∩B0|=      2  |B2∩B0|=      1   B1=B0?False  B2=∅?False
+  k= 5: c_k=     37 =      19+      9+      9   |B1∩B0|=      1  |B2∩B0|=      2   B1=B0?False  B2=∅?False
+  k= 6: c_k=     79 =      37+     20+     22   |B1∩B0|=      6  |B2∩B0|=      5   B1=B0?False  B2=∅?False
+  k= 7: c_k=    147 =      79+     34+     34   |B1∩B0|=      7  |B2∩B0|=      4   B1=B0?False  B2=∅?False
+  k= 8: c_k=    266 =     147+     74+     45   |B1∩B0|=      4  |B2∩B0|=      2   B1=B0?False  B2=∅?False
+  k= 9: c_k=    476 =     266+    137+     73   |B1∩B0|=      6  |B2∩B0|=      1   B1=B0?False  B2=∅?False
+  k=10: c_k=    919 =     476+    245+    198   |B1∩B0|=     12  |B2∩B0|=      5   B1=B0?False  B2=∅?False
+  k=11: c_k=   1790 =     919+    340+    531   |B1∩B0|=      6  |B2∩B0|=      7   B1=B0?False  B2=∅?False
+  k=12: c_k=   3210 =    1790+    674+    746   |B1∩B0|=      5  |B2∩B0|=      8   B1=B0?False  B2=∅?False
+  k=13: c_k=   5425 =    3210+   1671+    544   |B1∩B0|=      8  |B2∩B0|=      8   B1=B0?False  B2=∅?False
+  k=14: c_k=   9093 =    5425+   3346+    322   |B1∩B0|=     11  |B2∩B0|=      4   B1=B0?False  B2=∅?False
+  k=15: c_k=  19206 =    9093+   5668+   4445   |B1∩B0|=     12  |B2∩B0|=      4   B1=B0?False  B2=∅?False
+  k=16: c_k=  38367 =   19206+   5249+  13912   |B1∩B0|=     13  |B2∩B0|=     21   B1=B0?False  B2=∅?False
+  k=17: c_k=  65794 =   38367+   9932+  17495   |B1∩B0|=     11  |B2∩B0|=     19   B1=B0?False  B2=∅?False
+  k=18: c_k= 108103 =   65794+  33709+   8600   |B1∩B0|=     10  |B2∩B0|=     11   B1=B0?False  B2=∅?False
+  k=19: c_k= 177194 =  108103+  68634+    457   |B1∩B0|=     15  |B2∩B0|=      2   B1=B0?False  B2=∅?False
+  k=20: c_k= 347370 =  177194+ 112938+  57238   |B1∩B0|=     25  |B2∩B0|=      0   B1=B0?False  B2=∅?False

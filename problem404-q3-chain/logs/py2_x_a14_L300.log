@@ -1,0 +1,12 @@
+  V=   0: coins= 1 states=     2 maxevent=4
+  V=  40: coins= 0 states=   128 maxevent=48
+  V=  80: coins= 0 states=   148 maxevent=89
+  V= 120: coins= 2 states=   224 maxevent=127
+  V= 160: coins= 0 states=   205 maxevent=166
+  V= 200: coins= 0 states=   135 maxevent=209
+  V= 240: coins= 0 states=   135 maxevent=249
+  V= 280: coins= 0 states=   116 maxevent=287
+  V= 299: coins= 0 states=   261 maxevent=308
+g(14,2) [SOUND certified] = 300
+first UNREACHABLE level = > 300 (all 1..300 reachable)
+max event valuation = 308

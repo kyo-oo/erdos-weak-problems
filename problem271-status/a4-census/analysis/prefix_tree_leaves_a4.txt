@@ -1,0 +1,21 @@
+depth d: #nodes, #nodes that are full members (leaves of the language), #internal
+  d= 1  nodes=      2  leaves=      0  internal=      2
+  d= 2  nodes=      6  leaves=      3  internal=      3
+  d= 3  nodes=     18  leaves=      5  internal=     13
+  d= 4  nodes=     54  leaves=     10  internal=     44
+  d= 5  nodes=    162  leaves=     18  internal=    144
+  d= 6  nodes=    486  leaves=     42  internal=    444
+  d= 7  nodes=   1458  leaves=     68  internal=   1390
+  d= 8  nodes=   4374  leaves=    119  internal=   4255
+  d= 9  nodes=  13121  leaves=    210  internal=  12911
+  d=10  nodes=  38545  leaves=    443  internal=  38102
+  d=11  nodes=  99205  leaves=    871  internal=  98334
+  d=12  nodes= 195647  leaves=   1420  internal= 194227
+  d=13  nodes= 277568  leaves=   2215  internal= 275353
+  d=14  nodes= 317174  leaves=   3668  internal= 313506
+  d=15  nodes= 329999  leaves=  10113  internal= 319886
+  d=16  nodes= 325618  leaves=  19161  internal= 306457
+  d=17  nodes= 308243  leaves=  27427  internal= 280816
+  d=18  nodes= 281356  leaves=  42309  internal= 239047
+  d=19  nodes= 239210  leaves=  69091  internal= 170119
+  d=20  nodes= 170176  leaves= 170176  internal=      0

@@ -1,0 +1,2 @@
+verify data/a4_members_3k17.txt t=4 N=129140163: members=65794 marks=1168684137 aps=0 unblocked=0
+VERIFY PASS

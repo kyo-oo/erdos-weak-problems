@@ -1,0 +1,15 @@
+V=   0: coins= 1 states=     2 maxevent=1
+V=   6: coins= 0 states=     2 maxevent=6
+g(8,2) [C class_dp] = 6
+first UNREACHABLE level = 7
+max event valuation = 6
+capped = 0
+g_interval_crosscheck = 6 (consistent)
+peak_states = 8
+final_snapshot: states=2 distinct_t=1 max_t=6
+final_t_hist: 6:2
+hashstore = ok levels=0..7 bytes=0MB
+elapsed_s = 0.00
+peak_rss_mb = 2
+WITNESS = VERIFIED |B|=4 Bmin=9 Bmax=14 v2(a!+sum B!)= 13 g-level=6 dfs_nodes=5 hs_loads=4
+WITNESS_LIST 9 11 12 14
