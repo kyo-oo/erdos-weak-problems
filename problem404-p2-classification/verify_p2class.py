@@ -19,8 +19,8 @@ The Lean kernel proves T2/T3/T4 for ALL a in the families (universally
 quantified); this battery re-derives the same facts engine-side and cross-checks
 the Lean receipts (the exact v2-values for sample a's).
 """
-import sys, itertools
-sys.path.insert(0, '../problem404-full')
+import sys, os, itertools
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'problem404-full'))
 from classifier import vp_fact, window, P_mod, g_value
 
 PASS = 0
