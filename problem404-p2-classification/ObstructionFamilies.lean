@@ -449,7 +449,7 @@ theorem sl_cons_ne (r j' y x : Nat) (l : List Nat) (hxy : y ≠ x) :
       | inl heq => exact hxy heq
       | inr hr => exact hq hr)]
 
-theorem sl_cons_self (r j x : Nat) (l : List Nat) (hx : x ∉ l) :
+theorem sl_cons_self (r j x : Nat) (l : List Nat) (_hx : x ∉ l) :
     sl r j (x ∈ x :: l) = pt r j := by
   rw [sl_mem_true r j (x ∈ x :: l) (by simp)]
 
@@ -1748,3 +1748,1591 @@ theorem f404_T5_exact (a : Nat) (ha : a % 64 = 8) :
 #print axioms obs_T5
 #print axioms f404_T5_bound
 #print axioms f404_T5_exact
+
+-- ===========================================================================
+-- §11  THE 9-SLOT MACHINERY (T7/T7b windows) + kernel-eval leaf checks
+-- (memory-safe: ONE closed-term decide per leaf — no tactic case-split bombs)
+-- ===========================================================================
+
+theorem mod256_mod128 (a : Nat) : (a % 256) % 128 = a % 128 :=
+  Nat.mod_mod_of_dvd a (by decide : (128: Nat) ∣ 256)
+
+theorem mod1024_mod128 (a : Nat) : (a % 1024) % 128 = a % 128 :=
+  Nat.mod_mod_of_dvd a (by decide : (128: Nat) ∣ 1024)
+
+theorem mod2048_mod128 (a : Nat) : (a % 2048) % 128 = a % 128 :=
+  Nat.mod_mod_of_dvd a (by decide : (128: Nat) ∣ 2048)
+
+/-- The 9-slot window sum: `iteSum9 a r B = Σ_{j=1..9} sl r j (a+j ∈ B)`. -/
+def iteSum9 (a r : Nat) (B : List Nat) : Nat :=
+  sl r 1 (a + 1 ∈ B) + (sl r 2 (a + 2 ∈ B) + (sl r 3 (a + 3 ∈ B)
+    + (sl r 4 (a + 4 ∈ B) + (sl r 5 (a + 5 ∈ B) + (sl r 6 (a + 6 ∈ B)
+    + (sl r 7 (a + 7 ∈ B) + (sl r 8 (a + 8 ∈ B) + (sl r 9 (a + 9 ∈ B) + 0))))))))
+
+theorem iteSum9_nil (a r : Nat) : iteSum9 a r [] = 0 := by
+  simp [iteSum9, sl, List.not_mem_nil]
+
+theorem iteSum9_miss (a r i : Nat) (B' : List Nat)
+    (hne : ∀ j' ∈ [1, 2, 3, 4, 5, 6, 7, 8, 9], a + j' ≠ i) :
+    iteSum9 a r (i :: B') = iteSum9 a r B' := by
+  show sl r 1 (a + 1 ∈ i :: B') + (sl r 2 (a + 2 ∈ i :: B') + (sl r 3 (a + 3 ∈ i :: B')
+    + (sl r 4 (a + 4 ∈ i :: B') + (sl r 5 (a + 5 ∈ i :: B') + (sl r 6 (a + 6 ∈ i :: B')
+    + (sl r 7 (a + 7 ∈ i :: B') + (sl r 8 (a + 8 ∈ i :: B') + (sl r 9 (a + 9 ∈ i :: B')
+    + 0))))))))
+       = sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B')
+    + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B')
+    + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B')
+    + 0))))))))
+  rw [sl_cons_ne r 1 (a + 1) i B' (hne 1 (by simp)), sl_cons_ne r 2 (a + 2) i B' (hne 2 (by simp)),
+    sl_cons_ne r 3 (a + 3) i B' (hne 3 (by simp)), sl_cons_ne r 4 (a + 4) i B' (hne 4 (by simp)),
+    sl_cons_ne r 5 (a + 5) i B' (hne 5 (by simp)), sl_cons_ne r 6 (a + 6) i B' (hne 6 (by simp)),
+    sl_cons_ne r 7 (a + 7) i B' (hne 7 (by simp)), sl_cons_ne r 8 (a + 8) i B' (hne 8 (by simp)),
+    sl_cons_ne r 9 (a + 9) i B' (hne 9 (by simp))]
+
+
+theorem iteSum9_hit1 (a r : Nat) (B' : List Nat) (h : ¬(a + 1 ∈ B')) :
+    iteSum9 a r ((a + 1) :: B') = iteSum9 a r B' + pt r 1 := by
+  show (sl r 1 (a + 1 ∈ ((a+1) :: B')) + (sl r 2 (a + 2 ∈ ((a+1) :: B')) + (sl r 3 (a + 3 ∈ ((a+1) :: B')) + (sl r 4 (a + 4 ∈ ((a+1) :: B')) + (sl r 5 (a + 5 ∈ ((a+1) :: B')) + (sl r 6 (a + 6 ∈ ((a+1) :: B')) + (sl r 7 (a + 7 ∈ ((a+1) :: B')) + (sl r 8 (a + 8 ∈ ((a+1) :: B')) + (sl r 9 (a + 9 ∈ ((a+1) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 1
+  rw [sl_cons_self r 1 (a + 1) B' h, sl_cons_ne r 2 (a + 2) (a + 1) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 1) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 1) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 1) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 1) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 1) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 1) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 1) B' (by omega), sl_mem_false r 1 (a + 1 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit2 (a r : Nat) (B' : List Nat) (h : ¬(a + 2 ∈ B')) :
+    iteSum9 a r ((a + 2) :: B') = iteSum9 a r B' + pt r 2 := by
+  show (sl r 1 (a + 1 ∈ ((a+2) :: B')) + (sl r 2 (a + 2 ∈ ((a+2) :: B')) + (sl r 3 (a + 3 ∈ ((a+2) :: B')) + (sl r 4 (a + 4 ∈ ((a+2) :: B')) + (sl r 5 (a + 5 ∈ ((a+2) :: B')) + (sl r 6 (a + 6 ∈ ((a+2) :: B')) + (sl r 7 (a + 7 ∈ ((a+2) :: B')) + (sl r 8 (a + 8 ∈ ((a+2) :: B')) + (sl r 9 (a + 9 ∈ ((a+2) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 2
+  rw [sl_cons_self r 2 (a + 2) B' h, sl_cons_ne r 1 (a + 1) (a + 2) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 2) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 2) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 2) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 2) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 2) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 2) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 2) B' (by omega), sl_mem_false r 2 (a + 2 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit3 (a r : Nat) (B' : List Nat) (h : ¬(a + 3 ∈ B')) :
+    iteSum9 a r ((a + 3) :: B') = iteSum9 a r B' + pt r 3 := by
+  show (sl r 1 (a + 1 ∈ ((a+3) :: B')) + (sl r 2 (a + 2 ∈ ((a+3) :: B')) + (sl r 3 (a + 3 ∈ ((a+3) :: B')) + (sl r 4 (a + 4 ∈ ((a+3) :: B')) + (sl r 5 (a + 5 ∈ ((a+3) :: B')) + (sl r 6 (a + 6 ∈ ((a+3) :: B')) + (sl r 7 (a + 7 ∈ ((a+3) :: B')) + (sl r 8 (a + 8 ∈ ((a+3) :: B')) + (sl r 9 (a + 9 ∈ ((a+3) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 3
+  rw [sl_cons_self r 3 (a + 3) B' h, sl_cons_ne r 1 (a + 1) (a + 3) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 3) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 3) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 3) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 3) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 3) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 3) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 3) B' (by omega), sl_mem_false r 3 (a + 3 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit4 (a r : Nat) (B' : List Nat) (h : ¬(a + 4 ∈ B')) :
+    iteSum9 a r ((a + 4) :: B') = iteSum9 a r B' + pt r 4 := by
+  show (sl r 1 (a + 1 ∈ ((a+4) :: B')) + (sl r 2 (a + 2 ∈ ((a+4) :: B')) + (sl r 3 (a + 3 ∈ ((a+4) :: B')) + (sl r 4 (a + 4 ∈ ((a+4) :: B')) + (sl r 5 (a + 5 ∈ ((a+4) :: B')) + (sl r 6 (a + 6 ∈ ((a+4) :: B')) + (sl r 7 (a + 7 ∈ ((a+4) :: B')) + (sl r 8 (a + 8 ∈ ((a+4) :: B')) + (sl r 9 (a + 9 ∈ ((a+4) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 4
+  rw [sl_cons_self r 4 (a + 4) B' h, sl_cons_ne r 1 (a + 1) (a + 4) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 4) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 4) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 4) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 4) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 4) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 4) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 4) B' (by omega), sl_mem_false r 4 (a + 4 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit5 (a r : Nat) (B' : List Nat) (h : ¬(a + 5 ∈ B')) :
+    iteSum9 a r ((a + 5) :: B') = iteSum9 a r B' + pt r 5 := by
+  show (sl r 1 (a + 1 ∈ ((a+5) :: B')) + (sl r 2 (a + 2 ∈ ((a+5) :: B')) + (sl r 3 (a + 3 ∈ ((a+5) :: B')) + (sl r 4 (a + 4 ∈ ((a+5) :: B')) + (sl r 5 (a + 5 ∈ ((a+5) :: B')) + (sl r 6 (a + 6 ∈ ((a+5) :: B')) + (sl r 7 (a + 7 ∈ ((a+5) :: B')) + (sl r 8 (a + 8 ∈ ((a+5) :: B')) + (sl r 9 (a + 9 ∈ ((a+5) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 5
+  rw [sl_cons_self r 5 (a + 5) B' h, sl_cons_ne r 1 (a + 1) (a + 5) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 5) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 5) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 5) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 5) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 5) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 5) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 5) B' (by omega), sl_mem_false r 5 (a + 5 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit6 (a r : Nat) (B' : List Nat) (h : ¬(a + 6 ∈ B')) :
+    iteSum9 a r ((a + 6) :: B') = iteSum9 a r B' + pt r 6 := by
+  show (sl r 1 (a + 1 ∈ ((a+6) :: B')) + (sl r 2 (a + 2 ∈ ((a+6) :: B')) + (sl r 3 (a + 3 ∈ ((a+6) :: B')) + (sl r 4 (a + 4 ∈ ((a+6) :: B')) + (sl r 5 (a + 5 ∈ ((a+6) :: B')) + (sl r 6 (a + 6 ∈ ((a+6) :: B')) + (sl r 7 (a + 7 ∈ ((a+6) :: B')) + (sl r 8 (a + 8 ∈ ((a+6) :: B')) + (sl r 9 (a + 9 ∈ ((a+6) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 6
+  rw [sl_cons_self r 6 (a + 6) B' h, sl_cons_ne r 1 (a + 1) (a + 6) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 6) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 6) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 6) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 6) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 6) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 6) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 6) B' (by omega), sl_mem_false r 6 (a + 6 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit7 (a r : Nat) (B' : List Nat) (h : ¬(a + 7 ∈ B')) :
+    iteSum9 a r ((a + 7) :: B') = iteSum9 a r B' + pt r 7 := by
+  show (sl r 1 (a + 1 ∈ ((a+7) :: B')) + (sl r 2 (a + 2 ∈ ((a+7) :: B')) + (sl r 3 (a + 3 ∈ ((a+7) :: B')) + (sl r 4 (a + 4 ∈ ((a+7) :: B')) + (sl r 5 (a + 5 ∈ ((a+7) :: B')) + (sl r 6 (a + 6 ∈ ((a+7) :: B')) + (sl r 7 (a + 7 ∈ ((a+7) :: B')) + (sl r 8 (a + 8 ∈ ((a+7) :: B')) + (sl r 9 (a + 9 ∈ ((a+7) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 7
+  rw [sl_cons_self r 7 (a + 7) B' h, sl_cons_ne r 1 (a + 1) (a + 7) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 7) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 7) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 7) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 7) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 7) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 7) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 7) B' (by omega), sl_mem_false r 7 (a + 7 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit8 (a r : Nat) (B' : List Nat) (h : ¬(a + 8 ∈ B')) :
+    iteSum9 a r ((a + 8) :: B') = iteSum9 a r B' + pt r 8 := by
+  show (sl r 1 (a + 1 ∈ ((a+8) :: B')) + (sl r 2 (a + 2 ∈ ((a+8) :: B')) + (sl r 3 (a + 3 ∈ ((a+8) :: B')) + (sl r 4 (a + 4 ∈ ((a+8) :: B')) + (sl r 5 (a + 5 ∈ ((a+8) :: B')) + (sl r 6 (a + 6 ∈ ((a+8) :: B')) + (sl r 7 (a + 7 ∈ ((a+8) :: B')) + (sl r 8 (a + 8 ∈ ((a+8) :: B')) + (sl r 9 (a + 9 ∈ ((a+8) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 8
+  rw [sl_cons_self r 8 (a + 8) B' h, sl_cons_ne r 1 (a + 1) (a + 8) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 8) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 8) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 8) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 8) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 8) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 8) B' (by omega), sl_cons_ne r 9 (a + 9) (a + 8) B' (by omega), sl_mem_false r 8 (a + 8 ∈ B') h]
+  omega
+
+
+theorem iteSum9_hit9 (a r : Nat) (B' : List Nat) (h : ¬(a + 9 ∈ B')) :
+    iteSum9 a r ((a + 9) :: B') = iteSum9 a r B' + pt r 9 := by
+  show (sl r 1 (a + 1 ∈ ((a+9) :: B')) + (sl r 2 (a + 2 ∈ ((a+9) :: B')) + (sl r 3 (a + 3 ∈ ((a+9) :: B')) + (sl r 4 (a + 4 ∈ ((a+9) :: B')) + (sl r 5 (a + 5 ∈ ((a+9) :: B')) + (sl r 6 (a + 6 ∈ ((a+9) :: B')) + (sl r 7 (a + 7 ∈ ((a+9) :: B')) + (sl r 8 (a + 8 ∈ ((a+9) :: B')) + (sl r 9 (a + 9 ∈ ((a+9) :: B')) + 0))))))))) = (sl r 1 (a + 1 ∈ B') + (sl r 2 (a + 2 ∈ B') + (sl r 3 (a + 3 ∈ B') + (sl r 4 (a + 4 ∈ B') + (sl r 5 (a + 5 ∈ B') + (sl r 6 (a + 6 ∈ B') + (sl r 7 (a + 7 ∈ B') + (sl r 8 (a + 8 ∈ B') + (sl r 9 (a + 9 ∈ B') + 0))))))))) + pt r 9
+  rw [sl_cons_self r 9 (a + 9) B' h, sl_cons_ne r 1 (a + 1) (a + 9) B' (by omega), sl_cons_ne r 2 (a + 2) (a + 9) B' (by omega), sl_cons_ne r 3 (a + 3) (a + 9) B' (by omega), sl_cons_ne r 4 (a + 4) (a + 9) B' (by omega), sl_cons_ne r 5 (a + 5) (a + 9) B' (by omega), sl_cons_ne r 6 (a + 6) (a + 9) B' (by omega), sl_cons_ne r 7 (a + 7) (a + 9) B' (by omega), sl_cons_ne r 8 (a + 8) (a + 9) B' (by omega), sl_mem_false r 9 (a + 9 ∈ B') h]
+  omega
+
+
+-- === The kernel-eval leaf-check machinery ===
+
+/-- Bounded forall walker: `boundedForall P n` checks P on 0..n-1. -/
+def boundedForall (P : Nat → Bool) : Nat → Bool
+  | 0 => true
+  | k + 1 => P k && boundedForall P k
+
+theorem bf_true : ∀ (P : Nat → Bool) (n k : Nat), boundedForall P n = true → k < n → P k = true
+  | P, 0, k, _, hk => by omega
+  | P, n + 1, k, h, hk => by
+    simp only [boundedForall, Bool.and_eq_true] at h
+    rcases Nat.lt_succ_iff_lt_or_eq.mp hk with hlt | heq
+    · exact bf_true P n k h.2 hlt
+    · rw [heq]; exact h.1
+
+/-- `sl` as a masked product: `sl r j p = pt r j * (if p then 1 else 0)`. -/
+theorem sl_eq_mul (r j : Nat) (p : Prop) [Decidable p] :
+    sl r j p = pt r j * (if p then 1 else 0) := by
+  cases hd : decide p with
+  | false =>
+    have hp : ¬p := of_decide_eq_false hd
+    rw [sl_false, if_neg hp, Nat.mul_zero]
+  | true =>
+    have hp : p := of_decide_eq_true hd
+    rw [sl_true, if_pos hp, Nat.mul_one]
+
+/-- The membership mask of the 9-slot window: bit j-1 set iff a+j ∈ B. -/
+def memMask (a : Nat) (B : List Nat) : Nat :=
+  (if a + 1 ∈ B then 1 else 0) + 2 * (if a + 2 ∈ B then 1 else 0)
+    + 4 * (if a + 3 ∈ B then 1 else 0) + 8 * (if a + 4 ∈ B then 1 else 0)
+    + 16 * (if a + 5 ∈ B then 1 else 0) + 32 * (if a + 6 ∈ B then 1 else 0)
+    + 64 * (if a + 7 ∈ B then 1 else 0) + 128 * (if a + 8 ∈ B then 1 else 0)
+    + 256 * (if a + 9 ∈ B then 1 else 0)
+
+/-- The 9-coin window sum as a function of the mask n. -/
+def mc9 (r n : Nat) : Nat :=
+  pt r 1 * (n % 2) + (pt r 2 * (n / 2 % 2) + (pt r 3 * (n / 4 % 2)
+    + (pt r 4 * (n / 8 % 2) + (pt r 5 * (n / 16 % 2) + (pt r 6 * (n / 32 % 2)
+    + (pt r 7 * (n / 64 % 2) + (pt r 8 * (n / 128 % 2) + (pt r 9 * (n / 256 % 2)
+    + 0))))))))
+
+
+theorem memMask_lt (a : Nat) (B : List Nat) : memMask a B < 512 := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit1 (a : Nat) (B : List Nat) :
+    memMask a B % 2 = (if a + 1 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit2 (a : Nat) (B : List Nat) :
+    memMask a B / 2 % 2 = (if a + 2 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit3 (a : Nat) (B : List Nat) :
+    memMask a B / 4 % 2 = (if a + 3 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit4 (a : Nat) (B : List Nat) :
+    memMask a B / 8 % 2 = (if a + 4 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit5 (a : Nat) (B : List Nat) :
+    memMask a B / 16 % 2 = (if a + 5 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit6 (a : Nat) (B : List Nat) :
+    memMask a B / 32 % 2 = (if a + 6 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit7 (a : Nat) (B : List Nat) :
+    memMask a B / 64 % 2 = (if a + 7 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit8 (a : Nat) (B : List Nat) :
+    memMask a B / 128 % 2 = (if a + 8 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+theorem memMask_bit9 (a : Nat) (B : List Nat) :
+    memMask a B / 256 % 2 = (if a + 9 ∈ B then 1 else 0) := by
+  have e1 : (if a + 1 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 1 ∈ B <;> simp [h]
+  have e2 : (if a + 2 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 2 ∈ B <;> simp [h]
+  have e3 : (if a + 3 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 3 ∈ B <;> simp [h]
+  have e4 : (if a + 4 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 4 ∈ B <;> simp [h]
+  have e5 : (if a + 5 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 5 ∈ B <;> simp [h]
+  have e6 : (if a + 6 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 6 ∈ B <;> simp [h]
+  have e7 : (if a + 7 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 7 ∈ B <;> simp [h]
+  have e8 : (if a + 8 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 8 ∈ B <;> simp [h]
+  have e9 : (if a + 9 ∈ B then 1 else 0) ≤ 1 := by
+    by_cases h : a + 9 ∈ B <;> simp [h]
+  unfold memMask
+  omega
+
+
+/-- **THE BRIDGE**: the 9-slot membership sum IS the mask-coin sum. -/
+theorem iteSum9_eq_mc9 (a r : Nat) (B : List Nat) :
+    iteSum9 a r B = mc9 r (memMask a B) := by
+  show (sl r 1 (a + 1 ∈ B) + (sl r 2 (a + 2 ∈ B) + (sl r 3 (a + 3 ∈ B) + (sl r 4 (a + 4 ∈ B) + (sl r 5 (a + 5 ∈ B) + (sl r 6 (a + 6 ∈ B) + (sl r 7 (a + 7 ∈ B) + (sl r 8 (a + 8 ∈ B) + (sl r 9 (a + 9 ∈ B) + 0))))))))) = mc9 r (memMask a B)
+  rw [sl_eq_mul r 1 (a + 1 ∈ B), sl_eq_mul r 2 (a + 2 ∈ B), sl_eq_mul r 3 (a + 3 ∈ B),
+      sl_eq_mul r 4 (a + 4 ∈ B), sl_eq_mul r 5 (a + 5 ∈ B), sl_eq_mul r 6 (a + 6 ∈ B),
+      sl_eq_mul r 7 (a + 7 ∈ B), sl_eq_mul r 8 (a + 8 ∈ B), sl_eq_mul r 9 (a + 9 ∈ B)]
+  simp only [mc9, memMask_bit1 a B, memMask_bit2 a B, memMask_bit3 a B, memMask_bit4 a B,
+    memMask_bit5 a B, memMask_bit6 a B, memMask_bit7 a B, memMask_bit8 a B, memMask_bit9 a B]
+
+
+-- ===========================================================================
+-- §12  THEOREMS T6/T6b/T6c: a ≡ 40, 56, 88 (mod 128) ⟹ g(a,2) = 7 EXACTLY
+-- (mod-256 obstruction over the 7-coin window; witnesses {a+1,a+3,a+4,a+6},
+--  {a+1,a+3,a+5,a+6}, {a+1,a+3,a+4,a+7})
+-- ===========================================================================
+
+/-- **T6-family vanish**: a ≡ 40, 56 or 88 (mod 128) ⟹ 256 ∣ pt a j for j ≥ 8.
+v₂ profile: (a+2)%2, (a+4)%4, (a+6)%2, (a+8)%16 → 2^(1+2+1+4) = 2^8 = 256. -/
+theorem vanish_T6fam (a j : Nat) (ha : a % 128 = 40 ∨ a % 128 = 56 ∨ a % 128 = 88) (hj : 8 ≤ j) :
+    256 ∣ pt a j := by
+  induction hj with
+  | refl =>
+    have hv : (a + 2) % 2 = 0 ∧ (a + 4) % 4 = 0 ∧ (a + 6) % 2 = 0 ∧ (a + 8) % 16 = 0 := by omega
+    obtain ⟨h2a, h4a, h2b, h16a⟩ := hv
+    have hf2a : (2: Nat) ∣ a + 2 := ⟨(a + 2) / 2, by omega⟩
+    have hf4a : (4: Nat) ∣ a + 4 := ⟨(a + 4) / 4, by omega⟩
+    have hf2b : (2: Nat) ∣ a + 6 := ⟨(a + 6) / 2, by omega⟩
+    have hf16a : (16: Nat) ∣ a + 8 := ⟨(a + 8) / 16, by omega⟩
+    have hdvdA : (2: Nat) ∣ pt a 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf2a (⟨a + 1, Nat.mul_comm (a+1) (a+2)⟩)
+    have hdvdB : (4: Nat) ∣ pt (a + 2) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf4a (⟨a + 3, Nat.mul_comm (a+3) (a+4)⟩)
+    have hdvdC : (2: Nat) ∣ pt (a + 4) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf2b (⟨a + 5, Nat.mul_comm (a+5) (a+6)⟩)
+    have hdvdD : (16: Nat) ∣ pt (a + 6) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf16a (⟨a + 7, Nat.mul_comm (a+7) (a+8)⟩)
+    have h8 := pt_split 6 2 a
+    have hi8 : 2 + 6 = 8 := by omega
+    rw [hi8] at h8
+    have h6' := pt_split 4 2 (a + 2)
+    have hi6 : 2 + 4 = 6 := by omega
+    rw [hi6] at h6'
+    have hn2 : a + 2 + 2 = a + 4 := by omega
+    rw [hn2] at h6'
+    have h4' := pt_split 2 2 (a + 4)
+    have hi4 : 2 + 2 = 4 := by omega
+    rw [hi4] at h4'
+    have hn4 : a + 4 + 2 = a + 6 := by omega
+    rw [hn4] at h4'
+    rw [h4'] at h6'
+    rw [h6'] at h8
+    have h256 : (256: Nat) = 2 ^ ((1 + 2) + (1 + 4)) := rfl
+    have hAB : (2: Nat) ^ (1 + 2) ∣ pt a 2 * pt (a + 2) 2 := dvd_pow2_prod 1 2 _ _ hdvdA hdvdB
+    have hCD : (2: Nat) ^ (1 + 4) ∣ pt (a + 4) 2 * pt (a + 6) 2 := dvd_pow2_prod 1 4 _ _ hdvdC hdvdD
+    have hmain := dvd_pow2_prod (1 + 2) (1 + 4) _ _ hAB hCD
+    rw [h256, h8]
+    have hregroup : pt a 2 * (pt (a + 2) 2 * (pt (a + 4) 2 * pt (a + 6) 2))
+        = (pt a 2 * pt (a + 2) 2) * (pt (a + 4) 2 * pt (a + 6) 2) := by
+      rw [Nat.mul_assoc (pt a 2) (pt (a + 2) 2) (pt (a + 4) 2 * pt (a + 6) 2)]
+    rw [hregroup]
+    exact hmain
+  | @step j' hle ih =>
+    obtain ⟨k, hk⟩ := ih
+    have hstep : pt a (j' + 1) = pt a j' * (a + j' + 1) := rfl
+    rw [hstep, hk]
+    exact ⟨k * (a + j' + 1), Nat.mul_assoc _ _ _⟩
+
+theorem obs_core_T6fam : ∀ (B : List Nat) (a : Nat),
+    (hv : a % 128 = 40 ∨ a % 128 = 56 ∨ a % 128 = 88) → NoDup B → (∀ i ∈ B, a < i) →
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 256 = (1 + iteSum7 a (a % 256) B) % 256
+  | [], a, hv, _, _ => by simp [iteSum7_nil]
+  | i :: B', a, hv, hB, hgt => by
+    obtain ⟨hin, hB'⟩ := hB
+    have hai : a < i := hgt i (by simp)
+    have ih := obs_core_T6fam B' a hv hB' (fun x hx => hgt x (by simp [hx]))
+    have hsc : ((i :: B').map (fun x => pt a (x - a))).sum
+        = pt a (i - a) + ((B').map (fun x => pt a (x - a))).sum := rfl
+    have hcase : i - a = 1 ∨ i - a = 2 ∨ i - a = 3 ∨ i - a = 4 ∨ i - a = 5 ∨ i - a = 6 ∨
+        i - a = 7 ∨ i - a ≥ 8 := by omega
+    rcases hcase with h1 | h2 | h3 | h4 | h5 | h6 | h7 | hbig
+
+    · have hi : i = a + 1 := by omega
+      have hnot : ¬(a + 1 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit1 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 1 - a = 1 := by omega
+      rw [hia]
+      have hpt : pt a 1 % 256 = pt (a % 256) 1 % 256 := pt_mod 1 a 256
+      omega
+
+    · have hi : i = a + 2 := by omega
+      have hnot : ¬(a + 2 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit2 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 2 - a = 2 := by omega
+      rw [hia]
+      have hpt : pt a 2 % 256 = pt (a % 256) 2 % 256 := pt_mod 2 a 256
+      omega
+
+    · have hi : i = a + 3 := by omega
+      have hnot : ¬(a + 3 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit3 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 3 - a = 3 := by omega
+      rw [hia]
+      have hpt : pt a 3 % 256 = pt (a % 256) 3 % 256 := pt_mod 3 a 256
+      omega
+
+    · have hi : i = a + 4 := by omega
+      have hnot : ¬(a + 4 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit4 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 4 - a = 4 := by omega
+      rw [hia]
+      have hpt : pt a 4 % 256 = pt (a % 256) 4 % 256 := pt_mod 4 a 256
+      omega
+
+    · have hi : i = a + 5 := by omega
+      have hnot : ¬(a + 5 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit5 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 5 - a = 5 := by omega
+      rw [hia]
+      have hpt : pt a 5 % 256 = pt (a % 256) 5 % 256 := pt_mod 5 a 256
+      omega
+
+    · have hi : i = a + 6 := by omega
+      have hnot : ¬(a + 6 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit6 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 6 - a = 6 := by omega
+      rw [hia]
+      have hpt : pt a 6 % 256 = pt (a % 256) 6 % 256 := pt_mod 6 a 256
+      omega
+
+    · have hi : i = a + 7 := by omega
+      have hnot : ¬(a + 7 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit7 a (a % 256) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 7 - a = 7 := by omega
+      rw [hia]
+      have hpt : pt a 7 % 256 = pt (a % 256) 7 % 256 := pt_mod 7 a 256
+      omega
+
+    · have hbig2 : i - a ≥ 8 := by omega
+      have hdvd := vanish_T6fam a (i - a) hv hbig2
+      have hz : pt a (i - a) % 256 = 0 := Nat.mod_eq_zero_of_dvd hdvd
+      have hmiss := iteSum7_miss a (a % 256) i B' (by intro j' hj'; simp at hj'; omega)
+      rw [hsc, hmiss]
+      omega
+
+
+theorem leaf_T6_40 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 40 1 (b1) + (sl 40 2 (b2) + (sl 40 3 (b3) + (sl 40 4 (b4) + (sl 40 5 (b5) + (sl 40 6 (b6) + (sl 40 7 (b7) + 0)))))))) % 256 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+
+theorem leaf_T6_168 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 168 1 (b1) + (sl 168 2 (b2) + (sl 168 3 (b3) + (sl 168 4 (b4) + (sl 168 5 (b5) + (sl 168 6 (b6) + (sl 168 7 (b7) + 0)))))))) % 256 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+
+theorem leaf_T6b_56 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 56 1 (b1) + (sl 56 2 (b2) + (sl 56 3 (b3) + (sl 56 4 (b4) + (sl 56 5 (b5) + (sl 56 6 (b6) + (sl 56 7 (b7) + 0)))))))) % 256 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+
+theorem leaf_T6b_184 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 184 1 (b1) + (sl 184 2 (b2) + (sl 184 3 (b3) + (sl 184 4 (b4) + (sl 184 5 (b5) + (sl 184 6 (b6) + (sl 184 7 (b7) + 0)))))))) % 256 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+
+theorem leaf_T6c_88 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 88 1 (b1) + (sl 88 2 (b2) + (sl 88 3 (b3) + (sl 88 4 (b4) + (sl 88 5 (b5) + (sl 88 6 (b6) + (sl 88 7 (b7) + 0)))))))) % 256 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+
+theorem leaf_T6c_216 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 216 1 (b1) + (sl 216 2 (b2) + (sl 216 3 (b3) + (sl 216 4 (b4) + (sl 216 5 (b5) + (sl 216 6 (b6) + (sl 216 7 (b7) + 0)))))))) % 256 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+
+theorem obs_T6 (a : Nat) (ha : a % 128 = 40) (B : List Nat) (hB : NoDup B) (hgt : ∀ i ∈ B, a < i) :
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 256 ≠ 0 := by
+  have hcore := obs_core_T6fam B a (Or.inl ha) hB hgt
+  rw [hcore]
+  have hr : a % 256 = 40 ∨ a % 256 = 168 := by
+    have h1 := mod256_mod128 a
+    omega
+  rcases hr with h | h
+  · rw [h]; exact leaf_T6_40 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+  · rw [h]; exact leaf_T6_168 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+
+
+theorem obs_T6b (a : Nat) (ha : a % 128 = 56) (B : List Nat) (hB : NoDup B) (hgt : ∀ i ∈ B, a < i) :
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 256 ≠ 0 := by
+  have hcore := obs_core_T6fam B a (Or.inr (Or.inl ha)) hB hgt
+  rw [hcore]
+  have hr : a % 256 = 56 ∨ a % 256 = 184 := by
+    have h1 := mod256_mod128 a
+    omega
+  rcases hr with h | h
+  · rw [h]; exact leaf_T6b_56 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+  · rw [h]; exact leaf_T6b_184 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+
+
+theorem obs_T6c (a : Nat) (ha : a % 128 = 88) (B : List Nat) (hB : NoDup B) (hgt : ∀ i ∈ B, a < i) :
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 256 ≠ 0 := by
+  have hcore := obs_core_T6fam B a (Or.inr (Or.inr ha)) hB hgt
+  rw [hcore]
+  have hr : a % 256 = 88 ∨ a % 256 = 216 := by
+    have h1 := mod256_mod128 a
+    omega
+  rcases hr with h | h
+  · rw [h]; exact leaf_T6c_88 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+  · rw [h]; exact leaf_T6c_216 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+
+
+theorem wit_T6 (a : Nat) (ha : a % 128 = 40) :
+    (1 + coinsum a [1, 3, 4, 6]) % 128 = 0 := by
+  rw [Nat.add_mod, coinsum_mod, ha]
+  decide
+
+
+theorem wit_T6b (a : Nat) (ha : a % 128 = 56) :
+    (1 + coinsum a [1, 3, 5, 6]) % 128 = 0 := by
+  rw [Nat.add_mod, coinsum_mod, ha]
+  decide
+
+
+theorem wit_T6c (a : Nat) (ha : a % 128 = 88) :
+    (1 + coinsum a [1, 3, 4, 7]) % 128 = 0 := by
+  rw [Nat.add_mod, coinsum_mod, ha]
+  decide
+
+
+/-- **ERDŐS #404, THEOREM T6 (upper bound).** a ≡ 40 (mod 128) ⟹
+`v₂(a!) + Σ ≤ v₂(a!) + 7` for every valid B. -/
+theorem f404_T6_bound (a : Nat) (ha : a % 128 = 40) (B : List Nat) (hB : NoDup B)
+    (hgt : ∀ i ∈ B, a < i) :
+    v2 (fact a + (B.map fact).sum) ≤ v2 (fact a) + 7 := by
+  have hsf := sum_fact_eq B a hgt
+  have hcs := sum_pt_coinsum a B
+  have hobs := obs_T6 a ha B hB hgt
+  rw [hcs] at hobs
+  have hp : (2: Nat) ^ (7 + 1) = 256 := rfl
+  have hmod : (1 + coinsum a (B.map (fun i => i - a))) % (2: Nat) ^ (7 + 1) ≠ 0 := by
+    rw [hp]
+    exact hobs
+  have hle := v2_le_of_mod (1 + coinsum a (B.map (fun i => i - a))) (by omega) 7 hmod
+  rw [hsf]
+  have hdistr : fact a + fact a * coinsum a (B.map (fun i => i - a))
+      = fact a * (1 + coinsum a (B.map (fun i => i - a))) := by
+    rw [Nat.mul_add, Nat.mul_one]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a (B.map (fun i => i - a)) + 1) (fact a)
+      (1 + coinsum a (B.map (fun i => i - a))) (by omega) (fact_pos a) (by omega)]
+  omega
+
+
+/-- **ERDŐS #404, THEOREM T6 (exactness).** Witness [1, 3, 4, 6] attains
+`v₂(a!) + 7` exactly, for every a ≡ 40 (mod 128). -/
+theorem f404_T6_exact (a : Nat) (ha : a % 128 = 40) :
+    v2 (fact a + (fact (a + 1) + (fact (a + 3) + (fact (a + 4) + fact (a + 6))))) = v2 (fact a) + 7 := by
+  have h1 : fact (a + 1) = fact a * pt a 1 := fact_pt 1 a
+  have h3 : fact (a + 3) = fact a * pt a 3 := fact_pt 3 a
+  have h4 : fact (a + 4) = fact a * pt a 4 := fact_pt 4 a
+  have h6 : fact (a + 6) = fact a * pt a 6 := fact_pt 6 a
+  have hc : coinsum a [1, 3, 4, 6] = pt a 1 + (pt a 3 + (pt a 4 + (pt a 6 + 0))) := rfl
+  rw [h1 , h3 , h4 , h6]
+  have hdistr : fact a + (fact a * pt a 1 + (fact a * pt a 3 + (fact a * pt a 4 + fact a * pt a 6)))
+      = fact a * (1 + coinsum a [1, 3, 4, 6]) := by
+    rw [hc, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_one, Nat.add_zero]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a [1, 3, 4, 6] + 1) (fact a) (1 + coinsum a [1, 3, 4, 6])
+      (by omega) (fact_pos a) (by omega)]
+  have hw := wit_T6 a ha
+  have hp7 : (2: Nat) ^ 7 = 128 := rfl
+  have hge : 7 ≤ v2 (1 + coinsum a [1, 3, 4, 6]) :=
+    v2_ge_of_mod (1 + coinsum a [1, 3, 4, 6]) (by omega) 7 (by rw [hp7]; exact hw)
+  have hB : NoDup [a + 1, a + 3, a + 4, a + 6] := by
+    simp [NoDup]
+  have hgt : ∀ i ∈ [a + 1, a + 3, a + 4, a + 6], a < i := by
+    intro i hi; simp at hi; omega
+  have hobs := obs_T6 a ha [a + 1, a + 3, a + 4, a + 6] hB hgt
+  have hcs := sum_pt_coinsum a [a + 1, a + 3, a + 4, a + 6]
+  rw [hcs] at hobs
+  have hp8 : (2: Nat) ^ 8 = 256 := rfl
+  have hle : v2 (1 + coinsum a [1, 3, 4, 6]) ≤ 7 := by
+    have hmod : (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 6]))
+        % (2: Nat) ^ (7 + 1) ≠ 0 := by
+      rw [hp8]
+      exact hobs
+    have htmp := v2_le_of_mod
+      (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 6])) (by omega) 7 hmod
+    have hoff : List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 6] = [1, 3, 4, 6] := by
+      have e1 : a + 1 - a = 1 := by omega
+      have e3 : a + 3 - a = 3 := by omega
+      have e4 : a + 4 - a = 4 := by omega
+      have e6 : a + 6 - a = 6 := by omega
+      simp [List.map, e1, e3, e4, e6]
+    rw [hoff] at htmp
+    exact htmp
+  omega
+
+
+/-- **ERDŐS #404, THEOREM T6b (upper bound).** a ≡ 56 (mod 128) ⟹
+`v₂(a!) + Σ ≤ v₂(a!) + 7` for every valid B. -/
+theorem f404_T6b_bound (a : Nat) (ha : a % 128 = 56) (B : List Nat) (hB : NoDup B)
+    (hgt : ∀ i ∈ B, a < i) :
+    v2 (fact a + (B.map fact).sum) ≤ v2 (fact a) + 7 := by
+  have hsf := sum_fact_eq B a hgt
+  have hcs := sum_pt_coinsum a B
+  have hobs := obs_T6b a ha B hB hgt
+  rw [hcs] at hobs
+  have hp : (2: Nat) ^ (7 + 1) = 256 := rfl
+  have hmod : (1 + coinsum a (B.map (fun i => i - a))) % (2: Nat) ^ (7 + 1) ≠ 0 := by
+    rw [hp]
+    exact hobs
+  have hle := v2_le_of_mod (1 + coinsum a (B.map (fun i => i - a))) (by omega) 7 hmod
+  rw [hsf]
+  have hdistr : fact a + fact a * coinsum a (B.map (fun i => i - a))
+      = fact a * (1 + coinsum a (B.map (fun i => i - a))) := by
+    rw [Nat.mul_add, Nat.mul_one]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a (B.map (fun i => i - a)) + 1) (fact a)
+      (1 + coinsum a (B.map (fun i => i - a))) (by omega) (fact_pos a) (by omega)]
+  omega
+
+
+/-- **ERDŐS #404, THEOREM T6b (exactness).** Witness [1, 3, 5, 6] attains
+`v₂(a!) + 7` exactly, for every a ≡ 56 (mod 128). -/
+theorem f404_T6b_exact (a : Nat) (ha : a % 128 = 56) :
+    v2 (fact a + (fact (a + 1) + (fact (a + 3) + (fact (a + 5) + fact (a + 6))))) = v2 (fact a) + 7 := by
+  have h1 : fact (a + 1) = fact a * pt a 1 := fact_pt 1 a
+  have h3 : fact (a + 3) = fact a * pt a 3 := fact_pt 3 a
+  have h5 : fact (a + 5) = fact a * pt a 5 := fact_pt 5 a
+  have h6 : fact (a + 6) = fact a * pt a 6 := fact_pt 6 a
+  have hc : coinsum a [1, 3, 5, 6] = pt a 1 + (pt a 3 + (pt a 5 + (pt a 6 + 0))) := rfl
+  rw [h1 , h3 , h5 , h6]
+  have hdistr : fact a + (fact a * pt a 1 + (fact a * pt a 3 + (fact a * pt a 5 + fact a * pt a 6)))
+      = fact a * (1 + coinsum a [1, 3, 5, 6]) := by
+    rw [hc, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_one, Nat.add_zero]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a [1, 3, 5, 6] + 1) (fact a) (1 + coinsum a [1, 3, 5, 6])
+      (by omega) (fact_pos a) (by omega)]
+  have hw := wit_T6b a ha
+  have hp7 : (2: Nat) ^ 7 = 128 := rfl
+  have hge : 7 ≤ v2 (1 + coinsum a [1, 3, 5, 6]) :=
+    v2_ge_of_mod (1 + coinsum a [1, 3, 5, 6]) (by omega) 7 (by rw [hp7]; exact hw)
+  have hB : NoDup [a + 1, a + 3, a + 5, a + 6] := by
+    simp [NoDup]
+  have hgt : ∀ i ∈ [a + 1, a + 3, a + 5, a + 6], a < i := by
+    intro i hi; simp at hi; omega
+  have hobs := obs_T6b a ha [a + 1, a + 3, a + 5, a + 6] hB hgt
+  have hcs := sum_pt_coinsum a [a + 1, a + 3, a + 5, a + 6]
+  rw [hcs] at hobs
+  have hp8 : (2: Nat) ^ 8 = 256 := rfl
+  have hle : v2 (1 + coinsum a [1, 3, 5, 6]) ≤ 7 := by
+    have hmod : (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 5, a + 6]))
+        % (2: Nat) ^ (7 + 1) ≠ 0 := by
+      rw [hp8]
+      exact hobs
+    have htmp := v2_le_of_mod
+      (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 5, a + 6])) (by omega) 7 hmod
+    have hoff : List.map (fun i => i - a) [a + 1, a + 3, a + 5, a + 6] = [1, 3, 5, 6] := by
+      have e1 : a + 1 - a = 1 := by omega
+      have e3 : a + 3 - a = 3 := by omega
+      have e5 : a + 5 - a = 5 := by omega
+      have e6 : a + 6 - a = 6 := by omega
+      simp [List.map, e1, e3, e5, e6]
+    rw [hoff] at htmp
+    exact htmp
+  omega
+
+
+/-- **ERDŐS #404, THEOREM T6c (upper bound).** a ≡ 88 (mod 128) ⟹
+`v₂(a!) + Σ ≤ v₂(a!) + 7` for every valid B. -/
+theorem f404_T6c_bound (a : Nat) (ha : a % 128 = 88) (B : List Nat) (hB : NoDup B)
+    (hgt : ∀ i ∈ B, a < i) :
+    v2 (fact a + (B.map fact).sum) ≤ v2 (fact a) + 7 := by
+  have hsf := sum_fact_eq B a hgt
+  have hcs := sum_pt_coinsum a B
+  have hobs := obs_T6c a ha B hB hgt
+  rw [hcs] at hobs
+  have hp : (2: Nat) ^ (7 + 1) = 256 := rfl
+  have hmod : (1 + coinsum a (B.map (fun i => i - a))) % (2: Nat) ^ (7 + 1) ≠ 0 := by
+    rw [hp]
+    exact hobs
+  have hle := v2_le_of_mod (1 + coinsum a (B.map (fun i => i - a))) (by omega) 7 hmod
+  rw [hsf]
+  have hdistr : fact a + fact a * coinsum a (B.map (fun i => i - a))
+      = fact a * (1 + coinsum a (B.map (fun i => i - a))) := by
+    rw [Nat.mul_add, Nat.mul_one]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a (B.map (fun i => i - a)) + 1) (fact a)
+      (1 + coinsum a (B.map (fun i => i - a))) (by omega) (fact_pos a) (by omega)]
+  omega
+
+
+/-- **ERDŐS #404, THEOREM T6c (exactness).** Witness [1, 3, 4, 7] attains
+`v₂(a!) + 7` exactly, for every a ≡ 88 (mod 128). -/
+theorem f404_T6c_exact (a : Nat) (ha : a % 128 = 88) :
+    v2 (fact a + (fact (a + 1) + (fact (a + 3) + (fact (a + 4) + fact (a + 7))))) = v2 (fact a) + 7 := by
+  have h1 : fact (a + 1) = fact a * pt a 1 := fact_pt 1 a
+  have h3 : fact (a + 3) = fact a * pt a 3 := fact_pt 3 a
+  have h4 : fact (a + 4) = fact a * pt a 4 := fact_pt 4 a
+  have h7 : fact (a + 7) = fact a * pt a 7 := fact_pt 7 a
+  have hc : coinsum a [1, 3, 4, 7] = pt a 1 + (pt a 3 + (pt a 4 + (pt a 7 + 0))) := rfl
+  rw [h1 , h3 , h4 , h7]
+  have hdistr : fact a + (fact a * pt a 1 + (fact a * pt a 3 + (fact a * pt a 4 + fact a * pt a 7)))
+      = fact a * (1 + coinsum a [1, 3, 4, 7]) := by
+    rw [hc, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_one, Nat.add_zero]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a [1, 3, 4, 7] + 1) (fact a) (1 + coinsum a [1, 3, 4, 7])
+      (by omega) (fact_pos a) (by omega)]
+  have hw := wit_T6c a ha
+  have hp7 : (2: Nat) ^ 7 = 128 := rfl
+  have hge : 7 ≤ v2 (1 + coinsum a [1, 3, 4, 7]) :=
+    v2_ge_of_mod (1 + coinsum a [1, 3, 4, 7]) (by omega) 7 (by rw [hp7]; exact hw)
+  have hB : NoDup [a + 1, a + 3, a + 4, a + 7] := by
+    simp [NoDup]
+  have hgt : ∀ i ∈ [a + 1, a + 3, a + 4, a + 7], a < i := by
+    intro i hi; simp at hi; omega
+  have hobs := obs_T6c a ha [a + 1, a + 3, a + 4, a + 7] hB hgt
+  have hcs := sum_pt_coinsum a [a + 1, a + 3, a + 4, a + 7]
+  rw [hcs] at hobs
+  have hp8 : (2: Nat) ^ 8 = 256 := rfl
+  have hle : v2 (1 + coinsum a [1, 3, 4, 7]) ≤ 7 := by
+    have hmod : (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 7]))
+        % (2: Nat) ^ (7 + 1) ≠ 0 := by
+      rw [hp8]
+      exact hobs
+    have htmp := v2_le_of_mod
+      (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 7])) (by omega) 7 hmod
+    have hoff : List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 7] = [1, 3, 4, 7] := by
+      have e1 : a + 1 - a = 1 := by omega
+      have e3 : a + 3 - a = 3 := by omega
+      have e4 : a + 4 - a = 4 := by omega
+      have e7 : a + 7 - a = 7 := by omega
+      simp [List.map, e1, e3, e4, e7]
+    rw [hoff] at htmp
+    exact htmp
+  omega
+
+
+-- ===========================================================================
+-- §13  THEOREMS T7/T7b: a ≡ 70, 118 (mod 128) ⟹ g(a,2) = 10 EXACTLY
+-- (mod-2048 obstruction over the 9-coin window; witness {a+1,a+3,a+6,a+7,a+9})
+-- ===========================================================================
+
+/-- **T7-family vanish**: a ≡ 70 or 118 (mod 128) ⟹ 2048 ∣ pt a j for j ≥ 10.
+v₂ profile: (a+2)%8, (a+4)%2, (a+6)%4, (a+8)%2, (a+10)%16 → 2^(3+1+2+1+4) = 2^11. -/
+theorem vanish_T7fam (a j : Nat) (ha : a % 128 = 70 ∨ a % 128 = 118) (hj : 10 ≤ j) :
+    2048 ∣ pt a j := by
+  induction hj with
+  | refl =>
+    have hv : (a + 2) % 8 = 0 ∧ (a + 4) % 2 = 0 ∧ (a + 6) % 4 = 0 ∧ (a + 8) % 2 = 0
+        ∧ (a + 10) % 16 = 0 := by omega
+    obtain ⟨h8a, h2a, h4a, h2b, h16a⟩ := hv
+    have hf8a : (8: Nat) ∣ a + 2 := ⟨(a + 2) / 8, by omega⟩
+    have hf2a : (2: Nat) ∣ a + 4 := ⟨(a + 4) / 2, by omega⟩
+    have hf4a : (4: Nat) ∣ a + 6 := ⟨(a + 6) / 4, by omega⟩
+    have hf2b : (2: Nat) ∣ a + 8 := ⟨(a + 8) / 2, by omega⟩
+    have hf16a : (16: Nat) ∣ a + 10 := ⟨(a + 10) / 16, by omega⟩
+    have hdvdA : (8: Nat) ∣ pt a 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf8a (⟨a + 1, Nat.mul_comm (a+1) (a+2)⟩)
+    have hdvdB : (2: Nat) ∣ pt (a + 2) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf2a (⟨a + 3, Nat.mul_comm (a+3) (a+4)⟩)
+    have hdvdC : (4: Nat) ∣ pt (a + 4) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf4a (⟨a + 5, Nat.mul_comm (a+5) (a+6)⟩)
+    have hdvdD : (2: Nat) ∣ pt (a + 6) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf2b (⟨a + 7, Nat.mul_comm (a+7) (a+8)⟩)
+    have hdvdE : (16: Nat) ∣ pt (a + 8) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf16a (⟨a + 9, Nat.mul_comm (a+9) (a+10)⟩)
+    have hAB : (2: Nat) ^ (3 + 1) ∣ pt a 2 * pt (a + 2) 2 := dvd_pow2_prod 3 1 _ _ hdvdA hdvdB
+    have hCD : (2: Nat) ^ (2 + 1) ∣ pt (a + 4) 2 * pt (a + 6) 2 := dvd_pow2_prod 2 1 _ _ hdvdC hdvdD
+    have hmain := dvd_pow2_prod (3 + 1) (2 + 1) _ _ hAB hCD
+    have hfull := dvd_pow2_prod ((3 + 1) + (2 + 1)) 4 _ _ hmain hdvdE
+    -- pt a 10 = pt a 2 * (pt (a+2) 2 * (pt (a+4) 2 * (pt (a+6) 2 * pt (a+8) 2)))
+    have h10 := pt_split 8 2 a
+    have hi10 : 2 + 8 = 10 := by omega
+    rw [hi10] at h10
+    have h8' := pt_split 6 2 (a + 2)
+    have hi8 : 2 + 6 = 8 := by omega
+    rw [hi8] at h8'
+    have hn2 : a + 2 + 2 = a + 4 := by omega
+    rw [hn2] at h8'
+    have h6' := pt_split 4 2 (a + 4)
+    have hi6 : 2 + 4 = 6 := by omega
+    rw [hi6] at h6'
+    have hn4 : a + 4 + 2 = a + 6 := by omega
+    rw [hn4] at h6'
+    have h4' := pt_split 2 2 (a + 6)
+    have hi4 : 2 + 2 = 4 := by omega
+    rw [hi4] at h4'
+    have hn6 : a + 6 + 2 = a + 8 := by omega
+    rw [hn6] at h4'
+    rw [h4'] at h6'
+    rw [h6'] at h8'
+    rw [h8'] at h10
+    have h2048 : (2048: Nat) = 2 ^ (((3 + 1) + (2 + 1)) + 4) := rfl
+    rw [h2048, h10]
+    have hregroup : pt a 2 * (pt (a + 2) 2 * (pt (a + 4) 2 * (pt (a + 6) 2 * pt (a + 8) 2)))
+        = ((pt a 2 * pt (a + 2) 2) * (pt (a + 4) 2 * pt (a + 6) 2)) * pt (a + 8) 2 := by
+      rw [← Nat.mul_assoc (pt a 2) (pt (a + 2) 2) (pt (a + 4) 2 * (pt (a + 6) 2 * pt (a + 8) 2)),
+          ← Nat.mul_assoc (pt (a + 4) 2) (pt (a + 6) 2) (pt (a + 8) 2),
+          ← Nat.mul_assoc (pt a 2 * pt (a + 2) 2) (pt (a + 4) 2 * pt (a + 6) 2) (pt (a + 8) 2)]
+    rw [hregroup]
+    exact hfull
+  | @step j' hle ih =>
+    obtain ⟨k, hk⟩ := ih
+    have hstep : pt a (j' + 1) = pt a j' * (a + j' + 1) := rfl
+    rw [hstep, hk]
+    exact ⟨k * (a + j' + 1), Nat.mul_assoc _ _ _⟩
+
+
+theorem obs_core_T7fam : ∀ (B : List Nat) (a : Nat),
+    (hv : a % 128 = 70 ∨ a % 128 = 118) → NoDup B → (∀ i ∈ B, a < i) →
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 2048 = (1 + iteSum9 a (a % 2048) B) % 2048
+  | [], a, hv, _, _ => by simp [iteSum9_nil]
+  | i :: B', a, hv, hB, hgt => by
+    obtain ⟨hin, hB'⟩ := hB
+    have hai : a < i := hgt i (by simp)
+    have ih := obs_core_T7fam B' a hv hB' (fun x hx => hgt x (by simp [hx]))
+    have hsc : ((i :: B').map (fun x => pt a (x - a))).sum
+        = pt a (i - a) + ((B').map (fun x => pt a (x - a))).sum := rfl
+    have hcase : i - a = 1 ∨ i - a = 2 ∨ i - a = 3 ∨ i - a = 4 ∨ i - a = 5 ∨ i - a = 6 ∨
+        i - a = 7 ∨ i - a = 8 ∨ i - a = 9 ∨ i - a ≥ 10 := by omega
+    rcases hcase with h1 | h2 | h3 | h4 | h5 | h6 | h7 | h8 | h9 | hbig
+
+    · have hi : i = a + 1 := by omega
+      have hnot : ¬(a + 1 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit1 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 1 - a = 1 := by omega
+      rw [hia]
+      have hpt : pt a 1 % 2048 = pt (a % 2048) 1 % 2048 := pt_mod 1 a 2048
+      omega
+    · have hi : i = a + 2 := by omega
+      have hnot : ¬(a + 2 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit2 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 2 - a = 2 := by omega
+      rw [hia]
+      have hpt : pt a 2 % 2048 = pt (a % 2048) 2 % 2048 := pt_mod 2 a 2048
+      omega
+    · have hi : i = a + 3 := by omega
+      have hnot : ¬(a + 3 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit3 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 3 - a = 3 := by omega
+      rw [hia]
+      have hpt : pt a 3 % 2048 = pt (a % 2048) 3 % 2048 := pt_mod 3 a 2048
+      omega
+    · have hi : i = a + 4 := by omega
+      have hnot : ¬(a + 4 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit4 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 4 - a = 4 := by omega
+      rw [hia]
+      have hpt : pt a 4 % 2048 = pt (a % 2048) 4 % 2048 := pt_mod 4 a 2048
+      omega
+    · have hi : i = a + 5 := by omega
+      have hnot : ¬(a + 5 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit5 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 5 - a = 5 := by omega
+      rw [hia]
+      have hpt : pt a 5 % 2048 = pt (a % 2048) 5 % 2048 := pt_mod 5 a 2048
+      omega
+    · have hi : i = a + 6 := by omega
+      have hnot : ¬(a + 6 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit6 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 6 - a = 6 := by omega
+      rw [hia]
+      have hpt : pt a 6 % 2048 = pt (a % 2048) 6 % 2048 := pt_mod 6 a 2048
+      omega
+    · have hi : i = a + 7 := by omega
+      have hnot : ¬(a + 7 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit7 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 7 - a = 7 := by omega
+      rw [hia]
+      have hpt : pt a 7 % 2048 = pt (a % 2048) 7 % 2048 := pt_mod 7 a 2048
+      omega
+    · have hi : i = a + 8 := by omega
+      have hnot : ¬(a + 8 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit8 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 8 - a = 8 := by omega
+      rw [hia]
+      have hpt : pt a 8 % 2048 = pt (a % 2048) 8 % 2048 := pt_mod 8 a 2048
+      omega
+    · have hi : i = a + 9 := by omega
+      have hnot : ¬(a + 9 ∈ B') := by intro hm; apply hin; rw [hi]; exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum9_hit9 a (a % 2048) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 9 - a = 9 := by omega
+      rw [hia]
+      have hpt : pt a 9 % 2048 = pt (a % 2048) 9 % 2048 := pt_mod 9 a 2048
+      omega
+    · have hbig2 : i - a ≥ 10 := by omega
+      have hdvd := vanish_T7fam a (i - a) hv hbig2
+      have hz : pt a (i - a) % 2048 = 0 := Nat.mod_eq_zero_of_dvd hdvd
+      have hmiss := iteSum9_miss a (a % 2048) i B' (by intro j' hj'; simp at hj'; omega)
+      rw [hsc, hmiss]
+      omega
+
+
+-- The 32 residue checks: each ONE kernel-evaluated closed term (512 masks each).
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_70 :
+    boundedForall (fun n => (1 + mc9 70 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_198 :
+    boundedForall (fun n => (1 + mc9 198 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_326 :
+    boundedForall (fun n => (1 + mc9 326 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_454 :
+    boundedForall (fun n => (1 + mc9 454 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_582 :
+    boundedForall (fun n => (1 + mc9 582 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_710 :
+    boundedForall (fun n => (1 + mc9 710 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_838 :
+    boundedForall (fun n => (1 + mc9 838 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_966 :
+    boundedForall (fun n => (1 + mc9 966 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1094 :
+    boundedForall (fun n => (1 + mc9 1094 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1222 :
+    boundedForall (fun n => (1 + mc9 1222 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1350 :
+    boundedForall (fun n => (1 + mc9 1350 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1478 :
+    boundedForall (fun n => (1 + mc9 1478 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1606 :
+    boundedForall (fun n => (1 + mc9 1606 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1734 :
+    boundedForall (fun n => (1 + mc9 1734 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1862 :
+    boundedForall (fun n => (1 + mc9 1862 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7_1990 :
+    boundedForall (fun n => (1 + mc9 1990 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_118 :
+    boundedForall (fun n => (1 + mc9 118 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_246 :
+    boundedForall (fun n => (1 + mc9 246 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_374 :
+    boundedForall (fun n => (1 + mc9 374 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_502 :
+    boundedForall (fun n => (1 + mc9 502 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_630 :
+    boundedForall (fun n => (1 + mc9 630 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_758 :
+    boundedForall (fun n => (1 + mc9 758 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_886 :
+    boundedForall (fun n => (1 + mc9 886 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1014 :
+    boundedForall (fun n => (1 + mc9 1014 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1142 :
+    boundedForall (fun n => (1 + mc9 1142 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1270 :
+    boundedForall (fun n => (1 + mc9 1270 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1398 :
+    boundedForall (fun n => (1 + mc9 1398 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1526 :
+    boundedForall (fun n => (1 + mc9 1526 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1654 :
+    boundedForall (fun n => (1 + mc9 1654 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1782 :
+    boundedForall (fun n => (1 + mc9 1782 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_1910 :
+    boundedForall (fun n => (1 + mc9 1910 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+set_option maxRecDepth 32768 in
+theorem check_T7b_2038 :
+    boundedForall (fun n => (1 + mc9 2038 n) % 2048 != 0) 512 = true := by
+  decide
+
+
+theorem obs_T7 (a : Nat) (ha : a % 128 = 70) (B : List Nat) (hB : NoDup B) (hgt : ∀ i ∈ B, a < i) :
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 2048 ≠ 0 := by
+  have hcore := obs_core_T7fam B a (Or.inl ha) hB hgt
+  rw [hcore, iteSum9_eq_mc9 a (a % 2048) B]
+  have hr : a % 2048 = 70 ∨ a % 2048 = 198 ∨ a % 2048 = 326 ∨ a % 2048 = 454 ∨ a % 2048 = 582 ∨ a % 2048 = 710 ∨ a % 2048 = 838 ∨ a % 2048 = 966 ∨ a % 2048 = 1094 ∨ a % 2048 = 1222 ∨ a % 2048 = 1350 ∨ a % 2048 = 1478 ∨ a % 2048 = 1606 ∨ a % 2048 = 1734 ∨ a % 2048 = 1862 ∨ a % 2048 = 1990 := by
+    have h1 := mod2048_mod128 a
+    omega
+  rcases hr with h | h | h | h | h | h | h | h | h | h | h | h | h | h | h | h
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 70 n) % 2048 != 0) 512 (memMask a B) check_T7_70
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 198 n) % 2048 != 0) 512 (memMask a B) check_T7_198
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 326 n) % 2048 != 0) 512 (memMask a B) check_T7_326
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 454 n) % 2048 != 0) 512 (memMask a B) check_T7_454
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 582 n) % 2048 != 0) 512 (memMask a B) check_T7_582
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 710 n) % 2048 != 0) 512 (memMask a B) check_T7_710
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 838 n) % 2048 != 0) 512 (memMask a B) check_T7_838
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 966 n) % 2048 != 0) 512 (memMask a B) check_T7_966
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1094 n) % 2048 != 0) 512 (memMask a B) check_T7_1094
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1222 n) % 2048 != 0) 512 (memMask a B) check_T7_1222
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1350 n) % 2048 != 0) 512 (memMask a B) check_T7_1350
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1478 n) % 2048 != 0) 512 (memMask a B) check_T7_1478
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1606 n) % 2048 != 0) 512 (memMask a B) check_T7_1606
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1734 n) % 2048 != 0) 512 (memMask a B) check_T7_1734
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1862 n) % 2048 != 0) 512 (memMask a B) check_T7_1862
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1990 n) % 2048 != 0) 512 (memMask a B) check_T7_1990
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+
+
+theorem obs_T7b (a : Nat) (ha : a % 128 = 118) (B : List Nat) (hB : NoDup B) (hgt : ∀ i ∈ B, a < i) :
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 2048 ≠ 0 := by
+  have hcore := obs_core_T7fam B a (Or.inr ha) hB hgt
+  rw [hcore, iteSum9_eq_mc9 a (a % 2048) B]
+  have hr : a % 2048 = 118 ∨ a % 2048 = 246 ∨ a % 2048 = 374 ∨ a % 2048 = 502 ∨ a % 2048 = 630 ∨ a % 2048 = 758 ∨ a % 2048 = 886 ∨ a % 2048 = 1014 ∨ a % 2048 = 1142 ∨ a % 2048 = 1270 ∨ a % 2048 = 1398 ∨ a % 2048 = 1526 ∨ a % 2048 = 1654 ∨ a % 2048 = 1782 ∨ a % 2048 = 1910 ∨ a % 2048 = 2038 := by
+    have h1 := mod2048_mod128 a
+    omega
+  rcases hr with h | h | h | h | h | h | h | h | h | h | h | h | h | h | h | h
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 118 n) % 2048 != 0) 512 (memMask a B) check_T7b_118
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 246 n) % 2048 != 0) 512 (memMask a B) check_T7b_246
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 374 n) % 2048 != 0) 512 (memMask a B) check_T7b_374
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 502 n) % 2048 != 0) 512 (memMask a B) check_T7b_502
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 630 n) % 2048 != 0) 512 (memMask a B) check_T7b_630
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 758 n) % 2048 != 0) 512 (memMask a B) check_T7b_758
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 886 n) % 2048 != 0) 512 (memMask a B) check_T7b_886
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1014 n) % 2048 != 0) 512 (memMask a B) check_T7b_1014
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1142 n) % 2048 != 0) 512 (memMask a B) check_T7b_1142
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1270 n) % 2048 != 0) 512 (memMask a B) check_T7b_1270
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1398 n) % 2048 != 0) 512 (memMask a B) check_T7b_1398
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1526 n) % 2048 != 0) 512 (memMask a B) check_T7b_1526
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1654 n) % 2048 != 0) 512 (memMask a B) check_T7b_1654
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1782 n) % 2048 != 0) 512 (memMask a B) check_T7b_1782
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 1910 n) % 2048 != 0) 512 (memMask a B) check_T7b_1910
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+  · rw [h]
+    have hmem := bf_true (fun n => (1 + mc9 2038 n) % 2048 != 0) 512 (memMask a B) check_T7b_2038
+      (memMask_lt a B)
+    exact bne_iff_ne.mp hmem
+
+
+theorem wit_T7 (a : Nat) (ha : a % 128 = 70) :
+    (1 + coinsum a [1, 3, 6, 7, 9]) % 1024 = 0 := by
+  have hr : a % 1024 = 70 ∨ a % 1024 = 198 ∨ a % 1024 = 326 ∨ a % 1024 = 454 ∨ a % 1024 = 582 ∨ a % 1024 = 710 ∨ a % 1024 = 838 ∨ a % 1024 = 966 := by
+    have h1 := mod1024_mod128 a
+    omega
+  rcases hr with h | h | h | h | h | h | h | h
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+
+
+/-- **ERDŐS #404, THEOREM T7 (upper bound).** a ≡ 70 (mod 128) ⟹
+`v₂(a! + Σ) ≤ v₂(a!) + 10` for every valid B. -/
+theorem f404_T7_bound (a : Nat) (ha : a % 128 = 70) (B : List Nat) (hB : NoDup B)
+    (hgt : ∀ i ∈ B, a < i) :
+    v2 (fact a + (B.map fact).sum) ≤ v2 (fact a) + 10 := by
+  have hsf := sum_fact_eq B a hgt
+  have hcs := sum_pt_coinsum a B
+  have hobs := obs_T7 a ha B hB hgt
+  rw [hcs] at hobs
+  have hp : (2: Nat) ^ (10 + 1) = 2048 := rfl
+  have hmod : (1 + coinsum a (B.map (fun i => i - a))) % (2: Nat) ^ (10 + 1) ≠ 0 := by
+    rw [hp]
+    exact hobs
+  have hle := v2_le_of_mod (1 + coinsum a (B.map (fun i => i - a))) (by omega) 10 hmod
+  rw [hsf]
+  have hdistr : fact a + fact a * coinsum a (B.map (fun i => i - a))
+      = fact a * (1 + coinsum a (B.map (fun i => i - a))) := by
+    rw [Nat.mul_add, Nat.mul_one]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a (B.map (fun i => i - a)) + 1) (fact a)
+      (1 + coinsum a (B.map (fun i => i - a))) (by omega) (fact_pos a) (by omega)]
+  omega
+
+/-- **ERDŐS #404, THEOREM T7 (exactness).** Witness [1,3,6,7,9] attains
+`v₂(a!) + 10` exactly, for every a ≡ 70 (mod 128). -/
+theorem f404_T7_exact (a : Nat) (ha : a % 128 = 70) :
+    v2 (fact a + (fact (a + 1) + (fact (a + 3) + (fact (a + 6) + (fact (a + 7) + fact (a + 9)))))) = v2 (fact a) + 10 := by
+  have h1 : fact (a + 1) = fact a * pt a 1 := fact_pt 1 a
+  have h3 : fact (a + 3) = fact a * pt a 3 := fact_pt 3 a
+  have h6 : fact (a + 6) = fact a * pt a 6 := fact_pt 6 a
+  have h7 : fact (a + 7) = fact a * pt a 7 := fact_pt 7 a
+  have h9 : fact (a + 9) = fact a * pt a 9 := fact_pt 9 a
+  have hc : coinsum a [1, 3, 6, 7, 9] = pt a 1 + (pt a 3 + (pt a 6 + (pt a 7 + (pt a 9 + 0)))) := rfl
+  rw [h1, h3, h6, h7, h9]
+  have hdistr : fact a + (fact a * pt a 1 + (fact a * pt a 3 + (fact a * pt a 6 + (fact a * pt a 7 + fact a * pt a 9))))
+      = fact a * (1 + coinsum a [1, 3, 6, 7, 9]) := by
+    rw [hc, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_one, Nat.add_zero]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a [1, 3, 6, 7, 9] + 1) (fact a) (1 + coinsum a [1, 3, 6, 7, 9])
+      (by omega) (fact_pos a) (by omega)]
+  have hw := wit_T7 a ha
+  have hp10 : (2: Nat) ^ 10 = 1024 := rfl
+  have hge : 10 ≤ v2 (1 + coinsum a [1, 3, 6, 7, 9]) :=
+    v2_ge_of_mod (1 + coinsum a [1, 3, 6, 7, 9]) (by omega) 10 (by rw [hp10]; exact hw)
+  have hB : NoDup [a + 1, a + 3, a + 6, a + 7, a + 9] := by
+    simp [NoDup]
+  have hgt : ∀ i ∈ [a + 1, a + 3, a + 6, a + 7, a + 9], a < i := by
+    intro i hi; simp at hi; omega
+  have hobs := obs_T7 a ha [a + 1, a + 3, a + 6, a + 7, a + 9] hB hgt
+  have hcs := sum_pt_coinsum a [a + 1, a + 3, a + 6, a + 7, a + 9]
+  rw [hcs] at hobs
+  have hp11 : (2: Nat) ^ 11 = 2048 := rfl
+  have hle : v2 (1 + coinsum a [1, 3, 6, 7, 9]) ≤ 10 := by
+    have hmod : (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 6, a + 7, a + 9]))
+        % (2: Nat) ^ (10 + 1) ≠ 0 := by
+      rw [hp11]
+      exact hobs
+    have htmp := v2_le_of_mod
+      (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 6, a + 7, a + 9])) (by omega) 10 hmod
+    have hoff : List.map (fun i => i - a) [a + 1, a + 3, a + 6, a + 7, a + 9] = [1, 3, 6, 7, 9] := by
+      have e1 : a + 1 - a = 1 := by omega
+      have e3 : a + 3 - a = 3 := by omega
+      have e6 : a + 6 - a = 6 := by omega
+      have e7 : a + 7 - a = 7 := by omega
+      have e9 : a + 9 - a = 9 := by omega
+      simp [List.map, e1, e3, e6, e7, e9]
+    rw [hoff] at htmp
+    exact htmp
+  omega
+
+
+theorem wit_T7b (a : Nat) (ha : a % 128 = 118) :
+    (1 + coinsum a [1, 3, 6, 7, 9]) % 1024 = 0 := by
+  have hr : a % 1024 = 118 ∨ a % 1024 = 246 ∨ a % 1024 = 374 ∨ a % 1024 = 502 ∨ a % 1024 = 630 ∨ a % 1024 = 758 ∨ a % 1024 = 886 ∨ a % 1024 = 1014 := by
+    have h1 := mod1024_mod128 a
+    omega
+  rcases hr with h | h | h | h | h | h | h | h
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+  · rw [Nat.add_mod, coinsum_mod, h]; decide
+
+
+/-- **ERDŐS #404, THEOREM T7b (upper bound).** a ≡ 118 (mod 128) ⟹
+`v₂(a! + Σ) ≤ v₂(a!) + 10` for every valid B. -/
+theorem f404_T7b_bound (a : Nat) (ha : a % 128 = 118) (B : List Nat) (hB : NoDup B)
+    (hgt : ∀ i ∈ B, a < i) :
+    v2 (fact a + (B.map fact).sum) ≤ v2 (fact a) + 10 := by
+  have hsf := sum_fact_eq B a hgt
+  have hcs := sum_pt_coinsum a B
+  have hobs := obs_T7b a ha B hB hgt
+  rw [hcs] at hobs
+  have hp : (2: Nat) ^ (10 + 1) = 2048 := rfl
+  have hmod : (1 + coinsum a (B.map (fun i => i - a))) % (2: Nat) ^ (10 + 1) ≠ 0 := by
+    rw [hp]
+    exact hobs
+  have hle := v2_le_of_mod (1 + coinsum a (B.map (fun i => i - a))) (by omega) 10 hmod
+  rw [hsf]
+  have hdistr : fact a + fact a * coinsum a (B.map (fun i => i - a))
+      = fact a * (1 + coinsum a (B.map (fun i => i - a))) := by
+    rw [Nat.mul_add, Nat.mul_one]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a (B.map (fun i => i - a)) + 1) (fact a)
+      (1 + coinsum a (B.map (fun i => i - a))) (by omega) (fact_pos a) (by omega)]
+  omega
+
+/-- **ERDŐS #404, THEOREM T7b (exactness).** Witness [1,3,6,7,9] attains
+`v₂(a!) + 10` exactly, for every a ≡ 118 (mod 128). -/
+theorem f404_T7b_exact (a : Nat) (ha : a % 128 = 118) :
+    v2 (fact a + (fact (a + 1) + (fact (a + 3) + (fact (a + 6) + (fact (a + 7) + fact (a + 9)))))) = v2 (fact a) + 10 := by
+  have h1 : fact (a + 1) = fact a * pt a 1 := fact_pt 1 a
+  have h3 : fact (a + 3) = fact a * pt a 3 := fact_pt 3 a
+  have h6 : fact (a + 6) = fact a * pt a 6 := fact_pt 6 a
+  have h7 : fact (a + 7) = fact a * pt a 7 := fact_pt 7 a
+  have h9 : fact (a + 9) = fact a * pt a 9 := fact_pt 9 a
+  have hc : coinsum a [1, 3, 6, 7, 9] = pt a 1 + (pt a 3 + (pt a 6 + (pt a 7 + (pt a 9 + 0)))) := rfl
+  rw [h1, h3, h6, h7, h9]
+  have hdistr : fact a + (fact a * pt a 1 + (fact a * pt a 3 + (fact a * pt a 6 + (fact a * pt a 7 + fact a * pt a 9))))
+      = fact a * (1 + coinsum a [1, 3, 6, 7, 9]) := by
+    rw [hc, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_one, Nat.add_zero]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a [1, 3, 6, 7, 9] + 1) (fact a) (1 + coinsum a [1, 3, 6, 7, 9])
+      (by omega) (fact_pos a) (by omega)]
+  have hw := wit_T7b a ha
+  have hp10 : (2: Nat) ^ 10 = 1024 := rfl
+  have hge : 10 ≤ v2 (1 + coinsum a [1, 3, 6, 7, 9]) :=
+    v2_ge_of_mod (1 + coinsum a [1, 3, 6, 7, 9]) (by omega) 10 (by rw [hp10]; exact hw)
+  have hB : NoDup [a + 1, a + 3, a + 6, a + 7, a + 9] := by
+    simp [NoDup]
+  have hgt : ∀ i ∈ [a + 1, a + 3, a + 6, a + 7, a + 9], a < i := by
+    intro i hi; simp at hi; omega
+  have hobs := obs_T7b a ha [a + 1, a + 3, a + 6, a + 7, a + 9] hB hgt
+  have hcs := sum_pt_coinsum a [a + 1, a + 3, a + 6, a + 7, a + 9]
+  rw [hcs] at hobs
+  have hp11 : (2: Nat) ^ 11 = 2048 := rfl
+  have hle : v2 (1 + coinsum a [1, 3, 6, 7, 9]) ≤ 10 := by
+    have hmod : (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 6, a + 7, a + 9]))
+        % (2: Nat) ^ (10 + 1) ≠ 0 := by
+      rw [hp11]
+      exact hobs
+    have htmp := v2_le_of_mod
+      (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 6, a + 7, a + 9])) (by omega) 10 hmod
+    have hoff : List.map (fun i => i - a) [a + 1, a + 3, a + 6, a + 7, a + 9] = [1, 3, 6, 7, 9] := by
+      have e1 : a + 1 - a = 1 := by omega
+      have e3 : a + 3 - a = 3 := by omega
+      have e6 : a + 6 - a = 6 := by omega
+      have e7 : a + 7 - a = 7 := by omega
+      have e9 : a + 9 - a = 9 := by omega
+      simp [List.map, e1, e3, e6, e7, e9]
+    rw [hoff] at htmp
+    exact htmp
+  omega
+
+-- ===========================================================================
+-- §14  RECEIPTS: exact values v₂(a!) + g on family members (engine cross-checked)
+-- ===========================================================================
+
+-- T6 exact values v2(a!) + 7 (a = 40, 168, 296, 424; witness 1,3,4,6; expect 45, 172, 300, 427)
+#eval v2 (fact 40 + (fact 41 + (fact 43 + (fact 44 + fact 46))))
+#eval v2 (fact 168 + (fact 169 + (fact 171 + (fact 172 + fact 174))))
+#eval v2 (fact 296 + (fact 297 + (fact 299 + (fact 300 + fact 302))))
+#eval v2 (fact 424 + (fact 425 + (fact 427 + (fact 428 + fact 430))))
+
+-- T6b exact values v2(a!) + 7 (a = 56, 184; witness 1,3,5,6; expect 60, 187)
+#eval v2 (fact 56 + (fact 57 + (fact 59 + (fact 61 + fact 62))))
+#eval v2 (fact 184 + (fact 185 + (fact 187 + (fact 189 + fact 190))))
+
+-- T6c exact values v2(a!) + 7 (a = 88, 216; witness 1,3,4,7; expect 92, 219)
+#eval v2 (fact 88 + (fact 89 + (fact 91 + (fact 92 + fact 95))))
+#eval v2 (fact 216 + (fact 217 + (fact 219 + (fact 220 + fact 223))))
+
+-- T7 exact values v2(a!) + 10 (a = 70, 198, 326, 454; witness 1,3,6,7,9; expect 77, 204, 332, 459)
+#eval v2 (fact 70 + (fact 71 + (fact 73 + (fact 76 + (fact 77 + fact 79)))))
+#eval v2 (fact 198 + (fact 199 + (fact 201 + (fact 204 + (fact 205 + fact 207)))))
+#eval v2 (fact 326 + (fact 327 + (fact 329 + (fact 332 + (fact 333 + fact 335)))))
+#eval v2 (fact 454 + (fact 455 + (fact 457 + (fact 460 + (fact 461 + fact 463)))))
+
+-- T7b exact values v2(a!) + 10 (a = 118, 246; witness 1,3,6,7,9; expect 123, 250)
+#eval v2 (fact 118 + (fact 119 + (fact 121 + (fact 124 + (fact 125 + fact 127)))))
+#eval v2 (fact 246 + (fact 247 + (fact 249 + (fact 252 + (fact 253 + fact 255)))))
+
+#print axioms obs_T6
+#print axioms f404_T6_bound
+#print axioms f404_T6_exact
+#print axioms obs_T6b
+#print axioms f404_T6b_bound
+#print axioms f404_T6b_exact
+#print axioms obs_T6c
+#print axioms f404_T6c_bound
+#print axioms f404_T6c_exact
+#print axioms obs_T7
+#print axioms f404_T7_bound
+#print axioms f404_T7_exact
+#print axioms obs_T7b
+#print axioms f404_T7b_bound
+#print axioms f404_T7b_exact

@@ -29,12 +29,14 @@ Extracted verbatim from the research monorepo
 | **#10** | **261 (funnels)** | **The funnel/coalescence discovery**: the absolute walk state space $\{(N,v)\}$ carries ONE map $\varphi(N,v) = (N{+}1, 2v \bmod N)$; all walks are orbits and they COALESCE (64% die at $N{=}12231$); `death_fuel_mono` = the coalescence certificate; greedy-room census: room UNBOUNDED (max 152125 at $n{=}3817$). | `problem261-funnels/FunnelStructure.lean` | CI |
 | **#11** | **404 (p=2 classification I)** | **Obstruction families T2/T3/T4**: $a \equiv 4 \pmod 8 \Rightarrow f = v_2(a!) + 3$; $a \equiv 10 \pmod{16} \Rightarrow f = v_2(a!) + 6$; $a \equiv 32/48 \pmod{64} \Rightarrow f = v_2(a!) + 6$ — for ALL $a$ in the family, uniform modular obstructions (decided leaves), explicit witnesses. | `problem404-p2-classification/ObstructionFamilies.lean` | `propext, (Classical.choice,) Quot.sound` |
 | **#12** | **404 (p=2 classification II)** | **Theorem T5**: $a \equiv 8 \pmod{64} \Rightarrow f(a,2) = v_2(a!) + 6$ EXACTLY — `f404_T5_bound` + `f404_T5_exact`: vanish lemma ($128 \mid P_j$, $j \ge 8$), 7-coin mod-128 obstruction (leaf residues $\{8, 72\}$), witness $\{a{+}1, a{+}3, a{+}4, a{+}6\}$; receipts 13/76/140/203; battery 172/172. Found by the uncovered-class mining scan (7/7 members uniform, zero deep). | `problem404-p2-classification/ObstructionFamilies.lean` (§10) | `propext, Classical.choice, Quot.sound` |
+| **#13** | **404 (p=2 classification III)** | **Theorems T6/T6b/T6c/T7/T7b**: $a \equiv 40, 56, 88 \pmod{128} \Rightarrow g = 7$ exactly ($f = v_2(a!) + 7$); $a \equiv 70, 118 \pmod{128} \Rightarrow g = 10$ exactly ($f = v_2(a!) + 10$) — five more infinite families, ALL $a$ in each family, KERNEL-GREEN (0 errors, 0 sorry, axioms $[\mathrm{propext}, \mathrm{Classical.choice}, \mathrm{Quot.sound}]$), receipts 45/172/300/427/60/187/92/219/77/204/332/459/123/250, memory-safe boundedForall leaf architecture (one kernel decide per leaf). | `problem404-p2-classification/ObstructionFamilies.lean` (§11–§14) | `propext, Classical.choice, Quot.sound` |
 
 **Honest accounting (session 015 audit):** the complete problems are NOT yet
-fully solved.  #404: the reduction (Theorem A) is complete; for $p = 2$, five
-infinite classes are classified exactly (odd $a$; $a \equiv 4 \bmod 8$;
-$a \equiv 10 \bmod 16$; $a \equiv 32/48 \bmod 64$; $a \equiv 8 \bmod 64$ —
-T5); the open cores are the 22 deep survivors at $2^{28}$, the bounded
+fully solved.  #404: the reduction (Theorem A) is complete; for $p = 2$, TEN
+infinite families are classified exactly (odd $a$; $a \equiv 4 \bmod 8$;
+$a \equiv 10 \bmod 16$; $a \equiv 32/48 \bmod 64$; $a \equiv 8 \bmod 64$;
+$a \equiv 40, 56, 88, 70, 118 \bmod 128$ — T5/T6/T6b/T6c/T7/T7b); the open
+cores are the 22 deep survivors at $2^{28}$, the bounded
 staircases, all odd $p$, and sub-question 3 (the infinite chain — Conjecture
 D).  #261: sub-question 1 is known ([BoLo90], formalized as Kill #8's
 `bl_family`); sub-questions 2 (all $n$ — certified to $2\times10^5$) and 3
@@ -70,7 +72,10 @@ this workflow is green on GitHub.
 1. **#404 Conjecture D** — the gadget-supply lemma $\Rightarrow g(2,2) = \infty$
    $\Rightarrow$ sub-question 3 of #404 = **YES** (the infinite chain exists).
 2. **#404 classification completion** — the bounded-set structure, exact
-   $f$-values.
+   $f$-values. Progress: TEN exact $p=2$ families kernel-green so far
+   (odd $a$; $a \equiv 4, 10, 32/48, 8 \bmod \{8,16,64\}$;
+   $a \equiv 40, 56, 88, 70, 118 \bmod 128$ — T2–T7b, $g \in \{0,3,6,7,10\}$);
+   remaining: the 22 deep survivors at $2^{28}$ and the bounded staircases.
 3. **#261 rational-x** — the Q3 bridge (bounded-room all-$n$ $\Rightarrow$
    rational $x$ with $2^{\aleph_0}$ representations) + walk termination.
 4. **#260** — the sibling dyadic irrationality problem, behind the walk wall.
