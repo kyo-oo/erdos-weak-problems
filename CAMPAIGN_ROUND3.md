@@ -67,7 +67,7 @@ New package `problem261-q3bridge/`:
 
 ### Erdős #271 — the honest frontier
 New package `problem271-status/`: the complete problem (all $n$) includes
-$A(4)$ — OEIS A005487, a 45-year open case (the Type-2 growth question).
+$A(4)$ — OEIS A005487, the open core (the Type-2 growth question).
 **No complete one-shot of #271 exists today without cracking the general
 Stanley-sequence structure problem.**  Kill #3 stands as the formal
 verification of one known-family member ($A(2)$, Odlyzko–Stanley class).
@@ -117,7 +117,7 @@ substantially crackable front (this round's Theorems A/B/C) and connected
 3. **#261-Q2/Q3** — the walk termination (all $n$) + the uniform-room
    conjecture $\Rightarrow$ the rational $x$ (the bridge fires).
 4. **#260** — the sibling (sustained-orbit walk analysis).
-5. **#271/A(4)** — the 45-year Type-2 frontier (research-grade).
+5. **#271/A(4)** — the Type-2 frontier (research-grade).
 6. **#406 GAP-A2** — the anchor summit.
 
 ## 5. CI

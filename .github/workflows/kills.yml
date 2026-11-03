@@ -139,7 +139,7 @@ jobs:
           grep -xF "192" funnels.log
           grep -xF "155943" funnels.log
           echo FUNNELS_KERNEL_GREEN=1
-      - name: "Kernel 9 - Erdos 404 p=2 CLASSIFICATION: obstruction families (T2/T3/T4)"
+      - name: "Kernel 9 - Erdos 404 p=2 CLASSIFICATION: obstruction families (T2/T3/T4/T5)"
         shell: bash
         run: |
           set -euo pipefail
@@ -155,10 +155,16 @@ jobs:
           grep -F "'f404_T4_bound' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
           grep -F "'f404_T4_exact_32' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
           grep -F "'f404_T4_exact_48' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
+          grep -F "'obs_T5' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
+          grep -F "'f404_T5_bound' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
+          grep -F "'f404_T5_exact' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
           grep -xF "6" p2class.log
           grep -xF "13" p2class.log
           grep -xF "37" p2class.log
           grep -xF "52" p2class.log
+          grep -xF "76" p2class.log
+          grep -xF "140" p2class.log
+          grep -xF "203" p2class.log
           echo P2CLASS_KERNEL_GREEN=1
       - name: Independent verification battery
         shell: bash

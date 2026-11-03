@@ -12,7 +12,7 @@ For p = 2, writing P_j(a) = (a+1)(a+2)···(a+j) (so i! = a!·P_{i−a}(a) for 
 the campaign's reduction (kernel-green, problem404-full) gives
     f(a,2) = v₂(a!) + g(a,2),   g(a,2) = max { g : ∃B ⊆ {a+1,a+2,…}, 2^g ∣ (1 + Σ_{j∈B} P_j(a)) }.
 
-This kernel settles THREE INFINITE FAMILIES exactly:
+This kernel settles FOUR INFINITE FAMILIES exactly:
 
 * **THEOREM T2** (a ≡ 4 mod 8):  g(a,2) = 3 EXACTLY, for EVERY a ≡ 4 (mod 8).
   Upper bound: mod-16 obstruction (the 8 window sub-sums miss −1);
@@ -28,9 +28,14 @@ This kernel settles THREE INFINITE FAMILIES exactly:
   (a ≡ 32 mod 64) and B = {a+1,a+3,a+4} (a ≡ 48 mod 64).
   → f(a,2) = v₂(a!) + 6.
 
+* **THEOREM T5** (a ≡ 8 mod 64): g(a,2) = 6 EXACTLY.
+  Mod-128 obstruction over the 7-coin window (two leaf residues 8, 72 mod 128);
+  witness B = {a+1, a+3, a+4, a+6}.
+  → f(a,2) = v₂(a!) + 6.
+
 Together with Theorem B (p ∣ a+1 ⟹ g = 0, kernel-green in problem404-full):
-every odd a and every a ≡ 4 (mod 8), a ≡ 10 (mod 16), a ≡ 32/48 (mod 64) is
-CLASSIFIED with exact f-value.  The remaining a ≤ 200 are certified by the
+every odd a and every a ≡ 4 (mod 8), a ≡ 10 (mod 16), a ≡ 32/48 (mod 64),
+a ≡ 8 (mod 64) is CLASSIFIED with exact f-value.  The remaining a ≤ 200 are certified by the
 engine battery (verify_p2class.py): small-g table + 22 deep survivors at 2^28.
 
 Engine receipts (verify_p2class.py): the family tables are uniform to a = 304;
@@ -40,7 +45,7 @@ deep survivors g ≥ 28: a ∈ {2,6,14,16,18,24,30,34,38,62,64,78,94,98,102,126,
 Architecture: §1 machinery (fact/pt/v2 — as in GadgetSupply)  §2 pt lemmas
 (split, mod-reduction, vanish)  §3 coinsum + list lemmas  §4 the indicator
 lemma  §5 core reductions  §6 leaves (decided)  §7 theorems T2/T3/T4  §8
-f-level statements  §9 receipts.
+f-level statements  §9 receipts  §10 theorem T5 (a ≡ 8 mod 64).
 -/
 
 -- ===========================================================================
@@ -1452,3 +1457,294 @@ theorem f404_T4_exact_48 (a : Nat) (ha : a % 64 = 48) :
 #print axioms f404_T4_bound
 #print axioms f404_T4_exact_32
 #print axioms f404_T4_exact_48
+
+-- ===========================================================================
+-- §10  THEOREM T5: a ≡ 8 (mod 64) ⟹ g(a,2) = 6 EXACTLY
+-- (mod-128 obstruction over the 7-coin window; witness {a+1, a+3, a+4, a+6})
+-- ===========================================================================
+
+/-- **T5 vanish**: a ≡ 8 (mod 64) ⟹ 128 ∣ pt a j for all j ≥ 8. -/
+theorem vanish_T5 (a j : Nat) (ha : a % 64 = 8) (hj : 8 ≤ j) :
+    128 ∣ pt a j := by
+  induction hj with
+  | refl =>
+    have hv : (a + 2) % 2 = 0 ∧ (a + 4) % 4 = 0 ∧ (a + 6) % 2 = 0 ∧ (a + 8) % 8 = 0 := by
+      omega
+    obtain ⟨h2a, h4a, h2b, h8a⟩ := hv
+    have hf2a : (2: Nat) ∣ a + 2 := ⟨(a + 2) / 2, by omega⟩
+    have hf4a : (4: Nat) ∣ a + 4 := ⟨(a + 4) / 4, by omega⟩
+    have hf2b : (2: Nat) ∣ a + 6 := ⟨(a + 6) / 2, by omega⟩
+    have hf8a : (8: Nat) ∣ a + 8 := ⟨(a + 8) / 8, by omega⟩
+    have hdvdA : (2: Nat) ∣ pt a 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf2a (⟨a + 1, Nat.mul_comm (a+1) (a+2)⟩)
+    have hdvdB : (4: Nat) ∣ pt (a + 2) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf4a (⟨a + 3, Nat.mul_comm (a+3) (a+4)⟩)
+    have hdvdC : (2: Nat) ∣ pt (a + 4) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf2b (⟨a + 5, Nat.mul_comm (a+5) (a+6)⟩)
+    have hdvdD : (8: Nat) ∣ pt (a + 6) 2 := by
+      rw [pt_two_eq]
+      exact Nat.dvd_trans hf8a (⟨a + 7, Nat.mul_comm (a+7) (a+8)⟩)
+    -- pt a 8 = pt a 2 * (pt (a+2) 2 * (pt (a+4) 2 * pt (a+6) 2))
+    have h8 := pt_split 6 2 a
+    have hi8 : 2 + 6 = 8 := by omega
+    rw [hi8] at h8
+    have h6' := pt_split 4 2 (a + 2)
+    have hi6 : 2 + 4 = 6 := by omega
+    rw [hi6] at h6'
+    have hn2 : a + 2 + 2 = a + 4 := by omega
+    rw [hn2] at h6'
+    have h4' := pt_split 2 2 (a + 4)
+    have hi4 : 2 + 2 = 4 := by omega
+    rw [hi4] at h4'
+    have hn4 : a + 4 + 2 = a + 6 := by omega
+    rw [hn4] at h4'
+    rw [h4'] at h6'
+    rw [h6'] at h8
+    -- 128 = 2^7 = (2^1 * 2^2) * (2^1 * 2^3)
+    have h128 : (128: Nat) = 2 ^ ((1 + 2) + (1 + 3)) := rfl
+    have hAB : (2: Nat) ^ (1 + 2) ∣ pt a 2 * pt (a + 2) 2 := dvd_pow2_prod 1 2 _ _ hdvdA hdvdB
+    have hCD : (2: Nat) ^ (1 + 3) ∣ pt (a + 4) 2 * pt (a + 6) 2 := dvd_pow2_prod 1 3 _ _ hdvdC hdvdD
+    have hmain := dvd_pow2_prod (1 + 2) (1 + 3) _ _ hAB hCD
+    rw [h128, h8, ← Nat.mul_assoc (pt a 2) (pt (a + 2) 2) (pt (a + 4) 2 * pt (a + 6) 2)]
+    exact hmain
+  | @step j' hle ih =>
+    obtain ⟨k, hk⟩ := ih
+    have hstep : pt a (j' + 1) = pt a j' * (a + j' + 1) := rfl
+    rw [hstep, hk]
+    exact ⟨k * (a + j' + 1), Nat.mul_assoc _ _ _⟩
+
+theorem obs_core_T5 : ∀ (B : List Nat) (a : Nat), (ha : a % 64 = 8) → NoDup B → (∀ i ∈ B, a < i) →
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 128 = (1 + iteSum7 a (a % 128) B) % 128
+  | [], a, hv, _, _ => by simp [iteSum7_nil]
+  | i :: B', a, hv, hB, hgt => by
+    obtain ⟨hin, hB'⟩ := hB
+    have hai : a < i := hgt i (by simp)
+    have ih := obs_core_T5 B' a hv hB' (fun x hx => hgt x (by simp [hx]))
+    have hsc : ((i :: B').map (fun x => pt a (x - a))).sum
+        = pt a (i - a) + ((B').map (fun x => pt a (x - a))).sum := rfl
+    have hcase : i - a = 1 ∨ i - a = 2 ∨ i - a = 3 ∨ i - a = 4 ∨ i - a = 5 ∨ i - a = 6 ∨ i - a = 7 ∨ i - a ≥ 8 := by omega
+    cases hcase with
+    | inl h1 =>
+      have hi : i = a + 1 := by omega
+      have hnot : ¬(a + 1 ∈ B') := by
+        intro hm
+        apply hin
+        rw [hi]
+        exact hm
+      rw [hi] at hsc ⊢
+      have hstep := iteSum7_hit1 a (a % 128) B' hnot
+      rw [hsc, hstep]
+      have hia : a + 1 - a = 1 := by omega
+      rw [hia]
+      have hpt : pt a 1 % 128 = pt (a % 128) 1 % 128 := pt_mod 1 a 128
+      omega
+    | inr hcase_r =>
+      cases hcase_r with
+      | inl hj =>
+        have hi : i = a + 2 := by omega
+        have hnot : ¬(a + 2 ∈ B') := by
+          intro hm
+          apply hin
+          rw [hi]
+          exact hm
+        rw [hi] at hsc ⊢
+        have hstep := iteSum7_hit2 a (a % 128) B' hnot
+        rw [hsc, hstep]
+        have hia : a + 2 - a = 2 := by omega
+        rw [hia]
+        have hpt : pt a 2 % 128 = pt (a % 128) 2 % 128 := pt_mod 2 a 128
+        omega
+      | inr hr2 =>
+        cases hr2 with
+      | inl hj =>
+        have hi : i = a + 3 := by omega
+        have hnot : ¬(a + 3 ∈ B') := by
+          intro hm
+          apply hin
+          rw [hi]
+          exact hm
+        rw [hi] at hsc ⊢
+        have hstep := iteSum7_hit3 a (a % 128) B' hnot
+        rw [hsc, hstep]
+        have hia : a + 3 - a = 3 := by omega
+        rw [hia]
+        have hpt : pt a 3 % 128 = pt (a % 128) 3 % 128 := pt_mod 3 a 128
+        omega
+      | inr hr3 =>
+        cases hr3 with
+      | inl hj =>
+        have hi : i = a + 4 := by omega
+        have hnot : ¬(a + 4 ∈ B') := by
+          intro hm
+          apply hin
+          rw [hi]
+          exact hm
+        rw [hi] at hsc ⊢
+        have hstep := iteSum7_hit4 a (a % 128) B' hnot
+        rw [hsc, hstep]
+        have hia : a + 4 - a = 4 := by omega
+        rw [hia]
+        have hpt : pt a 4 % 128 = pt (a % 128) 4 % 128 := pt_mod 4 a 128
+        omega
+      | inr hr4 =>
+        cases hr4 with
+      | inl hj =>
+        have hi : i = a + 5 := by omega
+        have hnot : ¬(a + 5 ∈ B') := by
+          intro hm
+          apply hin
+          rw [hi]
+          exact hm
+        rw [hi] at hsc ⊢
+        have hstep := iteSum7_hit5 a (a % 128) B' hnot
+        rw [hsc, hstep]
+        have hia : a + 5 - a = 5 := by omega
+        rw [hia]
+        have hpt : pt a 5 % 128 = pt (a % 128) 5 % 128 := pt_mod 5 a 128
+        omega
+      | inr hr5 =>
+        cases hr5 with
+      | inl hj =>
+        have hi : i = a + 6 := by omega
+        have hnot : ¬(a + 6 ∈ B') := by
+          intro hm
+          apply hin
+          rw [hi]
+          exact hm
+        rw [hi] at hsc ⊢
+        have hstep := iteSum7_hit6 a (a % 128) B' hnot
+        rw [hsc, hstep]
+        have hia : a + 6 - a = 6 := by omega
+        rw [hia]
+        have hpt : pt a 6 % 128 = pt (a % 128) 6 % 128 := pt_mod 6 a 128
+        omega
+      | inr hr6 =>
+        cases hr6 with
+        | inl hj =>
+          have hi : i = a + 7 := by omega
+          have hnot : ¬(a + 7 ∈ B') := by
+            intro hm
+            apply hin
+            rw [hi]
+            exact hm
+          rw [hi] at hsc ⊢
+          have hstep := iteSum7_hit7 a (a % 128) B' hnot
+          rw [hsc, hstep]
+          have hia : a + 7 - a = 7 := by omega
+          rw [hia]
+          have hpt : pt a 7 % 128 = pt (a % 128) 7 % 128 := pt_mod 7 a 128
+          omega
+        | inr hbig =>
+        have hbig2 : i - a ≥ 8 := by omega
+        have hdvd := vanish_T5 a (i - a) hv hbig2
+        have hz : pt a (i - a) % 128 = 0 := Nat.mod_eq_zero_of_dvd hdvd
+        have hmiss := iteSum7_miss a (a % 128) i B' (by intro j' hj'; simp at hj'; omega)
+        rw [hsc, hmiss]
+        omega
+
+theorem leaf_T5_8 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 8 1 (b1) + (sl 8 2 (b2) + (sl 8 3 (b3) + (sl 8 4 (b4) + (sl 8 5 (b5) + (sl 8 6 (b6) + (sl 8 7 (b7) + 0)))))))) % 128 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+theorem leaf_T5_72 : ∀ (b1 b2 b3 b4 b5 b6 b7 : Bool),
+    (1 + (sl 72 1 (b1) + (sl 72 2 (b2) + (sl 72 3 (b3) + (sl 72 4 (b4) + (sl 72 5 (b5) + (sl 72 6 (b6) + (sl 72 7 (b7) + 0)))))))) % 128 ≠ 0 := by
+  intro b1 b2 b3 b4 b5 b6 b7
+  cases b1 <;> cases b2 <;> cases b3 <;> cases b4 <;> cases b5 <;> cases b6 <;> cases b7 <;> decide
+
+theorem obs_T5 (a : Nat) (ha : a % 64 = 8) (B : List Nat) (hB : NoDup B) (hgt : ∀ i ∈ B, a < i) :
+    (1 + (B.map (fun i => pt a (i - a))).sum) % 128 ≠ 0 := by
+  have hcore := obs_core_T5 B a ha hB hgt
+  rw [hcore]
+  have hr : a % 128 = 8 ∨ a % 128 = 72 := by
+    have h1 := mod128_mod64 a
+    omega
+  cases hr with
+  | inl h => rw [h]; exact leaf_T5_8 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+  | inr h => rw [h]; exact leaf_T5_72 (a + 1 ∈ B) (a + 2 ∈ B) (a + 3 ∈ B) (a + 4 ∈ B) (a + 5 ∈ B) (a + 6 ∈ B) (a + 7 ∈ B)
+
+theorem wit_T5 (a : Nat) (ha : a % 64 = 8) :
+    (1 + coinsum a [1, 3, 4, 6]) % 64 = 0 := by
+  rw [Nat.add_mod, coinsum_mod, ha]
+  decide
+
+/-- **ERDŐS #404, THEOREM T5 (upper bound).** a ≡ 8 (mod 64) ⟹
+`v₂(a! + Σ) ≤ v₂(a!) + 6` for every valid B. -/
+theorem f404_T5_bound (a : Nat) (ha : a % 64 = 8) (B : List Nat) (hB : NoDup B)
+    (hgt : ∀ i ∈ B, a < i) :
+    v2 (fact a + (B.map fact).sum) ≤ v2 (fact a) + 6 := by
+  have hsf := sum_fact_eq B a hgt
+  have hcs := sum_pt_coinsum a B
+  have hobs := obs_T5 a ha B hB hgt
+  rw [hcs] at hobs
+  have hp : (2: Nat) ^ (6 + 1) = 128 := rfl
+  have hmod : (1 + coinsum a (B.map (fun i => i - a))) % (2: Nat) ^ (6 + 1) ≠ 0 := by
+    rw [hp]
+    exact hobs
+  have hle := v2_le_of_mod (1 + coinsum a (B.map (fun i => i - a))) (by omega) 6 hmod
+  rw [hsf]
+  have hdistr : fact a + fact a * coinsum a (B.map (fun i => i - a))
+      = fact a * (1 + coinsum a (B.map (fun i => i - a))) := by
+    rw [Nat.mul_add, Nat.mul_one]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a (B.map (fun i => i - a)) + 1) (fact a)
+      (1 + coinsum a (B.map (fun i => i - a))) (by omega) (fact_pos a) (by omega)]
+  omega
+
+/-- **ERDŐS #404, THEOREM T5 (exactness).** Witness [a+1, a+3, a+4, a+6] attains
+`v₂(a!) + 6` exactly, for every a ≡ 8 (mod 64). -/
+theorem f404_T5_exact (a : Nat) (ha : a % 64 = 8) :
+    v2 (fact a + (fact (a + 1) + (fact (a + 3) + (fact (a + 4) + fact (a + 6))))) = v2 (fact a) + 6 := by
+  have h1 : fact (a + 1) = fact a * pt a 1 := fact_pt 1 a
+  have h3 : fact (a + 3) = fact a * pt a 3 := fact_pt 3 a
+  have h4 : fact (a + 4) = fact a * pt a 4 := fact_pt 4 a
+  have h6 : fact (a + 6) = fact a * pt a 6 := fact_pt 6 a
+  have hc : coinsum a [1, 3, 4, 6] = pt a 1 + (pt a 3 + (pt a 4 + (pt a 6 + 0))) := rfl
+  rw [h1, h3, h4, h6]
+  have hdistr : fact a + (fact a * pt a 1 + (fact a * pt a 3 + (fact a * pt a 4 + fact a * pt a 6)))
+      = fact a * (1 + coinsum a [1, 3, 4, 6]) := by
+    rw [hc, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_add, Nat.mul_one, Nat.add_zero]
+  rw [hdistr,
+    v2_mul (fact a + coinsum a [1, 3, 4, 6] + 1) (fact a) (1 + coinsum a [1, 3, 4, 6])
+      (by omega) (fact_pos a) (by omega)]
+  have hw := wit_T5 a ha
+  have hp6 : (2: Nat) ^ 6 = 64 := rfl
+  have hge : 6 ≤ v2 (1 + coinsum a [1, 3, 4, 6]) :=
+    v2_ge_of_mod (1 + coinsum a [1, 3, 4, 6]) (by omega) 6 (by rw [hp6]; exact hw)
+  have hB : NoDup [a + 1, a + 3, a + 4, a + 6] := by
+    simp [NoDup]
+  have hgt : ∀ i ∈ [a + 1, a + 3, a + 4, a + 6], a < i := by
+    intro i hi; simp at hi; omega
+  have hobs := obs_T5 a ha [a + 1, a + 3, a + 4, a + 6] hB hgt
+  have hcs := sum_pt_coinsum a [a + 1, a + 3, a + 4, a + 6]
+  rw [hcs] at hobs
+  have hp7 : (2: Nat) ^ 7 = 128 := rfl
+  have hle : v2 (1 + coinsum a [1, 3, 4, 6]) ≤ 6 := by
+    have hmod : (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 6]))
+        % (2: Nat) ^ (6 + 1) ≠ 0 := by
+      rw [hp7]
+      exact hobs
+    have htmp := v2_le_of_mod
+      (1 + coinsum a (List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 6])) (by omega) 6 hmod
+    have hoff : List.map (fun i => i - a) [a + 1, a + 3, a + 4, a + 6] = [1, 3, 4, 6] := by
+      have e1 : a + 1 - a = 1 := by omega
+      have e3 : a + 3 - a = 3 := by omega
+      have e4 : a + 4 - a = 4 := by omega
+      have e6 : a + 6 - a = 6 := by omega
+      simp [List.map, e1, e3, e4, e6]
+    rw [hoff] at htmp
+    exact htmp
+  omega
+
+-- T5 exact values v2(a!) + 6 (a = 8, 72, 136, 200; witness 1,3,4,6; expect 13, 76, 140, 203)
+#eval v2 (fact 8 + (fact 9 + (fact 11 + (fact 12 + fact 14))))
+#eval v2 (fact 72 + (fact 73 + (fact 75 + (fact 76 + fact 78))))
+#eval v2 (fact 136 + (fact 137 + (fact 139 + (fact 140 + fact 142))))
+#eval v2 (fact 200 + (fact 201 + (fact 203 + (fact 204 + fact 206))))
+
+#print axioms obs_T5
+#print axioms f404_T5_bound
+#print axioms f404_T5_exact

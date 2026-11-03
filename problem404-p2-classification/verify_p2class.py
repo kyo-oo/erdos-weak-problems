@@ -86,11 +86,20 @@ for a in [32, 96, 160, 224, 288]:
 for a in [48, 112, 176, 240, 304]:
     check(f"T4-48 wit({a})", witness_value(a, [1, 3, 4], 6))
 
+print("=== T5: a ≡ 8 (mod 64) ⟹ g = 6 (uniform, to a=456) ===")
+t5 = [a for a in range(1, 457) if a % 64 == 8]
+for a in t5:
+    g, st = g_value(a, 2, max_bits=2**13)
+    check(f"g({a},2)=6", g == 6 and st == "BOUNDED")
+for a in [8, 72, 136, 200, 264, 328, 392, 456]:
+    check(f"T5 wit({a})", witness_value(a, [1, 3, 4, 6], 6))
+    check(f"T5 obs({a})", obstruction_holds(a, 2, 6))
+
 print("=== Lean receipt cross-checks (v2(a!) + g) ===")
-# f(a,2) = v2(a!) + 3 [T2] / + 6 [T3/T4]; Lean #eval receipts: 6,13,21,39 / 14,29,45 / 37,52
-for a, expect in [(4, 6), (12, 13), (20, 21), (36, 37), (10, 14), (26, 29), (42, 45), (32, 37), (48, 52)]:
+# f(a,2) = v2(a!) + 3 [T2] / + 6 [T3/T4/T5]; Lean #eval receipts: 6,13,21,39 / 14,29,45 / 37,52 / 13,76,140,203
+for a, expect in [(4, 6), (12, 13), (20, 21), (36, 37), (10, 14), (26, 29), (42, 45), (32, 37), (48, 52), (8, 13), (72, 76), (136, 140), (200, 203)]:
     v = vp_fact(a, 2)
-    g = {4:3, 12:3, 20:3, 36:3, 10:6, 26:6, 42:6, 32:6, 48:6}[a]
+    g = {4:3, 12:3, 20:3, 36:3, 10:6, 26:6, 42:6, 32:6, 48:6, 8:6, 72:6, 136:6, 200:6}[a]
     check(f"f({a},2)={expect}", v + g == expect)
 
 print("=== The classification table a ≤ 200 (small-g set) ===")

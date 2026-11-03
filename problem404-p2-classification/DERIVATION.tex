@@ -102,13 +102,33 @@ mod 128 ($\{32, 96\}$ and $\{48, 112\}$); in each, all $128$ sub-sums miss
 $-1$ (decided in the kernel).
 \end{proof}
 
+\begin{theorem}[T5: the $a \equiv 8 \pmod{64}$ family]
+For every $a \equiv 8 \pmod{64}$ the witness $J = \{1,3,4,6\}$ attains
+$g = 6$ exactly; every $J$ misses $-1$ mod 128. Hence
+$f(a,2) = \vtwo(a!) + 6$ exactly on the family.
+\end{theorem}
+
+\begin{proof}
+$\vtwo(a+2) = \vtwo(a+6) = 1$, $\vtwo(a+4) = 2$, $8 \mid a+8$, so
+$2\cdot 4 \cdot 2 \cdot 8 = 128$ divides every $P_j(a)$ with $j \ge 8$:
+the window is the seven coins $P_1, \dots, P_7$. Two residue classes
+mod 128 ($\{8, 72\}$): the window residues are
+$\{9, 90, 94, 104, 72, 112, 16\}$ and $\{73, 26, 30, 104, 72, 112, 16\}$;
+in each, all $128$ sub-sums miss $-1$ (decided in the kernel as two
+boolean leaves). The witness $1 + P_1 + P_3 + P_4 + P_6 \equiv 0
+\pmod{64}$ holds identically on the family (single sub-case mod 64,
+decided; $v_2$ of the factor is exactly 6 since the sum is
+$\equiv 64 \pmod{128}$).
+\end{proof}
+
 \section*{The classification data}
 
 The engine (exact bitset subset-sum DP) certifies:
 \begin{itemize}
 \item family uniformity: $g = 3$ on all $a \equiv 4 \pmod 8$ up to $204$;
 $g = 6$ on all $a \equiv 10 \pmod{16}$ up to $202$; $g = 6$ on all
-$a \equiv 32, 48 \pmod{64}$ up to $304$;
+$a \equiv 32, 48 \pmod{64}$ up to $304$; $g = 6$ on all $a \equiv 8
+\pmod{64}$ up to $456$ (T5, new);
 \item the small-$g$ table for all $a \le 200$ (e.g.\ $g(22,2) = 11$,
 $g(80,2) = 15$, $g(120,2) = 9$);
 \item the \textbf{deep survivors} at modulus $2^{28}$:

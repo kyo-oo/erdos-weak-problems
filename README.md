@@ -25,15 +25,22 @@ Extracted verbatim from the research monorepo
 | **#6** | **261 (continuum, real-x)** | **The Tower**: `theorem erdos261_continuum` — an explicit injection $\sigma \mapsto F_\sigma$ from $2^{\aleph_0}$ branches to representation-sets of a single explicit irrational $x^* = \sum m_k/2^{m_k} \approx 0.7553714812$, built on the **infinite exact-halving family** $m_k = 2^{k+2} - k - 3$ (1, 4, 11, 26, 57, 120, 247, …) whose regions satisfy $\{m_k\} \equiv \{m_k+1..m_k+k+1\}$ exactly. Answer: YES, $2^{\aleph_0}$ representations exist. | `bulldoze/problem261-continuum-tower/Erdos261Tower.lean` | `propext, Quot.sound` |
 | **#7** | **404 (full problem)** | **The p-adic reduction** (Round 3): `erdos404_split` — every sum factors $a! + \sum_B i! = a!\,(1 + \sum_B P_i)$, so $f(a,p) = v_p(a!) + g(a,p)$; compactness: $g = \infty \iff$ an exact $\mathbb{Z}_p$ zero-sum $\sum_{i \in Z} i! = 0$ $\iff$ the infinite chain of sub-question 3 exists. **The $p \mid a{+}1$ class completely solved** (`erdos404_odd_a`: $f(a,2) = v_2(a!)$ for all odd $a$). **$f(4,2) = 6$ exactly** (`erdos404_f42`: witness $4!+5!+7! = 5184$, the mod-16 obstruction). Block identities $[u,u{+}1] = u!(u{+}2)$, $[u,u{+}2] = u!(u{+}2)^2$. | `problem404-full/PadicReduction.lean` | CI |
 | **#8** | **261 (Q3 bridge)** | **The rational-x bridge** (Round 3): `bl_family` — the representation-family identity $\sum_{j=1}^m (n+j) 2^{m-j} = n 2^m$ for $n = 2^{m+1}-m-2$ (Borwein–Loring family, independently re-derived, formalized) + the engines `jpow_sum_eq`, `pow_sum_eq` + toggle receipts; **new theorem (DERIVATION.tex): bounded-room all-n $\Rightarrow$ a rational $x$ with $2^{\aleph_0}$ representations.** | `problem261-q3bridge/BlockIdentity.lean` | CI |
+| **#9** | **404 (sub-Q3 program)** | **The gadget-supply engine**: lift law ($v_2 x = v_2 y = V \Rightarrow v_2(x{+}y) \ge V{+}1$), pair law $P_u + P_{u+1} = P_u(u{+}2)$ (ALL $u \ge 3$), triple law (perfect square), dead-end law (greedy traps at $V{=}4$), certified chain $g(2,2) \ge 23$, reachable-set DP $-1 \in R_k\ \forall k \le 24$. | `problem404-gadget-supply/GadgetSupply.lean` | `propext, Quot.sound` |
+| **#10** | **261 (funnels)** | **The funnel/coalescence discovery**: the absolute walk state space $\{(N,v)\}$ carries ONE map $\varphi(N,v) = (N{+}1, 2v \bmod N)$; all walks are orbits and they COALESCE (64% die at $N{=}12231$); `death_fuel_mono` = the coalescence certificate; greedy-room census: room UNBOUNDED (max 152125 at $n{=}3817$). | `problem261-funnels/FunnelStructure.lean` | CI |
+| **#11** | **404 (p=2 classification I)** | **Obstruction families T2/T3/T4**: $a \equiv 4 \pmod 8 \Rightarrow f = v_2(a!) + 3$; $a \equiv 10 \pmod{16} \Rightarrow f = v_2(a!) + 6$; $a \equiv 32/48 \pmod{64} \Rightarrow f = v_2(a!) + 6$ — for ALL $a$ in the family, uniform modular obstructions (decided leaves), explicit witnesses. | `problem404-p2-classification/ObstructionFamilies.lean` | `propext, (Classical.choice,) Quot.sound` |
+| **#12** | **404 (p=2 classification II)** | **Theorem T5**: $a \equiv 8 \pmod{64} \Rightarrow f(a,2) = v_2(a!) + 6$ EXACTLY — `f404_T5_bound` + `f404_T5_exact`: vanish lemma ($128 \mid P_j$, $j \ge 8$), 7-coin mod-128 obstruction (leaf residues $\{8, 72\}$), witness $\{a{+}1, a{+}3, a{+}4, a{+}6\}$; receipts 13/76/140/203; battery 172/172. Found by the uncovered-class mining scan (7/7 members uniform, zero deep). | `problem404-p2-classification/ObstructionFamilies.lean` (§10) | `propext, Classical.choice, Quot.sound` |
 
-**Honest accounting (Round 3 audit):** the complete problems are NOT yet
-fully solved.  #404: the $p \mid a{+}1$ class and $f(4,2)$ are completely
-answered (Kills #7 theorems B/C), the reduction (Theorem A) is complete,
-and the classification of the remaining $(a,p)$ is the live front
-(Conjecture D).  #261: sub-question 1 is known ([BoLo90], formalized as
-Kill #8's `bl_family`); sub-questions 2 (all $n$) and 3 (rational $x$) are
-the open cores, now connected by the Q3 bridge.  #271: the complete problem
-includes $A(4)$ (a 45-year open case); Kill #3 verifies one known-family
+**Honest accounting (session 015 audit):** the complete problems are NOT yet
+fully solved.  #404: the reduction (Theorem A) is complete; for $p = 2$, five
+infinite classes are classified exactly (odd $a$; $a \equiv 4 \bmod 8$;
+$a \equiv 10 \bmod 16$; $a \equiv 32/48 \bmod 64$; $a \equiv 8 \bmod 64$ —
+T5); the open cores are the 22 deep survivors at $2^{28}$, the bounded
+staircases, all odd $p$, and sub-question 3 (the infinite chain — Conjecture
+D).  #261: sub-question 1 is known ([BoLo90], formalized as Kill #8's
+`bl_family`); sub-questions 2 (all $n$ — certified to $2\times10^5$) and 3
+(rational $x$ — periodic towers DEAD, carry loophole isolated) are the open
+cores, connected by the Q3 bridge.  #271: the complete problem
+includes $A(4)$ (the open core); Kill #3 verifies one known-family
 member.  **#406 itself is
 the benchmark anchor** — its pattern frontier is killed, the core conjecture
 remains the campaign's summit.
@@ -67,5 +74,5 @@ this workflow is green on GitHub.
 3. **#261 rational-x** — the Q3 bridge (bounded-room all-$n$ $\Rightarrow$
    rational $x$ with $2^{\aleph_0}$ representations) + walk termination.
 4. **#260** — the sibling dyadic irrationality problem, behind the walk wall.
-5. **#271 / A(4)** — the 45-year Type-2 Stanley frontier (research-grade).
+5. **#271 / A(4)** — the Type-2 Stanley frontier (research-grade).
 6. **#406 GAP-A2** — the anchor summit.
