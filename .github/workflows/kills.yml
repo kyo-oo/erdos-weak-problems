@@ -207,12 +207,22 @@ jobs:
           python3 problem261-funnels/funnels.py
           python3 problem404-p2-classification/verify_p2class.py
           python3 problem404-q3-chain/verify_f22.py
-      - name: Kernel 10 (Erdos 404 ExactF22 — f(2,2) = 254)
+      - name: Kernel 10 (Erdos 404 ExactF22 — f(2,2) = 254, UNCONDITIONAL)
         run: |
-          lake env lean problem404-q3-chain/ExactF22.lean 2>&1 | tee kernel10.log
+          set -euo pipefail
+          # §7 THE MODULE CHAIN — every module its own lean process (memory walls),
+          # olean ladder in dependency order. ~5 min wall.
+          mkdir -p oleans && export LEAN_PATH="$PWD/oleans"
+          : > kernel10.log
+          for M in ExactF22 F22DataS F22DataC F22DataD1 F22DataD2 F22Chain F22SweepA F22SweepB F22Coins F22FM0 F22FM1 F22DD0 F22DD1 F22DD2 F22DD3 F22DD4 F22DD5 F22DD6 F22DD7 F22DD8 F22DD9 F22DDm0 F22DDm1 F22DDm2 F22DDm3 F22DDm4 F22DDm5 F22DDm6 F22Asm0 F22Asm1 F22AllA F22AllB F22AllC F22AllD F22AllE F22AllF F22AllG F22AllH F22All; do
+            echo "=== $M ===" >> kernel10.log
+            lake env lean -o oleans/$M.olean problem404-q3-chain/$M.lean 2>&1 | tee -a kernel10.log
+          done
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel10.log
           grep -F "254" kernel10.log | head -3
           grep -F "118" kernel10.log
           grep -F "true" kernel10.log | head -3
+          grep -F "'obstructionCheck_true' depends on axioms: [propext, Quot.sound]" kernel10.log
+          grep -F "'erdos404_f22_final' depends on axioms: [propext, Classical.choice, Quot.sound]" kernel10.log
 
 

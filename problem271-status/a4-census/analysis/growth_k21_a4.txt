@@ -1,0 +1,50 @@
+c_21 = 710129
+GROWTHROW 21 710129 2.0443 0.6509 0.5840 -15389
+
+cumulative alpha_k = ln c_k/(k ln3):
+  k=10  0.6211
+  k=11  0.6198
+  k=12  0.6124
+  k=13  0.6021
+  k=14  0.5926
+  k=15  0.5985
+  k=16  0.6005
+  k=17  0.5940
+  k=18  0.5861
+  k=19  0.5790
+  k=20  0.5806
+  k=21  0.5840
+
+same-phase k≡1 (mod 5): a_11=0.6198 -> a_16=0.6005 -> a_21=0.5840
+  declines: -0.0193, -0.0165   | gap to log3(2)=0.6309: 0.0111, 0.0305, 0.0469
+
+same-phase k≡0 (mod 5): a_10=0.6211 -> a_15=0.5985 -> a_20=0.5806
+  declines: -0.0226, -0.0179   | gap to log3(2)=0.6309: 0.0098, 0.0324, 0.0503
+
+5-scale marginal exponents ln(c_k/c_{k-5})/(5 ln3):
+  k=5..9: 0.5864
+  k=10..14: 0.5370
+  k=15..19: 0.5406
+  k=12..16: 0.5580
+  k=17..21: 0.5313
+
+Type-1 normalizer c_k/2^k (Type-1 needs -> const>0; it collapses):
+  1.0391 0.9297 0.8975 0.8740 0.7837 0.6622 0.5550 0.5861 0.5854 0.5020 0.4124 0.3380 0.3313 0.3386
+Type-2 normalizer c_k/(3^(k/2)*sqrt(k)) (Type-2 needs bounded band):
+  1.1611 1.1309 1.1959 1.2823 1.2711 1.1916 1.1112 1.3091 1.4619 1.4042 1.2945 1.1924 1.3154 1.5151
+
+LSQ fits of ln c_k = lnC + a*(k ln3) + b*ln k:
+  fixed b=1/2, k in [8,21]: a=0.5129 C=1.0335 R2=0.99904
+  fixed b=1/2, k in [10,21]: a=0.5115 C=1.0612 R2=0.99851
+  fixed b=1/2, k in [13,21]: a=0.5176 C=0.9396 R2=0.99689
+  free (a,b),  k in [8,21]: a=0.5113 b=0.5242 C=0.9947 R2=0.99916
+  free (a,b),  k in [10,21]: a=0.5315 b=0.1689 C=1.8527 R2=0.99869
+
+Type-2 fit (b=1/2, k in [8,21]): C=1.0335 a=0.5129
+  predicted c_22 = 1.172e+06
+  predicted c_25 = 6.775e+06
+Type-1 frozen at k=21 (c_k/2^k=0.3386): c_22=1.420e+06 c_25=1.136e+07
+same-phase (k≡1) declines predicted by this fit: a16-a11=-0.0212 a21-a16=-0.0133 a26-a21=-0.0092
+
+block split scale 21: b0=347370 b1=127627 b2=235132 (b1/c20=0.3674 b2/c20=0.6769)
+leading-digit-2 fraction of 21-digit members: 0.6482 (phase law k≡1: peak; k=16 value was 0.726)

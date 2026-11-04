@@ -1,0 +1,13 @@
+window 0 [0,1162261467): wmem=177194 marks=13762802366 aps=0 unblocked=0
+window 1 [1162261467,2324522934): wmem=112938 marks=12388814336 aps=0 unblocked=0
+window 2 [2324522934,3486784401): wmem=57238 marks=16136823457 aps=0 unblocked=0
+PARTIAL data/a4_members_3k21.txt t=4 N=10460353203 windows 0..2 of 0..8: members=710129 marks=42288440159 aps=0 unblocked=0 (clean so far)
+window 3 [3486784401,4649045868): wmem=124542 marks=10733174419 aps=0 unblocked=0
+window 4 [4649045868,5811307335): wmem=3039 marks=15978631953 aps=0 unblocked=0
+PARTIAL data/a4_members_3k21.txt t=4 N=10460353203 windows 3..4 of 0..8: members=710129 marks=26711806372 aps=0 unblocked=0 (clean so far)
+window 5 [5811307335,6973568802): wmem=46 marks=22071619387 aps=0 unblocked=0
+window 6 [6973568802,8135830269): wmem=18200 marks=15945942143 aps=0 unblocked=0
+PARTIAL data/a4_members_3k21.txt t=4 N=10460353203 windows 5..6 of 0..8: members=710129 marks=38017561530 aps=0 unblocked=0 (clean so far)
+window 7 [8135830269,9298091736): wmem=126401 marks=10609753826 aps=0 unblocked=0
+window 8 [9298091736,10460353203): wmem=90531 marks=10999574820 aps=0 unblocked=0
+PARTIAL data/a4_members_3k21.txt t=4 N=10460353203 windows 7..8 of 0..8: members=710129 marks=21609328646 aps=0 unblocked=0 (clean so far)

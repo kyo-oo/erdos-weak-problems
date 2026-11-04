@@ -1,0 +1,3 @@
+S(0,4)  N=531441  |A|=3210  marks=2875283  time=0.02s
+counts: 1 1 4 9 19 37 79 147 266 476 919 1790 3210   (k=0..12)
+naive-crosscheck to 531441: PASS (0 mismatches)

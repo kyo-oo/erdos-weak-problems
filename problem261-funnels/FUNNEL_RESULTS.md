@@ -324,3 +324,180 @@ unresolved-at-cap walk, no novel deep D, no nontermination-adjacent signal.
 - Standing watch: any D > 1,449,322,159 or any unresolved-at-cap walk is the
   nontermination-adjacent alarm — none seen in 103,969 total death records
   (43,969 prior + 60,000 this session).
+
+---
+
+# FRONTIER MARCH RE-RUN + EXTENSION (session 021, Agent Q1) — 19 blocks, [3260201, 4400200]
+
+**This session re-runs and extends the wiped unpushed session** (a prior agent
+pushed 3,260,200 → 3,740,200 in 8 blocks / 480,000 walks, 17/17 deep
+cross-checks, record-D unchanged — all lost in a sandbox wipe, never pushed).
+Re-derivation here starts from the CI-green pushed frontier n = 3,260,200 with
+fresh binaries and fresh receipts: blocks **e1–e8** reproduce the wiped result
+(8 × 60,000 walks → frontier 3,740,200), blocks **e9–e19** extend it a further
++660,000 to **n = 4,400,200**. Total this session: **1,140,000 consecutive n,
+all terminating**.
+
+Protocol = §6 / session-020 exactly, in 60,000-n blocks (6 chunks of 10,000):
+`war261b batch <lo> <hi> 2000000000 100000000 10 20 23 10000 1000000000
+<deaths> <merges> <snap> <certin> <certout>`, `nice -n 10`, hard `timeout 900`,
+**two blocks at a time** on the 2-core box (peak RSS 113–115 MB per job, ≈228 MB
+combined ≪ 800 MB cap; no swap configured). Cert chain rotated per wave:
+`cert_march.txt` 8,282 → **34,499 lines / 1,728 distinct** states. Receipts:
+`run261/e{1..19}_*`, `run261/cert_e{1..19}.txt`, logs `e{1..19}_log.txt`,
+wrapper `run261/run_block.sh`.
+
+**Engine-reconstruction gate (before the march):** binaries were absent (wipe);
+rebuilt with `gcc -O3 -march=native -funroll-loops`. The fresh `war261b`
+reproduced the committed fr run **bit-for-bit** — deaths file identical incl.
+d/c/w modes (200 lines), cert emission identical to `cert_frontier.txt`,
+7.4 s, totals 1,960,925,658 steps (`run261/valq_*`); plus `war261b sweep` on
+n = 3240203/3240204/3260200 and engine-A `war261 verify` on n = 3260200 all
+match the committed m3/fr data exactly.
+
+## Per-block results (all: unres=0, unlogged=0, exit 0, 0 even D, 0 D≤n, 0 FATAL)
+
+| block | n-range | walks | d / c / w | steps marched | re-walk | wall | RSS | heads | alias |
+|---|---|---|---|---|---|---|---|---|---|
+| e1 | [3260201, 3320200] | 60000/60000 | 5152 / 13405 / 41443 | 5.334×10¹⁰ | 1.446×10⁹ | 52.6 s | ~113 MB* | 43 | 4813 |
+| e2 | [3320201, 3380200] | 60000/60000 | 4085 / 14449 / 41466 | 5.023×10¹⁰ | 1.446×10⁹ | 67.5 s | 113.0 MB | 39 | 4605 |
+| e3 | [3380201, 3440200] | 60000/60000 | 2776 / 15982 / 41242 | 4.778×10¹⁰ | 1.446×10⁹ | 65.4 s | 113.2 MB | 40 | 5787 |
+| e4 | [3440201, 3500200] | 60000/60000 | 2836 / 15334 / 41830 | 4.423×10¹⁰ | 1.446×10⁹ | 60.0 s | 113.2 MB | 44 | 5757 |
+| e5 | [3500201, 3560200] | 60000/60000 | 2394 / 17647 / 39959 | 4.072×10¹⁰ | 1.446×10⁹ | 56.4 s | 113.4 MB | 34 | 5680 |
+| e6 | [3560201, 3620200] | 60000/60000 | 2498 / 18035 / 39467 | 3.715×10¹⁰ | 1.446×10⁹ | 68.0 s | 113.2 MB | 45 | 5647 |
+| e7 | [3620201, 3680200] | 60000/60000 | 1745 / 19000 / 39255 | 3.390×10¹⁰ | 1.446×10⁹ | 63.4 s | 114.2 MB | 37 | 5908 |
+| e8 | [3680201, 3740200] | 60000/60000 | 1136 / 16606 / 42258 | 3.054×10¹⁰ | 1.446×10⁹ | 63.7 s | 113.2 MB | 49 | 5692 |
+| e9 | [3740201, 3800200] | 60000/60000 | 1704 / 13835 / 44461 | 2.687×10¹⁰ | 1.446×10⁹ | 60.6 s | 113.2 MB | 38 | 5870 |
+| e10 | [3800201, 3860200] | 60000/60000 | 1651 / 15037 / 43312 | 2.332×10¹⁰ | 1.446×10⁹ | 51.7 s | 113.1 MB | 36 | 5618 |
+| e11 | [3860201, 3920200] | 60000/60000 | 1359 / 13221 / 45420 | 1.982×10¹⁰ | 1.445×10⁹ | 48.0 s | 113.2 MB | 43 | 5655 |
+| e12 | [3920201, 3980200] | 60000/60000 | 1039 / 10643 / 48318 | 1.631×10¹⁰ | 1.445×10⁹ | 39.6 s | 113.3 MB | 41 | 5423 |
+| e13 | [3980201, 4040200] | 60000/60000 | 438 / 7190 / 52372 | 1.285×10¹⁰ | 1.445×10⁹ | 35.9 s | 113.2 MB | 47 | 5604 |
+| e14 | [4040201, 4100200] | 60000/60000 | 197 / 8278 / 51525 | 0.937×10¹⁰ | 1.445×10⁹ | 26.7 s | 113.0 MB | 47 | 5781 |
+| e15 | [4100201, 4160200] | 60000/60000 | 783 / 4192 / 55025 | 0.605×10¹⁰ | 1.445×10⁹ | 22.3 s | 112.8 MB | 45 | 5281 |
+| e16 | [4160201, 4220200] | 60000/60000 | 7695 / 11226 / 41079 | 3.053×10¹⁰ | 1.445×10⁹ | 69.1 s | 113.6 MB | 41 | 5326 |
+| e17 | [4220201, 4280200] | 60000/60000 | 13406 / 16832 / 29762 | 5.684×10¹⁰ | 1.445×10⁹ | 98.4 s | 113.2 MB | 40 | 5447 |
+| e18 | [4280201, 4340200] | 60000/60000 | 11398 / 18842 / 29760 | 5.437×10¹⁰ | 1.445×10⁹ | 107.9 s | 114.5 MB | 42 | 5556 |
+| e19 | [4340201, 4400200] | 60000/60000 | 10487 / 20459 / 29054 | 5.147×10¹⁰ | 1.445×10⁹ | 108.2 s | 113.4 MB | 30 | 5481 |
+
+\* e1 predates an RSS-sampler fix (measured the `timeout` wrapper, not the
+engine); e2–e19 measured 112.8–114.5 MB, e1 has the same allocation profile.
+e1 ran solo; e2–e19 walls are under 2-way block sharing (2 cores).
+
+March total: **1,140,000/1,140,000 terminate** — 645,680,934,127 walk steps
+marched + 27,464,917,164 re-walk steps (19 trunk emissions, one per block,
+each internally re-verified by `emit_walk_certs`), 1,165.4 s summed engine
+time / ≈639 s wall (≈1,785 n/s wall, ≈978 n/s engine-summed). Contiguity
+machine-checked: the concatenated deaths files (1,140,000 lines) contain
+exactly n = 3260201…4400200 once each, zero gaps/dups (sorted awk pass).
+Global invariants over all 1,140,000 death records: **D odd, D > n — 0
+violations**. Mode census: 72,779 d / 270,213 c / 797,008 w.
+
+## Deep cross-checks: 21/21 PASS, zero nontermination signals
+
+- 19 stratified **no-table `war261b sweep`** direct walks (one per block,
+  rotating position): all match the batch death moduli exactly — n = 3260201,
+  3340200, 3410201 (→5061761), 3470200 (→7466441), 3530201, 3590200 (→5061761),
+  3650201, 3710200, 3770201, 3800201, 3890200, 3950201, 4010200 (→5061761),
+  4070201, 4130200 (→5061761), 4190201 (→7466441), 4250200, 4310201, 4400200
+  (→**5079041**, the shadow-era head) — all others → 1449322159.
+- 2 independent **engine-A** (`war261 verify`) confirms: n = 3800201 →
+  D = 1449322159 (steps 1,445,521,957 = e10's re-walk receipt), n = 4400200 →
+  D = 5079041 (678,840 steps).
+- **Unresolved-at-cap walks: 0 in all 19 blocks** — the 2×10⁹-step deep
+  verifier was never needed; no novel deep D, no nontermination-adjacent
+  signal of any kind.
+
+## Record death modulus: UNCHANGED — and the ALIGNMENT-SHADOW regime at n ≈ 4.19×10⁶
+
+**Max D over all 1,140,000 walks = 1,449,322,159** (unchanged since 3.0×10⁶;
+deepest single walk this session: the n = 3260201 trunk, 1,446,061,957 steps;
+max room 1,446,061,957 @ n=3260201 — below the campaign max 1,446,122,155
+@ n=3200003, as room shrinks ~linearly with n; median room 1,445,039,237).
+
+**New phenomenon (first seen this session; a predictable consequence of F4's
+structure):** at **n = 4,194,303 = 4·2²⁰−1** the first 2²⁰-aligned checkpoint
+after start jumps 4,194,304 → 5,242,880. Every head with **D ≤ 5,242,880**
+goes *sub-grid*: its new basin members have **no probe point before death**
+→ no walker-table merge, no cert hit → they all die **'d'**, each walking
+solo to its funnel. Effects, all visible in the table:
+- 'd' share jumped from 0.3–8.6% (e1–e15, trending down to ~1% by e13–e15) to
+  **12.8 / 22.3 / 19.0 / 17.5%** (e16–e19); block cost rose from the 0.605×10¹⁰ cheap peak (e15) back to
+  5.1–5.7×10¹⁰ steps (the ~10⁵ extra pre-probe steps per walk, plus full-cost
+  solo marches through mid-shallow basins).
+- The **5061761 mega-funnel is now sub-grid** (e.g. 7,290 solo 'd' walks in
+  e17) and simultaneously fades as its basin closes at n = 5,061,760:
+  14,365 walks/block (e1) → 5,333 (e19).
+- Deep basins unaffected: giant share stable 48.5→56.5% (53–57% after e2);
+  **7466441 overtook 5061761 permanently in e16** (13.0→26.1%, 15631 walks in
+  e19 — now the clear #2).
+- Merge histogram (104,931 events): **4194304: 87,716 (83.6%), 5242880:
+  17,091 (16.3%)**, tail 124 (7340032: 26; 6291456, 9437184, 11534336, and
+  the giant junction 303038464: 19 each — exactly one new independent trunk
+  entry per block; 16777216, 10485760: 11 each). F4's front-loaded
+  coalescence holds; the first-checkpoint grid simply moved one period up.
+
+## Head hierarchy across the march
+
+| block | 1449322159 | 5061761 | 7466441 | top-3 | biggest tail head |
+|---|---|---|---|---|---|
+| e1 | 48.5% | 23.9% | 19.0% | 91.4% | 4021505: 3.0% |
+| e2 | 52.5% | 24.8% | 15.9% | 93.2% | 4021505 |
+| e3 | 60.6% | 21.8% | 13.0% | 95.4% | 4021505 |
+| e4 | 57.7% | 17.2% | 20.4% | 95.3% | 4021505 |
+| e5 | 56.7% | 19.2% | 20.2% | 96.0% | 4021505 |
+| e6 | 56.5% | 21.7% | 17.6% | 95.9% | 4021505 |
+| e7 | 58.6% | 21.9% | 16.4% | 96.8% | 4021505 |
+| e8 | 57.2% | 21.7% | 18.0% | 96.8% | 4021505 |
+| e9 | 57.7% | 22.0% | 15.7% | 95.5% | 4021505 |
+| e10 | 56.8% | 25.3% | 14.4% | 96.5% | 5079041 born (6 walks) |
+| e11 | 56.2% | 24.0% | 15.6% | 95.8% | 5079041: 302 |
+| e12 | 54.2% | 20.7% | 19.0% | 93.9% | 5079041: 964 |
+| e13 | 56.3% | 18.8% | 19.2% | 94.3% | 5079041: 853 |
+| e14 | 57.1% | 16.9% | 19.4% | 93.4% | 5079041: 1797 |
+| e15 | 52.7% | 14.8% | 20.7% | 88.2% | 5079041: 3676 |
+| e16 | 53.3% | 13.1% | 20.5% | 87.0% | 5079041: 3360 |
+| e17 | 55.0% | 12.2% | 22.6% | 89.8% | 5079041: 3091 |
+| e18 | 56.1% | 9.2% | 24.9% | 90.2% | 5079041: 3760 |
+| e19 | 56.5% | 8.9% | 26.1% | 91.4% | 5079041: 3815 |
+
+- 557 heads birthed this march (shallow churn, all D ∈ [3.27, 5.08]×10⁶ —
+  just-above-n heads, together 52,934 walks = 4.6%, all ≪ record); biggest
+  birth: **D = 5,079,041** (first appears e10 with 6 walks,
+  21,624 total, ~6% of walks by e19, sub-grid since e16). Others: 4322145
+  (7,489), 4444479 (4,458), 4292039 (2,919), 4373889 (2,638), 4047745 (1,989).
+- Per-block head count 30–49 (vs 20–24 at 3.2×10⁶): the shadow zone forces
+  more distinct shallow funnels to be walked solo (each is a fresh 'd' root).
+- March totals: giant 636,058 (55.8%), 7466441 215,282 (18.9%), 5061761
+  214,808 (18.9%) — top-3 absorb 93.5% of 1,140,000 starts. The deep-funnel
+  architecture remains stable across 1.14×10⁶ of n; the shallow tail keeps
+  re-mixing on a 2²⁰ lattice.
+
+## Cert-table growth + reuse economics
+
+- Chain `cert_march.txt`: 8,282 → 34,499 lines / **1,680 → 1,728 distinct**
+  states (+48; ≈1–8 new trunk-entry states per block on the converged giant
+  spine — each block's ~1,379-line emission is ~99.9% already-certified
+  states, exactly the session-020 convergence picture).
+- Instant-'c' reuse: 270,213/1,140,000 = **23.7% overall**, rising 22.3% (e1)
+  → **34.1%** (e19) — within a 60K block the chunk-1 giant emission serves
+  chunks 2–6 from memory; the 60K block shape amortizes the certless-chunk-1
+  tax over 6 chunks (vs 2 in session-020's 20K blocks).
+- Walker table peaked at 65,812 entries (e16) ≪ 5.24M insert limit; cert-table
+  conflicts: 0 (a conflict FATALs — none in 19 loads of the growing chain).
+
+## Frontier verdict
+
+- **Contiguous all-n certified frontier: n = 4,400,200** (was 3,260,200
+  pushed; the wiped session's 3,740,200 is reproduced by e1–e8 and extended
+  by e9–e19). Total this session: 1,140,000 consecutive n in 19 blocks, all
+  terminating. Next unverified n: 4,400,201.
+- Cost model: the shadow zone [4.19×10⁶, 5.06×10⁶] costs ~5.1–5.7×10¹⁰
+  steps per 60K block (~108 s solo; shadow waves took 99–109 s wall for
+  120K). After n = 5,061,760 the 5061761 basin closes and blocks should
+  cheapen until the next shadow boundary **n = 5,242,879** (first checkpoint
+  6,291,456: heads D ≤ 6,291,456 go dark; 7466441 survives to n = 7,466,440;
+  the giant forever). At the measured 2-job pace: 4.5×10⁶ ≈ 1 wave (~2 min),
+  5×10⁶ ≈ 5 waves (~6–9 min), 6×10⁶ ≈ 13 waves (~15–20 min).
+- Standing watch: any D > 1,449,322,159 or any unresolved-at-cap walk is the
+  nontermination-adjacent alarm — none seen in **1,243,969 total death
+  records** (103,969 prior + 1,140,000 this session).

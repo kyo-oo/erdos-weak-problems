@@ -334,3 +334,29 @@ do they grow" for the frontier seed to explicit Θ-bounds.
    statement "c_k = 3^{k/2+o(k)}" (excludes Type-1) and the digit-mixing
    law; the period-5 leading-digit cycle is the phenomenon any inductive
    proof must reproduce.
+
+---
+
+## ADDENDUM (2026-11-04, session 021) — k=21 CENSUS: c₂₁ = 710,129 (re-run + verified)
+
+The wiped session's k=21 census was re-run after the sandbox rootfs replacement
+(engine + dumps re-verified bit-for-bit):
+
+- **Census**: N = 3²¹ = 10,460,353,203, **c₂₁ = 710,129**, marks = 128,627,136,707,
+  wall 1088.36 s (`a4-census/census_k21.log`, u64 member dump
+  `a4-census/data/a4_members_3k21.txt`, 7,586,108 bytes; first members 0,4,5;
+  last member 10,460,316,263 < 3²¹). Count ladder k=0..21:
+  1 1 4 9 19 37 79 147 266 476 919 1790 3210 5425 9093 19206 38367 65794
+  108103 177194 347370 **710129**.
+- **Independent verification** (`verify_dump_windowed`, 9 windows over [0,3²¹),
+  `a4-census/verify_log_k21.txt`): seeds ✓, strict ascent ✓, **aps=0,
+  unblocked=0** in every window, members = 710,129 exactly, mark count
+  recomputed = 128,627,136,707 — **PASS, dump certified as the greedy sequence**.
+- **α-ladder update (same-phase, period 5)**: α₁₁ = 0.6197 → α₁₆ = 0.6005 →
+  **α₂₁ = 0.5840** (cumulative exponent ln c_k/(k ln 3)) — the monotone decline
+  toward ½ continues on-schedule; Type-1 (α → 0.6309 flat) rejected harder.
+  c₂₁/c₂₀ = 2.044 (Type-1 asymptote would be ×3^{0.6309} ≈ 2.00 flat from above;
+  the observed cumulative keeps falling through it).
+- **Status**: A(4) Type-2 empirical case now verified through the k=21
+  same-phase point; the k=25/26 census (next same-phase points) remains the
+  decision step for the projection (c₂₆ Type-2 ≈ 6.4×10⁶ vs Type-1 ≈ 1.2×10⁷).
