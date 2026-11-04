@@ -1,2 +1,15 @@
 verify data/a4_members_3k17.txt t=4 N=129140163: members=65794 marks=1168684137 aps=0 unblocked=0
 VERIFY PASS
+verify data/a4_members_3k18.txt t=4 N=387420489: members=108103 marks=3956010418 aps=0 unblocked=0
+VERIFY PASS
+verify data/a4_members_3k19.txt t=4 N=1162261467: members=177194 marks=13762802366 aps=0 unblocked=0
+VERIFY PASS
+verify data/a4_members_3k20.txt t=4 N=3486784401: members=347370 marks=42288440159 aps=0 unblocked=0
+VERIFY PASS
+# task 1-d (2026-11-03): k17 line = historical receipt; k18/19/20 lines
+# re-verified FRESH this session (verify_dump.c rebuilt → bin_1d/verify_dump,
+# cc -O2 -Wall, md5 5be0467072d463082f54c8f8438c7f67, output byte-identical;
+# per-k logs + timings in verify_log_k{18,19,20}.txt, run_1d_status.txt;
+# wall 28s / 95s / 330s, nice -n 10). k13 self-test PASS (members=5425
+# marks=10129309). All dumps k=13..20 carry logged independent PASS.
+# A4_STATUS §8.1 verification gap CLOSED.

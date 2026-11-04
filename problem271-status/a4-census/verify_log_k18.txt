@@ -1,0 +1,12 @@
+verify data/a4_members_3k18.txt t=4 N=387420489: members=108103 marks=3956010418 aps=0 unblocked=0
+VERIFY PASS
+# task 1-d receipt (FRESH RUN 2026-11-03T22:44Z; independent verifier
+# verify_dump.c rebuilt as bin_1d/verify_dump, cc -O2 -Wall, md5
+# 5be0467072d463082f54c8f8438c7f67): wall 28s (nice -n 10).
+# Invocation: nice -n 10 ./bin_1d/verify_dump data/a4_members_3k18.txt 4 387420489
+# Certifies: (1) structural (first entries 0,4; strictly ascending; none in
+# (0,4); all < 3^18); (2) AP-freeness: aps=0 over ALL member pairs;
+# (3) maximality: unblocked=0 non-members in (4, 3^18) — every one carries a
+# blocking mark m=2b-a < N; marks = 3,956,010,418 recomputed pairs (a<b) with
+# 2b-a < N. members=108103 = c_18. Byte-identical to the earlier 1-d receipt
+# (verify_log_k18.txt.prev).

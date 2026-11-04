@@ -1,0 +1,9 @@
+verify data/a4_members_3k19.txt t=4 N=1162261467: members=177194 marks=13762802366 aps=0 unblocked=0
+VERIFY PASS
+# task 1-d receipt (FRESH RUN this session; independent verifier verify_dump.c,
+# built as bin_1d/verify_dump, cc -O2 -Wall, md5 5be0467072d463082f54c8f8438c7f67
+# = canonical ./verify_dump): wall 2m13s (user 1m36s).
+# Invocation: ./bin_1d/verify_dump data/a4_members_3k19.txt 4 1162261467
+# Certifies: structural + AP-freeness (aps=0 over all pairs) + maximality
+# (unblocked=0) on [0, 3^19); marks = 13,762,802,366 recomputed. members=177194
+# = c_19. Reproduces the earlier 1-d session's log exactly.

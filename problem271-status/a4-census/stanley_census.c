@@ -7,11 +7,15 @@
  *   both earlier members (i.e. no pair with a + n = 2b).
  *
  * Engine (fast path): two bitsets of N bits (member, blocked) plus the
- * sorted member list.  When n joins, mark m = 2n - a for every earlier
+ * sorted member list (u64 values — REQUIRED for k >= 21: 3^21 = 10460353203
+ * > 2^32, so u32 storage truncates every member >= 2^32 and corrupts the
+ * ascending invariant, the binary searches, the marks and the dump; k <= 20
+ * is safe since 3^20 = 3486784401 < 2^32).
+ * When n joins, mark m = 2n - a for every earlier
  * member a (note m > n), so at inspection time blocked[n] = 1 exactly iff
  * some blocking pair of earlier members exists.  Cost: O(N) scan plus one
  * bit-set per unordered pair of members (m < N only); memory 2*N bits +
- * 4*|A| bytes.
+ * 8*|A| bytes.
  *
  * Built-in cross-checks (always on where applicable):
  *   - NAIVE recompute by direct per-candidate pair scan up to NAIVE_LIMIT
@@ -74,7 +78,7 @@ int main(int argc, char **argv) {
     if ((have_member && !member) || !blocked) { fprintf(stderr, "OOM bitsets\n"); return 1; }
 
     size_t cap = 1 << 20, cnt = 0;
-    u32 *mem = malloc(cap * sizeof(u32));
+    u64 *mem = malloc(cap * sizeof(u64));
     if (!mem) { fprintf(stderr, "OOM list\n"); return 1; }
 
     const double t0 = now_sec();
@@ -92,9 +96,9 @@ int main(int argc, char **argv) {
 
     for (u64 n = t + 1; n < N; n++) {
         if (getbit(blocked, n)) continue;
-        if (cnt == cap) { cap *= 2; mem = realloc(mem, cap * sizeof(u32));
+        if (cnt == cap) { cap *= 2; mem = realloc(mem, cap * sizeof(u64));
                           if (!mem) { fprintf(stderr, "OOM grow\n"); return 1; } }
-        mem[cnt++] = (u32)n;
+        mem[cnt++] = n;
         if (member) setbit(member, n);
         /* mark m = 2n - a for earlier members a; only m < N is useful.
            mem is ascending, so m = 2n - mem[i] descends with i: skip the
@@ -138,7 +142,7 @@ int main(int argc, char **argv) {
         if (M > t + 1 && have_member) {
             const u64 mw = (M + 63) / 64;
             u64 *mem2b = calloc(mw, 8);
-            u32 *list2 = malloc(M * sizeof(u32));
+            u64 *list2 = malloc(M * sizeof(u64));
             size_t c2 = 0;
             setbit(mem2b, 0); list2[c2++] = 0;
             setbit(mem2b, t); list2[c2++] = t;
@@ -150,7 +154,7 @@ int main(int argc, char **argv) {
                     const u64 a = 2 * b - n;
                     if (getbit(mem2b, a)) blockedn = 1;   /* a < b < n holds */
                 }
-                if (!blockedn) { setbit(mem2b, n); list2[c2++] = (u32)n; }
+                if (!blockedn) { setbit(mem2b, n); list2[c2++] = n; }
             }
             size_t bad = 0;
             for (u64 n = 0; n < M; n++)
@@ -178,7 +182,7 @@ int main(int argc, char **argv) {
     if (outpath) {
         FILE *f = fopen(outpath, "w");
         if (!f) { fprintf(stderr, "cannot write %s\n", outpath); return 1; }
-        for (size_t j = 0; j < cnt; j++) fprintf(f, "%u\n", mem[j]);
+        for (size_t j = 0; j < cnt; j++) fprintf(f, "%llu\n", (unsigned long long)mem[j]);
         fclose(f);
         printf("members written: %s (%zu)\n", outpath, cnt);
     }

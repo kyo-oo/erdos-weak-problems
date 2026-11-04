@@ -1,0 +1,8 @@
+[n=3200001..3200100 round=0] budget=100000000 active=2 dead(d/c/w)=12/0/42 alias=44 round_steps=318133985 total=318133985 rate=1133183659/s elapsed=0.3s tab=316
+[n=3200001..3200100 round=1] budget=1000000000 active=1 dead(d/c/w)=12/0/42 alias=45 round_steps=1099838457 total=1417972442 rate=1137069433/s elapsed=1.2s tab=1364
+[n=3200001..3200100 round=2] budget=2000000000 active=0 dead(d/c/w)=13/0/42 alias=45 round_steps=446122155 total=1864094597 rate=73839376/s elapsed=7.3s tab=1790
+[chunk 3200001..3200100 COMPLETE] dead d/c/w=13/0/42 alias=45 unres=0 total_steps=1864094597 elapsed=7.3s
+[chunk 3200101..3200200] cert reload: +1381 entries (table 1383)
+[n=3200101..3200200 round=0] budget=100000000 active=0 dead(d/c/w)=20/10/125 alias=45 round_steps=96831061 total=1960925658 rate=1137714569/s elapsed=7.4s tab=1893
+[chunk 3200101..3200200 COMPLETE] dead d/c/w=20/10/125 alias=45 unres=0 total_steps=1960925658 elapsed=7.4s
+[ALL DONE 3200001..3200200] logged d/c/w=20/10/170 (incl. class members) alias_events=45 unres=0 unlogged=0 total_steps=1960925658 rewalk=1446122155 elapsed=7.4s tab=1893 cert=1383
