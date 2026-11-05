@@ -192,6 +192,7 @@ theorem pair_flat (j : Nat) : v2 (fact (2 * j + 1)) = v2 (fact (2 * j)) := by
       (Nat.le_refl _) (Nat.succ_le_succ (Nat.zero_le (2 * j)))
       (fact_pos (2 * j))
   rw [hv, v2_odd (2 * j + 1) (by omega)]
+  omega
 
 /-- PAIR JUMP: v₂((2j)!) < v₂((2j+2)!). -/
 theorem pair_jump (j : Nat) : v2 (fact (2 * j)) < v2 (fact (2 * j + 2)) := by
@@ -240,7 +241,7 @@ theorem v2_lt_add : ∀ (f x y : Nat), x + y ≤ f → 1 ≤ x → v2 x < v2 y �
     by_cases hxodd : x % 2 = 1
     · have hyeven : y % 2 = 0 := by
         cases hym : y % 2 with
-        | zero => exact hym
+        | zero => rfl
         | succ n =>
           have hy1 : y % 2 = 1 := by omega
           rw [v2_odd y hy1, v2_odd x hxodd] at hv
@@ -253,7 +254,7 @@ theorem v2_lt_add : ∀ (f x y : Nat), x + y ≤ f → 1 ≤ x → v2 x < v2 y �
       · rw [hy0, Nat.add_zero]
       · have hyeven : y % 2 = 0 := by
           cases hym : y % 2 with
-          | zero => exact hym
+          | zero => rfl
           | succ n =>
             have hy1 : y % 2 = 1 := by omega
             rw [v2_odd y hy1] at hv
@@ -556,7 +557,6 @@ theorem eq_mul_div (d n : Nat) (hd : 1 ≤ d) (h : d ∣ n) :
     n = d * (n / d) := by
   obtain ⟨c, hc⟩ := h
   have hcd : d * c / d = c := by
-    rw [Nat.mul_comm]
     have hd0 : 0 < d := by omega
     exact Nat.mul_div_cancel_left c hd0
   rw [hc, hcd]
