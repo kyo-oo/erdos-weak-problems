@@ -166,19 +166,21 @@ theorem v2_fact_mono : ∀ (f n m : Nat), n + m ≤ f → n ≤ m →
     have hn : n = 0 := by omega
     have hm : m = 0 := by omega
     rw [hn, hm]
+    exact Nat.le_refl _
   | f + 1, n, m, hf, h => by
     by_cases hnm : n = m
     · rw [hnm]
+      exact Nat.le_refl _
     · have hlt : n < m := by omega
       have ⟨k, hk⟩ : ∃ k, m = k + 1 := ⟨m - 1, by omega⟩
       rw [hk]
       have hgoal : v2 (fact (k + 1)) = v2 (k + 1) + v2 (fact k) := by
         show v2 ((k + 1) * fact k) = _
         exact v2_mul (k + 1 + fact k) (k + 1) (fact k) (Nat.le_refl _)
-          (Nat.le_refl _) (fact_pos k)
+          (Nat.succ_le_succ (Nat.zero_le k)) (fact_pos k)
       rw [hgoal]
       exact Nat.le_trans (v2_fact_mono f n k (by omega) (by omega))
-        (Nat.le_add_right _ _)
+        (Nat.le_add_left _ _)
 
 /-- PAIR FLATNESS: v₂((2j+1)!) = v₂((2j)!). -/
 theorem pair_flat (j : Nat) : v2 (fact (2 * j + 1)) = v2 (fact (2 * j)) := by
@@ -187,7 +189,8 @@ theorem pair_flat (j : Nat) : v2 (fact (2 * j + 1)) = v2 (fact (2 * j)) := by
   have hv : v2 ((2 * j + 1) * fact (2 * j)) =
       v2 (2 * j + 1) + v2 (fact (2 * j)) :=
     v2_mul (2 * j + 1 + fact (2 * j)) (2 * j + 1) (fact (2 * j))
-      (Nat.le_refl _) (Nat.le_refl _) (fact_pos (2 * j))
+      (Nat.le_refl _) (Nat.succ_le_succ (Nat.zero_le (2 * j)))
+      (fact_pos (2 * j))
   rw [hv, v2_odd (2 * j + 1) (by omega)]
 
 /-- PAIR JUMP: v₂((2j)!) < v₂((2j+2)!). -/
@@ -197,7 +200,8 @@ theorem pair_jump (j : Nat) : v2 (fact (2 * j)) < v2 (fact (2 * j + 2)) := by
   have hv : v2 ((2 * j + 2) * fact (2 * j + 1)) =
       v2 (2 * j + 2) + v2 (fact (2 * j + 1)) :=
     v2_mul (2 * j + 2 + fact (2 * j + 1)) (2 * j + 2) (fact (2 * j + 1))
-      (Nat.le_refl _) (Nat.le_refl _) (fact_pos (2 * j + 1))
+      (Nat.le_refl _) (Nat.succ_le_succ (Nat.zero_le (2 * j + 1)))
+      (fact_pos (2 * j + 1))
   rw [hv, pair_flat]
   have heven : (2 * j + 2) % 2 = 0 := by omega
   have hpos : 1 ≤ 2 * j + 2 := by omega
@@ -235,10 +239,12 @@ theorem v2_lt_add : ∀ (f x y : Nat), x + y ≤ f → 1 ≤ x → v2 x < v2 y �
   | f + 1, x, y, hf, hx, hv => by
     by_cases hxodd : x % 2 = 1
     · have hyeven : y % 2 = 0 := by
-        by_contra hc
-        have hy1 : y % 2 = 1 := by omega
-        rw [v2_odd y hy1, v2_odd x hxodd] at hv
-        omega
+        cases hym : y % 2 with
+        | zero => exact hym
+        | succ n =>
+          have hy1 : y % 2 = 1 := by omega
+          rw [v2_odd y hy1, v2_odd x hxodd] at hv
+          omega
       have hs : (x + y) % 2 = 1 := by omega
       rw [v2_odd x hxodd, v2_odd (x + y) hs]
     · have hxeven : x % 2 = 0 := by omega
@@ -246,11 +252,13 @@ theorem v2_lt_add : ∀ (f x y : Nat), x + y ≤ f → 1 ≤ x → v2 x < v2 y �
       by_cases hy0 : y = 0
       · rw [hy0, Nat.add_zero]
       · have hyeven : y % 2 = 0 := by
-          by_contra hc
-          have hy1 : y % 2 = 1 := by omega
-          rw [v2_odd y hy1] at hv
-          rw [v2_even_pos x hx1 hxeven] at hv
-          omega
+          cases hym : y % 2 with
+          | zero => exact hym
+          | succ n =>
+            have hy1 : y % 2 = 1 := by omega
+            rw [v2_odd y hy1] at hv
+            rw [v2_even_pos x hx1 hxeven] at hv
+            omega
         have hy1 : 1 ≤ y := by omega
         have hxy1 : 1 ≤ x + y := by omega
         have hs : (x + y) % 2 = 0 := by omega
@@ -346,7 +354,8 @@ theorem isolated_min_v2 : ∀ (S : List Nat) (b : Nat),
   | [], b, hb, _, _ => by cases hb
   | a :: t, b, hb, hc, hmin => by
     by_cases hab : a = b
-    · subst hab
+    · have hba : b = a := hab.symm
+      subst hba
       have hct : countB b t = 0 := by
         have hc2 : countB b (b :: t) = 1 := hc
         rw [countB] at hc2
@@ -378,9 +387,8 @@ theorem isolated_min_v2 : ∀ (S : List Nat) (b : Nat),
         rw [hrec]; exact hbig
       show v2 (fact a + sumFacts t) = v2 (fact b)
       rw [Nat.add_comm]
-      rw [v2_lt_add (sumFacts t + fact a) (sumFacts t) (fact a)
-        (Nat.le_refl _) hpos hlt]
-      rw [hrec]
+      exact Eq.trans (v2_lt_add (sumFacts t + fact a) (sumFacts t) (fact a)
+        (Nat.le_refl _) hpos hlt) hrec
 
 -- ===========================================================================
 -- §5  THE PAIR-SINGLETON SQUARE COROLLARY + RECEIPTS
@@ -390,11 +398,11 @@ theorem isolated_min_v2 : ∀ (S : List Nat) (b : Nat),
 theorem square_v2_even (n r : Nat) (h : n = r * r) : v2 n % 2 = 0 := by
   cases r with
   | zero =>
+    have h0 : v2 0 = 0 := by simp [v2]
     rw [h, Nat.mul_zero]
-    show (0 : Nat) % 2 = 0
     omega
   | succ r' =>
-    have hr1 : 1 ≤ r' + 1 := Nat.le_refl _
+    have hr1 : 1 ≤ r' + 1 := Nat.succ_le_succ (Nat.zero_le r')
     have hvm : v2 ((r' + 1) * (r' + 1)) = v2 (r' + 1) + v2 (r' + 1) :=
       v2_mul ((r' + 1) + (r' + 1)) (r' + 1) (r' + 1) (by omega) hr1 hr1
     rw [h, hvm]
@@ -468,9 +476,11 @@ theorem pair_level_exact (a j : Nat) (h : a / 2 = j) : v2 (fact a) = Lam j := by
   | inl he =>
     have hae : a = 2 * j := by omega
     rw [hae]
+    rfl
   | inr ho =>
     have hae : a = 2 * j + 1 := by omega
     rw [hae, pair_flat j]
+    rfl
 
 /-- Every element of S carries valuation at least Λ(botPair S). -/
 theorem pair_level_ge (S : List Nat) (a : Nat) (h : memB a S) :
@@ -478,6 +488,7 @@ theorem pair_level_ge (S : List Nat) (a : Nat) (h : memB a S) :
   have hle : botPair S ≤ a / 2 := botPair_le S a h
   by_cases heq : a / 2 = botPair S
   · rw [pair_level_exact a (botPair S) heq]
+    exact Nat.le_refl _
   · have hlt : botPair S < a / 2 := by omega
     have habove : v2 (fact (2 * botPair S)) < v2 (fact a) :=
       pair_above a (2 * botPair S) (by omega)
@@ -513,11 +524,21 @@ theorem one_le_two_pow : ∀ (k : Nat), 1 ≤ 2 ^ k
   | 0 => Nat.le_refl 1
   | k + 1 => by
     rw [Nat.pow_succ]
-    exact one_le_mul (2 ^ k) 2 (one_le_two_pow k) (Nat.le_refl 2)
+    exact one_le_mul (2 ^ k) 2 (one_le_two_pow k) (by omega : (1 : Nat) ≤ 2)
 
-theorem v2_one : v2 1 = 0 := by decide
+theorem v2_zero : v2 0 = 0 := by simp [v2]
 
-theorem v2_two : v2 2 = 1 := by decide
+theorem v2_one : v2 1 = 0 := by
+  rw [show (1 : Nat) = 0 + 1 from rfl, v2_succ 0,
+    if_neg (by omega : ¬((0 : Nat) + 1) % 2 = 0)]
+
+theorem v2_two : v2 2 = 1 := by
+  have h := v2_succ 1
+  rw [show (2 : Nat) = 1 + 1 from rfl]
+  rw [h, if_pos (by omega : ((1 : Nat) + 1) % 2 = 0)]
+  have hd2 : (1 : Nat) + 1 = 2 := by omega
+  have hd3 : (2 : Nat) / 2 = 1 := by omega
+  rw [hd2, hd3, v2_one]
 
 theorem v2_pow_two : ∀ (k : Nat), v2 (2 ^ k) = k
   | 0 => v2_one
@@ -535,7 +556,8 @@ theorem eq_mul_div (d n : Nat) (hd : 1 ≤ d) (h : d ∣ n) :
   obtain ⟨c, hc⟩ := h
   have hcd : d * c / d = c := by
     rw [Nat.mul_comm]
-    exact Nat.mul_div_cancel_left c (by omega)
+    have hd0 : 0 < d := by omega
+    exact Nat.mul_div_cancel_left c hd0
   rw [hc, hcd]
 
 theorem sumFacts_pos : ∀ (S : List Nat), S ≠ [] → 1 ≤ sumFacts S
@@ -566,11 +588,12 @@ theorem full_cascade_v2 : ∀ (S : List Nat), S ≠ [] →
         = 2 ^ (Lam (botPair S)) * (sumFacts S / 2 ^ (Lam (botPair S)))
       exact eq_mul_div _ _ (one_le_two_pow _) hdvd
     have hCpos : 1 ≤ cascadeC S := by
-      by_contra hcon
-      have hC0 : cascadeC S = 0 := by omega
-      have hsum1 : 1 ≤ sumFacts S := sumFacts_pos S hS
-      rw [hCeq, hC0, Nat.mul_zero] at hsum1
-      omega
+      cases hC0 : cascadeC S with
+      | zero =>
+        have hsum1 : 1 ≤ sumFacts S := sumFacts_pos S hS
+        rw [hCeq, hC0, Nat.mul_zero] at hsum1
+        omega
+      | succ n => exact Nat.succ_le_succ (Nat.zero_le n)
     rw [hCeq, v2_pow_mul _ _ hCpos]
 
 /-- **THE SQUARE CASCADE COROLLARY (general form — the #1108 p = 2
