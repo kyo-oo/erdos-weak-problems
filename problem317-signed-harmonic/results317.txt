@@ -1,0 +1,2 @@
+n in [5,5000]: 803790 prime-tests; degenerate n's: []
+VERDICT: ALL n KILLED (Theorem A applies everywhere)

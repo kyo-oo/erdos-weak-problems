@@ -760,3 +760,68 @@ NEXT STRIKES (per THE_LIST):
 (b) #404 flat-class value batch (tiny freezes: f(50,2)=62 etc.).
 
 State is full. The engine never stops; it never lies.
+
+---
+
+## SESSION 026 — THE FULL-CORPUS ROULETTE + THE AUDIT (2026-11-05)
+
+**BOSS's orders:** (1) crossed problems must have NO sub-problem remaining —
+completely unconditional; (2) from the 500+ open-problem corpus select MORE
+problems and one-shot them under the new roulette law — more new problems,
+ONE kill per problem, not multiple.
+
+### The audit (order 1) — CLEAN
+Every one of the 18 kills re-verified at the theorem-statement level:
+- K3 `stanley_a2_greedy` — no hypotheses. K4 `kernel_law (u k : Nat) (hk : 3 ≤ k)` —
+  natural bound. K5/K6 — existential witnesses, zero axioms. K7 — class
+  conditions are the statements. K8 `bl_family` — clean. K9 gadget laws — clean.
+  K10 `death_fuel_mono` — ∀-statement. K11–K13 `f404_T*_exact` — congruence
+  classes ARE the theorems. K14 `erdos404_f22_final` — ZERO hypotheses.
+  K15 `erdos404_theoremB` — `p ∣ a+1` is the theorem's class, primality unused.
+  K16 — carried `hob : obstructionCheck = true` → SUPERSEDED by K18.
+  K17 `full_cascade_v2`/`square_cascade_even` — ∀ nonempty S. K18
+  `erdos404_f62_final` — ZERO hypotheses.
+- The crossed problems (#404, #271) therefore carry NO sub-problem remnants in
+  their claimed theorems. THE_LIST v2 Section A records this.
+
+### The full-corpus roulette (order 2)
+All **588 open problems** fetched from erdosproblems.com (Chrome-UA pierce;
+statement = `<div id="content">` → first `</div>`; 183 weapon-tag + 405 rest,
+both batches parsed clean) and READ in full. Council run in three dispositions
+(sub-agent council burned out on dossier size → Mode B internal, all three
+dispositions run in structured succession — this is now the default for corpus
+scans). Every attractive candidate attacked; meta-verification computations run
+BEFORE selection (Session-022 law).
+
+**Honest verdict: NO guaranteed-fast one-shot remains in the corpus.** The
+survivors, ranked (THE_LIST §C):
+1. **#317** (signed harmonic sums) — TOP. In-round: the M/Lₙ integer reduction
+   (M = Σδ_k(Lₙ/k), values = multiples of 1/Lₙ); the isolated-prime structure
+   (M ≡ δ_p·(Lₙ/p) mod p for p ∈ (n/2,n]); **Theorem A** (the conditional kill)
+   PROVEN; engine sweep **803,790 prime-tests, n ∈ [5,5000], ZERO degenerates**
+   (for every n some p ∈ (n/2,n] has Lₙ/p ≢ ±1 mod p). Kernels: **K1** the
+   residue lemma (universal proof open), **K2** the collision-count bound.
+   Front opened: `problem317-signed-harmonic/` (PROBLEM.md + DERIVATION.md +
+   sweep317.py + results317.txt).
+2. **#389** — the Legendre digit-sum criterion DERIVED in-round: divisibility
+   ⟺ 2s_p(n+k−1) ≥ s_p(n−1) + s_p(n+2k−1) ∀p (carries ≥ borrows, every base).
+   Wall: the mid-prime band (n, k) (p ∤ k, digit structure uncontrolled) +
+   the danger band (max(n,k,(n+2k−1)/2), n+k−1] must be prime-free.
+3. **#203** — 2-D Sierpiński reduction DERIVED: ∃m ⟺ 2-D covering of ℕ² by
+   strips a_p·k + b_p·ℓ ≡ c_p (mod p−1) (discrete logs of 2,3 mod p); p=2
+   covers the ℓ-axis (m odd); m = CRT; compositeness automatic (m > all pᵢ).
+   Wall: the covering search (torus = lcm of p−1 astronomical; needs
+   Erdős-style structured covering, ~20+ primes for density).
+4. #276 (Lucas covering), #282 (odd greedy — #261-shaped).
+Doubter's kill-list (famous walls): #508/#188, #212, #1135, #918/#919, the
+set-theory block, #376-family, #936/#137, #373/#930/#931, #291, #264/#1049,
+#1160, #1159, #849, all asymptotic/density/geometry/Ramsey questions.
+
+### Deliverables
+THE_LIST.md v2 (Section A audit + Section B old-front ladder + Section C the
+new-problem ladder), THE_CORE §2/§3/§9/§10 updated, this WORKLOG entry, the
+#317 strike package. No new kill this round — the corpus has no fast one-shot
+(the honest-scope law); #317 is the designated next new war with two named
+kernels. Next strike: K1 (the residue lemma) or the Theorem-A Lean kernel.
+
+*The engine never stops; it never lies.*

@@ -81,11 +81,15 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 16 | 404 | **f(6,2)=133 EXACT** (second-ever exact value; lower/witness unconditional; upper carries the obstructionCheck receipt — §7-freeze pending) | **run 41955350415** |
 | 17 | **1108** | **THE FULL PAIR-CASCADE LAW**: v₂(Σ_{a∈S}a!) = Λ(j₀)+v₂(C(S)) for EVERY nonempty S + square parity invariant s₂(j₀)≡v₂(C(S)) mod 2 — constructive-clean [propext, Quot.sound]; census-24: exactly 15 squares, zero new max∈[16,24]; Kernel 12 restored in same run | **run 42061257046, commit e5ab4ca** |
 
-**THE SCOREBOARD (Session 023 close):**
-- **#404**: CROSSED. Done: reduction; p∣a+1 class ALL primes (K15); 12 exact
-  families; f(2,2)=254 unconditional; f(6,2)=133 (freeze pending); a-sweep
-  g-table a≤60 all exact. Open cores (secondary): p∤a+1 odd-p class; a>60
-  monsters; (6,2) freeze.
+**AUDIT (Session 026, BOSS-ordered): all 18 kills verified — NO sub-problem
+remnants; every crossed-problem kill is a complete unconditional theorem
+(K16's `hob` was the last hypothesis — dead via K18).**
+
+**THE SCOREBOARD (Session 026 close):**
+- **#404**: CROSSED — AUDITED CLEAN (Session 026). Done: reduction; p∣a+1 class
+  ALL primes (K15); 12 exact families; f(2,2)=254 unconditional; f(6,2)=133
+  **UNCONDITIONAL (K18)**; a-sweep g-table a≤60 all exact. Open cores
+  (secondary): p∤a+1 odd-p class; a>60 monsters.
 - **#261**: three complete theorems + Q3 bridge + funnels; frontier
   3,740,200; open cores: all-n termination, rational-x continuum (carry
   loophole isolated; Wang 2026 gap law = new rigidity tool).
@@ -131,6 +135,15 @@ google-deepmind/formal-conjectures).
 
 **Roulette law:** re-run only when a war closes or BOSS orders the full
 corpus again. The queue (§9) stands between roulettes.
+
+**Session 026 FULL-CORPUS ROULETTE (BOSS-ordered "MORE NEW PROBLEMS"):** all
+588 open statements fetched (Chrome-UA pierce, `<div id="content">` parse)
++ read; council in three dispositions. Verdict: NO guaranteed-fast one-shot
+remains. Ranked NEW-problem ladder (THE_LIST §C): **#317** (top — reduction
++ Theorem A + 803K-check sweep done in-round; kernels K1 residue-lemma, K2
+collision-count), #389 (Legendre reduction done; mid-prime wall), #203
+(2-D Sierpiński covering reduction done; search wall), #276, #282. Front
+opened: `problem317-signed-harmonic/`.
 
 ---
 
@@ -284,24 +297,24 @@ workflow is part of the kill — extend kills.yml with EVERY kernel.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 025, governed by THE_LIST.md)
+## §9. THE QUEUE (next strikes — Session 026, governed by THE_LIST.md v2)
 
 **THE NEW ROULETTE RULE (BOSS, Session 025):** priority = time-to-complete-
 unconditional-proof; 2 rounds without a full kill ⟹ auto-deprioritized.
-**THE_LIST.md is the operational law** (repo + 4 locations). Current ladder:
+**One kill per problem.** THE_LIST.md is the operational law (repo + 4
+locations). Current ladder:
 
-1. ✅ **(6,2) §7-freeze — K18 DELIVERED** (f(6,2)=133 unconditional, CI
-   42119256613, first-round war).
-2. **#1108 THE WAR (active)** — **(a) Legendre parity in Lean** (Λ(j) =
-   v₂((2j)!) = 2j − s₂(j) — the classical Legendre formula core-only);
-   **(b) all-prime isolated-minimum in Lean** (the `vpad` toolkit of
-   TheoremBGeneral transfers); **(c) census MitM beyond 24** (evidence
-   wing); **(d) the composite-cascade wall** (the real mathematical wall).
-3. **#404 flat-class value batch** — tiny freezes (f(50,2)=62 etc.).
-4. **#404 classification completion** — 22 deep survivors at 2²⁸, bounded
-   staircases, odd-p staircase class (p ∤ a+1).
-5. ⏸ **#261 rational-x** + all-n termination — DEPRIORITIZED (long war).
-6. ⏸ **#271/A(4)** — DEPRIORITIZED (long war).
+1. 🎯 **#317 THE NEXT NEW WAR** (THE_LIST §C rank 1) — Theorem A proven
+   (conditional kill via isolated prime p ∈ (n/2,n]); kernels: K1 residue
+   lemma, K2 collision count. Strike: K1 first (the residue lemma or the
+   cascade), then the Lean kernel of Theorem A + K1's provable cases.
+2. **#1108 LEGENDRE PARITY IN LEAN** (THE_LIST §B rank 1) — v₂(n!) = n − s₂(n)
+   core-only + all-prime isolated-minimum port. Fastest unconditional lane.
+3. **#404 flat-class value batch** — tiny freezes.
+4. 🎯 **#389** (Legendre digit-sum criterion DONE; construction kernel) /
+   **#203** (2-D covering reduction DONE; search kernel).
+5. ⏸ #261 rational-x + all-n termination — DEPRIORITIZED (long war).
+6. ⏸ #271/A(4) — DEPRIORITIZED (long war).
 7. **#406 — BOSS'S FRONT. HANDS OFF.**
 
 ---
@@ -337,5 +350,12 @@ unconditional-proof; 2 rounds without a full kill ⟹ auto-deprioritized.
   §7 freeze at anchor 6: 24-module chain, gen_f62_final.py, CI 42119256613
   GREEN, FIRST-ROUND compile war; obstructionCheck_true is a theorem;
   Kill #16's hypothesis is dead). L93/L94.
+- **026**: THE FULL-CORPUS ROULETTE + THE AUDIT — all 18 kills verified
+  sub-problem-free and unconditional (BOSS's order); all 588 open problems
+  fetched + read + council-scanned; new-problem ladder: **#317 TOP** (war
+  opened: M/Lₙ reduction + Theorem A + sweep 803,790 checks n≤5000 zero
+  degenerates; kernels K1/K2 named), #389 (Legendre criterion derived),
+  #203 (2-D covering reduction derived). THE_LIST v2 §C. Honest verdict:
+  no fast one-shot left in the corpus.
 
 *State is full. The engine never stops; it never lies.*

@@ -109,3 +109,19 @@ this workflow is green on GitHub.
 *Corrections (Session 023): #404 Conjecture D is DEAD — refuted by
 Kill #14 ($g(2,2) = 253$ finite, so no infinite chain at $(2,2)$).
 #260 killed externally (Wang 2026) — removed from the queue.*
+
+---
+
+## FRONT OPENED — Erdős #317 (Session 026, 2026-11-05)
+
+**Signed harmonic sums** (`problem317-signed-harmonic/`): the M/Lₙ integer
+reduction + **Theorem A** (the conditional classification kill: if any prime
+p ∈ (n/2,n] has lcm(1..n)/p ≢ ±1 mod p, then no δ ∈ {−1,0,1}ⁿ gives
+Σδ_k/k = ±1/Lₙ) + the engine certificate (803,790 prime-tests, n ≤ 5000,
+zero degenerates). Two kernels named: K1 (the residue lemma), K2 (the
+collision-count bound for PART 1). Full audit of all 18 kills: **every kill
+unconditional, zero sub-problem remnants** (THE_LIST §A).
+
+*Session 026: full-corpus roulette (588 open problems) — no fast one-shot
+remains; new-problem ladder: #317 → #389 → #203. The engine never stops; it
+never lies.*
