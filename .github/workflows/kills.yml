@@ -1,4 +1,4 @@
-name: Erdos One-Shot Kills CI (271 + 404 + 261 TwoSolutions + 261 Tower + 261 Funnels + 404 GadgetSupply + 404 p2-Classification)
+name: Erdos One-Shot Kills CI (271 + 404 + 261 TwoSolutions + 261 Tower + 261 Funnels + 404 GadgetSupply + 404 p2-Classification + 404 F62 + 1108 SubsetKernel)
 on:
   push:
     branches: ['**']
@@ -13,6 +13,7 @@ on:
       - problem261-funnels/**
       - problem404-p2-classification/**
       - problem404-q3-chain/**
+      - problem1108-subset-kernel/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -207,6 +208,8 @@ jobs:
           python3 problem261-funnels/funnels.py
           python3 problem404-p2-classification/verify_p2class.py
           python3 problem404-q3-chain/verify_f22.py
+          python3 problem404-q3-chain/verify_f62.py
+          python3 problem1108-subset-kernel/verify_cascade.py
       - name: Kernel 10 (Erdos 404 ExactF22 — f(2,2) = 254, UNCONDITIONAL)
         run: |
           set -euo pipefail
@@ -238,3 +241,30 @@ jobs:
           test "$(grep -cF '(2, 2)' theorem-b-general.log)" -ge 2
           grep -F "'erdos404_theoremB' depends on axioms: [propext, Quot.sound]" theorem-b-general.log
           echo THEOREM_B_GENERAL_KERNEL_GREEN=1
+
+      - name: "Kernel 12 - Erdos 404 ExactF62 (f(6,2) = 133 exact, Kill #16)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem404-q3-chain/ExactF62.lean 2>&1 | tee exact-f62.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' exact-f62.log
+          grep -F "'erdos404_f62_lower' depends on axioms: [propext, Quot.sound]" exact-f62.log
+          grep -F "'erdos404_f62_exact' depends on axioms: [propext, Classical.choice, Quot.sound]" exact-f62.log
+          echo EXACT_F62_KERNEL_GREEN=1
+
+      - name: "Kernel 13 - Erdos 1108 subset kernel + FULL PAIR-CASCADE LAW (Kill #17)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem1108-subset-kernel/SubsetKernelLaw.lean 2>&1 | tee subset-kernel.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' subset-kernel.log
+          grep -F "(4, 3, 1)" subset-kernel.log
+          grep -F "(6, 3, 3)" subset-kernel.log
+          grep -F "(3, 1, 2)" subset-kernel.log
+          grep -F "(0, 0, 0)" subset-kernel.log
+          test "$(grep -cF "1401602635449" subset-kernel.log)" -ge 2
+          grep -F "'isolated_min_v2' depends on axioms" subset-kernel.log
+          grep -F "'square_pair_singleton_even' depends on axioms" subset-kernel.log
+          grep -F "'full_cascade_v2' depends on axioms" subset-kernel.log
+          grep -F "'square_cascade_even' depends on axioms" subset-kernel.log
+          echo SUBSET_KERNEL_KERNEL_GREEN=1
