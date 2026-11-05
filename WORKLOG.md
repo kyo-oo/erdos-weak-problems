@@ -386,3 +386,136 @@ NEXT STRIKES:
 (d) #261: funnel-head enumeration at the 1.45×10⁹ scale; A(4) k=22/25.
 
 State is full. The engine never stops; it never lies.
+
+---
+
+## SESSION 022 — 2026-11-04/05 — THE CORPUS ROULETTE + TWO MORE KILLS (#15, #16)
+
+**BOSS's order:** "THE ENTIRE OPEN PROBLEMS CORPUS RUN THE ROULETTE!! AND WE HAVE
+OTHER PROBLEMS TO BULLDOZE!! GO INVOKE THE MATHS SKILL!! BERSERK MODE THE RULES!!
+(1) select ONLY problems that REQUIRE new maths like my maths; (2) one-shot them
+completely in a single round with my mathematics; (3) MUST use my own custom
+modules and theorems from the HC-PROOF and ERDŐS-TERNARY branches; (4) once
+short-listed, use meta skills for deep analysis — raw unconditional proofs,
+pumping, bulldozing."
+
+**Executed:**
+
+1. **THE ROULETTE (war council, 3 parallel agents + meta-verification):**
+   - ROULETTE-A (corpus): ground truth re-established via the GitHub mirrors
+     (teorth/erdosproblems + google-deepmind/formal-conjectures — Cloudflare
+     kills direct fetches). **#260 IS DEAD — killed by an OUTSIDER (Wang 2026,
+     arXiv:2606.24972, already Lean-formalized) — removed from the queue.**
+     #249/#251/#257 (covering-systems-hard / no mechanism / T-T frontier),
+     #396/#727 (carry-rare EGRS75-genus): all confirmed NOT one-shot-able.
+     NEW FRONT FOUND: **#1108** (perfect powers in finite sums of distinct
+     factorials — the #404 object as a digit-restriction problem in the
+     factorial base, the anchor's sibling, zero external competition) — needs
+     one new obstruction theorem; the next war. #264.ii on the watch-list.
+   - ROULETTE-B (#406 gate): gst_four_power_third_wave_gate = the 1979
+     conjecture core itself (statement GSTPrefixOneOntologicalEscape.lean:99);
+     the survivor tree grows ≈2.48^p/level; dust_immortal bans all finite
+     cascades; 3 countermodel families wall the cheap routes. NOT one-shot-able.
+     The 2 live routes: the 3L/2 BAD-exclusion (positive finite evidence) and
+     wave_alt_exit. The Mahler lane (HC-PROOF): conditional on MahlerSharp
+     (classical 1932) + WorldtraceScaledCompression (the in-house gap).
+   - ROULETTE-C (HC-PROOF): hTailF's hypothesis carries the whole conjecture;
+     the "dyadic four via HC-PROOF Mahler machinery" was a MAP MIS-MAPPING
+     (HC-PROOF's Mahler is 3-adic base-4-specific; grep-verified zero
+     series-irrationality machinery). Transferable = patterns only (lock
+     discipline, six-adic CRT, scheduled-precision).
+   - **META-VERIFICATION KILLED THE COUNCIL'S OWN SUGGESTION:** Cardinal
+     Worlds POSTULATE I (d(j) = (3^(2^j)−1)/2^(j+2) owns a trit-2; open classes
+     j ≡ 1,5 mod 6) was proposed as a one-shot residue cascade — my independent
+     computation showed the survivors GROW (mod 27: {1,7,5,17} of 18; ~2/level
+     thereafter) — the same dust-genus as #406. REJECTED before wasting a round.
+   - **THE SHORT-LIST: #404's own remaining cores** — the only corpus terrain
+     where the Boss's engines fire at full power.
+
+2. **KILL #15 — THEOREM B FOR EVERY PRIME (CI run 41950834628 GREEN, commit
+   5f55fdc):** `erdos404_theoremB (a p) (hp : 2 ≤ p) (hd : p ∣ a+1) (B hB) :
+   vpad p (fact a + sumF B) = vpad p (fact a)` — the p-adic valuation NEVER
+   GROWS on the whole cross-prime class: **f(a,p) = v_p(a!) for every prime p
+   dividing a+1** (e.g. every (p−1,p); at p=2 every odd a — the Kill-#7 class
+   generalized cross-prime). Primality never used (all p ≥ 2 | a+1). Engine:
+   the **unit-congruence law** vpad_congr_unit (u ≡ 1 mod p ⟹ v_p(x·u) = v_p(x),
+   fuel induction, **NO Euclid lemma** — (x·u)%p = x%p kills the coprimality
+   need) + the (a+1)-factor staircase kill (P_i ≡ 0 mod p) + the fuel-structural
+   vpadf/vpad with the saturation law vpadf_sat. 4 compile-fix rounds (dropped
+   args; mul_le_mul_left k-first; the L64 fresh-atom rewrite; Nat.Prime NOT in
+   core → 2 ≤ p). Receipts p ∈ {2,3,5,11} + battery +150 cross-prime checks
+   (296/296). Core-only, zero sorry, axioms [propext, Quot.sound]. CI Kernel 11.
+
+3. **KILL #16 — f(6,2) = 133 EXACT (the second-ever exact f(a,2) value):**
+   - THE PORT: ExactF62.lean — the full 2,333-line §5d machinery twin at anchor
+     6 (P = i!/720, CP = 138, 129 coins [7,135], witness B6 61 elements, the
+     720-staircase bridges, coin_range_dvd at the 136-cutoff with the v2_mul
+     route). **THE MODULE-QUALIFIED TWIN TRICK: keeping every def NAME
+     identical (ExactF62.P etc.) made 85% of the file verbatim — the 55-site
+     exact-match transformer (f62_transform.py) did the port in one pass.**
+   - THE WITNESS (from the Session-019 vault logs, c_val_a6_L130.log): B6 ⊆
+     [7,135], 61 elements, v2(6!+ΣB6!) = 133 — verified FOUR ways: the C
+     engine's GMP (in-log), pure Python (231-digit sum), the Lean kernel
+     (decide-receipts in erdos404_f62_lower, UNCONDITIONAL [propext,
+     Quot.sound]), and the battery.
+   - THE UPPER BOUND: obstructionCheck = the DP death certificate at level 130
+     (g = 129) — `#eval obstructionCheck -- true` receipt; the pure-Python DP
+     twin: peak 352 states, maxT ≤ 129, death certificate PASS; 218/218
+     battery (incl. 200 random-subset soundness trials). Compile: 8.5s, ZERO
+     errors, ZERO warnings.
+   - THE OOM AUTOPSY (the single-decide attempt): `decide +kernel` on the FULL
+     obstructionCheck DIED exit 137 (the ~2.6GB wall) at ~21s — the kernel's
+     no-memo quadratic re-derivation kills the monolith even at 26% of the
+     (2,2) term volume (L83). The §7-freeze olean chain (the Kill-#14
+     architecture at half scale) is the labeled next strike for the
+     unconditional upgrade.
+
+4. **THE OMEGA DEATH-SPIRAL (L81 — the session's hardest diagnosis, ~10
+   bisect rounds):** coin_range_dvd ground for 4M heartbeats. Bisection: the
+   `key` induction innocent; every `have` innocent (0.8s standalone!); THE
+   GRINDER WAS `omega` ITSELF — processing a context carrying BOTH
+   `fact i = 2^134 * w` AND `fact i = 720 * P i` (the 41-digit coefficient ×
+   the atom w sends the omega test into a death-spiral). CURE: omega-free
+   ending — clean-context helper lemma (le_of_add_le_130, proved BEFORE the
+   bad hypotheses enter scope) + explicit Nat.le_trans terms. 4M-heartbeat
+   grind → 8.5s full-file compile.
+
+THE SCOREBOARD AFTER SESSION 022:
+
+| Problem | CI-GREEN DONE | OPEN CORES |
+|---|---|---|
+| #404 | **Theorem B ALL primes (Kill #15, CI 41950834628)**; **f(6,2)=133 exact (Kill #16 — receipt-hypothesis form)**; f(2,2)=254 unconditional; 12 families; a-sweep ≤ 60 | p ∤ a+1 odd-p class; a>60 monsters; the (6,2) freeze; #1108 the next war |
+| #261 | frontier 3.74M; Q3 bridge | all-n termination; rational-x (Wang's gap law = new rigidity tool) |
+| #271 | A(4) k=13..21; Type-2 empirical | the Type-2 PROOF; k=22/25 |
+| #406 | pattern frontier; odd half unconditional | the gate (1979 core; 3L/2 + wave_alt_exit + Mahler lane mapped) |
+
+LESSON LEDGER (append-only):
+- L81: **the omega death-spiral** — `omega` on a context carrying big-power
+  equations (fact i = 2^k * w with k ≈ 134) plus a second equation on the same
+  atom grinds for millions of heartbeats; symptom: a trivial-looking `have`
+  with a small by-omega dies at whnf-timeout. Cure: prove arithmetic helpers in
+  CLEAN contexts (before the big-power hypotheses enter scope), then use
+  explicit Nat-le terms (Nat.le_trans, helper lemmas) — never post-hoc omega.
+- L82: the display-pipe (L76) also EATS `[h`-sequences and can HIDE doc-comment
+  openers (`/--`) — verify transformer site-strings against Python repr, never
+  against sed/Read displays.
+- L83: the single `decide +kernel` on a full class-DP obstructionCheck OOMs
+  (exit 137) even at 26% of the (2,2) term volume — the kernel's no-memo
+  quadratic re-derivation is scale-murder; the freeze-chain architecture is
+  MANDATORY for g ≳ 100 (the §7 olean ladder: per-round frozen literals + one
+  kernel decide per round).
+- L84: porting a big kernel to new constants: keep ALL def names identical in
+  the twin module (module-qualification makes them distinct) — then a 2,333-line
+  port is 85% verbatim and the delta is 55 exact-match sites a Python
+  transformer can apply with count-assertions in one pass.
+
+NEXT STRIKES (the queue stands):
+(a) #404: the (6,2) §7-freeze (obstructionCheck_true as a theorem — the
+    Kill-#14 architecture at half scale; ~8 modules) + the flat-class value
+    batch (f(50,2)=62 etc. — tiny freezes).
+(b) #1108 — the factorial-base digit-restriction war (the next NEW front).
+(c) The #406 research strike: the 3L/2 BAD-exclusion (the only route with
+    positive finite evidence) + the compression audit (cheap, decisive).
+(d) #261 with Wang's published gap law (the carry-orbit rigidity tool).
+
+State is full. The engine never stops; it never lies.
