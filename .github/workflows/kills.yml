@@ -268,3 +268,23 @@ jobs:
           grep -F "'full_cascade_v2' depends on axioms" subset-kernel.log
           grep -F "'square_cascade_even' depends on axioms" subset-kernel.log
           echo SUBSET_KERNEL_KERNEL_GREEN=1
+
+      - name: "Kernel 14 - Erdos 404 ExactF62 CHAIN (f(6,2) = 133, UNCONDITIONAL - the §7 freeze, Kill #18)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          # §7 THE MODULE CHAIN at anchor 6 (the Kill-#14 architecture at half
+          # scale) — every module its own lean process, olean ladder in
+          # dependency order. Kills `hob : obstructionCheck = true`.
+          mkdir -p oleans && export LEAN_PATH="$PWD/oleans"
+          : > kernel14.log
+          for M in ExactF62 F62DataS F62DataC F62DataD1 F62DataD2 F62Chain F62SweepA F62SweepB F62Coins F62FM0 F62FM1 F62DD0 F62DD1 F62DD2 F62DD3 F62DD4 F62DD5 F62DDm0 F62Asm0 F62Asm1 F62AllA F62AllB F62AllC F62AllD F62All; do
+            echo "=== $M ===" >> kernel14.log
+            lake env lean -o oleans/$M.olean problem404-q3-chain/$M.lean 2>&1 | tee -a kernel14.log
+          done
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel14.log
+          grep -F "133" kernel14.log | head -3
+          grep -F "129" kernel14.log | head -3
+          grep -F "'obstructionCheck_true' depends on axioms: [propext, Quot.sound]" kernel14.log
+          grep -F "'erdos404_f62_final' depends on axioms: [propext, Classical.choice, Quot.sound]" kernel14.log
+          echo EXACT_F62_CHAIN_KERNEL_GREEN=1
