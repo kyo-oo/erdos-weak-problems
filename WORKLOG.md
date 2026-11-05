@@ -585,9 +585,25 @@ BULLDOZE, MATHS skill, GitHub CI Lean (NOT local).
    greps) + verify_f62.py + verify_cascade.py to the battery +
    problem1108-subset-kernel/** to the paths.
 
-7. **PUSH:** branch `oneshot/1108-cascade-20261105` from the
-   five-families tip. CI receipt: [PENDING THIS PUSH — filled below on
-   green.]
+7. **PUSH + CI RECEIPT:** branch `oneshot/1108-cascade-20261105` from the
+   five-families tip. **CI RUN 42061257046 GREEN (commit e5ab4ca) — all 13
+   kernels + battery**: Kernel 13 receipts — (4,3,1), (6,3,3), (3,1,2),
+   (0,0,0), 1401602635449 ×2; `full_cascade_v2` +
+   `square_cascade_even` **[propext, Quot.sound]** (no choice — the law
+   is constructive-clean); `isolated_min_v2` + `square_pair_singleton_even`
+   [propext, Classical.choice, Quot.sound]; zero sorry, zero custom axioms.
+   **Kernel 12 (ExactF62, Kill #16) restored and GREEN in the same run** —
+   Kill #16's CI claim is now real on this branch. THE COMPILE WAR
+   (4 rounds, 31 → 4 → 0 errors, blind — no local Lean, CI was the only
+   compiler): R1 (31 errors — by_contra not core ×2 → `cases h : e with`
+   equations; decide cannot evaluate WF-recursive v2 → v2_one/v2_two
+   rebuilt via v2_succ, v2_zero via simp [v2]; four Nat.le_refl-as-1≤n+1
+   landmines → succ_le_succ (zero_le _); le_add_left arg order; subst
+   direction flipped via .symm; Eq.trans closings); R2 (audit-caught: the
+   lost v2_dom_tail fix + rw [← hxb] direction — masked by cascades);
+   R3 (4 errors — rw trailing-rfl cannot reduce 0 + x = x → omega;
+   cases h : e substitutes the GOAL → rfl branches; mul_div_cancel_left
+   is b*a/b = a); R4 GREEN.
 
 LESSON LEDGER (append-only):
 - L85: a never-compiled Lean file is a minefield: `exact h` with h : P
@@ -600,6 +616,13 @@ LESSON LEDGER (append-only):
 - L87: the CI workflow is part of the kill: a Lean file on the branch
   without a workflow step is NOT CI-verified, whatever a receipt
   message claims — restore/extend the workflow with every kernel.
+- L88: `cases h : e` SUBSTITUTES e in the goal (the zero-branch goal
+  becomes `0 = 0`, not `e = 0`) — close with `rfl`, never `exact h`.
+- L89: rw's trailing rfl is WEAK — no delta on WF-defs, no `0 + x`
+  reduction, no Nat.le reflexivity — close explicitly (rfl / le_refl /
+  omega) after every rw that lands on a non-syntactic identity.
+- L90: Nat.mul_div_cancel_left (a) (H : 0 < b) : b * a / b = a — the
+  DIVISOR leads; apply directly, never mul_comm first.
 
 THE SCOREBOARD AFTER SESSION 023: #271, #404 crossed (BOSS-confirmed);
 #406 BOSS's anchor; #261 cores walled (frontier 3,740,200); **#1108 =
