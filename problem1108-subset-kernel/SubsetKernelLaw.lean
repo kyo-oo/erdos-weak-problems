@@ -340,8 +340,9 @@ theorem v2_dom_tail : ∀ (T : List Nat) (b : Nat),
       show fact b + (fact a + sumFacts t) = (fact b + sumFacts t) + fact a
       omega
     rw [hreg]
-    exact v2_lt_add ((fact b + sumFacts t) + fact a) (fact b + sumFacts t)
-      (fact a) (Nat.le_refl _) hpos (by rw [hrec]; exact hbig)
+    exact Eq.trans (v2_lt_add ((fact b + sumFacts t) + fact a)
+      (fact b + sumFacts t) (fact a) (Nat.le_refl _) hpos
+      (by rw [hrec]; exact hbig)) hrec
 
 /-- **THE ISOLATED-MINIMUM LAW** (the subset kernel law, sharp form):
 if `b` occurs exactly once in `S` and every other element carries a
@@ -364,7 +365,7 @@ theorem isolated_min_v2 : ∀ (S : List Nat) (b : Nat),
       have hnmem : ¬ memB b t := not_memB_of_countB_zero t b hct
       have hall : ∀ x, memB x t → v2 (fact b) < v2 (fact x) := by
         intro x hx
-        exact hmin x (Or.inr hx) (fun hxb => hnmem (by rw [hxb]; exact hx))
+        exact hmin x (Or.inr hx) (fun hxb => hnmem (by rw [← hxb]; exact hx))
       show v2 (fact b + sumFacts t) = v2 (fact b)
       exact v2_dom_tail t b hall
     · have hbt : memB b t := by
