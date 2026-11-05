@@ -694,3 +694,69 @@ FRONTS): #1108 Legendre-parity-in-Lean + vpad port + MitM census; #404
 (6,2) §7-freeze; #261 scattered-representation; #271/A(4).
 
 State is full. The engine never stops; it never lies.
+
+---
+
+## SESSION 025 — 2026-11-05 — THE LIST + KILL #18 (f(6,2) = 133 UNCONDITIONAL)
+
+**BOSS's order:** "MAKE A LIST, HOW MANY PROBLEMS WE HAD ONE SHOT, AND HOW
+MANY PROBLEM WE ARE GOING TO ONE SHOT, COMPLETE LIST, AND WE WILL ACT
+ACCORDING TO THE LIST. IF THE PROBLEM TAKING TIME GETTING ONE SHOT, WE
+WILL TAKE IT OUT OF PRIORITY. ONLY PROBLEM THAT GETS COMPLETE
+UNCONDITIONAL PROOF IS SELECTED AND MARKED. NEW ROULETTE RULE, BEGIN THE
+WORK!! FULL MATHS FROM MY BOTH REPOS."
+
+**Executed:**
+
+1. **THE LIST WRITTEN** (`THE_LIST.md`, pushed, 4-location redundancy):
+   Section A = the 17 kills (5 fronts; #404/#271 crossed; #1108 the active
+   war; #406 BOSS's own; #260 dead); Section B = the forward ladder ranked
+   by TIME-TO-UNCONDITIONAL under the NEW ROULETTE RULE: rank 1 the (6,2)
+   freeze (mechanical), rank 2 #1108 Legendre parity + vpad port, rank 3
+   the flat-class value batch — #261 rational-x and #271/A(4)
+   DEPRIORITIZED (long wars), #376/#124/#820 parked, #406 hands-off.
+   Execution law: 2 rounds without a complete unconditional ⟹ auto-⏸.
+
+2. **KILL #18 — THE (6,2) §7-FREEZE, f(6,2) = 133 UNCONDITIONAL** (the
+   rank-1 strike, same round): the Kill-#14 architecture at half scale.
+   - `gen_f62_final.py` (the twin-port generator): self-contained DP
+     (130/130 sets, obstructionCheck = true, peak 352 states, 129 coins
+     [7,135], 1 multi-chunk round — WORK_CAP 60000) → 24 modules:
+     F62DataS/C + DataD1/2 + Chain + SweepA/B + Coins + FM0/1 + DD0–5 +
+     DDm0 + Asm0/1 + AllA–D + All.
+   - The sweep spec port: cls = V − 4 (v2 720 = 4), filter-free via
+     classOf_bound_all, hcls via v2_fact_classOf, coinFrom_spec with
+     k₀ = 7, F₀ = 5040, V₀ = 4, k + N = 136.
+   - **CI RUN 42119256613 GREEN (commit 2498b4f) — Kernel 14 —
+     FIRST-ROUND compile war, ZERO errors** (the only 'error:' string in
+     the log is the grep command echo). Receipts: 61 (witness), 133
+     (valuation), 129 (table), true ×2. **`obstructionCheck_true`
+     [propext, Quot.sound] — the hypothesis is DEAD; `erdos404_f62_final`
+     ZERO hypotheses [propext, Classical.choice, Quot.sound].**
+   - Kill #16's sole hypothesis is now a theorem: f(6,2) = 133 joins
+     f(2,2) = 254 as the second unconditional exact f(a,2) value.
+
+LESSON LEDGER:
+- L93: the twin-port doctrine extends to GENERATORS: porting
+  gen_f22_final.py → gen_f62_final.py = constant table swap (CP, k₀,
+  divisor, V-base, N, bound, filter cap, range) + self-contained DP
+  (drop the dumps cross-check, keep the internal asserts) — the 24-module
+  chain compiled FIRST-ROUND (vs 31 modules / multi-round for the
+  original). Half-scale ports of proven architectures are nearly free.
+- L94: f-string brace law for Lean `{{ }}` implicit binders in emitted
+  templates: quadruple braces ({{{{ }}}}) — anything less is a syntax
+  error that kills the generator before any math runs.
+
+THE SCOREBOARD AFTER SESSION 025: 18 kills. #404: CROSSED with TWO
+unconditional exact values (f(2,2)=254, f(6,2)=133) + Theorem B (every
+prime) + 12 families + the a-sweep. #1108: the active war (Legendre
+parity + vpad port = the next strike, THE_LIST rank 2). #261/#271-A(4):
+deprioritized under the new rule. #406: BOSS's front. THE LIST is the
+operational law.
+
+NEXT STRIKES (per THE_LIST):
+(a) #1108 Legendre parity in Lean (v₂(n!) = n − s₂(n) core-only) + the
+    all-prime isolated-minimum (vpad port).
+(b) #404 flat-class value batch (tiny freezes: f(50,2)=62 etc.).
+
+State is full. The engine never stops; it never lies.

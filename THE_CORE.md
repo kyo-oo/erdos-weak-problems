@@ -284,23 +284,25 @@ workflow is part of the kill — extend kills.yml with EVERY kernel.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 023 standing order)
+## §9. THE QUEUE (next strikes — Session 025, governed by THE_LIST.md)
 
-1. **#1108 THE WAR (active)** — finiteness of squares/powerfuls in A.
-   Next engines: **(a) Legendre parity in Lean** (Λ(j) = v₂((2j)!) = 2j −
-   s₂(j) — the explicit s₂ invariant, the classical Legendre formula in
-   core-only Lean); **(b) all-prime isolated-minimum in Lean** (the `vpad`
-   toolkit of TheoremBGeneral transfers); **(c) census MitM beyond 24**
-   (evidence wing); **(d) the composite-cascade wall** (sparse-dodge beyond
-   the Bertrand window — the real mathematical wall).
-2. **#404 (6,2) §7-freeze** — obstructionCheck_true as a theorem (Kill-#14
-   architecture at half scale, ~8 modules) ⟹ **Kill #16 unconditional**.
-3. **#404 classification completion** — 22 deep survivors at 2²⁸, bounded
+**THE NEW ROULETTE RULE (BOSS, Session 025):** priority = time-to-complete-
+unconditional-proof; 2 rounds without a full kill ⟹ auto-deprioritized.
+**THE_LIST.md is the operational law** (repo + 4 locations). Current ladder:
+
+1. ✅ **(6,2) §7-freeze — K18 DELIVERED** (f(6,2)=133 unconditional, CI
+   42119256613, first-round war).
+2. **#1108 THE WAR (active)** — **(a) Legendre parity in Lean** (Λ(j) =
+   v₂((2j)!) = 2j − s₂(j) — the classical Legendre formula core-only);
+   **(b) all-prime isolated-minimum in Lean** (the `vpad` toolkit of
+   TheoremBGeneral transfers); **(c) census MitM beyond 24** (evidence
+   wing); **(d) the composite-cascade wall** (the real mathematical wall).
+3. **#404 flat-class value batch** — tiny freezes (f(50,2)=62 etc.).
+4. **#404 classification completion** — 22 deep survivors at 2²⁸, bounded
    staircases, odd-p staircase class (p ∤ a+1).
-4. **#261 rational-x** — scattered-representation conjecture (tree surgery
-   + Theorem 2/3/5 machinery) + all-n termination (frontier 3,740,200).
-5. **#271/A(4)** — Type-2 Stanley frontier.
-6. **#406 — BOSS'S FRONT. HANDS OFF.**
+5. ⏸ **#261 rational-x** + all-n termination — DEPRIORITIZED (long war).
+6. ⏸ **#271/A(4)** — DEPRIORITIZED (long war).
+7. **#406 — BOSS'S FRONT. HANDS OFF.**
 
 ---
 
@@ -326,9 +328,14 @@ workflow is part of the kill — extend kills.yml with EVERY kernel.
 - **023**: THE #1108 WAR OPENS — Kill #17 THE FULL PAIR-CASCADE LAW +
   square parity invariant, CI 42061257046 (4-round blind compile war
   31→4→0); Kernel 12 restored; census-24; lessons L85–L90.
-- **024** (THIS SESSION): THE AMNESIA KILL — chat 1 recovered via the V1
+- **024**: THE AMNESIA KILL — chat 1 recovered via the V1
   JSON batch method (11 MB), full state verified (sandbox intact, token
   LIVE), THE CORE written + wipe-proofed (5 locations incl. GitHub).
   **The engine never stops; it never lies.**
+- **025**: THE LIST (new roulette rule: time-to-unconditional priority,
+  auto-deprioritization) + **KILL #18 — f(6,2)=133 UNCONDITIONAL** (the
+  §7 freeze at anchor 6: 24-module chain, gen_f62_final.py, CI 42119256613
+  GREEN, FIRST-ROUND compile war; obstructionCheck_true is a theorem;
+  Kill #16's hypothesis is dead). L93/L94.
 
 *State is full. The engine never stops; it never lies.*

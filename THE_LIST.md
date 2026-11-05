@@ -35,7 +35,7 @@
 
 | Rank | Target | Why it's next | Mark |
 |---|---|---|---|
-| 1 | **#404 (6,2) §7-FREEZE** — `obstructionCheck_true` as a THEOREM ⟹ **f(6,2)=133 UNCONDITIONAL** (Kill #18) | Mechanical: the Kill-#14 architecture at half scale (24 modules generated, DP pre-verified 130/130, peak 352 states). CI war only. FAST unconditional. | 🎯 **IN FLIGHT THIS ROUND** |
+| 1 | **#404 (6,2) §7-FREEZE** — `obstructionCheck_true` as a THEOREM ⟹ **f(6,2)=133 UNCONDITIONAL** (Kill #18) | **DELIVERED**: 24-module §7 chain, CI run 42119256613 GREEN, FIRST-ROUND compile war (zero errors), receipts 61/133/129. `obstructionCheck_true` [propext, Quot.sound]; `erdos404_f62_final` ZERO hypotheses. | ✅ **KILLED THIS ROUND** |
 | 2 | **#1108 LEGENDRE PARITY IN LEAN** — v₂(n!) = n − s₂(n) (the explicit s₂ invariant behind Λ(j) = 2j − s₂(j)) + the all-prime isolated-minimum (vpad port from TheoremBGeneral) | Complete unconditional theorems in the active war; classical math, core-only Lean, the v2 toolkit exists (SubsetKernelLaw). Moderate CI war. | 🎯 selected (next round) |
 | 3 | **#404 flat-class value batch** — f(50,2)=62 and siblings as tiny freezes (the a-sweep values hardened to unconditional) | Tiny freezes reuse the (6,2) chain architecture at smaller scale. Each = one unconditional exact value. | 🎯 selected (batch) |
 | 4 | **#1108 census MitM > 24** (evidence wing) + composite-cascade wall study | Supports the war's honest-scope section; NOT a kill by itself (finite-check law). | ⏸ support only |
@@ -45,7 +45,7 @@
 | 8 | **#406** | **BOSS'S FRONT — HANDS OFF.** | 🚫 |
 | 9 | **#260 / #404 Conjecture D** | Dead (Wang 2026 / refuted by Kill #14). | 🚫 |
 
-**Count going forward: 3 fast unconditional lanes selected (ranks 1–3);
+**Count going forward: rank 1 DELIVERED (Kill #18); ranks 2–3 selected (next strikes);
 2 deprioritized under the new rule (ranks 5–6); 4 parked/hands-off.**
 
 ---
