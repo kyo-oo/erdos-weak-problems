@@ -72,4 +72,25 @@ for a in [2, 4, 6, 8]:
         split = v2(total) == v2(F[a]) + v2(1 + sum(P(a, i) for i in B))
         ck(f"split a={a} B={B}", split)
 
+# ---- Theorem B GENERAL-p: the p | a+1 class, every prime p (Kill #15) ----
+def vp(p, n):
+    c = 0
+    while n % p == 0: n //= p; c += 1
+    return c
+
+for p in [2, 3, 5, 7, 11, 13]:
+    for m in range(1, 5):                  # a + 1 = m*p  (the full class)
+        a = m * p - 1
+        base = vp(p, F[a])
+        for B in [[], [a+1], [a+1, a+2], [a+1, a+3, a+5],
+                  [a+2, a+4, a+6, a+8], [a+1, a+2, a+3, a+7]]:
+            ck(f"BG p={p} a={a} B={B}", vp(p, sf(a, B)) == base)
+# the Lean receipts, one by one
+ck("BG receipt (2,3)", vp(3, sf(2, [4, 6])) == vp(3, F[2]) == 0)
+ck("BG receipt (5,2)", vp(2, sf(5, [6, 8])) == vp(2, F[5]) == 3)
+ck("BG receipt (8,3)", vp(3, sf(8, [10, 11])) == vp(3, F[8]) == 2)
+ck("BG receipt (10,11)", vp(11, sf(10, [11, 15])) == vp(11, F[10]) == 0)
+ck("BG receipt (14,5)", vp(5, sf(14, [16, 21])) == vp(5, F[14]) == 2)
+ck("BG receipt (1,2)", vp(2, sf(1, [2, 3])) == vp(2, F[1]) == 0)
+
 print(f"VERIFY_404 BATTERY: ALL {checks} CHECKS PASSED")

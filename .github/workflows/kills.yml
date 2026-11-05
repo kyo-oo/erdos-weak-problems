@@ -226,3 +226,15 @@ jobs:
           grep -F "'erdos404_f22_final' depends on axioms: [propext, Classical.choice, Quot.sound]" kernel10.log
 
 
+      - name: "Kernel 11 - Erdos 404 Theorem B for EVERY prime (the p | a+1 class, Kill #15)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem404-full/TheoremBGeneral.lean 2>&1 | tee theorem-b-general.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' theorem-b-general.log
+          grep -F "(3, 2, 2, 1)" theorem-b-general.log
+          test "$(grep -cF '(0, 0)' theorem-b-general.log)" -ge 3
+          grep -F "(3, 3)" theorem-b-general.log
+          test "$(grep -cF '(2, 2)' theorem-b-general.log)" -ge 2
+          grep -F "'erdos404_theoremB' depends on axioms: [propext, Quot.sound]" theorem-b-general.log
+          echo THEOREM_B_GENERAL_KERNEL_GREEN=1
