@@ -307,7 +307,7 @@ one into a show pattern; feed omega the facts as `have`s instead.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 027, governed by THE_LIST.md v3)
+## §9. THE QUEUE (next strikes — Session 028, governed by THE_LIST.md v4)
 
 **THE 5-ROUND LAW (BOSS, Session 027 — THE NEW STANDARD):** "IF THE
 PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
@@ -373,6 +373,18 @@ ladder (THE_LIST v3):
   #203 (2-D covering reduction derived). THE_LIST v2 §C. Honest verdict:
   no fast one-shot left in the corpus.
 - **027**: THE FULL-FIREPOWER SESSION — arsenal DOUBLED-LOADED (BOSS's
+- **028** (2026-11-06): THE FULL-CORPUS 5-ROUND RE-SELECTION + ARSENAL
+  VENDORING — 588/588 statements re-read (Chrome-UA), THE_LIST v4: 18
+  active fronts under the 5-round law; BOSS's mathematics vendored at
+  arsenal/ (erdosternary2 bulldoze + HC-PROOF research, exact Mathlib
+  pin 51e6992e) and APPLIED in both new kernels; STRIKE PACKAGES:
+  #686 Pell-ratio (Kernel 16: non-squares COMPLETE, 90-witness table,
+  square families; rounds 2–4) + #727 factorial-square (Kernel 17:
+  n=208 WITNESS THEOREM (210)!²|(416)!, 28 tight primes, 55-solution
+  census; rounds 4–5); witness-hunts: #885 k=3 WITNESSED, #677/#850/
+  #274 negative-to-bound; arsenal doctrine law (every kernel imports
+  BOSS's theorems); NO ledger additions; NO sub-agents. CI: run
+  42196183719 on 12d4a2e.
   doubt was FOUNDED: erdosternary2 re-cloned 7,083 theorems + HC-PROOF
   synced +17 commits to 8,004 = 15,087 theorems, latest branches all
   files); war council × 3 parallel agents (ALPHA/BETA/GAMMA; BETA died
