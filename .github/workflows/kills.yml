@@ -210,6 +210,7 @@ jobs:
           python3 problem404-q3-chain/verify_f22.py
           python3 problem404-q3-chain/verify_f62.py
           python3 problem1108-subset-kernel/verify_cascade.py
+          python3 problem1108-subset-kernel/verify_legendre.py
       - name: Kernel 10 (Erdos 404 ExactF22 — f(2,2) = 254, UNCONDITIONAL)
         run: |
           set -euo pipefail
@@ -288,3 +289,26 @@ jobs:
           grep -F "'obstructionCheck_true' depends on axioms: [propext, Quot.sound]" kernel14.log
           grep -F "'erdos404_f62_final' depends on axioms: [propext, Classical.choice, Quot.sound]" kernel14.log
           echo EXACT_F62_CHAIN_KERNEL_GREEN=1
+
+      - name: "Kernel 15 - Erdos 1108 LEGENDRE PARITY LAW (v₂(n!) = n − s₂(n): the Λ-spine + EXPLICIT CASCADE + SQUARE-PARITY INVARIANT, Kill #19)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          # The Λ(j) = 2j − s₂(j) spine of the #1108 engine made explicit:
+          #   v₂(n!) + s₂(n) = n          (legendre_v2_fact — Legendre at p=2)
+          #   Λ(j) = 2j − s₂(j)           (legendre_lam — the spine)
+          #   v₂(Σ a!) = (2j₀ − s₂(j₀)) + v₂(C)   (explicit_cascade)
+          #   square ⟹ s₂(j₀) ≡ v₂(C) (mod 2)     (square_parity_s2 — the payoff)
+          lake env lean problem1108-subset-kernel/SubsetKernelLaw.lean 2>&1 | tee legendre.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' legendre.log
+          grep -F "(0, 1, 3, 8, 1)" legendre.log
+          grep -F "(8, 8, 8)" legendre.log
+          grep -F "(20, 20)" legendre.log
+          grep -F "(4, 4)" legendre.log
+          grep -F "(1, 1)" legendre.log
+          grep -E "'legendre_v2_fact' (does not depend on any axioms|depends on axioms)" legendre.log
+          grep -E "'legendre_lam' (does not depend on any axioms|depends on axioms)" legendre.log
+          grep -E "'explicit_cascade' (does not depend on any axioms|depends on axioms)" legendre.log
+          grep -E "'square_parity_s2' (does not depend on any axioms|depends on axioms)" legendre.log
+          python3 problem1108-subset-kernel/verify_legendre.py
+          echo LEGENDRE_PARITY_KERNEL_GREEN=1

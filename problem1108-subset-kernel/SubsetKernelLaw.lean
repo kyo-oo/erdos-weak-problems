@@ -651,3 +651,213 @@ theorem square_cascade_even (S : List Nat) (r : Nat) (hS : S ≠ [])
 #print axioms square_pair_singleton_even
 #print axioms full_cascade_v2
 #print axioms square_cascade_even
+
+-- ===========================================================================
+-- §7  THE LEGENDRE PARITY LAW: Λ(j) = v₂((2j)!) = 2j − s₂(j)  (Kill #19)
+-- ===========================================================================
+--
+-- The engine's Λ-spine made explicit.  The binary digit sum s₂ (mirroring
+-- the shape of `v2`) gives the closed form of every pair level:
+--
+--     v₂(n!) = n − s₂(n)                (Legendre's formula at p = 2:
+--      `legendre_v2_fact`                v₂(n!) = Σ ⌊n/2^i⌋ = n − s₂(n))
+--     Λ(j) = v₂((2j)!) = 2j − s₂(j)     (`legendre_lam` — the spine)
+--
+-- THE EXPLICIT CASCADE (`explicit_cascade`): the full cascade law with the
+-- spine unfolded —
+--
+--     v₂ ( Σ_{a∈S} a! ) = (2j₀ − s₂(j₀)) + v₂(C(S)).
+--
+-- THE SQUARE-PARITY INVARIANT (`square_parity_s2` — the payoff): if
+-- Σ_{a∈S} a! is a perfect square then
+--
+--     s₂(j₀) ≡ v₂(C(S))  (mod 2)
+--
+-- — the parity of the bottom pair's binary digit sum is LOCKED to the
+-- cascade parity on every square in A (Kill #17's obstruction engine with
+-- the Λ-spine fully explicit).
+
+/-- Binary digit sum s₂ (`s2 0 = 0`), mirroring the shape of `v2`. -/
+def s2 : Nat → Nat
+  | 0 => 0
+  | n + 1 => if (n + 1) % 2 = 0 then s2 ((n + 1) / 2) else 1 + s2 ((n + 1) / 2)
+termination_by n => n
+decreasing_by omega
+
+theorem s2_succ (n : Nat) :
+    s2 (n + 1) = if (n + 1) % 2 = 0 then s2 ((n + 1) / 2) else 1 + s2 ((n + 1) / 2) := by
+  simp [s2]
+
+theorem s2_zero : s2 0 = 0 := by simp [s2]
+
+/-- Even numbers: s₂(m) = s₂(m/2) (`m ≥ 1`; mirror of `v2_even_pos`). -/
+theorem s2_even (m : Nat) (hm : 1 ≤ m) (h2 : m % 2 = 0) :
+    s2 m = s2 (m / 2) := by
+  have ⟨j, hj⟩ : ∃ j, m = j + 1 := ⟨m - 1, by omega⟩
+  rw [hj, s2_succ, if_pos (by omega : (j + 1) % 2 = 0)]
+
+/-- Odd numbers: s₂(m) = 1 + s₂(m/2) (mirror of `v2_odd`). -/
+theorem s2_odd (m : Nat) (h2 : m % 2 = 1) : s2 m = 1 + s2 (m / 2) := by
+  have ⟨j, hj⟩ : ∃ j, m = j + 1 := ⟨m - 1, by omega⟩
+  rw [hj, s2_succ, if_neg (by omega : ¬((j + 1) % 2 = 0))]
+
+/-- Doubling appends a binary zero: s₂(2m) = s₂(m). -/
+theorem s2_double : ∀ (m : Nat), s2 (2 * m) = s2 m
+  | 0 => rfl
+  | m + 1 => by
+    have hmod : (2 * (m + 1)) % 2 = 0 := by omega
+    have hpos : 1 ≤ 2 * (m + 1) := by omega
+    rw [s2_even (2 * (m + 1)) hpos hmod]
+    have hdiv : (2 * (m + 1)) / 2 = m + 1 := by omega
+    rw [hdiv]
+
+/-- Doubling plus one appends a binary one: s₂(2m+1) = 1 + s₂(m). -/
+theorem s2_double_plus_one (m : Nat) : s2 (2 * m + 1) = 1 + s2 m := by
+  have hmod : (2 * m + 1) % 2 = 1 := by omega
+  rw [s2_odd (2 * m + 1) hmod]
+  have hdiv : (2 * m + 1) / 2 = m := by omega
+  rw [hdiv]
+
+/-- **THE EVEN-FACTORIAL LAW**: v₂((2m)!) = m + v₂(m!) — the multiplicative
+half-step of Legendre's formula (each even factor 2, 4, …, 2m contributes
+exactly one 2 on top of the odd-collapsed factorial below). -/
+theorem v2_fact_even : ∀ (m : Nat), v2 (fact (2 * m)) = m + v2 (fact m)
+  | 0 => by
+    show v2 1 = 0 + v2 1
+    have h1 := v2_one
+    omega
+  | m + 1 => by
+    have ih := v2_fact_even m
+    have h21 : 2 * (m + 1) = 2 * m + 2 := by omega
+    rw [h21]
+    have hsplit : fact (2 * m + 2) = (2 * m + 2) * fact (2 * m + 1) := rfl
+    rw [hsplit]
+    have hv : v2 ((2 * m + 2) * fact (2 * m + 1)) =
+        v2 (2 * m + 2) + v2 (fact (2 * m + 1)) :=
+      v2_mul (2 * m + 2 + fact (2 * m + 1)) (2 * m + 2) (fact (2 * m + 1))
+        (Nat.le_refl _) (Nat.succ_le_succ (Nat.zero_le (2 * m + 1)))
+        (fact_pos (2 * m + 1))
+    rw [hv]
+    have hB : v2 (2 * m + 2) = 1 + v2 (m + 1) := by
+      have heven : (2 * m + 2) % 2 = 0 := by omega
+      have hpos : 1 ≤ 2 * m + 2 := by omega
+      rw [v2_even_pos (2 * m + 2) hpos heven]
+      have hdiv : (2 * m + 2) / 2 = m + 1 := by omega
+      rw [hdiv]
+    have hC : v2 (fact (2 * m + 1)) = v2 (fact (2 * m)) := pair_flat m
+    have hD : v2 (fact (m + 1)) = v2 (m + 1) + v2 (fact m) := by
+      show v2 ((m + 1) * fact m) = v2 (m + 1) + v2 (fact m)
+      exact v2_mul (m + 1 + fact m) (m + 1) (fact m) (Nat.le_refl _)
+        (Nat.succ_le_succ (Nat.zero_le m)) (fact_pos m)
+    omega
+
+/-- **THE LEGENDRE PARITY LAW** (fuel induction on the bound f): for every
+n with n ≤ f, v₂(n!) + s₂(n) = n — Legendre's formula at p = 2. -/
+theorem legendre_aux : ∀ (f n : Nat), n ≤ f → v2 (fact n) + s2 n = n
+  | 0, n, hn => by
+    have hn0 : n = 0 := by omega
+    rw [hn0]
+    have h1 : v2 (fact 0) = 0 := v2_one
+    have h2 : s2 0 = 0 := s2_zero
+    omega
+  | f + 1, 0, hn => by
+    have h1 : v2 (fact 0) = 0 := v2_one
+    have h2 : s2 0 = 0 := s2_zero
+    omega
+  | f + 1, n + 1, hn => by
+    cases (show (n + 1) % 2 = 0 ∨ (n + 1) % 2 = 1 by omega) with
+    | inl hpar =>
+      -- EVEN: n + 1 = 2k with k ≥ 1 (n + 1 ≥ 1); the even-factorial law.
+      have ⟨k, hk⟩ : ∃ k, n + 1 = 2 * k := ⟨(n + 1) / 2, by omega⟩
+      rw [hk]
+      have hkf : k ≤ f := by omega
+      have hve := v2_fact_even k
+      have hsd := s2_double k
+      have ihk := legendre_aux f k hkf
+      omega
+    | inr hpar =>
+      -- ODD: n + 1 = 2k+1; pair flatness keeps Λ, s₂ gains one bit.
+      have ⟨k, hk⟩ : ∃ k, n + 1 = 2 * k + 1 := ⟨(n + 1) / 2, by omega⟩
+      rw [hk]
+      have hflat := pair_flat k
+      have hs := s2_double_plus_one k
+      have hsd := s2_double k
+      have ihk := legendre_aux f (2 * k) (by omega)
+      omega
+
+/-- **LEGENDRE'S FORMULA AT p = 2**: v₂(n!) + s₂(n) = n, i.e.
+v₂(n!) = n − s₂(n). -/
+theorem legendre_v2_fact (n : Nat) : v2 (fact n) + s2 n = n :=
+  legendre_aux n n (Nat.le_refl n)
+
+theorem legendre_v2_fact_sub (n : Nat) : v2 (fact n) = n - s2 n := by
+  have h := legendre_v2_fact n
+  omega
+
+/-- The Λ-spine in additive form: Λ(j) + s₂(j) = 2j. -/
+theorem legendre_lam_add (j : Nat) : Lam j + s2 j = 2 * j := by
+  have h := legendre_v2_fact (2 * j)
+  have hsd := s2_double j
+  show v2 (fact (2 * j)) + s2 (2 * j) = 2 * j
+  omega
+
+/-- **THE LEGENDRE PARITY LAW ON THE Λ-SPINE**:
+Λ(j) = v₂((2j)!) = 2j − s₂(j). -/
+theorem legendre_lam (j : Nat) : Lam j = 2 * j - s2 j := by
+  have h : v2 (fact (2 * j)) + s2 j = 2 * j := legendre_lam_add j
+  show v2 (fact (2 * j)) = 2 * j - s2 j
+  omega
+
+/-- **THE EXPLICIT CASCADE** (the full cascade law, Λ-spine unfolded):
+for every nonempty S, with j₀ = botPair S and C(S) = cascadeC S,
+v₂ ( Σ_{a∈S} a! ) = (2j₀ − s₂(j₀)) + v₂(C(S)). -/
+theorem explicit_cascade (S : List Nat) (hS : S ≠ []) :
+    v2 (sumFacts S) = (2 * (botPair S) - s2 (botPair S)) + v2 (cascadeC S) := by
+  have h := full_cascade_v2 S hS
+  have hl : Lam (botPair S) = 2 * (botPair S) - s2 (botPair S) :=
+    legendre_lam (botPair S)
+  rw [hl] at h
+  exact h
+
+/-- **THE SQUARE-PARITY INVARIANT** (the Kill #19 payoff): if Σ_{a∈S} a!
+is a perfect square then s₂(j₀) ≡ v₂(C(S)) (mod 2) — the parity of the
+bottom pair's binary digit sum is locked to the cascade parity on every
+square in A. -/
+theorem square_parity_s2 (S : List Nat) (r : Nat) (hS : S ≠ [])
+    (h : sumFacts S = r * r) :
+    s2 (botPair S) % 2 = v2 (cascadeC S) % 2 := by
+  have hc := square_cascade_even S r hS h
+  have hl := legendre_lam_add (botPair S)
+  omega
+
+-- ===========================================================================
+-- §7 RECEIPTS (the Legendre spine, spot-verified)
+-- ===========================================================================
+
+-- The binary digit sum (hand-checked: 7 = 111₂, 255 = 11111111₂, 256 = 100000000₂):
+#eval (s2 0, s2 1, s2 7, s2 255, s2 256)
+-- expected (0, 1, 3, 8, 1)
+
+-- Λ(5) = v₂(10!) = ⌊10/2⌋+⌊10/4⌋+⌊10/8⌋ = 5+2+1 = 8; the explicit law agrees:
+#eval (Lam 5, 2 * 5 - s2 5, v2 (fact 10))
+-- expected (8, 8, 8)
+
+-- Legendre's identity at n = 20 (v₂(20!) = 18, s₂(20) = 2):
+#eval (v2 (fact 20) + s2 20, 20)
+-- expected (20, 20)
+
+-- THE EXPLICIT CASCADE on the nontrivial square cascade S = [4, 5] (144 = 12²):
+#eval (v2 (sumFacts [4, 5]), 2 * (botPair [4, 5]) - s2 (botPair [4, 5]) + v2 (cascadeC [4, 5]))
+-- expected (4, 4)
+
+-- THE SQUARE-PARITY INVARIANT on 144 = 12²: s₂(j₀) = s₂(2) = 1 and
+-- v₂(C) = v₂(18) = 1 — both odd, locked equal:
+#eval (s2 (botPair [4, 5]) % 2, v2 (cascadeC [4, 5]) % 2)
+-- expected (1, 1)
+
+#print axioms legendre_v2_fact
+#print axioms legendre_v2_fact_sub
+#print axioms legendre_lam_add
+#print axioms legendre_lam
+#print axioms explicit_cascade
+#print axioms square_parity_s2
