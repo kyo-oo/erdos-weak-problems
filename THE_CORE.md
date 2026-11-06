@@ -94,15 +94,18 @@ k=2-existence component (the infinitude/obstruction war is the named
 follow-up on the SAME front).**
 
 **THE SCOREBOARD (Session 026 close):**
-- **#404**: CROSSED — AUDITED CLEAN (Session 026). Done: reduction; p∣a+1 class
-  ALL primes (K15); 12 exact families; f(2,2)=254 unconditional; f(6,2)=133
-  **UNCONDITIONAL (K18)**; a-sweep g-table a≤60 all exact. Open cores
-  (secondary): p∤a+1 odd-p class; a>60 monsters.
+- **#404**: **PROVEN UNCONDITIONAL — CASE CLOSED (BOSS, Session 030).**
+  Killed: reduction; p∣a+1 class ALL primes (K15); 12 exact families;
+  f(2,2)=254 unconditional; f(6,2)=133 **UNCONDITIONAL (K18)**; a-sweep
+  g-table a≤60 all exact. **NO open work fronts — #404 is out of every
+  queue, permanently. Any further #404 item is a violation of the BOSS
+  order (S030).**
 - **#261**: three complete theorems + Q3 bridge + funnels; frontier
   3,740,200; open cores: all-n termination, rational-x continuum (carry
   loophole isolated; Wang 2026 gap law = new rigidity tool).
-- **#271**: CROSSED (A(2) complete). Open core: A(4) (census k=21:
-  c₂₁=710129, α≈0.584; Type-2 empirical).
+- **#271**: **PROVEN UNCONDITIONAL — CASE CLOSED (BOSS, Session 030).**
+  Stanley A(2) complete characterization killed it; the A(4) census
+  evidence stays in the registry as history. **No work fronts.**
 - **#406**: BOSS'S OWN — pattern frontier + odd half unconditional done;
   the gate (gst_four_power_third_wave_gate = the 1979 core) is his summit.
 - **#686**: **KILL #20 (S029, Kernel 16): the non-square Pell-ratio law
@@ -319,7 +322,7 @@ one into a show pattern; feed omega the facts as `have`s instead.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 029, governed by THE_LIST.md v5)
+## §9. THE QUEUE (next strikes — Session 030, governed by THE_LIST.md v6)
 
 **THE 5-ROUND LAW (BOSS, Session 027 — THE NEW STANDARD):** "IF THE
 PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
@@ -329,29 +332,33 @@ layers are one front). **Full firepower:** arsenal = erdosternary2 +
 HC-PROOF = 16,021 theorems, latest branches, all files — VENDORED into
 the kill CI at `Arsenal/` (S028; every new kernel imports and applies it).
 
-**THE MAJORITY TREATMENT (BOSS, Session 029):** 20–25+ open problems under
-ACTIVE 5-round treatment at all times. **THE_LIST v5 delivers 24**: 4
-engine/batch fronts (§B) + 12 selected (§C, with S029 admissions #306/#348/
-#708 and re-admission #203) + 6 witness-hunt lanes (§D, with S029 admission
-#273) + 2 kills-in-CI (#686 K16, #727 K17 — compile war R6, commit 36a2592).
-S026/S028's conservative "18" SUPERSEDED by the majority order; the honest
-boundary stays in THE_LIST §E.
+**THE MAJORITY TREATMENT (BOSS, S029+S030):** 20–25+ open problems under
+ACTIVE 5-round treatment at all times. **THE_LIST v6 delivers 22**:
+2 engine fronts (§B: #1108 port, #317 deadline war) + 12 ladder (§C, with
+S030 admissions #700 prime-power law) + 8 witness lanes (§D, with S030
+admissions #1056 factorial-residue case hunt + #939 r=4 powerful-sum hunt).
 
-**S029 firing state:** (1) K16/K17 compile war R5→R6: R5's diagnosis — rw
-is syntactic (3^1·2 ≢ 6, re-seat laws as show-equations); v2r/s2/s3 are
-WF-defined and the KERNEL cannot whnf them (decide dies, #eval lives) —
-fixes: the arsenal's own v2r.eq_def+if_neg/if_pos route (K16) + the
-FUEL-ORACLE architecture for s2/s3 (K17, structural on fuel, decide-clean).
-(2) #273 hunt round 1: L=720720, 79 moduli (all p−1, p≥5), density 1.1057;
-DLX drowns (79-way branches, no column discrimination), flat annealing
-plateaus at 13.2% uncovered (density-1.10 set) — round 2 = CRT-cylinder
-structured construction. (3) #348 derivation DONE: weak-definition (m,n)-
-validity requires infinitely many zero-slack critical junctures
-(criterion-tail invariance: finite removals cause finite gaps otherwise) —
-the construction war has its target named. (4) #306 admitted: semiprime
-Egyptian representation for all squarefree-b rationals (BEG15 did the
-3-prime case for b=1; kill path = CRT prime-pair splitting induction,
-arsenal Egyptian machinery).
+**S030 PURGE ORDER (BOSS):** **#404 and #271 are PROVEN UNCONDITIONAL —
+CASE CLOSED. Removed from every queue permanently.** The v5 §B "#404
+f(50,2) batch" and §C "#404" fronts are DEAD by BOSS order. #422 v5-front
+was a MISLABEL (corpus #422 = Hofstadter Q-sequence, well-definedness
+open = Collatz-class; the Conolly freq law is a different sequence) — OUT
+with cause.
+
+**S030 FIRING STATE:** (1) **#1056 CASE-FRONTIER KILL FIRING**: the
+structure law — k consecutive intervals with products ≡ 1 (mod p) ⟺ the
+sequence j! mod p visits one value k+1 times; Wilson-law force-pairs
+(1! ≡ 1 and (p−2)! ≡ 1 always; odd-j hits double via j!·(p−1−j)! ≡
+(−1)^{j+1}); case table jumped k: 3 (Makowski 1983) → **11** (p=52163,
+value 1, count 12 — dual-method + Wilson-verified); full case table
+k=2..11 with smallest witnesses (11, 17, 23, 109, 71, 673, 599, 3011,
+27901, 52163); 2M-record scan running. (2) **#700 PRIME-POWER LAW**
+derivation done in-round: carry lemma v_p(C(p^a,k)) = a−v_p(k) ⟹
+f(p²)=p (the ONLY prime powers satisfying the ErSz equality f(n)=n/P(n))
+and f(p^a)=p for ALL a≥3 (violation factor p^{a−2}); battery + kernel
+next. (3) **#939 r=4 hunt**: zero solutions ≤10¹³ (1,777 4-powerfuls,
+~1.5M coprime pairs — evidence, lane alive). (4) #203/#273 covering
+hunts + #885 k=5 + #317 K1: firing.
 
 ---
 

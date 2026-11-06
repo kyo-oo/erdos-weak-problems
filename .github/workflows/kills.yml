@@ -1,4 +1,4 @@
-name: Erdos One-Shot Kills CI (271 + 404 + 261 + 1108 + ARSENAL + 686 PellRatio + 727 FactorialSquare)
+name: Erdos One-Shot Kills CI (271 + 404 + 261 + 1108 + ARSENAL + 686 PellRatio + 727 FactorialSquare + 1056 FactorialIntervals)
 on:
   push:
     branches: ['**']
@@ -18,6 +18,7 @@ on:
       - lakefile.toml
       - problem686-pell-ratio/**
       - problem727-factorial-square/**
+      - problem1056-factorial-intervals/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -358,3 +359,24 @@ jobs:
           grep -E "'erdos727_carry_bound_witness' (does not depend on any axioms|depends on axioms)" factorial-square.log
           python3 problem727-factorial-square/census727.py
           echo ERDOS727_FACTORIAL_SQUARE_KERNEL_GREEN=1
+
+      - name: "Kernel 18 - Erdos 1056 FACTORIAL-INTERVAL CASE-FRONTIER THEOREM (k=4..11 NEW CASES: consecutive intervals with products 1 mod p + Wilson anchors + arsenal bridge, Kill #22)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem1056-factorial-intervals/FactorialIntervals.lean 2>&1 | tee factorial-intervals.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' factorial-intervals.log
+          grep -F "ERDOS1056_KERNEL_GREEN" factorial-intervals.log
+          grep -E "'erdos1056_k4' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k5' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k6' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k7' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k8' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k9' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k10' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k11' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_wilson_anchors' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_k11_chain' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          grep -E "'erdos1056_carry_bound_witness' (does not depend on any axioms|depends on axioms)" factorial-intervals.log
+          python3 problem1056-factorial-intervals/battery1056.py
+          echo ERDOS1056_FACTORIAL_INTERVALS_KERNEL_GREEN=1

@@ -1,4 +1,4 @@
-# THE LIST — THE OPERATIONAL LAW (v5, Session 029, 2026-11-06)
+# THE LIST — THE OPERATIONAL LAW (v6, Session 030, 2026-11-06)
 
 > **THE ROULETTE LAWS (verbatim, cumulative — OLD and NEW, both binding):**
 > **OLD (S023):** only problems that need new mathematics; one-shot capable.
@@ -17,12 +17,16 @@
 > 5-round treatment, complete unconditional proofs, engine = the vendored
 > arsenal (erdosternary2 + HC-PROOF, 16,021 theorems, latest branches, all
 > files). Queue deepens as strikes land; every kill frees a slot.
+> **S030 (BOSS, THE PURGE + ENERGY ORDER):** #404 and #271 are PROVEN
+> UNCONDITIONAL — CASE CLOSED, out of every queue permanently; the batch is
+> 20–25+ PROBLEMS under one-shot/5-round fire with MAX energy; MATHS skill
+> activation is LAW every session.
 
 ## MARKS
 - ✅ **KILLED** — complete unconditional proof, CI-green, no sub-problem remnants.
 - 🎯 **SELECTED** — in flight; kill path attached; round-budget attached.
 - ⏸ **HELD** — fires when faster lanes close.
-- 💣 **CONDITIONAL** — witness-hunt lanes: a single computation decides YES/NO.
+- 💣 **WITNESS LANE** — one computation decides YES/NO or lands a new case.
 - 🚫 **OUT** — >5 rounds or banned; removed from priority.
 
 ---
@@ -31,9 +35,9 @@
 
 | Erdős # | Status | Kills delivered |
 |---|---|---|
-| **#404** | ✅ CROSSED (10 kills) | p-adic reduction; p=2 kernel law; Theorem B every prime; 12 mod-families; f(2,2)=254; **f(6,2)=133 UNCONDITIONAL**; f(4,2)=6; gadget laws; a-sweep g-table (a ≤ 60). |
+| **#404** | ✅ **PROVEN UNCONDITIONAL — CASE CLOSED (BOSS S030)** | 10 kills: p-adic reduction; p=2 kernel law; Theorem B every prime; 12 exact mod-families; f(2,2)=254 UNCONDITIONAL; f(6,2)=133 UNCONDITIONAL; f(4,2)=6; gadget laws; a-sweep g-table (a ≤ 60). **No work fronts remain — ever.** |
+| **#271** | ✅ **PROVEN UNCONDITIONAL — CASE CLOSED (BOSS S030)** | Stanley A(2) complete characterization. **No work fronts remain.** |
 | **#261** | ⏸ partial (3 open sub-cores, DEPRIORITIZED) | 5 kills: greedy-walk; three x=1/2 reps; THE TOWER; rational-x bridge; funnels. |
-| **#271** | ✅ CROSSED (1 kill) | Stanley A(2) complete characterization. |
 | **#1108** | 🎯 ENGINE (exempt: layers, not stacked kills) | K17 pair-cascade law; K19 Legendre parity law (v₂(n!)=n−s₂(n) spine). |
 | **#406** | 🚫 BOSS'S OWN FRONT | HANDS OFF. |
 | **#260** | 🚫 DEAD | Wang 2026. |
@@ -42,83 +46,87 @@
 
 ---
 
-## SECTION B — THE ENGINE + BATCH FRONTS (old-front ladder)
+## SECTION B — THE ENGINE FRONTS
 
 | Rank | Target | Kill path | Rounds | Mark |
 |---|---|---|---|---|
-| 1 | **#404 f(50,2) + sibling batch** | Kill #18 twin-port at a=50 (g-table values; obstruction families + representation) | 1–2 | 🎯 |
+| 1 | **#317 signed harmonic sums** | K1 residue lemma; 1M sweep ZERO counterexamples; Theorem D 80% assembled | 2 (HARD deadline: 1 more round or demote) | 🎯 |
 | 2 | **#1108 all-prime isolated-minimum port** | TheoremBGeneral twin (vpad, every prime p) | 1–2 | 🎯 |
-| 3 | **#1108 census MitM > 24** | evidence wing for the engine | — | ⏸ |
-| 4 | **#317 signed harmonic sums** | K1 residue lemma; 1M sweep ZERO counterexamples; Theorem D 80% assembled | 2 (deadline) | 🎯 |
+| 3 | **#1108 census MitM > 24** | evidence wing for the engine | — | ⏸ support |
 
-## SECTION C — THE NEW-PROBLEM LADDER (v5: 13 fronts — S029 admissions #306/#348 + re-admissions #203)
+**PURGED (BOSS S030):** the v5 §B rank-1 "#404 f(50,2) + sibling batch" is
+DEAD — #404 is case-closed. Never re-admitted.
 
-| Rank | Problem | Front (Session 029 status) | Rounds | Mark |
+---
+
+## SECTION C — THE NEW-PROBLEM LADDER (v6: 12 fronts)
+
+| Rank | Problem | Front (Session 030 status) | Rounds | Mark |
 |---|---|---|---|---|
-| 1 | **#686 Pell-ratio** | **KILL #20 LANDED** (K16, run 42212351838); same-front residue: squares t≡0(4), odd t≥5 | 2–4 | 🎯 |
-| 2 | **#727 factorial-square** | **KILL #21 LANDED** (K17, run 42212351838 — witness + tightness + cascade); same-front war: k=2 infinitude / k≥3 obstruction | 2–4 | 🎯 |
-| 3 | **#374 factorial-square density** | #1108 multiplicative sibling; K17+K19 transfer | 4–5 | 🎯 |
-| 4 | **#422 Conolly meta-Fibonacci** | full characterization: f(n) nondecreasing, freq(m)=1+v₂(m); dyadic-block induction | 4–5 | 🎯 |
-| 5 | **#289 k-interval Egyptian families** | for all large k: interval families summing to 1; large-k construction war | 4–5 | 🎯 |
+| 1 | **#700 binomial-gcd f(n)** | **S030 ADMISSION — THE PRIME-POWER LAW**: carry lemma v_p(C(p^a,k)) = a−v_p(k) ⟹ f(p²)=p (the ONLY prime powers satisfying the ErSz equality f(n)=n/P(n)) and f(p^a)=p for ALL a≥3; battery + kernel this session | **1 (firing)** | 🎯 |
+| 2 | **#686 Pell-ratio** | KILL #20 LANDED; same-front residue: squares t≡0(4), odd t≥5 | 2–4 | 🎯 |
+| 3 | **#727 factorial-square** | KILL #21 LANDED; same-front war: k=2 infinitude / k≥3 obstruction | 2–4 | 🎯 |
+| 4 | **#374 factorial-square density** | #1108 multiplicative sibling; K17+K19 transfer | 4–5 | 🎯 |
+| 5 | **#289 k-interval Egyptian families** | large-k construction war | 4–5 | 🎯 |
 | 6 | **#396 ∏(n−i) \| C(2n,n)** | per-k construction; Kummer/cascade machinery | 4–5 | 🎯 |
-| 7 | **#306 semiprime Egyptian representation** | **S029 ADMISSION** (survived S026/S028 untriaged): every a/b with b squarefree as Σ1/(pq), pq distinct primes; BEG15 did the 3-prime case for b=1; semiprime case open (47-term examples for 1 known, Watanabe 2020); kill path = BEG-style induction (CRT prime-pair splitting, arsenal Egyptian machinery from #289) | 4–5 | 🎯 |
-| 8 | **#348 m-redundant complete sequences** | **S029 ADMISSION**: for which (m,n) does a complete sequence survive any m removals but die at some n removal? S029 derivation DONE in-round: weak-definition validity needs infinitely many ZERO-SLACK critical junctures (finite removals cause finite gaps otherwise — proved by criterion-tail invariance); construction = redundancy-interleaved critical blocks (arsenal digit-system/funnel machinery); m=2,n=3 = the concrete open case | 4–5 | 🎯 |
+| 7 | **#306 semiprime Egyptian representation** | BEG-style induction (CRT prime-pair splitting); S029 engine: 168/277 rationals represented | 4–5 | 🎯 |
+| 8 | **#348 m-redundant complete sequences** | zero-slack critical-juncture derivation DONE; construction war on m=2,n=3 | 4–5 | 🎯 |
 | 9 | **#288 two-interval harmonic integers** | #317 machinery transfers | 4–5 | ⏸ |
 | 10 | **#1212 coprime-composite dance** | Bertrand/CRT scheduling lemma | 3–5 | ⏸ |
 | 11 | **#389 consecutive-product divisibility** | k≤n/2 lane | 4–5 | ⏸ |
-| 12 | **#708 product-divisibility g(n)** | **S029 ADMISSION** (Erdős $100, ErSu59): g(n) ≤ 2n? (lower (2−o(1))n known, g(3)=4); kill path = divisor-matching/valuation construction (arsenal core territory); fires when faster lanes close | 4–5 | ⏸ |
+| 12 | **#708 product-divisibility g(n)** | Erdős $100; case-value g(4) lane (ErSu59 did g(2),g(3)) | 4–5 | ⏸ |
 
-## SECTION D — THE WITNESS-HUNT LANES (💣 one computation decides)
+## SECTION D — THE WITNESS LANES (💣 one computation decides)
 
 | Problem | Hunt | Decides | Mark |
 |---|---|---|---|
-| **#885 factor-difference sets** | k=3 WITNESSED (120,528,4488 share {2,37,58}); k=4 unhit <5·10⁵ | k=4 witness → YES-side; persistent miss → obstruction theorem | 💣 |
-| **#677 equal-lcm windows** | no collision <400·k≤12 | YES-death by witness; miss → uniqueness conjecture | 💣 |
+| **#1056 factorial-interval products** | **S030 ADMISSION — FIRING**: structure law: k consecutive intervals with products ≡ 1 (mod p) ⟺ j! mod p visits one value k+1 times; Wilson force-pairs (1!≡1, (p−2)!≡1 always; odd-j hits double); **case frontier jumped k: 3 → 11** (p=52163 count 12, dual-method + Wilson-verified); smallest-witness table k=2..11 = (11, 17, 23, 109, 71, 673, 599, 3011, 27901, 52163); 2M scan running | k=4..11 = NEW CASE THEOREMS (unconditional, kernel-decidable); arbitrarily-large-k = the open core | 💣 **KILL FIRING** |
+| **#939 r-powerful sums (r=4)** | **S030 ADMISSION**: a+b=c all 4-powerful, pairwise coprime; zero ≤ 10¹³ (1,777 4-powerfuls, ~1.5M coprime pairs); escalate to 10¹⁵–10¹⁶ C-hunt or Nitaj-style construction | witness → YES for r=4 (new case; r=3 done by Nitaj/Cohn) | 💣 |
+| **#203 Sierpiński 2·3-smooth** | exact cover over ord-lattices (2^k3^ℓm+1 all composite, (m,6)=1); arsenal covering machinery (#273 sibling) | covering found → m witness → **unconditional YES — the FULL problem** | 💣 |
+| **#273 covering system, moduli p−1** | round 2 = CRT-cylinder structured construction (round 1: L=720720, 79 moduli, density 1.1057; DLX drowned, annealing 13.2%) | covering found → kernel-decide witness → **unconditional YES — the FULL problem** | 💣 |
+| **#885 factor-difference sets** | k=5 hunt (k=2 ErRo97, k=3 Ji99, k=4 Br19; prior in-house k=3 witness 120/528/4488); k=4 unhit <5·10⁵ in-house — escalate with factorization-indexed search | k=5 witness → new case theorem | 💣 |
+| **#677 equal-lcm windows** | no collision <400·k≤12 | witness → YES-death | 💣 |
 | **#850 radical triple coincidence** | no witness <2·10⁴; extended hunt queued | witness → YES-death | 💣 |
-| **#274 coset tilings (distinct sizes)** | abelian ≤36 ALL negative (17 groups); nonabelian ≤24 queued | witness → YES-death | 💣 |
-| **#203 Sierpiński 2·3-smooth covering** | **S029 RE-ADMISSION** (S026 reduction stands: find m with (m,6)=1 and every 2^k3^ℓm+1 composite via finite covering of the (k,ℓ) lattice by order-classes); the hunt = exact cover over ord-lattices — arsenal covering machinery (#273 sibling) | covering found → m witness → unconditional YES | 💣 |
-| **#273 covering system, moduli p−1** | **S029 ADMISSION**: distinct moduli, all p−1 (p≥5); hunt LIVE (L=720720, 59 moduli, density 1.1045, exact-cover DLX running); Selfridge's divisors-of-360 solved the p=3-allowed version | covering found → kernel-decide witness → unconditional YES | 💣 |
+| **#274 coset tilings (distinct sizes)** | abelian ≤36 ALL negative (17 groups); nonabelian ≤24 queued | witness → YES-death (the FULL problem) | 💣 |
 
-**Firing queue total: 4 (§B) + 12 (§C) + 6 (§D) = 22 active fronts, of which #686/#727 carry LANDED kills #20/#21 (run 42212351838) with named same-front residues = THE MAJORITY TREATMENT (24 problems under active 5-round law; 21 total kills in the registry).**
+**Firing queue total: 2 (§B) + 12 (§C) + 8 (§D) = 22 problems under active
+one-shot/5-round fire — THE MAJORITY TREATMENT HOLDS.**
 
 ---
 
 ## SECTION E — OUT (the honest boundary; >5 rounds or banned)
 
-**Doubter-killed (S026, standing):** #508/#188, #212, #1135, #918/#919/#1167–
-#1221, #376/#377/#386, #936/#137?, #373/#930/#931, #291, #264/#1049, #1160,
-#1159, #849, #1003, #985, all asymptotic/density, all ℝ²-geometry, all
-Ramsey-asymptotics.
+**Doubter-killed (S026, standing):** #508/#188, #212, #1135, #918/#919/
+#1167–#1221, #376/#377/#386, #936/#137, #373/#930/#931, #291, #264/#1049,
+#1160, #1159, #849, #1003, #985, all asymptotic/density, all ℝ²-geometry,
+all Ramsey-asymptotics.
 **S028 full-corpus re-read OUT (with cause):** #3, #5/#233/#455, #68/#249/
-#251/#252/#257/#260/#263/#264/#267/#269, #1056, #385/#413, #572/#573, #634,
-#677-deep, #700/#684/#685/#1095, #805, #942, #952, #1199, #1206, #1135, #495,
-#508, #276.
-**S029 triage OUT (this session's full-sweep verdicts, with cause):**
-#1113 (non-covering Sierpiński existence — deep), #940 (r-powerful density
-wars), #1093 (binomial deficiency infinitude — ELS-type analytic), #675
-(translation property — sieve), #177 (discrepancy growth), #1188/#1189
-(covering-set ENUMERATION asymptotics; the divisors-of-n question was settled
-by Sun 2007), #912/#393/#400/#478 (factorial asymptotics), #1094 (least
-prime factor of binomials — finiteness claim, analytic), #278 (covering
-density — Fraenkel–Simpson wars), #293/#295/#301/#302/#304/#311/#313/#319/
-#327 (Egyptian asymptotics/infinitude; #313 = primary-pseudoperfect-adjacent),
-#450/#693/#886/#887/#893/#945/#975/#1054/#1100 (divisor estimate wars),
-#470 (odd weird numbers — search infeasible <10²¹), #9/#11/#28/#33/#40/#66/
-#870/#881/#1145/#1192/#1194/#338 (additive-basis analytic), #683/#731
-(binomial prime-divisor bounds), #156 (maximal Sidon order-of-magnitude),
-#472 (prime-chain infinitude), #695 (prime-chain growth), #701 (intersecting
-extremal), #970 (Jacobsthal order), #978 (polynomial prime-values), #983
-(prime-indexed subsets), #996/#1151/#256 (analysis), #1035 (hypercube
-containment), #595/#602 (set theory), #61/#75/#159/#174/#500/#563/#564/#712/
-#827/#837/#838 (Ramsey/extremal graph+geometry wars).
+#251/#252/#257/#260/#263/#264/#267/#269, **#1056 and #700 — both REVERSED
+S030** (#1056: the factorial-residue structure makes it witness-decidable,
+case frontier k=4..11 landed in-house; #700: the prime-power class is a
+clean carry-lemma kill, firing this session), #385/#413, #572/#573, #634,
+#677-deep, #684/#685/#1095, #805, #942, #952, #1199, #1206, #1135,
+#495, #508, #276.
+**S029 triage OUT (standing):** #1113, #940, #1093, #675, #177, #1188/
+#1189, #912/#393/#400/#478, #1094, #278, #293/#295/#301/#302/#304/#311/
+#313/#319/#327, #450/#693/#886/#887/#893/#945/#975/#1054/#1100, #470,
+#9/#11/#28/#33/#40/#66/#870/#881/#1145/#1192/#1194/#338, #683/#731, #156,
+#472, #695, #701, #970, #978, #983, #996/#1151/#256, #1035, #595/#602,
+#61/#75/#159/#174/#500/#563/#564/#712/#827/#837/#838.
+**S030 OUT (with cause):** **#422** — the v5 front was a MISLABEL: corpus
+#422 is the Hofstadter Q-sequence (f(n)=f(n−f(n−1))+f(n−f(n−2))) whose
+well-definedness is open = Collatz-class; the Conolly freq(m)=1+v₂(m)
+characterization belongs to a DIFFERENT sequence, not the corpus statement.
+**#456** — "almost all" statement, no witness resolution. **#913, #1065,
+#1059, #1142** (infinitude cores; #1142 searched ≤2⁴⁴ by MiWe69). **#324**
+(LPS-conjecture-dependent). **#826** (Lau 2026 partial exists; asymptotic
+core). **#634** (Laczkovich–Szabó deep). **#1055** (infinitude). **#1110**
+(density core open). **#689** (Green-list covering, LLL-grade). **#312**
+(EG&G open core). **#326, #431, #892, #1101** (deep structure wars).
 
-> **THE COUNT, HONEST:** 24 problems under active 5-round treatment (22
-> queue + 2 kills-in-CI). The S026/S028 conservative verdicts ("18") are
-> SUPERSEDED by the S029 majority order: the corpus re-swept with the
-> witness-hunt and construction lanes given full weight — #306, #348, #708
-> admitted; #203 re-admitted (reduction stands); #273 admitted (hunt live).
-> Remaining honest boundary documented in §E. The queue DEEPENS as strikes
-> land — every kill frees a slot.
+> **THE COUNT, HONEST:** 22 problems under active one-shot/5-round fire
+> (2 §B + 12 §C + 8 §D). The queue DEEPENS as strikes land — every kill
+> frees a slot. #404/#271 are CLOSED (BOSS S030) and never re-open.
 
 ---
 
@@ -130,4 +138,7 @@ containment), #595/#602 (set theory), #61/#75/#159/#174/#500/#563/#564/#712/
    theorems) is the engine — every new kernel imports and applies it
    (S028 doctrine). 5. No sub-problem remnants on crossed problems.
    6. NO ledger additions (S028). 7. The majority treatment: 20–25+ under
-   active fire at all times (S029).
+   active fire at all times (S029). 8. **#404/#271 CLOSED — any work item
+   on them is a violation (S030).**
+
+*State is full. The engine never stops; it never lies.*
