@@ -19,7 +19,7 @@ theorem erdos1056_k11 : Nat.Prime 52163 ∧
     prodmod 52163 26082 27231 = 1 ∧ prodmod 52163 27232 33643 = 1 ∧
     prodmod 52163 33644 44735 = 1 ∧ prodmod 52163 44736 44871 = 1 ∧
     prodmod 52163 44872 52161 = 1 :=
-  ⟨by decide, fi_k11_b1, fi_k11_b2, fi_k11_b3, fi_k11_b4, fi_k11_b5,
+  ⟨by norm_num, fi_k11_b1, fi_k11_b2, fi_k11_b3, fi_k11_b4, fi_k11_b5,
     fi_k11_b6, fi_k11_b7, fi_k11_b8, fi_k11_b9, fi_k11_b10, fi_k11_b11⟩
 
 #eval "FI_K11_GREEN"
