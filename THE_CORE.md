@@ -59,7 +59,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
    dress a partial result in complete-resolution clothing (MATHS §7.7,
    prohibition #8).
 
-**THE KILL REGISTRY (17 kills — full entries in repo `README.md`):**
+**THE KILL REGISTRY (19 kills — full entries in repo `README.md`):**
 
 | # | Problem | The kill (one line) | CI state |
 |---|---|---|---|
@@ -80,6 +80,8 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 15 | 404 | **Theorem B EVERY prime**: f(a,p)=v_p(a!) for all p ∣ a+1 (primality never used) | **run 41950834628** |
 | 16 | 404 | **f(6,2)=133 EXACT** (second-ever exact value; lower/witness unconditional; upper carries the obstructionCheck receipt — §7-freeze pending) | **run 41955350415** |
 | 17 | **1108** | **THE FULL PAIR-CASCADE LAW**: v₂(Σ_{a∈S}a!) = Λ(j₀)+v₂(C(S)) for EVERY nonempty S + square parity invariant s₂(j₀)≡v₂(C(S)) mod 2 — constructive-clean [propext, Quot.sound]; census-24: exactly 15 squares, zero new max∈[16,24]; Kernel 12 restored in same run | **run 42061257046, commit e5ab4ca** |
+| 18 | 404 | **f(6,2)=133 UNCONDITIONAL** (§7 freeze at anchor 6: 24-module chain, obstructionCheck_true is a THEOREM; Kill #16's hypothesis dead) | **run 42119256613** |
+| 19 | **1108** | **THE LEGENDRE PARITY LAW**: v₂(n!)+s₂(n)=n (core-only fuel induction) + Λ(j)=2j−s₂(j) THE SPINE + EXPLICIT CASCADE v₂(Σa!)=(2j₀−s₂(j₀))+v₂(C) + square⟹s₂(j₀)≡v₂(C) mod 2 — ALL SIX [propext, Quot.sound], zero hypotheses; battery 8191-subset census: 27 squares all parity-locked; Kernel 15 | **run 42153591445, commit 6974fa8** |
 
 **AUDIT (Session 026, BOSS-ordered): all 18 kills verified — NO sub-problem
 remnants; every crossed-problem kill is a complete unconditional theorem
@@ -294,27 +296,40 @@ workflow is part of the kill — extend kills.yml with EVERY kernel.
 **L88** `cases h : e` substitutes the GOAL — close zero-branches with rfl.
 **L89** rw's trailing rfl is WEAK — close explicitly after every rw.
 **L90** Nat.mul_div_cancel_left: the DIVISOR leads — apply directly.
+**L95** (S027) a WF-def with recursive calls in MULTIPLE branches (s2's
+if-then-else both recurse) gets ONE decreasing obligation per call —
+`decreasing_by omega` fires on the FIRST goal only; the rest stay open,
+the def silently sorries, and sorryAx poisons every downstream theorem +
+every #eval. LAW: `decreasing_by all_goals omega` for multi-call defs.
+**L96** (S027) `show` unfolds are DELTA-ONLY: a def (Lam j) unfolds by
+defeq, but a proof-equality (s2 (2*j) = s2 j) does NOT — never smuggle
+one into a show pattern; feed omega the facts as `have`s instead.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 026, governed by THE_LIST.md v2)
+## §9. THE QUEUE (next strikes — Session 027, governed by THE_LIST.md v3)
 
-**THE NEW ROULETTE RULE (BOSS, Session 025):** priority = time-to-complete-
-unconditional-proof; 2 rounds without a full kill ⟹ auto-deprioritized.
-**One kill per problem.** THE_LIST.md is the operational law (repo + 4
-locations). Current ladder:
+**THE 5-ROUND LAW (BOSS, Session 027 — THE NEW STANDARD):** "IF THE
+PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
+ROUNDS TAKING" — one-shot preferred; else ≤5 rounds to complete
+unconditional proof or OUT. **One kill per problem** (the #1108 engine
+layers are one front). **Full firepower:** war councils = parallel
+sub-agents; arsenal = erdosternary2 (7,083, sandbox-cloned) + HC-PROOF
+(8,004, synced) = 15,087 theorems, latest branches, all files. Current
+ladder (THE_LIST v3):
 
-1. 🎯 **#317 THE NEXT NEW WAR** (THE_LIST §C rank 1) — Theorem A proven
-   (conditional kill via isolated prime p ∈ (n/2,n]); kernels: K1 residue
-   lemma, K2 collision count. Strike: K1 first (the residue lemma or the
-   cascade), then the Lean kernel of Theorem A + K1's provable cases.
-2. **#1108 LEGENDRE PARITY IN LEAN** (THE_LIST §B rank 1) — v₂(n!) = n − s₂(n)
-   core-only + all-prime isolated-minimum port. Fastest unconditional lane.
-3. **#404 flat-class value batch** — tiny freezes.
-4. 🎯 **#389** (Legendre digit-sum criterion DONE; construction kernel) /
-   **#203** (2-D covering reduction DONE; search kernel).
-5. ⏸ #261 rational-x + all-n termination — DEPRIORITIZED (long war).
-6. ⏸ #271/A(4) — DEPRIORITIZED (long war).
+1. ✅ **#1108 LEGENDRE PARITY** — DONE (Kill #19, this session).
+2. 🎯 **#404 flat-class batch** (f(50,2) etc., Kill #18 twin-port) — 1-2
+   rounds.
+3. 🎯 **#1108 all-prime isolated-minimum port** (vpad twin) — 1-2 rounds.
+4. 🎯 **#317 THE NEW WAR** — K1 residue lemma; BETA 200k/1M evidence:
+   K1'' ZERO counterexamples; Theorem D architecture (gap-d vs forbidden
+   ±R⁻¹ set, zero collisions) 80% assembled; **hard deadline: 2 more
+   rounds or demote** (3-5 budget).
+5. 🎯 **#374 PROMOTED** (GAMMA S027: the #1108 multiplicative sibling;
+   parity lattice + prime-gap sandwich) — 4-5 rounds.
+6. ⏸ #288, #1212 held (4-5); #389 DEMOTED (4-5 borderline); #203, #276,
+   #282 OUT (>5 rounds).
 7. **#406 — BOSS'S FRONT. HANDS OFF.**
 
 ---
@@ -357,5 +372,17 @@ locations). Current ladder:
   degenerates; kernels K1/K2 named), #389 (Legendre criterion derived),
   #203 (2-D covering reduction derived). THE_LIST v2 §C. Honest verdict:
   no fast one-shot left in the corpus.
+- **027**: THE FULL-FIREPOWER SESSION — arsenal DOUBLED-LOADED (BOSS's
+  doubt was FOUNDED: erdosternary2 re-cloned 7,083 theorems + HC-PROOF
+  synced +17 commits to 8,004 = 15,087 theorems, latest branches all
+  files); war council × 3 parallel agents (ALPHA/BETA/GAMMA; BETA died
+  twice on infra deadlines — commander finished its weapon); **KILL #19
+  THE LEGENDRE PARITY LAW** (v₂(n!)+s₂(n)=n; Λ(j)=2j−s₂(j); explicit
+  cascade; square-parity invariant — ALL [propext, Quot.sound], CI run
+  42153591445, Kernel 15, two-round compile war); **THE 5-ROUND LAW**
+  (BOSS's new selection standard) + THE_LIST v3 (#374 promoted, #389
+  demoted, #203/#276/#282 out); #317 K1 evidence: BETA engine (exact
+  incremental ledger) — K1'' ZERO counterexamples to 200k, Theorem D
+  gap-architecture zero collisions; 1M sweep launched. Lessons L95/L96.
 
 *State is full. The engine never stops; it never lies.*

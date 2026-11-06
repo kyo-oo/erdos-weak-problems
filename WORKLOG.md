@@ -825,3 +825,67 @@ new-problem ladder), THE_CORE §2/§3/§9/§10 updated, this WORKLOG entry, the
 kernels. Next strike: K1 (the residue lemma) or the Theorem-A Lean kernel.
 
 *The engine never stops; it never lies.*
+
+## SESSION 027 (2026-11-06) — THE FULL-FIREPOWER SESSION: ARSENAL DOUBLE-LOADED + KILL #19 (THE LEGENDRE PARITY LAW) + THE 5-ROUND LAW
+
+**BOSS's opening challenge: "ARE YOU USING MY OWN BUILDED MATHS? LATEST
+BRANCHES ALL THE FILES" — the doubt was FOUNDED.** Verified and fixed:
+- **erdosternary2 was NOT in the sandbox** (only referenced). Full clone
+  (all 100+ branches), bulldoze branch checked out: **7,083 theorems**.
+- **HC-PROOF local was 17 COMMITS BEHIND its own remote tip** (the research
+  branch had Rounds 55-60 + the Hodge master assembly pushed later).
+  Synced: now **8,004 theorems**.
+- **TOTAL ARSENAL: 15,087 theorems of BOSS's own mathematics — latest
+  branches, all files, sandbox-live.**
+
+**THE 5-ROUND LAW (BOSS's new selection standard, verbatim):** "IF THE
+PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
+ROUNDS TAKING." One-shot preferred; else ≤5 rounds to complete
+unconditional proof or OUT. One kill per problem. THE_LIST v3 written.
+
+**THE WAR COUNCIL (full firepower — parallel sub-agents):**
+- ALPHA (Lean striker): delivered the Kill #19 draft — 210-line append-only
+  §7 to SubsetKernelLaw.lean + verify_legendre.py battery. Clean self-audit.
+- BETA (#317 K1 attacker): died TWICE on infra deadlines, but its weapon
+  survived: the exact incremental evidence engine (active-prime ledger,
+  Lemma U update rules) + 200k results: **K1'' ZERO counterexamples;
+  Theorem D collision audit ZERO**. Commander took over: 1M sweep launched.
+- GAMMA (5-round-law strategist): full corpus re-rank. Verdict: no fresh
+  corpus one-shot (double-confirms S026); **#374 PROMOTED** (the #1108
+  multiplicative sibling, 4-5 rounds); #389 DEMOTED (4-5 borderline);
+  #203/#276/#282 OUT (>5 rounds); fastest unconditional lanes all on held
+  fronts (#1108 engine layers, #404 batch).
+
+**KILL #19 — THE LEGENDRE PARITY LAW (the #1108 engine's Λ-spine,
+digit-explicit):**
+- `legendre_v2_fact : ∀ n, v₂(n!) + s₂(n) = n` — Legendre's formula at
+  p=2, core-only, FUEL induction (the arsenal's fuel-oracle pattern) on
+  the even-factorial law `v2_fact_even : v₂((2m)!) = m + v₂(m!)`.
+- `legendre_lam : Λ(j) = 2j − s₂(j)` — THE SPINE (the pair-cascade level
+  function as a closed binary-digit formula).
+- `explicit_cascade : ∀ S ≠ [], v₂(Σ_{a∈S} a!) = (2j₀ − s₂(j₀)) + v₂(C(S))`
+  — the full cascade law (K17) with the spine unfolded.
+- `square_parity_s2 : Σ_{a∈S} a! = r² ⟹ s₂(j₀) ≡ v₂(C(S)) (mod 2)` —
+  THE EXPLICIT SQUARE-PARITY INVARIANT (the finiteness obstruction engine,
+  digit-explicit).
+- ALL SIX new theorems **[propext, Quot.sound] — constructive-clean, ZERO
+  hypotheses.** Battery: 301 factorials (two-method), 151 pair levels, 500
+  random cascades, **8191-subset exhaustive census → 27 perfect squares,
+  every one parity-locked**.
+- **CI run 42153591445 GREEN (commit 6974fa8) — Kernel 15. TWO-ROUND
+  compile war:** R1's two errors → two surgical fixes: (1) def s2's
+  `decreasing_by omega` fired on the FIRST of TWO WF obligations only (s2
+  recurses in both if-branches, unlike v2) — silently sorried the def,
+  poisoning all six theorems + all #evals → `all_goals omega` (L95);
+  (2) legendre_lam_add's `show` smuggled a proof-equality (s2(2j) vs s2 j)
+  past defeq → dropped the show, fed omega the facts (L96).
+
+**#317 K1 war state:** evidence engine exact (Lemma U update rules: prime
+powers multiply residues; primes enter with self-residue R_p = lcm(1..p−1)
+mod p). 200k: K1/K1'/K1'' all hold, ZERO K1'' counterexamples; Theorem D
+(largest-prime-degenerate n's: gap d = q2−q1 vs forbidden set {±R⁻¹_{q1}}
+mod q1 — collision would break K1''): ZERO collisions; largest-prime rule
+misses only 1382/200k n's, second-largest covers 1380 of them. 1M sweep
+running at session close. THE_LIST: #317 hard deadline = 2 more rounds.
+
+**Registry: 19 kills. THE_LIST v3 + THE_CORE updated (5-round law, L95/L96).**
