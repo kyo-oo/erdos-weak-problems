@@ -169,14 +169,12 @@ theorem erdos727_v2r_values : v2r 210 = 1 ∧ v2r 70 = 1 := by
     have hd : (210:Nat) / 2 = 105 := by decide
     rw [hd, v2r.eq_def 105, if_neg (show (105:Nat) ≠ 0 by decide),
         if_neg (show (105:Nat) % 2 ≠ 0 by decide)]
-    rfl
   have h70 : v2r 70 = 1 := by
     rw [v2r.eq_def 70, if_neg (show (70:Nat) ≠ 0 by decide),
         if_pos (show (70:Nat) % 2 = 0 by decide)]
     have hd : (70:Nat) / 2 = 35 := by decide
     rw [hd, v2r.eq_def 35, if_neg (show (35:Nat) ≠ 0 by decide),
         if_neg (show (35:Nat) % 2 ≠ 0 by decide)]
-    rfl
   exact ⟨h210, h70⟩
 
 #eval "ERDOS727_KERNEL_GREEN"

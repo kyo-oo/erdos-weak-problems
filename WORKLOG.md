@@ -933,3 +933,70 @@ abelian ≤36 ALL negative (Z6..Z6xC6: 17 groups). #1056 analyzed to OUT
 applies BOSS's theorems in named, checkable steps. The vendored files'
 provenance: erdosternary2@bulldoze/erdos-weak-problems-3-20261101,
 HC-PROOF@research/gpt6-native-point-primitive-span-20261017.
+
+---
+
+## Session 029 (2026-11-06) — THE MAJORITY TREATMENT: THE LIST v5 (24 FRONTS) + THE WF-DECIDE KILL + THE AUDIT SAVE
+
+**BOSS's order:** the queue held only a handful of picked problems — the
+MAJORITY (20–25+) must be under ACTIVE 5-round treatment, complete
+unconditional proofs, engine = the 16,021-theorem vendored arsenal. STOP
+adding ledger entries. Both roulette laws (old: new-maths-only + one-shot;
+new: ≤5 rounds, one kill per problem, unconditional only) understood and
+enforced.
+
+**THE LIST v5 — 24 FRONTS UNDER ACTIVE FIRE:**
+- §B (4): #404 f(50,2) batch; #1108 all-prime port; #1108 census; #317
+  (K1/K2, deadline round).
+- §C (12): #686, #727, #374, #422, #289, #396, #288, #1212, #389 + S029
+  admissions: **#306** (semiprime Egyptian for all squarefree-b rationals —
+  BEG15 did the 3-prime case; kill path = CRT prime-pair splitting), **#348**
+  (m-redundant complete sequences — S029 derivation: weak-(m,n) validity
+  requires infinitely many zero-slack critical junctures; criterion-tail
+  invariance proves finite removals cause finite gaps otherwise), **#708**
+  (Erdős $100 g(n) ≤ 2n — divisor-matching construction).
+- §D (6): #885, #677, #850, #274 + S029: **#273** (covering system, all
+  moduli p−1, p≥5, distinct — hunt round 1 fired this session), **#203**
+  RE-ADMITTED (S026 reduction stands; the (k,ℓ)-lattice covering hunt).
+- Kills-in-CI (2): #686 K16, #727 K17.
+- Honest OUT boundary re-documented with causes (S029 sweep triaged 60+
+  remaining corpus entries: #1113, #940, #1093, #675, #177, #1188/#1189,
+  Egyptian asymptotics, divisor estimate wars, additive-basis analytic, etc).
+
+**THE ADVERSARIAL AUDIT SAVE (pre-push, Phase 4 doctrine):** K17's
+tightness theorem carried TWO FALSE CONJUNCTS — truncated Legendre sums:
+p=7 dropped the 7³ term (stated 68=67; true 59+8+1=68) and p=19 dropped the
+19² term (stated 22=21; true 21+1=22). Python exact recompute: the witness
+n=208 itself TRUE (115-digit Q exact match, divides cleanly), all corrected
+sums verified TIGHT. Both conjuncts fixed + full-sum documentation.
+
+**THE WF-DECIDE KILL (compile war R5→R6):** R5 (run 42205769138) proved the
+R4 rw-fix worked (goal reached `v2r 2 = 1 ∧ v2r 4 = 2 ∧ v2r 5 = 0`) but
+`decide` DIED at `(v2r 2).beq 1`: **WF-defined defs do not kernel-reduce —
+the kernel cannot whnf them; #eval can (interpreter), decide cannot
+(kernel).** K19's own s2 (SubsetKernelLaw) is WF and K19 NEVER decides s2
+literals — the S028 kernels broke that law. THREE fixes: (1) K16
+v2r-witness values via THE ARSENAL'S OWN ROUTE (v2r_mul_three_strong's
+pattern: rw [v2r.eq_def n, if_neg/if_pos, division-fact haves]); (2) K17
+s2/s3 via the FUEL-ORACLE ARCHITECTURE (s2fuel/s3fuel structural on fuel —
+kernel-reducible, decide-clean); (3) K17 v2r values via the eq_def chain.
+R6 = commit 36a2592.
+
+**#273 HUNT (round 1):** corpus admission — "Is there a covering system all
+of whose moduli are p−1 (p≥5 prime)?" (Selfridge solved the p=3-allowed
+version with divisors of 360.) Hunt: L=720720 (2⁴·3²·5·7·11·13), 79 moduli
+(all p−1), density Σ1/n = 1.1057. DLX lowest-bit branching drowns (every
+residue has all-moduli options — zero column discrimination); bitmask
+annealing (geometric-series masks: (2^{nm}−1)/(2^n−1)) plateaus at 13.2%
+uncovered (density-1.10 set; 16.2% at density-1.037). ROUND 2 target: the
+CRT-cylinder structured construction (Z_L = Z_{2⁴}×Z_{3²}×Z_5×Z_7×Z_{11}×
+Z_{13}; classes = cylinders; hierarchical refinement instead of flat
+search). Tools preserved: problem273-pminus1-covering/ (hunt273d.py,
+anneal273.py).
+
+**Deliverables:** THE_LIST v5 (24 fronts, laws verbatim, execution law
+updated with the majority treatment), THE_CORE §9/§10 synced (NO §8 ledger
+additions per BOSS law), this WORKLOG entry, K16/K17 R6 push. No sub-agents
+— commander-executed throughout.
+
+*The engine never stops; it never lies.*

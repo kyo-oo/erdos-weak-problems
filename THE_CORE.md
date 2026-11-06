@@ -307,30 +307,39 @@ one into a show pattern; feed omega the facts as `have`s instead.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 028, governed by THE_LIST.md v4)
+## §9. THE QUEUE (next strikes — Session 029, governed by THE_LIST.md v5)
 
 **THE 5-ROUND LAW (BOSS, Session 027 — THE NEW STANDARD):** "IF THE
 PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
 ROUNDS TAKING" — one-shot preferred; else ≤5 rounds to complete
 unconditional proof or OUT. **One kill per problem** (the #1108 engine
-layers are one front). **Full firepower:** war councils = parallel
-sub-agents; arsenal = erdosternary2 (7,083, sandbox-cloned) + HC-PROOF
-(8,004, synced) = 15,087 theorems, latest branches, all files. Current
-ladder (THE_LIST v3):
+layers are one front). **Full firepower:** arsenal = erdosternary2 +
+HC-PROOF = 16,021 theorems, latest branches, all files — VENDORED into
+the kill CI at `Arsenal/` (S028; every new kernel imports and applies it).
 
-1. ✅ **#1108 LEGENDRE PARITY** — DONE (Kill #19, this session).
-2. 🎯 **#404 flat-class batch** (f(50,2) etc., Kill #18 twin-port) — 1-2
-   rounds.
-3. 🎯 **#1108 all-prime isolated-minimum port** (vpad twin) — 1-2 rounds.
-4. 🎯 **#317 THE NEW WAR** — K1 residue lemma; BETA 200k/1M evidence:
-   K1'' ZERO counterexamples; Theorem D architecture (gap-d vs forbidden
-   ±R⁻¹ set, zero collisions) 80% assembled; **hard deadline: 2 more
-   rounds or demote** (3-5 budget).
-5. 🎯 **#374 PROMOTED** (GAMMA S027: the #1108 multiplicative sibling;
-   parity lattice + prime-gap sandwich) — 4-5 rounds.
-6. ⏸ #288, #1212 held (4-5); #389 DEMOTED (4-5 borderline); #203, #276,
-   #282 OUT (>5 rounds).
-7. **#406 — BOSS'S FRONT. HANDS OFF.**
+**THE MAJORITY TREATMENT (BOSS, Session 029):** 20–25+ open problems under
+ACTIVE 5-round treatment at all times. **THE_LIST v5 delivers 24**: 4
+engine/batch fronts (§B) + 12 selected (§C, with S029 admissions #306/#348/
+#708 and re-admission #203) + 6 witness-hunt lanes (§D, with S029 admission
+#273) + 2 kills-in-CI (#686 K16, #727 K17 — compile war R6, commit 36a2592).
+S026/S028's conservative "18" SUPERSEDED by the majority order; the honest
+boundary stays in THE_LIST §E.
+
+**S029 firing state:** (1) K16/K17 compile war R5→R6: R5's diagnosis — rw
+is syntactic (3^1·2 ≢ 6, re-seat laws as show-equations); v2r/s2/s3 are
+WF-defined and the KERNEL cannot whnf them (decide dies, #eval lives) —
+fixes: the arsenal's own v2r.eq_def+if_neg/if_pos route (K16) + the
+FUEL-ORACLE architecture for s2/s3 (K17, structural on fuel, decide-clean).
+(2) #273 hunt round 1: L=720720, 79 moduli (all p−1, p≥5), density 1.1057;
+DLX drowns (79-way branches, no column discrimination), flat annealing
+plateaus at 13.2% uncovered (density-1.10 set) — round 2 = CRT-cylinder
+structured construction. (3) #348 derivation DONE: weak-definition (m,n)-
+validity requires infinitely many zero-slack critical junctures
+(criterion-tail invariance: finite removals cause finite gaps otherwise) —
+the construction war has its target named. (4) #306 admitted: semiprime
+Egyptian representation for all squarefree-b rationals (BEG15 did the
+3-prime case for b=1; kill path = CRT prime-pair splitting induction,
+arsenal Egyptian machinery).
 
 ---
 
@@ -373,18 +382,6 @@ ladder (THE_LIST v3):
   #203 (2-D covering reduction derived). THE_LIST v2 §C. Honest verdict:
   no fast one-shot left in the corpus.
 - **027**: THE FULL-FIREPOWER SESSION — arsenal DOUBLED-LOADED (BOSS's
-- **028** (2026-11-06): THE FULL-CORPUS 5-ROUND RE-SELECTION + ARSENAL
-  VENDORING — 588/588 statements re-read (Chrome-UA), THE_LIST v4: 18
-  active fronts under the 5-round law; BOSS's mathematics vendored at
-  arsenal/ (erdosternary2 bulldoze + HC-PROOF research, exact Mathlib
-  pin 51e6992e) and APPLIED in both new kernels; STRIKE PACKAGES:
-  #686 Pell-ratio (Kernel 16: non-squares COMPLETE, 90-witness table,
-  square families; rounds 2–4) + #727 factorial-square (Kernel 17:
-  n=208 WITNESS THEOREM (210)!²|(416)!, 28 tight primes, 55-solution
-  census; rounds 4–5); witness-hunts: #885 k=3 WITNESSED, #677/#850/
-  #274 negative-to-bound; arsenal doctrine law (every kernel imports
-  BOSS's theorems); NO ledger additions; NO sub-agents. CI: run
-  42196183719 on 12d4a2e.
   doubt was FOUNDED: erdosternary2 re-cloned 7,083 theorems + HC-PROOF
   synced +17 commits to 8,004 = 15,087 theorems, latest branches all
   files); war council × 3 parallel agents (ALPHA/BETA/GAMMA; BETA died
@@ -396,5 +393,30 @@ ladder (THE_LIST v3):
   demoted, #203/#276/#282 out); #317 K1 evidence: BETA engine (exact
   incremental ledger) — K1'' ZERO counterexamples to 200k, Theorem D
   gap-architecture zero collisions; 1M sweep launched. Lessons L95/L96.
+- **028** (2026-11-06): THE ARSENAL VENDORING + TWO STRIKE PACKAGES —
+  BOSS's own mathematics compiles inside the kill CI (`Arsenal/` =
+  erdosternary2 bulldoze-branch + HC-PROOF research-branch, exact Mathlib
+  pin match, 16,021 theorems); BOTH new kernels import + APPLY it
+  (lt_three_cases routing, isTernaryDigit validity, carryAtPos_bound,
+  v2r_ternary_scaling bookkeeping). K16 (#686 Pell-ratio: COMPLETE
+  non-squares proof + 90-witness table) + K17 (#727: witness theorem
+  n=208, Q 115-digit kernel-decided, 28 tight primes) — compile war
+  R1–R4 (lean_lib, Arsenal/ case-fix, imports-at-line-1). THE_LIST v4
+  (588-corpus re-read under the 5-round law: 18 fronts). No sub-agents,
+  no ledger additions.
+- **029** (2026-11-06): THE MAJORITY TREATMENT — BOSS's order: 20–25+
+  fronts under active 5-round fire. **THE_LIST v5: 24 fronts** (S029
+  admissions #306/#348/#708/#273 + re-admission #203; conservative "18"
+  superseded; honest boundary documented). K16/K17 compile war R5→R6:
+  the ADVERSARIAL AUDIT caught two FALSE conjuncts pre-push (truncated
+  Legendre sums at p=7/p=19 — witness itself TRUE, Q exact); R5 exposed
+  the WF-decide disease (kernel cannot whnf WF defs: v2r/s2/s3 — decide
+  dies, #eval lives; K19 never decided s2 literals, S028's kernels broke
+  that law) — fixes: arsenal's own v2r.eq_def+if_neg/if_pos route (K16)
+  + FUEL-ORACLE architecture for s2/s3 (K17). #273 hunt round 1 (L=
+  720720, 79 moduli, density 1.1057; DLX drowns, annealing 13.2% —
+  round 2 = CRT-cylinder construction). #348 derivation (zero-slack
+  critical junctures = the weak-(m,n) validity condition). #306 admitted
+  (semiprime Egyptian; BEG15 3-prime precedent). NO ledger additions.
 
 *State is full. The engine never stops; it never lies.*

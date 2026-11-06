@@ -111,7 +111,6 @@ theorem erdos686_v2r_witness_values :
     have hd : (6:Nat) / 2 = 3 := by decide
     rw [hd, v2r.eq_def 3, if_neg (show (3:Nat) ≠ 0 by decide),
         if_neg (show (3:Nat) % 2 ≠ 0 by decide)]
-    rfl
   have h12 : v2r 12 = 2 := by
     rw [v2r.eq_def 12, if_neg (show (12:Nat) ≠ 0 by decide),
         if_pos (show (12:Nat) % 2 = 0 by decide)]
@@ -121,7 +120,6 @@ theorem erdos686_v2r_witness_values :
     have hd2 : (6:Nat) / 2 = 3 := by decide
     rw [hd2, v2r.eq_def 3, if_neg (show (3:Nat) ≠ 0 by decide),
         if_neg (show (3:Nat) % 2 ≠ 0 by decide)]
-    rfl
   have h15 : v2r 15 = 0 := by
     rw [v2r.eq_def 15, if_neg (show (15:Nat) ≠ 0 by decide),
         if_neg (show (15:Nat) % 2 ≠ 0 by decide)]
