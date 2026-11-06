@@ -682,7 +682,7 @@ def s2 : Nat → Nat
   | 0 => 0
   | n + 1 => if (n + 1) % 2 = 0 then s2 ((n + 1) / 2) else 1 + s2 ((n + 1) / 2)
 termination_by n => n
-decreasing_by omega
+decreasing_by all_goals omega
 
 theorem s2_succ (n : Nat) :
     s2 (n + 1) = if (n + 1) % 2 = 0 then s2 ((n + 1) / 2) else 1 + s2 ((n + 1) / 2) := by
@@ -796,9 +796,9 @@ theorem legendre_v2_fact_sub (n : Nat) : v2 (fact n) = n - s2 n := by
 
 /-- The Λ-spine in additive form: Λ(j) + s₂(j) = 2j. -/
 theorem legendre_lam_add (j : Nat) : Lam j + s2 j = 2 * j := by
-  have h := legendre_v2_fact (2 * j)
-  have hsd := s2_double j
-  show v2 (fact (2 * j)) + s2 (2 * j) = 2 * j
+  have h : v2 (fact (2 * j)) + s2 (2 * j) = 2 * j := legendre_v2_fact (2 * j)
+  have hsd : s2 (2 * j) = s2 j := s2_double j
+  have hlam : Lam j = v2 (fact (2 * j)) := rfl
   omega
 
 /-- **THE LEGENDRE PARITY LAW ON THE Λ-SPINE**:
