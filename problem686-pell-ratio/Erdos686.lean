@@ -128,3 +128,8 @@ theorem erdos686_v2r_witness_values :
 #eval "ERDOS686_KERNEL_GREEN"
 #eval pellWitnesses.length
 #eval (pellWitnesses.all (fun t => witnessOK t))
+
+-- Axiom receipts (the kill CI's gates):
+#print axioms erdos686_square_family_identity
+#print axioms erdos686_table_all
+#print axioms erdos686_v2r_scaling_witnesses

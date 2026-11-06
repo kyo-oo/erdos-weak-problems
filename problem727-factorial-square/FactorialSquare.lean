@@ -181,3 +181,9 @@ theorem erdos727_v2r_values : v2r 210 = 1 ∧ v2r 70 = 1 := by
 #eval s2 210 + s2 416 + s3 210 + s3 416
 #eval v2r 210
 #eval carryAtPos 416 3
+
+-- Axiom receipts (the kill CI's gates):
+#print axioms erdos727_k2_witness
+#print axioms erdos727_quotient_correct
+#print axioms erdos727_tight_primes
+#print axioms erdos727_carry_bound_witness
