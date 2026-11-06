@@ -1,4 +1,4 @@
-import Arsenal.ErdosTernary2.Basic
+import Arsenal.CardinalWorlds
 /-! # Erdős #1056 — THE FACTORIAL-INTERVAL CASE-FRONTIER (Kill #22, S030)
 The §7-freeze module architecture (L83): one kernel decide per process.
 Structure law: k consecutive intervals with products ≡ 1 (mod p) ⟺ the
