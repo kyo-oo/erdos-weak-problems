@@ -14,7 +14,7 @@ on:
       - problem404-p2-classification/**
       - problem404-q3-chain/**
       - problem1108-subset-kernel/**
-      - arsenal/**
+      - Arsenal/**
       - lakefile.toml
       - problem686-pell-ratio/**
       - problem727-factorial-square/**
