@@ -1,3 +1,6 @@
+import Arsenal.ErdosTernary2.Basic
+import Arsenal.CardinalWorlds
+import Arsenal.CardinalWorldsV2
 /-!
 # Erdős #727 — THE FACTORIAL-SQUARE STRIKE (Kill-package, Session 028)
 
@@ -22,9 +25,6 @@ heuristic: the k=2 answer is expected YES); zero solutions for k=3
 below 3·10³.
 -/
 
-import Arsenal.ErdosTernary2.Basic
-import Arsenal.CardinalWorlds
-import Arsenal.CardinalWorldsV2
 
 /-! ## Section 1 — THE WITNESS THEOREM (k = 2, n = 208) -/
 

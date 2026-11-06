@@ -1,3 +1,5 @@
+import Arsenal.ErdosTernary2.Basic
+import Arsenal.CardinalWorldsV2
 /-!
 # Erdős #686 — THE PELL-RATIO STRIKE (Kill-package, Session 028)
 
@@ -18,8 +20,6 @@ The complete mathematical proof (non-squares: Pell unit × (1+√N), parity
 lemma j ∈ {1,2}, size lemma) is in DERIVATION.md.
 -/
 
-import Arsenal.ErdosTernary2.Basic
-import Arsenal.CardinalWorldsV2
 
 /-! ## Section 1 — the square family (t ≡ 2 mod 4, t = 2(2d+5) ≥ 10) -/
 
