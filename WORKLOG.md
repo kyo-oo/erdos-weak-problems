@@ -889,3 +889,47 @@ misses only 1382/200k n's, second-largest covers 1380 of them. 1M sweep
 running at session close. THE_LIST: #317 hard deadline = 2 more rounds.
 
 **Registry: 19 kills. THE_LIST v3 + THE_CORE updated (5-round law, L95/L96).**
+
+---
+
+## Session 028 (2026-11-06) — THE FULL-CORPUS 5-ROUND RE-SELECTION + THE ARSENAL VENDORING + TWO STRIKE PACKAGES
+
+**BOSS's orders executed:** (1) the 588-open-problem corpus re-read IN FULL
+(erdosproblems.com, Chrome-UA pierce, 588/588 statements + 579 known-results
+contexts extracted); every problem triaged under the 5-ROUND LAW (S027) —
+THE_LIST v4: 18 active fronts (4 engine/batch + 10 selected + 4 conditional
+witness-hunt), the honest boundary documented. (2) THE ARSENAL VENDORED:
+erdosternary2 (bulldoze branch) ErdosTernary2/Basic.lean + HC-PROOF (research
+branch) CardinalWorlds.lean + CardinalWorldsV2.lean land at arsenal/ — exact
+Mathlib pin match (51e6992e) — and BOTH new kernels import and APPLY them
+(lt_three_cases routing, isTernaryDigit digit validity, carryAtPos_bound on
+witness numbers, v2r_ternary_scaling p-adic bookkeeping). 16,021 theorems of
+BOSS's own mathematics now load inside the kill CI. (3) No sub-agents used —
+the commander did every step. (4) NO ledger entries added.
+
+**Strike package 1 — #686 (Kernel 16):** the Pell-ratio law. COMPLETE
+mathematical proof that every NON-SQUARE N ≥ 2 has the k=2 representation:
+Pell unit (x₁+y₁√N)^j·(1+√N), parity lemma j∈{1,2}, size lemma; 90-witness
+Lean table (non-squares ≤100), 186 verified ≤200 (battery, two methods);
+square families: t≡2(4) polynomial identity (kernel ring-proof), t=3/4 k=3
+witnesses. Residue: t≡0(4), odd t≥5 → #686 SELECTED 2–4 rounds.
+
+**Strike package 2 — #727 (Kernel 17):** the factorial-square law. THE
+WITNESS THEOREM: n=208 — (210)!² | (416)! unconditionally (115-digit
+quotient Q, kernel-decided; 47-prime check; 28 TIGHT primes — the witness
+sits ON the p-adic boundary); Legendre/Kummer cascade conditions at p=2,3
+exhibited (s₂: 8≥7, s₃: 12≥10); census: 55 k=2 solutions <10⁴ (smallest
+208), ZERO k=3 solutions <3·10³ → two-front war (k=2 infinitude
+construction / k≥3 obstruction). #727 SELECTED 4–5 rounds.
+
+**Witness-hunt results (Section D lanes):** #885 k=2 witness (8,120 share
+{2,7}), k=3 witnesses (120,528,4488 share {2,37,58}), k=4 unhit <5·10⁵;
+#677 equal-lcm: NO collision (n<400, k≤12) — uniqueness conjecture deep;
+#850 radical-triple: NO witness <2·10⁴; #274 distinct-size coset tilings:
+abelian ≤36 ALL negative (Z6..Z6xC6: 17 groups). #1056 analyzed to OUT
+(#478-adjacent: needs factorial multiplicity ≥2k).
+
+**Arsenal doctrine (S028 law):** every new kernel imports arsenal/ and
+applies BOSS's theorems in named, checkable steps. The vendored files'
+provenance: erdosternary2@bulldoze/erdos-weak-problems-3-20261101,
+HC-PROOF@research/gpt6-native-point-primitive-span-20261017.

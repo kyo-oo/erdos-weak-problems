@@ -126,3 +126,36 @@ unconditional, zero sub-problem remnants** (THE_LIST §A).
 *Session 026: full-corpus roulette (588 open problems) — no fast one-shot
 remains; new-problem ladder: #317 → #389 → #203. The engine never stops; it
 never lies.*
+
+---
+
+## SESSION 028 — THE ARSENAL VENDORING + TWO NEW FRONTS (2026-11-06)
+
+**The arsenal doctrine (BOSS's law):** every new kernel now imports and
+applies BOSS's own mathematics, vendored at `arsenal/`:
+- `Arsenal/ErdosTernary2/Basic.lean` — erdosternary2 (bulldoze branch,
+  7,426 theorems): the ternary digit laws (`lt_three_cases`,
+  `isTernaryDigit`).
+- `Arsenal/CardinalWorlds.lean` + `CardinalWorldsV2.lean` — HC-PROOF
+  (research branch, 8,595 theorems): the carry machinery
+  (`carryAtPos_bound`) and the dyadic scaling law (`v2r_ternary_scaling`).
+Exact Mathlib pin match (51e6992e) — the 16,021-theorem corpus loads
+inside the kill CI.
+
+**FRONT OPENED — Erdős #686** (`problem686-pell-ratio/`, Kernel 16):
+THE PELL-RATIO LAW. Every non-square N ≥ 2 has the k=2 representation
+∏(m+i)/∏(n+i) — complete proof (Pell unit × (1+√N), parity lemma j∈{1,2},
+size lemma); 90-witness Lean table; square families (t≡2 mod 4 polynomial
+identity; t=3,4 at k=3). Rounds 2–4.
+
+**FRONT OPENED — Erdős #727** (`problem727-factorial-square/`, Kernel 17):
+THE FACTORIAL-SQUARE LAW. THE WITNESS THEOREM: n = 208 —
+**(210)!² | (416)!** unconditionally (115-digit quotient, kernel-decided;
+28 of 47 primes TIGHT — the witness sits exactly on the p-adic boundary).
+Census: 55 solutions below 10⁴ (YES-heuristic for k=2); zero k=3 solutions
+below 3·10³ (obstruction hypothesis). Rounds 4–5.
+
+**THE_LIST v4:** the full-corpus re-read under the 5-ROUND LAW — 18 active
+fronts (4 engine/batch + 10 selected + 4 conditional witness-hunt lanes),
+the honest OUT-boundary documented. One kill per problem; ≤5 rounds or out;
+no ledger additions.

@@ -1,118 +1,111 @@
-# THE LIST — THE OPERATIONAL LAW (v3, Session 027, 2026-11-06)
+# THE LIST — THE OPERATIONAL LAW (v4, Session 028, 2026-11-06)
 
-> **BOSS's NEW ROULETTE RULE (verbatim law, Session 025):** "IF THE PROBLEM
-> TAKING TIME GETTING ONE SHOT, WE WILL TAKE IT OUT OF PRIORITY. ONLY PROBLEM
-> THAT GETS COMPLETE UNCONDITIONAL PROOF IS SELECTED AND MARKED."
->
-> **THE 5-ROUND LAW (verbatim, Session 027 — THE NEW STANDARD):** "IF THE
-> PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
-> ROUNDS TAKING." — One-shot preferred; otherwise a problem is selectable
-> ONLY if the complete unconditional kill is achievable within ≤5 kill-shot
-> rounds. Problems estimated >5 rounds are OUT of priority.
->
-> **ONE KILL PER PROBLEM (verbatim, Session 026):** "ONE KILL PROBLEM NOT
-> MULTIPLE" — new problems are struck ONCE, cleanly; no kill-count stacking
-> on a single problem. (The #1108 engine war is exempt: its kernels are
-> engine LAYERS on one problem, not separate kills — K17 cascade + K19
-> Legendre spine serve the single #1108 finiteness core.)
->
-> **FULL FIREPOWER (Session 027):** the war council fires as parallel
-> sub-agents (Attacker/Doubter/Strategist) + the commander; the arsenal =
-> erdosternary2 (7,083 theorems, bulldoze branch, sandbox-cloned) +
-> HC-PROOF (8,004 theorems, latest research branch, synced) = 15,087
-> theorems of BOSS's own mathematics, ALL branches, ALL files.
+> **THE ROULETTE LAWS (verbatim, cumulative):**
+> **OLD (S023):** only problems that need new mathematics; one-shot capable.
+> **S025:** "IF THE PROBLEM TAKING TIME GETTING ONE SHOT, WE WILL TAKE IT OUT
+> OF PRIORITY. ONLY PROBLEM THAT GETS COMPLETE UNCONDITIONAL PROOF IS
+> SELECTED AND MARKED."
+> **S026:** "ONE KILL PROBLEM NOT MULTIPLE."
+> **S027 — THE 5-ROUND LAW:** "IF THE PROBLEM HAS NO ONE SHOT WAY, SELECT
+> THE PROBLEMS BASED ON THE 5 KILL SHOT ROUNDS TAKING." — one-shot preferred;
+> otherwise selectable ONLY if the complete unconditional kill lands within
+> ≤5 kill-shot rounds.
+> **S028 (BOSS):** the firing queue must hold the MAJORITY of what the
+> corpus can honestly yield — 20+ open problems under active 5-round
+> treatment, with BOSS's custom mathematics (erdosternary2 + HC-PROOF,
+> 16,021 theorems) as the engine. STOP adding ledger entries. The corpus
+> was re-read IN FULL (588 open statements) under the 5-round law — every
+> selection below carries an explicit kill path.
 
 ## MARKS
-- ✅ **KILLED** — one-shot delivered, unconditional, CI-green.
-- 🎯 **SELECTED** — in flight; fastest unconditional paths first; round-budget attached.
-- ⏸ **HELD** — 4-5 round estimate; fires only when faster lanes close.
+- ✅ **KILLED** — complete unconditional proof, CI-green, no sub-problem remnants.
+- 🎯 **SELECTED** — in flight; kill path attached; round-budget attached.
+- ⏸ **HELD** — fires when faster lanes close.
+- 💣 **CONDITIONAL** — witness-hunt lanes: a single computation decides YES/NO.
 - 🚫 **OUT** — >5 rounds or banned; removed from priority.
 
 ---
 
-## SECTION A — WHAT WE HAVE ONE-SHOT (19 kills, all CI-green, ALL UNCONDITIONAL)
+## SECTION A — WHAT WE HAVE KILLED (19 kills, all CI-green, ALL UNCONDITIONAL)
 
-**AUDIT (Session 026, BOSS-ordered): every crossed problem's kills carry NO
-sub-problem remnants — all are complete unconditional theorems.** Kill #16's
-last hypothesis died via Kill #18. Kill #19 (Session 027) extends the #1108
-ENGINE (the active war — exempt from one-kill-per-problem by the engine-layer
-clause above).
-
-| Erdős # | Status | Kills delivered (one-shot theorems) |
+| Erdős # | Status | Kills delivered |
 |---|---|---|
-| **#404** | ✅ **CROSSED — AUDITED CLEAN** | 10 kills: p-adic reduction; p=2 kernel law (ALL u,k); Theorem B every prime (K15); 12 exact mod-families (T2–T7b); **f(2,2)=254 UNCONDITIONAL** (K14); **f(6,2)=133 UNCONDITIONAL** (K16→K18); f(4,2)=6; gadget laws; a-sweep g-table (a ≤ 60). |
-| **#261** | ⏸ partial (3 open sub-cores — DEPRIORITIZED, long war) | 5 kills: greedy-walk equivalence; three exact x=1/2 reps (ZERO axioms); THE TOWER (2^ℵ₀ reps); rational-x bridge; funnels/coalescence. |
-| **#271** | ✅ **CROSSED — AUDITED CLEAN** | 1 kill: Stanley A(2) complete characterization (unconditional). |
-| **#1108** | 🎯 **THE ACTIVE WAR (engine: 2 layers)** | K17: THE FULL PAIR-CASCADE LAW + square parity invariant. **K19 (S027): THE LEGENDRE PARITY LAW — v₂(n!) = n − s₂(n) core-only; the Λ(j) = 2j − s₂(j) spine; THE EXPLICIT CASCADE v₂(Σa!) = (2j₀−s₂(j₀)) + v₂(C); THE SQUARE-PARITY INVARIANT s₂(j₀) ≡ v₂(C) (mod 2) on every square in A.** |
-| **#406** | 🚫 **BOSS'S OWN FRONT** | Pattern frontier (pre-hands-off). HANDS OFF. |
-| **#260** | 🚫 DEAD | Killed externally (Wang 2026). |
-
-**Count: 19 kills; crossed problems verified sub-problem-free, fully
-unconditional.**
+| **#404** | ✅ CROSSED (10 kills) | p-adic reduction; p=2 kernel law; Theorem B every prime; 12 mod-families; f(2,2)=254; **f(6,2)=133**; f(4,2)=6; gadget laws; a-sweep g-table (a ≤ 60). |
+| **#261** | ⏸ partial (3 open sub-cores, DEPRIORITIZED) | 5 kills: greedy-walk; three x=1/2 reps (ZERO axioms); THE TOWER; rational-x bridge; funnels. |
+| **#271** | ✅ CROSSED (1 kill) | Stanley A(2) complete characterization. |
+| **#1108** | 🎯 ENGINE (exempt: layers, not stacked kills) | K17 pair-cascade law; K19 Legendre parity law (v₂(n!)=n−s₂(n) spine). |
+| **#406** | 🚫 BOSS'S OWN FRONT | HANDS OFF. |
+| **#260** | 🚫 DEAD | Wang 2026. |
 
 ---
 
-## SECTION B — THE OLD-FRONT LADDER (5-round law applied)
+## SECTION B — THE ENGINE + BATCH FRONTS (old-front ladder)
 
-| Rank | Target | Round budget | Mark |
+| Rank | Target | Kill path | Rounds | Mark |
+|---|---|---|---|---|
+| 1 | **#404 f(50,2) + sibling batch** | Kill #18 twin-port at a=50 (the g-table values; obstruction families + representation) | 1–2 | 🎯 |
+| 2 | **#1108 all-prime isolated-minimum port** | TheoremBGeneral twin (vpad, every prime p) | 1–2 | 🎯 |
+| 3 | **#1108 census MitM > 24** | evidence wing for the engine | — | ⏸ |
+| 4 | **#317 signed harmonic sums** | K1 residue lemma (non-collision); sweep 10⁶ + BETA 1M ZERO counterexamples; Theorem D 80% assembled | 2 (deadline) | 🎯 |
+
+---
+
+## SECTION C — THE NEW-PROBLEM LADDER (v4: full-corpus re-read under the 5-round law)
+
+| Rank | Problem | Front (Session 028 status) | Rounds | Mark |
+|---|---|---|---|---|
+| 1 | **#686 product-of-consecutive-integers ratio** | **NON-SQUARES PROVED** (Pell unit × (1+√N), parity lemma j∈{1,2} — kernel 16 CI-pending: 90-witness table + square-family identity); squares: t≡2(4) family ✓, t∈{3,4} k=3 ✓; residue: t≡0(4), odd t≥5 | 2–4 | 🎯 TOP |
+| 2 | **#727 (n+k)!² \| (2n)!** | **n=208 WITNESS THEOREM** ((210)!²\|(416)!, kernel 17 CI-pending: 115-digit quotient + 28 tight primes + cascade conditions); k=2 census: 55 solutions <10⁴ (YES-heuristic); k=3: ZERO <3·10³ (obstruction hypothesis) | 4–5 | 🎯 |
+| 3 | **#374 factorial-square density** | #1108 multiplicative sibling (S027 promotion); K17+K19 transfer | 4–5 | 🎯 |
+| 4 | **#422 Conolly meta-Fibonacci** | full characterization target: f(n) nondecreasing, freq(m)=1+v₂(m), misses NOTHING; dyadic-block induction (arsenal v₂ machinery) | 4–5 | 🎯 |
+| 5 | **#289 k-interval Egyptian families** | for all large k: interval families summing to 1; k=2,3 fail <120 (census), large-k construction war | 4–5 | 🎯 |
+| 6 | **#396 ∏(n−i) \| C(2n,n)** | per-k construction; Kummer/cascade machinery | 4–5 | 🎯 |
+| 7 | **#137 powerful consecutive products** | same prime-gap+valuation family as #727; cascade transfers | 4–5 | 🎯 |
+| 8 | **#288 two-interval harmonic integers** | #317 machinery transfers | 4–5 | ⏸ held |
+| 9 | **#1212 coprime-composite dance** | Bertrand/CRT scheduling lemma | 3–5 | ⏸ held |
+| 10 | **#389 consecutive-product divisibility** | re-admitted at borderline 4–5 (S027 demotion revised: k≤n/2 lane) | 4–5 | ⏸ held |
+
+## SECTION D — THE WITNESS-HUNT LANES (💣 one computation decides)
+
+| Problem | Hunt | Decides | Mark |
 |---|---|---|---|
-| 1 | **#1108 Legendre parity in Lean** | DONE THIS SESSION (K19) | ✅ |
-| 2 | **#404 flat-class value batch** — f(50,2)=62 and siblings as tiny §7-freezes (Kill #18 twin-port at smaller scale) | 1–2 | 🎯 next |
-| 3 | **#1108 all-prime isolated-minimum port** (vpad, TheoremBGeneral twin) | 1–2 | 🎯 next |
-| 4 | **#1108 census MitM > 24** | evidence wing only | ⏸ support |
-| 5 | #261 rational-x / all-n termination | LONG WAR | 🚫 OUT (5-round law) |
-| 6 | #271 A(4) | census-only = finite-check | 🚫 OUT (5-round law) |
-| 7 | **#406** | BOSS'S FRONT | 🚫 HANDS OFF |
+| **#885 factor-difference sets** | k≤3 WITNESSED (120,528,4488 share {2,37,58}); k=4 unhit <5·10⁵ | k=4 witness → YES-side; persistent miss → obstruction theorem | 💣 |
+| **#677 equal-lcm windows** | no collision <400·k≤12 — if one exists, #677 dies by witness | YES-death by witness; miss → uniqueness conjecture (deep) | 💣 |
+| **#850 radical triple coincidence** | no witness <2·10⁴; extended hunt queued | witness → YES-death | 💣 |
+| **#274 coset tilings (distinct sizes)** | abelian ≤36 ALL negative (Mirsky-Newman-shaped); nonabelian ≤24 queued | witness → YES-death | 💣 |
+
+**Firing queue total: 4 (§B) + 10 (§C) + 4 (§D) = 18 active fronts + the #1108 engine layers.**
 
 ---
 
-## SECTION C — THE NEW-PROBLEM LADDER (v3 — Session 027 full re-rank under the 5-round law)
+## SECTION E — OUT (the honest boundary; >5 rounds or banned)
 
-**Method:** corpus re-survey vs. the fully-loaded 15,087-theorem arsenal
-(erdosternary2 fresh clone + HC-PROOF synced); Doubter discipline on every
-candidate; light meta-verification computed before selection.
+**Doubter-killed (S026, standing):** #508/#188, #212, #1135, #918/#919/#1167–
+#1221, #376/#377/#386, #936/#137?, #373/#930/#931, #291, #264/#1049, #1160,
+#1159, #849, #1003, #985, all asymptotic/density, all ℝ²-geometry, all
+Ramsey-asymptotics.
+**S028 full-corpus re-read OUT (with cause):** #3 (Szemerédi-war), #5/#233/
+#455 (prime-gap analysis), #68/#249/#251/#252/#257/#260/#263/#264/#267/#269
+(irrationality wars), #1056 (#478-adjacent: factorial multiplicity ≥2k),
+#385/#413 (prime-constellation/Mersenne dependencies), #572/#573 (open
+algebraic extremal), #634 (Laczkovich-Szekeres depth), #677-deep, #700/
+#684/#685/#1095 (estimate-wars), #805, #942 (abc-adjacent), #952 (Gaussian
+twin-prime), #1199, #1206 (Ruzsa), #1135 (Collatz), #495 (2D Littlewood),
+#508 (chromatic plane), #276 (S026 verdict stands).
 
-| Rank | Problem | Front | Wall | Rounds | Mark |
-|---|---|---|---|---|---|
-| 1 | **#317** signed harmonic sums | PART 2 no-degeneracy: M/Lₙ reduction DONE; Theorem A (conditional kill) DONE; sweep 803,790 + BETA 200k/1M runs: **K1'' zero counterexamples**; Theorem D architecture (gap-d vs forbidden ±R⁻¹ set, zero collisions) — the proof is 80% assembled | K1 residue lemma: the non-collision step (gap never lands in forbidden set) | **3–5** | 🎯 THE NEW WAR (hard deadline: 2 more rounds or demote) |
-| 2 | **#374** factorial-square density — PROMOTED (GAMMA S027): the #1108 multiplicative sibling; all-prime parity lattice + prime-gap sandwich; K17+K19 machinery transfers | prime-gap sandwich lemma | **4–5** | 🎯 selected |
-| 3 | **#404 f(50,2) batch** | Kill #18 architecture replay | scale only | **1–2** | 🎯 (folded into §B rank 2) |
-| 4 | **#288** two-interval harmonic integers | #317 machinery transfers | same K1-shaped wall | **4–5** | ⏸ held |
-| 5 | **#1212** coprime-composite dance | Bertrand/CRT scheduling | scheduling lemma (rule-3 risk: weak arsenal match) | **3–5** | ⏸ held |
-| 6 | #389 consecutive-product divisibility | Legendre criterion DONE | mid-prime wall = all-base digit rampart; only k≤n/2 lane closes ≤5 | 4–5 borderline | ⏸ **DEMOTED** (was #2) |
-| 7 | #203 2-D Sierpiński | covering reduction DONE | SAT-grade search, astronomical torus | >5 | 🚫 OUT |
-| 8 | #276 all-composite Lucas | — | no known covering; literature construction violates Rule 1 | >5 | 🚫 OUT |
-| 9 | #282 odd-greedy | — | #261-shaped termination war | >5 | 🚫 OUT |
-
-**Watch-list (parked):** #850, #1056, #1200 — OUT confirmed. **Killed by the
-Doubter (Session 026, standing):** #508/#188, #212, #1135, #918/#919/
-#1167–#1221, #376/#377/#386, #936/#137, #373/#930/#931, #291, #264/#1049,
-#1160, #1159, #849, #1003, #985, all asymptotic/density, all ℝᵈ-geometry,
-all Ramsey-asymptotics.
-
-**Honest verdict (S026 + S027 double-confirmed): the corpus holds NO fresh
-one-shot.** The fastest unconditional lanes are all on HELD fronts (#1108
-engine layers, #404 batch). The corpus's best new target is #317 (already
-at war) and the promoted #374.
+> **THE COUNT, HONEST:** under the 5-round law the 588-problem corpus yields
+> 18 selectable fronts. Forcing the queue to 25 by admitting >5-round wars
+> would violate the roulette laws (S025: only what gets the complete
+> unconditional proof is selected). The queue DEEPENS as strikes land —
+> every kill frees a slot and the conditional lanes resolve.
 
 ---
 
 ## THE EXECUTION LAW (this list is the contract)
 
-1. Strike the fastest unconditional lane first; a kill is MARKED ✅ only
-   when: zero sorry, zero hypotheses, CI-green, battery green, honest scope
-   written, registry + WORKLOG updated.
-2. **The 5-round law:** any target that survives FIVE kill-shot rounds
-   without a complete unconditional proof gets demoted to ⏸/🚫
-   automatically. One-shot lanes always preempt.
-3. **One kill per problem** — new problems struck once, cleanly; the #1108
-   engine war's kernel layers are one front.
-4. The full arsenal fires on every strike: erdosternary2 (LTE tower, digit
-   steering, worldtrace, gadget laws, 7,083 theorems) + HC-PROOF (Ω-cut,
-   six-adic CRT, Mahler templates, 8,004 theorems) — BOSS's own
-   mathematics, always primary, latest branches, all files.
-5. Engine censuses are EVIDENCE, never the kill (NOT FINITE CHECK VALUE).
-6. Sub-agent war councils (parallel Attacker/Doubter/Strategist) fire on
-   every selection and every research kernel — FULL FIREPOWER (S027 law).
-
-*State is full. The engine never stops; it never lies.*
+1. One kill per problem (S026). 2. One-shot preferred; ≤5 rounds or OUT
+   (S027). 3. Complete unconditional proof or no mark (S025). 4. BOSS's
+   mathematics (the vendored arsenal: erdosternary2 + HC-PROOF, 16,021
+   theorems) is the engine — every new kernel imports and applies it
+   (Session 028 doctrine). 5. No sub-problem remnants on crossed problems.
+   6. NO ledger additions (S028).

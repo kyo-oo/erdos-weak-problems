@@ -1,4 +1,4 @@
-name: Erdos One-Shot Kills CI (271 + 404 + 261 TwoSolutions + 261 Tower + 261 Funnels + 404 GadgetSupply + 404 p2-Classification + 404 F62 + 1108 SubsetKernel)
+name: Erdos One-Shot Kills CI (271 + 404 + 261 + 1108 + ARSENAL + 686 PellRatio + 727 FactorialSquare)
 on:
   push:
     branches: ['**']
@@ -14,6 +14,9 @@ on:
       - problem404-p2-classification/**
       - problem404-q3-chain/**
       - problem1108-subset-kernel/**
+      - arsenal/**
+      - problem686-pell-ratio/**
+      - problem727-factorial-square/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -312,3 +315,44 @@ jobs:
           grep -E "'square_parity_s2' (does not depend on any axioms|depends on axioms)" legendre.log
           python3 problem1108-subset-kernel/verify_legendre.py
           echo LEGENDRE_PARITY_KERNEL_GREEN=1
+
+      - name: "Build the vendored ARSENAL (BOSS's own mathematics: erdosternary2 + HC-PROOF)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          # erdosternary2 (bulldoze branch) ternary digit laws + HC-PROOF (research branch)
+          # carry machinery + dyadic v2r scaling — vendored at arsenal/, exact Mathlib pin match.
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          echo ARSENAL_BUILD_GREEN=1
+
+      - name: "Kernel 16 - Erdos 686 PELL-RATIO STRIKE (square family identity + 90-witness non-square table + arsenal bridge)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem686-pell-ratio/Erdos686.lean 2>&1 | tee erdos686.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos686.log
+          grep -F "ERDOS686_KERNEL_GREEN" erdos686.log
+          grep -F "90" erdos686.log | head -2
+          grep -F "true" erdos686.log | head -2
+          grep -E "'erdos686_square_family_identity' (does not depend on any axioms|depends on axioms)" erdos686.log
+          grep -E "'erdos686_table_all' (does not depend on any axioms|depends on axioms)" erdos686.log
+          grep -E "'erdos686_v2r_scaling_witnesses' (does not depend on any axioms|depends on axioms)" erdos686.log
+          python3 problem686-pell-ratio/pell_battery.py
+          echo ERDOS686_PELL_RATIO_KERNEL_GREEN=1
+
+      - name: "Kernel 17 - Erdos 727 FACTORIAL-SQUARE STRIKE (n=208 witness theorem: (210)!^2 | (416)! + tightness + cascade + arsenal bridge)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem727-factorial-square/FactorialSquare.lean 2>&1 | tee factorial-square.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' factorial-square.log
+          grep -F "ERDOS727_KERNEL_GREEN" factorial-square.log
+          grep -F "19" factorial-square.log | head -2
+          grep -E "'erdos727_k2_witness' (does not depend on any axioms|depends on axioms)" factorial-square.log
+          grep -E "'erdos727_quotient_correct' (does not depend on any axioms|depends on axioms)" factorial-square.log
+          grep -E "'erdos727_tight_primes' (does not depend on any axioms|depends on axioms)" factorial-square.log
+          grep -E "'erdos727_carry_bound_witness' (does not depend on any axioms|depends on axioms)" factorial-square.log
+          python3 problem727-factorial-square/census727.py
+          echo ERDOS727_FACTORIAL_SQUARE_KERNEL_GREEN=1
