@@ -1,28 +1,32 @@
 import Arsenal.CardinalWorlds
+
 /-! # Erdős #1056 — THE FACTORIAL-INTERVAL CASE-FRONTIER (Kill #22, S030)
-The §7-freeze module architecture (L83): one kernel decide per process.
-Structure law: k consecutive intervals with products ≡ 1 (mod p) ⟺ the
-prefix-factorial sequence j! mod p visits one value k+1 times. Known:
-k=2 (Erdős 1979, p=11), k=3 (Makowski 1983, p=17). NEW: k=4..11. -/
+The TREE-PRODUCT architecture: the compile war (R1/R5) proved linear fuel
+recursions past ~3k depth kill the CI runner (the kernel evaluator's deep
+native recursion); the R5 green boundary was FI_K9 (3009-deep, GREEN) vs
+FI_K10 (8324-deep, killed). Fix: balanced binary product trees — depth
+O(log span) (~17 for the largest block), identical values, same witness
+statements. Structure law: k consecutive intervals with products ≡ 1
+(mod p) ⟺ the prefix-factorial sequence j! mod p visits one value k+1
+times. Known: k=2 (Erdős 1979, p=11), k=3 (Makowski 1983, p=17). -/
 
-set_option maxRecDepth 262144
+set_option maxRecDepth 65536
 
-/-- Product of [a, a+1, …, a+c] mod p — fuel-structural (decide-clean). -/
-def prodmodFuel (p : Nat) : Nat → Nat → Nat → Nat
+/-- Balanced-tree product of [a, b] mod p: split at the midpoint, leaves
+are single terms. Fuel bounds the tree depth (64 ≫ log₂ 52163 + 2). -/
+def prodmodT (p : Nat) : Nat → Nat → Nat → Nat
   | 0, _, _ => 1
-  | _ + 1, a, 0 => a % p
-  | f + 1, a, c + 1 => (prodmodFuel p f a c * ((a + c + 1) % p)) % p
+  | f + 1, a, b =>
+    if a > b then 1
+    else if a = b then a % p
+    else (prodmodT p f a ((a + b) / 2) * prodmodT p f ((a + b) / 2 + 1) b) % p
 
 /-- Product of the interval [a, b] modulo p (witness intervals have b > a). -/
-def prodmod (p a b : Nat) : Nat := prodmodFuel p (b - a + 1) a (b - a)
+def prodmod (p a b : Nat) : Nat := prodmodT p 64 a b
 
-/-- Factorial j! mod p — same fuel architecture. -/
-def factmodFuel (p : Nat) : Nat → Nat → Nat
-  | 0, _ => 1
-  | _ + 1, 0 => 1
-  | f + 1, j + 1 => (factmodFuel p f j * ((j + 1) % p)) % p
-
-def factmod (p j : Nat) : Nat := factmodFuel p (j + 1) j
+/-- Factorial j! mod p: the tree product of [1, j] (j = 0 gives the empty
+range and 0! = 1 for free). -/
+def factmod (p j : Nat) : Nat := prodmodT p 64 1 j
 
 /-! ## The cases k = 2 .. 8 -/
 theorem erdos1056_k2 : Nat.Prime 11 ∧
