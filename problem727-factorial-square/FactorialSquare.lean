@@ -66,17 +66,23 @@ theorem erdos727_tight_primes :
 
 /-! ## Section 3 — the cascade digit conditions (Legendre/Kummer) -/
 
-/-- Binary digit sum (the K19 s₂ spine). -/
-def s2 (n : Nat) : Nat :=
-  if n = 0 then 0 else s2 (n / 2) + (n % 2)
-termination_by n
-decreasing_by all_goals omega
+/-- Binary digit sum (the K19 s₂ spine), via the FUEL-ORACLE pattern
+(the arsenal architecture: structural on fuel — kernel-reducible,
+`decide`-clean; WF defs stick the kernel, only #eval can run them). -/
+def s2fuel : Nat → Nat → Nat
+  | 0, _ => 0
+  | _ + 1, 0 => 0
+  | f + 1, n + 1 => (n + 1) % 2 + s2fuel f ((n + 1) / 2)
 
-/-- Ternary digit sum (the p = 3 cascade spine). -/
-def s3 (n : Nat) : Nat :=
-  if n = 0 then 0 else s3 (n / 3) + (n % 3)
-termination_by n
-decreasing_by all_goals omega
+def s2 (n : Nat) : Nat := s2fuel 20 n
+
+/-- Ternary digit sum (the p = 3 cascade spine), same fuel architecture. -/
+def s3fuel : Nat → Nat → Nat
+  | 0, _ => 0
+  | _ + 1, 0 => 0
+  | f + 1, n + 1 => (n + 1) % 3 + s3fuel f ((n + 1) / 3)
+
+def s3 (n : Nat) : Nat := s3fuel 20 n
 
 theorem s2_210 : s2 210 = 4 := by decide
 theorem s2_416 : s2 416 = 3 := by decide
@@ -155,8 +161,23 @@ theorem erdos727_v2r_scaling : v2r 210 = v2r 70 :=
   CardinalWorldsV2.v2r_ternary_scaling 1 70
 
 theorem erdos727_v2r_values : v2r 210 = 1 ∧ v2r 70 = 1 := by
-  rw [← CardinalWorldsV2.v2r_ternary_scaling 1 70]
-  decide
+  -- v2r is WF-defined: decide cannot kernel-reduce it. The arsenal's own
+  -- route (v2r_mul_three_strong): eq_def + if_neg/if_pos + division facts.
+  have h210 : v2r 210 = 1 := by
+    rw [v2r.eq_def 210, if_neg (show (210:Nat) ≠ 0 by decide),
+        if_pos (show (210:Nat) % 2 = 0 by decide)]
+    have hd : (210:Nat) / 2 = 105 := by decide
+    rw [hd, v2r.eq_def 105, if_neg (show (105:Nat) ≠ 0 by decide),
+        if_neg (show (105:Nat) % 2 ≠ 0 by decide)]
+    rfl
+  have h70 : v2r 70 = 1 := by
+    rw [v2r.eq_def 70, if_neg (show (70:Nat) ≠ 0 by decide),
+        if_pos (show (70:Nat) % 2 = 0 by decide)]
+    have hd : (70:Nat) / 2 = 35 := by decide
+    rw [hd, v2r.eq_def 35, if_neg (show (35:Nat) ≠ 0 by decide),
+        if_neg (show (35:Nat) % 2 ≠ 0 by decide)]
+    rfl
+  exact ⟨h210, h70⟩
 
 #eval "ERDOS727_KERNEL_GREEN"
 #eval s2 210 + s2 416 + s3 210 + s3 416

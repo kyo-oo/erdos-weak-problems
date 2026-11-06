@@ -101,13 +101,31 @@ theorem erdos686_v2r_scaling_witnesses :
 the battery compares both sides of each Pell identity through this law. -/
 theorem erdos686_v2r_witness_values :
     v2r 6 = 1 ∧ v2r 12 = 2 ∧ v2r 15 = 0 := by
-  -- rw is SYNTACTIC: the arsenal law's LHS carries `3^1 * 2`, which is only
-  -- defeq to the goal's literal `6`. Re-seat each law as a literal equation
-  -- (the `show` typechecks by defeq), then rw matches syntactically.
-  rw [show v2r 6 = v2r 2 from CardinalWorldsV2.v2r_ternary_scaling 1 2,
-      show v2r 12 = v2r 4 from CardinalWorldsV2.v2r_ternary_scaling 1 4,
-      show v2r 15 = v2r 5 from CardinalWorldsV2.v2r_ternary_scaling 1 5]
-  decide
+  -- v2r is WF-defined: `decide` cannot kernel-reduce it (#eval can; the
+  -- kernel cannot). The ARSENAL'S OWN pattern (v2r_mul_three_strong's route):
+  -- rewrite with v2r.eq_def, strip the ifs with if_neg/if_pos, feed the
+  -- division facts as explicit haves.
+  have h6 : v2r 6 = 1 := by
+    rw [v2r.eq_def 6, if_neg (show (6:Nat) ≠ 0 by decide),
+        if_pos (show (6:Nat) % 2 = 0 by decide)]
+    have hd : (6:Nat) / 2 = 3 := by decide
+    rw [hd, v2r.eq_def 3, if_neg (show (3:Nat) ≠ 0 by decide),
+        if_neg (show (3:Nat) % 2 ≠ 0 by decide)]
+    rfl
+  have h12 : v2r 12 = 2 := by
+    rw [v2r.eq_def 12, if_neg (show (12:Nat) ≠ 0 by decide),
+        if_pos (show (12:Nat) % 2 = 0 by decide)]
+    have hd : (12:Nat) / 2 = 6 := by decide
+    rw [hd, v2r.eq_def 6, if_neg (show (6:Nat) ≠ 0 by decide),
+        if_pos (show (6:Nat) % 2 = 0 by decide)]
+    have hd2 : (6:Nat) / 2 = 3 := by decide
+    rw [hd2, v2r.eq_def 3, if_neg (show (3:Nat) ≠ 0 by decide),
+        if_neg (show (3:Nat) % 2 ≠ 0 by decide)]
+    rfl
+  have h15 : v2r 15 = 0 := by
+    rw [v2r.eq_def 15, if_neg (show (15:Nat) ≠ 0 by decide),
+        if_neg (show (15:Nat) % 2 ≠ 0 by decide)]
+  exact ⟨h6, h12, h15⟩
 
 #eval "ERDOS686_KERNEL_GREEN"
 #eval pellWitnesses.length
