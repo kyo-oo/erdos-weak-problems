@@ -1010,3 +1010,74 @@ truncated-Legendre conjuncts (adversarial audit); R6 the WF-decide kill
 (arsenal eq_def route + fuel oracle); R7 the auto-rfl drop; R8 the axiom
 receipts. Both new kernels IMPORT AND APPLY BOSS'S OWN MATHEMATICS — the
 arsenal doctrine is now the standing architecture of every new kill.
+
+---
+
+## SESSION 030 (2026-11-06): THE ENERGY CORRECTION — PURGE + THE 1056 CASE-FRONTIER STRIKE + THE 700 PRIME-POWER DERIVATION
+
+**BOSS's correction (the round's law):** (1) #404 and #271 are PROVEN
+UNCONDITIONAL — CASE CLOSED, out of every queue permanently (the v5 §B
+"#404 f(50,2) batch" front was a violation — purged). (2) The batch is
+20–25+ PROBLEMS under one-shot/5-round fire, not 3–4 admissions. (3) MATHS
+skill activation is LAW (it fired: MATHS + prove-that-shit full chain).
+(4) MAX energy, commander-executed, no sub-agents.
+
+**THE_LIST v6 (the majority treatment holds):** 22 problems = 2 §B engine
+fronts (#317 deadline war, #1108 port) + 12 §C ladder + 8 §D witness
+lanes. S030 admissions: **#700** (prime-power law), **#1056** (factorial
+residues — S028's OUT REVERSED), **#939** (r=4 powerful sums). #422
+v5-front was a MISLABEL (corpus #422 = Hofstadter Q, well-definedness
+open = Collatz-class; the Conolly freq law is a different sequence) — OUT
+with cause.
+
+**KILL #22 (Kernel 18, firing at CI): Erdős #1056 — THE FACTORIAL-INTERVAL
+CASE-FRONTIER THEOREM.** The structure discovery: k consecutive intervals
+with products ≡ 1 (mod p) ⟺ the prefix-factorial sequence j! mod p
+visits one value k+1 times (block products between equal-value cut
+points). The Wilson anchor law forces value-1 chains: 1! ≡ 1 and
+(p−2)! ≡ 1 always; odd-j hits double (j!·(p−1−j)! ≡ (−1)^{j+1}).
+THE CASE TABLE (smallest witnesses, dual-method + Wilson-verified,
+battery1056 GREEN):
+  k=2: p=11 (Erdős 1979, re-derived in-house),
+  k=3: p=17 (Makowski 1983, re-derived),
+  **k=4: p=23, k=5: p=109, k=6: p=71, k=7: p=673, k=8: p=599,
+  k=9: p=3011, k=10: p=27901, k=11: p=52163 — ALL NEW CASES.**
+The frontier jumps 3 → 11. Kernel 18: prodmod/factmod fuel-oracle block
+products, all k=2..11 witness theorems decided, Wilson anchor instances
+(17/23/3011/52163), the k=11 chain in Noll–Simmons equal-factorial form
+(twelve cut points, all ≡ 1 mod 52163), arsenal bridge (isTernaryDigit
+on 52163 = (2211221222)₃, lt_three_cases routing, carryAtPos_bound on
+the cut points, v2r scaling 52161=3·17387, 7290=3·2430). Honest scope:
+"arbitrarily large k" (the full Noll–Simmons question) remains open; the
+case frontier is what fell.
+
+**#700 — THE PRIME-POWER LAW (round 1/5, derivation + battery landed).**
+The carry lemma v_p(C(p^a,k)) = a − v_p(k) (Legendre floor-sum proof,
+clean: each level i contributes [p^i ∤ k]) ⟹ f(p²) = p (prime squares
+SATISFY the ErSz equality — a new class beyond semiprimes) and f(p^a) = p
+for ALL a ≥ 3 (higher powers VIOLATE by factor p^{a−2}). Battery:
+79,003 carry instances + 16-row f-table — ALL GREEN (Legendre method
+cross-checked against exact binomial factorisations). DRAFT_PROOF.md
+complete; the general-theorem Lean war (divSplit → cntNotDiv → Legendre
+bridge → binomial identity → assembly) is armed for the next round.
+
+**The witness-lane volleys:** #939 (r=4): zero solutions ≤ 10¹³ (1,777
+4-powerfuls, ~1.5M coprime pairs — heuristic-consistent, lane alive).
+#273: the escalation annealing (85 moduli, density 1.1633, coverage-count
+incremental architecture) reached 9.58% uncovered (S029 was 13.2%) — the
+CRT-cylinder construction war continues. #203: THE DENSITY CENSUS — the
+covering budget Σ 1/|⟨2,3⟩_p| = 2.03 over p < 20000 (top primes: 5→1/4,
+7→1/6, 11→1/10, 23→1/11 [the double-QR safe-prime gem], 13→1/12, 17→1/16,
+19→1/18, 47→1/23, 29→1/28, 71→1/35, 37/73→1/36, 431→1/43, 97→1/48,
+601→1/75, 6553→1/117...): the covering lane is ALIVE (>1 budget). The
+linear-congruence reduction is written: covering (k,ℓ) ∈ Z² by
+α_i k + β_i ℓ ≡ γ_i (mod d_i), one per prime, then m by CRT — the torus
+budget/size tradeoff (5-smooth-d budget ≈ 0.76 < 1 forces the mixed-lcm
+monster torus ≈ 10⁹ cells) makes it a C-grade multi-round war. Honest
+verdict recorded; the lane fires on.
+
+**#317:** deadline war unchanged (K1 residue lemma) — the S030 energy
+went to the two strikes above; the hard deadline (1 more round) stands.
+
+NO ledger additions (§8 frozen). No sub-agents. THE_CORE synced (§2
+case-closed scoreboard, §9 v6 queue + firing state, §10 S030 index).

@@ -226,3 +226,55 @@ the k=2-infinitude / k≥3-obstruction war is the named same-front follow-up
 the syntactic-rw fix → the WF-decide kill (arsenal eq_def route + fuel
 oracle) → the auto-rfl drop → the axiom receipts. The engine never stops;
 it never lies.*
+
+## SESSION 030 — THE ENERGY CORRECTION + KILL #22 (2026-11-06)
+
+**BOSS's correction law:** #404 and #271 are **PROVEN UNCONDITIONAL — CASE
+CLOSED**, out of every queue permanently (the v5 "#404 f(50,2) batch" front
+purged); the batch is **22 problems under one-shot/5-round fire**
+(THE_LIST v6: 2 §B + 12 §C + 8 §D); MATHS-skill activation is LAW. S030
+admissions: **#700** (prime-power law), **#1056** (S028's OUT REVERSED —
+the factorial-residue structure), **#939** (r=4 powerful sums). #422's
+v5-front was a MISLABEL (corpus #422 = Hofstadter Q — well-definedness
+open, Collatz-class) — OUT with cause.
+
+**KILL #22 — Erdős #1056, Kernel 18: THE FACTORIAL-INTERVAL CASE-FRONTIER
+THEOREM.** The structure law: k consecutive intervals with products ≡ 1
+(mod p) ⟺ the prefix-factorial sequence j! mod p visits one value k+1
+times (cut points with equal factorials; block products are ratios of
+equal values). The Wilson anchor law forces value-1 chains (1! ≡ 1 and
+(p−2)! ≡ 1 always; odd-j hits double via j!·(p−1−j)! ≡ (−1)^{j+1} mod p).
+**THE CASE TABLE — the frontier jumps 3 → 11**: k=2: p=11 (Erdős 1979,
+re-derived), k=3: p=17 (Makowski 1983, re-derived), **k=4: p=23, k=5:
+p=109, k=6: p=71, k=7: p=673, k=8: p=599, k=9: p=3011, k=10: p=27901,
+k=11: p=52163 — ALL NEW.** Every witness kernel-decided block-by-block
+(prodmod fuel-oracle), Wilson anchors decided on all value-1 witness
+primes, the k=11 chain in the Noll–Simmons equal-factorial form (twelve
+cut points all ≡ 1 mod 52163, covering [2, 52161] with eleven consecutive
+intervals), ARSENAL-APPLIED (isTernaryDigit on 52163=(2211221222)₃,
+lt_three_cases routing, carryAtPos_bound on cut points, v2r scaling
+52161=3·17387 / 7290=3·2430). Battery1056: dual-method (block products ∥
+factorial chains) + Wilson anchors — k=2..11 ALL GREEN. Honest scope: the
+case frontier fell; "arbitrarily large k" (Noll–Simmons, the full
+question) remains open.
+
+**#700 — THE PRIME-POWER LAW (round 1/5):** the carry lemma
+v_p(C(p^a,k)) = a − v_p(k) (Legendre floor-sum proof: each level i
+contributes exactly [p^i ∤ k]) ⟹ **f(p²) = p — prime squares SATISFY the
+Erdős–Szekeres equality** (a new class beyond semiprimes) and **f(p^a) = p
+for ALL a ≥ 3** (higher powers violate by factor p^{a−2}). Battery:
+79,003 carry-lemma instances + 16-row exact f-table — ALL GREEN
+(`problem700-binomial-gcd/`: DRAFT_PROOF.md + batteries). The
+general-theorem Lean war (divSplit → cntNotDiv → Legendre bridge →
+binomial identity → assembly) armed for the next round.
+
+**Witness-lane volleys:** #939 r=4: zero solutions ≤ 10¹³ (1,777
+4-powerfuls, ~1.5M coprime pairs — heuristic-consistent). #273: escalation
+annealing (85 moduli, density 1.1633, incremental coverage-count
+architecture): 9.58% uncovered (from S029's 13.2%) — CRT-cylinder war
+continues. #203: THE DENSITY CENSUS — covering budget Σ 1/|⟨2,3⟩_p| =
+**2.03** over p < 20000 (gems: 23→1/11 double-QR safe prime, 431→1/43,
+601→1/75, 6553→1/117): the covering lane is ALIVE; the linear-congruence
+reduction written (cover (k,ℓ) ∈ Z² by α_i k + β_i ℓ ≡ γ_i mod d_i, then
+m by CRT); honest verdict: the mixed-lcm monster torus (≈10⁹ cells,
+C-grade) makes it a multi-round war.
