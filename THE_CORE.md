@@ -59,7 +59,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
    dress a partial result in complete-resolution clothing (MATHS §7.7,
    prohibition #8).
 
-**THE KILL REGISTRY (21 kills — full entries in repo `README.md`):**
+**THE KILL REGISTRY (22 kills — full entries in repo `README.md`):**
 
 | # | Problem | The kill (one line) | CI state |
 |---|---|---|---|
@@ -84,6 +84,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 19 | **1108** | **THE LEGENDRE PARITY LAW**: v₂(n!)+s₂(n)=n (core-only fuel induction) + Λ(j)=2j−s₂(j) THE SPINE + EXPLICIT CASCADE v₂(Σa!)=(2j₀−s₂(j₀))+v₂(C) + square⟹s₂(j₀)≡v₂(C) mod 2 — ALL SIX [propext, Quot.sound], zero hypotheses; battery 8191-subset census: 27 squares all parity-locked; Kernel 15 | **run 42153591445, commit 6974fa8** |
 | 20 | **686** | **THE PELL-RATIO LAW (non-squares)**: every non-square N≥2 has the k=2 ratio representation ∏(m+i)/∏(n+i) — COMPLETE Pell proof (unit^j·(1+√N), parity lemma j∈{1,2}, size lemma) + 90-witness Lean table (all non-squares ≤100) + t≡2(4) square-family polynomial identity + k=3 witnesses N=9,16; ARSENAL-APPLIED (lt_three_cases routing, isTernaryDigit validity, v2r_ternary_scaling bookkeeping); battery 186 non-squares ≤200 dual-method | **run 42212351838, commit 025dd39, Kernel 16** |
 | 21 | **727** | **THE WITNESS THEOREM n=208**: (210)!² ∣ (416)! unconditionally — 115-digit quotient Q kernel-decided, 47-prime check, 28 TIGHT primes (zero p-adic slack, FULL Legendre sums), Legendre/Kummer cascade conditions at p=2,3 (s₂: 8≥7, s₃: 12≥10); ARSENAL-APPLIED (ternary digit predicates on the witness's own digits, carryAtPos_bound, v2r scaling); census: 55 k=2 solutions <10⁴ (smallest 208), ZERO k=3 <3·10³ | **run 42212351838, commit 025dd39, Kernel 17** |
+| 22 | **1056** | **THE FACTORIAL-INTERVAL CASE-FRONTIER THEOREM**: the structure law (k consecutive intervals with products ≡ 1 mod p ⟺ the j! mod p chain visits one value k+1 times — Wilson anchors 1!≡1, (p−2)!≡1, odd-j doubling) + **CASE FRONTIER k: 3 → 11** — NEW cases k=4..11 with smallest witnesses p = 23, 109, 71, 673, 599, 3011, 27901, 52163 (every block product kernel-decided via the six-step §7-freeze olean ladder + tree products; wilson_23/17/3011 ZERO axioms; v2r_scaling [propext, Quot.sound]; arsenal bridge isTernaryDigit/lt_three_cases/carryAtPos_bound on the witness numbers); battery dual-method (block products ∥ factorial chains) k=2..11 ALL GREEN; honest scope: arbitrarily-large-k (Noll–Simmons) remains open | **run 42308034994, commit a66350c, Kernel 18 (the 9-round compile war)** |
 
 **AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
 sub-problem remnants; every crossed-problem kill is a complete unconditional
@@ -118,6 +119,9 @@ follow-up on the SAME front).**
   parity). Open: finiteness of squares/powerfuls (Brindza–Erdős bounds
   |S|; the war lives at |S|→∞; heuristic says finiteness; walls: composite
   cascade beyond Bertrand window + sparse-dodge).
+- **#1056**: **KILL #22 (S030, Kernel 18): the CASE-FRONTIER THEOREM —
+  k jumped 3 → 11** (new cases k=4..11; run 42308034994). Open core:
+  arbitrarily large k (Noll–Simmons).
 - **#260**: DEAD — killed by outsider Wang 2026 (arXiv:2606.24972,
   Lean-formalized). Removed from queue. #404 "Conjecture D" also DEAD
   (refuted by Kill #14: g(2,2)=253 finite).
@@ -439,5 +443,34 @@ hunts + #885 k=5 + #317 K1: firing.
   (semiprime Egyptian; BEG15 3-prime precedent). NO ledger additions.
   **R8 VERDICT (session close): run 42212351838 GREEN — KILLS #20 (#686)
   and #21 (#727) LANDED; the arsenal-vendored CI now carries 17 kernels.**
+- **030** (2026-11-06): THE ENERGY CORRECTION — BOSS's purge order
+  executed: **#404/#271 CASE CLOSED** (PROVEN UNCONDITIONAL, out of every
+  queue; scoreboard + THE_LIST v6 rewritten; #422 mislabel OUT); MATHS +
+  prove-that-shit full chain activated; the batch = **22 problems**
+  (admissions #700/#1056-reversal/#939). **KILL #22 LANDED (Kernel 18,
+  commit a66350c, CI run 42308034994 GREEN): Erdős #1056 THE FACTORIAL-INTERVAL
+  CASE-FRONTIER THEOREM — the structure law (equal-factorial cut points ⟺
+  consecutive-interval products ≡ 1 mod p) + the Wilson anchor law
+  (1!≡1, (p−2)!≡1, odd-j doubling); the case frontier jumped k: 3 → 11
+  (NEW cases k=4..11: p=23, 109, 71, 673, 599, 3011, 27901, 52163;
+  wilson_23/17/3011 ZERO axioms; battery dual-method GREEN; arsenal-applied).
+  THE 9-ROUND COMPILE WAR (the §7-freeze lesson at full scale): R1/R2 runner
+  shutdowns at ~55s of step-cumulative grind → R3/R4 the import ladder
+  (ErdosTernary2.Basic is CORE-ONLY; Nat.Prime lives in Mathlib via
+  CardinalWorlds) → R5 the linear-depth wall (3009 GREEN vs 8324 dead) →
+  R6 tree products (depth dead-end — the wall is TOTAL grind ~1.5ms/term) →
+  R7 THE SIX-STEP OLEAN LADDER (FI_Base → 8 term-budgeted core-only data
+  modules → zero-work final assemblies) → R8/R9 the Nat.Prime-instance
+  grind (Mathlib's Decidable trial-divides a prime to n itself) killed by
+  norm_num.** #700 PRIME-POWER LAW
+  round 1/5: the carry lemma v_p(C(p^a,k)) = a − v_p(k) derived
+  (floor-sum proof) + f(p²)=p (prime squares SATISFY the ErSz equality —
+  new class) + f(p^a)=p for a≥3; 79,003-instance battery GREEN; the
+  general-theorem Lean war armed (DRAFT_PROOF.md, 5-lemma chain). #939
+  r=4: zero ≤ 10¹³. #273: annealing escalation 13.2% → 9.58% (85 moduli,
+  density 1.1633). #203: THE DENSITY CENSUS (budget 2.03 — the covering
+  lane ALIVE; linear-congruence reduction written; C-grade multi-round
+  torus war). #317: deadline stands, energy went to the two strikes. NO
+  ledger additions. No sub-agents.
 
 *State is full. The engine never stops; it never lies.*

@@ -1081,3 +1081,30 @@ went to the two strikes above; the hard deadline (1 more round) stands.
 
 NO ledger additions (§8 frozen). No sub-agents. THE_CORE synced (§2
 case-closed scoreboard, §9 v6 queue + firing state, §10 S030 index).
+
+**SESSION 030 CLOSE — KILL #22 LANDED (run 42308034994 GREEN, commit
+a66350c).** The 9-round compile war, recorded for the craft: R1/R2 —
+runner shutdown (exit 143) at ~52-58s of Kernel-18 step-cumulative grind,
+twice, single-file; R3/R4 — the import ladder: ErdosTernary2.Basic is
+CORE-ONLY (no Mathlib), Nat.Prime resolves only through CardinalWorlds'
+`import Mathlib` — the 1-second failures; R5 — the §7-freeze module split:
+FI_K2_K8 + FI_K9 GREEN (3009-deep linear recursion OK), FI_K10 killed at
+~40s (8324-deep) — the depth boundary; R6 — tree products (depth 14!):
+FI_K10 STILL killed at ~36s — depth was NOT the killer, TOTAL kernel
+grind is (~1.5ms/term — the definition-unfolding cost; K17's 416! at
+~3ms/bignum-mult confirms the fixed per-step overhead); the jobs-API step
+table: Kernel-10's F22 step runs 410s GREEN — no universal step wall, the
+~55s wall is local to this step's content; k10+k11 need ~77k terms =
+~120s grind — no single step can hold it. R7 — THE SIX-STEP OLEAN LADDER
+(the K14 architecture at full scale): FI_Base (core-only tree defs) → 8
+core-only data modules (one block-set each, ≤ ~15k terms ≈ 25s/process) →
+FI_K10_FINAL/FI_K11_FINAL (Mathlib + olean imports; ZERO kernel work —
+pure ⟨⟩ assembly) — ALL DATA STEPS GREEN. R8 — the finals' `by decide` on
+Nat.Prime hit the DEFAULT maxRecDepth (512): set_option is FILE-LOCAL. R9
+— with 65536 the Nat.Prime 27901 decide STILL ground 66s and died:
+Mathlib's Decidable instance for Nat.Prime trial-divides a prime
+candidate ALL THE WAY TO n (~n/2 kernel divisions) — fine at 3011, fatal
+at 27901/52163 — killed by `by norm_num` (elaborator-native arithmetic).
+FINAL: all 24 CI steps GREEN; k4..k11 [propext, Classical.choice,
+Quot.sound]; wilson_23/17/3011 ZERO axioms; v2r_scaling [propext,
+Quot.sound]; battery dual-method GREEN. REGISTRY: 22 kills.

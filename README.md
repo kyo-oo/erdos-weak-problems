@@ -238,8 +238,9 @@ the factorial-residue structure), **#939** (r=4 powerful sums). #422's
 v5-front was a MISLABEL (corpus #422 = Hofstadter Q — well-definedness
 open, Collatz-class) — OUT with cause.
 
-**KILL #22 — Erdős #1056, Kernel 18: THE FACTORIAL-INTERVAL CASE-FRONTIER
-THEOREM.** The structure law: k consecutive intervals with products ≡ 1
+**KILL #22 LANDED — Erdős #1056, Kernel 18 (CI run 42308034994 GREEN,
+commit a66350c, the 9-round compile war): THE FACTORIAL-INTERVAL
+CASE-FRONTIER THEOREM.** The structure law: k consecutive intervals with products ≡ 1
 (mod p) ⟺ the prefix-factorial sequence j! mod p visits one value k+1
 times (cut points with equal factorials; block products are ratios of
 equal values). The Wilson anchor law forces value-1 chains (1! ≡ 1 and
@@ -257,6 +258,22 @@ lt_three_cases routing, carryAtPos_bound on cut points, v2r scaling
 factorial chains) + Wilson anchors — k=2..11 ALL GREEN. Honest scope: the
 case frontier fell; "arbitrarily large k" (Noll–Simmons, the full
 question) remains open.
+
+**The 9-round compile war (the §7-freeze at full scale):** R1/R2 runner
+shutdowns at ~55s step-cumulative grind → R3/R4 the import ladder
+(ErdosTernary2.Basic is CORE-ONLY; Nat.Prime is Mathlib-side via
+CardinalWorlds' `import Mathlib`) → R5 module split: k2..k9 GREEN, k10
+dead (the linear-depth boundary 3009 GREEN vs 8324 dead) → R6 tree
+products (depth-14 — still dead: the wall is TOTAL kernel grind
+~1.5ms/term, not depth) → R7 THE SIX-STEP OLEAN LADDER: FI_Base
+(core-only tree defs) → 8 term-budgeted core-only data modules (≤15k
+terms/process) → zero-work final assemblies — ALL DATA GREEN → R8
+maxRecDepth is FILE-LOCAL (the finals' `by decide` hit the default 512) →
+R9 Mathlib's Nat.Prime Decidable instance trial-divides a PRIME to n
+itself (~14k kernel divisions at 27901, ~26k at 52163 — the 66s grind)
+— killed by `by norm_num` (elaborator-native). Receipts: k4..k11
+[propext, Classical.choice, Quot.sound]; wilson_23/17/3011 ZERO axioms;
+v2r_scaling [propext, Quot.sound]; BATTERY 1056 GREEN.
 
 **#700 — THE PRIME-POWER LAW (round 1/5):** the carry lemma
 v_p(C(p^a,k)) = a − v_p(k) (Legendre floor-sum proof: each level i
