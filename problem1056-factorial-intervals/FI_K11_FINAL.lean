@@ -6,6 +6,8 @@ import FI_D4c
 import FI_D4d
 import FI_D4e
 
+set_option maxRecDepth 65536
+
 /-! ## The case k = 11 — THE FRONTIER (p = 52163): eleven consecutive
 intervals covering [2, 52161], every block product ≡ 1 (mod 52163) —
 the value-1 chain cut at 1, 3924, 7291, 7427, 18519, 24931, 26081,

@@ -4,6 +4,8 @@ import FI_D3a
 import FI_D3b
 import FI_D3c
 
+set_option maxRecDepth 65536
+
 /-! ## The case k = 10 — NEW (p = 27901). The FINAL ASSEMBLY: zero kernel
 work — the block products were decided in the data modules; this module
 composes them and decides the primality. -/

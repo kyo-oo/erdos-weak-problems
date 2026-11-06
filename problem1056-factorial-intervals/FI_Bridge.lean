@@ -2,6 +2,8 @@ import Arsenal.ErdosTernary2.Basic
 import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
+set_option maxRecDepth 65536
+
 /-! ## THE ARSENAL BRIDGE (BOSS's mathematics, applied to #1056's witness
 numbers). erdosternary2's digit predicates on the frontier prime's own
 ternary digits: 52163 = (2211221222)₃ least-significant first. -/
