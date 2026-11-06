@@ -101,9 +101,12 @@ theorem erdos686_v2r_scaling_witnesses :
 the battery compares both sides of each Pell identity through this law. -/
 theorem erdos686_v2r_witness_values :
     v2r 6 = 1 ∧ v2r 12 = 2 ∧ v2r 15 = 0 := by
-  rw [← CardinalWorldsV2.v2r_ternary_scaling 1 2,
-      ← CardinalWorldsV2.v2r_ternary_scaling 1 4,
-      ← CardinalWorldsV2.v2r_ternary_scaling 1 5]
+  -- rw is SYNTACTIC: the arsenal law's LHS carries `3^1 * 2`, which is only
+  -- defeq to the goal's literal `6`. Re-seat each law as a literal equation
+  -- (the `show` typechecks by defeq), then rw matches syntactically.
+  rw [show v2r 6 = v2r 2 from CardinalWorldsV2.v2r_ternary_scaling 1 2,
+      show v2r 12 = v2r 4 from CardinalWorldsV2.v2r_ternary_scaling 1 4,
+      show v2r 15 = v2r 5 from CardinalWorldsV2.v2r_ternary_scaling 1 5]
   decide
 
 #eval "ERDOS686_KERNEL_GREEN"

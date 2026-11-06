@@ -1,6 +1,11 @@
 import Arsenal.ErdosTernary2.Basic
 import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
+
+-- Family pattern (green kernels, F22-chain): kernel decides on 400+-deep
+-- factorial recursions get explicit depth headroom.
+set_option maxRecDepth 262144
+
 /-!
 # Erdős #727 — THE FACTORIAL-SQUARE STRIKE (Kill-package, Session 028)
 
@@ -43,16 +48,18 @@ theorem erdos727_k2_witness : ∃ n : Nat, n ≥ 1 ∧
 
 /-! ## Section 2 — the tightness profile (zero-slack primes) -/
 
-/-- The TIGHT primes: Legendre valuations coincide exactly —
-\$v_5(416!) = 2v_5(210!)\$, same at 7, 11, 13, 19, 23, 29.
+/-- The TIGHT primes: FULL Legendre valuations coincide exactly —
+\$v_5(416!) = 2v_5(210!)\$, same at 7 (the \$7^3\$ term included:
+59+8+1 = 68), 11, 13, 19 (the \$19^2\$ term included: 21+1 = 22), 23, 29.
+Every sum below is the COMPLETE Legendre sum — no truncation.
 The witness sits ON the p-adic boundary at these primes (28 of the
 47 primes ≤ 212 are tight — see battery). -/
 theorem erdos727_tight_primes :
     (2*(210/5 + 210/25 + 210/125) = 416/5 + 416/25 + 416/125)
-    ∧ (2*(210/7 + 210/49) = 416/7 + 416/49)
+    ∧ (2*(210/7 + 210/49) = 416/7 + 416/49 + 416/343)
     ∧ (2*(210/11 + 210/121) = 416/11 + 416/121)
     ∧ (2*(210/13 + 210/169) = 416/13 + 416/169)
-    ∧ (2*(210/19) = 416/19)
+    ∧ (2*(210/19) = 416/19 + 416/361)
     ∧ (2*(210/23) = 416/23)
     ∧ (2*(210/29) = 416/29) := by
   decide
