@@ -59,7 +59,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
    dress a partial result in complete-resolution clothing (MATHS §7.7,
    prohibition #8).
 
-**THE KILL REGISTRY (19 kills — full entries in repo `README.md`):**
+**THE KILL REGISTRY (21 kills — full entries in repo `README.md`):**
 
 | # | Problem | The kill (one line) | CI state |
 |---|---|---|---|
@@ -82,10 +82,16 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 17 | **1108** | **THE FULL PAIR-CASCADE LAW**: v₂(Σ_{a∈S}a!) = Λ(j₀)+v₂(C(S)) for EVERY nonempty S + square parity invariant s₂(j₀)≡v₂(C(S)) mod 2 — constructive-clean [propext, Quot.sound]; census-24: exactly 15 squares, zero new max∈[16,24]; Kernel 12 restored in same run | **run 42061257046, commit e5ab4ca** |
 | 18 | 404 | **f(6,2)=133 UNCONDITIONAL** (§7 freeze at anchor 6: 24-module chain, obstructionCheck_true is a THEOREM; Kill #16's hypothesis dead) | **run 42119256613** |
 | 19 | **1108** | **THE LEGENDRE PARITY LAW**: v₂(n!)+s₂(n)=n (core-only fuel induction) + Λ(j)=2j−s₂(j) THE SPINE + EXPLICIT CASCADE v₂(Σa!)=(2j₀−s₂(j₀))+v₂(C) + square⟹s₂(j₀)≡v₂(C) mod 2 — ALL SIX [propext, Quot.sound], zero hypotheses; battery 8191-subset census: 27 squares all parity-locked; Kernel 15 | **run 42153591445, commit 6974fa8** |
+| 20 | **686** | **THE PELL-RATIO LAW (non-squares)**: every non-square N≥2 has the k=2 ratio representation ∏(m+i)/∏(n+i) — COMPLETE Pell proof (unit^j·(1+√N), parity lemma j∈{1,2}, size lemma) + 90-witness Lean table (all non-squares ≤100) + t≡2(4) square-family polynomial identity + k=3 witnesses N=9,16; ARSENAL-APPLIED (lt_three_cases routing, isTernaryDigit validity, v2r_ternary_scaling bookkeeping); battery 186 non-squares ≤200 dual-method | **run 42212351838, commit 025dd39, Kernel 16** |
+| 21 | **727** | **THE WITNESS THEOREM n=208**: (210)!² ∣ (416)! unconditionally — 115-digit quotient Q kernel-decided, 47-prime check, 28 TIGHT primes (zero p-adic slack, FULL Legendre sums), Legendre/Kummer cascade conditions at p=2,3 (s₂: 8≥7, s₃: 12≥10); ARSENAL-APPLIED (ternary digit predicates on the witness's own digits, carryAtPos_bound, v2r scaling); census: 55 k=2 solutions <10⁴ (smallest 208), ZERO k=3 <3·10³ | **run 42212351838, commit 025dd39, Kernel 17** |
 
-**AUDIT (Session 026, BOSS-ordered): all 18 kills verified — NO sub-problem
-remnants; every crossed-problem kill is a complete unconditional theorem
-(K16's `hob` was the last hypothesis — dead via K18).**
+**AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
+sub-problem remnants; every crossed-problem kill is a complete unconditional
+theorem. Kills #20/#21 (Session 029): honest scope in registry — #686's
+non-square law is COMPLETE (the square-N residue classes are the named
+2–4-round follow-up on the SAME front); #727's witness theorem is the
+k=2-existence component (the infinitude/obstruction war is the named
+follow-up on the SAME front).**
 
 **THE SCOREBOARD (Session 026 close):**
 - **#404**: CROSSED — AUDITED CLEAN (Session 026). Done: reduction; p∣a+1 class
@@ -99,6 +105,12 @@ remnants; every crossed-problem kill is a complete unconditional theorem
   c₂₁=710129, α≈0.584; Type-2 empirical).
 - **#406**: BOSS'S OWN — pattern frontier + odd half unconditional done;
   the gate (gst_four_power_third_wave_gate = the 1979 core) is his summit.
+- **#686**: **KILL #20 (S029, Kernel 16): the non-square Pell-ratio law
+  COMPLETE + arsenal-applied.** Open residue (same front): square-N classes
+  t≡0(4), odd t≥5 (2–4 rounds).
+- **#727**: **KILL #21 (S029, Kernel 17): the n=208 witness theorem +
+  tightness profile + cascade conditions, arsenal-applied.** Open residue
+  (same front): k=2 infinitude / k≥3 obstruction (4–5 rounds).
 - **#1108**: THE ACTIVE WAR. Kill #17 delivered the engine (cascade law +
   parity). Open: finiteness of squares/powerfuls (Brindza–Erdős bounds
   |S|; the war lives at |S|→∞; heuristic says finiteness; walls: composite
@@ -418,5 +430,7 @@ arsenal Egyptian machinery).
   round 2 = CRT-cylinder construction). #348 derivation (zero-slack
   critical junctures = the weak-(m,n) validity condition). #306 admitted
   (semiprime Egyptian; BEG15 3-prime precedent). NO ledger additions.
+  **R8 VERDICT (session close): run 42212351838 GREEN — KILLS #20 (#686)
+  and #21 (#727) LANDED; the arsenal-vendored CI now carries 17 kernels.**
 
 *State is full. The engine never stops; it never lies.*

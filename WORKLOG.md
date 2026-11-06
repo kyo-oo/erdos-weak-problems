@@ -1000,3 +1000,13 @@ additions per BOSS law), this WORKLOG entry, K16/K17 R6 push. No sub-agents
 — commander-executed throughout.
 
 *The engine never stops; it never lies.*
+
+**R8 VERDICT (Session 029 close): run 42212351838 GREEN (commit 025dd39) —
+KILLS #20 (#686, Kernel 16) and #21 (#727, Kernel 17) LANDED.** The
+arsenal-vendored kill CI now carries 17 kernels, all green. Registry: 21
+kills. The compile war R4→R8 in one line each: R4 arsenal build (lean_lib,
+case-fix, imports-at-line-1); R5 the syntactic-rw fix + the two
+truncated-Legendre conjuncts (adversarial audit); R6 the WF-decide kill
+(arsenal eq_def route + fuel oracle); R7 the auto-rfl drop; R8 the axiom
+receipts. Both new kernels IMPORT AND APPLY BOSS'S OWN MATHEMATICS — the
+arsenal doctrine is now the standing architecture of every new kill.

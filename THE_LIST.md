@@ -37,8 +37,8 @@
 | **#1108** | 🎯 ENGINE (exempt: layers, not stacked kills) | K17 pair-cascade law; K19 Legendre parity law (v₂(n!)=n−s₂(n) spine). |
 | **#406** | 🚫 BOSS'S OWN FRONT | HANDS OFF. |
 | **#260** | 🚫 DEAD | Wang 2026. |
-| **#686** | 🎯 K16 CI-pending (R5, run 42205769138) | non-squares COMPLETE (Pell unit construction, 90-witness table, 186 verified ≤200). |
-| **#727** | 🎯 K17 CI-pending (R5, run 42205769138) | witness theorem n=208 (Q 115-digit kernel-decided; tightness profile CORRECTED this session — full Legendre sums). |
+| **#686** | ✅ KILL #20 (S029, K16, run 42212351838) | non-squares COMPLETE (Pell unit construction, 90-witness table, 186 verified ≤200); residue: square classes (same front, 2–4 rounds). |
+| **#727** | ✅ KILL #21 (S029, K17, run 42212351838) | witness theorem n=208 (Q 115-digit kernel-decided; tightness FULL Legendre sums; cascade conditions); residue: k=2 infinitude / k≥3 obstruction (same front, 4–5 rounds). |
 
 ---
 
@@ -55,8 +55,8 @@
 
 | Rank | Problem | Front (Session 029 status) | Rounds | Mark |
 |---|---|---|---|---|
-| 1 | **#686 Pell-ratio** | K16 in CI (R5); residue: squares t≡0(4), odd t≥5 | 1–2 | 🎯 TOP |
-| 2 | **#727 factorial-square** | K17 in CI (R5); two-front war: k=2 infinitude construction / k≥3 obstruction | 2–4 | 🎯 |
+| 1 | **#686 Pell-ratio** | **KILL #20 LANDED** (K16, run 42212351838); same-front residue: squares t≡0(4), odd t≥5 | 2–4 | 🎯 |
+| 2 | **#727 factorial-square** | **KILL #21 LANDED** (K17, run 42212351838 — witness + tightness + cascade); same-front war: k=2 infinitude / k≥3 obstruction | 2–4 | 🎯 |
 | 3 | **#374 factorial-square density** | #1108 multiplicative sibling; K17+K19 transfer | 4–5 | 🎯 |
 | 4 | **#422 Conolly meta-Fibonacci** | full characterization: f(n) nondecreasing, freq(m)=1+v₂(m); dyadic-block induction | 4–5 | 🎯 |
 | 5 | **#289 k-interval Egyptian families** | for all large k: interval families summing to 1; large-k construction war | 4–5 | 🎯 |
@@ -79,7 +79,7 @@
 | **#203 Sierpiński 2·3-smooth covering** | **S029 RE-ADMISSION** (S026 reduction stands: find m with (m,6)=1 and every 2^k3^ℓm+1 composite via finite covering of the (k,ℓ) lattice by order-classes); the hunt = exact cover over ord-lattices — arsenal covering machinery (#273 sibling) | covering found → m witness → unconditional YES | 💣 |
 | **#273 covering system, moduli p−1** | **S029 ADMISSION**: distinct moduli, all p−1 (p≥5); hunt LIVE (L=720720, 59 moduli, density 1.1045, exact-cover DLX running); Selfridge's divisors-of-360 solved the p=3-allowed version | covering found → kernel-decide witness → unconditional YES | 💣 |
 
-**Firing queue total: 4 (§B) + 12 (§C) + 6 (§D) = 22 active fronts + #686/#727 kills-in-CI = THE MAJORITY TREATMENT (24 problems under active 5-round law).**
+**Firing queue total: 4 (§B) + 12 (§C) + 6 (§D) = 22 active fronts, of which #686/#727 carry LANDED kills #20/#21 (run 42212351838) with named same-front residues = THE MAJORITY TREATMENT (24 problems under active 5-round law; 21 total kills in the registry).**
 
 ---
 

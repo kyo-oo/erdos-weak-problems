@@ -193,3 +193,36 @@ architecture for s2/s3 (K17); R7 = the final rfl-drop. Commits 9f48d15 →
 
 **Registry state:** kills #20 (#686 K16) and #21 (#727 K17) PENDING CI
 (R7). NO ledger additions (BOSS law). No sub-agents — commander-executed.
+
+---
+
+## KILLS #20 & #21 — SESSION 029 CLOSE (run 42212351838 GREEN, commit 025dd39)
+
+**KILL #20 — Erdős #686, Kernel 16: THE PELL-RATIO LAW (non-squares).**
+Every non-square N ≥ 2 has the k=2 consecutive-product ratio representation
+— the COMPLETE Pell proof (Pell unit (x₁+y₁√N)^j·(1+√N), parity lemma
+j ∈ {1,2}, size lemma), formalized core-only with the 90-witness Lean table
+(all non-squares ≤ 100), the t≡2(4) square-family polynomial identity, and
+k=3 witnesses N = 9, 16. **ARSENAL-APPLIED:** ErdosTernary2.lt_three_cases
+routing, isTernaryDigit witness-digit validity, CardinalWorldsV2
+v2r_ternary_scaling p-adic bookkeeping. Battery: 186 non-squares ≤ 200,
+dual-method, zero failures. Honest scope: the square-N residue classes
+(t≡0 mod 4, odd t≥5) are the named same-front follow-up (2–4 rounds).
+
+**KILL #21 — Erdős #727, Kernel 17: THE WITNESS THEOREM n=208.**
+(210)!² | (416)! — unconditionally, with the explicit 115-digit quotient Q
+kernel-decided; the 47-prime check; 28 TIGHT primes (zero p-adic slack —
+FULL Legendre sums, the p=7 and p=19 higher-order terms included after the
+S029 adversarial audit caught two truncated conjuncts pre-push); the
+Legendre/Kummer cascade digit conditions at p=2,3 (s₂: 8≥7, s₃: 12≥10).
+**ARSENAL-APPLIED:** ternary-digit predicates on the witness's own digits
+(210=(21210)₃, 416=(120102)₃), CardinalWorlds.carryAtPos_bound, v2r
+scaling via the arsenal's own eq_def route. Census battery: 55 k=2
+solutions < 10⁴ (smallest 208); ZERO k=3 solutions < 3·10³. Honest scope:
+the k=2-infinitude / k≥3-obstruction war is the named same-front follow-up
+(4–5 rounds).
+
+*The compile war R4→R8: arsenal build (lean_lib + case-fix + imports) →
+the syntactic-rw fix → the WF-decide kill (arsenal eq_def route + fuel
+oracle) → the auto-rfl drop → the axiom receipts. The engine never stops;
+it never lies.*
