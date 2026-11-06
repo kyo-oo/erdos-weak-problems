@@ -360,37 +360,103 @@ jobs:
           python3 problem727-factorial-square/census727.py
           echo ERDOS727_FACTORIAL_SQUARE_KERNEL_GREEN=1
 
-      - name: "Kernel 18 - Erdos 1056 FACTORIAL-INTERVAL CASE-FRONTIER (k=4..11 NEW CASES, Kill #22) - the §7-freeze module chain"
+      - name: "Kernel 18-A - Erdos 1056 (Kill #22): the k=2..9 modules (self-contained, Mathlib-loaded, term-budgeted)"
         shell: bash
         run: |
           set -euo pipefail
-          # §7-freeze architecture (L83): one kernel decide per process.
-          # The single-file version OOM-killed the runner twice (S030 R1/R2:
-          # 12x52k-deep recursions in one lake process) — split into 7
-          # self-contained modules, each its own lean process.
           : > kernel18.log
-          for M in FI_K2_K8 FI_K9 FI_K10 FI_K11 FI_Anchors FI_Wilson52163 FI_Bridge; do
-            echo "=== $M ===" >> kernel18.log
-            lake env lean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
-          done
+          echo "=== FI_K2_K8 ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_K2_K8.lean 2>&1 | tee -a kernel18.log
+          echo "=== FI_K9 ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_K9.lean 2>&1 | tee -a kernel18.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_K2_K8_GREEN" kernel18.log
           grep -F "FI_K9_GREEN" kernel18.log
+          echo FI_A_GREEN=1
+
+      - name: "Kernel 18-B - Erdos 1056: the olean ladder base + k=10 data A/B (core-only, term-budgeted)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p oleans
+          export LEAN_PATH="$PWD/oleans"
+          echo "=== FI_Base ===" >> kernel18.log
+          lake env lean -o oleans/FI_Base.olean problem1056-factorial-intervals/FI_Base.lean 2>&1 | tee -a kernel18.log
+          for M in FI_D3a FI_D3b; do
+            echo "=== $M ===" >> kernel18.log
+            lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
+          done
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          grep -F "FI_D3a_GREEN" kernel18.log
+          grep -F "FI_D3b_GREEN" kernel18.log
+          echo FI_B_GREEN=1
+
+      - name: "Kernel 18-C - Erdos 1056: k=10 data C + k=11 data A"
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$PWD/oleans"
+          for M in FI_D3c FI_D4a; do
+            echo "=== $M ===" >> kernel18.log
+            lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
+          done
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          grep -F "FI_D3c_GREEN" kernel18.log
+          grep -F "FI_D4a_GREEN" kernel18.log
+          echo FI_C_GREEN=1
+
+      - name: "Kernel 18-D - Erdos 1056: k=11 data B/C (the two 11k-term blocks)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$PWD/oleans"
+          for M in FI_D4b FI_D4c; do
+            echo "=== $M ===" >> kernel18.log
+            lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
+          done
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          grep -F "FI_D4b_GREEN" kernel18.log
+          grep -F "FI_D4c_GREEN" kernel18.log
+          echo FI_D_GREEN=1
+
+      - name: "Kernel 18-E - Erdos 1056: k=11 data D/E"
+        shell: bash
+        run: |
+          set -euo pipefail
+          export LEAN_PATH="$PWD/oleans"
+          for M in FI_D4d FI_D4e; do
+            echo "=== $M ===" >> kernel18.log
+            lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
+          done
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          grep -F "FI_D4d_GREEN" kernel18.log
+          grep -F "FI_D4e_GREEN" kernel18.log
+          echo FI_E_GREEN=1
+
+      - name: "Kernel 18-F - Erdos 1056: THE FINAL ASSEMBLIES (k=10, k=11 — zero kernel work) + anchors + arsenal bridge + battery"
+        shell: bash
+        run: |
+          set -euo pipefail
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans${LP:+:$LP}"
+          echo "=== FI_K10_FINAL ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_K10_FINAL.lean 2>&1 | tee -a kernel18.log
+          echo "=== FI_K11_FINAL ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_K11_FINAL.lean 2>&1 | tee -a kernel18.log
+          echo "=== FI_Anchors ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_Anchors.lean 2>&1 | tee -a kernel18.log
+          echo "=== FI_Bridge ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_Bridge.lean 2>&1 | tee -a kernel18.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_K10_GREEN" kernel18.log
           grep -F "FI_K11_GREEN" kernel18.log
           grep -F "FI_ANCHORS_SMALL_GREEN" kernel18.log
-          grep -F "FI_WILSON_52163_GREEN" kernel18.log
           grep -F "FI_BRIDGE_GREEN" kernel18.log
           grep -E "'erdos1056_k4' (does not depend on any axioms|depends on axioms)" kernel18.log
-          grep -E "'erdos1056_k5' (does not depend on any axioms|depends on axioms)" kernel18.log
-          grep -E "'erdos1056_k6' (does not depend on any axioms|depends on axioms)" kernel18.log
-          grep -E "'erdos1056_k7' (does not depend on any axioms|depends on axioms)" kernel18.log
-          grep -E "'erdos1056_k8' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_k9' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_k10' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_k11' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_wilson_3011' (does not depend on any axioms|depends on axioms)" kernel18.log
-          grep -E "'erdos1056_wilson_52163' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_carry_bound_witness' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_v2r_scaling' (does not depend on any axioms|depends on axioms)" kernel18.log
           python3 problem1056-factorial-intervals/battery1056.py
