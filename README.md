@@ -159,3 +159,37 @@ below 3·10³ (obstruction hypothesis). Rounds 4–5.
 fronts (4 engine/batch + 10 selected + 4 conditional witness-hunt lanes),
 the honest OUT-boundary documented. One kill per problem; ≤5 rounds or out;
 no ledger additions.
+
+## SESSION 029 — THE MAJORITY TREATMENT (2026-11-06)
+
+**BOSS's law:** 20–25+ open problems under ACTIVE 5-round treatment — the
+majority of what the corpus can honestly yield, engine = the vendored
+16,021-theorem arsenal. **THE_LIST v5: 24 fronts** — 4 engine/batch (§B) +
+12 selected (§C) + 6 witness-hunt (§D) + 2 kills-in-CI. S029 admissions:
+- **#306** semiprime Egyptian representation (all squarefree-b rationals;
+  BEG15 did 3-prime case; round-1 evidence: 168/277 rationals represented,
+  1–7 terms, max den 319, all exactly verified — `problem306-semiprime-egyptian/`).
+- **#348** m-redundant complete sequences (S029 derivation: weak-(m,n)
+  validity requires infinitely many ZERO-SLACK critical junctures —
+  criterion-tail invariance proves finite removals cause finite gaps
+  otherwise; the construction war's target is named).
+- **#708** Erdős $100 product-divisibility g(n) ≤ 2n (ErSu59; g(3)=4 known,
+  lower bound (2−o(1))n; divisor-matching construction lane).
+- **#273** covering system, all moduli p−1, p ≥ 5 (hunt round 1 fired:
+  L = 720720, 79 moduli, density 1.1057; DLX drowns, annealing plateaus at
+  13.2% uncovered — round 2 = CRT-cylinder structured construction;
+  `problem273-pminus1-covering/`).
+- **#203** RE-ADMITTED (S026 reduction stands; the (k,ℓ)-lattice covering
+  hunt re-armed).
+
+**K16/K17 compile war R5→R7:** the ADVERSARIAL AUDIT caught two FALSE
+conjuncts pre-push (truncated Legendre sums at p=7/19 — witness n=208
+itself TRUE, Q exact); R5 exposed the WF-DECIDE disease (the kernel cannot
+whnf WF-defined defs — v2r/s2/s3 decide-dies while #eval lives; K19 never
+decided s2 literals, the S028 kernels broke that law); fixes: the arsenal's
+own `v2r.eq_def`+`if_neg`/`if_pos` route (K16) + the FUEL-ORACLE
+architecture for s2/s3 (K17); R7 = the final rfl-drop. Commits 9f48d15 →
+36a2592 → 3ecacf7.
+
+**Registry state:** kills #20 (#686 K16) and #21 (#727 K17) PENDING CI
+(R7). NO ledger additions (BOSS law). No sub-agents — commander-executed.
