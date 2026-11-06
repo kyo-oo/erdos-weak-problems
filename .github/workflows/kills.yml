@@ -15,6 +15,7 @@ on:
       - problem404-q3-chain/**
       - problem1108-subset-kernel/**
       - arsenal/**
+      - lakefile.toml
       - problem686-pell-ratio/**
       - problem727-factorial-square/**
       - .github/workflows/kills.yml
@@ -325,6 +326,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
+          lake build Arsenal
           echo ARSENAL_BUILD_GREEN=1
 
       - name: "Kernel 16 - Erdos 686 PELL-RATIO STRIKE (square family identity + 90-witness non-square table + arsenal bridge)"

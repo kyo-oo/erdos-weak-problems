@@ -10,3 +10,9 @@ version = "0.1.0"
 name = "mathlib"
 scope = "leanprover-community"
 rev = "v4.33.0-rc2"
+
+# The vendored arsenal (Session 028): BOSS's own mathematics as a buildable
+# library — erdosternary2 (bulldoze branch) + HC-PROOF (research branch).
+[[lean_lib]]
+name = "Arsenal"
+globs = ["Arsenal.+"]
