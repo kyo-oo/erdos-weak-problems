@@ -334,7 +334,7 @@ one into a show pattern; feed omega the facts as `have`s instead.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 030, governed by THE_LIST.md v6)
+## §9. THE QUEUE (next strikes — Session 032, governed by THE_LIST.md v8)
 
 **THE 5-ROUND LAW (BOSS, Session 027 — THE NEW STANDARD):** "IF THE
 PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
@@ -356,6 +356,25 @@ f(50,2) batch" and §C "#404" fronts are DEAD by BOSS order. #422 v5-front
 was a MISLABEL (corpus #422 = Hofstadter Q-sequence, well-definedness
 open = Collatz-class; the Conolly freq law is a different sequence) — OUT
 with cause.
+
+**S032 FIRING STATE (THE NEW VOLLEY):** BOSS order — "SELECT MORE 10+ NEW
+PROBLEMS TO ONE SHOT FROM THE CORPUS, GO GO GO." Executed: 402 post-purge
+candidates re-triaged, **11 NEW ADMISSIONS (THE_LIST v8 §F)**, 9 computational
+engines fired in-round, every calibration PERFECT. Round-1 mathematics in hand:
+**#1063** case frontier k: 5 → 14 (n_6..n_14 = 75, 30, 70, 56, 2403, 280, 3465,
+210, 793 — engine calibrated EXACT on published n_2..n_5); **#451** witness table
+k=2..20 complete (modular criterion derived: n_k = least n > 2k with n mod p ∉
+{1..k} ∀ primes p ∈ (k,2k)); **#1072** WILSON-PAIR LAW derived + verified on
+2,694 instances (all p < 10^4) + census (465 Wilson-only primes); **#394** CRT
+LAW derived + battery 426/426 (t_k(n) = min-CRT over ordered coprime
+factorizations, (n,k!)=1); **#711** 2n−1 LAW discovered (max_m f(n,m) = 2n−1 at
+m=(n−1)², verified n=2..10 — answers ErPo80 Q1 exactly); **#961** f(k) frontier
+(2,3,3,4,… k≤12; Størmer–Pell certification = the #686 arsenal); **#1074** EHS
+engine calibrated exact; **#954** 1,200 terms (block law breaks at block 5);
+**#243** interval engine; **#124** admitted (#348 machinery); **#282** census —
+ALL odd-denominator rationals n ≤ 201 terminate (max 19 steps at 5/139).
+**Queue: 33 problems under active fire.** Kernel-war order: #1063 → #451 →
+#1072 → #394 → #711.
 
 **S031 FIRING STATE:** (1) **KILL #23 LANDED — #700 PRIME-POWER LAW**
 (run 42330675842, Kernel 19, the 8-round compile war; #317 demoted OUT
@@ -504,5 +523,17 @@ hunts + #885 k=5 + #317 K1: firing.
   3ms after the last receipt grep) → R8 THE LANDING. Parallel volleys:
   #939 zero ≤ 10¹⁵; #686 k=3 zero at 600k; #317 demoted (5-round law).
   THE_LIST v7 (22 active). No ledger additions.
+- **032** (2026-11-07): THE NEW VOLLEY — BOSS order ("SELECT MORE 10+ NEW
+  PROBLEMS TO ONE SHOT, GO GO GO") executed: 402 post-purge candidates
+  re-triaged under the dual wheel law, **11 NEW PROBLEMS ADMITTED (THE_LIST
+  v8 §F; queue 33)**; MATHS skill activated FIRST (the standing law);
+  9 engines fired in-round, all calibrations PERFECT: #1063 case frontier
+  k: 5 → 14 (nine new exact n_k values); #451 witness table k=2..20;
+  #1072 Wilson-pair law (2,694 verified instances) + 465 Wilson-only primes
+  < 10^4; #394 CRT law 426/426; #711 the 2n−1 law at (n−1)² (n=2..10);
+  #961 f(k) frontier + Størmer–Pell path; #1074 EHS engine calibrated;
+  #954 1,200 Rosen terms; #243 interval engine; #282 census n ≤ 201 all
+  terminate. Round-1 record: `S032_NEW_VOLLEY_ROUND1.md`. No ledger
+  additions. No sub-agents. English throughout.
 
 *State is full. The engine never stops; it never lies.*

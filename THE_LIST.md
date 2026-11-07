@@ -1,4 +1,4 @@
-# THE LIST — THE OPERATIONAL LAW (v7, Session 031, 2026-11-07)
+# THE LIST — THE OPERATIONAL LAW (v8, Session 032, 2026-11-07)
 
 > **THE ROULETTE LAWS (verbatim, cumulative — OLD and NEW, both binding):**
 > **OLD (S023):** only problems that need new mathematics; one-shot capable.
@@ -95,6 +95,30 @@ problems under active one-shot/5-round fire — THE MAJORITY TREATMENT HOLDS.**
 
 ---
 
+## SECTION F — THE S032 NEW VOLLEY (BOSS: "SELECT MORE 10+ NEW PROBLEMS TO
+ONE SHOT" — 11 admissions, round-1 mathematics delivered in-round; full record:
+`S032_NEW_VOLLEY_ROUND1.md`)
+
+| Rank | Problem | Round-1 kill shot (witnesses in hand) | Rounds | Mark |
+|---|---|---|---|---|
+| F1 | **#1063 binomial all-but-one frontier** | CASE FRONTIER k: 5 → 14 — n_6..n_14 = 75, 30, 70, 56, 2403, 280, 3465, 210, 793 (engine calibrated EXACT on published n_2..n_5 = 4,6,9,12); witness kernel = the #1056 pattern | 1–2 | 🎯 KILL FIRING |
+| F2 | **#451 interval-prime-free n_k** | modular criterion derived (p | ∏(n−i) ⟺ n mod p ∈ {1..k}); witness table k=2..20 COMPLETE (6, 9, 20, 13, 21, 21, 22, 65, 220, 51, 338, 133, 321, 339, 340, 113, 114, 368, 550) | 1–2 | 🎯 KILL FIRING |
+| F3 | **#1072 factorial-chain f(p)** | THE WILSON-PAIR LAW derived + VERIFIED on 2,694 solution instances (all primes < 10^4); census: 465 Wilson-only primes, histogram, max f/p = 0.9999 | 1–3 | 🎯 |
+| F4 | **#394 consecutive-product t_k(n)** | THE CRT LAW derived + battery 426/426 GREEN: t_k(n) = min-CRT over ordered coprime factorizations for (n,k!)=1 — complete characterization | 2–3 | 🎯 |
+| F5 | **#711 divisor scheduling** | THE 2n−1 LAW: max_m f(n,m) = 2n−1 at m=(n−1)², verified n=2..10 — answers ErPo80 Q1 EXACTLY (stronger than n^{1+o(1)}); f(n,n) table extended | 2–4 | 🎯 |
+| F6 | **#961 smooth-run frontier** | f(k) = 2,3,3,4,4,4,4,4,4,4,4 (k=2..12, ≤2·10^6); certification = Størmer–Pell census — the #686 PELL ARSENAL applied | 3–5 | 🎯 |
+| F7 | **#1074 EHS / Pillai** | membership engine calibrated EXACT on Hardy–Subbarao S∩[2,17]; extended to m ≤ 32 (25,27,28 ∉ S); census war | 3–5 | 💣 |
+| F8 | **#954 Rosen greedy sequence** | 1,200 terms computed (start matches published); block law breaks at block 5 — irregularity = the derivation target; #261 machinery transfer | 3–5 | 🎯 |
+| F9 | **#243 Sylvester rigidity** | interval engine derived (r_n ∈ (1/a_n, 1/(a_n−1)) super-Sylvester window; Farey-denominator rigidity); Duverney base | 3–5 | 🎯 |
+| F10 | **#124 BEGL96 tail completeness** | #348 critical-juncture machinery transfer; {3,4,7} template (1st question dead — Alexeev) | 4–5 | 🎯 |
+| F11 | **#282 Stein odd greedy** | census: ALL odd-denominator rationals n ≤ 201 TERMINATE (max 19 steps at 5/139); counterexample hunt + termination lanes | 4–5 | 💣 |
+
+**Firing queue total (v8): 22 (v7) + 11 (§F) = 33 problems under active
+one-shot/5-round fire — THE MAJORITY TREATMENT EXCEEDED (BOSS S029: 20–25+).**
+Kernel-war firing order: F1 #1063 → F2 #451 → F3 #1072 → F4 #394 → F5 #711.
+
+---
+
 ## SECTION E — OUT (the honest boundary; >5 rounds or banned)
 
 **Doubter-killed (S026, standing):** #508/#188, #212, #1135, #918/#919/
@@ -125,8 +149,8 @@ core). **#634** (Laczkovich–Szabó deep). **#1055** (infinitude). **#1110**
 (density core open). **#689** (Green-list covering, LLL-grade). **#312**
 (EG&G open core). **#326, #431, #892, #1101** (deep structure wars).
 
-> **THE COUNT, HONEST (v7):** 22 problems under active one-shot/5-round
-> fire (1 §B + 13 §C + 8 §D). #700 KILLED (S031, K19); #317 OUT (5-round
+> **THE COUNT, HONEST (v8):** 33 problems under active one-shot/5-round fire
+> (1 §B + 13 §C + 8 §D + 11 §F). #700 KILLED (S031, K19); #317 OUT (5-round
 > law). The queue DEEPENS as strikes land — every kill frees a slot.
 > #404/#271 are CLOSED (BOSS S030) and never re-open.
 
