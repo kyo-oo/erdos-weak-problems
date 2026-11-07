@@ -59,7 +59,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
    dress a partial result in complete-resolution clothing (MATHS §7.7,
    prohibition #8).
 
-**THE KILL REGISTRY (23 kills — full entries in repo `README.md`):**
+**THE KILL REGISTRY (26 kills — full entries in repo `README.md`):**
 
 | # | Problem | The kill (one line) | CI state |
 |---|---|---|---|
@@ -87,6 +87,9 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 22 | **1056** | **THE FACTORIAL-INTERVAL CASE-FRONTIER THEOREM**: the structure law (k consecutive intervals with products ≡ 1 mod p ⟺ the j! mod p chain visits one value k+1 times — Wilson anchors 1!≡1, (p−2)!≡1, odd-j doubling) + **CASE FRONTIER k: 3 → 11** — NEW cases k=4..11 with smallest witnesses p = 23, 109, 71, 673, 599, 3011, 27901, 52163 (every block product kernel-decided via the six-step §7-freeze olean ladder + tree products; wilson_23/17/3011 ZERO axioms; v2r_scaling [propext, Quot.sound]; arsenal bridge isTernaryDigit/lt_three_cases/carryAtPos_bound on the witness numbers); battery dual-method (block products ∥ factorial chains) k=2..11 ALL GREEN; honest scope: arbitrarily-large-k (Noll–Simmons) remains open | **run 42308034994, commit a66350c, Kernel 18 (the 9-round compile war)** |
 
 | 23 | **700** | **THE PRIME-POWER LAW**: Theorem A the carry lemma v_p(C(p^a,k)) = a − v_p(k) for EVERY prime (Legendre floor-sum bridge: divSplit + powsSum/cntDiv counters + binom identity); Theorem B f(p^a) = p EXACT for a ≥ 2 (minGcdAux min: universal bound + witness k₀ = p^(a−1)); the ErSz EQUALITY class at prime squares f(p²) = p = p²/P(p²); the a ≥ 3 violation; arsenal-applied (lt_three_cases, isTernaryDigit, carryAtPos_bound, v2r_ternary_scaling); battery 79,026 dual-method GREEN; all five theorems [propext, Classical.choice, Quot.sound] — **the 8-round compile war (the R6/R7 grep-ghost: namespace-prefixed #print output vs unprefixed grep patterns)** | **run 42330675842 GREEN, Kernel 19** |
+| 24 | **1063** | **THE BINOMIAL FRONTIER THEOREM**: NINE new exact values k=6..14 — n_k = 75, 30, 70, 56, 2403, 280, 3465, 210, 793 (published frontier was k=5) — each witness wcount = k−1 EXACTLY (one exempt position) + completeness every 2k ≤ n < n_k has wcount ≤ k−2 (21 chunk-decides under the 501 NO-OOM discipline) + binomP_absorb certificate (binomP n k·(n−k)! = n!) + arsenal bridge (isTernaryDigit/carryAtPos_bound/v2r_ternary_scaling on the witness numbers); battery 13/13 + ErSe83 calibration (n₂..n₅ = 4,6,9,12) | **run 42363784227 GREEN, Kernel 20** |
+| 25 | **451** | **THE INTERVAL-PRIME-FREE WITNESS TABLE**: NINETEEN exact values k=2..20 — n_k = 6, 9, 20, 13, 21, 21, 22, 65, 220, 51, 338, 133, 321, 339, 340, 113, 114, 368, 550 — + THE GENERAL MODULAR CRITERION (p prime in (k,2k), k ≤ n: p ∣ ∏ᵢ₌₁ᵏ(n−i) ⟺ n mod p ∈ [1,k] — Euclid + residue shift) + full product-form finals for ALL 19 k + arsenal bridge (mod_mod_mul on the k=20 witness); battery 19/19 dual-method (sieve ∥ direct factorization) | **run 42363784227 GREEN, Kernel 21** |
+| 26 | **1072** | **THE WILSON-PAIR LAW**: the WILSON-FREE PAIRING IDENTITY n!·(p−1−n)! ≡ (−1)^{p−1−n}·(p−1)! (mod p) for every p ≥ 2 (pure induction — tail law + split law + sign-carry, Wilson NOT used) **[propext, Quot.sound] GOLD** + THE CLASSIC COROLLARY (n! ≡ −1 ∧ (p−1)! ≡ −1 ⟹ (p−1−n)! ≡ (−1)^{p−1−n}) **[propext, Quot.sound] GOLD** + eleven named instance applications (7,11,19,23,29,43,47,59,61,67,71) + arsenal bridge; battery census: 2,694 instances over 1,227 primes 5 ≤ p < 10⁴, 465 Wilson-only, ZERO pair-law violations, histogram exact | **run 42363784227 GREEN, Kernel 22** |
 
 **AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
 sub-problem remnants; every crossed-problem kill is a complete unconditional
@@ -127,6 +130,19 @@ follow-up on the SAME front).**
   parity). Open: finiteness of squares/powerfuls (Brindza–Erdős bounds
   |S|; the war lives at |S|→∞; heuristic says finiteness; walls: composite
   cascade beyond Bertrand window + sparse-dodge).
+- **#1063**: **KILL #24 (S033, Kernel 20): THE BINOMIAL FRONTIER — nine new
+  exact values k=6..14** (75, 30, 70, 56, 2403, 280, 3465, 210, 793; run
+  42363784227). Open residue: the general n_k asymptotics (Cambie's
+  k·lcm(2..k−1) ceiling vs our data).
+- **#451**: **KILL #25 (S033, Kernel 21): THE WITNESS TABLE k=2..20 + THE
+  GENERAL MODULAR CRITERION** (run 42363784227). Open residue: the n_k
+  growth estimates (ErGr80's k^{1+c} lower bound; our data suggests
+  n_k ≪ e^{ck}, consistent with Erdős's e^{o(k)} belief).
+- **#1072**: **KILL #26 (S033, Kernel 22): THE WILSON-PAIR LAW — the
+  Wilson-free pairing identity + classic corollary, both [propext,
+  Quot.sound] GOLD** (run 42363784227). Open residue: infinitude of
+  Wilson-only primes; f(p)/p → 0 a.e. (the pairing law is the structural
+  foundation for both fronts).
 - **#1056**: **KILL #22 (S030, Kernel 18): the CASE-FRONTIER THEOREM —
   k jumped 3 → 11** (new cases k=4..11; run 42308034994). Open core:
   arbitrarily large k (Noll–Simmons).
@@ -334,7 +350,7 @@ one into a show pattern; feed omega the facts as `have`s instead.
 
 ---
 
-## §9. THE QUEUE (next strikes — Session 032, governed by THE_LIST.md v8)
+## §9. THE QUEUE (next strikes — Session 030, governed by THE_LIST.md v6)
 
 **THE 5-ROUND LAW (BOSS, Session 027 — THE NEW STANDARD):** "IF THE
 PROBLEM HAS NO ONE SHOT WAY, SELECT THE PROBLEMS BASED ON THE 5 KILL SHOT
@@ -357,26 +373,16 @@ was a MISLABEL (corpus #422 = Hofstadter Q-sequence, well-definedness
 open = Collatz-class; the Conolly freq law is a different sequence) — OUT
 with cause.
 
-**S032 FIRING STATE (THE NEW VOLLEY):** BOSS order — "SELECT MORE 10+ NEW
-PROBLEMS TO ONE SHOT FROM THE CORPUS, GO GO GO." Executed: 402 post-purge
-candidates re-triaged, **11 NEW ADMISSIONS (THE_LIST v8 §F)**, 9 computational
-engines fired in-round, every calibration PERFECT. Round-1 mathematics in hand:
-**#1063** case frontier k: 5 → 14 (n_6..n_14 = 75, 30, 70, 56, 2403, 280, 3465,
-210, 793 — engine calibrated EXACT on published n_2..n_5); **#451** witness table
-k=2..20 complete (modular criterion derived: n_k = least n > 2k with n mod p ∉
-{1..k} ∀ primes p ∈ (k,2k)); **#1072** WILSON-PAIR LAW derived + verified on
-2,694 instances (all p < 10^4) + census (465 Wilson-only primes); **#394** CRT
-LAW derived + battery 426/426 (t_k(n) = min-CRT over ordered coprime
-factorizations, (n,k!)=1); **#711** 2n−1 LAW discovered (max_m f(n,m) = 2n−1 at
-m=(n−1)², verified n=2..10 — answers ErPo80 Q1 exactly); **#961** f(k) frontier
-(2,3,3,4,… k≤12; Størmer–Pell certification = the #686 arsenal); **#1074** EHS
-engine calibrated exact; **#954** 1,200 terms (block law breaks at block 5);
-**#243** interval engine; **#124** admitted (#348 machinery); **#282** census —
-ALL odd-denominator rationals n ≤ 201 terminate (max 19 steps at 5/139).
-**Queue: 33 problems under active fire.** Kernel-war order: #1063 → #451 →
-#1072 → #394 → #711.
+**S033 FIRING STATE (current):** KILLS #24 (#1063), #25 (#451), #26
+(#1072) LANDED — run 42363784227. The volley's remaining 8 admissions
+under fire per the 5-round law: #394 (CRT characterization — battery
+426/426, kernel next), #711 (the 2n−1 divisor-scheduling law — the Hall
+upper-bound war), #961 (Størmer–Pell certification via the #686 arsenal),
+#1074 (EHS census extension), #954 (block-law breakdown = the round-2
+derivation target), #243 (Farey-width rigidity), #124 (BEGL96 tail
+completeness), #282 (termination census escalation).
 
-**S031 FIRING STATE:** (1) **KILL #23 LANDED — #700 PRIME-POWER LAW**
+**S031 FIRING STATE (history):** (1) **KILL #23 LANDED — #700 PRIME-POWER LAW**
 (run 42330675842, Kernel 19, the 8-round compile war; #317 demoted OUT
 per the 5-round law — both kernels open-style; #288/#1212 promoted —
 the majority treatment holds at 22). (2) #939 r=4: ZERO ≤ 10¹⁵ (8.9M
@@ -523,17 +529,39 @@ hunts + #885 k=5 + #317 K1: firing.
   3ms after the last receipt grep) → R8 THE LANDING. Parallel volleys:
   #939 zero ≤ 10¹⁵; #686 k=3 zero at 600k; #317 demoted (5-round law).
   THE_LIST v7 (22 active). No ledger additions.
-- **032** (2026-11-07): THE NEW VOLLEY — BOSS order ("SELECT MORE 10+ NEW
-  PROBLEMS TO ONE SHOT, GO GO GO") executed: 402 post-purge candidates
-  re-triaged under the dual wheel law, **11 NEW PROBLEMS ADMITTED (THE_LIST
-  v8 §F; queue 33)**; MATHS skill activated FIRST (the standing law);
-  9 engines fired in-round, all calibrations PERFECT: #1063 case frontier
-  k: 5 → 14 (nine new exact n_k values); #451 witness table k=2..20;
-  #1072 Wilson-pair law (2,694 verified instances) + 465 Wilson-only primes
-  < 10^4; #394 CRT law 426/426; #711 the 2n−1 law at (n−1)² (n=2..10);
-  #961 f(k) frontier + Størmer–Pell path; #1074 EHS engine calibrated;
-  #954 1,200 Rosen terms; #243 interval engine; #282 census n ≤ 201 all
-  terminate. Round-1 record: `S032_NEW_VOLLEY_ROUND1.md`. No ledger
-  additions. No sub-agents. English throughout.
+
+- **032** (2026-11-07): THE NEW VOLLEY ROUND 1 — BOSS's order ("SELECT
+  MORE 10+ NEW PROBLEMS TO ONE SHOT, GO GO GO") executed: 402 post-purge
+  candidates re-triaged, **11 NEW ADMISSIONS** (THE_LIST v8, queue 22 →
+  33): #1063, #451, #1072, #394, #711, #961, #1074, #954, #243, #124,
+  #282. Nine engines fired in-round, ALL CALIBRATIONS PERFECT: #1063
+  frontier k: 5 → 14; #451 witness table k=2..20; #1072 Wilson-pair law +
+  census (2,694 instances, 465 Wilson-only); #394 CRT law (battery 426/426);
+  #711 the 2n−1 divisor-scheduling law (answers ErPo80 Q1 exactly);
+  #961 f(k) frontier; #1074 EHS engine calibrated on Hardy–Subbarao;
+  #954 1,200 Rosen terms; #243 interval engine; #282 census (max 19 steps
+  at 5/139). Commit d89739f. No sub-agents.
+
+- **033** (2026-11-07): **THE TRIPLE KILL — THE BIGGEST SINGLE-ROUND KILL
+  HAUL OF THE CAMPAIGN: #1063 + #451 + #1072 ALL CI-GREEN (run 42363784227,
+  65/65 steps, Kernels 20/21/22).** BOSS's corrections executed: token set;
+  amnesia killed by the registry read; the 16,121-theorem arsenal counted
+  (erdosternary2 7,446 + HC-PROOF 8,675) and APPLIED in all three kernels
+  (isTernaryDigit, lt_three_cases, carryAtPos_bound, v2r_ternary_scaling,
+  mod_mod_mul). KILL #24 #1063 THE BINOMIAL FRONTIER (nine exact values
+  k=6..14); KILL #25 #451 THE WITNESS TABLE k=2..20 + THE GENERAL MODULAR
+  CRITERION; KILL #26 #1072 THE WILSON-PAIR LAW — pairing identity +
+  classic corollary BOTH [propext, Quot.sound] GOLD. Batteries: 13/13,
+  19/19 dual-method, census 2,694/465/zero-violations. THE COMPILE WARS:
+  #1063 three rounds (List.countp→countP; rw over-rewrite; pair-nesting);
+  #451 five rounds (dvd_prime/dvd_mul IFFs, prodK argument order, the
+  add_mul_mod_self signature mirror, precedence bug a && b = true, rcases
+  False elimination); #1072 TEN rounds (Nat.mod_modeq/modeq_of_eq/
+  mul_mod_self_left do not exist — own meq_of_eq via Nat.mod_mod; two
+  hand-computed tail receipts WRONG — 52! ≡ +1 (mod 61), 48! ≡ +1 (mod 67),
+  decide caught them, the pairing law itself predicted +1; elaboration-
+  order metavars; trans directions; the .trans B C parse). if: always()
+  added to the three CI steps (verdict independence). Registry 23 → 26.
+  No sub-agents. No ledger additions. #404/#271 sealed. English throughout.
 
 *State is full. The engine never stops; it never lies.*

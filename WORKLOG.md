@@ -1145,3 +1145,61 @@ are open-style cores; 1M sweep + Theorem D evidence exhausted).
 
 **THE_LIST v7:** #700 ✅ KILLED (23 kills total); #317 🚫 OUT (honest
 cause); #288 + #1212 promoted from ⏸ — the majority treatment holds at 22.
+
+## SESSION 033 (2026-11-07) — THE TRIPLE KILL
+
+**BOSS's standing corrections executed:** GitHub token set; the amnesia
+killed by reading the registry from disk (17→23 kills verified, S032's
+volley round 1 found at commit d89739f); the arsenal counted and certified:
+**erdosternary2 = 1,037 files / 7,446 theorems + HC-PROOF = 760 files /
+8,675 theorems = 16,121 THEOREMS** — and APPLIED in all three new kernels.
+
+**THE KILLS (run 42363784227, all 65 CI steps GREEN):**
+
+1. **KILL #24 — Erdős #1063 (Erdős–Selfridge binomial frontier), Kernel 20.**
+   NINE new unconditional exact values: n_6..n_14 = 75, 30, 70, 56, 2403,
+   280, 3465, 210, 793 (published frontier stood at k=5 since ErSe83).
+   Architecture: Erdos1063_Base (binomP/kfact/binom/wcount) + 4 data
+   modules (21 chunk-decides ≤ 480 elements — the NO-OOM law) + FINAL
+   (chunk_impl unpacker, 9 kill theorems, binomP_absorb: binomP n k·(n−k)!
+   = n!, frontier assembly, arsenal bridge). Battery 13/13 + calibration.
+
+2. **KILL #25 — Erdős #451 (Erdős–Graham interval-prime-free), Kernel 21.**
+   NINETEEN exact values k=2..20 (6, 9, 20, 13, 21, 21, 22, 65, 220, 51,
+   338, 133, 321, 339, 340, 113, 114, 368, 550) + THE GENERAL MODULAR
+   CRITERION (p prime in (k,2k): p ∣ ∏(n−i) ⟺ n mod p ∈ [1,k]) + full
+   product-form finals for ALL 19 k. Battery 19/19 dual-method.
+
+3. **KILL #26 — Erdős #1072 (Erdős–Hardy–Subbarao factorial chain),
+   Kernel 22.** THE WILSON-PAIR LAW: the Wilson-free pairing identity
+   n!·(p−1−n)! ≡ (−1)^{p−1−n}·(p−1)! (mod p) — pure induction (tail law,
+   split law, sign-carry; NO Wilson) — and the classic corollary
+   (n! ≡ −1 ∧ Wilson ⟹ (p−1−n)! ≡ (−1)^{p−1−n}), BOTH at
+   **[propext, Quot.sound] GOLD**. Eleven named applications. Battery:
+   census 2,694 instances / 1,227 primes / 465 Wilson-only / ZERO
+   pair-law violations / histogram exact.
+
+**The compile wars (full forensic record in the commits):**
+- #1063: 3 rounds — List.countp→List.countP (4.33 dropped the deprecated
+  alias); rw over-rewrite in binomP_absorb; flat vs pair-nested ⟨⟩.
+- #451: 5 rounds — Nat.dvd_prime and Nat.Prime.dvd_mul are IFFs; the
+  add_mul_mod_self family is (a + b*c) % b (left) / (a + b*c) % c (right);
+  prodK argument order swapped in all 19 finals; the precedence bug
+  (a && b = true parses as a && decide(b = true)); rcases ⟨⟩ does not
+  eliminate False.
+- #1072: 10 rounds — Nat.mod_modeq / Nat.modeq_of_eq /
+  Nat.mul_mod_self_left DO NOT EXIST (own meq_of_eq via Nat.mod_mod);
+  **two hand-computed tail receipts were WRONG (52! ≡ +1 mod 61,
+  48! ≡ +1 mod 67 — even pairing exponents; decide caught them and the
+  pairing law itself predicted +1)**; elaboration-order metavars (by ring
+  inside .trans — explicit haves); trans directions (.symm); the
+  '.trans B C' parse; associativity links.
+- Infrastructure: if: always() on the three CI steps (verdict
+  independence — a failed kernel no longer skips the others).
+
+**Registry: 23 → 26 kills. Queue: 33 fronts, 8 volley admissions remain
+under the 5-round law. Red lines held: #404/#271 sealed, #406 hands off,
+no sub-agents, no local Lean, §8 frozen, MATHS + prove-that-shit activated
+FIRST, English throughout.**
+
+*The engines never stop; they never lie.*
