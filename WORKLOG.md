@@ -1282,3 +1282,69 @@ held: #404/#271 sealed, #406 hands off, no sub-agents, no local Lean, §8
 frozen, MATHS + prove-that-shit activated FIRST, English throughout.*
 
 *The engines never stop; they never lie.*
+
+---
+
+## SESSION 035 (2026-11-07) — THE NEW-RULE VOLLEY + THE LOOK-BACK STRIKES
+
+**BOSS's orders this session:** (1) NEW RULE — every kernel carries the
+problem statement verbatim with the proof below it (engraved S034, now
+the standing format); (2) be MORE AGGRESSIVE — solve everything; (3)
+LOOK BACK at already-solved problems for remaining proof obligations;
+(4) USE ALL THE MATHS (the 16,121-theorem vendored arsenal).
+
+**The state on arrival:** kills #24-#26 CI-green (run 42363784227);
+kills #27 (#394 CRT-law) and #28 (#711 divisor-scheduling) mid
+compile-war at Round 4.
+
+**THE COMPILE WAR, ROUNDS 5-7 (run 42413367561 → 42415133362 →):**
+- Round 5 (25b6c4f): 13 errors → 3. The green-pattern rewrite: Nat.beq
+  in the four K23 data tables (the == / BEq.beq unification disease),
+  the decide-native w711OK def + the K21-green decode toolkit
+  (of_decide_eq_true / decide_eq_true / Bool.false_or / Bool.not_true /
+  Bool.noConfusion), the mul_le_mul_left rebuild (Nat.mul_lt_mul_left's
+  first explicit arg is a 0<k PROOF in this toolchain), the m + (2n−1)
+  parenthesis fix, the beta-blind omegas (hbeta forcing), the
+  truncated-sub trap (down-transport injectivity needs the window
+  bounds hbi/hbj).
+- Round 6 (97db934): 3 errors → fixed: the rw auto-close in K23's p=0
+  branch (restructured refine-first); THE INVERTED DECODE in K24's
+  injectivity (with a i = a j GIVEN, the first disjunct
+  decide (i−1 = j−1) must be TRUE — the second dies via !true — the
+  cases-route with simp closure); the cases h : e goal-substitution
+  disease (exact h vs true=true — rfl).
+
+**KERNEL 25 — Erdős #961 THE ELEMENTARY SMOOTH-RUN LAWS (S035 volley,
+F6 in the firing order — the #686 Pell arsenal applied per the plan):**
+THE {2,3}-CENSUS THEOREM (the only consecutive {2,3}-smooth pairs are
+(1,2),(2,3),(3,4),(8,9) — COMPLETE ELEMENTARY PROOF: the mod-8 spine
+(3^b ∈ {1,3} mod 8), the pow2 mod-8 classification, dvd_two_pow (every
+divisor of 2^a is a power of 2 — fuel induction with the odd-cofactor
+descent, zero coprimality machinery), sub_one_mul_add_one, the
+two-powers-of-2-differing-by-2 law); THE RUN LAW; THE EXACT FRONTIER
+f(2)=2, f(3)=3, f(4)=3 — the FIRST THREE CERTIFIED EXACT VALUES of the
+problem's function (witness + exclusion both unconditional); THE
+WITNESS LAWS f(k) ≥ 4 for k = 5..12 (runs (8,9,10)/(14,15,16), the six
+concrete divisor laws, fset_upward monotonicity, fset_nonempty_13 —
+any 13 consecutive contain a multiple of 13 > k); THE PELL DICTIONARY
+(n(n+1) = ab² with a,b {2,3}-smooth and (2n+1)² − a(2b)² = 1 — the
+complete Størmer bridge). Battery961 dual-method GREEN. Engine round-2
+(census 10^7 == closed form; frontier set-scan; Pell round-trip).
+
+**KERNEL 26 — Erdős #686 THE SQUARE k=2 CENSUS (S035, THE LOOK-BACK
+ORDER EXECUTED — the #686 square residue front, round 2 of 4):**
+THE INFINITE FAMILY THEOREM (every t = 4u+2 ≥ 10: the explicit k=2
+representation — Thm B Lean-complete UNBOUNDED); THE ODD SPORADIC
+t = 99 (m=241, n=1 — engine-discovered: 242·243 = 9801·6); THE NO-GO
+BRIDGE (the master identity (2m+3)² + t² = t²(2n+3)² + 1, the divisor
+pair d1 = tY−X < t, d2 = X+tY of t²−1); THE CENSUS THEOREM (t ∈ [2,100]:
+representable ⟺ family ∨ t = 99 — one kernel decide, the small-factor
+scan d1 ≤ t with lazy short-circuit); arsenal bridge. Battery686sq
+dual-method GREEN (scan == quadratic == family+99, t ≤ 100). Engine:
+census to t ≤ 300 — the SECOND odd sporadic t = 195 exists; the
+extension is the mechanical round-3 amplifier.
+
+**Kills pending CI: #27 (#394), #28 (#711) at Round 6; #29 (#961),
+#30 (#686-squares) at Round 7.** Registry: 26 green + 4 pending.
+
+*The engines never stop; they never lie.*
