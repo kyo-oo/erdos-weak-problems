@@ -2,8 +2,9 @@
 
 Erdős #394: t_k(n) = least m ≥ 1 with n ∣ m(m+1)···(m+k−1). This module
 defines the computation (structural scan, NO well-founded recursion — the
-L95 discipline; `0 < r` branch conditions only — no Bool/Prop ambiguity)
-and decides the four certified tables:
+L95 discipline; `0 < r` branch conditions only — no Bool/Prop ambiguity;
+`rfl`-step unfolding — no simp-equation roulette) and decides the four
+certified tables:
 
 - t_2 for all odd n = 3..101 (50 exact values);
 - t_3 for all (n,6)=1, n = 5..97 (32 exact values);
@@ -23,8 +24,8 @@ def prodCons : Nat → Nat → Nat
   | _, 0 => 1
   | m, k + 1 => (m + k) * prodCons m k
 
-/-- The divisibility oracle: n ∣ prodCons m k. -/
-def divAt (n m k : Nat) : Bool := n % prodCons m k == 0
+/-- The divisibility oracle: n ∣ prodCons m k (n divides the product). -/
+def divAt (n m k : Nat) : Bool := prodCons m k % n == 0
 
 /-- Structural scan: the least m ∈ [1, j] with n ∣ prodCons m k (0 = none). -/
 def tKfind : Nat → Nat → Nat → Nat
@@ -36,49 +37,39 @@ def tKfind : Nat → Nat → Nat → Nat
 /-- tKb n k = the least m ≥ 1 with n ∣ prodCons m k (search capped at n). -/
 def tKb (n k : Nat) : Nat := tKfind n k n
 
+/-- The definitional step of the scan (rfl-unfolds the structural match). -/
+theorem tKstep (n k j : Nat) : tKfind n k (j + 1)
+    = if 0 < tKfind n k j then tKfind n k j
+      else if divAt n (j + 1) k then j + 1 else 0 := rfl
+
 /-! ## The oracle correctness (bound + soundness + leastness). -/
 
 /-- The scan result is always an index ≤ j. -/
 theorem tKfind_bound (n k j : Nat) : tKfind n k j ≤ j := by
   induction j with
-  | zero => simp only [tKfind]; omega
-  | succ j _ =>
+  | zero => have h0 : tKfind n k 0 = 0 := rfl; omega
+  | succ j ih =>
     by_cases hprev : 0 < tKfind n k j
-    · have hstep : tKfind n k (j + 1) = tKfind n k j := by
-        simp only [tKfind]
-        rw [if_pos hprev]
-      rw [hstep]; omega
-    · have hprev0 : tKfind n k j = 0 := by omega
-      have hstep : tKfind n k (j + 1)
-          = if divAt n (j + 1) k then j + 1 else 0 := by
-        simp only [tKfind]
-        rw [if_neg hprev]
-      rw [hstep]
+    · rw [tKstep, if_pos hprev]; omega
+    · rw [tKstep, if_neg hprev]
       by_cases hdd : divAt n (j + 1) k = true
       · rw [if_pos hdd]; omega
-      · rw [if_neg hdd]; simp only [Nat.reduceIte]; omega
+      · rw [if_neg hdd]; omega
 
 /-- Every nonzero result of the scan is a valid m. -/
 theorem tKfind_sound (n k j : Nat) (h : tKfind n k j ≠ 0) :
     divAt n (tKfind n k j) k = true := by
   induction j with
-  | zero => simp only [tKfind] at h; omega
+  | zero => have h0 : tKfind n k 0 = 0 := rfl; exact absurd h0 h
   | succ j ih =>
     by_cases hprev : 0 < tKfind n k j
-    · have hstep : tKfind n k (j + 1) = tKfind n k j := by
-        simp only [tKfind]
-        rw [if_pos hprev]
-      rw [hstep] at h ⊢
+    · rw [tKstep, if_pos hprev] at h ⊢
       exact ih h
-    · have hprev0 : tKfind n k j = 0 := by omega
-      have hstep : tKfind n k (j + 1)
-          = if divAt n (j + 1) k then j + 1 else 0 := by
-        simp only [tKfind]
-        rw [if_neg hprev]
-      rw [hstep] at h ⊢
+    · rw [tKstep, if_neg hprev] at h ⊢
       by_cases hdd : divAt n (j + 1) k = true
       · rw [if_pos hdd] at h ⊢; exact hdd
-      · rw [if_neg hdd] at h; simp only [Nat.reduceIte] at h; omega
+      · rw [if_neg hdd] at h
+        exact absurd rfl h
 
 /-- Any valid m ≤ j forces a nonzero result, itself ≤ m (leastness). -/
 theorem tKfind_least (n k j m : Nat) (h1 : 1 ≤ m) (hmj : m ≤ j)
@@ -87,28 +78,16 @@ theorem tKfind_least (n k j m : Nat) (h1 : 1 ≤ m) (hmj : m ≤ j)
   | zero => omega
   | succ j ih =>
     by_cases hmj' : m ≤ j
-    · have hp := ih hmj' hd
-      have hprev : 0 < tKfind n k j := by
-        have := hp.1; omega
-      have hstep : tKfind n k (j + 1) = tKfind n k j := by
-        simp only [tKfind]
-        rw [if_pos hprev]
-      rw [hstep]
+    · have hp := ih hmj'
+      have hprev : 0 < tKfind n k j := by have := hp.1; omega
+      rw [tKstep, if_pos hprev]
       exact hp
     · have hmj1 : m = j + 1 := by omega
       by_cases hprev : 0 < tKfind n k j
-      · have hstep : tKfind n k (j + 1) = tKfind n k j := by
-          simp only [tKfind]
-          rw [if_pos hprev]
-        rw [hstep]
+      · rw [tKstep, if_pos hprev]
         have hb := tKfind_bound n k j
-        refine ⟨hprev, ?_⟩; omega
-      · have hprev0 : tKfind n k j = 0 := by omega
-        have hstep : tKfind n k (j + 1)
-            = if divAt n (j + 1) k then j + 1 else 0 := by
-          simp only [tKfind]
-          rw [if_neg hprev]
-        rw [hstep]
+        exact ⟨hprev, by omega⟩
+      · rw [tKstep, if_neg hprev]
         have hd' : divAt n (j + 1) k = true := by rw [← hmj1]; exact hd
         rw [if_pos hd']
         omega

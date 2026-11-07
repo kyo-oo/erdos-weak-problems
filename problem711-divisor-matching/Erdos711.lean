@@ -56,7 +56,7 @@ def AssignOk (n m F : Nat) (a : Nat → Nat) : Prop :=
   (∀ i, 1 ≤ i → i ≤ n → ∀ j, 1 ≤ j → j ≤ n → a i = a j → i = j)
 
 /-- $f(n,m)$ = the minimal $F \ge 1$ with a valid assignment. -/
-def f711 (n m : Nat) : Nat := Nat.sInf {F : Nat | 1 ≤ F ∧ ∃ a, AssignOk n m F a}
+def f711 (n m : Nat) : Nat := sInf {F : Nat | 1 ≤ F ∧ ∃ a, AssignOk n m F a}
 
 /-- The Bool witness checker (for the decided witness tables):
 length, window bounds, divisibility, pairwise distinctness. -/
@@ -160,9 +160,9 @@ theorem erdos711_forced_pair (n : Nat) (hn : 2 ≤ n) (a : Nat → Nat)
       have htlt : t < n + 1 := by
         by_contra hc
         push_neg at hc
-        have hle2 : (n - 1) * (n + 2) ≤ (n - 1) * t :=
-          Nat.mul_le_mul (Nat.le_refl (n - 1)) (by omega)
-        have hp2 := n1_p2_id n (by omega)
+        have hle2 : (n - 1) * (n + 1) ≤ (n - 1) * t :=
+          Nat.mul_le_mul (Nat.le_refl (n - 1)) hc
+        have hp1' := n1_p1_id n (by omega)
         omega
       have htcase : t = n ∨ t = n + 1 := by omega
       rcases htcase with htn | htn
@@ -178,6 +178,9 @@ theorem erdos711_forced_pair (n : Nat) (hn : 2 ≤ n) (a : Nat → Nat)
     have hb2 := hb 2 (by omega) (by omega)
     have hb1 := hb 1 (by omega) (by omega)
     subst hn2'
+    have hb1' : (1 : Nat) < a 1 ∧ a 1 ≤ 2 * 2 - 2 := hb1
+    have hb2' : (1 : Nat) < a 2 ∧ a 2 ≤ 2 * 2 - 2 := hb2
+    have hg1 : a (2 - 1) = a 1 := rfl
     omega
 
 /-- THE GENERAL LOWER BOUND: $f(n, (n-1)^2) \ge 2n-1$ for every $n \ge 2$. -/
@@ -190,6 +193,9 @@ theorem erdos711_obstruction (n : Nat) (hn : 2 ≤ n) :
       AssignOk n ((n - 1) * (n - 1)) (n * ((n - 1) * (n - 1) + 1) + 1) x
     refine ⟨by omega, fun k => k * ((n - 1) * (n - 1) + 1), ?_, ?_⟩
     · intro k h1k hkn
+      show k ∣ (k * ((n - 1) * (n - 1) + 1)) ∧
+        (n - 1) * (n - 1) < (k * ((n - 1) * (n - 1) + 1)) ∧
+        (k * ((n - 1) * (n - 1) + 1)) < (n - 1) * (n - 1) + (n * ((n - 1) * (n - 1) + 1) + 1)
       refine ⟨Nat.dvd_mul_right k _, ?_, ?_⟩
       · have hge : (1 : Nat) * ((n - 1) * (n - 1) + 1) ≤ k * ((n - 1) * (n - 1) + 1) :=
           Nat.mul_le_mul (by omega) (Nat.le_refl _)
@@ -198,7 +204,7 @@ theorem erdos711_obstruction (n : Nat) (hn : 2 ≤ n) :
           Nat.mul_le_mul (by omega) (Nat.le_refl _)
         omega
     · intro i hi1 hin j hj1 hjn hij
-      exact Nat.eq_of_mul_eq_mul_right hij (by omega)
+      exact Nat.eq_of_mul_eq_mul_right (by omega) hij
   have hmem : 1 ≤ f711 n ((n - 1) * (n - 1)) ∧ ∃ a,
       AssignOk n ((n - 1) * (n - 1)) (f711 n ((n - 1) * (n - 1))) a :=
     Nat.sInf_mem hempt
@@ -227,8 +233,11 @@ theorem erdos711_two (m : Nat) (hm : 1 ≤ m) : f711 2 m ≤ 3 := by
     · refine ⟨fun k => match k with | 1 => m + 1 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 by omega) with h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
         · subst h
+          show 1 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 3
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 3
           have hodd : m % 2 = 0 := h0
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
@@ -242,8 +251,11 @@ theorem erdos711_two (m : Nat) (hm : 1 ≤ m) : f711 2 m ≤ 3 := by
     · refine ⟨fun k => match k with | 1 => m + 2 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 by omega) with h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
         · subst h
+          show 1 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 3
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 3
           have hodd : m % 2 = 1 := h0
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
@@ -288,45 +300,87 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
     · refine ⟨fun k => match k with | 1 => m + 1 | 2 => m + 2 | _ => m + 3, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-      · exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        · subst h
+          show 1 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+        · subst h
+          show 3 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+      · intro i hi1 hin j hj1 hjn hij
+        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 3 | 2 => m + 1 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-      · exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        · subst h
+          show 1 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+        · subst h
+          show 3 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+      · intro i hi1 hin j hj1 hjn hij
+        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 3 | 2 => m + 2 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-      · exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        · subst h
+          show 1 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+        · subst h
+          show 3 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+      · intro i hi1 hin j hj1 hjn hij
+        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 2 | 2 => m + 1 | _ => m + 3, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-      · exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        · subst h
+          show 1 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+        · subst h
+          show 3 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+      · intro i hi1 hin j hj1 hjn hij
+        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 1 | 2 => m + 4 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-      · exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        · subst h
+          show 1 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 4) ∧ m < (m + 4) ∧ (m + 4) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+        · subst h
+          show 3 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+      · intro i hi1 hin j hj1 hjn hij
+        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 2 | 2 => m + 3 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
-        · subst h; exact ⟨Nat.dvd_one _, by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-        · subst h; exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
-      · exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        · subst h
+          show 1 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
+          exact ⟨Nat.one_dvd _, by omega⟩
+        · subst h
+          show 2 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+        · subst h
+          show 3 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
+          exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
+      · intro i hi1 hin j hj1 hjn hij
+        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
   exact Nat.sInf_le hmem
 
 /-! ## §4 THE WITNESS TABLES (n = 2..15 at m = (n−1)², kernel-decided). -/
@@ -351,23 +405,33 @@ the $(m, m+2n-1)$ window. -/
 theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
     (h : w711OK n m as = true) :
     ∃ a, AssignOk n m (2 * n - 1) a := by
-  simp only [w711OK, Bool.and_eq_true] at h
-  obtain ⟨hlen, hall, hdist⟩ := h
+  have hA : ((as.length == n) && ((List.range n).all (fun i =>
+         ((decide (m < as.getD i 0)) && (decide (as.getD i 0 < m + 2 * n - 1)))
+           && ((as.getD i 0) % (i + 1) == 0))) &&
+       ((List.range n).all (fun i =>
+         (List.range n).all (fun j =>
+           (i == j) || !((as.getD i 0) == (as.getD j 0)))))) = true := h
+  obtain ⟨hLM, hdist⟩ := Bool.and_eq_true.mp hA
+  obtain ⟨hlen, hall⟩ := Bool.and_eq_true.mp hLM
   have hlenN : as.length = n := Nat.eq_of_beq_eq_true hlen
   refine ⟨fun k => as.getD (k - 1) 0, ?_, ?_⟩
   · intro k h1k hkn
+    show k ∣ (as.getD (k - 1) 0) ∧ m < (as.getD (k - 1) 0) ∧
+      (as.getD (k - 1) 0) < m + (2 * n - 1)
     have hidx : k - 1 < n := by omega
     have hmem : (k - 1) ∈ List.range n := List.mem_range.mpr hidx
     have hcall := (List.all_eq_true.mp hall) (k - 1) hmem
-    simp only [Bool.and_eq_true] at hcall
-    obtain ⟨⟨hlt1, hlt2⟩, hmod⟩ := hcall
-    have hb1 : m < as.getD (k - 1) 0 := by simpa using hlt1
-    have hb2 : as.getD (k - 1) 0 < m + 2 * n - 1 := by simpa using hlt2
+    obtain ⟨hc2, hmod⟩ := Bool.and_eq_true.mp hcall
+    obtain ⟨hlt1, hlt2⟩ := Bool.and_eq_true.mp hc2
+    have hb1 : m < as.getD (k - 1) 0 := by
+      rw [decide_eq_true] at hlt1; exact hlt1
+    have hb2 : as.getD (k - 1) 0 < m + 2 * n - 1 := by
+      rw [decide_eq_true] at hlt2; exact hlt2
     have hdvd : k ∣ as.getD (k - 1) 0 := by
       have hmodk : (as.getD (k - 1) 0) % k = 0 := by
         have hk1 : (k - 1) + 1 = k := by omega
         rw [hk1] at hmod
-        simpa using hmod
+        exact Nat.eq_of_beq_eq_true hmod
       exact Nat.dvd_of_mod_eq_zero hmodk
     exact ⟨hdvd, hb1, hb2⟩
   · intro i hi1 hin j hj1 hjn hij
@@ -434,6 +498,7 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
     · rintro ⟨hF, a, ha⟩
       refine ⟨hF, fun k => a k + L, ?_, ?_⟩
       · intro k h1 h2
+        show k ∣ (a k + L) ∧ m + L < (a k + L) ∧ (a k + L) < m + L + F
         obtain ⟨hkd, hb1, hb2⟩ := ha.1 k h1 h2
         have hkl : k ∣ L := hL k h1 h2
         exact ⟨Nat.dvd_add hkd hkl, by omega, by omega⟩
@@ -442,6 +507,7 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
     · rintro ⟨hF, a, ha⟩
       refine ⟨hF, fun k => a k - L, ?_, ?_⟩
       · intro k h1 h2
+        show k ∣ (a k - L) ∧ m < (a k - L) ∧ (a k - L) < m + F
         obtain ⟨hkd, hb1, hb2⟩ := ha.1 k h1 h2
         have hkl : k ∣ L := hL k h1 h2
         refine ⟨Nat.dvd_sub' hkd hkl, ?_, ?_⟩

@@ -110,11 +110,12 @@ theorem cop_mul_dvd {a b x y : Nat} (ha : a ∣ x) (hb : b ∣ y) : a * b ∣ x 
 theorem prodCons_shift : ∀ (k m : Nat), prodCons m (k + 1) = m * prodCons (m + 1) k := by
   intro k
   induction k with
-  | zero => intro m; simp [prodCons]
+  | zero => intro m; rfl
   | succ k ih =>
     intro m
-    rw [show k + 2 = (k + 1) + 1 from rfl, prodCons, ih m, prodCons,
-      ← Nat.add_assoc, Nat.add_right_comm m k 1, Nat.mul_left_comm]
+    have hL : prodCons m (k + 2) = (m + (k + 1)) * prodCons m (k + 1) := rfl
+    have hR : prodCons (m + 1) (k + 2) = ((m + 1) + k) * prodCons (m + 1) k := rfl
+    rw [hL, ih m, hR, ← Nat.add_assoc, Nat.add_right_comm m k 1, Nat.mul_left_comm]
 
 /-- If d is coprime to every element of l then d is coprime to l.prod. -/
 theorem cop_prod {d : Nat} : ∀ (l : List Nat), (∀ x ∈ l, Nat.Coprime d x) →
@@ -133,7 +134,7 @@ theorem crt_sound : ∀ (ds : List Nat) (m : Nat), ds.Pairwise Nat.Coprime →
     ds.prod ∣ prodCons m ds.length := by
   intro ds
   induction ds with
-  | nil => intro m _ _; show (1 : Nat) ∣ prodCons m 0; exact Nat.dvd_one _
+  | nil => intro m _ _; show (1 : Nat) ∣ prodCons m 0; exact Nat.one_dvd _
   | cons d rest ih =>
     intro m hpair hdiv
     rcases hpair with _ | hhead htail
@@ -216,8 +217,8 @@ theorem erdos394_prime_landing (p : Nat) (hp : Nat.Prime p) :
 theorem pair_5_3 : [5, 3].Pairwise Nat.Coprime := by
   refine List.Pairwise.cons ?_ List.Pairwise.nil
   intro b hb
-  rcases hb with h | h
-  · show Nat.gcd 5 3 = 1
+  rcases List.mem_cons.mp hb with h | h
+  · subst h; show Nat.gcd 5 3 = 1
     decide
   · exact absurd h (by simp)
 
