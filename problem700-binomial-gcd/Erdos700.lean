@@ -100,6 +100,14 @@ theorem two_pow_ge_two (a : Nat) (ha : 1 ≤ a) : 2 ≤ 2 ^ a := by
 theorem pow_ge_two (p a : Nat) (hp : 2 ≤ p) (ha : 1 ≤ a) : 2 ≤ p ^ a :=
   Nat.le_trans (two_pow_ge_two a ha) (pow_le_pow_base 2 p a hp)
 
+/-- The power-split bridge: `p ^ a = p * p ^ (a - 1)` for a ≥ 1
+(via `Nat.pow_succ'`, the +1-form successor law). -/
+theorem ppow_split (p a : Nat) (ha : 1 ≤ a) : p ^ a = p * p ^ (a - 1) := by
+  have h1 := Nat.pow_succ' p (a - 1)
+  have hae : (a - 1) + 1 = a := by omega
+  rw [hae] at h1
+  exact h1
+
 /-! ## §2 THE p-ADIC VALUATION (fuel-structural, the K11 vpad architecture) -/
 
 /-- Fuel-structural p-adic valuation engine: `vpf p f n` counts factors of p
@@ -336,7 +344,7 @@ theorem pow_dvd_iff (p : Nat) (hp : 2 ≤ p) : ∀ (F i n : Nat), i ≤ F → 1 
         omega
       · constructor
         · intro hdvd
-          have hpp1 : p ∣ p ^ (i' + 1) := ⟨p ^ i', (Nat.pow_succ p i').symm⟩
+          have hpp1 : p ∣ p ^ (i' + 1) := ⟨p ^ i', Nat.pow_succ' p i'⟩
           exact absurd (Nat.dvd_trans hpp1 hdvd) hpd
         · intro hle
           have h1 : 1 ≤ vp p n := by omega
@@ -799,7 +807,7 @@ theorem minGcdAux_ge (n t : Nat) (htn : t ≤ n) : ∀ j, 1 ≤ j →
       have hB := ih (by omega) (by
         intro k hk2 hkj
         exact hall k hk2 (by omega))
-      exact Nat.le_min hA hB
+      exact Nat.le_min.mpr ⟨hA, hB⟩
 
 theorem minGcdAux_le (n k : Nat) (hk : 2 ≤ k) : ∀ j, k ≤ j →
     minGcdAux n j ≤ Nat.gcd n (binom n k) := by
@@ -831,7 +839,7 @@ theorem prime_dvd_pow_of (q : Nat) (hq : q.Prime) : ∀ (t b : Nat), q ∣ b ^ t
     | zero => omega
     | succ e' =>
       have hq1 : 2 ≤ q := hq.one_lt
-      have hle : q * 1 ≤ q * (e' + 1) := Nat.mul_le_mul_left q (Nat.le_succ e')
+      have hle : q * 1 ≤ q * (e' + 1) := Nat.mul_le_mul_left q (by omega)
       omega
   | t + 1, b, hd => by
     have hsucc : b ^ (t + 1) = b * b ^ t := by
@@ -857,11 +865,7 @@ theorem erdos700_gcd_lower (p a k : Nat) (hpp : p.Prime) (ha : 2 ≤ a)
   have hge1 : 1 ≤ vp p (binom (p ^ a) k) := by omega
   have hCpos : 1 ≤ binom (p ^ a) k := binom_pos _ _ (by omega)
   have hdvd : p ∣ binom (p ^ a) k := (vp_ge_one_iff_dvd p _ hp hCpos).mp hge1
-  have hpN : p ∣ p ^ a := by
-    refine ⟨p ^ (a - 1), ?_⟩
-    rw [Nat.mul_comm, ← Nat.pow_succ]
-    congr 1
-    omega
+  have hpN : p ∣ p ^ a := ⟨p ^ (a - 1), ppow_split p a (by omega)⟩
   have hg1 : 1 ≤ Nat.gcd (p ^ a) (binom (p ^ a) k) := by
     by_contra hg
     have hg0 : Nat.gcd (p ^ a) (binom (p ^ a) k) = 0 := by omega
@@ -879,10 +883,7 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hp : 2 ≤ p := hpp.one_lt
   have hk01 : 1 ≤ p ^ (a - 1) := pow_ge_one p (by omega) (a - 1)
   have hpowlt : p ^ (a - 1) < p ^ a := by
-    have hsplit : p ^ a = p ^ (a - 1) * p := by
-      rw [Nat.mul_comm, ← Nat.pow_succ]
-      congr 1
-      omega
+    have hsplit : p ^ a = p ^ (a - 1) * p := (ppow_split p a (by omega)).symm
     have h2 : p ^ (a - 1) * 2 ≤ p ^ (a - 1) * p :=
       Nat.mul_le_mul_left (p ^ (a - 1)) hp
     omega
@@ -903,15 +904,15 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
     obtain ⟨w, hw⟩ := hd
     have hC2 : p ^ 2 ∣ binom (p ^ a) (p ^ (a - 1)) := by
       refine ⟨w, ?_⟩
-      calc p ^ 2 * w = p * (p * w) := by rw [Nat.pow_two, Nat.mul_assoc]
-        _ = p * u := by rw [← hw]
-        _ = binom (p ^ a) (p ^ (a - 1)) := hu.symm
+      calc binom (p ^ a) (p ^ (a - 1)) = p * u := hu
+        _ = p * (p * w) := by rw [← hw]
+        _ = p ^ 2 * w := by rw [Nat.pow_two, Nat.mul_assoc]
     have hvp2 := (pow_dvd_iff p hp 2 2 (binom (p ^ a) (p ^ (a - 1)))
       (Nat.le_refl 2) hCpos).mp hC2
     omega
   have hpdvdg : p ∣ Nat.gcd (p ^ a) (binom (p ^ a) (p ^ (a - 1))) := by
     refine Nat.dvd_gcd ?_ hpC
-    exact ⟨p ^ (a - 1), by rw [Nat.mul_comm, ← Nat.pow_succ]; congr 1; omega⟩
+    exact ⟨p ^ (a - 1), ppow_split p a (by omega)⟩
   have hg1 : 1 ≤ Nat.gcd (p ^ a) (binom (p ^ a) (p ^ (a - 1))) := by
     by_contra hg
     have hg0 : Nat.gcd (p ^ a) (binom (p ^ a) (p ^ (a - 1))) = 0 := by omega
@@ -939,10 +940,7 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hhp : h ∣ p ^ (a - 1) := by
     obtain ⟨e, he⟩ := Nat.gcd_dvd_left (p ^ a) (binom (p ^ a) (p ^ (a - 1)))
     rw [hh] at he
-    have hsplit : p ^ a = p * p ^ (a - 1) := by
-      rw [Nat.mul_comm, ← Nat.pow_succ]
-      congr 1
-      omega
+    have hsplit : p ^ a = p * p ^ (a - 1) := ppow_split p a (by omega)
     have hcancel : h * e = p ^ (a - 1) := by
       have hboth : p * (h * e) = p * p ^ (a - 1) := by
         rw [← Nat.mul_assoc]
@@ -952,8 +950,8 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hh1eq : h = 1 := by
     by_contra h2h
     have h2le : 2 ≤ h := by omega
-    have hqdvd : h.minFac ∣ h := Nat.minFac_dvd h h2le
-    have hqprime : h.minFac.Prime := Nat.minFac_prime h (by omega)
+    have hqdvd : h.minFac ∣ h := Nat.minFac_dvd h
+    have hqprime : h.minFac.Prime := Nat.minFac_prime (show h ≠ 1 by omega)
     have hq2 : 2 ≤ h.minFac := hqprime.one_lt
     have hqdp : h.minFac ∣ p ^ (a - 1) := Nat.dvd_trans hqdvd hhp
     have hqdpp : h.minFac ∣ p := prime_dvd_pow_of h.minFac hqprime (a - 1) p hqdp
@@ -1021,11 +1019,8 @@ theorem erdos700_violation (p a : Nat) (hpp : p.Prime) (ha : 3 ≤ a) :
     f700 (p ^ a) = p ∧ p ^ a / p = p ^ (a - 1) ∧ p < p ^ (a - 1) := by
   have hp : 2 ≤ p := hpp.one_lt
   refine ⟨erdos700_law p a hpp (by omega), ?_, ?_⟩
-  · have hsplit : p ^ a = p * p ^ (a - 1) := by
-      rw [Nat.mul_comm, ← Nat.pow_succ]
-      congr 1
-      omega
-    rw [hsplit, Nat.mul_div_cancel_left _ (by omega : 1 ≤ p)]
+  · rw [ppow_split p a (by omega),
+      Nat.mul_div_cancel_left _ (by omega : 1 ≤ p)]
   · have h1 : p * 2 ≤ p * p := Nat.mul_le_mul_left p hp
     have h2 : p ^ 2 ≤ p ^ (a - 1) := pow_le_mono p (by omega) 2 (a - 1) (by omega)
     have h3 : p ^ 2 = p * p := Nat.pow_two p
