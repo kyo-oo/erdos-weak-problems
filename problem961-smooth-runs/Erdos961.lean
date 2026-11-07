@@ -79,7 +79,6 @@ theorem pow9_mod8 (j : Nat) : (9 ^ j) % 8 = 1 := by
   | zero => norm_num
   | succ j ih =>
       rw [Nat.pow_succ, Nat.mul_mod, ih]
-      norm_num
 
 /-- Every b is even or odd (the bisection). -/
 theorem bisect (b : Nat) : (∃ j, b = 2 * j) ∨ (∃ j, b = 2 * j + 1) := by
@@ -99,7 +98,6 @@ theorem pow3_odd_mod8 (j : Nat) : (3 ^ (2 * j + 1)) % 8 = 3 := by
   have h1 : 3 ^ (2 * j + 1) = 3 ^ (2 * j) * 3 := by
     rw [Nat.pow_add, Nat.pow_one]
   rw [h1, Nat.mul_mod, pow3_even_mod8]
-  norm_num
 
 /-- 3^b mod 8 is never 7. -/
 theorem pow3_neSeven (b : Nat) : (3 ^ b) % 8 ≠ 7 := by
@@ -171,7 +169,7 @@ theorem dvd_two_pow (a : Nat) : ∀ u : Nat, u ∣ 2 ^ a →
           obtain ⟨i, hi, hui⟩ := ih u ⟨c', hcancel⟩
           exact ⟨i, by omega, hui⟩
         · -- u odd, c odd: u·c is odd but equals the even 2^a·2 — contradiction
-          have hmod : (u * c) % 2 = (u % 2 * c % 2) % 2 := Nat.mul_mod u c 2
+          have hmod : u * c % 2 = u % 2 * (c % 2) % 2 := Nat.mul_mod u c 2
           rw [h1, hc1] at hmod
           norm_num at hmod
           have hz : (2 ^ a * 2) % 2 = 0 := by
@@ -235,7 +233,7 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
       have h3n : 3 ∣ n := by
         have h3b : 3 ^ b = 3 ^ (b - 1) * 3 := by
           rw [← Nat.pow_succ]; congr 1; omega
-        refine ⟨3 ^ (b - 1), ?_⟩
+        refine ⟨2 ^ a * 3 ^ (b - 1), ?_⟩
         rw [← hab, h3b]
         ring
       have h3np : 3 ∣ (n + 1) := by
@@ -269,10 +267,6 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
           obtain ⟨j, hj, hhigh⟩ := dvd_two_pow a (3 ^ e + 1)
             ⟨3 ^ e - 1, by rw [Nat.mul_comm]; exact hfac.symm⟩
           -- hlow : 3^e − 1 = 2^i ; hhigh : 3^e + 1 = 2^j
-          have h3e : 3 ^ e = 9 * 3 ^ (e - 2) := by
-            have hidx : e = 2 + (e - 2) := by omega
-            rw [hidx, Nat.pow_add]
-            norm_num
           rcases (show e = 0 ∨ e = 1 ∨ 2 ≤ e by omega) with e0 | e1 | e2
           · rw [e0] at hlow; norm_num at hlow
             have h2ipos : 1 ≤ 2 ^ i := pow_ge_one 2 i (by omega)
@@ -296,7 +290,6 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
             have hj1 : j = 1 := pow2_mod8_two j hmod2
             rw [hj1] at hdiff
             norm_num at hdiff
-            omega
         · ----- d = 2e+1: the mod-8 law -----
           have hmaster' : 2 ^ a + 1 = 3 ^ (2 * e + 1) := by rw [← he2]; exact hmaster
           have hmod8 : (2 ^ a) % 8 = 2 := by
@@ -320,7 +313,7 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
     · ----- d = 0 with b ≥ 1: n + 1 = 1 ⟹ n = 0 ✗ -----
       rw [hd0] at hnp1; norm_num at hnp1; omega
   · ----- CASE n ODD -----
-    obtain ⟨b, hb⟩ := odd_smooth23_pow3 h1 ho
+    obtain ⟨b, hb⟩ := odd_smooth23_pow3 ⟨a, b, hab⟩ ho
     rcases (show b = 0 ∨ 1 ≤ b by omega) with b0 | bge
     · rw [b0] at hb; norm_num at hb; omega
     · -- b ≥ 1: 3 ∣ n ⟹ 3 ∤ n+1 ⟹ d = 0 ⟹ n+1 = 2^c
@@ -330,7 +323,7 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
         have h3np : 3 ∣ (n + 1) := by
           have h3d : 3 ^ d = 3 ^ (d - 1) * 3 := by
             rw [← Nat.pow_succ]; congr 1; omega
-          refine ⟨3 ^ (d - 1), ?_⟩
+          refine ⟨2 ^ c * 3 ^ (d - 1), ?_⟩
           rw [← hcd, h3d]
           ring
         have h3n : 3 ∣ n := by
@@ -402,7 +395,7 @@ theorem exists_prime_dvd (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 2 ≤ v →
             · exact absurd hdd (hcon d h2 hlt)
             · exact Or.inr heq
         obtain ⟨d, hd2, hdlt, hddvd⟩ := hfactor
-        obtain ⟨p, hpp, hpd⟩ := ih d hdlt (by omega)
+        obtain ⟨p, hpp, hpd⟩ := ih d (by omega) (by omega)
         exact ⟨p, hpp, hpd.trans hddvd⟩
 
 /-- No prime > 3 dividing v, v ≥ 1 ⟹ v is {2,3}-smooth (fuel induction,
@@ -417,8 +410,9 @@ theorem no_big_prime_smooth23 (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 1 ≤ v
       · refine ⟨0, 0, ?_⟩
         rw [h1']
         norm_num
-      · obtain ⟨p, hpp, hpd⟩ := exists_prime_dvd fuel v (by omega) h2'
+      · obtain ⟨p, hpp, hpd⟩ := exists_prime_dvd (fuel + 1) v (by omega) h2'
         have hple3 : p ≤ 3 := hbig p hpp hpd
+        have hp2le : 2 ≤ p := hpp.1
         have hp23 : p = 2 ∨ p = 3 := by omega
         rcases hp23 with hp2 | hp3
         · ----- p = 2: v = 2w -----
