@@ -36,7 +36,7 @@ namespace Erdos1072
 /-! ## §1 The modeq toolkit (core-safe). -/
 theorem addmul (x p m : Nat) : (x + p * m) ≡ x [MOD p] := by
   show (x + p * m) % p = x % p
-  exact Nat.add_mul_mod_self_right x p m
+  exact Nat.add_mul_mod_self_left x p m
 
 theorem fm_modeq (p j : Nat) : fm p (j + 1) ≡ (j + 1) * fm p j [MOD p] := by
   show ((j + 1) * fm p j) % p % p = ((j + 1) * fm p j) % p
@@ -186,7 +186,7 @@ theorem sqn (p : Nat) (hp : 2 ≤ p) : (p - 1) * (p - 1) ≡ 1 [MOD p] := by
     rw [Nat.mul_one] at s1
     omega
   show ((p - 1) * (p - 1)) % p = (1:Nat) % p
-  rw [he, Nat.add_comm, Nat.add_mul_mod_self_right]
+  rw [he, Nat.add_comm, Nat.add_mul_mod_self_left]
 
 /-! ## §7 THE MAIN THEOREM — the Wilson-free pairing identity. -/
 theorem erdos1072_pair_law (p n : Nat) (hp : 2 ≤ p) (hpar : p = 2 ∨ p % 2 = 1)

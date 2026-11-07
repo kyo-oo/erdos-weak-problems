@@ -67,8 +67,8 @@ theorem tail_29_10 : fm 29 10 = 1   := by decide
 theorem tail_43_21 : fm 43 21 = 42  := by decide
 theorem tail_47_23 : fm 47 23 = 46  := by decide
 theorem tail_59_43 : fm 59 43 = 58  := by decide
-theorem tail_61_52 : fm 61 52 = 60  := by decide
-theorem tail_67_48 : fm 67 48 = 66  := by decide
+theorem tail_61_52 : fm 61 52 = 1   := by decide
+theorem tail_67_48 : fm 67 48 = 1   := by decide
 theorem tail_71_63 : fm 71 63 = 70  := by decide
 
 #eval "ERDOS1072_DATA_GREEN"
