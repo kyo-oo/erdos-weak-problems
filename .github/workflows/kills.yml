@@ -473,17 +473,10 @@ jobs:
           grep -F "(5, 3)" erdos700.log
           grep -F "(1, 1, 1, 1)" erdos700.log
           grep -F "(15, 1)" erdos700.log
-          grep -F "'erdos700_carry' depends on axioms: [propext" erdos700.log
-          grep -F "'erdos700_witness' depends on axioms: [propext" erdos700.log
-          grep -F "'erdos700_law' depends on axioms: [propext" erdos700.log
-          grep -F "'erdos700_equality_class' depends on axioms: [propext" erdos700.log
-          grep -F "'erdos700_violation' depends on axioms: [propext" erdos700.log
-          echo "=== BATTERY DIAG: python3 -V ==="
-          python3 -V
-          echo "=== BATTERY DIAG: file check ==="
-          ls -la problem700-binomial-gcd/battery700_ci.py
-          head -3 problem700-binomial-gcd/battery700_ci.py
-          echo "=== BATTERY DIAG: run ==="
-          python3 problem700-binomial-gcd/battery700_ci.py 2>&1 | tee battery700_ci.log
-          echo "=== BATTERY DIAG: exit ${PIPESTATUS[0]} ==="
+          grep -F "Erdos700.erdos700_carry' depends on axioms: [propext" erdos700.log
+          grep -F "Erdos700.erdos700_witness' depends on axioms: [propext" erdos700.log
+          grep -F "Erdos700.erdos700_law' depends on axioms: [propext" erdos700.log
+          grep -F "Erdos700.erdos700_equality_class' depends on axioms: [propext" erdos700.log
+          grep -F "Erdos700.erdos700_violation' depends on axioms: [propext" erdos700.log
+          python3 problem700-binomial-gcd/battery700_ci.py
           echo ERDOS700_PRIME_POWER_LAW_KERNEL_GREEN=1
