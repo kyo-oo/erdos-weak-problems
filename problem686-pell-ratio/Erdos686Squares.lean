@@ -133,7 +133,7 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
         = 4 * ((m + 1) * (m + 2)) + 1 + t * t := by rw [hX2]
       _ = t * t * (4 * ((n + 1) * (n + 2)) + 1) + 1 := by
           rw [heq]; ring
-      _ = t * t * Y * Y + 1 := by rw [hY2]; ring
+      _ = t * t * Y * Y + 1 := by rw [← hY2]; ring
   -- tY > X (the sign law: X² < t²Y²)
   have htt : 4 ≤ t * t := by
     have hmul : t * 2 ≤ t * t := Nat.mul_le_mul_left t (by omega)
@@ -199,28 +199,36 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
       rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left X (show (0:Nat) < 2 by norm_num)]
     rw [h1]
     exact decide_eq_true hX9
-  have hsum : d2 + d1 = 2 * t * Y := by omega
+  have hsum : d2 + d1 = t * Y + t * Y := by omega
+  have hform : t * Y + t * Y = 2 * t * Y := by ring
   have hdivt : (d2 + d1) / (2 * t) = Y := by
-    rw [hsum]
+    rw [hsum, hform]
     exact Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)
   have hoddY : Y % 2 = 1 := by omega
   have hY5 : 5 ≤ Y := by omega
   have hXY2 : Y + 2 ≤ X := by omega
   have hc7 : decide (((t * t - 1) / d1 + d1) % (2 * t) = 0) = true := by
     rw [hMdiv]
-    have h1 : d2 + d1 = 2 * t * Y := by omega
-    rw [h1, Nat.mul_mod]
-    norm_num
+    have h1 : d2 + d1 = t * Y + t * Y := by omega
+    have hdvdmod : (2 * t) ∣ (t * Y + t * Y) := ⟨Y, by ring⟩
+    rw [h1]
+    exact decide_eq_true (Nat.dvd_iff_mod_eq_zero.mpr hdvdmod)
   have hc8 : decide ((((t * t - 1) / d1 + d1) / (2 * t)) % 2 = 1) = true := by
     rw [hMdiv]
     have h1 : (d2 + d1) / (2 * t) = Y := by
-      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)]
+      have ha : d2 + d1 = t * Y + t * Y := by omega
+      have hb : t * Y + t * Y = 2 * t * Y := by ring
+      rw [ha, hb]
+      exact Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)
     rw [h1]
     exact decide_eq_true hoddY
   have hc9 : decide (5 ≤ ((t * t - 1) / d1 + d1) / (2 * t)) = true := by
     rw [hMdiv]
     have h1 : (d2 + d1) / (2 * t) = Y := by
-      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)]
+      have ha : d2 + d1 = t * Y + t * Y := by omega
+      have hb : t * Y + t * Y = 2 * t * Y := by ring
+      rw [ha, hb]
+      exact Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)
     rw [h1]
     exact decide_eq_true hY5
   have hc10 : decide (((t * t - 1) / d1 - d1) / 2 ≥
@@ -229,7 +237,10 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
     have h1 : (d2 - d1) / 2 = X := by
       rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left X (show (0:Nat) < 2 by norm_num)]
     have h2' : (d2 + d1) / (2 * t) = Y := by
-      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)]
+      have ha : d2 + d1 = t * Y + t * Y := by omega
+      have hb : t * Y + t * Y = 2 * t * Y := by ring
+      rw [ha, hb]
+      exact Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)
     rw [h1, h2']
     exact decide_eq_true hXY2
   -- assemble: divNoRepSmall t d1 = true, contradicting the scan
@@ -287,7 +298,7 @@ theorem erdos686sq_census : ∀ t : Nat, 2 ≤ t → t ≤ 100 →
       obtain ⟨m, n, hval, hn1', hmn'⟩ := erdos686sq_family ((t - 2) / 4) hu
       refine ⟨m, n, ?_, hn1', hmn'⟩
       rw [hval, ← hN]
-    · subst h99
+    · rw [h99]
       exact ⟨241, 1, erdos686sq_99⟩
 
 /-! ## §7 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
