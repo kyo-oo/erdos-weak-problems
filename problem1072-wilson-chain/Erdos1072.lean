@@ -135,7 +135,7 @@ theorem sgn_carry (p m : Nat) (hp : 2 ≤ p) (hm : m + 1 ≤ p) :
           exact e2
         have s3 : p * (p - 1 - m) = (p - 1 - m) * p := Nat.mul_comm _ _
         omega
-      exact ((addmul (m + 1) p (p - m - 2)).symm).trans (meq_of_eq _ _ _ heq.symm)
+      exact (((addmul (m + 1) p (p - m - 2)).symm).trans (meq_of_eq _ _ _ heq.symm)).symm
 
 /-! ## §4 THE TAIL LAW: tm p m ≡ sgn p m · m! (mod p), by induction. -/
 theorem tail_law (p : Nat) (hp : 2 ≤ p) :
@@ -259,9 +259,11 @@ theorem erdos1072_wilson_pair_classic (p n : Nat) (hp : 2 ≤ p)
     have hY : fm p (p - 1 - n)
         ≡ (p - 1) * (p - 1) * fm p (p - 1 - n) [MOD p] :=
       (((sqn p hp).mul_right _).trans (meq_of_eq _ _ _ (Nat.one_mul _))).symm
+    have hring2 : (p - 1) * (p - 1) * fm p (p - 1 - n)
+        = (p - 1) * ((p - 1) * fm p (p - 1 - n)) := by ring
     have h2 : (p - 1) * (p - 1) * fm p (p - 1 - n)
         ≡ (p - 1) * (p - 1) * (p - 1) [MOD p] :=
-      (meq_of_eq _ _ _ (by ring)).trans (hpair.mul_left (p - 1))
+      (meq_of_eq _ _ _ hring2).trans (hpair.mul_left (p - 1))
     have hring3 : (p - 1) * (p - 1) * (p - 1)
         = ((p - 1) * (p - 1)) * (p - 1) := by ring
     have hone3 : (1:Nat) * (p - 1) = (p - 1) := Nat.one_mul _
