@@ -69,7 +69,6 @@ theorem dvd_sub_nat {p x y : Nat} (hxy : y ≤ x) (hx : p ∣ x) (hy : p ∣ y) 
     rw [hpz]
     refine ⟨0, ?_⟩
     rw [hx0, hy0]
-    norm_num
   · obtain ⟨u, hu⟩ := hx
     obtain ⟨w, hw⟩ := hy
     have hwu : w ≤ u := by

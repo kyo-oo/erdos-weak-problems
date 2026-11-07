@@ -68,24 +68,25 @@ noncomputable def f961 (k : Nat) : Nat := sInf (FSet k)
 theorem pow_ge_one (b i : Nat) (hb : 1 ≤ b) : 1 ≤ b ^ i := by
   induction i with
   | zero => show 1 ≤ 1; omega
-  | succ i ih => rw [Nat.pow_succ]; omega
+  | succ i ih =>
+      rw [Nat.pow_succ]
+      have hmul := Nat.mul_le_mul_left (b ^ i) (show 1 ≤ b by omega)
+      omega
 
 /-- 9^j ≡ 1 (mod 8) for every j. -/
 theorem pow9_mod8 (j : Nat) : (9 ^ j) % 8 = 1 := by
   induction j with
   | zero => norm_num
   | succ j ih =>
-      show (9 * 9 ^ j) % 8 = 1
-      rw [Nat.mul_mod, ih]
+      rw [Nat.pow_succ, Nat.mul_mod, ih]
       norm_num
 
 /-- Every b is even or odd (the bisection). -/
 theorem bisect (b : Nat) : (∃ j, b = 2 * j) ∨ (∃ j, b = 2 * j + 1) := by
-  refine ⟨b / 2, ?_, b / 2, ?_⟩
-  · have hb := Nat.div_add_mod b 2
-    rcases Nat.mod_two_eq_zero_or_one b with h | h <;> omega
-  · have hb := Nat.div_add_mod b 2
-    rcases Nat.mod_two_eq_zero_or_one b with h | h <;> omega
+  have hdm := Nat.div_add_mod b 2
+  rcases Nat.mod_two_eq_zero_or_one b with h | h
+  · exact Or.inl ⟨b / 2, by omega⟩
+  · exact Or.inr ⟨b / 2, by omega⟩
 
 /-- 3^(2j) ≡ 1 (mod 8). -/
 theorem pow3_even_mod8 (j : Nat) : (3 ^ (2 * j)) % 8 = 1 := by
@@ -95,10 +96,9 @@ theorem pow3_even_mod8 (j : Nat) : (3 ^ (2 * j)) % 8 = 1 := by
 
 /-- 3^(2j+1) ≡ 3 (mod 8). -/
 theorem pow3_odd_mod8 (j : Nat) : (3 ^ (2 * j + 1)) % 8 = 3 := by
-  have h : 3 ^ (2 * j + 1) = 3 * 9 ^ j := by
-    rw [Nat.pow_mul, Nat.pow_add]
-    norm_num
-  rw [h, Nat.mul_mod, pow9_mod8]
+  have h1 : 3 ^ (2 * j + 1) = 3 ^ (2 * j) * 3 := by
+    rw [Nat.pow_add, Nat.pow_one]
+  rw [h1, Nat.mul_mod, pow3_even_mod8]
   norm_num
 
 /-- 3^b mod 8 is never 7. -/
@@ -168,18 +168,16 @@ theorem dvd_two_pow (a : Nat) : ∀ u : Nat, u ∣ 2 ^ a →
             rw [hc'] at hc
             have hstep1 : u * (2 * c') = 2 * (u * c') := by ring
             omega
-          exact ih u ⟨c', hcancel⟩
-        · have hprod : (u * c) % 2 = (2 ^ (a + 1)) % 2 := by rw [← hc]
-          rw [Nat.mul_mod] at hprod
-          rw [h1, hc1] at hprod
-          have hz : (2 ^ (a + 1)) % 2 = 0 := by
-            have hpow : 2 ^ (a + 1) = 2 * 2 ^ a := by rw [Nat.pow_succ]
-            rw [hpow, Nat.mul_mod]
+          obtain ⟨i, hi, hui⟩ := ih u ⟨c', hcancel⟩
+          exact ⟨i, by omega, hui⟩
+        · -- u odd, c odd: u·c is odd but equals the even 2^a·2 — contradiction
+          have hmod : (u * c) % 2 = (u % 2 * c % 2) % 2 := Nat.mul_mod u c 2
+          rw [h1, hc1] at hmod
+          norm_num at hmod
+          have hz : (2 ^ a * 2) % 2 = 0 := by
+            rw [Nat.mul_mod]
             norm_num
-          rw [hz] at hprod
-          have hodd' : (u * c) % 2 = 1 := by omega
-          rw [hodd'] at hprod
-          norm_num at hprod
+          omega
 
 /-- (x−1)(x+1) = x·x − 1 for all x (truncated-safe). -/
 theorem sub_one_mul_add_one (x : Nat) : (x - 1) * (x + 1) = x * x - 1 := by
@@ -202,7 +200,7 @@ theorem odd_smooth23_pow3 {n : Nat} (h : Smooth23 n) (hn : n % 2 = 1) :
     rw [← hab, h0]
     norm_num
   · exfalso
-    have h2a : 2 ^ a = 2 * 2 ^ (a - 1) := by
+    have h2a : 2 ^ a = 2 ^ (a - 1) * 2 := by
       rw [← Nat.pow_succ]; congr 1; omega
     have hdvd : 2 ∣ n := by
       rw [← hab, h2a]
@@ -221,7 +219,7 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
     have hc0 : c = 0 := by
       by_contra hcon
       have hge : 1 ≤ c := by omega
-      have h2c : 2 ^ c = 2 * 2 ^ (c - 1) := by
+      have h2c : 2 ^ c = 2 ^ (c - 1) * 2 := by
         rw [← Nat.pow_succ]; congr 1; omega
       have hdvd : 2 ∣ (n + 1) := by
         rw [← hcd, h2c]
@@ -235,13 +233,13 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
       push_neg at hcon
       obtain ⟨hb1, hd1⟩ := hcon
       have h3n : 3 ∣ n := by
-        have h3b : 3 ^ b = 3 * 3 ^ (b - 1) := by
+        have h3b : 3 ^ b = 3 ^ (b - 1) * 3 := by
           rw [← Nat.pow_succ]; congr 1; omega
         refine ⟨3 ^ (b - 1), ?_⟩
         rw [← hab, h3b]
         ring
       have h3np : 3 ∣ (n + 1) := by
-        have h3d : 3 ^ d = 3 * 3 ^ (d - 1) := by
+        have h3d : 3 ^ d = 3 ^ (d - 1) * 3 := by
           rw [← Nat.pow_succ]; congr 1; omega
         refine ⟨3 ^ (d - 1), ?_⟩
         rw [← hnp1, h3d]
@@ -267,17 +265,21 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
               norm_num
             omega
           obtain ⟨i, hi, hlow⟩ := dvd_two_pow a (3 ^ e - 1)
-            ⟨3 ^ e + 1, by rw [Nat.mul_comm]; exact hfac.symm⟩
+            ⟨3 ^ e + 1, hfac.symm⟩
           obtain ⟨j, hj, hhigh⟩ := dvd_two_pow a (3 ^ e + 1)
-            ⟨3 ^ e - 1, hfac⟩
+            ⟨3 ^ e - 1, by rw [Nat.mul_comm]; exact hfac.symm⟩
           -- hlow : 3^e − 1 = 2^i ; hhigh : 3^e + 1 = 2^j
           have h3e : 3 ^ e = 9 * 3 ^ (e - 2) := by
-            rw [← Nat.pow_add]; congr 1; omega
+            have hidx : e = 2 + (e - 2) := by omega
+            rw [hidx, Nat.pow_add]
+            norm_num
           rcases (show e = 0 ∨ e = 1 ∨ 2 ≤ e by omega) with e0 | e1 | e2
           · rw [e0] at hlow; norm_num at hlow
-            have := pow_ge_one 3 e (by omega)
+            have h2ipos : 1 ≤ 2 ^ i := pow_ge_one 2 i (by omega)
             omega
-          · rw [e1] at hlow hhigh hmaster; norm_num at hlow hhigh hmaster
+          · rw [e1] at hlow hhigh
+            rw [he2, e1] at hmaster
+            norm_num at hlow hhigh hmaster
             omega
           · -- e ≥ 2: 2^i ≥ 8, so i ≥ 3, so 8 ∣ 2^i; 2^j = 2^i + 2 ≡ 2 (mod 8) ⟹ j = 1 ⟹ 2 = 2^i + 2 ⟹ 2^i = 0 ✗
             have hige : 3 ≤ i := by
@@ -292,21 +294,28 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
             have hdiff : 2 ^ j = 2 ^ i + 2 := by omega
             have hmod2 : (2 ^ j) % 8 = 2 := by omega
             have hj1 : j = 1 := pow2_mod8_two j hmod2
+            rw [hj1] at hdiff
+            norm_num at hdiff
             omega
         · ----- d = 2e+1: the mod-8 law -----
+          have hmaster' : 2 ^ a + 1 = 3 ^ (2 * e + 1) := by rw [← he2]; exact hmaster
           have hmod8 : (2 ^ a) % 8 = 2 := by
             have hodd8 : (3 ^ (2 * e + 1)) % 8 = 3 := pow3_odd_mod8 e
             have hpos : 1 ≤ 2 ^ a := pow_ge_one 2 a (by omega)
             have hpos3 : 1 ≤ 3 ^ (2 * e + 1) := pow_ge_one 3 (2 * e + 1) (by omega)
-            have hme : 2 ^ a = 3 ^ (2 * e + 1) - 1 := by omega
             omega
           have ha1 : a = 1 := pow2_mod8_two a hmod8
           -- 2^1 + 1 = 3^(2e+1) = 3·3^(2e) ≥ 9 (e ≥ 1): contradiction
           have h3e : 3 ^ (2 * e + 1) = 3 * 3 ^ (2 * e) := by
-            rw [Nat.pow_add]; norm_num
-          have h3e1 : 1 ≤ 3 ^ (2 * e) := pow_ge_one 3 (2 * e) (by omega)
-          rw [he2, ha1] at hmaster
-          norm_num at hmaster
+            rw [Nat.pow_add, Nat.pow_one]
+            ring
+          have h3big : 3 ^ (2 * e) = 9 * 3 ^ (2 * e - 2) := by
+            have hidx : 2 * e = 2 + (2 * e - 2) := by omega
+            rw [hidx, Nat.pow_add]
+            norm_num
+          have h3e1' : 1 ≤ 3 ^ (2 * e - 2) := pow_ge_one 3 (2 * e - 2) (by omega)
+          rw [ha1] at hmaster'
+          norm_num at hmaster'
           omega
     · ----- d = 0 with b ≥ 1: n + 1 = 1 ⟹ n = 0 ✗ -----
       rw [hd0] at hnp1; norm_num at hnp1; omega
@@ -319,13 +328,13 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
         by_contra hcon
         have hdge : 1 ≤ d := by omega
         have h3np : 3 ∣ (n + 1) := by
-          have h3d : 3 ^ d = 3 * 3 ^ (d - 1) := by
+          have h3d : 3 ^ d = 3 ^ (d - 1) * 3 := by
             rw [← Nat.pow_succ]; congr 1; omega
           refine ⟨3 ^ (d - 1), ?_⟩
           rw [← hcd, h3d]
           ring
         have h3n : 3 ∣ n := by
-          have h3b : 3 ^ b = 3 * 3 ^ (b - 1) := by
+          have h3b : 3 ^ b = 3 ^ (b - 1) * 3 := by
             rw [← Nat.pow_succ]; congr 1; omega
           refine ⟨3 ^ (b - 1), ?_⟩
           rw [← hb, h3b]
@@ -339,8 +348,9 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
       · rcases (show c = 0 ∨ c = 1 ∨ c = 2 by omega) with c0 | c1 | c2
         · rw [c0] at hnp1c; norm_num at hnp1c; omega
         · rw [c1] at hnp1c; norm_num at hnp1c
-          have h3b : 3 ^ b = 3 * 3 ^ (b - 1) := by
+          have h3b : 3 ^ b = 3 ^ (b - 1) * 3 := by
             rw [← Nat.pow_succ]; congr 1; omega
+          have h3pos : 1 ≤ 3 ^ (b - 1) := pow_ge_one 3 (b - 1) (by omega)
           omega
         · rw [c2] at hnp1c; norm_num at hnp1c; omega
       · -- c ≥ 3: 2^c ≡ 0 (mod 8) ⟹ 3^b ≡ 7 (mod 8) — impossible
@@ -366,21 +376,19 @@ theorem erdos961_run23 : ∀ n : Nat, 3 < n → Smooth23 n → Smooth23 (n + 1) 
 
 /-! ## §3 The prime machinery (fuel-based, core-safe). -/
 
-/-- Every v ≥ 2 has a prime factor (fuel induction). -/
-theorem exists_prime_dvd (fuel : Nat) (v : Nat) (hvf : v ≤ fuel) (hv : 2 ≤ v) :
+/-- Every v ≥ 2 has a prime factor (fuel induction, ∀ inside). -/
+theorem exists_prime_dvd (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 2 ≤ v →
     ∃ p, IsPrime p ∧ p ∣ v := by
   induction fuel with
-  | zero => omega
+  | zero => intro v hvf; omega
   | succ fuel ih =>
-      rcases (show IsPrime v ∨ ¬ IsPrime v by
-        by_cases h : IsPrime v
-        · exact Or.inl h
-        · exact Or.inr h) with hpr | hnp
+      intro v hvf hv
+      by_cases hpr : IsPrime v
       · exact ⟨v, hpr, Nat.dvd_refl v⟩
       · have hfactor : ∃ d, 2 ≤ d ∧ d < v ∧ d ∣ v := by
           by_contra hcon
           push_neg at hcon
-          apply hnp
+          apply hpr
           refine ⟨hv, ?_⟩
           intro d hdd
           have hdv : d ≤ v := Nat.le_of_dvd (by omega) hdd
@@ -397,12 +405,14 @@ theorem exists_prime_dvd (fuel : Nat) (v : Nat) (hvf : v ≤ fuel) (hv : 2 ≤ v
         obtain ⟨p, hpp, hpd⟩ := ih d hdlt (by omega)
         exact ⟨p, hpp, hpd.trans hddvd⟩
 
-/-- No prime > 3 dividing v, v ≥ 1 ⟹ v is {2,3}-smooth (fuel induction). -/
-theorem no_big_prime_smooth23 (fuel v : Nat) (hv : v ≤ fuel) (h1 : 1 ≤ v)
-    (hbig : ∀ p, IsPrime p → p ∣ v → p ≤ 3) : Smooth23 v := by
+/-- No prime > 3 dividing v, v ≥ 1 ⟹ v is {2,3}-smooth (fuel induction,
+∀ inside). -/
+theorem no_big_prime_smooth23 (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 1 ≤ v →
+    (∀ p, IsPrime p → p ∣ v → p ≤ 3) → Smooth23 v := by
   induction fuel with
-  | zero => omega
+  | zero => intro v hv; omega
   | succ fuel ih =>
+      intro v hv h1 hbig
       rcases (show v = 1 ∨ 2 ≤ v by omega) with h1' | h2'
       · refine ⟨0, 0, ?_⟩
         rw [h1']
@@ -415,8 +425,7 @@ theorem no_big_prime_smooth23 (fuel v : Nat) (hv : v ≤ fuel) (h1 : 1 ≤ v)
           have hvm : 2 ∣ v := by rw [hp2] at hpd; exact hpd
           rw [Nat.dvd_iff_mod_eq_zero] at hvm
           have hdm := Nat.div_add_mod v 2
-          have hv2w : v = 2 * (v / 2) := by omega
-          obtain ⟨w, hw⟩ : ∃ w, v = 2 * w := ⟨v / 2, hv2w⟩
+          obtain ⟨w, hw⟩ : ∃ w, v = 2 * w := ⟨v / 2, by omega⟩
           have hw1 : 1 ≤ w := by obtain ⟨k, hk⟩ := hpd; rw [hp2] at hk; omega
           have hwlt : w < v := by omega
           have hwdvd : w ∣ v := ⟨2, by rw [hw, Nat.mul_comm]⟩
@@ -433,8 +442,7 @@ theorem no_big_prime_smooth23 (fuel v : Nat) (hv : v ≤ fuel) (h1 : 1 ≤ v)
           have hvm : 3 ∣ v := by rw [hp3] at hpd; exact hpd
           rw [Nat.dvd_iff_mod_eq_zero] at hvm
           have hdm := Nat.div_add_mod v 3
-          have hv3w : v = 3 * (v / 3) := by omega
-          obtain ⟨w, hw⟩ : ∃ w, v = 3 * w := ⟨v / 3, hv3w⟩
+          obtain ⟨w, hw⟩ : ∃ w, v = 3 * w := ⟨v / 3, by omega⟩
           have hw1 : 1 ≤ w := by obtain ⟨k, hk⟩ := hpd; rw [hp3] at hk; omega
           have hwlt : w < v := by omega
           have hwdvd : w ∣ v := ⟨3, by rw [hw, Nat.mul_comm]⟩
@@ -631,7 +639,7 @@ theorem smooth23_no3 (v : Nat) (h : Smooth23 v) (h3 : ¬ 3 ∣ v) :
   · rw [hb0, Nat.pow_zero, Nat.mul_one] at hab
     exact hab.symm
   · exfalso
-    have h3b : 3 ^ bb = 3 * 3 ^ (bb - 1) := by
+    have h3b : 3 ^ bb = 3 ^ (bb - 1) * 3 := by
       rw [← Nat.pow_succ]; congr 1; omega
     apply h3
     refine ⟨3 ^ (bb - 1), ?_⟩
@@ -714,14 +722,14 @@ theorem erdos961_f2 : f961 2 = 2 := by
     rcases (show i = 0 ∨ 1 ≤ i by omega) with i0 | i1
     · rw [i0] at hi; norm_num at hi; omega
     · have h2i : (2 ^ i) % 2 = 0 := by
-        have hpow : 2 ^ i = 2 * 2 ^ (i - 1) := by
+        have hpow : 2 ^ i = 2 ^ (i - 1) * 2 := by
           rw [← Nat.pow_succ]; congr 1; omega
         rw [hpow, Nat.mul_mod]
         norm_num
       rcases (show j = 0 ∨ 1 ≤ j by omega) with j0 | j1
       · rw [j0] at hj; norm_num at hj; omega
       · have h2j : (2 ^ j) % 2 = 0 := by
-          have hpow : 2 ^ j = 2 * 2 ^ (j - 1) := by
+          have hpow : 2 ^ j = 2 ^ (j - 1) * 2 := by
             rw [← Nat.pow_succ]; congr 1; omega
           rw [hpow, Nat.mul_mod]
           norm_num
