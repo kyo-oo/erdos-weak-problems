@@ -1,10 +1,25 @@
-# CI battery for #700 (dual-method, budget-tight):
+# CI battery for #700 (dual-method, budget-tight, SYMPY-FREE for the CI runner):
 #  Part 1: the carry lemma v_p(C(p^a,k)) = a - v_p(k) — Legendre-method sweep
 #          vs the law prediction (79k+ instances, pure arithmetic, seconds).
 #  Part 2: the f-law f(p^a) = p by EXACT binomial gcd sweeps, cross-checked
 #          against the ErSz equality condition (n <= 2048 cap: CI-budget tight).
 import sys
 from math import comb, gcd
+
+
+def sieve(n):
+    """Primes < n (inline, sympy-free)."""
+    if n < 3:
+        return []
+    flags = bytearray([1]) * n
+    flags[0] = flags[1] = 0
+    i = 2
+    while i * i < n:
+        if flags[i]:
+            flags[i * i::i] = bytearray(len(flags[i * i::i]))
+        i += 1
+    return [i for i in range(n) if flags[i]]
+
 
 def vp_fact(m, p):
     s = 0
@@ -13,8 +28,10 @@ def vp_fact(m, p):
         s += m
     return s
 
+
 def vp_binom(n, k, p):
     return vp_fact(n, p) - vp_fact(k, p) - vp_fact(n - k, p)
+
 
 def vp_of(k, p):
     c = 0
@@ -23,11 +40,12 @@ def vp_of(k, p):
         c += 1
     return c
 
+
 ok = True
 
 # Part 1: carry lemma sweep (Legendre method vs a - v_p(k))
 tested = 0
-for p in [2, 3, 5, 7, 11, 13]:
+for p in sieve(16):  # 2, 3, 5, 7, 11, 13
     for a in range(2, 8):
         n = p ** a
         for k in range(1, min(n, 5000)):
@@ -44,7 +62,7 @@ print(f"carry lemma: {tested} instances {'ALL VERIFIED' if ok else 'FAILURES'}")
 
 # Part 2: f-table by exact gcd sweeps (dual method: sweep value vs law p and
 # the ErSz equality f = n/P(n) which must hold exactly at a = 2, fail for a>=3)
-for p in [2, 3, 5, 7, 11, 13]:
+for p in sieve(16):
     a = 2
     while p ** a <= 2048:
         n = p ** a
