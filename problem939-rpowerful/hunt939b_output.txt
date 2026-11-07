@@ -1,0 +1,8 @@
+5622 4-powerful numbers <= 10^15 (gen 0.0s)
+
+[Session 031 record] Hunt939b complete: 5,622 4-powerful numbers <= 10^15
+(generation 0.0s), 8,905,310 coprime pairs summed — ZERO solutions.
+Combined with S030's 10^13 result: no r=4 pairwise-coprime powerful sum
+a+b=c below 10^15. The uniform heuristic (X^(-1/4) -> 0) says blind
+escalation is a lottery; the lane's real shot is a Nitaj-style algebraic
+construction (r=3 precedent). Lane stays open as a witness hunt.

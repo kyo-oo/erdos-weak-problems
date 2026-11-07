@@ -101,12 +101,20 @@ theorem pow_ge_two (p a : Nat) (hp : 2 ≤ p) (ha : 1 ≤ a) : 2 ≤ p ^ a :=
   Nat.le_trans (two_pow_ge_two a ha) (pow_le_pow_base 2 p a hp)
 
 /-- The power-split bridge: `p ^ a = p * p ^ (a - 1)` for a ≥ 1
-(via `Nat.pow_succ'`, the +1-form successor law). -/
+(via `Nat.pow_succ'`, implicit-arg succ-form). -/
 theorem ppow_split (p a : Nat) (ha : 1 ≤ a) : p ^ a = p * p ^ (a - 1) := by
-  have h1 := Nat.pow_succ' p (a - 1)
-  have hae : (a - 1) + 1 = a := by omega
+  have h1 : p ^ (Nat.succ (a - 1)) = p * p ^ (a - 1) := Nat.pow_succ'
+  have hae : Nat.succ (a - 1) = a := by omega
   rw [hae] at h1
   exact h1
+
+/-- Exact division of a self-product: `p * b / p = b` for p ≥ 1. -/
+theorem mul_div_self (p b : Nat) (hp : 1 ≤ p) : p * b / p = b := by
+  have h1 := Nat.div_add_mod (p * b) p
+  have h2 : (p * b) % p = 0 := by
+    rw [Nat.mul_mod, Nat.mod_self, Nat.zero_mul, Nat.zero_mod]
+  rw [h2, Nat.add_zero] at h1
+  exact Nat.mul_left_cancel hp h1
 
 /-! ## §2 THE p-ADIC VALUATION (fuel-structural, the K11 vpad architecture) -/
 
@@ -344,7 +352,7 @@ theorem pow_dvd_iff (p : Nat) (hp : 2 ≤ p) : ∀ (F i n : Nat), i ≤ F → 1 
         omega
       · constructor
         · intro hdvd
-          have hpp1 : p ∣ p ^ (i' + 1) := ⟨p ^ i', Nat.pow_succ' p i'⟩
+          have hpp1 : p ∣ p ^ (i' + 1) := ⟨p ^ i', Nat.pow_succ'⟩
           exact absurd (Nat.dvd_trans hpp1 hdvd) hpd
         · intro hle
           have h1 : 1 ≤ vp p n := by omega
@@ -883,7 +891,8 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hp : 2 ≤ p := hpp.one_lt
   have hk01 : 1 ≤ p ^ (a - 1) := pow_ge_one p (by omega) (a - 1)
   have hpowlt : p ^ (a - 1) < p ^ a := by
-    have hsplit : p ^ a = p ^ (a - 1) * p := (ppow_split p a (by omega)).symm
+    have hsplit : p ^ a = p * p ^ (a - 1) := ppow_split p a (by omega)
+    have hcomm : p ^ (a - 1) * p = p * p ^ (a - 1) := Nat.mul_comm _ _
     have h2 : p ^ (a - 1) * 2 ≤ p ^ (a - 1) * p :=
       Nat.mul_le_mul_left (p ^ (a - 1)) hp
     omega
@@ -1007,7 +1016,7 @@ theorem erdos700_equality_class (p : Nat) (hpp : p.Prime) :
     f700 (p ^ 2) = p ∧ p ^ 2 / p = p ∧ ∀ q, q.Prime → q ∣ p ^ 2 → q = p := by
   have hp : 2 ≤ p := hpp.one_lt
   refine ⟨erdos700_law p 2 hpp (by omega), ?_, ?_⟩
-  · rw [Nat.pow_two, Nat.mul_div_cancel_left _ (by omega : 1 ≤ p)]
+  · rw [Nat.pow_two, mul_div_self p p (by omega : 1 ≤ p)]
   · intro q hqp hqdvd
     have hqdp : q ∣ p := prime_dvd_pow_of q hqp 2 p hqdvd
     have hiff : q ∣ p ↔ q = 1 ∨ q = p := Nat.dvd_prime hpp
@@ -1019,8 +1028,7 @@ theorem erdos700_violation (p a : Nat) (hpp : p.Prime) (ha : 3 ≤ a) :
     f700 (p ^ a) = p ∧ p ^ a / p = p ^ (a - 1) ∧ p < p ^ (a - 1) := by
   have hp : 2 ≤ p := hpp.one_lt
   refine ⟨erdos700_law p a hpp (by omega), ?_, ?_⟩
-  · rw [ppow_split p a (by omega),
-      Nat.mul_div_cancel_left _ (by omega : 1 ≤ p)]
+  · rw [ppow_split p a (by omega), mul_div_self p (p ^ (a - 1)) (by omega : 1 ≤ p)]
   · have h1 : p * 2 ≤ p * p := Nat.mul_le_mul_left p hp
     have h2 : p ^ 2 ≤ p ^ (a - 1) := pow_le_mono p (by omega) 2 (a - 1) (by omega)
     have h3 : p ^ 2 = p * p := Nat.pow_two p
