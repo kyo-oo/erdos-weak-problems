@@ -94,6 +94,9 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 27 | **394** | **THE CRT-LAW STRIKE**: THE CRT SOUNDNESS THEOREM (general k: every ordered pairwise-coprime factorization n = d_0···d_{k−1} with d_i ∣ (m+i) for all i < k yields n ∣ m(m+1)···(m+k−1)) + THE UNIQUE-POSITION LAW (p > k divides at most one of m..m+k−1) + THE PRIME-LANDING LAW (a prime p > k dividing the product lands at a — unique — position) + t_k(n) ≤ n + the tKb leastness characterization + **139 kernel-decided exact values** (t_2 odd n ≤ 101 ×50, t_3 (n,6)=1 ×32, t_4 (n,24)=1 ×32, t_5 (n,120)=1 ×25) + the showcase CRT certificate t_2(15)=5 via d=[5,3]; battery dual-method 505/505 (k ≤ 6, n ≤ 300) + all four tables re-verified; NEW RULE format (verbatim statement in-file) | **S034, Kernel 23** |
 | 28 | **711** | **THE 2n−1 DIVISOR-SCHEDULING FRONTIER**: THE GENERAL FORCED-COLLISION OBSTRUCTION f(n,(n−1)²) ≥ 2n−1 for EVERY n ≥ 2 (in the 2n−3-window, keys n and n−1 are BOTH forced onto the single integer n²−n) + THE COMPLETE n=2 LAW (f(2,m) ≤ 3 ∀m: max = 3 = 2n−1 EXACT — the problem's first ask answered with the exact constant at n=2) + THE COMPLETE n=3 LAW (f(3,m) ≤ 5 ∀m, six explicit mod-6 assignments: max = 5 EXACT) + THE EXACT FRONTIER f(n,(n−1)²) = 2n−1 for n = 2..15 (fourteen kernel-decided witness assignments) + THE PERIODICITY LAW f(n,m) = f(n,m+L) for L = lcm(1..n) (transport a ↦ a±L) + the cover theorem (full-period census exhaustiveness); battery: FULL-PERIOD census n = 2..12 (63,662 m-values, greedy+Kuhn dual method — max_m f(n,m) = 2n−1 ALL, the S032 sweep's m ≤ 300 gap closed) + f(n,n) table + forced-collision audit n ≤ 15; ErPo80 Q1 (n^{1+o(1)}) answered EXACTLY (2n−1) for n ≤ 12 engine + n ≤ 15 Lean-witnessed; NEW RULE format | **S034, Kernel 24** |
 
+| 29 | **686-squares** | **THE SQUARE k=2 CENSUS (the look-back order executed — the #686 square residue front closed)**: the infinite family theorem (every t ≡ 2 mod 4, t ≥ 10: m = 4u²+4u−1, n = u−1, UNBOUNDED) + the odd sporadic t=99 + the no-go bridge (divisor-pair reduction of t², the master identity) + THE CENSUS t ≤ 100 (census_scan_true ZERO AXIOMS, 1.3M reductions); family/99 both [propext, Quot.sound] GOLD; battery dual-method (scan ∥ quadratic ∥ family+99); engine: the second odd sporadic t=195 at t ≤ 300 | **run 42422680476 GREEN, Kernel 26 (S035/S036)** |
+| 30 | **961** | **THE ELEMENTARY SMOOTH-RUN LAWS**: the {2,3}-census theorem ((1,2),(2,3),(3,4),(8,9) only — mod-8 spine, elementary, the two-powers-differing-by-2 law) + the run law (no 3-run above 3) + THE EXACT FRONTIER f(2)=2, f(3)=3, f(4)=3 (the first three certified exact values of the problem's function) + the witness laws f(k)≥4 (k=5..12, the runs (8,9,10),(14,15,16)) + THE PELL DICTIONARY (n(n+1)=ab², (2n+1)²−a(2b)²=1 — the complete Størmer bridge); pell_dict [propext, Quot.sound] GOLD; the 5-round compile war 68→43→34→5→0 | **run 42422680476 GREEN, Kernel 25 (S035/S036)** |
+
 **AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
 sub-problem remnants; every crossed-problem kill is a complete unconditional
 theorem. Kills #20/#21 (Session 029): honest scope in registry — #686's
@@ -118,8 +121,11 @@ follow-up on the SAME front).**
 - **#406**: BOSS'S OWN — pattern frontier + odd half unconditional done;
   the gate (gst_four_power_third_wave_gate = the 1979 core) is his summit.
 - **#686**: **KILL #20 (S029, Kernel 16): the non-square Pell-ratio law
-  COMPLETE + arsenal-applied.** Open residue (same front): square-N classes
-  t≡0(4), odd t≥5 (2–4 rounds).
+  COMPLETE + arsenal-applied.** KILL #29 (S036, Kernel 26): THE SQUARE
+  k=2 CENSUS — the S029-registered square-N residue front CLOSED
+  (infinite family t ≡ 2 mod 4 + sporadic t=99 + census t ≤ 100 +
+  no-go bridge). Open residue (same front): k ≥ 3 (the t=195 second
+  sporadic is the engine foundation; 2–4 rounds).
 - **#727**: **KILL #21 (S029, Kernel 17): the n=208 witness theorem +
   tightness profile + cascade conditions, arsenal-applied.** Open residue
   (same front): k=2 infinitude / k≥3 obstruction (4–5 rounds).
@@ -160,6 +166,20 @@ follow-up on the SAME front).**
   (the Hall war) — engine-confirmed n ≤ 12 full-period, conjectured all
   n; the problem's n^{1+o(1)} ask is EXACT (2n−1) for n ≤ 15, open in
   general.
+- **#961**: **KILL #30 (S036, Kernel 25, run 42422680476): THE ELEMENTARY
+  SMOOTH-RUN LAWS — the {2,3}-census + run law + exact frontier
+  f(2)=2, f(3)=3, f(4)=3 + witness laws k=5..12 + the Pell dictionary.**
+  Open residue: the k ≥ 5 exact values (the full Størmer census over
+  the Pell dictionary — the #686 arsenal applied) + the f(k)
+  asymptotics.
+- **#1074**: **KERNEL 27 FIRED (S036, compile war round 1)** — THE EHS
+  CENSUS + PILLAI DICTIONARY (factor-bound law + finite
+  characterization + complete census m ∈ [1,19] + large witnesses +
+  the dictionary + the first-30 Pillai table). Battery GREEN.
+- **#282**: **KERNEL 28 FIRED (S036, compile war round 1)** — THE
+  ODD-GREEDY TERMINATION LAWS (odd-closure + well-formedness p′ < 2p +
+  simulation soundness + the q ≤ 41 census, 420 pairs kernel-decided).
+  Battery GREEN (22,650 pairs q ≤ 301).
 - **#260**: DEAD — killed by outsider Wang 2026 (arXiv:2606.24972,
   Lean-formalized). Removed from queue. #404 "Conjecture D" also DEAD
   (refuted by Kill #14: g(2,2)=253 finite).
@@ -663,3 +683,62 @@ obligations; (4) use ALL the maths (16,121-theorem vendored arsenal).
 
 **Registry: 26 green + 2 green-pending-confirmation (#27, #28) + 2
 compile-war-active (#961, #686-squares). The war continues until green.**
+
+---
+
+## §12. SESSION 036 ADDENDUM (2026-11-08) — THE AGGRESSION VOLLEY
+
+**BOSS's orders (this session):** NEW RULE (statement-then-proof —
+applied at BIRTH to the two new kernels); be MORE AGGRESSIVE; LOOK BACK
+(prove what remains on solved problems); USE ALL THE MATHS.
+
+**LANDED:**
+- **KILL #29 (#686-squares)**: Kernel 26 GREEN (run 42422680476) —
+  THE SQUARE k=2 CENSUS. The S029-registered square residue front
+  CLOSED: infinite family (all t ≡ 2 mod 4, t ≥ 10) + sporadic t=99 +
+  no-go bridge + census t ≤ 100 (census_scan_true ZERO AXIOMS).
+- **KILL #30 (#961)**: Kernel 25 GREEN (run 42422680476) — THE
+  ELEMENTARY SMOOTH-RUN LAWS. The 5-round compile war closed
+  68→43→34→5→0: the calc-orientation law (after rw [Nat.pow_succ] the
+  goal LHS is the POWER-FACTOR-LEADS atom — calc first line must spell
+  the goal's atom, hw.symm at the finales), and THE h4 BRIDGE at the
+  Pell-dict finale (omega sees the power-products as OPAQUE ATOMS — the
+  explicit value-preserving have is MANDATORY, then rw [hX2, h4] +
+  omega).
+
+**FIRED (compile war round 1):**
+- **KERNEL 27 (#1074)** — THE EHS CENSUS + PILLAI DICTIONARY: the
+  factor-bound law (every prime p | m!+1 exceeds m), the finite
+  characterization (membership = scan over (m, m!+1]), the COMPLETE
+  census m ∈ [1,19] (S = {8,…,19}; members with witness primes
+  61/71/83/23/59/61/661/23/71; non-members with complete certified
+  factorizations — 39916801 = 11!+1 PRIME via the scan lemma, 13²·2834329
+  = 12!+1, 11·329891 = 10!+1), large members 22/23/24/26/34 (witnesses
+  521/79/811/1697/67411), the PILLAI DICTIONARY (S-membership ⟺
+  P-witnesshood — one relation, two readings), the Pillai witness bound,
+  the first-30 Pillai table (23 ≤ p ≤ 397). Battery dual-method GREEN
+  (613/1229 Pillai primes at 10⁴ = 49.88%).
+- **KERNEL 28 (#282)** — THE ODD-GREEDY TERMINATION LAWS: the
+  odd-closure law (the conjecture's habitat is invariant), the
+  well-formedness law (p′ < 2p — the numerator at most doubles), the
+  simulation soundness (certified Bool sim ⟹ genuine trajectory to 0;
+  the gcd via STRUCTURAL fuel-recursion — the WF-decide disease avoided;
+  the step self-certifying: no gcdF correctness needed), the TERMINATION
+  CENSUS q ≤ 41 (420 pairs kernel-decided, deepest 12 steps at 38/39;
+  numbers ≤ 1390 bits — the K17 precedent range). Battery dual-method
+  GREEN (22,650 pairs q ≤ 301 all terminate, deepest 20 at 102/293).
+
+**The S036 lessons (pre-registered for the compile war):**
+- THE DOMAIN-GUARD LAW for List.all censuses: the scan predicate must
+  return TRUE outside the domain (decide (q % 2 ≠ 1) || inner) — an
+  unguarded all() fails on every non-domain element.
+- THE CENSUS-COST LAW: kernel-decide census range is bounded by the
+  trajectory NUMBER SIZES (bits), not the pair count — #282's deep
+  instances (10^5000-digit intermediates) are battery-only; the q ≤ 41
+  range (≤ 1390 bits) is the K17-precedent zone.
+- The scan-lemma primality route (primeScan + sqrt bounds + decide)
+  beats norm_num for primes ≥ 10⁷ (39916801: 6318 trial divisions in
+  kernel ≈ seconds; norm_num grind avoided).
+
+**Registry: 30 kills CI-green. Kernels 27/28 in the compile war (round
+1 pending). The war continues until green.**

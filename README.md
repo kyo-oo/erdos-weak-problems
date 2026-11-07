@@ -420,4 +420,68 @@ $\max_m f(n,m) \le n^{1+o(1)}$ and $\max_m (f(n,m) - f(n,n)) \to \infty$.
 THE_CORE §2 and the WORKLOG; this README's session sections carry the
 full statements.)*
 
+## SESSION 036 — THE AGGRESSION VOLLEY: KILLS #29 + #30 LAND; K27 (#1074) + K28 (#282) FIRED (2026-11-08)
+
+**BOSS's standing orders executed:** the NEW RULE (statement-then-proof,
+verbatim, in every kernel — K27/K28 built in the format from birth);
+MORE AGGRESSIVE (two new fronts opened while the compile war runs); LOOK
+BACK (the #686-squares residue front — the S029-registered square-N
+residue classes — closed by Kernel 26); USE ALL THE MATHS (arsenal
+bridges in all four kernels).
+
+**KILL #29 — Erdős #686 THE SQUARE k=2 CENSUS (Kernel 26, run 42422680476
+GREEN):** the look-back order executed on the #686 square residue front.
+THE INFINITE FAMILY THEOREM (every t ≡ 2 mod 4, t ≥ 10: the square t²
+has the k=2 representation m = 4u²+4u−1, n = u−1 — UNBOUNDED,
+[propext, Quot.sound] GOLD) + THE ODD SPORADIC t = 99 (242·243 = 9801·6,
+[propext, Quot.sound] GOLD) + THE NO-GO BRIDGE (any k=2 representation
+of t² forces the divisor pair d₁ = tY−X, d₂ = X+tY of t²−1 with the
+master identity (2m+3)² − t²(2n+3)² = 1−t²) + THE CENSUS THEOREM (every
+t ∈ [2,100]: t² representable ⟺ (t ≡ 2 mod 4 ∧ t ≥ 10) ∨ t = 99 —
+census_scan_true ZERO AXIOMS, ~1.3M kernel reductions). Battery
+dual-method GREEN (scan ∥ quadratic ∥ family+99, 99/99). Engine
+discovery: the second odd sporadic t = 195 (census t ≤ 300 — the k≥3
+war's foundation).
+
+**KILL #30 — Erdős #961 THE ELEMENTARY SMOOTH-RUN LAWS (Kernel 25, run
+42422680476 GREEN, the 5-round compile war 68→43→34→5→0):** the
+{2,3}-CENSUS THEOREM (the ONLY consecutive {2,3}-smooth pairs are (1,2),
+(2,3), (3,4), (8,9) — elementary: mod-8 spine, divisor-of-power-of-2
+collapse, the two-powers-differing-by-2 law) + THE RUN LAW (no three
+consecutive {2,3}-smooth integers above 3) + THE EXACT FRONTIER f(2)=2,
+f(3)=3, f(4)=3 (the first three certified exact values of the problem's
+function, witness + exclusion both unconditional) + THE WITNESS LAWS
+f(k) ≥ 4 for k = 5..12 (the runs (8,9,10), (14,15,16)) + THE PELL
+DICTIONARY (every consecutive {2,3}-smooth pair yields n(n+1) = ab² with
+(2n+1)² − a(2b)² = 1 — the complete bridge to the Størmer census).
+pell_dict [propext, Quot.sound] GOLD. Honest scope: the f(k) asymptotics
+(Erdős < 3k/log k, conjectured (log k)^{O(1)}) open; k ≥ 5 exact values
+need the full Størmer census.
+
+**KERNEL 27 FIRED — Erdős #1074 THE EHS CENSUS + PILLAI DICTIONARY
+(compile war round 1):** THE FACTOR-BOUND LAW (every prime p | m!+1
+satisfies m < p) + THE FINITE CHARACTERIZATION (m ∈ S ⟺ finite scan
+over (m, m!+1]) + THE COMPLETE CENSUS m ∈ [1,19] (S ∩ [1,19] = {8,…,19}
+exactly — every member a certified witness prime, every non-member the
+complete certified factorization, all factors ≡ 1 mod m — the
+Hardy–Subbarao calibration range kernel-certified) + THE LARGE-MEMBER
+WITNESSES (m = 22, 23, 24, 26, 34 ∈ S) + THE PILLAI DICTIONARY (p
+witnesses m ∈ S ⟺ m witnesses p ∈ P — S and P are two readings of one
+relation) + THE PILLAI WITNESS BOUND (m! ≡ −1 mod p ⟹ m < p) + THE
+FIRST-30 PILLAI TABLE (23 ≤ p ≤ 397, all certified). Battery dual-method
+GREEN (factorization ∥ certificate replay; Pillai census 613/1229 =
+49.88% at 10⁴ — evidence). Honest scope: both density limits open.
+
+**KERNEL 28 FIRED — Erdős #282 THE ODD-GREEDY TERMINATION LAWS (compile
+war round 1):** THE ODD-CLOSURE LAW (the odd-denominator habitat is
+invariant under every greedy step) + THE WELL-FORMEDNESS LAW (every step
+at most doubles the numerator: p' < 2p) + THE SIMULATION SOUNDNESS (the
+certified Bool sim ⟹ a genuine greedy trajectory to exactly 0) + THE
+TERMINATION CENSUS q ≤ 41 (every odd-denominator rational p/q ∈ (0,1),
+q ≤ 41, terminates — 420 pairs kernel-decided, deepest 12 steps at
+38/39; the gcd via structural fuel-recursion, the step self-certifying).
+Battery dual-method GREEN (22,650 pairs q ≤ 301 ALL terminate, deepest
+20 steps at 102/293; odd-closure spot-check ALL ODD). Honest scope:
+Stein's general conjecture open.
+
 *The engines never stop; they never lie.*

@@ -1348,3 +1348,65 @@ extension is the mechanical round-3 amplifier.
 #30 (#686-squares) at Round 7.** Registry: 26 green + 4 pending.
 
 *The engines never stop; they never lie.*
+
+## SESSION 036 (2026-11-08) — THE AGGRESSION VOLLEY: KILLS #29/#30 LAND, K27/K28 FIRED
+
+BOSS's orders: NEW RULE format at birth; MORE AGGRESSIVE; LOOK BACK;
+USE ALL THE MATHS. MATHS + prove-that-shit chain activated FIRST.
+
+1. K25 (#961) ROUND 5 pushed (f31b09a) after the run-42420884188
+   forensics (5 errors: two calc-orientation pairs + the line-977 omega
+   death). Fixes: the calc first lines now spell the post-rw goal atom
+   (2^aa * 2 * 3^bb / 2^aa * (3^bb * 3) — POWER FACTOR LEADS); hw.symm
+   at both finales; THE h4 BRIDGE at the Pell-dict finale (a(2b)(2b) =
+   4·n(n+1) via rw [hprod_ab] + ring, then rw [hX2, h4] + omega — the
+   monomial-atom law's last strike).
+2. **RUN 42422680476 GREEN — KILLS #29 (#686-squares, Kernel 26) and
+   #30 (#961, Kernel 25) LAND.** Registry 28 → 30. Receipts verified:
+   census_scan_true ZERO AXIOMS; family/99/PELL_DICT GOLD
+   [propext, Quot.sound]; K25 all theorems in-gate. The look-back order
+   executed: the #686 square residue front (S029-registered) CLOSED.
+3. THE #1074 EHS ENGINE (round 2): full census m ≤ 40 with witness
+   extraction (S = {1?,8,9,13,...}; the m=1 engine-bug caught —
+   p % 1 = 0 = 1 % 1 so m=1 is NOT a member; the uniform witness form
+   p % m ≠ 1 % m); the Pillai census 613/1229 = 49.88% at 10⁴ with
+   witness table. DUAL-METHOD verification of every certificate
+   (factorization ∥ witness replay; the 30 Pillai entries ∥ direct
+   factorial mod).
+4. THE #282 STEIN ENGINE (round 2): full census q ≤ 301 (22,650 pairs
+   ALL terminate; deepest 20 steps at 102/293); the q ≤ 41 kernel range
+   (deepest 12 at 38/39; numbers ≤ 1390 bits — the K17 precedent);
+   the trajectory-size wall discovered (deep instances reach 10^100000+
+   digits even reduced — kernel-decide architecturally impossible there
+   — battery-only evidence; honest scope).
+5. KERNEL 27 (#1074) BUILT: ~550 lines, NEW RULE format. The scan
+   lemma (primeScan + prime_of_scan via Nat.Prime's def-unfold + the
+   sqrt-bound case split), the Euclid list lemma (prime_dvd_prod_list
+   via Nat.Prime.dvd_mul — the K21-green pattern), nonmember_of_cert,
+   the 19-branch census, the mod_bridge (p ∣ a+1 ↔ a % p = p−1), the
+   dictionary, the Pillai table (pillai_data decide + pillai_primes
+   norm_num × 30). Self-audit fixed: hkey.symm (the Dvd anonymous
+   constructor wants 1 = p * k), two rw-direction errors in mod_bridge,
+   || → ∨ inside decide.
+6. KERNEL 28 (#282) BUILT: ~380 lines, NEW RULE format. GreedyStep +
+   TerminateIn (relational), odd-closure (Nat.mul_mod parity), step
+   bound (p′ < 2p — the n=1/n≥2 case split with the mul_add-fed
+   omega), greedyN_spec (the ceiling facts via Nat.div_add_mod feeding:
+   q ≤ p·n₀ and p·(n₀−1) < q; the n₀=0/q=0 edge handled by the n=1
+   disjunct), the STRUCTURAL fuel-gcd gcdF (WF-decide disease avoided;
+   correctness NOT needed — the step check self-certifies), simTerm
+   with in-step validation (the garbage-g spurious-termination trap
+   killed by design), simTerm_sound (one-directional), census282 with
+   DOMAIN GUARDS (decide (q % 2 ≠ 1) || … — the unguarded-all trap
+   caught in self-audit). Self-audit fixed: hF3 unprovable at
+   n₀=0/q=0 (restructured into the n₀ ≥ 1 branches), the census
+   guards, the %2-distribution (Nat.add_mod + norm_num, not omega).
+7. Batteries battery1074.py + battery282.py BOTH GREEN locally
+   (dual-method).
+8. CI: kills.yml + kernels 27/28 steps + the on.push.paths fix
+   (problem1074-ehs-pillai/**, problem282-odd-greedy/** — the S034
+   paths lesson). README SESSION 036 section; THE_CORE §2 rows #29/#30
+   + the scoreboard updates + §12 addendum. PUSHED — the compile war
+   round 1 fires.
+
+Registry: 30 CI-green kills. 28 kernels in CI. The engine never stops.

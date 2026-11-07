@@ -27,6 +27,8 @@ on:
       - problem711-divisor-matching/**
       - problem961-smooth-runs/**
       - problem686-pell-ratio/**
+      - problem1074-ehs-pillai/**
+      - problem282-odd-greedy/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -643,3 +645,35 @@ jobs:
           grep -E "Erdos686Sq.(erdos686sq_(family|99|noRep|census|arsenal_bridge|main)|census_scan_true)' (does not depend on any axioms|depends on axioms)" kernel26.log
           python3 problem686-pell-ratio/battery686sq.py
           echo ERDOS686SQ_CENSUS_KERNEL_GREEN=1
+
+      - name: "Kernel 27 - Erdos 1074 EHS CENSUS + PILLAI DICTIONARY (S036 volley): the factor-bound law + the finite characterization + the complete census m in [1,19] + large-member witnesses + the Pillai dictionary + witness bound + the first-30 Pillai table + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel27.log
+          lake env lean problem1074-ehs-pillai/Erdos1074.lean 2>&1 | tee -a kernel27.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel27.log
+          grep -F "ERDOS1074_EHS_KERNEL_GREEN" kernel27.log
+          grep -E "Erdos1074.erdos1074_(factor_bound|finite_char|census19|large|dictionary|pillai_bound|pillai_table|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel27.log
+          python3 problem1074-ehs-pillai/battery1074.py
+          echo ERDOS1074_EHS_CENSUS_KERNEL_GREEN=1
+
+      - name: "Kernel 28 - Erdos 282 STEIN ODD-GREEDY TERMINATION LAWS (S036 volley): the odd-closure law + the well-formedness law (p' < 2p) + the simulation soundness + the termination census q <= 41 (420 pairs kernel-decided) + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel28.log
+          lake env lean problem282-odd-greedy/Erdos282.lean 2>&1 | tee -a kernel28.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel28.log
+          grep -F "ERDOS282_STEIN_KERNEL_GREEN" kernel28.log
+          grep -E "Erdos282.(erdos282_(odd_closure|step_bound|census|arsenal_bridge|main)|simTerm_sound)' (does not depend on any axioms|depends on axioms)" kernel28.log
+          python3 problem282-odd-greedy/battery282.py
+          echo ERDOS282_STEIN_CENSUS_KERNEL_GREEN=1
