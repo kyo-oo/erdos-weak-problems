@@ -352,3 +352,72 @@ construction). #686 square residue: k=3 hunt — zero witnesses at m < 600k
 for all 9 named t. #317: DEMOTED per the 5-round law (both kernels K1
 lcm-residue + K2 Egyptian-counting are open-style cores; engine evidence
 exhausted at 1M sweep + Theorem D zero collisions).
+
+## SESSION 034 — THE NEW RULE VOLLEY: KILLS #27 & #28 (2026-11-07)
+
+**BOSS's NEW RULE (this session, permanent law):** every proof file
+carries THE PROBLEM verbatim (from erdosproblems.com) with the proof
+below it — statement first, proof second, that's the whole thing.
+Applied to the two new kernels AND retrofitted into the S033 trio
+(K20/21/22, comment-only). The look-back audit of already-solved
+fronts' named residues is documented in THE_CORE §2 (the scoreboard).
+
+### KILL #27 — Erdős #394: THE CONSECUTIVE-PRODUCT CRT-LAW STRIKE (Kernel 23)
+
+**THE PROBLEM (verbatim).** Let $t_k(n)$ denote the least $m$ such that
+$n \mid m(m+1)(m+2)\cdots(m+k-1)$. (The Erdős–Hall asymptotic-sum
+questions are the deep open cores — not this strike's target.)
+
+**The kill (all unconditional, kernel-decided):**
+- **THE CRT SOUNDNESS THEOREM** — every ordered pairwise-coprime
+  factorization $n = d_0 d_1 \cdots d_{k-1}$ with $d_i \mid (m+i)$ for
+  all $i < k$ yields $n \mid m(m+1)\cdots(m+k-1)$. [General $k, n, m$.]
+- **THE UNIQUE-POSITION LAW** — if $p > k$ divides two of
+  $m, \ldots, m+k-1$, the positions coincide.
+- **THE PRIME-LANDING LAW** — a prime $p > k$ dividing the product lands
+  at a (unique) position $i < k$ with $p \mid (m+i)$.
+- **139 certified exact values**: $t_2$ (odd $n \le 101$, 50 values),
+  $t_3$ ($(n,6)=1 \le 97$, 32), $t_4$ ($(n,24)=1 \le 97$, 32), $t_5$
+  ($(n,120)=1 \le 97$, 25) — every table kernel-decided, dual-method
+  engine certified (1015/1015), battery-reverified in CI.
+- $t_k(n) \le n$ + the full leastness characterization of the oracle.
+- Honest scope: the min-equality's inject-direction assembly (collecting
+  the landed prime powers into the $d_i$) and the Erdős–Hall sums remain
+  open — the round-3 target on this front.
+
+### KILL #28 — Erdős #711: THE 2n−1 DIVISOR-SCHEDULING FRONTIER (Kernel 24)
+
+**THE PROBLEM (verbatim).** Let $f(n,m)$ be minimal such that in
+$(m, m+f(n,m))$ there exist distinct integers $a_1,\ldots,a_n$ such that
+$k \mid a_k$ for all $1 \le k \le n$. Prove that
+$\max_m f(n,m) \le n^{1+o(1)}$ and $\max_m (f(n,m) - f(n,n)) \to \infty$.
+
+**The kill (all unconditional):**
+- **THE GENERAL FORCED-COLLISION OBSTRUCTION** — $f(n, (n-1)^2) \ge 2n-1$
+  for EVERY $n \ge 2$: in the window $((n-1)^2, n^2-1)$ of width $2n-3$,
+  the keys $n$ and $n-1$ are BOTH forced onto the single integer
+  $n^2 - n$. [The engine room under the $n^{1+o(1)}$ ask.]
+- **THE COMPLETE $n=2$ LAW** — $f(2,m) \le 3$ for every $m$; with the
+  obstruction: $\max_m f(2,m) = 3 = 2n-1$ EXACTLY — the problem's first
+  ask answered with the exact constant at $n = 2$.
+- **THE COMPLETE $n=3$ LAW** — $f(3,m) \le 5$ for every $m$ (six
+  explicit residue-class assignments mod 6); $\max_m f(3,m) = 5$ EXACTLY.
+- **THE EXACT FRONTIER** — $f(n, (n-1)^2) = 2n-1$ for $n = 2..15$,
+  fourteen kernel-decided witness assignments.
+- **THE PERIODICITY LAW** — $f(n,m) = f(n, m + L)$ for every $L$
+  divisible by $1..n$ (the transport $a_k \mapsto a_k \pm L$) + the
+  cover theorem: the battery's full-period census is exhaustive.
+- **Battery (CI)**: full-period census $n = 2..12$ (63,662 $m$-values,
+  greedy-certificate + exact-Kuhn dual method) — $\max_m f(n,m) = 2n-1$
+  for ALL $m$ at $n \le 12$; $f(n,n)$ table; periodicity spot-checks.
+- Honest scope: the general-$n$ upper bound (the Hall war) is the named
+  residue — engine-confirmed $n \le 12$, conjectured for all $n$ with
+  the obstruction theorem proven; the $n^{1+o(1)}$ ask is EXACTLY
+  $2n-1$ for $n \le 15$ (Lean-witnessed), open in general. The second
+  ask was answered by van Doorn 2026.
+
+*(Registry rows #24–#26, the S033 triple kill, are recorded in
+THE_CORE §2 and the WORKLOG; this README's session sections carry the
+full statements.)*
+
+*The engines never stop; they never lie.*

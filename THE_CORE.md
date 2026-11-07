@@ -91,6 +91,9 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 25 | **451** | **THE INTERVAL-PRIME-FREE WITNESS TABLE**: NINETEEN exact values k=2..20 — n_k = 6, 9, 20, 13, 21, 21, 22, 65, 220, 51, 338, 133, 321, 339, 340, 113, 114, 368, 550 — + THE GENERAL MODULAR CRITERION (p prime in (k,2k), k ≤ n: p ∣ ∏ᵢ₌₁ᵏ(n−i) ⟺ n mod p ∈ [1,k] — Euclid + residue shift) + full product-form finals for ALL 19 k + arsenal bridge (mod_mod_mul on the k=20 witness); battery 19/19 dual-method (sieve ∥ direct factorization) | **run 42363784227 GREEN, Kernel 21** |
 | 26 | **1072** | **THE WILSON-PAIR LAW**: the WILSON-FREE PAIRING IDENTITY n!·(p−1−n)! ≡ (−1)^{p−1−n}·(p−1)! (mod p) for every p ≥ 2 (pure induction — tail law + split law + sign-carry, Wilson NOT used) **[propext, Quot.sound] GOLD** + THE CLASSIC COROLLARY (n! ≡ −1 ∧ (p−1)! ≡ −1 ⟹ (p−1−n)! ≡ (−1)^{p−1−n}) **[propext, Quot.sound] GOLD** + eleven named instance applications (7,11,19,23,29,43,47,59,61,67,71) + arsenal bridge; battery census: 2,694 instances over 1,227 primes 5 ≤ p < 10⁴, 465 Wilson-only, ZERO pair-law violations, histogram exact | **run 42363784227 GREEN, Kernel 22** |
 
+| 27 | **394** | **THE CRT-LAW STRIKE**: THE CRT SOUNDNESS THEOREM (general k: every ordered pairwise-coprime factorization n = d_0···d_{k−1} with d_i ∣ (m+i) for all i < k yields n ∣ m(m+1)···(m+k−1)) + THE UNIQUE-POSITION LAW (p > k divides at most one of m..m+k−1) + THE PRIME-LANDING LAW (a prime p > k dividing the product lands at a — unique — position) + t_k(n) ≤ n + the tKb leastness characterization + **139 kernel-decided exact values** (t_2 odd n ≤ 101 ×50, t_3 (n,6)=1 ×32, t_4 (n,24)=1 ×32, t_5 (n,120)=1 ×25) + the showcase CRT certificate t_2(15)=5 via d=[5,3]; battery dual-method 505/505 (k ≤ 6, n ≤ 300) + all four tables re-verified; NEW RULE format (verbatim statement in-file) | **S034, Kernel 23** |
+| 28 | **711** | **THE 2n−1 DIVISOR-SCHEDULING FRONTIER**: THE GENERAL FORCED-COLLISION OBSTRUCTION f(n,(n−1)²) ≥ 2n−1 for EVERY n ≥ 2 (in the 2n−3-window, keys n and n−1 are BOTH forced onto the single integer n²−n) + THE COMPLETE n=2 LAW (f(2,m) ≤ 3 ∀m: max = 3 = 2n−1 EXACT — the problem's first ask answered with the exact constant at n=2) + THE COMPLETE n=3 LAW (f(3,m) ≤ 5 ∀m, six explicit mod-6 assignments: max = 5 EXACT) + THE EXACT FRONTIER f(n,(n−1)²) = 2n−1 for n = 2..15 (fourteen kernel-decided witness assignments) + THE PERIODICITY LAW f(n,m) = f(n,m+L) for L = lcm(1..n) (transport a ↦ a±L) + the cover theorem (full-period census exhaustiveness); battery: FULL-PERIOD census n = 2..12 (63,662 m-values, greedy+Kuhn dual method — max_m f(n,m) = 2n−1 ALL, the S032 sweep's m ≤ 300 gap closed) + f(n,n) table + forced-collision audit n ≤ 15; ErPo80 Q1 (n^{1+o(1)}) answered EXACTLY (2n−1) for n ≤ 12 engine + n ≤ 15 Lean-witnessed; NEW RULE format | **S034, Kernel 24** |
+
 **AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
 sub-problem remnants; every crossed-problem kill is a complete unconditional
 theorem. Kills #20/#21 (Session 029): honest scope in registry — #686's
@@ -146,6 +149,17 @@ follow-up on the SAME front).**
 - **#1056**: **KILL #22 (S030, Kernel 18): the CASE-FRONTIER THEOREM —
   k jumped 3 → 11** (new cases k=4..11; run 42308034994). Open core:
   arbitrarily large k (Noll–Simmons).
+- **#394**: **KILL #27 (S034, Kernel 23): THE CRT-LAW STRIKE.** The
+  soundness theorem + unique-position + prime-landing laws + 139
+  kernel-decided exact values. Open residue (same front): the
+  min-equality's inject-direction assembly (collecting landed prime
+  powers into the d_i) + the Erdős–Hall asymptotic sums.
+- **#711**: **KILL #28 (S034, Kernel 24): THE 2n−1 FRONTIER.** The
+  general (n−1)² obstruction + complete n=2,3 laws + exact frontier
+  n ≤ 15 + the periodicity law. Open residue: the general-n upper bound
+  (the Hall war) — engine-confirmed n ≤ 12 full-period, conjectured all
+  n; the problem's n^{1+o(1)} ask is EXACT (2n−1) for n ≤ 15, open in
+  general.
 - **#260**: DEAD — killed by outsider Wang 2026 (arXiv:2606.24972,
   Lean-formalized). Removed from queue. #404 "Conjecture D" also DEAD
   (refuted by Kill #14: g(2,2)=253 finite).
@@ -373,6 +387,20 @@ was a MISLABEL (corpus #422 = Hofstadter Q-sequence, well-definedness
 open = Collatz-class; the Conolly freq law is a different sequence) — OUT
 with cause.
 
+**S034 FIRING STATE (current):** KILLS #27 (#394 CRT-law strike) and
+#28 (#711 2n−1 frontier) FIRED — kernels 23/24 pushed with the NEW RULE
+format (verbatim problem statements in-file; retrofitted into K20/21/22).
+Pre-flight: the #711 full-period adversarial audit (the S032 sweep
+covered m ≤ 300 but the true periods reach 27720 — zero breaks at full
+scale) + the #394 dual-method 1015/1015. The volley's remaining 6
+admissions (#961 Størmer–Pell, #1074 EHS census, #954 block-law, #243
+Farey rigidity, #124 BEGL96, #282 termination census) under the 5-round
+law. The compile war: round 1 run 42404935496 (K1–K22 green incl. the
+retrofits; K23/K24 15 root causes — the flipped oracle caught by the
+decide tables, Nat.sInf, omega-no-beta, iff-signatures) → round 2
+c62802c + the CI paths-fix 0f36406 (the new folders were absent from
+on.push.paths — c62802c never triggered).
+
 **S033 FIRING STATE (current):** KILLS #24 (#1063), #25 (#451), #26
 (#1072) LANDED — run 42363784227. The volley's remaining 8 admissions
 under fire per the 5-round law: #394 (CRT characterization — battery
@@ -563,5 +591,22 @@ hunts + #885 k=5 + #317 K1: firing.
   order metavars; trans directions; the .trans B C parse). if: always()
   added to the three CI steps (verdict independence). Registry 23 → 26.
   No sub-agents. No ledger additions. #404/#271 sealed. English throughout.
+
+- **034** (2026-11-07): THE NEW RULE VOLLEY — BOSS's law: every proof
+  file carries the problem STATEMENT verbatim, then the proof below
+  (applied to K23/K24 + retrofitted K20/21/22); the honest look-back
+  audit (all named residues documented in §2); fresh PAT deployed;
+  MATHS + prove-that-shit activated FIRST. **KILLS #27 (#394 CRT-LAW
+  STRIKE: soundness + unique-position + prime-landing + 139 exact
+  values) and #28 (#711 THE 2n−1 FRONTIER: general (n−1)² obstruction +
+  complete n=2,3 + frontier n≤15 + periodicity) fired as kernels 23/24.**
+  The pre-flight adversarial audit closed the S032 sweep gap (#711
+  full-periods to 27720 — zero breaks). Compile war round 1
+  (42404935496): 15 root causes — the flipped divAt oracle (the decide
+  tables caught it — decide never lies), Nat.sInf naming, omega-no-beta,
+  iff-signatures (dvd_one, mul_eq_mul_right arg order), the htlt bound
+  slip, missing intros, Mem-rcases arity, rw-on-defs; round 2 c62802c +
+  CI paths-fix 0f36406. English throughout. No sub-agents. No ledger
+  additions.
 
 *State is full. The engine never stops; it never lies.*

@@ -56,7 +56,7 @@ def AssignOk (n m F : Nat) (a : Nat → Nat) : Prop :=
   (∀ i, 1 ≤ i → i ≤ n → ∀ j, 1 ≤ j → j ≤ n → a i = a j → i = j)
 
 /-- $f(n,m)$ = the minimal $F \ge 1$ with a valid assignment. -/
-def f711 (n m : Nat) : Nat := sInf {F : Nat | 1 ≤ F ∧ ∃ a, AssignOk n m F a}
+noncomputable def f711 (n m : Nat) : Nat := sInf {F : Nat | 1 ≤ F ∧ ∃ a, AssignOk n m F a}
 
 /-- The Bool witness checker (for the decided witness tables):
 length, window bounds, divisibility, pairwise distinctness. -/
@@ -310,7 +310,8 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           show 3 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
-        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        exact inj3_of_ne (v1 := m + 1) (v2 := m + 2) (v3 := m + 3)
+          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 3 | 2 => m + 1 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -324,7 +325,8 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           show 3 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
-        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        exact inj3_of_ne (v1 := m + 3) (v2 := m + 1) (v3 := m + 2)
+          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 3 | 2 => m + 2 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -338,7 +340,8 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           show 3 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
-        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        exact inj3_of_ne (v1 := m + 3) (v2 := m + 2) (v3 := m + 1)
+          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 2 | 2 => m + 1 | _ => m + 3, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -352,7 +355,8 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           show 3 ∣ (m + 3) ∧ m < (m + 3) ∧ (m + 3) < m + 5
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
-        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        exact inj3_of_ne (v1 := m + 2) (v2 := m + 1) (v3 := m + 3)
+          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 1 | 2 => m + 4 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -366,7 +370,8 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           show 3 ∣ (m + 2) ∧ m < (m + 2) ∧ (m + 2) < m + 5
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
-        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        exact inj3_of_ne (v1 := m + 1) (v2 := m + 4) (v3 := m + 2)
+          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
     · refine ⟨fun k => match k with | 1 => m + 2 | 2 => m + 3 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -380,7 +385,8 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           show 3 ∣ (m + 1) ∧ m < (m + 1) ∧ (m + 1) < m + 5
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
-        exact inj3_of_ne (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+        exact inj3_of_ne (v1 := m + 2) (v2 := m + 3) (v3 := m + 1)
+          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
   exact Nat.sInf_le hmem
 
 /-! ## §4 THE WITNESS TABLES (n = 2..15 at m = (n−1)², kernel-decided). -/
@@ -411,8 +417,8 @@ theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
        ((List.range n).all (fun i =>
          (List.range n).all (fun j =>
            (i == j) || !((as.getD i 0) == (as.getD j 0)))))) = true := h
-  obtain ⟨hLM, hdist⟩ := Bool.and_eq_true.mp hA
-  obtain ⟨hlen, hall⟩ := Bool.and_eq_true.mp hLM
+  obtain ⟨hLM, hdist⟩ := (Bool.and_eq_true).mp hA
+  obtain ⟨hlen, hall⟩ := (Bool.and_eq_true).mp hLM
   have hlenN : as.length = n := Nat.eq_of_beq_eq_true hlen
   refine ⟨fun k => as.getD (k - 1) 0, ?_, ?_⟩
   · intro k h1k hkn
@@ -421,8 +427,8 @@ theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
     have hidx : k - 1 < n := by omega
     have hmem : (k - 1) ∈ List.range n := List.mem_range.mpr hidx
     have hcall := (List.all_eq_true.mp hall) (k - 1) hmem
-    obtain ⟨hc2, hmod⟩ := Bool.and_eq_true.mp hcall
-    obtain ⟨hlt1, hlt2⟩ := Bool.and_eq_true.mp hc2
+    obtain ⟨hc2, hmod⟩ := (Bool.and_eq_true).mp hcall
+    obtain ⟨hlt1, hlt2⟩ := (Bool.and_eq_true).mp hc2
     have hb1 : m < as.getD (k - 1) 0 := by
       rw [decide_eq_true] at hlt1; exact hlt1
     have hb2 : as.getD (k - 1) 0 < m + 2 * n - 1 := by
@@ -510,7 +516,19 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
         show k ∣ (a k - L) ∧ m < (a k - L) ∧ (a k - L) < m + F
         obtain ⟨hkd, hb1, hb2⟩ := ha.1 k h1 h2
         have hkl : k ∣ L := hL k h1 h2
-        refine ⟨Nat.dvd_sub' hkd hkl, ?_, ?_⟩
+        have hdvd2 : k ∣ a k - L := by
+          have hge : L ≤ a k := by omega
+          obtain ⟨u, hu⟩ := hkd
+          obtain ⟨w, hw⟩ := hkl
+          have huw : w ≤ u := by
+            by_contra hcon
+            have hwu : u < w := by omega
+            have hmul : u * k < w * k := Nat.mul_lt_mul_left (by omega) hwu
+            rw [Nat.mul_comm u k, Nat.mul_comm w k, ← hu, ← hw] at hmul
+            omega
+          refine ⟨u - w, ?_⟩
+          rw [hu, hw, Nat.mul_sub]
+        refine ⟨hdvd2, ?_, ?_⟩
         · omega
         · omega
       · intro i hi1 hin j hj1 hjn hij

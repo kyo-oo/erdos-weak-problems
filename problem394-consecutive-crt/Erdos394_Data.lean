@@ -86,7 +86,8 @@ theorem tKfind_least (n k j m : Nat) (h1 : 1 ≤ m) (hmj : m ≤ j)
       by_cases hprev : 0 < tKfind n k j
       · rw [tKstep, if_pos hprev]
         have hb := tKfind_bound n k j
-        exact ⟨hprev, by omega⟩
+        have hne : tKfind n k j ≠ 0 := by omega
+        exact ⟨hne, by omega⟩
       · rw [tKstep, if_neg hprev]
         have hd' : divAt n (j + 1) k = true := by rw [← hmj1]; exact hd
         rw [if_pos hd']

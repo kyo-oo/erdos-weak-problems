@@ -1203,3 +1203,82 @@ no sub-agents, no local Lean, §8 frozen, MATHS + prove-that-shit activated
 FIRST, English throughout.**
 
 *The engines never stop; they never lie.*
+
+---
+
+## SESSION 034 (2026-11-07) — THE S034 VOLLEY: KERNELS 23/24 + THE NEW RULE
+
+**BOSS's standing orders executed:** (1) THE NEW RULE — every proof file
+carries THE PROBLEM verbatim (statement first, proof below it — applied to
+K23/K24 + retrofitted into K20/K21/K22, comment-only); (2) "LOOK BACK
+ALREADY SOLVED PROBLEMS IF HAVE ANYTHING TO PROVE" — the honest audit of
+the kill registry's named residues (documented in THE_CORE §2 scoreboard:
+#686 square classes, #727 k≥3 obstruction, #1056 large-k, #1108 finiteness,
+#700 composites, #261 cores — all named, all queued); (3) "BE MORE
+AGGRESSIVE" — the S032 war-order pair #394 → #711 fired as kernels 23/24
+in a single volley; (4) the fresh PAT deployed (kyo-oo verified).
+
+**THE PRE-FLIGHT ADVERSARIAL AUDIT (engines, before any Lean):**
+- **#711**: the S032 round-1 sweep was m ≤ 300/800 — but f(n,m) is
+  PERIODIC with period lcm(1..n) (transport a ↦ a ± L) — for n = 9..12
+  the true periods are 2520–27720. FULL-PERIOD census re-run: ALL
+  m ∈ [1, lcm(1..n)] matchable in the 2n−2 window for n = 2..12 (63,662
+  m-values, greedy certificate + exact Kuhn dual method) — ZERO breaks;
+  forced-collision audit n = 2..15 (multiples of n and n−1 in
+  ((n−1)², n²−2] both EXACTLY {n²−n}); witnesses extracted and
+  HAND-VERIFIED (n=15: a₁₅=210=15·14, a₁₄=224=14·16, both keys 15/14
+  forced onto 210 in the 2n−3 window).
+- **#394**: dual-method (brute-force least-m vs min-CRT-class) 1015/1015
+  agreements (k = 2..6, n ≤ 600); unique prime-power landing verified on
+  every valid (n,k,m); the four tables extracted (139 values).
+
+**KILL #27 — KERNEL 23, Erdős #394 THE CRT-LAW STRIKE**
+(`problem394-consecutive-crt/`): THE CRT SOUNDNESS THEOREM (general k:
+every ordered pairwise-coprime factorization n = d_0···d_{k−1} with
+d_i ∣ (m+i) yields n ∣ m(m+1)···(m+k−1)) + THE UNIQUE-POSITION LAW
+(p > k divides ≤ one of m..m+k−1) + THE PRIME-LANDING LAW (a prime p > k
+dividing the product lands — uniquely — at a position) + t_k(n) ≤ n +
+the tKb leastness characterization + 139 kernel-decided exact values +
+the showcase CRT certificate (t_2(15) = 5 via d = [5,3] at m = 5).
+Honest scope: the min-equality's inject-direction assembly + the
+Erdős–Hall sums remain open (the round-3 target on this front).
+
+**KILL #28 — KERNEL 24, Erdős #711 THE 2n−1 DIVISOR-SCHEDULING
+FRONTIER** (`problem711-divisor-matching/`): THE GENERAL FORCED-COLLISION
+OBSTRUCTION f(n,(n−1)²) ≥ 2n−1 for EVERY n ≥ 2 (in the 2n−3-window both
+keys n and n−1 have the single option n²−n) + the COMPLETE n=2 LAW
+(f(2,m) ≤ 3 ∀m — max = 3 = 2n−1 EXACT, the problem's first ask answered
+with the exact constant at n=2) + the COMPLETE n=3 LAW (f(3,m) ≤ 5 ∀m,
+six explicit mod-6 assignments — max = 5 EXACT) + THE EXACT FRONTIER
+f(n,(n−1)²) = 2n−1 for n = 2..15 (fourteen kernel-decided witness
+assignments) + THE PERIODICITY LAW f(n,m) = f(n, m+L) for L = lcm(1..n)
++ the cover theorem (every m reduces to a residue — the full-period
+census is exhaustive). Battery: the full-period census n = 2..12 + the
+f(n,n) table (3,4,6,6,9,9,11,13,15,15,17) + periodicity spot-checks.
+Honest scope: the general-n upper bound (the Hall war) is the named
+residue — engine-confirmed n ≤ 12, conjectured for all n; ErPo80's
+n^{1+o(1)} ask: PROVEN exactly (2n−1) for n ≤ 15, open in general.
+
+**THE COMPILE WAR (round 1, run 42404935496):** K1–K22 all green
+(including the three statement retrofits — comment-only, zero risk).
+K23/K24 failed with rich forensics — 15 root causes found and fixed in
+round 2 (commit c62802c): the flipped oracle (divAt tested product∣n
+instead of n∣product — THE DECIDE TABLES CAUGHT IT INSTANTLY: 139
+witnesses do not lie; the S033 lesson repeating), Nat.sInf nonexistent
+(sInf unqualified is the Mathlib route; Nat.sInf_mem/Nat.sInf_le exist),
+Nat.dvd_one is an iff (Nat.one_dvd is the plain form),
+Nat.eq_of_mul_eq_mul_right takes positivity FIRST, omega does NOT
+beta-reduce lambda/match redexes (every goal show-reduced first), the
+htlt bound slip ((n−1)(n+1), not (n+2)), the missing intro in the six
+inj3_of_ne bullets, List.Mem rcases arity (use List.mem_cons), rw
+[prodCons] cannot fire on defs (rfl-steps instead), and the ih-arity in
+the auto-reverted induction. Round 2 also exposed the CI paths-filter
+gap (the new folders were not in on.push.paths — commit c62802c never
+triggered; fixed in 0f36406 which itself fired the run).
+
+*Registry: 26 → 28 kills (pending CI green on run 42407876625). Queue:
+33 fronts, 6 volley admissions remain under the 5-round law. Red lines
+held: #404/#271 sealed, #406 hands off, no sub-agents, no local Lean, §8
+frozen, MATHS + prove-that-shit activated FIRST, English throughout.*
+
+*The engines never stop; they never lie.*

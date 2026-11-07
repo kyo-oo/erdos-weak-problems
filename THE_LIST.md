@@ -101,11 +101,11 @@ ONE SHOT" — 11 admissions, round-1 mathematics delivered in-round; full record
 
 | Rank | Problem | Round-1 kill shot (witnesses in hand) | Rounds | Mark |
 |---|---|---|---|---|
-| F1 | **#1063 binomial all-but-one frontier** | CASE FRONTIER k: 5 → 14 — n_6..n_14 = 75, 30, 70, 56, 2403, 280, 3465, 210, 793 (engine calibrated EXACT on published n_2..n_5 = 4,6,9,12); witness kernel = the #1056 pattern | 1–2 | 🎯 KILL FIRING |
-| F2 | **#451 interval-prime-free n_k** | modular criterion derived (p | ∏(n−i) ⟺ n mod p ∈ {1..k}); witness table k=2..20 COMPLETE (6, 9, 20, 13, 21, 21, 22, 65, 220, 51, 338, 133, 321, 339, 340, 113, 114, 368, 550) | 1–2 | 🎯 KILL FIRING |
-| F3 | **#1072 factorial-chain f(p)** | THE WILSON-PAIR LAW derived + VERIFIED on 2,694 solution instances (all primes < 10^4); census: 465 Wilson-only primes, histogram, max f/p = 0.9999 | 1–3 | 🎯 |
-| F4 | **#394 consecutive-product t_k(n)** | THE CRT LAW derived + battery 426/426 GREEN: t_k(n) = min-CRT over ordered coprime factorizations for (n,k!)=1 — complete characterization | 2–3 | 🎯 |
-| F5 | **#711 divisor scheduling** | THE 2n−1 LAW: max_m f(n,m) = 2n−1 at m=(n−1)², verified n=2..10 — answers ErPo80 Q1 EXACTLY (stronger than n^{1+o(1)}); f(n,n) table extended | 2–4 | 🎯 |
+| F1 | **#1063 binomial all-but-one frontier** | **LANDED — KILL #24 (S033, Kernel 20, run 42363784227)**: nine exact values k=6..14 kernel-decided + absorption certificate + arsenal bridge | ✅ | ✅ KILLED |
+| F2 | **#451 interval-prime-free n_k** | **LANDED — KILL #25 (S033, Kernel 21, run 42363784227)**: witness table k=2..20 + the general modular criterion + arsenal bridge | ✅ | ✅ KILLED |
+| F3 | **#1072 factorial-chain f(p)** | **LANDED — KILL #26 (S033, Kernel 22, run 42363784227)**: the Wilson-pair law (pairing identity + classic corollary BOTH [propext, Quot.sound] GOLD) + eleven named instances + arsenal bridge | ✅ | ✅ KILLED |
+| F4 | **#394 consecutive-product t_k(n)** | **LANDED — KILL #27 (S034, Kernel 23)**: the CRT-LAW STRIKE (soundness theorem + unique-position + prime-landing + 139 exact values, NEW RULE format); residue: the inject-direction assembly | ✅ | ✅ KILLED |
+| F5 | **#711 divisor scheduling** | **LANDED — KILL #28 (S034, Kernel 24)**: the 2n−1 FRONTIER (general (n−1)² obstruction ALL n≥2 + complete n=2,3 laws + exact n≤15 + periodicity; full-period census n≤12; NEW RULE format); residue: the general-n upper bound (Hall war) | ✅ | ✅ KILLED |
 | F6 | **#961 smooth-run frontier** | f(k) = 2,3,3,4,4,4,4,4,4,4,4 (k=2..12, ≤2·10^6); certification = Størmer–Pell census — the #686 PELL ARSENAL applied | 3–5 | 🎯 |
 | F7 | **#1074 EHS / Pillai** | membership engine calibrated EXACT on Hardy–Subbarao S∩[2,17]; extended to m ≤ 32 (25,27,28 ∉ S); census war | 3–5 | 💣 |
 | F8 | **#954 Rosen greedy sequence** | 1,200 terms computed (start matches published); block law breaks at block 5 — irregularity = the derivation target; #261 machinery transfer | 3–5 | 🎯 |
