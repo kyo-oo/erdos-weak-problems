@@ -1108,3 +1108,36 @@ at 27901/52163 — killed by `by norm_num` (elaborator-native arithmetic).
 FINAL: all 24 CI steps GREEN; k4..k11 [propext, Classical.choice,
 Quot.sound]; wilson_23/17/3011 ZERO axioms; v2r_scaling [propext,
 Quot.sound]; battery dual-method GREEN. REGISTRY: 22 kills.
+
+## SESSION 031 (2026-11-07): KILL #23 — ERDŐS #700 PRIME-POWER LAW + THE TONGUE LAW
+
+BOSS's corrections executed: (1) THE TONGUE LAW — English only, always (the
+Chinese archive summary was the violation); (2) MATHS + prove-that-shit
+activated FIRST at max energy; (3) the batch holds the majority treatment.
+
+**KILL #23: Erdős #700 — Kernel 19 (Erdos700.lean, 1109 lines, zero sorry).**
+Theorem A: v_p(C(p^a,k)) = a − v_p(k) (the carry lemma — Legendre floor-sum
+bridge: divSplit + succDiff + div_unique + powsSum/cntDiv/cntNotDiv +
+Legendre-bridge fuel induction + the Pascal binomial identity with ring).
+Theorem B: f(p^a) = p exactly (minGcdAux min assembly: universal lower bound
++ witness k₀ = p^(a−1), the h=1 structure lemma via minFac). The ErSz
+equality class at prime squares (f(p²) = p = p²/P(p²) — second settled class
+beyond semiprimes) + the a ≥ 3 violation (factor p^(a−2)). Arsenal bridge:
+lt_three_cases, isTernaryDigit, carryAtPos_bound, v2r_ternary_scaling
+(K17 eq_def route). Battery 79,026 dual-method GREEN (sympy-free). All five
+theorems [propext, Classical.choice, Quot.sound].
+
+**The 6-round compile war:** R1 38 errors (core mathematics passed clean —
+API surface only) → R2 9 (dvd_mul iff; omega blind to Nat.min; pow_succ
+direction; obtain-clears) → R3 5 (pow_succ' implicit succ-form; minFac
+signatures) → R4 1 (q.Prime invisible to omega — hq2 := hqp.one_lt) →
+R5 KERNEL GREEN (battery died: no sympy on runner) → R6 sympy-free battery.
+
+**Parallel volleys:** #939: ZERO ≤ 10¹⁵ (8.9M coprime pairs; heuristic
+X^(−1/4) → 0 — the lane needs an algebraic Nitaj-style construction).
+#686 square residue: k=3 zero witnesses at m < 600k for the 9 named t.
+#317: DEMOTED per the 5-round law (K1 lcm-residue + K2 Egyptian-counting
+are open-style cores; 1M sweep + Theorem D evidence exhausted).
+
+**THE_LIST v7:** #700 ✅ KILLED (23 kills total); #317 🚫 OUT (honest
+cause); #288 + #1212 promoted from ⏸ — the majority treatment holds at 22.

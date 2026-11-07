@@ -478,5 +478,12 @@ jobs:
           grep -F "'erdos700_law' depends on axioms: [propext" erdos700.log
           grep -F "'erdos700_equality_class' depends on axioms: [propext" erdos700.log
           grep -F "'erdos700_violation' depends on axioms: [propext" erdos700.log
-          python3 problem700-binomial-gcd/battery700_ci.py
+          echo "=== BATTERY DIAG: python3 -V ==="
+          python3 -V
+          echo "=== BATTERY DIAG: file check ==="
+          ls -la problem700-binomial-gcd/battery700_ci.py
+          head -3 problem700-binomial-gcd/battery700_ci.py
+          echo "=== BATTERY DIAG: run ==="
+          python3 problem700-binomial-gcd/battery700_ci.py 2>&1 | tee battery700_ci.log
+          echo "=== BATTERY DIAG: exit ${PIPESTATUS[0]} ==="
           echo ERDOS700_PRIME_POWER_LAW_KERNEL_GREEN=1

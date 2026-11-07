@@ -295,3 +295,57 @@ continues. #203: THE DENSITY CENSUS — covering budget Σ 1/|⟨2,3⟩_p| =
 reduction written (cover (k,ℓ) ∈ Z² by α_i k + β_i ℓ ≡ γ_i mod d_i, then
 m by CRT); honest verdict: the mixed-lcm monster torus (≈10⁹ cells,
 C-grade) makes it a multi-round war.
+
+## SESSION 031 — KILL #23: ERDŐS #700 THE PRIME-POWER LAW (2026-11-07)
+
+**THE TONGUE LAW + MAX ENERGY:** all reports in English (BOSS's language —
+the archive-summary violation is burned); MATHS + prove-that-shit full chain
+activated first, per standing law.
+
+**KILL #23 LANDED — Erdős #700, Kernel 19 (the 6-round compile war, runs
+42319640729 → 42326088956 → R6): THE PRIME-POWER LAW.** For EVERY prime p:
+- **Theorem A (the carry lemma):** v_p(C(p^a, k)) = a − v_p(k) for all
+  1 ≤ k ≤ p^a − 1 — proven via the Legendre floor-sum bridge: divSplit
+  (⌊k/m⌋ + ⌊s/m⌋ + [k%m ≠ 0] = c for k+s = m·c — the heart), succDiff,
+  div_unique, the powsSum/cntDiv/cntNotDiv counters, cntDiv_min, the
+  Legendre bridge at prime powers (fuel induction), and the binomial
+  identity binom·k!·s! = n! (Pascal recursion + ring).
+- **Theorem B (the f-law):** f(p^a) = p for every a ≥ 2 — the EXACT
+  Erdős–Szekeres minimum (minGcdAux fold: universal lower bound from the
+  carry lemma + the witness k₀ = p^(a−1) whose gcd is exactly p, via the
+  prime-power-divisor structure: h ∣ p^t ∧ p ∣ h ∧ h ∣ u ∧ p ∤ u ⟹ h = 1,
+  minFac route).
+- **The equality class:** prime squares SATISFY the ErSz equality
+  f(p²) = p = p²/P(p²) (every prime divisor of p² is p — the second full
+  class beyond semiprimes); **the violation:** f(p^a) = p < p^(a−1) for
+  a ≥ 3 (fails by the factor p^(a−2)).
+- **Arsenal-applied (S028 doctrine):** erdosternary2's lt_three_cases
+  routing + isTernaryDigit validity on the #700 witnesses (4, 8);
+  HC-PROOF's carryAtPos_bound on the witness carry layer + the dyadic
+  v2r_ternary_scaling law with the K17 eq_def route (v2r 4 = 2, v2r 8 = 3).
+- **Battery:** 79,026 dual-method instances GREEN (carry sweep
+  79,003 + f-table 23, sympy-free for the CI runner).
+- **Axioms:** all five main theorems [propext, Classical.choice,
+  Quot.sound]; receipts (5, 3), (1, 1, 1, 1), (15, 1).
+- **Honest scope:** the prime-power class of the ErSz equality problem is
+  COMPLETELY characterized (every prime power, both directions, exact
+  minimum). The full corpus classification (all composite n) remains the
+  open core — the semiprime + prime-square classes are now both settled
+  in-house.
+
+*The compile war R1→R6: R1 (38 errors — the core mathematics ALL passed:
+Theorem A assembly, divSplit, powsSum_split, legendre_pp, binom_fact_gen;
+failures were API-surface) → R2 (9: dvd_mul is an iff; omega cannot see
+Nat.min; pow_succ direction; obtain-clears-Dvd) → R3 (5: pow_succ' implicit
+succ-form; minFac signatures; le_min iff) → R4 (1: q ≥ 2 from q.Prime is
+invisible to omega) → R5 (THE KERNEL GREEN — all five theorems at the clean
+axiom standard; battery sympy-import died on the runner) → R6 (sympy-free
+battery). The engine never stops; it never lies.*
+
+**The parallel volleys (majority treatment, same session):** #939 r=4:
+ZERO solutions ≤ 10¹⁵ (5,622 4-powerfuls, 8.9M coprime pairs — the
+escalation landed; uniform heuristic says the lane needs an algebraic
+construction). #686 square residue: k=3 hunt — zero witnesses at m < 600k
+for all 9 named t. #317: DEMOTED per the 5-round law (both kernels K1
+lcm-residue + K2 Egyptian-counting are open-style cores; engine evidence
+exhausted at 1M sweep + Theorem D zero collisions).
