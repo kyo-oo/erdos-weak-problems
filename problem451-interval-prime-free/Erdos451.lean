@@ -101,11 +101,11 @@ theorem erdos451_crit (p k n : Nat) (hp : p.Prime) (hk : k < p) (hkn : k ≤ n) 
 /-! ## §5 The decode toolkit (Bool data → Prop content). -/
 theorem win_decode (k : Nat) (ps : List Nat)
     (hbool : ((List.range (2 * k)).all
-      (fun q => !(Nat.blt k q && isP q) || decide (q ∈ ps))) = true)
+      (fun q => !(decide (k < q) && isP q) || decide (q ∈ ps))) = true)
     (q : Nat) (hq : q.Prime) (h1 : k < q) (h2 : q < 2 * k) : q ∈ ps := by
   have hmem : q ∈ List.range (2 * k) := List.mem_range.mpr h2
   have hall := (List.all_eq_true.mp hbool) q hmem
-  have hb : Nat.blt k q = true := Nat.blt_eq.mpr h1
+  have hb : decide (k < q) = true := decide_eq_true h1
   have hp : isP q = true := isP_of_prime q hq
   rw [hb, hp] at hall
   simp only [Bool.true_and, Bool.not_true, Bool.false_or] at hall
@@ -163,7 +163,7 @@ theorem erdos451_k2 : 2 * 2 < 6 ∧
     (∀ m, 2 * 2 < m → m < 6 → ∃ q, q.Prime ∧ 2 < q ∧ q < 2 * 2 ∧ q ∣ prodK 2 m) := by
   have hpr : ∀ q ∈ [3], q.Prime ∧ 2 < q ∧ q < 2 * 2 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
   have hwin : ∀ q, q.Prime → 2 < q → q < 2 * 2 → q ∈ [3] :=
@@ -179,7 +179,7 @@ theorem erdos451_k3 : 2 * 3 < 9 ∧
     (∀ m, 2 * 3 < m → m < 9 → ∃ q, q.Prime ∧ 3 < q ∧ q < 2 * 3 ∧ q ∣ prodK 3 m) := by
   have hpr : ∀ q ∈ [5], q.Prime ∧ 3 < q ∧ q < 2 * 3 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
   have hwin : ∀ q, q.Prime → 3 < q → q < 2 * 3 → q ∈ [5] :=
@@ -195,7 +195,7 @@ theorem erdos451_k4 : 2 * 4 < 20 ∧
     (∀ m, 2 * 4 < m → m < 20 → ∃ q, q.Prime ∧ 4 < q ∧ q < 2 * 4 ∧ q ∣ prodK 4 m) := by
   have hpr : ∀ q ∈ [5, 7], q.Prime ∧ 4 < q ∧ q < 2 * 4 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -212,7 +212,7 @@ theorem erdos451_k5 : 2 * 5 < 13 ∧
     (∀ m, 2 * 5 < m → m < 13 → ∃ q, q.Prime ∧ 5 < q ∧ q < 2 * 5 ∧ q ∣ prodK 5 m) := by
   have hpr : ∀ q ∈ [7], q.Prime ∧ 5 < q ∧ q < 2 * 5 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
   have hwin : ∀ q, q.Prime → 5 < q → q < 2 * 5 → q ∈ [7] :=
@@ -228,7 +228,7 @@ theorem erdos451_k6 : 2 * 6 < 21 ∧
     (∀ m, 2 * 6 < m → m < 21 → ∃ q, q.Prime ∧ 6 < q ∧ q < 2 * 6 ∧ q ∣ prodK 6 m) := by
   have hpr : ∀ q ∈ [7, 11], q.Prime ∧ 6 < q ∧ q < 2 * 6 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -245,7 +245,7 @@ theorem erdos451_k7 : 2 * 7 < 21 ∧
     (∀ m, 2 * 7 < m → m < 21 → ∃ q, q.Prime ∧ 7 < q ∧ q < 2 * 7 ∧ q ∣ prodK 7 m) := by
   have hpr : ∀ q ∈ [11, 13], q.Prime ∧ 7 < q ∧ q < 2 * 7 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -262,7 +262,7 @@ theorem erdos451_k8 : 2 * 8 < 22 ∧
     (∀ m, 2 * 8 < m → m < 22 → ∃ q, q.Prime ∧ 8 < q ∧ q < 2 * 8 ∧ q ∣ prodK 8 m) := by
   have hpr : ∀ q ∈ [11, 13], q.Prime ∧ 8 < q ∧ q < 2 * 8 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -279,7 +279,7 @@ theorem erdos451_k9 : 2 * 9 < 65 ∧
     (∀ m, 2 * 9 < m → m < 65 → ∃ q, q.Prime ∧ 9 < q ∧ q < 2 * 9 ∧ q ∣ prodK 9 m) := by
   have hpr : ∀ q ∈ [11, 13, 17], q.Prime ∧ 9 < q ∧ q < 2 * 9 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -297,7 +297,7 @@ theorem erdos451_k10 : 2 * 10 < 220 ∧
     (∀ m, 2 * 10 < m → m < 220 → ∃ q, q.Prime ∧ 10 < q ∧ q < 2 * 10 ∧ q ∣ prodK 10 m) := by
   have hpr : ∀ q ∈ [11, 13, 17, 19], q.Prime ∧ 10 < q ∧ q < 2 * 10 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -316,7 +316,7 @@ theorem erdos451_k11 : 2 * 11 < 51 ∧
     (∀ m, 2 * 11 < m → m < 51 → ∃ q, q.Prime ∧ 11 < q ∧ q < 2 * 11 ∧ q ∣ prodK 11 m) := by
   have hpr : ∀ q ∈ [13, 17, 19], q.Prime ∧ 11 < q ∧ q < 2 * 11 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -334,7 +334,7 @@ theorem erdos451_k12 : 2 * 12 < 338 ∧
     (∀ m, 2 * 12 < m → m < 338 → ∃ q, q.Prime ∧ 12 < q ∧ q < 2 * 12 ∧ q ∣ prodK 12 m) := by
   have hpr : ∀ q ∈ [13, 17, 19, 23], q.Prime ∧ 12 < q ∧ q < 2 * 12 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -353,7 +353,7 @@ theorem erdos451_k13 : 2 * 13 < 133 ∧
     (∀ m, 2 * 13 < m → m < 133 → ∃ q, q.Prime ∧ 13 < q ∧ q < 2 * 13 ∧ q ∣ prodK 13 m) := by
   have hpr : ∀ q ∈ [17, 19, 23], q.Prime ∧ 13 < q ∧ q < 2 * 13 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -371,7 +371,7 @@ theorem erdos451_k14 : 2 * 14 < 321 ∧
     (∀ m, 2 * 14 < m → m < 321 → ∃ q, q.Prime ∧ 14 < q ∧ q < 2 * 14 ∧ q ∣ prodK 14 m) := by
   have hpr : ∀ q ∈ [17, 19, 23], q.Prime ∧ 14 < q ∧ q < 2 * 14 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -389,7 +389,7 @@ theorem erdos451_k15 : 2 * 15 < 339 ∧
     (∀ m, 2 * 15 < m → m < 339 → ∃ q, q.Prime ∧ 15 < q ∧ q < 2 * 15 ∧ q ∣ prodK 15 m) := by
   have hpr : ∀ q ∈ [17, 19, 23, 29], q.Prime ∧ 15 < q ∧ q < 2 * 15 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -408,7 +408,7 @@ theorem erdos451_k16 : 2 * 16 < 340 ∧
     (∀ m, 2 * 16 < m → m < 340 → ∃ q, q.Prime ∧ 16 < q ∧ q < 2 * 16 ∧ q ∣ prodK 16 m) := by
   have hpr : ∀ q ∈ [17, 19, 23, 29, 31], q.Prime ∧ 16 < q ∧ q < 2 * 16 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -428,7 +428,7 @@ theorem erdos451_k17 : 2 * 17 < 113 ∧
     (∀ m, 2 * 17 < m → m < 113 → ∃ q, q.Prime ∧ 17 < q ∧ q < 2 * 17 ∧ q ∣ prodK 17 m) := by
   have hpr : ∀ q ∈ [19, 23, 29, 31], q.Prime ∧ 17 < q ∧ q < 2 * 17 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -447,7 +447,7 @@ theorem erdos451_k18 : 2 * 18 < 114 ∧
     (∀ m, 2 * 18 < m → m < 114 → ∃ q, q.Prime ∧ 18 < q ∧ q < 2 * 18 ∧ q ∣ prodK 18 m) := by
   have hpr : ∀ q ∈ [19, 23, 29, 31], q.Prime ∧ 18 < q ∧ q < 2 * 18 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -466,7 +466,7 @@ theorem erdos451_k19 : 2 * 19 < 368 ∧
     (∀ m, 2 * 19 < m → m < 368 → ∃ q, q.Prime ∧ 19 < q ∧ q < 2 * 19 ∧ q ∣ prodK 19 m) := by
   have hpr : ∀ q ∈ [23, 29, 31, 37], q.Prime ∧ 19 < q ∧ q < 2 * 19 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
@@ -485,7 +485,7 @@ theorem erdos451_k20 : 2 * 20 < 550 ∧
     (∀ m, 2 * 20 < m → m < 550 → ∃ q, q.Prime ∧ 20 < q ∧ q < 2 * 20 ∧ q ∣ prodK 20 m) := by
   have hpr : ∀ q ∈ [23, 29, 31, 37], q.Prime ∧ 20 < q ∧ q < 2 * 20 := by
     intro q hq
-    simp only [List.mem_cons, List.mem_nil] at hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
     rcases hq with rfl | rfl | rfl | rfl | ⟨⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩
     · exact ⟨by norm_num, by norm_num, by norm_num⟩

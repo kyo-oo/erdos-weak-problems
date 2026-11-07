@@ -72,25 +72,25 @@ theorem c_20_1 : ((List.range 255).all (fun off => [23, 29, 31, 37].any (fun p =
 theorem c_20_2 : ((List.range 254).all (fun off => [23, 29, 31, 37].any (fun p => Nat.ble 1 ((296 + off) % p) && Nat.ble ((296 + off) % p) 20))) = true := by decide
 
 /-! ## §3 The window enumerations (every prime q ∈ (k, 2k) is in the list). -/
-theorem win_2  : ((List.range 4).all (fun q => !(Nat.blt 2 q && isP q) || decide (q ∈ [3]))) = true := by decide
-theorem win_3  : ((List.range 6).all (fun q => !(Nat.blt 3 q && isP q) || decide (q ∈ [5]))) = true := by decide
-theorem win_4  : ((List.range 8).all (fun q => !(Nat.blt 4 q && isP q) || decide (q ∈ [5, 7]))) = true := by decide
-theorem win_5  : ((List.range 10).all (fun q => !(Nat.blt 5 q && isP q) || decide (q ∈ [7]))) = true := by decide
-theorem win_6  : ((List.range 12).all (fun q => !(Nat.blt 6 q && isP q) || decide (q ∈ [7, 11]))) = true := by decide
-theorem win_7  : ((List.range 14).all (fun q => !(Nat.blt 7 q && isP q) || decide (q ∈ [11, 13]))) = true := by decide
-theorem win_8  : ((List.range 16).all (fun q => !(Nat.blt 8 q && isP q) || decide (q ∈ [11, 13]))) = true := by decide
-theorem win_9  : ((List.range 18).all (fun q => !(Nat.blt 9 q && isP q) || decide (q ∈ [11, 13, 17]))) = true := by decide
-theorem win_10 : ((List.range 20).all (fun q => !(Nat.blt 10 q && isP q) || decide (q ∈ [11, 13, 17, 19]))) = true := by decide
-theorem win_11 : ((List.range 22).all (fun q => !(Nat.blt 11 q && isP q) || decide (q ∈ [13, 17, 19]))) = true := by decide
-theorem win_12 : ((List.range 24).all (fun q => !(Nat.blt 12 q && isP q) || decide (q ∈ [13, 17, 19, 23]))) = true := by decide
-theorem win_13 : ((List.range 26).all (fun q => !(Nat.blt 13 q && isP q) || decide (q ∈ [17, 19, 23]))) = true := by decide
-theorem win_14 : ((List.range 28).all (fun q => !(Nat.blt 14 q && isP q) || decide (q ∈ [17, 19, 23]))) = true := by decide
-theorem win_15 : ((List.range 30).all (fun q => !(Nat.blt 15 q && isP q) || decide (q ∈ [17, 19, 23, 29]))) = true := by decide
-theorem win_16 : ((List.range 32).all (fun q => !(Nat.blt 16 q && isP q) || decide (q ∈ [17, 19, 23, 29, 31]))) = true := by decide
-theorem win_17 : ((List.range 34).all (fun q => !(Nat.blt 17 q && isP q) || decide (q ∈ [19, 23, 29, 31]))) = true := by decide
-theorem win_18 : ((List.range 36).all (fun q => !(Nat.blt 18 q && isP q) || decide (q ∈ [19, 23, 29, 31]))) = true := by decide
-theorem win_19 : ((List.range 38).all (fun q => !(Nat.blt 19 q && isP q) || decide (q ∈ [23, 29, 31, 37]))) = true := by decide
-theorem win_20 : ((List.range 40).all (fun q => !(Nat.blt 20 q && isP q) || decide (q ∈ [23, 29, 31, 37]))) = true := by decide
+theorem win_2  : ((List.range 4).all (fun q => !(decide (2 < q) && isP q) || decide (q ∈ [3]))) = true := by decide
+theorem win_3  : ((List.range 6).all (fun q => !(decide (3 < q) && isP q) || decide (q ∈ [5]))) = true := by decide
+theorem win_4  : ((List.range 8).all (fun q => !(decide (4 < q) && isP q) || decide (q ∈ [5, 7]))) = true := by decide
+theorem win_5  : ((List.range 10).all (fun q => !(decide (5 < q) && isP q) || decide (q ∈ [7]))) = true := by decide
+theorem win_6  : ((List.range 12).all (fun q => !(decide (6 < q) && isP q) || decide (q ∈ [7, 11]))) = true := by decide
+theorem win_7  : ((List.range 14).all (fun q => !(decide (7 < q) && isP q) || decide (q ∈ [11, 13]))) = true := by decide
+theorem win_8  : ((List.range 16).all (fun q => !(decide (8 < q) && isP q) || decide (q ∈ [11, 13]))) = true := by decide
+theorem win_9  : ((List.range 18).all (fun q => !(decide (9 < q) && isP q) || decide (q ∈ [11, 13, 17]))) = true := by decide
+theorem win_10 : ((List.range 20).all (fun q => !(decide (10 < q) && isP q) || decide (q ∈ [11, 13, 17, 19]))) = true := by decide
+theorem win_11 : ((List.range 22).all (fun q => !(decide (11 < q) && isP q) || decide (q ∈ [13, 17, 19]))) = true := by decide
+theorem win_12 : ((List.range 24).all (fun q => !(decide (12 < q) && isP q) || decide (q ∈ [13, 17, 19, 23]))) = true := by decide
+theorem win_13 : ((List.range 26).all (fun q => !(decide (13 < q) && isP q) || decide (q ∈ [17, 19, 23]))) = true := by decide
+theorem win_14 : ((List.range 28).all (fun q => !(decide (14 < q) && isP q) || decide (q ∈ [17, 19, 23]))) = true := by decide
+theorem win_15 : ((List.range 30).all (fun q => !(decide (15 < q) && isP q) || decide (q ∈ [17, 19, 23, 29]))) = true := by decide
+theorem win_16 : ((List.range 32).all (fun q => !(decide (16 < q) && isP q) || decide (q ∈ [17, 19, 23, 29, 31]))) = true := by decide
+theorem win_17 : ((List.range 34).all (fun q => !(decide (17 < q) && isP q) || decide (q ∈ [19, 23, 29, 31]))) = true := by decide
+theorem win_18 : ((List.range 36).all (fun q => !(decide (18 < q) && isP q) || decide (q ∈ [19, 23, 29, 31]))) = true := by decide
+theorem win_19 : ((List.range 38).all (fun q => !(decide (19 < q) && isP q) || decide (q ∈ [23, 29, 31, 37]))) = true := by decide
+theorem win_20 : ((List.range 40).all (fun q => !(decide (20 < q) && isP q) || decide (q ∈ [23, 29, 31, 37]))) = true := by decide
 
 #eval "ERDOS451_DATA_GREEN"
 

@@ -29,4 +29,4 @@ def binom (n k : Nat) : Nat := binomP n k / kfact k
 
 /-- The divisibility census: #{i < k : (n−i) ∣ C(n,k)}. -/
 def wcount (n k : Nat) : Nat :=
-  (List.range k).countp (fun i => binom n k % (n - i) == 0)
+  (List.range k).countP (fun i => binom n k % (n - i) == 0)
