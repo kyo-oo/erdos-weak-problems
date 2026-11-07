@@ -58,6 +58,19 @@ theorem divAt_iff (n m k : Nat) :
     divAt n m k = true ↔ n ∣ prodCons m k := by
   simp [divAt, Nat.dvd_iff_mod_eq_zero]
 
+/-- The manual dvd-sub (Nat.dvd_sub' does not exist in this toolchain). -/
+theorem dvd_sub_nat {p x y : Nat} (hxy : y ≤ x) (hx : p ∣ x) (hy : p ∣ y) :
+    p ∣ x - y := by
+  obtain ⟨u, hu⟩ := hx
+  obtain ⟨w, hw⟩ := hy
+  have hwu : w ≤ u := by
+    by_contra hcon
+    have hwu' : u < w := by omega
+    have hmul : u * p < w * p := (Nat.mul_lt_mul_left p).mpr hwu'
+    rw [Nat.mul_comm u p, Nat.mul_comm w p, ← hu, ← hw] at hmul
+    omega
+  exact ⟨u - w, by rw [hu, hw, Nat.mul_sub]⟩
+
 /-- The consecutive product at $m = n$ is divisible by $n$ (for $k \ge 1$):
 the window contains $n$ itself. -/
 theorem prodCons_self_dvd (n : Nat) : ∀ k : Nat, 1 ≤ k → n ∣ prodCons n k := by
@@ -68,7 +81,8 @@ theorem prodCons_self_dvd (n : Nat) : ∀ k : Nat, 1 ≤ k → n ∣ prodCons n 
     | zero => show n ∣ n * 1; exact Nat.dvd_mul_right n 1
     | succ j ih =>
         show n ∣ (n + (j + 1)) * prodCons n (j + 1)
-        exact Dvd.mul_left ih _
+        obtain ⟨c, hc⟩ := ih
+        exact ⟨(n + (j + 1)) * c, by rw [hc, Nat.mul_left_comm]⟩
   have hk1 : (k - 1) + 1 = k := by omega
   rw [← hk1]; exact hcore (k - 1)
 
@@ -101,10 +115,7 @@ theorem cop_mul_dvd {a b x y : Nat} (ha : a ∣ x) (hb : b ∣ y) : a * b ∣ x 
   obtain ⟨x', hx⟩ := ha
   obtain ⟨y', hy⟩ := hb
   refine ⟨x' * y', ?_⟩
-  calc x * y = (a * x') * (b * y') := by rw [hx, hy]
-    _ = a * (x' * (b * y')) := by rw [← Nat.mul_assoc]
-    _ = a * (b * (x' * y')) := by rw [Nat.mul_left_comm x' b y']
-    _ = a * b * (x' * y') := by rw [Nat.mul_assoc]
+  rw [hx, hy, ← Nat.mul_assoc, Nat.mul_left_comm x' b y', Nat.mul_assoc]
 
 /-- The left-shift identity: prodCons m (k+1) = m * prodCons (m+1) k. -/
 theorem prodCons_shift : ∀ (k m : Nat), prodCons m (k + 1) = m * prodCons (m + 1) k := by
@@ -114,7 +125,7 @@ theorem prodCons_shift : ∀ (k m : Nat), prodCons m (k + 1) = m * prodCons (m +
   | succ k ih =>
     intro m
     have hL : prodCons m (k + 2) = (m + (k + 1)) * prodCons m (k + 1) := rfl
-    have hR : prodCons (m + 1) (k + 2) = ((m + 1) + k) * prodCons (m + 1) k := rfl
+    have hR : prodCons (m + 1) (k + 1) = ((m + 1) + k) * prodCons (m + 1) k := rfl
     rw [hL, ih m, hR, ← Nat.add_assoc, Nat.add_right_comm m k 1, Nat.mul_left_comm]
 
 /-- If d is coprime to every element of l then d is coprime to l.prod. -/
@@ -137,7 +148,7 @@ theorem crt_sound : ∀ (ds : List Nat) (m : Nat), ds.Pairwise Nat.Coprime →
   | nil => intro m _ _; show (1 : Nat) ∣ prodCons m 0; exact Nat.one_dvd _
   | cons d rest ih =>
     intro m hpair hdiv
-    rcases hpair with _ | hhead htail
+    rcases hpair with _ | ⟨hhead, htail⟩
     · have hd : d ∣ m + 0 := hdiv 0 (by simp)
       have hdivrest : ∀ i, i < rest.length → (rest.getD i 1) ∣ ((m + 1) + i) := by
         intro i hi
@@ -175,7 +186,7 @@ theorem erdos394_unique_pos (p m i j k : Nat)
     (h1 : p ∣ m + i) (h2 : p ∣ m + j) : i = j := by
   rcases Nat.le_total i j with hle | hle
   · have hd : p ∣ j - i := by
-      have hsub : p ∣ (m + j) - (m + i) := Nat.dvd_sub' h2 h1
+      have hsub : p ∣ (m + j) - (m + i) := dvd_sub_nat (by omega) h2 h1
       have heq : (m + j) - (m + i) = j - i := by omega
       rw [← heq]; exact hsub
     rcases Nat.eq_zero_or_pos (j - i) with h0 | hpos
@@ -183,7 +194,7 @@ theorem erdos394_unique_pos (p m i j k : Nat)
     · have hple : p ≤ j - i := Nat.le_of_dvd hpos hd
       omega
   · have hd : p ∣ i - j := by
-      have hsub : p ∣ (m + i) - (m + j) := Nat.dvd_sub' h1 h2
+      have hsub : p ∣ (m + i) - (m + j) := dvd_sub_nat (by omega) h1 h2
       have heq : (m + i) - (m + j) = i - j := by omega
       rw [← heq]; exact hsub
     rcases Nat.eq_zero_or_pos (i - j) with h0 | hpos
@@ -215,12 +226,14 @@ theorem erdos394_prime_landing (p : Nat) (hp : Nat.Prime p) :
 
 /-- The explicit coprimality certificate for the showcase factor pair (5, 3). -/
 theorem pair_5_3 : [5, 3].Pairwise Nat.Coprime := by
-  refine List.Pairwise.cons ?_ List.Pairwise.nil
-  intro b hb
-  rcases List.mem_cons.mp hb with h | h
-  · subst h; show Nat.gcd 5 3 = 1
-    decide
-  · exact absurd h (by simp)
+  refine List.Pairwise.cons ?_ (List.Pairwise.cons ?_ List.Pairwise.nil)
+  · intro b hb
+    rcases List.mem_cons.mp hb with h | h
+    · subst h; show Nat.gcd 5 3 = 1
+      decide
+    · exact absurd h (by simp)
+  · intro b hb
+    exact absurd hb (by simp)
 
 theorem t2_15 : tKb 15 2 = 5 := by decide
 theorem t2_35 : tKb 35 2 = 14 := by decide
@@ -236,8 +249,8 @@ theorem crt_showcase_15 : (15 : Nat) ∣ prodCons 5 2 :=
   erdos394_crt_sound 2 15 5 [5, 3] (by decide) (by decide) pair_5_3
     (fun i hi => by
       rcases (show i = 0 ∨ i = 1 by omega) with h | h
-      · subst h; exact ⟨1, by omega⟩
-      · subst h; exact ⟨2, by omega⟩)
+      · subst h; show (5 : Nat) ∣ (5 + 0); exact ⟨1, by omega⟩
+      · subst h; show (3 : Nat) ∣ (5 + 1); exact ⟨2, by omega⟩)
 
 /-- The full table summary: the seven showcase values + the 50-value t_2
 table, all kernel-decided. -/
@@ -251,17 +264,21 @@ theorem erdos394_table_main :
     (∀ j, j < 25 → tKb (n5v.getD j 0) 5 = t5v.getD j 0) := by
   refine ⟨t2_15, t2_35, t2_77, t3_35, t3_55, t4_77, t5_143, ?_, ?_, ?_, ?_⟩
   · intro j hj
-    exact Nat.eq_of_beq_eq_true
-      ((List.all_eq_true.mp t2_table) j (List.mem_range.mpr hj))
+    have h : Nat.beq (tKb (2 * j + 3) 2) (t2v.getD j 0) = true :=
+      (List.all_eq_true.mp t2_table) j (List.mem_range.mpr hj)
+    exact Nat.eq_of_beq_eq_true h
   · intro j hj
-    exact Nat.eq_of_beq_eq_true
-      ((List.all_eq_true.mp t3_table) j (List.mem_range.mpr hj))
+    have h : Nat.beq (tKb (n3v.getD j 0) 3) (t3v.getD j 0) = true :=
+      (List.all_eq_true.mp t3_table) j (List.mem_range.mpr hj)
+    exact Nat.eq_of_beq_eq_true h
   · intro j hj
-    exact Nat.eq_of_beq_eq_true
-      ((List.all_eq_true.mp t4_table) j (List.mem_range.mpr hj))
+    have h : Nat.beq (tKb (n4v.getD j 0) 4) (t4v.getD j 0) = true :=
+      (List.all_eq_true.mp t4_table) j (List.mem_range.mpr hj)
+    exact Nat.eq_of_beq_eq_true h
   · intro j hj
-    exact Nat.eq_of_beq_eq_true
-      ((List.all_eq_true.mp t5_table) j (List.mem_range.mpr hj))
+    have h : Nat.beq (tKb (n5v.getD j 0) 5) (t5v.getD j 0) = true :=
+      (List.all_eq_true.mp t5_table) j (List.mem_range.mpr hj)
+    exact Nat.eq_of_beq_eq_true h
 
 /-! ## §4 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/

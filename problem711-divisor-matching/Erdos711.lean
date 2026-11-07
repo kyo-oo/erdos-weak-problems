@@ -270,9 +270,10 @@ theorem erdos711_two (m : Nat) (hm : 1 ≤ m) : f711 2 m ≤ 3 := by
 
 /-- Injectivity helper for the three-value assignments. -/
 theorem inj3_of_ne {v1 v2 v3 : Nat} (h12 : v1 ≠ v2) (h13 : v1 ≠ v3) (h23 : v2 ≠ v3)
-    (i j : Nat) (hi : i = 1 ∨ i = 2 ∨ i = 3) (hj : j = 1 ∨ j = 2 ∨ j = 3)
+    (i j : Nat)
     (hij : (match i with | 1 => v1 | 2 => v2 | _ => v3)
-          = (match j with | 1 => v1 | 2 => v2 | _ => v3)) : i = j := by
+          = (match j with | 1 => v1 | 2 => v2 | _ => v3))
+    (hi : i = 1 ∨ i = 2 ∨ i = 3) (hj : j = 1 ∨ j = 2 ∨ j = 3) : i = j := by
   rcases hi with h1 | h1 | h1
   · rcases hj with h2 | h2 | h2
     · subst h1; subst h2; omega
@@ -311,7 +312,7 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
         exact inj3_of_ne (v1 := m + 1) (v2 := m + 2) (v3 := m + 3)
-          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+          (by omega) (by omega) (by omega) i j hij (by omega) (by omega)
     · refine ⟨fun k => match k with | 1 => m + 3 | 2 => m + 1 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -326,7 +327,7 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
         exact inj3_of_ne (v1 := m + 3) (v2 := m + 1) (v3 := m + 2)
-          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+          (by omega) (by omega) (by omega) i j hij (by omega) (by omega)
     · refine ⟨fun k => match k with | 1 => m + 3 | 2 => m + 2 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -341,7 +342,7 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
         exact inj3_of_ne (v1 := m + 3) (v2 := m + 2) (v3 := m + 1)
-          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+          (by omega) (by omega) (by omega) i j hij (by omega) (by omega)
     · refine ⟨fun k => match k with | 1 => m + 2 | 2 => m + 1 | _ => m + 3, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -356,7 +357,7 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
         exact inj3_of_ne (v1 := m + 2) (v2 := m + 1) (v3 := m + 3)
-          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+          (by omega) (by omega) (by omega) i j hij (by omega) (by omega)
     · refine ⟨fun k => match k with | 1 => m + 1 | 2 => m + 4 | _ => m + 2, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -371,7 +372,7 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
         exact inj3_of_ne (v1 := m + 1) (v2 := m + 4) (v3 := m + 2)
-          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+          (by omega) (by omega) (by omega) i j hij (by omega) (by omega)
     · refine ⟨fun k => match k with | 1 => m + 2 | 2 => m + 3 | _ => m + 1, ?_, ?_⟩
       · intro k h1k hkn
         rcases (show k = 1 ∨ k = 2 ∨ k = 3 by omega) with h | h | h
@@ -386,7 +387,7 @@ theorem erdos711_three (m : Nat) (hm : 1 ≤ m) : f711 3 m ≤ 5 := by
           exact ⟨Nat.dvd_of_mod_eq_zero (by omega), by omega⟩
       · intro i hi1 hin j hj1 hjn hij
         exact inj3_of_ne (v1 := m + 2) (v2 := m + 3) (v3 := m + 1)
-          (by omega) (by omega) (by omega) i j (by omega) (by omega) hij
+          (by omega) (by omega) (by omega) i j hij (by omega) (by omega)
   exact Nat.sInf_le hmem
 
 /-! ## §4 THE WITNESS TABLES (n = 2..15 at m = (n−1)², kernel-decided). -/
@@ -411,15 +412,9 @@ the $(m, m+2n-1)$ window. -/
 theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
     (h : w711OK n m as = true) :
     ∃ a, AssignOk n m (2 * n - 1) a := by
-  have hA : ((as.length == n) && ((List.range n).all (fun i =>
-         ((decide (m < as.getD i 0)) && (decide (as.getD i 0 < m + 2 * n - 1)))
-           && ((as.getD i 0) % (i + 1) == 0))) &&
-       ((List.range n).all (fun i =>
-         (List.range n).all (fun j =>
-           (i == j) || !((as.getD i 0) == (as.getD j 0)))))) = true := h
-  obtain ⟨hLM, hdist⟩ := (Bool.and_eq_true).mp hA
-  obtain ⟨hlen, hall⟩ := (Bool.and_eq_true).mp hLM
-  have hlenN : as.length = n := Nat.eq_of_beq_eq_true hlen
+  simp only [w711OK, Bool.and_eq_true] at h
+  obtain ⟨⟨hlen, hall⟩, hdist⟩ := h
+  have hlenN : as.length = n := by simp at hlen; exact hlen
   refine ⟨fun k => as.getD (k - 1) 0, ?_, ?_⟩
   · intro k h1k hkn
     show k ∣ (as.getD (k - 1) 0) ∧ m < (as.getD (k - 1) 0) ∧
@@ -427,8 +422,8 @@ theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
     have hidx : k - 1 < n := by omega
     have hmem : (k - 1) ∈ List.range n := List.mem_range.mpr hidx
     have hcall := (List.all_eq_true.mp hall) (k - 1) hmem
-    obtain ⟨hc2, hmod⟩ := (Bool.and_eq_true).mp hcall
-    obtain ⟨hlt1, hlt2⟩ := (Bool.and_eq_true).mp hc2
+    simp only [Bool.and_eq_true] at hcall
+    obtain ⟨⟨hlt1, hlt2⟩, hmod⟩ := hcall
     have hb1 : m < as.getD (k - 1) 0 := by
       rw [decide_eq_true] at hlt1; exact hlt1
     have hb2 : as.getD (k - 1) 0 < m + 2 * n - 1 := by
@@ -449,7 +444,7 @@ theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
       simp [hij]
     rw [hbeq] at hdij
     simp only [Bool.not_true, Bool.or_false] at hdij
-    have hidx : i - 1 = j - 1 := Nat.eq_of_beq_eq_true hdij
+    have hidx : i - 1 = j - 1 := by simp at hdij; exact hdij
     omega
 
 /-- The law-case assembler: obstruction below + witness above. -/
@@ -523,7 +518,7 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
           have huw : w ≤ u := by
             by_contra hcon
             have hwu : u < w := by omega
-            have hmul : u * k < w * k := Nat.mul_lt_mul_left (by omega) hwu
+            have hmul : u * k < w * k := (Nat.mul_lt_mul_left k).mpr hwu
             rw [Nat.mul_comm u k, Nat.mul_comm w k, ← hu, ← hw] at hmul
             omega
           refine ⟨u - w, ?_⟩
