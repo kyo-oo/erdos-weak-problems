@@ -433,9 +433,9 @@ theorem no_big_prime_smooth23 (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 1 ≤ v
           obtain ⟨aa, bb, hab⟩ := ih w (by omega) hw1 hbigw
           refine ⟨aa + 1, bb, ?_⟩
           rw [Nat.pow_succ]
-          calc 2 * 2 ^ aa * 3 ^ bb = 2 * (2 ^ aa * 3 ^ bb) := by ring
+          calc 2 ^ aa * 2 * 3 ^ bb = 2 * (2 ^ aa * 3 ^ bb) := by ring
             _ = 2 * w := by rw [hab]
-            _ = v := hw
+            _ = v := hw.symm
         · ----- p = 3: v = 3w -----
           have hvm : 3 ∣ v := by rw [hp3] at hpd; exact hpd
           rw [Nat.dvd_iff_mod_eq_zero] at hvm
@@ -450,9 +450,9 @@ theorem no_big_prime_smooth23 (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 1 ≤ v
           obtain ⟨aa, bb, hab⟩ := ih w (by omega) hw1 hbigw
           refine ⟨aa, bb + 1, ?_⟩
           rw [Nat.pow_succ]
-          calc 2 ^ aa * (3 * 3 ^ bb) = 3 * (2 ^ aa * 3 ^ bb) := by ring
+          calc 2 ^ aa * (3 ^ bb * 3) = 3 * (2 ^ aa * 3 ^ bb) := by ring
             _ = 3 * w := by rw [hab]
-            _ = v := hw
+            _ = v := hw.symm
 
 /-! ## §4 The witness divisor laws (concrete). -/
 
@@ -974,6 +974,15 @@ theorem erdos961_pell_dict (n : Nat) (h1 : Smooth23 n) (h2 : Smooth23 (n + 1)) :
           * (2 ^ ((a1 + a2) / 2) * 3 ^ ((b1 + b2) / 2)) := by
       rw [hprod, hsplit2, hsplit3]
       ring
+    -- THE h4 BRIDGE: a(2b)(2b) = 4·n(n+1) (omega sees the power-products
+    -- as opaque atoms — the explicit bridge is MANDATORY, S035 lesson)
+    have h4 : (2 ^ ((a1 + a2) % 2) * 3 ^ ((b1 + b2) % 2))
+        * (2 * (2 ^ ((a1 + a2) / 2) * 3 ^ ((b1 + b2) / 2)))
+        * (2 * (2 ^ ((a1 + a2) / 2) * 3 ^ ((b1 + b2) / 2)))
+        = 4 * (n * (n + 1)) := by
+      rw [hprod_ab]
+      ring
+    rw [hX2, h4]
     omega
 
 /-! ## §8 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
