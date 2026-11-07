@@ -26,6 +26,7 @@ on:
       - problem394-consecutive-crt/**
       - problem711-divisor-matching/**
       - problem961-smooth-runs/**
+      - problem686-pell-ratio/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -626,3 +627,19 @@ jobs:
           grep -E "Erdos961.erdos961_(census23|run23|f2|f3|f4|lower_57|lower_712|pell_dict|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel25.log
           python3 problem961-smooth-runs/battery961.py
           echo ERDOS961_SMOOTH_RUN_KERNEL_GREEN=1
+
+      - name: "Kernel 26 - Erdos 686 SQUARE k=2 CENSUS (S035 volley): the infinite family theorem (all t = 4u+2 >= 10) + the odd sporadic t=99 + the no-go bridge (divisor-pair reduction) + the full census t<=100 + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel26.log
+          lake env lean problem686-pell-ratio/Erdos686Squares.lean 2>&1 | tee -a kernel26.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel26.log
+          grep -F "ERDOS686SQ_KERNEL_GREEN" kernel26.log
+          grep -E "Erdos686Sq.(erdos686sq_(family|99|noRep|census|arsenal_bridge|main)|census_scan_true)' (does not depend on any axioms|depends on axioms)" kernel26.log
+          python3 problem686-pell-ratio/battery686sq.py
+          echo ERDOS686SQ_CENSUS_KERNEL_GREEN=1
