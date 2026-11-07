@@ -1018,6 +1018,7 @@ theorem erdos700_equality_class (p : Nat) (hpp : p.Prime) :
   refine ⟨erdos700_law p 2 hpp (by omega), ?_, ?_⟩
   · rw [Nat.pow_two, mul_div_self p p (by omega : 1 ≤ p)]
   · intro q hqp hqdvd
+    have hq2 : 2 ≤ q := hqp.one_lt
     have hqdp : q ∣ p := prime_dvd_pow_of q hqp 2 p hqdvd
     have hiff : q ∣ p ↔ q = 1 ∨ q = p := Nat.dvd_prime hpp
     exact (hiff.mp hqdp).resolve_left (by omega)
