@@ -38,7 +38,7 @@ theorem isP_of_prime (q : Nat) (hq : q.Prime) : isP q = true := by
   have hne : q % (d + 2) ≠ 0 := by
     intro h0
     have hdvd : (d + 2) ∣ q := Nat.dvd_of_mod_eq_zero h0
-    rcases Nat.dvd_prime hq hdvd with h1 | h1
+    rcases (Nat.dvd_prime hq).mp hdvd with h1 | h1
     · omega
     · omega
   exact bne_iff_ne.mpr hne
@@ -89,7 +89,7 @@ theorem erdos451_crit (p k n : Nat) (hp : p.Prime) (hk : k < p) (hkn : k ≤ n) 
     have hmod : n % p = j := by
       have hsplit : p * t + j = n := by omega
       have hjj : j % p = j := Nat.mod_eq_of_lt (by omega)
-      rw [← hsplit, Nat.mul_comm p t, Nat.add_mul_mod_self_right, hjj]
+      rw [← hsplit, Nat.add_comm, Nat.add_mul_mod_self_left, hjj]
     exact ⟨by omega, by omega⟩
   · intro hres
     obtain ⟨h1, h2⟩ := hres
@@ -128,12 +128,14 @@ theorem cov_decode (k base cnt : Nat) (ps : List Nat)
   have hall := (List.all_eq_true.mp h) (m - base) hoff
   obtain ⟨p, hpmem, hpval⟩ := List.any_eq_true.mp hall
   have hbm : base + (m - base) = m := Nat.add_sub_cancel' hm1
-  have hb : Nat.ble 1 (m % p) && Nat.ble (m % p) k = true := by
-    have hthis : Nat.ble 1 ((base + (m - base)) % p)
-        && Nat.ble ((base + (m - base)) % p) k = true := hpval
+  have hb : (Nat.ble 1 (m % p) && Nat.ble (m % p) k) = true := by
+    have hthis : (Nat.ble 1 ((base + (m - base)) % p)
+        && Nat.ble ((base + (m - base)) % p) k) = true := hpval
     rw [hbm] at hthis
     exact hthis
-  obtain ⟨hb1, hb2⟩ := Bool.and_eq_true.mp hb
+  obtain ⟨hb1, hb2⟩ : (Nat.ble 1 (m % p) = true ∧ Nat.ble (m % p) k = true) := by
+    rw [← Bool.and_eq_true]
+    exact hb
   exact ⟨p, hpmem, Nat.ble_eq.mp hb1, Nat.ble_eq.mp hb2⟩
 
 /-! ## §6 The assembly helper (sieve content → product formulation). -/
