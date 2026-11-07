@@ -84,7 +84,7 @@ theorem sub_add_mul (a b : Nat) (h : b ≤ a) : (a - b) * (a + b) = a * a - b * 
   rw [hexp]
   have hfin : b * b + 2 * b * c + c * c - b * b = 2 * b * c + c * c := by omega
   rw [hfin]
-  exact hL.symm
+  exact hL
 
 /-! ## §2 THE INFINITE FAMILY THEOREM. -/
 
@@ -129,8 +129,11 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
     have hY2 : Y * Y = 4 * ((n + 1) * (n + 2)) + 1 := by
       show (2 * n + 3) * (2 * n + 3) = 4 * ((n + 1) * (n + 2)) + 1
       ring
-    rw [hX2, hY2, heq]
-    ring
+    calc X * X + t * t
+        = 4 * ((m + 1) * (m + 2)) + 1 + t * t := by rw [hX2]
+      _ = t * t * (4 * ((n + 1) * (n + 2)) + 1) + 1 := by
+          rw [heq]; ring
+      _ = t * t * Y * Y + 1 := by rw [hY2]; ring
   -- tY > X (the sign law: X² < t²Y²)
   have htt : 4 ≤ t * t := by
     have hmul : t * 2 ≤ t * t := Nat.mul_le_mul_left t (by omega)
@@ -139,6 +142,7 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
     by_contra hcon
     have hge : t * Y ≤ X := by omega
     have hle : (t * Y) * (t * Y) ≤ X * X := Nat.mul_le_mul hge hge
+    have hsame : (t * Y) * (t * Y) = t * t * Y * Y := by ring
     omega
   -- the divisor pair
   set d1 := t * Y - X with hd1
@@ -146,19 +150,16 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
   have hd1pos : 1 ≤ d1 := by omega
   have hd1d2 : d1 * d2 = t * t - 1 := by
     have hfac := sub_add_mul (t * Y) X (by omega)
-    rw [hd1, hd2] at hfac
-    -- hfac : (t*Y - X) * (X + t*Y) = (t*Y)*(t*Y) - X*X
-    have harr : (t * Y - X) * (X + t * Y) = t * t * Y * Y - X * X := by
-      rw [← hfac]
-      congr 1
-      ring
+    have hprod_eq : d1 * d2 = (t * Y - X) * (t * Y + X) := by
+      rw [hd1, hd2, Nat.add_comm X (t * Y)]
+    have hsame2 : t * Y * (t * Y) = t * t * Y * Y := by ring
     omega
   -- d1 < d2 and d1 < t
   have hd1lt : d1 < d2 := by omega
   have hd1t : d1 < t := by
     by_contra hcon
     have hge : t ≤ d1 := by omega
-    have hsq : d1 * d1 ≤ d1 * d2 := Nat.mul_le_mul_left d1 hd1lt
+    have hsq : d1 * d1 ≤ d1 * d2 := Nat.mul_le_mul_left d1 (Nat.le_of_lt hd1lt)
     have ht2 : t * t ≤ d1 * d1 := Nat.mul_le_mul hge hge
     have htt2 : 4 ≤ t * t := by
       have hmul : t * 2 ≤ t * t := Nat.mul_le_mul_left t (by omega)
@@ -167,7 +168,7 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
   -- the division facts
   have hMdiv : (t * t - 1) / d1 = d2 := by
     rw [← hd1d2]
-    exact Nat.mul_div_cancel_left (show 0 < d1 by omega) d2
+    exact Nat.mul_div_cancel_left d2 (show 0 < d1 by omega)
   -- the ten components
   have hc1 : decide (1 ≤ d1) = true := decide_eq_true hd1pos
   have hc2 : decide (d1 < (t * t - 1) / d1) = true := by
@@ -178,7 +179,7 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
     exact decide_eq_true hd1d2
   have heven : d2 - d1 = 2 * X := by omega
   have hd2m1 : (d2 - d1) / 2 = X := by
-    rw [heven, Nat.mul_div_cancel_left (show (0:Nat) < 2 by norm_num) X]
+    rw [heven, Nat.mul_div_cancel_left X (show (0:Nat) < 2 by norm_num)]
   have hoddX : X % 2 = 1 := by omega
   have hX9 : 9 ≤ X := by omega
   have hc4 : decide (((t * t - 1) / d1 - d1) % 2 = 0) = true := by
@@ -189,19 +190,19 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
   have hc5 : decide ((((t * t - 1) / d1 - d1) / 2) % 2 = 1) = true := by
     rw [hMdiv]
     have h1 : (d2 - d1) / 2 = X := by
-      rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left (show (0:Nat) < 2 by norm_num) X]
+      rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left X (show (0:Nat) < 2 by norm_num)]
     rw [h1]
     exact decide_eq_true hoddX
   have hc6 : decide (9 ≤ ((t * t - 1) / d1 - d1) / 2) = true := by
     rw [hMdiv]
     have h1 : (d2 - d1) / 2 = X := by
-      rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left (show (0:Nat) < 2 by norm_num) X]
+      rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left X (show (0:Nat) < 2 by norm_num)]
     rw [h1]
     exact decide_eq_true hX9
   have hsum : d2 + d1 = 2 * t * Y := by omega
   have hdivt : (d2 + d1) / (2 * t) = Y := by
     rw [hsum]
-    exact Nat.mul_div_cancel_left (show 0 < 2 * t by omega) Y
+    exact Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)
   have hoddY : Y % 2 = 1 := by omega
   have hY5 : 5 ≤ Y := by omega
   have hXY2 : Y + 2 ≤ X := by omega
@@ -213,28 +214,29 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
   have hc8 : decide ((((t * t - 1) / d1 + d1) / (2 * t)) % 2 = 1) = true := by
     rw [hMdiv]
     have h1 : (d2 + d1) / (2 * t) = Y := by
-      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left (show 0 < 2 * t by omega) Y]
+      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)]
     rw [h1]
     exact decide_eq_true hoddY
   have hc9 : decide (5 ≤ ((t * t - 1) / d1 + d1) / (2 * t)) = true := by
     rw [hMdiv]
     have h1 : (d2 + d1) / (2 * t) = Y := by
-      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left (show 0 < 2 * t by omega) Y]
+      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)]
     rw [h1]
     exact decide_eq_true hY5
   have hc10 : decide (((t * t - 1) / d1 - d1) / 2 ≥
       ((t * t - 1) / d1 + d1) / (2 * t) + 2) = true := by
     rw [hMdiv]
     have h1 : (d2 - d1) / 2 = X := by
-      rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left (show (0:Nat) < 2 by norm_num) X]
+      rw [show d2 - d1 = 2 * X by omega, Nat.mul_div_cancel_left X (show (0:Nat) < 2 by norm_num)]
     have h2' : (d2 + d1) / (2 * t) = Y := by
-      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left (show 0 < 2 * t by omega) Y]
+      rw [show d2 + d1 = 2 * t * Y by omega, Nat.mul_div_cancel_left Y (show 0 < 2 * t by omega)]
     rw [h1, h2']
     exact decide_eq_true hXY2
   -- assemble: divNoRepSmall t d1 = true, contradicting the scan
   have htrue : divNoRepSmall t d1 = true := by
     simp only [divNoRepSmall]
     rw [hc1, hc2, hc3, hc4, hc5, hc6, hc7, hc8, hc9, hc10]
+    rfl
   have hall := (List.all_eq_true.mp hscan) d1 (List.mem_range.mpr (by omega))
   rw [htrue] at hall
   simp at hall
@@ -262,7 +264,10 @@ theorem erdos686sq_census : ∀ t : Nat, 2 ≤ t → t ≤ 100 →
       | false => rfl
       | true =>
           have hand : t % 4 = 2 ∧ 10 ≤ t := of_decide_eq_true hf
-          exact absurd hand hfam
+          exact absurd hand (by
+            intro hh
+            have hlt := hfam hh.1
+            omega)
     have h99f : decide (t = 99) = false := by
       cases hf : decide (t = 99) with
       | false => rfl
@@ -277,10 +282,11 @@ theorem erdos686sq_census : ∀ t : Nat, 2 ≤ t → t ≤ 100 →
     · -- family: t ≡ 2 mod 4, t ≥ 10: t = 4u+2 with u = (t-2)/4 ≥ 2
       have hu : 2 ≤ (t - 2) / 4 := by omega
       have htval : t = 4 * ((t - 2) / 4) + 2 := by omega
-      obtain ⟨m, n, hrep⟩ := erdos686sq_family ((t - 2) / 4) hu
-      refine ⟨m, n, ?_⟩
-      rw [htval]
-      exact hrep
+      have hN : t * t = (4 * ((t - 2) / 4) + 2) * (4 * ((t - 2) / 4) + 2) := by
+        rw [← htval]
+      obtain ⟨m, n, hval, hn1', hmn'⟩ := erdos686sq_family ((t - 2) / 4) hu
+      refine ⟨m, n, ?_, hn1', hmn'⟩
+      rw [hval, ← hN]
     · subst h99
       exact ⟨241, 1, erdos686sq_99⟩
 
