@@ -302,8 +302,8 @@ C-grade) makes it a multi-round war.
 the archive-summary violation is burned); MATHS + prove-that-shit full chain
 activated first, per standing law.
 
-**KILL #23 LANDED — Erdős #700, Kernel 19 (the 6-round compile war, runs
-42319640729 → 42326088956 → R6): THE PRIME-POWER LAW.** For EVERY prime p:
+**KILL #23 LANDED — Erdős #700, Kernel 19 (CI run 42330675842 GREEN, commit
+at R8; the 8-round compile war 42319640729 → 42330675842): THE PRIME-POWER LAW.** For EVERY prime p:
 - **Theorem A (the carry lemma):** v_p(C(p^a, k)) = a − v_p(k) for all
   1 ≤ k ≤ p^a − 1 — proven via the Legendre floor-sum bridge: divSplit
   (⌊k/m⌋ + ⌊s/m⌋ + [k%m ≠ 0] = c for k+s = m·c — the heart), succDiff,
@@ -333,14 +333,17 @@ activated first, per standing law.
   open core — the semiprime + prime-square classes are now both settled
   in-house.
 
-*The compile war R1→R6: R1 (38 errors — the core mathematics ALL passed:
+*The compile war R1→R8: R1 (38 errors — the core mathematics ALL passed:
 Theorem A assembly, divSplit, powsSum_split, legendre_pp, binom_fact_gen;
 failures were API-surface) → R2 (9: dvd_mul is an iff; omega cannot see
 Nat.min; pow_succ direction; obtain-clears-Dvd) → R3 (5: pow_succ' implicit
 succ-form; minFac signatures; le_min iff) → R4 (1: q ≥ 2 from q.Prime is
 invisible to omega) → R5 (THE KERNEL GREEN — all five theorems at the clean
-axiom standard; battery sympy-import died on the runner) → R6 (sympy-free
-battery). The engine never stops; it never lies.*
+axiom standard; battery sympy-import died on the runner) → R6/R7 (the battery
+never ran — the five axiom-grep patterns lacked the Erdos700. namespace
+prefix; grep-exit-1 under set -e killed the step at the first axiom grep,
+3ms after the last receipt grep) → R8 (patterns fixed: the LANDING). The
+engine never stops; it never lies.*
 
 **The parallel volleys (majority treatment, same session):** #939 r=4:
 ZERO solutions ≤ 10¹⁵ (5,622 4-powerfuls, 8.9M coprime pairs — the

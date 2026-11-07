@@ -59,7 +59,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
    dress a partial result in complete-resolution clothing (MATHS §7.7,
    prohibition #8).
 
-**THE KILL REGISTRY (22 kills — full entries in repo `README.md`):**
+**THE KILL REGISTRY (23 kills — full entries in repo `README.md`):**
 
 | # | Problem | The kill (one line) | CI state |
 |---|---|---|---|
@@ -85,6 +85,8 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 20 | **686** | **THE PELL-RATIO LAW (non-squares)**: every non-square N≥2 has the k=2 ratio representation ∏(m+i)/∏(n+i) — COMPLETE Pell proof (unit^j·(1+√N), parity lemma j∈{1,2}, size lemma) + 90-witness Lean table (all non-squares ≤100) + t≡2(4) square-family polynomial identity + k=3 witnesses N=9,16; ARSENAL-APPLIED (lt_three_cases routing, isTernaryDigit validity, v2r_ternary_scaling bookkeeping); battery 186 non-squares ≤200 dual-method | **run 42212351838, commit 025dd39, Kernel 16** |
 | 21 | **727** | **THE WITNESS THEOREM n=208**: (210)!² ∣ (416)! unconditionally — 115-digit quotient Q kernel-decided, 47-prime check, 28 TIGHT primes (zero p-adic slack, FULL Legendre sums), Legendre/Kummer cascade conditions at p=2,3 (s₂: 8≥7, s₃: 12≥10); ARSENAL-APPLIED (ternary digit predicates on the witness's own digits, carryAtPos_bound, v2r scaling); census: 55 k=2 solutions <10⁴ (smallest 208), ZERO k=3 <3·10³ | **run 42212351838, commit 025dd39, Kernel 17** |
 | 22 | **1056** | **THE FACTORIAL-INTERVAL CASE-FRONTIER THEOREM**: the structure law (k consecutive intervals with products ≡ 1 mod p ⟺ the j! mod p chain visits one value k+1 times — Wilson anchors 1!≡1, (p−2)!≡1, odd-j doubling) + **CASE FRONTIER k: 3 → 11** — NEW cases k=4..11 with smallest witnesses p = 23, 109, 71, 673, 599, 3011, 27901, 52163 (every block product kernel-decided via the six-step §7-freeze olean ladder + tree products; wilson_23/17/3011 ZERO axioms; v2r_scaling [propext, Quot.sound]; arsenal bridge isTernaryDigit/lt_three_cases/carryAtPos_bound on the witness numbers); battery dual-method (block products ∥ factorial chains) k=2..11 ALL GREEN; honest scope: arbitrarily-large-k (Noll–Simmons) remains open | **run 42308034994, commit a66350c, Kernel 18 (the 9-round compile war)** |
+
+| 23 | **700** | **THE PRIME-POWER LAW**: Theorem A the carry lemma v_p(C(p^a,k)) = a − v_p(k) for EVERY prime (Legendre floor-sum bridge: divSplit + powsSum/cntDiv counters + binom identity); Theorem B f(p^a) = p EXACT for a ≥ 2 (minGcdAux min: universal bound + witness k₀ = p^(a−1)); the ErSz EQUALITY class at prime squares f(p²) = p = p²/P(p²); the a ≥ 3 violation; arsenal-applied (lt_three_cases, isTernaryDigit, carryAtPos_bound, v2r_ternary_scaling); battery 79,026 dual-method GREEN; all five theorems [propext, Classical.choice, Quot.sound] — **the 8-round compile war (the R6/R7 grep-ghost: namespace-prefixed #print output vs unprefixed grep patterns)** | **run 42330675842 GREEN, Kernel 19** |
 
 **AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
 sub-problem remnants; every crossed-problem kill is a complete unconditional
@@ -115,6 +117,12 @@ follow-up on the SAME front).**
 - **#727**: **KILL #21 (S029, Kernel 17): the n=208 witness theorem +
   tightness profile + cascade conditions, arsenal-applied.** Open residue
   (same front): k=2 infinitude / k≥3 obstruction (4–5 rounds).
+- **#700**: **KILL #23 (S031, Kernel 19, run 42330675842): THE PRIME-POWER
+  LAW — the prime-power class of the ErSz equality COMPLETELY
+  characterized** (carry lemma + exact f(p^a) = p + the p² equality class +
+  the a ≥ 3 violation). Open core: the full composite classification
+  (mixed n) — semiprimes (known) + prime squares (ours) are the settled
+  classes.
 - **#1108**: THE ACTIVE WAR. Kill #17 delivered the engine (cascade law +
   parity). Open: finiteness of squares/powerfuls (Brindza–Erdős bounds
   |S|; the war lives at |S|→∞; heuristic says finiteness; walls: composite
@@ -349,7 +357,13 @@ was a MISLABEL (corpus #422 = Hofstadter Q-sequence, well-definedness
 open = Collatz-class; the Conolly freq law is a different sequence) — OUT
 with cause.
 
-**S030 FIRING STATE:** (1) **#1056 CASE-FRONTIER KILL FIRING**: the
+**S031 FIRING STATE:** (1) **KILL #23 LANDED — #700 PRIME-POWER LAW**
+(run 42330675842, Kernel 19, the 8-round compile war; #317 demoted OUT
+per the 5-round law — both kernels open-style; #288/#1212 promoted —
+the majority treatment holds at 22). (2) #939 r=4: ZERO ≤ 10¹⁵ (8.9M
+coprime pairs; the heuristic says the lane needs an algebraic
+construction). (3) #686 square residue: k=3 hunt zero at m < 600k for
+the 9 named t. **S030 FIRING STATE (carried):** (1) **#1056 CASE-FRONTIER KILL FIRING**: the
 structure law — k consecutive intervals with products ≡ 1 (mod p) ⟺ the
 sequence j! mod p visits one value k+1 times; Wilson-law force-pairs
 (1! ≡ 1 and (p−2)! ≡ 1 always; odd-j hits double via j!·(p−1−j)! ≡
@@ -472,5 +486,23 @@ hunts + #885 k=5 + #317 K1: firing.
   lane ALIVE; linear-congruence reduction written; C-grade multi-round
   torus war). #317: deadline stands, energy went to the two strikes. NO
   ledger additions. No sub-agents.
+
+- **031** (2026-11-07): THE TONGUE LAW + KILL #23 — English-only law
+  engraved (the Chinese archive violation burned); MATHS + prove-that-shit
+  full chain activated FIRST; **KILL #23: Erdős #700 THE PRIME-POWER LAW**
+(Kernel 19 `Erdos700.lean` — Theorem A carry lemma via the Legendre
+  floor-sum bridge [divSplit/succDiff/div_unique/powsSum/cntDiv/cntNotDiv/
+  legendre_pp/binom_fact_gen], Theorem B f(p^a) = p exact, the prime-square
+  ErSz equality class, the a ≥ 3 violation; arsenal-applied; battery
+  79,026; ALL [propext, Classical.choice, Quot.sound]; run 42330675842).
+  **The 8-round compile war**: R1 38 errors (core math passed — API
+  surface) → R2 9 (dvd_mul iff, omega blind to Nat.min, pow_succ
+  direction) → R3 5 (pow_succ' implicit succ-form, minFac signatures) →
+  R4 1 (q.Prime invisible to omega) → R5 KERNEL GREEN → R6/R7 THE GREP
+  GHOST (the five axiom-grep patterns lacked the Erdos700. namespace
+  prefix; the battery NEVER ran — grep exit 1 under set -e killed the step
+  3ms after the last receipt grep) → R8 THE LANDING. Parallel volleys:
+  #939 zero ≤ 10¹⁵; #686 k=3 zero at 600k; #317 demoted (5-round law).
+  THE_LIST v7 (22 active). No ledger additions.
 
 *State is full. The engine never stops; it never lies.*

@@ -1,4 +1,4 @@
-# THE LIST — THE OPERATIONAL LAW (v6, Session 030, 2026-11-06)
+# THE LIST — THE OPERATIONAL LAW (v7, Session 031, 2026-11-07)
 
 > **THE ROULETTE LAWS (verbatim, cumulative — OLD and NEW, both binding):**
 > **OLD (S023):** only problems that need new mathematics; one-shot capable.
@@ -42,6 +42,7 @@
 | **#406** | 🚫 BOSS'S OWN FRONT | HANDS OFF. |
 | **#260** | 🚫 DEAD | Wang 2026. |
 | **#686** | ✅ KILL #20 (S029, K16, run 42212351838) | non-squares COMPLETE (Pell unit construction, 90-witness table, 186 verified ≤200); residue: square classes (same front, 2–4 rounds). |
+| **#700** | ✅ **KILL #23 (S031, K19, run 42330675842)** | THE PRIME-POWER LAW: carry lemma v_p(C(p^a,k)) = a − v_p(k) for EVERY prime; f(p^a) = p exact (a ≥ 2); the ErSz EQUALITY class at prime squares (second settled class); the a ≥ 3 violation. Arsenal-applied; battery 79,026 GREEN. Residue: the full-n classification (mixed composites) = the open corpus core. |
 | **#727** | ✅ KILL #21 (S029, K17, run 42212351838) | witness theorem n=208 (Q 115-digit kernel-decided; tightness FULL Legendre sums; cascade conditions); residue: k=2 infinitude / k≥3 obstruction (same front, 4–5 rounds). |
 
 ---
@@ -50,7 +51,7 @@
 
 | Rank | Target | Kill path | Rounds | Mark |
 |---|---|---|---|---|
-| 1 | **#317 signed harmonic sums** | K1 residue lemma; 1M sweep ZERO counterexamples; Theorem D 80% assembled | 2 (HARD deadline: 1 more round or demote) | 🎯 |
+| ~~1~~ | **#317 signed harmonic sums** | **S031: OUT per the 5-round law** — both kernels (K1 lcm-residue non-degeneracy, K2 Egyptian-identity counting) are open-style cores; engine evidence exhausted (1M sweep zero, Theorem D zero collisions); the reduction + Theorem A + n ≤ 5000 classification remain in DERIVATION.md as the permanent base | — | 🚫 |
 | 2 | **#1108 all-prime isolated-minimum port** | TheoremBGeneral twin (vpad, every prime p) | 1–2 | 🎯 |
 | 3 | **#1108 census MitM > 24** | evidence wing for the engine | — | ⏸ support |
 
@@ -63,7 +64,6 @@ DEAD — #404 is case-closed. Never re-admitted.
 
 | Rank | Problem | Front (Session 030 status) | Rounds | Mark |
 |---|---|---|---|---|
-| 1 | **#700 binomial-gcd f(n)** | **S030 ADMISSION — THE PRIME-POWER LAW**: carry lemma v_p(C(p^a,k)) = a−v_p(k) ⟹ f(p²)=p (the ONLY prime powers satisfying the ErSz equality f(n)=n/P(n)) and f(p^a)=p for ALL a≥3; battery + kernel this session | **1 (firing)** | 🎯 |
 | 2 | **#686 Pell-ratio** | KILL #20 LANDED; same-front residue: squares t≡0(4), odd t≥5 | 2–4 | 🎯 |
 | 3 | **#727 factorial-square** | KILL #21 LANDED; same-front war: k=2 infinitude / k≥3 obstruction | 2–4 | 🎯 |
 | 4 | **#374 factorial-square density** | #1108 multiplicative sibling; K17+K19 transfer | 4–5 | 🎯 |
@@ -71,8 +71,8 @@ DEAD — #404 is case-closed. Never re-admitted.
 | 6 | **#396 ∏(n−i) \| C(2n,n)** | per-k construction; Kummer/cascade machinery | 4–5 | 🎯 |
 | 7 | **#306 semiprime Egyptian representation** | BEG-style induction (CRT prime-pair splitting); S029 engine: 168/277 rationals represented | 4–5 | 🎯 |
 | 8 | **#348 m-redundant complete sequences** | zero-slack critical-juncture derivation DONE; construction war on m=2,n=3 | 4–5 | 🎯 |
-| 9 | **#288 two-interval harmonic integers** | #317 machinery transfers | 4–5 | ⏸ |
-| 10 | **#1212 coprime-composite dance** | Bertrand/CRT scheduling lemma | 3–5 | ⏸ |
+| 9 | **#288 two-interval harmonic integers** | S031 PROMOTION (slot freed by #700's kill): #317's reduction machinery transfers | 4–5 | 🎯 |
+| 10 | **#1212 coprime-composite dance** | S031 PROMOTION: Bertrand/CRT scheduling lemma | 3–5 | 🎯 |
 | 11 | **#389 consecutive-product divisibility** | k≤n/2 lane | 4–5 | ⏸ |
 | 12 | **#708 product-divisibility g(n)** | Erdős $100; case-value g(4) lane (ErSu59 did g(2),g(3)) | 4–5 | ⏸ |
 
@@ -89,8 +89,9 @@ DEAD — #404 is case-closed. Never re-admitted.
 | **#850 radical triple coincidence** | no witness <2·10⁴; extended hunt queued | witness → YES-death | 💣 |
 | **#274 coset tilings (distinct sizes)** | abelian ≤36 ALL negative (17 groups); nonabelian ≤24 queued | witness → YES-death (the FULL problem) | 💣 |
 
-**Firing queue total: 2 (§B) + 12 (§C) + 8 (§D) = 22 problems under active
-one-shot/5-round fire — THE MAJORITY TREATMENT HOLDS.**
+**Firing queue total (v7): 1 (§B: the #1108 port; #317 OUT by the 5-round
+law) + 13 (§C: 12 − #700 killed + #288/#1212 promoted) + 8 (§D) = 22
+problems under active one-shot/5-round fire — THE MAJORITY TREATMENT HOLDS.**
 
 ---
 
@@ -124,9 +125,10 @@ core). **#634** (Laczkovich–Szabó deep). **#1055** (infinitude). **#1110**
 (density core open). **#689** (Green-list covering, LLL-grade). **#312**
 (EG&G open core). **#326, #431, #892, #1101** (deep structure wars).
 
-> **THE COUNT, HONEST:** 22 problems under active one-shot/5-round fire
-> (2 §B + 12 §C + 8 §D). The queue DEEPENS as strikes land — every kill
-> frees a slot. #404/#271 are CLOSED (BOSS S030) and never re-open.
+> **THE COUNT, HONEST (v7):** 22 problems under active one-shot/5-round
+> fire (1 §B + 13 §C + 8 §D). #700 KILLED (S031, K19); #317 OUT (5-round
+> law). The queue DEEPENS as strikes land — every kill frees a slot.
+> #404/#271 are CLOSED (BOSS S030) and never re-open.
 
 ---
 

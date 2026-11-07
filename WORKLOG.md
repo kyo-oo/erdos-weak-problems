@@ -1127,11 +1127,15 @@ lt_three_cases, isTernaryDigit, carryAtPos_bound, v2r_ternary_scaling
 (K17 eq_def route). Battery 79,026 dual-method GREEN (sympy-free). All five
 theorems [propext, Classical.choice, Quot.sound].
 
-**The 6-round compile war:** R1 38 errors (core mathematics passed clean —
+**The 8-round compile war (CI run 42330675842 GREEN):** R1 38 errors (core mathematics passed clean —
 API surface only) → R2 9 (dvd_mul iff; omega blind to Nat.min; pow_succ
 direction; obtain-clears) → R3 5 (pow_succ' implicit succ-form; minFac
 signatures) → R4 1 (q.Prime invisible to omega — hq2 := hqp.one_lt) →
-R5 KERNEL GREEN (battery died: no sympy on runner) → R6 sympy-free battery.
+R5 KERNEL GREEN → R6/R7 THE GREP GHOST (the battery never ran: the five
+axiom-grep patterns lacked the Erdos700. namespace prefix — grep exit 1
+under set -e killed the step 3ms after the last receipt grep; R7's
+diagnostic wrapper exposed it: even `python3 -V` never printed) → R8 the
+patterns fixed — THE LANDING (run 42330675842).
 
 **Parallel volleys:** #939: ZERO ≤ 10¹⁵ (8.9M coprime pairs; heuristic
 X^(−1/4) → 0 — the lane needs an algebraic Nitaj-style construction).
