@@ -436,16 +436,15 @@ theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
     have hdij := (List.all_eq_true.mp hinner) (j - 1) (List.mem_range.mpr hj')
     have hxyb : decide (as.getD (i - 1) 0 = as.getD (j - 1) 0) = true :=
       decide_eq_true hxy
-    have hf : decide ((i - 1) = (j - 1)) = false := by
-      by_contra hc
-      have htrue : decide ((i - 1) = (j - 1)) = true := by
-        cases h : decide ((i - 1) = (j - 1)) with
-        | false => exact absurd h hc
-        | true => exact h
-      have hbad : (i - 1) = (j - 1) := of_decide_eq_true htrue
-      omega
-    rw [hf, Bool.false_or, hxyb, Bool.not_true] at hdij
-    exact Bool.noConfusion hdij
+    rw [hxyb] at hdij
+    -- hdij : (decide ((i-1) = (j-1)) || !true) = true
+    cases hval : decide ((i - 1) = (j - 1)) with
+    | false =>
+        rw [hval] at hdij
+        simp at hdij
+    | true =>
+        have hidx : (i - 1) = (j - 1) := of_decide_eq_true hval
+        omega
 
 /-- The law-case assembler: obstruction below + witness above. -/
 theorem law_case (n : Nat) (hn : 0 < n)

@@ -66,8 +66,10 @@ theorem dvd_sub_nat {p x y : Nat} (hxy : y ≤ x) (hx : p ∣ x) (hy : p ∣ y) 
     rw [hpz] at hx hy
     have hx0 : x = 0 := by obtain ⟨u, hu⟩ := hx; omega
     have hy0 : y = 0 := by obtain ⟨w, hw⟩ := hy; omega
-    rw [hpz, hx0, hy0]
-    exact ⟨0, by norm_num⟩
+    rw [hpz]
+    refine ⟨0, ?_⟩
+    rw [hx0, hy0]
+    norm_num
   · obtain ⟨u, hu⟩ := hx
     obtain ⟨w, hw⟩ := hy
     have hwu : w ≤ u := by
