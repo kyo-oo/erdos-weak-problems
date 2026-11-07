@@ -61,3 +61,15 @@ cases like 30 (open: the full classification).
    gcd(p^a, C(p^a, p^{a−1})) = p ∧ ∀ k ∈ (1, p^a/2], p ∣ gcd(p^a, C(p^a,k)).
 Numerical receipts (decide): f(8)=2, f(16)=2, f(32)=2, f(64)=2, f(27)=3,
 f(81)=3, f(243)=3, f(25)=5, f(125)=5, f(625)=5, f(49)=7, f(121)=11, f(169)=13.
+
+## KERNEL STATUS (Session 031)
+Kernel 19 written: `Erdos700.lean` (1098 lines, zero sorry) — the full 5-lemma
+chain realized: vpf/vp valuation (K11 architecture) + vp_mul additivity
+(primality enters via Euclid exactly once) + pow_dvd_iff + binom_fact_gen
+(ring-assembled Pascal identity) + divSplit/div_unique/succDiff floor laws +
+powsSum/cntDiv/cntNotDiv counters + the Legendre bridge + Theorem A
+(erdos700_carry) + Theorem B (erdos700_witness, erdos700_law — f(p^a) = p as
+the exact minGcdAux minimum), erdos700_equality_class (ErSz equality at p^2),
+erdos700_violation (a >= 3), arsenal bridge (lt_three_cases, isTernaryDigit,
+carryAtPos_bound, v2r_ternary_scaling + v2r.eq_def receipts). Battery:
+battery700_ci.py GREEN (79,003 carry + 23 law instances, dual-method).

@@ -19,6 +19,7 @@ on:
       - problem686-pell-ratio/**
       - problem727-factorial-square/**
       - problem1056-factorial-intervals/**
+      - problem700-binomial-gcd/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -461,3 +462,21 @@ jobs:
           grep -E "'erdos1056_v2r_scaling' (does not depend on any axioms|depends on axioms)" kernel18.log
           python3 problem1056-factorial-intervals/battery1056.py
           echo ERDOS1056_FACTORIAL_INTERVALS_KERNEL_GREEN=1
+
+      - name: "Kernel 19 - Erdos 700 PRIME-POWER LAW (Theorem A carry lemma v_p(C(p^a,k)) = a - v_p(k); Theorem B f(p^a) = p; ErSz equality class at p^2 + violation a>=3; arsenal bridge)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean problem700-binomial-gcd/Erdos700.lean 2>&1 | tee erdos700.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos700.log
+          grep -F "ERDOS700_KERNEL_GREEN" erdos700.log
+          grep -F "(5, 3)" erdos700.log
+          grep -F "(1, 1, 1, 1)" erdos700.log
+          grep -F "(15, 1)" erdos700.log
+          grep -F "'erdos700_carry' depends on axioms: [propext" erdos700.log
+          grep -F "'erdos700_witness' depends on axioms: [propext" erdos700.log
+          grep -F "'erdos700_law' depends on axioms: [propext" erdos700.log
+          grep -F "'erdos700_equality_class' depends on axioms: [propext" erdos700.log
+          grep -F "'erdos700_violation' depends on axioms: [propext" erdos700.log
+          python3 problem700-binomial-gcd/battery700_ci.py
+          echo ERDOS700_PRIME_POWER_LAW_KERNEL_GREEN=1
