@@ -102,7 +102,7 @@ def t2v : List Nat :=
    21, 78, 80, 82, 34, 29, 88, 13, 30, 19, 96, 44, 100]
 
 theorem t2_table :
-    ((List.range 50).all (fun j => (tKb (2 * j + 3) 2 == t2v.getD j 0))) = true := by
+    ((List.range 50).all (fun j => Nat.beq (tKb (2 * j + 3) 2) (t2v.getD j 0))) = true := by
   decide
 
 /-- t_3 for (n,6)=1, n = 5..97 (index j ↦ the j-th such n). -/
@@ -115,7 +115,7 @@ def n3v : List Nat :=
    59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 89, 91, 95, 97]
 
 theorem t3_table :
-    ((List.range 32).all (fun j => (tKb (n3v.getD j 0) 3 == t3v.getD j 0))) = true := by
+    ((List.range 32).all (fun j => Nat.beq (tKb (n3v.getD j 0) 3) (t3v.getD j 0))) = true := by
   decide
 
 /-- t_4 for (n,24)=1, n = 5..99. -/
@@ -128,7 +128,7 @@ def n4v : List Nat :=
    59, 61, 65, 67, 71, 73, 77, 79, 83, 85, 89, 91, 95, 97]
 
 theorem t4_table :
-    ((List.range 32).all (fun j => (tKb (n4v.getD j 0) 4 == t4v.getD j 0))) = true := by
+    ((List.range 32).all (fun j => Nat.beq (tKb (n4v.getD j 0) 4) (t4v.getD j 0))) = true := by
   decide
 
 /-- t_5 for (n,120)=1, n = 7..99. -/
@@ -141,7 +141,7 @@ def n5v : List Nat :=
    73, 77, 79, 83, 89, 91, 97]
 
 theorem t5_table :
-    ((List.range 25).all (fun j => (tKb (n5v.getD j 0) 5 == t5v.getD j 0))) = true := by
+    ((List.range 25).all (fun j => Nat.beq (tKb (n5v.getD j 0) 5) (t5v.getD j 0))) = true := by
   decide
 
 #eval "ERDOS394_DATA_GREEN"

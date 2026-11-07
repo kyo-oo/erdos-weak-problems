@@ -61,15 +61,22 @@ theorem divAt_iff (n m k : Nat) :
 /-- The manual dvd-sub (Nat.dvd_sub' does not exist in this toolchain). -/
 theorem dvd_sub_nat {p x y : Nat} (hxy : y ≤ x) (hx : p ∣ x) (hy : p ∣ y) :
     p ∣ x - y := by
-  obtain ⟨u, hu⟩ := hx
-  obtain ⟨w, hw⟩ := hy
-  have hwu : w ≤ u := by
-    by_contra hcon
-    have hwu' : u < w := by omega
-    have hmul : u * p < w * p := (Nat.mul_lt_mul_left p).mpr hwu'
-    rw [Nat.mul_comm u p, Nat.mul_comm w p, ← hu, ← hw] at hmul
-    omega
-  exact ⟨u - w, by rw [hu, hw, Nat.mul_sub]⟩
+  rcases Nat.eq_zero_or_pos p with hpz | hp0
+  · -- p = 0: x = y = 0, so x - y = 0 and 0 ∣ 0
+    rw [hpz] at hx hy
+    have hx0 : x = 0 := by obtain ⟨u, hu⟩ := hx; omega
+    have hy0 : y = 0 := by obtain ⟨w, hw⟩ := hy; omega
+    rw [hpz, hx0, hy0]
+    exact ⟨0, by norm_num⟩
+  · obtain ⟨u, hu⟩ := hx
+    obtain ⟨w, hw⟩ := hy
+    have hwu : w ≤ u := by
+      by_contra hcon
+      have hu1 : u + 1 ≤ w := by omega
+      have hstep : p * (u + 1) = p * u + p := by rw [Nat.mul_add, Nat.mul_one]
+      have hle : p * (u + 1) ≤ p * w := Nat.mul_le_mul_left p hu1
+      omega
+    exact ⟨u - w, by rw [hu, hw, Nat.mul_sub]⟩
 
 /-- The consecutive product at $m = n$ is divisible by $n$ (for $k \ge 1$):
 the window contains $n$ itself. -/
@@ -115,7 +122,8 @@ theorem cop_mul_dvd {a b x y : Nat} (ha : a ∣ x) (hb : b ∣ y) : a * b ∣ x 
   obtain ⟨x', hx⟩ := ha
   obtain ⟨y', hy⟩ := hb
   refine ⟨x' * y', ?_⟩
-  rw [hx, hy, ← Nat.mul_assoc, Nat.mul_left_comm x' b y', Nat.mul_assoc]
+  rw [hx, hy]
+  ring
 
 /-- The left-shift identity: prodCons m (k+1) = m * prodCons (m+1) k. -/
 theorem prodCons_shift : ∀ (k m : Nat), prodCons m (k + 1) = m * prodCons (m + 1) k := by

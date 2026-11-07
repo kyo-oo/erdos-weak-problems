@@ -61,13 +61,13 @@ noncomputable def f711 (n m : Nat) : Nat := sInf {F : Nat | 1 ≤ F ∧ ∃ a, A
 /-- The Bool witness checker (for the decided witness tables):
 length, window bounds, divisibility, pairwise distinctness. -/
 def w711OK (n m : Nat) (as : List Nat) : Bool :=
-  (as.length == n) &&
+  (decide (as.length = n)) &&
   ((List.range n).all (fun i =>
-     ((decide (m < as.getD i 0)) && (decide (as.getD i 0 < m + 2 * n - 1)))
-       && ((as.getD i 0) % (i + 1) == 0))) &&
+     ((decide (m < as.getD i 0)) && (decide (as.getD i 0 < m + (2 * n - 1))))
+       && (decide ((as.getD i 0) % (i + 1) = 0)))) &&
   ((List.range n).all (fun i =>
      (List.range n).all (fun j =>
-       (i == j) || !((as.getD i 0) == (as.getD j 0)))))
+       (decide (i = j)) || !(decide (as.getD i 0 = as.getD j 0)))))
 
 /-! ## §1 The square identities (Nat-native, no ring). -/
 
@@ -414,38 +414,38 @@ theorem w711OK_spec (n m : Nat) (as : List Nat) (hn : 0 < n)
     ∃ a, AssignOk n m (2 * n - 1) a := by
   simp only [w711OK, Bool.and_eq_true] at h
   obtain ⟨⟨hlen, hall⟩, hdist⟩ := h
-  have hlenN : as.length = n := by simp at hlen; exact hlen
   refine ⟨fun k => as.getD (k - 1) 0, ?_, ?_⟩
   · intro k h1k hkn
-    show k ∣ (as.getD (k - 1) 0) ∧ m < (as.getD (k - 1) 0) ∧
-      (as.getD (k - 1) 0) < m + (2 * n - 1)
     have hidx : k - 1 < n := by omega
     have hmem : (k - 1) ∈ List.range n := List.mem_range.mpr hidx
     have hcall := (List.all_eq_true.mp hall) (k - 1) hmem
     simp only [Bool.and_eq_true] at hcall
     obtain ⟨⟨hlt1, hlt2⟩, hmod⟩ := hcall
-    have hb1 : m < as.getD (k - 1) 0 := by
-      rw [decide_eq_true] at hlt1; exact hlt1
-    have hb2 : as.getD (k - 1) 0 < m + 2 * n - 1 := by
-      rw [decide_eq_true] at hlt2; exact hlt2
-    have hdvd : k ∣ as.getD (k - 1) 0 := by
-      have hmodk : (as.getD (k - 1) 0) % k = 0 := by
-        have hk1 : (k - 1) + 1 = k := by omega
-        rw [hk1] at hmod
-        exact Nat.eq_of_beq_eq_true hmod
-      exact Nat.dvd_of_mod_eq_zero hmodk
+    have hb1 : m < as.getD (k - 1) 0 := of_decide_eq_true hlt1
+    have hb2 : as.getD (k - 1) 0 < m + (2 * n - 1) := of_decide_eq_true hlt2
+    have hk1 : (k - 1) + 1 = k := by omega
+    rw [hk1] at hmod
+    have hmodk : (as.getD (k - 1) 0) % k = 0 := of_decide_eq_true hmod
+    have hdvd : k ∣ as.getD (k - 1) 0 := Nat.dvd_of_mod_eq_zero hmodk
     exact ⟨hdvd, hb1, hb2⟩
   · intro i hi1 hin j hj1 hjn hij
+    have hxy : as.getD (i - 1) 0 = as.getD (j - 1) 0 := hij
     have hi' : i - 1 < n := by omega
     have hj' : j - 1 < n := by omega
     have hinner := (List.all_eq_true.mp hdist) (i - 1) (List.mem_range.mpr hi')
     have hdij := (List.all_eq_true.mp hinner) (j - 1) (List.mem_range.mpr hj')
-    have hbeq : ((as.getD (i - 1) 0) == (as.getD (j - 1) 0)) = true := by
-      simp [hij]
-    rw [hbeq] at hdij
-    simp only [Bool.not_true, Bool.or_false] at hdij
-    have hidx : i - 1 = j - 1 := by simp at hdij; exact hdij
-    omega
+    have hxyb : decide (as.getD (i - 1) 0 = as.getD (j - 1) 0) = true :=
+      decide_eq_true hxy
+    have hf : decide ((i - 1) = (j - 1)) = false := by
+      by_contra hc
+      have htrue : decide ((i - 1) = (j - 1)) = true := by
+        cases h : decide ((i - 1) = (j - 1)) with
+        | false => exact absurd h hc
+        | true => exact h
+      have hbad : (i - 1) = (j - 1) := of_decide_eq_true htrue
+      omega
+    rw [hf, Bool.false_or, hxyb, Bool.not_true] at hdij
+    exact Bool.noConfusion hdij
 
 /-- The law-case assembler: obstruction below + witness above. -/
 theorem law_case (n : Nat) (hn : 0 < n)
@@ -504,6 +504,7 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
         have hkl : k ∣ L := hL k h1 h2
         exact ⟨Nat.dvd_add hkd hkl, by omega, by omega⟩
       · intro i hi1 hin j hj1 hjn hij
+        have hbeta : a i + L = a j + L := hij
         exact ha.2 i hi1 hin j hj1 hjn (by omega)
     · rintro ⟨hF, a, ha⟩
       refine ⟨hF, fun k => a k - L, ?_, ?_⟩
@@ -517,9 +518,9 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
           obtain ⟨w, hw⟩ := hkl
           have huw : w ≤ u := by
             by_contra hcon
-            have hwu : u < w := by omega
-            have hmul : u * k < w * k := (Nat.mul_lt_mul_left k).mpr hwu
-            rw [Nat.mul_comm u k, Nat.mul_comm w k, ← hu, ← hw] at hmul
+            have hu1 : u + 1 ≤ w := by omega
+            have hstep : k * (u + 1) = k * u + k := by rw [Nat.mul_add, Nat.mul_one]
+            have hle : k * (u + 1) ≤ k * w := Nat.mul_le_mul_left k hu1
             omega
           refine ⟨u - w, ?_⟩
           rw [hu, hw, Nat.mul_sub]
@@ -527,6 +528,9 @@ theorem erdos711_period (n m L : Nat) (hm : 1 ≤ m)
         · omega
         · omega
       · intro i hi1 hin j hj1 hjn hij
+        have hbeta : a i - L = a j - L := hij
+        obtain ⟨_, hbi, _⟩ := ha.1 i hi1 hin
+        obtain ⟨_, hbj, _⟩ := ha.1 j hj1 hjn
         exact ha.2 i hi1 hin j hj1 hjn (by omega)
   simp only [f711, hseteq]
 
