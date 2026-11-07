@@ -212,7 +212,7 @@ theorem erdos686sq_noRep (t : Nat) (h2 : 2 ≤ t)
     have h1 : d2 + d1 = t * Y + t * Y := by omega
     have hdvdmod : (2 * t) ∣ (t * Y + t * Y) := ⟨Y, by ring⟩
     rw [h1]
-    exact decide_eq_true (Nat.dvd_iff_mod_eq_zero.mpr hdvdmod)
+    exact decide_eq_true (Nat.dvd_iff_mod_eq_zero.mp hdvdmod)
   have hc8 : decide ((((t * t - 1) / d1 + d1) / (2 * t)) % 2 = 1) = true := by
     rw [hMdiv]
     have h1 : (d2 + d1) / (2 * t) = Y := by
@@ -295,8 +295,8 @@ theorem erdos686sq_census : ∀ t : Nat, 2 ≤ t → t ≤ 100 →
       have htval : t = 4 * ((t - 2) / 4) + 2 := by omega
       have hN : t * t = (4 * ((t - 2) / 4) + 2) * (4 * ((t - 2) / 4) + 2) := by
         rw [← htval]
-      obtain ⟨m, n, hval, hn1', hmn'⟩ := erdos686sq_family ((t - 2) / 4) hu
-      refine ⟨m, n, ?_, hn1', hmn'⟩
+      obtain ⟨hval, hn1', hmn'⟩ := erdos686sq_family ((t - 2) / 4) hu
+      refine ⟨_, _, ?_, hn1', hmn'⟩
       rw [hval, ← hN]
     · rw [h99]
       exact ⟨241, 1, erdos686sq_99⟩

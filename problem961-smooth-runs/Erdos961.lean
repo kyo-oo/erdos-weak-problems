@@ -259,8 +259,7 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
             rw [sub_one_mul_add_one]
             have hsq : 3 ^ d = (3 ^ e) * (3 ^ e) := by
               have hcomm : 3 ^ d = 3 ^ (e * 2) := by rw [hd2e, Nat.mul_comm]
-              rw [hcomm, Nat.pow_mul]
-              norm_num
+              rw [hcomm, Nat.pow_mul, pow_two]
             omega
           obtain ⟨i, hi, hlow⟩ := dvd_two_pow a (3 ^ e - 1)
             ⟨3 ^ e + 1, hfac.symm⟩
@@ -276,6 +275,11 @@ theorem erdos961_census23 : ∀ n : Nat, 1 ≤ n → Smooth23 n → Smooth23 (n 
             norm_num at hlow hhigh hmaster
             omega
           · -- e ≥ 2: 2^i ≥ 8, so i ≥ 3, so 8 ∣ 2^i; 2^j = 2^i + 2 ≡ 2 (mod 8) ⟹ j = 1 ⟹ 2 = 2^i + 2 ⟹ 2^i = 0 ✗
+            have h3big : 3 ^ e = 9 * 3 ^ (e - 2) := by
+              have hidx : e = 2 + (e - 2) := by omega
+              rw [hidx, Nat.pow_add]
+              norm_num
+            have h3epos : 1 ≤ 3 ^ (e - 2) := pow_ge_one 3 (e - 2) (by omega)
             have hige : 3 ≤ i := by
               by_contra hcon
               rcases (show i = 0 ∨ i = 1 ∨ i = 2 by omega) with h' | h' | h'
@@ -454,6 +458,7 @@ theorem no_big_prime_smooth23 (fuel : Nat) : ∀ v : Nat, v ≤ fuel → 1 ≤ v
 
 theorem dvd8_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 8) : p = 2 := by
   have hle : p ≤ 8 := Nat.le_of_dvd (by norm_num) h
+  have hp2 : 2 ≤ p := hp.1
   rcases (show p = 2 ∨ p = 3 ∨ p = 4 ∨ p = 5 ∨ p = 6 ∨ p = 7 ∨ p = 8 by omega) with
     h' | h' | h' | h' | h' | h' | h'
   · exact h'
@@ -469,6 +474,7 @@ theorem dvd8_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 8) : p = 2 := by
 
 theorem dvd9_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 9) : p = 3 := by
   have hle : p ≤ 9 := Nat.le_of_dvd (by norm_num) h
+  have hp2 : 2 ≤ p := hp.1
   rcases (show p = 2 ∨ p = 3 ∨ p = 4 ∨ p = 5 ∨ p = 6 ∨ p = 7 ∨ p = 8 ∨ p = 9 by omega) with
     h' | h' | h' | h' | h' | h' | h' | h'
   · subst h'; exact absurd h (by intro hh; obtain ⟨c, hc⟩ := hh; omega)
@@ -486,6 +492,7 @@ theorem dvd9_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 9) : p = 3 := by
 
 theorem dvd10_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 10) : p = 2 ∨ p = 5 := by
   have hle : p ≤ 10 := Nat.le_of_dvd (by norm_num) h
+  have hp2 : 2 ≤ p := hp.1
   rcases (show p = 2 ∨ p = 3 ∨ p = 4 ∨ p = 5 ∨ p = 6 ∨ p = 7 ∨ p = 8 ∨ p = 9 ∨ p = 10 by omega) with
     h' | h' | h' | h' | h' | h' | h' | h' | h'
   · exact Or.inl h'
@@ -505,6 +512,7 @@ theorem dvd10_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 10) : p = 2 ∨ p = 5 
 
 theorem dvd14_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 14) : p = 2 ∨ p = 7 := by
   have hle : p ≤ 14 := Nat.le_of_dvd (by norm_num) h
+  have hp2 : 2 ≤ p := hp.1
   rcases (show p = 2 ∨ p = 3 ∨ p = 4 ∨ p = 5 ∨ p = 6 ∨ p = 7 ∨ p = 8 ∨ p = 9 ∨
       p = 10 ∨ p = 11 ∨ p = 12 ∨ p = 13 ∨ p = 14 by omega) with
     h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h'
@@ -531,6 +539,7 @@ theorem dvd14_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 14) : p = 2 ∨ p = 7 
 
 theorem dvd15_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 15) : p = 3 ∨ p = 5 := by
   have hle : p ≤ 15 := Nat.le_of_dvd (by norm_num) h
+  have hp2 : 2 ≤ p := hp.1
   rcases (show p = 2 ∨ p = 3 ∨ p = 4 ∨ p = 5 ∨ p = 6 ∨ p = 7 ∨ p = 8 ∨ p = 9 ∨
       p = 10 ∨ p = 11 ∨ p = 12 ∨ p = 13 ∨ p = 14 ∨ p = 15 by omega) with
     h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h' | h'
@@ -559,6 +568,7 @@ theorem dvd15_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 15) : p = 3 ∨ p = 5 
 
 theorem dvd16_prime (p : Nat) (hp : IsPrime p) (h : p ∣ 16) : p = 2 := by
   have hle : p ≤ 16 := Nat.le_of_dvd (by norm_num) h
+  have hp2 : 2 ≤ p := hp.1
   rcases (show p = 2 ∨ 3 ≤ p by omega) with h' | hge
   · exact h'
   · exfalso
@@ -636,7 +646,7 @@ theorem smooth23_no3 (v : Nat) (h : Smooth23 v) (h3 : ¬ 3 ∣ v) :
     have h3b : 3 ^ bb = 3 ^ (bb - 1) * 3 := by
       rw [← Nat.pow_succ]; congr 1; omega
     apply h3
-    refine ⟨3 ^ (bb - 1), ?_⟩
+    refine ⟨2 ^ aa * 3 ^ (bb - 1), ?_⟩
     rw [← hab, h3b]
     ring
 
@@ -746,14 +756,13 @@ theorem erdos961_f2 : f961 2 = 2 := by
       exact absurd (h4a 2 ⟨2, by norm_num⟩) (by omega)
   have hne : (FSet 2).Nonempty := ⟨2, h2mem⟩
   have hinf : f961 2 ∈ FSet 2 := Nat.sInf_mem hne
-  rcases (show f961 2 = 0 ∨ f961 2 = 1 ∨ f961 2 = 2 by
-      have := Nat.sInf_le h2mem
-      omega) with h | h | h
+  have hfin2 : f961 2 ≤ 2 := Nat.sInf_le h2mem
+  rcases (show f961 2 = 0 ∨ f961 2 = 1 ∨ f961 2 = 2 by omega) with h | h | h
   · rw [h] at hinf
     simp only [FSet, Set.mem_setOf_eq] at hinf
     obtain ⟨hpos, _⟩ := hinf
     omega
-  · rw [h] at hinf; exact h1not hinf
+  · rw [h] at hinf; exact (h1not hinf).elim
   · exact h
 
 theorem erdos961_f3 : f961 3 = 3 := by
@@ -785,9 +794,8 @@ theorem erdos961_f3 : f961 3 = 3 := by
     · subst h'; exact absurd hbig (nba9 3 (by omega))
   have hne : (FSet 3).Nonempty := ⟨3, h3mem⟩
   have hinf : f961 3 ∈ FSet 3 := Nat.sInf_mem hne
-  rcases (show f961 3 = 0 ∨ f961 3 = 1 ∨ f961 3 = 2 ∨ f961 3 = 3 by
-      have := Nat.sInf_le h3mem
-      omega) with h | h | h | h
+  have hfin3 : f961 3 ≤ 3 := Nat.sInf_le h3mem
+  rcases (show f961 3 = 0 ∨ f961 3 = 1 ∨ f961 3 = 2 ∨ f961 3 = 3 by omega) with h | h | h | h
   · rw [h] at hinf
     simp only [FSet, Set.mem_setOf_eq] at hinf
     obtain ⟨hpos, _⟩ := hinf
@@ -800,8 +808,8 @@ theorem erdos961_f3 : f961 3 = 3 := by
       exact ⟨by omega, fun m hm => by
         obtain ⟨i, hi, hbp⟩ := hall m hm
         exact ⟨i, by omega, hbp⟩⟩
-    exact h2not hup
-  · rw [h] at hinf; exact h2not hinf
+    exact (h2not hup).elim
+  · rw [h] at hinf; exact (h2not hinf).elim
   · exact h
 
 theorem erdos961_f4 : f961 4 = 3 := by
@@ -820,6 +828,11 @@ theorem erdos961_f4 : f961 4 = 3 := by
       exact no_big_prime_smooth23 (m + 2) v hle hv
         (fun p hp hpd => by
           by_contra hbig4
+          have hp4 : p ≠ 4 := by
+            intro h4
+            subst h4
+            obtain ⟨_, hall⟩ := hp
+            exact absurd (hall 2 ⟨2, by norm_num⟩) (by omega)
           have hgt : 4 < p := by omega
           exact hN ⟨p, hp, hgt, hpd⟩)
     exact erdos961_run23 m (by omega) (hbig m (by omega) (by omega) hN0)
@@ -835,9 +848,8 @@ theorem erdos961_f4 : f961 4 = 3 := by
     · subst h'; exact absurd hbig (nba9 4 (by omega))
   have hne : (FSet 4).Nonempty := ⟨3, h3mem⟩
   have hinf : f961 4 ∈ FSet 4 := Nat.sInf_mem hne
-  rcases (show f961 4 = 0 ∨ f961 4 = 1 ∨ f961 4 = 2 ∨ f961 4 = 3 by
-      have := Nat.sInf_le h3mem
-      omega) with h | h | h | h
+  have hfin4 : f961 4 ≤ 3 := Nat.sInf_le h3mem
+  rcases (show f961 4 = 0 ∨ f961 4 = 1 ∨ f961 4 = 2 ∨ f961 4 = 3 by omega) with h | h | h | h
   · rw [h] at hinf
     simp only [FSet, Set.mem_setOf_eq] at hinf
     obtain ⟨hpos, _⟩ := hinf
@@ -849,8 +861,8 @@ theorem erdos961_f4 : f961 4 = 3 := by
       exact ⟨by omega, fun m hm => by
         obtain ⟨i, hi, hbp⟩ := hall m hm
         exact ⟨i, by omega, hbp⟩⟩
-    exact h2not hup
-  · rw [h] at hinf; exact h2not hinf
+    exact (h2not hup).elim
+  · rw [h] at hinf; exact (h2not hinf).elim
   · exact h
 
 /-! ## §6 THE WITNESS LAWS: f(k) ≥ 4 for k = 5..12. -/
@@ -921,17 +933,18 @@ theorem erdos961_pell_dict (n : Nat) (h1 : Smooth23 n) (h2 : Smooth23 (n + 1)) :
   obtain ⟨a1, b1, hab1⟩ := h1
   obtain ⟨a2, b2, hab2⟩ := h2
   have hprod : n * (n + 1) = 2 ^ (a1 + a2) * 3 ^ (b1 + b2) := by
-    rw [hab1, hab2, ← Nat.pow_add, ← Nat.pow_add]
+    rw [← hab2, ← hab1, Nat.pow_add, Nat.pow_add]
     ring
-  -- the squarefree split of 2^(a1+a2)
+  -- the squarefree split of 2^(a1+a2) (the div_add_mod DIVISOR-LEADS form)
   have hsplit2 : 2 ^ (a1 + a2)
       = 2 ^ ((a1 + a2) % 2) * 2 ^ ((a1 + a2) / 2) * 2 ^ ((a1 + a2) / 2) := by
     have hdm := Nat.div_add_mod (a1 + a2) 2
-    have hsq : 2 ^ ((a1 + a2) / 2 * 2)
+    have hsq : 2 ^ (2 * ((a1 + a2) / 2))
         = 2 ^ ((a1 + a2) / 2) * 2 ^ ((a1 + a2) / 2) := by
-      rw [Nat.pow_mul, pow_two]
-    calc 2 ^ (a1 + a2) = 2 ^ ((a1 + a2) / 2 * 2 + (a1 + a2) % 2) := by rw [hdm]
-      _ = 2 ^ ((a1 + a2) / 2 * 2) * 2 ^ ((a1 + a2) % 2) := Nat.pow_add _ _ _
+      rw [Nat.mul_comm, Nat.pow_mul, pow_two]
+    calc 2 ^ (a1 + a2)
+        = 2 ^ (2 * ((a1 + a2) / 2) + (a1 + a2) % 2) := by rw [hdm]
+      _ = 2 ^ (2 * ((a1 + a2) / 2)) * 2 ^ ((a1 + a2) % 2) := Nat.pow_add _ _ _
       _ = 2 ^ ((a1 + a2) / 2) * 2 ^ ((a1 + a2) / 2) * 2 ^ ((a1 + a2) % 2) := by
           rw [hsq]
       _ = 2 ^ ((a1 + a2) % 2) * 2 ^ ((a1 + a2) / 2) * 2 ^ ((a1 + a2) / 2) := by
@@ -939,11 +952,12 @@ theorem erdos961_pell_dict (n : Nat) (h1 : Smooth23 n) (h2 : Smooth23 (n + 1)) :
   have hsplit3 : 3 ^ (b1 + b2)
       = 3 ^ ((b1 + b2) % 2) * 3 ^ ((b1 + b2) / 2) * 3 ^ ((b1 + b2) / 2) := by
     have hdm := Nat.div_add_mod (b1 + b2) 2
-    have hsq : 3 ^ ((b1 + b2) / 2 * 2)
+    have hsq : 3 ^ (2 * ((b1 + b2) / 2))
         = 3 ^ ((b1 + b2) / 2) * 3 ^ ((b1 + b2) / 2) := by
-      rw [Nat.pow_mul, pow_two]
-    calc 3 ^ (b1 + b2) = 3 ^ ((b1 + b2) / 2 * 2 + (b1 + b2) % 2) := by rw [hdm]
-      _ = 3 ^ ((b1 + b2) / 2 * 2) * 3 ^ ((b1 + b2) % 2) := Nat.pow_add _ _ _
+      rw [Nat.mul_comm, Nat.pow_mul, pow_two]
+    calc 3 ^ (b1 + b2)
+        = 3 ^ (2 * ((b1 + b2) / 2) + (b1 + b2) % 2) := by rw [hdm]
+      _ = 3 ^ (2 * ((b1 + b2) / 2)) * 3 ^ ((b1 + b2) % 2) := Nat.pow_add _ _ _
       _ = 3 ^ ((b1 + b2) / 2) * 3 ^ ((b1 + b2) / 2) * 3 ^ ((b1 + b2) % 2) := by
           rw [hsq]
       _ = 3 ^ ((b1 + b2) % 2) * 3 ^ ((b1 + b2) / 2) * 3 ^ ((b1 + b2) / 2) := by
@@ -954,10 +968,10 @@ theorem erdos961_pell_dict (n : Nat) (h1 : Smooth23 n) (h2 : Smooth23 (n + 1)) :
     ring
   · -- the Pell identity: (2n+1)² − 4n(n+1) = 1 and n(n+1) = a·b²
     have hX2 : (2 * n + 1) * (2 * n + 1) = 4 * (n * (n + 1)) + 1 := by ring
-    have habb : (2 ^ ((a1 + a2) % 2) * 3 ^ ((b1 + b2) % 2)) * (2 * b) * (2 * b)
-        = 4 * ((2 ^ ((a1 + a2) % 2) * 3 ^ ((b1 + b2) % 2)) * b * b) := by ring
     have hprod_ab : n * (n + 1)
-        = (2 ^ ((a1 + a2) % 2) * 3 ^ ((b1 + b2) % 2)) * b * b := by
+        = (2 ^ ((a1 + a2) % 2) * 3 ^ ((b1 + b2) % 2))
+          * (2 ^ ((a1 + a2) / 2) * 3 ^ ((b1 + b2) / 2))
+          * (2 ^ ((a1 + a2) / 2) * 3 ^ ((b1 + b2) / 2)) := by
       rw [hprod, hsplit2, hsplit3]
       ring
     omega
