@@ -101,7 +101,7 @@ theorem sgn_carry (p m : Nat) (hp : 2 ≤ p) (hm : m + 1 ≤ p) :
         omega
       rw [Nat.mul_one] at s1
       omega
-    exact ((addmul (p - 1 - m) p m).symm).trans (meq_of_eq _ _ _ heq)
+    exact ((addmul (p - 1 - m) p m).symm).trans (meq_of_eq _ _ _ heq.symm)
   · -- m odd
     have h1 : sgn p m = p - 1 := by
       unfold sgn; rw [h]; exact if_neg (by decide)
@@ -135,7 +135,7 @@ theorem sgn_carry (p m : Nat) (hp : 2 ≤ p) (hm : m + 1 ≤ p) :
           exact e2
         have s3 : p * (p - 1 - m) = (p - 1 - m) * p := Nat.mul_comm _ _
         omega
-      exact ((addmul (m + 1) p (p - m - 2)).symm).trans (meq_of_eq _ _ _ heq)
+      exact ((addmul (m + 1) p (p - m - 2)).symm).trans (meq_of_eq _ _ _ heq.symm)
 
 /-! ## §4 THE TAIL LAW: tm p m ≡ sgn p m · m! (mod p), by induction. -/
 theorem tail_law (p : Nat) (hp : 2 ≤ p) :
@@ -154,7 +154,7 @@ theorem tail_law (p : Nat) (hp : 2 ≤ p) :
     calc tm p (m + 1) ≡ (p - 1 - m) * tm p m [MOD p] := tm_modeq p m
       _ ≡ (p - 1 - m) * (sgn p m * fm p m) [MOD p] := IH.mul_left _
       _ ≡ (sgn p (m + 1) * (m + 1)) * fm p m [MOD p] :=
-          (meq_of_eq _ _ _ (Nat.mul_assoc _ _ _)).trans (sc.mul_right (fm p m))
+          (meq_of_eq _ _ _ (Nat.mul_assoc _ _ _).symm).trans (sc.mul_right (fm p m))
       _ ≡ sgn p (m + 1) * fm p (m + 1) [MOD p] := by
           have hring : (sgn p (m + 1) * (m + 1)) * fm p m
               = sgn p (m + 1) * ((m + 1) * fm p m) := by ring
@@ -255,7 +255,7 @@ theorem erdos1072_wilson_pair_classic (p n : Nat) (hp : 2 ≤ p)
     exact modeq_eq p _ _ (fm_lt p hp _) (sgn_lt p _ hp) hfinal'
   · have hs : sgn p (p - 1 - n) = p - 1 := by
       unfold sgn; rw [hq]; exact if_neg (by decide)
-    rw [hs, Nat.one_mul] at hpair
+    rw [hs] at hpair
     have hY : fm p (p - 1 - n)
         ≡ (p - 1) * (p - 1) * fm p (p - 1 - n) [MOD p] :=
       (((sqn p hp).mul_right _).trans (meq_of_eq _ _ _ (Nat.one_mul _))).symm
