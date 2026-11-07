@@ -197,6 +197,7 @@ theorem vp_le_fuel (p : Nat) : ∀ f n, vpf p f n ≤ f := by
         have hI := ih ((N + 1) / p)
         omega
       · rw [if_neg hm]
+        omega
 
 theorem vp_le_self (p k : Nat) : vp p k ≤ k := vp_le_fuel p k k
 
@@ -242,6 +243,7 @@ theorem vp_mul : ∀ (f p a b : Nat), a + b ≤ f → p.Prime → 1 ≤ a → 1 
     have hp : 2 ≤ p := hpp.one_lt
     by_cases ha1 : a = 1
     · subst ha1
+      rw [Nat.one_mul]
       have h0 : vp p 1 = 0 := vp_one p hp
       omega
     · by_cases hae : a % p = 0
@@ -278,7 +280,7 @@ theorem vp_mul : ∀ (f p a b : Nat), a + b ≤ f → p.Prime → 1 ≤ a → 1 
         · have hab : (a * b) % p ≠ 0 := by
             by_contra hcon
             have hdvd : p ∣ a * b := Nat.dvd_of_mod_eq_zero hcon
-            rcases hpp.dvd_mul hdvd with h | h
+            rcases (hpp.dvd_mul).mp hdvd with h | h
             · exact hae (Nat.mod_eq_zero_of_dvd h)
             · exact hbe (Nat.mod_eq_zero_of_dvd h)
           rw [vp_nondiv p (a * b) (one_le_mul a b ha hb) hab,
@@ -329,18 +331,16 @@ theorem pow_dvd_iff (p : Nat) (hp : 2 ≤ p) : ∀ (F i n : Nat), i ≤ F → 1 
           · intro hdvd
             obtain ⟨d, hd⟩ := hdvd
             refine ⟨d, ?_⟩
-            rw [hpm, Nat.mul_assoc, hd, hnps]
+            rw [hpm, Nat.mul_assoc, ← hd, hnps]
         rw [hcancel, ih i' (n / p) (by omega) hnpe', hval]
         omega
       · constructor
         · intro hdvd
-          have hpp1 : p ∣ p ^ (i' + 1) := by
-            refine ⟨p ^ i', ?_⟩
-            rw [Nat.pow_succ]
-          exact hpd (Nat.dvd_trans hpp1 hdvd)
+          have hpp1 : p ∣ p ^ (i' + 1) := ⟨p ^ i', (Nat.pow_succ p i').symm⟩
+          exact absurd (Nat.dvd_trans hpp1 hdvd) hpd
         · intro hle
           have h1 : 1 ≤ vp p n := by omega
-          exact hpd ((vp_ge_one_iff_dvd p n hp hn).mp h1)
+          exact absurd ((vp_ge_one_iff_dvd p n hp hn).mp h1) hpd
 
 theorem pow_vp_le (p k : Nat) (hp : 2 ≤ p) (hk : 1 ≤ k) : p ^ vp p k ≤ k := by
   have hdvd : p ^ vp p k ∣ k :=
@@ -383,6 +383,7 @@ theorem vp_pow_self (p : Nat) (hp : 2 ≤ p) : ∀ a, vp p (p ^ a) = a := by
       rw [hsplit, Nat.mul_mod, Nat.mod_self, Nat.zero_mul, Nat.zero_mod]
     have hpos : 1 ≤ p ^ (a + 1) := pow_ge_one p (by omega) (a + 1)
     rw [vp_step p (p ^ (a + 1)) hp hpos hmod, hdiv, ih]
+    omega
 
 /-! ## §5 THE BINOMIAL AND ITS FACTORIAL IDENTITY -/
 
@@ -399,14 +400,12 @@ theorem binom_lt : ∀ (n k : Nat), n < k → binom n k = 0
   | n + 1, k + 1, hk => by
     rw [show binom (n + 1) (k + 1) = binom n k + binom n (k + 1) from rfl,
         binom_lt n k (by omega), binom_lt n (k + 1) (by omega)]
-    rfl
 
 theorem binom_diag : ∀ n, binom n n = 1
   | 0 => rfl
   | n + 1 => by
     rw [show binom (n + 1) (n + 1) = binom n n + binom n (n + 1) from rfl,
       binom_diag n, binom_lt n (n + 1) (Nat.lt_succ_self n)]
-    rfl
 
 /-- **The binomial factorial identity** (no subtraction: n = s + k split).
 `binom n k * fact k * fact s = fact n` whenever n = s + k. -/
@@ -426,7 +425,7 @@ theorem binom_fact_gen : ∀ (n s k : Nat), n = s + k →
       ring
     · rcases s with _ | s'
       · have hnk : n = k := by omega
-        rw [hnk, binom_diag k, show fact 0 = 1 from rfl]
+        rw [hnk, binom_diag (k + 1), show fact 0 = 1 from rfl]
         ring
       · have hunf : binom (n + 1) (k + 1) = binom n k + binom n (k + 1) := rfl
         have IH1 := binom_fact_gen n (s' + 1) k (by omega)
@@ -446,7 +445,6 @@ theorem binom_fact_gen : ∀ (n s k : Nat), n = s + k →
               have hcongr := congrArg (fun t => t * fact n) hsum
               rw [Nat.add_mul] at hcongr
               rw [hfact, ← hcongr, Nat.add_mul]
-              ring
 
 theorem binom_pos (n k : Nat) (hk : k ≤ n) : 1 ≤ binom n k := by
   obtain ⟨s, hs⟩ : ∃ s, n = s + k := ⟨n - k, by omega⟩
@@ -534,7 +532,7 @@ theorem succDiff (m j : Nat) (hm : 1 ≤ m) :
         rw [Nat.mul_mod, Nat.mod_self, Nat.zero_mul, Nat.zero_mod]
       have hAM := Nat.add_mod (m * (j / m)) (j % m + 1) m
       have hfinal : (j + 1) % m = j % m + 1 := by
-        rw [hs, hAM, hmulmod, hmodlt, Nat.zero_add, Nat.mod_mod, hmodlt]
+        rw [hs, hAM, hmulmod, hmodlt, Nat.zero_add, hmodlt]
       omega
     rw [if_neg hnd]
     have hrep : j + 1 = m * (j / m) + (j % m + 1) := by omega
@@ -599,13 +597,14 @@ theorem cntDiv_eq_of_ge (p k : Nat) (hp : 2 ≤ p) (hk : 1 ≤ k) : ∀ a, a ≤
     cntDiv p a k = a := by
   intro a
   induction a with
-  | zero => rfl
+  | zero => intro _; rfl
   | succ a ih =>
     intro hle
     have hdvd : p ^ (a + 1) ∣ k :=
       (pow_dvd_iff p hp (a + 1) (a + 1) k (Nat.le_refl _) hk).mpr hle
     have e : cntDiv p (a + 1) k = (if p ^ (a + 1) ∣ k then 1 else 0) + cntDiv p a k := rfl
     rw [e, if_pos hdvd, ih (by omega)]
+    omega
 
 theorem cntDiv_eq_of_le (p k : Nat) (hp : 2 ≤ p) (hk : 1 ≤ k) : ∀ a, vp p k ≤ a →
     cntDiv p a k = vp p k := by
@@ -624,6 +623,7 @@ theorem cntDiv_eq_of_le (p k : Nat) (hp : 2 ≤ p) (hk : 1 ≤ k) : ∀ a, vp p 
         have := (pow_dvd_iff p hp (a + 1) (a + 1) k (Nat.le_refl _) hk).mp hd
         omega
       rw [e, if_neg hnd, ih (by omega)]
+      omega
     · have hdvd : p ^ (a + 1) ∣ k :=
         (pow_dvd_iff p hp (a + 1) (a + 1) k (Nat.le_refl _) hk).mpr (by omega)
       have hge := cntDiv_eq_of_ge p k hp hk a (by omega)
@@ -672,7 +672,7 @@ theorem powsSum_split (p a k s : Nat) (hp : 2 ≤ p) (hks : k + s = p ^ a) :
       omega
 
 /-- **The powsSum step law.** `powsSum p a (j+1) = powsSum p a j + cntDiv p a (j+1)`. -/
-theorem powsSum_succ (p j : Nat) : ∀ a,
+theorem powsSum_succ (p j : Nat) (hp : 2 ≤ p) : ∀ a,
     powsSum p a (j + 1) = powsSum p a j + cntDiv p a (j + 1) := by
   intro a
   induction a with
@@ -687,9 +687,9 @@ theorem powsSum_succ (p j : Nat) : ∀ a,
     have hsd := succDiff (p ^ (a + 1)) j (pow_ge_one p (by omega) (a + 1))
     rw [hsd]
     by_cases hd : p ^ (a + 1) ∣ j + 1
-    · rw [if_pos hd, if_pos hd]
+    · rw [if_pos hd]
       omega
-    · rw [if_neg hd, if_neg hd]
+    · rw [if_neg hd]
       omega
 
 /-! ## §8 THE LEGENDRE BRIDGE AT PRIME POWERS -/
@@ -730,7 +730,7 @@ theorem legendre_pp (p a : Nat) (hpp : p.Prime) : ∀ F m, m ≤ F → m ≤ p ^
           hpp hj1 hfj1
       have hvja : vp p (j + 1) ≤ a :=
         vp_le_of_le_pow p a (j + 1) hp hj1 hm
-      have hps := powsSum_succ p j a
+      have hps := powsSum_succ p j hp a
       have hcd := cntDiv_eq_of_le p (j + 1) hp hj1 a hvja
       rw [hvsplit, IHj, hps, hcd]
       omega
@@ -799,7 +799,7 @@ theorem minGcdAux_ge (n t : Nat) (htn : t ≤ n) : ∀ j, 1 ≤ j →
       have hB := ih (by omega) (by
         intro k hk2 hkj
         exact hall k hk2 (by omega))
-      omega
+      exact Nat.le_min hA hB
 
 theorem minGcdAux_le (n k : Nat) (hk : 2 ≤ k) : ∀ j, k ≤ j →
     minGcdAux n j ≤ Nat.gcd n (binom n k) := by
@@ -815,7 +815,8 @@ theorem minGcdAux_le (n k : Nat) (hk : 2 ≤ k) : ∀ j, k ≤ j →
       rw [hstep]
       rcases Nat.lt_or_ge k (j' + 2) with hlt | hge
       · have hIH := ih (by omega)
-        have hmin := Nat.min_le_right (Nat.gcd n (binom n (j' + 2))) (minGcdAux n (j' + 1))
+        have hmin : Nat.min (Nat.gcd n (binom n (j' + 2))) (minGcdAux n (j' + 1))
+            ≤ minGcdAux n (j' + 1) := Nat.min_le_right _ _
         omega
       · have hke : k = j' + 2 := by omega
         rw [hke]
@@ -830,12 +831,13 @@ theorem prime_dvd_pow_of (q : Nat) (hq : q.Prime) : ∀ (t b : Nat), q ∣ b ^ t
     | zero => omega
     | succ e' =>
       have hq1 : 2 ≤ q := hq.one_lt
-      have hexp := Nat.mul_succ q e'
+      have hle : q * 1 ≤ q * (e' + 1) := Nat.mul_le_mul_left q (Nat.le_succ e')
       omega
   | t + 1, b, hd => by
-    have hsucc : b ^ (t + 1) = b * b ^ t := Nat.pow_succ b t
+    have hsucc : b ^ (t + 1) = b * b ^ t := by
+      rw [Nat.pow_succ, Nat.mul_comm]
     rw [hsucc] at hd
-    rcases hq.dvd_mul hd with h | h
+    rcases (hq.dvd_mul).mp hd with h | h
     · exact h
     · exact prime_dvd_pow_of q hq t b h
 
@@ -844,7 +846,7 @@ theorem erdos700_gcd_lower (p a k : Nat) (hpp : p.Prime) (ha : 2 ≤ a)
     (hk2 : 2 ≤ k) (hkN : k ≤ p ^ a / 2) :
     p ≤ Nat.gcd (p ^ a) (binom (p ^ a) k) := by
   have hp : 2 ≤ p := hpp.one_lt
-  have hN2 : 2 ≤ p ^ a := pow_ge_two p a hp ha
+  have hN2 : 2 ≤ p ^ a := pow_ge_two p a hp (by omega)
   have hN1 : 1 ≤ p ^ a := pow_ge_one p (by omega) a
   have hklt : k < p ^ a := by omega
   have hk1 : 1 ≤ k := by omega
@@ -857,7 +859,7 @@ theorem erdos700_gcd_lower (p a k : Nat) (hpp : p.Prime) (ha : 2 ≤ a)
   have hdvd : p ∣ binom (p ^ a) k := (vp_ge_one_iff_dvd p _ hp hCpos).mp hge1
   have hpN : p ∣ p ^ a := by
     refine ⟨p ^ (a - 1), ?_⟩
-    rw [← Nat.pow_add]
+    rw [Nat.mul_comm, ← Nat.pow_succ]
     congr 1
     omega
   have hg1 : 1 ≤ Nat.gcd (p ^ a) (binom (p ^ a) k) := by
@@ -877,6 +879,10 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hp : 2 ≤ p := hpp.one_lt
   have hk01 : 1 ≤ p ^ (a - 1) := pow_ge_one p (by omega) (a - 1)
   have hpowlt : p ^ (a - 1) < p ^ a := by
+    have hsplit : p ^ a = p ^ (a - 1) * p := by
+      rw [Nat.mul_comm, ← Nat.pow_succ]
+      congr 1
+      omega
     have h2 : p ^ (a - 1) * 2 ≤ p ^ (a - 1) * p :=
       Nat.mul_le_mul_left (p ^ (a - 1)) hp
     omega
@@ -886,7 +892,7 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hCpos : 1 ≤ binom (p ^ a) (p ^ (a - 1)) := binom_pos _ _ (by omega)
   have hpC : p ∣ binom (p ^ a) (p ^ (a - 1)) :=
     (vp_ge_one_iff_dvd p _ hp hCpos).mp (by omega)
-  obtain ⟨u, hu⟩ := hpC
+  obtain ⟨u, hu⟩ := id hpC
   have hu1 : 1 ≤ u := by
     rcases Nat.eq_zero_or_pos u with h0 | h1
     · rw [h0, Nat.mul_zero] at hu
@@ -899,13 +905,13 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
       refine ⟨w, ?_⟩
       calc p ^ 2 * w = p * (p * w) := by rw [Nat.pow_two, Nat.mul_assoc]
         _ = p * u := by rw [← hw]
-        _ = binom (p ^ a) (p ^ (a - 1)) := hu
+        _ = binom (p ^ a) (p ^ (a - 1)) := hu.symm
     have hvp2 := (pow_dvd_iff p hp 2 2 (binom (p ^ a) (p ^ (a - 1)))
       (Nat.le_refl 2) hCpos).mp hC2
     omega
   have hpdvdg : p ∣ Nat.gcd (p ^ a) (binom (p ^ a) (p ^ (a - 1))) := by
     refine Nat.dvd_gcd ?_ hpC
-    exact ⟨p ^ (a - 1), by rw [← Nat.pow_add]; congr 1; omega⟩
+    exact ⟨p ^ (a - 1), by rw [Nat.mul_comm, ← Nat.pow_succ]; congr 1; omega⟩
   have hg1 : 1 ≤ Nat.gcd (p ^ a) (binom (p ^ a) (p ^ (a - 1))) := by
     by_contra hg
     have hg0 : Nat.gcd (p ^ a) (binom (p ^ a) (p ^ (a - 1))) = 0 := by omega
@@ -934,7 +940,7 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
     obtain ⟨e, he⟩ := Nat.gcd_dvd_left (p ^ a) (binom (p ^ a) (p ^ (a - 1)))
     rw [hh] at he
     have hsplit : p ^ a = p * p ^ (a - 1) := by
-      rw [← Nat.pow_succ]
+      rw [Nat.mul_comm, ← Nat.pow_succ]
       congr 1
       omega
     have hcancel : h * e = p ^ (a - 1) := by
@@ -946,13 +952,13 @@ theorem erdos700_witness (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
   have hh1eq : h = 1 := by
     by_contra h2h
     have h2le : 2 ≤ h := by omega
-    have hqdvd : h.minFac ∣ h := Nat.minFac_dvd h2le
-    have hqprime : h.minFac.Prime := Nat.minFac_prime h2le
+    have hqdvd : h.minFac ∣ h := Nat.minFac_dvd h h2le
+    have hqprime : h.minFac.Prime := Nat.minFac_prime h (by omega)
     have hq2 : 2 ≤ h.minFac := hqprime.one_lt
     have hqdp : h.minFac ∣ p ^ (a - 1) := Nat.dvd_trans hqdvd hhp
     have hqdpp : h.minFac ∣ p := prime_dvd_pow_of h.minFac hqprime (a - 1) p hqdp
-    have hqp : h.minFac = p :=
-      ((Nat.dvd_prime hpp h.minFac).mp hqdpp).resolve_left (by omega)
+    have hiff : h.minFac ∣ p ↔ h.minFac = 1 ∨ h.minFac = p := Nat.dvd_prime hpp
+    have hqp : h.minFac = p := (hiff.mp hqdpp).resolve_left (by omega)
     have hpu : p ∣ u := by
       rw [← hqp]
       exact Nat.dvd_trans hqdvd hhu
@@ -1001,11 +1007,13 @@ theorem erdos700_law (p a : Nat) (hpp : p.Prime) (ha : 2 ≤ a) :
 prime divisor of p² is p, so the Erdős–Szekeres equality HOLDS at n = p². -/
 theorem erdos700_equality_class (p : Nat) (hpp : p.Prime) :
     f700 (p ^ 2) = p ∧ p ^ 2 / p = p ∧ ∀ q, q.Prime → q ∣ p ^ 2 → q = p := by
+  have hp : 2 ≤ p := hpp.one_lt
   refine ⟨erdos700_law p 2 hpp (by omega), ?_, ?_⟩
   · rw [Nat.pow_two, Nat.mul_div_cancel_left _ (by omega : 1 ≤ p)]
   · intro q hqp hqdvd
     have hqdp : q ∣ p := prime_dvd_pow_of q hqp 2 p hqdvd
-    exact ((Nat.dvd_prime hpp q).mp hqdp).resolve_left (by omega)
+    have hiff : q ∣ p ↔ q = 1 ∨ q = p := Nat.dvd_prime hpp
+    exact (hiff.mp hqdp).resolve_left (by omega)
 
 /-- **The violation at higher powers.** For a ≥ 3: f(p^a) = p < p^(a−1)
 = p^a / p — the Erdős–Szekeres equality FAILS by the factor p^(a−2). -/
@@ -1014,7 +1022,7 @@ theorem erdos700_violation (p a : Nat) (hpp : p.Prime) (ha : 3 ≤ a) :
   have hp : 2 ≤ p := hpp.one_lt
   refine ⟨erdos700_law p a hpp (by omega), ?_, ?_⟩
   · have hsplit : p ^ a = p * p ^ (a - 1) := by
-      rw [← Nat.pow_succ]
+      rw [Nat.mul_comm, ← Nat.pow_succ]
       congr 1
       omega
     rw [hsplit, Nat.mul_div_cancel_left _ (by omega : 1 ≤ p)]
