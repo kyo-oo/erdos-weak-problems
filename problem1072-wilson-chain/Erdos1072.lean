@@ -263,14 +263,18 @@ theorem erdos1072_wilson_pair_classic (p n : Nat) (hp : 2 ≤ p)
         = (p - 1) * ((p - 1) * fm p (p - 1 - n)) := by ring
     have h2 : (p - 1) * (p - 1) * fm p (p - 1 - n)
         ≡ (p - 1) * (p - 1) * (p - 1) [MOD p] :=
-      (meq_of_eq _ _ _ hring2).trans (hpair.mul_left (p - 1))
+      (meq_of_eq _ _ _ hring2).trans (hpair.mul_left (p - 1)) |>.trans
+        (meq_of_eq _ _ _ (Nat.mul_assoc (p - 1) (p - 1) (p - 1)).symm)
     have hring3 : (p - 1) * (p - 1) * (p - 1)
         = ((p - 1) * (p - 1)) * (p - 1) := by ring
     have hone3 : (1:Nat) * (p - 1) = (p - 1) := Nat.one_mul _
     have h3 : (p - 1) * (p - 1) * (p - 1) ≡ (p - 1) [MOD p] :=
-      ((meq_of_eq _ _ _ hring3).trans (sqn p hp).mul_right (p - 1)).trans
+      (((meq_of_eq _ _ _ hring3).trans ((sqn p hp).mul_right (p - 1)))).trans
         (meq_of_eq _ _ _ hone3)
-    exact modeq_eq p _ _ (fm_lt p hp _) (sgn_lt p _ hp) ((hY.trans h2).trans h3)
+    have hfinalo : fm p (p - 1 - n) ≡ sgn p (p - 1 - n) [MOD p] := by
+      rw [hs]
+      exact (hY.trans h2).trans h3
+    exact modeq_eq p _ _ (fm_lt p hp _) (sgn_lt p _ hp) hfinalo
 
 /-! ## §9 THE NAMED APPLICATIONS (term-mode, receipts from Data). -/
 theorem erdos1072_pair_7   : fm 7 3   = sgn 7 3   := by
