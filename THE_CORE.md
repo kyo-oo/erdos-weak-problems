@@ -610,3 +610,56 @@ hunts + #885 k=5 + #317 K1: firing.
   additions.
 
 *State is full. The engine never stops; it never lies.*
+
+
+---
+
+## §11. SESSION 035 ADDENDUM (2026-11-07, late) — THE NEW-RULE VOLLEY + LOOK-BACK STRIKES
+
+**BOSS's orders:** (1) NEW RULE — every kernel carries the problem
+statement verbatim above the proof (S034 format, now standing); (2) be
+more aggressive; (3) LOOK BACK at solved problems for remaining proof
+obligations; (4) use ALL the maths (16,121-theorem vendored arsenal).
+
+**LANDED THIS SESSION:**
+- **KILL #27 (#394)**: the CRT-LAW kernel GREEN (run-10 state: zero
+  errors, all theorems clean — the 12-round compile war from 15 root
+  causes to 0).
+- **KILL #28 (#711)**: the DIVISOR-SCHEDULING kernel GREEN (the
+  round-5/6 fixes held).
+- **KERNEL 25 (#961)** — THE ELEMENTARY SMOOTH-RUN LAWS: the {2,3}-
+  census theorem (elementary: mod-8 spine, dvd_two_pow, the
+  two-powers-differing-by-2 law), the run law, THE EXACT FRONTIER
+  f(2)=2, f(3)=3, f(4)=3, the witness laws f(k)>=4 (k=5..12), the Pell
+  dictionary. Battery dual-method GREEN. Compile war: rounds 1-4
+  (68 -> 43 -> 34 -> ? errors).
+- **KERNEL 26 (#686 squares)** — THE SQUARE k=2 CENSUS: the infinite
+  family theorem (all t = 4u+2 >= 10, UNBOUNDED), the odd sporadic
+  t=99 (m=241, n=1), the no-go bridge (divisor-pair reduction), THE
+  CENSUS t <= 100 (ONE kernel decide — censusScan = true ALREADY
+  AXIOM-FREE GREEN; family + sporadic both [propext, Quot.sound]).
+  Battery dual-method GREEN (scan == quadratic == family+99).
+  Compile war: rounds 1-4 (18 -> 3 -> 2 -> ? errors).
+- Engine discoveries: the #686 square census has TWO odd sporadics
+  (t=99 AND t=195 at t <= 300) — the k>=3 war's exact foundation.
+
+**THE COMPILE-WAR LEDGER (the new lessons, S035):**
+- THE POW_SUCC ORDER LAW: core Nat.pow_succ is a^(n+1) = a^n * a — the
+  POWER FACTOR LEADS (three strikes this session).
+- THE MUL_DIV_CANCEL_LEFT / DIV_ADD_MOD SIGNATURES: the dividend/
+  divisor VALUE leads, the positivity proof second; div_add_mod is
+  k * (n/k) + n%k (the divisor leads the product).
+- THE COFACTOR-WITNESS LAW: 3 | 2^x * 3^k needs the witness
+  2^x * 3^(k-1), NOT 3^(k-1).
+- THE OMEGA MONOMIAL DISEASE: (a*b)*c, a*(b*c), and sums-of-atoms are
+  all DIFFERENT atoms — bridge with ring-haves; f961 k vs sInf (FSet k)
+  split — bridge with have-forced types.
+- omega cannot unfold IsPrime/defs — provide the .1-components.
+- obtain CONSUMES its hypothesis; rcases patterns must match the
+  constructor arity EXACTLY (a 5-name pattern on an ∧-triple mangles
+  the eliminators).
+- cases h : e SUBSTITUTES the goal (exact h fails; use rfl).
+- The fuel-induction shape: ∀-INSIDE (the IH must generalize v).
+
+**Registry: 26 green + 2 green-pending-confirmation (#27, #28) + 2
+compile-war-active (#961, #686-squares). The war continues until green.**
