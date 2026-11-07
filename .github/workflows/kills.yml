@@ -485,6 +485,7 @@ jobs:
           echo ERDOS700_PRIME_POWER_LAW_KERNEL_GREEN=1
 
       - name: "Kernel 20 - Erdos 1063 BINOMIAL FRONTIER (S033 volley): nine new exact values k=6..14 (75, 30, 70, 56, 2403, 280, 3465, 210, 793) + absorption certificate + arsenal bridge"
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
@@ -517,6 +518,7 @@ jobs:
           echo ERDOS1063_BINOMIAL_FRONTIER_KERNEL_GREEN=1
 
       - name: "Kernel 21 - Erdos 451 INTERVAL-PRIME-FREE (S033 volley): the witness table k=2..20 + the general modular criterion + arsenal bridge"
+        if: always()
         shell: bash
         run: |
           set -euo pipefail
@@ -541,6 +543,7 @@ jobs:
           echo ERDOS451_INTERVAL_PRIME_FREE_KERNEL_GREEN=1
 
       - name: "Kernel 22 - Erdos 1072 WILSON-PAIR LAW (S033 volley): the general pairing law + classic corollary + eleven named instances + arsenal bridge"
+        if: always()
         shell: bash
         run: |
           set -euo pipefail

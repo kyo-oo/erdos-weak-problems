@@ -147,8 +147,7 @@ theorem erdos1063_binomP_absorb (n : Nat) :
     have e2 : kfact (n - k) = (n - k) * kfact (n - k - 1) := by
       have hs : n - k = (n - k - 1) + 1 := by omega
       rw [hs]
-      show ((n - k - 1) + 1) * kfact (n - k - 1) = (n - k) * kfact (n - k - 1)
-      rw [Nat.sub_add_cancel (by omega : 1 ≤ n - k)]
+      simp only [kfact, Nat.add_sub_cancel]
     have IH := ih hkn
     rw [e2] at IH
     show binomP n (k + 1) * kfact (n - k - 1) = kfact n
@@ -174,11 +173,11 @@ theorem erdos1063_frontier :
     (2 * 10 ≤ 2403 ∧ 9 ≤ wcount 2403 10) ∧ (2 * 11 ≤ 280 ∧ 10 ≤ wcount 280 11) ∧
     (2 * 12 ≤ 3465 ∧ 11 ≤ wcount 3465 12) ∧ (2 * 13 ≤ 210 ∧ 12 ≤ wcount 210 13) ∧
     (2 * 14 ≤ 793 ∧ 13 ≤ wcount 793 14) :=
-  ⟨erdos1063_k6.1, erdos1063_k6.2.1, erdos1063_k7.1, erdos1063_k7.2.1,
-   erdos1063_k8.1, erdos1063_k8.2.1, erdos1063_k9.1, erdos1063_k9.2.1,
-   erdos1063_k10.1, erdos1063_k10.2.1, erdos1063_k11.1, erdos1063_k11.2.1,
-   erdos1063_k12.1, erdos1063_k12.2.1, erdos1063_k13.1, erdos1063_k13.2.1,
-   erdos1063_k14.1, erdos1063_k14.2.1⟩
+  ⟨⟨erdos1063_k6.1, erdos1063_k6.2.1⟩, ⟨erdos1063_k7.1, erdos1063_k7.2.1⟩,
+   ⟨erdos1063_k8.1, erdos1063_k8.2.1⟩, ⟨erdos1063_k9.1, erdos1063_k9.2.1⟩,
+   ⟨erdos1063_k10.1, erdos1063_k10.2.1⟩, ⟨erdos1063_k11.1, erdos1063_k11.2.1⟩,
+   ⟨erdos1063_k12.1, erdos1063_k12.2.1⟩, ⟨erdos1063_k13.1, erdos1063_k13.2.1⟩,
+   ⟨erdos1063_k14.1, erdos1063_k14.2.1⟩⟩
 
 #eval "ERDOS1063_KERNEL_GREEN"
 #print axioms erdos1063_k6
