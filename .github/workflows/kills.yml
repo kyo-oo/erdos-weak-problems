@@ -567,3 +567,43 @@ jobs:
           grep -E "Erdos1072.erdos1072_pair_(7|23|71)' (does not depend on any axioms|depends on axioms)" kernel22.log
           python3 problem1072-wilson-chain/battery1072.py
           echo ERDOS1072_WILSON_PAIR_LAW_KERNEL_GREEN=1
+
+      - name: "Kernel 23 - Erdos 394 CRT-LAW STRIKE (S034 volley): the soundness theorem + unique-position law + prime-landing law + 139 certified exact values t2..t5 + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel23.log
+          mkdir -p oleans394
+          export LEAN_PATH="$PWD/oleans394"
+          echo "=== Erdos394_Data ===" >> kernel23.log
+          lake env lean -o oleans394/Erdos394_Data.olean problem394-consecutive-crt/Erdos394_Data.lean 2>&1 | tee -a kernel23.log
+          echo "=== Erdos394 ===" >> kernel23.log
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans394${LP:+:$LP}"
+          lake env lean problem394-consecutive-crt/Erdos394.lean 2>&1 | tee -a kernel23.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel23.log
+          grep -F "ERDOS394_DATA_GREEN" kernel23.log
+          grep -F "ERDOS394_KERNEL_GREEN" kernel23.log
+          grep -E "Erdos394.erdos394_(crt_sound|unique_pos|prime_landing|tk_char|table_main|arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel23.log
+          python3 problem394-consecutive-crt/battery394.py
+          echo ERDOS394_CRT_LAW_KERNEL_GREEN=1
+
+      - name: "Kernel 24 - Erdos 711 DIVISOR-SCHEDULING FRONTIER (S034 volley): the general (n-1)^2 forced-collision obstruction + complete n=2,3 laws + exact frontier n=2..15 + periodicity + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel24.log
+          lake env lean problem711-divisor-matching/Erdos711.lean 2>&1 | tee -a kernel24.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel24.log
+          grep -F "ERDOS711_KERNEL_GREEN" kernel24.log
+          grep -E "Erdos711.erdos711_(forced_pair|obstruction|two|three|law|period|cover|arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel24.log
+          python3 problem711-divisor-matching/battery711.py
+          echo ERDOS711_DIVISOR_SCHEDULING_KERNEL_GREEN=1

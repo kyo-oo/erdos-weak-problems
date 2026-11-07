@@ -7,8 +7,14 @@ set_option maxRecDepth 262144
 
 /-! # Erdős #1072 — THE WILSON-PAIR LAW (Kill candidate, S033)
 
-**Problem (Erdős–Hardy–Subbarao).** f(p) = least n with n! ≡ −1 (mod p).
-Open: infinitude of the Wilson-only primes (f(p) = p−1); f(p)/p → 0 a.e.
+**THE PROBLEM (verbatim, erdosproblems.com/1072).** For any prime $p$,
+let $f(p)$ be the least integer such that $f(p)!+1\equiv 0\pmod{p}$. Is it
+true that there are infinitely many $p$ for which $f(p)=p-1$? Is it true
+that $f(p)/p\to 0$ for almost all $p$?
+
+(This kernel's law is the structure theorem for the solution set of
+$n! \equiv -1 \pmod p$ — the engine room under both open questions;
+honest scope in the registry: the two asymptotic questions remain open.)
 
 **THIS KERNEL — THE PAIRING LAW (the structure theorem for the solution
 set of n! ≡ −1 (mod p)), all unconditional:**

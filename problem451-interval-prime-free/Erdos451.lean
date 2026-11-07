@@ -7,9 +7,13 @@ set_option maxRecDepth 262144
 
 /-! # Erdős #451 — THE INTERVAL-PRIME-FREE WITNESS TABLE (Kill candidate, S033)
 
-**Problem (Erdős–Graham).** n_k = smallest n > 2k such that
-∏_{1≤i≤k}(n−i) has NO prime factor in the open interval (k, 2k).
-Open in ErGr80: estimates for n_k.
+**THE PROBLEM (verbatim, erdosproblems.com/451).** Estimate $n_k$, the
+smallest integer $>2k$ such that $\prod_{1\leq i\leq k}(n_k-i)$ has no
+prime factor in $(k,2k)$.
+
+(This kernel answers the estimation ask at machine precision: nineteen
+exact values $k=2..20$ + the general modular criterion; honest scope in
+the registry: the general asymptotics remain open.)
 
 **THIS KERNEL — NINETEEN UNCONDITIONAL EXACT VALUES (k = 2..20):**
 

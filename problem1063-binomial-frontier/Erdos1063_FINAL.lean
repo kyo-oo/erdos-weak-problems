@@ -10,9 +10,14 @@ set_option maxRecDepth 65536
 
 /-! # Erdős #1063 — THE BINOMIAL FRONTIER, k: 5 → 14 (Kill candidate, S033)
 
-**Problem (Erdős–Selfridge).** n_k = least n ≥ 2k such that (n−i) ∣ C(n,k)
-for all but one 0 ≤ i < k. Published: n_2=4, n_3=6, n_4=9, n_5=12 (ErSe83);
-the engine matched all four (battery calibration GREEN).
+**THE PROBLEM (verbatim, erdosproblems.com/1063).** Let $k\geq 2$ and
+define $n_k\geq 2k$ to be the least value of $n$ such that $n-i$ divides
+$\binom{n}{k}$ for all but one $0\leq i<k$. Estimate $n_k$.
+
+Published: n_2=4, n_3=6, n_4=9, n_5=12 (ErSe83); the engine matched all
+four (battery calibration GREEN). (This kernel answers the estimation ask
+with nine new exact values k=6..14; honest scope: the general asymptotics
+remain open.)
 
 **THIS KERNEL — NINE NEW UNCONDITIONAL EXACT VALUES (k = 6..14):**
 
