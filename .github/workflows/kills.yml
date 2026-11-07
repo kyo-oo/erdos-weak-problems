@@ -23,6 +23,8 @@ on:
       - problem1063-binomial-frontier/**
       - problem451-interval-prime-free/**
       - problem1072-wilson-chain/**
+      - problem394-consecutive-crt/**
+      - problem711-divisor-matching/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
