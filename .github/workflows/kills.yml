@@ -721,7 +721,14 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
+          mkdir -p oleans
+          export LEAN_PATH="$PWD/oleans"
           : > kernel31.log
+          echo "=== Erdos396_Base ===" >> kernel31.log
+          lake env lean -o oleans/Erdos396_Base.olean problem396-prod-binomial/Erdos396_Base.lean 2>&1 | tee -a kernel31.log
+          echo "=== Erdos396_Data ===" >> kernel31.log
+          lake env lean -o oleans/Erdos396_Data.olean problem396-prod-binomial/Erdos396_Data.lean 2>&1 | tee -a kernel31.log
+          echo "=== Erdos396 FINAL ===" >> kernel31.log
           lake env lean problem396-prod-binomial/Erdos396.lean 2>&1 | tee -a kernel31.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel31.log
           grep -F "ERDOS396_KERNEL_GREEN" kernel31.log

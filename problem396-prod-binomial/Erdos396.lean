@@ -69,7 +69,10 @@ theorem erdos396_k0 : binomP 1 1 ∣ binom 2 1 :=
 theorem erdos396_k1 : binomP 2 2 ∣ binom (2*2) 2 ∧
     ∀ n, 1 ≤ n → n < 2 → ¬(binomP n 2 ∣ binom (2*n) n) :=
   ⟨Nat.dvd_iff_mod_eq_zero.mpr (by decide),
-   fun n _ _ => not_dvd_of_mod_ne (by decide)⟩
+   fun n h1 h2 => by
+     have hn : n = 1 := by omega
+     subst hn
+     exact not_dvd_of_mod_ne (by decide)⟩
 
 /-! ## §4 The k=2 witness (n = 2480). -/
 
