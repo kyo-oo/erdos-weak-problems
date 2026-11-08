@@ -545,7 +545,7 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
         have hvp1 : 1 ≤ vp (Nat.minFac (N + 2)) (N + 2) := by
           have hmod : (N + 2) % Nat.minFac (N + 2) = 0 :=
             Nat.mod_eq_zero_of_dvd hdvd
-          have hstep := vp_step (Nat.minFac (N + 2)) (N + 2) hp2 hn2 hmod
+          have hstep := vp_step (Nat.minFac (N + 2)) (N + 2) hp2 (by omega) hmod
           omega
         have hpar := h _ hpp
         have hvp2 : 2 ≤ vp (Nat.minFac (N + 2)) (N + 2) := by omega
@@ -573,11 +573,11 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
             one_le_mul _ _ (by omega) (by omega)
           have hmul1 : vp q (Nat.minFac (N + 2) * Nat.minFac (N + 2) * k) =
               vp q (Nat.minFac (N + 2) * Nat.minFac (N + 2)) + vp q k :=
-            vp_mul _ hq _ _ (Nat.le_refl _) hq hm1 hk1
-          have hm2 : 1 ≤ Nat.minFac (N + 2) := hp2
+            vp_mul _ q _ _ (Nat.le_refl _) hq hm1 hk1
+          have hm2 : 1 ≤ Nat.minFac (N + 2) := by omega
           have hmul2 : vp q (Nat.minFac (N + 2) * Nat.minFac (N + 2)) =
               vp q (Nat.minFac (N + 2)) + vp q (Nat.minFac (N + 2)) :=
-            vp_mul _ hq _ _ (Nat.le_refl _) hq hm2 hm2
+            vp_mul _ q _ _ (Nat.le_refl _) hq hm2 hm2
           have hvq : vp q (Nat.minFac (N + 2)) = 1 ∨
               vp q (Nat.minFac (N + 2)) = 0 := by
             by_cases hqe : q = Nat.minFac (N + 2)
@@ -717,7 +717,7 @@ theorem censusAll_flags : ∀ (fuel m : Nat), censusAll fuel m = true →
       simpa only [Bool.and_eq_true] using h
     have hflag : d2w m = sqTest m := of_decide_eq_true hsplit.1
     rcases Nat.eq_or_lt_of_le hj1 with heq | hlt
-    · rw [heq]; exact hflag
+    · rw [← heq]; exact hflag
     · exact ih (m + 1) hsplit.2 j (by omega) (by omega)
 
 theorem census_flag (m : Nat) (hm : 1 ≤ m) (hm250 : m ≤ 250) :
@@ -994,7 +994,7 @@ dual-method engine check of S039). -/
 theorem parRow4_iff (a b c m : Nat) (ha : a ≤ 250) (hb : b ≤ 250)
     (hc : c ≤ 250) (hm : m ≤ 250) :
     parRow4 a b c m = true ↔
-      parAllX (fact a * fact b * (fact c * fact m)) = true := by
+      parAllX (fact a * fact b * fact c * fact m) = true := by
   have hpr : ∀ q ∈ primes250, q.Prime := fun q hq =>
     of_decide_eq_true ((List.all_eq_true.mp primes250_all_prime) q hq)
   have hmul1 : ∀ q, q.Prime → vp q (fact a * fact b) =
@@ -1005,12 +1005,15 @@ theorem parRow4_iff (a b c m : Nat) (ha : a ≤ 250) (hb : b ≤ 250)
       vp q (fact c) + vp q (fact m) :=
     fun q hq => vp_mul (fact c + fact m) q (fact c) (fact m) (Nat.le_refl _) hq
       (fact_pos c) (fact_pos m)
-  have hmul3 : ∀ q, q.Prime → vp q (fact a * fact b * fact c * fact m) =
+  have hmul3 : ∀ q, q.Prime → vp q (fact a * fact b * (fact c * fact m)) =
       vp q (fact a * fact b) + vp q (fact c * fact m) :=
     fun q hq => vp_mul (fact a * fact b + fact c * fact m) q (fact a * fact b)
       (fact c * fact m) (Nat.le_refl _) hq
       (one_le_mul _ _ (fact_pos a) (fact_pos b))
       (one_le_mul _ _ (fact_pos c) (fact_pos m))
+  have hassocP : fact a * fact b * fact c * fact m =
+      fact a * fact b * (fact c * fact m) :=
+    Nat.mul_assoc (fact a * fact b) (fact c) (fact m)
   constructor
   · intro hrow
     apply List.all_eq_true.mpr
@@ -1024,6 +1027,7 @@ theorem parRow4_iff (a b c m : Nat) (ha : a ≤ 250) (hb : b ≤ 250)
     have h1 := hmul1 q hq'
     have h2 := hmul2 q hq'
     have h3 := hmul3 q hq'
+    rw [hassocP]
     exact decide_eq_true (by omega)
   · intro hall
     apply List.all_eq_true.mpr
@@ -1034,6 +1038,7 @@ theorem parRow4_iff (a b c m : Nat) (ha : a ≤ 250) (hb : b ≤ 250)
     have hvc := vpar_eq q c hq' hc
     have hvm := vpar_eq q m hq' hm
     have hp := of_decide_eq_true (List.all_eq_true.mp hall q hq)
+    rw [hassocP] at hp
     have h1 := hmul1 q hq'
     have h2 := hmul2 q hq'
     have h3 := hmul3 q hq'
@@ -1054,7 +1059,7 @@ theorem d4_squares : ∀ i, i < 96 → ∃ s,
   have hall := (List.all_eq_true.mp d4_table) i (List.mem_range.mpr hi)
   obtain ⟨h1, h2, h3, h4, h5, hpar⟩ := of_decide_eq_true hall
   have hbig : parAllX (fact (d4tab.getD (4*i+1) 0) * fact (d4tab.getD (4*i+2) 0) *
-      (fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0))) = true :=
+      fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0)) = true :=
     (parRow4_iff _ _ _ _ (by omega) (by omega) (by omega) (by omega)).mp hpar
   exact sq_of_parAllX _ (fun q hq hv =>
     vp_fact4_bound q _ _ _ _ hq (by omega) (by omega) (by omega) (by omega) hv) hbig
