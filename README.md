@@ -458,6 +458,27 @@ pell_dict [propext, Quot.sound] GOLD. Honest scope: the f(k) asymptotics
 (Erdős < 3k/log k, conjectured (log k)^{O(1)}) open; k ≥ 5 exact values
 need the full Størmer census.
 
+**KILL #32 — Erdős #1074 THE EHS CENSUS + PILLAI DICTIONARY (Kernel 27,
+run 42436430564 GREEN, the 5-round compile war):** THE FACTOR-BOUND LAW
+(every prime p ∣ m!+1 satisfies m < p) + THE FINITE CHARACTERIZATION
+(m ∈ S ⟺ a finite scan over (m, m!+1]) + THE COMPLETE CENSUS m ∈ [1,19]
+(S ∩ [1,19] = {8,9,13,14,15,16,17,18,19} — every member a certified
+witness prime; every non-member the complete certified prime
+factorization with all factors ≡ 1 mod m — 39916801 = 11!+1 certified
+PRIME in-kernel) + the large-member witnesses (m = 22, 23, 24, 26, 34)
++ THE PILLAI DICTIONARY (p witnesses m ∈ S ⟺ m witnesses p ∈ P — S and
+P are two readings of one witness relation) + the Pillai witness bound
++ THE FIRST-30 PILLAI TABLE (23 ≤ p ≤ 397, all certified). Battery
+dual-method GREEN. Honest scope: both density limits remain open.
+
+**KERNEL 27 RECORD (compile war, 5 rounds):** the Prime-structure law
+(Nat.Prime is Irreducible-based — the ⟨⟩-construction dead, norm_num
+route), the bullet/combinator-in-parens laws (· and first | and <|> all
+illegal inside parenthesized (by ...) — top-level hoisting), the
+proof-in-statement law (And needs a Prop, not a theorem name), the
+or_false collapse (the False disjunct already simp'd away — the extra
+rcases pattern had no goals).
+
 **KERNEL 27 FIRED — Erdős #1074 THE EHS CENSUS + PILLAI DICTIONARY
 (compile war round 1):** THE FACTOR-BOUND LAW (every prime p | m!+1
 satisfies m < p) + THE FINITE CHARACTERIZATION (m ∈ S ⟺ finite scan
