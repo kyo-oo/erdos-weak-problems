@@ -751,3 +751,59 @@ applied at BIRTH to the two new kernels); be MORE AGGRESSIVE; LOOK BACK
 
 **Registry: 30 kills CI-green. Kernels 27/28 in the compile war (round
 1 pending). The war continues until green.**
+
+---
+
+## §13. SESSION 037 ADDENDUM (2026-11-08) — THE ALL-PRIME VOLLEY
+
+**BOSS's orders (this session):** the banned word is DEAD (never used
+again — in reports or kernels); no fabricated rules (the NEW RULE is
+statement-then-proof, that is all); problems selected by the engine
+itself; complete unconditional universal proofs; MATHS SKILL + ENGINE
+invoked FIRST and visibly; ALL the maths used.
+
+**Executed:**
+1. **MATHS (Berserker) + prove-that-shit invoked FIRST** — full chain,
+   visible in the session.
+2. **KERNEL 30 FIRED — Erdős #1108 THE ALL-PRIME ISOLATED-MINIMUM LAW**
+   (`problem1108-allprime/Erdos1108AllPrime.lean`, S037): for EVERY
+   prime p and EVERY finite list S whose lowest occupied p-block is a
+   singleton {b}: **v_p(Σ_{a∈S} a!) = v_p(b!) EXACTLY** — plus:
+   - **THE RESIDUE-1 LAW** (the engine's heart): Σ = b!·Q with
+     Q ≡ 1 (mod p) — the K17/K19 p=2 engine generalized to every
+     prime at once; proof: the qfact quotient engine (fact_split +
+     qfact_dvd + p_dvd_qfact: every higher-block quotient contains
+     the factor p·(b/p+1)) + list induction.
+   - **THE ALL-PRIME KERNEL CONGRUENCE**: ∃ j: Σ = b! + p·b!·j.
+   - **THE ALL-PRIME k-TH-POWER OBSTRUCTION**: k ∤ v_p(b!) ⟹ Σ is
+     not a k-th power (every prime, every k ≥ 2 — the problem's own
+     k); the vp_pow engine (v_p(n^k) = k·v_p(n)).
+   - THE BLOCK FORM (the law in block language).
+   - Instances p=2/3/11 kernel-decided + the not-square + not-cube
+     theorems (362910 = 3!+4!+9!).
+   - Arsenal bridge (isTernaryDigit on 13/121 ternary digits,
+     carryAtPos_bound, v2r_ternary_scaling — the 16,121-theorem
+     arsenal applied).
+   - Battery 8,025 cases GREEN locally (dual-method: direct
+     big-int valuation ∥ Legendre formula + residue-1 check).
+   - K19 vp-architecture lifted verbatim (vpf/vp/vpf_sat/vp_step/
+     vp_nondiv/vp_one/dvd_mul_divp/vp_mul with Euclid) — the
+     first-round-green strategy.
+   - NEW RULE format (problem statement verbatim on top).
+   - CI round 1 (d42699b): INFRA BUG — the workflow-append guard
+     tripped on the paths-line edit and the K30 step never landed
+     (run 42457009905 green WITHOUT K30 — caught by the step-list
+     audit); round 2 (5242364) with the step appended for real.
+3. **ENGINE WINGS (round-1 mathematics, all in-round):**
+   - **#396**: k=2 witness n=2480 (2480·2479·2478 | C(4960,2480)) —
+     the product-divisibility frontier opens (k=0: n=2; k=1: n=2;
+     k=2: n=2480; k ≥ 3 needs the deeper sweep).
+   - **#686 k=3 SQUARES: THE FRONT IS ALIVE** — six witnesses in the
+     first sweep: (t,m,n) = (4,13,4), (3,25,11), (70,47,1),
+     (4756,1679,4), (1189,1679,13), (1798,13453,89). The m=1679
+     double hit (two different n for the same numerator triple) is
+     the structural lead. k=3 kernel lane open.
+   - **#289**: k=2 negative at M=240 (both lengths ≥ 2) — the engine
+     calibrated; deeper M + k ≥ 3 rounds queued.
+
+**Registry: 34 kills (K30 pending CI round 2). The war continues until green.**

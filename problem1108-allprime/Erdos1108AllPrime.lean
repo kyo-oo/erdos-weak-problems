@@ -247,7 +247,6 @@ theorem qfact_pos : ∀ (t b : Nat), 1 ≤ qfact b t := by
     · rw [if_pos hlt]
       exact one_le_mul (t + 1) (qfact b t) (by omega) (ih b)
     · rw [if_neg hlt]
-      exact Nat.le_refl 1
 
 /-- **The factorial split.** `b ≤ t → t! = b! * ∏_{i=b+1}^{t} i`. -/
 theorem fact_split : ∀ (t b : Nat), b ≤ t → fact t = fact b * qfact b t := by
@@ -362,14 +361,13 @@ theorem countB_pos_mem : ∀ (t : List Nat) (b : Nat), 1 ≤ countB b t → memB
       exact Or.inr (countB_pos_mem t b (by omega))
 
 theorem sumFacts_pos_of_mem : ∀ (S : List Nat) (b : Nat), memB b S → 1 ≤ sumFacts S
-  | [], b, h => by exact h
+  | [], b, h => by have hf : False := h; exact hf.elim
   | c :: t, b, h => by
     have hOr : c = b ∨ memB b t := h
     cases hOr with
-    | inl heq =>
-      subst heq
-      have h1 : 1 ≤ fact b := fact_pos b
-      have h2 : 1 ≤ fact b + sumFacts t := by omega
+    | inl _ =>
+      have h1 : 1 ≤ fact c := fact_pos c
+      have h2 : 1 ≤ fact c + sumFacts t := by omega
       exact h2
     | inr hmem =>
       have h1 : 1 ≤ fact c := fact_pos c
@@ -428,7 +426,8 @@ theorem singleton_bottom_residue (p b : Nat) (hp : 2 ≤ p) :
         rw [Nat.mul_add, Nat.mul_one]
       omega
     by_cases hcb : c = b
-    · subst hcb
+    · have hbc : b = c := hcb.symm
+      subst hbc
       rw [if_pos rfl] at hbS
       have hct : countB b t = 0 := by omega
       have hnt : ¬ memB b t := not_memB_of_countB_zero t b hct
@@ -450,7 +449,6 @@ theorem singleton_bottom_residue (p b : Nat) (hp : 2 ≤ p) :
           Nat.mod_eq_of_lt (show 1 < p by omega)]
     · rw [if_neg hcb] at hbS
       have hct1 : countB b t = 1 := by omega
-      have hbt : memB b t := countB_pos_mem t b (by rw [hct1]; omega)
       have hblockt : ∀ a, memB a t → a ≠ b → p * (b / p + 1) ≤ a :=
         fun a ha hne => hblock a (Or.inr ha) hne
       obtain ⟨Qt, hQtsum, hQtmod⟩ := ih hct1 hblockt
@@ -500,17 +498,17 @@ theorem isolated_min_congruence (p b : Nat) (hp : p.Prime) (S : List Nat)
   rw [hQmod] at hdm
   have hQe : Q = p * (Q / p) + 1 := by omega
   refine ⟨Q / p, ?_⟩
-  rw [hQ, hQe, Nat.mul_add, Nat.mul_one]
+  rw [hQ]
+  conv_lhs => rw [hQe]
   have key : fact b * (p * (Q / p)) = p * (fact b * (Q / p)) := by
     rw [← Nat.mul_assoc, Nat.mul_comm (fact b) p, Nat.mul_assoc]
-  rw [key]
-  omega
+  rw [Nat.mul_add, Nat.mul_one, key, Nat.add_comm]
 
 /-- `1 ≤ n ^ k` for `1 ≤ n` (own mul-chain). -/
 theorem pow_pos_own : ∀ (k n : Nat), 1 ≤ n → 1 ≤ n ^ k := by
   intro k
   induction k with
-  | zero => intro n _; rw [Nat.pow_zero]; exact Nat.le_refl 1
+  | zero => intro n _; rw [Nat.pow_zero]
   | succ k ih =>
     intro n hn
     rw [Nat.pow_succ]
@@ -546,7 +544,7 @@ theorem all_prime_power_obstruction (p b : Nat) (hp : p.Prime) (S : List Nat)
   have hlaw := all_prime_isolated_min p b hp S hbS hblock
   cases n with
   | zero =>
-    have hbmem : memB b S := countB_pos_mem S b (by rw [hbS]; omega)
+    have hbmem : memB b S := countB_pos_mem S b (by rw [hbS])
     have hpos : 1 ≤ sumFacts S := sumFacts_pos_of_mem S b hbmem
     have h0 : (0 : Nat) ^ k = 0 := by
       cases k with
@@ -560,7 +558,7 @@ theorem all_prime_power_obstruction (p b : Nat) (hp : p.Prime) (S : List Nat)
       vp_pow k p k (m + 1) (Nat.le_refl k) hp hm1
     have h1 : vp p (sumFacts S) = vp p ((m + 1) ^ k) := by rw [h]
     have h2 : vp p (fact b) = k * vp p (m + 1) := by rw [← hlaw, h1, hv]
-    exact hknot ⟨vp p (m + 1), h2.symm⟩
+    exact hknot ⟨vp p (m + 1), h2⟩
 
 /-- **THE BLOCK FORM.** The same law in the block language: b in the
 lowest occupied p-block, and b's block occupied by b alone. -/
@@ -580,22 +578,62 @@ theorem isolated_min_block_form (p b : Nat) (hp : p.Prime) (S : List Nat)
   have h3 : p * (a / p) ≤ a := by omega
   omega
 
-/-! ## §6 LITERAL PRIMES (the `Nat.minFac_prime` route, green in K19). -/
+/-! ## §6 LITERAL PRIMES (the `Nat.le_of_dvd` route, green in K27;
+top-level aux lemmas — bullets live at top level, the S035 law). -/
 
-theorem pr2 : Nat.Prime 2 := by
-  have h := Nat.minFac_prime (show (2 : Nat) ≠ 1 by decide)
-  have e : (2 : Nat).minFac = 2 := by decide
-  rwa [e] at h
+theorem prime_small (p : Nat) (hp2 : 2 ≤ p)
+    (hp : ∀ m, 2 ≤ m → m < p → ¬ (m ∣ p)) : Nat.Prime p := by
+  show 2 ≤ p ∧ ∀ m : ℕ, m ∣ p → m = 1 ∨ m = p
+  refine ⟨hp2, ?_⟩
+  intro m hm
+  have hle : m ≤ p := Nat.le_of_dvd (by omega) hm
+  by_cases hm0 : m = 0
+  · exact absurd hm (by intro hd; obtain ⟨k, hk⟩ := hd; omega)
+  · by_cases hm1 : m = 1
+    · exact Or.inl hm1
+    · by_cases hmp : m = p
+      · exact Or.inr hmp
+      · exact absurd hm (hp m (by omega) (by omega))
 
-theorem pr3 : Nat.Prime 3 := by
-  have h := Nat.minFac_prime (show (3 : Nat) ≠ 1 by decide)
-  have e : (3 : Nat).minFac = 3 := by decide
-  rwa [e] at h
+theorem pr2 : Nat.Prime 2 := prime_small 2 (by omega) (by intro m h2 hlt; omega)
 
-theorem pr11 : Nat.Prime 11 := by
-  have h := Nat.minFac_prime (show (11 : Nat) ≠ 1 by decide)
-  have e : (11 : Nat).minFac = 11 := by decide
-  rwa [e] at h
+theorem pr3_aux (m : Nat) (h2 : 2 ≤ m) (hlt : m < 3) : ¬ (m ∣ 3) := by
+  intro hdvd
+  rcases m with 0 | 1 | 2 | m' + 3
+  · omega
+  · omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · omega
+
+theorem pr3 : Nat.Prime 3 := prime_small 3 (by omega) pr3_aux
+
+theorem pr11_aux (m : Nat) (h2 : 2 ≤ m) (hlt : m < 11) : ¬ (m ∣ 11) := by
+  intro hdvd
+  rcases m with 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | m' + 11
+  · omega
+  · omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · obtain ⟨k, hk⟩ := hdvd
+    omega
+  · omega
+
+theorem pr11 : Nat.Prime 11 := prime_small 11 (by omega) pr11_aux
 
 /-! ## §7 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
@@ -623,7 +661,7 @@ theorem inst_law_p2 : vp 2 (sumFacts [3, 4, 9]) = vp 2 (fact 3) := by
     · exact absurd rfl hne
     · decide
     · decide
-    · exact h
+    · exact h.elim
 
 /-- The p=3 instance: `v₃(2! + 9! + 13!) = v₃(2!)`. -/
 theorem inst_law_p3 : vp 3 (sumFacts [2, 9, 13]) = vp 3 (fact 2) := by
@@ -635,7 +673,7 @@ theorem inst_law_p3 : vp 3 (sumFacts [2, 9, 13]) = vp 3 (fact 2) := by
     · exact absurd rfl hne
     · decide
     · decide
-    · exact h
+    · exact h.elim
 
 /-- The p=11 instance: `v₁₁(5! + 121! + 130!) = v₁₁(5!)`. -/
 theorem inst_law_p11 : vp 11 (sumFacts [5, 121, 130]) = vp 11 (fact 5) := by
@@ -647,43 +685,35 @@ theorem inst_law_p11 : vp 11 (sumFacts [5, 121, 130]) = vp 11 (fact 5) := by
     · exact absurd rfl hne
     · decide
     · decide
-    · exact h
+    · exact h.elim
 
 /-- THE NOT-SQUARE INSTANCE: 3! + 4! + 9! = 362910 is not a square
 (the obstruction at p=2, k=2: v₂(3!) = 1 is odd). -/
 theorem inst_not_square_349 : ∀ n : Nat, sumFacts [3, 4, 9] ≠ n ^ 2 := by
   intro n
-  apply all_prime_power_obstruction (p := 2) 3 pr2 [3, 4, 9]
-  · decide
-  · intro a ha hne
-    have hOr : 3 = a ∨ (4 = a ∨ (9 = a ∨ False)) := ha
-    rcases hOr with rfl | rfl | rfl | h
-    · exact absurd rfl hne
-    · decide
-    · decide
-    · exact h
-  · exact 2
-  · exact n
-  · omega
-  · decide
+  exact all_prime_power_obstruction 2 3 pr2 [3, 4, 9] (by decide)
+    (by intro a ha hne
+        have hOr : 3 = a ∨ (4 = a ∨ (9 = a ∨ False)) := ha
+        rcases hOr with rfl | rfl | rfl | h
+        · exact absurd rfl hne
+        · decide
+        · decide
+        · exact h.elim)
+    2 n (by omega) (by decide)
 
 /-- THE NOT-CUBE INSTANCE: 3! + 4! + 9! = 362910 is not a cube
 (the obstruction at p=2, k=3: 3 ∤ v₂(3!) = 1). -/
 theorem inst_not_cube_349 : ∀ n : Nat, sumFacts [3, 4, 9] ≠ n ^ 3 := by
   intro n
-  apply all_prime_power_obstruction (p := 2) 3 pr2 [3, 4, 9]
-  · decide
-  · intro a ha hne
-    have hOr : 3 = a ∨ (4 = a ∨ (9 = a ∨ False)) := ha
-    rcases hOr with rfl | rfl | rfl | h
-    · exact absurd rfl hne
-    · decide
-    · decide
-    · exact h
-  · exact 3
-  · exact n
-  · omega
-  · decide
+  exact all_prime_power_obstruction 2 3 pr2 [3, 4, 9] (by decide)
+    (by intro a ha hne
+        have hOr : 3 = a ∨ (4 = a ∨ (9 = a ∨ False)) := ha
+        rcases hOr with rfl | rfl | rfl | h
+        · exact absurd rfl hne
+        · decide
+        · decide
+        · exact h.elim)
+    3 n (by omega) (by decide)
 
 /-! ## §9 MAIN. -/
 
