@@ -472,6 +472,20 @@ FIRST-30 PILLAI TABLE (23 ≤ p ≤ 397, all certified). Battery dual-method
 GREEN (factorization ∥ certificate replay; Pillai census 613/1229 =
 49.88% at 10⁴ — evidence). Honest scope: both density limits open.
 
+**KILL #31 — Erdős #954 THE ROSEN SEQUENCE LAWS (Kernel 29, run
+42434193235 GREEN):** the certified 46-term table (a₀..a₄₅ = 0, 1, 3, 5,
+9, 13, 17, 24, …, 769, 776, 836 — every computed term satisfies the
+defining drop property, kernel-decided per step) + THE COUNT LAW N(x) ≥
+x for every 1 ≤ x < 378 (the problem's own "always at least x by
+construction" remark, formalized and kernel-decided on the 30-term
+window — the window sized under the NO-OOM discipline) + the deviation
+profile (battery dual-method: max deviation 11 at x = 498 on the full
+census — consistent with the x^{1/4+o(1)} conjecture). All theorems
+[propext, Quot.sound] / [propext, Classical.choice, Quot.sound].
+Honest scope: the asymptotics and the (1+o(1))x upper bound remain
+open; the block law of the gaps breaks at block 5 — the derivation
+target.
+
 **KERNEL 28 FIRED — Erdős #282 THE ODD-GREEDY TERMINATION LAWS (compile
 war round 1):** THE ODD-CLOSURE LAW (the odd-denominator habitat is
 invariant under every greedy step) + THE WELL-FORMEDNESS LAW (every step
