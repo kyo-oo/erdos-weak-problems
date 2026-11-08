@@ -33,6 +33,8 @@ on:
       - problem954-rosen-sequence/**
       - problem1108-allprime/**
       - problem396-prod-binomial/**
+      - problem1073-factorial-mod/**
+      - problem461-smooth-component/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -767,3 +769,20 @@ jobs:
           grep -E "Erdos374.(erdos374_family|erdos374_D2_law|d2_census_decide|d3_squares|d4_squares|even_vals_square|erdos374_main)' (does not depend on any axioms|depends on axioms)" kernel33.log
           python3 problem374-factorial-square/battery374.py
           echo ERDOS374_KERNEL_GREEN=1
+
+      - name: "Kernel 34 - Erdos 1073 THE FACTORIAL-MOD COMPOSITE CENSUS (S041 volley): THE GCD/WINDOW LAW (every prime p | u forces the witness n < p) + THE SATURATION LAW + THE SMALL-PRIME-DIVISOR LAW (general: every 4 <= u <= B^2 non-prime has a prime divisor <= B, the p/a case-split engine) + THE COMPLETE CENSUS AT 10^4 (both directions, 21 NO-OOM chunk-decides at the 480 discipline, A(10^4) = 28 = the A256519 prefix T28) + THE 131-WITNESS TABLE AT 10^6 (every row composite + u | n!+1 kernel-decided, the 1330-digit 562! Wilson channel + the 918! deepest row) + THE BROCARD CHANNEL (4!+1=25, 5!+1=121, 7!+1=5041) + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel34.log
+          lake env lean problem1073-factorial-mod/Erdos1073.lean 2>&1 | tee -a kernel34.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel34.log
+          grep -F "ERDOS1073_KERNEL_GREEN" kernel34.log
+          grep -E "Erdos1073.(erdos1073_window|erdos1073_saturation|small_prime_divisor|erdos1073_census|erdos1073_A10k|erdos1073_witnesses|erdos1073_wilson|erdos1073_brocard|erdos1073_arsenal_bridge|erdos1073_main)' (does not depend on any axioms|depends on axioms)" kernel34.log
+          python3 problem1073-factorial-mod/battery1073.py
+          python3 problem1073-factorial-mod/battery1073b.py
+          echo ERDOS1073_FACTORIAL_MOD_KERNEL_GREEN=1
