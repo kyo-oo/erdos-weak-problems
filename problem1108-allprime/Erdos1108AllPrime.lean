@@ -443,7 +443,7 @@ theorem singleton_bottom_residue (p b : Nat) (hp : 2 ≤ p) :
       have hdvd := dvd_sumQ t b p (fun a ha => (htail a ha).2)
       have hQmod : sumQ b t % p = 0 := Nat.mod_eq_zero_of_dvd hdvd
       refine ⟨1 + sumQ b t, ?_, ?_⟩
-      · rw [sumFacts_cons, hsum, ← Nat.mul_add, Nat.mul_one]
+      · rw [sumFacts_cons, hsum, Nat.mul_add, Nat.mul_one]
       · rw [Nat.add_mod, hQmod, Nat.add_zero,
           Nat.mod_eq_of_lt (show 1 < p by omega),
           Nat.mod_eq_of_lt (show 1 < p by omega)]
@@ -578,63 +578,15 @@ theorem isolated_min_block_form (p b : Nat) (hp : p.Prime) (S : List Nat)
   have h3 : p * (a / p) ≤ a := by omega
   omega
 
-/-! ## §6 LITERAL PRIMES (the `Nat.le_of_dvd` route, green in K27;
-top-level aux lemmas — bullets live at top level, the S035 law). -/
+/-! ## §6 LITERAL PRIMES (the green Erdos1056 pattern: `Nat.Prime n`
+is decidable for literal n — 11, 109, 673, 52163 all proved this way
+in the K18 chain). -/
 
-theorem prime_small (p : Nat) (hp2 : 2 ≤ p)
-    (hp : ∀ m, 2 ≤ m → m < p → ¬ (m ∣ p)) : Nat.Prime p := by
-  show 2 ≤ p ∧ ∀ m : ℕ, m ∣ p → m = 1 ∨ m = p
-  refine ⟨hp2, ?_⟩
-  intro m hm
-  have hle : m ≤ p := Nat.le_of_dvd (by omega) hm
-  by_cases hm0 : m = 0
-  · subst hm0
-    exact absurd hm (by intro hd; obtain ⟨k, hk⟩ := hd; omega)
-  · by_cases hm1 : m = 1
-    · exact Or.inl hm1
-    · by_cases hmp : m = p
-      · exact Or.inr hmp
-      · exact absurd hm (hp m (by omega) (by omega))
+theorem pr2 : Nat.Prime 2 := by decide
 
-theorem pr2 : Nat.Prime 2 := prime_small 2 (by omega) (by intro m h2 hlt; omega)
+theorem pr3 : Nat.Prime 3 := by decide
 
-theorem pr3_aux (m : Nat) (h2 : 2 ≤ m) (hlt : m < 3) : ¬ (m ∣ 3) := by
-  intro hdvd
-  rcases m with 0 | 1 | 2 | m' + 3
-  · omega
-  · omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · omega
-
-theorem pr3 : Nat.Prime 3 := prime_small 3 (by omega) pr3_aux
-
-theorem pr11_aux (m : Nat) (h2 : 2 ≤ m) (hlt : m < 11) : ¬ (m ∣ 11) := by
-  intro hdvd
-  rcases m with 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | m' + 11
-  · omega
-  · omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · obtain ⟨k, hk⟩ := hdvd
-    omega
-  · omega
-
-theorem pr11 : Nat.Prime 11 := prime_small 11 (by omega) pr11_aux
+theorem pr11 : Nat.Prime 11 := by decide
 
 /-! ## §7 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
