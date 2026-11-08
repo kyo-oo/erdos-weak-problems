@@ -407,9 +407,10 @@ theorem vff_step (p : Nat) (hp : 2 ≤ p) : ∀ n,
         have hvstep : vp p (m + 2) = 1 + vp p ((m + 2) / p) :=
           vp_step p (m + 2) hp (by omega) hmod
         rw [hshift] at hvstep
+        have hk1' : (m + 1) / p + 1 ≤ m + 1 := by omega
         have s1 : vff p (m + 1) ((m + 1) / p + 1) =
             vff p ((m + 1) / p + 1) ((m + 1) / p + 1) :=
-          vff_sat p hp (m + 1) (m + 1) (Nat.le_refl _) ((m + 1) / p + 1) hk1
+          vff_sat p hp (m + 1) (m + 1) (Nat.le_refl _) ((m + 1) / p + 1) hk1'
         have s2 : vff p m ((m + 1) / p) = vff p ((m + 1) / p) ((m + 1) / p) :=
           vff_sat p hp m m (Nat.le_refl _) ((m + 1) / p) hk2
         have ihk : vff p ((m + 1) / p + 1) ((m + 1) / p + 1) =
@@ -447,6 +448,7 @@ theorem vff_step (p : Nat) (hp : 2 ≤ p) : ∀ n,
               vff p ((m + 1) / p) ((m + 1) / p) :=
             vff_sat p hp m m (Nat.le_refl _) ((m + 1) / p) (by omega)
           rw [s1, s2]
+          omega
 
 /-- **The Legendre bridge**: for every prime p, the canonical floor sum
 IS the factorial valuation. -/
@@ -527,7 +529,6 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
     ∃ s, n = s * s := by
   induction n using Nat.strongRecOn with
   | ind n ih =>
-    intro h
     cases n with
     | zero => exact ⟨0, by omega⟩
     | succ M =>
@@ -535,7 +536,7 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
       | zero => exact ⟨1, by omega⟩
       | succ N =>
         -- n = N + 2 ≥ 2
-        have hn : Nat.succ (Nat.succ N) = N + 2 := rfl
+        have hn : N + 1 + 1 = N + 2 := rfl
         rw [hn] at h ⊢
         have hn2 : 2 ≤ N + 2 := by omega
         have hpp : (Nat.minFac (N + 2)).Prime := Nat.minFac_prime (by omega)
@@ -621,8 +622,6 @@ theorem par_of_sq (X s : Nat) (h : X = s * s) : ∀ p, p.Prime →
     have hvp0 : vp p 0 = 0 := rfl
     omega
   | succ t =>
-    have hs1 : Nat.succ t = t + 1 := rfl
-    rw [hs1] at h
     have h1 : 1 ≤ t + 1 := by omega
     have hv : vp p ((t + 1) ^ 2) = 2 * vp p (t + 1) :=
       vp_pow 2 p 2 (t + 1) (Nat.le_refl _) hpp h1
@@ -714,7 +713,8 @@ theorem censusAll_flags : ∀ (fuel m : Nat), censusAll fuel m = true →
     have hunfold : censusAll (f + 1) m =
         (decide (d2w m = sqTest m) && censusAll f (m + 1)) := rfl
     rw [hunfold] at h
-    have hsplit := Bool.and_eq_true.mp h
+    have hsplit : decide (d2w m = sqTest m) = true ∧ censusAll f (m + 1) = true := by
+      simpa only [Bool.and_eq_true] using h
     have hflag : d2w m = sqTest m := of_decide_eq_true hsplit.1
     rcases Nat.eq_or_lt_of_le hj1 with heq | hlt
     · rw [heq]; exact hflag
@@ -994,7 +994,7 @@ dual-method engine check of S039). -/
 theorem parRow4_iff (a b c m : Nat) (ha : a ≤ 250) (hb : b ≤ 250)
     (hc : c ≤ 250) (hm : m ≤ 250) :
     parRow4 a b c m = true ↔
-      parAllX (fact a * fact b * fact c * fact m) = true := by
+      parAllX (fact a * fact b * (fact c * fact m)) = true := by
   have hpr : ∀ q ∈ primes250, q.Prime := fun q hq =>
     of_decide_eq_true ((List.all_eq_true.mp primes250_all_prime) q hq)
   have hmul1 : ∀ q, q.Prime → vp q (fact a * fact b) =
@@ -1054,7 +1054,7 @@ theorem d4_squares : ∀ i, i < 96 → ∃ s,
   have hall := (List.all_eq_true.mp d4_table) i (List.mem_range.mpr hi)
   obtain ⟨h1, h2, h3, h4, h5, hpar⟩ := of_decide_eq_true hall
   have hbig : parAllX (fact (d4tab.getD (4*i+1) 0) * fact (d4tab.getD (4*i+2) 0) *
-      fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0)) = true :=
+      (fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0))) = true :=
     (parRow4_iff _ _ _ _ (by omega) (by omega) (by omega) (by omega)).mp hpar
   exact sq_of_parAllX _ (fun q hq hv =>
     vp_fact4_bound q _ _ _ _ hq (by omega) (by omega) (by omega) (by omega) hv) hbig
