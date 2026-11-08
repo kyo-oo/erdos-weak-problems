@@ -1627,3 +1627,58 @@ restored; continue the campaign at maximum intensity.
    smooth-component structure laws + the certified stability table).
    The #1212 round-2 CRT-scheduling construction war runs as the
    new-mathematics wing.
+
+---
+
+## SESSION 041 EXECUTION LOG (continued — the volley record)
+
+**The S041 volley (fired this session):**
+
+1. **KERNEL 34 — Erdős #1073 THE FACTORIAL-MOD COMPOSITE CENSUS**
+   (`problem1073-factorial-mod/Erdos1073.lean`): THE GCD/WINDOW LAW (u ∣ n!+1
+   ⟹ every prime p ∣ u has n < p — the witness window [1, P(u))) + THE
+   SATURATION LAW + THE SMALL-PRIME-DIVISOR LAW (general: 4 ≤ u ≤ B²
+   non-prime ⟹ a PRIME divisor ≤ B — the p/a case-split engine with
+   (B+1)² ≤ pa ≤ B² — ZERO leastness API: no minFac-le, only
+   minFac_prime/minFac_dvd/dvd_prime, all green precedent) + THE COMPLETE
+   CENSUS AT 10⁴ (both directions: the 28 composite hits = the A256519
+   prefix T28, in 21 NO-OOM chunk-decides at the 480 discipline —
+   fuel-structured divLoop, no deep ranges) + THE 131-WITNESS TABLE AT 10⁶
+   (every row composite + u ∣ n!+1 kernel-decided; the 1330-digit 562!
+   Wilson channel + the 918! deepest row) + THE BROCARD CHANNEL (4!+1=25,
+   5!+1=121, 7!+1=5041) + arsenal bridge. battery1073b (the kernel-claims
+   battery, sympy+big-int independent): GREEN locally — census exact at
+   10⁴, 131/131 witnesses, channels, L1 spot-checks, growth counts.
+
+2. **KERNEL 35 — Erdős–Graham #461 THE SMOOTH-COMPONENT CENSUS LAWS**
+   (`problem461-smooth-component/Erdos461.lean`): THE EXTRACTION LAWS
+   (spart p m = p^vp p m — the K33 vp-architecture lift with the full
+   saturation proofs; scomp ps m ∣ m) + THE 119-ROW ACHIEVEMENT TABLE
+   (every t ∈ [2,120]'s minimizing window kernel-decided; f(1892,120)=69;
+   the engine table from the NEW single-pass prefix-product engine
+   `table461.txt` — 200K-window sliding census) + THE STABILITY LAW
+   (t ∈ [14,120]: 55t ≤ 100·c_t ≤ 65t — the honest band, correcting the
+   DERIVATION's optimistic 0.62: t=14 gives 0.643, t=16 gives 0.625) +
+   THE ERDŐS–GRAHAM BEATING (c_t ≥ t/ln t on all 107 rows via
+   ⌊1000 ln t⌋ rational bounds, the row-match to the achievement table
+   kernel-verified) + THE FOUR BOTH-DIRECTION CENSUSES at N₀=480
+   (t=14,20,30,40: min = 9,13,19,25 with witness + exclusion in
+   240-chunks). battery461: GREEN — 119/119 trial-division recount,
+   independent minimality recounts at 7 sampled t, 480-censuses 4/4,
+   stability+ErGra 107/107.
+
+3. **#1212 ROUND 2 — THE PHASE CALCULUS** (`DERIVATION.md` rewritten):
+   THE PHASE LAW (x ≡ 1 mod rad(y) ⟹ (q_min(y)−3)/2 CERTIFIED x-moves —
+   ENGINE-CORRECTED: the naive q−1 bound fails 224/224; the landings
+   collide at (q−3)/2, half the intermediate range — the corrected law
+   verified on every failure row) + THE SYMMETRIC Y-HOP CRT RESTORE
+   (146/146 applicable) + the construction sketch (the invariant
+   x ≡ 1 mod rad(y), phase, restore, repeat) + THE OPEN GAP named (the
+   rough-composite-in-short-interval selection — the Jacobsthal/Mertens
+   lane, round 3). Engine evidence: undirected greedy survives 3000+
+   (oscillating, no growth); directed dies ≤ 4 steps at low coordinates —
+   growth REQUIRES the phase calculus.
+
+**The compile war (S041):** round 1 fired at commits 6914da2 (K34) and
+b8d0f61 (K35) — runs 42532784292 / 42533467076. Kernels 1–21 green
+in-flight at last poll.

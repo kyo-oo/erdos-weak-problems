@@ -162,7 +162,7 @@ theorem inL_of_mem (l : List Nat) (u : Nat) (hm : u ∈ l) : inL u l = true :=
 
 theorem mem_of_inL : ∀ (l : List Nat) (u : Nat), inL u l = true → u ∈ l := by
   intro l u h
-  obtain ⟨x, hxm, hxp⟩ := any_exists l _ u h
+  obtain ⟨x, hxm, hxp⟩ := any_exists l _ h
   have hxu : x = u := of_decide_eq_true hxp
   rw [hxu] at hxm
   exact hxm
@@ -178,11 +178,11 @@ theorem prime_dvd_fact (p : Nat) (hp : 2 ≤ p) :
   | succ k ih =>
       intro hk
       by_cases hlt : p ≤ k
-      · rw [Nat.factorial_succ]
-        exact Nat.dvd_mul_of_dvd_right (ih hlt) (k + 1)
+      · rw [Nat.factorial_succ, Nat.mul_comm]
+        exact (ih hlt).mul_right (k + 1)
       · have hpk : p = k + 1 := by omega
         rw [Nat.factorial_succ, hpk]
-        exact dvd_mul_right p (Nat.factorial k)
+        exact dvd_mul_right (k + 1) (Nat.factorial k)
 
 /-- a ∣ b → a * (b / a) = b (omega-friendly, via div_add_mod). -/
 theorem mul_div_own (a b : Nat) (h : a ∣ b) : a * (b / a) = b := by
@@ -199,25 +199,34 @@ theorem erdos1073_window (u n : Nat) (hu : 2 ≤ u)
   intro p hp hpu
   have h2 : 2 ≤ p := Nat.Prime.two_le hp
   by_contra hcon
-  push_neg at hcon
-  have hfn : p ∣ Nat.factorial n := prime_dvd_fact p h2 n hcon
+  have hple : p ≤ n := by omega
+  have hfn : p ∣ Nat.factorial n := prime_dvd_fact p h2 n hple
   have hfull : u ∣ Nat.factorial n + 1 := Nat.dvd_of_mod_eq_zero h
   have hp1 : p ∣ Nat.factorial n + 1 := Nat.dvd_trans hpu hfull
-  have hsub : p ∣ (Nat.factorial n + 1) - Nat.factorial n := Nat.dvd_sub' hp1 hfn
-  have hone : (Nat.factorial n + 1) - Nat.factorial n = 1 := by omega
-  rw [hone] at hsub
-  have hle : p ≤ 1 := Nat.le_of_dvd (by norm_num) hsub
+  have hp1mod : (Nat.factorial n + 1) % p = 0 := Nat.mod_eq_zero_of_dvd hp1
+  have hfnmod : (Nat.factorial n) % p = 0 := Nat.mod_eq_zero_of_dvd hfn
+  have hone : 1 % p = 0 := by
+    have hadd := Nat.add_mod (Nat.factorial n) 1 p
+    have h0 : (Nat.factorial n % p + 1 % p) % p = 0 := by
+      rw [← hadd, hp1mod]
+    rw [hfnmod, Nat.zero_add, Nat.mod_mod] at h0
+    exact h0
+  have hle : p ≤ 1 := Nat.le_of_dvd (by norm_num) (Nat.dvd_of_mod_eq_zero hone)
   omega
 
 /-- **THE SATURATION LAW.** For n at or above any prime divisor of u,
 u never again divides n!+1. -/
 theorem erdos1073_saturation (u n p : Nat) (hp : p.Prime) (hpu : p ∣ u)
     (hle : p ≤ n) : (Nat.factorial n + 1) % u ≠ 0 := by
-  intro h
-  have h2 : 2 ≤ u := Nat.le_trans (Nat.Prime.two_le hp)
-    (Nat.le_of_dvd (by omega) hpu)
-  have hwin := erdos1073_window u n h2 h p hp hpu
-  omega
+  intro hmod
+  rcases (show u = 0 ∨ 1 ≤ u by omega) with h0 | h1
+  · rw [h0, Nat.mod_zero] at hmod
+    omega
+  · have hp2 := Nat.Prime.two_le hp
+    have hpu' := Nat.le_of_dvd (by omega) hpu
+    have h2 : 2 ≤ u := by omega
+    have hwin := erdos1073_window u n h2 hmod p hp hpu
+    omega
 
 /-! ## §3 The small-prime-divisor engine. -/
 
@@ -228,36 +237,37 @@ since (B+1)² ≤ p·a = u ≤ B². -/
 theorem small_prime_divisor (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
     (hnpr : ¬ u.Prime) : ∃ q : Nat, q.Prime ∧ q ∣ u ∧ q ≤ B := by
   have h2u : 2 ≤ u := by omega
-  have hmin : (Nat.minFac u).Prime := Nat.minFac_prime h2u
+  have hmin : (Nat.minFac u).Prime := Nat.minFac_prime (by omega)
   have hdvd : Nat.minFac u ∣ u := Nat.minFac_dvd u
   have hp2 : 2 ≤ Nat.minFac u := hmin.two_le
   have hsplit : Nat.minFac u * (u / Nat.minFac u) = u := mul_div_own _ _ hdvd
   -- a := u / minFac u ≥ 2 (a ≤ 1 forces u = 0 or u = minFac u, both dead)
   have ha2 : 2 ≤ u / Nat.minFac u := by
-    by_contra hcon
-    push_neg at hcon
-    rcases (show u / Nat.minFac u = 0 ∨ u / Nat.minFac u = 1 by omega) with h0 | h1
+    rcases (show u / Nat.minFac u = 0 ∨ u / Nat.minFac u = 1 ∨
+        2 ≤ u / Nat.minFac u by omega) with h0 | h1 | h2
     · rw [h0] at hsplit
       simp at hsplit
       omega
     · rw [h1, Nat.mul_one] at hsplit
       rw [hsplit] at hmin
       exact hnpr hmin
+    · exact h2
   rcases (show Nat.minFac u ≤ B ∨ B < Nat.minFac u by omega) with hpB | hpB
   · exact ⟨Nat.minFac u, hmin, hdvd, hpB⟩
   -- B < p: then a = u/p must be ≤ B, else (B+1)² ≤ p·a = u ≤ B²
   have haB : u / Nat.minFac u ≤ B := by
-    by_contra hcon
-    push_neg at hcon
-    have h1 : (B + 1) * (B + 1) ≤ Nat.minFac u * (u / Nat.minFac u) :=
-      Nat.mul_le_mul (by omega) (by omega)
-    rw [Nat.succ_mul_succ, hsplit] at h1
-    omega
+    rcases (show u / Nat.minFac u ≤ B ∨ B < u / Nat.minFac u by omega) with h | h
+    · exact h
+    · have h1 : (B + 1) * (B + 1) ≤ Nat.minFac u * (u / Nat.minFac u) :=
+        Nat.mul_le_mul (by omega) (by omega)
+      rw [Nat.succ_mul_succ, hsplit] at h1
+      omega
   have hamin : (Nat.minFac (u / Nat.minFac u)).Prime :=
-    Nat.minFac_prime ha2
+    Nat.minFac_prime (by omega)
   have hamdvd : Nat.minFac (u / Nat.minFac u) ∣ (u / Nat.minFac u) :=
     Nat.minFac_dvd _
-  have hau : (u / Nat.minFac u) ∣ u := ⟨Nat.minFac u, hsplit.symm⟩
+  have hau : (u / Nat.minFac u) ∣ u :=
+    ⟨Nat.minFac u, by rw [Nat.mul_comm]; exact hsplit⟩
   exact ⟨Nat.minFac (u / Nat.minFac u), hamin, Nat.dvd_trans hamdvd hau,
     Nat.le_trans (Nat.le_of_dvd (by omega) hamdvd) haB⟩
 
@@ -299,8 +309,8 @@ theorem divLoop_dvd_of_true : ∀ (fuel s u : Nat), divLoop u s fuel = true →
       by_cases hs2 : 2 ≤ s
       · rw [if_pos hs2] at h
         rcases Bool.or_eq_true_iff.mp h with hhit | hrest
-        · have h1 := (Bool.and_eq_true.mp hhit).1
-          have h2 := (Bool.and_eq_true.mp hhit).2
+        · rw [Bool.and_eq_true] at hhit
+          obtain ⟨h1, h2⟩ := hhit
           exact ⟨s, Nat.le_refl s, by omega, of_decide_eq_true h1,
             of_decide_eq_true h2⟩
         · obtain ⟨q, hq1, hq2, hq3, hq4⟩ := ih (s + 1) u hrest
@@ -316,11 +326,11 @@ theorem comp_of_not_prime (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
   have hq2 : 2 ≤ q := hqpr.two_le
   have hqle : q ≤ u := Nat.le_of_dvd (by omega) hqdvd
   have hqlt : q < u := by
-    by_contra hcon
-    push_neg at hcon
-    have hqu : u = q := by omega
-    rw [hqu] at hqpr
-    exact hnpr hqpr
+    rcases (show q < u ∨ u ≤ q by omega) with h | h
+    · exact h
+    · have hqu : u = q := by omega
+      rw [← hqu] at hqpr
+      exact hnpr hqpr
   have hmod : u % q = 0 := Nat.mod_eq_zero_of_dvd hqdvd
   simp only [compScan, Bool.and_eq_true]
   refine ⟨Nat.ble_eq.mpr (by omega), ?_⟩
@@ -502,9 +512,9 @@ numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
 theorem erdos1073_arsenal_bridge :
     [563 % 3, (563 / 3) % 3, (563 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
     [316969 % 3, (316969 / 3) % 3, (316969 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    CardinalWorlds.carryAtPos 316969 1 < 4 ∧
-    CardinalWorldsV2.v2r (3 ^ 2 * 25) = CardinalWorldsV2.v2r 25 :=
-  ⟨by decide, by decide, CardinalWorlds.carryAtPos_bound 316969 1,
+    carryAtPos 316969 1 < 4 ∧
+    v2r (3 ^ 2 * 25) = v2r 25 :=
+  ⟨by decide, by decide, carryAtPos_bound 316969 1,
     CardinalWorldsV2.v2r_ternary_scaling 2 25⟩
 
 /-- **THE MAIN SUMMARY.** -/

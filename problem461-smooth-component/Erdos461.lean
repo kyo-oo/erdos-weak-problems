@@ -281,11 +281,11 @@ theorem spart_dvd (p : Nat) (hp : 2 ≤ p) (m : Nat) : spart p m ∣ m := by
       intro n hn
       have hn0 : n = 0 := by omega
       subst hn0
-      exact one_dvd 0
+      exact ⟨0, Nat.mul_one 0⟩
     | succ f ih =>
       intro n hn
       cases n with
-      | zero => exact one_dvd 0
+      | zero => exact ⟨0, Nat.mul_one 0⟩
       | succ N =>
         have e1 : spf p (f + 1) (N + 1) =
             if (N + 1) % p = 0 then p * spf p f ((N + 1) / p) else 1 := rfl
@@ -302,7 +302,7 @@ theorem spart_dvd (p : Nat) (hp : 2 ≤ p) (m : Nat) : spart p m ∣ m := by
           rw [hsplit]
           exact Dvd.refl (p * ((N + 1) / p))
         · rw [if_neg hmod]
-          exact one_dvd (N + 1)
+          exact ⟨N + 1, Nat.mul_one (N + 1)⟩
   exact key m m (Nat.le_refl m)
 
 /-- The smooth component divides its argument (every prime list). -/
@@ -310,7 +310,7 @@ theorem scomp_dvd : ∀ (ps : List Nat), (∀ p ∈ ps, 2 ≤ p) → ∀ m : Nat
     scomp ps m ∣ m := by
   intro ps
   induction ps with
-  | nil => intro _ m; exact one_dvd m
+  | nil => intro _ m; exact ⟨m, Nat.mul_one m⟩
   | cons p ps ih =>
       intro hall m
       have hp2 : 2 ≤ p := hall p (List.mem_cons_self)
@@ -396,9 +396,9 @@ numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
 theorem erdos461_arsenal_bridge :
     [1892 % 3, (1892 / 3) % 3, (1892 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
     [2930 % 3, (2930 / 3) % 3, (2930 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    CardinalWorlds.carryAtPos 1892 1 < 4 ∧
-    CardinalWorldsV2.v2r (3 ^ 2 * 69) = CardinalWorldsV2.v2r 69 :=
-  ⟨by decide, by decide, CardinalWorlds.carryAtPos_bound 1892 1,
+    carryAtPos 1892 1 < 4 ∧
+    v2r (3 ^ 2 * 69) = v2r 69 :=
+  ⟨by decide, by decide, carryAtPos_bound 1892 1,
     CardinalWorldsV2.v2r_ternary_scaling 2 69⟩
 
 /-- **THE MAIN SUMMARY.** -/
