@@ -157,12 +157,16 @@ def simTerm : Nat → Nat → Nat → Bool
 theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
     greedyN p q % 2 = 1 ∧ 1 ≤ greedyN p q ∧ q ≤ p * greedyN p q ∧
       (greedyN p q = 1 ∨ p * (greedyN p q - 2) < q) := by
-  have hdm := Nat.div_add_mod (q + p - 1) p
+  -- an OPAQUE n0 (the set-tactic's let-bound local carries its
+  -- variable-divisor division value and poisons omega — obtain instead)
+  obtain ⟨n0, hn0eq⟩ : ∃ n0, (q + p - 1) / p = n0 := ⟨_, rfl⟩
   have hmodlt : (q + p - 1) % p < p := Nat.mod_lt (q + p - 1) (by omega)
-  simp only [greedyN]
-  set n0 := (q + p - 1) / p with hn0def
-  clear hn0def
+  have hdm : p * n0 + (q + p - 1) % p = q + p - 1 := by
+    rw [hn0eq]
+    exact Nat.div_add_mod (q + p - 1) p
   have hF2 : q ≤ p * n0 := by omega
+  unfold greedyN
+  rw [hn0eq]
   by_cases hb : n0 % 2 = 0
   · -- even branch: n = n0 + 1
     rw [if_pos hb]
