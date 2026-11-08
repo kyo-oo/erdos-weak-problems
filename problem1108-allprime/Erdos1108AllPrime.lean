@@ -588,7 +588,8 @@ theorem prime_small (p : Nat) (hp2 : 2 ≤ p)
   intro m hm
   have hle : m ≤ p := Nat.le_of_dvd (by omega) hm
   by_cases hm0 : m = 0
-  · exact absurd hm (by intro hd; obtain ⟨k, hk⟩ := hd; omega)
+  · subst hm0
+    exact absurd hm (by intro hd; obtain ⟨k, hk⟩ := hd; omega)
   · by_cases hm1 : m = 1
     · exact Or.inl hm1
     · by_cases hmp : m = p
