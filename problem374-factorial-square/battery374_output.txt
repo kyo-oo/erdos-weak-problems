@@ -1,0 +1,21 @@
+PASS family identity (t^2-1)!*(t^2)! = (t*(t^2-1)!)^2, t in [1,30]
+PASS D2 census direct-isqrt == squares in [4,250]
+PASS D2 census parity-method == squares in [4,250]
+PASS D2 census dual-method agreement (direct == parity)
+PASS d3tab length == 114 (38 triples)
+PASS D3 witness table: ordering 1<=a<b<m<=250 all 38
+PASS D3 witness table: all 38 products exact squares (isqrt)
+PASS D3 witness table: all 38 parity-XOR zero (Legendre)
+PASS d3ms list == the table's m-column (consistency)
+PASS all D3 members are non-squares (F=3 exactness side)
+PASS d4tab length == 384 (96 quadruples)
+PASS D4 witness table: ordering 1<=a<b<c<m<=250 all 96
+PASS D4 witness table: all 96 products exact squares (isqrt)
+PASS D4 witness table: all 96 parity-XOR zero (Legendre)
+PASS brute-force D3 set == the kernel's 38-member list
+PASS brute-force D4 set == the kernel's 96-member list
+PASS all D4 members are non-squares
+     (info: F unresolved beyond k=4 at 250: 101 values, first 10: [2, 3, 5, 7, 11, 13, 17, 19, 23, 29])
+PASS vff fuel-9 == Legendre == direct v_p(n!) on samples
+
+BATTERY374: GREEN

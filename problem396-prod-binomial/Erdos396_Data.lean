@@ -10,6 +10,7 @@ n ∈ {1, 2} the descending product binomP n 3 = 0 and 0 ∣ C is false
 Engine cross-check: engine396_round2.py, exclusion replay [1,2480) = []. -/
 
 set_option maxRecDepth 65536
+set_option maxHeartbeats 4000000
 
 namespace Erdos396Data
 

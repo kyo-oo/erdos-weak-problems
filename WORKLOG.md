@@ -1466,3 +1466,92 @@ session); LOOK BACK (#686-squares — the S029-registered residue —
 closed); USE ALL THE MATHS (arsenal bridges in all kernels).
 
 *The engines never stop; they never lie.*
+
+## SESSION 038 (2026-11-08) — THE SELECT-AND-PROVE VOLLEY: KERNELS 31/32 FIRED
+
+**BOSS's orders (this session):** only the mathematics present ON THE BRANCH
+(the vendored arsenal + the 30 green kernels — no external theory); SELECT
+MORE PROBLEMS AND PROVE THEM; MATHS skill + prove-that-shit engine at MAX
+(full chain invoked FIRST, visible).
+
+**The selection (roulette_s038.py — corpus scan):** 394 open+untriaged
+problems ranked by weapon-territory tags. Verdicts: #18/#468/#222 =
+asymptotic cores (h(n!) < n^ε, f(N) = o(N), gap bounds) — OUT (the S026
+finding holds: no fresh one-shots in the tag layer); **#289 EXTERNALLY
+SOLVED** (LEAP prover agent, arXiv:2606.03303 — the formal-conjectures
+mirror carries `research solved` + formal proof) — dropped from §C; #279 =
+prime-moduli covering (the #273 sibling — witness-lane material, HELD).
+The firing queue stands: the two strongest unfired fronts selected for
+immediate one-shot treatment.
+
+**KILL SHOTS FIRED (compile war round 1, run 42472218133):**
+
+1. **KERNEL 31 — Erdős #396 THE DESCENDING-FACTORIAL DIVISIBILITY
+   FRONTIER** (`problem396-prod-binomial/`): the K20/Erdos1063_Base
+   architecture lifted VERBATIM (binomP = the problem's own descFactorial;
+   binom = binomP/kfact; the absorption certificate binomP n k·(n−k)! = n!
+   proves binom IS the true binomial). **THE NEW CASE VALUE n₂ = 2480
+   EXACT**: 2480·2479·2478 ∣ C(4960,2480) — a 1492-digit binomial
+   coefficient, kernel-decided; the Kummer margin analysis (battery):
+   v₂, v₇, v₃₁, v₃₇, v₅₉, v₆₇ ALL at margin 0 — razor-thin witness;
+   COMPLETE EXCLUSION of every 1 ≤ n < 2480 in six NO-OOM chunk-decides
+   (480×5 + 79 — n = 1, 2 die via binomP n 3 = 0); the k=0/k=1 frontiers
+   (n₀ = 1, n₁ = 2 EXACT). Published frontier stood at k ≤ 1 (A375077).
+   Battery396 dual-method GREEN (direct big-int mod ‖ Kummer/Legendre
+   valuations; exclusion replay [1,2480) empty; chunk-boundary mirror;
+   binomP/kfact ≡ math.comb at n = 2479, 2480).
+   Engine: engine396_round2.py — the exclusion certificate sweep; k ≥ 3
+   bounded evidence: NO witness with n ≤ 6000.
+
+2. **KERNEL 32 — Erdős #686 THE k=3 SQUARE WITNESS LAWS**
+   (`problem686-pell-ratio/Erdos686K3.lean`): THE FIVE PRIMITIVE EDGES
+   (t, m, n) = (70, 47, 1), (4, 13, 4), (3, 25, 11), (1189, 1679, 13),
+   (1798, 13453, 89) — the first two kernelize Theorem C (N = 9, 16), the
+   last three are the S037 engine discoveries, now kernel-decided exact;
+   **THE CHAIN LAW** (c3(a) = t₁²·c3(b) ∧ c3(b) = t₂²·c3(c) ⟹
+   c3(a) = (t₁t₂)²·c3(c), pure ring) — the witness relation COMPOSES;
+   **THE COMPOSITE t = 4756 = 4·1189** at (m, n) = (1679, 4) — the S037
+   "double hit" EXPLAINED AND PROVED (one product 1680·1681·1682 serves
+   two squares via the chain 4 → 13 → 1679; the engine successor scan:
+   the chains END at 47 and 1679, t ≤ 20000 — Siegel-finite per curve);
+   **THE SIX k=3 SQUARE CLASSES** 9, 16, 4900, 1413721, 3232804,
+   22619536 — the first kernel-certified k=3 cases of the square front.
+   Battery686k3 dual-method GREEN (product replay ‖ isqrt-square
+   reconstruction; census t ≤ 300 exactly {3,4,70}; full witness census
+   t ≤ 5000 exactly the six; the double-hit identity 16·c3(4) = c3(13)).
+   Engine: engine686k3_census.py (the complete k=3 census machinery).
+
+**THE NEW-FRONT ENGINE WINGS (round-1 mathematics, in-round):**
+
+3. **#374 (THE K17+K19 TRANSFER — the #1108 multiplicative sibling):**
+   the GF(2) engine built (kappa(a) = the Legendre-parity vector of a!,
+   incremental squarefree-kernel XOR). LAWS FOUND: **D₂ = EXACTLY THE
+   SQUARES ≥ 4** (constructive identity (t²−1)!·(t²)! = (t·(t²−1)!)² —
+   kernel-ready ring theorem; exclusion verified ≤ 250: no other
+   collisions); **D₃ density ≈ 15%, D₄ density ≈ 38% and GROWING**
+   ([1,125]: 0.184/0.360; [1,250]: 0.152/0.384); **primes are
+   GF(2)-independent** (κ(p) carries the fresh prime p — F(p) undefined
+   for every prime; 2, 3, 5, 7, 11, ... all unresolved). The D₂-squares
+   law + the F(m) exact-value censuses are the kernel lane (the K19
+   Legendre spine decides each κ-parity cheaply).
+   Front opened: `problem374-factorial-square/`.
+
+4. **#1212 (the coprime-composite dance):** the habitat engine built
+   (BFS/DFS in H = {gcd = 1, min > 1, one composite}). STRUCTURE FOUND:
+   the type analysis (A = (even, odd) with x auto-composite; C = mirror;
+   B = (odd, odd) battleground; A/C vertices have HALF their moves
+   parity-blocked — the B-lattice reduction: ±2 steps on odd-odd pairs
+   with intermediate gcd conditions). CENSUS: components are SMALL at
+   low coordinates (3–20 vertices, box 150) and GROW with scale
+   ((49,50) → 20) — fragmentation below, merging above; the CRT
+   scheduling construction (round 2) targets the infinite-component
+   question. Front opened: `problem1212-coprime-composite/`.
+
+**The compile war:** round 1 fired (run 42472218133, commit e42d681, the
+S034-paths lesson applied — problem396-prod-binomial/** in on.push.paths;
+problem686-pell-ratio/** already present). K31/K32 steps appended with
+axiom-gate greps + battery calls. The war continues until green.
+
+*Registry: 34 kills CI-green (K34 = #1108 all-prime, run 42462902183);
+K31/K32 in the compile war. #289 OUT (externally solved); #374/#1212
+admitted with round-1 mathematics. The engine never stops.*

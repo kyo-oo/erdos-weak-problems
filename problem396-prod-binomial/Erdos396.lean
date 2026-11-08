@@ -5,6 +5,7 @@ import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
 set_option maxRecDepth 65536
+set_option maxHeartbeats 4000000
 
 /-! # Erdős #396 — THE DESCENDING-FACTORIAL DIVISIBILITY FRONTIER (S038)
 

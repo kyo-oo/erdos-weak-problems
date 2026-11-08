@@ -17,6 +17,7 @@ on:
       - Arsenal/**
       - lakefile.toml
       - problem686-pell-ratio/**
+      - problem374-factorial-square/**
       - problem727-factorial-square/**
       - problem1056-factorial-intervals/**
       - problem700-binomial-gcd/**
@@ -750,3 +751,19 @@ jobs:
           grep -E "Erdos686K3.(erdos686k3_chain|edge4756|erdos686k3_rep1189|erdos686k3_rep4756|erdos686k3_existence|erdos686k3_main|erdos686k3_arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel32.log
           python3 problem686-pell-ratio/battery686k3.py
           echo ERDOS686K3_KERNEL_GREEN=1
+
+      - name: "Kernel 33 - Erdos 374 THE FACTORIAL-SQUARE PARITY FRONTIER (S039 volley): THE D2 SQUARE FAMILY (every square >= 4 in D2 via (t^2-1)!*(t^2)! = (t*(t^2-1)!)^2) + THE D2 = SQUARES LAW at 250 (both directions, the vff/Legendre parity engine, one census decide) + THE PARITY LAW (even valuations iff square, both directions) + THE D3 TABLE (F(m) = 3 EXACT for all 38 members: witness + non-square) + THE D4 TABLE (96 witnesses, F <= 4) + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel33.log
+          lake env lean problem374-factorial-square/Erdos374.lean 2>&1 | tee -a kernel33.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel33.log
+          grep -F "ERDOS374_KERNEL_GREEN" kernel33.log
+          grep -E "Erdos374.(erdos374_family|erdos374_D2_law|d2_census_decide|d3_squares|d4_squares|even_vals_square|erdos374_main)' (does not depend on any axioms|depends on axioms)" kernel33.log
+          python3 problem374-factorial-square/battery374.py
+          echo ERDOS374_KERNEL_GREEN=1
