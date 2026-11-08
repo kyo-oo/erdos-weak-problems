@@ -175,142 +175,124 @@ theorem erdos1074_m1_nonmember : ¬ EHSmember 1 := by
 lemma cert2_primes : ∀ q ∈ ([3] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | hfalse
+  rcases hq with rfl
   · norm_num
-  · exact hfalse.elim
 
 lemma cert2_cong : ∀ q ∈ ([3] : List Nat), q % 2 = 1 % 2 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | hfalse
+  rcases hq with rfl
   · decide
-  · exact hfalse.elim
 
 lemma cert3_primes : ∀ q ∈ ([7] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | hfalse
+  rcases hq with rfl
   · norm_num
-  · exact hfalse.elim
 
 lemma cert3_cong : ∀ q ∈ ([7] : List Nat), q % 3 = 1 % 3 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | hfalse
+  rcases hq with rfl
   · decide
-  · exact hfalse.elim
 
 lemma cert4_primes : ∀ q ∈ ([5, 5] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · norm_num
   · norm_num
-  · exact hfalse.elim
 
 lemma cert4_cong : ∀ q ∈ ([5, 5] : List Nat), q % 4 = 1 % 4 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · decide
   · decide
-  · exact hfalse.elim
 
 lemma cert5_primes : ∀ q ∈ ([11, 11] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · norm_num
   · norm_num
-  · exact hfalse.elim
 
 lemma cert5_cong : ∀ q ∈ ([11, 11] : List Nat), q % 5 = 1 % 5 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · decide
   · decide
-  · exact hfalse.elim
 
 lemma cert6_primes : ∀ q ∈ ([7, 103] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · norm_num
   · norm_num
-  · exact hfalse.elim
 
 lemma cert6_cong : ∀ q ∈ ([7, 103] : List Nat), q % 6 = 1 % 6 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · decide
   · decide
-  · exact hfalse.elim
 
 lemma cert7_primes : ∀ q ∈ ([71, 71] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · norm_num
   · norm_num
-  · exact hfalse.elim
 
 lemma cert7_cong : ∀ q ∈ ([71, 71] : List Nat), q % 7 = 1 % 7 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · decide
   · decide
-  · exact hfalse.elim
 
 lemma cert10_primes : ∀ q ∈ ([11, 329891] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · norm_num
   · exact prime_329891
-  · exact hfalse.elim
 
 lemma cert10_cong : ∀ q ∈ ([11, 329891] : List Nat), q % 10 = 1 % 10 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | hfalse
+  rcases hq with rfl | rfl
   · decide
   · decide
-  · exact hfalse.elim
 
 lemma cert11_primes : ∀ q ∈ ([39916801] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | hfalse
+  rcases hq with rfl
   · exact prime_39916801
-  · exact hfalse.elim
 
 lemma cert11_cong : ∀ q ∈ ([39916801] : List Nat), q % 11 = 1 % 11 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | hfalse
+  rcases hq with rfl
   · decide
-  · exact hfalse.elim
 
 lemma cert12_primes : ∀ q ∈ ([13, 13, 2834329] : List Nat), q.Prime := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | rfl | hfalse
+  rcases hq with rfl | rfl | rfl
   · norm_num
   · norm_num
   · exact prime_2834329
-  · exact hfalse.elim
 
 lemma cert12_cong : ∀ q ∈ ([13, 13, 2834329] : List Nat), q % 12 = 1 % 12 := by
   intro q hq
   simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
-  rcases hq with rfl | rfl | rfl | hfalse
+  rcases hq with rfl | rfl | rfl
   · decide
   · decide
   · decide
-  · exact hfalse.elim
 
 theorem erdos1074_census19 :
     ∀ m, 1 ≤ m → m ≤ 19 →

@@ -115,8 +115,7 @@ theorem erdos282_step_bound (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
 
 /-- The minimal odd n ≥ q/p. -/
 def greedyN (p q : Nat) : Nat :=
-  let n0 := (q + p - 1) / p
-  if n0 % 2 = 0 then n0 + 1 else n0
+  if (q + p - 1) / p % 2 = 0 then (q + p - 1) / p + 1 else (q + p - 1) / p
 
 /-- Structural fuel-gcd (kernel-friendly; correctness NOT needed — the
 step check certifies divisibility directly). -/
