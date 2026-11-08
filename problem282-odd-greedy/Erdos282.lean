@@ -162,6 +162,7 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
   have hmodlt : (q + p - 1) % p < p := Nat.mod_lt (q + p - 1) (by omega)
   simp only [greedyN]
   set n0 := (q + p - 1) / p with hn0def
+  clear hn0def
   have hF2 : q ≤ p * n0 := by omega
   by_cases hb : n0 % 2 = 0
   · -- even branch: n = n0 + 1
@@ -186,7 +187,7 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
             Nat.mul_add p (n0 - 1) 1
           rw [Nat.mul_one] at hsplit
           rw [hn'] at hsplit
-          exact hsplit
+          exact hsplit.symm
         have hn2 : n0 + 1 - 2 = n0 - 1 := by omega
         show p * (n0 + 1 - 2) < q
         rw [hn2]
@@ -215,7 +216,7 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
           Nat.mul_add p (n0 - 1) 1
         rw [Nat.mul_one] at hsplit
         rw [hn'] at hsplit
-        exact hsplit
+        exact hsplit.symm
       have hmono : p * (n0 - 2) ≤ p * (n0 - 1) := Nat.mul_le_mul_left p (by omega)
       show p * (n0 - 2) < q
       omega
@@ -305,12 +306,12 @@ theorem erdos282_arsenal_bridge : arsenalBridgeProp :=
 /-! ## §9 MAIN (everything above, one theorem). -/
 
 theorem erdos282_main :
-    (∀ p q p' q' n g, q % 2 = 1 → n % 2 = 1 → 1 ≤ g → q' * g = q * n → q' % 2 = 1) ∧
+    (∀ q q' n g, q % 2 = 1 → n % 2 = 1 → 1 ≤ g → q' * g = q * n → q' % 2 = 1) ∧
     (∀ p q p' q', GreedyStep p q p' q' → p ≤ q → 1 ≤ p → p' < 2 * p) ∧
     (∀ fuel p q, simTerm fuel p q = true → TerminateIn fuel p q) ∧
     (∀ q p, q % 2 = 1 → q ≤ 41 → 1 ≤ p → p < q → ∃ k, TerminateIn k p q) ∧
     arsenalBridgeProp :=
-  ⟨fun p q p' q' n g hq hn hg heq => erdos282_odd_closure p q p' q' n g hq hn hg heq,
+  ⟨fun q q' n g hq hn hg heq => erdos282_odd_closure 0 q 0 q' n g hq hn hg heq,
    ⟨fun p q p' q' hstep hpq hp1 => erdos282_step_bound p q p' q' hstep hpq hp1,
    ⟨fun fuel p q h => simTerm_sound fuel p q h,
    ⟨fun q p hqodd hq41 hp1 hplt => erdos282_census q p hqodd hq41 hp1 hplt,

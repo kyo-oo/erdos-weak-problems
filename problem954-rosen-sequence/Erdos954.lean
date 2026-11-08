@@ -3,6 +3,7 @@ import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
 set_option maxRecDepth 65536
+set_option maxHeartbeats 20000000
 
 /-! # Erdős #954 — THE ROSEN SEQUENCE LAWS (S036 volley, Kernel 29)
 
@@ -104,11 +105,13 @@ theorem erdos954_count_law :
 /-! ## §4 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
 
-theorem erdos954_arsenal_bridge :
-    [9 % 3, (9 / 3) % 3, (9 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    [378 % 3, (378 / 3) % 3, (378 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    carryAtPos 378 1 < 4 ∧
-    v2r (3 ^ 1 * 9) = v2r 9 :=
+def arsenalBridgeProp : Prop :=
+  [9 % 3, (9 / 3) % 3, (9 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [378 % 3, (378 / 3) % 3, (378 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  carryAtPos 378 1 < 4 ∧
+  v2r (3 ^ 1 * 9) = v2r 9
+
+theorem erdos954_arsenal_bridge : arsenalBridgeProp :=
   ⟨by decide, by decide, carryAtPos_bound 378 1,
     CardinalWorldsV2.v2r_ternary_scaling 1 9⟩
 
@@ -118,7 +121,7 @@ theorem erdos954_main :
     (∀ e, 2 ≤ e → e ≤ 45 →
       cntP (List.take e rosenTab) (rosenTab.getD e 0) < rosenTab.getD e 0) ∧
     (∀ x, 1 ≤ x → x < 378 → cntP (List.take 30 rosenTab) x ≥ x) ∧
-    erdos954_arsenal_bridge :=
+    arsenalBridgeProp :=
   ⟨fun e h1 h2 => erdos954_construction e h1 h2,
    ⟨fun x h1 h2 => erdos954_count_law x h1 h2,
    erdos954_arsenal_bridge⟩⟩

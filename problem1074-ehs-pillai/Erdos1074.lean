@@ -170,6 +170,148 @@ theorem erdos1074_m1_nonmember : ¬ EHSmember 1 := by
   rw [h1, h2] at hcong
   exact hcong rfl
 
+/-! ## §7a The non-member certificates (top-level — bullets legal). -/
+
+lemma cert2_primes : ∀ q ∈ ([3] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | hfalse
+  · norm_num
+  · exact hfalse.elim
+
+lemma cert2_cong : ∀ q ∈ ([3] : List Nat), q % 2 = 1 % 2 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | hfalse
+  · decide
+  · exact hfalse.elim
+
+lemma cert3_primes : ∀ q ∈ ([7] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | hfalse
+  · norm_num
+  · exact hfalse.elim
+
+lemma cert3_cong : ∀ q ∈ ([7] : List Nat), q % 3 = 1 % 3 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | hfalse
+  · decide
+  · exact hfalse.elim
+
+lemma cert4_primes : ∀ q ∈ ([5, 5] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · norm_num
+  · norm_num
+  · exact hfalse.elim
+
+lemma cert4_cong : ∀ q ∈ ([5, 5] : List Nat), q % 4 = 1 % 4 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · decide
+  · decide
+  · exact hfalse.elim
+
+lemma cert5_primes : ∀ q ∈ ([11, 11] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · norm_num
+  · norm_num
+  · exact hfalse.elim
+
+lemma cert5_cong : ∀ q ∈ ([11, 11] : List Nat), q % 5 = 1 % 5 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · decide
+  · decide
+  · exact hfalse.elim
+
+lemma cert6_primes : ∀ q ∈ ([7, 103] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · norm_num
+  · norm_num
+  · exact hfalse.elim
+
+lemma cert6_cong : ∀ q ∈ ([7, 103] : List Nat), q % 6 = 1 % 6 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · decide
+  · decide
+  · exact hfalse.elim
+
+lemma cert7_primes : ∀ q ∈ ([71, 71] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · norm_num
+  · norm_num
+  · exact hfalse.elim
+
+lemma cert7_cong : ∀ q ∈ ([71, 71] : List Nat), q % 7 = 1 % 7 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · decide
+  · decide
+  · exact hfalse.elim
+
+lemma cert10_primes : ∀ q ∈ ([11, 329891] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · norm_num
+  · exact prime_329891
+  · exact hfalse.elim
+
+lemma cert10_cong : ∀ q ∈ ([11, 329891] : List Nat), q % 10 = 1 % 10 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | hfalse
+  · decide
+  · decide
+  · exact hfalse.elim
+
+lemma cert11_primes : ∀ q ∈ ([39916801] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | hfalse
+  · exact prime_39916801
+  · exact hfalse.elim
+
+lemma cert11_cong : ∀ q ∈ ([39916801] : List Nat), q % 11 = 1 % 11 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | hfalse
+  · decide
+  · exact hfalse.elim
+
+lemma cert12_primes : ∀ q ∈ ([13, 13, 2834329] : List Nat), q.Prime := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | rfl | hfalse
+  · norm_num
+  · norm_num
+  · exact prime_2834329
+  · exact hfalse.elim
+
+lemma cert12_cong : ∀ q ∈ ([13, 13, 2834329] : List Nat), q % 12 = 1 % 12 := by
+  intro q hq
+  simp only [List.mem_cons, List.mem_nil_iff, or_false] at hq
+  rcases hq with rfl | rfl | rfl | hfalse
+  · decide
+  · decide
+  · decide
+  · exact hfalse.elim
+
 theorem erdos1074_census19 :
     ∀ m, 1 ≤ m → m ≤ 19 →
       (EHSmember m ↔ m ∈ [8, 9, 13, 14, 15, 16, 17, 18, 19]) := by
@@ -183,45 +325,27 @@ theorem erdos1074_census19 :
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 2 [3]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (norm_num <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 2 [3] cert2_primes (by decide) cert2_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 3 [7]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (norm_num <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 3 [7] cert3_primes (by decide) cert3_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 4 [5, 5]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 4 [5, 5] cert4_primes (by decide) cert4_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 5 [11, 11]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 5 [11, 11] cert5_primes (by decide) cert5_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 6 [7, 103]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 6 [7, 103] cert6_primes (by decide) cert6_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 7 [71, 71]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 7 [71, 71] cert7_primes (by decide) cert7_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro _; simp
@@ -231,24 +355,15 @@ theorem erdos1074_census19 :
     · intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 10 [11, 329891]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> exact prime_329891 <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 10 [11, 329891] cert10_primes (by decide) cert10_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 11 [39916801]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (exact prime_39916801 <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 11 [39916801] cert11_primes (by decide) cert11_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
-      exact absurd hm (nonmember_of_cert 12 [13, 13, 2834329]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact prime_2834329 <|> exact hfalse.elim))
-        (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse <;> (decide <|> decide <|> decide <|> exact hfalse.elim)))
+      exact absurd hm (nonmember_of_cert 12 [13, 13, 2834329] cert12_primes (by decide) cert12_cong)
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro _; simp
