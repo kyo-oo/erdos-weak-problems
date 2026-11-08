@@ -545,3 +545,41 @@ Battery dual-method GREEN (22,650 pairs q ≤ 301 ALL terminate, deepest
 Stein's general conjecture open.
 
 *The engines never stop; they never lie.*
+
+---
+
+## KILL #34 — Erdős #1108: THE ALL-PRIME ISOLATED-MINIMUM LAW (Session 037, Kernel 30, run 42462902183 GREEN, commit 252ca34)
+
+**The problem (verbatim):** Let A = { Σ_{n∈S} n! : S ⊂ ℕ finite }. If k ≥ 2,
+then does A contain only finitely many kth powers? Does it contain only
+finitely many powerful numbers?
+
+**The kill (all complete unconditional universal theorems, statement-
+then-proof format, the problem verbatim on top):**
+
+1. **THE RESIDUE-1 LAW** (`singleton_bottom_residue`): for every prime p
+   and every finite list S whose lowest occupied p-block {pj, …, pj+p−1}
+   is a singleton {b}: Σ_{a∈S} a! = b!·Q with Q ≡ 1 (mod p).
+2. **THE ALL-PRIME ISOLATED-MINIMUM LAW** (`all_prime_isolated_min`):
+   v_p(Σ_{a∈S} a!) = v_p(b!) EXACTLY — the K17/K19 p=2 engine
+   generalized to EVERY prime at once.
+3. **THE ALL-PRIME KERNEL CONGRUENCE** (`isolated_min_congruence`):
+   ∃ j: Σ = b! + p·b!·j.
+4. **THE ALL-PRIME k-TH-POWER OBSTRUCTION** (`all_prime_power_obstruction`):
+   k ∤ v_p(b!) ⟹ Σ ≠ n^k for every n — the #1108 obstruction engine at
+   every prime and every k ≥ 2 (the problem's own k).
+5. **THE BLOCK FORM** (`isolated_min_block_form`).
+
+The engine: the qfact quotient engine (t! = b!·∏_{i=b+1}^t i; every
+higher-block quotient contains the factor p·(b/p+1)); the residue-1
+invariant by list induction; the K19 vp-architecture lift (vpf/vp/
+saturation/step/nondiv/one/dvd_mul_divp/vp_mul with Euclid). Instances
+p=2/3/11 kernel-decided + the not-square/not-cube theorems (362910 =
+3!+4!+9!). Arsenal bridge applied (isTernaryDigit on 13/121 ternary
+digits, carryAtPos_bound, v2r_ternary_scaling). Battery 8,025 cases
+GREEN (dual-method: direct big-int valuation ∥ Legendre + residue-1).
+All seven theorems [propext, Classical.choice, Quot.sound].
+
+The 5-round compile war: R1 the workflow-append guard bug (the step
+never landed — caught by the step-list audit); R2 31 errors (8 root
+causes); R3/R4 4 errors + the preemptive m·k strike; R5 zero.

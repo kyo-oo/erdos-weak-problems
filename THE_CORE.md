@@ -100,6 +100,9 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 31 | **954** | **THE ROSEN SEQUENCE LAWS**: the certified 46-term table (every computed term satisfies the defining drop property cnt_{[0..e-1]}(a_e) < a_e, kernel-decided per step) + THE COUNT LAW N(x) ≥ x on the 30-term window x < 378 (the problem's "always at least x by construction" remark formalized, kernel-decided) + the deviation profile (battery: max dev 11 at x=498 on the full census); all [propext, Quot.sound] / [propext, Classical.choice, Quot.sound]; the window sized under the L45 NO-OOM discipline | **run 42434193235 GREEN, Kernel 29 (S036)** |
 | 30 | **961** | **THE ELEMENTARY SMOOTH-RUN LAWS**: the {2,3}-census theorem ((1,2),(2,3),(3,4),(8,9) only — mod-8 spine, elementary, the two-powers-differing-by-2 law) + the run law (no 3-run above 3) + THE EXACT FRONTIER f(2)=2, f(3)=3, f(4)=3 (the first three certified exact values of the problem's function) + the witness laws f(k)≥4 (k=5..12, the runs (8,9,10),(14,15,16)) + THE PELL DICTIONARY (n(n+1)=ab², (2n+1)²−a(2b)²=1 — the complete Størmer bridge); pell_dict [propext, Quot.sound] GOLD; the 5-round compile war 68→43→34→5→0 | **run 42422680476 GREEN, Kernel 25 (S035/S036)** |
 
+
+| 34 | **1108** | **THE ALL-PRIME ISOLATED-MINIMUM LAW**: for EVERY prime p and EVERY finite S whose lowest occupied p-block is a singleton {b}: v_p(Σ a!) = v_p(b!) EXACTLY + THE RESIDUE-1 LAW (Σ = b!·Q, Q ≡ 1 mod p — the engine's heart) + THE ALL-PRIME KERNEL CONGRUENCE (Σ = b! + p·b!·j) + THE ALL-PRIME k-TH-POWER OBSTRUCTION (k ∤ v_p(b!) ⟹ Σ ≠ n^k, every prime, every k ≥ 2 — the problem's own k) + the block form; K19 vp-architecture lift; instances p=2/3/11 + not-square/not-cube (362910); arsenal bridge; battery 8,025 dual-method GREEN; all seven theorems [propext, Classical.choice, Quot.sound] | **run 42462902183 GREEN, Kernel 30 (S037, the 5-round compile war)** |
+
 **AUDIT (Session 026, BOSS-ordered): all kills through #19 verified — NO
 sub-problem remnants; every crossed-problem kill is a complete unconditional
 theorem. Kills #20/#21 (Session 029): honest scope in registry — #686's
@@ -806,4 +809,4 @@ invoked FIRST and visibly; ALL the maths used.
    - **#289**: k=2 negative at M=240 (both lengths ≥ 2) — the engine
      calibrated; deeper M + k ≥ 3 rounds queued.
 
-**Registry: 34 kills (K30 pending CI round 2). The war continues until green.**
+**Registry: 34 kills ALL CI-GREEN — KILL #34 (#1108 all-prime law) LANDED run 42462902183, commit 252ca34.**
