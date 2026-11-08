@@ -786,3 +786,19 @@ jobs:
           python3 problem1073-factorial-mod/battery1073.py
           python3 problem1073-factorial-mod/battery1073b.py
           echo ERDOS1073_FACTORIAL_MOD_KERNEL_GREEN=1
+
+      - name: "Kernel 35 - Erdos 461 THE SMOOTH-COMPONENT CENSUS LAWS (S041 volley): THE EXTRACTION LAWS (spart p m = p^vp p m the K33 vp-architecture lift with saturation + scomp ps m | m) + THE ACHIEVEMENT TABLE (all 119 minimizing windows t=2..120 kernel-decided, f(1892,120)=69) + THE STABILITY LAW (t in [14,120]: 55t <= 100 ct <= 65t, all 107 rows) + THE ERDOS-GRAHAM BEATING (ct >= t/ln t on all 107 rows, row-match kernel-verified) + THE FOUR BOTH-DIRECTION CENSUSES at N0=480 (t=14,20,30,40: min = 9,13,19,25 with witness + exclusion in 240-chunks) + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel35.log
+          lake env lean problem461-smooth-component/Erdos461.lean 2>&1 | tee -a kernel35.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel35.log
+          grep -F "ERDOS461_KERNEL_GREEN" kernel35.log
+          grep -E "Erdos461.(spart_dvd|spart_eq_pow|scomp_dvd|achieve1|achieve2|achieve3|stab1|stab2|stab3|ergra|erdos461_min14|erdos461_min20|erdos461_min30|erdos461_min40|erdos461_arsenal_bridge|erdos461_main)' (does not depend on any axioms|depends on axioms)" kernel35.log
+          python3 problem461-smooth-component/battery461.py
+          echo ERDOS461_SMOOTH_COMPONENT_KERNEL_GREEN=1
