@@ -1555,3 +1555,75 @@ axiom-gate greps + battery calls. The war continues until green.
 *Registry: 34 kills CI-green (K34 = #1108 all-prime, run 42462902183);
 K31/K32 in the compile war. #289 OUT (externally solved); #374/#1212
 admitted with round-1 mathematics. The engine never stops.*
+
+---
+
+## SESSION 039 (2026-11-08) — THE K33 ASSOCIATION-CASCADE WAR (retroactive entry)
+
+**BOSS's order:** continue the S038 volley — kernel 33 (#374 factorial-square
+parity frontier) fired; fight the compile war to green.
+
+**Executed:** 4 rounds. R1 (run 42495753194, 17 errors). R2 (5769f82, run
+42521113105): 8 root causes killed — the OLEAN LADDER replication, the
+FREE-VARIABLE DECIDE (L85 minefield: `fun n _ _ => not_dvd_of_mod_ne (by
+decide)` discarded hypotheses and handed decide a goal with FREE n — fixed
+with the omega-forced subst). R3 (95235ef, run 42523871321): 7 fresh kills.
+R4 (5210b88, run 42527356579): **THE ASSOCIATION CASCADE RESOLVED** — the
+LEFT-ASSOC CANON LAW (all statement-level products stay LEFT-ASSOC; the
+vp_mul INHERENT right-assoc bridged INSIDE parRow4_iff via hassocP :=
+Nat.mul_assoc), the VP_MUL ARG-ORDER LAW (p is a Nat, hq comes AFTER the
+fuel bound), the defeq traps (1 ≤ N+2 vs 2 ≤ N+2 — (by omega); 1 ≤ minFac
+via omega), the rw direction law (heq : m = j with goal about j — rw [← heq]).
+
+**RESULT: run 42527356579 SUCCESS — ALL 33 kernels + arsenal + batteries
+GREEN. KILLS #35 (#396), #36 (#686-k3), #37 (#374) LANDED.**
+
+---
+
+## SESSION 040 (2026-11-08) — THE SELECT-AND-PROVE ROUND 1 (two new fronts)
+
+**BOSS's order (the standing S038 law):** only the mathematics ON THE
+BRANCH; select more problems and prove them; full chain first.
+
+**Executed (round-1 mathematics, engines + derivations):**
+- **#1073 ADMITTED** (factorial-mod composite census, Hardy–Subbarao
+  channel): the census 131 composite u < 10^6 with witnesses (prefix EXACT
+  match A256519), the L1 GCD law + L2 saturation law (window [1, P(u))),
+  the Wilson-prime layer (all three known Wilson primes' squares appear:
+  25, 169, 316969), the Brocard channel (25, 121, 5041), the cluster law
+  (rich-n decomposition — 22 hits at n=18 alone), witness-uniqueness
+  (empirical), growth table α ≈ 0.35 flat. Files: engine1073_round{1,2}.py,
+  battery1073.py, census1073_1e6.txt, DERIVATION.md.
+- **#461 ADMITTED** (Erdős–Graham smooth-component distinct values): the
+  census min_n f(n,t) for every t ∈ [2,120] (n ≤ 2·10^5); THE 0.57
+  STABILITY LAW (min f/t ∈ [0.55, 0.62] for every t ∈ [14,120] — rock
+  stable, no decay); THE ERGRA BEATING (f/(t/log t) GROWS 0.35 → 2.75 —
+  the census says full ≫t on this range); the minimizer-cluster law (argmin
+  windows end near highly-divisible anchors — 2420 + t ≈ 2520 = lcm(1..10)).
+  Files: engine461_round1.py, DERIVATION.md.
+
+---
+
+## SESSION 041 (2026-11-09) — THE REGISTRATION + THE S041 VOLLEY (in flight)
+
+**BOSS's order:** "go the tool is bac full power" — the tool infrastructure
+restored; continue the campaign at maximum intensity.
+
+**Executed:**
+1. **THE STATE AUDIT:** run 42527356579 verified SUCCESS via the API —
+   all 33 kernels green; K31/K32/K33 kills UNREGISTERED (the S039 session
+   died before the registry pass). THE_LIST v8 in the monorepo STALE (the
+   repo's copy never advanced past S032 — the session records live in
+   WORKLOG/README).
+2. **REGISTRATION:** kills #35/#36/#37 registered (README sections, THE_CORE
+   rows 35-37, this WORKLOG, THE_LIST refresh). Statement audit during
+   registration caught and fixed TWO misstatements in the fresh README rows
+   (#396's product runs DOWN (n−i), not up; #374's F(m) is the minimal-k
+   square-product function, not a solution count) — the citation-accuracy
+   law enforced.
+3. **THE S041 VOLLEY FIRED:** Kernel 34 (#1073 — the factorial-mod census
+   kernel: L1/L2 general laws + the ≤10^4 two-direction census + the
+   131-witness table + Wilson/Brocard channels) and Kernel 35 (#461 — the
+   smooth-component structure laws + the certified stability table).
+   The #1212 round-2 CRT-scheduling construction war runs as the
+   new-mathematics wing.

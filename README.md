@@ -583,3 +583,96 @@ All seven theorems [propext, Classical.choice, Quot.sound].
 The 5-round compile war: R1 the workflow-append guard bug (the step
 never landed — caught by the step-list audit); R2 31 errors (8 root
 causes); R3/R4 4 errors + the preemptive m·k strike; R5 zero.
+
+## KILL #35 — Erdős #396: THE DESCENDING-FACTORIAL DIVISIBILITY FRONTIER (Session 038, Kernel 31, run 42527356579 GREEN, commit e42d681→5210b88)
+
+**The problem (verbatim):** Is it true that for every $k$ there exists $n$
+such that $\prod_{0\leq i\leq k}(n-i) \mid \binom{2n}{n}$? (Erdős–Graham:
+$n+1$ always divides — the Catalan number — but $n$ itself is rare;
+Pomerance: for any $k \ge 0$ infinitely many $n$ with $n-k \mid
+\binom{2n}{n}$.) With $n_k$ = least $n$ such that $n(n-1)\cdots(n-k)\mid
+\binom{2n}{n}$: estimate $n_k$.
+
+**The kill (all complete unconditional theorems):**
+
+1. **THE FRONTIER VALUES** (`erdos396_k2`, `erdos396_frontier`):
+   $n_0 = 1$, $n_1 = 2$, and **$n_2 = 2480$ EXACT** — the divisibility
+   $2480\cdot2479\cdot2478 \mid \binom{4960}{2480}$ (a 1492-digit binomial
+   coefficient, kernel-decided) with COMPLETE exclusion of every
+   $1 \le n < 2480$ (six NO-OOM chunk-decides; $n = 1, 2$ die via the
+   zero-fact). Published frontier stood at $k \le 1$ (A375077); the $k=2$
+   case value was OPEN before this.
+2. **THE ABSORPTION CERTIFICATE** (`erdos396_binomP_absorb`):
+   $\mathrm{binomP}\ n\ k \cdot (n-k)! = n!$ — the kernel's descFactorial
+   quotient IS the true binomial coefficient (the K20/Erdos1063_Base
+   architecture lifted verbatim).
+3. **The Kummer margin analysis** (battery): $v_2, v_7, v_{31}, v_{37}$,
+   $v_{59}, v_{67}$ of the witness all at margin 0 — razor-thin. Bounded
+   evidence: no $k \ge 3$ witness with $n \le 6000$.
+
+Arsenal bridge applied. Battery396 dual-method GREEN (direct big-int mod ‖
+Kummer/Legendre valuations). Honest scope: the infinitude core ($\forall k$
+$\exists$ infinitely many $n$) and $k \ge 3$ values remain open.
+
+## KILL #36 — Erdős #686: THE k=3 SQUARE WITNESS LAWS (Session 038, Kernel 32, run 42527356579 GREEN, commit e42d681→5210b88)
+
+**The problem (verbatim, the square residue of #686):** for which $t$ is
+$t^2$ representable via the Pell-ratio structure of three consecutive
+products (the $k=3$ square front opened by KILL #20's non-square
+classification)?
+
+**The kill (all complete unconditional theorems):**
+
+1. **THE FIVE PRIMITIVE EDGES** (`erdos686k3_rep*`): $(t, m, n) =
+   (70, 47, 1), (4, 13, 4), (3, 25, 11), (1189, 1679, 13),
+   (1798, 13453, 89)$ — the first two kernelize Theorem C ($N = 9, 16$),
+   the last three are the S037 engine discoveries, now kernel-decided exact.
+2. **THE CHAIN LAW** (`erdos686k3_chain`): $c_3(a) = t_1^2\cdot c_3(b)
+   \wedge c_3(b) = t_2^2\cdot c_3(c) \Rightarrow c_3(a) = (t_1t_2)^2
+   \cdot c_3(c)$ — the witness relation COMPOSES (pure ring).
+3. **THE COMPOSITE $t = 4756 = 4\cdot1189$** (`edge4756`): at
+   $(m, n) = (1679, 4)$ — the S037 "double hit" EXPLAINED AND PROVED (one
+   product $1680\cdot1681\cdot1682$ serves two squares via the chain
+   $4 \to 13 \to 1679$; the engine successor scan: the chains END at 47 and
+   1679, $t \le 20000$ — Siegel-finite per curve).
+4. **THE SIX k=3 SQUARE CLASSES** (`erdos686k3_existence`,
+   `erdos686k3_main`): $9, 16, 4900, 1413721, 3232804, 22619536$ — the
+   first kernel-certified $k=3$ cases of the square front.
+
+Arsenal bridge applied. Battery686k3 dual-method GREEN (product replay ‖
+isqrt-square reconstruction; census $t \le 300$ exactly $\{3,4,70\}$; full
+witness census $t \le 5000$ exactly the six; the double-hit identity
+$16\cdot c_3(4) = c_3(13)$).
+
+## KILL #37 — Erdős #374: THE FACTORIAL-SQUARE PARITY FRONTIER (Session 039, Kernel 33, run 42527356579 GREEN, commit 4948e4f→5210b88)
+
+**The problem (verbatim):** For any $m \in \mathbb{N}$, let $F(m)$ be the
+minimal $k \ge 2$ (if it exists) such that there are $a_1 < \cdots < a_k =
+m$ with $a_1!\cdots a_k!$ a square. Let $D_k = \{m : F(m) = k\}$. What is
+the order of growth of $|D_k \cap \{1,\ldots,n\}|$ for $3 \le k \le 6$?
+E.g., is $|D_6 \cap \{1,\ldots,n\}| \gg n$? (Known: no $D_k$ contains a
+prime; $D_2 = \{n^2 : n > 1\}$; $|D_3| = o(|D_4|)$; least element of
+$D_6$ is 527; $D_k = \emptyset$ for $k > 6$.)
+
+**The kill (all complete unconditional theorems):**
+
+1. **THE D2 SQUARE FAMILY** (`erdos374_family`, `erdos374_family_D2`):
+   every square $\ge 4$ lies in $D_2$ — the constructive identity
+   $(t^2-1)!\cdot(t^2)! = (t\cdot(t^2-1)!)^2$ (kernel-ready ring theorem).
+2. **THE D2 = SQUARES LAW at 250** (`erdos374_D2_law`,
+   `d2_census_decide`): both directions, the vff/Legendre parity engine,
+   one census decide.
+3. **THE PARITY LAW** (`even_vals_square`): even valuations iff square,
+   both directions.
+4. **THE D3 TABLE** (`d3_squares`): $F(m) = 3$ EXACT for all 38 members
+   (witness + non-square certificate each).
+5. **THE D4 TABLE** (`d4_squares`): 96 witnesses, $F \le 4$.
+
+Arsenal bridge applied (`erdos374_arsenal_bridge`). Battery374 GREEN. The
+4-round compile war (17 → 7 → 0 errors; the association-cascade round).
+Honest scope: the growth-order cores ($|D_k \cap [1,n]|$ for $3 \le k \le
+6$, the $\gg n$ question) remain open; the kernel lands the
+$D_2$ = squares law as an independent kernel proof (the identity
+$(t^2-1)!\cdot(t^2)! = (t\cdot(t^2-1)!)^2$), the census-exact $D_2$ law
+at 250, the parity law (both directions), and the $D_3$/$D_4$ certified
+tables (38 + 96 members).

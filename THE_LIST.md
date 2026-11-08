@@ -1,4 +1,19 @@
-# THE LIST — THE OPERATIONAL LAW (v8, Session 032, 2026-11-07)
+# THE LIST — THE OPERATIONAL LAW (v9, Session 041, 2026-11-09)
+
+> **v9 STATUS ADDENDUM (S041):** registry 34 → **37 kills CI-green**
+> (run 42527356579): **K#35 = #396** (n₂=2480 EXACT + absorption
+> certificate), **K#36 = #686-k3** (five primitive edges + chain law + six
+> k=3 square classes), **K#37 = #374** (D₂ square family + parity law + D₃/D₄
+> tables). **S033–S039 volleys consumed the §F firing order** (#1063 K20,
+> #451 K21, #1072 K22, #394 K23, #711 K24, #961 K25, #686-sq K26, #1074 K27,
+> #282 K28, #954 K29, #1108-allprime K30) — 14 of the 22-queue + 11-volley
+> targets now kernel-killed. **S040 admissions:** #1073 + #461 (round-1
+> mathematics complete). **S041 volley:** Kernel 34 (#1073) + Kernel 35
+> (#461) + the #1212 round-2 construction war. #289 OUT (externally solved,
+> LEAP arXiv:2606.03303). The majority treatment holds: 20+ under active
+> fire (§C remainder: #306, #348, #288, #1212, #389, #708; §D witness
+> lanes: #939, #203, #273, #885, #677, #850, #274; §F remainder: #243,
+> #124; new: #1073, #461).
 
 > **THE ROULETTE LAWS (verbatim, cumulative — OLD and NEW, both binding):**
 > **OLD (S023):** only problems that need new mathematics; one-shot capable.
