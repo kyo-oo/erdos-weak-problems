@@ -4,6 +4,7 @@ import Arsenal.CardinalWorldsV2
 
 -- Family pattern (green kernels K21/K26/K30): explicit depth headroom.
 set_option maxRecDepth 262144
+set_option maxHeartbeats 8000000
 
 /-! # Erdős–Graham #461 — THE SMOOTH-COMPONENT CENSUS LAWS (S041 volley, Kernel 35)
 
@@ -262,7 +263,7 @@ theorem spf_eq_pow (p : Nat) (hp : 2 ≤ p) : ∀ f n, n ≤ f →
       rw [e1, e2]
       by_cases hmod : (N + 1) % p = 0
       · rw [if_pos hmod, if_pos hmod, ih ((N + 1) / p) (by omega)]
-        rw [Nat.add_comm 1 (vpf p f ((N + 1) / p)), ← Nat.pow_succ]
+        rw [Nat.add_comm 1 (vpf p f ((N + 1) / p)), Nat.pow_succ]
         exact Nat.mul_comm p (p ^ (vpf p f ((N + 1) / p)))
       · rw [if_neg hmod, if_neg hmod]
         rfl
@@ -298,9 +299,9 @@ theorem spart_dvd (p : Nat) (hp : 2 ≤ p) (m : Nat) : spart p m ∣ m := by
           have hsplit : (N + 1) = p * ((N + 1) / p) := by
             have := Nat.div_add_mod (N + 1) p
             omega
-          refine Nat.mul_dvd_mul (Dvd.refl p) ih2 |>.trans ?_
+          refine Nat.mul_dvd_mul ⟨1, Nat.one_mul p⟩ ih2 |>.trans ?_
           rw [hsplit]
-          exact Dvd.refl (p * ((N + 1) / p))
+          exact ⟨1, Nat.one_mul (p * ((N + 1) / p))⟩
         · rw [if_neg hmod]
           exact ⟨N + 1, Nat.mul_one (N + 1)⟩
   exact key m m (Nat.le_refl m)
@@ -318,7 +319,7 @@ theorem scomp_dvd : ∀ (ps : List Nat), (∀ p ∈ ps, 2 ≤ p) → ∀ m : Nat
       have hsplit : spart p m * (m / spart p m) = m := mul_div_own _ _ hsp
       have hrest := ih (fun q hq => hall q (List.mem_cons_of_mem p hq))
         (m / spart p m)
-      refine Nat.mul_dvd_mul (Dvd.refl (spart p m)) hrest |>.trans ?_
+      refine Nat.mul_dvd_mul ⟨1, Nat.one_mul (spart p m)⟩ hrest |>.trans ?_
       exact ⟨1, by rw [hsplit, Nat.mul_one]⟩
 
 /-! ## §2 The achievement table (all 119 minimizing windows, n < 2·10^5). -/
@@ -329,11 +330,11 @@ theorem achieve3 : ACH3.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) = true :=
 
 /-! ## §3 The stability law (t ∈ [14,120]: 0.55t ≤ c_t ≤ 0.65t). -/
 
-theorem stab1 : ACH1.filter (fun r => decide (14 ≤ r.1)).all
+theorem stab1 : (ACH1.filter (fun r => decide (14 ≤ r.1))).all
     (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) = true := by decide
-theorem stab2 : ACH2.filter (fun r => decide (14 ≤ r.1)).all
+theorem stab2 : (ACH2.filter (fun r => decide (14 ≤ r.1))).all
     (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) = true := by decide
-theorem stab3 : ACH3.filter (fun r => decide (14 ≤ r.1)).all
+theorem stab3 : (ACH3.filter (fun r => decide (14 ≤ r.1))).all
     (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) = true := by decide
 
 /-! ## §4 The Erdős–Graham beating (t ∈ [14,120]: c_t ≥ t/ln t). -/
@@ -372,6 +373,7 @@ theorem min_assembly (t m : Nat)
   intro n hn
   rcases (show n < 240 ∨ 240 ≤ n by omega) with h | h
   · have hrow := (List.all_eq_true.mp haT) n (List.mem_range.mpr h)
+    rw [Nat.zero_add] at hrow
     exact of_decide_eq_true hrow
   · have hrow := (List.all_eq_true.mp hbT) (n - 240) (List.mem_range.mpr (by omega))
     have hidx : 240 + (n - 240) = n := by omega
@@ -408,11 +410,11 @@ theorem erdos461_main :
     ACH1.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) ∧
     ACH2.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) ∧
     ACH3.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) ∧
-    ACH1.filter (fun r => decide (14 ≤ r.1)).all
+    (ACH1.filter (fun r => decide (14 ≤ r.1))).all
       (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) ∧
-    ACH2.filter (fun r => decide (14 ≤ r.1)).all
+    (ACH2.filter (fun r => decide (14 ≤ r.1))).all
       (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) ∧
-    ACH3.filter (fun r => decide (14 ≤ r.1)).all
+    (ACH3.filter (fun r => decide (14 ≤ r.1))).all
       (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) ∧
     ERGRA.all (fun r =>
       ((ACH1 ++ ACH2 ++ ACH3).any (fun a => decide (a.1 = r.1 ∧ a.2.2 = r.2.1))) &&
