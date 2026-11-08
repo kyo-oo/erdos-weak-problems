@@ -695,3 +695,20 @@ jobs:
           grep -E "Erdos954.erdos954_(construction|count_law|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel29.log
           python3 problem954-rosen-sequence/battery954.py
           echo ERDOS954_ROSEN_KERNEL_GREEN=1
+
+      - name: "Kernel 30 - Erdos 1108 THE ALL-PRIME ISOLATED-MINIMUM LAW (S037 volley): every prime p, every finite S - lowest occupied p-block a singleton {b} implies v_p(sum a!) = v_p(b!) EXACTLY + THE RESIDUE-1 LAW (sum = b!*Q, Q = 1 mod p) + THE ALL-PRIME KERNEL CONGRUENCE + THE k-TH-POWER OBSTRUCTION (k does not divide v_p(b!) implies sum != n^k) + the block form + receipts + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel30.log
+          lake env lean problem1108-allprime/Erdos1108AllPrime.lean 2>&1 | tee -a kernel30.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel30.log
+          grep -F "ERDOS1108_ALLPRIME_KERNEL_GREEN" kernel30.log
+          grep -E "Erdos1108AP.(singleton_bottom_residue|all_prime_isolated_min|isolated_min_congruence|all_prime_power_obstruction|isolated_min_block_form|erdos1108ap_arsenal_bridge|erdos1108ap_main)' (does not depend on any axioms|depends on axioms)" kernel30.log
+          test "$(grep -cF '(1, 0, 1, 1, 0)' kernel30.log)" -ge 2
+          python3 problem1108-allprime/battery1108ap.py
+          echo ERDOS1108_ALLPRIME_KERNEL_GREEN=1
