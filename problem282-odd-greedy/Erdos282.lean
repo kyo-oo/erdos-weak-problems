@@ -83,17 +83,21 @@ theorem erdos282_odd_closure (p q p' q' n g : Nat) (hq : q % 2 = 1)
 theorem erdos282_step_bound (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
     (hpq : p ≤ q) (hp1 : 1 ≤ p) : p' < 2 * p := by
   obtain ⟨n, g, hnodd, hn1, hnge, hnmin, hg1, _, _, hp'g, _⟩ := hstep
-  rcases hnmin with hn1case | hn2case
+  by_cases hn1c : n = 1
   · -- n = 1: q ≤ p·1 = p, so p = q, so p'·g = p − q = 0, so p' = 0
     have hqle : q ≤ p := by
-      rw [hn1case, Nat.mul_one] at hnge
+      rw [hn1c, Nat.mul_one] at hnge
       exact hnge
     have hpe : p = q := Nat.le_antisymm hpq hqle
-    rw [hn1case, Nat.mul_one, ← hpe, Nat.sub_self] at hp'g
+    rw [hn1c, Nat.mul_one, ← hpe, Nat.sub_self] at hp'g
     rcases Nat.mul_eq_zero.mp hp'g with h0 | h0
     · omega
     · omega
-  · -- n ≥ 2: p' ≤ p·n − q and p·n = p·(n−2) + 2p
+  · -- n ≠ 1: the minimality disjunct p·(n−2) < q must hold
+    have hn2case : p * (n - 2) < q := by
+      rcases hnmin with h | h
+      · exact absurd h hn1c
+      · exact h
     have hn2 : 2 ≤ n := by omega
     have hcomm : 2 * p = p * 2 := Nat.mul_comm 2 p
     have hsplit : p * ((n - 2) + 2) = p * (n - 2) + p * 2 := Nat.mul_add p (n - 2) 2
@@ -164,7 +168,6 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
     rw [if_pos hb]
     have hmod1 : (n0 + 1) % 2 = 1 := by
       rw [Nat.add_mod n0 1 2, hb]
-      norm_num
     refine ⟨hmod1, by omega, ?_, ?_⟩
     · have hmul : p * (n0 + 1) = p * n0 + p := by
         rw [Nat.mul_add, Nat.mul_one]
@@ -179,7 +182,11 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
         have hle : p * n0 ≤ q + p - 1 := by omega
         have hsub : p * (n0 - 1) + p = p * n0 := by
           have hn' : n0 - 1 + 1 = n0 := by omega
-          rw [← hn', Nat.mul_add, Nat.mul_one]
+          have hsplit : p * ((n0 - 1) + 1) = p * (n0 - 1) + p * 1 :=
+            Nat.mul_add p (n0 - 1) 1
+          rw [Nat.mul_one] at hsplit
+          rw [hn'] at hsplit
+          exact hsplit
         have hn2 : n0 + 1 - 2 = n0 - 1 := by omega
         show p * (n0 + 1 - 2) < q
         rw [hn2]
@@ -204,7 +211,11 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
       have hle : p * n0 ≤ q + p - 1 := by omega
       have hsub : p * (n0 - 1) + p = p * n0 := by
         have hn' : n0 - 1 + 1 = n0 := by omega
-        rw [← hn', Nat.mul_add, Nat.mul_one]
+        have hsplit : p * ((n0 - 1) + 1) = p * (n0 - 1) + p * 1 :=
+          Nat.mul_add p (n0 - 1) 1
+        rw [Nat.mul_one] at hsplit
+        rw [hn'] at hsplit
+        exact hsplit
       have hmono : p * (n0 - 2) ≤ p * (n0 - 1) := Nat.mul_le_mul_left p (by omega)
       show p * (n0 - 2) < q
       omega
@@ -281,11 +292,13 @@ theorem erdos282_census :
 /-! ## §8 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
 
-theorem erdos282_arsenal_bridge :
-    [13 % 3, (13 / 3) % 3, (13 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    [65 % 3, (65 / 3) % 3, (65 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    carryAtPos 65 1 < 4 ∧
-    v2r (3 ^ 1 * 9) = v2r 9 :=
+def arsenalBridgeProp : Prop :=
+  [13 % 3, (13 / 3) % 3, (13 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [65 % 3, (65 / 3) % 3, (65 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  carryAtPos 65 1 < 4 ∧
+  v2r (3 ^ 1 * 9) = v2r 9
+
+theorem erdos282_arsenal_bridge : arsenalBridgeProp :=
   ⟨by decide, by decide, carryAtPos_bound 65 1,
     CardinalWorldsV2.v2r_ternary_scaling 1 9⟩
 
@@ -296,7 +309,7 @@ theorem erdos282_main :
     (∀ p q p' q', GreedyStep p q p' q' → p ≤ q → 1 ≤ p → p' < 2 * p) ∧
     (∀ fuel p q, simTerm fuel p q = true → TerminateIn fuel p q) ∧
     (∀ q p, q % 2 = 1 → q ≤ 41 → 1 ≤ p → p < q → ∃ k, TerminateIn k p q) ∧
-    erdos282_arsenal_bridge :=
+    arsenalBridgeProp :=
   ⟨fun p q p' q' n g hq hn hg heq => erdos282_odd_closure p q p' q' n g hq hn hg heq,
    ⟨fun p q p' q' hstep hpq hp1 => erdos282_step_bound p q p' q' hstep hpq hp1,
    ⟨fun fuel p q h => simTerm_sound fuel p q h,

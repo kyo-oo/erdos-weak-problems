@@ -29,6 +29,7 @@ on:
       - problem686-pell-ratio/**
       - problem1074-ehs-pillai/**
       - problem282-odd-greedy/**
+      - problem954-rosen-sequence/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -677,3 +678,19 @@ jobs:
           grep -E "Erdos282.(erdos282_(odd_closure|step_bound|census|arsenal_bridge|main)|simTerm_sound)' (does not depend on any axioms|depends on axioms)" kernel28.log
           python3 problem282-odd-greedy/battery282.py
           echo ERDOS282_STEIN_CENSUS_KERNEL_GREEN=1
+
+      - name: "Kernel 29 - Erdos 954 ROSEN SEQUENCE LAWS (S036 volley): the certified 46-term table + the construction property per step + THE COUNT LAW N(x) >= x on the 30-term window + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel29.log
+          lake env lean problem954-rosen-sequence/Erdos954.lean 2>&1 | tee -a kernel29.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel29.log
+          grep -F "ERDOS954_ROSEN_KERNEL_GREEN" kernel29.log
+          grep -E "Erdos954.erdos954_(construction|count_law|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel29.log
+          python3 problem954-rosen-sequence/battery954.py
+          echo ERDOS954_ROSEN_KERNEL_GREEN=1

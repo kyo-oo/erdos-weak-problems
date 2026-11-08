@@ -184,64 +184,93 @@ theorem erdos1074_census19 :
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 2 [3]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | norm_num | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (norm_num <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 3 [7]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | norm_num | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (norm_num <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 4 [5, 5]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 5 [11, 11]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 6 [7, 103]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 7 [71, 71]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim)) | intro hlist; simp at hlist | subst h; constructor | intro _; simp | intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
+    · intro hlist; simp at hlist
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 10 [11, 329891]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | exact prime_329891 | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (norm_num <|> exact prime_329891 <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse <;> (decide <|> decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 11 [39916801]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | exact prime_39916801 | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (exact prime_39916801 <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | decide | exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse <;> (decide <|> exact hfalse.elim)))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 12 [13, 13, 2834329]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse; first | norm_num | norm_num | exact prime_2834329 | exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse <;> (norm_num <|> norm_num <|> exact prime_2834329 <|> exact hfalse.elim))
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse; first | decide | decide | decide | exact hfalse.elim)) | intro hlist; simp at hlist | subst h; constructor | intro _; simp | intro _; exact ⟨83, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨59, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨661, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse <;> (decide <|> decide <|> decide <|> exact hfalse.elim)))
+    · intro hlist; simp at hlist
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨83, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨59, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨661, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+  · subst h; constructor
+    · intro _; simp
+    · intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
 
 /-! ## §8 THE LARGE-MEMBER WITNESSES. -/
 
@@ -280,7 +309,7 @@ lemma mod_bridge (a p : Nat) (hp : 2 ≤ p) : p ∣ a + 1 ↔ a % p = p - 1 := b
       have heq : p - 1 + 1 = p := by omega
       rw [heq]
       exact Nat.mod_self p
-    rw [← h1] at hz
+    rw [h1] at hz
     exact (Nat.dvd_iff_mod_eq_zero).mpr hz
 
 /-! ## §10 THE PILLAI DICTIONARY + WITNESS BOUND + TABLE. -/
@@ -349,12 +378,14 @@ theorem erdos1074_pillai_table : ∀ pm ∈ pillaiTab, PillaiPrime pm.1 := by
 /-! ## §11 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
 
-theorem erdos1074_arsenal_bridge :
-    [61 % 3, (61 / 3) % 3, (61 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    [23 % 3, (23 / 3) % 3, (23 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    [83 % 3, (83 / 3) % 3, (83 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
-    carryAtPos 40321 1 < 4 ∧
-    v2r (3 ^ 1 * 9) = v2r 9 :=
+def arsenalBridgeProp : Prop :=
+  [61 % 3, (61 / 3) % 3, (61 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [23 % 3, (23 / 3) % 3, (23 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [83 % 3, (83 / 3) % 3, (83 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  carryAtPos 40321 1 < 4 ∧
+  v2r (3 ^ 1 * 9) = v2r 9
+
+theorem erdos1074_arsenal_bridge : arsenalBridgeProp :=
   ⟨by decide, by decide, by decide, carryAtPos_bound 40321 1,
     CardinalWorldsV2.v2r_ternary_scaling 1 9⟩
 
@@ -370,7 +401,7 @@ theorem erdos1074_main :
     (∀ m p, (p : Nat).Prime → ((p ∣ fact m + 1 ∧ p % m ≠ 1 % m) ↔
       (m < p ∧ fact m % p = p - 1 ∧ p % m ≠ 1 % m))) ∧
     (∀ pm ∈ pillaiTab, PillaiPrime pm.1) ∧
-    erdos1074_arsenal_bridge :=
+    arsenalBridgeProp :=
   ⟨fun m p hp hdvd => erdos1074_factor_bound m p hp hdvd,
    ⟨fun m => erdos1074_finite_char m,
    ⟨fun m h1 h19 => erdos1074_census19 m h1 h19,
@@ -378,7 +409,7 @@ theorem erdos1074_main :
    ⟨fun p m hp hm => erdos1074_pillai_bound p m hp hm,
    ⟨fun m p hp => erdos1074_dictionary m p hp,
    ⟨fun pm hpm => erdos1074_pillai_table pm hpm,
-   erdos1074_arsenal_bridge⟩⟩⟩⟩⟩⟩⟩⟩
+   erdos1074_arsenal_bridge⟩⟩⟩⟩⟩⟩⟩
 
 #eval "ERDOS1074_EHS_KERNEL_GREEN"
 #print axioms erdos1074_factor_bound
