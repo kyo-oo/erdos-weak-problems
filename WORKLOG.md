@@ -1410,3 +1410,25 @@ USE ALL THE MATHS. MATHS + prove-that-shit chain activated FIRST.
    round 1 fires.
 
 Registry: 30 CI-green kills. 28 kernels in CI. The engine never stops.
+
+## SESSION 036 — THE COMPILE WAR ROUNDS (K27/K28) + K29 FIRED (cont.)
+
+- ROUND 1 (run 42427312243, commit 5cecbca): K27 35 errors, K28 11.
+  Root causes: Nat.Prime is Irreducible-structured (the anonymous ⟨⟩
+  construction dead — norm_num route); '·' bullets illegal in
+  parenthesized (by ...); the beq-coercion family; missing
+  Nat.eq_zero_of_mul_eq_zero; the flat-⟨⟩ main misassociation.
+- ROUND 2 (run 42429859659, commit 877d708): K27 8, K28 8. Root
+  causes: 'first |' illegal in parens (the pipe terminates the
+  declaration parse); THE PROOF-IN-STATEMENT LAW (the main statement's
+  last conjunct was the proof term — And needs a Prop — 3 rounds to
+  see); the minimality-disjunct leak (n=1 satisfies BOTH disjuncts of
+  the GreedyStep minimality — the second branch does NOT carry n ≥ 2);
+  the ← hn' self-mangling (S034 lesson, third strike); the extra ⟩
+  (8 for 7 nestings) breaking the parser. ALSO: the round-2 fix
+  transformer's own greedy regex mangled census19 — full clean rebuild
+  (the meta-lesson: verify transformations with balance checkers, not
+  just eyeballs).
+- ROUND 3 (commit 0253441): all fixes + K29 (#954 Rosen) fired with
+  battery GREEN (the battery's own cnt2 bug — binary search hi = j
+  instead of j+1 — caught by the dual-method discipline BEFORE CI).
