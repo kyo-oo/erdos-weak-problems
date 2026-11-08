@@ -274,7 +274,7 @@ theorem vff_zero (p : Nat) : ∀ f, vff p f 0 = 0 := by
   | zero => rfl
   | succ g ih =>
     have e : vff p (g + 1) 0 = 0 / p + vff p g (0 / p) := rfl
-    rw [e, Nat.zero_div, Nat.zero_div, ih]
+    rw [e, Nat.zero_div, ih]
 
 theorem vff_le_one (p : Nat) (hp : 2 ≤ p) : ∀ (n f : Nat), n ≤ 1 →
     vff p f n = 0 := by
@@ -332,7 +332,7 @@ theorem vff_drop (p : Nat) (hp : 2 ≤ p) : ∀ (c : Nat), ∀ (f n : Nat),
     have h1 : n ≤ 1 := by
       rw [Nat.pow_zero] at hn
       omega
-    show vff p f n = vff p 0 n
+    rw [Nat.zero_add]
     rw [vff_le_one p hp n f h1, vff_le_one p hp n 0 h1]
   | succ c ih =>
     intro f n hn
@@ -340,8 +340,14 @@ theorem vff_drop (p : Nat) (hp : 2 ≤ p) : ∀ (c : Nat), ∀ (f n : Nat),
     have hk : (n / p) ≤ p ^ c := by
       have h1 := Nat.div_add_mod n p
       have h2 : n % p < p := Nat.mod_lt n (by omega)
+      have hpc' : p ^ (c + 1) = p * p ^ c := by rw [hpc, Nat.mul_comm]
       have hB : p * (n / p) ≤ p * p ^ c := by omega
-      exact Nat.le_of_mul_le_mul_left hB (by omega)
+      by_contra hgt
+      have hsucc : p ^ c + 1 ≤ n / p := by omega
+      have hmul : p * (p ^ c + 1) ≤ p * (n / p) := Nat.mul_le_mul_left p hsucc
+      have hexpand : p * (p ^ c + 1) = p * p ^ c + p := by
+        rw [Nat.mul_add, Nat.mul_one]
+      omega
     have hassoc : c + 1 + f = c + f + 1 := by omega
     rw [hassoc]
     have e1 : vff p (c + f + 1) n = n / p + vff p (c + f) (n / p) := rfl
@@ -356,14 +362,13 @@ in vff form — proved by the two-floor case split at `p ∣ n+1`. -/
 theorem vff_step (p : Nat) (hp : 2 ≤ p) : ∀ n,
     vff p (n + 1) (n + 1) = vff p n n + vp p (n + 1) := by
   intro n
-  induction n using Nat.strongInduction_on with
+  induction n using Nat.strongRecOn with
   | ind n ih =>
     cases n with
     | zero =>
       have e1 : vff p 1 1 = 1 / p + vff p 0 (1 / p) := rfl
       have h1p : 1 / p = 0 := Nat.div_eq_of_lt (by omega)
       rw [e1, h1p, vff_zero, vp_one p hp]
-      omega
     | succ m =>
       show vff p (m + 2) (m + 2) = vff p (m + 1) (m + 1) + vp p (m + 2)
       have eL : vff p (m + 2) (m + 2) =
@@ -380,19 +385,22 @@ theorem vff_step (p : Nat) (hp : 2 ≤ p) : ∀ n,
         omega
       by_cases hmod : (m + 2) % p = 0
       · -- p ∣ (m+2): the wrap (m+1)%p = p−1, (m+2)/p = (m+1)/p + 1
+        have hone : (1 : Nat) % p = 1 := Nat.mod_eq_of_lt (by omega)
+        have hadd := Nat.add_mod (m + 1) 1 p
+        rw [hone] at hadd
+        have hconv : (m + 1 + 1) % p = (m + 2) % p := rfl
+        rw [hconv] at hadd
         have hwrap : (m + 1) % p + 1 = p := by
           rcases Nat.lt_or_ge ((m + 1) % p + 1) p with hlt' | hge'
-          · have hconv : (m + 1 + 1) % p = (m + 2) % p := rfl
-            have hadd := Nat.add_mod (m + 1) 1 p
-            have hmod' : ((m + 1) % p + 1) % p = 0 := by omega
-            have := Nat.mod_eq_of_lt hlt'
+          · have hmid := Nat.mod_eq_of_lt hlt'
             omega
-          · omega
+          · have hle : (m + 1) % p < p := Nat.mod_lt _ (by omega)
+            omega
         have hA : p * ((m + 2) / p) = p * ((m + 1) / p + 1) := by
           rw [Nat.mul_succ]
           omega
         have hshift : (m + 2) / p = (m + 1) / p + 1 :=
-          Nat.eq_of_mul_eq_mul_left (by omega) hA
+          Nat.mul_left_cancel (by omega : 1 ≤ p) hA
         have hk1 : (m + 2) / p ≤ m + 1 := by
           have := Nat.div_lt_self (by omega : 0 < m + 2) (by omega : 1 < p)
           omega
@@ -410,24 +418,28 @@ theorem vff_step (p : Nat) (hp : 2 ≤ p) : ∀ n,
         rw [hshift, s1, ihk, s2, hvstep]
         omega
       · -- p ∤ (m+2): the floors coincide, vp p (m+2) = 0
+        have hone : (1 : Nat) % p = 1 := Nat.mod_eq_of_lt (by omega)
+        have hadd := Nat.add_mod (m + 1) 1 p
+        rw [hone] at hadd
+        have hconv : (m + 1 + 1) % p = (m + 2) % p := rfl
+        rw [hconv] at hadd
         have hfloor : (m + 2) / p = (m + 1) / p := by
-          by_contra hne
-          have hmono : (m + 1) / p ≤ (m + 2) / p :=
-            Nat.div_le_div_right (by omega : m + 1 ≤ m + 2)
-          have hge : (m + 1) / p + 1 ≤ (m + 2) / p := by omega
-          have hsuccmul : p * ((m + 1) / p + 1) = p * ((m + 1) / p) + p :=
-            Nat.mul_succ p ((m + 1) / p)
-          have hB : p * ((m + 1) / p + 1) ≤ p * ((m + 2) / p) :=
-            Nat.mul_le_mul_left p hge
-          have hB2 : p * ((m + 2) / p) ≤ m + 2 := by omega
-          have hB3 : m + 1 < p * ((m + 1) / p + 1) := by omega
-          omega
+          rcases Nat.lt_or_ge ((m + 1) % p + 1) p with hlt' | hge'
+          · have hmid := Nat.mod_eq_of_lt hlt'
+            have hEq : p * ((m + 2) / p) = p * ((m + 1) / p) := by
+              have hd2 := Nat.div_add_mod (m + 2) p
+              have hd1 := Nat.div_add_mod (m + 1) p
+              omega
+            exact Nat.mul_left_cancel (by omega : 1 ≤ p) hEq
+          · have hle : (m + 1) % p < p := Nat.mod_lt _ (by omega)
+            have hexact : (m + 1) % p + 1 = p := by omega
+            rw [hexact, Nat.mod_self] at hadd
+            omega
         have hv0 : vp p (m + 2) = 0 :=
           vp_nondiv p (m + 2) (by omega) hmod
         rw [hfloor, hv0]
         rcases Nat.eq_zero_or_pos ((m + 1) / p) with h0 | h1
         · rw [h0, vff_zero, vff_zero]
-          omega
         · have s1 : vff p (m + 1) ((m + 1) / p) =
               vff p ((m + 1) / p) ((m + 1) / p) :=
             vff_sat p hp (m + 1) (m + 1) (Nat.le_refl _) ((m + 1) / p) (by omega)
@@ -513,8 +525,9 @@ theorem vp_pow_dvd (p : Nat) (hp : p.Prime) : ∀ (k n : Nat), k ≤ vp p n →
 then n is a perfect square (strong induction, min-factor peeling). -/
 theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
     ∃ s, n = s * s := by
-  induction n using Nat.strongInduction_on with
+  induction n using Nat.strongRecOn with
   | ind n ih =>
+    intro h
     cases n with
     | zero => exact ⟨0, by omega⟩
     | succ M =>
@@ -522,12 +535,17 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
       | zero => exact ⟨1, by omega⟩
       | succ N =>
         -- n = N + 2 ≥ 2
+        have hn : Nat.succ (Nat.succ N) = N + 2 := rfl
+        rw [hn] at h ⊢
         have hn2 : 2 ≤ N + 2 := by omega
-        have hpp : (Nat.minFac (N + 2)).Prime := Nat.minFac_prime hn2
+        have hpp : (Nat.minFac (N + 2)).Prime := Nat.minFac_prime (by omega)
         have hp2 : 2 ≤ Nat.minFac (N + 2) := hpp.one_lt
         have hdvd : Nat.minFac (N + 2) ∣ N + 2 := Nat.minFac_dvd (N + 2)
-        have hvp1 : 1 ≤ vp (Nat.minFac (N + 2)) (N + 2) :=
-          vp_dvd_of_pos _ _ hn2 (by omega)
+        have hvp1 : 1 ≤ vp (Nat.minFac (N + 2)) (N + 2) := by
+          have hmod : (N + 2) % Nat.minFac (N + 2) = 0 :=
+            Nat.mod_eq_zero_of_dvd hdvd
+          have hstep := vp_step (Nat.minFac (N + 2)) (N + 2) hp2 hn2 hmod
+          omega
         have hpar := h _ hpp
         have hvp2 : 2 ≤ vp (Nat.minFac (N + 2)) (N + 2) := by omega
         have hp2dvd : (Nat.minFac (N + 2)) ^ 2 ∣ N + 2 :=
@@ -551,7 +569,7 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
           intro q hq
           have hvpn := h q hq
           have hm1 : 1 ≤ Nat.minFac (N + 2) * Nat.minFac (N + 2) :=
-            Nat.mul_le_mul (Nat.le_refl 2) hp2 |>.trans (by omega)
+            one_le_mul _ _ (by omega) (by omega)
           have hmul1 : vp q (Nat.minFac (N + 2) * Nat.minFac (N + 2) * k) =
               vp q (Nat.minFac (N + 2) * Nat.minFac (N + 2)) + vp q k :=
             vp_mul _ hq _ _ (Nat.le_refl _) hq hm1 hk1
@@ -577,16 +595,18 @@ theorem even_vals_square (n : Nat) (h : ∀ p, p.Prime → vp p n % 2 = 0) :
             · right
               have hnd : ¬ (q ∣ Nat.minFac (N + 2)) := by
                 intro hd
-                rcases Nat.dvd_prime hpp hd with h1 | h2
-                · omega
-                · exact hqe h2.symm
+                rcases (Nat.dvd_prime hpp).mp hd with h1 | h2
+                · have hq2 : 2 ≤ q := hq.one_lt
+                  omega
+                · exact hqe h2
               exact vp_nondiv _ _ (by omega)
                 (fun hc => hnd (Nat.dvd_of_mod_eq_zero hc))
           rw [← hk] at hmul1
           omega
         obtain ⟨s, hs⟩ := ih k hklt hkeven
         refine ⟨Nat.minFac (N + 2) * s, ?_⟩
-        rw [hk, hs]
+        conv_lhs => rw [hk]
+        rw [hs]
         ring
 
 /-- **THE SQUARE-VALUATION LAW**: a square has every prime valuation
@@ -596,16 +616,18 @@ theorem par_of_sq (X s : Nat) (h : X = s * s) : ∀ p, p.Prime →
   intro p hpp
   cases s with
   | zero =>
-    have hX0 : X = 0 := by rw [h]; omega
+    have hX0 : X = 0 := by omega
     rw [hX0]
     have hvp0 : vp p 0 = 0 := rfl
     omega
   | succ t =>
+    have hs1 : Nat.succ t = t + 1 := rfl
+    rw [hs1] at h
     have h1 : 1 ≤ t + 1 := by omega
-    have h2 : (t + 1) ^ 2 = (t + 1) * (t + 1) := by rw [Nat.pow_two]
     have hv : vp p ((t + 1) ^ 2) = 2 * vp p (t + 1) :=
       vp_pow 2 p 2 (t + 1) (Nat.le_refl _) hpp h1
-    rw [h, h2]
+    have hp2 : (t + 1) ^ 2 = (t + 1) * (t + 1) := by rw [Nat.pow_two]
+    rw [h, ← hp2, hv]
     omega
 
 /-- **THE FACTORIAL FACTOR-BOUND**: a prime dividing n! is at most n. -/
@@ -648,11 +670,16 @@ theorem primes250_complete : (List.range 250).all (fun n =>
 
 theorem primes250_mem (p : Nat) (hpp : p.Prime) (hp : p ≤ 250) :
     p ∈ primes250 := by
+  have hpge : 2 ≤ p := hpp.one_lt
   have hcomp := primes250_complete
   have hn := (List.all_eq_true.mp hcomp) (p - 2) (List.mem_range.mpr (by omega))
   rcases of_decide_eq_true hn with hnp | hmem
-  · exact absurd hpp hnp
-  · exact hmem
+  · have hp2 : 2 + (p - 2) = p := by omega
+    rw [hp2] at hnp
+    exact absurd hpp hnp
+  · have hp2 : 2 + (p - 2) = p := by omega
+    rw [hp2] at hmem
+    exact hmem
 
 /-! ## §5 THE CENSUS ENGINE (the D₂ scan over [1, 250]). -/
 
@@ -685,7 +712,7 @@ theorem censusAll_flags : ∀ (fuel m : Nat), censusAll fuel m = true →
   | succ f ih =>
     intro m h j hj1 hj2
     have hunfold : censusAll (f + 1) m =
-        decide (d2w m = sqTest m) && censusAll f (m + 1) := rfl
+        (decide (d2w m = sqTest m) && censusAll f (m + 1)) := rfl
     rw [hunfold] at h
     have hsplit := Bool.and_eq_true.mp h
     have hflag : d2w m = sqTest m := of_decide_eq_true hsplit.1
@@ -702,6 +729,7 @@ theorem d2w_iff (m : Nat) : d2w m = true ↔
   constructor
   · intro h
     obtain ⟨x, hxmem, hx⟩ := List.any_eq_true.mp h
+    have hxlt : x < m - 1 := List.mem_range.mp hxmem
     refine ⟨1 + x, by omega, by omega, hx⟩
   · intro ⟨a, ha1, ham, hrow⟩
     refine List.any_eq_true.mpr ⟨a - 1, List.mem_range.mpr (by omega), ?_⟩
@@ -778,6 +806,9 @@ theorem erdos374_family (t : Nat) (ht : 1 ≤ t) :
 
 theorem erdos374_family_D2 (t : Nat) (ht : 2 ≤ t) :
     ∃ a s, 1 ≤ a ∧ a < t * t ∧ fact a * fact (t * t) = s * s := by
+  have htt : 2 ≤ t * t := by
+    have h1 : 2 * t ≤ t * t := Nat.mul_le_mul_right t ht
+    omega
   refine ⟨t * t - 1, t * fact (t * t - 1), by omega, by omega, ?_⟩
   exact erdos374_family t (by omega)
 
@@ -806,7 +837,7 @@ theorem erdos374_D2_law (m : Nat) (hm : 2 ≤ m) (hm250 : m ≤ 250) :
       have hte : 2 + (t - 2) = t := by omega
       rw [hte]
       exact decide_eq_true htm
-    have hd2 : d2w m = true := by rw [← hflag]; exact hsq
+    have hd2 : d2w m = true := by rw [hflag]; exact hsq
     exact (d2_meaning m hm hm250).mp hd2
 
 /-! ## §8 THE D₃ / D₄ WITNESS TABLES (engine witnesses, kernel-certified). -/
@@ -860,7 +891,9 @@ theorem vp_fact4_bound (q a b c m : Nat) (hq : q.Prime)
     (fact_pos a) (fact_pos b)
   have h3 := vp_mul (fact c + fact m) q (fact c) (fact m) (Nat.le_refl _) hq
     (fact_pos c) (fact_pos m)
-  rw [h1, h2, h3] at h
+  have hassoc : fact a * fact b * fact c * fact m = fact a * fact b * (fact c * fact m) :=
+    Nat.mul_assoc (fact a * fact b) (fact c) (fact m)
+  rw [hassoc, h1, h2, h3] at h
   rcases Nat.eq_zero_or_pos (vp q (fact a)) with h0 | h4
   · rcases Nat.eq_zero_or_pos (vp q (fact b)) with h0' | h5
     · rcases Nat.eq_zero_or_pos (vp q (fact c)) with h0'' | h6
@@ -947,12 +980,72 @@ def d4tab : List Nat :=
    26, 233, 236, 58, 59, 235, 240, 2, 5, 239, 244, 182, 183, 242, 246,
    119, 123, 241, 248, 30, 32, 247, 250, 2, 6, 249]
 
+/-- The parity row of a quadruple (a, b, c, m): the CHEAP Legendre-engine
+form (no big factorials — the census engine's architecture, same as
+`rowEqP`; this is what makes the 96-row table kernel-decidable within
+the heartbeat budget). -/
+def parRow4 (a b c m : Nat) : Bool :=
+  primes250.all (fun p =>
+    decide ((vpar p a + vpar p b + vpar p c + vpar p m) % 2 = 0))
+
+/-- **THE ROW BRIDGE**: for a, b, c, m ≤ 250, the cheap parity row IS the
+big-product `parAllX` test (via `vpar_eq` + `vp_mul` additivity — the
+dual-method engine check of S039). -/
+theorem parRow4_iff (a b c m : Nat) (ha : a ≤ 250) (hb : b ≤ 250)
+    (hc : c ≤ 250) (hm : m ≤ 250) :
+    parRow4 a b c m = true ↔
+      parAllX (fact a * fact b * fact c * fact m) = true := by
+  have hpr : ∀ q ∈ primes250, q.Prime := fun q hq =>
+    of_decide_eq_true ((List.all_eq_true.mp primes250_all_prime) q hq)
+  have hmul1 : ∀ q, q.Prime → vp q (fact a * fact b) =
+      vp q (fact a) + vp q (fact b) :=
+    fun q hq => vp_mul (fact a + fact b) q (fact a) (fact b) (Nat.le_refl _) hq
+      (fact_pos a) (fact_pos b)
+  have hmul2 : ∀ q, q.Prime → vp q (fact c * fact m) =
+      vp q (fact c) + vp q (fact m) :=
+    fun q hq => vp_mul (fact c + fact m) q (fact c) (fact m) (Nat.le_refl _) hq
+      (fact_pos c) (fact_pos m)
+  have hmul3 : ∀ q, q.Prime → vp q (fact a * fact b * fact c * fact m) =
+      vp q (fact a * fact b) + vp q (fact c * fact m) :=
+    fun q hq => vp_mul (fact a * fact b + fact c * fact m) q (fact a * fact b)
+      (fact c * fact m) (Nat.le_refl _) hq
+      (one_le_mul _ _ (fact_pos a) (fact_pos b))
+      (one_le_mul _ _ (fact_pos c) (fact_pos m))
+  constructor
+  · intro hrow
+    apply List.all_eq_true.mpr
+    intro q hq
+    have hq' := hpr q hq
+    have hva := vpar_eq q a hq' ha
+    have hvb := vpar_eq q b hq' hb
+    have hvc := vpar_eq q c hq' hc
+    have hvm := vpar_eq q m hq' hm
+    have hp := of_decide_eq_true (List.all_eq_true.mp hrow q hq)
+    have h1 := hmul1 q hq'
+    have h2 := hmul2 q hq'
+    have h3 := hmul3 q hq'
+    exact decide_eq_true (by omega)
+  · intro hall
+    apply List.all_eq_true.mpr
+    intro q hq
+    have hq' := hpr q hq
+    have hva := vpar_eq q a hq' ha
+    have hvb := vpar_eq q b hq' hb
+    have hvc := vpar_eq q c hq' hc
+    have hvm := vpar_eq q m hq' hm
+    have hp := of_decide_eq_true (List.all_eq_true.mp hall q hq)
+    have h1 := hmul1 q hq'
+    have h2 := hmul2 q hq'
+    have h3 := hmul3 q hq'
+    exact decide_eq_true (by omega)
+
 theorem d4_table : (List.range 96).all (fun i =>
     decide (1 ≤ d4tab.getD (4*i+1) 0 ∧ d4tab.getD (4*i+1) 0 < d4tab.getD (4*i+2) 0 ∧
       d4tab.getD (4*i+2) 0 < d4tab.getD (4*i+3) 0 ∧ d4tab.getD (4*i+3) 0 < d4tab.getD (4*i) 0 ∧
       d4tab.getD (4*i) 0 ≤ 250 ∧
-      parAllX (fact (d4tab.getD (4*i+1) 0) * fact (d4tab.getD (4*i+2) 0) *
-        fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0)))) = true := by decide
+      parRow4 (d4tab.getD (4*i+1) 0) (d4tab.getD (4*i+2) 0)
+        (d4tab.getD (4*i+3) 0) (d4tab.getD (4*i) 0))) = true := by
+  decide
 
 theorem d4_squares : ∀ i, i < 96 → ∃ s,
     fact (d4tab.getD (4*i+1) 0) * fact (d4tab.getD (4*i+2) 0) *
@@ -960,8 +1053,11 @@ theorem d4_squares : ∀ i, i < 96 → ∃ s,
   intro i hi
   have hall := (List.all_eq_true.mp d4_table) i (List.mem_range.mpr hi)
   obtain ⟨h1, h2, h3, h4, h5, hpar⟩ := of_decide_eq_true hall
+  have hbig : parAllX (fact (d4tab.getD (4*i+1) 0) * fact (d4tab.getD (4*i+2) 0) *
+      fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0)) = true :=
+    (parRow4_iff _ _ _ _ (by omega) (by omega) (by omega) (by omega)).mp hpar
   exact sq_of_parAllX _ (fun q hq hv =>
-    vp_fact4_bound q _ _ _ _ hq (by omega) (by omega) (by omega) (by omega) hv) hpar
+    vp_fact4_bound q _ _ _ _ hq (by omega) (by omega) (by omega) (by omega) hv) hbig
 
 /-- All 96 D₄ members are non-squares (so k = 2 is excluded by the D₂
 law; the k = 3 exclusion is engine/battery-side — honest scope). -/
@@ -985,6 +1081,13 @@ theorem erdos374_arsenal_bridge : arsenalBridgeProp :=
 
 /-! ## §10 THE MAIN THEOREM (everything assembled, unconditional). -/
 
+/-- The D₃ non-square census, statement form (the PROOF-IN-STATEMENT law:
+a conjunct is a Prop, never a proof name). -/
+def d3NonSqProp : Prop := d3ms.all (fun m => decide (sqTest m = false)) = true
+
+/-- The D₄ non-square census, statement form. -/
+def d4NonSqProp : Prop := d4ms.all (fun m => decide (sqTest m = false)) = true
+
 theorem erdos374_main :
     (∀ t, 2 ≤ t → ∃ a s, 1 ≤ a ∧ a < t * t ∧
         fact a * fact (t * t) = s * s) ∧
@@ -994,11 +1097,11 @@ theorem erdos374_main :
     (∀ i, i < 38 → ∃ s,
         fact (d3tab.getD (3*i+1) 0) * fact (d3tab.getD (3*i+2) 0) *
           fact (d3tab.getD (3*i) 0) = s * s) ∧
-    d3_non_squares ∧
+    d3NonSqProp ∧
     (∀ i, i < 96 → ∃ s,
         fact (d4tab.getD (4*i+1) 0) * fact (d4tab.getD (4*i+2) 0) *
           fact (d4tab.getD (4*i+3) 0) * fact (d4tab.getD (4*i) 0) = s * s) ∧
-    d4_non_squares ∧
+    d4NonSqProp ∧
     arsenalBridgeProp :=
   ⟨erdos374_family_D2, erdos374_D2_law, d3_squares, d3_non_squares,
     d4_squares, d4_non_squares, erdos374_arsenal_bridge⟩
