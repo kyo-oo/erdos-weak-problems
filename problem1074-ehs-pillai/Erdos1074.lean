@@ -77,7 +77,7 @@ theorem fact_dvd_of_le : ∀ m p, 1 ≤ p → p ≤ m → p ∣ fact m := by
       exact hd2
     · have hpe : p = n + 1 := Nat.le_antisymm h2 hge
       subst hpe
-      exact Nat.dvd_mul_left (n + 1) (fact n)
+      exact ⟨fact n, rfl⟩
 
 /-! ## §2 THE FACTOR-BOUND LAW (every prime factor of m!+1 exceeds m). -/
 
@@ -87,7 +87,7 @@ theorem erdos1074_factor_bound (m p : Nat) (hp : p.Prime)
   have hle : p ≤ m := by omega
   have h1 : 2 ≤ p := hp.two_le
   have hfp : 1 ≤ fact m := fact_pos m
-  have hfm : p ∣ fact m := fact_dvd_of_le m p h1 hle
+  have hfm : p ∣ fact m := fact_dvd_of_le m p (by omega) hle
   obtain ⟨c, hc⟩ := hdvd
   obtain ⟨d, hd⟩ := hfm
   have hkey : p * (c - d) = 1 := by
@@ -114,89 +114,17 @@ theorem erdos1074_finite_char (m : Nat) :
   · rintro ⟨p, _, _, hp, hdvd, hcong⟩
     exact ⟨p, hp, hdvd, hcong⟩
 
-/-! ## §4 The scan-based primality certificate. -/
+/-- The certified primes (norm_num route — the K18 precedent). -/
 
-def primeScan (p r : Nat) : Bool :=
-  (List.range (r + 1)).all (fun d => decide (d < 2 ∨ p % d ≠ 0))
+lemma prime_1697 : (1697 : Nat).Prime := by norm_num
 
-theorem prime_of_scan {p r : Nat} (h2 : 2 ≤ p) (hr1 : r * r ≤ p)
-    (hr2 : p < (r + 1) * (r + 1)) (hs : primeScan p r = true) : p.Prime := by
-  refine ⟨h2, ?_⟩
-  intro d hd
-  by_cases hd2 : d < 2
-  · rcases Nat.lt_or_ge d 1 with hd0 | hd1
-    · have hde : d = 0 := by omega
-      rw [hde] at hd
-      have hz : p = 0 := Nat.eq_zero_of_zero_dvd hd
-      omega
-    · have hde : d = 1 := by omega
-      rw [hde] at hd
-      exact Or.inl rfl
-  · by_cases hdr : d ≤ r
-    · exfalso
-      unfold primeScan at hs
-      have hall := (List.all_eq_true).mp hs
-      have hmem : d ∈ List.range (r + 1) := List.mem_range.mpr (by omega)
-      have hdcheck' : decide (d < 2 ∨ p % d ≠ 0) = true := hall d hmem
-      simp only [decide_eq_true_eq] at hdcheck'
-      rcases hdcheck' with hf | hf
-      · omega
-      · exact hf (Nat.dvd_iff_mod_eq_zero.mp hd)
-    · by_cases hdp : d = p
-      · exact Or.inr hdp
-      exfalso
-      have hdlep : d ≤ p := Nat.le_of_dvd (by omega) hd
-      have hmod : p % d = 0 := Nat.dvd_iff_mod_eq_zero.mp hd
-      have hdm := Nat.div_add_mod p d
-      have hk : d * (p / d) = p := by omega
-      have hk2 : 2 ≤ p / d := by
-        by_contra hkcon
-        have hle1 : p / d ≤ 1 := by omega
-        rcases (show p / d = 0 ∨ p / d = 1 by omega) with h0 | h1
-        · rw [h0, Nat.mul_zero] at hk
-          omega
-        · rw [h1, Nat.mul_one] at hk
-          omega
-      have hkr : p / d ≤ r := by
-        have hle1 : (r + 1) * (p / d) ≤ d * (p / d) :=
-          Nat.mul_le_mul_right (p / d) (by omega)
-        have hle2 : (r + 1) * (p / d) ≤ p := hle1.trans hk
-        have hlt2 : (r + 1) * (p / d) < (r + 1) * (r + 1) :=
-          Nat.lt_of_le_of_lt hle2 hr2
-        by_contra hcon2
-        have hge : r + 1 ≤ p / d := by omega
-        have hle3 : (r + 1) * (r + 1) ≤ (r + 1) * (p / d) :=
-          Nat.mul_le_mul_left (r + 1) hge
-        omega
-      have hkdiv : (p / d) ∣ p := by
-        rw [← hk]
-        exact Nat.dvd_mul_left d (p / d)
-      unfold primeScan at hs
-      have hall := (List.all_eq_true).mp hs
-      have hmem : p / d ∈ List.range (r + 1) := List.mem_range.mpr (by omega)
-      have hdcheck' : decide (p / d < 2 ∨ p % (p / d) ≠ 0) = true :=
-        hall (p / d) hmem
-      simp only [decide_eq_true_eq] at hdcheck'
-      rcases hdcheck' with hf | hf
-      · omega
-      · exact hf (Nat.dvd_iff_mod_eq_zero.mp hkdiv)
+lemma prime_67411 : (67411 : Nat).Prime := by norm_num
 
-/-- The certified primes (scan route for the big ones). -/
+lemma prime_329891 : (329891 : Nat).Prime := by norm_num
 
-lemma prime_1697 : (1697 : Nat).Prime :=
-  prime_of_scan (by norm_num) (by decide) (by decide) (by decide)
+lemma prime_2834329 : (2834329 : Nat).Prime := by norm_num
 
-lemma prime_67411 : (67411 : Nat).Prime :=
-  prime_of_scan (by norm_num) (by decide) (by decide) (by decide)
-
-lemma prime_329891 : (329891 : Nat).Prime :=
-  prime_of_scan (by norm_num) (by decide) (by decide) (by decide)
-
-lemma prime_2834329 : (2834329 : Nat).Prime :=
-  prime_of_scan (by norm_num) (by decide) (by decide) (by decide)
-
-lemma prime_39916801 : (39916801 : Nat).Prime :=
-  prime_of_scan (by norm_num) (by decide) (by decide) (by decide)
+lemma prime_39916801 : (39916801 : Nat).Prime := by norm_num
 
 /-! ## §5 THE EUCLID LIST LAW (p prime divides a product of primes
     from the list ⟹ p IS one of them). -/
@@ -256,143 +184,64 @@ theorem erdos1074_census19 :
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 2 [3]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse
-          · norm_num
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | norm_num | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 3 [7]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse
-          · norm_num
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | norm_num | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 4 [5, 5]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · norm_num
-          · norm_num
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · decide
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 5 [11, 11]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · norm_num
-          · norm_num
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · decide
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 6 [7, 103]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · norm_num
-          · norm_num
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · decide
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 7 [71, 71]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · norm_num
-          · norm_num
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | norm_num | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · decide
-          · decide
-          · exact hfalse.elim))
-    · intro hlist; simp at hlist
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim)) | intro hlist; simp at hlist | subst h; constructor | intro _; simp | intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 10 [11, 329891]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · norm_num
-          · exact prime_329891
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | norm_num | exact prime_329891 | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse
-          · decide
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | hfalse; first | decide | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 11 [39916801]
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse
-          · exact prime_39916801
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | exact prime_39916801 | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | hfalse
-          · decide
-          · exact hfalse.elim))
+        (by intro q hq; simp at hq; rcases hq with rfl | hfalse; first | decide | exact hfalse.elim))
     · intro hlist; simp at hlist
   · subst h; constructor
     · intro hm
       exact absurd hm (nonmember_of_cert 12 [13, 13, 2834329]
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse
-          · norm_num
-          · norm_num
-          · exact prime_2834329
-          · exact hfalse.elim)
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse; first | norm_num | norm_num | exact prime_2834329 | exact hfalse.elim)
         (by decide)
-        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse
-          · decide
-          · decide
-          · decide
-          · exact hfalse.elim))
-    · intro hlist; simp at hlist
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨83, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨59, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨661, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
-  · subst h; constructor
-    · intro _; simp
-    · intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
+        (by intro q hq; simp at hq; rcases hq with rfl | rfl | rfl | hfalse; first | decide | decide | decide | exact hfalse.elim)) | intro hlist; simp at hlist | subst h; constructor | intro _; simp | intro _; exact ⟨83, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨59, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨61, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨661, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨23, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩ | subst h; constructor | intro _; simp | intro _; exact ⟨71, by norm_num, (Nat.dvd_iff_mod_eq_zero).mpr (by decide), by decide⟩
 
 /-! ## §8 THE LARGE-MEMBER WITNESSES. -/
 
@@ -412,29 +261,27 @@ lemma mod_bridge (a p : Nat) (hp : 2 ≤ p) : p ∣ a + 1 ↔ a % p = p - 1 := b
   constructor
   · intro hdvd
     have h0 : (a + 1) % p = 0 := Nat.dvd_iff_mod_eq_zero.mp hdvd
-    have h1 : (a + 1) % p = ((a % p) + 1) % p := by
-      rw [Nat.add_mod, hone]
+    have h1 : (a % p + 1) % p = (a + 1) % p := by
+      rw [Nat.add_mod a 1 p, hone]
     rw [← h1] at h0
     rcases Nat.lt_or_ge (a % p + 1) p with hlt | hge
-    · have : (a % p + 1) % p = a % p + 1 := Nat.mod_eq_of_lt hlt
+    · have hz : (a % p + 1) % p = a % p + 1 := Nat.mod_eq_of_lt hlt
       omega
-    · have : (a % p + 1) % p = 0 := by
-        rcases Nat.lt_or_ge (a % p + 1) p with hlt2 | hge2
-        · exact absurd hlt2 (by omega)
-        · have heq : a % p + 1 = p := Nat.le_antisymm (by omega) hge
-          rw [heq]
-          exact Nat.mod_self p
+    · have heq : a % p + 1 = p := Nat.le_antisymm (by omega) hge
+      have hz : (a % p + 1) % p = 0 := by
+        rw [heq]
+        exact Nat.mod_self p
       omega
   · intro hmod
-    have h1 : (a % p + 1) % p = ((a + 1) % p) := by
-      rw [Nat.add_mod, hone]
+    have h1 : (a % p + 1) % p = (a + 1) % p := by
+      rw [Nat.add_mod a 1 p, hone]
     rw [hmod] at h1
-    have hzero : (p - 1 + 1) % p = 0 := by
+    have hz : (p - 1 + 1) % p = 0 := by
       have heq : p - 1 + 1 = p := by omega
       rw [heq]
       exact Nat.mod_self p
-    rw [h1] at hzero
-    exact (Nat.dvd_iff_mod_eq_zero).mpr hzero
+    rw [← h1] at hz
+    exact (Nat.dvd_iff_mod_eq_zero).mpr hz
 
 /-! ## §10 THE PILLAI DICTIONARY + WITNESS BOUND + TABLE. -/
 
@@ -482,8 +329,9 @@ theorem pillai_data :
 theorem pillai_primes : ∀ pm ∈ pillaiTab, pm.1.Prime := by
   intro pm hpm
   simp only [pillaiTab, List.mem_cons, List.mem_nil_iff, or_false] at hpm
-  rcases hpm with h | h | h | h | h | h | h | h | h | h | h | h | h | h | h |
-    h | h | h | h | h | h | h | h | h | h | h | h | h | h | h
+  rcases hpm with h | h | h | h | h | h | h | h | h | h |
+    h | h | h | h | h | h | h | h | h | h |
+    h | h | h | h | h | h | h | h | h | h
   all_goals first
     | (subst h; norm_num)
     | (subst h; exact prime_1697)
@@ -524,13 +372,13 @@ theorem erdos1074_main :
     (∀ pm ∈ pillaiTab, PillaiPrime pm.1) ∧
     erdos1074_arsenal_bridge :=
   ⟨fun m p hp hdvd => erdos1074_factor_bound m p hp hdvd,
-   fun m => erdos1074_finite_char m,
-   fun m h1 h19 => erdos1074_census19 m h1 h19,
-   erdos1074_large,
-   fun p m hp hm => erdos1074_pillai_bound p m hp hm,
-   fun m p hp => erdos1074_dictionary m p hp,
-   fun pm hpm => erdos1074_pillai_table pm hpm,
-   erdos1074_arsenal_bridge⟩
+   ⟨fun m => erdos1074_finite_char m,
+   ⟨fun m h1 h19 => erdos1074_census19 m h1 h19,
+   ⟨erdos1074_large,
+   ⟨fun p m hp hm => erdos1074_pillai_bound p m hp hm,
+   ⟨fun m p hp => erdos1074_dictionary m p hp,
+   ⟨fun pm hpm => erdos1074_pillai_table pm hpm,
+   erdos1074_arsenal_bridge⟩⟩⟩⟩⟩⟩⟩⟩
 
 #eval "ERDOS1074_EHS_KERNEL_GREEN"
 #print axioms erdos1074_factor_bound

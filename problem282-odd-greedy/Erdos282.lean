@@ -82,7 +82,7 @@ theorem erdos282_odd_closure (p q p' q' n g : Nat) (hq : q % 2 = 1)
 
 theorem erdos282_step_bound (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
     (hpq : p ≤ q) (hp1 : 1 ≤ p) : p' < 2 * p := by
-  obtain ⟨n, g, hnodd, hn1, hnge, hnmin, hg1, -, -, hp'g, -⟩ := hstep
+  obtain ⟨n, g, hnodd, hn1, hnge, hnmin, hg1, _, _, hp'g, _⟩ := hstep
   rcases hnmin with hn1case | hn2case
   · -- n = 1: q ≤ p·1 = p, so p = q, so p'·g = p − q = 0, so p' = 0
     have hqle : q ≤ p := by
@@ -90,7 +90,7 @@ theorem erdos282_step_bound (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
       exact hnge
     have hpe : p = q := Nat.le_antisymm hpq hqle
     rw [hn1case, Nat.mul_one, ← hpe, Nat.sub_self] at hp'g
-    rcases Nat.eq_zero_of_mul_eq_zero hp'g with h0 | h0
+    rcases Nat.mul_eq_zero.mp hp'g with h0 | h0
     · omega
     · omega
   · -- n ≥ 2: p' ≤ p·n − q and p·n = p·(n−2) + 2p
@@ -101,7 +101,7 @@ theorem erdos282_step_bound (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
     have hpn : p * (n - 2) + 2 * p = p * n := by
       rw [hcomm, ← hsplit, hn']
     have hle : p' ≤ p * n - q := by
-      have h1 : p' * 1 ≤ p' * g := Nat.mul_le_mul_right p' hg1
+      have h1 : p' * 1 ≤ p' * g := Nat.mul_le_mul_left p' hg1
       rw [Nat.mul_one] at h1
       rw [hp'g] at h1
       exact h1
@@ -112,7 +112,7 @@ theorem erdos282_step_bound (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
 /-- The minimal odd n ≥ q/p. -/
 def greedyN (p q : Nat) : Nat :=
   let n0 := (q + p - 1) / p
-  if n0 % 2 == 0 then n0 + 1 else n0
+  if n0 % 2 = 0 then n0 + 1 else n0
 
 /-- Structural fuel-gcd (kernel-friendly; correctness NOT needed — the
 step check certifies divisibility directly). -/
@@ -159,15 +159,12 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
   simp only [greedyN]
   set n0 := (q + p - 1) / p with hn0def
   have hF2 : q ≤ p * n0 := by omega
-  by_cases hb : (n0 % 2 == 0) = true
+  by_cases hb : n0 % 2 = 0
   · -- even branch: n = n0 + 1
-    have hn0e : n0 % 2 = 0 := Nat.eq_of_beq_eq_true hb
     rw [if_pos hb]
     have hmod1 : (n0 + 1) % 2 = 1 := by
-      have h1 : (n0 + 1) % 2 = (n0 % 2 + 1 % 2) % 2 := Nat.add_mod n0 1 2
-      rw [hn0e] at h1
-      norm_num at h1
-      exact h1
+      rw [Nat.add_mod n0 1 2, hb]
+      norm_num
     refine ⟨hmod1, by omega, ?_, ?_⟩
     · have hmul : p * (n0 + 1) = p * n0 + p := by
         rw [Nat.mul_add, Nat.mul_one]
@@ -189,15 +186,12 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
         omega
   · -- odd branch: n = n0
     have hlt2 : n0 % 2 < 2 := Nat.mod_lt n0 (by norm_num)
-    have hne : ¬ (n0 % 2 = 0) := by
-      intro hcon
-      exact hb (by simp [hcon])
     have hn0o : n0 % 2 = 1 := by omega
     rw [if_neg hb]
     have hn01 : 1 ≤ n0 := by
       by_cases hn0z : n0 = 0
       · rw [hn0z] at hb
-        exact absurd hb (by simp)
+        exact absurd hb (by norm_num)
       · omega
     refine ⟨hn0o, hn01, hF2, ?_⟩
     by_cases hn1c : n0 = 1
@@ -227,7 +221,7 @@ theorem stepValid_spec (p q n g : Nat) (h : stepValid p q n g = true) :
 theorem simTerm_sound : ∀ fuel p q, simTerm fuel p q = true → TerminateIn fuel p q := by
   intro fuel
   induction fuel with
-  | zero => intro p q h; simp only [simTerm] at h
+  | zero => intro p q h; simp only [simTerm] at h; exact Bool.noConfusion h
   | succ f ih =>
     intro p q h
     by_cases hp0 : p = 0
@@ -304,10 +298,10 @@ theorem erdos282_main :
     (∀ q p, q % 2 = 1 → q ≤ 41 → 1 ≤ p → p < q → ∃ k, TerminateIn k p q) ∧
     erdos282_arsenal_bridge :=
   ⟨fun p q p' q' n g hq hn hg heq => erdos282_odd_closure p q p' q' n g hq hn hg heq,
-   fun p q p' q' hstep hpq hp1 => erdos282_step_bound p q p' q' hstep hpq hp1,
-   fun fuel p q h => simTerm_sound fuel p q h,
-   fun q p hqodd hq41 hp1 hplt => erdos282_census q p hqodd hq41 hp1 hplt,
-   erdos282_arsenal_bridge⟩
+   ⟨fun p q p' q' hstep hpq hp1 => erdos282_step_bound p q p' q' hstep hpq hp1,
+   ⟨fun fuel p q h => simTerm_sound fuel p q h,
+   ⟨fun q p hqodd hq41 hp1 hplt => erdos282_census q p hqodd hq41 hp1 hplt,
+   erdos282_arsenal_bridge⟩⟩⟩⟩
 
 #eval "ERDOS282_STEIN_KERNEL_GREEN"
 #print axioms erdos282_odd_closure
