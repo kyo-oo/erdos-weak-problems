@@ -1,0 +1,6 @@
+=== (a) k=2 EXCLUSION CERTIFICATES: n in [2,2479] ===
+Traceback (most recent call last):
+  File "/home/z/my-project/erdos-weak-problems/problem396-prod-binomial/engine396_round2.py", line 50, in <module>
+    assert C % P != 0, f"n={n} DIVIDES — frontier broken!"
+           ~~^~~
+ZeroDivisionError: integer modulo by zero

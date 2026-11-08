@@ -31,6 +31,7 @@ on:
       - problem282-odd-greedy/**
       - problem954-rosen-sequence/**
       - problem1108-allprime/**
+      - problem396-prod-binomial/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -712,3 +713,33 @@ jobs:
           test "$(grep -cF '(1, 0, 1, 1, 0)' kernel30.log)" -ge 2
           python3 problem1108-allprime/battery1108ap.py
           echo ERDOS1108_ALLPRIME_KERNEL_GREEN=1
+      - name: "Kernel 31 - Erdos 396 THE DESCENDING-FACTORIAL DIVISIBILITY FRONTIER (S038 volley): n_0=1, n_1=2, and THE NEW CASE VALUE n_2=2480 EXACT (2480*2479*2478 | C(4960,2480), a 1492-digit binomial; margins v2,v7,v31,v37,v59,v67 all 0) + complete exclusion of every 1<=n<2480 in six NO-OOM chunk-decides + the absorption certificate (binom is the true binomial) + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel31.log
+          lake env lean problem396-prod-binomial/Erdos396.lean 2>&1 | tee -a kernel31.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel31.log
+          grep -F "ERDOS396_KERNEL_GREEN" kernel31.log
+          grep -E "Erdos396.(erdos396_k2|erdos396_frontier|erdos396_binomP_absorb|erdos396_arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel31.log
+          python3 problem396-prod-binomial/battery396.py
+          echo ERDOS396_KERNEL_GREEN=1
+      - name: "Kernel 32 - Erdos 686 THE k=3 SQUARE WITNESS LAWS (S038 volley): the five primitive edges (t,m,n) = (70,47,1), (4,13,4), (3,25,11), (1189,1679,13), (1798,13453,89) + THE CHAIN LAW (witness relations compose) + THE COMPOSITE t=4756=4*1189 (the 1679 double hit proved) + the six k=3 square classes 9, 16, 4900, 1413721, 3232804, 22619536 + arsenal bridge"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel32.log
+          lake env lean problem686-pell-ratio/Erdos686K3.lean 2>&1 | tee -a kernel32.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel32.log
+          grep -F "ERDOS686K3_KERNEL_GREEN" kernel32.log
+          grep -E "Erdos686K3.(erdos686k3_chain|edge4756|erdos686k3_rep1189|erdos686k3_rep4756|erdos686k3_existence|erdos686k3_main|erdos686k3_arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel32.log
+          python3 problem686-pell-ratio/battery686k3.py
+          echo ERDOS686K3_KERNEL_GREEN=1
