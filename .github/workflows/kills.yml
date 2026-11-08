@@ -30,6 +30,7 @@ on:
       - problem1074-ehs-pillai/**
       - problem282-odd-greedy/**
       - problem954-rosen-sequence/**
+      - problem1108-allprime/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
