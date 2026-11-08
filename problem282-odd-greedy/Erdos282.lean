@@ -162,7 +162,7 @@ theorem greedyN_spec (p q : Nat) (hp : 1 ≤ p) :
   obtain ⟨n0, hn0eq⟩ : ∃ n0, (q + p - 1) / p = n0 := ⟨_, rfl⟩
   have hmodlt : (q + p - 1) % p < p := Nat.mod_lt (q + p - 1) (by omega)
   have hdm : p * n0 + (q + p - 1) % p = q + p - 1 := by
-    rw [hn0eq]
+    rw [← hn0eq]
     exact Nat.div_add_mod (q + p - 1) p
   have hF2 : q ≤ p * n0 := by omega
   unfold greedyN
