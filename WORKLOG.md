@@ -1432,3 +1432,37 @@ Registry: 30 CI-green kills. 28 kernels in CI. The engine never stops.
 - ROUND 3 (commit 0253441): all fixes + K29 (#954 Rosen) fired with
   battery GREEN (the battery's own cnt2 bug — binary search hi = j
   instead of j+1 — caught by the dual-method discipline BEFORE CI).
+
+## SESSION 036 CLOSE — THE FIVE-KILL VOLLEY (run 42439522105 ALL GREEN)
+
+**KILLS LANDED THIS SESSION (the registry 28 → 33):**
+- **#29 (#686-squares)**: Kernel 26 — the square k=2 census (the
+  look-back order executed: the S029 square residue front closed).
+- **#30 (#961)**: Kernel 25 — the elementary smooth-run laws (the
+  5-round war; calc-orientation + hw.symm + the h4 bridge).
+- **#31 (#954)**: Kernel 29 — the Rosen sequence laws (the certified
+  46-term table + the count law; the NO-OOM window discipline).
+- **#32 (#1074)**: Kernel 27 — the EHS census + Pillai dictionary (the
+  5-round war; the Prime-structure law, the combinator-in-parens laws,
+  the proof-in-statement law, the or_false collapse).
+- **#33 (#282)**: Kernel 28 — the Stein odd-greedy termination laws
+  (the 7-round war; the minimality-disjunct leak, the let-local poison,
+  the obtain-opaque pattern).
+
+**34/34 kernel steps green in the final run.** The S036 lessons
+pre-registered into the campaign ledger: THE PRIME-STRUCTURE LAW
+(Nat.Prime is Irreducible-based — construct via norm_num or
+prime-def bridges, never ⟨⟩); THE COMBINATOR-IN-PARENS LAW (·, first|,
+<|> all illegal inside parenthesized (by ...) — hoist to top level);
+THE PROOF-IN-STATEMENT LAW (a main statement's conjunct must be a Prop
+— never a theorem name); THE OR_FALSE COLLAPSE; THE OBTAIN-OPAQUE
+PATTERN (set's let-bound locals poison omega through variable-divisor
+division values); THE HEARTBEAT CEILING (mass decides need
+maxHeartbeats raised).
+
+BOSS's four orders executed: NEW RULE format at birth (all four new
+kernels); MORE AGGRESSIVE (three new fronts opened + landed in one
+session); LOOK BACK (#686-squares — the S029-registered residue —
+closed); USE ALL THE MATHS (arsenal bridges in all kernels).
+
+*The engines never stop; they never lie.*

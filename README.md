@@ -507,6 +507,31 @@ Honest scope: the asymptotics and the (1+o(1))x upper bound remain
 open; the block law of the gaps breaks at block 5 — the derivation
 target.
 
+**KILL #33 — Erdős #282 THE ODD-GREEDY TERMINATION LAWS (Kernel 28, run
+42439522105 GREEN, the 7-round compile war):** THE ODD-CLOSURE LAW
+(starting from an odd-denominator rational, every odd-greedy step stays
+in the odd-denominator world — the conjecture's habitat is invariant)
+[propext, Quot.sound] GOLD + THE WELL-FORMEDNESS LAW (every greedy step
+at most DOUBLES the numerator: p′ < 2p) GOLD + THE SIMULATION SOUNDNESS
+(the certified Bool simulation implies a genuine greedy trajectory
+reaching exactly 0 — the gcd via structural fuel-recursion, the steps
+self-certifying) GOLD + THE TERMINATION CENSUS q ≤ 41 (every
+odd-denominator rational p/q ∈ (0,1) with q ≤ 41 terminates — 420
+pairs kernel-decided, deepest trajectory 12 steps at 38/39). Battery
+dual-method GREEN: 22,650 pairs with q ≤ 301 ALL terminate (deepest 20
+steps at 102/293). Honest scope: Stein's general conjecture remains
+open; the deep instances cannot be kernel-certified (10^5000-digit
+intermediates — battery evidence only).
+
+**KERNEL 28 WAR RECORD (7 rounds):** the beq-coercion family (Bool ==
+vs Prop =), the minimality-disjunct leak (n = 1 satisfies BOTH
+disjuncts — the second branch carries no n ≥ 2), the rw-auto-close,
+the self-mangling ←-rewrites, the S034 lesson's third strike, and THE
+LET-LOCAL POISON (set's n0 carries its variable-divisor division value
+— omega unfolds through it and loses Nat-ness — the phantom f ≤ −1
+models; killed by THE OBTAIN-OPAQUE PATTERN: obtain ⟨n0, hn0eq⟩ via an
+existential — a genuinely opaque fvar).
+
 **KERNEL 28 FIRED — Erdős #282 THE ODD-GREEDY TERMINATION LAWS (compile
 war round 1):** THE ODD-CLOSURE LAW (the odd-denominator habitat is
 invariant under every greedy step) + THE WELL-FORMEDNESS LAW (every step
