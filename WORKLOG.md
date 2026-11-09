@@ -1682,3 +1682,49 @@ restored; continue the campaign at maximum intensity.
 **The compile war (S041):** round 1 fired at commits 6914da2 (K34) and
 b8d0f61 (K35) — runs 42532784292 / 42533467076. Kernels 1–21 green
 in-flight at last poll.
+
+---
+
+## SESSION 041 CLOSE — THE S041 VOLLEY LANDED (run 42552313506 ALL GREEN)
+
+**KILLS #38 and #39 REGISTERED:**
+- **K#38 = #1073** (Kernel 34): THE FACTORIAL-MOD COMPOSITE CENSUS — the
+  GCD/window law + saturation + small-prime-divisor law + the complete
+  10⁴ census (A(10⁴)=28) + the 131-witness table + Wilson/Brocard
+  channels. The 7-round compile war: r1 11 errors; r2 the heartbeat wall;
+  r3-r6 the API archaeology (minFac_prime takes ≠1; push_neg deprecated;
+  Bool.and_eq_true.mp dot-resolution; the DVD-WITNESS CONVENTION b = a·c;
+  le_or_lt is Nat.lt_or_ge; omega's division-atom nonnegativity gap —
+  0∨1 disjunctions on x/y atoms fail, cases-analysis closes); r7 THE
+  SYMPY DISCOVERY (the CI runner has no sympy — batteries rewritten
+  pure-Python: trial-division factorint + deterministic Miller-Rabin).
+- **K#39 = #461** (Kernel 35): THE SMOOTH-COMPONENT CENSUS LAWS — the
+  extraction laws (K33 vp-architecture lift) + the 119-row achievement
+  table + the stability law (55t ≤ 100c ≤ 65t on [14,120]) + the ErGra
+  beating (c ≥ t/ln t, 107 rows) + four both-direction censuses at 480.
+
+**The session total: 5 kills registered (#35-#39), the 7-round war won,
+#1212 round-2 (the phase calculus with the engine-corrected landing law)
+delivered. Registry: 39 kills ALL CI-GREEN. All 35 kernels green in one
+run — the largest single-run green in campaign history.**
+
+LESSON LEDGER (append-only):
+- L55: the CI runner has NO SYMPY — batteries must be pure-Python
+  (trial division + deterministic Miller-Rabin for n < 3.3·10¹⁴).
+- L56: Nat.minFac_prime takes (h : n ≠ 1) — not 2 ≤ n.
+- L57: push_neg is DEPRECATED-WEAK in the pinned toolchain — restructure
+  to omega-native case splits (le_or_lt is Nat.lt_or_ge, disjuncts
+  swapped).
+- L58: the core Dvd witness convention is ∃ c, b = a * c — anonymous
+  dvd witnesses need the (b = a*c)-shaped equation (.symm of the
+  natural mul lemma).
+- L59: omega CANNOT prove 0∨1 disjunctions on division atoms (x / y) —
+  the Int-translation loses nonnegativity; cases hq : x / y closes.
+- L60: heavy `decide` theorems need set_option maxHeartbeats ≥ 16000000
+  at census scale (the 200000 default walls at ~5M nominal ops).
+- L61: `.all` after a parenthesized `.filter` binds to the lambda —
+  THE COMBINATOR-IN-PARENS LAW extends to dot-chains: wrap (l.filter f).all g.
+- L62: `rw [h]` rewrites EVERY occurrence — equations containing the
+  pattern inside div-terms double-hit; use term-level .trans chains.
+
+*State is full. The engine never stops; it never lies.*

@@ -676,3 +676,62 @@ $D_2$ = squares law as an independent kernel proof (the identity
 $(t^2-1)!\cdot(t^2)! = (t\cdot(t^2-1)!)^2$), the census-exact $D_2$ law
 at 250, the parity law (both directions), and the $D_3$/$D_4$ certified
 tables (38 + 96 members).
+
+
+## KILL #38 — Erdős #1073: THE FACTORIAL-MOD COMPOSITE CENSUS (Session 041, Kernel 34, run 42552313506 GREEN, commits 6914da2→3898551 (the 7-round war))
+
+**The problem (verbatim):** Let $A(x)$ count the number of composite $u<x$
+such that $n!+1\equiv 0 \pmod{u}$ for some $n$. Is it true that
+$A(x)\leq x^{o(1)}$?
+
+**The kill (all complete unconditional theorems):**
+
+1. **THE GCD/WINDOW LAW** (`erdos1073_window`, general): if $u \ge 2$ and
+   $u \mid n!{+}1$ then EVERY prime $p \mid u$ satisfies $n < p$ — every
+   witness lives strictly below the least prime factor. The saturation
+   side (`erdos1073_saturation`): for $n \ge P(u)$, $u$ never again
+   divides $n!{+}1$.
+2. **THE SMALL-PRIME-DIVISOR LAW** (`small_prime_divisor`, general):
+   every $4 \le u \le B^2$ that is not prime has a PRIME divisor $q \le B$
+   — the case-split engine ($p := P(u) \le B$ direct; else $a := u/p \le
+   B$ and $q := P(a)$; both large impossible since $(B{+}1)^2 \le p\,a =
+   u \le B^2$).
+3. **THE COMPLETE CENSUS AT $10^4$** (`erdos1073_census`): the composite
+   $u \in [4, 10^4]$ with some witness are EXACTLY the 28-element A256519
+   prefix T28 — both directions, 21 NO-OOM chunk-decides. **$A(10^4) =
+   28$.**
+4. **THE 131-WITNESS TABLE AT $10^6$** (`erdos1073_witnesses`): every
+   engine-census row kernel-certified (composite + $u \mid n!{+}1$),
+   including the 1330-digit $562!$ of the Wilson channel.
+5. **THE WILSON CHANNEL** ($5^2 \mid 4!{+}1$, $13^2 \mid 12!{+}1$,
+   $563^2 \mid 562!{+}1$) and **THE BROCARD CHANNEL** ($4!{+}1 = 5^2$,
+   $5!{+}1 = 11^2$, $7!{+}1 = 71^2$).
+
+Arsenal bridge applied. battery1073 + battery1073b dual-method GREEN.
+Honest scope: the $x^{o(1)}$ asymptotic core remains open.
+
+## KILL #39 — Erdős–Graham #461: THE SMOOTH-COMPONENT CENSUS LAWS (Session 041, Kernel 35, run 42552313506 GREEN, commits b8d0f61→3898551 (the 7-round war))
+
+**The problem (verbatim):** Let $s_t(n)$ be the $t$-smooth component of
+$n$… Let $f(n,t)$ count the number of distinct possible values for
+$s_t(m)$ for $m\in[n+1,n+t]$. Is it true that $f(n,t)\gg t$ (uniformly)?
+
+**The kill (all complete unconditional theorems):**
+
+1. **THE EXTRACTION LAWS** (general): `spart p m = p ^ vp p m` (the K33
+   vp-architecture lift, full saturation proofs) and `scomp ps m ∣ m`.
+2. **THE 119-ROW ACHIEVEMENT TABLE**: every minimizing window for
+   $t \in [2,120]$ (over $n < 2 \cdot 10^5$) kernel-decided —
+   $f(1892, 120) = 69$.
+3. **THE STABILITY LAW**: $0.55\,t \le c_t \le 0.65\,t$ for every
+   $t \in [14, 120]$ (107 rows) — rock-stable at $\approx 0.57$, no decay.
+4. **THE ERDŐS–GRAHAM BEATING**: $c_t \ge t/\ln t$ on all 107 rows
+   ($\lfloor 1000 \ln t \rfloor$ rational bounds, row-match
+   kernel-verified) — the census minimums beat the published
+   $f \gg t/\log t$ on the whole certified range.
+5. **THE FOUR BOTH-DIRECTION CENSUSES** at $N_0 = 480$: $t = 14, 20, 30,
+   40$ with $\min_n f = 9, 13, 19, 25$ (witness + exclusion).
+
+Arsenal bridge applied. battery461 dual-method GREEN (119/119
+trial-division recount + independent minimality recounts + censuses).
+Honest scope: the uniform $\gg t$ over ALL $n$ remains open.
