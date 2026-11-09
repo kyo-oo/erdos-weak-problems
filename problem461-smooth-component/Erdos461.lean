@@ -282,11 +282,11 @@ theorem spart_dvd (p : Nat) (hp : 2 ≤ p) (m : Nat) : spart p m ∣ m := by
       intro n hn
       have hn0 : n = 0 := by omega
       subst hn0
-      exact ⟨0, Nat.mul_one 0⟩
+      exact ⟨0, (Nat.mul_zero _).symm⟩
     | succ f ih =>
       intro n hn
       cases n with
-      | zero => exact ⟨0, Nat.mul_one 0⟩
+      | zero => exact ⟨0, (Nat.mul_zero _).symm⟩
       | succ N =>
         have e1 : spf p (f + 1) (N + 1) =
             if (N + 1) % p = 0 then p * spf p f ((N + 1) / p) else 1 := rfl
@@ -299,11 +299,11 @@ theorem spart_dvd (p : Nat) (hp : 2 ≤ p) (m : Nat) : spart p m ∣ m := by
           have hsplit : (N + 1) = p * ((N + 1) / p) := by
             have := Nat.div_add_mod (N + 1) p
             omega
-          refine Nat.mul_dvd_mul ⟨1, Nat.one_mul p⟩ ih2 |>.trans ?_
+          refine Nat.mul_dvd_mul ⟨1, (Nat.mul_one p).symm⟩ ih2 |>.trans ?_
           rw [hsplit]
-          exact ⟨1, Nat.one_mul (p * ((N + 1) / p))⟩
+          exact ⟨1, (Nat.mul_one (p * ((N + 1) / p))).symm⟩
         · rw [if_neg hmod]
-          exact ⟨N + 1, Nat.mul_one (N + 1)⟩
+          exact ⟨N + 1, (Nat.one_mul (N + 1)).symm⟩
   exact key m m (Nat.le_refl m)
 
 /-- The smooth component divides its argument (every prime list). -/
@@ -311,7 +311,7 @@ theorem scomp_dvd : ∀ (ps : List Nat), (∀ p ∈ ps, 2 ≤ p) → ∀ m : Nat
     scomp ps m ∣ m := by
   intro ps
   induction ps with
-  | nil => intro _ m; exact ⟨m, Nat.mul_one m⟩
+  | nil => intro _ m; exact ⟨m, (Nat.one_mul m).symm⟩
   | cons p ps ih =>
       intro hall m
       have hp2 : 2 ≤ p := hall p (List.mem_cons_self)
@@ -319,7 +319,7 @@ theorem scomp_dvd : ∀ (ps : List Nat), (∀ p ∈ ps, 2 ≤ p) → ∀ m : Nat
       have hsplit : spart p m * (m / spart p m) = m := mul_div_own _ _ hsp
       have hrest := ih (fun q hq => hall q (List.mem_cons_of_mem p hq))
         (m / spart p m)
-      refine Nat.mul_dvd_mul ⟨1, Nat.one_mul (spart p m)⟩ hrest |>.trans ?_
+      refine Nat.mul_dvd_mul ⟨1, (Nat.mul_one (spart p m)).symm⟩ hrest |>.trans ?_
       exact ⟨1, by rw [hsplit, Nat.mul_one]⟩
 
 /-! ## §2 The achievement table (all 119 minimizing windows, n < 2·10^5). -/

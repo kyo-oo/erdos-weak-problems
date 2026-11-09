@@ -244,15 +244,22 @@ theorem small_prime_divisor (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
   have hsplit : Nat.minFac u * (u / Nat.minFac u) = u := mul_div_own _ _ hdvd
   -- a := u / minFac u ≥ 2 (a ≤ 1 forces u = 0 or u = minFac u, both dead)
   have ha2 : 2 ≤ u / Nat.minFac u := by
-    rcases (show u / Nat.minFac u = 0 ∨ u / Nat.minFac u = 1 ∨
-        2 ≤ u / Nat.minFac u by omega) with h0 | h1 | h2
-    · rw [h0] at hsplit
-      simp at hsplit
-      omega
-    · rw [h1, Nat.mul_one] at hsplit
-      rw [hsplit] at hmin
-      exact hnpr hmin
-    · exact h2
+    rcases le_or_lt 2 (u / Nat.minFac u) with hge | hlt
+    · exact hge
+    · have ha1 : u / Nat.minFac u ≤ 1 := by omega
+      cases hq : u / Nat.minFac u with
+      | zero =>
+          rw [hq] at hsplit
+          simp at hsplit
+          omega
+      | succ k =>
+          cases k with
+          | zero =>
+              rw [hq] at hsplit
+              simp at hsplit
+              rw [hsplit] at hmin
+              exact (hnpr hmin).elim
+          | succ k' => omega
   rcases (show Nat.minFac u ≤ B ∨ B < Nat.minFac u by omega) with hpB | hpB
   · exact ⟨Nat.minFac u, hmin, hdvd, hpB⟩
   -- B < p: then a = u/p must be ≤ B, else (B+1)² ≤ p·a = u ≤ B²
@@ -268,7 +275,7 @@ theorem small_prime_divisor (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
   have hamdvd : Nat.minFac (u / Nat.minFac u) ∣ (u / Nat.minFac u) :=
     Nat.minFac_dvd _
   have hau : (u / Nat.minFac u) ∣ u :=
-    ⟨Nat.minFac u, by rw [Nat.mul_comm]; exact hsplit⟩
+    ⟨Nat.minFac u, by rw [Nat.mul_comm]; exact hsplit.symm⟩
   exact ⟨Nat.minFac (u / Nat.minFac u), hamin, Nat.dvd_trans hamdvd hau,
     Nat.le_trans (Nat.le_of_dvd (by omega) hamdvd) haB⟩
 
@@ -331,7 +338,7 @@ theorem comp_of_not_prime (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
     · exact h
     · have hqu : u = q := by omega
       rw [← hqu] at hqpr
-      exact hnpr hqpr
+      exact (hnpr hqpr).elim
   have hmod : u % q = 0 := Nat.mod_eq_zero_of_dvd hqdvd
   simp only [compScan, Bool.and_eq_true]
   refine ⟨Nat.ble_eq.mpr (by omega), ?_⟩
