@@ -5,7 +5,37 @@ engine (spf-sieve cascade) and the Lean kernel: sympy primality,
 direct big-int factorial divisibility, brute window scans."""
 import math
 import random
-from sympy import isprime, factorint
+
+def isprime(n):
+    """Pure-Python deterministic Miller-Rabin (valid for n < 3.3e14)."""
+    if n < 2:
+        return False
+    for p in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37):
+        if n % p == 0:
+            return n == p
+    d, s = n - 1, 0
+    while d % 2 == 0:
+        d //= 2
+        s += 1
+    for a in (2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37):
+        x = pow(a, d, n)
+        if x in (1, n - 1):
+            continue
+        for _ in range(s - 1):
+            x = x * x % n
+            if x == n - 1:
+                break
+        else:
+            return False
+    return True
+
+def smallest_prime_factor(n):
+    d = 2
+    while d * d <= n:
+        if n % d == 0:
+            return d
+        d += 1
+    return n
 
 T28 = [25, 121, 169, 437, 551, 667, 721, 1037, 1159, 1273, 1349, 1403, 1541,
        1769, 1943, 2209, 2329, 2363, 2419, 3071, 3713, 4087, 5041, 5111,
@@ -74,7 +104,7 @@ for _ in range(200):
     u = random.randrange(4, 10**6)
     if isprime(u):
         continue
-    P = min(factorint(u))
+    P = smallest_prime_factor(u)
     for n in range(1, min(P, 700)):
         if (math.factorial(n) + 1) % u == 0:
             check(n < P, f"L1 violation u={u} n={n} P={P}")

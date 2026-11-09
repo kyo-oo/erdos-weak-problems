@@ -1,7 +1,19 @@
 #!/usr/bin/env python3
 """BATTERY 1073 — dual-method verification of the round-1 census."""
 import math
-from sympy import factorint
+
+def factorint(n):
+    """Pure-Python trial-division factorization (n <= 10^6: trivial)."""
+    f = {}
+    d = 2
+    while d * d <= n:
+        while n % d == 0:
+            f[d] = f.get(d, 0) + 1
+            n //= d
+        d += 1
+    if n > 1:
+        f[n] = f.get(n, 0) + 1
+    return f
 
 X = 10**6
 spf = list(range(X + 1))
