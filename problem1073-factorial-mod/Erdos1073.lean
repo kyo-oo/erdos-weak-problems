@@ -244,8 +244,7 @@ theorem small_prime_divisor (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
   have hsplit : Nat.minFac u * (u / Nat.minFac u) = u := mul_div_own _ _ hdvd
   -- a := u / minFac u ≥ 2 (a ≤ 1 forces u = 0 or u = minFac u, both dead)
   have ha2 : 2 ≤ u / Nat.minFac u := by
-    rcases le_or_lt 2 (u / Nat.minFac u) with hge | hlt
-    · exact hge
+    rcases Nat.lt_or_ge (u / Nat.minFac u) 2 with hlt | hge
     · have ha1 : u / Nat.minFac u ≤ 1 := by omega
       cases hq : u / Nat.minFac u with
       | zero =>
@@ -260,6 +259,7 @@ theorem small_prime_divisor (B u : Nat) (h4 : 4 ≤ u) (huB : u ≤ B * B)
               rw [hsplit] at hmin
               exact (hnpr hmin).elim
           | succ k' => omega
+    · exact hge
   rcases (show Nat.minFac u ≤ B ∨ B < Nat.minFac u by omega) with hpB | hpB
   · exact ⟨Nat.minFac u, hmin, hdvd, hpB⟩
   -- B < p: then a = u/p must be ≤ B, else (B+1)² ≤ p·a = u ≤ B²

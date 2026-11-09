@@ -300,8 +300,7 @@ theorem spart_dvd (p : Nat) (hp : 2 ≤ p) (m : Nat) : spart p m ∣ m := by
             have := Nat.div_add_mod (N + 1) p
             omega
           refine Nat.mul_dvd_mul ⟨1, (Nat.mul_one p).symm⟩ ih2 |>.trans ?_
-          rw [hsplit]
-          exact ⟨1, (Nat.mul_one (p * ((N + 1) / p))).symm⟩
+          exact ⟨1, hsplit.trans (Nat.mul_one (p * ((N + 1) / p)))⟩
         · rw [if_neg hmod]
           exact ⟨N + 1, (Nat.one_mul (N + 1)).symm⟩
   exact key m m (Nat.le_refl m)
