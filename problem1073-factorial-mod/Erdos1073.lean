@@ -4,6 +4,7 @@ import Arsenal.CardinalWorldsV2
 
 -- Family pattern (green kernels K21/K26/K30): explicit depth headroom.
 set_option maxRecDepth 262144
+set_option maxHeartbeats 16000000
 
 /-! # Erdős #1073 — THE FACTORIAL-MOD COMPOSITE CENSUS (S041 volley, Kernel 34)
 

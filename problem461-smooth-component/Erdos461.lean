@@ -4,7 +4,7 @@ import Arsenal.CardinalWorldsV2
 
 -- Family pattern (green kernels K21/K26/K30): explicit depth headroom.
 set_option maxRecDepth 262144
-set_option maxHeartbeats 8000000
+set_option maxHeartbeats 16000000
 
 /-! # Erdős–Graham #461 — THE SMOOTH-COMPONENT CENSUS LAWS (S041 volley, Kernel 35)
 
