@@ -824,3 +824,22 @@ jobs:
           grep -F "[]" kernel36.log
           python3 problem271-status/battery271growth.py
           echo ERDOS271_GROWTH_KERNEL_GREEN=1
+      - name: "Kernel 37 - Erdos 404 THE RESIDUAL-TAIL CLASS LAW (S042 full-proof campaign, P404 strike): for every m>=3, prime p with (m-1)*(m-1)!+1 < p, seed a = p-m mod p, and distinct-index sets B: v_p(a! + sum_B i!) = v_p(a!) EXACTLY — f(a,p) = v_p(a!) on the whole two-parameter class family (the Kill-#15 p|a+1 class generalized to the residual tail: unit-block coins = signed falling factorials (-1)^j*ff(m,j), all multiples of m-1 bounded by (m-1)*(m-1)!, the pigeonhole count <= m-1, the Int-mod congruence layer, the small-multiple obstruction, Euclid's multiplicative law) + the m=3 class theorem (p >= 7, a = p-3 mod p) + arsenal bridge + battery404tail dual-method"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel37.log
+          lake env lean problem404-full/ResidualTail.lean 2>&1 | tee -a kernel37.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel37.log
+          grep -F "ERDOS404_RESIDUAL_TAIL_KERNEL_GREEN" kernel37.log
+          grep -E "erdos404_residual_tail' (does not depend on any axioms|depends on axioms)" kernel37.log
+          grep -E "erdos404_class_p_minus_3' (does not depend on any axioms|depends on axioms)" kernel37.log
+          grep -E "erdos404t_arsenal_bridge' (does not depend on any axioms|depends on axioms)" kernel37.log
+          grep -c "0" kernel37.log > /dev/null
+          python3 problem404-full/battery404tail.py
+          echo ERDOS404_RESIDUAL_TAIL_KERNEL_GREEN=1
+
