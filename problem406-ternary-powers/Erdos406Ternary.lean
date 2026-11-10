@@ -169,7 +169,7 @@ theorem tern01_of_tfold : ∀ (b : List Bool) (f : Nat), tfold b < 3 ^ f →
         · have hc := cond_le_one d
           have hdiv : (3 * tfold b' + cond d 1 0) / 3 = tfold b' := by omega
           rw [hdiv]
-          rw [Nat.pow_succ] at hf
+          rw [tfold_cons, Nat.pow_succ] at hf
           have hf' : tfold b' < 3 ^ f' := by omega
           exact ih f' hf'
 
