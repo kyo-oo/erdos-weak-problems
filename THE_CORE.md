@@ -829,3 +829,49 @@ invoked FIRST and visibly; ALL the maths used.
 
 | 38 | **1073** | **THE FACTORIAL-MOD COMPOSITE CENSUS**: THE GCD/WINDOW LAW (u ∣ n!+1 ⟹ every prime p ∣ u has n < p — the witness window [1, P(u))) + THE SATURATION LAW + THE SMALL-PRIME-DIVISOR LAW (general: every 4 ≤ u ≤ B² non-prime has a PRIME divisor ≤ B — the p/a case-split engine, (B+1)² ≤ pa ≤ B², zero leastness API) + THE COMPLETE CENSUS AT 10⁴ (both directions, 21 NO-OOM chunk-decides at the 480 discipline, A(10⁴) = 28 = the A256519 prefix T28) + THE 131-WITNESS TABLE AT 10⁶ (every row composite + u ∣ n!+1 kernel-decided; the 1330-digit 562! Wilson channel + the 918! deepest row) + THE BROCARD CHANNEL (4!+1=25, 5!+1=121, 7!+1=5041); all 10 theorems [propext, Classical.choice, Quot.sound] / [propext, Quot.sound]; batteries 1073+1073b dual-method GREEN (pure-Python after the sympy discovery) | **run 42552313506 GREEN, Kernel 34 (S041, the 7-round war)** |
 | 39 | **461** | **THE SMOOTH-COMPONENT CENSUS LAWS**: THE EXTRACTION LAWS (spart p m = p^vp p m — the K33 vp-architecture lift with full saturation proofs; scomp ps m ∣ m) + THE 119-ROW ACHIEVEMENT TABLE (every t ∈ [2,120]'s minimizing window over n < 2·10⁵ kernel-decided; f(1892,120) = 69) + THE STABILITY LAW (t ∈ [14,120]: 55t ≤ 100·c_t ≤ 65t — 107 rows, the honest band correcting the DERIVATION's optimistic 0.62) + THE ERDŐS–GRAHAM BEATING (c_t ≥ t/ln t on all 107 rows via ⌊1000 ln t⌋ rational bounds, the row-match kernel-verified — the census minimums beat the published t/log t on the whole certified range) + THE FOUR BOTH-DIRECTION CENSUSES at N₀=480 (t=14,20,30,40: min = 9,13,19,25 with witness + exclusion in 240-chunks); battery461 dual-method GREEN (119/119 trial-division recount + independent minimality recounts) | **run 42552313506 GREEN, Kernel 35 (S041, the 7-round war)** |
+
+---
+
+## §14. SESSION 043 ADDENDUM (2026-11-10) — THE WAVE-1 CONTINUATION
+
+**BOSS's chain law executed:** MATHS (Berserker) + prove-that-shit
+loaded and internalized FIRST, visibly, at session open. The S042
+full-proof campaign continues.
+
+**LANDED / IN FLIGHT:**
+- **K36/K37 CONFIRMED GREEN** (run 42823225484) — the compile war closed
+  at round 6. Registry 39 kills green.
+- **KERNEL 38 (#406 — BOSS's own front)**: THE TERNARY CENSUS LAW —
+  below 2^500 the 0/1-ternary-digit powers of 2 are EXACTLY {1, 4, 256}
+  + THE MOD-3 PARITY LAW (all odd exponents excluded, general) + THE
+  MOD-8 BUDGET LAW (E+3O ≡ 0 mod 8 for k ≥ 3, general) + THE SEMANTIC
+  LAW (checker ⟺ distinct-powers-of-3 representation, lt_three_cases
+  APPLIED). CI round 1: 8 root causes (the Iff-Decidability death —
+  no Decidable (a ↔ b) at the pin, the census redesigned pure-Bool; the
+  exponentiation threshold 1000 for 2^500 kernel evals; the BEq/Nat.beq
+  simpa bridge; the pow_le_pow_right signature rebuild). Round 2 pushed.
+- **#396 k=3 WITNESS: n₃ = 8178** (dual-method verified; the engine's
+  carry formula /(p−1) bug caught — false positives only, never false
+  negatives). Kernel 39 drafted (K31 architecture); battery396k3 GREEN
+  (full exclusion 4..8177, witness-prime census: 3 (1475×), 2 (982×),
+  5 (833×), 7 (752×)…).
+- **#1056:** no k=12 below p = 190,000; new k=11-class witnesses 109379,
+  111641. **#686:** zero missing-class squares at k=4..10, t ≤ 400,
+  n ≤ 60,000. **#203:** palette budget 2.1444 ≥ 1 (1003 primes; the
+  0.81 flat-lane verdict REVERSED); greedy DFS stuck at 0.7076 — THE
+  ALIGNMENT LAW (coverings need lattice chains, not density; the 1D
+  nested-moduli pattern). Palette banked; chain-planning = next round.
+
+**THE LEDGER (S043 additions):**
+- **L75 (THE REAPER):** background processes die at Bash-invocation end
+  (setsid/disound do not escape); engines run foreground in ≤ 9-min
+  chunks; cwd resets between invocations (absolute paths ALWAYS); `|
+  head` SIGPIPE-kills producers before file writes.
+- **L76 (THE IFF-DECIDABILITY LAW):** this pin has NO Decidable instance
+  for Prop-level Iff inside decide-checkers — census predicates are
+  PURE BOOL (checker == expected) with the Prop-bridge proven separately
+  (cases + simp), never `decide (p ↔ q)`.
+- **L77 (THE THRESHOLD LAW):** the kernel refuses exponentiation with
+  exponent > 256 by default (a WARNING, then unevaluated terms) —
+  `set_option exponentiation.threshold 1000` is the legal cap for
+  2^500-class kernel evals (the NO-OOM law: never above 1000).

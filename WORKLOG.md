@@ -1938,3 +1938,86 @@ appended; the r1 "no error" reading was an abort-suppression illusion);
 (3) THE FALSE-TAUTOLOGY TRAP (L74): `show K = 0 ∨ 0 < K by omega` is NOT a
 tautology (K < 0 kills it) — the sign-cases restated as the genuine
 trichotomy `K < 0 ∨ K = 0 ∨ 0 < K` in ONE rcases.
+
+---
+
+## SESSION 043 — THE FULL-PROOF CAMPAIGN, WAVE 1 CONTINUES (2026-11-10)
+
+**BOSS's standing orders:** the S042 full-proof campaign (Phase 1: 22
+case-kills → complete proofs; Phase 2: 17 attempted → complete proofs;
+Arsenal-only; MATHS + prove-that-shit loaded and internalized first —
+the chain law executed visibly at session open).
+
+**State at open:** K36 (#271 growth law) + K37 (#404 residual-tail class)
+BOTH GREEN (run 42823225484 — the compile war won). Registry 39 kills.
+
+**THE WAVE-1 CONTINUATION FIRED:**
+
+1. **KERNEL 38 (#406, BOSS's own front)** — THE TERNARY CENSUS LAW: the
+   only powers of 2 below 2^500 that are sums of distinct powers of 3
+   (0/1 ternary digits) are EXACTLY 1, 4, 256 (kernel census, 480+21
+   chunks, fuel 700) + THE MOD-3 PARITY LAW (every odd exponent excluded,
+   GENERAL, unconditional: the units ternary digit of a 0/1-digit number
+   is ≤ 1 but 2^(2j+1) ≡ 2 mod 3) + THE MOD-8 BUDGET LAW (k ≥ 3: E + 3O ≡
+   0 mod 8, the even/odd digit-count budget via the altsum machinery) +
+   THE SEMANTIC LAW (the fuel checker ⟺ the distinct-powers-of-3
+   representation; the Arsenal lt_three_cases trichotomy APPLIED in the
+   proof) + the arsenal bridge (isTernaryDigit on 256's digits,
+   carryAtPos_bound, v2r_ternary_scaling at (8,256)) + battery406
+   dual-method (divmod digits ∥ base-3 array doubling) ALL GREEN locally.
+   **CI round 1 (run 42891534769, dba7d1bc): 8 root causes** — the BEq/
+   Nat.beq unification gap (simpa bridge), 2× tfold_nil.symm, the
+   rw+ring tail on pow_succ, the WRONG hypothesis rewrite in mod8_budget
+   (h1 carries tfold, not h2), **THE IFF-DECIDABILITY DEATH** (no
+   Decidable (a ↔ b) instance at this pin — the census redesigned as
+   censusCheckB pure-Bool + the iff bridge + implication form), **THE
+   EXPONENTIATION THRESHOLD** (kernel refuses 2^500 at default 256 —
+   set_option exponentiation.threshold 1000, the NO-OOM legal cap), and
+   the pin's Nat.pow_le_pow_right signature mismatch (replaced by the
+   Nat.pow_add split + mul_le_mul_left construction). Round 2 pushed.
+
+2. **THE #396 k=3 WITNESS LANDED (engine)** — n₃ = 8178: 8178·8177·8176·8175
+   | C(16356, 8178), verified DUAL-METHOD (direct big-integer division,
+   4915-digit binomial; + the Kummer/Legendre carry method). **THE ENGINE
+   BUG CAUGHT AND FIXED:** the carry formula needed /(p−1) — v_p(C(2n,n))
+   = (2s_p(n) − s_p(2n))/(p−1) — the unfixed engine overcounted odd-prime
+   margins (false positives only; n₃ = 8178 survived the fix — zero hits
+   below it, leniency never hides witnesses). Kernel 39 (the witness +
+   K31-architecture absorption certificate + bridge) drafted;
+   battery396k3 GREEN (full exclusion 4..8177 by witness primes: census
+   top = 3 (1475×), 2 (982×), 5 (833×), 7 (752×)…; direct sample 299
+   values incl. [8100,8178) all excluded; methods agree).
+
+3. **THE #1056 k=12 HUNT (engine, negative so far):** no 13-fold repeat
+   in the j! chain below p = 190,000; NEW k=11-class witnesses recorded:
+   p = 109379 (value 61812), p = 111641 (value 27555) — the frontier
+   k=11 witness table extends beyond 52163. Scan continues in chunks.
+
+4. **THE #686 SQUARE FRONT (engine, negative census):** ZERO missing-class
+   squares (t = 2, odd t, t ≡ 0 mod 4) at k = 4..10, t ≤ 400, n ≤ 60,000
+   (the root-window method validated on all six known k=3 witnesses).
+   The missing square classes resist small k — the deeper Pell-type
+   theory or k ≥ 11 is the next front.
+
+5. **THE #203 TREE ENGINE (the complete-proof lane):** THE PALETTE — 1003
+   primes q ≤ 3·10⁵ with h_q = lcm(ord_q 2, ord_q 3) ≤ 5000, **density
+   budget Σ 1/h_q = 2.1444 ≥ 1** (the flat-lane 0.81 verdict REVERSED —
+   the palette was too small). Full lattice algebra implemented (Smith
+   kernel_lattice, BFS coset reps, split_region, free re-absorption).
+   **THE GREEDY DFS NEGATIVE (the alignment law):** min-m greedy with 975
+   primes: STUCK at density 0.7076, 745,118 frontier regions, zero
+   absorption events — density alone cannot cover; random-transverse
+   cosets cap at 1 − e^(−Σ1/h) ≈ 0.88. THE COVERING NEEDS LATTICE-CHAIN
+   ALIGNMENT (the 1D nested-moduli pattern: 2, 4, 8…). Palette banked in
+   palette203.txt + P203/PROOF.md §5; the chain-planning search is the
+   next round's design.
+
+**THE HARNESS LAW RELEARNED (L75):** every background process launched by
+a Bash invocation is reaped at invocation end (setsid/disown do NOT
+escape — the reaper is invocation-scoped, not session-scoped); engines
+run FOREGROUND IN CHUNKS (≤ 9 min each). The cwd resets between
+invocations — absolute paths everywhere. A `| head` on a producing pipe
+SIGPIPE-kills the producer BEFORE its file writes (the palette203.txt
+lesson).
+
+**CI STATE:** K38 round 2 in flight. K39 (#396 k=3) drafted and ready.
