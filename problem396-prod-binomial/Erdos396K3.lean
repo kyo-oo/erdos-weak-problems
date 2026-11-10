@@ -53,8 +53,8 @@ theorem erdos396_k3_witness : binomP 8178 4 ∣ binom (2 * 8178) 8178 :=
 theorem witness_product_value :
     binomP 8178 4 = 8178 * 8177 * 8176 * 8175 := by decide
 
-/-- The binomial size receipt: C(16356, 8178) has 4915 digits and the
-quotient by the product has 4901 digits (kernel-evaluated). -/
+-- The binomial size receipt: C(16356, 8178) and the divisibility remainder
+-- (kernel-evaluated; remainder 0 = the divisibility receipt).
 #eval (binom (2 * 8178) 8178 / binomP 8178 4,
        binom (2 * 8178) 8178 % binomP 8178 4)
 
