@@ -26,9 +26,22 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
    RAW UNCONDITIONAL PROOFS, PUMPING, WE ARE BULLDOZING"
 
 **Standing battlefield constraints (never violate):**
-- **#406 is BOSS's OWN front — HANDS OFF.** It is the anchor summit.
-- **#404 and #271 are CROSSED (BOSS-confirmed).** Off the hunt list; their
-  remaining cores are secondary fronts.
+- **S042 (BOSS, THE FULL-PROOF CAMPAIGN — supersedes S030 for #271/#404):**
+  "fuck my certifications, i dont approve 271 and 404 problem proofs" —
+  the #271/#404 certifications are **WITHDRAWN**. Both problems re-enter the
+  full-proof queue at maximum priority. The S030 "case closed" order is
+  RESCINDED for these two. **Every problem gets a sub-agent + intelligent
+  boost (MATHS + prove-that-shit doctrine).** ONLY repo math (the Arsenal,
+  16,021 theorems — no external black-box theorems). **Phase 1: the 22
+  problems carrying case/class-level kills are upgraded to COMPLETE
+  proofs (#271, #404, #406, #261, #686, #727, #1108, #1056, #700, #1063,
+  #451, #1072, #394, #711, #961, #954, #1074, #282, #396, #374, #1073,
+  #461). Phase 2: the 17 attempted problems (#306, #348, #288, #1212,
+  #389, #708, #939, #203, #273, #885, #677, #850, #274, #243, #124, #317,
+  #289) all fully proven.** COMPLETE PROOF = the problem's verbatim ask,
+  unconditional, Lean, CI-green. Nothing gets left out.
+- **#406: re-admitted to Phase 1 by the S042 order** (BOSS's own front, now
+  under army attack per his directive — the anchor summit stays his).
 - **NOT finite-check-value** — "NOT FINITE CHECK VALUE LIKE PUSSY" — engines
   verify; they do not substitute for the theorem. (Engine censuses are
   allowed as EVIDENCE inside a kill, never as the kill itself.)
