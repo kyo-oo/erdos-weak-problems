@@ -42,6 +42,7 @@ import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
 set_option maxHeartbeats 8000000
+set_option maxRecDepth 4096
 
 -- ===========================================================================
 -- §1  THE BLOCKING PREDICATE
@@ -71,7 +72,7 @@ theorem stepFree_of_forall {l : List Nat} {y : Nat}
   by_contra hc
   have hf : stepFree l y = false := by
     cases hcc : stepFree l y with
-    | true => rw [hcc] at hc; exact hc rfl
+    | true => rw [hcc] at hc; exact absurd rfl hc
     | false => rfl
   obtain ⟨a, b, ha, hb, hlt, heq⟩ := (stepFree_false_iff.mp hf)
   exact h a ha b hb hlt heq
@@ -101,7 +102,7 @@ theorem findFree_ge_start (l : List Nat) : ∀ (y fuel : Nat), y ≤ findFree l 
       simp only [findFree]
       split
       · exact Nat.le_refl y
-      · exact Nat.le_trans (Nat.le_refl y) (ih (y + 1))
+      · exact Nat.le_trans (Nat.le_succ y) (ih (y + 1))
 
 theorem findFree_le (l : List Nat) : ∀ (y fuel : Nat), findFree l y fuel ≤ y + fuel := by
   intro y fuel
@@ -139,7 +140,8 @@ theorem findFree_free_or_edge (l : List Nat) : ∀ (y fuel : Nat),
   | succ f ih =>
       simp only [findFree]
       split
-      · exact Or.inl rfl
+      · rename_i hc
+        exact Or.inl hc
       · rcases ih (y + 1) with h | h
         · exact Or.inl h
         · exact Or.inr (by omega)
@@ -178,10 +180,10 @@ theorem aSeq_one (n : Nat) : aSeq n 1 = n := rfl
 theorem sq_ne_nil (n : Nat) : ∀ k, sqSeq n k ≠ [] := by
   intro k
   cases k with
-  | zero => intro h; exact List.noConfusion h
+  | zero => intro h; simp [sqSeq] at h
   | succ k' =>
       cases k' with
-      | zero => intro h; exact List.noConfusion h
+      | zero => intro h; simp [sqSeq] at h
       | succ k'' =>
           intro h
           have h1 : sqSeq n (k'' + 2) = sqNext (sqSeq n (k'' + 1)) := by
@@ -195,6 +197,8 @@ theorem sq_step (n j : Nat) (hj : 2 ≤ j) :
       :: sqSeq n (j - 1) := by
   obtain ⟨k, hk⟩ : ∃ k, j = k + 2 := ⟨j - 2, by omega⟩
   subst hk
+  have hj1 : k + 2 - 1 = k + 1 := by omega
+  rw [hj1]
   have h1 : sqSeq n (k + 2) = sqNext (sqSeq n (k + 1)) := by
     simp only [sqSeq]
   rw [h1]
@@ -238,7 +242,8 @@ theorem strictDec_head_max {l : List Nat} (h : StrictDec l) (x : Nat) (hx : x �
   | nil => simp at hx
   | cons a t =>
       rcases List.mem_cons.mp hx with he | ht
-      · simp only [lhead, he]
+      · simp only [lhead]
+        omega
       · have hlt := h.1 x ht
         simp only [lhead]
         omega
@@ -265,13 +270,14 @@ theorem sq_strict (n : Nat) (hn : 1 ≤ n) : ∀ k, StrictDec (sqSeq n k) ∧ 0 
           cases hs : sqSeq n (k'' + 1) with
           | nil => exact absurd hs (sq_ne_nil n (k'' + 1))
           | cons a t =>
+              rw [hs] at hdec hzero
               have h2 : aSeq n (k'' + 1) = a := by
                 simp only [aSeq, hs, lhead]
               rw [h2]
               refine ⟨⟨?_, hdec⟩, List.mem_cons_of_mem _ hzero⟩
               · intro b hb
                 rcases List.mem_cons.mp hb with he | ht
-                · rw [← he]
+                · rw [he]
                   have hge := findFree_ge_start (a :: t) (a + 1) (a + 1)
                   omega
                 · have hba := hdec.1 b ht
@@ -285,7 +291,7 @@ theorem nodup_of_strictDec : ∀ (l : List Nat), StrictDec l → l.Nodup
         nodup_of_strictDec t hdec⟩
 
 theorem sq_nodup (n k : Nat) (hn : 1 ≤ n) : (sqSeq n k).Nodup :=
-  nodup_of_strictDec _ (sq_strict n k hn).1
+  nodup_of_strictDec _ (sq_strict n hn k).1
 
 theorem sq_length (n : Nat) : ∀ k, (sqSeq n k).length = k + 1 := by
   intro k
@@ -304,6 +310,7 @@ theorem sq_length (n : Nat) : ∀ k, (sqSeq n k).length = k + 1 := by
               have h2 : (sqSeq n (k'' + 1)).length = k'' + 2 := ih
               rw [hs] at h2
               simp only [sqNext, List.length_cons]
+              simp only [List.length_cons] at h2
               omega
 
 theorem aSeq_mem (n : Nat) (k : Nat) : aSeq n k ∈ sqSeq n k := by
@@ -313,7 +320,7 @@ theorem aSeq_mem (n : Nat) (k : Nat) : aSeq n k ∈ sqSeq n k := by
       have ha : aSeq n k = a := by
         simp only [aSeq, hk, lhead]
       rw [ha]
-      exact List.mem_cons_self _
+      exact List.mem_cons_self
 
 theorem sq_mem_iff (n : Nat) : ∀ (k x : Nat),
     x ∈ sqSeq n k ↔ ∃ i, i ≤ k ∧ aSeq n i = x
@@ -359,8 +366,8 @@ theorem sq_mem_iff (n : Nat) : ∀ (k x : Nat),
       constructor
       · intro hx
         rcases List.mem_cons.mp hx with he | ht
-        · exact ⟨k + 2, Nat.le_refl _, by rw [hhead]; exact he⟩
-        · obtain ⟨i, hi, heq⟩ := sq_mem_iff n (k + 1) x ht
+        · exact ⟨k + 2, Nat.le_refl _, by rw [hhead]; exact he.symm⟩
+        · obtain ⟨i, hi, heq⟩ := sq_mem_iff n (k + 1) x |>.mp ht
           exact ⟨i, by omega, heq⟩
       · intro h
         obtain ⟨i, hi, heq⟩ := h
@@ -372,7 +379,7 @@ theorem sq_mem_iff (n : Nat) : ∀ (k x : Nat),
         · have hie : i = k + 2 := by omega
           subst hie
           rw [← heq, ← hhead]
-          exact List.mem_cons_self _
+          exact List.mem_cons_self
 
 -- ===========================================================================
 -- §5  MONOTONICITY
@@ -436,7 +443,7 @@ theorem growth_G3 (n : Nat) (hn : 1 ≤ n) (k : Nat) (hk : 1 ≤ k) :
     aSeq n (k + 1) ≤ 2 * aSeq n k + 1 := by
   have hhead := aSeq_step_eq n k hk
   have hmax : ∀ x ∈ sqSeq n k, x ≤ aSeq n k :=
-    fun x hx => strictDec_head_max (sq_strict n k hn).1 x hx
+    fun x hx => strictDec_head_max (sq_strict n hn k).1 x hx
   have hz : stepFree (sqSeq n k) (2 * aSeq n k + 1) = true :=
     two_a_plus_one_free _ _ hmax
   have hleast := findFree_least (sqSeq n k) (aSeq n k + 1) (aSeq n k + 1)
@@ -453,9 +460,17 @@ theorem apFree_sq (n : Nat) (hn : 1 ≤ n) : ∀ (k x y z : Nat),
       simp only [sqSeq, List.mem_singleton] at hx hy hz
       omega
   | 1, x, y, z, hx, hy, hz, hxy, _ => by
-      simp only [sqSeq, List.mem_cons, List.mem_singleton] at hx hy hz
-      rcases hx with hex | hex <;> rcases hy with hey | hey <;>
-        rcases hz with hez | hez <;> omega
+      have hx' : x = n ∨ x = 0 := by
+        simp only [sqSeq] at hx
+        simpa [List.mem_cons, List.mem_singleton, List.not_mem_nil] using hx
+      have hy' : y = n ∨ y = 0 := by
+        simp only [sqSeq] at hy
+        simpa [List.mem_cons, List.mem_singleton, List.not_mem_nil] using hy
+      have hz' : z = n ∨ z = 0 := by
+        simp only [sqSeq] at hz
+        simpa [List.mem_cons, List.mem_singleton, List.not_mem_nil] using hz
+      rcases hx' with hex | hex <;> rcases hy' with hey | hey <;>
+        rcases hz' with hez | hez <;> omega
   | k + 2, x, y, z, hx, hy, hz, hxy, hyz => by
       have hstep := sq_next n (k + 1) (by omega)
       rw [hstep] at hx hy hz
@@ -464,7 +479,7 @@ theorem apFree_sq (n : Nat) (hn : 1 ≤ n) : ∀ (k x y z : Nat),
             (aSeq n (k + 1) + 1) := aSeq_step_eq n (k + 1) (by omega)
       have hc_max : ∀ w ∈ sqSeq n (k + 1), w < aSeq n (k + 2) := by
         intro w hw
-        have hd : StrictDec (sqSeq n (k + 2)) := (sq_strict n (k + 2) hn).1
+        have hd : StrictDec (sqSeq n (k + 2)) := (sq_strict n hn (k + 2)).1
         rw [hstep] at hd
         have hlt := hd.1 w (List.mem_cons_of_mem _ hw)
         omega
@@ -482,10 +497,11 @@ theorem apFree_sq (n : Nat) (hn : 1 ≤ n) : ∀ (k x y z : Nat),
           · -- z is the head: x + head = 2y with x < y in the tail —
             -- exactly the blocked pattern, but the head is free
             have hG3 := growth_G3 n hn (k + 1) (by omega)
+            rw [show k + 1 + 1 = k + 2 from by omega] at hG3
             have hfree := findFree_free_or_edge (sqSeq n (k + 1))
               (aSeq n (k + 1) + 1) (aSeq n (k + 1) + 1)
             rcases hfree with h | h
-            · rw [hez] at h
+            · rw [← hez] at h
               exact forall_of_stepFree h x hex y hey hxy
             · omega
           · exact apFree_sq n hn (k + 1) x y z hex hey hez hxy hyz
@@ -561,7 +577,7 @@ theorem skip_to_index (n : Nat) (hn : 1 ≤ n) {k y : Nat} (hk : 1 ≤ k)
           subst hij
           omega
   · omega
-  · rw [← hia, ← hjb]
+  · rw [hia, hjb]
     exact heq
 
 /-- Interval localization: a non-member strictly between `a_1` and `a_m`
@@ -585,7 +601,9 @@ theorem interval_loc (n : Nat) (hn : 1 ≤ n) : ∀ (m y : Nat), 2 ≤ m →
               exact ⟨k, hk1, by omega, hk3, hk4⟩
           | inr hge =>
               have hne : aSeq n (m - 1) ≠ y := hnm (m - 1) (by omega) (by omega)
-              exact ⟨m - 1, by omega, by omega, by omega, hmy⟩
+              refine ⟨m - 1, by omega, by omega, by omega, ?_⟩
+              rw [show m - 1 + 1 = m from by omega]
+              exact hmy
       | inr hle =>
           have hm2 : m = 2 := by omega
           subst hm2
@@ -603,8 +621,8 @@ theorem consec_even (k : Nat) : k * (k + 1) % 2 = 0 := by
   obtain ⟨t, ht⟩ | ⟨t, ht⟩ := Nat.even_or_odd k
   · have hE : k * (k + 1) = 2 * (t * (k + 1)) := by rw [ht]; ring
     omega
-  · have hm2 : k - 1 = 2 * t := by omega
-    have hE : k * (k + 1) = 2 * (k * (t + 1)) := by rw [hm2]; ring
+  · have hk1 : k + 1 = 2 * (t + 1) := by omega
+    have hE : k * (k + 1) = 2 * (k * (t + 1)) := by rw [hk1]; ring
     omega
 
 theorem pairList_length : ∀ m, (pairList m).length = m * (m + 1) / 2 := by
@@ -614,7 +632,8 @@ theorem pairList_length : ∀ m, (pairList m).length = m * (m + 1) / 2 := by
   | succ m' ih =>
       simp only [pairList, List.length_append, pairBlock, List.length_map,
         List.length_range, ih]
-      have hring : (m' + 1) * (m' + 2)
+      rw [show m' + 2 = m' + 1 + 1 from by omega]
+      have hring : (m' + 1) * (m' + 1 + 1)
           = (m' + 1) + m' * (m' + 1) + (m' + 1) := by ring
       have h1 := consec_even m'
       have h2 := consec_even (m' + 1)
@@ -640,7 +659,8 @@ theorem pairList_mem : ∀ (m i j : Nat), (i, j) ∈ pairList m ↔ i < j ∧ j 
           subst r1
           subst r2
           exact ⟨hi', Nat.le_refl _⟩
-        · exact pairList_mem m i j |>.mp hr
+        · obtain ⟨hl1, hl2⟩ := pairList_mem m i j |>.mp hr
+          exact ⟨hl1, by omega⟩
       · intro h
         obtain ⟨hlt, hle⟩ := h
         cases Nat.lt_or_ge j (m + 1) with
@@ -669,7 +689,8 @@ theorem pairList_mem_snd {m : Nat} {p : Nat × Nat} (hp : p ∈ pairList m) :
       simp only [pairList, List.mem_append] at hp
       rcases hp with hl | hr
       · rw [pairBlock_mem_snd hl]
-      · exact ih hr
+      · have h2 := ih hr
+        omega
 
 theorem pairBlock_nodup (j : Nat) : (pairBlock j).Nodup := by
   induction j with
@@ -713,7 +734,7 @@ theorem lfind_some {p : Nat × Nat → Bool} : ∀ {l : List (Nat × Nat)}
       · rename_i hp
         injection h with h'
         subst h'
-        exact ⟨List.mem_cons_self _ _, hp⟩
+        exact ⟨List.mem_cons_self, hp⟩
       · have hih := ih h
         exact ⟨List.mem_cons_of_mem _ hih.1, hih.2⟩
 
@@ -727,12 +748,12 @@ theorem lfind_isSome {p : Nat × Nat → Bool} : ∀ (l : List (Nat × Nat))
       · subst he
         simp only [lfind]
         split
-        · intro hc; exact Option.noConfusion hc
+        · intro hc; simp at hc
         · rename_i hn
           exact absurd hp hn
       · simp only [lfind]
         split
-        · intro hc; exact Option.noConfusion hc
+        · intro hc; simp at hc
         · exact ih ht hp
 
 /-- The canonical blocker-pair selector: the first `(i, j)` in the
@@ -782,12 +803,12 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
     aSeq n m ≤ n + (m - 1) * (m + 2) / 2 := by
   intro m hm
   cases Nat.lt_or_ge 1 m with
-  | inl hlt =>
+  | inr hle =>
       have hm1 : m = 1 := by omega
       subst hm1
       have ha1 : aSeq n 1 = n := rfl
       omega
-  | inr h2 =>
+  | inl h2 =>
       have ha1 : aSeq n 1 = n := rfl
       have hmono : aSeq n 1 < aSeq n m := aSeq_mono_lt n hn (by omega)
       set A := aSeq n m with hA
@@ -816,7 +837,7 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
           simp only [Finset.mem_insert, Finset.mem_singleton] at hx
           rcases hx with rfl | rfl | rfl
           · simp only [List.mem_toFinset]
-            exact (sq_strict n m hn).2
+            exact (sq_strict n hn m).2
           · simp only [List.mem_toFinset]
             rw [sq_mem_iff n m]
             exact ⟨1, by omega, rfl⟩
@@ -844,8 +865,12 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
         have hcalc := calc
           (Finset.Ico (n + 1) A ∩ (sqSeq n m).toFinset).card
               ≤ ((sqSeq n m).toFinset \ {0, n, A}).card := Finset.card_le_card hsub2
-          _ = ((sqSeq n m).toFinset).card - ({0, n, A} : Finset Nat).card :=
-            Finset.card_sdiff h3
+          _ = ((sqSeq n m).toFinset).card
+              - (({0, n, A} : Finset Nat) ∩ (sqSeq n m).toFinset).card :=
+            Finset.card_sdiff
+        have hinter : (({0, n, A} : Finset Nat) ∩ (sqSeq n m).toFinset).card
+            = ({0, n, A} : Finset Nat).card := by
+          rw [Finset.inter_eq_self_of_subset_left h3]
         omega
       -- the rejected side: the pigeonhole
       have hcover : ∀ y ∈ (Finset.Ico (n + 1) A \ (sqSeq n m).toFinset),
@@ -894,7 +919,10 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
               rw [← hfp]
               exact himg y hyR)
           _ = (pairList (m - 1)).length := List.toFinset_card (pairList_nodup _)
-          _ = (m - 1) * m / 2 := pairList_length _
+          _ = (m - 1) * m / 2 := by
+              have hpl := pairList_length (m - 1)
+              rw [show m - 1 + 1 = m from by omega] at hpl
+              exact hpl
       -- the arithmetic finish
       have heven1 : (m - 1) * m % 2 = 0 := by
         obtain ⟨t, ht⟩ | ⟨t, ht⟩ := Nat.even_or_odd m
@@ -910,9 +938,9 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
         · have hm2 : m - 1 = 2 * t := by omega
           have hE : (m - 1) * (m + 2) = 2 * (t * (m + 2)) := by rw [hm2]; ring
           omega
-      have hdm1 : (m - 1) * m / 2 * 2 + (m - 1) * m % 2 = (m - 1) * m :=
+      have hdm1 : 2 * ((m - 1) * m / 2) + (m - 1) * m % 2 = (m - 1) * m :=
         Nat.div_add_mod _ 2
-      have hdm2 : (m - 1) * (m + 2) / 2 * 2 + (m - 1) * (m + 2) % 2
+      have hdm2 : 2 * ((m - 1) * (m + 2) / 2) + (m - 1) * (m + 2) % 2
           = (m - 1) * (m + 2) := Nat.div_add_mod _ 2
       have hring : (m - 1) * (m + 2) = (m - 1) * m + 2 * (m - 1) := by ring
       omega
