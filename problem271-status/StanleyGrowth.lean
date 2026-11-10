@@ -575,7 +575,7 @@ theorem skip_to_index (n : Nat) (hn : 1 ≤ n) {k y : Nat} (hk : 1 ≤ k)
         cases Nat.lt_or_ge j i with
         | inl hlt =>
             have hmono := aSeq_mono_lt n hn hlt
-            rw [← hia, ← hjb] at hmono
+            rw [hia, hjb] at hmono
             omega
         | inr heg =>
           have hij : i = j := by omega
@@ -698,8 +698,7 @@ theorem pairList_mem_snd {m : Nat} {p : Nat × Nat} (hp : p ∈ pairList m) :
 
 theorem pairBlock_nodup (j : Nat) : (pairBlock j).Nodup := by
   simp only [pairBlock]
-  exact List.Nodup.map (fun a b h => by injection h with h1 _; exact h1)
-    (List.nodup_range j)
+  exact List.Nodup.map (fun a b h => by injection h with _ _) List.nodup_range
 
 theorem pairList_nodup : ∀ m, (pairList m).Nodup
   | 0 => List.nodup_nil

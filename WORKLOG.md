@@ -1888,3 +1888,36 @@ proof: `by decide` on the ground equation (the r1 rw+omega died on rw's
 auto-rfl).
 
 CI round 4 fired on both kernels.
+
+---
+
+## SESSION 042 (continued) — ROUND 5: the 13-error strike (68 → 13 → 0-target)
+
+**Round-4 verdict (run 42808299946):** K36 r4 3 errors, K37 r2 10 errors
+(down from 21+47). EVERY root cause extracted and struck:
+
+**K36 r5 (3 fixes):** (1) skip_to_index: sq_mem_iff's witness equations are
+`aSeq n i = a` (NOT `a = aSeq n i`) — the rw direction flipped to
+`rw [hia, hjb] at hmono`; (2) pairBlock_nodup: `List.nodup_range` at the pin
+takes NO explicit argument (the term alone unifies) and Lean 4.33's
+`injection` AUTO-SUBSTITUTES the component equation and closes the goal —
+the trailing `exact h1` and the `j` argument were both errors;
+(3) — (all three in one commit with K37).
+
+**K37 r3 (8 fixes):** (1) `0 % p = 0` is NOT defeq-0 at variable p —
+`Nat.zero_mod` appended to mod_zero_of_dvd's chain; (2) THE PRIME-BLINDNESS
+LAW (L73): omega CANNOT see `Nat.Prime p` — every `by omega : 0 < p` inside
+vpad_mul_nondiv died — `have hp2 : 2 ≤ p := hp.two_le` planted at the succ
+branch's head feeds every omega below; (3) `rfl` proves Eq, NOT `1 ≤ ff m 0`
+— ff_pos's zero case is `by simp [ff]`; (4) ff_dvd's |1 case needed
+`e0 : ff m 0 = 1` before ring (the atom ff m 0 ≠ 1 for ring); (5)
+`List.length_map` at the pin has implicit args — bare term under the
+ascription; (6-8) `Int.lt_or_ge` and `Int.eq_zero_or_pos` DO NOT EXIST at
+this pin — the T/K sign-cases restated as `rcases (show P ∨ Q by omega)`
+(omega proves linear disjunctions natively — the zero-name-risk case split).
+
+VERIFIED WORKING in round 4 (no errors): the whole divisibility architecture
+— coin_dvd's linear_combination step, bsum_diff_dvd, bsum_bounds,
+block_count's map_on/Nat.card_Ico/toFinset_card_of_nodup pigeonhole, the
+m=3 class theorem's `by decide`, the arsenal bridge (v2r resolved —
+erdos404t_arsenal_bridge depends on NO sorryAx).

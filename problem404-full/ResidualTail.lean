@@ -214,7 +214,7 @@ theorem vpad_step (p n : Nat) (hp : 2 ≤ p) (hn : 1 ≤ n) (hd : n % p = 0) :
 -- ===========================================================================
 
 theorem mod_zero_of_dvd (x p c : Nat) (h : x = p * c) : x % p = 0 := by
-  rw [h, Nat.mul_mod, Nat.mod_self, Nat.zero_mul]
+  rw [h, Nat.mul_mod, Nat.mod_self, Nat.zero_mul, Nat.zero_mod]
 
 /-- **The multiplicative law.**  For `p` prime and `p ∤ u ≥ 1`:
 `v_p (x·u) = v_p (x)` for every `x ≥ 1`.  Fuel induction on `x`; the
@@ -227,6 +227,7 @@ theorem vpad_mul_nondiv (p : Nat) (hp : Nat.Prime p) :
   | zero => intro x u hF hx _ _; omega
   | succ F ih =>
     intro x u hF hx hu hu0
+    have hp2 : 2 ≤ p := hp.two_le
     by_cases hx0 : x % p = 0
     · -- p ∣ x: step both sides down by one p
       have hmod := Nat.div_add_mod x p
@@ -321,7 +322,7 @@ def ff (m : Nat) : Nat → Nat
   | j + 1 => ff m j * (m - 1 - j)
 
 theorem ff_pos (m : Nat) : ∀ j, j ≤ m - 1 → 1 ≤ ff m j
-  | 0, _ => rfl
+  | 0, _ => by simp [ff]
   | j + 1, hj => by
       have hge : 1 ≤ m - 1 - j := by omega
       exact one_le_mul_nat _ _ (ff_pos m j (by omega)) hge
@@ -329,9 +330,10 @@ theorem ff_pos (m : Nat) : ∀ j, j ≤ m - 1 → 1 ≤ ff m j
 theorem ff_dvd (m : Nat) : ∀ j, 1 ≤ j → (m - 1) ∣ ff m j
   | 0, h => absurd h (by omega)
   | 1, _ => by
+      have e0 : ff m 0 = 1 := rfl
       have h1 : ff m 1 = ff m 0 * (m - 1) := rfl
       refine ⟨1, ?_⟩
-      rw [h1]
+      rw [h1, e0]
       ring
   | j + 2, _ => by
       have h1 : ff m (j + 2) = ff m (j + 1) * (m - 1 - (j + 1)) := rfl
@@ -544,7 +546,7 @@ theorem block_count (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
     List.toFinset_card_of_nodup hnd2
   rw [hcard2] at hcard
   have hlen : ((B.filter (fun i => i - a < m)).map (fun i => i - a)).length
-      = (B.filter (fun i => i - a < m)).length := List.length_map _ _
+      = (B.filter (fun i => i - a < m)).length := List.length_map
   omega
 
 /-- **The final two-sided block bound.**  `−(m−1)·(m−1)! ≤ bsumI ≤ (m−1)·(m−1)!`. -/
@@ -635,7 +637,7 @@ theorem erdos404_residual_tail (m p : Nat) (hm : 3 ≤ m) (hp : Nat.Prime p)
     have hDgt : -((p : ℕ) : ℤ) < (1 : ℤ) + bsumI m a B := by omega
     -- the t-cases force 1 + bsumI = 0
     have hzero : (1 : ℤ) + bsumI m a B = 0 := by
-      rcases Int.lt_or_ge (((q : ℕ) : ℤ) - C) 0 with hTn | hTp
+      rcases (show (((q : ℕ) : ℤ) - C) < 0 ∨ (0 : ℤ) ≤ (((q : ℕ) : ℤ) - C) by omega) with hTn | hTp
       · obtain ⟨s, hs⟩ : ∃ s, ((q : ℕ) : ℤ) - C = -1 - s :=
           ⟨-(((q : ℕ) : ℤ) - C) - 1, by omega⟩
         have hps : (0 : ℤ) ≤ ((p : ℕ) : ℤ) * s :=
@@ -644,7 +646,7 @@ theorem erdos404_residual_tail (m p : Nat) (hm : 3 ≤ m) (hp : Nat.Prime p)
             = -((p : ℕ) : ℤ) - ((p : ℕ) : ℤ) * s := by
           rw [hs]; ring
         omega
-      · rcases Int.eq_zero_or_pos (((q : ℕ) : ℤ) - C) with hT0 | hT0
+      · rcases (show (((q : ℕ) : ℤ) - C) = 0 ∨ (0 : ℤ) < (((q : ℕ) : ℤ) - C) by omega) with hT0 | hT0
         · rw [hD, hT0, Int.mul_zero]
         · obtain ⟨s, hs⟩ : ∃ s, ((q : ℕ) : ℤ) - C = 1 + s :=
             ⟨((q : ℕ) : ℤ) - C - 1, by omega⟩
@@ -659,10 +661,10 @@ theorem erdos404_residual_tail (m p : Nat) (hm : 3 ≤ m) (hp : Nat.Prime p)
     have hb1 : ((m - 1 : ℕ) : ℤ) * K = -1 := by omega
     have hm2 : (2 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) := by
       exact_mod_cast (by omega : (2 : Nat) ≤ m - 1)
-    rcases Int.eq_zero_or_pos K with hK0 | hK0
+    rcases (show K = 0 ∨ (0 : ℤ) < K by omega) with hK0 | hK0
     · have hkk : ((m - 1 : ℕ) : ℤ) * K = 0 := by rw [hK0, Int.mul_zero]
       omega
-    · rcases Int.lt_or_ge K 0 with hKn | hKp
+    · rcases (show K < 0 ∨ (0 : ℤ) ≤ K by omega) with hKn | hKp
       · obtain ⟨s, hs⟩ : ∃ s, K = -1 - s := ⟨-K - 1, by omega⟩
         have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
           Int.mul_nonneg (by omega) (by omega)
