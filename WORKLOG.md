@@ -1756,3 +1756,20 @@ parallel Task volleys are a loaded gun (L63).**
 P727 → P1056 — the two de-certified problems first, then the deepest
 Phase-1 residuals. Each agent: own clone, own branch agent/P{X}-full,
 full CI compile war, registry updates on-branch, commander merges serial.
+
+**INCIDENT 2 + THE ARCHITECTURE VERDICT (L63 final):** a SECOND rollback
+wiped /home/z/wave1 entirely (all six clones + briefs + the dead opus
+agent's battery271.py architecture spec). MECHANISM CONFIRMED: every Task
+launch that overruns its deadline triggers a sandbox filesystem rollback
+— failed launches are DESTRUCTIVE, not neutral. Tiny probe agents (<30s)
+are safe; mission agents are impossible. **VERDICT: the sub-agent relay
+via the Task tool is architecturally dead in this harness. The FULL-PROOF
+CAMPAIGN executes COMMANDER-DIRECT (the proven 39-kill pipeline), with the
+intelligent boost (MATHS + prove-that-shit, internalized) applied at every
+step, and push-after-every-milestone discipline (GitHub = the only
+wipe-proof store; proven twice today).** The dead opus agent's #271
+architecture is RECOVERED FROM CONTEXT: Kernel A StanleyGrowth.lean (G1
+universal quadratic ceiling a_m ≤ n + (m-1)(m+2)/2 via blocking-pair
+pigeonhole; G2 a_m ≥ 3(m-1)/2; G3 a_{k+1} ≤ 2a_k+1) + Kernel B
+StanleyType1.lean (the A(2) two-sided law) + battery271 triple-method.
+Commander rebuild begins immediately.
