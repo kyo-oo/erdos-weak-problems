@@ -31,3 +31,13 @@ NOT the raw lcm sweep (lcm(F) ~ 10¹⁵⁺).
 
 **Status:** construction lane OPEN, round 3 designed. The five-round clock
 started at round 1 (the annealing); rounds 2a–2i = round 2.
+
+**Round-3 first strike (273k, the sieve-greedy):** the window-greedy plateaus
+(37,566 → 23,718 gaps over 400 repair trials, 2.3% of the window at x≈900+;
+density 1.465 with 67 moduli ≤ 400). LAW (L-F): the first-uncovered-x greedy
+locks bad mid-range coverage; the classical constructions eat WHOLE gap
+residue-classes (m | M kills the frontier node), which is the split-tree
+core again — all three architectures (split-tree, Egyptian-carver,
+window-greedy) converge to the same combinatorial heart. The covering hunt
+needs a deeper structural idea (or the heavy search infrastructure) — rounds
+3–5 remain; the designs are recorded.
