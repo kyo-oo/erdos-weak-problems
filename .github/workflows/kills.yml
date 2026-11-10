@@ -862,4 +862,26 @@ jobs:
           grep -F "(1, 4, 256, 256)" kernel38.log
           python3 problem406-ternary-powers/battery406.py
           echo ERDOS406_KERNEL_GREEN=1
+      - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          mkdir -p oleans
+          export LEAN_PATH="$PWD/oleans"
+          : > kernel39.log
+          echo "=== Erdos396_Base ===" >> kernel39.log
+          lake env lean -o oleans/Erdos396_Base.olean problem396-prod-binomial/Erdos396_Base.lean 2>&1 | tee -a kernel39.log
+          echo "=== Erdos396K3 ===" >> kernel39.log
+          lake env lean problem396-prod-binomial/Erdos396K3.lean 2>&1 | tee -a kernel39.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel39.log
+          grep -F "ERDOS396_K3_KERNEL_GREEN" kernel39.log
+          grep -E "erdos396_k3_witness' (does not depend on any axioms|depends on axioms)" kernel39.log
+          grep -E "erdos396_k3_absorb' (does not depend on any axioms|depends on axioms)" kernel39.log
+          grep -E "erdos396_k3_arsenal_bridge' (does not depend on any axioms|depends on axioms)" kernel39.log
+          python3 problem396-prod-binomial/battery396k3.py
+          echo ERDOS396_K3_KERNEL_GREEN=1
 

@@ -72,3 +72,24 @@ coverage — the tree must PLAN lattice chains (top-down Λ-chain design:
 each split's children must land inside earlier/deeper cosets).
 The palette (budget 2.14, all machinery green) is BANKED — the
 chain-planning search is the next round's strike design.
+
+## §6. THE ROUND-4 DESIGN — THE CHAIN-PLANNING SEARCH (from the alignment law)
+
+The greedy's zero-absorption verdict forces the structured route:
+
+1. **THE CONTAINMENT MATRIX**: over the palette, compute all pairs
+   (q, q′) with Λ_q ⊆ Λ_{q′} (a child of a q-split is absorbable by q′
+   iff its lattice Λ_q sits inside a single Λ_{q′}-coset ⟸ Λ_q ⊆ Λ_{q′}).
+   Test: the basis vectors of Λ_q must satisfy 2^k3^ℓ ≡ 1 mod q′ (the
+   basis images vanish). NOT implied by h-divisibility alone (the
+   (k,ℓ)=(0,3) witness kills Λ_13 ⊆ Λ_5 despite 4 | 12) — the matrix is
+   genuine geometry.
+2. **THE CHAIN DAG**: containment edges q → q′ (lattice inclusion);
+   absorption depth of a region = its ready-absorber count along the DAG.
+3. **THE PLANNER**: split choices ranked by the children's absorption
+   depth (children landing deep in the DAG close fast); the budget prune
+   stays (frontier density ≤ unspent capacity).
+4. **The grid anchor**: primes with (ord_q 2, ord_q 3) = (a, b) have
+   Λ_q ⊇ aℤ×bℤ — the (a,b)-shaped splits produce grid-like children that
+   the (a′|a, b′|b)-primes can absorb — the 2D nested-moduli pattern
+   (the 1D Sierpiński spine 2→4→8→… generalized to the (a,b)-grid).
