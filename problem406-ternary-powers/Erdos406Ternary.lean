@@ -160,7 +160,7 @@ theorem tern01_of_tfold : ∀ (b : List Bool) (f : Nat), tfold b < 3 ^ f →
       by_cases h0 : 3 * tfold b' + cond d 1 0 = 0
       · rw [tfold_cons, h0, tern01_succ]
         rfl
-      · rw [tfold_cons, tern01_succ, Bool.or_eq_true]
+      · rw [tfold_cons, tern01_succ, Bool.or_eq_true, Bool.and_eq_true]
         refine Or.inr ⟨?_, ?_⟩
         · have hc := cond_le_one d
           have hsplit : (3 * tfold b' + cond d 1 0) % 3 = cond d 1 0 := by omega
@@ -190,19 +190,22 @@ theorem tfold_mod3_le_one : ∀ b : List Bool, tfold b % 3 ≤ 1 := by
     have hc := cond_le_one d
     omega
 
+theorem pow4_mod3 : ∀ j : Nat, 4 ^ j % 3 = 1 := by
+  intro j
+  induction j with
+  | zero => rfl
+  | succ j' ihj =>
+    have hp : 4 ^ (j' + 1) = 4 * 4 ^ j' := by
+      rw [Nat.pow_succ]
+      ring
+    omega
+
 theorem pow2_odd_mod3 : ∀ j : Nat, 2 ^ (2 * j + 1) % 3 = 2 := by
   intro j
   have h1 : 2 ^ (2 * j + 1) = 2 * 4 ^ j := by
     rw [Nat.pow_succ, Nat.pow_mul]
     ring
-  have h2 : 4 ^ j % 3 = 1 := by
-    induction j with
-    | zero => rfl
-    | succ j' ihj =>
-      have hp : 4 ^ (j' + 1) = 4 * 4 ^ j' := by
-        rw [Nat.pow_succ]
-        ring
-      omega
+  have h2 := pow4_mod3 j
   omega
 
 /-- **THE MOD-3 PARITY LAW** — no odd power of 2 is a sum of distinct
@@ -305,7 +308,7 @@ theorem erdos406_main : ∀ k ≤ 500,
     have hle : 2 ^ k ≤ 2 ^ 500 := by
       rw [hs]
       calc 2 ^ k = 2 ^ k * 1 := by ring
-        _ ≤ 2 ^ k * 2 ^ (500 - k) := Nat.mul_le_mul_left _ (Nat.le_of_lt hp)
+        _ ≤ 2 ^ k * 2 ^ (500 - k) := Nat.mul_le_mul_left _ (by omega)
     have hlt : 2 ^ 500 < 3 ^ 700 := two_pow_500_lt
     have hb3 : tfold b < 3 ^ 700 := by omega
     have h4 : tern01 700 (tfold b) = true := tern01_of_tfold b 700 hb3
