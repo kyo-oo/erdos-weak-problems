@@ -735,3 +735,41 @@ $s_t(m)$ for $m\in[n+1,n+t]$. Is it true that $f(n,t)\gg t$ (uniformly)?
 Arsenal bridge applied. battery461 dual-method GREEN (119/119
 trial-division recount + independent minimality recounts + censuses).
 Honest scope: the uniform $\gg t$ over ALL $n$ remains open.
+
+## KILL #40 — Erdős #406: THE TERNARY CENSUS LAW (Session 043, Kernel 38, run 42912135608 GREEN, commits 1dfab6d→9046b593 (the 4-round war: 8→4→1→0))
+
+**BOSS's own front, army-struck per the S042 full-proof-campaign order.**
+
+**The problem (verbatim):** Is it true that there are only finitely many
+powers of $2$ which have only the digits $0$ and $1$ when written in
+base $3$? (Corpus: "The only examples seem to be $1$, $4=1+3$, and
+$256=1+3+9+243$.")
+
+**The kill (all complete unconditional theorems):**
+
+1. **THE CENSUS** (`erdos406_census`, kernel-decided in the
+   480-discipline chunks 480+21, fuel 700): for EVERY $k \le 500$, the
+   digit checker accepts $2^k$ only at $k \in \{0, 2, 8\}$.
+2. **THE MAIN THEOREM** (`erdos406_main`): below $2^{500}$, the powers
+   of 2 that are sums of distinct powers of 3 (0/1 ternary digits) are
+   EXACTLY $1, 4, 256$ — with the three explicit fold-representations.
+3. **THE MOD-3 PARITY LAW** (`erdos406_odd_excluded`, GENERAL, no
+   bound): NO odd power of 2 is a sum of distinct powers of 3 — the
+   units ternary digit of a 0/1-digit number is $\le 1$ but
+   $2^{2j+1} \equiv 2 \pmod 3$. An infinite class of exponents excluded
+   unconditionally.
+4. **THE MOD-8 BUDGET LAW** (`erdos406_mod8_budget`, GENERAL, $k \ge 3$):
+   every solution satisfies $(E + 3O) \equiv 0 \pmod 8$ — $E$/$O$ the
+   even/odd-position 1-digit counts (the `altsum` machinery; on the
+   witness 256: $E = O = 2$, $2 + 3 \cdot 2 = 8$).
+5. **THE SEMANTIC LAW** (`tern01_iff_tfold`): the fuel-indexed checker
+   is EXACTLY the distinct-powers-of-3 representation predicate — the
+   Arsenal's `lt_three_cases` trichotomy APPLIED in the proof.
+
+Arsenal bridge applied (isTernaryDigit on 256's ternary digits,
+carryAtPos_bound 256, v2r_ternary_scaling at (8, 256) — the 16,121-theorem
+arsenal on the witness numbers). battery406 dual-method GREEN (divmod
+digits ∥ base-3 array doubling, semantic fold law, mod-3/mod-8 laws on
+random lists, fuel bound). Honest scope: the all-$k$ finiteness core
+remains open (Stewart-class); the census + two general laws are the
+standing constraints on every hypothetical large solution.
