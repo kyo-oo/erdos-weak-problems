@@ -35,6 +35,7 @@ on:
       - problem396-prod-binomial/**
       - problem1073-factorial-mod/**
       - problem461-smooth-component/**
+      - problem271-status/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
