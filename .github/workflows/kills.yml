@@ -802,3 +802,24 @@ jobs:
           grep -E "Erdos461.(spart_dvd|spart_eq_pow|scomp_dvd|achieve1|achieve2|achieve3|stab1|stab2|stab3|ergra|erdos461_min14|erdos461_min20|erdos461_min30|erdos461_min40|erdos461_arsenal_bridge|erdos461_main)' (does not depend on any axioms|depends on axioms)" kernel35.log
           python3 problem461-smooth-component/battery461.py
           echo ERDOS461_SMOOTH_COMPONENT_KERNEL_GREEN=1
+
+      - name: "Kernel 36 - Erdos 271 THE UNIVERSAL GROWTH LAW (S042 full-proof campaign): G3 the doubling law (a_{k+1} <= 2a_k+1, k>=1, via the 2a+1-never-blocked lemma) + G2 the linear floor (2a_m >= 3m-3, no-3-consecutive two-track induction) + G1 THE QUADRATIC CEILING (a_m <= n + (m-1)(m+2)/2 for EVERY seed n>=1, THE BLOCKING-PAIR PIGEONHOLE: rejected values inject into index pairs via the Finset machinery + the greedy skip lemma + interval localization) + the fuel-indexed greedy engine + arsenal bridge (ternary digits of 4 and 23, lt_three_cases, carryAtPos_bound, v2r_ternary_scaling)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel36.log
+          lake env lean problem271-status/StanleyGrowth.lean 2>&1 | tee -a kernel36.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel36.log
+          grep -F "ERDOS271_KERNEL_GREEN" kernel36.log
+          grep -E "growth_G3' (does not depend on any axioms|depends on axioms)" kernel36.log
+          grep -E "growth_G2' (does not depend on any axioms|depends on axioms)" kernel36.log
+          grep -E "growth_G1' (does not depend on any axioms|depends on axioms)" kernel36.log
+          grep -E "erdos271_arsenal_bridge' (does not depend on any axioms|depends on axioms)" kernel36.log
+          grep -F "[0, 4, 5, 7, 11, 12, 16, 23, 26, 31, 33, 37]" kernel36.log
+          grep -F "[]" kernel36.log
+          python3 problem271-status/battery271growth.py
+          echo ERDOS271_GROWTH_KERNEL_GREEN=1
