@@ -1,0 +1,95 @@
+
+/-! ## §10 The witness theorem (the odd-part reduction). -/
+
+/-- Bridge: for an index below the length, the total get! equals the safe get. -/
+theorem getElem_bang_of_lt {l : List Nat} {i : Nat} (h : i < l.length) :
+    l[i]! = l[i] := by
+  have h1 : l[i]! = (l[i]?).getD 0 := List.getElem!_eq_getElem?_getD
+  rw [h1, List.getD_getElem?]
+  rw [dif_pos h]
+
+/-- Every table entry is at most 59049 = 3^10 (decide-checked, no φ cost). -/
+theorem table_bounds : (List.range table411.length).all
+    (fun i => decide (table411[i]! ≤ 59049)) = true := by decide
+
+theorem table_bound_of_lt (i : Nat) (h : i < table411.length) : table411[i]! ≤ 59049 := by
+  have h1 := table_bounds
+  rw [List.all_eq_true] at h1
+  have h2 := h1 i (by rw [List.mem_range]; omega)
+  exact of_decide_eq_true h2
+
+/-- THE WITNESS THEOREM: every even x ≥ 4 whose odd part is a table member
+is an r=2 solution (the chain laws take over at entry). -/
+def WitP (i : Nat) : Prop :=
+  i < table411.length →
+    ∀ x a m, 4 ≤ x → 1 ≤ a → m % 2 = 1 → x = 2^a * m → m = table411[i]! →
+      ∃ K, ∀ k, K ≤ k → gF (k+2) x = 2 * gF k x
+
+theorem erdos411_witness : ∀ i, WitP i := by
+  apply strongIndOn
+  intro i ih hi
+  intro hlen x a m hx4 ha hmod hxe hmem
+  have hval : table411[i]! = m := hmem.symm
+  rcases closure_prop i hlen with hSIX | hstep
+  · -- m ∈ SIX: x is a chain-family member, doubling from k = 0
+    have hmSIX : m ∈ SIXl := by
+      have hbool : inSIX m = true := by rw [← hval]; exact hSIX
+      exact List.contains_iff_mem.mp (by simpa [inSIX] using hbool)
+    refine ⟨0, fun k _ => erdos411_doubling x ⟨a, m, ha, hmSIX, ?_, hxe⟩ k⟩
+    intro h1m
+    subst h1m
+    have ha2 : 2 ≤ a := by
+      by_contra hc
+      have : a ≤ 1 := by omega
+      have hle : (2:Nat)^a ≤ 2^1 := Nat.pow_le_pow_right (by decide) this
+      have h1 : (2:Nat)^1 = 2 := by rw [Nat.pow_one]
+      rw [hxe, h1] at hle
+      have : (2:Nat) * 1 ≤ 4 := by omega
+      omega
+    omega
+  · -- m ∉ SIX: step down through the table
+    obtain ⟨j, hji, hjlen, hjval, hjeven⟩ := hstep
+    have hmb : m ≤ 59049 := by
+      have := table_bound_of_lt i hlen
+      rw [hval] at this
+      exact this
+    have hstepx : gstep x = 2^(a-1) * (2 * m + phiB m) := by
+      rw [← hxe]
+      exact gstep_two_pow_mul a m ha hmod
+    have hphile : phiB m ≤ m := phiB_le m
+    have hvpos : 0 < 2 * m + phiB m := by omega
+    have h218 : (2:Nat)^18 = 262144 := by decide
+    have hv18 : 2 * m + phiB m < 2^18 := by omega
+    have hv64 : 2 * m + phiB m < 2^64 := by omega
+    obtain ⟨iv, mv, hmvodd, hmvfac, hmvoddPF⟩ := oddPF_fac (2 * m + phiB m) 64 hvpos hv64
+    have hmvT : mv = table411[j]! := by
+      rw [hjval, show Tstep table411[i]! = Tstep m from by rw [hval],
+          show Tstep m = oddPF 64 (2 * m + phiB m) from rfl, ← hmvoddPF]
+    have hg : gstep x = 2^(a-1+iv) * mv := by
+      rw [hstepx, hmvfac, ← Nat.mul_assoc, ← Nat.pow_add]
+    have hive : 1 ≤ iv := by
+      by_contra hc
+      have hiv0 : iv = 0 := by omega
+      rw [hiv0, Nat.pow_zero, Nat.one_mul] at hmvfac
+      rw [hmvfac] at hjeven
+      omega
+    have hpp : 1 ≤ phiB x := phiB_pos x (by omega)
+    have hgs4 : 4 ≤ gstep x := by
+      have : gstep x = x + phiB x := rfl
+      omega
+    have hW := ih j hji
+    unfold WitP at hW
+    obtain ⟨K', hK'⟩ := hW hjlen (gstep x) (a-1+iv) mv hgs4 (by omega) hmvodd hg hmvT
+    refine ⟨K' + 1, ?_⟩
+    intro k hk
+    have hk1 : K' ≤ k - 1 := by omega
+    have e1 : gF (k+2) x = gF (k+1) (gstep x) := rfl
+    have e2 : (k:Nat) + 1 = (k-1) + 2 := by omega
+    have e3 : gF k x = gF (k-1) (gstep x) := by
+      have hk2 : k = (k-1) + 1 := by omega
+      rw [hk2]
+      rfl
+    have e4 : gF ((k-1)+2) (gstep x) = 2 * gF (k-1) (gstep x) := hK' (k-1) hk1
+    rw [e1, e2, e4, ← e3]
+
+end Erdos411

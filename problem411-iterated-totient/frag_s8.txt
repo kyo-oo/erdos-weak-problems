@@ -1,0 +1,84 @@
+
+/-! ## §8 The odd-part machinery. -/
+
+theorem two_pow_mul_exists : ∀ x, 0 < x → ∃ a m, m % 2 = 1 ∧ x = 2^a * m := by
+  apply strongIndOn
+  intro i ih hi
+  rcases Nat.eq_zero_or_pos (i % 2) with h0 | h0
+  · have hi2 : 2 ≤ i := by omega
+    have hy : i / 2 < i := Nat.div_lt_self hi2 (by decide)
+    have hypos : 0 < i / 2 := by omega
+    obtain ⟨a, m, hm, hme⟩ := ih (i / 2) hy hypos
+    refine ⟨a + 1, m, hm, ?_⟩
+    rw [Nat.pow_succ, ← Nat.mul_assoc, ← hme]
+    have hdvd : 2 ∣ i := Nat.dvd_of_mod_eq_zero h0
+    exact (Nat.mul_div_cancel hdvd).symm
+  · exact ⟨0, i, by omega, by rw [Nat.pow_zero, Nat.one_mul]⟩
+
+theorem oddPF_eq : ∀ (x a m f : Nat), x = 2^a * m → m % 2 = 1 → a ≤ f →
+    oddPF f x = m := by
+  intro x a m f
+  induction f generalizing a with
+  | zero =>
+    intro hxe hm haf
+    have ha0 : a = 0 := by omega
+    rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
+    rw [hxe]
+    rfl
+  | succ f ih =>
+    intro hxe hm haf
+    rcases Nat.eq_zero_or_pos a with ha0 | ha1
+    · rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
+      rw [hxe]
+      have : ¬ (m % 2 = 0) := by omega
+      simp only [oddPF, if_neg this]
+    · have hae : a - 1 + 1 = a := by omega
+      have hx2 : x = 2 * (2^(a-1) * m) := by
+        rw [← Nat.mul_assoc, ← Nat.pow_succ, hae]
+        exact hxe
+      have hmod : x % 2 = 0 := by omega
+      have hdiv : x / 2 = 2^(a-1) * m := by
+        rw [hx2, Nat.mul_div_cancel_left _ (by decide : 0 < 2)]
+      simp only [oddPF, if_pos hmod]
+      exact ih hdiv hm (by omega)
+
+theorem oddPF_fac : ∀ (v f : Nat), 0 < v → v < 2^f →
+    ∃ i m, m % 2 = 1 ∧ v = 2^i * m ∧ oddPF f v = m := by
+  intro v f
+  induction f with
+  | zero => intro hv hlt; omega
+  | succ f ih =>
+    intro hv hlt
+    rcases Nat.eq_zero_or_pos (v % 2) with h0 | h0
+    · have hv2 : 2 ≤ v := by omega
+      have hmod : v % 2 = 0 := h0
+      simp only [oddPF, if_pos hmod]
+      have hdiv2 : v / 2 < v := Nat.div_lt_self hv2 (by decide)
+      have hdivpos : 0 < v / 2 := by omega
+      have hdivlt : v / 2 < 2^f := by
+        have h1 : 2^f * 2 = 2^(f+1) := (Nat.pow_succ 2 f).symm
+        rw [h1] at hlt
+        exact Nat.div_lt_of_lt_mul hlt
+      obtain ⟨i, m, hm, hme, hof⟩ := ih hdivpos hdivlt
+      refine ⟨i + 1, m, hm, ?_, hof.symm⟩
+      rw [Nat.pow_succ, ← Nat.mul_assoc, ← hme]
+      exact (Nat.mul_div_cancel (Nat.dvd_of_mod_eq_zero h0)).symm
+    · refine ⟨0, v, by omega, by rw [Nat.pow_zero, Nat.one_mul], ?_⟩
+      have : ¬ (v % 2 = 0) := by omega
+      simp only [oddPF, if_neg this]
+
+theorem oddPF_bound_ok (x a m : Nat) (hx : x < 2^64) (hxe : x = 2^a * m) (hm : m % 2 = 1) :
+    oddPF 64 x = m := by
+  have ha64 : a ≤ 64 := by
+    by_contra h
+    have h65 : 65 ≤ a := by omega
+    have hpow : (2:Nat)^64 ≤ 2^a := Nat.pow_le_pow_right (by decide) h65
+    have hm1 : 1 ≤ m := by omega
+    have h2a : 2^a ≤ x := by
+      rw [hxe]
+      exact Nat.le_mul_of_pos_right (2^a) hm1
+    omega
+  exact oddPF_eq x a m 64 hxe hm ha64
+
+/-! ## §9 The certified table and its closure. -/
+

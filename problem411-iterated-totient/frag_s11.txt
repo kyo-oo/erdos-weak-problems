@@ -1,0 +1,142 @@
+
+/-! ## §11 The census, the partition, the receipts, and the main theorems. -/
+
+/-- The 279 wanderer odd parts (bounded non-entry, engine-flagged). -/
+def wander411 : List Nat := [
+    65, 85, 89, 97, 99, 101, 105, 113, 117, 119, 125, 129,
+    133, 135, 137, 141, 145, 149, 151, 153, 155, 157, 161, 165,
+    167, 169, 171, 175, 177, 185, 187, 197, 199, 201, 205, 207,
+    209, 215, 219, 223, 225, 227, 229, 231, 235, 237, 241, 245,
+    247, 255, 257, 261, 263, 265, 267, 273, 277, 279, 285, 291,
+    293, 295, 297, 299, 301, 309, 313, 315, 319, 321, 323, 325,
+    327, 329, 335, 337, 339, 343, 345, 347, 351, 355, 357, 361,
+    365, 369, 371, 381, 385, 387, 397, 399, 405, 409, 411, 415,
+    419, 423, 427, 431, 433, 435, 437, 439, 445, 447, 449, 451,
+    453, 455, 457, 459, 463, 467, 469, 471, 481, 483, 485, 487,
+    489, 493, 495, 497, 499, 501, 505, 507, 509, 513, 521, 527,
+    531, 533, 537, 547, 553, 557, 561, 565, 573, 575, 579, 581,
+    589, 591, 593, 595, 597, 599, 603, 607, 611, 613, 615, 621,
+    623, 625, 627, 629, 635, 637, 639, 641, 643, 647, 649, 651,
+    657, 659, 661, 663, 665, 667, 669, 673, 675, 677, 679, 681,
+    685, 689, 693, 697, 701, 703, 705, 707, 711, 713, 715, 717,
+    721, 725, 733, 739, 741, 743, 745, 753, 755, 763, 765, 767,
+    769, 771, 773, 775, 779, 781, 783, 785, 787, 789, 793, 795,
+    799, 801, 805, 807, 809, 815, 819, 821, 827, 829, 831, 833,
+    835, 837, 839, 841, 845, 847, 849, 851, 855, 859, 861, 863,
+    867, 871, 873, 875, 879, 881, 887, 889, 891, 893, 895, 897,
+    905, 907, 917, 919, 921, 923, 929, 933, 937, 939, 941, 943,
+    945, 947, 951, 953, 955, 957, 961, 965, 967, 973, 975, 985,
+    987, 991, 997,  ]
+
+/-- THE PARTITION: every odd m ≤ 1001 lies in one of the two lists. -/
+def partitionB (k : Nat) : Bool :=
+  (!(k % 2 == 1)) || (table411.contains k || wander411.contains k)
+
+theorem erdos411_partition : (List.range 1002).all partitionB = true := by decide
+
+/-- THE COUNT: exactly 535 even n ∈ [4, 2000] have their odd part certified. -/
+theorem erdos411_count :
+    (List.filter (fun n => decide (4 ≤ n && n ≤ 2000 && n % 2 == 0 &&
+      table411.contains (oddPF 64 n))) (List.range 2001)).length = 535 := by decide
+
+/-- THE CENSUS THEOREM: every even n ∈ [4, 2000] with certified odd part
+is an r = 2 solution. -/
+theorem erdos411_census : ∀ n, 4 ≤ n → n ≤ 2000 → n % 2 = 0 →
+    table411.contains (oddPF 64 n) = true →
+      ∃ K, ∀ k, K ≤ k → gF (k+2) n = 2 * gF k n := by
+  intro n h4 hn2k heven hmem
+  obtain ⟨a, m, hmod, hxe⟩ := two_pow_mul_exists n (by omega)
+  have ha1 : 1 ≤ a := by
+    by_contra hc
+    have ha0 : a = 0 := by omega
+    rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
+    rw [hxe] at heven
+    omega
+  have hn64 : n < 2^64 := by omega
+  have hm64 : oddPF 64 n = m := oddPF_bound_ok n a m hn64 hxe hmod
+  rw [hm64] at hmem
+  have hmem' : m ∈ table411 := List.contains_iff_mem.mp (by simpa using hmem)
+  obtain ⟨i, hilen, hieval⟩ := List.mem_iff_getElem.mp hmem'
+  have hbang : table411[i]! = m := by
+    rw [getElem_bang_of_lt hilen]; exact hieval
+  have hW := erdos411_witness i hilen
+  unfold WitP at hW
+  exact hW hilen n a m h4 ha1 hmod hxe hbang
+
+/-- The two known solutions, as instances of the doubling theorem. -/
+theorem erdos411_ten : ∀ k, gF (k+2) 10 = 2 * gF k 10 := by
+  intro k
+  exact erdos411_doubling 10 ⟨1, 5, by omega, by simp [SIXl], by intro h; omega,
+    by rw [Nat.pow_one]⟩ k
+
+theorem erdos411_94 : ∀ k, gF (k+2) 94 = 2 * gF k 94 := by
+  intro k
+  exact erdos411_doubling 94 ⟨1, 47, by omega, by simp [SIXl], by intro h; omega,
+    by rw [Nat.pow_one]⟩ k
+
+/-- THE ARSENAL BRIDGE: the pair j-values via the Boss's own v2r machinery. -/
+theorem erdos411_arsenal_bridge :
+    v2r 14 = 1 ∧ v2r 20 = 2 ∧ v2r 8 = 3 ∧ v2r 94 = 1 ∧ v2r 140 = 2 ∧
+    v2r (9 * 14) = v2r 14 ∧ v2r (3^2 * 20) = v2r 20 ∧
+    ErdosTernary2.isTernaryDigit 59049 = true := by
+  refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · rw [v2r.eq_def 14, if_neg (by decide), if_pos (by decide : (14:Nat) % 2 = 0),
+        show (14:Nat)/2 = 7 from by decide,
+        v2r.eq_def 7, if_neg (by decide), if_neg (by decide : (7:Nat) % 2 = 0)]
+  · rw [v2r.eq_def 20, if_neg (by decide), if_pos (by decide : (20:Nat) % 2 = 0),
+        show (20:Nat)/2 = 10 from by decide,
+        v2r.eq_def 10, if_neg (by decide), if_pos (by decide : (10:Nat) % 2 = 0),
+        show (10:Nat)/2 = 5 from by decide,
+        v2r.eq_def 5, if_neg (by decide), if_neg (by decide : (5:Nat) % 2 = 0)]
+  · rw [v2r.eq_def 8, if_neg (by decide), if_pos (by decide : (8:Nat) % 2 = 0),
+        show (8:Nat)/2 = 4 from by decide,
+        v2r.eq_def 4, if_neg (by decide), if_pos (by decide : (4:Nat) % 2 = 0),
+        show (4:Nat)/2 = 2 from by decide,
+        v2r.eq_def 2, if_neg (by decide), if_pos (by decide : (2:Nat) % 2 = 0),
+        show (2:Nat)/2 = 1 from by decide,
+        v2r.eq_def 1, if_neg (by decide), if_neg (by decide : (1:Nat) % 2 = 0)]
+  · rw [v2r.eq_def 94, if_neg (by decide), if_pos (by decide : (94:Nat) % 2 = 0),
+        show (94:Nat)/2 = 47 from by decide,
+        v2r.eq_def 47, if_neg (by decide), if_neg (by decide : (47:Nat) % 2 = 0)]
+  · rw [v2r.eq_def 140, if_neg (by decide), if_pos (by decide : (140:Nat) % 2 = 0),
+        show (140:Nat)/2 = 70 from by decide,
+        v2r.eq_def 70, if_neg (by decide), if_pos (by decide : (70:Nat) % 2 = 0),
+        show (70:Nat)/2 = 35 from by decide,
+        v2r.eq_def 35, if_neg (by decide), if_neg (by decide : (35:Nat) % 2 = 0)]
+  · have h9 : (9:Nat) * 14 = 3^2 * 14 := by
+      rw [show (3:Nat)^2 = 9 from by decide]
+    rw [h9]
+    exact v2r_mul_three_pow 2 14
+  · exact v2r_mul_three_pow 2 20
+  · exact rfl
+
+/-- THE MAIN SUMMARY. -/
+theorem erdos411_main :
+    (∀ n, n % 2 = 1 → ∀ (r K : Nat), 1 ≤ r →
+      ¬ (∀ k, K ≤ k → gF (k+r) n = 2 * gF k n)) ∧
+    (∀ (r K : Nat), 1 ≤ r → ¬ (∀ k, K ≤ k → gF (k+r) 2 = 2 * gF k 2)) ∧
+    (∀ (x : Nat), inFAM x → ∀ k, gF (k+2) x = 2 * gF k x) ∧
+    (∀ n, 4 ≤ n → n ≤ 2000 → n % 2 = 0 →
+      table411.contains (oddPF 64 n) = true →
+        ∃ K, ∀ k, K ≤ k → gF (k+2) n = 2 * gF k n) ∧
+    (List.filter (fun n => decide (4 ≤ n && n ≤ 2000 && n % 2 == 0 &&
+      table411.contains (oddPF 64 n))) (List.range 2001)).length = 535 ∧
+    table411.length = 320 ∧ wander411.length = 279 ∧
+    (∀ k, gF (k+2) 10 = 2 * gF k 10) ∧ (∀ k, gF (k+2) 94 = 2 * gF k 94) :=
+  ⟨erdos411_parity, erdos411_two, erdos411_doubling, erdos411_census,
+   erdos411_count, by decide, by decide, erdos411_ten, erdos411_94⟩
+
+#eval "ERDOS411_KERNEL_GREEN"
+#print axioms erdos411_parity
+#print axioms erdos411_two
+#print axioms erdos411_doubling
+#print axioms erdos411_ten
+#print axioms erdos411_94
+#print axioms erdos411_witness
+#print axioms erdos411_census
+#print axioms erdos411_partition
+#print axioms erdos411_count
+#print axioms erdos411_arsenal_bridge
+#print axioms erdos411_main
+
+end Erdos411

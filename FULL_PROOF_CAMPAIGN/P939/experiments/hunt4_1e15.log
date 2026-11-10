@@ -1,0 +1,6 @@
+[4=4] 40048 r-powerful numbers <= 1000000000000000  (gen 0.2s)
+  (perfect 4th powers alone: 5623; OLD vacuous census claimed 5622)
+pairs with sum<=1000000000000000: 736822009, coprime: 180977293
+HITS: 0
+VERDICT[4,1000000000000000]: ZERO
+total 34.3s

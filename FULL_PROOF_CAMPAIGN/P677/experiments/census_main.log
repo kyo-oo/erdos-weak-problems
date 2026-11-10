@@ -1,0 +1,30 @@
+k=2: D_max=1 mu_k=1.0000 Lam=1 N=10000000 scan-to=10000004
+  chunk 0-2000000 (0.4s)
+  chunk 10000000-10000005 (1.1s)
+  => k=2: dup_groups=0 collisions(m>=n+k)=0 (1s)
+k=3: D_max=2 mu_k=1.2599 Lam=2 N=10000000 scan-to=12599216
+  chunk 0-2000000 (0.3s)
+  chunk 10000000-12000000 (1.6s)
+  => k=3: dup_groups=1 collisions(m>=n+k)=0 (2s)
+k=4: D_max=6 mu_k=1.5651 Lam=6 N=10000000 scan-to=15650854
+  chunk 0-2000000 (0.3s)
+  chunk 10000000-12000000 (2.1s)
+  => k=4: dup_groups=1 collisions(m>=n+k)=0 (3s)
+k=5: D_max=24 mu_k=1.8882 Lam=12 N=10000000 scan-to=18881761
+  chunk 0-2000000 (0.5s)
+  chunk 10000000-12000000 (2.7s)
+  => k=5: dup_groups=4 collisions(m>=n+k)=0 (4s)
+k=6: D_max=120 mu_k=2.2209 Lam=60 N=10000000 scan-to=22209076
+  chunk 0-2000000 (0.3s)
+  chunk 10000000-12000000 (2.0s)
+  chunk 20000000-22000000 (4.0s)
+  => k=6: dup_groups=3 collisions(m>=n+k)=0 (5s)
+k=7: D_max=720 mu_k=2.5597 Lam=60 N=10000000 scan-to=25597095
+  chunk 0-2000000 (0.4s)
+  chunk 10000000-12000000 (2.1s)
+  chunk 20000000-22000000 (3.8s)
+  => k=7: dup_groups=7 collisions(m>=n+k)=0 (5s)
+k=8: D_max=5040 mu_k=2.9027 Lam=420 N=10000000 scan-to=29027136
+  chunk 0-2000000 (0.4s)
+  chunk 10000000-12000000 (2.3s)
+  chunk 20000000-22000000 (4.1s)
