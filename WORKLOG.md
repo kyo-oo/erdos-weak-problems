@@ -1773,3 +1773,49 @@ universal quadratic ceiling a_m ≤ n + (m-1)(m+2)/2 via blocking-pair
 pigeonhole; G2 a_m ≥ 3(m-1)/2; G3 a_{k+1} ≤ 2a_k+1) + Kernel B
 StanleyType1.lean (the A(2) two-sided law) + battery271 triple-method.
 Commander rebuild begins immediately.
+
+---
+
+## SESSION 042 (continued) — THE FULL-PROOF CAMPAIGN: K36 ROUNDS 2-3 + K37 FIRED
+
+**K36 (P271) THE UNIVERSAL GROWTH LAW — the compile war:**
+- **Round 2 (run 42791405236, commit 6fe5ae1): 94+cap → 55 errors.** The five
+  r1 mothers confirmed dead; the r2 survivors exposed the NEXT law-layer:
+  L64: a kernel's first commit must ALWAYS include the workflow paths edit
+  (the r2 push didn't trigger — problem271-status/** was missing from the
+  paths filter; round 1 fired only via the workflow-file touch).
+  L65: THE MEM_CONS DIRECTION LAW — this toolchain's `List.mem_cons` yields
+  `x = head` (element = head), NOT head = element; every rw that consumed a
+  mem_cons disjunct was oriented backwards.
+  L66: `cases h : e` does NOT auto-generalize hypotheses mentioning e — the
+  manual `rw [hs] at hdec hzero` is mandatory.
+  L67: `List.mem_cons_self` is now zero-arg (both args implicit).
+  L68: `Finset.card_sdiff` is hypothesis-free with the `(t ∩ s).card` form —
+  the subset bridge goes through `Finset.inter_eq_self_of_subset_left`.
+  L69: `Nat.lt_or_ge a b : a < b ∨ b ≤ a` — the FIRST disjunct is a < b;
+  growth_G1's opening branch-swap was inverted (the m=1 case sat in the
+  a<m branch).
+  L70: ground products in omega goals ((1-1)*(1+2)/2) are fine, but
+  VARIABLE-factor forms must be pre-bridged ((m-1)+1 vs m; k+1+1 vs k+2;
+  m'+2 vs m'+1+1) — omega never normalizes inside atoms.
+  L71: `Option.noConfusion`/`List.noConfusion` on type-deferred equations
+  (sqSeq n 0 = []) fails at elaboration — `simp [def] at h` reduces first.
+- **Round 3 (commit 0875204): 30 fixes fired** — all 20 root causes struck;
+  battery271growth 45 seeds dual-engine ALL GREEN locally.
+
+**K37 (P404) FIRED — Erdős #404 THE RESIDUAL-TAIL CLASS LAW (commit e4dc221):**
+THE NEW MATHEMATICS (derived in-session): on the class a ≡ p−m (mod p),
+the unit-block staircase coins are P_{a+j} ≡ (−1)^j·(m−1)(m−2)···(m−j)
+mod p — signed falling factorials, every one a multiple of m−1, each
+bounded by (m−1)!, at most m−1 of them under distinct indices (the
+growth_G1 pigeonhole pattern) — so every block sum s is a multiple of m−1
+with |s| ≤ (m−1)·(m−1)! < p−1, and 1 + s ≡ 0 (mod p) would force s = −1,
+impossible for m ≥ 3. THEOREM: for every m ≥ 3, prime p with
+(m−1)·(m−1)! + 1 < p, seed a ≡ p−m: v_p(a! + Σ_B i!) = v_p(a!) EXACTLY —
+f(a,p) = v_p(a!) on the whole two-parameter class family (the Kill-#15
+class p ∣ a+1 generalized to the residual tail). Plus the m=3 class
+(p ≥ 7, a ≡ p−3). Battery404tail: 11 class instances dual-method + the
+p=5/a≡2 discovery class (below the tail bound, battery-verified) ALL
+GREEN locally. CI round 1 (run 42794751953).
+
+**The wave-1 state: P271 (K36) in CI r3; P404 (K37) in CI r1; next: P1108.**
