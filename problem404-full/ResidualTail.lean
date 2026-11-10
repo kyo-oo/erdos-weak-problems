@@ -242,7 +242,7 @@ theorem vpad_mul_nondiv (p : Nat) (hp : Nat.Prime p) :
         have h2 : (x / p) * 2 ≤ (x / p) * p := Nat.mul_le_mul_left _ hp.two_le
         omega
       have hxu0 : (x * u) % p = 0 := by
-        rw [Nat.mul_mod, hx0, Nat.zero_mul]
+        rw [Nat.mul_mod, hx0, Nat.zero_mul, Nat.zero_mod]
       have hxu1 : 1 ≤ x * u := one_le_mul_nat x u hx hu
       have hstep := vpad_step p (x * u) hp.two_le hxu1 hxu0
       have hdiv : (x * u) / p = (x / p) * u := by
@@ -546,7 +546,7 @@ theorem block_count (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
     List.toFinset_card_of_nodup hnd2
   rw [hcard2] at hcard
   have hlen : ((B.filter (fun i => i - a < m)).map (fun i => i - a)).length
-      = (B.filter (fun i => i - a < m)).length := List.length_map
+      = (B.filter (fun i => i - a < m)).length := List.length_map _
   omega
 
 /-- **The final two-sided block bound.**  `−(m−1)·(m−1)! ≤ bsumI ≤ (m−1)·(m−1)!`. -/
@@ -661,22 +661,21 @@ theorem erdos404_residual_tail (m p : Nat) (hm : 3 ≤ m) (hp : Nat.Prime p)
     have hb1 : ((m - 1 : ℕ) : ℤ) * K = -1 := by omega
     have hm2 : (2 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) := by
       exact_mod_cast (by omega : (2 : Nat) ≤ m - 1)
-    rcases (show K = 0 ∨ (0 : ℤ) < K by omega) with hK0 | hK0
+    rcases (show K < 0 ∨ K = 0 ∨ (0 : ℤ) < K by omega) with hKn | hK0 | hKp
+    · obtain ⟨s, hs⟩ : ∃ s, K = -1 - s := ⟨-K - 1, by omega⟩
+      have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
+        Int.mul_nonneg (by omega) (by omega)
+      have hpr : ((m - 1 : ℕ) : ℤ) * K = -(((m - 1 : ℕ) : ℤ))
+        - ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
+      omega
     · have hkk : ((m - 1 : ℕ) : ℤ) * K = 0 := by rw [hK0, Int.mul_zero]
       omega
-    · rcases (show K < 0 ∨ (0 : ℤ) ≤ K by omega) with hKn | hKp
-      · obtain ⟨s, hs⟩ : ∃ s, K = -1 - s := ⟨-K - 1, by omega⟩
-        have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
-          Int.mul_nonneg (by omega) (by omega)
-        have hpr : ((m - 1 : ℕ) : ℤ) * K = -(((m - 1 : ℕ) : ℤ))
-          - ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
-        omega
-      · obtain ⟨s, hs⟩ : ∃ s, K = 1 + s := ⟨K - 1, by omega⟩
-        have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
-          Int.mul_nonneg (by omega) (by omega)
-        have hpr : ((m - 1 : ℕ) : ℤ) * K = ((m - 1 : ℕ) : ℤ)
-          + ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
-        omega
+    · obtain ⟨s, hs⟩ : ∃ s, K = 1 + s := ⟨K - 1, by omega⟩
+      have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
+        Int.mul_nonneg (by omega) (by omega)
+      have hpr : ((m - 1 : ℕ) : ℤ) * K = ((m - 1 : ℕ) : ℤ)
+        + ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
+      omega
   -- the split + the multiplicative law finish
   have hsplit := sumF_split a B hgt
   rw [hsplit]

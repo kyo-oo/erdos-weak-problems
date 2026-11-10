@@ -79,7 +79,7 @@ def search(pool, verbose=True):
                 break
             children = sorted((qnu, c + j * nu) for j in range(q))
             res = dfs(sorted(rest + children), used, assigned,
-                      density - Fraction(1, nu) + Fraction(1, qnu))
+                      density - Fraction(1, nu) + q * Fraction(1, qnu))
             if res is not None:
                 return res
         return None

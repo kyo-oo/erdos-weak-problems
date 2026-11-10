@@ -1921,3 +1921,20 @@ VERIFIED WORKING in round 4 (no errors): the whole divisibility architecture
 block_count's map_on/Nat.card_Ico/toFinset_card_of_nodup pigeonhole, the
 m=3 class theorem's `by decide`, the arsenal bridge (v2r resolved —
 erdos404t_arsenal_bridge depends on NO sorryAx).
+
+---
+
+## SESSION 042 (continued) — KERNEL 36 GREEN (run 42815331290): ERDŐS #271 G1+G2+G3 LANDED
+
+**THE 5-ROUND WAR (94+cap → 55 → 21 → 3 → 0): Kernel 36 — Erdős 271 THE
+UNIVERSAL GROWTH LAW — CI GREEN at round 5 (commit 8b856f2).** G3 the
+doubling law, G2 the linear floor, G1 the quadratic blocking-pair-pigeonhole
+ceiling — the full growth-law triptych for EVERY Stanley seed, machine-certified.
+
+K37 r3 residual: 3 errors → the round-6 strike: (1) hxu0's `0 % p = 0`
+leftover (the rw auto-rfl does NOT fire at variable p — Nat.zero_mod
+appended; the r1 "no error" reading was an abort-suppression illusion);
+(2) `List.length_map` takes f explicit at the pin — `List.length_map _`;
+(3) THE FALSE-TAUTOLOGY TRAP (L74): `show K = 0 ∨ 0 < K by omega` is NOT a
+tautology (K < 0 kills it) — the sign-cases restated as the genuine
+trichotomy `K < 0 ∨ K = 0 ∨ 0 < K` in ONE rcases.
