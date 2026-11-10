@@ -1728,3 +1728,31 @@ LESSON LEDGER (append-only):
   pattern inside div-terms double-hit; use term-level .trans chains.
 
 *State is full. The engine never stops; it never lies.*
+
+---
+
+## SESSION 042 — THE FULL-PROOF CAMPAIGN OPENS (2026-11-10)
+
+**BOSS's S042 orders (THE_CORE §1):** #271/#404 certifications WITHDRAWN —
+both re-queued at max priority. Phase 1: 22 case-level kills → complete
+proofs. Phase 2: 17 attempted → complete proofs. Sub-agent +
+intelligent-boost doctrine. Arsenal-only. MATHS + prove-that-shit loaded
+and internalized first (chain law executed).
+
+**THE PARALLEL-LAUNCH INCIDENT (recorded for the ledger):** the harness
+DESTROYED sandbox state on parallel Task launches (6/3/2-agent volleys all
+failed "context deadline exceeded" + triggered a filesystem ROLLBACK that
+wiped the local S042 commit, the /home/z/wave1 briefs + 4 of 6 clones, and
+the untracked engines problem271-status/family/, problem1056
+scan12{,.c}, problem396 round-3/4 engines + lpf cache). RECOVERY: S042
+pulled back from GitHub (eternal); P271/P404 clones survived intact;
+protective commit af28d1c vaults FULL_PROOF_CAMPAIGN/ + problem411 (all
+surviving untracked state). LOST-FILE VERDICT: all regenerable, none
+blocking (A4_STATUS.md documents the family findings; scan12/battery396
+patterns are tracked). **LAW: agents launch ONE AT A TIME, sequential —
+parallel Task volleys are a loaded gun (L63).**
+
+**THE WAVE-1 FIRING ORDER (sequential):** P271 → P404 → P1108 → P686 →
+P727 → P1056 — the two de-certified problems first, then the deepest
+Phase-1 residuals. Each agent: own clone, own branch agent/P{X}-full,
+full CI compile war, registry updates on-branch, commander merges serial.
