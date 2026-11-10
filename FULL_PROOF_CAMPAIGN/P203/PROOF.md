@@ -47,3 +47,28 @@ The tree closes ⇒ covering. Each prime used once (W_q global). Budget
 ## §4. RESULTS
 
 (to be filled)
+
+## §5. THE S043 TREE-ENGINE ROUND (palette + first DFS)
+
+**THE PALETTE (engine203_tree.py, computed):** 1003 primes q ≤ 3·10⁵ with
+h_q = lcm(ord_q 2, ord_q 3) ≤ 5000 — **density budget Σ 1/h_q = 2.1444 ≥ 1**
+(the flat-lane 0.81 verdict is REVERSED: the palette was too small).
+Top rows: (5,4), (7,6), (11,10), (23,11), (13,12), (17,16), (19,18),
+(47,23), (29,28), (31,30), (71,35), (37,36), (73,36), (41,40), (43,42),
+(431,43), (97,48), (53,52)… — dlogs (U,V) computed for the working set
+(generator of S_h via primitive-root powering; palette203.txt + dlog builder
+in engine203_search.py). Lattice algebra: kernel_lattice (Smith-form 2×2),
+bfs_reps (coset representatives), split_region (Λ′ = Λ ∩ Λ_q), free
+re-absorption by used primes' cosets — all implemented and exercised.
+
+**THE FIRST DFS (greedy, negative — the structural lesson):** min-m greedy
+splitting with 975 primes: STUCK — all primes consumed, frontier 745,118
+regions, density 0.7076 (capacity left 1.58 in unspent coset density).
+Zero absorption events: min-m splitting creates misaligned children.
+**LAW (the alignment deficit):** a covering needs Λ ∩ Λ_q ⊆ Λ_{q′}
+chain-alignment (the 1D covering-system pattern: nested moduli 2, 4, 8…),
+not density alone; random-transverse cosets cap at 1 − e^{−Σ1/h} ≈ 0.88
+coverage — the tree must PLAN lattice chains (top-down Λ-chain design:
+each split's children must land inside earlier/deeper cosets).
+The palette (budget 2.14, all machinery green) is BANKED — the
+chain-planning search is the next round's strike design.

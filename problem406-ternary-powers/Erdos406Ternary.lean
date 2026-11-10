@@ -5,6 +5,8 @@ import Arsenal.CardinalWorldsV2
 -- Family pattern (green kernels, K30/K36/K37 chains): explicit depth headroom.
 set_option maxRecDepth 262144
 set_option maxHeartbeats 4000000
+-- 2^500 / 3^700 kernel evaluations (the NO-OOM legal cap; no bigger use)
+set_option exponentiation.threshold 1000
 
 /-!
 # ERDŐS #406 — THE TERNARY CENSUS LAW (Kernel 38, S043 full-proof campaign)
@@ -112,15 +114,16 @@ theorem tfold_of_tern01 : ∀ (f n : Nat), n < 3 ^ f → tern01 f n = true →
     intro n hn _
     have h0 : n = 0 := by omega
     subst h0
-    exact ⟨[], tfold_nil⟩
+    exact ⟨[], tfold_nil.symm⟩
   | succ f' ih =>
     intro n hn hval
     by_cases h0 : n = 0
     · subst h0
-      exact ⟨[], tfold_nil⟩
+      exact ⟨[], tfold_nil.symm⟩
     · rw [tern01_succ, Bool.or_eq_true] at hval
       rcases hval with hbeq | hval
-      · exact absurd (Nat.eq_of_beq_eq_true hbeq) h0
+      · have hn0 : n = 0 := by simpa using hbeq
+        exact absurd hn0 h0
       · rw [Bool.and_eq_true] at hval
         obtain ⟨hdig, hrec⟩ := hval
         have hmod : n % 3 ≤ 1 := of_decide_eq_true hdig
@@ -196,7 +199,9 @@ theorem pow2_odd_mod3 : ∀ j : Nat, 2 ^ (2 * j + 1) % 3 = 2 := by
     induction j with
     | zero => rfl
     | succ j' ihj =>
-      have hp : 4 ^ (j' + 1) = 4 * 4 ^ j' := by rw [Nat.pow_succ]
+      have hp : 4 ^ (j' + 1) = 4 * 4 ^ j' := by
+        rw [Nat.pow_succ]
+        ring
       omega
   omega
 
@@ -237,33 +242,49 @@ theorem erdos406_mod8_budget : ∀ (b : List Bool) (k : Nat), 3 ≤ k →
   intro b k hk hb
   have h1 := tfold_mod8 b
   have h2 := pow2_mod8 k hk
-  rw [← hb] at h2
+  rw [← hb] at h1
   omega
 
 /-! ## §5 THE CENSUS (kernel-decided, the 480-discipline chunks 480 + 21). -/
 
-/-- The census predicate for exponent k. -/
-def censusCheckP (k : Nat) : Prop :=
-  (tern01 700 (2 ^ k) = true ↔ (k = 0 ∨ k = 2 ∨ k = 8))
+/-- The census checker for exponent k (Bool form: the checker rejects 2^k,
+or k is one of the three witnesses). -/
+def censusCheckB (k : Nat) : Bool :=
+  (tern01 700 (2 ^ k) == false) || decide (k = 0 ∨ k = 2 ∨ k = 8)
+
+theorem censusCheckB_iff (k : Nat) : censusCheckB k = true ↔
+    (tern01 700 (2 ^ k) = false ∨ (k = 0 ∨ k = 2 ∨ k = 8)) := by
+  unfold censusCheckB
+  cases h : tern01 700 (2 ^ k) with
+  | true => simp [h]
+  | false => simp [h]
 
 /-- Chunk 1: k ∈ [0, 480). -/
-theorem census_chunk1 :
-    (List.range 480).all (fun k => decide (censusCheckP k)) = true := by decide
+theorem census_chunk1 : (List.range 480).all censusCheckB = true := by decide
 
 /-- Chunk 2: k ∈ [480, 501). -/
 theorem census_chunk2 :
-    (List.range 21).all (fun j => decide (censusCheckP (480 + j))) = true := by decide
+    (List.range 21).all (fun j => censusCheckB (480 + j)) = true := by decide
 
-/-- **THE CENSUS**: for every k ≤ 500, the digit checker accepts 2^k
-exactly at k ∈ {0, 2, 8} (fuel 700 ≥ 316 = the ternary length of 2^500). -/
-theorem erdos406_census (k : Nat) (hk : k < 501) : censusCheckP k := by
+/-- **THE CENSUS** (the 480-discipline chunks 480 + 21): for every k ≤ 500,
+the digit checker accepts 2^k only at k ∈ {0, 2, 8} (fuel 700 ≥ 316 = the
+ternary length of 2^500). -/
+theorem erdos406_census (k : Nat) (hk : k < 501) :
+    tern01 700 (2 ^ k) = true → (k = 0 ∨ k = 2 ∨ k = 8) := by
+  intro hval
   rcases (by omega : k < 480 ∨ 480 ≤ k) with h | h
-  · exact of_decide_eq_true
-      ((List.all_eq_true.mp census_chunk1) k (List.mem_range.mpr h))
+  · have hc := (List.all_eq_true.mp census_chunk1) k (List.mem_range.mpr h)
+    rcases (censusCheckB_iff k).mp hc with hneg | hmem
+    · rw [hneg] at hval
+      exact absurd hval (by decide)
+    · exact hmem
   · have hmem : k - 480 ∈ List.range 21 := List.mem_range.mpr (by omega)
     have h1 := (List.all_eq_true.mp census_chunk2) (k - 480) hmem
     rw [Nat.add_sub_cancel' h] at h1
-    exact of_decide_eq_true h1
+    rcases (censusCheckB_iff k).mp h1 with hneg | hmem2
+    · rw [hneg] at hval
+      exact absurd hval (by decide)
+    · exact hmem2
 
 theorem two_pow_500_lt : 2 ^ 500 < 3 ^ 700 := by decide
 
@@ -276,12 +297,20 @@ theorem erdos406_main : ∀ k ≤ 500,
   intro k hk
   constructor
   · intro ⟨b, hb⟩
-    have hle : 2 ^ k ≤ 2 ^ 500 := Nat.pow_le_pow_right hk
+    have hs : 2 ^ 500 = 2 ^ k * 2 ^ (500 - k) := by
+      rw [← Nat.pow_add]
+      congr 1
+      omega
+    have hp : 0 < 2 ^ (500 - k) := Nat.pow_pos (by decide)
+    have hle : 2 ^ k ≤ 2 ^ 500 := by
+      rw [hs]
+      calc 2 ^ k = 2 ^ k * 1 := by ring
+        _ ≤ 2 ^ k * 2 ^ (500 - k) := Nat.mul_le_mul_left _ (Nat.le_of_lt hp)
     have hlt : 2 ^ 500 < 3 ^ 700 := two_pow_500_lt
     have hb3 : tfold b < 3 ^ 700 := by omega
     have h4 : tern01 700 (tfold b) = true := tern01_of_tfold b 700 hb3
     rw [← hb] at h4
-    exact (erdos406_census k (by omega)).mp h4
+    exact erdos406_census k (by omega) h4
   · rintro (rfl | rfl | rfl)
     · exact ⟨[true], by rfl⟩
     · exact ⟨[true, true], by rfl⟩
