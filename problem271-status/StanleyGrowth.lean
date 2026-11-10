@@ -371,10 +371,10 @@ theorem sq_mem_iff (n : Nat) : ∀ (k x : Nat),
           exact ⟨i, by omega, heq⟩
       · intro h
         obtain ⟨i, hi, heq⟩ := h
-        have hmem : aSeq n i ∈ sqSeq n (k + 1) :=
-          (sq_mem_iff n (k + 1) (aSeq n i)).mpr ⟨i, by omega, rfl⟩
         rcases Nat.lt_or_ge i (k + 2) with hlt | hge
-        · rw [← heq]
+        · have hmem : aSeq n i ∈ sqSeq n (k + 1) :=
+            (sq_mem_iff n (k + 1) (aSeq n i)).mpr ⟨i, by omega, rfl⟩
+          rw [← heq]
           exact List.mem_cons_of_mem _ hmem
         · have hie : i = k + 2 := by omega
           subst hie
@@ -390,7 +390,7 @@ theorem aSeq_step_lt (n : Nat) (hn : 1 ≤ n) : ∀ k, aSeq n k < aSeq n (k + 1)
   cases k with
   | zero =>
       have h1 : aSeq n 0 = 0 := rfl
-      have h2 : aSeq n 1 = n := rfl
+      have h2 : aSeq n (0 + 1) = n := rfl
       omega
   | succ k' =>
       have heq := aSeq_step_eq n (k' + 1) (by omega)
@@ -481,7 +481,7 @@ theorem apFree_sq (n : Nat) (hn : 1 ≤ n) : ∀ (k x y z : Nat),
         intro w hw
         have hd : StrictDec (sqSeq n (k + 2)) := (sq_strict n hn (k + 2)).1
         rw [hstep] at hd
-        have hlt := hd.1 w (List.mem_cons_of_mem _ hw)
+        have hlt := hd.1 w hw
         omega
       rcases List.mem_cons.mp hx with hex | hex
       · rcases List.mem_cons.mp hy with hey | hey
@@ -510,6 +510,8 @@ theorem aSeq_gap3 (n : Nat) (hn : 1 ≤ n) (k : Nat) :
     aSeq n k + 3 ≤ aSeq n (k + 2) := by
   have h1 := aSeq_step_lt n hn k
   have h2 := aSeq_step_lt n hn (k + 1)
+  have hidx2 : k + 1 + 1 = k + 2 := by omega
+  rw [hidx2] at h2
   have hm0 : aSeq n k ∈ sqSeq n (k + 2) := (sq_mem_iff n (k + 2) _).mpr
     ⟨k, by omega, rfl⟩
   have hm1 : aSeq n (k + 1) ∈ sqSeq n (k + 2) := (sq_mem_iff n (k + 2) _).mpr
@@ -571,7 +573,10 @@ theorem skip_to_index (n : Nat) (hn : 1 ≤ n) {k y : Nat} (hk : 1 ≤ k)
     | inl h => exact h
     | inr hge =>
         cases Nat.lt_or_ge j i with
-        | inl hlt => omega
+        | inl hlt =>
+            have hmono := aSeq_mono_lt n hn hlt
+            rw [← hia, ← hjb] at hmono
+            omega
         | inr heg =>
           have hij : i = j := by omega
           subst hij
@@ -679,7 +684,6 @@ theorem pairBlock_mem_snd {j : Nat} {p : Nat × Nat} (hp : p ∈ pairBlock j) :
   simp only [pairBlock, List.mem_map] at hp
   obtain ⟨i, _, heq⟩ := hp
   rw [← heq]
-  rfl
 
 theorem pairList_mem_snd {m : Nat} {p : Nat × Nat} (hp : p ∈ pairList m) :
     p.2 ≤ m := by
@@ -693,20 +697,9 @@ theorem pairList_mem_snd {m : Nat} {p : Nat × Nat} (hp : p ∈ pairList m) :
         omega
 
 theorem pairBlock_nodup (j : Nat) : (pairBlock j).Nodup := by
-  induction j with
-  | zero => simp [pairBlock]
-  | succ j' ih =>
-      have hsplit : pairBlock (j' + 1)
-          = pairBlock j' ++ [(j', j' + 1)] := by
-        simp only [pairBlock, List.range_succ, List.map_append, List.map_cons,
-          List.map_nil, List.append_cons, List.append_nil]
-      rw [hsplit]
-      refine List.Nodup.append ih (List.nodup_singleton _) ?_
-      intro p hp hq
-      have h1 : p.2 = j' := pairBlock_mem_snd hp
-      rw [List.mem_singleton] at hq
-      have h2 : p.2 = j' + 1 := by rw [hq]
-      omega
+  simp only [pairBlock]
+  exact List.Nodup.map (fun a b h => by injection h with h1 _; exact h1)
+    (List.nodup_range j)
 
 theorem pairList_nodup : ∀ m, (pairList m).Nodup
   | 0 => List.nodup_nil
@@ -754,7 +747,7 @@ theorem lfind_isSome {p : Nat × Nat → Bool} : ∀ (l : List (Nat × Nat))
       · simp only [lfind]
         split
         · intro hc; simp at hc
-        · exact ih ht hp
+        · exact ih ht
 
 /-- The canonical blocker-pair selector: the first `(i, j)` in the
 `pairList` order with `a i + y = 2 * a j` (or `(0,0)` if none). -/
@@ -813,9 +806,9 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
       have hmono : aSeq n 1 < aSeq n m := aSeq_mono_lt n hn (by omega)
       set A := aSeq n m with hA
       have hIco_card : (Finset.Ico (n + 1) A).card = A - (n + 1) :=
-        Finset.card_Ico _ _
+        Nat.card_Ico _ _
       have hM_card : ((sqSeq n m).toFinset).card = m + 1 := by
-        rw [List.toFinset_card (sq_nodup n m hn), sq_length]
+        rw [List.toFinset_card_of_nodup (sq_nodup n m hn), sq_length]
       have hsub : Finset.Ico (n + 1) A
           ⊆ (Finset.Ico (n + 1) A \ (sqSeq n m).toFinset)
             ∪ (Finset.Ico (n + 1) A ∩ (sqSeq n m).toFinset) := by
@@ -835,13 +828,13 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
         have h3 : ({0, n, A} : Finset Nat) ⊆ (sqSeq n m).toFinset := by
           intro x hx
           simp only [Finset.mem_insert, Finset.mem_singleton] at hx
-          rcases hx with rfl | rfl | rfl
-          · simp only [List.mem_toFinset]
+          rcases hx with hx0 | hxn | hxA
+          · simp only [List.mem_toFinset, hx0]
             exact (sq_strict n hn m).2
-          · simp only [List.mem_toFinset]
+          · simp only [List.mem_toFinset, hxn]
             rw [sq_mem_iff n m]
             exact ⟨1, by omega, rfl⟩
-          · simp only [List.mem_toFinset]
+          · simp only [List.mem_toFinset, hxA]
             exact aSeq_mem n m
         have hcard3 : ({0, n, A} : Finset Nat).card = 3 := by
           have h01 : (0 : Nat) ∉ ({n, A} : Finset Nat) := by
@@ -850,7 +843,7 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
           have hnA : n ∉ ({A} : Finset Nat) := by
             simp only [Finset.mem_singleton]
             omega
-          rw [Finset.card_insert_eq h01, Finset.card_insert_eq hnA]
+          rw [Finset.card_insert_of_notMem h01, Finset.card_insert_of_notMem hnA]
           simp
         have hsub2 : Finset.Ico (n + 1) A ∩ (sqSeq n m).toFinset
             ⊆ (sqSeq n m).toFinset \ {0, n, A} := by
@@ -866,11 +859,8 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
           (Finset.Ico (n + 1) A ∩ (sqSeq n m).toFinset).card
               ≤ ((sqSeq n m).toFinset \ {0, n, A}).card := Finset.card_le_card hsub2
           _ = ((sqSeq n m).toFinset).card
-              - (({0, n, A} : Finset Nat) ∩ (sqSeq n m).toFinset).card :=
-            Finset.card_sdiff
-        have hinter : (({0, n, A} : Finset Nat) ∩ (sqSeq n m).toFinset).card
-            = ({0, n, A} : Finset Nat).card := by
-          rw [Finset.inter_eq_self_of_subset_left h3]
+              - (({0, n, A} : Finset Nat)).card :=
+            Finset.card_sdiff_of_subset h3
         omega
       -- the rejected side: the pigeonhole
       have hcover : ∀ y ∈ (Finset.Ico (n + 1) A \ (sqSeq n m).toFinset),
@@ -918,7 +908,7 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
               obtain ⟨y, hyR, hfp⟩ := hp
               rw [← hfp]
               exact himg y hyR)
-          _ = (pairList (m - 1)).length := List.toFinset_card (pairList_nodup _)
+          _ = (pairList (m - 1)).length := List.toFinset_card_of_nodup (pairList_nodup _)
           _ = (m - 1) * m / 2 := by
               have hpl := pairList_length (m - 1)
               rw [show m - 1 + 1 = m from by omega] at hpl
@@ -949,25 +939,25 @@ theorem growth_G1 (n : Nat) (hn : 1 ≤ n) : ∀ m, 1 ≤ m →
 -- §9  RECEIPTS + ARSENAL BRIDGE
 -- ===========================================================================
 
-/-- The first 12 members of S(0,4) (OEIS A005487):
+/- The first 12 members of S(0,4) (OEIS A005487):
 expected `[0, 4, 5, 7, 11, 12, 16, 23, 26, 31, 33, 37]`. -/
 #eval (List.range 12).map (fun k => aSeq 4 k)
 
-/-- S(0,1) = the Cantor set (OEIS A005836):
+/- S(0,1) = the Cantor set (OEIS A005836):
 expected `[0, 1, 3, 4, 9, 10, 12, 13, 27, 28]`. -/
 #eval (List.range 10).map (fun k => aSeq 1 k)
 
-/-- S(0,2) (OEIS A005837): expected `[0, 2, 3, 5, 9, 11, 12, 14, 27, 29]`. -/
+/- S(0,2) (OEIS A005837): expected `[0, 2, 3, 5, 9, 11, 12, 14, 27, 29]`. -/
 #eval (List.range 10).map (fun k => aSeq 2 k)
 
-/-- The G1 ceiling and G2 floor at seed 4, m ≤ 29 (the census range):
+/- The G1 ceiling and G2 floor at seed 4, m ≤ 29 (the census range):
 every row satisfies `2*a ≥ 3m-3` and `a ≤ 4 + (m-1)(m+2)/2`. -/
 #eval (List.range 29).filter (fun m =>
   let a := aSeq 4 (m + 1)
   !(2 * a ≥ 3 * (m + 1) - 3 ∧ a ≤ 4 + m * (m + 3) / 2))
 -- expected: [] (zero violations)
 
-/-- S(0,4) growth profile: a_m vs the two laws at the census frontier. -/
+/- S(0,4) growth profile: a_m vs the two laws at the census frontier. -/
 #eval (List.range 28).map (fun k =>
   (aSeq 4 (k + 2), 4 + (k + 1) * (k + 4) / 2))
 
@@ -981,7 +971,7 @@ def arsenalBridgeProp271 : Prop :=
   [23 % 3, (23 / 3) % 3, (23 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
   (aSeq 4 3 % 3 = 0 ∨ aSeq 4 3 % 3 = 1 ∨ aSeq 4 3 % 3 = 2) ∧
   carryAtPos 23 1 < 4 ∧
-  CardinalWorldsV2.v2r (3 ^ 1 * 9) = CardinalWorldsV2.v2r 9
+  v2r (3 ^ 1 * 9) = v2r 9
 
 theorem erdos271_arsenal_bridge : arsenalBridgeProp271 :=
   ⟨by decide, by decide,

@@ -1819,3 +1819,72 @@ p=5/a≡2 discovery class (below the tail bound, battery-verified) ALL
 GREEN locally. CI round 1 (run 42794751953).
 
 **The wave-1 state: P271 (K36) in CI r3; P404 (K37) in CI r1; next: P1108.**
+
+---
+
+## SESSION 042 (continued) — THE PIN-VERIFICATION DOCTRINE: K36 r4 + K37 r2 (one commit, 22+21 root-cause fixes)
+
+**THE R3 VERDICT (run 42799183337, job 129772003714):** K36 r3 FAILED (21
+errors), K37 r1 FAILED (47 errors) — kernels 1–35 ALL GREEN (the 35-kernel
+battery is stable). BOTH error lists fully extracted and EVERY root cause
+struck in ONE round:
+
+**THE NAME-ATLAS LAW (L72): never guess a Mathlib name again — FETCH THE PIN.**
+Lean v4.33.0-rc2 + Mathlib 51e6992e were interrogated DIRECTLY via raw
+GitHub sources. The pin-exact replacements (all verified against source):
+- `Finset.card_Ico` ✗ → **`Nat.card_Ico`** (Order/Interval/Finset/Nat.lean:84,
+  namespace Nat since the 2025 interval re-namespace)
+- `List.toFinset_card` ✗ → **`List.toFinset_card_of_nodup`** (Finset/Card.lean:212)
+- `List.Nodup.map` takes **Injective FIRST** (Nodup.lean:210); the injOn form
+  is **`List.Nodup.map_on`** (Nodup.lean:189)
+- `Finset.card_insert_eq` ✗ → **`Finset.card_insert_of_notMem`** (Card.lean:104)
+- `Finset.inter_eq_self_of_subset_left` ✗ → GONE ENTIRELY; the sdiff identity
+  **`Finset.card_sdiff_of_subset`** (Card.lean:584) makes it unnecessary
+- `Int.add_mod`/`Int.mul_mod`/`Int.abs_neg`/`Int.abs_add`/
+  `Int.mod_eq_zero_iff_dvd` — ALL DEAD at this pin. **THE K37 R2 REDESIGN:
+  the zero-roulette Int layer.** The whole coin-congruence engine was
+  restated in DIVISIBILITY form (`p ∣ (pt a j − (−1)^j·ff m j)` in ℤ, the
+  step closed by `linear_combination` + pure ring arithmetic; the block-sum
+  bound restated TWO-SIDED without abs; the final obstruction via
+  `Nat.dvd_of_mod_eq_zero` + Int-cast + sign cases with `Int.mul_nonneg`).
+  ZERO Int-mod lemma references remain.
+- `one_le_mul` clashes with Mathlib (ResidualTail imports the Arsenal →
+  full Mathlib) → renamed `one_le_mul_nat` (the green K15 file works only
+  because it imports NOTHING).
+- `Nat.Prime.dvd_mul` is an IFF at this pin: `(Nat.Prime.dvd_mul hp).mp hd`.
+- `CardinalWorldsV2.v2r` ✗ — v2r is a TOP-LEVEL def in CardinalWorlds.lean:657
+  (NOT in the V2 namespace): plain **`v2r`**.
+- Doc-comments (`/- … -/`) before `#eval` are parse errors ("expected
+  'lemma'") — plain comments only.
+
+**K36 r4 (StanleyGrowth.lean, 16 fixes):** (1) sq_mem_iff k+2: hmem moved
+into the hlt branch (the i ≤ k+1 side condition was unprovable before the
+case split); (2) aSeq_step_lt zero case: THE ATOM BRIDGE `aSeq n (0+1)`
+(L70 — omega never normalizes inside atoms); (3) apFree_sq hc_max: `hd.1 w
+hw` — the mem_cons_of_mem wrapper fed a cons-membership where the tail
+membership was already in hand; (4) aSeq_gap3: bridge `k+1+1 = k+2` at h2
+before the final omega; (5) skip_to_index j<i case: the missing
+`aSeq_mono_lt` contradiction (omega cannot know monotonicity); (6)
+pairBlock_mem_snd: rw auto-closed, trailing rfl removed; (7) pairBlock_nodup:
+THE FALSE HSPLIT (`pairBlock (j'+1) = pairBlock j' ++ [(j',j'+1)]` is
+mathematically WRONG — the second components differ!) replaced by the
+one-line `List.Nodup.map` + `List.nodup_range`; (8) the rcases-rfl TRAP:
+`rcases hx with rfl|rfl|rfl` on `x = n` SUBSTITUTES AWAY THE THEOREM
+PARAMETER n ("unknown identifier n") — explicit binders + simp rewrites;
+(9) card_insert_of_notMem; (10) card_sdiff_of_subset h3 + hinter deleted;
+(11-12) toFinset_card_of_nodup ×2; (13) Nat.card_Ico; (14) five #eval doc
+comments → plain; (15) v2r ×2; (16) lfind_isSome: `ih ht` (the auto-reverted
+IH is `x ∈ ys → lfind p ys ≠ none` — hp is not part of it).
+
+**K37 r2 (ResidualTail.lean): FULL REWRITE of §5–§7 to the divisibility
+architecture** (coin_dvd + pt_dvd_tail_int + bsum_diff_dvd + coin_bounds +
+bsum_bounds two-sided + block_count with map_on/Nat.card_Ico/
+toFinset_card_of_nodup + the main theorem's sign-case obstruction) + the
+K15-architecture port with `one_le_mul_nat`, `mod_zero_of_dvd` (Nat.zero_mul
+— the r1 bug was Nat.mul_zero on a `0 * x` pattern), and the Euclid
+multiplicative law ported from the green vpad_congr_unit structure with the
+`(Nat.Prime.dvd_mul hp).mp` iff-elimination. The m=3 class theorem's bound
+proof: `by decide` on the ground equation (the r1 rw+omega died on rw's
+auto-rfl).
+
+CI round 4 fired on both kernels.

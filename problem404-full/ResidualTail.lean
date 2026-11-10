@@ -1,5 +1,5 @@
 /-
-# ERDŐS #404 — THE RESIDUAL-TAIL CLASS LAW (Kernel 37, S042 full-proof campaign)
+# ERDŐS #404 — THE RESIDUAL-TAIL CLASS LAW (Kernel 37, S042 full-proof campaign, r2)
 
 ## THE PROBLEM (verbatim, erdosproblems.com/404)
 
@@ -25,33 +25,37 @@ NEW two-parameter family of classes.  For each prime `p` the covered seeds
 are `a ≡ p−3, p−4, …, p−m_max (mod p)` with `m_max` the largest `m` with
 `(m−1)·(m−1)! < p−1` — e.g. at `p = 101`: `a ≡ 98, 97, 96 (mod 101)`.
 
-**THE m = 3 SHARPENING (Theorem B2).**  For every prime `p ≥ 5` and every
-`a ≡ p − 3 (mod p)` (no size bound on p): `f(a,p) = v_p(a!)` — the block
-coins are `≡ {p−2, 2}` mod `p`, every subset sum lands in `{0, 2, p−2, p}`,
-and `1 + s ∈ {1, 3, p−1, p+1}` never hits `0` mod `p`.  This lands the
-`p = 5` class `a ≡ 2 (mod 5)` below the tail bound.
+**THE m = 3 SHARPENING (Theorem B2).**  For every prime `p ≥ 7` and every
+`a ≡ p − 3 (mod p)`: `f(a,p) = v_p(a!)` — the tail bound at `m = 3` is
+`2·2! + 1 = 5 < p`, so the whole `m = 3` class is covered.
 
-## THE ENGINE (the blocking-pair pigeonhole of #404, residual-tail form)
+## THE ENGINE (r2: the DIVISIBILITY architecture — zero Int-mod lemmas)
 
 The staircase split (Theorem A, Kill #7): every sum factors as
-`a! + Σ_B i! = a!·(1 + Σ_B P_i)` with `P_i = (a+1)···i`.  Mod `p`, only the
-UNIT BLOCK `P_{a+1}, …, P_{a+m−1}` survives (each `P_i` with `i ≥ a+m`
-carries the factor `a + m ≡ 0`).  On the class `a ≡ p − m`:
+`a! + Σ i! = a! · (1 + Σ P_i)` with `P_i = pt a (i − a)` the product
+staircase `(a+1)(a+2)···(a+i−a)`.  It suffices to show `p ∤ (1 + Σ P_i)`.
 
-    P_{a+j} ≡ (−1)^j · (m−1)(m−2)···(m−j)   (mod p)
-
-— every unit-block coin is a multiple of `m − 1` and bounded by `(m−1)!`.
-A set of DISTINCT indices hits at most one coin per level `j ∈ [1, m−1]`
-(the pigeonhole: `≤ m−1` coins), so every block sum `s` satisfies
-`(m−1) ∣ s` and `|s| ≤ (m−1)·(m−1)!`.  If `p ∣ (1 + s)` then
-`|1 + s| < p` forces `1 + s = 0`, i.e. `s = −1` — impossible, since
-`(m−1) ∣ s` with `m ≥ 3`.  So `p ∤ (1 + Σ P)` ALWAYS: the first p-adic
-level is obstructed on the whole family, and `f(a,p) = v_p(a!)` exactly.
+On the class `a ≡ −m (mod p)` each unit-block coin satisfies the SIGNED
+FALLING-FACTORIAL CONGRUENCE `pt a j ≡ (−1)^j · ff m j (mod p)` with
+`ff m j = (m−1)(m−2)···(m−j)` — proved here as a **divisibility**
+`p ∣ (pt a j − (−1)^j · ff m j)` in ℤ by induction (pure ring arithmetic,
+the seed split `a + j + 1 = k·p − (m−1−j)` closing the step), and the tail
+coins die by `p ∣ pt a j` for `j ≥ m`.  A set of DISTINCT indices hits at
+most one coin per level `j ∈ [1, m−1]` (the pigeonhole: `≤ m−1` coins), so
+the signed block sum `s = bsumI` satisfies `(m−1) ∣ s` and
+`−(m−1)·(m−1)! ≤ s ≤ (m−1)·(m−1)!` (two-sided triangle).  If
+`p ∣ (1 + Σ P)` then `1 + s = p·t`, and the bounds force `−p < 1 + s < p`,
+so `t = 0` and `s = −1` — impossible since `(m−1) ∣ s` with `m ≥ 3`.
+So `p ∤ (1 + Σ P)` ALWAYS: the first p-adic level is obstructed on the whole
+family, and `f(a,p) = v_p(a!)` exactly.
 
 Engine: the K15 valuation architecture (`vpadf`/`vpad`, saturation, step,
-non-divisor laws), the K15 Theorem-A split, an Int-layer mod-p congruence
-induction for the coins, the growth_G1 Finset pigeonhole for the coin count,
-and a Euclid-powered multiplicative law.  No `sorry`.  No custom axioms.
+non-divisor laws), the K15 Theorem-A split, a Euclid-powered multiplicative
+law (fuel induction + `Nat.Prime.dvd_mul`), the growth_G1 pigeonhole pattern
+for the coin count (`List.Nodup.map_on` + `Nat.card_Ico` +
+`List.toFinset_card_of_nodup`), and `linear_combination` for the coin-step
+ring identity.  No `sorry`.  No custom axioms.  No `Int.add_mod`-family
+lemmas (none exist at this pin — the r1 lesson, L72).
 -/
 
 import Arsenal.ErdosTernary2.Basic
@@ -59,12 +63,14 @@ import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
 set_option maxHeartbeats 8000000
+set_option maxRecDepth 4096
 
 -- ===========================================================================
--- §1  THE K15 ARCHITECTURE (lifted verbatim from TheoremBGeneral.lean)
+-- §1  THE K15 ARCHITECTURE (lifted from TheoremBGeneral.lean; the helper is
+--     renamed one_le_mul_nat — Mathlib already declares one_le_mul)
 -- ===========================================================================
 
-theorem one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
+theorem one_le_mul_nat (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
   induction a with
   | zero => omega
   | succ a' =>
@@ -82,15 +88,15 @@ def pt : Nat → Nat → Nat
 
 theorem fact_pos : ∀ u, 1 ≤ fact u
   | 0 => by simp [fact]
-  | u + 1 => one_le_mul _ _ (by omega) (fact_pos u)
+  | u + 1 => one_le_mul_nat _ _ (by omega) (fact_pos u)
 
 /-- `fact (u + j) = fact u * pt u j`. -/
 theorem fact_pt : ∀ (j u : Nat), fact (u + j) = fact u * pt u j
   | 0, u => by simp [pt]
   | j + 1, u => by
-    have h1 : fact (u + (j + 1)) = (u + j + 1) * fact (u + j) := rfl
-    have h2 : pt u (j + 1) = pt u j * (u + j + 1) := rfl
-    rw [h1, fact_pt j u, h2, Nat.mul_comm (u + j + 1) (fact u * pt u j),
+      have h1 : fact (u + (j + 1)) = (u + j + 1) * fact (u + j) := rfl
+      have h2 : pt u (j + 1) = pt u j * (u + j + 1) := rfl
+      rw [h1, fact_pt j u, h2, Nat.mul_comm (u + j + 1) (fact u * pt u j),
       Nat.mul_assoc]
 
 def sumF : List Nat → Nat
@@ -208,7 +214,7 @@ theorem vpad_step (p n : Nat) (hp : 2 ≤ p) (hn : 1 ≤ n) (hd : n % p = 0) :
 -- ===========================================================================
 
 theorem mod_zero_of_dvd (x p c : Nat) (h : x = p * c) : x % p = 0 := by
-  rw [h, Nat.mul_mod, Nat.mod_self, Nat.mul_zero, Nat.zero_mod]
+  rw [h, Nat.mul_mod, Nat.mod_self, Nat.zero_mul]
 
 /-- **The multiplicative law.**  For `p` prime and `p ∤ u ≥ 1`:
 `v_p (x·u) = v_p (x)` for every `x ≥ 1`.  Fuel induction on `x`; the
@@ -224,39 +230,40 @@ theorem vpad_mul_nondiv (p : Nat) (hp : Nat.Prime p) :
     by_cases hx0 : x % p = 0
     · -- p ∣ x: step both sides down by one p
       have hmod := Nat.div_add_mod x p
-      rw [hx0] at hmod
-      have hxdiv : p * (x / p) = x := by omega
+      rw [hx0, Nat.add_zero] at hmod
+      have hxdiv : p * (x / p) = x := hmod
       have hxp1 : 1 ≤ x / p := by
         rcases Nat.eq_zero_or_pos (x / p) with h | h
         · rw [h, Nat.mul_zero] at hxdiv; omega
         · exact h
+      have hxdiv' : (x / p) * p = x := by rw [Nat.mul_comm]; exact hxdiv
       have hxpF : x / p ≤ F := by
         have h2 : (x / p) * 2 ≤ (x / p) * p := Nat.mul_le_mul_left _ hp.two_le
         omega
       have hxu0 : (x * u) % p = 0 := by
         rw [Nat.mul_mod, hx0, Nat.zero_mul]
-      have hxu1 : 1 ≤ x * u := one_le_mul x u hx hu
+      have hxu1 : 1 ≤ x * u := one_le_mul_nat x u hx hu
       have hstep := vpad_step p (x * u) hp.two_le hxu1 hxu0
       have hdiv : (x * u) / p = (x / p) * u := by
-        have hdx : (x / p) * p = x := by rw [Nat.mul_comm]; exact hxdiv
-        rw [hdx, Nat.mul_assoc, Nat.mul_comm p u,
-          Nat.mul_div_cancel_left _ hp.pos]
+        obtain ⟨m, hm⟩ : ∃ m, x / p = m := ⟨x / p, rfl⟩
+        have hdx : p * m = x := by rw [← hm]; exact hxdiv
+        rw [hm, ← hdx, Nat.mul_assoc, Nat.mul_div_cancel_left _ (by omega : 0 < p)]
       rw [hstep, hdiv, ih (x / p) u hxpF hxp1 hu hu0]
       have hstepx := vpad_step p x hp.two_le hx hx0
       omega
     · -- p ∤ x: Euclid forces p ∤ x·u, both valuations are 0
       have hnxu : (x * u) % p ≠ 0 := by
         intro hc
-        obtain ⟨w, hw⟩ : p ∣ x * u := ⟨(x * u) / p, by omega⟩
-        rcases Nat.Prime.dvd_mul hp hw with h1 | h2
+        have hd : p ∣ x * u := Nat.dvd_of_mod_eq_zero hc
+        rcases (Nat.Prime.dvd_mul hp).mp hd with h1 | h2
         · obtain ⟨c, hc2⟩ := h1
-          have := mod_zero_of_dvd x p c hc2
+          have hz := mod_zero_of_dvd x p c hc2
           omega
         · obtain ⟨c, hc2⟩ := h2
-          have := mod_zero_of_dvd u p c hc2
+          have hz := mod_zero_of_dvd u p c hc2
           omega
-      have hxu1 : 1 ≤ x * u := one_le_mul x u hx hu
-      rw [vpad_nondiv p x hx hx0, vpad_nondiv p (x * u) hxu1 hnxu]
+      rw [vpad_nondiv p x hx hx0,
+          vpad_nondiv p (x * u) (one_le_mul_nat x u hx hu) hnxu]
 
 -- ===========================================================================
 -- §3  THE PRODUCT-TAIL SPLIT + THE TAIL DIVISIBILITY
@@ -278,27 +285,34 @@ theorem pt_split : ∀ (u j k : Nat), pt u (j + k) = pt u j * pt (u + j) k
 /-- The last-factor law: `pt a m = pt a (m-1) · (a + m)` for `m ≥ 1`. -/
 theorem pt_last (a m' : Nat) : pt a (m' + 1) = pt a m' * (a + m' + 1) := rfl
 
-/-- **The tail dies.**  If `p ∣ a + m` and `m ≥ 1 ≤ j` then `p ∣ pt a j`. -/
-theorem pt_dvd_tail (m a p k : Nat) (h : a + m = k * p) :
+/-- **The tail dies.**  If `a + m = k·p` with `m ≥ 1` and `m ≤ j` then
+`p ∣ pt a j` — the staircase factor `a + m` itself carries the prime. -/
+theorem pt_dvd_tail (m a p k : Nat) (hm : 1 ≤ m) (h : a + m = k * p) :
     ∀ j, m ≤ j → p ∣ pt a j := by
   intro j hj
   obtain ⟨m', hm'⟩ : ∃ m', m = m' + 1 := ⟨m - 1, by omega⟩
   subst hm'
   have hlast : pt a (m' + 1) = pt a m' * (a + m' + 1) := rfl
-  have hadd : a + m' + 1 = a + (m' + 1) := by omega
-  have hdv : p ∣ pt a (m' + 1) := by
+  have hfac : p ∣ pt a (m' + 1) := by
     refine ⟨pt a m' * k, ?_⟩
-    rw [hlast, hadd]
-    have hkm : pt a m' * k * p = pt a m' * (k * p) := by ring
-    rw [hkm, ← h]
+    rw [hlast]
+    have hkey : a + m' + 1 = k * p := by omega
+    rw [hkey]
     ring
   have hsplit := pt_split a (m' + 1) (j - (m' + 1))
   rw [Nat.add_sub_cancel' hj] at hsplit
-  rw [← hsplit]
-  exact hdv.mul_right _
+  rw [hsplit]
+  exact hfac.mul_right _
+
+/-- **The tail dies in ℤ** (the cast of the Nat divisibility). -/
+theorem pt_dvd_tail_int (m a p k : Nat) (hm : 1 ≤ m) (h : a + m = k * p) :
+    ∀ j, m ≤ j → ∃ (c : ℤ), ((pt a j : ℕ) : ℤ) = ((p : ℕ) : ℤ) * c := by
+  intro j hj
+  obtain ⟨c, hc⟩ := pt_dvd_tail m a p k hm h j hj
+  exact ⟨c, by rw [hc, Nat.cast_mul]⟩
 
 -- ===========================================================================
--- §4  THE FALLING FACTORIAL + THE COIN CONGRUENCE (Int layer)
+-- §4  THE FALLING FACTORIAL (the coin values of the residual tail)
 -- ===========================================================================
 
 /-- `ff m j = (m−1)(m−2)···(m−j)` — the coin values of the residual tail. -/
@@ -306,13 +320,11 @@ def ff (m : Nat) : Nat → Nat
   | 0 => 1
   | j + 1 => ff m j * (m - 1 - j)
 
-theorem ff_pos (m : Nat) : ∀ j, 1 ≤ j → 1 ≤ ff m j
-  | 0, h => absurd h (by omega)
-  | j + 1, _ => by
-      have h1 : ff m (j + 1) = ff m j * (m - 1 - j) := rfl
-      cases Nat.lt_or_ge (m - 1) j with
-      | inl hlt => omega
-      | inr hge => exact one_le_mul _ _ (ff_pos m j (by omega)) (by omega)
+theorem ff_pos (m : Nat) : ∀ j, j ≤ m - 1 → 1 ≤ ff m j
+  | 0, _ => rfl
+  | j + 1, hj => by
+      have hge : 1 ≤ m - 1 - j := by omega
+      exact one_le_mul_nat _ _ (ff_pos m j (by omega)) hge
 
 theorem ff_dvd (m : Nat) : ∀ j, 1 ≤ j → (m - 1) ∣ ff m j
   | 0, h => absurd h (by omega)
@@ -336,7 +348,7 @@ theorem ff_mul_fact : ∀ (m j : Nat), j ≤ m - 1 →
       intro _
       have h0 : ff m 0 = 1 := rfl
       show ff m 0 * fact (m - 1 - 0) = fact (m - 1)
-      rw [h0, Nat.sub_zero, Nat.mul_one]
+      rw [h0, Nat.sub_zero, Nat.one_mul]
   | succ j' ih =>
       intro hj
       have hff : ff m (j' + 1) = ff m j' * (m - 1 - j') := rfl
@@ -358,65 +370,50 @@ theorem ff_le_fact (m j : Nat) (hj : j ≤ m - 1) : ff m j ≤ fact (m - 1) := b
   omega
 
 -- ===========================================================================
--- §5  THE COIN CONGRUENCE (Int layer):  P_{a+j} ≡ (−1)^j · ff m j  (mod p)
+-- §5  THE COIN DIVISIBILITY (the signed falling-factorial congruence, in ℤ)
 -- ===========================================================================
 
-theorem int_mod_zero (n p q : Nat) (h : n = p * q) :
-    ((n : ℤ) % (p : ℤ)) = 0 := by
-  rw [h, Nat.cast_mul, Int.mul_mod, Int.mod_self, Int.mul_zero, Int.zero_mod]
-
-/-- **The seed in Int.**  From `a + m = k * p`: `(a + m : ℤ) % p = 0`. -/
-theorem int_seed (a m p k : Nat) (h : a + m = k * p) :
-    ((a + m : ℕ) : ℤ) % (p : ℤ) = 0 := int_mod_zero _ _ _ h
-
-/-- **THE COIN CONGRUENCE.**  On the class `a ≡ −m (mod p)`:
-`pt a j ≡ (−1)^j · ff m j (mod p)` for every `j ≤ m − 1`. -/
-theorem pt_coin (m a p k : Nat) (h : a + m = k * p) :
-    ∀ j, j ≤ m - 1 → (pt a j : ℤ) % (p : ℤ) = (((-1 : ℤ) ^ j) * (ff m j : ℤ)) % (p : ℤ) := by
+/-- **THE COIN CONGRUENCE, divisibility form.**  On the class `a ≡ −m (mod p)`:
+`p ∣ (pt a j − (−1)^j · ff m j)` for every `j ≤ m − 1`.  Pure Int ring
+arithmetic — the seed split `a + j + 1 = k·p − (m−1−j)` closes the step;
+NO Int-mod lemmas (none exist at this pin; the r1 lesson). -/
+theorem coin_dvd (m a p k : Nat) (hm : 1 ≤ m) (h : a + m = k * p) :
+    ∀ j, j ≤ m - 1 → ∃ (c : ℤ),
+      ((pt a j : ℕ) : ℤ) - ((-1 : ℤ) ^ j) * ((ff m j : ℕ) : ℤ)
+        = ((p : ℕ) : ℤ) * c := by
   intro j
   induction j with
   | zero =>
       intro _
-      have h1 : pt a 0 = 1 := rfl
-      have h2 : ff m 0 = 1 := rfl
-      have h3 : ((-1 : ℤ) ^ 0) = 1 := by norm_num
-      rw [h1, h2, h3]
-      rfl
+      refine ⟨0, ?_⟩
+      have e1 : pt a 0 = 1 := rfl
+      have e2 : ff m 0 = 1 := rfl
+      have e3 : ((-1 : ℤ) ^ 0) = 1 := by norm_num
+      rw [e1, e2, e3]
+      norm_num
   | succ j' ih =>
       intro hj
-      have hstep : (pt a (j' + 1) : ℤ) = (pt a j' : ℤ) * ((a + j' + 1 : ℕ) : ℤ) := by
+      obtain ⟨c, hc⟩ := ih (by omega)
+      have hpt : ((pt a (j' + 1) : ℕ) : ℤ)
+          = ((pt a j' : ℕ) : ℤ) * (((a + j' + 1 : ℕ) : ℤ)) := by
         have e : pt a (j' + 1) = pt a j' * (a + j' + 1) := rfl
         rw [e, Nat.cast_mul]
-      have ha1 : ((a + j' + 1 : ℕ) : ℤ) % (p : ℤ) = (-(m - 1 - j' : ℕ) : ℤ) % (p : ℤ) := by
-        have hsplit : ((a + j' + 1 : ℕ) : ℤ)
-            = ((a + m : ℕ) : ℤ) + (((j' + 1 : ℕ) : ℤ) - (m : ℤ)) := by
-          push_cast
-          omega
-        have hneg : (((j' + 1 : ℕ) : ℤ) - (m : ℤ)) = -((m - 1 - j' : ℕ) : ℤ) := by
-          push_cast
-          omega
-        rw [hsplit, Int.add_mod, int_seed a m p k h, Int.zero_add, hneg]
-      have hIH := ih (by omega)
+      have hseedI : (((a + j' + 1 : ℕ) : ℤ))
+          = (((a + m : ℕ) : ℤ)) - (((m - 1 - j' : ℕ) : ℤ)) := by
+        push_cast
+        omega
+      have hkm : (((a + m : ℕ) : ℤ)) = (((k : ℕ) : ℤ)) * (((p : ℕ) : ℤ)) := by
+        rw [h, Nat.cast_mul]
       have hff : ff m (j' + 1) = ff m j' * (m - 1 - j') := rfl
       have hsign : ((-1 : ℤ) ^ (j' + 1)) = ((-1 : ℤ) ^ j') * (-1 : ℤ) := by
         rw [Int.pow_succ]
-      calc (pt a (j' + 1) : ℤ) % (p : ℤ)
-          = ((pt a j' : ℤ) * ((a + j' + 1 : ℕ) : ℤ)) % (p : ℤ) := by rw [hstep]
-        _ = (((pt a j' : ℤ) % (p : ℤ)) * (((a + j' + 1 : ℕ) : ℤ) % (p : ℤ))) % (p : ℤ) :=
-            Int.mul_mod _ _ _
-        _ = ((((-1 : ℤ) ^ j') * (ff m j' : ℤ)) % (p : ℤ)
-              * ((-(m - 1 - j' : ℕ) : ℤ) % (p : ℤ))) % (p : ℤ) := by
-            rw [hIH, ha1]
-        _ = (((-1 : ℤ) ^ j') * (ff m j' : ℤ) * (-(m - 1 - j' : ℕ) : ℤ)) % (p : ℤ) := by
-            rw [← Int.mul_mod, ← Int.mul_mod]
-        _ = (((-1 : ℤ) ^ (j' + 1)) * (ff m (j' + 1) : ℤ)) % (p : ℤ) := by
-            rw [hff, hsign]
-            congr 1
-            push_cast
-            ring
+      refine ⟨((pt a j' : ℕ) : ℤ) * ((k : ℕ) : ℤ)
+        - (((m - 1 - j' : ℕ) : ℤ)) * c, ?_⟩
+      rw [hpt, hseedI, hkm, hff, Nat.cast_mul, hsign]
+      linear_combination -(((m - 1 - j' : ℕ) : ℤ)) * hc
 
 -- ===========================================================================
--- §6  THE BLOCK SUM: congruence, divisibility, absolute bound
+-- §6  THE BLOCK SUM: divisibility, two-sided bound, the pigeonhole count
 -- ===========================================================================
 
 /-- The Int-valued block sum: the signed coins of the unit block only. -/
@@ -425,44 +422,12 @@ def bsumI (m a : Nat) : List Nat → Int
   | i :: B => (if i - a < m then ((-1 : ℤ) ^ (i - a)) * (ff m (i - a) : ℤ) else 0)
              + bsumI m a B
 
-/-- **The block congruence.**  `sumP a B ≡ bsumI m a B (mod p)` on the class. -/
-theorem bsum_congr (m a p k : Nat) (h : a + m = k * p) :
-    ∀ (B : List Nat), (∀ i ∈ B, a < i) →
-    ((sumP a B : ℕ) : ℤ) % (p : ℤ) = (bsumI m a B) % (p : ℤ) := by
-  intro B
-  induction B with
-  | nil => intro _; rfl
-  | cons i B ih =>
-      intro hall
-      have hi : a < i := hall i (List.mem_cons_self ..)
-      have hrest := ih (by
-        intro j hj
-        exact hall j (List.mem_cons_of_mem _ hj))
-      have hunfold : sumP a (i :: B) = pt a (i - a) + sumP a B := rfl
-      have hcast : ((sumP a (i :: B) : ℕ) : ℤ)
-          = (pt a (i - a) : ℤ) + ((sumP a B : ℕ) : ℤ) := by
-        rw [hunfold, Nat.cast_add]
-      rw [hcast, Int.add_mod, hrest]
-      have hbu : bsumI m a (i :: B)
-          = (if i - a < m then ((-1 : ℤ) ^ (i - a)) * (ff m (i - a) : ℤ) else 0)
-            + bsumI m a B := rfl
-      rw [hbu, Int.add_mod]
-      by_cases hblk : i - a < m
-      · rw [if_pos hblk, if_pos hblk]
-        have hcoin := pt_coin m a p k h (i - a) (by omega)
-        rw [hcoin]
-      · rw [if_neg hblk, if_neg hblk]
-        have htail : ((pt a (i - a) : ℤ)) % (p : ℤ) = 0 := by
-          obtain ⟨w, hw⟩ := pt_dvd_tail m a p k h (i - a) (by omega)
-          exact int_mod_zero _ _ _ hw
-        rw [htail]
-
 /-- **The block divisibility.**  Every block sum is a multiple of `m − 1`. -/
 theorem bsum_dvd (m a : Nat) : ∀ (B : List Nat), (∀ i ∈ B, a < i) →
     ∃ (K : ℤ), bsumI m a B = ((m - 1 : ℕ) : ℤ) * K := by
   intro B
   induction B with
-  | nil => intro _; exact ⟨0, by norm_num⟩
+  | nil => intro _; exact ⟨0, by simp [bsumI]⟩
   | cons i B ih =>
       intro hall
       have hi : a < i := hall i (List.mem_cons_self ..)
@@ -488,8 +453,6 @@ theorem bsum_dvd (m a : Nat) : ∀ (B : List Nat), (∀ i ∈ B, a < i) →
         rw [hbu, if_neg hblk, hK]
         ring
 
-/-- **The absolute bound.**  `|bsumI m a B| ≤ count · (m−1)! ≤ (m−1)·(m−1)!`
-for distinct indices (the triangle inequality + the per-coin bound). -/
 theorem neg_one_pow_eq (j : Nat) : ((-1 : ℤ) ^ j) = 1 ∨ ((-1 : ℤ) ^ j) = -1 := by
   induction j with
   | zero => left; norm_num
@@ -498,14 +461,22 @@ theorem neg_one_pow_eq (j : Nat) : ((-1 : ℤ) ^ j) = 1 ∨ ((-1 : ℤ) ^ j) = -
       · rw [Int.pow_succ, h]; right; norm_num
       · rw [Int.pow_succ, h]; left; norm_num
 
-theorem coin_abs (j m : Nat) : |((-1 : ℤ) ^ j) * (ff m j : ℤ)| = (ff m j : ℤ) := by
+/-- **The per-coin two-sided bound.**  Each signed coin lies in
+`[−ff m j, +ff m j]` — no `abs` lemmas (none needed at this pin). -/
+theorem coin_bounds (j m : Nat) :
+    (-(ff m j : ℤ)) ≤ ((-1 : ℤ) ^ j) * (ff m j : ℤ) ∧
+    ((-1 : ℤ) ^ j) * (ff m j : ℤ) ≤ (ff m j : ℤ) := by
   rcases neg_one_pow_eq j with h | h
-  · rw [h, Int.mul_one, Int.abs_of_nonneg (by simp)]
-  · rw [h, Int.neg_one_mul, Int.abs_neg, Int.abs_of_nonneg (by simp)]
+  · rw [h]; exact ⟨by omega, by omega⟩
+  · rw [h]; exact ⟨by omega, by omega⟩
 
-/-- **The triangle-count bound.**  `|bsumI| ≤ (block count) · (m−1)!`. -/
-theorem bsum_abs_raw (m a : Nat) : ∀ (B : List Nat), (∀ i ∈ B, a < i) →
-    |bsumI m a B| ≤ ((B.filter (fun i => i - a < m)).length : ℤ) * (fact (m - 1) : ℤ) := by
+/-- **The two-sided triangle-count bound.**  `−(count·(m−1)!) ≤ bsumI ≤ …`
+with `count` the number of block coins (the per-coin bound + induction). -/
+theorem bsum_bounds (m a : Nat) : ∀ (B : List Nat), (∀ i ∈ B, a < i) →
+    -((((B.filter (fun i => i - a < m)).length * fact (m - 1) : ℕ) : ℤ))
+      ≤ bsumI m a B
+    ∧ bsumI m a B
+      ≤ ((((B.filter (fun i => i - a < m)).length * fact (m - 1) : ℕ) : ℤ)) := by
   intro B
   induction B with
   | nil => intro _; simp [bsumI]
@@ -515,43 +486,25 @@ theorem bsum_abs_raw (m a : Nat) : ∀ (B : List Nat), (∀ i ∈ B, a < i) →
       have hrest := ih (by
         intro j hj
         exact hall j (List.mem_cons_of_mem _ hj))
+      obtain ⟨hlo, hhi⟩ := hrest
       have hbu : bsumI m a (i :: B)
           = (if i - a < m then ((-1 : ℤ) ^ (i - a)) * (ff m (i - a) : ℤ) else 0)
             + bsumI m a B := rfl
-      rw [hbu]
       by_cases hblk : i - a < m
-      · rw [if_pos hblk]
-        have htri := Int.abs_add _ _
-        rw [coin_abs] at htri
-        have hffb : (ff m (i - a) : ℤ) ≤ (fact (m - 1) : ℤ) := by
+      · obtain ⟨hclo, hchi⟩ := coin_bounds (i - a) m
+        have hffb : ((ff m (i - a) : ℕ) : ℤ) ≤ ((fact (m - 1) : ℕ) : ℤ) := by
           exact_mod_cast ff_le_fact m (i - a) (by omega)
         have hflen : ((i :: B).filter (fun i => i - a < m)).length
-            = (B.filter (fun i => i - a < m)).length + 1 := by
-          rw [List.filter_cons]
-          simp only [hblk, Bool.true_and, if_true, List.length_cons]
-        rw [hflen]
-        have hcast : (((B.filter (fun i => i - a < m)).length + 1 : ℕ) : ℤ)
-            = ((B.filter (fun i => i - a < m)).length : ℤ) + 1 := by
-          push_cast
-          omega
-        rw [hcast]
-        have hring : (((B.filter (fun i => i - a < m)).length : ℤ) + 1)
-            * (fact (m - 1) : ℤ)
-            = ((B.filter (fun i => i - a < m)).length : ℤ) * (fact (m - 1) : ℤ)
-              + (fact (m - 1) : ℤ) := by
-          ring
-        rw [hring]
-        omega
-      · rw [if_neg hblk]
-        have hzero : |(0 : ℤ) + bsumI m a B| = |bsumI m a B| := by
-          rw [Int.zero_add]
-        rw [hzero]
-        have hflen : ((i :: B).filter (fun i => i - a < m)).length
-            = (B.filter (fun i => i - a < m)).length := by
-          rw [List.filter_cons]
-          simp only [hblk, Bool.false_and, if_false]
-        rw [hflen]
-        omega
+            = (B.filter (fun i => i - a < m)).length + 1 := by simp [hblk]
+        have hexp : ((B.filter (fun i => i - a < m)).length + 1) * fact (m - 1)
+            = (B.filter (fun i => i - a < m)).length * fact (m - 1)
+              + fact (m - 1) := by ring
+        rw [hbu, if_pos hblk, hflen, hexp, Nat.cast_add]
+        constructor <;> omega
+      · have hflen : ((i :: B).filter (fun i => i - a < m)).length
+            = (B.filter (fun i => i - a < m)).length := by simp [hblk]
+        rw [hbu, if_neg hblk, hflen]
+        constructor <;> omega
 
 -- §6b  THE BLOCK COUNT PIGEONHOLE (distinct j's in [1, m-1] ≤ m-1 of them)
 
@@ -568,7 +521,7 @@ theorem block_count (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
     have hya : a < y := hgt y hyb
     omega
   have hnd2 : ((B.filter (fun i => i - a < m)).map (fun i => i - a)).Nodup :=
-    List.Nodup.map hinj hnd1
+    List.Nodup.map_on hinj hnd1
   have hsub : ∀ j ∈ (B.filter (fun i => i - a < m)).map (fun i => i - a),
       1 ≤ j ∧ j ≤ m - 1 := by
     intro j hj
@@ -576,7 +529,7 @@ theorem block_count (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
     obtain ⟨i, hi, hji⟩ := hj
     have hib : i ∈ B := (List.mem_filter.mp hi).1
     have hia : a < i := hgt i hib
-    have hilt : i - a < m := (List.mem_filter.mp hi).2
+    have hilt : i - a < m := of_decide_eq_true (List.mem_filter.mp hi).2
     omega
   have hfin : (((B.filter (fun i => i - a < m)).map (fun i => i - a)).toFinset)
       ⊆ Finset.Ico 1 m := by
@@ -585,31 +538,61 @@ theorem block_count (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
     obtain ⟨h1, h2⟩ := hsub j hj'
     exact Finset.mem_Ico.mpr ⟨h1, by omega⟩
   have hcard := Finset.card_le_card hfin
-  rw [Finset.card_Ico] at hcard
+  rw [Nat.card_Ico] at hcard
   have hcard2 : ((B.filter (fun i => i - a < m)).map (fun i => i - a)).toFinset.card
       = ((B.filter (fun i => i - a < m)).map (fun i => i - a)).length :=
-    List.toFinset_card hnd2
+    List.toFinset_card_of_nodup hnd2
   rw [hcard2] at hcard
   have hlen : ((B.filter (fun i => i - a < m)).map (fun i => i - a)).length
       = (B.filter (fun i => i - a < m)).length := List.length_map _ _
   omega
 
-/-- **The final block bound.**  `|bsumI| ≤ (m−1)·(m−1)!`. -/
-theorem bsum_abs_final (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
+/-- **The final two-sided block bound.**  `−(m−1)·(m−1)! ≤ bsumI ≤ (m−1)·(m−1)!`. -/
+theorem bsum_bounds_final (m a : Nat) (hm : 1 ≤ m) (B : List Nat) (hB : B.Nodup)
     (hgt : ∀ i ∈ B, a < i) :
-    |bsumI m a B| ≤ (((m - 1) * fact (m - 1) : ℕ) : ℤ) := by
-  have hraw := bsum_abs_raw m a B hgt
+    -((((m - 1) * fact (m - 1) : ℕ) : ℤ)) ≤ bsumI m a B
+    ∧ bsumI m a B ≤ ((((m - 1) * fact (m - 1) : ℕ) : ℤ)) := by
+  obtain ⟨hlo, hhi⟩ := bsum_bounds m a B hgt
   have hcount := block_count m a hm B hB hgt
   have hmul : (B.filter (fun i => i - a < m)).length * fact (m - 1)
       ≤ (m - 1) * fact (m - 1) := Nat.mul_le_mul_right _ hcount
-  have hcast : ((B.filter (fun i => i - a < m)).length : ℤ) * (fact (m - 1) : ℤ)
-      = (((B.filter (fun i => i - a < m)).length * fact (m - 1) : ℕ) : ℤ) := by
-    rw [← Nat.cast_mul]
-  rw [hcast] at hraw
-  have hfinal : (((B.filter (fun i => i - a < m)).length * fact (m - 1) : ℕ) : ℤ)
+  have hcast : (((B.filter (fun i => i - a < m)).length * fact (m - 1) : ℕ) : ℤ)
       ≤ (((m - 1) * fact (m - 1) : ℕ) : ℤ) := by
     exact_mod_cast hmul
-  omega
+  exact ⟨by omega, by omega⟩
+
+/-- **The block-sum difference divisibility.**  On the class,
+`Σ P − bsumI` is a p-multiple in ℤ (the coin congruence for the block, the
+tail divisibility beyond it) — the divisibility form of the r1 congruence. -/
+theorem bsum_diff_dvd (m a p k : Nat) (hm : 1 ≤ m) (h : a + m = k * p) :
+    ∀ (B : List Nat), (∀ i ∈ B, a < i) →
+    ∃ (C : ℤ), ((sumP a B : ℕ) : ℤ) = bsumI m a B + ((p : ℕ) : ℤ) * C := by
+  intro B
+  induction B with
+  | nil => intro _; exact ⟨0, by simp [sumP, bsumI]⟩
+  | cons i B ih =>
+      intro hall
+      have hi : a < i := hall i (List.mem_cons_self ..)
+      have hrest := ih (by
+        intro j hj
+        exact hall j (List.mem_cons_of_mem _ hj))
+      obtain ⟨C, hC⟩ := hrest
+      have hunfold : sumP a (i :: B) = pt a (i - a) + sumP a B := rfl
+      have hcast : ((sumP a (i :: B) : ℕ) : ℤ)
+          = ((pt a (i - a) : ℕ) : ℤ) + ((sumP a B : ℕ) : ℤ) := by
+        rw [hunfold, Nat.cast_add]
+      have hbu : bsumI m a (i :: B)
+          = (if i - a < m then ((-1 : ℤ) ^ (i - a)) * (ff m (i - a) : ℤ) else 0)
+            + bsumI m a B := rfl
+      by_cases hblk : i - a < m
+      · obtain ⟨c, hc⟩ := coin_dvd m a p k hm h (i - a) (by omega)
+        refine ⟨C + c, ?_⟩
+        rw [hcast, hbu, if_pos hblk, hC, Int.mul_add]
+        omega
+      · obtain ⟨c, hc⟩ := pt_dvd_tail_int m a p k hm h (i - a) (by omega)
+        refine ⟨C + c, ?_⟩
+        rw [hcast, hbu, if_neg hblk, hC, Int.mul_add]
+        omega
 
 -- ===========================================================================
 -- §7  THE CLASS THEOREMS
@@ -625,58 +608,54 @@ theorem erdos404_residual_tail (m p : Nat) (hm : 3 ≤ m) (hp : Nat.Prime p)
     (hgt : ∀ i ∈ B, a < i) :
     vpad p (fact a + sumF B) = vpad p (fact a) := by
   have hp2 : 2 ≤ p := hp.one_lt
-  have hdv : p * ((a + m) / p) = a + m := by
-    have h1 := Nat.div_add_mod (a + m) p
-    rw [hseed, Nat.add_zero] at h1
-    exact h1
-  obtain ⟨k, hk⟩ : ∃ k, a + m = k * p := ⟨(a + m) / p, by rw [Nat.mul_comm]; exact hdv⟩
-  have hcongr := bsum_congr m a p k hk B hgt
-  obtain ⟨K, hK⟩ := bsum_dvd m a B hgt
-  have habs := bsum_abs_final m a (by omega) B hB hgt
-  -- the key obstruction: (1 + sumP a B) % p ≠ 0
+  have hmod := Nat.div_add_mod (a + m) p
+  rw [hseed, Nat.add_zero] at hmod
+  have hdv : p * ((a + m) / p) = a + m := hmod
+  obtain ⟨k, hk⟩ : ∃ k, a + m = k * p :=
+    ⟨(a + m) / p, by rw [Nat.mul_comm]; exact hdv.symm⟩
+  -- the key obstruction: p ∤ (1 + sumP a B)
   have hne : (1 + sumP a B) % p ≠ 0 := by
     intro hc
-    obtain ⟨q, hq⟩ : ∃ q, (1 + sumP a B) = p * q := ⟨(1 + sumP a B) / p, by
-      have h2 := Nat.div_add_mod (1 + sumP a B) p
-      rw [hc, Nat.add_zero] at h2
-      rw [Nat.mul_comm]; exact h2⟩
-    have hint := int_mod_zero _ _ _ hq
-    have hbridge : ((1 + sumP a B : ℕ) : ℤ) % (p : ℤ)
-        = ((1 : ℤ) + bsumI m a B) % (p : ℤ) := by
-      have hc1 : ((1 + sumP a B : ℕ) : ℤ) = (1 : ℤ) + ((sumP a B : ℕ) : ℤ) := by
-        rw [Nat.cast_add, Nat.cast_one]
-      rw [hc1, Int.add_mod, hcongr]
-    have hmod0 : ((1 : ℤ) + bsumI m a B) % (p : ℤ) = 0 := by
-      rw [← hbridge]; exact hint
-    obtain ⟨t, ht⟩ := Int.mod_eq_zero_iff_dvd _ _ |>.mp hmod0
-    -- |1 + bsumI| < p
-    have htri : |(1 : ℤ) + bsumI m a B| ≤ 1 + |bsumI m a B| := by
-      have hax := Int.abs_add (1 : ℤ) (bsumI m a B)
-      rw [Int.abs_one] at hax
+    have hdp : p ∣ 1 + sumP a B := Nat.dvd_of_mod_eq_zero hc
+    obtain ⟨q, hq⟩ := hdp
+    obtain ⟨C, hC⟩ := bsum_diff_dvd m a p k (by omega) hk B hgt
+    have hqI : ((1 + sumP a B : ℕ) : ℤ) = ((p : ℕ) : ℤ) * ((q : ℕ) : ℤ) := by
+      rw [hq, Nat.cast_mul]
+    have hD : (1 : ℤ) + bsumI m a B
+        = ((p : ℕ) : ℤ) * (((q : ℕ) : ℤ) - C) := by
+      have hsplit : ((p : ℕ) : ℤ) * (((q : ℕ) : ℤ) - C)
+          = ((p : ℕ) : ℤ) * ((q : ℕ) : ℤ) - ((p : ℕ) : ℤ) * C := by ring
+      rw [hsplit]
       omega
-    have hbound' : (((m - 1) * fact (m - 1) : ℕ) : ℤ) + 1 < (p : ℤ) := by
+    -- the two-sided bound, cast to ℤ
+    obtain ⟨hlo, hhi⟩ := bsum_bounds_final m a (by omega) B hB hgt
+    have hboundI : (((m - 1) * fact (m - 1) : ℕ) : ℤ) + 1 < ((p : ℕ) : ℤ) := by
       exact_mod_cast hbound
-    have hlow : (-(p : ℤ)) < (1 : ℤ) + bsumI m a B := by
-      have h1 := Int.le_abs (-((1 : ℤ) + bsumI m a B))
-      rw [Int.abs_neg] at h1
-      omega
-    have hhigh : (1 : ℤ) + bsumI m a B < (p : ℤ) := by
-      have h1 := Int.le_abs ((1 : ℤ) + bsumI m a B)
-      omega
+    have hDlt : (1 : ℤ) + bsumI m a B < ((p : ℕ) : ℤ) := by omega
+    have hDgt : -((p : ℕ) : ℤ) < (1 : ℤ) + bsumI m a B := by omega
     -- the t-cases force 1 + bsumI = 0
     have hzero : (1 : ℤ) + bsumI m a B = 0 := by
-      rcases Int.lt_or_ge t 0 with htn | htp
-      · obtain ⟨s, hs⟩ : ∃ s, t = -1 - s := ⟨-t - 1, by omega⟩
-        have hps : (0 : ℤ) ≤ (p : ℤ) * s := Int.mul_nonneg (by omega) (by omega)
-        have hpt : (p : ℤ) * t = -(p : ℤ) - (p : ℤ) * s := by rw [hs]; ring
+      rcases Int.lt_or_ge (((q : ℕ) : ℤ) - C) 0 with hTn | hTp
+      · obtain ⟨s, hs⟩ : ∃ s, ((q : ℕ) : ℤ) - C = -1 - s :=
+          ⟨-(((q : ℕ) : ℤ) - C) - 1, by omega⟩
+        have hps : (0 : ℤ) ≤ ((p : ℕ) : ℤ) * s :=
+          Int.mul_nonneg (by omega) (by omega)
+        have hpt : ((p : ℕ) : ℤ) * (((q : ℕ) : ℤ) - C)
+            = -((p : ℕ) : ℤ) - ((p : ℕ) : ℤ) * s := by
+          rw [hs]; ring
         omega
-      · rcases Int.eq_zero_or_pos t with ht0 | ht0
-        · omega
-        · obtain ⟨s, hs⟩ : ∃ s, t = 1 + s := ⟨t - 1, by omega⟩
-          have hps : (0 : ℤ) ≤ (p : ℤ) * s := Int.mul_nonneg (by omega) (by omega)
-          have hpt : (p : ℤ) * t = (p : ℤ) + (p : ℤ) * s := by rw [hs]; ring
+      · rcases Int.eq_zero_or_pos (((q : ℕ) : ℤ) - C) with hT0 | hT0
+        · rw [hD, hT0, Int.mul_zero]
+        · obtain ⟨s, hs⟩ : ∃ s, ((q : ℕ) : ℤ) - C = 1 + s :=
+            ⟨((q : ℕ) : ℤ) - C - 1, by omega⟩
+          have hps : (0 : ℤ) ≤ ((p : ℕ) : ℤ) * s :=
+            Int.mul_nonneg (by omega) (by omega)
+          have hpt : ((p : ℕ) : ℤ) * (((q : ℕ) : ℤ) - C)
+              = ((p : ℕ) : ℤ) + ((p : ℕ) : ℤ) * s := by
+            rw [hs]; ring
           omega
-    -- so bsumI = -1, but (m-1) | bsumI with m ≥ 3 — contradiction
+    -- so bsumI = −1, but (m−1) ∣ bsumI with m ≥ 3 — contradiction
+    obtain ⟨K, hK⟩ := bsum_dvd m a B hgt
     have hb1 : ((m - 1 : ℕ) : ℤ) * K = -1 := by omega
     have hm2 : (2 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) := by
       exact_mod_cast (by omega : (2 : Nat) ≤ m - 1)
@@ -688,13 +667,13 @@ theorem erdos404_residual_tail (m p : Nat) (hm : 3 ≤ m) (hp : Nat.Prime p)
         have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
           Int.mul_nonneg (by omega) (by omega)
         have hpr : ((m - 1 : ℕ) : ℤ) * K = -(((m - 1 : ℕ) : ℤ))
-            - ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
+          - ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
         omega
       · obtain ⟨s, hs⟩ : ∃ s, K = 1 + s := ⟨K - 1, by omega⟩
         have hps : (0 : ℤ) ≤ ((m - 1 : ℕ) : ℤ) * s :=
           Int.mul_nonneg (by omega) (by omega)
         have hpr : ((m - 1 : ℕ) : ℤ) * K = ((m - 1 : ℕ) : ℤ)
-            + ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
+          + ((m - 1 : ℕ) : ℤ) * s := by rw [hs]; ring
         omega
   -- the split + the multiplicative law finish
   have hsplit := sumF_split a B hgt
@@ -710,38 +689,37 @@ theorem erdos404_class_p_minus_3 (p : Nat) (hp : Nat.Prime p) (hp7 : 7 ≤ p)
     (hgt : ∀ i ∈ B, a < i) :
     vpad p (fact a + sumF B) = vpad p (fact a) :=
   erdos404_residual_tail 3 p (by omega) hp (by
-    have h2 : fact (3 - 1) = 2 := rfl
-    have h3 : (3 - 1) * fact (3 - 1) + 1 = 5 := by rw [h2]; omega
+    have h3 : (3 - 1) * fact (3 - 1) + 1 = 5 := by decide
     omega) a ha hseed B hB hgt
 
 -- ===========================================================================
 -- §8  RECEIPTS + ARSENAL BRIDGE
 -- ===========================================================================
 
-/-- The class instance (m, p, a) = (3, 7, 4): 4! + 5! = 144 ≡ 4 (mod 7),
+/- The class instance (m, p, a) = (3, 7, 4): 4! + 5! = 144 ≡ 4 (mod 7),
 4! + 6! = 744 ≡ 2, 4! + 5! + 6! = 864 ≡ 3 — never 0. -/
 #eval vpad 7 (fact 4 + fact 5)
 #eval vpad 7 (fact 4 + fact 6)
 #eval vpad 7 (fact 4 + fact 5 + fact 6)
 #eval vpad 7 (fact 4 + fact 5 + fact 6 + fact 7 + fact 8 + fact 9)
 
-/-- The class instance (m, p, a) = (4, 23, 19): the bound 3·3! + 1 = 19 < 23;
+/- The class instance (m, p, a) = (4, 23, 19): the bound 3·3! + 1 = 19 < 23;
 19! + 20! = 19!·21 with 23 ∤ 21. -/
 #eval vpad 23 (fact 19 + fact 20)
 #eval vpad 23 (fact 19 + fact 20 + fact 21)
 #eval vpad 23 (fact 19 + fact 22)
 
-/-- v_p(a!) receipts on the classes (the values the sums never exceed). -/
+/- v_p(a!) receipts on the classes (the values the sums never exceed). -/
 #eval vpad 7 (fact 4)
 #eval vpad 23 (fact 19)
 
-/-- The m = 3 first prime (5, below the tail bound — battery-verified class
+/- The m = 3 first prime (5, below the tail bound — battery-verified class
 a ≡ 2 (mod 5)) and the m = 4 first prime (23): ternary digits of both. -/
 def arsenalBridgeProp404t : Prop :=
   [5 % 3, (5 / 3) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
   [23 % 3, (23 / 3) % 3, (23 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
   carryAtPos 5 1 < 4 ∧
-  CardinalWorldsV2.v2r (3 ^ 1 * 9) = CardinalWorldsV2.v2r 9
+  v2r (3 ^ 1 * 9) = v2r 9
 
 theorem erdos404t_arsenal_bridge : arsenalBridgeProp404t :=
   ⟨by decide, by decide, carryAtPos_bound 5 1, CardinalWorldsV2.v2r_ternary_scaling 1 9⟩
