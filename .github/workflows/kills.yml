@@ -36,6 +36,7 @@ on:
       - problem1073-factorial-mod/**
       - problem461-smooth-component/**
       - problem271-status/**
+      - problem406-ternary-powers/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -842,4 +843,23 @@ jobs:
           grep -c "0" kernel37.log > /dev/null
           python3 problem404-full/battery404tail.py
           echo ERDOS404_RESIDUAL_TAIL_KERNEL_GREEN=1
+      - name: "Kernel 38 - Erdos 406 THE TERNARY CENSUS LAW (S043 full-proof campaign, BOSS's own front): the only powers of 2 below 2^500 that are sums of distinct powers of 3 (0/1 ternary digits) are EXACTLY 1, 4, 256 (kernel-decided census in 480+21 chunks, fuel 700) + THE MOD-3 PARITY LAW (every odd exponent excluded, general, unconditional) + THE MOD-8 BUDGET LAW (k>=3: E+3O = 0 mod 8, the even/odd digit-count budget, general) + THE SEMANTIC LAW (the checker is exactly the distinct-powers-of-3 representation, Arsenal lt_three_cases trichotomy applied) + the three explicit witnesses 1/4/256 + arsenal bridge (isTernaryDigit on 256's ternary digits, carryAtPos_bound, v2r_ternary_scaling at (8,256)) + battery406 dual-method (divmod digits ∥ base-3 array doubling)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel38.log
+          lake env lean problem406-ternary-powers/Erdos406Ternary.lean 2>&1 | tee -a kernel38.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel38.log
+          grep -F "ERDOS406_TERNARY_KERNEL_GREEN" kernel38.log
+          grep -E "erdos406_odd_excluded' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -E "erdos406_mod8_budget' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -E "erdos406_main' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -E "erdos406_arsenal_bridge' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -F "(1, 4, 256, 256)" kernel38.log
+          python3 problem406-ternary-powers/battery406.py
+          echo ERDOS406_KERNEL_GREEN=1
 
