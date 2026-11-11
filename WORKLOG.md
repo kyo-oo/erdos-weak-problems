@@ -2229,3 +2229,38 @@ a5ce216-failure was expected (pre-r3 code). Wave-4 banked on 88f6e5f
 sub-agent-originated COMPLETE proof green in CI. The K42 r3 (the W1
 LaTeX → Lean conversion of the #686 K2 classification) is the leading
 candidate — the CI verdict is the next checkpoint.
+
+**SESSION 046 (continued) — WAVE-5 + THE R4 WAR:**
+
+5. **WAVE-5 (5 agents): 5/5 SURVIVED — the format is 10/10 across two
+   waves.** W13 (#404, 710-line COMPLETE_PROOF.md — the master reduction
+   f(a,p)=v_p(a!)+g with the König-compactness Q3-equivalence; SEVEN
+   batteries GREEN; 15 audit-caught transcription errors repaired via
+   Legendre recomputation), W14 (#406, the anchor summit assembly, 509
+   lines, battery ×2 GREEN), W15 (#686, the partial-structure theorem
+   WITH COMPLETION EQUIVALENCE — corpus YES/NO ⟺ the off-chain k≥3
+   channel; five batteries GREEN), W16 (#374 — structural side COMPLETE
+   incl. the prime-exclusion full elementary proof; engine N=400 GREEN),
+   W17 (#282 — four GOLD laws + census + third exact-Fraction method).
+   Banked: 0f32922 (2631 insertions).
+
+6. **THE K42 r4 WAR:** r3 verdict = 4 errors (down from 13). All four
+   decoded from the CI counterexamples: (a) gap_mod4's final omega
+   CANNOT chain the non-constant-RHS mod-eq (y·C₁)%4 = (2·C₁)%4 — L80
+   THE CONSTANT-RHS LAW: omega's mod-arithmetic is reliable ONLY on
+   constant-RHS mod-facts — the route rebuilt on hZmod ((y-2)·C₁ ≡ 0)
+   + hYsplit (the calc + Nat.add_mul y-split, dodging the
+   y-substitution self-mangling); (b) THE DVD-WITNESS FORM LAW: Dvd's
+   anonymous constructor wants b = a·k (FLIPPED) — pin Nat.mul_comm's
+   args or it hits the wrong product; (c) THE ASSOC-HIDDEN PATTERN LAW:
+   rw patterns hide inside u₁·(cc·(E·E)) — open with explicit
+   Nat.mul_assoc FORWARD before rewriting; (d) e2's ← hw hit the
+   assoc-hidden t·w — forward rw [hw] + ring. r4 pushed: e08bfbb — CI
+   round 4 burning. r3-confirmed GREEN: gap_ge CLEAN (the atom-
+   canonicalization law works).
+
+7. **THE STATE:** three CI runs in flight (wave-4 gate, wave-5 gate, r4).
+   The Lean conversion queue: #271, #961, #1056, #1108, #1073, #461,
+   #1063, #1072, #404, #406, #686, #374, #282 — thirteen COMPLETE_PROOF
+   documents now standing; K42 r4 = the first conversion (the #686 K2
+   classification) — its green = KILL 1 on the new scoreboard.
