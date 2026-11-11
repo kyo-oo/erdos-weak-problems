@@ -2402,3 +2402,46 @@ Phase-2 fronts (P203, P273, P289, P389, P677, P850, P885, P939 partials +
 the missing nine).
 
 The engine never stops; it never lies.
+
+---
+
+## SESSION 048 (continued) — THE COMPILE WAR + P939 + THE K43 VERDICT
+
+1. **KERNEL 43 GREEN (run 43080301171, step SUCCESS):** P261's
+   `APRationality.lean` — `ap_sum_kernel` CI-verified on its first
+   compile. The Q3 bridge's rationality law, formalized. (The run's
+   job-level failure was Kernel 24 alone — the P711 addition's 11
+   errors.)
+
+2. **THE P711 COMPILE WAR r2 (commit d6eabbf):** the 11-error strike —
+   mod_bridge's rw-direction fix (hR/hD backward), the w711OKR_spec
+   distinctness branch REBUILT (the hd/hc Bool case-split +
+   of_decide_eq_false + the linear cancel — the agent's omega-on-Ne
+   was backwards), dvd60's type-wrap, the five div/mod rw-direction
+   fixes in erdos711_upper_general, pow_ge_one's dead exact dropped.
+
+3. **THE P939 FRONT (agent 3-a, DELIVERED COMPLETE):**
+   COMPLETE_PROOF.md (536 lines, campaign format) + 4 engine scripts.
+   THE FORENSIC FINDING: the prior sweeps (≤10¹³, ≤10¹⁵) were DOUBLY
+   VACUOUS — they enumerated perfect fourth powers (FLT-n=4
+   re-verifications), never the r=4 search space. THE CORRECTED
+   ESCALATION: ZERO solutions ≤ 10¹⁶ (73,698 4-powerfuls — complete
+   by Theorem C; 600,965,618 coprime pairs; 53.8s). Local NO-routes
+   closed by measurement (no congruence obstruction at any tested
+   modulus); the heuristic calibrated (blind hunt dead; solutions are
+   abc-quality hits); TWO certified r=3 witnesses; the named core:
+   the kernel-twist construction (Template-A genus-1 lane).
+
+4. **THE P271 F1 FOUNDATION (commander-executed, commit 226ce2c):**
+   memE/memT/memE_prof + **memE_no_ap L7 COMPLETE** (E_j is 3-AP-free
+   — the cyclic cap + the d-arithmetic + the 2H-exclusion kill) +
+   divP repaired + cyclicC restored (the agent's broken rewrite → the
+   original 5dc524d body with the zero-branch binder fix) + Kernel 44
+   wired (OdStFamily.lean's FIRST-EVER CI compile).
+
+5. **THE SITUATION (open at this entry):** runs 43083939408 (the F1
+   strike) and 43087431876 (the full current state) grinding. The
+   next verdicts: Kernel 44 (the OdStFamily first compile) and the
+   P711-fixed Kernel 24.
+
+The engine never stops; it never lies.
