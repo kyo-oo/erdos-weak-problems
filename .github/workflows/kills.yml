@@ -925,4 +925,8 @@ jobs:
           grep -E "cyclicC' (does not depend on any axioms|depends on axioms)" kernel44.log
           grep -E "memE_lt' (does not depend on any axioms|depends on axioms)" kernel44.log
           grep -E "memT_no_ap' (does not depend on any axioms|depends on axioms)" kernel44.log
+          grep -E "cBlocked' (does not depend on any axioms|depends on axioms)" kernel44.log
+          grep -E "cantorCarry' (does not depend on any axioms|depends on axioms)" kernel44.log
+          grep -E "carryBlock' (does not depend on any axioms|depends on axioms)" kernel44.log
+          grep -E "tailPair' (does not depend on any axioms|depends on axioms)" kernel44.log
           echo ODST_FAMILY_KERNEL_GREEN=1

@@ -823,6 +823,156 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
       omega
 
 -- ===========================================================================
+-- §6  L9 — THE CARRY FUNNELS (the constructive blockers)
+-- ===========================================================================
+
+/-- The Cantor blocked-pair constructor (L3, fuel induction): every
+m ≥ 2 outside C is straddled by a Cantor pair a < b < m with
+a + m = 2·b.  The lift face recurses on m/3 (the offense lifts to the
+quotient); the direct face lands the pair ⟨3t, 3t+1⟩ at the units
+digit 2. -/
+theorem cBlocked_fuel : ∀ (f m : Nat), m ≤ f → 2 ≤ m → noTwo m = false →
+    ∃ a b, a < b ∧ b < m ∧ noTwo a = true ∧ noTwo b = true ∧ a + m = 2 * b
+  | 0, m, hm, h2, _ => by omega
+  | f + 1, m, hm, h2, hn => by
+    by_cases hq : noTwo (m / 3) = false
+    · -- LIFT FACE: the quotient is outside C; recurse and lift by m % 3.
+      have hq2 : 2 ≤ m / 3 := noTwo_false_ge _ hq
+      have hqle : m / 3 ≤ f := by omega
+      have ⟨a, b, h1, h2', h3', h4', h5'⟩ := cBlocked_fuel f (m / 3) hqle hq2 hq
+      have hr : m % 3 = 0 ∨ m % 3 = 1 ∨ m % 3 = 2 := by omega
+      cases hr with
+      | inl hr =>
+        refine ⟨3 * a, 3 * b, by omega, by omega, ?_, ?_, by omega⟩
+        · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact h3')
+        · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact h4')
+      | inr hr =>
+        cases hr with
+        | inl hr =>
+          refine ⟨3 * a + 1, 3 * b + 1, by omega, by omega, ?_, ?_, by omega⟩
+          · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact h3')
+          · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact h4')
+        | inr hr =>
+          refine ⟨3 * a, 3 * b + 1, by omega, by omega, ?_, ?_, by omega⟩
+          · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact h3')
+          · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact h4')
+    · -- DIRECT FACE: the quotient is in C, so the units digit is the offense.
+      have hc : m % 3 = 2 := by
+        cases noTwo_false_inv m hn with
+        | inl h => exact h
+        | inr h => exact absurd h hq
+      have hqt : noTwo (m / 3) = true := by
+        cases hbb : noTwo (m / 3) with
+        | true => rfl
+        | false => exact absurd hbb hq
+      refine ⟨3 * (m / 3), 3 * (m / 3) + 1, by omega, by omega, ?_, ?_,
+        by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact hqt)
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact hqt)
+
+/-- L3 (fuel-free): every m ≥ 2 outside C is straddled by a Cantor pair. -/
+theorem cBlocked (m : Nat) (h2 : 2 ≤ m) (hn : noTwo m = false) :
+    ∃ a b, a < b ∧ b < m ∧ noTwo a = true ∧ noTwo b = true ∧ a + m = 2 * b :=
+  cBlocked_fuel m m (Nat.le_refl m) h2 hn
+
+/-- L9(a) — the Cantor carry pair: every q ∈ C with q ≥ 1 carries a pair
+α ≤ β < q in C with α + q = 2·β + 1 (the odd-sum funnel).  Fuel
+induction: q ≡ 1 (mod 3) lands the self-pair ⟨3u, 3u⟩; q ≡ 0 (mod 3)
+recurses on u = q/3 and lifts the pair to ⟨3α', 3β'+1⟩. -/
+theorem cantorCarry_fuel : ∀ (f q : Nat), q ≤ f → 1 ≤ q → noTwo q = true →
+    ∃ al be, al ≤ be ∧ be < q ∧ noTwo al = true ∧ noTwo be = true ∧
+      al + q = 2 * be + 1
+  | 0, q, hq, h1, _ => by omega
+  | f + 1, q, hq, h1, hc => by
+    have hu : noTwo (q / 3) = true := (noTwo_true_inv q hc).2
+    have hne : q % 3 ≠ 2 := (noTwo_true_inv q hc).1
+    by_cases hmod : q % 3 = 1
+    · -- DIRECT: the self-pair ⟨3u, 3u⟩ (u = q/3)
+      refine ⟨3 * (q / 3), 3 * (q / 3), by omega, by omega, ?_, ?_, by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact hu)
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact hu)
+    · -- q % 3 = 0 (never 2 in C): recurse on u = q/3 ≥ 1
+      have h0 : q % 3 = 0 := by omega
+      have hu1 : 1 ≤ q / 3 := by omega
+      have hule : q / 3 ≤ f := by omega
+      have ⟨al, be, hle, hlt, h3', h4', h5'⟩ :=
+        cantorCarry_fuel f (q / 3) hule hu1 hu
+      refine ⟨3 * al, 3 * be + 1, by omega, by omega, ?_, ?_, by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact h3')
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact h4')
+
+/-- L9(a) (fuel-free): the Cantor carry pair. -/
+theorem cantorCarry (q : Nat) (h1 : 1 ≤ q) (hc : noTwo q = true) :
+    ∃ al be, al ≤ be ∧ be < q ∧ noTwo al = true ∧ noTwo be = true ∧
+      al + q = 2 * be + 1 :=
+  cantorCarry_fuel q q (Nat.le_refl q) h1 hc
+
+/-- L9(b) — the carry blockers: every m ∉ C with m ≥ 2 carries a pair
+γ1 ≤ γ2 < m in C with γ1 + m = 2·γ2 + 1 (the odd-sum funnel for the
+non-Cantor side).  Three mod-3 faces; the C-quotient faces land the
+self-pairs, the non-C faces lift the L3 pair. -/
+theorem carryBlock (m : Nat) (h2 : 2 ≤ m) (hn : noTwo m = false) :
+    ∃ g1 g2, g1 ≤ g2 ∧ g2 < m ∧ noTwo g1 = true ∧ noTwo g2 = true ∧
+      g1 + m = 2 * g2 + 1 := by
+  have htrich : m % 3 = 0 ∨ m % 3 = 1 ∨ m % 3 = 2 := by omega
+  rcases htrich with hr | hr | hr
+  · -- r = 0: the quotient is outside C (else m = 3t ∈ C)
+    have hm3 : m = 3 * (m / 3) := by omega
+    have h1 : noTwo (3 * (m / 3)) = noTwo (m / 3) := noTwo_mul3 (m / 3)
+    rw [hm3] at hn
+    rw [h1] at hn
+    have ht2 : 2 ≤ m / 3 := noTwo_false_ge _ hn
+    have ⟨a, b, ha1, ha2, ha3, ha4, ha5⟩ := cBlocked (m / 3) ht2 hn
+    refine ⟨3 * a + 1, 3 * b, by omega, by omega, ?_, ?_, by omega⟩
+    · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact ha3)
+    · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact ha4)
+  · -- r = 1
+    by_cases htc : noTwo (m / 3) = true
+    · -- t ∈ C: the self-pair ⟨3t, 3t⟩
+      refine ⟨3 * (m / 3), 3 * (m / 3), by omega, by omega, ?_, ?_, by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact htc)
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact htc)
+    · -- t ∉ C: the L3 pair, lifted flat
+      have htf : noTwo (m / 3) = false := by
+        cases hbb : noTwo (m / 3) with
+        | false => rfl
+        | true => exact absurd hbb htc
+      have ht2 : 2 ≤ m / 3 := noTwo_false_ge _ htf
+      have ⟨a, b, ha1, ha2, ha3, ha4, ha5⟩ := cBlocked (m / 3) ht2 htf
+      refine ⟨3 * a, 3 * b, by omega, by omega, ?_, ?_, by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact ha3)
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3]; exact ha4)
+  · -- r = 2
+    by_cases htc : noTwo (m / 3) = true
+    · -- t ∈ C: the self-pair ⟨3t+1, 3t+1⟩
+      refine ⟨3 * (m / 3) + 1, 3 * (m / 3) + 1, by omega, by omega, ?_, ?_,
+        by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact htc)
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact htc)
+    · -- t ∉ C: the L3 pair, shifted
+      have htf : noTwo (m / 3) = false := by
+        cases hbb : noTwo (m / 3) with
+        | false => rfl
+        | true => exact absurd hbb htc
+      have ht2 : 2 ≤ m / 3 := noTwo_false_ge _ htf
+      have ⟨a, b, ha1, ha2, ha3, ha4, ha5⟩ := cBlocked (m / 3) ht2 htf
+      refine ⟨3 * a + 1, 3 * b + 1, by omega, by omega, ?_, ?_, by omega⟩
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact ha3)
+      · exact noTwo_intro _ (by omega) (by rw [div3_mul3_add1]; exact ha4)
+
+/-- L9(c) — the tail pair: every 0 < r carries a pair (w1, w2) in C
+with w1 + r = 2·w2 and w2 ≥ 1 (r itself when r ∈ C; the L3 pair
+otherwise). -/
+theorem tailPair (r : Nat) (h0 : 0 < r) :
+    ∃ w1 w2, noTwo w1 = true ∧ noTwo w2 = true ∧ w1 + r = 2 * w2 ∧
+      1 ≤ w2 := by
+  by_cases hc : noTwo r = true
+  · exact ⟨r, r, hc, hc, by omega, h0⟩
+  · have h2 : 2 ≤ r := noTwo_false_ge _ hc
+    have ⟨a, b, ha1, ha2, ha3, ha4, ha5⟩ := cBlocked r h2 hc
+    exact ⟨a, b, ha3, ha4, ha5, by omega⟩
+
+-- ===========================================================================
 -- RECEIPTS
 -- ===========================================================================
 
@@ -832,4 +982,8 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
 #print axioms cyclicC
 #print axioms memE_lt
 #print axioms memT_no_ap
+#print axioms cBlocked
+#print axioms cantorCarry
+#print axioms carryBlock
+#print axioms tailPair
 
