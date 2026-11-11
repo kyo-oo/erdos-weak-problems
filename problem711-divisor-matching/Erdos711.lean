@@ -656,6 +656,9 @@ theorem w711OKR_spec (n L m r : Nat) (cs : List Nat) (hn : 0 < n)
       m + cs.getD (k - 1) 0 < m + (2 * n - 1)
     exact ⟨Nat.dvd_of_mod_eq_zero hmodm, by omega, by omega⟩
   · intro i hi1 hin j hj1 hjn hij
+    -- beta-reduce the witness-function equality before omega (the
+    -- opaque-application trap: omega cannot see through the lambda)
+    have hij' : m + cs.getD (i - 1) 0 = m + cs.getD (j - 1) 0 := hij
     have hxy : cs.getD (i - 1) 0 = cs.getD (j - 1) 0 := by omega
     have hi' : i - 1 < n := by omega
     have hj' : j - 1 < n := by omega
