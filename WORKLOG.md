@@ -2042,3 +2042,44 @@ lesson).
   missing-class squares at k=4..10, t ≤ 400, n ≤ 60,000), #203 (palette
   budget 2.1444; greedy-stuck 0.7076 = the alignment law; containment
   matrix 36 edges = the multi-step law; the look-ahead DFS design).
+
+---
+
+## SESSION 044 — 2026-11-11 — THE KILL LIST RESET + THE S042 ARMY LAUNCH
+
+**BOSS's order (this session, verbatim):** "reset the kill list now, means
+continue the work for sure, but whenever the sub agent completed the proof
+of the theorem using my own maths, complete proof, no sub cases then that
+would mark as kill 1. simple as that, now that you know the last message
+read it again, accurately and began the work detailed, according to the
+message i given to the last model, which it didn't answer, invoke the maths
+skill and its engine, i need full power, full energy, complete maths skill
+invocation rules and follow them accurately, go"
+
+**Executed:**
+
+1. **THE CHAIN FIRED FIRST (the law):** MATHS (Berserker) + prove-that-shit
+   both invoked at session open, visibly, full doctrine internalized.
+
+2. **THE FULL CONTEXT RECOVERY (the S042 message re-read accurately, as
+   ordered):** the prior context-exhausted session's recovery verified —
+   download/chat-recovery/ (BOSS_ORDERS_FULL.md, 28 orders, the 30.5MB
+   batch), repos synced to the fresh tips (erdos-weak @ 33d4200, registry
+   41 kills CI-green; CI run 42924027171 GREEN). THE LAST TASK (message
+   49aaaca4, Nov 10 19:30) stands OPEN: Phase 1 = the 22 problems with
+   case/class kills upgraded to COMPLETE proofs, each problem its own
+   sub-agent + intelligent boost, arsenal maths only; Phase 2 = the 17
+   attempted problems. Priority: #271, #404 (certifications WITHDRAWN per
+   S042, maximum priority), then #406 (BOSS's own front), #261, then the
+   rest.
+
+3. **THE KILL LIST RESET (this session's new law):** the NEW registry
+   counts from KILL 1. A kill on the new list lands ONLY when a
+   sub-agent completes the proof of the theorem using BOSS's own maths —
+   COMPLETE proof, NO sub-cases. The old 41-kill registry (case/class
+   level) = the historical record (README.md stands); the new list is
+   the scoreboard of the full-proof campaign.
+
+4. **THE ARMY LAUNCHES:** sub-agents fire sequentially (L63: parallel
+   launches trigger destructive sandbox rollbacks — proven twice), one
+   per problem, priority order. Wave 1: #271 (S044-A).

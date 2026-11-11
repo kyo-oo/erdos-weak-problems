@@ -40,6 +40,15 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
   #389, #708, #939, #203, #273, #885, #677, #850, #274, #243, #124, #317,
   #289) all fully proven.** COMPLETE PROOF = the problem's verbatim ask,
   unconditional, Lean, CI-green. Nothing gets left out.
+- **S044 (BOSS, 2026-11-11 — THE KILL LIST RESET):** "reset the kill list
+  now, means continue the work for sure, but whenever the sub agent
+  completed the proof of the theorem using my own maths, complete proof,
+  no sub cases then that would mark as kill 1. simple as that." **The new
+  scoreboard counts from KILL 1 = the first sub-agent-delivered COMPLETE
+  proof (no sub-cases, arsenal maths only, CI-green). The S042 army fires
+  sequentially (L63), one sub-agent per problem, priority #271 → #404 →
+  #406 → #261 → the remaining 18 of Phase 1 → Phase 2's 17.** The old
+  41-kill registry is the historical record, not the scoreboard.
 - **#406: re-admitted to Phase 1 by the S042 order** (BOSS's own front, now
   under army attack per his directive — the anchor summit stays his).
 - **NOT finite-check-value** — "NOT FINITE CHECK VALUE LIKE PUSSY" — engines
