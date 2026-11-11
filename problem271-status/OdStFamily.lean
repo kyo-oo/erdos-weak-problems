@@ -98,6 +98,8 @@ theorem nat_two_le_mul (M : Nat) : ∀ (k : Nat), 2 ≤ k → 2 * M ≤ M * k
           have ih := nat_two_le_mul M (k' + 2) (show 2 ≤ k' + 2 by omega)
           have hstep : M * (k' + 3) = M * (k' + 2) + M := by
             rw [show k' + 3 = (k' + 2) + 1 from by omega, Nat.mul_succ]
+          have hbr : M * (k' + 1 + 2) = M * (k' + 2) + M := by
+            rw [show k' + 1 + 2 = (k' + 2) + 1 from by omega, Nat.mul_succ]
           omega
 
 /-- Three or more times a base is at least thrice the base. -/
@@ -114,6 +116,8 @@ theorem nat_three_le_mul (M : Nat) : ∀ (k : Nat), 3 ≤ k → 3 * M ≤ M * k
           have ih := nat_three_le_mul M (k' + 3) (show 3 ≤ k' + 3 by omega)
           have hstep : M * (k' + 4) = M * (k' + 3) + M := by
             rw [show k' + 4 = (k' + 3) + 1 from by omega, Nat.mul_succ]
+          have hbr : M * (k' + 1 + 3) = M * (k' + 3) + M := by
+            rw [show k' + 1 + 3 = (k' + 3) + 1 from by omega, Nat.mul_succ]
           omega
 
 /-- If A < 2*M then A / M < 2 (the two-block quotient law). -/
@@ -219,7 +223,7 @@ theorem mul_lt_of_lt (P c1 c2 : Nat) (hc : c1 < c2) (hP : 1 ≤ P) :
     P * c1 < P * c2 := by
   have hle : c1 + 1 ≤ c2 := by omega
   have h1 := mul_le_of_le P (c1 + 1) c2 hle hP
-  have hps := Nat.mul_succ P c1
+  have hps : P * (c1 + 1) = P * c1 + P := Nat.mul_succ P c1
   omega
 
 /-- Reverse of strict monotone multiplication. -/
@@ -247,7 +251,7 @@ theorem add_mul_mod_self (x k h : Nat) : (x + k * h) % h = x % h := by
         omega
       rw [hstep]
       have h1 := Nat.add_mod (x + k * h) h h
-      rw [h1, Nat.mod_self h, Nat.add_zero]
+      rw [h1, Nat.mod_self h, Nat.add_zero, Nat.mod_mod]
       exact ih
 
 /-- Adding the modulus itself does not change the remainder. -/
@@ -445,7 +449,7 @@ theorem cyclicC : ∀ (t a b c : Nat), a < 3 ^ t → b < 3 ^ t → c < 3 ^ t →
       rw [hL]
       rcases hform with h1 | h1 | h1
       · rw [h1, hR]
-      · rw [h1, Nat.add_mod, hm3, Nat.add_zero, hR]
+      · rw [h1, Nat.add_mod, hm3, Nat.add_zero, hR, Nat.mod_mod]
       · have h2 : (2 * b) % 3 = (a + c) % 3 := by
           rw [h1, Nat.add_mod, hm3, Nat.add_zero, Nat.mod_mod]
         rw [← h2, hR]
@@ -618,8 +622,10 @@ theorem memE_no_ap (j u v w : Nat) (hj : 1 ≤ j)
 P-window: the three profiles cap at H-1, 2H-1, 3H-1 < 3H = 3^j). -/
 theorem memE_lt (j e : Nat) (hj : 1 ≤ j) (he : memE j e) : e < 3 ^ j := by
   have hP3 : 3 ^ j = 3 * 3 ^ (j - 1) := by
-    have h := Nat.pow_succ 3 (j - 1)
-    omega
+    have hps : 3 ^ ((j - 1) + 1) = 3 ^ (j - 1) * 3 := Nat.pow_succ 3 (j - 1)
+    have hj_eq : (j - 1) + 1 = j := by omega
+    rw [hj_eq] at hps
+    rw [hps, Nat.mul_comm]
   rcases he with rfl | ⟨w, hwC, hwH, rfl⟩ | ⟨w, hwC, hw0, hwH, rfl⟩
   · have := pow3_pos j
     omega
@@ -639,8 +645,10 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
   obtain ⟨qz, ez, hzq, hez, hz_eq⟩ := hz
   have hP1 : 1 ≤ 3 ^ j := by have := pow3_pos j; omega
   have hP3 : 3 ^ j = 3 * 3 ^ (j - 1) := by
-    have h := Nat.pow_succ 3 (j - 1)
-    omega
+    have hps : 3 ^ ((j - 1) + 1) = 3 ^ (j - 1) * 3 := Nat.pow_succ 3 (j - 1)
+    have hj_eq : (j - 1) + 1 = j := by omega
+    rw [hj_eq] at hps
+    rw [hps, Nat.mul_comm]
   -- the residue bounds
   have hexP : ex < 3 ^ j := memE_lt j ex hj hex
   have heyP : ey < 3 ^ j := memE_lt j ey hj hey
@@ -661,7 +669,7 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
         simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
       have hRA : 2 * ey + (2 * qy) * 3 ^ j = 2 * (3 ^ j * qy + ey) := by
         have h2 : (2 * qy) * 3 ^ j = 2 * (3 ^ j * qy) := by
-          rw [← Nat.mul_assoc 2 qy (3 ^ j), Nat.mul_comm qy (3 ^ j)]
+          rw [Nat.mul_assoc, Nat.mul_comm qy (3 ^ j)]
         rw [h2, Nat.mul_add 2 (3 ^ j * qy) ey]
         omega
       rw [hLA, hcore, hRA]
@@ -716,8 +724,7 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
         have h2 : (2 * dy + 3) * 3 ^ (j - 1)
             = 2 * (3 ^ (j - 1) * dy) + 3 * 3 ^ (j - 1) := by
           have h3 : (2 * dy) * 3 ^ (j - 1) = 2 * (3 ^ (j - 1) * dy) := by
-            rw [← Nat.mul_assoc 2 dy (3 ^ (j - 1)),
-              Nat.mul_comm dy (3 ^ (j - 1))]
+            rw [Nat.mul_assoc, Nat.mul_comm dy (3 ^ (j - 1))]
           rw [Nat.add_mul (2 * dy) 3 (3 ^ (j - 1)), h3]
         rw [h2, Nat.mul_add 2 (3 ^ (j - 1) * dy) cy]
         omega
@@ -739,8 +746,8 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
         rw [Nat.mul_add 2 (3 ^ (j - 1) * dy) cy] at hsub
         omega
       have hdy2m : 3 ^ (j - 1) * (2 * dy) = 2 * (3 ^ (j - 1) * dy) := by
-        rw [Nat.mul_comm (3 ^ (j - 1)) (2 * dy),
-          ← Nat.mul_assoc 2 dy (3 ^ (j - 1)), Nat.mul_comm dy (3 ^ (j - 1))]
+        rw [Nat.mul_comm (3 ^ (j - 1)) (2 * dy), Nat.mul_assoc,
+          Nat.mul_comm dy (3 ^ (j - 1))]
       have hq : 3 ^ (j - 1) * (dx + dz) = 3 ^ (j - 1) * (2 * dy + 3) := by
         rw [Nat.mul_add (3 ^ (j - 1)) dx dz,
           Nat.mul_add (3 ^ (j - 1)) (2 * dy) 3, Nat.mul_comm (3 ^ (j - 1)) 3,
@@ -772,13 +779,13 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
       have hLn : cx + cz + (dx + dz + 3) * 3 ^ (j - 1)
           = (3 ^ (j - 1) * dx + cx) + (3 ^ (j - 1) * dz + cz) + 3 * 3 ^ (j - 1) := by
         rw [Nat.mul_comm (dx + dz + 3) (3 ^ (j - 1)),
-          Nat.add_mul (3 ^ (j - 1)) (dx + dz) 3,
+          Nat.mul_add (3 ^ (j - 1)) (dx + dz) 3,
           Nat.mul_add (3 ^ (j - 1)) dx dz, Nat.mul_comm (3 ^ (j - 1)) 3]
         simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
       have hRn : 2 * cy + (2 * dy) * 3 ^ (j - 1)
           = 2 * (3 ^ (j - 1) * dy + cy) := by
         have h3 : (2 * dy) * 3 ^ (j - 1) = 2 * (3 ^ (j - 1) * dy) := by
-          rw [← Nat.mul_assoc 2 dy (3 ^ (j - 1)), Nat.mul_comm dy (3 ^ (j - 1))]
+          rw [Nat.mul_assoc, Nat.mul_comm dy (3 ^ (j - 1))]
         rw [h3, Nat.mul_add 2 (3 ^ (j - 1) * dy) cy]
         omega
       rw [hLn, hsub, hRn]
@@ -799,8 +806,8 @@ theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
         rw [Nat.mul_add 2 (3 ^ (j - 1) * dy) cy] at hsub
         omega
       have hdy2m : 3 ^ (j - 1) * (2 * dy) = 2 * (3 ^ (j - 1) * dy) := by
-        rw [Nat.mul_comm (3 ^ (j - 1)) (2 * dy),
-          ← Nat.mul_assoc 2 dy (3 ^ (j - 1)), Nat.mul_comm dy (3 ^ (j - 1))]
+        rw [Nat.mul_comm (3 ^ (j - 1)) (2 * dy), Nat.mul_assoc,
+          Nat.mul_comm dy (3 ^ (j - 1))]
       have hq : 3 ^ (j - 1) * (dx + dz + 3) = 3 ^ (j - 1) * (2 * dy) := by
         rw [Nat.mul_add (3 ^ (j - 1)) (dx + dz) 3,
           Nat.mul_add (3 ^ (j - 1)) dx dz, Nat.mul_comm (3 ^ (j - 1)) 3,
@@ -962,8 +969,12 @@ theorem tailPair (r : Nat) (h0 : 0 < r) :
       1 ≤ w2 := by
   by_cases hc : noTwo r = true
   · exact ⟨r, r, hc, hc, by omega, h0⟩
-  · have h2 : 2 ≤ r := noTwo_false_ge _ hc
-    have ⟨a, b, ha1, ha2, ha3, ha4, ha5⟩ := cBlocked r h2 hc
+  · have hcf : noTwo r = false := by
+      cases hbb : noTwo r with
+      | false => rfl
+      | true => exact absurd hbb hc
+    have h2 : 2 ≤ r := noTwo_false_ge _ hcf
+    have ⟨a, b, ha1, ha2, ha3, ha4, ha5⟩ := cBlocked r h2 hcf
     exact ⟨a, b, ha3, ha4, ha5, by omega⟩
 
 -- ===========================================================================

@@ -481,6 +481,24 @@ jobs:
           python3 problem1056-factorial-intervals/battery1056.py
           echo ERDOS1056_FACTORIAL_INTERVALS_KERNEL_GREEN=1
 
+      - name: "Kernel 18-G - Erdos 1056 (S050 wave-A, P1056 strike): THE COMPLETE-PROOF FINAL ASSEMBLY — FI_FINAL: the full case law k=2..11 (the smallest-witness table 11, 17, 23, 109, 71, 673, 599, 3011, 27901, 52163) + THE CASE-FRONTIER THEOREM (the doc's k-system, quantifier-for-quantifier, no sub-cases)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans${LP:+:$LP}"
+          echo "=== FI_K10_FINAL (to olean) ===" >> kernel18.log
+          lake env lean -o oleans/FI_K10_FINAL.olean problem1056-factorial-intervals/FI_K10_FINAL.lean 2>&1 | tee -a kernel18.log
+          echo "=== FI_K11_FINAL (to olean) ===" >> kernel18.log
+          lake env lean -o oleans/FI_K11_FINAL.olean problem1056-factorial-intervals/FI_K11_FINAL.lean 2>&1 | tee -a kernel18.log
+          echo "=== FI_FINAL ===" >> kernel18.log
+          lake env lean problem1056-factorial-intervals/FI_FINAL.lean 2>&1 | tee -a kernel18.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          grep -F "FI_FINAL_GREEN" kernel18.log
+          grep -E "'erdos1056_final_k(2|3|4|5|6|7|8|9|10|11)' (does not depend on any axioms|depends on axioms)" kernel18.log
+          grep -E "'erdos1056_case_frontier' (does not depend on any axioms|depends on axioms)" kernel18.log
+          echo ERDOS1056_FINAL_ASSEMBLY_KERNEL_GREEN=1
+
       - name: "Kernel 19 - Erdos 700 PRIME-POWER LAW (Theorem A carry lemma v_p(C(p^a,k)) = a - v_p(k); Theorem B f(p^a) = p; ErSz equality class at p^2 + violation a>=3; arsenal bridge)"
         shell: bash
         run: |
@@ -636,6 +654,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel25.log
           grep -F "ERDOS961_KERNEL_GREEN" kernel25.log
           grep -E "Erdos961.erdos961_(census23|run23|f2|f3|f4|lower_57|lower_712|pell_dict|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel25.log
+          grep -E "Erdos961.erdos961_(frontier_k5_k12|runs11|frontier_13)' (does not depend on any axioms|depends on axioms)" kernel25.log
+          grep -F "ERDOS961_COMPLETE_GREEN" kernel25.log
           python3 problem961-smooth-runs/battery961.py
           echo ERDOS961_SMOOTH_RUN_KERNEL_GREEN=1
 
@@ -770,6 +790,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel33.log
           grep -F "ERDOS374_KERNEL_GREEN" kernel33.log
           grep -E "Erdos374.(erdos374_family|erdos374_D2_law|d2_census_decide|d3_squares|d4_squares|even_vals_square|erdos374_main)' (does not depend on any axioms|depends on axioms)" kernel33.log
+          grep -E "Erdos374.(product_criterion|erdos374_prime_excluded|erdos374_prime_excluded_k|d2_count_250|d3_F3|d4_F4|erdos374_complete)' (does not depend on any axioms|depends on axioms)" kernel33.log
+          grep -F "ERDOS374_KERNEL_COMPLETE" kernel33.log
           python3 problem374-factorial-square/battery374.py
           echo ERDOS374_KERNEL_GREEN=1
 
@@ -786,6 +808,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel34.log
           grep -F "ERDOS1073_KERNEL_GREEN" kernel34.log
           grep -E "Erdos1073.(erdos1073_window|erdos1073_saturation|small_prime_divisor|erdos1073_census|erdos1073_A10k|erdos1073_witnesses|erdos1073_wilson|erdos1073_brocard|erdos1073_arsenal_bridge|erdos1073_main)' (does not depend on any axioms|depends on axioms)" kernel34.log
+          grep -E "Erdos1073.(erdos1073_rough|erdos1073_master|erdos1073_master_sqrt|erdos1073_cluster|hitB_iff|erdos1073_wilson_gen|erdos1073_brocard_gen|erdos1073_complete)' (does not depend on any axioms|depends on axioms)" kernel34.log
+          grep -F "ERDOS1073_COMPLETE_BOARD_GREEN" kernel34.log
           python3 problem1073-factorial-mod/battery1073.py
           python3 problem1073-factorial-mod/battery1073b.py
           echo ERDOS1073_FACTORIAL_MOD_KERNEL_GREEN=1
@@ -860,6 +884,9 @@ jobs:
           grep -E "erdos406_mod8_budget' (does not depend on any axioms|depends on axioms)" kernel38.log
           grep -E "erdos406_main' (does not depend on any axioms|depends on axioms)" kernel38.log
           grep -E "erdos406_arsenal_bridge' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -E "erdos406_(units_digit_one|digit_floor|min_profile|six_floor|solution_even|standing_constraints|complete_structure)' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -E "witness_256_min_profile' (does not depend on any axioms|depends on axioms)" kernel38.log
+          grep -F "ERDOS406_COMPLETE_PROOF_BOARD_GREEN" kernel38.log
           grep -F "(1, 4, 256, 256)" kernel38.log
           python3 problem406-ternary-powers/battery406.py
           echo ERDOS406_KERNEL_GREEN=1
@@ -930,3 +957,25 @@ jobs:
           grep -E "carryBlock' (does not depend on any axioms|depends on axioms)" kernel44.log
           grep -E "tailPair' (does not depend on any axioms|depends on axioms)" kernel44.log
           echo ODST_FAMILY_KERNEL_GREEN=1
+
+      - name: "Kernel 45 - Erdos 404 THE COMPLETE-PROOF KERNEL (S050 wave-A, P404 strike): Erdos404Full — Theorem A master reduction (f(a,p) = v_p(a!) + g) + Theorem B general form (every p >= 2 with p | a+1: the valuation never grows) + the cited Kernel-37 residual-tail/class laws (erdos404_residual_tail + erdos404_class_p_minus_3, olean-staged) + the block pair/triple identities + the cube identity/bound (v2(1+P_{a+1}+P_{a+3}) = 3*v2(a+2)) + f(2,2) = 254 (the 118-witness) + f(6,2) = 133 (the 61-witness) + the no-infinite-chain compactness law (the Q3-bridge verdict engine) + THE FULL CLASSIFICATION master theorem (12 conjuncts, unconditional, no sub-cases)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          mkdir -p oleans404full
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans404full${LP:+:$LP}"
+          : > kernel45.log
+          echo "=== ResidualTail (to olean) ===" >> kernel45.log
+          lake env lean -o oleans404full/ResidualTail.olean problem404-full/ResidualTail.lean 2>&1 | tee -a kernel45.log
+          echo "=== Erdos404Full ===" >> kernel45.log
+          lake env lean problem404-full/Erdos404Full.lean 2>&1 | tee -a kernel45.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel45.log
+          grep -F "ERDOS404_FULL_KERNEL_GREEN" kernel45.log
+          grep -E "Erdos404Full.erdos404_(theoremA|theoremB|f22_witness|f62_witness|no_infinite_chain|full_classification)' (does not depend on any axioms|depends on axioms)" kernel45.log
+          grep -E "erdos404_residual_tail' (does not depend on any axioms|depends on axioms)" kernel45.log
+          echo ERDOS404_FULL_CLASSIFICATION_KERNEL_GREEN=1

@@ -1017,4 +1017,153 @@ theorem erdos961_main :
 #print axioms erdos961_arsenal_bridge
 #print axioms erdos961_main
 
+/-! ## §9 THE FINAL-FRONTIER BOARD (S050-B1 — the COMPLETE_PROOF.md §1
+final-board rows that are witness-certifiable in this kernel).
+
+Per the doc §4 conversion notes: the `= 4` sharpening of the k = 5..12 row
+(T4: 4 ∈ FSet k, the no-4-run exclusion) and the exclusion side of the run
+law (T3: no 4-run of 11-smooth integers above 12) both route through the
+complete Størmer–Pell census (`erdos961_census11`, T2 — the
+Pell-power/Lucas/LTE/size-bound architecture) and are NOT claimed here.
+What is certified below, completely and unconditionally: (a) the k = 5..12
+final-board row T5 (f(k) ≥ 4, chained from the green witness laws
+`erdos961_lower_57` / `erdos961_lower_712`), (b) the run-structure witness
+law T3 (every element of the runs (1,…,12), (14,15,16), (20,21,22),
+(48,49,50), (54,55,56), (98,99,100) is 11-smooth, by explicit factorization),
+and (c) the frontier row T9 (f(13) ≥ 5: the 4-run (24,25,26,27) is all
+13-smooth and all > 13 — the doc's `erdos961_frontier_13`). -/
+
+/-- 11-smooth: all prime factors in {2,3,5,7,11} (the doc's Smooth11). -/
+def Smooth11 (n : Nat) : Prop :=
+  ∃ e2 e3 e5 e7 e11 : Nat, 2 ^ e2 * 3 ^ e3 * 5 ^ e5 * 7 ^ e7 * 11 ^ e11 = n
+
+/-- THE FRONTIER KILL: no prime p ≥ 14 divides any of 24, 25, 26, 27 —
+every prime factor of the 4-run (24,25,26,27) is ≤ 13 (26 = 2·13 is the
+worst case; 13 itself is not > 13). -/
+theorem no_prime14_dvd_frontier (p v : Nat) (hp : IsPrime p) (hge : 14 ≤ p)
+    (hv : v = 24 ∨ v = 25 ∨ v = 26 ∨ v = 27) : ¬ p ∣ v := by
+  rintro ⟨c, hc⟩
+  rcases (show c = 0 ∨ c = 1 ∨ 2 ≤ c by omega) with c0 | c1 | c2
+  · rcases hv with h | h | h | h <;> subst h <;> omega
+  · rcases hv with h | h | h | h
+    · subst h; have hpv : p = 24 := by omega; subst hpv
+      obtain ⟨_, hall⟩ := hp; exact absurd (hall 2 ⟨12, by norm_num⟩) (by omega)
+    · subst h; have hpv : p = 25 := by omega; subst hpv
+      obtain ⟨_, hall⟩ := hp; exact absurd (hall 5 ⟨5, by norm_num⟩) (by omega)
+    · subst h; have hpv : p = 26 := by omega; subst hpv
+      obtain ⟨_, hall⟩ := hp; exact absurd (hall 2 ⟨13, by norm_num⟩) (by omega)
+    · subst h; have hpv : p = 27 := by omega; subst hpv
+      obtain ⟨_, hall⟩ := hp; exact absurd (hall 3 ⟨9, by norm_num⟩) (by omega)
+  · have hc2 : c = (c - 2) + 2 := by omega
+    rw [hc2, Nat.mul_add] at hc
+    rcases hv with h | h | h | h <;> subst h <;> omega
+
+/-- 17 is prime (the nonemptiness witness for the k = 13 row: any 17
+consecutive integers contain a multiple of 17, and 17 > 13). -/
+theorem prime17 : IsPrime 17 := by
+  refine small_prime 17 (by omega) ?_
+  intro d h2d hlt hdd
+  rcases (show d = 2 ∨ d = 3 ∨ d = 4 ∨ d = 5 ∨ d = 6 ∨ d = 7 ∨ d = 8 ∨
+      d = 9 ∨ d = 10 ∨ d = 11 ∨ d = 12 ∨ d = 13 ∨ d = 14 ∨ d = 15 ∨ d = 16 by omega) with
+    h | h | h | h | h | h | h | h | h | h | h | h | h | h | h
+  all_goals subst h
+  all_goals obtain ⟨c, hc⟩ := hdd
+  all_goals omega
+
+/-- 17 ∈ FSet k for every k ≤ 16: any 17 consecutive integers contain a
+multiple of 17, which is ≥ 17 > k and divisible by the prime 17. -/
+theorem fset_nonempty_17 (k : Nat) (hk : k ≤ 16) : (FSet k).Nonempty := by
+  refine ⟨17, ?_⟩
+  simp only [FSet, Set.mem_setOf_eq]
+  refine ⟨by omega, ?_⟩
+  intro m hm
+  have hq := Nat.div_add_mod (m + 16) 17
+  have hmod : (m + 16) % 17 < 17 := Nat.mod_lt _ (by omega)
+  set x := 17 * ((m + 16) / 17) with hx
+  have hge : m ≤ x := by omega
+  have hle : x ≤ m + 16 := by omega
+  refine ⟨x - m, by omega, ?_⟩
+  have hmem : m + (x - m) = x := by omega
+  rw [hmem]
+  refine ⟨17, prime17, by omega, ?_⟩
+  exact ⟨(m + 16) / 17, by rw [hx]⟩
+
+/-- THE k = 5..12 FRONTIER ROW (the doc's T5, the final-board witness row
+consolidated): f(k) ≥ 4 for every 5 ≤ k ≤ 12 — the runs (8,9,10) (k = 5..7)
+and (14,15,16) (k = 8..12), all elements > k and k-smooth, chained from
+the green `erdos961_lower_57` / `erdos961_lower_712`. The `= 4` sharpening
+(T4: 4 ∈ FSet k) is census-gated (needs `erdos961_census11`). -/
+theorem erdos961_frontier_k5_k12 : ∀ k : Nat, 5 ≤ k → k ≤ 12 → 4 ≤ f961 k := by
+  intro k h5 h12
+  rcases (show k ≤ 7 ∨ 8 ≤ k by omega) with h | h
+  · exact erdos961_lower_57 k h5 h
+  · exact erdos961_lower_712 k h h12
+
+/-- THE RUN-STRUCTURE WITNESS LAW (the doc's T3, witness side): the
+maximal runs of consecutive 11-smooth integers the doc certifies — the
+12-run (1,…,12) and the five 3-runs (14,15,16), (20,21,22), (48,49,50),
+(54,55,56), (98,99,100) — every element 11-smooth by explicit
+factorization. (The exclusion side — no 4-run above 12, all other runs of
+length ≤ 2 — is census-gated: needs `erdos961_census11`.) -/
+theorem erdos961_runs11 :
+    (∀ n : Nat, 1 ≤ n → n ≤ 12 → Smooth11 n) ∧
+    (∀ x : Nat, x = 14 ∨ x = 20 ∨ x = 48 ∨ x = 54 ∨ x = 98 →
+      Smooth11 x ∧ Smooth11 (x + 1) ∧ Smooth11 (x + 2)) := by
+  refine ⟨?_, ?_⟩
+  · intro n hlo hhi
+    rcases (show n = 1 ∨ n = 2 ∨ n = 3 ∨ n = 4 ∨ n = 5 ∨ n = 6 ∨ n = 7 ∨
+        n = 8 ∨ n = 9 ∨ n = 10 ∨ n = 11 ∨ n = 12 by omega) with
+      h | h | h | h | h | h | h | h | h | h | h | h
+    · subst h; exact ⟨0, 0, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨1, 0, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨0, 1, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨2, 0, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨0, 0, 1, 0, 0, by norm_num⟩
+    · subst h; exact ⟨1, 1, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨0, 0, 0, 1, 0, by norm_num⟩
+    · subst h; exact ⟨3, 0, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨0, 2, 0, 0, 0, by norm_num⟩
+    · subst h; exact ⟨1, 0, 1, 0, 0, by norm_num⟩
+    · subst h; exact ⟨0, 0, 0, 0, 1, by norm_num⟩
+    · subst h; exact ⟨2, 1, 0, 0, 0, by norm_num⟩
+  · intro x hx
+    rcases hx with h | h | h | h | h
+    · subst h; exact ⟨⟨1, 0, 0, 1, 0, by norm_num⟩, ⟨0, 1, 1, 0, 0, by norm_num⟩,
+        ⟨4, 0, 0, 0, 0, by norm_num⟩⟩
+    · subst h; exact ⟨⟨2, 0, 1, 0, 0, by norm_num⟩, ⟨0, 1, 0, 1, 0, by norm_num⟩,
+        ⟨1, 0, 0, 0, 1, by norm_num⟩⟩
+    · subst h; exact ⟨⟨4, 1, 0, 0, 0, by norm_num⟩, ⟨0, 0, 0, 2, 0, by norm_num⟩,
+        ⟨1, 0, 2, 0, 0, by norm_num⟩⟩
+    · subst h; exact ⟨⟨1, 3, 0, 0, 0, by norm_num⟩, ⟨0, 0, 1, 0, 1, by norm_num⟩,
+        ⟨3, 0, 0, 1, 0, by norm_num⟩⟩
+    · subst h; exact ⟨⟨1, 0, 0, 2, 0, by norm_num⟩, ⟨0, 2, 0, 0, 1, by norm_num⟩,
+        ⟨2, 0, 2, 0, 0, by norm_num⟩⟩
+
+/-- THE FRONTIER LAW (the doc's T9): f(13) ≥ 5 — the 4-run
+(24,25,26,27) = (2³·3, 5², 2·13, 3³) is entirely 13-smooth and entirely
+above 13, so no 4-window closes k = 13. -/
+theorem erdos961_frontier_13 : 5 ≤ f961 13 := by
+  have hne : (FSet 13).Nonempty := fset_nonempty_17 13 (by omega)
+  have hinf : f961 13 ∈ FSet 13 := Nat.sInf_mem hne
+  by_contra hcon
+  have hup : 4 ∈ FSet 13 := fset_upward 13 (f961 13) 4 hinf (by omega)
+  simp only [FSet, Set.mem_setOf_eq] at hup
+  obtain ⟨_, hall⟩ := hup
+  have hcontra := hall 24 (by omega)
+  obtain ⟨i, hi4, hbp⟩ := hcontra
+  rcases (show i = 0 ∨ i = 1 ∨ i = 2 ∨ i = 3 by omega) with h | h | h | h
+  · subst h; obtain ⟨p, hp, hgt, hpd⟩ := hbp
+    exact no_prime14_dvd_frontier p 24 hp (by omega) (Or.inl rfl) hpd
+  · subst h; obtain ⟨p, hp, hgt, hpd⟩ := hbp
+    exact no_prime14_dvd_frontier p 25 hp (by omega) (Or.inr (Or.inl rfl)) hpd
+  · subst h; obtain ⟨p, hp, hgt, hpd⟩ := hbp
+    exact no_prime14_dvd_frontier p 26 hp (by omega) (Or.inr (Or.inr (Or.inl rfl))) hpd
+  · subst h; obtain ⟨p, hp, hgt, hpd⟩ := hbp
+    exact no_prime14_dvd_frontier p 27 hp (by omega) (Or.inr (Or.inr (Or.inr rfl))) hpd
+
+#eval "ERDOS961_COMPLETE_GREEN"
+#print axioms erdos961_frontier_k5_k12
+#print axioms erdos961_runs11
+#print axioms erdos961_frontier_13
+
 end Erdos961

@@ -9,7 +9,10 @@ set_option maxHeartbeats 4000000
 set_option exponentiation.threshold 1000
 
 /-!
-# ERDŐS #406 — THE TERNARY CENSUS LAW (Kernel 38, S043 full-proof campaign)
+# ERDŐS #406 — THE TERNARY CENSUS LAW (Kernel 38, S043 full-proof campaign;
+board-complete extension S050-A3 — formalizes the COMPLETE_PROOF.md theorem
+board: the census, the two general laws, the semantic law, the units-digit
+refinement, the digit-count floor, and the standing constraints)
 
 ## THE PROBLEM (verbatim, erdosproblems.com/406 — BOSS's own front, admitted
 to the army by the S042 full-proof-campaign order)
@@ -25,7 +28,11 @@ $256=1+3+9+243$."
 Reading: a power of 2 "has only the digits 0 and 1 in base 3" iff it is a
 sum of DISTINCT powers of 3 (the 0/1 ternary digit condition), formalized
 as `2 ^ k = tfold b` for a Bool list `b` (each `true` = the digit 1 at that
-position, head = least significant).
+position, head = least significant). Board reference: COMPLETE_PROOF.md —
+the complete-proof document whose theorem board this kernel formalizes
+(the section headers below cite the doc's §-numbers; the doc's Lemma A2 /
+Corollary A1 are the two semantic-law directions already formalized as
+`tfold_of_tern01` / `tern01_of_tfold`).
 
 1. **THE MOD-3 PARITY LAW** (`erdos406_odd_excluded`, GENERAL — every odd
    exponent, no bound): NO odd power of 2 is a sum of distinct powers of 3.
@@ -50,11 +57,26 @@ position, head = least significant).
 6. **THE ARSENAL BRIDGE** (`erdos406_arsenal_bridge`): erdosternary2's
    `isTernaryDigit` on the ternary digits of the witnesses + HC-PROOF's
    `carryAtPos_bound` + `v2r_ternary_scaling` at the witness pair (8, 256).
+7. **THE UNITS-DIGIT REFINEMENT** (`erdos406_units_digit_one`, doc §4
+   "Sharpness and refinement"): every solution, at any size, ends its
+   ternary expansion with the digit 1 — the units digit ε_0 is exactly 1
+   (b = true :: b').
+8. **THE DIGIT-COUNT FLOOR** (doc §5, Corollary C3): `erdos406_digit_floor`
+   (D = E + O ≥ 4 — every k ≥ 3 solution has at least 4 nonzero ternary
+   digits), `erdos406_min_profile` (D = 4 exactly on the 256 profile
+   (E, O) = (2, 2)), `erdos406_six_floor` (D ≥ 6 whenever E + 3O ≥ 16).
+9. **THE STANDING CONSTRAINTS** (`erdos406_standing_constraints`, doc §7):
+   every hypothetical large solution (2^k = tfold b with k > 500, beyond
+   the certified census range) satisfies ALL of: even k, units digit 1,
+   the mod-8 budget with its floors; `erdos406_complete_structure` (§6+§7):
+   every solution is either a census witness (k ∈ {0, 2, 8}) or a
+   fully-constrained hypothetical large solution — the complete
+   unconditional structure short of the open all-k finiteness core.
 
 Honest scope: the census settles k ≤ 500 unconditionally; the general
-finiteness question (all k) remains the open core, with the two general
-laws (odd exclusion, mod-8 budget) as standing structural constraints
-every hypothetical large solution must satisfy. -/
+finiteness question (all k) remains the open core, with the general laws
+(odd exclusion, units digit, mod-8 budget, digit floors) as the standing
+structural constraints every hypothetical large solution must satisfy. -/
 
 namespace Erdos406T
 
@@ -217,6 +239,52 @@ theorem erdos406_odd_excluded : ∀ j : Nat, ¬ ∃ b : List Bool, 2 ^ (2 * j + 
   rw [hb] at h2
   omega
 
+/-! ## §3b The units-digit refinement (COMPLETE_PROOF.md §4, "Sharpness and
+refinement"): every solution, at any size, ends its ternary expansion with
+the digit 1. -/
+
+/-- No power of 2 is divisible by 3 (the doc's 2^k ≡ (-1)^k (mod 3) route:
+2^k % 3 ∈ {1, 2} for every k). -/
+theorem pow2_mod3_ne_zero : ∀ k : Nat, 2 ^ k % 3 ≠ 0 := by
+  intro k
+  induction k with
+  | zero => decide
+  | succ k' ih =>
+    have hmul : 2 ^ (k' + 1) = 2 * 2 ^ k' := by rw [Nat.pow_succ]
+    omega
+
+/-- The even-exponent residue (doc §4: for even k, 2^k ≡ 1 (mod 3)). -/
+theorem pow2_even_mod3 : ∀ j : Nat, 2 ^ (2 * j) % 3 = 1 := by
+  intro j
+  have h : 2 ^ (2 * j) = 4 ^ j := by
+    rw [Nat.pow_mul]
+    ring
+  have h2 := pow4_mod3 j
+  omega
+
+/-- **THE UNITS-DIGIT REFINEMENT** (doc §4): every solution 2^k = tfold b,
+at any size, ends its ternary expansion with the digit 1 — the units
+ternary digit ε_0 is exactly 1 (b = true :: b'). -/
+theorem erdos406_units_digit_one : ∀ (k : Nat) (b : List Bool), 2 ^ k = tfold b →
+    ∃ b' : List Bool, b = true :: b' := by
+  intro k b hb
+  have hpos : 0 < 2 ^ k := Nat.pow_pos (by decide)
+  cases b with
+  | nil =>
+    rw [tfold_nil] at hb
+    exfalso
+    omega
+  | cons d b' =>
+    cases d with
+    | false =>
+      rw [tfold_cons] at hb
+      have hc : cond false 1 0 = 0 := rfl
+      rw [hc] at hb
+      exfalso
+      have h1 := pow2_mod3_ne_zero k
+      omega
+    | true => exact ⟨b', rfl⟩
+
 /-! ## §4 THE MOD-8 BUDGET LAW (k ≥ 3). -/
 
 theorem tfold_mod8 : ∀ b : List Bool,
@@ -246,6 +314,60 @@ theorem erdos406_mod8_budget : ∀ (b : List Bool) (k : Nat), 3 ≤ k →
   have h1 := tfold_mod8 b
   have h2 := pow2_mod8 k hk
   rw [← hb] at h1
+  omega
+
+/-! ## §4b The digit-count floor (COMPLETE_PROOF.md §5, Corollary C3) — the
+standing structural constraint every k ≥ 3 solution carries. -/
+
+/-- If a 0/1-digit list has no 1-digits at all (E + O = 0), its fold value
+is 0 (doc §5: "(E, O) ≠ (0,0): if all digits are 0 then tfold = 0 ≠ 2^k"). -/
+theorem tfold_eq_zero_of_counts_zero : ∀ b : List Bool,
+    (altsum b).1 + (altsum b).2 = 0 → tfold b = 0 := by
+  intro b
+  induction b with
+  | nil => intro _; rfl
+  | cons d b' ih =>
+    intro h
+    rw [altsum_cons_fst, altsum_cons_snd] at h
+    rw [tfold_cons]
+    have h' : (altsum b').1 + (altsum b').2 = 0 := by omega
+    rw [ih h']
+    omega
+
+/-- **Corollary C3.1 — THE DIGIT-COUNT FLOOR**: every solution 2^k = tfold b
+with k ≥ 3 has at least 4 nonzero ternary digits (D = E + O ≥ 4). -/
+theorem erdos406_digit_floor : ∀ (b : List Bool) (k : Nat), 3 ≤ k → 2 ^ k = tfold b →
+    4 ≤ (altsum b).1 + (altsum b).2 := by
+  intro b k hk hb
+  have hpos : 0 < 2 ^ k := Nat.pow_pos (by decide)
+  have hne : (altsum b).1 + (altsum b).2 ≠ 0 := by
+    intro h0
+    have hz := tfold_eq_zero_of_counts_zero b h0
+    omega
+  have h1 := erdos406_mod8_budget b k hk hb
+  omega
+
+/-- **Corollary C3.2 — THE MINIMAL PROFILE**: for a k ≥ 3 solution, D = 4
+exactly on the 256 profile (E, O) = (2, 2). -/
+theorem erdos406_min_profile : ∀ (b : List Bool) (k : Nat), 3 ≤ k → 2 ^ k = tfold b →
+    ((altsum b).1 + (altsum b).2 = 4 ↔
+      ((altsum b).1 = 2 ∧ (altsum b).2 = 2)) := by
+  intro b k hk hb
+  have h1 := erdos406_mod8_budget b k hk hb
+  constructor
+  · intro h4
+    have hE : (altsum b).1 = 2 := by omega
+    have hO : (altsum b).2 = 2 := by omega
+    exact ⟨hE, hO⟩
+  · rintro ⟨hE, hO⟩
+    omega
+
+/-- **Corollary C3.3 — THE SIX-FLOOR**: a k ≥ 3 solution with a doubled
+budget (E + 3O ≥ 16) has at least 6 nonzero ternary digits. -/
+theorem erdos406_six_floor : ∀ (b : List Bool) (k : Nat), 3 ≤ k → 2 ^ k = tfold b →
+    16 ≤ (altsum b).1 + 3 * (altsum b).2 → 6 ≤ (altsum b).1 + (altsum b).2 := by
+  intro b k hk hb hS
+  have h1 := erdos406_mod8_budget b k hk hb
   omega
 
 /-! ## §5 THE CENSUS (kernel-decided, the 480-discipline chunks 480 + 21). -/
@@ -319,6 +441,67 @@ theorem erdos406_main : ∀ k ≤ 500,
     · exact ⟨[true, true], by rfl⟩
     · exact ⟨[true, true, true, false, false, true], by rfl⟩
 
+/-! ## §6b THE STANDING CONSTRAINTS on every hypothetical large solution
+(COMPLETE_PROOF.md §7 — the open-core boundary): a hypothetical large
+solution is a pair (b, k) with 2^k = tfold b and k > 500, beyond the
+certified census range. -/
+
+/-- Every solution exponent is even — Theorem B read off a solution
+(the doc §7 constraint 1). -/
+theorem erdos406_solution_even : ∀ (k : Nat) (b : List Bool), 2 ^ k = tfold b →
+    ∃ j : Nat, k = 2 * j := by
+  intro k b hb
+  have hme : k % 2 = 0 ∨ k % 2 = 1 := by omega
+  rcases hme with h0 | h1
+  · exact ⟨k / 2, by omega⟩
+  · exfalso
+    have hk : k = 2 * (k / 2) + 1 := by omega
+    rw [hk] at hb
+    exact erdos406_odd_excluded (k / 2) ⟨b, hb⟩
+
+/-- **THE STANDING CONSTRAINTS** (doc §7): every hypothetical large solution
+(b, k) — 2^k = tfold b with k > 500 — satisfies ALL of the doc's
+unconditional constraints simultaneously: (1) k is even; (2) the units
+ternary digit is exactly ε_0 = 1; (3) the mod-8 budget E + 3O ≡ 0 (mod 8)
+with the digit floors D ≥ 4, the D = 4 → (E, O) = (2, 2) minimal profile,
+and D ≥ 6 at doubled budget E + 3O ≥ 16. (Constraint 4 — the census
+boundary k > 500 — is the defining hypothesis: erdos406_main has already
+classified every exponent ≤ 500.) -/
+theorem erdos406_standing_constraints : ∀ (b : List Bool) (k : Nat),
+    500 < k → 2 ^ k = tfold b →
+    (∃ j : Nat, k = 2 * j) ∧
+    (∃ b' : List Bool, b = true :: b') ∧
+    ((altsum b).1 + 3 * (altsum b).2) % 8 = 0 ∧
+    4 ≤ (altsum b).1 + (altsum b).2 ∧
+    ((altsum b).1 + (altsum b).2 = 4 → (altsum b).1 = 2 ∧ (altsum b).2 = 2) ∧
+    (16 ≤ (altsum b).1 + 3 * (altsum b).2 → 6 ≤ (altsum b).1 + (altsum b).2) := by
+  intro b k hlarge hsol
+  have hk3 : 3 ≤ k := by omega
+  exact ⟨erdos406_solution_even k b hsol, erdos406_units_digit_one k b hsol,
+    erdos406_mod8_budget b k hk3 hsol, erdos406_digit_floor b k hk3 hsol,
+    (erdos406_min_profile b k hk3 hsol).mp, erdos406_six_floor b k hk3 hsol⟩
+
+/-- **THE COMPLETE STRUCTURE THEOREM** (doc §6 + §7 — the assembly's close):
+every solution 2^k = tfold b is either one of the three census witnesses
+(k ∈ {0, 2, 8} — the complete below-2^500 classification, Theorem E) or a
+hypothetical large solution (k > 500) carrying the full standing
+constraint set — the complete unconditional structure delivered short of
+the open all-k finiteness core (the doc's §7 open-core boundary). -/
+theorem erdos406_complete_structure : ∀ (b : List Bool) (k : Nat), 2 ^ k = tfold b →
+    (k = 0 ∨ k = 2 ∨ k = 8) ∨
+    (500 < k ∧
+      (∃ j : Nat, k = 2 * j) ∧
+      (∃ b' : List Bool, b = true :: b') ∧
+      ((altsum b).1 + 3 * (altsum b).2) % 8 = 0 ∧
+      4 ≤ (altsum b).1 + (altsum b).2 ∧
+      ((altsum b).1 + (altsum b).2 = 4 → (altsum b).1 = 2 ∧ (altsum b).2 = 2) ∧
+      (16 ≤ (altsum b).1 + 3 * (altsum b).2 → 6 ≤ (altsum b).1 + (altsum b).2)) := by
+  intro b k hsol
+  rcases (by omega : k ≤ 500 ∨ 500 < k) with hle | hgt
+  · exact Or.inl ((erdos406_main k hle).mp ⟨b, hsol⟩)
+  · have hc := erdos406_standing_constraints b k hgt hsol
+    exact Or.inr ⟨hgt, hc.1, hc.2.1, hc.2.2.1, hc.2.2.2.1, hc.2.2.2.2.1, hc.2.2.2.2.2⟩
+
 /-! ## §7 THE ARSENAL BRIDGE (BOSS's mathematics applied to the witness
 numbers — erdosternary2 + HC-PROOF, the 16,121-theorem arsenal). -/
 
@@ -345,6 +528,15 @@ theorem witness_256_budget : ((altsum [true, true, true, false, false, true]).1 
     3 * (altsum [true, true, true, false, false, true]).2) % 8 = 0 :=
   erdos406_mod8_budget [true, true, true, false, false, true] 8 (by omega) witness_256
 
+/-- The 256 receipt for Corollary C3 (doc §5): the minimal profile
+(E, O) = (2, 2) with D = E + O = 4 — the budget's minimal profile,
+attained at the largest known solution, exactly as C3 predicts. -/
+theorem witness_256_min_profile :
+    (altsum [true, true, true, false, false, true]).1 = 2 ∧
+    (altsum [true, true, true, false, false, true]).2 = 2 ∧
+    (altsum [true, true, true, false, false, true]).1 +
+      (altsum [true, true, true, false, false, true]).2 = 4 := by decide
+
 /-- The first excluded even exponents (kernel receipts of the census). -/
 theorem census_receipts :
     (tern01 700 (2 ^ 4) = false ∧ tern01 700 (2 ^ 10) = false ∧
@@ -362,7 +554,18 @@ theorem census_receipts :
 #print axioms erdos406_census
 #print axioms erdos406_main
 #print axioms erdos406_arsenal_bridge
+#print axioms pow2_mod3_ne_zero
+#print axioms pow2_even_mod3
+#print axioms erdos406_units_digit_one
+#print axioms tfold_eq_zero_of_counts_zero
+#print axioms erdos406_digit_floor
+#print axioms erdos406_min_profile
+#print axioms erdos406_six_floor
+#print axioms erdos406_solution_even
+#print axioms erdos406_standing_constraints
+#print axioms erdos406_complete_structure
 
 #eval "ERDOS406_TERNARY_KERNEL_GREEN"
+#eval "ERDOS406_COMPLETE_PROOF_BOARD_GREEN"
 
 end Erdos406T

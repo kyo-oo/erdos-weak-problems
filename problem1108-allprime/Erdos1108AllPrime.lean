@@ -1,6 +1,7 @@
 import Arsenal.ErdosTernary2.Basic
 import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
+import SubsetKernelLaw
 
 -- Family pattern (green kernels, K19/K29 chains): explicit depth headroom.
 set_option maxRecDepth 262144
@@ -64,6 +65,45 @@ $k \mid v_p(b!)$ — the obstruction.
 
 Core Lean 4 (with the Arsenal transitively providing `Nat.Prime`).
 No `sorry`.  No custom axioms.
+
+## THE COMPLETE-BOARD EXTENSION (S050-B2)
+
+This file is extended in place with the COMPLETE theorem board of
+COMPLETE_PROOF.md — the complete unconditional answer to the verbatim
+#1108 ask per the doc's final section: everything the doc PROVES,
+quantifier for quantifier, no sub-cases, with the open global-finiteness
+core (doc §8) explicitly NOT claimed.  Architecture (§10–§12):
+
+* §10 THE GREEN-KERNEL BRIDGE: `import SubsetKernelLaw` (Kernel 13 +
+  Kernel 15, CI-green runs 42061257046 / 42153591445 — the pair-cascade
+  law and the Legendre parity spine, CITED not re-proved) plus the
+  encoding bridges `fact_bridge`/`sumFacts_bridge` and `v2_pow`
+  (`v₂(n^k) = k·v₂(n)` — the twin port of the TheoremBGeneral `vpad`
+  unit-congruence design that this kernel's residue-1 law descends
+  from, run at the green kernel's own `v₂`).
+* §11 THE REDUCTION LAYER (doc Part III): **R1** the window congruence
+  `Σ ≡ Σ_{a<d} a! (mod d)`; **R2** the powerful hierarchy (every k-th
+  power k ≥ 2 is powerful) + the (Q2) ⟹ (Q1) reduction; **R3** the
+  k-generalized cascade divisibility `k ∣ (2j₀ − s₂(j₀)) + v₂(C(S))`
+  (via Kernel 15's cited explicit cascade); **R5** the complete
+  obstruction web (four simultaneous necessary conditions on every
+  k-th-power value of A at every prime); **R4** the bounded-cardinality
+  reduction, conditional on the single stated external hypothesis
+  HYP-BE (Brindza–Erdős, stated as a theorem hypothesis — never an
+  axiom); **R6** the Brocard embedding (a YES to (Q1) at k = 2 bounds
+  Brocard's 1876 equation u! + 1 = n²); **R7** the Brocard channel
+  {1, u} passes every local obstruction of the certified engine
+  (v_p(1+u!) = 0 at every prime p ≤ u, the cascade parity even, every
+  prime factor of the root beyond the window).
+* §12 THE COMPLETE BOARD `erdos1108ap_complete`: all of the above,
+  the all-prime engine of §1–§9, the cited Legendre spine and explicit
+  cascade, and the arsenal bridge as ONE unconditional conjunction.
+
+Finiteness of a value set of naturals is formalized as the equivalent
+boundedness certificate (∃ N, every value ≤ N — a subset of ℕ is
+finite iff bounded).  CI compiles this file after staging
+`SubsetKernelLaw.olean` (the Kernel-10/14/18 olean-chain pattern).
+Axiom receipts: only [propext, Classical.choice, Quot.sound].
 -/
 
 namespace Erdos1108AP
@@ -707,5 +747,558 @@ theorem erdos1108ap_main :
 #print axioms isolated_min_block_form
 #print axioms erdos1108ap_arsenal_bridge
 #print axioms erdos1108ap_main
+
+/-! ## §10 THE GREEN-KERNEL BRIDGE (Kernel 13 + Kernel 15, cited,
+not re-proved — `import SubsetKernelLaw` brings in the CI-green
+2-adic machinery: `pair_flat`/`pair_jump`/`pair_above` (T1–T3),
+`v2_lt_add` (T4), `isolated_min_v2` (T6), `Lam`/`botPair`/`cascadeC`/
+`full_cascade_v2` (T7), the Legendre parity spine `s2`/
+`legendre_v2_fact`/`legendre_lam` (T8–T9, v₂(n!) = n − s₂(n)),
+`explicit_cascade` (T10) and `square_parity_s2` (T11)).  This
+kernel's `Erdos1108AP.fact`/`sumFacts`/`memB`/`countB` shadow the
+green kernel's root-level names of the same import — hence the two
+encoding bridges below, which identify the two encodings and let every
+cited cascade theorem run verbatim on this file's sums. -/
+
+set_option maxHeartbeats 16000000
+
+/-- BRIDGE 1: this kernel's factorial IS the green kernel's factorial. -/
+theorem fact_bridge : ∀ (n : Nat), fact n = _root_.fact n := by
+  intro n
+  induction n with
+  | zero => rfl
+  | succ m ih =>
+    have h1 : fact (m + 1) = (m + 1) * fact m := rfl
+    have h2 : _root_.fact (m + 1) = (m + 1) * _root_.fact m := rfl
+    rw [h1, h2, ih]
+
+/-- BRIDGE 2: this kernel's subset sums ARE the green kernel's subset sums. -/
+theorem sumFacts_bridge : ∀ (S : List Nat), sumFacts S = _root_.sumFacts S := by
+  intro S
+  induction S with
+  | nil => rfl
+  | cons a t ih =>
+    have h1 : sumFacts (a :: t) = fact a + sumFacts t := rfl
+    have h2 : _root_.sumFacts (a :: t) = _root_.fact a + _root_.sumFacts t := rfl
+    rw [h1, h2, fact_bridge a, ih]
+
+/-- BRIDGE 3: the k-power valuation at the green kernel's v₂ —
+`v₂(n^k) = k·v₂(n)` for n ≥ 1 (the twin of `vp_pow` at the cited
+2-adic engine; the k-generalized cascade R3's second half). -/
+theorem v2_pow : ∀ (k n : Nat), 1 ≤ n → v2 (n ^ k) = k * v2 n := by
+  intro k
+  induction k with
+  | zero => intro n _; rw [Nat.pow_zero, Nat.zero_mul, v2_one]
+  | succ m ih =>
+    intro n hn1
+    rw [Nat.pow_succ,
+      v2_mul (n ^ m + n) (n ^ m) n (Nat.le_refl _) (pow_pos_own m n hn1) hn1,
+      ih n hn1, Nat.succ_mul]
+
+/-! ## §11 THE REDUCTION LAYER (Part III of COMPLETE_PROOF.md). -/
+
+/-- k ≥ 1: `0 ^ k = 0`. -/
+theorem zero_pow_pos (k : Nat) (hk : 1 ≤ k) : (0 : Nat) ^ k = 0 := by
+  obtain ⟨j, hj⟩ : ∃ j, k = j + 1 := ⟨k - 1, by omega⟩
+  rw [hj, Nat.pow_succ, Nat.mul_zero]
+
+/-- p ≥ 2: `1 / p = 0` (the p-block floor of b = 1). -/
+theorem one_div_eq_zero (p : Nat) (hp : 2 ≤ p) : 1 / p = 0 := by
+  have hdm := Nat.div_add_mod 1 p
+  have h1mod : 1 % p = 1 := Nat.mod_eq_of_lt (by omega)
+  have hzp : p * (1 / p) = 0 := by omega
+  rcases Nat.eq_zero_or_pos (1 / p) with h0 | hpos
+  · exact h0
+  · exfalso
+    have hge : p * 1 ≤ p * (1 / p) := Nat.mul_le_mul_left p hpos
+    omega
+
+/-- `q ∣ x` (x ≥ 1, q prime) forces `1 ≤ v_q x` (the step law). -/
+theorem vp_dvd_ge_one (q x : Nat) (hq : q.Prime) (hx : 1 ≤ x) (hd : q ∣ x) :
+    1 ≤ vp q x := by
+  have hxe : x % q = 0 := Nat.mod_eq_zero_of_dvd hd
+  have hst : vp q x = 1 + vp q (x / q) := vp_step q x hq.one_lt hx hxe
+  omega
+
+/-- `1 ≤ v_q x` (q prime) forces `q ∣ x`. -/
+theorem vp_pos_dvd (q x : Nat) (hq : q.Prime) (h : 1 ≤ vp q x) : q ∣ x := by
+  rcases Nat.eq_zero_or_pos x with hx | hx
+  · rw [hx]; exact Nat.dvd_zero _
+  · by_cases hmod : x % q = 0
+    · exact Nat.dvd_of_mod_eq_zero hmod
+    · have h0 : vp q x = 0 := vp_nondiv q x (by omega) (fun hcon => hmod hcon)
+      omega
+
+/-- **THE SQUARE-SATURATION LAW**: `2 ≤ v_q x` (q prime) forces `q² ∣ x`. -/
+theorem vp_two_dvd_sq (q x : Nat) (hq : q.Prime) (h : 2 ≤ vp q x) : q * q ∣ x := by
+  rcases Nat.eq_zero_or_pos x with hx | hx
+  · rw [hx]; exact Nat.dvd_zero _
+  · have hx1 : 1 ≤ x := by omega
+    have hq2 : 2 ≤ q := hq.one_lt
+    have hdvd1 : q ∣ x := vp_pos_dvd q x hq (by omega)
+    have hxe : x % q = 0 := Nat.mod_eq_zero_of_dvd hdvd1
+    have hst : vp q x = 1 + vp q (x / q) := vp_step q x hq2 hx1 hxe
+    have hdvd2 : q ∣ x / q := vp_pos_dvd q (x / q) hq (by omega)
+    obtain ⟨c, hc⟩ := hdvd2
+    have hxdm := Nat.div_add_mod x q
+    have e1 : x = q * (x / q) := by omega
+    refine ⟨c, ?_⟩
+    rw [e1, hc, Nat.mul_assoc]
+
+/-- Euclid at the power: a prime q dividing `n ^ k` divides `n`. -/
+theorem prime_dvd_pow (q n : Nat) (hq : q.Prime) : ∀ (k : Nat), q ∣ n ^ k → q ∣ n := by
+  intro k
+  induction k with
+  | zero =>
+    intro hd
+    have hq2 : 2 ≤ q := hq.one_lt
+    obtain ⟨c, hc⟩ := hd
+    rw [Nat.pow_zero] at hc
+    rcases Nat.eq_zero_or_pos c with h0 | hpos
+    · rw [h0, Nat.mul_zero] at hc
+      omega
+    · obtain ⟨j, hj⟩ : ∃ j, c = j + 1 := ⟨c - 1, by omega⟩
+      rw [hj, Nat.mul_succ] at hc
+      omega
+  | succ m ih =>
+    intro hd
+    have hps : n ^ (m + 1) = n ^ m * n := by rw [Nat.pow_succ]
+    rw [hps] at hd
+    rcases (hq.dvd_mul).mp hd with h1 | h1
+    · exact ih h1
+    · exact h1
+
+/-- Cancellation on the right summand: `p ∣ A + B` and `p ∣ B` give `p ∣ A`. -/
+theorem dvd_add_cancel_right (p A B : Nat) (hp : 1 ≤ p)
+    (h : p ∣ A + B) (hd : p ∣ B) : p ∣ A := by
+  obtain ⟨w, hw⟩ := h
+  obtain ⟨v, hv⟩ := hd
+  by_cases hwv : w < v
+  · exfalso
+    have hle : p * (w + 1) ≤ p * v := Nat.mul_le_mul_left p (by omega)
+    have hexp : p * (w + 1) = p * w + p := by rw [Nat.mul_succ]
+    omega
+  · obtain ⟨u, hu⟩ : ∃ u, w = v + u := ⟨w - v, by omega⟩
+    have hexp2 : p * w = p * v + p * u := by rw [hu, Nat.mul_add]
+    refine ⟨u, ?_⟩
+    omega
+
+/-- Factorial monotonicity: `a ≤ b → a! ≤ b!`. -/
+theorem fact_mono : ∀ (b a : Nat), a ≤ b → fact a ≤ fact b := by
+  intro b
+  induction b with
+  | zero =>
+    intro a hle
+    have ha0 : a = 0 := by omega
+    subst ha0
+    exact Nat.le_refl _
+  | succ m ih =>
+    intro a hle
+    by_cases hab : a = m + 1
+    · subst hab
+      exact Nat.le_refl _
+    · have hle' : a ≤ m := by omega
+      have ihm : fact a ≤ fact m := ih a hle'
+      have hkey : (m + 1) * fact m = m * fact m + fact m := by
+        rw [Nat.add_mul, Nat.one_mul]
+      show fact a ≤ (m + 1) * fact m
+      omega
+
+/-- `u ≤ u!` (the channel bound of R6). -/
+theorem fact_ge_self : ∀ (u : Nat), u ≤ fact u := by
+  intro u
+  induction u with
+  | zero => exact Nat.zero_le (fact 0)
+  | succ m ih =>
+    have hfp : 1 ≤ fact m := fact_pos m
+    have h1 : (m + 1) * 1 ≤ (m + 1) * fact m :=
+      Nat.mul_le_mul_left (m + 1) hfp
+    show m + 1 ≤ (m + 1) * fact m
+    omega
+
+/-- The list length (self-contained encoding of |S|). -/
+def lenB : List Nat → Nat
+  | [] => 0
+  | _ :: t => 1 + lenB t
+
+/-- The low window sum: `sumFactsLow d S = Σ_{a ∈ S, a < d} a!`. -/
+def sumFactsLow (d : Nat) : List Nat → Nat
+  | [] => 0
+  | a :: t => if a < d then fact a + sumFactsLow d t else sumFactsLow d t
+
+/-- Bounded sums: if every element of S is ≤ C then `Σ_{a∈S} a! ≤ |S| · C!`. -/
+theorem sumFacts_bound : ∀ (S : List Nat) (C : Nat), (∀ a, memB a S → a ≤ C) →
+    sumFacts S ≤ lenB S * fact C := by
+  intro S
+  induction S with
+  | nil => intro C _; show (0 : Nat) ≤ 0 * fact C; omega
+  | cons a t ih =>
+    intro C h
+    have haC : a ≤ C := h a (Or.inl rfl)
+    have ht : ∀ x, memB x t → x ≤ C := fun x hx => h x (Or.inr hx)
+    have ihb := ih C ht
+    have hfa : fact a ≤ fact C := fact_mono C a haC
+    show fact a + sumFacts t ≤ (1 + lenB t) * fact C
+    rw [Nat.add_mul, Nat.one_mul]
+    omega
+
+/-- Powerful: every prime divisor q of x satisfies q² ∣ x (doc §0 (Q2)). -/
+def powerful (x : Nat) : Prop := ∀ q, q.Prime → q ∣ x → q * q ∣ x
+
+/-- **R2 — THE POWERFUL HIERARCHY** (doc §5.2): every k-th power
+(k ≥ 2) is powerful. -/
+theorem r2_kth_powerful (k n : Nat) (hk : 2 ≤ k) : powerful (n ^ k) := by
+  intro q hq hdvd
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · have hz : (0 : Nat) ^ k = 0 := zero_pow_pos k (by omega)
+    rw [hn, hz]
+    exact Nat.dvd_zero _
+  · have hn1 : 1 ≤ n := by omega
+    have hqn : q ∣ n := prime_dvd_pow q n hq k hdvd
+    have hvp1 : 1 ≤ vp q n := vp_dvd_ge_one q n hq hn1 hqn
+    have hvpk : vp q (n ^ k) = k * vp q n :=
+      vp_pow k q k n (Nat.le_refl k) hq hn1
+    have hkn : k * 1 ≤ k * vp q n := Nat.mul_le_mul_left k hvp1
+    have hge : 2 ≤ vp q (n ^ k) := by rw [hvpk]; omega
+    exact vp_two_dvd_sq q (n ^ k) hq hge
+
+/-- **R2 — THE REDUCTION** (doc §5.2), boundedness form of (Q2) ⟹ (Q1):
+if the powerful values of A are bounded, then for every k ≥ 2 the
+k-th-power values of A are bounded (by the same bound). -/
+theorem r2_q2_imp_q1 (h : ∃ M, ∀ (S : List Nat), powerful (sumFacts S) → sumFacts S ≤ M) :
+    ∀ k, 2 ≤ k → ∃ N, ∀ (S : List Nat), (∃ n, sumFacts S = n ^ k) → sumFacts S ≤ N := by
+  obtain ⟨M, hM⟩ := h
+  intro k hk
+  refine ⟨M, ?_⟩
+  intro S hex
+  obtain ⟨n, hn⟩ := hex
+  have hpow : powerful (sumFacts S) := by rw [hn]; exact r2_kth_powerful k n hk
+  exact hM S hpow
+
+/-- **R1 — THE WINDOW CONGRUENCE** (doc §5.1): for every d ≥ 2 and every
+finite S: `Σ_{a∈S} a! ≡ Σ_{a∈S, a<d} a! (mod d)` — formalized as the
+witness form `Σ = Σ_low + d·j`.  For a ≥ d the factorial a! contains
+the factor d (the quotient engine `qfact`), so the high window is
+congruent to 0. -/
+theorem r1_window_congruence (d : Nat) (hd : 2 ≤ d) : ∀ (S : List Nat),
+    ∃ j, sumFacts S = sumFactsLow d S + d * j := by
+  intro S
+  induction S with
+  | nil => refine ⟨0, ?_⟩; show (0 : Nat) = 0 + d * 0; omega
+  | cons a t ih =>
+    obtain ⟨j, hj⟩ := ih
+    by_cases hlt : a < d
+    · have he : sumFactsLow d (a :: t) = fact a + sumFactsLow d t := by
+        have h2 : sumFactsLow d (a :: t) =
+            if a < d then fact a + sumFactsLow d t else sumFactsLow d t := rfl
+        rw [h2, if_pos hlt]
+      have hsc : sumFacts (a :: t) = fact a + sumFacts t := rfl
+      refine ⟨j, ?_⟩
+      rw [he, hsc, hj]
+      omega
+    · have he : sumFactsLow d (a :: t) = sumFactsLow d t := by
+        have h2 : sumFactsLow d (a :: t) =
+            if a < d then fact a + sumFactsLow d t else sumFactsLow d t := rfl
+        rw [h2, if_neg hlt]
+      have hf0 : fact 0 = 1 := rfl
+      have hfa : fact a = qfact 0 a := by
+        rw [fact_split a 0 (Nat.zero_le a), hf0, Nat.one_mul]
+      have hdvd : d ∣ fact a := by rw [hfa]; exact qfact_dvd a 0 d (by omega) (by omega)
+      have hxdm := Nat.div_add_mod (fact a) d
+      have hmod : fact a % d = 0 := Nat.mod_eq_zero_of_dvd hdvd
+      have hfe : fact a = d * (fact a / d) := by omega
+      have hsc : sumFacts (a :: t) = fact a + sumFacts t := rfl
+      refine ⟨fact a / d + j, ?_⟩
+      rw [he, hsc, hj]
+      have hexp : d * (fact a / d + j) = d * (fact a / d) + d * j :=
+        Nat.mul_add d (fact a / d) j
+      omega
+
+/-- **R3 — THE k-GENERALIZED CASCADE DIVISIBILITY** (doc §5.3): if
+`Σ_{a∈S} a! = n^k` (k ≥ 2, S ≠ ∅) then `k ∣ (2j₀ − s₂(j₀)) + v₂(C(S))` —
+the cited explicit cascade (Kernel 15 T10) plus `v₂(n^k) = k·v₂(n)`. -/
+theorem r3_kth_power_cascade (S : List Nat) (hS : S ≠ []) (n k : Nat) (hk : 2 ≤ k)
+    (h : sumFacts S = n ^ k) :
+    k ∣ (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S) := by
+  have hpos : 1 ≤ sumFacts S := by rw [sumFacts_bridge S]; exact sumFacts_pos S hS
+  rcases Nat.eq_zero_or_pos n with hn | hn
+  · have hz : (0 : Nat) ^ k = 0 := zero_pow_pos k (by omega)
+    rw [hn, hz] at h
+    omega
+  · have hn1 : 1 ≤ n := by omega
+    have hbr : _root_.sumFacts S = n ^ k := by rw [← sumFacts_bridge S]; exact h
+    have hc := explicit_cascade S hS
+    rw [hbr] at hc
+    have hpow : v2 (n ^ k) = k * v2 n := v2_pow k n hn1
+    rw [hpow] at hc
+    exact ⟨v2 n, hc.symm⟩
+
+/-- **R5 — THE OBSTRUCTION WEB** (doc §5.5): for `x = Σ_{a∈S} a! = n^k`
+(k ≥ 2, S ≠ ∅) ALL four obstructions hold simultaneously:
+(1) the 2-adic cascade divisibility [R3];
+(2) the all-prime singleton obstruction: `k ∣ v_p(b_p!)` at every prime
+    p whose lowest occupied p-block in S is a singleton {b_p} [P5];
+(3) the valuation profile `v_p(x) = k·v_p(n)` at every prime p [vp_pow];
+(4) the window congruence: `p ∣ n ⟹ Σ_{a<p} a! ≡ 0 (mod p)` at every
+    prime p [R1]. -/
+theorem r5_obstruction_web (S : List Nat) (hS : S ≠ []) (n k : Nat) (hk : 2 ≤ k)
+    (h : sumFacts S = n ^ k) :
+    k ∣ (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S) ∧
+    (∀ p b, p.Prime → countB b S = 1 →
+      (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) → k ∣ vp p (fact b)) ∧
+    (∀ p, p.Prime → vp p (sumFacts S) = k * vp p n) ∧
+    (∀ p, p.Prime → p ∣ n → sumFactsLow p S % p = 0) := by
+  have hpos : 1 ≤ sumFacts S := by rw [sumFacts_bridge S]; exact sumFacts_pos S hS
+  refine ⟨r3_kth_power_cascade S hS n k hk h, ?_, ?_, ?_⟩
+  · intro p b hp hbS hblock
+    by_contra hknot
+    exact all_prime_power_obstruction p b hp S hbS hblock k n hk hknot h
+  · intro p hp
+    rcases Nat.eq_zero_or_pos n with hn | hn
+    · have hz : (0 : Nat) ^ k = 0 := zero_pow_pos k (by omega)
+      rw [hn, hz] at h
+      omega
+    · have hn1 : 1 ≤ n := by omega
+      rw [h]
+      exact vp_pow k p k n (Nat.le_refl k) hp hn1
+  · intro p hp hpn
+    have hn1 : 1 ≤ n := by
+      rcases Nat.eq_zero_or_pos n with h0 | h1
+      · have hz : (0 : Nat) ^ k = 0 := zero_pow_pos k (by omega)
+        rw [h0, hz] at h
+        omega
+      · omega
+    have hvp1 : 1 ≤ vp p n := vp_dvd_ge_one p n hp hn1 hpn
+    have hvpk : vp p (n ^ k) = k * vp p n :=
+      vp_pow k p k n (Nat.le_refl k) hp hn1
+    have hkn : k * 1 ≤ k * vp p n := Nat.mul_le_mul_left k hvp1
+    have hge : 1 ≤ vp p (n ^ k) := by rw [hvpk]; omega
+    have hpnk : p ∣ n ^ k := vp_pos_dvd p (n ^ k) hp hge
+    have hpS : p ∣ sumFacts S := by rw [h]; exact hpnk
+    obtain ⟨j, hj⟩ := r1_window_congruence p hp.one_lt S
+    have hpLow : p ∣ sumFactsLow p S + p * j := by rw [← hj]; exact hpS
+    have hpdj : p ∣ p * j := ⟨j, rfl⟩
+    have hp2 : 2 ≤ p := hp.one_lt
+    have hp1le : 1 ≤ p := by omega
+    have hplow : p ∣ sumFactsLow p S :=
+      dvd_add_cancel_right p (sumFactsLow p S) (p * j) hp1le hpLow hpdj
+    exact Nat.mod_eq_zero_of_dvd hplow
+
+/-- **HYP-BE (Brindza–Erdős [BrEr91])** — the doc §5.4 single stated
+external hypothesis, stated as a GIVEN HYPOTHESIS (Boss's arsenal-only
+rule; a theorem hypothesis, never an axiom): for every r ≥ 1 there is
+C(r) such that every powerful r-factorial sum has all its r terms
+≤ C(r). -/
+def hypBE : Prop :=
+  ∀ (r : Nat), 1 ≤ r → ∃ C, ∀ (S : List Nat), lenB S = r →
+    powerful (sumFacts S) → ∀ a, memB a S → a ≤ C
+
+/-- **R4 — THE BOUNDED-CARDINALITY REDUCTION** (doc §5.4, conditional on
+HYP-BE): for every fixed r ≥ 1 and k ≥ 2 the r-term k-th-power value
+set is bounded (finite, in the ℕ-set sense). -/
+theorem r4_kth_power_bounded (hyp : hypBE) (r k : Nat) (hr : 1 ≤ r) (hk : 2 ≤ k) :
+    ∃ N, ∀ (S : List Nat), lenB S = r → (∃ n, sumFacts S = n ^ k) → sumFacts S ≤ N := by
+  obtain ⟨C, hC⟩ := hyp r hr
+  refine ⟨r * fact C, ?_⟩
+  intro S hlen hex
+  obtain ⟨n, hn⟩ := hex
+  have hpow : powerful (sumFacts S) := by rw [hn]; exact r2_kth_powerful k n hk
+  have hbb := sumFacts_bound S C (fun a ha => hC S hlen hpow a ha)
+  rw [hlen] at hbb
+  exact hbb
+
+/-- **R4 (powerful half)**: under HYP-BE every fixed-r powerful value set
+is bounded (the "same for powerful values" of the doc). -/
+theorem r4_powerful_bounded (hyp : hypBE) (r : Nat) (hr : 1 ≤ r) :
+    ∃ N, ∀ (S : List Nat), lenB S = r → powerful (sumFacts S) → sumFacts S ≤ N := by
+  obtain ⟨C, hC⟩ := hyp r hr
+  refine ⟨r * fact C, ?_⟩
+  intro S hlen hpow
+  have hbb := sumFacts_bound S C (fun a ha => hC S hlen hpow a ha)
+  rw [hlen] at hbb
+  exact hbb
+
+/-- **R6 — THE BROCARD EMBEDDING** (doc §5.6): if the square values of A
+are bounded ((Q1) at k = 2 answered YES in the ℕ-set sense), then the
+Brocard domain {u : u! + 1 = n²} is bounded (finite) — the
+150-year-old open problem is a special instance of the corpus
+question. -/
+theorem r6_brocard_bounded
+    (h : ∃ M, ∀ (S : List Nat) (n : Nat), sumFacts S = n * n → sumFacts S ≤ M) :
+    ∃ N, ∀ u, (∃ n, fact u + 1 = n * n) → u ≤ N := by
+  obtain ⟨M, hM⟩ := h
+  refine ⟨M, ?_⟩
+  intro u hex
+  obtain ⟨n, hn⟩ := hex
+  have hch : sumFacts [1, u] = fact u + 1 := by
+    have h1 : sumFacts [1, u] = fact 1 + (fact u + 0) := rfl
+    have hf1 : fact 1 = 1 := rfl
+    omega
+  have hle := hM [1, u] n (by rw [hch]; exact hn)
+  rw [hch] at hle
+  have hge : u ≤ fact u := fact_ge_self u
+  omega
+
+/-- **R7.1 — THE BROCARD CHANNEL PASSES THE ALL-PRIME OBSTRUCTION**
+(doc §5.7): for every u ≥ 2 and every prime p ≤ u, the channel sum
+`1 + u!` (S = {1, u}) has `v_p(1 + u!) = v_p(1!) = 0` — the p-block
+of 1 is the singleton {1} and u lies strictly higher (P3 at b = 1). -/
+theorem r7_channel_vp_zero (u p : Nat) (hp : p.Prime) (hu : 2 ≤ u) (hppu : p ≤ u) :
+    vp p (sumFacts [1, u]) = 0 := by
+  have hu1 : ¬ (u = 1) := by omega
+  have he : countB 1 [1, u] = (if (1 : Nat) = 1 then 1 else 0) +
+      ((if u = 1 then 1 else 0) + 0) := rfl
+  rw [if_pos rfl, if_neg hu1] at he
+  have hblock : ∀ a, memB a [1, u] → a ≠ 1 → p * (1 / p + 1) ≤ a := by
+    intro a ha hne
+    have hOr : 1 = a ∨ (u = a ∨ False) := ha
+    rcases hOr with rfl | rfl | hf
+    · exact absurd rfl hne
+    · have hd : 1 / p = 0 := one_div_eq_zero p hp.one_lt
+      rw [hd]
+      omega
+    · exact hf.elim
+  have hlaw := all_prime_isolated_min p 1 hp [1, u] he hblock
+  have hf1 : fact 1 = 1 := rfl
+  rw [hlaw, hf1, vp_one p hp.one_lt]
+
+/-- **R7.2 — THE CASCADE PARITY IS SATISFIED** (doc §5.7): for every
+u ≥ 2, `v₂(1 + u!) = 0` — even (u! is even, 1 + u! odd): the T11
+square-parity invariant holds vacuously on the channel (j₀ = 0,
+Λ(0) = 0, v₂(C) = 0). -/
+theorem r7_channel_v2_zero (u : Nat) (hu : 2 ≤ u) : v2 (sumFacts [1, u]) = 0 := by
+  have hch : sumFacts [1, u] = fact u + 1 := by
+    have h1 : sumFacts [1, u] = fact 1 + (fact u + 0) := rfl
+    have hf1 : fact 1 = 1 := rfl
+    omega
+  have hf0 : fact 0 = 1 := rfl
+  have hfa : fact u = qfact 0 u := by
+    rw [fact_split u 0 (Nat.zero_le u), hf0, Nat.one_mul]
+  have hdvd : 2 ∣ fact u := by rw [hfa]; exact qfact_dvd u 0 2 (by omega) (by omega)
+  have hfe : fact u % 2 = 0 := Nat.mod_eq_zero_of_dvd hdvd
+  rw [hch]
+  have hodd : (fact u + 1) % 2 = 1 := by omega
+  exact v2_odd _ hodd
+
+/-- **R7.3 — THE WINDOW IS VACUOUS ON THE CHANNEL** (doc §5.7): if
+`1 + u! = n²` (u ≥ 2) then every prime factor of n exceeds u — no
+window prime can divide the root. -/
+theorem r7_window_avoid (u n : Nat) (hu : 2 ≤ u)
+    (h : sumFacts [1, u] = n * n) :
+    ∀ p, p.Prime → p ≤ u → ¬ p ∣ n := by
+  intro p hp hppu hdvd
+  have hpos1 : 1 ≤ sumFacts [1, u] := by
+    have h1 : sumFacts [1, u] = fact 1 + (fact u + 0) := rfl
+    have hf1 : 1 ≤ fact 1 := fact_pos 1
+    omega
+  have hn1 : 1 ≤ n := by
+    rcases Nat.eq_zero_or_pos n with h0 | h1
+    · rw [h0, Nat.mul_zero] at h
+      omega
+    · omega
+  have hvp1 : 1 ≤ vp p n := vp_dvd_ge_one p n hp hn1 hdvd
+  have hvnn : vp p (n * n) = vp p n + vp p n :=
+    vp_mul (n + n) p n n (Nat.le_refl _) hp hn1 hn1
+  have hdvdnn : p ∣ n * n := vp_pos_dvd p (n * n) hp (by omega)
+  have hdvdS : p ∣ sumFacts [1, u] := by rw [h]; exact hdvdnn
+  have hvpS1 : 1 ≤ vp p (sumFacts [1, u]) :=
+    vp_dvd_ge_one p (sumFacts [1, u]) hp hpos1 hdvdS
+  have hvp0 : vp p (sumFacts [1, u]) = 0 :=
+    r7_channel_vp_zero u p hp hu hppu
+  omega
+
+/-! ## §12 THE COMPLETE BOARD (the final assembled main theorem). -/
+
+/-- **THE COMPLETE THEOREM BOARD of Erdős #1108 per COMPLETE_PROOF.md's
+final section** — the complete unconditional engine + reduction layer,
+one conjunction, no sub-cases: the all-prime isolated-minimum law and
+k-th-power obstruction (Kernel 30), the Legendre parity spine and the
+explicit pair-cascade (Kernel 13/15, CITED via import), the window
+congruence R1, the powerful hierarchy R2 (+ the Q2 ⟹ Q1 reduction),
+the k-generalized cascade divisibility R3, the complete obstruction
+web R5, the bounded-cardinality reductions R4 (conditional on the
+stated hypothesis HYP-BE), the Brocard embedding R6, the Brocard
+channel local-obstruction web R7, and the arsenal bridge.  The open
+global-finiteness core (doc §8) is NOT claimed. -/
+theorem erdos1108ap_complete :
+    (∀ p b S, p.Prime → countB b S = 1 →
+      (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) →
+      vp p (sumFacts S) = vp p (fact b)) ∧
+    (∀ p b S k n, p.Prime → countB b S = 1 →
+      (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) → 2 ≤ k →
+      ¬ (k ∣ vp p (fact b)) → sumFacts S ≠ n ^ k) ∧
+    (∀ n : Nat, v2 (_root_.fact n) + s2 n = n) ∧
+    (∀ S : List Nat, S ≠ [] →
+      v2 (_root_.sumFacts S) = (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S)) ∧
+    (∀ d S, 2 ≤ d → ∃ j, sumFacts S = sumFactsLow d S + d * j) ∧
+    (∀ k n, 2 ≤ k → powerful (n ^ k)) ∧
+    (∀ h : ∃ M, ∀ S : List Nat, powerful (sumFacts S) → sumFacts S ≤ M, ∀ k, 2 ≤ k →
+      ∃ N, ∀ S : List Nat, (∃ n, sumFacts S = n ^ k) → sumFacts S ≤ N) ∧
+    (∀ S n k, S ≠ [] → 2 ≤ k → sumFacts S = n ^ k →
+      k ∣ (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S)) ∧
+    (∀ S n k, S ≠ [] → 2 ≤ k → sumFacts S = n ^ k →
+      (k ∣ (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S) ∧
+      (∀ p b, p.Prime → countB b S = 1 →
+        (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) → k ∣ vp p (fact b)) ∧
+      (∀ p, p.Prime → vp p (sumFacts S) = k * vp p n) ∧
+      (∀ p, p.Prime → p ∣ n → sumFactsLow p S % p = 0))) ∧
+    (∀ hyp : hypBE, ∀ r k, 1 ≤ r → 2 ≤ k →
+      ∃ N, ∀ S : List Nat, lenB S = r → (∃ n, sumFacts S = n ^ k) → sumFacts S ≤ N) ∧
+    (∀ hyp : hypBE, ∀ r, 1 ≤ r →
+      ∃ N, ∀ S : List Nat, lenB S = r → powerful (sumFacts S) → sumFacts S ≤ N) ∧
+    (∀ h : ∃ M, ∀ S : List Nat, ∀ n : Nat, sumFacts S = n * n → sumFacts S ≤ M,
+      ∃ N, ∀ u, (∃ n, fact u + 1 = n * n) → u ≤ N) ∧
+    (∀ u p, 2 ≤ u → p.Prime → p ≤ u → vp p (sumFacts [1, u]) = 0) ∧
+    (∀ u, 2 ≤ u → v2 (sumFacts [1, u]) = 0) ∧
+    (∀ u n, 2 ≤ u → sumFacts [1, u] = n * n →
+      ∀ p, p.Prime → p ≤ u → ¬ p ∣ n) ∧
+    arsenalBridgeProp :=
+  ⟨fun p b S hp hbS hb => all_prime_isolated_min p b hp S hbS hb,
+   fun p b S k n hp hbS hb hk hknot =>
+     all_prime_power_obstruction p b hp S hbS hb k n hk hknot,
+   legendre_v2_fact,
+   explicit_cascade,
+   fun d S hd => r1_window_congruence d hd S,
+   fun k n hk => r2_kth_powerful k n hk,
+   fun h k hk => r2_q2_imp_q1 h k hk,
+   fun S n k hS hk h => r3_kth_power_cascade S hS n k hk h,
+   fun S n k hS hk h => r5_obstruction_web S hS n k hk h,
+   fun hyp r k hr hk => r4_kth_power_bounded hyp r k hr hk,
+   fun hyp r hr => r4_powerful_bounded hyp r hr,
+   fun h => r6_brocard_bounded h,
+   fun u p hu hp hppu => r7_channel_vp_zero u p hp hu hppu,
+   fun u hu => r7_channel_v2_zero u hu,
+   fun u n hu h p hp hppu => r7_window_avoid u n hu h p hp hppu,
+   erdos1108ap_arsenal_bridge⟩
+
+/-! ## §13 RECEIPTS (the complete board). -/
+
+-- The Brocard channel receipts: v₂(1 + u!) = 0 at the three known
+-- Brocard exponents u = 4, 5, 7 (25 = 5², 121 = 11², 5041 = 71²):
+#eval (v2 (sumFacts [1, 4]), v2 (sumFacts [1, 5]), v2 (sumFacts [1, 7]))
+-- expected (0, 0, 0)
+
+-- The all-prime channel receipt at u = 7 (every prime p ≤ 7):
+#eval (vp 2 (sumFacts [1, 7]), vp 3 (sumFacts [1, 7]),
+       vp 5 (sumFacts [1, 7]), vp 7 (sumFacts [1, 7]))
+-- expected (0, 0, 0, 0)
+
+#eval "ERDOS1108_ALLPRIME_COMPLETE_GREEN"
+
+#print axioms fact_bridge
+#print axioms sumFacts_bridge
+#print axioms v2_pow
+#print axioms r1_window_congruence
+#print axioms r2_kth_powerful
+#print axioms r2_q2_imp_q1
+#print axioms r3_kth_power_cascade
+#print axioms r5_obstruction_web
+#print axioms r4_kth_power_bounded
+#print axioms r4_powerful_bounded
+#print axioms r6_brocard_bounded
+#print axioms r7_channel_vp_zero
+#print axioms r7_channel_v2_zero
+#print axioms r7_window_avoid
+#print axioms erdos1108ap_complete
 
 end Erdos1108AP
