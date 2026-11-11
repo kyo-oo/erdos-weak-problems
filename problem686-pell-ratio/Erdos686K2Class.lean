@@ -350,7 +350,7 @@ theorem mutual_step (u₀ u₁ : Nat) (hu1 : 2 ≤ u₁) (hslt : u₁ < u₀)
   have hC : u₁ ∣ (u₀ * u₀ - 1) * (E * E) := by
     obtain ⟨cc, hcc⟩ := hd2
     refine ⟨cc * (E * E), ?_⟩
-    rw [Nat.mul_assoc u₁ cc (E * E), ← hcc]
+    rw [hcc, Nat.mul_assoc u₁ cc (E * E)]
   have hsa := sub_add_mul (u₀ * E) 1 hW1
   have hQZ : (u₀ * u₀ - 1) * (E * E) = (u₀ * u₀) * (E * E) - E * E := by
     have hpos : 1 ≤ u₀ * u₀ := Nat.mul_pos (by omega) (by omega)
