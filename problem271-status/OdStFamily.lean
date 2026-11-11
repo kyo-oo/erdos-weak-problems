@@ -90,7 +90,7 @@ theorem nat_two_le_mul (M : Nat) : ∀ (k : Nat), 2 ≤ k → 2 * M ≤ M * k
   | 0, hk => by omega
   | 1, hk => by omega
   | k + 2, _ => by
-      have ih := nat_two_le_mul M (k + 1) (by omega)
+      have ih := nat_two_le_mul M (k + 1) (show 2 ≤ k + 1 by omega)
       have hstep : M * (k + 2) = M * (k + 1) + M := by
         rw [show k + 2 = (k + 1) + 1 from by omega, Nat.mul_succ]
       omega
@@ -101,7 +101,7 @@ theorem nat_three_le_mul (M : Nat) : ∀ (k : Nat), 3 ≤ k → 3 * M ≤ M * k
   | 1, hk => by omega
   | 2, hk => by omega
   | k + 3, _ => by
-      have ih := nat_three_le_mul M (k + 2) (by omega)
+      have ih := nat_three_le_mul M (k + 2) (show 3 ≤ k + 2 by omega)
       have hstep : M * (k + 3) = M * (k + 2) + M := by
         rw [show k + 3 = (k + 2) + 1 from by omega, Nat.mul_succ]
       omega
@@ -168,20 +168,26 @@ theorem nat_mul_cancel (H x y : Nat) (hH : 1 ≤ H) (h : H * x = H * y) :
     x = y := by
   induction x generalizing y with
   | zero =>
-      have hz : H * y = 0 := by omega
-      cases Nat.eq_zero_of_mul_eq_zero hz with
-      | inl hH0 => omega
-      | inr hy0 => omega
-  | succ x' ih =>
+      have h' := h
+      rw [Nat.mul_zero] at h'
       cases y with
       | zero => omega
+      | succ y' =>
+          have hsucc : H * (y' + 1) = H * y' + H := Nat.mul_succ H y'
+          omega
+  | succ x' ih =>
+      cases y with
+      | zero =>
+          rw [Nat.mul_zero] at h
+          have hsucc : H * (x' + 1) = H * x' + H := Nat.mul_succ H x'
+          omega
       | succ y' =>
           have hs : H * x' + H = H * y' + H := by
             have e1 : H * (x' + 1) = H * x' + H := Nat.mul_succ H x'
             have e2 : H * (y' + 1) = H * y' + H := Nat.mul_succ H y'
             rw [e1, e2] at h
             omega
-          have hc : H * x' = H * y' := Nat.add_right_cancel _ _ _ hs
+          have hc : H * x' = H * y' := Nat.add_right_cancel hs
           have hxy : x' = y' := ih y' hc
           omega
 
@@ -199,18 +205,20 @@ theorem mul_le_of_le (P : Nat) : ∀ (a b : Nat), a ≤ b → 1 ≤ P → P * a 
   induction b generalizing a with
   | zero =>
       cases a with
-      | zero => rw [Nat.mul_zero, Nat.mul_zero]
+      | zero => simp [Nat.mul_zero]
       | succ a' => omega
   | succ b' ih =>
       cases Nat.lt_or_ge a b' with
       | inl hlt =>
-          have h1 := ih a hlt hP
-          have hps := Nat.mul_succ P b'
+          have h1 := ih a (Nat.le_of_lt hlt) hP
+          have hps : P * (b' + 1) = P * b' + P := Nat.mul_succ P b'
           omega
       | inr hge =>
-          have ha : a = b' + 1 := by omega
-          rw [ha]
-          exact Nat.le_refl _
+          rcases (show a = b' ∨ a = b' + 1 by omega) with hab | hab
+          · rw [hab, Nat.mul_succ]
+            exact Nat.le_add_right (P * b') P
+          · rw [hab]
+            exact Nat.le_refl _
 
 /-- Monotone multiplication (left factor fixed), strict form. -/
 theorem mul_lt_of_lt (P c1 c2 : Nat) (hc : c1 < c2) (hP : 1 ≤ P) :
@@ -244,9 +252,9 @@ theorem add_mul_mod_self (x k h : Nat) : (x + k * h) % h = x % h := by
         rw [succ_mul_self]
         omega
       rw [hstep]
-      have ham := Nat.add_mod (x + k * h) h h
-      rw [Nat.mod_self h, Nat.add_zero, ih]
-      exact Nat.mod_eq_of_lt (Nat.mod_lt x (show 0 < h from by omega))
+      have h1 := Nat.add_mod (x + k * h) h h
+      rw [h1, Nat.mod_self h, Nat.zero_add]
+      exact ih
 
 /-- Adding the modulus itself does not change the remainder. -/
 theorem add_mod_self (x h : Nat) : (x + h) % h = x % h := by
@@ -257,11 +265,13 @@ theorem add_mod_self (x h : Nat) : (x + h) % h = x % h := by
 /-- The residue congruence under an exact sum `u + w = 2 * v`. -/
 theorem mod_sum_mod (u v w h : Nat) (hsum : u + w = 2 * v) :
     (u % h + w % h) % h = (2 * (v % h)) % h := by
-  have h2 : (u + w) % h = (u % h + w % h) % h := Nat.add_mod u w h
-  have h3 : (v + v) % h = (v % h + v % h) % h := Nat.add_mod v v h
-  have hvv : 2 * v = v + v := by omega
-  have hvv2 : 2 * (v % h) = v % h + v % h := by omega
-  rw [← h2, hsum, hvv, h3, hvv2]
+  have hva : 2 * v = v + v := by omega
+  have hvb : 2 * (v % h) = v % h + v % h := by omega
+  calc (u % h + w % h) % h = (u + w) % h := (Nat.add_mod u w h).symm
+    _ = (2 * v) % h := by rw [hsum]
+    _ = (v + v) % h := by rw [hva]
+    _ = (v % h + v % h) % h := Nat.add_mod v v h
+    _ = (2 * (v % h)) % h := by rw [hvb]
 
 /-- The residue congruence under a sum with a ±h carry on either side. -/
 theorem mod_sum_carry2 (u v w h k k' : Nat)
@@ -278,23 +288,23 @@ theorem mod_sum_carry2 (u v w h k k' : Nat)
     rw [hva, hvm, hvb]
   rw [← h1, ← h2, hc, h3]
 
+/-- The remainder of `P * c + r` modulo `P` (r < P). -/
+theorem modP (P c r : Nat) (hr : r < P) : (P * c + r) % P = r := by
+  have h0 : 0 < P := by omega
+  rw [Nat.add_mod]
+  rw [show (P * c) % P = 0 from by
+        rw [Nat.mul_mod, Nat.mod_self P, Nat.zero_mul, Nat.zero_mod]]
+  rw [Nat.zero_add, Nat.mod_mod, Nat.mod_eq_of_lt hr]
+
 /-- The quotient of `P * c + r` by `P` (r < P). -/
 theorem divP (P c r : Nat) (hr : r < P) : (P * c + r) / P = c := by
   have hP : 1 ≤ P := by omega
   have hdm : P * ((P * c + r) / P) + (P * c + r) % P = P * c + r :=
     Nat.div_add_mod (P * c + r) P
-  have hm : (P * c + r) % P = r := by
-    rw [Nat.add_mod, Nat.mul_mod, Nat.mod_self P, Nat.zero_mul,
-      Nat.zero_add, Nat.mod_eq_of_lt hr]
+  have hm : (P * c + r) % P = r := modP P c r hr
   rw [hm] at hdm
-  have hc : P * ((P * c + r) / P) = P * c :=
-    Nat.add_right_cancel _ _ _ hdm
+  have hc : P * ((P * c + r) / P) = P * c := Nat.add_right_cancel hdm
   exact Nat.mul_left_cancel hP hc
-
-/-- The remainder of `P * c + r` modulo `P` (r < P). -/
-theorem modP (P c r : Nat) (hr : r < P) : (P * c + r) % P = r := by
-  rw [Nat.add_mod, Nat.mul_mod, Nat.mod_self P, Nat.zero_mul,
-    Nat.zero_add, Nat.mod_eq_of_lt hr]
 
 -- ===========================================================================
 -- §1  THE CANTOR PREDICATE
@@ -351,20 +361,28 @@ theorem noTwo_false_ge (m : Nat) (h : noTwo m = false) : 2 ≤ m := by
     exact absurd h (by simp)
   · omega
 
+/-- The forward-false law: a clean units digit and a false tail give a
+false verdict. -/
+theorem noTwo_false_of (n : Nat) (hn2 : n % 3 ≠ 2) (hf : noTwo (n / 3) = false) :
+    noTwo n = false := by
+  cases n with
+  | zero => simp [noTwo] at hf
+  | succ k =>
+      simp only [noTwo]
+      rw [if_neg hn2]
+      exact hf
+
 /-- The units digits of `3 * m` and `m` carry the same Cantor verdict. -/
 theorem noTwo_mul3 (m : Nat) : noTwo (3 * m) = noTwo m := by
-  induction m with
-  | zero => rfl
-  | succ m' =>
-      have hih : noTwo (3 * m') = noTwo m' := by
-        exact noTwo_mul3 m'
-      have hrw : 3 * (m' + 1) = 3 * m' + 2 + 1 := by omega
-      rw [hrw]
-      simp only [noTwo]
-      rw [if_neg (by omega : (3 * m' + 2 + 1) % 3 ≠ 2)]
-      have hdiv : (3 * m' + 2 + 1) / 3 = m' + 1 := by omega
-      rw [hdiv]
-      exact hih
+  cases h : noTwo m with
+  | true =>
+      rw [noTwo_intro _ (by omega : (3 * m) % 3 ≠ 2)
+        (by rw [div3_mul3]; exact h)]
+      rw [h]
+  | false =>
+      rw [noTwo_false_of _ (by omega : (3 * m) % 3 ≠ 2)
+        (by rw [div3_mul3]; exact h)]
+      rw [h]
 
 /-- The units digits of `3 * m + 1` and `m` carry the same verdict. -/
 theorem noTwo_mul3_add1 (m : Nat) : noTwo (3 * m + 1) = noTwo m := by
@@ -416,33 +434,27 @@ theorem cyclicC : ∀ (t a b c : Nat), a < 3 ^ t → b < 3 ^ t → c < 3 ^ t →
     have hM : 3 ^ (t + 1) = 3 * 3 ^ t := by
       have := Nat.pow_succ (3) t
       omega
-    have hform : (a + c) = 2 * b ∨ (a + c) + 3 ^ (t + 1) = 2 * b ∨
-        2 * b = (a + c) + 3 ^ (t + 1) :=
-      mod_to_form (3 ^ (t + 1)) (a + c) (2 * b) (by omega) (by omega) hmod
+    have hform := mod_to_form (3 ^ (t + 1)) (a + c) (2 * b) (by omega)
+      (by omega) hmod
     -- the units-digit trichotomy: all three units digits agree
-    have hra : a % 3 ≤ 1 := (noTwo_true_inv a hna).1 ▸ by omega
-    have hrb : b % 3 ≤ 1 := (noTwo_true_inv b hnb).1 ▸ by omega
-    have hrc : c % 3 ≤ 1 := (noTwo_true_inv c hnc).1 ▸ by omega
+    have hra : a % 3 ≤ 1 := by have h := (noTwo_true_inv a hna).1; omega
+    have hrb : b % 3 ≤ 1 := by have h := (noTwo_true_inv b hnb).1; omega
+    have hrc : c % 3 ≤ 1 := by have h := (noTwo_true_inv c hnc).1; omega
     -- residue equation, valid in every form
     have hres : (a % 3 + c % 3) % 3 = (2 * (b % 3)) % 3 := by
-      cases hform with
-      | inl h1 => rw [h1]; simp [Nat.add_mod, Nat.mul_mod]
-      | inr h2 =>
-          rcases h2 with h2 | h2
-          · rw [← h2]
-            rw [Nat.add_mod, Nat.add_mod]
-            have hz : 3 ^ (t + 1) % 3 = 0 := by
-              have := Nat.pow_succ (3) t
-              omega
-            rw [hz, Nat.zero_mod, Nat.zero_add]
-            simp [Nat.add_mod, Nat.mul_mod]
-          · rw [← h2]
-            rw [Nat.mul_mod]
-            have hz : 3 ^ (t + 1) % 3 = 0 := by
-              have := Nat.pow_succ (3) t
-              omega
-            rw [hz, Nat.zero_mod, Nat.zero_add]
-            simp [Nat.add_mod, Nat.mul_mod]
+      have hm3 : 3 ^ (t + 1) % 3 = 0 := by
+        have hps := Nat.pow_succ (3) t
+        omega
+      have hL : (a % 3 + c % 3) % 3 = (a + c) % 3 := (Nat.add_mod a c 3).symm
+      have hR : (2 * b) % 3 = (2 * (b % 3)) % 3 := by
+        rw [Nat.mul_mod, show (2 : Nat) % 3 = 2 from by omega]
+      rw [hL, hR]
+      rcases hform with h1 | h1 | h1
+      · rw [h1]
+      · rw [h1, Nat.add_mod, hm3, Nat.zero_add]
+      · have h2 : (2 * b) % 3 = (a + c) % 3 := by
+          rw [h1, Nat.add_mod, hm3, Nat.zero_add]
+        rw [← h2]
     have hsums : a % 3 + c % 3 = 2 * (b % 3) := by
       have h1 : (a % 3 + c % 3) < 3 := by omega
       have h2 : 2 * (b % 3) < 3 := by omega
@@ -473,46 +485,33 @@ theorem cyclicC : ∀ (t a b c : Nat), a < 3 ^ t → b < 3 ^ t → c < 3 ^ t →
     have hnc' : noTwo (c / 3) = true := (noTwo_true_inv c hnc).2
     -- the quotient-level equation, in each form
     have heq : (a / 3 + c / 3) % 3 ^ t = (2 * (b / 3)) % 3 ^ t := by
-      cases hform with
-      | inl h1 =>
-          have hsplit : a / 3 + c / 3 = 2 * (b / 3) := by
-            have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
-            have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
-            have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
-            have := hsame.1
-            have := hsame.2
-            omega
-          rw [hsplit]
-      | inr h2 =>
-          rcases h2 with h2 | h2
-          · have hsplit : a / 3 + c / 3 + 3 ^ t = 2 * (b / 3) := by
-              have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
-              have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
-              have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
-              have hM' : 3 ^ (t + 1) = 3 * 3 ^ t := by
-                have := Nat.pow_succ (3) t
-                omega
-              have := hsame.1
-              have := hsame.2
-              omega
-            rw [hsplit]
-            rw [Nat.add_mod, Nat.add_mod]
-            have hz : 3 ^ t % 3 ^ t = 0 := Nat.mod_self _
-            rw [hz, Nat.zero_mod, Nat.zero_add]
-          · have hsplit : 2 * (b / 3) = a / 3 + c / 3 + 3 ^ t := by
-              have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
-              have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
-              have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
-              have hM' : 3 ^ (t + 1) = 3 * 3 ^ t := by
-                have := Nat.pow_succ (3) t
-                omega
-              have := hsame.1
-              have := hsame.2
-              omega
-            rw [hsplit]
-            rw [Nat.add_mod, Nat.add_mod]
-            have hz : 3 ^ t % 3 ^ t = 0 := Nat.mod_self _
-            rw [hz, Nat.zero_mod, Nat.zero_add]
+      rcases hform with h1 | h1 | h1
+      · have hsplit : a / 3 + c / 3 = 2 * (b / 3) := by
+          have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+          have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+          have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+          have := hsame.1
+          have := hsame.2
+          omega
+        rw [hsplit]
+      · have hsplit : a / 3 + c / 3 = 2 * (b / 3) + 3 ^ t := by
+          have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+          have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+          have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+          have hM' : 3 ^ (t + 1) = 3 * 3 ^ t := hM
+          have := hsame.1
+          have := hsame.2
+          omega
+        rw [hsplit, add_mod_self]
+      · have hsplit : 2 * (b / 3) = a / 3 + c / 3 + 3 ^ t := by
+          have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+          have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+          have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+          have hM' : 3 ^ (t + 1) = 3 * 3 ^ t := hM
+          have := hsame.1
+          have := hsame.2
+          omega
+        rw [hsplit, add_mod_self]
     have ⟨hab, hbc⟩ := cyclicC t (a / 3) (b / 3) (c / 3) hqa hqb hqc
       hna' hnb' hnc' heq
     have hda : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
@@ -544,7 +543,7 @@ theorem memE_prof (j e : Nat) (hj : 1 ≤ j) (he : memE j e) :
     ∃ d c, e = 3 ^ (j - 1) * d + c ∧ c < 3 ^ (j - 1) ∧ noTwo c = true ∧
       d ≤ 2 ∧ (d = 0 → c = 0) ∧ (d = 2 → 0 < c) := by
   rcases he with rfl | ⟨w, hwC, hwH, rfl⟩ | ⟨w, hwC, hw0, hwH, rfl⟩
-  · refine ⟨0, 0, by omega, by have := pow3_pos (j - 1); omega, by rfl,
+  · refine ⟨0, 0, by omega, by have := pow3_pos (j - 1); omega, by simp [noTwo],
       by omega, by omega, by have := pow3_pos (j - 1); omega⟩
   · refine ⟨1, w, by omega, hwH, hwC, by omega, by omega, by omega⟩
   · refine ⟨2, w, by omega, hwH, hwC, by omega, by omega, by omega⟩
@@ -586,7 +585,6 @@ theorem memE_no_ap (j u v w : Nat) (hj : 1 ≤ j)
   have hR : 2 * (3 ^ (j - 1) * dv + cv)
          = (3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv) + (cv + cv) := by
     rw [Nat.mul_add, Nat.two_mul, Nat.two_mul]
-    simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
   have hcancel : (3 ^ (j - 1) * du + 3 ^ (j - 1) * dw) + (cv + cv)
                = (3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv) + (cv + cv) := by
     calc (3 ^ (j - 1) * du + 3 ^ (j - 1) * dw) + (cv + cv)
@@ -595,7 +593,7 @@ theorem memE_no_ap (j u v w : Nat) (hj : 1 ≤ j)
       _ = (3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv) + (cv + cv) := hR
   have hAt : 3 ^ (j - 1) * du + 3 ^ (j - 1) * dw
           = 3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv :=
-    Nat.add_right_cancel _ _ _ hcancel
+    Nat.add_right_cancel hcancel
   have hfin : 3 ^ (j - 1) * (du + dw) = 3 ^ (j - 1) * (dv + dv) := by
     rw [Nat.mul_add, Nat.mul_add]
     exact hAt
