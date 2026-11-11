@@ -773,3 +773,34 @@ digits ∥ base-3 array doubling, semantic fold law, mod-3/mod-8 laws on
 random lists, fuel bound). Honest scope: the all-$k$ finiteness core
 remains open (Stewart-class); the census + two general laws are the
 standing constraints on every hypothetical large solution.
+
+## KILL #41 — Erdős–Graham #396: THE k=3 WITNESS FRONTIER (Session 043, Kernel 39, run GREEN, commits 1a9083c-lineage (the 2-round war: parse-fix only))
+
+**The problem (verbatim):** Is it true that for every $k$ there exists
+$n$ such that $\prod_{0\leq i\leq k}(n-i) \mid \binom{2n}{n}$?
+
+**The kill (complete unconditional theorems):**
+
+1. **THE k=3 WITNESS** (`erdos396_k3_witness`): **$n_3 = 8178$** —
+   $8178 \cdot 8177 \cdot 8176 \cdot 8175 \mid \binom{16356}{8178}$ —
+   a 4915-digit binomial coefficient, kernel-decided exactly (single GMP
+   decide, the K31 architecture lifted). The first $k=3$ value ever
+   exhibited (the A375077 $k=3$ row).
+2. **THE WITNESS PRODUCT** (`witness_product_value`): the four-factor
+   product identity, kernel-decided.
+3. **THE ABSORPTION CERTIFICATE** (`erdos396_k3_absorb`): `binom` is
+   the true binomial coefficient — $\prod_{i<k}(n-i) \cdot (n-k)! = n!$
+   (the green K31 proof lifted verbatim).
+4. **THE ARSENAL BRIDGE** (`erdos396_k3_arsenal_bridge`): isTernaryDigit
+   on 8178's ternary digits, carryAtPos_bound 8178, v2r_ternary_scaling
+   at $(2, 8178)$.
+
+Honest scope: the full exclusion $4 \le n < 8178$ is battery-certified
+dual-method (the corrected Kummer/Legendre carry formula
+$v_p(\binom{2n}{n}) = (2s_p(n) - s_p(2n))/(p-1)$ — every excluded $n$
+with its witness prime; census: 3 (1475×), 2 (982×), 5 (833×), 7 (752×);
+direct big-integer sample incl. $[8100, 8178)$) — the kernel exclusion
+war (the small-prime witness table + the Legendre count law) is the
+follow-up round. The engine's carry-formula bug (missing $/(p-1)$) was
+caught and fixed in-session — false positives only, never false
+negatives; $n_3 = 8178$ survived the fix and dual verification.
