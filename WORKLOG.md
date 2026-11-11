@@ -2519,3 +2519,41 @@ IN THE LOCAL CLOUD, YOU CAN CHECK IT OUT, BEGAN THE WORK"
    first compile) and the L8 layer on top of it.
 
 The engine never stops; it never lies.
+
+---
+
+## SESSION 048 (final entry) — THE ROUND'S LEDGER
+
+1. **KERNEL 43 CI-GREEN (locked):** P261's `APRationality.lean`
+   (ap_sum_kernel — the Q3 bridge's rationality law). The round's
+   first new kernel verdict.
+
+2. **THE P711 WAR (r2+r3 fought):** the 11-error strike + the
+   670-single-error strike (the injectivity-clause fix). The war
+   continues — the r3 state (380c27a) still shows Kernel 24 fighting
+   (the next error layer; the log lands at run completion).
+
+3. **THE P271 WAR (r2 fought + the agent's L8/L9 LANDED):** the
+   29-error strike (the helpers + cyclicC + the F1's three) — and the
+   surviving background agent DELIVERED BEHIND THE COMMANDER'S LINE:
+   L8 memT_no_ap (T_j 3-AP-free, all j, both carry signs) + memE_lt +
+   L9 COMPLETE (the four carry funnels: cBlocked, cantorCarry,
+   carryBlock, tailPair) — OdStFamily.lean now 989 lines. L10 (the
+   witness-funnel table) is its named next strike.
+
+4. **THE P939 FRONT DELIVERED:** COMPLETE_PROOF.md (536 lines) + the
+   corrected census (ZERO ≤ 10^16) + the forensic finding (the prior
+   sweeps were doubly vacuous).
+
+5. **THE CI QUEUE (at this entry):** 4 runs stacked (b2a6b24,
+   380c27a, 06630b8, 9a4ca622) — the verdicts cascade; the next
+   session reads them and fights the next rounds.
+
+6. **THE NEXT STRIKES (the queue stands):** the P711 r4 (the Kernel
+   24 log at completion); the Kernel 44 verdict (my r2 + the agent's
+   L8/L9 — the combined file's first full CI); L10 + the
+   greedy-equality assembly (stanley_T_family); the conversion queue's
+   remaining kernels; the Phase-2 fronts (P203, P273, P289, P389,
+   P677, P850, P885 + the missing nine).
+
+The engine never stops; it never lies.
