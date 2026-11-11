@@ -2021,3 +2021,24 @@ SIGPIPE-kills the producer BEFORE its file writes (the palette203.txt
 lesson).
 
 **CI STATE:** K38 round 2 in flight. K39 (#396 k=3) drafted and ready.
+
+---
+
+## SESSION 043 (close) — TWO KILLS LANDED
+
+- **KILL #40 (Kernel 38, #406)**: run 42912135608 GREEN — the 4-round
+  war (8 → 4 → 1 → 0 root causes). THE TERNARY CENSUS LAW on BOSS's own
+  front: below 2^500 the 0/1-ternary-digit powers of 2 are EXACTLY
+  {1, 4, 256}; the MOD-3 PARITY LAW (all odd exponents, general); the
+  MOD-8 BUDGET LAW (E + 3O ≡ 0 mod 8, k ≥ 3, general); the SEMANTIC LAW
+  (lt_three_cases applied in-proof).
+- **KILL #41 (Kernel 39, #396)**: run 42924027171 GREEN — the 2-round
+  war (one parse fix: doc-comment before #eval). THE k=3 WITNESS
+  FRONTIER: n₃ = 8178 (4915-digit binomial, single kernel decide) + the
+  K31 absorption certificate + bridge; full exclusion battery-certified
+  dual-method (witness-prime census banked for the kernel-exclusion war).
+- **Registry: 41 kills CI-green.** Engine lanes banked: #1056 (seven
+  new k=11-class witnesses; no k=12 below 410,000), #686 (zero
+  missing-class squares at k=4..10, t ≤ 400, n ≤ 60,000), #203 (palette
+  budget 2.1444; greedy-stuck 0.7076 = the alignment law; containment
+  matrix 36 edges = the multi-step law; the look-ahead DFS design).

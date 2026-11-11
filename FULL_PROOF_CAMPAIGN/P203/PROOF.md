@@ -93,3 +93,16 @@ The greedy's zero-absorption verdict forces the structured route:
    Λ_q ⊇ aℤ×bℤ — the (a,b)-shaped splits produce grid-like children that
    the (a′|a, b′|b)-primes can absorb — the 2D nested-moduli pattern
    (the 1D Sierpiński spine 2→4→8→… generalized to the (a,b)-grid).
+
+## §7. THE CONTAINMENT MATRIX (computed, S043 close)
+
+391 palette primes (top-400 with dlogs): **36 containment edges, max
+out-degree 1** — single-step lattice chains Λ_q ⊆ Λ_{q′} barely exist
+(the geometry warning confirmed: h-divisibility does NOT imply
+containment). **THE MULTI-STEP LAW:** absorption in a 2D covering tree
+lives at DEEP intersections — Λ_deep = Λ_{q1} ∩ Λ_{q2} ∩ … ⊆ Λ_{q′} —
+the joint-kernel forces q′ (CRT-style: all q_i | 2^k3^ℓ−1 ⟹ q′ | it).
+THE ROUND-4 SEARCH REFINEMENT: look-ahead-guided DFS — rank split
+candidates by the count of siblings with IMMEDIATE absorbers (for each
+(region, q, q″): Λ ∩ Λ_q ⊆ Λ_{q″} on the basis vectors — cheap, already
+implemented as the m=1 act_on_region check). containment203.txt banked.

@@ -97,6 +97,7 @@ substance in the universe.** The MATHS skill (Omega/Berserker Protocol,
 | 19 | **1108** | **THE LEGENDRE PARITY LAW**: v₂(n!)+s₂(n)=n (core-only fuel induction) + Λ(j)=2j−s₂(j) THE SPINE + EXPLICIT CASCADE v₂(Σa!)=(2j₀−s₂(j₀))+v₂(C) + square⟹s₂(j₀)≡v₂(C) mod 2 — ALL SIX [propext, Quot.sound], zero hypotheses; battery 8191-subset census: 27 squares all parity-locked; Kernel 15 | **run 42153591445, commit 6974fa8** |
 | 20 | **686** | **THE PELL-RATIO LAW (non-squares)**: every non-square N≥2 has the k=2 ratio representation ∏(m+i)/∏(n+i) — COMPLETE Pell proof (unit^j·(1+√N), parity lemma j∈{1,2}, size lemma) + 90-witness Lean table (all non-squares ≤100) + t≡2(4) square-family polynomial identity + k=3 witnesses N=9,16; ARSENAL-APPLIED (lt_three_cases routing, isTernaryDigit validity, v2r_ternary_scaling bookkeeping); battery 186 non-squares ≤200 dual-method | **run 42212351838, commit 025dd39, Kernel 16** |
 | 21 | **727** | **THE WITNESS THEOREM n=208**: (210)!² ∣ (416)! unconditionally — 115-digit quotient Q kernel-decided, 47-prime check, 28 TIGHT primes (zero p-adic slack, FULL Legendre sums), Legendre/Kummer cascade conditions at p=2,3 (s₂: 8≥7, s₃: 12≥10); ARSENAL-APPLIED (ternary digit predicates on the witness's own digits, carryAtPos_bound, v2r scaling); census: 55 k=2 solutions <10⁴ (smallest 208), ZERO k=3 <3·10³ | **run 42212351838, commit 025dd39, Kernel 17** |
+| 41 | **396** | **THE k=3 WITNESS FRONTIER**: n₃ = 8178 (8178·8177·8176·8175 ∣ C(16356,8178), 4915-digit binomial, single kernel decide — the first k=3 value ever exhibited, A375077's k=3 row; full exclusion 4..8177 battery-certified dual-method with the corrected Kummer/Legendre carry formula) | **run 42924027171** |
 | 40 | **406** | **THE TERNARY CENSUS LAW** (below 2^500 the 0/1-ternary-digit powers of 2 are EXACTLY {1,4,256}, kernel census + THE MOD-3 PARITY LAW all odd exponents excluded + THE MOD-8 BUDGET LAW E+3O≡0 mod 8 — BOSS's own front, army-struck per S042) | **run 42912135608** |
 | 22 | **1056** | **THE FACTORIAL-INTERVAL CASE-FRONTIER THEOREM**: the structure law (k consecutive intervals with products ≡ 1 mod p ⟺ the j! mod p chain visits one value k+1 times — Wilson anchors 1!≡1, (p−2)!≡1, odd-j doubling) + **CASE FRONTIER k: 3 → 11** — NEW cases k=4..11 with smallest witnesses p = 23, 109, 71, 673, 599, 3011, 27901, 52163 (every block product kernel-decided via the six-step §7-freeze olean ladder + tree products; wilson_23/17/3011 ZERO axioms; v2r_scaling [propext, Quot.sound]; arsenal bridge isTernaryDigit/lt_three_cases/carryAtPos_bound on the witness numbers); battery dual-method (block products ∥ factorial chains) k=2..11 ALL GREEN; honest scope: arbitrarily-large-k (Noll–Simmons) remains open | **run 42308034994, commit a66350c, Kernel 18 (the 9-round compile war)** |
 
@@ -876,3 +877,13 @@ full-proof campaign continues.
   exponent > 256 by default (a WARNING, then unevaluated terms) —
   `set_option exponentiation.threshold 1000` is the legal cap for
   2^500-class kernel evals (the NO-OOM law: never above 1000).
+
+**THE S043 CLOSE (the wave-1 continuation lands):**
+- **KILL #40 (#406, Kernel 38)**: THE TERNARY CENSUS LAW — run
+  42912135608 GREEN (the 4-round war: 8→4→1→0). BOSS's own front,
+  army-struck.
+- **KILL #41 (#396, Kernel 39)**: THE k=3 WITNESS FRONTIER, n₃ = 8178 —
+  run 42924027171 GREEN (the 2-round war: one parse fix).
+- **Registry: 41 kills CI-green.** The wave-1 firing order stands:
+  P1108 → P686 → P727 → P1056 next (the square front, the k=3
+  witness-lottery lanes all firing in engines).
