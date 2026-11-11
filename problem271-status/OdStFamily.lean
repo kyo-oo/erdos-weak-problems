@@ -90,10 +90,15 @@ theorem nat_two_le_mul (M : Nat) : ∀ (k : Nat), 2 ≤ k → 2 * M ≤ M * k
   | 0, hk => by omega
   | 1, hk => by omega
   | k + 2, _ => by
-      have ih := nat_two_le_mul M (k + 1) (show 2 ≤ k + 1 by omega)
-      have hstep : M * (k + 2) = M * (k + 1) + M := by
-        rw [show k + 2 = (k + 1) + 1 from by omega, Nat.mul_succ]
-      omega
+      cases k with
+      | zero =>
+          have h2 : M * 2 = 2 * M := Nat.mul_comm M 2
+          omega
+      | succ k' =>
+          have ih := nat_two_le_mul M (k' + 2) (show 2 ≤ k' + 2 by omega)
+          have hstep : M * (k' + 3) = M * (k' + 2) + M := by
+            rw [show k' + 3 = (k' + 2) + 1 from by omega, Nat.mul_succ]
+          omega
 
 /-- Three or more times a base is at least thrice the base. -/
 theorem nat_three_le_mul (M : Nat) : ∀ (k : Nat), 3 ≤ k → 3 * M ≤ M * k
@@ -101,10 +106,15 @@ theorem nat_three_le_mul (M : Nat) : ∀ (k : Nat), 3 ≤ k → 3 * M ≤ M * k
   | 1, hk => by omega
   | 2, hk => by omega
   | k + 3, _ => by
-      have ih := nat_three_le_mul M (k + 2) (show 3 ≤ k + 2 by omega)
-      have hstep : M * (k + 3) = M * (k + 2) + M := by
-        rw [show k + 3 = (k + 2) + 1 from by omega, Nat.mul_succ]
-      omega
+      cases k with
+      | zero =>
+          have h3 : M * 3 = 3 * M := Nat.mul_comm M 3
+          omega
+      | succ k' =>
+          have ih := nat_three_le_mul M (k' + 3) (show 3 ≤ k' + 3 by omega)
+          have hstep : M * (k' + 4) = M * (k' + 3) + M := by
+            rw [show k' + 4 = (k' + 3) + 1 from by omega, Nat.mul_succ]
+          omega
 
 /-- If A < 2*M then A / M < 2 (the two-block quotient law). -/
 theorem div_lt_two (A M : Nat) (hM : 1 ≤ M) (hA : A < 2 * M) : A / M < 2 := by
@@ -202,23 +212,7 @@ theorem pow3_pos (t : Nat) : 0 < 3 ^ t := by
 /-- Monotone multiplication (left factor fixed), weak form. -/
 theorem mul_le_of_le (P : Nat) : ∀ (a b : Nat), a ≤ b → 1 ≤ P → P * a ≤ P * b := by
   intro a b hle hP
-  induction b generalizing a with
-  | zero =>
-      cases a with
-      | zero => simp [Nat.mul_zero]
-      | succ a' => omega
-  | succ b' ih =>
-      cases Nat.lt_or_ge a b' with
-      | inl hlt =>
-          have h1 := ih a (Nat.le_of_lt hlt) hP
-          have hps : P * (b' + 1) = P * b' + P := Nat.mul_succ P b'
-          omega
-      | inr hge =>
-          rcases (show a = b' ∨ a = b' + 1 by omega) with hab | hab
-          · rw [hab, Nat.mul_succ]
-            exact Nat.le_add_right (P * b') P
-          · rw [hab]
-            exact Nat.le_refl _
+  exact Nat.mul_le_mul_left P hle
 
 /-- Monotone multiplication (left factor fixed), strict form. -/
 theorem mul_lt_of_lt (P c1 c2 : Nat) (hc : c1 < c2) (hP : 1 ≤ P) :
@@ -253,7 +247,7 @@ theorem add_mul_mod_self (x k h : Nat) : (x + k * h) % h = x % h := by
         omega
       rw [hstep]
       have h1 := Nat.add_mod (x + k * h) h h
-      rw [h1, Nat.mod_self h, Nat.zero_add]
+      rw [h1, Nat.mod_self h, Nat.add_zero]
       exact ih
 
 /-- Adding the modulus itself does not change the remainder. -/
@@ -280,7 +274,9 @@ theorem mod_sum_carry2 (u v w h k k' : Nat)
   have h1 : (u + w) % h = (u % h + w % h) % h := Nat.add_mod u w h
   have h2 : (u + w + k * h) % h = (u + w) % h :=
     add_mul_mod_self (u + w) k h
-  have hc : (u + w + k * h) % h = (2 * v) % h := by rw [hcarry]
+  have hc : (u + w + k * h) % h = (2 * v) % h := by
+    rw [hcarry]
+    exact add_mul_mod_self (2 * v) k' h
   have h3 : (2 * v) % h = (2 * (v % h)) % h := by
     have hva : 2 * v = v + v := by omega
     have hvm : (v + v) % h = (v % h + v % h) % h := Nat.add_mod v v h
@@ -378,11 +374,9 @@ theorem noTwo_mul3 (m : Nat) : noTwo (3 * m) = noTwo m := by
   | true =>
       rw [noTwo_intro _ (by omega : (3 * m) % 3 ≠ 2)
         (by rw [div3_mul3]; exact h)]
-      rw [h]
   | false =>
       rw [noTwo_false_of _ (by omega : (3 * m) % 3 ≠ 2)
         (by rw [div3_mul3]; exact h)]
-      rw [h]
 
 /-- The units digits of `3 * m + 1` and `m` carry the same verdict. -/
 theorem noTwo_mul3_add1 (m : Nat) : noTwo (3 * m + 1) = noTwo m := by
@@ -448,13 +442,13 @@ theorem cyclicC : ∀ (t a b c : Nat), a < 3 ^ t → b < 3 ^ t → c < 3 ^ t →
       have hL : (a % 3 + c % 3) % 3 = (a + c) % 3 := (Nat.add_mod a c 3).symm
       have hR : (2 * b) % 3 = (2 * (b % 3)) % 3 := by
         rw [Nat.mul_mod, show (2 : Nat) % 3 = 2 from by omega]
-      rw [hL, hR]
+      rw [hL]
       rcases hform with h1 | h1 | h1
-      · rw [h1]
-      · rw [h1, Nat.add_mod, hm3, Nat.zero_add]
+      · rw [h1, hR]
+      · rw [h1, Nat.add_mod, hm3, Nat.add_zero, hR]
       · have h2 : (2 * b) % 3 = (a + c) % 3 := by
-          rw [h1, Nat.add_mod, hm3, Nat.zero_add]
-        rw [← h2]
+          rw [h1, Nat.add_mod, hm3, Nat.add_zero, Nat.mod_mod]
+        rw [← h2, hR]
     have hsums : a % 3 + c % 3 = 2 * (b % 3) := by
       have h1 : (a % 3 + c % 3) < 3 := by omega
       have h2 : 2 * (b % 3) < 3 := by omega
