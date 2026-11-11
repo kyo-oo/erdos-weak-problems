@@ -186,6 +186,8 @@ theorem gap_mod4 (y : Nat) (hy4 : y % 4 = 2) (hy : 2 ≤ y) (i : Nat) :
     have A := chev_add y hy i
     have hm1 := chev_mono y hy i
     have hm2 := chev_mono y hy (i + 1)
+    -- canonical indices ONLY (omega atoms: chev y (i+1+1) ≠ chev y (i+2))
+    show (chev y (i + 2) - chev y (i + 1)) % 4 = 1
     have hPmod : (y * chev y (i + 1)) % 4 = (2 * chev y (i + 1)) % 4 := by
       rw [Nat.mul_mod, Nat.mul_mod, hy4]
       omega
@@ -198,12 +200,17 @@ theorem gap_ge (y : Nat) (hy : 2 ≤ y) (k : Nat) (hk : 1 ≤ k) :
   | zero => omega
   | succ k ih =>
     by_cases hk0 : k = 0
-    · rw [hk0, chev_one, chev_zero]
+    · subst hk0
+      show y - 1 ≤ chev y 1 - chev y 0
+      rw [chev_one, chev_zero]
     · have hk' : 1 ≤ k := by omega
       have h := ih hk'
-      have A := chev_add y hy (k - 1)
-      have hidx : k - 1 + 2 = k + 1 := by omega
-      rw [hidx] at A
+      -- canonical indices ONLY (omega atoms: chev y (k+1-1) ≠ chev y k)
+      show y - 1 ≤ chev y (k + 1) - chev y k
+      have A : chev y (k - 1) + chev y (k + 1) = y * chev y k := by
+        have hA := chev_add y hy (k - 1)
+        rw [show k - 1 + 2 = k + 1 by omega, show k - 1 + 1 = k by omega] at hA
+        exact hA
       have hP2 : 2 * chev y k ≤ y * chev y k := by
         have h1 := Nat.mul_le_mul_left (chev y k) hy
         calc 2 * chev y k = chev y k * 2 := Nat.mul_comm _ _
@@ -236,7 +243,10 @@ theorem erdos686k2_witness_of_chain (y j : Nat) (hy4 : y % 4 = 2) (hy10 : 10 ≤
   have hYodd : (y / 2) % 2 = 1 := by omega
   have hEge : 2 * (y - 1) ≤ chev y (j + 1) - chev y (j - 1) := by
     have hga := gap_ge y hy j hj
-    have hgb := gap_ge y hy (j + 1) (by omega)
+    have hgb : y - 1 ≤ chev y (j + 1) - chev y j := by
+      have h := gap_ge y hy (j + 1) (by omega)
+      rw [show j + 1 - 1 = j by omega] at h
+      exact h
     omega
   have hsum : chev y (j - 1) + chev y (j + 1) = y * chev y j := by
     have A := chev_add y hy (j - 1)
@@ -269,6 +279,7 @@ theorem erdos686k2_witness_of_chain (y j : Nat) (hy4 : y % 4 = 2) (hy10 : 10 ≤
   have hfac := sub_add_mul (Yk * t) X hXle
   rw [hd1, hd2] at hcass
   have hMM : (Yk * t) * (Yk * t) = t * t * (Yk * Yk) := by ring
+  have hUle : X * X ≤ (Yk * t) * (Yk * t) := Nat.mul_le_mul hXle hXle
   -- master Pell identity: X² + t² = t²·Yk² + 1
   have hmaster : X * X + t * t = t * t * (Yk * Yk) + 1 := by omega
   -- m, n
@@ -276,7 +287,8 @@ theorem erdos686k2_witness_of_chain (y j : Nat) (hy4 : y % 4 = 2) (hy10 : 10 ≤
   obtain ⟨n, hn⟩ : ∃ n, (Yk - 3) / 2 = n := ⟨_, rfl⟩
   have hXm : X = 2 * m + 3 := by omega
   have hYn : Yk = 2 * n + 3 := by omega
-  rw [ht, hX, hYk, hm, hn]
+  have hXgoal : (chev y (j + 1) - chev y (j - 1)) / 2 = X := by rw [hc, ha]; exact hX
+  rw [ht, hXgoal, hYk, hm, hn]
   refine ⟨?_, by omega, by omega⟩
   · rw [hXm, hYn] at hmaster
     have hE1 : (2 * m + 3) * (2 * m + 3) = 4 * ((m + 1) * (m + 2)) + 1 := by ring
@@ -306,12 +318,12 @@ theorem mutual_step (u₀ u₁ : Nat) (hu1 : 2 ≤ u₁) (hslt : u₁ < u₀)
   have hexact : u₀ * ((u₁ * u₁ - 1) / u₀) = u₁ * u₁ - 1 := by
     rw [hu2val]
     exact hc.symm
-  have hd2' : ((u₁ * u₁ - 1) / u₀) ∣ u₁ * u₁ - 1 := ⟨u₀, by omega⟩
+  have hd2' : ((u₁ * u₁ - 1) / u₀) ∣ u₁ * u₁ - 1 := ⟨u₀, by rw [Nat.mul_comm]; exact hexact⟩
   have hu2lt : (u₁ * u₁ - 1) / u₀ < u₁ := by
     have hmono : u₁ * (u₁ + 1) ≤ u₀ * u₁ := by
-      have h := Nat.mul_le_mul_left u₁ (by omega)
-      rw [Nat.mul_comm u₁ u₀] at h
-      exact h
+      have h := Nat.mul_le_mul_left u₁ (show u₁ + 1 ≤ u₀ by omega)
+      calc u₁ * (u₁ + 1) ≤ u₁ * u₀ := h
+        _ = u₀ * u₁ := Nat.mul_comm _ _
     have h1 : u₁ * u₁ - 1 < u₁ * (u₁ + 1) := by
       obtain ⟨P, hP⟩ : ∃ P, u₁ * u₁ = P := ⟨_, rfl⟩
       obtain ⟨Q, hQ⟩ : ∃ Q, u₁ * (u₁ + 1) = Q := ⟨_, rfl⟩
@@ -331,20 +343,43 @@ theorem mutual_step (u₀ u₁ : Nat) (hu1 : 2 ≤ u₁) (hslt : u₁ < u₀)
   have hA : u₁ ∣ (u₀ * E - 1) * (u₀ * E + 1) := hdW.mul_left (u₀ * E - 1)
   have hC : u₁ ∣ (u₀ * u₀ - 1) * (E * E) := by
     obtain ⟨cc, hcc⟩ := hd2
-    exact ⟨cc * (E * E), by rw [hcc]; ring⟩
+    exact ⟨cc * (E * E), by rw [← hcc]; ring⟩
   have hsa := sub_add_mul (u₀ * E) 1 hW1
-  have hFC : (u₀ * u₀ - 1) * (E * E) = (u₀ * u₀) * (E * E) - E * E :=
-    Nat.sub_one_mul _ _
+  have hQZ : (u₀ * u₀ - 1) * (E * E) = (u₀ * u₀) * (E * E) - E * E := by
+    have hpos : 1 ≤ u₀ * u₀ := Nat.mul_pos (by omega) (by omega)
+    obtain ⟨q, hq⟩ : ∃ q, u₀ * u₀ = q + 1 := ⟨u₀ * u₀ - 1, by omega⟩
+    rw [hq]
+    have hq0 : q + 1 - 1 = q := by omega
+    rw [hq0]
+    have hr : (q + 1) * (E * E) = q * (E * E) + E * E := by ring
+    rw [hr]
+    omega
   have hfinal : (u₀ * E - 1) * (u₀ * E + 1) - (u₀ * u₀ - 1) * (E * E) = E * E - 1 := by
     have hW2 : (u₀ * E) * (u₀ * E) = (u₀ * u₀) * (E * E) := by ring
-    have hXpos : 0 < (u₀ * u₀) * (E * E) :=
-      Nat.mul_pos (Nat.mul_pos (by omega) (by omega)) (Nat.mul_pos (by omega) (by omega))
-    rw [hsa, hW2, hFC]
+    have hV : 1 ≤ (u₀ * E) * (u₀ * E) := Nat.mul_pos hW1 hW1
+    have hUle : E * E ≤ (u₀ * u₀) * (E * E) := by
+      have h := Nat.mul_le_mul (show 1 ≤ u₀ * u₀ from Nat.mul_pos (by omega) (by omega))
+          (Nat.le_refl (E * E))
+      rwa [Nat.one_mul] at h
+    rw [hsa, hW2, hQZ]
     omega
-  have hAB : u₁ ∣ (u₀ * E - 1) * (u₀ * E + 1) - (u₀ * u₀ - 1) * (E * E) :=
-    Nat.dvd_sub' hA hC
-  rw [hE, ← hfinal]
-  exact hAB
+  rw [hE]
+  -- u₁ ∣ E² − 1: pure divisibility algebra (atom-extraction pattern)
+  obtain ⟨wA, hwA⟩ := hA
+  obtain ⟨wC, hwC⟩ := hC
+  refine ⟨wA - wC, ?_⟩
+  have hmsexp : u₁ * (wA - wC) = u₁ * wA - u₁ * wC := by
+    rcases Nat.lt_or_ge wC wA with h | h
+    · obtain ⟨d, hd⟩ : ∃ d, wA = wC + d := ⟨wA - wC, by omega⟩
+      have harg : wA - wC = d := by omega
+      rw [harg, hd, Nat.mul_add]
+      omega
+    · have hzero : wA - wC = 0 := by omega
+      obtain ⟨e, he⟩ : ∃ e, wC = wA + e := ⟨wC - wA, by omega⟩
+      rw [hzero, Nat.mul_zero, he, Nat.mul_add]
+      omega
+  rw [hmsexp]
+  omega
 
 /-- THE DESCENT THEOREM: every mutual pair (u₀ > u₁ ≥ 1) sits on a
 Chebyshev chain: u₀ = chev y j, u₁ = chev y (j−1), some y ≥ 2, j ≥ 1.
@@ -360,7 +395,7 @@ theorem chain_of_mutual : ∀ (k u₀ u₁ : Nat), u₁ < u₀ → u₀ ≤ k �
     intro u₀ u₁ hlt hle h1 hmut
     by_cases hu1 : u₁ = 1
     · refine ⟨u₀, 1, by omega, by omega, chev_one u₀, ?_⟩
-      rw [hu1, chev_zero]
+      rw [hu1, Nat.sub_self, chev_zero]
     · have hu1ge2 : 2 ≤ u₁ := by omega
       obtain ⟨u₂, hexact, hmut2, hu2lt, hu2pos⟩ := mutual_step u₀ u₁ hu1ge2 hlt hmut
       have hu1le : u₁ ≤ k := by omega
@@ -371,18 +406,14 @@ theorem chain_of_mutual : ∀ (k u₀ u₁ : Nat), u₁ < u₀ → u₀ ≤ k �
         rw [show j - 1 + 2 = j + 1 by omega, show j - 1 + 1 = j by omega] at h
         exact h
       rw [hu₁eq, hu₂eq] at hexact
-      rw [hcass] at hexact
-      have hcomm : chev y (j - 1) * chev y (j + 1) = chev y (j + 1) * chev y (j - 1) :=
-        Nat.mul_comm _ _
-      have hkey : u₀ * chev y (j - 1) = chev y (j + 1) * chev y (j - 1) := by omega
+      have hcass' : chev y (j - 1) * chev y (j + 1) = chev y j * chev y j - 1 := by omega
+      have hkey2 : u₀ * chev y (j - 1) = chev y (j - 1) * chev y (j + 1) := by omega
       -- cancel the common factor d := chev y (j−1) ≥ 1 (division pattern, CI-green)
       have hpos : 0 < chev y (j - 1) := chev_pos y hy (j - 1)
       have hu0eq : u₀ = chev y (j + 1) := by
-        have hkeycomm : chev y (j - 1) * u₀ = chev y (j - 1) * chev y (j + 1) := by
-          rw [Nat.mul_comm (chev y (j - 1)) u₀, Nat.mul_comm (chev y (j - 1)) (chev y (j + 1))]
-          exact hkey
         have hEqD : chev y (j - 1) * u₀ / chev y (j - 1)
-            = chev y (j - 1) * chev y (j + 1) / chev y (j - 1) := by rw [hkeycomm]
+            = chev y (j - 1) * chev y (j + 1) / chev y (j - 1) := by
+          rw [Nat.mul_comm (chev y (j - 1)) u₀, hkey2]
         rw [Nat.mul_div_cancel_left u₀ hpos] at hEqD
         rw [Nat.mul_div_cancel_left (chev y (j + 1)) hpos] at hEqD
         exact hEqD
@@ -399,10 +430,8 @@ theorem erdos686k2class (t : Nat) (h2 : 2 ≤ t) :
   · -- ⟹ : Rep2 → chain value (the descent)
     intro hrep
     obtain ⟨m, n, heq, hn1, hmn⟩ := hrep
-    have htt : 4 ≤ t * t := by
-      have hmul : t * 2 ≤ t * t := Nat.mul_le_mul_left t (by omega)
-      omega
     -- the master identity (Pell form): X² + t² = T² + 1 with X = 2m+3, T = t(2n+3)
+    have htt : 4 ≤ t * t := Nat.mul_le_mul h2 h2
     have hmaster : (2 * m + 3) * (2 * m + 3) + t * t
         = (t * (2 * n + 3)) * (t * (2 * n + 3)) + 1 := by
       have hX2 : (2 * m + 3) * (2 * m + 3) = 4 * ((m + 1) * (m + 2)) + 1 := by ring
@@ -448,20 +477,30 @@ theorem erdos686k2class (t : Nat) (h2 : 2 ≤ t) :
       have h : d1 * d2 + 1 = t * t := by omega
       exact ⟨t, h⟩
     have hFirst : t ∣ d1 * d1 - 1 := by
-      have hA : t ∣ d1 * (d1 + d2) := Nat.dvd_mul_of_dvd_left hdvdt _
-      have hAB : t ∣ d1 * (d1 + d2) - (d1 * d2 + 1) := Nat.dvd_sub' hA hdvd12
-      have hEq : d1 * (d1 + d2) - (d1 * d2 + 1) = d1 * d1 - 1 := by
-        have e : d1 * (d1 + d2) = d1 * d1 + d1 * d2 := by ring
-        have hA1 : 1 ≤ d1 * d1 := Nat.mul_pos (by omega) (by omega)
-        omega
-      rw [hEq] at hAB
-      exact hAB
+      obtain ⟨w, hw⟩ := hdvdt
+      obtain ⟨u, hu⟩ := hdvd12
+      have hA5 : 1 ≤ d1 * d1 := Nat.mul_pos (by omega) (by omega)
+      refine ⟨d1 * w - u, ?_⟩
+      have e2 : t * (d1 * w) = d1 * (d1 + d2) := by rw [← hw]; ring
+      have e1 : d1 * (d1 + d2) = d1 * d1 + d1 * d2 := by ring
+      have hmsexp : t * (d1 * w - u) = t * (d1 * w) - t * u := by
+        rcases Nat.lt_or_ge u (d1 * w) with h | h
+        · obtain ⟨d, hd⟩ : ∃ d, d1 * w = u + d := ⟨d1 * w - u, by omega⟩
+          have harg : d1 * w - u = d := by omega
+          rw [harg, hd, Nat.mul_add]
+          omega
+        · have hzero : d1 * w - u = 0 := by omega
+          obtain ⟨e, he⟩ : ∃ e, u = d1 * w + e := ⟨u - d1 * w, by omega⟩
+          rw [hzero, Nat.mul_zero, he, Nat.mul_add]
+          omega
+      rw [hmsexp]
+      omega
     have hSecond : d1 ∣ t * t - 1 := by
       rw [← hprod]
-      exact ⟨d2, Nat.mul_comm d1 d2⟩
+      exact ⟨d2, rfl⟩
     have hmut : Mutual t d1 := ⟨hFirst, hSecond⟩
     obtain ⟨y, j, hy2, hj1, hteq, hd1eq⟩ :=
-      chain_of_mutual t d1 (by omega) (Nat.le_refl t) (by omega) hmut
+      chain_of_mutual t t d1 (by omega) (Nat.le_refl t) (by omega) hmut
     -- the Y-law: d1 + d2 = 2t·(2n+3) [divisor pair] and d1 + dd = y·t [chain]
     -- with d2 = dd (Cassini-cancellation): y·t = 2·t·(2n+3) ⟹ y = 2(2n+3) = 4n+6
     obtain ⟨dd, hdd⟩ : ∃ dd, chev y (j + 1) = dd := ⟨_, rfl⟩
