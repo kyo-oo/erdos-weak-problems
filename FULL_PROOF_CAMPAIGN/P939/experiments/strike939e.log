@@ -1,0 +1,29 @@
+
+=== [r3@1e13] r=3, LIMIT=10^13: census N=90618 (gen 0.1s) ===
+decade counts N(10^k): 1:1 2:6 3:19 4:50 5:128 6:306 7:712 8:1644 9:3720 10:8347 11:18588 12:41135 13:90618
+  census residues mod 16: 10 classes hit (units+0 possible = 9); nonzero-class support ok=True
+  census residues mod 81: 57 classes hit (units+0 possible = 55); nonzero-class support ok=True
+  census residues mod 625: 505 classes hit (units+0 possible = 501); nonzero-class support ok=True
+  census residues mod 2401: 2065 classes hit (units+0 possible = 2059); nonzero-class support ok=True
+  census mod-16 histogram: {0: 49974, 1: 3940, 2: 0, 3: 3344, 4: 0, 5: 3271, 6: 0, 7: 3382, 8: 13419, 9: 3240, 10: 0, 11: 3481, 12: 0, 13: 3376, 14: 0, 15: 3191}
+  pairs(sum<=LIMIT)=3,605,277,655  coprime=1,110,039,462  HITS=2  [(19902511, 756249048, 776151559), (1392672604221, 2126285555779, 3518958160000)]
+  E_unif (exact, decade densities)          = 34.7159
+  E_unif by decade (top5): k=12:4.8286 k=11:4.6028 k=10:4.3466 k=9:4.0467 k=8:3.7108
+  filter pass counts: 2:963,827,714 3:953,024,839 5:970,980,208 7:984,818,586
+  ALL-4-filter survivors: 643,168,845  (fraction 0.5794; random-int fraction f_rand = 0.3056)
+  E_loc (survivors only) = 19.7043   E_cond = E_loc/f_rand = 64.4693   [observed hits = 2]
+  (odd,odd) coprime pairs: 194,899,351; of these 16|(a+b): 24,301,802 (empirical 0.1247 vs 1/8=0.1250)
+  smallest survivor sums c=a+b (of 643,168,845):
+    c=43: 43^1  bad-primes(v in 1..2)=[43]
+    c=59: 59^1  bad-primes(v in 1..2)=[59]
+    c=89: 89^1  bad-primes(v in 1..2)=[89]
+    c=97: 97^1  bad-primes(v in 1..2)=[97]
+    c=113: 113^1  bad-primes(v in 1..2)=[113]
+    c=152: 2^3 * 19^1  bad-primes(v in 1..2)=[19]
+    c=157: 157^1  bad-primes(v in 1..2)=[157]
+    c=209: 11^1 * 19^1  bad-primes(v in 1..2)=[11, 19]
+  [r3@1e13] total 131.9s
+
+CALIBRATION (updated):
+  r=3 @10^12: E_unif=29.8873  E_cond=55.3071  observed=1
+  r=3 @10^13: E_unif=34.7159  E_cond=64.4693  observed=2

@@ -610,7 +610,7 @@ theorem mod_bridge (L k m c : Nat) (hkl : k ∣ L) :
   obtain ⟨q, hq⟩ := hkl
   obtain ⟨R, hR⟩ : ∃ R, m % L = R := ⟨_, rfl⟩
   obtain ⟨D, hD⟩ : ∃ D, m / L = D := ⟨_, rfl⟩
-  have hdm : L * D + R = m := by rw [hR, hD]; exact Nat.div_add_mod m L
+  have hdm : L * D + R = m := by rw [← hR, ← hD]; exact Nat.div_add_mod m L
   have h1 : k * (q * D) = L * D := by rw [← Nat.mul_assoc, ← hq]
   have hsplit : k * (q * D) + (R + c) = m + c := by omega
   rw [hR, ← hsplit, Nat.add_mod, mul_mod_self_zero, Nat.zero_add]
@@ -656,20 +656,25 @@ theorem w711OKR_spec (n L m r : Nat) (cs : List Nat) (hn : 0 < n)
       m + cs.getD (k - 1) 0 < m + (2 * n - 1)
     exact ⟨Nat.dvd_of_mod_eq_zero hmodm, by omega, by omega⟩
   · intro i hi1 hin j hj1 hjn hij
-    have hxy : cs.getD (i - 1) 0 = cs.getD (j - 1) 0 := by omega
     have hi' : i - 1 < n := by omega
     have hj' : j - 1 < n := by omega
     have hinner := (List.all_eq_true.mp hdist) (i - 1) (List.mem_range.mpr hi')
     have hdij := (List.all_eq_true.mp hinner) (j - 1) (List.mem_range.mpr hj')
-    have hxyb : decide (cs.getD (i - 1) 0 = cs.getD (j - 1) 0) = true :=
-      decide_eq_true hxy
-    rw [hxyb] at hdij
-    cases hval : decide ((i - 1) = (j - 1)) with
+    cases hd : decide ((i - 1) = (j - 1)) with
     | false =>
-        rw [hval] at hdij
-        simp at hdij
+        rw [hd] at hdij
+        cases hc : decide (cs.getD (i - 1) 0 = cs.getD (j - 1) 0) with
+        | false =>
+            have hcne : ¬(cs.getD (i - 1) 0 = cs.getD (j - 1) 0) :=
+              of_decide_eq_false hc
+            intro hcon
+            apply hcne
+            omega
+        | true =>
+            rw [hc] at hdij
+            simp at hdij
     | true =>
-        have hidx : (i - 1) = (j - 1) := of_decide_eq_true hval
+        have heq : (i - 1) = (j - 1) := of_decide_eq_true hd
         omega
 
 /-- THE PARAMETERIZED-WINDOW WITNESS CHECKER (Bool): `w711OK` with the
@@ -923,7 +928,7 @@ theorem erdos711_five (m : Nat) (hm : 1 ≤ m) : f711 5 m ≤ 2 * 5 - 1 := by
   have hrl : m % 60 < 60 := by omega
   have hmem0 : m % 60 ∈ List.range 60 := List.mem_range.mpr hrl
   have hall := (List.all_eq_true.mp hwit5) (m % 60) hmem0
-  have hL : ∀ k, 1 ≤ k → k ≤ 5 → k ∣ 60 := dvd60
+  have hL : ∀ k, 1 ≤ k → k ≤ 5 → k ∣ 60 := fun k h1 h5 => dvd60 k h1 (by omega)
   obtain ⟨a, ha⟩ :=
     w711OKR_spec 5 60 m (m % 60) (wit5 (m % 60)) (by omega) hL rfl hall
   have hmem : (2 * 5 - 1) ∈ {F : Nat | 1 ≤ F ∧ ∃ x, AssignOk 5 m F x} := by
@@ -1093,8 +1098,8 @@ theorem erdos711_upper_general : ∀ n m, 2 ≤ n → 1 ≤ m → f711 n m ≤ n
       · obtain ⟨Q, hQ⟩ : ∃ Q, (m + k - 1) / k = Q := ⟨_, rfl⟩
         obtain ⟨Y, hY⟩ : ∃ Y, (m + k - 1) % k = Y := ⟨_, rfl⟩
         have hdm : k * Q + Y = m + k - 1 := by
-          rw [hQ, hY]; exact Nat.div_add_mod (m + k - 1) k
-        have hlt : Y < k := by rw [hY]; exact Nat.mod_lt (m + k - 1) (by omega)
+          rw [← hQ, ← hY]; exact Nat.div_add_mod (m + k - 1) k
+        have hlt : Y < k := by rw [← hY]; exact Nat.mod_lt (m + k - 1) (by omega)
         have hz : 1 ≤ k * n := by
           have := Nat.mul_le_mul (show 1 ≤ k by omega) (show 1 ≤ n by omega)
           simpa using this
@@ -1103,7 +1108,7 @@ theorem erdos711_upper_general : ∀ n m, 2 ≤ n → 1 ≤ m → f711 n m ≤ n
       · obtain ⟨Q, hQ⟩ : ∃ Q, (m + k - 1) / k = Q := ⟨_, rfl⟩
         obtain ⟨Y, hY⟩ : ∃ Y, (m + k - 1) % k = Y := ⟨_, rfl⟩
         have hdm : k * Q + Y = m + k - 1 := by
-          rw [hQ, hY]; exact Nat.div_add_mod (m + k - 1) k
+          rw [← hQ, ← hY]; exact Nat.div_add_mod (m + k - 1) k
         have hz : k * n ≤ n * n := by
           rw [Nat.mul_comm]
           exact Nat.mul_le_mul_left n (show k ≤ n by omega)
@@ -1118,11 +1123,11 @@ theorem erdos711_upper_general : ∀ n m, 2 ≤ n → 1 ≤ m → f711 n m ≤ n
         obtain ⟨Qq, hQq⟩ : ∃ Qq, (m + q - 1) / q = Qq := ⟨_, rfl⟩
         obtain ⟨Yq, hYq⟩ : ∃ Yq, (m + q - 1) % q = Yq := ⟨_, rfl⟩
         have hdmp : p * P + Yp = m + p - 1 := by
-          rw [hP, hYp]; exact Nat.div_add_mod (m + p - 1) p
-        have hltp : Yp < p := by rw [hYp]; exact Nat.mod_lt (m + p - 1) (by omega)
+          rw [← hP, ← hYp]; exact Nat.div_add_mod (m + p - 1) p
+        have hltp : Yp < p := by rw [← hYp]; exact Nat.mod_lt (m + p - 1) (by omega)
         have hdmq : q * Qq + Yq = m + q - 1 := by
-          rw [hQq, hYq]; exact Nat.div_add_mod (m + q - 1) q
-        have hltq : Yq < q := by rw [hYq]; exact Nat.mod_lt (m + q - 1) (by omega)
+          rw [← hQq, ← hYq]; exact Nat.div_add_mod (m + q - 1) q
+        have hltq : Yq < q := by rw [← hYq]; exact Nat.mod_lt (m + q - 1) (by omega)
         have hpn : p * n + p ≤ q * n := by
           have h1 : (p + 1) * n = p * n + n := Nat.succ_mul p n
           have h2 : (p + 1) * n ≤ q * n := by
@@ -1210,7 +1215,7 @@ theorem erdos711_ask1 (hU : Hall711) :
 
 theorem pow_ge_one (n t : Nat) (hn : 1 ≤ n) : 1 ≤ n ^ t := by
   induction t with
-  | zero => rw [Nat.pow_zero]; exact Nat.le_refl 1
+  | zero => rw [Nat.pow_zero]
   | succ t ih =>
     rw [Nat.pow_succ]
     have h := Nat.mul_le_mul ih hn

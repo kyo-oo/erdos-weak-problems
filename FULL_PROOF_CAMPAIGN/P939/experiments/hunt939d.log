@@ -1,0 +1,15 @@
+[r=4] 73698 4-powerful numbers <= 10^16  (gen 0.1s)
+decade counts: 10:1740 11:3311 12:6235 13:11653 14:21660 15:40048 16:73698
+pairs with sum<=10^16: 2,497,969,813, coprime: 600,965,618
+HITS: 0
+VERDICT[4,10^16]: ZERO
+E_unif(<=10^16, decade densities) = 0.8233
+E by decade k=2..15: 2:0.1533 3:0.1260 4:0.1468 5:0.1053 6:0.0809 7:0.0577 8:0.0395 9:0.0261 10:0.0171 11:0.0109 12:0.0068 13:0.0042 14:0.0026 15:0.0016
+coprime pairs by decade k=2..15: 2:23 3:81 4:413 5:1,580 6:6,169 7:22,660 8:80,428 9:280,874 10:982,061 11:3,356,210 12:11,326,254 13:38,066,986 14:126,853,553 15:419,988,325
+total 53.8s
+
+=== TEMPLATE A WIRING RECEIPT (2-covering of the square-hypotenuse sub-case) ===
+quartic 1*1^4 + 8*1^4 = 3^2 : True
+E_{8}: V^2 = U^3 - 32U at (U,V)=(8,16): 16^2 = 256 vs 8^3 - 32*8 = 256 : True
+=== r=3 KERNEL EQUATION RECEIPT (the certified witness, kernel triple (1,9,1)) ===
+271^3 + 9*438^3 = 19902511 + 756249048 = 776151559 = 919^3 : True
