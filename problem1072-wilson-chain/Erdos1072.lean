@@ -4,6 +4,7 @@ import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
 set_option maxRecDepth 262144
+set_option maxHeartbeats 16000000
 
 /-! # Erdős #1072 — THE WILSON-PAIR LAW (Kill candidate, S033)
 
@@ -35,7 +36,22 @@ n ↦ p−1−n with the sign law.
 (71,7) — each a term-mode application of the general corollary with the
 decide-verified receipts. The full census (2,694 instances over the 1,227
 primes 5 ≤ p < 10^4, 465 Wilson-only, ZERO pair-law violations) is the
-battery (battery1072.py). -/
+battery (battery1072.py).
+
+**THE COMPLETE BOARD (S050-C5, COMPLETE_PROOF.md §4/§7):** the C-layer on
+top of K1/K2 — the exact pairing equivalence (C1), the parity split (C2),
+the top-chain k!±1 dictionary (C7, the #1074 bridge), the least-solution
+law (C8: every sub-Wilson solution sits at or below p−5, p=7 the exact
+sole exception), the p=6089 tightness witness, and the assembled final
+theorem `erdos1072_complete` citing the green spine, the eleven named
+instance receipts, and the arsenal bridge. Cited as follow-ups: the
+2-cycle product laws (C3), the Gauss half-factorial law (C4), the
+fixed-point laws (C5), the count laws (C6) — all proved in
+COMPLETE_PROOF.md §4 and machine-verified over the 1,227 census primes
+by the extension engine E1–E9. Honest scope unchanged: both corpus
+questions (Q1 infinitely many Wilson-only primes; Q2 f(p)/p → 0 a.e.)
+remain open — the single remaining component is the factorial-walk
+first-hit distribution, which exactly subsumes both. -/
 
 namespace Erdos1072
 
@@ -326,6 +342,303 @@ theorem erdos1072_arsenal_bridge :
   ⟨by decide, carryAtPos_bound 61 1, carryAtPos_bound 67 2,
     CardinalWorldsV2.v2r_ternary_scaling 1 24⟩
 
+/-! ## §11 THE C-LAYER GLUE (COMPLETE_PROOF.md §4): the sign algebra and the
+small factorial values — the ammunition for the exact equivalence (C1), the
+top-chain dictionary (C7), and the edge cascade (C8). Pure mod-algebra on
+the green kernel spine (§1–§8). -/
+
+/-- The sign residue is self-inverse: (±1)² ≡ 1 (mod p) — the cancellation
+engine for the ← direction of C1. -/
+theorem sgn_sq (p m : Nat) (hp : 2 ≤ p) : sgn p m * sgn p m ≡ 1 [MOD p] := by
+  rcases Nat.mod_two_eq_zero_or_one m with h | h
+  · have h1 : sgn p m = 1 := by unfold sgn; rw [h]; exact if_pos rfl
+    rw [h1]
+    exact meq_of_eq _ _ _ (Nat.one_mul _)
+  · have h1 : sgn p m = p - 1 := by unfold sgn; rw [h]; exact if_neg (by decide)
+    rw [h1]
+    exact sqn p hp
+
+/-- For odd p the involution σ(n) = p−1−n preserves index parity (p−1 is
+even), so the sign residues agree — the engine of the parity split (C2). -/
+theorem sgn_par (p m k : Nat) (hodd : p % 2 = 1) (h : m + k = p - 1) :
+    sgn p m = sgn p k := by
+  unfold sgn
+  rcases Nat.mod_two_eq_zero_or_one m with hm | hm
+  · have hk : k % 2 = 0 := by omega
+    rw [hm, hk]
+  · have hk : k % 2 = 1 := by omega
+    rw [hm, hk]
+
+/-- Mod-cancellation by a self-inverse factor: c·c ≡ 1 (mod p) and
+a·c ≡ c·b (mod p) imply a ≡ b (mod p). -/
+theorem cancel_sq (p a b c : Nat) (hc : c * c ≡ 1 [MOD p])
+    (h : a * c ≡ c * b [MOD p]) : a ≡ b [MOD p] := by
+  have e1 : a * (c * c) ≡ (a * c) * c [MOD p] := meq_of_eq _ _ _ (by ring)
+  have e2 : (a * c) * c ≡ (c * b) * c [MOD p] := h.mul_right c
+  have e3 : (c * b) * c ≡ b * (c * c) [MOD p] := meq_of_eq _ _ _ (by ring)
+  have la1 : a * (c * c) ≡ 1 * a [MOD p] :=
+    (meq_of_eq _ _ _ (by ring)).trans (hc.mul_right a)
+  have la : a * (c * c) ≡ a [MOD p] := la1.trans (meq_of_eq _ _ _ (by ring))
+  have rb1 : b * (c * c) ≡ 1 * b [MOD p] :=
+    (meq_of_eq _ _ _ (by ring)).trans (hc.mul_right b)
+  have rb : b * (c * c) ≡ b [MOD p] := rb1.trans (meq_of_eq _ _ _ (by ring))
+  exact (la.symm.trans ((e1.trans e2).trans e3)).trans rb
+
+/-- 1! ≡ 1 (mod p), for every p — the k = 1 edge value. -/
+theorem fm_one_modeq (p : Nat) : fm p 1 ≡ 1 [MOD p] := by
+  have h := fm_modeq p 0
+  have h0 : fm p 0 = 1 := rfl
+  rw [h0, Nat.zero_add, Nat.one_mul] at h
+  exact h
+
+theorem fm_one (p : Nat) (hp : 2 ≤ p) : fm p 1 = 1 :=
+  modeq_eq p (fm p 1) 1 (fm_lt p hp 1) (by omega) (fm_one_modeq p)
+
+/-- 2! ≡ 2 (mod p), for every p — the k = 2 edge value. -/
+theorem fm_two_modeq (p : Nat) : fm p 2 ≡ 2 [MOD p] := by
+  have h := fm_modeq p 1
+  have h12 : (1:Nat) + 1 = 2 := rfl
+  rw [h12] at h
+  have h1 : fm p 1 ≡ 1 [MOD p] := fm_one_modeq p
+  exact h.trans ((h1.mul_left 2).trans (meq_of_eq _ _ _ (by ring)))
+
+theorem fm_two (p : Nat) (hp : 3 ≤ p) : fm p 2 = 2 :=
+  modeq_eq p (fm p 2) 2 (fm_lt p (by omega) 2) (by omega) (fm_two_modeq p)
+
+/-- 3! ≡ 6 (mod p), for every p — the k = 3 edge value (the p = 7 fork). -/
+theorem fm_three_modeq (p : Nat) : fm p 3 ≡ 6 [MOD p] := by
+  have h := fm_modeq p 2
+  have h23 : (2:Nat) + 1 = 3 := rfl
+  rw [h23] at h
+  have h2 : fm p 2 ≡ 2 [MOD p] := fm_two_modeq p
+  exact h.trans ((h2.mul_left 3).trans (meq_of_eq _ _ _ (by ring)))
+
+/-- The sign residues at the literal edge indices k = 1, 2, 3. -/
+theorem sgn_one (p : Nat) : sgn p 1 = p - 1 := by
+  unfold sgn
+  exact if_neg (by decide)
+
+theorem sgn_two (p : Nat) : sgn p 2 = 1 := by
+  unfold sgn
+  exact if_pos (by decide)
+
+theorem sgn_three (p : Nat) : sgn p 3 = p - 1 := by
+  unfold sgn
+  exact if_neg (by decide)
+
+/-! ## §12 C1 — THE EXACT PAIRING EQUIVALENCE (COMPLETE_PROOF.md §4).
+
+For every odd p ≥ 3 with the Wilson receipt and every 1 ≤ n ≤ p−2:
+    n! ≡ −1 (mod p)  ⟺  (p−1−n)! ≡ (−1)^{p−1−n} (mod p).
+The → direction is the green classic corollary (§8); the ← direction
+substitutes the paired receipt into the pairing law K1 and cancels the
+self-inverse sign factor (`sgn_sq` + `cancel_sq`, §11). -/
+
+theorem erdos1072_pair_equivalence (p n : Nat) (hp : 3 ≤ p) (hodd : p % 2 = 1)
+    (hn : 1 ≤ n) (hn2 : n + 1 ≤ p - 1) (hW : fm p (p - 1) = p - 1) :
+    fm p n = p - 1 ↔ fm p (p - 1 - n) = sgn p (p - 1 - n) := by
+  constructor
+  · intro h
+    exact erdos1072_wilson_pair_classic p n (by omega) (Or.inr hodd) hn2 hW h
+  · intro h
+    have hpair := erdos1072_pair_law p n (by omega) (Or.inr hodd) (by omega)
+    rw [h, hW] at hpair
+    have hc := cancel_sq p (fm p n) (p - 1) (sgn p (p - 1 - n))
+      (sgn_sq p (p - 1 - n) (by omega)) hpair
+    exact modeq_eq p (fm p n) (p - 1) (fm_lt p (by omega) n) (by omega) hc
+
+/-! ## §13 C2 — THE PARITY SPLIT (COMPLETE_PROOF.md §4).
+
+For odd p the involution preserves index parity, so the exact equivalence
+C1 splits by the parity of n: odd-index −1-solutions pair with odd-index
+−1-solutions (i); even-index −1-solutions pair with even-index +1-hits
+(ii). -/
+
+theorem erdos1072_parity_odd (p n : Nat) (hp : 3 ≤ p) (hodd : p % 2 = 1)
+    (hn : 1 ≤ n) (hn2 : n + 1 ≤ p - 1) (hW : fm p (p - 1) = p - 1)
+    (hnodd : n % 2 = 1) :
+    fm p n = p - 1 ↔ fm p (p - 1 - n) = p - 1 := by
+  have hpar : sgn p (p - 1 - n) = sgn p n :=
+    sgn_par p (p - 1 - n) n hodd (by omega)
+  have hsgn : sgn p n = p - 1 := by
+    unfold sgn
+    exact if_neg (by omega)
+  have hc1 := erdos1072_pair_equivalence p n hp hodd hn hn2 hW
+  rw [hpar, hsgn] at hc1
+  exact hc1
+
+theorem erdos1072_parity_even (p n : Nat) (hp : 3 ≤ p) (hodd : p % 2 = 1)
+    (hn : 1 ≤ n) (hn2 : n + 1 ≤ p - 1) (hW : fm p (p - 1) = p - 1)
+    (hneven : n % 2 = 0) :
+    fm p n = p - 1 ↔ fm p (p - 1 - n) = 1 := by
+  have hpar : sgn p (p - 1 - n) = sgn p n :=
+    sgn_par p (p - 1 - n) n hodd (by omega)
+  have hsgn : sgn p n = 1 := by
+    unfold sgn
+    exact if_pos hneven
+  have hc1 := erdos1072_pair_equivalence p n hp hodd hn hn2 hW
+  rw [hpar, hsgn] at hc1
+  exact hc1
+
+/-! ## §14 C7 — THE TOP-CHAIN DICTIONARY (COMPLETE_PROOF.md §4; the
+#1074 EHS/Pillai bridge). For every odd p ≥ 3 with the Wilson receipt and
+every 1 ≤ k ≤ p−2:
+    (p−1−k)! ≡ −1 (mod p)  ⟺  k! ≡ (−1)^k (mod p)
+— i.e. p ∣ k!+1 (k odd) / p ∣ k!−1 (k even). This is C1 instantiated at
+the paired index n = p−1−k, and is the complete classification of the
+top half of S₋(p). -/
+
+theorem erdos1072_top_chain_dictionary (p k : Nat) (hp : 3 ≤ p)
+    (hodd : p % 2 = 1) (hk : 1 ≤ k) (hk2 : k + 1 ≤ p - 1)
+    (hW : fm p (p - 1) = p - 1) :
+    fm p (p - 1 - k) = p - 1 ↔ fm p k = sgn p k := by
+  have hn : 1 ≤ p - 1 - k := by omega
+  have hn2 : p - 1 - k + 1 ≤ p - 1 := by omega
+  have hc1 := erdos1072_pair_equivalence p (p - 1 - k) hp hodd hn hn2 hW
+  have hmid : p - 1 - (p - 1 - k) = k := by omega
+  have hpar : sgn p (p - 1 - k) = sgn p k :=
+    sgn_par p (p - 1 - k) k hodd (by omega)
+  rw [hmid, hpar] at hc1
+  exact hc1
+
+/-! ## §15 C8 — THE LEAST-SOLUTION LAW (COMPLETE_PROOF.md §4, C8(ii)).
+
+For every odd p ≥ 5 with the Wilson receipt and p ≠ 7: EVERY solution m
+of S₋(p) with m ≤ p−2 already satisfies m ≤ p−5 — the edge cascade:
+(p−2)! ≢ −1, (p−3)! ≢ −1, (p−4)! ≢ −1 (the k = 1, 2, 3 positions of the
+dictionary; the k = 3 position forces p = 7, the exact sole exception,
+witnessed below). -/
+
+theorem erdos1072_least_solution_law (p m : Nat) (hp : 5 ≤ p)
+    (hodd : p % 2 = 1) (hp7 : p ≠ 7) (hW : fm p (p - 1) = p - 1)
+    (hm : 1 ≤ m) (hm2 : m ≤ p - 2) (hmin : fm p m = p - 1) : m ≤ p - 5 := by
+  rcases Nat.lt_or_ge m (p - 4) with hlt | hge
+  · omega
+  · have hcases : m = p - 4 ∨ m = p - 3 ∨ m = p - 2 := by omega
+    rcases hcases with h | h | h
+    · rw [h] at hmin
+      have hC73 := erdos1072_top_chain_dictionary p 3 hp hodd (by omega) (by omega) hW
+      have hb3 : p - 1 - 3 = p - 4 := by omega
+      rw [hb3] at hC73
+      have hcontra := hC73.mp hmin
+      have hsg3 : sgn p 3 = p - 1 := sgn_three p
+      rw [hsg3] at hcontra
+      have h6 : fm p 3 ≡ 6 [MOD p] := fm_three_modeq p
+      rw [hcontra] at h6
+      have hc : (p - 1) % p = 6 % p := h6
+      rcases Nat.lt_or_ge p 7 with hlt7 | hge7
+      · have hp5 : p = 5 := by omega
+        rw [hp5] at hc
+        exact absurd hc (by decide)
+      · have h6v : 6 % p = 6 := Nat.mod_eq_of_lt (by omega)
+        have hpv : (p - 1) % p = p - 1 := Nat.mod_eq_of_lt (by omega)
+        rw [hpv, h6v] at hc
+        omega
+    · rw [h] at hmin
+      have hC72 := erdos1072_top_chain_dictionary p 2 hp hodd (by omega) (by omega) hW
+      have hb2 : p - 1 - 2 = p - 3 := by omega
+      rw [hb2] at hC72
+      have hcontra := hC72.mp hmin
+      rw [fm_two p (by omega), sgn_two p] at hcontra
+      omega
+    · rw [h] at hmin
+      have hC71 := erdos1072_top_chain_dictionary p 1 hp hodd (by omega) (by omega) hW
+      have hb1 : p - 1 - 1 = p - 2 := by omega
+      rw [hb1] at hC71
+      have hcontra := hC71.mp hmin
+      rw [fm_one p (by omega), sgn_one p] at hcontra
+      omega
+
+/-- The p = 7 exception is exact and live: the Wilson receipt holds, the
+k = 3 dictionary hit 3! ≡ −1 holds at m = 3 = p−4, and the p−5 bound
+fails — the sole prime with a sub-Wilson solution above p−5. -/
+theorem erdos1072_exception_7 :
+    fm 7 3 = 6 ∧ fm 7 6 = 6 ∧ 3 = 7 - 4 ∧ ¬ (3 ≤ 7 - 5) :=
+  ⟨Erdos1072Data.inst_7_3, Erdos1072Data.wilson_7, by decide, by decide⟩
+
+/-! ## §16 THE TIGHTNESS WITNESS — p = 6089 (COMPLETE_PROOF.md §4
+C8(iii), §5): the census's maximal non-Wilson-only ratio (f = 6042 =
+p−1−46, ratio 0.9924). The Wilson receipt and the k = 46 dictionary hit
+46! ≡ +1 (6089 ∣ 46!−1) are decide-verified; the top solution m = 6042 is
+delivered BY THE DICTIONARY (C7 applied, not decided). -/
+
+theorem wilson_6089 : fm 6089 6088 = 6088 := by decide
+
+theorem dict_6089_46 : fm 6089 46 = 1 := by decide
+
+theorem erdos1072_witness_6089_top : fm 6089 6042 = 6088 := by
+  have hC7 := erdos1072_top_chain_dictionary 6089 46 (by norm_num) (by decide)
+    (by norm_num) (by norm_num) wilson_6089
+  have hsgn : sgn 6089 46 = 1 := by decide
+  rw [hsgn] at hC7
+  exact hC7.mpr dict_6089_46
+
+theorem erdos1072_witness_6089 :
+    fm 6089 6088 = 6088 ∧ fm 6089 46 = 1 ∧ fm 6089 6042 = 6088 ∧
+    6042 = 6089 - 1 - 46 :=
+  ⟨wilson_6089, dict_6089_46, erdos1072_witness_6089_top, by decide⟩
+
+/-! ## §17 THE COMPLETE ASSEMBLY (S050-C5) — the final theorem.
+
+`erdos1072_complete` welds the whole unconditional board into one
+statement: the green spine K1/K2 (§7/§8), the C-layer (C1 the exact
+pairing equivalence, C2 the parity split, C7 the top-chain k!±1
+dictionary, C8 the least-solution law), the exact p = 7 exception, the
+p = 6089 tightness witness, the eleven named instance receipts (§9 +
+Erdos1072_Data), and the arsenal bridge (§10).
+
+**Follow-ups (COMPLETE_PROOF.md §4, cited, not yet in Lean):** C3 the
+2-cycle product laws, C4 the Gauss half-factorial identity, C5 the
+fixed-point laws, C6 the count laws (census: 147 + 217 = 364) — all
+proved in the doc and machine-verified by the extension engine E1–E9
+over all 1,227 census primes.
+
+**Honest scope (doc §7, unchanged):** the structure theory of S₋(p) is
+complete here; the two corpus questions (Q1: infinitely many Wilson-only
+primes; Q2: f(p)/p → 0 for almost all p) remain open — both are exactly
+the first-hit distribution of the factorial walk n ↦ n! mod p. No sorry,
+no sub-case dressed as the answer, no heuristic dressed as proof. -/
+
+theorem erdos1072_complete :
+    (∀ p n : Nat, 2 ≤ p → (p = 2 ∨ p % 2 = 1) → n ≤ p - 1 →
+      fm p n * fm p (p - 1 - n) ≡ sgn p (p - 1 - n) * fm p (p - 1) [MOD p]) ∧
+    (∀ p n : Nat, 2 ≤ p → (p = 2 ∨ p % 2 = 1) → n + 1 ≤ p - 1 →
+      fm p (p - 1) = p - 1 → fm p n = p - 1 →
+      fm p (p - 1 - n) = sgn p (p - 1 - n)) ∧
+    (∀ p n : Nat, 3 ≤ p → p % 2 = 1 → 1 ≤ n → n + 1 ≤ p - 1 →
+      fm p (p - 1) = p - 1 →
+      (fm p n = p - 1 ↔ fm p (p - 1 - n) = sgn p (p - 1 - n))) ∧
+    (∀ p n : Nat, 3 ≤ p → p % 2 = 1 → 1 ≤ n → n + 1 ≤ p - 1 →
+      fm p (p - 1) = p - 1 → n % 2 = 1 →
+      (fm p n = p - 1 ↔ fm p (p - 1 - n) = p - 1)) ∧
+    (∀ p n : Nat, 3 ≤ p → p % 2 = 1 → 1 ≤ n → n + 1 ≤ p - 1 →
+      fm p (p - 1) = p - 1 → n % 2 = 0 →
+      (fm p n = p - 1 ↔ fm p (p - 1 - n) = 1)) ∧
+    (∀ p k : Nat, 3 ≤ p → p % 2 = 1 → 1 ≤ k → k + 1 ≤ p - 1 →
+      fm p (p - 1) = p - 1 →
+      (fm p (p - 1 - k) = p - 1 ↔ fm p k = sgn p k)) ∧
+    (∀ p m : Nat, 5 ≤ p → p % 2 = 1 → p ≠ 7 → fm p (p - 1) = p - 1 →
+      1 ≤ m → m ≤ p - 2 → fm p m = p - 1 → m ≤ p - 5) ∧
+    (fm 7 3 = 6 ∧ fm 7 6 = 6 ∧ 3 = 7 - 4 ∧ ¬ (3 ≤ 7 - 5)) ∧
+    (fm 6089 6088 = 6088 ∧ fm 6089 46 = 1 ∧ fm 6089 6042 = 6088 ∧
+      6042 = 6089 - 1 - 46) ∧
+    (fm 7 3 = 6 ∧ fm 11 5 = 10 ∧ fm 19 9 = 18 ∧ fm 23 14 = 22 ∧
+      fm 23 8 = 1 ∧ fm 29 18 = 28 ∧ fm 29 10 = 1 ∧ fm 43 21 = 42 ∧
+      fm 47 23 = 46 ∧ fm 59 15 = 58 ∧ fm 61 8 = 60 ∧ fm 61 52 = 1 ∧
+      fm 67 18 = 66 ∧ fm 71 7 = 70 ∧ fm 71 63 = 70) ∧
+    ([71 % 3, (71 / 3) % 3, (71 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+      carryAtPos 61 1 < 4 ∧ carryAtPos 67 2 < 4 ∧
+      v2r (3 ^ 1 * 24) = v2r 24) :=
+  ⟨erdos1072_pair_law, erdos1072_wilson_pair_classic, erdos1072_pair_equivalence,
+    erdos1072_parity_odd, erdos1072_parity_even, erdos1072_top_chain_dictionary,
+    erdos1072_least_solution_law, erdos1072_exception_7, erdos1072_witness_6089,
+    ⟨Erdos1072Data.inst_7_3, Erdos1072Data.inst_11_5, Erdos1072Data.inst_19_9,
+      Erdos1072Data.inst_23_14, Erdos1072Data.tail_23_8, Erdos1072Data.inst_29_18,
+      Erdos1072Data.tail_29_10, Erdos1072Data.inst_43_21, Erdos1072Data.inst_47_23,
+      Erdos1072Data.inst_59_15, Erdos1072Data.inst_61_8, Erdos1072Data.tail_61_52,
+      Erdos1072Data.inst_67_18, Erdos1072Data.inst_71_7, Erdos1072Data.tail_71_63⟩,
+    erdos1072_arsenal_bridge⟩
+
 #eval "ERDOS1072_KERNEL_GREEN"
 #print axioms erdos1072_pair_law
 #print axioms erdos1072_wilson_pair_classic
@@ -333,5 +646,15 @@ theorem erdos1072_arsenal_bridge :
 #print axioms erdos1072_pair_23
 #print axioms erdos1072_pair_71
 #print axioms erdos1072_arsenal_bridge
+
+#eval "ERDOS1072_COMPLETE_GREEN"
+#print axioms erdos1072_pair_equivalence
+#print axioms erdos1072_parity_odd
+#print axioms erdos1072_parity_even
+#print axioms erdos1072_top_chain_dictionary
+#print axioms erdos1072_least_solution_law
+#print axioms erdos1072_exception_7
+#print axioms erdos1072_witness_6089
+#print axioms erdos1072_complete
 
 end Erdos1072

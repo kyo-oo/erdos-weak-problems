@@ -98,6 +98,17 @@ core (doc §8) explicitly NOT claimed.  Architecture (§10–§12):
 * §12 THE COMPLETE BOARD `erdos1108ap_complete`: all of the above,
   the all-prime engine of §1–§9, the cited Legendre spine and explicit
   cascade, and the arsenal bridge as ONE unconditional conjunction.
+* §12b THE C1 FINAL ASSEMBLY `erdos1108_complete` (S050-C1 — the B2
+  retry deliverable, the retry-mandated name): the doc's final-board
+  complete unconditional answer — the all-prime engine + THE R5
+  OBSTRUCTION WEB (the doc §5.5 final assembly, quantifier for
+  quantifier) + the cited Legendre spine and explicit pair-cascade
+  (Kernel 15) + the TheoremBGeneral twin `v2_pow` + the R2/R4 reduction
+  layer + the Brocard laws R6/R7 + the arsenal bridge, ONE conjunction,
+  every component chained BY NAME from the green layers above (zero new
+  glue).  Receipts: `#eval "ERDOS1108_COMPLETE_GREEN"` +
+  `#print axioms erdos1108_complete` (expected [propext,
+  Classical.choice, Quot.sound]).
 
 Finiteness of a value set of naturals is formalized as the equivalent
 boundedness certificate (∃ N, every value ≤ N — a subset of ℕ is
@@ -1271,6 +1282,86 @@ theorem erdos1108ap_complete :
    fun u n hu h p hp hppu => r7_window_avoid u n hu h p hp hppu,
    erdos1108ap_arsenal_bridge⟩
 
+/-! ## §12b THE C1 FINAL ASSEMBLY (S050-C1 — the B2 retry deliverable,
+the doc's final-board form, quantifier for quantifier, no sub-cases,
+chained by name from the green layers — zero new glue lemmas). -/
+
+/-- **THE FINAL ASSEMBLED MAIN THEOREM of COMPLETE_PROOF.md** (the C1
+complete-board deliverable): the complete unconditional answer to the
+verbatim #1108 ask per the doc's final board — every component the doc
+PROVES, in one conjunction:
+
+* the all-prime engine: `all_prime_isolated_min` (the complete
+  all-prime valuation theory at singleton bottoms, every prime p
+  simultaneously) and `all_prime_power_obstruction`;
+* **THE R5 OBSTRUCTION WEB** (doc §5.5 — the final assembly): for every
+  k ≥ 2 and every nonempty finite S with `Σ_{a∈S} a! = n^k`, ALL FOUR
+  obstructions hold simultaneously — (1) the 2-adic cascade
+  divisibility `k ∣ (2j₀ − s₂(j₀)) + v₂(C(S))`, (2) the all-prime
+  singleton obstruction `k ∣ v_p(b_p!)` at every prime whose lowest
+  occupied p-block is a singleton, (3) the valuation profile
+  `v_p(x) = k·v_p(n)` at every prime, (4) the window congruence
+  `p ∣ n → Σ_{a∈S,a<p} a! ≡ 0 (mod p)`;
+* the cited Legendre parity spine `v₂(n!) + s₂(n) = n` and the explicit
+  pair-cascade (Kernel 15, CI-green run 42153591445);
+* the TheoremBGeneral twin `v2_pow` (`v₂(n^k) = k·v₂(n)`);
+* the R2 powerful hierarchy (every k-th power is powerful) and the
+  (Q2) ⟹ (Q1) reduction in boundedness form;
+* the R4 bounded-cardinality reductions under the single stated
+  external hypothesis HYP-BE (a theorem hypothesis — never an axiom);
+* the Brocard embedding R6 (a YES to (Q1) at k = 2 bounds Brocard's
+  1876 equation) and the Brocard channel web R7 (`v_p(1+u!) = 0` at
+  every prime p ≤ u, the cascade parity, window avoidance).
+
+The open global-finiteness core (doc §8) is explicitly NOT claimed. -/
+theorem erdos1108_complete :
+    (∀ p b S, p.Prime → countB b S = 1 →
+      (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) →
+      vp p (sumFacts S) = vp p (fact b)) ∧
+    (∀ p b S k n, p.Prime → countB b S = 1 →
+      (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) → 2 ≤ k →
+      ¬ (k ∣ vp p (fact b)) → sumFacts S ≠ n ^ k) ∧
+    (∀ S n k, S ≠ [] → 2 ≤ k → sumFacts S = n ^ k →
+      (k ∣ (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S) ∧
+      (∀ p b, p.Prime → countB b S = 1 →
+        (∀ a, memB a S → a ≠ b → p * (b / p + 1) ≤ a) → k ∣ vp p (fact b)) ∧
+      (∀ p, p.Prime → vp p (sumFacts S) = k * vp p n) ∧
+      (∀ p, p.Prime → p ∣ n → sumFactsLow p S % p = 0))) ∧
+    (∀ n : Nat, v2 (_root_.fact n) + s2 n = n) ∧
+    (∀ S : List Nat, S ≠ [] →
+      v2 (_root_.sumFacts S) = (2 * botPair S - s2 (botPair S)) + v2 (cascadeC S)) ∧
+    (∀ k n, 1 ≤ n → v2 (n ^ k) = k * v2 n) ∧
+    (∀ k n, 2 ≤ k → powerful (n ^ k)) ∧
+    (∀ h : ∃ M, ∀ S : List Nat, powerful (sumFacts S) → sumFacts S ≤ M, ∀ k, 2 ≤ k →
+      ∃ N, ∀ S : List Nat, (∃ n, sumFacts S = n ^ k) → sumFacts S ≤ N) ∧
+    (∀ hyp : hypBE, ∀ r k, 1 ≤ r → 2 ≤ k →
+      ∃ N, ∀ S : List Nat, lenB S = r → (∃ n, sumFacts S = n ^ k) → sumFacts S ≤ N) ∧
+    (∀ hyp : hypBE, ∀ r, 1 ≤ r →
+      ∃ N, ∀ S : List Nat, lenB S = r → powerful (sumFacts S) → sumFacts S ≤ N) ∧
+    (∀ h : ∃ M, ∀ S : List Nat, ∀ n : Nat, sumFacts S = n * n → sumFacts S ≤ M,
+      ∃ N, ∀ u, (∃ n, fact u + 1 = n * n) → u ≤ N) ∧
+    (∀ u p, 2 ≤ u → p.Prime → p ≤ u → vp p (sumFacts [1, u]) = 0) ∧
+    (∀ u, 2 ≤ u → v2 (sumFacts [1, u]) = 0) ∧
+    (∀ u n, 2 ≤ u → sumFacts [1, u] = n * n →
+      ∀ p, p.Prime → p ≤ u → ¬ p ∣ n) ∧
+    erdos1108ap_arsenal_bridge :=
+  ⟨fun p b S hp hbS hb => all_prime_isolated_min p b hp S hbS hb,
+   fun p b S k n hp hbS hb hk hknot =>
+     all_prime_power_obstruction p b hp S hbS hb k n hk hknot,
+   fun S n k hS hk h => r5_obstruction_web S hS n k hk h,
+   legendre_v2_fact,
+   explicit_cascade,
+   v2_pow,
+   fun k n hk => r2_kth_powerful k n hk,
+   fun h k hk => r2_q2_imp_q1 h k hk,
+   fun hyp r k hr hk => r4_kth_power_bounded hyp r k hr hk,
+   fun hyp r hr => r4_powerful_bounded hyp r hr,
+   fun h => r6_brocard_bounded h,
+   fun u p hu hp hppu => r7_channel_vp_zero u p hp hu hppu,
+   fun u hu => r7_channel_v2_zero u hu,
+   fun u n hu h p hp hppu => r7_window_avoid u n hu h p hp hppu,
+   erdos1108ap_arsenal_bridge⟩
+
 /-! ## §13 RECEIPTS (the complete board). -/
 
 -- The Brocard channel receipts: v₂(1 + u!) = 0 at the three known
@@ -1284,6 +1375,7 @@ theorem erdos1108ap_complete :
 -- expected (0, 0, 0, 0)
 
 #eval "ERDOS1108_ALLPRIME_COMPLETE_GREEN"
+#eval "ERDOS1108_COMPLETE_GREEN"
 
 #print axioms fact_bridge
 #print axioms sumFacts_bridge
@@ -1300,5 +1392,6 @@ theorem erdos1108ap_complete :
 #print axioms r7_channel_v2_zero
 #print axioms r7_window_avoid
 #print axioms erdos1108ap_complete
+#print axioms erdos1108_complete
 
 end Erdos1108AP

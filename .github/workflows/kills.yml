@@ -731,11 +731,18 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
+          mkdir -p oleans1108
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans1108${LP:+:$LP}"
           : > kernel30.log
+          echo "=== SubsetKernelLaw (to olean) ===" >> kernel30.log
+          lake env lean -o oleans1108/SubsetKernelLaw.olean problem1108-subset-kernel/SubsetKernelLaw.lean 2>&1 | tee -a kernel30.log
+          echo "=== Erdos1108AllPrime ===" >> kernel30.log
           lake env lean problem1108-allprime/Erdos1108AllPrime.lean 2>&1 | tee -a kernel30.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel30.log
           grep -F "ERDOS1108_ALLPRIME_KERNEL_GREEN" kernel30.log
-          grep -E "Erdos1108AP.(singleton_bottom_residue|all_prime_isolated_min|isolated_min_congruence|all_prime_power_obstruction|isolated_min_block_form|erdos1108ap_arsenal_bridge|erdos1108ap_main)' (does not depend on any axioms|depends on axioms)" kernel30.log
+          grep -F "ERDOS1108_COMPLETE_GREEN" kernel30.log
+          grep -E "Erdos1108AP.(singleton_bottom_residue|all_prime_isolated_min|isolated_min_congruence|all_prime_power_obstruction|isolated_min_block_form|erdos1108ap_arsenal_bridge|erdos1108ap_main|erdos1108_complete|erdos1108ap_complete)' (does not depend on any axioms|depends on axioms)" kernel30.log
           test "$(grep -cF '(1, 0, 1, 1, 0)' kernel30.log)" -ge 2
           python3 problem1108-allprime/battery1108ap.py
           echo ERDOS1108_ALLPRIME_KERNEL_GREEN=1
@@ -827,6 +834,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel35.log
           grep -F "ERDOS461_KERNEL_GREEN" kernel35.log
           grep -E "Erdos461.(spart_dvd|spart_eq_pow|scomp_dvd|achieve1|achieve2|achieve3|stab1|stab2|stab3|ergra|erdos461_min14|erdos461_min20|erdos461_min30|erdos461_min40|erdos461_arsenal_bridge|erdos461_main)' (does not depend on any axioms|depends on axioms)" kernel35.log
+          grep -E "Erdos461.(erdos461_anchor|erdos461_dvd_sub|erdos461_spacing|erdos461_complete)' (does not depend on any axioms|depends on axioms)" kernel35.log
+          grep -F "ERDOS461_COMPLETE_GREEN" kernel35.log
           python3 problem461-smooth-component/battery461.py
           echo ERDOS461_SMOOTH_COMPONENT_KERNEL_GREEN=1
 

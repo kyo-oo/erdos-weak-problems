@@ -3,6 +3,7 @@ import Arsenal.CardinalWorlds
 import Arsenal.CardinalWorldsV2
 
 set_option maxRecDepth 65536
+set_option maxHeartbeats 16000000
 
 /-! # Erdős #282 — THE ODD-GREEDY TERMINATION LAWS (S036 volley, Kernel 28)
 
@@ -34,11 +35,33 @@ remains open and is NOT claimed)
    rational $p/q \in (0,1)$ with $q$ odd, $q \le 41$, terminates under
    the odd-greedy — kernel-decided (420 pairs, deepest trajectory 12
    steps at $38/39$).
+5. **THE FAITHFULNESS LAWS** (`erdos282_step_domain`,
+   `erdos282_step_value` - F1.4 + F1.2 of COMPLETE_PROOF.md Sect. 2):
+   every greedy step from a live state lands in the domain ($p' \le q'$ -
+   the laws' hypotheses re-arise at every step of every trajectory), and
+   preserves the rational exactly ($p/q = 1/n + p'/q'$ - the corpus
+   algorithm's $x \mapsto x - 1/n$; the reduction by $g$ is value-neutral).
+6. **THE REPRESENTATION LAW** (`erdos282_representation`): IF the
+   odd-greedy terminates from $p/q$ ($1 \le p \le q$), THEN $x$ is exactly
+   a finite sum of unit fractions $1/d$ with odd denominators $d \ge 1$ -
+   the corpus statement's then-clause ("this produces a representation of
+   $x$ as the sum of unit fractions with denominators from $A$" at $A$ =
+   the odd numbers), complete and unconditional.
+7. **THE COMPLETE BOARD** (`erdos282_complete`): the one-statement
+   assembly of everything the #282 ask delivers unconditionally - L1
+   (odd-closure), L2 (doubling) + F1.4 (domain perpetuation), L3 (engine
+   soundness), the representation then-clause, the L4 census band, and
+   the arsenal bridge.
 
 Honest scope: Stein's general conjecture (all odd denominators) remains
 open; the battery census extends termination to every odd $q \le 301$
 (22,650 pairs, all terminate, deepest 20 steps at $102/293$ — engine
-evidence, not claimed as theorem).
+evidence, not claimed as theorem). DOC ERRATUM, honestly scoped: the
+corpus statement's parenthetical "distinct" unit fractions is FALSE in
+the odd habitat - the kernel-decided census itself contains
+4/5 = 1/3 + 1/3 + 1/9 + 1/45 (denominator 3 twice, certified trajectory
+[3, 3, 9, 45]) - so the representation law claims odd, finite, exact -
+NOT distinctness.
 -/
 
 namespace Erdos282
@@ -320,6 +343,133 @@ theorem erdos282_main :
    ⟨fun q p hqodd hq41 hp1 hplt => erdos282_census q p hqodd hq41 hp1 hplt,
    erdos282_arsenal_bridge⟩⟩⟩⟩
 
+/-! ## §10 THE FAITHFULNESS LAWS (COMPLETE_PROOF.md Sect. 2, Lemma F1).
+
+The encoding IS the corpus algorithm. F1.4 (domain perpetuation): a
+step from a live state 1 ≤ p ≤ q lands in a live-or-terminal state
+(p' ≤ q'), so the laws' hypotheses re-arise at every step of every
+trajectory. F1.2 (value preservation): the step preserves the rational
+exactly, x = 1/n + x' - the corpus algorithm's x ↦ x − 1/n; the
+reduction by g is value-neutral. Together with `greedyN_spec` (F1.1,
+landed above) and `TerminateIn`'s exact-zero clause (F1.3), the
+faithfulness board is complete. -/
+
+/-- **F1.4 - the domain-perpetuation law.** Every certified greedy step
+from a live state lands in the domain: p' ≤ q'. -/
+theorem erdos282_step_domain (p q p' q' : Nat) (hstep : GreedyStep p q p' q')
+    (hp1 : 1 ≤ p) (hpq : p ≤ q) : p' ≤ q' := by
+  obtain ⟨n, g, -, -, hqle, -, hg1, -, -, hp'g, hq'g⟩ := hstep
+  have hpn : p' * g + q = p * n := by omega
+  have hpnqn : p * n ≤ q * n := Nat.mul_le_mul_right n hpq
+  have hle : p' * g ≤ q' * g := by omega
+  exact Nat.le_of_mul_le_mul_right hle (by omega)
+
+/-- **F1.2 - the value-preservation law.** One certified greedy step
+satisfies the corpus algorithm's exact arithmetic: p/q = 1/n + p'/q'
+(the common divisor g cancels: p'·g = p·n − q and q'·g = q·n). -/
+theorem erdos282_step_value (p q p' q' n g : Nat) (hn1 : 1 ≤ n) (hg1 : 1 ≤ g)
+    (hqle : q ≤ p * n) (hp'g : p' * g = p * n - q) (hq'g : q' * g = q * n)
+    (hq1 : 1 ≤ q) (hq'1 : 1 ≤ q') :
+    (p:ℚ)/q = (1:ℚ)/n + (p':ℚ)/q' := by
+  have hq0 : (q:ℚ) ≠ 0 := Nat.cast_ne_zero.mpr (fun h => by omega)
+  have hn0 : (n:ℚ) ≠ 0 := Nat.cast_ne_zero.mpr (fun h => by omega)
+  have hq'0 : (q':ℚ) ≠ 0 := Nat.cast_ne_zero.mpr (fun h => by omega)
+  have hpn : p' * g + q = p * n := by omega
+  have hE1 : (p':ℚ) * g + q = (p:ℚ) * n := by exact_mod_cast hpn
+  have hE2 : (q':ℚ) * g = (q:ℚ) * n := by exact_mod_cast hq'g
+  rw [div_add_div (1:ℚ) (p':ℚ) hn0 hq'0,
+      div_eq_div_iff hq0 (mul_ne_zero hn0 hq'0)]
+  linear_combination (p':ℚ) * hE2 - (q':ℚ) * hE1
+
+/-! ## §11 THE REPRESENTATION LAW (the corpus statement's then-clause:
+termination implies the unit-fraction representation, complete and
+unconditional - the full conditional half of the #282 ask). -/
+
+/-- **The representation law.** If the odd-greedy process terminates
+from p/q (p ≤ q, q ≥ 1), then x = p/q is exactly a finite sum of unit
+fractions 1/d whose denominators d are odd and ≥ 1 - "this produces a
+representation of x as the sum of unit fractions with denominators
+from A" at A = the odd numbers. The corpus's parenthetical "distinct"
+is FALSE in the odd habitat (4/5 = 1/3 + 1/3 + 1/9 + 1/45 sits inside
+the kernel-decided census) - hence claimed honestly: odd, finite,
+exact. -/
+theorem erdos282_representation : ∀ k p q, TerminateIn k p q → p ≤ q → 1 ≤ q →
+    ∃ ds : List Nat, (∀ d ∈ ds, 1 ≤ d ∧ d % 2 = 1) ∧
+      (p:ℚ)/q = (ds.map (fun d => (1:ℚ)/d)).sum := by
+  intro k
+  induction k with
+  | zero =>
+    intro p q h hpq hq1
+    have h0 : p = 0 := h
+    subst h0
+    refine ⟨[], ?_, ?_⟩
+    · intro d hd
+      exact (List.mem_nil_iff.mp hd).elim
+    · simp
+  | succ f ih =>
+    intro p q h hpq hq1
+    rcases h with h0 | ⟨p', q', hstep, hterm⟩
+    · -- terminal state inside the fuel: the empty representation
+      subst h0
+      refine ⟨[], ?_, ?_⟩
+      · intro d hd
+        exact (List.mem_nil_iff.mp hd).elim
+      · simp
+    · obtain ⟨n, g, hnodd, hn1, hqle, _, hg1, _, _, hp'g, hq'g⟩ := hstep
+      -- the state is live: 1 ≤ p
+      have hp1 : 1 ≤ p := by
+        by_cases hp0 : p = 0
+        · rw [hp0, Nat.mul_zero] at hqle
+          exact (by omega : False).elim
+        · omega
+      -- the next denominator is positive: 1 ≤ q'
+      have hq'1 : 1 ≤ q' := by
+        by_cases hq'z : q' = 0
+        · rw [hq'z, Nat.mul_zero] at hq'g
+          rcases Nat.mul_eq_zero.mp hq'g.symm with hq0' | hn0'
+          · exact (by omega : False).elim
+          · exact (by omega : False).elim
+        · omega
+      -- F1.4: the residual state stays in the domain
+      have hp'q' : p' ≤ q' := erdos282_step_domain p q p' q' hstep hp1 hpq
+      obtain ⟨ds', hall', hval'⟩ := ih p' q' hterm hp'q' hq'1
+      -- F1.2: the exact value equation for this step
+      have hv : (p:ℚ)/q = (1:ℚ)/n + (p':ℚ)/q' :=
+        erdos282_step_value p q p' q' n g hn1 hg1 hqle hp'g hq'g hq1 hq'1
+      refine ⟨n :: ds', ?_, ?_⟩
+      · intro d hd
+        rcases List.mem_cons.mp hd with rfl | hd'
+        · exact ⟨hn1, hnodd⟩
+        · exact hall' d hd'
+      · calc (p:ℚ)/q = (1:ℚ)/n + (p':ℚ)/q' := hv
+        _ = (1:ℚ)/n + (ds'.map (fun d => (1:ℚ)/d)).sum := by rw [hval']
+        _ = ((n :: ds').map (fun d => (1:ℚ)/d)).sum := by
+            simp only [List.map_cons, List.sum_cons]
+
+/-! ## §12 THE COMPLETE BOARD (the one-statement complete unconditional
+answer to the #282 ask per COMPLETE_PROOF.md's final section: the
+habitat law, the well-formedness laws, the verification engine, the
+corpus then-clause, the kernel-decided census band, and the arsenal
+bridge - the open global termination core is NOT claimed). -/
+
+theorem erdos282_complete :
+    (∀ q q' n g, q % 2 = 1 → n % 2 = 1 → 1 ≤ g → q' * g = q * n → q' % 2 = 1) ∧
+    (∀ p q p' q', GreedyStep p q p' q' → 1 ≤ p → p ≤ q → p' < 2 * p ∧ p' ≤ q') ∧
+    (∀ fuel p q, simTerm fuel p q = true → TerminateIn fuel p q) ∧
+    (∀ q p, q % 2 = 1 → 1 ≤ p → p ≤ q → (∃ k, TerminateIn k p q) →
+      ∃ ds : List Nat, (∀ d ∈ ds, 1 ≤ d ∧ d % 2 = 1) ∧
+        (p:ℚ)/q = (ds.map (fun d => (1:ℚ)/d)).sum) ∧
+    (∀ q p, q % 2 = 1 → q ≤ 41 → 1 ≤ p → p < q → ∃ k, TerminateIn k p q) ∧
+    arsenalBridgeProp :=
+  ⟨fun q q' n g hq hn hg heq => erdos282_odd_closure 0 q 0 q' n g hq hn hg heq,
+   ⟨fun p q p' q' hstep hp1 hpq =>
+     ⟨erdos282_step_bound p q p' q' hstep hpq hp1,
+      erdos282_step_domain p q p' q' hstep hp1 hpq⟩,
+   ⟨fun fuel p q h => simTerm_sound fuel p q h,
+   ⟨fun q p _ hp1 hpq ⟨k, hk⟩ => erdos282_representation k p q hk hpq (by omega),
+   ⟨fun q p hqodd hq41 hp1 hplt => erdos282_census q p hqodd hq41 hp1 hplt,
+   erdos282_arsenal_bridge⟩⟩⟩⟩⟩⟩
+
 #eval "ERDOS282_STEIN_KERNEL_GREEN"
 #print axioms erdos282_odd_closure
 #print axioms erdos282_step_bound
@@ -327,5 +477,10 @@ theorem erdos282_main :
 #print axioms erdos282_census
 #print axioms erdos282_arsenal_bridge
 #print axioms erdos282_main
+#print axioms erdos282_step_domain
+#print axioms erdos282_step_value
+#print axioms erdos282_representation
+#print axioms erdos282_complete
+#eval "ERDOS282_COMPLETE_GREEN"
 
 end Erdos282

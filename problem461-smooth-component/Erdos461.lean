@@ -442,4 +442,104 @@ theorem erdos461_main :
 #print axioms erdos461_arsenal_bridge
 #print axioms erdos461_main
 
+/-! ## §7 THE COMPLETE ASSEMBLY (S050-C2: the doc's final board, quantifier-for-quantifier).
+
+`COMPLETE_PROOF.md` §1 (the board) / §4 (the verdict): the corpus ask Ω — the uniform
+$f(n,t)\gg t$ for all $t$ and $n$ — is OPEN and is NOT asserted here; no sub-case is
+dressed as the answer. Assembled below as ONE flat unconditional theorem: the
+extraction laws (K1), the 119-row achievement table with the anchor $f(1892,120)=69$
+(K2), the stability law (K3), the Erdős–Graham beating (K4), the four both-direction
+censuses (K5), the arsenal bridge (K6), and the collapse law G2 — equal smooth values
+force spacing — now Lean-green as thin glue over the extraction law `scomp_dvd`. -/
+
+/-- **THE ANCHOR ROW** (K2's called-out witness): $f(1892,120)=69$ — the last
+row of the achievement table (ACH3), kernel-decided ground row (the w14–w40
+witness pattern). -/
+theorem erdos461_anchor : f461 1892 120 = 69 := by decide
+
+/-- The manual dvd-sub (Nat.dvd_sub' does not exist in this toolchain — the
+green K-family pattern; cf. Erdos394's dvd_sub_nat). -/
+theorem erdos461_dvd_sub {p x y : Nat} (hxy : y ≤ x) (hx : p ∣ x) (hy : p ∣ y) :
+    p ∣ x - y := by
+  rcases Nat.eq_zero_or_pos p with hpz | hp0
+  · rw [hpz] at hx hy
+    have hx0 : x = 0 := by obtain ⟨u, hu⟩ := hx; omega
+    have hy0 : y = 0 := by obtain ⟨w, hw⟩ := hy; omega
+    rw [hpz]
+    refine ⟨0, ?_⟩
+    rw [hx0, hy0]
+  · obtain ⟨u, hu⟩ := hx
+    obtain ⟨w, hw⟩ := hy
+    have hwu : w ≤ u := by
+      by_contra hcon
+      have hu1 : u + 1 ≤ w := by omega
+      have hstep : p * (u + 1) = p * u + p := by rw [Nat.mul_add, Nat.mul_one]
+      have hle : p * (u + 1) ≤ p * w := Nat.mul_le_mul_left p hu1
+      omega
+    exact ⟨u - w, by rw [hu, hw, Nat.mul_sub]⟩
+
+/-- **G2 — THE COLLAPSE LAW** (the doc board's spacing row, COMPLETE_PROOF.md
+§3.2): equal smooth values force spacing — if $s_t(m)=s_t(m')$ (the same value
+$v$, any prime list) with $m\ne m'$, then $|m-m'|\ge v$ (Nat form:
+$v\le m-m'$ or $v\le m'-m$). -/
+theorem erdos461_spacing (ps : List Nat) (hall : ∀ p ∈ ps, 2 ≤ p) (m m' : Nat)
+    (he : scomp ps m = scomp ps m') (hne : m ≠ m') :
+    scomp ps m ≤ m - m' ∨ scomp ps m ≤ m' - m := by
+  have h1 : scomp ps m ∣ m := scomp_dvd ps hall m
+  have h2 : scomp ps m ∣ m' := by rw [he]; exact scomp_dvd ps hall m'
+  rcases Nat.lt_trichotomy m m' with hlt | heq | hgt
+  · right
+    have hd : scomp ps m ∣ m' - m := erdos461_dvd_sub (by omega) h2 h1
+    rcases Nat.eq_zero_or_pos (m' - m) with h0 | hpos
+    · omega
+    · exact Nat.le_of_dvd hpos hd
+  · exact (hne heq).elim
+  · left
+    have hd : scomp ps m ∣ m - m' := erdos461_dvd_sub (by omega) h1 h2
+    rcases Nat.eq_zero_or_pos (m - m') with h0 | hpos
+    · omega
+    · exact Nat.le_of_dvd hpos hd
+
+/-- **THE COMPLETE ASSEMBLY** — the doc's final board (COMPLETE_PROOF.md §1/§4),
+quantifier-for-quantifier, no sub-cases: the complete unconditional answer of the
+green kernel spine (every component a green census law of this kernel or thin
+glue over one). -/
+theorem erdos461_complete :
+    (∀ (p : Nat), 2 ≤ p → ∀ m : Nat, spart p m = p ^ vp p m) ∧
+    (∀ (ps : List Nat), (∀ p ∈ ps, 2 ≤ p) → ∀ m : Nat, scomp ps m ∣ m) ∧
+    ACH1.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) ∧
+    ACH2.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) ∧
+    ACH3.all (fun r => decide (f461 r.2.1 r.1 = r.2.2)) ∧
+    f461 1892 120 = 69 ∧
+    (ACH1.filter (fun r => decide (14 ≤ r.1))).all
+      (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) ∧
+    (ACH2.filter (fun r => decide (14 ≤ r.1))).all
+      (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) ∧
+    (ACH3.filter (fun r => decide (14 ≤ r.1))).all
+      (fun r => decide (55 * r.1 ≤ 100 * r.2.2 ∧ 100 * r.2.2 ≤ 65 * r.1)) ∧
+    ERGRA.all (fun r =>
+      ((ACH1 ++ ACH2 ++ ACH3).any (fun a => decide (a.1 = r.1 ∧ a.2.2 = r.2.1))) &&
+      decide (1000 * r.1 ≤ r.2.1 * r.2.2)) ∧
+    ((∀ n : Nat, n < 480 → 9 ≤ f461 n 14) ∧ f461 33 14 = 9) ∧
+    ((∀ n : Nat, n < 480 → 13 ≤ f461 n 20) ∧ f461 198 20 = 13) ∧
+    ((∀ n : Nat, n < 480 → 19 ≤ f461 n 30) ∧ f461 121 30 = 19) ∧
+    ((∀ n : Nat, n < 480 → 25 ≤ f461 n 40) ∧ f461 162 40 = 25) ∧
+    [1892 % 3, (1892 / 3) % 3, (1892 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+    [2930 % 3, (2930 / 3) % 3, (2930 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+    carryAtPos 1892 1 < 4 ∧
+    v2r (3 ^ 2 * 69) = v2r 69 ∧
+    (∀ (ps : List Nat), (∀ p ∈ ps, 2 ≤ p) → ∀ (m m' : Nat),
+      scomp ps m = scomp ps m' → m ≠ m' →
+      scomp ps m ≤ m - m' ∨ scomp ps m ≤ m' - m) :=
+  ⟨spart_eq_pow, scomp_dvd, achieve1, achieve2, achieve3, erdos461_anchor,
+   stab1, stab2, stab3, ergra,
+   erdos461_min14, erdos461_min20, erdos461_min30, erdos461_min40,
+   erdos461_arsenal_bridge, erdos461_spacing⟩
+
+#print axioms erdos461_anchor
+#print axioms erdos461_dvd_sub
+#print axioms erdos461_spacing
+#print axioms erdos461_complete
+#eval "ERDOS461_COMPLETE_GREEN"
+
 end Erdos461
