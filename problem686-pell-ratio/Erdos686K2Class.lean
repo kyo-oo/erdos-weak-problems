@@ -188,9 +188,14 @@ theorem gap_mod4 (y : Nat) (hy4 : y % 4 = 2) (hy : 2 ≤ y) (i : Nat) :
     have hm2 := chev_mono y hy (i + 1)
     -- canonical indices ONLY (omega atoms: chev y (i+1+1) ≠ chev y (i+2))
     show (chev y (i + 2) - chev y (i + 1)) % 4 = 1
-    have hPmod : (y * chev y (i + 1)) % 4 = (2 * chev y (i + 1)) % 4 := by
-      rw [Nat.mul_mod, Nat.mul_mod, hy4]
+    -- the constant-RHS congruence route (omega cannot chain non-constant mod-eqs):
+    have hZmod : ((y - 2) * chev y (i + 1)) % 4 = 0 := by
+      rw [Nat.mul_mod, show (y - 2) % 4 = 0 by omega]
       omega
+    have hYsplit : y * chev y (i + 1) = (y - 2) * chev y (i + 1) + 2 * chev y (i + 1) := by
+      have hy2 : y - 2 + 2 = y := by omega
+      calc y * chev y (i + 1) = (y - 2 + 2) * chev y (i + 1) := by rw [hy2]
+        _ = (y - 2) * chev y (i + 1) + 2 * chev y (i + 1) := Nat.add_mul _ _ _
     omega
 
 /-- Gaps grow: y − 1 ≤ g_k for all k ≥ 1 (g_{k+1} = g_k + (y−2)·a_{k+1} ≥ g_k). -/
@@ -318,7 +323,8 @@ theorem mutual_step (u₀ u₁ : Nat) (hu1 : 2 ≤ u₁) (hslt : u₁ < u₀)
   have hexact : u₀ * ((u₁ * u₁ - 1) / u₀) = u₁ * u₁ - 1 := by
     rw [hu2val]
     exact hc.symm
-  have hd2' : ((u₁ * u₁ - 1) / u₀) ∣ u₁ * u₁ - 1 := ⟨u₀, by rw [Nat.mul_comm]; exact hexact⟩
+  have hd2' : ((u₁ * u₁ - 1) / u₀) ∣ u₁ * u₁ - 1 :=
+    ⟨u₀, by rw [Nat.mul_comm ((u₁ * u₁ - 1) / u₀) u₀]; exact hexact.symm⟩
   have hu2lt : (u₁ * u₁ - 1) / u₀ < u₁ := by
     have hmono : u₁ * (u₁ + 1) ≤ u₀ * u₁ := by
       have h := Nat.mul_le_mul_left u₁ (show u₁ + 1 ≤ u₀ by omega)
@@ -343,7 +349,8 @@ theorem mutual_step (u₀ u₁ : Nat) (hu1 : 2 ≤ u₁) (hslt : u₁ < u₀)
   have hA : u₁ ∣ (u₀ * E - 1) * (u₀ * E + 1) := hdW.mul_left (u₀ * E - 1)
   have hC : u₁ ∣ (u₀ * u₀ - 1) * (E * E) := by
     obtain ⟨cc, hcc⟩ := hd2
-    exact ⟨cc * (E * E), by rw [← hcc]; ring⟩
+    refine ⟨cc * (E * E), ?_⟩
+    rw [Nat.mul_assoc u₁ cc (E * E), ← hcc]
   have hsa := sub_add_mul (u₀ * E) 1 hW1
   have hQZ : (u₀ * u₀ - 1) * (E * E) = (u₀ * u₀) * (E * E) - E * E := by
     have hpos : 1 ≤ u₀ * u₀ := Nat.mul_pos (by omega) (by omega)
@@ -481,7 +488,7 @@ theorem erdos686k2class (t : Nat) (h2 : 2 ≤ t) :
       obtain ⟨u, hu⟩ := hdvd12
       have hA5 : 1 ≤ d1 * d1 := Nat.mul_pos (by omega) (by omega)
       refine ⟨d1 * w - u, ?_⟩
-      have e2 : t * (d1 * w) = d1 * (d1 + d2) := by rw [← hw]; ring
+      have e2 : t * (d1 * w) = d1 * (d1 + d2) := by rw [hw]; ring
       have e1 : d1 * (d1 + d2) = d1 * d1 + d1 * d2 := by ring
       have hmsexp : t * (d1 * w - u) = t * (d1 * w) - t * u := by
         rcases Nat.lt_or_ge u (d1 * w) with h | h
