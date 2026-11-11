@@ -36,6 +36,7 @@ on:
       - problem1073-factorial-mod/**
       - problem461-smooth-component/**
       - problem271-status/**
+      - problem261-full/**
       - problem406-ternary-powers/**
       - .github/workflows/kills.yml
   workflow_dispatch:
@@ -618,7 +619,7 @@ jobs:
           lake env lean problem711-divisor-matching/Erdos711.lean 2>&1 | tee -a kernel24.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel24.log
           grep -F "ERDOS711_KERNEL_GREEN" kernel24.log
-          grep -E "Erdos711.erdos711_(forced_pair|obstruction|two|three|law|period|cover|arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel24.log
+          grep -E "Erdos711.erdos711_(forced_pair|obstruction|two|three|law|period|cover|arsenal_bridge|universal_bounded|max_exact_bounded|fn_bounded|ask2_bounded|gap_24|upper_general|universal|max_exact|ask1_eps|ask2_tends)' (does not depend on any axioms|depends on axioms)" kernel24.log
           python3 problem711-divisor-matching/battery711.py
           echo ERDOS711_DIVISOR_SCHEDULING_KERNEL_GREEN=1
 
@@ -894,3 +895,15 @@ jobs:
           grep -E "Erdos686K2Class.(cassini|chain_of_mutual|erdos686k2class|erdos686k2_nogo|erdos686k2class_main)' (does not depend on any axioms|depends on axioms)" kernel42.log
           python3 problem686-pell-ratio/battery686k2class.py
           echo ERDOS686K2CLASS_KERNEL_GREEN=1
+
+      - name: "Kernel 43 - Erdos 261 THE AP RATIONALITY ENGINE (S048 full-proof campaign, P261 strike): ap_sum_kernel — the finite kernel of the Q3 bridge's rationality lemma (cited since Kill #8, battery-verified since W5, now formalized): for all r T K: Sum_{k<=K}(r+kT)*2^{K-k} = r(2^{K+1}-1) + T(2^{K+1}-K-2) — the two CI-green Kill #8 engines (jpow_sum_eq, pow_sum_eq) become degenerate points of this ONE law; core-only, general induction, receipts 120/399/4239/217/120 pairs + the Rat mirror 15/4"
+        if: always()
+        shell: bash
+        run: |
+          lake env lean problem261-full/APRationality.lean 2>&1 | tee kernel43.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel43.log
+          grep -F "AP261_KERNEL_GREEN" kernel43.log
+          grep -E "ap_sum_kernel' (does not depend on any axioms|depends on axioms)" kernel43.log
+          grep -E "apSum_split' (does not depend on any axioms|depends on axioms)" kernel43.log
+          grep -E "jpow_sum_eq' (does not depend on any axioms|depends on axioms)" kernel43.log
+          echo AP261_RATIONALITY_KERNEL_GREEN=1
