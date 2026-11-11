@@ -2104,3 +2104,51 @@ invocation rules and follow them accurately, go"
   N (⌈3n/2⌉) ⟹ max_m f = 2n−1 = n^{1+o(1)} (ask 1, exact constant) +
   max_m(f−f(n,n)) ≥ ⌊n/2⌋−1 → ∞ (ask 2). THE COMPLETE #711. Next:
   DERIVATION.md + HallLaw.lean + battery + CI war.
+
+---
+
+## SESSION 045 (round 1) — THE WAVE PIPELINE + THE K42 REWRITE WAR
+
+**BOSS's order:** "GO GO GO, DON'T STOP!! WE HAVE MANY TARGETS AHEAD. FASTER YOUR
+LEAN WORK. FULL POWER, INVOKE THE MATHS SKILL AND ITS ENGINE, DO NOT STOP!!"
+
+**Executed (the BOSS pipeline: sub-agents write the complete LaTeX → commander
+converts to Lean → green):**
+
+1. **THE CHAIN:** MATHS skill invoked at open (the law) + full state recovery
+   verified (git tip 618f295, registry 41 kills, K42 r1 FAILED in CI).
+
+2. **WAVE 1 (5 agents):** W1 (#686 K2 descent) DELIVERED — 444-line complete
+   LaTeX proof, ALL 8 theorems PROVEN, CI root cause exposed (ONE false lemma
+   `gap_hop` + ONE false bridge conjunct + ONE parse bug); W3 (#271 Stanley)
+   DELIVERED — 675-line COMPLETE_PROOF (M1 the complete A(2) characterization
+   + F1 OdStFamily all j≥1 + growth triptych). W2/W4/W5 dead (context
+   deadline — L78).
+
+3. **THE K42 REWRITE (commander, round 2):** Erdos686K2Class.lean REWRITTEN —
+   R1 (false gap_hop DELETED; Route B: gap_mod4/gap_ge replace it), R2 (descent
+   rebuilt: mutual_step exports positivity; Cassini-climb via the CI-green
+   `Nat.mul_div_cancel_left` division pattern — the mul_right_cancel
+   signature risk eliminated), R3 (bridge conjunct → v2r (3^2·2401) = v2r 2401
+   verbatim), witness statement parens fix, ~38 CI error sites killed.
+   Pushed d3fe24f — CI run 43023692349 IN FLIGHT.
+
+4. **WAVE 3 (5 agents, tightened briefs):** W6 (#961) DELIVERED — 505-line
+   COMPLETE_PROOF (f(k) table certified k=2..12 via Størmer–Pell census, the
+   40-pair 11-smooth census, no-4-run, f(13)≥5); W7 (#1056) DELIVERED —
+   519-line COMPLETE_PROOF (k=4..11 smallest-witness case theorems + structure
+   law + Wilson force-pair + frontier bar, dual-method certified). W2r/W4r/
+   W5r dead — **L78 CALIBRATED: tight-brief agents with strong existing
+   derivations survive; synthesis-from-scatter dies. THE ARCHITECTURE LAW:
+   the commander writes #711/#727/#261 derivations himself (the 41-kill
+   pattern).**
+
+5. **#711 state:** the war-map re-read; the antichain union bound = the last
+   mile (engine-certified deficiency-0; the {n−1,n} obstruction tightness
+   proves the bound exact). THE NEXT ROUND'S COMMANDER FRONT.
+
+**CI STATE:** K42 r2 verdict run 43023692349 (d3fe24f) in flight (~40 min).
+Wave deliverables banked: #686-K2, #271, #961, #1056 COMPLETE_PROOF.md files
+CI-committed (d016305, 30f462b). Lean conversion of #271/#961/#1056 queued
+behind the K42 verdict.
+
