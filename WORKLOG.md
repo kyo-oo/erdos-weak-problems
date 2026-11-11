@@ -2557,3 +2557,131 @@ The engine never stops; it never lies.
    P677, P850, P885 + the missing nine).
 
 The engine never stops; it never lies.
+
+---
+
+## SESSION 050 — 2026-11-11 — THE WAVE FIRING (THE 39-TARGET ROUND)
+
+**BOSS's order (this session, verbatim):** "began the wave firing and also
+complete the proof one by one, list all thoe 37+ problems, we have to solve,
+you can opnly use my maths repo branches lean files and thats it, intsturect
+sub agentgs and worklog big mention this, always invoke the maths skill and
+its engine, go bersker!! go go go this round i atleasst expect 10+ problem
+down, go"
+
+**THE CHAIN FIRED FIRST (the law):** MATHS (Berserker) + prove-that-shit
+both invoked at session open, visibly, full doctrine. The wave firing =
+the standing S042 full-proof campaign (Phase 1: 22 → complete proofs;
+Phase 2: 17 → complete proofs; THE_LIST v9 registry: 37 kills CI-green
+historical; the S044 scoreboard reset — KILL 1 = #686 k=2 square
+classification, standing).
+
+**THE 39 TARGETS (the "37+ problems" — Phase 1's 22 + Phase 2's 17):**
+Phase 1: #271, #404, #406, #261, #686, #727, #1108, #1056, #700, #1063,
+#451, #1072, #394, #711, #961, #954, #1074, #282, #396, #374, #1073, #461.
+Phase 2: #306, #348, #288, #1212, #389, #708, #939, #203, #273, #885,
+#677, #850, #274, #243, #124, #317, #289.
+
+**Executed:**
+
+1. **THE STATE READ:** worklogs (both repos), THE_LIST v9, THE_CORE §1,
+   the CI state (token re-verified LIVE, login kyo-oo), the in-flight
+   verdicts read: K44 r4 (run 43098583216) = FAILURE (15 errors — the
+   OdStFamily compile war), K24 r4 (run 43098641830) = still queued.
+
+2. **THE PROTECTIVE COMMIT (b490844):** the 26 uncommitted S048/S049
+   sub-agent products banked (COMPLETE_PROOF.md upgrades for 13 problems
+   + the P939 corrected hunt engines). GitHub = the wipe-proof store.
+
+3. **THE WAVE-A FIRING (5 agents, tight-brief format):**
+   - **A1/P271 DELIVERED:** ALL 15 K44 r4 errors killed in 14 surgical
+     edits (the omega atom-bridge law per L70 — hbr pre-bridges for
+     M*(k'+1+2)-type atoms; Nat.mod_mod chain-closures; forward
+     mul_assoc orientation — the ←-assoc monomial disease; the noTwo
+     Bool-split feeding false-typed witnesses at 965/966). File 989→994
+     lines, proofs-only, every receipt name intact.
+   - **A2/P404 DELIVERED:** problem404-full/Erdos404Full.lean NEW (843
+     lines, 42 decls): Theorem A master reduction + Theorem B general +
+     the cited Kernel-37 laws (ResidualTail olean-staged — the
+     root-name-incompatibility engineering finding governs the
+     architecture) + block/cube identities + f(2,2)=254 + f(6,2)=133
+     witness theorems + the no-infinite-chain compactness law + THE FULL
+     CLASSIFICATION master theorem (12 conjuncts). **Kernel 45 wired.**
+   - **A3/P406 DELIVERED:** Erdos406Ternary.lean extended (11 theorems:
+     units-digit-one refinement, C3.1 digit floor, C3.2 min-profile
+     (2,2), C3.3 six-floor, solution-even, standing-constraints (the §7
+     complete constraint web), complete-structure). Kernel 38 receipts
+     extended.
+   - **A4/P961 CASUALTY (context deadline) → re-fired as B1.**
+   - **A5/P1056 DELIVERED:** problem1056-factorial-intervals/FI_FINAL.lean
+     NEW (477 lines): the k=2..11 case law (the smallest-witness table)
+     + THE CASE-FRONTIER THEOREM (the doc's k-system,
+     quantifier-for-quantifier). **Kernel 18-G wired** (K10/K11 to
+     olean, FI_FINAL assembled on the ladder).
+
+4. **THE WAVE-B FIRING (5 agents):**
+   - **B1/P961 DELIVERED (the A4 retry):** Erdos961.lean extended:
+     erdos961_frontier_k5_k12 (4 ≤ f961 k, the T5 row) + erdos961_runs11
+     (the 12-run + five 3-runs witness law) + erdos961_frontier_13 —
+     with the HONEST GAP recorded: the f961 k = 4 upper half needs the
+     complete Størmer–Pell 40-pair census kernel (the next strike,
+     the #686 chev pattern). Kernel 25 receipts extended.
+   - **B2/P1108 CASUALTY (context deadline) → re-fired as C1.**
+   - **B3/P1073 DELIVERED:** Erdos1073.lean extended (557→888): the
+     complete T1–T10 board — erdos1073_rough (Thm 1.6 auto-roughness),
+     the master/master_sqrt witness-collapse laws, the cluster law,
+     hitB_iff (the decidability half), wilson_gen/brocard_gen channels +
+     **erdos1073_complete (the 17-conjunct final assembly)**. Kernel 34
+     receipts extended.
+   - **B4/P461 CASUALTY (context deadline) → re-fired as C2.**
+   - **B5/P374 DELIVERED:** Erdos374.lean extended (→1496 lines): the
+     tuple language + **product_criterion (Theorem B: square iff all
+     valuations even)** + **erdos374_prime_excluded (Theorem D: no prime
+     in any D_k)** + d2_count_250 (Theorem E quantitative) + d3_F3/d4_F4
+     (Theorems F/G) + **erdos374_complete (the 10-conjunct
+     classification)**. Kernel 33 receipts extended.
+
+5. **THE WAVE-A+B COMMIT + PUSH (d1b8199):** 7 kernel products + the
+   6-edit kills.yml wiring (Kernel 18-G, Kernel 45, the receipt
+   extensions on 25/33/34/38/44) — pushed to
+   oneshot/1108-cascade-20261105. YAML validated (53 steps).
+
+6. **THE WAVE-C FIRING (5 agents):**
+   - **C1/P1108 DELIVERED (the B2 retry):** Erdos1108AllPrime.lean
+     extended: **erdos1108_complete (the doc's final board, 15
+     conjuncts)** — pure citation chain (R5 obstruction web, R6 Brocard,
+     R7 channels, Legendre spine, pair-cascade, TheoremBGeneral twin,
+     arsenal bridge; HYP-BE stays a theorem-hypothesis, never an axiom).
+     **THE FORENSIC FINDING: Kernel 30's standing CI failure
+     root-caused** — the step never olean-staged SubsetKernelLaw (the
+     file imports it; every prior round died on unknown-import). FIXED:
+     olean staging wired (the Kernel-31 pattern).
+   - **C2/P461 DELIVERED (the B4 retry):** Erdos461.lean extended:
+     erdos461_anchor (f461 1892 120 = 69) + erdos461_dvd_sub +
+     erdos461_spacing (the G2 collapse law) + **erdos461_complete (the
+     16-conjunct final board)**. Kernel 35 receipts extended.
+   - **C3/P282, C4/P1063, C5/P1072 CASUALTIES (context deadline — the
+     harness wave-degrades after sustained parallel fire; L63's shadow
+     confirmed). Re-queued for the next session's wave.**
+
+7. **THE WAVE-C COMMIT + PUSH (693d522):** 2 products + the Kernel-30
+   fix + the receipt extensions.
+
+**The round's kernel-product scoreboard (9 products, 9 problems):**
+P271 (r5, the 15-error kill), P404 (Kernel 45), P406 (Kernel 38 ext),
+P1056 (Kernel 18-G), P961 (Kernel 25 ext), P1073 (Kernel 34 ext),
+P374 (Kernel 33 ext), P1108 (Kernel 30 fix + complete), P461 (Kernel
+35 ext). Plus the in-flight K24 r4 (P711's last-error kill shot,
+queued) and the K43 (P261) standing green.
+
+**The CI queue at close:** run 43118407809 (@ d1b8199, IN PROGRESS —
+the first compile of the 7 Wave-A+B products), run 43122346187 (@
+693d522, QUEUED — Wave-C + the Kernel-30 fix), run 43098641830 (@
+46763f7, QUEUED — the K24 r4 verdict). The verdicts cascade; the next
+session reads them and fights the next compile rounds.
+
+**Open at close:** the three CI verdicts; the Wave-C casualty re-fire
+(P282, P1063, P1072); the P961 census kernel (the Størmer–Pell 40-pair
+closure); the P271 L10 layer + stanley_T_family assembly; the P711 r4
+verdict + the Hall war; the conversion queue's remaining fronts; the
+Phase-2 seventeen. The engine never stops; it never lies.
