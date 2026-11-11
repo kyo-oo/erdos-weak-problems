@@ -2152,3 +2152,80 @@ Wave deliverables banked: #686-K2, #271, #961, #1056 COMPLETE_PROOF.md files
 CI-committed (d016305, 30f462b). Lean conversion of #271/#961/#1056 queued
 behind the K42 verdict.
 
+
+---
+
+## SESSION 046 — THE WAVE PIPELINE CONTINUES: K42 r3 WAR + WAVE-4 (5/5)
+
+**BOSS's order (this session):** "release more waves, go full power!!! invoke
+the skill!! go go go" — the wave law + full-energy chain.
+
+**Executed:**
+
+1. **THE CHAIN FIRED FIRST:** MATHS (Berserker) + prove-that-shit both
+   invoked at open, visibly. Full state recovery: repo synced @ d6cc0a1,
+   no competing session; the dead session's uncommitted wave products
+   armor-committed (a5ce216 — mode-changes only, content already safe).
+
+2. **THE K42 r3 WAR (commander):** the r2 CI verdict decoded (run
+   43023692349 FAILED — Kernel 42 the only red step, 13 error sites, 9
+   sorryAx leaks). ROOT CAUSE #1 DISCOVERED — **L79 THE OMEGA ATOM LAW:
+   omega does NOT normalize indices inside opaque applications —
+   `chev y (k-1+1)` and `chev y k` are DIFFERENT atoms (the CI
+   counterexample evidence decoded: f := y·chev y (k-1+1) vs g-atom
+   mismatch; chev y (k+1-1) ≠ chev y k in E2/E3)** — every omega site
+   canonicalized via show/rw. ROOT CAUSE #2: truncation guards missing
+   (htt : 4 ≤ t*t; hUle : X*X ≤ (Yk*t)²). ROOT CAUSE #3: dead lemmas at
+   this Mathlib pin (Nat.dvd_sub', Nat.dvd_mul_of_dvd_left,
+   Nat.sub_one_mul) — manualized: the wA-wC witness construction with
+   hmsexp (Nat.mul_add/mul_zero/one_mul + rcases Nat.lt_or_ge), hQZ via
+   obtain-q + ring + omega, hUleZ via mul_le_mul + one_mul dance. ROOT
+   CAUSE #4: hmono's metavar-pinned mul_le_mul_left (gave u₁*1 ≤ u₁*hu2 —
+   type-wrong; rebuilt with the explicit show + calc). ROOT CAUSE #5: the
+   Cassini climb's `rw [hcass] at hexact` pattern-miss (rebuilt: hcass' +
+   hkey2 + the hEqD division pattern). ROOT CAUSE #6: chain_of_mutual
+   call missing the u₁=d1 arg (t t d1 restored). 13 surgical fixes
+   landed → **3b39ebf pushed — CI round 3 (run 43038195739) BURNING.**
+   Transport quirk logged: the tool layer mangles the literal sequence
+   "[hu" in command/display transit (file verified correct via
+   length-invariant awk check; chr(91)-construction for any future
+   transport of that token).
+
+3. **WAVE-4 (5 agents, the S046 tight-brief format): 5/5 SURVIVED — the
+   best wave survival rate of the campaign** (S045: 2/5, 2/5). The
+   format: verbatim-corpus-statement extraction FIRST + the kernel-spine
+   declaration + the completeness-verdict demand + battery run + the
+   no-sub-cases law. Deliverables:
+   - **W8 #1108**: COMPLETE_PROOF.md (26.7KB) — the 2-adic cascade +
+     all-prime isolated-minimum + reduction + Brocard-hardness layers;
+     3 batteries GREEN; named core: the global finiteness core (Brocard-
+     embedded, provably open since 1876).
+   - **W9 #1073**: COMPLETE_PROOF.md — window/saturation/small-prime-
+     divisor/master-characterization + both censuses + 131-witness
+     table; battery ×2 GREEN; named core: the HaSu asymptotic law.
+   - **W10 #461**: COMPLETE_PROOF.md (508 lines) — G1-G8 incl. the
+     AM-GM master law (f ≥ 0.146t box-uniform) + the Ω-confinement
+     (counterexamples need n > 7·10²⁰); battery ×2 GREEN.
+   - **W11 #1063**: COMPLETE_PROOF.md (450 lines) — the exact-value
+     frontier COMPLETE k≤14 under BOTH readings of "all but one", 13
+     exact values; battery + NEW Pascal-recurrence second method GREEN.
+   - **W12 #1072**: COMPLETE_PROOF.md — the Wilson-pair law GOLD spine
+     + the complete structure layer; 1227 primes zero violations;
+     battery + E1-E9 extension engine GREEN.
+   All five honest: the structural/reducible core COMPLETE, the corpus's
+   own open asymptotic cores NAMED (no partial-dressed-as-complete).
+   **WAVE-4 DELIVERY committed: 88f6e5f (2358 insertions).**
+
+4. **THE LEAN CONVERSION QUEUE (next rounds):** #271, #961, #1056
+   (S045 LaTeX) + #1108, #1073, #461, #1063, #1072 (S046 LaTeX) → Lean
+   kernels → CI-green. The commander fronts: #711 DERIVATION.md +
+   HallLaw.lean (the kill shot is assembled), #727, #261 synthesis.
+
+**CI STATE:** K42 r3 (run 43038195739) in flight on 3b39ebf. The
+a5ce216-failure was expected (pre-r3 code). Wave-4 banked on 88f6e5f
+(the CI verdict for it lands with the same kernel-42 gate).
+
+**The scoreboard (the new kill list):** KILL 1 still pending = the first
+sub-agent-originated COMPLETE proof green in CI. The K42 r3 (the W1
+LaTeX → Lean conversion of the #686 K2 classification) is the leading
+candidate — the CI verdict is the next checkpoint.
