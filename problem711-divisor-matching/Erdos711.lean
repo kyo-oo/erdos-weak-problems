@@ -656,25 +656,20 @@ theorem w711OKR_spec (n L m r : Nat) (cs : List Nat) (hn : 0 < n)
       m + cs.getD (k - 1) 0 < m + (2 * n - 1)
     exact ⟨Nat.dvd_of_mod_eq_zero hmodm, by omega, by omega⟩
   · intro i hi1 hin j hj1 hjn hij
+    have hxy : cs.getD (i - 1) 0 = cs.getD (j - 1) 0 := by omega
     have hi' : i - 1 < n := by omega
     have hj' : j - 1 < n := by omega
     have hinner := (List.all_eq_true.mp hdist) (i - 1) (List.mem_range.mpr hi')
     have hdij := (List.all_eq_true.mp hinner) (j - 1) (List.mem_range.mpr hj')
-    cases hd : decide ((i - 1) = (j - 1)) with
+    have hxyb : decide (cs.getD (i - 1) 0 = cs.getD (j - 1) 0) = true :=
+      decide_eq_true hxy
+    rw [hxyb] at hdij
+    cases hval : decide ((i - 1) = (j - 1)) with
     | false =>
-        rw [hd] at hdij
-        cases hc : decide (cs.getD (i - 1) 0 = cs.getD (j - 1) 0) with
-        | false =>
-            have hcne : ¬(cs.getD (i - 1) 0 = cs.getD (j - 1) 0) :=
-              of_decide_eq_false hc
-            intro hcon
-            apply hcne
-            omega
-        | true =>
-            rw [hc] at hdij
-            simp at hdij
+        rw [hval] at hdij
+        simp at hdij
     | true =>
-        have heq : (i - 1) = (j - 1) := of_decide_eq_true hd
+        have hidx : (i - 1) = (j - 1) := of_decide_eq_true hval
         omega
 
 /-- THE PARAMETERIZED-WINDOW WITNESS CHECKER (Bool): `w711OK` with the
