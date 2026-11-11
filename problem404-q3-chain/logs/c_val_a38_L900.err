@@ -2,11 +2,11 @@
 # [t=0.0s] V=40 states=56 maxevent=44 rss=2MB
 # [t=0.0s] V=80 states=55 maxevent=90 rss=2MB
 # [t=0.0s] V=120 states=140 maxevent=127 rss=2MB
-# [t=0.0s] V=160 states=156 maxevent=170 rss=2MB
-# [t=0.0s] V=200 states=105 maxevent=206 rss=2MB
-# [t=0.0s] V=240 states=140 maxevent=247 rss=2MB
-# [t=0.0s] V=280 states=232 maxevent=292 rss=2MB
-# [t=0.0s] V=320 states=282 maxevent=328 rss=2MB
+# [t=0.0s] V=160 states=156 maxevent=170 rss=3MB
+# [t=0.0s] V=200 states=105 maxevent=206 rss=3MB
+# [t=0.0s] V=240 states=140 maxevent=247 rss=3MB
+# [t=0.0s] V=280 states=232 maxevent=292 rss=3MB
+# [t=0.0s] V=320 states=282 maxevent=328 rss=3MB
 # [t=0.0s] V=360 states=273 maxevent=365 rss=3MB
 # [t=0.0s] V=400 states=1028 maxevent=412 rss=3MB
 # [t=0.0s] V=440 states=268 maxevent=449 rss=3MB

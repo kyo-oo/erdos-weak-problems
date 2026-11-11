@@ -1,4 +1,4 @@
-# [t=0.0s] V=0 states=2 maxevent=1 rss=2MB
+# [t=0.0s] V=0 states=2 maxevent=1 rss=1MB
 # [t=0.0s] V=40 states=60 maxevent=49 rss=2MB
 # [t=0.0s] V=80 states=48 maxevent=87 rss=2MB
 # [t=0.0s] V=120 states=48 maxevent=124 rss=2MB
