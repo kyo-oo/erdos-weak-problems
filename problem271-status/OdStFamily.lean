@@ -617,6 +617,212 @@ theorem memE_no_ap (j u v w : Nat) (hj : 1 ≤ j)
     omega
 
 -- ===========================================================================
+-- §5  L8 — THE CLOSED-FORM FAMILY T_j IS 3-AP-FREE (the three carry cases)
+-- ===========================================================================
+
+/-- Every E_j member is bounded by 3^j (the block fits inside one
+P-window: the three profiles cap at H-1, 2H-1, 3H-1 < 3H = 3^j). -/
+theorem memE_lt (j e : Nat) (hj : 1 ≤ j) (he : memE j e) : e < 3 ^ j := by
+  have hP3 : 3 ^ j = 3 * 3 ^ (j - 1) := by
+    have h := Nat.pow_succ 3 (j - 1)
+    omega
+  rcases he with rfl | ⟨w, hwC, hwH, rfl⟩ | ⟨w, hwC, hw0, hwH, rfl⟩
+  · have := pow3_pos j
+    omega
+  · omega
+  · omega
+
+/-- L8 — the closed-form family T_j is 3-AP-free: there is no x < z in T_j
+with x + z = 2·y. The block-level carry trichotomy (δ = 0, +1, −1):
+δ = 0 collapses to an E_j-AP (L7) or a Cantor-quotient AP (L2); δ = +1 and
+δ = −1 die on the profile arithmetic — the 0-profile and the 2H-exclusion
+cannot both hold. -/
+theorem memT_no_ap (j x y z : Nat) (hj : 1 ≤ j)
+    (hx : memT j x) (hy : memT j y) (hz : memT j z)
+    (hsum : x + z = 2 * y) (hlt : x < z) : False := by
+  obtain ⟨qx, ex, hxq, hex, hx_eq⟩ := hx
+  obtain ⟨qy, ey, hyq, hey, hy_eq⟩ := hy
+  obtain ⟨qz, ez, hzq, hez, hz_eq⟩ := hz
+  have hP1 : 1 ≤ 3 ^ j := by have := pow3_pos j; omega
+  have hP3 : 3 ^ j = 3 * 3 ^ (j - 1) := by
+    have h := Nat.pow_succ 3 (j - 1)
+    omega
+  -- the residue bounds
+  have hexP : ex < 3 ^ j := memE_lt j ex hj hex
+  have heyP : ey < 3 ^ j := memE_lt j ey hj hey
+  have hezP : ez < 3 ^ j := memE_lt j ez hj hez
+  -- the full block equation, omega-normalizable
+  have hcore : (3 ^ j * qx + ex) + (3 ^ j * qz + ez) = 2 * (3 ^ j * qy + ey) := by
+    rw [← hx_eq, ← hz_eq, ← hy_eq]
+    exact hsum
+  have hE0 : 3 ^ j * qx + ex + 3 ^ j * qz + ez = 2 * (3 ^ j * qy) + 2 * ey := by
+    rw [Nat.mul_add 2 (3 ^ j * qy) ey] at hcore
+    omega
+  -- the mod-P congruence of the residues (the carry bridge)
+  have hmodP : (ex + ez) % 3 ^ j = (2 * ey) % 3 ^ j := by
+    have hE : ex + ez + (qx + qz) * 3 ^ j = 2 * ey + (2 * qy) * 3 ^ j := by
+      have hLA : ex + ez + (qx + qz) * 3 ^ j
+          = (3 ^ j * qx + ex) + (3 ^ j * qz + ez) := by
+        rw [Nat.mul_comm (qx + qz) (3 ^ j), Nat.mul_add (3 ^ j) qx qz]
+        simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
+      have hRA : 2 * ey + (2 * qy) * 3 ^ j = 2 * (3 ^ j * qy + ey) := by
+        have h2 : (2 * qy) * 3 ^ j = 2 * (3 ^ j * qy) := by
+          rw [← Nat.mul_assoc 2 qy (3 ^ j), Nat.mul_comm qy (3 ^ j)]
+        rw [h2, Nat.mul_add 2 (3 ^ j * qy) ey]
+        omega
+      rw [hLA, hcore, hRA]
+    have hL := add_mul_mod_self (ex + ez) (qx + qz) (3 ^ j)
+    have hR := add_mul_mod_self (2 * ey) (2 * qy) (3 ^ j)
+    rw [← hL, hE, hR]
+  -- the carry trichotomy
+  have htri := mod_to_form (3 ^ j) (ex + ez) (2 * ey)
+    (by omega : ex + ez < 2 * 3 ^ j) (by omega : 2 * ey < 2 * 3 ^ j) hmodP
+  rcases htri with hcase | hcase | hcase
+  · -- CASE A (δ = 0): ex + ez = 2 * ey
+    have hq0 : 3 ^ j * qx + 3 ^ j * qz = 2 * (3 ^ j * qy) := by omega
+    have hqf : 3 ^ j * (qx + qz) = 3 ^ j * (qy + qy) := by
+      rw [Nat.mul_add (3 ^ j) qx qz, Nat.mul_add (3 ^ j) qy qy]
+      omega
+    have hqap : qx + qz = qy + qy := Nat.mul_left_cancel hP1 hqf
+    by_cases hexez : ex = ez
+    · -- all residues equal: the quotients carry a Cantor 3-AP
+      have hqxz : qx < qz := by
+        by_contra hcon
+        have hle : qz ≤ qx := by omega
+        have hmono : 3 ^ j * qz ≤ 3 ^ j * qx := Nat.mul_le_mul_left (3 ^ j) hle
+        omega
+      exact noTwo_no_ap qx qy qz hxq hyq hzq (by omega) hqxz
+    · -- the residues carry an E_j 3-AP (L7)
+      rcases Nat.lt_or_ge ex ez with h | h
+      · exact memE_no_ap j ex ey ez hj hex hey hez hcase h
+      · have hlt2 : ez < ex := by omega
+        have hswap : ez + ex = 2 * ey := by omega
+        exact memE_no_ap j ez ey ex hj hez hey hex hswap hlt2
+  · -- CASE B (δ = +1): ex + ez = 2 * ey + 3 ^ j
+    obtain ⟨dx, cx, hex_eq', hcx, hcxC, hdx_le, hdx_zero, hdx_two⟩ :=
+      memE_prof j ex hj hex
+    obtain ⟨dy, cy, hey_eq', hcy, hcyC, hdy_le, hdy_zero, hdy_two⟩ :=
+      memE_prof j ey hj hey
+    obtain ⟨dz, cz, hez_eq', hcz, hczC, hdz_le, hdz_zero, hdz_two⟩ :=
+      memE_prof j ez hj hez
+    have hH1 : 1 ≤ 3 ^ (j - 1) := by have := pow3_pos (j - 1); omega
+    have hsub : (3 ^ (j - 1) * dx + cx) + (3 ^ (j - 1) * dz + cz)
+        = 2 * (3 ^ (j - 1) * dy + cy) + 3 * 3 ^ (j - 1) := by
+      rw [← hex_eq', ← hez_eq', ← hey_eq', ← hP3]
+      exact hcase
+    have hcarry : cx + cz + (dx + dz) * 3 ^ (j - 1)
+        = 2 * cy + (2 * dy + 3) * 3 ^ (j - 1) := by
+      have hLn : cx + cz + (dx + dz) * 3 ^ (j - 1)
+          = (3 ^ (j - 1) * dx + cx) + (3 ^ (j - 1) * dz + cz) := by
+        rw [Nat.mul_comm (dx + dz) (3 ^ (j - 1)),
+          Nat.mul_add (3 ^ (j - 1)) dx dz]
+        simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
+      have hRn : 2 * cy + (2 * dy + 3) * 3 ^ (j - 1)
+          = 2 * (3 ^ (j - 1) * dy + cy) + 3 * 3 ^ (j - 1) := by
+        have h2 : (2 * dy + 3) * 3 ^ (j - 1)
+            = 2 * (3 ^ (j - 1) * dy) + 3 * 3 ^ (j - 1) := by
+          have h3 : (2 * dy) * 3 ^ (j - 1) = 2 * (3 ^ (j - 1) * dy) := by
+            rw [← Nat.mul_assoc 2 dy (3 ^ (j - 1)),
+              Nat.mul_comm dy (3 ^ (j - 1))]
+          rw [Nat.add_mul (2 * dy) 3 (3 ^ (j - 1)), h3]
+        rw [h2, Nat.mul_add 2 (3 ^ (j - 1) * dy) cy]
+        omega
+      rw [hLn, hsub, hRn]
+    have hmodH : (cx + cz) % 3 ^ (j - 1) = (2 * cy) % 3 ^ (j - 1) := by
+      have hm := mod_sum_carry2 cx cy cz (3 ^ (j - 1)) (dx + dz) (2 * dy + 3)
+        hcarry
+      rw [Nat.mod_eq_of_lt hcx, Nat.mod_eq_of_lt hcz, Nat.mod_eq_of_lt hcy] at hm
+      exact hm
+    have hcc := cyclicC (j - 1) cx cy cz hcx hcy hcz hcxC hcyC hczC hmodH
+    have hcxcy : cx = cy := hcc.1
+    have hcyz : cy = cz := hcc.2
+    -- the digit equation: dx + dz = 2 * dy + 3
+    have hdigit : dx + dz = 2 * dy + 3 := by
+      rw [hcxcy] at hsub
+      rw [← hcyz] at hsub
+      have hd0 : 3 ^ (j - 1) * dx + 3 ^ (j - 1) * dz
+          = 2 * (3 ^ (j - 1) * dy) + 3 * 3 ^ (j - 1) := by
+        rw [Nat.mul_add 2 (3 ^ (j - 1) * dy) cy] at hsub
+        omega
+      have hdy2m : 3 ^ (j - 1) * (2 * dy) = 2 * (3 ^ (j - 1) * dy) := by
+        rw [Nat.mul_comm (3 ^ (j - 1)) (2 * dy),
+          ← Nat.mul_assoc 2 dy (3 ^ (j - 1)), Nat.mul_comm dy (3 ^ (j - 1))]
+      have hq : 3 ^ (j - 1) * (dx + dz) = 3 ^ (j - 1) * (2 * dy + 3) := by
+        rw [Nat.mul_add (3 ^ (j - 1)) dx dz,
+          Nat.mul_add (3 ^ (j - 1)) (2 * dy) 3, Nat.mul_comm (3 ^ (j - 1)) 3,
+          hdy2m]
+        omega
+      exact Nat.mul_left_cancel hH1 hq
+    have hkey : dy = 0 ∧ ((dx = 1 ∧ dz = 2) ∨ (dx = 2 ∧ dz = 1)) := by omega
+    rcases hkey with ⟨hdyz, hd⟩
+    have hcy0 : cy = 0 := hdy_zero hdyz
+    rcases hd with ⟨h1, h2⟩ | ⟨h1, h2⟩
+    · have hczpos : 0 < cz := hdz_two h2
+      omega
+    · have hcxpos : 0 < cx := hdx_two h1
+      omega
+  · -- CASE C (δ = −1): 2 * ey = ex + ez + 3 ^ j
+    obtain ⟨dx, cx, hex_eq', hcx, hcxC, hdx_le, hdx_zero, hdx_two⟩ :=
+      memE_prof j ex hj hex
+    obtain ⟨dy, cy, hey_eq', hcy, hcyC, hdy_le, hdy_zero, hdy_two⟩ :=
+      memE_prof j ey hj hey
+    obtain ⟨dz, cz, hez_eq', hcz, hczC, hdz_le, hdz_zero, hdz_two⟩ :=
+      memE_prof j ez hj hez
+    have hH1 : 1 ≤ 3 ^ (j - 1) := by have := pow3_pos (j - 1); omega
+    have hsub : (3 ^ (j - 1) * dx + cx) + (3 ^ (j - 1) * dz + cz)
+        + 3 * 3 ^ (j - 1) = 2 * (3 ^ (j - 1) * dy + cy) := by
+      rw [← hex_eq', ← hez_eq', ← hey_eq', ← hP3]
+      exact hcase.symm
+    have hcarry : cx + cz + (dx + dz + 3) * 3 ^ (j - 1)
+        = 2 * cy + (2 * dy) * 3 ^ (j - 1) := by
+      have hLn : cx + cz + (dx + dz + 3) * 3 ^ (j - 1)
+          = (3 ^ (j - 1) * dx + cx) + (3 ^ (j - 1) * dz + cz) + 3 * 3 ^ (j - 1) := by
+        rw [Nat.mul_comm (dx + dz + 3) (3 ^ (j - 1)),
+          Nat.add_mul (3 ^ (j - 1)) (dx + dz) 3,
+          Nat.mul_add (3 ^ (j - 1)) dx dz, Nat.mul_comm (3 ^ (j - 1)) 3]
+        simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
+      have hRn : 2 * cy + (2 * dy) * 3 ^ (j - 1)
+          = 2 * (3 ^ (j - 1) * dy + cy) := by
+        have h3 : (2 * dy) * 3 ^ (j - 1) = 2 * (3 ^ (j - 1) * dy) := by
+          rw [← Nat.mul_assoc 2 dy (3 ^ (j - 1)), Nat.mul_comm dy (3 ^ (j - 1))]
+        rw [h3, Nat.mul_add 2 (3 ^ (j - 1) * dy) cy]
+        omega
+      rw [hLn, hsub, hRn]
+    have hmodH : (cx + cz) % 3 ^ (j - 1) = (2 * cy) % 3 ^ (j - 1) := by
+      have hm := mod_sum_carry2 cx cy cz (3 ^ (j - 1)) (dx + dz + 3) (2 * dy)
+        hcarry
+      rw [Nat.mod_eq_of_lt hcx, Nat.mod_eq_of_lt hcz, Nat.mod_eq_of_lt hcy] at hm
+      exact hm
+    have hcc := cyclicC (j - 1) cx cy cz hcx hcy hcz hcxC hcyC hczC hmodH
+    have hcxcy : cx = cy := hcc.1
+    have hcyz : cy = cz := hcc.2
+    -- the digit equation: dx + dz + 3 = 2 * dy
+    have hdigit : dx + dz + 3 = 2 * dy := by
+      rw [hcxcy] at hsub
+      rw [← hcyz] at hsub
+      have hd0 : 3 ^ (j - 1) * dx + 3 ^ (j - 1) * dz + 3 * 3 ^ (j - 1)
+          = 2 * (3 ^ (j - 1) * dy) := by
+        rw [Nat.mul_add 2 (3 ^ (j - 1) * dy) cy] at hsub
+        omega
+      have hdy2m : 3 ^ (j - 1) * (2 * dy) = 2 * (3 ^ (j - 1) * dy) := by
+        rw [Nat.mul_comm (3 ^ (j - 1)) (2 * dy),
+          ← Nat.mul_assoc 2 dy (3 ^ (j - 1)), Nat.mul_comm dy (3 ^ (j - 1))]
+      have hq : 3 ^ (j - 1) * (dx + dz + 3) = 3 ^ (j - 1) * (2 * dy) := by
+        rw [Nat.mul_add (3 ^ (j - 1)) (dx + dz) 3,
+          Nat.mul_add (3 ^ (j - 1)) dx dz, Nat.mul_comm (3 ^ (j - 1)) 3,
+          hdy2m]
+        omega
+      exact Nat.mul_left_cancel hH1 hq
+    have hkey : dy = 2 ∧ ((dx = 0 ∧ dz = 1) ∨ (dx = 1 ∧ dz = 0)) := by omega
+    rcases hkey with ⟨hdy2v, hd⟩
+    have hcypos : 0 < cy := hdy_two hdy2v
+    rcases hd with ⟨h1, h2⟩ | ⟨h1, h2⟩
+    · have hcx0 : cx = 0 := hdx_zero h1
+      omega
+    · have hcz0 : cz = 0 := hdz_zero h2
+      omega
+
+-- ===========================================================================
 -- RECEIPTS
 -- ===========================================================================
 
@@ -624,4 +830,6 @@ theorem memE_no_ap (j u v w : Nat) (hj : 1 ≤ j)
 #print axioms memE_prof
 #print axioms memE_no_ap
 #print axioms cyclicC
+#print axioms memE_lt
+#print axioms memT_no_ap
 
