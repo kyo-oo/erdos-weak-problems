@@ -885,3 +885,12 @@ jobs:
           python3 problem396-prod-binomial/battery396k3.py
           echo ERDOS396_K3_KERNEL_GREEN=1
 
+      - name: "Kernel 42 - Erdos 686 K2 CLASSIFICATION (S045): the complete scan-free k=2 square classification (Rep2 iff Chebyshev chain, ALL t) + witness construction + mutual-pair descent + Cassini bootstrap + scan-free no-go + new-layer edges + arsenal bridge"
+        shell: bash
+        run: |
+          lake env lean problem686-pell-ratio/Erdos686K2Class.lean 2>&1 | tee kernel42.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel42.log
+          grep -F "ERDOS686K2CLASS_KERNEL_GREEN" kernel42.log
+          grep -E "Erdos686K2Class.(cassini|chain_of_mutual|erdos686k2class|erdos686k2_nogo|erdos686k2class_main)' (does not depend on any axioms|depends on axioms)" kernel42.log
+          python3 problem686-pell-ratio/battery686k2class.py
+          echo ERDOS686K2CLASS_KERNEL_GREEN=1
