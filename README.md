@@ -804,3 +804,44 @@ war (the small-prime witness table + the Legendre count law) is the
 follow-up round. The engine's carry-formula bug (missing $/(p-1)$) was
 caught and fixed in-session — false positives only, never false
 negatives; $n_3 = 8178$ survived the fix and dual verification.
+
+---
+
+## THE NEW SCOREBOARD (S044 KILL LIST RESET — complete proofs only)
+
+> BOSS (S044, 2026-11-11): *"reset the kill list now … whenever the sub agent
+> completed the proof of the theorem using my own maths, complete proof, no
+> sub cases then that would mark as kill 1. simple as that."*
+> The 41-kill registry above is the historical record (case/class-level
+> kills). THIS scoreboard counts sub-agent-delivered COMPLETE theorems only.
+
+### KILL 1 — Erdős #686: THE COMPLETE k=2 SQUARE CLASSIFICATION (Session 047, Kernel 42, CI run 43057893133 GREEN, commit fb561ec)
+
+**The problem (verbatim):** Can every integer $N\geq 2$ be written as
+$N=\frac{\prod_{1\leq i\leq k}(m+i)}{\prod_{1\leq i\leq k}(n+i)}$ for some
+$k\geq 2$ and $m\geq n+k$?
+
+**The kill (the complete k=2 square classification — `erdos686k2class`):**
+for EVERY $t \ge 2$:
+$$\big(\exists\, m\, n,\ \mathrm{Rep2}(t^2)\, m\, n\big) \iff
+\exists\, y\, j,\ y \bmod 4 = 2 \wedge 10 \le y \wedge 1 \le j \wedge
+t = \mathrm{chev}\,y\,j$$
+— the Chebyshev chain $a_0=1,\ a_1=y,\ a_{n+2}=y\,a_{n+1}-a_n$.
+**SCAN-FREE, NO CENSUS, ALL $t$, BOTH DIRECTIONS** — the first
+census-free square theorem of the campaign. The witness construction
+(`erdos686k2_witness_of_chain`, ⟸) + the mutual-pair descent with the
+Cassini bootstrap (`chain_of_mutual`, ⟹) + the scan-free no-go
+(`erdos686k2_nogo`) + the arsenal bridge
+(`erdos686k2class_arsenal_bridge` — isTernaryDigit/carryAtPos/v2r applied).
+Delivered by the W1 sub-agent as complete LaTeX (all 8 theorems,
+`K2CLASS_COMPLETE_PROOF.md`), converted to Lean, fought through the
+5-round compile war (r1 13 errors → r2 rewrite → r3 the omega-atom law →
+r4 4 surgical kills → r5 THE DIRECTION KILL — the single reversed
+`mul_assoc` at line 353), **run 43057893133 ALL GREEN: all 14 theorems
+axioms [propext, Classical.choice, Quot.sound], zero sorryAx, battery
+762 chain-replays + seal(2000)=508 both directions.**
+
+Honest scope: the COMPLETE $k=2$ channel of #686 (unconditional, every
+$t$, both directions). The $k\geq 3$ channel for non-chain $t$ is the
+named next front (Lemma Ω of the S045 derivation) — the smallest
+undetermined $N$ is $4$.
