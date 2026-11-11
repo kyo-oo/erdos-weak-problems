@@ -1,0 +1,10 @@
+==============================================================================
+ENGINE ROUND 3 / PHASE A: full-period census n = 13..16 + exact max
+==============================================================================
+  [A/13-13] n=13 m in [1,360,360] (360,360 vals, 11.2s, 32,227/s): max f = 25 (2n-1=25) argmax~[144, 300, 456, 612, 768, 924] greedyFails=3655 UVIOLATIONS=0 []
+  [A/13-14] n=14 m in [1,360,360] (360,360 vals, 13.1s, 27,423/s): max f = 27 (2n-1=27) argmax~[169, 351, 533, 715, 897, 1079] greedyFails=6790 UVIOLATIONS=0 []
+  [A/13-15] n=15 m in [1,360,360] (360,360 vals, 15.3s, 23,582/s): max f = 29 (2n-1=29) argmax~[196, 406, 616, 826, 1036, 1246] greedyFails=6454 UVIOLATIONS=0 []
+  [A/13-16] n=16 m in [1,720,720] (720,720 vals, 36.2s, 19,886/s): max f = 31 (2n-1=31) argmax~[225, 465, 705, 945, 1185, 1425] greedyFails=21349 UVIOLATIONS=0 []
+PHASE A VERDICT: THEOREM U CONFIRMED n=13..16 (full periods)
+
+[engine_round3 phase A complete]

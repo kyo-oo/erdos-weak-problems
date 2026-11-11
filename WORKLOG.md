@@ -2083,3 +2083,24 @@ invocation rules and follow them accurately, go"
 4. **THE ARMY LAUNCHES:** sub-agents fire sequentially (L63: parallel
    launches trigger destructive sandbox rollbacks — proven twice), one
    per problem, priority order. Wave 1: #271 (S044-A).
+
+**SESSION 044 (continued) — THE ARMY ARCHITECTURE DISCOVERED (the runtime law):**
+- S044-B (ask-gap census, sub-agent): SUCCESS — the 22-problem gap table.
+  Kill order: #711 (SMALL) → #686 (MEDIUM) → #727 (MEDIUM); everything
+  else fortress cores.
+- S044-C (engine burst, sub-agent): SUCCESS — engine_round3.py + A/F/G
+  outputs: THEOREM U CONFIRMED (f(n,m) ≤ 2n−1 full periods n ≤ 16, ZERO
+  violations, max = 2n−1 exact); THEOREM N confirmed (f(n,n) ≤ ⌈3n/2⌉,
+  n ≤ 24); HALL'S CONDITION VERIFIED (max deficiency 0; tight sets {n}
+  at m=1 and top blocks {n−3..n}).
+- S044-A/A2/C2 (construction bursts): DEAD (context deadline ×3) —
+  L78 (THE BURST LAW): this runtime sustains sub-agent read/compute
+  bursts (~one step each); deep-writing missions (derivations, kernels)
+  die in the pipe. THE ARCHITECTURE: sub-agents = intel + engine
+  verification; the commander writes derivations + kernels + fights the
+  CI wars (the 41-kill pattern). The OdStFamily.lean 379-line draft
+  (S044-A's inheritance) stands for the #271 Type-1 front.
+- THE #711 KILL SHOT assembled: Obstruction (proven, ∀n) + U (Hall) +
+  N (⌈3n/2⌉) ⟹ max_m f = 2n−1 = n^{1+o(1)} (ask 1, exact constant) +
+  max_m(f−f(n,n)) ≥ ⌊n/2⌋−1 → ∞ (ask 2). THE COMPLETE #711. Next:
+  DERIVATION.md + HallLaw.lean + battery + CI war.

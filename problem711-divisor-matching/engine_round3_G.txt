@@ -1,0 +1,45 @@
+==============================================================================
+ENGINE ROUND 3 / PHASE G: Hall tightness probe (bitmask over S subsets)
+==============================================================================
+  sanity n=5 m=(n-1)^2 win=2n-3: min deficiency = -2 at S=[2]  (expect < 0)
+  sanity n=8 m=(n-1)^2 win=2n-3: min deficiency = -7 at S=[2, 3]  (expect < 0)
+  sanity n=10 m=(n-1)^2 win=2n-3: min deficiency = -10 at S=[2, 3, 5]  (expect < 0)
+  sanity n=12 m=(n-1)^2 win=2n-3: min deficiency = -13 at S=[2, 3]  (expect < 0)
+  n= 5 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n= 6 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n= 7 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n= 8 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n= 9 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n=10 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n=11 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n=12 full period: max deficiency = 99 (Hall FAILS) tight S=None at m=None; #tight-S-cases=0
+  n=13 sampled: max deficiency = -14 tight S=[2, 3] at m=7
+  n=14 sampled: max deficiency = -15 tight S=[2, 3] at m=421135445
+  n=15 sampled: max deficiency = -17 tight S=[2, 3, 5] at m=143835441
+  n=16 sampled: max deficiency = -19 tight S=[2, 3, 5] at m=1
+
+[engine_round3 phase G complete]
+==============================================================================
+ENGINE ROUND 3 / PHASE G: Hall tightness probe (bitmask over S subsets)
+==============================================================================
+  sanity n=5 m=(n-1)^2 win=2n-3: min deficiency = 1 at S=[4, 5]  (expect < 0)
+  sanity n=8 m=(n-1)^2 win=2n-3: min deficiency = 1 at S=[7, 8]  (expect < 0)
+  sanity n=10 m=(n-1)^2 win=2n-3: min deficiency = 1 at S=[9, 10]  (expect < 0)
+  sanity n=12 m=(n-1)^2 win=2n-3: min deficiency = 1 at S=[11, 12]  (expect < 0)
+  n= 5 full period: max deficiency = 0 (Hall OK) tight S=[5] at m=1; #tight-S-cases=0
+  n= 6 full period: max deficiency = 0 (Hall OK) tight S=[6] at m=1; #tight-S-cases=0
+  n= 7 full period: max deficiency = 0 (Hall OK) tight S=[7] at m=1; #tight-S-cases=0
+  n= 8 full period: max deficiency = 0 (Hall OK) tight S=[8] at m=1; #tight-S-cases=2
+  n= 9 full period: max deficiency = 0 (Hall OK) tight S=[9] at m=1; #tight-S-cases=0
+  n=10 full period: max deficiency = 0 (Hall OK) tight S=[10] at m=1; #tight-S-cases=6
+  n=11 full period: max deficiency = 0 (Hall OK) tight S=[11] at m=1; #tight-S-cases=78
+  n=12 full period: max deficiency = 0 (Hall OK) tight S=[12] at m=1; #tight-S-cases=28
+  n=13 sampled: max deficiency = 0 tight S=[13] at m=1
+  n=14 sampled: max deficiency = 0 tight S=[14] at m=1
+  n=15 sampled: max deficiency = 0 tight S=[15] at m=1
+  n=16 sampled: max deficiency = 0 tight S=[16] at m=1
+  n= 8: tight S multiset over full period: [((8,), 210), ((5, 6, 7, 8), 2)]
+  n=10: tight S multiset over full period: [((10,), 504), ((7, 8, 9, 10), 6)]
+  n=12: tight S multiset over full period: [((12,), 4620), ((8, 9, 10, 11), 28)]
+
+[engine_round3 phase G complete]
