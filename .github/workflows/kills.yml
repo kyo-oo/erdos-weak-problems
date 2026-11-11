@@ -907,3 +907,20 @@ jobs:
           grep -E "apSum_split' (does not depend on any axioms|depends on axioms)" kernel43.log
           grep -E "jpow_sum_eq' (does not depend on any axioms|depends on axioms)" kernel43.log
           echo AP261_RATIONALITY_KERNEL_GREEN=1
+
+      - name: "Kernel 44 - Erdos 271 ODST FAMILY (S048 full-proof campaign, P271 strike): the F1 foundation — memE the block-set predicate + memT the closed-form family + memE_prof the profile extraction (every E_j member is H*d + c with c in C below H, d<=2, the 0-profile exact, the 2H-exclusion live) + memE_no_ap L7 THE AP-FREENESS OF E_j (the three-profile digit descent: the cyclic cap forces the tails equal, the d-arithmetic forces the {0,2} spread, the 2H-exclusion kills it) + the restored cyclicC (the mod-3^t Cantor cap, the zero-branch binder fix) + the repaired divP (the add_right_cancel + mul_left_cancel route) — the L6-L10 war continues toward stanley_T_family"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel44.log
+          lake env lean problem271-status/OdStFamily.lean 2>&1 | tee -a kernel44.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel44.log
+          grep -F "ODST_FAMILY_KERNEL_GREEN" kernel44.log
+          grep -E "memE_prof' (does not depend on any axioms|depends on axioms)" kernel44.log
+          grep -E "memE_no_ap' (does not depend on any axioms|depends on axioms)" kernel44.log
+          grep -E "cyclicC' (does not depend on any axioms|depends on axioms)" kernel44.log
+          echo ODST_FAMILY_KERNEL_GREEN=1

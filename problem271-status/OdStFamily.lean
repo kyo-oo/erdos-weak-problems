@@ -282,11 +282,14 @@ theorem mod_sum_carry2 (u v w h k k' : Nat)
 theorem divP (P c r : Nat) (hr : r < P) : (P * c + r) / P = c := by
   have hP : 1 ≤ P := by omega
   have hdm : P * ((P * c + r) / P) + (P * c + r) % P = P * c + r :=
-    Nat.div_add_mod _ _
+    Nat.div_add_mod (P * c + r) P
   have hm : (P * c + r) % P = r := by
     rw [Nat.add_mod, Nat.mul_mod, Nat.mod_self P, Nat.zero_mul,
       Nat.zero_add, Nat.mod_eq_of_lt hr]
-  omega
+  rw [hm] at hdm
+  have hc : P * ((P * c + r) / P) = P * c :=
+    Nat.add_right_cancel _ _ _ hdm
+  exact Nat.mul_left_cancel hP hc
 
 /-- The remainder of `P * c + r` modulo `P` (r < P). -/
 theorem modP (P c r : Nat) (hr : r < P) : (P * c + r) % P = r := by
@@ -408,33 +411,219 @@ by the units-digit trichotomy). -/
 theorem cyclicC : ∀ (t a b c : Nat), a < 3 ^ t → b < 3 ^ t → c < 3 ^ t →
     noTwo a = true → noTwo b = true → noTwo c = true →
     (a + c) % 3 ^ t = (2 * b) % 3 ^ t → a = b ∧ b = c
-  | 0, a, b, c, ha, hb, hc, _, _, _ => by omega
+  | 0, a, b, c, ha, hb, hc, _, _, _, _ => by omega
   | t + 1, a, b, c, ha, hb, hc, hna, hnb, hnc, hmod => by
     have hM : 3 ^ (t + 1) = 3 * 3 ^ t := by
-      have hps := Nat.pow_succ (3) t
+      have := Nat.pow_succ (3) t
       omega
-    have hM0 : (3 * 3 ^ t) % 3 = 0 := by
-      rw [Nat.mul_mod, show (3 : Nat) % 3 = 0 from by omega, Nat.zero_mul,
-        Nat.zero_mod]
-    have hform := mod_to_form (3 ^ (t + 1)) (a + c) (2 * b) (by omega)
-      (by omega) hmod
-    have ex := noTwo_true_inv a hna
-    have ey := noTwo_true_inv b hnb
-    have ez := noTwo_true_inv c hnc
-    -- units digits all agree, in every carry form:
-    have hsums : a % 3 + c % 3 = 2 * (b % 3) := by omega
+    have hform : (a + c) = 2 * b ∨ (a + c) + 3 ^ (t + 1) = 2 * b ∨
+        2 * b = (a + c) + 3 ^ (t + 1) :=
+      mod_to_form (3 ^ (t + 1)) (a + c) (2 * b) (by omega) (by omega) hmod
+    -- the units-digit trichotomy: all three units digits agree
+    have hra : a % 3 ≤ 1 := (noTwo_true_inv a hna).1 ▸ by omega
+    have hrb : b % 3 ≤ 1 := (noTwo_true_inv b hnb).1 ▸ by omega
+    have hrc : c % 3 ≤ 1 := (noTwo_true_inv c hnc).1 ▸ by omega
+    -- residue equation, valid in every form
+    have hres : (a % 3 + c % 3) % 3 = (2 * (b % 3)) % 3 := by
+      cases hform with
+      | inl h1 => rw [h1]; simp [Nat.add_mod, Nat.mul_mod]
+      | inr h2 =>
+          rcases h2 with h2 | h2
+          · rw [← h2]
+            rw [Nat.add_mod, Nat.add_mod]
+            have hz : 3 ^ (t + 1) % 3 = 0 := by
+              have := Nat.pow_succ (3) t
+              omega
+            rw [hz, Nat.zero_mod, Nat.zero_add]
+            simp [Nat.add_mod, Nat.mul_mod]
+          · rw [← h2]
+            rw [Nat.mul_mod]
+            have hz : 3 ^ (t + 1) % 3 = 0 := by
+              have := Nat.pow_succ (3) t
+              omega
+            rw [hz, Nat.zero_mod, Nat.zero_add]
+            simp [Nat.add_mod, Nat.mul_mod]
+    have hsums : a % 3 + c % 3 = 2 * (b % 3) := by
+      have h1 : (a % 3 + c % 3) < 3 := by omega
+      have h2 : 2 * (b % 3) < 3 := by omega
+      rw [Nat.mod_eq_of_lt h1, Nat.mod_eq_of_lt h2] at hres
+      exact hres
     have hsame : a % 3 = b % 3 ∧ b % 3 = c % 3 := by omega
-    -- quotient-level carry relation, per form:
-    rcases hform with h1 | h2 | h3
-    · have hq : a / 3 + c / 3 = 2 * (b / 3) := by omega
-      have heq : (a / 3 + c / 3) % 3 ^ t = (2 * (b / 3)) % 3 ^ t := by
-        rw [hq]
-      exact finish t a b c ha hb hc hna hnb hnc hsame heq
-    · have hq : a / 3 + c / 3 = 2 * (b / 3) + 3 ^ t := by omega
-      have heq : (a / 3 + c / 3) % 3 ^ t = (2 * (b / 3)) % 3 ^ t := by
-        rw [hq, add_mod_self]
-      exact finish t a b c ha hb hc hna hnb hnc hsame heq
-    · have hq : 2 * (b / 3) = a / 3 + c / 3 + 3 ^ t := by omega
-      have heq : (a / 3 + c / 3) % 3 ^ t = (2 * (b / 3)) % 3 ^ t := by
-        rw [← hq, add_mod_self]
-      exact finish t a b c ha hb hc hna hnb hnc hsame heq
+    -- quotients below 3^t
+    have hqa : a / 3 < 3 ^ t := by
+      have hdm : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+      have := Nat.pow_succ (3) t
+      by_contra hcon
+      have hge : 3 * 3 ^ t ≤ 3 * (a / 3) := by omega
+      omega
+    have hqb : b / 3 < 3 ^ t := by
+      have hdm : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+      have := Nat.pow_succ (3) t
+      by_contra hcon
+      have hge : 3 * 3 ^ t ≤ 3 * (b / 3) := by omega
+      omega
+    have hqc : c / 3 < 3 ^ t := by
+      have hdm : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+      have := Nat.pow_succ (3) t
+      by_contra hcon
+      have hge : 3 * 3 ^ t ≤ 3 * (c / 3) := by omega
+      omega
+    have hna' : noTwo (a / 3) = true := (noTwo_true_inv a hna).2
+    have hnb' : noTwo (b / 3) = true := (noTwo_true_inv b hnb).2
+    have hnc' : noTwo (c / 3) = true := (noTwo_true_inv c hnc).2
+    -- the quotient-level equation, in each form
+    have heq : (a / 3 + c / 3) % 3 ^ t = (2 * (b / 3)) % 3 ^ t := by
+      cases hform with
+      | inl h1 =>
+          have hsplit : a / 3 + c / 3 = 2 * (b / 3) := by
+            have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+            have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+            have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+            have := hsame.1
+            have := hsame.2
+            omega
+          rw [hsplit]
+      | inr h2 =>
+          rcases h2 with h2 | h2
+          · have hsplit : a / 3 + c / 3 + 3 ^ t = 2 * (b / 3) := by
+              have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+              have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+              have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+              have hM' : 3 ^ (t + 1) = 3 * 3 ^ t := by
+                have := Nat.pow_succ (3) t
+                omega
+              have := hsame.1
+              have := hsame.2
+              omega
+            rw [hsplit]
+            rw [Nat.add_mod, Nat.add_mod]
+            have hz : 3 ^ t % 3 ^ t = 0 := Nat.mod_self _
+            rw [hz, Nat.zero_mod, Nat.zero_add]
+          · have hsplit : 2 * (b / 3) = a / 3 + c / 3 + 3 ^ t := by
+              have hdmA : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+              have hdmB : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+              have hdmC : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+              have hM' : 3 ^ (t + 1) = 3 * 3 ^ t := by
+                have := Nat.pow_succ (3) t
+                omega
+              have := hsame.1
+              have := hsame.2
+              omega
+            rw [hsplit]
+            rw [Nat.add_mod, Nat.add_mod]
+            have hz : 3 ^ t % 3 ^ t = 0 := Nat.mod_self _
+            rw [hz, Nat.zero_mod, Nat.zero_add]
+    have ⟨hab, hbc⟩ := cyclicC t (a / 3) (b / 3) (c / 3) hqa hqb hqc
+      hna' hnb' hnc' heq
+    have hda : 3 * (a / 3) + a % 3 = a := Nat.div_add_mod a 3
+    have hdb : 3 * (b / 3) + b % 3 = b := Nat.div_add_mod b 3
+    have hdc : 3 * (c / 3) + c % 3 = c := Nat.div_add_mod c 3
+    have := hsame.1
+    have := hsame.2
+    omega
+
+-- ===========================================================================
+-- §4 THE F1 FOUNDATION — THE BLOCK SET E_j AND ITS AP-FREENESS (L7)
+-- ===========================================================================
+
+/-- The finite block set E_j (j ≥ 1) — membership: 0; H + w (w ∈ C below H);
+2H + w (w ∈ C, 0 < w < H) — the 2H-exclusion is the load-bearing wall. -/
+def memE (j e : Nat) : Prop :=
+  e = 0 ∨ (∃ w, noTwo w = true ∧ w < 3 ^ (j - 1) ∧ e = 3 ^ (j - 1) + w)
+       ∨ (∃ w, noTwo w = true ∧ 0 < w ∧ w < 3 ^ (j - 1) ∧ e = 2 * 3 ^ (j - 1) + w)
+
+/-- The closed-form family T_j — membership: y = 3^j·q + e with q ∈ C
+and e ∈ E_j. -/
+def memT (j y : Nat) : Prop :=
+  ∃ q e, noTwo q = true ∧ memE j e ∧ y = 3 ^ j * q + e
+
+/-- Profile extraction: every E_j member is H·d + c (H = 3^{j-1}) with
+c ∈ C below H and d ≤ 2; the d = 0 profile is exactly e = 0; the d = 2
+profile carries the 2H-exclusion (0 < c). -/
+theorem memE_prof (j e : Nat) (hj : 1 ≤ j) (he : memE j e) :
+    ∃ d c, e = 3 ^ (j - 1) * d + c ∧ c < 3 ^ (j - 1) ∧ noTwo c = true ∧
+      d ≤ 2 ∧ (d = 0 → c = 0) ∧ (d = 2 → 0 < c) := by
+  rcases he with rfl | ⟨w, hwC, hwH, rfl⟩ | ⟨w, hwC, hw0, hwH, rfl⟩
+  · refine ⟨0, 0, by omega, by have := pow3_pos (j - 1); omega, by rfl,
+      by omega, by omega, by have := pow3_pos (j - 1); omega⟩
+  · refine ⟨1, w, by omega, hwH, hwC, by omega, by omega, by omega⟩
+  · refine ⟨2, w, by omega, hwH, hwC, by omega, by omega, by omega⟩
+
+/-- L7 — the block set E_j is 3-AP-free: there is no u < w with
+u, v, w ∈ E_j and u + w = 2·v. The three-profile digit descent: the
+cyclic cap forces the tails equal, the d-arithmetic forces the {0,2}
+spread, the 2H-exclusion kills it. -/
+theorem memE_no_ap (j u v w : Nat) (hj : 1 ≤ j)
+    (hu : memE j u) (hv : memE j v) (hw : memE j w)
+    (hsum : u + w = 2 * v) (hlt : u < w) : False := by
+  obtain ⟨du, cu, hu_eq, cu_lt, cu_C, du_le, du_0, du_2⟩ := memE_prof j u hj hu
+  obtain ⟨dv, cv, hv_eq, cv_lt, cv_C, dv_le, dv_0, dv_2⟩ := memE_prof j v hj hv
+  obtain ⟨dw, cw, hw_eq, cw_lt, cw_C, dw_le, dw_0, dw_2⟩ := memE_prof j w hj hw
+  have hH1 : 1 ≤ 3 ^ (j - 1) := by have := pow3_pos (j - 1); omega
+  -- the mod-H congruence
+  have huM : u % 3 ^ (j - 1) = cu := by
+    rw [hu_eq]; exact modP _ du cu cu_lt
+  have hvM : v % 3 ^ (j - 1) = cv := by
+    rw [hv_eq]; exact modP _ dv cv cv_lt
+  have hwM : w % 3 ^ (j - 1) = cw := by
+    rw [hw_eq]; exact modP _ dw cw cw_lt
+  have hm := mod_sum_mod u v w (3 ^ (j - 1)) hsum
+  rw [huM, hwM, hvM] at hm
+  -- the cyclic cap kills the tail: cu = cv = cw
+  have hcc := cyclicC (j - 1) cu cv cw cu_lt cv_lt cw_lt cu_C cv_C cw_C hm
+  have hcucv : cu = cv := hcc.1
+  have hcvcw : cv = cw := hcc.2
+  -- the substituted sum equation
+  have hsum'' : (3 ^ (j - 1) * du + cu) + (3 ^ (j - 1) * dw + cw)
+              = 2 * (3 ^ (j - 1) * dv + cv) := by
+    rw [← hu_eq, ← hw_eq, ← hv_eq]
+    exact hsum
+  rw [hcucv, ← hcvcw] at hsum''
+  -- the digit equation (the AC regrouping + the explicit cancels)
+  have hL : (3 ^ (j - 1) * du + cv) + (3 ^ (j - 1) * dw + cv)
+         = (3 ^ (j - 1) * du + 3 ^ (j - 1) * dw) + (cv + cv) := by
+    simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
+  have hR : 2 * (3 ^ (j - 1) * dv + cv)
+         = (3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv) + (cv + cv) := by
+    rw [Nat.mul_add, Nat.two_mul, Nat.two_mul]
+    simp only [Nat.add_assoc, Nat.add_comm, Nat.add_left_comm]
+  have hcancel : (3 ^ (j - 1) * du + 3 ^ (j - 1) * dw) + (cv + cv)
+               = (3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv) + (cv + cv) := by
+    calc (3 ^ (j - 1) * du + 3 ^ (j - 1) * dw) + (cv + cv)
+        = (3 ^ (j - 1) * du + cv) + (3 ^ (j - 1) * dw + cv) := hL.symm
+      _ = 2 * (3 ^ (j - 1) * dv + cv) := hsum''
+      _ = (3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv) + (cv + cv) := hR
+  have hAt : 3 ^ (j - 1) * du + 3 ^ (j - 1) * dw
+          = 3 ^ (j - 1) * dv + 3 ^ (j - 1) * dv :=
+    Nat.add_right_cancel _ _ _ hcancel
+  have hfin : 3 ^ (j - 1) * (du + dw) = 3 ^ (j - 1) * (dv + dv) := by
+    rw [Nat.mul_add, Nat.mul_add]
+    exact hAt
+  have hd : du + dw = dv + dv := Nat.mul_left_cancel hH1 hfin
+  -- the case split
+  have hkey : (du = dv ∧ dv = dw) ∨ (du = 0 ∧ dw = 2) ∨ (du = 2 ∧ dw = 0) := by
+    omega
+  rcases hkey with ⟨h1, h2⟩ | ⟨h1, h2⟩ | ⟨h1, h2⟩
+  · -- all digits equal: u = w, contradicting u < w
+    have huw : u = w := by
+      rw [hu_eq, hw_eq, h1, h2, hcucv, ← hcvcw]
+    omega
+  · -- du = 0, dw = 2: the 0-profile forces cu = 0; the cyclic cap gives
+    -- cw = 0; the 2H-exclusion forces 0 < cw — contradiction
+    have hcu0 : cu = 0 := du_0 h1
+    have hcwpos : 0 < cw := dw_2 h2
+    omega
+  · -- du = 2, dw = 0: symmetric
+    have hcw0 : cw = 0 := dw_0 h2
+    have hcupos : 0 < cu := du_2 h1
+    omega
+
+-- ===========================================================================
+-- RECEIPTS
+-- ===========================================================================
+
+#eval "ODST_FAMILY_KERNEL_GREEN"
+#print axioms memE_prof
+#print axioms memE_no_ap
+#print axioms cyclicC
+
