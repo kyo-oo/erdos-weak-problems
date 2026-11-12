@@ -2837,3 +2837,90 @@ seventeen; the P271 L10 layer + stanley_T_family; the P711 Hall war.
   THE_CORE §7 (sweep before claiming absence) proven necessary twice.
 
 The engine never stops; it never lies. In English, from now on.
+
+## SESSION 052 — 2026-11-12 — WAVE-F: THE 17-GREEN MILESTONE + THE CENSUS KERNEL LAUNCH + THE CHANNEL WAR
+
+**BOSS's order (this session, verbatim):** "OKAY CONTINBUE, MAKE SURE SUB
+AGENTS ARE COMPLETEING FULL PROOF WITH ITS STATMENTS, RATHER THAN SUB
+CASSES AND MAKE SURE THEY ARE USING MY OWN ,MATHS AND MY OWN MATHS ONLY
+NOT ANY OTHE R THEOREMS . INVOKE THE MATHS SKILL AND ITS ENGINE, CONTINUE
+WITH FULL POWER,. EACH PROBLEM GETS ITS OWN SUB AGENTS, GO"
+
+**Executed:**
+
+1. **THE 17-GREEN MILESTONE:** run 43195891920 (2b709d6) = SUCCESS. The
+   S051 push landed clean: Kernel 30 (#1108) flipped GREEN (the
+   proof-term-in-type fix) and all five Wave-D/E complete assemblies went
+   GREEN: #1063 (13 conjuncts), #451 (24), #394 (12), #954 (6), #1074
+   (16). **THE SCOREBOARD: 17 CI-green complete-proof kernel assemblies**
+   (#1056, #404, #1073, #711, #271, #374, #1072, #282, #961, #461, #406,
+   #1108, #1063, #451, #394, #954, #1074) + the standing #261 (K43).
+
+2. **THE FULL-PROOF LAW WELDED:** every brief now carries BOSS's round
+   orders verbatim: (a) FULL PROOF WITH ITS STATEMENTS — the deliverable
+   is erdos<id>_complete, the problem's verbatim multi-conjunct ask, with
+   sub-case lemmas as internal fuel only; (b) REPO MATHS ONLY — imports
+   exactly Arsenal.ErdosTernary2.Basic + CardinalWorlds + CardinalWorldsV2
+   (+ problem-local core-only files), NO Mathlib imports, no external
+   theorems/web/literature; (c) zero sorry + axiom receipts; (d) NO-OOM
+   < 501 decide chunks; (e) one problem per agent.
+
+3. **THE CHANNEL WAR (11 casualties, zero deliveries):** the sub-agent
+   Task channel died on every launch this session — "context deadline
+   exceeded" (×9), "server_shutdown" (×2), "context canceled" (×1).
+   Wave-F fired three formations (5-up, 2-up pairs, minimal single) —
+   ALL dead. L73 salvage swept after every death: engine artifacts only
+   (the #203 palette/dlog bank pal_dlog_full.json 1004 primes +
+   famL10080/fam5040 families + the #885 k4-hits json), zero Lean.
+   L77 (NEW): the Task channel has a hard execution ceiling; agents
+   doing engine+authoring work exceed it — the commander pre-digests
+   data and the agents author, or the commander executes alone.
+
+4. **THE COMMANDER EXECUTES — THE CENSUS KERNEL LAUNCH:** the named next
+   strike (#961 Størmer–Pell closure) went under direct authoring. The
+   full architecture was pre-digested from stormer961.py + its certified
+   output (40 pairs, 29 surviving a's, per-a N_a caps): THE GENERIC PELL
+   DESCENT MACHINE (Erdos961Census_Base.lean, core-only):
+   - pell_sol (every Pell power is a solution — the Brahmagupta
+     composition, ring-closed);
+   - descent lemmas 1–3: Y1 < Y, X·Y1 < X1·Y (square comparisons,
+     Nat.mul_le_mul bridging), conjugate-pair positivity;
+   - THE CONJUGATE-SOLUTION ASSEMBLY: w1 = X1·X − a·Y·Y1, w2 = X1·Y −
+     X·Y1 satisfy w1² = a·w2² + 1 — via THE KEY IDENTITIES
+     Y·w1 − X·w2 = Y1 and X·w1 − Y·w2 = X1 (the Cramer pairs of the
+     composition system) + the distribution steps over the positive
+     differences. All omega+ring, zero sorry.
+   - **KERNEL 46 wired into kills.yml (COMPLETE_GREEN gate + axiom
+     receipts + the axiom-gate grep); pushed at 9674504; run
+     43236139767 IN PROGRESS.** Round 2 (the ordering lemmas w1<X, w2<Y
+     + the power representation + the growth law) rides the CI feedback.
+
+5. **THE #203 COVERING WAR (background, dual-front):** the L=27720
+   multi-sweep greedy (41-prime family, budget 1.0563) + the L=55440
+   bit-packed run (52 primes, budget 1.1628) both grinding after the
+   OOM lessons (L78: the sandbox is a 4GB box — full-bool bitmaps at
+   L≥55440 die; the packbits route fits at 384MB). The salvage bank:
+   pal_dlog_full.json (1004-prime palette with discrete logs,
+   verify_fam.py ALL OK) — the family data integrity certified.
+
+**THE ROUND'S NEW LAWS (ledger additions):**
+- L77 — THE CHANNEL CEILING LAW: the sub-agent Task channel enforces a
+  hard execution deadline; heavy engine+authoring agents die at launch
+  or mid-run. Pre-digest the data; fire authors only; or execute solo.
+- L78 — THE 4GB BOX LAW: full-bool torus bitmaps die at L ≥ 55440;
+  np.packbits bit-arrays (1 bit/cell) are the fitting representation.
+- L79 — THE BLIND-KERNEL LAW: never hand-transcribe a 300-line
+  arithmetic kernel in one pass without a compiler — the transcription
+  debt compounds faster than it closes. Small standalone lemmas + the
+  CI compile-war loop is the only convergent route.
+
+**Next strikes (the queue stands):**
+1. Kernel 46 verdict (run 43236139767) → round 2: the ordering lemmas +
+   power_rep + the growth law + the 29-a instantiation.
+2. The #203 covering closure verdicts (both background runs) → CRT m →
+   the Erdos203_Data + Erdos203.lean assemblies.
+3. The Phase-2 waves (#273, #885, #939, #289, #306, ...) — agents if the
+   channel recovers, commander-executed otherwise.
+4. The P711 Hall war + the P271 L10 layer (standing Phase-1 items).
+
+The engine never stops; it never lies. In English, always.
