@@ -534,7 +534,9 @@ theorem erdos461_complete :
   ⟨spart_eq_pow, scomp_dvd, achieve1, achieve2, achieve3, erdos461_anchor,
    stab1, stab2, stab3, ergra,
    erdos461_min14, erdos461_min20, erdos461_min30, erdos461_min40,
-   erdos461_arsenal_bridge, erdos461_spacing⟩
+   erdos461_arsenal_bridge.1, erdos461_arsenal_bridge.2.1,
+   erdos461_arsenal_bridge.2.2.1, erdos461_arsenal_bridge.2.2.2,
+   erdos461_spacing⟩
 
 #print axioms erdos461_anchor
 #print axioms erdos461_dvd_sub

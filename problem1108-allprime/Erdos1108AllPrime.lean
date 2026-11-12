@@ -123,7 +123,7 @@ namespace Erdos1108AP
 verbatim lift: fuel-structural `vpf`/`vp`, saturation, step law,
 non-divisor law, one, product additivity with Euclid). -/
 
-theorem one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
+theorem ap_one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
   obtain ⟨a', ha'⟩ : ∃ a', a = a' + 1 := ⟨a - 1, by omega⟩
   obtain ⟨b', hb'⟩ : ∃ b', b = b' + 1 := ⟨b - 1, by omega⟩
   rw [ha', hb', Nat.mul_succ, Nat.add_mul]
@@ -135,7 +135,7 @@ def fact : Nat → Nat
 
 theorem fact_pos : ∀ u, 1 ≤ fact u
   | 0 => Nat.le_refl 1
-  | u + 1 => one_le_mul (u + 1) (fact u) (Nat.succ_le_succ (Nat.zero_le u))
+  | u + 1 => ap_one_le_mul (u + 1) (fact u) (Nat.succ_le_succ (Nat.zero_le u))
     (fact_pos u)
 
 /-- Fuel-structural p-adic valuation engine (K19 architecture). -/
@@ -240,7 +240,7 @@ theorem vp_mul : ∀ (f p a b : Nat), a + b ≤ f → p.Prime → 1 ≤ a → 1 
       have h0 : vp p 1 = 0 := vp_one p hp
       omega
     · by_cases hae : a % p = 0
-      · have hxy : 1 ≤ a * b := one_le_mul a b ha hb
+      · have hxy : 1 ≤ a * b := ap_one_le_mul a b ha hb
         have hb2 : (a * b) % p = 0 := by rw [Nat.mul_mod, hae]; simp
         have hsplit : a * b / p = (a / p) * b := dvd_mul_divp a b p (by omega) hae
         have hpa : a / p < a := Nat.div_lt_self (by omega) (by omega)
@@ -256,7 +256,7 @@ theorem vp_mul : ∀ (f p a b : Nat), a + b ≤ f → p.Prime → 1 ≤ a → 1 
         omega
       · by_cases hbe : b % p = 0
         · rw [Nat.mul_comm a b]
-          have hxy : 1 ≤ b * a := one_le_mul b a hb ha
+          have hxy : 1 ≤ b * a := ap_one_le_mul b a hb ha
           have hb2 : (b * a) % p = 0 := by rw [Nat.mul_mod, hbe]; simp
           have hsplit : b * a / p = (b / p) * a := dvd_mul_divp b a p (by omega) hbe
           have hpb : b / p < b := Nat.div_lt_self (by omega) (by omega)
@@ -276,7 +276,7 @@ theorem vp_mul : ∀ (f p a b : Nat), a + b ≤ f → p.Prime → 1 ≤ a → 1 
             rcases (hpp.dvd_mul).mp hdvd with h | h
             · exact hae (Nat.mod_eq_zero_of_dvd h)
             · exact hbe (Nat.mod_eq_zero_of_dvd h)
-          rw [vp_nondiv p (a * b) (one_le_mul a b ha hb) hab,
+          rw [vp_nondiv p (a * b) (ap_one_le_mul a b ha hb) hab,
               vp_nondiv p a ha hae, vp_nondiv p b hb hbe]
 
 /-! ## §2 THE FACTORIAL-QUOTIENT ENGINE (`qfact b t = ∏_{i=b+1}^{t} i`). -/
@@ -296,7 +296,7 @@ theorem qfact_pos : ∀ (t b : Nat), 1 ≤ qfact b t := by
     rw [he]
     by_cases hlt : b < t + 1
     · rw [if_pos hlt]
-      exact one_le_mul (t + 1) (qfact b t) (by omega) (ih b)
+      exact ap_one_le_mul (t + 1) (qfact b t) (by omega) (ih b)
     · rw [if_neg hlt]
 
 /-- **The factorial split.** `b ≤ t → t! = b! * ∏_{i=b+1}^{t} i`. -/
@@ -563,7 +563,7 @@ theorem pow_pos_own : ∀ (k n : Nat), 1 ≤ n → 1 ≤ n ^ k := by
   | succ k ih =>
     intro n hn
     rw [Nat.pow_succ]
-    exact one_le_mul (n ^ k) n (ih n hn) hn
+    exact ap_one_le_mul (n ^ k) n (ih n hn) hn
 
 /-- **The power valuation law**: `v_p (n^k) = k · v_p n` (n ≥ 1). -/
 theorem vp_pow : ∀ (F p k n : Nat), k ≤ F → p.Prime → 1 ≤ n →

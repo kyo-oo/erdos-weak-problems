@@ -101,7 +101,7 @@ theorem v2_odd (m : Nat) (h2 : m % 2 = 1) : v2 m = 0 := by
   have ⟨j, hj⟩ : ∃ j, m = j + 1 := ⟨m - 1, by omega⟩
   rw [hj, v2_succ, if_neg (by omega : ¬((j + 1) % 2 = 0))]
 
-theorem one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
+theorem skl_one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
   obtain ⟨a', ha'⟩ : ∃ a', a = a' + 1 := ⟨a - 1, by omega⟩
   obtain ⟨b', hb'⟩ : ∃ b', b = b' + 1 := ⟨b - 1, by omega⟩
   rw [ha', hb', Nat.mul_succ, Nat.add_mul]
@@ -109,7 +109,7 @@ theorem one_le_mul (a b : Nat) (ha : 1 ≤ a) (hb : 1 ≤ b) : 1 ≤ a * b := by
 
 theorem fact_pos : ∀ u, 1 ≤ fact u
   | 0 => Nat.le_refl 1
-  | u + 1 => one_le_mul (u + 1) (fact u) (Nat.succ_le_succ (Nat.zero_le u))
+  | u + 1 => skl_one_le_mul (u + 1) (fact u) (Nat.succ_le_succ (Nat.zero_le u))
     (fact_pos u)
 
 theorem even_mul_div2 (a b : Nat) (h : a % 2 = 0) :
@@ -134,7 +134,7 @@ theorem v2_mul : ∀ (f a b : Nat), a + b ≤ f → 1 ≤ a → 1 ≤ b →
     · rw [ha1, Nat.one_mul, v2_odd 1 (by omega)]
       omega
     · by_cases hae : a % 2 = 0
-      · have hxy : 1 ≤ a * b := one_le_mul a b (by omega) hb
+      · have hxy : 1 ≤ a * b := skl_one_le_mul a b (by omega) hb
         have hb2 : (a * b) % 2 = 0 := by rw [Nat.mul_mod, hae]; simp
         have hsplit : a * b / 2 = (a / 2) * b := even_mul_div2 a b hae
         rw [v2_even_pos _ hxy hb2, hsplit]
@@ -143,7 +143,7 @@ theorem v2_mul : ∀ (f a b : Nat), a + b ≤ f → 1 ≤ a → 1 ≤ b →
         omega
       · by_cases hbe : b % 2 = 0
         · rw [Nat.mul_comm a b]
-          have hxy : 1 ≤ b * a := one_le_mul b a hb (by omega)
+          have hxy : 1 ≤ b * a := skl_one_le_mul b a hb (by omega)
           have hb2 : (b * a) % 2 = 0 := by rw [Nat.mul_mod, hbe]; simp
           have hsplit : b * a / 2 = (b / 2) * a := even_mul_div2 b a hbe
           rw [v2_even_pos _ hxy hb2, hsplit]
@@ -526,7 +526,7 @@ theorem one_le_two_pow : ∀ (k : Nat), 1 ≤ 2 ^ k
   | 0 => Nat.le_refl 1
   | k + 1 => by
     rw [Nat.pow_succ]
-    exact one_le_mul (2 ^ k) 2 (one_le_two_pow k) (by omega : (1 : Nat) ≤ 2)
+    exact skl_one_le_mul (2 ^ k) 2 (one_le_two_pow k) (by omega : (1 : Nat) ≤ 2)
 
 theorem v2_zero : v2 0 = 0 := by simp [v2]
 
