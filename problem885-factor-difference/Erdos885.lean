@@ -76,10 +76,10 @@ theorem e885_two_two (x : Nat) : (2 * x) * (2 * x) = 4 * (x * x) := by
     rw [Nat.mul_comm x (2 * x), Nat.mul_assoc]
   rw [h1, h2]
   rw [← Nat.mul_assoc 2 2 (x * x)]
-  -- r1 post-mortem (CI run 43311092381): the trailing rfl of the
-  -- mul_assoc rewrite already closes the goal (2*2 is defeq 4 on
-  -- native Nat literals) — the extra show-rewrite ran with no goals.
-  rfl
+  -- r2/r3 post-mortem (CI runs 43311092381 + 43319633134): the trailing
+  -- rfl of the mul_assoc rewrite closes the goal (2*2 defeq 4 on native
+  -- Nat literals) — NO tactic may follow (r1's show-rewrite AND r2's
+  -- explicit rfl both died with "No goals to be solved").
 
 /-- (2x)·d = 2·(x·d) — right factor. -/
 theorem e885_cross_r (x d : Nat) : (2 * x) * d = 2 * (x * d) := by
