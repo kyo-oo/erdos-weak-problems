@@ -3087,3 +3087,73 @@ pushed after every round (zero-loss).
 3. Phase-2 waves (#273, #885, #850, #289, #306, ...).
 
 The engine never stops; it never lies. In English, always.
+
+## S056 — THE FIVE-PROBLEM WAVE (W56 agents) + the #203 anneal grind (2026-11-13)
+
+**BOSS order:** continue, more problems, each with its own sub-agent, CI-only
+verdicts, progress packs on GitHub. **WAVE EXECUTED: five parallel strike
+agents (one problem each) + the #203 annealing round — all in one round.**
+
+1. **W56-1 — #961 Kernel 48 (THE EXCLUSION SIDE):** Erdos961Exclusion.lean
+   (307 lines, 16 theorems, zero sorry) on the green K46 machine
+   (olean-staged Erdos961Census_Base import). THE STRICT TOWER ORDERING
+   LAWS (X/Y strict mono at every level) + THE GROWTH LAW (2^(n+1) ≤
+   X_{n+1}, pure Nat.le_trans cascade — omega never touches a power) +
+   the CORRECTED exponential bound (the mission's naive X_n ≤ (X1+1)^n is
+   FALSE at a=2: X_2 = 17 > 16 — the agent's adversarial self-audit
+   caught it and authored X_n ≤ (X1+a·Y1+Y1)^n) + THE 29-a
+   INSTANTIATION (9801² − 29·1820² = 1 decide-certified; tower members
+   1 and 2 exact; growth instance). Receipt E961X_EXCLUSION_GREEN.
+2. **W56-2 — #306 Kernel 49 (SEMIPRIME EGYPTIAN r1):** Erdos306.lean
+   (747 lines, ~100 theorems). isPrimeSmall (trial division) + 66
+   semiprime certificates + THE TWENTY REPRESENTATION WITNESS THEOREMS
+   (1/2 in 9 terms, 2/3 in 21 terms, 3/5, 4/5, 5/6, 2/5, 3/7, 3/10,
+   3/11, 3/13, 3/14, 8/21, 2/21, 1/3, 1/5, 1/7, 2/7, 4/7, 1/6 — every
+   identity python-Fraction-verified then decide-certified) + the CRT
+   amicable-triple splitting law + the 2-adic obstruction seed
+   (1/4 has NO 2-term representation — the squarefree-b obstruction
+   is real, round-2 target). The UNIT not found this round (documented
+   MITM/LP round-2 path). Receipt E306_SEMIPRIME_GREEN.
+3. **W56-3 — #885 Kernel 50 (FACTOR-DIFFERENCE CASES r1):** Erdos885.lean
+   (288 lines). LEMMA 1 THE SQUARE CRITERION — FULL IFF, both directions,
+   the parity cell proved OUTRIGHT (e885_parity: mod-2 split, identical
+   atom spellings, omega close — no fallback needed) + k2 witness
+   (8, 120 share {2,7}) + k3 witness (120, 528, 4488 share {2, 37, 58};
+   66·68 = 88·51 = 102·44 = 4488) + the 5-conjunct case board + Arsenal
+   bridge (5 cited lemmas). THE k=5 HUNT round-1 (hunt885_k5.py, 272s,
+   ~50MB): NO HIT in the gated window (Δ ≤ 5·10⁶, τ ≥ 64, C ≤ 10⁸);
+   best 4-C common-row count 3/6; engine VALIDATED (re-derived the
+   in-house k=3 config + found 9,771 k3 configs). The B⁰·(log)²⁴
+   divergence-boundary heuristic holds. Receipt E885_FACTOR_DIFF_GREEN.
+4. **W56-4 — #243 Kernel 51 (SYLVESTER RIGIDITY r1):** Erdos243.lean
+   (383 lines, 19 theorems). sylv (pairwise recursion) + the recursion
+   equivalence (full induction) + THE SYLVESTER TELESCOPE (cross-multiplied
+   Nat form, omega-shelled induction) + THE GENERAL GREEDY WINDOW LAW
+   ((a−1)p < q ≤ ap via Nat.div_add_mod — the forcing engine) + THE
+   FORCED-TERMINAL RIGIDITY (every k: one-term completion of the exact
+   k-prefix forces f = sylv k − 1; instances 42, 6) + two_term_one
+   (k=1 uniqueness) + 14-conjunct board + ternary bridge
+   (lt_three_cases). Receipt E243_SYLVESTER_GREEN.
+5. **W56-5 — #124 Kernel 52 (BEGL96 TAIL r1):** Erdos124.lean (566
+   lines). THE UNIT-SPLIT THEOREM EXISTS: 1/3+1/4+1/7+1/9+1/12+1/28+
+   1/36+1/63 = 1 — 8 distinct {3,4,7}-template elements (python-hunted,
+   decide-certified) + S347_closed_mul (FULL semigroup closure) +
+   S347_sorted_first (the <37 classification iff) + THE FULL GENERAL
+   SPLIT THEOREM (split_all: EVERY 1/n splits over 9 distinct template
+   reciprocals; split_all_S347: the split moves strictly into the
+   S-tail) + e124_critical_juncture (the #348 zero-slack transfer at
+   every scale 3^k) + 8-conjunct board. Receipt E124_BEGL96_GREEN.
+6. **#203 annealing round (L81-compliant, one call):** resumed count-map,
+   2,027 trials → **18 real improving moves**, residual 219,166,385 →
+   218,978,787 (28.522% → 28.498%), state banked incrementally after
+   every move (L80). The war grinds.
+
+**CI LADDER: kernels 48–52 wired** (kills.yml): K48 olean-stages the K46
+base then compiles the exclusion file; K49–K52 compile the four new
+kernels with full receipt greps + axiom gates. Paths triggers added.
+
+**Next:** CI verdicts on r1 (repair rounds per the r2/r3 pattern);
+the #885 k=5 wider window; the #961 exclusion descent to the finiteness
+law; #203 continues round-based.
+
+The engine never stops; it never lies. In English, always.

@@ -38,6 +38,10 @@ on:
       - problem271-status/**
       - problem261-full/**
       - problem406-ternary-powers/**
+      - problem306-semiprime-egyptian/**
+      - problem885-factor-difference/**
+      - problem243-sylvester/**
+      - problem124-begl96/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -1031,3 +1035,74 @@ jobs:
           grep -F "E961C_CENSUS_GREEN" kernel47.log
           grep -E "E961C.(prime101|fset_nonempty_101|e961c_frontier_13_47|e961c_frontier_13_97|e961c_frontier_5_97|e961c_smooth11_dict|erdos961_census_board)' (does not depend on any axioms|depends on axioms)" kernel47.log
           echo KERNEL47_GREEN=1
+      - name: "Kernel 48 - Erdos 961 THE EXCLUSION KERNEL (S056, W56-1): the Pell tower laws on the green K46 machine (olean-staged Erdos961Census_Base) — pell_tower_X_pos/Y_pos (tower positivity, stated at n+1) + THE STRICT ORDERING LAWS pell_tower_X_strict_mono/pell_tower_Y_strict_mono (every tower level strictly increases, via definitional Pell-unfold + L86-exact atom spellings) + THE GROWTH LAW pell_tower_growth (2^(n+1) <= X_{n+1}, the exponential doubling — pure Nat.le_trans cascade, omega never touches a power) + pell_tower_exp_bound (corrected form X_n <= (X1+a*Y1+Y1)^n; the naive (X1+1)^n bound is FALSE at a=2: X_2=17 > 16, caught by adversarial self-audit) + THE 29-a INSTANTIATION (pell29_fundamental: 9801^2 - 29*1820^2 = 1; pell29_tower_growth; pell29_tower_one/two exact members) + the 8-conjunct exclusion board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          mkdir -p oleans961x
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans961x${LP:+:$LP}"
+          echo "=== Erdos961Census_Base (to olean) ===" > kernel48.log
+          lake env lean -o oleans961x/Erdos961Census_Base.olean problem961-smooth-runs/Erdos961Census_Base.lean 2>&1 | tee -a kernel48.log
+          echo "=== Erdos961Exclusion ===" >> kernel48.log
+          lake env lean problem961-smooth-runs/Erdos961Exclusion.lean 2>&1 | tee -a kernel48.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel48.log
+          grep -F "E961X_EXCLUSION_GREEN" kernel48.log
+          grep -E "E961X.(pell_tower_X_pos|pell_tower_Y_pos|pell_tower_X_strict_mono|pell_tower_Y_strict_mono|pell_tower_growth|pell_tower_exp_bound|pell29_fundamental|pell29_fundamental_sol|pell29_tower_growth|pell29_tower_sol|pell29_tower_one|pell29_tower_two|e961x_exclusion_board)' (does not depend on any axioms|depends on axioms)" kernel48.log
+          echo KERNEL48_GREEN=1
+      - name: "Kernel 49 - Erdos 306 SEMIPRIME EGYPTIAN r1 (S056, W56-2): the representation kernel — isPrimeSmall (trial-division primality) + isSemiprime/isSemiprimeD + eleven prime certs + 66 semiprime certificates + THE TWENTY REPRESENTATION WITNESS THEOREMS (1/2 in 9 terms, 2/3 in 21, 3/5, 4/5, 5/6, 1/3, 1/5, 1/7, 2/7, 2/5, 3/7, 3/10, 3/11, 3/13, 3/14, 4/7, 8/21, 2/21, 1/6 — every identity python-Fraction-verified then decide-certified in Lean) + THE STRUCTURE LAWS (semiprime_even 4<=n, the CRT amicable-triple splitting law + 4 certs, the 2-adic obstruction seed no_rep_quarter_two: 1/4 has NO 2-term representation) + the three boards + the Arsenal bridge (v2r anchor 21=3*7)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem306-semiprime-egyptian/Erdos306.lean 2>&1 | tee kernel49.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel49.log
+          grep -F "E306_SEMIPRIME_GREEN" kernel49.log
+          grep -E "E306.(e306_semiprime_law|semiprime_even|split_lemma|rep_1_2|rep_2_3|rep_3_5|no_rep_quarter_two|e306_arsenal_bridge|e306_rep_board|e306_distinct_board|e306_witness_board)' (does not depend on any axioms|depends on axioms)" kernel49.log
+          echo KERNEL49_GREEN=1
+      - name: "Kernel 50 - Erdos 885 FACTOR-DIFFERENCE SETS r1 (S056, W56-3): the case kernel — dset (the additive truncation-free |a-b| encoding) + LEMMA 1 THE SQUARE CRITERION FULL IFF BOTH DIRECTIONS (d in D(N) iff 4N+d^2 = m^2 — the parity cell proved OUTRIGHT via e885_parity: mod-2 case split, both squares hand-expanded in identical atom spellings, omega closes) + THE WITNESS THEOREMS (k2: 8,120 share {2,7}; k3: 120,528,4488 share {2,37,58} — 66*68=4488, 88*51=4488, 102*44=4488) + the 5-conjunct case board + the Arsenal bridge (5 cited lemmas on the witness anchors) + the k=5 hunt round-1 census on disk (NO HIT in the gated window, best 3/6, engine validated on the in-house k3 config)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem885-factor-difference/Erdos885.lean 2>&1 | tee kernel50.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel50.log
+          grep -F "E885_FACTOR_DIFF_GREEN" kernel50.log
+          grep -E "E885.(dset_mem_iff|e885_parity|dset_square_fwd|dset_square_rev|dset_square_criterion|dset_square_criterion_parity|k2_witness|k3_witness|k3_distinct_sorted|e885_arsenal_bridge|e885_case_board)' (does not depend on any axioms|depends on axioms)" kernel50.log
+          echo KERNEL50_GREEN=1
+      - name: "Kernel 51 - Erdos 243 SYLVESTER RIGIDITY r1 (S056, W56-4): the rigidity kernel — sylv (the pairwise a^2-a+1 recursion) + sylvProd/sylvNum (division-free complementary-sum form) + sylv_prod_succ (the recursion equivalence, full induction) + THE SYLVESTER TELESCOPE (Sum 1/sylv(i) over i<n + 1/P(n) = 1 in cross-multiplied Nat form — the classical identity, omega-shelled induction) + sylv_greedy_identity + THE GENERAL GREEDY WINDOW LAW (greedy_window: the ceiling law (a-1)p < q <= a*p via Nat.div_add_mod) + sylv_window (the super-Sylvester window edges) + THE FORCED-TERMINAL RIGIDITY (sylv_forced_terminal: every k, one-term completion of the exact k-prefix forces f = sylv k - 1; forced_terminal_42/6 instances) + two_term_one (the k=1 uniqueness d+e=de -> d=e=2) + the 14-conjunct board + the ternary bridge (lt_three_cases on every base-3 digit)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem243-sylvester/Erdos243.lean 2>&1 | tee kernel51.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel51.log
+          grep -F "E243_SYLVESTER_GREEN" kernel51.log
+          grep -E "E243.(sylv_exact_6|sylv_strict_mono|sylv_prod_succ|sylv_telescope|sylv_greedy_identity|greedy_window|greedy_window_sylv|sylv_window|sylv_forced_terminal|forced_terminal_42|forced_terminal_6|two_term_one|e243_ternary_digit_window|e243_arsenal_bridge|e243_sylvester_board)' (does not depend on any axioms|depends on axioms)" kernel51.log
+          echo KERNEL51_GREEN=1
+      - name: "Kernel 52 - Erdos 124 BEGL96 TAIL COMPLETENESS r1 (S056, W56-5): the template kernel — inS347/S347 (the {3,4,7}-multiplicative semigroup recognizer) + S347_table (24 certified elements) + S347_closed_mul (FULL closure law via Nat.pow_add + AC-normalization) + S347_sorted_first (the <37 element classification iff) + S347_nonmember + THE UNIT-SPLIT THEOREM (unit_split_decided: 1/3+1/4+1/7+1/9+1/12+1/28+1/36+1/63 = 1 — 8 distinct template elements, python-hunted then decide-certified) + split_law_instances (6 concrete tail splits) + THE FULL GENERAL SPLIT THEOREM (split_all: every 1/n splits over 9 distinct template reciprocals; split_all_S347: the split moves strictly into the S-tail) + e124_critical_juncture (the #348 transfer: zero-slack exact splits at every scale 3^k) + the 8-conjunct board + the ternary bridge (the template exponent carriers 3^d)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem124-begl96/Erdos124.lean 2>&1 | tee kernel52.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel52.log
+          grep -F "E124_BEGL96_GREEN" kernel52.log
+          grep -E "E124.(S347_closed_mul|S347_sorted_first|S347_nonmember|S347_table|unit_split_decided|split_law_instances|split_all|split_all_S347|e124_critical_juncture|e124_arsenal_bridge|e124_begl96_board)' (does not depend on any axioms|depends on axioms)" kernel52.log
+          echo KERNEL52_GREEN=1

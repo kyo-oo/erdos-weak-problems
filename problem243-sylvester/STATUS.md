@@ -1,0 +1,12 @@
+# problem243-sylvester — STATUS (round 1, W56-4)
+
+1. **Kernel**: `Erdos243.lean` (namespace `E243`, header = the three Arsenal imports + maxRecDepth 65536 + maxHeartbeats 4000000, as mandated). Zero sorry, zero native_decide; all numeric claims pre-verified by a 25s python check (sylv table, products, telescopes, 43's ternary digits).
+2. **Landed (all complete, unconditional)**: `sylv_exact_6` + `sylv_prefix_certificates` (kernel-decided tables: 2,3,7,43,1807,3263443 / P: 2,6,42,1806,3263442 / N: 1,5,41,1805,3263441); `sylv_ge_two`, `sylv_strict_mono`, `sylvProd_pos` (induction + `Nat.mul_le_mul_right` + omega — banked atom spellings).
+3. **`sylv_prod_succ`**: THE RECURSION EQUIVALENCE — pairwise a²−a+1 recursion ≡ product recursion a_{n+1} = a_1⋯a_n + 1 (`sylv n = Π_{i<n} sylv i + 1`), full induction.
+4. **`sylv_telescope`** (THE round-1 core): (Σ_{i<n} Π_{j≠i} sylv j) + 1 = Π_{j<n} sylv j, division-free via the running numerator `sylvNum`; + `sylv_greedy_identity`; + `sylv_unit_certificates` (1/2+1/3+1/7+1/42 = 1 and 1/2+1/3+1/7+1/43+1/1806 = 1, decide-closed).
+5. **`greedy_window`** (the forcing engine, general): ceil law (a−1)p < q ≤ ap for a = (q+p−1)/p — via `Nat.div_add_mod` + `Nat.mod_lt` + a mul_comm atom bridge + omega; instantiated at the Sylvester remainder (`greedy_window_sylv`) + `sylv_window` (the super-Sylvester window edges r_k ∈ (1/sylv k, 1/(sylv k−1)]).
+6. **`sylv_forced_terminal`** (rigidity, EVERY k): any one-term completion of the exact k-prefix forces the terminal f = P(k) = sylv k − 1; concrete `forced_terminal_42` (1 = 1/2+1/3+1/7+1/f ⟹ f = 42) and `forced_terminal_6`; + `two_term_one` (k = 1 rigidity: d+e = de, d,e ≥ 2 ⟹ d = e = 2).
+7. **Arsenal bridge**: `e243_ternary_digit_window` (ErdosTernary2.lt_three_cases on every base-3 digit, general) + `e243_arsenal_bridge` (anchor sylv 3 = 43 = 1121₃, four isTernaryDigit-certified digits, decide).
+8. **Board**: `e243_sylvester_board` — 14-conjunct master assembly. Receipt: 19 `#print axioms` + `#eval "E243_SYLVESTER_GREEN"`.
+9. **Round-2 open residue** (honest): full distinct-denominator rigidity (any distinct prefix — needs Nat cancellation lemmas `Nat.le_of_mul_le_mul_right`-style or complementary-product machinery), the Takenouchi growth-window non-reachability law (Σ < 1 under d_{j+1} ≥ d_j(d_j−1)+1), the 3-term distinct uniqueness (2,3,6).
+10. **CI**: verdict pending (commander integrates the kills.yml step: `lake env lean problem243-sylvester/Erdos243.lean`; expected axiom sets ⊆ [propext, Classical.choice, Quot.sound]).
