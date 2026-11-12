@@ -2762,3 +2762,78 @@ channel's census kernels (the #961 Størmer-Pell closure) are named
 next strikes.
 
 The engine never stops; it never lies.
+
+---
+
+## SESSION 051 — 2026-11-12 — THE CONTINUATION ROUND (LANGUAGE LAW + THE VERDICT FLIPS + WAVE-D/E)
+
+**BOSS's order (this session, verbatim):** "uhm, can you add language law,
+sorry i cant speak chinese, so i dont understand you, in langugage law,
+only speak english, cointinue and tell me [the S050 battle report]"
+
+**THE LANGUAGE LAW (L75, permanent):** English only — every output, every
+round, forever. The S050 report was delivered largely in Chinese and BOSS
+could not read it. Fixed by law; the full English edition was delivered
+this session.
+
+**Executed:**
+
+1. **THE STATE RECOVERY:** the previous context window died mid-campaign
+   and its summary falsely claimed the corpus was absent from this
+   sandbox. Ground truth swept and proven: the FULL campaign lives here —
+   erdos-weak-problems @ b2383d1 (the S050 final), OMEGA-VAULT (token
+   LIVE, login kyo-oo), HC-PROOF, erdosternary2, THE_LIST v9. THE_CORE §7
+   law vindicated a second time.
+
+2. **THE VERDICT WAR:** the two grinding runs completed — 43132435789
+   (the r5 verdict @ 6109f71) and 43131166312 (the r4 verdict @
+   f786289). THE FLIPS: **Kernel 25 (#961) GREEN** (the L63b omega
+   atom-disconnection fix landed), **Kernel 35 (#461) GREEN** (the
+   projection fix landed), **Kernel 38 (#406) GREEN** (the receipt fix
+   landed). Kernel 30 (#1108) alone failed — with ONE error.
+
+3. **THE K30 r6 STRIKE:** Erdos1108AllPrime.lean:1347 — the statement's
+   last conjunct cited the PROOF TERM erdos1108ap_arsenal_bridge where
+   the PROPOSITION arsenalBridgeProp belongs (the proof-term-in-type
+   disease; every green assembly ends with the proposition —
+   erdos1108ap_main line 738, Erdos374 line 1110, Erdos282 line 339 all
+   prove the pattern). The sorryAx in the receipt was the
+   elaboration-failure artifact. One-line strike.
+
+4. **WAVE-D (5 agents, the Phase-C re-fires):** 3/5 delivered —
+   **P451** (erdos451_complete, 24 conjuncts), **P394** (erdos394_complete,
+   12 conjuncts + the unique-landing fusion), **P954** (erdos954_complete,
+   6 conjuncts + the block-5 break law). Casualties P1063/P1074 died
+   CLEAN (zero bytes written — the salvage git-diff confirmed).
+
+5. **WAVE-E (the 2 re-fires, tighter briefs — the A4→B1 survivor
+   pattern):** 2/2 delivered — **P1063** (erdos1063_complete, 13
+   conjuncts), **P1074** (erdos1074_complete, 16 conjuncts). Tighter
+   brief = survival.
+
+6. **THE WIRING + PUSH:** 5 CI gates wired (COMPLETE_GREEN + axiom
+   receipts on Kernels 20/21/23/27/29, every gate verified against the
+   on-disk receipts first); YAML validated; commit 2b709d6; pushed to
+   oneshot/1108-cascade-20261105. **RUN 43195891920 IN PROGRESS** — the
+   first compile of the 5 new assemblies + the K30 r6 verdict.
+
+**The scoreboard (S044 reset):** 11 CI-green assemblies standing
+(#1056, #404, #1073, #711, #271, #374, #1072, #282, #961, #461, #406)
++ the standing #261 K43 + 6 verdicts grinding (K30 #1108 r6 + the five
+completes #1063/#451/#394/#954/#1074). If the run lands clean: 17
+complete-proof kernel assemblies green in the two-round span.
+
+**Next strikes (the queue stands):** the run's verdict war (the next
+session reads it and fights any residuals); the P961 census kernel (the
+Størmer–Pell 40-pair closure — the f961 upper half); the Phase-2
+seventeen; the P271 L10 layer + stanley_T_family; the P711 Hall war.
+
+**LESSON LEDGER (append-only):**
+- L75 (Session 051): THE LANGUAGE LAW — English only, every output,
+  every round, permanent (BOSS cannot read Chinese; the S050 report was
+  half-lost to him).
+- L76: a dying context window's SUMMARY is not ground truth — it can
+  claim the corpus is absent while the corpus sits intact on disk.
+  THE_CORE §7 (sweep before claiming absence) proven necessary twice.
+
+The engine never stops; it never lies. In English, from now on.
