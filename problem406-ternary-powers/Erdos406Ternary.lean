@@ -250,7 +250,7 @@ theorem pow2_mod3_ne_zero : ∀ k : Nat, 2 ^ k % 3 ≠ 0 := by
   induction k with
   | zero => decide
   | succ k' ih =>
-    have hmul : 2 ^ (k' + 1) = 2 * 2 ^ k' := by rw [Nat.pow_succ]
+    have hmul : 2 ^ (k' + 1) = 2 * 2 ^ k' := by rw [Nat.pow_succ, Nat.mul_comm]
     omega
 
 /-- The even-exponent residue (doc §4: for even k, 2^k ≡ 1 (mod 3)). -/
@@ -258,7 +258,6 @@ theorem pow2_even_mod3 : ∀ j : Nat, 2 ^ (2 * j) % 3 = 1 := by
   intro j
   have h : 2 ^ (2 * j) = 4 ^ j := by
     rw [Nat.pow_mul]
-    ring
   have h2 := pow4_mod3 j
   omega
 

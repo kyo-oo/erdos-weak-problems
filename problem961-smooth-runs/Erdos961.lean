@@ -1042,21 +1042,36 @@ every prime factor of the 4-run (24,25,26,27) is ≤ 13 (26 = 2·13 is the
 worst case; 13 itself is not > 13). -/
 theorem no_prime14_dvd_frontier (p v : Nat) (hp : IsPrime p) (hge : 14 ≤ p)
     (hv : v = 24 ∨ v = 25 ∨ v = 26 ∨ v = 27) : ¬ p ∣ v := by
+  obtain ⟨_, hall⟩ := hp
   rintro ⟨c, hc⟩
-  rcases (show c = 0 ∨ c = 1 ∨ 2 ≤ c by omega) with c0 | c1 | c2
-  · rcases hv with h | h | h | h <;> subst h <;> omega
-  · rcases hv with h | h | h | h
-    · subst h; have hpv : p = 24 := by omega; subst hpv
-      obtain ⟨_, hall⟩ := hp; exact absurd (hall 2 ⟨12, by norm_num⟩) (by omega)
-    · subst h; have hpv : p = 25 := by omega; subst hpv
-      obtain ⟨_, hall⟩ := hp; exact absurd (hall 5 ⟨5, by norm_num⟩) (by omega)
-    · subst h; have hpv : p = 26 := by omega; subst hpv
-      obtain ⟨_, hall⟩ := hp; exact absurd (hall 2 ⟨13, by norm_num⟩) (by omega)
-    · subst h; have hpv : p = 27 := by omega; subst hpv
-      obtain ⟨_, hall⟩ := hp; exact absurd (hall 3 ⟨9, by norm_num⟩) (by omega)
-  · have hc2 : c = (c - 2) + 2 := by omega
-    rw [hc2, Nat.mul_add] at hc
+  rcases Nat.lt_or_ge 1 c with hge2 | hle2
+  · -- 1 < c : 2 ≤ c, so p * c ≥ 2p ≥ 28 > 27 ≥ v — impossible
+    have hmul2 : p * 2 ≤ p * c := Nat.mul_le_mul_left p (by omega)
     rcases hv with h | h | h | h <;> subst h <;> omega
+  · -- c ≤ 1 : c = 0 or c = 1
+    rcases Nat.eq_zero_or_pos c with c0 | cpos
+    · omega
+    · rcases hv with h | h | h | h
+      · subst h
+        have hpv : p = 24 := by omega
+        subst hpv
+        have hbad := hall 2 ⟨12, by norm_num⟩
+        rcases hbad with e | e <;> omega
+      · subst h
+        have hpv : p = 25 := by omega
+        subst hpv
+        have hbad := hall 5 ⟨5, by norm_num⟩
+        rcases hbad with e | e <;> omega
+      · subst h
+        have hpv : p = 26 := by omega
+        subst hpv
+        have hbad := hall 2 ⟨13, by norm_num⟩
+        rcases hbad with e | e <;> omega
+      · subst h
+        have hpv : p = 27 := by omega
+        subst hpv
+        have hbad := hall 3 ⟨9, by norm_num⟩
+        rcases hbad with e | e <;> omega
 
 /-- 17 is prime (the nonemptiness witness for the k = 13 row: any 17
 consecutive integers contain a multiple of 17, and 17 > 13). -/

@@ -674,11 +674,9 @@ theorem comp_of_not_prime_self (u : Nat) (h4 : 4 ≤ u) (hnpr : ¬ u.Prime) :
 
 /-- If 1 ≤ n and n·n < u then n < u (the scan-range helper). -/
 theorem lt_of_sq_lt (n u : Nat) (h1 : 1 ≤ n) (h : n * n < u) : n < u := by
-  cases n with
-  | zero => omega
-  | succ k =>
-      have hsucc := Nat.succ_mul_succ k k
-      omega
+  have hn1 : n * 1 ≤ n * n := Nat.mul_le_mul_left n h1
+  rw [Nat.mul_one] at hn1
+  omega
 
 /-- The terminating master witness scan: some n with 1 ≤ n, n·n < u,
 and u ∣ n!+1 (the corpus's unbounded `∃ n` collapsed to the √u window;
@@ -835,7 +833,7 @@ theorem erdos1073_complete :
       ∃ n : Nat, 1 ≤ n ∧ (Nat.factorial n + 1) % u = 0)) ∧
     (∀ n u : Nat, 2 ≤ u → ¬ u.Prime →
       (Nat.factorial n + 1) % u = 0 → n * n < u) ∧
-    (∀ x u : Nat, 4 ≤ u → u < x → ((∃ n : Nat, 1 ≤ n ∧
+    (∀ x u : Nat, 4 ≤ u → u < x → ¬ u.Prime → ((∃ n : Nat, 1 ≤ n ∧
       (Nat.factorial n + 1) % u = 0) ↔
       (∃ n : Nat, 1 ≤ n ∧ n * n < x ∧
         (Nat.factorial n + 1) % u = 0))) ∧

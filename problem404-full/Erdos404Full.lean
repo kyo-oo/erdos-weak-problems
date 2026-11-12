@@ -579,9 +579,12 @@ theorem erdos404_cube_bound (a : Nat) :
     omega
   rw [hbr, erdos404_cube_identity]
   have hpos : 1 ≤ a + 2 := by omega
+  have hprod : 1 ≤ (a + 2) * (a + 2) := by
+    have h1 : (a + 2) * 1 ≤ (a + 2) * (a + 2) := Nat.mul_le_mul_left (a + 2) hpos
+    omega
   have hm1 : v2 ((a + 2) * (a + 2) * (a + 2)) = v2 ((a + 2) * (a + 2)) + v2 (a + 2) :=
     v2_mul ((a + 2) * (a + 2) + (a + 2)) ((a + 2) * (a + 2)) (a + 2)
-      (Nat.le_refl _) hpos hpos
+      (Nat.le_refl _) hprod hpos
   have hm2 : v2 ((a + 2) * (a + 2)) = v2 (a + 2) + v2 (a + 2) :=
     v2_mul ((a + 2) + (a + 2)) (a + 2) (a + 2)
       (Nat.le_refl _) hpos hpos
