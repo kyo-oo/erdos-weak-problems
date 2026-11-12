@@ -76,7 +76,10 @@ theorem e885_two_two (x : Nat) : (2 * x) * (2 * x) = 4 * (x * x) := by
     rw [Nat.mul_comm x (2 * x), Nat.mul_assoc]
   rw [h1, h2]
   rw [← Nat.mul_assoc 2 2 (x * x)]
-  rw [show (2 : Nat) * 2 = 4 from by decide]
+  -- r1 post-mortem (CI run 43311092381): the trailing rfl of the
+  -- mul_assoc rewrite already closes the goal (2*2 is defeq 4 on
+  -- native Nat literals) — the extra show-rewrite ran with no goals.
+  rfl
 
 /-- (2x)·d = 2·(x·d) — right factor. -/
 theorem e885_cross_r (x d : Nat) : (2 * x) * d = 2 * (x * d) := by
@@ -184,6 +187,7 @@ theorem dset_square_criterion (N d : Nat) (hN : 1 ≤ N) :
   constructor
   · exact dset_square_fwd N d
   · intro hm
+    obtain ⟨m, hm⟩ := hm
     exact dset_square_rev N d m hN hm
 
 /-- The parity side of the square criterion, stated on its own
@@ -238,7 +242,7 @@ theorem e885_arsenal_bridge :
     (12 ^ 2 - 1 = (12 - 1) * (12 + 1)) ∧
     (4488 % (37 * 2)) % 37 = 4488 % 37 ∧
     carryAtPos 528 1 < 4 ∧
-    CardinalWorldsV2.v2r (3 ^ 1 * 40) = CardinalWorldsV2.v2r 40 :=
+    v2r (3 ^ 1 * 40) = v2r 40 :=
   ⟨by decide, sq_sub_one 12 (by decide), mod_mod_mul 4488 37 2 (by decide),
     carryAtPos_bound 528 1, CardinalWorldsV2.v2r_ternary_scaling 1 40⟩
 
@@ -257,7 +261,7 @@ theorem e885_case_board :
       d3 ∈ dset 120 ∧ d3 ∈ dset 528 ∧ d3 ∈ dset 4488) ∧
     (120 < 528 ∧ 528 < 4488) ∧
     ((4488 % (37 * 2)) % 37 = 4488 % 37 ∧
-      CardinalWorldsV2.v2r (3 ^ 1 * 40) = CardinalWorldsV2.v2r 40) :=
+      v2r (3 ^ 1 * 40) = v2r 40) :=
   ⟨fun N d hN => dset_square_criterion N d hN, k2_witness, k3_witness,
     k3_distinct_sorted,
     ⟨mod_mod_mul 4488 37 2 (by decide), CardinalWorldsV2.v2r_ternary_scaling 1 40⟩⟩

@@ -50,23 +50,25 @@ import set. No Mathlib tactics beyond that. No sorry. No axiom. No
 native_decide. -/
 namespace E961X
 
-/-! ## §0 Power stepping stones (orientation-blind, core-only). -/
-
-/-- The 2-power recursion in the left-multiplied orientation. The
-`first`-dual proof is immune to which orientation the core `Nat.pow`
-recursion takes. -/
-theorem pow2_step : ∀ k : Nat, 2 ^ (k + 1) = 2 * 2 ^ k := by
-  intro k
-  first
-  | rfl
-  | rw [Nat.mul_comm]
+/-! ## §0 Power stepping stones (r2 repair: the r1 orientation-blind
+`first | rfl | rw` failed on the LEFT-multiplied 2-power goal — CI run
+43311092381 post-mortem: `rfl` does not close `2 ^ (k+1) = 2 * 2 ^ k`
+definitionally, and the rw-reordered goal `2 ^ (k+1) = 2 ^ k * 2` is
+EXACTLY the right-orientation step. Fix: prove the right-orientation
+step first (rfl — CI-verified in r1), then chain through comm.). -/
 
 /-- The power recursion in the right-multiplied orientation (used for
-the M-bound expansion). -/
+the M-bound expansion; r1-CI-verified closes by rfl). -/
 theorem powMul_step (M k : Nat) : M ^ (k + 1) = M ^ k * M := by
-  first
-  | rfl
-  | rw [Nat.mul_comm]
+  rfl
+
+/-- The 2-power recursion in the left-multiplied orientation: rw turns
+the goal into `2 ^ (k + 1) = 2 ^ k * 2` (the exact r1 CI evidence),
+which is `powMul_step 2 k` verbatim. -/
+theorem pow2_step : ∀ k : Nat, 2 ^ (k + 1) = 2 * 2 ^ k := by
+  intro k
+  rw [Nat.mul_comm]
+  exact powMul_step 2 k
 
 /-! ## §1 Tower ordering laws (on the Kernel-46 Pell machine). -/
 

@@ -64,9 +64,12 @@ theorem pow_mono (x e f : Nat) (hx : 2 ≤ x) (hef : e ≤ f) : x ^ e ≤ x ^ f 
   | zero => rw [Nat.add_zero]
   | succ d ih =>
     rw [Nat.add_succ, Nat.pow_succ]
-    have h3 : 1 * x ^ (e + d) ≤ x * x ^ (e + d) :=
-      Nat.mul_le_mul_right (x ^ (e + d)) (by omega)
-    rw [Nat.one_mul] at h3
+    -- r2 repair (CI run 43311092381): the goal after pow_succ is
+    -- x^(e+d) ≤ x^(e+d) * x (RIGHT-multiplied atom); h3 must carry the
+    -- SAME spelling (the L86 atom law in term position).
+    have h3 : x ^ (e + d) * 1 ≤ x ^ (e + d) * x :=
+      Nat.mul_le_mul_left (x ^ (e + d)) (by omega)
+    rw [Nat.mul_one] at h3
     exact Nat.le_trans ih h3
 
 /-- A product of two ≥-1 factors is at least 1. -/
@@ -170,8 +173,12 @@ theorem S347_closed_mul : ∀ m n : Nat, inS347 m → inS347 n → inS347 (m * n
   obtain ⟨a, b, c, ha⟩ := hm
   obtain ⟨a', b', c', ha'⟩ := hn
   refine ⟨a + a', b + b', c + c', ?_⟩
-  rw [ha, ha', Nat.pow_add]
-  simp only [Nat.mul_comm, Nat.mul_assoc, Nat.mul_left_comm]
+  rw [ha, ha', Nat.pow_add, Nat.pow_add, Nat.pow_add]
+  -- r2 repair (CI run 43311092381): the single pow_add rewrite + AC-simp
+  -- left the goal unsolved; three rewrites (one per distinct instance)
+  -- + commutative-ring normalization close it (Mathlib ring is loaded
+  -- via the Arsenal's Mathlib import).
+  ring
 
 /-- The 12-case exclusion below 12 (exponent bounds a ≤ 2, b ≤ 1, c ≤ 1). -/
 theorem S347_below12 (n : Nat) (hn : n < 12) (h : inS347 n) :

@@ -353,7 +353,9 @@ theorem e243_sylvester_board :
       1 * 27 + 1 * 9 + 2 * 3 + 1 = 43 :=
   ⟨sylv_prod_succ, sylv_telescope, sylv_greedy_identity, sylv_forced_terminal,
     forced_terminal_42, forced_terminal_6, greedy_window, greedy_window_sylv,
-    sylv_window, two_term_one, sylv_strict_mono, sylv_exact_6,
+    sylv_window, two_term_one, sylv_strict_mono,
+    sylv_exact_6.1, sylv_exact_6.2.1, sylv_exact_6.2.2.1, sylv_exact_6.2.2.2.1,
+    sylv_exact_6.2.2.2.2.1, sylv_exact_6.2.2.2.2.2,
     e243_arsenal_bridge.1, e243_arsenal_bridge.2.2.2.2.1⟩
 
 /-! ## Receipt block. -/
