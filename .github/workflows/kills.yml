@@ -1015,3 +1015,19 @@ jobs:
           grep -F "E961P_KERNEL46_GREEN" kernel46.log
           grep -E "E961P.(pell_compose|pell_sol|descent_Y1_lt_Y|descent_XY1_lt|descent_pos|descent_sol)' (does not depend on any axioms|depends on axioms)" kernel46.log
           echo KERNEL46_GREEN=1
+      - name: "Kernel 47 - Erdos 961 THE CENSUS KERNEL r1 (S054): the 40-pair Størmer witness census (e961c_smooth11_dict — every certified value n has n and n+1 both 11-smooth, explicit exponent vectors) + prime101 + the nine nba run-element laws + THE FRONTIER EXTENSION (e961c_frontier_13_97 via the 3-runs 48/54/98) + THE CONTINUOUS FRONTIER LAW (e961c_frontier_5_97: f(k) >= 4 for ALL 5 <= k <= 97, chaining green Kernel-25) + THE 4-CONJUNCT MASTER BOARD (erdos961_census_board)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p oleans961
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans961${LP:+:$LP}"
+          echo "=== Erdos961 (to olean) ===" > kernel47.log
+          lake env lean -o oleans961/Erdos961.olean problem961-smooth-runs/Erdos961.lean 2>&1 | tee -a kernel47.log
+          echo "=== Erdos961Census ===" >> kernel47.log
+          lake env lean problem961-smooth-runs/Erdos961Census.lean 2>&1 | tee -a kernel47.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel47.log
+          grep -F "E961C_CENSUS_GREEN" kernel47.log
+          grep -E "E961C.(prime101|fset_nonempty_101|e961c_frontier_13_47|e961c_frontier_13_97|e961c_frontier_5_97|e961c_smooth11_dict|erdos961_census_board)' (does not depend on any axioms|depends on axioms)" kernel47.log
+          echo KERNEL47_GREEN=1
