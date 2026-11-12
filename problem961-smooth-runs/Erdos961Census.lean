@@ -48,9 +48,9 @@ theorem prime101 : IsPrime 101 := by
     all_goals omega
   · obtain ⟨c, hc⟩ := hdd
     rcases Nat.eq_zero_or_pos c with h0 | hpos
-    · rw [Nat.mul_zero] at hc
+    · rw [h0, Nat.mul_zero] at hc
       omega
-    · have h11 : c * 11 ≤ c * d := Nat.mul_le_mul_left c h'
+    · have h11 : 11 * c ≤ d * c := Nat.mul_le_mul_right c h'
       rcases (show c = 1 ∨ 2 ≤ c by omega) with h1 | h2
       · rw [h1, Nat.mul_one] at hc
         omega
@@ -89,9 +89,9 @@ theorem nba48 (k : Nat) (hk : 13 ≤ k) : ¬ HasPrimeAbove 48 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 14 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h14 : c * 14 ≤ c * p := Nat.mul_le_mul_left c hge
+  · have h14 : 14 * c ≤ p * c := Nat.mul_le_mul_right c hge
     rcases (show c = 1 ∨ c = 2 ∨ c = 3 by omega) with h' | h' | h'
     · rw [h', Nat.mul_one] at hc
       subst hc
@@ -112,9 +112,9 @@ theorem nba49 (k : Nat) (hk : 13 ≤ k) : ¬ HasPrimeAbove 49 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 14 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h14 : c * 14 ≤ c * p := Nat.mul_le_mul_left c hge
+  · have h14 : 14 * c ≤ p * c := Nat.mul_le_mul_right c hge
     rcases (show c = 1 ∨ c = 2 ∨ c = 3 by omega) with h' | h' | h'
     · rw [h', Nat.mul_one] at hc
       subst hc
@@ -131,9 +131,9 @@ theorem nba50 (k : Nat) (hk : 13 ≤ k) : ¬ HasPrimeAbove 50 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 14 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h14 : c * 14 ≤ c * p := Nat.mul_le_mul_left c hge
+  · have h14 : 14 * c ≤ p * c := Nat.mul_le_mul_right c hge
     rcases (show c = 1 ∨ c = 2 ∨ c = 3 by omega) with h' | h' | h'
     · rw [h', Nat.mul_one] at hc
       subst hc
@@ -152,10 +152,11 @@ theorem nba54 (k : Nat) (hk : 48 ≤ k) : ¬ HasPrimeAbove 54 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 49 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h49 : c * 49 ≤ c * p := Nat.mul_le_mul_left c hge
-    rw [Nat.mul_one] at hc
+  · have h49 : 49 * c ≤ p * c := Nat.mul_le_mul_right c hge
+    have hc1 : c = 1 := by omega
+    rw [hc1, Nat.mul_one] at hc
     have hpv : p = 54 := by omega
     subst hpv
     exact absurd (hall 2 ⟨27, by norm_num⟩) (by omega)
@@ -167,10 +168,11 @@ theorem nba55 (k : Nat) (hk : 48 ≤ k) : ¬ HasPrimeAbove 55 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 49 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h49 : c * 49 ≤ c * p := Nat.mul_le_mul_left c hge
-    rw [Nat.mul_one] at hc
+  · have h49 : 49 * c ≤ p * c := Nat.mul_le_mul_right c hge
+    have hc1 : c = 1 := by omega
+    rw [hc1, Nat.mul_one] at hc
     have hpv : p = 55 := by omega
     subst hpv
     exact absurd (hall 5 ⟨11, by norm_num⟩) (by omega)
@@ -182,10 +184,11 @@ theorem nba56 (k : Nat) (hk : 48 ≤ k) : ¬ HasPrimeAbove 56 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 49 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h49 : c * 49 ≤ c * p := Nat.mul_le_mul_left c hge
-    rw [Nat.mul_one] at hc
+  · have h49 : 49 * c ≤ p * c := Nat.mul_le_mul_right c hge
+    have hc1 : c = 1 := by omega
+    rw [hc1, Nat.mul_one] at hc
     have hpv : p = 56 := by omega
     subst hpv
     exact absurd (hall 2 ⟨28, by norm_num⟩) (by omega)
@@ -197,10 +200,11 @@ theorem nba98 (k : Nat) (hk : 54 ≤ k) : ¬ HasPrimeAbove 98 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 55 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h55 : c * 55 ≤ c * p := Nat.mul_le_mul_left c hge
-    rw [Nat.mul_one] at hc
+  · have h55 : 55 * c ≤ p * c := Nat.mul_le_mul_right c hge
+    have hc1 : c = 1 := by omega
+    rw [hc1, Nat.mul_one] at hc
     have hpv : p = 98 := by omega
     subst hpv
     exact absurd (hall 2 ⟨49, by norm_num⟩) (by omega)
@@ -212,10 +216,11 @@ theorem nba99 (k : Nat) (hk : 54 ≤ k) : ¬ HasPrimeAbove 99 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 55 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h55 : c * 55 ≤ c * p := Nat.mul_le_mul_left c hge
-    rw [Nat.mul_one] at hc
+  · have h55 : 55 * c ≤ p * c := Nat.mul_le_mul_right c hge
+    have hc1 : c = 1 := by omega
+    rw [hc1, Nat.mul_one] at hc
     have hpv : p = 99 := by omega
     subst hpv
     exact absurd (hall 3 ⟨33, by norm_num⟩) (by omega)
@@ -227,10 +232,11 @@ theorem nba100 (k : Nat) (hk : 54 ≤ k) : ¬ HasPrimeAbove 100 k := by
   obtain ⟨c, hc⟩ := hpd
   have hge : 55 ≤ p := by omega
   rcases Nat.eq_zero_or_pos c with h0 | hpos
-  · rw [Nat.mul_zero] at hc
+  · rw [h0, Nat.mul_zero] at hc
     omega
-  · have h55 : c * 55 ≤ c * p := Nat.mul_le_mul_left c hge
-    rw [Nat.mul_one] at hc
+  · have h55 : 55 * c ≤ p * c := Nat.mul_le_mul_right c hge
+    have hc1 : c = 1 := by omega
+    rw [hc1, Nat.mul_one] at hc
     have hpv : p = 100 := by omega
     subst hpv
     exact absurd (hall 2 ⟨50, by norm_num⟩) (by omega)
