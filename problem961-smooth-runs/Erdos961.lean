@@ -1050,24 +1050,33 @@ theorem no_prime14_dvd_frontier (p v : Nat) (hp : IsPrime p) (hge : 14 ≤ p)
     rcases hv with h | h | h | h <;> subst h <;> omega
   · -- c ≤ 1 : c = 0 or c = 1
     rcases Nat.eq_zero_or_pos c with c0 | cpos
-    · omega
+    · rw [c0] at hc
+      rcases hv with h | h | h | h <;> subst h <;> omega
     · rcases hv with h | h | h | h
       · subst h
+        have hc1 : c = 1 := by omega
+        rw [hc1] at hc
         have hpv : p = 24 := by omega
         subst hpv
         have hbad := hall 2 ⟨12, by norm_num⟩
         rcases hbad with e | e <;> omega
       · subst h
+        have hc1 : c = 1 := by omega
+        rw [hc1] at hc
         have hpv : p = 25 := by omega
         subst hpv
         have hbad := hall 5 ⟨5, by norm_num⟩
         rcases hbad with e | e <;> omega
       · subst h
+        have hc1 : c = 1 := by omega
+        rw [hc1] at hc
         have hpv : p = 26 := by omega
         subst hpv
         have hbad := hall 2 ⟨13, by norm_num⟩
         rcases hbad with e | e <;> omega
       · subst h
+        have hc1 : c = 1 := by omega
+        rw [hc1] at hc
         have hpv : p = 27 := by omega
         subst hpv
         have hbad := hall 3 ⟨9, by norm_num⟩

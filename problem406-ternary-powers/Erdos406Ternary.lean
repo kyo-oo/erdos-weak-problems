@@ -563,6 +563,7 @@ theorem census_receipts :
 #print axioms erdos406_solution_even
 #print axioms erdos406_standing_constraints
 #print axioms erdos406_complete_structure
+#print axioms witness_256_min_profile
 
 #eval "ERDOS406_TERNARY_KERNEL_GREEN"
 #eval "ERDOS406_COMPLETE_PROOF_BOARD_GREEN"
