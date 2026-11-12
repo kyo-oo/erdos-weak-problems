@@ -93,7 +93,9 @@ theorem descent_Y1_lt_Y {a X1 Y1 X Y : Nat}
   have hsq : Y * Y ≤ Y1 * Y1 := Nat.mul_le_mul hle hle
   have hxx : X * X ≤ X1 * X1 := by
     rw [hX, hf]
-    have h : a * Y * Y ≤ a * Y1 * Y1 := Nat.mul_le_mul_left a hsq
+    have h : a * (Y * Y) ≤ a * (Y1 * Y1) := Nat.mul_le_mul_left a hsq
+    have h2 : a * Y * Y = a * (Y * Y) := by ring
+    have h3 : a * Y1 * Y1 = a * (Y1 * Y1) := by ring
     omega
   have hmono : (X1 + 1) * (X1 + 1) ≤ X * X :=
     Nat.mul_le_mul (by omega) (by omega)
@@ -142,7 +144,7 @@ theorem descent_pos {a X1 Y1 X Y : Nat}
       ring
     rw [hL, hR] at hsq
     omega
-  exact ⟨hE, by omega⟩
+  exact ⟨by omega, by omega⟩
 
 /-- THE KEY IDENTITY ASSEMBLY: the conjugate pair (w1, w2) =
 (X₁X − a·Y·Y₁, X₁Y − XY₁) satisfies w1² = a·w2² + 1 — it is itself a
@@ -161,6 +163,7 @@ theorem descent_sol {a X1 Y1 X Y : Nat}
       = a * (X1 * Y - X * Y1) * (X1 * Y - X * Y1) + 1 := by
   have hYY1 : Y1 < Y := descent_Y1_lt_Y hf hX hgt
   have hXY1 : X * Y1 < X1 * Y := descent_XY1_lt hf hX hgt
+  obtain ⟨hE, hG⟩ := descent_pos hpos hf hX hgt
   obtain ⟨w1, hF⟩ : ∃ w1, X1 * X = a * Y * Y1 + w1 :=
     ⟨X1 * X - a * Y * Y1, by omega⟩
   obtain ⟨w2, hH⟩ : ∃ w2, X1 * Y = X * Y1 + w2 :=
@@ -232,5 +235,4 @@ end E961P
 #print axioms E961P.descent_pos
 #print axioms E961P.descent_sol
 
-#eval "'[propext, Classical.choice, Quot.sound]'"
 #eval "E961P_KERNEL46_GREEN"
