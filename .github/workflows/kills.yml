@@ -595,9 +595,11 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel22.log
           grep -F "ERDOS1072_DATA_GREEN" kernel22.log
           grep -F "ERDOS1072_KERNEL_GREEN" kernel22.log
+          grep -F "ERDOS1072_COMPLETE_GREEN" kernel22.log
           grep -E "Erdos1072.erdos1072_pair_law' (does not depend on any axioms|depends on axioms)" kernel22.log
           grep -E "Erdos1072.erdos1072_wilson_pair_classic' (does not depend on any axioms|depends on axioms)" kernel22.log
           grep -E "Erdos1072.erdos1072_pair_(7|23|71)' (does not depend on any axioms|depends on axioms)" kernel22.log
+          grep -E "Erdos1072.(erdos1072_pair_equivalence|erdos1072_top_chain_dictionary|erdos1072_least_solution_law|erdos1072_exception_7|erdos1072_witness_6089|erdos1072_complete)' (does not depend on any axioms|depends on axioms)" kernel22.log
           python3 problem1072-wilson-chain/battery1072.py
           echo ERDOS1072_WILSON_PAIR_LAW_KERNEL_GREEN=1
 
@@ -703,7 +705,9 @@ jobs:
           lake env lean problem282-odd-greedy/Erdos282.lean 2>&1 | tee -a kernel28.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel28.log
           grep -F "ERDOS282_STEIN_KERNEL_GREEN" kernel28.log
+          grep -F "ERDOS282_COMPLETE_GREEN" kernel28.log
           grep -E "Erdos282.(erdos282_(odd_closure|step_bound|census|arsenal_bridge|main)|simTerm_sound)' (does not depend on any axioms|depends on axioms)" kernel28.log
+          grep -E "Erdos282.(erdos282_(step_domain|step_value|representation)|erdos282_complete)' (does not depend on any axioms|depends on axioms)" kernel28.log
           python3 problem282-odd-greedy/battery282.py
           echo ERDOS282_STEIN_CENSUS_KERNEL_GREEN=1
 

@@ -353,7 +353,6 @@ theorem sgn_sq (p m : Nat) (hp : 2 ≤ p) : sgn p m * sgn p m ≡ 1 [MOD p] := b
   rcases Nat.mod_two_eq_zero_or_one m with h | h
   · have h1 : sgn p m = 1 := by unfold sgn; rw [h]; exact if_pos rfl
     rw [h1]
-    exact meq_of_eq _ _ _ (Nat.one_mul _)
   · have h1 : sgn p m = p - 1 := by unfold sgn; rw [h]; exact if_neg (by decide)
     rw [h1]
     exact sqn p hp
@@ -498,7 +497,7 @@ theorem erdos1072_top_chain_dictionary (p k : Nat) (hp : 3 ≤ p)
   have hmid : p - 1 - (p - 1 - k) = k := by omega
   have hpar : sgn p (p - 1 - k) = sgn p k :=
     sgn_par p (p - 1 - k) k hodd (by omega)
-  rw [hmid, hpar] at hc1
+  rw [hmid] at hc1
   exact hc1
 
 /-! ## §15 C8 — THE LEAST-SOLUTION LAW (COMPLETE_PROOF.md §4, C8(ii)).
@@ -517,7 +516,7 @@ theorem erdos1072_least_solution_law (p m : Nat) (hp : 5 ≤ p)
   · have hcases : m = p - 4 ∨ m = p - 3 ∨ m = p - 2 := by omega
     rcases hcases with h | h | h
     · rw [h] at hmin
-      have hC73 := erdos1072_top_chain_dictionary p 3 hp hodd (by omega) (by omega) hW
+      have hC73 := erdos1072_top_chain_dictionary p 3 (by omega : 3 ≤ p) hodd (by omega) (by omega) hW
       have hb3 : p - 1 - 3 = p - 4 := by omega
       rw [hb3] at hC73
       have hcontra := hC73.mp hmin
@@ -535,14 +534,14 @@ theorem erdos1072_least_solution_law (p m : Nat) (hp : 5 ≤ p)
         rw [hpv, h6v] at hc
         omega
     · rw [h] at hmin
-      have hC72 := erdos1072_top_chain_dictionary p 2 hp hodd (by omega) (by omega) hW
+      have hC72 := erdos1072_top_chain_dictionary p 2 (by omega : 3 ≤ p) hodd (by omega) (by omega) hW
       have hb2 : p - 1 - 2 = p - 3 := by omega
       rw [hb2] at hC72
       have hcontra := hC72.mp hmin
       rw [fm_two p (by omega), sgn_two p] at hcontra
       omega
     · rw [h] at hmin
-      have hC71 := erdos1072_top_chain_dictionary p 1 hp hodd (by omega) (by omega) hW
+      have hC71 := erdos1072_top_chain_dictionary p 1 (by omega : 3 ≤ p) hodd (by omega) (by omega) hW
       have hb1 : p - 1 - 1 = p - 2 := by omega
       rw [hb1] at hC71
       have hcontra := hC71.mp hmin

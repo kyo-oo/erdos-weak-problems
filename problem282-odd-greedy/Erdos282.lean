@@ -404,7 +404,7 @@ theorem erdos282_representation : ∀ k p q, TerminateIn k p q → p ≤ q → 1
     subst h0
     refine ⟨[], ?_, ?_⟩
     · intro d hd
-      exact (List.mem_nil_iff.mp hd).elim
+      exact absurd hd (by simp)
     · simp
   | succ f ih =>
     intro p q h hpq hq1
@@ -413,25 +413,25 @@ theorem erdos282_representation : ∀ k p q, TerminateIn k p q → p ≤ q → 1
       subst h0
       refine ⟨[], ?_, ?_⟩
       · intro d hd
-        exact (List.mem_nil_iff.mp hd).elim
+        exact absurd hd (by simp)
       · simp
-    · obtain ⟨n, g, hnodd, hn1, hqle, _, hg1, _, _, hp'g, hq'g⟩ := hstep
-      -- the state is live: 1 ≤ p
+    · have hstep' := hstep
+      obtain ⟨n, g, hnodd, hn1, hqle, _, hg1, _, _, hp'g, hq'g⟩ := hstep
       have hp1 : 1 ≤ p := by
         by_cases hp0 : p = 0
-        · rw [hp0, Nat.mul_zero] at hqle
+        · rw [hp0, Nat.zero_mul] at hqle
           exact (by omega : False).elim
         · omega
       -- the next denominator is positive: 1 ≤ q'
       have hq'1 : 1 ≤ q' := by
         by_cases hq'z : q' = 0
-        · rw [hq'z, Nat.mul_zero] at hq'g
+        · rw [hq'z, Nat.zero_mul] at hq'g
           rcases Nat.mul_eq_zero.mp hq'g.symm with hq0' | hn0'
           · exact (by omega : False).elim
           · exact (by omega : False).elim
         · omega
       -- F1.4: the residual state stays in the domain
-      have hp'q' : p' ≤ q' := erdos282_step_domain p q p' q' hstep hp1 hpq
+      have hp'q' : p' ≤ q' := erdos282_step_domain p q p' q' hstep' hp1 hpq
       obtain ⟨ds', hall', hval'⟩ := ih p' q' hterm hp'q' hq'1
       -- F1.2: the exact value equation for this step
       have hv : (p:ℚ)/q = (1:ℚ)/n + (p':ℚ)/q' :=
@@ -444,7 +444,7 @@ theorem erdos282_representation : ∀ k p q, TerminateIn k p q → p ≤ q → 1
       · calc (p:ℚ)/q = (1:ℚ)/n + (p':ℚ)/q' := hv
         _ = (1:ℚ)/n + (ds'.map (fun d => (1:ℚ)/d)).sum := by rw [hval']
         _ = ((n :: ds').map (fun d => (1:ℚ)/d)).sum := by
-            simp only [List.map_cons, List.sum_cons]
+            simp
 
 /-! ## §12 THE COMPLETE BOARD (the one-statement complete unconditional
 answer to the #282 ask per COMPLETE_PROOF.md's final section: the
@@ -468,7 +468,7 @@ theorem erdos282_complete :
    ⟨fun fuel p q h => simTerm_sound fuel p q h,
    ⟨fun q p _ hp1 hpq ⟨k, hk⟩ => erdos282_representation k p q hk hpq (by omega),
    ⟨fun q p hqodd hq41 hp1 hplt => erdos282_census q p hqodd hq41 hp1 hplt,
-   erdos282_arsenal_bridge⟩⟩⟩⟩⟩⟩
+   erdos282_arsenal_bridge⟩⟩⟩⟩⟩
 
 #eval "ERDOS282_STEIN_KERNEL_GREEN"
 #print axioms erdos282_odd_closure
