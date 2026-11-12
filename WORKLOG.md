@@ -2924,3 +2924,62 @@ WITH FULL POWER,. EACH PROBLEM GETS ITS OWN SUB AGENTS, GO"
 4. The P711 Hall war + the P271 L10 layer (standing Phase-1 items).
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## SESSION 054 — THE ENVIRONMENT WAR + KERNEL 46 r3 GREEN + KERNEL 47 FIRED
+
+**Timestamp:** 2026-11-12 (continuation, boss-ordered environment triage first)
+
+1. **THE ENVIRONMENT WAR (boss's priority order, executed first):**
+   - Site crash root-caused: the 30-line placeholder page.tsx had a bad
+     import (Card from badge.tsx) → GET / 500. Fixed: proper shadcn imports
+     + the full Command Center dashboard (campaign scoreboard, in-flight
+     fronts, laws, sticky footer, responsive, dark-aware, a11y semantics).
+   - Cross-origin preview warning killed: allowedDevOrigins ["*.space-z.ai"]
+     in next.config.ts. Title updated. Browser-verified: mobile 390px and
+     desktop 1440px zero horizontal overflow, zero console errors, footer
+     law holds. THE SITE IS GREEN.
+   - THE REAL KILLER CHAIN: the 3-4GB covering jobs OOM-restarted the
+     sandbox → killed the site AND the conversation repeatedly. Compute
+     law enforced: all jobs bounded, round-based, packbits bitmaps.
+2. **THE CHANNEL LAW EXTENDED (L82):** the Bash tool kills ALL background
+     children at call end — nohup, setsid, disown ALL die. Zero persistent
+     background compute; every long job must fit inside ONE bounded call
+     with disk-persisted resumable state.
+3. **KERNEL 46 r3 GREEN (run 43275240470):** Erdos961Census_Base.lean —
+     THE GENERIC PELL DESCENT MACHINE, all six theorems axiom-clean
+     [propext, Quot.sound]: pell_compose (Brahmagupta), pell_sol,
+     descent_Y1_lt_Y, descent_XY1_lt, descent_pos, descent_sol (the
+     conjugate-solution assembly on the CORRECTED key X·w1 = X1 + a·Y·w2 —
+     the naive X·w1 − Y·w2 = X1 is FALSE at a=2: 27 ≠ 3; the r1→r3 war
+     took 3 CI rounds: missing Arsenal header → 3 surgical fixes).
+4. **KERNEL 47 FIRED (census kernel r1):** Erdos961Census.lean — the
+     40-pair Størmer witness census (all exponent vectors hand-verified),
+     prime101 + the 101-window, nine nba divisor-count laws, the frontier
+     rows (48/54/98), THE CONTINUOUS FRONTIER LAW f(k) ≥ 4 for ALL
+     5 ≤ k ≤ 97 (chains green Kernel-25), the 4-conjunct master board.
+     CI in flight.
+5. **THE #203 COVERING WAR (L=55440 all-member engine):** the 27720
+     family is EXHAUSTED at 1.59% (repair: zero single-W moves — local
+     optimum; the palette only has 41 primes with h | 27720). The escape:
+     L = 55440 (52 members, budget 1.1628, finer geometry). Engine:
+     packbits 384MB + incremental save per layer (L80: round-1's
+     save-at-end design lost 9 minutes to the 570s timeout kill).
+     Rounds 1-3: 17/52 layers, 2.56% remaining. ~6 more rounds.
+6. **NEW LAWS:**
+   - L80 — THE INCREMENTAL STATE LAW: save after EVERY layer, never
+     only at the end (a timeout kill must never erase compute).
+   - L81 — THE GIT BINARY LAW: no big binary caches in git (GitHub
+     pre-receive rejects ~100MB pushes); state JSONs are canonical,
+     bitmaps regenerate.
+   - L82 — THE CHANNEL LAW (Bash): zero persistent background procs.
+
+**Next strikes:**
+1. Kernel 47 verdict → the census kernel joins the board (scoreboard 18).
+2. The 55440 grind to closure (or stall analysis at the residual).
+3. The descent machine's next layers: ordering lemmas + power_rep +
+   the growth law + the 29-a instantiation (the #961 exclusion side).
+4. Phase-2 waves continue (#273, #885, #850, ...).
+
+The engine never stops; it never lies. In English, always.
