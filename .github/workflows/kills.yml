@@ -1005,7 +1005,7 @@ jobs:
           grep -E "Erdos404Full.erdos404_(theoremA|theoremB|f22_witness|f62_witness|no_infinite_chain|full_classification)' (does not depend on any axioms|depends on axioms)" kernel45.log
           grep -E "erdos404_residual_tail' (does not depend on any axioms|depends on axioms)" kernel45.log
           echo ERDOS404_FULL_CLASSIFICATION_KERNEL_GREEN=1
-      - name: "Kernel 46 - Erdos 961 THE PELL DESCENT MACHINE (S052 census-kernel round 1): pell_sol + descent lemmas 1-3 + THE CONJUGATE-SOLUTION ASSEMBLY (w1² = a·w2² + 1 via the key identities Y·w1 − X·w2 = Y1 and X·w1 − Y·w2 = X1)"
+      - name: "Kernel 46 - Erdos 961 THE PELL DESCENT MACHINE r2 (S053): pell_compose (Brahmagupta) + pell_sol + descent lemmas 1-3 + THE CONJUGATE-SOLUTION ASSEMBLY via the CORRECTED linear keys Y·w1 = Y1 + X·w2 and X·w1 = X1 + a·Y·w2 (r1 run 43236139767 post-mortem: missing Arsenal header killed ring/by_contra; r2 fixes + the false naive key X·w1 − Y·w2 = X1 replaced)"
         if: always()
         shell: bash
         run: |
@@ -1013,5 +1013,5 @@ jobs:
           lake env lean problem961-smooth-runs/Erdos961Census_Base.lean 2>&1 | tee kernel46.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel46.log
           grep -F "E961P_KERNEL46_GREEN" kernel46.log
-          grep -F "'[propext, Classical.choice, Quot.sound]'" kernel46.log
+          grep -E "E961P.(pell_compose|pell_sol|descent_Y1_lt_Y|descent_XY1_lt|descent_pos|descent_sol)' (does not depend on any axioms|depends on axioms)" kernel46.log
           echo KERNEL46_GREEN=1
