@@ -2685,3 +2685,80 @@ session reads them and fights the next compile rounds.
 closure); the P271 L10 layer + stanley_T_family assembly; the P711 r4
 verdict + the Hall war; the conversion queue's remaining fronts; the
 Phase-2 seventeen. The engine never stops; it never lies.
+
+---
+
+## SESSION 050 (final entry) — THE COMPILE-WAR LEDGER (the round's kills)
+
+**The round fired 15 sub-agents across 3 waves (A/B/C), delivered 11
+kernel products, and fought 5 compile-war rounds (r2-r5). The CI
+verdicts read to date:**
+
+**CI-GREEN THIS SESSION (8 complete-proof kernel assemblies):**
+1. **#1056 Kernel 18-G GREEN (d1b8199):** FI_FINAL — the k=2..11 case
+   law + THE CASE-FRONTIER THEOREM (first-compile green).
+2. **#404 Kernel 45 GREEN (3c14560):** Erdos404Full — Theorem A + B +
+   cited K37 laws + f(2,2)=254/f(6,2)=133 + the no-infinite-chain
+   compactness + THE 12-CONJUNCT FULL CLASSIFICATION (r2's hprod bridge
+   killed the single first-compile error).
+3. **#1073 Kernel 34 GREEN (3c14560):** erdos1073_complete — the
+   17-conjunct board (r2: lt_of_sq_lt rebuilt on mul_le_mul_left +
+   Nat.mul_one; the cluster conjunct's ¬ u.Prime restored).
+4. **#711 Kernel 24 GREEN (d1b8199):** the r4 beta-redex kill shot —
+   the n=4,5,6-complete laws + THEOREM N (n≤24) + the general upper
+   bound stand.
+5. **#271 Kernel 44 GREEN (d1b8199+3c14560):** the OdStFamily r5 — ALL
+   15 errors killed (14 surgical edits: omega atom-bridges per L70,
+   mod_mod closures, forward assoc, the noTwo Bool-split).
+6. **#374 Kernel 33 GREEN (d1b8199):** erdos374_complete — the
+   10-conjunct classification (23 new theorems, first-compile green).
+7. **#1072 Kernel 22 GREEN (4757d0e):** the C5 SALVAGE — the dead exact
+   deleted, the redundant hpar dropped (pair_equivalence's sgn-arg is
+   p-1-n so rw [hmid] carries both), the three 3≤p bridges — the
+   complete board C1/C2/C7/C8 + erdos1072_complete stands.
+8. **#282 Kernel 28 GREEN (4757d0e):** the C3 SALVAGE — List.mem_nil_iff
+   replaced, the two Nat.zero_mul fixes (the 0*n disease), hstep saved
+   before the consuming obtain, the extra ⟩ removed — erdos282_complete
+   (the 6-conjunct board) stands.
+
+**VERDICTS IN FLIGHT (fixes pushed, runs grinding):**
+- **#961 Kernel 25 (r4 @ f786289):** the omega ATOM-DISCONNECTION law
+  (L63b: omega abstracts p*c as opaque E, DISCONNECTS it from p, and
+  IGNORES disjunction hypotheses) — the fix rewrites the case-split
+  value INTO hc before omega (p*0, p*1 literal-normalized).
+- **#1108 Kernel 30 (r5 @ 6109f71):** the one_le_mul clash killed
+  (skl_one_le_mul + ap_one_le_mul renames) on top of the olean staging.
+- **#461 Kernel 35 (r5 @ 6109f71):** the 4-part arsenal bridge
+  decomposed into its four projections (the 16-for-19 mismatch).
+- **#406 Kernel 38 (r4 @ f786289):** the compile was already CLEAN (all
+  11 new-theorem receipts printed on 3c14560) — the missing
+  witness_256_min_profile receipt added.
+- **#261 Kernel 43 (standing green from S048).**
+
+**THE ROUND'S NEW LAWS (ledger additions):**
+- **L63b — THE OMEGA ATOM-DISCONNECTION LAW:** omega abstracts
+  nonlinear products (p*c) as opaque atoms and DISCONNECTS them from
+  their factors (a constraint on c does NOT propagate into the atom);
+  omega also IGNORES disjunction hypotheses. Fix: rewrite the
+  case-split value INTO the equation (literal coefficients normalize:
+  p*0 -> 0, p*1 -> p) and split disjunctions manually via rcases.
+- **L72 — THE DISPLAY-MANGLE LAW:** this harness's file-display
+  pipeline EATS `[h`-sequences (rw [h] displays as `rw ]`, rw [h1] as
+  `rw 1]`) — od -c is the ONLY faithful read; the files themselves are
+  intact. Never diagnose from displayed brackets alone.
+- **L73 — THE SALVAGE LAW:** "context deadline exceeded" casualties may
+  have DELIVERED their files before dying (C3/C5 wrote 157/325 complete
+  lines) — always git-diff the casualty's target before re-firing.
+- **L74 — THE MISSING-RECEIPT LAW:** a clean compile can still fail the
+  kernel step on a receipt grep for a theorem whose #print axioms was
+  never added (witness_256_min_profile) — the receipt list must cover
+  every grepped name.
+
+**THE SCOREBOARD (S044 reset, complete-proof kernel assemblies):**
+8 CI-green this session + 4 verdicts in flight + the standing #261 K43.
+The historical registry (41 kills) remains the background record. The
+queue deepens: the Phase-2 seventeen await their waves; the conversion
+channel's census kernels (the #961 Størmer-Pell closure) are named
+next strikes.
+
+The engine never stops; it never lies.
