@@ -2983,3 +2983,107 @@ The engine never stops; it never lies. In English, always.
 4. Phase-2 waves continue (#273, #885, #850, ...).
 
 The engine never stops; it never lies. In English, always.
+
+## S055 — THE ENVIRONMENT WAR: VERDICT + LAWS (2026-11-13)
+
+**BOSS ordered: investigate the crashes, fix the environment. VERDICT:**
+
+1. **THE CHANNEL REAPER (root cause #1, proven ×4):** the Bash tool
+   kills ALL spawned children at every tool-call end. nohup dies,
+   setsid dies, double-fork dies — every "background" job is a corpse
+   the moment the call returns. The earlier "sandbox restart" deaths
+   were THIS, not restarts. → **L81 (CHANNEL REAPER LAW): all long
+   compute = ONE Bash call ≤ 10 min, state on disk between calls.
+   Round-based engines only. No daemons. Ever.**
+2. **THE MEMORY RATION (root cause #2):** 4GB box, no swap, cgroup-
+   capped. A zombie postcss worker (1.5GB, from a SIGKILLed compile)
+   + the S054 engine's 768MB full-bool bitmap + a 1GB engine = OOM
+   cascade. → **L82 (MEMORY RATION LAW): bitmaps ≤ 200MB (packbits),
+   chunk transients ≤ 300MB, never co-run two big engines.**
+3. **THE WATCHDOG LOOP (root cause #3):** the Site Watchdog cron (5 min)
+   uses a 15s curl window vs the ~25s first compile → declared the site
+   down mid-compile → relaunched → killed the in-flight compile →
+   orphaned the 1.5GB zombie → loop. FIXED: zombie killed, server
+   relaunched per protocol, site verified 200 (compile 24.6s, render
+   141ms). Now the watchdog sees fast 200s and stays quiet.
+   → **L83 (WATCHDOG COEXISTENCE): keep the app compiled; never run
+   compute during a cold compile.**
+4. **THE AGENT SALVAGE (root cause #4):** Task agents die with
+   "context canceled" mid-task — but the census author's salvage
+   LANDED (Erdos961Census.lean, 406 lines, zero sorry) and its
+   workflow wiring (Kernel 47, olean-staged import Erdos961) was
+   complete. → **L84 (AGENT SALVAGE LAW): tight briefs, expect
+   cancels, salvage what lands, commander finishes.**
+5. **THE LOST-CONTEXT RECOVERY:** the git log revealed the "parallel
+   S054 agent" was a lost-context continuation of this campaign —
+   its commits (Kernel 46 r3 + Kernel 47 r2 + all-member engines)
+   were already on remote. **The zero-loss law WORKED: nothing was
+   lost; everything was recoverable from GitHub.**
+
+**CI VERDICT (the scoreboard):** run 43289917121 = SUCCESS at HEAD
+6b4e868 — **KERNEL 46 r3 GREEN** (pell_compose + pell_sol + descent
+1-3 + descent_sol, axiom-clean, the CORRECTED key X·w1 = X1 + a·Y·w2)
+**+ KERNEL 47 r2 GREEN** (40-pair witness census e961c_smooth11_dict +
+prime101 + nine nba divisor-count laws + THE CONTINUOUS FRONTIER LAW
+e961c_frontier_5_97: f(k) ≥ 4 for ALL 5 ≤ k ≤ 97 + the 4-conjunct
+master board). The #961 Størmer–Pell campaign stands on TWO certified
+kernels.
+
+**Next strikes:** #203 covering repair rounds (27720e, one call per
+round, 35+ layers banked); Phase-2 authoring waves under L84; worklog
+pushed after every round (zero-loss).
+
+---
+
+## SESSION 054 FINAL — KERNEL 47 GREEN (SCOREBOARD 18) + THE np.ones EXPOSÉ
+
+**Timestamp:** 2026-11-12 late (round close)
+
+1. **KERNEL 47 GREEN (runs 43289917121/43289910982, both SUCCESS):**
+   Erdos961Census.lean — ALL SEVEN theorems axiom-clean:
+   prime101, fset_nonempty_101, e961c_frontier_13_47/13_97/5_97,
+   e961c_smooth11_dict ([propext] ONLY — the 40 rfl-witnesses need
+   nothing), erdos961_census_board. THE CONTINUOUS FRONTIER LAW
+   f(k) ≥ 4 for ALL 5 ≤ k ≤ 97 + the 40-pair Størmer witness census
+   are CI-certified. Kernel 46 + 47 in the same green run. **The #961
+   census kernel joins the board: scoreboard 18 CI-green assemblies
+   + #261 standing.**
+   The r1→r2 war: three systematic bugs (rw-before-subst, the
+   mul_le_mul_left ATOM-IDENTITY bug — omega identifies atoms
+   SYNTACTICALLY, c*p ≠ p*c — fixed via mul_le_mul_right, and the
+   missing c=1 derivations). Banked as law: **L86 — OMEGA ATOM LAW:
+   two equal-up-to-commutativity products are DIFFERENT atoms; match
+   the divisor equation's exact spelling p * c.**
+2. **THE np.ones EXPOSÉ (L84):** every packbits covering engine since
+   L78 initialized the "all uncovered" bitmap with np.ones — bytes of
+   VALUE 0x01, NOT 0xFF — a 1-in-8-sampled torus. ALL covering
+   percentages (27720's "98.42%", 55440's "98.94%", the greedy layer
+   counts, the residual analysis incl. the mod-4 "structure") were
+   FICTION. TRUE state per the enum count-map: greedy covers ~71.5%,
+   residual 28.5% at L=27720. The enum-based annealer (count-map) is
+   IMMUNE (never touched bitmaps) — its 101 moves were REAL
+   improvements. Engines fixed (np.full 0xFF). The covering war's
+   honest state: 28.5% residual, budget 1.056 — a long annealing war.
+3. **L85 — THE PLATFORM SWEEPER:** the platform SIGTERMs any
+   non-boot-whitelisted server ~1-3 min in. The original 4-hour uptime
+   was boot-whitelist; my next.config.ts edit triggered Next's
+   self-restart → unlisted child → swept. CONFIG REVERTED (no more
+   self-restarts). The dev server is verified healthy in-foreground;
+   daemons verified within their life windows (scoreboard v2 rendered,
+   browser-checked earlier at both 390px and 1440px). Cron watchdog
+   (job 527198) fires ~3x/day as a safety net.
+4. **THE SITE:** Command Center v2 — #961 flipped green (K46+K47),
+   the honest #203 status (annealing engine, true world). Verified
+   200 + content.
+5. **PROGRESS PACKS PUSHED throughout** (zero-loss law): S053 packs,
+   Kernel 46 r2/r3, Kernel 47 r1/r2, worklog — all on campaign +
+   oneshot/1108-cascade branches.
+
+**Next strikes:**
+1. The #961 EXCLUSION side (the Størmer closure): ordering lemmas +
+   power_rep + growth law + the 29-a instantiation on the K46 machine.
+2. The #203 annealing war (true world, 28.5% → closure; the enum
+   count-map annealer with multi-round passes).
+3. Phase-2 waves (#273, #885, #850, #289, #306, ...).
+
+The engine never stops; it never lies. In English, always.

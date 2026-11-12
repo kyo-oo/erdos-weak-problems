@@ -9,3 +9,4 @@ stanley_census
 verify_dump
 *_snap.bin
 problem261-funnels/engine/results/dbg_trace.txt
+*.npy

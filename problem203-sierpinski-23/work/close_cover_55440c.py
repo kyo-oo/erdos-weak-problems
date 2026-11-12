@@ -24,7 +24,7 @@ for (q, h, U, V) in pal:
 fam = sorted(bases.values(), key=lambda r: -1.0 / r[1])
 print(f"L={L} family: {len(fam)} primes, budget {sum(1.0/r[1] for r in fam):.4f}", flush=True)
 
-unc = np.ones(BITS // 8 + 1, dtype=np.uint8)   # 384MB bit-packed
+unc = np.full(BITS // 8 + 1, 0xFF, dtype=np.uint8)   # 384MB bit-packed
 total = BITS
 ks = np.arange(L, dtype=np.int64)
 CH = 1024

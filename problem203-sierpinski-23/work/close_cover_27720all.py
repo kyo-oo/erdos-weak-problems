@@ -26,7 +26,7 @@ if os.path.exists(W + "state27720all.json"):
     print(f"resumed: {len(layers)} layers, remaining {int(np.unpackbits(unc, bitorder='little')[:BITS].sum())}", flush=True)
 else:
     layers = []
-    unc = np.ones(BITS // 8 + 1, dtype=np.uint8)
+    unc = np.full(BITS // 8 + 1, 0xFF, dtype=np.uint8)
     print("fresh start", flush=True)
 
 placed = {l[0] for l in layers}
