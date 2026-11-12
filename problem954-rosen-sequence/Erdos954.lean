@@ -132,4 +132,112 @@ theorem erdos954_main :
 #print axioms erdos954_arsenal_bridge
 #print axioms erdos954_main
 
+/-! ## §6 THE STRUCTURE LAW (the certified table lives in the problem's
+habitat: the seeds and the strict monotonicity). -/
+
+/-- The structure battery: the certified table starts with the seeds
+a_0 = 0, a_1 = 1 and is strictly increasing across all 46 certified
+terms (the problem's own habitat 0 = a_0 < a_1 < a_2 < ...,
+kernel-decided). -/
+def tabStructOK : Bool :=
+  (List.range 45).all (fun i =>
+    decide (rosenTab.getD i 0 < rosenTab.getD (i + 1) 0))
+
+theorem tabStructOK_data : tabStructOK = true := by decide
+
+/-- **THE STRUCTURE LAW.** The certified table satisfies the problem's
+habitat clauses outright: a_0 = 0, a_1 = 1, and a_0 < a_1 < ... < a_45
+(strictly increasing across all 46 certified terms, so every gap
+a_{k+1} - a_k is positive). -/
+theorem erdos954_structure :
+    rosenTab.getD 0 0 = 0 ∧ rosenTab.getD 1 0 = 1 ∧
+    ∀ i, i < 45 → rosenTab.getD i 0 < rosenTab.getD (i + 1) 0 := by
+  refine ⟨by decide, by decide, ?_⟩
+  intro i hi
+  have hall := (List.all_eq_true).mp tabStructOK_data
+  have hmem : i ∈ List.range 45 := List.mem_range.mpr (by omega)
+  have hdcheck := hall i hmem
+  have hdcheck' : decide (rosenTab.getD i 0 < rosenTab.getD (i + 1) 0) = true :=
+    hdcheck
+  simp only [decide_eq_true_eq] at hdcheck'
+  exact hdcheck'
+
+/-! ## §7 THE BLOCK-LAW / IRREGULARITY LAWS (the constant-block gap
+structure and its break at block 5). -/
+
+/-- The gap function of the certified table: gapAt k = a_{k+1} - a_k.
+The table is strictly increasing (`erdos954_structure`), so the
+truncated subtraction is exact; every statement below is
+kernel-decided from the certified data. -/
+def gapAt (k : Nat) : Nat := rosenTab.getD (k + 1) 0 - rosenTab.getD k 0
+
+/-- **THE INITIAL BLOCK LAW.** The gaps of the certified table open in
+constant blocks — [1], [2, 2], [4, 4, 4], [7, 7, 7, 7] — block k
+holding k copies of the gap value 1 + k(k-1)/2 (values 1, 2, 4, 7 for
+k = 1, 2, 3, 4), and the fifth block opens [8, 8]: the gap values at
+indices 0-11 are exactly 1, 2, 2, 4, 4, 4, 7, 7, 7, 7, 8, 8. -/
+theorem erdos954_block_law_initial :
+    gapAt 0 = 1 ∧ gapAt 1 = 2 ∧ gapAt 2 = 2 ∧
+    gapAt 3 = 4 ∧ gapAt 4 = 4 ∧ gapAt 5 = 4 ∧
+    gapAt 6 = 7 ∧ gapAt 7 = 7 ∧ gapAt 8 = 7 ∧ gapAt 9 = 7 ∧
+    gapAt 10 = 8 ∧ gapAt 11 = 8 := by
+  decide
+
+/-- **THE BLOCK-5 BREAK — the irregularity law.** The block law that
+holds for blocks one through four (`erdos954_block_law_initial`: block
+k is k copies of the gap value 1 + k(k-1)/2) predicts for block five
+FIVE gaps of 11 at gap indices 10-14. The certified table refutes the
+prediction at every slot — the actual gaps there are 8, 8, 14, 12, 10 —
+and the fifth constant-gap block is exactly the two gaps
+g_10 = g_11 = 8 (bounded below by the 7 of block four, closed above by
+g_12 = 14): the block law breaks at block five, and the irregular
+regime (14, 12, 10, 15, 12, 15, 8, 28, ...) begins. The 1,200-term
+engine computation (engine_round1.py, ENGINE 6) confirms the same
+first break at block five — engine evidence; this theorem claims only
+the certified 46-term window. -/
+theorem erdos954_block5_break :
+    (gapAt 10 ≠ 11 ∧ gapAt 11 ≠ 11 ∧ gapAt 12 ≠ 11 ∧
+      gapAt 13 ≠ 11 ∧ gapAt 14 ≠ 11) ∧
+    (gapAt 9 ≠ gapAt 10 ∧ gapAt 10 = gapAt 11 ∧ gapAt 11 ≠ gapAt 12 ∧
+      gapAt 12 = 14) := by
+  decide
+
+/-! ## §8 THE COMPLETE BOARD (the one-statement final assembly of the
+#954 kernel: the habitat/structure law, the defining construction law,
+the initial block law, the block-5 break, the computation-frontier
+count law, and the arsenal bridge — the open asymptotic
+x + O(x^{1/4+o(1)}) core is NOT claimed; the battery's wider census
+x < 836 and the 1,200-term engine run are evidence, not claimed). -/
+
+theorem erdos954_complete :
+    (rosenTab.getD 0 0 = 0 ∧ rosenTab.getD 1 0 = 1 ∧
+      ∀ i, i < 45 → rosenTab.getD i 0 < rosenTab.getD (i + 1) 0) ∧
+    (∀ e, 2 ≤ e → e ≤ 45 →
+      cntP (List.take e rosenTab) (rosenTab.getD e 0) < rosenTab.getD e 0) ∧
+    (gapAt 0 = 1 ∧ gapAt 1 = 2 ∧ gapAt 2 = 2 ∧
+      gapAt 3 = 4 ∧ gapAt 4 = 4 ∧ gapAt 5 = 4 ∧
+      gapAt 6 = 7 ∧ gapAt 7 = 7 ∧ gapAt 8 = 7 ∧ gapAt 9 = 7 ∧
+      gapAt 10 = 8 ∧ gapAt 11 = 8) ∧
+    ((gapAt 10 ≠ 11 ∧ gapAt 11 ≠ 11 ∧ gapAt 12 ≠ 11 ∧
+      gapAt 13 ≠ 11 ∧ gapAt 14 ≠ 11) ∧
+      (gapAt 9 ≠ gapAt 10 ∧ gapAt 10 = gapAt 11 ∧ gapAt 11 ≠ gapAt 12 ∧
+        gapAt 12 = 14)) ∧
+    (∀ x, 1 ≤ x → x < 378 → cntP (List.take 30 rosenTab) x ≥ x) ∧
+    arsenalBridgeProp :=
+  ⟨erdos954_structure,
+   ⟨fun e h1 h2 => erdos954_construction e h1 h2,
+   ⟨erdos954_block_law_initial,
+   ⟨erdos954_block5_break,
+   ⟨fun x h1 h2 => erdos954_count_law x h1 h2,
+   erdos954_arsenal_bridge⟩⟩⟩⟩⟩
+
+#print axioms tabStructOK
+#print axioms tabStructOK_data
+#print axioms erdos954_structure
+#print axioms gapAt
+#print axioms erdos954_block_law_initial
+#print axioms erdos954_block5_break
+#print axioms erdos954_complete
+#eval "ERDOS954_COMPLETE_GREEN"
+
 end Erdos954

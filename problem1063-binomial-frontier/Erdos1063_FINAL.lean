@@ -194,3 +194,85 @@ theorem erdos1063_frontier :
 #print axioms erdos1063_arsenal_bridge
 
 end Erdos1063
+
+namespace Erdos1063
+
+/-! ## §7 THE ARSENAL BRIDGE, PROPOSITION FORM (the PROOF-IN-STATEMENT law:
+the final board's last conjunct is a Prop, never a proof term inside the
+type). Arithmetic content identical to `erdos1063_arsenal_bridge` above:
+ternary digits of the two odd frontier witnesses 75 and 793 (decide-
+certified), the carry law on the two large witnesses 2403 and 3465, and the
+v2r ternary scaling for 3465 = 3 * 1155. -/
+def arsenalBridgeProp : Prop :=
+  [75 % 3, (75 / 3) % 3, (75 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [793 % 3, (793 / 3) % 3, (793 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  carryAtPos 2403 1 < 4 ∧ carryAtPos 3465 2 < 4 ∧
+  v2r (3 ^ 1 * 1155) = v2r 1155
+
+/-- The bridge theorem for the proposition form: the already-green
+`erdos1063_arsenal_bridge` proves exactly this conjunction (defeq by delta
+unfolding of `arsenalBridgeProp`). -/
+theorem erdos1063_arsenal_bridge' : arsenalBridgeProp := erdos1063_arsenal_bridge
+
+/-! ## §8 THE COMPLETE THEOREM BOARD — every major law this kernel proves,
+assembled quantifier-for-quantifier, unconditional: the chunk-certification
+law, the nine new exact values k = 6..14 (each with witness census k-1 AND
+full completeness below n_k — the content of `comp6..comp14` is the third
+conjunct of each value, verbatim), the factorial absorption certificate, the
+frontier witness board, and the arsenal bridge. NOT claimed here (honest
+scope): the k = 2..5 calibration values (corpus-recorded, not proved in this
+file) and the general asymptotic estimate for n_k (open). -/
+theorem erdos1063_complete :
+    -- 1. THE CHUNK CERTIFICATION LAW (T3): a chunk certificate over [a, b)
+    --    unpacks pointwise (wcount n k <= k - 2 for every a <= n < b)
+    (∀ (a b k n : Nat),
+      ((List.range (b - a)).all (fun off => Nat.ble (wcount (a + off) k) (k - 2))) = true →
+      a ≤ n → n < b → wcount n k ≤ k - 2) ∧
+    -- 2. n_6 = 75 (witness census 5 = k-1; completeness for 12 <= n < 75)
+    (2 * 6 ≤ 75 ∧ 5 ≤ wcount 75 6 ∧
+      ∀ n, 2 * 6 ≤ n → n < 75 → wcount n 6 ≤ 4) ∧
+    -- 3. n_7 = 30
+    (2 * 7 ≤ 30 ∧ 6 ≤ wcount 30 7 ∧
+      ∀ n, 2 * 7 ≤ n → n < 30 → wcount n 7 ≤ 5) ∧
+    -- 4. n_8 = 70
+    (2 * 8 ≤ 70 ∧ 7 ≤ wcount 70 8 ∧
+      ∀ n, 2 * 8 ≤ n → n < 70 → wcount n 8 ≤ 6) ∧
+    -- 5. n_9 = 56
+    (2 * 9 ≤ 56 ∧ 8 ≤ wcount 56 9 ∧
+      ∀ n, 2 * 9 ≤ n → n < 56 → wcount n 9 ≤ 7) ∧
+    -- 6. n_10 = 2403
+    (2 * 10 ≤ 2403 ∧ 9 ≤ wcount 2403 10 ∧
+      ∀ n, 2 * 10 ≤ n → n < 2403 → wcount n 10 ≤ 8) ∧
+    -- 7. n_11 = 280
+    (2 * 11 ≤ 280 ∧ 10 ≤ wcount 280 11 ∧
+      ∀ n, 2 * 11 ≤ n → n < 280 → wcount n 11 ≤ 9) ∧
+    -- 8. n_12 = 3465
+    (2 * 12 ≤ 3465 ∧ 11 ≤ wcount 3465 12 ∧
+      ∀ n, 2 * 12 ≤ n → n < 3465 → wcount n 12 ≤ 10) ∧
+    -- 9. n_13 = 210
+    (2 * 13 ≤ 210 ∧ 12 ≤ wcount 210 13 ∧
+      ∀ n, 2 * 13 ≤ n → n < 210 → wcount n 13 ≤ 11) ∧
+    -- 10. n_14 = 793
+    (2 * 14 ≤ 793 ∧ 13 ≤ wcount 793 14 ∧
+      ∀ n, 2 * 14 ≤ n → n < 793 → wcount n 14 ≤ 12) ∧
+    -- 11. THE DEFINITIONAL CERTIFICATE (T2): binomP n k * (n - k)! = n!
+    (∀ (n k : Nat), k ≤ n → binomP n k * kfact (n - k) = kfact n) ∧
+    -- 12. THE FRONTIER WITNESS BOARD (nine new exact values, one conjunct)
+    ((2 * 6 ≤ 75 ∧ 5 ≤ wcount 75 6) ∧ (2 * 7 ≤ 30 ∧ 6 ≤ wcount 30 7) ∧
+      (2 * 8 ≤ 70 ∧ 7 ≤ wcount 70 8) ∧ (2 * 9 ≤ 56 ∧ 8 ≤ wcount 56 9) ∧
+      (2 * 10 ≤ 2403 ∧ 9 ≤ wcount 2403 10) ∧ (2 * 11 ≤ 280 ∧ 10 ≤ wcount 280 11) ∧
+      (2 * 12 ≤ 3465 ∧ 11 ≤ wcount 3465 12) ∧ (2 * 13 ≤ 210 ∧ 12 ≤ wcount 210 13) ∧
+      (2 * 14 ≤ 793 ∧ 13 ≤ wcount 793 14)) ∧
+    -- 13. THE ARSENAL BRIDGE (T9) — a Prop, never a proof term in the type
+    arsenalBridgeProp :=
+  ⟨chunk_impl,
+    erdos1063_k6, erdos1063_k7, erdos1063_k8, erdos1063_k9,
+    erdos1063_k10, erdos1063_k11, erdos1063_k12, erdos1063_k13, erdos1063_k14,
+    erdos1063_binomP_absorb, erdos1063_frontier, erdos1063_arsenal_bridge'⟩
+
+#eval "ERDOS1063_COMPLETE_GREEN"
+#print axioms arsenalBridgeProp
+#print axioms erdos1063_arsenal_bridge'
+#print axioms erdos1063_complete
+
+end Erdos1063

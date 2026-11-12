@@ -547,6 +547,9 @@ jobs:
           grep -E "Erdos1063.erdos1063_k(6|10|12|14)' (does not depend on any axioms|depends on axioms)" kernel20.log
           grep -E "Erdos1063.erdos1063_binomP_absorb' (does not depend on any axioms|depends on axioms)" kernel20.log
           grep -E "Erdos1063.erdos1063_frontier' (does not depend on any axioms|depends on axioms)" kernel20.log
+          grep -F "ERDOS1063_COMPLETE_GREEN" kernel20.log
+          grep -E "Erdos1063.erdos1063_complete' (does not depend on any axioms|depends on axioms)" kernel20.log
+          grep -E "Erdos1063.erdos1063_arsenal_bridge'' (does not depend on any axioms|depends on axioms)" kernel20.log
           python3 problem1063-binomial-frontier/battery1063.py
           echo ERDOS1063_BINOMIAL_FRONTIER_KERNEL_GREEN=1
 
@@ -572,6 +575,9 @@ jobs:
           grep -F "ERDOS451_KERNEL_GREEN" kernel21.log
           grep -E "Erdos451.erdos451_crit' (does not depend on any axioms|depends on axioms)" kernel21.log
           grep -E "Erdos451.erdos451_k(2|10|12|20)' (does not depend on any axioms|depends on axioms)" kernel21.log
+          grep -F "ERDOS451_COMPLETE_GREEN" kernel21.log
+          grep -E "Erdos451.erdos451_complete' (does not depend on any axioms|depends on axioms)" kernel21.log
+          grep -E "Erdos451.erdos451_arsenal_bridge_full' (does not depend on any axioms|depends on axioms)" kernel21.log
           python3 problem451-interval-prime-free/battery451.py
           echo ERDOS451_INTERVAL_PRIME_FREE_KERNEL_GREEN=1
 
@@ -624,6 +630,9 @@ jobs:
           grep -F "ERDOS394_DATA_GREEN" kernel23.log
           grep -F "ERDOS394_KERNEL_GREEN" kernel23.log
           grep -E "Erdos394.erdos394_(crt_sound|unique_pos|prime_landing|tk_char|table_main|arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel23.log
+          grep -F "ERDOS394_COMPLETE_GREEN" kernel23.log
+          grep -E "Erdos394.erdos394_(complete|unique_landing)' (does not depend on any axioms|depends on axioms)" kernel23.log
+          grep -E "Erdos394.erdos394_arsenal_bridge'' (does not depend on any axioms|depends on axioms)" kernel23.log
           python3 problem394-consecutive-crt/battery394.py
           echo ERDOS394_CRT_LAW_KERNEL_GREEN=1
 
@@ -690,6 +699,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel27.log
           grep -F "ERDOS1074_EHS_KERNEL_GREEN" kernel27.log
           grep -E "Erdos1074.erdos1074_(factor_bound|finite_char|census19|large|dictionary|pillai_bound|pillai_table|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel27.log
+          grep -F "ERDOS1074_COMPLETE_GREEN" kernel27.log
+          grep -E "Erdos1074.erdos1074_complete' (does not depend on any axioms|depends on axioms)" kernel27.log
           python3 problem1074-ehs-pillai/battery1074.py
           echo ERDOS1074_EHS_CENSUS_KERNEL_GREEN=1
 
@@ -724,6 +735,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel29.log
           grep -F "ERDOS954_ROSEN_KERNEL_GREEN" kernel29.log
           grep -E "Erdos954.erdos954_(construction|count_law|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel29.log
+          grep -F "ERDOS954_COMPLETE_GREEN" kernel29.log
+          grep -E "Erdos954.erdos954_(complete|structure|block_law_initial|block5_break)' (does not depend on any axioms|depends on axioms)" kernel29.log
           python3 problem954-rosen-sequence/battery954.py
           echo ERDOS954_ROSEN_KERNEL_GREEN=1
 

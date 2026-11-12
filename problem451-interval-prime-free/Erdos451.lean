@@ -547,4 +547,133 @@ theorem erdos451_arsenal_bridge :
 #print axioms erdos451_k20
 #print axioms erdos451_arsenal_bridge
 
+/-! ## §9 THE ARSENAL BRIDGE PROPOSITION (the complete board's final
+conjunct, in the #282 `erdos282_complete` pattern: the §8 bridge facts —
+ternary digits of the k=10 witness 220, carry bounds at the k=20 and
+k=12 witnesses 550 and 338, the composite-modulus reduction at the
+k=20 window prime 23, the ternary scaling at 183 (550 - 1 = 3 * 183) —
+packaged as one named `Prop` and EXTENDED with kernel-decided arithmetic
+facts on four more witness numbers: the ternary digits of 65 (n_9) and
+368 (n_19), and the carry bounds at 220 (n_10) and 113 (n_17). The
+existing §8 theorem `erdos451_arsenal_bridge` closes the final
+sub-conjunct verbatim; the extension is `by decide` plus the arsenal's
+`carryAtPos_bound`.) -/
+
+def arsenalBridgeProp : Prop :=
+  [65 % 3, (65 / 3) % 3, (65 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [368 % 3, (368 / 3) % 3, (368 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  carryAtPos 220 1 < 4 ∧ carryAtPos 113 1 < 4 ∧
+  ([220 % 3, (220 / 3) % 3, (220 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+    carryAtPos 550 1 < 4 ∧ carryAtPos 338 2 < 4 ∧
+    (550 % (23 * 2)) % 23 = 550 % 23 ∧
+    v2r (3 ^ 1 * 183) = v2r 183)
+
+theorem erdos451_arsenal_bridge_full : arsenalBridgeProp :=
+  ⟨by decide, by decide, carryAtPos_bound 220 1, carryAtPos_bound 113 1,
+    erdos451_arsenal_bridge⟩
+
+/-! ## §10 THE COMPLETE BOARD (the one-statement assembly of everything
+this kernel delivers unconditionally, in the #282 `erdos282_complete`
+pattern: the primality bridge §1, the two product-direction laws §2 and
+§3, THE general modular criterion §4, and the nineteen witness-table
+rows §7 (k = 2..20) stated EXACTLY as §7 states them, with the arsenal
+bridge §9 as the final conjunct. Honest scope, unchanged: the general
+asymptotics of n_k remain open and are NOT claimed; the §5 decode
+toolkit and the §6 assembly helper stay proven in this file exactly as
+they were — they are the machinery that manufactures the nineteen rows,
+not laws of the problem, so they are not board conjuncts). -/
+
+theorem erdos451_complete :
+    (∀ q : Nat, q.Prime → isP q = true) ∧
+    (∀ p : Nat, p.Prime → ∀ k n, p ∣ prodK n k → ∃ j, 1 ≤ j ∧ j ≤ k ∧ p ∣ (n - j)) ∧
+    (∀ j n k : Nat, 1 ≤ j → j ≤ k → ∀ p, p ∣ (n - j) → p ∣ prodK n k) ∧
+    (∀ p k n : Nat, p.Prime → k < p → k ≤ n → (p ∣ prodK n k ↔ 1 ≤ n % p ∧ n % p ≤ k)) ∧
+    (2 * 2 < 6 ∧
+      (∀ q, q.Prime → 2 < q → q < 2 * 2 → ¬ q ∣ prodK 6 2) ∧
+      (∀ m, 2 * 2 < m → m < 6 → ∃ q, q.Prime ∧ 2 < q ∧ q < 2 * 2 ∧ q ∣ prodK m 2)) ∧
+    (2 * 3 < 9 ∧
+      (∀ q, q.Prime → 3 < q → q < 2 * 3 → ¬ q ∣ prodK 9 3) ∧
+      (∀ m, 2 * 3 < m → m < 9 → ∃ q, q.Prime ∧ 3 < q ∧ q < 2 * 3 ∧ q ∣ prodK m 3)) ∧
+    (2 * 4 < 20 ∧
+      (∀ q, q.Prime → 4 < q → q < 2 * 4 → ¬ q ∣ prodK 20 4) ∧
+      (∀ m, 2 * 4 < m → m < 20 → ∃ q, q.Prime ∧ 4 < q ∧ q < 2 * 4 ∧ q ∣ prodK m 4)) ∧
+    (2 * 5 < 13 ∧
+      (∀ q, q.Prime → 5 < q → q < 2 * 5 → ¬ q ∣ prodK 13 5) ∧
+      (∀ m, 2 * 5 < m → m < 13 → ∃ q, q.Prime ∧ 5 < q ∧ q < 2 * 5 ∧ q ∣ prodK m 5)) ∧
+    (2 * 6 < 21 ∧
+      (∀ q, q.Prime → 6 < q → q < 2 * 6 → ¬ q ∣ prodK 21 6) ∧
+      (∀ m, 2 * 6 < m → m < 21 → ∃ q, q.Prime ∧ 6 < q ∧ q < 2 * 6 ∧ q ∣ prodK m 6)) ∧
+    (2 * 7 < 21 ∧
+      (∀ q, q.Prime → 7 < q → q < 2 * 7 → ¬ q ∣ prodK 21 7) ∧
+      (∀ m, 2 * 7 < m → m < 21 → ∃ q, q.Prime ∧ 7 < q ∧ q < 2 * 7 ∧ q ∣ prodK m 7)) ∧
+    (2 * 8 < 22 ∧
+      (∀ q, q.Prime → 8 < q → q < 2 * 8 → ¬ q ∣ prodK 22 8) ∧
+      (∀ m, 2 * 8 < m → m < 22 → ∃ q, q.Prime ∧ 8 < q ∧ q < 2 * 8 ∧ q ∣ prodK m 8)) ∧
+    (2 * 9 < 65 ∧
+      (∀ q, q.Prime → 9 < q → q < 2 * 9 → ¬ q ∣ prodK 65 9) ∧
+      (∀ m, 2 * 9 < m → m < 65 → ∃ q, q.Prime ∧ 9 < q ∧ q < 2 * 9 ∧ q ∣ prodK m 9)) ∧
+    (2 * 10 < 220 ∧
+      (∀ q, q.Prime → 10 < q → q < 2 * 10 → ¬ q ∣ prodK 220 10) ∧
+      (∀ m, 2 * 10 < m → m < 220 → ∃ q, q.Prime ∧ 10 < q ∧ q < 2 * 10 ∧ q ∣ prodK m 10)) ∧
+    (2 * 11 < 51 ∧
+      (∀ q, q.Prime → 11 < q → q < 2 * 11 → ¬ q ∣ prodK 51 11) ∧
+      (∀ m, 2 * 11 < m → m < 51 → ∃ q, q.Prime ∧ 11 < q ∧ q < 2 * 11 ∧ q ∣ prodK m 11)) ∧
+    (2 * 12 < 338 ∧
+      (∀ q, q.Prime → 12 < q → q < 2 * 12 → ¬ q ∣ prodK 338 12) ∧
+      (∀ m, 2 * 12 < m → m < 338 → ∃ q, q.Prime ∧ 12 < q ∧ q < 2 * 12 ∧ q ∣ prodK m 12)) ∧
+    (2 * 13 < 133 ∧
+      (∀ q, q.Prime → 13 < q → q < 2 * 13 → ¬ q ∣ prodK 133 13) ∧
+      (∀ m, 2 * 13 < m → m < 133 → ∃ q, q.Prime ∧ 13 < q ∧ q < 2 * 13 ∧ q ∣ prodK m 13)) ∧
+    (2 * 14 < 321 ∧
+      (∀ q, q.Prime → 14 < q → q < 2 * 14 → ¬ q ∣ prodK 321 14) ∧
+      (∀ m, 2 * 14 < m → m < 321 → ∃ q, q.Prime ∧ 14 < q ∧ q < 2 * 14 ∧ q ∣ prodK m 14)) ∧
+    (2 * 15 < 339 ∧
+      (∀ q, q.Prime → 15 < q → q < 2 * 15 → ¬ q ∣ prodK 339 15) ∧
+      (∀ m, 2 * 15 < m → m < 339 → ∃ q, q.Prime ∧ 15 < q ∧ q < 2 * 15 ∧ q ∣ prodK m 15)) ∧
+    (2 * 16 < 340 ∧
+      (∀ q, q.Prime → 16 < q → q < 2 * 16 → ¬ q ∣ prodK 340 16) ∧
+      (∀ m, 2 * 16 < m → m < 340 → ∃ q, q.Prime ∧ 16 < q ∧ q < 2 * 16 ∧ q ∣ prodK m 16)) ∧
+    (2 * 17 < 113 ∧
+      (∀ q, q.Prime → 17 < q → q < 2 * 17 → ¬ q ∣ prodK 113 17) ∧
+      (∀ m, 2 * 17 < m → m < 113 → ∃ q, q.Prime ∧ 17 < q ∧ q < 2 * 17 ∧ q ∣ prodK m 17)) ∧
+    (2 * 18 < 114 ∧
+      (∀ q, q.Prime → 18 < q → q < 2 * 18 → ¬ q ∣ prodK 114 18) ∧
+      (∀ m, 2 * 18 < m → m < 114 → ∃ q, q.Prime ∧ 18 < q ∧ q < 2 * 18 ∧ q ∣ prodK m 18)) ∧
+    (2 * 19 < 368 ∧
+      (∀ q, q.Prime → 19 < q → q < 2 * 19 → ¬ q ∣ prodK 368 19) ∧
+      (∀ m, 2 * 19 < m → m < 368 → ∃ q, q.Prime ∧ 19 < q ∧ q < 2 * 19 ∧ q ∣ prodK m 19)) ∧
+    (2 * 20 < 550 ∧
+      (∀ q, q.Prime → 20 < q → q < 2 * 20 → ¬ q ∣ prodK 550 20) ∧
+      (∀ m, 2 * 20 < m → m < 550 → ∃ q, q.Prime ∧ 20 < q ∧ q < 2 * 20 ∧ q ∣ prodK m 20)) ∧
+    arsenalBridgeProp :=
+  ⟨fun q hq => isP_of_prime q hq,
+   fun p hp k n hdvd => prime_dvd_prodK p hp k n hdvd,
+   fun j n k hj1 hjk p hpdiv => dvd_prodK_factor j n k hj1 hjk p hpdiv,
+   fun p k n hp hk hkn => erdos451_crit p k n hp hk hkn,
+   erdos451_k2,
+   erdos451_k3,
+   erdos451_k4,
+   erdos451_k5,
+   erdos451_k6,
+   erdos451_k7,
+   erdos451_k8,
+   erdos451_k9,
+   erdos451_k10,
+   erdos451_k11,
+   erdos451_k12,
+   erdos451_k13,
+   erdos451_k14,
+   erdos451_k15,
+   erdos451_k16,
+   erdos451_k17,
+   erdos451_k18,
+   erdos451_k19,
+   erdos451_k20,
+   erdos451_arsenal_bridge_full⟩
+
+#eval "ERDOS451_COMPLETE_GREEN"
+#print axioms erdos451_complete
+#print axioms arsenalBridgeProp
+#print axioms erdos451_arsenal_bridge_full
+
 end Erdos451

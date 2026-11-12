@@ -1344,7 +1344,7 @@ theorem erdos1108_complete :
     (∀ u, 2 ≤ u → v2 (sumFacts [1, u]) = 0) ∧
     (∀ u n, 2 ≤ u → sumFacts [1, u] = n * n →
       ∀ p, p.Prime → p ≤ u → ¬ p ∣ n) ∧
-    erdos1108ap_arsenal_bridge :=
+    arsenalBridgeProp :=
   ⟨fun p b S hp hbS hb => all_prime_isolated_min p b hp S hbS hb,
    fun p b S k n hp hbS hb hk hknot =>
      all_prime_power_obstruction p b hp S hbS hb k n hk hknot,

@@ -310,4 +310,113 @@ theorem erdos394_arsenal_bridge :
 #print axioms erdos394_table_main
 #print axioms erdos394_arsenal_bridge
 
+/-! ## §5 THE COMPLETE THEOREM BOARD (final assembly, S051-WD3).
+
+Everything this kernel has proven, welded into one unconditional theorem
+(the Erdos374 complete-board pattern): the CRT soundness law, the three
+structure laws, the five oracle laws, the showcase CRT instance, the 139
+certified exact values, and the arsenal bridge. Every conjunct below is
+the VERBATIM statement of a theorem proven above (conjunct 4 is the direct
+fusion of Laws 2+3, proven right here) -- no silent weakening, no silent
+strengthening, no unproven new claims.
+
+Honest scope, unchanged from the header: the min-equality's inject-direction
+assembly (collecting the landed prime powers into the d_i -- it needs
+prime-power valuation machinery this kernel does not carry) and the
+Erdos-Hall asymptotic sums remain open. Laws 1-4 are the complete skeleton:
+every CRT class is valid (Law 1), every prime divisor p > k of the product
+lands at one position (Law 3) and at exactly one position (Law 2, fused in
+Law 4) -- for (n, k!) = 1 this forces the assignment structure of the
+characterization. -/
+
+/-- The arsenal bridge in proposition form (the PROOF-IN-STATEMENT law: the
+last conjunct of the complete board is the Prop itself, never a proof
+term). The body is the verbatim statement of `erdos394_arsenal_bridge`
+(section 4) -- that green theorem proves it as-is. -/
+def arsenalBridgeProp : Prop :=
+  [5 % 3, (5 / 3) % 3, (5 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  [210 % 3, (210 / 3) % 3, (210 / 9) % 3].all (fun d => ErdosTernary2.isTernaryDigit d) ∧
+  carryAtPos 120 1 < 4 ∧ carryAtPos 336 2 < 4 ∧
+  (55 % (23 * 2)) % 23 = 55 % 23 ∧
+  v2r (3 ^ 1 * 35) = v2r 35
+
+/-- The proposition-form arsenal bridge: the section 4 bridge theorem
+re-seated on `arsenalBridgeProp` (definitional -- the statements are
+identical). -/
+theorem erdos394_arsenal_bridge' : arsenalBridgeProp := erdos394_arsenal_bridge
+
+/-- THE UNIQUE-LANDING LAW (Laws 2+3 fused): a prime p > k dividing the
+consecutive product lands at a position i < k with p | (m+i), and that
+position is the ONLY one -- every other j < k with p | (m+j) equals i. -/
+theorem erdos394_unique_landing (p : Nat) (hp : Nat.Prime p) (k m : Nat)
+    (hpk : k < p) (hd : p ∣ prodCons m k) :
+    ∃ i, i < k ∧ p ∣ m + i ∧ ∀ j, j < k → p ∣ m + j → i = j := by
+  obtain ⟨i, hi, him⟩ := erdos394_prime_landing p hp k m hpk hd
+  refine ⟨i, hi, him, ?_⟩
+  intro j hj hjm
+  exact erdos394_unique_pos p m i j k hpk hi hj him hjm
+
+/-- **THE COMPLETE THEOREM BOARD**: the full conjunct board of the kernel,
+unconditional, zero sorry. The last conjunct is `arsenalBridgeProp` (the
+Prop, per the proof-in-statement law). -/
+theorem erdos394_complete :
+    -- 1. THE CRT SOUNDNESS THEOREM (Law 1): every ordered pairwise-coprime
+    -- factorization n = d_0 ... d_{k-1} with d_i | (m+i) for all i < k
+    -- yields n | m(m+1)...(m+k-1). [General k, n, m.]
+    (∀ (k n m : Nat) (ds : List Nat), ds.length = k → ds.prod = n →
+        ds.Pairwise Nat.Coprime →
+        (∀ i, i < k → (ds.getD i 1) ∣ (m + i)) →
+        n ∣ prodCons m k) ∧
+    -- 2. THE UNIQUE-POSITION LAW (Law 2): if p > k divides two of
+    -- m, m+1, ..., m+k-1, the positions coincide. [General.]
+    (∀ (p m i j k : Nat), k < p → i < k → j < k →
+        p ∣ m + i → p ∣ m + j → i = j) ∧
+    -- 3. THE PRIME-LANDING LAW (Law 3): a prime p > k dividing the product
+    -- lands at a position i < k with p | (m+i). [General.]
+    (∀ (p : Nat), Nat.Prime p → ∀ (k m : Nat), k < p → p ∣ prodCons m k →
+        ∃ i, i < k ∧ p ∣ m + i) ∧
+    -- 4. THE UNIQUE-LANDING LAW (Laws 2+3 fused): the landing position
+    -- exists and is the only position < k at which p divides.
+    (∀ (p : Nat), Nat.Prime p → ∀ (k m : Nat), k < p → p ∣ prodCons m k →
+        ∃ i, i < k ∧ p ∣ m + i ∧ ∀ j, j < k → p ∣ m + j → i = j) ∧
+    -- 5. THE ORACLE BRIDGE LAW: the Bool oracle iff the Prop divisibility.
+    (∀ (n m k : Nat), divAt n m k = true ↔ n ∣ prodCons m k) ∧
+    -- 6. THE SELF-DIVISIBILITY LAW: for k >= 1 the window at m = n
+    -- contains n itself.
+    (∀ (n k : Nat), 1 ≤ k → n ∣ prodCons n k) ∧
+    -- 7. THE CAP LAW: t_k(n) <= n (the search cap is sound).
+    (∀ (n k : Nat), 1 ≤ n → 1 ≤ k → tKb n k ≤ n) ∧
+    -- 8. THE ORACLE VALIDITY LAW: tKb n k is a nonzero valid witness.
+    (∀ (n k : Nat), 1 ≤ n → 1 ≤ k →
+        tKb n k ≠ 0 ∧ divAt n (tKb n k) k = true) ∧
+    -- 9. THE LEASTNESS CHARACTERIZATION: tKb n k IS t_k(n) -- every valid
+    -- m >= 1 is an upper bound for the oracle.
+    (∀ (n k m : Nat), 1 ≤ n → 1 ≤ k → 1 ≤ m → divAt n m k = true →
+        tKb n k ≤ m) ∧
+    -- 10. THE SHOWCASE CRT INSTANCE: t_2(15) = 5 via the certificate
+    -- d_0 = 5, d_1 = 3 at m = 5 (5 | 5, 3 | 6, 5*3 = 15) -- Law 1 in action.
+    ((15 : Nat) ∣ prodCons 5 2) ∧
+    -- 11. THE 139 CERTIFIED EXACT VALUES: seven showcase values + the four
+    -- kernel-decided tables (t_2 odd n <= 101; t_3, t_4 for (n,24)=1 <= 97;
+    -- t_5 for (n,120)=1 <= 97).
+    (tKb 15 2 = 5 ∧ tKb 35 2 = 14 ∧ tKb 77 2 = 21 ∧
+        tKb 35 3 = 5 ∧ tKb 55 3 = 9 ∧
+        tKb 77 4 = 11 ∧ tKb 143 5 = 9 ∧
+        (∀ j, j < 50 → tKb (2 * j + 3) 2 = t2v.getD j 0) ∧
+        (∀ j, j < 32 → tKb (n3v.getD j 0) 3 = t3v.getD j 0) ∧
+        (∀ j, j < 32 → tKb (n4v.getD j 0) 4 = t4v.getD j 0) ∧
+        (∀ j, j < 25 → tKb (n5v.getD j 0) 5 = t5v.getD j 0)) ∧
+    -- 12. THE ARSENAL BRIDGE
+    arsenalBridgeProp :=
+  ⟨erdos394_crt_sound, erdos394_unique_pos, erdos394_prime_landing,
+    erdos394_unique_landing, divAt_iff, prodCons_self_dvd, tKb_le,
+    tKb_valid, erdos394_tk_char, crt_showcase_15, erdos394_table_main,
+    erdos394_arsenal_bridge'⟩
+
+#eval "ERDOS394_COMPLETE_GREEN"
+#print axioms arsenalBridgeProp
+#print axioms erdos394_arsenal_bridge'
+#print axioms erdos394_unique_landing
+#print axioms erdos394_complete
+
 end Erdos394
