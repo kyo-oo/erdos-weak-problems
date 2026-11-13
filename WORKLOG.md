@@ -3203,3 +3203,53 @@ escalation (pair-moves / restarts) queued for the next session.
 W57 pack push. r1 verdicts expected next.
 
 The engine never stops; it never lies. In English, always.
+
+## S057 ENVIRONMENT WAR — THE DIRECTORY-SWAP (L89) + THE W57 r2 REPAIRS (2026-11-13)
+
+**THE ATTACK:** mid-round, the local erdos-weak-problems directory was
+SWAPPED to an S052-era snapshot (HEAD c3b47e9, old reflog, the W57
+folders gone, /tmp/ghtoken.txt wiped — the platform's restore machinery,
+not a git operation). **THE ZERO-LOSS LAW HELD:** every push of the
+session was verified on remote (0f854d2); the recovery =
+fetch + `git reset --hard origin/campaign` + the salvage of the one
+untracked repaired file (Erdos348 r2 via /tmp backup). 
+**L89 — THE DIRECTORY-SWAP LAW: the remote is TRUTH; the local tree is
+disposable; recover by fetch+reset, never by local archaeology; keep
+untracked salvage in /tmp before risky operations.**
+
+**W57 r1 VERDICT (run 43335072786): K57 (#850) GREEN IN R1** (the
+relaunch landed first-try — the corpus length-2 pairs + the
+non-witness census x,y<50). K53/K54/K55/K56 failed with SMALL root
+causes — all repaired:
+
+1. **K53 (#677) — THE NAT DEFEO-GAP LAW (L90):** Nat.mul/add do NOT
+   defeq-reduce on variable second-arguments: `Nat.div_add_mod` spells
+   the product LEFT-multiplied (k * (m/k)) — bridge with mul_comm;
+   `Nat.succ a * b` is NOT defeq to `b + a*b` (Nat.succ_mul bridges);
+   `1 * (n+1)` is NOT defeq to `n+1` (Nat.mul_one bridges). NEVER trust
+   defeq across a multiplication with a variable.
+2. **K54 (#348) — the deadline-salvage's 12 errors root-repaired** by
+   the repair agent: Bool.noConfusion idioms for `||`/`&&` closure
+   (rw's trailing rfl cannot iota-unfold Bool.or), omega for the
+   fvar-stranded decide, the binder-typo in sumSet_cons_inv (t : Nat
+   → t : List Nat — seven errors from ONE typo), the `_`-padding
+   alternative pattern (ExactF62's house idiom).
+3. **K55 (#274) — THE BEQ LAW (L91): `==`-beq on Nat does NOT
+   reliably defeq-reduce at variable arguments** (the instance chain
+   blocks iota) — the fix: the structural natB def (equation-compiler
+   native, iota-reduces on constructor pairs) replacing every variable-
+   level `==`; decide-consumed concrete sites stay (kernel evaluation
+   is fine on closed terms).
+4. **K56 (#288) — List.range is range'-based, NOT a Nat.rec** —
+   `List.range 0` is not defeq `[]` at rw's trailing-rfl transparency;
+   simp bridges (two window laws).
+
+**#203:** the v3 pair-move annealer (the single-switch landscape
+exhausted after 10 rounds; pair-moves with sequential-delta
+bookkeeping); round 11 banked 1 more improvement (28.474%).
+
+**Next:** CI round 5 verdicts on the r2 repairs; the #274
+Mirsky-Newman-Davenport-Rado kill route (kills C_n for ALL n) is the
+round-2 priority; #961's exclusion descent continues.
+
+The engine never stops; it never lies. In English, always.

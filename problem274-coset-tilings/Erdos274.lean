@@ -60,6 +60,18 @@ namespace E274
 
 /-! ## §1 The arithmetic tiling frame (group-free core). -/
 
+/-- Structural boolean equality (equation-compiler native: iota-reduces
+on constructor pairs — immune to the BEq instance-reduction gap that
+killed r1's `==`-spelled lemmas on run 43335072786). -/
+def natB : Nat → Nat → Bool
+  | 0, 0 => true
+  | Nat.succ a, Nat.succ b => natB a b
+  | _, _ => false
+
+theorem natB_self : ∀ n : Nat, natB n n = true
+  | 0 => rfl
+  | Nat.succ k => natB_self k
+
 /-- List sum. -/
 def sumNat : List Nat → Nat
   | [] => 0
@@ -68,7 +80,7 @@ def sumNat : List Nat → Nat
 /-- Boolean membership. -/
 def memNat : Nat → List Nat → Bool
   | _, [] => false
-  | s, t :: r => (s == t) || memNat s r
+  | s, t :: r => natB s t || memNat s r
 
 /-- All entries pairwise distinct. -/
 def sizesDistinct : List Nat → Bool
@@ -78,29 +90,21 @@ def sizesDistinct : List Nat → Bool
 /-- Every entry divides `n` (Boolean arithmetic mirror of `∣`). -/
 def dividesAll (n : Nat) : List Nat → Bool
   | [] => true
-  | s :: t => (n % s == 0) && dividesAll n t
+  | s :: t => natB (n % s) 0 && dividesAll n t
 
 /-- THE TILING FRAME: `sizes` is an arithmetic coset-size multiset for an
 order-`n` group — each size divides the order, the sizes are distinct,
 and they sum to the order. -/
 def tilingSizes (n : Nat) (sizes : List Nat) : Bool :=
-  (dividesAll n sizes) && (sizesDistinct sizes) && (sumNat sizes == n)
-
-/-- Reflexivity of boolean equality on Nat (self-contained core-free). -/
-theorem beq_self_true (n : Nat) : (n == n) = true := by
-  induction n with
-  | zero => rfl
-  | succ k ih => exact ih
+  (dividesAll n sizes) && (sizesDistinct sizes) && (natB (sumNat sizes) n)
 
 /-- The trivial one-coset multiset [n] passes the tiling frame. -/
 theorem tilingSizes_self (n : Nat) : tilingSizes n [n] = true := by
-  have h1 : (dividesAll n [n]) = true := by
-    show (n % n == 0) && true = true
-    rw [Nat.mod_self n]
-  have h2 : (sizesDistinct [n]) = true := rfl
-  have h3 : (sumNat [n] == n) = true := beq_self_true n
-  show (dividesAll n [n]) && (sizesDistinct [n]) && (sumNat [n] == n) = true
-  rw [h1, h2, h3]
+  -- r2 repair: the r1 `==`-spelled haves died on the BEq instance-reduction
+  -- gap; the natB spelling makes every step iota-native.
+  show (natB (n % n) 0) && true && (natB (n + 0) n) = true
+  rw [Nat.mod_self n, Nat.add_zero]
+  exact natB_self n
 
 /-- THE ARITHMETIC FEASIBILITY LAW (trivial layer): every order n admits
 the one-coset size multiset [n] (G as a single coset of itself). -/
@@ -366,7 +370,7 @@ end E274
 
 /-! ## RECEIPT. -/
 
-#print axioms E274.beq_self_true
+#print axioms E274.natB_self
 #print axioms E274.tilingSizes_self
 #print axioms E274.feasible_structure
 #print axioms E274.two_coset_impossible

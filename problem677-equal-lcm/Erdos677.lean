@@ -88,7 +88,10 @@ def wprod (n k : Nat) : Nat :=
 /-- Exact division: if m % k = 0 then m / k * k = m (from `Nat.div_add_mod`). -/
 theorem e677_div_mul_self (m k : Nat) (hmod : m % k = 0) : m / k * k = m := by
   have h := Nat.div_add_mod m k
-  rw [hmod, Nat.add_zero] at h
+  -- r1 post-mortem (run 43335072786): core `Nat.div_add_mod` spells the
+  -- product LEFT-multiplied (k * (m / k)); the goal atom is m / k * k —
+  -- the L86 orientation law: bridge with mul_comm, never trust defeq.
+  rw [hmod, Nat.add_zero, Nat.mul_comm k (m / k)] at h
   exact h
 
 /-- Multiplication closure of dvd: d ∣ a → d ∣ a * b. -/
@@ -115,7 +118,12 @@ theorem e677_mul_eq_zero (a b : Nat) (h : a * b = 0) : a = 0 ∨ b = 0 := by
   | zero => exact Or.inl rfl
   | succ a _ =>
     right
-    have h' : b + a * b = 0 := h
+    -- r1 post-mortem: `Nat.succ a * b` is NOT defeq to `b + a * b`
+    -- (Nat.mul recurses on the second argument) — the equation lemma
+    -- `Nat.succ_mul` does the bridging rewrite.
+    have h' : b + a * b = 0 := by
+      rw [Nat.succ_mul] at h
+      exact h
     omega
 
 /-- Positivity of the lcm: both factors positive → lcm positive. -/
@@ -201,7 +209,13 @@ theorem wprod_succ (n k : Nat) : wprod n (Nat.succ k) = wprod n k * (n + 1 + k) 
 through the lcm laws, closed by dvd_antisymm). -/
 theorem M677_one (n : Nat) : M677 n 1 = n + 1 := by
   have hA : n + 1 ∣ M677 n 1 := e677_dvd_lcmd_right 1 (n + 1)
-  have hB : M677 n 1 ∣ n + 1 := e677_lcmd_dvd_mul 1 (n + 1)
+  -- r1 post-mortem (run 43335072786): `1 * (n+1)` is NOT defeq to `n + 1`
+  -- (Nat.mul recurses on the second argument — variable n blocks it);
+  -- the mul_one equation bridges it.
+  have hB : M677 n 1 ∣ n + 1 := by
+    have h0 := e677_lcmd_dvd_mul 1 (n + 1)
+    rw [Nat.mul_one] at h0
+    exact h0
   exact Nat.dvd_antisymm hB hA
 
 /-- M677 is always positive (the empty window is 1; each step lcms a

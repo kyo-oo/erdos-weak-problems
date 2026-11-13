@@ -93,10 +93,16 @@ theorem window_eq (a b : Nat) :
 theorem window_nil (a b : Nat) (h : b < a) : window a b = [] := by
   have h1 : b + 1 - a = 0 := by omega
   rw [window_eq, h1]
+  -- r1 post-mortem (run 43335072786): List.range 0 is not defeq [] at rw's
+  -- trailing rfl (List.range is range'-based, not a Nat.rec); simp closes it.
+  simp
 
 theorem window_single (a : Nat) : window a a = [a] := by
   have h1 : a + 1 - a = 1 := by omega
   rw [window_eq, h1]
+  -- r1 post-mortem (run 43335072786): List.range 1 = [0] + map + add_zero
+  -- needs the simp normalization (not defeq at trailing-rfl transparency).
+  simp
 
 /-- The base recurrences (rfl: structural match on the second argument). -/
 theorem wprod_zero (a : Nat) : wprod a 0 = 1 := rfl

@@ -95,11 +95,18 @@ theorem or_of_bool_right (x y : Bool) (hy : y = true) : (x || y) = true := by
 
 /-- Bool or: a true left disjunct forces the or. -/
 theorem or_of_bool_left (x y : Bool) (hx : x = true) : (x || y) = true := by
-  rw [hx]
+  cases x with
+  | false => exact Bool.noConfusion hx
+  | true => rfl
 
 /-- Bool and: both true forces the and. -/
 theorem and_of_bools (x y : Bool) (hx : x = true) (hy : y = true) : (x && y) = true := by
-  rw [hx, hy]
+  cases x with
+  | false => exact Bool.noConfusion hx
+  | true =>
+    cases y with
+    | false => exact Bool.noConfusion hy
+    | true => rfl
 
 /-- The leB guard reads `a ≤ n` (forward). -/
 theorem leB_of_true : ∀ (a n : Nat), leB a n = true → a ≤ n := by
@@ -109,7 +116,7 @@ theorem leB_of_true : ∀ (a n : Nat), leB a n = true → a ≤ n := by
   | succ k ih =>
     intro n h
     cases n with
-    | zero => exact absurd h (by decide)
+    | zero => omega
     | succ m =>
       have h2 : leB k m = true := h
       have hkm : k ≤ m := ih m h2
@@ -128,9 +135,7 @@ theorem leB_true_of_le : ∀ (n a : Nat), a ≤ n → leB a n = true := by
     intro a h
     cases a with
     | zero => rfl
-    | succ k =>
-      have hkm : k ≤ m := ih k (by omega)
-      exact hkm
+    | succ k => exact ih k (by omega)
 
 /-! ## §1 The Prop view: the `sumSet` inductive + the bridge -/
 
@@ -144,12 +149,12 @@ inductive sumSet : List Nat → Nat → Prop
     sumSet (a :: t) n
 
 /-- Inversion on the cons structure of `sumSet`. -/
-theorem sumSet_cons_inv {a t n : Nat} (h : sumSet (a :: t) n) :
+theorem sumSet_cons_inv {a : Nat} {t : List Nat} {n : Nat} (h : sumSet (a :: t) n) :
     sumSet t n ∨ (a ≤ n ∧ sumSet t (n - a)) := by
   cases h with
   | zero => exact Or.inl (sumSet.zero t)
-  | drop hd => exact Or.inl hd
-  | take hle htk => exact Or.inr ⟨hle, htk⟩
+  | drop _ _ _ hd => exact Or.inl hd
+  | take _ _ _ hle htk => exact Or.inr ⟨hle, htk⟩
 
 /-- Inversion on the nil structure of `sumSet`: the empty list covers only 0. -/
 theorem sumSet_nil_inv {n : Nat} (h : sumSet [] n) : n = 0 := by
