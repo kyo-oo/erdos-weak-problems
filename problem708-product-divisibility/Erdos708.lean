@@ -130,9 +130,9 @@ theorem ascB_head (b : Nat) (B : List Nat) (h : ascB (b :: B) = true) :
     | false => rw [hbb] at h'; exact Bool.noConfusion h'
     | true => rfl
   have hasc : ascB B = true := by
-    cases hbs : ascB B with
-    | false => rw [hbs] at h'; exact Bool.noConfusion h'
-    | true => rfl
+    cases hbb : (B.all (fun b' => decide (b < b'))) with
+    | false => rw [hbb] at h'; exact Bool.noConfusion h'
+    | true => rw [hbb] at h'; exact h'
   refine ⟨?_, hasc⟩
   intro b' hb'
   exact of_decide_eq_true ((List.all_eq_true.mp hall) b' hb')

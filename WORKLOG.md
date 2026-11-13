@@ -3442,3 +3442,33 @@ c=3 frontier band (PART-1 evidence for every n ≤ 8) + the arsenal bridge
 + the board. Kernel-63 step wired.
 
 The engine never stops; it never lies. In English, always.
+
+## S058 — K59 #273 r2 REPAIRED: the nine-error sweep (CI run 43389136518)
+
+- **K59 #273 r2 (REPAIRED):** Erdos273.lean — all nine CI errors root-repaired,
+  zero statement-math changes (two binder SPELLINGS restored to their proof-term
+  witnesses):
+  1. `natB_self` (51:2): the binder-before-colon form `(n : Nat)` fed the
+     equation compiler a bogus succ-case goal (`0 = k.succ`); healed to the
+     K55-green ∀-spelling (verbatim E274 r3: `theorem natB_self : ∀ n : Nat,
+     natB n n = true`).
+  2. `kraft_leaf_ge1` succ branch (107:18): leftover `rw [q]` hunted `L / ν`
+     inside the already-substituted bound `1 ≤ j + 1`; dropped — omega on the
+     linear j-bound (L86-clean).
+  3. `noDivFrom` (187:40): `Nat.beq (dividesB k n) false` fed a Bool to
+     Nat.beq; re-spelled `!(dividesB k n)` (the K55 L91 Bool idiom). ROOT of
+     the `pool400_census` decide stall too: the ill-typed body poisoned kernel
+     reduction ("Decidable instance did not reduce"). Pool data
+     python-mirrored 67/67 pMinus1B true — the census needs NO chunking
+     (67 small-integer trial divisions, trivially below the kernel decides
+     that already passed on the same run, e.g. the 44-digit pool400_kraft).
+  4. `erdos273_board` (274:38, 274:56, 275:38, 286:47): the first conjunct's
+     `∀ leaves L : Nat` shared the Nat annotation, binding `leaves : ℕ`;
+     restored `∀ (leaves : List Nat) (L : Nat)` — the verbatim ∀-form of
+     kraft_confinement (the call site was never swapped; the statement was).
+  5. Board conjunct-2 (287:4): hypothesis order (ν ∣ L vs 0 < L) transposed
+     against `no_single_leaf`'s binders; explicit lambda wrapper at the call
+     site (`fun ν L h2 hd hL hk => no_single_leaf ν L h2 hL hd hk`) — the
+     theorem itself untouched.
+  Receipts strengthened: `#print axioms` now prints all 11 gate names
+  (leafOK_bound, pool12_kraft, pool400_kraft added to §9).

@@ -46,7 +46,7 @@ def natB : Nat → Nat → Bool
   | Nat.succ a, Nat.succ b => natB a b
   | _, _ => false
 
-theorem natB_self (n : Nat) : natB n n = true
+theorem natB_self : ∀ n : Nat, natB n n = true
   | 0 => rfl
   | Nat.succ k => natB_self k
 
@@ -104,7 +104,7 @@ theorem kraft_leaf_ge1 (ν L : Nat) (h2 : 2 ≤ ν) (hL : 0 < L) (hd : ν ∣ L)
     rw [q, Nat.mul_zero, Nat.zero_add] at hdm
     rw [hdm] at hmlt
     exact absurd (Nat.lt_of_lt_of_le hmlt (dvd_le ν L hd hL)) (Nat.lt_irrefl L)
-  | succ j => rw [q]; exact Nat.succ_le_succ (Nat.zero_le j)
+  | succ j => omega
 
 /-! ## §4 THE KRAFT CONFINEMENT LAW (L-A — the star, full induction). -/
 
@@ -184,7 +184,7 @@ def dividesB (d n : Nat) : Bool := Nat.beq (n % d) 0
 def noDivFrom (n k : Nat) : Nat → Bool
   | 0 => true
   | Nat.succ f =>
-    Nat.ble (n + 1) (k * k) || (Nat.beq (dividesB k n) false && noDivFrom n (k + 1) f)
+    Nat.ble (n + 1) (k * k) || (!(dividesB k n) && noDivFrom n (k + 1) f)
 
 def primeB (n : Nat) : Bool := Nat.ble 2 n && noDivFrom n 2 n
 
@@ -271,7 +271,7 @@ core + the pool tables + the density window + the granularity wall + the
 repeated-moduli escape + the arsenal bridge — every certified fact of
 PROOF.md §4 in one unconditional conjunction. -/
 theorem erdos273_board :
-    (∀ leaves L : Nat, 0 < L → leafOK leaves L → kraftW leaves L = L →
+    (∀ (leaves : List Nat) (L : Nat), 0 < L → leafOK leaves L → kraftW leaves L = L →
         leaves.length ≤ L ∧ leafBound leaves L ∧ 2 ≤ leaves.length) ∧
     (∀ ν L : Nat, 2 ≤ ν → ν ∣ L → 0 < L → kraftW [ν] L = L → False) ∧
     (kraftW pool12 3603600 = 4078497) ∧
@@ -284,13 +284,17 @@ theorem erdos273_board :
     (ErdosTernary2.isTernaryDigit 2 = true ∧ v2r (3 ^ 1 * 44) = v2r 44 ∧
         v2r (3 ^ 1 * 14) = v2r 14) :=
   ⟨fun leaves L hL hok hk => kraft_confinement leaves L hL hok hk,
-    no_single_leaf, pool12_kraft, pool400_census, pool400_density,
+    fun ν L h2 hd hL hk => no_single_leaf ν L h2 hL hd hk,
+    pool12_kraft, pool400_census, pool400_density,
     granul_wall_4to12, ⟨parity_cover, parity_leafOK⟩, e273_arsenal_bridge⟩
 
 /-! ## §9 Receipts. -/
 #print axioms E273.kraft_confinement
 #print axioms E273.no_single_leaf
 #print axioms E273.length_le_kraft
+#print axioms E273.leafOK_bound
+#print axioms E273.pool12_kraft
+#print axioms E273.pool400_kraft
 #print axioms E273.pool400_census
 #print axioms E273.pool400_density
 #print axioms E273.granul_wall_4to12

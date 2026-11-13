@@ -115,7 +115,7 @@ theorem tilingSizes_self (n : Nat) : tilingSizes n [n] = true := by
     show natB (n + 0) n = true
     rw [Nat.add_zero]
     exact natB_self n
-  show (dividesAll n [n]) && (sizesDistinct [n]) && (natB (sumNat [n]) n) = true
+  show ((dividesAll n [n]) && (sizesDistinct [n]) && (natB (sumNat [n]) n)) = true
   rw [h1, h2, h3]
 
 /-- THE ARITHMETIC FEASIBILITY LAW (trivial layer): every order n admits

@@ -837,7 +837,12 @@ theorem no29negX_sound (y : Nat) : ∀ b : Nat, no29negX y b = true →
       intro _ x hx
       have hx0 : x = 0 := by omega
       rw [hx0]
-      omega
+      rcases (show y = 0 ∨ 1 ≤ y by omega) with h0 | h1
+      · rw [h0]
+        omega
+      · have h29 : 29 * 1 ≤ 29 * y := Nat.mul_le_mul_left _ h1
+        have hyy : 29 * y * 1 ≤ 29 * y * y := Nat.mul_le_mul_left _ h1
+        omega
   | succ w ih =>
       intro hrow x hx
       have hstep : (if (w + 1) * (w + 1) + 1 = 29 * y * y then false
@@ -938,6 +943,7 @@ theorem pell29_no_small_plus : ∀ y : Nat, 1 ≤ y → y ≤ 12 →
       have hy144 : y * y ≤ 12 * 12 := Nat.mul_le_mul hy12 hy12
       have h29 : 29 * (y * y) ≤ 29 * (12 * 12) :=
         Nat.mul_le_mul_left _ hy144
+      have hyz : 29 * y * y = 29 * (y * y) := by ring
       omega
     exact no29plus12_sound 12 no29plus12_dec y hy1 hy12 x hx65 hxeq
   · exact hxeq
@@ -956,6 +962,7 @@ theorem pell29_no_small_neg : ∀ v : Nat, 1 ≤ v → v ≤ 12 →
       have hv144 : v * v ≤ 12 * 12 := Nat.mul_le_mul hv12 hv12
       have h29 : 29 * (v * v) ≤ 29 * (12 * 12) :=
         Nat.mul_le_mul_left _ hv144
+      have hyz : 29 * v * v = 29 * (v * v) := by ring
       omega
     exact no29neg12_sound 12 no29neg12_dec v hv1 hv12 u hu65 hueq
   · exact hueq
@@ -1001,6 +1008,7 @@ theorem pell29_minimal : ∀ X Y : Nat, X * X = 29 * Y * Y + 1 → 1 ≤ Y →
       have hL : (13 * X) * (13 * X) = 169 * (X * X) := by ring
       have hR : (70 * Y) * (70 * Y) = 4900 * (Y * Y) := by ring
       rw [hL, hR] at hs
+      have hyz : 29 * Y * Y = 29 * (Y * Y) := by ring
       omega
     -- 70·X < 377·Y (for Y ≥ 13)
     have h70X : 70 * X < 377 * Y := by
@@ -1014,6 +1022,7 @@ theorem pell29_minimal : ∀ X Y : Nat, X * X = 29 * Y * Y + 1 → 1 ≤ Y →
       have h169 : 13 * 13 ≤ Y * Y := Nat.mul_le_mul hbig hbig
       have h4901 : 29 * (13 * 13) ≤ 29 * (Y * Y) :=
         Nat.mul_le_mul_left _ h169
+      have hyz : 29 * Y * Y = 29 * (Y * Y) := by ring
       omega
     -- the conjugate pair (sub-to-add, the K46 obtain-pattern)
     obtain ⟨vX, hA⟩ : ∃ vX, 377 * Y = 70 * X + vX :=
@@ -1046,12 +1055,17 @@ theorem pell29_minimal : ∀ X Y : Nat, X * X = 29 * Y * Y + 1 → 1 ≤ Y →
       have d5 : Y * (70 * Y + vY) = 70 * (Y * Y) + vY * Y := by ring
       have d6 : Y * (13 * X) = 13 * (X * Y) := by ring
       omega
-    have hneg : vX * vX + 1 = 29 * vY * vY := by omega
+    have hneg : vX * vX + 1 = 29 * vY * vY := by
+      have hxz : 29 * Y * Y = 29 * (Y * Y) := by ring
+      have hvz : 29 * vY * vY = 29 * (vY * vY) := by ring
+      omega
     -- THE WALL: vY ≤ 13
     have hvY13 : vY ≤ 13 := by
       by_contra hc
       have h14 : 14 ≤ vY := by omega
-      have W1 : vY * vY + 140 * (vY * Y) = Y * Y + 169 := by omega
+      have W1 : vY * vY + 140 * (vY * Y) = Y * Y + 169 := by
+        have hxz : 29 * Y * Y = 29 * (Y * Y) := by ring
+        omega
       have m1 : vY * (140 * Y + vY) = 140 * (vY * Y) + vY * vY := by
         ring
       have m2 : 14 * (140 * Y + vY) = 1960 * Y + 14 * vY := by ring
@@ -1177,6 +1191,7 @@ theorem pell_tower_two_cheb (a X1 Y1 : Nat)
     (hf : X1 * X1 = a * Y1 * Y1 + 1) :
     (E961P.Pell a X1 Y1 2).1 + 1 = 2 * X1 * X1 := by
   have h2 := (pell_tower_two_square a X1 Y1).1
+  have hbr : 2 * X1 * X1 = 2 * (X1 * X1) := by ring
   omega
 
 /-- THE POWER-REP AT 29 — the doubling law on every even tower index:
@@ -1190,6 +1205,10 @@ theorem pell29_double_angle : ∀ k : Nat,
   intro k
   obtain ⟨hX, hY⟩ := pell_tower_pow_add 29 9801 1820 (k + 1) (k + 1)
   have hsol := E961P.pell_sol 29 9801 1820 pell29_fundamental_sol k
+  have hbr : 2 * (E961P.Pell 29 9801 1820 (k + 1)).1
+      * (E961P.Pell 29 9801 1820 (k + 1)).1
+      = 2 * ((E961P.Pell 29 9801 1820 (k + 1)).1
+      * (E961P.Pell 29 9801 1820 (k + 1)).1) := by ring
   omega
 
 /-- THE STØRMER FACTORIZATION LAW (general): every solution of
@@ -1261,8 +1280,9 @@ theorem pow_pos_9801 : ∀ e : Nat, 1 ≤ 9801 ^ e := by
   | zero => rw [Nat.pow_zero]
   | succ k ih =>
       rw [Nat.pow_succ]
-      have h := Nat.mul_le_mul ih (by omega)
-      simpa using h
+      have h2 : 1 * 9801 ≤ 9801 ^ k * 9801 :=
+        Nat.mul_le_mul_right _ ih
+      omega
 
 /-- THE MULTIPLICATIVE SEPARATION STEP: every tower step at least
 multiplies X by the fundamental's X₁ — X₁·X_k ≤ X_{k+1} (the additive
@@ -1339,7 +1359,7 @@ theorem pell29_gap3_min : ∀ X Y : Nat, X * X = 29 * Y * Y + 1 → 1 ≤ Y →
   · have hge : 9801 ^ (n + 1) ≤ (E961P.Pell 29 9801 1820 (n + 1)).1 :=
       pell_tower_X_ge_pow 29 9801 1820 (n + 1) (by omega)
     have hmono : 9801 ^ 3 ≤ 9801 ^ (n + 1) := by
-      obtain ⟨j, hj⟩ : ∃ j, n + 1 = 3 + j := ⟨n - 1, by omega⟩
+      obtain ⟨j, hj⟩ : ∃ j, n + 1 = 3 + j := ⟨n - 2, by omega⟩
       rw [hj, Nat.pow_add]
       have hpos : 1 ≤ 9801 ^ j := pow_pos_9801 j
       have hmul : 9801 ^ 3 * 1 ≤ 9801 ^ 3 * 9801 ^ j :=

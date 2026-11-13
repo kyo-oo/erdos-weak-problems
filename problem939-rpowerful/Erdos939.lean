@@ -1,3 +1,7 @@
+import Arsenal.ErdosTernary2.Basic
+import Arsenal.CardinalWorlds
+import Arsenal.CardinalWorldsV2
+
 /-! # Erdos939 — THE R-POWERFUL SUM KERNEL (Kernel 60, W58-B)
 Erdős #939 (r-powerful sums): the r=4 frontier — when is a sum of two
 r-powerful numbers again r-powerful? This kernel encodes ONLY certified
@@ -8,10 +12,6 @@ r=3 pair below 8; no raw r=4 pair below 16; no odd-census pair sums
 back into the r=4 census), the r=3 witness construction (two
 Nitaj-style identities), the pair-kill arithmetic beyond the census
 frontiers, the beyond-FLT row, and the 10^15 hunt bracket. -/
-
-import Arsenal.ErdosTernary2.Basic
-import Arsenal.CardinalWorlds
-import Arsenal.CardinalWorldsV2
 
 set_option maxRecDepth 65536
 set_option maxHeartbeats 4000000

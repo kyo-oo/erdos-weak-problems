@@ -134,39 +134,50 @@ theorem two_pow_ge (n : Nat) : n ≤ 2 ^ n := by
       have hP := two_pow_pos n
       omega
 
-/-- Cast-of-sum distribution (omega on linear Nat under the Int cast). -/
+/-- Cast-of-sum distribution (the cast bridge: `Int.ofNat_eq_natCast` +
+`Int.natCast_add` — omega is BLIND to raw `Int.ofNat` constructor apps in
+this toolchain: it sees only `Nat.cast` coercions, so every Int.ofNat atom
+must be bridged to `↑`-form before omega). -/
 theorem ofNat_add (a b : Nat) :
-    Int.ofNat (a + b) = Int.ofNat a + Int.ofNat b := by omega
+    Int.ofNat (a + b) = Int.ofNat a + Int.ofNat b := by
+  simp only [Int.ofNat_eq_natCast, Int.natCast_add]
 
 /-- THE TWO-SIDED MAGNITUDE LAW: every sign vector's numerator is bounded by
-its length times the scale n! (induction over the fold; sign case-split —
-each δ ∈ {−1,0,1} contributes at most one weight n!/k ≤ n!). -/
+its length times the scale n! (induction over the fold — with `k` generalized
+so the IH bounds the k+1-fold; sign case-split — each δ ∈ {−1,0,1} contributes
+at most one weight n!/k ≤ n!, whose Int facts are fed to omega explicitly in
+`↑`-cast form: raw `Int.ofNat` apps are omega-opaque atoms in this toolchain). -/
 theorem hsumAux_two_sided (n k : Nat) : ∀ ds : List Int,
     (∀ d ∈ ds, d = -1 ∨ d = 0 ∨ d = 1) →
     -(Int.ofNat (ds.length * fact n)) ≤ hsumAux n k ds ∧
       hsumAux n k ds ≤ Int.ofNat (ds.length * fact n) := by
   intro ds
-  induction ds with
+  induction ds generalizing k with
   | nil =>
-      intro _
+      intro k _
       have hl : ([] : List Int).length = 0 := rfl
       have hz : hsumAux n k [] = 0 := rfl
       rw [hl, hz]
+      simp only [Int.ofNat_eq_natCast]
       constructor <;> omega
   | cons d ds ih =>
-      intro hdom
+      intro k hdom
       have hd : d = -1 ∨ d = 0 ∨ d = 1 :=
-        hdom d ((List.mem_cons d d ds).mpr (Or.inl rfl))
+        hdom d (List.mem_cons.mpr (Or.inl rfl))
       have hdom' : ∀ x ∈ ds, x = -1 ∨ x = 0 ∨ x = 1 :=
-        fun x hx => hdom x ((List.mem_cons x d ds).mpr (Or.inr hx))
-      have IH := ih hdom'
+        fun x hx => hdom x (List.mem_cons.mpr (Or.inr hx))
+      have IH := ih (k + 1) hdom'
       have hNat := natDiv_le (fact n) k
-      have hW : Int.ofNat (fact n / k) ≤ Int.ofNat (fact n) := by omega
+      have hW : ((fact n / k : Nat) : Int) ≤ ((fact n : Nat) : Int) :=
+        Int.ofNat_le.mpr hNat
+      have hW0 : (0 : Int) ≤ ((fact n / k : Nat) : Int) :=
+        Int.natCast_nonneg _
       have hl : (d :: ds).length = ds.length + 1 := rfl
       have hN : (ds.length + 1) * fact n = ds.length * fact n + fact n := by ring
       have hca : Int.ofNat (ds.length * fact n + fact n)
           = Int.ofNat (ds.length * fact n) + Int.ofNat (fact n) := ofNat_add _ _
       rw [hl, hN, hca, hsumAux_cons]
+      simp only [Int.ofNat_eq_natCast] at IH ⊢
       rcases hd with h | h | h
       · subst h; constructor <;> omega
       · subst h; constructor <;> omega
@@ -190,6 +201,9 @@ theorem hsum_envelope (ds : List Int) (n : Nat)
   have hN : ds.length * fact n ≤ 2 ^ n * fact n :=
     Nat.le_trans (e317_le_mul_right _ _ _ hlen (fact_pos n))
       (e317_le_mul_right _ _ _ (two_pow_ge n) (fact_pos n))
+  have hC : ((ds.length * fact n : Nat) : Int) ≤ ((2 ^ n * fact n : Nat) : Int) :=
+    Int.ofNat_le.mpr hN
+  simp only [Int.ofNat_eq_natCast] at htwo ⊢
   constructor <;> omega
 
 /-! ## §2 The witness constructions — the certified δ-vectors. -/
