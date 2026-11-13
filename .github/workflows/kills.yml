@@ -979,6 +979,20 @@ jobs:
           python3 problem686-pell-ratio/battery686k2class.py
           echo ERDOS686K2CLASS_KERNEL_GREEN=1
 
+      - name: "Kernel 67 - Erdos 389 CONSECUTIVE-PRODUCT CHAIN KERNEL r1 (S059, W59-B-2): the chain kernel — prodRange/countQ/mCount/countChain/depthSum habitat + the count laws (mono, mod-shift, THE SHIFT LAW q|k -> both k-blocks carry the same q-count) + THE CHAIN LAYER (chain_dvd: q^depthSum | prodRange, THE SWAP LAW e389_swap: countChain = depthSum structurally, THE CROWN e389_crown: q^e|k forall 1<=e<=E -> q^countChain | the right block) + THE WITNESS TABLE n=1..11 (720|55440 up to the 45144-wide ~2*10^5-digit blocks) + THE FULL MINIMALITY n=1..7 (chunked sweeps <= 500, NO-OOM) + the quotient residues + the arsenal bridge + the 26-conjunct board + E389_CONSECUTIVE_PRODUCT_GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem389-consecutive-product/Erdos389.lean 2>&1 | tee kernel67.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel67.log
+          grep -F "E389_CONSECUTIVE_PRODUCT_GREEN" kernel67.log
+          grep -E "E389.(e389_shift_law|e389_swap|e389_crown|e389_witness_10_45144|e389_witness_11_45143|e389_minimal_6|e389_crown_inst_2_3_4_2|erdos389_board)' (does not depend on any axioms|depends on axioms)" kernel67.log
+          echo KERNEL67_GREEN=1
+
   kernel-c:
     runs-on: ubuntu-24.04
     steps:
@@ -1333,5 +1347,16 @@ jobs:
           grep -F "E317_SIGNED_HARMONIC_GREEN" kernel63.log
           grep -E "E317.(hsum_two_sided|hsum_envelope|e317_witness_table|e317_min_value_5|e317_min_value_6|e317_min_value_7|e317_no_unit_over_L5|e317_frontier_c3|e317_arsenal_bridge|erdos317_board)' (does not depend on any axioms|depends on axioms)" kernel63.log
           echo KERNEL63_GREEN=1
-
-
+      - name: "Kernel 66 - Erdos 961 EXCLUSION LAYER 3 + SUPER-MULTIPLICATIVE GROWTH r1 (S059, W59-B-1): the growth crown — pell_tower_X_supermul (X_n · X_m ≤ X_{n+m}, the super-multiplicative law) + THE EXPONENTIAL GROWTH LAW pell_tower_X_ge_pow (X_1^n ≤ X_n) + pell_tower_pow_add (the tower IS the power map) + the gap cascade pell_tower_gap_mono + THE FIVE NEW PELL FAMILY ROWS (a=13: 649/180, a=19: 170/39, a=23: 24/5, a=31: 1520/273, a=37: 73/12 — fundamentals decide-certified, member-2 and member-3 composition rows, forall-n solvability + growth + gap cascade per family) + the family scale receipt + the 11-conjunct board + E961X3_EXCLUSION3_GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem961-smooth-runs/Erdos961Exclusion3.lean 2>&1 | tee kernel66.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel66.log
+          grep -F "E961X3_EXCLUSION3_GREEN" kernel66.log
+          grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
+          echo KERNEL66_GREEN=1

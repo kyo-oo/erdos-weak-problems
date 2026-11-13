@@ -3493,3 +3493,56 @@ The engine never stops; it never lies. In English, always.
 - Pre-seal progress pack committed + pushed (fa4a160 → remote campaign).
 
 The bag is sealed. The campaign continues.
+
+## S059 — W59: THE CI RESCUE + THE W59-B CREATION WAVE
+
+- **W58-E verdict harvested (run 43419375680):** 70 steps GREEN,
+  2 failed. NINE kernels went green in one stroke — K53 #677 r3,
+  K54 #348 r3, K55 #274 r5, K58 #961x2, K59 #273 r2, K61 #411,
+  K63 #317 r3, K64 #289, K65 #1212. Green ledger: 52 → 61.
+- **K62 #708 r5 ROOT-KILL (the binder absorption law, L94):**
+  Erdos708.lean:308 — `cases hsub with | drop _ _ B2 hsub'` failed
+  because sub708.drop's `B` binder is ABSORBED by index unification
+  (B ≟ outer B, fvar-to-fvar → inaccessible); naming it B2 binds
+  nothing → "unknown identifier B2" → error-recovery sorryAx →
+  board poisoned. Fix: `| drop _ _ _ hsub' =>` + the witness
+  position as `_` (unification infers it from hsub'). The take
+  branch survived because its first index (x :: B) is composite →
+  B stays fresh/accessible. Asymmetry was the diagnostic key.
+- **K60 #939 NO-OOM SPLIT (L95):** W58-D died with "maximum
+  recursion depth" at census_r4_members (10^4-scan folds); the r3
+  "repair" (maxRecDepth 262144) turned fast-fail into a 2m42s+
+  grind that OOM-killed the runner (exit 143, shutdown signal).
+  ROOT: one heavy census sharing a lane with 68 kernels. FIX:
+  Erdos939R4.lean — the isolated heavy module (verbatim 25-value
+  r=4 census + no_small_solution_r4 + the FULL 7-conjunct
+  board939_r4), its own CI step kernel60b; light Erdos939.lean
+  keeps everything else + the 6-conjunct board. Statements
+  verbatim — only the module boundary moved.
+- **kills.yml 3-WAY PARALLEL SPLIT:** the single 69-step job →
+  kernel-a/b/c (24/24/24 + setup). No single grind holds verdicts
+  hostage; wall time ~55 min → ~20 min. Repo is PUBLIC → CI
+  minutes free.
+- **Paths trigger filter extended (+8):** problem708/939/411/317/
+  273/289/1212/389 — the W58 folders were ONLY in step commands,
+  never in the trigger; their CI runs happened by luck (co-touched
+  filtered paths). Landmine removed.
+- **W59-B CREATION WAVE (two sub-agents, each own problem):**
+  - **K66 #961 EXCLUSION3 (agent W59-B-1):** 574 lines, 21
+    theorems — pell_tower_X_supermul (X_n·X_m ≤ X_{n+m}) + THE
+    EXPONENTIAL GROWTH LAW pell_tower_X_ge_pow (X₁^n ≤ X_n) +
+    gap cascade + FIVE new Pell family rows (a=13/19/23/31/37,
+    fundamentals decide-certified 649/180, 170/39, 24/5, 1520/273,
+    73/12) + 11-conjunct board. 12 blocks byte-verbatim from
+    K46/K58 green.
+  - **K67 #389 CONSECUTIVE-PRODUCT (agent W59-B-2):** 549 lines,
+    61 theorems — the count laws + THE SHIFT LAW + THE SWAP LAW
+    (countChain = depthSum) + THE CROWN (q^countChain ∣ right
+    block) + witness table n=1..11 (720∣55440 up to 45144-wide
+    blocks) + FULL minimality n=1..7 (chunked ≤ 500, NO-OOM) +
+    26-conjunct board. Root-repaired the draft's latent
+    Nat.mul_mod_right unknown-identifier kill pre-push.
+- **HEAD:** 8213afe (W59-A rescue) → this wave. CI in flight on
+  the 3-way parallel lane.
+
+The engine never stops; it never lies. In English, always.
