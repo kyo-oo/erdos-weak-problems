@@ -308,8 +308,6 @@ theorem e389_witness_8_8171 : prodRange 8 8171 ∣ prodRange 8179 8171 := by dec
 /-- **WITNESS (n=9, k=8170):** the 8170-wide block 9···8178 divides 8179···16348. -/
 theorem e389_witness_9_8170 : prodRange 9 8170 ∣ prodRange 8179 8170 := by decide
 
-/-- **WITNESS (n=10, k=45144):** the 45144-wide block 10···45153 divides
-45154···90297 (≈2.1·10^5 digits — the heaviest decide here). -/
 /-! S059 W59-E addendum — THE CLOSED-GOAL ROUTE (the Erdos939R4 law):
     the two heaviest witnesses (n=10, k=45144 and n=11, k=45143 — folds
     ~45k wide) blew the elaborator recursion budget at 65536 (CI run
@@ -319,6 +317,8 @@ theorem e389_witness_9_8170 : prodRange 9 8170 ∣ prodRange 8179 8170 := by dec
     the IR evaluator runs these folds in seconds with bounded memory.
     Receipts honestly show Lean.ofReduceBool on these two rows. -/
 
+/-- **WITNESS (n=10, k=45144):** the 45144-wide block 10···45153 divides
+45154···90297 (≈2.1·10^5 digits — the heaviest row here). -/
 theorem e389_witness_10_45144 : prodRange 10 45144 ∣ prodRange 45154 45144 := by
   native_decide
 
