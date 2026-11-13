@@ -3572,3 +3572,33 @@ The engine never stops; it never lies. In English, always.
   skipped step is an unverified kernel, never a green one.
 
 The engine never stops; it never lies. In English, always.
+
+## S059 — W59-E/F: THE VERDICT FLOOD + K61's TRUE ROOTS
+
+- **THE GREEN FLOOD (CI runs 43453321441 + 43456966622):**
+  - K60b #939 R4 module GREEN (native_decide route KILLED the
+    twice-runner-killer — stable across two runs).
+  - K63 #317 r3 VERIFIED GREEN (first true verification after three
+    skip-masks).
+  - K65 #1212 re-verified GREEN.
+  - K66 #961 EXCLUSION3 GREEN ON FIRST CI FLIGHT (574 lines: the
+    super-multiplicative growth law X_n·X_m ≤ X_{n+m}, the exponential
+    law X₁^n ≤ X_n, five new Pell families).
+  - 18-F AND 18-G GREEN (the 1056 olean ladder reunited in kernel-a;
+    kernel-a 31/31 success).
+- **K67 #389 r1 verdict: FAILURE — 3 errors, all root-killed in r2
+  (976654c, verdict pending):** (1) orphan `exact` after rw's trailing
+  rfl; (2)+(3) the n=10/11 45k-wide witness decides blew elaborator
+  depth 65536 → closed-goal native_decide (the Erdos939R4 law).
+- **K61 #411 r2 verdict: FAILURE — the cascade's TRUE ROOTS exposed:**
+  8 root sites citing MATHLIB-ONLY lemmas that never resolve in the
+  Arsenal-only world (Nat.dvd_sub', Nat.dvd_mul_of_dvd_right,
+  Nat.pos_pow_of_pos, Nat.even_iff_exists_two_mul) + binder/rfl/omega
+  defects. Full map banked in
+  problem411-iterated-totient/CI_errors_w59e.txt — dedicated repair
+  mission queued (W59-F-1, agent launch deferred to next round:
+  context deadline).
+- **Ledger after honesty audit:** 60+ green kernels; K63/K65/K66/K60b
+  newly verified; K61 in dedicated repair; K67 r2 in flight.
+
+The engine never stops; it never lies. In English, always.
