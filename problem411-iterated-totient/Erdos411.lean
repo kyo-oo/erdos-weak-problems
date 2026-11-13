@@ -72,17 +72,21 @@ def inSIX (m : Nat) : Bool := SIXl.contains m
 
 /-! ## §1 Small helpers. -/
 
-/-- Bool-iff bridge for decide predicates. -/
-theorem boolIff {P Q : Prop} (h : P ↔ Q) : (decide P = true) ↔ (decide Q = true) := by
+/-- Bool-iff bridge for decide predicates (r2: instance binders added —
+    `decide P` for variable `P` needs `[Decidable P]`; the r1 form never
+    compiled anywhere — the W58-D/W59 skips masked it). -/
+theorem boolIff {P Q : Prop} [Decidable P] [Decidable Q] (h : P ↔ Q) :
+    (decide P = true) ↔ (decide Q = true) := by
   rw [decide_eq_true_iff, decide_eq_true_iff]
   exact h
 
-theorem decCongr {P Q : Prop} (h : P ↔ Q) : decide P = decide Q := by
+/-- Decide congruence (r2: instance binders + the rw-cascade body — the r1
+    body fed `decide Q = true` to a `true = decide Q` goal). -/
+theorem decCongr {P Q : Prop} [Decidable P] [Decidable Q] (h : P ↔ Q) :
+    decide P = decide Q := by
   by_cases hp : P
-  · rw [decide_eq_true hp]
-    exact decide_eq_true (h.mp hp)
-  · rw [decide_eq_false (by simpa using hp)]
-    exact decide_eq_false (by intro hq; exact hp (h.mpr hq))
+  · rw [decide_eq_true hp, decide_eq_true (h.mp hp)]
+  · rw [decide_eq_false hp, decide_eq_false (fun hq => hp (h.mpr hq))]
 
 /-- Strong induction (self-contained). -/
 theorem strongIndOn (P : Nat → Prop) (hstep : ∀ i, (∀ j, j < i → P j) → P i) : ∀ i, P i := by

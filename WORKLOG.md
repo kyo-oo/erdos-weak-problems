@@ -3546,3 +3546,29 @@ The bag is sealed. The campaign continues.
   the 3-way parallel lane.
 
 The engine never stops; it never lies. In English, always.
+
+## S059 — W59-D: THE SKIP-MASK CORRECTION (verdict honesty law, L96)
+
+- **THE AUDIT:** the W58-E "70 passed / 2 failed" hid 4 SKIPPED steps —
+  K61 #411, K65 #1212, K63 #317 + Post-Run — sitting AFTER the kernel60
+  runner death. Skipped ≠ green. The corrected harvest:
+  - TRUE green from W58-E + the W59-A rescue run: K53 #677, K54 #348,
+    K55 #274, K58 #961x2, K59 #273, K62 #708 r5 (binder-absorption fix
+    VERIFIED GREEN), K64 #289, K60-light #939 (VERIFIED GREEN), and
+    K65 #1212 (verified back in W58-D, which ran it).
+  - FALSE greens retracted: K61 #411 (file NEVER compiled — see below),
+    K63 #317 (r3 repair never executed anywhere).
+- **K61 #411 ROOT EXPOSÉ:** Erdos411.lean:76/80 — `boolIff`/`decCongr`
+  stated `decide P` over VARIABLE P with no `[Decidable P]` binder:
+  unprovable instance, 101-error cascade in W58-D (which the W58-E
+  skip-mask hid). r2 surgical fix pushed: instance binders + the
+  decCongr rw-cascade body repair (r1 fed `decide Q = true` to a
+  `true = decide Q` goal). Full cascade repair = next wave's dedicated
+  mission with the fresh CI error map.
+- **18-G reunited:** the second severed oleans consumer (with 18-F)
+  moved into kernel-a; the whole 1056 ladder (18-A..18-G) now rides
+  one job.
+- **The law minted (L96):** count ONLY explicit step successes. A
+  skipped step is an unverified kernel, never a green one.
+
+The engine never stops; it never lies. In English, always.

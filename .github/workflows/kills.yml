@@ -498,19 +498,6 @@ jobs:
           python3 problem1056-factorial-intervals/battery1056.py
           echo ERDOS1056_FACTORIAL_INTERVALS_KERNEL_GREEN=1
 
-  kernel-b:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v5
-      - name: Install Lean Mathlib
-        shell: bash
-        run: |
-          set -euo pipefail
-          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
-          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
-          export PATH="$HOME/.elan/bin:$PATH"
-          lake update
-          lake exe cache get
       - name: "Kernel 18-G - Erdos 1056 (S050 wave-A, P1056 strike): THE COMPLETE-PROOF FINAL ASSEMBLY — FI_FINAL: the full case law k=2..11 (the smallest-witness table 11, 17, 23, 109, 71, 673, 599, 3011, 27901, 52163) + THE CASE-FRONTIER THEOREM (the doc's k-system, quantifier-for-quantifier, no sub-cases)"
         shell: bash
         run: |
@@ -529,6 +516,19 @@ jobs:
           grep -E "'erdos1056_case_frontier' (does not depend on any axioms|depends on axioms)" kernel18.log
           echo ERDOS1056_FINAL_ASSEMBLY_KERNEL_GREEN=1
 
+  kernel-b:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
       - name: "Kernel 19 - Erdos 700 PRIME-POWER LAW (Theorem A carry lemma v_p(C(p^a,k)) = a - v_p(k); Theorem B f(p^a) = p; ErSz equality class at p^2 + violation a>=3; arsenal bridge)"
         shell: bash
         run: |
