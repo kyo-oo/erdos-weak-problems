@@ -1,4 +1,17 @@
 # P677 STATUS — W57-1 round-1 kernel (E677_EQUAL_LCM_GREEN)
+0. R3 REPAIR (run 43345282494 root-cause, CI-only fix): the r2 L90 bridges
+   were BOTH mis-orientated — (a) `e677_mul_eq_zero` succ-case: `Nat.succ_mul`
+   unfolds `Nat.succ a * b` PRODUCT-FIRST to `a * b + b`, but r2 forced
+   `exact h` into the add-first spelling `b + a * b` (line-126 type
+   mismatch) → fixed by rewriting `h` to the succ_mul spelling and closing
+   with omega over the `a * b` atom; (b) `M677_one` hB: the divisibility
+   identity spells the unit scale `1 * (n+1)`, which `Nat.mul_one` (`?n * 1`)
+   cannot match (line-217 rw failure) → the correct variable-second-argument
+   bridge is `Nat.one_mul`. Zero literal sorries ever existed — the
+   `sorryAx` contamination in e677_mul_eq_zero/e677_mul_pos/e677_lcmd_pos
+   (and downstream M677_one/e677_board) was purely declaration-error
+   fallout from those two tactic failures; both statements byte-identical,
+   only proof bodies touched.
 1. FILE: problem677-equal-lcm/Erdos677.lean (440 lines, namespace E677, header EXACT per boss, zero sorry/native_decide; decide only on closed numerics + bounded quantifiers ≤ 501, CardinalWorlds-banked shape).
 2. DEFINITIONS: `lcmd a b = a*b / Nat.gcd a b` (core-safe), `M677 n k` (structural window fold), `winCollFree` (Bool collision checker), `wprod` (window product).
 3. DIVISION ENGINE (self-contained, house-banked names only): exact-division identity `lcmd a b * gcd a b = a*b`, `a ∣ lcmd a b`, `b ∣ lcmd a b`, `lcmd a b ∣ a*b`, positivity, `a*b=0 → a=0 ∨ b=0` — via Nat.div_add_mod/mul_mod/mod_self/mul_left_cancel.

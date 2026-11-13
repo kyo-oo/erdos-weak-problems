@@ -1,0 +1,37 @@
+BATTERY 708 — Erdos708 kernel independent verification
+semantics: B subset of I_t = {t+1..t+max(A)}, distinct elements, prod(A) | prod(B); t = 1..40 (engine t_max)
+  (A) case A=[2,3]           : brute-force worst-over-t = 2 == engine-certified 2
+  (B) case                   : hard window t=1 — NO subset of size < 2 covers
+  (C) case                   : min at t=1 EQUALS 2 (witness [2, 3])
+  (A) case A=[6,10,15]       : brute-force worst-over-t = 3 == engine-certified 3
+  (B) case                   : hard window t=1 — NO subset of size < 3 covers
+  (C) case                   : min at t=1 EQUALS 3 (witness [5, 12, 15])
+  (A) case A=[2,3,5]         : brute-force worst-over-t = 3 == engine-certified 3
+  (B) case                   : hard window t=24 — NO subset of size < 3 covers
+  (C) case                   : min at t=24 EQUALS 3 (witness [25, 26, 27])
+  (A) case A=[6,10,14,15]    : brute-force worst-over-t = 4 == engine-certified 4
+  (B) case                   : hard window t=1 — NO subset of size < 4 covers
+  (C) case                   : min at t=1 EQUALS 4 (witness [5, 12, 14, 15])
+  (A) case A=[6,10,15,21]    : brute-force worst-over-t = 4 == engine-certified 4
+  (B) case                   : hard window t=1 — NO subset of size < 4 covers
+  (C) case                   : min at t=1 EQUALS 4 (witness [3, 15, 20, 21])
+  (A) case A=[2,3,5,7]       : brute-force worst-over-t = 3 == engine-certified 3
+  (B) case                   : hard window t=1 — NO subset of size < 3 covers
+  (C) case                   : min at t=1 EQUALS 3 (witness [5, 6, 7])
+  (A) case A=[6,10,14,15,21] : brute-force worst-over-t = 5 == engine-certified 5
+  (B) case                   : hard window t=1 — NO subset of size < 5 covers
+  (C) case                   : min at t=1 EQUALS 5 (witness [3, 14, 15, 20, 21])
+  (A) case A=[6,10,14,15,21,35]: brute-force worst-over-t = 5 == engine-certified 5
+  (B) case                   : hard window t=1 — NO subset of size < 5 covers
+  (C) case                   : min at t=1 EQUALS 5 (witness [14, 21, 25, 35, 36])
+(D) Lean witness tables parsed live from Erdos708.lean:
+  (D) wit23                : all 40 rows valid + optimal (size == exact min)
+  (D) wit6_10_15           : all 40 rows valid + optimal (size == exact min)
+  (D) wit2_3_5             : all 40 rows valid + optimal (size == exact min)
+  (D) wit6_10_14_15        : all 40 rows valid + optimal (size == exact min)
+  (D) wit6_10_15_21        : all 40 rows valid + optimal (size == exact min)
+  (D) wit2_3_5_7           : all 40 rows valid + optimal (size == exact min)
+  (D) wit6_10_14_15_21     : all 40 rows valid + optimal (size == exact min)
+  (D) wit6_10_14_15_21_35  : all 40 rows valid + optimal (size == exact min)
+(F) engine708.py branch-and-bound cross-check (sympy present):
+  (F) all 8 x 40 engine mins == brute-force mins — engine kernel semantics CONFIRMED

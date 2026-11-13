@@ -19,7 +19,7 @@ THE BOARD (full statements, complete unconditional proofs, zero sorry):
    kernel-computable subset-sum reachability (drop-if recursion with the
    truncation-safe guard), the inductive Prop view `sumSet`, and the
    decidability bridge `reachable_iff_sumSet`.
-2. THE PREFIX FUNCTION: `prefix` (take m) and `mSuffices` (a finite prefix
+2. THE PREFIX FUNCTION: `pref` (take m) and `mSuffices` (a finite prefix
    covers all sufficiently large integers) — the m(A) predicate in finite
    form, plus the take-extension law `sumSet_take`.
 3. THE GROWTH-SELECTION LAWS (Graham's classical complete-sequence theory,
@@ -116,7 +116,11 @@ theorem leB_of_true : ∀ (a n : Nat), leB a n = true → a ≤ n := by
   | succ k ih =>
     intro n h
     cases n with
-    | zero => omega
+    | zero =>
+      -- `leB (k+1) 0` iota-reduces to `false`, so `h` is definitionally
+      -- `false = true`; close by the Bool.noConfusion idiom (cf. or_of_bool_left).
+      have hf : false = true := h
+      exact Bool.noConfusion hf
     | succ m =>
       have h2 : leB k m = true := h
       have hkm : k ≤ m := ih m h2
@@ -199,17 +203,24 @@ theorem reach_of_reachable : ∀ (l : List Nat) (n : Nat), reachable l n = true 
     intro n h
     cases n with
     | zero => exact sumSet.zero []
-    | succ k => exact absurd h (by decide)
+    | succ k =>
+      -- `reachable [] (k+1)` = `eq0 (k+1)` = `false` definitionally; `h` is
+      -- absurd. Structural (no decide: k is a free variable).
+      have hf : false = true := h
+      exact Bool.noConfusion hf
   | cons a t ih =>
     intro n h
     rcases or_of_bool_eq (reachable t n) (leB a n && reachable t (n - a)) h with h1 | h2
     · exact sumSet.drop a t n (ih n h1)
     · rcases bool_cases (leB a n) with hb | hb
-      · rw [hb] at h2
-        exact absurd h2 (by decide)
-      · rw [hb] at h2
+      · -- guard true: `true && x` iota-reduces to `x`, so h2 IS the residue proof.
+        rw [hb] at h2
         have h3 : reachable t (n - a) = true := h2
         exact sumSet.take a t n (leB_of_true a n hb) (ih (n - a) h3)
+      · -- guard false: `false && x` iota-reduces to `false`, so h2 is absurd.
+        rw [hb] at h2
+        have hf : false = true := h2
+        exact Bool.noConfusion hf
 
 /-- **THE DECIDABILITY BRIDGE**: the Bool engine and the inductive Prop view
 of subset-sum membership coincide. -/
@@ -264,22 +275,23 @@ theorem take_split : ∀ (l : List Nat) (m : Nat), ∃ ext, l.take m ++ ext = l 
   induction l with
   | nil =>
     intro m
-    exact ⟨[], by rw [take_nil m]⟩
+    exact ⟨[], by rw [take_nil m, List.nil_append]⟩
   | cons a t ih =>
     intro m
     cases m with
-    | zero => exact ⟨a :: t, by rw [take_zero]⟩
+    | zero => exact ⟨a :: t, by rw [take_zero, List.nil_append]⟩
     | succ k =>
       obtain ⟨ext, hex⟩ := ih k
       exact ⟨ext, by show a :: (List.take k t ++ ext) = a :: t; rw [hex]⟩
 
-/-- **THE PREFIX FUNCTION**: the first m terms of the sequence. -/
-def prefix (l : List Nat) (m : Nat) : List Nat := l.take m
+/-- **THE PREFIX FUNCTION** (`pref`; `prefix` is a reserved keyword in
+Lean 4, so the identifier is `pref`): the first m terms of the sequence. -/
+def pref (l : List Nat) (m : Nat) : List Nat := l.take m
 
-/-- **THE m(A) LAW IN FINITE FORM**: the finite prefix `prefix l m` suffices —
+/-- **THE m(A) LAW IN FINITE FORM**: the finite prefix `pref l m` suffices —
 every sufficiently large integer is a sum of distinct terms of the prefix. -/
 def mSuffices (l : List Nat) (m : Nat) : Prop :=
-  ∃ N, ∀ n, N ≤ n → reachable (prefix l m) n = true
+  ∃ N, ∀ n, N ≤ n → reachable (pref l m) n = true
 
 /-- A prefix's subset sums are subset sums of the whole list. -/
 theorem sumSet_mono_append : ∀ (l ext : List Nat) (n : Nat), sumSet l n → sumSet (l ++ ext) n := by

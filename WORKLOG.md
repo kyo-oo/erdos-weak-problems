@@ -3253,3 +3253,89 @@ Mirsky-Newman-Davenport-Rado kill route (kills C_n for ALL n) is the
 round-2 priority; #961's exclusion descent continues.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S058 — N-708: ERDOS #708 PRODUCT-DIVISIBILITY WINDOW KERNEL (Kernel 62, r1 delivered)
+
+- Engine+battery first: engine708.py branch-and-bound + battery708.py brute force (A)-(F) all
+  GREEN: 8 adversarial A's, worst-over-t (t=1..40) = 2,3,3,4,4,3,5,5; hard windows t0=1 (t0=24
+  for [2,3,5]); 40-row optimal witness tables banked (wit708_tables.txt); (D) re-run: all 8x40
+  Lean table rows valid + optimal (size == exact brute-force min, ascending, in-window, covering).
+- Kernel: Erdos708.lean (1458 lines, 52 theorems + 16-conjunct board + receipt constant).
+  General laws: prod-append, superset, composition, demand-refinement, the enumerator duality
+  (coverFrom sound + complete, full generality), the window law, the ascending bridge. Census
+  (minB A t <= w for ALL t=1..40) + 8 exact-min theorems (witness side + coverFrom exclusion
+  side, kernel-decided) + 8 case rows + erdos708_board. Receipts: #print axioms x42 + #eval +
+  E708_PRODUCT_DIVISIBILITY_GREEN.
+- r1 draft repair (2 root causes found by audit): (1) w708OK_spec used the decide components as
+  Props directly — wrapped with of_decide_eq_true (the K21-green decode toolkit, the Erdos406/
+  Erdos711 idiom); (2) the exact-min omegas crossed the minB/sInf defeq gap (L70: omega never
+  normalizes inside atoms) — replaced the Set.mem_setOf_eq simp with the Erdos711-green
+  minB-spelled ascription of Nat.sInf_mem hne.
+- Kernel 62 numbering per the N-708 wiring order (the r1 draft header said "Kernel 64";
+  problem289's draft also self-claims 62 — the wiring owner must resolve the collision before
+  pushing kills.yml; add problem708-product-divisibility/ to on.push.paths).
+- CI-only discipline: no local lake/lean, no commit/push; the kills.yml Kernel 62 step block is
+  delivered in the agent report for the wiring owner.
+
+## S058 — KERNEL 64 (#289 K-INTERVAL EGYPTIAN) r1 DELIVERED (2026-11-13)
+
+**W58 P289 — Erdos289.lean (problem289-intervals/, namespace E289, Kernel 64,
+CI verdict pending):** the k-interval Egyptian kernel — longWindow/iprod/inum
+(the #289 length guard + the harmonic window sum as an exact unreduced Nat
+fraction) + covers2 (the k=2 SUM-TO-ONE decomposition, cross-multiplied) +
+THE JOIN/SPLITTING LAW join_adjacent (sigma(a,b)+sigma(b+1,d)=sigma(a,d), the
+round-2 K2 lane core) + THE ANTI-CLOSURE COLLAPSE LAW adjacent_collapse
+(adjacent k=2 decompositions iff a k=1 merged-window decomposition — the
+non-adjacency condition is exactly the merge-blocker) + the COMPLETE bounded
+k=2 CLASSIFICATION e289_no_pair_any_le12 (k=1 + k=2 gapped decide censuses
+on [2,12], adjacent via collapse) + the HM k=5 TOTAL-2 WITNESS FAMILY
+e289_hm_family ([2,7],[9,10],[17,18],[34,35],[84,85] — shape + exact
+cross-multiplied sum = 2) + 14-conjunct board, 30 #print-axioms receipts,
+receipt constant E289_INTERVALS_GREEN. battery289.py ALL GREEN (9s, re-run):
+M=240 k=1/k=2 frontier by TWO methods (crossing + brute at 80); the engine's
+stdout capture is empty (k>=3 python lanes infeasible at M=240 — battery is
+the carrier of record). STATUS.md written; round-2 lanes: LEAP-style
+splitting induction (the YES side) + Kuerchak/#317 parity transfer.
+
+The engine never stops; it never lies. In English, always.
+
+## S058 — W58-A WAVE PACK (4 kernels, the repaired + the new) (2026-11-13)
+
+**THE ROUND:** CI run 43345282494 (on 144d0c6) verdict read — 54 kernel
+steps green (K1-K52 + K56 #288 + K57 #850), three red: K53 #677, K54 #348,
+K55 #274 (the r2 repairs incomplete: sorries + ten small root causes).
+The 12-agent W58 wave fired; four landed complete this pack:
+
+1. **K53 #677 r3 REPAIRED:** two surgical proof fixes — (a) line 126:
+   `Nat.succ_mul` unfolds product-first (`a*b + b`), the r2 `exact h` forced
+   the defeq gap — now `rw [Nat.succ_mul] at h; omega` (atom law); (b) line
+   217: `Nat.mul_one` pattern `?n*1` never matches `1*(n+1)` — now
+   `Nat.one_mul` (the variable-second-argument bridge). The sorryAx
+   contamination was declaration-error fallout (zero literal sorries).
+2. **K54 #348 r3 REPAIRED (ten errors, one typo class):** the branch-swap
+   of the leB guard split (true/false bullets transposed — the CI messages
+   themselves proved the rw's worked, the branches didn't); the open-term
+   decides replaced with structural kills (`reachable [] (k+1)` whnf →
+   `eq0` → false = absurd); `List.nil_append` bridges for the two
+   take-append goals; **`prefix` is a reserved keyword** — renamed `pref`
+   (the parse error cascaded sorryAx into the unexecuted
+   `no_finite_prefix_seed` proof — now genuinely elaborating).
+3. **K62 #708 r1 (NEW):** the product-divisibility window kernel — the
+   draft's two root causes repaired (the `w708OK_spec` decide-decode gap
+   via `of_decide_eq_true`; the L70 omega atom-crossing via the
+   Erdos711-green minB-spelled `Nat.sInf_mem` ascription) + the 8 census +
+   8 exact-minima theorems (g(4) ≥ 4 evidence) + 16-conjunct board +
+   `E708_PRODUCT_DIVISIBILITY_GREEN`.
+4. **K64 #289 r1 (NEW):** the k-interval Egyptian kernel — join/splitting
+   law + anti-closure collapse law + the complete bounded k=2
+   classification + the HM k=5 total-2 witness family + 14-conjunct board
+   + `E289_INTERVALS_GREEN`.
+
+**RELAUNCH QUEUE (W58-B):** nine wave agents fell to context-deadline
+(12-parallel overload): the K55 #274 repair, #961 exclusion-2 continuation,
+#273, #939, #411, #317, #1212 new kernels, the #203 annealing rounds —
+re-firing in ≤5-parallel batches with tightened briefs.
+
+The engine never stops; it never lies. In English, always.

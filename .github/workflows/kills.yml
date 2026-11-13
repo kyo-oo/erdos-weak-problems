@@ -1176,3 +1176,29 @@ jobs:
           grep -F "E850_RADICAL_TRIPLE_GREEN" kernel57.log
           grep -E "E850.(sameRad_refl|sameRad_symm|sameRad_trans|rad_dvd|radSet_one|ew2_pair_6_48|ew2_pair_75_1215|e850_no_witness_50|e850_arsenal_bridge|e850_board)' (does not depend on any axioms|depends on axioms)" kernel57.log
           echo KERNEL57_GREEN=1
+      - name: "Kernel 62 - Erdos 708 PRODUCT-DIVISIBILITY WINDOWS r1 (S058, W58-A): the product-divisibility window kernel — prod708/maxA/winUp (the window machinery) + the 8 general laws (prod-append, superset, composition, demand-refinement) + the coverFrom enumerator duality (sound + complete, full generality) + the window law + the ascending bridge + w708OK_spec (the checker) + THE 8×40 WITNESS TABLES (decide-certified, all rows valid + optimal vs brute) + THE 8 CENSUS THEOREMS (minB ≤ w for ALL t ∈ [1,40]) + THE 8 EXACT-MINIMA THEOREMS (witness + decide-certified coverFrom exclusion; the g(4) ≥ 4 evidence) + 8 case rows + the 16-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem708-product-divisibility/Erdos708.lean 2>&1 | tee kernel62.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel62.log
+          grep -F "E708_PRODUCT_DIVISIBILITY_GREEN" kernel62.log
+          grep -E "E708.(e708_prod_append|e708_enum_sound|e708_enum_complete|e708_exact_6_10_14_15|erdos708_board)' (does not depend on any axioms|depends on axioms)" kernel62.log
+          echo KERNEL62_GREEN=1
+      - name: "Kernel 64 - Erdos 289 K-INTERVAL EGYPTIAN FAMILIES r1 (S058, W58-A): the intervals kernel — longWindow/iprod/inum (the #289 length guard + the harmonic window sum as an exact unreduced Nat fraction) + covers2 (the k=2 SUM-TO-ONE decomposition, cross-multiplied) + the structural laws (recurrences, empty-window, positivity, the L86-safe atom kit) + THE JOIN/SPLITTING LAW join_adjacent (sigma(a,b)+sigma(b+1,d)=sigma(a,d)) + THE ANTI-CLOSURE COLLAPSE LAW adjacent_collapse (adjacent k=2 decompositions iff k=1 merged-window decomposition) + covers2_comm + THE COMPLETE BOUNDED k=2 CLASSIFICATION e289_no_pair_any_le12 (k=1 + k=2 gapped decide censuses on [2,12] + the adjacent collapse route) + THE HM k=5 TOTAL-2 WITNESS FAMILY e289_hm_family ([2,7],[9,10],[17,18],[34,35],[84,85] — full #289 shape + exact cross-multiplied sum = 2) + the arsenal bridge + the 14-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem289-intervals/Erdos289.lean 2>&1 | tee kernel64.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel64.log
+          grep -F "E289_INTERVALS_GREEN" kernel64.log
+          grep -E "E289.(join_adjacent|adjacent_collapse|e289_no_pair_any_le12|e289_hm_family|e289_arsenal_bridge|erdos289_board)' (does not depend on any axioms|depends on axioms)" kernel64.log
+          echo KERNEL64_GREEN=1

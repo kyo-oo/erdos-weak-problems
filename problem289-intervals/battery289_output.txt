@@ -1,0 +1,16 @@
+S1 anchors: inum 2 7 = 8028 iprod 2 7 = 5040 inum 9 10 = 19 iprod 9 10 = 90 inum 17 18 = 35 iprod 17 18 = 306 inum 34 35 = 69 iprod 34 35 = 1190 inum 84 85 = 169 iprod 84 85 = 7140
+S2 HM family shape: longWindow: [True, True, True, True, True] gaps: [True, True, True, True]
+S2 HM total-2 identity: 2358683349120000 == 2358683349120000 -> True
+S3 k=1 census <= 12 (windows summing to 1): []
+S4 k=2 gapped census <= 12: []
+S4 k=2 adjacent census <= 12: []
+S4 k=2 COMPLETE classification <= 12 (adjacent + gapped): []
+S5 join_adjacent violations (a<=b<d<=60): []
+S5 adjacent_collapse iff violations (a<=b<d<=200): []
+S5 covers2_comm violations <= 10: []
+S6a k=1 census <= 240 (windows summing to 1): []
+S6b' crossing machinery validation: hits = 378 misses = 0
+S6b k=2 gapped witnesses <= 240 (crossing method): []
+S6c k=2 gapped witnesses <= 80 (brute): [] | (crossing): [] | methods agree: True
+S6d k=2 adjacent witnesses <= 80 (brute): []
+BATTERY289_ALL_GREEN

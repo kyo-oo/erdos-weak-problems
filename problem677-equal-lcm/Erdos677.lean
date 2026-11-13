@@ -118,12 +118,15 @@ theorem e677_mul_eq_zero (a b : Nat) (h : a * b = 0) : a = 0 ∨ b = 0 := by
   | zero => exact Or.inl rfl
   | succ a _ =>
     right
-    -- r1 post-mortem: `Nat.succ a * b` is NOT defeq to `b + a * b`
-    -- (Nat.mul recurses on the second argument) — the equation lemma
-    -- `Nat.succ_mul` does the bridging rewrite.
-    have h' : b + a * b = 0 := by
-      rw [Nat.succ_mul] at h
-      exact h
+    -- r3 post-mortem (run 43345282494): `Nat.succ_mul` unfolds the
+    -- succ-product PRODUCT-FIRST (`Nat.succ a * b = a * b + b`), never
+    -- add-first — the r2 bridge tried to force `exact h : a * b + b = 0`
+    -- across the Nat.add defeq gap into the `b + a * b` spelling and died
+    -- at line 126. THE L86/L90 ORIENTATION LAW: keep the hypothesis on the
+    -- side the induction lemma actually produces and let omega close the
+    -- linear shell over the atom `a * b` (atom + b = 0 with both
+    -- nonnegative forces b = 0).
+    rw [Nat.succ_mul] at h
     omega
 
 /-- Positivity of the lcm: both factors positive → lcm positive. -/
@@ -209,12 +212,15 @@ theorem wprod_succ (n k : Nat) : wprod n (Nat.succ k) = wprod n k * (n + 1 + k) 
 through the lcm laws, closed by dvd_antisymm). -/
 theorem M677_one (n : Nat) : M677 n 1 = n + 1 := by
   have hA : n + 1 ∣ M677 n 1 := e677_dvd_lcmd_right 1 (n + 1)
-  -- r1 post-mortem (run 43335072786): `1 * (n+1)` is NOT defeq to `n + 1`
-  -- (Nat.mul recurses on the second argument — variable n blocks it);
-  -- the mul_one equation bridges it.
+  -- r3 post-mortem (run 43345282494): the divisibility identity spells the
+  -- unit scale LEFT-multiplied (`1 * (n + 1)`); `Nat.mul_one` matches the
+  -- pattern `?n * 1` and found no occurrence at line 217. THE L86/L90
+  -- ORIENTATION LAW: `1 * (n+1)` is NOT defeq to `n + 1` (Nat.mul recurses
+  -- on the variable second argument), and the bridge must be the equation
+  -- lemma for THAT side: `Nat.one_mul : 1 * n = n`.
   have hB : M677 n 1 ∣ n + 1 := by
     have h0 := e677_lcmd_dvd_mul 1 (n + 1)
-    rw [Nat.mul_one] at h0
+    rw [Nat.one_mul] at h0
     exact h0
   exact Nat.dvd_antisymm hB hA
 
