@@ -3602,3 +3602,58 @@ The engine never stops; it never lies. In English, always.
   newly verified; K61 in dedicated repair; K67 r2 in flight.
 
 The engine never stops; it never lies. In English, always.
+
+## S060 — W59-H: THE ENGINE REFORGED + K61 DEDICATED REPAIR MISSION (W59-F-1) + K19 RESCUE
+
+**THE ROUND (the zip-bag restoration session — S059 bag unsealed, remote
+advanced W59-A..G, L89 recovery executed: fetch+reset to b69fe97):**
+
+1. **THE NEXT-GEN ENGINE FORGED (BOSS's order):** MATHS v2.0 — the persona
+   skill FUSED with the prove-that-shit workflow engine + THE WEAPONS DEPOT
+   (mathstack v1.1): PARI/GP 2.17.4 (built from source), GAP 4.14.0 (built
+   with local GMP 6.3.0), SageMath 10.8.13 (passagemath full library),
+   Z3 5.4.1 (python), Vampire 5.1.0 (static binary), sympy+gmpy2 layer.
+   Dispatcher `mathstack` + invocation manual INVOKE.md + the unified skill
+   at /home/z/my-project/skills/MATHS/SKILL.md. Sub-agent verification
+   battery: ALL SIX WEAPONS OPERATIONAL (independent agent, doctor green).
+2. **K67 #389 r3 VERIFIED GREEN** (run 43467312288: E389_CONSECUTIVE_PRODUCT_
+   GREEN, KERNEL67_GREEN=1, axiom receipts [propext, Quot.sound] — the
+   doc-comment fix landed).
+3. **K19 #700 RESCUED:** the W59-A 3-way split severed K19's Arsenal olean
+   prelude in kernel-b (CI: `unknown module prefix 'Arsenal'`). The
+   18-F-pattern reunion applied: the three lake-build lines restored to
+   Kernel 19's step.
+4. **K61 #411 r3 — THE DEDICATED REPAIR MISSION (W59-F-1) executed on the
+   fresh CI error map (102 lines, ~91 sites, roots killed):**
+   - Mathlib-only citations → core-local helpers: `dvd_sub_local`,
+     `dvd_mul_of_dvd_right_local` (calc-route), `pos_pow_local`.
+   - strongIndOn: the missing `intro i` (the goal is ∀ i, P i).
+   - countP_shift rebuilt: zero-case rw-normalization (rfl never closed
+     `0 + ite` vs `ite + 0`); succ-case one simp-only pass + omega.
+   - countP_rev_idx rebuilt: per-side lemmas (map-route LHS connecting the
+     IH predicate, append-route RHS), countP_congr for the index identity.
+   - countP_parity_split rebuilt: per-element `parity_elem` (cases on the
+     three decides, literal ites defeq-reduce via rfl) + omega on atoms.
+   - gcd_partners: the transposed dvd_gcd bullets + the dvd_sub' sites.
+   - gcd_two_mul_of_even: y-cases (y=0 legal under 2∣y — gcd_pos needs
+     0 < 2y), the .symm orientation, the eq_or_lt_of_le branch order.
+   - gcd_two_mul_of_odd: dvd_mul sites, Dvd.intro y rfl for 2 ∣ 2*y,
+     the branch order.
+   - phiB_even_dbl/odd_dbl: `List.range_add` is implicit-arg (the `y y`
+     application was function-expected).
+   - phiB_two_pow_mul: hEq via pow_succ + exponent normalization (the rw
+     pattern `?a^(succ ?n)` never matched `a'+2`), pos_pow_local.
+   - phiB_pos: the no-goal rw after simp closed (deleted).
+   - THE SIX CHAIN LAWS: the hpow show-rewrite direction INVERTED
+     (rewriting `a` everywhere poisoned the goal — now (a-1)+1 → a);
+     mul_assoc forward not reversed; norm_num (Mathlib tactic) → decide;
+     gstep_7/47 via pow_add + literal 2^2 = 4.
+   - gF_odd_of_odd rebuilt: the induction now GENERALIZES the start
+     (gF (j+1) y = gF j (gstep y) — the fixed-x motive could not apply
+     the IH at gstep y).
+   - erdos411_doubling: `Nat.even_iff_exists_two_mul` → omega-parity split.
+   Zero sorry, zero Mathlib imports, 78 theorems, statements untouched.
+
+**REMAINING (next CI cycle):** the 490-620 wall (gF_two_pow internals —
+comp/congruence chains), the 800+ census/witness machinery, K67/K61
+verdicts pending on this push. The engine never stops; it never lies.

@@ -529,10 +529,13 @@ jobs:
           export PATH="$HOME/.elan/bin:$PATH"
           lake update
           lake exe cache get
-      - name: "Kernel 19 - Erdos 700 PRIME-POWER LAW (Theorem A carry lemma v_p(C(p^a,k)) = a - v_p(k); Theorem B f(p^a) = p; ErSz equality class at p^2 + violation a>=3; arsenal bridge)"
+      - name: "Kernel 19 - Erdos 700 PRIME-POWER LAW (Theorem A carry lemma v_p(C(p^a,k)) = a - v_p(k); Theorem B f(p^a) = p; ErSz equality class at p^2 + violation a>=3; arsenal bridge) [W59-H: Arsenal prelude reunited — the 3-way split had severed the olean pipeline]"
         shell: bash
         run: |
           set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
           lake env lean problem700-binomial-gcd/Erdos700.lean 2>&1 | tee erdos700.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos700.log
           grep -F "ERDOS700_KERNEL_GREEN" erdos700.log
@@ -1308,7 +1311,7 @@ jobs:
           grep -F "E939R4_CENSUS_GREEN" kernel60b.log
           grep -E "E939R4.(census_r4_members|no_small_solution_r4|board939_r4)' (does not depend on any axioms|depends on axioms)" kernel60b.log
           echo KERNEL60B_GREEN=1
-      - name: "Kernel 61 - Erdos 411 ITERATED-TOTIENT DOUBLING LAWS r1 (S058, W58-B): the iterated-totient kernel on the structural φ-fold — gF (the g(n)=n+φ(n) iteration) + the closure properties + table_bounds/table_bound_of_lt (the certified table ≤ 59049) + erdos411_witness (the doubling-class witness law) + erdos411_partition (the 1002-cell partition decide) + erdos411_count + erdos411_census (the even-n census to 2000) + THE DOUBLING LAWS erdos411_ten (g_{k+2}(10) = 2·g_k(10)) + erdos411_94 (g_{k+2}(94) = 2·g_k(94)) + the arsenal bridge + erdos411_main + ERDOS411_KERNEL_GREEN"
+      - name: "Kernel 61 - Erdos 411 ITERATED-TOTIENT DOUBLING LAWS r3 (W59-H: the W59-F-1 dedicated repair mission — Mathlib-only citations replaced with core locals, countP family rebuilt, gcd family root-repaired): the iterated-totient kernel on the structural φ-fold — gF (the g(n)=n+φ(n) iteration) + the closure properties + table_bounds/table_bound_of_lt (the certified table ≤ 59049) + erdos411_witness (the doubling-class witness law) + erdos411_partition (the 1002-cell partition decide) + erdos411_count + erdos411_census (the even-n census to 2000) + THE DOUBLING LAWS erdos411_ten (g_{k+2}(10) = 2·g_k(10)) + erdos411_94 (g_{k+2}(94) = 2·g_k(94)) + the arsenal bridge + erdos411_main + ERDOS411_KERNEL_GREEN"
         if: always()
         shell: bash
         run: |
