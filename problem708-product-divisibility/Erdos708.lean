@@ -124,8 +124,15 @@ def ascB : List Nat → Bool
 
 theorem ascB_head (b : Nat) (B : List Nat) (h : ascB (b :: B) = true) :
     (∀ b', b' ∈ B → b < b') ∧ ascB B = true := by
-  have h' : (B.all (fun b' => decide (b < b'))) && ascB B = true := h
-  obtain ⟨hall, hasc⟩ := Bool.and_eq_true.mp h'
+  have h' : ((B.all (fun b' => decide (b < b'))) && ascB B) = true := h
+  have hall : (B.all (fun b' => decide (b < b'))) = true := by
+    cases hbb : (B.all (fun b' => decide (b < b'))) with
+    | false => rw [hbb] at h'; exact Bool.noConfusion h'
+    | true => rfl
+  have hasc : ascB B = true := by
+    cases hbs : ascB B with
+    | false => rw [hbs] at h'; exact Bool.noConfusion h'
+    | true => rfl
   refine ⟨?_, hasc⟩
   intro b' hb'
   exact of_decide_eq_true ((List.all_eq_true.mp hall) b' hb')
@@ -254,7 +261,7 @@ theorem e708_enum_sound : ∀ (P : Nat) (l : List Nat) (k acc : Nat),
           rcases or_of_bool_eq _ _ h' with htake | hskip
           · obtain ⟨B, hsub, hlen, hdvd⟩ := ih m (acc * x) htake
             refine ⟨x :: B, sub708.take x l' B hsub, ?_, ?_⟩
-            · have hL : (x :: B).length = B.length + 1 := List.length_cons x B
+            · have hL : (x :: B).length = B.length + 1 := rfl
               rw [hL]
               omega
             · rw [prod708_cons, ← Nat.mul_assoc]
@@ -297,9 +304,9 @@ theorem e708_enum_complete : ∀ (P : Nat) (l : List Nat) (k acc : Nat) (B : Lis
               have hz : P ∣ acc * prod708 [] := hdvd
               exact or_of_bool_right _ _
                 (ih (m + 1) acc [] (sub708.nil l') (Nat.zero_le (m + 1)) hz)
-          | drop _ _ B2 hsub' =>
+          | drop B2 hsub' =>
               exact or_of_bool_right _ _ (ih (m + 1) acc B2 hsub' hlen hdvd)
-          | take _ _ B2 hsub' =>
+          | take B2 hsub' =>
               rw [List.length_cons] at hlen
               have hlen' : B2.length ≤ m := by omega
               have hdvd' : P ∣ acc * x * prod708 B2 := by
@@ -370,6 +377,7 @@ theorem sub708_of_asc_gen : ∀ (k s : Nat) (B : List Nat), ascB B = true →
       | nil => exact sub708.nil (s :: winUp (s + 1) m)
       | cons b B' =>
           obtain ⟨hlt, hasc'⟩ := ascB_head b B' hasc
+          have hbmem := hmem b (List.mem_cons.mpr (Or.inl rfl))
           rcases (show b = s ∨ s < b by omega) with hbs | hbs
           · rw [hbs] at hmem hlt ⊢
             refine sub708.take s (winUp (s + 1) m) B' (ih (s + 1) B' hasc' ?_)

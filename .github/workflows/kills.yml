@@ -1202,3 +1202,74 @@ jobs:
           grep -F "E289_INTERVALS_GREEN" kernel64.log
           grep -E "E289.(join_adjacent|adjacent_collapse|e289_no_pair_any_le12|e289_hm_family|e289_arsenal_bridge|erdos289_board)' (does not depend on any axioms|depends on axioms)" kernel64.log
           echo KERNEL64_GREEN=1
+      - name: "Kernel 58 - Erdos 961 EXCLUSION LAYER 2 + TOWER-ORDERING r1 (S058, W58-B): the exclusion continuation on the green K46/K48 machines — pell29_minimal (HMIN INSIDE LEAN, the structural route: -1-conjugate wall vY ≤ 13 + recomposition keys) + pell29_structure_min/pell29_gap_min + the power-rep layer (pell_tower_pow_add, pell_tower_two_square/cheb, pell29_double_angle) + pell_factor_law + the factor dict + the 12-row walker sweeps + THE GROWTH STRENGTHENING (pell_tower_X_ge_pow, pell29_gap3_min the three-wall gap) + THE NEW TOWER-ORDERING LAYERS (pell_tower_X_pos, pell_tower_X_ge_succ, pell_tower_X_strict_mono, THE LINEAR FUNDAMENTAL BOUND pell_tower_X_ge_X1_mul X1·n ≤ X_n, THE GAP MONOTONICITY pell_tower_gap_mono consecutive gaps strictly increase) + the 29-instances + pell29_gap_receipt + pell29_min_Y_lower (no 0 < Y < 1820 with X ≤ 9801 solves X² = 29·Y²+1) + master board 3 + E961X2_EXCLUSION2_GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          mkdir -p oleans961x2
+          LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
+          export LEAN_PATH="$PWD/oleans961x2${LP:+:$LP}"
+          echo "=== Erdos961Census_Base (to olean) ===" > kernel58.log
+          lake env lean -o oleans961x2/Erdos961Census_Base.olean problem961-smooth-runs/Erdos961Census_Base.lean 2>&1 | tee -a kernel58.log
+          echo "=== Erdos961Exclusion2 ===" >> kernel58.log
+          lake env lean problem961-smooth-runs/Erdos961Exclusion2.lean 2>&1 | tee -a kernel58.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel58.log
+          grep -F "E961X2_EXCLUSION2_GREEN" kernel58.log
+          grep -E "E961X2.(pell29_minimal|pell29_gap3_min|pell_tower_gap_mono|pell_tower_X_ge_X1_mul|pell29_min_Y_lower|e961x2_exclusion2_board3)' (does not depend on any axioms|depends on axioms)" kernel58.log
+          echo KERNEL58_GREEN=1
+      - name: "Kernel 59 - Erdos 273 P-1 COVERING KERNEL r1 (S058, W58-B): the covering kernel — the leaf machinery (natB structural equality + leafOK/leafBound) + kraftW (the exact-integer Kraft weight, cross-multiplied by the pool lcm) + dvd_le + kraft_leaf_ge1 + THE LENGTH-WEIGHT LAW length_le_kraft + leafOK_bound + no_single_leaf + THE KRAFT CONFINEMENT LAW kraft_confinement (leaves' ν satisfy Σ L/ν ≤ ... — the solution is a SMALL object) + pool12_kraft (4078497 exact) + pool400_kraft + THE POOL-400 CENSUS + THE POOL-400 DENSITY + THE GRANULARITY WALL granul_wall_4to12 + the parity layer (leafOK [2,2] 2 + kraftW [2,2] 2 = 2) + the arsenal bridge + the board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem273-pminus1-covering/Erdos273.lean 2>&1 | tee kernel59.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel59.log
+          grep -F "E273_PMINUS1_COVERING_GREEN" kernel59.log
+          grep -E "E273.(kraft_confinement|length_le_kraft|leafOK_bound|no_single_leaf|pool12_kraft|pool400_kraft|pool400_census|pool400_density|granul_wall_4to12|e273_arsenal_bridge|erdos273_board)' (does not depend on any axioms|depends on axioms)" kernel59.log
+          echo KERNEL59_GREEN=1
+      - name: "Kernel 60 - Erdos 939 R-POWERFUL SUMS r4 FRONTIER r1 (S058, W58-B): the r-powerful kernel — divAll (the structural divisor fold: every divisor e of n is either non-prime or e^r | n) + rpow (n≥1 gate + fold) + divAll_row (row-extraction induction) + rpow_prime_div (Bool-to-arithmetic bridge) + THE MOD-16 OBSTRUCTION mod16_obstruction (two odd r=4-powerful summands with r-powerful sum force 2^4 | a+b; the census pair 81+243=324 blocked) + THE CENSUS MEMBERSHIP ROWS (r=2 N=100 with the exhaustive completeness fold, r=3 N=1000, r=4 N=10^4) + THE ZERO-SOLUTION CENSUS BOUNDS (no raw r=3 pair below 8, no raw r=4 pair below 16, no ODD9 pair sums back into the r=4 census) + THE R=3 WITNESS CONSTRUCTION (19902511+756249048=776151559 and 1392672604221+2126285555779=3518958160000 with all six factorizations) + the pair-kill arithmetic + BEYOND_FLT (32 = 2^5 is 4-powerful, no fourth root) + the 10^15 hunt bracket + the 7-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem939-rpowerful/Erdos939.lean 2>&1 | tee kernel60.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60.log
+          grep -F "E939_RPOWERFUL_GREEN" kernel60.log
+          grep -E "E939.(divAll_row|rpow_prime_div|mod16_obstruction|census_r2_complete|census_r4_members|no_small_solution_r4|odd_pairs_no_r4_sum|witness1|witness2|board939)' (does not depend on any axioms|depends on axioms)" kernel60.log
+          echo KERNEL60_GREEN=1
+      - name: "Kernel 61 - Erdos 411 ITERATED-TOTIENT DOUBLING LAWS r1 (S058, W58-B): the iterated-totient kernel on the structural φ-fold — gF (the g(n)=n+φ(n) iteration) + the closure properties + table_bounds/table_bound_of_lt (the certified table ≤ 59049) + erdos411_witness (the doubling-class witness law) + erdos411_partition (the 1002-cell partition decide) + erdos411_count + erdos411_census (the even-n census to 2000) + THE DOUBLING LAWS erdos411_ten (g_{k+2}(10) = 2·g_k(10)) + erdos411_94 (g_{k+2}(94) = 2·g_k(94)) + the arsenal bridge + erdos411_main + ERDOS411_KERNEL_GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem411-iterated-totient/Erdos411.lean 2>&1 | tee kernel61.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61.log
+          grep -F "ERDOS411_KERNEL_GREEN" kernel61.log
+          grep -E "E411.(table_bounds|erdos411_witness|erdos411_partition|erdos411_census|erdos411_ten|erdos411_94|erdos411_arsenal_bridge|erdos411_main)' (does not depend on any axioms|depends on axioms)" kernel61.log
+          echo KERNEL61_GREEN=1
+      - name: "Kernel 65 - Erdos 1212 COPRIME-PAIR GRAPH r1 (S058, W58-B): the coprime-pair graph kernel — the verbatim habitat machinery (fuel-gcd gcdF/gcdB/coprimeB + ascending composite scan compU/compB) + the Prop adjacency adj with its laws (adj_comm, adj_distinct, adj_one_coord, THE B-HUB PARITY FLIP adj_parity_flip) + the structural degree bound degBound ≤ 4 + the 9-row degree table + THE NO-EXIT CLOSURE LAW of the (9,25) component (36-cell ring sweep, closed in the FULL graph) + the five component censuses + the engine-corrected PHASE-LAW instances ((15,49) wall at 21; (203,10201) 99-column sweep, walls at 303/404) + the directed-death census (12 rows) + THE 103-VERTEX TWO-PHASE WITNESS p103 (walkOK + allDistinct + endpoint compositeness + growth) + p7/p8/p6 + the arsenal bridge + the 18-conjunct board + python mirror 63/63 GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem1212-coprime-composite/Erdos1212.lean 2>&1 | tee kernel65.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel65.log
+          grep -F "E1212_COPRIME_COMPOSITE_GREEN" kernel65.log
+          grep -E "E1212.(degBound|adj_parity_flip|comp925_no_exit|comp925_closed|phase203_sweep|p103_valid|p103_shape|directed_death|e1212_arsenal_bridge|erdos1212_board)' (does not depend on any axioms|depends on axioms)" kernel65.log
+          echo KERNEL65_GREEN=1

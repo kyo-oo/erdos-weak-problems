@@ -100,11 +100,23 @@ def tilingSizes (n : Nat) (sizes : List Nat) : Bool :=
 
 /-- The trivial one-coset multiset [n] passes the tiling frame. -/
 theorem tilingSizes_self (n : Nat) : tilingSizes n [n] = true := by
-  -- r2 repair: the r1 `==`-spelled haves died on the BEq instance-reduction
-  -- gap; the natB spelling makes every step iota-native.
-  show (natB (n % n) 0) && true && (natB (n + 0) n) = true
-  rw [Nat.mod_self n, Nat.add_zero]
-  exact natB_self n
+  -- r4 repair (r3? no: this is r3 — the R-K55 v3): the r2 show pattern
+  -- mis-spelled the definitional unfolding — it dropped the middle
+  -- `sizesDistinct [n]` component, so the left-associated `&&`-tree never
+  -- matched. The component-have assembly is transparency-proof: each
+  -- component is proven on its own iota-safe spelling, then the outer
+  -- show performs only the DELTA unfold of the plain def.
+  have h1 : dividesAll n [n] = true := by
+    show (natB (n % n) 0 && true) = true
+    rw [Nat.mod_self n]
+    rfl
+  have h2 : sizesDistinct [n] = true := rfl
+  have h3 : natB (sumNat [n]) n = true := by
+    show natB (n + 0) n = true
+    rw [Nat.add_zero]
+    exact natB_self n
+  show (dividesAll n [n]) && (sizesDistinct [n]) && (natB (sumNat [n]) n) = true
+  rw [h1, h2, h3]
 
 /-- THE ARITHMETIC FEASIBILITY LAW (trivial layer): every order n admits
 the one-coset size multiset [n] (G as a single coset of itself). -/

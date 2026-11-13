@@ -1,0 +1,18 @@
+palette entries: 1004
+L=27720: all-member fam 41 budget 1.0563 | distinct-base fam 41 budget 1.0563
+L=55440: all-member fam 52 budget 1.1628 | distinct-base fam 52 budget 1.1628
+state27720live : 35 layers, 35 active, active budget 1.0539
+state27720all : 35 layers, 35 active, active budget 1.0539
+state27720(old): 41 layers, 39 active, active budget 1.0559
+state55440    : 52 layers, 52 active; round55440=7
+live == all   : True
+in old(r1) not in live: [2311, 3697, 4621, 7393, 9241, 55441]
+in live not in old(r1): []
+banked bestres27720.txt = 218794308 = 28.4741% of L^2 (L^2=768398400)
+RESIDUAL live  = 218794308 (28.4741%) [build 7s]
+RESIDUAL all(bank) = same (states identical) = 218794308
+RESIDUAL old-r1-greedy-41 = 242899738 (31.6112%) [build 6s]
+consistency: bestres 218794308 vs live 218794308 -> CONSISTENT; vs bank-state 218794308 -> CONSISTENT
+old-r1 vs banked best delta: -24105430 cells (-3.1371pp in favour of old-r1)
+build time per 35-41 layer state: 7s
+VERIFY DONE

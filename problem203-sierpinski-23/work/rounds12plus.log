@@ -1,0 +1,11 @@
+=== ROUND 12 (v3 pair-move annealer, seed 90210, T 300->0.4) start 2026-11-13T05:33:00Z ===
+live residual: 218794308 (28.474%), best banked: 218794308
+== pair pass: tried 707, acc single 0, acc pair 0, improvements 0, live res 218794308 (28.474%), best 218794308 (28.474%) (463s)
+=== ROUND 13 (v3 pair-move annealer verbatim, seed 90210 — determinism confirmation) start 2026-11-13T05:42:01Z ===
+live residual: 218794308 (28.474%), best banked: 218794308
+== pair pass: tried 676, acc single 0, acc pair 0, improvements 0, live res 218794308 (28.474%), best 218794308 (28.474%) (461s)
+=== ROUND 14 (v4 anneal_27720d: triple-moves + restart-diversification, T0=50000) start 2026-11-13T05:51:59Z ===
+d-round 1: RESTART from banked best, seed 425251, T0 50000 -> 0.4, budget 460s
+live residual (restart): 218794308 (28.474%), best banked: 218794308 [CONSISTENT]
+delta-scan 40 single proposals: min -13205, med 542358, max 17531597
+== d pass r1: tried 230, acc single 0, pair 0, triple 0, improvements 0, walk-min 218794308 (28.474%), live res 218794308 (28.474%), best 218794308 (28.474%) (462s)

@@ -285,6 +285,7 @@ theorem join_aux (a b : Nat) (ha : 1 ≤ a) (hab : a ≤ b) :
       rw [inum_succ_le a b (by omega), iprod_succ_le a b (by omega)]
       ring
   | succ t ih =>
+      rw [← Nat.add_assoc]
       rw [inum_succ_le a (b + 1 + t) (by omega),
           iprod_succ_le a (b + 1 + t) (by omega),
           inum_succ_le (b + 1) (b + 1 + t) (by omega),
@@ -499,7 +500,7 @@ theorem erdos289_board :
       inum a d * (iprod a b * iprod (b + 1) d)
         = (inum a b * iprod (b + 1) d + inum (b + 1) d * iprod a b) * iprod a d) ∧
     (∀ a b d : Nat, 1 ≤ a → a ≤ b → b + 1 ≤ d →
-      covers2 a b (b + 1) d ↔ inum a d = iprod a d) ∧
+      (covers2 a b (b + 1) d ↔ inum a d = iprod a d)) ∧
     (∀ a b c d : Nat, covers2 a b c d ↔ covers2 c d a b) ∧
     (inum 2 7 = 8028 ∧ iprod 2 7 = 5040 ∧
       inum 9 10 = 19 ∧ iprod 9 10 = 90 ∧

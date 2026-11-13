@@ -3339,3 +3339,92 @@ The 12-agent W58 wave fired; four landed complete this pack:
 re-firing in ≤5-parallel batches with tightened briefs.
 
 The engine never stops; it never lies. In English, always.
+
+## S058 — W58-B KERNEL 65 (#1212 COPRIME-PAIR GRAPH) r1 DELIVERED (2026-11-13)
+
+**W58-B P1212 — Erdos1212.lean (problem1212-coprime-composite/, namespace E1212,
+Kernel 65, CI verdict pending):** the coprime-pair graph kernel — the verbatim
+#1212 habitat (fuel-gcd `gcdF`/`gcdB`/`coprimeB` + ascending composite scan
+`compU`/`compB`, all equation-compiler native, decide-consumed on closed terms)
++ the Prop adjacency `adj` with its laws (adj_comm, adj_distinct,
+adj_one_coord, THE B-HUB PARITY FLIP adj_parity_flip) + the structural degree
+bound `degB v ≤ 4` + the engine's 9-row degree table + THE NO-EXIT CLOSURE LAW
+of the (9,25) component (36-cell ring sweep = the complete ±1-neighborhood in
+ℕ² —
+the component is closed in the FULL graph) + five component censuses (3, 9, 4,
+10, 13 vertices) + the engine-corrected PHASE-LAW instances ((15,49): 5-column
+sweep, wall at 21; (203,10201): 99-column sweep, walls at 303/404) + the
+directed-death census (12 r2b rows, liveB false) + THE 103-VERTEX TWO-PHASE
+WITNESS p103 (walkOK + allDistinct + shape: endpoints (203,10201)→(301,10205),
+both composite, sum grows by 102) + p7/p8/p6 witnesses + the arsenal bridge +
+18-conjunct board, 23 #print-axioms receipts, receipt string
+E1212_COPRIME_COMPOSITE_GREEN. Pre-verified: mirror1212.py (the EXACT python
+mirror of every Lean def — 63/63 decide rows PASS, ALL GREEN) + battery1212.py/b
+(the fact extractor). CI-carrier discipline: no local lake/lean, no commit/push;
+kills.yml Kernel 65 step block delivered in the agent report for the wiring owner.
+Round-2 lanes: the Jacobsthal/Mertens rough-composite window lemma (the sole gap between the phase calculus and the FULL YES).
+
+The engine never stops; it never lies. In English, always.
+
+## K59 / Erdos273 (p−1 covering) — Kernel 59 written
+- Wrote `problem273-pminus1-covering/Erdos273.lean` (301 lines, 20 theorems, 0 sorry): the Kraft-confinement law L-A in exact-integer form (`kraftW` structural fold, no Rat; `kraft_confinement` = length ≤ L ∧ ν-bounds 2 ≤ ν ≤ L ∧ 2 ≤ length, full induction) + Mirsky–Newman core L-D (`no_single_leaf` + `granul_wall_4to12` decide census: no distinct-moduli selection in window [4,12] closes Σ 27720/m = 27720) + L-E pool tables (67-modulus M_even ≤ 400: census + density window [1.464, 1.465) cross-multiplied by 1000·L400, all 2m+1 prime via self-contained `pMinus1B` = 2m+1 `primeB`) + parity escape (`kraftW [2,2] 2 = 2`, repeated moduli) + Arsenal bridge (3 lemma instances at anchors 44/14) + 8-conjunct board theorem + `#print axioms` receipts + `#eval E273_PMINUS1_COVERING_GREEN`.
+- Fixed the broken 49-line stub (which carried a `sorry` at `natB_iff`); every statement COMPLETE, every proof COMPLETE; decide only on closed terms; no Mathlib import; laws L86/L90/L91 obeyed.
+- First-compile risk accepted per mission; CI (kills.yml Kernel 59 step) verifies.
+
+## S058 — W58-B WAVE PACK (5 new kernels + 3 repairs + the anneal) (2026-11-13)
+
+**THE ROUND (parallel-agent war under a flaky sub-agent service —7 successes
+landed, the rest executed by the commander directly):**
+
+1. **K55 #274 r3 REPAIRED (commander surgery):** the show pattern
+   mis-spelled the definitional unfolding (dropped the middle
+   sizesDistinct component); replaced with the component-have assembly
+   (h1 dividesAll / h2 rfl / h3 sumNat) + outer show + rw — heals
+   tilingSizes_self → feasible_structure → e274_board (the sorryAx was
+   error-cascade).
+2. **K62 #708 r2 REPAIRED (commander surgery, 4 fixes):** the
+   Bool-equation precedence trap (`&&`-35 vs `=`-50 — parenthesize!
+   `Bool.and_eq_true.mp` is NOT core — replaced with the
+   Bool.noConfusion cases idiom); `List.length_cons x B` application
+   fails (function-expected) — rfl; the cases-pattern binder-count law
+   (indexed-family cases SOLVES the x/l constructor binders — drop/take
+   introduce only B,h — patterns must name TWO not FOUR); the missing
+   s ≤ b have before the omega (hmem is ∀ — extract first).
+3. **K64 #289 r2 REPAIRED (commander surgery, 2 fixes):** the
+   associativity bridge `rw [← Nat.add_assoc]` before the succ-case
+   rw-chain (the goal spells `b+1+(t+1)`, the lemmas `b+1+t+1`); the
+   board conjunct-6 iff parenthesized (the →/↔ precedence ambiguity
+   kill).
+4. **K58 #961x2 r1 (NEW):** Erdos961Exclusion2.lean completed+extended —
+   HMIN inside Lean (pell29_minimal, structural route), power-rep layer,
+   growth strengthening, +11 new theorems (tower X-positivity, strict
+   monotonicity, LINEAR FUNDAMENTAL BOUND X₁·n ≤ X_n, GAP MONOTONICITY,
+   pell29_min_Y_lower the bounded minimality, board 3). 1659 lines.
+5. **K59 #273 r1 (NEW):** Erdos273.lean — kraftW exact-integer weight +
+   THE KRAFT CONFINEMENT LAW + pool12_kraft (4078497 exact) + the
+   pool-400 census/density + THE GRANULARITY WALL + the parity layer +
+   board. 301 lines (the dead agent's complete file, audited: zero
+   literal sorry).
+6. **K60 #939 r1 (NEW):** Erdos939.lean — divAll/rpow structural folds +
+   THE MOD-16 OBSTRUCTION (odd r=4-pairs force 2^4 | a+b; 81+243
+   blocked) + r=2/3/4 censuses + THE R=3 WITNESS CONSTRUCTIONS (Nitaj
+   pairs with full factorizations) + zero-solution bounds + board. 262
+   lines.
+7. **K61 #411 r1 (NEW):** the S045-era draft (1328 lines, zero sorry,
+   Arsenal-clean) finally wired: gF the structural φ-iteration + the
+   doubling laws erdos411_ten/erdos411_94 (g_{k+2} = 2·g_k) + the
+   census/witness/partition tables + erdos411_main.
+8. **K65 #1212 r1 (NEW):** Erdos1212.lean — the coprime-pair graph
+   kernel: habitat machinery + adjacency laws (THE B-HUB PARITY FLIP) +
+   degBound ≤ 4 + THE NO-EXIT CLOSURE LAW (the (9,25) component closed
+   in the FULL graph) + phase-law instances + THE 103-VERTEX TWO-PHASE
+   WITNESS + 18-conjunct board. Python mirror 63/63 GREEN.
+9. **#203 (anneal):** the v3 pair-move exhaust certified (0 accepts at
+   T≤300; fixed-seed flaw found); the v4 ILS restart-diversification
+   written+run (kick-recovery mismatch diagnosed); banked 28.474%
+   unchanged; v5 route logged (1-pair kicks + 300-400s tempers).
+
+**REMAINING:** K63 #317 (signed harmonic — creation in flight);
+CI verdicts pending on all 8 red/green transitions.
+
+The engine never stops; it never lies. In English, always.
