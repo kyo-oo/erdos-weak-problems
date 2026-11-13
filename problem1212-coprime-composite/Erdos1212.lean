@@ -155,7 +155,7 @@ theorem countB_le (p : Nat × Nat → Bool) :
   | nil => exact Nat.le_refl 0
   | cons v rest ih =>
     have hc : countB p (v :: rest) = btoN (p v) + countB p rest := rfl
-    have hl : (v :: rest).length = rest.length + 1 := by simp
+    have hl : (v :: rest).length = rest.length + 1 := rfl
     rw [hc, hl]
     have h1 : btoN (p v) ≤ 1 := btoN_le_one (p v)
     omega
@@ -186,12 +186,16 @@ theorem adj_comm_aux (v w : Nat × Nat) : adj v w → adj w v := by
 theorem adj_comm (v w : Nat × Nat) : adj v w ↔ adj w v :=
   ⟨adj_comm_aux v w, adj_comm_aux w v⟩
 
-/-- THE IRREFLEXIVITY LAW: adjacent vertices are distinct. -/
+/-- THE IRREFLEXIVITY LAW: adjacent vertices are distinct. (W59-T3
+hardening: the ∨-hypothesis is rcases-split before omega — every omega
+goal is a plain False from contradictory linear atoms.) -/
 theorem adj_distinct (v w : Nat × Nat) : adj v w → v ≠ w := by
   intro h hveq
   subst hveq
   unfold adj at h
-  omega
+  rcases h with ⟨hx, hy⟩ | ⟨hy, hx⟩
+  · rcases hy with hy' | hy' <;> omega
+  · rcases hx with hx' | hx' <;> omega
 
 /-- THE ONE-COORDINATE LAW: adjacent vertices differ in exactly one
 coordinate (the "differ in only one coordinate" reading of #1212,
@@ -202,24 +206,30 @@ theorem adj_one_coord (v w : Nat × Nat) : adj v w →
   unfold adj at h
   rcases h with ⟨hx, hy⟩ | ⟨hy, hx⟩
   · rcases hy with hy' | hy'
-    · exact Or.inl ⟨hx, by omega⟩
-    · exact Or.inl ⟨hx, by omega⟩
+    · exact Or.inl ⟨hx, fun heq => by omega⟩
+    · exact Or.inl ⟨hx, fun heq => by omega⟩
   · rcases hx with hx' | hx'
-    · exact Or.inr ⟨by omega, hy⟩
-    · exact Or.inr ⟨by omega, hy⟩
+    · exact Or.inr ⟨fun heq => by omega, hy⟩
+    · exact Or.inr ⟨fun heq => by omega, hy⟩
 
 /-- THE B-HUB PARITY FLIP (round-1 type analysis as a theorem): an odd-odd
 vertex (B-hub) has an odd/even or even/odd neighbor — the path alternates
-B-hubs with intermediates whose even coordinate is auto-composite. -/
+B-hubs with intermediates whose even coordinate is auto-composite.
+(W59-T3 hardening: the goal disjunction is constructed explicitly; omega
+only sees single linear/mod-2 conjuncts.) -/
 theorem adj_parity_flip (v w : Nat × Nat) (h : adj v w)
     (hv : v.1 % 2 = 1 ∧ v.2 % 2 = 1) :
     (w.1 % 2 = 1 ∧ w.2 % 2 = 0) ∨ (w.1 % 2 = 0 ∧ w.2 % 2 = 1) := by
   unfold adj at h
   rcases h with ⟨hx, hy⟩ | ⟨hy, hx⟩
   · rcases hv with ⟨h1, h2⟩
-    rcases hy with hy' | hy' <;> omega
+    rcases hy with hy' | hy'
+    · exact Or.inl ⟨by omega, by omega⟩
+    · exact Or.inl ⟨by omega, by omega⟩
   · rcases hv with ⟨h1, h2⟩
-    rcases hx with hx' | hx' <;> omega
+    rcases hx with hx' | hx'
+    · exact Or.inr ⟨by omega, by omega⟩
+    · exact Or.inr ⟨by omega, by omega⟩
 
 /-! ## §4 The certified data rows (decide; battery1212.py §1/§3). -/
 
@@ -297,8 +307,18 @@ theorem comp925_closed :
       adjToB (5 + dx, 23 + dy) c925 = true →
       memB (5 + dx, 23 + dy) c925 = true := by
   intro dx dy hdx hdy hh ha
-  have h1 := (List.all_eq_true.mp comp925_no_exit) dx (List.mem_range.mpr hdx)
-  have h2 := (List.all_eq_true.mp h1) dy (List.mem_range.mpr hdy)
+  -- W59-T3 hardening: both chained `List.all_eq_true.mp` applications are
+  -- TYPE-ASCRIBED to the exact Bool equation (the K33 #374 green idiom),
+  -- so the second `.mp` never unifies through a Bool coercion.
+  have h1 : ((List.range 6).all (fun dy : Nat =>
+      decide (¬ (habitatB (5 + dx, 23 + dy) = true ∧
+          adjToB (5 + dx, 23 + dy) c925 = true) ∨
+        memB (5 + dx, 23 + dy) c925 = true))) = true :=
+    (List.all_eq_true.mp comp925_no_exit) dx (List.mem_range.mpr hdx)
+  have h2 : decide (¬ (habitatB (5 + dx, 23 + dy) = true ∧
+      adjToB (5 + dx, 23 + dy) c925 = true) ∨
+      memB (5 + dx, 23 + dy) c925 = true) = true :=
+    (List.all_eq_true.mp h1) dy (List.mem_range.mpr hdy)
   rcases of_decide_eq_true h2 with hneg | hmem
   · exact absurd ⟨hh, ha⟩ hneg
   · exact hmem
@@ -331,7 +351,9 @@ to 10201. -/
 theorem phase203_coprime :
     ∀ k : Nat, k < 99 → coprimeB (203 + k) 10201 = true := by
   intro k hk
-  exact (List.all_eq_true.mp phase203_sweep.1) k (List.mem_range.mpr hk)
+  have hrow : coprimeB (203 + k) 10201 = true :=
+    (List.all_eq_true.mp phase203_sweep.1) k (List.mem_range.mpr hk)
+  exact hrow
 
 /-! ## §7 The path constructions (the certified finite witnesses). -/
 

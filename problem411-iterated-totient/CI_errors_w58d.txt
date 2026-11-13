@@ -1,0 +1,774 @@
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+problem411-iterated-totient/Erdos411.lean:84:8: error(lean.synthInstanceFailed): failed to synthesize instance of type class
+Decidable P
+
+Hint: Type class instance resolution failures can be inspected with the `set_option trace.Meta.synthInstance true` command.
+problem411-iterated-totient/Erdos411.lean:100:12: error(lean.unknownIdentifier): Unknown identifier `i`
+problem411-iterated-totient/Erdos411.lean:100:14: error(lean.unknownIdentifier): Unknown identifier `i`
+problem411-iterated-totient/Erdos411.lean:108:12: error: Tactic `rfl` failed: The left-hand side
+List.countP (fun j => P (j + 1)) (List.range 0) + if P 0 = true then 1 else 0
+is not definitionally equal to the right-hand side
+List.countP P (List.range (0 + 1))
+
+case zero
+P : ℕ → Bool
+⊢ (List.countP (fun j => P (j + 1)) (List.range 0) + if P 0 = true then 1 else 0) = List.countP P (List.range (0 + 1))
+problem411-iterated-totient/Erdos411.lean:112:4: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:124:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+List.range (Nat.succ ?m.43)
+in the target expression
+(List.countP ((fun j => P (M + 1 - 1 - j)) ∘ Nat.succ) (List.range M) + if P (M + 1 - 1 - 0) = true then 1 else 0) =
+List.countP P (0 :: List.map Nat.succ (List.range M))
+
+case succ
+P : ℕ → Bool
+M : ℕ
+ih : List.countP (fun j => P (M - 1 - j)) (List.range M) = List.countP P (List.range M)
+⊢ (List.countP ((fun j => P (M + 1 - 1 - j)) ∘ Nat.succ) (List.range M) + if P (M + 1 - 1 - 0) = true then 1 else 0) =
+List.countP P (0 :: List.map Nat.succ (List.range M))
+problem411-iterated-totient/Erdos411.lean:141:6: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:141:6: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:141:6: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:141:6: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:155:6: error: Type mismatch
+Nat.gcd_dvd_left (n - c) n
+has type
+(n - c).gcd n ∣ n - c
+but is expected to have type
+(n - c).gcd n ∣ c
+problem411-iterated-totient/Erdos411.lean:157:8: error(lean.unknownIdentifier): Unknown constant `Nat.dvd_sub'`
+problem411-iterated-totient/Erdos411.lean:159:6: error: Type mismatch
+hd
+has type
+(n - c).gcd n ∣ c
+but is expected to have type
+(n - c).gcd n ∣ n
+problem411-iterated-totient/Erdos411.lean:162:6: error: Type mismatch
+Nat.gcd_dvd_left c n
+has type
+c.gcd n ∣ c
+but is expected to have type
+c.gcd n ∣ n - c
+problem411-iterated-totient/Erdos411.lean:163:12: error(lean.unknownIdentifier): Unknown constant `Nat.dvd_sub'`
+problem411-iterated-totient/Erdos411.lean:176:4: error: Type mismatch
+Eq.symm (Nat.eq_one_of_dvd_one hd)
+has type
+1 = c.gcd y
+but is expected to have type
+c.gcd y = 1
+problem411-iterated-totient/Erdos411.lean:189:14: error(lean.unknownIdentifier): Unknown constant `Nat.dvd_mul_of_dvd_right`
+problem411-iterated-totient/Erdos411.lean:193:72: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+0 ≤ b ≤ 2
+a ≥ 0
+where
+a := ↑c / 2
+b := ↑(c.gcd (2 * y))
+problem411-iterated-totient/Erdos411.lean:195:6: error: Type mismatch
+h1
+has type
+c.gcd (2 * y) = 2
+but is expected to have type
+c.gcd (2 * y) = 1
+problem411-iterated-totient/Erdos411.lean:196:45: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+b ≥ 0
+a ≥ 0
+where
+a := ↑y / 2
+b := ↑c / 2
+problem411-iterated-totient/Erdos411.lean:197:51: error: No goals to be solved
+problem411-iterated-totient/Erdos411.lean:212:6: error: Type mismatch
+Eq.symm (Nat.eq_one_of_dvd_one hd)
+has type
+1 = c.gcd y
+but is expected to have type
+c.gcd y = 1
+problem411-iterated-totient/Erdos411.lean:219:24: error: Application type mismatch: The argument
+dvd_mul_left 2 y
+has type
+2 ∣ y * 2
+but is expected to have type
+2 ∣ 2 * y
+in the application
+Nat.dvd_gcd h2c (dvd_mul_left 2 y)
+problem411-iterated-totient/Erdos411.lean:228:14: error(lean.unknownIdentifier): Unknown constant `Nat.dvd_mul_of_dvd_right`
+problem411-iterated-totient/Erdos411.lean:239:6: error: Type mismatch
+h1
+has type
+c.gcd (2 * y) = 2
+but is expected to have type
+c.gcd (2 * y) = 1
+problem411-iterated-totient/Erdos411.lean:240:41: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+b ≥ 0
+a ≥ 0
+where
+a := ↑y / 2
+b := ↑c / 2
+problem411-iterated-totient/Erdos411.lean:241:34: error: No goals to be solved
+problem411-iterated-totient/Erdos411.lean:251:10: error: Function expected at
+List.range_add
+but this term has type
+List.range (?m.72 + ?m.73) = List.range ?m.72 ++ List.map (fun x => ?m.72 + x) (List.range ?m.73)
+
+Note: Expected a function because this term is being applied to the argument
+y
+problem411-iterated-totient/Erdos411.lean:257:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+List.countP (fun k => decide ((y + k + 1).gcd (2 * y) = 1)) ?m.160
+in the target expression
+List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y) +
+List.countP ((fun k => decide ((k + 1).gcd (2 * y) = 1)) ∘ fun k => y + k) (List.range y) =
+2 * List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y)
+
+y : ℕ
+hy : 2 ∣ y
+hy0 : 0 < y
+hsplit : List.range (2 * y) = List.range y ++ List.map (fun k => y + k) (List.range y)
+⊢ List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y) +
+List.countP ((fun k => decide ((k + 1).gcd (2 * y) = 1)) ∘ fun k => y + k) (List.range y) =
+2 * List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y)
+problem411-iterated-totient/Erdos411.lean:276:10: error: Function expected at
+List.range_add
+but this term has type
+List.range (?m.64 + ?m.65) = List.range ?m.64 ++ List.map (fun x => ?m.64 + x) (List.range ?m.65)
+
+Note: Expected a function because this term is being applied to the argument
+y
+problem411-iterated-totient/Erdos411.lean:283:34: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+(x + 1).gcd (2 * y) = 1
+in the target expression
+?m.172 ↔ ?m.173
+
+y : ℕ
+hy : y % 2 = 1
+hsplit : List.range (2 * y) = List.range y ++ List.map (fun k => y + k) (List.range y)
+x : ℕ
+a✝ : x ∈ List.range y
+h1 : (x + 1).gcd (2 * y) = 1 ↔ (x + 1) % 2 = 1 ∧ (x + 1).gcd y = 1
+⊢ ?m.172 ↔ ?m.173
+problem411-iterated-totient/Erdos411.lean:284:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+List.countP (fun k => decide ((y + k + 1).gcd (2 * y) = 1)) ?m.224
+in the target expression
+List.countP (fun k => decide ((k + 1).gcd y = 1 ∧ (k + 1) % 2 = 1)) (List.range y) +
+List.countP ((fun k => decide ((k + 1).gcd (2 * y) = 1)) ∘ fun k => y + k) (List.range y) =
+List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y)
+
+y : ℕ
+hy : y % 2 = 1
+hsplit : List.range (2 * y) = List.range y ++ List.map (fun k => y + k) (List.range y)
+⊢ List.countP (fun k => decide ((k + 1).gcd y = 1 ∧ (k + 1) % 2 = 1)) (List.range y) +
+List.countP ((fun k => decide ((k + 1).gcd (2 * y) = 1)) ∘ fun k => y + k) (List.range y) =
+List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y)
+problem411-iterated-totient/Erdos411.lean:314:40: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2 ^ (a' + 1) * 2
+in the target expression
+2 ^ a' * 2 * 2 * m = 2 * (2 ^ a' * 2 * m)
+
+m : ℕ
+hm : m % 2 = 1
+a' : ℕ
+ih : 1 ≤ a' + 1 → phiB (2 ^ (a' + 1) * m) = 2 ^ (a' + 1 - 1) * phiB m
+ha : 1 ≤ a' + 1 + 1
+⊢ 2 ^ a' * 2 * 2 * m = 2 * (2 ^ a' * 2 * m)
+problem411-iterated-totient/Erdos411.lean:316:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2 ^ (a' + 2) * m
+in the target expression
+2 ∣ 2 ^ (a' + 1) * m
+
+m : ℕ
+hm : m % 2 = 1
+a' : ℕ
+ih : 1 ≤ a' + 1 → phiB (2 ^ (a' + 1) * m) = 2 ^ (a' + 1 - 1) * phiB m
+ha : 1 ≤ a' + 1 + 1
+hEq : 2 ^ (a' + 2) * m = 2 * (2 ^ (a' + 1) * m)
+⊢ 2 ∣ 2 ^ (a' + 1) * m
+problem411-iterated-totient/Erdos411.lean:318:31: error(lean.unknownIdentifier): Unknown constant `Nat.pos_pow_of_pos`
+problem411-iterated-totient/Erdos411.lean:319:8: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+f ≥ 0
+e ≥ 1
+b ≥ 0
+a ≥ 0
+where
+a := ↑m / 2
+b := ↑a'
+e := ↑2 ^ a'
+f := ↑(2 ^ (a' + 1 - 1)) * ↑(phiB m)
+problem411-iterated-totient/Erdos411.lean:320:41: error: Function expected at
+ih ?m.304
+but this term has type
+phiB (2 ^ (a' + 1) * m) = 2 ^ (a' + 1 - 1) * phiB m
+
+Note: Expected a function because this term is being applied to the argument
+hm
+problem411-iterated-totient/Erdos411.lean:328:4: error: Function expected at
+List.countP_le_length
+but this term has type
+List.countP ?m.21 ?m.22 ≤ List.length ?m.22
+
+Note: Expected a function because this term is being applied to the argument
+_
+problem411-iterated-totient/Erdos411.lean:338:8: error: No goals to be solved
+problem411-iterated-totient/Erdos411.lean:360:12: error: Function expected at
+List.range_succ
+but this term has type
+List.range (Nat.succ ?m.114) = List.range ?m.114 ++ [?m.114]
+
+Note: Expected a function because this term is being applied to the argument
+(x - 1)
+problem411-iterated-totient/Erdos411.lean:363:43: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+b ≥ 0
+a ≥ 1
+a ≥ 0
+2*a - b ≥ 0
+where
+a := ↑h
+b := ↑((x - 1 + 1).gcd x)
+problem411-iterated-totient/Erdos411.lean:364:10: error: Tactic `rewrite` failed: motive is not type correct:
+fun _a => decide (_a = 1) = false
+Error: Application type mismatch: The argument
+(x - 1 + 1).instDecidableCoprime x
+has type
+Decidable ((x - 1 + 1).Coprime x)
+but is expected to have type
+Decidable (_a = 1)
+in the application
+@decide (_a = 1) ((x - 1 + 1).instDecidableCoprime x)
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+x h : ℕ
+hx : x = 2 * h + 1
+h3 : 3 ≤ x
+hxx : x.gcd x = x
+hr : List.range x = List.range (x - 1) ++ [x - 1]
+this : (x - 1 + 1).gcd x = x
+⊢ decide ((x - 1 + 1).gcd x = 1) = false
+problem411-iterated-totient/Erdos411.lean:375:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+List.countP (fun k => decide ((h + k + 1).gcd x = 1)) ?m.241
+in the target expression
+2 ∣
+List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range h) +
+List.countP ((fun k => decide ((k + 1).gcd x = 1)) ∘ fun x => h + x) (List.range h)
+
+x h : ℕ
+hx : x = 2 * h + 1
+h3 : 3 ≤ x
+hxx : x.gcd x = x
+hstrip :
+List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range x) =
+List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range (x - 1))
+⊢ 2 ∣
+List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range h) +
+List.countP ((fun k => decide ((k + 1).gcd x = 1)) ∘ fun x => h + x) (List.range h)
+problem411-iterated-totient/Erdos411.lean:407:35: error: unsolved goals
+a m : ℕ
+ha : 1 ≤ a
+hm : m % 2 = 1
+⊢ 2 ^ (a - 1 + 1) = 2 ^ (a - 1 + 1 - 1).succ
+problem411-iterated-totient/Erdos411.lean:409:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n * (?m * ?k)
+in the target expression
+2 ^ (a - 1) * 2 * m + 2 ^ (a - 1) * phiB m = 2 ^ (a - 1) * (2 * m + phiB m)
+
+a m : ℕ
+ha : 1 ≤ a
+hm : m % 2 = 1
+hpow : 2 ^ a = 2 ^ (a - 1) * 2
+⊢ 2 ^ (a - 1) * 2 * m + 2 ^ (a - 1) * phiB m = 2 ^ (a - 1) * (2 * m + phiB m)
+problem411-iterated-totient/Erdos411.lean:418:35: error: unsolved goals
+a : ℕ
+ha : 1 ≤ a
+hphi : phiB (2 ^ a) = 2 ^ (a - 1)
+⊢ 2 ^ (a - 1 + 1) = 2 ^ (a - 1 + 1 - 1).succ
+problem411-iterated-totient/Erdos411.lean:420:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n * (?m * ?k)
+in the target expression
+2 ^ (a - 1) * 2 + 2 ^ (a - 1) = 3 * 2 ^ (a - 1)
+
+a : ℕ
+ha : 1 ≤ a
+hphi : phiB (2 ^ a) = 2 ^ (a - 1)
+hpow : 2 ^ a = 2 ^ (a - 1) * 2
+⊢ 2 ^ (a - 1) * 2 + 2 ^ (a - 1) = 3 * 2 ^ (a - 1)
+problem411-iterated-totient/Erdos411.lean:431:35: error: unsolved goals
+a : ℕ
+ha : 1 ≤ a
+⊢ 2 ^ (a - 1 + 1) = 2 ^ (a - 1 + 1 - 1).succ
+problem411-iterated-totient/Erdos411.lean:433:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n * (?m * ?k)
+in the target expression
+2 ^ (a - 1) * 14 = 2 ^ (a - 1) * 2 * 7
+
+a : ℕ
+ha : 1 ≤ a
+hpow : 2 ^ a = 2 ^ (a - 1) * 2
+⊢ 2 ^ (a - 1) * 14 = 2 ^ (a - 1) * 2 * 7
+problem411-iterated-totient/Erdos411.lean:439:35: error: unsolved goals
+a : ℕ
+ha : 1 ≤ a
+⊢ 2 ^ (a - 1 + 1) = 2 ^ (a - 1 + 1 - 1).succ
+problem411-iterated-totient/Erdos411.lean:441:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2 ^ a
+in the target expression
+2 ^ (a - 1) * 20 = 5 * 2 ^ (a + 1)
+
+a : ℕ
+ha : 1 ≤ a
+hpow : 2 ^ a = 2 ^ (a - 1) * 2
+⊢ 2 ^ (a - 1) * 20 = 5 * 2 ^ (a + 1)
+problem411-iterated-totient/Erdos411.lean:447:35: error: unsolved goals
+a : ℕ
+ha : 1 ≤ a
+⊢ 2 ^ (a - 1 + 1) = 2 ^ (a - 1 + 1 - 1).succ
+problem411-iterated-totient/Erdos411.lean:449:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n * (?m * ?k)
+in the target expression
+2 ^ (a - 1) * 94 = 2 ^ (a - 1) * 2 * 47
+
+a : ℕ
+ha : 1 ≤ a
+hpow : 2 ^ a = 2 ^ (a - 1) * 2
+⊢ 2 ^ (a - 1) * 94 = 2 ^ (a - 1) * 2 * 47
+problem411-iterated-totient/Erdos411.lean:455:35: error: unsolved goals
+a : ℕ
+ha : 1 ≤ a
+⊢ 2 ^ (a - 1 + 1) = 2 ^ (a - 1 + 1 - 1).succ
+problem411-iterated-totient/Erdos411.lean:457:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+2 ^ a
+in the target expression
+2 ^ (a - 1) * 140 = 35 * 2 ^ (a + 1)
+
+a : ℕ
+ha : 1 ≤ a
+hpow : 2 ^ a = 2 ^ (a - 1) * 2
+⊢ 2 ^ (a - 1) * 140 = 35 * 2 ^ (a + 1)
+problem411-iterated-totient/Erdos411.lean:469:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gF (i + j) x
+in the target expression
+gF (i + j) (gstep x) = gF i (gF (j + 1) x)
+
+case succ
+i x j : ℕ
+ih : gF (i + j) x = gF i (gF j x)
+h1 : i + (j + 1) = i + j + 1
+h2 : gF (i + j + 1) x = gF (i + j) (gstep x)
+h3 : gF (j + 1) x = gF j (gstep x)
+⊢ gF (i + j) (gstep x) = gF i (gF (j + 1) x)
+problem411-iterated-totient/Erdos411.lean:481:19: error: Tactic `rcases` failed: `1` is not a free variable
+problem411-iterated-totient/Erdos411.lean:491:72: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?a ^ ?m * ?a ^ ?n
+in the target expression
+2 ^ (a - 1 + 2) = 2 ^ (a + 1)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 1 ∈ SIXl
+hm1 : 1 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 1
+ha2 : 2 ≤ a
+s1 : gstep (2 ^ a * 1) = 3 * 2 ^ (a - 1)
+ha1 : 1 ≤ a - 1
+this : 3 * 2 ^ (a - 1) = 2 ^ (a - 1) * 3
+⊢ 2 ^ (a - 1 + 2) = 2 ^ (a + 1)
+problem411-iterated-totient/Erdos411.lean:488:53: error: unsolved goals
+x a : ℕ
+ha : 1 ≤ a
+hm : 1 ∈ SIXl
+hm1 : 1 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 1
+ha2 : 2 ≤ a
+s1 : gstep (2 ^ a * 1) = 3 * 2 ^ (a - 1)
+ha1 : 1 ≤ a - 1
+this : 3 * 2 ^ (a - 1) = 2 ^ (a - 1) * 3
+⊢ 2 ^ (a + 1) = 2 * 2 ^ a
+problem411-iterated-totient/Erdos411.lean:494:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gstep (2 ^ a * 1)
+in the target expression
+inFAM (gstep (2 ^ a)) ∧ gstep (gstep (2 ^ a)) = 2 * 2 ^ a
+
+case inl
+x a : ℕ
+ha : 1 ≤ a
+hm : 1 ∈ SIXl
+hm1 : 1 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 1
+ha2 : 2 ≤ a
+s1 : gstep (2 ^ a * 1) = 3 * 2 ^ (a - 1)
+s2 : gstep (3 * 2 ^ (a - 1)) = 2 * 2 ^ a
+⊢ inFAM (gstep (2 ^ a)) ∧ gstep (gstep (2 ^ a)) = 2 * 2 ^ a
+problem411-iterated-totient/Erdos411.lean:505:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gstep (2 ^ (a + 2) * 1)
+in the target expression
+gstep (2 ^ (a + 2)) = 2 * (2 ^ a * 3)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 3 ∈ SIXl
+hm1 : 3 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 3
+s1 : gstep (2 ^ a * 3) = 2 ^ (a + 2)
+ha3 : 1 ≤ a + 2
+hexp : 2 ^ (a + 2) = 2 ^ (a + 2) * 1
+this : gstep (2 ^ (a + 2) * 1) = 3 * 2 ^ (a + 2 - 1)
+⊢ gstep (2 ^ (a + 2)) = 2 * (2 ^ a * 3)
+problem411-iterated-totient/Erdos411.lean:510:119: error: Application type mismatch: The argument
+Eq.symm s2
+has type
+2 * (2 ^ a * 3) = gstep (2 ^ (a + 2))
+but is expected to have type
+2 * (2 ^ a * 3) = 2 * (2 ^ a * 3)
+in the application
+⟨Exists.intro (a + 1) (Exists.intro 1 ⟨?m.622, ⟨?m.625, ⟨?m.628, ?m.629⟩⟩⟩), Eq.symm s2⟩
+problem411-iterated-totient/Erdos411.lean:510:96: error: unsolved goals
+x a : ℕ
+ha : 1 ≤ a
+hm : 3 ∈ SIXl
+hm1 : 3 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 3
+s1 : gstep (2 ^ a * 3) = 2 ^ (a + 2)
+s2 : gstep (2 ^ (a + 2)) = 2 * (2 ^ a * 3)
+⊢ 2 ^ (a + 2) = 2 ^ (a + 1)
+problem411-iterated-totient/Erdos411.lean:516:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n ^ ?m * ?n
+in the target expression
+5 * 2 ^ (a + 1) = 2 * (2 ^ a * 5)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 5 ∈ SIXl
+hm1 : 5 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 5
+s1 : gstep (2 ^ a * 5) = 2 ^ a * 7
+this : gstep (2 ^ a * 7) = 5 * 2 ^ (a + 1)
+⊢ 5 * 2 ^ (a + 1) = 2 * (2 ^ a * 5)
+problem411-iterated-totient/Erdos411.lean:519:70: error: Application type mismatch: The argument
+Eq.symm s2
+has type
+2 * (2 ^ a * 5) = gstep (2 ^ a * 7)
+but is expected to have type
+2 * (2 ^ a * 5) = 2 * (2 ^ a * 5)
+in the application
+⟨Exists.intro a (Exists.intro 7 ⟨ha, ⟨?m.778, ⟨?m.781, ?m.782⟩⟩⟩), Eq.symm s2⟩
+problem411-iterated-totient/Erdos411.lean:519:64: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gstep (2 ^ a * 5)
+in the target expression
+2 ^ a * 7 = 2 ^ a * 7
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 5 ∈ SIXl
+hm1 : 5 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 5
+s1 : gstep (2 ^ a * 5) = 2 ^ a * 7
+s2 : gstep (2 ^ a * 7) = 2 * (2 ^ a * 5)
+⊢ 2 ^ a * 7 = 2 ^ a * 7
+problem411-iterated-totient/Erdos411.lean:526:35: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n ^ ?m * ?n
+in the target expression
+2 ^ (a + 1) * 7 = 2 * (2 ^ a * 7)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 7 ∈ SIXl
+hm1 : 7 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 7
+s1 : gstep (2 ^ a * 7) = 5 * 2 ^ (a + 1)
+ha1 : 1 ≤ a + 1
+this : 5 * 2 ^ (a + 1) = 2 ^ (a + 1) * 5
+⊢ 2 ^ (a + 1) * 7 = 2 * (2 ^ a * 7)
+problem411-iterated-totient/Erdos411.lean:529:78: error: Application type mismatch: The argument
+Eq.symm s2
+has type
+2 * (2 ^ a * 7) = gstep (5 * 2 ^ (a + 1))
+but is expected to have type
+2 * (2 ^ a * 7) = 2 * (2 ^ a * 7)
+in the application
+⟨Exists.intro (a + 1) (Exists.intro 5 ⟨?m.986, ⟨?m.989, ⟨?m.992, ?m.993⟩⟩⟩), Eq.symm s2⟩
+problem411-iterated-totient/Erdos411.lean:529:72: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gstep (2 ^ a * 7)
+in the target expression
+5 * 2 ^ (a + 1) = 2 ^ (a + 1) * 5
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 7 ∈ SIXl
+hm1 : 7 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 7
+s1 : gstep (2 ^ a * 7) = 5 * 2 ^ (a + 1)
+s2 : gstep (5 * 2 ^ (a + 1)) = 2 * (2 ^ a * 7)
+⊢ 5 * 2 ^ (a + 1) = 2 ^ (a + 1) * 5
+problem411-iterated-totient/Erdos411.lean:535:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n ^ ?m * ?n
+in the target expression
+35 * 2 ^ (a + 1) = 2 * (2 ^ a * 35)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 35 ∈ SIXl
+hm1 : 35 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 35
+s1 : gstep (2 ^ a * 35) = 2 ^ a * 47
+this : gstep (2 ^ a * 47) = 35 * 2 ^ (a + 1)
+⊢ 35 * 2 ^ (a + 1) = 2 * (2 ^ a * 35)
+problem411-iterated-totient/Erdos411.lean:538:71: error: Application type mismatch: The argument
+Eq.symm s2
+has type
+2 * (2 ^ a * 35) = gstep (2 ^ a * 47)
+but is expected to have type
+2 * (2 ^ a * 35) = 2 * (2 ^ a * 35)
+in the application
+⟨Exists.intro a (Exists.intro 47 ⟨ha, ⟨?m.1100, ⟨?m.1103, ?m.1104⟩⟩⟩), Eq.symm s2⟩
+problem411-iterated-totient/Erdos411.lean:538:65: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gstep (2 ^ a * 35)
+in the target expression
+2 ^ a * 47 = 2 ^ a * 47
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 35 ∈ SIXl
+hm1 : 35 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 35
+s1 : gstep (2 ^ a * 35) = 2 ^ a * 47
+s2 : gstep (2 ^ a * 47) = 2 * (2 ^ a * 35)
+⊢ 2 ^ a * 47 = 2 ^ a * 47
+problem411-iterated-totient/Erdos411.lean:545:36: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n ^ ?m * ?n
+in the target expression
+2 ^ (a + 1) * 47 = 2 * (2 ^ a * 47)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 47 ∈ SIXl
+hm1 : 47 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 47
+s1 : gstep (2 ^ a * 47) = 35 * 2 ^ (a + 1)
+ha1 : 1 ≤ a + 1
+this : 35 * 2 ^ (a + 1) = 2 ^ (a + 1) * 35
+⊢ 2 ^ (a + 1) * 47 = 2 * (2 ^ a * 47)
+problem411-iterated-totient/Erdos411.lean:548:79: error: Application type mismatch: The argument
+Eq.symm s2
+has type
+2 * (2 ^ a * 47) = gstep (35 * 2 ^ (a + 1))
+but is expected to have type
+2 * (2 ^ a * 47) = 2 * (2 ^ a * 47)
+in the application
+⟨Exists.intro (a + 1) (Exists.intro 35 ⟨?m.1308, ⟨?m.1311, ⟨?m.1314, ?m.1315⟩⟩⟩), Eq.symm s2⟩
+problem411-iterated-totient/Erdos411.lean:548:73: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gstep (2 ^ a * 47)
+in the target expression
+35 * 2 ^ (a + 1) = 2 ^ (a + 1) * 35
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 47 ∈ SIXl
+hm1 : 47 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 47
+s1 : gstep (2 ^ a * 47) = 35 * 2 ^ (a + 1)
+s2 : gstep (35 * 2 ^ (a + 1)) = 2 * (2 ^ a * 47)
+⊢ 35 * 2 ^ (a + 1) = 2 ^ (a + 1) * 35
+problem411-iterated-totient/Erdos411.lean:557:38: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n * 1
+in the target expression
+gF 0 x = 1 * x
+
+case zero.left
+x : ℕ
+hx : inFAM x
+⊢ gF 0 x = 1 * x
+problem411-iterated-totient/Erdos411.lean:558:38: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n * 1
+in the target expression
+gF (0 + 1) x = gstep (1 * x)
+
+case zero.right
+x : ℕ
+hx : inFAM x
+⊢ gF (0 + 1) x = gstep (1 * x)
+problem411-iterated-totient/Erdos411.lean:562:10: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gF (?i + ?j) ?x
+in the target expression
+gF (2 * (j + 1)) x = gF 2 (gF (2 * j) x)
+
+x : ℕ
+hx : inFAM x
+j : ℕ
+ih0 : gF (2 * j) x = 2 ^ j * x
+ih1 : gF (2 * j + 1) x = gstep (2 ^ j * x)
+⊢ gF (2 * (j + 1)) x = gF 2 (gF (2 * j) x)
+problem411-iterated-totient/Erdos411.lean:564:28: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+f ≥ 1
+e ≥ 0
+b ≥ 0
+a ≥ 0
+where
+a := ↑(2 ^ j) * ↑x
+b := ↑(gstep (2 ^ j * x))
+e := ↑(gF 2 (gF (2 * j) x))
+f := ↑j
+problem411-iterated-totient/Erdos411.lean:570:17: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?a ^ ?m * ?a ^ ?n
+in the target expression
+2 ^ j * (2 ^ a * m) = 2 ^ (a + j) * m
+
+case refine_2
+x j : ℕ
+ih0 : gF (2 * j) x = 2 ^ j * x
+ih1 : gF (2 * j + 1) x = gstep (2 ^ j * x)
+hcomp2 : gF (2 * (j + 1)) x = gF 2 (gF (2 * j) x)
+hcomp3 : gF (2 * (j + 1) + 1) x = gF 2 (gF (2 * j + 1) x)
+a m : ℕ
+ha : 1 ≤ a
+hm : m ∈ SIXl
+hm1 : m = 1 → 2 ≤ a
+hxe : x = 2 ^ a * m
+⊢ 2 ^ j * (2 ^ a * m) = 2 ^ (a + j) * m
+problem411-iterated-totient/Erdos411.lean:575:48: error: Type mismatch
+hstep_two'
+has type
+gstep (gstep (gstep (2 ^ j * x))) = 2 * gstep (2 ^ j * x)
+but is expected to have type
+gF 2 (2 ^ j * x) = 2 * (2 ^ j * x)
+problem411-iterated-totient/Erdos411.lean:582:29: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+?n ^ ?m * ?n
+in the target expression
+2 ^ j * 2 ^ a * m = 2 * (2 ^ (a - 1) * m)
+
+x j : ℕ
+ih0 : gF (2 * j) x = 2 ^ j * x
+ih1 : gF (2 * j + 1) x = gstep (2 ^ j * x)
+hcomp2 : gF (2 * (j + 1)) x = gF 2 (2 ^ j * x)
+hcomp3 : gF (2 * (j + 1) + 1) x = gF 2 (gstep (2 ^ j * x))
+a m : ℕ
+ha : 1 ≤ a
+hm : m ∈ SIXl
+hm1 : m = 1 → 2 ≤ a
+hxe : x = 2 ^ a * m
+hfam : inFAM (2 ^ j * x)
+hstep_fam : inFAM (gstep (2 ^ j * x))
+hstep_two : gstep (gstep (2 ^ j * x)) = 2 * (2 ^ j * x)
+hstep_fam' : inFAM (gstep (gstep (2 ^ j * x)))
+hstep_two' : gstep (gstep (gstep (2 ^ j * x))) = 2 * gstep (2 ^ j * x)
+h2 : gF 2 (2 ^ j * x) = 2 * (2 ^ j * x)
+⊢ 2 ^ j * 2 ^ a * m = 2 * (2 ^ (a - 1) * m)
+problem411-iterated-totient/Erdos411.lean:583:36: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+g ≥ 0
+f ≥ 1
+e ≥ 0
+b ≥ 0
+b ≥ 0
+where
+b := ↑(gstep (2 ^ j * x))
+e := ↑(gF 2 (gstep (2 ^ j * x)))
+f := ↑a
+g := ↑(2 ^ a) * ↑m
+problem411-iterated-totient/Erdos411.lean:586:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gF 2 (2 ^ j * x)
+in the target expression
+gF (2 * (j + 1) + 1) x = gF 2 (gstep (2 ^ j * x))
+
+case succ
+x j : ℕ
+ih0 : gF (2 * j) x = 2 ^ j * x
+ih1 : gF (2 * j + 1) x = gstep (2 ^ j * x)
+hcomp2 : gF (2 * (j + 1)) x = gF 2 (2 ^ j * x)
+hcomp3 : gF (2 * (j + 1) + 1) x = gF 2 (gstep (2 ^ j * x))
+a m : ℕ
+ha : 1 ≤ a
+hm : m ∈ SIXl
+hm1 : m = 1 → 2 ≤ a
+hxe : x = 2 ^ a * m
+hfam : inFAM (2 ^ j * x)
+hstep_fam : inFAM (gstep (2 ^ j * x))
+hstep_two : gstep (gstep (2 ^ j * x)) = 2 * (2 ^ j * x)
+hstep_fam' : inFAM (gstep (gstep (2 ^ j * x)))
+hstep_two' : gstep (gstep (gstep (2 ^ j * x))) = 2 * gstep (2 ^ j * x)
+h2 : gF 2 (2 ^ j * x) = 2 * (2 ^ j * x)
+hgsd : gstep (2 * (2 ^ j * x)) = 2 * gstep (2 ^ j * x)
+⊢ gF (2 * (j + 1)) x = 2 ^ (j + 1) * x ∧ gF (2 * (j + 1) + 1) x = gstep (2 ^ (j + 1) * x)
+problem411-iterated-totient/Erdos411.lean:604:9: error(lean.unknownIdentifier): Unknown constant `Nat.even_iff_exists_two_mul`
+problem411-iterated-totient/Erdos411.lean:604:44: error: Tactic `rcases` failed: `x✝ : ?m.44` is not an inductive datatype
+problem411-iterated-totient/Erdos411.lean:663:6: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+a ≥ 1
+where
+a := ↑x / 2
+problem411-iterated-totient/Erdos411.lean:664:4: error: Type mismatch
+gstep_parity_of_odd ih h1
+has type
+gstep (gF k x) % 2 = 1
+but is expected to have type
+gF (k + 1) x % 2 = 1
+problem411-iterated-totient/Erdos411.lean:676:23: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+i ≥ 0
+g ≥ 0
+g - i ≥ 1
+f ≥ 0
+e ≥ 0
+b ≥ 1
+a ≥ 1
+where
+a := ↑n / 2
+b := ↑r
+e := ↑(gF (k + r) n) / 2
+f := ↑(gF k n) / 2
+g := ↑K
+i := ↑k
+problem411-iterated-totient/Erdos411.lean:685:50: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:687:12: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gF (k - 1) (gF 1 1)
+in the target expression
+gF k 1 = gF (k - 1) 2
+
+r K : ℕ
+hr : 1 ≤ r
+hn : 1 % 2 = 1
+hall : ∀ (k : ℕ), K ≤ k → gF (k + r) 1 = 2 * gF k 1
+k : ℕ
+hk : 2 ≤ k
+h1 : gF 1 1 = gstep 1
+h2 : gstep 1 = 2
+⊢ gF k 1 = gF (k - 1) 2
+problem411-iterated-totient/Erdos411.lean:695:14: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+gF (j - 1) (gF 1 2)
+in the target expression
+gF j 2 = gF (j - 1) (gstep 2)
+
+r K : ℕ
+hr : 1 ≤ r
+hn : 1 % 2 = 1
+hall : ∀ (k : ℕ), K ≤ k → gF (k + r) 1 = 2 * gF k 1
+k : ℕ
+hk : 2 ≤ k
+this✝ : gF k 1 = gF (k - 1) 2
+this : 2 % 2 = 0
+j : ℕ
+hj : 1 ≤ j
+⊢ gF j 2 = gF (j - 1) (gstep 2)
+problem411-iterated-totient/Erdos411.lean:698:51: error: `simp` made no progress
+problem411-iterated-totient/Erdos411.lean:703:32: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+b ≥ 0
+a ≥ 1
+a + b ≤ 1
+where
+a := ↑r
+b := ↑k
+problem411-iterated-totient/Erdos411.lean:704:26: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+0 ≤ e ≤ 1
+b ≥ 0
+a ≥ 1
+where
+a := ↑r
+b := ↑(gF (k + r) 1) / 2
+e := ↑k
+problem411-iterated-totient/Erdos411.lean:705:23: error: maximum number of errors (100; from option `maxErrors`) reached, exiting
+##[error]Process completed with exit code 1.

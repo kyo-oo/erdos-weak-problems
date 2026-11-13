@@ -1,0 +1,32 @@
+∀ (j k : ℕ),
+gstThreeWorldExponentialPacketS (j + k) =
+packetMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+info: Arsenal/CardinalWorldsV2.lean:152:0: 'CardinalWorldsV2.has_two_iff_no_two_false' depends on axioms: [propext, Quot.sound]
+info: Arsenal/CardinalWorldsV2.lean:153:0: 'CardinalWorldsV2.has_two_iff_first_signature' depends on axioms: [propext, Quot.sound]
+info: Arsenal/CardinalWorldsV2.lean:154:0: 'CardinalWorldsV2.carryAtPos_one_exact' depends on axioms: [propext, Quot.sound]
+info: Arsenal/CardinalWorldsV2.lean:155:0: 'CardinalWorldsV2.packet_add' depends on axioms: [propext]
+info: Arsenal/CardinalWorldsV2.lean:156:0: 'CardinalWorldsV2.cardinal_worlds_v2_crown' depends on axioms: [propext, Quot.sound]
+Build completed successfully (8698 jobs).
+problem274-coset-tilings/Erdos274.lean:102:65: error: unsolved goals
+n : ℕ
+h1 : dividesAll n [n] = true
+h2 : sizesDistinct [n] = true
+h3 : natB (sumNat [n]) n = true
+⊢ (true && true && true) = true
+'E274.natB_self' depends on axioms: [propext]
+'E274.tilingSizes_self' depends on axioms: [propext, sorryAx]
+'E274.feasible_structure' depends on axioms: [propext, sorryAx]
+'E274.two_coset_impossible' depends on axioms: [propext, Quot.sound]
+'E274.no_two_coset_tiling' depends on axioms: [propext, Quot.sound]
+'E274.no_two_coset_half' depends on axioms: [propext, Quot.sound]
+'E274.divisor_le_half' depends on axioms: [propext, Quot.sound]
+'E274.feasible_6' depends on axioms: [propext]
+'E274.feasible_12' depends on axioms: [propext]
+'E274.feasible_12b' depends on axioms: [propext]
+'E274.cyclic_6_negative' depends on axioms: [propext]
+'E274.cyclic_12_negative' depends on axioms: [propext]
+'E274.cyclic_census_le_12' depends on axioms: [propext]
+'E274.e274_arsenal_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+'E274.e274_board' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+"E274_COSET_TILING_GREEN"
+##[error]Process completed with exit code 1.

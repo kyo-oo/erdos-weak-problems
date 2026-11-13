@@ -1,0 +1,22 @@
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+problem939-rpowerful/Erdos939.lean:104:62: warning: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+[apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+problem939-rpowerful/Erdos939.lean:146:2: error: maximum recursion depth has been reached
+use `set_option maxRecDepth <num>` to increase limit
+use `set_option diagnostics true` to get diagnostic information
+'E939.divAll_row' depends on axioms: [propext, Quot.sound]
+'E939.rpow_prime_div' depends on axioms: [propext, Quot.sound]
+'E939.mod16_obstruction' depends on axioms: [propext, Quot.sound]
+'E939.census_r2_complete' depends on axioms: [propext]
+'E939.census_r4_members' depends on axioms: [propext, sorryAx]
+'E939.no_small_solution_r4' depends on axioms: [propext]
+'E939.odd_pairs_no_r4_sum' does not depend on any axioms
+'E939.witness1' depends on axioms: [propext]
+'E939.witness2' depends on axioms: [propext]
+'E939.board939' depends on axioms: [propext, sorryAx, Quot.sound]
+"E939_RPOWERFUL_GREEN"
+##[error]Process completed with exit code 1.
