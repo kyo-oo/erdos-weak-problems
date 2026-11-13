@@ -304,8 +304,8 @@ theorem e708_enum_complete : ∀ (P : Nat) (l : List Nat) (k acc : Nat) (B : Lis
               have hz : P ∣ acc * prod708 [] := hdvd
               exact or_of_bool_right _ _
                 (ih (m + 1) acc [] (sub708.nil l') (Nat.zero_le (m + 1)) hz)
-          | drop _ _ B2 hsub' =>
-              exact or_of_bool_right _ _ (ih (m + 1) acc B2 hsub' hlen hdvd)
+          | drop _ _ _ hsub' =>
+              exact or_of_bool_right _ _ (ih (m + 1) acc _ hsub' hlen hdvd)
           | take _ _ B2 hsub' =>
               rw [List.length_cons] at hlen
               have hlen' : B2.length ≤ m := by omega

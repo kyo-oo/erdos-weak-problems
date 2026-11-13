@@ -47,12 +47,20 @@ on:
       - problem274-coset-tilings/**
       - problem288-two-interval/**
       - problem850-radical-triple/**
+      - problem708-product-divisibility/**
+      - problem939-rpowerful/**
+      - problem411-iterated-totient/**
+      - problem317-signed-harmonic/**
+      - problem273-pminus1-covering/**
+      - problem289-intervals/**
+      - problem1212-coprime-composite/**
+      - problem389-consecutive-product/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
   contents: read
 jobs:
-  kernel:
+  kernel-a:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -461,6 +469,19 @@ jobs:
           grep -F "FI_D4e_GREEN" kernel18.log
           echo FI_E_GREEN=1
 
+  kernel-b:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
       - name: "Kernel 18-F - Erdos 1056: THE FINAL ASSEMBLIES (k=10, k=11 — zero kernel work) + anchors + arsenal bridge + battery"
         shell: bash
         run: |
@@ -958,6 +979,19 @@ jobs:
           python3 problem686-pell-ratio/battery686k2class.py
           echo ERDOS686K2CLASS_KERNEL_GREEN=1
 
+  kernel-c:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
       - name: "Kernel 43 - Erdos 261 THE AP RATIONALITY ENGINE (S048 full-proof campaign, P261 strike): ap_sum_kernel — the finite kernel of the Q3 bridge's rationality lemma (cited since Kill #8, battery-verified since W5, now formalized): for all r T K: Sum_{k<=K}(r+kT)*2^{K-k} = r(2^{K+1}-1) + T(2^{K+1}-K-2) — the two CI-green Kill #8 engines (jpow_sum_eq, pow_sum_eq) become degenerate points of this ONE law; core-only, general induction, receipts 120/399/4239/217/120 pairs + the Rat mirror 15/4"
         if: always()
         shell: bash
@@ -1245,8 +1279,21 @@ jobs:
           lake env lean problem939-rpowerful/Erdos939.lean 2>&1 | tee kernel60.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60.log
           grep -F "E939_RPOWERFUL_GREEN" kernel60.log
-          grep -E "E939.(divAll_row|rpow_prime_div|mod16_obstruction|census_r2_complete|census_r4_members|no_small_solution_r4|odd_pairs_no_r4_sum|witness1|witness2|board939)' (does not depend on any axioms|depends on axioms)" kernel60.log
+          grep -E "E939.(divAll_row|rpow_prime_div|mod16_obstruction|census_r2_complete|no_small_solution_r4|odd_pairs_no_r4_sum|witness1|witness2|board939)' (does not depend on any axioms|depends on axioms)" kernel60.log
           echo KERNEL60_GREEN=1
+      - name: "Kernel 60b - Erdos 939 R-POWERFUL R=4 CENSUS MODULE r1 (S059, W59-A): the isolated NO-OOM heavy module — the verbatim r=4 census row census_r4_members (25 four-powerful values to 10^4) + no_small_solution_r4 + the FULL 7-conjunct board939_r4 (mod-16 obstruction + census + zero-solution + both Nitaj witnesses + the 10^15 hunt bracket) — split from Erdos939.lean after the W58-E runner kill: every heavy 10^4-scan now runs in its own lean process with its own CI step, isolated from the queue + E939R4_CENSUS_GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem939-rpowerful/Erdos939R4.lean 2>&1 | tee kernel60b.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60b.log
+          grep -F "E939R4_CENSUS_GREEN" kernel60b.log
+          grep -E "E939R4.(census_r4_members|no_small_solution_r4|board939_r4)' (does not depend on any axioms|depends on axioms)" kernel60b.log
+          echo KERNEL60B_GREEN=1
       - name: "Kernel 61 - Erdos 411 ITERATED-TOTIENT DOUBLING LAWS r1 (S058, W58-B): the iterated-totient kernel on the structural φ-fold — gF (the g(n)=n+φ(n) iteration) + the closure properties + table_bounds/table_bound_of_lt (the certified table ≤ 59049) + erdos411_witness (the doubling-class witness law) + erdos411_partition (the 1002-cell partition decide) + erdos411_count + erdos411_census (the even-n census to 2000) + THE DOUBLING LAWS erdos411_ten (g_{k+2}(10) = 2·g_k(10)) + erdos411_94 (g_{k+2}(94) = 2·g_k(94)) + the arsenal bridge + erdos411_main + ERDOS411_KERNEL_GREEN"
         if: always()
         shell: bash
@@ -1286,3 +1333,5 @@ jobs:
           grep -F "E317_SIGNED_HARMONIC_GREEN" kernel63.log
           grep -E "E317.(hsum_two_sided|hsum_envelope|e317_witness_table|e317_min_value_5|e317_min_value_6|e317_min_value_7|e317_no_unit_over_L5|e317_frontier_c3|e317_arsenal_bridge|erdos317_board)' (does not depend on any axioms|depends on axioms)" kernel63.log
           echo KERNEL63_GREEN=1
+
+

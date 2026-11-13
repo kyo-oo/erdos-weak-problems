@@ -109,7 +109,8 @@ theorem mod16_obstruction (a b : Nat) (ha : rpow 4 a = true) (hb : rpow 4 b = tr
   have hd16 : (a + b) % 2 ^ 4 = 0 := rpow_prime_div 4 (a + b) 2 hsum hp2 heven
   exact hd16
 
-/-! ## Certified battery facts -/
+/-! ## Certified battery facts (the r=4 census row moved to Erdos939R4.lean —
+    the isolated NO-OOM module, Kernel 60b). -/
 
 /-- Certified: the census odd pair `81 + 243 = 324` is NOT 4-powerful
     (324 = 2^2·3^4; mod-16 obstruction: 324 % 16 = 4 ≠ 0). -/
@@ -137,12 +138,6 @@ theorem census_r2_complete : (List.range 101).all (fun n =>
 theorem census_r3_members :
     [1, 8, 16, 27, 32, 64, 81, 125, 128, 216, 243, 256, 343, 432, 512, 625, 648, 729, 864,
      1000].all (fun n => rpow 3 n) = true := by
-  decide
-
-/-- Certified census (r=4, N=10^4): the 25 listed 4-powerful values. -/
-theorem census_r4_members :
-    [1, 16, 32, 64, 81, 128, 243, 256, 512, 625, 729, 1024, 1296, 2048, 2187, 2401, 2592,
-     3125, 3888, 4096, 5184, 6561, 7776, 8192, 10000].all (fun n => rpow 4 n) = true := by
   decide
 
 /-- Certified zero-solution bound (r=3, raw form): below 8 there is NO pair of
@@ -229,20 +224,19 @@ theorem beyond_flt_32 : rpow 4 32 = true ∧ ∀ m : Nat, m ^ 4 ≠ 32 := by
           | zero => exact absurd hm (by decide)
           | succ t => omega
 
-/-- The board: multi-conjunct receipt of the whole certified r=4 frontier
-    (obstruction + census + zero-solution + witnesses + 10^15 hunt bracket). -/
+/-- The board (light): the 6-conjunct frontier receipt — obstruction + zero-solution
+    + witnesses + 10^15 hunt bracket. The census row (conjunct 2 of the W58-B board)
+    lives verbatim in Erdos939R4.lean as board939_r4 (the isolated NO-OOM module). -/
 theorem board939 :
     (∀ a b : Nat, rpow 4 a = true → rpow 4 b = true → a % 2 = 1 → b % 2 = 1 →
         rpow 4 (a + b) = true → (a + b) % 16 = 0)
-    ∧ [1, 16, 32, 64, 81, 128, 243, 256, 512, 625, 729, 1024, 1296, 2048, 2187, 2401, 2592,
-       3125, 3888, 4096, 5184, 6561, 7776, 8192, 10000].all (fun n => rpow 4 n) = true
     ∧ (List.range 16).all (fun a =>
         (List.range 16).all (fun b => !(rpow 4 a && rpow 4 b && rpow 4 (a + b)))) = true
     ∧ 19902511 + 756249048 = 776151559
     ∧ 1392672604221 + 2126285555779 = 3518958160000
     ∧ 999706081460641 < 1000000000000000
     ∧ 1000000000000000 < 1000417426149376 :=
-  ⟨mod16_obstruction, census_r4_members, no_small_solution_r4, by decide, by decide,
+  ⟨mod16_obstruction, no_small_solution_r4, by decide, by decide,
     by decide, by decide⟩
 
 end E939
@@ -253,7 +247,6 @@ end E939
 #print axioms E939.rpow_prime_div
 #print axioms E939.mod16_obstruction
 #print axioms E939.census_r2_complete
-#print axioms E939.census_r4_members
 #print axioms E939.no_small_solution_r4
 #print axioms E939.odd_pairs_no_r4_sum
 #print axioms E939.witness1
