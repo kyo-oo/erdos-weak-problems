@@ -42,6 +42,11 @@ on:
       - problem885-factor-difference/**
       - problem243-sylvester/**
       - problem124-begl96/**
+      - problem677-equal-lcm/**
+      - problem348-redundant-complete/**
+      - problem274-coset-tilings/**
+      - problem288-two-interval/**
+      - problem850-radical-triple/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -1106,3 +1111,68 @@ jobs:
           grep -F "E124_BEGL96_GREEN" kernel52.log
           grep -E "E124.(S347_closed_mul|S347_sorted_first|S347_nonmember|S347_table|unit_split_decided|split_law_instances|split_all|split_all_S347|e124_critical_juncture|e124_arsenal_bridge|e124_begl96_board)' (does not depend on any axioms|depends on axioms)" kernel52.log
           echo KERNEL52_GREEN=1
+      - name: "Kernel 53 - Erdos 677 EQUAL-LCM WINDOWS r1 (S057, W57-1): the window kernel — lcmd (a*b/gcd, core-safe) + M677 (structural window fold) + the division engine (ten self-contained laws) + the window table (11 decide rows incl. the corpus's own M(4,3)=M(13,2)=210 and M(3,4)=M(19,2)=420 cross-k coincidences, kernel-certified) + THE MONTONICITY/DIVISIBILITY LAWS (M677_mono: k->k+1; M677_dvd_window: every window element divides the lcm; M677_le_prod) + THE ROUND-1 KILL e677_no_collision_box (the full honest nested box: every n < 25, k in [1,5], m in [n+k, n+25) has M(n,k) != M(m,k) — five decide-certified k-chunks + the spec bridge, NO decide on the nested quantifier) + the 10-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem677-equal-lcm/Erdos677.lean 2>&1 | tee kernel53.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel53.log
+          grep -F "E677_EQUAL_LCM_GREEN" kernel53.log
+          grep -E "E677.(M677_mono|M677_dvd_window|M677_le_prod|known_cross_32|known_cross_42|e677_window_table|winCollFree_spec|no_coll_k1|no_coll_k2|no_coll_k3|no_coll_k4|no_coll_k5|e677_no_collision_box|e677_arsenal_bridge|e677_board)' (does not depend on any axioms|depends on axioms)" kernel53.log
+          echo KERNEL53_GREEN=1
+      - name: "Kernel 54 - Erdos 348 m-REDUNDANT COMPLETE SEQUENCES r1 (S057, W57-3): the completeness kernel — the reachability engine (reachable/sumSet, the iff bridge) + THE CUMULATIVE LAW greedy_complete (sorted growth-condition sequences reach every n <= sum — the classical completeness theorem, full induction) + THE GAP LAW gap_law (the redundancy engine: growth-condition violation makes 1+prefix-sum unreachable) + powers_complete/powers_decide_500 (the binary witness, chunked <= 500 NO-OOM) + THE REDUNDANCY WITNESS LAWS (never_one: [2,3] never reaches 1; redundant_seed; no_finite_prefix_seed — the m(A)=inf war's round-1 structure) + the board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem348-redundant-complete/Erdos348.lean 2>&1 | tee kernel54.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel54.log
+          grep -F "E348_REDUNDANT_GREEN" kernel54.log
+          grep -E "E348.(reachable_iff_sumSet|sumSet_le_sum|gap_law|greedy_complete|greedy_complete_prefix|powers_complete|powers_decide_500|never_one|redundant_seed|no_finite_prefix_seed|e348_arsenal_bridge|e348_board)' (does not depend on any axioms|depends on axioms)" kernel54.log
+          echo KERNEL54_GREEN=1
+      - name: "Kernel 55 - Erdos 274 COSET TILINGS r1 (S057, W57-4): the tiling kernel — THE TWO-COSET IMPOSSIBILITY two_coset_impossible (FULL GENERAL, group-free: a proper divisor pair a<b with a+b=n cannot exist — the dvd_sub cascade b | n-b = a with 0<a<b) + no_two_coset_tiling/no_two_coset_half + divisor_le_half + THE ARITHMETIC FEASIBILITY WITNESSES (feasible_6 [1,2,3], feasible_12 [1,2,3,6], feasible_12b [2,4,6]) + THE CYCLIC CENSUS cyclic_census_le_12 (C_n admits NO distinct-size coset tiling for every n <= 12 — the full assignment-search decide: only n=6 (36 assignments) and n=12 (612) have arithmetic candidates, ALL fail disjointness) + the Mirsky-Newman-Davenport-Rado kill route flagged for round 2 + the 7-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem274-coset-tilings/Erdos274.lean 2>&1 | tee kernel55.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel55.log
+          grep -F "E274_COSET_TILING_GREEN" kernel55.log
+          grep -E "E274.(tilingSizes_self|feasible_structure|two_coset_impossible|no_two_coset_tiling|no_two_coset_half|divisor_le_half|feasible_6|feasible_12|cyclic_6_negative|cyclic_12_negative|cyclic_census_le_12|e274_arsenal_bridge|e274_board)' (does not depend on any axioms|depends on axioms)" kernel55.log
+          echo KERNEL55_GREEN=1
+      - name: "Kernel 56 - Erdos 288 TWO-INTERVAL HARMONIC r1 (S057, W57-5): the window-sum kernel — window/wprod/hnum (the fraction-addition recursion, kernel-computable) + equalWindow (cross-multiplied) + THE STRUCTURE LAWS (positivity, strict growth window_mono_step + single_lt_pair) + THE CENSUS: THE HUNT FOUND ZERO disjoint equal-sum window pairs over [1..120] (7,260 windows grouped by exact Fraction value — no cross-group disjoint hit) + e288_no_disjoint_pair_le12 + e288_single_never_right_le24 (decide-certified non-existence boxes) + anchor_values (26/24, 47/60, 1650/3024, 638/840 python-verified) + the Kuerchak/#317 parity lane named for round 2 + the 12-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem288-two-interval/Erdos288.lean 2>&1 | tee kernel56.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel56.log
+          grep -F "E288_TWO_INTERVAL_GREEN" kernel56.log
+          grep -E "E288.(wprod_pos|hnum_pos|window_mono_step|single_lt_pair|empty_never_nonempty|anchor_values|e288_no_disjoint_pair_le12|e288_single_never_right_le24|e288_arsenal_bridge|e288_board)' (does not depend on any axioms|depends on axioms)" kernel56.log
+          echo KERNEL56_GREEN=1
+      - name: "Kernel 57 - Erdos 850 RADICAL TRIPLE COINCIDENCE r1 (S057, W57-2r): the Erdos-Woods length-3 kernel — radSet (distinct prime factors, trial division) + sameRad (the coincidence predicate, an equivalence) + rad_dvd (the soundness law) + THE CORPUS LENGTH-2 PAIRS KERNEL-CERTIFIED (ew2_pair_6_48: 6,48 share {2,3} and 7,49 share {7}; ew2_pair_75_1215: the Makowski pair 75,1215 share {3,5} and 76,1216 share {2,19}) + THE LENGTH-3 NON-WITNESS CENSUS e850_no_witness_50 (NO pair x,y < 50 with the full 3-window radical coincidence — the chunk walker + the master assembly, NO nested-quantifier decide) + the 6-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem850-radical-triple/Erdos850.lean 2>&1 | tee kernel57.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel57.log
+          grep -F "E850_RADICAL_TRIPLE_GREEN" kernel57.log
+          grep -E "E850.(sameRad_refl|sameRad_symm|sameRad_trans|rad_dvd|radSet_one|ew2_pair_6_48|ew2_pair_75_1215|e850_no_witness_50|e850_arsenal_bridge|e850_board)' (does not depend on any axioms|depends on axioms)" kernel57.log
+          echo KERNEL57_GREEN=1

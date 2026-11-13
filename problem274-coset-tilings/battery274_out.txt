@@ -1,0 +1,7 @@
+TWO-COSET: no distinct proper divisor pairs a<b with a+b=n, n<=200: CONFIRMED
+CYCLIC CENSUS n<=12 (distinct sizes, k>=2): ALL NEGATIVE
+  arithmetic candidates n=6: [[1, 2, 3]]
+  arithmetic candidates n=12: [[2, 4, 6], [1, 2, 3, 6]]
+CYCLIC CENSUS 13<=n<=36: ALL NEGATIVE
+C_6 candidate sizes = [[1,2,3]]; C_12 = [[1,2,3,6],[2,4,6]]  OK
+BATTERY274_GREEN

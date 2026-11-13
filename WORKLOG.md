@@ -3157,3 +3157,49 @@ the #885 k=5 wider window; the #961 exclusion descent to the finiteness
 law; #203 continues round-based.
 
 The engine never stops; it never lies. In English, always.
+
+## S057 — W57 WAVE (5 more kernels) + W56 ALL GREEN (run 43327017564) (2026-11-13)
+
+**CI ROUND 3 VERDICT (run 43327017564 = SUCCESS at d1cb268): ALL FIVE
+W56 KERNELS GREEN — scoreboard 23 CI-green assemblies:**
+- K48 (#961 EXCLUSION): Pell tower ordering + growth + 29-a [axiom-clean]
+- K49 (#306 SEMIPRIME EGYPTIAN): 20 representation theorems [green since r1]
+- K50 (#885 FACTOR-DIFFERENCE): square criterion FULL iff + k2/k3 [r3]
+- K51 (#243 SYLVESTER RIGIDITY): telescope + window + forced-terminal [r2]
+- K52 (#124 BEGL96 TAIL): UNIT-SPLIT EXISTS + full general split [r2]
+
+**THE W57 WAVE (5 problems, each its own agent):**
+1. **W57-1 — #677 EQUAL-LCM:** Erdos677.lean (440 lines): the
+   division engine + M677 window fold + the corpus's own cross-k
+   coincidences M(4,3)=M(13,2)=210, M(3,4)=M(19,2)=420 kernel-certified
+   + THE NON-COLLISION BOX (n<25, k∈[1,5], m∈[n+k,n+25): M(n,k)≠M(m,k)
+   — 5 decide chunks + spec bridge). One agent correction: M(1,3)=12.
+2. **W57-2r — #850 RADICAL TRIPLE (Erdős–Woods len-3):** first launch
+   DIED EMPTY (the agent-cancel law); relaunch DELIVERED: radSet/sameRad
+   + both corpus length-2 pairs kernel-certified (6,48: {2,3}/{7};
+   75,1215: {3,5}/{2,19}) + THE NON-WITNESS CENSUS x,y<50.
+3. **W57-3 — #348 m-REDUNDANT:** deadline-killed agent BUT THE SALVAGE
+   LANDED COMPLETE (590 lines, receipt intact): greedy_complete (the
+   classical cumulative law) + gap_law + powers_complete + the
+   redundancy witness laws (m(A)=∞ war's round-1 structure).
+4. **W57-4 — #274 COSET TILINGS:** Erdos274.lean: THE TWO-COSET
+   IMPOSSIBILITY (FULL GENERAL group-free: 0<a<b, b∣n, a+b=n → False
+   via dvd_sub cascade) + THE CYCLIC CENSUS C_n ≤ 12 ALL NEGATIVE
+   (full assignment-search decide: only n=6/12 have arithmetic
+   candidates, ALL fail disjointness) + the Mirsky–Newman–Davenport–
+   Rado kill route flagged (round-2 priority: kills C_n for ALL n).
+5. **W57-5 — #288 TWO-INTERVAL HARMONIC:** Erdos288.lean + THE HUNT
+   FOUND ZERO disjoint equal-sum window pairs over [1..120] (7,260
+   windows, no cross-group disjoint hit — the classification
+   conjectured EMPTY) + the structure laws (window_mono_step) +
+   decide-certified non-existence boxes ≤ 12/24.
+
+**#203 annealing (rounds 4-10 banked):** the temperature mechanism
+(T0=600) broke the greedy plateau: 28.522% → 28.474% across 10
+round-based calls; single-switch landscape exhausted, mechanism
+escalation (pair-moves / restarts) queued for the next session.
+
+**CI LADDER: kernels 53-57 wired** (kills.yml at 1168 lines) for the
+W57 pack push. r1 verdicts expected next.
+
+The engine never stops; it never lies. In English, always.
