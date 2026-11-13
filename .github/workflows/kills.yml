@@ -1273,3 +1273,16 @@ jobs:
           grep -F "E1212_COPRIME_COMPOSITE_GREEN" kernel65.log
           grep -E "E1212.(degBound|adj_parity_flip|comp925_no_exit|comp925_closed|phase203_sweep|p103_valid|p103_shape|directed_death|e1212_arsenal_bridge|erdos1212_board)' (does not depend on any axioms|depends on axioms)" kernel65.log
           echo KERNEL65_GREEN=1
+      - name: "Kernel 63 - Erdos 317 SIGNED HARMONIC SUMS r1 (S058, W58-C): the signed-harmonic kernel — hsum/hsumAux (the exact cross-multiplied n!-integer arithmetic: hsum δ n = Σ δ_k·(n!/k), NO Rat) + THE TWO-SIDED MAGNITUDE LAW hsum_two_sided + THE 2^n ENVELOPE hsum_envelope + THE WITNESS TABLES (n≤4 hit 1/L_n EXACTLY: 1, 1/2, 1/6, 1/12; n≥5 minima 2/L_5, 2/L_6, 4/L_7, 7/L_8) + THE MINIMAL-VALUE CLASSIFICATION (every 3^n sign code for n=5/6/7: |hsum| = 0 or ≥ 4/24/48 — decide sweeps 243/729/2187 codes chunked ≤ 500) + THE GRANULARITY LAW (n=5 values are multiples of 2) + THE MOD-5 RESIDUE MECHANISM (Theorem A at n=5) + e317_no_unit_over_L5 (±1/L_5 infeasibility) + THE FRONTIER BAND e317_frontier_c3 (for every n ≤ 8 a witness with 0 < |Σ| < 3/2^n — the c=3 PART-1 band) + the arsenal bridge (ternary-digit world) + the board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem317-signed-harmonic/Erdos317.lean 2>&1 | tee kernel63.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel63.log
+          grep -F "E317_SIGNED_HARMONIC_GREEN" kernel63.log
+          grep -E "E317.(hsum_two_sided|hsum_envelope|e317_witness_table|e317_min_value_5|e317_min_value_6|e317_min_value_7|e317_no_unit_over_L5|e317_frontier_c3|e317_arsenal_bridge|erdos317_board)' (does not depend on any axioms|depends on axioms)" kernel63.log
+          echo KERNEL63_GREEN=1

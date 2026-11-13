@@ -3428,3 +3428,17 @@ landed, the rest executed by the commander directly):**
 CI verdicts pending on all 8 red/green transitions.
 
 The engine never stops; it never lies. In English, always.
+
+## S058 — W58-C ADDENDUM: K63 #317 WIRED (2026-11-13)
+
+**K63 #317 r1 (NEW):** Erdos317.lean (537 lines, complete — the dead
+agent's full delivery, commander-audited: zero literal sorry) — the exact
+n!-cross-multiplied signed-harmonic machinery + the two-sided magnitude
+law + the 2ⁿ envelope + the n=1..8 witness tables (n ≤ 4 hit 1/Lₙ exactly;
+n ≥ 5 minima 2/L₅, 2/L₆, 4/L₇, 7/L₈) + THE MINIMAL-VALUE CLASSIFICATION for
+n=5/6/7 (decide sweeps 243/729/2187 codes, chunked ≤ 500) + the granularity
+law + the Theorem-A mod-5 residue mechanism + ±1/L₅ infeasibility + the
+c=3 frontier band (PART-1 evidence for every n ≤ 8) + the arsenal bridge
++ the board. Kernel-63 step wired.
+
+The engine never stops; it never lies. In English, always.
