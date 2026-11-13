@@ -3472,3 +3472,24 @@ The engine never stops; it never lies. In English, always.
      theorem itself untouched.
   Receipts strengthened: `#print axioms` now prints all 11 gate names
   (leafOK_bound, pool12_kraft, pool400_kraft added to §9).
+
+## S059 — THE ZIP BAG SEAL (campaign full-archive export)
+
+- **BOSS order:** every file, folder, sub-agent output, both skills
+  (MATHS + prove-that-shit), the GitHub token, every math achievement —
+  into one zip bag.
+- **Sealed:** 27MB `erdos-campaign-zipbag.zip` (SHA256
+  `11cce5bdd61ad1a5241b106d8b4078d351e0df159888b0a55a559f82ec99b73b`),
+  integrity `unzip -t` all-OK.
+- **Contents:** full repo WITH .git (217 commits, HEAD fa4a160,
+  remote==local verified pre-seal), Arsenal, all 47 problem folders
+  (149 Lean files / 54,820 Lean lines / 169 Python engines / 14
+  COMPLETE_PROOF writeups / 19 derivations), kills.yml CI pipeline,
+  WORKLOG full diary, MATHS_SKILL.md + PROVE_THAT_SHIT_SKILL.md,
+  secrets/ghtoken.txt, dashboard/page.tsx, MANIFEST.md restore guide.
+- **Deployment:** copy served at `/erdos-campaign-zipbag.zip` on the
+  Command Center (public/), manifest mirrored in-repo as
+  `ARCHIVE_MANIFEST.md`.
+- Pre-seal progress pack committed + pushed (fa4a160 → remote campaign).
+
+The bag is sealed. The campaign continues.
