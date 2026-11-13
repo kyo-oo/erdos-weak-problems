@@ -13,26 +13,65 @@ These local replacements keep the kernel import-clean. -/
 
 private theorem dvd_sub_local {k m n : Nat} (h1 : k ∣ m) (h2 : k ∣ n) :
     k ∣ m - n := by
-  rcases h1 with ⟨a, ha⟩
-  rcases h2 with ⟨b, hb⟩
-  by_cases hab : b ≤ a
-  · rw [ha, hb]
-    exact Dvd.intro (a - b) (by omega)
-  · rw [ha, hb]
-    exact Dvd.intro 0 (by omega)
+  rcases h1 with ⟨a, rfl⟩
+  rcases h2 with ⟨b, rfl⟩
+  rcases Nat.lt_or_ge a b with hlt | hge
+  · have hmono : k * a ≤ k * b := Nat.mul_le_mul_left k (Nat.le_of_lt hlt)
+    refine Dvd.intro 0 ?_
+    omega
+  · have hmono : k * b ≤ k * a := Nat.mul_le_mul_left k hge
+    have hdist : k * a = k * (a - b) + k * b := by
+      calc k * a = k * (a - b + b) := by rw [Nat.sub_add_cancel hge]
+        _ = k * (a - b) + k * b := Nat.mul_add k (a - b) b
+    refine Dvd.intro (a - b) ?_
+    omega
 
 private theorem dvd_mul_of_dvd_right_local {k m n : Nat} (h : k ∣ m) : k ∣ n * m := by
   rcases h with ⟨a, ha⟩
   refine Dvd.intro (n * a) ?_
-  calc n * m = n * (k * a) := by rw [ha]
-    _ = (n * k) * a := (Nat.mul_assoc n k a).symm
-    _ = (k * n) * a := by rw [Nat.mul_comm n k]
-    _ = k * (n * a) := Nat.mul_assoc k n a
+  rw [ha]
+  ring
 
 private theorem pos_pow_local {a b : Nat} (h : 0 < a) : 0 < a ^ b := by
   induction b with
-  | zero => decide
-  | succ n ih => rw [Nat.pow_succ]; exact Nat.mul_pos h ih
+  | zero => rw [Nat.pow_zero]; decide
+  | succ n ih => rw [Nat.pow_succ]; exact Nat.mul_pos ih h
+
+/-- The countP congruence (self-built: the Mathlib `countP_congr` signature
+mismatched the r3 call sites — the W60-T1 local, Bool-eq form). -/
+private theorem countP_congr_local {l : List Nat} {p q : Nat → Bool}
+    (h : ∀ x ∈ l, p x = q x) : l.countP p = l.countP q := by
+  induction l with
+  | nil => rfl
+  | cons a t ih =>
+    rw [List.countP_cons, List.countP_cons, h a (by simp), ih]
+
+/-- The beta-friendly map-count identity (countP_map's ∘-form mismatched the
+r3 congr patterns; the local gives the applied form directly). -/
+private theorem countP_map_local {l : List Nat} (f : Nat → Nat) (p : Nat → Bool) :
+    (l.map f).countP p = l.countP (fun x => p (f x)) := by
+  induction l with
+  | nil => rfl
+  | cons a t ih =>
+    rw [List.map_cons, List.countP_cons, List.countP_cons, ih]
+
+/-- The canonical power splits (W60-T1: the `.succ` display killed the r1
+`rw [show a - 1 + 1 = a]` chains — congr 1 + omega aligns exponents). -/
+private theorem two_pow_split (a : Nat) (ha : 1 ≤ a) : 2^a = 2^(a-1) * 2 := by
+  have hexp : 2^a = 2^((a-1)+1) := by
+    congr 1
+    omega
+  rw [hexp, Nat.pow_add, Nat.pow_one]
+
+private theorem two_pow_split3 (a : Nat) (ha : 1 ≤ a) : 2^(a+1) = 2^(a-1) * 4 := by
+  have hexp : 2^(a+1) = 2^((a-1)+2) := by
+    congr 1
+    omega
+  rw [hexp, Nat.pow_add, show 2^2 = 4 from by decide]
+
+private theorem two_pow_succ_add (a : Nat) : 2^(a+1) = 2 * 2^a := by
+  rw [Nat.pow_add, Nat.pow_one]
+  ring
 
 /-! # Erdős #411 — THE ITERATED-TOTIENT DOUBLING LAWS (S042 volley, Kernel 36)
 
@@ -98,6 +137,22 @@ def SIXl : List Nat := [1, 3, 5, 7, 35, 47]
 
 def inSIX (m : Nat) : Bool := SIXl.contains m
 
+/-- The six-case membership enumeration (W60-T1: the r3 `rcases hm with h | h...`
+died — `1 is not a free variable`; the mem-simp route is the green spelling). -/
+theorem SIXl_mem (m : Nat) (hm : m ∈ SIXl) :
+    m = 1 ∨ m = 3 ∨ m = 5 ∨ m = 7 ∨ m = 35 ∨ m = 47 := by
+  have h : m ∈ [1, 3, 5, 7, 35, 47] := hm
+  simp only [List.mem_cons, List.mem_singleton] at h
+  exact h
+
+theorem SIXl_pos (m : Nat) (hm : m ∈ SIXl) : 1 ≤ m := by
+  rcases SIXl_mem m hm with h | h | h | h | h | h <;> rw [h] <;> decide
+
+theorem inFAM_pos (x : Nat) (hx : inFAM x) : 0 < x := by
+  obtain ⟨a, m, ha, hm, hm1, hxe⟩ := hx
+  rw [hxe]
+  exact Nat.mul_pos (pos_pow_local (by omega)) (SIXl_pos m hm)
+
 /-! ## §1 Small helpers. -/
 
 /-- Bool-iff bridge for decide predicates (r2: instance binders added —
@@ -149,52 +204,41 @@ theorem countP_shift (P : Nat → Bool) : ∀ M,
     simp only [List.range_succ, List.countP_append, List.countP_singleton] at ih ⊢
     omega
 
-/-- The index-reversal identity: counting P over reversed indices = counting P.
-W59-F-1: the r1 rw-chain fired range_succ_eq_map on BOTH sides then hunted
-`List.range (succ _)` that no longer existed. Rebuilt with per-side lemmas:
-LHS via the map route (connects to the IH predicate), RHS via the append
-route; index identities by omega; countP-congruence via countP_congr. -/
 theorem countP_rev_idx (P : Nat → Bool) : ∀ M,
     (List.range M).countP (fun j => P (M - 1 - j)) = (List.range M).countP P := by
   intro M
   induction M with
   | zero => rfl
   | succ M ih =>
-    have h1 : (List.range (M + 1)).countP (fun j => P (M + 1 - 1 - j))
-        = (if P (M + 1 - 1 - 0) then 1 else 0)
-          + (List.range M).countP (fun j => P (M + 1 - 1 - (j + 1))) := by
-      simp only [List.range_succ_eq_map, List.countP_cons, List.countP_map,
-          Function.comp, Nat.succ_eq_add_one]
-      omega
-    have h2 : (List.range (M + 1)).countP P
-        = (List.range M).countP P + (if P M then 1 else 0) := by
-      simp only [List.range_succ, List.countP_append, List.countP_singleton]
-      omega
-    have hz : M + 1 - 1 - 0 = M := by omega
-    have hcount : (List.range M).countP (fun j => P (M + 1 - 1 - (j + 1)))
+    rw [List.range_succ, List.countP_append, List.countP_singleton]
+    have hz : M + 1 - 1 - M = M := by omega
+    rw [hz]
+    have hc : (List.range M).countP (fun j => P (M + 1 - 1 - j))
         = (List.range M).countP (fun j => P (M - 1 - j)) :=
-      List.countP_congr (p := fun j => P (M + 1 - 1 - (j + 1)))
-        (q := fun j => P (M - 1 - j))
-        (by intro x _
-            exact congrArg P (by omega))
-    rw [h1, h2, hz, hcount, ih]
+      countP_congr_local (fun x hx => congrArg P (by
+        rw [List.mem_range] at hx; omega))
+    rw [hc]
     omega
 
-/-- The per-element parity identity (W59-F-1 helper): the Bool-and decides
-case-split to literals; the ites with literal conditions defeq-reduce. -/
+/-- The per-element parity identity: the three decides case-split to literals
+(the by_cases route — the r3 `cases <;> first | ...` block had a parser defect
+at the parenthesized `by` alternative). -/
 private theorem parity_elem (Q : Nat → Prop) [DecidablePred Q] (k : Nat) :
     (if decide (Q k ∧ k % 2 = 1) then 1 else 0)
       + (if decide (Q k ∧ k % 2 = 0) then 1 else 0)
       = (if decide (Q k) then 1 else 0) := by
-  rw [decide_and]
-  cases hq : decide (Q k) <;>
-    cases h1 : decide (k % 2 = 1) <;>
-    cases h0 : decide (k % 2 = 0) <;>
-    (rw [hq, h1, h0]
-      <;> first
-        | rfl
-        | (exact absurd (of_decide_eq_true h1) (by have := of_decide_eq_true h0; omega))
-        | (by have := of_decide_eq_false h1; have := of_decide_eq_false h0; omega))
+  by_cases hq : Q k
+  · by_cases h1 : k % 2 = 1
+    · rw [decide_eq_true ⟨hq, h1⟩,
+          decide_eq_false (fun hc => absurd hc.2 (by omega)),
+          decide_eq_true hq]
+    · have h0 : k % 2 = 0 := by omega
+      rw [decide_eq_false (fun hc => absurd hc.2 h1),
+          decide_eq_true ⟨hq, h0⟩,
+          decide_eq_true hq]
+  · rw [decide_eq_false (fun hc => hq hc.1),
+        decide_eq_false (fun hc => hq hc.1),
+        decide_eq_false hq]
 
 /-- The parity-split count: (Q ∧ odd) + (Q ∧ even) = Q.
 W59-F-1: the r1 `simp only [decide_eq_true, decide_eq_false] at *` never fired
@@ -263,7 +307,7 @@ theorem gcd_two_mul_of_even {c y : Nat} (hy : 2 ∣ y) :
       have hpos : 0 < Nat.gcd c (2 * (y' + 1)) :=
         Nat.gcd_pos_of_pos_right c (by omega)
       rcases Nat.eq_or_lt_of_le hle with h1 | h2
-      · have htwo : 2 ∣ Nat.gcd c (2 * (y' + 1)) := by rw [h1]; exact dvd_refl 2
+      · have htwo : 2 ∣ Nat.gcd c (2 * (y' + 1)) := by rw [h1]
         have hcc : 2 ∣ c := Nat.dvd_trans htwo (Nat.gcd_dvd_left c (2 * (y' + 1)))
         exact absurd hcc hcodd
       · omega
@@ -312,7 +356,7 @@ theorem gcd_two_mul_of_odd {c y : Nat} (hy : y % 2 = 1) :
       have hc0 : c % 2 = 0 := Nat.mod_eq_zero_of_dvd h2c
       omega
     rcases Nat.eq_or_lt_of_le hle with h1 | h2
-    · have htwo : 2 ∣ Nat.gcd c (2 * y) := by rw [h1]; exact dvd_refl 2
+    · have htwo : 2 ∣ Nat.gcd c (2 * y) := by rw [h1]
       exact absurd htwo hd2
     · omega
 
@@ -325,22 +369,22 @@ theorem phiB_even_dbl : ∀ {y : Nat}, 2 ∣ y → 0 < y → phiB (2 * y) = 2 * 
   have hsplit : List.range (2 * y) = List.range y ++ (List.range y).map (fun k => y + k) := by
     rw [show 2 * y = y + y by omega]
     exact List.range_add
-  rw [hsplit, List.countP_append, List.countP_map]
-  rw [List.countP_congr (p := fun k => decide (Nat.gcd (k + 1) (2 * y) = 1))
+  rw [hsplit, List.countP_append, countP_map_local]
+  rw [countP_congr_local (l := List.range y)
+        (p := fun k => decide (Nat.gcd (k + 1) (2 * y) = 1))
         (q := fun k => decide (Nat.gcd (k + 1) y = 1))
-        (by intro x _
-            exact boolIff (gcd_two_mul_of_even hy))]
-  rw [List.countP_congr (p := fun k => decide (Nat.gcd (y + k + 1) (2 * y) = 1))
+        (fun x _ => decCongr (gcd_two_mul_of_even hy))]
+  rw [countP_congr_local (l := List.range y)
+        (p := fun k => decide (Nat.gcd (y + k + 1) (2 * y) = 1))
         (q := fun k => decide (Nat.gcd (k + 1) y = 1))
-        (by intro x _
-            have h1 : Nat.gcd (y + x + 1) (2 * y) = 1 ↔ Nat.gcd (y + x + 1) y = 1 :=
-              gcd_two_mul_of_even hy
-            have h2 : Nat.gcd (y + x + 1) y = Nat.gcd (x + 1) y := by
-              have hEq : (y + x + 1) = (x + 1) + y := by omega
-              rw [hEq, Nat.gcd_add_self_left]
-            rw [h2] at h1
-            exact boolIff h1)]
-  unfold phiB at *
+        (fun x _ => decCongr (by
+          have h1 : Nat.gcd (y + x + 1) (2 * y) = 1 ↔ Nat.gcd (y + x + 1) y = 1 :=
+            gcd_two_mul_of_even hy
+          have h2 : Nat.gcd (y + x + 1) y = Nat.gcd (x + 1) y := by
+            have hEq : (y + x + 1) = (x + 1) + y := by omega
+            rw [hEq, Nat.gcd_add_self_left]
+          rw [h2] at h1
+          exact h1))]
   omega
 
 /-- φ(2y) = φ(y) for y odd. -/
@@ -350,26 +394,30 @@ theorem phiB_odd_dbl : ∀ {y : Nat}, y % 2 = 1 → phiB (2 * y) = phiB y := by
   have hsplit : List.range (2 * y) = List.range y ++ (List.range y).map (fun k => y + k) := by
     rw [show 2 * y = y + y by omega]
     exact List.range_add
-  rw [hsplit, List.countP_append, List.countP_map]
-  rw [List.countP_congr (p := fun k => decide (Nat.gcd (k + 1) (2 * y) = 1))
+  rw [hsplit, List.countP_append, countP_map_local]
+  rw [countP_congr_local (l := List.range y)
+        (p := fun k => decide (Nat.gcd (k + 1) (2 * y) = 1))
         (q := fun k => decide (Nat.gcd (k + 1) y = 1 ∧ (k + 1) % 2 = 1))
-        (by intro x _
-            have h1 : Nat.gcd (x + 1) (2 * y) = 1 ↔ ((x + 1) % 2 = 1 ∧ Nat.gcd (x + 1) y = 1) :=
-              gcd_two_mul_of_odd hy
-            exact boolIff (by rw [h1]; exact And.comm))]
-  rw [List.countP_congr (p := fun k => decide (Nat.gcd (y + k + 1) (2 * y) = 1))
+        (fun x _ => decCongr (by
+          have h1 : Nat.gcd (x + 1) (2 * y) = 1 ↔ ((x + 1) % 2 = 1 ∧ Nat.gcd (x + 1) y = 1) :=
+            gcd_two_mul_of_odd hy
+          rw [h1]
+          exact And.comm))]
+  rw [countP_congr_local (l := List.range y)
+        (p := fun k => decide (Nat.gcd (y + k + 1) (2 * y) = 1))
         (q := fun k => decide (Nat.gcd (k + 1) y = 1 ∧ (k + 1) % 2 = 0))
-        (by intro x _
-            have h1 : Nat.gcd (y + x + 1) (2 * y) = 1 ↔
-                ((y + x + 1) % 2 = 1 ∧ Nat.gcd (y + x + 1) y = 1) :=
-              gcd_two_mul_of_odd hy
-            have hpar : ((y + x + 1) % 2 = 1) ↔ ((x + 1) % 2 = 0) := by
-              constructor <;> intro h <;> omega
-            have h2 : Nat.gcd (y + x + 1) y = Nat.gcd (x + 1) y := by
-              have hEq : (y + x + 1) = (x + 1) + y := by omega
-              rw [hEq, Nat.gcd_add_self_left]
-            rw [h2, hpar] at h1
-            exact boolIff h1)]
+        (fun x _ => decCongr (by
+          have h1 : Nat.gcd (y + x + 1) (2 * y) = 1 ↔
+              ((y + x + 1) % 2 = 1 ∧ Nat.gcd (y + x + 1) y = 1) :=
+            gcd_two_mul_of_odd hy
+          have hpar : ((y + x + 1) % 2 = 1) ↔ ((x + 1) % 2 = 0) := by
+            constructor <;> intro h <;> omega
+          have h2 : Nat.gcd (y + x + 1) y = Nat.gcd (x + 1) y := by
+            have hEq : (y + x + 1) = (x + 1) + y := by omega
+            rw [hEq, Nat.gcd_add_self_left]
+          rw [h2, hpar] at h1
+          rw [h1]
+          exact And.comm))]
   rw [countP_parity_split]
   rfl
 
@@ -382,21 +430,23 @@ theorem phiB_two_pow_mul : ∀ (a m : Nat), 1 ≤ a → m % 2 = 1 →
   | succ a ih =>
     cases a with
     | zero =>
-      have hEq : 2^(0+1) * m = 2 * m := by rw [Nat.pow_one]
       show phiB (2*m) = 2^0 * phiB m
       rw [phiB_odd_dbl hm, Nat.pow_zero, Nat.one_mul]
     | succ a' =>
       have hEq : 2^(a'+2) * m = 2 * (2^(a'+1) * m) := by
         have hexp : 2^(a'+2) = 2 * 2^(a'+1) := by
-          rw [show a'+2 = (a'+1)+1 from by omega, Nat.pow_succ, Nat.mul_comm]
+          rw [show a'+2 = (a'+1)+1 from by omega, Nat.pow_add, Nat.pow_one]
+          ring
         rw [hexp, ← Nat.mul_assoc]
       have hEven : 2 ∣ 2^(a'+1) * m := by
-        rw [hEq]; exact dvd_mul_left 2 (2^(a'+1) * m)
-      have hPos : 0 < 2^(a'+1) * m := by
-        have : 0 < 2^(a'+1) := pos_pow_local (by decide)
-        omega
+        refine ⟨2^a' * m, ?_⟩
+        rw [Nat.pow_add, Nat.pow_one]
+        ring
+      have hPos : 0 < 2^(a'+1) * m := Nat.mul_pos (pos_pow_local (by decide)) (by omega)
       rw [hEq, phiB_even_dbl hEven hPos, ih (by omega) hm]
       rw [show a'+2-1 = a'+1 from by omega, show a'+1-1 = a' from by omega]
+      rw [Nat.pow_add, Nat.pow_one]
+      ring
 
 /-! ## §4 Basic φ facts. -/
 
@@ -480,9 +530,8 @@ theorem gstep_two_pow_mul (a m : Nat) (ha : 1 ≤ a) (hm : m % 2 = 1) :
     gstep (2^a * m) = 2^(a-1) * (2 * m + phiB m) := by
   unfold gstep
   rw [phiB_two_pow_mul a m ha hm]
-  have hpow : 2^a = 2^(a-1) * 2 := by
-    rw [← Nat.pow_succ, show a - 1 + 1 = a from by omega]
-  rw [hpow, Nat.mul_assoc, ← Nat.mul_add]
+  rw [two_pow_split a ha]
+  ring
 
 /-- THE SIX CHAIN LAWS (symbolic in a ≥ 1). -/
 theorem gstep_two_pow (a : Nat) (ha : 1 ≤ a) : gstep (2^a) = 3 * 2^(a-1) := by
@@ -491,51 +540,36 @@ theorem gstep_two_pow (a : Nat) (ha : 1 ≤ a) : gstep (2^a) = 3 * 2^(a-1) := by
         phiB_two_pow_mul a 1 ha (by decide), show phiB 1 = 1 from by decide, Nat.mul_one]
   unfold gstep
   rw [hphi]
-  have hpow : 2^a = 2^(a-1) * 2 := by
-    rw [← Nat.pow_succ, show a - 1 + 1 = a from by omega]
-  rw [hpow]
+  rw [two_pow_split a ha]
   omega
 
 theorem gstep_3 (a : Nat) (ha : 1 ≤ a) : gstep (2^a * 3) = 2^(a+2) := by
-  rw [gstep_two_pow_mul a 3 ha (by decide), phiB_3,
-      show 2 * 3 + 2 = 8 from by omega, show 8 = 2^3 from by decide,
-      ← Nat.pow_add, show a - 1 + 3 = a + 2 from by omega]
+  rw [gstep_two_pow_mul a 3 ha (by decide), phiB_3]
+  have hexp : 2^(a+2) = 2^(a-1) * 8 := by
+    have h1 : a + 2 = (a-1) + 3 := by omega
+    rw [h1, Nat.pow_add, show 2^3 = 8 from by decide]
+  rw [hexp]
+  ring
 
 theorem gstep_5 (a : Nat) (ha : 1 ≤ a) : gstep (2^a * 5) = 2^a * 7 := by
-  rw [gstep_two_pow_mul a 5 ha (by decide), phiB_5,
-      show 2 * 5 + 4 = 14 from by omega]
-  have hpow : 2^a = 2^(a-1) * 2 := by
-    rw [← Nat.pow_succ, show a - 1 + 1 = a from by omega]
-  rw [hpow]
-  omega
+  rw [gstep_two_pow_mul a 5 ha (by decide), phiB_5]
+  rw [two_pow_split a ha]
+  ring
 
 theorem gstep_7 (a : Nat) (ha : 1 ≤ a) : gstep (2^a * 7) = 5 * 2^(a+1) := by
-  rw [gstep_two_pow_mul a 7 ha (by decide), phiB_7,
-      show 2 * 7 + 6 = 20 from by omega]
-  have hpow : 2^a = 2^(a-1) * 2 := by
-    rw [← Nat.pow_succ, show a - 1 + 1 = a from by omega]
-  have h4 : 2^(a+1) = 2^(a-1) * 4 := by
-    rw [show a + 1 = (a - 1) + 2 from by omega, Nat.pow_add, show 2^2 = 4 from by decide]
-  rw [hpow, h4]
-  omega
+  rw [gstep_two_pow_mul a 7 ha (by decide), phiB_7]
+  rw [two_pow_split3 a ha]
+  ring
 
 theorem gstep_35 (a : Nat) (ha : 1 ≤ a) : gstep (2^a * 35) = 2^a * 47 := by
-  rw [gstep_two_pow_mul a 35 ha (by decide), phiB_35,
-      show 2 * 35 + 24 = 94 from by omega]
-  have hpow : 2^a = 2^(a-1) * 2 := by
-    rw [← Nat.pow_succ, show a - 1 + 1 = a from by omega]
-  rw [hpow]
-  omega
+  rw [gstep_two_pow_mul a 35 ha (by decide), phiB_35]
+  rw [two_pow_split a ha]
+  ring
 
 theorem gstep_47 (a : Nat) (ha : 1 ≤ a) : gstep (2^a * 47) = 35 * 2^(a+1) := by
-  rw [gstep_two_pow_mul a 47 ha (by decide), phiB_47,
-      show 2 * 47 + 46 = 140 from by omega]
-  have hpow : 2^a = 2^(a-1) * 2 := by
-    rw [← Nat.pow_succ, show a - 1 + 1 = a from by omega]
-  have h4 : 2^(a+1) = 2^(a-1) * 4 := by
-    rw [show a + 1 = (a - 1) + 2 from by omega, Nat.pow_add, show 2^2 = 4 from by decide]
-  rw [hpow, h4]
-  omega
+  rw [gstep_two_pow_mul a 47 ha (by decide), phiB_47]
+  rw [two_pow_split3 a ha]
+  ring
 
 /-! ## §6 The iteration: composition and the doubling theorem. -/
 
@@ -555,77 +589,73 @@ def inFAM (x : Nat) : Prop :=
 theorem inFAM_gstep (x : Nat) (hx : inFAM x) : inFAM (gstep x) ∧ gstep (gstep x) = 2 * x := by
   obtain ⟨a, m, ha, hm, hm1, hxe⟩ := hx
   rw [hxe]
-  -- the six cases
-  have hmem : m = 1 ∨ m = 3 ∨ m = 5 ∨ m = 7 ∨ m = 35 ∨ m = 47 := by
-    simp only [SIXl] at hm
-    rcases hm with h | h | h | h | h | h <;> simp [h]
-  rcases hmem with h1 | h3 | h5 | h7 | h35 | h47
+  rcases SIXl_mem m hm with h1 | h3 | h5 | h7 | h35 | h47
   · -- m = 1 (a ≥ 2): 2^a → 3·2^(a-1) → 2^(a+1) = 2·2^a
     subst h1
     have ha2 : 2 ≤ a := hm1 rfl
-    have s1 : gstep (2^a * 1) = 3 * 2^(a-1) := by
-      rw [Nat.mul_one]; exact gstep_two_pow a ha
-    have s2 : gstep (3 * 2^(a-1)) = 2 * (2^a * 1) := by
-      have ha1 : 1 ≤ a - 1 := by omega
-      have : 3 * 2^(a-1) = 2^(a-1) * 3 := Nat.mul_comm 3 (2^(a-1))
-      rw [this, gstep_3 (a-1) ha1, show 2^(a-1+2) = 2^(a+1) from by rw [← Nat.pow_add]; omega,
-          Nat.mul_one]
-    rw [Nat.mul_one] at s2 ⊢
-    rw [s1, s2]
-    refine ⟨⟨a-1, 3, by omega, by simp [SIXl], by intro h; omega, by rw [Nat.mul_comm]; rfl⟩, ?_⟩
-    exact s2.symm
+    have s1' : gstep (2^a * 1) = 2^(a-1) * 3 := by
+      rw [Nat.mul_one, gstep_two_pow a ha, Nat.mul_comm 3 (2^(a-1))]
+    have s2 : gstep (2^(a-1) * 3) = 2 * (2^a * 1) := by
+      have h3step := gstep_3 (a-1) (by omega)
+      rw [h3step, show 2^(a-1+2) = 2^(a+1) from by congr 1; omega,
+          two_pow_succ_add, Nat.mul_one]
+    exact ⟨⟨a-1, 3, by omega, by simp [SIXl], by intro h; omega, s1'⟩, by rw [s1', s2]⟩
   · -- m = 3: 3·2^a → 2^(a+2) → 3·2^(a+1) = 2·(3·2^a)
     subst h3
     have s1 : gstep (2^a * 3) = 2^(a+2) := gstep_3 a ha
     have s2 : gstep (2^(a+2)) = 2 * (2^a * 3) := by
-      have ha3 : 1 ≤ a + 2 := by omega
-      have hexp : 2^(a+2) = 2^((a+2)) * 1 := (Nat.mul_one _).symm
-      have := gstep_two_pow (a+2) ha3
-      rw [hexp] at this
-      rw [this, show 3 * 2^((a+2)-1) = 2 * (2^a * 3) from by
-        rw [show (a+2)-1 = a+1 from by omega, ← Nat.pow_succ, show a + 1 = (a-1)+2 from by omega,
-            ← Nat.pow_add]
-        omega]
-    rw [s1, s2]
-    refine ⟨⟨a+1, 1, by omega, by simp [SIXl], by omega, by rw [show 2^(a+2) = 2^(a+1) * 1 from by rw [Nat.mul_one]]⟩, s2.symm⟩
-  · -- m = 5: 5·2^a → 7·2^a → 5·2^(a+1)
+      have htp := gstep_two_pow (a+2) (by omega)
+      rw [htp, two_pow_succ_add]
+      ring
+    exact ⟨⟨a+2, 1, by omega, by simp [SIXl], by omega,
+        by rw [Nat.mul_one]; exact s1⟩, by rw [s1, s2]⟩
+  · -- m = 5: 5·2^a → 7·2^a → 5·2^(a+1) = 2·(5·2^a)
     subst h5
     have s1 : gstep (2^a * 5) = 2^a * 7 := gstep_5 a ha
     have s2 : gstep (2^a * 7) = 2 * (2^a * 5) := by
-      have := gstep_7 a ha
-      rw [this, ← Nat.pow_succ, ← Nat.mul_assoc]
-      omega
-    rw [s1, s2]
-    exact ⟨⟨a, 7, ha, by simp [SIXl], by intro h; omega, by rw [s1]⟩, s2.symm⟩
-  · -- m = 7: 7·2^a → 5·2^(a+1) → 7·2^(a+1)
+      have h7step := gstep_7 a ha
+      rw [h7step, two_pow_succ_add]
+      ring
+    exact ⟨⟨a, 7, ha, by simp [SIXl], by intro h; omega, s1⟩, by rw [s1, s2]⟩
+  · -- m = 7: 7·2^a → 5·2^(a+1) → 7·2^(a+1) = 2·(7·2^a)
     subst h7
-    have s1 : gstep (2^a * 7) = 5 * 2^(a+1) := gstep_7 a ha
-    have s2 : gstep (5 * 2^(a+1)) = 2 * (2^a * 7) := by
-      have ha1 : 1 ≤ a + 1 := by omega
-      have : 5 * 2^(a+1) = 2^(a+1) * 5 := Nat.mul_comm 5 (2^(a+1))
-      rw [this, gstep_5 (a+1) ha1, ← Nat.pow_succ, ← Nat.mul_assoc]
-      omega
-    rw [s1, s2]
-    exact ⟨⟨a+1, 5, by omega, by simp [SIXl], by intro h; omega, by rw [s1]⟩, s2.symm⟩
-  · -- m = 35: 35·2^a → 47·2^a → 35·2^(a+1)
+    have s1' : gstep (2^a * 7) = 2^(a+1) * 5 := by
+      rw [gstep_7 a ha, Nat.mul_comm 5 (2^(a+1))]
+    have s2 : gstep (2^(a+1) * 5) = 2 * (2^a * 7) := by
+      have h5step := gstep_5 (a+1) (by omega)
+      rw [h5step, two_pow_succ_add]
+      ring
+    exact ⟨⟨a+1, 5, by omega, by simp [SIXl], by intro h; omega, s1'⟩, by rw [s1', s2]⟩
+  · -- m = 35: 35·2^a → 47·2^a → 35·2^(a+1) = 2·(35·2^a)
     subst h35
     have s1 : gstep (2^a * 35) = 2^a * 47 := gstep_35 a ha
     have s2 : gstep (2^a * 47) = 2 * (2^a * 35) := by
-      have := gstep_47 a ha
-      rw [this, ← Nat.pow_succ, ← Nat.mul_assoc]
-      omega
-    rw [s1, s2]
-    exact ⟨⟨a, 47, ha, by simp [SIXl], by intro h; omega, by rw [s1]⟩, s2.symm⟩
-  · -- m = 47: 47·2^a → 35·2^(a+1) → 47·2^(a+1)
+      have h47step := gstep_47 a ha
+      rw [h47step, two_pow_succ_add]
+      ring
+    exact ⟨⟨a, 47, ha, by simp [SIXl], by intro h; omega, s1⟩, by rw [s1, s2]⟩
+  · -- m = 47: 47·2^a → 35·2^(a+1) → 47·2^(a+1) = 2·(47·2^a)
     subst h47
-    have s1 : gstep (2^a * 47) = 35 * 2^(a+1) := gstep_47 a ha
-    have s2 : gstep (35 * 2^(a+1)) = 2 * (2^a * 47) := by
-      have ha1 : 1 ≤ a + 1 := by omega
-      have : 35 * 2^(a+1) = 2^(a+1) * 35 := Nat.mul_comm 35 (2^(a+1))
-      rw [this, gstep_35 (a+1) ha1, ← Nat.pow_succ, ← Nat.mul_assoc]
-      omega
-    rw [s1, s2]
-    exact ⟨⟨a+1, 35, by omega, by simp [SIXl], by intro h; omega, by rw [s1]⟩, s2.symm⟩
+    have s1' : gstep (2^a * 47) = 2^(a+1) * 35 := by
+      rw [gstep_47 a ha, Nat.mul_comm 35 (2^(a+1))]
+    have s2 : gstep (2^(a+1) * 35) = 2 * (2^a * 47) := by
+      have h35step := gstep_35 (a+1) (by omega)
+      rw [h35step, two_pow_succ_add]
+      ring
+    exact ⟨⟨a+1, 35, by omega, by simp [SIXl], by intro h; omega, s1'⟩, by rw [s1', s2]⟩
+
+/-- The doubling-commutation law (W60-T1: shared by gF_two_pow and the
+doubling theorem; the r3 inline copies had the FALSE witness 2^(a-1)·m). -/
+theorem gstep_dbl_comm {v : Nat} (hv : inFAM v) : gstep (2 * v) = 2 * gstep v := by
+  obtain ⟨a, m, ha, hm, hm1, hxe⟩ := hv
+  have hEven : 2 ∣ v := by
+    rw [hxe]; refine ⟨2^(a-1) * m, ?_⟩
+    rw [two_pow_split a ha]
+    ring
+  have hPos : 0 < v := inFAM_pos v hv
+  unfold gstep
+  rw [phiB_even_dbl hEven hPos]
+  omega
 
 /-- The two-step closed form. -/
 theorem gF_two_pow (x : Nat) (hx : inFAM x) : ∀ j,
@@ -634,87 +664,64 @@ theorem gF_two_pow (x : Nat) (hx : inFAM x) : ∀ j,
   induction j with
   | zero =>
     constructor
-    · rw [Nat.mul_zero, Nat.pow_zero, Nat.mul_one]; rfl
-    · rw [Nat.mul_zero, Nat.pow_zero, Nat.mul_one]; rfl
+    · rw [Nat.mul_zero, Nat.pow_zero, Nat.one_mul]
+    · rw [Nat.mul_zero, Nat.pow_zero, Nat.one_mul]
   | succ j ih =>
     obtain ⟨ih0, ih1⟩ := ih
     have hcomp2 : gF (2*(j+1)) x = gF 2 (gF (2*j) x) := by
-      rw [gF_add]; congr 1; omega
+      rw [show 2*(j+1) = 2 + 2*j from by ring, gF_add]
     have hcomp3 : gF (2*(j+1)+1) x = gF 2 (gF (2*j+1) x) := by
-      rw [gF_add]; congr 1; omega
-    -- 2^j * x ∈ inFAM
+      rw [show 2*(j+1)+1 = 2 + (2*j+1) from by ring, gF_add]
     obtain ⟨a, m, ha, hm, hm1, hxe⟩ := hx
     have hfam : inFAM (2^j * x) := by
       refine ⟨a + j, m, by omega, hm, ?_, ?_⟩
       · intro h; subst h; omega
-      · rw [hxe, ← Nat.pow_add]; omega
+      · rw [hxe, ← Nat.mul_assoc, ← Nat.pow_add]
+        congr 1 <;> omega
     obtain ⟨hstep_fam, hstep_two⟩ := inFAM_gstep _ hfam
-    obtain ⟨hstep_fam', hstep_two'⟩ := inFAM_gstep _ hstep_fam
     rw [ih0] at hcomp2
     rw [ih1] at hcomp3
-    have h2 : gF 2 (2^j * x) = 2 * (2^j * x) := hstep_two'
-    -- gstep commutes with doubling on the family: gstep (2 * v) = 2 * gstep v
-    have hgsd : gstep (2 * (2^j * x)) = 2 * gstep (2^j * x) := by
-      unfold gstep
-      -- φ(2y) = 2φ(y) with y = 2^j * x even
-      have hEven : 2 ∣ 2^j * x := by
-        rw [hxe]; refine ⟨2^(a-1) * m, ?_⟩
-        rw [← Nat.mul_assoc, ← Nat.pow_succ]; omega
-      have hPos : 0 < 2^j * x := by omega
-      rw [phiB_even_dbl hEven hPos]
-      omega
-    rw [h2] at hcomp3
-    rw [← h2] at hcomp2
+    have h2 : gF 2 (2^j * x) = 2 * (2^j * x) := hstep_two
+    have hgsd : gstep (2 * (2^j * x)) = 2 * gstep (2^j * x) := gstep_dbl_comm hfam
+    rw [h2] at hcomp2
+    have hgg : gF 2 (gstep (2^j * x)) = 2 * gstep (2^j * x) :=
+      (inFAM_gstep _ hstep_fam).2
+    rw [hgg] at hcomp3
     constructor
-    · rw [hcomp2, h2, ← Nat.mul_assoc, ← Nat.pow_succ]
-      omega
-    · rw [hcomp3]
-      have : gF 2 (gstep (2^j * x)) = 2 * gstep (2^j * x) := by
-        rw [show gF 2 z = gstep (gstep z) from fun z => rfl] at *
-        exact hstep_two
-      rw [this, hgsd, ← Nat.mul_assoc, ← Nat.pow_succ]
-      omega
+    · rw [hcomp2, two_pow_succ_add]
+      ring
+    · rw [hcomp3, ← hgsd, show 2 * (2^j * x) = 2^(j+1) * x from by
+        rw [two_pow_succ_add]; ring]
 
 /-- THE DOUBLING THEOREM: every chain-family member doubles every 2 steps,
 from step 0 on. -/
 theorem erdos411_doubling (x : Nat) (hx : inFAM x) : ∀ k, gF (k+2) x = 2 * gF k x := by
   intro k
-  obtain ⟨hA, hB⟩ := gF_two_pow x hx k
-  obtain ⟨hC, hD⟩ := gF_two_pow x hx (k/2)
-  -- W59-F-1: Mathlib-only `Nat.even_iff_exists_two_mul` replaced with the
-  -- omega-derived parity split (k even: k = 2 * (k/2); k odd: below).
   rcases (show k % 2 = 0 ∨ k % 2 = 1 from by omega) with hpar | hpar
   · -- k even: k = 2 * (k/2)
     obtain ⟨hE, hF⟩ := gF_two_pow x hx ((k/2)+1)
-    have hk : k = 2 * (k/2) := by omega
-    have hk2 : k + 2 = 2 * ((k/2) + 1) := by omega
-    rw [hk, hk2, hE, hA]
-    rw [hk] at hA
-    rw [← Nat.mul_assoc, ← Nat.pow_succ] at hA
-    omega
-  · -- k odd
-    have hodd : k % 2 = 1 := by omega
-    have hk : k = 2 * (k/2) + 1 := by omega
-    obtain ⟨hE, hF⟩ := gF_two_pow x hx ((k/2)+1)
-    have hke : k + 2 = 2 * ((k/2)+1) + 1 := by omega
-    -- gstep doubling commutes (as in gF_two_pow)
+    obtain ⟨hC, hD⟩ := gF_two_pow x hx (k/2)
+    conv =>
+      rhs => rw [show k = 2*(k/2) from by omega]
+      lhs => rw [show k + 2 = 2*((k/2)+1) from by omega]
+    rw [hE, hC, two_pow_succ_add]
+    ring
+  · -- k odd: gstep (2^(q+1)·x) = 2·gstep (2^q·x) by the commutation law
     obtain ⟨a, m, ha, hm, hm1, hxe⟩ := hx
     have hfam : inFAM (2^(k/2) * x) := by
       refine ⟨a + k/2, m, by omega, hm, ?_, ?_⟩
       · intro h; subst h; omega
-      · rw [hxe, ← Nat.pow_add]; omega
-    have hgsd : gstep (2 * (2^(k/2) * x)) = 2 * gstep (2^(k/2) * x) := by
-      unfold gstep
-      have hEven : 2 ∣ 2^(k/2) * x := by
-        rw [hxe]; refine ⟨2^(a-1) * m, ?_⟩
-        rw [← Nat.mul_assoc, ← Nat.pow_succ]; omega
-      have hPos : 0 < 2^(k/2) * x := by omega
-      rw [phiB_even_dbl hEven hPos]
-      omega
-    rw [hk, hke, hE, hF, hB]
-    rw [hk] at hB
-    rw [hgsd, ← Nat.mul_assoc, ← Nat.pow_succ]
-    omega
+      · rw [hxe, ← Nat.mul_assoc, ← Nat.pow_add]
+        congr 1 <;> omega
+    have hgsd : gstep (2 * (2^(k/2) * x)) = 2 * gstep (2^(k/2) * x) :=
+      gstep_dbl_comm hfam
+    obtain ⟨hE, hF⟩ := gF_two_pow x hx ((k/2)+1)
+    obtain ⟨hC, hD⟩ := gF_two_pow x hx (k/2)
+    conv =>
+      rhs => rw [show k = 2*(k/2) + 1 from by omega]
+      lhs => rw [show k + 2 = 2*((k/2)+1) + 1 from by omega]
+    rw [hF, hD, two_pow_succ_add, Nat.mul_assoc]
+    exact hgsd
 
 /-! ## §7 The parity exclusion. -/
 
@@ -740,45 +747,52 @@ theorem gF_odd_of_odd : ∀ {x : Nat}, x % 2 = 1 → 3 ≤ x → ∀ k, (gF k x)
       exact ihj (gstep y) hgs hgs3
   exact key k x hx h3
 
+/-- The two anchor steps (decide-certified: g(1) = 2, g(2) = 3). -/
+theorem gstep_one : gstep 1 = 2 := by decide
+
+theorem gstep_two : gstep 2 = 3 := by decide
+
+theorem gF_one_step (k : Nat) : gF (k+1) 1 = gF k 2 := by
+  have h : gF (k+1) 1 = gF k (gstep 1) := rfl
+  rw [h, gstep_one]
+
+theorem gF_two_step (k : Nat) : gF (k+1) 2 = gF k 3 := by
+  have h : gF (k+1) 2 = gF k (gstep 2) := rfl
+  rw [h, gstep_two]
+
 /-- THE PARITY EXCLUSION: no odd n is a ratio-2 solution. -/
 theorem erdos411_parity : ∀ (n : Nat), n % 2 = 1 → ∀ (r K : Nat), 1 ≤ r →
     ¬ (∀ k, K ≤ k → gF (k + r) n = 2 * gF k n) := by
   intro n hn r K hr hall
   have h3 : 3 ≤ n ∨ n = 1 := by omega
   rcases h3 with h | h
-  · have hodd : ∀ k, (gF k n) % 2 = 1 := fun k => gF_odd_of_odd hn h k
-    have k := max K 1
-    have h1 := hodd (k + r)
-    have h2 := hodd k
-    have := hall k (by omega)
+  · -- n ≥ 3: every iterate stays odd; doubling forces even — contradiction
+    have hodd : ∀ k, (gF k n) % 2 = 1 := fun k => gF_odd_of_odd hn h k
+    have h1 := hodd (K + r)
+    have := hall K (by omega)
     rw [this] at h1
     omega
-  · -- n = 1: gF 1 1 = 2, then odd forever
+  · -- n = 1: g₁(1) = 2, then the orbit enters 3 and stays odd
     subst h
-    have hodd : ∀ k, 2 ≤ k → (gF k 1) % 2 = 1 := by
-      intro k hk
-      have : gF k 1 = gF (k-1) 2 := by
-        have h1 : gF 1 1 = gstep 1 := rfl
-        have h2 : gstep 1 = 2 := by unfold gstep; simp; decide
-        -- gF k 1 = gF (k-1) (gF 1 1) = gF (k-1) 2
-        rw [← gF_add (k-1) 1 1, h1, h2]
-        omega
-      rw [this]
-      have : (2 : Nat) % 2 = 0 := by decide
-      -- gF j 2 = gF j (gstep 2)?? — gF j 2: g_1(2) = 3 odd; gF j 2 for j ≥ 1: = gF (j-1) 3
-      have h3 : ∀ j, 1 ≤ j → (gF j 2) % 2 = 1 := by
-        intro j hj
-        have : gF j 2 = gF (j-1) (gstep 2) := by
-          rw [← gF_add (j-1) 1 2]
-          congr 1
-          omega
-        have hs2 : gstep 2 = 3 := by unfold gstep; simp; decide
-        rw [this, hs2]
-        exact gF_odd_of_odd (by decide) (by decide) (j-1)
-      exact h3 (k-1) (by omega)
-    have k := max K 2
+    have hodd : ∀ j, 2 ≤ j → (gF j 1) % 2 = 1 := by
+      intro j hj
+      have h1 : gF j 1 = gF (j-1) 2 := by
+        cases j with
+        | zero => omega
+        | succ j' =>
+            have h2 : gF (j'+1) 1 = gF j' 2 := gF_one_step j'
+            rw [h2]
+            rfl
+      have h3 : (gF (j-1) 2) % 2 = 1 := by
+        cases (j-1) with
+        | zero => omega
+        | succ j'' =>
+            have h4 : gF (j''+1) 2 = gF j'' 3 := gF_two_step j''
+            rw [h4]
+            exact gF_odd_of_odd (by decide) (by decide) j''
+      rw [h1, h3]
+    have k := K + 2
     have h1 := hodd (k + r) (by omega)
-    have h2 := hodd k (by omega)
     have := hall k (by omega)
     rw [this] at h1
     omega
@@ -789,14 +803,17 @@ theorem erdos411_two : ∀ (r K : Nat), 1 ≤ r →
   intro r K hr hall
   have hodd : ∀ k, 1 ≤ k → (gF k 2) % 2 = 1 := by
     intro k hk
-    have : gF k 2 = gF (k-1) (gstep 2) := by
-      rw [← gF_add (k-1) 1 2]; congr 1; omega
-    have hs2 : gstep 2 = 3 := by unfold gstep; simp; decide
-    rw [this, hs2]
+    have h1 : gF k 2 = gF (k-1) 3 := by
+      cases k with
+      | zero => omega
+      | succ k' =>
+          have h2 : gF (k'+1) 2 = gF k' 3 := gF_two_step k'
+          rw [h2]
+          rfl
+    rw [h1]
     exact gF_odd_of_odd (by decide) (by decide) (k-1)
-  have k := max K 1
+  have k := K + 1
   have h1 := hodd (k + r) (by omega)
-  have h2 := hodd k (by omega)
   have := hall k (by omega)
   rw [this] at h1
   omega
@@ -807,74 +824,74 @@ theorem two_pow_mul_exists : ∀ x, 0 < x → ∃ a m, m % 2 = 1 ∧ x = 2^a * m
   apply strongIndOn
   intro i ih hi
   rcases Nat.eq_zero_or_pos (i % 2) with h0 | h0
-  · have hi2 : 2 ≤ i := by omega
-    have hy : i / 2 < i := Nat.div_lt_self hi2 (by decide)
-    have hypos : 0 < i / 2 := by omega
+  · have hy : i / 2 < i := Nat.div_lt_self (by omega) (by decide)
+      have hypos : 0 < i / 2 := by omega
     obtain ⟨a, m, hm, hme⟩ := ih (i / 2) hy hypos
     refine ⟨a + 1, m, hm, ?_⟩
-    rw [Nat.pow_succ, ← Nat.mul_assoc, ← hme]
-    have hdvd : 2 ∣ i := Nat.dvd_of_mod_eq_zero h0
-    exact (Nat.mul_div_cancel hdvd).symm
+    have hd2 : i = 2 * (i / 2) := (Nat.mul_div_cancel (Nat.dvd_of_mod_eq_zero h0)).symm
+    rw [hd2, hme, Nat.pow_add, Nat.pow_one]
+    ring
   · exact ⟨0, i, by omega, by rw [Nat.pow_zero, Nat.one_mul]⟩
 
 theorem oddPF_eq : ∀ (x a m f : Nat), x = 2^a * m → m % 2 = 1 → a ≤ f →
     oddPF f x = m := by
   intro x a m f
-  induction f generalizing a with
+  induction f generalizing x a with
   | zero =>
-    intro hxe hm haf
-    have ha0 : a = 0 := by omega
-    rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
-    rw [hxe]
-    rfl
-  | succ f ih =>
-    intro hxe hm haf
-    rcases Nat.eq_zero_or_pos a with ha0 | ha1
-    · rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
+      intro hxe hm haf
+      have ha0 : a = 0 := by omega
+      rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
       rw [hxe]
-      have : ¬ (m % 2 = 0) := by omega
-      simp only [oddPF, if_neg this]
-    · have hae : a - 1 + 1 = a := by omega
-      have hx2 : x = 2 * (2^(a-1) * m) := by
-        rw [← Nat.mul_assoc, ← Nat.pow_succ, hae]
-        exact hxe
-      have hmod : x % 2 = 0 := by omega
-      have hdiv : x / 2 = 2^(a-1) * m := by
-        rw [hx2, Nat.mul_div_cancel_left _ (by decide : 0 < 2)]
-      simp only [oddPF, if_pos hmod]
-      exact ih hdiv hm (by omega)
+      rfl
+  | succ f ih =>
+      intro hxe hm haf
+      rcases Nat.eq_zero_or_pos a with ha0 | ha1
+      · rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
+        rw [hxe]
+        have hno : ¬ (m % 2 = 0) := by omega
+        simp only [oddPF, if_neg hno]
+      · have hsucc : Nat.succ (a-1) = a := by omega
+        have hx2 : x = 2 * (2^(a-1) * m) := by
+          rw [← Nat.mul_assoc, ← Nat.pow_succ, hsucc]
+          exact hxe
+        have hmod : x % 2 = 0 := by omega
+        have hdiv : x / 2 = 2^(a-1) * m := by
+          rw [hx2]
+          omega
+        simp only [oddPF, if_pos hmod]
+        exact ih (x/2) (a-1) hdiv hm (by omega)
 
 theorem oddPF_fac : ∀ (v f : Nat), 0 < v → v < 2^f →
     ∃ i m, m % 2 = 1 ∧ v = 2^i * m ∧ oddPF f v = m := by
   intro v f
-  induction f with
-  | zero => intro hv hlt; omega
+  induction f generalizing v with
+  | zero => intro v hv hlt; omega
   | succ f ih =>
-    intro hv hlt
-    rcases Nat.eq_zero_or_pos (v % 2) with h0 | h0
-    · have hv2 : 2 ≤ v := by omega
-      have hmod : v % 2 = 0 := h0
-      simp only [oddPF, if_pos hmod]
-      have hdiv2 : v / 2 < v := Nat.div_lt_self hv2 (by decide)
-      have hdivpos : 0 < v / 2 := by omega
-      have hdivlt : v / 2 < 2^f := by
-        have h1 : 2^f * 2 = 2^(f+1) := (Nat.pow_succ 2 f).symm
-        rw [h1] at hlt
-        exact Nat.div_lt_of_lt_mul hlt
-      obtain ⟨i, m, hm, hme, hof⟩ := ih hdivpos hdivlt
-      refine ⟨i + 1, m, hm, ?_, hof.symm⟩
-      rw [Nat.pow_succ, ← Nat.mul_assoc, ← hme]
-      exact (Nat.mul_div_cancel (Nat.dvd_of_mod_eq_zero h0)).symm
-    · refine ⟨0, v, by omega, by rw [Nat.pow_zero, Nat.one_mul], ?_⟩
-      have : ¬ (v % 2 = 0) := by omega
-      simp only [oddPF, if_neg this]
+      intro v hv hlt
+      rcases Nat.eq_zero_or_pos (v % 2) with h0 | h0
+      · have hmod : v % 2 = 0 := h0
+        simp only [oddPF, if_pos hmod]
+        have hdivpos : 0 < v / 2 := by omega
+        have hdivlt : v / 2 < 2^f := by
+          have hp : 2^(f+1) = 2^f * 2 := by rw [Nat.pow_add, Nat.pow_one]
+          rw [hp] at hlt
+          exact Nat.div_lt_of_lt_mul hlt
+        obtain ⟨i, m, hm, hme, hof⟩ := ih (v/2) hdivpos hdivlt
+        refine ⟨i + 1, m, hm, ?_, ?_⟩
+        · have hd2 : v = 2 * (v / 2) := (Nat.mul_div_cancel (Nat.dvd_of_mod_eq_zero h0)).symm
+          rw [hd2, hme, Nat.pow_add, Nat.pow_one]
+          ring
+        · exact hof
+      · refine ⟨0, v, by omega, by rw [Nat.pow_zero, Nat.one_mul], ?_⟩
+        have hno : ¬ (v % 2 = 0) := by omega
+        simp only [oddPF, if_neg hno]
 
 theorem oddPF_bound_ok (x a m : Nat) (hx : x < 2^64) (hxe : x = 2^a * m) (hm : m % 2 = 1) :
     oddPF 64 x = m := by
   have ha64 : a ≤ 64 := by
     by_contra h
     have h65 : 65 ≤ a := by omega
-    have hpow : (2:Nat)^64 ≤ 2^a := Nat.pow_le_pow_right (by decide) h65
+    have hpow : (2:Nat)^64 ≤ 2^a := Nat.pow_le_pow_right 2 h65
     have hm1 : 1 ≤ m := by omega
     have h2a : 2^a ≤ x := by
       rw [hxe]
@@ -954,8 +971,13 @@ def closureB (i : Nat) : Bool :=
       (decide (stepIX411[i]! < i) && ((2 * table411[i]! + phiB table411[i]!) % 2 == 0)
         && (table411[stepIX411[i]!]! == Tstep table411[i]!)))
 
+/-- The chunk covers EXACTLY the closed index interval [lo, hi] (W60-T1 ROOT
+FIX: the r1 form `List.range (hi + 1)` covered lo..lo+hi — every chunk with
+lo + hi ≥ 320 ran past the table end where closureB fails the length check,
+which is why cl_3..cl_17 evaluated FALSE; cl_1/cl_2 passed only because
+0 + 92 < 320 and 93 + 150 < 320). Python mirror: ALL 320 indices pass. -/
 def closureChunk (lo hi : Nat) : Bool :=
-  (List.range (hi + 1)).all (fun k => closureB (lo + k))
+  (List.range (hi - lo + 1)).all (fun k => closureB (lo + k))
 
 /-! ### The 17 closure chunks (NO-OOM discipline; cumulative φ-cost per chunk). -/
 
@@ -1156,18 +1178,12 @@ theorem closure_prop (i : Nat) (hi : i < table411.length) :
        (2 * table411[i]! + phiB table411[i]!) % 2 = 0) := by
   have h := closure_all i hi
   unfold closureB at h
-  simp only [decide_eq_true (by omega : i < table411.length), Bool.and_eq_true] at h
-  rcases h with hSIX | hstep
+  rw [decide_eq_true hi] at h
+  simp only [Bool.true_and, Bool.or_eq_true, Bool.and_eq_true] at h
+  rcases h with hSIX | ⟨hlt, heven, hval⟩
   · exact Or.inl hSIX
-  · simp only [Bool.and_eq_true] at hstep
-    obtain ⟨hlt, heven, hval⟩ := hstep
-    refine Or.inr ⟨stepIX411[i]!, ?_, ?_, ?_, ?_⟩
-    · exact hlt
-    · omega
-    · exact eq_of_beq hval
-    · -- (2 * table411[i]! + phiB table411[i]!) % 2 = 0 from the == check
-      have : (2 * table411[i]! + phiB table411[i]!) % 2 == 0 = true := heven
-      exact eq_of_beq this
+  · have hlt' := of_decide_eq_true hlt
+    refine Or.inr ⟨stepIX411[i]!, hlt', by omega, eq_of_beq hval, eq_of_beq heven⟩
 
 /-! ## §10 The witness theorem (the odd-part reduction). -/
 
@@ -1211,7 +1227,7 @@ theorem erdos411_witness : ∀ i, WitP i := by
     have ha2 : 2 ≤ a := by
       by_contra hc
       have : a ≤ 1 := by omega
-      have hle : (2:Nat)^a ≤ 2^1 := Nat.pow_le_pow_right (by decide) this
+      have hle : (2:Nat)^a ≤ 2^1 := Nat.pow_le_pow_right 2 this
       have h1 : (2:Nat)^1 = 2 := by rw [Nat.pow_one]
       rw [hxe, h1] at hle
       have : (2:Nat) * 1 ≤ 4 := by omega
@@ -1291,11 +1307,16 @@ def wander411 : List Nat := [
     945, 947, 951, 953, 955, 957, 961, 965, 967, 973, 975, 985,
     987, 991, 997,  ]
 
-/-- THE PARTITION: every odd m ≤ 1001 lies in one of the two lists. -/
+/-- The two-list predicate: evens pass; odds must be table or wanderer. -/
 def partitionB (k : Nat) : Bool :=
   (!(k % 2 == 1)) || (table411.contains k || wander411.contains k)
 
-theorem erdos411_partition : (List.range 1002).all partitionB = true := by decide
+/-- THE PARTITION: every odd m ≤ 999 lies in one of the two lists (W60-T1:
+the r1 wrote `List.range 1002` — but 1001 itself is in NEITHER list, exactly
+as the python mirror warns: "1001 is in neither list — the kernel must use
+range 1001"; the certified statement is the 500-value split: 221 table
+entries + 279 wanderers = every odd k ≤ 999). -/
+theorem erdos411_partition : (List.range 1001).all partitionB = true := by decide
 
 /-- THE COUNT: exactly 535 even n ∈ [4, 2000] have their odd part certified. -/
 theorem erdos411_count :
@@ -1315,7 +1336,11 @@ theorem erdos411_census : ∀ n, 4 ≤ n → n ≤ 2000 → n % 2 = 0 →
     rw [ha0, Nat.pow_zero, Nat.one_mul] at hxe
     rw [hxe] at heven
     omega
-  have hn64 : n < 2^64 := by omega
+  have hn64 : n < 2^64 := by
+    have h10 : (2:Nat)^10 = 1024 := by decide
+    have hn10 : n < 2^10 := by omega
+    have h64 : (2:Nat)^10 ≤ 2^64 := Nat.pow_le_pow_right 2 (by omega)
+    omega
   have hm64 : oddPF 64 n = m := oddPF_bound_ok n a m hn64 hxe hmod
   rw [hm64] at hmem
   have hmem' : m ∈ table411 := List.contains_iff_mem.mp (by simpa using hmem)
@@ -1337,41 +1362,24 @@ theorem erdos411_94 : ∀ k, gF (k+2) 94 = 2 * gF k 94 := by
   exact erdos411_doubling 94 ⟨1, 47, by omega, by simp [SIXl], by intro h; omega,
     by rw [Nat.pow_one]⟩ k
 
-/-- THE ARSENAL BRIDGE: the pair j-values via the Boss's own v2r machinery. -/
+/-- THE ARSENAL BRIDGE: the pair j-values via the Boss's own v2r machinery
+(W60-T1: the r1 rw-chains cited a nonexistent `v2r.eq_def` — an invented
+path; the green spelling is decide on the certified literals + the genuine
+`v2r_mul_three_pow` for the scaling conjuncts). -/
 theorem erdos411_arsenal_bridge :
     v2r 14 = 1 ∧ v2r 20 = 2 ∧ v2r 8 = 3 ∧ v2r 94 = 1 ∧ v2r 140 = 2 ∧
     v2r (9 * 14) = v2r 14 ∧ v2r (3^2 * 20) = v2r 20 ∧
     ErdosTernary2.isTernaryDigit 59049 = true := by
   refine ⟨?_, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
-  · rw [v2r.eq_def 14, if_neg (by decide), if_pos (by decide : (14:Nat) % 2 = 0),
-        show (14:Nat)/2 = 7 from by decide,
-        v2r.eq_def 7, if_neg (by decide), if_neg (by decide : (7:Nat) % 2 = 0)]
-  · rw [v2r.eq_def 20, if_neg (by decide), if_pos (by decide : (20:Nat) % 2 = 0),
-        show (20:Nat)/2 = 10 from by decide,
-        v2r.eq_def 10, if_neg (by decide), if_pos (by decide : (10:Nat) % 2 = 0),
-        show (10:Nat)/2 = 5 from by decide,
-        v2r.eq_def 5, if_neg (by decide), if_neg (by decide : (5:Nat) % 2 = 0)]
-  · rw [v2r.eq_def 8, if_neg (by decide), if_pos (by decide : (8:Nat) % 2 = 0),
-        show (8:Nat)/2 = 4 from by decide,
-        v2r.eq_def 4, if_neg (by decide), if_pos (by decide : (4:Nat) % 2 = 0),
-        show (4:Nat)/2 = 2 from by decide,
-        v2r.eq_def 2, if_neg (by decide), if_pos (by decide : (2:Nat) % 2 = 0),
-        show (2:Nat)/2 = 1 from by decide,
-        v2r.eq_def 1, if_neg (by decide), if_neg (by decide : (1:Nat) % 2 = 0)]
-  · rw [v2r.eq_def 94, if_neg (by decide), if_pos (by decide : (94:Nat) % 2 = 0),
-        show (94:Nat)/2 = 47 from by decide,
-        v2r.eq_def 47, if_neg (by decide), if_neg (by decide : (47:Nat) % 2 = 0)]
-  · rw [v2r.eq_def 140, if_neg (by decide), if_pos (by decide : (140:Nat) % 2 = 0),
-        show (140:Nat)/2 = 70 from by decide,
-        v2r.eq_def 70, if_neg (by decide), if_pos (by decide : (70:Nat) % 2 = 0),
-        show (70:Nat)/2 = 35 from by decide,
-        v2r.eq_def 35, if_neg (by decide), if_neg (by decide : (35:Nat) % 2 = 0)]
-  · have h9 : (9:Nat) * 14 = 3^2 * 14 := by
-      rw [show (3:Nat)^2 = 9 from by decide]
-    rw [h9]
+  · decide
+  · decide
+  · decide
+  · decide
+  · decide
+  · rw [show (9:Nat) = 3^2 from by decide]
     exact v2r_mul_three_pow 2 14
   · exact v2r_mul_three_pow 2 20
-  · exact rfl
+  · decide
 
 /-- THE MAIN SUMMARY. -/
 theorem erdos411_main :
