@@ -117,6 +117,7 @@ theorem tilingSizes_self (n : Nat) : tilingSizes n [n] = true := by
     exact natB_self n
   show ((dividesAll n [n]) && (sizesDistinct [n]) && (natB (sumNat [n]) n)) = true
   rw [h1, h2, h3]
+  decide
 
 /-- THE ARITHMETIC FEASIBILITY LAW (trivial layer): every order n admits
 the one-coset size multiset [n] (G as a single coset of itself). -/

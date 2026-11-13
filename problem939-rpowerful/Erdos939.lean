@@ -13,7 +13,7 @@ back into the r=4 census), the r=3 witness construction (two
 Nitaj-style identities), the pair-kill arithmetic beyond the census
 frontiers, the beyond-FLT row, and the 10^15 hunt bracket. -/
 
-set_option maxRecDepth 65536
+set_option maxRecDepth 262144
 set_option maxHeartbeats 4000000
 
 namespace E939

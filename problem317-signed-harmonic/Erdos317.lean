@@ -152,7 +152,8 @@ theorem hsumAux_two_sided (n k : Nat) : ∀ ds : List Int,
     -(Int.ofNat (ds.length * fact n)) ≤ hsumAux n k ds ∧
       hsumAux n k ds ≤ Int.ofNat (ds.length * fact n) := by
   intro ds
-  induction ds generalizing k with
+  revert k
+  induction ds with
   | nil =>
       intro k _
       have hl : ([] : List Int).length = 0 := rfl
