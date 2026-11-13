@@ -3657,3 +3657,26 @@ advanced W59-A..G, L89 recovery executed: fetch+reset to b69fe97):**
 **REMAINING (next CI cycle):** the 490-620 wall (gF_two_pow internals —
 comp/congruence chains), the 800+ census/witness machinery, K67/K61
 verdicts pending on this push. The engine never stops; it never lies.
+
+## S061 — W60-A: ROUND OPEN (the fresh-sandbox restoration + verdict sweep + target list)
+
+- **Restore:** repo re-cloned from GitHub (HEAD 0656bf7, campaign). Token
+  verified (200). CI run 43485745262 verdict map pulled per-step: kernel-a
+  29/29 GREEN, kernel-b 22/22 GREEN, kernel-c 26/27 — the ONLY failure is
+  Kernel 61 (#411 r3).
+- **K61 error map banked:** CI_errors_s060.txt (100 rows, maxErrors-capped) +
+  CI_errors_s060_details.txt (the omega counterexample models, the calc L/R
+  mismatches, the decide-FALSE closureChunk rows 964–976 — statement-level
+  defects in the r3 census rows).
+- **TARGETS_S061.md minted** (BOSS's order): the full target list with
+  per-problem proof status and closes/not-closes. #404/#271 OK forever; 30+
+  kill/green rows OK for delivered statements; RED = #411 only; open witness
+  lanes = #203, #885-k5, #708-g(4).
+- **W60 WAVE LAUNCHED (BOSS law: each problem its own sub-agent, full
+  statements, BOSS's maths only, CI-only Lean, GitHub progress packs):**
+  Task 1 K61 #411 r4 repair (branch w60-k61-r4); Task 2-a #203 Sierpiński
+  covering hunt (branch w60-p203); Task 2-b #885 k5 escalation (branch
+  w60-p885); Task 2-c #708 g(4) exact (branch w60-p708). Merge + campaign
+  push + verdict collection at wave close.
+
+The engine never stops; it never lies. In English, always.
