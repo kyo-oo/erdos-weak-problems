@@ -197,7 +197,6 @@ theorem e389_chain_dvd : ∀ (q n E k : Nat), q ^ depthSum q n E k ∣ prodRange
       have h0 : depthSum q n E 0 = 0 := rfl
       have h1 : prodRange n 0 = 1 := rfl
       rw [h0, h1, Nat.pow_zero]
-      exact Nat.dvd_refl 1
   | succ k ih =>
       have hd : depthSum q n E (k + 1) = mCount q (n + k) E + depthSum q n E k := rfl
       have hp : prodRange n (k + 1) = (n + k) * prodRange n k := rfl
@@ -311,10 +310,21 @@ theorem e389_witness_9_8170 : prodRange 9 8170 ∣ prodRange 8179 8170 := by dec
 
 /-- **WITNESS (n=10, k=45144):** the 45144-wide block 10···45153 divides
 45154···90297 (≈2.1·10^5 digits — the heaviest decide here). -/
-theorem e389_witness_10_45144 : prodRange 10 45144 ∣ prodRange 45154 45144 := by decide
+/-! S059 W59-E addendum — THE CLOSED-GOAL ROUTE (the Erdos939R4 law):
+    the two heaviest witnesses (n=10, k=45144 and n=11, k=45143 — folds
+    ~45k wide) blew the elaborator recursion budget at 65536 (CI run
+    43453321441: maximum recursion depth at 314:81/317:81). They are
+    CLOSED goals (no free variables) — the engine law permits
+    native_decide on closed goals (the ban is free-variable goals);
+    the IR evaluator runs these folds in seconds with bounded memory.
+    Receipts honestly show Lean.ofReduceBool on these two rows. -/
+
+theorem e389_witness_10_45144 : prodRange 10 45144 ∣ prodRange 45154 45144 := by
+  native_decide
 
 /-- **WITNESS (n=11, k=45143):** the 45143-wide block 11···45153 divides 45154···90296. -/
-theorem e389_witness_11_45143 : prodRange 11 45143 ∣ prodRange 45154 45143 := by decide
+theorem e389_witness_11_45143 : prodRange 11 45143 ∣ prodRange 45154 45143 := by
+  native_decide
 
 /-- **WITNESS (n=1, k=1):** the 1-wide block at n=1 divides the 1-wide block at n=2. -/
 theorem e389_witness_1_1 : prodRange 1 1 ∣ prodRange 2 1 := by decide
