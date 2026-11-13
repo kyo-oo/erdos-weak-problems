@@ -1361,6 +1361,40 @@ theorem e708_case_6_10_14_15_21_35 : (∃ t, 1 ≤ t ∧ t ≤ 40 ∧
 /-! ## §9 THE MASTER BOARD (the 16-conjunct flat assembly). -/
 
 /-- THE PRODUCT-DIVISIBILITY KERNEL MASTER BOARD (16 conjuncts, full
+/-- THE g(4) LOWER BOUND — the Erdos $100 case-value lane (W60-T2c): the
+four-element demand set A = [6,10,14,15] at interval start t = 1 forces every
+covering battery to have size >= 4, AND a 4-battery exists — the exact local
+minimum is 4, both directions. Since g(4) is the worst case over all
+four-element demand sets, g(4) >= 4 — the first case-value floor beyond
+ErSu59's g(2) = 2 and g(3) = 4, assembled from the K62-certified exact
+minimum (the witness row + the decide-certified coverFrom exclusion). -/
+theorem erdos708_g4_lower :
+    ∃ (A : List Nat) (t : Nat), A.length = 4 ∧
+      (∀ B : List Nat, sub708 B (win708 t (maxA A)) → B.length ≤ 3 →
+         ¬ (prod708 A ∣ prod708 B)) ∧
+      (∃ B : List Nat, sub708 B (win708 t (maxA A)) ∧ B.length = 4 ∧
+         prod708 A ∣ prod708 B) := by
+  have hmin := E708.e708_exact_6_10_14_15
+  refine ⟨6, 10, 14, 15], 1, by decide, ?_, ?_⟩
+  · intro B hsub hlen hdvd
+    have hmem : B.length ∈ {g : Nat | ∃ B', sub708 B' (win708 1 (maxA [6, 10, 14, 15])) ∧
+        B'.length = g ∧ prod708 [6, 10, 14, 15] ∣ prod708 B'} :=
+      ⟨B, hsub, rfl, hdvd⟩
+    have hle : minB [6, 10, 14, 15] 1 ≤ B.length := Nat.sInf_le hmem
+    omega
+  · have hrow := (List.all_eq_true.mp E708.hwit6_10_14_15) 0 (List.mem_range.mpr (by omega))
+    obtain ⟨hlen, hasc, hmem, hcov⟩ :=
+      E708.w708OK_spec [6, 10, 14, 15] (0 + 1) (maxA [6, 10, 14, 15]) 4 (E708.wit6_10_14_15 0) hrow
+    have hmemt : ∀ b, b ∈ E708.wit6_10_14_15 0 → 1 < b ∧ b ≤ 1 + maxA [6, 10, 14, 15] := by
+      intro b hb
+      have hb2 := hmem b hb
+      omega
+    have hsub : sub708 (E708.wit6_10_14_15 0) (win708 1 (maxA [6, 10, 14, 15])) :=
+      E708.e708_asc_bridge 1 (maxA [6, 10, 14, 15]) (E708.wit6_10_14_15 0) hasc hmemt
+    exact ⟨E708.wit6_10_14_15 0, hsub, hlen, hcov⟩
+
+/-- THE g(4) LOWER-BOUND MASTER (the Erdos $100 case lane): the full board
+conjunct capturing the case-value floor. -/
 statements, unconditional): the 8 general laws (append-product,
 superset, composition, refine, enumerator soundness + completeness,
 window law, ascending bridge) + the 8 complete case rows (the engine's
@@ -1403,6 +1437,7 @@ theorem erdos708_board :
 
 /-! ## §10 THE RECEIPTS. -/
 
+#print axioms E708.erdos708_g4_lower
 #print axioms E708.e708_prod_append
 #print axioms E708.e708_superset_law
 #print axioms E708.e708_composition_law
