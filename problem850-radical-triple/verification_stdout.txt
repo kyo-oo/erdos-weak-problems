@@ -1,0 +1,5 @@
+sample rad cross-check (C SPF-walk vs sympy.factorint, 64 random n in [1,N]): 64 OK / 0 MISMATCH
+length-2 pairs re-verified with sympy.factorint: 13 pairs total, 0 bad
+witness_details.txt: absent/empty — no length-3 witness found (consistent with hunt verdict)
+length-2 summary: total 13; with smaller member > 2*10^4: 0
+

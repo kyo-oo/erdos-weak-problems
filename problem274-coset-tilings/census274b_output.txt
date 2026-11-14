@@ -1,0 +1,115 @@
+=== DIVISOR-SUM LEMMA VERIFICATION (orders 1..24) ===
+orders ≤ 24 with admissible distinct-proper-divisor subsets: [6, 12, 18, 20, 24]
+p-groups ALL die (sum of distinct proper divisors of p^k = (p^k-1)/(p-1) < p^k).
+  order 6: subsets [(1, 2, 3)]
+  order 12: subsets [(2, 4, 6), (1, 2, 3, 6)]
+  order 18: subsets [(3, 6, 9), (1, 2, 6, 9)]
+  order 20: subsets [(1, 4, 5, 10)]
+  order 24: subsets [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+=== CENSUS: nonabelian groups of orders 6,12,18,20,24 ===
+(abelian ≤ 36 already certified negative by campaign battery274.py;
+ 2-groups/p-groups die by the divisor-sum lemma; orders ≠ {6,12,18,20,24} die likewise.)
+
+--- S3 (order 6): order 6, nonabelian=True, verify OK (0.0s)
+    subgroups: 6 (0.0s) orders: [(1, 1), (2, 3), (3, 1), (6, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(1, 2, 3)]
+
+--- Dih_12 (order 12): order 12, nonabelian=True, verify OK (0.0s)
+    subgroups: 16 (0.0s) orders: [(1, 1), (2, 7), (3, 1), (4, 3), (6, 3), (12, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(2, 4, 6), (1, 2, 3, 6)]
+
+--- A4 (order 12): order 12, nonabelian=True, verify OK (0.0s)
+    subgroups: 10 (0.0s) orders: [(1, 1), (2, 3), (3, 4), (4, 1), (12, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: []
+
+--- Dic_3 (order 12): order 12, nonabelian=True, verify OK (0.0s)
+    subgroups: 8 (0.0s) orders: [(1, 1), (2, 1), (3, 1), (4, 3), (6, 1), (12, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(2, 4, 6), (1, 2, 3, 6)]
+
+--- Dih_18 (order 18): order 18, nonabelian=True, verify OK (0.0s)
+    subgroups: 16 (0.0s) orders: [(1, 1), (2, 9), (3, 1), (6, 3), (9, 1), (18, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(3, 6, 9), (1, 2, 6, 9)]
+
+--- S3 x C3 (order 18): order 18, nonabelian=True, verify OK (0.0s)
+    subgroups: 14 (0.0s) orders: [(1, 1), (2, 3), (3, 4), (6, 4), (9, 1), (18, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(3, 6, 9), (1, 2, 6, 9)]
+
+--- (C3xC3)⋊C2 inv (order 18): order 18, nonabelian=True, verify OK (0.0s)
+    subgroups: 28 (0.1s) orders: [(1, 1), (2, 9), (3, 4), (6, 12), (9, 1), (18, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(3, 6, 9), (1, 2, 6, 9)]
+
+--- Dih_20 (order 20): order 20, nonabelian=True, verify OK (0.0s)
+    subgroups: 22 (0.0s) orders: [(1, 1), (2, 11), (4, 5), (5, 1), (10, 3), (20, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(1, 4, 5, 10)]
+
+--- Dic_5 (order 20): order 20, nonabelian=True, verify OK (0.0s)
+    subgroups: 10 (0.0s) orders: [(1, 1), (2, 1), (4, 5), (5, 1), (10, 1), (20, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(1, 4, 5, 10)]
+
+--- C5⋊C4 Frobenius (order 20): order 20, nonabelian=True, verify OK (0.0s)
+    subgroups: 14 (0.0s) orders: [(1, 1), (2, 5), (4, 5), (5, 1), (10, 1), (20, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(1, 4, 5, 10)]
+
+--- Dih_24 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 34 (0.1s) orders: [(1, 1), (2, 13), (3, 1), (4, 7), (6, 5), (8, 3), (12, 3), (24, 1)]
+    NO distinct-size coset cover (5.1s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- Dic_6 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 18 (0.0s) orders: [(1, 1), (2, 1), (3, 1), (4, 7), (6, 1), (8, 3), (12, 3), (24, 1)]
+    NO distinct-size coset cover (0.3s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- S4 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 30 (0.2s) orders: [(1, 1), (2, 9), (3, 4), (4, 7), (6, 4), (8, 3), (12, 1), (24, 1)]
+    NO distinct-size coset cover (9.6s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- A4 x C2 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 26 (0.4s) orders: [(1, 1), (2, 7), (3, 4), (4, 7), (6, 4), (8, 1), (12, 1), (24, 1)]
+    NO distinct-size coset cover (6.2s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- SL(2,3)=Q8⋊C3 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 15 (0.0s) orders: [(1, 1), (2, 1), (3, 4), (4, 3), (6, 4), (8, 1), (24, 1)]
+    NO distinct-size coset cover (0.2s). admissible divisor-sets: [(1, 2, 3, 4, 6, 8)]
+
+--- Dih_8 x C3 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 20 (0.1s) orders: [(1, 1), (2, 5), (3, 1), (4, 3), (6, 5), (8, 1), (12, 3), (24, 1)]
+    NO distinct-size coset cover (0.7s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- Q8 x C3 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 12 (0.0s) orders: [(1, 1), (2, 1), (3, 1), (4, 3), (6, 1), (8, 1), (12, 3), (24, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- S3 x C4 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 26 (0.2s) orders: [(1, 1), (2, 7), (3, 1), (4, 7), (6, 3), (8, 3), (12, 3), (24, 1)]
+    NO distinct-size coset cover (5.3s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- S3 x C2 x C2 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 54 (1.7s) orders: [(1, 1), (2, 15), (3, 1), (4, 19), (6, 7), (8, 3), (12, 7), (24, 1)]
+    NO distinct-size coset cover (58.9s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- C3⋊C8 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 10 (0.0s) orders: [(1, 1), (2, 1), (3, 1), (4, 1), (6, 1), (8, 3), (12, 1), (24, 1)]
+    NO distinct-size coset cover (0.0s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- C3⋊Q8 (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 18 (0.0s) orders: [(1, 1), (2, 1), (3, 1), (4, 9), (6, 1), (8, 1), (12, 3), (24, 1)]
+    NO distinct-size coset cover (0.1s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- C3⋊D8[kernel=<s>] (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 30 (0.1s) orders: [(1, 1), (2, 9), (3, 1), (4, 7), (6, 5), (8, 3), (12, 3), (24, 1)]
+    NO distinct-size coset cover (3.6s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+--- C3⋊D8[kernel=<rs>] (order 24): order 24, nonabelian=True, verify OK (0.0s)
+    subgroups: 30 (0.1s) orders: [(1, 1), (2, 9), (3, 1), (4, 7), (6, 5), (8, 3), (12, 3), (24, 1)]
+    NO distinct-size coset cover (3.7s). admissible divisor-sets: [(4, 8, 12), (1, 3, 8, 12), (2, 4, 6, 12), (1, 2, 3, 6, 12), (1, 2, 3, 4, 6, 8)]
+
+=== DISTINCTNESS CHECK (invariants: order-histogram, center size) ===
+  DUPLICATE INVARIANT: C3⋊D8[kernel=<rs>] (order 24) vs C3⋊D8[kernel=<s>] (order 24) — INVESTIGATE
+  23 groups, distinct invariants: False
+
+=== CENSUS COMPLETE: NO WITNESS among the target groups ===
+Bounded theorem: no distinct-size coset exact cover in any group of order ≤ 24
+(all orders die by divisor-sum except 6,12,18,20,24; abelian ≤ 36 negative;
+ the nonabelian 6/12/18/20/24 groups above exhaustively searched — mixed left/right cosets).
+
+Total runtime: 97.3s

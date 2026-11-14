@@ -1,0 +1,130 @@
+====================================================================
+ HUNT850 — FULL LOG — Erdos problem #850 (length-3 radical triple)
+ target: do there exist distinct x,y >= 1 with rad(x)=rad(y),
+         rad(x+1)=rad(y+1), rad(x+2)=rad(y+2) ?  [rad = product of
+         distinct prime factors; a length-3 Erdos-Woods pair]
+ machine: 2-core Xeon, 4 GB RAM (~2.6 GB available), gcc 14.2 -O3
+====================================================================
+
+--- RUN 0: X=10^5 — pipeline validation (C machinery vs independent python brute force) ---
+[alloc] spf 0.4 MB (N=100002), primes cap 0.0 MB
+=== HUNT850 — Erdos problem #850: length-3 radical-triple (Erdos-Woods length-3) witness hunt ===
+X=100000 N=100002 bx=17 hash_bits=47 outdir=/home/z/erdos-weak-problems/problem850-radical-triple
+[sieve] SPF linear sieve: 0.00 s, primes: 9592
+[self-check] SPF vs trial division (n<=10000): PASS | rad spot values (rad(48)=6, rad(75)=15, rad(960)=30, rad(16128)=42, ...): PASS
+[radtab] cached radicals: 0.00 s (spf freed; factorizations via trial division)
+[L3] pass 0.00 s | sort 0.01 s | scan+verify 0.00 s | hash-collision candidate pairs: 0 | exact-verified TRUE: 0 | rejected hash collisions: 0
+[L3 VERDICT] NO length-3 radical-triple witness pair with both members in [1, 100000].
+[L2 pair] x=254 y=65024 rad(x)=rad(y)=254 rad(x+1)=rad(y+1)=255
+[L2 pair] x=2 y=8 rad(x)=rad(y)=2 rad(x+1)=rad(y+1)=3
+[L2 pair] x=6 y=48 rad(x)=rad(y)=6 rad(x+1)=rad(y+1)=7
+[L2 pair] x=62 y=3968 rad(x)=rad(y)=62 rad(x+1)=rad(y+1)=21
+[L2 pair] x=75 y=1215 rad(x)=rad(y)=15 rad(x+1)=rad(y+1)=38
+[L2 pair] x=126 y=16128 rad(x)=rad(y)=42 rad(x+1)=rad(y+1)=127
+[L2 pair] x=30 y=960 rad(x)=rad(y)=30 rad(x+1)=rad(y+1)=31
+[L2 pair] x=14 y=224 rad(x)=rad(y)=14 rad(x+1)=rad(y+1)=15
+[L2] pass 0.00 s | sort 0.01 s | scan+verify 0.00 s | candidates 8 | verified length-2 pairs: 8 (smaller member > 2*10^4: 0)
+[L2 sanity] (2,8):FOUND (6,48):FOUND (75,1215):FOUND   full list: /home/z/erdos-weak-problems/problem850-radical-triple/length2_pairs.txt
+[done] total 0.02 s, peak RSS 2.9 MB
+
+python brute force (X=100000):
+  L2 pairs: [(2, 8), (6, 48), (14, 224), (30, 960), (62, 3968), (75, 1215), (126, 16128), (254, 65024)]
+  L3 pairs: []
+C-vs-python L2 pair list: MATCH
+C-vs-python L3 both empty: yes
+
+--- RUN 1: X=10^7 (500x escalation over prior 2*10^4 bound) ---
+[alloc] spf 40.0 MB (N=10000002), primes cap 3.3 MB
+=== HUNT850 — Erdos problem #850: length-3 radical-triple (Erdos-Woods length-3) witness hunt ===
+X=10000000 N=10000002 bx=24 hash_bits=40 outdir=/home/z/erdos-weak-problems/problem850-radical-triple
+[sieve] SPF linear sieve: 0.08 s, primes: 664579
+[self-check] SPF vs trial division (n<=10000): PASS | rad spot values (rad(48)=6, rad(75)=15, rad(960)=30, rad(16128)=42, ...): PASS
+[radtab] cached radicals: 0.44 s (spf freed; factorizations via trial division)
+[L3] pass 0.10 s | sort 1.01 s | scan+verify 0.03 s | hash-collision candidate pairs: 51 | exact-verified TRUE: 0 | rejected hash collisions: 51
+[L3 VERDICT] NO length-3 radical-triple witness pair with both members in [1, 10000000].
+[L2 pair] x=254 y=65024 rad(x)=rad(y)=254 rad(x+1)=rad(y+1)=255
+[L2 pair] x=2 y=8 rad(x)=rad(y)=2 rad(x+1)=rad(y+1)=3
+[L2 pair] x=2046 y=4190208 rad(x)=rad(y)=2046 rad(x+1)=rad(y+1)=2047
+[L2 pair] x=6 y=48 rad(x)=rad(y)=6 rad(x+1)=rad(y+1)=7
+[L2 pair] x=62 y=3968 rad(x)=rad(y)=62 rad(x+1)=rad(y+1)=21
+[L2 pair] x=75 y=1215 rad(x)=rad(y)=15 rad(x+1)=rad(y+1)=38
+[L2 pair] x=126 y=16128 rad(x)=rad(y)=42 rad(x+1)=rad(y+1)=127
+[L2 pair] x=1022 y=1046528 rad(x)=rad(y)=1022 rad(x+1)=rad(y+1)=1023
+[L2 pair] x=510 y=261120 rad(x)=rad(y)=510 rad(x+1)=rad(y+1)=511
+[L2 pair] x=30 y=960 rad(x)=rad(y)=30 rad(x+1)=rad(y+1)=31
+[L2 pair] x=14 y=224 rad(x)=rad(y)=14 rad(x+1)=rad(y+1)=15
+[L2] pass 0.03 s | sort 1.06 s | scan+verify 0.03 s | candidates 61 | verified length-2 pairs: 11 (smaller member > 2*10^4: 0)
+[L2 sanity] (2,8):FOUND (6,48):FOUND (75,1215):FOUND   full list: /home/z/erdos-weak-problems/problem850-radical-triple/length2_pairs.txt
+[done] total 2.77 s, peak RSS 118.8 MB
+
+--- RUN 2: X=10^8 (5000x escalation; RAM peak 1168 MB) ---
+[alloc] spf 400.0 MB (N=100000002), primes cap 33.3 MB
+=== HUNT850 — Erdos problem #850: length-3 radical-triple (Erdos-Woods length-3) witness hunt ===
+X=100000000 N=100000002 bx=27 hash_bits=37 outdir=/home/z/erdos-weak-problems/problem850-radical-triple
+[sieve] SPF linear sieve: 0.91 s, primes: 5761455
+[self-check] SPF vs trial division (n<=10000): PASS | rad spot values (rad(48)=6, rad(75)=15, rad(960)=30, rad(16128)=42, ...): PASS
+[radtab] cached radicals: 5.63 s (spf freed; factorizations via trial division)
+[L3 pass] x=67108864
+[L3] pass 1.00 s | sort 11.90 s | scan+verify 0.47 s | hash-collision candidate pairs: 36373 | exact-verified TRUE: 0 | rejected hash collisions: 36373
+[L3 VERDICT] NO length-3 radical-triple witness pair with both members in [1, 100000000].
+[L2 pass] x=67108864
+[L2 pair] x=254 y=65024 rad(x)=rad(y)=254 rad(x+1)=rad(y+1)=255
+[L2 pair] x=2 y=8 rad(x)=rad(y)=2 rad(x+1)=rad(y+1)=3
+[L2 pair] x=4094 y=16769024 rad(x)=rad(y)=4094 rad(x+1)=rad(y+1)=1365
+[L2 pair] x=2046 y=4190208 rad(x)=rad(y)=2046 rad(x+1)=rad(y+1)=2047
+[L2 pair] x=6 y=48 rad(x)=rad(y)=6 rad(x+1)=rad(y+1)=7
+[L2 pair] x=62 y=3968 rad(x)=rad(y)=62 rad(x+1)=rad(y+1)=21
+[L2 pair] x=75 y=1215 rad(x)=rad(y)=15 rad(x+1)=rad(y+1)=38
+[L2 pair] x=8190 y=67092480 rad(x)=rad(y)=2730 rad(x+1)=rad(y+1)=8191
+[L2 pair] x=126 y=16128 rad(x)=rad(y)=42 rad(x+1)=rad(y+1)=127
+[L2 pair] x=1022 y=1046528 rad(x)=rad(y)=1022 rad(x+1)=rad(y+1)=1023
+[L2 pair] x=510 y=261120 rad(x)=rad(y)=510 rad(x+1)=rad(y+1)=511
+[L2 pair] x=30 y=960 rad(x)=rad(y)=30 rad(x+1)=rad(y+1)=31
+[L2] pass 0.34 s | sort 11.99 s | scan+verify 0.46 s | candidates 36313 | verified length-2 pairs: 13 (smaller member > 2*10^4: 0)
+[L2 sanity] (2,8):FOUND (6,48):FOUND (75,1215):FOUND   full list: /home/z/erdos-weak-problems/problem850-radical-triple/length2_pairs.txt
+[done] total 32.70 s, peak RSS 1168.0 MB
+
+--- INDEPENDENT VERIFICATION (sympy.factorint — second factorization method) ---
+sample rad cross-check (C SPF-walk vs sympy.factorint, 64 random n in [1,N]): 64 OK / 0 MISMATCH
+length-2 pairs re-verified with sympy.factorint: 13 pairs total, 0 bad
+witness_details.txt: absent/empty — no length-3 witness found (consistent with hunt verdict)
+length-2 summary: total 13; with smaller member > 2*10^4: 0
+
+--- CERTIFIED BOX STATEMENT (honest, bounded — NOT full closure) ---
+ Certified: NO pair of distinct integers x,y (both in [1, 10^8]) satisfies
+   rad(x)=rad(y) AND rad(x+1)=rad(y+1) AND rad(x+2)=rad(y+2).
+ Soundness: any true pair => identical 37-bit packed-hash tops => adjacent after
+   in-place sort => exactly re-verified via cached radicals (rad <= n < 2^32).
+   Hash-collision candidates: 36373 observed vs ~36400 predicted by birthday
+   statistics (C(10^8,2)/2^37) — all exactly verified, all rejected.
+ Pipeline validation: full exact-match against independent python brute force
+   at 10^5 (both length-2 and length-3), SPF self-check vs trial division,
+   sort self-test vs qsort (400 cases), 64 random rad values cross-checked by
+   sympy.factorint, and known pairs (2,8),(6,48),(75,1215) located at every scale.
+ Prior state: no witness < 2*10^4 (campaign), < 100 (python), < 50 (kernel).
+ THIS RUN EXTENDS THE CERTIFIED NO-WITNESS BOX FROM 2*10^4 TO 10^8 (x5000).
+ Erdos #850 remains OPEN beyond 10^8 — this is a bounded theorem, not closure.
+
+--- BONUS (structural): complete census of length-2 pairs in [1, 10^8] ---
+ All 13 pairs (x,y), x<y, with rad(x)=rad(y) and rad(x+1)=rad(y+1), both <= 10^8:
+  (2, 8)  rad=2, rad(+1)=3
+  (6, 48)  rad=6, rad(+1)=7
+  (14, 224)  rad=14, rad(+1)=15
+  (30, 960)  rad=30, rad(+1)=31
+  (62, 3968)  rad=62, rad(+1)=21
+  (75, 1215)  rad=15, rad(+1)=38
+  (126, 16128)  rad=42, rad(+1)=127
+  (254, 65024)  rad=254, rad(+1)=255
+  (510, 261120)  rad=510, rad(+1)=511
+  (1022, 1046528)  rad=1022, rad(+1)=1023
+  (2046, 4190208)  rad=2046, rad(+1)=2047
+  (4094, 16769024)  rad=4094, rad(+1)=1365
+  (8190, 67092480)  rad=2730, rad(+1)=8191
+ Structure: 12 of 13 form the family (m-1, m^2-1) with m = 2^k - 1 (k=2..13),
+   since rad(m)=rad(m^2) always and supp(m+1)={2} <= supp(m-1); the 13th is the
+   sporadic pair (75, 1215) [y+1 = 16(x+1), supp(x+1)={2,19}, supp(x)={3,5}].
+ NO length-2 pair exists with smaller member in (8190, 10^8] — in particular
+   none beyond 2*10^4 — so even length-2 witnesses are absent across the whole
+   upper box, explaining the length-3 emptiness. No Mersenne-family pair extends
+   to length 3: x+2 = 2^k has rad 2, while y+2 = m^2+1 = 2 mod 8 (m odd > 1)
+   is never a power of 2, so rad(x+2) != rad(y+2) always.

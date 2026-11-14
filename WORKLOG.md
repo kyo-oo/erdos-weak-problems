@@ -3730,3 +3730,91 @@ The engine never stops; it never lies. In English, always.
   failures so far).
 
 The engine never stops; it never lies. In English, always.
+
+## S062 — W61-A: THE AUDIT + THE ONE-SHOT CENSUS + THE WITNESS VOLLEY (BOSS order)
+
+**BOSS's order (this round):** (1) check even the "okay completed" problem
+list — are those actually completed or just sub cases? (2) over the 500+ open
+corpus, select MY OWN problems and ONE-SHOT them with BOSS's mathematics,
+sub-agents per problem, same conditions (GitHub CI, progress packs, BOSS's
+math only, FULL statements).
+
+**1. THE AUDIT (Task 1, Explore agent — delivered):** all 34 "OK completed"
+rows audited against the verbatim corpus statements. VERDICT: **0 of 34 are
+FULL closures** of the original corpus asks. 32/34 = PARTIAL (complete
+unconditional CI-green theorem-packages — case values, structure laws,
+bounded censuses — with the corpus core (asymptotic law / general k /
+infinitude / full classification / existence verdict) still open; the
+COMPLETE_PROOF.md files themselves honestly name the open component in
+nearly every case). 2/34 = EVIDENCE-only: **#396** (the round-2 engine
+artifact on disk is a crashed run — ZeroDivisionError; the K31/K39 kernel
+kills n₂=2480/n₃=8178 remain the real record) and **#317** (STATUS records
+"kills: none yet"; reduction + 5000-sweep only; OUT by the 5-round law
+anyway). #404/#271 remain BOSS-SEALED (S030 law — closed for campaign
+purposes). THE HONEST LEDGER: the campaign's "OK" marks mean "OK for the
+delivered statement", NOT "corpus problem solved". The sub-agent audit table
+is in this session's record (34 rows, FULL/PARTIAL/EVIDENCE per problem).
+
+**2. THE ONE-SHOT CENSUS (the 592-problem open pool):** full live corpus
+harvest (erdosproblems.com, 593 pages, browser-header curl) →
+corpus_harvest/corpus_statements.json + triage2.py. After OUT-list +
+attacked-set exclusion: **391 fresh problems**, machine triage + full manual
+sweep. VERDICT: **ZERO certain one-shot FULL-closure candidates in the fresh
+pool** (every sharp shape is asymptotic / infinitude / Ramsey-class /
+celebrity-open; #624 "prove H(n) − log₂n → ∞" and #272 "largest t(N) for
+AP-intersecting families" demoted with cause). The corpus-wide
+one-shot-decidable FULL asks are EXACTLY the witness lanes already under
+fire: #274 (one group example = FULL YES), #677 (one collision = FULL NO),
+#850 (one pair = FULL YES), #939-Q1 (one triple = Q1-YES), #203, #1212.
+
+**3. THE W61 VOLLEY (4 sub-agents fired — the wall hit 3, the commander
+executed the dead missions directly):**
+
+- **Task 3-c #850 (agent d332a2b9 DELIVERED):** C engine + verification —
+  certified **NO length-3 Erdős–Woods pair in [1, 10^8]** (5,000× the prior
+  2·10⁴ bound; 36,373 hash-candidates all exactly re-verified and rejected;
+  soundness via exact-match brute force at 10⁵, 64 sympy.factorint
+  cross-checks). BONUS STRUCTURE THEOREM: **complete length-2 census ≤ 10⁸ —
+  exactly 13 pairs**: the Mersenne family (2^k−2, (2^k−1)²−1) k=2..13
+  (11 NEW beyond the campaign's (6,48)) + sporadic (75,1215); zero length-2
+  pairs beyond 8190; and the Mersenne family provably never extends to
+  length 3 (y+2 = m²+1 ≡ 2 mod 8 never a power of 2). #850 stays OPEN
+  (honest — no witness), now with a 10⁸ certified box + the family law.
+- **Task 3-a #274 (commander):** THE DIVISOR-SUM LEMMA (coset sizes are
+  distinct proper divisors; p-groups die since Σ distinct proper divisors of
+  p^k = (p^k−1)/(p−1) < p^k; among orders ≤ 24 ONLY 6,12,18,20,24 admit
+  admissible divisor-sets) + the corrected exhaustive census
+  (census274b.py): 23 nonabelian encodings of orders 6/12/18/20/24, full
+  subgroup lattices (S4: 30 subgroups ✓), mixed left/right-coset exact-cover
+  DFS — **NO WITNESS**. UNCONDITIONAL BOUNDED THEOREM: no group of order ≤
+  24 admits an exact covering by cosets of distinct sizes (abelian ≤ 36 was
+  already campaign-negative; p-groups of ANY order die by the lemma — an
+  infinite family kill for the kernel). #274 stays OPEN.
+- **Task 3-d #939 (commander):** algebraic routes (not blind escalation per
+  the S031 record): Route 2 — ALL coprime 4th-power pairs x⁴+y⁴ with sum a
+  4-powerful, c ≤ 10^16 (9,999 c-values): ZERO. Route 3 — Sophie-Germain
+  parametric family (a=x⁴, b=2⁶z⁴, both SG factors 4-powerful, z≤400,
+  x≤4000): ZERO factor-hits. #939 Q1 stays OPEN (coverage added, honestly
+  labeled).
+- **Task 3-b #677 (commander):** deep same-k collision sweep: k=2
+  INJECTIVITY LEMMA (M(n,2)=(n+1)(n+2), x↦x(x+1) strictly increasing ⇒
+  injective — a new mini-law for the kernel); ZERO gap≥k collisions for
+  k=3: n≤4,000,000 (66,000× the old n<60 box), k=4: 1.5M, k=5: 700k,
+  k=6..12: 40k..6k. #677 stays OPEN (conjecture looks TRUE — the YES-side
+  proof is the Thue-band war; the box + lemma are this round's bank).
+
+**CI STATE at round open (runs checked):** 6ec6ace kernel-a GREEN,
+kernel-b GREEN (the P708 g(4)≥4 master now CI-green), kernel-c RED = K61
+#411 r4/r5 residue only (the standing queue item — 65-error map, next
+mission). No Lean kernels were touched this round (pure-hunt wave); the
+push carries the progress pack (artifacts + corpus harvest + this entry).
+
+**HONEST SCOREBOARD:** 0 new FULL closures this round (the witness lanes
+genuinely resisted: the corpus is honest — its one-shot lanes are one-shot
+DECIDABLE, not one-shot WINNABLE); banked: #850 10⁸-box + L2-classification,
+#274 ≤24-all-groups theorem + divisor-sum lemma (p-groups infinite kill),
+#939 algebraic subfamily coverage, #677 4M-box + k=2 lemma. The corpus
+one-shot census answer for BOSS: of 592 open problems — 6 one-shot-decidable
+lanes exist (all already under campaign fire), 0 fresh one-shots.
+
+The engine never stops; it never lies. In English, always.

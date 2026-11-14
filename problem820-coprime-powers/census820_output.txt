@@ -1,0 +1,244 @@
+== Erdos820 census: gcd(2^n-1, 3^n-1), n = 1..120 ==
+good n (gcd = 1, the H(n)=3 witnesses): [1, 2, 3, 5, 7, 9, 13, 14, 15, 17, 19, 21, 25, 26, 27, 29, 31, 34, 37, 38, 39, 41, 45, 47, 49, 51, 53, 57, 59, 61, 62, 63, 65, 67, 71, 73, 74, 79, 81, 85, 87, 89, 91, 93, 94, 97, 98, 101, 103, 107, 109, 111, 113, 118]
+bad  n (gcd > 1): count = 66
+relevant primes (prime divisors of some gcd(2^n-1,3^n-1), n<=120): [5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 167, 191, 193, 239, 241, 307, 431, 601, 6553]
+
+== the L_p table: L_p = lcm(ord_p(2), ord_p(3)), p >= 5 ==
+       p   ord_p(2)   ord_p(3)      L_p primal check
+       5          4          4        4   (p-1 = 4 = {2: 2})
+       7          3          6        6   (p-1 = 6 = {2: 1, 3: 1})
+      11         10          5       10   (p-1 = 10 = {2: 1, 5: 1})
+      13         12          3       12   (p-1 = 12 = {2: 2, 3: 1})
+      17          8         16       16   (p-1 = 16 = {2: 4})
+      19         18         18       18   (p-1 = 18 = {2: 1, 3: 2})
+      23         11         11       11   (p-1 = 22 = {2: 1, 11: 1})
+      29         28         28       28   (p-1 = 28 = {2: 2, 7: 1})
+      31          5         30       30   (p-1 = 30 = {2: 1, 3: 1, 5: 1})
+      37         36         18       36   (p-1 = 36 = {2: 2, 3: 2})
+      41         20          8       40   (p-1 = 40 = {2: 3, 5: 1})
+      43         14         42       42   (p-1 = 42 = {2: 1, 3: 1, 7: 1})
+      47         23         23       23   (p-1 = 46 = {2: 1, 23: 1})
+      53         52         52       52   (p-1 = 52 = {2: 2, 13: 1})
+      59         58         29       58   (p-1 = 58 = {2: 1, 29: 1})
+      61         60         10       60   (p-1 = 60 = {2: 2, 3: 1, 5: 1})
+      67         66         22       66   (p-1 = 66 = {2: 1, 3: 1, 11: 1})
+      71         35         35       35   (p-1 = 70 = {2: 1, 5: 1, 7: 1})
+      73          9         12       36   (p-1 = 72 = {2: 3, 3: 2})
+      79         39         78       78   (p-1 = 78 = {2: 1, 3: 1, 13: 1})
+      83         82         41       82   (p-1 = 82 = {2: 1, 41: 1})
+      89         11         88       88   (p-1 = 88 = {2: 3, 11: 1})
+      97         48         48       48   (p-1 = 96 = {2: 5, 3: 1})
+     101        100        100      100   (p-1 = 100 = {2: 2, 5: 2})
+     103         51         34      102   (p-1 = 102 = {2: 1, 3: 1, 17: 1})
+     107        106         53      106   (p-1 = 106 = {2: 1, 53: 1})
+     109         36         27      108   (p-1 = 108 = {2: 2, 3: 3})
+     113         28        112      112   (p-1 = 112 = {2: 4, 7: 1})
+     167         83         83       83   (p-1 = 166 = {2: 1, 83: 1})
+     191         95         95       95   (p-1 = 190 = {2: 1, 5: 1, 19: 1})
+     193         96         16       96   (p-1 = 192 = {2: 6, 3: 1})
+     239        119        119      119   (p-1 = 238 = {2: 1, 7: 1, 17: 1})
+     241         24        120      120   (p-1 = 240 = {2: 4, 3: 1, 5: 1})
+     307        102         34      102   (p-1 = 306 = {2: 1, 3: 2, 17: 1})
+     431         43         43       43   (p-1 = 430 = {2: 1, 5: 1, 43: 1})
+     601         25         75       75   (p-1 = 600 = {2: 3, 3: 1, 5: 2})
+    6553        117         39      117   (p-1 = 6552 = {2: 3, 3: 2, 7: 1, 13: 1})
+
+== the L_p table, first 30 primes p >= 5 (requested) ==
+       p   ord_p(2)   ord_p(3)      L_p in-census
+       5          4          4        4   yes
+       7          3          6        6   yes
+      11         10          5       10   yes
+      13         12          3       12   yes
+      17          8         16       16   yes
+      19         18         18       18   yes
+      23         11         11       11   yes
+      29         28         28       28   yes
+      31          5         30       30   yes
+      37         36         18       36   yes
+      41         20          8       40   yes
+      43         14         42       42   yes
+      47         23         23       23   yes
+      53         52         52       52   yes
+      59         58         29       58   yes
+      61         60         10       60   yes
+      67         66         22       66   yes
+      71         35         35       35   yes
+      73          9         12       36   yes
+      79         39         78       78   yes
+      83         82         41       82   yes
+      89         11         88       88   yes
+      97         48         48       48   yes
+     101        100        100      100   yes
+     103         51         34      102   yes
+     107        106         53      106   yes
+     109         36         27      108   yes
+     113         28        112      112   yes
+     127          7        126      126   no (L_p > 120 never hits n <= 120)
+     131        130         65      130   no (L_p > 120 never hits n <= 120)
+
+== THE ORDER-CRITERION LAW: verification for every n <= 120 ==
+prime-set + exponent agreement for all n <= 120: True
+method A (gmpy2 gcd) == method B (order-criterion reconstruction) for all n <= 120: True
+
+== THE GOOD-N LAW: gcd(2^n-1,3^n-1)=1 <=> no relevant L_p divides n ==
+good n <=> n avoids every L_p (for the relevant primes): True
+
+== the gcd table (n: gcd(2^n-1,3^n-1)) ==
+n=  4  gcd=5  factors={5: 1}  (L_p | n: [4])
+n=  6  gcd=7  factors={7: 1}  (L_p | n: [6])
+n=  8  gcd=5  factors={5: 1}  (L_p | n: [4])
+n= 10  gcd=11  factors={11: 1}  (L_p | n: [10])
+n= 11  gcd=23  factors={23: 1}  (L_p | n: [11])
+n= 12  gcd=455  factors={5: 1, 7: 1, 13: 1}  (L_p | n: [4, 6, 12])
+n= 16  gcd=85  factors={5: 1, 17: 1}  (L_p | n: [4, 16])
+n= 18  gcd=133  factors={7: 1, 19: 1}  (L_p | n: [6, 18])
+n= 20  gcd=275  factors={5: 2, 11: 1}  (L_p | n: [4, 10])
+n= 22  gcd=23  factors={23: 1}  (L_p | n: [11])
+n= 23  gcd=47  factors={47: 1}  (L_p | n: [23])
+n= 24  gcd=455  factors={5: 1, 7: 1, 13: 1}  (L_p | n: [4, 6, 12])
+n= 28  gcd=145  factors={5: 1, 29: 1}  (L_p | n: [4, 28])
+n= 30  gcd=2387  factors={7: 1, 11: 1, 31: 1}  (L_p | n: [6, 10, 30])
+n= 32  gcd=85  factors={5: 1, 17: 1}  (L_p | n: [4, 16])
+n= 33  gcd=23  factors={23: 1}  (L_p | n: [11])
+n= 35  gcd=71  factors={71: 1}  (L_p | n: [35])
+n= 36  gcd=23350145  factors={5: 1, 7: 1, 13: 1, 19: 1, 37: 1, 73: 1}  (L_p | n: [4, 6, 12, 18, 36])
+n= 40  gcd=11275  factors={5: 2, 11: 1, 41: 1}  (L_p | n: [4, 10, 40])
+n= 42  gcd=2107  factors={7: 2, 43: 1}  (L_p | n: [6, 42])
+n= 43  gcd=431  factors={431: 1}  (L_p | n: [43])
+n= 44  gcd=115  factors={5: 1, 23: 1}  (L_p | n: [4, 11])
+n= 46  gcd=47  factors={47: 1}  (L_p | n: [23])
+n= 48  gcd=750295  factors={5: 1, 7: 1, 13: 1, 17: 1, 97: 1}  (L_p | n: [4, 6, 12, 16, 48])
+n= 50  gcd=11  factors={11: 1}  (L_p | n: [10])
+n= 52  gcd=265  factors={5: 1, 53: 1}  (L_p | n: [4, 52])
+n= 54  gcd=133  factors={7: 1, 19: 1}  (L_p | n: [6, 18])
+n= 55  gcd=23  factors={23: 1}  (L_p | n: [11])
+n= 56  gcd=145  factors={5: 1, 29: 1}  (L_p | n: [4, 28])
+n= 58  gcd=59  factors={59: 1}  (L_p | n: [58])
+n= 60  gcd=47322275  factors={5: 2, 7: 1, 11: 1, 13: 1, 31: 1, 61: 1}  (L_p | n: [4, 6, 10, 12, 30, 60])
+n= 64  gcd=85  factors={5: 1, 17: 1}  (L_p | n: [4, 16])
+n= 66  gcd=10787  factors={7: 1, 23: 1, 67: 1}  (L_p | n: [6, 11, 66])
+n= 68  gcd=5  factors={5: 1}  (L_p | n: [4])
+n= 69  gcd=47  factors={47: 1}  (L_p | n: [23])
+n= 70  gcd=781  factors={11: 1, 71: 1}  (L_p | n: [10, 35])
+n= 72  gcd=23350145  factors={5: 1, 7: 1, 13: 1, 19: 1, 37: 1, 73: 1}  (L_p | n: [4, 6, 12, 18, 36])
+n= 75  gcd=601  factors={601: 1}  (L_p | n: [75])
+n= 76  gcd=5  factors={5: 1}  (L_p | n: [4])
+n= 77  gcd=23  factors={23: 1}  (L_p | n: [11])
+n= 78  gcd=553  factors={7: 1, 79: 1}  (L_p | n: [6, 78])
+n= 80  gcd=191675  factors={5: 2, 11: 1, 17: 1, 41: 1}  (L_p | n: [4, 10, 16, 40])
+n= 82  gcd=83  factors={83: 1}  (L_p | n: [82])
+n= 83  gcd=167  factors={167: 1}  (L_p | n: [83])
+n= 84  gcd=3971695  factors={5: 1, 7: 2, 13: 1, 29: 1, 43: 1}  (L_p | n: [4, 6, 12, 28, 42])
+n= 86  gcd=431  factors={431: 1}  (L_p | n: [43])
+n= 88  gcd=10235  factors={5: 1, 23: 1, 89: 1}  (L_p | n: [4, 11, 88])
+n= 90  gcd=45353  factors={7: 1, 11: 1, 19: 1, 31: 1}  (L_p | n: [6, 10, 18, 30])
+n= 92  gcd=235  factors={5: 1, 47: 1}  (L_p | n: [4, 23])
+n= 95  gcd=191  factors={191: 1}  (L_p | n: [95])
+n= 96  gcd=144806935  factors={5: 1, 7: 1, 13: 1, 17: 1, 97: 1, 193: 1}  (L_p | n: [4, 6, 12, 16, 48, 96])
+n= 99  gcd=23  factors={23: 1}  (L_p | n: [11])
+n=100  gcd=138875  factors={5: 3, 11: 1, 101: 1}  (L_p | n: [4, 10, 100])
+n=102  gcd=221347  factors={7: 1, 103: 1, 307: 1}  (L_p | n: [6, 102])
+n=104  gcd=265  factors={5: 1, 53: 1}  (L_p | n: [4, 52])
+n=105  gcd=71  factors={71: 1}  (L_p | n: [35])
+n=106  gcd=107  factors={107: 1}  (L_p | n: [106])
+n=108  gcd=2545165805  factors={5: 1, 7: 1, 13: 1, 19: 1, 37: 1, 73: 1, 109: 1}  (L_p | n: [4, 6, 12, 18, 36, 108])
+n=110  gcd=2783  factors={11: 2, 23: 1}  (L_p | n: [10, 11])
+n=112  gcd=278545  factors={5: 1, 17: 1, 29: 1, 113: 1}  (L_p | n: [4, 16, 28, 112])
+n=114  gcd=7  factors={7: 1}  (L_p | n: [6])
+n=115  gcd=47  factors={47: 1}  (L_p | n: [23])
+n=116  gcd=295  factors={5: 1, 59: 1}  (L_p | n: [4, 58])
+n=117  gcd=6553  factors={6553: 1}  (L_p | n: [117])
+n=119  gcd=239  factors={239: 1}  (L_p | n: [119])
+n=120  gcd=467591399275  factors={5: 2, 7: 1, 11: 1, 13: 1, 31: 1, 41: 1, 61: 1, 241: 1}  (L_p | n: [4, 6, 10, 12, 30, 40, 60, 120])
+
+== H(n) census: smallest l with some k < l, gcd(k^n-1,l^n-1)=1 ==
+   (k ranges 2..l-1; the k=1 lane is dead for every n >= 2 since
+    gcd(0, l^n-1) = l^n-1 >= 3; k >= 2 is the corpus convention.)
+n=  1  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n=  2  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n=  3  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n=  4  gcd(2^n-1,3^n-1)=5  H(n)=(6, 5)
+n=  5  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n=  6  gcd(2^n-1,3^n-1)=7  H(n)=(18, 14)
+n=  7  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n=  8  gcd(2^n-1,3^n-1)=5  H(n)=(6, 5)
+n=  9  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 10  gcd(2^n-1,3^n-1)=11  H(n)=(12, 11)
+n= 11  gcd(2^n-1,3^n-1)=23  H(n)=(5, 2)
+n= 12  gcd(2^n-1,3^n-1)=455  H(n)=None  (none <= 50; extended: (65, 42))
+n= 13  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 14  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 15  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 16  gcd(2^n-1,3^n-1)=85  H(n)=(34, 30)
+n= 17  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 18  gcd(2^n-1,3^n-1)=133  H(n)=(42, 19)
+n= 19  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 20  gcd(2^n-1,3^n-1)=275  H(n)=(30, 11)
+n= 21  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 22  gcd(2^n-1,3^n-1)=23  H(n)=(23, 6)
+n= 23  gcd(2^n-1,3^n-1)=47  H(n)=(5, 2)
+n= 24  gcd(2^n-1,3^n-1)=455  H(n)=None  (none <= 50; extended: (65, 42))
+n= 25  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 26  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 27  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 28  gcd(2^n-1,3^n-1)=145  H(n)=(30, 29)
+n= 29  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 30  gcd(2^n-1,3^n-1)=2387  H(n)=None  (none <= 50; extended: None)
+n= 31  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 32  gcd(2^n-1,3^n-1)=85  H(n)=None  (none <= 50; extended: (80, 51))
+n= 33  gcd(2^n-1,3^n-1)=23  H(n)=(5, 2)
+n= 34  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 35  gcd(2^n-1,3^n-1)=71  H(n)=(7, 2)
+n= 36  gcd(2^n-1,3^n-1)=23350145  H(n)=None  (none <= 50; extended: None)
+n= 37  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 38  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 39  gcd(2^n-1,3^n-1)=1  H(n)=(3, 2)
+n= 40  gcd(2^n-1,3^n-1)=11275  H(n)=None  (none <= 50; extended: None)
+
+== mirror lane: smallest k >= 2 with gcd(k^n-1, 2^n-1) = 1 (Erdos's last Q) ==
+n=  1  smallest k = 2
+n=  2  smallest k = 3
+n=  3  smallest k = 3
+n=  4  smallest k = 15
+n=  5  smallest k = 3
+n=  6  smallest k = 21
+n=  7  smallest k = 3
+n=  8  smallest k = 45
+n=  9  smallest k = 3
+n= 10  smallest k = 99
+n= 11  smallest k = 5
+n= 12  smallest k > 200
+n= 13  smallest k = 3
+n= 14  smallest k = 3
+n= 15  smallest k = 3
+n= 16  smallest k > 200
+n= 17  smallest k = 3
+n= 18  smallest k > 200
+n= 19  smallest k = 3
+n= 20  smallest k > 200
+n= 21  smallest k = 3
+n= 22  smallest k = 69
+n= 23  smallest k = 5
+n= 24  smallest k > 200
+n= 25  smallest k = 3
+n= 26  smallest k = 3
+n= 27  smallest k = 3
+n= 28  smallest k > 200
+n= 29  smallest k = 3
+n= 30  smallest k > 200
+n= 31  smallest k = 3
+n= 32  smallest k > 200
+n= 33  smallest k = 5
+n= 34  smallest k = 3
+n= 35  smallest k = 7
+n= 36  smallest k > 200
+n= 37  smallest k = 3
+n= 38  smallest k = 3
+n= 39  smallest k = 3
+n= 40  smallest k > 200
+
+== RECEIPTS ==
+python: 3.12.16
+gmpy2 gcd + powmod; sympy 1.14.0 factorint
+law (prime sets + exponents + full reconstruction): True
+E820_CENSUS_GREEN

@@ -1,0 +1,22 @@
+[alloc] spf 40.0 MB (N=10000002), primes cap 3.3 MB
+=== HUNT850 — Erdos problem #850: length-3 radical-triple (Erdos-Woods length-3) witness hunt ===
+X=10000000 N=10000002 bx=24 hash_bits=40 outdir=/home/z/erdos-weak-problems/problem850-radical-triple
+[sieve] SPF linear sieve: 0.08 s, primes: 664579
+[self-check] SPF vs trial division (n<=10000): PASS | rad spot values (rad(48)=6, rad(75)=15, rad(960)=30, rad(16128)=42, ...): PASS
+[radtab] cached radicals: 0.44 s (spf freed; factorizations via trial division)
+[L3] pass 0.10 s | sort 1.01 s | scan+verify 0.03 s | hash-collision candidate pairs: 51 | exact-verified TRUE: 0 | rejected hash collisions: 51
+[L3 VERDICT] NO length-3 radical-triple witness pair with both members in [1, 10000000].
+[L2 pair] x=254 y=65024 rad(x)=rad(y)=254 rad(x+1)=rad(y+1)=255
+[L2 pair] x=2 y=8 rad(x)=rad(y)=2 rad(x+1)=rad(y+1)=3
+[L2 pair] x=2046 y=4190208 rad(x)=rad(y)=2046 rad(x+1)=rad(y+1)=2047
+[L2 pair] x=6 y=48 rad(x)=rad(y)=6 rad(x+1)=rad(y+1)=7
+[L2 pair] x=62 y=3968 rad(x)=rad(y)=62 rad(x+1)=rad(y+1)=21
+[L2 pair] x=75 y=1215 rad(x)=rad(y)=15 rad(x+1)=rad(y+1)=38
+[L2 pair] x=126 y=16128 rad(x)=rad(y)=42 rad(x+1)=rad(y+1)=127
+[L2 pair] x=1022 y=1046528 rad(x)=rad(y)=1022 rad(x+1)=rad(y+1)=1023
+[L2 pair] x=510 y=261120 rad(x)=rad(y)=510 rad(x+1)=rad(y+1)=511
+[L2 pair] x=30 y=960 rad(x)=rad(y)=30 rad(x+1)=rad(y+1)=31
+[L2 pair] x=14 y=224 rad(x)=rad(y)=14 rad(x+1)=rad(y+1)=15
+[L2] pass 0.03 s | sort 1.06 s | scan+verify 0.03 s | candidates 61 | verified length-2 pairs: 11 (smaller member > 2*10^4: 0)
+[L2 sanity] (2,8):FOUND (6,48):FOUND (75,1215):FOUND   full list: /home/z/erdos-weak-problems/problem850-radical-triple/length2_pairs.txt
+[done] total 2.77 s, peak RSS 118.8 MB

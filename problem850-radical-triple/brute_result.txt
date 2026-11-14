@@ -1,0 +1,5 @@
+python brute force (X=100000):
+  L2 pairs: [(2, 8), (6, 48), (14, 224), (30, 960), (62, 3968), (75, 1215), (126, 16128), (254, 65024)]
+  L3 pairs: []
+C-vs-python L2 pair list: MATCH
+C-vs-python L3 both empty: yes

@@ -1,0 +1,9 @@
+4-powerful <= 1e16: 9999 (0.0s)
+Route 2 (c=x^4+y^4 subfamily, all 4-powerful c <= 1e16): ZERO (10.8s, 9999/9999 c scanned)
+4-powerful <= 2e8: 117 (0.0s)
+Route 3 (SG factors u,v both 4-powerful, z<=400, x<=4000): 0 factor-hits [], full witness: None (0.4s)
+NO WITNESS via algebraic routes this round. Coverage added:
+  - ALL coprime 4th-power pairs (x^4+y^4) with sum <= 1e16: ZERO (complete subfamily).
+  - SG parametric family z<=400, x<=4000: factor-hits listed above; no full witness.
+
+Total runtime 11.2s

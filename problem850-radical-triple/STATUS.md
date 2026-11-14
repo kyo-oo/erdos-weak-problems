@@ -27,3 +27,17 @@
 8. NEXT: if CI green, bank W57-2r; if red, the error line pins the one
    lemma to swap (fallbacks: Nat.mod_add_div route for rad_dvd; rfl route
    for list-values).
+9. HUNT 3-c (radical triple depth escalation, #850): C hunt (`hunt850.c` /
+   `hunt850`, log `hunt850_output.txt`) — SPF linear sieve + packed-hash
+   (37-bit) sort + exact re-verification. Certified: NO length-3 witness
+   pair with both members in [1, 10^8] (prior bound 2*10^4, x5000; bounded
+   theorem, problem still open beyond 10^8). Validated: exact match vs
+   python brute force at 10^5; 36373 hash-collision candidates all
+   rejected (birthday prediction ~36400); sympy cross-checks all PASS.
+   BONUS census (complete, [1,10^8]): exactly 13 length-2 pairs — the 12
+   Mersenne-family pairs (2^k-2, (2^k-1)^2-1), k=2..13 (incl. (2,8),
+   (30,960), (8190,67092480), ...) plus sporadic (75,1215); NONE with
+   smaller member > 8190 (so none beyond 2*10^4) — prior records listed
+   only (6,48) and (75,1215). No Mersenne-family pair extends to length 3
+   (y+2 = m^2+1 = 2 mod 8 is never a power of 2). No WITNESS850.md (no
+   witness found; honest no-closure).
