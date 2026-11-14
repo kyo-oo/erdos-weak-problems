@@ -581,7 +581,7 @@ theorem phiB_even_of_odd : ∀ {x h : Nat}, x = 2*h + 1 → 3 ≤ x → 2 ∣ ph
           have hEq : x - (h + k + 1) = h - k := by omega
           rw [hEq] at hpar
           rw [show h - 1 - k + 1 = h - k from by omega]
-          exact decCongr (by rw ← hpar))]
+          exact decCongr (by rw [← hpar]))]
   -- now countP (fun k => P (h-1-k)) (range h) = countP P (range h) by index reversal
   have hEq2 : (fun k => decide (Nat.gcd (h - 1 - k + 1) x = 1))
       = (fun j => (fun j => decide (Nat.gcd (j + 1) x = 1)) (h - 1 - j)) := rfl
@@ -946,7 +946,8 @@ theorem oddPF_fac : ∀ (v f : Nat), 0 < v → v < 2^f →
         simp only [oddPF, if_pos hmod]
         have hdivpos : 0 < v / 2 := by omega
         have hdivlt : v / 2 < 2^f := by
-          have hp : 2^(f+1) = 2 * 2^f := by rw [Nat.pow_add, Nat.pow_one]
+          have hp : 2^(f+1) = 2 * 2^f := by
+            rw [Nat.pow_add, Nat.pow_one]; ring
           rw [hp] at hlt
           exact Nat.div_lt_of_lt_mul hlt
         obtain ⟨i, m, hm, hme, hof⟩ := ih (v/2) hdivpos hdivlt
@@ -1270,14 +1271,12 @@ theorem closure_prop (i : Nat) (hi : i < table411.length) :
   have h := closure_all i hi
   unfold closureB at h
   rw [decide_eq_true hi] at h
-  simp only [Bool.true_and, Bool.or_eq_true, Bool.and_eq_true,
-      decide_eq_true_iff] at h
+  simp only [Bool.true_and, Bool.or_eq_true, Bool.and_eq_true] at h
   rcases h with hSIX | hrest
   · exact Or.inl hSIX
-  · obtain ⟨hlt, heven, hval⟩ := hrest
-    have hlt' := of_decide_eq_true hlt
-    have heven' := eq_of_beq heven
-    have hval' := eq_of_beq hval
+  · have hlt' := of_decide_eq_true hrest.1
+    have heven' := eq_of_beq hrest.2.1
+    have hval' := eq_of_beq hrest.2.2
     refine Or.inr ⟨stepIX411[i]!, hlt', by omega, hval', heven'⟩
 
 /-! ## §10 The witness theorem (the odd-part reduction). -/
