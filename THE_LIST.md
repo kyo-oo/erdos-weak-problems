@@ -1,5 +1,33 @@
 # THE LIST — THE OPERATIONAL LAW (v9, Session 041, 2026-11-09)
 
+> **v11 STATUS ADDENDUM (S064/W64 — THE WAVE SESSION):** BOSS's wave order
+> executed (MATHS v2 invoked; 9 sub-agent lanes W64-A..J released; the
+> adapter's dispatch reports were false-negative — agents landed and
+> executed anyway; git state = the report). THREE NEW CI-CERTIFIED KILLS:
+> **K#38 = #411** (kernel61 KILLED, triple-green runs 43598294749/
+> 43599564453/43602044077: 12 theorems, partition+count axiom-free, the
+> ten-round CI war won — the masked guard defect was the last enemy; scope:
+> even n ≤ 2000 census count 535 + odd parts ≤ 59049 + the six-family
+> doubling law; the ALL-even-n closure honestly open), **K#39 = #708 g(4)
+> master** (QUADRUPLE-green 43602748433/43605017845/43606392625/43607312330:
+> the exact-budget enumerator + the 1365-box census + g(4) = 4 EXACTLY on
+> the certified box {four-element A ⊆ [2,16]} × {t ≤ 40} — the Erdős $100
+> case-value lane's first floor beyond ErSu59; NO-OOM law vindicated: the
+> 60,151-line kernel elaborates in ~4.5 min at the 4M default after the
+> witness-table restructure), **K#40 = #885 k=4 case theorem** (kernel-c
+> green 43601000542: the first in-house k=4 witness N=2254336<9945936<
+> 29904336<779175936 sharing exactly {534,3216,8016,9840}, E885K4.k4_witness
+> axioms [propext] only; k=5 escalation banked: 12,761 K62 pairs seeded +
+> extension negative census to 1e9). THE WAVE-CLOSE MERGE: w64-merge
+> master-verified ALL-GREEN (run 43610571086) — campaign advanced with six
+> kills (#411, #708, #885-k4, #961-19tier, #1063-k20, #451-k28). LIVE AT
+> CLOSE: #348 kernel54 repair loop (the (2,3) case theorem authored), #939
+> the true-box bounded-theorem authoring (no coprime 4-powerful triple ≤
+> 10^19), #1212 Erdos1212.lean authored (repair loop), #289 Erdos289.lean
+> authored (CI in flight), #203 the feasibility law (42-prime palette),
+> #306 census 142/181 (commander lane; the near-unit family = the
+> complement-flip regime; disjoint-window splits next).
+
 > **v10 STATUS ADDENDUM (S063/W62):** THE AUDIT LAW STANDS (W61: 0/34 FULL —
 > 32 PARTIAL / 2 EVIDENCE; the "OK" marks mean "OK for the delivered
 > statement"). W62 volley: THREE FRONTIER KILLS — #961 the 13-tier

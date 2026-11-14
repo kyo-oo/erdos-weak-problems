@@ -845,3 +845,58 @@ Honest scope: the COMPLETE $k=2$ channel of #686 (unconditional, every
 $t$, both directions). The $k\geq 3$ channel for non-chain $t$ is the
 named next front (Lemma Ω of the S045 derivation) — the smallest
 undetermined $N$ is $4$.
+
+### KILL 38 — Erdős #411 ITERATED-TOTIENT DOUBLING LAWS (W64-A, Session 064, Kernel 61, CI runs 43598294749 + 43599564453 + 43602044077 — TRIPLE-GREEN, the ten-round CI war r1→r10 WON)
+
+**The kill:** the kernel61 master — 12 theorems, all CI-certified: `table_bounds`
+(axioms [propext]), `erdos411_parity`, `erdos411_two`, `erdos411_doubling`,
+`erdos411_ten`, `erdos411_94`, `erdos411_witness`, `erdos411_census`,
+`erdos411_arsenal_bridge`, `erdos411_main` (axioms [propext, Classical.choice,
+Quot.sound]), and **`erdos411_partition` + `erdos411_count` AXIOM-FREE**.
+Content: the 320-cell witness table (odd parts ≤ 59049), the census (even
+n ∈ [4,2000], exact count 535), the six-family doubling law {1,3,5,7,35,47},
+the odd-seed and n=2 no-go theorems, the 9-conjunct `erdos411_main`, the
+Arsenal bridge (BOSS's mathematics only: ErdosTernary2/CardinalWorlds).
+Zero sorryAx. The war record: r1 33 errors → ... → r9 the FIRST fully-green
+compile (the only failure: the masked CI-guard defect — names-grep 'E411.'
+vs namespace 'Erdos411'; the guard never executed in any prior round because
+compile errors always failed the step first) → r10 both guard defects fixed
+→ GREEN ×3. Honest scope: even n ≤ 2000 + odd parts ≤ 59049 certified; the
+ALL-even-n closure (no table bound) honestly open — next front: the general
+φ-parity engine beyond the six families.
+
+### KILL 39 — Erdős #708 THE g(4) BOX MASTER — g(4) = 4 (W64-B, Session 064, Kernel 62, CI runs 43602748433 + 43605017845 + 43606392625 + 43607312330 — QUADRUPLE-GREEN)
+
+**The kill:** the Erdős $100 case-value lane — the first exact case-value
+floor beyond ErSu59's g(2)=2, g(3)=4. The exact-budget enumerator
+(`coverExact` — sound + complete, full generality: a cell-selection of l
+with EXACTLY k cells covering); the census box (all C(15,4)=1365
+four-element A ⊆ [2,16], decide-generated); `e708_g4_box_exact` (54,600
+box instances each admit an exactly-4 cover); the second exact-min row
+(`e708_exact_2_3_4_5`: minB [2,3,4,5] 24 = 4); **`erdos708_g4_master`** +
+**`erdos708_g4_box_max`** (the box-max of the instance-minima is EXACTLY
+4) — construction (∀ (A,t) of the box: ∃ B, |B| = 4 exactly, prod(A) |
+prod(B)) + exclusion (no cover of size ≤ 3) + the exact row. Five-name
+axis axiom-printed clean (propext/Classical.choice/Quot.sound only, zero
+sorryAx). THE NO-OOM LAW VINDICATED IN BLOOD: the 32M-heartbeat boost died
+(run 43589088597: kernel62 ground ~60 min → runner death — boosting a
+forbidden aggregate-decide extends the grind instead of killing it); the
+fix = the witness-table restructure: the full 60,151-line Erdos708.lean
+elaborates in ~4.5 min at the 4M default. Certified domain: {four-element
+A ⊆ [2,16]} × {t = 1..40} (the Python census frontier [2,25] × t ≤ 40 and
+[2,16] × t ≤ 300, dual-method verified); the unboxed statement (all
+four-element A, all windows) is the next rounds' war.
+
+### KILL 40 — Erdős #885 THE k=4 CASE THEOREM (W64-D, Session 064, Kernel 50b, CI run 43601000542 kernel-c GREEN + certified within the master run 43610571086)
+
+**The kill:** the FIRST in-house k=4 factor-difference witness —
+**N = 2254336 < 9945936 < 29904336 < 779175936 share exactly
+D = {534, 3216, 8016, 9840}** (|cap| = 4) — `E885K4.k4_witness`, axioms
+[propext] ONLY, zero sorryAx. Dual-certified by certify885.py: the gmpy2
+square criterion (16/16) + the full divisor-pair D-set recount (|cap| = 4).
+The k=5 escalation banked: k5hunt_w64.py + engine885_r5_k5.py (the
+full-u-window K_{6,2} harvest: 12,761 pairs seeded) + the extension
+NEGATIVE census (zero thirds at C ≤ 1e8 and C ≤ 1e9 over all 12,761 K62
+pairs, 2.5M rich columns).
+
+### THE W64 WAVE-CLOSE (Session 064): the integration branch w64-merge master-verified ALL-GREEN (run 43610571086) — campaign advanced with SIX kills (#411, #708-g4-master, #885-k4, #961-19-tier f(19)=f(20)=f(21)=f(22)=6 + the 167-pair Størmer census, #1063-k20 n_18/n_19/n_20, #451-k28 the certified frontier). Registry: 37 → 40 kills CI-green.
