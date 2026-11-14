@@ -3818,3 +3818,159 @@ one-shot census answer for BOSS: of 592 open problems — 6 one-shot-decidable
 lanes exist (all already under campaign fire), 0 fresh one-shots.
 
 The engine never stops; it never lies. In English, always.
+
+## S063 — W62: THE VERIFICATION + THE ONE-SHOT VOLLEY + THE K61 r5 SURGERY (BOSS order: audit + select + assault)
+
+**BOSS's order (this round):** (1) verify the "okay completed" audit — the
+W61 verdict re-checked against the artifacts; (2) select MY OWN one-shot
+targets over the 592-corpus with BOSS's mathematics; (3) assault with
+sub-agents, same conditions (full statements, complete unconditional proofs,
+arsenal-only, GitHub CI persistence). TONGUE LAW (BOSS, standing): English
+only, always.
+
+**0. THE STATE RECOVERY (commander):** the local repo restored from the
+sealed zipbag (fa4a160) and fast-forwarded to the true frontline S062
+(01d39e0) — the W61 round had already delivered: THE AUDIT (0/34 FULL —
+32 PARTIAL / 2 EVIDENCE; the "OK" marks mean "OK for the delivered
+statement", NOT "corpus problem solved") + the 592-corpus one-shot census
+(391 fresh after OUT-exclusions; machine triage + manual sweep; VERDICT: 0
+certain fresh one-shot FULL-closure candidates; the one-shot-DECIDABLE lanes
+= the 6 witness lanes, 4 already W61-struck). This round re-verified the
+census artifacts live (corpus_statements.json = 593 statements present;
+triage2.py OUT-lists intact) and took the NEXT step: the assault on the
+remaining lanes + the guaranteed-kill extensions.
+
+**1. THE SUB-AGENT VOLLEY (4 agents fired; 1 delivered clean, 3 died to the
+flaky agent service — the commander executed the dead missions directly):**
+
+- **Task 1-c (agent 761ac21d, DELIVERED): THREE FRONTIER EXTENSIONS KILLED.**
+  - **#961 (smooth runs): f(13)=f(14)=f(15)=f(16)=6** — the certified
+    frontier extended from f(k)=4 (k ≤ 12) to the 13-tier. THE COMPLETE
+    STØRMER–PELL CENSUS AT S={2,3,5,7,11,13}: exactly **68 consecutive
+    13-smooth pairs, largest (123200, 123201)** (the 5-tier had 40 pairs,
+    largest (9800,9801)). Maximal-run decomposition: the 5-run witness
+    (24,25,26,27,28)=(2³·3, 5², 2·13, 3³, 2²·7) gives f ≥ 6; the complete
+    census exclusion (no 6-run above k) gives f ≤ 6. Machine: 63 Pell
+    equations (exact CF + identity), brute minimality 405,933 in-engine +
+    625,742,711 checks for the heavy a=5005 row (271s companion job);
+    **DUAL cross-check independent of Pell: all 958,460 13-smooth integers
+    ≤ 10^18 brute-enumerated — pairs EQUAL the census, run decompositions
+    equal.** Calibration: f(2..12) re-derived GREEN. Artifacts:
+    stormer961_k13.py + STATUS_K13.md + brute5005.py.
+  - **#1063 (binomial frontier): n_15=4732, n_16=3213, n_17=1456** — the
+    certified frontier extended from n_14=793 to k=17. Witness wcount=k−1
+    with exactly one exempt position each (k=15: i=7, 4725=3³·5²·7,
+    v₃-deficit 3>1; k=16: i=13, 3200=2⁷·5², v₂ 7>3; k=17: i=11,
+    1445=5·17², v₁₇ 2>1). Completeness: 9305 exclusion points. DUAL code
+    paths: exact gmpy2.comb divisibility vs the Legendre/Kummer valuation
+    route (11,493 points, no binomial ever formed on path B). Calibration
+    k=2..14 re-derived GREEN. Artifacts: engine_round2.py +
+    STATUS_EXTENSION.md.
+  - **#451 (interval-prime-free): n_21=805, n_22=2691, n_23=1884,
+    n_24=2664** — the certified frontier extended from n_20=550 to k=24.
+    Per row: the modular route (erdos451_crit) vs the direct product route,
+    both agree on all 22 rows; witness residues all outside [1,k];
+    exclusions machine-checked. Calibration k=2..20 intact (19/19).
+    Artifacts: battery451_ext.py + STATUS_EXTENSION.md.
+  Every new value is an honest complete unconditional case theorem — "the
+  certified frontier extended to k=16 / k=17 / k=24" — no general-k law
+  claimed.
+
+- **Task 1-b (#939 r=4 triple hunt, agent died mid-run — the commander
+  found the dead agent's bank): THE PRIOR-HUNT ENUMERATION BUG (AUDIT939).**
+  Every prior r=4 hunt (hunt939b/c, the W61 Routes 2/3) enumerated FOURTH
+  POWERS (exponent multiples of 4) instead of TRUE 4-powerful numbers
+  (exponents ≥ 4): 32=2⁵ and 2592=2⁵·3⁴ were MISSING from every prior list
+  (receipt: the buggy generator yields exactly 1,777 ≤ 10^13 = the count of
+  fourth powers). ALL prior r=4 "zero" claims are FLT(x⁴+y⁴=z⁴)-void —
+  coverage claims VOID, honestly retracted. The corrected enumerator
+  (validated: reproduces the K60 Lean census row exactly at 10^4 +
+  brute-force cross-check at 10^7): TRUE counts 11,653 ≤ 10^13, 40,048 ≤
+  10^15, 73,698 ≤ 10^16, 246,652 ≤ 10^18, 449,087 ≤ 10^19. The TRUE
+  exhaustive box hunt (hunt939d.py, bucketed EO/OO lanes, numpy-exact)
+  relaunched detached; the 10^19 box (hunt939e.py) queued. THE ONE-SHOT
+  LOTTERY: one triple in the box = the FULL Q1 kill; the box itself (if
+  zero) = a NEW unconditional bounded theorem 1000× the prior bound.
+
+- **Task 1-a (#203 covering assault, agent empty — the commander executed):
+  THE DENSITY-LAW ESCALATION.** Structural law this round: a prime p with
+  o2 | L2, o3 | L3 covers exactly L2·L3/|⟨2,3⟩ mod p| cells of the torus —
+  the v5 banked 28.47% died on density-sum ≈ 1.05 (the fractional-covering
+  boundary) + overlap waste. THE ESCALATION (hunt203_r3.py, running
+  detached): enriched palette = primes dividing 2^d−1/3^e−1 for divisors
+  d,e of 27720 (every prime whose orders divide the torus), sampled-column
+  anneal + full-torus verification passes + CRT extraction on kill.
+  Honest state: the palette build (the 2^d−1 factorization sweep to d=720)
+  grinds; banked at round close = the structural law + the engine.
+
+- **Task 1-d (K61 #411 r5 CI repair, agent timed out — the commander
+  executed THE FULL SURGERY).** The LIVE CI log pulled (run 43553801505,
+  kernel-c, 90 error lines — the freshest error set matches the w60_r4
+  map). Root-cause families killed (30 fix families, the deterministic
+  repair411.py — source of truth = the git blob, in-memory transformation,
+  md5-stable write, zero sorry):
+  1. countP_congr_local: the induction auto-reverted h — ih is an
+     implication; the rw consumed it as an equation (46).
+  2. SIXl_mem: the simp left the impossible m ∈ [] tail — 7-way rcases +
+     omega ×6 + absurd (146).
+  3. inFAM FORWARD REFERENCE: def at 586 used at 151 — the keystone
+     cascade (151 → inFAM_pos → gstep_dbl_comm → gF_two_pow → doubling).
+     Def moved up; the old copy deleted.
+  4. countP_rev_idx: hz : M+1−1−M = M was FALSE (omega correctly refused)
+     — the full clean rewrite via countP_shift + congr chains + final
+     omega on ite-atoms (214, 221).
+  5. parity_elem: the ite-literal residues (if true = true …) close by rfl
+     — appended to all three bullets (232, 235, 239).
+  6. phiB_odd_dbl: the parity_split lemma's k%2 shape NEVER matched the
+     (k+1)%2 predicates — the NEW shifted variant
+     countP_parity_split_succ (per-element lemma + omega) minted and
+     applied (421).
+  7. phiB_two_pow_mul: ih already the equation — dropped the phantom args
+     (446).
+  8. phiB_le: List.countP_le_length has zero explicit binders in this
+     toolchain — bare name (456).
+  9. phiB_even_of_odd: range_succ via conv-lhs rw (the exact-application
+     binder disease, 486) + hlast rebuilt without rewriting under the
+     decide (the instDecidableCoprime motive kill, 489/490) + the Mathlib
+     countP_congr replaced by the local (501).
+  10. gstep_3: the rw chain auto-closed by defeq — the trailing ring
+      deleted (552 "No goals").
+  11. gF_add: the induction needed x generalized — explicit revert + ih
+      (gstep x) (583).
+  12. inFAM_gstep m=3: the exponent a+2−1 normalized to a+1 before
+      two_pow_succ_add (608).
+  13. gF_two_pow zero-case: def-unfold residues by rfl (667, 668).
+  14. erdos411_doubling: the conv `rhs =>` PARSE ERROR + the k/2
+      self-reference in the k-atom rewrite — restructured via fresh
+      q + subst (k even/odd both) (698, 701, 705).
+  15. gF_two_pow/erdos411_doubling hfam: powers are not omega-fragment —
+      the exponent commuted via show + pow_add + ring (680).
+  16. erdos411_parity n=1: cases (j−1) swallowed the branch condition —
+      the zero-branch goal was FALSE; explicit-disjunction split + the
+      k-let inlined (788, 795, 796).
+  17. erdos411_two: same k-inline (817).
+  18. two_pow_mul_exists: the bullet indentation defect (parser death,
+      827, 828).
+  19/20. oddPF_eq/oddPF_fac: `generalizing` silently failed to revert —
+      the ih-call arities mismatched; explicit revert-restructure; the
+      (a−1)+1 exponent show in oddPF_eq (855, 868, 870).
+  21. oddPF_bound_ok: pow_le_pow_right's first explicit binder is the
+      proof — (by omega) form (894).
+  22. closure_all ×17: the all_eq_true rw never matched (closureChunk
+      ununfolded) — `simp only [closureChunk] at h` inserted in every
+      block (1008–1030+).
+  CI verdict PENDING on the W62 push (kernel-c). Residual risk (honest):
+  the file compiled BLIND (no local lean — the CI-carrier law); the
+  elaboration-order uncertainties (the generalizing behavior, the
+  ite-instance normals) were eliminated by the deterministic
+  revert-restructures, but the CI run is the only verdict.
+
+**2. THE HONEST SCOREBOARD (S063):** 3 new complete unconditional case
+theorems (the #961 13-tier with the 68-pair census; the #1063 k=15..17
+values; the #451 k=21..24 values) + 1 prior-coverage retraction with the
+corrected engine (#939) + the K61 r5 surgery banked + 2 witness hunts
+running detached (#939 true-box, #203 enriched-palette). ZERO new FULL
+corpus closures (the witness lanes resist — consistent with the census).
+The audit stands: 0/34 FULL; the corpus one-shot answer stands: 0 fresh.
+
+The engine never stops; it never lies. In English, always.

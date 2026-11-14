@@ -1,0 +1,177 @@
+(A) Pell fundamentals for the 63 squarefree S-units (S={2,3,5,7,11,13}):
+   63 equations solved; survivors (Y1 13-smooth): 53 ; dead: 10
+   DEAD a=  130: Y1=570        killed by prime 19 > 13
+   DEAD a=  286: Y1=33222      killed by prime 113 > 13
+   DEAD a=  385: Y1=4884       killed by prime 37 > 13
+   DEAD a=  429: Y1=73584      killed by prime 73 > 13
+   DEAD a=  715: Y1=2829       killed by prime 23 > 13
+   DEAD a= 1001: Y1=33532      killed by prime 83 > 13
+   DEAD a= 1365: Y1=684        killed by prime 19 > 13
+   DEAD a= 2002: Y1=253128     killed by prime 53 > 13
+   DEAD a= 2145: Y1=608        killed by prime 19 > 13
+   DEAD a= 5005: Y1=625742712  killed by prime 557 > 13
+   [a=5005: Y1=625742712 > 10^6 -> brute in companion job logs/brute5005.log]
+   brute minimality certified (Y1 <= 10^6 rows): 405933 checks, no Y'<Y1 solves
+
+(C/D/E) Lucas laws + size bound + census per surviving a:
+   a=    2: N_a= 17  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 2}  C_a=  20.16  pairs_here=4
+   a=    3: N_a= 19  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  16.46  pairs_here=3
+   a=    5: N_a= 12  B={3: 3, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.04  pairs_here=2
+   a=    6: N_a= 15  B={3: 3, 5: 2, 7: 2, 11: 1, 13: 1}  C_a=  23.17  pairs_here=4
+   a=    7: N_a= 13  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.04  pairs_here=1
+   a=   10: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  18.04  pairs_here=1
+   a=   11: N_a= 12  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  20.37  pairs_here=1
+   a=   13: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  22.95  pairs_here=1
+   a=   14: N_a= 11  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  19.78  pairs_here=2
+   a=   15: N_a= 15  B={3: 3, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.04  pairs_here=1
+   a=   21: N_a= 10  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  21.37  pairs_here=2
+   a=   22: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.85  pairs_here=1
+   a=   26: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  18.78  pairs_here=1
+   a=   30: N_a= 11  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  16.46  pairs_here=2
+   a=   33: N_a= 11  B={3: 3, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.04  pairs_here=1
+   a=   35: N_a= 13  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  16.46  pairs_here=1
+   a=   39: N_a= 12  B={3: 2, 5: 3, 7: 2, 11: 1, 13: 1}  C_a=  24.91  pairs_here=2
+   a=   42: N_a= 12  B={3: 4, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  21.95  pairs_here=3
+   a=   55: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.04  pairs_here=1
+   a=   65: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.46  pairs_here=1
+   a=   66: N_a= 10  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  20.78  pairs_here=2
+   a=   70: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.37  pairs_here=1
+   a=   77: N_a=  9  B={3: 4, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  23.95  pairs_here=2
+   a=   78: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  18.04  pairs_here=1
+   a=   91: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  23.83  pairs_here=0
+   a=  105: N_a= 11  B={3: 5, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  22.21  pairs_here=1
+   a=  110: N_a= 11  B={3: 2, 5: 1, 7: 2, 11: 1, 13: 1}  C_a=  19.27  pairs_here=2
+   a=  143: N_a= 12  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  19.78  pairs_here=1
+   a=  154: N_a=  8  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  28.53  pairs_here=1
+   a=  165: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  21.85  pairs_here=1
+   a=  182: N_a= 11  B={3: 4, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.63  pairs_here=2
+   a=  195: N_a= 12  B={3: 4, 5: 1, 7: 2, 11: 1, 13: 1}  C_a=  22.44  pairs_here=1
+   a=  210: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  16.46  pairs_here=1
+   a=  231: N_a= 10  B={3: 3, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  21.37  pairs_here=0
+   a=  273: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.92  pairs_here=1
+   a=  330: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  18.04  pairs_here=1
+   a=  390: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 2, 13: 1}  C_a=  20.92  pairs_here=1
+   a=  455: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  23.04  pairs_here=1
+   a=  462: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  16.46  pairs_here=1
+   a=  546: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.37  pairs_here=1
+   a=  770: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  17.46  pairs_here=1
+   a=  858: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.04  pairs_here=1
+   a=  910: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 2, 13: 1}  C_a=  21.50  pairs_here=1
+   a= 1155: N_a= 10  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  16.46  pairs_here=0
+   a= 1430: N_a=  8  B={3: 4, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  27.09  pairs_here=1
+   a= 2310: N_a=  9  B={3: 5, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  24.21  pairs_here=1
+   a= 2730: N_a=  9  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  17.46  pairs_here=1
+   a= 3003: N_a=  9  B={3: 3, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.37  pairs_here=0
+   a= 4290: N_a=  9  B={3: 3, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  18.04  pairs_here=1
+   a= 6006: N_a=  9  B={3: 2, 5: 2, 7: 1, 11: 1, 13: 1}  C_a=  18.78  pairs_here=1
+   a=10010: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  19.78  pairs_here=1
+   a=15015: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.27  pairs_here=1
+   a=30030: N_a=  8  B={3: 2, 5: 1, 7: 1, 11: 1, 13: 1}  C_a=  20.04  pairs_here=1
+
+(E) THE COMPLETE CENSUS — consecutive 13-smooth pairs (x, x+1):
+   x=1            a=2     n=1   X=3                Y=2            b=1
+   x=2            a=6     n=1   X=5                Y=2            b=1
+   x=3            a=3     n=2   X=7                Y=4            b=2
+   x=4            a=5     n=1   X=9                Y=4            b=2
+   x=5            a=30    n=1   X=11               Y=2            b=1
+   x=6            a=42    n=1   X=13               Y=2            b=1
+   x=7            a=14    n=1   X=15               Y=4            b=2
+   x=8            a=2     n=2   X=17               Y=12           b=6
+   x=9            a=10    n=1   X=19               Y=6            b=3
+   x=10           a=110   n=1   X=21               Y=2            b=1
+   x=11           a=33    n=1   X=23               Y=4            b=2
+   x=12           a=39    n=1   X=25               Y=4            b=2
+   x=13           a=182   n=1   X=27               Y=2            b=1
+   x=14           a=210   n=1   X=29               Y=2            b=1
+   x=15           a=15    n=2   X=31               Y=8            b=4
+   x=20           a=105   n=1   X=41               Y=4            b=2
+   x=21           a=462   n=1   X=43               Y=2            b=1
+   x=24           a=6     n=2   X=49               Y=20           b=10
+   x=25           a=26    n=1   X=51               Y=10           b=5
+   x=26           a=78    n=1   X=53               Y=6            b=3
+   x=27           a=21    n=1   X=55               Y=12           b=6
+   x=32           a=66    n=1   X=65               Y=8            b=4
+   x=35           a=35    n=2   X=71               Y=12           b=6
+   x=39           a=390   n=1   X=79               Y=4            b=2
+   x=44           a=55    n=1   X=89               Y=12           b=6
+   x=48           a=3     n=4   X=97               Y=56           b=28
+   x=49           a=2     n=3   X=99               Y=70           b=35
+   x=54           a=330   n=1   X=109              Y=6            b=3
+   x=55           a=770   n=1   X=111              Y=4            b=2
+   x=63           a=7     n=2   X=127              Y=48           b=24
+   x=64           a=65    n=1   X=129              Y=16           b=8
+   x=65           a=4290  n=1   X=131              Y=2            b=1
+   x=77           a=6006  n=1   X=155              Y=2            b=1
+   x=80           a=5     n=2   X=161              Y=72           b=36
+   x=90           a=910   n=1   X=181              Y=6            b=3
+   x=98           a=22    n=1   X=197              Y=42           b=21
+   x=99           a=11    n=2   X=199              Y=60           b=30
+   x=104          a=2730  n=1   X=209              Y=4            b=2
+   x=120          a=30    n=2   X=241              Y=44           b=22
+   x=125          a=70    n=1   X=251              Y=30           b=15
+   x=143          a=143   n=2   X=287              Y=24           b=12
+   x=168          a=42    n=2   X=337              Y=52           b=26
+   x=175          a=77    n=1   X=351              Y=40           b=20
+   x=195          a=195   n=2   X=391              Y=28           b=14
+   x=224          a=14    n=2   X=449              Y=120          b=60
+   x=242          a=6     n=3   X=485              Y=198          b=99
+   x=324          a=13    n=1   X=649              Y=180          b=90
+   x=350          a=546   n=1   X=701              Y=30           b=15
+   x=351          a=858   n=1   X=703              Y=24           b=12
+   x=363          a=273   n=1   X=727              Y=44           b=22
+   x=384          a=2310  n=1   X=769              Y=16           b=8
+   x=440          a=110   n=2   X=881              Y=84           b=42
+   x=539          a=165   n=1   X=1079             Y=84           b=42
+   x=624          a=39    n=2   X=1249             Y=200          b=100
+   x=675          a=3     n=6   X=1351             Y=780          b=390
+   x=728          a=182   n=2   X=1457             Y=108          b=54
+   x=1000         a=10010 n=1   X=2001             Y=20           b=10
+   x=1715         a=15015 n=1   X=3431             Y=28           b=14
+   x=2079         a=30030 n=1   X=4159             Y=24           b=12
+   x=2400         a=6     n=4   X=4801             Y=1960         b=980
+   x=3024         a=21    n=2   X=6049             Y=1320         b=660
+   x=4095         a=455   n=2   X=8191             Y=384          b=192
+   x=4224         a=66    n=2   X=8449             Y=1040         b=520
+   x=4374         a=42    n=3   X=8749             Y=1350         b=675
+   x=6655         a=1430  n=1   X=13311            Y=352          b=176
+   x=9800         a=2     n=6   X=19601            Y=13860        b=6930
+   x=10647        a=154   n=1   X=21295            Y=1716         b=858
+   x=123200       a=77    n=2   X=246401           Y=28080        b=14040
+   TOTAL PAIRS: 68
+
+(F) THE f(k) TABLE — k = 13..16 (primes <= k = {2,3,5,7,11,13} for all four):
+   maximal runs of consecutive 13-smooth (length >= 3):
+      start=1        len=16  (1, ..., 16)
+      start=20       len=3  (20, 21, 22)
+      start=24       len=5  (24, 25, 26, 27, 28)
+      start=48       len=3  (48, 49, 50)
+      start=54       len=3  (54, 55, 56)
+      start=63       len=4  (63, 64, 65, 66)
+      start=98       len=3  (98, 99, 100)
+      start=350      len=3  (350, 351, 352)
+   (maximal run length overall: 16 — the run (1..16), below every k>=17
+   k=13: longest run of 13-smooth entirely > 13 has length 5  ->  f(13) = 6
+   k=14: longest run of 14-smooth entirely > 14 has length 5  ->  f(14) = 6
+   k=15: longest run of 15-smooth entirely > 15 has length 5  ->  f(15) = 6
+   k=16: longest run of 16-smooth entirely > 16 has length 5  ->  f(16) = 6
+   WITNESS: (24,25,26,27,28) = (2^3·3, 5^2, 2·13, 3^3, 2^2·7), all > 16
+   -> f(k) >= 6 for k = 13..16 (a 5-run of 13-smooth above every k <= 16)
+   EXCLUSION: no census pair x > k with x..x+5 all 13-smooth (k=13..16)
+   -> no 6-run of 13-smooth above k  ->  f(k) <= 6
+
+   *** f(13) = f(14) = f(15) = f(16) = 6 — THE CERTIFIED FRONTIER EXTENDED ***
+   CALIBRATION: the 40 certified 11-smooth pairs all present; f(2..12)
+   re-derived from THIS census by k-smooth filtering: [2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4]
+   (matches the certified table f(2)=2, f(3)=f(4)=3, f(5..12)=4 — GREEN)
+
+(G) DUAL CROSS-CHECK — brute enumeration of all 13-smooth <= 10^18:
+   13-smooth count <= 10^18: 958460
+   brute pairs: 68 ; census pairs <= 10^18: 68 ; EQUAL: True
+   brute 6-run check k=13..16 (<=10^18): CLEAN (no 6 consecutive
+   13-smooth integers all > 16 below 10^18, independent of Pell)
+   brute maximal-run decomposition EQUALS the census decomposition (<=10^18)
+   runs of length >= 3 (brute, entire range): [(1, 16), (20, 3), (24, 5), (48, 3), (54, 3), (63, 4), (98, 3), (350, 3)]
+
+THE CERTIFIED FRONTIER OF ERDOS #961 NOW READS:
+   f(2)=2, f(3)=f(4)=3, f(k)=4 for 5<=k<=12, f(k)=6 for 13<=k<=16
+STORMER961_K13 ALL GREEN — 1.0s

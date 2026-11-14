@@ -1,5 +1,22 @@
 # THE LIST — THE OPERATIONAL LAW (v9, Session 041, 2026-11-09)
 
+> **v10 STATUS ADDENDUM (S063/W62):** THE AUDIT LAW STANDS (W61: 0/34 FULL —
+> 32 PARTIAL / 2 EVIDENCE; the "OK" marks mean "OK for the delivered
+> statement"). W62 volley: THREE FRONTIER KILLS — #961 the 13-tier
+> f(13)=f(14)=f(15)=f(16)=6 (the complete 68-pair Størmer census at
+> {2,3,5,7,11,13}, largest (123200,123201); dual-method brute cross-check
+> 958,460 values), #1063 n_15=4732/n_16=3213/n_17=1456 (dual code paths,
+> 9305 exclusion points), #451 n_21..n_24=805/2691/1884/2664 (22-row dual
+> routes). #939 PRIOR-COVERAGE RETRACTION: every prior r=4 zero-claim was
+> FLT-void (the engines enumerated fourth powers, not 4-powerful numbers);
+> corrected engine validated vs the K60 Lean census; the TRUE box hunt
+> (≤10^18/10^19) running. #203: the density-law escalation (enriched
+> palette = primes dividing 2^d−1/3^e−1, d,e | 27720) running. K61 #411 r5:
+> the 30-family root-kill surgery (CI verdict pending on the W62 push).
+> Corpus one-shot census answer (W61, re-verified S063): 0 fresh one-shots
+> in the 592-pool; the 6 witness lanes remain the only one-shot-DECIDABLE
+> FULL asks.
+
 > **v9 STATUS ADDENDUM (S041):** registry 34 → **37 kills CI-green**
 > (run 42527356579): **K#35 = #396** (n₂=2480 EXACT + absorption
 > certificate), **K#36 = #686-k3** (five primitive edges + chain law + six
