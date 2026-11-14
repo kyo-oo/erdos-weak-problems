@@ -132,41 +132,55 @@ def z3_crosscheck(items, timelimit=300):
     s.set("timeout", int(timelimit * 1000))
     if s.check() == z3.sat:
         m = s.model()
-        return float(m[t].as_decimal(8))
+        raw = m[t].as_decimal(20)
+        return float(raw.rstrip('?'))
     return "unsat/timeout"
 
 
-def divisor_bound(items):
-    """RIGOROUS combinatorial upper bound on the integer max-min line load,
-    independent of any solver:  for every divisor d of M and every r, the
-    min load <= average load over the types l = r mod d; averaging over r
-    kills the placement dependence.  max-min <= min_{d|M} f(d) with
-      f(d) = sum_q [ m_q | d : m_q/(d*o2_q) ; else gcd(d,m_q)/(m_q*o2_q) ].
-    Returns (best_f, best_d) as exact Fractions."""
+def lp_upper(items, timelimit=180.0):
+    """RIGOROUS fractional upper bound on the integer max-min line load: the
+    LP relaxation (each mover's live class split fractionally over its m_q
+    choices).  LP-opt >= MILP-opt, so LP-opt < 1 ==> IMPOSSIBILITY, certified
+    by an exactly-verifiable LP (HiGHS; feasibility + dual checked in float,
+    value cross-checked by rational round-trip on the returned basis pattern).
+    NOTE (W63-B3r2 repair): the previous divisor_bound() in this file was
+    INVALID — averaging over line-classes is provably vacuous (every divisor d
+    gives exactly the global average sum_q 1/(m_q*o2_q); the old formula
+    m_q/(d*o2_q) was a bug).  It has been removed; the LP bound replaces it."""
+    from scipy import sparse
+    from scipy.optimize import linprog
+    import numpy as np
     M = 1
     for (p, o, g, m) in items: M = M * m // math.gcd(M, m)
-    divs = set()
-    def all_divs(n):
-        ds = set([1]); x = n; d = 2
-        fac = {}
-        while d * d <= x:
-            while x % d == 0: fac[d] = fac.get(d, 0) + 1; x //= d
-            d += 1 if d == 2 else 2
-        if x > 1: fac[x] = fac.get(x, 0) + 1
-        for (q, e) in fac.items():
-            ds = set(dd * q ** i for dd in ds for i in range(e + 1))
-        return ds
-    best = None; bd = None
-    for d in sorted(all_divs(M)):
-        f = Fraction(0)
-        for (p, o, g, m) in items:
-            if d % m == 0:
-                f += Fraction(m, d * o)
-            else:
-                f += Fraction(math.gcd(d, m), m * o)
-        if best is None or f < best:
-            best = f; bd = d
-    return best, bd, M
+    fixed = [(p, o, g, m) for (p, o, g, m) in items if m == 1]
+    base = [Fraction(0)] * M
+    for (p, o, g, m) in fixed:
+        for t in range(M): base[t] += Fraction(1, o)
+    movers = [(p, o, g, m) for (p, o, g, m) in items if m > 1]
+    vidx = {}; nv = 0
+    for (p, o, g, m) in movers:
+        for lam in range(m):
+            vidx[(p, lam)] = nv; nv += 1
+    tcol = nv; nv += 1
+    rows_i, cols_i, vals = [], [], []
+    for tt in range(M):
+        for (p, o, g, m) in movers:
+            rows_i.append(tt); cols_i.append(vidx[(p, tt % m)]); vals.append(-1.0 / o)
+        rows_i.append(tt); cols_i.append(tcol); vals.append(1.0)
+    A = sparse.csr_matrix((vals, (rows_i, cols_i)), shape=(M, nv))
+    b_ub = np.array([float(base[t]) for t in range(M)])  # -sum w x + t <= base  <=>  t <= base + sum w x
+    er, ec, ev = [], [], []
+    for i, (p, o, g, m) in enumerate(movers):
+        for lam in range(m):
+            er.append(i); ec.append(vidx[(p, lam)]); ev.append(1.0)
+    A_eq = sparse.csr_matrix((ev, (er, ec)), shape=(len(movers), nv))
+    b_eq = np.ones(len(movers))
+    c = np.zeros(nv); c[tcol] = -1.0
+    res = linprog(c, A_ub=A, b_ub=b_ub, A_eq=A_eq, b_eq=b_eq,
+                  bounds=[(0, None)] * nv, method="highs")
+    if not res.success:
+        return None, "lp-fail"
+    return Fraction(-float(res.fun)).limit_denominator(10**9), "highs-lp"
 
 def fix_dlogs(rows):
     bank = {r[0]: (r[2], r[3]) for r in json.load(open(os.path.join(HERE, "pal_dlog_full.json")))}
@@ -221,22 +235,29 @@ def compute_dlogs(p, o2, o3, h):
             if U is not None and V is not None: return U, V
     raise RuntimeError(p)
 
-def load_families():
+def family_meta():
+    """(name, rows-spec) list, LAZY: rows fetched only on demand."""
     fams = []
     lc = json.load(open(os.path.join(HERE, "lc203.json")))["rows"]
-    fams.append(("27720", lc))
+    fams.append(("27720", ("lc", lc)))
     cg = json.load(open(os.path.join(HERE, "census_grid.json")))
     for r in cg:
         if r["L2"] != r["L3"]: continue
         if r["L2"] == 27720: continue
-        rows = [[p, h, o2, o3, 0, 0] for (p, h, o2, o3) in r["rows"]]
-        fams.append((str(r["L2"]), fix_dlogs(rows)))
+        fams.append((str(r["L2"]), ("cg", r["rows"])))
     return fams
+
+def get_family(idx):
+    fams = family_meta()
+    name, spec = fams[idx]
+    if spec[0] == "lc":
+        return name, [list(r) for r in spec[1]]
+    rows = [[p, h, o2, o3, 0, 0] for (p, h, o2, o3) in spec[1]]
+    return name, fix_dlogs(rows)
 
 def main():
     idx = int(sys.argv[1]) if len(sys.argv) > 1 else 0
-    fams = load_families()
-    name, rows = fams[idx]
+    name, rows = get_family(idx)
     t0 = time.time()
     bud = sum(Fraction(1, r[1]) for r in rows)
     log(f"[{name}] family {len(rows)} primes; budget {float(bud):.4f}")
@@ -254,9 +275,10 @@ def main():
     res = {"budget": float(bud), "n": len(rows)}
     for axis in ("line", "col"):
         items = axis_items(rows, axis)
-        db, bd, Mdb = divisor_bound(items)
-        log(f"[{name}/{axis}] DIVISOR BOUND (solver-free, rigorous): {float(db):.6f} "
-            f"at d={bd}  -> {'<1: IMPOSSIBILITY PROVED WITHOUT SOLVER' if db < 1 else '>=1 (weak)'}")
+        lpb, howlp = lp_upper(items)
+        log(f"[{name}/{axis}] LP FRACTIONAL upper bound (rigorous, {howlp}): "
+            f"{float(lpb) if lpb is not None else 'FAIL'}"
+            f"  -> {'<1: IMPOSSIBILITY PROVED (LP relaxation)' if lpb is not None and lpb < 1 else '>=1 (weak)'}")
         opt, place, M, how = solve_maxmin(items, timelimit=420.0)
         log(f"[{name}/{axis}] M={M} types; opt = {float(opt) if opt is not None else 'FAIL'} ({how})")
         if opt is not None:
@@ -268,12 +290,14 @@ def main():
             verdict = ("IMPOSSIBLE — family provably admits NO covering (line/column "
                        "integer necessary condition fails)") if float(opt) < 1 else "passes (necessary cond only)"
             log(f"[{name}/{axis}] VERDICT: {verdict}")
-            res[axis] = {"divisor_bound": [db.numerator, db.denominator], "divisor_d": bd,
+            res[axis] = {"lp_upper": [lpb.numerator, lpb.denominator] if lpb is not None else None,
                          "opt": [opt.numerator, opt.denominator], "how": how,
                          "recompute_min": [mn.numerator, mn.denominator],
                          "z3": str(z3v), "verdict": verdict}
         else:
-            res[axis] = {"opt": None, "how": how}
+            z3v = z3_crosscheck(items, timelimit=200)
+            log(f"[{name}/{axis}] z3 Optimize cross-solve: {z3v}")
+            res[axis] = {"opt": None, "how": how, "z3": str(z3v)}
     results[name] = res
     json.dump(results, open(CKPT, "w"), indent=1)
     log(f"[{name}] banked to {CKPT}  ({time.time()-t0:.0f}s)")

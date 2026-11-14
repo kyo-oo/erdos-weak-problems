@@ -1,0 +1,40 @@
+{
+ "27720": {
+  "budget": 1.0564213564213565,
+  "n": 42,
+  "line": {
+   "lp_upper": [
+    7321,
+    6930
+   ],
+   "opt": [
+    287,
+    330
+   ],
+   "how": "milp(gap=0.0)",
+   "recompute_min": [
+    287,
+    330
+   ],
+   "z3": "skipped(M big)",
+   "verdict": "IMPOSSIBLE \u2014 family provably admits NO covering (line/column integer necessary condition fails)"
+  },
+  "col": {
+   "lp_upper": [
+    7321,
+    6930
+   ],
+   "opt": [
+    25211,
+    27720
+   ],
+   "how": "milp(gap=0.0)",
+   "recompute_min": [
+    25211,
+    27720
+   ],
+   "z3": "0.9094877344877345",
+   "verdict": "IMPOSSIBLE \u2014 family provably admits NO covering (line/column integer necessary condition fails)"
+  }
+ }
+}
