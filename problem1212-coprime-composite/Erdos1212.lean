@@ -510,6 +510,326 @@ theorem erdos1212_board :
     p103_valid, p103_shape, small_walks_valid, directed_death,
     ⟨sq_sub_one 10201 (by decide), CardinalWorldsV2.v2r_ternary_scaling 1 10201⟩⟩
 
+/-! ## §11 THE COLUMN OBSTRUCTION KILL (W64-J, round 7 — the periodic-design
+closure). THE LAW (engine1212_round7.py, dual-verified, output
+engine1212_round7_output.txt): every M-periodic translation-resonant block
+design for #1212 is DEAD, for every modulus M with an odd divisor ≥ 3 —
+three certified instances below (M = 210, 2310, 30030: the round-3/4/6
+lanes). The mechanism, discovered by the W64-E column-verdict engine and
+here proven unconditionally:
+
+- (CROSSING) Any hub walk (steps of one coordinate by ±2 — the forced
+  B-hub lattice) with net translation (M, M) ATTAINS a hub on the
+  anti-diagonal residue class (X + Y) % 2M = 0: the coordinate sum S walks
+  in ±2 steps from S0 to S0 + 2M, and a ±2-step walk from a to b covers
+  every value of the step parity between them (the discrete IVT,
+  `e1212_ivt`, proven by induction on the walk length).
+- (ANTI-DIAGONAL) On that class, a hub carrying a composite-certifying
+  factor q ≥ 3 with q ∣ 2M in a coordinate is NOT coprime (`e1212_antidiag`:
+  q ∣ X and q ∣ X + Y forces q ∣ Y — both coordinates share q).
+
+Hence a design whose every hub is coprime AND carrier-certified (the only
+mechanism that certifies compositeness across all M-translates: q ∣ M ∧
+q ∣ coordinate ⟹ the translate stays divisible, stays composite) cannot
+exist: at the crossed hub the carrier kills coprimality. Honest scope:
+this closes the PERIODIC CARRIER-CERTIFIED lane (the round-3/4/5 engine
+designs) unconditionally for the three campaign moduli; the #1212 question
+itself remains open (a non-periodic path, or one relying on non-carrier
+compositeness, is not excluded). -/
+
+/-- The manual dvd-sub (W65-C repair: `Nat.dvd_sub'` does not resolve in
+this toolchain — the CI-green K-family pattern, verbatim from the green
+Erdos411 kernel's `dvd_sub_local`). -/
+private theorem dvd_sub_local {k m n : Nat} (h1 : k ∣ m) (h2 : k ∣ n) :
+    k ∣ m - n := by
+  rcases h1 with ⟨a, rfl⟩
+  rcases h2 with ⟨b, rfl⟩
+  rcases Nat.lt_or_ge a b with hlt | hge
+  · have hmono : k * a ≤ k * b := Nat.mul_le_mul_left k (Nat.le_of_lt hlt)
+    refine Dvd.intro 0 ?_
+    omega
+  · have hmono : k * b ≤ k * a := Nat.mul_le_mul_left k hge
+    have hdist : k * a = k * (a - b) + k * b := by
+      calc k * a = k * (a - b + b) := by rw [Nat.sub_add_cancel hge]
+        _ = k * (a - b) + k * b := Nat.mul_add k (a - b) b
+    refine Dvd.intro (a - b) ?_
+    omega
+
+/-- THE ANTI-DIAGONAL LAW (moduli-free core): if q divides both the sum
+X + Y and X itself, then q divides Y. On the anti-diagonal class
+(X + Y) % 2M = 0 every carrier q ∣ 2M of the coordinate X is shared by
+both coordinates — the hub is not coprime. -/
+theorem e1212_antidiag (X Y q : Nat) (hsum : q ∣ X + Y) (hx : q ∣ X) :
+    q ∣ Y := by
+  have hsub : q ∣ (X + Y) - X := dvd_sub_local hsum hx
+  have hsimp : (X + Y) - X = Y := by omega
+  rw [hsimp] at hsub
+  exact hsub
+
+/-- THE DISCRETE IVT (the crossing engine, all-Nat): a walk of ±2 steps
+from a to b attains every value v with a ≤ v ≤ b of the step parity
+(v % 2 = a % 2). Proven by induction on the walk length: the tail walk
+starts at a ± 2 and still ends at b, so it covers [a ± 2, b] of the same
+parity (a dip below the start is a legal Nat value). -/
+theorem e1212_ivt (n : Nat) : ∀ (f : Nat → Nat) (a b : Nat),
+    a ≤ b → f 0 = a → f n = b →
+    (∀ k < n, f (k + 1) = f k + 2 ∨ f k = f (k + 1) + 2) →
+    ∀ v : Nat, a ≤ v → v ≤ b → v % 2 = a % 2 →
+    ∃ k, k ≤ n ∧ f k = v := by
+  induction n with
+  | zero =>
+      intro f a b _ hfa hfb _ v hva hvb _
+      exact ⟨0, by omega, by omega⟩
+  | succ n ih =>
+      intro f a b hab hfa hfb hstep v hva hvb hpar
+      by_cases habb : a = b
+      · exact ⟨0, by omega, by omega⟩
+      · have hablt : a < b := by omega
+        by_cases hva0 : v = a
+        · exact ⟨0, by omega, by omega⟩
+        by_cases hvbn : v = b
+        · exact ⟨n + 1, by omega, by omega⟩
+        · have hs0 := hstep 0 (by omega)
+          have hgstep : ∀ k < n, f (k + 1 + 1) = f (k + 1) + 2 ∨
+              f (k + 1) = f (k + 1 + 1) + 2 := by
+            intro k hk
+            exact hstep (k + 1) (by omega)
+          rcases hs0 with h1 | h1
+          · obtain ⟨k, hk, hgk⟩ := ih (fun k => f (k + 1)) (a + 2) b
+              (by omega) (by omega) (by omega) hgstep v
+              (by omega) (by omega) (by omega)
+            exact ⟨k + 1, by omega, hgk⟩
+          · obtain ⟨k, hk, hgk⟩ := ih (fun k => f (k + 1)) (f (0 + 1)) b
+              (by omega) (by omega) (by omega) hgstep v
+              (by omega) (by omega) (by omega)
+            exact ⟨k + 1, by omega, hgk⟩
+
+/-- THE M = 2310 PERIODIC-DESIGN KILL (the round-4/5 lane): no hub walk
+with net translation (2310, 2310) exists in which every hub is coprime
+and carries a composite-certifying factor q ≥ 3 dividing 2310. The walk
+crosses the anti-diagonal class (X + Y) % 4620 = 0 (discrete IVT on the
+coordinate sum); on that class the carrier of either coordinate forces
+the common divisor q ≥ 3 — coprimality dies. Corollary: no 2310-periodic
+carrier-certified block design for #1212 (any shape, dips allowed, no
+box/band confinement needed). -/
+theorem e1212_periodic_kill_2310 (n X0 Y0 : Nat) (X Y : Nat → Nat)
+    (hst : X 0 = X0 ∧ Y 0 = Y0 ∧ X n = X0 + 2310 ∧ Y n = Y0 + 2310)
+    (hS0 : (X0 + Y0) % 2 = 0)
+    (hstep : ∀ k < n,
+      (X (k + 1) = X k + 2 ∧ Y (k + 1) = Y k) ∨
+      (X k = X (k + 1) + 2 ∧ Y (k + 1) = Y k) ∨
+      (X (k + 1) = X k ∧ Y (k + 1) = Y k + 2) ∨
+      (X (k + 1) = X k ∧ Y k = Y (k + 1) + 2))
+    (hcop : ∀ k ≤ n, Nat.gcd (X k) (Y k) = 1)
+    (hcar : ∀ k ≤ n, ∃ q, 3 ≤ q ∧ q ∣ 2310 ∧ (q ∣ X k ∨ q ∣ Y k)) : False := by
+  have hf0 : X 0 + Y 0 = X0 + Y0 := by omega
+  have hfn : X n + Y n = X0 + Y0 + 4620 := by omega
+  have hfstep : ∀ k < n,
+      (X (k + 1) + Y (k + 1) = X k + Y k + 2) ∨
+      (X k + Y k = X (k + 1) + Y (k + 1) + 2) := by
+    intro k hk
+    rcases hstep k hk with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> omega
+  obtain ⟨k, hkn, hfk⟩ := e1212_ivt n
+      (fun k => X k + Y k) (X0 + Y0) (X0 + Y0 + 4620)
+      (by omega) hf0 hfn hfstep
+      (4620 * ((X0 + Y0) / 4620 + 1))
+      (by omega) (by omega) (by omega)
+  -- (W65-C hardening) the crossed hub is the next multiple of 4620 above
+  -- the start: hfk : X k + Y k = 4620 * ((X0 + Y0) / 4620 + 1) IS the
+  -- divisibility witness (anonymous constructor; no omega-on-dvd, no
+  -- nested-mod side goals).
+  have hd4620 : 4620 ∣ X k + Y k :=
+    ⟨(X0 + Y0) / 4620 + 1, hfk⟩
+  obtain ⟨q, hq3, hqm, hqc⟩ := hcar k hkn
+  have hqM : q ∣ 4620 := Nat.dvd_trans hqm ⟨2, by omega⟩
+  have hsum : q ∣ X k + Y k := Nat.dvd_trans hqM hd4620
+  rcases hqc with hqx | hqy
+  · have hqy' : q ∣ Y k := e1212_antidiag _ _ _ hsum hqx
+    have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx hqy'
+    rw [hcop k hkn] at hgd
+    have hq1 : q = 1 := Nat.dvd_one.mp hgd
+    omega
+  · have hsumY : q ∣ Y k + X k := by
+      obtain ⟨c, hc⟩ := hsum
+      exact ⟨c, by omega⟩
+    have hqx' : q ∣ X k := e1212_antidiag (Y k) (X k) q hsumY hqy
+    have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx' hqy
+    rw [hcop k hkn] at hgd
+    have hq1 : q = 1 := Nat.dvd_one.mp hgd
+    omega
+
+/-- THE M = 210 PERIODIC-DESIGN KILL (the round-3 lane): no hub walk with
+net translation (210, 210) has all hubs coprime and carrier-certified
+(carrier q ≥ 3 dividing 210). Identical mechanism: the crossing class
+(X + Y) % 420 = 0, the anti-diagonal sharing of carriers. -/
+theorem e1212_periodic_kill_210 (n X0 Y0 : Nat) (X Y : Nat → Nat)
+    (hst : X 0 = X0 ∧ Y 0 = Y0 ∧ X n = X0 + 210 ∧ Y n = Y0 + 210)
+    (hS0 : (X0 + Y0) % 2 = 0)
+    (hstep : ∀ k < n,
+      (X (k + 1) = X k + 2 ∧ Y (k + 1) = Y k) ∨
+      (X k = X (k + 1) + 2 ∧ Y (k + 1) = Y k) ∨
+      (X (k + 1) = X k ∧ Y (k + 1) = Y k + 2) ∨
+      (X (k + 1) = X k ∧ Y k = Y (k + 1) + 2))
+    (hcop : ∀ k ≤ n, Nat.gcd (X k) (Y k) = 1)
+    (hcar : ∀ k ≤ n, ∃ q, 3 ≤ q ∧ q ∣ 210 ∧ (q ∣ X k ∨ q ∣ Y k)) : False := by
+  have hf0 : X 0 + Y 0 = X0 + Y0 := by omega
+  have hfn : X n + Y n = X0 + Y0 + 420 := by omega
+  have hfstep : ∀ k < n,
+      (X (k + 1) + Y (k + 1) = X k + Y k + 2) ∨
+      (X k + Y k = X (k + 1) + Y (k + 1) + 2) := by
+    intro k hk
+    rcases hstep k hk with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> omega
+  obtain ⟨k, hkn, hfk⟩ := e1212_ivt n
+      (fun k => X k + Y k) (X0 + Y0) (X0 + Y0 + 420)
+      (by omega) hf0 hfn hfstep
+      (420 * ((X0 + Y0) / 420 + 1))
+      (by omega) (by omega) (by omega)
+  -- (W65-C hardening) same witness form at M = 210.
+  have hd420 : 420 ∣ X k + Y k :=
+    ⟨(X0 + Y0) / 420 + 1, hfk⟩
+  obtain ⟨q, hq3, hqm, hqc⟩ := hcar k hkn
+  have hqM : q ∣ 420 := Nat.dvd_trans hqm ⟨2, by omega⟩
+  have hsum : q ∣ X k + Y k := Nat.dvd_trans hqM hd420
+  rcases hqc with hqx | hqy
+  · have hqy' : q ∣ Y k := e1212_antidiag _ _ _ hsum hqx
+    have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx hqy'
+    rw [hcop k hkn] at hgd
+    have hq1 : q = 1 := Nat.dvd_one.mp hgd
+    omega
+  · have hsumY : q ∣ Y k + X k := by
+      obtain ⟨c, hc⟩ := hsum
+      exact ⟨c, by omega⟩
+    have hqx' : q ∣ X k := e1212_antidiag (Y k) (X k) q hsumY hqy
+    have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx' hqy
+    rw [hcop k hkn] at hgd
+    have hq1 : q = 1 := Nat.dvd_one.mp hgd
+    omega
+
+/-- THE M = 30030 PERIODIC-DESIGN KILL (the round-6 verdict lane, Q + 13):
+no hub walk with net translation (30030, 30030) has all hubs coprime and
+carrier-certified (carrier q ≥ 3 dividing 30030). The crossing class
+(X + Y) % 60060 = 0. -/
+theorem e1212_periodic_kill_30030 (n X0 Y0 : Nat) (X Y : Nat → Nat)
+    (hst : X 0 = X0 ∧ Y 0 = Y0 ∧ X n = X0 + 30030 ∧ Y n = Y0 + 30030)
+    (hS0 : (X0 + Y0) % 2 = 0)
+    (hstep : ∀ k < n,
+      (X (k + 1) = X k + 2 ∧ Y (k + 1) = Y k) ∨
+      (X k = X (k + 1) + 2 ∧ Y (k + 1) = Y k) ∨
+      (X (k + 1) = X k ∧ Y (k + 1) = Y k + 2) ∨
+      (X (k + 1) = X k ∧ Y k = Y (k + 1) + 2))
+    (hcop : ∀ k ≤ n, Nat.gcd (X k) (Y k) = 1)
+    (hcar : ∀ k ≤ n, ∃ q, 3 ≤ q ∧ q ∣ 30030 ∧ (q ∣ X k ∨ q ∣ Y k)) : False := by
+  have hf0 : X 0 + Y 0 = X0 + Y0 := by omega
+  have hfn : X n + Y n = X0 + Y0 + 60060 := by omega
+  have hfstep : ∀ k < n,
+      (X (k + 1) + Y (k + 1) = X k + Y k + 2) ∨
+      (X k + Y k = X (k + 1) + Y (k + 1) + 2) := by
+    intro k hk
+    rcases hstep k hk with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> omega
+  obtain ⟨k, hkn, hfk⟩ := e1212_ivt n
+      (fun k => X k + Y k) (X0 + Y0) (X0 + Y0 + 60060)
+      (by omega) hf0 hfn hfstep
+      (60060 * ((X0 + Y0) / 60060 + 1))
+      (by omega) (by omega) (by omega)
+  -- (W65-C hardening) same witness form at M = 30030.
+  have hd60060 : 60060 ∣ X k + Y k :=
+    ⟨(X0 + Y0) / 60060 + 1, hfk⟩
+  obtain ⟨q, hq3, hqm, hqc⟩ := hcar k hkn
+  have hqM : q ∣ 60060 := Nat.dvd_trans hqm ⟨2, by omega⟩
+  have hsum : q ∣ X k + Y k := Nat.dvd_trans hqM hd60060
+  rcases hqc with hqx | hqy
+  · have hqy' : q ∣ Y k := e1212_antidiag _ _ _ hsum hqx
+    have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx hqy'
+    rw [hcop k hkn] at hgd
+    have hq1 : q = 1 := Nat.dvd_one.mp hgd
+    omega
+  · have hsumY : q ∣ Y k + X k := by
+      obtain ⟨c, hc⟩ := hsum
+      exact ⟨c, by omega⟩
+    have hqx' : q ∣ X k := e1212_antidiag (Y k) (X k) q hsumY hqy
+    have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx' hqy
+    rw [hcop k hkn] at hgd
+    have hq1 : q = 1 := Nat.dvd_one.mp hgd
+    omega
+
+/-! ## §12 The extended witness (the round-6e extension of p103). -/
+
+/-- THE 105-VERTEX TWO-PHASE WITNESS (engine1212_round6e/round7, dual-
+verified, witness1212_extended.json): p103 extended by the two vertices
+(302, 10205), (303, 10205) — the x-phase continues past the p103 end.
+Every vertex a G-vertex (the evens auto-composite; the odd columns
+302 → 303 = 3·101 composite against the composite 10205 = 5·13·157),
+consecutive vertices adjacent, all 105 distinct. -/
+def p105 : List (Nat × Nat) := p103 ++ [(302, 10205), (303, 10205)]
+
+theorem p105_valid : walkOK p105 = true ∧ allDistinct p105 = true := by
+  decide
+
+/-- THE WITNESS SHAPE: 105 vertices, from (203,10201) to (303,10205),
+both endpoints with BOTH coordinates composite (303 = 3·101,
+10205 = 5·13·157), and the coordinate sum GROWS by 104 over the witness
+— the longest certified simple G-walk of the campaign. -/
+theorem p105_shape :
+    (firstV p105).1 = 203 ∧ (firstV p105).2 = 10201 ∧
+    (lastV p105).1 = 303 ∧ (lastV p105).2 = 10205 ∧
+    p105.length = 105 ∧ compB 303 = true ∧ compB 302 = true ∧
+    203 + 10201 < 303 + 10205 := by
+  decide
+
+/-! ## §13 THE COLUMN-OBSTRUCTION MASTER BOARD (7 conjuncts: the design-kill
+package — the anti-diagonal law, the discrete IVT, the three modulus kills,
+the extended witness laws). -/
+
+theorem e1212_column_board :
+    (∀ X Y q : Nat, q ∣ X + Y → q ∣ X → q ∣ Y) ∧
+    (∀ n : Nat, ∀ f : Nat → Nat, ∀ a b : Nat,
+      a ≤ b → f 0 = a → f n = b →
+      (∀ k < n, f (k + 1) = f k + 2 ∨ f k = f (k + 1) + 2) →
+      ∀ v : Nat, a ≤ v → v ≤ b → v % 2 = a % 2 → ∃ k, k ≤ n ∧ f k = v) ∧
+    (∀ n X0 Y0 : Nat, ∀ X Y : Nat → Nat,
+      X 0 = X0 → Y 0 = Y0 → X n = X0 + 210 → Y n = Y0 + 210 →
+      (X0 + Y0) % 2 = 0 →
+      (∀ k < n,
+        (X (k + 1) = X k + 2 ∧ Y (k + 1) = Y k) ∨
+        (X k = X (k + 1) + 2 ∧ Y (k + 1) = Y k) ∨
+        (X (k + 1) = X k ∧ Y (k + 1) = Y k + 2) ∨
+        (X (k + 1) = X k ∧ Y k = Y (k + 1) + 2)) →
+      (∀ k ≤ n, Nat.gcd (X k) (Y k) = 1) →
+      (∀ k ≤ n, ∃ q, 3 ≤ q ∧ q ∣ 210 ∧ (q ∣ X k ∨ q ∣ Y k)) → False) ∧
+    (∀ n X0 Y0 : Nat, ∀ X Y : Nat → Nat,
+      X 0 = X0 → Y 0 = Y0 → X n = X0 + 2310 → Y n = Y0 + 2310 →
+      (X0 + Y0) % 2 = 0 →
+      (∀ k < n,
+        (X (k + 1) = X k + 2 ∧ Y (k + 1) = Y k) ∨
+        (X k = X (k + 1) + 2 ∧ Y (k + 1) = Y k) ∨
+        (X (k + 1) = X k ∧ Y (k + 1) = Y k + 2) ∨
+        (X (k + 1) = X k ∧ Y k = Y (k + 1) + 2)) →
+      (∀ k ≤ n, Nat.gcd (X k) (Y k) = 1) →
+      (∀ k ≤ n, ∃ q, 3 ≤ q ∧ q ∣ 2310 ∧ (q ∣ X k ∨ q ∣ Y k)) → False) ∧
+    (∀ n X0 Y0 : Nat, ∀ X Y : Nat → Nat,
+      X 0 = X0 → Y 0 = Y0 → X n = X0 + 30030 → Y n = Y0 + 30030 →
+      (X0 + Y0) % 2 = 0 →
+      (∀ k < n,
+        (X (k + 1) = X k + 2 ∧ Y (k + 1) = Y k) ∨
+        (X k = X (k + 1) + 2 ∧ Y (k + 1) = Y k) ∨
+        (X (k + 1) = X k ∧ Y (k + 1) = Y k + 2) ∨
+        (X (k + 1) = X k ∧ Y k = Y (k + 1) + 2)) →
+      (∀ k ≤ n, Nat.gcd (X k) (Y k) = 1) →
+      (∀ k ≤ n, ∃ q, 3 ≤ q ∧ q ∣ 30030 ∧ (q ∣ X k ∨ q ∣ Y k)) → False) ∧
+    (walkOK p105 = true ∧ allDistinct p105 = true) ∧
+    ((firstV p105).1 = 203 ∧ (firstV p105).2 = 10201 ∧
+      (lastV p105).1 = 303 ∧ (lastV p105).2 = 10205 ∧
+      p105.length = 105 ∧ compB 303 = true ∧ compB 302 = true ∧
+      203 + 10201 < 303 + 10205) :=
+  ⟨e1212_antidiag, e1212_ivt,
+    fun n X0 Y0 X Y h1 h2 h3 h4 hS0 hstep hcop hcar =>
+      e1212_periodic_kill_210 n X0 Y0 X Y ⟨h1, h2, h3, h4⟩ hS0 hstep hcop hcar,
+    fun n X0 Y0 X Y h1 h2 h3 h4 hS0 hstep hcop hcar =>
+      e1212_periodic_kill_2310 n X0 Y0 X Y ⟨h1, h2, h3, h4⟩ hS0 hstep hcop hcar,
+    fun n X0 Y0 X Y h1 h2 h3 h4 hS0 hstep hcop hcar =>
+      e1212_periodic_kill_30030 n X0 Y0 X Y ⟨h1, h2, h3, h4⟩ hS0 hstep hcop hcar,
+    p105_valid, p105_shape⟩
+
 /-! ## RECEIPT. -/
 
 #print axioms E1212.gcdF_zero_fuel
@@ -535,6 +855,16 @@ theorem erdos1212_board :
 #print axioms E1212.directed_death
 #print axioms E1212.e1212_arsenal_bridge
 #print axioms E1212.erdos1212_board
+
+#print axioms E1212.e1212_antidiag
+#print axioms E1212.e1212_ivt
+#print axioms E1212.e1212_periodic_kill_2310
+#print axioms E1212.e1212_periodic_kill_210
+#print axioms E1212.e1212_periodic_kill_30030
+#print axioms E1212.p105_valid
+#print axioms E1212.p105_shape
+#print axioms E1212.e1212_column_board
+
 
 /- THE KERNEL-65 RECEIPT: prints green when the whole file elaborates
 clean (the CI grep target for this step). -/
