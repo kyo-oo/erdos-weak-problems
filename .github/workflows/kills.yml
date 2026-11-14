@@ -1239,6 +1239,8 @@ jobs:
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel62.log
           grep -F "E708_PRODUCT_DIVISIBILITY_GREEN" kernel62.log
           grep -E "E708.(e708_prod_append|e708_enum_sound|e708_enum_complete|e708_exact_6_10_14_15|erdos708_board)' (does not depend on any axioms|depends on axioms)" kernel62.log
+          grep -F "E708_G4_MASTER_GREEN" kernel62.log
+          grep -E "E708.(e708_g4_box_exact|e708_g4_box_corpus|e708_exact_2_3_4_5|erdos708_g4_master|erdos708_g4_box_max)' (does not depend on any axioms|depends on axioms)" kernel62.log
           echo KERNEL62_GREEN=1
       - name: "Kernel 64 - Erdos 289 K-INTERVAL EGYPTIAN FAMILIES r1 (S058, W58-A): the intervals kernel — longWindow/iprod/inum (the #289 length guard + the harmonic window sum as an exact unreduced Nat fraction) + covers2 (the k=2 SUM-TO-ONE decomposition, cross-multiplied) + the structural laws (recurrences, empty-window, positivity, the L86-safe atom kit) + THE JOIN/SPLITTING LAW join_adjacent (sigma(a,b)+sigma(b+1,d)=sigma(a,d)) + THE ANTI-CLOSURE COLLAPSE LAW adjacent_collapse (adjacent k=2 decompositions iff k=1 merged-window decomposition) + covers2_comm + THE COMPLETE BOUNDED k=2 CLASSIFICATION e289_no_pair_any_le12 (k=1 + k=2 gapped decide censuses on [2,12] + the adjacent collapse route) + THE HM k=5 TOTAL-2 WITNESS FAMILY e289_hm_family ([2,7],[9,10],[17,18],[34,35],[84,85] — full #289 shape + exact cross-multiplied sum = 2) + the arsenal bridge + the 14-conjunct board"
         if: always()

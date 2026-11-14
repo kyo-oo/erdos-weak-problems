@@ -1,0 +1,251 @@
+2026-11-14T14:11:46.9695416Z ##[group]Run set -euo pipefail
+2026-11-14T14:11:46.9695761Z [36;1mset -euo pipefail[0m
+2026-11-14T14:11:46.9696062Z [36;1mlake build Arsenal.ErdosTernary2.Basic[0m
+2026-11-14T14:11:46.9696398Z [36;1mlake build Arsenal.CardinalWorlds[0m
+2026-11-14T14:11:46.9696706Z [36;1mlake build Arsenal.CardinalWorldsV2[0m
+2026-11-14T14:11:46.9697171Z [36;1mlake env lean problem708-product-divisibility/Erdos708.lean 2>&1 | tee kernel62.log[0m
+2026-11-14T14:11:46.9697837Z [36;1m! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel62.log[0m
+2026-11-14T14:11:46.9698396Z [36;1mgrep -F "E708_PRODUCT_DIVISIBILITY_GREEN" kernel62.log[0m
+2026-11-14T14:11:46.9699140Z [36;1mgrep -E "E708.(e708_prod_append|e708_enum_sound|e708_enum_complete|e708_exact_6_10_14_15|erdos708_board)' (does not depend on any axioms|depends on axioms)" kernel62.log[0m
+2026-11-14T14:11:46.9699839Z [36;1mgrep -F "E708_G4_MASTER_GREEN" kernel62.log[0m
+2026-11-14T14:11:46.9700564Z [36;1mgrep -E "E708.(e708_g4_box_exact|e708_g4_box_corpus|e708_exact_2_3_4_5|erdos708_g4_master|erdos708_g4_box_max)' (does not depend on any axioms|depends on axioms)" kernel62.log[0m
+2026-11-14T14:11:46.9701236Z [36;1mecho KERNEL62_GREEN=1[0m
+2026-11-14T14:11:46.9722395Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-14T14:11:46.9722743Z ##[endgroup]
+2026-11-14T14:11:47.8421845Z Build completed successfully (2 jobs).
+2026-11-14T14:11:51.8525048Z ⚠ [8697/8697] Replayed Arsenal.CardinalWorlds
+2026-11-14T14:11:51.8525881Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-14T14:11:51.8526260Z 
+2026-11-14T14:11:51.8526685Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:11:51.8527269Z   [apply] _hm
+2026-11-14T14:11:51.8527396Z 
+2026-11-14T14:11:51.8527656Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:11:51.8528237Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-14T14:11:51.8528598Z 
+2026-11-14T14:11:51.8529035Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:11:51.8529583Z   [apply] _hm
+2026-11-14T14:11:51.8529725Z 
+2026-11-14T14:11:51.8529946Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:11:51.8530707Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-14T14:11:51.8531574Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-14T14:11:51.8532755Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-14T14:11:51.8535230Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-14T14:11:51.8537070Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-14T14:11:51.8537790Z   4 * X / 3 ^ p % 3 = 2
+2026-11-14T14:11:51.8538533Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-14T14:11:51.8539533Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-14T14:11:51.8540567Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-14T14:11:51.8541843Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-14T14:11:51.8543145Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-14T14:11:51.8544017Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-14T14:11:51.8544825Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-14T14:11:51.8545325Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-14T14:11:51.8546116Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-14T14:11:51.8546973Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-14T14:11:51.8548065Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-14T14:11:51.8549131Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-14T14:11:51.8549683Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-14T14:11:51.8550380Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-14T14:11:51.8551320Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-14T14:11:51.8551902Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-14T14:11:51.8552526Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-14T14:11:51.8553950Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-14T14:11:51.8555037Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8555859Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8556727Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8557636Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8558749Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8559735Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:11:51.8560618Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-14T14:11:51.8561457Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8562466Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8563707Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8564736Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:51.8565676Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-14T14:11:51.8566507Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-14T14:11:51.8567371Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-14T14:11:51.8568494Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:11:51.8945474Z Build completed successfully (8697 jobs).
+2026-11-14T14:11:56.0154913Z ⚠ [8697/8698] Replayed Arsenal.CardinalWorlds
+2026-11-14T14:11:56.0156005Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-14T14:11:56.0156605Z 
+2026-11-14T14:11:56.0157844Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:11:56.0158724Z   [apply] _hm
+2026-11-14T14:11:56.0158878Z 
+2026-11-14T14:11:56.0159189Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:11:56.0160006Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-14T14:11:56.0160523Z 
+2026-11-14T14:11:56.0161098Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:11:56.0161911Z   [apply] _hm
+2026-11-14T14:11:56.0162073Z 
+2026-11-14T14:11:56.0162366Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:11:56.0163583Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-14T14:11:56.0164764Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-14T14:11:56.0166012Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-14T14:11:56.0167337Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-14T14:11:56.0168730Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-14T14:11:56.0169502Z   4 * X / 3 ^ p % 3 = 2
+2026-11-14T14:11:56.0170313Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-14T14:11:56.0171422Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-14T14:11:56.0172589Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-14T14:11:56.0174188Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-14T14:11:56.0175430Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-14T14:11:56.0176353Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-14T14:11:56.0177216Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-14T14:11:56.0177764Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-14T14:11:56.0178640Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-14T14:11:56.0179583Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-14T14:11:56.0180787Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-14T14:11:56.0181962Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-14T14:11:56.0182576Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-14T14:11:56.0183490Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-14T14:11:56.0184528Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-14T14:11:56.0185170Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-14T14:11:56.0185860Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-14T14:11:56.0187239Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-14T14:11:56.0188439Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0189567Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0190551Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0191540Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0192567Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0193830Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:11:56.0194807Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-14T14:11:56.0195725Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0196830Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0197965Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0199098Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.0200133Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-14T14:11:56.0201050Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-14T14:11:56.0202008Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-14T14:11:56.0203519Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:11:56.1150779Z ℹ [8698/8698] Replayed Arsenal.CardinalWorldsV2
+2026-11-14T14:11:56.1151997Z info: Arsenal/CardinalWorldsV2.lean:140:0: CardinalWorldsV2.has_two_iff_no_two_false (n : ℕ) : hasTernaryTwo n = true ↔ noTernaryTwo n = false
+2026-11-14T14:11:56.1153583Z info: Arsenal/CardinalWorldsV2.lean:141:0: CardinalWorldsV2.has_two_iff_first_signature (n : ℕ) :
+2026-11-14T14:11:56.1154267Z   hasTernaryTwo n = true ↔ ∃ q, n / 3 ^ q % 3 = 2 ∧ ∀ p < q, n / 3 ^ p % 3 ≠ 2
+2026-11-14T14:11:56.1155106Z info: Arsenal/CardinalWorldsV2.lean:142:0: CardinalWorldsV2.no_two_false_iff_digit_witness (n : ℕ) : noTernaryTwo n = false ↔ ∃ p, gstDigit n p = 2
+2026-11-14T14:11:56.1156102Z info: Arsenal/CardinalWorldsV2.lean:143:0: CardinalWorldsV2.carryAtPos_one_exact (R : ℕ) : carryAtPos R 1 = R % 3
+2026-11-14T14:11:56.1156949Z info: Arsenal/CardinalWorldsV2.lean:144:0: CardinalWorldsV2.first_carry_two_iff (R : ℕ) : carryAtPos R 1 = 2 ↔ R % 3 = 2
+2026-11-14T14:11:56.1157784Z info: Arsenal/CardinalWorldsV2.lean:145:0: CardinalWorldsV2.v2r_ternary_scaling (a c : ℕ) : v2r (3 ^ a * c) = v2r c
+2026-11-14T14:11:56.1158552Z info: Arsenal/CardinalWorldsV2.lean:146:0: CardinalWorldsV2.packet_add (j k : ℕ) :
+2026-11-14T14:11:56.1159143Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-14T14:11:56.1160060Z     packetMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-14T14:11:56.1161132Z info: Arsenal/CardinalWorldsV2.lean:147:0: CardinalWorldsV2.packetMul_assoc (A B C : GSTThreeWorldExponentialPacketS) :
+2026-11-14T14:11:56.1161972Z   packetMul (packetMul A B) C = packetMul A (packetMul B C)
+2026-11-14T14:11:56.1162775Z info: Arsenal/CardinalWorldsV2.lean:148:0: CardinalWorldsV2.packet_mixed_reconstruct (j : ℕ) :
+2026-11-14T14:11:56.1163622Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-14T14:11:56.1164254Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-14T14:11:56.1165199Z info: Arsenal/CardinalWorldsV2.lean:149:0: CardinalWorldsV2.joined_prefix_succ (K : ℕ) :
+2026-11-14T14:11:56.1166335Z   gstHandwrittenThreeWorldJoinedPrefixS (K + 1) = gstHandwrittenThreeWorldJoinedPrefixS K + 5 * 6 ^ K
+2026-11-14T14:11:56.1167229Z info: Arsenal/CardinalWorldsV2.lean:150:0: CardinalWorldsV2.cardinal_worlds_v2_crown :
+2026-11-14T14:11:56.1167976Z   (∀ (n : ℕ), hasTernaryTwo n = true ↔ noTernaryTwo n = false) ∧
+2026-11-14T14:11:56.1168458Z     (∀ (R : ℕ), carryAtPos R 1 = R % 3) ∧
+2026-11-14T14:11:56.1168868Z       (∀ (a c : ℕ), v2r (3 ^ a * c) = v2r c) ∧
+2026-11-14T14:11:56.1169231Z         ∀ (j k : ℕ),
+2026-11-14T14:11:56.1169555Z           gstThreeWorldExponentialPacketS (j + k) =
+2026-11-14T14:11:56.1170188Z             packetMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-14T14:11:56.1171200Z info: Arsenal/CardinalWorldsV2.lean:152:0: 'CardinalWorldsV2.has_two_iff_no_two_false' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.1172349Z info: Arsenal/CardinalWorldsV2.lean:153:0: 'CardinalWorldsV2.has_two_iff_first_signature' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.1203862Z info: Arsenal/CardinalWorldsV2.lean:154:0: 'CardinalWorldsV2.carryAtPos_one_exact' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.1204964Z info: Arsenal/CardinalWorldsV2.lean:155:0: 'CardinalWorldsV2.packet_add' depends on axioms: [propext]
+2026-11-14T14:11:56.1206141Z info: Arsenal/CardinalWorldsV2.lean:156:0: 'CardinalWorldsV2.cardinal_worlds_v2_crown' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:11:56.1689218Z Build completed successfully (8698 jobs).
+2026-11-14T14:16:24.4197624Z problem708-product-divisibility/Erdos708.lean:171:4: warning: Variable name `x` is not explicitly referenced.
+2026-11-14T14:16:24.4198378Z 
+2026-11-14T14:16:24.4199015Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:16:24.4199880Z   [apply] _x
+2026-11-14T14:16:24.4200063Z 
+2026-11-14T14:16:24.4200408Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:16:24.4201362Z problem708-product-divisibility/Erdos708.lean:249:6: warning: Variable name `A` is not explicitly referenced.
+2026-11-14T14:16:24.4202130Z 
+2026-11-14T14:16:24.4202534Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:16:24.4203301Z   [apply] _A
+2026-11-14T14:16:24.4203430Z 
+2026-11-14T14:16:24.4203657Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:16:24.4204290Z problem708-product-divisibility/Erdos708.lean:249:8: warning: Variable name `A'` is not explicitly referenced.
+2026-11-14T14:16:24.4204704Z 
+2026-11-14T14:16:24.4205090Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:16:24.4205656Z   [apply] _A'
+2026-11-14T14:16:24.4205783Z 
+2026-11-14T14:16:24.4205998Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:16:24.4206652Z problem708-product-divisibility/Erdos708.lean:249:11: warning: Variable name `B` is not explicitly referenced.
+2026-11-14T14:16:24.4207067Z 
+2026-11-14T14:16:24.4207463Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-14T14:16:24.4208010Z   [apply] _B
+2026-11-14T14:16:24.4208129Z 
+2026-11-14T14:16:24.4208327Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-14T14:16:24.4208852Z 'E708.erdos708_g4_lower' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4209305Z 'E708.e708_prod_append' depends on axioms: [propext]
+2026-11-14T14:16:24.4209655Z 'E708.e708_superset_law' depends on axioms: [propext]
+2026-11-14T14:16:24.4210016Z 'E708.e708_composition_law' depends on axioms: [propext]
+2026-11-14T14:16:24.4210357Z 'E708.e708_refine_law' depends on axioms: [propext]
+2026-11-14T14:16:24.4210932Z 'E708.e708_enum_sound' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.4211365Z 'E708.e708_enum_complete' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.4211840Z 'E708.e708_window_law' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4212342Z 'E708.e708_asc_bridge' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4212785Z 'E708.w708OK_spec' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.4213337Z 'E708.hwit23' depends on axioms: [propext]
+2026-11-14T14:16:24.4213657Z 'E708.hwit6_10_15' depends on axioms: [propext]
+2026-11-14T14:16:24.4213985Z 'E708.hwit2_3_5' depends on axioms: [propext]
+2026-11-14T14:16:24.4214298Z 'E708.hwit6_10_14_15' depends on axioms: [propext]
+2026-11-14T14:16:24.4214623Z 'E708.hwit6_10_15_21' depends on axioms: [propext]
+2026-11-14T14:16:24.4214960Z 'E708.hwit2_3_5_7' depends on axioms: [propext]
+2026-11-14T14:16:24.4215297Z 'E708.hwit6_10_14_15_21' depends on axioms: [propext]
+2026-11-14T14:16:24.4215652Z 'E708.hwit6_10_14_15_21_35' depends on axioms: [propext]
+2026-11-14T14:16:24.4216081Z 'E708.e708_census_23' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4216595Z 'E708.e708_census_6_10_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4217106Z 'E708.e708_census_2_3_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4217623Z 'E708.e708_census_6_10_14_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4218134Z 'E708.e708_census_6_10_15_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4218630Z 'E708.e708_census_2_3_5_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4219147Z 'E708.e708_census_6_10_14_15_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4219692Z 'E708.e708_census_6_10_14_15_21_35' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4220211Z 'E708.e708_exact_23' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4220885Z 'E708.e708_exact_6_10_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4221397Z 'E708.e708_exact_2_3_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4221894Z 'E708.e708_exact_6_10_14_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4222401Z 'E708.e708_exact_6_10_15_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4222921Z 'E708.e708_exact_2_3_5_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4223687Z 'E708.e708_exact_6_10_14_15_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4224233Z 'E708.e708_exact_6_10_14_15_21_35' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4224745Z 'E708.e708_case_23' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.4225240Z 'E708.e708_case_6_10_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9114590Z 'E708.e708_case_2_3_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9115701Z 'E708.e708_case_6_10_14_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9116629Z 'E708.e708_case_6_10_15_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9117681Z 'E708.e708_case_2_3_5_7' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9118307Z 'E708.e708_case_6_10_14_15_21' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9118926Z 'E708.e708_case_6_10_14_15_21_35' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9119494Z 'E708.erdos708_board' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9119941Z 'E708.coverExact' does not depend on any axioms
+2026-11-14T14:16:24.9120647Z 'E708.e708_exact_enum_sound' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.9121119Z 'E708.e708_exact_enum_complete' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.9121646Z 'E708.e708_g4_box_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9122090Z 'E708.w708OK4' does not depend on any axioms
+2026-11-14T14:16:24.9122497Z 'E708.w708OK4_spec' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9122912Z 'E708.nthD708' does not depend on any axioms
+2026-11-14T14:16:24.9123399Z 'E708.rowOK708' does not depend on any axioms
+2026-11-14T14:16:24.9123765Z 'E708.e708_all_append' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.9124190Z 'E708.e708_g4_rows_exact' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:24.9124567Z 'E708.e708_wrows_dom' does not depend on any axioms
+2026-11-14T14:16:24.9124995Z 'E708.e708_g4_box_corpus' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9125519Z 'E708.e708_exact_2_3_4_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9126019Z 'E708.erdos708_g4_master' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9126540Z 'E708.erdos708_g4_box_max' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:24.9126936Z "E708_KERNEL_GREEN"
+2026-11-14T14:16:24.9127172Z "E708_PRODUCT_DIVISIBILITY_GREEN"
+2026-11-14T14:16:24.9127433Z "E708_G4_MASTER_GREEN"
+2026-11-14T14:16:25.4308142Z "E708_PRODUCT_DIVISIBILITY_GREEN"
+2026-11-14T14:16:25.4325348Z 'E708.e708_prod_append' depends on axioms: [propext]
+2026-11-14T14:16:25.4325924Z 'E708.e708_enum_sound' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:25.4326401Z 'E708.e708_enum_complete' depends on axioms: [propext, Quot.sound]
+2026-11-14T14:16:25.4327167Z 'E708.e708_exact_6_10_14_15' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4328050Z 'E708.erdos708_board' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4340043Z "E708_G4_MASTER_GREEN"
+2026-11-14T14:16:25.4357827Z 'E708.e708_g4_box_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4358787Z 'E708.e708_g4_box_corpus' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4359643Z 'E708.e708_exact_2_3_4_5' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4360528Z 'E708.erdos708_g4_master' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4361418Z 'E708.erdos708_g4_box_max' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-14T14:16:25.4362098Z KERNEL62_GREEN=1
+2026-11-14T14:16:25.4400622Z ##[group]Run set -euo pipefail
+2026-11-14T14:16:25.4400966Z [36;1mset -euo pipefail[0m

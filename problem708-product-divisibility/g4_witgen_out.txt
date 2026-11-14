@@ -1,0 +1,8 @@
+=== #708 W64-B THE NO-OOM WITNESS-TABLE RESTRUCTURE ===
+box708 rows: 1365 (C(15,4) = 1365)
+(A,t) instances: 54600 (1365 x 40)
+witness rows verified (dual: DFS-hunt + explicit recheck): 54600/54600, failures: 0
+chunks: 114 x <= 12 A-rows (480 instances per chunk, <= 501 law)
+witness-element checksum (determinism): 5500392
+generator: 8.3s
+VERDICT: GREEN — witness table complete, dual-method verified
