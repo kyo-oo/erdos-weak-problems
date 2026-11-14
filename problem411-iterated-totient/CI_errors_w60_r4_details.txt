@@ -1,0 +1,200 @@
+problem411-iterated-totient/Erdos411.lean:46:16: error: unsolved goals
+case cons
+p q : ℕ → Bool
+a : ℕ
+t : List ℕ
+ih : (∀ x ∈ t, p x = q x) → List.countP p t = List.countP q t
+h : ∀ x ∈ a :: t, p x = q x
+⊢ ∀ x ∈ t, p x = q x
+problem411-iterated-totient/Erdos411.lean:146:2: error: Type mismatch
+  h
+has type
+  m = 1 ∨ m = 3 ∨ m = 5 ∨ m = 7 ∨ m = 35 ∨ m = 47 ∨ m ∈ []
+but is expected to have type
+  m = 1 ∨ m = 3 ∨ m = 5 ∨ m = 7 ∨ m = 35 ∨ m = 47
+problem411-iterated-totient/Erdos411.lean:145:28: warning: This simp argument is unused:
+  List.mem_singleton
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [List.mem_cons] at h
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+problem411-iterated-totient/Erdos411.lean:151:34: error: Function expected at
+  inFAM
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  x
+
+Hint: The identifier `inFAM` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+problem411-iterated-totient/Erdos411.lean:214:38: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  b ≥ 0
+  b ≥ 1
+  a ≥ 0
+where
+ a := ↑(List.countP P (List.range M))
+ b := ↑M
+problem411-iterated-totient/Erdos411.lean:221:4: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  e ≥ 0
+  b ≥ 0
+  a ≥ 0
+  a - b + e ≤ -1
+where
+ a := ↑(List.countP (fun j => P (M + 1 - 1 - j)) (List.range M))
+ b := ↑(List.countP P (List.range M ++ [M]))
+ e := ↑(if P M = true then 1 else 0)
+problem411-iterated-totient/Erdos411.lean:232:4: error: unsolved goals
+case pos
+Q : ℕ → Prop
+inst✝ : DecidablePred Q
+k : ℕ
+hq : Q k
+h1 : k % 2 = 1
+⊢ ((if true = true then 1 else 0) + if false = true then 1 else 0) = if true = true then 1 else 0
+problem411-iterated-totient/Erdos411.lean:235:4: error: unsolved goals
+case neg
+Q : ℕ → Prop
+inst✝ : DecidablePred Q
+k : ℕ
+hq : Q k
+h1 : ¬k % 2 = 1
+h0 : k % 2 = 0
+⊢ ((if false = true then 1 else 0) + if true = true then 1 else 0) = if true = true then 1 else 0
+problem411-iterated-totient/Erdos411.lean:239:2: error: unsolved goals
+case neg
+Q : ℕ → Prop
+inst✝ : DecidablePred Q
+k : ℕ
+hq : ¬Q k
+⊢ ((if false = true then 1 else 0) + if false = true then 1 else 0) = if false = true then 1 else 0
+problem411-iterated-totient/Erdos411.lean:421:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  List.countP (fun k => decide (?Q k ∧ k % 2 = 1)) ?l + List.countP (fun k => decide (?Q k ∧ k % 2 = 0)) ?l
+in the target expression
+  List.countP (fun k => decide ((k + 1).gcd y = 1 ∧ (k + 1) % 2 = 1)) (List.range y) +
+      List.countP (fun k => decide ((k + 1).gcd y = 1 ∧ (k + 1) % 2 = 0)) (List.range y) =
+    List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y)
+
+y : ℕ
+hy : y % 2 = 1
+hsplit : List.range (2 * y) = List.range y ++ List.map (fun k => y + k) (List.range y)
+⊢ List.countP (fun k => decide ((k + 1).gcd y = 1 ∧ (k + 1) % 2 = 1)) (List.range y) +
+      List.countP (fun k => decide ((k + 1).gcd y = 1 ∧ (k + 1) % 2 = 0)) (List.range y) =
+    List.countP (fun k => decide ((k + 1).gcd y = 1)) (List.range y)
+problem411-iterated-totient/Erdos411.lean:446:41: error: Function expected at
+  ih ?m.328
+but this term has type
+  phiB (2 ^ (a' + 1) * m) = 2 ^ (a' + 1 - 1) * phiB m
+
+Note: Expected a function because this term is being applied to the argument
+  hm
+problem411-iterated-totient/Erdos411.lean:456:4: error: Function expected at
+  List.countP_le_length
+but this term has type
+  List.countP ?m.21 ?m.22 ≤ List.length ?m.22
+
+Note: Expected a function because this term is being applied to the argument
+  _
+problem411-iterated-totient/Erdos411.lean:486:12: error: Function expected at
+  List.range_succ
+but this term has type
+  List.range (Nat.succ ?m.114) = List.range ?m.114 ++ [?m.114]
+
+Note: Expected a function because this term is being applied to the argument
+  (x - 1)
+problem411-iterated-totient/Erdos411.lean:489:43: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  b ≥ 0
+  a ≥ 1
+  a ≥ 0
+  2*a - b ≥ 0
+where
+ a := ↑h
+ b := ↑((x - 1 + 1).gcd x)
+problem411-iterated-totient/Erdos411.lean:490:10: error: Tactic `rewrite` failed: motive is not type correct:
+  fun _a => decide (_a = 1) = false
+Error: Application type mismatch: The argument
+  (x - 1 + 1).instDecidableCoprime x
+has type
+  Decidable ((x - 1 + 1).Coprime x)
+but is expected to have type
+  Decidable (_a = 1)
+in the application
+  @decide (_a = 1) ((x - 1 + 1).instDecidableCoprime x)
+
+Explanation: The rewrite tactic rewrites an expression 'e' using an equality 'a = b' by the following process. First, it looks for all 'a' in 'e'. Second, it tries to abstract these occurrences of 'a' to create a function 'm := fun _a => ...', called the *motive*, with the property that 'm a' is definitionally equal to 'e'. Third, we observe that 'congrArg' implies that 'm a = m b', which can be used with lemmas such as 'Eq.mpr' to change the goal. However, if 'e' depends on specific properties of 'a', then the motive 'm' might not typecheck.
+
+Possible solutions: use rewrite's 'occs' configuration option to limit which occurrences are rewritten, or use 'simp' or 'conv' mode, which have strategies for certain kinds of dependencies (these tactics can handle proofs and 'Decidable' instances whose types depend on the rewritten term, and 'simp' can apply user-defined '@[congr]' theorems as well).
+
+x h : ℕ
+hx : x = 2 * h + 1
+h3 : 3 ≤ x
+hxx : x.gcd x = x
+hr : List.range x = List.range (x - 1) ++ [x - 1]
+this : (x - 1 + 1).gcd x = x
+⊢ decide ((x - 1 + 1).gcd x = 1) = false
+problem411-iterated-totient/Erdos411.lean:501:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  List.countP (fun k => decide ((h + k + 1).gcd x = 1)) ?m.241
+in the target expression
+  2 ∣
+    List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range h) +
+      List.countP ((fun k => decide ((k + 1).gcd x = 1)) ∘ fun x => h + x) (List.range h)
+
+x h : ℕ
+hx : x = 2 * h + 1
+h3 : 3 ≤ x
+hxx : x.gcd x = x
+hstrip :
+  List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range x) =
+    List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range (x - 1))
+⊢ 2 ∣
+    List.countP (fun k => decide ((k + 1).gcd x = 1)) (List.range h) +
+      List.countP ((fun k => decide ((k + 1).gcd x = 1)) ∘ fun x => h + x) (List.range h)
+problem411-iterated-totient/Erdos411.lean:552:2: error: No goals to be solved
+problem411-iterated-totient/Erdos411.lean:583:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  gF (i + j) x
+in the target expression
+  gF (i + j) (gstep x) = gF i (gF (j + 1) x)
+
+case succ
+i x j : ℕ
+ih : gF (i + j) x = gF i (gF j x)
+h1 : i + (j + 1) = i + j + 1
+h2 : gF (i + j + 1) x = gF (i + j) (gstep x)
+h3 : gF (j + 1) x = gF j (gstep x)
+⊢ gF (i + j) (gstep x) = gF i (gF (j + 1) x)
+problem411-iterated-totient/Erdos411.lean:608:15: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  2 ^ (?a + 1)
+in the target expression
+  3 * 2 ^ (a + 2 - 1) = 2 * (2 ^ a * 3)
+
+x a : ℕ
+ha : 1 ≤ a
+hm : 3 ∈ SIXl
+hm1 : 3 = 1 → 2 ≤ a
+hxe : x = 2 ^ a * 3
+s1 : gstep (2 ^ a * 3) = 2 ^ (a + 2)
+htp : gstep (2 ^ (a + 2)) = 3 * 2 ^ (a + 2 - 1)
+⊢ 3 * 2 ^ (a + 2 - 1) = 2 * (2 ^ a * 3)
+problem411-iterated-totient/Erdos411.lean:655:35: error(lean.unknownIdentifier): Unknown identifier `hv`
+problem411-iterated-totient/Erdos411.lean:649:81: error: unsolved goals
+v a m : ℕ
+ha : 1 ≤ a
+hm : m ∈ SIXl
+hm1 : m = 1 → 2 ≤ a
+hxe : v = 2 ^ a * m
+hEven : 2 ∣ v
+⊢ gstep (2 * v) = 2 * gstep v
+problem411-iterated-totient/Erdos411.lean:667:4: error: unsolved goals
+case zero.left
+x : ℕ
+hx : inFAM x
+⊢ gF 0 x = x
+problem411-iterated-totient/Erdos411.lean:668:4: error: unsolved goals
+case zero.right
+x : ℕ
+hx : inFAM x
+⊢ gF (0 + 1) x = gstep x
+problem411-iterated-totient/Erdos411.lean:680:20: error: omega could not prove the goal:

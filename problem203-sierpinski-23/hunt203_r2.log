@@ -1,0 +1,7 @@
+[v5.1 cycle] build 5s; live residual 218794308 (28.4741%); best banked 218794308 (28.4741%)
+[cycle 4] KICK 1-pair members 37,331 -> res 220351207 (28.6767%), excess +1556899 (tries 1), seed 1464868676
+[sweep c4 p1] member q=5 W 0->2 gain 91314768 loss 91234400 d -80368 res 220270839 (28.6662%)
+[sweep c4 p1] member q=37 W 19->11 gain 8749392 loss 8231222 d -518170 res 219752669 (28.5988%)
+[sweep c4] pass 1: 2 switches, net gain +598538 cells, res 219752669 (28.5988%) (232s)
+[cycle 4] basin failed -> 5 switch-backs to best 218794308
+== v5.1 cycle cycle 4 done: best 218794308 (28.4741%), improvements 0, sweep switches 2 (net +598538), polish tried 1932, wall 392s

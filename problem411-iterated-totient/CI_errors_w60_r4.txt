@@ -1,0 +1,65 @@
+problem411-iterated-totient/Erdos411.lean:46:16: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:146:2: error: Type mismatch
+problem411-iterated-totient/Erdos411.lean:151:34: error: Function expected at
+problem411-iterated-totient/Erdos411.lean:214:38: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:221:4: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:232:4: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:235:4: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:239:2: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:421:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:446:41: error: Function expected at
+problem411-iterated-totient/Erdos411.lean:456:4: error: Function expected at
+problem411-iterated-totient/Erdos411.lean:486:12: error: Function expected at
+problem411-iterated-totient/Erdos411.lean:489:43: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:490:10: error: Tactic `rewrite` failed: motive is not type correct:
+problem411-iterated-totient/Erdos411.lean:501:6: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:552:2: error: No goals to be solved
+problem411-iterated-totient/Erdos411.lean:583:16: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:608:15: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:649:81: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:667:4: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:668:4: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:680:20: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:698:85: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:701:2: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:705:10: error: unexpected token '=>'; expected command
+problem411-iterated-totient/Erdos411.lean:788:18: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:795:32: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:796:23: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:817:21: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:823:76: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:827:2: error: unsolved goals
+problem411-iterated-totient/Erdos411.lean:828:6: error: unexpected token 'have'; expected command
+problem411-iterated-totient/Erdos411.lean:855:31: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:868:23: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+problem411-iterated-totient/Erdos411.lean:870:17: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+problem411-iterated-totient/Erdos411.lean:894:57: error: numerals are data in Lean, but the expected type is a proposition
+problem411-iterated-totient/Erdos411.lean:1008:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1014:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1022:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1030:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1038:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1046:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1054:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1062:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1070:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1078:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1086:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1094:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1102:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1110:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1118:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1126:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1134:8: error: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+problem411-iterated-totient/Erdos411.lean:1172:31: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:1183:23: error: Tactic `cases` failed with a nested error:
+problem411-iterated-totient/Erdos411.lean:1217:35: error: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+problem411-iterated-totient/Erdos411.lean:1341:31: error: omega could not prove the goal:
+problem411-iterated-totient/Erdos411.lean:1342:57: error: numerals are data in Lean, but the expected type is a proposition
+problem411-iterated-totient/Erdos411.lean:1352:11: error: Application type mismatch: The argument
+problem411-iterated-totient/Erdos411.lean:1374:4: error: Tactic `decide` failed for proposition
+problem411-iterated-totient/Erdos411.lean:1375:4: error: Tactic `decide` failed for proposition
+problem411-iterated-totient/Erdos411.lean:1376:4: error: Tactic `decide` failed for proposition
+problem411-iterated-totient/Erdos411.lean:1377:4: error: Tactic `decide` failed for proposition
+problem411-iterated-totient/Erdos411.lean:1378:4: error: Tactic `decide` failed for proposition
+problem411-iterated-totient/Erdos411.lean:1382:4: error: Tactic `decide` proved that the proposition

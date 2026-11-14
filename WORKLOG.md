@@ -3680,3 +3680,53 @@ verdicts pending on this push. The engine never stops; it never lies.
   push + verdict collection at wave close.
 
 The engine never stops; it never lies. In English, always.
+
+## S061 — W60-B: THE WAVE EXECUTION (K61 r4 repair + P708 g(4) master + both hunts escalated)
+
+- **THE SUB-AGENT WALL:** all four parallel Task dispatches hit the
+  environment's context deadline (the wave could not deploy in this
+  sandbox). MOMENTUM ENGINE: the commander executed the missions directly.
+- **W60-T1 K61 #411 r4 — THE FULL REPAIR (18 root-kill families, pushed
+  a048108):** THE closureChunk BOUNDARY ROOT FIX (`range (hi+1)` covered
+  lo..lo+hi — chunks overran the table end; python mirror proves ALL 320
+  indices pass — the data was always sound); THE PARTITION STATEMENT DEFECT
+  (1001 in neither list — the mirror's own warning; range 1001 mandated);
+  the .succ-display disease (two_pow_split/split3/succ_add helpers + ring);
+  countP_congr_local/countP_map_local self-built; parity_elem by_cases
+  rebuild; inFAM_gstep six cases (r1 had a FALSE witness); gstep_dbl_comm
+  minted (r3's hEven witness 2^(a-1)m false for j≥1); oddPF family
+  generalizing rebuilds; the arsenal bridge's invented v2r.eq_def → decide +
+  genuine v2r_mul_three_pow. Zero sorry. Full inventory:
+  problem411-iterated-totient/ROUND_REPORT_w60.md. CI verdict pending.
+- **W60-T2c P708 — THE g(4) LOWER-BOUND MASTER (pushed 7c0adcc):**
+  erdos708_g4_lower — A=[6,10,14,15] at t=1: every covering battery ≥ 4
+  AND a 4-battery exists (both directions, from the K62-certified exact
+  minimum) — g(4) ≥ 4, the first case-value floor beyond ErSu59's
+  g(2)=2, g(3)=4. The Erdős $100 lane.
+- **W60-T2b P885 k5 ESCALATION:** hunt885_k5_r2.py (Δ ≤ 2e7, s1 ≤ 4472,
+  870s cap) — k3 validation PASS (9771 configs), k5 phase swept u=1..350+
+  (best 3-common-rows held at u=350; round-2 log banking).
+- **W60-T2a P203 CONTINUATION:** anneal_27720f resumed from checkpoint
+  (28.47% → live 28.68% → 28.60% cycling; the covering hunt continues).
+- **REPO NOTE:** the /home/z/my-project/erdos-weak-problems symlink minted
+  (the W56-era scripts hardcode the old layout).
+
+The engine never stops; it never lies. In English, always.
+
+## S061 — W60-C: ROUND CLOSE (verdicts + the honest ledger)
+
+- **K61 r4 VERDICT (run 43529437027, kernel-c):** FAILURE — but the map
+  DROPPED from 100-capped to 65 errors, and **the decide-FALSE closureChunk
+  family is ELIMINATED** (the boundary ROOT FIX confirmed: no more false
+  chunk rows). The residue: new-shape residuals (the conv-syntax at 705,
+  `introN` binder mismatches at 868/870, unsolved goals in the rebuilt
+  proofs). Fresh map banked: CI_errors_w60_r4.txt + details. **The r5
+  mission is the queue item** (the map is half the size — one or two more
+  rounds close it).
+- **P708 g(4) master:** verdict in flight (run 43529726776 on 7c0adcc).
+- **Hunt logs banked:** hunt885_k5_r2.log (best common-rows climbed 3→4 at
+  u=800, Δ ≤ 2e7 window), hunt203_r2.log (anneal cycling 28.47-28.68%).
+- kernel-a 31/31 SUCCESS on the r4 run; kernel-b in flight (18 done, no
+  failures so far).
+
+The engine never stops; it never lies. In English, always.
