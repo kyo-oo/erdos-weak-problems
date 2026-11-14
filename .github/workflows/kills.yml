@@ -1328,6 +1328,19 @@ jobs:
           grep -F "E939R4_CENSUS_GREEN" kernel60b.log
           grep -E "E939R4.(census_r4_members|no_small_solution_r4|board939_r4)' (does not depend on any axioms|depends on axioms)" kernel60b.log
           echo KERNEL60B_GREEN=1
+      - name: "Kernel 60c - Erdos 939 THE TRUE-BOX WITNESS-TABLE KERNEL r1 (W66-P939-K): the certified census TAB (48,138 4-powerful values <= 2*999706081460641, dual-method python verified) + the inTAB decision-tree membership (64 bucket defs) + the mod-16 gated residue-class sweeps (265 decide chunks, sum-hits 17,439 all gcd>1, zero coprime witnesses) + THE BOX THEOREM e939_box_census (no pairwise-coprime 4-powerful triple a+b=c with a,b <= B inside the certified census) + E939R5_BOX_GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem939-rpowerful/Erdos939R5.lean 2>&1 | tee kernel60c.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60c.log
+          grep -F "E939R5_BOX_GREEN" kernel60c.log
+          grep -E "E939R5.(tab_all_inTAB|e939_box_census|board939R5)' (does not depend on any axioms|depends on axioms)" kernel60c.log
+          echo KERNEL60C_GREEN=1
       - name: "Kernel 61 - Erdos 411 ITERATED-TOTIENT DOUBLING LAWS r3 (W59-H: the W59-F-1 dedicated repair mission — Mathlib-only citations replaced with core locals, countP family rebuilt, gcd family root-repaired): the iterated-totient kernel on the structural φ-fold — gF (the g(n)=n+φ(n) iteration) + the closure properties + table_bounds/table_bound_of_lt (the certified table ≤ 59049) + erdos411_witness (the doubling-class witness law) + erdos411_partition (the 1002-cell partition decide) + erdos411_count + erdos411_census (the even-n census to 2000) + THE DOUBLING LAWS erdos411_ten (g_{k+2}(10) = 2·g_k(10)) + erdos411_94 (g_{k+2}(94) = 2·g_k(94)) + the arsenal bridge + erdos411_main + ERDOS411_KERNEL_GREEN"
         if: always()
         shell: bash
