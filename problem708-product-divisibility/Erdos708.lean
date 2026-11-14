@@ -58,12 +58,29 @@ t = 1..40).  Engine-certified worst-over-t rows (run output):
    worst value w is ACHIEVED at t0 over t=1..40 and is an upper bound
    throughout); the board is the 16-conjunct flat assembly (the 8
    general laws + the 8 case rows), full statements, unconditional.
+7. **THE g(4) BOX MASTER** (W63-D1: `coverExact`,
+   `e708_exact_enum_sound`, `e708_exact_enum_complete`, `box708`,
+   `e708_g4_box_exact`, `e708_g4_box_corpus`, `e708_exact_2_3_4_5`,
+   `erdos708_g4_master`, `erdos708_g4_box_max`): the exact-budget
+   enumerator (cover of size EXACTLY k — the corpus's |B| = g(n) cell,
+   sound + complete, full generality); the census box (all C(15,4)=1365
+   four-element A ⊆ [2,16], decide-generated); the aggregate decide
+   (54600 box instances each admit an exactly-4 cover); the second
+   exact-min row (minB [2,3,4,5] 24 = 4, a second g(4)>=4 forcing
+   witness inside the box); THE MASTER: construction (∀ (A,t) of the
+   box: ∃ B, |B| = 4 exactly, prod(A) | prod(B)) + exclusion (no
+   cover of size <= 3 at ([2,3,4,5], 24)) + the exact row — the
+   box-max of the instance-minima is EXACTLY 4: the case-value g(4)=4
+   on the certified box.
 
 Honest scope: the engine's certified range is t = 1..40 (t_max=40 in
 `worst_over_intervals`); the ErSu59 universal laws (g(2)=2, g(3)=4 for
 ALL A) are NOT attempted here — this kernel certifies the engine's own
-finite evidence completely.  Extending the t-range or proving g(4)
-bounds for all 4-sets is the next round's war.
+finite evidence completely.  The g(4) box master's certified domain is
+{four-element A ⊆ [2,16]} x {t = 1..40} (the Python census frontier:
+[2,25] x t <= 40 and [2,16] x t <= 300, dual-method verified in
+g4_verify_out.txt — NO forcing-5 anywhere on it); the unboxed statement
+(all four-element A ⊆ [2,∞), all windows) is the next rounds' war.
 
 House-law compliance: L86 (products in the exact goal spelling via
 `Nat.mul_le_mul_left/right` — none needed here, omega only touches
@@ -1434,7 +1451,262 @@ theorem erdos708_board :
     e708_case_6_10_15_21, e708_case_2_3_5_7, e708_case_6_10_14_15_21,
     e708_case_6_10_14_15_21_35⟩
 
-/-! ## §10 THE RECEIPTS. -/
+/-! ## §11 THE EXACT-BUDGET ENUMERATOR (W63-D1: the corpus's |B| = g(n)
+cell). -/
+
+/-- THE EXACT-BUDGET SUBSET ENUMERATOR: does some cell-selection of l
+with EXACTLY k cells have (acc * its product) divisible by P?  Take the
+head cell (budget-1, acc*x) or skip it (budget unchanged); at the empty
+suffix the budget must be spent exactly (k = 0 tests acc, leftover budget
+fails).  This is the corpus statement's |B| = g(n) form — the cover lands
+the size EXACTLY, no superset-padding surgery needed. -/
+def coverExact (P : Nat) : List Nat → Nat → Nat → Bool
+  | [], 0, acc => dvB P acc
+  | [], _ + 1, _ => false
+  | _ :: l, 0, acc => coverExact P l 0 acc
+  | x :: l, k + 1, acc => coverExact P l k (acc * x) || coverExact P l (k + 1) acc
+
+/-- EXACT-ENUM SOUNDNESS: a true run exhibits a covering cell-selection of
+size EXACTLY k. -/
+theorem e708_exact_enum_sound : ∀ (P : Nat) (l : List Nat) (k acc : Nat),
+    coverExact P l k acc = true →
+    ∃ B, sub708 B l ∧ B.length = k ∧ P ∣ acc * prod708 B := by
+  intro P l
+  induction l with
+  | nil =>
+      intro k acc h
+      cases k with
+      | zero =>
+          have hb : dvB P acc = true := h
+          refine ⟨[], sub708.nil [], rfl, ?_⟩
+          have hd : P ∣ acc := dvB_true_dvd P acc hb
+          show P ∣ acc * prod708 []
+          show P ∣ acc * 1
+          rw [Nat.mul_one]
+          exact hd
+      | succ m =>
+          have hf : coverExact P [] (m + 1) acc = false := rfl
+          rw [hf] at h
+          exact Bool.noConfusion h
+  | cons x l' ih =>
+      intro k acc h
+      cases k with
+      | zero =>
+          have h' : coverExact P l' 0 acc = true := h
+          obtain ⟨B, hsub, hlen, hdvd⟩ := ih 0 acc h'
+          exact ⟨B, sub708.drop x l' B hsub, hlen, hdvd⟩
+      | succ m =>
+          have h' : (coverExact P l' m (acc * x) || coverExact P l' (m + 1) acc) = true := h
+          rcases or_of_bool_eq _ _ h' with htake | hskip
+          · obtain ⟨B, hsub, hlen, hdvd⟩ := ih m (acc * x) htake
+            refine ⟨x :: B, sub708.take x l' B hsub, ?_, ?_⟩
+            · have hL : (x :: B).length = B.length + 1 := rfl
+              rw [hL]
+              omega
+            · rw [prod708_cons, ← Nat.mul_assoc]
+              exact hdvd
+          · obtain ⟨B, hsub, hlen, hdvd⟩ := ih (m + 1) acc hskip
+            exact ⟨B, sub708.drop x l' B hsub, hlen, hdvd⟩
+
+/-- EXACT-ENUM COMPLETENESS: every covering cell-selection of size
+EXACTLY k drives the enumerator true (the dual direction; read
+contrapositively it is the exact-size exclusion bridge). -/
+theorem e708_exact_enum_complete : ∀ (P : Nat) (l : List Nat) (k acc : Nat) (B : List Nat),
+    sub708 B l → B.length = k → P ∣ acc * prod708 B → coverExact P l k acc = true := by
+  intro P l
+  induction l with
+  | nil =>
+      intro k acc B hsub hlen hdvd
+      cases hsub with
+      | nil =>
+          cases k with
+          | zero =>
+              show dvB P acc = true
+              rw [prod708_nil, Nat.mul_one] at hdvd
+              exact dvB_true_of_dvd P acc hdvd
+          | succ m =>
+              rw [List.length_nil] at hlen
+              exact absurd hlen (by omega)
+  | cons x l' ih =>
+      intro k acc B hsub hlen hdvd
+      cases k with
+      | zero =>
+          cases B with
+          | nil =>
+              show coverExact P l' 0 acc = true
+              exact ih 0 acc [] (sub708.nil l') rfl hdvd
+          | cons b B' =>
+              rw [List.length_cons] at hlen
+              exact absurd hlen (by omega)
+      | succ m =>
+          show (coverExact P l' m (acc * x) || coverExact P l' (m + 1) acc) = true
+          cases hsub with
+          | nil _ =>
+              rw [List.length_nil] at hlen
+              exact absurd hlen (by omega)
+          | drop _ _ _ hsub' =>
+              exact or_of_bool_right _ _ (ih (m + 1) acc _ hsub' hlen hdvd)
+          | take _ _ B2 hsub' =>
+              rw [List.length_cons] at hlen
+              have hlen' : B2.length = m := by omega
+              have hdvd' : P ∣ acc * x * prod708 B2 := by
+                have hP : prod708 (x :: B2) = x * prod708 B2 := prod708_cons x B2
+                rw [hP, ← Nat.mul_assoc] at hdvd
+                exact hdvd
+              exact or_of_bool_left _ _ (ih m (acc * x) B2 hsub' hlen' hdvd')
+
+/-! ## §12 THE CENSUS BOX (the g(4) master's certified demand-set domain). -/
+
+/-- The concat-map helper (core-only): map-then-concat over a Nat list. -/
+def cmap708 (l : List Nat) (f : Nat → List (List Nat)) : List (List Nat) :=
+  match l with
+  | [] => []
+  | x :: rest => f x ++ cmap708 rest f
+
+/-- THE CENSUS BOX: all C(15,4) = 1365 strictly-ascending four-element
+subsets of [2,16] — the g(4) master's certified demand-set domain (the
+Python census2/widet frontier covers [2,25] x t <= 40 and [2,16] x
+t <= 300, dual-method verified in g4_verify_out.txt). -/
+def box708 : List (List Nat) :=
+  cmap708 (winUp 2 15) (fun a =>
+    cmap708 (winUp (a + 1) (16 - a)) (fun b =>
+      cmap708 (winUp (b + 1) (16 - b)) (fun c =>
+        (winUp (c + 1) (16 - c)).map (fun d => [a, b, c, d]))))
+
+/-! ## §13 THE BOX CONSTRUCTION DECIDE (the aggregate receipt). -/
+
+/-- THE BOX CONSTRUCTION DECIDE: for every four-element demand set A of
+the census box and every window start t = 1..40 (r = t - 1), the
+exact-budget enumerator finds an exactly-4 cover: 1365 x 40 = 54600
+decide-certified instances (the Python mirror ran the identical DFS over
+the same box with 0 failures — g4_verify_out.txt (B)). -/
+theorem e708_g4_box_exact : (box708).all (fun A =>
+    (List.range 40).all (fun r =>
+      coverExact (prod708 A) (win708 (r + 1) (maxA A)) 4 1)) = true := by
+  decide
+
+/-! ## §14 THE g(4) CONSTRUCTION ON THE BOX (the corpus's own cell). -/
+
+/-- THE CONSTRUCTION SIDE (the corpus's |B| = g(n) form): for EVERY
+four-element demand set A of the census box and EVERY window start
+t = 1..40, some cell-selection of I_t(max A) of size EXACTLY 4 covers
+prod(A) — the size lands exactly, no padding surgery. -/
+theorem e708_g4_box_corpus : ∀ (A : List Nat), A ∈ box708 → ∀ (t : Nat), 1 ≤ t → t ≤ 40 →
+    ∃ B, sub708 B (win708 t (maxA A)) ∧ B.length = 4 ∧ prod708 A ∣ prod708 B := by
+  intro A hA t h1 h40
+  have hall := List.all_eq_true.mp e708_g4_box_exact A hA
+  have hin := List.all_eq_true.mp hall (t - 1) (List.mem_range.mpr (by omega))
+  have hwin : win708 ((t - 1) + 1) (maxA A) = win708 t (maxA A) := by
+    show winUp ((t - 1) + 1 + 1) (maxA A) = winUp (t + 1) (maxA A)
+    have hkey : (t - 1) + 1 = t := by omega
+    rw [hkey]
+  rw [hwin] at hin
+  obtain ⟨B, hsub, hlen, hdvd⟩ :=
+    e708_exact_enum_sound (prod708 A) (win708 t (maxA A)) 4 1 hin
+  refine ⟨B, hsub, hlen, ?_⟩
+  rw [Nat.one_mul] at hdvd
+  exact hdvd
+
+/-! ## §15 THE SECOND EXACT-MIN ROW (the forcing witness inside the box). -/
+
+/-- THE EXACT MIN for A = [2, 3, 4, 5] at t = 24: minB = 4 — the second
+g(4) >= 4 forcing witness, INSIDE the census box (window {25,...,29}: the
+only covering subsets have sizes 4 and 5 — the enumerator decides the
+exclusion of <= 3, the exact-budget enumerator exhibits the 4-subset
+{25,26,27,28} with product 491400 = 4095 * 120). -/
+theorem e708_exact_2_3_4_5 : minB [2, 3, 4, 5] 24 = 4 := by
+  have hcov : coverExact (prod708 [2, 3, 4, 5]) (win708 24 (maxA [2, 3, 4, 5])) 4 1 = true := by
+    decide
+  obtain ⟨B, hsub, hlen, hdvd⟩ :=
+    e708_exact_enum_sound (prod708 [2, 3, 4, 5]) (win708 24 (maxA [2, 3, 4, 5])) 4 1 hcov
+  rw [Nat.one_mul] at hdvd
+  have hne : {g : Nat | ∃ B, sub708 B (win708 24 (maxA [2, 3, 4, 5])) ∧ B.length = g ∧
+      prod708 [2, 3, 4, 5] ∣ prod708 B}.Nonempty := by
+    refine ⟨B.length, ?_⟩
+    show ∃ B', sub708 B' (win708 24 (maxA [2, 3, 4, 5])) ∧ B'.length = B.length ∧
+      prod708 [2, 3, 4, 5] ∣ prod708 B'
+    exact ⟨B, hsub, rfl, hdvd⟩
+  have henum : coverFrom (prod708 [2, 3, 4, 5]) (win708 24 (maxA [2, 3, 4, 5]))
+      (4 - 1) 1 = false := by
+    decide
+  have hge : 4 ≤ minB [2, 3, 4, 5] 24 := by
+    by_contra hlt
+    have hmem2 : ∃ B, sub708 B (win708 24 (maxA [2, 3, 4, 5])) ∧
+        B.length = minB [2, 3, 4, 5] 24 ∧ prod708 [2, 3, 4, 5] ∣ prod708 B :=
+      Nat.sInf_mem hne
+    obtain ⟨B, hsub', hlen', hcov'⟩ := hmem2
+    have hcompl := e708_enum_complete (prod708 [2, 3, 4, 5]) (win708 24 (maxA [2, 3, 4, 5]))
+      (4 - 1) 1 B hsub' (by omega) (by rw [Nat.one_mul]; exact hcov')
+    rw [hcompl] at henum
+    exact Bool.noConfusion henum
+  have hmem' : B.length ∈
+      {g : Nat | ∃ B', sub708 B' (win708 24 (maxA [2, 3, 4, 5])) ∧ B'.length = g ∧
+        prod708 [2, 3, 4, 5] ∣ prod708 B'} := by
+    show ∃ B', sub708 B' (win708 24 (maxA [2, 3, 4, 5])) ∧ B'.length = B.length ∧
+      prod708 [2, 3, 4, 5] ∣ prod708 B'
+    exact ⟨B, hsub, rfl, hdvd⟩
+  have hle : minB [2, 3, 4, 5] 24 ≤ B.length := Nat.sInf_le hmem'
+  omega
+
+/-! ## §16 THE g(4) MASTER THEOREM (the box master, both directions). -/
+
+/-- THE g(4) MASTER THEOREM (W63-D1) — THE BOX MASTER, both directions,
+the corpus statement's own cells, on the certified domain
+{four-element A ⊆ [2,16]} x {t = 1..40} (1365 x 40 = 54600 instances,
+decide-certified; the Python census frontier: [2,25] x t <= 40 and
+[2,16] x t <= 300, dual-method verified):
+
+  (i) CONSTRUCTION (the corpus's |B| = g(4) cell, the upper side):
+      every (A, t) of the box admits a covering cell-selection of size
+      EXACTLY 4;
+  (ii) EXCLUSION (the lower side): some (A, t) of the box —
+      ([2,3,4,5], t = 24) — admits NO covering selection of size <= 3;
+  (iii) the exact row: minB [2,3,4,5] 24 = 4.
+
+Hence the box-max of the instance-minima minB is EXACTLY 4 — the
+case-value g(4) = 4 on the certified box (see erdos708_g4_box_max).
+The unconditional unboxed statement — all four-element A ⊆ [2,∞), all
+windows — remains the next rounds' war: the census gives NO forcing-5
+evidence anywhere on [2,25] x t <= 40 ∪ [2,16] x t <= 300. -/
+theorem erdos708_g4_master :
+    (∀ (A : List Nat), A ∈ box708 → ∀ (t : Nat), 1 ≤ t → t ≤ 40 →
+      ∃ (B : List Nat), sub708 B (win708 t (maxA A)) ∧ B.length = 4 ∧
+        prod708 A ∣ prod708 B)
+    ∧ (∃ (A : List Nat), A ∈ box708 ∧ ∃ (t : Nat), 1 ≤ t ∧ t ≤ 40 ∧
+      (∀ (B : List Nat), sub708 B (win708 t (maxA A)) → B.length ≤ 3 →
+        ¬ (prod708 A ∣ prod708 B)))
+    ∧ (∃ (A : List Nat), A ∈ box708 ∧ ∃ (t : Nat), 1 ≤ t ∧ t ≤ 40 ∧
+      minB A t = 4) := by
+  refine ⟨e708_g4_box_corpus, ?_, ?_⟩
+  · refine ⟨[2, 3, 4, 5], by decide, 24, by omega, by omega, ?_⟩
+    intro B hsub hlen hdvd
+    have hmin : minB [2, 3, 4, 5] 24 = 4 := e708_exact_2_3_4_5
+    have hmem : B.length ∈ {g : Nat | ∃ B', sub708 B' (win708 24 (maxA [2, 3, 4, 5])) ∧
+        B'.length = g ∧ prod708 [2, 3, 4, 5] ∣ prod708 B'} :=
+      ⟨B, hsub, rfl, hdvd⟩
+    have hle : minB [2, 3, 4, 5] 24 ≤ B.length := Nat.sInf_le hmem
+    omega
+  · exact ⟨[2, 3, 4, 5], by decide, 24, by omega, by omega, e708_exact_2_3_4_5⟩
+
+/-- THE BOX-MAX COROLLARY: on the census box, the instance-minimum minB
+is bounded by 4 everywhere and EQUALS 4 at the forcing witness — the
+box-max of the instance-minima is EXACTLY 4, the g(4) case-value on the
+certified domain in the kernel's own minB language. -/
+theorem erdos708_g4_box_max :
+    (∀ (A : List Nat), A ∈ box708 → ∀ (t : Nat), 1 ≤ t → t ≤ 40 → minB A t ≤ 4)
+    ∧ (∃ (A : List Nat), A ∈ box708 ∧ ∃ (t : Nat), 1 ≤ t ∧ t ≤ 40 ∧ minB A t = 4) := by
+  refine ⟨?_, ⟨[2, 3, 4, 5], by decide, 24, by omega, by omega, e708_exact_2_3_4_5⟩⟩
+  intro A hA t h1 h40
+  obtain ⟨B, hsub, hlen, hdvd⟩ := e708_g4_box_corpus A hA t h1 h40
+  have hmem : B.length ∈ {g : Nat | ∃ B', sub708 B' (win708 t (maxA A)) ∧ B'.length = g ∧
+      prod708 A ∣ prod708 B'} := by
+    show ∃ B', sub708 B' (win708 t (maxA A)) ∧ B'.length = B.length ∧
+      prod708 A ∣ prod708 B'
+    exact ⟨B, hsub, rfl, hdvd⟩
+  have hle : minB A t ≤ B.length := Nat.sInf_le hmem
+  omega
+
+/-! ## §17 THE RECEIPTS. -/
 
 #print axioms E708.erdos708_g4_lower
 #print axioms E708.e708_prod_append
@@ -1479,6 +1751,14 @@ theorem erdos708_board :
 #print axioms E708.e708_case_6_10_14_15_21
 #print axioms E708.e708_case_6_10_14_15_21_35
 #print axioms E708.erdos708_board
+#print axioms E708.coverExact
+#print axioms E708.e708_exact_enum_sound
+#print axioms E708.e708_exact_enum_complete
+#print axioms E708.e708_g4_box_exact
+#print axioms E708.e708_g4_box_corpus
+#print axioms E708.e708_exact_2_3_4_5
+#print axioms E708.erdos708_g4_master
+#print axioms E708.erdos708_g4_box_max
 
 #eval "E708_KERNEL_GREEN"
 
@@ -1494,6 +1774,14 @@ zero admit, decide-certified evidence rows (8 x 40 witness-table rows +
 def E708_PRODUCT_DIVISIBILITY_GREEN : String := "E708_PRODUCT_DIVISIBILITY_GREEN"
 
 #eval E708_PRODUCT_DIVISIBILITY_GREEN
+
+/-- THE g(4) MASTER RECEIPT CONSTANT (W63-D1): the box master stands —
+construction (the corpus's |B| = 4 exactly cell, all 54600 box instances)
++ exclusion (no cover of size <= 3 at the forcing witness) + the exact-min
+row, decide-certified, dual-method verified (g4_verify_out.txt). -/
+def E708_G4_MASTER_GREEN : String := "E708_G4_MASTER_GREEN"
+
+#eval E708_G4_MASTER_GREEN
 
 end E708
 
