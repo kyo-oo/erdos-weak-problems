@@ -585,6 +585,465 @@ theorem e348_board :
     gap_law, reachable_mono, powers_decide_500, powers_complete,
     powers_decide_battery, redundant_seed, no_finite_prefix_seed, e348_arsenal_bridge⟩
 
+/-! ## §8 THE (2,3) CONSTRUCTION — THE CASE THEOREM (W64-F)
+
+THE WITNESS (the campaign's certified construction, engine348/construct_23.py):
+the block-order mult-3 powers witness `w23 j = [1,1,1, 2,2,2, ..., 2^j,2^j,2^j]`
+(each power of 2 with multiplicity 3, level blocks in ascending order).  Under
+the campaign's reading of Erdős #348, the pair (m,n) is witnessed by a
+complete sequence that survives every m-removal but is killed by some
+n-removal.  THE CASE THEOREM for (m,n) = (2,3):
+
+(C1) COMPLETENESS (general, all levels): the witness prefix at level j has
+  sum 3(2^{j+1}-1) and satisfies Graham's prefix growth criterion, so every
+  n ≤ 3(2^{j+1}-1) is a subset sum (`w23_complete`); hence EVERY natural
+  number is a sum of distinct terms of the ω-witness (`w23_inf_complete`).
+(C2) 2-REDUNDANCY (general, all levels, every position pair): after deleting
+  at most 2 positions (`SubN`), the survivor still covers the full binary
+  range [0, 2^{j+1}-1] (`w23_two_removal`); in delAt form: for any two
+  positions i, j and any n, some level's survivor covers n
+  (`w23_two_removal_inf`).
+(C3) THE 3-KILL (parity, general): the survivor `w23k j` obtained by
+  removing the three 1s (SubN 3) is all-even, so NO odd integer is ever a
+  subset sum (`w23k_no_odd`) and the survivor is NOT complete
+  (`w23k_not_complete`) — the m=2 redundancy is exactly 2: it dies at 3.
+
+Dual-method verification (engine348/w64_verify_lean_targets.py): bitset DP +
+Graham criterion + value-set survival, all levels j ≤ 9/12, every position
+pair — ALL GREEN.  Core-only, zero sorry, axioms within house profile. -/
+
+/-- The append associativity law (own proof — no core-name dependence). -/
+theorem my_append_assoc : ∀ (l1 l2 l3 : List Nat), (l1 ++ l2) ++ l3 = l1 ++ (l2 ++ l3) := by
+  intro l1
+  induction l1 with
+  | nil =>
+    intro l2 l3
+    rfl
+  | cons a t ih =>
+    intro l2 l3
+    show a :: ((t ++ l2) ++ l3) = a :: (t ++ (l2 ++ l3))
+    exact congrArg (fun q => a :: q) (ih l2 l3)
+
+/-- The list sum of the uniform 3-block (iota + linear omega only). -/
+theorem lsum_replicate3 : ∀ x : Nat, lsum (List.replicate 3 x) = 3 * x := by
+  intro x
+  have h1 : lsum (List.replicate 3 x) = x + lsum (List.replicate 2 x) := rfl
+  have h2 : lsum (List.replicate 2 x) = x + lsum (List.replicate 1 x) := rfl
+  have h3 : lsum (List.replicate 1 x) = x + lsum (List.replicate 0 x) := rfl
+  have h4 : lsum (List.replicate 0 x) = 0 := rfl
+  have hm : 3 * x = x + x + x := by omega
+  omega
+
+/-- The witness level-block: three copies of `2^j`. -/
+def blk : Nat → List Nat := fun j => List.replicate 3 (2 ^ j)
+
+/-- The block sum: `3 * 2^j`. -/
+theorem blk_lsum : ∀ j : Nat, lsum (blk j) = 3 * 2 ^ j := fun j => lsum_replicate3 (2 ^ j)
+
+/-- THE (2,3)-WITNESS PREFIX FAMILY: blocks 0..j (the mult-3 powers). -/
+def w23 : Nat → List Nat
+  | 0 => blk 0
+  | j + 1 => w23 j ++ blk (j + 1)
+
+/-- The closed form of the witness sum: `3 * (2^{j+1} - 1)`. -/
+theorem w23_lsum : ∀ j : Nat, lsum (w23 j) = 3 * (2 ^ (j + 1) - 1) := by
+  intro j
+  induction j with
+  | zero => decide
+  | succ k ih =>
+    show lsum (w23 k ++ blk (k + 1)) = 3 * (2 ^ (k + 1 + 1) - 1)
+    have h1 := lsum_append (w23 k) (blk (k + 1))
+    have h2 := blk_lsum (k + 1)
+    have hp : 2 ^ (k + 1 + 1) = 2 ^ (k + 1) + 2 ^ (k + 1) := by rw [Nat.pow_succ]; omega
+    omega
+
+/-- The three-snoc growth builder: appending three copies of `x` (each
+within the classical bound) preserves Graham's prefix growth. -/
+theorem snoc3 (acc x : Nat) (l : List Nat) (hg : GrowthA acc l) (hx : x ≤ acc + 1) :
+    GrowthA (acc + 3 * x) (l ++ [x, x, x]) := by
+  have g1 : GrowthA (acc + x) (l ++ [x]) := GrowthA.snoc acc l x hx hg
+  have g2 : GrowthA (acc + x + x) ((l ++ [x]) ++ [x]) :=
+    GrowthA.snoc (acc + x) (l ++ [x]) x (by omega) g1
+  have g3 : GrowthA (acc + x + x + x) (((l ++ [x]) ++ [x]) ++ [x]) :=
+    GrowthA.snoc (acc + x + x) ((l ++ [x]) ++ [x]) x (by omega) g2
+  have heq : ((l ++ [x]) ++ [x]) ++ [x] = l ++ [x, x, x] :=
+    (my_append_assoc (l ++ [x]) [x] [x]).trans (my_append_assoc l [x] ([x] ++ [x]))
+  have h3x : acc + 3 * x = acc + x + x + x := by omega
+  rw [h3x, ← heq]
+  exact g3
+
+/-- **THE GROWTH CERTIFICATE of the witness** (general j): the mult-3 powers
+prefix family satisfies Graham's prefix growth criterion. -/
+theorem w23_growth : ∀ j : Nat, GrowthA (lsum (w23 j)) (w23 j) := by
+  intro j
+  induction j with
+  | zero =>
+    have g1 : GrowthA 1 [1] := GrowthA.snoc 0 [] 1 (by omega) GrowthA.nil
+    have g2 : GrowthA 2 [1, 1] := GrowthA.snoc 1 [1] 1 (by omega) g1
+    have g3 : GrowthA 3 [1, 1, 1] := GrowthA.snoc 2 [1, 1] 1 (by omega) g2
+    exact g3
+  | succ k ih =>
+    have hl := w23_lsum k
+    have hp : 2 ^ (k + 1 + 1) = 2 ^ (k + 1) + 2 ^ (k + 1) := by rw [Nat.pow_succ]; omega
+    have hx : 2 ^ (k + 1) ≤ lsum (w23 k) + 1 := by omega
+    have hgrow := snoc3 (lsum (w23 k)) (2 ^ (k + 1)) (w23 k) ih hx
+    have hl1 := lsum_append (w23 k) (blk (k + 1))
+    have hl2 := blk_lsum (k + 1)
+    show GrowthA (lsum (w23 k ++ blk (k + 1))) (w23 k ++ blk (k + 1))
+    rw [hl1, hl2]
+    exact hgrow
+
+/-- **(C1) THE COMPLETENESS of the witness at every level**: every
+n ≤ 3(2^{j+1}-1) is a subset sum of the mult-3 powers prefix. -/
+theorem w23_complete : ∀ (j n : Nat), n ≤ lsum (w23 j) → sumSet (w23 j) n := by
+  intro j n hn
+  exact greedy_complete_prefix (w23 j) (lsum (w23 j)) (w23_growth j) n hn
+
+/-- `1 ≤ 2 ^ j` (the positivity of the powers). -/
+theorem two_pow_pos : ∀ j : Nat, 1 ≤ 2 ^ j := by
+  intro j
+  induction j with
+  | zero => decide
+  | succ k ih => rw [Nat.pow_succ]; omega
+
+/-- `n + 1 ≤ 2 ^ (n+1)` (the exponential escape bound). -/
+theorem n_lt_two_pow : ∀ n : Nat, n + 1 ≤ 2 ^ (n + 1) := by
+  intro n
+  induction n with
+  | zero => decide
+  | succ k ih =>
+    have hp : 2 ^ (k + 1 + 1) = 2 ^ (k + 1) + 2 ^ (k + 1) := by rw [Nat.pow_succ]; omega
+    have h1 := two_pow_pos (k + 1)
+    omega
+
+/-- **(C1) THE ω-WITNESS COMPLETENESS**: every natural number is a sum of
+distinct terms of the mult-3 powers sequence (the level-n prefix covers n). -/
+theorem w23_inf_complete : ∀ n : Nat, ∃ j : Nat, sumSet (w23 j) n := by
+  intro n
+  have hn := n_lt_two_pow n
+  have hl := w23_lsum n
+  refine ⟨n, ?_⟩
+  exact w23_complete n n (by omega)
+
+/-! ## §8B THE 2-REMOVAL MACHINERY (position deletions, counted) -/
+
+/-- `SubN c l l'` : `l'` is obtained from `l` by deleting exactly `c`
+positions (the count-tracked sublist relation). -/
+inductive SubN : Nat → List Nat → List Nat → Prop
+  | refl : ∀ (l : List Nat), SubN 0 l l
+  | keep : ∀ (c : Nat) (a : Nat) (t t' : List Nat), SubN c t t' → SubN c (a :: t) (a :: t')
+  | drop : ∀ (c : Nat) (a : Nat) (t t' : List Nat), SubN c t t' → SubN (c + 1) (a :: t) t'
+
+/-- SubN survives appending a common tail to both sides. -/
+theorem SubN_append_keep : ∀ (c : Nat) (l l' r : List Nat), SubN c l l' → SubN c (l ++ r) (l' ++ r) := by
+  intro c l l' r h
+  induction h with
+  | refl l0 => exact SubN.refl (l0 ++ r)
+  | keep c0 a t t' hsub ih => exact SubN.keep c0 a (t ++ r) (t' ++ r) ih
+  | drop c0 a t t' hsub ih => exact SubN.drop c0 a (t ++ r) (t' ++ r) ih
+
+/-- The uniform-list law: a counted deletion from `replicate m x` stays
+uniform, with the count bookkept. -/
+theorem SubN_replicate : ∀ (m x c : Nat) (t' : List Nat), SubN c (List.replicate m x) t' →
+    ∃ r, t' = List.replicate r x ∧ r + c = m := by
+  intro m
+  induction m with
+  | zero =>
+    intro x c t' h
+    have hnil : List.replicate 0 x = [] := rfl
+    rw [hnil] at h
+    cases h with
+    | refl l1 => exact ⟨0, rfl, by omega⟩
+  | succ k ih =>
+    intro x c t' h
+    have hcons : List.replicate (k + 1) x = x :: List.replicate k x := rfl
+    rw [hcons] at h
+    cases h with
+    | refl l1 => exact ⟨k + 1, rfl, by omega⟩
+    | keep c0 a t1 t1' hsub =>
+      obtain ⟨r, hr, hrc⟩ := ih x c t1' hsub
+      refine ⟨r + 1, ?_, by omega⟩
+      exact congrArg (fun q => x :: q) hr
+    | drop c0 a t1 t1' hsub =>
+      obtain ⟨r, hr, hrc⟩ := ih x c0 t' hsub
+      exact ⟨r, hr, by omega⟩
+
+/-- The append-split law for counted deletions: a deletion from `l1 ++ l2`
+splits into deletions on `l1` and `l2` with the counts adding. -/
+theorem SubN_append : ∀ (l1 l2 : List Nat) (c : Nat) (l' : List Nat),
+    SubN c (l1 ++ l2) l' → ∃ c1 c2 l1' l2', c = c1 + c2 ∧ SubN c1 l1 l1' ∧
+    SubN c2 l2 l2' ∧ l' = l1' ++ l2' := by
+  intro l1
+  induction l1 with
+  | nil =>
+    intro l2 c l' h
+    have hnil : ([] : List Nat) ++ l2 = l2 := rfl
+    rw [hnil] at h
+    exact ⟨0, c, [], l', by omega, SubN.refl [], h, rfl⟩
+  | cons a t ih =>
+    intro l2 c l' h
+    have hca : (a :: t) ++ l2 = a :: (t ++ l2) := rfl
+    rw [hca] at h
+    cases h with
+    | refl l1 => exact ⟨0, 0, a :: t, l2, by omega, SubN.refl (a :: t), SubN.refl l2, rfl⟩
+    | keep c0 b u u' hsub =>
+      obtain ⟨c1, c2, t', l2', hc, h1, h2, hsplit⟩ := ih l2 c u' hsub
+      refine ⟨c1, c2, a :: t', l2', hc, SubN.keep c1 a t t' h1, h2, ?_⟩
+      exact congrArg (fun q => a :: q) hsplit
+    | drop c0 b u u' hsub =>
+      obtain ⟨c1, c2, t', l2', hc, h1, h2, hsplit⟩ := ih l2 c0 l' hsub
+      exact ⟨c1 + 1, c2, t', l2', by omega, SubN.drop c1 a t t' h1, h2, hsplit⟩
+
+/-- The composition law for counted deletions (the ∃-count form: omega
+bridges the count arithmetic; r2 binder-law restructure — the second count
+`c2` and its target are trailing binders INSIDE the induction motive, the
+CI-green `SubN_append` shape: no `generalizing` clause (that clause
+auto-reintroduces the reverted variable as an inaccessible `c2✝`, shifting
+the case binders), each case intros its own `c2 m' h2`, and the IH closes
+generally in the second count). -/
+theorem SubN_comp : ∀ (c1 : Nat) (l m : List Nat), SubN c1 l m → ∀ (c2 : Nat) (m' : List Nat),
+    SubN c2 m m' → ∃ c, c = c1 + c2 ∧ SubN c l m' := by
+  intro c1 l m h1
+  induction h1 with
+  | refl l0 =>
+    intro c2 m' h2
+    exact ⟨c2, by omega, h2⟩
+  | keep c0 a t t1 hsub ih =>
+    intro c2 m' h2
+    cases h2 with
+    | refl l1 => exact ⟨c0, by omega, SubN.keep c0 a t t1 hsub⟩
+    | keep c2' b u u1 hsub2 =>
+      obtain ⟨c, hc, hcm⟩ := ih c2 u1 hsub2
+      exact ⟨c, hc, SubN.keep c a t u1 hcm⟩
+    | drop c2' b u u1 hsub2 =>
+      obtain ⟨c, hc, hcm⟩ := ih c2' m' hsub2
+      exact ⟨c + 1, by omega, SubN.drop c a t m' hcm⟩
+  | drop c0 a t t1 hsub ih =>
+    intro c2 m' h2
+    obtain ⟨c, hc, hcm⟩ := ih c2 m' h2
+    exact ⟨c + 1, by omega, SubN.drop c a t m' hcm⟩
+
+/-- Position deletion (kernel-computable). -/
+def delAt : List Nat → Nat → List Nat
+  | [], _ => []
+  | a :: t, 0 => t
+  | a :: t, i + 1 => a :: delAt t i
+
+/-- One position deletion is a ≤1 counted deletion. -/
+theorem SubN_delAt : ∀ (l : List Nat) (i : Nat), ∃ c, c ≤ 1 ∧ SubN c l (delAt l i) := by
+  intro l
+  induction l with
+  | nil => intro i; exact ⟨0, by omega, SubN.refl []⟩
+  | cons a t ih =>
+    intro i
+    cases i with
+    | zero => exact ⟨1, by omega, SubN.drop 0 a t t (SubN.refl t)⟩
+    | succ m =>
+      obtain ⟨c, hc, hsub⟩ := ih m
+      exact ⟨c, hc, SubN.keep c a t (delAt t m) hsub⟩
+
+/-- Two position deletions compose to a ≤2 counted deletion. -/
+theorem delAt_SubN2 : ∀ (l : List Nat) (i j : Nat), ∃ c, c ≤ 2 ∧ SubN c l (delAt (delAt l i) j) := by
+  intro l i j
+  obtain ⟨c1, hc1, h1⟩ := SubN_delAt l i
+  obtain ⟨c2, hc2, h2⟩ := SubN_delAt (delAt l i) j
+  obtain ⟨c, hc, hcm⟩ := SubN_comp c1 l (delAt l i) h1 c2 (delAt (delAt l i) j) h2
+  exact ⟨c, by omega, hcm⟩
+
+/-- **(C2) THE 2-REDUNDANCY, GENERAL**: after ANY at-most-2 position
+deletion at ANY level j, the survivor still covers the full binary range
+[0, 2^{j+1}-1].  (The block-snoc induction: the two deletions are split
+between the level-j prefix and the new 2^{j+1}-block by `SubN_append`; the
+block keeps ≥1 copy of 2^{j+1} by `SubN_replicate`; the prefix's coverage
+plus the surviving copy re-covers the doubled range.) -/
+theorem w23_two_removal : ∀ (j c : Nat) (l' : List Nat), c ≤ 2 → SubN c (w23 j) l' →
+    ∀ n, n ≤ 2 ^ (j + 1) - 1 → sumSet l' n := by
+  intro j
+  induction j with
+  | zero =>
+    intro c l' hc hsub n hn
+    obtain ⟨r, hr, hrc⟩ := SubN_replicate 3 1 c l' hsub
+    cases r with
+    | zero => exfalso; omega
+    | succ s =>
+      rw [hr]
+      cases n with
+      | zero => exact sumSet.zero (List.replicate (s + 1) 1)
+      | succ m =>
+        have hp1 : 2 ^ (0 + 1) = 2 := by decide
+        have hm : m = 0 := by omega
+        subst hm
+        exact sumSet.take 1 (List.replicate s 1) (0 + 1) (by omega)
+          (sumSet.zero (List.replicate s 1))
+  | succ k ih =>
+    intro c l' hc hsub n hn
+    obtain ⟨c1, c2, pre', blk', hcc, hpre, hblk, hsplit⟩ :=
+      SubN_append (w23 k) (blk (k + 1)) c l' hsub
+    have hc2 : c2 ≤ 2 := by omega
+    have hc1 : c1 ≤ 2 := by omega
+    obtain ⟨r, hrb, hrc2⟩ := SubN_replicate 3 (2 ^ (k + 1)) c2 blk' hblk
+    cases r with
+    | zero => exfalso; omega
+    | succ s =>
+      have hsplit2 : l' = pre' ++ (2 ^ (k + 1) :: List.replicate s (2 ^ (k + 1))) :=
+        hsplit.trans (congrArg (fun b => pre' ++ b) hrb)
+      have hp : 2 ^ (k + 1 + 1) = 2 ^ (k + 1) + 2 ^ (k + 1) := by rw [Nat.pow_succ]; omega
+      have hcase : n < 2 ^ (k + 1) ∨ 2 ^ (k + 1) ≤ n := by omega
+      rcases hcase with hlt | hge
+      · have hnm : n ≤ 2 ^ (k + 1) - 1 := by omega
+        have hsum := ih c1 pre' hc1 hpre n hnm
+        rw [hsplit2]
+        exact sumSet_mono_append pre' (2 ^ (k + 1) :: List.replicate s (2 ^ (k + 1))) n hsum
+      · rw [hp] at hn
+        have hp1 : 1 ≤ 2 ^ (k + 1) := two_pow_pos (k + 1)
+        have hnm : n - 2 ^ (k + 1) ≤ 2 ^ (k + 1) - 1 := by omega
+        have hsum := ih c1 pre' hc1 hpre (n - 2 ^ (k + 1)) hnm
+        have hsnoc := sumSet_snoc pre' (2 ^ (k + 1)) (n - 2 ^ (k + 1)) n (by omega) hsum
+        have heq : (pre' ++ [2 ^ (k + 1)]) ++ List.replicate s (2 ^ (k + 1))
+            = pre' ++ (2 ^ (k + 1) :: List.replicate s (2 ^ (k + 1))) :=
+          my_append_assoc pre' [2 ^ (k + 1)] (List.replicate s (2 ^ (k + 1)))
+        have hmono := sumSet_mono_append (pre' ++ [2 ^ (k + 1)])
+          (List.replicate s (2 ^ (k + 1))) n hsnoc
+        rw [hsplit2, ← heq]
+        exact hmono
+
+/-- **(C2) THE 2-REDUNDANCY IN delAT FORM (the ω-witness)**: for ANY two
+positions i, j and ANY n, some level's survivor of the mult-3 powers
+witness covers n — after any two deletions the witness sequence remains
+complete. -/
+theorem w23_two_removal_inf : ∀ (i j n : Nat), ∃ L : Nat,
+    sumSet (delAt (delAt (w23 L) i) j) n := by
+  intro i j n
+  have hn := n_lt_two_pow n
+  refine ⟨n, ?_⟩
+  obtain ⟨c, hc, hsub⟩ := delAt_SubN2 (w23 n) i j
+  exact w23_two_removal n c (delAt (delAt (w23 n) i) j) hc hsub n (by omega)
+
+/-! ## §8C THE 3-KILL (the parity law) -/
+
+/-- The all-even list predicate (own inductive — no core-name risk). -/
+inductive AllEven : List Nat → Prop
+  | nil : AllEven []
+  | cons : ∀ (a : Nat) (t : List Nat), (∃ c, a = 2 * c) → AllEven t → AllEven (a :: t)
+
+/-- Uniform even blocks are all-even. -/
+theorem AllEven_replicate : ∀ (m x : Nat), (∃ c, x = 2 * c) → AllEven (List.replicate m x) := by
+  intro m x hx
+  induction m with
+  | zero => exact AllEven.nil
+  | succ k ih => exact AllEven.cons x (List.replicate k x) hx ih
+
+/-- AllEven survives append. -/
+theorem AllEven_append : ∀ (l r : List Nat), AllEven l → AllEven r → AllEven (l ++ r) := by
+  intro l
+  induction l with
+  | nil => intro r _ h2; exact h2
+  | cons a t ih =>
+    intro r h1 h2
+    cases h1 with
+    | cons _ _ hAe hAt => exact AllEven.cons a (t ++ r) hAe (ih r hAt h2)
+
+/-- **THE PARITY LAW**: every subset sum of an all-even list is even. -/
+theorem sumSet_even : ∀ (l : List Nat) (n : Nat), AllEven l → sumSet l n → ∃ c, n = 2 * c := by
+  intro l
+  induction l with
+  | nil =>
+    intro n _ h
+    have hn0 : n = 0 := sumSet_nil_inv h
+    exact ⟨0, by omega⟩
+  | cons a t ih =>
+    intro n hall h
+    cases hall with
+    | cons _ _ hAe hAt =>
+      rcases sumSet_cons_inv h with hd | ⟨hle, htk⟩
+      · exact ih n hAt hd
+      · obtain ⟨d, hd⟩ := hAe
+        obtain ⟨c, hc⟩ := ih (n - a) hAt htk
+        exact ⟨c + d, by omega⟩
+
+/-- THE 3-KILL SURVIVOR FAMILY: blocks 1..j (the three 1s removed). -/
+def w23k : Nat → List Nat
+  | 0 => []
+  | j + 1 => w23k j ++ blk (j + 1)
+
+/-- The 3-kill survivor is all-even (every surviving element is 2^k, k ≥ 1). -/
+theorem w23k_allEven : ∀ j : Nat, AllEven (w23k j) := by
+  intro j
+  induction j with
+  | zero => exact AllEven.nil
+  | succ k ih =>
+    have hblk : AllEven (blk (k + 1)) := by
+      have hxe : ∃ c, 2 ^ (k + 1) = 2 * c := by
+        refine ⟨2 ^ k, ?_⟩
+        have hp : 2 ^ (k + 1) = 2 ^ k * 2 := by rw [Nat.pow_succ]
+        omega
+      exact AllEven_replicate 3 (2 ^ (k + 1)) hxe
+    show AllEven (w23k k ++ blk (k + 1))
+    exact AllEven_append (w23k k) (blk (k + 1)) ih hblk
+
+/-- **(C3) THE 3-KILL, GENERAL**: NO odd integer is a subset sum of the
+survivor obtained by removing the three 1s — at any level. -/
+theorem w23k_no_odd : ∀ (j n : Nat), ¬ sumSet (w23k j) (2 * n + 1) := by
+  intro j n h
+  obtain ⟨c, hc⟩ := sumSet_even (w23k j) (2 * n + 1) (w23k_allEven j) h
+  omega
+
+/-- The structural split: the witness is the 1-block plus the kill survivor. -/
+theorem w23_split : ∀ j : Nat, w23 j = blk 0 ++ w23k j := by
+  intro j
+  induction j with
+  | zero => rfl
+  | succ k ih =>
+    show w23 k ++ blk (k + 1) = blk 0 ++ (w23k k ++ blk (k + 1))
+    rw [ih]
+    exact my_append_assoc (blk 0) (w23k k) (blk (k + 1))
+
+/-- The kill certificate: the 3-kill survivor IS the witness with exactly
+the three 1s deleted (a counted 3-deletion). -/
+theorem SubN_kill : ∀ j : Nat, SubN 3 (w23 j) (w23k j) := by
+  intro j
+  induction j with
+  | zero =>
+    show SubN 3 [1, 1, 1] []
+    exact SubN.drop 2 1 [1, 1] [] (SubN.drop 1 1 [1] []
+      (SubN.drop 0 1 [] [] (SubN.refl [])))
+  | succ k ih =>
+    show SubN 3 (w23 k ++ blk (k + 1)) (w23k k ++ blk (k + 1))
+    exact SubN_append_keep 3 (w23 k) (w23k k) (blk (k + 1)) ih
+
+/-- **(C3) THE 3-KILL NON-COMPLETENESS**: the survivor of the 1-block
+removal is NOT complete — no threshold N makes every n ≥ N a subset sum. -/
+theorem w23k_not_complete : ¬ ∃ N : Nat, ∀ n, N ≤ n → ∃ j, sumSet (w23k j) n := by
+  intro h
+  obtain ⟨N, hN⟩ := h
+  have hw := hN (2 * N + 1) (by omega)
+  obtain ⟨j, hj⟩ := hw
+  exact w23k_no_odd j N hj
+
+/-- The decide battery at the certified level-4 witness (engine-verified
+identities, dual-method; bounded kernel cost). -/
+theorem w23_decide_battery :
+    (reachable (w23 4) 93 = true ∧ reachable (w23 4) 61 = true ∧
+      reachable (w23 4) 1 = true ∧ reachable (w23k 4) 1 = false) :=
+  ⟨by decide, by decide, by decide, by decide⟩
+
+/-- **THE (m,n) = (2,3) CASE THEOREM**: the mult-3 powers witness is
+complete (C1), survives every 2-deletion at every level with the full binary
+range intact (C2, both the SubN form and the delAt ω-form), and is killed by
+the 3-deletion of the three 1s — no odd integer is a subset sum of the
+survivor, which is therefore not complete (C3).  The redundancy of the
+witness is exactly 2. -/
+theorem e348_construction_23 :
+    (∀ n : Nat, ∃ j : Nat, sumSet (w23 j) n) ∧
+    (∀ (j c : Nat) (l' : List Nat), c ≤ 2 → SubN c (w23 j) l' →
+      ∀ n, n ≤ 2 ^ (j + 1) - 1 → sumSet l' n) ∧
+    (∀ (i j n : Nat), ∃ L : Nat, sumSet (delAt (delAt (w23 L) i) j) n) ∧
+    (∀ (j n : Nat), ¬ sumSet (w23k j) (2 * n + 1)) ∧
+    (∀ j : Nat, SubN 3 (w23 j) (w23k j)) ∧
+    (¬ ∃ N : Nat, ∀ n, N ≤ n → ∃ j, sumSet (w23k j) n) :=
+  ⟨w23_inf_complete, w23_two_removal, w23_two_removal_inf, w23k_no_odd,
+    SubN_kill, w23k_not_complete⟩
+
 /-! ## Receipt block -/
 
 #print axioms reachable_iff_sumSet
@@ -601,7 +1060,17 @@ theorem e348_board :
 #print axioms no_finite_prefix_seed
 #print axioms e348_arsenal_bridge
 #print axioms e348_board
+#print axioms w23_complete
+#print axioms w23_inf_complete
+#print axioms w23_two_removal
+#print axioms w23_two_removal_inf
+#print axioms w23k_no_odd
+#print axioms w23k_not_complete
+#print axioms SubN_kill
+#print axioms w23_decide_battery
+#print axioms e348_construction_23
 
 #eval "E348_REDUNDANT_GREEN"
+#eval "E348_CONSTRUCTION23_GREEN"
 
 end E348

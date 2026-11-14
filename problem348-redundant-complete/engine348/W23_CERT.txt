@@ -1,0 +1,29 @@
+=== E348 THE (m,n)=(2,3) CONSTRUCTION CERTIFICATION ===
+witness: each 2^i (i=0..9) with multiplicity 3; B=3000
+--- P1 completeness: mult-3 powers, levels 0..9, B=3000 ---
+M1 bitset: covered [0,3000] (B=3000) -> PASS
+M2 structural: every power present? True; covered(A) >= covered(powers)? True -> PASS
+M3 criterion: PASS
+boundary spots [0, 1, 2, 3, 1500, 2999, 3000]: PASS
+--- P2 every-2-removal complete: 55 level-pairs, B=3000 ---
+M1 (survivor covers [0,B]): PASS all
+M2 (every power survives; covered >= covered(powers)): PASS all
+positional exhaustive: 55 distinct removals, 0 FAILS -> PASS
+--- P3 the 3-kill (remove the three 1s), B=3000 ---
+M1 bitset: odd values covered: 0 (expect 0); even values missed: 0 -> KILL CONFIRMED
+M2 structural: all elements even? True; covered has no odd bit? True -> KILL CONFIRMED
+odd spots [1, 3, 5, 2999, 3000]: uncovered? PASS (all uncovered)
+--- general (m,n) law spot-checks ---
+mult-2 (the (1,2) witness): every 1-removal complete? True; 2-removal of the 1s kills (all odd uncovered)? True
+mult-4 (the (3,4) witness): every 3-removal complete? True; 4-removal of the 1s kills (all odd uncovered)? True
+--- slack tables (sigma_k = 1 + S_k - a_{k+1}) ---
+powers of 2: (k, 1+S_k, a_next, sigma) = [(1, 2, 2, 0), (2, 4, 4, 0), (3, 8, 8, 0), (4, 16, 16, 0)] ... sigma = 0 ALWAYS
+double-1 Fibonacci: sigma_k = [1, 1, 2, 3, 5, 8, 13] (= F_k, grows to infinity)
+mult-3 powers: (level, 1+S, next, sigma) = [(0, 4, 2, 2), (1, 10, 4, 6), (2, 22, 8, 14)] ... sigma = 2^{j+2}-2 grows
+=== VERDICT ===
+P1 completeness:           GREEN
+P2 every-2-removal compl.: GREEN
+P3 the 3-kill (parity):   GREEN
+general (m,n) spots:      GREEN
+slack tables:             GREEN
+THE (2,3) CONSTRUCTION: CERTIFIED
