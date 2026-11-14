@@ -1,0 +1,66 @@
+=== engine939_w66 phase validate start; python 3.12.16; 2026-11-14 21:03:22 ===
+--- V1: Lean-fold simulation vs fast predicate, all n <= 3000 ---
+V1 disagreements (r=4): 0 -> []
+V1 OK: literal Erdos939R4.lean fold == fast predicate on 0..3000 (r=3 and r=4). Edge: rpow4(0)=False, rpow4(1)=True (vacuous), rpow4(2)=False -> triple 1+1=2 fails.
+--- V2: fast predicate vs sympy.factorint, all n <= 10^6 ---
+V2 disagreements: 0
+V2 OK: independent factorizations agree on 1..10^6.
+--- V3: DP generator vs brute predicate scan ---
+V3 gen4_dp(10000) == brute scan: True (|L| = 25, incl 1; excl-1 count 24)
+V3 gen4_dp(100000) == brute scan: True (|L| = 57, incl 1; excl-1 count 56)
+V3 gen4_dp(1000000) == brute scan: True (|L| = 117, incl 1; excl-1 count 116)
+V3 OK: Method-A layered-merge DP == brute predicate to 10^6.
+--- V4: Lean K60 census row reproduction ---
+V4 gen4_dp(10^4) == Erdos939R4 census row (25 values incl 1): True
+V4b r=3 sanity: DP(10^4, r=3)... (skipped r=3 DP; brute below)
+V4b brute r=3 <= 10^3 == battery939 c3 row: True
+--- V5: prior-hunt audit crosscheck (fourth powers vs true set) ---
+V5 fourth powers <= 1e13: 1777 (prior buggy engines: 1777); true 4-powerful <= 1e13 incl 1: 11654, excl 1: 11653; 32 in true list: True; 32 in fourth-power list: False
+VALIDATE939_W66_ALL_OK
+--- phase validate total 16.0s ---
+=== engine939_w66 phase census13 start; python 3.12.16; 2026-11-14 21:03:43 ===
+GEN 1e13: |L| = 11654 incl 1 (11653 excl 1); odd 3087, even 8567; 0.1s
+S2 lanes 1e13: checks EO=921600 OO=396909 EE=0; hits 42923 (4.5s)
+S2 gcd census 1e13: sum-hits 42923, coprime pairs 0 -> ZERO pairwise-coprime triples: True
+S1 transparent double-loop 1e13: 42923 hits (7.4s); S1 == S2 (EXACT): False
+=== engine939_w66 phase census13 start; python 3.12.16; 2026-11-14 21:04:14 ===
+GEN 1e13: |L| = 11654 incl 1 (11653 excl 1); odd 3087, even 8567; 0.1s
+S2 lanes 1e13: checks EO=921600 OO=396909 EE=33583258; hits 42923 (8.0s)
+S2 gcd census 1e13: sum-hits 42923, coprime pairs 0 -> ZERO pairwise-coprime triples: True
+S1 transparent double-loop 1e13: 42923 hits (9.4s); S1 == S2 (EXACT): True
+gcd-equality lemma verified on every hit (gcd(a,b)=gcd(a,c)=gcd(b,c)).
+EMIT 1e13: values written; sumhits 42923 rows; coverage json at /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/coverage939_1e13.json
+coverage939_1e13.json: min_hit_gcd=16, zero_coprime_witnesses=True
+--- phase census total 17.6s ---
+=== engine939_w66 phase census14 start; python 3.12.16; 2026-11-14 21:07:19 ===
+GEN 1e14: |L| = 21661 incl 1 (21660 excl 1); odd 5682, even 15979; 0.7s
+S2 lanes 1e14: checks EO=3049907 OO=1375986 EE=117052744; hits 88627 (52.6s)
+S2 gcd census 1e14: sum-hits 88627, coprime pairs 0 -> ZERO pairwise-coprime triples: True
+gcd-equality lemma verified on every hit (gcd(a,b)=gcd(a,c)=gcd(b,c)).
+EMIT 1e14: values written; sumhits 88627 rows; coverage json at /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/coverage939_1e14.json
+coverage939_1e14.json: min_hit_gcd=16, zero_coprime_witnesses=True
+--- phase census total 53.5s ---
+=== engine939_w66 phase census15 start; python 3.12.16; 2026-11-14 21:08:19 ===
+GEN 1e15: |L| = 40049 incl 1 (40048 excl 1); odd 10404, even 29645; 2.6s
+S2 lanes 1e15: checks EO=10041488 OO=4709819 EE=403449867; hits 180228 (234.8s)
+S2 gcd census 1e15: sum-hits 180228, coprime pairs 0 -> ZERO pairwise-coprime triples: True
+gcd-equality lemma verified on every hit (gcd(a,b)=gcd(a,c)=gcd(b,c)).
+EMIT 1e15: values written; sumhits 180228 rows; coverage json at /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/coverage939_1e15.json
+coverage939_1e15.json: min_hit_gcd=16, zero_coprime_witnesses=True
+--- phase census total 236.1s ---
+=== engine939_w66 phase counts start; python 3.12.16; 2026-11-14 21:12:22 ===
+--- generation-only count verification (Method A DP) ---
+COUNT 1e13: 11654 incl 1 (11653 excl 1); 0.2s
+COUNT 1e14: 21661 incl 1 (21660 excl 1); 0.7s
+COUNT 1e15: 40049 incl 1 (40048 excl 1); 2.2s
+COUNT 1e16: 73699 incl 1 (73698 excl 1); 10.6s
+COUNT 1e17: 135059 incl 1 (135058 excl 1); 37.2s
+COUNT 1e18: 246653 incl 1 (246652 excl 1); 139.9s
+=== engine939_w66 phase box19 start; python 3.12.16; 2026-11-14 21:23:10 ===
+=== engine939_w66 phase box19 start; python 3.12.16; 2026-11-14 21:23:24 ===
+GEN 1e19: |L| = 449088 incl 1 (449087 excl 1); 566.5s
+BOX19 RESULT: sum-hits (EO+OO) = 246243; coprime = 0; ZERO pairwise-coprime triples <= 1e19: True
+BOX19 receipts: EO checks 1136256847, OO checks 587176776
+EMIT 1e19: values (skipped); sumhits 246243 rows; coverage json at /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/coverage939_1e19.json
+BOX19 value list written: /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/values939_1e19.txt (449088 values)
+--- phase box19 total 991.0s ---

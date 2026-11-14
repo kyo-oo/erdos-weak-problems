@@ -1,0 +1,7 @@
+=== engine939_w66 phase box19 start; python 3.12.16; 2026-11-14 21:23:24 ===
+GEN 1e19: |L| = 449088 incl 1 (449087 excl 1); 566.5s
+BOX19 RESULT: sum-hits (EO+OO) = 246243; coprime = 0; ZERO pairwise-coprime triples <= 1e19: True
+BOX19 receipts: EO checks 1136256847, OO checks 587176776
+EMIT 1e19: values (skipped); sumhits 246243 rows; coverage json at /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/coverage939_1e19.json
+BOX19 value list written: /home/z/waves/w66-p939-e/problem939-rpowerful/table939_w66/values939_1e19.txt (449088 values)
+--- phase box19 total 991.0s ---
