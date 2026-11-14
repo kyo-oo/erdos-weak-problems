@@ -1,0 +1,48 @@
+========================================================================
+ENGINE ROUND 3 — #1063 frontier extension: calibration k=2..17, then n_18..n_20
+========================================================================
+(K) CALIBRATION — re-deriving the certified frontier k=2..17:
+  k=2..17 re-derived: [4, 6, 9, 12, 75, 30, 70, 56, 2403, 280, 3465, 210, 793, 4732, 3213, 1456]
+  -> CALIBRATION GREEN (engine reproduces the certified tip n_17=1456)
+
+(X) THE EXTENSION — new certified exact values k = 18, 19, 20:
+    ...find k=18 swept to 16384 (10551 pts/s, 1s)
+    ...certify k=18 swept 16384/31074 points (1s)
+  n_18 = 31110
+     witness wcount = 17  (= k-1: exactly one exempt position)
+     exempt i = 6  (n-i = 31104 = 2^7 * 3^5)
+     prime-power deficits (q, v_q(n-i), v_q(C(n,k))): [(2, 7, 3), (3, 5, 3)]
+     completeness: 31074 points swept in [36, 31110), all wcount <= k-2  GREEN
+  n_19 = 612
+     witness wcount = 18  (= k-1: exactly one exempt position)
+     exempt i = 4  (n-i = 608 = 2^5 * 19)
+     prime-power deficits (q, v_q(n-i), v_q(C(n,k))): [(2, 5, 3), (19, 1, 0)]
+     completeness: 574 points swept in [38, 612), all wcount <= k-2  GREEN
+    ...find k=20 swept to 16384 (2868 pts/s, 1s)
+    ...find k=20 swept to 32768 (4673 pts/s, 2s)
+    ...find k=20 swept to 49152 (5857 pts/s, 4s)
+    ...find k=20 swept to 65536 (6668 pts/s, 5s)
+    ...certify k=20 swept 16384/67163 points (1s)
+    ...certify k=20 swept 32768/67163 points (2s)
+    ...certify k=20 swept 49152/67163 points (4s)
+    ...certify k=20 swept 65536/67163 points (5s)
+  n_20 = 67203
+     witness wcount = 19  (= k-1: exactly one exempt position)
+     exempt i = 3  (n-i = 67200 = 2^7 * 3 * 5^2 * 7)
+     prime-power deficits (q, v_q(n-i), v_q(C(n,k))): [(2, 7, 5), (5, 2, 1)]
+     completeness: 67163 points swept in [40, 67203), all wcount <= k-2  GREEN
+
+(B) BOUNDS CONSISTENCY on the new rows (corpus-recorded upper bounds):
+  k=18: n_k= 31110  <=  k*lcm(1..k-1) = 220540320    (ratio 1.41e-04)  and  <= k! (ratio 4.86e-12)
+  k=19: n_k=   612  <=  k*lcm(1..k-1) = 232792560    (ratio 2.63e-06)  and  <= k! (ratio 5.03e-15)
+  k=20: n_k= 67203  <=  k*lcm(1..k-1) = 4655851200   (ratio 1.44e-05)  and  <= k! (ratio 2.76e-14)
+
+(D) DUAL-PATH TOTALS — every swept point certified by BOTH the exact
+    gmpy2 binomial (Path A) and the Legendre/Kummer valuation route (Path B):
+    dual-agreeing points this run: 115340 (calibration+find) + 98814 (extension) = 214154
+
+THE CERTIFIED FRONTIER EXTENDED TO k = 20:
+  k   :      2      3      4      5      6      7      8      9     10     11     12     13     14     15     16     17     18     19     20
+  n_k :      4      6      9     12     75     30     70     56   2403    280   3465    210    793   4732   3213   1456  31110    612  67203
+
+ENGINE ROUND 3 ALL GREEN — 15.5s

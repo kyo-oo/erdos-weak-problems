@@ -1,0 +1,4 @@
+k=18 n_k= 31110: Pascal-additive C == GMP comb;  wcount=17  exempt i=[6]  GREEN
+k=19 n_k=   612: Pascal-additive C == GMP comb;  wcount=18  exempt i=[4]  GREEN
+k=20 n_k= 67203: Pascal-additive C == GMP comb;  wcount=19  exempt i=[3]  GREEN
+PASCAL 263 ALL GREEN — 0.4s

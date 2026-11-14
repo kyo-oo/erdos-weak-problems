@@ -1,0 +1,42 @@
+========================================================================
+BATTERY 263 — independent verification of the #1063 frontier k = 2..20
+========================================================================
+(a) stdlib math.comb full recount (witness + completeness), k = 2..20:
+  k |  n_k | wcount | =k-1? | completeness pts | max wcount below | verdict
+   2 |     4 |      1 |  True |        0 |       -1 | GREEN
+   3 |     6 |      2 |  True |        0 |       -1 | GREEN
+   4 |     9 |      3 |  True |        1 |        2 | GREEN
+   5 |    12 |      4 |  True |        2 |        3 | GREEN
+   6 |    75 |      5 |  True |       63 |        4 | GREEN
+   7 |    30 |      6 |  True |       16 |        5 | GREEN
+   8 |    70 |      7 |  True |       54 |        6 | GREEN
+   9 |    56 |      8 |  True |       38 |        7 | GREEN
+  10 |  2403 |      9 |  True |     2383 |        8 | GREEN
+  11 |   280 |     10 |  True |      258 |        9 | GREEN
+  12 |  3465 |     11 |  True |     3441 |       10 | GREEN
+  13 |   210 |     12 |  True |      184 |       11 | GREEN
+  14 |   793 |     13 |  True |      765 |       12 | GREEN
+  15 |  4732 |     14 |  True |     4702 |       13 | GREEN
+  16 |  3213 |     15 |  True |     3181 |       14 | GREEN
+  17 |  1456 |     16 |  True |     1422 |       15 | GREEN
+  18 | 31110 |     17 |  True |    31074 |       16 | GREEN
+  19 |   612 |     18 |  True |      574 |       17 | GREEN
+  20 | 67203 |     19 |  True |    67163 |       18 | GREEN
+
+(b) Kummer carry-count route (disjoint algorithm), new rows k = 18, 19, 20:
+  k=18 n_k=31110: Kummer wcount = 17 (math.comb wcount = 17)  exempt receipts:
+     i=6  n-i=31104  deficits (q, v_q(n-i), v_q(C)) = [(2, 7, 3), (3, 5, 3)]
+     crosscheck 1953 boundary+interior points vs math.comb: GREEN
+  k=19 n_k=612: Kummer wcount = 18 (math.comb wcount = 18)  exempt receipts:
+     i=4  n-i=608  deficits (q, v_q(n-i), v_q(C)) = [(2, 5, 3), (19, 1, 0)]
+     crosscheck 574 boundary+interior points vs math.comb: GREEN
+  k=20 n_k=67203: Kummer wcount = 19 (math.comb wcount = 19)  exempt receipts:
+     i=3  n-i=67200  deficits (q, v_q(n-i), v_q(C)) = [(2, 7, 5), (5, 2, 1)]
+     crosscheck 1980 boundary+interior points vs math.comb: GREEN
+
+(c) sympy.binomial third-implementation check at the new witnesses:
+  k=18 n_k=31110: sympy wcount = 17  -> GREEN
+  k=19 n_k=612: sympy wcount = 18  -> GREEN
+  k=20 n_k=67203: sympy wcount = 19  -> GREEN
+
+BATTERY 263 ALL GREEN — 2.2s
