@@ -1,0 +1,41 @@
+=== #708 W63-D1 g(4) MASTER VERIFICATION BATTERY ===
+(A) banked K62 regression (census DP, t=1..40):
+   A=[2, 3]: worst=2 (banked 2) [OK]
+   A=[6, 10, 15]: worst=3 (banked 3) [OK]
+   A=[2, 3, 5]: worst=3 (banked 3) [OK]
+   A=[6, 10, 14, 15]: worst=4 (banked 4) [OK]
+   A=[6, 10, 15, 21]: worst=4 (banked 4) [OK]
+   A=[2, 3, 5, 7]: worst=3 (banked 3) [OK]
+   A=[6, 10, 14, 15, 21]: worst=5 (banked 5) [OK]
+   A=[6, 10, 14, 15, 21, 35]: worst=5 (banked 5) [OK]
+(A) GREEN
+
+(B) THE BOX CONSTRUCTION [2,16] x t=1..40 (1365 A's x 40 windows):
+    (i) coverExact-4 mirror (the Lean def transcribed):
+    box708 = all 4-subsets of [2,16]: 1365 sets (C(15,4)=1365)
+    coverExact(exactly-4 cover exists) over the whole box: 54600 instances, 0 failures [OK] (4.2s)
+    (ii) minB ≤ 4 via census DP (independent cross):
+    minB ≤ 4 over the whole box: 0 violations [OK] (13.5s)
+
+(C) THE EXCLUSION WITNESS A=[2,3,4,5] at t=24 (window {25..29}):
+    brute (gmpy2, all subsets): minB = 4, witness [25, 26, 27, 28] (prod(B)=491400, prod(A)=120, 120 | prod(B): True)
+    census DP: minB = 4
+    sympy-route DP: minB = 4
+    coverFrom(≤3) = false (no 3-subset covers): True
+    full enumeration: covering subsets = [(4, (25, 26, 27, 28)), (5, (25, 26, 27, 28, 29))] (min size 4)
+(C) GREEN
+
+(D) CENSUS2 CHECKPOINT RECOUNT (sympy-route DP, all 10626 rows, [2,25] x t≤40):
+    rows recounted: 10626, mismatches: 0 [OK] (208.8s)
+    ckpt global claim: max=4 at [[2, 3, 4, 5], 24]; recounted global max = see rows
+    rows global max: 4 (forcing-5 count: 0)
+
+(E) WIDET CHECKPOINT ([2,16] x t≤300) spot checks:
+    25 random rows recounted at T=300 (sympy route): 0 mismatches [OK]
+    5 hardest widet rows brute-checked at their t: 0 mismatches [OK]
+
+(F) DP-vs-BRUTE equalities (random box sample + hard A's):
+    258 pairs, 0 mismatches [OK]
+
+BATTERY VERDICT: GREEN (A=True B=True C=True D=True E=True F=True)
+E708_G4_MASTER_BATTERY_GREEN
