@@ -58,3 +58,46 @@
   form needs manual emod lemmas; the three campaign moduli are certified).
 - p105 extension: the DFS of round-6e stalled at 105 vertices; deeper
   budgets or the phase ladder with better restore choices.
+
+## W65-C — THE KERNEL REPAIR ROUND (branch w65-c-p1212, from cf51699)
+Baseline: CI run 43612317953 FAILURE — kernel65 step red, 7 errors / 3
+families, ALL in the §11 column-obstruction block (§1–§10 + §12–§13 boards
+elaborated clean, zero sorryAx in the receipt for the green half). The
+live log pulled, error set mapped to lines, deterministic per-family
+root-kill:
+
+1. FAMILY 1 — `Nat.dvd_sub'` unknown constant (line 546, e1212_antidiag):
+   the toolchain pin does not carry it (known campaign law, WORKLOG 2179;
+   the green K-family pattern from Erdos411/Erdos394). FIX: private
+   `dvd_sub_local` (verbatim from the CI-green #411 kernel: rcases both
+   witnesses, Nat.mul_le_mul_left case split, Dvd.intro) + the antidiag
+   proof now routes through it.
+2. FAMILY 2 — four omega failures in e1212_ivt's descending branch
+   (585:18/585:29/586:18/586:40): the branch passes the new base point
+   as `f 1` while the step hypothesis speaks of `f (0 + 1)` — omega treats
+   the two as DISTINCT atoms (the CI counterexample lists both), so
+   `f 1 ≤ b`, `f (0+1) = f 1`, `f 1 ≤ v`, `v % 2 = f 1 % 2` are all
+   unprovable. FIX: pass `(f (0 + 1))` as the base — the goal
+   `(fun k => f (k+1)) 0 = f (0+1)` beta-reduces to a syntactic
+   reflexivity and every side goal connects through h1/hfa.
+3. FAMILY 3 — application type mismatch at the three kill theorems
+   (616/660/704): hfstep's second disjunct was stated Eq-flipped
+   (`S' + 2 = S`) while e1212_ivt requires `S = S' + 2`. FIX: flip the
+   disjunct to the IVT's orientation (proof unchanged, `<;> omega` closes
+   either orientation). HARDENING of the never-elaborated tail (it sat
+   behind the family-3 elaboration abort): the IVT target value
+   `X0+Y0+(M'-(X0+Y0)%M')%M'` (nested mod — omega-hostile) → the
+   division form `M' * ((X0 + Y0) / M' + 1)` (next multiple above the
+   start; plain div-atom goals, the Erdos885/CardinalWorlds-certified
+   omega family); `hclass`+`by omega`-on-dvd deleted — hfk IS the
+   divisibility witness (`⟨(X0+Y0)/M'+1, hfk⟩`, anonymous constructor);
+   `Nat.dvd_trans hqm (by decide)` → `Nat.dvd_trans hqm ⟨2, by omega⟩`
+   (explicit witness, no Decidable-instance dependence);
+   `(Nat.add_comm ...) ▸ hsum` → obtain/witness form (no ▸ motive risk).
+
+Statements UNCHANGED (only proofs repaired): e1212_antidiag, e1212_ivt,
+e1212_periodic_kill_210/2310/30030, e1212_column_board — the banked
+mathematics stands; zero sorry/admit/sorryAx; all lemma names green-
+certified in campaign kernels (Nat.dvd_trans/gcd/one via 291/677/700/961,
+the dvd_sub_local body via 411, anonymous-ctor-on-dvd via 711).
+CI verdict: run <TO_FILL> on branch w65-c-p1212.

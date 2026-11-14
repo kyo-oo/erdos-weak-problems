@@ -537,13 +537,31 @@ designs) unconditionally for the three campaign moduli; the #1212 question
 itself remains open (a non-periodic path, or one relying on non-carrier
 compositeness, is not excluded). -/
 
+/-- The manual dvd-sub (W65-C repair: `Nat.dvd_sub'` does not resolve in
+this toolchain — the CI-green K-family pattern, verbatim from the green
+Erdos411 kernel's `dvd_sub_local`). -/
+private theorem dvd_sub_local {k m n : Nat} (h1 : k ∣ m) (h2 : k ∣ n) :
+    k ∣ m - n := by
+  rcases h1 with ⟨a, rfl⟩
+  rcases h2 with ⟨b, rfl⟩
+  rcases Nat.lt_or_ge a b with hlt | hge
+  · have hmono : k * a ≤ k * b := Nat.mul_le_mul_left k (Nat.le_of_lt hlt)
+    refine Dvd.intro 0 ?_
+    omega
+  · have hmono : k * b ≤ k * a := Nat.mul_le_mul_left k hge
+    have hdist : k * a = k * (a - b) + k * b := by
+      calc k * a = k * (a - b + b) := by rw [Nat.sub_add_cancel hge]
+        _ = k * (a - b) + k * b := Nat.mul_add k (a - b) b
+    refine Dvd.intro (a - b) ?_
+    omega
+
 /-- THE ANTI-DIAGONAL LAW (moduli-free core): if q divides both the sum
 X + Y and X itself, then q divides Y. On the anti-diagonal class
 (X + Y) % 2M = 0 every carrier q ∣ 2M of the coordinate X is shared by
 both coordinates — the hub is not coprime. -/
 theorem e1212_antidiag (X Y q : Nat) (hsum : q ∣ X + Y) (hx : q ∣ X) :
     q ∣ Y := by
-  have hsub : q ∣ (X + Y) - X := Nat.dvd_sub' hsum hx
+  have hsub : q ∣ (X + Y) - X := dvd_sub_local hsum hx
   have hsimp : (X + Y) - X = Y := by omega
   rw [hsimp] at hsub
   exact hsub
@@ -581,7 +599,7 @@ theorem e1212_ivt (n : Nat) : ∀ (f : Nat → Nat) (a b : Nat),
               (by omega) (by omega) (by omega) hgstep v
               (by omega) (by omega) (by omega)
             exact ⟨k + 1, by omega, hgk⟩
-          · obtain ⟨k, hk, hgk⟩ := ih (fun k => f (k + 1)) (f 1) b
+          · obtain ⟨k, hk, hgk⟩ := ih (fun k => f (k + 1)) (f (0 + 1)) b
               (by omega) (by omega) (by omega) hgstep v
               (by omega) (by omega) (by omega)
             exact ⟨k + 1, by omega, hgk⟩
@@ -608,18 +626,22 @@ theorem e1212_periodic_kill_2310 (n X0 Y0 : Nat) (X Y : Nat → Nat)
   have hfn : X n + Y n = X0 + Y0 + 4620 := by omega
   have hfstep : ∀ k < n,
       (X (k + 1) + Y (k + 1) = X k + Y k + 2) ∨
-      (X (k + 1) + Y (k + 1) + 2 = X k + Y k) := by
+      (X k + Y k = X (k + 1) + Y (k + 1) + 2) := by
     intro k hk
     rcases hstep k hk with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> omega
   obtain ⟨k, hkn, hfk⟩ := e1212_ivt n
       (fun k => X k + Y k) (X0 + Y0) (X0 + Y0 + 4620)
       (by omega) hf0 hfn hfstep
-      (X0 + Y0 + (4620 - (X0 + Y0) % 4620) % 4620)
+      (4620 * ((X0 + Y0) / 4620 + 1))
       (by omega) (by omega) (by omega)
-  have hclass : (X k + Y k) % 4620 = 0 := by omega
-  have hd4620 : 4620 ∣ X k + Y k := by omega
+  -- (W65-C hardening) the crossed hub is the next multiple of 4620 above
+  -- the start: hfk : X k + Y k = 4620 * ((X0 + Y0) / 4620 + 1) IS the
+  -- divisibility witness (anonymous constructor; no omega-on-dvd, no
+  -- nested-mod side goals).
+  have hd4620 : 4620 ∣ X k + Y k :=
+    ⟨(X0 + Y0) / 4620 + 1, hfk⟩
   obtain ⟨q, hq3, hqm, hqc⟩ := hcar k hkn
-  have hqM : q ∣ 4620 := Nat.dvd_trans hqm (by decide)
+  have hqM : q ∣ 4620 := Nat.dvd_trans hqm ⟨2, by omega⟩
   have hsum : q ∣ X k + Y k := Nat.dvd_trans hqM hd4620
   rcases hqc with hqx | hqy
   · have hqy' : q ∣ Y k := e1212_antidiag _ _ _ hsum hqx
@@ -627,7 +649,9 @@ theorem e1212_periodic_kill_2310 (n X0 Y0 : Nat) (X Y : Nat → Nat)
     rw [hcop k hkn] at hgd
     have hq1 : q = 1 := Nat.dvd_one.mp hgd
     omega
-  · have hsumY : q ∣ Y k + X k := (Nat.add_comm (X k) (Y k)) ▸ hsum
+  · have hsumY : q ∣ Y k + X k := by
+      obtain ⟨c, hc⟩ := hsum
+      exact ⟨c, by omega⟩
     have hqx' : q ∣ X k := e1212_antidiag (Y k) (X k) q hsumY hqy
     have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx' hqy
     rw [hcop k hkn] at hgd
@@ -652,18 +676,19 @@ theorem e1212_periodic_kill_210 (n X0 Y0 : Nat) (X Y : Nat → Nat)
   have hfn : X n + Y n = X0 + Y0 + 420 := by omega
   have hfstep : ∀ k < n,
       (X (k + 1) + Y (k + 1) = X k + Y k + 2) ∨
-      (X (k + 1) + Y (k + 1) + 2 = X k + Y k) := by
+      (X k + Y k = X (k + 1) + Y (k + 1) + 2) := by
     intro k hk
     rcases hstep k hk with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> omega
   obtain ⟨k, hkn, hfk⟩ := e1212_ivt n
       (fun k => X k + Y k) (X0 + Y0) (X0 + Y0 + 420)
       (by omega) hf0 hfn hfstep
-      (X0 + Y0 + (420 - (X0 + Y0) % 420) % 420)
+      (420 * ((X0 + Y0) / 420 + 1))
       (by omega) (by omega) (by omega)
-  have hclass : (X k + Y k) % 420 = 0 := by omega
-  have hd420 : 420 ∣ X k + Y k := by omega
+  -- (W65-C hardening) same witness form at M = 210.
+  have hd420 : 420 ∣ X k + Y k :=
+    ⟨(X0 + Y0) / 420 + 1, hfk⟩
   obtain ⟨q, hq3, hqm, hqc⟩ := hcar k hkn
-  have hqM : q ∣ 420 := Nat.dvd_trans hqm (by decide)
+  have hqM : q ∣ 420 := Nat.dvd_trans hqm ⟨2, by omega⟩
   have hsum : q ∣ X k + Y k := Nat.dvd_trans hqM hd420
   rcases hqc with hqx | hqy
   · have hqy' : q ∣ Y k := e1212_antidiag _ _ _ hsum hqx
@@ -671,7 +696,9 @@ theorem e1212_periodic_kill_210 (n X0 Y0 : Nat) (X Y : Nat → Nat)
     rw [hcop k hkn] at hgd
     have hq1 : q = 1 := Nat.dvd_one.mp hgd
     omega
-  · have hsumY : q ∣ Y k + X k := (Nat.add_comm (X k) (Y k)) ▸ hsum
+  · have hsumY : q ∣ Y k + X k := by
+      obtain ⟨c, hc⟩ := hsum
+      exact ⟨c, by omega⟩
     have hqx' : q ∣ X k := e1212_antidiag (Y k) (X k) q hsumY hqy
     have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx' hqy
     rw [hcop k hkn] at hgd
@@ -696,18 +723,19 @@ theorem e1212_periodic_kill_30030 (n X0 Y0 : Nat) (X Y : Nat → Nat)
   have hfn : X n + Y n = X0 + Y0 + 60060 := by omega
   have hfstep : ∀ k < n,
       (X (k + 1) + Y (k + 1) = X k + Y k + 2) ∨
-      (X (k + 1) + Y (k + 1) + 2 = X k + Y k) := by
+      (X k + Y k = X (k + 1) + Y (k + 1) + 2) := by
     intro k hk
     rcases hstep k hk with ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ | ⟨hx, hy⟩ <;> omega
   obtain ⟨k, hkn, hfk⟩ := e1212_ivt n
       (fun k => X k + Y k) (X0 + Y0) (X0 + Y0 + 60060)
       (by omega) hf0 hfn hfstep
-      (X0 + Y0 + (60060 - (X0 + Y0) % 60060) % 60060)
+      (60060 * ((X0 + Y0) / 60060 + 1))
       (by omega) (by omega) (by omega)
-  have hclass : (X k + Y k) % 60060 = 0 := by omega
-  have hd60060 : 60060 ∣ X k + Y k := by omega
+  -- (W65-C hardening) same witness form at M = 30030.
+  have hd60060 : 60060 ∣ X k + Y k :=
+    ⟨(X0 + Y0) / 60060 + 1, hfk⟩
   obtain ⟨q, hq3, hqm, hqc⟩ := hcar k hkn
-  have hqM : q ∣ 60060 := Nat.dvd_trans hqm (by decide)
+  have hqM : q ∣ 60060 := Nat.dvd_trans hqm ⟨2, by omega⟩
   have hsum : q ∣ X k + Y k := Nat.dvd_trans hqM hd60060
   rcases hqc with hqx | hqy
   · have hqy' : q ∣ Y k := e1212_antidiag _ _ _ hsum hqx
@@ -715,7 +743,9 @@ theorem e1212_periodic_kill_30030 (n X0 Y0 : Nat) (X Y : Nat → Nat)
     rw [hcop k hkn] at hgd
     have hq1 : q = 1 := Nat.dvd_one.mp hgd
     omega
-  · have hsumY : q ∣ Y k + X k := (Nat.add_comm (X k) (Y k)) ▸ hsum
+  · have hsumY : q ∣ Y k + X k := by
+      obtain ⟨c, hc⟩ := hsum
+      exact ⟨c, by omega⟩
     have hqx' : q ∣ X k := e1212_antidiag (Y k) (X k) q hsumY hqy
     have hgd : q ∣ Nat.gcd (X k) (Y k) := Nat.dvd_gcd hqx' hqy
     rw [hcop k hkn] at hgd
