@@ -3,8 +3,9 @@
 ## THE RESULT: KERNEL62 GREEN ON CI — THE g(4) MASTER IS CERTIFIED
 
 **Run 43602748433** (branch w63-d1-p708, HEAD 064806a4, started 14:02:16Z):
+**FULL RUN COMPLETED SUCCESS — all three jobs GREEN.**
 - **kernel-c: SUCCESS (completed 14:22:20Z, job 132470819408)** — kernel62 (#708) GREEN.
-- kernel-a: SUCCESS (14:12:56Z). kernel-b: see run verdict below (all recent runs green).
+- kernel-a: SUCCESS (14:12:56Z). kernel-b: SUCCESS (14:39:35Z, 28/28 steps).
 - The kernel62 lean run elaborated ALL of Erdos708.lean (60151 lines, witness
   table + 114 chunk decides) in ~4.5 min at the 4M default heartbeat —
   vs the 60-min runner death of run 43589088597. NO-OOM structure PROVEN.
