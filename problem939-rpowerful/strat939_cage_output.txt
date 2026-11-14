@@ -1,0 +1,55 @@
+strat939_cage start; python 3.12.16
+[CAGE] 4-powerful values <= 1e13: 11653 (generator validated vs the K60 Lean census row at 1e4: True)
+
+=== 1. THE ADMISSIBLE-SET A(M) (empirical vs theoretical) ===
+[A(16)] |A| theoretical = 9; empirical coverage from 1e13 values = 9; FULL: True
+[A(32)] |A| theoretical = 18; empirical coverage from 1e13 values = 18; FULL: True
+[A(81)] |A| theoretical = 55; empirical coverage from 1e13 values = 55; FULL: True
+[A(625)] |A| theoretical = 501; empirical coverage from 1e13 values = 501; FULL: True
+[A(2401)] |A| theoretical = 2059; empirical coverage from 1e13 values = 2034; FULL: False
+[A(2401)]   missing (need the u^(1+3d) lift): [75, 150, 181, 223, 411, 776, 1200, 1245]
+[A(2401)]   u^(1+3d) achievement covers the missing classes: True
+[A(1296)] |A| theoretical = 495; empirical coverage from 1e13 values = 420; FULL: False
+[A(1296)]   missing (need the u^(1+3d) lift): [35, 37, 47, 61, 67, 71, 83, 89]
+[A(1296)]   u^(1+3d) achievement covers the missing classes: True
+[A(10000)] |A| theoretical = 4509; empirical coverage from 1e13 values = 1690; FULL: False
+[A(10000)]   missing (need the u^(1+3d) lift): [7, 11, 13, 17, 19, 21, 27, 29]
+[A(10000)]   u^(1+3d) achievement covers the missing classes: True
+[A(50625)] |A| theoretical = 27555; empirical coverage from 1e13 values = 3801; FULL: False
+[A(50625)]   missing (need the u^(1+3d) lift): [1, 2, 4, 7, 8, 11, 13, 14]
+[A(50625)]   u^(1+3d) achievement covers the missing classes: True
+
+=== 2. THE ODD-MEMBER CLASSES MOD 16 ===
+[M16] odd 4-powerful classes mod 16: {1: 1109, 3: 384, 5: 256, 7: 229, 9: 429, 11: 304, 13: 219, 15: 156}
+[M16] even 4-powerful classes mod 16: {0: 8567}
+[M16] ALL 8 odd classes populated: True; even: only 0 (16 | every even 4-powerful) — the mod-16 valuation cage
+
+=== 3. THE CAGE-CLOSE TEST: local coprime EO/OO solutions per M ===
+[EO M=16] x=2^k (k=4) y=1 z (bitlen 1) (gamma=1, ord=1)
+[EO M=16]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {2: 1}
+[OO M=16] a=1 b(bitlen 28) c(bitlen 5) (b_cls=15, dc=n/a)
+[OO M=16]   a+b = c mod M: True; mod-M coprime: True {2: 1}
+[EO M=81] x=2^k (k=216) y=1 z (bitlen 164) (gamma=2, ord=54)
+[EO M=81]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {3: 0}
+[OO M=81] a=1 b(bitlen 1) c(bitlen 343) (b_cls=1, dc=18)
+[OO M=81]   a+b = c mod M: True; mod-M coprime: True {3: 0}
+[EO M=625] x=2^k (k=2000) y=1 z (bitlen 1502) (gamma=2, ord=500)
+[EO M=625]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {5: 0}
+[OO M=625] a=1 b(bitlen 1) c(bitlen 13657) (b_cls=1, dc=500)
+[OO M=625]   a+b = c mod M: True; mod-M coprime: True {5: 0}
+[EO M=2401] x=2^k (k=4116) y=1 z (bitlen 3089) (gamma=2, ord=1029)
+[EO M=2401]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {7: 0}
+[OO M=2401] a=1 b(bitlen 1) c(bitlen 11372) (b_cls=1, dc=343)
+[OO M=2401]   a+b = c mod M: True; mod-M coprime: True {7: 0}
+[EO M=1296] x=2^k (k=216) y=1 z (bitlen 1671) (gamma=1217, ord=54)
+[EO M=1296]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {2: 1, 3: 0}
+[OO M=1296] a=1 b(bitlen 72) c(bitlen 343) (b_cls=1135, dc=18)
+[OO M=1296]   a+b = c mod M: True; mod-M coprime: True {2: 1, 3: 0}
+[EO M=10000] x=2^k (k=2000) y=1 z (bitlen 19806) (gamma=9377, ord=500)
+[EO M=10000]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {2: 1, 5: 0}
+[OO M=10000] a=1 b(bitlen 92) c(bitlen 13657) (b_cls=8751, dc=500)
+[OO M=10000]   a+b = c mod M: True; mod-M coprime: True {2: 1, 5: 0}
+[EO M=50625] x=2^k (k=54000) y=1 z (bitlen 40502) (gamma=2, ord=13500)
+[EO M=50625]   x+y = z mod M: True; mod-M coprime (per-prime divisors <= 1): True {3: 0, 5: 0}
+[OO M=50625] a=1 b(bitlen 1) c(bitlen 208391) (b_cls=1, dc=4500)
+[OO M=50625]   a+b = c mod M: True; mod-M coprime: True {3: 0, 5: 0}
