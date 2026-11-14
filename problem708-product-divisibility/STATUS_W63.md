@@ -68,4 +68,7 @@ Replaced the aggregate decide with THE WITNESS-TABLE structure:
   dual-direction master structure is now CI-grepped directly.
 
 ## CI VERDICT
-(pending — this push; the verdict will be recorded here when green)
+**GREEN — run 43602748433** (kernel-c SUCCESS 14:22:20Z, kernel62 GREEN with the
+five-name master axiom-prints + E708_G4_MASTER_GREEN receipt; see STATUS_W64.md,
+the round report of record). One intermediate failure first: 43600972276 died on
+a single stacked-doc-comment parse error (1595:69), fixed by 064806a.
