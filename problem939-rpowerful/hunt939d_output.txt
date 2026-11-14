@@ -1,7 +1,0 @@
-hunt939d start (phases ['A']); python 3.12.16
-=== PHASE A: calibration + validation ===
-[A] gen4(10^4) reproduces the K60 Lean census row exactly (excl. 1): True
-[A] TRUE 4-powerful <= 1e13: 11653   (gen 0.0s)
-[A] TRUE 4-powerful <= 1e15: 40048   (gen 0.1s)
-[A] TRUE 4-powerful <= 1e16: 73698   (gen 0.1s)
-[A] TRUE 4-powerful <= 1e17: 135058   (gen 0.2s)

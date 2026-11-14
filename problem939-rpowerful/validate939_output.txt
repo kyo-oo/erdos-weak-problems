@@ -1,0 +1,19 @@
+=== validate939 — ENUMERATOR DUAL-METHOD VALIDATION (W63-B1) ===
+python 3.12.16; numpy 2.1.3; gmpy2 2.3.2
+[1] M1 (DFS generator gen4) at 1e4 == K60 Lean census row (excl. vacuous 1): True  (24 values vs 24)
+[2] M2 (independent rad-sieve) at 1e4 == K60 Lean census row (excl. 1): True
+[3] M2 == M1 EXACT set equality at 1e7: True  (|set| = 234; identical element-by-element)
+[4] audit anchors (the values the prior fourth-power engines missed):
+    32: factors {2: 5}, min exp 5 -> 4-powerful: True; in M1 list: True
+    2592: factors {2: 5, 3: 4}, min exp 4 -> 4-powerful: True; in M1 list: True
+    3888: factors {2: 4, 3: 5}, min exp 4 -> 4-powerful: True; in M1 list: True
+    614656: factors {2: 8, 7: 4}, min exp 4 -> 4-powerful: True; in M1 list: True
+    1594323: factors {3: 13}, min exp 13 -> 4-powerful: True; in M1 list: True
+[5] TRUE 4-powerful counts (M1; re-derivation of the W62 audit rows):
+    <= 1e13: 11653   (0.0s)
+    <= 1e15: 40048   (0.0s)
+    <= 1e16: 73698   (0.1s)
+    <= 1e17: 135058   (0.1s)
+    <= 1e18: 246652   (0.3s)
+    <= 1e19: 449087   (0.5s)
+=== validate939 VERDICT: ALL GREEN ===

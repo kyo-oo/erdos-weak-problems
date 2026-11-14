@@ -1,0 +1,14 @@
+{
+ "limit": 10000000000000000000,
+ "exp10": 19,
+ "nL": 449087,
+ "nE": 335682,
+ "nO": 113405,
+ "con_pairs": 0,
+ "eo_checks": 1136219675,
+ "oo_checks": 587169988,
+ "coprime_hits": 0,
+ "witnesses": [],
+ "wall_s": 293.5,
+ "sumhits_note": "246243 sum-hits (all gcd>1, zero coprime) enumerated in the gzipped lane ckpts ck939_box19_[eo|oo].json.gz"
+}

@@ -1,5 +1,17 @@
 #!/usr/bin/env python3
 # hunt939d.py — Erdős #939 r=4 lane, W62 Task 1-b (ATTACKER): THE CORRECTED ENGINE.
+# W63-B1 REPAIR (this round): (i) REPO is now the script's own directory (the old
+# hard-coded /home/z/erdos-weak-problems path belonged to the dead machine — the
+# W62 run wrote its log into the MAIN repo and died at 355 bytes); (ii) the box
+# lanes are RESUMABLE: per-lane JSON checkpoints (ck939_box<tag>_<lane>.json)
+# written every ~45 s / 20000 iterations, so the L75 reaper can kill any chunk
+# and the next chunk resumes; (iii) generic PHASES=B<n> (B13, B15, ..., B20)
+# sub-box certifications; (iv) the a=1 CONsecutive lane (pairs x, x+1 both
+# 4-powerful — required for the FULL statement "no pairwise-coprime triple with
+# all three rpow-4" since rpow 4 1 = true in the K60 kernel); (v) witnesses are
+# coprime-checked and dual-method-verified IMMEDIATELY as they land (never held
+# for a lane end that a reaper might eat); (vi) the log opens in APPEND mode
+# (chunk history preserved).
 #
 # THE ENUMERATION-BUG AUDIT (this round): hunt939b.py / hunt939c.py built their
 # "4-powerful" lists as val * p**4 then v *= p**4 — i.e. prime exponents that are
@@ -14,8 +26,12 @@
 # PHASES (env PHASES, comma-separated; default A):
 #   A    calibration + validation vs the Lean K60 census row + brute-force
 #        cross-validation of the bucketed box lanes at 1e7.
-#   B18  the TRUE exhaustive box: pairwise-coprime 4-powerful a+b=c, c <= 10^18.
-#        Lanes (sound & complete — EE pairs die by coprimality):
+#   B<n> the TRUE exhaustive box: pairwise-coprime 4-powerful a+b=c, c <= 10^n
+#        (B13, B15, B16, B17 = sub-box bounded theorems; B18 = THE MISSION;
+#        B19 = the queued hunt939e; B20+ = stretch). RESUMABLE via per-lane JSON
+#        checkpoints (L75 law: chunks die; ck939_box<tag>_<lane>.json resume).
+#        Lanes (sound & complete — EE pairs die by coprimality, a=b dies by gcd):
+#          CON: a = 1 (rpow 4 1 = true): consecutive 4-powerful pairs x, x+1.
 #          EO: e even (16|e), o odd, c=e+o odd. Necessary: c = o mod 16, so the
 #              sweep is (o, c) same mod-16 bucket, c > o, e = c-o in the E-list.
 #          OO: a,b odd, c=a+b even 4-powerful => 16 | c (the K60 mod-16
@@ -43,14 +59,14 @@
 # Every candidate triple is verified by TWO independent methods (sympy.factorint
 # receipts + gmpy2 trial division to n^(1/4) — complete for the 4-powerful
 # property since p > n^(1/4) forces exponent < 4 — with Pollard-rho completion).
-import sys, time, math, os
+import sys, time, math, os, json
 from bisect import bisect_right
 from collections import defaultdict
 from sympy import primerange, factorint
 import gmpy2
 import numpy as np
 
-REPO = '/home/z/erdos-weak-problems/problem939-rpowerful'
+REPO = os.path.dirname(os.path.abspath(__file__))
 T0 = time.time()
 iroot = lambda n, k: int(gmpy2.iroot(int(n), int(k))[0])
 isqrt = lambda n: int(gmpy2.isqrt(int(n)))
@@ -133,16 +149,21 @@ def factor_m2(n):
 def is_r4_fact(f):
     return f is not None and all(e >= 4 for e in f.values())
 
+def minexp(f):
+    # min prime exponent; 99 for the empty factorization (n = 1, vacuously
+    # 4-powerful — rpow 4 1 = true in the K60 kernel)
+    return min(f.values()) if f else 99
+
 def verify_triple(a, b, c, tag):
     """Full receipts for a candidate witness. Returns True iff verified."""
     log(f'  VERIFY[{tag}] a={a} b={b} c={c}')
     ok_sum = (a + b == c)
     log(f'    a+b=c: {ok_sum}')
     fa = factorint(a); fb = factorint(b); fc = factorint(c)
-    log(f'    M1 a = {dict(fa)}  (min exp {min(fa.values())})')
-    log(f'    M1 b = {dict(fb)}  (min exp {min(fb.values())})')
-    log(f'    M1 c = {dict(fc)}  (min exp {min(fc.values())})')
-    m1 = (min(fa.values()) >= 4 and min(fb.values()) >= 4 and min(fc.values()) >= 4)
+    log(f'    M1 a = {dict(fa)}  (min exp {minexp(fa)})')
+    log(f'    M1 b = {dict(fb)}  (min exp {minexp(fb)})')
+    log(f'    M1 c = {dict(fc)}  (min exp {minexp(fc)})')
+    m1 = (minexp(fa) >= 4 and minexp(fb) >= 4 and minexp(fc) >= 4)
     ga = factor_m2(a); gb = factor_m2(b); gc = factor_m2(c)
     m2 = (is_r4_fact(ga) and is_r4_fact(gb) and is_r4_fact(gc))
     log(f'    M2 a = {ga}'); log(f'    M2 b = {gb}'); log(f'    M2 c = {gc}')
@@ -164,11 +185,43 @@ def verify_triple(a, b, c, tag):
     return ok
 
 # ----------------------------------------------------------------------------
-# The bucketed exhaustive box (numpy uint64; LIMIT <= 1.8e19)
+# The bucketed exhaustive box (numpy uint64; LIMIT <= 1.8e19) — RESUMABLE (W63)
 # ----------------------------------------------------------------------------
+CK_EVERY = 20000          # iterations between checkpoints
+CK_TSEC = 45              # ... or seconds since last checkpoint, whichever first
+
+def _ck_path(tag, lane):
+    return os.path.join(REPO, f'ck939_box{tag}_{lane}.json')
+
+def _ck_save(tag, lane, obj):
+    p = _ck_path(tag, lane)
+    tmp = p + '.tmp'
+    with open(tmp, 'w') as fh:
+        json.dump(obj, fh)
+    os.replace(tmp, p)    # atomic — a reaper mid-write never corrupts a checkpoint
+
+def _ck_load(tag, lane):
+    p = _ck_path(tag, lane)
+    if not os.path.exists(p):
+        return None
+    try:
+        with open(p) as fh:
+            return json.load(fh)
+    except Exception:
+        return None
+
 def box_npy(LIMIT, tag):
+    """TRUE exhaustive box c <= LIMIT, RESUMABLE across reaper kills:
+    pairwise-coprime 4-powerful triples a+b=c.
+    Lanes (sound & complete; EE pairs die by coprimality, a=b dies by gcd):
+      CON  a = 1 (rpow 4 1 = true): pairs x, x+1 both 4-powerful.
+      EO   e even (16|e), o odd, c=e+o odd: c = o (mod 16) -> same bucket.
+      OO   a,b odd, c even 4-powerful -> 16|c -> b = -a (mod 16): complementary
+           buckets, sum tested against the E-list.
+    Witnesses are gcd-checked and dual-method verified THE MOMENT they land."""
     t0 = time.time()
     L = gen4(LIMIT)
+    Lset = set(L)
     E = [x for x in L if not (x & 1)]
     O = [x for x in L if (x & 1)]
     exp10 = round(math.log10(LIMIT))
@@ -178,74 +231,148 @@ def box_npy(LIMIT, tag):
         f'(E={len(E)} even, O={len(O)} odd) ===')
     obuck = {r: np.array([o for o in O if (o & 15) == r], dtype=np.uint64)
              for r in (1, 3, 5, 7, 9, 11, 13, 15)}
-    sumhits = []
-    # ---- EO lane: (o, c) in the same mod-16 bucket, c > o, e = c - o in E ----
-    nEO = 0
-    tbeat = time.time(); nO_tot = len(O)
-    for io, o in enumerate(O):
-        if io % 20000 == 0:
-            log(f'[B{tag}] EO heartbeat {io}/{nO_tot} ({time.time()-tbeat:.0f}s)')
-        r = o & 15
-        bk = obuck[r]
+    sumhits = []; wit = []
+    # ---- CON lane: a=1, consecutive 4-powerful pairs (deterministic, cheap:
+    # |L| set-lookups — always recomputed so every chunk-run's census is complete) ----
+    ncon = 0
+    for x in L:
+        if (x + 1) <= LIMIT and (x + 1) in Lset:
+            ncon += 1
+            log(f'[B{tag}] CON sum-hit: 1 + {x} = {x + 1} (gcd=1)')
+            if verify_triple(1, x, x + 1, f'CON{tag}'):
+                wit.append((1, x, x + 1))
+            sumhits.append((1, x, x + 1))
+    _ck_save(tag, 'con', {'done': True, 'pairs': ncon})
+    log(f'[B{tag}] CON lane (a=1): {ncon} consecutive 4-powerful pairs')
+    # ---- EO lane (checkpointed) ----
+    nO_tot = len(O)
+    ckE = _ck_load(tag, 'eo')
+    if ckE is None:
+        ckE = {'idx': 0, 'nEO': 0, 'hits': []}
+    if ckE.get('idx', 0) > 0:
+        log(f'[B{tag}] EO resume from idx {ckE["idx"]}/{nO_tot} '
+            f'({ckE["nEO"]} checks, {len(ckE["hits"])} hits banked)')
+    for h in ckE['hits']:
+        sumhits.append(tuple(h))
+        if math.gcd(h[0], h[1]) == 1 and tuple(h) not in wit:
+            wit.append(tuple(h))     # banked witness (verified when it landed)
+    tbeat = tck = time.time()
+    io = ckE['idx']
+    while io < nO_tot:
+        o = O[io]
+        bk = obuck[o & 15]
         lo = int(np.searchsorted(bk, np.uint64(o), side='right'))
-        if lo >= bk.size: continue
-        cands = bk[lo:]
-        diffs = cands - np.uint64(o)
-        pos = np.searchsorted(E_np, diffs)
-        np.clip(pos, 0, nE - 1, out=pos)
-        hit = E_np[pos] == diffs
-        nEO += int(cands.size)
-        if hit.any():
-            for k in np.nonzero(hit)[0]:
-                c = int(cands[k]); e = int(diffs[k])
-                sumhits.append((e, o, c))
-    log(f'[B{tag}] EO lane (same-bucket (o,c), e=c-o): {nEO} checks; '
-        f'{len(sumhits)} sum-hits so far')
-    # ---- OO lane: complementary mod-16 buckets, b > a, c = a+b in E ----
-    nOO = 0
-    tbeat = time.time()
-    for ia, a in enumerate(O):
-        if ia % 20000 == 0:
-            log(f'[B{tag}] OO heartbeat {ia}/{nO_tot} ({time.time()-tbeat:.0f}s)')
-        r = (-a) & 15
-        bk = obuck[r]
+        if lo < bk.size:
+            cands = bk[lo:]
+            diffs = cands - np.uint64(o)
+            pos = np.searchsorted(E_np, diffs)
+            np.clip(pos, 0, nE - 1, out=pos)
+            hit = E_np[pos] == diffs
+            ckE['nEO'] += int(cands.size)
+            if hit.any():
+                for k in np.nonzero(hit)[0]:
+                    c = int(cands[k]); e = int(diffs[k])
+                    g = math.gcd(e, o)
+                    log(f'[B{tag}] EO sum-hit: {e} + {o} = {c}  (gcd = {g}'
+                        f'{" COPRIME" if g == 1 else " rejected"})')
+                    sumhits.append((e, o, c))
+                    ckE['hits'].append([e, o, c])
+                    if g == 1:
+                        log(f'[B{tag}] *** WITNESS CANDIDATE EO ({e},{o},{c}) ***')
+                        if verify_triple(e, o, c, f'BOX{tag}EO'):
+                            wit.append((e, o, c))
+        io += 1
+        if io % CK_EVERY == 0 or io == nO_tot or time.time() - tck > CK_TSEC:
+            if io % (CK_EVERY) == 0 or io == nO_tot:
+                log(f'[B{tag}] EO heartbeat {io}/{nO_tot} '
+                    f'({time.time()-tbeat:.0f}s lane-time)')
+            ckE['idx'] = io
+            _ck_save(tag, 'eo', ckE)
+            tck = time.time()
+    nEO = ckE['nEO']
+    log(f'[B{tag}] EO lane (same-bucket (o,c), e=c-o): {nEO} checks complete; '
+        f'{len(ckE["hits"])} EO sum-hits')
+    # ---- OO lane (checkpointed) ----
+    ckO = _ck_load(tag, 'oo')
+    if ckO is None:
+        ckO = {'idx': 0, 'nOO': 0, 'hits': []}
+    if ckO.get('idx', 0) > 0:
+        log(f'[B{tag}] OO resume from idx {ckO["idx"]}/{nO_tot} '
+            f'({ckO["nOO"]} checks, {len(ckO["hits"])} hits banked)')
+    for h in ckO['hits']:
+        sumhits.append(tuple(h))
+        if math.gcd(h[0], h[1]) == 1 and tuple(h) not in wit:
+            wit.append(tuple(h))
+    tbeat = tck = time.time()
+    ia = ckO['idx']
+    while ia < nO_tot:
+        a = O[ia]
+        bk = obuck[(-a) & 15]
         lo = int(np.searchsorted(bk, np.uint64(a), side='right'))
         hi = int(np.searchsorted(bk, np.uint64(LIMIT - a), side='right'))
-        if lo >= hi: continue
-        cands = bk[lo:hi]
-        sums = cands + np.uint64(a)
-        pos = np.searchsorted(E_np, sums)
-        np.clip(pos, 0, nE - 1, out=pos)
-        hit = E_np[pos] == sums
-        nOO += int(cands.size)
-        if hit.any():
-            for k in np.nonzero(hit)[0]:
-                b = int(cands[k]); c = int(sums[k])
-                sumhits.append((a, b, c))
-    log(f'[B{tag}] OO lane (complementary buckets): {nOO} checks; '
-        f'total sum-hits {len(sumhits)}')
+        if lo < hi:
+            cands = bk[lo:hi]
+            sums = cands + np.uint64(a)
+            pos = np.searchsorted(E_np, sums)
+            np.clip(pos, 0, nE - 1, out=pos)
+            hit = E_np[pos] == sums
+            ckO['nOO'] += int(cands.size)
+            if hit.any():
+                for k in np.nonzero(hit)[0]:
+                    b = int(cands[k]); c = int(sums[k])
+                    g = math.gcd(a, b)
+                    log(f'[B{tag}] OO sum-hit: {a} + {b} = {c}  (gcd = {g}'
+                        f'{" COPRIME" if g == 1 else " rejected"})')
+                    sumhits.append((a, b, c))
+                    ckO['hits'].append([a, b, c])
+                    if g == 1:
+                        log(f'[B{tag}] *** WITNESS CANDIDATE OO ({a},{b},{c}) ***')
+                        if verify_triple(a, b, c, f'BOX{tag}OO'):
+                            wit.append((a, b, c))
+        ia += 1
+        if ia % CK_EVERY == 0 or ia == nO_tot or time.time() - tck > CK_TSEC:
+            if ia % CK_EVERY == 0 or ia == nO_tot:
+                log(f'[B{tag}] OO heartbeat {ia}/{nO_tot} '
+                    f'({time.time()-tbeat:.0f}s lane-time)')
+            ckO['idx'] = ia
+            _ck_save(tag, 'oo', ckO)
+            tck = time.time()
+    nOO = ckO['nOO']
+    log(f'[B{tag}] OO lane (complementary buckets): {nOO} checks complete; '
+        f'{len(ckO["hits"])} OO sum-hits')
+    # ---- final census + certificate ----
     ncop = 0; nrej = 0
     for t in sumhits:
-        g = math.gcd(t[0], t[1])
-        if g == 1: ncop += 1
+        if math.gcd(t[0], t[1]) == 1: ncop += 1
         else: nrej += 1
-    log(f'[B{tag}] sum-hit census: {len(sumhits)} total; {ncop} coprime; '
-        f'{nrej} rejected (gcd > 1). First 50:')
-    for t in sumhits[:50]:
+    log(f'[B{tag}] sum-hit census: {len(sumhits)} total (CON {ncon} + EO '
+        f'{len(ckE["hits"])} + OO {len(ckO["hits"])}); {ncop} coprime; '
+        f'{nrej} rejected (gcd > 1). All:')
+    for t in sumhits[:200]:
         g = math.gcd(t[0], t[1])
         log(f'[B{tag}]   sum-hit: {t[0]} + {t[1]} = {t[2]}  (gcd = {g} '
             f'-> {"COPRIME" if g == 1 else "rejected: gcd > 1"})')
-    wit = []
+    if len(sumhits) > 200:
+        log(f'[B{tag}]   ... and {len(sumhits)-200} more (see lane ckpt files)')
     for t in sumhits:
-        if math.gcd(t[0], t[1]) == 1:
-            wit.append(t)
-            log(f'[B{tag}] *** WITNESS CANDIDATE {t} ***')
-            verify_triple(t[0], t[1], t[2], f'BOX{tag}')
+        if math.gcd(t[0], t[1]) == 1 and t not in wit:
+            wit.append(t)   # safety net (should be empty — hits are inline-checked)
     log(f'[B{tag}] RESULT: {len(wit)} coprime triples (a+b=c all 4-powerful, '
-        f'c <= 1e{exp10}); {time.time()-t0:.1f}s')
+        f'c <= 1e{exp10}); {time.time()-t0:.1f}s this chunk-run')
+    for t in wit:
+        log(f'[B{tag}] *** WITNESS (re-verified at finalize) {t} ***')
+        verify_triple(t[0], t[1], t[2], f'BOX{tag}FINAL')
     log(f'[B{tag}] CERTIFICATE: |L|={len(L)} (generator validated vs the Lean K60 '
-        f'census at 1e4 + brute-force lane cross-check at 1e7); EO checks={nEO}, '
-        f'OO checks={nOO}, sum-hits={len(sumhits)}, coprime witnesses={len(wit)}')
+        f'census row at 1e4 + independent rad-sieve at 1e7 + brute-force lane '
+        f'cross-check at 1e7); CON pairs={ncon}, EO checks={nEO}, OO checks={nOO}, '
+        f'sum-hits={len(sumhits)}, coprime witnesses={len(wit)}')
+    _ck_save(tag, 'done', {'limit': LIMIT, 'exp10': exp10, 'nL': len(L),
+                           'nE': len(E), 'nO': len(O), 'con_pairs': ncon,
+                           'eo_checks': nEO, 'oo_checks': nOO,
+                           'sumhits': [list(t) for t in sumhits],
+                           'coprime_hits': ncop, 'witnesses': [list(t) for t in wit],
+                           'wall_s': round(time.time() - t0, 1)})
+    log(f"[B{tag}] DONE receipt: {_ck_path(tag, 'done')}")
     return wit
 
 # ----------------------------------------------------------------------------
@@ -274,9 +401,13 @@ def phase_A():
     log('[A] AUDIT: prior hunts enumerated FOURTH POWERS only (1777 <= 1e13; '
         '9999 <= 1e16 — counts of fourth powers); 32 = 2^5 was missing. All prior '
         'r=4 zero-claims were FLT(x^4+y^4=z^4)-void.')
-    for lim in (10 ** 24, 10 ** 26):
-        t = time.time(); n = len(gen4(lim, mod4=1))
-        log(f'[A] W-list (primes 1 mod 4, exp >= 4) <= 1e{int(round(math.log10(lim)))}: {n}   ({time.time()-t:.1f}s)')
+    if os.environ.get('A_WLIST') == '1':
+        for lim in (10 ** 24, 10 ** 26):
+            t = time.time(); n = len(gen4(lim, mod4=1))
+            log(f'[A] W-list (primes 1 mod 4, exp >= 4) <= 1e{int(round(math.log10(lim)))}: {n}   ({time.time()-t:.1f}s)')
+    else:
+        log('[A] W-list lines skipped (A_WLIST=1 enables) — they feed the L1/L2/SG '
+            'family lanes, not the B-box mission of this round.')
     t = time.time(); lu = [x for x in gen4(10 ** 13) if x & 1]
     log(f'[A] odd 4-powerful <= 1e13: {len(lu)}   ({time.time()-t:.1f}s)')
     # brute-force cross-check of the bucketed lanes at 1e7
@@ -519,33 +650,40 @@ def route2(cmax, uvmax):
 # ----------------------------------------------------------------------------
 def main():
     global LOG
-    phases = os.environ.get('PHASES', 'A').split(',')
-    if 'QUIETFILE' in os.environ:
-        LOG = open(os.environ['QUIETFILE'], 'w')
-    else:
-        LOG = open(REPO + '/hunt939d_output.txt', 'w')
-    log(f'hunt939d start (phases {phases}); python {sys.version.split()[0]}')
-    if 'A' in phases:
-        phase_A()
-    if 'B18' in phases:
-        box_npy(10 ** 18, '18')
-    B = int(os.environ.get('LANE_B', 10 ** 13))
-    Wmax = int(os.environ.get('LANE_WMAX', 10 ** 26))
-    if 'L1' in phases:
-        lane1(B, Wmax)
-    if 'L2' in phases:
-        lane2(B, Wmax)
-    if 'SG' in phases:
-        sg_lane(int(os.environ.get('SG_C', 10 ** 26)))
-    if 'R2' in phases:
-        route2(int(os.environ.get('R2_CMAX', 4096)), int(os.environ.get('R2_UVMAX', 400)))
-    if 'V' in phases:
-        log('=== verifier self-test on the K60-certified r=3 witness2 ===')
-        fa = factorint(1392672604221); fb = factorint(2126285555779); fc = factorint(3518958160000)
-        log(f'  3^4*29^3*89^3 = {fa}; 7^3*11^3*167^3 = {fb}; 2^7*5^4*353^3 = {fc}')
-        log(f'  sum: {1392672604221 + 2126285555779 == 3518958160000}; '
-            f'min-exponents {min(fa.values())}, {min(fb.values())}, {min(fc.values())}')
-    log(f'hunt939d total {time.time()-T0:.1f}s')
+    phases = [p.strip() for p in os.environ.get('PHASES', 'A').split(',') if p.strip()]
+    logfile = os.environ.get('LOGFILE', os.path.join(REPO, 'hunt939d_output.txt'))
+    if os.environ.get('QUIETFILE'):      # legacy override (hunt939e-style wrappers)
+        logfile = os.environ['QUIETFILE']
+    LOG = open(logfile, 'a')              # APPEND: chunk history is part of the receipt
+    log(f'--- hunt939d chunk start (phases {phases}); python {sys.version.split()[0]}; '
+        f'{time.strftime("%Y-%m-%d %H:%M:%S")} ---')
+    for ph in phases:
+        if ph == 'A':
+            phase_A()
+        elif ph.startswith('B') and ph[1:].isdigit():
+            # B<n>: certify the TRUE box c <= 10^n (resumable; sub-boxes B13, B15,
+            # B16, B17 ... are the incremental bounded theorems; B18 the mission;
+            # B19 closes the queued hunt939e; B20+ the stretch frontier).
+            box_npy(10 ** int(ph[1:]), ph[1:])
+        elif ph == 'L1':
+            lane1(int(os.environ.get('LANE_B', 10 ** 13)),
+                  int(os.environ.get('LANE_WMAX', 10 ** 26)))
+        elif ph == 'L2':
+            lane2(int(os.environ.get('LANE_B', 10 ** 13)),
+                  int(os.environ.get('LANE_WMAX', 10 ** 26)))
+        elif ph == 'SG':
+            sg_lane(int(os.environ.get('SG_C', 10 ** 26)))
+        elif ph == 'R2':
+            route2(int(os.environ.get('R2_CMAX', 4096)), int(os.environ.get('R2_UVMAX', 400)))
+        elif ph == 'V':
+            log('=== verifier self-test on the K60-certified r=3 witness2 ===')
+            fa = factorint(1392672604221); fb = factorint(2126285555779); fc = factorint(3518958160000)
+            log(f'  3^4*29^3*89^3 = {fa}; 7^3*11^3*167^3 = {fb}; 2^7*5^4*353^3 = {fc}')
+            log(f'  sum: {1392672604221 + 2126285555779 == 3518958160000}; '
+                f'min-exponents {min(fa.values())}, {min(fb.values())}, {min(fc.values())}')
+        else:
+            log(f'!! unknown phase {ph!r} — skipped')
+    log(f'--- hunt939d chunk end; total {time.time()-T0:.1f}s ---')
     LOG.close()
 
 if __name__ == '__main__':
