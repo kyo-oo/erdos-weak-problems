@@ -575,13 +575,17 @@ theorem mSeq_step (n : Nat) : mSeq (n + 1) = 2 * dSeq (n + 1) + mSeq n :=
   rfl
 
 /-- Monotonicity of the cascade denominators (needed so the defining
-subtraction never truncates). -/
+subtraction never truncates). The succ case hands omega BOTH inputs: the
+inductive atom order `ih` AND the defining recurrence (rfl) — omega sees
+`dSeq (n + 2) = 6·dSeq (n + 1) − dSeq n`, and `dSeq n ≤ dSeq (n + 1)`
+makes the truncated subtraction exact with `5·dSeq (n + 1) ≥ dSeq (n + 1)`. -/
 theorem dSeq_mono : ∀ n : Nat, dSeq n ≤ dSeq (n + 1) := by
   intro n
   induction n with
   | zero => decide
   | succ n ih =>
       show dSeq (n + 1) ≤ dSeq (n + 2)
+      have hstep : dSeq (n + 2) = 6 * dSeq (n + 1) - dSeq n := dSeq_step n
       omega
 
 /-- THE ADDITIVE RECURRENCE LAW: d_{n+2} + d_n = 6·d_{n+1} (the
@@ -734,7 +738,11 @@ theorem e289_cascade_board :
       2871 + 1 < 16730 ∧ 16731 + 1 < 97512) :=
   ⟨e289_dSeq_add, e289_pell, e289_srel, e289_split,
     e289_cascade_anchor_values,
-    (e289_cascade_family_k5).1, (e289_cascade_family_k7).1⟩
+    by obtain ⟨⟨h1, h2, h3, h4, h5⟩, ⟨g1, g2, g3, g4⟩, _⟩ := e289_cascade_family_k5
+      exact ⟨h1, h2, h3, h4, h5, g1, g2, g3, g4⟩,
+    by obtain ⟨⟨h1, h2, h3, h4, h5, h6, h7⟩, ⟨g1, g2, g3, g4, g5, g6⟩, _⟩ :=
+        e289_cascade_family_k7
+      exact ⟨h1, h2, h3, h4, h5, h6, h7, g1, g2, g3, g4, g5, g6⟩⟩
 
 /-! ## RECEIPT. -/
 
