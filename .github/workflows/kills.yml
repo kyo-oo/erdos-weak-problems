@@ -1136,6 +1136,19 @@ jobs:
           grep -F "E885_FACTOR_DIFF_GREEN" kernel50.log
           grep -E "E885.(dset_mem_iff|e885_parity|dset_square_fwd|dset_square_rev|dset_square_criterion|dset_square_criterion_parity|k2_witness|k3_witness|k3_distinct_sorted|e885_arsenal_bridge|e885_case_board)' (does not depend on any axioms|depends on axioms)" kernel50.log
           echo KERNEL50_GREEN=1
+      - name: "Kernel 50b - Erdos 885 THE k=4 CASE THEOREM (W63-B5, P885 r3): the first in-house k=4 witness row — N = 2254336 < 9945936 < 29904336 < 779175936 share EXACTLY {534, 3216, 8016, 9840} (|cap D(N_i)| = 4, minimal-tight) — 16 explicit factor-pair witnesses (1792*1258 .. 33264*23424), dual-certified pre-authoring (gmpy2 square criterion + full divisor-pair D-set recount), the W63-B5 factorization-indexed escalation origin (K_{5,2} harvest + column-pair extension -> K_{5,3} rows {267,1525,3165,5475,27915}, columns {24135111, 2514375, 15992775} -> Theorem B lambda=2 scaling) + the arsenal bridge + the 3-conjunct board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem885-factor-difference/Erdos885K4.lean 2>&1 | tee kernel50b.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel50b.log
+          grep -F "E885_K4_GREEN" kernel50b.log
+          grep -E "E885K4.(dset_mem_iff|dset_witness|k4_witness|k4_distinct_sorted|e885_k4_arsenal_bridge|e885_k4_board)' (does not depend on any axioms|depends on axioms)" kernel50b.log
+          echo KERNEL50B_GREEN=1
       - name: "Kernel 51 - Erdos 243 SYLVESTER RIGIDITY r1 (S056, W56-4): the rigidity kernel — sylv (the pairwise a^2-a+1 recursion) + sylvProd/sylvNum (division-free complementary-sum form) + sylv_prod_succ (the recursion equivalence, full induction) + THE SYLVESTER TELESCOPE (Sum 1/sylv(i) over i<n + 1/P(n) = 1 in cross-multiplied Nat form — the classical identity, omega-shelled induction) + sylv_greedy_identity + THE GENERAL GREEDY WINDOW LAW (greedy_window: the ceiling law (a-1)p < q <= a*p via Nat.div_add_mod) + sylv_window (the super-Sylvester window edges) + THE FORCED-TERMINAL RIGIDITY (sylv_forced_terminal: every k, one-term completion of the exact k-prefix forces f = sylv k - 1; forced_terminal_42/6 instances) + two_term_one (the k=1 uniqueness d+e=de -> d=e=2) + the 14-conjunct board + the ternary bridge (lt_three_cases on every base-3 digit)"
         if: always()
         shell: bash
