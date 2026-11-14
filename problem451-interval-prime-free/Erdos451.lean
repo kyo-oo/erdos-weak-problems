@@ -527,6 +527,579 @@ theorem erdos451_k20 : 2 * 20 < 550 ∧
     · exact cov_decode 20 296 254 [23, 29, 31, 37] Erdos451Data.c_20_2 m (by omega) (by omega)
   exact final_helper 20 550 [23, 29, 31, 37] hpr hwin (by norm_num) (by norm_num) hw hcov
 
+/-! ## §7b THE EIGHT EXTENSION THEOREMS (k = 21..28, W62 + W63 volleys;
+original product formulation, unconditional: witness ∧ leastness). The
+certified frontier of this kernel is now k = 2..28: n_21 = 805,
+n_22 = 2691, n_23 = 1884, n_24 = 2664, n_25 = 7653, n_26 = 7654,
+n_27 = 36887, n_28 = 36888. Same §6 assembly machinery, same §5 decode
+toolkit, same dual-method machine certificate (battery451_ext_w63.py,
+triple-route GREEN). -/
+
+theorem erdos451_k21 : 2 * 21 < 805 ∧
+    (∀ q, q.Prime → 21 < q → q < 2 * 21 → ¬ q ∣ prodK 805 21) ∧
+    (∀ m, 2 * 21 < m → m < 805 → ∃ q, q.Prime ∧ 21 < q ∧ q < 2 * 21 ∧ q ∣ prodK m 21) := by
+  have hpr : ∀ q ∈ [23, 29, 31, 37, 41], q.Prime ∧ 21 < q ∧ q < 2 * 21 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 21 < q → q < 2 * 21 → q ∈ [23, 29, 31, 37, 41] :=
+    win_decode 21 [23, 29, 31, 37, 41] Erdos451Data.win_21
+  have hw : ∀ q ∈ [23, 29, 31, 37, 41], ¬ (1 ≤ 805 % q ∧ 805 % q ≤ 21) :=
+    wit_decode 21 805 [23, 29, 31, 37, 41] Erdos451Data.w_21
+  have hcov : ∀ m, 2 * 21 < m → m < 805 → ∃ q ∈ [23, 29, 31, 37, 41], 1 ≤ m % q ∧ m % q ≤ 21 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 543 ∨ 543 ≤ m) with h0 | h0
+    · exact cov_decode 21 43 500 [23, 29, 31, 37, 41] Erdos451Data.c_21_1 m (by omega) (by omega)
+    · exact cov_decode 21 543 262 [23, 29, 31, 37, 41] Erdos451Data.c_21_2 m (by omega) (by omega)
+  exact final_helper 21 805 [23, 29, 31, 37, 41] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k22 : 2 * 22 < 2691 ∧
+    (∀ q, q.Prime → 22 < q → q < 2 * 22 → ¬ q ∣ prodK 2691 22) ∧
+    (∀ m, 2 * 22 < m → m < 2691 → ∃ q, q.Prime ∧ 22 < q ∧ q < 2 * 22 ∧ q ∣ prodK m 22) := by
+  have hpr : ∀ q ∈ [23, 29, 31, 37, 41, 43], q.Prime ∧ 22 < q ∧ q < 2 * 22 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 22 < q → q < 2 * 22 → q ∈ [23, 29, 31, 37, 41, 43] :=
+    win_decode 22 [23, 29, 31, 37, 41, 43] Erdos451Data.win_22
+  have hw : ∀ q ∈ [23, 29, 31, 37, 41, 43], ¬ (1 ≤ 2691 % q ∧ 2691 % q ≤ 22) :=
+    wit_decode 22 2691 [23, 29, 31, 37, 41, 43] Erdos451Data.w_22
+  have hcov : ∀ m, 2 * 22 < m → m < 2691 → ∃ q ∈ [23, 29, 31, 37, 41, 43], 1 ≤ m % q ∧ m % q ≤ 22 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 1545 ∨ 1545 ≤ m) with h0 | h0
+    · rcases (by omega : m < 545 ∨ 545 ≤ m) with h1 | h1
+      · exact cov_decode 22 45 500 [23, 29, 31, 37, 41, 43] Erdos451Data.c_22_1 m (by omega) (by omega)
+      · rcases (by omega : m < 1045 ∨ 1045 ≤ m) with h2 | h2
+        · exact cov_decode 22 545 500 [23, 29, 31, 37, 41, 43] Erdos451Data.c_22_2 m (by omega) (by omega)
+        · exact cov_decode 22 1045 500 [23, 29, 31, 37, 41, 43] Erdos451Data.c_22_3 m (by omega) (by omega)
+    · rcases (by omega : m < 2045 ∨ 2045 ≤ m) with h1 | h1
+      · exact cov_decode 22 1545 500 [23, 29, 31, 37, 41, 43] Erdos451Data.c_22_4 m (by omega) (by omega)
+      · rcases (by omega : m < 2545 ∨ 2545 ≤ m) with h2 | h2
+        · exact cov_decode 22 2045 500 [23, 29, 31, 37, 41, 43] Erdos451Data.c_22_5 m (by omega) (by omega)
+        · exact cov_decode 22 2545 146 [23, 29, 31, 37, 41, 43] Erdos451Data.c_22_6 m (by omega) (by omega)
+  exact final_helper 22 2691 [23, 29, 31, 37, 41, 43] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k23 : 2 * 23 < 1884 ∧
+    (∀ q, q.Prime → 23 < q → q < 2 * 23 → ¬ q ∣ prodK 1884 23) ∧
+    (∀ m, 2 * 23 < m → m < 1884 → ∃ q, q.Prime ∧ 23 < q ∧ q < 2 * 23 ∧ q ∣ prodK m 23) := by
+  have hpr : ∀ q ∈ [29, 31, 37, 41, 43], q.Prime ∧ 23 < q ∧ q < 2 * 23 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 23 < q → q < 2 * 23 → q ∈ [29, 31, 37, 41, 43] :=
+    win_decode 23 [29, 31, 37, 41, 43] Erdos451Data.win_23
+  have hw : ∀ q ∈ [29, 31, 37, 41, 43], ¬ (1 ≤ 1884 % q ∧ 1884 % q ≤ 23) :=
+    wit_decode 23 1884 [29, 31, 37, 41, 43] Erdos451Data.w_23
+  have hcov : ∀ m, 2 * 23 < m → m < 1884 → ∃ q ∈ [29, 31, 37, 41, 43], 1 ≤ m % q ∧ m % q ≤ 23 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 1047 ∨ 1047 ≤ m) with h0 | h0
+    · rcases (by omega : m < 547 ∨ 547 ≤ m) with h1 | h1
+      · exact cov_decode 23 47 500 [29, 31, 37, 41, 43] Erdos451Data.c_23_1 m (by omega) (by omega)
+      · exact cov_decode 23 547 500 [29, 31, 37, 41, 43] Erdos451Data.c_23_2 m (by omega) (by omega)
+    · rcases (by omega : m < 1547 ∨ 1547 ≤ m) with h1 | h1
+      · exact cov_decode 23 1047 500 [29, 31, 37, 41, 43] Erdos451Data.c_23_3 m (by omega) (by omega)
+      · exact cov_decode 23 1547 337 [29, 31, 37, 41, 43] Erdos451Data.c_23_4 m (by omega) (by omega)
+  exact final_helper 23 1884 [29, 31, 37, 41, 43] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k24 : 2 * 24 < 2664 ∧
+    (∀ q, q.Prime → 24 < q → q < 2 * 24 → ¬ q ∣ prodK 2664 24) ∧
+    (∀ m, 2 * 24 < m → m < 2664 → ∃ q, q.Prime ∧ 24 < q ∧ q < 2 * 24 ∧ q ∣ prodK m 24) := by
+  have hpr : ∀ q ∈ [29, 31, 37, 41, 43, 47], q.Prime ∧ 24 < q ∧ q < 2 * 24 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 24 < q → q < 2 * 24 → q ∈ [29, 31, 37, 41, 43, 47] :=
+    win_decode 24 [29, 31, 37, 41, 43, 47] Erdos451Data.win_24
+  have hw : ∀ q ∈ [29, 31, 37, 41, 43, 47], ¬ (1 ≤ 2664 % q ∧ 2664 % q ≤ 24) :=
+    wit_decode 24 2664 [29, 31, 37, 41, 43, 47] Erdos451Data.w_24
+  have hcov : ∀ m, 2 * 24 < m → m < 2664 → ∃ q ∈ [29, 31, 37, 41, 43, 47], 1 ≤ m % q ∧ m % q ≤ 24 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 1549 ∨ 1549 ≤ m) with h0 | h0
+    · rcases (by omega : m < 549 ∨ 549 ≤ m) with h1 | h1
+      · exact cov_decode 24 49 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_24_1 m (by omega) (by omega)
+      · rcases (by omega : m < 1049 ∨ 1049 ≤ m) with h2 | h2
+        · exact cov_decode 24 549 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_24_2 m (by omega) (by omega)
+        · exact cov_decode 24 1049 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_24_3 m (by omega) (by omega)
+    · rcases (by omega : m < 2049 ∨ 2049 ≤ m) with h1 | h1
+      · exact cov_decode 24 1549 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_24_4 m (by omega) (by omega)
+      · rcases (by omega : m < 2549 ∨ 2549 ≤ m) with h2 | h2
+        · exact cov_decode 24 2049 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_24_5 m (by omega) (by omega)
+        · exact cov_decode 24 2549 115 [29, 31, 37, 41, 43, 47] Erdos451Data.c_24_6 m (by omega) (by omega)
+  exact final_helper 24 2664 [29, 31, 37, 41, 43, 47] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k25 : 2 * 25 < 7653 ∧
+    (∀ q, q.Prime → 25 < q → q < 2 * 25 → ¬ q ∣ prodK 7653 25) ∧
+    (∀ m, 2 * 25 < m → m < 7653 → ∃ q, q.Prime ∧ 25 < q ∧ q < 2 * 25 ∧ q ∣ prodK m 25) := by
+  have hpr : ∀ q ∈ [29, 31, 37, 41, 43, 47], q.Prime ∧ 25 < q ∧ q < 2 * 25 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 25 < q → q < 2 * 25 → q ∈ [29, 31, 37, 41, 43, 47] :=
+    win_decode 25 [29, 31, 37, 41, 43, 47] Erdos451Data.win_25
+  have hw : ∀ q ∈ [29, 31, 37, 41, 43, 47], ¬ (1 ≤ 7653 % q ∧ 7653 % q ≤ 25) :=
+    wit_decode 25 7653 [29, 31, 37, 41, 43, 47] Erdos451Data.w_25
+  have hcov : ∀ m, 2 * 25 < m → m < 7653 → ∃ q ∈ [29, 31, 37, 41, 43, 47], 1 ≤ m % q ∧ m % q ≤ 25 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 4051 ∨ 4051 ≤ m) with h0 | h0
+    · rcases (by omega : m < 2051 ∨ 2051 ≤ m) with h1 | h1
+      · rcases (by omega : m < 1051 ∨ 1051 ≤ m) with h2 | h2
+        · rcases (by omega : m < 551 ∨ 551 ≤ m) with h3 | h3
+          · exact cov_decode 25 51 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_1 m (by omega) (by omega)
+          · exact cov_decode 25 551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_2 m (by omega) (by omega)
+        · rcases (by omega : m < 1551 ∨ 1551 ≤ m) with h3 | h3
+          · exact cov_decode 25 1051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_3 m (by omega) (by omega)
+          · exact cov_decode 25 1551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_4 m (by omega) (by omega)
+      · rcases (by omega : m < 3051 ∨ 3051 ≤ m) with h2 | h2
+        · rcases (by omega : m < 2551 ∨ 2551 ≤ m) with h3 | h3
+          · exact cov_decode 25 2051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_5 m (by omega) (by omega)
+          · exact cov_decode 25 2551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_6 m (by omega) (by omega)
+        · rcases (by omega : m < 3551 ∨ 3551 ≤ m) with h3 | h3
+          · exact cov_decode 25 3051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_7 m (by omega) (by omega)
+          · exact cov_decode 25 3551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_8 m (by omega) (by omega)
+    · rcases (by omega : m < 6051 ∨ 6051 ≤ m) with h1 | h1
+      · rcases (by omega : m < 5051 ∨ 5051 ≤ m) with h2 | h2
+        · rcases (by omega : m < 4551 ∨ 4551 ≤ m) with h3 | h3
+          · exact cov_decode 25 4051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_9 m (by omega) (by omega)
+          · exact cov_decode 25 4551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_10 m (by omega) (by omega)
+        · rcases (by omega : m < 5551 ∨ 5551 ≤ m) with h3 | h3
+          · exact cov_decode 25 5051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_11 m (by omega) (by omega)
+          · exact cov_decode 25 5551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_12 m (by omega) (by omega)
+      · rcases (by omega : m < 7051 ∨ 7051 ≤ m) with h2 | h2
+        · rcases (by omega : m < 6551 ∨ 6551 ≤ m) with h3 | h3
+          · exact cov_decode 25 6051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_13 m (by omega) (by omega)
+          · exact cov_decode 25 6551 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_14 m (by omega) (by omega)
+        · rcases (by omega : m < 7551 ∨ 7551 ≤ m) with h3 | h3
+          · exact cov_decode 25 7051 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_15 m (by omega) (by omega)
+          · exact cov_decode 25 7551 102 [29, 31, 37, 41, 43, 47] Erdos451Data.c_25_16 m (by omega) (by omega)
+  exact final_helper 25 7653 [29, 31, 37, 41, 43, 47] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k26 : 2 * 26 < 7654 ∧
+    (∀ q, q.Prime → 26 < q → q < 2 * 26 → ¬ q ∣ prodK 7654 26) ∧
+    (∀ m, 2 * 26 < m → m < 7654 → ∃ q, q.Prime ∧ 26 < q ∧ q < 2 * 26 ∧ q ∣ prodK m 26) := by
+  have hpr : ∀ q ∈ [29, 31, 37, 41, 43, 47], q.Prime ∧ 26 < q ∧ q < 2 * 26 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 26 < q → q < 2 * 26 → q ∈ [29, 31, 37, 41, 43, 47] :=
+    win_decode 26 [29, 31, 37, 41, 43, 47] Erdos451Data.win_26
+  have hw : ∀ q ∈ [29, 31, 37, 41, 43, 47], ¬ (1 ≤ 7654 % q ∧ 7654 % q ≤ 26) :=
+    wit_decode 26 7654 [29, 31, 37, 41, 43, 47] Erdos451Data.w_26
+  have hcov : ∀ m, 2 * 26 < m → m < 7654 → ∃ q ∈ [29, 31, 37, 41, 43, 47], 1 ≤ m % q ∧ m % q ≤ 26 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 4053 ∨ 4053 ≤ m) with h0 | h0
+    · rcases (by omega : m < 2053 ∨ 2053 ≤ m) with h1 | h1
+      · rcases (by omega : m < 1053 ∨ 1053 ≤ m) with h2 | h2
+        · rcases (by omega : m < 553 ∨ 553 ≤ m) with h3 | h3
+          · exact cov_decode 26 53 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_1 m (by omega) (by omega)
+          · exact cov_decode 26 553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_2 m (by omega) (by omega)
+        · rcases (by omega : m < 1553 ∨ 1553 ≤ m) with h3 | h3
+          · exact cov_decode 26 1053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_3 m (by omega) (by omega)
+          · exact cov_decode 26 1553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_4 m (by omega) (by omega)
+      · rcases (by omega : m < 3053 ∨ 3053 ≤ m) with h2 | h2
+        · rcases (by omega : m < 2553 ∨ 2553 ≤ m) with h3 | h3
+          · exact cov_decode 26 2053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_5 m (by omega) (by omega)
+          · exact cov_decode 26 2553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_6 m (by omega) (by omega)
+        · rcases (by omega : m < 3553 ∨ 3553 ≤ m) with h3 | h3
+          · exact cov_decode 26 3053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_7 m (by omega) (by omega)
+          · exact cov_decode 26 3553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_8 m (by omega) (by omega)
+    · rcases (by omega : m < 6053 ∨ 6053 ≤ m) with h1 | h1
+      · rcases (by omega : m < 5053 ∨ 5053 ≤ m) with h2 | h2
+        · rcases (by omega : m < 4553 ∨ 4553 ≤ m) with h3 | h3
+          · exact cov_decode 26 4053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_9 m (by omega) (by omega)
+          · exact cov_decode 26 4553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_10 m (by omega) (by omega)
+        · rcases (by omega : m < 5553 ∨ 5553 ≤ m) with h3 | h3
+          · exact cov_decode 26 5053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_11 m (by omega) (by omega)
+          · exact cov_decode 26 5553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_12 m (by omega) (by omega)
+      · rcases (by omega : m < 7053 ∨ 7053 ≤ m) with h2 | h2
+        · rcases (by omega : m < 6553 ∨ 6553 ≤ m) with h3 | h3
+          · exact cov_decode 26 6053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_13 m (by omega) (by omega)
+          · exact cov_decode 26 6553 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_14 m (by omega) (by omega)
+        · rcases (by omega : m < 7553 ∨ 7553 ≤ m) with h3 | h3
+          · exact cov_decode 26 7053 500 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_15 m (by omega) (by omega)
+          · exact cov_decode 26 7553 101 [29, 31, 37, 41, 43, 47] Erdos451Data.c_26_16 m (by omega) (by omega)
+  exact final_helper 26 7654 [29, 31, 37, 41, 43, 47] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k27 : 2 * 27 < 36887 ∧
+    (∀ q, q.Prime → 27 < q → q < 2 * 27 → ¬ q ∣ prodK 36887 27) ∧
+    (∀ m, 2 * 27 < m → m < 36887 → ∃ q, q.Prime ∧ 27 < q ∧ q < 2 * 27 ∧ q ∣ prodK m 27) := by
+  have hpr : ∀ q ∈ [29, 31, 37, 41, 43, 47, 53], q.Prime ∧ 27 < q ∧ q < 2 * 27 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 27 < q → q < 2 * 27 → q ∈ [29, 31, 37, 41, 43, 47, 53] :=
+    win_decode 27 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.win_27
+  have hw : ∀ q ∈ [29, 31, 37, 41, 43, 47, 53], ¬ (1 ≤ 36887 % q ∧ 36887 % q ≤ 27) :=
+    wit_decode 27 36887 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.w_27
+  have hcov : ∀ m, 2 * 27 < m → m < 36887 → ∃ q ∈ [29, 31, 37, 41, 43, 47, 53], 1 ≤ m % q ∧ m % q ≤ 27 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 18555 ∨ 18555 ≤ m) with h0 | h0
+    · rcases (by omega : m < 9055 ∨ 9055 ≤ m) with h1 | h1
+      · rcases (by omega : m < 4555 ∨ 4555 ≤ m) with h2 | h2
+        · rcases (by omega : m < 2055 ∨ 2055 ≤ m) with h3 | h3
+          · rcases (by omega : m < 1055 ∨ 1055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 555 ∨ 555 ≤ m) with h5 | h5
+              · exact cov_decode 27 55 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_1 m (by omega) (by omega)
+              · exact cov_decode 27 555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_2 m (by omega) (by omega)
+            · rcases (by omega : m < 1555 ∨ 1555 ≤ m) with h5 | h5
+              · exact cov_decode 27 1055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_3 m (by omega) (by omega)
+              · exact cov_decode 27 1555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_4 m (by omega) (by omega)
+          · rcases (by omega : m < 3055 ∨ 3055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 2555 ∨ 2555 ≤ m) with h5 | h5
+              · exact cov_decode 27 2055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_5 m (by omega) (by omega)
+              · exact cov_decode 27 2555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_6 m (by omega) (by omega)
+            · rcases (by omega : m < 3555 ∨ 3555 ≤ m) with h5 | h5
+              · exact cov_decode 27 3055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_7 m (by omega) (by omega)
+              · rcases (by omega : m < 4055 ∨ 4055 ≤ m) with h6 | h6
+                · exact cov_decode 27 3555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_8 m (by omega) (by omega)
+                · exact cov_decode 27 4055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_9 m (by omega) (by omega)
+        · rcases (by omega : m < 6555 ∨ 6555 ≤ m) with h3 | h3
+          · rcases (by omega : m < 5555 ∨ 5555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 5055 ∨ 5055 ≤ m) with h5 | h5
+              · exact cov_decode 27 4555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_10 m (by omega) (by omega)
+              · exact cov_decode 27 5055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_11 m (by omega) (by omega)
+            · rcases (by omega : m < 6055 ∨ 6055 ≤ m) with h5 | h5
+              · exact cov_decode 27 5555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_12 m (by omega) (by omega)
+              · exact cov_decode 27 6055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_13 m (by omega) (by omega)
+          · rcases (by omega : m < 7555 ∨ 7555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 7055 ∨ 7055 ≤ m) with h5 | h5
+              · exact cov_decode 27 6555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_14 m (by omega) (by omega)
+              · exact cov_decode 27 7055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_15 m (by omega) (by omega)
+            · rcases (by omega : m < 8055 ∨ 8055 ≤ m) with h5 | h5
+              · exact cov_decode 27 7555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_16 m (by omega) (by omega)
+              · rcases (by omega : m < 8555 ∨ 8555 ≤ m) with h6 | h6
+                · exact cov_decode 27 8055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_17 m (by omega) (by omega)
+                · exact cov_decode 27 8555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_18 m (by omega) (by omega)
+      · rcases (by omega : m < 13555 ∨ 13555 ≤ m) with h2 | h2
+        · rcases (by omega : m < 11055 ∨ 11055 ≤ m) with h3 | h3
+          · rcases (by omega : m < 10055 ∨ 10055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 9555 ∨ 9555 ≤ m) with h5 | h5
+              · exact cov_decode 27 9055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_19 m (by omega) (by omega)
+              · exact cov_decode 27 9555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_20 m (by omega) (by omega)
+            · rcases (by omega : m < 10555 ∨ 10555 ≤ m) with h5 | h5
+              · exact cov_decode 27 10055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_21 m (by omega) (by omega)
+              · exact cov_decode 27 10555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_22 m (by omega) (by omega)
+          · rcases (by omega : m < 12055 ∨ 12055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 11555 ∨ 11555 ≤ m) with h5 | h5
+              · exact cov_decode 27 11055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_23 m (by omega) (by omega)
+              · exact cov_decode 27 11555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_24 m (by omega) (by omega)
+            · rcases (by omega : m < 12555 ∨ 12555 ≤ m) with h5 | h5
+              · exact cov_decode 27 12055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_25 m (by omega) (by omega)
+              · rcases (by omega : m < 13055 ∨ 13055 ≤ m) with h6 | h6
+                · exact cov_decode 27 12555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_26 m (by omega) (by omega)
+                · exact cov_decode 27 13055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_27 m (by omega) (by omega)
+        · rcases (by omega : m < 16055 ∨ 16055 ≤ m) with h3 | h3
+          · rcases (by omega : m < 14555 ∨ 14555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 14055 ∨ 14055 ≤ m) with h5 | h5
+              · exact cov_decode 27 13555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_28 m (by omega) (by omega)
+              · exact cov_decode 27 14055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_29 m (by omega) (by omega)
+            · rcases (by omega : m < 15055 ∨ 15055 ≤ m) with h5 | h5
+              · exact cov_decode 27 14555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_30 m (by omega) (by omega)
+              · rcases (by omega : m < 15555 ∨ 15555 ≤ m) with h6 | h6
+                · exact cov_decode 27 15055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_31 m (by omega) (by omega)
+                · exact cov_decode 27 15555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_32 m (by omega) (by omega)
+          · rcases (by omega : m < 17055 ∨ 17055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 16555 ∨ 16555 ≤ m) with h5 | h5
+              · exact cov_decode 27 16055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_33 m (by omega) (by omega)
+              · exact cov_decode 27 16555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_34 m (by omega) (by omega)
+            · rcases (by omega : m < 17555 ∨ 17555 ≤ m) with h5 | h5
+              · exact cov_decode 27 17055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_35 m (by omega) (by omega)
+              · rcases (by omega : m < 18055 ∨ 18055 ≤ m) with h6 | h6
+                · exact cov_decode 27 17555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_36 m (by omega) (by omega)
+                · exact cov_decode 27 18055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_37 m (by omega) (by omega)
+    · rcases (by omega : m < 27555 ∨ 27555 ≤ m) with h1 | h1
+      · rcases (by omega : m < 23055 ∨ 23055 ≤ m) with h2 | h2
+        · rcases (by omega : m < 20555 ∨ 20555 ≤ m) with h3 | h3
+          · rcases (by omega : m < 19555 ∨ 19555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 19055 ∨ 19055 ≤ m) with h5 | h5
+              · exact cov_decode 27 18555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_38 m (by omega) (by omega)
+              · exact cov_decode 27 19055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_39 m (by omega) (by omega)
+            · rcases (by omega : m < 20055 ∨ 20055 ≤ m) with h5 | h5
+              · exact cov_decode 27 19555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_40 m (by omega) (by omega)
+              · exact cov_decode 27 20055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_41 m (by omega) (by omega)
+          · rcases (by omega : m < 21555 ∨ 21555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 21055 ∨ 21055 ≤ m) with h5 | h5
+              · exact cov_decode 27 20555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_42 m (by omega) (by omega)
+              · exact cov_decode 27 21055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_43 m (by omega) (by omega)
+            · rcases (by omega : m < 22055 ∨ 22055 ≤ m) with h5 | h5
+              · exact cov_decode 27 21555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_44 m (by omega) (by omega)
+              · rcases (by omega : m < 22555 ∨ 22555 ≤ m) with h6 | h6
+                · exact cov_decode 27 22055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_45 m (by omega) (by omega)
+                · exact cov_decode 27 22555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_46 m (by omega) (by omega)
+        · rcases (by omega : m < 25055 ∨ 25055 ≤ m) with h3 | h3
+          · rcases (by omega : m < 24055 ∨ 24055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 23555 ∨ 23555 ≤ m) with h5 | h5
+              · exact cov_decode 27 23055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_47 m (by omega) (by omega)
+              · exact cov_decode 27 23555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_48 m (by omega) (by omega)
+            · rcases (by omega : m < 24555 ∨ 24555 ≤ m) with h5 | h5
+              · exact cov_decode 27 24055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_49 m (by omega) (by omega)
+              · exact cov_decode 27 24555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_50 m (by omega) (by omega)
+          · rcases (by omega : m < 26055 ∨ 26055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 25555 ∨ 25555 ≤ m) with h5 | h5
+              · exact cov_decode 27 25055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_51 m (by omega) (by omega)
+              · exact cov_decode 27 25555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_52 m (by omega) (by omega)
+            · rcases (by omega : m < 26555 ∨ 26555 ≤ m) with h5 | h5
+              · exact cov_decode 27 26055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_53 m (by omega) (by omega)
+              · rcases (by omega : m < 27055 ∨ 27055 ≤ m) with h6 | h6
+                · exact cov_decode 27 26555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_54 m (by omega) (by omega)
+                · exact cov_decode 27 27055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_55 m (by omega) (by omega)
+      · rcases (by omega : m < 32055 ∨ 32055 ≤ m) with h2 | h2
+        · rcases (by omega : m < 29555 ∨ 29555 ≤ m) with h3 | h3
+          · rcases (by omega : m < 28555 ∨ 28555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 28055 ∨ 28055 ≤ m) with h5 | h5
+              · exact cov_decode 27 27555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_56 m (by omega) (by omega)
+              · exact cov_decode 27 28055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_57 m (by omega) (by omega)
+            · rcases (by omega : m < 29055 ∨ 29055 ≤ m) with h5 | h5
+              · exact cov_decode 27 28555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_58 m (by omega) (by omega)
+              · exact cov_decode 27 29055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_59 m (by omega) (by omega)
+          · rcases (by omega : m < 30555 ∨ 30555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 30055 ∨ 30055 ≤ m) with h5 | h5
+              · exact cov_decode 27 29555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_60 m (by omega) (by omega)
+              · exact cov_decode 27 30055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_61 m (by omega) (by omega)
+            · rcases (by omega : m < 31055 ∨ 31055 ≤ m) with h5 | h5
+              · exact cov_decode 27 30555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_62 m (by omega) (by omega)
+              · rcases (by omega : m < 31555 ∨ 31555 ≤ m) with h6 | h6
+                · exact cov_decode 27 31055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_63 m (by omega) (by omega)
+                · exact cov_decode 27 31555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_64 m (by omega) (by omega)
+        · rcases (by omega : m < 34555 ∨ 34555 ≤ m) with h3 | h3
+          · rcases (by omega : m < 33055 ∨ 33055 ≤ m) with h4 | h4
+            · rcases (by omega : m < 32555 ∨ 32555 ≤ m) with h5 | h5
+              · exact cov_decode 27 32055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_65 m (by omega) (by omega)
+              · exact cov_decode 27 32555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_66 m (by omega) (by omega)
+            · rcases (by omega : m < 33555 ∨ 33555 ≤ m) with h5 | h5
+              · exact cov_decode 27 33055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_67 m (by omega) (by omega)
+              · rcases (by omega : m < 34055 ∨ 34055 ≤ m) with h6 | h6
+                · exact cov_decode 27 33555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_68 m (by omega) (by omega)
+                · exact cov_decode 27 34055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_69 m (by omega) (by omega)
+          · rcases (by omega : m < 35555 ∨ 35555 ≤ m) with h4 | h4
+            · rcases (by omega : m < 35055 ∨ 35055 ≤ m) with h5 | h5
+              · exact cov_decode 27 34555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_70 m (by omega) (by omega)
+              · exact cov_decode 27 35055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_71 m (by omega) (by omega)
+            · rcases (by omega : m < 36055 ∨ 36055 ≤ m) with h5 | h5
+              · exact cov_decode 27 35555 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_72 m (by omega) (by omega)
+              · rcases (by omega : m < 36555 ∨ 36555 ≤ m) with h6 | h6
+                · exact cov_decode 27 36055 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_73 m (by omega) (by omega)
+                · exact cov_decode 27 36555 332 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_27_74 m (by omega) (by omega)
+  exact final_helper 27 36887 [29, 31, 37, 41, 43, 47, 53] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+theorem erdos451_k28 : 2 * 28 < 36888 ∧
+    (∀ q, q.Prime → 28 < q → q < 2 * 28 → ¬ q ∣ prodK 36888 28) ∧
+    (∀ m, 2 * 28 < m → m < 36888 → ∃ q, q.Prime ∧ 28 < q ∧ q < 2 * 28 ∧ q ∣ prodK m 28) := by
+  have hpr : ∀ q ∈ [29, 31, 37, 41, 43, 47, 53], q.Prime ∧ 28 < q ∧ q < 2 * 28 := by
+    intro q hq
+    simp only [List.mem_cons, List.mem_nil_iff] at hq
+    rcases hq with rfl | rfl | rfl | rfl | rfl | rfl | rfl | hfalse
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact ⟨by norm_num, by norm_num, by norm_num⟩
+    · exact hfalse.elim
+  have hwin : ∀ q, q.Prime → 28 < q → q < 2 * 28 → q ∈ [29, 31, 37, 41, 43, 47, 53] :=
+    win_decode 28 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.win_28
+  have hw : ∀ q ∈ [29, 31, 37, 41, 43, 47, 53], ¬ (1 ≤ 36888 % q ∧ 36888 % q ≤ 28) :=
+    wit_decode 28 36888 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.w_28
+  have hcov : ∀ m, 2 * 28 < m → m < 36888 → ∃ q ∈ [29, 31, 37, 41, 43, 47, 53], 1 ≤ m % q ∧ m % q ≤ 28 := by
+    intro m hm1 hm2
+    rcases (by omega : m < 18557 ∨ 18557 ≤ m) with h0 | h0
+    · rcases (by omega : m < 9057 ∨ 9057 ≤ m) with h1 | h1
+      · rcases (by omega : m < 4557 ∨ 4557 ≤ m) with h2 | h2
+        · rcases (by omega : m < 2057 ∨ 2057 ≤ m) with h3 | h3
+          · rcases (by omega : m < 1057 ∨ 1057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 557 ∨ 557 ≤ m) with h5 | h5
+              · exact cov_decode 28 57 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_1 m (by omega) (by omega)
+              · exact cov_decode 28 557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_2 m (by omega) (by omega)
+            · rcases (by omega : m < 1557 ∨ 1557 ≤ m) with h5 | h5
+              · exact cov_decode 28 1057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_3 m (by omega) (by omega)
+              · exact cov_decode 28 1557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_4 m (by omega) (by omega)
+          · rcases (by omega : m < 3057 ∨ 3057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 2557 ∨ 2557 ≤ m) with h5 | h5
+              · exact cov_decode 28 2057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_5 m (by omega) (by omega)
+              · exact cov_decode 28 2557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_6 m (by omega) (by omega)
+            · rcases (by omega : m < 3557 ∨ 3557 ≤ m) with h5 | h5
+              · exact cov_decode 28 3057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_7 m (by omega) (by omega)
+              · rcases (by omega : m < 4057 ∨ 4057 ≤ m) with h6 | h6
+                · exact cov_decode 28 3557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_8 m (by omega) (by omega)
+                · exact cov_decode 28 4057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_9 m (by omega) (by omega)
+        · rcases (by omega : m < 6557 ∨ 6557 ≤ m) with h3 | h3
+          · rcases (by omega : m < 5557 ∨ 5557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 5057 ∨ 5057 ≤ m) with h5 | h5
+              · exact cov_decode 28 4557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_10 m (by omega) (by omega)
+              · exact cov_decode 28 5057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_11 m (by omega) (by omega)
+            · rcases (by omega : m < 6057 ∨ 6057 ≤ m) with h5 | h5
+              · exact cov_decode 28 5557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_12 m (by omega) (by omega)
+              · exact cov_decode 28 6057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_13 m (by omega) (by omega)
+          · rcases (by omega : m < 7557 ∨ 7557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 7057 ∨ 7057 ≤ m) with h5 | h5
+              · exact cov_decode 28 6557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_14 m (by omega) (by omega)
+              · exact cov_decode 28 7057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_15 m (by omega) (by omega)
+            · rcases (by omega : m < 8057 ∨ 8057 ≤ m) with h5 | h5
+              · exact cov_decode 28 7557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_16 m (by omega) (by omega)
+              · rcases (by omega : m < 8557 ∨ 8557 ≤ m) with h6 | h6
+                · exact cov_decode 28 8057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_17 m (by omega) (by omega)
+                · exact cov_decode 28 8557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_18 m (by omega) (by omega)
+      · rcases (by omega : m < 13557 ∨ 13557 ≤ m) with h2 | h2
+        · rcases (by omega : m < 11057 ∨ 11057 ≤ m) with h3 | h3
+          · rcases (by omega : m < 10057 ∨ 10057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 9557 ∨ 9557 ≤ m) with h5 | h5
+              · exact cov_decode 28 9057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_19 m (by omega) (by omega)
+              · exact cov_decode 28 9557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_20 m (by omega) (by omega)
+            · rcases (by omega : m < 10557 ∨ 10557 ≤ m) with h5 | h5
+              · exact cov_decode 28 10057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_21 m (by omega) (by omega)
+              · exact cov_decode 28 10557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_22 m (by omega) (by omega)
+          · rcases (by omega : m < 12057 ∨ 12057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 11557 ∨ 11557 ≤ m) with h5 | h5
+              · exact cov_decode 28 11057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_23 m (by omega) (by omega)
+              · exact cov_decode 28 11557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_24 m (by omega) (by omega)
+            · rcases (by omega : m < 12557 ∨ 12557 ≤ m) with h5 | h5
+              · exact cov_decode 28 12057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_25 m (by omega) (by omega)
+              · rcases (by omega : m < 13057 ∨ 13057 ≤ m) with h6 | h6
+                · exact cov_decode 28 12557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_26 m (by omega) (by omega)
+                · exact cov_decode 28 13057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_27 m (by omega) (by omega)
+        · rcases (by omega : m < 16057 ∨ 16057 ≤ m) with h3 | h3
+          · rcases (by omega : m < 14557 ∨ 14557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 14057 ∨ 14057 ≤ m) with h5 | h5
+              · exact cov_decode 28 13557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_28 m (by omega) (by omega)
+              · exact cov_decode 28 14057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_29 m (by omega) (by omega)
+            · rcases (by omega : m < 15057 ∨ 15057 ≤ m) with h5 | h5
+              · exact cov_decode 28 14557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_30 m (by omega) (by omega)
+              · rcases (by omega : m < 15557 ∨ 15557 ≤ m) with h6 | h6
+                · exact cov_decode 28 15057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_31 m (by omega) (by omega)
+                · exact cov_decode 28 15557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_32 m (by omega) (by omega)
+          · rcases (by omega : m < 17057 ∨ 17057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 16557 ∨ 16557 ≤ m) with h5 | h5
+              · exact cov_decode 28 16057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_33 m (by omega) (by omega)
+              · exact cov_decode 28 16557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_34 m (by omega) (by omega)
+            · rcases (by omega : m < 17557 ∨ 17557 ≤ m) with h5 | h5
+              · exact cov_decode 28 17057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_35 m (by omega) (by omega)
+              · rcases (by omega : m < 18057 ∨ 18057 ≤ m) with h6 | h6
+                · exact cov_decode 28 17557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_36 m (by omega) (by omega)
+                · exact cov_decode 28 18057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_37 m (by omega) (by omega)
+    · rcases (by omega : m < 27557 ∨ 27557 ≤ m) with h1 | h1
+      · rcases (by omega : m < 23057 ∨ 23057 ≤ m) with h2 | h2
+        · rcases (by omega : m < 20557 ∨ 20557 ≤ m) with h3 | h3
+          · rcases (by omega : m < 19557 ∨ 19557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 19057 ∨ 19057 ≤ m) with h5 | h5
+              · exact cov_decode 28 18557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_38 m (by omega) (by omega)
+              · exact cov_decode 28 19057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_39 m (by omega) (by omega)
+            · rcases (by omega : m < 20057 ∨ 20057 ≤ m) with h5 | h5
+              · exact cov_decode 28 19557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_40 m (by omega) (by omega)
+              · exact cov_decode 28 20057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_41 m (by omega) (by omega)
+          · rcases (by omega : m < 21557 ∨ 21557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 21057 ∨ 21057 ≤ m) with h5 | h5
+              · exact cov_decode 28 20557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_42 m (by omega) (by omega)
+              · exact cov_decode 28 21057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_43 m (by omega) (by omega)
+            · rcases (by omega : m < 22057 ∨ 22057 ≤ m) with h5 | h5
+              · exact cov_decode 28 21557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_44 m (by omega) (by omega)
+              · rcases (by omega : m < 22557 ∨ 22557 ≤ m) with h6 | h6
+                · exact cov_decode 28 22057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_45 m (by omega) (by omega)
+                · exact cov_decode 28 22557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_46 m (by omega) (by omega)
+        · rcases (by omega : m < 25057 ∨ 25057 ≤ m) with h3 | h3
+          · rcases (by omega : m < 24057 ∨ 24057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 23557 ∨ 23557 ≤ m) with h5 | h5
+              · exact cov_decode 28 23057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_47 m (by omega) (by omega)
+              · exact cov_decode 28 23557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_48 m (by omega) (by omega)
+            · rcases (by omega : m < 24557 ∨ 24557 ≤ m) with h5 | h5
+              · exact cov_decode 28 24057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_49 m (by omega) (by omega)
+              · exact cov_decode 28 24557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_50 m (by omega) (by omega)
+          · rcases (by omega : m < 26057 ∨ 26057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 25557 ∨ 25557 ≤ m) with h5 | h5
+              · exact cov_decode 28 25057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_51 m (by omega) (by omega)
+              · exact cov_decode 28 25557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_52 m (by omega) (by omega)
+            · rcases (by omega : m < 26557 ∨ 26557 ≤ m) with h5 | h5
+              · exact cov_decode 28 26057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_53 m (by omega) (by omega)
+              · rcases (by omega : m < 27057 ∨ 27057 ≤ m) with h6 | h6
+                · exact cov_decode 28 26557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_54 m (by omega) (by omega)
+                · exact cov_decode 28 27057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_55 m (by omega) (by omega)
+      · rcases (by omega : m < 32057 ∨ 32057 ≤ m) with h2 | h2
+        · rcases (by omega : m < 29557 ∨ 29557 ≤ m) with h3 | h3
+          · rcases (by omega : m < 28557 ∨ 28557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 28057 ∨ 28057 ≤ m) with h5 | h5
+              · exact cov_decode 28 27557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_56 m (by omega) (by omega)
+              · exact cov_decode 28 28057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_57 m (by omega) (by omega)
+            · rcases (by omega : m < 29057 ∨ 29057 ≤ m) with h5 | h5
+              · exact cov_decode 28 28557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_58 m (by omega) (by omega)
+              · exact cov_decode 28 29057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_59 m (by omega) (by omega)
+          · rcases (by omega : m < 30557 ∨ 30557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 30057 ∨ 30057 ≤ m) with h5 | h5
+              · exact cov_decode 28 29557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_60 m (by omega) (by omega)
+              · exact cov_decode 28 30057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_61 m (by omega) (by omega)
+            · rcases (by omega : m < 31057 ∨ 31057 ≤ m) with h5 | h5
+              · exact cov_decode 28 30557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_62 m (by omega) (by omega)
+              · rcases (by omega : m < 31557 ∨ 31557 ≤ m) with h6 | h6
+                · exact cov_decode 28 31057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_63 m (by omega) (by omega)
+                · exact cov_decode 28 31557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_64 m (by omega) (by omega)
+        · rcases (by omega : m < 34557 ∨ 34557 ≤ m) with h3 | h3
+          · rcases (by omega : m < 33057 ∨ 33057 ≤ m) with h4 | h4
+            · rcases (by omega : m < 32557 ∨ 32557 ≤ m) with h5 | h5
+              · exact cov_decode 28 32057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_65 m (by omega) (by omega)
+              · exact cov_decode 28 32557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_66 m (by omega) (by omega)
+            · rcases (by omega : m < 33557 ∨ 33557 ≤ m) with h5 | h5
+              · exact cov_decode 28 33057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_67 m (by omega) (by omega)
+              · rcases (by omega : m < 34057 ∨ 34057 ≤ m) with h6 | h6
+                · exact cov_decode 28 33557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_68 m (by omega) (by omega)
+                · exact cov_decode 28 34057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_69 m (by omega) (by omega)
+          · rcases (by omega : m < 35557 ∨ 35557 ≤ m) with h4 | h4
+            · rcases (by omega : m < 35057 ∨ 35057 ≤ m) with h5 | h5
+              · exact cov_decode 28 34557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_70 m (by omega) (by omega)
+              · exact cov_decode 28 35057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_71 m (by omega) (by omega)
+            · rcases (by omega : m < 36057 ∨ 36057 ≤ m) with h5 | h5
+              · exact cov_decode 28 35557 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_72 m (by omega) (by omega)
+              · rcases (by omega : m < 36557 ∨ 36557 ≤ m) with h6 | h6
+                · exact cov_decode 28 36057 500 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_73 m (by omega) (by omega)
+                · exact cov_decode 28 36557 331 [29, 31, 37, 41, 43, 47, 53] Erdos451Data.c_28_74 m (by omega) (by omega)
+  exact final_helper 28 36888 [29, 31, 37, 41, 43, 47, 53] hpr hwin (by norm_num) (by norm_num) hw hcov
+
+
 /-! ## §8 THE ARSENAL BRIDGE (BOSS's mathematics applied to #451's witness
 numbers — the criterion's composite-modulus reduction is
 CardinalWorlds.mod_mod_mul applied to the k=20 witness). -/
@@ -675,5 +1248,66 @@ theorem erdos451_complete :
 #print axioms erdos451_complete
 #print axioms arsenalBridgeProp
 #print axioms erdos451_arsenal_bridge_full
+
+/-! ## §11 THE W63 EXTENSION COMPLETE BOARD (the one-statement assembly
+of the W62+W63 extension volley, in the §10 `erdos451_complete` pattern: the
+four general laws + the eight rows k = 21..28 stated EXACTLY as §7b states
+them + the arsenal bridge §9 — together with §10 this boards the certified
+frontier k = 2..28 unconditionally. Honest scope unchanged: the general
+asymptotics of n_k remain open and are NOT claimed.) -/
+theorem erdos451_complete_ext :
+    (∀ q : Nat, q.Prime → isP q = true) ∧
+    (∀ p : Nat, p.Prime → ∀ k n, p ∣ prodK n k → ∃ j, 1 ≤ j ∧ j ≤ k ∧ p ∣ (n - j)) ∧
+    (∀ j n k : Nat, 1 ≤ j → j ≤ k → ∀ p, p ∣ (n - j) → p ∣ prodK n k) ∧
+    (∀ p k n : Nat, p.Prime → k < p → k ≤ n → (p ∣ prodK n k ↔ 1 ≤ n % p ∧ n % p ≤ k)) ∧
+    (2 * 21 < 805 ∧
+      (∀ q, q.Prime → 21 < q → q < 2 * 21 → ¬ q ∣ prodK 805 21) ∧
+      (∀ m, 2 * 21 < m → m < 805 → ∃ q, q.Prime ∧ 21 < q ∧ q < 2 * 21 ∧ q ∣ prodK m 21)) ∧
+    (2 * 22 < 2691 ∧
+      (∀ q, q.Prime → 22 < q → q < 2 * 22 → ¬ q ∣ prodK 2691 22) ∧
+      (∀ m, 2 * 22 < m → m < 2691 → ∃ q, q.Prime ∧ 22 < q ∧ q < 2 * 22 ∧ q ∣ prodK m 22)) ∧
+    (2 * 23 < 1884 ∧
+      (∀ q, q.Prime → 23 < q → q < 2 * 23 → ¬ q ∣ prodK 1884 23) ∧
+      (∀ m, 2 * 23 < m → m < 1884 → ∃ q, q.Prime ∧ 23 < q ∧ q < 2 * 23 ∧ q ∣ prodK m 23)) ∧
+    (2 * 24 < 2664 ∧
+      (∀ q, q.Prime → 24 < q → q < 2 * 24 → ¬ q ∣ prodK 2664 24) ∧
+      (∀ m, 2 * 24 < m → m < 2664 → ∃ q, q.Prime ∧ 24 < q ∧ q < 2 * 24 ∧ q ∣ prodK m 24)) ∧
+    (2 * 25 < 7653 ∧
+      (∀ q, q.Prime → 25 < q → q < 2 * 25 → ¬ q ∣ prodK 7653 25) ∧
+      (∀ m, 2 * 25 < m → m < 7653 → ∃ q, q.Prime ∧ 25 < q ∧ q < 2 * 25 ∧ q ∣ prodK m 25)) ∧
+    (2 * 26 < 7654 ∧
+      (∀ q, q.Prime → 26 < q → q < 2 * 26 → ¬ q ∣ prodK 7654 26) ∧
+      (∀ m, 2 * 26 < m → m < 7654 → ∃ q, q.Prime ∧ 26 < q ∧ q < 2 * 26 ∧ q ∣ prodK m 26)) ∧
+    (2 * 27 < 36887 ∧
+      (∀ q, q.Prime → 27 < q → q < 2 * 27 → ¬ q ∣ prodK 36887 27) ∧
+      (∀ m, 2 * 27 < m → m < 36887 → ∃ q, q.Prime ∧ 27 < q ∧ q < 2 * 27 ∧ q ∣ prodK m 27)) ∧
+    (2 * 28 < 36888 ∧
+      (∀ q, q.Prime → 28 < q → q < 2 * 28 → ¬ q ∣ prodK 36888 28) ∧
+      (∀ m, 2 * 28 < m → m < 36888 → ∃ q, q.Prime ∧ 28 < q ∧ q < 2 * 28 ∧ q ∣ prodK m 28)) ∧
+    arsenalBridgeProp :=
+  ⟨fun q hq => isP_of_prime q hq,
+   fun p hp k n hdvd => prime_dvd_prodK p hp k n hdvd,
+   fun j n k hj1 hjk p hpdiv => dvd_prodK_factor j n k hj1 hjk p hpdiv,
+   fun p k n hp hk hkn => erdos451_crit p k n hp hk hkn,
+   erdos451_k21,
+   erdos451_k22,
+   erdos451_k23,
+   erdos451_k24,
+   erdos451_k25,
+   erdos451_k26,
+   erdos451_k27,
+   erdos451_k28,
+   erdos451_arsenal_bridge_full⟩
+
+#eval "ERDOS451_FRONTIER_EXT_GREEN"
+#print axioms erdos451_k21
+#print axioms erdos451_k22
+#print axioms erdos451_k23
+#print axioms erdos451_k24
+#print axioms erdos451_k25
+#print axioms erdos451_k26
+#print axioms erdos451_k27
+#print axioms erdos451_k28
+#print axioms erdos451_complete_ext
 
 end Erdos451
