@@ -740,7 +740,7 @@ theorem SubN_append_keep : ∀ (c : Nat) (l l' r : List Nat), SubN c l l' → Su
   induction h with
   | refl l0 => exact SubN.refl (l0 ++ r)
   | keep c0 a t t' hsub ih => exact SubN.keep c0 a (t ++ r) (t' ++ r) ih
-  | drop c0 a t t' hsub ih => exact SubN.drop c0 a (t ++ r) t' ih
+  | drop c0 a t t' hsub ih => exact SubN.drop c0 a (t ++ r) (t' ++ r) ih
 
 /-- The uniform-list law: a counted deletion from `replicate m x` stays
 uniform, with the count bookkept. -/
@@ -761,11 +761,11 @@ theorem SubN_replicate : ∀ (m x c : Nat) (t' : List Nat), SubN c (List.replica
     cases h with
     | refl l1 => exact ⟨k + 1, rfl, by omega⟩
     | keep c0 a t1 t1' hsub =>
-      obtain ⟨r, hr, hrc⟩ := ih x c0 t1' hsub
+      obtain ⟨r, hr, hrc⟩ := ih x c t1' hsub
       refine ⟨r + 1, ?_, by omega⟩
       exact congrArg (fun q => x :: q) hr
     | drop c0 a t1 t1' hsub =>
-      obtain ⟨r, hr, hrc⟩ := ih x c0 t1' hsub
+      obtain ⟨r, hr, hrc⟩ := ih x c0 t' hsub
       exact ⟨r, hr, by omega⟩
 
 /-- The append-split law for counted deletions: a deletion from `l1 ++ l2`
@@ -787,11 +787,11 @@ theorem SubN_append : ∀ (l1 l2 : List Nat) (c : Nat) (l' : List Nat),
     cases h with
     | refl l1 => exact ⟨0, 0, a :: t, l2, by omega, SubN.refl (a :: t), SubN.refl l2, rfl⟩
     | keep c0 b u u' hsub =>
-      obtain ⟨c1, c2, t', l2', hc, h1, h2, hsplit⟩ := ih l2 c0 u' hsub
+      obtain ⟨c1, c2, t', l2', hc, h1, h2, hsplit⟩ := ih l2 c u' hsub
       refine ⟨c1, c2, a :: t', l2', hc, SubN.keep c1 a t t' h1, h2, ?_⟩
       exact congrArg (fun q => a :: q) hsplit
     | drop c0 b u u' hsub =>
-      obtain ⟨c1, c2, t', l2', hc, h1, h2, hsplit⟩ := ih l2 c0 u' hsub
+      obtain ⟨c1, c2, t', l2', hc, h1, h2, hsplit⟩ := ih l2 c0 l' hsub
       exact ⟨c1 + 1, c2, t', l2', by omega, SubN.drop c1 a t t' h1, h2, hsplit⟩
 
 /-- The composition law for counted deletions (the ∃-count form: omega
@@ -801,23 +801,23 @@ theorem SubN_comp : ∀ (c1 c2 : Nat) (l m : List Nat), SubN c1 l m → ∀ (m' 
     SubN c2 m m' → ∃ c, c = c1 + c2 ∧ SubN c l m' := by
   intro c1 c2 l m
   intro h1
-  induction h1 with
+  induction h1 generalizing c2 with
   | refl l0 =>
-    intro m' h2
+    intro c2 m' h2
     exact ⟨c2, by omega, h2⟩
   | keep c0 a t t1 hsub ih =>
-    intro m' h2
+    intro c2 m' h2
     cases h2 with
     | refl l1 => exact ⟨c0, by omega, SubN.keep c0 a t t1 hsub⟩
     | keep c2' b u u1 hsub2 =>
-      obtain ⟨c, hc, hcm⟩ := ih u1 hsub2
+      obtain ⟨c, hc, hcm⟩ := ih c2 u1 hsub2
       exact ⟨c, hc, SubN.keep c a t u1 hcm⟩
     | drop c2' b u u1 hsub2 =>
-      obtain ⟨c, hc, hcm⟩ := ih u1 hsub2
-      exact ⟨c + 1, by omega, SubN.drop c a t u1 hcm⟩
+      obtain ⟨c, hc, hcm⟩ := ih c2' m' hsub2
+      exact ⟨c + 1, by omega, SubN.drop c a t m' hcm⟩
   | drop c0 a t t1 hsub ih =>
-    intro m' h2
-    obtain ⟨c, hc, hcm⟩ := ih m' h2
+    intro c2 m' h2
+    obtain ⟨c, hc, hcm⟩ := ih c2 m' h2
     exact ⟨c + 1, by omega, SubN.drop c a t m' hcm⟩
 
 /-- Position deletion (kernel-computable). -/
@@ -891,7 +891,9 @@ theorem w23_two_removal : ∀ (j c : Nat) (l' : List Nat), c ≤ 2 → SubN c (w
         have hsum := ih c1 pre' hc1 hpre n hnm
         rw [hsplit2]
         exact sumSet_mono_append pre' (2 ^ (k + 1) :: List.replicate s (2 ^ (k + 1))) n hsum
-      · have hnm : n - 2 ^ (k + 1) ≤ 2 ^ (k + 1) - 1 := by omega
+      · rw [hp] at hn
+        have hp1 : 1 ≤ 2 ^ (k + 1) := two_pow_pos (k + 1)
+        have hnm : n - 2 ^ (k + 1) ≤ 2 ^ (k + 1) - 1 := by omega
         have hsum := ih c1 pre' hc1 hpre (n - 2 ^ (k + 1)) hnm
         have hsnoc := sumSet_snoc pre' (2 ^ (k + 1)) (n - 2 ^ (k + 1)) n (by omega) hsum
         have heq : (pre' ++ [2 ^ (k + 1)]) ++ List.replicate s (2 ^ (k + 1))
