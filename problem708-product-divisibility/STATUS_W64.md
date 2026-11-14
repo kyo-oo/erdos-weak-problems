@@ -6,6 +6,11 @@
 **FULL RUN COMPLETED SUCCESS — all three jobs GREEN.**
 - **kernel-c: SUCCESS (completed 14:22:20Z, job 132470819408)** — kernel62 (#708) GREEN.
 - kernel-a: SUCCESS (14:12:56Z). kernel-b: SUCCESS (14:39:35Z, 28/28 steps).
+- **DOUBLE-GREEN REVALIDATION: run 43605017845 (HEAD 81336eb, the kill-bank
+  push itself)** — kernel-a SUCCESS (14:38:58Z), kernel-c SUCCESS (14:47:32Z,
+  job 132477697409): kernel62 GREEN AGAIN with the identical five-name
+  axiom-prints + E708_G4_MASTER_GREEN receipt at 14:42:05Z. Two consecutive
+  runs, two different commits, same green kernel62 — the kill is REPRODUCED.
 - The kernel62 lean run elaborated ALL of Erdos708.lean (60151 lines, witness
   table + 114 chunk decides) in ~4.5 min at the 4M default heartbeat —
   vs the 60-min runner death of run 43589088597. NO-OOM structure PROVEN.
