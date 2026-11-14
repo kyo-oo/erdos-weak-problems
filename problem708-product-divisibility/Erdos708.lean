@@ -1576,7 +1576,7 @@ def box708 : List (List Nat) :=
 /-! ## §13 THE g(4) BOX WITNESS-TABLE DECIDES (the W64-B NO-OOM
 restructure). -/
 
-/-- THE RUNNER-DEATH POST-MORTEM AND THE REPAIR: the r10 aggregate
+/- THE RUNNER-DEATH POST-MORTEM AND THE REPAIR: the r10 aggregate
 decide (one `decide` over all 1365 x 40 = 54600 coverExact instances)
 deterministically timed out at the 4M default (run 43585957179);
 raised to 32M heartbeats it ground ~60 minutes and the hosted runner
