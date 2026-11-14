@@ -1495,6 +1495,7 @@ theorem erdos411_main :
    erdos411_count, by decide, by decide, erdos411_ten, erdos411_94⟩
 
 #eval "ERDOS411_KERNEL_GREEN"
+#print axioms table_bounds
 #print axioms erdos411_parity
 #print axioms erdos411_two
 #print axioms erdos411_doubling
