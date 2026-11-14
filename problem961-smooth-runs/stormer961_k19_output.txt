@@ -1,0 +1,546 @@
+(A) Pell fundamentals for the 255 squarefree S-units (S={2,3,5,7,11,13,17,19}):
+   255 equations solved; largest X1 has 35 digits (a=46189), largest Y1 has 32 digits (a=46189)
+   (A1) CROSS-IMPLEMENTATION GREEN: all 255 fundamentals equal the mod-M
+       filtered CF run (M = 2^61-1)
+   (A2) P-TH-POWER DESCENT CERTIFICATE GREEN: 255 equations certified fundamental
+       (1398 prime-exponent searches, exact integer verification; valid at every Y1 size)
+   (A3) brute minimality certified (Y1 <= 10^6 rows): 5244374 checks, no Y'<Y1 solves
+       heavy rows beyond 10^6 (all (A2) p-power certified; brute companions where feasible):
+         a=46189   Y1=86758237470381438680540739974304 (A2) p-th-power certificate only
+         a=461890  Y1=484886176336583551028915219862 (A2) p-th-power certificate only
+         a=3233230 Y1=2245071156129804883433689038 (A2) p-th-power certificate only
+         a=58786   Y1=302935779463416243078 (A2) p-th-power certificate only
+         a=9699690 Y1=22205900901368228    (A2) p-th-power certificate only
+         a=3553    Y1=21952515342262236    (A2) p-th-power certificate only
+         a=969969  Y1=12419683134452564    (A2) p-th-power certificate only
+         a=13585   Y1=2443011875875056     (A2) p-th-power certificate only
+         a=277134  Y1=587461632350660      (A2) p-th-power certificate only
+         a=24871   Y1=86431430078700       (A2) p-th-power certificate only
+         a=1939938 Y1=43313178145496       (A2) p-th-power certificate only
+         a=11305   Y1=35108839958604       (A2) p-th-power certificate only
+         a=1309    Y1=22199221738044       (A2) p-th-power certificate only
+         a=373065  Y1=19674148336492       (A2) p-th-power certificate only
+         a=25194   Y1=4152728739314        (A2) p-th-power certificate only
+         a=35530   Y1=3582034547094        (A2) p-th-power certificate only
+         a=285285  Y1=1265202316188        (A2) p-th-power certificate only
+         a=1729    Y1=1072885712316        (A2) p-th-power certificate only
+         a=1385670 Y1=811838987988         (A2) p-th-power certificate only
+         a=95095   Y1=451955039349         (A2) p-th-power certificate only
+         a=4849845 Y1=403446481020         (A2) p-th-power certificate only
+         a=29393   Y1=143931733820         (A2) p-th-power certificate only
+         a=3094    Y1=98876026314          (A2) p-th-power certificate only
+         a=20995   Y1=55365619647          (A2) p-th-power certificate only
+         a=36465   Y1=17987356140          (A2) p-th-power certificate only
+         a=85085   Y1=17947617300          (A2) p-th-power certificate only
+         a=17290   Y1=15025617024          (A2) p-th-power certificate only
+         a=146965  Y1=6924422688           (A2) p-th-power certificate only
+         a=2926    Y1=5053154310           (A2) p-th-power certificate only
+         a=2431    Y1=3836541735           (A2) p-th-power certificate only
+         a=106590  Y1=2179829576           (A2) p-th-power certificate only
+         a=12597   Y1=1047913020           (A2) p-th-power certificate only
+         a=5005    Y1=625742712            (W62 receipt logs/brute5005.log)
+         a=692835  Y1=146982452            (A2) p-th-power certificate only
+         a=570570  Y1=146136698            (A2) p-th-power certificate only
+         a=13090   Y1=87429738             (brute companion feasible)
+         a=4845    Y1=87057432             (brute companion feasible)
+         a=1616615 Y1=84102021             (brute companion feasible)
+         a=74613   Y1=81962400             (brute companion feasible)
+         a=7106    Y1=72751848             (brute companion feasible)
+         a=293930  Y1=58250208             (brute companion feasible)
+         a=1105    Y1=48828432             (brute companion feasible)
+         a=881790  Y1=29700770             (brute companion feasible)
+         a=138567  Y1=28060445             (brute companion feasible)
+         a=21945   Y1=20282284             (brute companion feasible)
+         a=125970  Y1=16655828             (brute companion feasible)
+         a=67830   Y1=16437862             (brute companion feasible)
+         a=34034   Y1=13786506             (brute companion feasible)
+         a=62985   Y1=7781604              (brute companion feasible)
+         a=41990   Y1=7526372              (brute companion feasible)
+         a=88179   Y1=5540935              (brute companion feasible)
+         a=10374   Y1=3684076              (brute companion feasible)
+         a=17765   Y1=3046708              (brute companion feasible)
+         a=114114  Y1=2962330              (brute companion feasible)
+         a=49742   Y1=2867590              (brute companion feasible)
+         a=190190  Y1=2432522              (brute companion feasible)
+         a=17017   Y1=2373732              (brute companion feasible)
+         a=5434    Y1=2172690              (brute companion feasible)
+         a=4522    Y1=2136750              (brute companion feasible)
+         a=3705    Y1=2073360              (brute companion feasible)
+         a=746130  Y1=1860200              (brute companion feasible)
+
+(B) THE PRUNE: 255 equations solved; survivors (Y1 19-smooth): 143 ; dead: 112
+   DEAD a=85     : Y1=30996                killed by prime 41 > 19
+   DEAD a=133    : Y1=224460               killed by prime 29 > 19
+   DEAD a=187    : Y1=123                  killed by prime 41 > 19
+   DEAD a=190    : Y1=3774                 killed by prime 37 > 19
+   DEAD a=209    : Y1=3220                 killed by prime 23 > 19
+   DEAD a=247    : Y1=5427                 killed by prime 67 > 19
+   DEAD a=286    : Y1=33222                killed by prime 113 > 19
+   DEAD a=374    : Y1=174                  killed by prime 29 > 19
+   DEAD a=385    : Y1=4884                 killed by prime 37 > 19
+   DEAD a=418    : Y1=1656                 killed by prime 23 > 19
+   DEAD a=429    : Y1=73584                killed by prime 73 > 19
+   DEAD a=494    : Y1=3286                 killed by prime 31 > 19
+   DEAD a=561    : Y1=22072                killed by prime 31 > 19
+   DEAD a=595    : Y1=759                  killed by prime 23 > 19
+   DEAD a=715    : Y1=2829                 killed by prime 23 > 19
+   DEAD a=741    : Y1=270108               killed by prime 41 > 19
+   DEAD a=969    : Y1=436540               killed by prime 23 > 19
+   DEAD a=1001   : Y1=33532                killed by prime 83 > 19
+   DEAD a=1105   : Y1=48828432             killed by prime 857 > 19
+   DEAD a=1254   : Y1=10234                killed by prime 43 > 19
+   DEAD a=1309   : Y1=22199221738044       killed by prime 23 > 19
+   DEAD a=1330   : Y1=34182                killed by prime 211 > 19
+   DEAD a=1615   : Y1=81732                killed by prime 139 > 19
+   DEAD a=1729   : Y1=1072885712316        killed by prime 89 > 19
+   DEAD a=1870   : Y1=455148               killed by prime 47 > 19
+   DEAD a=2002   : Y1=253128               killed by prime 53 > 19
+   DEAD a=2210   : Y1=94                   killed by prime 47 > 19
+   DEAD a=2431   : Y1=3836541735           killed by prime 1031 > 19
+   DEAD a=2470   : Y1=48816                killed by prime 113 > 19
+   DEAD a=2926   : Y1=5053154310           killed by prime 1193 > 19
+   DEAD a=3094   : Y1=98876026314          killed by prime 3931 > 19
+   DEAD a=3315   : Y1=217                  killed by prime 31 > 19
+   DEAD a=3553   : Y1=21952515342262236    killed by prime 197 > 19
+   DEAD a=3705   : Y1=2073360              killed by prime 53 > 19
+   DEAD a=4522   : Y1=2136750              killed by prime 37 > 19
+   DEAD a=4845   : Y1=87057432             killed by prime 41 > 19
+   DEAD a=4862   : Y1=1298                 killed by prime 59 > 19
+   DEAD a=5005   : Y1=625742712            killed by prime 557 > 19
+   DEAD a=5434   : Y1=2172690              killed by prime 619 > 19
+   DEAD a=6545   : Y1=87032                killed by prime 23 > 19
+   DEAD a=7106   : Y1=72751848             killed by prime 251 > 19
+   DEAD a=7293   : Y1=455820               killed by prime 71 > 19
+   DEAD a=7410   : Y1=3626                 killed by prime 37 > 19
+   DEAD a=7854   : Y1=6466                 killed by prime 53 > 19
+   DEAD a=8151   : Y1=7685                 killed by prime 29 > 19
+   DEAD a=8398   : Y1=44160                killed by prime 23 > 19
+   DEAD a=8645   : Y1=4324                 killed by prime 23 > 19
+   DEAD a=8778   : Y1=754                  killed by prime 29 > 19
+   DEAD a=10374  : Y1=3684076              killed by prime 101 > 19
+   DEAD a=10659  : Y1=112431               killed by prime 3407 > 19
+   DEAD a=11305  : Y1=35108839958604       killed by prime 23 > 19
+   DEAD a=12597  : Y1=1047913020           killed by prime 1543 > 19
+   DEAD a=13090  : Y1=87429738             killed by prime 613 > 19
+   DEAD a=13566  : Y1=466170               killed by prime 41 > 19
+   DEAD a=13585  : Y1=2443011875875056     killed by prime 47 > 19
+   DEAD a=14586  : Y1=632578               killed by prime 211 > 19
+   DEAD a=15470  : Y1=13098                killed by prime 37 > 19
+   DEAD a=17017  : Y1=2373732              killed by prime 31 > 19
+   DEAD a=17290  : Y1=15025617024          killed by prime 41 > 19
+   DEAD a=17765  : Y1=3046708              killed by prime 233 > 19
+   DEAD a=19019  : Y1=184164               killed by prime 103 > 19
+   DEAD a=20995  : Y1=55365619647          killed by prime 41 > 19
+   DEAD a=21318  : Y1=146                  killed by prime 73 > 19
+   DEAD a=21945  : Y1=20282284             killed by prime 109 > 19
+   DEAD a=22610  : Y1=44588                killed by prime 71 > 19
+   DEAD a=23205  : Y1=313272               killed by prime 229 > 19
+   DEAD a=24871  : Y1=86431430078700       killed by prime 31 > 19
+   DEAD a=25194  : Y1=4152728739314        killed by prime 139 > 19
+   DEAD a=25935  : Y1=23                   killed by prime 23 > 19
+   DEAD a=29393  : Y1=143931733820         killed by prime 37 > 19
+   DEAD a=34034  : Y1=13786506             killed by prime 31 > 19
+   DEAD a=35530  : Y1=3582034547094        killed by prime 47 > 19
+   DEAD a=36465  : Y1=17987356140          killed by prime 29 > 19
+   DEAD a=41990  : Y1=7526372              killed by prime 389 > 19
+   DEAD a=46189  : Y1=86758237470381438680540739974304 killed by prime 293 > 19
+   DEAD a=46410  : Y1=812                  killed by prime 29 > 19
+   DEAD a=49742  : Y1=2867590              killed by prime 131 > 19
+   DEAD a=51051  : Y1=378115               killed by prime 47 > 19
+   DEAD a=58786  : Y1=302935779463416243078 killed by prime 3137 > 19
+   DEAD a=62985  : Y1=7781604              killed by prime 617 > 19
+   DEAD a=67830  : Y1=16437862             killed by prime 139 > 19
+   DEAD a=74613  : Y1=81962400             killed by prime 37 > 19
+   DEAD a=85085  : Y1=17947617300          killed by prime 1823 > 19
+   DEAD a=88179  : Y1=5540935              killed by prime 37 > 19
+   DEAD a=95095  : Y1=451955039349         killed by prime 47 > 19
+   DEAD a=102102 : Y1=18128                killed by prime 103 > 19
+   DEAD a=106590 : Y1=2179829576           killed by prime 59 > 19
+   DEAD a=114114 : Y1=2962330              killed by prime 101 > 19
+   DEAD a=124355 : Y1=23200                killed by prime 29 > 19
+   DEAD a=125970 : Y1=16655828             killed by prime 709 > 19
+   DEAD a=138567 : Y1=28060445             killed by prime 863 > 19
+   DEAD a=146965 : Y1=6924422688           killed by prime 23 > 19
+   DEAD a=149226 : Y1=16732                killed by prime 47 > 19
+   DEAD a=190190 : Y1=2432522              killed by prime 167 > 19
+   DEAD a=230945 : Y1=347424               killed by prime 47 > 19
+   DEAD a=277134 : Y1=587461632350660      killed by prime 1307 > 19
+   DEAD a=285285 : Y1=1265202316188        killed by prime 23 > 19
+   DEAD a=293930 : Y1=58250208             killed by prime 43 > 19
+   DEAD a=373065 : Y1=19674148336492       killed by prime 167 > 19
+   DEAD a=461890 : Y1=484886176336583551028915219862 killed by prime 109 > 19
+   DEAD a=570570 : Y1=146136698            killed by prime 101 > 19
+   DEAD a=646646 : Y1=6062                 killed by prime 433 > 19
+   DEAD a=692835 : Y1=146982452            killed by prime 59 > 19
+   DEAD a=746130 : Y1=1860200              killed by prime 71 > 19
+   DEAD a=881790 : Y1=29700770             killed by prime 193 > 19
+   DEAD a=969969 : Y1=12419683134452564    killed by prime 23 > 19
+   DEAD a=1385670: Y1=811838987988         killed by prime 149 > 19
+   DEAD a=1616615: Y1=84102021             killed by prime 2657 > 19
+   DEAD a=1939938: Y1=43313178145496       killed by prime 31 > 19
+   DEAD a=3233230: Y1=2245071156129804883433689038 killed by prime 6317 > 19
+   DEAD a=4849845: Y1=403446481020         killed by prime 107 > 19
+   DEAD a=9699690: Y1=22205900901368228    killed by prime 191 > 19
+
+(C/D/E) Lucas laws + size bound + census per surviving a:
+   a=2      : N_a= 22  C_a=  32.40  pairs_here=5
+   a=3      : N_a= 26  C_a=  27.12  pairs_here=3
+   a=5      : N_a= 15  C_a=  28.96  pairs_here=3
+   a=6      : N_a= 18  C_a=  31.51  pairs_here=4
+   a=7      : N_a= 16  C_a=  30.70  pairs_here=1
+   a=10     : N_a= 12  C_a=  26.38  pairs_here=2
+   a=11     : N_a= 14  C_a=  28.70  pairs_here=1
+   a=13     : N_a=  9  C_a=  31.29  pairs_here=1
+   a=14     : N_a= 13  C_a=  29.70  pairs_here=2
+   a=15     : N_a= 18  C_a=  27.38  pairs_here=1
+   a=17     : N_a= 12  C_a=  30.70  pairs_here=2
+   a=19     : N_a= 10  C_a=  32.40  pairs_here=1
+   a=21     : N_a= 11  C_a=  29.70  pairs_here=2
+   a=22     : N_a= 10  C_a=  31.51  pairs_here=1
+   a=26     : N_a= 11  C_a=  28.70  pairs_here=2
+   a=30     : N_a= 13  C_a=  24.79  pairs_here=2
+   a=33     : N_a= 13  C_a=  29.70  pairs_here=1
+   a=34     : N_a= 12  C_a=  31.51  pairs_here=2
+   a=35     : N_a= 16  C_a=  26.38  pairs_here=1
+   a=38     : N_a= 12  C_a=  31.02  pairs_here=1
+   a=39     : N_a= 13  C_a=  33.25  pairs_here=3
+   a=42     : N_a= 15  C_a=  32.61  pairs_here=3
+   a=51     : N_a= 12  C_a=  33.83  pairs_here=1
+   a=55     : N_a= 10  C_a=  27.38  pairs_here=1
+   a=57     : N_a= 10  C_a=  28.12  pairs_here=1
+   a=65     : N_a= 10  C_a=  29.38  pairs_here=1
+   a=66     : N_a= 11  C_a=  29.12  pairs_here=2
+   a=70     : N_a= 10  C_a=  28.70  pairs_here=1
+   a=77     : N_a= 10  C_a=  33.87  pairs_here=2
+   a=78     : N_a= 12  C_a=  32.95  pairs_here=1
+   a=95     : N_a= 11  C_a=  27.38  pairs_here=2
+   a=102    : N_a= 10  C_a=  27.12  pairs_here=1
+   a=105    : N_a= 13  C_a=  34.64  pairs_here=1
+   a=110    : N_a= 14  C_a=  33.43  pairs_here=2
+   a=114    : N_a= 10  C_a=  35.02  pairs_here=1
+   a=119    : N_a= 11  C_a=  34.16  pairs_here=1
+   a=130    : N_a=  9  C_a=  32.95  pairs_here=1
+   a=143    : N_a= 15  C_a=  32.02  pairs_here=1
+   a=154    : N_a=  8  C_a=  36.86  pairs_here=1
+   a=165    : N_a=  9  C_a=  30.19  pairs_here=1
+   a=170    : N_a= 10  C_a=  30.08  pairs_here=1
+   a=182    : N_a= 13  C_a=  31.87  pairs_here=2
+   a=195    : N_a= 14  C_a=  30.77  pairs_here=1
+   a=210    : N_a= 12  C_a=  24.79  pairs_here=1
+   a=221    : N_a=  9  C_a=  36.09  pairs_here=1
+   a=231    : N_a= 11  C_a=  29.70  pairs_here=1
+   a=238    : N_a=  9  C_a=  41.46  pairs_here=1
+   a=255    : N_a= 13  C_a=  27.79  pairs_here=1
+   a=266    : N_a= 10  C_a=  35.60  pairs_here=1
+   a=273    : N_a=  9  C_a=  31.58  pairs_here=1
+   a=285    : N_a=  9  C_a=  30.96  pairs_here=2
+   a=323    : N_a= 15  C_a=  37.21  pairs_here=1
+   a=330    : N_a= 10  C_a=  26.38  pairs_here=1
+   a=357    : N_a=  9  C_a=  31.29  pairs_here=1
+   a=390    : N_a= 11  C_a=  29.25  pairs_here=1
+   a=399    : N_a= 13  C_a=  28.12  pairs_here=1
+   a=442    : N_a=  9  C_a=  31.51  pairs_here=1
+   a=455    : N_a= 12  C_a=  31.38  pairs_here=1
+   a=462    : N_a= 11  C_a=  27.12  pairs_here=1
+   a=510    : N_a= 10  C_a=  27.38  pairs_here=1
+   a=546    : N_a= 10  C_a=  32.95  pairs_here=1
+   a=570    : N_a= 10  C_a=  29.60  pairs_here=1
+   a=646    : N_a= 10  C_a=  29.70  pairs_here=1
+   a=663    : N_a= 12  C_a=  35.97  pairs_here=1
+   a=665    : N_a=  8  C_a=  34.43  pairs_here=1
+   a=714    : N_a=  9  C_a=  37.63  pairs_here=1
+   a=770    : N_a= 10  C_a=  27.38  pairs_here=1
+   a=798    : N_a= 11  C_a=  32.02  pairs_here=1
+   a=858    : N_a=  9  C_a=  30.70  pairs_here=1
+   a=910    : N_a= 11  C_a=  34.09  pairs_here=2
+   a=1045   : N_a=  8  C_a=  37.58  pairs_here=1
+   a=1122   : N_a= 11  C_a=  30.29  pairs_here=2
+   a=1155   : N_a= 12  C_a=  24.79  pairs_here=1
+   a=1190   : N_a= 11  C_a=  26.38  pairs_here=1
+   a=1326   : N_a=  9  C_a=  29.92  pairs_here=1
+   a=1365   : N_a=  9  C_a=  40.13  pairs_here=1
+   a=1430   : N_a=  9  C_a=  37.01  pairs_here=1
+   a=1463   : N_a= 11  C_a=  31.29  pairs_here=2
+   a=1482   : N_a= 11  C_a=  31.51  pairs_here=2
+   a=1785   : N_a= 10  C_a=  29.49  pairs_here=2
+   a=1938   : N_a=  9  C_a=  36.22  pairs_here=1
+   a=2090   : N_a=  8  C_a=  34.19  pairs_here=1
+   a=2145   : N_a=  8  C_a=  33.04  pairs_here=1
+   a=2261   : N_a=  9  C_a=  29.70  pairs_here=1
+   a=2310   : N_a= 10  C_a=  32.55  pairs_here=1
+   a=2618   : N_a= 10  C_a=  28.70  pairs_here=1
+   a=2717   : N_a= 10  C_a=  33.51  pairs_here=1
+   a=2730   : N_a= 10  C_a=  25.79  pairs_here=2
+   a=2805   : N_a=  8  C_a=  34.25  pairs_here=1
+   a=3135   : N_a= 12  C_a=  29.60  pairs_here=1
+   a=3230   : N_a= 10  C_a=  33.78  pairs_here=1
+   a=3458   : N_a=  8  C_a=  31.51  pairs_here=1
+   a=3570   : N_a= 10  C_a=  31.08  pairs_here=1
+   a=3990   : N_a=  9  C_a=  26.38  pairs_here=1
+   a=4199   : N_a= 11  C_a=  34.46  pairs_here=1
+   a=4290   : N_a= 10  C_a=  26.38  pairs_here=1
+   a=4389   : N_a= 10  C_a=  29.70  pairs_here=1
+   a=4641   : N_a= 10  C_a=  34.16  pairs_here=1
+   a=5187   : N_a=  9  C_a=  31.70  pairs_here=1
+   a=5610   : N_a=  9  C_a=  29.92  pairs_here=1
+   a=6006   : N_a= 10  C_a=  27.12  pairs_here=1
+   a=6270   : N_a=  9  C_a=  29.70  pairs_here=1
+   a=6630   : N_a=  9  C_a=  36.89  pairs_here=1
+   a=7315   : N_a=  9  C_a=  28.96  pairs_here=1
+   a=7735   : N_a=  8  C_a=  36.69  pairs_here=1
+   a=9282   : N_a=  9  C_a=  32.79  pairs_here=1
+   a=9690   : N_a=  8  C_a=  35.51  pairs_here=1
+   a=10010  : N_a=  9  C_a=  29.70  pairs_here=1
+   a=12155  : N_a= 10  C_a=  34.58  pairs_here=2
+   a=14630  : N_a=  9  C_a=  29.84  pairs_here=1
+   a=15015  : N_a=  9  C_a=  28.60  pairs_here=1
+   a=16302  : N_a=  8  C_a=  34.25  pairs_here=1
+   a=19635  : N_a=  9  C_a=  29.96  pairs_here=1
+   a=24310  : N_a=  9  C_a=  27.38  pairs_here=1
+   a=27170  : N_a=  9  C_a=  30.47  pairs_here=1
+   a=30030  : N_a=  9  C_a=  28.38  pairs_here=1
+   a=33915  : N_a=  8  C_a=  31.08  pairs_here=1
+   a=38038  : N_a=  9  C_a=  28.70  pairs_here=1
+   a=39270  : N_a=  9  C_a=  26.38  pairs_here=1
+   a=40755  : N_a=  8  C_a=  31.88  pairs_here=1
+   a=43890  : N_a= 10  C_a=  27.96  pairs_here=1
+   a=51870  : N_a=  9  C_a=  25.79  pairs_here=1
+   a=57057  : N_a=  9  C_a=  34.51  pairs_here=1
+   a=72930  : N_a=  9  C_a=  27.96  pairs_here=1
+   a=81510  : N_a=  9  C_a=  26.38  pairs_here=1
+   a=92378  : N_a=  9  C_a=  34.02  pairs_here=1
+   a=170170 : N_a=  8  C_a=  29.70  pairs_here=1
+   a=176358 : N_a=  8  C_a=  28.12  pairs_here=1
+   a=248710 : N_a=  8  C_a=  28.38  pairs_here=1
+   a=255255 : N_a=  8  C_a=  35.09  pairs_here=1
+   a=323323 : N_a=  8  C_a=  39.72  pairs_here=1
+   a=510510 : N_a=  9  C_a=  24.79  pairs_here=1
+
+(E) THE COMPLETE CENSUS — consecutive 19-smooth pairs (x, x+1):
+   x=1            a=2       n=1   X=3                  Y=2               b=1
+   x=2            a=6       n=1   X=5                  Y=2               b=1
+   x=3            a=3       n=2   X=7                  Y=4               b=2
+   x=4            a=5       n=1   X=9                  Y=4               b=2
+   x=5            a=30      n=1   X=11                 Y=2               b=1
+   x=6            a=42      n=1   X=13                 Y=2               b=1
+   x=7            a=14      n=1   X=15                 Y=4               b=2
+   x=8            a=2       n=2   X=17                 Y=12              b=6
+   x=9            a=10      n=1   X=19                 Y=6               b=3
+   x=10           a=110     n=1   X=21                 Y=2               b=1
+   x=11           a=33      n=1   X=23                 Y=4               b=2
+   x=12           a=39      n=1   X=25                 Y=4               b=2
+   x=13           a=182     n=1   X=27                 Y=2               b=1
+   x=14           a=210     n=1   X=29                 Y=2               b=1
+   x=15           a=15      n=2   X=31                 Y=8               b=4
+   x=16           a=17      n=1   X=33                 Y=8               b=4
+   x=17           a=34      n=1   X=35                 Y=6               b=3
+   x=18           a=38      n=1   X=37                 Y=6               b=3
+   x=19           a=95      n=1   X=39                 Y=4               b=2
+   x=20           a=105     n=1   X=41                 Y=4               b=2
+   x=21           a=462     n=1   X=43                 Y=2               b=1
+   x=24           a=6       n=2   X=49                 Y=20              b=10
+   x=25           a=26      n=1   X=51                 Y=10              b=5
+   x=26           a=78      n=1   X=53                 Y=6               b=3
+   x=27           a=21      n=1   X=55                 Y=12              b=6
+   x=32           a=66      n=1   X=65                 Y=8               b=4
+   x=33           a=1122    n=1   X=67                 Y=2               b=1
+   x=34           a=1190    n=1   X=69                 Y=2               b=1
+   x=35           a=35      n=2   X=71                 Y=12              b=6
+   x=38           a=1482    n=1   X=77                 Y=2               b=1
+   x=39           a=390     n=1   X=79                 Y=4               b=2
+   x=44           a=55      n=1   X=89                 Y=12              b=6
+   x=48           a=3       n=4   X=97                 Y=56              b=28
+   x=49           a=2       n=3   X=99                 Y=70              b=35
+   x=50           a=102     n=1   X=101                Y=10              b=5
+   x=51           a=663     n=1   X=103                Y=4               b=2
+   x=54           a=330     n=1   X=109                Y=6               b=3
+   x=55           a=770     n=1   X=111                Y=4               b=2
+   x=56           a=798     n=1   X=113                Y=4               b=2
+   x=63           a=7       n=2   X=127                Y=48              b=24
+   x=64           a=65      n=1   X=129                Y=16              b=8
+   x=65           a=4290    n=1   X=131                Y=2               b=1
+   x=75           a=57      n=1   X=151                Y=20              b=10
+   x=76           a=1463    n=1   X=153                Y=4               b=2
+   x=77           a=6006    n=1   X=155                Y=2               b=1
+   x=80           a=5       n=2   X=161                Y=72              b=36
+   x=84           a=1785    n=1   X=169                Y=4               b=2
+   x=90           a=910     n=1   X=181                Y=6               b=3
+   x=95           a=570     n=1   X=191                Y=8               b=4
+   x=98           a=22      n=1   X=197                Y=42              b=21
+   x=99           a=11      n=2   X=199                Y=60              b=30
+   x=104          a=2730    n=1   X=209                Y=4               b=2
+   x=119          a=3570    n=1   X=239                Y=4               b=2
+   x=120          a=30      n=2   X=241                Y=44              b=22
+   x=125          a=70      n=1   X=251                Y=30              b=15
+   x=132          a=4389    n=1   X=265                Y=4               b=2
+   x=135          a=510     n=1   X=271                Y=12              b=6
+   x=143          a=143     n=2   X=287                Y=24              b=12
+   x=152          a=646     n=1   X=305                Y=12              b=6
+   x=153          a=2618    n=1   X=307                Y=6               b=3
+   x=168          a=42      n=2   X=337                Y=52              b=26
+   x=169          a=170     n=1   X=339                Y=26              b=13
+   x=170          a=3230    n=1   X=341                Y=6               b=3
+   x=175          a=77      n=1   X=351                Y=40              b=20
+   x=189          a=3990    n=1   X=379                Y=6               b=3
+   x=195          a=195     n=2   X=391                Y=28              b=14
+   x=208          a=2717    n=1   X=417                Y=8               b=4
+   x=209          a=43890   n=1   X=419                Y=2               b=1
+   x=220          a=12155   n=1   X=441                Y=4               b=2
+   x=224          a=14      n=2   X=449                Y=120             b=60
+   x=242          a=6       n=3   X=485                Y=198             b=99
+   x=255          a=255     n=2   X=511                Y=32              b=16
+   x=272          a=4641    n=1   X=545                Y=8               b=4
+   x=285          a=81510   n=1   X=571                Y=2               b=1
+   x=288          a=2       n=4   X=577                Y=408             b=204
+   x=323          a=323     n=2   X=647                Y=36              b=18
+   x=324          a=13      n=1   X=649                Y=180             b=90
+   x=342          a=266     n=1   X=685                Y=42              b=21
+   x=350          a=546     n=1   X=701                Y=30              b=15
+   x=351          a=858     n=1   X=703                Y=24              b=12
+   x=360          a=10      n=2   X=721                Y=228             b=114
+   x=363          a=273     n=1   X=727                Y=44              b=22
+   x=374          a=5610    n=1   X=749                Y=10              b=5
+   x=384          a=2310    n=1   X=769                Y=16              b=8
+   x=399          a=399     n=2   X=799                Y=40              b=20
+   x=440          a=110     n=2   X=881                Y=84              b=42
+   x=441          a=442     n=1   X=883                Y=42              b=21
+   x=455          a=51870   n=1   X=911                Y=4               b=2
+   x=475          a=2261    n=1   X=951                Y=20              b=10
+   x=494          a=27170   n=1   X=989                Y=6               b=3
+   x=512          a=114     n=1   X=1025               Y=96              b=48
+   x=539          a=165     n=1   X=1079               Y=84              b=42
+   x=560          a=19635   n=1   X=1121               Y=8               b=4
+   x=594          a=39270   n=1   X=1189               Y=6               b=3
+   x=624          a=39      n=2   X=1249               Y=200             b=100
+   x=675          a=3       n=6   X=1351               Y=780             b=390
+   x=714          a=510510  n=1   X=1429               Y=2               b=1
+   x=728          a=182     n=2   X=1457               Y=108             b=54
+   x=832          a=221     n=1   X=1665               Y=112             b=56
+   x=935          a=24310   n=1   X=1871               Y=12              b=6
+   x=968          a=1938    n=1   X=1937               Y=44              b=22
+   x=1000         a=10010   n=1   X=2001               Y=20              b=10
+   x=1088         a=17      n=2   X=2177               Y=528             b=264
+   x=1155         a=1155    n=2   X=2311               Y=68              b=34
+   x=1215         a=285     n=1   X=2431               Y=144             b=72
+   x=1224         a=34      n=2   X=2449               Y=420             b=210
+   x=1274         a=1326    n=1   X=2549               Y=70              b=35
+   x=1330         a=14630   n=1   X=2661               Y=22              b=11
+   x=1444         a=5       n=3   X=2889               Y=1292            b=646
+   x=1520         a=95      n=2   X=3041               Y=312             b=156
+   x=1539         a=7315    n=1   X=3079               Y=36              b=18
+   x=1700         a=357     n=1   X=3401               Y=180             b=90
+   x=1715         a=15015   n=1   X=3431               Y=28              b=14
+   x=1728         a=5187    n=1   X=3457               Y=48              b=24
+   x=2057         a=714     n=1   X=4115               Y=154             b=77
+   x=2079         a=30030   n=1   X=4159               Y=24              b=12
+   x=2375         a=6270    n=1   X=4751               Y=60              b=30
+   x=2400         a=6       n=4   X=4801               Y=1960            b=980
+   x=2430         a=72930   n=1   X=4861               Y=18              b=9
+   x=2431         a=92378   n=1   X=4863               Y=16              b=8
+   x=2499         a=51      n=2   X=4999               Y=700             b=350
+   x=2600         a=26      n=2   X=5201               Y=1020            b=510
+   x=2925         a=38038   n=1   X=5851               Y=30              b=15
+   x=3024         a=21      n=2   X=6049               Y=1320            b=660
+   x=3135         a=3135    n=2   X=6271               Y=112             b=56
+   x=3249         a=130     n=1   X=6499               Y=570             b=285
+   x=4095         a=455     n=2   X=8191               Y=384             b=192
+   x=4199         a=176358  n=1   X=8399               Y=20              b=10
+   x=4224         a=66      n=2   X=8449               Y=1040            b=520
+   x=4374         a=42      n=3   X=8749               Y=1350            b=675
+   x=4913         a=9282    n=1   X=9827               Y=102             b=51
+   x=5775         a=231     n=2   X=11551              Y=760             b=380
+   x=5831         a=238     n=1   X=11663              Y=756             b=378
+   x=5928         a=1482    n=2   X=11857              Y=308             b=154
+   x=5984         a=248710  n=1   X=11969              Y=24              b=12
+   x=6174         a=3458    n=1   X=12349              Y=210             b=105
+   x=6655         a=1430    n=1   X=13311              Y=352             b=176
+   x=6859         a=665     n=1   X=13719              Y=532             b=266
+   x=9800         a=2       n=6   X=19601              Y=13860           b=6930
+   x=10240        a=2090    n=1   X=20481              Y=448             b=224
+   x=10647        a=154     n=1   X=21295              Y=1716            b=858
+   x=10829        a=6630    n=1   X=21659              Y=266             b=133
+   x=12375        a=170170  n=1   X=24751              Y=60              b=30
+   x=12635        a=1365    n=1   X=25271              Y=684             b=342
+   x=13376        a=57057   n=1   X=26753              Y=112             b=56
+   x=14079        a=2145    n=1   X=28159              Y=608             b=304
+   x=14364        a=33915   n=1   X=28729              Y=156             b=78
+   x=14399        a=119     n=2   X=28799              Y=2640            b=1320
+   x=23408        a=1463    n=2   X=46817              Y=1224            b=612
+   x=27455        a=40755   n=1   X=54911              Y=272             b=136
+   x=28560        a=1785    n=2   X=57121              Y=1352            b=676
+   x=28899        a=19      n=2   X=57799              Y=13260           b=6630
+   x=31212        a=39      n=3   X=62425              Y=9996            b=4998
+   x=37179        a=2805    n=1   X=74359              Y=1404            b=702
+   x=43680        a=2730    n=2   X=87361              Y=1672            b=836
+   x=89375        a=16302   n=1   X=178751             Y=1400            b=700
+   x=104975       a=4199    n=2   X=209951             Y=3240            b=1620
+   x=123200       a=77      n=2   X=246401             Y=28080           b=14040
+   x=165375       a=9690    n=1   X=330751             Y=3360            b=1680
+   x=194480       a=12155   n=2   X=388961             Y=3528            b=1764
+   x=228095       a=1045    n=1   X=456191             Y=14112           b=7056
+   x=336140       a=7735    n=1   X=672281             Y=7644            b=3822
+   x=601425       a=1122    n=3   X=1202851            Y=35910           b=17955
+   x=633555       a=255255  n=1   X=1267111            Y=2508            b=1254
+   x=709631       a=323323  n=1   X=1419263            Y=2496            b=1248
+   x=5909760      a=285     n=2   X=11819521           Y=700128          b=350064
+   x=11859210     a=910     n=3   X=23718421           Y=786258          b=393129
+   TOTAL PAIRS: 167 ; LARGEST x = 11859210
+   saved census_k19.json (checkpoint + receipt)
+
+(F) THE f(k) TABLE — k = 19..22 (primes <= k = {2,3,5,7,11,13,17,19} for all four):
+   maximal runs of consecutive 19-smooth (length >= 3):
+      start=1        len=22  (1, ..., 22)
+      start=24       len=5  (24, 25, 26, 27, 28)
+      start=32       len=5  (32, 33, 34, 35, 36)
+      start=38       len=3  (38, 39, 40)
+      start=48       len=5  (48, 49, 50, 51, 52)
+      start=54       len=4  (54, 55, 56, 57)
+      start=63       len=4  (63, 64, 65, 66)
+      start=75       len=4  (75, 76, 77, 78)
+      start=98       len=3  (98, 99, 100)
+      start=119      len=3  (119, 120, 121)
+      start=152      len=3  (152, 153, 154)
+      start=168      len=4  (168, 169, 170, 171)
+      start=208      len=3  (208, 209, 210)
+      start=323      len=3  (323, 324, 325)
+      start=350      len=3  (350, 351, 352)
+      start=440      len=3  (440, 441, 442)
+      start=2430     len=3  (2430, 2431, 2432)
+   (maximal run length overall: 22 — the run (1..22), inside every k>=23
+   k=19: longest run of 19-smooth entirely > 19 has length 5  ->  f(19) = 6
+   k=20: longest run of 20-smooth entirely > 20 has length 5  ->  f(20) = 6
+   k=21: longest run of 21-smooth entirely > 21 has length 5  ->  f(21) = 6
+   k=22: longest run of 22-smooth entirely > 22 has length 5  ->  f(22) = 6
+   WITNESS: (24,25,26,27,28) = (2^3·3, 5^2, 2·13, 3^3, 2^2·7), all > 22
+   -> f(k) >= 6 for k = 19..22 (a 5-run of 19-smooth above every k <= 22)
+   EXCLUSION k=19: no census pair x > k with x..x+5 all 19-smooth -> no 6-run above 19 -> f(19) <= 6
+   EXCLUSION k=20: no census pair x > k with x..x+5 all 19-smooth -> no 6-run above 20 -> f(20) <= 6
+   EXCLUSION k=21: no census pair x > k with x..x+5 all 19-smooth -> no 6-run above 21 -> f(21) <= 6
+   EXCLUSION k=22: no census pair x > k with x..x+5 all 19-smooth -> no 6-run above 22 -> f(22) <= 6
+
+   *** f(19) = f(20) = f(21) = f(22) = 6 — THE CERTIFIED FRONTIER EXTENDED ***
+   CALIBRATION (i): the 40 K25 / 68 W62 / 108 W63 pairs appear VERBATIM
+   (full-list equality by k-smooth filtering) — GREEN
+   CALIBRATION (ii): f(2..18) re-derived from THIS census by k-smooth
+   filtering: [2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6]
+   (matches the certified table f(2)=2, f(3)=f(4)=3, f(5..12)=4,
+    f(13..18)=6 — GREEN)
+
+(G) DUAL CROSS-CHECK — brute enumeration of all 19-smooth <= 1,000,000,000,000,000,000:
+   19-smooth count <= 1,000,000,000,000,000,000: 7039193
+   brute pairs: 167 ; census pairs: 167 ; EQUAL: True
+   brute 6-run check k=19 (<= 1,000,000,000,000,000,000): CLEAN (no 6 consecutive 19-smooth integers all > 19 below the bound, independent of Pell)
+   brute 6-run check k=20 (<= 1,000,000,000,000,000,000): CLEAN (no 6 consecutive 19-smooth integers all > 20 below the bound, independent of Pell)
+   brute 6-run check k=21 (<= 1,000,000,000,000,000,000): CLEAN (no 6 consecutive 19-smooth integers all > 21 below the bound, independent of Pell)
+   brute 6-run check k=22 (<= 1,000,000,000,000,000,000): CLEAN (no 6 consecutive 19-smooth integers all > 22 below the bound, independent of Pell)
+   brute maximal-run decomposition EQUALS the census decomposition (full range)
+   runs of length >= 3 (brute, entire range): [(1, 22), (24, 5), (32, 5), (38, 3), (48, 5), (54, 4), (63, 4), (75, 4), (98, 3), (119, 3), (152, 3), (168, 4), (208, 3), (323, 3), (350, 3), (440, 3), (2430, 3)]
+   brute L recount k=19: 5 == Pell L — GREEN
+   brute L recount k=20: 5 == Pell L — GREEN
+   brute L recount k=21: 5 == Pell L — GREEN
+   brute L recount k=22: 5 == Pell L — GREEN
+
+THE CERTIFIED FRONTIER OF ERDOS #961 NOW READS:
+   f(2)=2, f(3)=f(4)=3, f(k)=4 for 5<=k<=12, f(k)=6 for 13<=k<=18,
+   f(k)=6 for 19<=k<=22
+STORMER961_K19 ALL GREEN — 16.5s

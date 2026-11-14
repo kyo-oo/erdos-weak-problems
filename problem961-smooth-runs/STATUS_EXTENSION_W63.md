@@ -1,26 +1,33 @@
-# STATUS_EXTENSION_W63 — THE 17-TIER: Erdős #961 frontier extended, f(17) = f(18) = 6
+# STATUS_EXTENSION_W63 — THE 17-TIER AND THE 19-TIER: Erdős #961 frontier
+# extended, f(17) = f(18) = 6 and f(19) = f(20) = f(21) = f(22) = 6
 
 **S063 W63 volley, task W63-C1r (resumed from the salvage pack — the predecessor's
 killing blow was an adapter timeout; its completed probe `probe_k17_fund.py`/
 `probe_k17_fund.json` (the mod-M filtered CF over all 127 equations, log
 `probe_k17_v3.log`: "ALL 127 fundamentals done… alive (Y1 17-smooth): 88 ; dead: 39")
-is now the (A1) cross-implementation receipt of this engine).** Engines:
-`stormer961_k17.py` (output `stormer961_k17_output.txt`, ALL GREEN, 5.9s) and the
-W63 companion brute-minimality job `brute_k17_heavy.py` (log
-`logs/brute_k17_heavy.log`, GREEN, 152,418,404 checks, 56s).
+is now the (A1) cross-implementation receipt of the 17-tier engine).** Engines:
+`stormer961_k17.py` (output `stormer961_k17_output.txt`, ALL GREEN, 5.9s) with the
+companion brute-minimality job `brute_k17_heavy.py` (log
+`logs/brute_k17_heavy.log`, GREEN, 152,418,404 checks, 56s); and — the second
+frontier row of the same wave — `stormer961_k19.py` (output
+`stormer961_k19_output.txt`, ALL GREEN, 16.5s) with its companion
+`brute_k19_heavy.py` (log `logs/brute_k19_heavy.log`, GREEN, 691,764,617 checks,
+364s).
 
-## THE NEW CERTIFIED THEOREM (complete, unconditional)
+## THE NEW CERTIFIED THEOREMS (complete, unconditional)
 
-$$f(17)=f(18)=6 .$$
+$$f(17)=f(18)=6 \qquad\text{and}\qquad f(19)=f(20)=f(21)=f(22)=6 .$$
 
 The certified frontier of #961 now reads
-$$f(2)=2,\quad f(3)=f(4)=3,\quad f(k)=4\ (5\le k\le 12),\quad f(k)=6\ (13\le k\le 18).$$
+$$f(2)=2,\quad f(3)=f(4)=3,\quad f(k)=4\ (5\le k\le 12),\quad f(k)=6\ (13\le k\le 22).$$
 
 *Proof architecture (the campaign's generic Størmer–Pell certification, T8 of
-COMPLETE_PROOF.md, executed at the 7-prime tier).* For every k ∈ {17,18} the
-primes ≤ k are exactly S = {2,3,5,7,11,13,17} (18 = 2·3² adds no new prime), so
-k-smooth = 17-smooth for both k, and by the window law (L0):
-f(k) = 1 + max{L : L consecutive 17-smooth integers all > k}.
+COMPLETE_PROOF.md, executed at the 7-prime and 8-prime tiers).* For every
+k ∈ {17,18} the primes ≤ k are exactly S₇ = {2,3,5,7,11,13,17} (18 = 2·3²
+adds no new prime); for every k ∈ {19,20,21,22} the primes ≤ k are exactly
+S₈ = S₇ ∪ {19} (20 = 2²·5, 21 = 3·7, 22 = 2·11 add no new prime); so
+k-smooth is 17-smooth resp. 19-smooth on each block, and by the window law
+(L0): f(k) = 1 + max{L : L consecutive k-smooth integers all > k}.
 
 **The complete Størmer–Pell census at S = {2,3,5,7,11,13,17} (the new T2-tier
 theorem).** The consecutive 17-smooth pairs (x, x+1), x ≥ 1, are **exactly 108**;
@@ -172,9 +179,113 @@ global, the brute is the independent dual.
 ## Honest scope
 
 Each new value is a certified exact value of f at the stated k — "the certified
-frontier extended to k = 18". The general-k law (Erdős's asymptotic
-f(k) < 3k/log k, conjectured (log k)^{O(1)}) remains OPEN and is not claimed.
-The next tier (k = 19..22, prime set {2,3,5,7,11,13,17,19} — 20 = 2²·5,
-21 = 3·7, 22 = 2·11 add no new prime — 2⁸−1 = 255 Pell equations) is the next
-fixed prime set the same architecture closes; the new (A2) p-th-power descent
-certificate is the law that keeps the tier's monster-Y1 rows certifiable.
+frontier extended to k = 22" (six consecutive new rows in one wave). The
+general-k law (Erdős's asymptotic f(k) < 3k/log k, conjectured (log k)^{O(1)})
+remains OPEN and is not claimed. The next tier (k = 23..28, prime set
+{2,3,5,7,11,13,17,19,23} — 2⁹−1 = 511 Pell equations) is the next fixed prime
+set the same architecture closes; the W63 (A2) p-th-power descent certificate
+is the law that keeps every monster-Y1 row (the 19-tier already carries
+Y1 = 8.7·10³¹ at a = 46189) certifiable without any brute scan.
+
+---
+
+# PART II — THE 19-TIER: f(19) = f(20) = f(21) = f(22) = 6
+
+Engine `stormer961_k19.py` (ALL GREEN, 16.5s) — the 8-prime tier
+S = {2,3,5,7,11,13,17,19}, 255 squarefree S-units, SODD = {3,5,7,11,13,17,19},
+ZMAX = 20 (z_p ≤ p+1 ≤ 20). Identical architecture to Part I; the deltas:
+
+## The complete Størmer–Pell census at S = {2,3,5,7,11,13,17,19}
+
+The consecutive 19-smooth pairs (x, x+1), x ≥ 1, are **exactly 167**; the
+largest is **(11859210, 11859211)** (x = 2·3⁴·5·11⁴, x+1 = 7·13·19⁴,
+sf(x(x+1)) = 910 = 2·5·7·13, b = 393129 = 3²·11²·19², n = 3; machine-checked).
+The 108 W63 17-tier pairs appear **verbatim** (full-list equality by k-smooth
+filtering, asserted against the receipt `census_k17.json`); the **59 new pairs**
+(all involving the prime 19 on at least one side): x = 18, 19, 38, 56, 75, 76,
+95, 132, 152, 170, 189, 208, 209, 285, 323, 342, 360, 399, 455, 475, 494,
+512, 968, 1215, 1330, 1444, 1520, 1539, 1728, 2375, 2431, 2925, 3135, 3249,
+4199, 5775, 5928, 5984, 6174, 6859, 10240, 10829, 12635, 13376, 14079, 14364,
+23408, 27455, 28899, 43680, 89375, 104975, 165375, 228095, 601425, 633555,
+709631, 5909760, 11859210.
+
+- **(A) The 255 Pell equations.** Exact CF with the in-loop certificates
+  (non-decreasing denominators, every pre-hit convergent exactly checked);
+  anchors (2)→(3,2), (3)→(2,1), (5)→(9,4), (6)→(5,2), (7)→(8,3),
+  (13)→(649,180), (17)→(33,8), **(19)→(170,39)**, (5005)→(44268809311,
+  625742712). Largest fundamentals: **X1 with 35 digits, Y1 =
+  86758237470381438680540739974304 (32 digits) at a = 46189**.
+  - **(A1) CROSS-IMPLEMENTATION:** a second, structurally different CF run —
+    the mod-M filtered CF (M = 2⁶¹−1, the salvage-probe law) — **255/255
+    EQUAL**.
+  - **(A2) THE P-TH-POWER DESCENT CERTIFICATE (the W63 law): 255 equations
+    certified fundamental, 1398 prime-exponent searches** — including the
+    monster rows beyond any brute scan: a = 46189 (Y1 = 8.7·10³¹), 461890
+    (4.8·10²⁶), 3233230 (2.2·10²⁷), 58786 (3.0·10²⁰), 9699690
+    (2.2·10¹⁶), 3553 (2.2·10¹⁶), 969969 (1.2·10¹⁶), … This is the tier where
+    the new law became LOAD-BEARING: the W62-style brute-only certification
+    would have been impossible.
+  - **(A3) BRUTE minimality:** 5,244,374 checks in-engine (the 189 rows with
+    Y1 ≤ 10⁶) **+ 691,764,617 checks in the W63 companion job**
+    `logs/brute_k19_heavy.log` (the 26 rows with 10⁶ < Y1 ≤ 10⁸) — **215 of 255
+    equations brute-certified minimal; the 40 monster rows (Y1 up to 8.7·10³¹)
+    carry the complete (A2) proof.**
+- **(B) The prune.** 112 equations die (Y1 not 19-smooth), each with the kill
+  receipt (the prime > 19 dividing Y1; full list in `stormer961_k19_output.txt`).
+  **143 survive.**
+- **(C) Lucas/valuation/parity laws** — instance-verified over n = 2..N_a for
+  all 143 survivors × 7 odd primes; **(D) size bound** with
+  C_a = log₂Y1 + v₂(X1) + Σ_{p odd ≤ 19} B_{a,p} log₂p, N_a ∈ [8, 26];
+  **(E) the census** with per-pair identity + dictionary asserts
+  (checkpoint receipt `census_k19.json`).
+
+## THE f(k) ROWS k = 19..22 (dual: witness + exclusion)
+
+- **Witness.** (24,25,26,27,28) — all 19-smooth, all > 22 — gives f(k) ≥ 6 for
+  all four k. **Exclusion.** No census pair x > k has x, …, x+5 all 19-smooth
+  (machine scan of all 167 pairs, k = 19..22) — a 6-run above k would contain
+  a census pair (m, m+1) with m > k. Hence **f(19) = f(20) = f(21) = f(22) = 6**
+  (machine: L = 5 for all four — the three 5-runs (24..28), (32..36), (48..52)
+  all sit above 22).
+
+**Maximal-run decomposition of the 19-smooth integers:** (1, …, 22) [len 22 —
+19..22 join; any 23 consecutive integers contain a multiple of the prime 23,
+so 22 is the global maximum], then (20,21,22) merges away; the 5-runs (24..28),
+(32,33,34,35,36), (48,49,50,51,52); **NEW 4-runs** (54,55,56,57) [57 = 3·19
+extends the W62 run], (75,76,77,78) [75 = 3·5², 76 = 2²·19, 77 = 7·11,
+78 = 2·3·13], (63,64,65,66), (168,169,170,171) [171 = 3²·19 extends the W63
+run]; **NEW 3-runs** (38,39,40), (98,99,100), (119,120,121), (152,153,154),
+(208,209,210), (323,324,325), (350,351,352), (440,441,442), (2430,2431,2432)
+[2431 = 11·13·17, 2432 = 2⁷·19]; all other runs have length ≤ 2. **No 6-run
+of 19-smooth integers exists above 22** (indeed above 19).
+
+## CALIBRATION + DUAL CROSS-CHECK (19-tier)
+
+- The 40 K25 / 68 W62 / 108 W63 pairs appear VERBATIM (full-list equality by
+  k-smooth filtering; the 108 x-values loaded from the receipt
+  `census_k17.json`). f(2..18) re-derived: [2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4,
+  6, 6, 6, 6, 6, 6] — GREEN.
+- Brute enumeration of **all 7,039,193 19-smooth numbers ≤ 10¹⁸** (8-deep
+  nested smooth generation): consecutive pairs = **exactly the 167 census
+  pairs** (EQUAL: True — the largest census pair 11859210 ≪ 10¹⁸, so the brute
+  covers the FULL census range); brute no-6-run checks for k = 19..22 below
+  10¹⁸: CLEAN; brute maximal-run decomposition EQUALS the census decomposition;
+  brute L recount (5 for all four k) equals the Pell L — GREEN ×4.
+
+## Receipts (machine counts, 19-tier)
+
+| component | count |
+|---|---|
+| Pell equations solved + Pell-identity checks | 255 |
+| (A1) cross-implementation agreement (mod-M filtered CF) | 255/255 |
+| (A2) p-th-power descent certificates (prime-exponent searches) | 255 eq / 1,398 |
+| (A3) brute minimality checks (in-engine, Y1 ≤ 10⁶) | 5,244,374 |
+| (A3) brute minimality checks (companion, 26 heavy rows) | 691,764,617 |
+| (A3) monster rows certified by the (A2) complete proof (Y1 > 10⁸) | 40 |
+| dead-equation kill receipts (prime > 19 in Y1) | 112 |
+| survivors: Lucas/valuation/parity instances | 143 × (n = 2..N_a) × 7 primes |
+| census pairs certified (identity + smoothness + x(x+1)=ab² + dictionary) | 167 |
+| exclusion scans (no 6-run above k, k = 19..22) | 4 × 167 pairs |
+| calibration: old-pair containment (11/13/17-tiers) + f(2..18) | 40 + 68 + 108 + 17 rows |
+| brute dual: 19-smooth enumerated ≤ 10¹⁸ | 7,039,193 |
+| brute pairs equality + no-6-run + decomposition + L recount | 167 / 4 / 17 runs / 4 |
