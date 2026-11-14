@@ -718,9 +718,34 @@ theorem e289_cascade_anchor_values :
 
 /-! ## §9 THE CASCADE MASTER BOARD. -/
 
+/-- THE k=5 CASCADE SHAPE (extracted from the family witness): the five
+pairwise-non-adjacent length-≥2 blocks [2,3], [14,15], [84,85], [492,493],
+[2870,2871] with all four gaps ≥ 1 — the full #289 shape conjunct of the
+k=5 near-one family, isolated as its own named theorem for the board. -/
+theorem e289_cascade_shape_k5 :
+    (longWindow 2 3 ∧ longWindow 14 15 ∧ longWindow 84 85 ∧
+      longWindow 492 493 ∧ longWindow 2870 2871 ∧
+      3 + 1 < 14 ∧ 15 + 1 < 84 ∧ 85 + 1 < 492 ∧ 493 + 1 < 2870) := by
+  obtain ⟨⟨h1, h2, h3, h4, h5⟩, ⟨g1, g2, g3, g4⟩, _⟩ := e289_cascade_family_k5
+  exact ⟨h1, h2, h3, h4, h5, g1, g2, g3, g4⟩
+
+/-- THE k=7 CASCADE SHAPE (extracted from the family witness): the seven
+pairwise-non-adjacent length-≥2 blocks [2,3] … [97512,97513] with all six
+gaps ≥ 1 — the full #289 shape conjunct of the k=7 near-one family, isolated
+as its own named theorem for the board. -/
+theorem e289_cascade_shape_k7 :
+    (longWindow 2 3 ∧ longWindow 14 15 ∧ longWindow 84 85 ∧
+      longWindow 492 493 ∧ longWindow 2870 2871 ∧
+      longWindow 16730 16731 ∧ longWindow 97512 97513 ∧
+      3 + 1 < 14 ∧ 15 + 1 < 84 ∧ 85 + 1 < 492 ∧ 493 + 1 < 2870 ∧
+      2871 + 1 < 16730 ∧ 16731 + 1 < 97512) := by
+  obtain ⟨⟨h1, h2, h3, h4, h5, h6, h7⟩, ⟨g1, g2, g3, g4, g5, g6⟩, _⟩ :=
+    e289_cascade_family_k7
+  exact ⟨h1, h2, h3, h4, h5, h6, h7, g1, g2, g3, g4, g5, g6⟩
+
 /-- THE P289 CASCADE BOARD (7 conjuncts): the additive recurrence + THE
 PELL INVARIANT + THE S-RELATION + THE SPLIT CORE + the value table + the
-two concrete near-one families (k=5, k=7). -/
+k=5 shape + the k=7 shape. -/
 theorem e289_cascade_board :
     (∀ n : Nat, dSeq (n + 2) + dSeq n = 6 * dSeq (n + 1)) ∧
     (∀ n : Nat, dSeq (n + 1) * dSeq (n + 1) + dSeq n * dSeq n
@@ -738,11 +763,7 @@ theorem e289_cascade_board :
       2871 + 1 < 16730 ∧ 16731 + 1 < 97512) :=
   ⟨e289_dSeq_add, e289_pell, e289_srel, e289_split,
     e289_cascade_anchor_values,
-    by obtain ⟨⟨h1, h2, h3, h4, h5⟩, ⟨g1, g2, g3, g4⟩, _⟩ := e289_cascade_family_k5
-      exact ⟨h1, h2, h3, h4, h5, g1, g2, g3, g4⟩,
-    by obtain ⟨⟨h1, h2, h3, h4, h5, h6, h7⟩, ⟨g1, g2, g3, g4, g5, g6⟩, _⟩ :=
-        e289_cascade_family_k7
-      exact ⟨h1, h2, h3, h4, h5, h6, h7, g1, g2, g3, g4, g5, g6⟩⟩
+    e289_cascade_shape_k5, e289_cascade_shape_k7⟩
 
 /-! ## RECEIPT. -/
 
@@ -788,6 +809,8 @@ theorem e289_cascade_board :
 #print axioms E289.e289_cascade_family_k5
 #print axioms E289.e289_cascade_family_k7
 #print axioms E289.e289_cascade_anchor_values
+#print axioms E289.e289_cascade_shape_k5
+#print axioms E289.e289_cascade_shape_k7
 #print axioms E289.e289_cascade_board
 
 
