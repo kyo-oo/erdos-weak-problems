@@ -1,0 +1,4 @@
+=== crosscheck939 — SECOND-METHOD BOX RE-DERIVATIONS (W63-B1) ===
+  [B13] M4 (e,c)/(c,a) traversals: EO 2258 hits (receipt 2258) -> exact match True; OO 1610 hits (receipt 1610) -> exact match True; CON 0 vs 0 -> True; coprime hits 0; 1.6s
+  [B13] M3 pure-Python brute: 35834 sum-hits total (31966 EE — excluded by coprimality; 3868 mixed/odd vs receipt 3868) -> exact match False; coprime hits among ALL pairs: 0; 19.7s
+=== crosscheck939 VERDICT: MISMATCH ===
