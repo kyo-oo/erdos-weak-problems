@@ -795,13 +795,16 @@ theorem SubN_append : ∀ (l1 l2 : List Nat) (c : Nat) (l' : List Nat),
       exact ⟨c1 + 1, c2, t', l2', by omega, SubN.drop c1 a t t' h1, h2, hsplit⟩
 
 /-- The composition law for counted deletions (the ∃-count form: omega
-bridges the count arithmetic; the second deletion's target is kept
-universally quantified so the inner cases can peel it). -/
-theorem SubN_comp : ∀ (c1 c2 : Nat) (l m : List Nat), SubN c1 l m → ∀ (m' : List Nat),
+bridges the count arithmetic; r2 binder-law restructure — the second count
+`c2` and its target are trailing binders INSIDE the induction motive, the
+CI-green `SubN_append` shape: no `generalizing` clause (that clause
+auto-reintroduces the reverted variable as an inaccessible `c2✝`, shifting
+the case binders), each case intros its own `c2 m' h2`, and the IH closes
+generally in the second count). -/
+theorem SubN_comp : ∀ (c1 : Nat) (l m : List Nat), SubN c1 l m → ∀ (c2 : Nat) (m' : List Nat),
     SubN c2 m m' → ∃ c, c = c1 + c2 ∧ SubN c l m' := by
-  intro c1 c2 l m
-  intro h1
-  induction h1 generalizing c2 with
+  intro c1 l m h1
+  induction h1 with
   | refl l0 =>
     intro c2 m' h2
     exact ⟨c2, by omega, h2⟩
@@ -844,7 +847,7 @@ theorem delAt_SubN2 : ∀ (l : List Nat) (i j : Nat), ∃ c, c ≤ 2 ∧ SubN c 
   intro l i j
   obtain ⟨c1, hc1, h1⟩ := SubN_delAt l i
   obtain ⟨c2, hc2, h2⟩ := SubN_delAt (delAt l i) j
-  obtain ⟨c, hc, hcm⟩ := SubN_comp c1 c2 l (delAt l i) h1 (delAt (delAt l i) j) h2
+  obtain ⟨c, hc, hcm⟩ := SubN_comp c1 l (delAt l i) h1 c2 (delAt (delAt l i) j) h2
   exact ⟨c, by omega, hcm⟩
 
 /-- **(C2) THE 2-REDUNDANCY, GENERAL**: after ANY at-most-2 position
