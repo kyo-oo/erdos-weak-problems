@@ -16,7 +16,7 @@ targets = universe(B_HI)
 print(f"universe {len(targets)} | done {len(state['done'])} | skip {sorted(SKIP)}", flush=True)
 for (a, b) in targets:
     key = f"{a}/{b}"
-    if key in state["done"] or key in SKIP:
+    if key in state["done"] or key in SKIP or key in set(state["failed"]):
         continue
     if time.time() - T0 > BUDGET:
         print(f"[budget stop] done={len(state['done'])}", flush=True)
