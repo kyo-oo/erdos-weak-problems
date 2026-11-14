@@ -87,3 +87,19 @@ that family; the general even family needs the full φ-parity engine). No `sorry
 anywhere in the file; every theorem is kernel-decided or arsenal-bridged.
 
 *The CI log IS the proof. Quoted verbatim above. THE #411 KILL IS COMPLETE.*
+
+## ADDENDUM W64-A (double-green revalidation)
+
+The banking push itself (`1aab7fe`, STATUS_W64.md + the saved kernel-c log — zero Lean-code
+change) triggered a SECOND full CI run: **run 43599564453** (sha `1aab7fe0`, started
+2026-11-14T13:24:00Z, completed success at poll 13:53:28Z). All three jobs green:
+
+```
+132461203080 kernel-a completed success
+132461203013 kernel-b completed success
+132461202740 kernel-c completed success
+```
+
+TWO INDEPENDENT GREEN CI RUNS on the same kernel blob (md5 `dc307f253cbcbd861da3a0815af575b0`
+for Erdos411.lean, blob last modified at `eadcfb4e`): 43598294749 and 43599564453.
+Local sanity re-check: `grep -c sorry Erdos411.lean` = **0**. The kill is double-certified.
