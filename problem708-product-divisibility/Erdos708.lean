@@ -1580,6 +1580,7 @@ the census box and every window start t = 1..40 (r = t - 1), the
 exact-budget enumerator finds an exactly-4 cover: 1365 x 40 = 54600
 decide-certified instances (the Python mirror ran the identical DFS over
 the same box with 0 failures — g4_verify_out.txt (B)). -/
+set_option maxHeartbeats 32000000 in
 theorem e708_g4_box_exact : (box708).all (fun A =>
     (List.range 40).all (fun r =>
       coverExact (prod708 A) (win708 (r + 1) (maxA A)) 4 1)) = true := by
