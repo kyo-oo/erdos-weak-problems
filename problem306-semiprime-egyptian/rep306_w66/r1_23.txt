@@ -1,0 +1,27 @@
+#306 semiprime Egyptian representation receipt — W66-P306-E
+rational: 1/23   (b squarefree, b <= 30 census box)
+method:   A:direct-fresh-window
+terms:    3 distinct semiprime denominators n = p*q, p < q
+
+1/23 = 1/35 + 1/115 + 1/161
+
+term table (n = p*q, p < q, primes certified by trial division):
+      35 = 5 * 7
+     115 = 5 * 23
+     161 = 7 * 23
+
+verification transcript (python /home/z/.venv/bin/python3, Fraction arithmetic):
+  >>> from fractions import Fraction
+  >>> dens = [35, 115, 161]
+  >>> sum(Fraction(1, n) for n in dens) == Fraction(1, 23)
+  True
+  >>> len(set(dens)) == len(dens)
+  True
+  >>> all(certify(n) is not None for n in dens)   # p<q semiprime, trial division
+  True
+  integer cross-check over D = lcm(b, dens) = 805:
+  >>> sum(D // n for n in dens) == 1 * (D // 23)
+  True   (acc = 35, a*(D//b) = 35)
+
+engine: engine306_w66.py (MITM/LP staged disjoint-window composer v2)
+state:  EVIDENCE_306_W66E.json  (census checkpoint)

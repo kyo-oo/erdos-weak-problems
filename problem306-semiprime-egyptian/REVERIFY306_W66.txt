@@ -1,0 +1,134 @@
+==============================================================================
+W66-P306-E SECOND-METHOD REVERIFICATION — full surviving receipt corpus
+==============================================================================
+SRC-A EVIDENCE_306_W63.json : 89 receipts (W63-D5 census, b<=21 families)
+SRC-B EVIDENCE_306.txt      : 46 receipts (round-1 hunt, b<=30 scattered)
+SRC-C Erdos306.lean embedded : 19 receipts (decide-certified kernel identities)
+
+------------------------------------------------------------------------------
+SRC-A verified 89/89
+SRC-B verified 46/46
+SRC-C verified 19/19
+NOTE 2/3: kernel receipt differs from census receipt (both verified independently — distinct valid representations).
+NOTE 2/5: kernel receipt differs from census receipt (both verified independently — distinct valid representations).
+NOTE 4/5: kernel receipt differs from census receipt (both verified independently — distinct valid representations).
+NOTE 4/11: SRC-A and SRC-B disagree on the witness list (A 9 terms vs B 4) — both independently verified, distinct valid representations.
+NOTE 5/11: SRC-A and SRC-B disagree on the witness list (A 8 terms vs B 7) — both independently verified, distinct valid representations.
+NOTE 4/19: SRC-A and SRC-B disagree on the witness list (A 3 terms vs B 4) — both independently verified, distinct valid representations.
+NOTE 8/21: SRC-A and SRC-B disagree on the witness list (A 5 terms vs B 4) — both independently verified, distinct valid representations.
+NOTE 8/21: kernel receipt differs from census receipt (both verified independently — distinct valid representations).
+
+------------------------------------------------------------------------------
+UNION REPRESENTED SET: 105 distinct rationals (all second-method verified unless listed CRITICAL below)
+census box position: 105/181 rationals (b squarefree <= 30) already represented by verified receipts
+remaining: 76: ['9/10', '10/11', '12/13', '13/14', '14/15', '15/17', '16/17', '16/19', '17/19', '18/19', '19/21', '20/21', '7/22', '13/22', '15/22', '17/22', '19/22', '21/22', '1/23', '2/23', '3/23', '4/23', '5/23', '6/23', '7/23', '9/23', '11/23', '12/23', '13/23', '14/23', '15/23', '16/23', '17/23', '18/23', '19/23', '20/23', '21/23', '22/23', '7/26', '11/26', '15/26', '17/26', '19/26', '21/26', '23/26', '25/26', '1/29', '2/29', '3/29', '4/29', '5/29', '7/29', '9/29', '11/29', '12/29', '13/29', '14/29', '15/29', '16/29', '17/29', '18/29', '19/29', '20/29', '21/29', '22/29', '23/29', '24/29', '25/29', '26/29', '27/29', '28/29', '1/30', '17/30', '19/30', '23/30', '29/30']
+
+------------------------------------------------------------------------------
+THE FULL REPRESENTED-SET LIST (name: terms, provenance A/B/C):
+  1/2      9 terms  max den       91  src=AC
+  1/3      3 terms  max den       15  src=ABC
+  2/3     15 terms  max den      143  src=AC
+  1/5      3 terms  max den       35  src=ABC
+  2/5     10 terms  max den      143  src=AC
+  3/5     13 terms  max den      187  src=AC
+  4/5     27 terms  max den      391  src=AC
+  1/6      1 terms  max den        6  src=ABC
+  5/6     28 terms  max den      391  src=AC
+  1/7      3 terms  max den       35  src=ABC
+  2/7      3 terms  max den       21  src=ABC
+  3/7      7 terms  max den       91  src=AC
+  4/7     10 terms  max den       91  src=AC
+  5/7     19 terms  max den      187  src=A
+  6/7     35 terms  max den      589  src=A
+  1/10     1 terms  max den       10  src=AB
+  3/10     8 terms  max den      143  src=AC
+  7/10    21 terms  max den      323  src=A
+  1/11     3 terms  max den       77  src=AB
+  2/11     6 terms  max den      143  src=A
+  3/11     4 terms  max den       77  src=ABC
+  4/11     9 terms  max den       91  src=AB
+  5/11     8 terms  max den      143  src=AB
+  6/11    10 terms  max den       91  src=A
+  7/11    15 terms  max den      221  src=A
+  8/11    20 terms  max den      187  src=A
+  9/11    28 terms  max den      391  src=A
+  1/13     5 terms  max den      221  src=A
+  2/13     3 terms  max den       65  src=AB
+  3/13     3 terms  max den       39  src=ABC
+  4/13     4 terms  max den       65  src=A
+  5/13     7 terms  max den       91  src=AB
+  6/13     8 terms  max den       91  src=A
+  7/13    14 terms  max den      221  src=A
+  8/13    14 terms  max den      187  src=A
+  9/13    16 terms  max den      143  src=A
+  10/13   29 terms  max den      391  src=A
+  11/13   28 terms  max den      391  src=A
+  1/14     1 terms  max den       14  src=AB
+  3/14     2 terms  max den       21  src=ABC
+  5/14     8 terms  max den       91  src=A
+  9/14    15 terms  max den      247  src=A
+  11/14   27 terms  max den      391  src=A
+  1/15     1 terms  max den       15  src=AB
+  2/15     7 terms  max den      221  src=A
+  4/15     2 terms  max den       10  src=AB
+  7/15    11 terms  max den      143  src=A
+  8/15    11 terms  max den      143  src=A
+  11/15   22 terms  max den      323  src=A
+  13/15   31 terms  max den      391  src=A
+  1/17     3 terms  max den      323  src=A
+  2/17     6 terms  max den      187  src=A
+  3/17     5 terms  max den      119  src=AB
+  4/17     4 terms  max den      221  src=AB
+  5/17     4 terms  max den      119  src=AB
+  6/17     4 terms  max den       51  src=AB
+  7/17    11 terms  max den      143  src=A
+  8/17    11 terms  max den      187  src=A
+  9/17    10 terms  max den       91  src=A
+  10/17   14 terms  max den      143  src=A
+  11/17   20 terms  max den      323  src=A
+  12/17   18 terms  max den      187  src=A
+  13/17   28 terms  max den      391  src=A
+  14/17   29 terms  max den      391  src=A
+  1/19     3 terms  max den      209  src=AB
+  2/19     3 terms  max den      133  src=AB
+  3/19     4 terms  max den      247  src=A
+  4/19     3 terms  max den       57  src=AB
+  5/19     4 terms  max den      133  src=AB
+  6/19     9 terms  max den      247  src=A
+  7/19     5 terms  max den      209  src=AB
+  8/19    17 terms  max den      323  src=A
+  9/19    20 terms  max den      323  src=A
+  10/19   20 terms  max den      247  src=A
+  11/19   16 terms  max den      209  src=A
+  12/19   19 terms  max den      247  src=A
+  13/19   19 terms  max den      209  src=A
+  14/19   27 terms  max den      437  src=A
+  15/19   27 terms  max den      391  src=A
+  1/21     1 terms  max den       21  src=AB
+  2/21     2 terms  max den       35  src=ABC
+  4/21     5 terms  max den       91  src=A
+  5/21     2 terms  max den       14  src=AB
+  8/21     5 terms  max den       35  src=ABC
+  10/21    8 terms  max den       91  src=A
+  11/21    9 terms  max den       91  src=A
+  13/21   13 terms  max den      187  src=A
+  16/21   27 terms  max den      391  src=A
+  17/21   26 terms  max den      391  src=A
+  1/22     1 terms  max den       22  src=B
+  3/22     4 terms  max den       77  src=B
+  5/22     3 terms  max den       77  src=B
+  9/22     5 terms  max den       33  src=B
+  8/23     4 terms  max den       69  src=B
+  10/23    7 terms  max den      253  src=B
+  1/26     1 terms  max den       26  src=B
+  3/26     2 terms  max den       65  src=B
+  5/26     2 terms  max den       39  src=B
+  9/26     6 terms  max den       65  src=B
+  6/29     4 terms  max den      145  src=B
+  8/29     5 terms  max den      319  src=B
+  10/29    4 terms  max den       87  src=B
+  7/30     2 terms  max den       15  src=B
+  11/30    4 terms  max den       35  src=B
+  13/30    5 terms  max den       35  src=B
+
+VERDICT: ALL RECEIPTS REVERIFIED CLEAN — zero mismatches, zero non-(p<q)-semiprime denominators, zero duplicate denominators, zero sum mismatches.
