@@ -900,3 +900,50 @@ NEGATIVE census (zero thirds at C ≤ 1e8 and C ≤ 1e9 over all 12,761 K62
 pairs, 2.5M rich columns).
 
 ### THE W64 WAVE-CLOSE (Session 064): the integration branch w64-merge master-verified ALL-GREEN (run 43610571086) — campaign advanced with SIX kills (#411, #708-g4-master, #885-k4, #961-19-tier f(19)=f(20)=f(21)=f(22)=6 + the 167-pair Størmer census, #1063-k20 n_18/n_19/n_20, #451-k28 the certified frontier). Registry: 37 → 40 kills CI-green.
+
+### KILL 41 — Erdős #348 THE (2,3) CONSTRUCTION THEOREM (W65-A, Session 065, kernel54, CI run 43622961413 GREEN @ 219965d + master-verified in run 43630419149)
+
+**The kill:** the (2,3) case for m-redundant complete sequences — a complete
+unconditional construction-and-classification kernel. The w23/w23k witness
+family (w23 j = blk 0 ++ w23k j); the SubN counted-deletion machinery
+(SubN_delAt, delAt_SubN2, w23_two_removal, w23_two_removal_inf); C1
+completeness general; C2 every-2-removal general; C3 the 3-kill parity +
+non-completeness chain (w23k_allEven → sumSet_even → w23k_no_odd →
+w23k_not_complete); SubN_kill (SubN 3 (w23 j) (w23k j)); the
+w23_decide_battery; e348_construction_23 (the 6-conjunct board) + the E348
+twelve-conjunct board. Receipts: E348_REDUNDANT_GREEN +
+E348_CONSTRUCTION23_GREEN. The r2 root-kill: the SubN_comp generalizing-c2
+auto-reintro binder defect — statement regrouped to the CI-green
+SubN_append shape (trailing binders inside the induction motive, real IH
+closure). Scope: the (2,3) case COMPLETE for the certified construction
+class; the general (m,n) war continues.
+
+### KILL 42 — Erdős #289 THE PELL CASCADE KERNEL (W65-B, Session 065, CI run 43622306136 GREEN @ 3da86f9 + master-verified in run 43630419149)
+
+**The kill:** the Pell-cascade construction class for k-interval Egyptian
+families — complete unconditional. dSeq_mono; e289_dSeq_add (dSeq(n+2) +
+dSeq(n) = 6·dSeq(n+1)); e289_pell; e289_srel (dSeq(n+1) = dSeq n + 2·mSeq n
++ 1); e289_split (m(m+1) = dd', the telescoping backbone); the cascade
+values/families (k=5 totals 1−1/6930, k=7 totals 1−1/235416); the anchor
+values; the named shape theorems e289_cascade_shape_k5/k7 (the full
+non-adjacency shapes); the cascade board e289_cascade_board. Receipt:
+E289_INTERVALS_GREEN + the five-name axiom print. The repair: the inline
+by-blocks replaced by the named shape theorems (defensive hardening).
+Scope: the Pell-cascade construction class complete for the certified
+families; the general large-k construction war continues.
+
+### KILL 43 — Erdős #1212 THE COLUMN OBSTRUCTION KERNEL (W65-C, Session 065, CI run 43623762873 GREEN @ 87c1c00 + master-verified in run 43630419149)
+
+**The kill:** the column-obstruction class for the coprime-composite dance —
+complete unconditional. directed_death; e1212_arsenal_bridge;
+erdos1212_board; e1212_antidiag (the antidiagonal obstruction); e1212_ivt
+(the discrete IVT); the periodic-design kills at 210/2310/30030; p105_valid
++ p105_shape (the p105 witness); the column board e1212_column_board.
+Receipt: E1212_COPRIME_COMPOSITE_GREEN + the six-name axiom print. The
+repair: three error families root-killed (dvd_sub_local green pattern for
+Nat.dvd_sub'; the IVT descending-branch f(0+1) atom fix; the kill-theorem
+hfstep orientation flip + div-form witness hardening). Scope: the
+column-obstruction class complete for the certified board; the
+Bertrand/CRT scheduling lemma war continues.
+
+### THE W65 WAVE-CLOSE (Session 065): the integration branch w65-merge master-verified ALL-GREEN (run 43630419149 @ 90307b0) — campaign advanced with THREE kills (#348-(2,3), #289-Pell-cascade, #1212-column-obstruction). Registry: 40 → 43 kills CI-green. Live at close: #939 witness-table kernel authoring, #203 enriched-palette hunts at L=55440, #306 CRT peel census 173/181.

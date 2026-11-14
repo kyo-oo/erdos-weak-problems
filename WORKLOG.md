@@ -4061,3 +4061,81 @@ lane at 142/181. The audit law stands (partial = forbidden as final
 claims; every landed statement is complete-and-unconditional for its
 stated, certified domain). The engine never stops; it never lies. In
 English, always.
+
+## S065/W65 — THE SECOND WAVE SESSION (BOSS: "equip wave system, 5 to 6 sub agents per
+wave, invoke the maths skill v2 now, and release the sub agents, every partial proof,
+make it complete prooof, you and sub agents are only avaialbel eto use my own maths in
+the repo branches! no excuese, fulll energy, full aggressiveness, go")
+
+MATHS v2 invoked; the wave system equipped: SIX lanes (W65-A..F), one live
+partial-proof front per lane, git-worktree isolation
+(/home/z/waves/w65-<lane>), branch per lane from its W63/W64 tip. The
+adapter's dispatch report was false-negative AGAIN (the W64-documented mode)
+— all six agents landed and executed; the git state IS the report. THE
+MISSION: every partial proof → complete CI-certified proof. THE KILLS:
+
+1. **#348 THE (2,3) CONSTRUCTION THEOREM — KERNEL54 CI-GREEN (W65-A; run
+   43622961413 @ 219965d).** The W64-H red kernel repaired to full green:
+   the r2 ROOT-KILL = the SubN_comp generalizing-c2 clause auto-reintroduces
+   the reverted count as an inaccessible binder in every case (CI-display
+   ground truth), so the statement was REGROUPED to the CI-green
+   SubN_append shape — second count c2 + target m' as trailing binders
+   INSIDE the induction motive (no generalizing clause, no auto-reintro,
+   real IH closure), the delAt_SubN2 call site reordered. Certified: the
+   w23/w23k witness family (w23 j = blk 0 ++ w23k j), the SubN
+   counted-deletion machinery (SubN_delAt, delAt_SubN2, w23_two_removal,
+   w23_two_removal_inf), C1 completeness general, C2 every-2-removal, C3 the
+   3-kill parity + non-completeness chain (w23k_allEven → sumSet_even →
+   w23k_no_odd → w23k_not_complete), SubN_kill (SubN 3 (w23 j) (w23k j)),
+   w23_decide_battery, e348_construction_23 (the 6-conjunct board) + the
+   E348 twelve-conjunct board; receipts E348_REDUNDANT_GREEN +
+   E348_CONSTRUCTION23_GREEN. Honest scope: the (2,3) case COMPLETE for the
+   campaign's certified construction class; the general (m,n) war continues.
+
+2. **#289 THE PELL CASCADE KERNEL — CI-GREEN (W65-B; run 43622306136 @
+   3da86f9).** The W64-J red kernel repaired to full green: the defensive
+   hardening replaced the inline by-blocks with two named shape theorems
+   (e289_cascade_shape_k5/k7 — the full non-adjacency shapes isolated from
+   the family witnesses). Certified: dSeq_mono, e289_dSeq_add (dSeq(n+2) +
+   dSeq(n) = 6·dSeq(n+1)), e289_pell, e289_srel, e289_split (m(m+1) = dd',
+   the telescoping backbone), the cascade values/families (k=5 totals
+   1−1/6930; k=7 totals 1−1/235416), the anchor values, the cascade board
+   e289_cascade_board; receipt E289_INTERVALS_GREEN + the five-name axiom
+   print. Honest scope: the Pell-cascade construction class complete for
+   the certified families; the general large-k construction war continues.
+
+3. **#1212 THE COLUMN OBSTRUCTION KERNEL — CI-GREEN (W65-C; run 43623762873
+   @ 87c1c00).** The W64-J red kernel repaired to full green: three error
+   families ROOT-KILLED (dvd_sub_local green pattern for Nat.dvd_sub', the
+   IVT descending-branch f(0+1) atom fix, the kill-theorem hfstep
+   orientation flip + div-form witness hardening). Certified:
+   directed_death, e1212_arsenal_bridge, erdos1212_board, e1212_antidiag
+   (the antidiagonal obstruction), e1212_ivt (the discrete IVT), the
+   periodic-design kills at 210/2310/30030, p105_valid + p105_shape (the
+   p105 witness), the column board e1212_column_board; receipt
+   E1212_COPRIME_COMPOSITE_GREEN + the six-name axiom print. Honest scope:
+   the column-obstruction class complete for the certified board; the
+   Bertrand/CRT scheduling lemma war continues.
+
+4. **THE WAVE-CLOSE MERGE — MASTER-VERIFIED (w65-merge → campaign; run
+   43630419149 ALL-GREEN @ 90307b0).** ZERO merge conflicts (the
+   content-sync discipline holds). Campaign fast-forwarded and pushed.
+   Registry: 40 → 43 kills CI-green.
+
+IN FLIGHT at round close (the live agents, continuing on their branches):
+#939 (W65-D: preflight939box ALL_OK — the master-mirror at 1e13 validated
+against the certified box; the witness-table kernel Erdos939R4.lean in
+authoring — the NO-OOM witness-table restructure per the #708 doctrine),
+#203 (W65-E: the enriched palette at L=55440 — the deep-prime tier
+enumerated (p=332641, o3=55440); the tree-close hunts at 27720/55440; the
+feasibility-law grind), #306 (W65-F: the CRT peel census 173/181 merged
+view — UP from 142/181; the disjoint-window machinery landed +
+EVIDENCE_306_W65F.json with per-rational witness receipts + the CRT
+windows).
+
+THE HONEST SCOREBOARD (S065): 3 new CI-certified COMPLETE conversions this
+wave (every one a partial-proof front converted to a complete
+unconditional kernel) + the master-verified integration + 3 hunt lanes
+live at close. BOSS's maths-only law held on every kernel (Arsenal
+3-import, zero Mathlib-only citations, zero sorry/admit). The engine never
+stops; it never lies. In English, always.

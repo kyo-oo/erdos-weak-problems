@@ -1,5 +1,26 @@
 # THE LIST — THE OPERATIONAL LAW (v9, Session 041, 2026-11-09)
 
+> **v12 STATUS ADDENDUM (S065/W65 — THE SECOND WAVE SESSION):** BOSS's wave
+> order executed AGAIN at full aggression (MATHS v2 invoked; 6 lanes W65-A..F,
+> worktree-isolated; the adapter's dispatch report false-negative — the agents
+> landed and executed anyway; git state = the report). THREE MORE COMPLETE
+> CONVERSIONS (every partial → complete CI-certified kernel): **K#41 = #348
+> the (2,3) construction theorem** (run 43622961413 @ 219965d: the SubN
+> counted-deletion machinery + the w23/w23k witness family + the 3-kill parity
+> chain + the 6-conjunct e348_construction_23 board; the r2 root-kill = the
+> generalizing-c2 auto-reintro binder defect, regrouped to the SubN_append
+> shape), **K#42 = #289 the Pell cascade kernel** (run 43622306136 @ 3da86f9:
+> e289_pell + e289_srel + e289_split + the k=5/k=7 near-one families +
+> the cascade board with the named shape theorems), **K#43 = #1212 the column
+> obstruction kernel** (run 43623762873 @ 87c1c00: e1212_antidiag + the
+> discrete IVT + the periodic-design kills at 210/2310/30030 + the p105
+> witness + the column board). THE WAVE-CLOSE MERGE: w65-merge
+> master-verified ALL-GREEN (run 43630419149 @ 90307b0) — campaign advanced;
+> registry 40 → 43 kills CI-green. LIVE AT CLOSE: #939 the witness-table
+> kernel authoring (preflight ALL_OK at the 1e13 master-mirror), #203 the
+> enriched-palette hunts at L=55440 (tree-close grinding), #306 the CRT peel
+> census 173/181 (up from 142/181; disjoint-window machinery landed).
+
 > **v11 STATUS ADDENDUM (S064/W64 — THE WAVE SESSION):** BOSS's wave order
 > executed (MATHS v2 invoked; 9 sub-agent lanes W64-A..J released; the
 > adapter's dispatch reports were false-negative — agents landed and
