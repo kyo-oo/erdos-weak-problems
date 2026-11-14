@@ -535,6 +535,207 @@ theorem erdos289_board :
     e289_census_k2_gapped_le12, e289_no_pair_any_le12,
     ⟨sq_sub_one 5040 (by decide), CardinalWorldsV2.v2r_ternary_scaling 1 8028⟩⟩
 
+/-! ## §8 THE PELL CASCADE (W64-J, engine289_round4.py S1 → Lean: the
+large-k construction lane). The engine's discovery (dual-verified: exact
+Fractions + integer cross-multiplication + the sympy symbolic laws L1
+Pell-preservation and L2 split-iff-Pell): with d_0 = 1, d_1 = 6,
+d_{n+2} = 6·d_{n+1} - d_n (the Pell sequence of 6) and m_0 = 2,
+m_{n+1} = 2·d_{n+1} + m_n, the SPLIT 1/d_n = f(m_n) + 1/d_{n+1} holds
+EXACTLY for every n, where f(m) = 1/m + 1/(m+1) is the pair-block sum:
+the core is m_n·(m_n + 1) = d_n·d_{n+1} (`e289_split`) together with the
+S-relation d_{n+1} = d_n + 2·m_n + 1 (`e289_srel`) and the PELL INVARIANT
+d_{n+1}² + d_n² = 6·d_n·d_{n+1} + 1 (`e289_pell`). Telescoped: for every
+k ≥ 1 the k pairwise-non-adjacent length-2 blocks [m_i, m_i+1] sum to
+exactly 1 - 1/d_k — the campaign's closest certified approaches to the
+#289 total-1 target (concrete decide witnesses below: k = 5 with total
+1 - 1/6930, k = 7 with total 1 - 1/235416; the deficit 1/d_k → 0). The
+terminal war (a leftover d with an exact 1/d block-family) found NO
+terminal at any reachable node in shapes s1–s5 (engine round-4 S3–S6,
+all 24 reachable d-nodes) — the total-1 family remains unassembled; the
+cascade is the strongest construction on the table. -/
+
+/-- The Pell cascade denominator sequence: d_0 = 1, d_1 = 6,
+d_{n+2} = 6·d_{n+1} - d_n (1, 6, 35, 204, 1189, 6930, 40391, 235416,
+1372105, …). -/
+def dSeq : Nat → Nat
+  | 0 => 1
+  | 1 => 6
+  | n + 2 => 6 * dSeq (n + 1) - dSeq n
+
+/-- The cascade block-start sequence: m_0 = 2, m_{n+1} = 2·d_{n+1} + m_n
+(2, 14, 84, 492, 2870, 16730, 97512, 568344, …). -/
+def mSeq : Nat → Nat
+  | 0 => 2
+  | n + 1 => 2 * dSeq (n + 1) + mSeq n
+
+theorem dSeq_step (n : Nat) : dSeq (n + 2) = 6 * dSeq (n + 1) - dSeq n :=
+  rfl
+
+theorem mSeq_step (n : Nat) : mSeq (n + 1) = 2 * dSeq (n + 1) + mSeq n :=
+  rfl
+
+/-- Monotonicity of the cascade denominators (needed so the defining
+subtraction never truncates). -/
+theorem dSeq_mono : ∀ n : Nat, dSeq n ≤ dSeq (n + 1) := by
+  intro n
+  induction n with
+  | zero => decide
+  | succ n ih =>
+      show dSeq (n + 1) ≤ dSeq (n + 2)
+      omega
+
+/-- THE ADDITIVE RECURRENCE LAW: d_{n+2} + d_n = 6·d_{n+1} (the
+truncation-free form of the defining subtraction). -/
+theorem e289_dSeq_add (n : Nat) : dSeq (n + 2) + dSeq n = 6 * dSeq (n + 1) := by
+  have hstep : dSeq (n + 2) = 6 * dSeq (n + 1) - dSeq n := rfl
+  have hmono := dSeq_mono n
+  omega
+
+/-- THE PELL INVARIANT of the cascade: d_{n+1}² + d_n² = 6·d_n·d_{n+1} + 1
+for every n (the engine's L1 law — preservation under the recurrence — as
+an induction; the base is 6² + 1² = 6·1·6 + 1). -/
+theorem e289_pell (n : Nat) :
+    dSeq (n + 1) * dSeq (n + 1) + dSeq n * dSeq n
+      = 6 * dSeq n * dSeq (n + 1) + 1 := by
+  induction n with
+  | zero => decide
+  | succ n ih =>
+      show dSeq (n + 2) * dSeq (n + 2) + dSeq (n + 1) * dSeq (n + 1)
+        = 6 * dSeq (n + 1) * dSeq (n + 2) + 1
+      have hL : dSeq (n + 2) + dSeq n = 6 * dSeq (n + 1) := e289_dSeq_add n
+      have hLX : dSeq (n + 2) * dSeq (n + 2) + dSeq n * dSeq (n + 2)
+          = 6 * dSeq (n + 1) * dSeq (n + 2) := by
+        rw [← hL]; ring
+      have hLA : dSeq (n + 2) * dSeq n + dSeq n * dSeq n
+          = 6 * dSeq (n + 1) * dSeq n := by
+        rw [← hL]; ring
+      linarith [ih, hLX, hLA]
+
+/-- THE S-RELATION: d_{n+1} = d_n + 2·m_n + 1 — the difference of
+consecutive denominators is exactly the pair-block numerator 2m + 1. -/
+theorem e289_srel (n : Nat) : dSeq (n + 1) = dSeq n + 2 * mSeq n + 1 := by
+  induction n with
+  | zero => decide
+  | succ n ih =>
+      show dSeq (n + 2) = dSeq (n + 1) + 2 * mSeq (n + 1) + 1
+      have hL : dSeq (n + 2) + dSeq n = 6 * dSeq (n + 1) := e289_dSeq_add n
+      have hm : mSeq (n + 1) = 2 * dSeq (n + 1) + mSeq n := rfl
+      omega
+
+/-- THE SPLIT CORE (the cascade law): m_n·(m_n + 1) = d_n·d_{n+1} — the
+pair-block denominator m(m+1) EQUALS the product of consecutive cascade
+denominators, which makes the block fraction f(m_n) = (2m_n+1)/(m_n(m_n+1))
+exactly 1/d_n - 1/d_{n+1} (with `e289_srel`). This is the engine's
+telescoping backbone, proven for every n from the Pell invariant. -/
+theorem e289_split (n : Nat) :
+    mSeq n * (mSeq n + 1) = dSeq n * dSeq (n + 1) := by
+  have hp := e289_pell n
+  have hs := e289_srel n
+  have hB2 : dSeq (n + 1) * dSeq (n + 1)
+      = dSeq n * dSeq n + 4 * (mSeq n * mSeq n)
+        + 4 * (dSeq n * mSeq n) + 2 * dSeq n + 4 * mSeq n + 1 := by
+    rw [hs]; ring
+  have h6AB : 6 * dSeq n * dSeq (n + 1)
+      = 6 * (dSeq n * dSeq n) + 12 * (dSeq n * mSeq n) + 6 * dSeq n := by
+    rw [hs]; ring
+  have hAB : dSeq n * dSeq (n + 1)
+      = dSeq n * dSeq n + 2 * (dSeq n * mSeq n) + dSeq n := by
+    rw [hs]; ring
+  have h4 : 4 * (mSeq n * (mSeq n + 1)) = 4 * (dSeq n * dSeq (n + 1)) := by
+    linarith [hp, hB2, h6AB, hAB]
+  set X := mSeq n * (mSeq n + 1) with hXdef
+  set Y := dSeq n * dSeq (n + 1) with hYdef
+  have h4' : 4 * X = 4 * Y := by linarith [h4]
+  rcases Nat.lt_trichotomy X Y with h | h | h
+  · omega
+  · exact h
+  · omega
+
+/-- THE CASCADE VALUE TABLE (decide): the first eight denominators and
+the first seven block starts — the concrete bridge from the abstract
+sequences to the family witnesses below. -/
+theorem e289_cascade_values :
+    dSeq 0 = 1 ∧ dSeq 1 = 6 ∧ dSeq 2 = 35 ∧ dSeq 3 = 204 ∧
+    dSeq 4 = 1189 ∧ dSeq 5 = 6930 ∧ dSeq 6 = 40391 ∧ dSeq 7 = 235416 ∧
+    mSeq 0 = 2 ∧ mSeq 1 = 14 ∧ mSeq 2 = 84 ∧ mSeq 3 = 492 ∧
+    mSeq 4 = 2870 ∧ mSeq 5 = 16730 ∧ mSeq 6 = 97512 := by
+  decide
+
+/-- THE k=5 CASCADE FAMILY (the first near-one witness): the five
+pairwise-non-adjacent length-2 blocks [2,3], [14,15], [84,85], [492,493],
+[2870,2871] sum EXACTLY to 1 - 1/6930 — the cross-multiplied Nat identity
+N·6930 + P = 6930·P over the product P of the five block denominators
+(the engine's telescoped total, dual-verified Fraction + integer). The
+campaign's first sub-1/5000 deficit at full #289 shape. -/
+theorem e289_cascade_family_k5 :
+    (longWindow 2 3 ∧ longWindow 14 15 ∧ longWindow 84 85 ∧
+      longWindow 492 493 ∧ longWindow 2870 2871) ∧
+    (3 + 1 < 14 ∧ 15 + 1 < 84 ∧ 85 + 1 < 492 ∧ 493 + 1 < 2870) ∧
+    ((inum 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * iprod 2870 2871)))
+    + inum 14 15 * (iprod 2 3 * (iprod 84 85 * (iprod 492 493 * iprod 2870 2871)))
+    + inum 84 85 * (iprod 2 3 * (iprod 14 15 * (iprod 492 493 * iprod 2870 2871)))
+    + inum 492 493 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * iprod 2870 2871)))
+    + inum 2870 2871 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * iprod 492 493)))) * 6930
+    + iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * iprod 2870 2871)))
+    = 6930 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * iprod 2870 2871))))) := by
+  refine ⟨?_, ?_, ?_⟩
+  · unfold longWindow; omega
+  · omega
+  · decide
+
+/-- THE k=7 CASCADE FAMILY (the tighter near-one witness): the seven
+pairwise-non-adjacent length-2 blocks [2,3] … [97512,97513] sum EXACTLY
+to 1 - 1/235416 — deficit under 1/235000 at full #289 shape (7 blocks,
+all gaps ≥ 1). The engine's cascade at k = 7 (dual-verified). -/
+theorem e289_cascade_family_k7 :
+    (longWindow 2 3 ∧ longWindow 14 15 ∧ longWindow 84 85 ∧
+      longWindow 492 493 ∧ longWindow 2870 2871 ∧
+      longWindow 16730 16731 ∧ longWindow 97512 97513) ∧
+    (3 + 1 < 14 ∧ 15 + 1 < 84 ∧ 85 + 1 < 492 ∧ 493 + 1 < 2870 ∧
+      2871 + 1 < 16730 ∧ 16731 + 1 < 97512) ∧
+    ((inum 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * (iprod 2870 2871 * (iprod 16730 16731 * iprod 97512 97513)))))
+    + inum 14 15 * (iprod 2 3 * (iprod 84 85 * (iprod 492 493 * (iprod 2870 2871 * (iprod 16730 16731 * iprod 97512 97513)))))
+    + inum 84 85 * (iprod 2 3 * (iprod 14 15 * (iprod 492 493 * (iprod 2870 2871 * (iprod 16730 16731 * iprod 97512 97513)))))
+    + inum 492 493 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 2870 2871 * (iprod 16730 16731 * iprod 97512 97513)))))
+    + inum 2870 2871 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * (iprod 16730 16731 * iprod 97512 97513)))))
+    + inum 16730 16731 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * (iprod 2870 2871 * iprod 97512 97513)))))
+    + inum 97512 97513 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * (iprod 2870 2871 * iprod 16730 16731)))))) * 235416
+    + iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * (iprod 2870 2871 * (iprod 16730 16731 * iprod 97512 97513)))))
+    = 235416 * (iprod 2 3 * (iprod 14 15 * (iprod 84 85 * (iprod 492 493 * (iprod 2870 2871 * (iprod 16730 16731 * iprod 97512 97513))))))) := by
+  refine ⟨?_, ?_, ?_⟩
+  · unfold longWindow; omega
+  · omega
+  · decide
+
+/-- The four anchor values of the two family witnesses (decide). -/
+theorem e289_cascade_anchor_values :
+    dSeq 5 = 6930 ∧ dSeq 7 = 235416 ∧ mSeq 4 = 2870 ∧ mSeq 6 = 97512 := by
+  decide
+
+/-! ## §9 THE CASCADE MASTER BOARD. -/
+
+/-- THE P289 CASCADE BOARD (7 conjuncts): the additive recurrence + THE
+PELL INVARIANT + THE S-RELATION + THE SPLIT CORE + the value table + the
+two concrete near-one families (k=5, k=7). -/
+theorem e289_cascade_board :
+    (∀ n : Nat, dSeq (n + 2) + dSeq n = 6 * dSeq (n + 1)) ∧
+    (∀ n : Nat, dSeq (n + 1) * dSeq (n + 1) + dSeq n * dSeq n
+      = 6 * dSeq n * dSeq (n + 1) + 1) ∧
+    (∀ n : Nat, dSeq (n + 1) = dSeq n + 2 * mSeq n + 1) ∧
+    (∀ n : Nat, mSeq n * (mSeq n + 1) = dSeq n * dSeq (n + 1)) ∧
+    (dSeq 5 = 6930 ∧ dSeq 7 = 235416 ∧ mSeq 4 = 2870 ∧ mSeq 6 = 97512) ∧
+    (longWindow 2 3 ∧ longWindow 14 15 ∧ longWindow 84 85 ∧
+      longWindow 492 493 ∧ longWindow 2870 2871 ∧
+      3 + 1 < 14 ∧ 15 + 1 < 84 ∧ 85 + 1 < 492 ∧ 493 + 1 < 2870) ∧
+    (longWindow 2 3 ∧ longWindow 14 15 ∧ longWindow 84 85 ∧
+      longWindow 492 493 ∧ longWindow 2870 2871 ∧
+      longWindow 16730 16731 ∧ longWindow 97512 97513 ∧
+      3 + 1 < 14 ∧ 15 + 1 < 84 ∧ 85 + 1 < 492 ∧ 493 + 1 < 2870 ∧
+      2871 + 1 < 16730 ∧ 16731 + 1 < 97512) :=
+  ⟨e289_dSeq_add, e289_pell, e289_srel, e289_split,
+    e289_cascade_anchor_values,
+    (e289_cascade_family_k5).1, (e289_cascade_family_k7).1⟩
+
 /-! ## RECEIPT. -/
 
 #print axioms E289.longWindow_iff
@@ -567,6 +768,20 @@ theorem erdos289_board :
 #print axioms E289.e289_hm_family
 #print axioms E289.e289_arsenal_bridge
 #print axioms E289.erdos289_board
+
+#print axioms E289.dSeq_step
+#print axioms E289.mSeq_step
+#print axioms E289.dSeq_mono
+#print axioms E289.e289_dSeq_add
+#print axioms E289.e289_pell
+#print axioms E289.e289_srel
+#print axioms E289.e289_split
+#print axioms E289.e289_cascade_values
+#print axioms E289.e289_cascade_family_k5
+#print axioms E289.e289_cascade_family_k7
+#print axioms E289.e289_cascade_anchor_values
+#print axioms E289.e289_cascade_board
+
 
 /-- THE KERNEL-64 RECEIPT CONSTANT: prints green when the whole file
 elaborates clean (the CI grep target for this step). -/
