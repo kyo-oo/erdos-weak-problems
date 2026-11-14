@@ -1,0 +1,7 @@
+family: 41 primes
+V1 pair formula vs brute force: 300 pairs, mismatches 0
+V1 triple formula vs brute force: 364 triples, mismatches 0
+V2/V3 forced/avoidable structure: 626 pairs checked, violations 0, empty intersections found for 23/23 avoidable pairs
+V4 Bonferroni E3 exact test on family [5, 7, 11, 13, 43] at torus 420x420
+V4 Bonferroni E3 >= |union| on 40 random systems: violations 0
+A4b DONE

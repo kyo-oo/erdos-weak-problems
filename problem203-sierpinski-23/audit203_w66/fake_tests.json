@@ -1,0 +1,7 @@
+{
+ "T1_ground_truth": "PASS",
+ "T2_partial_as_complete": true,
+ "T3_layer_removal": true,
+ "T4_ord_poison": true,
+ "T5_m_poison": true
+}

@@ -1,0 +1,21 @@
+{
+ "entries": 1004,
+ "bad": [],
+ "sympy_mismatch": [],
+ "cross_file": [
+  [
+   316201,
+   "in json not in txt"
+  ]
+ ],
+ "families": {
+  "27720": {
+   "size": 41,
+   "budget": 1.0563131313131313
+  },
+  "55440": {
+   "size": 52,
+   "budget": 1.1628246753246754
+  }
+ }
+}

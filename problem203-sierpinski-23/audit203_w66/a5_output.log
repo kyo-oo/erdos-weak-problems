@@ -1,0 +1,20 @@
+L=27720 family: 41 primes, S1 = 1.056313
+budget concentration (density-sorted):
+   top  8 primes: cumulative budget 0.8155
+   top 12 primes: cumulative budget 0.9246
+   top 16 primes: cumulative budget 0.9916
+   top 20 primes: cumulative budget 1.0194
+   top 24 primes: cumulative budget 1.0358
+   top 28 primes: cumulative budget 1.0449
+   top 32 primes: cumulative budget 1.0511
+   top 36 primes: cumulative budget 1.0545
+   top 41 primes: cumulative budget 1.0563
+   budget reaches 1.0 at the top-18 prime (q=127, h=126)
+S2_forced = 0.381090 [0s]
+S3_cap = 0.461656 [0s]
+S4_forced = 0.000616 over 156 forced quads [3s]
+S5_cap = 0.420083 [40s]
+E3 bound = 1.136879; E5 bound = 1.556346
+E3 >= 1: no kill (headroom 0.136879).
+E5 >= 1: no kill (headroom 0.556346).
+A5 DONE

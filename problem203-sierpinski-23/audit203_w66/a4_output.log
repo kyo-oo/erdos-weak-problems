@@ -1,0 +1,25 @@
+=== NO-FRAME at L=27720 ===
+N1 family: 41 primes; Sigma 1/h = 1.056313 (>= 1: YES — density does not kill)
+N1 strongest members: q=5(h=4,1/h=0.2500), q=7(h=6,1/h=0.1667), q=11(h=10,1/h=0.1000), q=23(h=11,1/h=0.0909), q=13(h=12,1/h=0.0833), q=19(h=18,1/h=0.0556), q=29(h=28,1/h=0.0357), q=31(h=30,1/h=0.0333)
+N2 LP-blindness witness: x_(p,coset)=1/h for each of the h cosets of each prime; every cell covered to depth exactly 1.056313 >= 1 -> fractional cover FEASIBLE -> NO LP-dual certificate of any kind can exist for this family.
+N2 1-D k-axis LP (column): 130 constraints, 27761 vars; min sum z_p = 1.056313 (NO certificate (>= 1) — LP-blindness theorem CONFIRMED) [3s]
+N2 1-D l-axis LP (row): 164 constraints, 27761 vars; min sum z_p = 1.056313 (NO certificate (>= 1) — LP-blindness theorem CONFIRMED) [2s]
+N3 pairs: 458 forced (joint surjective, intersection L^2/(h_p h_q) always), 362 avoidable/degenerate; S2_forced = 0.381090
+N3 triples: 10660 evaluated; S3_cap = 0.461656 [0s]
+N3 BONFERRONI-E3 BOUND: max_union/L^2 <= S1 - S2_forced + S3_cap = 1.056313 - 0.381090 + 0.461656 = 1.136879
+N3 VERDICT: B >= 1 — the E3 bound does not kill the family (headroom 0.136879); the hunt is not provably doomed at this level.
+status: random-placement baseline union = 0.676383; integral best (A2-verified, L=27720 state) = 0.715259; gap to random = +0.038876
+choice-matters pairs (J < h_p h_q): 362: [(5, 19, 36), (5, 29, 56), (5, 43, 84), (5, 67, 132), (5, 241, 240), (5, 211, 420), (5, 331, 660), (5, 1009, 1008), (5, 2971, 1980), (5, 7393, 3696), (7, 31, 90), (7, 37, 72)]
+=== NO-FRAME at L=55440 ===
+N1 family: 52 primes; Sigma 1/h = 1.162825 (>= 1: YES — density does not kill)
+N1 strongest members: q=5(h=4,1/h=0.2500), q=7(h=6,1/h=0.1667), q=11(h=10,1/h=0.1000), q=23(h=11,1/h=0.0909), q=13(h=12,1/h=0.0833), q=17(h=16,1/h=0.0625), q=19(h=18,1/h=0.0556), q=29(h=28,1/h=0.0357)
+N2 LP-blindness witness: x_(p,coset)=1/h for each of the h cosets of each prime; every cell covered to depth exactly 1.162825 >= 1 -> fractional cover FEASIBLE -> NO LP-dual certificate of any kind can exist for this family.
+N2 1-D k-axis LP (column): 150 constraints, 55492 vars; min sum z_p = 1.162825 (NO certificate (>= 1) — LP-blindness theorem CONFIRMED) [8s]
+N2 1-D l-axis LP (row): 211 constraints, 55492 vars; min sum z_p = 1.162825 (NO certificate (>= 1) — LP-blindness theorem CONFIRMED) [7s]
+N3 pairs: 743 forced (joint surjective, intersection L^2/(h_p h_q) always), 583 avoidable/degenerate; S2_forced = 0.459054
+N3 triples: 22100 evaluated; S3_cap = 0.698599 [2s]
+N3 BONFERRONI-E3 BOUND: max_union/L^2 <= S1 - S2_forced + S3_cap = 1.162825 - 0.459054 + 0.698599 = 1.402370
+N3 VERDICT: B >= 1 — the E3 bound does not kill the family (headroom 0.402370); the hunt is not provably doomed at this level.
+status: random-placement baseline union = 0.709757; integral best (A2-verified, L=27720 state) = 0.715259; gap to random = +0.005502
+choice-matters pairs (J < h_p h_q): 583: [(5, 19, 36), (5, 29, 56), (5, 43, 84), (5, 97, 48), (5, 67, 132), (5, 241, 240), (5, 577, 288), (5, 211, 420), (5, 331, 660), (5, 1009, 1008), (5, 2971, 1980), (5, 2017, 2016)]
+A4 DONE

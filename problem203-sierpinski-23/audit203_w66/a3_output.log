@@ -1,0 +1,29 @@
+=== T1 GROUND TRUTH: m=78557 (Sierpinski) 1-D cover ===
+cover primes discovered: [3, 5, 7, 11, 13, 19, 29, 37, 41, 43, 53, 61, 67, 71, 73, 109, 131, 181, 211, 281, 313, 353, 463, 521, 617, 859, 1009, 1873, 3433]
+torus L=720720: uncovered classes: 0 (NONE — CLASS COVER COMPLETE)
+direct divisibility for k in [0,3000): 3000 covered-by-class, 0 uncovered, primes among uncovered: 0
+beyond-torus random k up to 1e6: primes on uncovered classes: 0
+T1 VERDICT: PASS
+=== T2 PARTIAL-AS-COMPLETE FAKE (state27720all presented as closed) ===
+claimed-complete sweep: uncovered 218794308/768398400 (28.47%)
+PRIME witnesses on uncovered classes: [(11, 5, 270)]
+T2 VERDICT: FAKE CAUGHT (uncovered classes + prime witness (11, 5)) 
+=== T3 LAYER-REMOVAL FAKE (weaken the partial cover, k>=k0 shape) ===
+removed layers: [5]; covered 549604092 -> 457157994 (uncovered 218794308 -> 311240406)
+prime witnesses on newly-uncovered small classes: [(1, 9, 263), (7, 3, 260), (7, 12, 274), (8, 7, 267)]
+T3 VERDICT: FAKE CAUGHT (weakening -> new uncovered cells -> witness (1, 9))
+=== T4 ORD-POISON PALETTE ===
+poison A (q=17, claimed o2=4, h=8): audit ok=False notes=['o2 mismatch: true=8 claimed=4', 'h mismatch: true=16 claimed=8']
+poison B (q=221 composite): audit ok=False notes=['NOT PRIME']
+poison C (q=3): audit ok=False notes=['q in {2,3} forbidden']
+poison D (q=13, ords true, bogus (U,V)=(5,5)): audit ok=False notes=['(U,V)=(5,5) not valid dlogs: no consistent generator']
+control (q=13 true palette entry (7,4)): audit ok=True
+poison F (layer q=17 h=16 at L=27720): ord-closure broken = True
+T4 VERDICT: ALL POISONS FLAGGED, CONTROL PASSES
+=== T5 m-POISON (corrupted CRT extraction) ===
+clean m: covered-cell failures 0/1500 (expect 0); m=0-mod-q poison: failures 129/1500 (expect >0)
+clean m coprime to 6: True; poisoned m (m=0 mod 2): coprime=False
+T5 VERDICT: M-POISONS CAUGHT
+
+A3 BATTERY SUMMARY: {'T1_ground_truth': 'PASS', 'T2_partial_as_complete': True, 'T3_layer_removal': True, 'T4_ord_poison': True, 'T5_m_poison': True}
+ALL TESTS BEHAVED CORRECTLY (fakes caught, truth validated) (94s)

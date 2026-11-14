@@ -1,0 +1,14 @@
+pal_dlog_full.json entries: 1004; palette203.txt rows: 1003
+P7 cross-file consistency: [(316201, 'in json not in txt')]
+  ...200/1004 audited (0s), bad so far: 0
+  ...400/1004 audited (0s), bad so far: 0
+  ...600/1004 audited (0s), bad so far: 0
+  ...800/1004 audited (1s), bad so far: 0
+  ...1000/1004 audited (1s), bad so far: 0
+P1-P3/P5/P6 full audit: 1004 entries, BAD: 0
+P2 sympy cross-check: 0 mismatches
+P4 L=27720: family size 41 (h-filter 41, same=True); budget Sigma1/h = 1.0563 (h-filter 1.0563)
+P4 L=55440: family size 52 (h-filter 52, same=True); budget Sigma1/h = 1.1628 (h-filter 1.1628)
+P4 state work/state27720all.json: 35 layers, 35 active; problems: NONE
+P4 state work/state55440.json: 52 layers, 52 active; problems: NONE
+PALETTE AUDIT DONE (6s); wrote palette_audit.json
