@@ -1,0 +1,13 @@
+1. all 108 + 167 census pairs re-verified from receipts (Pell identity,
+   x(x+1)=ab^2, smoothness, dictionary a=sf(x(x+1))) — GREEN
+2. fresh brute: 42950 19-smooth numbers <= 10^8
+   brute pairs == 19-tier census list (167) EXACT; 17-smooth-filtered
+   sublist == 17-tier census list (108) EXACT — GREEN (the brute covers
+   the full range of both censuses: largest pair 11859211 < 10^8)
+3. f(k) re-derived independently for k = 2..22 from the brute structure:
+   [2, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6]
+   (matches the certified table — GREEN)
+
+AUDIT_W63 ALL GREEN — the W63 frontier f(k)=6 (13<=k<=22) stands on
+independent brute verification of the complete 108-pair and 167-pair
+censuses (full range) + direct receipt re-verification.

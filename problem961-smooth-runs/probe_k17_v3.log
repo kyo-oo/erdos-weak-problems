@@ -1,0 +1,10 @@
+a=   1309: Y1digits=14     X1digits=15     steps=29      modhits=1 0.0s
+a=   2431: Y1digits=10     X1digits=12     steps=27      modhits=1 0.0s
+a=   3094: Y1digits=11     X1digits=13     steps=33      modhits=1 0.0s
+a=   5005: Y1digits=9      X1digits=11     steps=17      modhits=1 0.0s
+a=  36465: Y1digits=11     X1digits=13     steps=21      modhits=1 0.0s
+a=  85085: Y1digits=11     X1digits=13     steps=17      modhits=1 0.0s
+ALL 127 fundamentals done, total 0.0s
+alive (Y1 17-smooth): 88 ; dead: 39
+heavy alive rows (Y1 > 10^6):
+saved probe_k17_fund.json
