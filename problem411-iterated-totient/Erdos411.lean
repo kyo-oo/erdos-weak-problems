@@ -1274,9 +1274,9 @@ theorem closure_prop (i : Nat) (hi : i < table411.length) :
   simp only [Bool.true_and, Bool.or_eq_true, Bool.and_eq_true] at h
   rcases h with hSIX | hrest
   · exact Or.inl hSIX
-  · have hlt' := of_decide_eq_true hrest.1
-    have heven' := eq_of_beq hrest.2.1
-    have hval' := eq_of_beq hrest.2.2
+  · have hlt' := of_decide_eq_true hrest.1.1
+    have heven' := eq_of_beq hrest.1.2
+    have hval' := eq_of_beq hrest.2
     refine Or.inr ⟨stepIX411[i]!, hlt', by omega, hval', heven'⟩
 
 /-! ## §10 The witness theorem (the odd-part reduction). -/
