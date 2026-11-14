@@ -1,0 +1,1 @@
+{"cycle": 4, "phase": "done", "mode": "cycle", "res_cur": 218794308, "best": 218794308, "stats": {"tried": 1932, "acc": 287, "acc_neut": 10, "acc_up": 106, "near": 1166, "far": 276, "pair": 490, "neg_props": 171, "sweep_switches": 2, "sweep_gain": 598538, "min_delta": -8181460, "max_delta": 31634668}, "ts": "2026-11-13T23:55:01Z"}
