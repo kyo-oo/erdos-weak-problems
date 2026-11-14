@@ -1,0 +1,9 @@
+[k5r5] seeded 12761 K_(6,2) pairs from the W63-B5 u<=501 harvest
+[k5r5] core self-test PASS: R(24135111)^R(2514375)^R(15992775) contains the k4 witness rows (|inter|=5)
+[k5r5] hunt: K_(6,2) harvest, u=501..2236, tau>=16, C<=1.0e+08, budget 490s
+  [k5r5] new best: 4-C subset with 2 common rows (s0=2, s1=503, rich=4)
+  [k5r5] new best: 4-C subset with 3 common rows (s0=27, s1=528, rich=7)
+  [k5r5] new best: 4-C subset with 4 common rows (s0=1116, s1=1656, rich=31)
+  [k5r5] u=600 pairs=135157 rich=132292 proc=132292 best=4 hits=0 Kpairs=14635 t=240s cache=527438
+  [k5r5] u=700 pairs=263071 rich=258065 proc=258065 best=4 hits=0 Kpairs=16753 t=499s cache=847204
+[k5r5] chunk done=False stats={'pairs': 263071, 'rich': 258065, 'proc': 258065, 'maxG': 58, 'best': 4, 'hits': 0, 'pairhits': 16753, 'maxrich': 58, 'u_next': 701} colstats={'queries': 1662132, 'misses': 863469, 'rich': 847204, 'poor': 16265}

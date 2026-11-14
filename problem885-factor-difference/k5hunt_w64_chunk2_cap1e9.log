@@ -1,0 +1,27 @@
+[k5-w64] 12761 K_(6,2) pairs (>= 6 rows) from k4_pairs.jsonl; COLCAP=1.0e+09; budget 470s
+  [k5-w64] proc=500/12761 thirds=0 hits=0 t=9s cache=174064 colstats={'queries': 227661, 'misses': 175038, 'rich': 174064, 'poor': 974}
+  [k5-w64] proc=1000/12761 thirds=0 hits=0 t=16s cache=317571 colstats={'queries': 420446, 'misses': 319455, 'rich': 317571, 'poor': 1884}
+  [k5-w64] proc=1500/12761 thirds=0 hits=0 t=23s cache=440833 colstats={'queries': 615819, 'misses': 443632, 'rich': 440833, 'poor': 2799}
+  [k5-w64] proc=2000/12761 thirds=0 hits=0 t=30s cache=550312 colstats={'queries': 811975, 'misses': 553959, 'rich': 550312, 'poor': 3647}
+  [k5-w64] proc=2500/12761 thirds=0 hits=0 t=36s cache=647946 colstats={'queries': 969352, 'misses': 652403, 'rich': 647946, 'poor': 4457}
+  [k5-w64] proc=3000/12761 thirds=0 hits=0 t=40s cache=737643 colstats={'queries': 1108150, 'misses': 742907, 'rich': 737643, 'poor': 5264}
+  [k5-w64] proc=3500/12761 thirds=0 hits=0 t=46s cache=822411 colstats={'queries': 1247383, 'misses': 828418, 'rich': 822411, 'poor': 6007}
+  [k5-w64] proc=4000/12761 thirds=0 hits=0 t=51s cache=900000 colstats={'queries': 1390480, 'misses': 916474, 'rich': 909670, 'poor': 6804}
+  [k5-w64] proc=4500/12761 thirds=0 hits=0 t=57s cache=900000 colstats={'queries': 1541111, 'misses': 1004105, 'rich': 996435, 'poor': 7670}
+  [k5-w64] proc=5000/12761 thirds=0 hits=0 t=62s cache=900000 colstats={'queries': 1686648, 'misses': 1091587, 'rich': 1083151, 'poor': 8436}
+  [k5-w64] proc=5500/12761 thirds=0 hits=0 t=68s cache=900000 colstats={'queries': 1831253, 'misses': 1177400, 'rich': 1168196, 'poor': 9204}
+  [k5-w64] proc=6000/12761 thirds=0 hits=0 t=74s cache=900000 colstats={'queries': 1978224, 'misses': 1265179, 'rich': 1255157, 'poor': 10022}
+  [k5-w64] proc=6500/12761 thirds=0 hits=0 t=79s cache=900000 colstats={'queries': 2125966, 'misses': 1354035, 'rich': 1343171, 'poor': 10864}
+  [k5-w64] proc=7000/12761 thirds=0 hits=0 t=85s cache=900000 colstats={'queries': 2273702, 'misses': 1445136, 'rich': 1433522, 'poor': 11614}
+  [k5-w64] proc=7500/12761 thirds=0 hits=0 t=90s cache=900000 colstats={'queries': 2422745, 'misses': 1538948, 'rich': 1526584, 'poor': 12364}
+  [k5-w64] proc=8000/12761 thirds=0 hits=0 t=94s cache=900000 colstats={'queries': 2574202, 'misses': 1629615, 'rich': 1616381, 'poor': 13234}
+  [k5-w64] proc=8500/12761 thirds=0 hits=0 t=100s cache=900000 colstats={'queries': 2722157, 'misses': 1720128, 'rich': 1706161, 'poor': 13967}
+  [k5-w64] proc=9000/12761 thirds=0 hits=0 t=106s cache=900000 colstats={'queries': 2874856, 'misses': 1814859, 'rich': 1800045, 'poor': 14814}
+  [k5-w64] proc=9500/12761 thirds=0 hits=0 t=112s cache=900000 colstats={'queries': 3026889, 'misses': 1908684, 'rich': 1893062, 'poor': 15622}
+  [k5-w64] proc=10000/12761 thirds=0 hits=0 t=117s cache=900000 colstats={'queries': 3173141, 'misses': 1998564, 'rich': 1982257, 'poor': 16307}
+  [k5-w64] proc=10500/12761 thirds=0 hits=0 t=123s cache=900000 colstats={'queries': 3321590, 'misses': 2092732, 'rich': 2075643, 'poor': 17089}
+  [k5-w64] proc=11000/12761 thirds=0 hits=0 t=129s cache=900000 colstats={'queries': 3475822, 'misses': 2188209, 'rich': 2170323, 'poor': 17886}
+  [k5-w64] proc=11500/12761 thirds=0 hits=0 t=135s cache=900000 colstats={'queries': 3627571, 'misses': 2280250, 'rich': 2261562, 'poor': 18688}
+  [k5-w64] proc=12000/12761 thirds=0 hits=0 t=141s cache=900000 colstats={'queries': 3775969, 'misses': 2373910, 'rich': 2354494, 'poor': 19416}
+  [k5-w64] proc=12500/12761 thirds=0 hits=0 t=147s cache=900000 colstats={'queries': 3922492, 'misses': 2466720, 'rich': 2446556, 'poor': 20164}
+[k5-w64] chunk done: proc=12761 of 12761 (idx 12761); thirds=0; hits=0 (149.9s); colstats={'queries': 3999415, 'misses': 2515613, 'rich': 2495022, 'poor': 20591}
