@@ -1,0 +1,19 @@
+========================================================================
+(A) ANTI-DIAGONAL CARRIERLESS LAW, method 1: exhaustive residue census
+  residue pairs checked: 4620 (x3 lifts) -> violations: 0  AGREEMENT: LAW HOLDS
+(A') method 2: algebraic prediction on random large samples
+  random samples: 20000 -> prediction failures: 0  AGREEMENT
+========================================================================
+(B) CROSSING LAW (discrete IVT) on random walks, method 1: direct scan
+  2000 random dip-allowed walks -> crossing failures: 0  LAW HOLDS
+(B') method 2: j-walk intermediate-value recount
+  2000 random +-1 j-walks (0 -> 2310) -> walks missing a value: 0  IVT HOLDS
+========================================================================
+(C) DESIGN-KILL CONSEQUENCE CHECK: no coprime carried hub on the
+    anti-diagonal class (X + Y) % 4620 == 0, exhaustively on the
+    residue class with real gcd + real carriers, all 4 neighbors
+  exhaustive class census -> coprime carried hubs: 0  ZERO: THE CLASS IS THE WALL
+========================================================================
+(D) P105 WITNESS dual verification
+  p105: 105 vertices (203, 10201) -> (303, 10205): GREEN (dual)
+  rebuild-from-p103 match: True
