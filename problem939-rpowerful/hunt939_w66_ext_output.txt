@@ -1,0 +1,36 @@
+=== THE STRUCTURE LAW: every sum-hit decomposed as a = g*a', b = g*b', c = g*s ===
+  recomputed 1e13 box: 42923 sum-hits (49.7s; matches scan939_w66_box: True)
+  s = a'+b' classification over all 42923 hits:
+    s a pure power of 2 : 16744
+    support(s) <= support(g) (incl. 2): 23651
+    s brings a prime OUTSIDE support(g): 2528
+      a=625 b=50000 c=50625 g=625 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=3125 b=250000 c=253125 g=3125 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=10000 b=800000 c=810000 g=10000 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=15625 b=1250000 c=1265625 g=15625 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=20000 b=1600000 c=1620000 g=20000 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=38416 b=168031584 c=168070000 g=38416 s=4375={5: 4, 7: 1} gcd(a',b')=1, a'=1 b'=4374
+      a=40000 b=3200000 c=3240000 g=40000 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=50000 b=4000000 c=4050000 g=50000 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+      a=50625 b=121500000 c=121550625 g=50625 s=2401={7: 4} gcd(a',b')=1, a'=1 b'=2400
+      a=76832 b=117649 c=194481 g=2401 s=81={3: 4} gcd(a',b')=1, a'=32 b'=49
+      a=76832 b=336063168 c=336140000 g=76832 s=4375={5: 4, 7: 1} gcd(a',b')=1, a'=1 b'=4374
+      a=78125 b=6250000 c=6328125 g=78125 s=81={3: 4} gcd(a',b')=1, a'=1 b'=80
+  LAW (empirical, 1e13): sum-hits exist BECAUSE a,b share a big 4-powerful
+  core g = gcd(a,b) (always itself 4-powerful); the coprime remainders sum to
+  s = a'+b' whose primes are absorbed by g's exponent headroom (or s = 2^k).
+  A COPRIME triple has g = 1: the FULL exponent burden falls on c = a+b itself.
+  That is why coprime hits are the hard lane and the shared core is the easy one.
+=== THE r=3 POSITIVE CONTROL (scanner validated where witnesses EXIST) ===
+  r=3 box <= 1e9: |L3| = 3721; sum-hits 12032; COPRIME triples 1 (5.0s)
+    coprime: 19902511 + 756249048 = 776151559 <= THE KERNEL witness1 19902511+756249048=776151559
+  -> the scanner DETECTS the known r=3 witness (positive control): True
+     (so the r=4 zero is a property of r=4, not a scanner blind spot)
+=== THE ZERO-COPRIME EXTENSION (EO/OO lanes; EE pairs die by gcd >= 2) ===
+  justification: a coprime pair (a,b) cannot be both even; so every coprime
+  triple intersects the odd set — the EO/OO lanes are SOUND AND COMPLETE for
+  the zero-coprime question. (1 is included — kernel-faithful.)
+  [1e15] |L|=40049 (odd 10404): mixed/odd sum-hits 15663; COPRIME WITNESSES 0  (6.1s)
+  [1e16] |L|=73699 (odd 18979): mixed/odd sum-hits 31191; COPRIME WITNESSES 0  (18.8s)
+  [1e17] |L|=135059 (odd 34522): mixed/odd sum-hits 61832; COPRIME WITNESSES 0  (77.0s)
+  hunt939_w66_ext total: 157.2s

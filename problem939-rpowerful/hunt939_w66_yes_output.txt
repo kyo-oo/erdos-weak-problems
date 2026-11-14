@@ -1,0 +1,53 @@
+=== (A) THE CONGRUENCE CAGE (pairwise-coprime 4-powerful triples) ===
+  Parity cases for a coprime triple (a,b,c=a+b): at most one of a,b,c even,
+  and a+b=c parity gives exactly three patterns:
+   (odd, odd, even): c even 4-powerful -> 16 | c (kernel mod16_obstruction).
+       Constraint on the SUMMANDS: b = -a mod 16 (real cage — e.g. 81+243 is
+       blocked: 1+3 = 4 != 0 mod 16).
+   (even, odd, odd) and (odd, even, odd): the even one is 16 | a (definition),
+       and c = a+b odd with c = b mod 16. NO local obstruction at all — the
+       2-adic cage is VACUOUS for the EO lane (c-b = a supplies 2^4 by itself).
+  machine census: odd 4-powerful residues mod 16 attainable <= 1e13: [1, 3, 5, 7, 9, 11, 13, 15]
+                  odd 4-powerful residues mod 32 attainable <= 1e13: [1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31]
+  -> every odd residue mod 16 (and mod 32) is attained: the mod-16 obstruction
+     constrains PAIRS of summands (b = -a mod 16) but forbids nothing outright;
+     the EO lane has NO congruence obstruction. The barrier is global, not local.
+  smallest odd 4-powerful per mod-16 residue: {1: 1, 3: 243, 5: 3125, 7: 16807, 9: 729, 11: 2187, 13: 78125, 15: 759375}
+=== (B) LANE A: the COMPLETE (x^4, z^4-x^4, z^4) family, z <= ZMAX ===
+  ZMAX = 1000000  =>  coverage c = z^4 <= 1.00e+24  (1e24)
+  factor law: D = z^4-x^4 = (z-x)(z+x)(z^2+x^2) = u*v*w. For gcd(x,z)=1:
+   - odd primes never cross between u, v, w (p | z-x and p | z^2+x^2 => p | 2x^2
+     => p | x, z, contradiction); so D 4-powerful <=> odd(u), odd(v), odd(w)
+     all 4-powerful (v2(D) >= 4 automatic when x,z both odd: v2(u)+v2(v) >= 3,
+     v2(w) = 1; and D odd when x,z of opposite parity).
+  U-list (m <= 2000000 with 4-powerful odd part): 235 values; w-set (odd 4-powerful <= 2.0e+12): 2016 values (0.0s)
+  same-parity (u,v) pairs examined: 18801; w-hits (b = u*v*w 4-powerful): 52; coprime (x,z) among them: 0; non-coprime: 52 (0.1s)
+    w-hit: u=1250 v=2500 w=3906250 -> x=625 z=1875 c=z^4=12359619140625 gcd(x,z)=625
+    w-hit: u=2500 v=5000 w=15625000 -> x=1250 z=3750 c=z^4=197753906250000 gcd(x,z)=1250
+    w-hit: u=5000 v=10000 w=62500000 -> x=2500 z=7500 c=z^4=3164062500000000 gcd(x,z)=2500
+    w-hit: u=6250 v=12500 w=97656250 -> x=3125 z=9375 c=z^4=7724761962890625 gcd(x,z)=3125
+    w-hit: u=10000 v=20000 w=250000000 -> x=5000 z=15000 c=z^4=50625000000000000 gcd(x,z)=5000
+    w-hit: u=12500 v=25000 w=390625000 -> x=6250 z=18750 c=z^4=123596191406250000 gcd(x,z)=6250
+    w-hit: u=20000 v=40000 w=1000000000 -> x=10000 z=30000 c=z^4=810000000000000000 gcd(x,z)=10000
+    w-hit: u=25000 v=50000 w=1562500000 -> x=12500 z=37500 c=z^4=1977539062500000000 gcd(x,z)=12500
+    w-hit: u=31250 v=62500 w=2441406250 -> x=15625 z=46875 c=z^4=4827976226806640625 gcd(x,z)=15625
+    w-hit: u=40000 v=80000 w=4000000000 -> x=20000 z=60000 c=z^4=12960000000000000000 gcd(x,z)=20000
+    w-hit: u=50000 v=100000 w=6250000000 -> x=25000 z=75000 c=z^4=31640625000000000000 gcd(x,z)=25000
+    w-hit: u=50625 v=151875 w=12814453125 -> x=50625 z=101250 c=z^4=105094533691406250000 gcd(x,z)=50625
+    non-coprime examples (x,z): [(625, 1875), (1250, 3750), (2500, 7500), (3125, 9375), (5000, 15000), (6250, 18750)]
+  >>> LANE A VERDICT: pairwise-COprime triples with a=x^4, c=z^4, z <= 1e6 (c <= 1e24): 0
+  (the r=3 analog of this exact lane CONTAINS the kernel witness1:
+   271^3 + 756249048 = 919^3 with 919-271 = 648 and both factors 3-powerful)
+=== (C) THE r=3 vs r=4 EXPONENT-POOLING CONTRAST ===
+  r=3 witness1 dissected: z-x = 648 = {2: 3, 3: 4};
+    z^2+zx+x^2 = 1167051 = {3: 1, 73: 3}; product = 756249048 (= 2^3*3^5*73^3 certified)
+    THE POOLING LAW: mod p | (z-x): z^2+zx+x^2 = 3x^2, so the prime 3 divides
+    BOTH factors — exponents pool: 3^4 (in u) + 3^1 (in w) = 3^5 >= 3. The r=3
+    construction lives on this crossing.
+    AT r=4: z^2+x^2 = 2x^2 mod (z-x) — only the prime 2 can cross; odd primes
+    are CONFINED to a single factor and must carry exponent >= 4 alone. The
+    Nitaj pooling trick is structurally DEAD at r=4; each of u, v, w must be
+    4-powerful on its own odd part (the LANE A condition) — and Lane A finds
+    ZERO coprime instances with z <= 1e6 (c <= 1e24), vs the r=3 instance at
+    z = 919 (c = 7.8e8).
+  hunt939_w66_yes total: 0.2s

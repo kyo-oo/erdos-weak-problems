@@ -1,0 +1,58 @@
+== EDGE CASES of rpow (Lean-literal fold vs math def) ==
+  rpow 4 0: Lean-literal=False  math=False  AGREE=True
+  rpow 4 1: Lean-literal=True  math=True  AGREE=True
+  rpow 4 2: Lean-literal=False  math=False  AGREE=True
+  rpow 4 15: Lean-literal=False  math=False  AGREE=True
+  rpow 4 16: Lean-literal=True  math=True  AGREE=True
+  rpow 4 32: Lean-literal=True  math=True  AGREE=True
+  rpow 4 81: Lean-literal=True  math=True  AGREE=True
+  rpow 2 1: Lean-literal=True  math=True  AGREE=True
+  rpow 2 8: Lean-literal=True  math=True  AGREE=True
+  rpow 3 1: Lean-literal=True  math=True  AGREE=True
+  rpow 3 8: Lean-literal=True  math=True  AGREE=True
+  rpow 3 16: Lean-literal=True  math=True  AGREE=True
+  rpow 4 10000: Lean-literal=True  math=True  AGREE=True
+  rpow 4 2592: Lean-literal=True  math=True  AGREE=True
+  rpow 4 3888: Lean-literal=True  math=True  AGREE=True
+  NOTE: kernel rpow 4 1 = true (1 is 4-powerful, vacuous); hunt engines gen4
+       EXCLUDE 1 from their lists — audit of that mismatch handled in the box scan.
+== CENSUS ROWS (membership + completeness, brute force) ==
+  r=2 N=100: kernel row has 14 values; brute force finds 14; MEMBERSHIP+COMPLETENESS=PASS
+  r=3 N=1000: kernel row has 20 values; brute force finds 20; MEMBERSHIP+COMPLETENESS=PASS
+  r=4 N=10000: kernel row has 25 values; brute force finds 25; MEMBERSHIP+COMPLETENESS=PASS
+  r=4 census row length = 25 (brief says 25) -> True
+== WITNESS IDENTITIES (r=3, Nitaj lane) ==
+  19902511 + 756249048 = 776151559 : True
+    271^3 = 19902511; 2^3*3^5*73^3 = 756249048; 919^3 = 776151559
+    3-powerful all three: True, True, True
+    pairwise gcds: gcd(a,b)=1, gcd(a,c)=1, gcd(b,c)=1 -> PAIRWISE COPRIME: True
+    -> AUDIT VERDICT on the brief's 'the known 19902511-type witnesses share gcd 11':
+       FALSE as stated — these two witnesses are pairwise COPRIME (they are r=3
+       witnesses, the Nitaj class). No gcd-11 structure exists in them.
+  1392672604221 + 2126285555779 = 3518958160000 : True
+    3^4*29^3*89^3 = 1392672604221; 7^3*11^3*167^3 = 2126285555779; 2^7*5^4*353^3 = 3518958160000
+    3-powerful all three: True, True, True
+    pairwise gcds: 1, 1, 1 -> PAIRWISE COPRIME: True
+== THE BRACKET (kernel rows: 999706081460641 < 1000000000000000 < 1000417426149376) ==
+  lo < mid < hi : True
+  5623^4 = 999706081460641 == lo : True
+  5624^4 = 1000417426149376 == hi : True
+  mid = 10^15 : True
+  -> VERDICT: the bracket is the 10^15 fourth-power bracket (5623^4 < 1e15 < 5624^4),
+     the hunt939b scale receipt. The W66 brief calls it 'the 1e13 bracket' — MISLABELED
+     in the brief; the kernel numbers themselves are TRUE.
+== no_small_solution_r4 (pairs a, b < 16) ==
+  4-powerful < 16: [1]; violating pairs: [] -> THEOREM HOLDS: True
+== mod16_obstruction sanity ==
+  81 + 243 = 324 = 324; 324 % 16 = 4; 324 factorization = {2: 2, 3: 4}
+  324 is 4-powerful: False (must be False — 2^2 exponent)
+  exhaustive odd-pair check <= 10^4 (sums that are 4-powerful): []
+  obstruction violations: [] (must be empty)
+== kills_r4 / kills_r2_r3 rows ==
+  kills_r4: True True True True True True True True True True True
+  kills_r2_r3: True True True True True True True True True True True True True True
+== beyond_flt_32 + primes ==
+  rpow 4 32 = True; no m^4 = 32 for m < 4: True
+  primes: [(2, True), (3, True), (5, True), (7, True), (11, True), (29, True), (73, True), (89, True), (167, True), (271, True), (353, True), (919, True)]
+== odd_pairs_no_r4_sum (ODD9 pairs never land in the r4 census) ==
+  violating pairs: [] (must be empty)

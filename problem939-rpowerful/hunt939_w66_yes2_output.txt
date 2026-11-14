@@ -1,0 +1,1 @@
+=== (D) LANE C: disjoint-prime-support lattices, c <= 1e16, gcd = 1 BY CONSTRUCTION ===
