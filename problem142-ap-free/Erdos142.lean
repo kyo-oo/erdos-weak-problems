@@ -66,6 +66,38 @@ closes by omega over the division identities; (h) every missing
 was supplied. The sorryAx of the error-recovery pass is thereby purged:
 the file compiles with axiom profile [propext, Classical.choice,
 Quot.sound] only.
+
+## REPAIR NOTE (r4, W68-142K)
+Root-killed the residual 28-error family of CI run 43745701008 (verified
+against a local Lean v4.33.0-rc2 stub-harness that reproduced all 28
+errors verbatim, then zero): (1) THE ROOT: the `eqb` patterns
+`| zero, zero => …` bind VARIABLES named `zero` (twice!) — the def
+never compiled, so `eqb` was error-recovery-opaque and poisoned every
+downstream reduction (eqb_refl's `rfl`, `Bool.noConfusion h`
+unification at eq_of_eqb_true, and the whole 12-member `decide` family
+of r3max/ap3Free) — patterns rewritten to constructor form `0 / _+1 /
+x+1,y+1`; (2) `and_true_of_true`: `rw [hx, hy]` leaves
+`(true && true) = true` (rw's auto-rfl is reducible-only) — now closed
+by `cases` + rfl; (3) mem_filt_iff cons branch: `hp : p a = true`
+supplied for `p s = true` via `subst h` first, the spurious
+`rcases List.mem_cons.mp h2.1` on a `s ∈ t` (non-cons) replaced by the
+direct constructor, and `absurd hs.2 hpf` (a `p s = false` where
+`¬(p s = true)` is needed) replaced by `rw [hpf] at hs; exact
+Bool.noConfusion hs.2`; (4) `nodup_append_disj`: the k-block side goal
+has `hb : b ∈ t ++ l2` — the splitter is `List.mem_append.mp hb`, not
+mem_cons; (5) `nodup_const_le1`/`k2_upper`: `mem_cons_of_tail w u rest'
+(mem_self_cons u rest')` passes the WRONG list argument (needs
+`u ∈ u :: rest'`, i.e. t := `u :: rest'`) — the k2 case needs the same
+fix at both AP-term sites plus the missing `hne : a ≠ b` from Nodup
+before `omega` derives `b < a` from `¬(a < b)`; (6) window_cover's
+`hge1`: after `cases hL : …`, the goal atom is `(a :: t).length` but
+`hLlen` was stated on the pre-cases `(filt …).length` — omega saw two
+unrelated atoms — hLlen restated on `(a :: t).length` (rfl); (7)
+`r3_upper_via_r3max`: `hAP` needs `x ∈ S`, so the filt-membership
+conjunction's SECOND component (`memB x S = true`, via memB_iff) is the
+right one, not `.left` (the `x ∈ upto1 N`). Axiom profile after r4:
+[propext, Classical.choice, Quot.sound] only, zero sorry, markers
+E142_TERNARY_GREEN / E142_CANTOR_GREEN / E142_BOARD_GREEN emitted.
 -/
 
 namespace E142
@@ -84,7 +116,12 @@ theorem or_true_right (x y : Bool) (hy : y = true) : (x || y) = true := by
 
 theorem and_true_of_true (x y : Bool) (hx : x = true) (hy : y = true) :
     (x && y) = true := by
-  rw [hx, hy]
+  cases x with
+  | false => exact Bool.noConfusion hx
+  | true =>
+    cases y with
+    | false => exact Bool.noConfusion hy
+    | true => rfl
 
 theorem or_split (x y : Bool) (h : (x || y) = true) : x = true ∨ y = true := by
   cases x with
@@ -102,10 +139,10 @@ theorem and_split (x y : Bool) (h : (x && y) = true) : x = true ∧ y = true := 
 /-! ### The house Boolean equality on Nat (structural, iota-transparent). -/
 
 def eqb : Nat → Nat → Bool
-  | zero, zero => true
-  | zero, succ _ => false
-  | succ _, zero => false
-  | succ x, succ y => eqb x y
+  | 0, 0 => true
+  | 0, _ + 1 => false
+  | _ + 1, 0 => false
+  | x + 1, y + 1 => eqb x y
 
 theorem eqb_refl : ∀ a : Nat, eqb a a = true := by
   intro a
@@ -195,7 +232,8 @@ theorem mem_filt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α),
       constructor
       · intro hs
         rcases List.mem_cons.mp hs with h | h
-        · exact ⟨List.mem_cons.mpr (Or.inl h), hp⟩
+        · subst h
+          exact ⟨List.mem_cons.mpr (Or.inl rfl), hp⟩
         · have h2 := (ih s).mp h
           exact ⟨List.mem_cons.mpr (Or.inr h2.1), h2.2⟩
       · intro hs
@@ -210,14 +248,12 @@ theorem mem_filt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α),
       constructor
       · intro hs
         have h2 := (ih s).mp hs
-        rcases List.mem_cons.mp h2.1 with h | h
-        · subst h
-          exact absurd h2.2 hpf
-        · exact ⟨List.mem_cons.mpr (Or.inr h), h2.2⟩
+        exact ⟨List.mem_cons.mpr (Or.inr h2.1), h2.2⟩
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
         · subst h
-          exact absurd hs.2 hpf
+          rw [hpf] at hs
+          exact Bool.noConfusion hs.2
         · exact (ih s).mpr ⟨h, hs.2⟩
 
 theorem filt_split (p : Nat → Bool) : ∀ (l : List Nat),
@@ -313,7 +349,7 @@ theorem nodup_append_disj : ∀ (l1 l2 : List Nat), l1.Nodup → l2.Nodup →
     refine List.Pairwise.cons ?_ (ih l2 (nodup_cons_tail a t hl1) hl2
       (fun b hb1 hb2 => hd b (mem_cons_of_tail a b t hb1) hb2))
     intro b hb
-    rcases List.mem_cons.mp hb with h | h
+    rcases List.mem_append.mp hb with h | h
     · exact nodup_cons_head a t hl1 b h
     · exact hd a (mem_self_cons a t) b h
 
@@ -330,7 +366,7 @@ theorem nodup_const_le1 (W : List Nat) (c : Nat) (hN : W.Nodup)
       omega
     | cons u rest' =>
       have hw := hb w (mem_self_cons w (u :: rest'))
-      have hu := hb u (mem_cons_of_tail w u rest' (mem_self_cons u rest'))
+      have hu := hb u (mem_cons_of_tail w u (u :: rest') (mem_self_cons u rest'))
       have hwu : w = u := by omega
       exact absurd hwu (nodup_cons_head w (u :: rest') hN u (mem_self_cons u rest'))
 
@@ -748,8 +784,7 @@ theorem window_cover : ∀ (k : Nat) (W : List Nat) (lo : Nat), W.Nodup →
       cases hL : filt (fun s => eqb s lo) W with
       | nil => exact absurd hmem (by rw [hL]; simp)
       | cons a t =>
-        have hLlen : (filt (fun s => eqb s lo) W).length = t.length + 1 := by
-          rw [hL, List.length_cons]
+        have hLlen : (a :: t).length = t.length + 1 := rfl
         omega
     have hW1len : (filt (fun s => ! eqb s lo) W).length = k := by omega
     have hcover1 := ih (filt (fun s => ! eqb s lo) W) (lo + 1)
@@ -880,8 +915,9 @@ theorem k2_upper : ∀ (N : Nat) (S : List Nat), 2 ≤ N → S.Nodup →
           · subst h
             have ho : a + 1 * (b - a) = b := by omega
             rw [ho]
-            exact mem_cons_of_tail a b t' (mem_self_cons b t')
-        · have hgt : b < a := by omega
+            exact mem_cons_of_tail a b (b :: t') (mem_self_cons b t')
+        · have hne : a ≠ b := nodup_cons_head a (b :: t') hNod b (mem_self_cons b t')
+          have hgt : b < a := by omega
           refine ⟨b, a - b, by omega, ?_⟩
           intro i hi
           have hii : i = 0 ∨ i = 1 := by omega
@@ -889,7 +925,7 @@ theorem k2_upper : ∀ (N : Nat) (S : List Nat), 2 ≤ N → S.Nodup →
           · subst h
             have hz : b + 0 * (a - b) = b := by omega
             rw [hz]
-            exact mem_cons_of_tail a b t' (mem_self_cons b t')
+            exact mem_cons_of_tail a b (b :: t') (mem_self_cons b t')
           · subst h
             have ho : b + 1 * (a - b) = a := by omega
             rw [ho]
@@ -1132,9 +1168,9 @@ theorem r3_upper_via_r3max : ∀ (N : Nat) (S : List Nat), S.Nodup →
     nodup_mem_le _ S hN hS'mem
   have hS'ap : ap3Free (filt (fun s => memB s S) (upto1 N)) = true :=
     ap3Free_of_set _ (fun x y z hx hy hz hxy =>
-      hAP x y z ((mem_filt_iff (fun s => memB s S) (upto1 N) x).mp hx |>.1)
-        ((mem_filt_iff (fun s => memB s S) (upto1 N) y).mp hy |>.1)
-        ((mem_filt_iff (fun s => memB s S) (upto1 N) z).mp hz |>.1) hxy)
+      hAP x y z ((memB_iff x S).mp ((mem_filt_iff (fun s => memB s S) (upto1 N) x).mp hx).2)
+        ((memB_iff y S).mp ((mem_filt_iff (fun s => memB s S) (upto1 N) y).mp hy).2)
+        ((memB_iff z S).mp ((mem_filt_iff (fun s => memB s S) (upto1 N) z).mp hz).2) hxy)
   have hsub : filt (fun s => memB s S) (upto1 N) ∈ filt ap3Free (sublists (upto1 N)) :=
     (mem_filt_iff ap3Free (sublists (upto1 N)) _).mpr
       ⟨filt_mem_sublists (upto1 N) (fun s => memB s S), hS'ap⟩
