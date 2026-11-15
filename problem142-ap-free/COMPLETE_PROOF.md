@@ -106,7 +106,27 @@ s ∈ S with 1 ≤ s ≤ N.
   axioms within [propext, Classical.choice, Quot.sound]; zero sorry,
   zero admit, zero native_decide.
 
-## §3 HONEST SCOPE
+## §3 CI VERDICT (banked, W68-142K r4)
+
+- CI run **43753209508** (workflow kills.yml, branch w67-p142k, head
+  `654224c`): job **kernel-142k** = `success` (job id 132931526918).
+  Compile log: `lake env lean problem142-ap-free/Erdos142.lean` → zero
+  errors, zero sorryAx, markers `E142_TERNARY_GREEN` / `E142_CANTOR_GREEN` /
+  `E142_BOARD_GREEN` emitted, `KERNEL142K_GREEN=1` reached; the guards'
+  axiom greps all hit: E142.(t3free|t3_no_nontriv|cantor_lower|
+  block_upper|r3_upper|k2_edge|r3_exact_small|arsenal_bridge|
+  erdos142_board) each `depends on axioms: [propext, Classical.choice,
+  Quot.sound]` or a subset thereof — all inside the allowed profile
+  [propext, Classical.choice, Quot.sound].
+- Repair trail: r1 (011cb3e) 73 errors → r2 → r3 (6e51a4b) 28 errors →
+  r4 (654224c) **0 errors, GREEN**. The r4 root-kill: the `eqb`
+  `zero`-pattern collision (variables named `zero`, not the constructors)
+  that poisoned every downstream reduction incl. the 12-member
+  r3max/ap3Free `decide` family — verified first on a local
+  Lean v4.33.0-rc2 stub-harness that reproduced all 28 CI errors
+  verbatim, then zero after the fix.
+
+## §4 HONEST SCOPE
 
 The asymptotic formula for r_k(N) remains **OPEN for every k ≥ 3** — this
 kernel does NOT claim it (Roth's r_3 = o(N), Behrend's lower bound, and
