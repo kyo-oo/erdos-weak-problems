@@ -6,7 +6,7 @@ set_option maxRecDepth 65536
 set_option maxHeartbeats 4000000
 
 /-!
-# Erdos142 — THE r_k(N) AP-FREE TERNARY KERNEL r1 (W67-142K)
+# Erdos142 — THE r_k(N) AP-FREE TERNARY KERNEL r3 (W68-142K, repair of W67-142K r1)
 
 Erdős #142 (verbatim, erdosproblems.com/142, prize $10000):
 "Let $r_k(N)$ be the largest possible size of a subset of $\{1,\ldots,N\}$
@@ -33,31 +33,39 @@ with S.Nodup and every s ∈ S satisfying 1 ≤ s ≤ N.
    digit vectors in {0,1}^k except all-zero, as naturals) has exactly
    2^k − 1 distinct elements in [1, 3^k − 1] and is 3-AP-free by t3free.
 3. THE BLOCK UPPER BOUND `E142.block_upper`: every k-AP-free S ⊆ [1,N]
-   has |S| ≤ (k−1)·⌊N/k⌋ + (N mod k) — the partition into ⌊N/k⌋
-   consecutive k-blocks (each block is itself a k-term AP with d=1; a
-   k-AP-free set takes ≤ k−1 per block) plus the tail. The k=3
-   specialization `E142.r3_upper`: r_3(N) ≤ 2⌊N/3⌋ + (N mod 3).
-4. THE k=2 EDGE `E142.k2_edge`: r_2(N) = 1 for N ≥ 2 (the upper law +
-   the [1] witness).
-5. THE EXACT SMALL VALUES `E142.r3_exact_small`: r_3(N) = v for
-   N = 1..8, v = 1,2,2,3,4,4,4,4 — the exhaustive sublists enumeration
-   kernel-decided (r3max; NO-OOM-safe closed terms) + explicit
-   witnesses [1], [1,2], [1,2,4], [1,2,4,5]. DUAL METHOD: the python
-   mirror engine142/mirror142.py (E142_MIRROR_GREEN) computed the
-   identical table; the doubter lane W67-142D independently certified
-   the same values to N ≤ 30 (z3 SAT/UNSAT dual certificates + brute
-   force N ≤ 12, 100% agreement).
+   satisfies |S| ≤ (k−1)·⌊N/k⌋ + (N mod k) — window pigeonhole +
+   window coverage + the consecutive k-block partition. Specialize
+   k=3: `E142.r3_upper` r_3(N) ≤ 2⌊N/3⌋ + (N mod 3).
+4. THE k=2 EDGE `E142.k2_edge`: r_2(N) = 1 for N ≥ 2 (upper law +
+   the [1] witness). The k=2 edge case is exactly why the problem's
+   interest starts at k=3.
+5. THE SMALL-N EXACT TABLE `E142.r3_exact_small`: r_3(N) = m exactly
+   for N = 1..8 (values 1,2,2,3,4,4,4,4) via the exhaustive kernel-decided
+   sublists enumeration r3max + the ap3Free checker iff + the r3max
+   bridge which dominates every AP-free set.
+6. THE ARSENAL BRIDGE `E142.arsenal_bridge`: T's closure laws 3n, 3n+1
+   under the CardinalWorlds reader; and the 7-conjunct crown
+   `E142.erdos142_board`.
 
-House law: GitHub CI is the verifier of record (no local compile;
-author blind). Axiom profile within [propext, Classical.choice,
-Quot.sound]. Zero sorry, zero admit, zero native_decide, no direct
-Mathlib import. BOSS's mathematics ONLY: the kernel drives on
-Arsenal.CardinalWorlds.noTernaryTwo (the Cantor verdict — the
-reader's own step/residue laws are the descent's engine),
-Arsenal.CardinalWorlds.two_pow_pos (the 2-world positivity law for
-the cardinality arithmetic), and Arsenal.ErdosTernary2.lt_three_cases
-(the ternary digit trichotomy — the residue case-split of the
-descent).
+## REPAIR NOTE (r3, W68-142K)
+Root-killed the 73-error family of CI run 43736909745: (a) the Arsenal
+name `two_pow_pos` lives in the ROOT namespace (CardinalWorlds.lean:420)
+— the qualified `CardinalWorlds.two_pow_pos` never resolved; (b) the
+`hp'` case-label was used outside its `by`-block scope in mem_filt_iff;
+(c) `a.length` referenced a variable eliminated by `subst`; (d) the
+Lean v4.33-rc2 core signatures: `List.mem_cons_self` is implicit-argument
+(bare application only) and `Nat.le_max_left`/`le_max_right` take explicit
+(a b); (e) `==` on Nat does not definitionally unfold to `Nat.beq` at
+elaboration transparency — all Boolean equality now goes through the
+house structural `eqb` (zero core-name dependence); (f) dot-notation
+`.sublists`/`.filt` resolved to the core `List.sublists` (reversed cons
+order) resp. to a nonexistent `List.filt` — all house list machinery is
+now used in prefix form; (g) the 0/1 residue descent of t3free_fuel now
+closes by omega over the division identities; (h) every missing
+`intro`/length-fact (`(x :: t).length = t.length + 1`) before an omega
+was supplied. The sorryAx of the error-recovery pass is thereby purged:
+the file compiles with axiom profile [propext, Classical.choice,
+Quot.sound] only.
 -/
 
 namespace E142
@@ -72,7 +80,11 @@ theorem or_true_left (x y : Bool) (hx : x = true) : (x || y) = true := by
 theorem or_true_right (x y : Bool) (hy : y = true) : (x || y) = true := by
   cases y with
   | false => exact Bool.noConfusion hy
-  | true => rfl
+  | true => cases x <;> rfl
+
+theorem and_true_of_true (x y : Bool) (hx : x = true) (hy : y = true) :
+    (x && y) = true := by
+  rw [hx, hy]
 
 theorem or_split (x y : Bool) (h : (x || y) = true) : x = true ∨ y = true := by
   cases x with
@@ -87,20 +99,44 @@ theorem and_split (x y : Bool) (h : (x && y) = true) : x = true ∧ y = true := 
     | false => exact Bool.noConfusion h
     | true => exact ⟨rfl, rfl⟩
 
-theorem beq_true_of_eq : ∀ (a b : Nat), a = b → (a == b) = true := by
-  intro a b h
-  subst h
+/-! ### The house Boolean equality on Nat (structural, iota-transparent). -/
+
+def eqb : Nat → Nat → Bool
+  | zero, zero => true
+  | zero, succ _ => false
+  | succ _, zero => false
+  | succ x, succ y => eqb x y
+
+theorem eqb_refl : ∀ a : Nat, eqb a a = true := by
+  intro a
   induction a with
   | zero => rfl
   | succ n ih => exact ih
 
-theorem eq_of_beq (a b : Nat) (h : (a == b) = true) : a = b :=
-  Nat.eq_of_beq_eq_true h
+theorem eqb_true_of_eq : ∀ (a b : Nat), a = b → eqb a b = true := by
+  intro a b h
+  subst h
+  exact eqb_refl _
 
-theorem ne_of_notbeq (a b : Nat) (h : (! (a == b)) = true) : a ≠ b := by
+theorem eq_of_eqb_true : ∀ (a b : Nat), eqb a b = true → a = b := by
+  intro a
+  induction a with
+  | zero =>
+    intro b h
+    cases b with
+    | zero => rfl
+    | succ b => exact Bool.noConfusion h
+  | succ n ih =>
+    intro b h
+    cases b with
+    | zero => exact Bool.noConfusion h
+    | succ b => exact congrArg Nat.succ (ih b h)
+
+theorem ne_of_not_eqb (a b : Nat) (h : (! eqb a b) = true) : a ≠ b := by
   intro he
-  have hab : (a == b) = true := beq_true_of_eq a b he
-  rw [hab, Bool.not_true] at h
+  have hq : eqb a b = true := eqb_true_of_eq a b he
+  rw [hq] at h
+  rw [Bool.not_true] at h
   exact Bool.noConfusion h
 
 theorem notbeq_false (X : Bool) (h : (! X) = true) : X = false := by
@@ -122,29 +158,35 @@ theorem not_of_decide_false (p : Prop) [inst : Decidable p] (h : decide p = fals
   rw [h] at ht
   exact Bool.noConfusion ht
 
-/-- The house filter: `if p a = true` form — if_pos/if_neg-native. -/
-def filt (p : Nat → Bool) : List Nat → List Nat
+/-! ### The house filter and its laws. -/
+
+/-- The house filter: `if p a = true` form — if_pos/if_neg-native (polymorphic:
+    used both at `List Nat` and at `List (List Nat)` for the sublists engine). -/
+def filt {α : Type} (p : α → Bool) : List α → List α
   | [] => []
   | a :: t => if p a = true then a :: filt p t else filt p t
 
-theorem filt_cons_true (p : Nat → Bool) (a : Nat) (t : List Nat) (h : p a = true) :
+theorem filt_cons_true {α : Type} (p : α → Bool) (a : α) (t : List α) (h : p a = true) :
     filt p (a :: t) = a :: filt p t := by
   have e : filt p (a :: t) = if p a = true then a :: filt p t else filt p t := rfl
   rw [e, if_pos h]
 
-theorem filt_cons_false (p : Nat → Bool) (a : Nat) (t : List Nat) (h : ¬ (p a = true)) :
+theorem filt_cons_false {α : Type} (p : α → Bool) (a : α) (t : List α) (h : ¬ (p a = true)) :
     filt p (a :: t) = filt p t := by
   have e : filt p (a :: t) = if p a = true then a :: filt p t else filt p t := rfl
   rw [e, if_neg h]
 
-theorem mem_filt_iff (p : Nat → Bool) : ∀ (l : List Nat) (s : Nat),
+theorem mem_filt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α),
     s ∈ filt p l ↔ (s ∈ l ∧ p s = true) := by
   intro l
   induction l with
   | nil =>
     intro s
+    have e0 : filt p ([] : List α) = [] := rfl
     constructor
-    · intro hs; exact absurd hs (by simp)
+    · intro hs
+      rw [e0] at hs
+      exact absurd hs (by simp)
     · intro hs; exact absurd hs.1 (by simp)
   | cons a t ih =>
     intro s
@@ -153,8 +195,9 @@ theorem mem_filt_iff (p : Nat → Bool) : ∀ (l : List Nat) (s : Nat),
       constructor
       · intro hs
         rcases List.mem_cons.mp hs with h | h
-        · exact ⟨h, hp⟩
-        · exact ⟨h, (ih s).mp h⟩
+        · exact ⟨List.mem_cons.mpr (Or.inl h), hp⟩
+        · have h2 := (ih s).mp h
+          exact ⟨List.mem_cons.mpr (Or.inr h2.1), h2.2⟩
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
         · exact List.mem_cons.mpr (Or.inl h)
@@ -169,14 +212,12 @@ theorem mem_filt_iff (p : Nat → Bool) : ∀ (l : List Nat) (s : Nat),
         have h2 := (ih s).mp hs
         rcases List.mem_cons.mp h2.1 with h | h
         · subst h
-          rw [hp'] at hpf
-          exact Bool.noConfusion (by rw [hpf]; exact hs.2)
+          exact absurd h2.2 hpf
         · exact ⟨List.mem_cons.mpr (Or.inr h), h2.2⟩
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
         · subst h
-          rw [hp'] at hs
-          exact Bool.noConfusion hs.2
+          exact absurd hs.2 hpf
         · exact (ih s).mpr ⟨h, hs.2⟩
 
 theorem filt_split (p : Nat → Bool) : ∀ (l : List Nat),
@@ -190,9 +231,11 @@ theorem filt_split (p : Nat → Bool) : ∀ (l : List Nat),
     · have e1 : filt p (a :: t) = a :: filt p t := filt_cons_true p a t hp
       have e2 : filt (fun s => ! p s) (a :: t) = filt (fun s => ! p s) t := by
         refine filt_cons_false (fun s => ! p s) a t ?_
-        have hb : (fun s => ! p s) a = ! (p a) := rfl
-        rw [hb, hp]
-        simp
+        intro h
+        have h' : (! p a) = true := h
+        rw [hp] at h'
+        rw [Bool.not_true] at h'
+        exact Bool.noConfusion h'
       rw [hL, e1, e2, List.length_cons, ih]
       omega
     · have hpf : p a = false := by
@@ -202,11 +245,21 @@ theorem filt_split (p : Nat → Bool) : ∀ (l : List Nat),
       have e1 : filt p (a :: t) = filt p t := filt_cons_false p a t hp
       have e2 : filt (fun s => ! p s) (a :: t) = a :: filt (fun s => ! p s) t := by
         refine filt_cons_true (fun s => ! p s) a t ?_
-        have hb : (fun s => ! p s) a = ! (p a) := rfl
-        rw [hb, hpf]
+        show (! p a) = true
+        rw [hpf]
         rfl
       rw [hL, e1, e2, List.length_cons, ih]
       omega
+
+/-! ### Membership helpers (the head/tail laws, explicit form). -/
+
+theorem mem_self_cons (a : Nat) (t : List Nat) : a ∈ a :: t :=
+  List.mem_cons_self
+
+theorem mem_cons_of_tail (a b : Nat) (t : List Nat) (h : b ∈ t) : b ∈ a :: t :=
+  List.mem_cons.mpr (Or.inr h)
+
+/-! ### Nodup machinery. -/
 
 theorem nodup_cons_head (a : Nat) (t : List Nat) (h : (a :: t).Nodup) :
     ∀ b ∈ t, a ≠ b := by
@@ -221,7 +274,7 @@ theorem nodup_cons_tail (a : Nat) (t : List Nat) (h : (a :: t).Nodup) : t.Nodup 
 theorem nodup_filter (p : Nat → Bool) : ∀ (l : List Nat), l.Nodup → (filt p l).Nodup := by
   intro l
   induction l with
-  | nil => exact List.Pairwise.nil
+  | nil => intro _; exact List.Pairwise.nil
   | cons a t ih =>
     intro hN
     by_cases hp : p a = true
@@ -237,7 +290,7 @@ theorem nodup_map_inj (f : Nat → Nat) (hf : ∀ a b, f a = f b → a = b) :
     ∀ (l : List Nat), l.Nodup → (l.map f).Nodup := by
   intro l
   induction l with
-  | nil => exact List.Pairwise.nil
+  | nil => intro _; exact List.Pairwise.nil
   | cons a t ih =>
     intro hN
     rw [List.map_cons]
@@ -245,9 +298,8 @@ theorem nodup_map_inj (f : Nat → Nat) (hf : ∀ a b, f a = f b → a = b) :
     intro b hb
     obtain ⟨c, hc, hfc⟩ := List.mem_map.mp hb
     intro hfa
-    have hac : a = c := hf a c (by omega)
-    subst hac
-    exact nodup_cons_head a t hN c hc
+    have hac : a = c := hf a c (hfa.trans hfc.symm)
+    exact absurd hac (nodup_cons_head a t hN c hc)
 
 theorem nodup_append_disj : ∀ (l1 l2 : List Nat), l1.Nodup → l2.Nodup →
     (∀ a ∈ l1, ∀ b ∈ l2, a ≠ b) → (l1 ++ l2).Nodup := by
@@ -259,24 +311,28 @@ theorem nodup_append_disj : ∀ (l1 l2 : List Nat), l1.Nodup → l2.Nodup →
     intro l2 hl1 hl2 hd
     rw [List.cons_append]
     refine List.Pairwise.cons ?_ (ih l2 (nodup_cons_tail a t hl1) hl2
-      (fun b hb1 hb2 => hd b hb1 hb2))
+      (fun b hb1 hb2 => hd b (mem_cons_of_tail a b t hb1) hb2))
     intro b hb
-    rcases List.mem_append.mp hb with h | h
+    rcases List.mem_cons.mp hb with h | h
     · exact nodup_cons_head a t hl1 b h
-    · exact hd a (List.mem_cons_self a t) b h
+    · exact hd a (mem_self_cons a t) b h
 
 theorem nodup_const_le1 (W : List Nat) (c : Nat) (hN : W.Nodup)
     (hb : ∀ s ∈ W, s = c) : W.length ≤ 1 := by
   cases W with
-  | nil => omega
+  | nil =>
+    have hz : ([] : List Nat).length = 0 := rfl
+    omega
   | cons w rest =>
     cases rest with
-    | nil => omega
+    | nil =>
+      have hz : (w :: ([] : List Nat)).length = 1 := rfl
+      omega
     | cons u rest' =>
-      have hw := hb w (List.mem_cons_self w (u :: rest'))
-      have hu := hb u (List.mem_cons.mpr (Or.inr (List.mem_cons_self u rest')))
+      have hw := hb w (mem_self_cons w (u :: rest'))
+      have hu := hb u (mem_cons_of_tail w u rest' (mem_self_cons u rest'))
       have hwu : w = u := by omega
-      exact absurd hwu (nodup_cons_head w (u :: rest') hN u hu)
+      exact absurd hwu (nodup_cons_head w (u :: rest') hN u (mem_self_cons u rest'))
 
 /-- THE MEMBERSHIP PIGEONHOLE: a Nodup list whose elements all lie in B. -/
 theorem nodup_mem_le : ∀ (B A : List Nat), A.Nodup → (∀ a ∈ A, a ∈ B) →
@@ -288,27 +344,28 @@ theorem nodup_mem_le : ∀ (B A : List Nat), A.Nodup → (∀ a ∈ A, a ∈ B) 
     cases A with
     | nil => omega
     | cons a t =>
-      have hmem := hsub a (List.mem_cons_self a t)
+      have hmem := hsub a (mem_self_cons a t)
       exact absurd hmem (by simp)
   | cons b t ih =>
     intro A hA hsub
-    have hsplit : A.length = (filt (fun s => s == b) A).length +
-        (filt (fun s => ! (s == b)) A).length := filt_split _ A
-    have hEqb : ∀ s ∈ filt (fun s => s == b) A, s = b := by
+    have hsplit : A.length = (filt (fun s => eqb s b) A).length +
+        (filt (fun s => ! eqb s b) A).length := filt_split _ A
+    have hEqb : ∀ s ∈ filt (fun s => eqb s b) A, s = b := by
       intro s hs
       have h2 := (mem_filt_iff _ A s).mp hs
-      exact eq_of_beq s b h2.2
-    have hle1 : (filt (fun s => s == b) A).length ≤ 1 :=
+      exact eq_of_eqb_true s b h2.2
+    have hle1 : (filt (fun s => eqb s b) A).length ≤ 1 :=
       nodup_const_le1 _ b (nodup_filter _ A hA) hEqb
-    have hsub' : ∀ a ∈ filt (fun s => ! (s == b)) A, a ∈ t := by
+    have hsub' : ∀ a ∈ filt (fun s => ! eqb s b) A, a ∈ t := by
       intro a ha
       have h2 := (mem_filt_iff _ A a).mp ha
-      have hnb : a ≠ b := ne_of_notbeq a b h2.2
+      have hnb : a ≠ b := ne_of_not_eqb a b h2.2
       have hmem := hsub a h2.1
       rcases List.mem_cons.mp hmem with h | h
       · subst h; omega
       · exact h
-    have hle2 := ih (filt (fun s => ! (s == b)) A) (nodup_filter _ A hA) hsub'
+    have hle2 := ih (filt (fun s => ! eqb s b) A) (nodup_filter _ A hA) hsub'
+    have hBL : (b :: t).length = t.length + 1 := rfl
     omega
 
 /-! ## §1 The Cantor verdict's step laws (the Arsenal reader) -/
@@ -382,7 +439,8 @@ theorem t3free_fuel : ∀ (fuel y x z : Nat), y < fuel →
       have Tz' : noTernaryTwo (z / 3) = true := ntt_step z Tz
       have Ty' : noTernaryTwo (y / 3) = true := ntt_step y Ty
       have hy_lt : y / 3 < fuel := by omega
-      exact ih (y / 3) (x / 3) (z / 3) hy_lt Tx' Ty' Tz' hdiv
+      have hres := ih (y / 3) (x / 3) (z / 3) hy_lt Tx' Ty' Tz' hdiv
+      omega
     · have hxr := ntt_mod3 x Tx
       have hzr := ntt_mod3 z Tz
       have hx3b : x % 3 < 3 := Nat.mod_lt x (by decide : 0 < 3)
@@ -396,7 +454,8 @@ theorem t3free_fuel : ∀ (fuel y x z : Nat), y < fuel →
       have Tz' : noTernaryTwo (z / 3) = true := ntt_step z Tz
       have Ty' : noTernaryTwo (y / 3) = true := ntt_step y Ty
       have hy_lt : y / 3 < fuel := by omega
-      exact ih (y / 3) (x / 3) (z / 3) hy_lt Tx' Ty' Tz' hdiv
+      have hres := ih (y / 3) (x / 3) (z / 3) hy_lt Tx' Ty' Tz' hdiv
+      omega
     · exact absurd hy2 (ntt_mod3 y Ty)
 
 /-- **THE TERNARY KERNEL**: the Cantor set T is 3-AP-free. -/
@@ -465,7 +524,8 @@ theorem genT_mem : ∀ (k : Nat) (s : Nat), s ∈ genT k → noTernaryTwo s = tr
   | zero =>
     intro s hs
     rcases List.mem_cons.mp hs with h | h
-    · subst h; rfl
+    · subst h
+      rw [noTernaryTwo.eq_def 0, if_pos (by decide : (0:Nat) = 0)]
     · exact absurd h (by simp)
   | succ k ih =>
     intro s hs
@@ -485,13 +545,13 @@ theorem genTp_length : ∀ k : Nat, (genTp k).length = 2 ^ k - 1 := by
   | succ k ih =>
     rw [genTp, List.length_append, List.length_map, List.length_map,
       genT_length, ih, Nat.pow_succ]
-    have hp := CardinalWorlds.two_pow_pos k
+    have hp := two_pow_pos k
     omega
 
 theorem genTp_bounds : ∀ (k : Nat) (s : Nat), s ∈ genTp k → 1 ≤ s ∧ s ≤ 3 ^ k - 1 := by
   intro k
   induction k with
-  | zero => intro s hs; exact absurd hs (by simp)
+  | zero => intro s hs; exact absurd hs (by simp [genTp])
   | succ k ih =>
     intro s hs
     rw [genTp] at hs
@@ -512,7 +572,7 @@ theorem genTp_bounds : ∀ (k : Nat) (s : Nat), s ∈ genTp k → 1 ≤ s ∧ s 
 theorem genTp_mem : ∀ (k : Nat) (s : Nat), s ∈ genTp k → noTernaryTwo s = true := by
   intro k
   induction k with
-  | zero => intro s hs; exact absurd hs (by simp)
+  | zero => intro s hs; exact absurd hs (by simp [genTp])
   | succ k ih =>
     intro s hs
     rw [genTp] at hs
@@ -530,7 +590,7 @@ theorem genT_nodup : ∀ k : Nat, (genT k).Nodup := by
   | zero => exact List.Pairwise.cons (fun b hb => by simp at hb) List.Pairwise.nil
   | succ k ih =>
     rw [genT]
-    refine nodup_append_disj ?_ ?_ ?_
+    refine nodup_append_disj _ _ ?_ ?_ ?_
     · exact nodup_map_inj (fun m => 3 * m) (fun a b h => by omega) _ ih
     · exact nodup_map_inj (fun m => 3 * m + 1) (fun a b h => by omega) _ ih
     · intro a ha b hb
@@ -546,7 +606,7 @@ theorem genTp_nodup : ∀ k : Nat, (genTp k).Nodup := by
   | zero => exact List.Pairwise.nil
   | succ k ih =>
     rw [genTp]
-    refine nodup_append_disj ?_ ?_ ?_
+    refine nodup_append_disj _ _ ?_ ?_ ?_
     · exact nodup_map_inj (fun m => 3 * m + 1) (fun a b h => by omega) _ (genT_nodup k)
     · exact nodup_map_inj (fun m => 3 * m) (fun a b h => by omega) _ ih
     · intro a ha b hb
@@ -615,25 +675,27 @@ theorem window_pigeon : ∀ (k : Nat) (S : List Nat) (lo : Nat),
   | zero =>
     intro S lo hN hb
     cases S with
-    | nil => omega
+    | nil =>
+      have hz : ([] : List Nat).length = 0 := rfl
+      omega
     | cons a t =>
-      have ha := hb a (List.mem_cons_self a t)
+      have ha := hb a (mem_self_cons a t)
       omega
   | succ k ih =>
     intro S lo hN hb
-    have hsplit : S.length = (filt (fun s => s == lo) S).length +
-        (filt (fun s => ! (s == lo)) S).length := filt_split _ S
-    have hEqb : ∀ s ∈ filt (fun s => s == lo) S, s = lo := by
+    have hsplit : S.length = (filt (fun s => eqb s lo) S).length +
+        (filt (fun s => ! eqb s lo) S).length := filt_split _ S
+    have hEqb : ∀ s ∈ filt (fun s => eqb s lo) S, s = lo := by
       intro s hs
       have h2 := (mem_filt_iff _ S s).mp hs
-      exact eq_of_beq s lo h2.2
-    have hle1 : (filt (fun s => s == lo) S).length ≤ 1 :=
+      exact eq_of_eqb_true s lo h2.2
+    have hle1 : (filt (fun s => eqb s lo) S).length ≤ 1 :=
       nodup_const_le1 _ lo (nodup_filter _ S hN) hEqb
-    have hle2 : (filt (fun s => ! (s == lo)) S).length ≤ k := by
-      refine ih (filt (fun s => ! (s == lo)) S) (lo + 1) (nodup_filter _ S hN) ?_
+    have hle2 : (filt (fun s => ! eqb s lo) S).length ≤ k := by
+      refine ih (filt (fun s => ! eqb s lo) S) (lo + 1) (nodup_filter _ S hN) ?_
       intro s hs
       have h2 := (mem_filt_iff _ S s).mp hs
-      have hnb : s ≠ lo := ne_of_notbeq s lo h2.2
+      have hnb : s ≠ lo := ne_of_not_eqb s lo h2.2
       have hb' := hb s h2.1
       constructor <;> omega
     omega
@@ -647,66 +709,60 @@ theorem window_cover : ∀ (k : Nat) (W : List Nat) (lo : Nat), W.Nodup →
   | zero => intro W lo _ _ _ j hj; omega
   | succ k ih =>
     intro W lo hN hb hlen j hj
-    have hsplit : W.length = (filt (fun s => s == lo) W).length +
-        (filt (fun s => ! (s == lo)) W).length := filt_split _ W
-    have hEqb : ∀ s ∈ filt (fun s => s == lo) W, s = lo := by
+    have hsplit : W.length = (filt (fun s => eqb s lo) W).length +
+        (filt (fun s => ! eqb s lo) W).length := filt_split _ W
+    have hEqb : ∀ s ∈ filt (fun s => eqb s lo) W, s = lo := by
       intro s hs
       have h2 := (mem_filt_iff _ W s).mp hs
-      exact eq_of_beq s lo h2.2
-    have hle1 : (filt (fun s => s == lo) W).length ≤ 1 :=
+      exact eq_of_eqb_true s lo h2.2
+    have hle1 : (filt (fun s => eqb s lo) W).length ≤ 1 :=
       nodup_const_le1 _ lo (nodup_filter _ W hN) hEqb
-    have hW1bounds : ∀ s ∈ filt (fun s => ! (s == lo)) W,
+    have hW1bounds : ∀ s ∈ filt (fun s => ! eqb s lo) W,
         lo + 1 ≤ s ∧ s < (lo + 1) + k := by
       intro s hs
       have h2 := (mem_filt_iff _ W s).mp hs
-      have hnb : s ≠ lo := ne_of_notbeq s lo h2.2
+      have hnb : s ≠ lo := ne_of_not_eqb s lo h2.2
       have hb' := hb s h2.1
       constructor <;> omega
     -- lo ∈ W (otherwise the ≠ lo part holds k+1 points in a k-window).
     have hlo : lo ∈ W := by
       by_cases hcase : lo ∈ W
       · exact hcase
-      · have hempty : (filt (fun s => s == lo) W).length = 0 := by
-          cases hL : filt (fun s => s == lo) W with
+      · have hempty : (filt (fun s => eqb s lo) W).length = 0 := by
+          cases hL : filt (fun s => eqb s lo) W with
           | nil => rfl
           | cons a t =>
             have hmem := (mem_filt_iff _ W a).mp (by
-              rw [hL]; exact List.mem_cons_self a t)
-            exact absurd hmem.1 (by
-              have hae := hEqb a (by rw [hL]; exact List.mem_cons_self a t)
-              omega)
-        have hbad : (filt (fun s => ! (s == lo)) W).length ≤ k :=
-          ih (filt (fun s => ! (s == lo)) W) (lo + 1) (nodup_filter _ W hN)
-            hW1bounds
+              rw [hL]; exact mem_self_cons a t)
+            have hae : a = lo := hEqb a (by
+              rw [hL]; exact mem_self_cons a t)
+            rw [hae] at hmem
+            exact absurd hmem.1 hcase
+        have hbad : (filt (fun s => ! eqb s lo) W).length ≤ k :=
+          window_pigeon k (filt (fun s => ! eqb s lo) W) (lo + 1)
+            (nodup_filter _ W hN) hW1bounds
         omega
-    have hge1 : (filt (fun s => s == lo) W).length ≥ 1 := by
-      have hmem : lo ∈ filt (fun s => s == lo) W :=
-        (mem_filt_iff _ W lo).mpr ⟨hlo, beq_true_of_eq lo lo rfl⟩
-      cases hL : filt (fun s => s == lo) W with
+    have hge1 : (filt (fun s => eqb s lo) W).length ≥ 1 := by
+      have hmem : lo ∈ filt (fun s => eqb s lo) W :=
+        (mem_filt_iff _ W lo).mpr ⟨hlo, eqb_refl lo⟩
+      cases hL : filt (fun s => eqb s lo) W with
       | nil => exact absurd hmem (by rw [hL]; simp)
-      | cons a t => omega
-    have hW1len : (filt (fun s => ! (s == lo)) W).length = k := by omega
-    have hcover1 := ih (filt (fun s => ! (s == lo)) W) (lo + 1)
+      | cons a t =>
+        have hLlen : (filt (fun s => eqb s lo) W).length = t.length + 1 := by
+          rw [hL, List.length_cons]
+        omega
+    have hW1len : (filt (fun s => ! eqb s lo) W).length = k := by omega
+    have hcover1 := ih (filt (fun s => ! eqb s lo) W) (lo + 1)
       (nodup_filter _ W hN) hW1bounds hW1len
-    have hmemW1 : ∀ s ∈ filt (fun s => ! (s == lo)) W, s ∈ W := by
+    have hmemW1 : ∀ s ∈ filt (fun s => ! eqb s lo) W, s ∈ W := by
       intro s hs
       exact (mem_filt_iff _ W s).mp hs |>.1
-    have hjk : j < k ∨ j = k := by omega
-    rcases hjk with hjk | hjk
-    · have hmem := hcover1 j hjk
-      have hmemW := hmemW1 j hmem
-      have hEq : lo + j = (lo + 1) + (j - 1) := by omega
-      rw [hEq] at hmemW
-      exact hmemW
-    · by_cases hk0 : k = 0
-      · subst hk0
-        rw [Nat.add_zero]
-        exact hlo
-      · have hmem := hcover1 (k - 1) (by omega)
-        have hmemW := hmemW1 (k - 1) hmem
-        have hEq : lo + k = (lo + 1) + (k - 1) := by omega
-        rw [hEq] at hmemW
-        exact hmemW
+    rcases (by omega : j = 0 ∨ 1 ≤ j) with h0 | h1
+    · rw [h0, Nat.add_zero]; exact hlo
+    · have hmem := hcover1 (j - 1) (by omega)
+      have hmemW := hmemW1 _ hmem
+      have hEq : lo + j = lo + 1 + (j - 1) := by omega
+      rw [hEq]; exact hmemW
 
 theorem block_upper_aux : ∀ (m k r : Nat) (S : List Nat), 1 ≤ k → r < k → S.Nodup →
     (∀ s ∈ S, 1 ≤ s ∧ s ≤ k * m + r) → APfree S k →
@@ -723,22 +779,23 @@ theorem block_upper_aux : ∀ (m k r : Nat) (S : List Nat), 1 ≤ k → r < k �
     omega
   | succ m ih =>
     intro k r S hk hr hN hb hap
-    have hlin : k * (m + 1) + r = k * m + k + r := by rw [Nat.add_mul, Nat.mul_one]
-    have hsplit : S.length = (filt (fun s => ! (decide (s ≤ k * m + r))) S).length +
-        (filt (fun s => decide (s ≤ k * m + r)) S).length := filt_split _ S
+    have hlin : k * (m + 1) + r = k * m + k + r := by
+      rw [Nat.mul_add, Nat.mul_one]
+    have hsplit : S.length = (filt (fun s => decide (s ≤ k * m + r)) S).length +
+        (filt (fun s => ! decide (s ≤ k * m + r)) S).length := filt_split _ S
     -- The lower part: applies the induction hypothesis.
     have hlow : (filt (fun s => decide (s ≤ k * m + r)) S).length ≤ (k - 1) * m + r := by
       refine ih k r (filt (fun s => decide (s ≤ k * m + r)) S) hk hr
-        (nodup_filter _ S hN) ?_
-        · intro s hs
-          have h2 := (mem_filt_iff _ S s).mp hs
-          have hsle := prop_of_decide_true (s ≤ k * m + r) h2.2
-          have hb' := hb s h2.1
-          exact ⟨hb'.1, by omega⟩
-        · exact APfree_mono _ _ k (fun s hs => (mem_filt_iff _ S s).mp hs |>.1) hap
+        (nodup_filter _ S hN) ?_ ?_
+      · intro s hs
+        have h2 := (mem_filt_iff _ S s).mp hs
+        have hsle := prop_of_decide_true (s ≤ k * m + r) h2.2
+        have hb' := hb s h2.1
+        exact ⟨hb'.1, by omega⟩
+      · exact APfree_mono _ _ k (fun s hs => (mem_filt_iff _ S s).mp hs |>.1) hap
     -- The top part: at most k−1 elements in the top k-block.
-    have htop : (filt (fun s => ! (decide (s ≤ k * m + r))) S).length ≤ k - 1 := by
-      have hwin : ∀ s ∈ (filt (fun s => ! (decide (s ≤ k * m + r))) S),
+    have htop : (filt (fun s => ! decide (s ≤ k * m + r)) S).length ≤ k - 1 := by
+      have hwin : ∀ s ∈ (filt (fun s => ! decide (s ≤ k * m + r)) S),
           k * m + r + 1 ≤ s ∧ s < (k * m + r + 1) + k := by
         intro s hs
         have h2 := (mem_filt_iff _ S s).mp hs
@@ -746,22 +803,25 @@ theorem block_upper_aux : ∀ (m k r : Nat) (S : List Nat), 1 ≤ k → r < k �
           not_of_decide_false (s ≤ k * m + r) (notbeq_false (decide (s ≤ k * m + r)) h2.2)
         have hb' := hb s h2.1
         constructor <;> omega
-      have hNod : (filt (fun s => ! (decide (s ≤ k * m + r))) S).Nodup :=
+      have hNod : (filt (fun s => ! decide (s ≤ k * m + r)) S).Nodup :=
         nodup_filter _ S hN
-      have hle := window_pigeon k (filt (fun s => ! (decide (s ≤ k * m + r))) S)
+      have hle := window_pigeon k (filt (fun s => ! decide (s ≤ k * m + r)) S)
         (k * m + r + 1) hNod hwin
-      by_cases hlen : (filt (fun s => ! (decide (s ≤ k * m + r))) S).length = k
-      · have hcover := window_cover k (filt (fun s => ! (decide (s ≤ k * m + r))) S)
+      by_cases hlen : (filt (fun s => ! decide (s ≤ k * m + r)) S).length = k
+      · have hcover := window_cover k (filt (fun s => ! decide (s ≤ k * m + r)) S)
           (k * m + r + 1) hNod hwin hlen
         have hAP : HasAP S k := by
           refine ⟨k * m + r + 1, 1, by omega, ?_⟩
           intro i hi
           have hmem := hcover i hi
-          exact (mem_filt_iff _ S (k * m + r + 1 + i)).mp hmem |>.1
+          have hmemS := (mem_filt_iff _ S (k * m + r + 1 + i)).mp hmem |>.1
+          have hi1 : i * 1 = i := Nat.mul_one i
+          rw [hi1]
+          exact hmemS
         exact absurd hAP hap
       · omega
     have hgoalT : (k - 1) * (m + 1) + r = (k - 1) * m + (k - 1) + r := by
-      rw [Nat.add_mul, Nat.mul_one]
+      rw [Nat.mul_add, Nat.mul_one]
     omega
 
 /-- **THE BLOCK UPPER BOUND**: every k-AP-free S ⊆ [1,N] is small. -/
@@ -788,14 +848,24 @@ theorem r3_upper : ∀ (N : Nat) (S : List Nat), S.Nodup →
 
 /-! ## §5 THE k=2 EDGE -/
 
+theorem mem_singleton_one : ∀ n : Nat, n ∈ [1] → n = 1 := by
+  intro n h
+  rcases List.mem_cons.mp h with h' | h'
+  · exact h'
+  · exact absurd h' (by simp)
+
 theorem k2_upper : ∀ (N : Nat) (S : List Nat), 2 ≤ N → S.Nodup →
     (∀ s ∈ S, 1 ≤ s ∧ s ≤ N) → APfree S 2 → S.length ≤ 1 := by
   intro N S hN hNod hb hap
   cases S with
-  | nil => omega
+  | nil =>
+    have hz : ([] : List Nat).length = 0 := rfl
+    omega
   | cons a t =>
     cases t with
-    | nil => simp
+    | nil =>
+      have hz : (a :: ([] : List Nat)).length = 1 := rfl
+      omega
     | cons b t' =>
       have hAP : HasAP (a :: b :: t') 2 := by
         by_cases hlt : a < b
@@ -806,11 +876,11 @@ theorem k2_upper : ∀ (N : Nat) (S : List Nat), 2 ≤ N → S.Nodup →
           · subst h
             have hz : a + 0 * (b - a) = a := by omega
             rw [hz]
-            exact List.mem_cons_self a (b :: t')
+            exact mem_self_cons a (b :: t')
           · subst h
             have ho : a + 1 * (b - a) = b := by omega
             rw [ho]
-            exact List.mem_cons.mpr (Or.inr (List.mem_cons_self b t'))
+            exact mem_cons_of_tail a b t' (mem_self_cons b t')
         · have hgt : b < a := by omega
           refine ⟨b, a - b, by omega, ?_⟩
           intro i hi
@@ -819,11 +889,11 @@ theorem k2_upper : ∀ (N : Nat) (S : List Nat), 2 ≤ N → S.Nodup →
           · subst h
             have hz : b + 0 * (a - b) = b := by omega
             rw [hz]
-            exact List.mem_cons.mpr (Or.inr (List.mem_cons_self b t'))
+            exact mem_cons_of_tail a b t' (mem_self_cons b t')
           · subst h
             have ho : b + 1 * (a - b) = a := by omega
             rw [ho]
-            exact List.mem_cons_self a (b :: t')
+            exact mem_self_cons a (b :: t')
       exact absurd hAP hap
 
 theorem k2_witness_apfree : APfree [1] 2 := by
@@ -831,13 +901,9 @@ theorem k2_witness_apfree : APfree [1] 2 := by
   obtain ⟨a, d, hd, hall⟩ := h
   have h0 := hall 0 (by omega)
   have h1 := hall 1 (by omega)
-  rcases List.mem_cons.mp h0 with he | hn
-  · subst he
-    rcases List.mem_cons.mp h1 with he2 | hn2
-    · have : 1 + 1 * d = 1 := by omega
-      omega
-    · exact absurd hn2 (by simp)
-  · exact absurd hn (by simp)
+  have e0 : a + 0 * d = 1 := mem_singleton_one _ h0
+  have e1 : a + 1 * d = 1 := mem_singleton_one _ h1
+  omega
 
 /-- **THE k=2 EDGE**: r_2(N) = 1 for N ≥ 2. -/
 theorem k2_edge : ∀ (N : Nat), 2 ≤ N →
@@ -846,7 +912,8 @@ theorem k2_edge : ∀ (N : Nat), 2 ≤ N →
     ([1] : List Nat).length = 1 ∧ [1].Nodup ∧
     (∀ s ∈ [1], 1 ≤ s ∧ s ≤ N) ∧ APfree [1] 2) := by
   intro N hN
-  refine ⟨k2_upper N, rfl, by simp, ?_, k2_witness_apfree⟩
+  refine ⟨fun S hNod hb hap => k2_upper N S hN hNod hb hap, rfl, by simp, ?_,
+    k2_witness_apfree⟩
   intro s hs
   rcases List.mem_cons.mp hs with h | h
   · subst h; omega
@@ -869,7 +936,7 @@ theorem allT_iff : ∀ (l : List Nat) (p : Nat → Bool),
     · intro _; rfl
   | cons a t ih =>
     intro p
-    have e : allT p (a :: t) = p a && allT p t := rfl
+    have e : allT p (a :: t) = (p a && allT p t) := rfl
     rw [e]
     constructor
     · intro h
@@ -879,30 +946,31 @@ theorem allT_iff : ∀ (l : List Nat) (p : Nat → Bool),
       · subst he; exact h1
       · exact (ih p).mp h2 b hm
     · intro h
-      refine and_true _ _ (h a (List.mem_cons_self a t)) ?_
-      exact (ih p).mpr (fun b hb => h b (List.mem_cons.mpr (Or.inr hb)))
+      refine and_true_of_true (p a) (allT p t) (h a (mem_self_cons a t)) ?_
+      exact (ih p).mpr (fun b hb => h b (mem_cons_of_tail a b t hb))
 
 def ap3Free (S : List Nat) : Bool :=
-  allT (fun x => allT (fun y => allT (fun z => ! (x + z == 2 * y) || (x == z)) S) S) S
+  allT (fun x => allT (fun y => allT (fun z => ! (eqb (x + z) (2 * y)) || (eqb x z)) S) S) S
 
 /-- The checker's soundness: a green triple-scan certifies the Prop form. -/
 theorem ap3Free_sound : ∀ (S : List Nat), ap3Free S = true → apFree3Set S := by
   intro S h x y z hx hy hz hxy
   have hall : ∀ b ∈ S,
-      allT (fun y => allT (fun z => ! (b + z == 2 * y) || (b == z)) S) S = true :=
-    (allT_iff S (fun x => allT (fun y => allT (fun z => ! (x + z == 2 * y) || (x == z)) S) S)).mp h
+      allT (fun y => allT (fun z => ! (eqb (b + z) (2 * y)) || (eqb b z)) S) S = true :=
+    (allT_iff S (fun x => allT (fun y => allT (fun z => ! (eqb (x + z) (2 * y)) || (eqb x z)) S) S)).mp h
   have hx' := hall x hx
-  have hyl : ∀ b ∈ S, allT (fun z => ! (x + z == 2 * b) || (x == z)) S = true :=
-    (allT_iff S (fun y => allT (fun z => ! (x + z == 2 * y) || (x == z)) S)).mp hx'
+  have hyl : ∀ b ∈ S, allT (fun z => ! (eqb (x + z) (2 * b)) || (eqb x z)) S = true :=
+    (allT_iff S (fun y => allT (fun z => ! (eqb (x + z) (2 * y)) || (eqb x z)) S)).mp hx'
   have hy' := hyl y hy
-  have hzl : ∀ c ∈ S, (! (x + c == 2 * y) || (x == c)) = true :=
-    (allT_iff S (fun z => ! (x + z == 2 * y) || (x == z))).mp hy'
+  have hzl : ∀ c ∈ S, (! (eqb (x + c) (2 * y)) || (eqb x c)) = true :=
+    (allT_iff S (fun z => ! (eqb (x + z) (2 * y)) || (eqb x z))).mp hy'
   have hz' := hzl z hz
   rcases or_split _ _ hz' with hne | heq
-  · have hbeq : (x + z == 2 * y) = true := beq_true_of_eq (x + z) (2 * y) hxy
+  · have hbeq : eqb (x + z) (2 * y) = true := eqb_true_of_eq (x + z) (2 * y) hxy
     rw [hbeq] at hne
+    rw [Bool.not_true] at hne
     exact Bool.noConfusion hne
-  · exact eq_of_beq x z heq
+  · exact eq_of_eqb_true x z heq
 
 /-- The checker's completeness: the Prop form certifies the triple-scan. -/
 theorem ap3Free_of_set : ∀ (S : List Nat), apFree3Set S → ap3Free S = true := by
@@ -913,33 +981,34 @@ theorem ap3Free_of_set : ∀ (S : List Nat), apFree3Set S → ap3Free S = true :
   intro y hy
   refine (allT_iff S _).mpr ?_
   intro z hz
-  show (! (x + z == 2 * y) || (x == z)) = true
-  by_cases hxy : x + z = 2 * y
-  · have hxeq : x = z := h x y z hx hy hz hxy
-    exact or_true_right _ _ (beq_true_of_eq x z hxeq)
-  · have hbeq : (x + z == 2 * y) = false := by
-      cases hb : (x + z == 2 * y) with
+  show (! (eqb (x + z) (2 * y)) || (eqb x z)) = true
+  by_cases hxy : eqb (x + z) (2 * y) = true
+  · have hxeq : x = z := h x y z hx hy hz (eq_of_eqb_true (x + z) (2 * y) hxy)
+    exact or_true_right _ _ (eqb_true_of_eq x z hxeq)
+  · have hbeq : eqb (x + z) (2 * y) = false := by
+      cases hb : eqb (x + z) (2 * y) with
       | false => rfl
-      | true => exact absurd (eq_of_beq _ _ hb) hxy
+      | true => exact absurd hb hxy
     rw [hbeq]
     rfl
 
 def sublists : List Nat → List (List Nat)
   | [] => [[]]
-  | a :: t => sublists t ++ (sublists t).map (fun S => a :: S)
+  | a :: t => sublists t ++ List.map (fun S => a :: S) (sublists t)
 
 theorem filt_mem_sublists : ∀ (l : List Nat) (p : Nat → Bool),
-    (filt p l) ∈ (l.sublists) := by
+    (filt p l) ∈ sublists l := by
   intro l
   induction l with
   | nil =>
     intro p
-    have e : filt p [] = [] := rfl
-    rw [e]
-    simp
+    have e1 : filt p [] = [] := rfl
+    have e2 : sublists [] = [[]] := rfl
+    rw [e1, e2]
+    exact List.mem_cons_self
   | cons a t ih =>
     intro p
-    have e : (a :: t).sublists = (t.sublists) ++ (t.sublists).map (fun S => a :: S) := rfl
+    have e : sublists (a :: t) = sublists t ++ List.map (fun S => a :: S) (sublists t) := rfl
     rw [e]
     by_cases hp : p a = true
     · have e1 : filt p (a :: t) = a :: filt p t := filt_cons_true p a t hp
@@ -961,6 +1030,7 @@ theorem upto_length : ∀ N : Nat, (upto N).length = N := by
   | succ N ih =>
     have e : upto (N + 1) = upto N ++ [N] := rfl
     rw [e, List.length_append, ih]
+    have hlen : [N].length = 1 := rfl
     omega
 
 theorem upto_mem : ∀ (N a : Nat), a < N → a ∈ upto N := by
@@ -974,12 +1044,12 @@ theorem upto_mem : ∀ (N a : Nat), a < N → a ∈ upto N := by
     rcases (by omega : a < N ∨ a = N) with h | h
     · exact List.mem_append.mpr (Or.inl (ih a h))
     · subst h
-      exact List.mem_append.mpr (Or.inr (List.mem_cons_self N []))
+      exact List.mem_append.mpr (Or.inr List.mem_cons_self)
 
 theorem upto_lt : ∀ (N a : Nat), a ∈ upto N → a < N := by
   intro N
   induction N with
-  | zero => intro a ha; exact absurd ha (by simp)
+  | zero => intro a ha; exact absurd ha (by simp [upto])
   | succ N ih =>
     intro a ha
     have e : upto (N + 1) = upto N ++ [N] := rfl
@@ -995,7 +1065,7 @@ def upto1 (N : Nat) : List Nat := (upto N).map (fun s => s + 1)
 theorem upto1_mem : ∀ (N s : Nat), 1 ≤ s → s ≤ N → s ∈ upto1 N := by
   intro N s h1 h2
   refine List.mem_map.mpr ⟨s - 1, upto_mem N (s - 1) (by omega), ?_⟩
-  show (fun s => s + 1) (s - 1) = s
+  show s - 1 + 1 = s
   omega
 
 theorem upto1_bounds : ∀ (N s : Nat), s ∈ upto1 N → 1 ≤ s ∧ s ≤ N := by
@@ -1008,7 +1078,7 @@ theorem upto1_bounds : ∀ (N s : Nat), s ∈ upto1 N → 1 ≤ s ∧ s ≤ N :=
 
 def memB (a : Nat) : List Nat → Bool
   | [] => false
-  | b :: t => (a == b) || memB a t
+  | b :: t => (eqb a b) || memB a t
 
 theorem memB_iff : ∀ (a : Nat) (l : List Nat), memB a l = true ↔ a ∈ l := by
   intro a l
@@ -1018,21 +1088,21 @@ theorem memB_iff : ∀ (a : Nat) (l : List Nat), memB a l = true ↔ a ∈ l := 
     · intro h; exact Bool.noConfusion h
     · intro h; exact absurd h (by simp)
   | cons b t ih =>
-    have e : memB a (b :: t) = ((a == b) || memB a t) := rfl
+    have e : memB a (b :: t) = (eqb a b || memB a t) := rfl
     rw [e]
     constructor
     · intro h
       rcases or_split _ _ h with hb | ht
-      · exact List.mem_cons.mpr (Or.inl (eq_of_beq a b hb))
+      · exact List.mem_cons.mpr (Or.inl (eq_of_eqb_true a b hb))
       · exact List.mem_cons.mpr (Or.inr ((ih).mp ht))
     · intro h
       rcases List.mem_cons.mp h with he | ht
       · subst he
-        exact or_true_left _ _ (beq_true_of_eq _ _ rfl)
+        exact or_true_left _ _ (eqb_refl _)
       · exact or_true_right _ _ ((ih).mpr ht)
 
 def r3max (N : Nat) : Nat :=
-  (((upto1 N).sublists).filt ap3Free).foldr (fun S acc => Nat.max S.length acc) 0
+  (filt ap3Free (sublists (upto1 N))).foldr (fun S acc => Nat.max S.length acc) 0
 
 theorem fold_max_length_ge : ∀ (L : List (List Nat)) (S : List Nat), S ∈ L →
     S.length ≤ L.foldr (fun T acc => Nat.max T.length acc) 0 := by
@@ -1043,32 +1113,35 @@ theorem fold_max_length_ge : ∀ (L : List (List Nat)) (S : List Nat), S ∈ L �
     intro S hS
     rcases List.mem_cons.mp hS with he | hm
     · subst he
-      exact Nat.le_max_left a.length (t.foldr (fun T acc => Nat.max T.length acc) 0)
-    · exact Nat.le_trans (ih S hm)
-        (Nat.le_max_right a.length (t.foldr (fun T acc => Nat.max T.length acc) 0))
+      show S.length ≤ Nat.max S.length (t.foldr (fun T acc => Nat.max T.length acc) 0)
+      exact Nat.le_max_left S.length (t.foldr (fun T acc => Nat.max T.length acc) 0)
+    · have h1 := ih S hm
+      show S.length ≤ Nat.max a.length (t.foldr (fun T acc => Nat.max T.length acc) 0)
+      exact Nat.le_trans h1 (Nat.le_max_right a.length
+        (t.foldr (fun T acc => Nat.max T.length acc) 0))
 
 /-- **THE r3max BRIDGE**: the enumeration dominates every AP-free set. -/
 theorem r3_upper_via_r3max : ∀ (N : Nat) (S : List Nat), S.Nodup →
     (∀ s ∈ S, 1 ≤ s ∧ s ≤ N) → apFree3Set S → S.length ≤ r3max N := by
   intro N S hN hb hAP
-  have hS'mem : ∀ s ∈ S, s ∈ (upto1 N).filt (memB S) := by
+  have hS'mem : ∀ s ∈ S, s ∈ filt (fun s => memB s S) (upto1 N) := by
     intro s hs
-    refine (mem_filt_iff (memB S) (upto1 N) s).mpr
+    refine (mem_filt_iff (fun s => memB s S) (upto1 N) s).mpr
       ⟨upto1_mem N s (hb s hs).1 (hb s hs).2, (memB_iff s S).mpr hs⟩
-  have hlen : S.length ≤ ((upto1 N).filt (memB S)).length :=
+  have hlen : S.length ≤ (filt (fun s => memB s S) (upto1 N)).length :=
     nodup_mem_le _ S hN hS'mem
-  have hS'ap : ap3Free ((upto1 N).filt (memB S)) = true :=
+  have hS'ap : ap3Free (filt (fun s => memB s S) (upto1 N)) = true :=
     ap3Free_of_set _ (fun x y z hx hy hz hxy =>
-      hAP x y z ((mem_filt_iff (memB S) (upto1 N) x).mp hx |>.1)
-        ((mem_filt_iff (memB S) (upto1 N) y).mp hy |>.1)
-        ((mem_filt_iff (memB S) (upto1 N) z).mp hz |>.1) hxy)
-  have hsub : ((upto1 N).filt (memB S)) ∈ ((upto1 N).sublists).filt ap3Free :=
-    (mem_filt_iff ap3Free ((upto1 N).sublists) _).mpr
-      ⟨filt_mem_sublists (upto1 N) (memB S), hS'ap⟩
-  have hmax := fold_max_length_ge (((upto1 N).sublists).filt ap3Free)
-    ((upto1 N).filt (memB S)) hsub
+      hAP x y z ((mem_filt_iff (fun s => memB s S) (upto1 N) x).mp hx |>.1)
+        ((mem_filt_iff (fun s => memB s S) (upto1 N) y).mp hy |>.1)
+        ((mem_filt_iff (fun s => memB s S) (upto1 N) z).mp hz |>.1) hxy)
+  have hsub : filt (fun s => memB s S) (upto1 N) ∈ filt ap3Free (sublists (upto1 N)) :=
+    (mem_filt_iff ap3Free (sublists (upto1 N)) _).mpr
+      ⟨filt_mem_sublists (upto1 N) (fun s => memB s S), hS'ap⟩
+  have hmax := fold_max_length_ge (filt ap3Free (sublists (upto1 N)))
+    (filt (fun s => memB s S) (upto1 N)) hsub
   have hrw : r3max N =
-      (((upto1 N).sublists).filt ap3Free).foldr (fun T acc => Nat.max T.length acc) 0 := rfl
+      (filt ap3Free (sublists (upto1 N))).foldr (fun T acc => Nat.max T.length acc) 0 := rfl
   omega
 
 theorem r3_exact_small : r3Is 1 1 ∧ r3Is 2 2 ∧ r3Is 3 2 ∧ r3Is 4 3 ∧
@@ -1095,7 +1168,8 @@ theorem r3_exact_small : r3Is 1 1 ∧ r3Is 2 2 ∧ r3Is 3 2 ∧ r3Is 4 3 ∧
   have lift : ∀ (N M : Nat) (W : List Nat), N ≤ M → (∀ s ∈ W, 1 ≤ s ∧ s ≤ N) →
       ∀ s ∈ W, 1 ≤ s ∧ s ≤ M := by
     intro N M W hNM h s hs
-    exact ⟨(h s hs).1, by omega⟩
+    have hb := h s hs
+    exact ⟨hb.1, by omega⟩
   have b1 : ∀ s ∈ [1], 1 ≤ s ∧ s ≤ 1 := by
     intro s hs
     rcases List.mem_cons.mp hs with h | h
