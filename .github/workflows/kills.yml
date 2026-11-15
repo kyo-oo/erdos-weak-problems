@@ -12,6 +12,7 @@ on:
       - problem404-gadget-supply/**
       - problem261-funnels/**
       - problem404-p2-classification/**
+      - problem61-erdos-hajnal/**
       - problem404-q3-chain/**
       - problem1108-subset-kernel/**
       - Arsenal/**
@@ -1381,3 +1382,17 @@ jobs:
           grep -F "E961X3_EXCLUSION3_GREEN" kernel66.log
           grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
           echo KERNEL66_GREEN=1
+
+  kernel-61d:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Kernel 61d - Erdos 61 ERDOS-HAJNAL DOUBTER MIRROR BATTERY r1 (W68-61D): the adversarial audit of the killer lane's family design (pure python stdlib, dual engines, exit nonzero on ANY failure) -- (ARITH) the kernel's integer arithmetic certified: floor-superadditivity isqrt(a)+isqrt(b) >= isqrt(a+b) exhaustive a,b<=200 + boundary-adjacent <=10^4, greedy law k^2<=n => ceil(n/k)>=k, peel law 1<=c<=k-1 & k^2<=n => 1+isqrt(n-c)>=k all k<=200; (STRUCT) P3-free = disjoint union of cliques (n<=6, dual-engine adjacency + bitmask agreement), Seinsche Lemma A census: connected AND co-connected => induced P4 (21016 connected+co-connected graphs n<=6, ZERO P4-free among them), omega/alpha complement duality dual-engine agreement n<=5; (FAMILY) the SHARP form max(omega,alpha) >= isqrt(n) over every H-free graph n<=6 for all 8 family members (K1,K2,Kb2,P3,Pb3,K3,Kb3,P4) with P3-free census = 278 = Bell(1..6) ground-truth cross-check and Pb3 census = 278 complement symmetry; (PRODUCT) omega*alpha >= n certified for P3-free and P4-free graphs n<=6 (the cograph product law, zero violations); (FRONTIER) the 11 unlabeled 4-vertex H honest-scope map: min max(omega,alpha) over H-free graphs n=4..6 banked to frontier_map.json"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 problem61-erdos-hajnal/engine61/doubter/mirror_battery.py 2>&1 | tee kernel61d.log
+          ! grep -E 'BATTERY VERDICT: RED|FAIL:' kernel61d.log
+          grep -F "E61_DOUBTER_BATTERY_GREEN" kernel61d.log
+          test "$(grep -c 'violations: 0' kernel61d.log)" -ge 8
+          echo KERNEL61D_GREEN=1

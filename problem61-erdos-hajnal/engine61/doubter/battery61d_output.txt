@@ -1,0 +1,42 @@
+MIRROR BATTERY W68-61D — Erdos #61 doubter lane (dual engines)
+======================================================================
+[ARITH] floor-superadditivity: isqrt(a)+isqrt(b) >= isqrt(a+b)
+  violations (exhaustive <=200 + boundary <=10^4): 0
+[ARITH] greedy law: k^2 <= n implies ceil(n/k) >= k
+  violations: 0
+[ARITH] peel law: 1 <= c <= k-1 and k^2 <= n implies 1+isqrt(n-c) >= k
+  violations: 0
+[STRUCT] P3-free = disjoint union of cliques (n<=6, dual)
+  violations: 0
+[STRUCT] Seinsche: connected AND co-connected => induced P4 (n<=6)
+  connected+co-connected total: 21084; P4-free among them: 0
+[STRUCT] omega/alpha duality + dual-engine agreement (n<=5)
+  violations: 0
+[FAMILY] sharp form max(omega,alpha) >= isqrt(n) per H in F (n<=6, dual)
+  K1: count=0 sharp-violations=0
+  K2: count=6 sharp-violations=0
+  Kb2: count=6 sharp-violations=0
+  P3: count=278 sharp-violations=0
+  Pb3: count=278 sharp-violations=0
+  K3: count=6228 sharp-violations=0
+  Kb3: count=6228 sharp-violations=0
+  P4: count=6039 sharp-violations=0
+[PRODUCT] omega*alpha >= n for P3-free and P4-free (n<=6)
+  P3-free product-law violations: 0
+  P4-free product-law violations: 0
+[FRONTIER] the 11 unlabeled 4-vertex H: min max(omega,alpha) over H-free graphs, n=4..6
+  iso classes on 4 vertices: 11
+  H 0 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 1 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 2 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 2 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 3 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 3 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 3 edges: min max(w,a) n=4,5,6: {4: 2, 5: 3, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 4 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 4 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 5 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  H 6 edges: min max(w,a) n=4,5,6: {4: 2, 5: 2, 6: 3} (sqrt: 2.00 2.24 2.45)
+  frontier_map.json banked
+======================================================================
+BATTERY VERDICT: GREEN — all dual-engine censuses agree, no violations
