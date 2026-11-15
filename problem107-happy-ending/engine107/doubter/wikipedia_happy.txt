@@ -1,0 +1,426 @@
+
+
+Happy ending problem - Wikipedia
+
+Jump to content
+
+Main menu
+
+Main menu
+
+ move to sidebar
+ hide
+
+ Navigation
+
+Main page
+
+Contents
+
+Current events
+
+Random article
+
+About Wikipedia
+
+Contact us
+
+ Contribute
+
+Help
+
+Learn to edit
+
+Community portal
+
+Recent changes
+
+Upload file
+
+Special pages
+
+Search
+
+ Search
+
+Appearance
+
+Donate
+
+Create account
+
+Log in
+
+Personal tools
+
+Donate
+
+Create account
+
+Log in
+
+Contents
+
+ move to sidebar
+ hide
+
+(Top)
+
+ 1
+ Larger polygons
+
+ 2
+ Empty convex polygons
+
+ 3
+ Related problems
+
+ 4
+ "Happy ending"
+
+ 5
+ Notes
+
+ 6
+ References
+
+ 7
+ External links
+
+Toggle the table of contents
+
+Happy ending problem
+
+16 languages
+
+العربية
+
+Català
+
+Ελληνικά
+
+Español
+
+فارسی
+
+Suomi
+
+Français
+
+Magyar
+
+Italiano
+
+한국어
+
+Português
+
+Русский
+
+ไทย
+
+Українська
+
+文言
+
+中文
+
+Edit links
+
+Article
+
+Talk
+
+ English
+
+Read
+
+Edit
+
+View history
+
+Save
+
+Tools
+
+Tools
+
+ move to sidebar
+ hide
+
+ Actions
+
+Read
+
+Edit
+
+View history
+
+Save
+
+ General
+
+What links here
+
+Related changes
+
+Upload file
+
+Permanent link
+
+Page information
+
+Cite this page
+
+Get shortened URL
+
+Switch to legacy parser
+
+ Print/export
+
+Download as PDF
+
+Printable version
+
+ In other projects
+
+Wikidata item
+
+Appearance
+
+ move to sidebar
+ hide
+
+From Wikipedia, the free encyclopedia
+
+Five coplanar points have a subset forming a convex quadrilateral
+
+For the Fred Frith album, see The Happy End Problem.
+
+"Erdős–Szekeres conjecture" redirects here. For their theorem on monotonic subsequences, see Erdős–Szekeres theorem.
+
+The happy ending problem: every set of five points in general position contains the vertices of a convex quadrilateral
+
+In mathematics, the "happy ending problem" (so named by Paul Erdős because it led to the marriage of mathematicians George Szekeres and Esther Klein)[1][2][3] is the following statement:
+
+Theorem—any set of five points in the plane in general position[4] has a subset of four points that form the vertices of a convex quadrilateral.
+
+This was one of the original results that led to the development of Ramsey theory.
+
+The happy ending theorem can be proven by a simple case analysis: if four or more points are vertices of the convex hull, any four such points can be chosen. If on the other hand, the convex hull has the form of a triangle with two points inside it, the two inner points and one of the triangle sides can be chosen. See Peterson (2000) for an illustrated explanation of this proof, and Morris & Soltan (2000) for a more detailed survey of the problem.
+
+The Erdős–Szekeres conjecture states precisely a more general relationship between the number of points in a general-position point set and its largest subset forming a convex polygon, namely that the smallest number of points for which any general position arrangement contains a convex subset of n points is 2n−2+1. It remains unproven, but less precise bounds are known.
+
+Larger polygons
+
+A set of eight points in general position with no convex pentagon
+
+Erdős & Szekeres (1935) proved the following generalisation:
+
+Theorem—for any positive integer N, any sufficiently large finite set of points in the plane in general position has a subset of N points that form the vertices of a convex polygon.
+
+The proof appeared in the same paper that proves the Erdős–Szekeres theorem on monotonic subsequences in sequences of numbers.
+
+Let f(N) denote the minimum M for which any set of M points in general position must contain a convex N-gon. It is known that
+
+f(3) = 3, trivially.
+
+f(4) = 5.[5]
+
+f(5) = 9.[6] A set of eight points with no convex pentagon is shown in the illustration, demonstrating that f(5) > 8; the more difficult part of the proof is to show that every set of nine points in general position contains the vertices of a convex pentagon.
+
+f(6) = 17.[7]
+
+The value of f(N) is unknown for all N > 6. By the result of Erdős & Szekeres (1935), f(N) is known to be finite for all finite N.
+
+On the basis of the known values of f(N) for N = 3, 4 and 5, Erdős and Szekeres conjectured in their original paper that 
+
+A set of sixteen points in general position with no convex hexagon
+
+f(N)=1+2N−2for all N≥3.
+They proved later, by constructing explicit examples, that[8]
+f(N)≥1+2N−2.
+In 2016 Andrew Suk[9] showed that for N ≥ 7
+f(N)≤2N+o(N).
+
+Suk actually proves, for N sufficiently large, 
+f(N)≤2N+6N2/3log⁡N.
+
+This was subsequently improved to:[10]
+
+f(N)≤2N+O(Nlog⁡N).
+
+Empty convex polygons
+
+There is also the question of whether any sufficiently large set of points in general position has an "empty" convex quadrilateral, pentagon, etc.,
+that is, one that contains no other input point. The original solution to the happy ending problem can be adapted to show that any five points in general position have an empty convex quadrilateral, as shown in the illustration, and any ten points in general position have an empty convex pentagon.[11] However, there exist arbitrarily large sets of points in general position that contain no empty convex heptagon.[12]
+
+Let N be the minimum number of points, such that any N points in general position contains an empty hexagon. For a long time it is open whether N exists. The question is now solved:
+
+Overmars (2003) showed that if it exists, then N≥30, by constructing an example with 29 points.
+
+Nicolás (2007) showed that N≤f(25).
+
+Gerken (2008) showed that N≤f(9).
+
+Valtr (2008) made a simpler but looser version of Gerken (2008), to show that N≤f(15).
+
+Heule & Scheucher (2024) showed, by using a SAT solving approach, that N=30.
+
+Related problems
+
+The problem of finding sets of n points minimizing the number of convex quadrilaterals is equivalent to minimizing the crossing number in a straight-line drawing of a complete graph. The number of quadrilaterals must be proportional to the fourth power of n, but the precise constant is not known.[13]
+
+It is straightforward to show that, in higher-dimensional Euclidean spaces, sufficiently large sets of points will have a subset of k points that forms the vertices of a convex polytope, for any k greater than the dimension: this follows immediately from existence of convex k-gons in sufficiently large planar point sets, by projecting the higher-dimensional point set into an arbitrary two-dimensional subspace. However, the number of points necessary to find k points in convex position may be smaller in higher dimensions than it is in the plane, and it is possible to find subsets that are more highly constrained. In particular, in d dimensions, every d + 3 points in general position have a subset of d + 2 points that form the vertices of a cyclic polytope.[14] More generally, for every d and k > d there exists a number m(d, k) such that every set of m(d, k) points in general position has a subset of k points that form the vertices of a neighborly polytope.[15]
+
+"Happy ending"
+
+According to George Szekeres, who discussed the problem with his future wife Esther Klein early in their relationship, "it was Paul Erdös who called it the 'Happy Ending'". They became friends in 1933 and married in 1937, and Szekeres says the reason they got married was not entirely because of their work on the problem.[16]
+
+Notes
+
+↑ Cowling, Michael (November 7, 2005). "A world of teaching and numbers - times two". The Sydney Morning Herald. Retrieved September 4, 2014.
+
+↑ Hartnett, Kevin (2017-05-30). "A Puzzle of Clever Connections Nears a Happy End". Quanta Magazine. Retrieved 2026-07-13.
+
+↑ Hoffman, Paul (1998). The man who loved only numbers: the story of Paul Erdos and the search for mathematical truth. New York: Hyperion. p. 76. ISBN 978-0-7868-6362-4.
+
+↑ In this context, general position means that no two points coincide and no three points are collinear.
+
+↑ This was the original problem, proved by Esther Klein.
+
+↑ According to Erdős & Szekeres (1935), this was first proved by Endre Makai (1915–1987);(see "The Hidden Order: A Painting". www.sfu.ca. Retrieved 2026-02-09., Fizikusok és matematikusok az Eötvös Collegiumban 1895–1950 (PDF) (in Hungarian). pp. 231–232.) the first published proof appeared in Kalbfleisch, Kalbfleisch & Stanton (1970).
+
+↑ This has been proved by Szekeres & Peters (2006). They carried out a computer search which eliminated all possible configurations of 17 points without convex hexagons while examining only a tiny fraction of all configurations.
+
+↑ Erdős & Szekeres (1961)
+
+↑ Suk (2016). See binomial coefficient and big O notation for notation used here and Catalan numbers or Stirling's approximation for the asymptotic expansion.
+
+↑ Holmsen et al. (2020).
+
+↑ Harborth (1978).
+
+↑ Horton (1983)
+
+↑ Scheinerman & Wilf (1994)
+
+↑ Grünbaum (2003), Ex. 6.5.6, p.120. Grünbaum attributes this result to a private communication of Micha A. Perles.
+
+↑ Grünbaum (2003), Ex. 7.3.6, p. 126. This result follows by applying a Ramsey-theoretic argument similar to Szekeres's original proof together with Perles's result on the case k = d + 2.
+
+↑ "Professor George Szekeres (1911-2005), mathematician | Australian Academy of Science". science.org.au. Retrieved 2026-07-13.
+
+References
+
+Chung, F.R.K.; Graham, R.L. (1998), "Forced convex n-gons in the plane", Discrete and Computational Geometry, 19 (3): 367–371, doi:10.1007/PL00009353
+
+Erdős, P.; Szekeres, G. (1935), "A combinatorial problem in geometry", Compositio Mathematica, 2: 463–470 reprinted in Gessel, Ira; Rota, Gian-Carlo (1987). Gessel, Ira; Rota, Gian-Carlo (eds.). Classic Papers in Combinatorics. Boston, MA: Birkhäuser Boston Inc. pp. 49–56.
+
+Erdős, P.; Szekeres, G. (1961), "On some extremum problems in elementary geometry", Ann. Univ. Sci. Budapest. Eötvös Sect. Math., 3–4: 53–62; reprinted in Erdős, P. (1973), Spencer, J. (ed.), The Art of Counting: Selected Writings, Cambridge, MA: MIT Press, pp. 680–689
+
+Gerken, Tobias (2008), "Empty convex hexagons in planar point sets", Discrete and Computational Geometry, 39 (1–3): 239–272, doi:10.1007/s00454-007-9018-x
+
+Grünbaum, Branko (2003), Kaibel, Volker; Klee, Victor; Ziegler, Günter M. (eds.), Convex Polytopes, Graduate Texts in Mathematics, vol. 221 (2nd ed.), Springer-Verlag, ISBN 0-387-00424-6
+
+Harborth, Heiko (1978), "Konvexe Fünfecke in ebenen Punktmengen", Elemente der Mathematik, 33 (5): 116–118
+
+Heule, Marijn J. H.; Scheucher, Manfred (2024), "Happy Ending: An Empty Hexagon in Every Set of 30 Points", in Finkbeiner, Bernd; Kovács, Laura (eds.), Tools and Algorithms for the Construction and Analysis of Systems, Lecture Notes in Computer Science, vol. 14570, Springer-Verlag, pp. 61–80, arXiv:2403.00737, doi:10.1007/978-3-031-57246-3_5, ISBN 978-3-031-57245-6
+
+Holmsen, Andreas F.; Mojarrad, Hossein Nassajian; Pach, János; Tardos, Gábor (2020), "Two extensions of the Erdős–Szekeres problem", Journal of the European Mathematical Society, 22 (12): 3981–3995, arXiv:1710.11415, doi:10.4171/jems/1000, MR 4176784
+
+Horton, J. D. (1983), "Sets with no empty convex 7-gons", Canadian Mathematical Bulletin, 26 (4): 482–484, doi:10.4153/CMB-1983-077-8, S2CID 120267029
+
+Kalbfleisch, J.D.; Kalbfleisch, J.G.; Stanton, R.G. (1970), "A combinatorial problem on convex regions", Proc. Louisiana Conf. Combinatorics, Graph Theory and Computing, Congressus Numerantium, vol. 1, Baton Rouge, La.: Louisiana State Univ., pp. 180–188
+
+Kleitman, D.J.; Pachter, L. (1998), "Finding convex sets among points in the plane", Discrete and Computational Geometry, 19 (3): 405–410, doi:10.1007/PL00009358
+
+Morris, W.; Soltan, V. (2000), "The Erdős-Szekeres problem on points in convex position—A survey", Bulletin of the American Mathematical Society, 37 (4): 437–458, doi:10.1090/S0273-0979-00-00877-6
+
+Nicolás, Carlos M. (2007), "The empty hexagon theorem", Discrete and Computational Geometry, 38 (2): 389–397, doi:10.1007/s00454-007-1343-6
+
+Overmars, M. (2003), "Finding sets of points without empty convex 6-gons", Discrete and Computational Geometry, 29 (1): 153–158, doi:10.1007/s00454-002-2829-x
+
+Peterson, Ivars (2000), "Planes of Budapest", MAA Online, archived from the original on 2013-07-02
+
+Scheinerman, Edward R.; Wilf, Herbert S. (1994), "The rectilinear crossing number of a complete graph and Sylvester's "four point problem" of geometric probability", American Mathematical Monthly, 101 (10), Mathematical Association of America: 939–943, doi:10.2307/2975158, JSTOR 2975158
+
+Suk, Andrew (2016), "On the Erdős–Szekeres convex polygon problem", J. Amer. Math. Soc., 30 (4): 1047–1053, arXiv:1604.08657, doi:10.1090/jams/869, S2CID 15732134
+
+Szekeres, G.; Peters, L. (2006), "Computer solution to the 17-point Erdős-Szekeres problem", ANZIAM Journal, 48 (2): 151–164, doi:10.1017/S144618110000300X
+
+Tóth, G.; Valtr, P. (1998), "Note on the Erdős-Szekeres theorem", Discrete and Computational Geometry, 19 (3): 457–459, doi:10.1007/PL00009363
+
+Tóth, G.; Valtr, P. (2005), "The Erdős-Szekeres theorem: upper bounds and related results", in Goodman, Jacob E.; Pach, János; Welzl, Emo (eds.), Combinatorial and Computational Geometry (PDF), Mathematical Sciences Research Institute Publications, vol. 52, Cambridge University Press, pp. 557–568, archived from the original (PDF) on 2019-07-28, retrieved 2015-02-28
+
+Valtr, P. (2008), "On empty hexagons", in Goodman, Jacob E.; Pach, János; Pollack, Richard (eds.), Surveys on Discrete and Computational Geometry: Twenty Years Later: AMS-IMS-SIAM Joint Summer Research Conference, June 18-22, 2006, Snowbird, Utah, Contemporary Mathematics, vol. 453, American Mathematical Society, pp. 433–442, ISBN 9780821842393
+
+External links
+
+Happy ending problem and Ramsey-theoretic proof of the Erdős-Szekeres theorem on PlanetMath
+
+Weisstein, Eric W., "Happy End Problem", MathWorld
+
+Retrieved from "https://en.wikipedia.org/w/index.php?title=Happy_ending_problem&oldid=1385770362"
+
+Categories: 
+Discrete geometry
+
+Euclidean plane geometry
+
+Quadrilaterals
+
+Polygons
+
+Mathematical problems
+
+Ramsey theory
+
+Paul Erdős
+
+Hidden categories: 
+Articles with short description
+
+Short description is different from Wikidata
+
+CS1 Hungarian-language sources (hu)
+
+ This page was last edited on 15 November 2026, at 03:42 (UTC).
+
+Page was rendered with Parsoid.
+
+Text is available under the Creative Commons Attribution-ShareAlike 4.0 License;
+additional terms may apply. By using this site, you agree to the Terms of Use and Privacy Policy. Wikipedia® is a registered trademark of the Wikimedia Foundation, Inc., a non-profit organization.
+
+Privacy policy
+
+About Wikipedia
+
+Disclaimers
+
+Contact Wikipedia
+
+Legal & safety contacts
+
+Code of Conduct
+
+Developers
+
+Statistics
+
+Cookie statement
+
+Mobile view
+
+Search
+
+ Search
+
+Toggle the table of contents
+
+Happy ending problem
+
+16 languages
+
+Add topic
+
