@@ -1,0 +1,38 @@
+W68-107D MIRROR BATTERY -- SUMMARY (Erdos #107, Happy Ending)
+========================================================================
+Engine queries (dual, LAW 3): 1611589 calls, 1611589 agreements (100.000%)
+Failures: 0
+
+HONEST SCOPE (LAW 4)
+---------------------------------------------------------------
+CERTIFIED-UNCONDITIONAL (exact arithmetic, dual engines, exhaustive
+over the stated domain):
+ * ES35 arithmetic identities C(2n-4,n-2)+1, n=3..14 (check 1).
+ * Cups/caps table N(r,s)=C(r+s-4,r-2)+1 == recurrence-built table,
+   r,s<=8, incl. N(r,s)=N(r-1,s)+N(r,s-1)-1 and boundaries (check 2).
+ * f(4) > 4: explicit 4-point GP sets with no convex 4-gon
+   (check 3, e.g. triangle + interior point).
+ * f(4) <= 5 over the canonical grid family: EVERY GP 5-subset of the
+   4x4/5x5/6x6 integer grids contains a convex 4-gon, and the classical
+   case map (hull>=4 direct; hull=3 split rule) yields a dual-verified
+   witness in every instance. Family coverage: all three 5-point
+   order-type hull classes (3/4/5) are realized (counts in the JSON);
+   any 5-point GP set has hull size in {3,4,5} (classical trichotomy),
+   and the case-map code path is uniform (instance-independent).
+ * ErSz61 construction certificates n=3..6 (check 5): each constructed
+   2^{n-2}-point set is certified in general position with NO convex
+   n-gon, exhaustively over ALL n-subsets (n=6: all 8008) -- hence
+   f(n) >= 2^{n-2}+1 for these instances; n=6 certifies f(6) >= 17.
+ * 8-point ErSz61 variants (check 4b): 18/18 certified, no convex
+   5-gon (exhaustive over all 56 5-subsets each).
+EVIDENCE (randomized census -- NOT exhaustive, labeled as such):
+ * f(5) <= 9: 100,000 random GP 9-point sets, each containing a convex
+   5-gon (check 4a). The theorem f(5)=9 is literature (Makai-Turan;
+   first published proof Kalbfleisch-Kalbfleisch-Stanton 1970).
+ * ES35 (4,4) stress: 10,000 random 7-point GP sets each contain a
+   4-cup or 4-cap (check 2b).
+LITERATURE-CITED (NOT verified by this battery):
+ * f(6) = 17 upper bound: Szekeres & Peters 2006 (computer search).
+ * f(5) = 9 upper bound: Makai & Turan; Kalbfleisch et al. 1970.
+ * f(4) = 5: Klein (1932/33, credit in ES35); f(3)=3 trivial.
+---------------------------------------------------------------

@@ -1,0 +1,9 @@
+{
+ "all_contained_convex_5gon": true,
+ "full_dual_enumerations": 100,
+ "grid": "80x80 integer grid, rejection for collinear triples",
+ "label": "EVIDENCE (randomized census -- NOT exhaustive; the theorem f(5)=9 is literature: Makai-Turan / Kalbfleisch et al. 1970)",
+ "rejected_non_gp_candidates": 8600,
+ "rng_seed": 107005,
+ "sets_checked": 100000
+}

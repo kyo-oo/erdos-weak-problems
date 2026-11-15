@@ -1,0 +1,119 @@
+========================================================================
+W68-107D MIRROR BATTERY -- Erdos #107 (Happy Ending) doubter lane
+exact arithmetic only (integers + Fractions, no floats); dual engines
+========================================================================
+== SELF-TESTS (known answers, both engines) ==
+  unit square                            A=True  B=True  expected=True  OK
+  triangle + interior                    A=False B=False expected=False OK
+  generic convex quad                    A=True  B=True  expected=True  OK
+  triangle                               A=True  B=True  expected=True  OK
+  collinear triple                       A=False B=False expected=False OK
+  square + center                        A=False B=False expected=False OK
+  square + 2 interior                    A=False B=False expected=False OK
+  square + exterior point (convex pentagon) A=True  B=True  expected=True  OK
+  3-cup                                  cup/cap=cup   expected=cup   OK
+  3-cap                                  cup/cap=cap   expected=cap   OK
+  3-cap down                             cup/cap=cap   expected=cap   OK
+  collinear (excluded)                   cup/cap=None  expected=None  OK
+  all self-tests OK
+== CHECK 1: ES35 arithmetic C(2n-4,n-2)+1 for n=3..14 (dual: math.comb vs multiplicative recurrence) ==
+  n= 3  C( 2, 1)+1 = 3             dual_agree=True
+  n= 4  C( 4, 2)+1 = 7             dual_agree=True
+  n= 5  C( 6, 3)+1 = 21            dual_agree=True
+  n= 6  C( 8, 4)+1 = 71            dual_agree=True
+  n= 7  C(10, 5)+1 = 253           dual_agree=True
+  n= 8  C(12, 6)+1 = 925           dual_agree=True
+  n= 9  C(14, 7)+1 = 3433          dual_agree=True
+  n=10  C(16, 8)+1 = 12871         dual_agree=True
+  n=11  C(18, 9)+1 = 48621         dual_agree=True
+  n=12  C(20,10)+1 = 184757        dual_agree=True
+  n=13  C(22,11)+1 = 705433        dual_agree=True
+  n=14  C(24,12)+1 = 2704157       dual_agree=True
+  anchors: ES35(4)=7, ES35(5)=21, ES35(6)=71 -- match banked notes
+== CHECK 2: cups/caps table N(r,s)=C(r+s-4,r-2)+1 for r,s<=8 (closed form vs classical recurrence N(r,s)=N(r-1,s)+N(r,s-1)-1) ==
+  table (rows r=3..8, cols s=3..8):
+        s=3   s=4   s=5   s=6   s=7   s=8   
+    r=3 3     4     5     6     7     8     
+    r=4 4     7     11    16    22    29    
+    r=5 5     11    21    36    57    85    
+    r=6 6     16    36    71    127   211   
+    r=7 7     22    57    127   253   463   
+    r=8 8     29    85    211   463   925   
+  closed==recurrence: True | recurrence identity: True | boundary: True | symmetry: True
+  anchors: N(4,4)=7 (=ES35 f(4,4)<=7), N(5,5)=21 (=21), N(8,8)=925
+== CHECK 2b (bonus evidence): ES35 Thm 2.3 at (k,l)=(4,4): 10,000 random GP 7-point sets each contain a 4-cup or 4-cap ==
+  sets checked: 10000 (rejected non-GP: 212), all contained a 4-cup or 4-cap
+  full dual enumerations (both detectors, all 35 subsets agree): 20
+== CHECK 3: f(4)=5 brute census over canonical grids (4x4, 5x5, 6x6; every GP 5-subset contains a convex 4-gon) ==
+  grid 4x4: 5-subsets=4368, GP=1668 | hull classes 3/4/5 = 12/808/848 | case-map witnesses verified: 1668 | rules: {'hull>=4-direct': 1656, 'hull=3-split-rule': 12}
+           convex-4-subsets per GP 5-set (histogram): {1: 12, 3: 808, 5: 848}
+  grid 5x5: 5-subsets=53130, GP=25052 | hull classes 3/4/5 = 624/12800/11628 | case-map witnesses verified: 25052 | rules: {'hull>=4-direct': 24428, 'hull=3-split-rule': 624}
+           convex-4-subsets per GP 5-set (histogram): {1: 624, 3: 12800, 5: 11628}
+  grid 6x6: 5-subsets=376992, GP=215448 | hull classes 3/4/5 = 8672/115724/91052 | case-map witnesses verified: 215448 | rules: {'hull>=4-direct': 206776, 'hull=3-split-rule': 8672}
+           convex-4-subsets per GP 5-set (histogram): {1: 8672, 3: 115724, 5: 91052}
+  -- lower side: 4-point GP subsets of the 6x6 grid with NO convex 4-gon (f(4) > 4) --
+  4-subsets of 6x6 grid: total=58905, GP=47331, with NO convex 4-gon: 11604
+  witness (hull is a triangle, 4th point interior): [[0, 0], [0, 1], [1, 1], [3, 2]]
+  => f(4) > 4 certified by explicit witness; with the census above: f(4) = 5
+== CHECK 4a (EVIDENCE): f(5)=9 randomized census -- 100,000 random GP 9-point sets each contain a convex 5-gon ==
+  random 9-point GP sets checked: 100000 (rejected non-GP candidates: 8600) -- every one contained a convex 5-gon
+  full dual enumerations (all 126 5-subsets, both engines identical): 100
+== CHECK 4b: 8-point ErSz61 construction sweep -- 18 parameter variants, each certified to contain NO convex 5-gon ==
+  variants verified: 18/18 PASS (each: 8 points, GP, sizes 1+3+3+1, slope dichotomy, T_i cup/cap properties, NO convex 5-gon over all 56 5-subsets, dual engines)
+== CHECK 5: ErSz61 construction certificates n=3..6 (default params; exhaustive no-convex-n-gon, dual engines) ==
+  ErSz61 certificate n=3: |X|=2 (clusters [1, 1]), GP=True, dichotomy(intra<=1/2:True, inter>1:True), T_i cup/cap props=True, no-convex-3-gon: 0/0 subsets convex -> NONE, max convex polygon=None
+  ErSz61 certificate n=4: |X|=4 (clusters [1, 2, 1]), GP=True, dichotomy(intra<=1/2:True, inter>1:True), T_i cup/cap props=True, no-convex-4-gon: 0/1 subsets convex -> NONE, max convex polygon=3
+  ErSz61 certificate n=5: |X|=8 (clusters [1, 3, 3, 1]), GP=True, dichotomy(intra<=1/2:True, inter>1:True), T_i cup/cap props=True, no-convex-5-gon: 0/56 subsets convex -> NONE, max convex polygon=4
+  ErSz61 certificate n=6: |X|=16 (clusters [1, 4, 6, 4, 1]), GP=True, dichotomy(intra<=1/2:True, inter>1:True), T_i cup/cap props=True, no-convex-6-gon: 0/8008 subsets convex -> NONE, max convex polygon=5
+== CHECK 6: f(3)=3 sanity census (5x5 grid) + f(6)=17 citation-only ==
+  triples of the 5x5 grid: 2300 total, 2148 non-collinear -- every one a convex 3-gon (dual engines)
+  f(3) > 2 is vacuous (a 2-point set contains no 3-gon) => f(3) = 3
+  f(6) = 17: UPPER BOUND IS LITERATURE, NOT VERIFIED HERE:
+    G. Szekeres, L. Peters, 'Computer solution to the 17-point
+    Erdos-Szekeres problem', ANZIAM J. 48 (2006), 151-164.
+    (The LOWER half f(6) >= 17 IS certified by the n=6 ErSz61
+    construction certificate in check 5: 16 points, no convex hexagon.)
+== CHECK 7: banking (JSON artifacts + summary written to out/) ==
+W68-107D MIRROR BATTERY -- SUMMARY (Erdos #107, Happy Ending)
+========================================================================
+Engine queries (dual, LAW 3): 1611589 calls, 1611589 agreements (100.000%)
+Failures: 0
+
+HONEST SCOPE (LAW 4)
+---------------------------------------------------------------
+CERTIFIED-UNCONDITIONAL (exact arithmetic, dual engines, exhaustive
+over the stated domain):
+ * ES35 arithmetic identities C(2n-4,n-2)+1, n=3..14 (check 1).
+ * Cups/caps table N(r,s)=C(r+s-4,r-2)+1 == recurrence-built table,
+   r,s<=8, incl. N(r,s)=N(r-1,s)+N(r,s-1)-1 and boundaries (check 2).
+ * f(4) > 4: explicit 4-point GP sets with no convex 4-gon
+   (check 3, e.g. triangle + interior point).
+ * f(4) <= 5 over the canonical grid family: EVERY GP 5-subset of the
+   4x4/5x5/6x6 integer grids contains a convex 4-gon, and the classical
+   case map (hull>=4 direct; hull=3 split rule) yields a dual-verified
+   witness in every instance. Family coverage: all three 5-point
+   order-type hull classes (3/4/5) are realized (counts in the JSON);
+   any 5-point GP set has hull size in {3,4,5} (classical trichotomy),
+   and the case-map code path is uniform (instance-independent).
+ * ErSz61 construction certificates n=3..6 (check 5): each constructed
+   2^{n-2}-point set is certified in general position with NO convex
+   n-gon, exhaustively over ALL n-subsets (n=6: all 8008) -- hence
+   f(n) >= 2^{n-2}+1 for these instances; n=6 certifies f(6) >= 17.
+ * 8-point ErSz61 variants (check 4b): 18/18 certified, no convex
+   5-gon (exhaustive over all 56 5-subsets each).
+EVIDENCE (randomized census -- NOT exhaustive, labeled as such):
+ * f(5) <= 9: 100,000 random GP 9-point sets, each containing a convex
+   5-gon (check 4a). The theorem f(5)=9 is literature (Makai-Turan;
+   first published proof Kalbfleisch-Kalbfleisch-Stanton 1970).
+ * ES35 (4,4) stress: 10,000 random 7-point GP sets each contain a
+   4-cup or 4-cap (check 2b).
+LITERATURE-CITED (NOT verified by this battery):
+ * f(6) = 17 upper bound: Szekeres & Peters 2006 (computer search).
+ * f(5) = 9 upper bound: Makai & Turan; Kalbfleisch et al. 1970.
+ * f(4) = 5: Klein (1932/33, credit in ES35); f(3)=3 trivial.
+---------------------------------------------------------------
+========================================================================
+DUAL METHOD (LAW 3): engine queries=1611589, exact agreements=1611589 (100.0000%)
+elapsed: 27.6s
+BATTERY VERDICT: ALL CHECKS GREEN
+MIRROR_BATTERY_GREEN=1

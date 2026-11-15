@@ -55,6 +55,7 @@ on:
       - problem289-intervals/**
       - problem1212-coprime-composite/**
       - problem389-consecutive-product/**
+      - problem107-happy-ending/**
       - .github/workflows/kills.yml
   workflow_dispatch:
 permissions:
@@ -1381,3 +1382,18 @@ jobs:
           grep -F "E961X3_EXCLUSION3_GREEN" kernel66.log
           grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
           echo KERNEL66_GREEN=1
+  kernel-107d:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: "Erdos 107 doubter mirror battery (W68-107D): pure-python dual-method census battery -- ES35 arithmetic (n=3..14), cups/caps N(r,s) table r,s<=8 + ES35(4,4) stress, f(4)=5 canonical-grid census (215,448 GP 5-subsets of the 6x6 grid) + f(4)>4 witnesses, f(5)=9 randomized evidence census (100k random GP 9-point sets) + 18 ErSz61 8-point variants, ErSz61 construction certificates n=3..6 (n=6: 16 points, no convex hexagon over all 8008 6-subsets), f(3)=3 census + f(6)=17 literature citation -- NO Lean install (pure python job)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 problem107-happy-ending/engine107/doubter/mirror_battery.py 2>&1 | tee mirror-107d.log
+          grep -F "MIRROR_BATTERY_GREEN=1" mirror-107d.log
+          grep -F "DUAL METHOD (LAW 3): engine queries=" mirror-107d.log
+          echo KERNEL_107D_GREEN=1
