@@ -1,0 +1,62 @@
+MIRROR61 — W67-61K — Erdos #61 family kernel mirror (dual engines)
+==========================================================================
+[0] Engine agreement + basic invariants over ALL graphs n <= 6
+  n=1: 1 graphs enumerated, dual-engine agreement on (omega,alpha,connectivity,complement,8 H-freeness): OK
+  n=2: 2 graphs enumerated, dual-engine agreement on (omega,alpha,connectivity,complement,8 H-freeness): OK
+  n=3: 8 graphs enumerated, dual-engine agreement on (omega,alpha,connectivity,complement,8 H-freeness): OK
+  n=4: 64 graphs enumerated, dual-engine agreement on (omega,alpha,connectivity,complement,8 H-freeness): OK
+  n=5: 1024 graphs enumerated, dual-engine agreement on (omega,alpha,connectivity,complement,8 H-freeness): OK
+  n=6: 32768 graphs enumerated, dual-engine agreement on (omega,alpha,connectivity,complement,8 H-freeness): OK
+  TOTAL graphs n<=6: 33867
+
+[1] THE SHARP-VS-SAFE DECISION — the mirror decides the authored form
+    SHARP: max(w,a) >= floor(sqrt(n))   SAFE: max(w,a) >= ceil(sqrt(n)/2)
+    H-free graph counts (n<=6, summed): {'K1': 0, 'K2': 6, 'Kb2': 6, 'P3': 278, 'Pb3': 278, 'K3': 6228, 'Kb3': 6228, 'P4': 6039}
+    SHARP violations over ALL H-free graphs n<=6: 0
+    SAFE  violations over ALL H-free graphs n<=6: 0
+    ==> MIRROR VERDICT: the SHARP form max(omega,alpha) >= floor(sqrt(n)) HOLDS on all graphs n<=6 for every H in F
+    ==> AUTHORED FORM: SHARP
+
+[2] SEINSCHE CENSUS (Lemma A): connected AND co-connected => induced P4
+  n=2: 0 connected+co-connected graphs; all contain P4: YES
+  n=3: 0 connected+co-connected graphs; all contain P4: YES
+  n=4: 12 connected+co-connected graphs; all contain P4: YES
+  n=5: 432 connected+co-connected graphs; all contain P4: YES
+  n=6: 20640 connected+co-connected graphs; all contain P4: YES
+  TOTAL connected+co-connected (n<=6): 21084; P4-free among them: 0
+  ==> SEINSCHE LEMMA A CERTIFIED on n<=6 (contrapositive: P4-free, n>=2 => disconnected or co-disconnected)
+
+[3] PRODUCT LAW: P3-free and P4-free graphs satisfy omega*alpha >= n
+  P3-free graphs n<=6: 278; product-law violations: 0
+  P4-free graphs n<=6: 6039; product-law violations: 0
+
+[4] CLUSTER LAW: P3-free = disjoint union of cliques
+  P3-free graphs n<=6: 278; not-disjoint-union-of-cliques: 0
+
+[5] GREEDY LAW: triangle-free -> alpha*(Delta+1) >= n ; CASE A law
+  triangle-free graphs n<=6: 6228; greedy-law violations: 0; case-A violations: 0
+
+[6] COMPLEMENT FAMILY LAWS
+  complement-law violations over all graphs n<=6: 0
+
+[7] UNION/JOIN COMPOSITION LAWS (all graph pairs nA,nB <= 3, both engines)
+  composition checks: 144; violations: 0
+
+[8] INTEGER ARITHMETIC (n <= 200; products <= 60)
+  arithmetic violations: 0
+
+[9] TIGHTNESS: alternating cograph witness — max = sqrt(n) EXACTLY at n=4^j
+    j=0: n=1, omega=1, alpha=1, max=1, floor(sqrt n)=1, EXACT=True
+    j=1: n=4, omega=2, alpha=2, max=2, floor(sqrt n)=2, EXACT=True
+    j=2: n=16, omega=4, alpha=4, max=4, floor(sqrt n)=4, EXACT=True
+    j=3: n=64, omega=8, alpha=8, max=8, floor(sqrt n)=8, EXACT=True
+    j=4: n=256, omega=16, alpha=16, max=16, floor(sqrt n)=16, EXACT=True
+    j=5: n=1024, omega=32, alpha=32, max=32, floor(sqrt n)=32, EXACT=True
+    ==> the sharp bound is TIGHT on this family (equality at n=4^j): True
+
+[10] n=7 BONUS CENSUS (targeted, the tight class): P4-free -> max >= floor(sqrt 7) = 2
+     (full n<=7 census is the doubter lane W67-61D's mandate; this is insurance)
+     n=7 graphs checked: 2097152; P4-free: 78416; sharp violations: 0
+
+==========================================================================
+FINAL VERDICT: ALL GREEN — mirror certifies the SHARP form

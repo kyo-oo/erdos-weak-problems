@@ -12,6 +12,7 @@ on:
       - problem404-gadget-supply/**
       - problem261-funnels/**
       - problem404-p2-classification/**
+      - problem61-erdos-hajnal/**
       - problem404-q3-chain/**
       - problem1108-subset-kernel/**
       - Arsenal/**
@@ -1381,3 +1382,29 @@ jobs:
           grep -F "E961X3_EXCLUSION3_GREEN" kernel66.log
           grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
           echo KERNEL66_GREEN=1
+
+  kernel-61k:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 61k - Erdos 61 ERDOS-HAJNAL FAMILY KERNEL r1 (W68-61K): the complete unconditional family theorem on BOSS's Arsenal for F7 = {K1, K2, Kb2, P3, Pb3, K3, Kb3} — every H-free graph on n vertices contains a clique OR an independent set of size >= floor(sqrt n) (the SHARP bound, exponent c(H) = 1/2; mirror-certified n<=6 by engine61/mirror61.py: zero sharp violations, P3-free census 278 = Bell(1..6), and engine61/doubter/mirror_battery.py: dual-engine agreement, Seinsche census 21016/0) — via (1) THE UNIFIED GREEDY ENGINE E61.closedNbhd_greedy (every closed neighborhood <= D implies an independent S with D * |S| >= n: peel a vertex, delete its closed neighborhood, fuel induction); (2) THE DEGREE LAW E61.k3_bound (K3-free: a big open neighborhood is independent by triangle-freeness, else the greedy); (3) THE CLUSTER LAW E61.p3_bound (P3-free: the closed neighborhood N[v] is a clique — neighbors of v pairwise adjacent — and the greedy covers the rest); (4) THE COMPLEMENT TRANSFERS E61.kb3_bound + E61.pb3_bound (Kb3-free IS K3-freeness of the complement adjacency, alpha<->omega swap; Pb3 = complement of P3); (5) THE TRIVIAL FAMILY E61.k1_bound/k2_bound/kb2_bound; (6) THE TIGHTNESS WITNESS E61.tight_family (the disjoint union of 2^j copies of K_{2^j} on n = 2^j * 2^j vertices has max(omega,alpha) = 2^j = floor(sqrt n) EXACTLY — both upper bounds certified via the mod-map and div-map injectivity — the c = 1/2 exponent is OPTIMAL); (7) THE ARSENAL BRIDGE E61.arsenal_bridge (CardinalWorlds.two_pow_pos + three_pow_pos_lemma applied) + tight_family_arsenal; the 7-conjunct E61.family_board + E61_FAMILY_GREEN receipt. Honest scope: P4 (cographs, Seinsche) is the live continuation front, not claimed. House-built machinery only (eqb/memB/hfilt/herase/fsqrt + Nat mono stack), zero Mathlib-only citations"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee kernel61k.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61k.log
+          grep -F "E61_FAMILY_GREEN" kernel61k.log
+          grep -E "E61.(family_board|closedNbhd_greedy|k3_bound|p3_bound|kb3_bound|pb3_bound|tight_family|arsenal_bridge|E61_FAMILY_GREEN)' (does not depend on any axioms|depends on axioms)" kernel61k.log
+          echo KERNEL61K_GREEN=1
