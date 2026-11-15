@@ -1,0 +1,66 @@
+ENGINE 142 MIRROR BATTERY — Erdos #142 (r_k(N) AP-free), lane W67-142K
+==============================================================================
+(a) CANTOR/TERNARY KERNEL — T_k is 3-AP-free (k <= 8)
+  [GREEN] T_0 3-AP-free (all x<z pairs, midpoint verdict), N=3^0-1=0 :: 1 elements, 0 pairs, 0 violations
+  [GREEN] |T_0 cap [1,0]| = 2^0-1 :: count=0 expected=0
+  [GREEN] T_1 3-AP-free (all x<z pairs, midpoint verdict), N=3^1-1=2 :: 2 elements, 1 pairs, 0 violations
+  [GREEN] |T_1 cap [1,2]| = 2^1-1 :: count=1 expected=1
+  [GREEN] T_2 3-AP-free (all x<z pairs, midpoint verdict), N=3^2-1=8 :: 4 elements, 6 pairs, 0 violations
+  [GREEN] |T_2 cap [1,8]| = 2^2-1 :: count=3 expected=3
+  [GREEN] T_3 3-AP-free (all x<z pairs, midpoint verdict), N=3^3-1=26 :: 8 elements, 28 pairs, 0 violations
+  [GREEN] |T_3 cap [1,26]| = 2^3-1 :: count=7 expected=7
+  [GREEN] T_4 3-AP-free (all x<z pairs, midpoint verdict), N=3^4-1=80 :: 16 elements, 120 pairs, 0 violations
+  [GREEN] |T_4 cap [1,80]| = 2^4-1 :: count=15 expected=15
+  [GREEN] T_5 3-AP-free (all x<z pairs, midpoint verdict), N=3^5-1=242 :: 32 elements, 496 pairs, 0 violations
+  [GREEN] |T_5 cap [1,242]| = 2^5-1 :: count=31 expected=31
+  [GREEN] T_6 3-AP-free (all x<z pairs, midpoint verdict), N=3^6-1=728 :: 64 elements, 2016 pairs, 0 violations
+  [GREEN] |T_6 cap [1,728]| = 2^6-1 :: count=63 expected=63
+  [GREEN] T_7 3-AP-free (all x<z pairs, midpoint verdict), N=3^7-1=2186 :: 128 elements, 8128 pairs, 0 violations
+  [GREEN] |T_7 cap [1,2186]| = 2^7-1 :: count=127 expected=127
+  [GREEN] T_8 3-AP-free (all x<z pairs, midpoint verdict), N=3^8-1=6560 :: 256 elements, 32640 pairs, 0 violations
+  [GREEN] |T_8 cap [1,6560]| = 2^8-1 :: count=255 expected=255
+  [GREEN] carry-free addition: digits(x+z) = digitwise x_i+z_i on T_6 x T_6 :: 4096 pairs, 0 violations
+  [GREEN] carry-free doubling: digits(2y) = digitwise 2y_i on T_6 :: 64 elements, 0 violations
+  [GREEN] ternary value map injective on {0,1,2}^6 (fixed length 6) :: 729 lists, 729 values, 0 collisions
+
+(b) THE EXACT r_3 TABLE — DUAL METHOD (brute 2^N + branch-and-bound)
+  [GREEN] brute 2^N scan r_3(N), N <= 12 :: table=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6]
+  [GREEN] branch-and-bound r_3(N), N <= 12 :: table=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6]
+  [GREEN] DUAL-METHOD agreement (brute == B&B) on N <= 12
+
+(c) BLOCK-BOUND DOMINATION r_k(N) <= (k-1)*floor(N/k) + (N mod k)
+  [GREEN] own B&B r_3(N) N <= 30 agrees with doubter-certified table :: own=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12]
+  [GREEN] k=3 domination: r_3(N) <= 2*floor(N/3) + N mod 3 on all N <= 30 :: max_margin=9
+  [GREEN] k=4 domination on doubter-certified N <= 20
+  [GREEN] k=5 domination on doubter-certified N <= 20 (tight everywhere)
+  [GREEN] r_2(N) = 1 for all 1 <= N <= 16 (exhaustive, d>=1 convention) :: r2=[1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  [GREEN] k=2 domination N <= 100 (r_2 = 1 <= 1*floor(N/2) + N mod 2)
+  [GREEN] block-bound arithmetic identity N <= 100, k in 1..5 (spot)
+  [GREEN] k=3 bound monotone nondecreasing N <= 100
+
+(d) KERNEL-DECIDE CORRESPONDENCE — r_3(N) N <= 8 (the decide table)
+  [GREEN] kernel decide table r_3(N) N <= 8 == [1,2,2,3,4,4,4,4] :: got=[1, 2, 2, 3, 4, 4, 4, 4]
+  [GREEN] witness for r_3(1) = 1: [1] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(2) = 2: [1, 2] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(3) = 2: [1, 2] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(4) = 3: [1, 2, 4] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(5) = 4: [1, 2, 4, 5] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(6) = 4: [1, 2, 4, 5] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(7) = 4: [1, 2, 4, 5] 3-AP-free, in range, distinct
+  [GREEN] witness for r_3(8) = 4: [1, 2, 4, 5] 3-AP-free, in range, distinct
+  [GREEN] cantor witness T_1 cap [1,2] size 2^1-1=1, 3-AP-free
+  [GREEN] cantor witness T_2 cap [1,8] size 2^2-1=3, 3-AP-free
+  [GREEN] cantor witness T_3 cap [1,26] size 2^3-1=7, 3-AP-free
+  [GREEN] cantor witness T_4 cap [1,80] size 2^4-1=15, 3-AP-free
+  [GREEN] cantor witness T_5 cap [1,242] size 2^5-1=31, 3-AP-free
+  [GREEN] cantor witness T_6 cap [1,728] size 2^6-1=63, 3-AP-free
+  [GREEN] cantor witness T_7 cap [1,2186] size 2^7-1=127, 3-AP-free
+  [GREEN] cantor witness T_8 cap [1,6560] size 2^8-1=255, 3-AP-free
+  ratio r_3(N)*3/(2N), N <= 30 (doubter-certified values):
+    N= 5  r_3= 4  ratio=6/5
+    N=10  r_3= 5  ratio=3/4
+    N=20  r_3= 9  ratio=27/40
+    N=30  r_3=12  ratio=3/5
+
+==============================================================================
+E142_MIRROR_GREEN — all mirror checks passed.
