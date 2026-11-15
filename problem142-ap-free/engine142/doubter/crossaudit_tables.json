@@ -845,5 +845,25 @@
   "beta: fresh z3 encoding (Bool/AP/Not(And)/PbGe), SAT@r + UNSAT@(r+1)",
   "gamma: left-to-right greedy certificate construction",
   "explicit mod-5 drop construction {n in [1,N]: n%%5 != 0}"
- ]
+ ],
+ "killer_ci_intel": {
+  "run_id": 43736909745,
+  "branch": "w67-p142k",
+  "head_sha": "011cb3e5",
+  "conclusion": "failure",
+  "failed_job": "kernel-142k (the only red job; kernel-a/b/c green)",
+  "compile_errors_in_Erdos142_lean": 73,
+  "axiom_receipts_as_compiled": {
+   "E142.t3free": "[propext, sorryAx, Quot.sound]",
+   "E142.t3_no_nontriv": "[propext, sorryAx, Quot.sound]",
+   "E142.cantor_lower": "[propext, sorryAx, Classical.choice, Quot.sound]",
+   "E142.block_upper": "[propext, sorryAx, Quot.sound]",
+   "E142.r3_upper": "[propext, sorryAx, Quot.sound]",
+   "E142.k2_edge": "[propext, sorryAx, Classical.choice, Quot.sound]",
+   "E142.r3_exact_small": "[propext, sorryAx, Classical.choice, Quot.sound]",
+   "E142.arsenal_bridge": "[propext, Quot.sound]  (the only clean board theorem)",
+   "E142.erdos142_board": "[propext, sorryAx, Classical.choice, Quot.sound]"
+  },
+  "reading": "73 tactic/type errors in Erdos142.lean (rfl failures, type mismatches, unknown identifiers e.g. CardinalWorlds.two_pow_pos, a stray hp'); Lean error recovery inserts sorryAx, so 7 of the 9 board theorems compile to sorryAx -- the kernel artifact is NOT CI-certified at 011cb3e even though the source contains no literal `sorry` (only the 'zero sorry' comment). The mathematical CONTENT of every board claim is what this cross-audit verifies."
+ }
 }

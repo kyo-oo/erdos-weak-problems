@@ -99,13 +99,29 @@ explicit construction {n in [1,N] : n mod 5 != 0} (every 5-AP with d not
 divisible by 5 hits exactly one multiple of 5, and d divisible by 5 needs
 a+4d >= 21 > 20), and fresh z3 UNSAT@bound+1 certificates all agree: TIGHT.
 
+## Killer-lane CI intel (observed 2026-11-15, frozen fact)
+
+The killer kernel's OWN CI verdict at `011cb3e`: run **43736909745 = FAILURE**
+(job `kernel-142k` red; `kernel-a/b/c` green). 73 compile errors in
+`Erdos142.lean` (tactic `rfl` failures, type mismatches, unknown identifiers
+such as `CardinalWorlds.two_pow_pos` and a stray `hp'`); Lean's error
+recovery inserts `sorryAx`, so **7 of the 9 board theorems as-compiled
+rest on `sorryAx`** -- only `E142.arsenal_bridge` lands clean. The source
+contains no literal `sorry` (only the 'zero sorry' comment), but the
+artifact is nonetheless NOT CI-certified. Consequence for this audit:
+the kernel's mathematical claims are all CONFIRMED numerically below,
+while the kernel's Lean proofs await the killer lane's own repair loop
+(that lane owns its <=5 CI repair rounds; this lane does not touch it).
+
 ## Scope (honest)
 
 * Numerical audits cover the finite windows: Cantor k<=8 (3^8=6561, full
   pairwise midpoint scans), r_3 N<=30, r_4/r_5 N<=20, r_2 N<=30, exhaustive
   2^N N<=12. The kernel's Lean proofs (unbounded t3free via mod-3 descent,
-  the general block_upper window pigeonhole, etc.) are certified by the
-  killer lane's own CI (kernel-142k job), not re-proved here.
+  the general block_upper window pigeonhole, etc.) are NOT currently
+  CI-certified (see killer CI intel above) and are not re-proved here;
+  this cross-audit certifies their mathematical CONTENT on the stated
+  windows.
 * The kernel `r3Is` convention (subsets of [1,N], d>=1) matches the doubter
   convention exactly; every disagreement would have been reported BROKEN.
 * INTEL carried forward: the printed reference string corrupt at

@@ -560,6 +560,39 @@ def audit_K6_r5_tight(cert_r5):
 
 
 # ---------------------------------------------------------------------------
+# Killer-lane CI intel (frozen facts, observed 2026-11-15 from the GitHub
+# Actions API; the killer lane's own repair loop owns the fix -- NOT this lane)
+# ---------------------------------------------------------------------------
+
+KILLER_CI_INTEL = {
+    "run_id": 43736909745,
+    "branch": "w67-p142k",
+    "head_sha": "011cb3e5",
+    "conclusion": "failure",
+    "failed_job": "kernel-142k (the only red job; kernel-a/b/c green)",
+    "compile_errors_in_Erdos142_lean": 73,
+    "axiom_receipts_as_compiled": {
+        "E142.t3free": "[propext, sorryAx, Quot.sound]",
+        "E142.t3_no_nontriv": "[propext, sorryAx, Quot.sound]",
+        "E142.cantor_lower": "[propext, sorryAx, Classical.choice, Quot.sound]",
+        "E142.block_upper": "[propext, sorryAx, Quot.sound]",
+        "E142.r3_upper": "[propext, sorryAx, Quot.sound]",
+        "E142.k2_edge": "[propext, sorryAx, Classical.choice, Quot.sound]",
+        "E142.r3_exact_small": "[propext, sorryAx, Classical.choice, Quot.sound]",
+        "E142.arsenal_bridge": "[propext, Quot.sound]  (the only clean board theorem)",
+        "E142.erdos142_board": "[propext, sorryAx, Classical.choice, Quot.sound]",
+    },
+    "reading": "73 tactic/type errors in Erdos142.lean (rfl failures, type "
+               "mismatches, unknown identifiers e.g. CardinalWorlds.two_pow_pos, "
+               "a stray hp'); Lean error recovery inserts sorryAx, so 7 of the 9 "
+               "board theorems compile to sorryAx -- the kernel artifact is NOT "
+               "CI-certified at 011cb3e even though the source contains no "
+               "literal `sorry` (only the 'zero sorry' comment). The mathematical "
+               "CONTENT of every board claim is what this cross-audit verifies.",
+}
+
+
+# ---------------------------------------------------------------------------
 # main
 # ---------------------------------------------------------------------------
 
@@ -581,6 +614,15 @@ def main():
     cert_r2 = {row["N"]: row["r2"] for row in cert["r2_table"]}
     log("certified tables loaded: r_3 N<=%d, r_4/r_5 N<=%d, r_2 N<=%d "
         "(battery_status GREEN)" % (R3_N_MAX, R45_N_MAX, R3_N_MAX))
+    log()
+    log("INTEL (killer lane CI, frozen fact 2026-11-15): run %d @ %s = %s; "
+        "kernel-142k job RED with %d compile errors in Erdos142.lean; "
+        "error-recovery sorryAx in 7/9 board theorems (only arsenal_bridge "
+        "clean) -> the kernel ARTIFACT is not CI-certified; this cross-audit "
+        "certifies the mathematical CONTENT of its claims."
+        % (KILLER_CI_INTEL["run_id"], KILLER_CI_INTEL["head_sha"][:7],
+           KILLER_CI_INTEL["conclusion"],
+           KILLER_CI_INTEL["compile_errors_in_Erdos142_lean"]))
 
     audit_K1_t3free()
     audit_K2_cantor_lower(cert_r3)
@@ -621,6 +663,7 @@ def main():
             "gamma: left-to-right greedy certificate construction",
             "explicit mod-5 drop construction {n in [1,N]: n%%5 != 0}",
         ],
+        "killer_ci_intel": KILLER_CI_INTEL,
     }
     (HERE / "crossaudit_tables.json").write_text(json.dumps(out, indent=1))
     log()
@@ -681,13 +724,29 @@ def main():
     md.append("divisible by 5 hits exactly one multiple of 5, and d divisible by 5 needs")
     md.append("a+4d >= 21 > 20), and fresh z3 UNSAT@bound+1 certificates all agree: TIGHT.")
     md.append("")
+    md.append("## Killer-lane CI intel (observed 2026-11-15, frozen fact)")
+    md.append("")
+    md.append("The killer kernel's OWN CI verdict at `011cb3e`: run **43736909745 = FAILURE**")
+    md.append("(job `kernel-142k` red; `kernel-a/b/c` green). 73 compile errors in")
+    md.append("`Erdos142.lean` (tactic `rfl` failures, type mismatches, unknown identifiers")
+    md.append("such as `CardinalWorlds.two_pow_pos` and a stray `hp'`); Lean's error")
+    md.append("recovery inserts `sorryAx`, so **7 of the 9 board theorems as-compiled")
+    md.append("rest on `sorryAx`** -- only `E142.arsenal_bridge` lands clean. The source")
+    md.append("contains no literal `sorry` (only the 'zero sorry' comment), but the")
+    md.append("artifact is nonetheless NOT CI-certified. Consequence for this audit:")
+    md.append("the kernel's mathematical claims are all CONFIRMED numerically below,")
+    md.append("while the kernel's Lean proofs await the killer lane's own repair loop")
+    md.append("(that lane owns its <=5 CI repair rounds; this lane does not touch it).")
+    md.append("")
     md.append("## Scope (honest)")
     md.append("")
     md.append("* Numerical audits cover the finite windows: Cantor k<=8 (3^8=6561, full")
     md.append("  pairwise midpoint scans), r_3 N<=30, r_4/r_5 N<=20, r_2 N<=30, exhaustive")
     md.append("  2^N N<=12. The kernel's Lean proofs (unbounded t3free via mod-3 descent,")
-    md.append("  the general block_upper window pigeonhole, etc.) are certified by the")
-    md.append("  killer lane's own CI (kernel-142k job), not re-proved here.")
+    md.append("  the general block_upper window pigeonhole, etc.) are NOT currently")
+    md.append("  CI-certified (see killer CI intel above) and are not re-proved here;")
+    md.append("  this cross-audit certifies their mathematical CONTENT on the stated")
+    md.append("  windows.")
     md.append("* The kernel `r3Is` convention (subsets of [1,N], d>=1) matches the doubter")
     md.append("  convention exactly; every disagreement would have been reported BROKEN.")
     md.append("* INTEL carried forward: the printed reference string corrupt at")

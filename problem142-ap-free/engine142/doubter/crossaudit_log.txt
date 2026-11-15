@@ -3,6 +3,8 @@ W68-142D CROSS-AUDIT -- Erdos #142: killer kernel (w67-p142k @ 011cb3e)
 env: python 3.12.16, z3 5.4.1
 certified tables loaded: r_3 N<=30, r_4/r_5 N<=20, r_2 N<=30 (battery_status GREEN)
 
+INTEL (killer lane CI, frozen fact 2026-11-15): run 43736909745 @ 011cb3e = failure; kernel-142k job RED with 73 compile errors in Erdos142.lean; error-recovery sorryAx in 7/9 board theorems (only arsenal_bridge clean) -> the kernel ARTIFACT is not CI-certified; this cross-audit certifies the mathematical CONTENT of its claims.
+
 ==== K1: E142.t3free -- Cantor ternary set is 3-AP-free (x+z=2y => x=z) ====
   k=1  |Tfull|=2 (2^k=2)  generators A/B/R agree=True  genTp replica len=1  midpoint violations=0
   k=2  |Tfull|=4 (2^k=4)  generators A/B/R agree=True  genTp replica len=3  midpoint violations=0
