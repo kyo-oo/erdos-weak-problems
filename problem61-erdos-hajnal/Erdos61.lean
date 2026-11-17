@@ -457,14 +457,6 @@ theorem hmul_lt_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b < a * c) :
   · have hle : a * c ≤ a * b := hmul_le a a c b (Nat.le_refl a) (Nat.le_of_lt hgt)
     omega
 
-theorem hmul_le_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b ≤ a * c) : b ≤ c := by
-  rcases Nat.lt_trichotomy b c with hlt | heq | hgt
-  · exact Nat.le_of_lt hlt
-  · exact heq
-  · exfalso
-    have hlt2 : a * c < a * b := hmul_lt a c b (by omega) hgt
-    omega
-
 theorem hmul_lt (a b c : Nat) (hpos : 0 < a) (h : b < c) : a * b < a * c := by
   have hbc : b + 1 ≤ c := Nat.succ_le_of_lt h
   have h1 : a * (b + 1) ≤ a * c := hmul_le a a (b + 1) c (Nat.le_refl a) hbc
@@ -475,6 +467,14 @@ theorem hmul_lt (a b c : Nat) (hpos : 0 < a) (h : b < c) : a * b < a * c := by
     exact hstep
   rw [h2] at h3
   exact Nat.lt_of_lt_of_le h3 h1
+
+theorem hmul_le_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b ≤ a * c) : b ≤ c := by
+  rcases Nat.lt_trichotomy b c with hlt | heq | hgt
+  · exact Nat.le_of_lt hlt
+  · exact Nat.le_of_eq heq
+  · exfalso
+    have hlt2 : a * c < a * b := hmul_lt a c b (by omega) hgt
+    omega
 
 theorem hmul_pred_lt (k : Nat) (hk : 0 < k) : k * (k - 1) < k * k := by
   cases k with
