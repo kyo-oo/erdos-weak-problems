@@ -1,0 +1,4 @@
+# W69 WAVE CLOSE — THE ROUND RECORD (commander seal)
+- #142: kernel-142k CI-GREEN (43754690872) + doubler green + audit battery green (43987293225) + merge branch green (43984773332). THE CERTIFIED KILL. The w69-merge integration attempt (12dcfc2) hit a structural kills.yml break (zero-jobs failure) + elan-install flakes on reruns — the green branch states ARE the record; campaign advance = next round's first action.
+- #61: kernel-61k at r2 (f6dfcbb) — helper layer root-killed (23 fixes), graph machinery ~60 errors remain; fresh map banked at INTEL/kernel61k_r2_errors.log. Doubter batteries green (43751615462 + escalation in flight 44002320481).
+- #107: kernel-107k authored (1f198400) — f(3)=3 exact + witness family f(4)>=5, f(5)>=9 (kernel-decided subsequence enumeration); CI failing ONLY at the elan-install step (curl exit 22, twice — infra, not code; kernels a/b/c green on same runs). Witness forge battery CI-GREEN (44003489730).
