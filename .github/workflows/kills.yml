@@ -54,6 +54,9 @@ on:
       - problem273-pminus1-covering/**
       - problem289-intervals/**
       - problem1212-coprime-composite/**
+      - problem142-rk-asymptotic/**
+      - problem61-erdos-hajnal/**
+      - problem107-happy-ending/**
       - problem389-consecutive-product/**
       - .github/workflows/kills.yml
   workflow_dispatch:
@@ -1381,3 +1384,28 @@ jobs:
           grep -F "E961X3_EXCLUSION3_GREEN" kernel66.log
           grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
           echo KERNEL66_GREEN=1
+
+      - name: "Kernel W66-A - Erdos 142 STATEMENT-ONLY KERNELS (S066, W66-A/B): the r_k(N) fortress-front statements — Theorem A (Cantor-verdict 3-AP-free, no-carry + family forms, over the Arsenal reader noTernaryTwo), Theorem B.2 (translated family size + AP-free halves), B.3 (rational-exponent interpolation (2|S|)^1000 >= N^630), the digitFamily frame, Theorem D (no-carry column law base 2k-3); audit lane AuditKernel142 (noTernaryTwo_ap3_free + cantor_family_no_nontrivial_ap3 + sigma_worlds_ap3_free, the Arsenal SS12 mixed 6-world law statement); STATEMENT-ONLY (no sorry; proofs = the next kernel wave); CI = verifier of record"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem142-rk-asymptotic/Erdos142.lean 2>&1 | tee kernelW66A.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A.log
+          lake env lean problem142-rk-asymptotic/AuditKernel142.lean 2>&1 | tee kernelW66A2.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A2.log
+          echo KERNELW66A_GREEN=1
+      - name: "Kernel W66-B - Erdos 61 STATEMENT-ONLY KERNEL (S066, W66-C/E): the Erdos-Hajnal fortress-front statements (SimpleGraph primitives): the master conjecture + the substitution-closure law (uniform blow-up frame, exponent f = c1c2/(c1+c2)) + the small-H explicit-constant laws; STATEMENT-ONLY (no sorry); CI = verifier of record"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee kernelW66B.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66B.log
+          echo KERNELW66B_GREEN=1
