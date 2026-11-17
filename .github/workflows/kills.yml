@@ -1681,9 +1681,9 @@ jobs:
         run: |
           set -euo pipefail
           install_ok=0
-          if python3 -m pip install --quiet --break-system-packages numpy absl-py 2>/dev/null; then install_ok=1
-          elif pip3 install --quiet --break-system-packages numpy absl-py 2>/dev/null; then install_ok=1
-          elif python3 -m pip install --quiet numpy absl-py 2>/dev/null; then install_ok=1; fi
+          if python3 -m pip install --quiet --break-system-packages numpy absl-py scipy 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages numpy absl-py scipy 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet numpy absl-py scipy 2>/dev/null; then install_ok=1; fi
           if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED"; exit 1; fi
           python3 comparator-official/official_gate.py 107 2>&1 | tee gate107official.log
           test "${PIPESTATUS[0]}" -eq 0
