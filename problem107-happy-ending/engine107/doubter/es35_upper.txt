@@ -1,0 +1,129 @@
+================================================================================
+ES35 UPPER BOUND — BANKED CLASSICAL TEXT (W67-107D research intel)
+Erdos problem #107 (Happy Ending problem) — upper bound f(n) <= C(2n-4, n-2)+1
+================================================================================
+FETCHED: 2026-11-15 by W67-107D (doubter lane).
+SOURCES (verified reachable by curl):
+  [S1] Wikipedia, "Happy ending problem" (fetched verbatim to
+       problem107-happy-ending/engine107/doubter/wikipedia_happy.txt):
+       https://en.wikipedia.org/wiki/Happy_ending_problem
+  [S2] W. Morris, V. Soltan, "The Erdos-Szekeres problem on points in convex
+       position - a survey", Bulletin of the AMS (New Series) 37 (2000), no. 4,
+       pp. 437-458. PDF fetched from:
+       https://www.ams.org/journals/bull/2000-37-04/S0273-0979-00-00877-6/S0273-0979-00-00877-6.pdf
+       (curl works with browser User-Agent headers; DOI 10.1090/S0273-0979-00-00877-6)
+  [S3] A. Suk, "On the Erdos-Szekeres convex polygon problem", JAMS 30 (2017),
+       arXiv:1604.08657 (intro confirms the same statements):
+       https://arxiv.org/abs/1604.08657 (HTML: https://ar5iv.labs.arxiv.org/html/1604.08657)
+
+--------------------------------------------------------------------------------
+1. THE STATEMENT (from [S1], verbatim)
+--------------------------------------------------------------------------------
+"The happy ending problem: ... Theorem--any set of five points in the plane in
+general position has a subset of four points that form the vertices of a convex
+quadrilateral. ... The Erdos-Szekeres conjecture states precisely a more general
+relationship between the number of points in a general-position point set and
+its largest subset forming a convex polygon, namely that the smallest number of
+points for which any general position arrangement contains a convex subset of n
+points is 2^{n-2}+1. It remains unproven, but less precise bounds are known."
+
+Let f(N) denote the minimum M for which any set of M points in general position
+must contain a convex N-gon. It is known that (verbatim from [S1]):
+  f(3) = 3, trivially.
+  f(4) = 5.  [proved by Esther Klein / Endre Makai; first published proof:
+              Kalbfleisch, Kalbfleisch & Stanton (1970)]
+  f(5) = 9.  [Makai & Turan; first published: Kalbfleisch et al. (1970);
+              the difficult direction: every 9-point set has a convex pentagon]
+  f(6) = 17. [Szekeres & Peters (2006): "Computer solution to the 17-point
+              Erdos-Szekeres problem", ANZIAM J. 48 (2006) 151-164 -- computer
+              search eliminating all 17-point configurations without convex
+              hexagons.]
+The value of f(N) is unknown for all N > 6.
+
+Upper bound history (verbatim from [S1]):
+  "Erdos & Szekeres (1935) proved ... In 2016 Andrew Suk showed that for N >= 7
+  f(N) <= 2^{N + o(N)}. Suk actually proves, for N sufficiently large,
+  f(N) <= 2^{N + 6 N^{2/3} log N}. This was subsequently improved to
+  f(N) <= 2^{N + O(N log N)} [Holmsen et al. 2020]."
+
+--------------------------------------------------------------------------------
+2. THE CLASSICAL ES35 CUPS/CAPS UPPER BOUND (from [S2], Section 2.2, verbatim)
+--------------------------------------------------------------------------------
+Definitions (verbatim, [S2] Sec 2.2; also [S3] Thm 2.2 context):
+"We will assume in this section that a coordinate system (x, y) is introduced
+in the plane. Let X = {(x1,y1),...,(xm,ym)} be a set of points in general
+position in the plane, with xi != xj for all i != j. A subset of points
+{(xi1,yi1),...,(xir,yir)} is called ... an r-CUP if xi1 < xi2 < ... < xir and
+  (yi1-yi2)/(xi1-xi2) < (yi2-yi3)/(xi2-xi3) < ... < (yir-1-yir)/(xir-1-xir).
+Similarly, the subset is called an r-CAP if xi1 < xi2 < ... < xir and
+  (yi1-yi2)/(xi1-xi2) > (yi2-yi3)/(xi2-xi3) > ... > (yir-1-yir)/(xir-1-xir).
+In other words, the set of r points forms an r-cup (respectively, an r-cap)
+provided the sequence of slopes of the segments ... is monotonically increasing
+(respectively, decreasing)."
+
+(Suk's equivalent formulation [S3]: "We say that X forms a k-cup (k-cap) if X
+is in convex position and its convex hull is bounded above (below) by a single
+edge. In other words, X is a cup (cap) if and only if for every point p in X,
+there is a line L passing through it such that all of the other points in X lie
+on or above (below) L.")
+
+"Define f(k, l) to be the smallest positive integer for which X contains a
+k-cup or an l-cap whenever X has at least f(k, l) points.
+
+Theorem 2.3 ([32] = Erdos-Szekeres 1935).  f(k,l) <= C(k+l-4, k-2) + 1.
+
+Proof. The inequality follows from the boundary conditions f(k,3) = f(3,k) = k
+and the recurrence f(k,l) <= f(k-1,l) + f(k,l-1) - 1. We sketch a proof of the
+recurrence. Suppose that X contains f(k-1,l) + f(k,l-1) - 1 points. Let Y be
+the set of left endpoints of (k-1)-cups of X. If X \ Y contains f(k-1,l)
+points, then it contains an l-cap. Otherwise, Y contains f(k,l-1) points.
+Suppose that Y contains an (l-1)-cap {(xi1,yi1),...,(xil-1,yil-1)}. Let
+{(xj1,yj1),...,(xjk-1,yjk-1)} be a (k-1)-cup with il-1 = j1. A quick sketch
+then shows that either (xil-2,yil-2) can be added to the (k-1)-cup to create a
+k-cup or (xj2,yj2) can be added to the (l-1)-cap to create an l-cap."
+
+  [W67-107D note: f(k,3)=f(3,k)=k is the Erdos-Szekeres monotone subsequence
+  lemma at the boundary: with distinct x's, a k-cup or k-cap among k points is
+  forced trivially at k points only when l=3; the boundary is classical. The
+  recurrence plus Pascal's identity on the binomial grid gives
+  f(k,l) <= C(k+l-4,k-2)+1 with equality f(k,l)=C(k+l-4,k-2)+1 (Thm 2.5).]
+
+"Because N(n) <= f(n,n), we get from Theorem 2.3 that
+        N(n) <= C(2n-4, n-2) + 1."
+  [W67-107D note: an n-cup or an n-cap is, in particular, a set of n points in
+  convex position (its convex hull is bounded above resp. below by a single
+  edge), so forcing an n-cup-or-n-cap forces a convex n-gon.]
+
+Improvements banked from [S2] (for context): Chung-Graham [16]
+N(n) <= C(2n-4,n-2); Kleitman-Pachter [57] N(n) <= C(2n-4,n-2)+7-2n;
+Toth-Valtr [80] Theorem 2.4: N(n) <= C(2n-5,n-3)+2 (projective transformation
+argument, verbatim in [S2]); Norin-Yuditsky + Mojarrad-Vlachos:
+limsup ES(n)/C(2n-4,n-2) <= 7/16 (from [S3]); Suk [S3]:
+ES(n) <= 2^{n + 6n^{2/3} log n} for n >= n0 (2016/2017, nearly settles the
+2^{n-2}+1 conjecture up to subexponential terms).
+
+Testable instances of the ES35 claim (used by the doubter census):
+  n=4: C(2*4-4, 4-2)+1 = C(4,2)+1 = 7   -> every 7-point GP set has a 4-cup
+       or a 4-cap (hence a convex 4-gon); NOTE f(4)=5 is much smaller.
+  n=5: C(2*5-4, 5-2)+1 = C(6,3)+1 = 21  -> every 21-point GP set has a 5-cup
+       or a 5-cap.
+The tight cup/cap Ramsey function: f(k,l) = C(k+l-4, k-2)+1 EXACTLY
+(Theorem 2.5, [S2]; see ersz61_lower.txt for the matching extremal
+construction, which is the first half of the lower-bound machinery).
+
+--------------------------------------------------------------------------------
+3. REFERENCE CHAIN (for the killer's citations)
+--------------------------------------------------------------------------------
+[ES35] P. Erdos, G. Szekeres, "A combinatorial problem in geometry",
+       Compositio Mathematica 2 (1935), 463-470.
+       (NUMDAM open scan: https://www.numdam.org/item?id=CM_1935__2__463_0 )
+[ES61] P. Erdos, G. Szekeres, "On some extremum problems in elementary
+       geometry", Ann. Univ. Sci. Budapest Eotvos Sect. Math. 3-4 (1960/61),
+       53-62. (lower bound 2^{n-2}+1; the $500 conjecture f(n)=2^{n-2}+1)
+[MaTu] E. Makai, P. Turan: f(5)=9 (credit in [ES61]); published proof:
+       Kalbfleisch, Kalbfleisch, Stanton (1970).
+[SP06] G. Szekeres, L. Peters, "Computer solution to the 17-point
+       Erdos-Szekeres problem", ANZIAM J. 48 (2006), 151-164.
+[Suk]  A. Suk, J. Amer. Math. Soc. 30 (2017), 1047-1053, arXiv:1604.08657.
+[MS00] W. Morris, V. Soltan, BAMS 37 (2000) 437-458 (THE survey; [S2] above).
+================================================================================

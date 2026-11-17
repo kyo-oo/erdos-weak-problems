@@ -1,0 +1,135 @@
+{
+ "certificates": [
+  {
+   "all_pass": true,
+   "checks": {
+    "Ti_no_(n-i)-cup_no_(i+2)-cap": true,
+    "cluster_sizes_C(n-2,i)": true,
+    "distinct_points": true,
+    "general_position": true,
+    "inter_cluster_slope_gt_1": true,
+    "intra_cluster_slope_le_half": true,
+    "no_convex_n_gon_exhaustive": true,
+    "size_is_2_pow_n_minus_2": true
+   },
+   "cluster_sizes": [
+    1,
+    1
+   ],
+   "convex_n_gons_found": 0,
+   "coordinate_denominator": "11681",
+   "max_convex_polygon_size": null,
+   "n": 3,
+   "n_subsets_checked": 0,
+   "num_points": 2,
+   "params": {
+    "alpha": "1/4",
+    "beta": "1/2",
+    "c": "4/1",
+    "eps": "1/1048576",
+    "gamma": "3/4",
+    "w": "41/100"
+   }
+  },
+  {
+   "all_pass": true,
+   "checks": {
+    "Ti_no_(n-i)-cup_no_(i+2)-cap": true,
+    "cluster_sizes_C(n-2,i)": true,
+    "distinct_points": true,
+    "general_position": true,
+    "inter_cluster_slope_gt_1": true,
+    "intra_cluster_slope_le_half": true,
+    "no_convex_n_gon_exhaustive": true,
+    "size_is_2_pow_n_minus_2": true
+   },
+   "cluster_sizes": [
+    1,
+    2,
+    1
+   ],
+   "convex_n_gons_found": 0,
+   "coordinate_denominator": "73490497536",
+   "max_convex_polygon_size": 3,
+   "n": 4,
+   "n_subsets_checked": 1,
+   "num_points": 4,
+   "params": {
+    "alpha": "1/4",
+    "beta": "1/2",
+    "c": "4/1",
+    "eps": "1/1048576",
+    "gamma": "3/4",
+    "w": "41/100"
+   }
+  },
+  {
+   "all_pass": true,
+   "checks": {
+    "Ti_no_(n-i)-cup_no_(i+2)-cap": true,
+    "cluster_sizes_C(n-2,i)": true,
+    "distinct_points": true,
+    "general_position": true,
+    "inter_cluster_slope_gt_1": true,
+    "intra_cluster_slope_le_half": true,
+    "no_convex_n_gon_exhaustive": true,
+    "size_is_2_pow_n_minus_2": true
+   },
+   "cluster_sizes": [
+    1,
+    3,
+    3,
+    1
+   ],
+   "convex_n_gons_found": 0,
+   "coordinate_denominator": "20213046913794048",
+   "max_convex_polygon_size": 4,
+   "n": 5,
+   "n_subsets_checked": 56,
+   "num_points": 8,
+   "params": {
+    "alpha": "1/4",
+    "beta": "1/2",
+    "c": "4/1",
+    "eps": "1/1048576",
+    "gamma": "3/4",
+    "w": "41/100"
+   }
+  },
+  {
+   "all_pass": true,
+   "checks": {
+    "Ti_no_(n-i)-cup_no_(i+2)-cap": true,
+    "cluster_sizes_C(n-2,i)": true,
+    "distinct_points": true,
+    "general_position": true,
+    "inter_cluster_slope_gt_1": true,
+    "intra_cluster_slope_le_half": true,
+    "no_convex_n_gon_exhaustive": true,
+    "size_is_2_pow_n_minus_2": true
+   },
+   "cluster_sizes": [
+    1,
+    4,
+    6,
+    4,
+    1
+   ],
+   "convex_n_gons_found": 0,
+   "coordinate_denominator": "27568416850182144",
+   "max_convex_polygon_size": 5,
+   "n": 6,
+   "n_subsets_checked": 8008,
+   "num_points": 16,
+   "params": {
+    "alpha": "1/4",
+    "beta": "1/2",
+    "c": "4/1",
+    "eps": "1/1048576",
+    "gamma": "3/4",
+    "w": "41/100"
+   }
+  }
+ ],
+ "label": "CERTIFIED per constructed instance: no convex n-gon verified exhaustively over ALL C(2^{n-2}, n) subsets, dual engines; hence f(n) >= 2^{n-2}+1 for these instances"
+}

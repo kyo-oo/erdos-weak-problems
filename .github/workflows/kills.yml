@@ -1485,3 +1485,29 @@ jobs:
           test "$(grep -c 'CERTIFIED' kernel142a.log)" -ge 5
           test "$(grep -c 'CONFIRMED' kernel142a.log)" -ge 7
           echo KERNEL142A_GREEN=1
+  kernel-107k:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 107k - Erdos 107 HAPPY ENDING WITNESS KERNEL (W69-E): the certified lower-bound family on BOSS's Arsenal — (1) E107.f3_upper (every 3 general-position points form a convex 3-gon, f(3) <= 3) + E107.f3_lower (the explicit 2-point witness, kernel-decided enumeration, f(3) >= 3): f(3) = 3 EXACTLY; (2) E107.f4_lower (the explicit 4-point gp witness, one point inside the triangle of the other three, no convex 4-gon: f(4) >= 5) + w4_gp; (3) E107.w5_gp + E107.w5_no_convex5 (the explicit 8-point ErSz61 integer witness — the doubter-battery-certified instance — with NO convex 5-gon, by the exhaustive kernel-decided subsequence enumeration, the Erdos142 r3max architecture: f(5) >= 9); (4) E107.erdos107_board (the 5-conjunct collection). Order-independent sign-product convexity test; zero sorry/admit; honest scope: the upper bounds f(4)<=5 (Klein), f(5)<=9, and the general conjecture remain open; the n=6 witness is python-certified (kernel-107d)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem107-happy-ending/Erdos107.lean 2>&1 | tee kernel107k.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107k.log
+          grep -F "E107_F3_GREEN" kernel107k.log
+          grep -F "E107_BOARD_GREEN" kernel107k.log
+          grep -E "E107.(f3_upper|f3_lower|w4_gp|f4_lower|w5_gp|w5_no_convex5|erdos107_board)' (does not depend on any axioms|depends on axioms)" kernel107k.log
+          echo KERNEL107K_GREEN=1
