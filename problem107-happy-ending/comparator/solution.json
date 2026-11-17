@@ -1,0 +1,88 @@
+{
+  "problem_id": "erdos-107-happy-ending",
+  "solution_id": "campaign-w66-problem107-package",
+  "statement_frozen_copy": {
+    "corpus_verbatim": "Let $f(n)$ be minimal such that any $f(n)$ points in $\\mathbb{R}^2$, no three on a line, contain $n$ points which form the vertices of a convex $n$-gon. Prove that $f(n)=2^{n-2}+1$. [#107, prize $500]",
+    "note": "Must match challenge.json statement_frozen byte-for-byte (statement integrity gate AC-S)."
+  },
+  "claims": [
+    {
+      "id": "CLAIM-S1", "claim": "f(3) = 3 = 2^{3-2}+1",
+      "label": "UNCONDITIONAL-MATHEMATICAL (PROOF.md section 1, complete: both directions) + MACHINE-CORROBORATED-FINITE-UNIVERSE (comparator part A)",
+      "content": "(i) There exist 2 points in GP with no convex 3-gon (a 2-point set has no 3 points at all). (ii) Every 3 points in GP form the vertex set of a non-degenerate triangle: GP forces orient != 0. Hence f(3) = 3."
+    },
+    {
+      "id": "CLAIM-S2", "claim": "f(4) = 5 = 2^{4-2}+1",
+      "label": "UNCONDITIONAL-MATHEMATICAL (PROOF.md section 2, complete case analysis: hull >= 4 case + hull = 3 interior-pair case with the (alpha) line-intersection and (beta) extremality arguments) + MACHINE-CORROBORATED (comparator parts B and C)",
+      "content": "(i) LOWER: the 4-point GP witness W4 = {(0,0),(6,0),(3,9),(3,2)} has (3,2) strictly inside the triangle of the other three, hence no convex 4-gon (f(4) >= 5). (ii) UPPER: every 5-point GP set contains 4 points in convex position — if the hull has >= 4 vertices, any 4 hull vertices work; if the hull is a triangle ABC with interior points p,q, the line through p,q separates {A,B} from C, and {A,B,p,q} is in convex position (p not in triangle(A,B,q) and q not in triangle(A,B,p) by the line-intersection argument (alpha); A,B not in the triangles of the others by hull extremality (beta)). Hence f(4) = 5."
+    },
+    {
+      "id": "CLAIM-S2-LOW", "claim": "f(4) >= 5 (witness side)",
+      "label": "MACHINE-WITNESSED (comparator part B: W4 regenerated and verified from scratch, two-method checker)",
+      "content": "W4 = {(0,0),(6,0),(3,9),(3,2)}: GP verified (all 4 triples non-collinear, exact integer cross products); the unique 4-subset is NOT in convex position ((3,2) in the closed triangle of the other three)."
+    },
+    {
+      "id": "CLAIM-S2-UP", "claim": "f(4) <= 5 (containment side)",
+      "label": "UNCONDITIONAL-MATHEMATICAL (the PROOF.md case analysis) + MACHINE-CORROBORATED (comparator part C: 10^4 uniform random GP 5-sets + adversarial structured sets + EXHAUSTIVE all GP 5-subsets of the 4x4 and 5x5 grids — zero failures)",
+      "content": "Every 5-point GP set contains a convex 4-subset. The comparator's sweeps are corroboration over its finite universe (integer grids + random boxes); the mathematical theorem over R^2 is the complete PROOF.md proof."
+    },
+    {
+      "id": "CLAIM-V5-LOW", "claim": "f(5) >= 9 (witness side)",
+      "label": "MACHINE-WITNESSED (comparator part D: five 8-point GP witnesses, every one with all C(8,5)=56 subsets swept by the two-method checker, zero convex 5-gons; re-derivation sweep rediscovers the lattice family)",
+      "content": "Five distinct 8-point GP sets with no convex 5-subset: the four 5x5-lattice witnesses L1 = {(0,0),(0,3),(1,1),(1,2),(3,1),(3,2),(4,0),(4,3)}, L2 = {(0,0),(0,4),(1,1),(1,3),(2,1),(2,3),(3,0),(3,4)}, L3 = {(0,1),(0,4),(1,2),(1,3),(3,2),(3,3),(4,1),(4,4)}, L4 = {(1,0),(1,4),(2,1),(2,3),(3,1),(3,3),(4,0),(4,4)}, and the interleaved cup/cap family IC = {(2t, t^2) : t=0..3} U {(2t+1, -(3-t)^2+2) : t=0..3} (even-x convex arc high, odd-x concave arc low). Any 8-point GP set with no convex 5-subset certifies f(5) > 8, i.e. f(5) >= 9."
+    },
+    {
+      "id": "CLAIM-V5", "claim": "f(5) = 9 = 2^{5-2}+1 (exact)",
+      "label": "CITED-CLASSICAL (Turan-Makai; corpus reference [6]) — the witness side machine-verified here, the containment side f(5) <= 9 classical (corroborated by the comparator on 9-point witness extensions)",
+      "content": "f(5) = 9."
+    },
+    {
+      "id": "CLAIM-V6", "claim": "f(6) = 17 = 2^{6-2}+1 (exact)",
+      "label": "CITED-CLASSICAL (Szekeres-Peters 2006, computer-assisted; corpus reference [7]) — NOT re-derived, NOT machine-witnessed here (the 16-point no-convex-6 witness was not regenerated; engine107's structured hunt found none in 30000 tries — honest)",
+      "content": "f(6) = 17."
+    },
+    {
+      "id": "CLAIM-M", "claim": "Erdos-Szekeres monotone subsequence lemma: any sequence of (s-1)(t-1)+1 distinct reals contains an increasing subsequence of length s or a decreasing subsequence of length t",
+      "label": "UNCONDITIONAL-MATHEMATICAL (PROOF.md section 3, complete re-derivation via injective (u,d) labels) + MACHINE-FINITE-CORE (comparator part F: exhaustive over all order types up to length 8, tightness witnesses at length (a-1)(b-1))",
+      "content": "The full proof is the label-injectivity pigeonhole of PROOF.md section 3; the comparator verifies the finite core exhaustively."
+    },
+    {
+      "id": "CLAIM-CC", "claim": "Every k-cup or k-cap (k >= 3) is in convex position",
+      "label": "UNCONDITIONAL-MATHEMATICAL (PROOF.md section 4, complete induction with the exact cross-product turn inequality)",
+      "content": "Cups and caps are strictly convex chains; the two endpoints close the polygon."
+    },
+    {
+      "id": "CLAIM-DICH", "claim": "Dichotomy: any set of binom(a+b-4, a-2)+1 points in GP with pairwise distinct x-coordinates contains an a-cup or a b-cap",
+      "label": "CITED-CLASSICAL (Erdos-Szekeres 1935; classical proof by induction on a+b with the Pascal recurrence) + MACHINE-CORROBORATED at (a,b) in {(3,3),(3,4),(4,3),(4,4)} (comparator part H; corroboration only — the naive injective-label route FAILS 263/300, receipts107.txt part D)",
+      "content": "Statement with all hypotheses: GP + pairwise distinct x. This is the engine of the classical upper bound."
+    },
+    {
+      "id": "CLAIM-U", "claim": "Upper bound: every set of binom(2n-4, n-2)+1 points in GP (pairwise distinct x after an arbitrarily small rotation, which preserves GP and convex-position structure) contains a convex n-gon",
+      "label": "CITED-CLASSICAL (Erdos-Szekeres 1935 dichotomy) + ASSEMBLED (PROOF.md section 5: DICH at (n,n) + CLAIM-CC) + ARITHMETIC-CERTIFIED (comparator part I: the frontier table n=3..40, exact integers)",
+      "content": "f(n) <= binom(2n-4, n-2)+1; superseded asymptotically by Suk 2017 f(n) <= 2^{(1+o(1))n} and HMPT20 f(n) <= 2^{n+O(sqrt(n log n))} (both cited)."
+    },
+    {
+      "id": "CLAIM-L", "claim": "Lower bound: for every n >= 3 there exist 2^{n-2} points in GP with no convex n-gon (Erdos-Szekeres 1961 explicit constructions), hence f(n) >= 2^{n-2}+1",
+      "label": "CITED-CLASSICAL (Erdos-Szekeres 1961) + MACHINE-WITNESSED at n = 3, 4, 5 (comparator parts A/B/D: the 2-point, 4-point and five 8-point witnesses; the doubling 2 -> 4 -> 8 of the classical construction machine-witnessed)",
+      "content": "f(n) >= 2^{n-2}+1."
+    },
+    {
+      "id": "CLAIM-CONJ", "claim": "The conjecture f(n) = 2^{n-2}+1 is OPEN for n >= 7; the certified gap is the frontier table",
+      "label": "OPEN (honest): f(7) in [33, 253]; frontier arithmetic certified exact by comparator part I for n = 3..40; no witness beyond n = 5 is claimed",
+      "content": "Known exact values: f(3)=3, f(4)=5, f(5)=9, f(6)=17 (all equal to 2^{n-2}+1); for n >= 7 only 2^{n-2}+1 <= f(n) <= binom(2n-4,n-2)+1 is known (better: HMPT20 upper 2^{n+O(sqrt(n log n))})."
+    }
+  ],
+  "frontier_table_n3_to_40": {
+    "description": "exact integers; lower = 2^{n-2}+1 (conjectured value), upper = binom(2n-4,n-2)+1 (classical ES35); the gap IS the certified open frontier",
+    "rows": [
+      {"n": 3, "lower": 3, "upper": 3, "exact": 3, "status": "PROVEN (PROOF.md S1)"},
+      {"n": 4, "lower": 5, "upper": 7, "exact": 5, "status": "PROVEN (PROOF.md S2)"},
+      {"n": 5, "lower": 9, "upper": 21, "exact": 9, "status": "CITED-EXACT (Turan-Makai); witness side machine-verified"},
+      {"n": 6, "lower": 17, "upper": 71, "exact": 17, "status": "CITED-EXACT (Szekeres-Peters 2006)"},
+      {"n": 7, "lower": 33, "upper": 253, "exact": null, "status": "OPEN"},
+      {"n": "8..40", "lower": "2^{n-2}+1", "upper": "binom(2n-4,n-2)+1", "exact": null, "status": "OPEN (HMPT20: f(n) <= 2^{n+O(sqrt(n log n))}, cited)"}
+    ]
+  },
+  "prize_context": "Erdos $500 for proof / $100 for disproof; Graham $1000 for proof. The full conjecture remains OPEN; this package does NOT claim the prize.",
+  "honest_scope": "Unconditionally proven in the campaign package: f(3)=3, f(4)=5, the monotone subsequence lemma, the cup/cap->convex-position machinery. Machine-witnessed: f(4)>=5, f(5)>=9 (five 8-point witnesses, all 56 subsets each). Cited-classical: the ES35 dichotomy, both global bounds, f(5)=9, f(6)=17, Suk17/HMPT20 improvements. OPEN: the conjecture for n >= 7. The comparator (this lane) DIRECTLY verifies every machine-checkable item against challenge.json's acceptance criteria; it does not verify the R^2 theorems (those are PROOF.md's proofs) and does not use DeepMind solvers (see challenge.json deepmind_context)."
+}

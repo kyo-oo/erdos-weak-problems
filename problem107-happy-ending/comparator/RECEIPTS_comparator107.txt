@@ -1,0 +1,142 @@
+# RECEIPTS_comparator107.txt — local run of comparator.py (the DIRECT evaluator)
+# date: 2026-11-17T14:08:04Z | python: Python 3.12.16 | z3: 5.4.1
+# exit code: 0 | final line: COMPARATOR_107_GREEN=1
+
+COMPARATOR 107 — DeepMind-style DIRECT verification (challenge/solution/evaluator)
+problem: Erdos #107 Happy Ending — f(n) = 2^{n-2}+1 conjecture
+exact integer arithmetic only; no floats in any geometric predicate
+==============================================================================
+S  STATEMENT INTEGRITY + CLAIM WIRING (challenge.json <-> solution.json)
+  frozen statements identical (byte-for-byte): True
+  solution claim ids complete: True
+  every claim carries an honest label (unconditional/cited/machine/open): True
+  acceptance criteria complete: True
+  frozen statement: Let $f(n)$ be minimal such that any $f(n)$ points in $\mathbb{R}^2$, no three on a line, contain...
+==============================================================================
+A  f(3)=3 — BOTH DIRECTIONS (finite universe; PROOF.md S1 is the R^2 proof)
+  2-point witness GP=True  no-convex-3=True (C(2,3)=0 subsets — vacuous sweep)
+  grid 4x4: GP triples=516  collinear triples=44  GP-triples NOT in convex position=0
+  grid 5x5: GP triples=2148  collinear triples=152  GP-triples NOT in convex position=0
+  random GP triples: 3000 checked, non-convex=0
+  collinear triple [(0, 0), (1, 1), (2, 2)]           GP-gate=REJECTED (triple True) convex-position=False
+  collinear triple [(0, 0), (5, 0), (9, 0)]           GP-gate=REJECTED (triple True) convex-position=False
+  collinear triple [(3, 0), (3, 4), (3, 9)]           GP-gate=REJECTED (triple True) convex-position=False
+  collinear triple [(0, 0), (2, 6), (3, 9)]           GP-gate=REJECTED (triple True) convex-position=False
+  collinear triple [(-4, 6), (0, -1), (4, -8)]        GP-gate=REJECTED (triple True) convex-position=False
+CMP107-A f(3)=3 BOTH-DIRECTIONS GREEN
+==============================================================================
+B  f(4)>=5 — THE 4-POINT INTERIOR WITNESS (regenerated, two-method verified)
+  W4 = [(0, 0), (6, 0), (3, 9), (3, 2)]
+  GP check: all C(4,3)=4 triples non-collinear -> GP=True
+  unique 4-subset in convex position: False (must be False)
+  interior point(s) by exact containment: [(3, 2)] (expected [(3, 2)])
+  grid 4x4: GP 4-subsets=1278  of which NOT in convex position=240 (3 hull + interior sets exist)
+  grid 5x5: GP 4-subsets=9498  of which NOT in convex position=2100 (3 hull + interior sets exist)
+CMP107-B f(4)>=5 WITNESS GREEN
+==============================================================================
+C  f(4)<=5 — EVERY 5-POINT GP SET CONTAINS A CONVEX 4-SUBSET (sweeps)
+  uniform random sweep: 10^4 GP 5-sets, failures=0 (zero required)
+  adversarial structured sweep (near-collinear/arc/cluster/near-dup): 2500 GP 5-sets, failures=0
+  EXHAUSTIVE grid 4x4: GP 5-subsets=1668 (non-vacuous), without convex 4-subset=0
+  EXHAUSTIVE grid 5x5: GP 5-subsets=25052 (non-vacuous), without convex 4-subset=0
+CMP107-C f(4)<=5 SWEEP GREEN
+==============================================================================
+D  f(5)>=9 — 8-POINT NO-CONVEX-5 WITNESSES (regenerated + re-derived)
+  distinct witnesses supplied: 5 (>=3 required)
+  lattice-1            GP=True  C(8,5)=56 subsets swept, convex 5-gons found=False
+  lattice-2            GP=True  C(8,5)=56 subsets swept, convex 5-gons found=False
+  lattice-3            GP=True  C(8,5)=56 subsets swept, convex 5-gons found=False
+  lattice-4            GP=True  C(8,5)=56 subsets swept, convex 5-gons found=False
+  interleaved-cup-cap  GP=True  C(8,5)=56 subsets swept, convex 5-gons found=False
+  re-derivation sweep: 50000 structured candidates, GP=2071, no-convex-5 witnesses found=4  [0.6s]
+  the four known lattice witnesses rediscovered: True
+    witness: [(0, 0), (0, 3), (1, 1), (1, 2), (3, 1), (3, 2), (4, 0), (4, 3)]
+    witness: [(0, 0), (0, 4), (1, 1), (1, 3), (2, 1), (2, 3), (3, 0), (3, 4)]
+    witness: [(0, 1), (0, 4), (1, 2), (1, 3), (3, 2), (3, 3), (4, 1), (4, 4)]
+    witness: [(1, 0), (1, 4), (2, 1), (2, 3), (3, 1), (3, 3), (4, 0), (4, 4)]
+  all rediscovered witnesses re-verified two-method: True
+  9-point GP extensions of the 5 witnesses: 5 built, all contain convex 5-subset=True (corroborates cited f(5)=9 on these instances)
+CMP107-D f(5)>=9 WITNESSES GREEN
+==============================================================================
+E  CHECKER SELF-AGREEMENT — two independent exact methods on every query
+  positive control pentagon [(0, 0), (4, 1), (5, 4), (2, 6), (-1, 3)] in convex position: True
+  global tally: queries=97957  verdict-True=62871  verdict-False=35086  A/B disagreements=0
+CMP107-E CHECKER-AGREEMENT GREEN
+==============================================================================
+F  MONOTONE SUBSEQUENCE LEMMA — finite core (order types <= 8, exhaustive)
+  (a,b) pairs with (a-1)(b-1)+1 <= 8: 16 pairs
+  (a,b)=(2,2) L=2: all 2 order types have a-increase or b-decrease; tightness witness len=1 lis=1 lds=1
+  (a,b)=(2,3) L=3: all 6 order types have a-increase or b-decrease; tightness witness len=2 lis=1 lds=2
+  (a,b)=(2,4) L=4: all 24 order types have a-increase or b-decrease; tightness witness len=3 lis=1 lds=3
+  (a,b)=(2,5) L=5: all 120 order types have a-increase or b-decrease; tightness witness len=4 lis=1 lds=4
+  (a,b)=(2,6) L=6: all 720 order types have a-increase or b-decrease; tightness witness len=5 lis=1 lds=5
+  (a,b)=(2,7) L=7: all 5040 order types have a-increase or b-decrease; tightness witness len=6 lis=1 lds=6
+  (a,b)=(2,8) L=8: all 40320 order types have a-increase or b-decrease; tightness witness len=7 lis=1 lds=7
+  (a,b)=(3,2) L=3: all 6 order types have a-increase or b-decrease; tightness witness len=2 lis=2 lds=1
+  (a,b)=(3,3) L=5: all 120 order types have a-increase or b-decrease; tightness witness len=4 lis=2 lds=2
+  (a,b)=(3,4) L=7: all 5040 order types have a-increase or b-decrease; tightness witness len=6 lis=2 lds=3
+  (a,b)=(4,2) L=4: all 24 order types have a-increase or b-decrease; tightness witness len=3 lis=3 lds=1
+  (a,b)=(4,3) L=7: all 5040 order types have a-increase or b-decrease; tightness witness len=6 lis=3 lds=2
+  (a,b)=(5,2) L=5: all 120 order types have a-increase or b-decrease; tightness witness len=4 lis=4 lds=1
+  (a,b)=(6,2) L=6: all 720 order types have a-increase or b-decrease; tightness witness len=5 lis=5 lds=1
+  (a,b)=(7,2) L=7: all 5040 order types have a-increase or b-decrease; tightness witness len=6 lis=6 lds=1
+  (a,b)=(8,2) L=8: all 40320 order types have a-increase or b-decrease; tightness witness len=7 lis=7 lds=1
+  random distinct-value sequences: 3000 sequences, 24050 applicable (a,b) checks, violations=0
+  exhaustive order types checked in total: 102662
+CMP107-F MONOTONE-SUBSEQUENCE FINITE-CORE GREEN
+==============================================================================
+G  NEGATIVE CONTROLS — corruption, collinearity, gate rejection, detection
+  unit moves (3 witnesses x 8 pts x 4 moves): GP-preserving=24, convex-5 induced=8 (33.3%) — MEASUREMENT: the witnesses are locally robust; single-unit corruption often preserves the no-convex-5 property
+  near moves (5 witnesses x 8 pts x 48 moves): GP-preserving=570, convex-5 induced=364 (63.9%)
+  far moves (5 witnesses x 8 pts x 12 moves): GP-preserving=382, convex-5 induced=310 (81.2%)
+  combined corruption battery: GP-preserving=952, convex-5 induced=674 (70.8%); every witness individually corrupted into a convex-5 carrier: True
+  collinear triple battery (6 slopes): all rejected by GP gate with the offending triple identified: True
+  non-GP 5-set [(0, 0), (2, 4), (4, 8), (1, 7), (6, 1)]: GP gate=False (embedded triple ((0, 0), (2, 4), (4, 8)))
+  positive detection: pentagon in convex position=True; random 8-point GP sets with a convex 5-subset: 50/50
+CMP107-G NEGATIVE-CONTROLS GREEN
+==============================================================================
+H  CITED DICHOTOMY CORROBORATION — cup/cap at small (a,b) (NOT a proof)
+  (a,b)=(3,3): N=binom(2,1)+1=3, 1500 random GP distinct-x sets, missing cup/cap=0
+  (a,b)=(3,4): N=binom(3,1)+1=4, 1500 random GP distinct-x sets, missing cup/cap=0
+  (a,b)=(4,3): N=binom(3,2)+1=4, 1500 random GP distinct-x sets, missing cup/cap=0
+  (a,b)=(4,4): N=binom(4,2)+1=7, 1500 random GP distinct-x sets, missing cup/cap=0
+  label: CORROBORATION ONLY — the Erdos-Szekeres dichotomy is cited-classical
+  (the naive injective-label route FAILS 263/300, receipts107.txt part D)
+CMP107-H DICH-CORROBORATION GREEN
+==============================================================================
+I  FRONTIER ARITHMETIC — 2^{n-2}+1 <= f(n) <= binom(2n-4,n-2)+1, n=3..40
+  n= 3  lower=2^{1}+1=3  upper=binom(2,1)+1=3  exact=3  log2(upper)/n=0.5283
+  n= 4  lower=2^{2}+1=5  upper=binom(4,2)+1=7  exact=5  log2(upper)/n=0.7018
+  n= 5  lower=2^{3}+1=9  upper=binom(6,3)+1=21  exact=9  log2(upper)/n=0.8785
+  n= 6  lower=2^{4}+1=17  upper=binom(8,4)+1=71  exact=17  log2(upper)/n=1.0250
+  n= 7  lower=2^{5}+1=33  upper=binom(10,5)+1=253  exact=OPEN  log2(upper)/n=1.1404
+  n= 8  lower=2^{6}+1=65  upper=binom(12,6)+1=925  exact=OPEN  log2(upper)/n=1.2317
+  n= 9  lower=2^{7}+1=129  upper=binom(14,7)+1=3433  exact=OPEN  log2(upper)/n=1.3050
+  n=10  lower=2^{8}+1=257  upper=binom(16,8)+1=12871  exact=OPEN  log2(upper)/n=1.3652
+  n=11  lower=2^{9}+1=513  upper=binom(18,9)+1=48621  exact=OPEN  log2(upper)/n=1.4154
+  n=12  lower=2^{10}+1=1025  upper=binom(20,10)+1=184757  exact=OPEN  log2(upper)/n=1.4579
+  n=40  lower=2^{38}+1=274877906945  upper=binom(76,38)+1=6892620648693261354601  exact=OPEN  log2(upper)/n=1.8136
+  f(7) in [33, 253]: certified interval (33, 253)
+  exact values: f(3)=3, f(4)=5, f(5)=9, f(6)=17 — each = 2^{n-2}+1 and each inside the classical bounds: True
+  the conjecture f(n)=2^{n-2}+1 is OPEN for n>=7; HMPT20 upper 2^{n+O(sqrt(n log n))} is cited (asymptotic, no machine check)
+CMP107-I FRONTIER-ARITHMETIC GREEN
+==============================================================================
+Z3 OPTIONAL THIRD-METHOD LANE — LP feasibility vs orientation containment
+  z3 version: 5.4.1
+  LP-vs-orientation on 2004 real (point,triangle) queries: inside=208 outside=1796 mismatches=0
+CMP107-Z3 THIRD-METHOD GREEN
+==============================================================================
+VERDICT
+  S-statement-integrity        GREEN
+  A-f(3)=3                     GREEN
+  B-f(4)>=5                    GREEN
+  C-f(4)<=5                    GREEN
+  D-f(5)>=9                    GREEN
+  E-checker-agreement          GREEN
+  F-monotone-core              GREEN
+  G-negative-controls          GREEN
+  H-dich-corroboration         GREEN
+  I-frontier-arithmetic        GREEN
+  Z3-third-method              GREEN
+COMPARATOR_107_GREEN=1
+total wall 5.8s; checker queries=126956 (A/B disagreements=0)

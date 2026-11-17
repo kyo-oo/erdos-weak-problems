@@ -1409,3 +1409,38 @@ jobs:
           lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee kernelW66B.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66B.log
           echo KERNELW66B_GREEN=1
+
+  kernel-107cmp:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install z3-solver for the optional third-method lane (multi-route fallback; python-only job, NO Lean)
+        shell: bash
+        run: |
+          set -uo pipefail
+          python3 --version
+          (python3 -m pip install --quiet z3-solver \
+            || pip3 install --quiet z3-solver \
+            || python3 -m pip install --quiet --user z3-solver \
+            || (sudo apt-get update -qq && sudo apt-get install -y -qq python3-z3) \
+            || echo "z3 install failed - comparator will run in pure-python mode (z3 lane is optional)")
+          python3 -c "import z3; print('z3 available:', z3.get_version_string())" \
+            || echo "z3 NOT importable - optional lane will be SKIPPED"
+      - name: "Comparator 107 - Happy Ending DEEPMIND-STYLE DIRECT VERIFICATION (W70-F: challenge.json + solution.json + independent evaluator, the FunSearch/AlphaCode challenge/solution/evaluator grading pattern; NO Lean, exact integer arithmetic, no floats in any geometric predicate): A f(3)=3 both directions (grid-exhaustive GP triples + convention encoding) | B f(4)>=5 the 4-pt interior witness regenerated | C f(4)<=5 sweeps (10^4 uniform + 2500 adversarial + EXHAUSTIVE all 1668 GP 5-subsets of the 4x4 grid and all 25052 of the 5x5 grid, zero failures) | D f(5)>=9 five 8-pt no-convex-5 witnesses all C(8,5)=56 subsets two-method + re-derivation sweep (50000 structured candidates, the four lattice witnesses rediscovered as the ONLY ones in class) + 9-pt extensions corroborate cited f(5)=9 | E two independent exact convex-position checkers (centroid-angular-tour vs closed-triangle containment) agree on 126956 queries | F monotone subsequence finite core (all 102662 order types <= 8 + tightness witnesses) | G negative controls (corruption batteries 952 GP-preserving corruptions 70.8% convex-5-induced, collinear rejection, positive detection) | H cited ES35 dichotomy corroboration at (3,3),(3,4),(4,3),(4,4) | I frontier arithmetic n=3..40 exact | Z3 optional LP third-method lane (2004 queries) | statement-integrity gate challenge<->solution"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 problem107-happy-ending/comparator/comparator.py 2>&1 | tee comparator107.log
+          grep -F "COMPARATOR_107_GREEN=1" comparator107.log
+          grep -F "CMP107-A f(3)=3 BOTH-DIRECTIONS GREEN" comparator107.log
+          grep -F "CMP107-B f(4)>=5 WITNESS GREEN" comparator107.log
+          grep -F "CMP107-C f(4)<=5 SWEEP GREEN" comparator107.log
+          grep -F "CMP107-D f(5)>=9 WITNESSES GREEN" comparator107.log
+          grep -F "CMP107-E CHECKER-AGREEMENT GREEN" comparator107.log
+          grep -F "CMP107-F MONOTONE-SUBSEQUENCE FINITE-CORE GREEN" comparator107.log
+          grep -F "CMP107-G NEGATIVE-CONTROLS GREEN" comparator107.log
+          grep -F "CMP107-H DICH-CORROBORATION GREEN" comparator107.log
+          grep -F "CMP107-I FRONTIER-ARITHMETIC GREEN" comparator107.log
+          grep -E "CMP107-Z3 (THIRD-METHOD GREEN|SKIPPED)" comparator107.log
+          grep -F "A/B disagreements=0" comparator107.log
+          echo KERNEL107CMP_GREEN=1
