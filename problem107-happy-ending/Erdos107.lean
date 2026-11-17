@@ -61,7 +61,7 @@ def turn (p q r : Int × Int) : Int :=
 /-- The order-independent 4-point convexity test (Bool): the product of the
 four triple-orientation signs is strictly positive. -/
 def convex4B (a b c d : Int × Int) : Bool :=
-  turn a b c * turn a b d * turn a c d * turn b c d > 0
+  decide (0 < turn a b c * turn a b d * turn a c d * turn b c d)
 
 /-- The 4-point convexity proposition. -/
 def convex4 (a b c d : Int × Int) : Prop := convex4B a b c d = true
