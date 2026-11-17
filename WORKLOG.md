@@ -4541,3 +4541,20 @@ multi-route deps, exit-code + verdict-line + PASS/FAIL-count gating).
 Run 44201831510 on d999a92 [verdicts appended below].
 
 The engine never stops; it never lies. In English, always.
+
+### S071 CI VERDICTS (the official gates on GitHub Actions)
+
+- Run 44201831510 (d999a92): gate-142-official **SUCCESS**,
+  gate-61-official **SUCCESS**, gate-107-official FAILURE — root cause
+  found in the log: the official programs_database imports scipy (present
+  in the local sandbox, absent on the runner) — root-killed by adding
+  scipy to the install routes.
+- Run 44202363630 (3509fe3): **gate-142-official SUCCESS,
+  gate-61-official SUCCESS, gate-107-official SUCCESS** — the runner logs
+  print `VERDICT: YOUR SOLUTION IS OKAY` and `GATE<id>OFFICIAL_GREEN=1`
+  for all three. Lean kernels on the same run: kernel-142k/142a/142d,
+  kernel-107k, kernel-61k, kernel-142cmp/61cmp/107cmp all SUCCESS.
+- THE S071 SEAL: the three fortress fronts carry the official DeepMind
+  comparator verdict — locally (14/14, 10/10, 7/7, exit 0) and on GitHub
+  CI — with the full arsenal read and cited (ARSENAL_USAGE.md) and the
+  round ledger complete (WORKLOG_S071.md).
