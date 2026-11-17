@@ -4232,3 +4232,48 @@ receipts + audits), statements frozen on CI-green kernels, proofs = the next ker
 wave's work (the statement-first discipline).
 
 The engine never stops; it never lies. In English, always.
+
+## S070 — W70: THE WAVE OF SIX (commander-executed after dispatcher death; #142 INTEGRATION SEALED)
+
+**The W70 wave was ordered as 6 sub-agents, one problem each (2 lanes per fortress
+front). The dispatcher killed all six launches (context deadline — the documented
+W66 dispenser-war condition). Fallback per the engine law: the agents that did land
+work before the deadline had their artifacts verified by the commander; the rest of
+the wave is commander-executed in structured succession.**
+
+1. **#142 INTEGRATION (W70-A): SEALED — CI run 44096364454 on head 99ca542
+   ALL-GREEN, 6/6 jobs** (kernel-a/b/c with the W66 statement gates +
+   kernel-142k ternary kernel + kernel-142d doubter battery + kernel-142a W69-B
+   audit battery). The w69-merge killer defect (a step with only `name:`, zero
+   jobs spawned) is eliminated by construction: the final kills.yml is validated
+   (every step carries `uses:`/`run:`, no `elan_init` underscore, no duplicate
+   keys). Campaign advanced to 99ca542. The #142 certified stack on campaign:
+   the elementary two-sided theory kernel (t3free, cantor_lower, block_upper,
+   r3_exact_small, k2_edge, arsenal_bridge, the 7-conjunct board), the doubter
+   mirror battery + cross-audit, and the second-method audit battery. EXACT
+   LABEL: the #142 asymptotic formula remains OPEN for every k >= 3; the
+   kernels certify the complete elementary envelope + exact finite tables.
+
+2. **#107 kernel (W70-E): two root-kill repair rounds landed on w70-e-p107k.**
+   r1 (fd5d5b2): the `elan_init.sh` underscore 404 that killed run 44007921936
+   before Lean started + the convex4B Prop/Bool type collision (decide-typed
+   re-body). r2 (78c5b42): the decidability-opacity root-kill — `convex4` is now
+   `abbrev` (reducible) so `decide (¬ convex4 …)` synthesizes through
+   instDecidableNot + instDecidableEqBool. r1 verdict: run 44097016217 FAILURE
+   (the opacity error at Erdos107.lean:131:2); r2 verdict: run 44101517445
+   IN PROGRESS at seal time — recorded, pending.
+
+3. **#142 comparator (W70-B): the DeepMind-style comparator lane built on
+   w70-b-p142comp (090eece)** — challenge.json (frozen statement + pinned
+   conventions + DeepMind FunSearch context: the 512-point n=8 cap set, honest
+   F_3^n-vs-[1,N] distinction + SOTA baselines as canonical citations) +
+   solution.json (honestly-labeled claims) + comparator.py (independent direct
+   verifier: r_3 by three fresh methods, r_4/r_5 tables, Cantor census two
+   routes, block-bound torture, negative controls) + kernel-142cmp CI job.
+   Local receipts 42/42 PASS; CI run 44098447017 IN PROGRESS at seal time.
+
+4. **#61 kernel (W70-C) and #61 comparator (W70-D): commander-executed next
+   (this session's continuation).** #107 comparator (W70-F): artifacts in
+   flight, to be committed and pushed after verification.
+
+The engine never stops; it never lies. In English, always.
