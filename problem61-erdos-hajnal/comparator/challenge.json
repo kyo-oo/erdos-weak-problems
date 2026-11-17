@@ -1,0 +1,44 @@
+{
+  "problem": "Erdos #61 — the Erdos-Hajnal conjecture",
+  "statement_frozen": "For any graph H is there some c=c(H)>0 such that every graph G on n vertices that does not contain H as an induced subgraph contains either a complete graph or independent set on >= n^c vertices?",
+  "source": "erdoesproblems.com/61 (corpus harvest, verbatim)",
+  "conventions": {
+    "graphs": "finite, simple, undirected, no loops",
+    "induced": "closed under both edges and non-edges",
+    "omega": "max clique size",
+    "alpha": "max independent set size",
+    "hom": "max(omega, alpha)",
+    "h_H(n)": "min{ hom(G) : G on n vertices, H induced-free } (minimum always attained; feasible set nonempty for every n>=1)",
+    "homogeneous_set": "clique or independent set",
+    "complement_bar": "H-bar denotes graph complement; F1: induced subgraphs of H-free are H-free; F2: homogeneous sets of induced subgraphs are homogeneous in the host; F3: cliques of G <-> independent sets of G-bar; F4: h_H nondecreasing in n"
+  },
+  "parameter_space": {
+    "H_universe": "the six receipt H's (2K2, P3, 3K1, claw K1,3, C4, K2) plus the F7 family {K1, K2, Kbar2=2K1, P3, Pbar3, K3, Kbar3=3K1} — all graphs on <= 3 vertices plus the four key 4-vertex H's (2K2, claw, C4, P4 as the honest continuation front)",
+    "n_exhaustive": "1..7",
+    "n_witness_lane": "8..30",
+    "substitution_frame": "uniform blow-ups H1[H2], q,s in {1,2,3}^2 exhaustive, sampled beyond"
+  },
+  "acceptance_criteria": [
+    "AC-1: every h-table value in solution.json must be re-derived by at least two independent methods (exhaustive/targeted enumeration + z3 SAT/UNSAT dual certificates) with exact agreement",
+    "AC-2: the P3 classification (P3-free <=> disjoint union of cliques) must hold on every P3-free graph enumerated exhaustively at n<=6, and the sharp law h_P3(n)=ceil(sqrt(n)) must hold at n<=7 exhaustively with witnesses at n<=30",
+    "AC-3: the 3K1 law h_3K1(n) >= t_n := min{t : t(t+1)>=n} must hold at n<=7 exhaustively, with the C5 honesty correction encoded (hom >= sqrt(n) REAL-VALUED IS FALSE at n=5)",
+    "AC-4: Ramsey cross-check R(3,3)=6: every 6-vertex graph has omega>=3 or alpha>=3 (exhaustive)",
+    "AC-5: the substitution identities and avoidance table must be verified by brute isomorphism; the blow-up law hom(G) >= min(h_H1(q), h_H2(s)) must hold on the full exhaustive frame with zero violations",
+    "AC-6: the exponent law f(c1,c2)=c1c2/(c1+c2) and the multi-level harmonic law F_k=(sum 1/ci)^{-1} must verify in exact rational arithmetic",
+    "AC-7: the F7 family theorem finite core: for every H in {K2, 2K1, P3, Pbar3, K3, 3K1} and n<=7, every H-free graph has hom >= floor(sqrt(n)) (exhaustive), and the tightness witness (disjoint union of 2^j copies of K_{2^j} on n=4^j vertices, max(omega,alpha)=2^j=floor(sqrt(n))) must verify exactly for j=1..3",
+    "AC-8: negative controls: a corrupted table value, a corrupted witness, and a corrupted classification instance must each be REJECTED (comparator non-vacuity)"
+  ],
+  "deepmind_context": {
+    "methodology": "This comparator implements the DeepMind evaluation pattern (challenge file + solution file + independent evaluator — the FunSearch (Nature 2024) systematic evaluator loop and the AlphaCode example-based grading discipline): the solution's claims are DIRECTLY verified against the challenge spec by fresh computation, with no Lean and no trust in the solution's own engines.",
+    "deepmind_statements_fetched": "FunSearch Nature-2024 page and AlphaGeometry/AlphaGeometry-2 blog pages were fetched by the sibling #142/#107 comparator lanes in this wave; for #61 DeepMind has NO published result on the Erdos-Hajnal conjecture — honest absence, recorded.",
+    "canonical_baselines_context_only": [
+      "Erdos-Hajnal 1977: the conjecture; baseline: every induced-H-free G has hom >= exp(c_H sqrt(log n))",
+      "Seinsche 1974: P4-free = cographs, c(P4)=1",
+      "Alon-Pach-Solymosi 2001: substitution closure of the EH property",
+      "Chudnovsky-Safra 2010: bull-free graphs satisfy EH",
+      "The F7 family c=1/2 sharp is the campaign's delivered envelope (this comparator's certification target)"
+    ],
+    "honest_note": "Context baselines are canonical citations, NOT comparator targets; the comparator certifies exactly what solution.json claims with exact labels."
+  },
+  "verdict_protocol": "exit 0 + COMPARATOR_61_GREEN=1 only if every lane passes; exit nonzero on any failure, disagreement, or negative-control leak"
+}

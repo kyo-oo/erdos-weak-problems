@@ -1534,3 +1534,38 @@ jobs:
           grep -F "negative control: corrupted r_3 table (N=10 bumped to 6) REJECTED" kernel142cmp.log
           grep -F "AGREEMENT LAW: comparator table == solution.json R3-TABLE, 30/30 values" kernel142cmp.log
           echo KERNEL142CMP_GREEN=1
+
+  kernel-61cmp:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install z3-solver (multi-route fallback; python-only job, NO Lean)
+        shell: bash
+        run: |
+          set -uo pipefail
+          python3 --version
+          (python3 -m pip install --quiet --break-system-packages z3-solver \
+            || pip3 install --quiet --break-system-packages z3-solver \
+            || python3 -m pip install --quiet z3-solver \
+            || (sudo apt-get update -qq && sudo apt-get install -y -qq python3-z3) \
+            || echo "z3 install failed - comparator will run in pure-python mode")
+          python3 -c "import z3; print('z3 available:', z3.get_version_string())" \
+            || echo "z3 NOT importable - dual-certificate lanes will be skipped honestly"
+      - name: "Comparator 61 - Erdos-Hajnal DEEPMIND-STYLE DIRECT VERIFICATION (W70-D: challenge.json + solution.json + independent evaluator, the FunSearch/AlphaCode grading pattern; NO Lean, exact integer arithmetic): S statement-integrity + open-scope | A six h-tables n<=7 (n<=6 exhaustive bitmask re-derivation + n=7 witness+Ramsey + z3 SAT/UNSAT dual certificates with ALL-injection induced-copy encoding + model re-validation) | B P3-classification (P3-free <=> disjoint-union-of-cliques via independent DSU on every graph n<=6, Bell census 1,2,5,15,52,203, ceil(sqrt(n)) witnesses n<=30) | C 3K1 law t_n with equality {1,3,4,5,7} + Ramsey strictness {2,6} + the C5 honesty correction (hom(C5)=2 < sqrt(5)) | D Ramsey R(3,3)=6 exhaustive + z3 UNSAT | E four substitution identities brute-iso | F 12-entry avoidance table + transversal/class laws | G blow-up frame 4317 graphs (transversal law + avoidance disjunction + hom min-law, zero violations) | H exponent laws exact rational (f(c1,c2)=c1c2/(c1+c2), harmonic multi-level) | I F7 family finite core (six members exhaustive n<=6 + trivial-floor lemma + tightness witnesses 2^j K_{2^j} on 4^j) | J negative controls (corrupted table/witness/classification all REJECTED)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 problem61-erdos-hajnal/comparator/comparator.py 2>&1 | tee comparator61.log
+          grep -F "COMPARATOR_61_GREEN=1" comparator61.log
+          grep -F "CMP61-A H-TABLES GREEN" comparator61.log
+          grep -F "CMP61-B P3-CLASSIFICATION GREEN" comparator61.log
+          grep -F "CMP61-C 3K1-LAW+C5 GREEN" comparator61.log
+          grep -F "CMP61-D RAMSEY GREEN" comparator61.log
+          grep -F "CMP61-E SUBSTITUTION-IDENTITIES GREEN" comparator61.log
+          grep -F "CMP61-F AVOIDANCE GREEN" comparator61.log
+          grep -F "CMP61-G BLOWUP-LAW GREEN" comparator61.log
+          grep -F "CMP61-H EXPONENT-LAWS GREEN" comparator61.log
+          grep -F "CMP61-I F7-FAMILY GREEN" comparator61.log
+          grep -F "CMP61-J NEGATIVE-CONTROLS GREEN" comparator61.log
+          ! grep -E 'CRITICAL' comparator61.log
+          echo KERNEL61CMP_GREEN=1

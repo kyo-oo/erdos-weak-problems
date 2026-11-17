@@ -1,0 +1,85 @@
+==============================================================================
+COMPARATOR 61 — Erdos-Hajnal DIRECT VERIFICATION (challenge/solution/evaluator)
+==============================================================================
+z3: available 5.4.1
+
+[S] STATEMENT INTEGRITY
+  PASS [S] Erdos-Hajnal statement frozen (induced subgraph + complete-or-independent) and solution carries >= 6 labeled claims
+  PASS [S] open-scope declaration present (the full conjecture stays OPEN)
+
+[A] H-TABLES n<=7 — fresh re-derivation
+  PASS [A] six h-tables n=1..7 re-derived (n<=6 exhaustive, n=7 witness+Ramsey) == solution
+    h_2K2: [1, 2, 2, 2, 2, 3, 3]
+    h_P3: [1, 2, 2, 2, 3, 3, 3]
+    h_3K1: [1, 2, 2, 2, 2, 3, 3]
+    h_claw: [1, 2, 2, 2, 2, 3, 3]
+    h_C4: [1, 2, 2, 2, 2, 3, 3]
+    h_K2: [1, 2, 3, 4, 5, 6, 7]
+  PASS [A] z3 SAT/UNSAT dual certificates agree with all tables (n=2..6, five non-trivial H)
+
+[B] THEOREM 2 — P3 classification and h_P3(n) = ceil(sqrt(n))
+  PASS [B] P3-free <=> disjoint-union-of-cliques on EVERY graph n<=6 (exhaustive, independent DSU check)
+  PASS [B] P3-free census == Bell numbers 1,2,5,15,52,203 at n=1..6
+  PASS [B] h_P3(n) <= ceil(sqrt(n)) witnesses (balanced clique unions) verified n=1..30; classification gives lower bound (n<=7 exhaustive)
+
+[C] THEOREM 3 — 3K1 complement-side law with the C5 correction
+  PASS [C] h_3K1(n) >= t_n = min{t: t(t+1)>=n} with equality at {1,3,4,5,7} and Ramsey strictness at {2,6} (n<=7)
+  PASS [C] C5 honesty correction: C5 is 3K1-free (=True) and hom(C5)=2 < sqrt(5)~2.236 — the naive real-valued law is FALSE exactly as documented
+
+[D] RAMSEY CROSS-CHECK R(3,3)=6
+  PASS [D] every 6-vertex graph has omega>=3 or alpha>=3 (exhaustive 2^15) — the universal n=6,7 floor
+  PASS [D] z3 UNSAT: no 6-vertex graph with all-triangles-and-independent-triples absent
+
+[E] THEOREM 4 — substitution identities
+  PASS [E] all four substitution identities verified by brute isomorphism
+    K2[K2] ≅ K4: True
+    2K1[K2] ≅ 2K2: True
+    K2[2K1] ≅ C4: True
+    comp(P3[K2]) ≅ C4 ∪ 2K1: True
+
+[F] AVOIDANCE TABLE (induced)
+  PASS [F] 12-entry induced-avoidance table verified
+  PASS [F] alpha(P3[K2]) = 2 (claimed 2)
+  PASS [F] transversal law: P3[K2] contains induced P3 on (p,0) transversal
+  PASS [F] class law: P3[K2] contains induced K2 inside class 0
+
+[G] THEOREM 4A — blow-up min-law on the exhaustive frame
+  PASS [G] blow-up frame exhaustive (q,s in 1..3, 4317 blow-ups, campaign count 4317; 81 contain induced P3[P3]): transversal law + avoidance disjunction + hom >= min(h_H1(q), h_H2(s)) violations = 0
+
+[H] THEOREM 4B/4C — exponent laws (exact rational arithmetic)
+  PASS [H] f(1/2,1/2) = 1/4 (claimed 1/4)
+  PASS [H] f(f(1/2,1/2),1/2) = 1/6 (claimed 1/6 — the harmonic law)
+  PASS [H] f(f(1/2,1/3),2/3) = 2/13 (claimed 2/13)
+  PASS [H] balanced splits: q=s=2^j on n=4^j give q^{1/2}=s^{1/2}=n^{1/4}=2^{j/2} exact (integer grid)
+
+[I] F7 FAMILY THEOREM — finite core + tightness witnesses
+  PASS [I] F7 family floor(sqrt(n)) verified exhaustively n=1..6 for all six non-vacuous members; n=7 via the trivial floor lemma (floor(sqrt(7))=2 <= hom of any graph on >=2 vertices) + lane A's Ramsey-forced h=3
+    h_K2 (F7 view, n=1..6): [1, 2, 3, 4, 5, 6]
+    h_2K1 (F7 view, n=1..6): [1, 2, 3, 4, 5, 6]
+    h_P3 (F7 view, n=1..6): [1, 2, 2, 2, 3, 3]
+    h_Pbar3 (F7 view, n=1..6): [1, 2, 2, 2, 3, 3]
+    h_K3 (F7 view, n=1..6): [1, 2, 2, 2, 2, 3]
+    h_3K1 (F7 view, n=1..6): [1, 2, 2, 2, 2, 3]
+  PASS [I] trivial floor lemma: every graph on n in 2..6 vertices has hom >= 2 (exhaustive spot-verification)
+  PASS [I] tightness witnesses j=1..3: disjoint union of 2^j K_{2^j} on n=4^j has max(omega,alpha)=2^j=floor(sqrt(n)) EXACTLY (c=1/2 optimal in-family)
+
+[J] NEGATIVE CONTROLS
+  PASS [J] corrupted h_P3(5)=2 table REJECTED (true value 3)
+  PASS [J] corrupted n=5 witness (K4 ∪ K1, hom=4) correctly NOT a ceil(sqrt(5))=3 witness
+  PASS [J] P3-containing graph REJECTED by the P3-free checker (non-vacuity)
+
+==============================================================================
+VERDICT
+==============================================================================
+  PASS: 27   FAIL/CRITICAL: 0
+COMPARATOR_61_GREEN=1
+CMP61-A H-TABLES GREEN
+CMP61-B P3-CLASSIFICATION GREEN
+CMP61-C 3K1-LAW+C5 GREEN
+CMP61-D RAMSEY GREEN
+CMP61-E SUBSTITUTION-IDENTITIES GREEN
+CMP61-F AVOIDANCE GREEN
+CMP61-G BLOWUP-LAW GREEN
+CMP61-H EXPONENT-LAWS GREEN
+CMP61-I F7-FAMILY GREEN
+CMP61-J NEGATIVE-CONTROLS GREEN
