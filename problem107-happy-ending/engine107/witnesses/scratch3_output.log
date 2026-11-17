@@ -1,0 +1,23 @@
+== E(k,l) sizes and properties ==
+E(3,3): |E|=2 (want 2), maxcup=2 (<= 2), maxcap=2 (<= 2), brute=True
+E(3,4): |E|=3 (want 3), maxcup=2 (<= 2), maxcap=3 (<= 3), brute=True
+E(3,5): |E|=4 (want 4), maxcup=2 (<= 2), maxcap=4 (<= 4), brute=True
+E(4,3): |E|=3 (want 3), maxcup=3 (<= 3), maxcap=2 (<= 2), brute=True
+E(4,4): |E|=6 (want 6), maxcup=3 (<= 3), maxcap=3 (<= 3), brute=True
+E(4,5): |E|=10 (want 10), maxcup=3 (<= 3), maxcap=4 (<= 4), brute=True
+E(5,3): |E|=4 (want 4), maxcup=4 (<= 4), maxcap=2 (<= 2), brute=True
+E(5,4): |E|=10 (want 10), maxcup=4 (<= 4), maxcap=3 (<= 3), brute=True
+E(5,5): |E|=20 (want 20), maxcup=4 (<= 4), maxcap=4 (<= 4), brute=True
+E(5,5) coord magnitude: 568332288
+E(4,4): [(0, 0), (9216, 704), (12672, 768), (81792, 16512), (85248, 16576), (94464, 17280)]
+elapsed 0.0s
+E(4,4) labels: [(1, 1), (2, 2), (2, 3), (3, 2), (3, 3), (3, 3)]
+  collisions: 1
+E(5,5) labels: [(1, 1), (2, 2), (2, 3), (2, 4), (3, 2), (3, 3), (3, 3), (3, 4), (3, 4), (3, 4), (4, 2), (4, 3), (4, 3), (4, 3), (4, 4), (4, 4), (4, 4), (4, 4), (4, 4), (4, 4)]
+  collisions: 10
+  random collision: [(7, 68), (24, 178), (53, 0), (99, 184), (110, 58), (124, 114), (155, 151), (195, 26), (196, 81)] [(1, 1), (2, 2), (2, 3), (3, 3), (3, 4), (3, 5), (4, 4), (4, 4), (4, 5)]
+  random collision: [(5, 161), (74, 47), (106, 185), (117, 25), (142, 75), (194, 164)] [(1, 1), (2, 2), (3, 2), (3, 3), (4, 3), (4, 3)]
+  random collision: [(44, 112), (93, 169), (95, 100), (140, 130), (170, 22), (172, 41), (179, 27), (188, 133), (198, 199)] [(1, 1), (2, 2), (2, 3), (3, 3), (3, 4), (4, 4), (4, 4), (5, 3), (5, 3)]
+random sets with label collisions: 135/300
+elapsed 0.1s
+engine self-test: disagreements on gp sets: 0 /4000
