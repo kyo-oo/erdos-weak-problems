@@ -1,0 +1,14 @@
+{
+ "f3": {
+  "all_convex_triangles": true,
+  "f3_equals_3": "trivial + census",
+  "grid": "5x5",
+  "non_collinear": 2148,
+  "triples_total": 2300
+ },
+ "f6": {
+  "lower_bound_f6_ge_17": "CERTIFIED here via the n=6 ErSz61 construction certificate (16 points, no convex hexagon)",
+  "upper_bound_f6_le_17": "LITERATURE ONLY (not verified): Szekeres & Peters, ANZIAM J. 48 (2006), 151-164 (computer search)",
+  "value": 17
+ }
+}

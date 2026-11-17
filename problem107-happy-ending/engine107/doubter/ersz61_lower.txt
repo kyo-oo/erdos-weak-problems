@@ -1,0 +1,129 @@
+================================================================================
+ErSz60/61 LOWER BOUND — BANKED CLASSICAL TEXT (W67-107D research intel)
+f(n) >= 2^{n-2}+1: the EXPLICIT construction of 2^{n-2} points, no convex n-gon
+================================================================================
+FETCHED: 2026-11-15 by W67-107D (doubter lane).
+PRIMARY SOURCE (verbatim quotes below): W. Morris, V. Soltan, "The Erdos-Szekeres
+problem on points in convex position - a survey", Bulletin of the AMS (New
+Series) 37 (2000), no. 4, pp. 437-458, Section 2.3 "Construction for the Lower
+Bound", pp. 442-443.
+  URL: https://www.ams.org/journals/bull/2000-37-04/S0273-0979-00-00877-6/S0273-0979-00-00877-6.pdf
+  DOI: 10.1090/S0273-0979-00-00877-6  (curl-fetchable with browser UA headers)
+Supporting: https://en.wikipedia.org/wiki/Happy_ending_problem (statement:
+"they proved later, by constructing explicit examples, that f(N) >= 1+2^{N-2}"
+with reference [8] = Erdos & Szekeres (1961)).
+
+--------------------------------------------------------------------------------
+1. THE PROVENANCE (verbatim from [MS00], Sec 2.3)
+--------------------------------------------------------------------------------
+"Now we are ready to prove the inequality N(n) >= 2^{n-2} + 1. This lower bound
+on N(n) was essentially proved in [33 = ES61]. Some inaccuracies in the proof
+were later corrected by Kalbfleisch and Stanton [51]. (Erdos refers to their
+corrections in [26].) We sketch the main ideas of the construction as it is
+presented in [61 = L. Lovasz, Combinatorial Problems and Exercises,
+North-Holland, 1979]."
+
+[References from [MS00]:
+  [33] Erdos P., Szekeres G., On some extremum problems in elementary geometry,
+       Ann. Univ. Sci. Budapest Eotvos Sect. Math. 3-4 (1960/61), 53-62.
+  [51] Kalbfleisch J.G., Stanton R.G., On the maximum number of coplanar points
+       containing no obtuse angle (correcting the ES61 construction).
+  [61] Lovasz L., Combinatorial Problems and Exercises, North-Holland,
+       Amsterdam, 1979 (pp. 88-89, 501-506 contain the corrected construction
+       and the N(5)=9 proof).]
+
+--------------------------------------------------------------------------------
+2. THE CUP/CAP EXTREMAL SETS (Theorem 2.5 of [MS00], verbatim) -- the parts
+--------------------------------------------------------------------------------
+"Theorem 2.5 ([32]).  f(k,l) = C(k+l-4, k-2) + 1.
+
+Proof. Note that we have already observed this to be the case when k or l is 3.
+We proceed by induction. Suppose that we have a set A of C(k+l-5, k-3) points
+with no (k-1)-cup and no l-cap, and a set B of C(k+l-5, k-2) points with no
+k-cup and no (l-1)-cap. Translate these sets so that the following conditions
+are satisfied:
+   (i) every point of B has greater first coordinate than the first
+       coordinates of points of A,
+   (ii) the slope of any line connecting a point of A to a point of B is
+       greater than the slope of any line connecting two points of A or two
+       points of B.
+Let X = A U B be the resulting configuration. Any cup in X that contains
+elements of both A and B may have only one element of B. It follows that X
+contains no k-cup. We similarly see that X contains no l-cap. Thus
+   f(k,l) >= C(k+l-5, k-3) + C(k+l-5, k-2) + 1 = C(k+l-4, k-2) + 1."
+
+[Note the extremal object: a set E(k,l) of exactly C(k+l-4, k-2) points with
+ NO k-cup and NO l-cap, built recursively: E(k,l) = A U B with A a translated
+ copy of E(k-1,l) to the LOWER LEFT (smaller x's), B a copy of E(k,l-1) to the
+ UPPER RIGHT, all A->B line slopes STRICTLY GREATER than every slope of a line
+ through two points of A or two points of B. Base: E(2,l) and E(k,2) = one
+ point. |E(k,l)| = C(k+l-4, k-2) by Pascal. Why cups/caps die: a mixed cup
+ (slopes strictly increasing along increasing x) can contain at most one
+ element of B, since after entering B via an A->B segment (slope larger than
+ all internal slopes) any following B-internal segment has smaller slope --
+ contradicting monotone increase; hence mixed cup = (cup in A of length <= k-2)
+ + at most 1 point of B, total <= k-1. Symmetrically a mixed cap contains at
+ most one element of A, total <= 1 + (l-2) = l-1.]
+
+--------------------------------------------------------------------------------
+3. THE 2^{n-2} CONSTRUCTION (Theorem 2.6 of [MS00], verbatim) -- the whole
+--------------------------------------------------------------------------------
+"Theorem 2.6 ([33],[51]).  N(n) >= 2^{n-2} + 1.
+
+Proof. To prove the inequality, we construct a set X of 2^{n-2} points with no
+subset of n points in convex position. For i = 0, 1, ..., n-2, let T_i be a set
+of C(n-2, i) points containing no (i+2)-cap and no (n-i)-cup and having the
+property that no two points in the set are connected by a line having slope of
+absolute value greater than 1.
+
+For i = 0, 1, ..., n-2, place a small copy of T_i in a neighborhood of the
+point on the unit circle making an angle of pi/4 - i*pi/(2(n-2)) with the
+positive x-axis. Let X be the union of the T_i, i = 0, 1, ..., n-2. Then
+        |X| = sum_{i=0}^{n-2} C(n-2, i) = 2^{n-2}.
+
+Suppose that Y is a subset of X in convex position. Let k and l be the smallest
+and the largest values of i so that Y INTERSECT T_i != empty. If k = l, then Y
+contains no (k+2)-cap and no (n-k)-cup. The construction guarantees that:
+   (a) Y INTERSECT T_k is a cap of at most k+1 points,
+   (b) Y INTERSECT T_l is a cup of at most n-l-1 points,
+   (c) |Y INTERSECT T_i| <= 1 for all i = k+1, k+2, ..., l-1.
+Thus
+   |Y| <= k+1 + l-k-1 + n-l-1 = n-1.
+Hence no subset of X in convex position contains n points."
+
+WHY IT WORKS (W67-107D structural analysis, exact slope separation):
+  * T_i = E(n-i, i+2) from Theorem 2.5's extremal construction: it has exactly
+    C(n-i+i+2-4, n-i-2) = C(n-2, n-i-2) = C(n-2, i) points, no (n-i)-CUP and
+    no (i+2)-CAP. The E-construction can be realized with ALL pairwise line
+    slopes in the open interval (0,1): compose children flattened so their
+    internal slopes lie in (0, 1/3), and place B so that every A->B line slope
+    lies in (1/2, 1) -- strictly above all internal slopes, satisfying
+    Theorem 2.5 condition (ii), while every pairwise slope of the union stays
+    < 1 in absolute value, satisfying the T_i slope condition.
+  * The clusters T_i sit on the arc of the unit circle from angle +pi/4 (i=0,
+    TOP-RIGHT) down to -pi/4 (i=n-2, BOTTOM-RIGHT), passing through angle 0
+    (i=(n-2)/2, RIGHTMOST). The chord between two circle points at angles
+    a > b has slope -cot((a+b)/2), hence EVERY line through points of two
+    different clusters has slope of magnitude >= 1 (up to the tiny "small copy"
+    perturbation), while every line through two points of one cluster has all
+    |slope| <= 1 (indeed in (0,1)). INTER-cluster lines are steep, INTRA-
+    cluster lines are shallow: this dichotomy is what forces (a),(b),(c):
+    a convex polygon's boundary can pass through a middle cluster only in a
+    single point (its entering/exiting edges are steep, its internal edges
+    shallow, breaking the monotone turning of the convex boundary), while at
+    the topmost used cluster k the polygon's boundary chain is a CAP (bounded
+    below by a single edge; caps in T_k have <= k+1 points since T_k has no
+    (k+2)-cap) and at the bottommost used cluster l it is a CUP (<= n-l-1
+    points since T_l has no (n-i)-cup).
+  * SIZES: |X| = 2^{n-2}: n=3 -> 2 points, n=4 -> 4 (triangle+interior), n=5
+    -> 8 (the Wikipedia "eight points, no convex pentagon" figure), n=6 -> 16
+    (the Wikipedia "sixteen points, no convex hexagon" figure), n=7 -> 32.
+
+COROLLARY (the statement under attack): f(n) >= 2^{n-2} + 1 for all n >= 3,
+and the Erdos-Szekeres conjecture f(n) = 2^{n-2}+1 is OPEN for n >= 7
+(exactly true for n<=6: f(3)=3, f(4)=5, f(5)=9, f(6)=17; first open value
+f(7), conjectured 65, currently 33 <= f(7) <= 127 per the classical bounds,
+2^{5}+1 = 65 conjectural, C(10,5)+1 = 253 ES35, Toth-Valtr C(9,4)+2 = 128.
+[W67-107D: compute C(2*7-5,7-3)+2 = C(9,4)+2 = 126+2 = 128; Suk's
+2^{n+o(n)} for large n only.])
+================================================================================

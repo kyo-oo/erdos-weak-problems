@@ -1,0 +1,7 @@
+{
+ "all_contained_4cup_or_4cap": true,
+ "full_dual_enumerations": 20,
+ "label": "EVIDENCE (randomized census, not exhaustive)",
+ "rejected_non_gp": 212,
+ "sets_checked": 10000
+}
