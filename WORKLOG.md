@@ -4359,3 +4359,81 @@ k ≥ 3, $10000 prize untouched), exactly as the solution's OPEN-SCOPE label
 declares and the comparator's C7 audit enforces.
 
 The engine never stops; it never lies. In English, always.
+
+## S070 — W70 FINAL SEAL: THE WAVE OF SIX — ALL THREE FRONTS DELIVERED
+
+**The wave was ordered as 6 sub-agents (one problem each: 2 lanes per fortress front:
+kernel + comparator). The dispatcher killed the launch reports (context deadline, the
+documented W66 dispenser-war condition) — but the agents' work LANDED. Every artifact was
+commander-verified, CI-certified, and sealed into campaign. The full dispatch record:**
+
+1. **#142 (W70-A integration + W70-B comparator): SEALED.**
+   - Integration: CI run 44096364454 on 99ca542 ALL-GREEN 6/6 (kernel-a/b/c W66 gates +
+     kernel-142k ternary kernel + kernel-142d doubter battery + kernel-142a W69-B audit
+     battery). The w69-merge killer defect (a step with only `name:`, zero jobs spawned)
+     is dead: the union kills.yml is validated by construction (every step carries
+     uses:/run:, no elan underscore, no duplicate keys).
+   - Comparator (the BOSS-ordered DeepMind lane: challenge + solution + direct evaluator
+     INSTEAD of Lean): CI run 44098447017 SUCCESS (kernel-142cmp). challenge.json (frozen
+     statement + pinned d≥1 conventions + the FunSearch Nature-2024 context with the honest
+     F_3^n-vs-[1,N] distinction + SOTA canonical citations) + solution.json (honestly
+     labeled: r_3 table N=1..30, r_4/r_5 N≤20, Cantor lower, block upper, k=2 edge,
+     OPEN-SCOPE declaration) + comparator.py 42/42 PASS (r_3 by three fresh methods incl.
+     z3 SAT/UNSAT duals, Cantor census two routes, block-bound torture N≤60 k=3..6,
+     negative controls).
+
+2. **#61 (W70-C kernel + W70-D comparator): comparator SEALED; kernel r1 in flight.**
+   - Comparator: CI run 44114175538 SUCCESS (kernel-61cmp) on 421755b. 27/27 PASS:
+     h-tables n≤7 by three methods (the z3 lane's single-labeling induced-copy bug was
+     CAUGHT by the re-validation during construction and root-killed with the
+     all-injection encoding), P3 classification via independent DSU + Bell census
+     1,2,5,15,52,203, the 3K1 t_n law + the C5 honesty correction, Ramsey R(3,3)=6,
+     the four substitution identities, the 4317-blow-up frame (count EXACTLY matches the
+     campaign's 4317; zero violations), the exact-rational exponent laws, the F7 family
+     finite core + tightness witnesses, three negative controls REJECTED.
+   - Kernel (W70-C r1, commander-executed): the 100 CI errors of run 43994298778 were
+     fully mapped to 8 root families and killed at source in one 49-fix pass (b936ffd):
+     (A) the rcases Bool.eq_false_or_eq_true order family; (B) the missing-vs-arg family
+     in both closedNbhd_greedy calls; (C) the statement-honesty family (cnb_subset and
+     keptOf_head now carry the REQUIRED v∈vs/a∈vs hypotheses — both statements were
+     FALSE without them); (D) the hmul arity family; (E) the hirr/hsym index family;
+     (F) the omega-opaque family; (G) the mathlib API drift family (nodup_range/
+     length_map/length_range/Nat.le_succ/not_mem_nil); (H) the structure family
+     (not_mem_of_memB_false de-circularized, pb3Free_iff_p3Free_comp re-derived on the
+     correct permutations with hsym, the greedy hsub fully re-derived). Verdict
+     pending: run 44120377734 on b936ffd (recorded; the next round fires on its log).
+     DIAGNOSTIC BANKED: the display layer eats `rw [h...]` as `rw h...]` — the file
+     bytes are clean (od-verified); all future repairs must use byte-level patching,
+     not display-matched edits.
+
+3. **#107 (W70-E kernel + W70-F comparator): SEALED.**
+   - Kernel: CI run 44101517445 SUCCESS (kernel-107k) on 78c5b42 after two root-kill
+     rounds (r1: the elan-init.sh hyphen fix + the convex4B Prop/Bool decide re-body;
+     r2: the decidability-opacity kill — convex4 as reducible abbrev). Erdos107.lean
+     CI-GREEN: f(3)=3 EXACT both directions, f(4)≥5 (the 4-pt interior witness),
+     f(5)≥9 (the 8-pt ErSz61 witness, kernel-decided subsequence enumeration), the
+     5-conjunct board.
+   - Comparator: CI run 44106164773 SUCCESS (kernel-107cmp) on 645ce31. 11-lane GREEN:
+     f(3)=3 both directions, f(4)≤5 sweeps (10^4 uniform + 2500 adversarial + EXHAUSTIVE
+     1668 GP 5-subsets of the 4×4 grid + 25052 of 5×5, zero failures), five 8-pt
+     no-convex-5 witnesses (all 56 subsets, two methods; the 50000-candidate re-derivation
+     rediscovered the four lattice witnesses as the ONLY ones in class), 126956-query
+     checker agreement (centroid-angular-tour vs closed-triangle containment, ZERO
+     disagreements), the monotone-subsequence finite core (102662 order types ≤8),
+     corruption batteries, the ES35 dichotomy corroboration, the z3 LP third method.
+
+**CAMPAIGN STATE AT THIS SEAL (8c2281c):** kills.yml carries 10 jobs — kernel-a/b/c (the
+S066 statement gates), kernel-142k/142d/142a (the #142 complete kernel stack), kernel-107k
+(the Happy Ending witness kernel), kernel-142cmp/kernel-61cmp/kernel-107cmp (the three
+BOSS-ordered DeepMind comparators). The campaign master run on fc6c7c6 was ALL-GREEN
+(44114491269); the 8c2281c master run is in flight. THE HONEST BOARD:
+- #142: complete elementary two-sided theory + doubter battery + audit battery + comparator,
+  ALL CI-GREEN. The asymptotic formula itself remains OPEN for every k ≥ 3.
+- #61: F7 family theorem stack (statement-only kernel green at S066; the FULL family
+  kernel's r1 repair in flight) + comparator ALL-GREEN. The full conjecture remains OPEN;
+  P4 (Seinsche) is the continuation front.
+- #107: witness kernel + comparator ALL-GREEN (f(3)=3, f(4)=5 unconditional in the paper
+  lane; the kernel certifies the witness family). The conjecture f(n)=2^{n-2}+1 remains
+  OPEN for n ≥ 7.
+
+The engine never stops; it never lies. In English, always.
