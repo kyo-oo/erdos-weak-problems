@@ -1,0 +1,30 @@
+name: GST Fermat Surface Cyclotomic Primitive Orbit Rank
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - research/computations/k3_cyclotomic_graph_orbit_rank.py
+      - .github/workflows/gst-k3-cyclotomic-graph-rank.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-cyclotomic:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Exact primitive graph orbit rank on regular surfaces, orders 2 through 66
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/computations/k3_cyclotomic_graph_orbit_rank.py | tee k3-cyclotomic-rank.log
+      - name: Archive exact rank evidence
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-k3-cyclotomic-orbit-rank
+          path: k3-cyclotomic-rank.log

@@ -1,0 +1,72 @@
+name: Limitless Live Repair
+
+on:
+  push:
+    branches:
+      - "sol/limitless-cosmology-bursts"
+    paths:
+      - ".github/workflows/limitless-repair-live.yml"
+      - "scripts/limitless_repair.py"
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v5
+        with:
+          ref: "sol/limitless-cosmology-bursts"
+          fetch-depth: 0
+      - name: Apply exact limitless repairs
+        run: |
+          set -euo pipefail
+          python3 scripts/limitless_repair.py
+          git diff --check
+          if grep -nE '\bsorry\b|sorryAx' \
+            GSTUniversalLefschetzCosmology.lean \
+            GSTGlobalPureHodgeCosmology.lean \
+            GSTInfiniteWorldClassification.lean \
+            GSTTransferBridgeV2.lean; then exit 1; fi
+      - name: Commit repaired source
+        run: |
+          set -euo pipefail
+          git config user.name "kyo-oo"
+          git config user.email "lordoftreasures7@gmail.com"
+          git add \
+            GSTUniversalLefschetzCosmology.lean \
+            GSTGlobalPureHodgeCosmology.lean \
+            GSTInfiniteWorldClassification.lean \
+            GSTTransferBridgeV2.lean
+          if git diff --cached --quiet; then
+            echo "No source repair diff to commit"
+          else
+            git commit -m "Repair final limitless cosmology compile obligations"
+            git push origin HEAD:sol/limitless-cosmology-bursts
+          fi
+      - name: Install Lean
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Compile repaired limitless modules
+        run: |
+          set -o pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build \
+            GSTUniversalLefschetzCosmology \
+            GSTGlobalPureHodgeCosmology \
+            GSTInfiniteWorldClassification \
+            GSTTransferBridgeV2 2>&1 | tee limitless-repair-build.log
+      - name: Upload limitless repair build log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: limitless-repair-build-log
+          path: limitless-repair-build.log
+          if-no-files-found: ignore

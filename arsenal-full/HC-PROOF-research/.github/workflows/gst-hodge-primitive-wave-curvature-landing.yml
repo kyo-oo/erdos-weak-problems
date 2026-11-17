@@ -1,0 +1,72 @@
+name: GST Hodge - Primitive Wave + Curvature Landing
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTHodgePrimitiveWaveCurvatureLanding.lean'
+      - '.github/workflows/gst-hodge-primitive-wave-curvature-landing.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-hodge-primitive-wave-curvature-landing
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Lean original-X wave and curvature residual theorem
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-wave-curvature-residual
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compiled GST corpus
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-wave-curvature-residual
+          restore-keys: |
+            hc-lean-incremental-Linux-
+      - name: Kernel compile exact wave/curvature residual theorems
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTPrimitiveWaveCurvatureLib GSTHodgePrimitiveWaveCurvatureLanding
+          if timeout 9900 lake build GSTHodgePrimitiveWaveCurvatureLanding > gst-primitive-wave-curvature.log 2>&1; then
+            echo "LEAN PASSED: GSTHodgePrimitiveWaveCurvatureLanding"
+          else
+            grep -nE 'error:|sorryAx|unknown constant|unknown identifier' gst-primitive-wave-curvature.log | tail -n 100 || true
+            tail -n 100 gst-primitive-wave-curvature.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-primitive-wave-curvature.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Upload compiler diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-primitive-wave-curvature-lean
+          path: gst-primitive-wave-curvature.log
+          if-no-files-found: warn

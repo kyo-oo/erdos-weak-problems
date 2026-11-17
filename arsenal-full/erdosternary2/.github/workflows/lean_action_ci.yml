@@ -1,0 +1,97 @@
+name: Lean Action CI
+
+on:
+  push:
+    branches: ['**']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install exact Lean RC2
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve dependencies
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Kernel-check direct affine classifier
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          lake build GSTFourPowerDirectExistence GSTCanonicalTailStateIso
+          for module in \
+            GSTFourPowerAffineOrbit \
+            GSTFourPowerAffineExponentPeel \
+            GSTFourPowerAffineBadState \
+            GSTFourPowerAffineChannelAutomaton \
+            GSTFourPowerAffineClassifierBridge \
+            GSTFourPowerAffinePeelClassifier
+          do
+            lake env lean -o ".lake/build/lib/lean/${module}.olean" "${module}.lean" 2>&1 | tee "${module}.log"
+            ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' "${module}.log"
+          done
+          echo DIRECT_AFFINE_CLASSIFIER_KERNEL_GREEN=1
+
+      - name: Legacy production surgery disabled
+        run: |
+          set -euo pipefail
+          echo 'LEAN_ACTION_CI_SURGERY_DISABLED=1'
+          echo 'This workflow is verification-only and must never mutate lakefile.toml or ErdosTernary2.lean.'
+
+      - name: Hard build
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build 2>&1 | tee hard-build.log
+          ! grep -E 'sorryAx|declaration uses .sorry.|unknown identifier|unknown module prefix|unsolved goals|error:' hard-build.log
+
+      - name: Exact V5 comparator
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          bash scripts/comparator.sh 2>&1 | tee comparator.log
+          grep -Fq 'Your solution is okay!' comparator.log
+          grep -Fq '=== COMPARATOR RESULT: PASS ===' comparator.log
+
+      - name: Kernel axiom audit
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat > MultiNukeAxiomAudit.lean <<'LEAN'
+          import ErdosTernary2
+          #print axioms gst_four_power_creation_master_inline
+          #print axioms gst_prefix_one_navigation_lift
+          #print axioms gst_power_two_wave_large
+          #print axioms erdos_ternary_2_universal
+          LEAN
+          lake env lean MultiNukeAxiomAudit.lean 2>&1 | tee axiom-audit.log
+          rm -f MultiNukeAxiomAudit.lean
+          ! grep -E 'sorryAx|declaration uses .sorry.|unknown identifier|unknown constant|error:' axiom-audit.log
+
+      - name: Assert CI is non-mutating
+        run: |
+          set -euo pipefail
+          if ! git diff --quiet -- ErdosTernary2.lean lakefile.toml; then
+            echo 'ERROR: CI attempted to mutate production files.'
+            git diff -- ErdosTernary2.lean lakefile.toml
+            exit 1
+          fi
+          echo CI_NON_MUTATING_CONFIRMED=1

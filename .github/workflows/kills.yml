@@ -1630,3 +1630,64 @@ jobs:
           grep -F "E61_FAMILY_GREEN" kernel61k.log
           grep -E "E61.(family_board|closedNbhd_greedy|k3_bound|p3_bound|kb3_bound|pb3_bound|tight_family|arsenal_bridge|E61_FAMILY_GREEN)' (does not depend on any axioms|depends on axioms)" kernel61k.log
           echo KERNEL61K_GREEN=1
+
+  gate-142-official:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Gate 142 OFFICIAL DeepMind comparator (S071/W72: fresh github.com/google-deepmind/funsearch @ cc53f27 + code_contests @ fa7a4f8 clones, challenge+solution, verbatim official evaluators — cap_set solve/is_cap_set/build_512_cap — NOT the legacy comparator script): official checks (512 greedy, 512 explicit, 1082 at n=9, the {0,1}^d Cantor bridge d=3..9) + solution checks (Behrend engine 8/8, independent constructions, the exact Corollary-B* finite inequality, z3 dual certificates, block bound, mono law) + negative controls (planted AP, corrupted official 512-cap REJECTED by official is_cap_set, corrupted r_3)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_ok=0
+          if python3 -m pip install --quiet --break-system-packages numpy z3-solver 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages numpy z3-solver 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet numpy z3-solver 2>/dev/null; then install_ok=1; fi
+          if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED"; exit 1; fi
+          python3 comparator-official/official_gate.py 142 2>&1 | tee gate142official.log
+          test "${PIPESTATUS[0]}" -eq 0
+          grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate142official.log
+          grep -F "YOUR SOLUTION IS REJECTED" gate142official.log && exit 1 || true
+          test "$(grep -c '\[PASS\]' gate142official.log)" -ge 14
+          test "$(grep -c '\[FAIL\]' gate142official.log)" -eq 0
+          echo GATE142OFFICIAL_GREEN=1
+
+  gate-61-official:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Gate 61 OFFICIAL DeepMind comparator (S071/W72: fresh funsearch clone, verbatim cyclic_graphs evaluator — notebook-flow asserts 367/81/324/1458/754 + per-cell priority rebinding + independence cross-checks): solution checks (family engine 10/10 — Seinsche perfectness form, F7 board, tightness, substitution receipts — + harmonic law + independence semantics agreement) + negative controls"
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_ok=0
+          if python3 -m pip install --quiet --break-system-packages numpy 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages numpy 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet numpy 2>/dev/null; then install_ok=1; fi
+          if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED"; exit 1; fi
+          python3 comparator-official/official_gate.py 61 2>&1 | tee gate61official.log
+          test "${PIPESTATUS[0]}" -eq 0
+          grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate61official.log
+          test "$(grep -c '\[PASS\]' gate61official.log)" -ge 10
+          test "$(grep -c '\[FAIL\]' gate61official.log)" -eq 0
+          echo GATE61OFFICIAL_GREEN=1
+
+  gate-107-official:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Gate 107 OFFICIAL DeepMind comparator (S071/W72: fresh funsearch clone, the official implementation/ Evaluator engine executing the solution program via _sample_to_program + analyse + ProgramsDatabase, official admissible_set data integrity): solution checks (ES engine 10/10 — MS, MS-TIGHT, CC, U-BINOM, witness family, E3-E4, E5 — + independent re-checks) + negative controls (broken program REJECTED by the official engine, planted convex pentagon, corrupted binomial)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_ok=0
+          if python3 -m pip install --quiet --break-system-packages numpy absl-py 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages numpy absl-py 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet numpy absl-py 2>/dev/null; then install_ok=1; fi
+          if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED"; exit 1; fi
+          python3 comparator-official/official_gate.py 107 2>&1 | tee gate107official.log
+          test "${PIPESTATUS[0]}" -eq 0
+          grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate107official.log
+          test "$(grep -c '\[PASS\]' gate107official.log)" -ge 7
+          test "$(grep -c '\[FAIL\]' gate107official.log)" -eq 0
+          echo GATE107OFFICIAL_GREEN=1

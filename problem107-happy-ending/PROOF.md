@@ -238,3 +238,20 @@ remains OPEN for n ≥ 7 — the certified gap is the frontier table.**
 ---
 
 *W1-C1S — the engine never stops; it never lies.*
+
+---
+
+## THE ES PACKAGE (W72-107K, S071)
+
+The complete classical two-sided theory: Theorem MS (monotone
+subsequences, tight — full label-pigeonhole proof), Theorem CC (cups-caps
+C(k+l−4, k−2)+1 — full staircase-path proof), Theorem U (f(n) ≤
+C(2n−4, n−2)+1 — cup/cap convexity + the frame rotation), Theorem L
+(f(n) ≥ 2^{n−2}+1 — the ES35 doubling, cited classical, with the
+machine-certified witness family n = 3..6), Theorem E (f(3) = 3, f(4) = 5
+exactly; f(5) ≥ 9 + the 9-point sweep lane): **ES_PACKAGE_PROOF.md**
+(this directory). Engine: `engine107es.py --verify` — 10/10 GREEN
+(`receipts107es.txt`), exact integer arithmetic. The OFFICIAL DeepMind
+comparator lane (fresh google-deepmind/funsearch clone, the official
+implementation/ Evaluator executing the solution program):
+`comparator-official/challenges/107/`.

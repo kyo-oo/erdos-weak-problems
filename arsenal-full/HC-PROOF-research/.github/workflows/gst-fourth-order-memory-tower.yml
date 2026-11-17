@@ -1,0 +1,62 @@
+name: GST Fold Fourth Order Memory Tower
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTFoldFourthOrderMemoryTower.lean'
+      - 'GSTFoldChainThirdOrderMemory.lean'
+      - 'GSTFoldMemoryTower.lean'
+      - 'GSTAllDegreeCurvatureMemory.lean'
+      - '.github/workflows/gst-fourth-order-memory-tower.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-fourth-order-memory-tower-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel-verify the fourth-order memory tower and the arbitrary-order unification
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTFoldFourthOrderMemoryTowerLib GSTFoldFourthOrderMemoryTower
+          if lake build GSTFoldFourthOrderMemoryTower > fourth-order-memory-tower.log 2>&1; then
+            echo "PASS GSTFoldFourthOrderMemoryTower"
+          else
+            grep -nE 'error:' fourth-order-memory-tower.log | tail -n 120 || true
+            tail -n 80 fourth-order-memory-tower.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" fourth-order-memory-tower.log; then
+            exit 1
+          fi
+          echo "LEAN GREEN: the Round 55 fourth-order memory tower and the arbitrary-order tower unification kernel-verified, zero sorry"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-fourth-order-memory-tower-log
+          path: fourth-order-memory-tower.log
+          if-no-files-found: warn

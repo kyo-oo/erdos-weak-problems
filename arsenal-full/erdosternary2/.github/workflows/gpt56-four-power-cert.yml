@@ -1,0 +1,100 @@
+name: GPT56 Four Power Navigation Cert
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - '.github/workflows/gpt56-four-power-cert.yml'
+      - 'GSTInfiniteFourPowerNavigation.lean'
+  workflow_dispatch:
+
+concurrency:
+  group: gpt56-four-power-cert-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+      - name: Pin source
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "SOURCE_HEAD=$(git rev-parse HEAD)"
+      - name: Install exact Lean RC2 and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Materialize navigation import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          ROOT = Path('GSTInfiniteFourPowerNavigation.lean')
+          BUILD = Path('.lake/build/lib/lean')
+          import_re = re.compile(r'^\s*import\s+(.+?)\s*$')
+          def local_path(module): return Path(*module.split('.')).with_suffix('.lean')
+          def imports_of(path):
+              out=[]
+              for raw in path.read_text(encoding='utf-8').splitlines():
+                  code=raw.split('--',1)[0].rstrip()
+                  m=import_re.match(code)
+                  if m: out.extend(m.group(1).split())
+              return out
+          order=[]; done=set(); temp=[]
+          def visit(module):
+              if module in done: return
+              path=local_path(module)
+              if not path.exists(): return
+              if module in temp: raise SystemExit('LOCAL_IMPORT_CYCLE='+' -> '.join(temp+[module]))
+              temp.append(module)
+              for dep in imports_of(path): visit(dep)
+              temp.pop(); done.add(module); order.append((module,path))
+          for module in imports_of(ROOT): visit(module)
+          print(f'NAV_IMPORT_CLOSURE_COUNT={len(order)}')
+          BUILD.mkdir(parents=True, exist_ok=True)
+          for module,path in order:
+              out=BUILD.joinpath(*module.split('.')).with_suffix('.olean')
+              out.parent.mkdir(parents=True, exist_ok=True)
+              if out.exists(): continue
+              print(f'=== compiling {module} ===', flush=True)
+              subprocess.run(['lake','env','lean','-o',str(out),str(path)],check=True)
+          print('NAV_IMPORT_CLOSURE_GREEN=1')
+          PY
+      - name: Compile independent four-power navigation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTInfiniteFourPowerNavigation.olean GSTInfiniteFourPowerNavigation.lean 2>&1 | tee four-power.log
+          echo 'FOUR_POWER_NAV_GREEN=1'
+      - name: Axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat > GPT56FourPowerAudit.lean <<'EOF'
+          import GSTInfiniteFourPowerNavigation
+          #print axioms GSTInfiniteFourPowerNavigation.power_three_step_collision
+          #print axioms GSTInfiniteFourPowerNavigation.four_power_happy_ge_three
+          #print axioms GSTInfiniteFourPowerNavigation.gst_four_power_navigation_universal
+          EOF
+          lake env lean GPT56FourPowerAudit.lean 2>&1 | tee four-power-axioms.log
+          if grep -Fq 'sorryAx' four-power-axioms.log; then
+            echo 'FORBIDDEN_SORRYAX_IN_FOUR_POWER_NAV=1'
+            exit 1
+          fi
+          echo 'FOUR_POWER_AXIOM_AUDIT_GREEN=1'

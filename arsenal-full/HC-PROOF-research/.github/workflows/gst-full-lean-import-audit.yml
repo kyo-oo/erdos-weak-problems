@@ -1,0 +1,65 @@
+name: GST Full Lean Import Dependency Audit
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - '.github/workflows/gst-full-lean-import-audit.yml'
+      - 'scripts/audit_lean_dependency_graph.py'
+      - 'scripts/gst_theorem_declaration_catalogue.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - name: Audit every local Lean file and entire import graph
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/audit_lean_dependency_graph.py
+          python3 scripts/gst_theorem_declaration_catalogue.py
+          python3 - <<'PY'
+          import json
+          x=json.load(open("lean-dependency-audit.json",encoding="utf8"))
+          m=x["modules"]
+          seeds=[p for p in m if any(k in p for k in ["CM","Zeta","NumberManipulation","OpenAI","HodgeConjecture"])]
+          closure=set()
+          def visit(p):
+              if p in closure:return
+              closure.add(p)
+              for dep in m[p]["imports"]:visit(dep)
+          for p in seeds:visit(p)
+          reverse={k:[] for k in m}
+          for p,rec in m.items():
+              for dep in rec["imports"]:reverse[dep].append(p)
+          sinks=[p for p in m if "CM" in p and not reverse[p]]
+          report={
+              "total_lean_files":len(m),
+              "selected_seed_modules":len(seeds),
+              "cm_zeta_dependency_closure":len(closure),
+              "closure_files":sorted(closure),
+              "unreferenced_cm_modules":sinks,
+              "missing_imports":x["local_missing_imports"],
+              "cycles":x["import_cycles"],
+              "entry_roots":x["registered_roots"],
+          }
+          with open("cm-nm-dependency-closure.json","w",encoding="utf8") as f:
+              json.dump(report,f,indent=2)
+          print("CM_NM_CLOSURE",json.dumps({k:v for k,v in report.items() if k not in ["closure_files","unreferenced_cm_modules"]}))
+          print("CM_UNUSED_COUNT",len(sinks))
+          PY
+      - name: Upload complete source import and CM research graph
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-full-source-dependency-report
+          path: |
+            lean-dependency-audit.json
+            lean-dependency-audit.md
+            cm-nm-dependency-closure.json
+            lean-declaration-catalogue.json
+          if-no-files-found: warn

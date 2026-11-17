@@ -1,0 +1,1 @@
+Out[1]= <|"coevalActsAsIdentity" -> {{1, 0}, {0, 1}}, "kernelInvariant" -> True, "kernelIdempotent" -> True, "kernelAction" -> {{0, 0}, {0, 1}}, "kernelTrace" -> 1, "nativePeriod" -> 0, "positiveResidualEnergy" -> b$83871, "signedDoubledEulerIndex" -> -b$83871, "signedConvolutionIdempotent" -> True, "curveDpairings" -> {0, 0, -2*g$83871}, "curveDsquare" -> -2*g$83871|>

@@ -1,0 +1,3546 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Original-World Primitive Source Attempt:
+Rational Deligne Fold Data, Actual Quillen--Gersten Residues,
+and the Exact Algebraic \(K\)-Birth Obstruction}
+\date{23 October 2026}
+\begin{document}\maketitle
+
+\section{Exact source and target}
+Fix an arbitrary connected smooth projective complex variety X,
+an integer p with $1\le p\le d=\dim X$, and a
+PRESCRIBED rational Hodge class
+\[
+ \alpha\in H^{2p}(X,\mathbb Q(p))\cap F^pH^{2p}(X,\mathbb C).
+\]
+Here the rational Tate twist includes the usual $(2\pi i)^p$
+normalization; it does not change the underlying rational vector-space
+claim. The actual requested output is
+\[
+ \boxed{Z_\alpha\in CH^p(X)_\mathbb Q,\qquad
+  \operatorname{cl}^{can}_X(Z_\alpha)=\alpha.}
+ \tag{1}
+\]
+GST's already-proved Hodge-preserving geometric dimensional folds and
+their algebraic Rees counterparts are taken as inputs,
+not retested and not dismissed as numerical experiments.
+The present attempt pursues a DIFFERENT route from further
+projective ranks and from fixed-bundle section mutations:
+construct the integral/rational descent object selected FROM alpha
+and apply the algebraic fold residue to its TRUE algebraic K-data.
+
+\section{A new alpha-selected geometric descent object, without a supplied cycle}
+Let $C_B^\bullet(X,\mathbb Q(p))$ be a rational Betti cochain model,
+$C^\bullet_{\mathrm{dR}}(X,\mathbb C)$ a de Rham model, and
+$F^pC^\bullet_{\mathrm{dR}}$ a filtered model computing Hodge $F^p$
+(for algebraic projective X, use finite Cech algebraic differential
+forms with the stupid Hodge filtration).
+Choose comparison quasi-isomorphisms into a common complex cochain model.
+The rational Deligne homotopy-pullback complex is
+\[
+ \boxed{
+ C^\bullet_{\mathcal D}(X,\mathbb Q(p))
+ =
+ \operatorname{Cone}\!\left[
+ C_B^\bullet(X,\mathbb Q(p))
+ \oplus F^p C^\bullet_{\mathrm{dR}}(X,\mathbb C)
+ \xrightarrow{\;\iota_B-\iota_{\mathrm{dR}}\;}
+ C^\bullet_{\mathrm{dR}}(X,\mathbb C)
+ \right][-1].
+ }                                                       \tag{2}
+\]
+Use the usual mapping-cone signs. In degree 2p a cycle is
+represented by a finite triple $(b,\omega,u)$ with
+\[
+ \boxed{
+ db=0,\qquad d\omega=0,\qquad
+ du=\iota_{\mathrm{dR}}\omega-\iota_B b .
+ }                                                       \tag{3}
+\]
+All maps and signs here are ordinary genuine cohomology
+comparison maps; no user-defined 'Hodge-to-Chow' source is inserted.
+
+\begin{theorem}[Universal actual alpha-selected rational Deligne descent]
+For EVERY prescribed rational Hodge class alpha on EVERY original
+smooth projective X and EVERY p, there is a finite triple
+\[
+ \boxed{\mathfrak d_\alpha=[b,\omega,u]
+  \in H^{2p}_{\mathcal D}(X,\mathbb Q(p))}
+                                                               \tag{4}
+\]
+of type (3), with the actual rational Betti projection
+equal to alpha. The set of possible such lifts is a torsor
+under the rational intermediate-Jacobian group
+\[
+ \boxed{
+ J^{2p-1}(X)_\mathbb Q=
+ \frac{H^{2p-1}(X,\mathbb C)}
+ {F^p H^{2p-1}(X,\mathbb C)+
+                       H^{2p-1}(X,\mathbb Q(p))}.
+ }                                                       \tag{5}
+\]
+There is an exact sequence
+\[
+ \boxed{
+ 0\longrightarrow J^{2p-1}(X)_\mathbb Q
+ \longrightarrow H^{2p}_{\mathcal D}(X,\mathbb Q(p))
+ \longrightarrow\operatorname{Hdg}^p(X)_\mathbb Q
+ \longrightarrow0 .
+ }                                                       \tag{6}
+\]
+For p=1, the integral version of the same construction is
+the usual holomorphic line-bundle exponential sequence:
+$H^2_{\mathcal D}(X,\mathbb Z(1))\cong\operatorname{Pic}(X)$,
+with projective GAGA providing algebraicity.
+For p>=2, (4) is a genuine higher geometric differential
+descent object but its existence does not alone construct
+an algebraic codimension-p Chow cycle.
+\end{theorem}
+\begin{proof}
+Take a rational Betti cocycle b representing alpha.
+Hodge purity gives an algebraic filtered Cech--de Rham
+closed cocycle omega representing the SAME class in complex
+de Rham cohomology. Their comparison difference is thus
+a coboundary in the common model, so solve du=omega-iota_B b.
+This constructs the finite triple (3) FROM alpha, without
+a cycle or K0 source in the input.
+The cone long exact sequence identifies the image as
+the intersection of rational Betti classes and F^p,
+and the kernel as exactly (5), giving (6).
+For p=1 the Deligne complex
+$\mathbb Z(1)\to\mathcal O_X$ is quasi-isomorphic
+to $\mathcal O_X^\times[-1]$ by the analytic exponential
+sequence; H^2 is the holomorphic Picard group.
+Projective GAGA identifies that Picard group
+with actual algebraic line bundles.
+\end{proof}
+
+\section{The actual algebraic K-source and its source-to-cycle output}
+Write $\mathcal K_p^Q$ for the Zariski sheaf of
+QUILLEN algebraic $K_p$ on smooth X.
+The genuine codimension filtration has an actual Gersten
+complex with initial and terminal terms
+\[
+ \boxed{
+ K_p(\mathbb C(X))
+ \xrightarrow{\partial_1}
+ \bigoplus_{x\in X^{(1)}} K_{p-1}(\kappa(x))
+ \longrightarrow\cdots\longrightarrow
+ \bigoplus_{x\in X^{(p)}}K_0(\kappa(x)),
+ }                                                       \tag{7}
+\]
+with terminal $K_0(\kappa(x))\cong\mathbb Z$,
+and all successive boundary composites zero.
+For smooth quasi-projective X the Bloch/Quillen formula is
+\[
+ \boxed{H^p_{\mathrm{Zar}}(X,\mathcal K_p^Q)
+                     \cong CH^p(X).}             \tag{8}
+\]
+This is an actual statement about algebraic cycles and
+rational equivalences, not merely complex Hodge forms.
+
+\begin{theorem}[Actual K-residue source returns an original-X cycle with a certified Hodge target]
+Let $z$ be any genuine codimension-p Quillen--Gersten
+cycle class from (7)--(8) with rational coefficients.
+Its true terminal residue cycle is
+\[
+ Z(z)=\sum_{x\in X^{(p)}} n_x[\overline{\{x\}}]
+       \in CH^p(X)_\mathbb Q,
+ \qquad n_x\in\mathbb Q .
+                                                               \tag{9}
+\]
+The genuine Deligne regulator and canonical cycle class
+commute in the diagram
+\[
+ \begin{array}{ccc}
+ H^p(X,\mathcal K_p^Q)_\mathbb Q
+  &\xrightarrow{\ \operatorname{reg}_{\mathcal D}\ }&
+             H_{\mathcal D}^{2p}(X,\mathbb Q(p))\\
+ \downarrow\cong &&\downarrow\\
+ CH^p(X)_\mathbb Q
+  &\xrightarrow{\ \mathrm{cl}^{can}_X\ }&
+             \operatorname{Hdg}^p(X)_\mathbb Q .
+ \end{array}                                             \tag{10}
+\]
+Consequently a genuinely CONSTRUCTED K-source z
+whose Deligne regulator projects to the
+prescribed rational class alpha gives the ACTUAL
+original-X cycle $Z(z)$ and exact canonical Betti
+identity $\mathrm{cl}^{can}_X(Z(z))=\alpha$.
+\end{theorem}
+\begin{proof}
+The Gersten complex computes sheaf K-cohomology
+on regular schemes. The degree-p cycles are finite
+formal sums of codimension-p subvarieties modulo the
+boundaries recording rational equivalence; this
+identifies (7)--(8).
+The algebraic K-theory cycle regulator is the
+usual canonical Deligne cycle class, whose
+projection into rational Betti cohomology is
+the genuine fundamental cycle class and commutes
+with proper cycle pushforward.
+The right vertical map of (10) is the actual
+Deligne-to-Hodge projection (6).
+Apply the commuting square to the constructed z.
+No inverse 'Hodge-to-Chow' map is presumed.
+\end{proof}
+
+\section{The dimensional fold is an ACTUAL residue in both geometry and K-theory}
+Let a smooth regular algebraic fold center of codimension c
+be cut locally by a regular ordered sequence
+$z_1,\ldots,z_c$.
+The exact GST Rees fold has polynomial equations
+$t u_j=z_j$ for all j.
+For every p>=1, with $p-1$ invertible algebraic units
+$u_1,\ldots,u_{p-1}$ on its log chart,
+the true Milnor algebraic K-symbol
+$\{t,u_1,\ldots,u_{p-1}\}$ has the algebraic
+$t$-valuation residue
+\[
+ \boxed{
+ \partial_t\{t,u_1,\ldots,u_{p-1}\}
+        =\{\bar u_1,\ldots,\bar u_{p-1}\}
+        \in K^M_{p-1}(\kappa(t)).
+ }                                                       \tag{11}
+\]
+Its actual differential logarithm obeys
+\[
+ \boxed{
+ \operatorname{Res}_{t=0}
+ (d\log t\wedge d\log u_1\wedge\cdots
+             \wedge d\log u_{p-1})
+ =d\log\bar u_1\wedge\cdots\wedge
+                   d\log\bar u_{p-1}.
+ }                                                       \tag{12}
+\]
+The agreement is exact, in every p.
+It is not necessary to call a de Rham 2p-form a K_p-symbol:
+the K-symbol differential has exterior degree p, and
+a p-fold Zariski Cech--de Rham degree shift is needed
+to contribute to the total Hodge degree 2p.
+
+\begin{lemma}[Exact source degree bookkeeping prevents a false algebraicity inference]
+A generic $K_p$-symbol generates a logarithmic
+degree-p differential form, not a global
+degree-2p differential form. In the codimension-p
+Gersten/Deligne regulator its coniveau/Cech degree
+provides the additional p degrees.
+Therefore an alpha-selected GLOBAL algebraic
+closed 2p-form on the GST affine incidence
+world cannot be turned into a genuine algebraic
+K_p-symbol merely by taking its wedge or by
+naming it an 'integral residue'.
+An ACTUAL K-Gersten cocycle and its terminal
+multiplicity data are needed for (10).
+\end{lemma}
+\begin{proof}
+$\bigwedge^p d\log$ has cohomological de Rham
+degree p by definition. The filtered Cech
+de Rham complex has total degree a+b;
+a=p,b=p gives total 2p, while a=0,b=2p
+is a different cocycle degree. The Gersten
+complex (7) places its terminal cycle in
+codimension and complex degree p.
+Identifying these two different cochain
+positions is not a valid degree-preserving
+chain map without constructed transition data.
+\end{proof}
+
+\section{The EXACT higher-Hodge obstruction as a quotient of genuine geometric data}
+Let $A^p(X)_\mathbb Q$ denote the genuine rational
+canonical Chow Betti image. Let
+$R^p_{\mathcal D}(X)$ be the actual image of
+the Deligne regulator (10).
+Then the Deligne exact sequence (6) and a direct
+quotient construction give the genuine exact identity
+\[
+ \boxed{
+ \frac{H_{\mathcal D}^{2p}(X,\mathbb Q(p))}
+ {R^p_{\mathcal D}(X)+J^{2p-1}(X)_\mathbb Q}
+ \ \cong\
+ \frac{\operatorname{Hdg}^p(X)_\mathbb Q}
+ {A^p(X)_\mathbb Q}.
+ }                                                       \tag{13}
+\]
+\begin{theorem}[Sharp source-birth theorem, original-X and any fold]
+For EVERY original X,p and prescribed Hodge alpha,
+the class of EVERY constructed rational Deligne
+lift $\mathfrak d_\alpha$ in the quotient (13)
+depends only on alpha and vanishes IF AND ONLY IF
+alpha has an ACTUAL original-X rational
+algebraic cycle representative.
+This quotient is unchanged on the inherited
+original-X factor under all proper blowup/projective
+dimension folds possessing actual Chow--Hodge retracts.
+Born exceptional classes supply additional
+algebraic directions from the center, but do not
+silently cancel an inherited nonzero quotient element.
+\end{theorem}
+\begin{proof}
+Use the elementary fact that for any surjective
+homomorphism $\pi:D\twoheadrightarrow H$
+with kernel J and any subgroup R of D,
+the induced map
+$D/(R+J)\to H/\pi(R)$ is an isomorphism.
+Take D=Deligne, H=Hodge, R=Deligne Chow image;
+then $\pi(R)=A^p(X)_\mathbb Q$, proving (13)
+and the vanishing criterion.
+The true blowup and projective bundle
+formulas hold for both Chow groups and
+Deligne cohomology under the natural Hodge-compatible
+realization; their original-X pullback and proper
+pushforward constitute an explicit split retract.
+The Deligne-to-Hodge and Chow cycle maps
+commute with these true operations, so an
+original factor cannot be killed by a class
+in a complementary exceptional summand.
+\end{proof}
+
+\section{A decisive algebraic countertest to fixed-term higher-fold differential constructions}
+The filtered cocycle $\omega_\alpha$ could be used to
+vary differential operators or algebraic sections of
+a fixed graded bundle across the nonlinear GST fold.
+That CANNOT, by itself, alter the algebraic K0 class.
+
+\begin{theorem}[Any alpha-dependent perfect differential with FIXED bundle terms leaves algebraic K0 unchanged]
+Let E^a, for a in a finite interval, be ACTUAL
+algebraic vector bundles on X that are all
+INDEPENDENT of prescribed alpha. Let
+$d^a_\alpha:E^a\to E^{a+1}$
+be ANY alpha-dependent algebraic differentials
+with $d^{a+1}_\alpha d^a_\alpha=0$.
+Then every resulting actual strictly perfect complex
+has the SAME class in algebraic K0:
+\[
+ \boxed{
+ [E^\bullet_\alpha]
+    =\sum_a(-1)^a[E^a]\in K_0^{alg}(X),
+ \qquad
+ \operatorname{ch}_p^{CH}([E^\bullet_\alpha])
+    =\sum_a(-1)^a\operatorname{ch}_p^{CH}(E^a).
+ }                                                       \tag{14}
+\]
+In particular no choice of alpha-dependent
+differential or changes to only its matrix coefficients
+can make its TOTAL algebraic K0 source image vary
+with alpha while the bundle terms are held fixed.
+This includes derived graph/zero-section folds
+where the localized total Chern/K class
+is eventually pushed forward to original X.
+The theorem does not exclude truly new
+alpha-dependent bundle classes: it identifies
+the exact source-generation level that has
+to change for that route to work.
+\end{theorem}
+\begin{proof}
+The Grothendieck K0 class of a strictly perfect
+complex is the alternating sum of its constituent
+bundle classes, independent of its differential.
+Applying the additive algebraic Chern character
+in the true rational Chow ring proves (14).
+For a derived local zero-locus with fixed ambient
+bundle, proper pushforward of its virtual
+fundamental K-theory class is governed by the
+same fixed alternating class; only additional
+algebraic K0 terms could change the result.
+\end{proof}
+
+\section{Direct countercheck: algebraic de Rham need NOT be generated by logs of units}
+Even at differential degree one, the tempting
+universal primitive-to-algebraic-symbol step is false.
+
+\begin{theorem}[A smooth affine actual counterexample to dlog spanning]
+Let E be an ACTUAL smooth projective complex
+elliptic curve and P a point.
+On the smooth affine curve $U=E\setminus\{P\}$,
+\[
+ \boxed{
+ \Gamma(U,\mathcal O_U)^\times=\mathbb C^\times,
+ \qquad H^1_{\mathrm{dR}}(U,\mathbb C)
+                      \cong\mathbb C^2\ne0.
+ }                                                       \tag{15}
+\]
+Thus all logarithmic differentials
+$d\log f$ of REGULAR ALGEBRAIC UNITS on U vanish,
+while genuinely nonzero global algebraic de Rham
+classes exist. A global regular differential
+cannot be universally reconstructed from
+$d\log$ of regular units; allowing rational
+functions with poles introduces actual divisor
+boundary data that must be tracked rather than
+assumed to cancel.
+\end{theorem}
+\begin{proof}
+A nowhere-zero regular function on U can have
+zeros and poles only at P on the compact E.
+Its principal divisor has degree zero, forcing
+the coefficient of P to be zero. Hence it is
+a nowhere-zero regular function on the
+compact projective curve E and therefore
+constant. Its logarithmic differential is zero.
+The cohomology long exact sequence for removal
+of one point, or the topological first Betti
+number of a once-punctured complex torus,
+gives dimension two for H^1(U,C).
+Algebraic de Rham comparison for the smooth
+affine U identifies this group with
+$H^1_{\mathrm{dR}}(U)$.
+\end{proof}
+
+\section{ALL-DIMENSION true countertest: algebraic differential source is larger than regular-symbol logarithms}
+The preceding punctured-elliptic obstruction is NOT
+a low-dimensional accident. It scales to any
+fold dimension, and precisely tests the naive
+claim that increasing the dimensional fold can
+turn all algebraic differential source data into
+wedges of logarithms of GLOBAL regular units.
+
+\begin{theorem}[For every p, a genuine p-dimensional affine world has rich de Rham cohomology but NO nonzero global-unit logarithmic p-source]
+Let E be ANY smooth projective complex elliptic
+curve, fix a point P, put U=E\setminus\{P\},
+and for every integer p>=1 set
+\[
+ \boxed{U_p=\underbrace{U\times\cdots\times U}_{p\text{ factors}}.}
+                                                               \tag{16}
+\]
+Then $U_p$ is an ACTUAL smooth affine algebraic
+complex p-fold and
+\[
+ \boxed{
+ \Gamma(U_p,\mathcal O_{U_p})^\times=\mathbb C^\times,
+ \quad
+ \dim_{\mathbb C}H_{\mathrm{dR}}^p(U_p)=2^p,
+ \quad
+ \operatorname{span}\{
+ d\log f_1\wedge\cdots\wedge d\log f_p:
+     f_i\in\mathcal O(U_p)^\times\}=0.
+ }                                                     \tag{17}
+\]
+In fact the Kunneth component
+$\bigotimes_{i=1}^p H_{\mathrm{dR}}^1(U)$
+has dimension EXACTLY $2^p$
+and equals $H_{\mathrm{dR}}^p(U_p)$.
+Thus in every dimension a nontrivial
+algebraic de Rham source can be invisible to
+the subalgebra generated by differential
+logarithms of globally REGULAR units.
+
+This result does NOT prohibit proper
+Quillen Gersten residues with rational
+functions, since poles on codimension-one
+strata and their cancellations carry
+additional local algebraic data.
+It excludes only the shortcut that tries to
+construct every target's algebraic K-cycle
+from global regular units without any
+Gersten boundaries.
+\end{theorem}
+\begin{proof}
+The product of affine smooth varieties is
+affine and smooth, proving the first claim.
+Let $f\in\Gamma(U_p,\mathcal O)^\times$.
+Hold p-1 coordinates fixed at arbitrary
+complex points. Its restriction to the
+remaining factor U is an ACTUAL regular
+algebraic unit, therefore CONSTANT by
+the one-factor theorem (15). This holds
+independently for each coordinate and for
+every choice of the other coordinates.
+Hence f is constant on the complex points
+of the irreducible reduced variety U_p,
+and therefore is a scalar in the coordinate
+ring. Its logarithmic differential vanishes,
+proving the third identity.
+The algebraic de Rham Kunneth theorem
+identifies cohomology of the product with
+the graded tensor product of the
+factor cohomologies. In degree p its
+component obtained by taking degree one
+from every factor is precisely
+$(H^1_{\mathrm{dR}}(U))^{\otimes p}$.
+The previous elliptic computation gives
+$\dim H^1_{\mathrm{dR}}(U)=2$, so the
+tensor component has dimension $2^p$.
+Each factor U is an affine smooth curve,
+so its de Rham cohomology vanishes in
+degrees greater than one. To obtain total
+degree p from exactly p factors, EVERY
+factor must contribute degree one.
+The displayed tensor component is therefore
+the ENTIRE degree-p cohomology of U_p,
+proving the exact equality in (17).
+\end{proof}
+
+\section{A POSITIVE spectral fold construction: geometry and algebra from the SAME matrix}
+The countertests above exclude fixed-complex
+differentials and global dlog units as universal
+higher-primitive sources. They do NOT say an
+algebraic fold cannot create a genuinely
+nontrivial projective module. In fact the
+fold itself supplies a useful spectral
+construction, expressed by one equation.
+
+\begin{theorem}[ALL-RANK spectral algebraic fold involution and exact Chern--Weil residue]
+Let J be ANY smooth affine algebraic
+complex GST fold, let R=Gamma(J,O_J),
+and let A be an ACTUAL algebraic
+m-by-m matrix satisfying
+\[
+ \boxed{A^2=I_m.}                                       \tag{18}
+\]
+Then its spectral matrix
+\[
+ \boxed{P_A=\tfrac12(I_m+A)}
+                                                               \tag{19}
+\]
+is a genuine REGULAR ALGEBRAIC
+idempotent; $\operatorname{im}P_A$
+is an honest finite projective
+algebraic R-module, not a
+topological or analytic placeholder.
+For EVERY integer p>=1 its
+actual algebraic Chern--Weil
+form is
+\[
+ \boxed{
+ \operatorname{ch}^{dR}_p(P_A)
+ =\frac1{2^{2p+1}p!}
+       \operatorname{Tr}
+              \left(A(dA)^{\wedge 2p}\right)
+       \in\Omega_{\mathrm{alg}}^{2p}(J),
+ }                                                     \tag{20}
+\]
+which is CLOSED and represents
+the actual rational algebraic Chern
+character of the spectral eigenbundle
+under algebraic de Rham comparison.
+The entire geometric source and its
+algebraic characteristic form
+are thus generated by the SAME
+polynomial fold equation $A^2=I$.
+\end{theorem}
+\begin{proof}
+Equation (18) gives
+$(I+A)^2=2(I+A)$ and
+thus $P_A^2=P_A$.
+Differentiate $A^2=I$ to obtain
+$A\,dA+dA\,A=0$. Since
+$dP_A=(dA)/2$,
+\[
+ \frac1{p!}\operatorname{Tr}
+   (P_A(dP_A)^{2p})
+ =\frac1{2^{2p+1}p!}
+     \operatorname{Tr}((I+A)(dA)^{2p}).
+\]
+For any matrix B of
+anticommuting exterior one-form
+entries, graded trace cyclicity
+gives
+$\operatorname{Tr}(B^{2p})
+=-\operatorname{Tr}(B^{2p})=0$,
+so the I term disappears,
+yielding exactly (20).
+The usual Chern--Weil
+connection induced by a
+regular idempotent is an
+ALGEBRAIC Grassmann connection;
+its curvature is
+$P_A(dP_A)^2P_A$,
+and its Chern character
+forms are closed and
+represent the true algebraic
+de Rham image of
+$\operatorname{ch}^{CH}(P_A)$.
+Alternatively differentiating
+(20) gives
+$\operatorname{Tr}((dA)^{2p+1})$;
+conjugation by A acts by
+minus one on this odd
+power, so its trace is
+zero. This proves closedness
+directly from the SAME
+fold relation.
+\end{proof}
+
+\begin{theorem}[TRUE Jouanolou P1 fold: its spectral algebraic curvature IS its geometric symplectic residue]
+Consider the actual GST
+incidence Jouanolou fold
+$J_{\mathbb P^1}
+=\mathbb P^1\times\mathbb P^1
+ \setminus\Delta$
+with projection to the first
+factor $q:J_{\mathbb P^1}\to\mathbb P^1$.
+It is isomorphic to the
+smooth affine quadric
+\[
+ \boxed{
+ Q=\operatorname{Spec}
+ \frac{\mathbb C[x,y,z]}
+      {(xy+z^2-1)}
+ }                                                     \tag{21}
+\]
+by sending an ordered pair
+of distinct lines $\ell_+,\ell_-$
+in $\mathbb C^2$ to the
+trace-zero algebraic involution
+A with respective eigenvalues
++1,-1:
+\[
+ \boxed{
+ A=\begin{pmatrix}z&x\\y&-z\end{pmatrix},
+ \quad A^2=I,\qquad
+ P=\frac12
+   \begin{pmatrix}1+z&x\\y&1-z\end{pmatrix}.
+ }                                                     \tag{22}
+\]
+The algebraic eigenbundle im P is
+EXACTLY $q^*\mathcal O_{\mathbb P^1}(-1)$.
+The regular holomorphic algebraic
+symplectic form
+\[
+ \boxed{
+ \Omega=\operatorname{Res}_{Q}
+  \frac{dx\wedge dy\wedge dz}
+       {xy+z^2-1},
+ \qquad
+ \Omega|_{z\ne0}
+     =\frac{dx\wedge dy}{2z}
+ }                                                     \tag{23}
+\]
+is NONZERO in algebraic de Rham
+cohomology and is everywhere
+nondegenerate. The SAME spectral
+projector satisfies the exact
+form identity
+\[
+ \boxed{
+ \operatorname{Tr}(P\,dP\wedge dP)
+        =\frac{dx\wedge dy}{4z}
+        =\frac12\Omega
+       \quad\text{on }z\ne0,
+ }                                                     \tag{24}
+\]
+hence globally as algebraic
+forms on Q.
+Its normalized Betti period
+over the real oriented
+two-sphere is
+\[
+ \boxed{
+ \frac1{2\pi i}
+       \int_{S^2}\operatorname{Tr}
+               (P\,dP\wedge dP)=-1.
+ }                                                     \tag{25}
+\]
+Thus the folded algebraic
+spectral projector CONSTRUCTS a
+genuine nontrivial Chern/Chow
+class from exactly the SAME
+fold geometry, not an external
+cycle-class selector.
+
+However the other tempting
+source, the contraction kernel
+of the alpha-selected
+differential form,
+$\ker(\iota_{\Omega}:T_Q\to\Omega_Q^1)$,
+is ZERO, since Omega is
+symplectic. Therefore the
+construction must use the
+nontrivial ALGEBRAIC
+eigenbundle P, not the
+kernel of the form:
+the latter would miss even
+this already-algebraic
+nonzero divisor class.
+\end{theorem}
+\begin{proof}
+Distinct one-dimensional
+subspaces of C2 are
+complementary. Their
+direct-sum decomposition
+determines the regular
+projection onto the
+first along the second,
+and the involution
+A=2P-I. Conversely
+A^2=I, tr A=0 and
+eigenvalues +/-1
+supply the two distinct
+eigenlines via
+the algebraic projectors
+$(I\pm A)/2$.
+Writing out a 2-by-2
+traceless matrix shows
+$A^2=(xy+z^2)I$,
+giving (21)--(22).
+The image P is the
+tautological line over
+the plus-eigenline,
+hence q*O(-1).
+The Poincare residue
+in (23) is nowhere
+vanishing on a smooth
+affine hypersurface of
+complex dimension two,
+so its contraction
+gives an isomorphism
+$T_Q\simeq\Omega_Q^1$.
+
+For the curvature,
+on z!=0 use
+$dz=-(y\,dx+x\,dy)/(2z)$.
+Substituting this
+differential relation
+into the actual
+matrix expression
+$\operatorname{Tr}
+(P\,dP\wedge dP)$
+and reducing
+$xy+z^2=1$
+gives exactly
+$dx\wedge dy/(4z)$.
+For the period set
+$x=X+iY,\ y=X-iY,\ z=Z$.
+The REAL locus
+$X^2+Y^2+Z^2=1$
+is a compact oriented
+2-sphere contained in Q.
+There
+$dx\wedge dy=-2i\,dX\wedge dY$,
+so the spectral
+curvature form restricts
+to $(-i/2)dX\wedge dY/Z$.
+The area form on
+the unit sphere equals
+$dX\wedge dY/Z$
+where Z!=0, with
+integral 4pi. Hence
+the integral is -2pi i,
+proving (25) and
+the nontriviality
+of the de Rham
+curvature class.
+This matches the
+Chern number -1 of
+$q^*O(-1)$.
+\end{proof}
+
+\begin{corollary}[The same GST fold preserves Hodge type even when an algebraic representative changes DIFFERENTIAL degree]
+For the genuine affine P1 fold
+$Q=P^1\times P^1\setminus\Delta$ above,
+\[
+ \boxed{
+ H^2(Q,\mathbb Q)
+    \cong H^2(P^1,\mathbb Q)
+    \cong\mathbb Q(-1)
+ \quad\text{as rational MIXED Hodge structures},
+ \qquad F^2_{\mathrm{MHS}}H^2(Q,\mathbb C)=0.
+ }                                                     \tag{26}
+\]
+Yet the GLOBAL ALGEBRAIC HOLOMORPHIC
+two-form Omega constructed in (23)
+has a NONZERO de Rham cohomology class,
+as witnessed by the exact
+nonzero normalized Chern period (25).
+
+These facts are compatible:
+on the smooth projective compactification
+$\bar Q=P^1\times P^1$
+the missing diagonal D has
+divisor class $(1,1)$.
+Its canonical bundle is
+$K_{\bar Q}=O(-2,-2)$.
+The algebraic symplectic
+form on Q extends as a
+MEROMORPHIC form with
+precisely a DOUBLE pole
+along D:
+\[
+ \boxed{
+ K_{\bar Q}(2D)\cong O,\qquad
+ H^0(\bar Q,K_{\bar Q}(D))
+      =H^0(\bar Q,O(-1,-1))=0.
+ }                                                     \tag{27}
+\]
+The true Deligne mixed-Hodge filtration
+on open Q is computed using
+the LOGARITHMIC compactification
+complex, not the naive exterior
+degree of all regular algebraic
+forms on Q. In particular,
+Omega is not a log two-form
+with only simple poles and
+does not give a class in
+$F^2_{\mathrm{MHS}}H^2(Q)$.
+
+This is an EXACT mathematical
+explanation of how the
+GST dimensional fold
+preserves its original
+Hodge (1,1) class while
+representing that class
+on the affine fold by
+a regular algebraic
+holomorphic two-form.
+It is not a contradiction,
+a loss of Hodge structure,
+or an implication that
+every higher rational
+Hodge class is algebraic.
+\end{corollary}
+\begin{proof}
+The affine morphism
+$q:Q\to P^1$ has Zariski-local
+affine-line fibers and
+induces an isomorphism
+on rational cohomology
+compatible with Deligne
+mixed Hodge structures.
+$H^2(P^1)$ is one-dimensional
+pure Tate (1,1), proving
+the first statement.
+The compactification
+and canonical bundle
+formulas are standard:
+$D\sim(1,1)$ and
+$K_{\bar Q}\sim(-2,-2)$.
+Since Omega is a
+nowhere-vanishing regular
+two-form on Q,
+its rational extension
+is a meromorphic
+canonical section
+on the projective
+compactification.
+There is a nonzero
+section of
+$K_{\bar Q}(2D)$,
+whereas there is
+NONE of $K_{\bar Q}(D)$;
+the extension
+necessarily has
+pole order exactly two.
+For a smooth normal-crossings
+compactification, the
+Hodge filtration of the
+open variety is
+computed by the
+logarithmic de Rham
+complex. Its degree-two
+$F^2$ piece comes
+from global log two-forms,
+which are sections of
+$K_{\bar Q}(D)$ and
+vanish here.
+Finally the explicit
+nonzero period in (25)
+proves that Omega has
+nonzero ALGEBRAIC
+de Rham cohomology
+even though its
+naive differential
+degree two does
+not equal the actual
+mixed Hodge type.
+\end{proof}
+
+\begin{remark}[One genuinely different continuation for arbitrary higher primitive alpha]
+The same fold-to-algebra mechanism
+is now explicit:
+$A^2=I\mapsto P=(I+A)/2
+\mapsto \operatorname{ch}^{CH}_p(P)$,
+with the precise differential
+curvature (20).
+For arbitrary original X
+and higher primitive alpha,
+one would have to CONSTRUCT
+an alpha-dependent ACTUAL
+algebraic involution A
+on the genuine affine GST
+world whose characteristic
+form has the prescribed
+rational Betti period.
+The existing arbitrary-alpha
+Deligne cocycle (4)
+does not automatically
+select such a finite
+algebraic involution.
+Thus (18)--(25)
+provide a positive
+mathematical mechanism
+and an exact first
+source-generation example,
+without asserting
+a nonexistent
+universal spectral
+solution.
+\end{remark}
+
+
+\section{Spectral-fold finite-difference divisor-source theorem: explicit all-original-$X$ algebraization}
+The simultaneous geometric--algebraic principle has a further exact
+\emph{target-dependent} application, with no supplied codimension-$p$
+cycle. Unlike an arbitrary closed algebraic differential, every rational
+divisor Hodge class has a genuine line-bundle source by Lefschetz $(1,1)$.
+A finite-difference construction turns precisely this input into
+a higher-codimension algebraic source using the \emph{same} affine
+Jouanolou fold and the algebraic involution of (18)--(20).
+
+\begin{theorem}[All $X$, all $p$: finite spectral involutions representing every divisor-generated Hodge target]
+Let $X$ be any smooth projective complex variety and $p\ge1$.
+Fix rational divisor Hodge classes
+$\beta_i\in H^2(X,\mathbb Q)\cap H^{1,1}(X)$, $1\le i\le p$, and
+prescribe $\alpha=\beta_1\cup\cdots\cup\beta_p$.
+Choose genuine algebraic line bundles $M_i$ and positive integers
+$m_i$ with $\mathrm{cl}^{can}(c_1(M_i))=m_i\beta_i$,
+which exist by the integral Lefschetz $(1,1)$ theorem after clearing
+denominators. Let $q:J\to X$ be an ACTUAL affine Jouanolou
+incidence bundle and $R=\Gamma(J,\mathcal O_J)$.
+For each subset $S\subseteq\{1,\ldots,p\}$, set
+$L_S=\bigotimes_{i\in S}q^*M_i$ ($L_{\varnothing}=\mathcal O_J$).
+Its finite projective $R$-module of global sections is the image
+of an ACTUAL finite regular algebraic idempotent $P_S$; hence
+$A_S=2P_S-I$ is an ACTUAL regular algebraic involution
+$A_S^2=I$ on precisely the same geometric fold. The true
+original-$X$ rational Chow class
+\[
+ \boxed{\displaystyle
+ Z_\alpha=\frac{1}{\prod_{i=1}^p m_i}\,
+    (q^*)^{-1}
+    \left(\sum_{S\subseteq\{1,\ldots,p\}}
+      (-1)^{p-|S|}\,
+      \operatorname{ch}^{CH}_p(\operatorname{im}P_S)\right)
+     \in CH^p(X)_{\mathbb Q}}
+                                                               \tag{28}
+\]
+is well defined by affine-bundle homotopy invariance
+$q^*:CH^p(X)\xrightarrow{\sim}CH^p(J)$
+and satisfies the exact canonical Betti equality
+\[
+ \boxed{\operatorname{cl}^{can}_X(Z_\alpha)=
+                     \beta_1\cup\cdots\cup\beta_p=\alpha.}     \tag{29}
+\]
+Moreover the spectral involutions supply the same class via the
+\emph{actual closed algebraic differential} forms
+\[
+ \operatorname{ch}^{dR}_p(P_S)
+  =\frac{1}{2^{2p+1}p!}
+    \operatorname{Tr}(A_S(dA_S)^{2p}),                         \tag{30}
+\]
+using the algebraic de Rham Chern-character convention of (20).
+The construction extends by rational linearity to every prescribed
+Hodge class in the degree-$2p$ part of the rational divisor-generated
+subalgebra of $H^*(X,\mathbb Q)$.
+\end{theorem}
+\begin{proof}
+The affine Jouanolou incidence bundle is Zariski-locally an
+affine-space bundle, so its pullback is an isomorphism on the
+actual Chow groups. As $J$ is smooth affine, each algebraic line
+bundle $L_S$ corresponds to a finite projective module over $R$.
+Choose a finite free surjection $\pi_S:R^{N_S}\twoheadrightarrow L_S$
+and its projective-module splitting
+$\iota_S:L_S\hookrightarrow R^{N_S}$ with
+$\pi_S\iota_S=1$. The regular matrix
+$P_S=\iota_S\pi_S$ satisfies $P_S^2=P_S$ and has
+image exactly $L_S$. Its involution $A_S=2P_S-I$
+and the differential formula (30) follow directly from (18)--(20).
+In particular the spectral matrices are constructed from the
+line bundles determined by the prescribed $\beta_i$, not chosen
+by postulating a codimension-$p$ representative of $\alpha$.
+
+Write $x_i=c_1^{CH}(M_i)$, so
+$\operatorname{ch}^{CH}(L_S)
+ =\exp(\sum_{i\in S}q^*x_i)$ and
+\[
+ \operatorname{ch}^{CH}_p(L_S)
+   =\frac1{p!}\left(\sum_{i\in S}q^*x_i\right)^p.
+\]
+In the signed sum over subsets, every degree-$p$ monomial
+missing some index $i$ cancels under the involution toggling
+whether $i$ belongs to $S$.
+The ONLY surviving monomial uses every one of the $p$
+different indices exactly once; there are $p!$ permutations.
+Thus the exact all-rank polarization identity is
+\[
+ \boxed{\displaystyle
+ \sum_{S\subseteq\{1,\ldots,p\}}
+   (-1)^{p-|S|}
+    \frac{(\sum_{i\in S}q^*x_i)^p}{p!}
+      =q^*x_1\cdots q^*x_p.}                                \tag{31}
+\]
+Equation (28) therefore gives the true CHOW equality
+$Z_\alpha=(x_1\cdots x_p)/\prod_i m_i$, and its
+canonical Betti class is exactly (29).
+No Hodge-to-Chow input of codimension $p$ was supplied.
+The algebraic idempotent's Chern character and its closed
+Grassmann-connection differential representative agree by
+the ordinary algebraic Chern--Weil comparison, establishing (30).
+For finite rational linear combinations, apply the construction
+to each decomposable term and add their genuine Chow outputs.
+\end{proof}
+
+\begin{corollary}[Same-fold spectral sources cover every Hodge curve class on every original $X$]
+Let $X$ have dimension $d\ge2$ and choose a very ample
+$h=c_1(H)$. Every rational $(d-1,d-1)$ class
+$\alpha\in H^{2d-2}(X,\mathbb Q)$ equals
+$h^{d-2}\beta$ for a rational divisor Hodge class
+$\beta$, by rational Hard Lefschetz and preservation of Hodge
+type. Apply (28) with $p=d-1$, taking $d-2$ factors
+equal to $h$ and the remaining factor equal to $\beta$.
+The resulting \emph{actual finite algebraic spectral involutions}
+on the SAME affine GST fold return an original-$X$
+rational Chow curve cycle with canonical Betti class $\alpha$.
+Together with divisors and zero-/top-degree cycle classes,
+this specializes to the entire rational Hodge statement in
+dimensions at most three. This is an exact unconditional
+universal-$X$ source construction in the stated degrees,
+not an assumption that higher primitive classes factor into divisors.
+\end{corollary}
+
+\begin{remark}[Precise non-divisor interface with the October 22 causal source]
+The nonlinear anti-deck construction on the smooth quadric
+fourfold supplies an actual primitive codimension-two Chow source
+outside the divisor-generated middle subspace.
+Such a separately constructed genuine Chow source can also be
+represented in rational algebraic $K_0$ and by finite spectral
+involutions on its affine Jouanolou fold, since $X$ is smooth
+and $J$ is affine. This is a legitimate \emph{extension of the
+available source family}, not a claim that (28) turns arbitrary
+higher primitive rational Hodge inputs into divisor products.
+\end{remark}
+
+
+
+\section{Every prescribed rational Hodge target has a finite holomorphic spectral-fold lift}
+The last theorem algebraizes every divisor-generated class with actual
+REGULAR polynomial/algebraic matrix entries. A second, genuinely all-target
+result can be established without pretending that holomorphic matrices on
+the affine fold are necessarily REGULAR ALGEBRAIC matrices.
+
+\begin{theorem}[Unconditional arbitrary-$X$, arbitrary-$p$, prescribed-$\alpha$ HOLomorphic spectral involution birth]
+Let $X$ be ANY smooth projective complex variety,
+$p\ge1$, and
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$
+be prescribed. Let $q:J\to X$ be the true
+algebraic Jouanolou affine-space bundle.
+There exist a positive integer $m$ and
+two finite matrices $A_+,A_-$ with entries in
+the ring of global \emph{holomorphic} functions
+$\mathcal O_{\mathrm{hol}}(J^{an})$ such that
+\[
+ \boxed{A_\pm^2=I,\qquad
+  \left[\frac{1}{m}\left(
+    \mathrm{ch}^{an}_p(\operatorname{im}(I+A_+)/2)
+   -\mathrm{ch}^{an}_p(\operatorname{im}(I+A_-)/2)
+  \right)\right]=q^*\alpha\in H^{2p}(J,\mathbb Q).}       \tag{32}
+\]
+In particular all original rational Hodge targets admit actual
+TARGET-DEPENDENT \emph{finite holomorphic spectral idempotents}
+on the SAME true affine algebraic fold geometry.
+Their closed holomorphic Chern--Weil forms are explicitly
+\[
+ \boxed{\displaystyle
+ \frac{1}{m(2\pi i)^p\,2^{2p+1}p!}
+ \left[
+   \operatorname{Tr}(A_+(dA_+)^{2p})
+  -\operatorname{Tr}(A_-(dA_-)^{2p})
+ \right],}                                               \tag{33}
+\]
+with the conventional analytic Betti normalization.
+This statement asserts existence of HOLOMORPHIC matrices,
+not regular algebraic ones; it makes no algebraic-Chow
+source assumption.
+\end{theorem}
+\begin{proof}
+A smooth projective complex variety has the homotopy type of a
+finite CW complex, and its rational topological Chern character
+is an isomorphism
+$K^0_{\mathrm{top}}(X)\otimes\mathbb Q
+ \cong H^{\mathrm{even}}(X,\mathbb Q)$.
+Choose a rational virtual topological bundle $\kappa_\alpha$
+whose \emph{total} Chern character is exactly $\alpha$
+(and zero in other degrees). After clearing its denominator,
+write $m\kappa_\alpha=[E_+]-[E_-]$ for genuine finite-rank
+topological complex vector bundles on $X$.
+Pull these bundles to the analytic space $J^{an}$.
+
+The true algebraic Jouanolou fold $J$ is smooth AFFINE,
+so $J^{an}$ is Stein. By the Oka--Grauert principle,
+each pulled-back topological bundle has a holomorphic
+vector-bundle representative. By finite holomorphic generation
+on finite-dimensional Stein manifolds (Cartan--Forster) and
+Cartan's vanishing for coherent sheaves,
+each such holomorphic bundle is the image of a
+finite holomorphic idempotent $P_\pm$:
+a finite free holomorphic surjection splits because
+the target bundle is locally free and its extension
+obstruction is a coherent $H^1$, which vanishes on Stein.
+Set $A_\pm=2P_\pm-I$; then $A_\pm^2=I$ as
+actual holomorphic matrix identities.
+
+Naturality of the \emph{topological} Chern character
+gives
+$\mathrm{ch}(P_+)-\mathrm{ch}(P_-)=m q^*\alpha$,
+and taking degree $2p$ proves (32).
+The holomorphic Grassmann connections of $P_\pm$
+have curvature $P_\pm(dP_\pm)^2$.
+Exactly the SAME exterior matrix calculation as (18)--(20),
+now in holomorphic functions, gives the trace forms (33)
+and their closedness. Their analytic de Rham classes,
+under the stated $(2\pi i)^{-p}$ normalization,
+are the desired topological Chern character classes.
+The construction is selected from the ORIGINAL alpha
+via rational topological K-theory and the TRUE affine fold;
+no codimension-$p$ algebraic cycle is inserted.
+(The $p=0$ case is immediate from rank and the degree-zero
+Chow group; the trace-of-$A$ formula (33) specifically requires
+$p\ge1$, since the scalar $I$ term does not vanish in degree zero.)
+\end{proof}
+
+\begin{proposition}[Exact regularity criterion for classical original-$X$ algebraicity]
+For fixed original $X,p,\alpha$ as above, the following
+two properties are equivalent:
+\begin{enumerate}
+\item There is an actual $Z_\alpha\in CH^p(X)_{\mathbb Q}$
+      with $\mathrm{cl}^{can}_X(Z_\alpha)=\alpha$.
+\item On the SAME Jouanolou affine bundle $J$, there are
+      $m>0$ and TWO finite matrices
+      $B_\pm\in\operatorname{Mat}_{N_\pm}
+                   \Gamma(J,\mathcal O_J)$ with
+      \emph{REGULAR ALGEBRAIC} entries,
+      $B_\pm^2=I$, and
+\[
+ \frac1m\left(
+   \mathrm{cl}^{can}_J
+       \mathrm{ch}^{CH}_p(\operatorname{im}(I+B_+)/2)
+ - \mathrm{cl}^{can}_J
+       \mathrm{ch}^{CH}_p(\operatorname{im}(I+B_-)/2)
+ \right)=q^*\alpha .
+\]
+\end{enumerate}
+The unconditional holomorphic matrices of (32)
+therefore provide genuine \emph{all-target} differential
+source geometry, while the additional REGULAR ALGEBRAIC
+matrix realization is the exact test needed to make it
+a classical Chow proof. Mere existence of the fold,
+or finite holomorphic projectors on its Stein
+analytification, does not establish this regularity.
+\end{proposition}
+\begin{proof}
+A regular algebraic projector has a genuine algebraic
+finite projective module image, hence its rational
+Chow Chern character lies in $CH^p(J)_{\mathbb Q}$.
+The true Jouanolou affine-space pullback is an
+isomorphism $CH^p(X)_{\mathbb Q}\to CH^p(J)_{\mathbb Q}$
+and commutes with canonical Betti classes.
+This returns an ACTUAL original-$X$ cycle
+from the two regular matrices in (2), proving (1).
+
+Conversely start from (1), use the rational
+Chern-character isomorphism from algebraic
+$K_0(X)_{\mathbb Q}$ to the rational graded Chow
+group for smooth $X$ to represent the degree-$p$
+class of $Z_\alpha$ by a rational virtual
+algebraic bundle $\xi$. Clearing a denominator,
+pull $m\xi$ to $J$; on the genuine affine
+scheme $J$ it is a difference of finite projective
+algebraic modules, each the image of a finite
+regular idempotent by projective-module splitting.
+Take $B_\pm=2P_\pm-I$. Functoriality of the
+Chern character gives (2).
+\end{proof}
+
+
+
+\section{Unconditional exact differential-curvature equation from a prescribed original-world class}
+The previous construction produces a finite HOLOMORPHIC involution for
+every prescribed rational even-degree original-X cohomology class.
+We strengthen it from equality of COHOMOLOGY CLASSES
+to a literal solved GLOBAL DIFFERENTIAL EQUATION on the SAME
+actual algebraic fold; this is an explicit source-type test of the
+GST simultaneous geometry/algebra ambition.
+
+\begin{theorem}[ALL $X,p,\alpha$: genuine algebraic target form and a SOLVED holomorphic nonlinear spectral system]
+Let $X$ be ANY smooth projective complex algebraic variety,
+let $p\ge1$ and let $\alpha\in H^{2p}(X,\mathbb Q)$ be
+ANY prescribed rational even-degree class. In particular,
+$\alpha$ may be rational Hodge $(p,p)$ or primitive.
+Let $q:J\to X$ be a genuine smooth affine algebraic
+Jouanolou torsor and write $J^{an}$ for its Stein analytification.
+There exist the following simultaneously, with NO supplied
+original-$X$ algebraic cycle:
+\begin{enumerate}
+\item a GLOBAL REGULAR ALGEBRAIC closed differential form
+      $\eta_\alpha\in\Gamma(J,\Omega^{2p}_{J/\mathbb C})$
+      with $[\eta_\alpha]_{dR}=q^*\alpha_{\mathbb C}$
+      under genuine algebraic de Rham comparison;
+\item a positive integer $m$ and two finite GLOBAL
+      HOLOMORPHIC matrix involutions
+      $A_\pm\in\operatorname{Mat}_{N_\pm}
+                    \mathcal O_{\mathrm{hol}}(J^{an})$,
+      with $A_\pm^2=I$;
+\item a GLOBAL HOLOMORPHIC $(2p-1)$-form
+      $B_\alpha\in\Gamma(J^{an},\Omega^{2p-1}_{hol})$
+      such that the LITERAL DIFFERENTIAL identity
+\[
+\boxed{\displaystyle
+ \frac{1}{(2\pi i)^p\,2^{2p+1}p!}
+ \left\{\operatorname{Tr}(A_+(dA_+)^{2p})
+       -\operatorname{Tr}(A_-(dA_-)^{2p})\right\}
+       -m\,\eta_\alpha =dB_\alpha.}                       \tag{34}
+\]
+\end{enumerate}
+Here (34) holds in the complex of GLOBAL HOLOMORPHIC forms,
+not merely after passing to singular cohomology.
+The algebraic target differential $\eta_\alpha$ and the
+holomorphic source matrices share the SAME original
+alpha and the SAME actual affine fold J.
+\end{theorem}
+
+\begin{proof}
+Because $J$ is smooth AFFINE of finite type over $\mathbb C$,
+Grothendieck's algebraic de Rham theorem and affineness identify
+the cohomology of the GLOBAL algebraic de Rham complex
+$\Gamma(J,\Omega^\bullet_{J/\mathbb C})$ with singular cohomology
+of $J^{an}$ with complex coefficients. Pull back the fixed
+class $\alpha$ and choose its closed GLOBAL ALGEBRAIC
+degree-$2p$ cocycle $\eta_\alpha$. This is an actual algebraic
+differential form, but by itself not a Chow cycle.
+
+The rational topological Chern character is an
+isomorphism $K^0_{\mathrm{top}}(X)\otimes\mathbb Q
+ \cong H^{even}(X,\mathbb Q)$.
+Choose a virtual class whose total Chern character
+is exactly the degree-$2p$ class $\alpha$.
+Multiply by some $m>0$ to obtain a difference
+$[E_+]-[E_-]$ of genuine finite-rank topological bundles.
+Pull to J. As $J^{an}$ is Stein, Oka--Grauert
+realizes them by holomorphic vector bundles and
+Cartan--Forster finite global generation together with
+Cartan B splits finite free holomorphic presentations.
+Thus actual finite holomorphic idempotents $P_\pm$
+exist, with actual involutions $A_\pm=2P_\pm-I$.
+By the all-rank spectral Chern--Weil identity (20),
+their normalized curvature forms yield exactly the
+displayed trace difference in (34).
+Naturality of the rational topological Chern character
+and analytic de Rham comparison show that its
+cohomology class is $m q^*\alpha_{\mathbb C}$,
+precisely the class of $m\eta_\alpha$.
+
+The complex of GLOBAL holomorphic differential forms on
+the STEIN space $J^{an}$ computes singular complex
+cohomology by the analytic de Rham theorem and
+Cartan B: the sheaf holomorphic de Rham complex resolves
+the constant sheaf, and all terms are acyclic for
+higher sheaf cohomology. Therefore any closed global
+holomorphic $(2p)$-form of cohomology class zero is
+the holomorphic differential of a GLOBAL
+holomorphic $(2p-1)$-form.
+Apply this to the difference of the two sides of (34).
+It produces $B_\alpha$ and proves the literal equality.
+The zero-source case $2p>\dim_\mathbb C J$ is included:
+the global degree-$2p$ differential-form complex
+vanishes there and the pulled-back class is zero.
+\end{proof}
+
+\begin{corollary}[First exact all-original-$X$ barrier of the same-fold nonlinear curvature system]
+The same-fold equations (34) admit an ACTUAL finite
+holomorphic solution for EVERY rational degree-$2p$
+original-$X$ class, whether of Hodge type or not.
+Consequently neither a solved HOLOMORPHIC
+idempotent curvature equation nor an ALGEBRAIC
+closed target form by itself forces an
+original-$X$ Chow representative.
+Requiring $A_\pm$ and $B_\alpha$ to be REGULAR
+ALGEBRAIC, rather than holomorphic, is a
+strictly stronger SOURCE-TYPE assertion;
+the polynomial idempotents are algebraic K-theory objects.
+In the special divisor-generated Hodge sector
+the preceding finite-difference theorem constructs
+the needed regular algebraic $A_S$ explicitly.
+For arbitrary higher primitive Hodge classes,
+equation (34) is a solved genuine differential
+source stage, not a claimed all-class algebraic
+$K_0$ source.
+\end{corollary}
+
+
+
+\begin{proposition}[A concrete transcendental holomorphic involution and exact source-preserving transgression]
+On the SAME genuine affine GST quadric
+$Q=\{xy+z^2=1\}$ let
+\[
+ P=\frac12\begin{pmatrix}1+z&x\\y&1-z\end{pmatrix},
+ \quad
+ G=\begin{pmatrix}1&0\\e^z&1\end{pmatrix},
+ \quad P'=GPG^{-1},\quad A'=2P'-I .
+\]
+Then $P'^2=P'$, $(A')^2=I$, and $P'$ is
+HOLOMORPHIC on the entire affine Q but is NOT
+a matrix of regular ALGEBRAIC functions on Q.
+Nevertheless $\operatorname{im}P'\cong\operatorname{im}P
+\cong q^*O_{\mathbb P^1}(-1)$ as holomorphic line bundles.
+The two full exact differential Chern representatives obey
+\[
+ \boxed{\operatorname{Tr}(P'dP'\wedge dP')
+       -\operatorname{Tr}(PdP\wedge dP)
+     =d\left(\frac{x e^z}{2}\,dz\right)
+     =\frac{e^z}{2}\,dx\wedge dz .}                       \tag{35}
+\]
+Thus one and the SAME nonzero rational Hodge (1,1) class
+and actual fold geometry admit both a regular algebraic
+spectral source and a transcendental holomorphic source,
+with a computed nonalgebraic exact transgression.
+Hodge type and correct periods do NOT force an arbitrary
+holomorphic spectral matrix to be regular algebraic.
+\end{proposition}
+\begin{proof}
+$G$ and $G^{-1}$ are entire invertible matrices
+on Q, so conjugation preserves idempotence and
+gives the asserted holomorphic line-bundle isomorphism.
+The $(2,1)$ entry of $P'$ equals
+$y/2+ze^z-(x/2)e^{2z}$.
+Restrict it to the actual algebraic affine line
+$\ell\subset Q$ given by $x=1$, $y=1-z^2$:
+its value becomes
+$(1-z^2)/2+ze^z-e^{2z}/2$, which is not
+a polynomial in z; a regular algebraic function
+on Q would restrict to a polynomial on $\ell$.
+Thus $P'$ and $A'$ have genuinely nonregular entries.
+
+On the algebraic coordinate chart $x\ne0$,
+put $y=(1-z^2)/x$ and use $(x,z)$ as coordinates.
+Direct multiplication of the explicit
+matrices gives
+\[
+ \operatorname{Tr}\bigl(P[P_x,P_z]\bigr)=-\frac1{2x},
+ \quad
+ \operatorname{Tr}\bigl(P'[P'_x,P'_z]\bigr)
+       =-\frac1{2x}+\frac{e^z}{2}.
+\]
+Therefore their global holomorphic two-form difference
+is the right side of (35) on a dense chart,
+hence on the smooth irreducible Q everywhere.
+The one-form $x e^z dz/2$ is globally
+holomorphic, completing the exact transgression.
+It also verifies that the normalized Chern period
+remains the actual value -1 from (25).
+\end{proof}
+
+
+
+
+\section{Polynomial principal-divisor splitting produces a NONZERO folded spectral Chow source}
+The same genuine quadric involution of (21)--(25) admits a
+MORE DIRECT geometric--algebraic interpretation.
+An actual globally principal polynomial divisor can split into
+two NONTRIVIAL Chow components with opposite classes.
+This precisely distinguishes a nonlinear COMPONENT birth
+from a smooth polynomial idempotent homotopy.
+
+\begin{theorem}[The actual P1 Jouanolou fold: same polynomial equation creates geometry AND the eigenbundle CHOW source]
+On the genuine smooth affine algebraic quadric
+$Q=\operatorname{Spec}\mathbb C[x,y,z]/(xy+z^2-1)$,
+consider the true reduced principal Cartier divisor
+\[
+ \boxed{
+ \operatorname{div}_Q(x)=L_++L_-,
+ \quad
+ L_\pm=V(x,z\mp1)\cong\mathbb A^1 .
+ }                                                           \tag{40}
+\]
+Let $q:Q\to\mathbb P^1$ send the algebraic
+matrix involution $A=\begin{pmatrix}z&x\\y&-z\end{pmatrix}$
+to its $+1$ eigenline, with
+$P=(I+A)/2$.
+Then IN ACTUAL rational/integral CHOW,
+not merely numerical Betti cohomology,
+\[
+ \boxed{
+ [L_-]=q^*c_1^{CH}(\mathcal O_{\mathbb P^1}(1)),
+ \quad [L_+]=-[L_-]
+       =c_1^{CH}(\operatorname{im}P),\quad
+ \operatorname{im}P=q^*\mathcal O_{\mathbb P^1}(-1).
+ }                                                           \tag{41}
+\]
+In particular the two INDIVIDUAL born algebraic
+components are nonzero in $CH^1(Q)\cong\mathbb Z$
+but their globally principal sum is zero.
+The spectral Chern--Weil form (24) has precisely
+the canonical Betti class of $[L_+]$.
+Thus ONE actual polynomial fold produces BOTH a
+nonlinear geometric component and its algebraic
+Chern source, with a true CHOW equality.
+\end{theorem}
+\begin{proof}
+Set $x=0$ in $xy+z^2-1=0$.
+Then $(z-1)(z+1)=0$, and since characteristic
+is zero the two components $L_\pm$ are distinct
+reduced affine lines, each with generic
+multiplicity one in the principal divisor
+of x. Therefore $[L_+]+[L_-]=0$
+in $CH^1(Q)$.
+
+The map q takes the $+1$ eigenline of A.
+At $x=0,z=-1$ its matrix is
+$\begin{pmatrix}-1&0\\y&1\end{pmatrix}$,
+whose $+1$ eigenspace is the CONSTANT line
+$\mathbb C e_2$. Conversely,
+$q^{-1}([\mathbb C e_2])$ is exactly the
+closed subscheme $L_-$, since
+$P e_2=e_2$ imposes $x=0,z=-1$.
+Hence $L_-$ is the scheme-theoretic
+pullback of one projective point divisor,
+and its class is $q^*c_1^{CH}(\mathcal O(1))$.
+The eigenline construction in (22) gives
+$\operatorname{im}P=q^*\mathcal O(-1)$.
+This and the principal divisor equality
+give (41), both in the actual Chow ring.
+Affine-bundle homotopy invariance for q
+gives $CH^1(Q)\cong CH^1(\mathbb P^1)
+=\mathbb Z$; the components are nonzero.
+The existing explicit normalized spectral
+Chern integral from (25) then agrees with
+the canonical image of the NONZERO class
+$[L_+]$ rather than merely an abstract
+differential-period token.
+\end{proof}
+
+\begin{theorem}[Universal original-X divisor source returned from signed COMPONENTS of the SAME nonlinear GST fold]
+Let $X$ be ANY smooth projective complex variety,
+$L$ an ACTUAL sufficiently very ample line bundle,
+and $d=\dim X\ge1$.
+Take a general pencil of two sections
+of $L$; for $d\ge2$ blow up its regular
+codimension-two base locus
+$b:Y\to X$ (for $d=1$ take $Y=X$).
+The resolved pencil is an ACTUAL morphism
+$f:Y\to\mathbb P^1$ with
+$f^*\mathcal O(1)=b^*L\otimes\mathcal O_Y(-E)$,
+where $E$ is the exceptional divisor
+($E=0$ for curves).
+Pull back the SAME polynomial fold:
+\[
+ W=Y\times_{\mathbb P^1}Q
+       \xrightarrow{\ q_f\ }Y
+       \xrightarrow{\ b\ }X.
+\]
+Let $L_{+,f}\subset W$ be the actual
+Cartier divisor obtained from the born
+component $L_+\subset Q$.
+Then the alpha-INDEPENDENT, TRUE
+algebraic original-X return operation is
+\[
+ \boxed{
+ \mathcal C_X(L)=
+    -\,b_*(q_f^*)^{-1}[L_{+,f}]
+    =c_1^{CH}(L)\quad\text{in }CH^1(X).
+ }                                                          \tag{42}
+\]
+For any prescribed rational divisor Hodge class
+$\beta$ on ANY $X$, clearing a denominator
+and applying Lefschetz $(1,1)$ gives an actual
+algebraic line bundle $M$ with
+$\operatorname{cl}^{can}c_1(M)=m\beta$.
+Choose $k\gg0$ with both $M\otimes H^k$
+and $H^k$ very ample, and apply (42)
+separately to their TRUE folded component cycles.
+The resulting ACTUAL original-X rational cycle
+\[
+ \boxed{
+ Z_\beta={\mathcal C_X(M\otimes H^k)-
+          \mathcal C_X(H^k)\over m}
+ \in CH^1(X)_{\mathbb Q},
+ \qquad \operatorname{cl}^{can}_X(Z_\beta)=\beta
+ }                                                           \tag{43}
+\]
+requires NO codimension-one Chow witness as input.
+For any prescribed divisor-generated
+$\alpha=\beta_1\cdots\beta_p$,
+the original-X product
+$\boxed{Z_\alpha=Z_{\beta_1}\cdots Z_{\beta_p}}$
+is an ACTUAL $CH^p(X)_{\mathbb Q}$
+cycle with the exact canonical class alpha.
+\end{theorem}
+\begin{proof}
+The base-changed q_f is a Zariski-locally
+affine-line bundle, so its actual
+pullback $q_f^*:CH^1(Y)\to CH^1(W)$
+is an isomorphism.
+The original equality (41) gives
+$[L_{+,f}]=-q_f^*f^*c_1^{CH}(\mathcal O(1))$.
+Hence its original return is
+$f^*c_1^{CH}(\mathcal O(1))=b^*c_1(L)-[E]$.
+The blowup is along codimension two,
+so its exceptional divisor pushes
+to ZERO in codimension one on X,
+and $b_*b^*c_1(L)=c_1(L)$.
+This proves (42).
+The two line bundles for beta differ
+by the actual line M:
+$c_1(M\otimes H^k)-c_1(H^k)=c_1(M)$
+in genuine integral $CH^1(X)$.
+Equation (43) and its canonical rational
+Betti comparison follow. Multiplicativity
+of the actual Chow-to-canonical Betti map
+proves the final all-p product claim.
+
+Crucially, the NONLINEAR component extraction
+uses individually nonzero divisors $L_\pm$,
+whereas the total principal zero locus
+$V(x)$ has CHOW class zero.
+This is the exact algebraic distinction
+between SAME-fold geometric SOURCE BIRTH
+and a vacuous polynomial zero-locus identity.
+The result does not claim a general higher
+primitive $\alpha$ is a divisor product.
+\end{proof}
+
+
+
+\section{Exact spectral curvature to nonlinear zero-component geometry:
+the SAME fold carries its own genuine algebraic source}
+The crucial distinction in the GST dimensional-fold argument
+is not a formal equality of scalar periods. A GLOBAL CLOSED
+ALGEBRAIC representative of a fixed rational Hodge class
+can undergo a nontrivial nonlinear geometric
+zero-component bifurcation while its de Rham
+class is LITERALLY unchanged.
+On the actual affine Jouanolou fold the born
+components are the SAME algebraic eigensheaf
+Chow sources of the spectral involution.
+
+\begin{theorem}[SAME GST polynomial simultaneously gives true spectral curvature and an actual bifurcating Chow source]
+Let
+\[
+ Q=\{xy+z^2=1\},\quad
+ A=\begin{pmatrix}z&x\\y&-z\end{pmatrix},
+ \quad P=(I+A)/2.
+\]
+Its GLOBAL REGULAR ALGEBRAIC nowhere-vanishing
+two-form is
+\[
+ \boxed{
+ \Omega_P=\operatorname{Tr}(P\,dP\wedge dP)
+          =\frac{dx\wedge dy}{4z},}             \tag{44}
+\]
+where the right expression is interpreted by its
+regular extension on the smooth locus $z=0$
+(the whole $Q$ is smooth).
+For every $t\in\mathbb C$, set
+\[
+ \boxed{
+  \Omega_{P,t}=(1+tz)\Omega_P
+       =\Omega_P+d\left(\frac{t x\,dy}{4}\right).
+ }                                            \tag{45}
+\]
+These are ACTUAL closed regular algebraic two-forms
+with the SAME NONZERO algebraic de Rham
+and canonical normalized rational Betti class
+for ALL $t$.
+
+The genuine scheme of zeros of
+$\Omega_{P,t}$ is EMPTY at $t=0$.
+For $t\ne0$ it is the actual Cartier divisor
+\[
+ \boxed{
+ Z_t=V_Q(1+tz)
+ \cong \operatorname{Spec}
+          \mathbb C[x,y]/(xy-(1-t^{-2})).
+ }                                            \tag{46}
+\]
+When $t\ne0,\pm1$, this is a smooth
+IRREDUCIBLE affine hyperbola $\mathbb G_m$.
+At the TRUE discriminant parameters
+$t=\pm1$, it splits into two genuine affine
+algebraic line components.
+In particular at $t=1$,
+\[
+ \boxed{
+ Z_1=V(z+1)=D_x\cup D_y,\quad
+ D_x=V(x,z+1),\quad D_y=V(y,z+1),}
+\]
+and the CHOW class of the two born
+components is
+\[
+ \boxed{
+ [D_x]=q^*h=-c_1^{CH}(\operatorname{im}P),
+ \qquad
+ [D_y]=-q^*h=c_1^{CH}(\operatorname{im}P)\ne0,
+ \qquad [D_x]+[D_y]=0 .}                      \tag{47}
+\]
+Thus the very SAME nonzero spectral curvature
+class is maintained through the global algebraic
+differential equality (45), while a true
+irreducible-to-reducible geometric fold
+creates a pair of individually nonzero,
+oppositely charged original algebraic
+eigenbundle source components.
+\end{theorem}
+
+\begin{proof}
+The existing exact all-rank spectral matrix
+calculation establishes (44).
+On $z\ne0$ the indicated expression is
+regular, and on $x\ne0$ the quadric equation
+gives
+$\Omega_P=-dx\wedge dz/(2x)$,
+with a corresponding expression on $y\ne0$.
+At $x=y=0,z=\pm1$, the $z\ne0$
+expression applies.
+These charts cover Q, proving global
+regularity and nowhere vanishing.
+Because Q has complex dimension two,
+every global regular two-form is closed.
+Moreover
+$z\Omega_P=dx\wedge dy/4
+             =d(x\,dy/4)$,
+proving the LITERAL algebraic differential
+identity (45), hence equality of the
+actual de Rham classes at every parameter.
+Their nonzero canonical rational Betti
+period is the earlier eigenline Chern period
+of $\operatorname{im}P=q^*O_{\mathbb P^1}(-1)$,
+up to the standard $(2\pi i)^{-1}$
+Chern normalization.
+
+Because $\Omega_P$ nowhere vanishes,
+the zero scheme of $(1+tz)\Omega_P$
+is exactly the principal scheme
+defined by $1+tz$; at $t=0$ the
+factor is the unit 1 and no zero occurs.
+For $t\ne0$, substituting $z=-1/t$
+into $xy+z^2=1$ gives (46).
+The nonzero constant $1-t^{-2}$
+makes the affine curve isomorphic
+to $\mathbb G_m$. The constant vanishes
+only at $t=\pm1$, where $xy=0$
+and the two transverse reduced affine
+lines appear.
+
+At $t=1$, the line $D_x$ is the
+already constructed $+1$ eigenline
+fiber $L_-$ in (40)--(41), and has
+true Chow class $q^*h$.
+Since $Z_1$ is principal and both
+components have multiplicity one,
+$[D_y]=-[D_x]$. The true affine
+bundle Chow isomorphism
+$CH^1(Q)\cong CH^1(\mathbb P^1)=\mathbb Z$
+proves that each individual component
+is nonzero and yields (47).
+The TOTAL zero divisor has class zero
+for every t; the nonzero component
+classes appear only at the split
+discriminant. This respects flat-family
+Betti rigidity and never infers Chow
+creation from a de Rham form alone.
+\end{proof}
+
+\begin{theorem}[ALL original $X$, ALL divisor-product codimensions:
+simultaneous spectral-differential/geometric fold with exact exceptional correction]
+Let $X$ be ANY smooth projective
+complex $d$-fold and fix
+$p$ actual sufficiently very ample
+line bundles $L_1,\ldots,L_p$ with
+$1\le p\le d$.
+Choose general two-section pencils
+and resolve ALL their codimension-two
+base loci in a common sequence of
+smooth algebraic blowups
+$b:Y\to X$, giving regular morphisms
+$f_i:Y\to\mathbb P^1$.
+Let $E_i$ denote the actual divisor
+class on Y of the total vanishing base
+ideal of the i-th resolved pencil,
+so the ACTUAL line-bundle equality is
+\[
+ f_i^*O_{\mathbb P^1}(1)
+      = b^*L_i\otimes O_Y(-E_i).
+\]
+Form the SAME simultaneous polynomial
+GST geometry
+\[
+ W=Y\times_{(\mathbb P^1)^p}Q^p,
+ \qquad q_W:W\to Y,
+ \qquad g_i:W\to Q.
+\]
+Then $q_W$ is a genuine Zariski-locally
+trivial affine-space bundle and
+$q_W^*:CH^p(Y)\overset{\sim}\to CH^p(W)$
+is an isomorphism.
+For each i, pull back the ORIGINAL
+born component $D_y=V(y,z+1)$
+from Q to the Cartier divisor
+$\mathcal D_i=g_i^{-1}D_y$ on W.
+Its ACTUAL Chow class satisfies
+\[
+ [\mathcal D_i]
+  =-q_W^*f_i^*h
+  =-q_W^*\big(b^*c_1(L_i)-E_i\big).
+\]
+The independent nonzero spectral
+Chern representatives on the same
+fold are $g_i^*\Omega_P$, and their
+p-fold exterior product is
+\[
+ \Theta_0=\bigwedge_{i=1}^p g_i^*\Omega_P.
+\]
+For formal parameters $t_i\in\mathbb C$,
+set $\Theta_{\mathbf t}=
+ \bigwedge_i g_i^*((1+t_i z)\Omega_P)$.
+These are closed GLOBAL REGULAR
+algebraic $2p$-forms on W with an
+EXPLICIT GLOBAL ALGEBRAIC transgression
+\[
+ \boxed{
+ \Theta_{\mathbf t}-\Theta_0
+ =d\sum_{i=1}^p\left(
+ \bigwedge_{j<i}g_j^*\Omega_{P,t_j}\right)
+ \wedge g_i^*\left(\frac{t_i x\,dy}{4}\right)
+ \wedge\left(
+ \bigwedge_{k>i}g_k^*\Omega_P\right).
+ }                                            \tag{48}
+\]
+At the simultaneous true discriminant
+$t_1=\cdots=t_p=1$ the p
+original geometric born components
+have the exactly computed
+original-$X$ Chow return
+\[
+ \boxed{
+ (-1)^p b_*(q_W^*)^{-1}
+   \left(\prod_{i=1}^p[\mathcal D_i]\right)
+ =b_*\prod_{i=1}^p
+          \big(b^*c_1(L_i)-E_i\big).
+ }                                            \tag{49}
+\]
+In particular define the ACTUAL exceptional
+correction on original X
+\[
+ \mathcal R=
+ \sum_{\emptyset\ne S\subseteq\{1,\ldots,p\}}
+    (-1)^{|S|}
+    \left(\prod_{i\notin S}c_1(L_i)\right)
+    b_*\left(\prod_{i\in S}E_i\right)
+ \in CH^p(X)_{\mathbb Q}.
+\]
+Then the original-X Chow identity is
+\[
+ \boxed{
+ \prod_{i=1}^p c_1^{CH}(L_i)
+ =(-1)^p b_*(q_W^*)^{-1}
+          \prod_i[\mathcal D_i]
+   -\mathcal R.
+ }                                            \tag{50}
+\]
+For an arbitrary prescribed Hodge target
+$\alpha=\prod_{i=1}^p\beta_i$ with
+$\beta_i\in H^{1,1}(X)\cap H^2(X,\mathbb Q)$,
+take actual $M_i$ and $m_i>0$ with
+$c_1(M_i)=m_i\beta_i$,
+and apply (50) to each of the
+$2^p$ tuples whose ith line bundle is
+$M_i\otimes H^k$ or $H^k$.
+The finite signed alternating combination,
+divided by $\prod_i m_i$,
+is an ACTUAL rational original-$X$
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+\[
+ \boxed{\mathrm{cl}^{can}_X(Z_\alpha)=\alpha.}\tag{51}
+\]
+This is a TRUE SAME-GEOMETRY
+nonlinear zero-component and
+spectral curvature construction in
+every codimension, with the necessary
+higher-blowup excess correction kept
+explicit, not suppressed.
+\end{theorem}
+\begin{proof}
+General pencils of sufficiently
+very ample line bundles have smooth
+codimension-two base loci by Bertini
+(for a curve they are basepoint-free);
+a finite common smooth resolution
+of the finite rational maps exists
+in characteristic zero. Writing the
+principalized base ideals on Y
+as O(-E_i) gives the displayed
+line-bundle equations.
+Each $Q\to\mathbb P^1$ is a genuine
+affine-line torsor, so simultaneous
+base change gives the indicated
+affine bundle over Y and the ACTUAL
+Chow homotopy isomorphism.
+
+The original component equality (47)
+pulls back by the algebraic maps g_i:
+$[\mathcal D_i]=-q_W^*f_i^*h$.
+All component intersections are
+Cartier-intersection products in
+the smooth W and carry their actual
+CHOW classes whether or not a
+particular geometric intersection
+is transverse.
+
+The two-form exactness (45) pulls
+back along each g_i.
+Every wedge factor is closed;
+the finite telescoping product
+identity for even-degree forms
+proves (48), including the signs.
+For the Chow return, multiply the p
+actual component classes and apply
+the inverse of $q_W^*$; then push
+properly along b. This proves (49).
+
+Use the genuine projection formula
+$b_*(b^*a\cdot\xi)=a\cdot b_*\xi$
+to expand the right-hand side of
+(49). The empty exceptional-index
+subset returns exactly
+$\prod_i c_1(L_i)$ because $b$
+is birational between smooth
+d-folds; all nonempty subsets
+give precisely the explicitly
+defined $\mathcal R$.
+Thus (50) is an exact equality in
+$CH^p(X)_{\mathbb Q}$.
+Importantly terms with two or more
+exceptional factors need not vanish,
+so a naive multiplication of the
+individual divisor return formulas
+WITHOUT $\mathcal R$ would be
+incorrect.
+
+Finally Lefschetz $(1,1)$ and GAGA
+construct the actual line bundles
+$M_i$ from prescribed rational
+divisor Hodge classes.
+Choose k so all $M_i\otimes H^k$
+and $H^k$ are sufficiently very
+ample. Expand the product of
+differences by the exact
+finite-difference identity
+\[
+ \prod_{i=1}^p c_1(M_i)
+ =\sum_{S\subseteq[p]}(-1)^{p-|S|}
+   \prod_{i=1}^p
+    c_1\big(H^k\otimes
+        (M_i\text{ if }i\in S
+           \text{ else }O_X)\big).
+\]
+Each product is given by the
+actual spectral/geometric fold
+and exceptional-corrected formula
+(50), so the finite signed sum
+defines an actual original-X
+Chow class. The canonical Betti
+map is multiplicative and
+$c_1(M_i)/m_i=\beta_i$ in rational
+cohomology; hence its class is
+EXACTLY the prescribed alpha.
+This uses NO supplied higher-p
+original-X cycle in its input,
+and makes no assertion that an
+arbitrary non-divisor primitive
+Hodge class factors into divisors.
+\end{proof}
+
+
+
+
+\section{An exact ZERO-class GST differential births the SAME nonzero Chow components}
+The preceding simultaneous fold genuinely creates
+nonzero algebraic components when a regular
+spectral curvature form acquires zeros.
+We now test whether those components, by themselves,
+can certify the class of the PRESCRIBED Hodge input.
+
+\begin{theorem}[Algebraically exact source differential with nonzero born Chow components]
+On the ACTUAL Q fold of (44), with GLOBAL nowhere-vanishing
+algebraic spectral Chern two-form
+$\Omega=\operatorname{Tr}(P\,dP\wedge dP)$, define
+\[
+ \eta_{\rm nonzero}=(z^2-1)\Omega,\qquad
+ \eta_{\rm zero}=(z^2-1)(1-5z^2)\Omega .
+\]
+Then both are GLOBAL CLOSED REGULAR algebraic
+two-forms, and
+\[
+ \boxed{
+ [\eta_{\rm nonzero}]_{dR}
+      =-\tfrac23[\Omega]_{dR}\ne0,\qquad
+ \eta_{\rm zero}
+      =d\left(\tfrac12(z-z^3)x\,dy\right).
+ }                                                         \tag{53}
+\]
+Thus the SECOND form has IDENTICALLY ZERO
+algebraic de Rham and rational Betti class,
+whereas the first has a nonzero rational
+multiple of the genuine spectral Chern class.
+Nevertheless BOTH have, as actual multiplicity-one
+irreducible components of their zero schemes,
+the SAME FOUR algebraic lines
+\[
+ V(x,z-1),\ V(y,z-1),\
+ V(x,z+1),\ V(y,z+1).
+\]
+Each line has an individual NONZERO
+class $\pm q^*h$ in ACTUAL
+$CH^1(Q)\cong\mathbb Z$.
+The two lines in each fixed-$z$ fiber
+have opposite classes and zero total Chow.
+Consequently the existence of a nonzero
+component in the zero scheme of an
+alpha-selected algebraic differential
+does NOT imply that component has the
+canonical Betti class of alpha, even if
+the differential is a global regular
+algebraic form on the SAME GST fold.
+This is a refutation of THAT source
+identification only, not of rational
+Hodge algebraicity or the genuine
+component-birth mechanism.
+\end{theorem}
+\begin{proof}
+On Q the exact global algebraic differential
+identities are
+\[
+ z\Omega=d(x\,dy/4),\qquad
+ d(zx\,dy)=(6z^2-2)\Omega,\qquad
+ d(z^3x\,dy)=(10z^4-6z^2)\Omega .
+\]
+The first two identities give
+$[z^2\Omega]=[\Omega]/3$ and hence
+$[(z^2-1)\Omega]=-2[\Omega]/3\ne0$,
+using the nonzero spectral Chern period.
+The half-difference of the last two is
+\[
+ \tfrac12\big((6z^2-2)-(10z^4-6z^2)\big)\Omega
+   =(-1+6z^2-5z^4)\Omega
+   =(z^2-1)(1-5z^2)\Omega,
+\]
+which proves the GLOBAL ALGEBRAIC
+one-form primitive in (53).
+The original spectral form is nowhere
+vanishing, so the zero scheme of the
+product is the polynomial principal
+zero divisor. At each $z=\pm1$ the
+quadric equation specializes to $xy=0$.
+The second factor $1-5z^2$ is a
+UNIT along these components, so
+both forms have the same four
+reduced multiplicity-one lines.
+The actual eigenline fiber/Chow
+identities (41) and (47) establish
+that the component Chow classes
+are $\pm q^*h\ne0$.
+\end{proof}
+
+\section{The arbitrary-alpha algebraic differential produces a real incidence scheme, but its complete intersection class is rigid}
+The same-fold theorem (34) gives a GLOBAL
+REGULAR ALGEBRAIC closed $2p$-form
+$\eta_\alpha$ on the actual smooth AFFINE
+Jouanolou $J\to X$ for EVERY original
+rational Hodge input alpha.
+It therefore produces, without any given
+Chow preimage, a concrete target-selected
+algebraic degeneracy locus. We calculate its
+genuine Chow class rather than assuming
+that its zero geometry has the original
+cohomology class $\alpha$.
+
+\begin{theorem}[ALL original $X,p,\alpha$: exact native algebraic zero-geometry class and its source-birth constraint]
+For ANY smooth projective original X,
+$p\ge1$, rational Hodge alpha and smooth
+affine Jouanolou fold $q:J\to X$,
+choose an actual GLOBAL REGULAR ALGEBRAIC
+closed form
+\[
+ \eta_\alpha\in
+   \Gamma(J,\Omega_{J/\mathbb C}^{2p}),
+ \qquad [\eta_\alpha]_{dR}=q^*\alpha_\mathbb C .
+\]
+Let $V=\Omega_{J/\mathbb C}^{2p}$ be the
+ACTUAL algebraic vector bundle of rank
+$R={\dim_\mathbb C J\choose 2p}$.
+The global form is a genuine algebraic
+section, hence defines an alpha-selected
+scheme-theoretic ZERO LOCUS
+\[
+ D_\alpha=Z_J(\eta_\alpha)
+    =V(\text{local coefficient functions of }\eta_\alpha).
+\]
+If this section is REGULAR with zero
+locus of pure expected codimension R,
+its ACTUAL Chow fundamental class is
+\[
+ \boxed{
+ [D_\alpha]=c_R^{CH}
+       (\Omega_{J/\mathbb C}^{2p})
+ \quad\text{in }CH^R(J)_{\mathbb Q}.
+ }                                                 \tag{52}
+\]
+The right-hand side depends on the
+fold geometry but NOT on alpha.
+Thus this WHOLE-ZERO-LOCUS regular-section
+operation cannot supply differing
+prescribed original-X Betti classes
+solely by varying the algebraic
+differential representative.
+This is a precise limitation on
+THE WHOLE section zero locus, not
+on its singular/excess irreducible
+components.
+
+For the true Q fold, $p=1$, one has
+$V=K_Q\cong O_Q$, $c_1(V)=0$.
+The nonzero fixed cohomology class
+represented by every $\Omega_{P,t}$
+therefore has $[Z_t]=0$ in Chow.
+At $t=\pm1$ the two split components
+have opposite NONZERO CHOW classes
+given by (47). These are actual
+source births invisible to the fixed
+total top Chern class.
+\end{theorem}
+\begin{proof}
+Grothendieck algebraic de Rham on
+smooth affine J gives an actual
+regular representative of $q^*\alpha$.
+A section of the locally free sheaf
+V defines its true coefficient ideal
+in local trivializations; its zero
+scheme therefore glues algebraically
+and is selected by alpha and the
+choice of representative, without
+any CHOW input. For a regular section
+of rank R vector bundle on a
+smooth scheme, the Koszul resolution
+and algebraic top Chern class formula
+give the fundamental cycle
+$[Z(\eta_\alpha)]=c_R(V)$.
+The genuine affine bundle pullback
+$q^*:CH^R(X)\to CH^R(J)$ is an
+isomorphism, so its original-X return
+is fixed whenever (52) applies.
+
+On Q the explicit nowhere-vanishing
+$\Omega_P$ is a trivialization of
+$K_Q$, hence its top Chern vanishes.
+Every $\Omega_{P,t}=(1+tz)\Omega_P$
+has principal total zero divisor,
+so its Chow class vanishes, while
+(46)--(47) prove that its individual
+discriminant components need not
+vanish. This checks the exact boundary
+between a fixed section Chern class
+and genuinely new signed component
+geometry on the same actual fold.
+\end{proof}
+
+
+\section{GST finite spectral homotopy rigidity: why a genuine NON-SPLIT source event must change algebraic K-theory}
+The October 22 causal/nonlinear fold mechanism permits topology
+changes and genuinely born Chow classes.
+The polynomial spectral source of (18)--(20) has
+a stronger exact rigidity law than the infinitesimal
+idempotent-conjugacy identity: a WHOLE algebraic
+one-parameter deformation cannot change its original-$X$
+K-theory or rational Chow characteristic class.
+
+\begin{theorem}[ALL smooth affine folds: polynomial spectral homotopy cannot birth a new canonical rational Chow direction]
+Let $X$ be ANY smooth projective complex original variety,
+let $q:J\to X$ be its actual smooth affine Jouanolou fold,
+and let $R=\Gamma(J,\mathcal O_J)$.
+For any integer $N>0$ and ANY genuine regular
+algebraic matrix
+\[
+ \boxed{A(t)\in\operatorname{Mat}_N(R[t]),
+          \qquad A(t)^2=I_N,}                            \tag{36}
+\]
+put $P(t)=(I_N+A(t))/2$ and
+$E(t)=\operatorname{im}P(t)$.
+For any two complex parameters $s_0,s_1\in\mathbb C$,
+the following are exact equalities of ACTUAL algebraic
+$K_0$ and rational Chow:
+\[
+ \boxed{
+ [E(s_0)]=[E(s_1)]\ \text{in }K_0^{alg}(J),
+ \quad
+ \operatorname{ch}^{CH}_p(E(s_0))
+ =\operatorname{ch}^{CH}_p(E(s_1))
+   \ \text{in }CH^p(J)_{\mathbb Q}
+ \text{ for every }p.}                                  \tag{37}
+\]
+Consequently their genuine original-$X$ return classes
+$(q^*)^{-1}\operatorname{ch}^{CH}_p(E(s))$
+are independent of $s$. The same is true of ANY
+finite rational signed sum of such regular polynomial
+spectral families with fixed coefficients.
+If a purported GST alpha-selected source is generated
+solely by evaluating such one-parameter families,
+its canonical Betti class CANNOT interpolate between
+two distinct prescribed original-$X$ target classes.
+
+This is a no-go theorem for REGULAR HOMOTOPY of an
+existing source, NOT a no-go for all true nonlinear,
+singular, branched, or different-component GST births.
+\end{theorem}
+\begin{proof}
+Since $2$ is invertible, $P(t)^2=P(t)$, and
+$\operatorname{im}P(t)$ is an ACTUAL finite projective
+$R[t]$-module $\mathcal E$ on $J\times\mathbb A^1$.
+Because $R$ is smooth and therefore regular Noetherian,
+algebraic $K_0$ is invariant under the polynomial
+extension $R\to R[t]$. Both evaluation maps
+$\mathrm{ev}_{s_0},\mathrm{ev}_{s_1}:R[t]\to R$
+induce the same inverse to
+$K_0(R)\xrightarrow{\sim}K_0(R[t])$.
+Thus their images of $[\mathcal E]$ coincide
+in $K_0(R)$, proving the first equality in (37).
+Apply the actual rational algebraic Chern character
+to obtain its equality in genuine $CH^p(J)_{\mathbb Q}$.
+The original-$X$ return equality follows from the
+ACTUAL affine bundle homotopy isomorphism
+$q^*:CH^p(X)_{\mathbb Q}\xrightarrow{\sim}
+CH^p(J)_{\mathbb Q}$ and canonical Betti naturality.
+
+For the exact infinitesimal comparison, differentiating
+$P^2=P$ gives $P'P+PP'=P'$ and $PP'P=0$.
+Hence $K=[P',P]$ satisfies
+$\boxed{P'=[K,P]}$.
+This is a genuine gauge tangent identity;
+the algebraic homotopy proof above additionally
+rules out a hidden finite-parameter jump in $K_0$.
+If different $\alpha(s)$ had equal constructed
+canonical classes, the injectivity of the affine-fold
+pullback on rational Betti cohomology would force them
+to be equal. This proves the final assertion.
+\end{proof}
+
+
+\begin{theorem}[Connected-parameter rigidity of canonical Hodge-Betti source: beyond polynomial homotopy]
+Let $X$ be ANY smooth projective complex original variety,
+$q:J\to X$ its genuine smooth affine GST fold, and
+$T$ ANY connected complex algebraic parameter variety.
+Let $\mathcal E$ be an ACTUAL algebraic vector
+bundle on $J\times T$ (a finite regular
+idempotent matrix on the whole product,
+when one exists, is a special case).
+For each closed point $t\in T(\mathbb C)$
+denote its true algebraic bundle fiber
+$E_t=\mathcal E|_{J\times\{t\}}$.
+Then for all $t_0,t_1\in T(\mathbb C)$
+and every $p$,
+\[
+\boxed{\operatorname{cl}^{can}_J\operatorname{ch}^{CH}_p(E_{t_0})
+       =\operatorname{cl}^{can}_J\operatorname{ch}^{CH}_p(E_{t_1})
+       \quad\text{in }H^{2p}(J,\mathbb Q).}                  \tag{39}
+\]
+Their original-$X$ rational Betti returns through
+$(q^*)^{-1}$ are consequently EQUAL.
+Thus no ACTUAL algebraic vector-bundle family,
+including any family built from regular GST
+spectral source matrices, parametrized by a
+CONNECTED algebraic $T$ can interpolate between
+DISTINCT rational cohomological Hodge targets
+on the SAME original X.
+Unlike (37), the actual $CH^p(J)_{\mathbb Q}$
+classes need NOT be equal for a general connected
+$T$: algebraically inequivalent Chow classes
+can share one canonical Betti class.
+\end{theorem}
+\begin{proof}
+Take the genuine rational
+Betti Chern character
+$\operatorname{ch}^{Betti}(\mathcal E)$.
+The analytification of a connected complex
+algebraic variety is path connected,
+and the maps
+$i_t:J^{an}\to J^{an}\times T^{an}$,
+$x\mapsto(x,t)$, are homotopic as $t$ varies.
+Therefore their pullbacks of every
+topological Betti cohomology class are EQUAL.
+The algebraic-to-Betti Chern character
+commutes with the fiber inclusions, so its
+degree-$2p$ component gives exactly (39).
+Since $q:J\to X$ is an affine-space bundle,
+$q^*$ on rational Betti cohomology is an
+isomorphism and the original-X classes agree.
+
+To see why one cannot strengthen this to an
+arbitrary connected-$T$ CHOW equality,
+take a genuine elliptic curve $E$ with its
+Poincare line bundle on $E\times E^\vee$.
+As $t\in E^\vee$ varies, its restriction
+$L_t\in\operatorname{Pic}^0(E)=CH^1(E)$
+varies nontrivially as an algebraic Chow
+class, but every $c_1^{Betti}(L_t)$ is ZERO.
+Pullback to the affine Jouanolou J of E
+and represent the pulled-back line by
+finite REGULAR matrices: the example retains
+different actual algebraic K0/CH classes,
+yet IDENTICAL rational Betti Hodge classes.
+This verifies the sharpness of the
+Betti-only assertion for connected parameter
+spaces beyond $\mathbb A^1$.
+\end{proof}
+
+
+\begin{proposition}[A real singular source birth and its mandatory derived cancellation]
+Let $Z\subset J$ be any nonempty actual algebraic
+closed subscheme. On $J\times\mathbb A^1$ put
+$\mathcal F=\mathcal O_{Z\times\{0\}}$.
+Its naive fiber is zero at every $t\ne0$ and has
+an ACTUAL nonzero coherent scheme sheaf
+$\mathcal O_Z$ at $t=0$, so the singular event really
+creates support geometry. Nevertheless the
+\emph{derived} fiber contains both
+$\operatorname{Tor}_0^{\mathbb C[t]}(\mathcal F,\mathbb C_0)
+\cong\mathcal O_Z$ and
+$\operatorname{Tor}_1^{\mathbb C[t]}(\mathcal F,\mathbb C_0)
+\cong\mathcal O_Z$, with identical algebraic
+$K_0/G_0$ classes and opposite signs:
+\[
+ \boxed{
+ \sum_{j\ge0}(-1)^j
+ [\operatorname{Tor}_j(\mathcal F,\mathbb C_0)]
+  =[\mathcal O_Z]-[\mathcal O_Z]=0 .}                     \tag{38}
+\]
+Thus a genuine non-flat born support is not by
+itself a nonzero global derived K-theory birth.
+Any GST singular-fold construction must compute
+its localized excess/Tor correction, then a
+nonzero independent original-$X$ canonical
+source pairing, before claiming a newly
+generated rational Hodge direction.
+\end{proposition}
+\begin{proof}
+The one-variable Koszul resolution of the base
+point $\mathbb C_0=\mathbb C[t]/(t)$ is
+$0\to\mathbb C[t]\xrightarrow{t}\mathbb C[t]\to
+ \mathbb C_0\to0$.
+Tensoring with $\mathcal F$, on which $t$ acts
+as zero, gives the complex
+$\mathcal O_Z\xrightarrow{0}\mathcal O_Z$.
+Its degree-zero and degree-one homology
+are both $\mathcal O_Z$; all higher Tor
+vanishes. Their alternate sum is zero.
+This is an exact scheme-level computation,
+not a statement that the geometrically
+visible special-fiber support vanishes.
+\end{proof}
+
+
+
+\section{All-original-world polynomial spectral approximation and its genuine finite cover}
+The October 22--24 component-birth operations require algebraic
+polynomial data on the true fold. The October 23 all-target spectral
+theorem already supplies a finite \emph{holomorphic} idempotent for any
+prescribed rational Hodge class. We now ACTUALLY build, from that
+same prescribed input, finite REGULAR POLYNOMIAL matrices and
+corresponding FINITE ALGEBRAIC spectral-cover schemes.
+This construction produces real algebraic fold geometry for every
+input, even those whose original Chow existence is unknown.
+We then calculate the precise gap between polynomial and
+idempotent algebraic sources, rather than silently treating
+their near-equality as Chow equality.
+
+\begin{theorem}[All original $X,p,\alpha$: actual polynomial matrices and finite algebraic spectral worlds detect the prescribed topological class on a finite core]
+Let $X$ be ANY connected smooth projective complex variety,
+$1\le p\le\dim X$,
+and let $\alpha\in H^{2p}(X,\mathbb Q)$ be prescribed;
+in particular $\alpha$ may be rational Hodge and
+primitive. Let $q:J\to X$ be the ACTUAL smooth AFFINE
+Jouanolou torsor.
+Choose the genuine finite global HOLOMORPHIC idempotents
+$P_+,P_-$ and positive integer $m$ from the earlier
+all-target construction, so that
+\[
+ [\,\operatorname{ch}^{an}_p(P_+)
+ -\operatorname{ch}^{an}_p(P_-)\,]
+       =m\,q^*\alpha .
+\]
+There exists a compact subset $K\subset J^{an}$
+with rational restriction map
+\[
+ \boxed{H^{2p}(J,\mathbb Q)\longrightarrow
+                H^{2p}(K,\mathbb Q)
+                \text{ injective}.}                  \tag{54}
+\]
+For EVERY real $\epsilon>0$ there exist finite
+REGULAR ALGEBRAIC matrices
+\[
+ Q_{\pm,\epsilon}\in
+  \operatorname{Mat}_{N_\pm}\Gamma(J,\mathcal O_J)
+\]
+such that
+\[
+ \boxed{
+ \sup_K\|Q_{\pm,\epsilon}-P_\pm\|<\epsilon,
+ \quad
+ \sup_K\|Q_{\pm,\epsilon}^2
+              -Q_{\pm,\epsilon}\|\xrightarrow[\epsilon\to0]{}0.
+ }                                                   \tag{55}
+\]
+After choosing epsilon sufficiently small,
+the holomorphic Riesz spectral projectors
+\[
+ \widetilde P_{\pm,\epsilon}(x)=
+   \frac{1}{2\pi i}\oint_{|\lambda-1|=1/2}
+       (\lambda I-Q_{\pm,\epsilon}(x))^{-1}\,d\lambda
+                                                              \tag{56}
+\]
+exist on an actual analytic OPEN NEIGHBORHOOD
+of K, and on K they are homotopic as
+topological idempotents to $P_\pm$.
+Consequently
+\[
+ \boxed{
+ \left[
+   \operatorname{ch}_p(\widetilde P_{+,\epsilon})
+  -\operatorname{ch}_p(\widetilde P_{-,\epsilon})
+ \right]\Big|_K
+        =m(q^*\alpha)|_K.}                           \tag{57}
+\]
+At the SAME TIME, each $Q_{\pm,\epsilon}$ determines
+an ACTUAL finite algebraic spectral world
+\[
+ \boxed{
+ T_{\pm,\epsilon}
+ =\operatorname{Spec}_J
+  \frac{\mathcal O_J[\lambda]}
+       {\det(\lambda I-Q_{\pm,\epsilon})}
+       \longrightarrow J ,}                         \tag{58}
+\]
+finite flat of degree $N_\pm$, with concrete
+characteristic-polynomial and discriminant
+equations chosen from the prescribed
+$\alpha$ through the holomorphic projectors.
+Neither (56) nor the topological sheet class
+(57) is asserted to extend to a REGULAR
+ALGEBRAIC idempotent on J.
+\end{theorem}
+\begin{proof}
+The affine-space torsor $q$ is a complex
+homotopy equivalence, and X has finite
+dimensional rational singular homology.
+Represent a finite basis of
+$H_{2p}(J,\mathbb Q)$ by finite singular
+cycles and take K to contain their
+compact images. The inclusion
+$H_{2p}(K,\mathbb Q)\to H_{2p}(J,\mathbb Q)$
+is surjective. Duality over Q and the
+universal coefficient theorem yield
+the injection (54). Enlarging K
+preserves this property.
+
+Choose a closed algebraic embedding
+$J\hookrightarrow\mathbb A_{\mathbb C}^M$.
+By the ideal-sheaf exact sequence and
+Cartan Theorem B on the Stein manifold
+$\mathbb C^M$, EVERY holomorphic entry
+of $P_\pm$ extends to an ENTIRE function
+on $\mathbb C^M$. Its Taylor polynomials
+converge uniformly on every compact
+subset. Restrict sufficiently many of
+these polynomials to J to obtain actual
+global REGULAR ALGEBRAIC functions
+approximating ALL finitely many entries
+of $P_\pm$ uniformly on K.
+This gives the first assertion (55).
+The algebraic polynomial defect obeys
+\[
+ Q^2-Q=(Q-P)^2+(Q-P)P+P(Q-P)-(Q-P),
+\]
+so the second assertion (55) follows
+uniformly from $P^2=P$ and boundedness
+of P on compact K.
+This construction actually creates
+regular polynomial matrices from the
+specified target class, without
+algebraic K0 or CH witnesses.
+
+For an idempotent P and
+$|\lambda-1|=1/2$ one has the
+EXACT resolvent
+\[
+ (\lambda I-P)^{-1}=
+ \lambda^{-1}(I-P)+(\lambda-1)^{-1}P .
+\]
+The norms of these resolvents are
+bounded uniformly over K and the
+chosen contour. If Q is sufficiently
+close to P on K, the Neumann series
+shows the same contour avoids the
+spectrum of every $P+s(Q-P)$,
+$s\in[0,1]$, uniformly on K.
+Continuity gives an analytic
+neighborhood on which (56) is
+well-defined and holomorphic.
+The Riesz projectors along the
+straight homotopy are a continuous
+homotopy of idempotents on K.
+Their actual topological Chern
+characters therefore agree.
+Naturality of the holomorphic
+Chern character and the original
+choice of $P_\pm$ give (57).
+
+Finally
+$\det(\lambda I-Q)$ is a monic
+polynomial of degree $N_\pm$
+over the genuine affine algebraic
+coordinate ring of J. Its quotient
+is a finite FREE module of rank
+$N_\pm$, giving the actual
+finite flat algebraic spectral
+cover (58), whether or not
+its discriminant vanishes.
+The selected 0/1 eigenvalue
+clusters are holomorphic on K
+but need not be invariant under
+the global algebraic monodromy
+of this genuine spectral cover.
+\end{proof}
+
+
+\begin{theorem}[Genuine full spectral eigenmodule pushes to a FREE original-world bundle for EVERY finite polynomial GST fold]
+Let $J$ be ANY smooth complex AFFINE
+algebraic fold with coordinate ring R,
+and let $Q\in\operatorname{Mat}_N(R)$
+be ANY actual globally regular
+algebraic matrix, including EVERY
+target-dependent approximation
+$Q_{\alpha,\epsilon}$ of (55).
+Let
+\[
+ \chi_Q(\lambda)=\det(\lambda I-Q),
+ \quad
+ A=R[\lambda]/(\chi_Q),
+ \quad
+ \pi:T=\operatorname{Spec}A\to J
+\]
+be its genuine finite algebraic spectral
+world. Define the ACTUAL algebraic
+coherent spectral eigensheaf
+\[
+ \mathcal M_Q=
+ \operatorname{coker}\left(
+   \lambda I-Q:\mathcal O_T^{\,N}
+                         \to\mathcal O_T^{\,N}
+                         \right).
+\]
+Then the source-to-target return is
+\[
+ \boxed{\pi_*\mathcal M_Q
+                  \cong\mathcal O_J^{\,N}
+             \quad\text{as ACTUAL algebraic
+                         vector bundles}.}            \tag{63}
+\]
+Consequently for every $p\ge1$,
+\[
+ \boxed{
+ \operatorname{ch}^{CH}_p
+        ([\pi_*\mathcal M_Q])=0
+       \quad\text{in }CH^p(J)_{\mathbb Q},
+ \qquad
+ \operatorname{cl}^{can}_J
+        \operatorname{ch}^{CH}_p
+             ([\pi_*\mathcal M_Q])=0.}           \tag{64}
+\]
+This is NOT merely a vanishing
+period or a numerical linearization:
+the entire canonical coherent
+spectral-module pushforward is
+LITERALLY algebraically trivial.
+
+In particular, the global original-$X$
+CHOW return of the canonical full
+spectral eigensheaf is ZERO in all
+positive degrees on the genuine
+Jouanolou fold, even when the
+polynomial Q was chosen from a
+prescribed NONZERO primitive Hodge
+target alpha and its LOCAL analytic
+$1$-eigencluster correctly encodes
+that target on the compact core.
+To create a nonzero original-$X$
+positive-degree Chow source, the
+GST fold must include an operation
+NOT equal to this unsplit full
+spectral-module return: for
+example a genuinely ALGEBRAIC
+selected summand, nonlinear
+component product, or independently
+constructed twisting/sheaf source.
+No such extra source is assumed
+to exist universally here.
+\end{theorem}
+\begin{proof}
+View the actual free R-module
+$M=R^N$ as an $R[\lambda]$-module
+by letting lambda act via the
+given algebraic matrix Q.
+The Cayley--Hamilton identity
+$\chi_Q(Q)=0$ shows that this
+action factors through the
+finite algebra A.
+Define the genuine R[lambda]-linear
+surjection
+\[
+ \Phi:R[\lambda]^N\longrightarrow M,
+ \qquad
+ \sum_{k=0}^{r}\lambda^k v_k
+                 \longmapsto
+             \sum_{k=0}^{r}Q^k v_k.
+\]
+For each $v\in R^N$, the identity
+\[
+ \lambda^k v-Q^k v
+   =(\lambda I-Q)
+      \sum_{j=0}^{k-1}
+         \lambda^{k-1-j}Q^j v
+\]
+holds in $R[\lambda]^N$.
+It shows that EVERY polynomial
+vector is congruent, modulo
+$\operatorname{im}(\lambda I-Q)$,
+to the constant vector obtained
+by replacing lambda with Q.
+Constant vectors killed in the
+quotient are zero after applying
+Phi, so the exact kernel is
+$\operatorname{im}(\lambda I-Q)$.
+This gives an ACTUAL isomorphism
+\[
+ \operatorname{coker}_{R[\lambda]}
+       (\lambda I-Q)\cong R^N
+\]
+as R[lambda]-modules, with lambda
+acting as Q on the right.
+Since Cayley--Hamilton makes
+chi_Q act as zero, the same
+cokernel computed over A is
+precisely the A-module
+$\mathcal M_Q$ on T.
+Restriction of scalars along
+$R\to A$ is the actual finite
+pushforward $\pi_*$.
+Thus $\pi_*\mathcal M_Q
+\cong R^N$ without a homotopy,
+an analytic approximation, a
+Hodge assumption, or a sign choice.
+
+The rational algebraic Chern character
+of a free rank-N vector bundle has
+vanishing positive Chow-degree
+components. Canonical Betti
+comparison preserves this equality,
+and the actual affine-bundle
+$q^*:CH^p(X)\overset\sim\to CH^p(J)$
+returns zero on X for $p\ge1$.
+This proves the universal typed
+source-obstruction (63)--(64).
+\end{proof}
+
+\begin{theorem}[Universal quantitative source-type gap and forced spectral-gap closure]
+Use the exact input and compact core K
+of the previous theorem. Define
+\[
+ M=\max_{\pm}\sup_{x\in K}
+       \|2P_\pm(x)-I\|,\qquad
+ \delta=\frac{1}{2\max(1,M)}>0 .
+\]
+If ACTUAL REGULAR ALGEBRAIC idempotents
+$R_\pm\in\operatorname{Mat}_{N_\pm}
+\Gamma(J,\mathcal O_J)$ satisfy
+\[
+ \boxed{\max_\pm\sup_K\|R_\pm-P_\pm\|<\delta,} \tag{59}
+\]
+then an actual original-$X$
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$
+exists with
+$\operatorname{cl}^{can}_X(Z_\alpha)=\alpha$.
+
+The contrapositive is a UNIFORM POSITIVE
+norm gap for a nonalgebraic rational
+cohomology class: when
+$\alpha\notin\operatorname{im}
+\mathrm{cl}^{can}_X$,
+no exact regular algebraic pair
+$R_\pm$ of the same sizes can
+satisfy (59), although the
+approximate polynomial matrices (55)
+exist with arbitrarily small
+idempotency defect for that
+same alpha.
+
+More generally let $Q_{s,\pm}$,
+$s\in[0,1]$, be a CONTINUOUS family
+of regular polynomial or holomorphic
+matrices on J. If for every
+$(s,x)\in[0,1]\times K$ their spectra
+avoid the fixed separation circle
+$|\lambda-1|=1/2$, then the associated
+Riesz $1$-cluster projectors on K have
+CONSTANT rational degree-$2p$
+Chern-character difference.
+Hence interpolating between two
+different rational cohomology classes
+detected on K NECESSARILY forces
+some actual $(s,x)$ at which an
+eigenvalue crosses that circle.
+A geometric discriminant located
+entirely AWAY from the cohomological
+core is not such a change.
+\end{theorem}
+\begin{proof}
+For arbitrary idempotents P and R
+in the SAME finite matrix algebra, put
+\[
+ U=RP+(I-R)(I-P)
+   =I+(R-P)(2P-I).
+\]
+The hypothesis (59) implies
+$\|U-I\|<1/2$ on K, so
+U is invertible there by the
+Neumann series. Moreover
+$UP=RP=RU$, hence
+$R=UPU^{-1}$ on K.
+Thus the true complex topological
+vector bundles defined by R and P
+are isomorphic over K, and their
+Chern characters agree there.
+Since restriction of $H^{2p}(J,\mathbb Q)$
+to K is injective, the genuine
+algebraic projectors R have
+Chern-character difference
+$m q^*\alpha$ in FULL rational
+cohomology of J.
+The affine-bundle Chow isomorphism
+$q^*:CH^p(X)_{\mathbb Q}
+ \overset\sim\longrightarrow
+ CH^p(J)_{\mathbb Q}$
+therefore returns
+\[
+ Z_\alpha=(q^*)^{-1}
+ \frac{\operatorname{ch}^{CH}_p(\operatorname{im}R_+)
+       -\operatorname{ch}^{CH}_p(\operatorname{im}R_-)}m
+\]
+with EXACT canonical rational Betti class alpha.
+The quantitative contrapositive follows.
+This does NOT construct the regular R for
+unknown higher-primitive alpha.
+
+For the path $Q_{s,\pm}$,
+the fixed spectral gap allows
+the Riesz contour integral to vary
+continuously in $(s,x)$ over
+$[0,1]\times K$.
+It yields a genuine homotopy
+of finite-rank topological bundle
+projectors, so the rational
+Chern-character difference on K
+is constant. Injectivity (54)
+then distinguishes any different
+original-$X$ endpoint classes.
+The required gap crossing is
+a NECESSARY topology-changing
+event; existence of that event
+does not automatically create
+a valid algebraic Chow source.
+\end{proof}
+
+
+\begin{theorem}[Nonlinear spectral square source from an actual resolved double-world: TRUE original-$X$ codimension-two Chow construction]
+Let $X$ be ANY smooth projective
+complex original variety with
+$\dim X\ge2$, let $q:J\to X$
+be its smooth affine GST fold,
+and let $Q\in\operatorname{Mat}_2
+\Gamma(J,\mathcal O_J)$ be ANY
+regular algebraic matrix whose
+discriminant
+\[
+ D=(\operatorname{Tr}Q)^2-4\det Q
+\]
+is nonzero and nonsquare in the
+function field $\mathbb C(J)$.
+It may be chosen from a prescribed
+Hodge target by taking a genuinely
+algebraic polynomial matrix made
+from that target's previously
+constructed regular differential
+or its approximate holomorphic
+spectral matrices, without ever
+supplying a target Chow cycle.
+
+Let $T\to J$ be the actual
+finite degree-two spectral cover
+obtained by adjoining $t$ with
+$t^2=D$. Take the normalization
+followed by an ACTUAL
+equivariant smooth algebraic
+resolution $\rho:\widetilde T\to T$
+and denote by
+$\pi:\widetilde T\to J$
+the proper composite map.
+Over the true finite etale locus
+$U=\{D\ne0\}\subset J$, let
+$L_\pm$ be the ACTUAL algebraic
+rank-one spectral eigensheaves
+from
+\[
+ E_\pm=\tfrac12
+  \left(I\pm
+       \frac{2Q-(\operatorname{Tr}Q)I}{t}\right).
+\]
+Choose an algebraic extension
+$\bar L_+$ of $L_+$ to an ACTUAL
+line bundle on smooth $\widetilde T$,
+choose its deck transform
+$\bar L_-=\sigma^*\bar L_+$,
+and form the genuine algebraic
+virtual $K_0$ source
+\[
+ \Delta_Q=[\bar L_+]-[\bar L_-]
+            \in K_0(\widetilde T).
+\]
+Then the LINEAR source return
+vanishes in genuine $G_0(J)$:
+\[
+ \boxed{\pi_*(\Delta_Q)=0.}                \tag{65}
+\]
+But the nonlinear square
+$\Delta_Q^{\otimes2}$ is invariant
+under the deck involution and
+defines an ACTUAL original-$X$
+codimension-two rational
+Chow candidate
+\[
+ \boxed{
+ Z_Q=(q^*)^{-1}
+    \operatorname{ch}^{CH}_2
+       \bigl(\pi_*(\Delta_Q^{\otimes2})\bigr)
+      \in CH^2(X)_{\mathbb Q}.}           \tag{66}
+\]
+Its exact actual Chow formula is
+\[
+ \boxed{
+ q^*Z_Q=
+   \pi_*\bigl(
+      c_1^{CH}(\bar L_+)
+        -c_1^{CH}(\bar L_-)
+        \bigr)^2
+        \quad\text{in }CH^2(J)_{\mathbb Q}.
+ }                                       \tag{67}
+\]
+This is the precise all-original-$X$
+nonlinear spectral analogue of
+the October 22 double-world
+anti-times-anti construction:
+an actual algebraic cover,
+its genuine eigensheaves,
+and its actual original-X
+CHOW return are built from
+REGULAR polynomial geometry.
+A target equality
+$\operatorname{cl}^{can}_X(Z_Q)
+=\alpha$ is not asserted
+without a separate exact
+canonical period computation.
+In particular the linear
+invariance obstruction (65)
+does not prevent a nonzero
+quadratic source in general.
+
+On the original quadric
+$J=Q=\{xy+z^2=1\}$ itself,
+$CH^2(Q)_{\mathbb Q}=0$,
+so ALL such quadratic
+spectral returns to THAT base
+must vanish in codimension two.
+This is a genuine source-type
+countertest, not a universal
+vanishing claim on arbitrary X.
+\end{theorem}
+\begin{proof}
+Since D is nonzero and nonsquare
+over the function field, the
+actual quadratic algebra defines
+a degree-two integral cover of J.
+On the étale locus U, t is
+invertible and
+\[
+ (2Q-(\operatorname{Tr}Q)I)^2
+   = D I
+\]
+by Cayley--Hamilton for a
+two-by-two matrix. Thus the E_pm
+are actual regular algebraic
+idempotents on the double cover
+over U, of rank one; their images
+are true algebraic line bundles
+exchanged by the deck map.
+Equivariant resolution in
+characteristic zero gives smooth
+$\widetilde T$ with an algebraic
+involution. As the missing
+locus has divisor support,
+any algebraic line bundle on
+the regular étale open extends
+to an algebraic line bundle on
+smooth $\widetilde T$: take the
+closure of a Weil divisor
+representative, which is
+Cartier on the smooth resolution.
+Take the conjugate extension
+by the involution.
+
+Proper functoriality of
+pushforward in coherent G-theory
+and $\pi\circ\sigma=\pi$ gives
+$\pi_*[\bar L_-]=
+  \pi_*[\bar L_+]$;
+hence the linear K/G source
+difference vanishes INTEGRALLY,
+establishing (65). The algebraic
+K-class $\Delta_Q$ has VIRTUAL
+RANK ZERO, and its square is
+invariant under sigma. Its
+proper coherent pushforward
+lies in $G_0(J)=K_0(J)$ because
+J is smooth, so the
+degree-two rational Chow
+Chern character and original-X
+Jouanolou inverse are ACTUAL
+well-typed operations.
+This constructs (66).
+
+Write $a=c_1^{CH}(\bar L_+)$
+and $b=c_1^{CH}(\bar L_-)$.
+The total rational Chow
+Chern character is
+\[
+ \operatorname{ch}^{CH}(\Delta_Q)
+   =e^a-e^b=(a-b)+O(CH^2),
+\]
+hence
+$\operatorname{ch}(\Delta_Q^{\otimes2})
+=(e^a-e^b)^2$ has CH degrees
+ZERO and ONE identically zero,
+and degree TWO equal to
+$(a-b)^2$.
+Apply actual Grothendieck--
+Riemann--Roch for proper
+$\pi:\widetilde T\to J$
+between smooth algebraic schemes:
+\[
+ \operatorname{ch}(\pi_*D^2)
+       \operatorname{td}(T_J)
+  =\pi_*\bigl(
+       \operatorname{ch}(D^2)
+       \operatorname{td}(T_{\widetilde T})
+          \bigr).
+\]
+Since $\pi$ has relative
+dimension zero and the
+degree zero and one parts of
+$\operatorname{ch}(D^2)$ vanish,
+the TODD correction contributes
+nothing in codimension two.
+Therefore the degree-two
+identity is EXACTLY
+$\operatorname{ch}^{CH}_2
+        (\pi_*D^2)=\pi_*(a-b)^2$.
+This proves (67) in
+genuine rational CHOW, not
+just a de Rham or numerical
+equality.
+
+On Q the actual affine-line
+torsor $Q\to\mathbb P^1$
+gives
+$CH^2(Q)\cong CH^2(\mathbb P^1)=0$.
+Thus no codimension-two
+original-Q Chow class arises
+from (66), regardless of how
+nontrivial the resolved
+spectral cover geometry is.
+The general original-X
+construction is not asserted
+to vanish.
+\end{proof}
+
+
+\begin{corollary}[Uniform all-codimension character parity of the nonlinear anti-eigenline source]
+Keep the ACTUAL $2$-sheet
+normalization, smooth equivariant
+resolution and algebraic line
+bundles $\bar L_\pm$ of the
+preceding theorem.
+For EVERY integer $r\ge1$,
+the ACTUAL proper coherent
+K-theory return satisfies
+\[
+ \boxed{
+ \operatorname{ch}^{CH}_r
+      \bigl(\pi_*(\Delta_Q^{\otimes r})\bigr)
+   =\pi_*\bigl(
+      c_1^{CH}(\bar L_+)
+       -c_1^{CH}(\bar L_-)
+               \bigr)^r
+       \ \in CH^r(J)_{\mathbb Q}.
+ }                                               \tag{68}
+\]
+Moreover for all ODD $r$,
+\[
+ \boxed{\pi_*(\Delta_Q^{\otimes r})=0
+                      \quad\text{in }G_0(J),}    \tag{69}
+\]
+whereas for EVERY EVEN codimension
+$r=2k\le\dim X$ the explicitly
+constructed algebraic class
+\[
+ \boxed{
+ Z_{Q,2k}=(q^*)^{-1}
+     \pi_*\bigl(
+          c_1(\bar L_+)-c_1(\bar L_-)
+                 \bigr)^{2k}
+       \in CH^{2k}(X)_{\mathbb Q}
+ }                                               \tag{70}
+\]
+is a genuine SAME-fold nonlinear
+original-$X$ rational Chow source.
+Its canonical Betti class is
+determined by actual algebraic
+proper pushforward, not by
+a hypothetical Hodge-to-Chow
+selector. It may be zero.
+In odd codimensions a nonlinear
+source requires either a
+NONTRIVIAL additional character
+whose total charge is neutral,
+or an additional genuine algebraic
+source factor; an odd power of
+a lone double-world anti-character
+cannot survive as stated.
+
+The even-power source family
+is an actual CONSTRUCTOR for any
+chosen spectral cover, not a
+uniform theorem asserting
+$cl_X^{can}(Z_{Q,2k})=\alpha$
+for an arbitrary prescribed
+higher-primitive $\alpha$.
+\end{corollary}
+\begin{proof}
+Set $a=c_1^{CH}(\bar L_+)$,
+$b=c_1^{CH}(\bar L_-)$.
+The virtual class Delta has
+rank zero and
+\[
+ \mathrm{ch}(\Delta_Q)=
+     e^a-e^b=(a-b)+O(CH^2).
+\]
+For ANY r, the Chern character
+of the tensor power is
+\[
+ \mathrm{ch}(\Delta_Q^{\otimes r})
+   =(e^a-e^b)^r
+   =(a-b)^r+O(CH^{r+1}),
+\]
+and ALL Chow degrees below r
+vanish EXACTLY.
+Apply actual GRR for proper
+$\pi:\widetilde T\to J$.
+As pi has relative
+dimension zero, no Todd factor
+contributes at Chow degree r;
+the degree-r part yields (68).
+Because the equivariant
+deck map sends Delta to
+$-\Delta$, it sends its rth
+power to $(-1)^r\Delta^r$.
+For odd r the two coherent
+pushforward classes are
+canonically isomorphic
+after the deck involution,
+so their difference is zero,
+proving (69) in actual G0,
+not just rational Chow.
+For even r formula (68)
+combined with the true
+Jouanolou Chow isomorphism
+produces (70).
+The sign/character condition
+agrees with the original
+October 22 antideck
+character-selection law.
+\end{proof}
+
+
+\begin{theorem}[Rank-two spectral complementarity kills repeated anti-eigenline sources on the unramified world]
+For the true rank-two spectral
+double-world above, restrict to
+the actual finite etale locus
+$T^\circ\to J^\circ$.
+The two globally algebraic
+eigenline bundles satisfy the
+exact split vector-bundle identity
+\[
+  L_+\oplus L_-
+       \simeq\mathcal O_{T^\circ}^{\oplus2}.
+\]
+In the INTEGRAL algebraic ring
+$K_0(T^\circ)$ define
+$u=[L_+]-1$. Then
+\[
+ \boxed{
+ [L_-]=1-u,\quad
+ [L_+][L_-]=1,\quad
+ u^2=0,\quad
+ \Delta=[L_+]-[L_-]=2u,\quad
+ \Delta^{\otimes r}=0\ (r\ge2).
+ }                                               \tag{71}
+\]
+Consequently the apparently
+possible original-$X$ nonlinear
+sources (66) and (70), made
+from REPEATED powers of just
+ONE eigenline difference, are
+ZERO after restricting to
+the unramified spectral cover.
+Any global source
+$\pi_*(\Delta_Q^{\otimes r})$,
+$r\ge2$, formed after
+extending the line bundles to
+a smooth equivariant
+resolution, is therefore a
+BOUNDARY-LOCALIZED coherent
+K-theory class: it is represented
+in the image of G-theory with
+support on the ramification or
+exceptional locus.
+Its original-$X$ Chow return
+is supported over the algebraic
+spectral discriminant.
+
+This is a precise correction to
+treating the lone quadratic
+anti-eigenline square as an
+independently supported NEW
+bulk higher-primitive source.
+The genuine original-$X$
+construction and GRR identities
+remain valid, but a nontrivial
+class, if any, must come from
+actual ramification-localized
+excess geometry, not from the
+repeated bulk eigenline.
+\end{theorem}
+\begin{proof}
+The idempotents $E_+,E_-$
+are orthogonal complementary
+endomorphisms of the SAME
+actual trivial rank-two
+bundle over $T^\circ$.
+Thus $L_+\oplus L_-=
+O^{\oplus2}$, so their
+sum in integral K0 is 2.
+Taking the determinant of
+this ACTUAL bundle
+isomorphism gives
+$L_+\otimes L_-\simeq O$,
+hence their K0 product is 1.
+Writing $[L_+]=1+u$,
+the first equality forces
+$[L_-]=1-u$, and the
+determinant identity becomes
+$(1+u)(1-u)=1$.
+Therefore $u^2=0$
+IN INTEGRAL $K_0(T^\circ)$.
+Their virtual difference is
+$2u$, so ALL of its tensor
+powers $r\ge2$ vanish there.
+
+Take a smooth equivariant
+resolution of the entire
+branched spectral cover,
+and extend $L_\pm$.
+Its open etale region is
+$T^\circ$. The coherent
+G-theory localization exact
+sequence for the closed
+complement $E$ is
+\[
+ G_0(E)\longrightarrow
+ G_0(\widetilde T)
+ \longrightarrow G_0(T^\circ)
+ \longrightarrow0 .
+\]
+Because the whole nonlinear
+power restricts to zero, it
+lies in the image of the
+boundary-supported G0 term.
+Proper pushforward to
+the smooth affine J carries
+this class to a coherent
+K0 class supported on the
+spectral discriminant.
+Its rational Chern character
+therefore has no bulk source
+outside that branch support,
+proving the asserted precise
+source locality.
+\end{proof}
+
+\begin{theorem}[All-$X$ MIXED independent anti-eigenline source:
+a genuine codimension-$r$ Chow channel with exact charge law]
+Let $X$ be ANY smooth projective
+original variety, $q:J\to X$
+its smooth affine fold,
+and let $\pi:\widetilde T\to J$
+be a genuine smooth equivariantly
+resolved algebraic double-world
+obtained from a COMMON quadratic
+characteristic extension.
+Suppose the same unramified
+double cover carries $r$
+INDEPENDENT rank-two algebraic
+spectral splitting pairs
+$L_{i,+}\oplus L_{i,-}\simeq
+  \mathcal O^{\oplus2}$,
+$i=1,\ldots,r$, swapped by
+the same deck involution.
+Extend equivariantly to
+genuine algebraic line bundles
+$\bar L_{i,\pm}$ on
+$\widetilde T$, and put
+\[
+ \Delta_i=[\bar L_{i,+}]
+                 -[\bar L_{i,-}]
+       \in K_0(\widetilde T).
+\]
+Then on the true etale open,
+\[
+ \boxed{
+ \Delta_i=2u_i,\quad u_i^2=0,\qquad
+ \Delta_1\cdots\Delta_r
+          =2^r u_1\cdots u_r .}             \tag{72}
+\]
+The MIXED product may be nonzero
+even though every repeated
+$\Delta_i^2$ vanishes there.
+The actual ORIGINAL-$X$
+codimension-r CHOW return is
+\[
+ \boxed{
+ Z_{Q_1,\ldots,Q_r}
+  =(q^*)^{-1}\operatorname{ch}_r^{CH}
+       \bigl(\pi_*(\Delta_1\cdots\Delta_r)\bigr)
+  =(q^*)^{-1}\pi_*
+       \prod_{i=1}^{r}
+       (c_1(\bar L_{i,+})
+                -c_1(\bar L_{i,-}))
+       \in CH^r(X)_{\mathbb Q}.}             \tag{73}
+\]
+For odd r it vanishes by the
+same deck-character law.
+For even r, the mixed product
+is deck-neutral and can be
+NONZERO in actual original-X
+Chow. As always, exact equality
+with a prescribed arbitrary
+higher-primitive rational
+Hodge alpha requires a genuine
+canonical Betti computation
+of the particular constructed
+mixed product; character
+neutrality alone does not
+establish that equality.
+\end{theorem}
+\begin{proof}
+For each i, the same exact
+K0 complementarity argument
+as (71) gives $\Delta_i=2u_i$
+and $u_i^2=0$ on the etale
+open. It imposes NO relation
+forcing $u_iu_j=0$ for
+different i,j.
+On the entire equivariant
+smooth resolution, the
+source is the actual K0
+tensor product
+$\prod_i\Delta_i$.
+Its rational Chow Chern
+character is
+\[
+ \prod_i
+  \big(e^{a_i}-e^{b_i}\big),
+ \quad a_i=c_1(\bar L_{i,+}),
+ \quad b_i=c_1(\bar L_{i,-}),
+\]
+whose terms of degrees below r
+vanish, and whose degree-r
+term is $\prod_i(a_i-b_i)$.
+Proper GRR and the relative
+dimension zero of the finite
+spectral world plus resolution
+give exactly (73); no Todd
+corrections can enter degree r.
+If r is odd, the equivariant
+deck involution changes the
+sign of the source while
+proper return is invariant,
+so the integral G0 class
+cancels. For even r it is
+invariant. Actual
+nonvanishing is proved
+in the following explicit
+source example.
+\end{proof}
+
+\begin{theorem}[TRUE simultaneous GST affine quadric worlds:
+independent anti-sources give nonzero original Chow in EVERY even codimension]
+Let $r\ge2$ be EVEN and
+let the original smooth
+projective variety be
+$X=(\mathbb P^1)^r$.
+Let $Q_i=\{x_iy_i+z_i^2=1\}$
+be the ACTUAL Jouanolou
+affine-line world of the i-th
+$\mathbb P^1$ and put
+\[
+ J=\prod_{i=1}^{r}Q_i
+    \xrightarrow{q}
+    X,\qquad
+ h_i=c_1^{CH}
+   (\operatorname{pr}_i^*
+     O_{\mathbb P^1}(1)).
+\]
+On J, let $P_i$ be the
+regular algebraic spectral
+idempotent of the ith Q
+factor, with
+$L_i=\operatorname{im}P_i
+ =q^*\operatorname{pr}_i^*
+      O_{\mathbb P^1}(-1)$
+and algebraic complementary
+line bundle $L_i^{-1}$.
+The r rank-two matrices
+$P_i$ all have the SAME
+split characteristic
+polynomial
+$\lambda(\lambda-1)$,
+so they determine the
+one COMMON ACTUAL double-world
+\[
+ T=J\times\operatorname{Spec}
+       \bigl(\mathbb C[t]/(t^2-1)\bigr)
+   =J\sqcup J
+\]
+with its sheet-switching
+deck involution.
+Let the r actual
+anti-eigenline classes
+$\Delta_i$ be defined by
+$E_{i,\pm}=(I\pm(2P_i-I)/t)/2$.
+Then each
+$\Delta_i^2=0$ in actual
+$K_0(T)$, but the mixed
+product has NONZERO
+original-$X$ Chow return
+\[
+ \boxed{
+ Z_{P_1,\ldots,P_r}
+   =2^{r+1}
+        h_1h_2\cdots h_r
+   \ne0\in CH^r(X)_{\mathbb Q}.
+ }                                             \tag{74}
+\]
+Its canonical rational
+Betti class is exactly
+$2^{r+1}\prod_i cl^{can}(h_i)$.
+Thus genuinely INDEPENDENT
+same-world algebraic spectral
+anti-sources, unlike repeated
+powers of a single one,
+DO produce a nonzero
+original-$X$ codimension-r
+Chow class for EVERY even r.
+This is a controlled
+divisor-generated positive
+construction, NOT evidence
+that arbitrary higher-primitive
+rational Hodge classes are
+products of divisor classes.
+\end{theorem}
+\begin{proof}
+On the actual affine product,
+put $u_i=[L_i]-1\in K_0(J)$.
+Each $P_i$ is an actual rank-one
+algebraic idempotent with
+complementary algebraic line,
+so $u_i^2=0$ as in (71).
+Their CHERN characters
+satisfy
+$\operatorname{ch}(u_i)=
+  e^{-h_i}-1=-h_i$
+because $h_i^2=0$ in
+the actual Chow ring
+of $(\mathbb P^1)^r$.
+On the two components of T,
+the signs of each Delta_i
+are simultaneously reversed
+by the deck switch.
+Hence the mixed product on
+each sheet is
+$2^r\prod_i u_i$ since r is
+even. Proper finite pushforward
+from the DISJOINT TWO SHEETS
+returns
+$2^{r+1}\prod_i u_i$
+in ACTUAL $K_0(J)$.
+Its degree-r Chern character is
+$2^{r+1}\prod_i(-h_i)
+=2^{r+1}\prod_i h_i$.
+The true Jouanolou
+homotopy isomorphism
+$CH^r(X)\overset\sim\to CH^r(J)$
+returns precisely (74).
+The product $\prod_i h_i$
+is the rational Chow class
+of a point on
+$(\mathbb P^1)^r$ and is
+NONZERO with canonical
+Betti degree one.
+This is a direct exact
+class calculation in genuine
+algebraic CHOW; no numerical
+Gram, assumed rational
+Hodge basis, or topological
+virtual-source substitution
+is used.
+\end{proof}
+
+\begin{theorem}[An actual two-sheet polynomial spectral fold with MONODROMY, no algebraic sheet selector, and vanishing linear anti-deck return]
+Return to the SAME TRUE affine GST quadric
+$J=Q=\operatorname{Spec}
+ \mathbb C[x,y,z]/(xy+z^2-1)$.
+For any sufficiently small
+real $\varepsilon>0$, the
+REGULAR ALGEBRAIC near-projector
+\[
+ \boxed{
+ Q_\varepsilon=
+ \begin{pmatrix}
+   1&\varepsilon x\\
+   \varepsilon y&0
+ \end{pmatrix},
+ \quad
+ Q_\varepsilon^2-Q_\varepsilon
+       =\varepsilon^2xy I_2}                  \tag{60}
+\]
+converges on every fixed compact
+K to the EXACT regular idempotent
+$\operatorname{diag}(1,0)$.
+Its genuine degree-two spectral cover
+is the smooth finite double-world
+\[
+ \boxed{
+ \pi:T_\varepsilon\to Q,\qquad
+ t^2=D_\varepsilon(z)
+ =1+4\varepsilon^2(1-z^2).}                  \tag{61}
+\]
+The function-field extension
+$\mathbb C(Q)(\sqrt{D_\varepsilon})/
+ \mathbb C(Q)$ is quadratic
+for every positive epsilon.
+There is NO nontrivial
+rational algebraic idempotent
+commuting with the matrix
+$Q_\varepsilon$ on Q,
+even though the nearby
+regular rank-one idempotent
+$\operatorname{diag}(1,0)$
+certainly exists.
+
+Over the nonbranch open locus
+$Q^\circ=\{D_\varepsilon\ne0\}$,
+the ACTUAL algebraic involution
+on the cover
+\[
+ B_\varepsilon
+ =\frac{2Q_\varepsilon-I}{t},
+ \qquad B_\varepsilon^2=I,\qquad
+ E_\pm=\frac{I\pm B_\varepsilon}{2}
+\]
+produces two genuine regular
+algebraic rank-one eigenmodules
+$L_\pm=\operatorname{im}E_\pm$ on
+$T_\varepsilon^\circ$.
+The deck transformation
+$\sigma(t)=-t$ EXCHANGES them.
+Consequently the genuine
+algebraic $K_0$ anti-source
+obeys
+\[
+ \boxed{
+ \pi_*([L_+]-[L_-])=0
+        \quad\text{in }
+          K_0^{alg}(Q^\circ).}                \tag{62}
+\]
+The two true branch fibers on
+the ORIGINAL Q are at
+$z=\pm\sqrt{1+(4\varepsilon^2)^{-1}}$.
+Each is an irreducible
+principal Cartier divisor of Q,
+hence its individual original
+CH$^1(Q)$ class is ZERO.
+As $\varepsilon\to0$, the branch
+fibers escape every fixed compact
+core, although the two-world
+algebraic monodromy is genuinely
+nontrivial for every epsilon.
+\end{theorem}
+\begin{proof}
+Direct matrix multiplication gives
+(60) and
+\[
+ \det(\lambda I-Q_\varepsilon)
+  =\lambda^2-\lambda-\varepsilon^2xy,\qquad
+ (2Q_\varepsilon-I)^2
+   =(1+4\varepsilon^2xy)I .
+\]
+On the actual Q, $xy=1-z^2$, giving
+the discriminant equation (61).
+The rational function field is
+$\mathbb C(Q)=\mathbb C(x,z)$.
+For every positive epsilon,
+$D_\varepsilon(z)$ has two
+DISTINCT SIMPLE zeros in z.
+Its order at each corresponding
+divisorial valuation of
+$\mathbb C(x,z)$ is one, hence
+it cannot be a square in that
+field. Therefore the
+characteristic polynomial is
+irreducible over $\mathbb C(Q)$.
+The centralizer of
+$Q_\varepsilon$ in
+$\operatorname{Mat}_2(\mathbb C(Q))$
+is the FIELD
+$\mathbb C(Q)[Q_\varepsilon]$,
+which has no idempotents other
+than 0 and 1. Thus its local
+0/1 cluster cannot be made
+a rational algebraic commuting
+idempotent on the original Q.
+This statement concerns the
+chosen polynomial Q, not every
+possible algebraic projector.
+
+The branch components
+$z=\pm\sqrt{1+(4\varepsilon^2)^{-1}}$
+are smooth irreducible
+$\mathbb G_m$ fibers, since their
+$xy=1-z^2$ constant is
+nonzero; they are cut by the
+single regular functions
+$z-\text{constant}$, so each
+is principal and has Chow
+class zero on Q.
+The double cover T itself
+is smooth because the branch
+divisor is smooth and the
+defining equations have
+linearly independent gradients
+along the ramification.
+Away from branch t is invertible,
+and the displayed E_+,E_-
+are honest regular algebraic
+idempotents satisfying
+$E_++E_-=I$.
+The deck involution exchanges
+them, so for finite etale
+$\pi:T_\varepsilon^\circ\to Q^\circ$
+proper pushforward on vector
+bundles satisfies
+\[
+ \pi_*[L_-]
+  =\pi_*[\sigma^*L_+]
+  =\pi_*[L_+] .
+\]
+Subtract to obtain (62).
+Finally $|\sqrt{1+(4\epsilon^2)^{-1}}|
+\to\infty$ as epsilon tends
+to zero, establishing the
+geometric escape of the true
+branch locus from compact K.
+\end{proof}
+
+\paragraph{The mathematical consequence for higher-primitive GST source birth.}
+For EVERY original-$X$ rational Hodge alpha we now have
+an ACTUAL prescribed-alpha finite polynomial
+spectral-cover family with local holomorphic
+eigenbundle carrying the correct alpha class
+on a finite cohomology-detecting compact core.
+This is genuine algebraic geometry with
+the correct initial topological class,
+not a supplied CHOW witness.
+However, the explicit Q calculation
+shows that polynomial world-birth,
+arbitrarily small idempotent defect
+and nontrivial double-world monodromy
+do not FORCE a nonzero ORIGINAL-BASE
+algebraic eigenmodule or period.
+Global REGULAR algebraic
+source birth requires additional
+geometric information beyond the
+finite cover and its local analytic
+sheet labeling. The missing implication
+is demonstrated on an actual affine
+GST world, not assumed away by
+a formal source-surjectivity hypothesis.
+
+
+\section{Outcome of the exact higher-primitive proof attempt}
+We CONSTRUCTED, from arbitrary rational Hodge alpha
+and no supplied algebraic cycle, the genuine rational
+Deligne descent triple (b,omega,u).
+We derived the SAME polynomial fold as an actual
+algebraic K-residue and an exact degree-preserving
+Gysin/regulator interface; and established two
+nontrivial source-generation obstructions:
+fixed complex differentials cannot change
+the class of their total K0 source, and
+regular logarithmic units do not span
+the algebraic de Rham classes even on
+smooth affine elliptic curves.
+
+The unrestricted mathematical target would be
+settled if one constructed FROM that alpha-specific
+Deligne triple an actual Quillen-Gersten class z
+whose Deligne regulator has Hodge projection alpha.
+The current theorem constructs the Deligne DATA
+and all genuinely algebraic fold operations, but
+does not construct that K-class for every higher
+primitive alpha. As shown by the exact quotient
+(13), automatic existence of such a K-class is
+precisely equivalent to the universal rational
+Hodge algebraicity assertion, and cannot be used
+as an input to the present argument.
+No user's established GST Hodge-purity result is
+questioned by this precise source/type audit.
+\end{document}

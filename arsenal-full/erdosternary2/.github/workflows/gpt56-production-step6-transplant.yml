@@ -1,0 +1,96 @@
+name: GPT56 Production Step6 Certification
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'ErdosTernary2.lean'
+      - 'GSTStep6Close.lean'
+      - 'GSTStep6CollisionKernel.lean'
+      - 'GSTStep6CloseTest.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/gpt56-production-step6-transplant.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: gpt56-production-step6-transplant
+  cancel-in-progress: false
+
+jobs:
+  certify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Install Lean RC2 and pinned Mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Compile committed production monolith
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build ErdosTernary2 2>&1 | tee production-step6-lean.log
+          echo STEP6_PRODUCTION_MONOLITH_GREEN=1
+
+      - name: Compile Step6 closer module
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTStep6Close 2>&1 | tee production-step6-closer.log
+          echo STEP6_CLOSER_MODULE_GREEN=1
+
+      - name: Compile Step6 collision kernel
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTStep6CollisionKernel 2>&1 | tee production-step6-kernel.log
+          echo STEP6_COLLISION_KERNEL_GREEN=1
+
+      - name: Compile exact tactic regression
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTStep6CloseTest.lean 2>&1 | tee production-step6-regression.log
+          echo STEP6_TACTIC_REGRESSION_GREEN=1
+
+      - name: Kernel axiom audit
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          printf '%s\n' \
+            'import GSTStep6CollisionKernel' \
+            '#print axioms gst_step6_collision_kernel' \
+            '#print axioms gst_prefix_one_information_bad_descends_inline' \
+            '#print axioms gst_prefix_one_child_gate_contradicts_parent_bad_inline' \
+            '#print axioms gst_prefix_one_navigation_lift' \
+            '#print axioms erdos_ternary_2_universal' \
+            > ProductionStep6Audit.lean
+          lake env lean ProductionStep6Audit.lean 2>&1 | tee production-step6-axioms.log
+          if grep -Fq sorryAx production-step6-axioms.log; then
+            echo 'forbidden sorryAx reached transplanted theorem chain'
+            exit 1
+          fi
+          echo STEP6_PRODUCTION_AXIOM_AUDIT_GREEN=1
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gpt56-production-step6-diagnostics
+          path: |
+            production-step6-lean.log
+            production-step6-closer.log
+            production-step6-kernel.log
+            production-step6-regression.log
+            production-step6-axioms.log
+          if-no-files-found: warn

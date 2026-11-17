@@ -1,0 +1,786 @@
+{
+  "claim": "Actual algebraic-bundle Chern periods converted into smooth-center native periods on original X",
+  "domain": "Exact Q polynomials in formal c1,...,cp; no numerical tolerances",
+  "center": "General n-p+1 sections of rank-n globally generated quotient V; smooth incidence zero locus in X times P^(n-p)",
+  "projective_push": "pr_X*[S]=c_p(V)",
+  "exceptional_push": "pr_X*rho_*(F^n)=(-1)^(n-1)c_p(V)",
+  "smooth_inside_original_X_range": "n<=2p+1; in particular every primitive middle case n=2p",
+  "interpolation_rows": [
+    {
+      "codimension": 1,
+      "positive_bundle_copy_counts": [
+        1
+      ],
+      "center_weights": [
+        "1"
+      ],
+      "newton_character_monomials": 1,
+      "weight_square_sum": "1",
+      "coarse_center_energy_constant": "1",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 2,
+      "positive_bundle_copy_counts": [
+        1,
+        2
+      ],
+      "center_weights": [
+        "-2",
+        "1/2"
+      ],
+      "newton_character_monomials": 2,
+      "weight_square_sum": "17/4",
+      "coarse_center_energy_constant": "1/5",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 3,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3
+      ],
+      "center_weights": [
+        "3/2",
+        "-3/4",
+        "1/6"
+      ],
+      "newton_character_monomials": 3,
+      "weight_square_sum": "409/144",
+      "coarse_center_energy_constant": "4/19",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 4,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "center_weights": [
+        "-2/3",
+        "1/2",
+        "-2/9",
+        "1/24"
+      ],
+      "newton_character_monomials": 5,
+      "weight_square_sum": "3865/5184",
+      "coarse_center_energy_constant": "12/23",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 5,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "center_weights": [
+        "5/24",
+        "-5/24",
+        "5/36",
+        "-5/96",
+        "1/120"
+      ],
+      "newton_character_monomials": 7,
+      "weight_square_sum": "225769/2073600",
+      "coarse_center_energy_constant": "576/251",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 6,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "center_weights": [
+        "-1/20",
+        "1/16",
+        "-1/18",
+        "1/32",
+        "-1/100",
+        "1/720"
+      ],
+      "newton_character_monomials": 11,
+      "weight_square_sum": "548009/51840000",
+      "coarse_center_energy_constant": "14400/923",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 7,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "center_weights": [
+        "7/720",
+        "-7/480",
+        "7/432",
+        "-7/576",
+        "7/1200",
+        "-7/4320",
+        "1/5040"
+      ],
+      "newton_character_monomials": 15,
+      "weight_square_sum": "68962721/91445760000",
+      "coarse_center_energy_constant": "518400/3431",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 8,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "center_weights": [
+        "-1/630",
+        "1/360",
+        "-1/270",
+        "1/288",
+        "-1/450",
+        "1/1080",
+        "-1/4410",
+        "1/40320"
+      ],
+      "newton_character_monomials": 22,
+      "weight_square_sum": "750217889/17923368960000",
+      "coarse_center_energy_constant": "25401600/12869",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 9,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "center_weights": [
+        "1/4480",
+        "-1/2240",
+        "1/1440",
+        "-1/1280",
+        "1/1600",
+        "-1/2880",
+        "1/7840",
+        "-1/35840",
+        "1/362880"
+      ],
+      "newton_character_monomials": 30,
+      "weight_square_sum": "19305323641/10323860520960000",
+      "coarse_center_energy_constant": "1625702400/48619",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 10,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "center_weights": [
+        "-1/36288",
+        "1/16128",
+        "-1/9072",
+        "1/6912",
+        "-1/7200",
+        "1/10368",
+        "-1/21168",
+        "1/64512",
+        "-1/326592",
+        "1/3628800"
+      ],
+      "newton_character_monomials": 42,
+      "weight_square_sum": "57499206193/836232702197760000",
+      "coarse_center_energy_constant": "8778792960/12317",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 11,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11
+      ],
+      "center_weights": [
+        "11/3628800",
+        "-11/1451520",
+        "11/725760",
+        "-11/483840",
+        "11/432000",
+        "-11/518400",
+        "11/846720",
+        "-11/1935360",
+        "11/6531840",
+        "-11/36288000",
+        "1/39916800"
+      ],
+      "newton_character_monomials": 56,
+      "weight_square_sum": "21408857691673/10118415696592896000000",
+      "coarse_center_energy_constant": "13168189440000/705431",
+      "full_formal_polynomial_identity": true
+    },
+    {
+      "codimension": 12,
+      "positive_bundle_copy_counts": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ],
+      "center_weights": [
+        "-1/3326400",
+        "1/1209600",
+        "-1/544320",
+        "1/322560",
+        "-1/252000",
+        "1/259200",
+        "-1/352800",
+        "1/645120",
+        "-1/1632960",
+        "1/6048000",
+        "-1/36590400",
+        "1/479001600"
+      ],
+      "newton_character_monomials": 77,
+      "weight_square_sum": "67621756214233/1224328299287740416000000",
+      "coarse_center_energy_constant": "106223394816000/180277",
+      "full_formal_polynomial_identity": true
+    }
+  ],
+  "dimension_cases_checked": 300,
+  "smooth_original_center_cases_checked": 179,
+  "codimension_two_sharp_energy_constant": "4/17",
+  "codimension_two_energy_grid_checks": 625,
+  "original_X_plane_syzygy_benchmark": [
+    {
+      "degree": 2,
+      "explicit_global_generation_twist": 2,
+      "first_center_primitive_period": -1,
+      "second_center_primitive_period": -2,
+      "first_center_ample_degree": 1,
+      "codimension_two_blowup_feedback": 1,
+      "target_selected_energy": 5
+    },
+    {
+      "degree": 3,
+      "explicit_global_generation_twist": 3,
+      "first_center_primitive_period": -8,
+      "second_center_primitive_period": -16,
+      "first_center_ample_degree": 8,
+      "codimension_two_blowup_feedback": 8,
+      "target_selected_energy": 320
+    },
+    {
+      "degree": 4,
+      "explicit_global_generation_twist": 4,
+      "first_center_primitive_period": -27,
+      "second_center_primitive_period": -54,
+      "first_center_ample_degree": 27,
+      "codimension_two_blowup_feedback": 27,
+      "target_selected_energy": 3645
+    },
+    {
+      "degree": 5,
+      "explicit_global_generation_twist": 5,
+      "first_center_primitive_period": -64,
+      "second_center_primitive_period": -128,
+      "first_center_ample_degree": 64,
+      "codimension_two_blowup_feedback": 64,
+      "target_selected_energy": 20480
+    },
+    {
+      "degree": 6,
+      "explicit_global_generation_twist": 6,
+      "first_center_primitive_period": -125,
+      "second_center_primitive_period": -250,
+      "first_center_ample_degree": 125,
+      "codimension_two_blowup_feedback": 125,
+      "target_selected_energy": 78125
+    },
+    {
+      "degree": 7,
+      "explicit_global_generation_twist": 7,
+      "first_center_primitive_period": -216,
+      "second_center_primitive_period": -432,
+      "first_center_ample_degree": 216,
+      "codimension_two_blowup_feedback": 216,
+      "target_selected_energy": 233280
+    },
+    {
+      "degree": 8,
+      "explicit_global_generation_twist": 8,
+      "first_center_primitive_period": -343,
+      "second_center_primitive_period": -686,
+      "first_center_ample_degree": 343,
+      "codimension_two_blowup_feedback": 343,
+      "target_selected_energy": 588245
+    },
+    {
+      "degree": 9,
+      "explicit_global_generation_twist": 9,
+      "first_center_primitive_period": -512,
+      "second_center_primitive_period": -1024,
+      "first_center_ample_degree": 512,
+      "codimension_two_blowup_feedback": 512,
+      "target_selected_energy": 1310720
+    },
+    {
+      "degree": 10,
+      "explicit_global_generation_twist": 10,
+      "first_center_primitive_period": -729,
+      "second_center_primitive_period": -1458,
+      "first_center_ample_degree": 729,
+      "codimension_two_blowup_feedback": 729,
+      "target_selected_energy": 2657205
+    },
+    {
+      "degree": 11,
+      "explicit_global_generation_twist": 11,
+      "first_center_primitive_period": -1000,
+      "second_center_primitive_period": -2000,
+      "first_center_ample_degree": 1000,
+      "codimension_two_blowup_feedback": 1000,
+      "target_selected_energy": 5000000
+    },
+    {
+      "degree": 12,
+      "explicit_global_generation_twist": 12,
+      "first_center_primitive_period": -1331,
+      "second_center_primitive_period": -2662,
+      "first_center_ample_degree": 1331,
+      "codimension_two_blowup_feedback": 1331,
+      "target_selected_energy": 8857805
+    },
+    {
+      "degree": 13,
+      "explicit_global_generation_twist": 13,
+      "first_center_primitive_period": -1728,
+      "second_center_primitive_period": -3456,
+      "first_center_ample_degree": 1728,
+      "codimension_two_blowup_feedback": 1728,
+      "target_selected_energy": 14929920
+    },
+    {
+      "degree": 14,
+      "explicit_global_generation_twist": 14,
+      "first_center_primitive_period": -2197,
+      "second_center_primitive_period": -4394,
+      "first_center_ample_degree": 2197,
+      "codimension_two_blowup_feedback": 2197,
+      "target_selected_energy": 24134045
+    },
+    {
+      "degree": 15,
+      "explicit_global_generation_twist": 15,
+      "first_center_primitive_period": -2744,
+      "second_center_primitive_period": -5488,
+      "first_center_ample_degree": 2744,
+      "codimension_two_blowup_feedback": 2744,
+      "target_selected_energy": 37647680
+    },
+    {
+      "degree": 16,
+      "explicit_global_generation_twist": 16,
+      "first_center_primitive_period": -3375,
+      "second_center_primitive_period": -6750,
+      "first_center_ample_degree": 3375,
+      "codimension_two_blowup_feedback": 3375,
+      "target_selected_energy": 56953125
+    },
+    {
+      "degree": 17,
+      "explicit_global_generation_twist": 17,
+      "first_center_primitive_period": -4096,
+      "second_center_primitive_period": -8192,
+      "first_center_ample_degree": 4096,
+      "codimension_two_blowup_feedback": 4096,
+      "target_selected_energy": 83886080
+    },
+    {
+      "degree": 18,
+      "explicit_global_generation_twist": 18,
+      "first_center_primitive_period": -4913,
+      "second_center_primitive_period": -9826,
+      "first_center_ample_degree": 4913,
+      "codimension_two_blowup_feedback": 4913,
+      "target_selected_energy": 120687845
+    },
+    {
+      "degree": 19,
+      "explicit_global_generation_twist": 19,
+      "first_center_primitive_period": -5832,
+      "second_center_primitive_period": -11664,
+      "first_center_ample_degree": 5832,
+      "codimension_two_blowup_feedback": 5832,
+      "target_selected_energy": 170061120
+    },
+    {
+      "degree": 20,
+      "explicit_global_generation_twist": 20,
+      "first_center_primitive_period": -6859,
+      "second_center_primitive_period": -13718,
+      "first_center_ample_degree": 6859,
+      "codimension_two_blowup_feedback": 6859,
+      "target_selected_energy": 235229405
+    }
+  ],
+  "actual_Weil_exterior_intrinsic_center_test": {
+    "primitive_Gram": [
+      [
+        8,
+        0
+      ],
+      [
+        0,
+        8
+      ]
+    ],
+    "exact_exterior_dimension": 8,
+    "candidate": "Any twist of an intrinsic trivial tangent tensor/Schur bundle",
+    "center_periods": [
+      {
+        "bundle_rank": 4,
+        "twist": 1,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 4,
+        "twist": 3,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 4,
+        "twist": 7,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 8,
+        "twist": 1,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 8,
+        "twist": 3,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 8,
+        "twist": 7,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 12,
+        "twist": 1,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 12,
+        "twist": 3,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 12,
+        "twist": 7,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 24,
+        "twist": 1,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 24,
+        "twist": 3,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      },
+      {
+        "bundle_rank": 24,
+        "twist": 7,
+        "two_exact_Weil_periods": [
+          0,
+          0
+        ]
+      }
+    ],
+    "scope": "This candidate family fails to detect the displayed Weil plane; no claim about all algebraic bundles"
+  },
+  "intrinsic_tangent_candidate_on_abelian_original_X": [
+    {
+      "n": 4,
+      "p": 1,
+      "twist": 1,
+      "ambient_chern_coefficient": 4,
+      "primitive_period": 0
+    },
+    {
+      "n": 4,
+      "p": 1,
+      "twist": 3,
+      "ambient_chern_coefficient": 12,
+      "primitive_period": 0
+    },
+    {
+      "n": 4,
+      "p": 1,
+      "twist": 7,
+      "ambient_chern_coefficient": 28,
+      "primitive_period": 0
+    },
+    {
+      "n": 4,
+      "p": 2,
+      "twist": 1,
+      "ambient_chern_coefficient": 6,
+      "primitive_period": 0
+    },
+    {
+      "n": 4,
+      "p": 2,
+      "twist": 3,
+      "ambient_chern_coefficient": 54,
+      "primitive_period": 0
+    },
+    {
+      "n": 4,
+      "p": 2,
+      "twist": 7,
+      "ambient_chern_coefficient": 294,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 1,
+      "twist": 1,
+      "ambient_chern_coefficient": 6,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 1,
+      "twist": 3,
+      "ambient_chern_coefficient": 18,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 1,
+      "twist": 7,
+      "ambient_chern_coefficient": 42,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 2,
+      "twist": 1,
+      "ambient_chern_coefficient": 15,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 2,
+      "twist": 3,
+      "ambient_chern_coefficient": 135,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 2,
+      "twist": 7,
+      "ambient_chern_coefficient": 735,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 3,
+      "twist": 1,
+      "ambient_chern_coefficient": 20,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 3,
+      "twist": 3,
+      "ambient_chern_coefficient": 540,
+      "primitive_period": 0
+    },
+    {
+      "n": 6,
+      "p": 3,
+      "twist": 7,
+      "ambient_chern_coefficient": 6860,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 1,
+      "twist": 1,
+      "ambient_chern_coefficient": 8,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 1,
+      "twist": 3,
+      "ambient_chern_coefficient": 24,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 1,
+      "twist": 7,
+      "ambient_chern_coefficient": 56,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 2,
+      "twist": 1,
+      "ambient_chern_coefficient": 28,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 2,
+      "twist": 3,
+      "ambient_chern_coefficient": 252,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 2,
+      "twist": 7,
+      "ambient_chern_coefficient": 1372,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 3,
+      "twist": 1,
+      "ambient_chern_coefficient": 56,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 3,
+      "twist": 3,
+      "ambient_chern_coefficient": 1512,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 3,
+      "twist": 7,
+      "ambient_chern_coefficient": 19208,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 4,
+      "twist": 1,
+      "ambient_chern_coefficient": 70,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 4,
+      "twist": 3,
+      "ambient_chern_coefficient": 5670,
+      "primitive_period": 0
+    },
+    {
+      "n": 8,
+      "p": 4,
+      "twist": 7,
+      "ambient_chern_coefficient": 168070,
+      "primitive_period": 0
+    }
+  ],
+  "unrestricted_argument": "Derivative of [z^p]c_z(E)^t at t=0, followed by Lagrange interpolation at 0,...,p; primitive annihilation removes every positive hyperplane twist term",
+  "non_claims": [
+    "No algebraic bundle with nonzero prescribed residual period is proved to exist on every original X",
+    "Finite polynomial checks do not prove the all-p geometric construction",
+    "Generic smoothness, vector-bundle resolution and canonical Chow/Betti comparison are geometric proof leaves",
+    "Zero intrinsic tangent period does not imply all bundle or all center periods vanish"
+  ]
+}

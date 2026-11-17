@@ -1,0 +1,1320 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST All-Dimensional Spatial Fold: Universal Analytic Geometry, Determinantal Source Birth, and Finite-Pole Algebraic Descent}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We continue the actual dimensionless-GST to realized-geometry
+construction on an arbitrary original smooth projective complex X,
+a prescribed rational Hodge class alpha in ANY codimension p, and
+arbitrarily large emergent complex dimensions.
+The exact topological Segre-exponential fold of the previous
+manuscript is upgraded to a universal \emph{analytic determinantal
+cycle} on the genuine affine Jouanolou spatial world J_N(X).
+For ANY rational even-degree class (a strictly stronger input scope
+than rational Hodge type), an actual closed complex analytic
+subspace of the expected codimension is constructed with
+the EXACT rational Betti class of the pulled-back original target.
+The construction uses an honest finite holomorphic projector
+and a globally generated holomorphic vector bundle, not an
+abstract existence of Chow representatives. We isolate a
+completely geometric algebraization condition on this actual
+projector: polynomial growth of its matrix coefficients in an
+affine algebraic embedding is equivalent to their algebraicity.
+On the affine fold this condition gives a \emph{single} honest
+algebraic projective-module source with the required pure Chern
+character. Conversely, if the original rational Hodge class is
+algebraic, an appropriate such finite-pole projector exists.
+This identifies a precise growth/descent bottleneck and
+rules out a false holomorphic-section shortcut, while keeping
+all original-X quantifiers and the geometric construction explicit.
+\end{abstract}
+
+\section{Exact original-X research target and inherited GST spatial fold}
+Let X be ANY connected smooth projective complex variety of
+dimension d, 1<=p<=d, and
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+The desired final output is an ACTUAL
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+$\mathrm{cl}^{can}_X(Z_\alpha)=\alpha$.
+
+Fix an arbitrary projective embedding $i:X\hookrightarrow
+\mathbb P^N$, where N may be increased without limit.
+With $D=(\mathbb P^N)^\vee$ and hyperplane incidence
+divisor $I_X$, the TRUE algebraic GST spatial realization is
+\[
+ \boxed{J_N(X)=(X\times D)\setminus I_X
+    =\{(x,H):H(x)\ne0\},\qquad q:J_N(X)\to X.}       \tag{1.1}
+\]
+It is smooth affine of complex dimension d+N
+with Zariski locally trivial fibers $\mathbb A^N$.
+The pullback $q^*:H^*(X,\mathbb Q)\to
+H^*(J_N(X),\mathbb Q)$ is an isomorphism of
+rational MHS; the compact-support Hodge--Deligne
+polynomial transforms by $(uv)^N$.
+These results are proved in
+\texttt{GST\_universal\_spatial\_fold\_exponential\_geometric\_realization\_2026-10-23.tex};
+their proof uses actual affine geometry and
+does not regard globular cell index as intrinsic dimension.
+Write $J=J_N(X)$ and $J^{an}$ for its Stein analytification.
+
+\section{A full-class, actual holomorphic projector: all-X existence}
+\begin{theorem}[Universal analytic finite-projector realization]
+For every original X, p, alpha and N, there
+exist positive integers m,r,M, with r>=p+1,
+and an honest holomorphic matrix-valued
+function
+\[
+  \boxed{
+   P_\alpha:J^{an}\longrightarrow
+            \operatorname{Mat}_M(\mathbb C),\qquad
+   P_\alpha^2=P_\alpha,\quad\operatorname{rk}P_\alpha=r
+  }                                                       \tag{2.1}
+\]
+whose image holomorphic vector bundle
+$\mathcal E_\alpha^{an}=\operatorname{im}P_\alpha$
+has the EXACT entire rational Betti Chern character
+\[
+  \boxed{
+   \operatorname{ch}_{top}(\mathcal E_\alpha^{an})
+     =r+m q^*\alpha \quad\text{in }H^{even}(J,\mathbb Q).
+  }                                                       \tag{2.2}
+\]
+All its positive Chern-character components
+different from grade p vanish, with no alpha
+algebraicity assumption. The theorem in fact
+holds for EVERY rational $\alpha\in H^{2p}(X,\mathbb Q)$,
+whether or not of Hodge type.
+\end{theorem}
+\begin{proof}
+Rational topological K-theory and stabilization
+produce an HONEST finite rank topological complex
+bundle E on original X with ch(E)=r+m alpha
+(as fully proved in the previous GST exponential
+spatial fold derivation). Pull back E to J;
+J^{an} is Stein. Oka--Grauert gives a
+holomorphic vector bundle $\mathcal E$
+realizing the prescribed topological bundle.
+
+Because J^{an} has the homotopy type of a finite
+CW complex, this finite-rank topological bundle
+has a finite-rank topological complementary
+bundle F with $E\oplus F$ topologically trivial.
+Oka--Grauert also gives a holomorphic
+complement $\mathcal F$ for q^*F and upgrades
+the topological trivialization to a holomorphic
+isomorphism
+\[
+ \mathcal E\oplus\mathcal F
+     \cong\mathcal O_{J^{an}}^{\,M}.                 \tag{2.3}
+\]
+Holomorphic projection onto the first summand
+and inclusion into the trivial bundle yield
+the matrix P in (2.1). Its rank is constant r.
+Naturality of the entire Chern character
+gives (2.2), with no chosen Chow cycle.
+\end{proof}
+
+\section{Actual spatial cycle birth, rather than a formal algebraic-image compiler}
+Write $s=r-p+1$. Since (2.3) gives finitely many
+holomorphic global sections generating
+$\mathcal E_\alpha^{an}$ at EVERY point,
+choose s independent generic constant-linear
+combinations of these generating sections.
+They form a holomorphic map
+\[
+ \phi:\mathcal O_{J^{an}}^{\,s}
+          \longrightarrow\mathcal E_\alpha^{an}.
+\]
+Define the genuine closed analytic degeneracy
+space by its holomorphic minors:
+\[
+ \boxed{
+ \Sigma_\alpha=\{z\in J^{an}:
+                 \mathrm{rank}\phi_z<s\}.
+ }                                                       \tag{3.1}
+\]
+
+\begin{theorem}[All-X, all-p true analytic determinantal source]
+The generating sections can be selected so
+that $\Sigma_\alpha$ is either empty
+or a genuine complex analytic subspace
+of PURE complex codimension p, generically
+of the expected determinantal type. Its
+analytic fundamental cycle class in ordinary
+rational Betti cohomology is exactly
+\[
+ \boxed{
+ [\Sigma_\alpha]_{\mathrm{Betti}}
+   =c_p(\mathcal E_\alpha^{an})
+   =(-1)^{p-1}m(p-1)!\,q^*\alpha
+        \in H^{2p}(J,\mathbb Q).
+ }                                                       \tag{3.2}
+\]
+If alpha is nonzero, the cycle is nonempty,
+and in fact its class is nonzero. This
+construction is unconditional on every X,
+every p, every finite emergent N, and every
+rational cohomological class alpha, not just
+Hodge classes.
+\end{theorem}
+\begin{proof}
+Choose the finite holomorphic generating
+map $\mathcal O^M\to\mathcal E$ from (2.3).
+For a matrix of constant parameters
+$C\in\mathrm{Hom}_{\mathbb C}(\mathbb C^s,\mathbb C^M)$,
+compose $C$ with this surjection to obtain
+$\phi_C:\mathcal O^s\to\mathcal E$.
+The universal evaluation map from
+$J^{an}\times\mathrm{Hom}(\mathbb C^s,\mathbb C^M)$
+to the total space of $\mathrm{Hom}(\mathbb C^s,\mathcal E)$
+is submersive in its parameter direction,
+because the pointwise evaluation of the
+generating map is surjective. Parametric
+transversality to the finitely many
+rank-determinantal strata gives a
+generic parameter C whose rank-(s-1)
+degeneracy has expected codimension
+$r-s+1=p$, or is empty; deeper
+rank strata, if present, have codimension
+at least p+2 and do not alter the
+fundamental codimension-p cycle.
+The analytic Thom--Porteous formula
+for an expected-codimension degeneracy locus
+gives its analytic cycle class
+\[
+ [\Sigma_\alpha]_{\mathrm{Betti}}
+    =c_{r-s+1}(\mathcal E-\mathcal O^s)
+    =c_p(\mathcal E).
+\]
+The pure-Chern-character identity (2.2)
+and the rational splitting principle
+give
+\[
+ \log c(\mathcal E,t)
+  =\sum_{j\ge1}(-1)^{j-1}(j-1)!
+         \operatorname{ch}_j(\mathcal E)t^j
+  =(-1)^{p-1}m(p-1)!q^*\alpha\,t^p .
+\]
+Its coefficient at t^p is precisely
+$c_p(\mathcal E)=(-1)^{p-1}m(p-1)!q^*\alpha$.
+Since q^* is injective on rational
+cohomology, a nonzero alpha makes this
+class nonzero; the analytic locus cannot
+be empty. No analytic-to-algebraic
+identification is made in this theorem.
+\end{proof}
+
+\section{Polynomial growth of the projector IS finite-pole algebraic geometry}
+Fix ANY closed algebraic embedding of the actual
+smooth affine J into affine complex space
+$J\hookrightarrow\mathbb A_{\mathbb C}^K$,
+and denote the coordinate vector by $z$.
+A holomorphic function f on J^{an} is
+\emph{polynomially bounded} if
+there exist C>0 and k>=0 with
+\[
+ \boxed{|f(z)|\le C(1+\|z\|)^k\quad
+                       \text{for every }z\in J^{an}.}     \tag{4.1}
+\]
+The condition is equivalent for any pair
+of affine algebraic embeddings (possibly
+with a different exponent) because the
+coordinate maps are regular polynomials.
+This is a quantitative bound on genuine
+growth at infinity of the folded geometry.
+
+\begin{lemma}[Polynomial-growth Liouville principle on algebraic Stein folds]
+Let J be any smooth affine algebraic variety
+over C and f a holomorphic function on J^{an}.
+Then
+\[
+ \boxed{
+ f\in\mathcal O_{\mathrm{alg}}(J)
+ \quad\Longleftrightarrow\quad
+ f\text{ satisfies the finite polynomial bound (4.1)}.
+ }                                                       \tag{4.2}
+\]
+\end{lemma}
+\begin{proof}
+A regular function on an affine closed embedding
+is the restriction of a polynomial in the ambient
+coordinates, so satisfies (4.1). Conversely,
+choose a smooth projective compactification
+$\overline J$ of J with a simple-normal-crossing
+divisor B as boundary. Each ambient affine
+coordinate z_i extends to a rational function
+on $\overline J$, hence has at worst finite
+poles along the finitely many divisorial
+components of B. In a local coordinate
+polydisc meeting B with local defining
+coordinates $(t_1,\dots,t_\ell)$, their
+pole growth is bounded by
+$C'\prod_j|t_j|^{-a_j}$ for finite exponents.
+The polynomial growth assumption for f
+then supplies finite exponents b_j such that
+$|\prod_j t_j^{b_j}f|\le C''$ near B.
+The removable-singularity theorem across
+normal crossing divisors extends this
+product holomorphically. Thus f extends
+meromorphically to $\overline J$, with
+finite poles supported on B. A meromorphic
+function on smooth complex projective
+$\overline J$ is rational by GAGA;
+as f has no poles on smooth J, that
+rational function is regular there.
+\end{proof}
+
+\begin{theorem}[Geometric growth criterion for the exact original-X source]
+For the given original (X,p,alpha), fix any
+spatial Jouanolou fold J=J_N(X).
+The following are EQUIVALENT:
+
+(A) There exists an ACTUAL rational algebraic
+cycle $Z_\alpha\in CH^p(X)_{\mathbb Q}$
+with $\mathrm{cl}_X^{can}(Z_\alpha)=\alpha$.
+
+(B) There exist r,M,m and a HOLomorphic
+idempotent matrix $P:J^{an}\to
+\mathrm{Mat}_M(\mathbb C)$ with constant
+rank r, all entries POLYNOMIALLY BOUNDED
+as in (4.1), and FULL rational Betti class
+\[
+  \boxed{
+   \operatorname{ch}_{top}(\operatorname{im}P)
+      =r+m q^*\alpha.
+  }                                                       \tag{4.3}
+\]
+
+When (B) holds, P is automatically a matrix
+of REGULAR ALGEBRAIC functions on J.
+It defines a TRUE algebraic finite projective
+module E_P over $\mathbb C[J]$,
+and the source formula is
+\[
+ \boxed{
+ Z_\alpha=(q^*)^{-1}
+       \left[\frac{(-1)^{p-1}}{m(p-1)!}
+                 c_p^{CH}(E_P)\right].
+ }                                                       \tag{4.4}
+\]
+The Chow inverse exists by affine-bundle
+homotopy invariance. The canonical Betti
+class of (4.4) is exactly alpha.
+\end{theorem}
+\begin{proof}
+(B)->(A): by the polynomial-growth lemma,
+all entries of P are regular functions
+on the algebraic J, and P^2=P gives an
+algebraic idempotent defining a finite
+projective module. Its algebraic Chern
+character has Betti class r+m q^*alpha.
+By the Newton identity already proved in
+section 3, its codimension-p algebraic
+Chern class has canonical Betti class
+$(-1)^{p-1}m(p-1)!q^*\alpha$. Apply the
+rational Chow isomorphism q^*:CH^p(X)
+to CH^p(J) and naturality of the
+canonical Betti cycle class to obtain
+(4.4).
+
+(A)->(B): the rational algebraic K0--Chow
+Chern character isomorphism on smooth
+projective X gives a rational K0 class
+v with ch(v) concentrated in codimension
+p and equal to Z_alpha. Clear
+denominators by m, and pull this
+actual algebraic K0 class to smooth
+AFFINE J. Since algebraic vector
+bundles over smooth affine J correspond
+to finite projective modules and every
+finite projective module has a finite
+free complement, a sufficiently large
+honest algebraic vector bundle E_P can
+be chosen with
+$\operatorname{ch}^{CH}(E_P)=r+m q^*Z_\alpha$
+in the full rational Chow ring.
+Represent E_P as the image of a finite
+matrix idempotent P over $\mathbb C[J]$.
+Its entries are automatically regular
+and hence polynomially bounded, and its
+Betti Chern character equals (4.3).
+This constructs the full required
+positive algebraic realization on the
+AFFINE folded world even where a
+single positive pure-ch bundle might
+not exist on projective X.
+\end{proof}
+
+\section{Exact finite ALGEBRAIC equations of the realized whole spatial fold}
+For the specific GST incidence world the
+polynomial-growth criterion can be written
+without ANY analytic asymptotic notation,
+using finite sections on the ORIGINAL
+projective ambient product.
+
+Let $\bar J=X\times(\mathbb P^N)^\vee$.
+Let L=$O_X(1)\boxtimes O_{(\mathbb P^N)^\vee}(1)$.
+Write $s(x,\ell)=\sum_{i=0}^N x_i\ell_i$
+for the canonical incidence section
+$s\in H^0(\bar J,L)$.
+Its zero locus is the genuine smooth
+incidence boundary divisor B, and
+$J=\bar J\setminus B$.
+
+\begin{theorem}[Finite-pole matrix equation, arbitrary X and N]
+For every prescribed rational Hodge alpha
+and every N from an actual projective embedding,
+the original-X canonical algebraicity
+condition is EQUIVALENT to existence of
+positive integers k,m,M,r and a matrix
+\[
+ \boxed{
+ A=(A_{ij})\in
+ \operatorname{Mat}_M H^0(\bar J,L^{\otimes k})
+ }                                                        \tag{4.5}
+\]
+with the EXACT scheme equations
+\[
+ \boxed{
+ A^2=s^k A,\qquad
+ \operatorname{tr} A=r s^k,
+ }                                                        \tag{4.6}
+\]
+and with the full rational Betti
+Chern-character condition
+\[
+ \boxed{
+ \operatorname{ch}_{top}
+   \bigl(\operatorname{im}(A/s^k)\bigr)
+      =r+m q^*\alpha.
+ }                                                        \tag{4.7}
+\]
+The quotient $A/s^k$ is an ACTUAL
+algebraic idempotent on the entire
+affine realization J. Equations
+(4.5)--(4.6) are finite polynomial
+identities in the homogeneous
+coordinates of (x,ell), modulo the
+homogeneous scheme equations of X.
+Conversely EVERY regular finite-rank
+idempotent on J admits a representation
+(4.5)--(4.6) for SOME finite k.
+\end{theorem}
+\begin{proof}
+Because $\bar J$ is smooth projective
+and B is an effective Cartier divisor,
+the ring of regular functions on the
+complement is the filtered union
+\[
+ \boxed{
+ \Gamma(J,\mathcal O_J)
+   =\varinjlim_{k\ge0}
+     H^0(\bar J,L^{\otimes k}),
+ \qquad f\ \leftrightarrow\ s^{-k}a.
+ }                                                        \tag{4.8}
+\]
+Any regular function on J has finitely
+many poles along the single Cartier
+boundary B and therefore becomes a
+global regular section of O(kB)=L^k
+after multiplication by a suitable
+power s^k. The converse is clear.
+For a finite idempotent P, choose one
+common pole order k for all its
+entries, and set A=s^kP. Its algebraic
+idempotence P^2=P gives A^2=s^kA;
+constant rank gives tr P=r,
+hence tr A=r s^k.
+Both identities extend across B as
+global-section identities because
+they hold on dense open J.
+The inverse construction P=A/s^k
+on J is immediate, and its Chern
+class is the stated (4.7).
+The theorem is therefore equivalent
+to the original-X Chow source via
+the already proved finite-pole
+projector theorem, with the SAME
+explicit original-X cycle formula
+(4.4).
+\end{proof}
+
+\begin{remark}[Truly finite geometric complexity at every level]
+For each fixed k,M,N the section
+space $H^0(\bar J,L^k)$ is FINITE
+dimensional. Therefore the equations
+$A^2=s^kA$ and tr A=r s^k
+are finite sets of polynomial
+relations in finitely many complex
+section coefficients, computable
+modulo the actual equations of X.
+The rational period condition (4.7)
+selects a discrete rational Betti
+class among such idempotents; it
+is NOT automatic from the matrix
+polynomial equations alone.
+A theorem solving these equations
+uniformly for each rational Hodge
+alpha, without inserting a
+target-representing Chow source,
+would finish the original-X target
+by the explicit output (4.4).
+\end{remark}
+
+\section{One finite pole order for every class in a fixed Hodge fiber}
+For each (X,p) the rational space
+$\mathrm{Hdg}^p(X)_{\mathbb Q}$ is finite
+dimensional, say of dimension h.
+Call an idempotent P \emph{growth-k
+certified} when all entries have
+polynomial-growth exponent <=k in
+a fixed algebraic affine embedding
+of J, allowing an arbitrary multiplicative
+constant for each matrix. There is no
+bound on the matrix dimension.
+
+\begin{corollary}[Uniform finite spatial-pole criterion at fixed X,p]
+The following are equivalent:
+
+(i) Every rational $(p,p)$ class on X
+has its canonical original-X rational
+algebraic cycle.
+
+(ii) There exists ONE finite integer
+K=K(X,p,J) such that for EVERY
+$\alpha\in\mathrm{Hdg}^p(X)_{\mathbb Q}$,
+there is a POSITIVE integer m and
+a growth-K holomorphic algebraic
+idempotent P on J whose full Betti
+Chern character is r+m q^*alpha.
+
+This K does not depend on alpha, its
+rational denominator, or the necessary
+matrix rank/dimension.
+\end{corollary}
+\begin{proof}
+(ii)->(i) follows from the previous theorem.
+For (i)->(ii), choose a finite rational
+basis alpha_1,...,alpha_h of the rational
+Hodge fiber. For each alpha_i,
+the previous proof gives a difference
+of two finite projective algebraic modules,
+with full pure Chern-character difference
+m_i q^*alpha_i, represented by finite
+idempotents with some pole bounds k_i.
+Let K be the maximum of these finitely
+many bounds and of the bound needed for
+one algebraic free complement of their
+negative summands. By enlarging the
+individual module presentations finitely
+many times, each basis direction can be
+represented by a SINGLE positive
+algebraic projective module whose
+full positive Chern character is rank
+plus m_i alpha_i and whose idempotent
+has some finite bound k_i'.
+For an arbitrary rational linear combination
+of the alpha_i, clear a common denominator.
+Positive multiples can be implemented
+by block-diagonal direct sums of these
+modules; negative multiples require a
+representative for -alpha_i, which is
+likewise constructed once for each i
+via finite projective-module
+complements. Choose K as the maximum
+of all these finite basis and negated
+basis idempotent bounds. Block-diagonal
+sums preserve the largest individual
+pole order, while their ranks may grow.
+This gives (ii).
+\end{proof}
+\begin{remark}
+The uniform bound K is an exact
+\emph{geometric source-existence
+criterion}, not an asserted analytic
+estimate derived from Hodge purity.
+The point is that a SINGLE finite
+pole-order estimate per fixed X,p
+would suffice for every rational target
+class, even though dimensions/ranks
+of its finite bundle models may grow.
+\end{remark}
+
+\section{PURE SPATIAL VOLUME GROWTH: a metric-geometric proof-or-disproof criterion}
+
+The finite-pole condition on projector coordinates
+can be replaced by a condition on the
+ACTUAL SPATIAL GEOMETRY of its determinantal locus.
+This preserves the owner's topology/dimension-first
+view of the full emergent world.
+
+Choose once and for all an affine algebraic
+closed embedding $j:J\hookrightarrow\mathbb C^K$.
+Put $D=d+N=\dim_{\mathbb C}J$,
+$s=D-p$, and let $\Sigma_\alpha\subset J^{an}$
+be the ACTUAL codimension-p closed analytic
+source from (3.1), viewed as a closed complex
+analytic subset of $\mathbb C^K$.
+Let $\omega_{\mathrm{Euc}}=\frac{i}{2}
+ \sum_{a=1}^K dz_a\wedge d\bar z_a$
+be the induced realized observation K\"ahler form.
+Define its exact geometric s-volume inside radius R by
+\[
+ \boxed{
+ V_{\Sigma_\alpha}(R)=
+  \int_{\Sigma_\alpha^{reg}\cap B_R}
+   \frac{\omega_{\mathrm{Euc}}^s}{s!},
+ \qquad
+ \Theta_{\Sigma_\alpha}^{\infty}
+  =\sup_{R\ge1}\frac{V_{\Sigma_\alpha}(R)}{R^{2s}}.
+ }                                                        \tag{5.1}
+\]
+For analytic cycles with multiplicity the integral
+is weighted by the cycle multiplicities.
+The exponent $2s=2(d+N-p)$ is precisely the
+REAL dimension of the emergent analytic cycle;
+this is a theorem about genuine volume scaling
+of the folded geometry, not a dimension label
+on the un-realized GST carrier.
+
+\begin{theorem}[ALL-X GST spatial-volume algebraization criterion]
+For ANY original smooth projective complex X,
+ANY 1<=p<=d, ANY rational Hodge alpha
+(and any chosen actual affine fold J_N(X)),
+the following are EQUIVALENT:
+
+(A) alpha has a genuine original-X rational
+algebraic cycle with canonical Betti class alpha.
+
+(V) There exist an honest pure-class
+holomorphic fold projector P_alpha constructed
+as in (2.1)--(2.2), and generic holomorphic
+sections as in (3.1), whose actual
+determinantal analytic cycle satisfies
+\[
+ \boxed{
+   \Theta_{\Sigma_\alpha}^{\infty}<\infty,
+   \quad\text{i.e.}\quad
+   V_{\Sigma_\alpha}(R)
+       =O(R^{2(d+N-p)}).
+ }                                                        \tag{5.2}
+\]
+When (V) holds, the analytic set
+$\Sigma_\alpha$ is a TRUE algebraic
+subvariety of the actual affine
+algebraic world J, and an explicit
+ORIGINAL-X rational Chow representative is
+\[
+ \boxed{
+ Z_\alpha=
+ \frac{(-1)^{p-1}}{m(p-1)!}\,
+     (q^*)^{-1}[\Sigma_\alpha]_{\mathrm{Chow}}
+       \in CH^p(X)_{\mathbb Q}.
+ }                                                        \tag{5.3}
+\]
+Its canonical Betti class is EXACTLY alpha.
+\end{theorem}
+\begin{proof}
+(V)->(A): $\Sigma_\alpha$ is a closed
+pure s-dimensional analytic cycle in the
+AFFINE EMBEDDED J, hence a closed
+analytic cycle in $\mathbb C^K$.
+The classical Bishop--Stoll
+algebraicity criterion for closed
+complex analytic sets in affine space
+states that bounded normalized Euclidean
+volume $V_\Sigma(R)/R^{2s}$ implies the
+analytic set is algebraic.
+(Here the exact theorem's required
+hypotheses are: pure complex dimension s,
+closedness in affine complex space, and
+the growth exponent twice the complex
+dimension. No compactness of Sigma or
+of the affine J is assumed.)
+Thus Sigma is a genuine codimension-p
+algebraic cycle on J. Its algebraic
+canonical Betti class equals its
+analytic fundamental class (3.2).
+Chow homotopy invariance for the
+Zariski locally trivial affine-space
+bundle q gives the unique rational
+original-X Chow preimage in (5.3).
+Canonical cycle naturality, injectivity
+of q^* on rational cohomology and
+(3.2) give $\mathrm{cl}_X^{can}(Z_\alpha)=\alpha$.
+
+(A)->(V): the previous finite-pole
+projector theorem builds a genuine
+ALGEBRAIC projective-module idempotent
+P on the actual smooth affine J with
+full Chern character r+m q^*alpha.
+Its standard globally generating
+ALGEBRAIC sections have a generic
+determinantal locus of expected
+codimension p, and this locus is
+an actual algebraic subvariety of J.
+Conversely to the stated criterion,
+any pure s-dimensional algebraic
+subvariety of affine complex space
+has Euclidean volume
+$V(R)=O(R^{2s})$, with the constant
+controlled by its projective degree;
+this follows from the complex
+integral geometry (Crofton/Bishop)
+degree-volume bound.
+Therefore (5.2) holds.
+\end{proof}
+
+\begin{corollary}[Actual-geometric finite-energy formulation]
+Define the absolute all-dimensional
+GST spatial excess-growth invariant
+at the ORIGINAL target alpha by
+\[
+ \boxed{
+ \mathcal G_{X,p,N}(\alpha)
+ =\inf_{(P,\phi)}\;
+    \sup_{R\ge1}\frac{
+     V_{\Sigma(P,\phi)}(R)}{R^{2(d+N-p)}},
+ }                                                        \tag{5.4}
+\]
+where $(P,\phi)$ ranges over the actual
+finite holomorphic pure-class projectors
+(2.1)--(2.2), with positive integer m
+and expected-codimension holomorphic
+degeneracy maps (3.1).
+The existence of a PAIR with finite
+normalized spatial volume is equivalent
+to alpha's canonical algebraicity. Indeed,
+each witness in the infimum has an
+extended nonnegative value in [0,+infinity],
+and an infimum is finite if and only if
+at least one witness has finite value.
+Therefore, WITHOUT any claim that
+a minimizing source must exist,
+\[
+ \boxed{
+ \mathcal G_{X,p,N}(\alpha)<\infty
+ \quad\Longleftrightarrow\quad
+ \alpha\in\operatorname{im}
+   (\mathrm{cl}^{can}_X:CH^p(X)_{\mathbb Q}
+     \longrightarrow H^{2p}(X,\mathbb Q)).
+ }                                                        \tag{5.5}
+\]
+This is a genuinely SPATIAL scalar
+reformulation of the full original-X
+Hodge algebraicity target via growth
+of ACTUAL geometric analytic folds.
+\end{corollary}
+\begin{remark}[Exact proof-status dependence]
+The volume criterion uses the
+classical Bishop--Stoll algebraicity
+theorem for complex analytic
+subvarieties of affine space.
+The present repo-native proof
+checks the translation of its
+hypotheses and applies it;
+an exact external-primary-source
+version/identifier has not been
+authenticated in this session.
+Accordingly, the volume criterion
+is SOURCE-CONDITIONAL on that
+standard analytic-algebraicity
+theorem, whereas the polynomial
+projector growth criterion of
+section 4 is self-contained in
+this manuscript.
+\end{remark}
+
+\section{Exact two non-shortcuts: no holomorphic section and boundedness}
+\begin{theorem}[No global holomorphic section of the affine spatial fold]
+If X has positive complex dimension,
+$q:J_N(X)^{an}\to X^{an}$ has NO
+global holomorphic section.
+\end{theorem}
+\begin{proof}
+Any holomorphic map from a connected
+compact complex variety to a Stein
+manifold has point image: Stein
+holomorphic functions separate its
+points, while every holomorphic
+function on connected compact X
+is constant. If a holomorphic s:X
+to J existed with q s=id_X,
+s could not be constant. Contradiction.
+\end{proof}
+
+\begin{theorem}[Zero-growth analytic projectors are constant]
+Every bounded holomorphic function on
+a smooth affine algebraic J is constant.
+Consequently any finite holomorphic
+idempotent matrix P whose entries
+satisfy growth exponent k=0 is
+constant and has trivial image
+bundle; it cannot carry a nonzero
+rational Chern character of grade p>0.
+\end{theorem}
+\begin{proof}
+The polynomial-growth Liouville
+lemma with k=0 extends f as a
+HOLomorphic (not merely meromorphic)
+function across the compactifying
+boundary: in local coordinates
+the function itself is bounded and
+has no poles. Thus f extends to
+the connected compact projective
+compactification and is constant
+by the maximum principle.
+A constant idempotent gives a
+trivial finite-dimensional subspace
+of a trivial bundle; its positive
+Chern character vanishes.
+\end{proof}
+
+\section{Universal actual algebraic projector as a base geometric operator}
+For the original embedding X into P^N
+write x=(x_0,...,x_N)^T and
+$\ell=(\ell_0,...,\ell_N)$
+for projective point and dual hyperplane
+coordinates, with $\lambda=\ell x$
+nonzero on J. The expression
+\[
+ \boxed{
+  P_{amb}(x,\ell)=\frac{x\,\ell}{\ell x},
+  \quad P_{amb}^2=P_{amb},
+  \quad\operatorname{tr}P_{amb}=1
+ }                                                       \tag{8.1}
+\]
+defines a globally REGULAR algebraic
+matrix on the affine J: numerator
+and denominator have matching
+bihomogeneous degrees, and the
+denominator never vanishes on J.
+Its rank-one image bundle is q^*O_X(-1).
+This is a true explicit geometric
+idempotent for EVERY X,N, not a
+formal or arbitrary chosen projector.
+Its ch is $\exp(-q^*h)$, so
+operations using ONLY this operator,
+its dual, tensor powers and direct
+sums live in $\mathbb Q[h]$ and
+cannot detect a prescribed primitive
+alpha outside the ambient polynomial
+subalgebra. This exhibits the
+necessary source of additional
+target-sensitive geometry:
+the new holomorphic projector P_alpha
+from (2.1), which is not restricted
+to being a polynomial in P_amb.
+\begin{proof}
+The matrix identity is direct:
+$(x\ell)^2=x(\ell x)\ell$.
+Coordinates $x_i\ell_j/(\ell x)$
+are genuine global degree-(0,0)
+regular functions on J. The column
+space equals the line generated by x,
+i.e., the pullback of O_X(-1).
+Naturality and the line-bundle
+Chern character give the last claim.
+\end{proof}
+
+\section{Exact higher-causal PROJECTIVE INTEGRABILITY obstruction}
+
+The same universal fold gives a second
+geometry-first avenue independent of
+analytic volume growth. For the honest
+smooth complex topological E_alpha over
+the COMPACT original X with
+$\mathrm{ch}(E_\alpha)=r+m\alpha$,
+choose a smooth $(0,1)$-connection D.
+Its curvature obstruction
+$F_D^{0,2}=D^2$ is a smooth
+$(0,2)$-form with values in
+$\mathrm{End}(E_\alpha)$.
+Define the honest projective/center-free
+causal obstruction
+\[
+ \boxed{
+ \mathfrak N_{\mathrm{proj}}(D)=
+ F_D^{0,2}
+ -\frac1r\operatorname{tr}(F_D^{0,2})\,\mathrm{Id}_{E_\alpha}.
+ }                                                        \tag{9.1}
+\]
+
+\begin{theorem}[Traceless projective fold integrability upgrades to true algebraic geometry]
+Assume the original class alpha is of rational
+Hodge type (p,p). If there is a smooth
+$(0,1)$-connection D on E_alpha for which
+\[
+ \boxed{\mathfrak N_{\mathrm{proj}}(D)=0,}       \tag{9.2}
+\]
+then E_alpha admits a \emph{fully integrable}
+holomorphic $(0,1)$-connection. The resulting
+holomorphic bundle is algebraic by GAGA,
+and the ORIGINAL X receives the TRUE
+cycle
+\[
+ \boxed{
+ Z_\alpha=
+   \frac{(-1)^{p-1}}{m(p-1)!}\,
+         c_p^{CH}(E_\alpha),\qquad
+ \mathrm{cl}^{can}_X(Z_\alpha)=\alpha .
+ }                                                        \tag{9.3}
+\]
+Conversely any holomorphic structure
+on this fixed topological E_alpha has
+a $(0,1)$-operator for which
+$\mathfrak N_{\mathrm{proj}}=0$.
+Thus, in the pure-Chern-character Hodge
+setting, the projectivized
+curvature obstruction is not a
+new hidden category that could evade
+true holomorphic-bundle integrability:
+the projective and vector-bundle
+integrability existence criteria coincide.
+\end{theorem}
+\begin{proof}
+If (9.2) holds, write
+$F_D^{0,2}=\eta\mathrm{Id}$ with
+$\eta=\frac1r\operatorname{tr}F_D^{0,2}$.
+The $(0,3)$ Bianchi identity for D
+reduces to $\bar\partial\eta=0$
+because the scalar curvature is central.
+The Dolbeault cohomology class
+$[\eta]\in H^{0,2}_{\bar\partial}(X)$
+is $\frac{2\pi i}{r}c_1(E_\alpha)^{0,2}$,
+which vanishes: for p>=2,
+$\operatorname{ch}_1(E_\alpha)=0$;
+for p=1, $\operatorname{ch}_1(E_\alpha)
+=m\alpha$ is of type (1,1).
+Since X is compact K\"ahler,
+there is a global smooth $(0,1)$
+scalar form beta with
+$\bar\partial\beta=\eta$.
+The corrected operator
+$D'=D-\beta\mathrm{Id}$ obeys
+\[
+ (D')^2=(\eta-\bar\partial\beta)
+           \mathrm{Id}=0.
+\]
+Koszul--Malgrange gives a genuine
+holomorphic bundle; projective GAGA
+gives a genuine algebraic bundle.
+The pure ch Chern-polynomial formula
+from section 3 gives (9.3).
+The converse is immediate: the Dolbeault
+operator of a holomorphic bundle has
+zero entire $(0,2)$ curvature.
+\end{proof}
+\begin{remark}
+This identifies an exact tensorial
+GEOMETRIC equation for the final
+constructor, not a freely chosen
+Hodge-to-Chow map. The vanishing of
+the scalar/trace $(0,2)$ obstruction
+follows from the Hodge type of alpha,
+whereas vanishing of the
+\emph{traceless} projective Nijenhuis
+obstruction (9.1) is the genuinely
+independent geometry that has to
+be derived by a new universal GST law.
+\end{remark}
+
+\section{Concrete failure of the false ANALYTIC = ALGEBRAIC shortcut}
+For ANY positive-dimensional affine
+GST spatial world J, choose a
+nonconstant regular function
+$f:J\to\mathbb A^1$. Its image
+contains all but finitely many
+complex numbers because the
+Chevalley image of a nonconstant
+morphism from an irreducible
+affine variety to A1 is infinite
+constructible. Then
+\[
+ \boxed{\Delta_f=\{z\in J^{an}:
+                     e^{f(z)}-1=0\}}              \tag{9.4}
+\]
+is an ACTUAL closed analytic
+principal divisor. Its topological
+first Chern/divisor class is ZERO,
+yet it is generally not algebraic:
+its f-image is
+$2\pi i\mathbb Z\cap f(J)$,
+an infinite discrete subset of C.
+If the divisor were an algebraic
+subvariety of J, Chevalley's theorem
+would make its f-image a constructible
+subset of A1, and every infinite
+constructible subset of A1 contains
+a nonempty Zariski-open set.
+This contradicts discreteness.
+Thus even a zero topological Hodge
+class admits analytic geometric
+representatives that are not
+algebraic; one must select
+a CONTROLLED geometric
+representative (polynomial
+projector growth or finite
+cycle-volume growth), not infer
+regularity from cohomology alone.
+
+\section{ESSENTIAL BOUNDARY versus PROJECTIVE COMPACTIFICATION: direct closure theorem}
+The actual fold J is the complement
+of the smooth incidence divisor
+$B\subset\bar J=X\times(\mathbb P^N)^\vee$.
+This makes the final geometric
+obstruction observable without
+introducing any metric, numerical
+cutoff, or Hodge-number experiment.
+
+\begin{theorem}[All-X exact algebraic-source criterion by spatial boundary closure]
+Fix arbitrary original X,p,alpha and
+any actual affine Jouanolou fold
+J_N(X), together with its projective
+compactification $\bar J$.
+The following are equivalent:
+
+(A) alpha has an ACTUAL
+original-X rational algebraic Chow
+representative with canonical class alpha.
+
+(C) Among the genuine holomorphic
+projector/determinantal cycles
+$\Sigma_\alpha$ constructed
+in section 3 there exists one
+whose analytic cycle admits a
+closed pure-codimension-p analytic
+cycle EXTENSION $\bar\Sigma_\alpha$
+across the incidence boundary
+$B=\bar J\setminus J$:
+\[
+ \boxed{
+ \bar\Sigma_\alpha\in Z^p_{\rm an}(\bar J)_{\mathbb Q},
+ \qquad
+ \bar\Sigma_\alpha|_{J^{an}}
+        =\Sigma_\alpha .
+ }                                                        \tag{11.1}
+\]
+If (C) holds, the true original-X
+source is obtained by restricting
+the projective Chow cycle of
+$\bar\Sigma_\alpha$ to J and applying
+the rational affine-bundle Chow inverse:
+\[
+ \boxed{
+ Z_\alpha=
+ \frac{(-1)^{p-1}}{m(p-1)!}\,
+     (q^*)^{-1} \bigl[
+       \bar\Sigma_\alpha|_J
+     \bigr]_{\rm Chow}.
+ }                                                        \tag{11.2}
+\]
+\end{theorem}
+\begin{proof}
+(C)->(A): $\bar J$ is an
+ACTUAL complex projective algebraic
+variety. By Chow's algebraicity
+theorem, every closed complex
+analytic cycle on $\bar J$ is
+algebraic; thus $\bar\Sigma_\alpha$
+is a genuine Chow cycle, whose
+restriction to affine J is the
+genuine algebraic cycle
+$\Sigma_\alpha$. Its canonical
+Betti class is the analytic
+cycle class from (3.2).
+The Chow affine-space torsor
+homotopy isomorphism
+$q^*:CH^p(X)_Q\overset{\sim}\to
+ CH^p(J)_Q$ and rational Betti
+naturality prove (11.2).
+
+(A)->(C): the finite-pole
+projector source theorem builds
+a REGULAR algebraic idempotent
+P on J with pure full ch
+equal to r+m q^*alpha.
+Generic global algebraic sections
+of its actual algebraic image
+bundle produce a genuine expected
+codimension-p algebraic
+determinantal cycle Sigma on J.
+Its Zariski closure in the
+projective compactification bar J
+is an algebraic cycle and
+therefore an analytic cycle
+extension satisfying (11.1).
+\end{proof}
+\begin{remark}
+This is the sharp geometric
+interpretation of the spatial
+fold: the full original Hodge
+structure survives arbitrary
+emergent dimensions, and the
+constructed analytic cycle already
+has the EXACT required Betti class.
+The mathematical issue is whether
+one can select a cycle with NO
+essential analytic boundary
+at the incidence compactification.
+If that boundary closure theorem
+is established from a genuinely
+independent GST causal/topological
+law for EVERY rational (p,p)
+input, equation (11.2)
+delivers the classical target.
+The theorem above certifies the
+exact implication and converse;
+it does not silently assume the
+extension condition for arbitrary
+constructed holomorphic cycles.
+\end{remark}
+
+\begin{theorem}[Dimension-free boundary dominance obstruction to automatic analytic extension]
+For the ENTIRE all-dimensional
+Jouanolou spatial tower indexed by
+every projective ambient dimension
+N, a codimension-p analytic
+determinantal cycle has complex
+dimension $d+N-p$, while the
+incidence boundary divisor B has
+dimension $d+N-1$. Their
+DIFFERENCE is the exact
+universal number
+\[
+ \boxed{
+ \dim_\mathbb C \Sigma_\alpha-
+ \dim_\mathbb C B
+ =(d+N-p)-(d+N-1)=1-p.
+ }                                                        \tag{11.3}
+\]
+For every p>=1 and EVERY
+emergent N, this is nonpositive.
+Consequently simply increasing
+the realized spatial dimension
+N can NEVER create the strict
+analytic-dimension dominance
+$\dim\Sigma>\dim B$ that
+would permit a direct
+Remmert--Stein extension theorem
+across the entire boundary
+B without further analytic
+control. The p=1 case has
+EQUAL dimensions; every p>=2
+has strictly smaller cycle
+dimension than boundary
+dimension.
+\end{theorem}
+\begin{proof}
+J has complex dimension d+N;
+the generic expected-codimension-p
+determinantal locus has dimension
+d+N-p. The incidence boundary
+is a nonempty effective Cartier
+divisor on the projective
+compactification of dimension
+d+N, hence has dimension
+d+N-1. Subtract and cancel N.
+The elementary dimension
+comparison is exact for ALL N
+and all original X, so the
+usual sufficient hypothesis
+$\dim\Sigma>\dim B$ cannot
+be established by dimension
+growth alone.
+This does NOT prove extension
+is impossible: finite volume,
+finite pole order or actual
+fiber translation coherence
+still give independent ways
+to establish it.
+\end{proof}
+
+\section{A second SPATIAL causal mechanism: full affine-fiber translation symmetry}
+
+The Jouanolou fold is more than a
+cohomology equivalence: it is a
+genuine affine-space TORSOR
+$q:J\to X$ under an algebraic rank-N
+vector bundle $V\to X$.
+To type the action explicitly, write
+$L=O_X(-1)$ and let
+$0\to L\to\underline{\mathbb C}^{N+1}
+ \to Q\to0$ be the restricted
+universal tautological sequence.
+Applying $\operatorname{Hom}(-,L)$
+gives an exact sequence of algebraic
+vector bundles
+\[
+ 0\to\operatorname{Hom}(Q,L)
+  \to\operatorname{Hom}(
+       \underline{\mathbb C}^{N+1},L)
+  \to\operatorname{Hom}(L,L)=O_X
+  \to0 .
+\]
+A point of J over x is exactly a
+LINEAR RETRACTION of the inclusion
+$L_x\hookrightarrow\mathbb C^{N+1}$
+to $L_x$, obtained from the
+nonincident dual hyperplane by
+$w\mapsto(\ell(w)/\ell(x))x$.
+Therefore J is precisely the affine
+fiber of the above map over the
+identity section $1\in O_X$.
+The difference of two retractions
+belongs to
+$V=\operatorname{Hom}(Q,L)$,
+which proves the rank-N vector
+bundle torsor statement and gives
+its FULL actual translation action.
+The total vector bundle acts by
+the actual algebraic translation map
+\[
+ a:V\times_X J\longrightarrow J,
+ \qquad (v,z)\longmapsto z+v.                    \tag{10.1}
+\]
+Translation acts transitively on every
+emergent affine fiber but leaves
+every original-X point x fixed.
+
+\begin{theorem}[Exact universal symmetry-to-original-cycle descent]
+For ANY original smooth projective
+complex X, ANY p, ANY rational
+class alpha in H^{2p}(X,Q),
+and ANY affine fold J_N(X),
+the following are equivalent:
+
+(i) alpha has an ACTUAL rational
+algebraic codimension-p cycle on
+the original X.
+
+(ii) There exists a
+closed PURE codimension-p
+rational complex-analytic cycle
+W on the actual folded J^{an}
+whose analytic Betti class equals
+$q^*\alpha$ and whose entire
+cycle (including rational
+multiplicities) is invariant under
+ALL fiber translations by V:
+\[
+ \boxed{
+  a^{-1}(W)=
+  \operatorname{pr}_J^{-1}(W)
+       \quad\text{as analytic cycles
+                  on }V\times_X J.
+ }                                                        \tag{10.2}
+\]
+No limit in N, rank, or topology
+of original X appears.
+\end{theorem}
+\begin{proof}
+(ii)->(i): local analytic sections
+of the affine-space torsor exist
+because q is algebraically locally
+trivial. On a trivializing open
+$U\subset X$, write $q^{-1}(U)
+=U\times\mathbb C^N$.
+Translation invariance (10.2)
+forces every analytic-cycle
+component of W over U to be
+a pullback of a unique analytic
+codimension-p cycle $Z_U$ on U:
+membership and multiplicity at
+$(x,z)$ are independent of z,
+and the slice $z=0$ recovers
+$Z_U$ analytically. The
+$Z_U$ agree on overlaps by
+translation coherence, hence
+glue to a rational analytic
+cycle Z on compact X.
+By projective Chow/GAGA,
+every closed analytic subvariety
+of projective X is algebraic;
+thus $Z\in CH^p(X)_Q$.
+Its pullback is W, so canonical
+cycle naturality gives
+$q^*cl_X^{can}(Z)=q^*\alpha$.
+Injectivity of q^* on rational
+cohomology proves
+$cl_X^{can}(Z)=\alpha$.
+
+(i)->(ii): choose an actual
+algebraic rational cycle Z on
+X with canonical class alpha.
+The flat preimage $W=q^{-1}Z$
+is a genuine codimension-p
+rational algebraic, hence
+analytic, cycle on J.
+Since every translation preserves
+its base point, it satisfies
+(10.2) and has Betti class
+$q^*cl_X^{can}(Z)=q^*\alpha$.
+\end{proof}
+
+\begin{remark}[Full causal coherence is strictly stronger than cohomological invariance]
+For every alpha the class
+$q^*\alpha$ is automatically
+invariant under translations
+because $q\circ a=q\circ
+\mathrm{pr}_J$. This
+COHOMOLOGICAL symmetry is not
+the ACTUAL analytic-cycle
+symmetry (10.2). Generic
+analytic degeneracy cycles from
+section 3 need not satisfy
+(10.2), even though their
+Betti class does. The exact
+new law that would finish the
+universal conjecture by this
+route must transform the
+constructed \emph{actual analytic
+cycle} into a new
+translation-equivariant analytic
+cycle with the same original
+Betti class, WITHOUT replacing
+the analytic cycle by a smooth
+harmonic form or assuming an
+original-X Chow source.
+\end{remark}
+
+\section{Final geometry-to-algebraicity proof contract}
+The full chain constructed WITHOUT
+an original-X algebraic witness is
+\[
+ \alpha\quad\leadsto\quad
+ E_\alpha^{top}\quad\leadsto\quad
+ J_N(X)\quad\leadsto\quad
+ P_\alpha^{hol}\quad\leadsto\quad
+ \Sigma_\alpha^{an},\qquad
+ [\Sigma_\alpha]_{Betti}
+  =(-1)^{p-1}m(p-1)!\,q^*\alpha .
+\]
+The exact original-X return
+is already mathematically proved
+if a representative P_alpha
+in this HOLomorphic projector
+class can be selected with
+a finite polynomial-growth bound.
+On the smooth affine fold that
+single analytic growth statement
+produces an actual algebraic
+projective module and, by (4.4),
+the ACTUAL original-X algebraic
+cycle with the correct canonical
+Betti class. The universal growth
+statement is the remaining
+geometric theorem whose proof
+would finish the Hodge target.
+Nothing in the proof replaces
+this theorem by ordinary
+Hodge-number conservation or
+by an abstract algebraic-basis
+input.
+\end{document}

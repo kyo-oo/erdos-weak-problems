@@ -1,0 +1,69 @@
+name: GST First Middle Primitive Algebraic Cycle
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTMiddlePrimitiveProjectiveProduct.lean'
+      - '.github/workflows/gst-middle-primitive-projective-product.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-middle-primitive-product-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependency build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-middle-primitive
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Verify explicit primitive algebraic-cycle coordinates
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTMiddlePrimitiveProduct"
+          roots = ["GSTMiddlePrimitiveProjectiveProduct"]
+          EOF
+          if lake build GSTMiddlePrimitiveProduct > middle-primitive-product-lean.log 2>&1; then
+            echo "LEAN PASSED: exact nonzero middle primitive Hodge cycle for P2xP2 cohomology ring"
+          else
+            grep -nE 'error:|sorryAx|✖' middle-primitive-product-lean.log | tail -n 120 || true
+            tail -n 80 middle-primitive-product-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" middle-primitive-product-lean.log; then
+            exit 1
+          fi
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-middle-primitive-product-log
+          path: middle-primitive-product-lean.log
+          if-no-files-found: warn

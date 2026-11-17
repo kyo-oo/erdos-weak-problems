@@ -1,0 +1,160 @@
+{
+  "assertion_tested": "Complete middle-pairing and mixed-birth matrices for m=1..12; exact Chern convolution through dimension 2m+2; all 1093 words of arity 0..6 over dimensions m=1,2,3",
+  "coefficient_domain": "Q, exact Fraction arithmetic",
+  "middle_basis": [
+    "H^(m+1)",
+    "C_A",
+    "C_B"
+  ],
+  "rows": [
+    {
+      "m": 1,
+      "dimension_first_world": 4,
+      "second_center_codimension": 2,
+      "first_push": 0,
+      "primitive_square": 2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": -1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 2,
+      "dimension_first_world": 6,
+      "second_center_codimension": 3,
+      "first_push": 0,
+      "primitive_square": -2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": 1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 3,
+      "dimension_first_world": 8,
+      "second_center_codimension": 4,
+      "first_push": 0,
+      "primitive_square": 2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": -1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 4,
+      "dimension_first_world": 10,
+      "second_center_codimension": 5,
+      "first_push": 0,
+      "primitive_square": -2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": 1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 5,
+      "dimension_first_world": 12,
+      "second_center_codimension": 6,
+      "first_push": 0,
+      "primitive_square": 2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": -1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 6,
+      "dimension_first_world": 14,
+      "second_center_codimension": 7,
+      "first_push": 0,
+      "primitive_square": -2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": 1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 7,
+      "dimension_first_world": 16,
+      "second_center_codimension": 8,
+      "first_push": 0,
+      "primitive_square": 2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": -1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 8,
+      "dimension_first_world": 18,
+      "second_center_codimension": 9,
+      "first_push": 0,
+      "primitive_square": -2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": 1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 9,
+      "dimension_first_world": 20,
+      "second_center_codimension": 10,
+      "first_push": 0,
+      "primitive_square": 2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": -1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 10,
+      "dimension_first_world": 22,
+      "second_center_codimension": 11,
+      "first_push": 0,
+      "primitive_square": -2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": 1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 11,
+      "dimension_first_world": 24,
+      "second_center_codimension": 12,
+      "first_push": 0,
+      "primitive_square": 2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": -1,
+      "perfect_source_Euler": -1
+    },
+    {
+      "m": 12,
+      "dimension_first_world": 26,
+      "second_center_codimension": 13,
+      "first_push": 0,
+      "primitive_square": -2,
+      "mixed_top_push": -1,
+      "unit_readout": 1,
+      "ambient_gram_determinant": 1,
+      "perfect_source_Euler": -1
+    }
+  ],
+  "projector_grid_checks": 1500,
+  "cosmology_words_visited": 1093,
+  "structural_results": {
+    "old_push_of_source": 0,
+    "new_mixed_push_of_source": -1,
+    "normalized_feedback_readout": 1,
+    "ample_cup_minor": "(k-1)*(k-2)",
+    "primitive_dimension": 1,
+    "integral_projector_idempotent": true,
+    "derived_K0_source_top_Euler": -1
+  },
+  "non_claims": [
+    "No general-X source or non-tautological center is constructed",
+    "The rational coordinate model needs the stated canonical blowup comparison",
+    "No Hodge counterexample follows from the old pushforward kernel",
+    "Finite m and word tests do not replace the unrestricted Lean proofs"
+  ]
+}

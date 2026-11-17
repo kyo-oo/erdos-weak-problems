@@ -1,0 +1,50 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0689 / 1132
+#    Path         : branches/sol_phase-crossing-surgery/.github/workflows/phase-crossing-surgery.yml
+#    Ref          : origin/sol/phase-crossing-surgery
+#    First-commit : 2026-08-16 22:58:35 +0530  (45e4f50)
+#    Last-commit  : 2026-08-17 00:30:42 +0530  (cf9ab6e)
+#    Total commits: 4
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/4] 2026-08-16 22:58:35 +0530  45e4f50  (ker07-dev)
+#        Add isolated phase crossing surgery check
+# [02/4] 2026-08-16 23:13:22 +0530  a378ac2  (ker07-dev)
+#        Compile exact carrier lemmas before crossing RED
+# [03/4] 2026-08-16 23:23:50 +0530  7753c0d  (ker07-dev)
+#        Compile vertical phase handoff before crossing RED
+# [04/4] 2026-08-17 00:30:42 +0530  cf9ab6e  (ker07-dev)
+#        Compile canonical trap reduction before crossing RED
+# ======================================================================
+
+name: Phase crossing surgery
+
+on:
+  push:
+    branches: [sol/phase-crossing-surgery]
+  workflow_dispatch:
+
+jobs:
+  red-green:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Compile exact phase carrier lemmas
+        run: lake env lean GSTPhaseCrossingCarrierScratch.lean
+      - name: Compile exact vertical phase handoff
+        run: lake env lean GSTPhaseCrossingTransferScratch.lean
+      - name: Compile canonical two-boundary trap reduction
+        run: lake env lean GSTPhaseCrossingTrapScratch.lean
+      - name: Compile isolated canonical crossing RED test
+        run: lake env lean PhaseCrossingSurgeryRED.lean

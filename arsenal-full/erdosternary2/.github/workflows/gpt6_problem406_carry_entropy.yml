@@ -1,0 +1,27 @@
+name: GST exact 4-state physical-pair carry entropy
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [scripts/gst_406_carry_entropy_independent_audit.py, GSTProblem406CarryEntropyBound.lean, .github/workflows/gpt6_problem406_carry_entropy.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  carry-entropy:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Kernel prove uniform seven-of-nine carry restriction
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake env lean GSTProblem406CarryEntropyBound.lean 2>&1 | tee gst-406-carry-entropy.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' gst-406-carry-entropy.log
+          echo GST_ORIGINAL_AFFINE_CARRY_ENTROPY_PASS=1
+      - name: Independent exact finite physical-prefix audit
+        run: python3 scripts/gst_406_carry_entropy_independent_audit.py

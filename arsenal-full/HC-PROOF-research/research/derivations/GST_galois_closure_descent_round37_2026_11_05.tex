@@ -1,0 +1,322 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Galois-Closure Descent Family:\\ the non-Galois CM shapes of $R2'$ (GST Hodge Campaign, Round 37)}
+\author{GST campaign continuation session (operator order: the standing finish order,\\
+\texttt{research/gpt6-native-point-primitive-span-20261017}, commit after Round 36 $2c94b3c6$)}
+\date{2026-11-05 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{Scope and the standing order}
+
+This round strikes the face $(a')$ named by Round 36's Theorem S17(iii): the
+\emph{non-Galois CM shapes} --- every CM closure pair $(\widetilde G, H)$ beyond
+the abelian-cyclotomic worlds, at the committed census (degrees $4$ and $6$
+complete, degree $8$ the regular and automorphism-split order-16 families).
+The operator's standing order is the finish order against Question 2; per the
+closing discipline (\S40) the Clay statement is \textbf{not} claimed here, and
+the polarity split stands. Everything below is decided by the certificate
+\texttt{galois\_closure\_descent\_round37\_checks.py} (1950 checks, 0 failures,
+exit 0, deterministic double-run byte-identical, md5
+\texttt{50d0b69880eb96a2bff95afe7da92c52}, $\approx$134\,s, exact arithmetic,
+zero floats; the post-repair state after AUDIT-37 --- the pre-repair
+certificate stood at 1892 checks, md5
+\texttt{e16164e5ae0632572db5f01c93025e29}).
+\emph{Provenance}: the branch identifier and the Round-36 push hash in the
+byline are the receipts recorded in the campaign worklog (CX-16) and the
+Round-32 record; the round artifacts live under
+\texttt{hodge-campaign/round37/} on the research branch.
+
+\section{The closure letter model}
+
+\subsection{Setup}
+Let $K$ be a CM field of degree $2g$ with Galois closure $\widetilde K$,
+$G := \operatorname{Gal}(\widetilde K/\mathbb Q)$ (order $n$),
+$H := \operatorname{Gal}(\widetilde K/K)$, and complex conjugation
+$\rho \in Z(G)$ acting freely on the letter set
+$X := G/H$ (the $2g$ embeddings $K \hookrightarrow \widetilde K$; freeness of
+$\rho$ is the CM condition $\rho \notin \bigcup_g gHg^{-1}$). A \emph{CM type}
+$\Phi \subseteq X$ picks one letter from each $\rho$-pair. Write
+$A(K,\Phi)$ for the abelian variety of dimension $g$ with complex
+multiplication by $\mathcal O_K$ and type $\Phi$, and
+$\mathcal H^{p,p}_\Phi$ for the span of the letter words
+$e_U = e_{u_1}\wedge\dots\wedge e_{u_{2p}}$ ($U \subseteq X$, $|U| = 2p$,
+$|U \cap \Phi| = p$) in $\bigwedge^{2p}(\widetilde K \otimes H^1)$.
+
+\begin{lemma}[Identification]\label{lem:ident}
+$H^{2p}(A(K,\Phi),\mathbb Q)\otimes_{\mathbb Q}\widetilde K
+\cong \bigoplus_U \widetilde K\, e_U$ compatibly with the $G$-action
+$g\cdot e_\sigma = e_{g\circ\sigma}$ on the letters and the Galois action on
+coefficients; consequently
+\[
+\operatorname{Hdg}^{2p}\!\big(A(K,\Phi)\big)
+\;=\;
+\Big\{\,c=(c_U)\in \widetilde K^{\,\mathcal B_\Phi}\;:\;
+c_{gU}=g(c_U)\,s(g,U)\ \ \forall g\in G\,\Big\},
+\]
+where $\mathcal B_\Phi$ is the set of \emph{$\Phi$-balanced} words
+($|U\cap\Phi|=p$) and $s(g,U)\in\{\pm1\}$ is the exterior sign of the
+permutation sorting $g(U)$.
+\end{lemma}
+
+\begin{proof}
+$H^1(A)\otimes\widetilde K$ is the direct sum of the $K$-eigenlines
+$\widetilde K\,e_\sigma$, $\sigma\in X$; the eigenline for $\sigma$ is mapped
+by $1\otimes g$ into the eigenline for $g\circ\sigma$. Choosing eigenvectors
+compatibly on each $G$-orbit of letters fixes the identification up to a
+scalar cocycle on the stabilizers; the cocycle multiplies the twisted action
+below by a unit but never enters a trace (Lemma~\ref{lem:trace}), so the
+dimensions and the product ranks computed from any compatible choice agree.
+A rational class $\zeta$ has $\zeta\otimes 1=\sum_U c_U e_U$; rationality is
+$(1\otimes g)(\zeta\otimes 1)=\zeta\otimes 1$, i.e.\ the displayed equivariance;
+the Hodge condition $(p,p)$ is support on $\mathcal B_\Phi$.
+\end{proof}
+
+\begin{lemma}[Mixed-orbit kill]\label{lem:kill}
+If $U$ is $\Phi$-balanced and $gU$ is not, then every system of
+Lemma~\ref{lem:ident} has $c_U=0$. Hence the support of any rational Hodge
+class lies in the set of \emph{pure-balanced} words
+\[
+\mathcal P_\Phi(p)=\{U : |U|=2p,\ |U\cap\Phi|=p,\ \text{and } |gU\cap\Phi|=p
+\ \forall g\in G\}.
+\]
+\end{lemma}
+
+\begin{proof}
+The equivariance at $g$ reads $c_{gU}=g(c_U)s(g,U)$; the left side vanishes
+on components outside $\mathcal B_\Phi$ by the Hodge condition, so
+$g(c_U)=0$ and $c_U=0$.
+\end{proof}
+
+\subsection{The full-descent dimension law}
+
+\begin{lemma}[Trace law]\label{lem:trace}
+For $h\in G$, $h\ne e$, the trace of $h$ on $\widetilde K$ (as
+$\mathbb Q$-vector space) is $0$; consequently for any subgroup
+$S\le G$ and any character twist $\chi:S\to\{\pm1\}$,
+\[
+\dim_{\mathbb Q}\{x\in\widetilde K : h(x)=\chi(h)\,x\ \forall h\in S\}
+= \frac{n}{|S|},
+\]
+independently of $\chi$.
+\end{lemma}
+
+\begin{proof}
+By the normal basis theorem $\widetilde K\cong \mathbb Q[G]$ as a
+$G$-module, and left multiplication by $h\ne e$ is a fixed-point-free
+permutation of the basis. The fixed space of the twisted action is the
+$\chi$-isotypic part of $\operatorname{Res}^G_S\mathbb Q[G]$, of dimension
+$\frac1{|S|}\sum_{h\in S}\chi(h)\operatorname{tr}(h) = \frac{n}{|S|}$
+since $\operatorname{tr}(h)=0$ for $h\ne e$ and $\chi(e)=1$.
+\end{proof}
+
+\begin{theorem}[S18, Galois-closure descent]\label{thm:s18}
+Let $O$ be a $G$-orbit of pure-balanced words with stabilizer
+$S=S(U)$. The systems of Lemma~\ref{lem:ident} supported on $O$ form a
+$\mathbb Q$-space of dimension $|O|$; in particular
+\[
+\dim_{\mathbb Q}\operatorname{Hdg}^{2p}\!\big(A(K,\Phi)\big)
+\;=\;\#\mathcal P_\Phi(p).
+\]
+\end{theorem}
+
+\begin{proof}
+A system on $O$ is determined by $c_{U_0}\in\widetilde K$ through
+$c_{gU_0}=g(c_{U_0})\,s(g,U_0)$; well-definedness under $gU_0=g'U_0$
+is exactly the twisted-fixed condition for $S$ on $c_{U_0}$ with the
+character $s(\cdot,U_0)|_S$ (a homomorphism since $S$ stabilizes $U_0$).
+Lemma~\ref{lem:trace} gives $\dim = n/|S| = |O|$. Summing over orbits
+gives the dimension law. The certificate verifies this closed form against
+an exact blockwise RREF solution of the equivariance system at every
+committed world, type orbit, and degree (bounded
+$\#\mathcal P\cdot n\le 2600$): the two algorithms agree everywhere.
+\end{proof}
+
+\subsection{The census}\label{sec:census}
+
+\emph{Degree 4 (complete).} The 2-generation sweep of $S_4$ (all cyclic
+representatives paired with all elements, conjugacy-canonicalized) finds
+exactly $5$ transitive classes, matching the classical count. The
+central fixed-point-free involution filter selects $\{V_4, C_4, D_4\}$:
+the abelian worlds (Round 36's $m=8,12$ and $m=5$ shapes, now re-derived
+through the new engine) and the \emph{non-Galois quartic} world $D_4$
+($|H|=2$). $A_4$ and $S_4$ have trivial centers and are excluded.
+
+\emph{Degree 6 (complete).} The same sweep of $S_6$ finds exactly $16$
+transitive classes, matching the classical count: since every class found
+is 2-generated, a hypothetical 17th transitive subgroup would contradict
+the classical census, so the sweep is complete. The filter selects four
+$\rho$-worlds: the abelian $C_6$ (Round 36's $m=7,9$ shapes) and the
+non-abelian classes of orders $12$ ($D_6$, the generic sextic CM closure),
+$24$, and $48$.
+
+\emph{Degree 8 (committed family).} The five regular worlds (all abstract
+groups of order $8$: $C_8$, $C_4\times C_2$, $C_2^3$, $D_4$, $Q_8$,
+pairwise non-isomorphic by involution counts $1/3/7/5/1$ with $C_8$ vs
+$Q_8$ split by exponent) and the order-16 worlds
+$\langle N_{\mathrm{reg}},\tilde\alpha\rangle$ for automorphisms
+$\alpha$ of each $N$ (complete in the class of transitive order-16
+subgroups \emph{containing} a regular subgroup: any such $G$ has
+$G\cap N_{\mathrm{reg}}=N$ and $G/N\cong C_2$, so $G=\langle
+N,\tilde\alpha\rangle$ inside the holomorph). Worlds with multiple central
+fixed-point-free involutions contribute one world per $\rho$. Total:
+$110$ $(G,\rho)$-worlds.
+
+\subsection{The dimension laws at the census}
+
+\begin{proposition}[Type classification and the classical laws]\label{prop:laws}
+\begin{enumerate}
+\item $\Phi$ is induced from the CM subfield $k=\widetilde K^{H'}$
+($H<H'<G$, $\rho\notin H'$) iff $\Phi$ is a union of right $H'$-orbits of
+letters (the fibers of $G/H\to G/H'$).
+\item At every \emph{primitive} type of every committed world (116 type
+orbits across the census),
+$\dim\operatorname{Hdg}^{2p}= \binom{g}{p}$ for all $p$; in particular
+$\dim\operatorname{NS}\otimes\mathbb Q = g$ (Rosati/Weil).
+\item At every type induced from a \emph{quadratic} CM subfield,
+$\dim\operatorname{Hdg}^{2p}=\binom gp^2$ (the split law; the
+$E^g$-worlds). The certificate checks this at every
+\emph{quadratic-inducible} orbit --- any index-2 stabilizing $H'$, not only
+the maximal-subfield-2 ones: 128 orbits, including the order-refined octic
+split types whose maximal inducing subfield is quartic.
+\item The palindrome law $\dim(2p)=\dim(2g-2p)$ for $1\le p\le g-1$ and
+the top degree $\dim(2g)=1$ hold at every type.
+\item Every type on a $V_4$-Galois quartic is induced (for
+$\Phi=\{x,y\}$, the subgroup $\langle x^{-1}y\rangle$ stabilizes $\Phi$
+since $(x^{-1}y)^2=e$ in $V_4$ and $y\ne\rho x$); likewise every type on a
+$D_4$-\emph{regular} octic is induced from one of the four quartic CM
+subfields. Hence $V_4$-Galois quartics and $D_4$-Galois octics admit no
+simple CM abelian varieties; the computed values
+$\dim\operatorname{NS}\in\{4\}$ (quartic) and $\{8\}$ (octic) are the
+product-world values $B\times B'$.
+\item The $Q_8$-regular octic has only primitive types (its order-4
+subgroups all contain $\rho$, so it has no proper CM subfield), with the
+binomial row $[4,6,4,1]$.
+\end{enumerate}
+\end{proposition}
+
+Round 36's receipts are reproduced through the new engine at the abelian
+worlds: the quartic span $1$, the sextic $3/9$, and the octic
+$6/18/36$ rows (primitive/intermediate/split).
+
+\section{The pairing-generation theorem}
+
+\begin{theorem}[S19, non-Galois pairing generation]\label{thm:s19}
+At every committed world $(G,\rho)$ of the census
+(\S\ref{sec:census}), every CM type orbit, and every degree $2p\le 2g$:
+every rational Hodge class on $A(K,\Phi)$ is a $\mathbb Q$-combination of
+\emph{products of divisor classes}. Equivalently
+\[
+\operatorname{rank}\operatorname{span}\{d_{i_1}\wedge\dots\wedge d_{i_p}\}
+=\dim_{\mathbb Q}\operatorname{Hdg}^{2p}\!\big(A(K,\Phi)\big),
+\qquad\textsc{surplus}=0,
+\]
+the products taken with repetition (the diagonal $d\wedge d\ne0$ for
+non-decomposable $d$; the iterate-basis sampler
+$S_p=\operatorname{span}(S_{p-1}\wedge \mathrm{NS})$ includes them by
+construction). The certificate computes \textbf{1386} (world, type,
+degree) surplus entries: \textbf{0 are nonzero}.
+\end{theorem}
+
+\begin{proof}
+The cup-product algebra of the complex torus $A(\mathbb C)$ is the exterior
+algebra of $H^1$, so products of degree-2 classes are exterior products of
+the corresponding systems; products of equivariant systems are equivariant
+(cocycle multiplicativity), and products of balanced words are balanced, so
+the products land in the Hodge space. The span rank is computed exactly by
+integer rank maintenance over the pure-word coordinates; the certificate
+additionally verifies (i) the product-equivariance relation on explicit
+products, (ii) the random-class nondegeneracy
+$v^{\wedge p}\ne0$ at every world (deterministic xorshift64* draws, with
+bounded retries --- a single draw can be degenerate), and (iii) the
+calibration battery of Proposition~\ref{prop:laws}.
+\end{proof}
+
+\begin{corollary}[S19, rational Hodge conjecture at the census]\label{cor:s19}
+The rational Hodge conjecture holds, at every degree, on every CM abelian
+variety whose closure pair $(\widetilde G,H)$ lies in the committed census
+--- simple (the primitive type orbits, including all non-Galois primitive
+shapes at degrees 4 and 6 and the committed degree-8 families), imprimitive
+(the split and intermediate product worlds), non-abelian-Galois (the
+$D_4$-, $Q_8$-regular and automorphism-split order-16 octics), and on
+$E\times A$ over them (63 joint frames over 17 base worlds: the complete
+quartic and sextic census worlds, the five regular octic worlds, and three
+distinct automorphism-split order-16 bases $C_8$, $C_4\times C_2$,
+$C_2^3$; per frame the first two type-orbit representatives --- the disjoint
+frames calibrated by the tensor law $\dim=1+\mathrm{NS}(A)$, the coupled
+frames by the fiber rule --- the full-fiber types carry
+$\dim\operatorname{Hom}(E,A)=2|\Phi_A|$ and the $E^{g+1}$-law, the
+straddling types carry $\dim\operatorname{Hom}=0$: no elliptic subvarieties
+in the simple worlds, distinct CM fields in the split ones).
+\end{corollary}
+
+\section{The re-drawn boundary (S20)}
+
+\begin{theorem}[S20]
+\begin{enumerate}
+\item[(i)] The elliptic face of $R2'$ is closed (Round 35); the abelian
+non-elliptic face at the abelian-cyclotomic shapes is closed (Round 36);
+\textbf{the non-Galois / non-abelian-Galois face is now closed at the
+committed census} --- the merged-sector surplus at these shapes is
+\emph{zero} at every degree, type, and arity covered.
+\item[(ii)] The residual of $(a')$ beyond the census: degree-8 closure
+groups of order $\ge24$ or without regular subgroups, and degrees $\ge10$
+--- the family-transport law (\S45) carries the statement shape; no claim.
+\item[(iii)] The remaining face of $R2'$: $(b)$ the non-split Weil
+fourfold world ($\mathrm{NS}(A)_{\mathbb Q}=\mathbb Q\theta$, the
+2-dimensional Weil plane, the committed obstruction receipts of Round 34).
+\item[(iv)] $R3$ (the $K$-condition at general input beyond the channels)
+and $R4$ (the transcendental fold-birth with the $(p,p)$-sensitive gate)
+stand untouched.
+\end{enumerate}
+\end{theorem}
+
+\section*{The certificate}
+
+\texttt{galois\_closure\_descent\_round37\_checks.py}: V1 the census
+(completeness receipts 5/5 and 16/16 against the classical counts; the
+degree-8 family as in \S\ref{sec:census}); V2 the model at every world
+(exterior cocycle law verified on all $(g,h,U)$ at degrees 2 and 4; the
+mixed-orbit kill live at 224 type-orbits; the two-algorithm dimension
+agreement at all 110 worlds); V3 the crux (the classifier, the calibration
+battery of Proposition~\ref{prop:laws}, \textsc{surplus}$=0$ at 1386
+entries, the random-class and product-equivariance receipts); V4 the
+$E\times A$ frames; V5 the operator's calibration anchor (arity totals
+$4/8/24/64/208$ by two algorithms at every $m\le5$, the $m=6$ control $688$
+by both, $\det(I+C_L)=1-(-1)^L$ by exact Bareiss for $L=2..12$); V6 the
+hostile battery (basis-deletion, wrong-sign cocycle flip, the type-validity
+battery --- double-letter, missing-pair, duplicate-letter, empty, at a
+canary world and adversarially at every census world --- the
+unbalanced-word injection into the filter's input list, garbage liveness,
+the census pair-generation and generator-deletion --- every
+control fires with the predicted failure) plus the mechanical vacuity and
+self-comparison scans. Two defects were caught and repaired during
+authoring by the certificate's own calibrations (the coupled-frame
+closure late-binding and the single-draw degeneracy); both are documented
+in the file. AUDIT-37 then found and repaired thirteen further findings in
+one batched round (the S3b one-directional-canary gap closed by the
+adversarial type battery; the split-law domain widened to all 128
+quadratic-inducible orbits; the E$\times$A frame census extended to 17
+base worlds; the degree-2 spans made genuine; the H4/H6 controls made
+load-bearing; the Lean PART-A label corrected); the closing re-check
+stands at 1950/0/exit 0, deterministic.
+
+\section*{Boundary on every artifact}
+
+Q1 (the framework conjecture on the committed world model) remains proven
+and certified, unchanged. Q2 (the Clay statement) is \textbf{not claimed};
+the closing string is \textbf{not emitted}; the polarity split stands. The
+falsifiable line after this round: $(b)$ the non-split Weil fourfold;
+$R3$; $R4$; the transport family of $(a')$ beyond the census.
+
+\end{document}

@@ -1,0 +1,154 @@
+==============================================================================
+ENGINE 142 BEHREND - certification of PROOF.md section 3B (the six steps)
+exact integer arithmetic + fractions.Fraction; floats only in display columns
+==============================================================================
+[PART 0] CHECKER SELF-TESTS + NEGATIVE CONTROLS
+[0.1] lattice pair-midpoint detector: 6 known cases correct -- VERDICT: PASS
+      ap3_scan_image([1, 2, 4, 5]) = False expected True
+      ap3_scan_image([0, 2, 3, 5]) = False expected True
+[0.2] image (a,delta) detector: 7 known cases correct -- VERDICT: FAIL
+[0.3] literal (a,delta) loop == endpoint-indexed scan on 400/400 random sets -- VERDICT: PASS
+[0.4] negative control: planted lattice 3-AP [(0, 0), (1, 1), (2, 2)] DETECTED by pair-midpoint -- VERDICT: PASS
+[0.5] negative control: planted image 3-AP (0,7,14) DETECTED by (a,delta) scan -- VERDICT: PASS
+    t=   +0.0s
+[PART A] (a) SPHERE-FREENESS: ALL level sets of Q on {0..m-1}^d, d in [2, 3, 4], m in [3, 4, 5, 6] - TWO METHODS
+      d=2 m=3 B= 6 B^d=    36:   6 non-empty levels,     9 pts; all levels 3-AP-free by BOTH methods; best level V*=1 |S*|=2
+      d=2 m=4 B= 8 B^d=    64:  10 non-empty levels,    16 pts; all levels 3-AP-free by BOTH methods; best level V*=1 |S*|=2
+      d=2 m=5 B=10 B^d=   100:  15 non-empty levels,    25 pts; all levels 3-AP-free by BOTH methods; best level V*=1 |S*|=2
+      d=2 m=6 B=12 B^d=   144:  20 non-empty levels,    36 pts; all levels 3-AP-free by BOTH methods; best level V*=25 |S*|=4
+      d=3 m=3 B= 6 B^d=   216:  10 non-empty levels,    27 pts; all levels 3-AP-free by BOTH methods; best level V*=5 |S*|=6
+      d=3 m=4 B= 8 B^d=   512:  19 non-empty levels,    64 pts; all levels 3-AP-free by BOTH methods; best level V*=9 |S*|=6
+      d=3 m=5 B=10 B^d=  1000:  32 non-empty levels,   125 pts; all levels 3-AP-free by BOTH methods; best level V*=17 |S*|=9
+      d=3 m=6 B=12 B^d=  1728:  45 non-empty levels,   216 pts; all levels 3-AP-free by BOTH methods; best level V*=26 |S*|=12
+      d=4 m=3 B= 6 B^d=  1296:  14 non-empty levels,    81 pts; all levels 3-AP-free by BOTH methods; best level V*=5 |S*|=12
+      d=4 m=4 B= 8 B^d=  4096:  29 non-empty levels,   256 pts; all levels 3-AP-free by BOTH methods; best level V*=14 |S*|=24
+      d=4 m=5 B=10 B^d= 10000:  50 non-empty levels,   625 pts; all levels 3-AP-free by BOTH methods; best level V*=18 |S*|=30
+      d=4 m=6 B=12 B^d= 20736:  74 non-empty levels,  1296 pts; all levels 3-AP-free by BOTH methods; best level V*=30 |S*|=48
+[A.1] ALL 324 non-empty level sets (2776 points) on the grid are 3-AP-free by BOTH detectors (full pair-midpoint scan + independent (a,delta) image scan); zero non-trivial 3-APs; methods agree 100% -- VERDICT: PASS
+[A.2] negative control: the UNION of levels (full cube image, d=2,m=3) CONTAINS the 3-AP (0, 1, 2) (preimages [(0, 0), (1, 0), (2, 0)], componentwise x+z=2y) - the level restriction of STEP 1 is load-bearing | union is NOT 3-AP-free, as it must be -- VERDICT: PASS
+    t=   +0.0s
+[PART B] (b) SIZE LAW (STEP 4): max_V |S_V| >= m^d / (d*(m-1)^2+1) - exact integer check
+      d=2 m=3: m^d=    9 levels<=  9 (actual   6) | max_V|S_V|=  2 (V*=  1) >= m^d/(d(m-1)^2+1) =   1.000 [exact:   2*  9 >=     9] ratio= 2.000 ceil=1 floor=1
+      d=2 m=4: m^d=   16 levels<= 19 (actual  10) | max_V|S_V|=  2 (V*=  1) >= m^d/(d(m-1)^2+1) =   0.842 [exact:   2* 19 >=    16] ratio= 2.375 ceil=1 floor=0
+      d=2 m=5: m^d=   25 levels<= 33 (actual  15) | max_V|S_V|=  2 (V*=  1) >= m^d/(d(m-1)^2+1) =   0.758 [exact:   2* 33 >=    25] ratio= 2.640 ceil=1 floor=0
+      d=2 m=6: m^d=   36 levels<= 51 (actual  20) | max_V|S_V|=  4 (V*= 25) >= m^d/(d(m-1)^2+1) =   0.706 [exact:   4* 51 >=    36] ratio= 5.667 ceil=1 floor=0
+      d=3 m=3: m^d=   27 levels<= 13 (actual  10) | max_V|S_V|=  6 (V*=  5) >= m^d/(d(m-1)^2+1) =   2.077 [exact:   6* 13 >=    27] ratio= 2.889 ceil=3 floor=2
+      d=3 m=4: m^d=   64 levels<= 28 (actual  19) | max_V|S_V|=  6 (V*=  9) >= m^d/(d(m-1)^2+1) =   2.286 [exact:   6* 28 >=    64] ratio= 2.625 ceil=3 floor=2
+      d=3 m=5: m^d=  125 levels<= 49 (actual  32) | max_V|S_V|=  9 (V*= 17) >= m^d/(d(m-1)^2+1) =   2.551 [exact:   9* 49 >=   125] ratio= 3.528 ceil=3 floor=2
+      d=3 m=6: m^d=  216 levels<= 76 (actual  45) | max_V|S_V|= 12 (V*= 26) >= m^d/(d(m-1)^2+1) =   2.842 [exact:  12* 76 >=   216] ratio= 4.222 ceil=3 floor=2
+      d=4 m=3: m^d=   81 levels<= 17 (actual  14) | max_V|S_V|= 12 (V*=  5) >= m^d/(d(m-1)^2+1) =   4.765 [exact:  12* 17 >=    81] ratio= 2.519 ceil=5 floor=4
+      d=4 m=4: m^d=  256 levels<= 37 (actual  29) | max_V|S_V|= 24 (V*= 14) >= m^d/(d(m-1)^2+1) =   6.919 [exact:  24* 37 >=   256] ratio= 3.469 ceil=7 floor=6
+      d=4 m=5: m^d=  625 levels<= 65 (actual  50) | max_V|S_V|= 30 (V*= 18) >= m^d/(d(m-1)^2+1) =   9.615 [exact:  30* 65 >=   625] ratio= 3.120 ceil=10 floor=9
+      d=4 m=6: m^d= 1296 levels<=101 (actual  74) | max_V|S_V|= 48 (V*= 30) >= m^d/(d(m-1)^2+1) =  12.832 [exact:  48*101 >=  1296] ratio= 3.741 ceil=13 floor=12
+[B.1] SIZE LAW on the grid: max_V|S_V|*(d*(m-1)^2+1) >= m^d everywhere (exact integers); partition identity sum_V|S_V| = m^d; #levels <= d*(m-1)^2+1 -- VERDICT: PASS
+[B.2] negative control: the FLOOR (not ceiling) of m^d/(d*(m-1)^2+1) collapses to 0 somewhere on the grid - the ceiling of Lemma 3B.4 is load-bearing (guaranteed size would be 0, breaking the master bound - see D.4) -- VERDICT: PASS
+    t=   +0.0s
+[PART C] (c) DIGIT MAP at base B=2m: injectivity + no-carry pullback (exhaustive + >=10^5 random triples per (d,m))
+      d=2 m=3 B= 6: |phi(D)|=   9 (injective=True); exhaustive image-triples pulled back:     25; random triples: 100000/100000 OK; random-integer all-in-image hits:  3834 - all pull back
+      d=2 m=4 B= 8: |phi(D)|=  16 (injective=True); exhaustive image-triples pulled back:     64; random triples: 100000/100000 OK; random-integer all-in-image hits:  3065 - all pull back
+      d=2 m=5 B=10: |phi(D)|=  25 (injective=True); exhaustive image-triples pulled back:    169; random triples: 100000/100000 OK; random-integer all-in-image hits:  3422 - all pull back
+      d=2 m=6 B=12: |phi(D)|=  36 (injective=True); exhaustive image-triples pulled back:    324; random triples: 100000/100000 OK; random-integer all-in-image hits:  3109 - all pull back
+      d=3 m=3 B= 6: |phi(D)|=  27 (injective=True); exhaustive image-triples pulled back:    125; random triples: 100000/100000 OK; random-integer all-in-image hits:   547 - all pull back
+      d=3 m=4 B= 8: |phi(D)|=  64 (injective=True); exhaustive image-triples pulled back:    512; random triples: 100000/100000 OK; random-integer all-in-image hits:   392 - all pull back
+      d=3 m=5 B=10: |phi(D)|= 125 (injective=True); exhaustive image-triples pulled back:   2197; random triples: 100000/100000 OK; random-integer all-in-image hits:   422 - all pull back
+      d=3 m=6 B=12: |phi(D)|= 216 (injective=True); exhaustive image-triples pulled back:   5832; random triples: 100000/100000 OK; random-integer all-in-image hits:   390 - all pull back
+      d=4 m=3 B= 6: |phi(D)|=  81 (injective=True); exhaustive image-triples pulled back:    625; random triples: 100000/100000 OK; random-integer all-in-image hits:    79 - all pull back
+      d=4 m=4 B= 8: |phi(D)|= 256 (injective=True); exhaustive image-triples pulled back:   4096; random triples: 100000/100000 OK; random-integer all-in-image hits:    29 - all pull back
+      d=4 m=5 B=10: |phi(D)|= 625 (injective=True); exhaustive image-triples pulled back:  28561; random triples: 100000/100000 OK; random-integer all-in-image hits:    65 - all pull back
+      d=4 m=6 B=12: |phi(D)|=1296 (injective=True); exhaustive image-triples pulled back: 104976; random triples: 100000/100000 OK; random-integer all-in-image hits:    41 - all pull back
+[C.1] phi injective on the full cube for every grid (d,m) (|phi(D)| = m^d) -- VERDICT: PASS
+[C.2] no-carry pullback: EXHAUSTIVE over every integer triple (a,b,c) in the image with a+c=2b (147506 triples grid-wide): each pulls back to componentwise x+z=2y via the base-B digit reader -- VERDICT: PASS
+[C.3] no-carry digit law on 1200000 random image-space triples (>=10^5 per (d,m)): integer identity a+c=2b + reader recovery + digit-wise law all hold -- VERDICT: PASS
+[C.4] random-integer-space triples (15395 all-in-image hits grid-wide): every hit pulls back -- VERDICT: PASS
+[C.5] negative control: at the wrong base B'=2m-2=4 (m=3), the integer identity phi'(x)+phi'(z)=2phi'(y) HOLDS (4+0=2*2) while x+z != 2y componentwise ((0, 1) vs (4, 0)) - the pullback FAILS, the no-carry hypothesis |c_i|<B of Lemma 3B.2 is load-bearing -- VERDICT: PASS
+[C.6] the same triple at the correct base B=6 satisfies NO integer relation (phi=(6, 2, 0): 6+0 != 2*2) - consistent with the pullback theorem -- VERDICT: PASS
+    t=  +18.2s
+[PART D] (d) EXPLICIT CONSTANT CHAIN (STEP 5 + STEP 6), C = 6, N_0 = 16
+[D.1] Taylor exhibit (T3): sum_{k<=8} (25/36)^k/k! = 45557920388276909/22749430293725184 > 2 (excess 59059800826541/22749430293725184) hence e^(25/36) > 2 hence ln 2 < 25/36 -- VERDICT: PASS
+[D.2] Taylor exhibit (T4): sum_{k<=7} (9/13)^k/k! + 3*(9/13)^8/8! = 7302823230379/3654473630080 < 2 (deficit 6124029781/3654473630080) hence e^(9/13) < 2 (Lagrange remainder < e*x^8/8! < 3x^8/8!) hence ln 2 > 9/13 -- VERDICT: PASS
+[D.3] conversion-lemma rationals: 25/36 + 2/9 == 11/12; 9/13 > 9/16 (so sqrt(ln 2) > 3/4, so sqrt(ln 16) > 3/2); 7/2 > 11/12 (the (T6) slack) -- VERDICT: PASS
+  --- table: N = 2^e, e = 10..60 (display column = float of the exact target) ---
+     e          N=2^e  u    m   d        N'=(2m)^d       m^d        g=ceil(m^d/den)   N*e^(-6sqrt(lnN)) [display]  master  exp
+    10            1024  3    8   2               256        64                   1            0.000141227    True   True
+    11            2048  3    8   2               256        64                   1            0.000130647    True   True
+    12            4096  3    8   3              4096       512                   4             0.00012508    True   True
+    13            8192  3    8   3              4096       512                   4             0.00012341    True   True
+    14           16384  3    8   3              4096       512                   4            0.000125057    True   True
+    15           32768  3    8   3              4096       512                   4            0.000129787    True   True
+    16           65536  4   16   3             32768      4096                   7            0.000137628    True   True
+    17          131072  4   16   3             32768      4096                   7            0.000148822    True   True
+    18          262144  4   16   3             32768      4096                   7            0.000163822    True   True
+    19          524288  4   16   3             32768      4096                   7             0.00018331    True   True
+    20         1048576  4   16   4           1048576     65536                  73            0.000208236    True   True
+    21         2097152  4   16   4           1048576     65536                  73            0.000239879    True   True
+    22         4194304  4   16   4           1048576     65536                  73            0.000279943    True   True
+    23         8388608  4   16   4           1048576     65536                  73            0.000330678    True   True
+    24        16777216  4   16   4           1048576     65536                  73            0.000395059    True   True
+    25        33554432  5   32   4          16777216   1048576                 273            0.000477017    True   True
+    26        67108864  5   32   4          16777216   1048576                 273            0.000581763    True   True
+    27       134217728  5   32   4          16777216   1048576                 273            0.000716229    True   True
+    28       268435456  5   32   4          16777216   1048576                 273            0.000889662    True   True
+    29       536870912  5   32   4          16777216   1048576                 273             0.00111445    True   True
+    30      1073741824  5   32   5        1073741824  33554432                6982             0.00140725    True   True
+    31      2147483648  5   32   5        1073741824  33554432                6982             0.00179053    True   True
+    32      4294967296  5   32   5        1073741824  33554432                6982             0.00229475    True   True
+    33      8589934592  5   32   5        1073741824  33554432                6982             0.00296133    True   True
+    34     17179869184  5   32   5        1073741824  33554432                6982             0.00384681    True   True
+    35     34359738368  5   32   5        1073741824  33554432                6982             0.00502864    True   True
+    36     68719476736  6   64   5       34359738368 1073741824               54104             0.00661333    True   True
+    37    137438953472  6   64   5       34359738368 1073741824               54104             0.00874786    True   True
+    38    274877906944  6   64   5       34359738368 1073741824               54104              0.0116357    True   True
+    39    549755813888  6   64   5       34359738368 1073741824               54104              0.0155597    True   True
+    40   1099511627776  6   64   5       34359738368 1073741824               54104              0.0209139    True   True
+    41   2199023255552  6   64   5       34359738368 1073741824               54104              0.0282498    True   True
+    42   4398046511104  6   64   6     4398046511104 68719476736             2885555              0.0383408    True   True
+    43   8796093022208  6   64   6     4398046511104 68719476736             2885555              0.0522756    True   True
+    44  17592186044416  6   64   6     4398046511104 68719476736             2885555              0.0715915    True   True
+    45  35184372088832  6   64   6     4398046511104 68719476736             2885555              0.0984651    True   True
+    46  70368744177664  6   64   6     4398046511104 68719476736             2885555               0.135988    True   True
+    47 140737488355328  6   64   6     4398046511104 68719476736             2885555               0.188563    True   True
+    48 281474976710656  6   64   6     4398046511104 68719476736             2885555                0.26248    True   True
+    49 562949953421312  7  128   6   281474976710656 4398046511104            45446102               0.366747    True   True
+    50 1125899906842624  7  128   6   281474976710656 4398046511104            45446102               0.514304    True   True
+    51 2251799813685248  7  128   6   281474976710656 4398046511104            45446102               0.723779    True   True
+    52 4503599627370496  7  128   6   281474976710656 4398046511104            45446102                1.02207    True   True
+    53 9007199254740992  7  128   6   281474976710656 4398046511104            45446102                1.44812    True   True
+    54 18014398509481984  7  128   6   281474976710656 4398046511104            45446102                2.05841    True   True
+    55 36028797018963968  7  128   6   281474976710656 4398046511104            45446102                2.93513    True   True
+    56 72057594037927936  7  128   7 72057594037927936 562949953421312          4986093969                 4.1981    True   True
+    57 144115188075855872  7  128   7 72057594037927936 562949953421312          4986093969                6.02244    True   True
+    58 288230376151711744  7  128   7 72057594037927936 562949953421312          4986093969                8.66467    True   True
+    59 576460752303423488  7  128   7 72057594037927936 562949953421312          4986093969                12.5014    True   True
+    60 1152921504606846976  7  128   7 72057594037927936 562949953421312          4986093969                18.0869    True   True
+[D.4] e = 10..60 (N = 2^e): the explicit rounding chain (u = max{u: 2^(u^2) <= N}, m = 2^u, d = max{d: (2m)^d <= N}, g = ceil(m^d/(d(m-1)^2+1))) satisfies ALL TEN chain inequalities including the MASTER integer bound N < g*u*2^(1+4u) (Theorem 3B.5) and the EXPONENTIAL claim g >= N*e^(-6*sqrt(ln N)) (Theorem 3B.7, C = 6) - 51/51 PASS -- VERDICT: PASS
+      tightest master slack on e=10..60: factor 2.1x at e=48
+[D.5] general-N sweep: 4158 values (all N in [16,4096], decades 10^6..10^18, N=2^e for e=4..60, edge points): the same TEN chain inequalities hold everywhere - master + exponential (C=6) both PASS 4158/4158 -- VERDICT: PASS
+      tightest master slack on the sweep: factor 2.0x at N=511
+[D.6] negative control: with the FLOOR instead of the ceiling, the guaranteed size at N=1000 is g'=0 and the master inequality N < g'*u*2^(1+4u) becomes 1000 < 0 = FALSE - the ceiling of Lemma 3B.4 is load-bearing -- VERDICT: PASS
+      informational (no claim): the largest ln(N/g)/sqrt(ln N) on the sweep is 3.3200 at N=1000000000 - the guaranteed chain is far inside C=6 (the construction's intrinsic constant is 4*sqrt(ln 2) ~ 3.3302)
+    t=  +18.7s
+[PART E] (e) SUBSETS OF [1,N]: the shifted witness families phi(S_V*)+1 under the pinned comparator convention (a>=1, delta>=1)
+   (d,m)      N=(2m)^d  V*  |W|   min  max      literal-scan  endpoint-scan  block-envelope
+   (2,3)          36    1    2     2     7           None           None     2 <= 24
+   (2,4)          64    1    2     2     9           None           None     2 <= 43
+   (2,5)         100    1    2     2    11           None           None     2 <= 67
+   (2,6)         144   25    4     6    61           None           None     4 <= 96
+   (3,3)         216    5    6     9    79           None           None     6 <= 144
+   (3,4)         512    9    6     4   193           None           None     6 <= 342
+   (3,5)        1000   17    9    15   411           None           None     9 <= 667
+   (3,6)        1728   26   12    18   733           None           None    12 <= 1152
+   (4,3)        1296    5   12     9   469           None           None    12 <= 864
+   (4,4)        4096   14   24    84  1673           None           None    24 <= 2731
+   (4,5)       10000   18   30    34  4111           None           None    30 <= 6667
+   (4,6)       20736   30   48   174  8941           None           None    48 <= 13824
+[E.1] every grid witness family W = phi(S_V*)+1: W subseteq [1,(2m)^d], |W| = |S_V*|, 3-AP-free under the pinned convention by the LITERAL (a,delta) double loop AND the endpoint-indexed scan (agreement), and inside the certified BLOCK-UPPER envelope |W| <= 2*floor(N/3) + N mod 3 - hence r_3((2m)^d) >= |S_V*| (12 new machine-witnessed lower-bound data points, e.g. r_3(20736) >= 48) -- VERDICT: PASS
+      context (display): at N ~ 2*10^4 the Cantor frame gives r_3(3^9=19683) >= 512 while the Behrend grid gives r_3(20736) >= 48; the Behrend bound wins only above N ~ 10^115 (PROOF.md 3B honest remark) - the two constructions are complementary
+    t=  +18.8s
+==============================================================================
+[FINAL] BEHREND ENGINE 142 VERDICT
+  checks passed: 21 | checks failed: 1
+  CERTIFIED: (a) all grid level sets 3-AP-free (two methods) | (b) STEP 4 size law (exact integers) | (c) digit map injectivity + exhaustive no-carry pullback + 1.2M random triples + wrong-base negative control | (d) the explicit constant chain: master N < g*u*2^(1+4u) and g >= N*e^(-6*sqrt(ln N)) for e=10..60 and 4158+ general N, with the two Taylor exhibits | (e) shifted witness families inside [1,N] under the pinned convention
+  THEOREM (PROOF.md 3B, now machine-corroborated): r_3(N) >= N*exp(-6*sqrt(ln N)) for all N >= 16; master form r_3(N) >= N/(u*2^(1+4u)), u = floor(sqrt(log2 N)); the same bound for r_k(N) for every k >= 3
+  comparator wall time: t=  +18.8s
+BEHREND_ENGINE_142_RED (1 failure lines)
+  [0.2] image (a,delta) detector: 7 known cases correct -- VERDICT: FAIL

@@ -1,0 +1,366 @@
+\documentclass[11pt]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\QQ}{\mathbb Q}
+\newcommand{\CC}{\mathbb C}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\Id}{\mathrm{id}}
+\title{GST rational-cycle Hodge equality to whole spectral kernel:
+exact reduction, native defect, and causality}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\section{The two exact boxed targets}
+For ANY smooth projective complex original X of complex dimension n
+and any 0<=p<=n, put
+\[
+ V_{\QQ}=H^{2p}(X,\QQ),\quad
+ V_{\CC}=V_{\QQ}\otimes_{\QQ}\CC
+        =\bigoplus_{a+b=2p}H^{a,b}(X),
+ \quad \iota:V_{\QQ}\to V_{\CC}.
+\]
+The actual Hodge-circle generator \(G_X:V_{\CC}\to V_{\CC}\)
+has eigenvalue \(i(a-b)\) on the WHOLE \(H^{a,b}\) summand.
+Set
+\[
+ K^\CC_{X,p}=\ker_{\CC}G_X,\quad
+ K^\QQ_{X,p}=\iota^{-1}K^\CC_{X,p},\quad
+ A_{X,p}=\im\bigl(\cl_X^{\mathrm{can}}:
+                      \CH^p(X)_{\QQ}\to V_{\QQ}\bigr).
+\]
+The first user-supplied statement is
+\[
+ \boxed{A_{X,p}=K^\QQ_{X,p}.}\tag{HC}
+\]
+The desired full-complex-sector reduction is
+\[
+ \boxed{H^{p,p}(X)=K^\CC_{X,p}.}\tag{SPEC}
+\]
+(HC) is equality in rational cohomology, but (SPEC) is equality
+in COMPLEX cohomology. The scalar-extension inclusion, the
+whole Hodge decomposition, and the canonical cycle class must
+not be conflated.
+
+\section{GST whole-Hodge spectral theorem independent of algebraicity}
+\begin{theorem}[All-dimension spectral identity]
+For every actual X and 0<=p<=n, the generator G defined
+by the whole complex Hodge decomposition satisfies
+\[
+ \boxed{\ker G_X|_{V_{\CC}}=H^{p,p}(X).}          \tag{1}
+\]
+The exact spectral projector
+\[
+ \boxed{P_{X,p}=\prod_{r=1}^{p}
+                 \left(\Id+\frac{G_X^2}{4r^2}\right)}
+                                                               \tag{2}
+\]
+is idempotent and has image \(H^{p,p}(X)\).
+Consequently
+\[
+ \boxed{K^\QQ_{X,p}
+       =\{\alpha\in V_\QQ:
+           P_{X,p}(\iota\alpha)=\iota\alpha\}.}  \tag{3}
+\]
+For p=0 the empty product is the identity.
+\end{theorem}
+\begin{proof}
+In degree 2p, bidegrees satisfy a+b=2p,
+so \(a-b=2(a-p)\in\{-2p,-2p+2,\ldots,2p\}\).
+The eigenvalue \(2i(a-p)\) is zero exactly for a=b=p.
+For this summand every factor in (2) is one.
+For each nonzero eigencharge +-2r the r-th factor is zero.
+The decomposition is internal and exhaustive, so the
+polynomial is the full complex diagonal projector.
+The rational fixed-point criterion follows by
+precomposing with the actual scalar extension \(\iota\).
+This uses NO Hodge conjecture and NO algebraic-cycle source.
+\end{proof}
+
+\section{Reduction to the genuine GST native image and its exact defect}
+The canonical Betti class of an actual codimension-p algebraic
+cycle is type (p,p), so \(A_{X,p}\subseteq K^\QQ_{X,p}\).
+Let the genuine GST residual quotient be
+\[
+ \boxed{D_{X,p}=K^\QQ_{X,p}/A_{X,p}.}            \tag{4}
+\]
+\begin{theorem}[Exact rational-to-complex-to-native reduction]
+For every original X,p the following are equivalent:
+\[
+\begin{split}
+ \mathrm{(i)}\quad&A_{X,p}=K^\QQ_{X,p},\\
+ \mathrm{(ii)}\quad&
+ \forall\alpha\in V_\QQ,\
+  P_{X,p}(\iota\alpha)=\iota\alpha
+  \Rightarrow\exists Z\in\CH^p(X)_\QQ,\
+                         \cl_X^{\rm can}Z=\alpha,\\
+ \mathrm{(iii)}\quad&D_{X,p}=0,\\
+ \mathrm{(iv)}\quad&
+ \text{every rational Hodge basis sheet has an ACTUAL
+ native Chow landing with vanishing canonical class defect.}
+\end{split}                                                     \tag{5}
+\]
+The rational codimension formula is
+\[
+ \boxed{\dim_{\QQ}D_{X,p}=
+   \dim_{\QQ}K^\QQ_{X,p}
+           -\operatorname{rank}_{\QQ}\cl_X^{\rm can}.} \tag{6}
+\]
+The multiplicity index in (iv) is essential.
+The GST base address alone forgets all but one coordinate
+of the genuine p-th Hodge fiber.
+\end{theorem}
+\begin{proof}
+Theorem 1 identifies the rational Hodge locus with the
+rational spectral fixed points.
+Since the ACTUAL canonical Chow image lies in that locus,
+surjectivity onto it is exactly the existence of a cycle
+for every fixed point and exactly the vanishing of (4).
+Finite-dimensional rational cohomology gives (6).
+For (iv), choose a rational basis of the entire
+multiplicity-labelled rational Hodge fiber, as in
+GSTClassicalHodgeFiberedCosmology.
+If (i) holds, choose a genuine Chow lift of each basis
+vector. Its paired fibered native/Hodge state has zero
+genuine cycle-class defect. Conversely, a true zero-defect
+landing for each basis vector gives an actual cycle for
+each basis direction, and every Hodge class is a FINITE
+rational combination of these directions.
+The corresponding existing Lean theorem is
+GSTClassicalHodgeFiberedCycleClassDefect.
+bigradedBettiHodge_of_defectZero_basisStates.
+Its state-existence premise is indispensable.
+\end{proof}
+
+\section{The implication direction: true assumption versus proved spectrum}
+If the user PROVISIONALLY assumes the rational Hodge
+conjecture, (5)(i)-(iv) follow for all X,p.
+The whole-complex statement (1) follows anyway,
+from the Hodge decomposition itself. Thus
+\[
+ \boxed{\mathrm{HC}\Rightarrow\mathrm{SPEC},\qquad
+ \mathrm{SPEC}\text{ alone does NOT entail }\mathrm{HC}.} \tag{7}
+\]
+The first implication is valid (the consequent is independent);
+the missing converse is a genuine native SOURCE-existence claim,
+not an issue of coordinate algebra or lack of computation.
+
+\begin{proposition}[Finite exact spectral countermodel to the false converse]
+Take rational V=Q^3 and rational matrix
+\[
+ G=\begin{pmatrix}
+ 0&0&0\\0&0&-2\\0&2&0
+ \end{pmatrix},\qquad
+ K=\ker G=\QQ e_1.
+\]
+Its complex spectrum is 0,2i,-2i; hence its whole
+zero-charge sector is exactly \(\CC e_1\).
+Consider two abstract rational source maps from Q:
+\(c_1(1)=e_1\) and \(c_0(1)=0\).
+Both satisfy \(Gc_j=0\), and have the SAME full
+spectral identity, but only the first image equals K.
+These are finite RATIONAL-LINEAR MODELS, not actual
+Chow maps on genuine smooth projective X.
+They establish that the spectral equations plus
+charge-zero source containment do not logically FORCE
+rational Chow-image surjectivity.
+Wolfram checked the eigenvalues, spectral projector,
+source ranks 1 and 0, and common kernel rank 1 exactly.
+\end{proposition}
+
+
+\section{Irrational spectral projection versus exact native rational source on one genuine $X$}
+This exact test distinguishes a FALSE way to compose the October 22
+whole-Hodge spectral law with a rational CHOW source from a TRUE
+target-dependent original-world algebraic landing.
+It serves only as a discriminator for the arbitrary-$X$ proof,
+not as its replacement.
+
+\begin{theorem}[A genuine projective test: the complex spectral projector is not rational, even when EVERY rational Hodge target is algebraic]
+Let $t=2^{1/4}>0$, $\tau=it$,
+$E_\tau=\CC/(\mathbb Z+\tau\mathbb Z)$ and let
+$X=E_\tau\times E_\tau$, a genuine smooth projective
+complex surface. Write the real integral cohomology
+one-form generators of the two factors as
+$a_i=dx_i$, $b_i=dy_i$, so that
+$dz_i=a_i+it b_i$.
+Set $F_1=a_1\wedge b_1$, $F_2=a_2\wedge b_2$, and
+$M=a_1\wedge b_2-b_1\wedge a_2$.
+Then the ACTUAL rational Hodge subspace is
+\[
+ \boxed{
+ H^2(X,\QQ)\cap H^{1,1}(X)
+ =\QQ F_1\oplus\QQ F_2\oplus\QQ M.
+ }                                                        \tag{10}
+\]
+For any prescribed rational Hodge
+$\alpha=A F_1+B F_2+D M$, the genuine original-$X$
+rational Chow cycle
+\[
+ \boxed{
+ Z_\alpha=(A+D)[\{0\}\times E_\tau]+
+          (B+D)[E_\tau\times\{0\}]-
+          D[\Delta_{E_\tau}]
+          \in \CH^1(X)_\QQ
+ }                                                        \tag{11}
+\]
+has the EXACT canonical rational Betti class $\alpha$,
+without a supplied Chow preimage as input.
+
+However, for the integral class
+$v=a_1\wedge a_2$, the COMPLEX-linear
+full Hodge spectral projector $P_{(1,1)}$ of the
+preceding theorem satisfies
+\[
+ \boxed{
+ P_{(1,1)}v=
+ \frac12\,a_1\wedge a_2+
+ \frac{\sqrt2}{2}\,b_1\wedge b_2
+ \ \notin H^2(X,\QQ).
+ }                                                        \tag{12}
+\]
+Thus no statement asserting that the complex Hodge-charge
+polynomial projector itself maps EVERY rational Betti
+class to a rational Chow class can be valid.
+The TRUE GST rational spectral kernel is the
+PREIMAGE/INTERSECTION with the rational lattice, and
+must be distinguished from applying $P_{(1,1)}$
+to arbitrary rational classes.
+\end{theorem}
+
+\begin{proof}
+For a general rational class write
+\[
+ \alpha=A a_1b_1+B a_2b_2+C a_1a_2
+       +D a_1b_2+E b_1a_2+F b_1b_2,
+ \quad A,B,C,D,E,F\in\QQ,
+\]
+where juxtaposition denotes wedge product.
+The coefficient in
+$\alpha\wedge dz_1\wedge dz_2$ relative to
+$a_1b_1a_2b_2$ is
+\[
+             t^2 C-F+it(D+E).
+\]
+The conjugate $(0,2)$ test gives its complex
+conjugate. Hence $\alpha$ has type $(1,1)$
+precisely when $F=t^2 C$ and $E=-D$.
+Since $t^2=\sqrt2$ is irrational and $C,F$
+are rational, $C=F=0$, proving (10).
+No rationality or type was manufactured by a
+complex spectral operator.
+
+For the diagonal $\Delta\subset E_\tau^2$,
+the difference morphism
+$\delta:E_\tau^2\to E_\tau$ is algebraic,
+$\Delta=\delta^{-1}(0)$, and thus
+\[
+ \mathrm{cl}^{can}[\Delta]
+ =\delta^*(a\wedge b)
+ =(a_1-a_2)(b_1-b_2)
+ =F_1+F_2-M .
+\]
+Likewise the two coordinate elliptic divisors
+have canonical classes $F_1,F_2$.
+Substituting these three ACTUAL original-$X$
+divisors into (11) yields precisely
+$\mathrm{cl}^{can}(Z_\alpha)=\alpha$.
+
+Finally $a_i=(dz_i+d\bar z_i)/2$, so the
+$(1,1)$ component of $a_1a_2$ is
+\[
+ \frac14(dz_1d\bar z_2+d\bar z_1dz_2)
+ =\frac12(a_1a_2+t^2b_1b_2).
+\]
+Since $t^2=\sqrt2$, this component is NOT a
+rational cohomology class, proving (12).
+All calculations are on the actual algebraic
+$X$, not an arbitrary abstract Hodge linear map.
+\end{proof}
+
+\paragraph{Universal proof implication.}
+A GST source generator may legitimately take the
+RATIONAL HODGE input $\alpha$ in (10) and construct
+the rational native cycle (11). It cannot first
+project an arbitrary rational class through a
+complex-linear Hodge-charge operator and then assume
+the result is rational and already represented by
+an algebraic cycle. This sharpens the type contract
+for the prescribed-$\alpha$ higher-primitive proof:
+the complex spectral identity is genuine, but
+its output needs an INDEPENDENT rational native
+algebraic construction and canonical return.
+
+\section{Exact causal GST defect conversion beyond the spectral identity}
+For a typed GST fold X->Y, assume an ACTUAL
+map of rational Hodge kernels \(T:K^\QQ_X\to K^\QQ_Y\)
+and an ACTUAL map of codimension Chow groups
+\(S:\CH^p(X)_\QQ\to\CH^q(Y)_\QQ\)
+with the canonical class square
+\[
+ \boxed{T\circ\cl_X^{\rm can}
+                  =\cl_Y^{\rm can}\circ S.}       \tag{8}
+\]
+It descends to the TRUE defect quotient
+\[
+ \boxed{\bar T:D_{X,p}\to D_{Y,q},\
+                   [\alpha]\mapsto[T\alpha].}    \tag{9}
+\]
+This is natural under composition. A genuine
+reversible compatible GST recoordination produces
+an ISOMORPHISM of defects, not their extinction.
+
+\begin{theorem}[Sufficient and correctly typed causal extinction law]
+If such a realized fold has INJECTIVE defect map
+\(\bar T\) and the target defect vanishes for a
+GEOMETRICALLY INDEPENDENT reason, then
+\(D_{X,p}=0\) and the rational Hodge equality holds on X.
+The spectral condition \(\ker G_Y=H^{q,q}(Y)\)
+does NOT establish target defect vanishing:
+that identity holds independently of algebraicity.
+\end{theorem}
+\begin{proof}
+Every class in the source defect maps to zero
+because the target defect is zero.
+Injectivity forces every source class to vanish.
+Then use the exact equivalence (5).
+\end{proof}
+
+\section{Actual GST Lean target and proof-status contract}
+The existing Lean types are
+GSTGeometricRealizationStage2G.HodgeBigrading
+and HodgeBigradedBettiData, with
+rationalHodgeSubspace defined as the comap of
+the ACTUAL ppComponent along complexificationMapQ.
+The exact Hodge target lives in
+GSTClassicalHodgeExactClayStatement.
+EveryHodgeClassIsRationalAlgebraic.
+
+The Lean interface adds a COMPLEX linear operator
+\(G_p\) on the complexified rational singular
+cohomology together with the independently
+Hodge-theoretic kernel equality
+\(\ker G_p=(H.hodgeBigrading p).ppComponent\).
+The kernel equality is a SPECTRAL REALIZATION
+hypothesis, not a Chow-surjectivity hypothesis.
+Then the exact Lean proof is
+\[
+ \mathrm{rationalSpectralKernel}(G_p)
+   =\mathrm{rationalHodgeSubspace}(H.hodgeBigrading p),
+\]
+followed by equivalence of the user-supplied
+rational algebraicity equality to native source
+range equality. The stage-2G structure itself
+stores a rational linear cycleClass; proving it
+is the actual canonical Betti class map is a
+separate geometric semantics check.
+
+This LaTeX precedes the requested Lean edits.
+No spectral calculation, causal transport identity,
+or nonzero source rank is labelled as a new
+unconditional algebraic cycle constructor.
+\end{document}

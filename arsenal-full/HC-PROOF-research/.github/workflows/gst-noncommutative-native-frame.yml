@@ -1,0 +1,78 @@
+name: GST Noncommutative Native Frame Proof
+# Reverify all native geometric imports against the registered Lake project roots.
+
+on:
+  push:
+    branches:
+      - research/gpt6-gst-native-rank-one-realization-20261014
+    paths:
+      - 'GSTClassicalHodgeActualNoncommutativeNativeFrame.lean'
+      - '.github/workflows/gst-noncommutative-native-frame.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-realized-multigenerator-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-frame:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and get Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore source compilation cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-noncommutative
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Compile actual GST noncommutative native cycles
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTClassicalHodgeActualNoncommutativeNativeFrame > noncommutative-lean.log 2>&1; then
+            echo 'LEAN PASSED: noncommutative actual native geometric cycle frame'
+          else
+            echo 'LEAN FAILED: noncommutative actual native geometric frame'
+            grep -nE 'error:|sorryAx|✖' noncommutative-lean.log | tail -n 120 || true
+            tail -n 50 noncommutative-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" noncommutative-lean.log; then
+            echo 'Trust audit failed'
+            exit 1
+          fi
+      - name: Save compiled source cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-noncommutative
+      - name: Upload Lean compiler diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-noncommutative-native-frame-lean-log
+          path: noncommutative-lean.log
+          if-no-files-found: warn

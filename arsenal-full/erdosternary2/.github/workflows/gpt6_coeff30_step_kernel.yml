@@ -1,0 +1,33 @@
+name: GPT6 GST Thirty-Trit Coefficient Numeric Kernel
+on:
+  push:
+    branches:
+      - gpt6/erdos-normalized-core-rigidity-20261029
+    paths:
+      - GSTWorldtraceCoeff30Compute.lean
+      - .github/workflows/gpt6_coeff30_step_kernel.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and canonical LTE
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTCanonicalTailLTE
+      - name: Verify numeric c29 in the kernel with 29 bounded steps
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceCoeff30Compute.lean 2>&1 | tee coeff30.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' coeff30.log
+          echo GST_COEFF30_KERNEL_GREEN=1

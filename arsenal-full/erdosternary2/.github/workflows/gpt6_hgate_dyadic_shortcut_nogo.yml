@@ -1,0 +1,30 @@
+name: GPT6 Exact HGate Dyadic Shortcut NoGo Kernel
+on:
+  push:
+    branches: [gpt6/problem406-seventh-trit-worldtrace-20261029]
+    paths: [GSTProblem406DyadicShortcutNoGo.lean, .github/workflows/gpt6_hgate_dyadic_shortcut_nogo.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact GST digit prerequisite
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerDirectResidue
+      - name: Kernel-check no-go and axiom dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406DyadicShortcutNoGo.lean 2>&1 | tee hgate-dyadic-no-go.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' hgate-dyadic-no-go.log
+          grep -F 'no_high_dyadic_only_propagation' hgate-dyadic-no-go.log

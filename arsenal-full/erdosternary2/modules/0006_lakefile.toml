@@ -1,0 +1,48 @@
+/- ======================================================================
+/- CHRONOLOGICAL LABEL — #0006 / 1133
+/-    Path         : lakefile.toml
+/-    Ref          : main
+/-    First-commit : 2026-08-14 14:36:21 +0530
+/-    Last-commit  : 2026-08-14 15:07:29 +0530
+/-    Total commits: 2
+/- ======================================================================
+/- GIT HISTORY (chronological, oldest first)
+/- ======================================================================
+/- ====================================================================== -/
+
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0006 / 1132
+#    Path         : lakefile.toml
+#    Ref          : main
+#    First-commit : 2026-08-14 14:36:21 +0530  (322c6c7)
+#    Last-commit  : 2026-08-14 15:07:29 +0530  (0532799)
+#    Total commits: 2
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/2] 2026-08-14 14:36:21 +0530  322c6c7  (ker07-dev)
+#        build: add Lake comparator workspace
+# [02/2] 2026-08-14 15:07:29 +0530  0532799  (ker07-dev)
+#        build: register GSTTactic as Lean library target
+# ======================================================================
+
+name = "erdos-ternary2-proof"
+version = "0.1.0"
+defaultTargets = ["GSTTactic", "ErdosTernary2", "Challenge", "Solution"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.0-rc2"
+
+[[lean_lib]]
+name = "GSTTactic"
+
+[[lean_lib]]
+name = "ErdosTernary2"
+
+[[lean_lib]]
+name = "Challenge"
+
+[[lean_lib]]
+name = "Solution"

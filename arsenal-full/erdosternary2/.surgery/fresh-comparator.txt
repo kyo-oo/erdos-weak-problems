@@ -1,0 +1,48 @@
+[1m=== LEAN COMPARATOR (V5) ===[0m
+
+[0;36m[1/3] Compiling Lean project (lake build)...[0m
+  [0;31m✗ Build FAILED[0m
+
+--- Build output (last 40 lines) ---
+✔ [17344/17384] Built Mathlib.Topology.Sets.Order:c.o (125ms)
+✔ [17345/17384] Built Mathlib.Topology.Sheaves.PUnit:c.o (128ms)
+✔ [17346/17384] Built Mathlib.Topology.Sheaves.Skyscraper:c.o (120ms)
+✔ [17347/17384] Built Mathlib.Topology.Sheaves.Abelian:c.o (222ms)
+✔ [17348/17384] Built Mathlib.Topology.Sheaves.AddCommGrpCat:c.o (139ms)
+✔ [17349/17384] Built Mathlib.Topology.Sheaves.Alexandrov:c.o (162ms)
+✔ [17350/17384] Built Mathlib.Topology.Sheaves.EtaleSpace:c.o (124ms)
+✔ [17351/17384] Built Mathlib.Topology.Sheaves.LocallySurjective:c.o (137ms)
+✔ [17352/17384] Built Mathlib.Topology.Sheaves.Flasque:c.o (139ms)
+✔ [17353/17384] Built Mathlib.Topology.Sheaves.MayerVietoris:c.o (136ms)
+✔ [17354/17384] Built Mathlib.Topology.Sheaves.Points:c.o (134ms)
+✔ [17355/17384] Built Mathlib.Topology.Sheaves.SheafCondition.EqualizerProducts:c.o (116ms)
+✔ [17356/17384] Built Mathlib.Topology.Sheaves.Sheafify:c.o (141ms)
+✔ [17357/17384] Built Mathlib.Topology.Sion:c.o (137ms)
+✔ [17358/17384] Built Mathlib.Topology.SmallInductiveDimension:c.o (135ms)
+✔ [17359/17384] Built Mathlib.Topology.Spectral.ConstructibleTopology:c.o (139ms)
+✔ [17360/17384] Built Mathlib.Topology.Subpath:c.o (169ms)
+✔ [17361/17384] Built Mathlib.Topology.UniformSpace.AbsoluteValue:c.o (159ms)
+✔ [17362/17384] Built Mathlib.Topology.UniformSpace.CompareReals:c.o (244ms)
+✔ [17363/17384] Built Mathlib.Topology.UniformSpace.Dini:c.o (125ms)
+✔ [17364/17384] Built Mathlib.Topology.UniformSpace.OfCompactT2:c.o (142ms)
+✔ [17365/17384] Built Mathlib.Topology.UniformSpace.Path:c.o (141ms)
+✔ [17366/17384] Built Mathlib.Topology.UniformSpace.Ultra.Basic:c.o (129ms)
+✔ [17367/17384] Built Mathlib.Topology.UniformSpace.Ultra.Constructions:c.o (149ms)
+✔ [17368/17384] Built Mathlib.Topology.UniformSpace.Ultra.Completion:c.o (116ms)
+✔ [17369/17384] Built Mathlib.Topology.UniformSpace.Uniformizable:c.o (125ms)
+✔ [17370/17384] Built Mathlib.Topology.VectorBundle.ContinuousAlternatingMap:c.o (116ms)
+✔ [17371/17384] Built Mathlib.Util.AssertNoSorry:c.o (339ms)
+✔ [17372/17384] Built Mathlib.Util.Export:c.o (2.5s)
+✔ [17373/17384] Built Mathlib.Util.FormatTable:c.o (578ms)
+✔ [17374/17384] Built Mathlib.Util.GetAllModules:c.o (354ms)
+✔ [17375/17384] Built Mathlib.Util.LongNames:c.o (378ms)
+✔ [17376/17384] Built Mathlib.Util.Simp:c.o (149ms)
+✔ [17377/17384] Built Mathlib.Util.SleepHeartbeats:c.o (213ms)
+✔ [17378/17384] Built Mathlib.Tactic.Widget.StringDiagram:c.o (32s)
+✔ [17381/17384] Built GSTTactic:c.o (503ms)
+✔ [17383/17384] Built Mathlib:c.o (23s)
+Some required targets logged failures:
+- ErdosTernary2
+error: build failed
+
+[0;31m=== COMPARATOR RESULT: FAIL (build errors) ===[0m

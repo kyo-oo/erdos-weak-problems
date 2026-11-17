@@ -1,0 +1,64 @@
+ClearAll["Global`*"];
+started=AbsoluteTime[]; checks=0;
+test[x_]:=(checks++;If[!TrueQ[x],Throw["FAILED assertion "<>ToString[checks]]]);
+result=Catch[Module[{phi,offsets,periodRows={},q,a,b,c,d,n,m,u,v,z,vals,pred,inv,stable,fixed,
+  mat,w,denom,irr,tensorRows={},k,dim,e,f,h,lift,eop,fop,hop,q0,q1,q2,null,mono,cat,
+  nc,vec,edges,bits,columns,em,ks,br,det,exterior},
+  phi[aa_,bb_,cc_,dd_,x_,y_]:=aa*x*y-bb*x-cc*y+dd;
+  test[Expand[phi[a,b,c,d,n*z+u,m*z+v]-(a*n*m*z^2+
+    (a*(n*v+m*u)-n*b-m*c)*z+a*u*v-b*u-c*v+d)]===0];
+  offsets={{0,0},{0,1/2},{1/3,-2},{1/2,1/3}};
+  Do[{u,v}=uv;stable=0;fixed=0;
+    Do[{a,b,c,d}=q;
+      vals=Expand[phi[a,b,c,d,n*#+u,m*#+v]]&/@{I,2I,1+I};
+      pred=(a==0&&n*b+m*c==0&&d==b*u+c*v);
+      test[And@@(#==0&/@vals)===pred];
+      mat={a,b+m*a,c+n*a,d+n*b+m*c+n*m*a};inv=(mat==q);
+      test[inv===(a==0&&n*b+m*c==0)];
+      If[inv,test[SameQ@@vals]];
+      stable+=Boole[pred];fixed+=Boole[inv],{q,Tuples[Range[-1,1],4]}];
+    w={0,m,-n,m*u-n*v};test[Expand[phi@@Join[w,{n*z+u,m*z+v}]]===0];
+    test[2(w[[2]]w[[3]]-w[[1]]w[[4]])===-2n*m];
+    a=m/n;b=v-a*u;denom=Denominator[a]*Denominator[b];
+    test[IntegerQ[denom*a]&&IntegerQ[denom*b]];test[IntegerQ[denom^2*a]&&denom^2*a>0];
+    AppendTo[periodRows,{n,m,ToString[u,InputForm],ToString[v,InputForm],stable,fixed}],
+    {n,1,3},{m,1,3},{uv,offsets}];
+  irr=0;Do[
+    pred=TrueQ[RootReduce[phi@@Join[q,{I,I+Sqrt[2]}]]==0];
+    test[pred===(q=={0,0,0,0})];irr+=Boole[pred],{q,Tuples[Range[-2,2],4]}];
+  test[RootReduce[phi[0,1,-1,0,I,I+Sqrt[2]]]===Sqrt[2]];
+  e={{0,1},{0,0}};f=Transpose[e];h=DiagonalMatrix[{1,-1}];
+  lift[op_,0]:={{0}};
+  lift[op_,1]:=op;
+  lift[op_,k_Integer?Positive]:=Sum[KroneckerProduct@@Table[If[j==i,op,IdentityMatrix[2]],{j,k}],{i,k}];
+  nc[{}]:={{}};
+  nc[is_List]:=Flatten[Table[Table[Join[{{First[is],is[[j]]}},x,y],
+    {x,nc[Take[is,{2,j-1}]]},{y,nc[Drop[is,j]]}],{j,2,Length[is],2}],2];
+  vec[es_,k_]:=Table[Times@@Table[With[{i=e[[1]],j=e[[2]]},
+    Which[bs[[i]]==0&&bs[[j]]==1,1,bs[[i]]==1&&bs[[j]]==0,-1,True,0]],{e,es}],
+    {bs,Tuples[{0,1},k]}];
+  Do[dim=2^k;eop=lift[e,k];fop=lift[f,k];hop=lift[h,k];
+    q0=eop-fop;q1=eop/2-2fop;q2=-hop+eop-2fop;
+    null=Length[NullSpace[Join[q0,q1,q2]]];mono=Length[NullSpace[fop]];
+    cat=If[EvenQ[k],CatalanNumber[k/2],0];
+    test[null===cat];test[mono===Binomial[k,Floor[k/2]]];
+    edges=If[EvenQ[k],nc[Range[k]],{}];columns=vec[#,k]&/@edges;
+    test[Length[edges]===cat];test[If[columns==={},0,MatrixRank[columns]]===cat];
+    Do[test[And@@Thread[Join[q0,q1,q2].w==ConstantArray[0,3dim]]],{w,columns}];
+    AppendTo[tensorRows,{k,dim,null,mono,Length[columns]}],{k,0,8}];
+  br[x_,y_]:=Det[{x,y}];
+  Do[mat={{a,b},{c,d}};test[br[mat.{2,-1},mat.{-3,2}]===Det[mat]*br[{2,-1},{-3,2}]],
+    {a,-2,2},{b,-2,2},{c,-2,2},{d,-2,2}];
+  (* Grassmann variables via antisymmetrizing permutations, independent of Python. *)
+  em[i_,j_]:={{1,{2i-1,2j}},{-1,{2i,2j-1}}};
+  wedge[p_,q_]:=Module[{terms},terms=Flatten[Table[With[{word=Join[x[[2]],y[[2]]]},
+    If[DuplicateFreeQ[word],{{x[[1]]y[[1]]Signature[word],Sort[word]}},{}]],{x,p},{y,q}],2];
+    DeleteCases[({Total[#[[All,1]]],#[[1,2]]}&/@GatherBy[terms,Last]),{0,_}]];
+  exterior={wedge[em[1,2],em[3,4]],wedge[em[1,3],em[2,4]],wedge[em[1,4],em[2,3]]};
+  test[And@@(Total[#[[All,1]]]==0&/@GatherBy[Join@@exterior,Last])];
+  test[wedge[em[1,2],em[1,2]]=={{-2,{1,2,3,4}}}];
+  <|"all_passed"->True,"period_rows"->periodRows,"irrational_cross_count"->irr,
+    "tensor_rows"->tensorRows,"exterior_term_counts"->(Length/@exterior)|>
+]];
+If[AssociationQ[result],result["assertion_count"]=checks;result["kernel_version"]=$Version;
+  result["runtime_seconds"]=AbsoluteTime[]-started;ExportString[result,"RawJSON","Compact"->True],result]

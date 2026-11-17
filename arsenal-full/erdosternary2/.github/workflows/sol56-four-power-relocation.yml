@@ -1,0 +1,62 @@
+name: SOL56 Four-Power Relocation
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTGraphV2FourPowerRelocation.lean
+      - GSTGraphV2FourPowerRelocationClosure.lean
+      - GSTGraphV2FourPowerForcingBridge.lean
+      - GSTInfiniteFourPowerNavigation.lean
+      - GSTGraphV2NonlocalCascade.lean
+      - GSTGraphV2CanonicalEscape.lean
+      - GSTGraphV2CanonicalInfiniteCycle.lean
+      - GSTGraphV2CanonicalNWave.lean
+      - GSTGraphV2CanonicalTerminalExtinctionProbe.lean
+      - GSTFinalPurePowerResidueTransplant.lean
+      - GSTGraphV2HandwrittenExponentialLTE.lean
+      - .github/workflows/sol56-four-power-relocation.yml
+  workflow_dispatch:
+
+concurrency:
+  group: sol56-four-power-relocation
+  cancel-in-progress: true
+
+jobs:
+  relocation:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Compile exact relocation and forcing chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build \
+            GSTGraphV2CanonicalEscape \
+            GSTGraphV2CanonicalInfiniteCycle \
+            GSTGraphV2CanonicalNWave \
+            GSTGraphV2CanonicalTerminalExtinctionProbe \
+            GSTFinalPurePowerResidueTransplant \
+            2>&1 | tee relocation-deps.log
+          mkdir -p .lake/build/lib/lean
+          lake env lean \
+            -o .lake/build/lib/lean/GSTGraphV2FourPowerForcingBridge.olean \
+            GSTGraphV2FourPowerForcingBridge.lean 2>&1 | tee forcing-bridge.log
+          lake env lean \
+            -o .lake/build/lib/lean/GSTGraphV2NonlocalCascade.olean \
+            GSTGraphV2NonlocalCascade.lean 2>&1 | tee nonlocal-cascade.log
+          lake env lean \
+            -o .lake/build/lib/lean/GSTGraphV2FourPowerRelocation.olean \
+            GSTGraphV2FourPowerRelocation.lean 2>&1 | tee relocation.log
+          lake env lean \
+            -o .lake/build/lib/lean/GSTInfiniteFourPowerNavigation.olean \
+            GSTInfiniteFourPowerNavigation.lean 2>&1 | tee infinite-four-power-navigation.log
+          lake env lean \
+            GSTGraphV2FourPowerRelocationClosure.lean 2>&1 | tee relocation-closure.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' \
+            relocation-deps.log forcing-bridge.log nonlocal-cascade.log relocation.log infinite-four-power-navigation.log relocation-closure.log

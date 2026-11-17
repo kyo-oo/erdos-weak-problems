@@ -1,0 +1,11 @@
+import ErdosTernary2
+import GSTFourPowerDirectExistenceProviderPipeline
+
+#check gst_four_power_third_wave_gate
+#print gst_four_power_third_wave_gate
+#check gst_four_power_creation_certificate_inline
+#check GSTFourPowerThirdWave.fourPowerDirectExistence_iff_thirdWave
+#check GSTFourPowerDirectExistenceProviderPipeline.FourPowerDirectNoBadAffineChannelOne
+#check GSTFourPowerDirectExistence.FourPowerDirectExistence
+#check erdos_ternary_2_universal
+#print axioms erdos_ternary_2_universal

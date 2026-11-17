@@ -1,0 +1,32 @@
+name: GST Fermat Cubic 405-Plane Exact Rank
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - research/computations/fermat_cubic_405_rank.py
+      - research/computations/fermat_cubic_fourier_all_dimensions.py
+      - .github/workflows/gst-fermat-cubic-405-rank.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-gram:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Exact finite intersection and full 21-dimensional rank
+        shell: bash
+        run: |
+          set -euo pipefail
+          python research/computations/fermat_cubic_405_rank.py | tee fermat-cubic-405-rank.log
+          python research/computations/fermat_cubic_fourier_all_dimensions.py | tee -a fermat-cubic-405-rank.log
+      - name: Save exact rank certificate
+        uses: actions/upload-artifact@v4
+        with:
+          name: fermat-cubic-405-exact-rank
+          path: fermat-cubic-405-rank.log

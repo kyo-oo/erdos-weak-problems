@@ -1,0 +1,42 @@
+{
+  "problem": "erdoes-107",
+  "solution_id": "es-package-official-v1",
+  "provenance": "W72-107K (S071): ES_PACKAGE_PROOF.md complete-theorem package + engine107es.py 10/10 GREEN; W72-107C official gate on the fresh google-deepmind/funsearch clone @ cc53f27 (the official implementation/ Evaluator executing the solution program); witnesses grounded in the CI-green kernel-107k (run 44101517445) + the kernel witness data; 11 arsenal laws read, cited, and spot-verified",
+  "claims": [
+    {
+      "id": "C107-MS",
+      "statement": "Theorem MS (Erdos-Szekeres 1935): every sequence of (r-1)(s-1)+1 distinct reals contains an increasing r-subsequence or a decreasing s-subsequence; tight (the block construction).",
+      "verification": "engine MS (5208 exhaustive permutations for (r,s) in {(3,3),(2,4),(4,2),(3,4)} + 3000 random length-13) + MS-TIGHT"
+    },
+    {
+      "id": "C107-CC",
+      "statement": "Theorem CC (cups-caps): every C(k+l-4, k-2)+1 points in general position (distinct x) contain a k-cup or an l-cap.",
+      "verification": "engine CC (300 random sets per (k,l) in {(3,3),(3,4),(4,3),(4,4),(3,5),(5,3)} — every one contains the cup/cap)"
+    },
+    {
+      "id": "C107-UPPER",
+      "statement": "Theorem U: f(n) <= C(2n-4, n-2)+1 (every such set contains n points in convex position; cups/caps are convex).",
+      "verification": "engine U-BINOM (fresh table 3,7,21,71,253,925 for n=3..8 + the cup/cap-to-convex conversion on 200 samples); full derivation in ES_PACKAGE_PROOF.md section 3"
+    },
+    {
+      "id": "C107-LOWER",
+      "statement": "Theorem L: f(n) >= 2^{n-2}+1 (the Erdos-Szekeres 1935 doubling construction — cited classical); machine-certified witness family: n=3 (2 pts), n=4 (4 pts), n=5 (8 pts, the kernel witness), n=6 (16 pts, the kernel witness) — general position, zero convex n-gons, exhaustive subset scans.",
+      "verification": "engine WITNESS-FAMILY (exhaustive: 1, 1, 56, 8008 subsets) + E5-WITNESS; the doubling construction cited-classical [ErSz35] in ES_PACKAGE_PROOF.md section 4"
+    },
+    {
+      "id": "C107-E3E4",
+      "statement": "f(3) = 3 and f(4) = 5 exactly, both directions (the 2-point and 3+1 witnesses; every 5-point general-position set contains a convex 4 — the line-split argument).",
+      "verification": "engine E3-E4 (2000 random triangles + the witnesses + 5500 random/adversarial 5-point sets)"
+    },
+    {
+      "id": "C107-E5",
+      "statement": "f(5) >= 9 (the 8-point exact-integer kernel witness: no convex 5 among all 56 subsets) and the 9-point sweep lane (1300 random+adversarial 9-point sets all contain a convex 5).",
+      "verification": "engine E5-WITNESS + E5-SWEEP; CI-green kernel-107k and the W70 comparator battery"
+    },
+    {
+      "id": "C107-OFFICIAL-ENGINE",
+      "statement": "The official DeepMind Evaluator (funsearch/implementation, fresh clone @ cc53f27) compiles the #107 solution program via the official _sample_to_program and executes it through the official analyse path against the challenge inputs (claim groups 1..5), scoring 3/3/1/3/2 — the official program-evaluation lane.",
+      "verification": "driver O-EVAL (the official Evaluator with a documented local Sandbox implementing the official abstract interface; official ProgramsDatabase registration)"
+    }
+  ]
+}

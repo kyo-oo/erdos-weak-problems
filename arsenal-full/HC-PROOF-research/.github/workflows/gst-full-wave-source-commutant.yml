@@ -1,0 +1,61 @@
+name: GST full-wave native-source scalar commutant
+
+on:
+  push:
+    branches:
+      - research/gpt6-gst-wave-curvature-spectral-birth-20261110
+    paths:
+      - 'GSTFullWaveCyclicSourceCommutant.lean'
+      - '.github/workflows/gst-full-wave-source-commutant.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Kernel check GST full-N cyclic rank-one source commutant
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-source-commutant
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Compile source-commutant theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTFullWaveSourceCommLib GSTFullWaveCyclicSourceCommutant
+          if timeout 6900 lake build GSTFullWaveCyclicSourceCommutant > gst-source-commutant.log 2>&1; then
+            echo "LEAN PASSED: GSTFullWaveCyclicSourceCommutant"
+          else
+            grep -nE 'error:|sorryAx|unknown constant|unknown identifier' gst-source-commutant.log | tail -n 100 || true
+            tail -n 95 gst-source-commutant.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-source-commutant.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Upload compile diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-source-commutant-lean
+          path: gst-source-commutant.log
+          if-no-files-found: warn

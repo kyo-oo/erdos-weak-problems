@@ -1,0 +1,114 @@
+LEAN_RC=1
+GSTFinalResidualCompositorProbe.lean:214:2: error: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  n ≥ 1
+  l ≥ 1
+  j ≥ 0
+  i ≥ 0
+  h ≥ 0
+  g ≥ 0
+  f ≥ 0
+  e ≥ 0
+  d ≥ 0
+  c ≥ 0
+  a ≥ 1
+where
+ a := ↑k
+ c := ↑m / 3
+ d := ↑(3 ^ (k + 1)) * ↑m
+ e := ↑(4 ^ 3 ^ (k + 1)) * ↑(residualFrame 1 k m (b + q)).nextTailEnergy
+ f := ↑(residualGateFrame 1 k m q).originFrame.phasedTail.seven.carry
+ g := ↑(residualGateFrame 1 k m q).originFrame.phasedTail.seven.digit
+ h := ↑(GSTGraphV2Production.cell 1 (residualFrame 1 k m (b + q)).parentExponent (b + q)).seven.carry
+ i := ↑(GSTGraphV2Production.cell 1 (residualFrame 1 k m (b + q)).parentExponent (b + q)).seven.digit
+ j := ↑(GSTGraphV2Production.cell 1 (residualFrame 1 k m (b + q)).parentExponent (b + q)).eventCode
+ l := weightedRectanglePrefix83 (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+  (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3 (q + 1)
+ n := weightedCrossPrefix (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+  (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3 (q + 1)
+k m q : ℕ
+hk : 1 ≤ k
+hm : 1 ≤ m
+hm1 : m % 3 = 1
+hChild :
+  HappyCell (GSTGraphV2InfiniteControl.graph (GSTGraphV2Production.residualEnergy 1 k m) 0 (k + 2 + q)).seven.carry
+    (GSTGraphV2InfiniteControl.graph (GSTGraphV2Production.residualEnergy 1 k m) 0 (k + 2 + q)).seven.digit
+hRightBad :
+  ∀ (j : ℕ),
+    ¬HappyCell (GSTGraphV2InfiniteControl.graph (GSTGraphV2Production.residualEnergy 1 k m) 3 (k + 2 + j)).seven.carry
+        (GSTGraphV2InfiniteControl.graph (GSTGraphV2Production.residualEnergy 1 k m) 3 (k + 2 + j)).seven.digit
+E : ℕ := GSTGraphV2Production.residualEnergy 1 k m
+b : ℕ := k + 2
+T : ℕ := uTailEnergy (1 + k) m (q + 1)
+P : ℕ := uPhaseShift (1 + k) m (q + 1)
+hWidth : (residualFrame 1 k m (b + q)).parentWidth = 3
+hParentExponent : (residualFrame 1 k m (b + q)).parentExponent = 3 + 3 ^ (k + 1) * m
+hEnergyStep : (residualFrame 1 k m (b + q)).childEnergy = 4 ^ 3 ^ (k + 1) * (residualFrame 1 k m (b + q)).nextTailEnergy
+hNeutral :
+  have F := residualGateFrame 1 k m q;
+  F.originFrame.neutralTail.seven.carry = 0 ∧
+    F.originFrame.neutralTail.seven.digit = 0 ∧ F.originFrame.neutralTail.seven.space = Space.null
+hLeftPhased :
+  have F := residualGateFrame 1 k m q;
+  F.residual.block.left.seven.carry = F.originFrame.phasedTail.seven.carry ∧
+    F.residual.block.left.seven.digit = F.originFrame.phasedTail.seven.digit
+hRightAbsolute :
+  have F := residualFrame 1 k m (b + q);
+  F.block.right.seven.carry = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).seven.carry ∧
+    F.block.right.seven.digit = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).seven.digit ∧
+      F.block.right.eventCode = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).eventCode ∧
+        F.block.right.uCharge = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).uCharge ∧
+          F.block.right.mixedCharge = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).mixedCharge ∧
+            F.block.right.crossingCharge = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).crossingCharge ∧
+              F.block.right.survive = (GSTGraphV2Production.cell 1 F.parentExponent (b + q)).survive
+hNeutralWindow :
+  ∀ p ≤ q,
+    (GSTGraphV2InfiniteControl.graph T 0 (b + p)).seven.carry = 0 ∧
+      (GSTGraphV2InfiniteControl.graph T 0 (b + p)).seven.digit = 0 ∧
+        (GSTGraphV2InfiniteControl.graph T 0 (b + p)).seven.space = Space.null
+hRephaseWindow :
+  ∀ p ≤ q,
+    (GSTGraphV2InfiniteControl.graph E 0 (b + p)).seven.carry =
+        (GSTGraphV2InfiniteControl.graph T P (b + p)).seven.carry ∧
+      (GSTGraphV2InfiniteControl.graph E 0 (b + p)).seven.digit =
+        (GSTGraphV2InfiniteControl.graph T P (b + p)).seven.digit
+hRephaseRightWindow :
+  ∀ p ≤ q,
+    (GSTGraphV2InfiniteControl.graph E 3 (b + p)).seven.carry =
+        (GSTGraphV2InfiniteControl.graph T (P + 3) (b + p)).seven.carry ∧
+      (GSTGraphV2InfiniteControl.graph E 3 (b + p)).seven.digit =
+        (GSTGraphV2InfiniteControl.graph T (P + 3) (b + p)).seven.digit
+hPositive83 :
+  0 <
+    weightedRectanglePrefix83 (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+      (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3 (q + 1)
+hExact83 :
+  ∑ p ∈ Finset.range (q + 1),
+      ↑(3 ^ p) *
+        reverseDensity83 (fun t => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+          (fun t => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3 =
+    ∑ p ∈ Finset.range (q + 1),
+          ↑(3 ^ p) *
+            (digitPotential83 (GSTGraphV2InfiniteControl.graph E 3 (b + p)).seven.digit -
+              ↑(8 ^ 3) * digitPotential83 (GSTGraphV2InfiniteControl.graph E 0 (b + p)).seven.digit) +
+        reverseCarry83 (fun t => (GSTGraphV2InfiniteControl.graph E t (b + 0)).seven.carry) 3 -
+      ↑(3 ^ (q + 1)) * reverseCarry83 (fun t => (GSTGraphV2InfiniteControl.graph E t (b + (q + 1))).seven.carry) 3
+hCrossPositive :
+  0 <
+    weightedCrossPrefix (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+      (fun t p => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3 (q + 1)
+hCrossExact :
+  ∑ p ∈ Finset.range (q + 1),
+      ↑(3 ^ p) *
+        reverseCrossCode (fun t => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+          (fun t => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3 =
+    ∑ p ∈ Finset.range (q + 1),
+          ↑(3 ^ p) *
+            (digitPotential (GSTGraphV2InfiniteControl.graph E 3 (b + p)).seven.digit -
+                ↑(4 ^ 3) * digitPotential (GSTGraphV2InfiniteControl.graph E 0 (b + p)).seven.digit +
+              84 *
+                reverseSurviveCode (fun t => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.carry)
+                  (fun t => (GSTGraphV2InfiniteControl.graph E t (b + p)).seven.digit) 3) +
+        reverseCarryCode (fun t => (GSTGraphV2InfiniteControl.graph E t (b + 0)).seven.carry) 3 -
+      ↑(3 ^ (q + 1)) * reverseCarryCode (fun t => (GSTGraphV2InfiniteControl.graph E t (b + (q + 1))).seven.carry) 3
+⊢ False

@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\coker}{\mathrm{coker}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{problem}[theorem]{Geometric Problem}
+\title{GST Hodge: Derivation of the Missing Geometric Construction}
+\author{Mathbox: mathematics-first source-level research}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We separate GST's abstract sheet algebra, genuine Chow-cycle source
+algebra, and canonical Hodge target. We derive precise constraints on
+the missing universal geometric realization, and a full-rank
+native-word theorem that would close the gap if its independently
+geometric hypotheses were established. No universal proof of the
+Hodge conjecture is asserted.
+\end{abstract}
+\section{Exact target and the unproved geometry}
+For arbitrary smooth projective complex $X$ and $p\ge0$ define
+\[
+ V=\Hdg^p(X)_{\Q}
+ =H^{2p}(X,\Q)\cap H^{p,p}(X),\qquad
+ C=\CH^p(X)_{\Q},\qquad
+ A=\im(c:C\to V),\quad D=V/A.
+\]
+Here $c$ must be the canonical Betti cycle-class map, not
+the freely supplied linear map of the Stage2G interface.
+The exact conjecture is $D=0$ for all $X,p$.
+The repository's geometric-spine module explicitly admits
+a zero-cycle-class countermodel, hence its current
+naturality axioms alone do not characterize the canonical map.
+
+\section{The universal native-image invariant}
+GST source-specific programs have a true native/Hodge
+commuting square
+\[
+\begin{array}{ccc}
+ C&\stackrel{U}{\longrightarrow}&C\\
+ \downarrow c&&\downarrow c\\
+ V&\stackrel{T}{\longrightarrow}&V
+\end{array}
+\qquad cU=Tc .
+\]
+\begin{theorem}[Native conservation]
+Every actual geometric GST operator $T$ with an actual native
+partner $U$ preserves the full algebraic Hodge image $A$.
+Any rational sum or finite composition of such operators does so.
+\end{theorem}
+\begin{proof}
+If $a=c(z)$ then $Ta=Tc(z)=c(Uz)\in A$.
+The compatibility equation survives finite sums and products.
+\end{proof}
+Thus a new native source may enlarge a finite known subspace
+$A_0\subset A$, but no composition of algebraic operations
+on already algebraic sources can escape the full $A$.
+This is the first constraint on a universal cosmic birth.
+
+\section{The genuine correspondence irreducibility route}
+Let $\mathscr G\subseteq\mathrm{End}_{\Q}(V)$ be generated
+only by genuine Hodge-compatible closed correspondences whose
+Chow and Betti actions commute with $c$.
+\begin{theorem}[Conditional irreducibility]
+If $A\ne0$ and the representation of $\mathscr G$ on $V$
+has no proper nonzero invariant $\Q$-subspace, then $A=V$.
+If $0\ne A\ne V$, this actual geometric action is reducible.
+\end{theorem}
+\begin{proof}
+The previous theorem proves $A$ invariant. Nonzero
+irreducibility forces $A=V$. The converse follows immediately.
+\end{proof}
+The source module
+\texttt{GSTClassicalHodgeActualGeometricIrreducibility.lean}
+proves precisely such a conditional implication.
+It does not establish actual geometric irreducibility on
+arbitrary $X$. Abstract GST sheet matrix-unit irreducibility
+cannot be substituted for actual geometric irreducibility.
+
+\section{The complete native-source controllability criterion}
+Fix genuine algebraic $z\in C$ with $v=c(z)\ne0$.
+Choose actual geometric words $W_1,\ldots,W_m$,
+where $m=\dim_{\Q}V$, each with a canonical commuting
+native/Hodge square. Choose a rational basis $e_1,\ldots,e_m$
+for $V$ and form the concrete source-period matrix
+\[
+ M_{ji}=e_j^*(W_{i,\Hdg}v).
+\]
+\begin{theorem}[Explicit GST source-word construction]
+If the genuinely computed rational matrix satisfies
+$\det(M)\ne0$, then for every $\alpha\in V$ the actual
+original-$X$ rational cycle
+\[
+ Z_\alpha=\sum_{i=1}^m
+ (M^{-1}[\alpha])_i W_{i,\mathrm{native}}(z)
+ \in\CH^p(X)_{\Q}
+\]
+has canonical class $c(Z_\alpha)=\alpha$.
+\end{theorem}
+\begin{proof}
+Naturality gives
+$c(W_{i,\mathrm{native}}z)=W_{i,\Hdg}v$.
+The coordinate column of this class is the $i$th
+column of $M$. The displayed linear combination
+therefore has coordinate vector
+$M M^{-1}[\alpha]=[\alpha]$.
+\end{proof}
+The conditional theorem is fully derived. The
+unconditional theorem would require independent construction
+of the words with $\det M\ne0$ on every original $X$;
+providing the determinant as an abstract hypothesis
+does not solve Hodge.
+
+\begin{theorem}[Dual orbit test]
+Let $T_1,\ldots,T_s$ be actual native-compatible
+operators on finite-dimensional $V$. Their word orbit
+$U=\mathrm{span}_{\Q}\{T_{i_k}\cdots T_{i_1}v:k\ge0\}$
+equals $V$ if and only if no nonzero rational linear
+functional $\ell\in V^*$ vanishes on every word value.
+\end{theorem}
+\begin{proof}
+The vanishing functionals form $U^\perp$.
+Finite-dimensional duality gives $U=V$ exactly if
+$U^\perp=0$.
+\end{proof}
+A functional annihilating the orbit shows only that
+the \emph{chosen} geometric source family is incomplete,
+not that a Hodge class is nonalgebraic.
+
+\section{GST primitive Gram projector test}
+Let $P$ project onto a finite algebraic source frame
+$A_0$, with $P^2=P$ verified by the native rational
+Gram dual. For a genuine geometric operator $T$,
+\[
+ (I-P)TP\ne0 \quad\Longrightarrow\quad
+ A_0+T(A_0)\supsetneq A_0 .
+\]
+The new direction is algebraic, but may have been in
+the full $A$ already.
+For the entire $A$ and a nondegenerate rational
+polarization restriction, every genuine $T$ satisfies
+$(I-P_A)TP_A=0$. This follows from native-image stability.
+
+The Wolfram exact symbolic experiment used
+\[
+ P=\begin{pmatrix}1&0\\0&0\end{pmatrix},\quad
+ T=\begin{pmatrix}a&b\\c&d\end{pmatrix}.
+\]
+It returned $P^2=P$ and
+\[
+ [T,P]=\begin{pmatrix}0&-b\\c&0\end{pmatrix},
+ \qquad
+ (I-P)TP=\begin{pmatrix}0&0\\c&0\end{pmatrix}.
+\]
+Thus $c\ne0$ detects growth beyond the selected
+frame; the calculation does not construct the
+correspondence $T$ on arbitrary $X$.
+
+\section{Exceptional cosmology cannot bypass the defect}
+Embed $X\subset\mathbb P^N$ with normal codimension
+$c\ge2$; take $Y=\mathrm{Bl}_X\mathbb P^N$,
+exceptional divisor $j:E\to Y$, $q:E\to X$,
+and $\xi=c_1(\mathcal O_E(1))$.
+The actual Chow return is
+\[
+ R_p(W)=-q_*(\xi^{c-2}j^*W)
+ :\CH^{p+1}(Y)_{\Q}\to\CH^p(X)_{\Q}.
+\]
+Using $j^*j_*q^*Z=-\xi q^*Z$
+and $q_*(\xi^{c-1}q^*Z)=Z$,
+we derive $R_p(j_*q^*Z)=Z$.
+However, automatically
+$\im(cR_p)\subseteq A$. Native source
+surjectivity onto existing Chow classes is
+not the unknown Hodge surjectivity.
+
+For smooth projective $B$ and smooth center
+$Z\subset B$ of codimension $c$,
+the canonical Chow/Betti blowup splittings give
+\[
+ \coker(c^p_{\mathrm{Bl}_ZB})
+ \cong \coker(c_B^p)
+ \oplus\bigoplus_{i=1}^{c-1}\coker(c_Z^{p-i}).
+\]
+Thus blowups of Hodge-complete bases along
+Hodge-complete centers cannot create missing
+Hodge classes. They also cannot independently
+remove a pre-existing defect. A counterexample
+center, if it exists, survives upstairs.
+
+\section{The missing theorem, in explicit geometric form}
+\begin{problem}[Universal original-$X$ realized sources]
+For every smooth projective complex $X$ and $p$
+construct a finite packet of actual original-$X$
+Chow seed cycles and finitely many bona fide
+GST source-to-target operators built from its
+algebraic incidence, perfect-$K_0$, correspondence
+and cosmological mechanisms, with:
+\begin{enumerate}
+\item actual canonical Betti--Chow commuting squares;
+\item all source objects independently geometrically
+constructed without assuming target algebraicity;
+\item a full-rank rational matrix of resulting
+canonical Hodge classes, covering every Hodge direction.
+\end{enumerate}
+\end{problem}
+The exact source-to-target program compiler,
+actual-correspondence irreducibility route,
+and native Gram dual become a global proof
+only if the existence requirements above
+are proved, not simply inserted as fields.
+\section{Status and evidence classification}
+Native conservation, conditional irreducibility,
+matrix reconstruction, and orbit duality are
+proved above. The $2\times2$ Wolfram test is exact.
+The blowup formulas are valid for genuine
+smooth projective blowups with proper canonical
+cycle comparisons; their full scheme-level Lean
+instantiation remains separate.
+The missing universal geometric realization
+and canonical Stage2G Betti identification
+are \emph{not proved}. This manuscript is a
+rigorous mathematical derivation and an explicit
+new research contract, not a completed proof
+or counterexample to the rational Hodge conjecture.
+\end{document}

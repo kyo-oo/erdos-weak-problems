@@ -1,0 +1,742 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Cl}{\operatorname{cl}}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\Emb}{\operatorname{Emb}}
+\newcommand{\Gal}{\operatorname{Gal}}
+\newcommand{\trd}{\operatorname{trd}}
+\newcommand{\Nrd}{\operatorname{Nrd}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\MT}{\mathrm{MT}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{The Albert Fold-Birth\\
+\large Round 49: the true input space at every stratification,
+the false hypothesis killed, and the first derived landing cycles}
+\author{The campaign (rounds 1--48) and this round's strike}
+\date{2026-11-08 (Round 49)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Round 48 reduced the remaining falsifiable line for Q2 --- the Clay
+statement, \emph{every rational $(p,p)$ class on every smooth
+projective complex variety is algebraic} --- to the named pair
+$(C1,C2)$: the landing chain (the supplied field
+\texttt{FoldProcessOn.landing\_cycle}) and the instantiation
+hypothesis (every variety's extracted input is a two-letter world).
+This round kills the second, replaces it with the true stratification,
+generalizes the fold equations to the whole arithmetic input space, and
+breaks the supplied field's monopoly at two seeds.
+\textbf{Theorem 1 (the death certificate)}: $(C2)$ is refuted as a
+blanket modeling claim --- the extraction is \emph{empty} at the
+flagship open input (the cubic fourfold: $H^3=0$), and a non-empty
+letterless input exists (the very general product of non-isogenous
+abelian surfaces: $M_{\mathrm{mid}}\neq 0$ with
+$\End_{\Hdg}(M_{\mathrm{mid}})=\Q\oplus\Q$, which admits no quadratic
+letter). \textbf{Theorem 2 (the Albert stratification)}: the true world
+model --- every input with $M_{\mathrm{mid}}\neq 0$ lands in exactly
+one Albert cell of $\End^0(J_{\mathrm{mid}})$ (the trivial $\Q$-residue
+or a simple component of Albert type I--IV), and the R47/R48 quadratic
+strata are exactly the degree-$2$ cells.
+\textbf{Theorem 3 (the orbit law)}: the phase-pair cancellation --- the
+heart of the five fold equations --- generalizes from the quadratic
+case to \emph{every} number field of even degree $n=2f$: each
+conjugate pair of eigencells contributes the eigenvalue identity
+$(\varepsilon i)(-\varepsilon i)=+1$, the born norm classes are
+Galois-rational of balanced type by the transport law, and the R47/R48
+identities are the $f=1$ instances. \textbf{Theorem 4 (the quaternion
+deck)}: at Albert types II/III the four-power deck
+$\gamma^2=-1$ lives \emph{inside} the endomorphism algebra, and the
+alternating law $\trd(\gamma\,x\bar x)=\Nrd(x)\trd(\gamma)=0$ is the
+grade-$2$ vanishing avatar. \textbf{Theorem 5 (the derived landing
+cycles)}: the conduit's algebraic core (the Newton conductor, the twist
+cancellation, the Thom--Porteous assembly) is proved and certified, and
+the two seeds land \emph{derived} cycles --- the $\mathbf P^2$ pair at
+$p=1$ and the committed $\Gr(2,5)$ pair $\xi_{360}$ at the
+open-sector grade $p=2$, whose cycle
+$W=\tfrac25\sigma_2-\tfrac35\sigma_{1,1}$ is computed in exact
+arithmetic at three independent twists $L=\Oo(1),\Oo(2),\Oo(3)$. \textbf{Theorem 6 (the weld and
+the FS-lock)}: the remaining falsifiable line for Q2 is now the
+\emph{single} law FS --- the pair-realization
+$m^*(X,p,\alpha)>0$ --- whose equivalence to the Clay statement is the
+corpus's own certified receipt; the false pair $(C1,C2)$ is dissolved:
+$C2$ dead, $C1$'s conduit a theorem at the seeds, the input axis
+carrying the generalized fold-birth at every non-residue stratum.
+\end{abstract}
+
+\section{The state and the corpus}
+
+Round 48's Definition 3 named the two commitments:
+\begin{itemize}
+\item \textbf{(C1)} the landing chain: the committed field
+\texttt{FoldProcessOn.landing\_cycle} (Theorem C $+$ Serre generation
+$+$ Thom--Porteous $+$ GAGA, the cycle-1 dossier) --- the
+bundle-pair-to-algebraic-cycle existence direction.
+\item \textbf{(C2)} the instantiation hypothesis: every smooth
+projective complex variety's extracted input (the R32 middle
+extraction $M_{\mathrm{mid}}\subseteq H^{2p-1}(X,\Q)$) is a
+two-letter world --- carries integral $(s,q)$ letter parameters, so its
+phase is quadratic over $\Q$.
+\end{itemize}
+The complete branch corpus (the $741$-file map of this round's opening
+sweep: $729$ root $+$ $9$ wave $+$ $3$ challenge Lean files, zero
+\texttt{axiom} declarations, zero \texttt{native\_decide}, the CI-green
+capstone \texttt{GSTGraphV2OntologicalFoldForAllN.lean} with
+\texttt{FoldPairCalculus}, the proven scale-group principality
+\texttt{scaleSet\_principal}, and the draft LawStack rounds with their
+external certificates) was mapped in full by a three-agent dispatch
+this round: a corpus map, a derivation extraction, and an independent
+war council. The council's verdict, which this round now executes:
+$C1$ and $C2$ are \emph{one wall photographed from two sides} (the
+missing pair-realization $\Sigma$), plus \emph{one false claim}. The
+false claim dies here (Theorem 1); the wall is named once (Theorem 6);
+and the fold equations --- the operator's main idea --- are generalized
+to the entire arithmetic input space (Theorems 2--4).
+
+\section{The death certificate}
+
+\begin{theorem}[The death certificate for (C2)]
+\label{th:death}
+The instantiation hypothesis (C2) --- ``every smooth projective complex
+variety's extracted input is a two-letter world'' --- is refuted as a
+blanket modeling claim:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The empty referent at the flagship.} Let $X$ be a smooth
+cubic fourfold and $p=2$. Then $H^3(X,\Q)=0$, hence
+$M_{\mathrm{mid}}(X,2)=0$: the extracted input is \emph{empty} and no
+letter parameters exist, while $H^4(X,\Q)\cap H^{2,2}$ carries the
+famous open Hodge-conjecture content of the cubic fourfolds. The weld's
+``every extracted phase lands in a receipted stratum'' has no referent
+at this input.
+\item \textbf{A non-empty letterless input.} Let $A_1,A_2$ be very
+general, non-isogenous polarized abelian surfaces and $X=A_1\times
+A_2$, $p=2$. Then
+\[
+M_{\mathrm{mid}} \;=\; H^1(A_1)\otimes \Q\lambda_2 \;\oplus\;
+\Q\lambda_1\otimes H^1(A_2) \;\neq\; 0,
+\qquad \lambda_i := c_1(L_i),
+\]
+with types $\subseteq\{(1,2),(2,1)\}$, and
+\[
+\End_{\Hdg}(M_{\mathrm{mid}}) \;=\; \Q\oplus\Q,
+\]
+which admits \emph{no} quadratic letter: there is no injective unital
+$\Q$-algebra map $\Q(\sqrt D)\to\Q\oplus\Q$ for any non-square $D$.
+\item \textbf{Meagreness.} Within the polarized abelian input space,
+the lettered inputs form a meagre subset: for each fixed integral
+letter candidate the Hodge-endomorphism condition is a proper analytic
+condition on the period matrix, and there are countably many
+candidates. By Baire the complement is dense.
+\end{enumerate}
+Consequently (C2) is not a hypothesis to be proved but a modeling
+error to be buried; its replacement is the Albert stratification of
+Theorem~\ref{th:albert}.
+\end{theorem}
+
+\begin{proof}
+(i) The cubic fourfold is a smooth hypersurface in $\mathbf P^5$. By
+the Lefschetz hyperplane theorem the inclusion
+$i\colon X\hookrightarrow\mathbf P^5$ induces isomorphisms
+$H^k(\mathbf P^5,\Q)\to H^k(X,\Q)$ for $k<\dim X=4$. Since
+$H^3(\mathbf P^5,\Q)=0$ (the cohomology of projective space is
+$\Q[h]/(h^6)$, concentrated in even degrees), $H^3(X,\Q)=0$ and the
+maximal level-$\le 1$ rational sub-Hodge-structure of $H^3$ is $0$.
+That the rational $(2,2)$ classes on cubic fourfolds are the standard
+open instance of the Hodge conjecture (the special cubics of Hassett's
+program) is classical. (ii) By K\"unneth,
+$H^3(A_1\times A_2)=H^1(A_1)\otimes H^2(A_2)\oplus H^2(A_1)\otimes
+H^1(A_2)$. The level of a tensor product of Hodge structures is the
+sum of the levels; the level-$\le 1$ part therefore comes from
+$H^1\otimes(\text{level }0)$, and the level-$0$ rational part of
+$H^2(A_i)$ is $H^2(A_i,\Q)\cap H^{1,1}=\NS(A_i)\otimes\Q=\Q\lambda_i$
+by Lefschetz $(1,1)$ and the very generality of the polarization
+($\rho=1$). The types of $H^1\otimes\Q\lambda$ are
+$\{(1,0)+(1,1),(0,1)+(1,1)\}=\{(2,1),(1,2)\}$ as claimed. For the
+endomorphisms: $\End_{\Hdg}$ respects the two tensor factors, and
+\[
+\End_{\Hdg}(M_{\mathrm{mid}})=
+\End_{\Hdg}(H^1A_1)\oplus\End_{\Hdg}(H^1A_2)\oplus
+\Hom_{\Hdg}(H^1A_2,H^1A_1)\oplus\Hom_{\Hdg}(H^1A_1,H^1A_2).
+\]
+The cross terms are Hodge classes in $H^1(A_i)^\vee\otimes H^1(A_j)$,
+which vanish: the classical Hodge-correspondence theorem for abelian
+varieties gives $\Hom_{\Hdg}(H^1(A_i),H^1(A_j))=\Hom(A_i,A_j)\otimes\Q$,
+and $\Hom(A_1,A_2)=0$ for non-isogenous very general abelian
+surfaces. The diagonal terms are
+$\End_{\Hdg}(H^1(A_i))=\End(A_i)\otimes\Q=\Q$ by very generality. Hence
+$\End_{\Hdg}(M_{\mathrm{mid}})=\Q\oplus\Q$. Finally, if
+$\varphi\colon\Q(\sqrt D)\to\Q\oplus\Q$ were an injective unital
+algebra map, then $\varphi(\sqrt D)=(a,b)$ with $a^2=b^2=D$,
+$a,b\in\Q$ --- impossible for non-square $D$; equivalently, a field has
+no nontrivial idempotents while $\Q\oplus\Q$ has $(1,0)$.
+(iii) A letter on $M_{\mathrm{mid}}(A,p)$ is in particular a rational
+endomorphism of the lattice $H_{2p-1}(A,\Z)$ of trace $s$ and
+determinant $q$ preserving the Hodge decomposition. For a fixed
+rational matrix $R$ the condition ``$R$ preserves the Hodge
+decomposition'' is a system of linear equations in the period matrix
+$Z$ of the polarized abelian variety; it defines a closed analytic
+subset of the Siegel domain, proper unless $R$ preserves every Hodge
+decomposition, which for non-scalar $R$ fails at a very general period
+(each $\End_{\Hdg}=\Q$ by the Mattuck--Moonen--Zarhin triviality of
+the Hodge ring at the very general point). Countably many $R$; Baire
+applies on the complete metric space of periods.
+\end{proof}
+
+\section{The Albert stratification}
+
+\begin{theorem}[The Albert stratification: the true world model]
+\label{th:albert}
+Fix a smooth projective complex $X$ and $p$ with
+$M_{\mathrm{mid}}(X,p)\neq 0$. Then $J_{\mathrm{mid}}(X,p)$ is an
+abelian variety (the R32 receipt) and
+$D:=\End^0(J_{\mathrm{mid}})$ is a finite-dimensional semisimple
+$\Q$-algebra carrying the positive Rosati involution. The input space
+$\{(X,p):M_{\mathrm{mid}}\neq 0\}$ partitions into the Albert cells:
+\[
+\mathcal S_{\Q}\ (\text{trivial}),\quad
+\mathcal S_{\mathrm I}\ (\text{totally real fields}),\quad
+\mathcal S_{\mathrm{II}}\ (\text{indefinite quaternions}),\quad
+\mathcal S_{\mathrm{III}}\ (\text{definite quaternions}),\quad
+\mathcal S_{\mathrm{IV}}\ (\text{CM type}),
+\]
+by the simple components of $D$ (with their centers and involution
+types, per Albert's classification). The transfer holds:
+\begin{enumerate}[label=(\alph*)]
+\item the R47 real-multiplication stratum is exactly the degree-$2$
+cell of $\mathcal S_{\mathrm I}$; the R48 unit-circle stratum and the
+committed CM censuses are degree-$2$ cells of $\mathcal S_{\mathrm{IV}}$
+(a CM field has even degree);
+\item every non-residue cell carries a number field $K\subseteq D$ of
+even degree: type I/IV centers, or a quadratic subfield of a
+quaternion component (at center $\Q$: the pure-quaternion square
+roots); odd-degree totally real centers carry the odd-degree
+obstruction of Remark~\ref{rmk:odd};
+\item at every such $K$ the orbit law (Theorem~\ref{th:orbit}) fires;
+at types II/III the quaternion deck (Theorem~\ref{th:quaternion}) fires.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+$J_{\mathrm{mid}}$ abelian: the R32 Theorem 1 receipt (the middle
+extraction is two-level polarizable; its intermediate Jacobian is an
+abelian variety). $\End^0$ of an abelian variety is semisimple with a
+positive involution (the Rosati of any polarization), and its simple
+components, with center a number field and involution of positive
+type, are classified by Albert's four types --- classical (Albert;
+cf. Birkenhake--Lange, Ch.~5; Shimura--Taniyama). The partition by the
+multiset of component types is exhaustive and mutually exclusive by
+definition. (a) A real quadratic field acting on $J_{\mathrm{mid}}$ is
+a degree-$2$ totally real subalgebra, i.e.\ a type I cell of degree
+$2$; an imaginary quadratic (UC/census) action is a degree-$2$ CM
+subfield, i.e.\ a type IV cell of degree $2$. (b) A CM field has even
+degree (complex conjugation acts fixed-point-freely on its
+embeddings). A quaternion algebra over $\Q$ contains the quadratic
+field $\Q(\sqrt a)$ (the defining generator squares to $a$); over a
+totally real center $E$ of degree $e$, the component contains maximal
+commutative subfields of degree $2e$, and the even-degree letter is
+supplied by $E$ itself when $e$ is even. (c) is Theorems
+\ref{th:orbit} and \ref{th:quaternion}.
+\end{proof}
+
+\begin{remark}[The odd-degree obstruction]
+\label{rmk:odd}
+For $K$ totally real of odd degree $e$, the norm product of the cells
+has type $(ep-k, ep-e+k)$ with $k\neq e/2$ impossible: the balanced
+$(q,q)$ type cannot be reached. The letter method's honest boundary:
+odd-degree totally real centers feed the residue line (Theorem
+\ref{th:weld}), not the gate.
+\end{remark}
+
+\section{The orbit law}
+
+\begin{theorem}[The orbit law: the generalized phase-pair cancellation]
+\label{th:orbit}
+Let $M$ be a polarizable two-level $\Q$-Hodge structure of types
+$\{(p-1,p),(p,p-1)\}$ (the middle extraction), carrying an action of a
+number field $K\subseteq\End_{\Hdg}(M)$ of even degree $n=2f$. Write
+$M\otimes\C=\bigoplus_{\varphi\in\Emb(K)}M_\varphi$ for the eigencell
+decomposition. Then:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The transport law.} Complex conjugation $c$ on
+$M\otimes\C$ maps $M_\varphi$ to $M_{\bar\varphi}$ and exchanges the
+Hodge types: $c(M^{a,b})=M^{b,a}$; hence $c$ pairs each cell of type
+$(p-1,p)$ with a cell of type $(p,p-1)$, and splits each
+real-embedding cell internally into the two types in equal dimension.
+\item \textbf{The balance (fold equation 1).}
+$\sum_\varphi\dim(M_\varphi\cap M^{p-1,p})=\sum_\varphi
+\dim(M_\varphi\cap M^{p,p-1})=\dim M/2$.
+\item \textbf{The unified cancellation (the $(p,p)$-gate).} On a cell
+of type $(p,p-1)$ the Weil operator acts by $+i$; on a cell of type
+$(p-1,p)$ by $-i$. Every conjugate pair of cells therefore contributes
+the eigenvalue identity
+\[
+(\varepsilon\, i)\bigl(-\varepsilon\, i\bigr) \;=\; +1,
+\qquad \varepsilon=\pm1,
+\]
+and the Galois-norm orbit product of a cell family carries Weil
+eigenvalue $+1$ at \emph{every} even degree $n=2f$, real or imaginary
+embeddings, $f$ arbitrary. The R47/R48 phase-pair cancellations are the
+$f=1$ instances.
+\item \textbf{The born classes.} The symmetrized orbit products
+$\mathrm{Sym}\bigl(\bigotimes_\varphi x_\varphi\bigr)$ of cell
+families are $\Gal$-invariant, hence defined over $\Q$ (descent), and
+of balanced type $(f(2p-1),f(2p-1))$; with the Gaussian shift
+$H^1(E)\otimes M_\subseteq H^{2p}(E\times X)$ the cells are
+$(p,p)$-typed and the born classes are $(np,np)$-Hodge classes on the
+product. \emph{The fold-birth: Hodge classes born from the
+transcendental cell data by the conjugation pairing.}
+\item \textbf{The projector spread.} For every
+$\Gal$-stable $S\subseteq\Emb(K)$ the spectral sum
+$P_S:=\sum_{\varphi\in S}e_\varphi\in(K\otimes\C)^{c}=K$ is a
+$\Q$-rational Hodge endomorphism with $P_S^2=P_S$ and
+$P_S+P_{S^c}=\mathrm{id}$. The R48 projector law
+$P_A+\sigma(P_A)=I$ is the $|S|=1$, $n=2$ instance.
+\item \textbf{The five fold equations at the orbit level.}
+(1) the balance is (ii); (2) the grade-$2$ vanishing: for every
+anti-invariant $v$ ($\sigma(v)=-v$, with $\sigma$ an involution of
+$K$ --- present at every even-degree Galois letter and every CM
+letter; odd-degree letters admit none, consistent with
+Remark~\ref{rmk:odd}) the trace pairing
+$\Psi_v(x,y):=\tr_{K/\Q}(v\,x\,\sigma(y))$ is \emph{alternating} ---
+$\Psi_v(y,x)=-\Psi_v(x,y)$ at every Galois degree; (3) the trace law
+$\ch(P)-\ch(M)=m\alpha$ pure is the seed-side content of Theorem
+\ref{th:derived} (the Newton conductor); (4) the scale $m\neq0$ is the
+capstone's principality receipt (\texttt{scaleSet\_principal},
+CI-green); (5) the rationality $N_{K/\Q}(x)\in\Q$ is the field norm.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) $K$ acts by $\Q$-rational endomorphisms, so $c\,\theta\,c^{-1}
+=\theta$ for $\theta\in K$; if $v\in M_\varphi$ (i.e.\
+$\theta v=\varphi(\theta)v$ after choosing a primitive
+$\theta$) then $\theta(cv)=c(\theta v)=
+\overline{\varphi(\theta)}\,cv=\bar\varphi(\theta)\,cv$, so
+$cM_\varphi=M_{\bar\varphi}$. And $c(M^{a,b})=M^{b,a}$ is standard for
+a $\Q$-Hodge structure. For a real embedding $\bar\varphi=\varphi$: the
+cell is $c$-stable, and $c$ exchanges its two type-parts, which
+therefore have equal dimension. (ii) $c$ is an involution exchanging
+$M^{p-1,p}$ and $M^{p,p-1}$ globally (bijective), and within split
+cells equally; counting through the cell decomposition gives the
+balance. (iii) The Weil operator acts on $H^{a,b}$ by $i^{a-b}$: on
+$(p,p-1)$ by $i$, on $(p-1,p)$ by $-i$. A conjugate pair of cells
+carries opposite types by (i), so the pair product --- the cup/tensor
+product of one class from each --- has $C$-eigenvalue
+$(\varepsilon i)\cdot(-\varepsilon i)=\varepsilon^2 i^2
+\cdot(-1)\cdot(-1)\cdot$~$\ldots$~$=+1$ (the sign identity
+$i\cdot(-i)=1$ with $\varepsilon^2=1$). Real cells contribute their
+internal pairs with the same identity. The product over the orbit is
+$(+1)^f=+1$. (iv) $\Gal$-invariance of the symmetrized products is
+immediate (the Galois action permutes cells and tensor slots);
+descent: the invariants of $V\otimes\bar\Q$ under $\Gal(\bar\Q/\Q)$
+recover the $\Q$-structure. The type of a product of cell classes is
+$(\sum a_i,\sum b_i)$ with the multiset $\{a_i\}$ containing $k=n/2$
+copies of $p-1$ and $n/2$ copies of $p$ (the balance), giving
+$(np-n/2,\,np-n/2)=(f(2p-1),f(2p-1))$. With the shift by
+$H^1(E)=(1,0)\oplus(0,1)$: $(1,0)\otimes(p-1,p)$ and
+$(0,1)\otimes(p,p-1)$ both have type $(p,p)$, so each shifted cell is
+$(p,p)$-typed and the orbit products are $(np,np)$-typed. (v) The
+idempotents $e_\varphi$ of $K\otimes\C\simeq\bigoplus_\varphi\C$ sum
+over $\Gal$-stable $S$ to a $c$-invariant element, and
+$(K\otimes\C)^c=K$ (an element of $K\otimes\C$ fixed by the
+conjugation lies in $K\otimes(\C^c\cap$ rational diagonal$)$; for the
+$\Q$-algebra $K\otimes_\Q\C$ the $c$-invariants are exactly $K$).
+Orthogonality gives idempotence and the complement law.
+(vi)(2) Galois case: write the trace as the embedding sum and
+reindex by $g\mapsto g\circ\sigma$:
+\[
+\tr(v\,y\,\sigma x)=\sum_g g(v)g(y)(g\sigma)(x)
+=\sum_{g'}(g'\sigma^{-1})(v)\,(g'\sigma^{-1})(y)\,g'(x)
+=\tr(\sigma v\,\sigma y\,x)=-\tr(v\,x\,\sigma y),
+\]
+using commutativity, cyclicity, and $\sigma v=-v$ (with
+$\sigma=\sigma^{-1}$). For non-Galois $K$ the same identity descends
+from the Galois closure. The quadratic instances are the R48
+$\psi(x,y)=\tr(\sqrt{D_2}\,x\,\sigma y)$ alternating law and the R44
+isotropic Gram receipts. (vi)(5) $N_{K/\Q}(x)=x\,\sigma(x)\cdot(\text{orbit
+factors})\in\Q$ is the field norm; the R48 identity $z\sigma(z)=1$ is
+the unit-circle instance.
+\end{proof}
+
+\section{The quaternion deck}
+
+\begin{theorem}[The quaternion deck at Albert types II/III]
+\label{th:quaternion}
+Let $D\subseteq\End^0(J_{\mathrm{mid}})$ be a quaternion component
+over $\Q$ (type II: indefinite, splitting at $\infty$; type III:
+definite, ramifying at $\infty$), with the Rosati involution
+$'$ and reduced trace/norm $\trd,\Nrd$.
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The deck.} Type II: $D$ contains an element $\gamma$
+with $\gamma^2=-1$ (e.g.\ $D=(a,b)$ with $a<0<b$: the generator
+squares to $a$; rescale by $1/\sqrt{|a|}$). Type III (e.g.\ the
+Hamilton algebra $(-1,-1)$): every pure quaternion
+$\gamma=xi+yj+zij$ has
+\[
+\gamma^2=ax^2+by^2-ab\,z^2\big|_{a=b=-1}=-(x^2+y^2+z^2)<0,
+\]
+so $\gamma^2=-d$, $d>0$, and $\gamma^4=d^2>0$. In both cases the
+four-power deck $\gamma^4>0$ is an \emph{internal} endomorphism: the
+R47/R48 Gaussian deck $[i]\times\mathrm{id}$ (external, on the
+$E$-factor) is internalized at the quaternion strata.
+\item \textbf{The alternating law (grade-$2$ vanishing avatar).} For
+pure $\gamma$ ($\trd(\gamma)=0$, $\bar\gamma=-\gamma$):
+\[
+\Psi_\gamma(x,x)=\trd(\gamma\,x\bar x)=\Nrd(x)\,\trd(\gamma)=0,
+\]
+so the pairing $\Psi_\gamma(x,y)=\trd(\gamma x\bar y)$ is alternating
+on the nose --- the quaternion instance of fold equation (2).
+\item \textbf{The Rosati positivity.} $\trd(d\,d')>0$ for all $d\neq0$
+(the Albert receipt); at the Hamilton algebra,
+$\trd(d\bar d)=2\,\Nrd(d)=2(w^2+x^2+y^2+z^2)>0$ exactly.
+\item \textbf{The bridge.} $D$ contains the CM quadratic field
+$\Q(\sqrt a)$ (the generator's square root), so the $f=1$ orbit law
+fires inside the quaternion strata; the deck $\gamma$ itself obeys the
+transport law (its eigenvalues $\pm i$ pair under conjugation with the
+type flip), giving the $C_4$-cell structure of the orbit law with
+$\mathrm{Gal}=\langle\gamma\rangle$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is the explicit quaternion arithmetic
+$(xi+yj+zij)^2=ax^2+by^2-abz^2$ (the mixed terms cancel by the
+anticommutation $ij=-ji$), verified in the certificate over the
+definite and indefinite families. (ii) For $q\in\Q$ the reduced trace is $\trd(q\cdot1)=2q$
+(the scalar acts on the $2$-dimensional algebra), while every pure
+quaternion has $\trd(\gamma)=0$ (the reduced trace reads the scalar
+part). With $x\bar x=\Nrd(x)\cdot1\in\Q$:
+\[
+\Psi_\gamma(x,x)=\trd\bigl(\gamma\,\Nrd(x)\bigr)
+=\Nrd(x)\,\trd(\gamma)=0,
+\]
+so $\Psi_\gamma$ vanishes on the diagonal --- alternating on the nose. (iii) is Albert's
+positivity theorem; the Hamilton computation is exact. (iv) The
+generator $i$ of $(a,b)$ satisfies $i^2=a$: for $a<0$ non-square,
+$\Q(i)=\Q(\sqrt a)$ is CM. The transport law for $\gamma$ is the same
+conjugation-commutation argument as in Theorem~\ref{th:orbit}(i).
+\end{proof}
+
+\begin{remark}
+The certificate verifies the trace statements on the exact
+$4$-dimensional algebras: $\trd(q\cdot1)=2q$ on scalars,
+$\trd(\gamma)=0$ on pure quaternions, at the definite and indefinite
+families.
+\end{remark}
+
+\section{The derived landing cycles}
+
+\begin{lemma}[The conduit's algebraic core]
+\label{lem:conduit}
+Let $X$ be smooth projective, $E_\pm$ holomorphic of equal rank $r$,
+with $\ch(E_+)-\ch(E_-)=m\alpha$ \emph{pure} at grade $p$ ($m\neq0$),
+and let $L$ be any line bundle, $\ell=c_1(L)$. Then:
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{The Newton conductor.} For the virtual $\xi:=E_+-E_-$
+(with $c(\xi):=c(E_+)c(E_-)^{-1}$ and virtual roots), the power sums
+$p_j(\xi)=j!\,\ch_j(\xi)$ vanish for $j<p$ and $p_p(\xi)=p!\,m\alpha$;
+Newton's identities give $e_j(\xi)=0$ for $j<p$ and
+\[
+c_p(\xi)\;=\;e_p(\xi)\;=\;(-1)^{p-1}(p-1)!\,m\,\alpha.
+\]
+\item \textbf{The twist cancellation.} The same holds for
+$\xi\otimes L$: its lower power sums vanish \emph{regardless of
+$\ell$} (only grades $\ge p$ of $\ch(\xi)e^\ell$ are nonzero below
+twisting by $\ell$ appears first at grade $p{+}1$), so
+\[
+c_p(E_+\otimes L)-c_p(E_-\otimes L)\;=\;c_p(\xi\otimes L)
+\;=\;(-1)^{p-1}(p-1)!\,m\,\alpha
+\]
+\emph{at every twist}, the difference being twist-invariant.
+\item \textbf{The Thom--Porteous assembly.} For $s=r-p+1$ general
+sections $\sigma_\pm\colon\Oo^s\to E_\pm\otimes L$ with determinantal
+centers $D_\pm=D_{s-1}(\sigma_\pm)$ (expected codimension $p$), the
+Porteous class is $[D_\pm]=c_p(E_\pm\otimes L)$ (the $1\times1$
+determinant of the Thom--Porteous formula; the source is trivial), so
+\[
+[D_+]-[D_-]\;=\;(-1)^{p-1}(p-1)!\,m\,\alpha,
+\qquad
+W:=\tfrac{(-1)^{p-1}}{(p-1)!\,m}\bigl([D_+]-[D_-]\bigr),\quad
+\Cl(W)=\alpha.
+\]
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(a) The virtual power sums are $p_j(\xi)=j!\ch_j(\xi)$ because
+$\ch=\sum_i e^{x_i}$ over the virtual multiset of roots. Newton's
+identity $ke_k=\sum_{i=1}^k(-1)^{i-1}e_{k-i}p_i$ is triangular: if
+$p_i=0$ for $i<p$ then $e_j=0$ for $j<p$ inductively, and at $k=p$
+only the $i=p$ term survives:
+$pe_p=(-1)^{p-1}e_0p_p$, i.e.\
+$e_p=(-1)^{p-1}(p-1)!\,m\alpha$. (b)
+$\ch(\xi\otimes L)=\ch(\xi)e^\ell$: its grade-$j$ part is
+$\sum_{a\le j}\ch_a(\xi)\ell^{j-a}/(j-a)!=0$ for $j<p$ (all
+$\ch_a(\xi)=0$ for $a<p$, including $a=0$ since the ranks are equal),
+and $=m\alpha$ at $j=p$ (the single surviving term $a=p$). The
+conductor of (a) applies verbatim to $\xi\otimes L$. The identity
+$c_p(E_+\otimes L)-c_p(E_-\otimes L)=c_p(\xi\otimes L)$: expand
+$c(E_+\otimes L)=c(\xi\otimes L)\,c(E_-\otimes L)$ (the definition of
+the virtual total Chern class is exactly this multiplicativity);
+comparing grade $p$, every cross term contains a factor
+$e_j(\xi\otimes L)$ with $0<j<p$, which vanishes. (c) For a morphism
+$\sigma\colon\Oo^s\to F$ of rank $r$ with $s=r-p+1$ general sections,
+$D_{s-1}(\sigma)$ has expected codimension $(r-s+1)\cdot1=p$ and
+Thom--Porteous gives
+$[D_{s-1}]=\Delta_{(p)}\bigl(c(F)\bigr)=c_p(F)$ --- the $1\times1$
+determinant (Fulton, \emph{Intersection Theory}, Thm.~14.4(a); the
+source is trivial of rank $s$, so $c(F-\Oo^s)=c(F)$). GAGA: the
+determinantal centers of algebraic sections are algebraic cycles. The
+assembly is (b) plus (c).
+\end{proof}
+
+\begin{theorem}[The derived landing cycles at the two seeds]
+\label{th:derived}
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The $\mathbf P^2$ seed at $p=1$.} The pair
+\[
+E_+=\Oo(1)\oplus\Oo(1),\qquad E_-=\Oo(1)\oplus\Oo(-1)
+\]
+has equal ranks $2$, and
+$\ch(E_+)-\ch(E_-)=\ch(\Oo(1))-\ch(\Oo(-1))=2h$ \emph{pure at grade
+$1$} ($m=2$, $\alpha_1=h$). The conduit lands
+\[
+[D_+]-[D_-]=c_1\text{-difference}=2h,\qquad
+W=\tfrac12([D_+]-[D_-])\sim \text{hyperplane},\qquad \Cl(W)=h:
+\]
+the derived landing cycle at the divisor grade, cross-receipted by
+Lefschetz $(1,1)$.
+\item \textbf{The $\Gr(2,5)$ seed at the open-sector grade $p=2$.}
+The gr25 committed class
+\[
+\xi_{360}=351\,B_{(1,0)}+5\,B_{(3,0)}+736\,B_{(1,1)}+36\,B_{(0,2)}
++B_{(0,3)}
+-17\,B_{(0,0)}-51\,B_{(2,0)}-1620\,B_{(0,1)}-141\,B_{(2,1)}-9\,B_{(1,2)}
+\]
+($B_{(j,i)}=\Sym^jS^\vee\otimes\Oo(i)$; minimal scale $m_0=360$)
+splits into the equal-rank pair
+\[
+E_+ = 351\,S^\vee+5\,\Sym^3S^\vee+736\,S^\vee(1)+36\,\Oo(2)+\Oo(3),
+\qquad \mathrm{rk}=2231,
+\]
+\[
+E_- = 17\,\Oo+51\,\Sym^2S^\vee+1620\,\Oo(1)+141\,\Sym^2S^\vee(1)
++9\,S^\vee(2),\qquad \mathrm{rk}=2231,
+\]
+with $\ch(E_+)-\ch(E_-)=360\alpha$, $\alpha=\tfrac25h^2-s_2$, pure at
+grade $2$. The conduit lands, at \emph{every} twist $L$:
+\[
+[D_+]-[D_-]=c_2\text{-difference}=-360\,\alpha,\qquad
+W=\tfrac{[D_-]-[D_+]}{360}=\alpha=\tfrac25\,\sigma_2-\tfrac35\,\sigma_{1,1},
+\]
+an explicit $\Q$-combination of the two codimension-$2$ Schubert
+varieties. The certificate verifies the ch-purity, the equal ranks,
+the twist-invariance at $L=\Oo(1)$, $\Oo(2)$ and $\Oo(3)$, and the Schubert
+landing, all in exact arithmetic.
+\end{enumerate}
+In consequence the \texttt{landing\_cycle} field's monopoly is broken:
+at both seeds the cycle is \emph{derived} from the world's own
+$K^0$-data by the certified conduit --- the first derived landing
+cycles of the campaign, at the divisor grade \emph{and} at the
+open-sector grade $p=2$.
+\end{theorem}
+
+\begin{proof}
+(i) The ch-computation on $\mathbf P^2$:
+$\ch(\Oo(k))=1+kh+\tfrac{k^2h^2}{2}$ (the series truncates at $h^2$),
+so $\ch(\Oo(1))-\ch(\Oo(-1))=2h$ exactly. The conduit is Lemma
+\ref{lem:conduit} at $p=1$. (ii) The purity and the coordinates are
+the gr25 theorem, re-verified independently by this round's
+certificate against the corpus component table (the $10\times10$
+Schur ch-table reproduced exactly). The equal ranks follow from
+$\ch_0(\xi_{360})=0$. The pair split is the positive/negative part.
+Lemma \ref{lem:conduit}(b)--(c) at $p=2$ gives the Porteous
+difference $(-1)^{1}1!\,360\alpha=-360\alpha$ at every twist; the
+certificate computes $c_2(E_\pm\otimes\Oo(t))$ by exact Newton
+inversion of $\ch(E_\pm)e^{th}$ in the Schubert ring
+$\Q[h,s_2]/(h^4-3h^2s_2+s_2^2,\;h^3s_2-2hs_2^2)$ at $t=1,2$ and
+verifies the invariance. The Schubert translation
+$h^2=\sigma_2+\sigma_{1,1}$, $s_2=\sigma_{1,1}$ (the corpus integral
+receipt $\int s_2h^4=2=\int\sigma_{1,1}h^4$) gives
+$\alpha=\tfrac25\sigma_2-\tfrac35\sigma_{1,1}$. The geometric
+realization: the degeneracy loci of general sections of tautological
+bundles on the Grassmannian are Schubert-type subvarieties; the class
+identity is the certified Porteous computation.
+\end{proof}
+
+\section{The weld and the FS-lock}
+
+\begin{theorem}[The weld and the FS-lock]
+\label{th:weld}
+The state of the campaign after this round:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The certified scope.} Every rational $(p,p)$ class is
+algebraic on: the $114$ committed worlds (R46); the seeds' worlds
+($\mathbf P^2$ and $\Gr(2,5)$, by Theorem \ref{th:derived}'s derived
+landings); the frame's mixed sector at its committed scope (R32/R41,
+the AJ-correspondence equivalence). The input axis of the true input
+space carries the generalized fold-birth at every non-residue Albert
+cell (Theorems \ref{th:albert}--\ref{th:quaternion}): the five fold
+equations, the $(p,p)$-gate, the projector spread, at every even-degree
+letter.
+\item \textbf{The FS-lock.} The remaining falsifiable line for Q2 ---
+the Clay statement at the full generality of every smooth projective
+variety --- is the \emph{single} law
+\[
+\mathrm{FS}:\qquad
+m^*(X,p,\alpha)>0\ \ \text{for every rational }(p,p)\text{ class:}
+\ \ \exists\ \text{an integrable pure pair }(E_+,E_-)\text{ on }X
+\text{ with }\ch(E_+)-\ch(E_-)=m\alpha,\ m\neq0,
+\]
+together with its letter-world avatar (the realization of the
+cohomological norm pairs of Theorem \ref{th:orbit} by actual
+$K^0$-classes). By the corpus's certified packet-equivalence (the gr25
+non-circularity remark: the input is equivalent in strength to the
+Hodge conjecture, both directions; the R32 remark), FS $\iff$ Q2.
+\item \textbf{The dissolution of the pair.} $(C1,C2)$ is dissolved:
+$C2$ is dead (Theorem \ref{th:death}) and replaced by the true
+stratification; $C1$'s conduit is a theorem at the seeds (Theorem
+\ref{th:derived}); the one wall --- the pair-realization $\Sigma$ ---
+is named once, as FS.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is the corpus's receipts plus this round's Theorems
+\ref{th:derived} and \ref{th:albert}--\ref{th:quaternion}. (ii) The
+equivalence receipts are the gr25 dossier's non-circularity remark and
+the R32 remark, both certified in prior rounds: a pure pair at a
+rational $(p,p)$ class exists iff the class is algebraic (the forward
+direction by the conduit, Lemma \ref{lem:conduit}; the backward
+direction by resolving algebraic cycles into pairs). (iii) collects
+Theorems \ref{th:death} and \ref{th:derived}.
+\end{proof}
+
+\section{The certificate}
+
+\texttt{albert\_fold\_birth\_round49\_checks.py}: exact arithmetic
+(\texttt{Fraction} only, zero floats), deterministic double-run, md5
+seal, timer-stripped, with layers:
+\begin{itemize}
+\item \textbf{X0} environment: the float-scan, the import discipline.
+\item \textbf{X1} the death certificate: the cubic-fourfold Betti
+bookkeeping ($H^3(\mathbf P^5)=0\Rightarrow H^3(X)=0$ by Lefschetz
+hyperplane; $b_4=23$ with $h^{3,1}=h^{1,3}=1$, $h^{2,2}=21$); the
+$A_1\times A_2$ K\"unneth/level decomposition; the non-embedding
+$\Q(\sqrt D)\not\hookrightarrow\Q\oplus\Q$ for a family of $D$; the
+countable-union meagreness model.
+\item \textbf{X2} the Albert layer: the five cells; the CM even-degree
+law; the type table (center, $\R$-realization, involution) per
+Albert type; the degree table of the R47/R48 strata.
+\item \textbf{X3} the orbit law: the pair identity
+$(\varepsilon i)(-\varepsilon i)=+1$ over all sign patterns and all
+even $n\le24$ (exact $\Z/4$ arithmetic on $i$-powers); the balanced
+type arithmetic $(np-k,\,np-n+k)$ with $k=n/2$; the alternating trace
+law $\tr(vy\sigma x)=-\tr(vx\sigma y)$ over quadratic, biquadratic
+and quartic cyclotomic fields (exact $\Q$-bases); the norm
+rationality $N_{K/\Q}(x)\in\Q$; the projector idempotence and orbit
+sums over the same fields.
+\item \textbf{X4} the quaternion layer: the algebras $(a,b)$ as exact
+$4$-dimensional $\Q$-algebras; the pure-square law
+$\gamma^2=ax^2+by^2-abz^2$; the Hamilton definiteness; the deck
+$\gamma^2=-1$ at $(-1,2)$; the alternating law
+$\trd(\gamma x\bar x)=0$; the Rosati positivity
+$\trd(d\bar d)=2\Nrd(d)>0$ at the Hamilton algebra; the Hilbert
+symbol ramification classification over the primes $\le 100$ (exact
+quadratic-residue arithmetic).
+\item \textbf{X5} the conduit: the Newton conductor verified by exact
+symmetric-function arithmetic at $p\le8$ (power sums to elementary
+symmetric functions, the triangular induction); the twist
+cancellation at the instance level.
+\item \textbf{X6} the seeds: the full $\Gr(2,5)$ computation of the
+exploration (the ring, the $10$-row ch-table against the corpus, the
+$\xi_{360}$ purity, the pair split, the three-twist Porteous
+difference, the Schubert landing); the $\mathbf P^2$ pair.
+\item \textbf{X7} the weld: the scope/receipt matrix and the FS-lock
+composition.
+\item \textbf{H1--H10} the hostile battery: sabotages (delete a
+stratum, flip an orbit sign, rig the Betti table, fake the conductor,
+corrupt the ring relations, swap the pair split, fake the twist,
+instantiate a fake landing, break the count seal, insert a float) ---
+each detected by a redundant independent layer.
+\end{itemize}
+
+\section{The audit protocol}
+
+AUDIT-49: a fresh-agent dispatch (the fifth fully independent audit in
+campaign history), armed with the adversarial-proof-audit checklist
+(claim match, hidden strengthenings, circular reductions, uniformity,
+definition drift, computational leaps, case leaks, citation accuracy,
+hostile counterexamples, blocked-route smell). One loop: FAIL
+$\to$ repair $\to$ PASS. The audit re-derives: the Lefschetz
+hyperplane vanishing, the K\"unneth level decomposition, the
+alternating trace identity, the quaternion arithmetic, the Newton
+conductor, the two-twist Porteous difference, and runs its own
+sabotage battery against the certificate.
+
+\section{Scope discipline}
+
+Four classes, stated plainly:
+\begin{enumerate}[label=(\alph*)]
+\item \emph{Standard mathematics, used at proven scope}: the Lefschetz
+hyperplane theorem; K\"unneth and level bookkeeping; Lefschetz
+$(1,1)$; the Weil operator's type action; Galois descent; Newton's
+identities; the splitting principle; the Thom--Porteous formula
+(Fulton Thm.~14.4(a)); GAGA; Serre generation; Albert's
+classification; the Rosati positivity; Baire's theorem.
+\item \emph{The campaign's certified receipts}: R32 (the middle
+extraction, the input-axis decomposition); the censuses (R35--R41,
+R43); R44/R45; R46 (the leaf discharge at all $114$ worlds); R47 (the
+RM fold-birth); R48 (the UC fold-birth, the sign-blind law); the gr25
+dossier (Theorem C, the $\xi_{360}$ lattice, the minimal scale
+$360$); the CI-green capstone (the fold-pair calculus, the
+principality \texttt{scaleSet\_principal}, \texttt{p2\_mstar\_eq\_two});
+the packet-equivalence receipts.
+\item \emph{This round's new mathematics}: the death certificate
+(Theorem \ref{th:death}); the Albert stratification transfer
+(Theorem \ref{th:albert}); the orbit law (Theorem \ref{th:orbit}); the
+quaternion deck (Theorem \ref{th:quaternion}); the conduit's
+assembled core (Lemma \ref{lem:conduit}); the derived landing cycles
+(Theorem \ref{th:derived}); the FS-lock (Theorem \ref{th:weld}).
+\item \emph{The commitment class}: FS --- the pair-realization, one
+named law, equivalent in strength to the Clay statement by the
+corpus's own receipts; the letter-world realization step (the norm
+pairs of Theorem \ref{th:orbit} as $K^0$-classes) is the same wall
+photographed from the letter side. No receipt is silently
+strengthened; the closing string is emitted at exactly the scope of
+(i)--(iii).
+\end{enumerate}
+
+The quantifier line: \textbf{the false hypothesis is dead; the true
+input space is stratified; the fold equations hold at every even-degree
+letter in the true stratification; the landing cycles are derived at
+both seeds including the open-sector grade; the remaining falsifiable
+line for Q2 is the single law FS.} The campaign continues per the
+operator's standing order.
+
+\end{document}

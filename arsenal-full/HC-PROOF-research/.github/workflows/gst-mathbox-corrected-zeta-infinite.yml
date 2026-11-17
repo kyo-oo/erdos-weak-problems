@@ -1,0 +1,73 @@
+name: GST Mathbox Corrected Infinite Zeta
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTMathboxCorrectedZetaInfinite.lean'
+      - '.github/workflows/gst-mathbox-corrected-zeta-infinite.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-mathbox-zeta-infinite-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install Lean and Mathlib cached dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental Lean cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-zeta-infinite
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Verify exact infinite summation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "MathboxZetaInfinity"
+          roots = [
+            "GSTMathboxCorrectedZetaGeometry",
+            "GSTMathboxCorrectedZetaInfinite"
+          ]
+          EOF
+          if lake build MathboxZetaInfinity > zeta-infinite-lean.log 2>&1; then
+            echo 'LEAN PASSED: exact infinite corrected zeta equation-three sum'
+          else
+            grep -nE 'error:|sorryAx|✖' zeta-infinite-lean.log | tail -n 120 || true
+            tail -n 100 zeta-infinite-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" zeta-infinite-lean.log; then
+            echo "Sorry axiom detected"
+            exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-mathbox-zeta-infinite-lean
+          path: zeta-infinite-lean.log
+          if-no-files-found: warn

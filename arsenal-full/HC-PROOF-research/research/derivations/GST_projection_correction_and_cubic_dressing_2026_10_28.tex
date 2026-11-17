@@ -1,0 +1,207 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\cl}{\operatorname{cl}}
+\title{GST: exact source correction, torsion extensions, and dressing beyond square zero}
+\date{28 October 2026}
+\begin{document}\maketitle
+
+\paragraph{Target and evidence.}
+The original input is an arbitrary smooth projective complex variety $X$,
+a codimension $p$, and a prescribed rational Hodge class
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$.
+The requested output remains a cycle on this same $X$ under its canonical
+Betti cycle map. The results below strengthen the branch's actual
+correction and obstruction laws. They do not assert that an arbitrary $X$
+has a CM source decomposition or a particular transport deck.
+Base revision: \texttt{f8d557bb840134cac00a3fb4267aa5bb611501f2}.
+Lean files are proof drafts, with compilation deliberately left to the owner.
+
+\paragraph{Source dictionary.}
+OpenAI/math revision \texttt{7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a}
+is the external reference. The CM Hodge manuscript's surface criterion
+uses an actual projective surface, rational Hodge maps, a nonzero fourfold
+period and divisor kernels. Its assembly gives a source theorem for CM
+abelian varieties, including powers, not for arbitrary targets.
+The smooth surface immersion manuscript separates approximate construction
+from exact metric correction. We use this separation as a method, and prove
+our finite algebraic correction independently; no analytic smoothing theorem
+is asserted for Chow groups. Projection-body and projection-moment results
+concern real convex geometry and real projection measures. Their estimates
+do not turn a real smooth immersion or a positive projection measure into
+an algebraic correspondence. These source-to-target distinctions are part
+of the mathematical statements, not optional implementation details.
+
+\section{An actual theorem replacing the Round-29 truth-valued stub}
+\begin{theorem}[Torsion through an exact sequence]
+Let $K,A,B$ be abelian groups, $i:K\to A$ and $q:A\to B$ homomorphisms,
+and suppose $\ker q\subseteq\operatorname{im}i$.
+Let $a,b\in\mathbb N$, with $aK=0$ and $bq(A)=0$.
+Then $(ab)A=0$.
+\end{theorem}
+\begin{proof}
+For $x\in A$, $q(bx)=bq(x)=0$, so $bx=i(k)$ for some $k$.
+Thus $abx=ai(k)=i(ak)=0$. No injectivity of $i$ or surjectivity of $q$
+is needed. In particular $a=b=4$ gives $16x=0$.
+\end{proof}
+The product bound cannot generally be replaced by $\operatorname{lcm}(a,b)$:
+take $A=\Z/16$, $K=B=\Z/4$, $i(k)=4k$ and $q$ reduction modulo $4$.
+The class of $1$ has order $16$ while both end terms have exponent $4$.
+For the concentration variant, if every element of $\ker q$ comes from
+a subgroup $K$ and the relevant inflation map is zero, then $\ker q=0$;
+the mixed map is injective. Exactness and vanishing must be actual maps
+and equations, not fields of type \texttt{True}.
+
+\section{Target-dependent correction from independently solved sources}
+Let $V=H^{2p}(X,\Q)\cap H^{p,p}(X)$, retaining its full multiplicity.
+For each of finitely many indices $i$, let $Y_i$ be a smooth projective
+source, $V_i$ its appropriate rational Hodge fiber, and
+$s_i:V\to V_i$, $t_i:V_i\to V$ rational linear maps.
+Require an actual native return $T_i$ on cycles satisfying
+$\cl_X T_i=t_i\cl_{Y_i}$. Independently assume the source classes are
+algebraic. For CM sources this is the place for the checked external CM
+theorem and a canonical comparison; it is not a new axiom on $X$.
+Put $F=\sum_i t_i s_i$ and $N=1-F$. For $v\in V$, choose source cycles
+$z_i(v)$ representing $s_i(v)$, and define
+\[
+ L(v)=\sum_i T_i z_i(v),\qquad
+ Z_n(\alpha)=\sum_{k=0}^{n-1}L(N^k\alpha).
+\]
+The choices need not be linear. Every $Z_n$ is a finite rational cycle on
+the original $X$, explicitly selected from the prescribed $\alpha$.
+\begin{theorem}[Finite correction, with no commutation of source legs]
+For every $n\ge0$,
+\[
+ \cl_X Z_n(\alpha)=\alpha-N^n\alpha.
+\]
+Consequently $N^n\alpha=0$ gives the exact original-$X$ cycle
+$Z_n(\alpha)$. It is enough that nilpotence hold on this target's cyclic
+subspace; global nilpotence or an exact one-step retract is unnecessary.
+\end{theorem}
+\begin{proof}
+Naturality gives $\cl_X L(v)=Fv=v-Nv$. Sum these identities at
+$v=N^k\alpha$; the intermediate terms cancel. This uses powers of the
+single total error $N$, and never commutes individual $t_is_i$.
+\end{proof}
+\begin{theorem}[Polynomial correction, stronger than nilpotence]
+Suppose $c_0,\ldots,c_{r-1}\in\Q$ satisfy
+\[
+ \sum_{k<r}c_kN^k\alpha=0,\qquad d=\sum_{k<r}c_k\ne0.
+\]
+Then the actual rational cycle
+\[
+ Z(\alpha)=d^{-1}\sum_{k<r}c_kZ_k(\alpha)
+\]
+has class $\alpha$. Equivalently, a polynomial annihilating $\alpha$
+under $N$ suffices if its value at $1$ is nonzero.
+\end{theorem}
+\begin{proof}
+The preceding theorem computes the unnormalized class as
+$d\alpha-\sum c_kN^k\alpha=d\alpha$. Divide by the nonzero rational $d$.
+\end{proof}
+\begin{proposition}[Exact surviving obstruction]
+If $Fv=0$ then $N^kv=v$ for every $k$. Therefore a nonzero such $v$
+cannot satisfy the polynomial criterion: the annihilator identity would
+give $dv=0$. In particular, repeating the same source packet cannot
+manufacture a class in its blind subspace.
+\end{proposition}
+\begin{proof}
+$Nv=v-Fv=v$, and induction gives the powers. A vector space over $\Q$
+has no nonzero scalar torsion.
+\end{proof}
+This explicitly executes the CM-source attempt at arbitrary $(X,p,\alpha)$:
+the finite cycles $Z_n(\alpha)$ and their exact residual are constructed.
+The missing geometric implication for universal success is a source packet
+whose error satisfies the displayed criterion at every prescribed target.
+The OpenAI CM theorem by itself supplies no such packet for arbitrary $X$.
+Unrestricted correspondences from a point merely encode the cycle being
+sought; they are not an independent way to obtain the packet.
+
+\section{Cubic dressing: a genuine extension beyond the square-zero span}
+Let $R$ be a unital associative ring and $S\subset R$ an additive subgroup
+such that $xyz=0$ for all $x,y,z\in S$. Assume first that elements of $S$
+commute pairwise. Products $xy$ need not vanish. Define the integral
+polynomial
+\[
+ E_2(x)=1+2x+2x^2.
+\]
+\begin{theorem}[Integral cubic dressing]
+For $x,y\in S$,
+\[
+ E_2(x)E_2(y)=E_2(x+y),\qquad
+ E_2(x)E_2(-x)=E_2(-x)E_2(x)=1.
+\]
+Thus an additive realization into $S$ has a multiplicative lift to
+$R^\times$ without requiring $S^2=0$ and without inverting $2$ in $R$.
+\end{theorem}
+\begin{proof}
+Expand the product:
+$1+2x+2y+2x^2+4xy+2y^2$; all cubic and quartic terms vanish.
+Since $xy=yx$, this is $1+2(x+y)+2(x+y)^2$.
+Substitute $y=-x$ for the inverses. The coefficients are integral;
+over $\Q$ this is the truncated exponential $\exp(2x)$.
+\end{proof}
+In a group action preserving $S$, if $c(g,h)=s(g)+g s(h)-s(gh)$,
+commutativity and the multiplication law give the exact dressed equation
+\[
+ E_2(s(g))\,E_2(g s(h))\,E_2(-s(gh))=E_2(c(g,h)).
+\]
+This is a multiplicative coboundary calculation, not a proof that an
+additive primitive $s$ exists for arbitrary geometric inputs.
+
+\section{The noncommuting boundary is a real additional obstruction}
+For $a,b,c\in\Z$, put
+\[
+ H(a,b,c)=
+ \begin{pmatrix}1&2a&2c+2ab\\0&1&2b\\0&0&1\end{pmatrix}.
+\]
+\begin{theorem}[Exact central correction]
+\[
+ H(a,b,c)H(a',b',c')=
+ H(a+a',b+b',c+c'+ab'-a'b).
+\]
+In particular additive dressing is valid exactly when the alternating
+area $ab'-a'b$ vanishes; dropping commutativity from cubic dressing is false.
+\end{theorem}
+\begin{proof}
+The $(1,3)$ entry of the left side is
+$2c+2ab+2c'+2a'b'+4ab'$.
+The proposed right side has this entry after expanding
+$2(c+c'+ab'-a'b)+2(a+a')(b+b')$. All other entries agree immediately.
+\end{proof}
+For $x=(m,0)$, $y=(0,m)$ the uncorrected product differs from additive
+dressing by the nonzero $(1,3)$ entry $2m^2$, for every $m\ne0$.
+Thus a uniform finite scaling cannot repair this noncommuting defect.
+More intrinsically, $\omega(x,y)=ab'-a'b$ is an additive $2$-cocycle.
+On an abelian group every ordinary coboundary
+$f(x)+f(y)-f(x+y)$ is symmetric in $x,y$, whereas
+$\omega((1,0),(0,1))=1$ and its reverse is $-1$.
+No nonzero integral multiple of $\omega$ is such a coboundary.
+This closes a false route rather than claiming all nonabelian dressing
+constructions are impossible.
+
+\section{Projection correction keeps types separate}
+Let $d:V\to W$ and $h:W\to V$ be linear with $dhd=d$.
+Then $C=1-hd$ satisfies $dC=0$, $C^2=C$, and fixes $\ker d$.
+For any type projector $P$, $CP$ has closed image. This does not imply
+that $CP$ still has the prescribed Hodge type.
+In the branch's Fourier block $V=\Q^2$, $d(a,b)=-b$ and
+$P(a,b)=((a+b)/2,(a+b)/2)$. Choose $h(t)=(0,-t)$.
+Then $CP(a,b)=((a+b)/2,0)$. A vector both closed and fixed by $P$
+must be zero. For the original closed vector $(1,0)$, correcting the
+boundary therefore leaves a nonzero type defect. Smooth metric correction
+does not resolve this simultaneous chain/type/integrality problem.
+
+\paragraph{Review status and novelty.}
+These are complete hand arguments under the displayed assumptions.
+Their Lean encodings have not been compiled. They are extensions relative
+to this branch; no global priority claim is made. The torsion lemma,
+finite resolvent, truncated exponential and Heisenberg cocycle are familiar
+algebraic mechanisms. The contribution here is their explicit integration,
+target-dependent native-cycle formulas, removal of truth-valued stubs,
+and the precise extra obstruction beyond the existing square-zero law.
+\end{document}

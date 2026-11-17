@@ -1,0 +1,143 @@
+{
+  "assertion_tested": "Exact polynomial finite-shear expansion and Gaussian recurrence for every integer n=1..512",
+  "coefficient_domain": "Q[a1,a2,a3,b1,b2,b3,d1,d2,i,t] and Z[i]",
+  "polynomial_remainders": [
+    0,
+    0
+  ],
+  "quadratic_signs": {
+    "real": "-(i*i+1)*t*t*d1*d2*a3",
+    "imag": "+(i*i+1)*t*t*d1*d2*b3"
+  },
+  "gaussian_exponents_visited": 512,
+  "gaussian_first_twelve": [
+    [
+      1,
+      2,
+      1,
+      4,
+      0
+    ],
+    [
+      2,
+      3,
+      4,
+      1,
+      0
+    ],
+    [
+      3,
+      2,
+      11,
+      4,
+      0
+    ],
+    [
+      4,
+      -7,
+      24,
+      1,
+      0
+    ],
+    [
+      5,
+      -38,
+      41,
+      4,
+      0
+    ],
+    [
+      6,
+      -117,
+      44,
+      1,
+      0
+    ],
+    [
+      7,
+      -278,
+      -29,
+      4,
+      0
+    ],
+    [
+      8,
+      -527,
+      -336,
+      1,
+      0
+    ],
+    [
+      9,
+      -718,
+      -1199,
+      4,
+      0
+    ],
+    [
+      10,
+      -237,
+      -3116,
+      1,
+      0
+    ],
+    [
+      11,
+      2642,
+      -6469,
+      4,
+      0
+    ],
+    [
+      12,
+      11753,
+      -10296,
+      1,
+      0
+    ]
+  ],
+  "direct_sum_line_bundle_Atiyah_coordinate": {
+    "U1^U2": "1/2",
+    "V1^V2": "1/2"
+  },
+  "direct_sum_nine_parameter_obstruction": {
+    "coefficient_domain": "Q(i), pairs of exact Fractions",
+    "shape": [
+      24,
+      9
+    ],
+    "rank_growth_AAA_ABB_BAB_BBA": [
+      3,
+      5,
+      6,
+      6
+    ],
+    "pivot_columns_zero_based": [
+      1,
+      2,
+      3,
+      5,
+      6,
+      7
+    ],
+    "kernel_basis_columns_zero_based": [
+      0,
+      4,
+      8
+    ],
+    "kernel": [
+      "t11",
+      "t22",
+      "t33"
+    ],
+    "mixed_pair_minor": "(1-i)/4",
+    "six_direction_minor": "-(1+i)/32",
+    "scope": "Necessary obstruction map of line-bundle direct summands; not the full Atiyah map of every representative of the K0 class"
+  },
+  "non_claims": [
+    "No construction of a nonsplit relative perfect complex",
+    "No counterexample to the rational Hodge conjecture",
+    "Finite powers alone do not prove the all-n theorem",
+    "Atiyah interpretation uses the stated geometric comparison"
+  ]
+}

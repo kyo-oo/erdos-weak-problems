@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "claim_id": "SECANT-FULL-INVARIANT-OBSTRUCTION-RANK-20261018",
+  "repository": {
+    "commit": "4a1c4c50292c0622c48ca2debd4183028cd7df37",
+    "dirty": false
+  },
+  "command": "timeout 120s python3 research/computations/secant_obstruction_rank.py",
+  "environment": {
+    "software": [
+      "Python 3.12.14; standard-library exact Fraction and sparse Q[n] exterior arithmetic"
+    ],
+    "hardware": "Linux container; hardware unreported"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact 48-by-48 contraction detector for the product of two genus-three Abel-orbit ideals has determinant n^42. One-factor detectors have determinant -n^3; ordered factorwise imbalance gives the matching rank upper bound 48.",
+    "coefficient_domain": "Q[n], n an indeterminate; no floating point or sampled orbit order",
+    "conventions": "Per-factor exterior order u0,u1,u2,w0,w1,w2; first factor before second; left interior at wi includes its sign past u factors; f_n=1-n*theta^2/2+n*theta^3/3.",
+    "inputs": [
+      "research/computations/secant_obstruction_rank.py"
+    ],
+    "bounds": {
+      "one_factor_generators": 6,
+      "product_generators": 12,
+      "one_factor_HT_degrees": [
+        1,
+        2
+      ],
+      "detector_shape": [
+        48,
+        48
+      ],
+      "all_detector_entries": 2304,
+      "product_source_columns_selected": 48,
+      "full_product_HT2_dimension": 66,
+      "symbolic_parameters": [
+        "n"
+      ],
+      "excluded_specialization": "n=0",
+      "geometric_orbit_order": "n=d+1 with d=176400*d0, d0 a positive integer",
+      "wall_time_cap_seconds": 120,
+      "cpu_memory_caps": "not additionally imposed"
+    },
+    "non_claims": [
+      "Does not identify actual derived Ext groups or prove the Hochschild--Atiyah identity.",
+      "Does not construct geometric cycles, prove analytic effectivity, or establish period spread by computation.",
+      "Does not instantiate the canonical Betti map in Lean."
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-17T22:30:29.858009+00:00",
+    "runtime_seconds": 0.04210106200002883,
+    "exit_status": 0
+  },
+  "outputs": [
+    {
+      "path": "research/computations/secant_obstruction_rank.output.txt",
+      "sha256": "92d351eac1861039afeb1a8bdd0f13be1fc9dc7d6f1b9935626faa1745fa7f09"
+    }
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/secant_obstruction_rank.py",
+      "sha256": "8810947aa34cb61e55d51edeb78de378a03cff6c0e60b1b3bd20e27c4dc31bb8"
+    }
+  ],
+  "checks": [
+    "Computed actual contractions in the twelve-generator exterior algebra.",
+    "Compared all 2304 entries of the selected matrix with the independent three-block Kronecker construction.",
+    "Verified both six-dimensional one-factor diagonal detectors, all target c2 basis terms, and every off-diagonal zero.",
+    "Verified product determinant exactly n^42 and all 48 nonzero diagonal monomials."
+  ],
+  "result": "Exact symbolic determinant n^42; an explicit diagonal right inverse exists over Q[n,n^-1]. Geometric specialization has n>0. No finite list of n values is substituted for a universal identity.",
+  "residual_risks": [
+    "Custom exterior and polynomial implementation; cross-checked against independent factorwise Kronecker multiplication and the manuscript basis derivation.",
+    "The rank upper bound and identification with actual Hodge/Ext maps are separate written mathematical arguments.",
+    "Version 1 has legacy machine-provenance limitations; argv, before/after input hash, wall timeout and actual interpreter were explicitly recorded by this host wrapper."
+  ]
+}

@@ -142,3 +142,23 @@ These are the classical elementary two-sided bounds of the problem — the
 complete elementary theory below the asymptotic frontier.
 
 The engine never stops; it never lies.
+
+---
+
+## THE BEHREND PILLAR (W72-142K, S071)
+
+**Theorem B (explicit Behrend).** For all $d \geq 1$, $m \geq 2$, $B = 2m$:
+there is a 3-AP-free $S \subseteq [0, B^d)$ with
+$|S| \geq \frac{m^d}{(d(m-1)+1)(d(m-1)^2+1)}$; hence for $N \geq B^d$,
+$r_3(N) \geq \frac{m^d}{(d(m-1)+1)(d(m-1)^2+1)}$. With the optimization
+$d = \lfloor\sqrt{3\ln N/\ln 2}\rfloor$, $m = \lfloor N^{1/d}/2 \rfloor$:
+$r_3(N) \geq N\exp(-(2\sqrt{3\ln 2}+o(1))\sqrt{\ln N})$.
+
+Full six-step derivation, the no-carry law, the sphere lemma, the certified
+instance table, the Cantor ternary family + the $\mathbb{F}_3^d$ cap-set
+bridge, and the 18 arsenal-law citations:
+**BEHREND_PROOF.md** (this directory). Engine:
+`engine142behrend.py --verify` — 8/8 GREEN (`receipts142behrend.txt`),
+including the three-way $r_3$ table agreement and the 18/18 arsenal law
+spot-checks. The OFFICIAL DeepMind comparator lane (fresh
+google-deepmind/funsearch clone): `comparator-official/challenges/142/`.

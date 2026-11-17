@@ -1,0 +1,142 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-ORIGINAL-X-SMOOTH-CENTERS-20261020",
+  "repository": {
+    "commit": "ae647d8b46d55256f0320255df0d2fbb6ac786ad",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "research/computations/gst_original_x_smooth_incidence_centers.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      }
+    ],
+    "hardware": "x86_64; Linux-6.18.55-x86_64-with-glibc2.39; host CPU model unrecorded"
+  },
+  "mathematics": {
+    "assertion_tested": "Formal symmetric Chern interpolation against independent Newton recursion p=1..12; projective degree and determinantal smoothness arithmetic n=1..24; sharp codimension-two energy; explicit degree-2..20 hypersurface source; actual eight-generator Weil exterior null test",
+    "coefficient_domain": "Q[c1,...,cp] and exact rational exterior algebra; no floating point",
+    "conventions": "Chern class grades are complex codimensions; incidence uses X times P^(n-p); proper blowup sign (-1)^(center codimension-1); ordered exterior basis u1,v1,...,u4,v4 with polarization signs +,+,-,-",
+    "inputs": [
+      "research/computations/gst_original_x_smooth_incidence_centers.py",
+      "GSTUniversalResolvedSupportHodge.lean",
+      "GSTActualXHodgeResidualProjection.lean",
+      "GSTMaximalLinearHypersurfacePrimitive.lean",
+      "research/computations/gst_original_x_incidence_wolfram.wl",
+      "research/computations/gst_original_x_incidence_wolfram.output.txt"
+    ],
+    "bounds": {
+      "codimensions_inclusive": [
+        1,
+        12
+      ],
+      "original_dimensions_inclusive": [
+        1,
+        24
+      ],
+      "dimension_pairs_visited": 300,
+      "energy_grid_points": 625,
+      "hypersurface_degrees_inclusive": [
+        2,
+        20
+      ],
+      "Weil_exterior_generators": 8,
+      "Weil_test_bundle_ranks": [
+        4,
+        8,
+        12,
+        24
+      ],
+      "Weil_test_twists": [
+        1,
+        3,
+        7
+      ],
+      "timeout_seconds": 30
+    },
+    "non_claims": [
+      "No universal algebraic bundle or center detecting each prescribed residual is constructed",
+      "Finite Chern identities are not the unrestricted geometric theorem",
+      "The intrinsic tangent null test is not a no-go for other bundles or all GST centers"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T07:59:30.469303+00:00",
+    "runtime_seconds": 0.15981154499968397,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": 1,
+      "max_threads": 1
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_original_x_smooth_incidence_centers.output.json",
+      "sha256": "167df68d34685a8c4c65a729be9944d6ecf1d96c97ecab75a5a551b8eeb6eb6f",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Every coefficient of each full formal interpolation polynomial equals the independently computed Newton character",
+    "All 300 enumerated dimension pairs use the exact projective push coefficient and correct lower-rank-stratum codimension",
+    "Sharp two-center energy identity and lower bound hold for all 625 visited rational pairs",
+    "All 19 equation-driven source degrees have the predicted nonzero period, ample degree and blowup feedback",
+    "Actual exterior multiplication gives primitive Weil Gram diag(8,8) and zero tangent-derived center period for every visited bundle rank/twist",
+    "Source contains no floating numeric literals; rational division used for the half-character period",
+    "All pinned input bytes unchanged during execution"
+  ],
+  "result": "Implementation and the exact finite assertions passed. Universal prescribed-residual source selection is not established; the intrinsic tangent candidate fails the stated nonzero target test.",
+  "residual_risks": [
+    "The smooth center existence, rank compression, Bertini, Chow/Betti comparison and all-p interpolation use the separate geometric proof; Python does not instantiate schemes",
+    "The primitive untwist law requires true Lefschetz primitiveness, not just the name of a residual function",
+    "The generic Lean source laws do not assert a detecting algebraic bundle exists universally"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/gst_original_x_smooth_incidence_centers.py",
+      "sha256": "00850a0d3674a749a7083d02ee7f1e969e00044d1c5ff388a9bcb7065c4816dd",
+      "sha256_after": "00850a0d3674a749a7083d02ee7f1e969e00044d1c5ff388a9bcb7065c4816dd"
+    },
+    {
+      "path": "GSTUniversalResolvedSupportHodge.lean",
+      "sha256": "c7d84c9ba45c6501713a117f576974b4bfc61cdda9c04370cd42b825fe7e7d67",
+      "sha256_after": "c7d84c9ba45c6501713a117f576974b4bfc61cdda9c04370cd42b825fe7e7d67"
+    },
+    {
+      "path": "GSTActualXHodgeResidualProjection.lean",
+      "sha256": "1e6d4c61f7a3684a3f0feb6630332cff3ae129152af204a7fe6fa1fb32feb0a3",
+      "sha256_after": "1e6d4c61f7a3684a3f0feb6630332cff3ae129152af204a7fe6fa1fb32feb0a3"
+    },
+    {
+      "path": "GSTMaximalLinearHypersurfacePrimitive.lean",
+      "sha256": "01c60768119c945efa2a08f952fcd5a2cb281ef794eb074762a93347801bd49d",
+      "sha256_after": "01c60768119c945efa2a08f952fcd5a2cb281ef794eb074762a93347801bd49d"
+    },
+    {
+      "path": "research/computations/gst_original_x_incidence_wolfram.wl",
+      "sha256": "ef547ab22b431e2f4dbb160c7c36a394373cbb5c4238a652b003e1b45fdd904d",
+      "sha256_after": "ef547ab22b431e2f4dbb160c7c36a394373cbb5c4238a652b003e1b45fdd904d"
+    },
+    {
+      "path": "research/computations/gst_original_x_incidence_wolfram.output.txt",
+      "sha256": "ad53b144c0b2db1e77082be0859cf786758b8134a60c23278e697c68cb1ab543",
+      "sha256_after": "ad53b144c0b2db1e77082be0859cf786758b8134a60c23278e697c68cb1ab543"
+    }
+  ],
+  "declared_results": [
+    "research/computations/gst_original_x_smooth_incidence_centers.output.json"
+  ]
+}

@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\title{GST: All rank-optimal finite incidence folds generate exactly the original divisor Chow algebra}
+\date{23 October 2026}
+\begin{document}\maketitle
+Let X be any smooth connected projective complex d-fold.
+Every finite surjective morphism f:X to projective d-space
+produces the dimension-OPTIMAL Stein affine-space GST
+incidence fold of rank d, as proved in the companion
+mathematical source
+\texttt{GST\_optimal\_rank\_universal\_stein\_fold\_trace\_residual\_2026-10-23.tex}.
+Write h_f=c_1^{CH}(f^*O_{\mathbb P^d}(1)).
+Let D^p_{\rm div}(X) denote the rational span in the
+ACTUAL original-X Chow group CH^p(X) of all p-fold
+products of algebraic divisor classes.
+
+\begin{theorem}[Every geometric minimal-fold source, exact span]
+For every X and every p in 0,...,d, the entire family of
+all finite-projective incidence-fold base sources satisfies
+\[
+ \boxed{\operatorname{span}_{\mathbb Q}
+ \{h_f^p:f:X\to\mathbb P^d\text{ finite surjective}\}
+ =D^p_{\rm div}(X).}                                     \tag{1}
+\]
+This is a theorem in CHOW, hence also after the actual
+canonical rational Betti cycle-class map.
+\end{theorem}
+\begin{proof}
+Every h_f is the first Chern class of an ample
+line bundle, giving the direct inclusion.
+Conversely take arbitrary algebraic rational
+divisor classes lambda_1,...,lambda_p on X.
+Choose an ample rational class A and a small positive
+rational epsilon such that
+$A_S=A+\varepsilon\sum_{i\in S}\lambda_i$
+is ample for every subset S of {1,...,p}.
+Since pth powers form a homogeneous polynomial
+of degree p in the genuine commutative Chow ring,
+multivariate inclusion-exclusion gives the EXACT equality
+\[
+ \boxed{p!\varepsilon^p\prod_{i=1}^{p}\lambda_i
+  =\sum_{S\subseteq\{1,\ldots,p\}}
+       (-1)^{p-|S|}A_S^p.}                                \tag{2}
+\]
+Every monomial missing some lambda_i cancels;
+the unique survivor is the product with each
+lambda_i exactly once and coefficient p!.
+For each ample rational A_S there is a positive
+integer m_S so m_S A_S is very ample.
+Choose a generic (d+1)-dimensional
+basepoint-free linear subsystem; it yields a
+finite surjective f_S:X to P^d with
+$f_S^*O(1)=O_X(m_S A_S)$.
+The map is finite since a positive-dimensional
+fiber would contradict ampleness of its
+pullback of O(1). Therefore
+$A_S^p=m_S^{-p}h_{f_S}^p$.
+Substitute into (2), obtaining the other inclusion.
+In codimension p=0 the class is the unit, also
+obtained from any finite morphism.
+\end{proof}
+
+\begin{corollary}[Direct original-X algebraic output]
+For EVERY rational divisor monomial
+$\gamma=\lambda_1\cdots\lambda_p$, the cycle
+\[
+ Z_\gamma=\frac{1}{p!\varepsilon^p}
+ \sum_{S\subseteq\{1,\ldots,p\}}
+ (-1)^{p-|S|}m_S^{-p}h_{f_S}^p
+       \in CH^p(X)_{\mathbb Q}                             \tag{3}
+\]
+is genuinely constructed from the spatial finite maps,
+satisfies $Z_\gamma=\prod_i\lambda_i$ as an
+ACTUAL Chow equality, and has canonical rational
+Betti class gamma. Rational linear combinations
+generate all divisor-algebra Hodge directions,
+in arbitrary original dimensions/codimensions.
+\end{corollary}
+
+Equation (1) also sharply characterizes the source
+scope of the entire family: variation over ALL
+dimension-optimal base-incidence folds cannot
+generate an independent rational Hodge class
+outside the divisor algebra by merely taking
+linear combinations of its base trace outputs.
+This conclusion refers only to that exact
+GEOMETRIC operation, not to independent nonlinear,
+nonabelian or ramification sources in GST.
+\end{document}

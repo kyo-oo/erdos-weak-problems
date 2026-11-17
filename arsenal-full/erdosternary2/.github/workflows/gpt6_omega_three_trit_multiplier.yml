@@ -1,0 +1,36 @@
+name: GPT6 GST Two-Parameter Infinite Delayed Escape Kernel
+on:
+  push:
+    branches:
+      - gpt6/erdos-omega-terminal-normalform-20261029
+    paths:
+      - GSTOmegaThreeTritMultiplierLaw.lean
+      - .github/workflows/gpt6_omega_three_trit_multiplier.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and Worldtrace parent modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectResidue
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaArbitraryDelay.olean GSTOmegaArbitraryDelay.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaExactDelayedEscape.olean GSTOmegaExactDelayedEscape.lean
+      - name: Verify for all u and all L >= 5 without finite cutoff
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTOmegaThreeTritMultiplierLaw.lean 2>&1 | tee gst-2parameter.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gst-2parameter.log
+          echo GST_OMEGA_2PARAMETER_UNBOUNDED_KERNEL_GREEN=1

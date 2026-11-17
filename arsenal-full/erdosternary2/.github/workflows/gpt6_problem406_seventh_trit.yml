@@ -1,0 +1,40 @@
+name: GPT6 Problem406 Seventh Trit Worldtrace Same-Row Kernel
+on:
+  push:
+    branches:
+      - gpt6/problem406-seventh-trit-worldtrace-20261029
+    paths:
+      - GSTProblem406HGateSeventhTrit.lean
+      - .github/workflows/gpt6_problem406_seventh_trit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  seventh:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and build actual GST physical source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectCreationMaster GSTFourPowerThirdWave
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaArbitraryDelay.olean GSTOmegaArbitraryDelay.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaExactDelayedEscape.olean GSTOmegaExactDelayedEscape.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaThreeTritMultiplierLaw.olean GSTOmegaThreeTritMultiplierLaw.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaResidueClassExit.olean GSTOmegaResidueClassExit.lean
+          lake env lean -o .lake/build/lib/lean/GSTProblem406HGateCoreClass.olean GSTProblem406HGateCoreClass.lean
+          lake env lean -o .lake/build/lib/lean/GSTProblem406HGateCoreIntegration.olean GSTProblem406HGateCoreIntegration.lean
+      - name: Kernel-check newly discovered seventh-trit physical CommonTwo and original gate integration
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406HGateSeventhTrit.lean 2>&1 | tee seventh-trit-kernel.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' seventh-trit-kernel.log
+          echo GST_406_SEVENTH_TRIT_58_UNBOUNDED_CLASSES_PASS=1

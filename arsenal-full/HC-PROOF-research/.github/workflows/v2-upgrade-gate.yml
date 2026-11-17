@@ -1,0 +1,97 @@
+name: HC V2 Upgrade Gate
+
+on:
+  push:
+    branches:
+      - main
+      - sol/limitless-cosmology-bursts
+    paths:
+      - 'CardinalWorldsV2.lean'
+      - 'waves/CardinalWorldsPostulateLawV2.lean'
+      - 'waves/GSTWaveCohomologyV2.lean'
+      - 'waves/GSTNCohomologyV2.lean'
+      - 'waves/GSTVortexSingularityV2.lean'
+      - 'HodgeDeRhamBridgeV2.lean'
+      - 'GSTAnalyticAbsorptionV2.lean'
+      - 'GSTLefschetzCrownV2.lean'
+      - 'GSTHodgeAssaultV2.lean'
+      - 'GSTClayOfficialV2.lean'
+      - 'GSTTransferBridgeV2.lean'
+      - '.github/workflows/v2-upgrade-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hc-v2-upgrade-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  v2-upgrade:
+    name: V2 strengthened theorem compile matrix
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 1
+
+      - name: Install Lean and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile strengthened layers independently
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build \
+            CardinalWorldsV2 \
+            waves.CardinalWorldsPostulateLawV2 \
+            waves.GSTWaveCohomologyV2 \
+            waves.GSTNCohomologyV2 \
+            waves.GSTVortexSingularityV2 \
+            HodgeDeRhamBridgeV2 \
+            GSTAnalyticAbsorptionV2 \
+            GSTLefschetzCrownV2 \
+            GSTHodgeAssaultV2 \
+            GSTClayOfficialV2 \
+            GSTTransferBridgeV2 2>&1 | tee v2-upgrade.log
+
+      - name: Reject proof escapes in strengthened layers
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            CardinalWorldsV2.lean
+            waves/CardinalWorldsPostulateLawV2.lean
+            waves/GSTWaveCohomologyV2.lean
+            waves/GSTNCohomologyV2.lean
+            waves/GSTVortexSingularityV2.lean
+            HodgeDeRhamBridgeV2.lean
+            GSTAnalyticAbsorptionV2.lean
+            GSTLefschetzCrownV2.lean
+            GSTHodgeAssaultV2.lean
+            GSTClayOfficialV2.lean
+            GSTTransferBridgeV2.lean
+          )
+          if grep -nE '^[[:space:]]*(axiom|sorry|admit)[[:space:]]' "${files[@]}"; then
+            exit 1
+          fi
+          echo V2_PROOF_ESCAPE_CHECK=PASS
+
+      - name: Upload V2 diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: v2-upgrade-diagnostics
+          path: v2-upgrade.log
+          if-no-files-found: ignore

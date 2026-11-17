@@ -1,0 +1,69 @@
+name: GST Even Quadric Primitive Ruling Geometry
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTQuadricPrimitiveRulingGeometry.lean'
+      - '.github/workflows/gst-quadric-primitive-ruling-geometry.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-quadric-ruling-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-quadric-ruling
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel-check all-dimensional primitive ruling algebra
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTQuadricRulingGeometry"
+          roots = ["GSTQuadricPrimitiveRulingGeometry"]
+          EOF
+          if lake build GSTQuadricRulingGeometry > quadric-ruling-lean.log 2>&1; then
+            echo "LEAN PASSED: full primitive rational ruling construction all even quadric dimensions"
+          else
+            grep -nE 'error:|sorryAx|✖' quadric-ruling-lean.log | tail -n 130 || true
+            tail -n 100 quadric-ruling-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" quadric-ruling-lean.log; then
+            exit 1
+          fi
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-quadric-ruling-lean-log
+          path: quadric-ruling-lean.log
+          if-no-files-found: warn

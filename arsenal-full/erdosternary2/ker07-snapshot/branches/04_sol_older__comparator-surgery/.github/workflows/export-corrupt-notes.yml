@@ -1,0 +1,38 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0687 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/export-corrupt-notes.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 20:46:05 +0530  (d989b8e)
+#    Last-commit  : 2026-08-16 20:46:05 +0530  (d989b8e)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 20:46:05 +0530  d989b8e  (ker07-dev)
+#        Export corrupt bridge notes for exact inspection
+# ======================================================================
+
+name: Export corrupt bridge notes
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+
+jobs:
+  export:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Pack bridge notes
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/bridge-notes
+          find . -type f \( -iname '*BERSERKER*' -o -iname '*PARADOX*MIRROR*' -o -iname '*BAD*REFLECTION*' -o -iname '*FIRST*EXIT*' \) -print0 | xargs -0 -r cp --parents -t /tmp/bridge-notes
+          tar -C /tmp/bridge-notes -czf bridge-notes.tgz .
+          sha256sum bridge-notes.tgz
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bridge-notes
+          path: bridge-notes.tgz
+          if-no-files-found: error

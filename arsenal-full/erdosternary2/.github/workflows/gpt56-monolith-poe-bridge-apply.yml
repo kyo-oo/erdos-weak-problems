@@ -1,0 +1,133 @@
+name: SOL56 Direct Four-Power Arithmetic Verify
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  direct-arithmetic-kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+
+      - name: Prepare direct arithmetic output directory
+        shell: bash
+        run: mkdir -p .lake/build/lib/lean
+
+      - name: Compile pure direct residue arithmetic
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectResidue.olean GSTFourPowerDirectResidue.lean 2>&1 | tee direct-residue.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-residue.log
+
+      - name: Compile exact exponent period
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerExactExponentPeriod.olean GSTFourPowerExactExponentPeriod.lean 2>&1 | tee exact-period.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' exact-period.log
+
+      - name: Compile exact mod-27 residue classifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectResidue27.olean GSTFourPowerDirectResidue27.lean 2>&1 | tee direct-residue27.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-residue27.log
+
+      - name: Compile exact mod-81 residue classifier
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectResidue81.olean GSTFourPowerDirectResidue81.lean 2>&1 | tee direct-residue81.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-residue81.log
+
+      - name: Compile direct binary carry automaton
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectAdditionCarry.olean GSTFourPowerDirectAdditionCarry.lean 2>&1 | tee direct-addition-carry.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-addition-carry.log
+
+      - name: Compile direct no-common 22 obstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectNo22.olean GSTFourPowerDirectNo22.lean 2>&1 | tee direct-no22.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-no22.log
+
+      - name: Compile exponent-trit obstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerExponentTritObstruction.olean GSTFourPowerExponentTritObstruction.lean 2>&1 | tee direct-trit.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-trit.log
+
+      - name: Compile direct existence spine
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectExistence.olean GSTFourPowerDirectExistence.lean 2>&1 | tee direct-existence.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-existence.log
+
+      - name: Compile canonical tail state prerequisite
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTCanonicalTailStateIso.olean GSTCanonicalTailStateIso.lean 2>&1 | tee canonical-tail-state.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' canonical-tail-state.log
+
+      - name: Compile affine direct classifier chain
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in \
+            GSTFourPowerAffineOrbit \
+            GSTFourPowerAffineExponentPeel \
+            GSTFourPowerAffineBadState \
+            GSTFourPowerAffineChannelAutomaton \
+            GSTFourPowerAffineClassifierBridge \
+            GSTFourPowerAffinePeelClassifier \
+            GSTFourPowerAffineTwoTritClassifier
+          do
+            lake env lean -o ".lake/build/lib/lean/${module}.olean" "${module}.lean" 2>&1 | tee "${module}.log"
+            ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' "${module}.log"
+          done
+          echo 'DIRECT_AFFINE_TWO_TRIT_CLASSIFIER_KERNEL_GREEN=1'
+
+      - name: Compile direct failed-relocation state
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectFailedRelocationState.olean GSTFourPowerDirectFailedRelocationState.lean 2>&1 | tee direct-failed-relocation.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-failed-relocation.log
+
+      - name: Compile direct physical Happy bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectHappyBridge.olean GSTFourPowerDirectHappyBridge.lean 2>&1 | tee direct-happy.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' direct-happy.log
+
+      - name: Audit conditional propagation adapter
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > SOL56Task33AdapterAudit.lean <<'EOF'
+          import GSTFourPowerDirectHappyBridge
+          #check GSTFourPowerDirectHappyBridge.four_power_happy_propagates
+          #print axioms GSTFourPowerDirectHappyBridge.four_power_happy_propagates
+          EOF
+          lake env lean SOL56Task33AdapterAudit.lean 2>&1 | tee task33-adapter-axioms.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown constant|unsolved goals|error:' task33-adapter-axioms.log
+          echo 'TASK33_CONDITIONAL_ADAPTER_AXIOM_AUDIT_GREEN=1'

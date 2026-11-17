@@ -1,0 +1,23 @@
+name: GPT6 GST 140804-Core Exact Certificate
+on:
+  push:
+    branches:
+      - gpt6/erdos-worldtrace-block-lift-20261029
+    paths:
+      - scripts/gpt6_fixed_core_140804_certificate.py
+      - .github/workflows/gpt6_fixed_core_140804_certificate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-certificate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exhaustive 30-trit GST coefficient and 4-million initial scale cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/gpt6_fixed_core_140804_certificate.py | tee gst-core140804.txt
+          grep -Fq 'GST_FIXED_CORE_140804_CERTIFICATE_PASS=1' gst-core140804.txt

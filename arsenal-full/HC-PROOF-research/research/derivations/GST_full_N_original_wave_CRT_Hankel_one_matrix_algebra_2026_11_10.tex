@@ -1,0 +1,187 @@
+\documentclass[11pt]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Res}{\operatorname{Res}}
+\newcommand{\Span}{\operatorname{span}}
+\title{GST full N-wave source: an unconditional all-N cyclic Hankel and full adjoint-closed operator algebra}
+\date{10 November 2026}
+\begin{document}\maketitle
+
+\section{Exact source and relation to the Hodge hypothesis}
+This theorem starts from the \emph{owner's original} twelve-state seven-axis fold, CM phase and Wave-I SURVIVE source in \texttt{GSTGraphV2CMWaveFusion.lean}, and the original arbitrary-N Wave-II channels in \texttt{GSTGraphV2WaveNShapeCompiler.lean}. It makes no change of mathematical theory, no artificial physical dimension, no substitution of a classical K3/CM geometric example, and no assumption that an unknown rational Hodge class has an algebraic representative.
+
+The \emph{universal Hodge theorem} remains the conditional result \texttt{GSTHodgeSingleHypothesisConditional.exactHodge_of_one_GST_fold_orbit}: a \emph{genuine original-X algebraic} GST fold with full cyclic Hodge orbit in every weight implies all rational Hodge classes algebraic. The results below remove the cyclicity obstruction \emph{inside the original GST all-N information system}, and prove that system has the full rational endomorphism algebra using its own original fold and source. They do not identify that information representation with canonical Chow correspondences on arbitrary X. That realization is the exact typed boundary.
+
+\section{The owner's unchanged twelve-cell laws}
+Let
+\[
+ \mathscr I=\{0,1,2,3\}\times\{0,1,2\},\quad
+ \mathscr V=\Q^{\mathscr I},\quad
+ f(C,d)=\left(\left\lfloor\frac{C+4d}{3}\right\rfloor,(C+4d)\bmod3\right).
+\]
+The exact GST information fold is $(Uu)(s)=u(f(s))$, with $U^5=I$. The mirror $m(C,d)=(3-C,2-d)$ and original phase $\sigma(s)\in\{\pm1\}$ define $(Ju)(s)=\sigma(s)u(m(s))$, with $J^2=-I$ and $UJ=JU$.
+
+Let $M$ be multiplication by the \emph{original} seven-axis microscopic SURVIVE multiplicity (not a new parameter):
+\[
+ \mu(C,d)=
+ {\bf1}_{d=2}{\bf1}_{\mathrm{mid}(C,d)=2}
+ +{\bf1}_{\mathrm{mid}(C,d)=2}
+  {\bf1}_{\mathrm{fin}(C,d)=2},
+\quad
+\mathrm{mid}(C,d)=\left(\lfloor C/2\rfloor+2d\right)\bmod3,
+\quad
+\mathrm{fin}(C,d)=\left((C\bmod2)+2\,\mathrm{mid}(C,d)\right)\bmod3.
+\]
+Put $T_0=U+J+M$ and take the original GST seed $v_0$ with value $1$ at $(0,0)$ and $(0,1)$, zero elsewhere. All matrices use carry-major, digit-minor order.
+
+The \emph{exact} characteristic polynomial calculated independently from these definitions is
+\[
+\begin{split}
+ \chi(t)={}&t^{12}-6t^{11}+18t^{10}-40t^9+69t^8-98t^7
+  +123t^6-104t^5\\
+ &+6t^4+62t^3+20t^2-56t+16.
+\end{split}
+\]
+The exact GST base Krylov certificate is
+\[
+ \boxed{\Delta_{12}:=\det[v_0,T_0v_0,\ldots,T_0^{11}v_0]
+ =-1\,149\,656\,584\,000\ne0.}\tag{1}
+\]
+The integer coefficient and determinant are exact, not floating estimates. Each row of $T_0$ has absolute row-sum at most $4$. The original permutation/signed-mirror source laws also give
+\[
+ \boxed{U^\top=U^4,\quad J^\top=-J,\quad M^\top=M,\quad
+ T_0^\top=U^4-J+M.}\tag{2}
+\]
+
+\section{The arbitrary-N theorem and exact resultant formula}
+Fix any GST NShape $s$ with $N:=s.\mathrm{holes}\ge1$ and distinct integer labels
+$c_i=\operatorname{channel}_s(i)\in\mathbb N$; their injectivity is the already proven \texttt{GSTNCohomology.channel\_embedding} law. Put $\delta_i=10c_i$,
+\[
+ \mathscr V_N=(\Q^{12})^N,\qquad
+ T_N=I_N\otimes T_0+\operatorname{diag}(\delta_1,\ldots,\delta_N)\otimes I_{12},
+ \quad v_N=(v_0,\ldots,v_0).
+\]
+This is \emph{exactly} the old \texttt{shiftedNShapeFold} and \texttt{uniformNShapeSeed}, not the optional new nearest-neighbor mixer.
+
+\begin{theorem}[Full N-wave source cyclicity and exact polynomial-resultant law]
+For EVERY finite GST NShape of positive hole count,
+\[
+ \boxed{\Span_\Q\{v_N,T_Nv_N,\ldots,T_N^{12N-1}v_N\}=\mathscr V_N.}\tag{3}
+\]
+More sharply, writing
+\(\chi_i(t)=\chi(t-\delta_i)\)
+for the $i$th shifted characteristic polynomial and
+\(\mathcal K_N=[v_N,T_Nv_N,\ldots,T_N^{12N-1}v_N]\), one has the \emph{exact rational determinant formula}
+\[
+ \boxed{
+ \det\mathcal K_N=
+ \Delta_{12}^{\,N}\prod_{1\le i<j\le N}\Res_t(\chi_i(t),\chi_j(t))
+ \ne0.}\tag{4}
+\]
+In particular there is no missing N-hole information channel or original carry/trit cell in the full single-fold orbit.
+\end{theorem}
+\begin{proof}
+The single-block Krylov determinant (1) makes the map
+\(q(t)\bmod\chi\longmapsto q(T_0)v_0\)
+an isomorphism of rational cyclic modules $\Q[t]/\chi\to\Q^{12}$.
+For the shifted block $T_0+\delta_i I$, the same seed is cyclic, and its $12\times12$ Krylov matrix has the same determinant $\Delta_{12}$ because each $(T_0+\delta_i I)^kv_0$ is a monic triangular rational combination of the vectors $T_0^jv_0$ for $j\le k$.
+The full orbit map from polynomials of degree $<12N$ is the direct sum of evaluation modulo $\chi_i$, followed by the block cyclic isomorphisms.
+
+The maximum absolute row-sum is $4$, so the standard spectral radius bound gives every complex eigenvalue $\lambda$ of $T_0$ the bound $|\lambda|\le4$. If two shifted spectra intersect, one has $\delta_i+\lambda=\delta_j+\mu$ with $|\lambda|,|\mu|\le4$, hence
+\(10\le|\delta_i-\delta_j|=|\mu-\lambda|\le8\), contradiction.
+Thus the shifted monic polynomials $\chi_i$ are pairwise coprime over $\Q$. Chinese remainder yields a rational isomorphism
+\[
+ \Q[t]/\prod_i\chi_i \;\simeq\;\bigoplus_i\Q[t]/\chi_i,
+\]
+so the orbit map is invertible. Its determinant is the product of the block Krylov determinants $\Delta_{12}^N$ and the determinant of the polynomial Chinese-remainder coefficient map. The latter equals the product of pairwise resultants with sign $(-1)^{12^2\binom N2}=+1$ under the stated ordered power and hole bases. This proves (4) and (3).
+\end{proof}
+
+
+\begin{corollary}[Quantitative full-N spectral separation]
+The exact nonvanishing is uniform, not a finite-N coincidence:
+\[
+ \boxed{
+ |\Res(\chi_i,\chi_j)|\ge 2^{144}\quad(i\ne j),\qquad
+ |\det\mathcal K_N|\ge
+ (1\,149\,656\,584\,000)^N\,
+ 2^{144\binom N2}.}
+\tag{9}
+\]
+\end{corollary}
+\begin{proof}
+Every eigenvalue of the original twelve-cell $T_0$ lies in the closed
+complex disk of radius $4$ by the exact absolute-row-sum bound.
+For distinct integer GST addresses, $|\delta_i-\delta_j|\ge10$.
+Therefore every difference between an eigenvalue in the $i$th and
+one in the $j$th shifted spectrum has absolute value at least
+$10-4-4=2$. Each characteristic polynomial is monic of degree
+twelve, so each pairwise resultant is the product of $12^2=144$
+such differences counted with multiplicity. Apply the exact
+factorization (4).
+\end{proof}
+
+\section{The exact full-N GST Hankel hypothesis on the native information carrier}
+\begin{theorem}[Full-space single fold determinant is exactly one]
+Let $r=12N$, and define the rational linear functional
+\[
+ \boxed{\ell_N(u)=e_r^\top\mathcal K_N^{-1}u.}\tag{5}
+\]
+It is computed from the \emph{already specified original} GST single fold and original uniform seed; it is neither a left eigenfunctional nor a chosen abstract Hodge-to-Chow map. Its complete GST Hankel moment matrix
+\(H_{ij}=\ell_N(T_N^{i+j}v_N)\), $0\le i,j<r$, satisfies
+\[
+ \boxed{\det H=+1\quad\text{for EVERY }N\ge1.}\tag{6}
+\]
+\end{theorem}
+\begin{proof}
+By definition of $\ell_N$ and $\mathcal K_N$,
+\(\ell_N(T_N^k v_N)=\delta_{k,r-1}\) for $0\le k<r$.
+Consequently $H_{ij}=0$ when $i+j<r-1$, while $H_{ij}=1$ when $i+j=r-1$. The remaining entries with $i+j>r-1$ may be nonzero but lie strictly on one side of the anti-diagonal. Reversing the rows gives a triangular matrix with every diagonal entry $1$. Hence
+\[
+ \det H=(-1)^{r(r-1)/2}=1
+\]
+because $r=12N$ makes $r(r-1)/2=6N(12N-1)$ even.
+\end{proof}
+
+\section{Whole native information operator algebra from the original seed}
+Define the \emph{new source-coupling} operator
+\(P_N=v_Nv_N^\top\in\End_\Q(\mathscr V_N)\)
+for the standard rational counting pairing. It is constructed directly from the original GST Wave-I seed, not from an arbitrary Hodge target.
+The full $U_N,J_N,M_N,D_N$ satisfy the same transpose relations as (2), and $D_N^\top=D_N$, so $T_N^\top$ lies in the algebra they generate.
+
+\begin{theorem}[Full N GST source-mixed matrix algebra]
+The rational algebra generated by the original all-N $U_N,J_N,M_N$, the existing integer spectral address $D_N$, and $P_N$ is the \emph{entire rational endomorphism algebra}:
+\[
+ \boxed{
+ \Q\langle U_N,J_N,M_N,D_N,P_N\rangle
+ =\End_\Q(\mathscr V_N).}\tag{7}
+\]
+It is closed under transposition and has scalar commutant.
+\end{theorem}
+\begin{proof}
+The generated algebra contains $T_N$, $T_N^\top$ and $P_N$.
+For $0\le i,j<r$,
+\[
+ \boxed{
+ T_N^iP_N(T_N^\top)^j
+   =(T_N^iv_N)(T_N^jv_N)^\top
+   =\mathcal K_N E_{i+1,j+1}\mathcal K_N^\top.}\tag{8}
+\]
+Since $\mathcal K_N$ is invertible by (4), these $r^2$ genuine
+\emph{information-operator words} are a rational basis of
+$\operatorname{Mat}_{r\times r}(\Q)$. Thus the algebra generated by the GST operators equals all rational endomorphisms and its commutant is $\Q I$.
+\end{proof}
+
+\section{Adversarial full-carrier and canonical Chow boundary}
+The original fixed-cell readout quotient of \texttt{GSTHodgeWaveAllNHoleReadout} has a nonzero kernel of dimension $11N$. The new results do \emph{not} mistake quotient cyclicity for (3): they prove the full $12N$ result independently from the original Wave-I $\Delta_{12}$ and shifted characteristic-polynomial CRT.
+
+Equation (7) is valid for the \emph{dimensionless GST information carrier}, not for an unknown rational Hodge space $W_p(X)$ on an arbitrary original smooth projective complex variety. To conclude the \emph{user's actual universal GST antecedent}, a separate geometrically constructed intertwiner must supply, for each $(X,p)$, an original-X rational Chow seed and an actual algebraic correspondence whose canonical Betti action is the full N-wave fold (possibly on a faithful quotient fitting the Hodge rank), and must preserve the nonzero orbit determinant. An arbitrary vector-space isomorphism from $\mathscr V_N$ to $W_p(X)$, a supplied per-target cycle, or the identity $P_N=v_Nv_N^\top$ in the symbolic wave carrier cannot substitute for that original-X Chow geometry.
+
+For N=1, Wolfram verified $\chi$, $\Delta_{12}$, the three transpose laws, and $\det H_{12}=1$. For N=2 and shifts $(0,10)$, Wolfram verified $\operatorname{rank}\mathcal K_{24}=24$,
+\(\det\mathcal K_{24}=\Delta_{12}^2\Res(\chi(t),\chi(t-10))\), and $\det H_{24}=1$. The full-N assertions follow from the preceding exact proof, not from extrapolation of these cases.
+No claim is made that the universal geometric GST hypothesis or the Clay Hodge conjecture is thereby unconditionally proved.
+\end{document}

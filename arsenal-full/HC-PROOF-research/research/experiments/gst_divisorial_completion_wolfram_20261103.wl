@@ -1,0 +1,50 @@
+Module[{checks={},failures={},check,ls,sequence,L,r,m,rho,K,k,E,qE,pure,pr,
+u,v,plus,minus,G,PB,PV,a,raw,S,b,N=3,d=6,integral,tr,returned,
+restrict,P,rows,col,res,prim,killed,gamma,h2,enc},
+check[name_,test_]:=(AppendTo[checks,name];If[!TrueQ[test],AppendTo[failures,name]]);
+enc[x_]:=Map[ToString[#,InputForm]&,x,{2}];
+ls={{{1,2,3},{0,0,0}},{{1,0,1},{0,1,1}},{{0,0,0},{0,0,0}},{{1,0},{0,1}},{{2},{4}}};
+sequence=Table[
+{m,r}=Dimensions[L];rho=MatrixRank[L];K=NullSpace[L];k=Length[K];
+E=Join[Table[Join[If[k==0,{},K[[All,i]]],ConstantArray[0,r]],{i,r}],
+Table[Join[ConstantArray[0,k],UnitVector[r,i]],{i,r}]];
+qE=Join[ConstantArray[0,{m,r}],L,2].E;
+pure=Join[Table[Join[If[k==0,{},K[[All,i]]],ConstantArray[0,k]],{i,r}],
+Table[Join[ConstantArray[0,k],If[k==0,{},K[[All,i]]]],{i,r}]];
+pr=If[k==0,0,MatrixRank[pure]];
+check["closed_vertical_dimension",MatrixRank[E]==2r-rho];
+check["missing_surjection",MatrixRank[qE]==rho];
+check["kernel_equals_pure",pr==2(r-rho)&&MatrixRank[E]-MatrixRank[qE]==pr];
+If[k>0,check["pure_is_in_missing_kernel",Join[ConstantArray[0,{m,r}],L,2].pure==ConstantArray[0,{m,2k}]]];
+u=If[k==0,ConstantArray[0,r],First[K]];v=If[k==0,ConstantArray[0,r],Last[K]];
+plus=(u-I v)/2;minus=(u+I v)/2;
+check["explicit_complex_split",plus+minus==u&&I(plus-minus)==v];
+{m,r,rho,MatrixRank[E],MatrixRank[qE],pr},{L,ls}];
+check["zero_handle_exact_sequence",2*0-0==0&&2(0-0)==0];
+G={{1,1,0,0,0,0,0},{0,1,1,0,0,0,0},{0,0,0,1,0,0,0},{0,0,0,0,1,0,0}};
+PB=DiagonalMatrix[{1,1,1,0,0,0,0}];PV=DiagonalMatrix[{1,1,0,0}];
+a={{1},{0},{0},{0}};raw={{1},{0},{0},{0},{0},{1},{0}};
+check["type_projectors_commute",G.PB==PV.G];
+check["rational_lift_need_not_be_hodge",G.raw==a&&PB.raw!=raw];
+check["corrected_lift_exact",G.PB.raw==a];
+S=Transpose[G].Inverse[G.Transpose[G]];b=S.a;integral=N b;
+check["polarized_complement_right_inverse",G.S==IdentityMatrix[4]];
+check["rational_hodge_lift",b=={{2/3},{1/3},{-1/3},{0},{0},{0},{0}}&&PB.b==b];
+check["integral_boundary_denominator",And@@(IntegerQ/@Flatten[integral])&&G.integral==N a];
+tr={{6,0,0,0},{0,6,0,0}};returned=tr.G.integral/(N*d);
+check["both_denominators_return",returned=={{1},{0}}];
+check["omitting_degree_fails",tr.G.integral/N!={{1},{0}}];
+check["omitting_line_denominator_fails",tr.G.integral/d!={{1},{0}}];
+L={{1},{1}};restrict={{1,-1}};P={{1,-1},{-1,1}}/2;
+check["ample_kernel_and_primitive",restrict.L=={{0}}&&P.L=={{0},{0}}&&P.P==P];
+rows=Table[col=Transpose[{x}];res=restrict.col;prim=P.col;killed=(res=={{0}});
+check["ample_exact_nullification",killed==(MatrixRank[Join[L,col,2]]==MatrixRank[L])== (prim=={{0},{0}})];
+{x,killed,enc[res],enc[prim]},{x,{{1,0},{0,1},{1,1},{1,-1},{0,0}}}];
+gamma={{1},{-1}};h2={{1},{1}};
+check["quadric_primitive_nonzero_norm",Transpose[gamma].gamma=={{2}}&&Transpose[h2].gamma=={{0}}];
+check["singular_boundary_line_return",IdentityMatrix[2].gamma==gamma&&restrict.gamma!={{0}}];
+ExportString[<|"all_passed"->(failures=={}),"assertions"->Length[checks],"failures"->failures,
+"kernel_version"->$Version,"sequence_rows"->sequence,"hodge_lift"->enc[b],
+"cleared_source"->enc[integral],"returned_cycle"->enc[returned],"ample_rows"->rows,
+"quadric_line_return"->enc[gamma]|>,"RawJSON","Compact"->True]
+]

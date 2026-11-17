@@ -1,0 +1,61 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0686 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/inspect-corrupt-surgery-notes.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 20:42:48 +0530  (0c6af81)
+#    Last-commit  : 2026-08-16 20:42:48 +0530  (0c6af81)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 20:42:48 +0530  0c6af81  (ker07-dev)
+#        Inspect final bridge notes with tolerant decoding
+# ======================================================================
+
+name: Inspect final bridge surgery notes
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/inspect-corrupt-surgery-notes.yml]
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extract bridge sections with tolerant decoding
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          keys = ['FIRST EXIT','first exit','joint bad','flux','two-row','escape','prefix-one','PrefixOne','BadReflection','survive','SURVIVE','separation','carry-survival','simultaneous deletion','correction equation','final theorem','remaining']
+          candidates=[]
+          for p in Path('.').rglob('*'):
+              if not p.is_file(): continue
+              n=p.name.lower()
+              if any(x in n for x in ['berserker','paradox_mirror','surgery_plan','bad_reflection','first_exit']):
+                  candidates.append(p)
+          for p in sorted(candidates):
+              raw=p.read_bytes()
+              try: text=raw.decode('utf-8')
+              except UnicodeDecodeError: text=raw.decode('latin-1')
+              lines=text.splitlines()
+              hits=[]
+              for i,line in enumerate(lines):
+                  if any(k.lower() in line.lower() for k in keys):
+                      hits.append(i)
+              if not hits: continue
+              print('\n'+'='*90)
+              print(p, 'bytes=',len(raw),'hits=',len(hits))
+              print('='*90)
+              emitted=set()
+              for i in hits[:80]:
+                  a=max(0,i-8); b=min(len(lines),i+20)
+                  if any(j in emitted for j in range(a,b)): continue
+                  emitted.update(range(a,b))
+                  print(f'--- lines {a+1}-{b} ---')
+                  for j in range(a,b):
+                      print(f'{j+1}: {lines[j]}')
+          PY

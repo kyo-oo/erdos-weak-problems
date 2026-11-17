@@ -1,0 +1,22 @@
+OFFICIAL GATE RECEIPT — problem #61 — 2026-11-17T23:29:53
+==============================================================================
+OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
+  github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
+  github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
+Challenge statement: erdos-61-erdos-hajnal
+Claims in solution ledger: 8
+==============================================================================
+[PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cyclic_graphs module (verbatim cells 2/6/7/9/11/13/14) imports; its own asserts hold (367 in C_7^5; 81/324/1458 in C_9^3..5; 754 in C_11^4)
+[PASS] (official) O-CYC7-5 — official evaluate(num_nodes=7, n=5) == 367 (official cell-6 priority)
+[PASS] (official) O-CYC9-345 — official evaluate(num_nodes=9, n=3/4/5) == 81/324/1458 (official cell-9 priority, the official cell-11 expected sizes)
+[PASS] (official) O-CYC11-4 — official evaluate(num_nodes=11, n=4) == 754 (official cell-13 priority) AND the returned 754-set is independent (own checker)
+[PASS] (solution) S-ENGINE — campaign family engine --verify: exit 0, >= 10 PASS, 0 FAIL
+[PASS] (solution) S-HARMONIC — harmonic law 1/f = 1/c1 + 1/c2 on exact rationals (independent of the engine)
+[PASS] (solution) S-INDEP-CROSS — independence semantics agreement: official C_9^3 81-set re-verified + own greedy independent set on the same graph
+[PASS] (control) N-CORRUPT-SIZE — corrupted expected size (81 -> 80) is REJECTED by the official-lane equality check
+[PASS] (control) N-PLANT-EDGE — planted adjacent pair ((0,1,2),(1,2,3)) in an independent-set candidate is DETECTED by the independence checker
+[PASS] (control) N-COGRAPH — planted induced P4 in a cograph is DETECTED by the P4 filter
+==============================================================================
+CHECKS: 10/10 passed (official=4, solution=3, controls=3)
+WALL: 343.14s
+VERDICT: YOUR SOLUTION IS OKAY

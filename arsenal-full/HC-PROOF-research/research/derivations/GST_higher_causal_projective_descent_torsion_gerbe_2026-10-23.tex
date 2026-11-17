@@ -1,0 +1,1056 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=21mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Higher-Causal Geometry: Eliminating the Scalar Descent Obstruction by Finite Central Cohomology}
+\date{23 October 2026}
+\begin{document}\maketitle
+
+\begin{abstract}
+We attack the all-original-X universal algebraic source goal on the
+ACTUAL dimensionless-GST affine incidence spatial fold. The previous
+native mathematics constructs a genuine holomorphic pure-Chern-character
+bundle H on its Stein realization J but leaves the two-cell
+causal descent relation unestablished.
+Here we prove a stronger descent theorem without assuming that H itself
+has any flat vertical connection: for any holomorphic rank-r bundle H on
+the actual fold, if its full projective bundle descends to the original
+compact X AND its determinant line descends, then H itself descends.
+The proof uses the finite central extension
+$1\to\mu_r\to GL_r\to PGL_r\times\mathbb G_m\to1$
+(the determinant/projective map), the exact homotopy
+invariance of cohomology with $\mu_r$ coefficients
+under the genuine affine-space torsor, and the
+Stein exponential sequence for residual r-torsion
+line-bundle twists. No Hodge-to-Chow selector is inserted.
+For any prescribed rational (p,p) Hodge class alpha,
+determinant descent is established without assuming
+alpha algebraic, so the ONLY independent source-bearing
+higher-causal condition is descent of the true PGL_r
+projective fold. We give the complete canonical original-X
+cycle formula if that projective condition is constructed.
+We also prove that unbounded affine spatial stabilization
+does not force projective descent of a fixed Oka bundle;
+the proof uses exact central obstruction invariance,
+not finite numerical sampling.
+\end{abstract}
+
+\section{Typed original goal and actual unlimited spatial fold}
+Let X be any nonempty smooth projective complex variety,
+$1\le p\le d=\dim_\mathbb CX$ and
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+The final requested output is a genuine rational algebraic
+cycle $Z_\alpha\in CH^p(X)_\mathbb Q$ with
+$\operatorname{cl}^{can}_X Z_\alpha=\alpha$.
+
+Choose any embedding $X\hookrightarrow\mathbb P^N$
+and the true smooth affine Jouanolou fold
+\[
+ J=J_N(X)=\{(x,\ell):\ell(x)\ne0\},
+ \qquad q:J\longrightarrow X.                      \tag{1}
+\]
+It is the affine-space torsor under
+$V=\operatorname{Hom}(Q,O_X(-1))$ derived
+from the tautological quotient sequence.
+Each complex affine fiber is $\mathbb C^N$;
+$q^{an}$ is a homotopy equivalence,
+$q^*:H^j(X,A)\simeq H^j(J,A)$ for EVERY
+constant coefficient group A, in particular
+$A=\mathbb Z$ and $A=\mu_r$.
+The total J is smooth AFFINE,
+hence $J^{an}$ Stein.
+
+Rational topological K-theory constructs
+an actual finite-rank complex bundle $E_\alpha^{top}$
+on original X with
+$\operatorname{ch}_{top}(E_\alpha^{top})=r+m\alpha$
+for some $m>0$, rank $r\ge2$.
+Oka--Grauert holomorphically realizes its
+pullback over Stein J as a genuine
+holomorphic rank-r bundle $H_\alpha$ with
+\[
+ \boxed{
+ \operatorname{ch}_{top}(H_\alpha)
+      =r+m q^*\alpha\quad\text{in ALL grades}.
+ }                                                       \tag{2}
+\]
+
+\section{First independent geometric law: the determinant descends from rational Hodge type}
+
+\begin{lemma}[Entire determinant Hodge law, original X arbitrary]
+For the above Hodge class alpha and Oka
+fold H_alpha, there exists an actual
+holomorphic, hence algebraic, line bundle
+$L$ on original X with
+\[
+ \boxed{\det H_\alpha\simeq q^*L}
+                                                             \tag{3}
+\]
+as genuine holomorphic line bundles on Stein J.
+\end{lemma}
+\begin{proof}
+Since $c_1(E_\alpha^{top})$ is integral and
+its rational image is $\operatorname{ch}_1(E_\alpha)$,
+for $p\ge2$ it is torsion, hence its Dolbeault
+$(0,2)$ component vanishes; for $p=1$ it
+has rational image $m\alpha$ of type (1,1),
+so again its $(0,2)$ image vanishes.
+The exact holomorphic exponential sequence
+\[
+ H^1(X,\mathcal O_X^\times)
+ \xrightarrow{c_1}H^2(X,\mathbb Z)
+ \longrightarrow H^2(X,\mathcal O_X)
+\]
+therefore produces a holomorphic line
+L on compact projective X with
+$c_1(L)=c_1(E_\alpha^{top})$.
+GAGA algebraizes L.
+The determinant of Oka H_alpha and q^*L
+have the same integral Chern class on J,
+where Cartan B makes
+$\operatorname{Pic}_{hol}(J)
+\simeq H^2(J,\mathbb Z)$.
+They are thus holomorphically isomorphic.
+\end{proof}
+
+\section{The finite central obstruction and the exact original-X projective descent theorem}
+
+\begin{theorem}[CENTRAL GST FOLD DESCENT: projective plus determinant descent implies vector-bundle descent]
+Let q:J→X be the above actual
+affine Jouanolou torsor, H ANY
+holomorphic rank-r bundle on J
+with r>=2.
+Assume there are
+(i) a genuine holomorphic principal PGL_r
+bundle Q over the ORIGINAL complex X
+and a holomorphic identification
+\[
+ \mathbb P(H)\simeq q^*Q,
+                                                             \tag{4}
+\]
+and (ii) a genuine holomorphic
+line bundle L over original X
+with $\det H\simeq q^*L$.
+Then there exists a genuine
+holomorphic rank-r bundle E on X
+with
+\[
+ \boxed{H\simeq q^*E}.
+                                                             \tag{5}
+\]
+When X is projective, E is a true
+ALGEBRAIC vector bundle by GAGA.
+The result is independent of
+the affine fiber dimension N.
+\end{theorem}
+
+\begin{proof}
+Consider the central extension of complex Lie groups
+\[
+ 1\longrightarrow \mu_r
+ \longrightarrow GL_r(\mathbb C)
+ \overset{\Phi}{\longrightarrow}
+ PGL_r(\mathbb C)\times\mathbb C^\times
+ \longrightarrow1,\qquad
+ \Phi(g)=([g],\det g).
+                                                             \tag{6}
+\]
+The kernel consists of scalar
+matrices $\zeta I_r$ with
+$\zeta^r=1$; the map is
+surjective as a morphism of
+complex Lie groups (locally
+lift a projective element and
+choose an rth root of the
+determinant ratio).
+The obstruction to lifting the
+holomorphic pair (Q,L) to
+a rank-r holomorphic vector
+bundle is the nonabelian
+boundary class
+\[
+   o(Q,L)\in H^2(X,\mu_r)
+                                                             \tag{7}
+\]
+formed from local holomorphic
+lift matrices: their triple-overlap
+defect lies in the finite CENTRAL
+group $\mu_r$ and defines a
+Cech 2-cocycle independent of lifts
+up to coboundary. The pair (Q,L)
+lifts iff this class vanishes.
+Pull the pair to J. By (4) and
+the determinant hypothesis its
+pullback is the pair of actual
+projective bundle and determinant
+coming from H, so
+$q^*o(Q,L)=0$ in $H^2(J,\mu_r)$.
+But q is a homotopy equivalence,
+and the finite analytic sheaf
+$\mu_r$ is the constant local
+system of rth roots of unity.
+Thus q^*:H^2(X,\mu_r)→H^2(J,\mu_r)
+is an ISOMORPHISM, so
+$o(Q,L)=0$. Hence some genuine
+holomorphic E on original X lifts
+(Q,L), with $\mathbb P(E)\simeq Q$
+and $\det E\simeq L$.
+
+The two holomorphic bundles H
+and q^*E on J have isomorphic
+projectivizations. The central
+$\mathbb C^\times$ subgroup of GL_r
+and analytic local frames imply
+that they differ by a holomorphic
+LINE bundle M on J:
+\[
+    H\simeq q^*E\otimes M.
+                                                             \tag{8}
+\]
+Taking determinants and using the
+chosen isomorphisms $\det H\simeq
+q^*L\simeq q^*\det E$ gives
+$M^{\otimes r}\simeq\mathcal O_J$.
+Since J is Stein,
+$\operatorname{Pic}_{hol}(J)
+\simeq H^2(J,\mathbb Z)$,
+so $c_1(M)$ is an integral
+r-torsion class. Homotopy
+invariance for q produces
+$c\in H^2(X,\mathbb Z)$
+with $q^*c=c_1(M)$, and r c=0.
+Torsion classes have ZERO image
+in $H^2(X,\mathcal O_X)$,
+so the exponential sequence
+constructs a genuine holomorphic
+line bundle $M_X$ on X with
+$c_1(M_X)=c$. Oka on Stein J
+identifies $M\simeq q^*M_X$.
+Substituting into (8) gives
+$H\simeq q^*(E\otimes M_X)$,
+which is (5).
+\end{proof}
+
+\section{Direct all-original-X Chow source when the actual nonabelian projective fold descends}
+
+\begin{theorem}[Universal original-X source from ONE projective causal coherence equation]
+For every original X,p,rational
+Hodge alpha and its actual
+Oka bundle H_alpha in (2),
+the determinant is already
+the pullback of an actual
+algebraic line by (3).
+If the TRUE projective bundle
+$\mathbb P(H_\alpha)$ carries
+a holomorphic flat relative
+PGL_r causal translation transport,
+equivalently it descends to a
+holomorphic PGL_r bundle on X,
+then H_alpha itself descends
+holomorphically to the original X.
+Writing this descended bundle
+as E_alpha, the true rational
+algebraic cycle
+\[
+ \boxed{
+ Z_\alpha=
+  \frac{(-1)^{p-1}}{m(p-1)!}
+          c_p^{CH}(E_\alpha)
+       \in CH^p(X)_\mathbb Q
+                                                             \tag{9}
+ }
+\]
+has EXACT canonical Betti class
+$\operatorname{cl}_X^{can}(Z_\alpha)=\alpha$.
+No algebraic cycle is input to
+the construction.
+\end{theorem}
+\begin{proof}
+The determinant lemma supplies
+the precise L in the central
+descent theorem. The assumed
+PGL transport gives Q on X by
+holomorphic groupoid descent
+(the original affine fibers
+are connected and simply
+connected, and two-direction
+coherence supplies the exact
+cocycle). Apply central descent
+to obtain holomorphic E_alpha
+with H_alpha≅q^*E_alpha.
+GAGA algebraizes E_alpha.
+Since q^* on rational cohomology
+is injective and
+$\operatorname{ch}_{top}(H_\alpha)
+=r+m q^*\alpha$, we obtain
+$\operatorname{ch}_{top}(E_\alpha)
+=r+m\alpha$ in EVERY degree.
+The rational Newton identity
+\[
+ \log c(E,t)=
+ \sum_{j\ge1}(-1)^{j-1}(j-1)!
+                \operatorname{ch}_j(E)t^j
+                                                             \tag{10}
+\]
+therefore yields
+$c_p(E_\alpha)=(-1)^{p-1}
+ (p-1)!m\alpha$. The genuine
+algebraic Chow Chern class
+of E_alpha is the actual Z
+in (9), whose canonical Betti
+image is alpha by comparison.
+\end{proof}
+
+\section{STRONGER DIRECT GEOMETRY: the rational projective Segre fold generates the ORIGINAL-X Chow cycle with no vector lift}
+
+The finite-central lift in the previous
+section is conceptually useful, but it
+is not needed to return an actual
+original-X algebraic class. The actual
+projective-space fold has an intrinsically
+defined relative anti-canonical line
+bundle, even if its PGL_r structure does
+not initially come from any
+honest vector bundle.
+
+Let $\rho:Y\to X$ be a genuine
+holomorphic PGL_r projective-space
+bundle over an arbitrary original
+smooth projective complex X, with
+fiber $\mathbb P^{r-1}$ and
+relative holomorphic tangent
+bundle $T_{Y/X}$. By GAGA for
+holomorphic principal bundles
+under the complex affine algebraic
+group PGL_r, Y is a genuine
+algebraic projective-space bundle.
+Set the canonical rational Chow
+class
+\[
+ \boxed{
+ \zeta_Y=\frac1r c_1^{CH}
+              (T_{Y/X})\in CH^1(Y)_\mathbb Q.
+ }                                                       \tag{12}
+\]
+The relative tangent bundle exists
+independently of any O(1) on Y.
+The resulting full intrinsic
+projective-fold Segre series is
+\[
+ \boxed{
+ S_Y(t)=\sum_{k=0}^{d}
+       \rho_*\left(\zeta_Y^{\,r-1+k}\right)t^k
+       \in CH^*(X)_\mathbb Q[t]/(t^{d+1}),
+ \quad S_Y(0)=1 .
+ }                                                       \tag{13}
+\]
+The truncated logarithm $\log S_Y(t)$
+is well-defined because its
+constant term is one.
+
+\begin{theorem}[Intrinsic projective GST-Chern source, all original-X and every higher grade]
+For ANY original smooth projective X,
+any p with $2\le p\le d$, and
+any holomorphic PGL_r projective-space
+bundle $\rho:Y\to X$, the class
+\[
+ \boxed{
+ \operatorname{pch}^{CH}_p(Y)=
+  \frac{1}{(p-1)!}
+    [t^p]\log S_Y(t)\in CH^p(X)_\mathbb Q
+ }                                                       \tag{14}
+\]
+is an ACTUAL CANONICAL rational Chow
+cycle class constructed directly from
+the projective fold geometry, even
+without choosing a vector-bundle
+lifting of Y.
+
+If locally $Y\cong\mathbb P(E)$ for
+an algebraic rank-r bundle E
+with formal Chern roots $x_1,\dots,x_r$,
+put $\mu=r^{-1}\sum_i x_i$.
+Then
+\[
+ \boxed{
+ \operatorname{pch}^{CH}_p(Y)
+   =\frac1{p!}\sum_{i=1}^r
+                   (x_i-\mu)^p .
+ }                                                       \tag{15}
+\]
+In particular the class is invariant
+under ALL changes of local GL_r
+lifts by tensoring with line bundles,
+so it descends genuinely in rational
+Chow cohomology.
+\end{theorem}
+\begin{proof}
+Work locally under a GL_r splitting
+of the PGL_r bundle, with quotient
+projective bundle $\rho:\mathbb P(E)\to X$
+and tautological first Chern
+class $\xi=c_1(O_{\mathbb P(E)}(1))$.
+The relative Euler sequence gives
+$c_1(T_{Y/X})=r\xi-\rho^*c_1(E)$,
+hence $\zeta_Y=\xi-\rho^*\mu$.
+The quotient projective-bundle
+Chow relation is
+$\prod_{i=1}^r(\xi-x_i)=0$.
+Therefore
+$\prod_i(\zeta_Y-(x_i-\mu))=0$,
+and fiber integration gives
+\[
+ S_Y(t)=\prod_{i=1}^r
+          \frac1{1-(x_i-\mu)t}.
+                                                             \tag{16}
+\]
+Taking the logarithm yields
+\[
+ \log S_Y(t)=\sum_{p\ge1}
+     \frac{t^p}{p}\sum_i(x_i-\mu)^p
+  =\sum_{p\ge1}(p-1)!\,
+     \left(\frac1{p!}\sum_i
+                    (x_i-\mu)^p\right)t^p.
+                                                             \tag{17}
+\]
+Under a line twist $E\mapsto E\otimes M$,
+all roots shift $x_i\mapsto x_i+c_1(M)$,
+and their mean $\mu$ shifts by the
+same amount. Hence every centered
+root $x_i-\mu$ and its symmetric
+power polynomial remain unchanged.
+This is the intrinsic PGL characteristic
+class, with global representative
+(14) in the actual Chow ring, which
+also proves that no unverified
+Brauer lift is being assumed.
+\end{proof}
+
+\begin{corollary}[Complete rational characteristic spectrum of the projective fold]
+For rank $r\ge2$ the algebra
+of symmetric rational
+polynomials in the centered
+Chern roots
+$y_i=x_i-\frac1r\sum_jx_j$
+is freely generated over
+$\mathbb Q$ by the
+$r-1$ intrinsic projective
+Chern classes
+\[
+ \boxed{
+   \operatorname{pch}_2,\dots,
+   \operatorname{pch}_r.
+ }                                                       \tag{17a}
+\]
+Here the first centered power
+vanishes identically,
+$\sum_i y_i=0$.
+Explicitly
+\[
+ \boxed{
+ \begin{aligned}
+  \operatorname{pch}_2
+    &=\operatorname{ch}_2
+      -\frac{c_1^2}{2r},\\
+  \operatorname{pch}_3
+    &=\operatorname{ch}_3
+      -\frac{c_1}{r}\operatorname{ch}_2
+      +\frac{c_1^3}{3r^2}.
+ \end{aligned}
+ }                                                       \tag{17b}
+\]
+Thus the intrinsic projective
+Segre logarithm retains ODD
+higher codimension information,
+including the entire cubic
+projective class, without
+an unlifted vector-bundle
+choice.
+\end{corollary}
+\begin{proof}
+The fundamental theorem of
+symmetric polynomials says
+$\mathbb Q[y_1,\dots,y_r]^{S_r}
+=\mathbb Q[e_1,\dots,e_r]$,
+where $e_j$ are the elementary
+symmetric polynomials. The
+centered relation imposes
+$e_1=\sum_i y_i=0$.
+The invariant ring therefore
+becomes the polynomial ring
+$\mathbb Q[e_2,\dots,e_r]$.
+Newton identities over
+characteristic-zero $\mathbb Q$
+provide a triangular invertible
+polynomial change of
+generators between
+$e_2,\dots,e_r$ and
+the power sums
+$\sum_i y_i^p$ for
+$2\le p\le r$.
+Dividing each by $p!$
+gives precisely the
+projective Chern characters
+in (14)--(15), proving
+freedom and generation.
+Expand $(x_i-\mu)^2$
+and $(x_i-\mu)^3$,
+using $\mu=c_1/r$,
+to obtain (17b).
+\end{proof}
+
+\begin{theorem}[DIRECT original-X Chow return from a descended GST projective world]
+Let alpha be ANY rational Hodge class
+of codimension p>=2 on arbitrary
+original smooth projective X.
+Take an ACTUAL pure-class topological
+bundle $E_\alpha^{top}$ and its
+holomorphic Oka realization H_alpha
+on the affine GST fold J, with
+$\operatorname{ch}(H_\alpha)=r+m q^*\alpha$,
+as established in (2).
+
+Suppose ONLY its ACTUAL projective-space
+bundle $\mathbb P(H_\alpha)$ has
+holomorphically coherent PGL_r
+transport along every affine causal
+fiber, so it descends to a genuine
+holomorphic projective-space bundle
+$\rho:Y_\alpha\to X$.
+
+Then the EXACT original-X rational
+algebraic cycle class
+\[
+ \boxed{
+ Z_\alpha=
+   \frac1{m(p-1)!}
+    [t^p]\log\!\left(
+       \sum_{k=0}^d
+         \rho_*\left[
+           \left(\frac{c_1^{CH}(T_{Y_\alpha/X})}{r}
+           \right)^{r-1+k}
+         \right]t^k
+       \right)
+  \in CH^p(X)_\mathbb Q
+ }                                                       \tag{18}
+\]
+satisfies
+\[
+ \boxed{\operatorname{cl}^{can}_X(Z_\alpha)=\alpha.}
+                                                             \tag{19}
+\]
+No original-X bundle E, choice of
+O(1), lifted PGL gerbe, or existing
+original-X Chow preimage is
+required as an input.
+\end{theorem}
+\begin{proof}
+The actual descended holomorphic
+PGL projective bundle is algebraic
+by GAGA. Its intrinsic relative
+anticanonical first Chern class and
+its powers are therefore true
+algebraic Chow classes. Their
+proper projective pushforwards,
+finite logarithm and rational
+coefficient extraction construct
+the ACTUAL original-X Chow class
+in (18).
+
+At the Betti cohomology level,
+q^*Y_alpha is the projective
+bundle of H_alpha. Apply the
+intrinsic Segre formula (16)
+to the (global) GL_r
+lift H_alpha on J. Since
+the entire positive Chern
+character of H_alpha is
+concentrated in grade p>=2,
+$c_1(H_\alpha)=0$ rationally
+and $\mu=0$ in rational Betti
+cohomology. Consequently
+\[
+ \begin{aligned}
+ [t^p]\log S_{q^*Y_\alpha}(t)
+    &=(p-1)!\operatorname{ch}_p(H_\alpha)\\
+    &=(p-1)!\,m q^*\alpha.
+ \end{aligned}
+\]
+The canonical cycle-class map
+commutes with projective
+Gysin pushforward and Chern
+classes, and the affine-torsor
+q^*:H^{2p}(X,\mathbb Q)
+   \overset{\sim}{\to}H^{2p}(J,\mathbb Q)
+is an isomorphism.
+Thus the cycle (18) has Betti
+class exactly alpha.
+\end{proof}
+
+\begin{remark}[Exact improvement over the finite-central lift]
+Theorem (18) is stronger
+as a SOURCE CONSTRUCTION:
+it extracts the original-X
+canonical Chow class DIRECTLY
+from the unlifted algebraic
+PGL projective geometry.
+It applies uniformly to even
+and odd higher codimensions,
+since the centered symmetric
+power $p_p=\sum_i(x_i-\mu)^p$
+is defined for every p>=2;
+using merely the adjoint
+End-bundle would unnecessarily
+erase the odd power data.
+The sole independent
+still-required geometric
+condition is that the true
+projective Oka fold has a
+coherent PGL translation
+descent. This statement is
+not identified with ordinary
+Hodge purity or with a
+cohomological 2-cell condition.
+\end{remark}
+
+\section{NEW UNIVERSAL COMPLETENESS: EVERY rational Chow class is an EXACT DIFFERENCE of TWO intrinsic GST PGL folds}
+
+The previous theorem constructs a genuine original-$X$ Chow source from
+an independently descended projective fold. The present result goes
+further in the opposite direction: it proves that the intrinsic
+projective Segre-logarithm mechanism is EXHAUSTIVE for the ENTIRE
+rational Chow ring of every smooth projective original world.
+This is a source-type theorem, not an assumption that an arbitrary
+rational Hodge class already belongs to the Chow image.
+
+\begin{theorem}[Universal two-projective-fold normal form of actual Chow geometry]
+Let $X$ be ANY smooth projective complex variety of dimension $d$,
+$2\le p\le d$, and let $Z\in CH^p(X)_{\mathbb Q}$ be ANY
+genuine rational algebraic cycle class.
+There exist two honest algebraic vector bundles
+$E_+,E_-$ on the ORIGINAL $X$, of equal rank $r\ge2$,
+and a positive integer $m$, such that
+\[
+ \boxed{
+  c_1^{CH}(E_+)=c_1^{CH}(E_-)=0
+        \quad\text{in }CH^1(X)_{\mathbb Q},
+ }\tag{20}
+\]
+and their ACTUAL projective PGL folds
+$Y_\pm=\mathbb P_X(E_\pm)$ satisfy
+\[
+ \boxed{
+ m Z=
+  \operatorname{pch}^{CH}_p(Y_+)
+   -\operatorname{pch}^{CH}_p(Y_-)
+   \quad\text{in the genuine }CH^p(X)_{\mathbb Q}.
+ }\tag{21}
+\]
+Explicitly, the RHS is calculated WITHOUT choosing any
+global O(1) or lifting data from the actual projective
+geometries:
+\[
+ \boxed{
+ Z=\frac{[t^p]}{m(p-1)!}
+ \log\frac{
+   \displaystyle\sum_{k=0}^{d}
+   (\rho_+)_*\left(
+   \left[\frac{c_1(T_{Y_+/X})}{r}\right]^{r-1+k}
+   \right)t^k
+ }{
+   \displaystyle\sum_{k=0}^{d}
+   (\rho_-)_*\left(
+   \left[\frac{c_1(T_{Y_-/X})}{r}\right]^{r-1+k}
+   \right)t^k
+ }
+ \quad\text{in } CH^p(X)_{\mathbb Q}.
+ }\tag{22}
+\]
+All operations are ACTUAL Chow intersection, relative tangent
+Chern classes and proper algebraic pushforwards.
+The formula is valid for every original dimension and
+every allowed p, not only for a numerical intersection
+functional or rational Betti cohomology.
+\end{theorem}
+\begin{proof}
+On smooth projective $X$ the genuine algebraic rational
+Chern character is an isomorphism
+\[
+ \operatorname{ch}^{CH}:
+  K_0^{alg}(X)_{\mathbb Q}
+   \overset{\simeq}{\longrightarrow}
+  \bigoplus_{j=0}^{d}CH^j(X)_{\mathbb Q}.
+\]
+Choose the UNIQUE rational virtual K-class $v$
+satisfying $\operatorname{ch}^{CH}(v)=Z$ concentrated
+in grade $p$, with all other Chow grades equal to zero.
+After multiplying by a positive integer $m$,
+write $mv=[F_+]-[F_-]$ for TWO actual algebraic
+bundles on $X$, by the group-completion definition
+of algebraic $K_0$ on a smooth projective scheme.
+The degree-zero Chern character identity gives
+$\operatorname{rk}F_+=\operatorname{rk}F_-$,
+and the degree-one identity gives
+\[
+   c_1(F_+)-c_1(F_-)=0
+      \quad\text{in }CH^1(X)_{\mathbb Q}.
+\]
+Let $L=(\det F_+)^\vee$ be the genuine
+algebraic inverse determinant LINE bundle and set
+\[
+  E_+=F_+\oplus L,\qquad
+  E_-=F_-\oplus L .
+\]
+Then both bundles have the same rank
+$r=\operatorname{rk}(F_+)+1$,
+$c_1(E_+)=0$ in integral Chow and
+$c_1(E_-)=0$ in rational Chow.
+The difference of their entire algebraic Chern
+characters is unaffected by adjoining the
+SAME actual line bundle:
+\[
+  \operatorname{ch}^{CH}(E_+)
+      -\operatorname{ch}^{CH}(E_-)
+  =m Z \quad\text{in all Chow grades}.
+\]
+If necessary add the same trivial algebraic summands
+to ensure $r\ge2$. For $c_1(E)=0$ rationally, the
+intrinsic projective Chern character obtained
+from the actual relative tangent Segre logarithm
+is EQUAL in Chow to the ordinary algebraic
+$\operatorname{ch}_p(E)$, because the centered root
+$y_i=x_i-c_1(E)/r$ equals the original root
+$x_i$ in rational Chow.
+Therefore
+\[
+ \operatorname{pch}^{CH}_p(\mathbb P(E_+))
+ -\operatorname{pch}^{CH}_p(\mathbb P(E_-))
+ =\operatorname{ch}^{CH}_p(E_+)
+  -\operatorname{ch}^{CH}_p(E_-)=m Z,
+\]
+proving (21). Applying the exact projective
+Segre-logarithm identity already proved
+in equations (12)--(17) yields (22).
+No original-X Hodge-to-Chow assumption occurs
+in this theorem: its quantified input is an
+ACTUAL Chow class Z.
+\end{proof}
+
+\begin{corollary}[Full GST projective-generator spectrum of actual algebraic classes]
+For every original smooth projective $X$ and every
+$p\ge2$, the rational Chow group $CH^p(X)_{\mathbb Q}$
+is generated by DIFFERENCES of intrinsic degree-$p$
+projective Segre-logarithm classes of actual
+algebraic projective-space folds whose presenting
+vector bundles have rationally trivial determinant.
+In particular, after applying the true canonical
+Betti cycle-class map, the ENTIRE algebraic
+subspace of rational $(p,p)$ Hodge classes is
+generated by those projective Chern sources.
+\end{corollary}
+
+\begin{remark}[Precise Hodge-sensitive boundary of this complete source language]
+This is a complete geometrical \emph{PRESENTATION}
+of the genuine algebraic SOURCE GROUP on the original X,
+not a proof that every rational Hodge class has
+such a source. For a prescribed arbitrary rational
+Hodge class $\alpha$ with no Chow input, the
+unconditional TOPological K0/Oka construction on
+the affine spatial fold yields candidate
+projective PGL geometries, while the theorem
+above shows that any resulting original-X
+algebraic class is expressible by TWO
+determinant-normalized true projective folds.
+The sole additional all-X assertion needed
+to make those analytically built projective folds
+serve as original-X algebraic sources is a
+genuine higher-causal projective descent
+construction tied to the prescribed alpha,
+not merely the all-degree cohomological
+fold-preservation identities.
+\end{remark}
+
+\section{All-dimensional geometry: spatial stabilization preserves the true obstruction}
+\begin{theorem}[No automatic projective coherence from unbounded trivial affine dimensions]
+For the SAME fixed holomorphic
+H_alpha on J, form
+$J_M=J\times\mathbb A_\mathbb C^M$,
+$q_M=q\circ\operatorname{pr}_J$,
+$H_M=\operatorname{pr}_J^*H$.
+Then
+\[
+ \boxed{
+ \mathbb P(H_M)\text{ descends to }X
+ \quad\Longleftrightarrow\quad
+ \mathbb P(H)\text{ descends to }X.
+ }
+                                                             \tag{11}
+\]
+The same equivalence holds for
+existence of coherent holomorphic
+flat relative PGL transport.
+\end{theorem}
+\begin{proof}
+If P(H) descends, pull the
+descending PGL bundle along
+$q_M$ to obtain P(H_M).
+Conversely restrict any proposed
+descent isomorphism of P(H_M)
+along the holomorphic zero slice
+$J\to J\times\mathbb A^M$.
+This yields descent of P(H).
+For the flat-transport form,
+holomorphic projective
+groupoid descent gives the
+equivalence to PGL descent,
+and the same slice argument
+applies at the level of
+the relative connections
+(the reverse extends connection
+by the standard flat connection
+in the added affine directions).
+\end{proof}
+
+\section{TRUE UNBOUNDED GST HIGHER CAUSAL NErve: coherent obstruction can survive every Stein world}
+
+The actual GST affine fold has a
+COSIMPLICIAL geometric realization
+containing all causal translation
+cells at once:
+\[
+ J_n=\underbrace{J\times_X\cdots
+                  \times_XJ}_{n+1\ \mathrm{copies}},
+ \qquad n=0,1,2,\dots .
+                                                             \tag{20}
+\]
+A point of $J_1$ is a pair of points
+in one affine fiber, an actual causal
+arrow. A point of $J_2$ is three such
+points, or a composable pair of
+arrows and its composite. The face
+maps delete one point; identities
+repeat points. All simplicial
+identities are ACTUAL algebraic
+equalities of morphisms. The
+cosimplicial coboundary on regular
+functions is
+\[
+ \boxed{
+ \delta f=\sum_{i=0}^{n+1}
+   (-1)^i d_i^*f\quad
+   \text{from }\Gamma(J_n,O)
+   \text{ to }\Gamma(J_{n+1},O).
+ }                                                       \tag{21}
+\]
+By the simplicial identities,
+$\delta^2=0$ EXACTLY in all
+degrees. These are genuine
+geometric higher causal cells,
+not an arbitrary graded synthetic
+carrier with unproved functorial
+comparison.
+
+\begin{theorem}[GST all-X entire higher-causal Amitsur cohomology]
+For EVERY original smooth projective
+complex X and EVERY finite affine
+incidence fold J_N(X), the actual
+higher-causal algebraic nerve (20)
+consists in EVERY simplicial
+degree of affine schemes.
+Its alternating cochain complex
+has the EXACT cohomology
+\[
+ \boxed{
+ H^k\bigl(\Gamma(J_\bullet,O),
+                         \delta\bigr)
+       \ \cong\
+ H^k(X,O_X)
+       \ \cong\
+ H^{0,k}(X,\mathbb C)
+ \quad\text{for all }k\ge0.
+ }                                                       \tag{22}
+\]
+In particular, for arbitrary
+original X with $h^{0,2}(X)>0$,
+the actual affine world and
+EVERY composable causal-arrow
+space are Stein, and their
+individual higher coherent
+sheaf cohomology vanishes,
+yet the ENTIRE two-cell
+cosimplicial cohomology is
+nonzero:
+\[
+ \boxed{
+ H^2(\Gamma(J_\bullet,O),\delta)
+       \cong H^{0,2}(X)\ne0.
+ }                                                       \tag{23}
+\]
+The conclusion persists for
+arbitrarily large actual
+emergent dimension N.
+\end{theorem}
+\begin{proof}
+The map q:J→X is smooth,
+surjective, faithfully flat
+and AFFINE. Because X is
+separated and J is affine,
+every iterated fiber product
+J_n is an affine scheme:
+it is the closed inverse image
+of the diagonal equations
+in an affine product of copies
+of J. Thus the actual
+Amitsur/Cech cochain complex
+formed from the fpqc cover
+q and its affine nerve
+computes quasi-coherent sheaf
+cohomology $H^k(X,O_X)$:
+the sheaf-level Amitsur
+augmentation is exact by
+faithfully flat descent, and
+all higher Cech terms are
+acyclic for global sections
+because each J_n is affine.
+The GAGA and Dolbeault
+comparison on original
+smooth projective X gives
+$H^k(X,O_X)\cong H^{0,k}(X)$.
+When $h^{0,2}>0$, the exact
+degree-two result (23)
+is nonzero despite
+$H^j(J_n,O_{J_n})=0$
+for EVERY n and j>0.
+Finally the affine bundle
+rank N can grow arbitrarily
+without changing the
+right side, so no finite
+higher-causal truncation
+or dimension growth can
+erase that particular
+cohomological group.
+\end{proof}
+
+\begin{remark}[What this exact higher-causal theorem does and does not decide]
+The Hodge hypothesis on a
+particular rational alpha
+eliminates the scalar
+determinant obstruction
+for its selected pure-class
+bundle, as proved in
+the original-X determinant
+lemma. It does NOT assert
+all sheaf cohomology of the
+original X vanishes.
+Equation (22) demonstrates
+why the vanishing of
+$H^j(J_n,\mathcal F)$
+for each Stein simplicial
+level cannot be promoted
+to vanishing of the GLOBAL
+higher-causal groupoid
+coherence obstruction:
+the simplicial coboundary
+$\delta$ has real
+cohomology inherited from X.
+For projective GL/PGL
+bundles, the descent equation
+is nonabelian rather than
+this additive O-valued
+linear complex, and
+requires actual holomorphic
+two-cell cocycle solving.
+The theorem is therefore
+a precise, positive
+unbounded-GST geometry
+calculation and a rigorous
+test against substituting
+first-order Cartan-B
+acyclicity for actual
+higher-causal flatness.
+\end{remark}
+
+\section{Mathbox structural audit: why full Hodge preservation by itself does not force PGL coherence}
+For every rational class beta in
+$H^{2p}(X,\mathbb Q)$, even one
+not of Hodge type $(p,p)$,
+the same rational topological
+K bundle and Oka holomorphic
+H_beta on J exist with
+$\operatorname{ch}_{top}(H_\beta)
+=r+m q^*\beta$.
+If p>=2 its determinant descends
+for the SAME torsion-c1 reason
+as in the Hodge determinant lemma.
+If beta is not of type (p,p),
+then its PGL projective bundle
+cannot descend to original X:
+otherwise the central descent
+theorem would give an algebraic
+original-X E with
+$\operatorname{ch}_p(E)=m\beta$,
+which is impossible because
+algebraic Chern-character classes
+have type (p,p).
+Thus the actual projective
+coherence property contains
+nontrivial GEOMETRIC information
+not present in the automatically
+preserved rational topology,
+the first Atiyah connection,
+or the affine dimension variable.
+
+For rational Hodge alpha in
+higher codimension p>=2,
+the proof of universal projective
+coherence of P(H_alpha), or an
+independently constructed
+holomorphic projectively
+coherent bundle with the
+prescribed full Chern character,
+would complete the exact target
+through (9). This source-free
+PGL coherence equation is
+the first unestablished step.
+There is no claim that the
+mere Hodge type or homotopy
+equivalence already forces it.
+
+\section{Result and project handoff}
+The substantive completed result
+is the CENTRAL DESCENT THEOREM:
+on a genuine all-original-X
+affine GST fold, the ONLY
+independent holomorphic descent
+condition for an Oka pure-class
+bundle with a Hodge determinant
+is its PROJECTIVE PGL_r
+bundle's higher-causal
+translation coherence. The
+scalar center, determinant
+comparison, Brauer lifting
+and residual r-torsion
+line twist are all resolved
+by actual projective geometry
+and the $\mu_r$ cohomology
+homotopy isomorphism.
+The resulting explicit true
+original-X canonical Chow cycle
+is (9).
+
+The user-requested universal
+existence proof is thereby
+reduced to a precise higher-rank,
+NONABELIAN geometric law.
+The record does not assert
+this law was proved; it is
+the exact source-bearing
+remaining mathematical
+assertion. This is not a
+counterexample to the Hodge
+conjecture and no claimed
+completed proof is certified.
+\end{document}

@@ -1,0 +1,238 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\C}{\mathbb C}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\rk}{\operatorname{rank}}
+\title{Algebraizing a restored GST fold: exact torsor criterion and actual cycle return}
+\author{Hand derivation before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{The exact subconstruction and original target}
+Base checkpoint: \texttt{e699dbec256fc23d4c5615449bf303df45d0076d}.
+The original input remains arbitrary smooth projective complex $X$, integer
+$1\le p\le\dim X$, and prescribed rational $(p,p)$ class $\alpha$.
+The desired final output is $Z_\alpha\in\CH^p(X)_\Q$ with canonical
+Betti class $\alpha$. This paper executes the intervening projective
+algebraization subconstruction for the actual elliptic-torus folds over $X$.
+It does not identify a rational homotopy-fiber model in higher degree with
+one of these principal torus bundles.
+
+Work first on connected $X$; all statements extend componentwise. Fix
+$E=\C^*/q^\Z$, $q=e^{-2\pi}$, and $A=E^r$. For actual holomorphic (hence
+algebraic) lines $L_i$ on $X$ let
+\[
+ P=\prod_X (L_i^\times/q^\Z),\quad
+ \theta=(\theta(L_i))\in H^1(X,\mathcal A),\quad
+ C:\Q^r\to H^2(X,\Q),\ e_i\mapsto c_1(L_i).
+\]
+Here $\mathcal A$ is the analytic sheaf of holomorphic maps to $A$;
+$H^1$ classifies principal $A$-torsors with their specified action over $X$.
+The prior curvature proof establishes whole canonical Hodge purity iff
+$C=0$. It also retains the distinct gluing class $\theta$.
+No Hodge-conjecture premise is used below.
+
+\section{The projectivity test, including both directions}
+\begin{theorem}[Exact projective algebraization criterion]\label{thm:proj}
+For every holomorphic principal $A$-torsor $\pi:P\to X$ with $X$ smooth
+projective and $A$ a fixed projective complex torus, the following are equivalent:
+\begin{enumerate}
+\item $P$ is a projective complex manifold;
+\item $\theta$ is torsion: $[N]\theta=0$ for some integer $N>0$;
+\item an actual finite unramified cover $f:X'\to X$ trivializes $P$, and
+$P$ has the finite quotient presentation $(X'\times A)/A[N]$ constructed below.
+\end{enumerate}
+When these hold, $P$, $\pi$, and the principal action have algebraic
+realizations over the original $X$.
+\end{theorem}
+\begin{proof}
+Suppose $P$ is projective and take an ample line $M$ on it. Trivialize $P$
+on small analytic opens $U_i$ by choices of local origins. On each fiber,
+$M$ has an ample Neron--Severi class $\lambda$, constant on connected $X$.
+Choose an actual ample line $M_0$ on $A$ in that class. The fiber restrictions
+of $M$ define holomorphic maps $a_i:U_i\to\operatorname{Pic}^0(A)=A^\vee$
+after tensoring by $M_0^{-1}$. Changing the origin by transition $t_{ij}$
+changes those maps by $\lambda_{M_0}(t_{ij})$, up to the fixed harmless
+choice of sign, where
+\[
+ \lambda_{M_0}:A\to A^\vee,\quad
+ t\mapsto T_t^*M_0\otimes M_0^{-1}.
+\]
+Thus $\lambda_{M_0,*}\theta=0$ in $H^1(X,\mathcal A^\vee)$.
+Positivity of $M_0$ makes $\lambda_{M_0}$ an isogeny: its positive Hermitian
+Riemann form is nonsingular, so its induced map on the real universal covers
+is invertible and its lattice cokernel is finite. Choose $N>0$ annihilating
+that finite cokernel; the inverse on universal covers then gives an isogeny
+$\mu:A^\vee\to A$ with $\mu\lambda_{M_0}=[N]$. Consequently $[N]\theta=0$.
+This argument uses an actual ample line on the total space, not purity alone.
+
+Conversely, the exact analytic sheaf sequence
+\[
+ 0\longrightarrow A[N]\longrightarrow\mathcal A
+ \xrightarrow{[N]}\mathcal A\longrightarrow0
+\]
+is locally surjective because $[N]$ is a covering map. If $[N]\theta=0$,
+its long exact sequence gives an actual $A[N]$-valued cocycle lifting
+$\theta$. Its principal cover $X'\to X$ is finite unramified of degree
+$d=|A[N]|=N^{2r}$ (it need not be connected). The associated bundle is
+\[
+ P\cong(X'\times A)/A[N],
+ \qquad g\cdot(x',a)=(g x',a-g).
+\]
+Local cocycles verify this equality with the original torsor, not just
+with its topological class. Pullback of a positive ample line from $X$
+is positive on compact $X'$, so Kodaira embedding makes every component
+projective. The covering is algebraic by projective GAGA. The finite group
+actions are algebraic for the same reason. A finite group quotient of a
+projective variety is projective: tensor an ample line over the group orbit,
+then take a sufficiently high power for descent and invariant sections.
+The action here is free, so the quotient is smooth. The quotient map to $X$
+and the translation action are algebraic. This constructs (3) and (1).
+The implication (3) to (2) also follows from the displayed finite cocycle.
+\end{proof}
+The analytic inputs used are the line-family map to $\operatorname{Pic}^0$
+and the Kodaira/projective-GAGA facts at their usual precise strengths.
+No statement that all K\"ahler manifolds are projective is used.
+
+\section{Actual multisection cycle and normalized canonical return}
+\begin{theorem}[Source constructed by the finite cover]\label{thm:cycle}
+Under the equivalent conditions above, set $s:X'\to P$ to be the algebraic
+map induced by $x'\mapsto(x',0)$. With $d=N^{2r}$ the genuine rational
+Chow class
+\[
+ \Sigma=\frac1d s_*[X']\in\CH^r(P)_\Q
+\]
+satisfies $\pi_*\Sigma=[X]$. Therefore
+\[
+ R_\Sigma(B)=\pi_*(\Sigma\cdot B):\CH^p(P)_\Q\to\CH^p(X)_\Q,
+ \qquad R_\Sigma\pi^*=\mathrm{id}.                 \tag{1}
+\]
+These statements hold in actual Chow, with the canonical Betti compatibility.
+\end{theorem}
+\begin{proof}
+The map $s$ is proper and finite onto its image, since its composite with
+$\pi$ is finite and its fibers are finite. All maps have already been
+algebraized. Hence
+$\pi_*s_*[X']=f_*[X']=d[X]$, including disconnected covers and multiplicities.
+The projection formula gives
+$\pi_*(\Sigma\cdot\pi^*Z)=Z\cdot\pi_*\Sigma=Z$.
+Smoothness defines the Chow intersection; proper pushforward lowers
+codimension by $r$, so (1) has the stated degree $p$. Compatibility of the
+canonical cycle map with these operations gives the Betti identities.
+\end{proof}
+In particular, for the actual prescribed $\alpha$,
+\[
+ \alpha\text{ is a cycle class on }X
+ \iff \pi^*\alpha\text{ is a cycle class on }P.       \tag{2}
+\]
+The forward map is actual pullback; in the reverse direction an actual
+$B$ with $\mathrm{cl}(B)=\pi^*\alpha$ yields the explicit
+$Z_\alpha=R_\Sigma(B)$, with class $\alpha$. The construction of $\Sigma$
+is unconditional once the torsor is torsion; it does not construct $B$
+for an arbitrary higher-primitive $\alpha$. Equation (2) prevents silently
+using the provisional Hodge assumption at the projective endpoint.
+
+The finite cover also computes the entire rational Hodge cup algebra.
+Translations on $A$ act trivially on cohomology, being isotopic to identity.
+Finite-cover transfer and Kunneth give
+\[
+ H^*(P,\Q)\cong
+ (H^*(X',\Q)\otimes H^*(A,\Q))^{A[N]}
+ \cong H^*(X,\Q)\otimes H^*(A,\Q).                 \tag{3}
+\]
+These are Hodge-algebra isomorphisms because all maps are algebraic and
+finite invariants are exact over $\Q$. The splitting uses the finite-cover
+presentation and is not claimed canonical under all choices. Every degree
+is retained; no first-Betti surrogate or claim about the full Chow ring is
+being made.
+
+\section{Largest projective dimensional quotient}
+Return to $A=E^r$ and the list of lines. Define three actual subgroups of
+$\Z^r$:
+\[
+\begin{split}
+ R_0&=\{m:\textstyle\sum_i m_i\theta(L_i)=0\},\\
+ R_{\rm alg}&=\{m:\textstyle\sum_i m_i\theta(L_i)\text{ is torsion}\},\\
+ R_C&=\{m:\textstyle\sum_i m_i c_1(L_i)=0\text{ in }H^2(X,\Q)\}.
+\end{split}
+\begin{theorem}[Exact projective quotient and dimension gap]\label{thm:max}
+In the category of integer-matrix principal $E$-quotients over $X$,
+\[
+ R_{\rm alg}=\operatorname{sat}(R_0),\qquad
+ R_0\subset R_{\rm alg}\subset R_C.
+\]
+In particular $R_{\rm alg}$ is saturated. Choose an integral basis as the
+rows of $M_{\rm alg}$. The corresponding connected-fiber quotient has a
+projective total space, dimension $n+s$ where $s=\rk R_{\rm alg}$, and
+every projective integer-matrix quotient factors uniquely through it.
+The sharp number of dimensions that must collapse for projectivity is
+$r-s$. The extra collapse beyond Hodge restoration is
+\[
+ \Delta_{\rm ext}=\rk R_C-\rk R_{\rm alg}\geq0.       \tag{4}
+\]
+\end{theorem}
+\begin{proof}
+A relation is torsion iff a positive multiple is zero; this proves the
+saturation equality and closure under sums, including different torsion
+orders. A torsion torsor has torsion integral topological Chern class, so
+its rational curvature vanishes; hence $R_{\rm alg}\subset R_C$.
+A saturated subgroup of a finite free lattice has free quotient; extend
+its basis to a unimodular basis of $\Z^r$. Thus the basis-row map is
+surjective on lattices and its map $E^r\to E^s$ has connected kernel.
+Its finitely many torsor coordinates are torsion. A common multiple
+annihilates all of them, so Theorem~\ref{thm:proj} constructs its projective
+endpoint and Theorem~\ref{thm:cycle} its multisection.
+Every projective quotient has torsion coordinate classes, so all its rows
+lie in $R_{\rm alg}$. Unique integral expansion in the basis gives the
+factorization. If the original row map is surjective, so is this factor
+map, since a right inverse for $M_{\rm alg}$ is integral. Its row rank
+cannot exceed $s$, proving optimality. The earlier Hodge maximum is
+$n+\rk R_C=n+r-\rk C$; subtraction proves (4).
+For $r=0$ the empty quotient is just $X$, with $N=1$ and $\Sigma=1$.
+\end{proof}
+The optimum concerns precisely these integer-matrix quotients. It is not
+an optimality claim over all GST realizations. Basis choices are not
+canonical. Computing the analytic torsor classes is not replaced by a
+claimed decision procedure from curvature alone.
+
+\section{A geometric discriminator, rather than another rank extrapolation}
+If $h^{1,0}(X)>0$, the earlier countability argument gives a line
+$L\in\operatorname{Pic}^0(X)$ for which $\theta(L)$ is not torsion.
+Indeed the image of $H^1(X,\Z)\to\operatorname{Pic}(X)$ under $q^{(-)}$
+is countable, as is the union of its preimages under all nonzero power
+maps on the positive-dimensional compact torus $\operatorname{Pic}^0(X)$;
+each such power map has finite fibers. Choose $L$ outside that union.
+Then $P(L)$ has $C=0$, its entire canonical Hodge structure and the actual
+K\"ahler metric from the prior construction. Yet Theorem~\ref{thm:proj}
+proves it has no projective realization of the given complex manifold.
+Here $R_C=\Z$, $R_{\rm alg}=0$: the maximal Hodge quotient keeps the handle,
+and the maximal projective quotient collapses it, returning to $X$.
+This refutes the proposed implication ``curvature zero automatically
+algebraizes every restored fold.'' It does not refute the Hodge conjecture.
+
+For the earlier independent central worlds $W_K=X\times Z_K$, zero total
+curvature gives the actual product $X\times E^{m+r}$; its torsor is zero.
+Thus that experiment lies on the positive branch, with the explicit
+multisection and original-X return above. Its curvature theorem remains
+established. The new test concerns the broader base-coupled construction.
+
+\section{Executed routes and remaining source scope}
+Three distinct checks were executed: (i) construct a projective model from
+a torsion gluing class, with finite quotient and actual multisection;
+(ii) derive the necessary torsion condition from an actual ample line,
+then apply it to the already constructed zero-curvature non-torsion world;
+(iii) test the proposed alpha return using the actual multisection, obtaining
+the exact two-way cycle-image relation (2), rather than an assumed source.
+The projective realization subconstruction and its optimal quotient are
+completed at hand-proof level, self-reviewed. No worldwide novelty claim
+is made for the classical torsor/projectivity ingredients.
+For higher $p$ the prescribed rational homotopy-fiber torsor is not a
+principal elliptic torsor; these theorems do not silently algebraize it.
+The universal $B$ in (2), or a different independently algebraic higher
+source representing $\alpha$, has not been constructed by this attempt.
+\end{document}

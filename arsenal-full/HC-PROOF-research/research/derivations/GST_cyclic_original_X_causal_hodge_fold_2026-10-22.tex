@@ -1,0 +1,433 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{lemma}{Lemma}
+\title{GST cyclic causal folds acting on the original variety:
+an all-arity Hodge-genesis and purity-defect law}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This is a substantive extension of
+\texttt{GST\_causal\_graph\_double\_fold\_weight\_emergence\_2026-10-22.tex}.
+Instead of adjoining a singular causal curve as an independent spectator,
+the fold carries a nontrivial algebraic action on cohomology derived from
+\emph{every} original connected smooth projective complex variety $X$.
+For all fold arities $m\geq2$ we construct a concrete projective
+twisted-nodal realization and a smooth projective companion; derive exact
+mixed/pure Hodge-generating equations; and prove that two causal loops
+produce an even-degree, rational diagonal but non-pure sector depending on
+the original $X$.  The original $X$ is input geometry, not an assumed
+cycle-class solution.  These equations do not assert a Hodge counterexample
+on a smooth projective variety.
+\end{abstract}
+
+\section{Immutable original-$X$ contract and dimensionless input}
+Fix any \emph{connected}, smooth, projective complex variety $X$
+of complex dimension $d\geq0$.  The immutable rational Hodge target
+would require that for every $p$ and rational $(p,p)$ Hodge class
+$\alpha$ one constructs $Z_\alpha\in CH^p(X)_{\mathbb Q}$
+with $\mathrm{cl}^{\mathrm{can}}_X(Z_\alpha)=\alpha$.
+We make no algebraicity assumption about $\alpha$.
+
+The GST input is instead a finite causal incidence cycle, its cyclic
+automorphism and a geometric realization.  World arity $m$ is chosen
+freely; geometry then produces the cohomological degrees and Hodge types.
+In the language of \texttt{GSTGeneralSpace.lean}, the underlying world
+is not assigned a metric or a Hodge decomposition.  The construction
+below is the explicit algebraic realization required for its
+dimension-fold laws to have mathematical content.
+
+For a mixed Hodge structure write
+\[
+ P_Y(t,s,u,v)=
+ \sum_{k,w,p,q}
+ h^{p,q}\bigl(\operatorname{Gr}^W_wH^k(Y,\mathbb Q)\bigr)
+ t^k s^w u^p v^q,\qquad w=p+q.
+\]
+For smooth projective $Y$, every degree-$k$ sector is pure of
+weight $k$.  Define the two GST fold readouts
+$\chi=p-q$ and $\delta=w-k$; the former tests diagonality, the latter
+the cohomological purity condition.
+
+\section{Actual cyclic original-$X$ causal realization}
+Let $m\geq2$, $B=X^m$, and $\rho:B\to B$ cyclically permute factors.
+Write $G=C_m=\langle\rho\rangle$.
+Let $D_m$ be the connected \emph{cycle of $m$ copies of
+$\mathbb P^1$}, with $\infty$ on component $i$ glued transversely
+to $0$ on component $i+1$ (indices modulo $m$).
+For $m=2$ there are two distinct nodes and two components.
+The cyclic rotation $\tau$ of components preserves the nodes;
+no nonidentity rotation fixes any geometric point.
+
+Take the actual projective geometric quotient
+\[
+       Y_m(X)=(X^m\times D_m)/C_m ,
+       \qquad
+       g\cdot(b,c)=(\rho(g)b,\tau(g)c).
+       \tag{1}
+\]
+The group action is free because the rotation on $D_m$ is free,
+even when $\rho$ has fixed points on $B$.
+The quotient is projective (finite quotient of a projective scheme)
+and has complex dimension $md+1$. It is a singular nodal
+normal-crossings realization with a single rational normalization
+component $B\times\mathbb P^1$; equivalently its two boundary
+copies of $B$ are glued by $\rho$.
+
+For an independent \emph{smooth outcome with the same causal
+group and the same action on $X$}, choose a smooth elliptic curve
+$E$ and an $m$-torsion point $a$ of exact order $m$.
+Translation $\tau_a$ acts freely on $E$. Define
+\[
+       S_m(X)=(X^m\times E)/C_m ,
+       \qquad
+       g\cdot(b,e)=(\rho(g)b,e+g a).
+       \tag{2}
+\]
+This quotient is smooth projective of the same complex dimension
+$md+1$ and has a pure Hodge structure.
+Equations (1) and (2) are two \emph{actual} realized world outputs.
+An equivariant flat family interpolating them is a separate
+geometric assertion and is not assumed here.
+
+\begin{lemma}[Exact rational cohomology of the causal cycle]
+The $C_m$-equivariant mixed Hodge structures on $D_m$ are
+\[
+ H^0(D_m,\mathbb Q)=\mathbb Q(0),\qquad
+ H^1(D_m,\mathbb Q)=\mathbb Q(0),\qquad
+ H^2(D_m,\mathbb Q)=\mathbb Q(-1)\otimes\mathbb Q[G].
+ \tag{3}
+\]
+$G$ acts trivially on degrees zero and one, and by the regular
+component-permutation representation on degree two.
+\end{lemma}
+\begin{proof}
+The normalization is the disjoint union of $m$ rational
+components. The node--component incidence graph is one
+oriented $m$-cycle. Its boundary matrix has rank $m-1$;
+there is one graph $H^1$, of weight zero and type $(0,0)$.
+Rotation preserves its orientation, so acts trivially on that line.
+Top cohomology has one weight-two Tate class for each rational
+component, and $G$ rotates these $m$ classes regularly.
+The normalization sequence is equivariant and compatible with
+mixed Hodge structures.
+\end{proof}
+
+\begin{theorem}[GST original-$X$ cyclic causal fold decomposition]
+Put $V_k=H^k(B,\mathbb Q)$ and $V_k^G=\ker(\rho^*-\mathrm{id})$.
+For every integer $k$, with $V_j=0$ for $j<0$, the following is
+an isomorphism of rational mixed Hodge structures:
+\[
+ \boxed{\quad
+ H^k(Y_m(X),\mathbb Q)\cong
+ V_k^G\ \oplus\ V_{k-1}^G\
+                  \oplus\ V_{k-2}(-1).
+ \quad}                                                \tag{4}
+\]
+Here the middle summand occurs in cohomological degree $k$
+but has weight $k-1$; the other two summands have weight $k$.
+The corresponding smooth companion satisfies
+\[
+ \boxed{\quad
+ H^k(S_m(X),\mathbb Q)\cong
+ V_k^G \oplus
+ (V_{k-1}^G\otimes H^1(E,\mathbb Q))
+ \oplus V_{k-2}^G(-1).
+ \quad}                                                \tag{5}
+\]
+Its three summands all have weight $k$.
+\end{theorem}
+\begin{proof}
+For the free finite cyclic action, rational transfer makes
+cohomology of each quotient the $G$-invariants of the respective
+product cohomology, compatibly with its mixed Hodge structure.
+K\"unneth and (3) give the first two summands in (4). For the third,
+the regular representation identity
+$(V\otimes\mathbb Q[G])^G\cong V$ holds by the explicit map
+$v\mapsto\sum_{g\in G}g v\otimes e_g$.
+Its inverse is coefficient extraction at $e_1$, so no
+extra invariant-only assumption is inserted.
+For (5), translation on an elliptic curve acts identically on
+its cohomology. The elliptic cohomology is $\mathbb Q(0)$,
+$H^1(E)$, and $\mathbb Q(-1)$ in degrees $0,1,2$.
+Finite invariants and K\"unneth now give (5).
+\end{proof}
+
+\section{ALL-arity equation, graded Koszul signs, and exact output comparison}
+Let $P_X=P_X(t,s,u,v)$ and $A=t^2s^2uv$. For
+$0\leq j<m$ put $g_j=\gcd(m,j)$, $L_j=m/g_j$.
+The graded K\"unneth action on $H^*(X)^{\otimes m}$ is a
+\emph{signed} permutation, with Koszul sign. Consequently
+\[
+ \boxed{\quad
+ I_m(X)=P_{H^*(X^m)^{C_m}}
+ =\frac1m\sum_{j=0}^{m-1}
+ \left[
+   P_X\bigl((-1)^{L_j-1}t^{L_j},
+            s^{L_j},u^{L_j},v^{L_j}\bigr)
+ \right]^{g_j}.
+ \quad}                                                \tag{6}
+\]
+The $j=0$ term is $P_X^m$.
+Indeed $\rho^j$ consists of $g_j$ cycles of length $L_j$;
+only tensor-basis words constant around each cycle contribute
+to its trace. On a homogeneous degree-$k$ basis element, the
+cycle carries sign $(-1)^{(L_j-1)k}$. Averaging the characters
+is the rational invariant projector.
+
+The complete all-arity GST dimensional-fold genesis equations are
+\[
+ \boxed{\begin{aligned}
+ P_{Y_m(X)}&=(1+t)\,I_m(X)+A\,P_X^m,\\
+ P_{S_m(X)}&=(1+t\,s(u+v)+A)\,I_m(X),\\
+ P_{S_m(X)}-P_{Y_m(X)}
+     &=t\bigl(s(u+v)-1\bigr)I_m(X)
+       +A\bigl(I_m(X)-P_X^m\bigr).
+ \end{aligned}}                                       \tag{7}
+\]
+These are \emph{entire Hodge-graded realizations}, not
+endomorphisms relabeling a fixed $H^{p,q}(X)$.
+For any additional Tate dimension-fold $N\geq0$, multiply
+both series by $\sum_{\ell=0}^N A^\ell$.
+Thus arbitrary $m,N$ yield actual dimensions $md+1+N$,
+while preserving the exact charge and purity-gap diagnostics.
+
+\section{Genuine original-product Chow operator}
+The action $\rho$ is an algebraic automorphism of
+$B=X^m$. It supplies actual graph correspondences
+$[\Gamma_{\rho^j}]\in CH^{md}(B\times B)_{\mathbb Q}$.
+The averaged correspondence
+\[
+ \boxed{\qquad
+ e_\rho=\frac1m\sum_{j=0}^{m-1}[\Gamma_{\rho^j}],
+ \qquad e_\rho\circ e_\rho=e_\rho
+ \quad\text{in } CH^{md}(B\times B)_{\mathbb Q}.
+ \qquad}                                               \tag{8}
+\]
+is a \emph{genuine Chow idempotent}, because graph composition
+implements the cyclic group multiplication. It induces the
+rational Hodge projector onto $V_k^G$. Therefore the invariant
+factor in the fold formula (7) has an actual source in scheme
+correspondence geometry, not an assumed Hodge operator.
+Its being algebraic as a \emph{two-legged correspondence}
+does not assert an algebraic representative for every
+one-legged Hodge class on the untouched original $X$.
+
+\section{Second fold: even-degree diagonal weight failure for EVERY X}
+Let $D_1$ denote the irreducible rational nodal projective curve,
+so $P_{D_1}=1+t+A$. Construct
+\[
+             Z_m(X)=Y_m(X)\times D_1.
+\]
+It is an actual singular projective world of dimension $md+2$,
+and
+\[
+ \boxed{\qquad
+ P_{Z_m(X)}=(1+t+A)
+             \bigl((1+t)I_m(X)+A P_X^m\bigr).
+ \qquad}                                               \tag{9}
+\]
+The sole \emph{double-weight-deficit} contribution is the
+$t^2 I_m(X)$ term. Hence for every $k$
+\[
+ \boxed{\quad
+ \operatorname{Gr}^W_{k}H^{k+2}(Z_m(X),\mathbb Q)
+ \cong H^k(X^m,\mathbb Q)^{C_m},
+ \quad(\chi,\delta)=(p-q,-2)\text{ on a }(p,q)\text{ component}.
+ \quad}                                                \tag{10}
+\]
+For $d>0$ choose the nonzero rational top point class
+$\eta_X\in H^{2d}(X,\mathbb Q)$, of type $(d,d)$.
+Inside $H^{2d}(X^m,\mathbb Q)$ the vector
+\[
+       \Theta_X=\sum_{i=1}^m
+       1\otimes\cdots\otimes\eta_X\otimes\cdots\otimes1
+                                                               \tag{11}
+\]
+is nonzero and cyclically invariant. The indices are
+even-degree, so no Koszul signs arise.
+Equation (10) constructs from \emph{every} original $X$
+a rational cohomological sector on $Z_m(X)$ with
+\[
+       k_{\mathrm{new}}=2d+2,\quad
+       (p,q)=(d,d),\quad
+       w=2d,\quad
+       (\chi,\delta)=(0,-2).
+                                                               \tag{12}
+\]
+After any Tate fold $j$ its signature becomes
+$(2d+2+2j,d+j,d+j,2d+2j)$, with the same charge $0$
+and defect $-2$. Therefore \emph{charge-zero does not imply
+smooth-projective purity}, even with an original-$X$-dependent
+algebraic cyclic action and genuine projective realization.
+The singular world still has its legitimate \emph{mixed}
+Hodge structure; this is not a nonalgebraic rational $(p,p)$
+class on a smooth projective $X$.
+
+\section{Exact test: X an elliptic curve, m=2}
+For an elliptic curve $X$, $P_X=1+ts(u+v)+A$.
+The cyclic involution swaps the two $X$ factors. Formula (6)
+specializes to
+\[
+ I_2=\frac12\bigl(P_X^2+
+       P_X(-t^2,s^2,u^2,v^2)\bigr).
+\]
+The symbolic rational Wolfram evaluation of (7) gives
+\[
+ \begin{array}{c|c|c}
+  &\operatorname{Gr}^W_1 H^2&
+        \operatorname{Gr}^W_2 H^2\\ \hline
+ Y_2(X)&u+v&3uv\\
+ X^2\times D_1&2u+2v&u^2+5uv+v^2\\
+ S_2(X)&0&u^2+5uv+v^2
+ \end{array}
+\]
+where displayed polynomials are the $u,v$ Hodge multiplicities.
+For the second actual nodal fold, the weight-two component of
+$H^4(Z_2(X))$ is $2uv$ and has $\delta=-2$.
+A separate check with $X=\mathbb P^1$ gives $uv$ in this
+degree-four weight-two component. Thus the signature
+is not an artifact of elliptic odd cohomology.
+
+\section{Target-sensitive lift of EVERY original-$X$ Hodge class}
+The preceding fold is not limited to a selected point or top
+cohomology class. Fix \emph{any} rational Hodge class
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+The $G$-invariant cyclic symmetrization
+\[
+ \Theta_m(\alpha)=\sum_{i=1}^m\operatorname{pr}_i^*\alpha
+ \in H^{2p}(B,\mathbb Q)^G\cap H^{p,p}(B)
+ \tag{13}
+\]
+is a rational Hodge class without selecting any source cycle.
+For $p>0$, fixing a complex point $x_0\in X(\mathbb C)$
+gives an algebraic insertion
+$s:X\hookrightarrow B$, $x\mapsto(x,x_0,\ldots,x_0)$, and
+\[
+ \boxed{s^*\Theta_m(\alpha)=\alpha.}                     \tag{14}
+\]
+Indeed for $i\ne1$ the composition $\operatorname{pr}_i s$
+is constant and pulls every positive-degree class to zero.
+For $p=0$, the map sends $\alpha$ to $m\alpha$ and is
+injective over $\mathbb Q$. Therefore $\Theta_m$ is injective
+for every codimension, with an explicit left inverse.
+
+Combining (13) with the weight-$2p$ K\"unneth summand
+in (10) constructs a \emph{linear injection}
+\[
+ \boxed{\quad
+ \mathfrak B_{m,p}:
+ H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)
+ \hookrightarrow
+ \operatorname{Gr}_{2p}^W H^{2p+2}(Z_m(X),\mathbb Q).
+ \quad}                                                \tag{15}
+\]
+Every nonzero target is sent to a nonzero rational diagonal
+class in degree $2p+2$, of weight $2p$ and therefore
+of purity gap $-2$.  This is a \emph{target-sensitive
+nonpure Hodge-sector construction for every original $X$}
+that does not assume $\alpha$ is algebraic.  The target
+class is not thereby made into a nonalgebraic class of
+a smooth projective variety: the receiving world is singular.
+
+\begin{theorem}[Algebraicity-faithful smooth causal fold]
+Let $q:B\times E\to S_m(X)$ be the finite \'etale quotient.
+There is a unique rational Hodge class $\widehat\alpha$
+on the \emph{smooth} $S_m(X)$ such that
+\[
+ q^*\widehat\alpha=\operatorname{pr}_B^*\Theta_m(\alpha).
+ \tag{16}
+\]
+For every $X,m,p,\alpha$ as above,
+\[
+ \boxed{\quad
+ \alpha\in\operatorname{im}\mathrm{cl}^{\mathrm{can}}_X
+ \ \Longleftrightarrow\
+ \widehat\alpha\in\operatorname{im}\mathrm{cl}^{\mathrm{can}}_{S_m(X)}.
+ \quad}                                                \tag{17}
+\]
+Both implications are induced by genuine algebraic
+pushforward/pullback operations, not a freely chosen
+Hodge-to-Chow inverse.
+\end{theorem}
+\begin{proof}
+Finite-group rational transfer identifies $H^*(S_m,\mathbb Q)$
+with the invariants in $H^*(B\times E,\mathbb Q)$.
+The right side of (16) is invariant under cyclic permutation
+of $B$ and torsion translation on $E$; hence it descends
+uniquely to $\widehat\alpha$.  All these maps preserve
+Hodge type, so $\widehat\alpha$ is rational of type $(p,p)$.
+
+Suppose $\alpha=\mathrm{cl}^{\mathrm{can}}_X(W)$ for
+$W\in CH^p(X)_{\mathbb Q}$. Set
+$W_B=\sum_i\operatorname{pr}_i^*W\in CH^p(B)_{\mathbb Q}$.
+It is invariant as a Chow class. Then the honest rational
+algebraic cycle
+\[
+       \widehat W={1\over m}q_*
+            (\operatorname{pr}_B^*W_B)
+       \in CH^p(S_m)_{\mathbb Q}
+                                                               \tag{18}
+\]
+has canonical Betti class $\widehat\alpha$:
+the finite-degree transfer identity and invariance give
+$q^*\mathrm{cl}_{S_m}^{\mathrm{can}}(\widehat W)
+=\mathrm{cl}_{B\times E}^{\mathrm{can}}
+ (\operatorname{pr}_B^*W_B)$, and $q^*$ is injective.
+
+Conversely suppose $\widehat\alpha
+=\mathrm{cl}_{S_m}^{\mathrm{can}}(\widehat W)$ for a
+genuine codimension-$p$ cycle $\widehat W$.
+Pull it back by the finite \'etale map $q$, then by the
+regular embedding $i_e:B\to B\times E$ at any
+point $e\in E(\mathbb C)$, obtaining
+$W_B=i_e^*q^*\widehat W\in CH^p(B)_{\mathbb Q}$.
+Naturality of the canonical cycle class and (16) give
+$\mathrm{cl}_B(W_B)=\Theta_m(\alpha)$.
+For $p>0$ set $W=s^*W_B$ using the algebraic
+insertion $s:X\to B$; then (14) proves
+$\mathrm{cl}_X(W)=\alpha$.
+For $p=0$, pullback returns $m\alpha$ and
+$W=m^{-1}s^*W_B$ gives $\alpha$.
+All these operations lie in actual rational Chow groups.
+\end{proof}
+
+Equation (17) is a sharp \emph{algebraicity-preservation
+equivalence}, not a proof of universal source existence:
+an arbitrary preimage $\widehat W$ on $S_m$ is not
+constructed from $\alpha$ by (16).  Its value is that
+the smooth causal fold \emph{faithfully transports any
+unknown original-X Hodge target} and has an explicit
+native cycle return whenever a folded native source
+is independently available. The singular double fold
+(15) instead exposes a nonpure topology-dependent
+version of the same unknown class.
+
+\section{Evidence and precise limits}
+Uniform arguments: finite-group transfer; rational K\"unneth;
+node-normalization mixed Hodge structure; character projection
+including Koszul signs; algebraic graph composition.
+Finite exact Wolfram checks at $m=1,\ldots,5$ for elliptic
+cohomology, at $m=2$ for elliptic and $\mathbb P^1$ double
+folds, and polynomial smooth--singular comparison, returned
+exact equalities and nonnegative coefficients.
+No approximation, unproved abstract cycle-class map,
+source preimage, local Lean installation, or claim of a
+new universal Hodge solution is involved.
+
+\emph{Mathematical boundary.}
+The construction acts nontrivially on the entire Hodge
+cohomology of $X^m$, for arbitrary input $X$, and supplies
+a genuine Chow projector there.  It changes realized
+global topology and realizes both pure and mixed outputs.
+It does not yet construct $Z_\alpha\in CH^p(X)_{\mathbb Q}$
+for a prescribed arbitrary Hodge class $\alpha$ on the
+\emph{same} $X$. The decisive additional operation would
+need a genuine Chow correspondence returning an independently
+created one-legged class to the untouched original $X$;
+this cannot be deduced just from the cyclic invariants.
+\end{document}

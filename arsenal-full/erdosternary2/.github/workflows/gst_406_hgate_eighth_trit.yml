@@ -1,0 +1,36 @@
+name: GST 406 Original HGate Eighth Trit Physical Families
+on:
+  push:
+    branches: [gpt6/problem406-rowtwo-first-hit-exact-20261030]
+    paths:
+      - GSTProblem406HGateEighthTrit.lean
+      - .github/workflows/gst_406_hgate_eighth_trit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict_hgate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Pinned Lean / mathlib and olean cache
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Existing exact GST source modules
+        run: |
+          set -euo pipefail
+          lake build GST406HGateEighthTrit 2>&1 | tee hgate-deps.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' hgate-deps.log
+      - name: Strict source-exact eighth-trit kernel and axiom check
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406HGateEighthTrit.lean 2>&1 | tee hgate-eight.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' hgate-eight.log
+          grep -F "'GSTProblem406HGateEighthTrit.commonTwo_eighth_physical_class' depends on axioms:" hgate-eight.log
+          grep -F "'GSTProblem406HGateEighthTrit.original_thirdWave_seed37' depends on axioms:" hgate-eight.log
+          echo GST406_ORIGINAL_EIGHTH_HGATE_KERNEL_PASS=1

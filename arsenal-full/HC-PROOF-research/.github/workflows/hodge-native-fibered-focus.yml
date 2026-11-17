@@ -1,0 +1,54 @@
+name: Focused Hodge Native-Fibered Lean Gate
+
+on:
+  push:
+    branches:
+      - clean/advanced-gst-hodge-20261009
+    paths:
+      - 'GSTClassicalHodgeKernelStableOperatorAlgebra.lean'
+      - 'GSTClassicalHodgePointwiseNativeCosmicClosure.lean'
+      - 'GSTClassicalHodgeFiberedNativeOperatorLift.lean'
+      - 'GSTClassicalHodgeSynchronizedSeedFiberedLanding.lean'
+      - '.github/workflows/hodge-native-fibered-focus.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hodge-native-fibered-focus-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-native-fibered:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and fetch Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Compile the four independent failure roots
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build \
+            GSTClassicalHodgePointwiseNativeCosmicClosure \
+            GSTClassicalHodgeFiberedNativeOperatorLift \
+            GSTClassicalHodgeSynchronizedSeedFiberedLanding \
+            GSTClassicalHodgeKernelStableOperatorAlgebra \
+            2>&1 | tee hodge-focused.log
+      - name: Publish focused compiler diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hodge-native-fibered-focused-log
+          path: hodge-focused.log
+          if-no-files-found: warn

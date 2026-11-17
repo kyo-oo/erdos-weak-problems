@@ -1,0 +1,61 @@
+name: GST Canonical Polarized Hodge Ghost
+on:
+  push:
+    branches: [research/mathbox-k3-diagonal-primitive-20261015]
+    paths:
+      - GSTCanonicalPolarizedHodgeGhost.lean
+      - .github/workflows/gst-canonical-polarized-hodge-ghost.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-polarized-canonical-ghost-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel verify canonical positive Hodge Riemann separator
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTCanonicalHodgeGhost"
+          roots = [
+            "GSTUniversalHodgeResidualProjection",
+            "GSTPolarizedHodgeResidualEnergy",
+            "GSTCanonicalPolarizedHodgeGhost"
+          ]
+          EOF
+          if lake build GSTCanonicalHodgeGhost > gst-canonical-ghost.log 2>&1; then
+            echo "LEAN PASSED: exact rational positive Hodge ghost from unrepresented residual"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-canonical-ghost.log | tail -n 150 || true
+            tail -n 140 gst-canonical-ghost.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-canonical-ghost.log; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-canonical-polarized-hodge-ghost-log
+          path: gst-canonical-ghost.log
+          if-no-files-found: warn

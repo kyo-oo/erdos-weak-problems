@@ -1,0 +1,32 @@
+name: GPT6 GST Worldtrace Cubic Three-Band Exact Kernel
+on:
+  push:
+    branches: [gpt6/problem406-fourth-trit-discovery-20261029]
+    paths: [GSTWorldtraceCubicBlockLift.lean, .github/workflows/gpt6_gst_cubic_block.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-cubic-kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile verified GST quadratic and source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceQuadraticBlockLift.olean GSTWorldtraceQuadraticBlockLift.lean
+      - name: Kernel check exact GST third-scale-band cubic physical source law
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceCubicBlockLift.lean 2>&1 | tee gst-cubic-exact.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' gst-cubic-exact.log
+          echo GST_WORLDTRACE_CUBIC_THREE_BAND_KERNEL_PASS=1

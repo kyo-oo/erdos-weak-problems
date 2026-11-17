@@ -1,0 +1,248 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Sp}{\mathrm{Sp}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\kerp}{\mathrm{ker}}
+
+\title{GST -- the identification link: the grade-typed parity reduction
+(Round 24; the one mechanism, the rotation, at the remaining construction)}
+\author{the campaign}
+\date{2026-10-26 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{The target}
+
+The remaining construction of the universal close (the 21-c audit's item (ii),
+upgraded by Round 23 under the operator's granted authority): an equivariant
+identification of the traceless two-cell class $[C_T^0]\in H^2(G_\bullet,
+\mathrm{SL}(H_z))$ with a $C_4$-class of the content deck (the rotation deck of
+the input's letter lattice), carrying the $(p,p)$-gate, acting on the groupoid
+class directly, and absorbing the $(A,-A)$ witness. This note delivers the
+\emph{target-side calculus} of that link under an explicit hypothesis, and
+certifies its laws on the committed model world. The construction is
+\emph{the grade-typed parity reduction} $\Lambda_p$; the reduction of the
+actual two-cell to the consumed cochain is the remaining step (the 21-c item
+(ii) itself) and is not performed here.
+
+\section{The setup (the stripped two-cell, the content deck)}
+
+Let $\Gamma = L$ be the translation lattice of the groupoid $G_\bullet$ (the
+monodromy letters; on the model, the eight-letter lattice
+$L=\bigoplus_j \Z e_j\oplus\Z f_j$), and let
+$\gamma\in\Aut(L)$ be the committed single-factor Gaussian rotation
+($e_j\mapsto -f_j$, $f_j\mapsto e_j$, the other letters fixed; the deck
+$C_4=\langle\gamma\rangle$). Let
+$\theta=\sum_j e_j\wedge f_j\in\bigwedge^2 L$ be the committed curvature form
+(the divisor class $\vartheta$ of the letter world).
+
+\begin{quote}
+\textbf{HYPOTHESIS (the strip shape; assumed in this note, on its face).}
+After the D2/D3 strip the two-cell of the input pair at scale $m$ with
+content $\alpha$ is the $\iota$-shaped curvature cochain
+\[
+  c_{m,\alpha}(v,w)\;=\;\theta(v,w)\cdot\iota(m\alpha),\qquad
+  \iota(x)=(x,-x)\in M_\alpha\oplus M_\alpha,
+\]
+where $v,w\in\Gamma$ are the arrows and $M_\alpha$ is the content module of
+$\alpha$ (the deck orbit plane; on the typed-pure sector, the lattice
+$S_{pp}$ below). The committed strip control and the traceless decks
+certify the $\iota$-shape as the strip's own output type at the cochain
+level (the traceless pair $\{(x,-x)\}$; the $(x,+x)$ shape fails the
+trace condition, computed in the certificate). The reduction of the
+actual $\mathrm{GL}(H_z)$-valued two-cell to this cochain is \emph{not}
+performed here; it is the remaining step of the construction (the 21-c
+item (ii)), and the falsifiable entry test for it is the committed one: a
+derivation instance of the residue pair transported through the
+identification.
+\end{quote}
+
+\section{The construction}
+
+\begin{definition}[the link $\Lambda_p$]
+Fix the conduit's grade $p$ (the codimension of the sought cycle; on the
+model, $p=2$). The \emph{identification link} is the map
+\[
+  \Lambda_p:\; H^2\big(G_\bullet,\,\mathrm{SL}(H_z)\big)
+  \;\longrightarrow\; H^1\!\left(C_4;\;\iota\!\left(\pi_p(M_\alpha)\right)\right),
+  \qquad
+  [\,c_{m,\alpha}\,]\;\longmapsto\;\big[\,\iota\!\left(m\,\pi_p(\alpha)\right)\,\big],
+\]
+where $\pi_p$ is the $(p,p)$-typed content projection (the committed typed
+expansion machinery: the letter-to-$dz/d\bar z$ expansion with the T1/T2
+filters), read along the $\theta$-line of the two-cell. The target is the
+first deck cohomology of the content module at the conduit's grade.
+\end{definition}
+
+The link is defined \emph{at the groupoid level}: the two-cell is a
+$2$-cocycle of $\Gamma$ (Lemma 1), the deck acts on $\Gamma$ by conjugation,
+and the transport of the two-cell is computed through that action
+(Lemma 2). The content is read from the two-cell's $\theta$-line -- the
+coupling fixed by the curvature (the committed pair-trace law D4.1 and the
+balanced carrier D1). No \emph{further} value-module re-typing is performed
+beyond the assumed cochain of the hypothesis: the map consumes the groupoid
+cocycle and the deck action on it. The R22/R23 route-map condition (i) --
+no value-module re-typing of the ACTUAL two-cell -- is therefore NOT
+discharged here; it is part of the remaining reduction step (the 21-c
+item (ii)).
+
+\section{The reduction laws (LA1)}
+
+\begin{lemma}[the cocycle, the transport, the norm]
+Let $\gamma\in\Sp(8,\Z)$ (the symplectic law
+$\gamma^t\Theta\gamma=\Theta$) and let $(\gamma\times\gamma)\circ
+\iota=\iota\circ\gamma$ (the intertwining). Then:
+(i) $c_{m,\alpha}$ is an inhomogeneous $2$-cocycle of the abelian arrow
+lattice;
+(ii) the transport identity holds:
+$\gamma\cdot c_{m,\alpha}=c_{m,\gamma\alpha}$;
+(iii) the deck norm vanishes at the two-cell level:
+$N(c_{m,\alpha})=\theta\cdot\iota(m\,N_\gamma\alpha)=0$ on every
+$\gamma^2=-1$ content module.
+\end{lemma}
+
+\begin{proof}
+(i) Alternating forms on a free abelian group with trivial coefficient action
+are $2$-cocycles; certified on fixed instances.
+(ii) $\gamma\cdot c(v,w)=(\gamma\times\gamma)\,c(\gamma^{-1}v,\gamma^{-1}w)
+=\theta(\gamma^{-1}v,\gamma^{-1}w)\,\iota(m\gamma\alpha)
+=\theta(v,w)\,\iota(m\gamma\alpha)$, by the intertwining and the symplectic
+law. (iii) Summing the four transports and using (ii) inductively gives
+$\theta\cdot\iota(m\,N_\gamma\alpha)$; on the all-odd sector
+$N_\gamma=0$ (the R1 norm degeneration), so the orbit sum is zero. All three
+steps are computed in the certificate, word-exact and matrix-exact. The
+norm law is the \emph{absorption of the $(A,-A)$ witness at the two-cell
+level}: the anti-invariant pair dies in the deck orbit sum with no
+symmetrization step and no invariant-class hypothesis. BOUNDARY (on the
+face): the norm law $(1+\gamma)(1+\gamma^2)=0$ holds for every
+$\iota$-shaped content and does not by itself distinguish $(A,-A)$ from
+$(x,+x)$; the $\iota$-specificity is the strip's traceless condition
+(computed in the certificate); the pair-level residue is discharged only
+through the remaining two-cell reduction.
+\end{proof}
+
+\begin{theorem}[the parity law and the killing, for the primitive contents]
+On every all-odd content module $M$ (in particular on each typed-pure
+lattice below): $H^2(C_4;\iota(M))=0$, and for a content with a
+\emph{nonzero} $H^1$-class (a primitive content:
+$\pi_p(\alpha)\notin\im(\gamma-1)$) the link's value dies exactly at the
+even scales:
+\[
+  \Lambda_p([c_{m,\alpha}])=0
+  \iff m\,\pi_p(\alpha)\in(\gamma-1)\,\pi_p(M)
+  \iff m \text{ even}.
+\]
+Degenerate contents (already in $\im(\gamma-1)$ integrally) die at every
+scale -- the audit's counterexample class $(\gamma-1)s_0$ is computed as a
+boundary receipt in the certificate. The sector kill-scale on the full
+typed-pure $(2,2)$ lattice $S_{22}$ is $m=2$ exactly \emph{as the maximum
+over the primitive contents}: $2\,S_{22}\subseteq\im(\gamma-1)$ and no
+basis class lies in $\im(\gamma-1)$.
+\end{theorem}
+
+\begin{proof}
+$\gamma^2=-1$ on the all-odd sector, so $\kerp(\gamma-1)=0$ and
+$N_\gamma=0$: $H^2(C_4;\iota(M))=0$ by the R1 obstruction law (computed on
+the doubled pair modules $M\oplus M$, whose $H^1=(\Z/2)^2$ carries the
+parity on both slots; the $\iota$-submodule itself, isomorphic to $M$,
+carries $H^1=\Z/2$). The $H^1$-class of $\iota(m\pi_p(\alpha))$ is the
+cokernel of $\gamma-1$; the $2$-elementary law
+$2v=-(\gamma-1)((1{+}\gamma)v)$ gives the even-scale law for the primitive
+contents; the least-scale computations give the pins (all three $(2,2)$
+planes and both Weil rays: least kill $2$; the sector lattice $S_{22}$: $H^1(C_4;S_{22})=(\Z/2)^3$).
+\end{proof}
+
+\section{The gate (LA2)}
+
+\begin{theorem}[the grade law; the character collision]
+The link $\Lambda_p$ exists as an identification exactly when
+$\pi_p(\alpha)\ne 0$: the target module is then nonzero and the
+equivariance
+$\Lambda_p(\gamma\cdot c)=\gamma\cdot\Lambda_p(c)$ holds (Lemma 2).
+When $\pi_p(\alpha)=0$ there is no target: no identification, no killing,
+no descent, no cycle output. On the model's all-odd sector:
+\begin{itemize}
+\item the eight typed-pure orbit planes carry the types
+$(4,0){+}(0,4)$ (one), $(3,1){+}(1,3)$ (four), $(2,2)$ (three);
+\item the product deck (the total rotation) acts by the scalar
+$i^{p-q}$: $+1$ on the $(2,2)$ planes \emph{and} on the Weil plane, $-1$ on
+the $(3,1)$ planes;
+\item hence the deck character (the value $(p-q) \bmod 4$) does not separate the
+Hodge sector from the transcendental discriminator sector -- the
+$(2,2)/(4,0)$ collision is separated only by the grade projection
+$\pi_2$, which is nonzero exactly on the three $(2,2)$ planes.
+\end{itemize}
+The collision sector is exactly the committed discriminators $W_R,W_I$
+(and $S_{40}$ is the Weil plane exactly, index $1$).
+\end{theorem}
+
+This is the target-side repair of the input-blindness boundary: the deck's
+module law is uniform on the all-odd sector (the $(3,1)$ planes carry the
+same even-scale module law, and their generator's $H^1$-class is nonzero at
+$m=1$ -- the positive non-killing datum: the obstruction data lives and the
+link refuses to carry it), and the discrimination lives in the link's own
+\emph{domain condition}, the grade (the transport identity itself holds on
+the gated planes; the gate is the existence of the target, not an
+equivariance condition). The conduit's purity hypothesis (the two-center
+descent law: the pure pair at grade $p$) is a \emph{stated hypothesis} of
+the composition: a descended non-$(p,p)$ content has no $\Lambda_p$-value
+and the conduit's hypothesis excludes it; this exclusion is recorded as a
+hypothesis, not claimed as a computed conduit rejection (the certificate:
+$\pi_2(W_R)=0$; the mixed-content control carries exactly the gated part).
+
+\section{The partition (LA3)}
+
+The typed-pure lattices of the all-odd sector (computed as the kernels of
+the typed-component systems, the committed expansion machinery):
+\[
+  S_{22}\ (\text{rank }6),\qquad S_{40}\ (\text{rank }2)=\langle W_R,W_I\rangle,\qquad
+  S_{31}\ (\text{rank }8),
+\]
+with the exact positions: the three $(2,2)$ plane classes generate an
+index-$16$ sublattice of $S_{22}$; the four $(3,1)$ planes an index-$256$
+sublattice of $S_{31}$; the Weil plane is $S_{40}$ exactly; the word
+lattice sits over the typed-pure sum at index $4096$; over $\Q$ the
+typed decomposition is the partition
+$L_{16}\otimes\Q=S_{22}\otimes\Q\oplus S_{40}\otimes\Q\oplus
+S_{31}\otimes\Q$.
+
+\begin{corollary}[the model world's $(2,2)$ accounting]
+On the committed letter world, the rational $(2,2)$ classes decompose as:
+the all-even pair-product sector (the divisor products $F_jF_k$:
+Sector~1, the committed compiler I2, $m^*>0$ unconditionally), the all-odd
+typed-pure sector $S_{22}$ (this round: the link's target-side laws are
+certified on it in full -- deck-stable, $\gamma^2=-I$, $H^2(C_4;S_{22})=0$,
+$H^1=(\Z/2)^3$, the sector kill-scale $2$ exact), and the mixed-parity
+$(2,2)$ content (the remaining sector: the words with mixed parity
+patterns; the next strike's target, not claimed here). The transcendental
+content ($(4,0){+}(0,4)$ and $(3,1){+}(1,3)$) is gated by the domain
+condition. \textbf{The composition boundary, on the face:} the descent and
+the conduit are NOT computed here -- they require the two-cell reduction
+(the 21-c item (ii)) and remain the composition's remaining steps; no
+algebraicity is claimed for any sector in this round's artifacts.
+\end{corollary}
+
+\section{The scope}
+
+Letter-lattice laws on the committed model world. The mixed-parity $(2,2)$
+sector and the general-input transport (the standing boundary, ledger 085)
+are the recorded remaining sector; the Lean face
+\texttt{EveryHodgeClassIsRationalAlgebraic} remains the target. The
+certificate \texttt{identification\_link\_checks.py} runs the full law set:
+$94$ checks, exit $0$, deterministic double-run byte-identical, exact
+$\mathrm{Fraction}$/int arithmetic, zero floats, zero complex, hostile
+controls on the load-bearing layers (the broken symplectic, the 2-torsion
+degeneration, the all-even contrast, the mixed-grade control, the gate and
+the filter's $(p,p)$-specificity, the strip's trace control); the thirteen
+committed regressions re-run independently green from this tree together
+with this certificate ($14/14$).
+
+\end{document}

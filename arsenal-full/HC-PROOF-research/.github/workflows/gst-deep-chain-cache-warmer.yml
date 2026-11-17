@@ -1,0 +1,118 @@
+name: GST Deep Chain Cache Warmer
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - '.github/warm-slice.txt'
+      - '.github/workflows/gst-deep-chain-cache-warmer.yml'
+  workflow_dispatch:
+    inputs:
+      slice:
+        description: 'Union-closure slice to warm (1-6), or all'
+        required: true
+        default: 'all'
+permissions:
+  contents: read
+concurrency:
+  group: gst-deep-chain-cache-warmer-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  warm:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Resolve the requested slice
+        id: slice
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            S='${{ inputs.slice }}'
+          else
+            S=$(tr -d '[:space:]' < .github/warm-slice.txt)
+          fi
+          echo "slice=$S" >> "$GITHUB_OUTPUT"
+          echo "resolved slice: $S"
+      - name: Restore accumulated deep-chain cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-warmer-s${{ steps.slice.outputs.slice }}-${{ github.run_number }}
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Warm the requested union-closure slice
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          SLICE='${{ steps.slice.outputs.slice }}'
+          python3 - "$SLICE" <<'PY' > warm-slice-targets.txt
+          import contextlib, importlib.util, io, sys
+          from pathlib import Path
+          slice_id = sys.argv[1]
+          spec = importlib.util.spec_from_file_location("roots", "scripts/gst_lean_dependency_roots.py")
+          roots = importlib.util.module_from_spec(spec); spec.loader.exec_module(roots)
+          buf = io.StringIO()
+          with contextlib.redirect_stdout(buf):
+              order = roots.generate(
+                  "WarmUnion",
+                  ["GSTClassicalHodgeGlobalSheetSaturation",
+                   "GSTClassicalHodgeGSTDegreeCertifiedSource",
+                   "GSTClassicalHodgeGeometricKrylovMomentDeterminant"],
+                  Path("."))
+          print(f"union closure size: {len(order)} (generate log: {buf.getvalue().strip()})", file=sys.stderr)
+          if slice_id == "all":
+              print("WarmUnion")
+              sys.exit(0)
+          if "-" in slice_id:
+              lo, hi = (int(t) for t in slice_id.split("-"))
+              chunk = order[lo - 1: hi]
+          else:
+              k = int(slice_id)
+              N = 6
+              per = (len(order) + N - 1) // N
+              chunk = order[(k - 1) * per: k * per]
+          if not chunk:
+              raise SystemExit(f"slice {slice_id} is empty")
+          for m in chunk:
+              print(m)
+          PY
+          TARGETS=$(cat warm-slice-targets.txt)
+          echo "WARMING SLICE $SLICE: $TARGETS"
+          if lake build $TARGETS > warmer.log 2>&1; then
+            echo "LEAN PASSED: union-closure slice $SLICE warmed"
+          else
+            grep -nE 'error:|sorryAx' warmer.log | tail -n 60 || true
+            tail -n 40 warmer.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" warmer.log; then exit 1; fi
+      - name: Save accumulated deep-chain cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-warmer-s${{ steps.slice.outputs.slice }}-${{ github.run_number }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-deep-chain-warmer-s${{ steps.slice.outputs.slice }}-${{ github.run_number }}-log
+          path: warmer.log
+          if-no-files-found: warn

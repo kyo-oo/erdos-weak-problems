@@ -1,0 +1,108 @@
+name: GPT6 Problem406 Exact HGate Collision Audit
+on:
+  push:
+    branches: [gpt6/problem406-direct-hgate-collision-audit-20261030]
+    paths:
+      - .github/workflows/gpt6_hgate_exact_collision_audit.yml
+      - GSTFinalPrefixOneDirectU2DCollision.lean
+      - GSTInfiniteFourPowerNavigation.lean
+      - GSTFinalResidualCollision.lean
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  direct-collision:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Materialize exact GST direct collision import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          ROOTS = ['GSTFinalPrefixOneDirectU2DCollision.lean','GSTInfiniteFourPowerNavigation.lean','GSTFinalResidualCollision.lean']
+          BUILD=Path('.lake/build/lib/lean')
+          rx=re.compile(r'^\s*import\s+(.+?)\s*$')
+          order=[];done=set();stack=[]
+          def path_of(name):
+              return Path(*name.split('.')).with_suffix('.lean')
+          def imports(path):
+              result=[]
+              for raw in path.read_text(encoding='utf8').splitlines():
+                  m=rx.match(raw.split('--',1)[0].rstrip())
+                  if m:result.extend(m.group(1).split())
+              return result
+          def visit(name):
+              if name in done:return
+              path=path_of(name)
+              if not path.exists():return
+              if name in stack:raise RuntimeError('LOCAL_IMPORT_CYCLE='+str(stack+[name]))
+              stack.append(name)
+              for dependency in imports(path):visit(dependency)
+              stack.pop();done.add(name);order.append((name,path))
+          for root in ROOTS:
+              for m in imports(Path(root)):visit(m)
+          BUILD.mkdir(parents=True,exist_ok=True)
+          print('EXACT_HGATE_IMPORT_CLOSURE_COUNT=',len(order),flush=True)
+          for name,path in order:
+              out=BUILD.joinpath(*name.split('.')).with_suffix('.olean')
+              out.parent.mkdir(parents=True,exist_ok=True)
+              if out.exists():continue
+              print('BUILD_DEPENDENCY=',name,flush=True)
+              subprocess.run(['lake','env','lean','-o',str(out),str(path)],check=True)
+          print('EXACT_HGATE_IMPORT_CLOSURE_GREEN=1',flush=True)
+          PY
+      - name: Check canonical direct collision (do not suppress Lean errors)
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTFinalPrefixOneDirectU2DCollision.lean 2>&1 | tee direct-collision.log
+          ! grep -E 'error:|sorryAx|unsolved goals' direct-collision.log
+          echo DIRECT_U2D_COLLISION_COMPILES=1
+      - name: Check power-specific three-step collision (do not suppress errors)
+        if: always()
+        continue-on-error: true
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTInfiniteFourPowerNavigation.lean 2>&1 | tee physical-collision.log
+          ! grep -E 'error:|sorryAx|unsolved goals' physical-collision.log
+          echo POWER_SPECIFIC_COLLISION_COMPILES=1
+      - name: Check original residual collision alternate (no suppressed errors)
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTFinalResidualCollision.lean 2>&1 | tee residual-collision.log
+          ! grep -E 'error:|sorryAx|unsolved goals' residual-collision.log
+          echo RESIDUAL_COLLISION_COMPILES=1
+      - name: Consolidate exact collision outcomes
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          for log in direct-collision.log physical-collision.log residual-collision.log; do
+            if [ ! -f "$log" ]; then echo "UNEXECUTED=$log"; exit 1; fi
+            if grep -qE 'error:|sorryAx|unsolved goals' "$log"; then
+              echo "UNRESOLVED_COLLISION=$log"
+              grep -nE 'error:|sorryAx|unsolved goals' "$log" | head -25 || true
+              exit 1
+            fi
+          done
+          echo ALL_THREE_DIRECT_COLLISIONS_AXIOM_FREE=1

@@ -1,0 +1,1220 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=21mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Explicit Pl\"ucker--Fitting Algebra:
+All-Rank Geometric Projectors, Polynomial Degeneracy Ideals,
+and the True Original-World Chow Return}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Starting from the genuine GST Jouanolou spatial incidence
+geometry, we give an EXPLICIT rational-matrix formula for
+the tautological rank-r algebraic projector in EVERY
+Grassmannian rank and ambient dimension, not merely an
+assertion that some algebraic idempotent exists.
+We then construct finite polynomial Fitting equations
+whose actual scheme-theoretic degeneracy loci have
+the required original-world algebraic Chern classes.
+The construction is functorial for algebraic classifying
+maps from arbitrary original smooth projective X.
+We derive the original-X Chern-character formula
+for arbitrary algebraic bundles using ample twisting,
+globally generated quotient classifying maps and finite
+Pl\"ucker projectors; no artificial Hodge-to-Chow map
+is inserted. An explicit nondivisor test gives a
+TRUE closed codimension-two algebraic subvariety of
+Gr(2,5) and its exact rational Hodge source.
+This extends the existing alpha-indexed polynomial
+projector source algebra by replacing abstract
+projective-module witnesses with actual matrices
+and finite determinantal ideals.
+We distinguish existence of a genuine ALGEBRAIC
+classifying map from the universal prescribed Hodge
+input, where that existence has not been proved.
+\end{abstract}
+
+\section{The exact arbitrary-original-X target}
+Given arbitrary smooth projective complex X,
+$0\le p\le d=\dim_\mathbb C X$ and a prescribed
+rational Hodge class
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$,
+the exact output required is an ACTUAL
+$Z_\alpha\in CH^p(X)_\mathbb Q$ with
+$\mathrm{cl}_X^{can}(Z_\alpha)=\alpha$.
+All constructed classes below use the actual
+canonical algebraic Chow-to-Betti comparison.
+The concrete algebra is new source GENERATION
+inside the true algebraic image; it is not
+postulated to cover alpha absent an
+independent algebraic-geometric source.
+
+\section{The universal rank-r spatial PLUCKER matrix}
+Let $V=\mathbb C^m$ and
+$1\le r\le m$. Let
+$G=\operatorname{Gr}(r,V)$ with
+tautological algebraic rank-r subbundle
+$S\subset V\otimes O_G$.
+Set $W=\bigwedge^r V$,
+$N=\binom mr-1$, and use the
+actual Pl\"ucker projective embedding
+$G\hookrightarrow\mathbb P(W)$.
+The GST affine incidence world is
+\[
+ \boxed{
+ J_G=\{(S,[\varphi])\in
+ G\times\mathbb P(W^\vee):
+       \varphi(\bigwedge^r S)\ne0\},
+ \qquad q:J_G\to G.
+ }                                                     \tag{1}
+\]
+It is the complement of the ample
+$(1,1)$ incidence divisor and is
+smooth affine, with rank-N affine
+fibers. Put $R=\Gamma(J_G,O_{J_G})$.
+This world has the true Chow
+homotopy isomorphism
+$q^*:CH^p(G)_\mathbb Q\overset{\sim}\to
+CH^p(J_G)_\mathbb Q$ for every p.
+
+At an actual point choose ANY frame
+$u=(u_1,\ldots,u_r)$ of S, and define
+$\Delta=\varphi(u_1\wedge\cdots\wedge u_r)$,
+which is nonzero on J_G.
+For each vector $w\in V$ put
+\[
+ \boxed{
+ P_{S,\varphi}(w)=
+ \frac1\Delta
+ \sum_{i=1}^r u_i\,
+ \varphi(u_1\wedge\cdots\wedge
+             u_{i-1}\wedge w\wedge
+             u_{i+1}\wedge\cdots\wedge u_r).
+ }                                                     \tag{2}
+\]
+The numerator is linear in w,
+so (2) is an explicit m-by-m
+matrix of rational functions in
+the Pl\"ucker incidence coordinates.
+
+\begin{theorem}[ALL-RANK actual idempotent and genuine source module]
+Equation (2) is frame-independent,
+invariant under rescaling
+$\varphi$, and a GLOBAL REGULAR
+algebraic endomorphism of the
+trivial rank-m bundle on J_G.
+It satisfies EXACTLY
+\[
+ \boxed{P_{S,\varphi}^2=P_{S,\varphi},
+ \quad\mathrm{Tr}P_{S,\varphi}=r,
+ \quad\operatorname{im}P_{S,\varphi}=q^*S.}    \tag{3}
+\]
+Every entry is regular on J_G;
+after clearing a common finite
+incidence denominator it satisfies
+the existing GST homogeneous
+polynomial scheme equation
+$A^2=s^k A,\;\mathrm{Tr}A=r s^k$
+in actual global sections.
+\end{theorem}
+\begin{proof}
+Denote the coefficient in (2)
+by $c_i(w)$. The alternating
+r-form restricted to S is a
+nonzero element of
+$\bigwedge^r S^\vee$.
+Its basic Cramer duality
+identity says
+$c_i(u_j)=\delta_{ij}$:
+if j!=i the numerator
+contains two equal frame
+vectors and vanishes;
+if j=i it equals Delta.
+Thus $P(u_j)=u_j$
+for every j, while the
+image of P lies in S.
+This already proves $P^2=P$,
+rank r and trace r.
+The coefficients $(c_i)$
+are the UNIQUE functionals
+on V whose restrictions
+to S are the dual basis
+and whose wedge formula
+is induced by varphi.
+Under a frame change
+$u'=uB$ they transform
+by $B^{-1}$, so the sum
+$\sum u_i c_i$ is unchanged;
+rescaling varphi cancels
+between numerator and
+denominator. Consequently P
+glues on all frame charts.
+Every coefficient is a ratio
+of homogeneous Pl\"ucker
+polynomial expressions with
+incidence denominator Delta
+that never vanishes on J_G,
+hence defines a GLOBAL
+regular function there.
+The image is precisely
+q^*S. The explicit
+finite pole form in the
+existing incidence
+compactification is obtained
+from the general localization
+identity
+$\Gamma(J_G,O)=
+\varinjlim_k H^0(G\times\mathbb P(W^\vee),
+                  O_G(k)\boxtimes O(k))$.
+\end{proof}
+
+\section{Actual algebraic Fitting ideals from ANY GST idempotent}
+Let U be ANY smooth affine
+complex algebraic scheme,
+R its regular coordinate ring,
+and let $P\in\operatorname{Mat}_M(R)$
+satisfy $P^2=P$ with rank r.
+Write $E=\operatorname{im}P$,
+$Q=\operatorname{im}(I_M-P)$,
+so $R^M=E\oplus Q$.
+Let $1\le p\le r$, and
+put $s=r-p+1$. Choose
+ACTUAL ambient constant
+vectors $v_1,\ldots,v_s\in\mathbb C^M$.
+They induce $s$ global
+ALGEBRAIC sections
+$Pv_1,\ldots,Pv_s$ of E.
+
+Construct the FULL explicit
+matrix over R
+\[
+ \boxed{
+ B_P(V)=
+ \left[
+ \ I_M-P\ \Big|\
+ Pv_1\ \Big|\cdots\Big|\
+ Pv_s
+ \right]\in
+ \operatorname{Mat}_{M\times(M+s)}(R),
+ }                                                     \tag{4}
+\]
+and its finite determinantal ideal
+\[
+ \boxed{
+ \mathfrak I_{P,p,V}
+ =I_{M-r+s}(B_P(V))
+ =I_{M-p+1}(B_P(V))
+       \ \subset R.
+ }                                                     \tag{5}
+\]
+Here $I_t(B)$ is generated
+by ALL t-by-t polynomial
+minors of B; these are
+ACTUAL algebraic equations,
+not cohomological placeholders.
+
+\begin{theorem}[TRUE scheme-theoretic degeneracy source from polynomial minors]
+The closed subscheme
+$\Sigma(P,V)=V(\mathfrak I_{P,p,V})
+\subset U$ is EXACTLY
+the rank-deficiency scheme
+of the algebraic map
+\[
+  O_U^{\oplus s}\longrightarrow E,\qquad
+           e_j\longmapsto Pv_j.
+\]
+If $\Sigma(P,V)$ has
+the expected pure
+codimension p, its genuine
+fundamental algebraic cycle
+obeys in the TRUE Chow group
+\[
+ \boxed{
+ [\Sigma(P,V)]_{CH}
+       =c_p^{CH}(E)\in CH^p(U).
+ }                                                     \tag{6}
+\]
+For a GST affine fold
+$q:J\to X$ the true
+original-X rational cycle
+\[
+ \boxed{
+ Z(P,V)=
+  (q^*)^{-1}[\Sigma(P,V)]_{CH}
+ \in CH^p(X)_\mathbb Q
+ }                                                     \tag{7}
+\]
+has canonical Betti class
+$\mathrm{cl}_X^{can}(Z)=
+(q^*)^{-1}c_p^{Betti}(E)$.
+No cycle on X with that class
+is assumed in constructing P,
+V, the Fitting ideal, or Sigma.
+\end{theorem}
+\begin{proof}
+Decompose the actual free
+module as $E\oplus Q$.
+The first M columns of B
+map surjectively to Q
+and vanish in E; their
+image has constant rank M-r.
+The last s columns
+have zero Q-component
+and their E-component is
+the chosen section map.
+Therefore
+$\operatorname{rank}B=
+ M-r+\operatorname{rank}(Pv_1,\ldots,Pv_s)$
+at EVERY geometric point.
+The determinantal rank
+condition $\operatorname{rank}B<
+ M-r+s$ is exactly
+$\operatorname{rank}(s\to E)\le s-1$.
+The same identity of
+DETERMINANTAL IDEAL SHEAVES
+holds scheme-theoretically,
+because locally choosing
+an algebraic basis of E and Q
+transforms B by invertible
+row/column operations into
+a block matrix with an
+$I_{M-r}$ block and
+the section matrix; all
+other entries can be cleared
+by elementary operations.
+Its maximal rank minors
+generate the same ideal
+as the s-by-s minors of
+the section map.
+The expected-codimension
+Thom--Porteous formula for
+a map from rank s trivial
+bundle to rank r E gives
+$[\Sigma]=c_{r-s+1}(E)
+=c_p(E)$ in true Chow.
+The affine-space Chow
+isomorphism and its
+canonical Betti naturality
+give (7).
+\end{proof}
+
+\begin{remark}[Finite denominators preserve the ACTUAL ideal]
+For $P=A/s^k$, the matrix
+B consists of rational
+regular entries on D(s).
+Multiplying each column by
+a suitable invertible
+power of s yields
+an ACTUAL polynomial
+matrix whose maximal minors
+generate the SAME ideal
+on D(s), up to factors
+that are UNITS there.
+Thus the geometric
+degeneracy locus is
+defined by finite
+homogeneous polynomial
+equations modulo the
+original-X scheme ideal
+and the explicit
+incidence localization.
+The GST algebraic source
+engine can use either
+a projector solution or
+its Fitting-minor
+cycle directly.
+\end{remark}
+
+\section{A full nondivisor GST Fitting-source example}
+Set $G=\operatorname{Gr}(2,\mathbb C^5)$,
+a smooth sixfold, and take
+the ACTUAL Pl\"ucker
+incidence fold
+$J_G$ as in (1).
+Choose a nonzero
+constant vector $w_0\in\mathbb C^5$.
+The explicit rank-two
+projector in (2) is
+\[
+ \boxed{
+ P(w)=\frac{
+    u\,\varphi(w\wedge v)
+     -v\,\varphi(w\wedge u)}
+              {\varphi(u\wedge v)}
+ }
+                                                               \tag{8}
+\]
+in a frame (u,v) of S.
+The single true section
+$P(w_0)\in\Gamma(J_G,q^*S)$
+has an ACTUAL polynomial
+two-equation zero scheme
+\[
+ \boxed{
+ D_{w_0}:
+ \varphi(w_0\wedge u)=0,\quad
+ \varphi(w_0\wedge v)=0,\quad
+ \varphi(u\wedge v)\ne0 .
+ }                                                     \tag{9}
+\]
+
+\begin{theorem}[Explicit nondivisor rank-two algebraic source]
+The closed incidence subscheme
+$D_{w_0}\subset J_G$ is smooth
+of pure complex codimension TWO.
+Its TRUE Chow class is
+\[
+ \boxed{
+ [D_{w_0}]_{CH}
+     =c_2^{CH}(q^*S)
+     =q^*c_2^{CH}(S^\vee).
+ }                                                     \tag{10}
+\]
+The original-X return is
+the independent nondivisor
+Schubert cycle
+$c_2(S^\vee)=\sigma_{1,1}$,
+represented explicitly by
+\[
+ \boxed{
+ Z_{w_0}=\operatorname{Gr}
+         (2,\ker a)\subset G
+ }                                                     \tag{11}
+\]
+for ANY nonzero covector
+$a\in(\mathbb C^5)^\vee$.
+This is a genuine
+original-X algebraic
+subvariety, not a
+formal rational Chow
+symbol. With any
+generic two Pl\"ucker
+hyperplane divisors
+H_1,H_2 on G, the
+prescribed rational
+Hodge target
+\[
+ \alpha=\tfrac25 h^2-\sigma_{1,1}
+\]
+has the actual direct
+original-X source
+\[
+ \boxed{
+ Z_\alpha=\frac25(H_1\cap H_2)
+              -\operatorname{Gr}(2,\ker a)
+ \quad\text{in }CH^2(G)_\mathbb Q,
+ \qquad \mathrm{cl}_G^{can}
+          (Z_\alpha)=\alpha .
+ }                                                     \tag{12}
+\]
+\end{theorem}
+\begin{proof}
+If $w_0\in S$, projection
+P(w_0)=w_0\ne0$, so no
+zero occurs there.
+If $w_0\notin S$, then
+$w_0,u,v$ are independent.
+The two linear conditions
+$\varphi(w_0\wedge u)=0$
+and $\varphi(w_0\wedge v)=0$
+are independent linear
+conditions on
+$\varphi\in(\bigwedge^2 V)^\vee$,
+and the incidence
+nonvanishing
+$\varphi(u\wedge v)\ne0$
+is a third independent
+linear coordinate condition.
+Thus in every fiber over
+the OPEN base
+$\{S:w_0\notin S\}$,
+the zero locus is a
+linear affine subspace
+of codimension TWO
+in the incidence affine
+fiber. It has no
+points over the closed
+complement, and the total
+D is smooth of pure
+codimension two.
+It is the regular
+zero locus of a true
+global section of
+the rank-two algebraic
+bundle q^*S, so its
+actual Chow class is
+$c_2(q^*S)=q^*c_2(S)$.
+Dualizing a rank-two
+bundle preserves c2,
+hence this is
+$q^*c_2(S^\vee)$.
+For a nonzero constant
+covector a, its
+restriction to each
+tautological two-plane S
+defines a global
+algebraic section of
+S^\vee on G, vanishing
+exactly when S lies in
+ker a (a four-dimensional
+subspace of C5).
+This is the smooth
+Schubert fourfold
+Gr(2,4), a codimension-two
+regular zero locus
+with actual class c2(S^\vee).
+It therefore gives
+the true ORIGINAL-G
+Chow return of D
+under inverse q^*,
+by Chow homotopy
+invariance. A generic
+pair of actual Pl\"ucker
+hyperplane divisors has
+intersection class h².
+Taking the rational
+linear combination (12)
+yields precisely the
+prescribed alpha under
+the canonical Betti map.
+\end{proof}
+
+\section{Universal explicit source algebra for arbitrary ORIGINAL X}
+Let X be arbitrary smooth
+projective, and let F be
+ANY honest algebraic
+rank-t vector bundle on X.
+Choose a very ample
+line bundle L with first
+Chern class h and
+k sufficiently large that
+$Q=F^\vee\otimes L^k$
+is globally generated AND
+its determinant is ample.
+Choose a genuine finite
+surjection
+\[
+ \mathcal O_X^{\oplus m}
+      \twoheadrightarrow Q,
+\]
+with actual kernel K of
+rank $m-t$. The quotient
+classifying map
+$f_Q:X\to\operatorname{Gr}
+(t,\mathbb C^m)$ has
+\[
+  Q\cong f_Q^*\mathcal Q,
+ \quad K\cong f_Q^*S.
+\]
+The Pl\"ucker pullback
+of $O(1)$ is
+$\det Q$, which is ample
+for sufficiently large k.
+
+\begin{theorem}[ALL-X every algebraic bundle has an EXPLICIT finite GST Pl\"ucker projector presentation]
+The pullback of the
+Grassmannian incidence
+torsor along f_Q gives
+an ACTUAL smooth
+AFFINE fold
+\[
+ J_Q=X\times_{\operatorname{Gr}}
+     J_{\operatorname{Gr}}
+       \longrightarrow X
+\]
+because it is the
+complement of the ample
+incidence divisor
+$\det Q\boxtimes O(1)$
+on $X\times\mathbb P
+(\bigwedge^t\mathbb C^m)$.
+On this affine world
+the rank-(m-t) K and
+rank-t Q are represented
+by the EXPLICIT
+finite Pl\"ucker
+projector $P_{K,\varphi}$
+of (2), and $I-P_{K,\varphi}$,
+respectively (under the
+equivalent Grassmannian
+kernel classifying map).
+Their actual Chow
+Chern characters satisfy
+the exact identity
+\[
+ \boxed{
+ \operatorname{ch}_p^{CH}(F)=
+ \sum_{j=0}^p
+    \frac{(kh)^{p-j}}{(p-j)!}
+       (-1)^j
+       \operatorname{ch}_j^{CH}(Q)
+ \quad\text{on original X.}
+ }                                                     \tag{13}
+\]
+Each term on the right
+is obtained from genuine
+algebraic projector
+coefficients and Chow
+polynomial operations,
+and the same construction
+produces explicit Fitting
+minors for the Chern
+classes of Q on the fold.
+For every genuine algebraic
+F this yields actual
+finite polynomial
+source equations and
+an exact canonical
+Betti period output.
+It is NOT an algebraicity
+theorem for an arbitrary
+TOPological bundle
+of specified Hodge class:
+such a bundle has not
+been given an algebraic
+quotient classifying map.
+\end{theorem}
+\begin{proof}
+Serre's theorem gives
+global generation of
+$F^\vee\otimes L^k$ for
+k sufficiently positive.
+Its determinant
+$\det(F^\vee)\otimes
+L^{kt}$ is ample for
+large k. The quotient
+presentation classifies
+Q and K as asserted.
+The incidence line bundle
+for the Grassmann
+classifying map is
+the ample
+$\det Q\boxtimes O(1)$,
+so its nonvanishing
+locus is affine,
+with genuine affine
+fibers of dimension
+$\binom mt-1$.
+To present K use the
+equivalent kernel
+classifying map
+$X\to\operatorname{Gr}
+(m-t,\mathbb C^m)$.
+Its Pl\"ucker line
+also pulls back to
+$\det Q$ because
+$\det K^\vee\cong\det Q$.
+The universal rank-(m-t)
+matrix (2) pulled back
+along the kernel
+classifying map produces
+an explicit idempotent
+with image q^*K.
+Its complement has
+image q^*Q, so the
+true rank-t algebraic
+projective module is
+explicit as well.
+The identity
+$Q=F^\vee\otimes L^k$
+rewrites as
+$F=Q^\vee\otimes L^k$.
+The algebraic Chern
+character respects
+duals and line twists:
+$\operatorname{ch}(F)
+=e^{kh}\operatorname{ch}
+(Q^\vee)$, while
+$\operatorname{ch}_j(Q^\vee)
+=(-1)^j\operatorname{ch}_j(Q)$.
+Take codimension p and
+expand the exponential,
+obtaining (13) in the
+ACTUAL original Chow
+ring. Proper Chow-to-Betti
+comparison verifies every
+displayed source period.
+\end{proof}
+
+\section{A universal TRUE CHOW presentation by finite GST determinantal equations}
+The existing source algebra
+from algebraic projectors was
+known to be complete in
+the canonical BETTI image.
+The explicit minors (5)
+give a stronger statement:
+every ACTUAL original-X
+rational Chow class itself
+can be represented by a
+finite signed pair of
+determinantal SCHEMES on
+an affine GST spatial world.
+
+\begin{theorem}[EVERY actual Chow class is a finite GST projector-minor difference]
+For ANY original smooth
+projective complex X of
+dimension d and EVERY
+$0\le p\le d$, let
+$q:J\to X$ be an ACTUAL
+smooth affine
+GST Jouanolou fold.
+For EVERY rational
+algebraic Chow class
+$z\in CH^p(X)_{\mathbb Q}$
+there exist an integer
+$m>0$, two finite
+ALGEBRAIC projector
+matrices
+\[
+ P_\pm\in
+ \operatorname{Mat}_{M_\pm}
+             \Gamma(J,O_J),
+ \quad P_\pm^2=P_\pm,
+ \quad\mathrm{rank}P_\pm=r_\pm\ge p,
+\]
+and two sets of actual
+constant ambient vectors
+$V_\pm$ of cardinality
+$s_\pm=r_\pm-p+1$,
+such that the finite
+minor schemes
+$\Sigma_\pm=
+V(I_{M_\pm-p+1}
+([I-P_\pm\mid P_\pm V_\pm]))$
+have expected
+codimension p and obey
+the EXACT ORIGINAL-X
+CHOW identity
+\[
+ \boxed{
+ z=
+ {(-1)^{p-1}\over m(p-1)!}
+ (q^*)^{-1}
+       ([\Sigma_+]_{CH}
+                -[\Sigma_-]_{CH})
+ \in CH^p(X)_{\mathbb Q}.
+ }                                                     \tag{14}
+\]
+In particular, the
+genuine rational Chow
+group of arbitrary X
+is spanned by classes
+of finite algebraic
+GST projector-minor
+schemes pulled back
+from these actual
+spatial folds.
+This is a statement
+IN CHOW, not only
+an identity of
+cohomological periods.
+For p=0 use the unit
+cycle and projectors
+of constant rank;
+the displayed
+factorial normalization
+is stated for p>=1.
+\end{theorem}
+\begin{proof}
+Since X is smooth,
+the rational algebraic
+Chern character
+\[
+ \operatorname{ch}^{CH}:
+ K_0^{alg}(X)_\mathbb Q
+ \overset{\sim}{\longrightarrow}
+ \bigoplus_{j=0}^d
+              CH^j(X)_\mathbb Q
+\]
+is an isomorphism
+of rational vector
+spaces. Choose a
+rational virtual K0
+class v whose ENTIRE
+Chow Chern character
+has only the pth
+positive component z,
+with all other
+components including
+degree zero equal zero.
+Clear denominators
+to find m>0 and
+two actual algebraic
+vector bundles F_+,F_-
+such that
+\[
+ [F_+]-[F_-]=m v
+ \quad\text{in }K_0(X),
+\]
+allowing addition of
+a common trivial
+bundle to increase
+their ranks at least p.
+Hence in ACTUAL CHOW
+\[
+ \operatorname{ch}_j^{CH}(F_+)
+ -\operatorname{ch}_j^{CH}(F_-)
+ =m z\,\delta_{j,p}
+           \quad (0\le j\le d).
+                                                               \tag{15}
+\]
+Pull F_\pm to the
+affine J: their
+algebraic modules are
+finitely generated
+projective, therefore
+actual finite
+direct summands of
+free modules. Choose
+real algebraic
+idempotents P_\pm
+over the affine
+coordinate ring,
+with image equal to
+q^*F_\pm.
+(The word 'real'
+here means
+GENUINE/ACTUAL,
+not defined over
+the field of real
+numbers.)
+
+Because these
+bundles are globally
+generated by the
+ambient constants,
+the universal family
+of rank-degeneracy
+section maps is
+pointwise surjective
+onto every matrix
+fiber. Over
+characteristic zero,
+generic constant
+section parameters
+are transverse to
+the rank strata
+in the algebraic
+Bertini/Kleiman
+sense; choose V_\pm
+such that each
+determinantal locus
+has expected pure
+codimension p
+(or is empty, in
+which case its
+Chow class is zero).
+Then the previously
+proved actual
+Fitting--Porteous
+theorem gives
+\[
+ [\Sigma_\pm]_{CH}
+       =c_p^{CH}(q^*F_\pm).
+                                                               \tag{16}
+\]
+
+For arbitrary algebraic
+bundle F the exact
+Newton/splitting
+identity in the
+actual rational
+Chow ring is
+\[
+ \log c_t(F)=
+   \sum_{j\ge1}
+   (-1)^{j-1}(j-1)!
+        \operatorname{ch}_j^{CH}(F)t^j .
+\]
+Subtract the two
+identities for
+F_+,F_-.
+By (15) the
+difference through
+degree p is exactly
+$(-1)^{p-1}(p-1)!
+m z\,t^p$.
+Exponentiating and
+taking the coefficient
+of t^p gives
+\[
+ c_p^{CH}(F_+)
+     -c_p^{CH}(F_-)
+   =(-1)^{p-1}(p-1)!m z,
+                                                               \tag{17}
+\]
+because all lower
+total Chern
+coefficients agree.
+Pull (17) to J,
+substitute (16),
+and apply the TRUE
+Chow affine-bundle
+inverse to obtain
+(14) as an equality
+of rational Chow
+classes on ORIGINAL X.
+Every step uses
+actual algebraic
+bundles and
+equations. The proof
+does not merely
+assert a Chern
+Betti class is z.
+\end{proof}
+
+\begin{remark}[Precise purpose of the completeness result]
+The input z to
+this theorem is
+an already
+ALGEBRAIC Chow
+class, so this
+result is an
+explicit SCHEME
+PRESENTATION of
+the entire existing
+Chow group, not
+a construction
+of an unknown
+Chow class for
+arbitrary rational
+Hodge alpha.
+It substantially
+upgrades the GST
+source engine from
+abstract classes
+of projective modules
+to actual polynomial
+ideals and
+scheme-theoretic
+subvarieties.
+For the prescribed
+alpha target,
+the decisive
+universal step is
+to construct
+appropriate
+projector-minor
+sources WITHOUT
+input z and then
+prove their
+canonical Betti
+image equals alpha,
+using the existing
+rational period
+solver or direct
+exact cohomology.
+\end{remark}
+
+\section{The original-X alpha-directed divisor SOURCE, with no prior Chow witness}
+For p=1 there is
+an UNCONDITIONAL
+genuine source
+construction directly
+from the prescribed
+rational Hodge alpha.
+Take any original
+smooth projective X,
+and rational
+$\alpha\in H^2(X,\mathbb Q)
+                 \cap H^{1,1}(X)$.
+Choose m>0 such
+that m alpha has
+an integral
+cohomology lift
+$\lambda\in H^2(X,\mathbb Z)$.
+The complex
+exponential
+sequence and
+Hodge decomposition
+show that the
+(0,2)-component of
+lambda vanishes.
+Hence there exists
+an honest holomorphic,
+therefore by GAGA
+ALGEBRAIC, line
+bundle M on original
+X whose first
+Chern class is lambda.
+
+Choose an actual
+very ample line
+L0, h=c1(L0).
+For large k,
+$Q=M^\vee\otimes L0^k$
+is very ample,
+globally generated
+and has ample
+determinant.
+The preceding
+ALL-X classifying-map
+construction gives
+a genuine rank-one
+algebraic quotient
+with explicit
+Pl\"ucker incidence
+projector and
+source class
+$c_1^{CH}(Q)$.
+The ACTUAL
+original-X rational
+cycle
+\[
+ \boxed{
+ Z_\alpha={1\over m}
+  (k\,c_1^{CH}(L0)
+       -c_1^{CH}(Q))
+      \in CH^1(X)_\mathbb Q
+ }                                                     \tag{18}
+\]
+has the EXACT
+canonical Betti
+class alpha:
+\[
+ \operatorname{cl}^{can}_X
+     (Z_\alpha)
+ ={1\over m}
+       (kh-(kh-m\alpha))
+ =\alpha .
+\]
+The sources are
+produced by
+an actual Hodge-to-line
+exponential construction,
+genuine classifying
+map and Pl\"ucker
+polynomial projector,
+not by assuming
+a target divisor
+or a Chow preimage.
+The same algebra
+gives p=d from
+an actual closed
+point of X, and
+p=0 from the
+unit class.
+The difficulty
+at middle p>=2
+is that the
+Hodge exponential
+sequence constructs
+a line bundle
+from an integral
+(1,1) class,
+not a rank-p
+bundle for an
+arbitrary integral
+(p,p) class.
+\section{Exact source complexity versus target complexity: the algebraic classifying-map obstruction}
+For EVERY original X,
+rational topological K
+theory supplies a UNIQUE
+rational virtual class
+$\kappa_\alpha\in
+K^0_{\mathrm{top}}(X)
+\otimes\mathbb Q$
+whose ENTIRE
+topological Chern
+character equals the
+prescribed rational
+degree-2p input
+alpha and zero in all
+other degrees.
+
+Define the ACTUAL
+algebraic-to-topological
+forgetful homomorphism
+\[
+ \rho_X:
+ K^{alg}_0(X)_\mathbb Q
+ \longrightarrow
+ K^0_{\mathrm{top}}(X)_\mathbb Q
+\]
+and the quotient
+\[
+ \boxed{
+ \mathfrak Q_X=
+ K^0_{\mathrm{top}}(X)_\mathbb Q/
+               \rho_X(K^{alg}_0(X)_\mathbb Q).
+ }                                                     \tag{19}
+\]
+The Chern character
+gives a literal
+isomorphism
+\[
+ \boxed{
+ \mathfrak Q_X\cong
+ \left(\bigoplus_j
+     H^{2j}(X,\mathbb Q)\right)
+ \Big/
+ \left(\bigoplus_j
+     \operatorname{im}
+          \mathrm{cl}^{can}_X|_{CH^j(X)_\mathbb Q}\right).
+ }                                                     \tag{20}
+\]
+This follows from the
+rational topological
+Chern character
+isomorphism and
+the rational algebraic
+K0-to-Chow Chern
+character isomorphism,
+with naturality of the
+cycle comparison.
+
+\begin{theorem}[Exact source CLASSIFYING-MAP obstruction for the new GST algebra]
+For any original
+X,p and rational
+Hodge alpha, the
+following are
+EQUIVALENT:
+(1) $\kappa_\alpha$
+maps to zero in
+the actual quotient
+$\mathfrak Q_X$;
+(2) some rational
+difference of ACTUAL
+algebraic vector bundles
+on X has FULL
+topological Chern
+character alpha;
+(3) some finite
+rational difference
+of real GST
+Pl\"ucker--Fitting
+projector-minor
+scheme cycles
+has the exact
+original-X Betti
+class alpha;
+(4) alpha has a
+genuine original-X
+rational Chow
+representative.
+This equivalence
+is an audit of
+the exact algebra's
+types, not an
+independent proof
+of condition (1)
+from Hodge type.
+\end{theorem}
+\begin{proof}
+(1)<->(2) is
+the definition
+of the K0 quotient
+and rational Chern
+character.
+(2)->(3) uses
+the explicit all-X
+algebraic Grassmann
+classifying-map
+presentation and
+the universal true
+Chow Fitting-minor
+difference theorem
+(14); a common
+integer denominator
+and trivial-rank
+stabilization clear
+all rational K0
+signs.
+(3)->(4) follows
+from the actual
+Chow affine-bundle
+inverse, finite
+rational linearity
+and exact canonical
+Betti naturality.
+(4)->(1) uses the
+rational algebraic
+K0-to-Chow Chern
+character inverse
+to lift its ACTUAL
+Chow class to
+the algebraic
+K0 quotient.
+\end{proof}
+
+This identifies
+WHY a genuine
+TOPological bundle
+classifying map
+from the arbitrary
+Hodge alpha,
+or an Oka holomorphic
+Grassmannian map
+on affine J,
+cannot silently be
+substituted into
+the Pl\"ucker
+projector formula:
+the explicit
+matrix is algebraic
+ONLY WHEN the
+classifying subbundle
+it represents is
+constructed through
+an ACTUAL algebraic
+map/quotient.
+The missing
+universal implication
+for a prescribed
+(p,p) class is
+the exact vanishing
+of $[\kappa_\alpha]$
+in (19), or an
+independent geometric
+law that constructs
+a polynomial
+projector defeating
+this obstruction.
+Increasing M,
+k, or the ambient
+spatial dimensions
+does not by itself
+prove that vanishing.
+
+\section{Research verdict: actual constructed algebra, exact open inference}
+The original-X GST target was
+NOT replaced by a constructed
+PGL Chern compiler. We have
+created explicit
+all-rank polynomial idempotents
+and finite Fitting equations,
+an independently algebraic
+nondivisor original-X cycle,
+and a genuine algebraic
+bundle compiler for
+arbitrary original X.
+These provide exact
+finite algebraic
+SOURCE GENERATION and
+canonical original-X
+Betti classes for inputs
+that carry algebraic
+classifying maps.
+The specific remaining
+universal mathematical
+implication is to build
+such an algebraic
+classifying map/cycle
+with exact prescribed
+period alpha from
+GST's Hodge geometry,
+for EVERY original
+(X,p,alpha), WITHOUT
+assuming that the
+target is already in
+the canonical Chow
+image. None of the
+displayed source
+equations is misused
+as an automatic
+solution of that
+implication.
+\end{document}

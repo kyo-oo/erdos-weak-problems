@@ -1,0 +1,73 @@
+name: GST V2 Exact Experiments
+
+on:
+  push:
+    branches:
+      - sol/gst-v2-atomic-surgery-20260818
+  pull_request:
+
+jobs:
+  v2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Materialize Aug-17 V2 scratch modules without archive wrappers
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          src = Path('ker07-snapshot/branches/16_sol_latest__5c579-final-bigN-right-chord-atomic')
+          count = 0
+          for p in src.glob('*.lean'):
+              text = p.read_text(encoding='utf-8')
+              i = text.find('import ')
+              if i < 0:
+                  continue
+              Path(p.name).write_text(text[i:], encoding='utf-8')
+              count += 1
+          print(f'materialized {count} Aug-17 Lean scratch modules')
+          PY
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Compile canonical root first
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTTactic ErdosTernary2
+      - name: Compile exact GST V2 local graph
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTGraphV2Scratch.lean
+          lake env lean GSTGraphV2FluxScratch.lean
+          lake env lean GSTGraphV2BlockScratch.lean
+      - name: Compile handwritten equation and potentials
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean HandwrittenBigNOmegaScratch.lean
+          lake env lean HandwrittenKernelV2Scratch.lean
+          lake env lean HandwrittenSignedKernelFluxScratch.lean
+          lake env lean HandwrittenUniversalParadoxPotentialScratch.lean
+      - name: Compile full Aug-17 canonical surgery chain
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean CanonicalOriginCutIntersectionScratch.lean
+          lake env lean PhysicalSixBridgeGateScratch.lean
+          lake env lean PrefixOneRightChordLastGateScratch.lean
+          lake env lean CanonicalRightChordTrapScratch.lean
+          lake env lean ResidualNullTerminalScratch.lean
+          lake env lean RetainedOffsetUStateScratch.lean
+          lake env lean CanonicalPhaseCrossingSurgeryScratch.lean
+          lake env lean CanonicalOriginTritForcingScratch.lean

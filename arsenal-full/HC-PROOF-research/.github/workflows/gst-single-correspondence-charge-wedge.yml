@@ -1,0 +1,168 @@
+name: GST Single Correspondence Charge Wedge
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTClassicalHodgeSingleCorrespondenceRankTwo.lean'
+      - 'GSTClassicalHodgeArbitraryRankChargeFrames.lean'
+      - 'GSTClassicalHodgeActualGeometricIrreducibility.lean'
+      - 'HodgeConjecture.lean'
+      - 'GSTMathboxCorrectedZetaGeometry.lean'
+      - 'GSTMathboxCorrectedZetaInfinite.lean'
+      - 'GSTMathboxCorrectedZetaSafeDomain.lean'
+      - 'GSTMathboxCorrectedZetaActualHodge.lean'
+      - 'GSTMathboxIndependentGeometricCoordinate.lean'
+      - 'GSTMathboxCMGeometricComplexStructure.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/gst-single-correspondence-charge-wedge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-single-correspondence-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore Lean dependency cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-charge-wedge
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel check geometric charge wedge and rank-two theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTClassicalHodgeSingleCorrespondenceRankTwo > charge-wedge-lean.log 2>&1; then
+            echo "LEAN PASSED: single-correspondence charge wedge"
+          else
+            grep -nE 'error:|sorryAx|✖' charge-wedge-lean.log | tail -n 120 || true
+            tail -n 70 charge-wedge-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" charge-wedge-lean.log; then
+            echo 'Trust audit failed'
+            exit 1
+          fi
+      - name: Kernel check arbitrary-rank charged geometric frames
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTClassicalHodgeArbitraryRankChargeFrames > charged-frames-lean.log 2>&1; then
+            echo "LEAN PASSED: explicit arbitrary-rank charged native frames"
+          else
+            grep -nE 'error:|sorryAx|✖' charged-frames-lean.log | tail -n 120 || true
+            tail -n 70 charged-frames-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" charged-frames-lean.log; then
+            echo 'Trust audit failed: charged frames'
+            exit 1
+          fi
+      - name: Kernel check actual correspondence irreducibility geometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTClassicalHodgeActualGeometricIrreducibility > geometric-irreducibility-lean.log 2>&1; then
+            echo "LEAN PASSED: genuine-geometry invariant-subspace reduction"
+          else
+            grep -nE 'error:|sorryAx|✖' geometric-irreducibility-lean.log | tail -n 120 || true
+            tail -n 70 geometric-irreducibility-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" geometric-irreducibility-lean.log; then
+            echo 'Trust audit failed: geometric irreducibility'
+            exit 1
+          fi
+      - name: Kernel check independent third coordinate and CM quadratic geometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTMathboxIndependentGeometricCoordinate GSTMathboxCMGeometricComplexStructure > new-geometric-coordinate-lean.log 2>&1 || {
+            grep -nE 'error:|sorryAx|✖' new-geometric-coordinate-lean.log | tail -n 100 || true
+            tail -n 70 new-geometric-coordinate-lean.log
+            exit 1
+          }
+          if grep -E "declaration uses 'sorry'|sorryAx" new-geometric-coordinate-lean.log; then
+            echo "Trust audit failed: independent geometry / CM quadratic"
+            exit 1
+          fi
+      - name: Kernel check corrected zeta exact series and actual Hodge landing
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTMathboxCorrectedZetaGeometry GSTMathboxCorrectedZetaInfinite GSTMathboxCorrectedZetaSafeDomain GSTMathboxCorrectedZetaActualHodge > corrected-zeta-hodge-root.log 2>&1; then
+            echo "LEAN PASSED: corrected zeta infinite series / safe domain / actual Hodge"
+          else
+            grep -nE 'error:|sorryAx|✖' corrected-zeta-hodge-root.log | tail -n 110 || true
+            tail -n 80 corrected-zeta-hodge-root.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" corrected-zeta-hodge-root.log; then
+            echo "Trust audit failure: corrected zeta"
+            exit 1
+          fi
+      - name: Compile complete public HodgeConjecture root with new geometric theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build HodgeConjecture > public-hodge-root-lean.log 2>&1; then
+            echo "LEAN PASSED: public HodgeConjecture integration"
+          else
+            grep -nE 'error:|sorryAx|✖' public-hodge-root-lean.log | tail -n 120 || true
+            tail -n 70 public-hodge-root-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" public-hodge-root-lean.log; then
+            echo "Trust audit failed: public Hodge root"
+            exit 1
+          fi
+      - name: Save dependency cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-charge-wedge
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-single-correspondence-charge-wedge-lean
+          path: |
+            charge-wedge-lean.log
+            charged-frames-lean.log
+            geometric-irreducibility-lean.log
+            new-geometric-coordinate-lean.log
+            corrected-zeta-hodge-root.log
+            public-hodge-root-lean.log
+          if-no-files-found: warn

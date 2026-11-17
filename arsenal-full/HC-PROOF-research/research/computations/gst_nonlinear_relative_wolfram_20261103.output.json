@@ -1,0 +1,76 @@
+{
+  "input_path": "research/experiments/gst_nonlinear_relative_wolfram_20261103.wl",
+  "input_sha256": "ba7bde828be25648d08474f7a2e262cee441ccb563c4cc58339f4600026117fb",
+  "started_at": "2026-11-03T11:24:05.285Z",
+  "remote_process_exit_status": null,
+  "raw_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= \"{\\\"all_passed\\\":true,\\\"assertions\\\":1318,\\\"failures\\\":[],\\\"nonlinear_rows\\\":[[-2,256,2,false],[-1,256,2,false],[0,256,2,true],[1,256,2,false],[2,256,2,false]],\\\"massey_ranks\\\":[2,3],\\\"kernel_version\\\":\\\"15.0.1 for Linux x86 (64-bit) (July 2, 2026)\\\",\\\"runtime_seconds\\\":1.81711}\""
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  },
+  "result": {
+    "all_passed": true,
+    "assertions": 1318,
+    "failures": [],
+    "nonlinear_rows": [
+      [
+        -2,
+        256,
+        2,
+        false
+      ],
+      [
+        -1,
+        256,
+        2,
+        false
+      ],
+      [
+        0,
+        256,
+        2,
+        true
+      ],
+      [
+        1,
+        256,
+        2,
+        false
+      ],
+      [
+        2,
+        256,
+        2,
+        false
+      ]
+    ],
+    "massey_ranks": [
+      2,
+      3
+    ],
+    "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "runtime_seconds": 1.81711
+  },
+  "diagnostics": [
+    {
+      "observation": "The first evaluation returned matching passing tables but an undefined-symbol warning for an unused Dold wrapper. Removed that wrapper and reran the entire pinned input. The final raw response has no warning.",
+      "first_input_sha256": "62475d050e307a60efc7961735bcc9118977eb2c6e582a07c4f7644bc5f02b6f",
+      "first_raw_response": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Symbol::undefined2: Warning: Global symbols \"Dold, Dold\" are undefined.\nGeneral::messages: Messages were generated which may indicate errors.\n\nOut[1]= \"{\\\"all_passed\\\":true,\\\"assertions\\\":1318,\\\"failures\\\":[],\\\"nonlinear_rows\\\":[[-2,256,2,false],[-1,256,2,false],[0,256,2,true],[1,256,2,false],[2,256,2,false]],\\\"massey_ranks\\\":[2,3],\\\"kernel_version\\\":\\\"15.0.1 for Linux x86 (64-bit) (July 2, 2026)\\\",\\\"runtime_seconds\\\":1.963049}\""
+          }
+        ],
+        "structuredContent": null,
+        "isError": false
+      },
+      "classification": "non-mathematical evaluator warning; final evidence is the complete clean rerun"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+name: GST N-Cohomology Double Causal Fold
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'waves/GSTNCohomologyV3.lean'
+      - '.github/workflows/gst-n-cohomology-double-causal-fold.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-n-cohomology-double-causal-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel check independent GST N-hole double-fold laws
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTNCohomologyDoubleCausalFold"
+          roots = ["waves.GSTNCohomologyV3"]
+          EOF
+          if lake build GSTNCohomologyDoubleCausalFold > gst-n-double-causal.log 2>&1; then
+            echo "LEAN PASSED: independent N-hole tensor reconstruction and multiplicative channel count"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-n-double-causal.log | tail -n 150 || true
+            tail -n 150 gst-n-double-causal.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-n-double-causal.log; then
+            exit 1
+          fi
+      - name: Upload Lean kernel log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-n-cohomology-double-causal-fold
+          path: gst-n-double-causal.log
+          if-no-files-found: warn

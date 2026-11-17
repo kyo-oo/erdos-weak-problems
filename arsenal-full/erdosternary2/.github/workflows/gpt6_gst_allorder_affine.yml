@@ -1,0 +1,30 @@
+name: GST all-order Worldtrace and affine orbit unification
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [GSTWorldtraceAllOrderAffineUnification.lean, .github/workflows/gpt6_gst_allorder_affine.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  all-order-exact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile GST source and original physical affine orbit
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerAffineOrbit GSTFourPowerDirectExistence
+      - name: Kernel audit full source-worldtrace-all-order identity and literal CommonTwo
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceAllOrderAffineUnification.lean 2>&1 | tee all-order-affine-proof.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' all-order-affine-proof.log
+          echo GST_ALL_ORDER_WORLDTRACE_AFFINE_ORBIT_EXACT_PASS=1

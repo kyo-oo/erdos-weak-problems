@@ -1,0 +1,71 @@
+name: GST CM Finite-Degree Geometric Hodge Descent
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+      - mathbox/residual-zero-direct-audit-20261015
+    paths:
+      - 'GSTCMFiniteGeometricDegreeDescent.lean'
+      - 'GSTClassicalHodgeCMNativeRationalDescent.lean'
+      - '.github/workflows/gst-cm-finite-degree-geometric-descent.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-cm-finite-degree-descent-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore Lean incremental cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-cm-degree-descent
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify finite-degree CM geometric descent
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTCMFiniteDegreeDescent"
+          roots = ["GSTCMFiniteGeometricDegreeDescent", "GSTClassicalHodgeCMNativeRationalDescent", "GSTUniversalChowRetractToTarget"]
+          EOF
+          if lake build GSTCMFiniteDegreeDescent > cm-degree-descent-lean.log 2>&1; then
+            echo "LEAN PASSED: native target cycle from actual source pull/push degree split"
+          else
+            grep -nE 'error:|sorryAx|✖' cm-degree-descent-lean.log | tail -n 130 || true
+            tail -n 100 cm-degree-descent-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" cm-degree-descent-lean.log; then
+            exit 1
+          fi
+      - name: Upload verification log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cm-finite-degree-descent-kernel-log
+          path: cm-degree-descent-lean.log
+          if-no-files-found: warn

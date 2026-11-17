@@ -1,0 +1,32 @@
+name: GST pure-three exponent CommonTwo infinite family
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [GSTProblem406UnboundedPureThreePowerFamily.lean, .github/workflows/gpt6_problem406_pure_three_family.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  family:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build source-specific GST all-scale coefficient laws
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectExistence
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerDirectExistence.olean GSTFourPowerDirectExistence.lean
+      - name: Strict prove new physical exponent families
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406UnboundedPureThreePowerFamily.lean 2>&1 | tee gst-unbounded-pure-three.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' gst-unbounded-pure-three.log
+          echo GST_PURE_THREE_POWER_PHYSICAL_COMMON_TWO_PASS=1

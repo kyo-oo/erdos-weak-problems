@@ -1,0 +1,123 @@
+name: GST Research Source Lean Verification
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTClassicalHodgeCM*.lean'
+      - 'GSTClassicalHodgeCrossCarrier*.lean'
+      - 'GSTClassicalHodgeGeometric*.lean'
+      - 'GSTClassicalHodgeFinalFrontier.lean'
+      - 'GSTClassicalHodgeDegreeCertifiedFrontier.lean'
+      - 'GSTClassicalHodgeGuardedFrontierConversion.lean'
+      - 'HodgeConjecture.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/hodge-research-source-lean.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hodge-research-final-pass-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  compile-research:
+    name: Compile ${{ matrix.target }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 1
+      matrix:
+        target:
+          - GSTInfiniteCoupledLedger
+          - GSTClassicalHodgeBasisCycleBridge
+          - GSTClassicalHodgeSuccessorGroundFloor
+          - GSTClassicalHodgeProjectiveDegreeTrace
+          - GSTClassicalHodgeGeometricKrylovMomentDeterminant
+          - HodgeConjecture
+          - GSTClassicalHodgeFinalFrontier
+          - GSTClassicalHodgeDegreeCertifiedFrontier
+          - GSTClassicalHodgeGuardedFrontierConversion
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and get Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore the unified bank
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-capstone-${{ matrix.target }}-${{ github.run_id }}
+          restore-keys: |
+            hc-lean-incremental-Linux-
+      - name: Kernel compile research module
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          # Register the master's ACTUAL transitive import closure (the
+          # tower modules are not in the committed registry) so every
+          # matrix target resolves; the committed lakefile stays untouched.
+          # The FinalFrontier root adds itself on top of the master closure.
+          python3 scripts/gst_lean_dependency_roots.py HodgeResearchLib HodgeConjecture GSTClassicalHodgeFinalFrontier GSTClassicalHodgeDegreeCertifiedFrontier GSTClassicalHodgeGuardedFrontierConversion
+          # THE SEQUENTIAL CAPSTONE MACHINE: one module per job, the jobs
+          # strictly ordered by the dependency chain (the ledger and the
+          # basis-cycle bridge first, then the ground floor, the trace, the
+          # Krylov/Hankel monster, and the master root LAST). Each job
+          # restores the unified bank (whoever saved last — the previous
+          # job in this machine, or the master assembly lane) and builds
+          # ONLY its own target on top: a dedicated 165-minute window per
+          # capstone, three times the master lane's convergence window,
+          # with the whole bank replayed underneath. A failed or
+          # timed-out job does not cancel the machine (fail-fast: false):
+          # the next job re-attempts the failed dependencies inside its
+          # own window. Every completed module lands in the unified bank
+          # and never replays its grind.
+          ( while true; do
+              sleep 60
+              echo "[live-tail $(date -u +%H:%M:%S)] $(tail -c 300 research-lean.log 2>/dev/null | tr '\n' ' ' | tail -c 200)"
+            done ) & TAILPID=$!
+          if timeout 9900 lake build "${{ matrix.target }}" > research-lean.log 2>&1; then
+            echo "LEAN COMPILE PASSED: ${{ matrix.target }}"
+          else
+            status=$?
+            echo "BUILD EXIT $status (the 165-minute dedicated window) — the unified bank keeps every completed module; the next matrix job re-attempts this target's dependencies inside its own window"
+            grep -nE "error:|sorryAx" research-lean.log | tail -n 130 || true
+            tail -n 30 research-lean.log || true
+            kill $TAILPID 2>/dev/null || true
+            exit 1
+          fi
+          kill $TAILPID 2>/dev/null || true
+          if grep -E "declaration uses 'sorry'|sorryAx" research-lean.log; then
+            echo "Trust audit failed" && exit 1
+          fi
+          echo "LEAN GREEN: ${{ matrix.target }} kernel-verified on the pinned toolchain, zero sorry"
+      - name: Save the unified bank
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-capstone-${{ matrix.target }}-${{ github.run_id }}
+      - name: Upload compiler diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hodge-research-${{ matrix.target }}-diagnostics
+          path: research-lean.log
+          if-no-files-found: warn

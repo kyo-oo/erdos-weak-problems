@@ -1,0 +1,495 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Optimal-Dimensional Whole-Space Incidence Realization and Exact Finite-Trace Hodge Residual}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+Given an arbitrary original smooth projective complex d-fold X,
+we determine the SHARP minimal possible complex dimension
+of any Stein affine-space torsor over X: its affine-fiber rank
+must be at least d. The bound is attained for every X by
+pulling back the genuine incidence-complement affine torsor
+over P^d along a finite Noether-normalization map X->P^d.
+This provides a UNIVERSAL realized GST whole-space
+fold of minimal total complex dimension 2d, with exact
+ordinary/compact-support Hodge signatures and the actual
+rank-d higher-causal translation geometry.
+Next we construct in rational Betti AND true Chow
+the exact finite-cover transfer projector onto the
+algebraic ambient Hodge direction. We show that every
+prescribed rational (p,p) alpha splits canonically for
+each finite projection into a constructed genuine algebraic
+cycle and a trace-zero Hodge residual. We prove that
+pure incidence/fiber-rank manipulations cannot manufacture
+the latter: the finite-transfer original-X residual
+is invariant under all base-induced operations.
+The work is actual all-X mathematics; no special
+example is extrapolated to the universal Hodge target.
+\end{abstract}
+
+\section{Exact geometry and original-X source target}
+Let X be any connected smooth projective complex
+variety, $\dim_\mathbb C X=d\ge1$.
+The target of the full GST program remains:
+for every p with $0\le p\le d$ and every rational
+Hodge class $\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$,
+construct a GENUINE
+$Z_\alpha\in CH^p(X)_\mathbb Q$
+with actual canonical rational Betti
+$\mathrm{cl}_X(Z_\alpha)=\alpha$.
+No target Chow class is ever an input below.
+
+A genuine affine-space torsor of rank r
+means a Zariski-locally trivial morphism
+$q:J\to X$ with fibers $\mathbb A^r_\mathbb C$,
+under some actual algebraic vector bundle
+of rank r. Its topology is a genuine
+affine-fiber fold, not a formal
+higher-cell dimension declaration.
+
+\begin{theorem}[UNIVERSAL SHARP RANK LOWER BOUND]
+If the analytification of the total space J
+of a rank-r affine-space torsor
+$q:J\to X$ is Stein, then
+\[
+ \boxed{r\ge d,\qquad
+        \dim_\mathbb C J=d+r\ge2d.}                  \tag{1}
+\]
+This holds on EVERY smooth projective
+complex d-fold X without any
+Hodge-algebraicity hypothesis.
+\end{theorem}
+\begin{proof}
+Each affine-space fiber is contractible;
+because q is locally trivial analytically,
+it is a homotopy equivalence. In particular,
+\[
+ H^{2d}(J,\mathbb Q)\cong H^{2d}(X,\mathbb Q)
+              \cong\mathbb Q
+\]
+by the nonzero compact complex orientation
+fundamental class of connected X.
+A Stein manifold of complex dimension n
+has the homotopy type of a CW complex
+of REAL dimension at most n,
+by the Andreotti--Frankel/Morse
+handle-index theorem for Stein manifolds.
+Applied to J of complex dimension d+r,
+it yields $H^k(J,\mathbb Q)=0$ for
+$k>d+r$. Since $H^{2d}(J,\mathbb Q)$
+is nonzero, $2d\le d+r$, proving (1).
+Neither rational Hodge type nor the
+Hodge conjecture is used here.
+\end{proof}
+
+\begin{theorem}[ACTUAL SHARP MINIMAL-RANK FOLD: EVERY original X]
+Every smooth projective complex d-fold X
+admits a smooth AFFINE, Stein-analytic
+rank-d affine-space torsor
+\[
+ \boxed{
+ q_d:J_d^{\min}(X)\to X,\qquad
+ \dim_\mathbb C J_d^{\min}(X)=2d.
+ }                                                       \tag{2}
+\]
+The total-space algebraic scheme has
+the explicit genuine incidence equation
+\[
+ \boxed{
+ J_d^{\min}(X)=
+ \{(x,H)\in X\times(\mathbb P^d)^\vee:
+                    f(x)\notin H\},
+ }                                                       \tag{3}
+\]
+where $f:X\to\mathbb P^d$ is ANY finite
+surjective projective Noether-normalization map.
+It is the affine torsor under the
+rank-d bundle
+\[
+ \boxed{
+ V_f=f^*\operatorname{Hom}
+       (Q_{\mathbb P^d},O_{\mathbb P^d}(-1)).
+ }                                                       \tag{4}
+\]
+For all natural k, replacing this space
+by $J_d^{\min}(X)\times\mathbb A^k$
+produces a genuine Stein affine
+rank-(d+k) fold; none with rank<d
+can be Stein.
+\end{theorem}
+\begin{proof}
+For any positive-dimensional projective
+d-dimensional X, homogeneous
+Noether normalization for its
+projective homogeneous coordinate
+ring, or generic finite linear
+projection, supplies a finite
+surjective morphism
+$f:X\to\mathbb P^d$ of degree
+$\delta>0$. The standard incidence
+complement
+\[
+ U_d=\{(y,H)\in\mathbb P^d\times
+ (\mathbb P^d)^\vee:y\notin H\}
+\]
+is the complement of a
+$(1,1)$-divisor in the product.
+Since $O(1,1)$ is ample,
+this complement is an AFFINE
+algebraic variety.
+The natural projection $U_d\to\mathbb P^d$
+has fiber $\mathbb P^d\setminus H$
+isomorphic to $\mathbb A^d$;
+as the space of retractions of
+$O(-1)\subset O^{d+1}$ it is
+a Zariski-locally trivial torsor
+under $V_{\mathbb P^d}$ in (4).
+Base change along f gives exactly
+$J_d^{\min}(X)=X\times_{\mathbb P^d}U_d$.
+The projection $J_d^{\min}(X)\to U_d$
+is finite (finite morphisms are
+stable under base change).
+A finite morphism over an affine
+scheme has AFFINE source, so
+$J_d^{\min}(X)$ is affine.
+It is smooth as an affine-space
+torsor over smooth X and has
+complex dimension 2d.
+Its analytification is Stein.
+The torsor bundle pulls back
+to (4).
+Products with any affine A^k
+are affine and remain actual
+torsors; the preceding theorem
+proves minimality.
+\end{proof}
+
+\begin{corollary}[Universal whole-Hodge causal fold law at the SHARP minimum]
+Every original X has its own
+geometrically optimal entire-space
+realization q_d in (2), whose ACTUAL
+rational mixed Hodge structure and
+compact-support Hodge polynomial obey
+\[
+ \boxed{
+ q_d^*:H^j(X,\mathbb Q)
+    \overset{\sim}{\longrightarrow}
+      H^j(J_d^{\min}(X),\mathbb Q)
+ \ \text{as rational MHS, for all }j,}
+                                                               \tag{5}
+\]
+\[
+ \boxed{
+ E_c(J_d^{\min}(X);u,v)
+    =(uv)^d\,E_c(X;u,v).
+ }                                                       \tag{6}
+\]
+The first identifies the entire
+ordinary Hodge structure in EVERY
+grade; the second shifts compact
+weights by exactly d Tate degrees.
+The actual torsor's higher-causal
+vertical tangent has rank d,
+and its relative curvature tensor
+lies in
+$\Omega_{J/X}^2\otimes\mathrm{End}(H)$.
+For d>=2 this sheaf is nonzero
+as a vector-bundle sheaf;
+for d=1 it vanishes identically.
+Thus the minimal REAL spatial
+complex dimension cannot force
+nonabelian curvature to vanish
+by a rank-one degree argument
+when d>=2.
+\end{corollary}
+\begin{proof}
+Algebraic affine-space bundles
+are A1-homotopy invariant on
+rational singular cohomology
+with its natural mixed Hodge
+structure (equivalently, use the
+algebraic Leray sheaf R^j q_*Q,
+which vanishes above zero
+because each geometric affine
+fiber is contractible).
+The compact-support
+Hodge--Deligne polynomial is
+multiplicative under a
+Zariski locally trivial
+algebraic A^d fibration,
+whose fiber has $E_c=(uv)^d$.
+The relative cotangent bundle
+is rank d, so its exterior
+square has rank d(d-1)/2;
+this vanishes exactly for
+d<=1 and is nonzero for d>=2.
+\end{proof}
+
+\section{A TRUE finite-cover Chow return and exact trace-zero Hodge residual}
+Write $f:X\to\mathbb P^d$ for
+the actual finite morphism
+used in the minimal incidence
+space, $\delta=\deg f$,
+$h=c_1(f^*O_{\mathbb P^d}(1))$.
+Let $H=c_1^{CH}(f^*O(1))$ denote
+the true original-X
+hyperplane Chow divisor.
+The map f is finite and flat:
+the target P^d is smooth,
+the source X is Cohen--Macaulay,
+the fibers are zero-dimensional,
+and the miracle-flatness
+criterion applies.
+
+\begin{theorem}[Actual rational Chow and Betti finite-trace PROJECTOR]
+For EVERY p, 0<=p<=d,
+there is an actual algebraic
+correspondence-type Chow operator
+\[
+ \boxed{
+ T^{CH}_{f,p}=
+ \frac1\delta f^*f_*:
+ CH^p(X)_\mathbb Q\to CH^p(X)_\mathbb Q
+ }                                                       \tag{7}
+\]
+using the GENUINE flat pullback
+and finite proper pushforward.
+It is idempotent, with image
+$\mathbb Q H^p$ modulo any
+Chow relations; since $\int_XH^d
+=\delta$, $H^p$ is nonzero
+in the relevant rational Chow.
+The corresponding Betti operator
+\[
+ \boxed{
+ T_{f,p}=\frac1\delta f^*f_*:
+ H^{2p}(X,\mathbb Q)\to H^{2p}(X,\mathbb Q)
+ }                                                       \tag{8}
+\]
+is idempotent, a morphism of
+rational Hodge structures
+of type (0,0) in degree 2p,
+and has exact image $\mathbb Q h^p$.
+For EVERY rational Hodge alpha
+define the ACTUAL rational
+number
+\[
+ c_\alpha=\int_X\alpha\,h^{d-p}\in\mathbb Q.
+\]
+Then the identity of ORIGINAL-X
+rational Betti classes is
+\[
+ \boxed{
+ \alpha=\underbrace{\frac{c_\alpha}
+  {\delta}h^p}_{\mathrm{cl}_X^{can}
+  ((c_\alpha/\delta)H^p)}
+ +\underbrace{\left(
+   \alpha-\frac{c_\alpha}{\delta}h^p
+             \right)}_{\alpha_f^0},
+ \qquad
+ f_*(\alpha_f^0)=0 .
+ }                                                       \tag{9}
+\]
+The first term has the displayed
+ACTUAL independently constructed
+original-X Chow source. The
+second is rational of type (p,p)
+and lives in the TRUE trace-zero
+subspace of the whole spatial
+finite-fold geometry.
+\end{theorem}
+\begin{proof}
+The finite flat projection
+formula says
+$f_*f^*\eta=\delta\eta$
+for cohomology and Chow
+with rational coefficients.
+Therefore
+$(f^*f_*/\delta)^2
+=f^*(f_*f^*)f_*/\delta^2
+=f^*f_*/\delta$.
+The cohomology and Chow rings
+of P^d contain only the
+one-dimensional group
+in codimension p generated by
+$\zeta^p$,
+where $\zeta=c_1(O(1))$.
+Hence both projector images
+are spanned by $f^*\zeta^p=h^p$
+(or H^p in Chow).
+To determine the coefficient
+of $f_*\alpha\in H^{2p}(P^d)$,
+integrate against $\zeta^{d-p}$:
+\[
+ \int_{\mathbb P^d}
+ f_*\alpha\,\zeta^{d-p}
+ =\int_X\alpha\,f^*\zeta^{d-p}
+ =c_\alpha .
+\]
+Thus $f_*\alpha=c_\alpha\zeta^p$
+and (9) follows. The canonical
+cycle-class map commutes with
+actual finite flat pullback
+and proper pushforward.
+Because f is algebraic, f^* and
+f_* respect rational Hodge
+bidegrees after the proper
+degree shifts (none here, since
+finite). Hence the residual is
+Hodge whenever alpha is Hodge.
+\end{proof}
+
+\begin{corollary}[Exact original-X residual source equivalence]
+For EVERY original X and every
+finite projective f as above,
+\[
+ \boxed{
+ \alpha\in\mathrm{im}(\mathrm{cl}^{can}_X)
+ \quad\Longleftrightarrow\quad
+ \alpha_f^0\in
+   \mathrm{im}(\mathrm{cl}^{can}_X).
+ }                                                       \tag{10}
+\]
+In particular for p=0 and p=d,
+the trace-zero rational Hodge
+residual vanishes for every alpha,
+and the original-X canonical
+algebraic source is completely
+constructed by the first term
+of (9). In middle grades the
+trace-zero subspace is the exact
+new geometry that any genuine
+universal source birth must
+represent, not a change of
+notation for an ordinary
+hyperplane class.
+\end{corollary}
+\begin{proof}
+The first term in (9) is an
+ACTUAL rational Chow cycle on
+original X for every input alpha,
+without alpha being algebraic.
+Thus alpha is algebraic iff its
+difference with that term is
+algebraic. In degrees zero and
+2d the original rational
+cohomology groups are
+one-dimensional for connected
+smooth projective X, and are
+already spanned by h^p, so the
+trace-zero kernel vanishes.
+\end{proof}
+
+\section{Independent source creation inside the trace-zero geometry}
+Let $K_X$ denote the actual
+algebraic canonical divisor
+and let $R_f$ denote the genuine
+effective ramification divisor
+of the finite flat generically
+separable map f.
+The Riemann--Hurwitz canonical
+divisor identity gives
+\[
+ \boxed{
+ R_f=K_X+(d+1)H\quad
+          \text{in }CH^1(X)_\mathbb Q .
+ }                                                       \tag{11}
+\]
+In ANY positive codimension p
+construct the ACTUAL Chow source
+\[
+ \boxed{
+ B^{CH}_{f,p}=
+ R_f\cdot H^{p-1}
+ -\frac{\int_X c_1(R_f)h^{d-1}}
+        {\delta}\,H^p
+ \in CH^p(X)_\mathbb Q .
+ }                                                       \tag{12}
+\]
+This formula is always defined
+without a chosen Hodge target
+cycle. Its canonical rational
+Betti class lies in
+$\ker f_*$ by the exact
+projector theorem. It can be
+NONZERO when the class of
+$R_f$ has a nonambient component
+that survives multiplying by
+h^(p-1). It can vanish,
+notably when Pic(X)_Q is
+generated by H, so it does
+NOT give universal spanning
+of all trace-zero Hodge
+directions. This is a genuinely
+constructed nonambient source
+from the original finite cover
+and its branch geometry, distinct
+from the hyperplane-only factory.
+
+\section{Actual all-N higher-causal constraint and the remaining universal mechanism}
+The minimal whole-world GST fold
+exists for EVERY original smooth
+projective X, and the first
+rational Hodge-preserving
+spatial source projection is
+solved by (9). Its actual
+higher-causal vector-bundle
+groupoid has vertical rank d.
+The fold's own topological
+trace-zero sector can carry
+rational Hodge classes that
+are not exhausted by the
+finite branch source (12).
+The native K0 algebraization
+quotient described in the
+existing manuscript
+\texttt{GST\_stein\_affine\_line\_causal\_flatness\_universal\_chow\_2026\_10\_23.tex}
+is preserved under ANY
+affine-space torsor:
+\[
+ \frac{K_0^{hol}(J)_\mathbb Q}
+ {\operatorname{im}K_0^{alg}(J)_\mathbb Q}
+ \cong\bigoplus_p
+ \frac{H^{2p}(X,\mathbb Q)}
+ {\operatorname{im}\mathrm{cl}_X^{can,p}} .
+ \tag{13}
+\]
+Equation (13) is exact for the
+OPTIMAL J in (2), just as
+for larger unnecessary ambient
+ranks. Thus the geometric
+problem is not resolved by
+adding artificial extra affine
+dimensions, nor by taking
+finite traces back to P^d:
+(9) shows precisely where
+the original-X Hodge residual
+persists. A genuinely new
+higher-causal construction
+would have to create an actual
+algebraic lift for that
+trace-zero rational Hodge
+class, independently of
+assuming it in advance.
+
+The achieved theorem is the
+SHARP universal spatial
+dimension law, its geometric
+realization, the true
+finite-cover Chow projector,
+and the original-X trace-zero
+source decomposition.
+This is verified for all X by
+topology, affine geometry,
+finite morphism geometry
+and actual rational Chow
+push-pull. It does not replace
+the residual source with a
+conditional flatness hypothesis
+and claim a full solution.
+\end{document}

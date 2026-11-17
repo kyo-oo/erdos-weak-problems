@@ -1,0 +1,130 @@
+/- ======================================================================
+/- CHRONOLOGICAL LABEL — #0031 / 1133
+/-    Path         : SOURCE_MANIFEST.json
+/-    Ref          : main
+/-    First-commit : 2026-08-14 21:44:31 +0530
+/-    Last-commit  : 2026-08-14 21:44:31 +0530
+/-    Total commits: 1
+/- ======================================================================
+/- GIT HISTORY (chronological, oldest first)
+/- ======================================================================
+/- ====================================================================== -/
+
+{
+  ".devcontainer/devcontainer.json": {
+    "bytes": 378,
+    "sha256": "17d0367c9fad557ffc3708df57517142f33700da44ffb194bdefdf123b87f7ac"
+  },
+  ".github/workflows/comparator.yml": {
+    "bytes": 614,
+    "sha256": "e31563f94780928c1a5ee0f3a099107246b9bbe1e565f28a8fcdceafc82a7ffe"
+  },
+  ".gitignore": {
+    "bytes": 41,
+    "sha256": "8207801bca4e620cc13964b4d5f25953ad1a8a3776ed9f5d4229ca893c2471db"
+  },
+  "Challenge.lean": {
+    "bytes": 479,
+    "sha256": "101370f6d7fb3ec01fcd7e9a340c52c415a36a690c5025ba4b9bd08806f04f71"
+  },
+  "ErdosTernary2.lean": {
+    "bytes": 384816,
+    "sha256": "fb0d3fe4ed279f7e120b987d42b95773d1927be02d97dc194567ef1d48794906"
+  },
+  "GSTTactic.lean": {
+    "bytes": 7717,
+    "sha256": "5ec0347da6b6a7d8e19696461761d505bf748523c4b6b6a1d93f439d1493de05"
+  },
+  "README.md": {
+    "bytes": 1229,
+    "sha256": "e27abf259abad023efb39f031acf9ec933879d65bdb4bafbab7fb43588b608a3"
+  },
+  "Solution.lean": {
+    "bytes": 988,
+    "sha256": "db83a8583052f823666098dfa18008b74fd27f96c138b8b825259fec2b2c1fe0"
+  },
+  "archive/ErdosTernary2_7891_canonical.lean": {
+    "bytes": 369299,
+    "sha256": "7b1cf2c3d25baf1fa28fa5c90cfa6d64702200e7412b7f894efb8fded722316a"
+  },
+  "archive/ErdosTernary2_8303_v2.lean": {
+    "bytes": 384816,
+    "sha256": "fb0d3fe4ed279f7e120b987d42b95773d1927be02d97dc194567ef1d48794906"
+  },
+  "comparator_config.json": {
+    "bytes": 222,
+    "sha256": "d2556fa134f62fedda2afc77af101448693c305b45baa795b9cf2c01d6756a31"
+  },
+  "docs/ERDOSTERNARY2_ATOMIC_OMEGA_PARADOX_MIRROR_SURGERY_PLAN.md": {
+    "bytes": 45959,
+    "sha256": "dfe6f750285090acfba3fae68c1be13571eaf25268ede1a3b35948f6407d33f1"
+  },
+  "docs/GST_GRAPH_OMEGA_INFINITY_INTEGRATED.md": {
+    "bytes": 16477,
+    "sha256": "8d591eef397b71212c4446dd401d2fd8763b44794b0674c339e90c047a9d62e0"
+  },
+  "docs/GST_OMEGA_PARADOX_MIRROR_FINAL_SURGERY_BERSERKER.md": {
+    "bytes": 237428,
+    "sha256": "1f86147322abb5c44fa5befd9f0d3f8c39ec5030eec117409f29fbfec87f34e1"
+  },
+  "docs/GST_OMEGA_PARADOX_MIRROR_LEAN_SURGERY_PLAN.md": {
+    "bytes": 32966,
+    "sha256": "67579f5a627465879622344b3deae7eded675f5b87b97ae55a27b1c380d73de0"
+  },
+  "docs/GST_PARADOX_MIRROR_OMEGA_CLOSURE.md": {
+    "bytes": 13277,
+    "sha256": "e26fd853aff5393690cf64622574358b93c9f686c86b21b12920b90acd16fd3f"
+  },
+  "lakefile.toml": {
+    "bytes": 291,
+    "sha256": "cd130ad82a1196f587309d4a1d96962cc003f09f490737874002486e6fd3ba7d"
+  },
+  "lean-toolchain": {
+    "bytes": 29,
+    "sha256": "0d3c76ccd8772d8bcbe207241421a760312b71a6aa82f84194391fdf5cb026d6"
+  },
+  "scripts/audit.sh": {
+    "bytes": 1466,
+    "sha256": "eaba90a2adf8d42f48c3dc9b1b75ae92c48233af08359790deab33cb179dd983"
+  },
+  "scripts/run-comparator.sh": {
+    "bytes": 492,
+    "sha256": "9cba1419110082e3d904cdb50b088bafc8949408434624c7317489e8a48ba5ae"
+  },
+  "scripts/setup-comparator.sh": {
+    "bytes": 743,
+    "sha256": "621ee59a536adf0662fb7f18ecc46610ad1b5625775f0bc26e0fc1c12b9d0e85"
+  },
+  "workbench/ErdosTernary2_SOL_INLINE_GREEN_CHECKPOINT.lean": {
+    "bytes": 383669,
+    "sha256": "296ae0ff435a0b6c7013a66e863649bb29b3976794b6492afa8b16e77d88487a"
+  },
+  "workbench/ErdosTernary2_SOL_INLINE_SURGERY_EXPERIMENT.lean": {
+    "bytes": 390117,
+    "sha256": "fbca614ee31139c115a6d05c31664421f6595b957b1426bd021458b73e3f2386"
+  },
+  "workbench/GREEN_PROVENANCE.md": {
+    "bytes": 1136,
+    "sha256": "ebd528d65479ce3a2840590d69590645b0ebd1a5d74bed493ebd1718b9db0873"
+  },
+  "workbench/SOL_INLINE_SURGERY_AUDIT.json": {
+    "bytes": 1507,
+    "sha256": "92783aa741c2dd86e640d4388e5f2d3506ea660e4bb050d882239a4b724baa01"
+  },
+  "workbench/SolOmegaAK.lean": {
+    "bytes": 7216,
+    "sha256": "7178e94b2556dcd9974460a81b23423822c231fe19f76549b44daaf99df8df32"
+  },
+  "workbench/SolOmegaOccurrence.lean": {
+    "bytes": 3644,
+    "sha256": "7f9c2de848202166cc13e3bd3c9cfc3c37ae9080f95e05e2cb6781789aa575bb"
+  },
+  "workbench/SolOmegaSurgery.lean": {
+    "bytes": 5947,
+    "sha256": "42e0e1e3a3f35805fa539d0adf78d14394dac35cf9fa75fd936be0372dd97411"
+  },
+  "workbench/SolOriginDescent.lean": {
+    "bytes": 2869,
+    "sha256": "5a440674aff6c44a1c4ffa2c0939135b086215134dbc2018397a01736bdaeabd"
+  }
+}

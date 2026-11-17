@@ -1,0 +1,14 @@
+RECEIPTS — engine142behrend.py (W72-142K, S071) — THE BEHREND ENGINE
+seed 20261117 ; deterministic ; python3
+
+PASS BEHREND-GRID — 10 instances (d,m); AP-free, |S| >= Theorem-B bound, range < (2m)^d all hold; rows (d,m,N,|S|,bound): [(3, 3, 216, 6, 0.3), (4, 3, 1296, 12, 0.53), (5, 3, 7776, 30, 1.05), (6, 3, 46656, 90, 2.24), (3, 5, 1000, 6, 0.2), (4, 5, 10000, 24, 0.57), (3, 7, 2744, 12, 0.17), (4, 7, 38416, 48, 0.66), (2, 9, 324, 2, 0.04), (5, 2, 1024, 10, 0.89)]
+PASS BEHREND-NOCARRY — digitwise APs lift; integer APs digitize (base 2m, digits < m); max-digit adversarial triples hold
+PASS BEHREND-SPHERE-ID — parallelogram law ||A||^2+||C||^2 = 2||B||^2 + 2||A-B||^2 with A+C=2B: 10^4 samples
+PASS CANTOR — ternary Cantor set 3-AP-free with |T_d| = 2^d for d=1..9 (sizes 512 at d=9)
+PASS CAPSET-BRIDGE — {0,1}^d in F_3^d is a cap set for d=3..9 (midpoint (u+w)*2 mod 3 in set iff u=w); cross-certified by the OFFICIAL DeepMind is_cap_set in the 142 gate
+PASS R3-TABLE — r_3(N) N=1..30 exact, B&B fresh (0.7s); fresh == embedded == legacy CI-certified data; table [1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12]
+PASS LAW-SPOTCHECKS — 18/18 arsenal law spot-checks pass (CardinalWorlds, GSTBladeWave, ErdosTernary2)
+PASS NEGATIVE-CONTROLS — planted integer AP detected=True; corrupted r_3 entry detected=True; planted F_3 AP detected=True
+
+TOTAL: 8/8 PASS, wall 1.6s
+BEHREND_ENGINE_GREEN=1

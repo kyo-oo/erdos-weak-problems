@@ -1,0 +1,68 @@
+name: SOL56 Infinite Ledger Collision
+
+on:
+  push:
+    branches:
+      - sol/sol56-final-residual-production-green-20260824
+  workflow_dispatch:
+
+concurrency:
+  group: sol56-infinite-ledger-collision-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  infinite-ledger-collision:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/sol56-final-residual-production-green-20260824
+          fetch-depth: 1
+
+      - name: Prepare pinned Lean RC2
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+
+      - name: Compile all-Nat infinite ledger collision
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          target = 'GSTFinalResidualInfiniteLedgerProbe'
+          order, done, active = [], set(), []
+          def source_for(mod):
+              p = Path(*mod.split('.')).with_suffix('.lean')
+              return p if p.is_file() else None
+          def imports_of(mod):
+              p = source_for(mod)
+              if p is None: return []
+              return re.findall(r'(?m)^\s*import\s+([A-Za-z0-9_.]+)\s*$', p.read_text())
+          def visit(mod):
+              p = source_for(mod)
+              if p is None or mod in done: return
+              if mod in active: raise SystemExit('IMPORT_CYCLE=' + ' -> '.join(active + [mod]))
+              active.append(mod)
+              for dep in imports_of(mod): visit(dep)
+              active.pop(); done.add(mod); order.append(mod)
+          for dep in imports_of(target): visit(dep)
+          Path('/tmp/infinite-ledger-order.txt').write_text('\n'.join(order) + '\n')
+          print('INFINITE_LEDGER_IMPORT_COUNT=' + str(len(order)))
+          PY
+          while IFS= read -r mod; do
+            [ -z "$mod" ] && continue
+            src="${mod//.//}.lean"
+            out=".lake/build/lib/lean/${mod//.//}.olean"
+            mkdir -p "$(dirname "$out")"
+            echo "=== INFINITE LEDGER DEP: $mod ==="
+            lake env lean -o "$out" "$src"
+          done < /tmp/infinite-ledger-order.txt
+          echo '=== INFINITE LEDGER TARGET ==='
+          lake env lean GSTFinalResidualInfiniteLedgerProbe.lean

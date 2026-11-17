@@ -1,0 +1,205 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Ann}{\operatorname{Ann}}
+\title{Nonlinear relative GST folds: complete pure-model classification and secondary memory}
+\author{Hand derivation before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+\section{Owner, inputs and output category}
+Checkpoint: \texttt{2e0324f1328409d68c25d85897435187d0a380b0}.
+Keep arbitrary original smooth projective complex $X$, $p\geq1$ and
+prescribed rational Hodge $\alpha$ as the geometric input. The universal
+cycle target is still a rational cycle on this same $X$ with canonical
+Betti class $\alpha$. The results here concern the actual rational torsor
+model and its marked base, not a replacement definition of Chow classes.
+
+For connected $X$ let $A=\bigoplus_q\operatorname{Hdg}^q(X)_\Q$, with
+cohomological degrees $2q$, augmentation ideal $\mathfrak m=A_{>0}$ and
+$\mathfrak m^{\dim X+1}=0$. For any finite homogeneous curvature list
+$a_i\in A_{p_i}$ set
+\[
+ B(a)=A\otimes\Lambda(u_i,v_i),\quad |u_i|=|v_i|=2p_i-1,
+ \quad du_i=a_i,\quad dv_i=0,\qquad I(a)=(a_i).
+\]
+All maps called relative fix $A$ pointwise. Arbitrary nonlinear graded
+maps are allowed; their images need not be linear in the handles. A
+zigzag below consists of quasi-isomorphisms of DGAs under $A$.
+These are unfiltered equivalences unless a filtration is explicitly named.
+
+\section{The full base kernel, without a linear-fold restriction}
+\begin{theorem}[Exact marked-base kernel]
+The kernel of the canonical map $A\longrightarrow H^*(B(a))$ is exactly
+$I(a)$. Consequently $A/I(a)$ is the actual image subalgebra of the base
+in cohomology. It need not be the whole cohomology algebra.
+\end{theorem}
+\begin{proof}
+Expand an arbitrary element uniquely by exterior word length. The
+length-zero component of its differential is $\sum_i b_i a_i$, where
+$b_i$ is its coefficient of the one-letter word $u_i$. Longer words
+cannot contribute length zero. Therefore a base element which is a
+boundary lies in $I(a)$. Conversely $\sum_i b_i a_i=d(\sum_i b_i u_i)$,
+since all coefficients in $A$ are even and closed. This proves equality,
+including an empty curvature list.
+\end{proof}
+
+For the full model $R\otimes\Lambda(u_i,v_i)$ with
+$R=H^*(X,\Q)$, including odd and off-diagonal base classes, the identical
+argument gives kernel $I(a)R$, with the usual graded sign in the coefficient
+of $u_i$. Its contraction to $A$ is exactly $I(a)$. Here is why this last
+assertion does not assume a rational projection onto complex Hodge types.
+In each degree the multiplication map
+$\bigoplus_i H^{2(q-p_i)}(X,\Q)(-p_i)\to H^{2q}(X,\Q)$ is a morphism of
+polarizable rational pure Hodge structures. The rational polarizing
+orthogonal complement of its kernel is a Hodge substructure: the kernel
+is stable under the Weil operator, so positivity makes the restricted
+polarization nondegenerate. This complement maps isomorphically to the
+image. A rational Hodge target in that image therefore has a rational
+Hodge preimage, supplying coefficients in $A_{q-p_i}$. This proves the
+contraction statement and keeps all original base cohomology.
+
+\begin{theorem}[Nonlinear and quasi-isomorphic invariance]
+For any DGA $C$ under $A$, the kernel of $A\to H(C)$ is preserved by every
+relative quasi-isomorphism, hence every relative zigzag. If $C$ has a
+chain retraction to $(A,0)$, that kernel is zero. Thus nonzero $I(a)$
+cannot be erased by any relative nonlinear equivalence, even into a
+presentation whose differentials are not pure base curvatures.
+\end{theorem}
+\begin{proof}
+The cohomology map of a relative quasi-isomorphism is an isomorphism
+commuting with the marked base map; their kernels coincide. A chain
+retraction makes the base map split injective on cohomology. In particular,
+if every target handle differential has positive handle length, setting
+all handles to zero is such a retraction. No inspection of the nonlinear
+coordinate formula is needed.
+\end{proof}
+
+\section{Complete classification of the pure paired presentations}
+\begin{theorem}[Classification in the larger category]
+For two finite pure paired models over this fixed $A$, the following are
+equivalent:
+\begin{enumerate}
+\item they are joined by a relative DGA quasi-isomorphism zigzag;
+\item $I(a)=I(b)$ as graded ideals and their multiplicities
+$r_q=\#\{i:p_i=q\}$ agree in every weight;
+\item they are related by a homogeneous $A$-linear change of the paired
+handle coordinates, hence by a relative DGA isomorphism.
+\end{enumerate}
+Therefore the previous minimum $\mu_q=\dim_\Q(I/\mathfrak m I)_q$ remains
+sharp among all pure paired presentations in the entire nonlinear relative
+quasi-isomorphism class. The equivalence need not preserve an ordered
+basis. This does not classify all DGAs with nonlinear differentials.
+\end{theorem}
+\begin{proof}
+The base-kernel theorem recovers $I$ from (1). To recover the handle
+multiplicities, take the derived fiber along $A\to\Q$. The model is a
+finite semifree $A$-module, filtered by exterior length, with differential
+lowering length. It is also a relative free DGA obtained by attaching the
+odd generators with differential already in $A$. Its ordinary fiber
+therefore computes the derived fiber:
+\[
+ \Q\otimes_A^{\mathbb L}B(a)\simeq
+ (\Lambda_\Q(u_i,v_i),0).
+\]
+For clarity the flatness assertion is not ordinary tensor preservation
+for arbitrary modules. A finite semifree complex is homotopy projective:
+lifting a map into an acyclic complex and its nullhomotopy is performed
+successively over its free filtration. Thus a quasi-isomorphism between
+such models has acyclic homotopy-projective cone and a chain homotopy
+inverse. Tensoring that homotopy with $\Q$ preserves it. For an arbitrary
+zigzag use semifree replacements at each intermediate object; the same
+lifting argument defines the invariant derived fiber. These constructions
+also preserve the product in its derived algebra. The graded
+indecomposables of its cohomology exterior algebra have dimension $2r_q$
+in degree $2q-1$. This recovers every $r_q$.
+
+For (2) implies (3), apply the preceding graded-local normal-form theorem
+to both lists. Their minimal generators have the same counts $\mu_q$.
+Writing one minimal list in terms of the other gives a homogeneous matrix
+whose equal-weight diagonal blocks are invertible over $\Q$, since both
+lists are bases of $I/\mathfrak m I$. Its off-diagonal part is strictly
+weight triangular and has a finite inverse. Their closed pairs have equal
+counts $r_q-\mu_q$ and can be matched. Apply the same matrix to each
+conjugate partner list. This gives the claimed isomorphism; it also
+preserves the specified model filtration. (3) implies (1) immediately.
+\end{proof}
+
+The marking matters. On $A=\Q[x,y]/(x^2,y^2)$, $|x|=|y|=2$, swapping
+$x,y$ identifies the absolute models of curvatures $x$ and $y$. Their
+marked kernels $(x)$ and $(y)$ differ, so they are not equivalent under
+the original base. Total Betti numbers alone cannot make this distinction.
+
+\section{An actual nonlinear fold and its exact transported differential}
+On $X=\mathbb P^1\times\mathbb P^1$, use curvatures $(x,0,xy)$ with
+handle pairs $(u,v),(z,t),(w,s)$ of degrees $(1,1),(1,1),(3,3)$.
+Thus $du=x$, $dw=xy$ and all other generator differentials vanish. For
+every $\lambda\in\Q$ the degree-preserving substitution
+\[
+ U=u,\quad V=v,\quad Z=z,\quad T=t,\quad
+ W=w-yu+\lambda uvz,\quad S=s
+\]
+is an actual nonlinear graded algebra isomorphism. Its inverse is
+$w=W+yu-\lambda uvz$. Transporting the full differential gives
+\[
+ dW=\lambda xvz,
+\]
+not zero when $\lambda\ne0$. The transformed model still has base
+kernel $(x)$. The explicit closed coordinate is $W-\lambda uvz$.
+Consequently the same complete closed-pair factor is recovered, without
+mistaking the absence of the base term of $dW$ for closedness. Every
+monomial, both inverse orders, all absolute degrees and the nonlinear
+Leibniz signs are checked in the accompanying finite calculation.
+
+\section{Complete one-curvature cohomology ring and secondary memory}
+\begin{theorem}[One paired handle, including multiplication]
+For any even graded commutative $A$ and homogeneous $a$ of degree $2p$,
+\[
+ H\bigl(A\otimes\Lambda(u,v),du=a,dv=0\bigr)
+ \cong \bigl(A/(a)\ltimes (\Ann_A(a)u)\bigr)\otimes\Lambda(v).
+\]
+The summand containing $u$ is a square-zero ideal, shifted by $2p-1$.
+The action of $A/(a)$ on it is well-defined because $a\Ann_A(a)=0$.
+\end{theorem}
+\begin{proof}
+In the two-term $u$ factor, $b+cu$ is closed exactly when $ca=0$;
+all boundaries are the base elements $aA$. Multiplying two $u$ terms
+gives zero. Changing a base representative by $ab$ changes its product
+with $cu$ by $abc u=0$. This proves the algebra formula, not just a
+vector-space count. The flat $v$ factor is an exterior algebra with zero
+differential, so tensoring preserves the formula with its graded signs.
+\end{proof}
+
+This ring formula does not imply formality. Take the actual rational
+torsor over $\mathbb P^1\times\mathbb P^1$ with $a=xy$, $p=2$. The
+classes $[x][y]$ and $[y]^2$ vanish. With primitives $u$ and zero,
+the triple Massey product $\langle[x],[y],[y]\rangle$ contains
+$[-uy]$ (the opposite global sign convention is equivalent here).
+It is closed because $d(uy)=xy^2=0$, and is nonzero because there are no
+$u$-component boundaries. The complete indeterminacy is
+$[x]H^3+H^3[y]=\operatorname{span}_\Q\{[xv],[yv]\}$, since
+$H^3=\Q[v]$. The class $[yu]$ is independent of that span, so zero is
+not in the product. This gives an explicit higher operation retained by
+the actual torsor; the ring is not being used as a false zero-differential
+replacement. This fixture tests the arbitrary-base structural formulas;
+it is not the universal Chow target.
+
+\section{Geometric disposition and proof boundary}
+For the original arbitrary prescribed $(X,p,\alpha)$, construct its same
+rational homotopy-fiber torsor and any finite cup births. Its full base
+kernel is $(\alpha)H^*(X,\Q)$, with rational Hodge contraction $(\alpha)$.
+That is the exact computed original-base effect under every relative
+nonlinear quasi-isomorphism, and the pure paired presentations now have
+a complete classification. The one-handle ring also computes its full
+primary multiplicative memory and identifies possible secondary memory.
+No algebraicity of $\alpha$ was needed for these topological constructions.
+They do not construct a universal Chow cycle or prove the Hodge conjecture.
+
+The derivation and classification are hand proofs with author self-review.
+Lean additions encode the base-boundary submodule, exact first-coefficient
+calculation, relative chain-equivalence invariance, retraction obstruction,
+and concrete two-curvature packets. They do not claim a formalized derived
+category, Massey-product construction or arbitrary-X geometric comparison.
+Compilation is left to the owner. No historical-priority claim is made.
+\end{document}

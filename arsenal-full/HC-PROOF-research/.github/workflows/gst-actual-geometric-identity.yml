@@ -1,0 +1,81 @@
+name: GST Actual Geometric Identity Proof
+
+on:
+  push:
+    branches:
+      - research/openai-cm-gale-gst-crosscarrier-20261013
+    paths:
+      - 'GSTClassicalHodgeActualGeometricIdentityClosure.lean'
+      - '.github/workflows/gst-actual-geometric-identity.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-actual-identity-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  native-identity:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore GST dependency cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-identity
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+      - name: Verify geometric diagonal identity and unital correspondence powers
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+
+          [[lean_lib]]
+          name = "GSTActualGeometricIdentityVerification"
+          roots = ["GSTClassicalHodgeActualGeometricIdentityClosure"]
+          EOF
+          if lake build GSTActualGeometricIdentityVerification > identity-lean.log 2>&1; then
+            echo "LEAN PASSED: geometric native identity and unital powers"
+          else
+            echo "LEAN FAILED: geometric native identity"
+            grep -nE 'error:|sorryAx|✖' identity-lean.log | tail -n 100 || true
+            tail -n 40 identity-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" identity-lean.log; then
+            exit 1
+          fi
+      - name: Save GST dependency cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-identity
+      - name: Upload independent native identity diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-actual-geometric-identity-lean-log
+          path: identity-lean.log
+          if-no-files-found: warn

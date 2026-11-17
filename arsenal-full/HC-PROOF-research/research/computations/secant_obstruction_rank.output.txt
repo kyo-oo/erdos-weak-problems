@@ -1,0 +1,9 @@
+Python 3.12.14
+One-factor c1 detector: 6 x 6, determinant -1*n^3
+One-factor c2 detector: 6 x 6, determinant -1*n^3
+Product blocks: [6, 36, 6] ; factor imbalances (2,0),(1,1),(0,2)
+All 48 x 48 detector entries checked; determinant 1*n^42
+Diagonal (n-degree, sign) census: [((0, Fraction(1, 1)), 15), ((1, Fraction(-1, 1)), 8), ((1, Fraction(1, 1)), 16), ((2, Fraction(-1, 1)), 4), ((2, Fraction(1, 1)), 5)]
+Rank lower bound 48 for every nonzero n; factorwise upper bound 6+36+6=48.
+Coefficient ring Q[n]; no numerical orbit length or floating-point rank used.
+PASS: full invariant obstruction contraction certificate; geometry is a separate proof.

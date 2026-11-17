@@ -1,0 +1,257 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Weil-World Supply:\\ the non-split Weil fourfold face of $R2'$ (GST Hodge Campaign, Round 38)}
+\author{GST campaign continuation session (operator order: the standing finish order\\
+with the continuation order --- finish everything, no stopping after one round;\\
+\texttt{research/gpt6-native-point-primitive-span-20261017}, after Round 37 $4d6b4217$)}
+\date{2026-11-05 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{Scope and the standing order}
+
+This round strikes the face $(b)$ named by Rounds 36/37: the \emph{non-split
+Weil fourfold world} --- $\mathrm{NS}(A)_\mathbb{Q} = \mathbb{Q}\theta$, the
+two-dimensional Weil plane, Round 34's committed obstruction receipts. The
+operator's continuation order is the finish order without stopping; per the
+closing discipline (\S40) the Clay statement is \textbf{not} claimed here, and
+the polarity split stands. Everything below is decided by the certificate
+\texttt{weil\_world\_supply\_round38\_checks.py} (182 checks, 0 failures,
+exit 0, deterministic double-run byte-identical, md5 of the receipts
+\texttt{runA.txt} (= \texttt{runB.txt})
+\texttt{bdfb4d74323292a562a376ef46dad47c} (post-AUDIT-38 repair; the
+pre-repair receipts stood at md5
+\texttt{60c3a5d374cf6b75df426a6d547974ff}), $\approx$13\,s, exact
+arithmetic, zero floats). \emph{Provenance}: the branch identifier and the Round-37 push
+hash are the receipts recorded in the campaign worklog (CX-17); the round
+artifacts live under \texttt{hodge-campaign/round38/} on the research
+branch.
+
+The round's method is the campaign's letter discipline applied to the Weil
+world, calibrated against the repo's own committed forcing-frame receipts
+(the repository-root files
+\texttt{GSTUniversalCMArithmeticObstruction.lean} and
+\texttt{GSTWeilForcingFrameCertificate.lean} on the research branch: the
+discriminating fourfold
+$f = [2+i]$, the spectral factors $t^2{+}14t{+}625$ / $t^2{-}30t{+}625$ /
+$t{-}25$, the projector
+$P_W = -\frac{(t-25)(39t-79)(t^2-30t+625)}{44000000}$, the correspondence
+coefficients $a_0,\dots,a_4$, $\mathrm{INT}\,W_R^2 = 8$, and the
+kernel-verified source dichotomy).
+
+\section{The Weil letter model}
+
+\subsection{Setup}
+
+Let $A$ be an abelian fourfold of Weil type over the imaginary quadratic
+field $K = \mathbb{Q}(\sqrt{-d})$: $H^1(A,\mathbb{Q})$ is a free
+$K$-module of rank $4$ (the $Q$-letters $e_1,\dots,e_4,f_1,\dots,f_4$ with
+$f_j = \sqrt{-d}\,e_j$), and the Weil-type condition on the Hodge structure
+($\dim(H^{1,0} \cap V_\pm) = 2$ for the two $K$-eigenlines in
+$H^1 \otimes \mathbb{C}$) makes the degree-4 \emph{Weil plane}
+$W = $ the $\alpha^4$-primary part of $[\alpha]^*$ on
+$\bigwedge^4_\mathbb{Q} H^1$ --- equivalently the image of the $K$-line
+$\bigwedge^4_K H^1$ --- a space of rational $(2,2)$-classes. The Hodge-type
+inclusion $W \subset \mathrm{Hdg}^4$ is the committed \textbf{external leaf}
+(inherited from the repo's forcing frame; the certificate verifies the exact
+$Q$-arithmetic on both sides of it). The polarization
+$\theta = \sum_j e_j \wedge f_j$ satisfies
+$[\alpha]^*\theta = N(\alpha)\,\theta$.
+
+\subsection{The committed census}
+
+The nine generic worlds $(K, \alpha)$: the Heegner-class fields
+$d \in \{1,2,3,7,11,19,43,67,163\}$ with $\alpha = 2 + \sqrt{-d}$ at
+$d \in \{1,3\}$ and $\alpha = 1 + \sqrt{-d}$ elsewhere; plus the
+\emph{Eisenstein degeneracy} $(d,\alpha) = (3,\,1+\sqrt{-3})$ carried
+separately (\S4).
+
+\begin{theorem}[S21, the spectral law]\label{thm:s21}
+At every committed generic world, the $Q$-spectral structure of $[\alpha]^*$
+on $\bigwedge^4_\mathbb{Q}H^1$ ($70$-dimensional) is
+\[
+\mathrm{minpoly}(\alpha^4)^{1}\;\oplus\;
+\mathrm{minpoly}(\alpha^3\bar\alpha)^{16}\;\oplus\;
+\big(t - N(\alpha)^2\big)^{36},
+\qquad 2 + 32 + 36 = 70,
+\]
+the eigenvalues being $\alpha^k\bar\alpha^{4-k}$ with multiplicities
+$\binom{4}{k}\binom{4}{4-k}$ (trace-verified against the actual $70\times70$
+exterior matrix at every world). The three factors are pairwise coprime
+iff $(\alpha/\bar\alpha)^k \ne 1$ for $k \le 4$; the \textbf{Weil plane}
+$W := $ the $\mathrm{minpoly}(\alpha^4)$-primary part has dimension exactly
+$\mathbf{2}$ at every generic world.
+\end{theorem}
+
+\begin{proof}
+The letter-pair block of $[\alpha]$ has characteristic polynomial
+$(x-\alpha)(x-\bar\alpha)$; the exterior power
+$\bigwedge^4$ of the eight $Q$-letters carries the products
+$\alpha^k\bar\alpha^{4-k}$ with the stated multiplicities, and the
+$Q$-irreducible grouping is as displayed (the conjugate pairs
+$k \leftrightarrow 4-k$ merge over $Q$). The certificate verifies the
+trace identity
+$\sum_k \binom{4}{k}\binom{4}{4-k}\alpha^k\bar\alpha^{4-k}
+= \operatorname{tr}(\bigwedge^4[\alpha])$
+exactly at every world, together with the three kernel dimensions
+$2/36/32$ and the coprimality gcds. The coprimality criterion:
+$\mathrm{minpoly}(\alpha^4) = \mathrm{minpoly}(\alpha^3\bar\alpha)$
+iff $\alpha^4 = \overline{\alpha^3\bar\alpha}$ iff
+$(\alpha/\bar\alpha)^3 = 1$; similarly for the other pairs.
+\end{proof}
+
+\section{The projector supply}
+
+\begin{theorem}[S22, the CRT projector supply]\label{thm:s22}
+At every committed generic world there is a \textbf{unique} $Q$-polynomial
+$P$ of degree $\le 4$ with
+\[
+P \equiv 1 \pmod{\mathrm{minpoly}(\alpha^4)},\qquad
+P \equiv 0 \pmod{(t - N(\alpha)^2)},\qquad
+P \equiv 0 \pmod{\mathrm{minpoly}(\alpha^3\bar\alpha)}.
+\]
+As a polynomial in the correspondence operator $[\alpha]^*$, $P([\alpha]^*)$
+is an explicit $Q$-combination of the graphs $\Gamma_{[\alpha]^j}$ of the
+isogeny iterates --- an \textbf{algebraic correspondence} at every committed
+world. At the repo's discriminator $(K,\alpha) = (\mathbb{Q}(i),\,2+i)$ the
+canonical representative equals, coefficient for coefficient, the repo's
+committed projector
+\[
+P_W(t) = -\frac{(t-25)(39t-79)(t^2-30t+625)}{44000000}
+= -\tfrac{39}{44000000}t^4 + \tfrac{139}{2750000}t^3
+- \tfrac{527}{400000}t^2 + \tfrac{359}{22000}t - \tfrac{79}{2816},
+\]
+with $a_0..a_4$ the correspondence coefficients of
+$\Pi_W^{\mathrm{CH}} = \sum_j a_j\Gamma_{f^j}$ and the key identity
+$\mathrm{pwN}(t) + (t^2{+}14t{+}625)(39t^2{-}2770t{+}72375) = 44000000$.
+\end{theorem}
+
+\begin{proof}
+The three factors are pairwise coprime (S21), so the CRT solution exists;
+two degree-$\le 4$ solutions differ by a multiple of the degree-5 product,
+hence coincide. The certificate constructs $P$ by modular inversion at every
+world and verifies the three congruences, the degree bound, and --- at the
+discriminator --- the coefficient-for-coefficient identity with the repo's
+$P_W$, the $a_j$ list, and the key identity.
+\end{proof}
+
+\begin{theorem}[S23, the divisor-sector kill and the fixation]\label{thm:s23}
+At every committed generic world, with $P$ the S22 projector:
+\begin{enumerate}
+\item \textbf{The kill}: $P$ annihilates the $36$-dimensional ambient sector
+and the $32$-dimensional mixed sector; in particular
+$P(\theta^2) = 0$ --- under $\mathrm{NS}(A)_\mathbb{Q} = \mathbb{Q}\theta$,
+\emph{every product of divisor classes is killed}. The algebraic source, if
+it exists, must be beyond-divisor.
+\item \textbf{The fixation}: $P$ is the identity on $W$ (verified on the
+basis and on deterministic pseudo-random combinations).
+\item \textbf{The measurement}: the beyond-divisor content is exactly the
+Weil plane: $W \cap \mathrm{ambient} = 0$ (the spectral disjointness);
+$\mathrm{Hdg}^4 = \mathbb{Q}\theta^2 \oplus W$ under the external leaf,
+$\dim W = 2$.
+\item \textbf{The generators and the period identity} (the Gaussian world
+$d=1$): $\Omega = \bigwedge_{j=1}^4(e_j + i f_j)$ has $16$ monomial
+components; $W = \langle \operatorname{Re}\Omega,\,
+\operatorname{Im}\Omega\rangle$; $\mathrm{INT}\,W_R^2 = 8$
+(the repo's Part B receipt, reproduced by the exterior sign count).
+\item \textbf{The fourth-power character}: the $K$-action on
+$(\operatorname{Re}\Omega,\,\operatorname{Im}\Omega)$ has first column
+$(-7,-24)$, trace $-14$, and determinant $625$: char poly
+$t^2 + 14t + 625$ --- $[\alpha]^*|_W$ is multiplication by
+$\bar{\alpha}^4 = -7-24i$ on the $\{\operatorname{Re},\operatorname{Im}\}$
+basis (the conjugate identification $\operatorname{Re}\leftrightarrow 1$,
+$\operatorname{Im}\leftrightarrow -i$; the Weil factor either way).
+\item \textbf{The dichotomy}: $\mathrm{minpoly}(\alpha^4)$ is irreducible
+over $Q$, so the $K$-module $W \cong \mathbb{Q}(\alpha^4)$ is a field: any
+$K$-stable $Q$-subspace of $W$ is $0$ or all of $W$ --- the kernel-verified
+source dichotomy of the repo, reproduced in the letter model (a rank-one
+algebraic source is impossible; the source is zero or the full plane).
+\end{enumerate}
+\end{theorem}
+
+\section{The Eisenstein degeneracy}
+
+\begin{proposition}\label{prop:degen}
+At $(K,\alpha) = (\mathbb{Q}(\sqrt{-3}),\,1+\sqrt{-3})$ the phase
+$\alpha/\bar\alpha = e^{i\pi/3}$ is a cube root of unity:
+$\alpha^4 = \overline{\alpha^3\bar\alpha}$ exactly, the Weil and mixed
+factors coincide ($t^2+16t+256$), and the primary part merges to dimension
+$34 = 2 + 32$. The degeneracy occurs at \emph{no} generic world (the
+certificate's canary: $\alpha^4 \ne \overline{\alpha^3\bar\alpha}$ at all
+nine). The genericity law: the three factors are pairwise coprime iff
+$(\alpha/\bar\alpha)^k \ne 1$ for $k \le 4$ --- the root-of-unity phase
+exclusion.
+\end{proposition}
+
+\section{The reduction and the re-drawn boundary (S24)}
+
+\begin{theorem}[S24, the reduction to one source]\label{thm:s24}
+Fix a committed generic world and grant the external leaf
+$W \subset \mathrm{Hdg}^4(A)$ (the Weil-type Hodge condition). Then the
+rational Hodge conjecture at $A$ at degree 4 ---
+$\mathrm{Hdg}^4(A) = \mathbb{Q}\theta^2 \oplus W$ algebraic --- is
+\textbf{equivalent} to the single leaf: there exists ONE algebraic class
+$z \in H^4(A,\mathbb{Q})$ with $P(z) \ne 0$ (equivalently
+$P(z) \in W \setminus \{0\}$).
+\end{theorem}
+
+\begin{proof}
+($\Leftarrow$) $P$ is an algebraic correspondence (S22), so $P(z)$ is an
+algebraic class in $W$; the $K$-translates $[\beta]^*P(z)$ are algebraic
+(graphs of isogenies), and by the dichotomy (S23.6) the $K$-stable algebraic
+source they generate is the full plane $W$; with $\theta^2$ algebraic,
+$\mathrm{Hdg}^4 = \mathbb{Q}\theta^2 \oplus W$ is algebraic.
+($\Rightarrow$) trivial. The certificate verifies both halves' arithmetic:
+the correspondence supply, the dichotomy, and the kill (the divisor
+subalgebra alone can never fire the source).
+\end{proof}
+
+\emph{The boundary after this round}: the face $(b)$ is reduced at the
+committed census to the \textbf{one-source leaf} --- exactly the repo's own
+committed open content ("the remaining nonalgebraicity claim, if pursued,
+must establish that $P_W\,\mathrm{cl}(Z) = 0$ for \emph{every} actual
+algebraic surface $Z$, not just the divisor subalgebra"): either an
+algebraic $z$ with $P(z) \ne 0$ is exhibited (the RHC closes at that world,
+and the family-transport law carries the shape), or all are killed. The
+residual of $(a')$ beyond its census, $R3$ (the $K$-condition at general
+input), and $R4$ (the transcendental fold-birth) stand untouched.
+
+\section*{The certificate}
+
+\texttt{weil\_world\_supply\_round38\_checks.py}: V1 the census (the
+$K$-operator laws at every world); V2 the spectral law (trace-verified, the
+$2/36/32$ kernels, the coprimality genericity); V3 the repo calibration
+(the three factors, the CRT projector equal to the repo's $P_W$ coefficient
+for coefficient, the $a_j$, the key identity); V4 the projector supply at
+every world (the congruences, the action on $W$ basis and random-class, the
+ambient and mixed kills); V5 the divisor sector ($[\alpha]^*\theta =
+N(\alpha)\theta$, the $\theta^2$ eigenvalue, the divisor-sector kill, the
+spectral disjointness, the generators, $\mathrm{INT}\,W_R^2 = 8$, the
+fourth-power character, the dichotomy and its canary); V6 the Eisenstein
+degeneracy; V7 the hostile battery (letter-deletion, projector-sign,
+fake-ambient, non-word, garbage liveness, the degeneracy claim --- every
+control fires) plus the mechanical vacuity and self-comparison scans. One
+defect was caught and repaired during authoring by the certificate's own
+scan (a dead \texttt{or True} remnant in the disjointness draft --- the
+ledger-092 class, caught by the ledger-107 gate).
+
+\section*{Boundary on every artifact}
+
+Q1 (the framework conjecture on the committed world model) remains proven
+and certified, unchanged. Q2 (the Clay statement) is \textbf{not claimed};
+the closing string is \textbf{not emitted}; the polarity split stands. The
+falsifiable line after this round: the one-source leaf at the committed Weil
+census; the transport families of $(a')$ and $(b)$ beyond their censuses;
+$R3$; $R4$.
+
+\end{document}

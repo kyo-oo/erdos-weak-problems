@@ -1,0 +1,69 @@
+name: GST Pair Channel Walls Certificate
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTPairChannelWallsCertificate.lean'
+      - '.github/workflows/gst-pair-channel-walls-certificate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-pair-channel-walls-certificate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-install.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ github.run_id }}
+      - name: Kernel verify pair-channel walls certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTPairChannelWallsCertificate"
+          roots = ["GSTPairChannelWallsCertificate"]
+          EOF
+          if lake build GSTPairChannelWallsCertificate > pair-channel-walls.log 2>&1; then
+            echo "LEAN PASSED: pair-channel walls kernel-verified in the bitmask exterior model — Lemma W0 class annihilation (theta^j wedge W_R/W_I = zero class, j=1..3), period constants re-confirmed (theta^4=24, W_R^2=W_I^2=8, W_R W_I=0, Omega Omegabar=16), W4 corridor arithmetic (twist difference-Euler zero at every k; linear-detector arithmetic), W5 FM normalization exact (fm W_R = W_R-dual, fm W_I = W_I-dual, both round trips the identity), W6 pair Chern table (synthetic instances pure grade-by-grade, charge split -8m, mixed-End table, carrier consistency chi(End F) = 8 m^2 at q=0). SCOPE: walls + transport + table only — determines NO bit (no decision of S, no monoid claim, no exhaustiveness, no resolution)."
+          else
+            grep -nE 'error:|sorryAx|✖' pair-channel-walls.log | tail -n 140 || true
+            tail -n 120 pair-channel-walls.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" pair-channel-walls.log; then
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-pair-channel-walls-certificate-log
+          path: pair-channel-walls.log
+          if-no-files-found: warn

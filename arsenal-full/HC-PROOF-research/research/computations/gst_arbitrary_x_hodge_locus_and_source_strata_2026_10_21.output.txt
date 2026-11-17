@@ -1,0 +1,16 @@
+Tool: Wolfram MCP WolframLanguageEvaluator, stateless evaluation, timeConstraint=60 seconds
+Input: research/computations/gst_arbitrary_x_hodge_locus_and_source_strata_2026_10_21.wl
+Input conventions: projective family X_t=E_i×E_(i+t), marked rational 1-form basis
+(dx1,dx2,dy1,dy2), eta=dx1∧dy2−dy1∧dx2,
+omega1=dx1+i dy1, omega2=dx2+(i+t)dy2.
+Exact output:
+<|"EllipticHodgeTypeObstructionCoefficient" -> t,
+  "HodgeAtCenter" -> 0,
+  "ExactOnlyAtCenter" -> True,
+  "RankPlateauAndGrowth" -> {1,1,2},
+  "Residual" -> {0,0,2},
+  "NativeResidualEnergy" -> 20|>
+Check status: PASS (exact algebraic identities and finite arithmetic).
+Nonclaims: no verification of relative Chow properness by finite arithmetic;
+no computation on a hypothetical nonalgebraic rational Hodge class;
+no unconditional universal Chow representative; no Lean compilation.

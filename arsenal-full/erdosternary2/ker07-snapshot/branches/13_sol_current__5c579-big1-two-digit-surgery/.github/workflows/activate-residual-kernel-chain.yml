@@ -1,0 +1,46 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0675 / 1132
+#    Path         : branches/sol_5c579-big1-two-digit-surgery/.github/workflows/activate-residual-kernel-chain.yml
+#    Ref          : origin/sol/5c579-big1-two-digit-surgery
+#    First-commit : 2026-08-16 19:39:35 +0530  (a0c4f65)
+#    Last-commit  : 2026-08-16 19:40:22 +0530  (b718ec7)
+#    Total commits: 2
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/2] 2026-08-16 19:39:35 +0530  a0c4f65  (ker07-dev)
+#        Stage selective residual kernel-chain activation
+# [02/2] 2026-08-16 19:40:22 +0530  b718ec7  (ker07-dev)
+#        Simplify residual-chain activation workflow
+# ======================================================================
+
+name: Activate residual kernel chain
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+
+permissions:
+  contents: write
+
+jobs:
+  activate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: sol/comparator-surgery
+          fetch-depth: 0
+
+      - name: Apply source-only activation
+        run: python3 scripts/activate-residual-kernel-chain.py
+
+      - name: Commit source-only activation
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ErdosTernary2.lean
+          git commit -m "Activate certified residual omega termination chain"
+          git push origin HEAD:sol/comparator-surgery

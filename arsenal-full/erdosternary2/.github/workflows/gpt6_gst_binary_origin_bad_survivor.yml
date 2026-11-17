@@ -1,0 +1,37 @@
+name: GPT6 GST Binary Origin BAD Physical Reduction Kernel
+on:
+  push:
+    branches: [gpt6/problem406-binary-origin-valuation-20261030]
+    paths:
+      - GSTProblem406BinaryOriginExponentScale.lean
+      - GSTProblem406BinaryOriginBadSurvivor.lean
+      - .github/workflows/gpt6_gst_binary_origin_bad_survivor.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean RC2, Mathlib and original source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerDirectExistence GSTFourPowerDirectResidue
+      - name: Exact physical BAD survivor reduction and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTProblem406BinaryOriginExponentScale GSTProblem406BinaryOriginBadSurvivor 2>&1 | tee scale.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' scale.log
+          lake env lean GSTProblem406BinaryOriginBadSurvivor.lean 2>&1 | tee bad-survivor.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' bad-survivor.log
+          grep -F 'bad_physical_exponent_produces_binary_origin_survivor' bad-survivor.log
+          echo GST_BINARY_ORIGIN_BAD_SURVIVOR_KERNEL_PASS=1

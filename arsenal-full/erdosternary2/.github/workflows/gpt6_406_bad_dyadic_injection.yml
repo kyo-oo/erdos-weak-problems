@@ -1,0 +1,29 @@
+name: GST 406 BAD Dyadic Injection Exact Audit
+on:
+  push:
+    branches: [gpt6/problem406-exact-origin-gate-research-20261030]
+    paths:
+      - scripts/gst_406_bad_dyadic_injectivity_audit.cpp
+      - .github/workflows/gpt6_406_bad_dyadic_injection.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile exhaustive exact integer auditor
+        shell: bash
+        run: |
+          set -euo pipefail
+          g++ -std=c++17 -O3 -Wall -Wextra -pedantic scripts/gst_406_bad_dyadic_injectivity_audit.cpp -o /tmp/gs406-dyadic
+      - name: Check exceptional L9 and new lengths 10, 18, 22
+        shell: bash
+        run: |
+          set -euo pipefail
+          /tmp/gs406-dyadic 9
+          /tmp/gs406-dyadic 10
+          /tmp/gs406-dyadic 18
+          /tmp/gs406-dyadic 22
+          echo GST_406_DYADIC_FINITE_AUDIT_PASS=1

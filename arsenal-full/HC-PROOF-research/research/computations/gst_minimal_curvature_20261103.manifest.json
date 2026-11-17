@@ -1,0 +1,152 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-MINIMAL-CURVATURE-NORMAL-FORM-20261103",
+  "repository": {
+    "commit": "fde04bf40c9482f6818521a04df3700b2edb4210",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_minimal_curvature_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64"
+  },
+  "mathematics": {
+    "assertion_tested": "Full finite simultaneous clearing, independent I/mI dimensions, both inverse chain maps, absolute degree, whole cohomology factor, nilpotent fixed points and nonunit syzygy controls; Wolfram checks the declared shared cases and spectra.",
+    "coefficient_domain": "Z, Q; actual and model Hodge filtrations separately derived by hand",
+    "conventions": "Base cohomology of declared products of projective spaces. Odd generators u_i,v_i have degree 2p_i-1, du_i=alpha_i, dv_i=0; homogeneous even coefficients, all exterior signs and absolute degrees retained.",
+    "inputs": [
+      "research/experiments/gst_minimal_curvature_checks.py",
+      "research/derivations/GST_minimal_curvature_fold_normal_form_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_minimal_curvature_wolfram_20261103.wl",
+      "research/computations/gst_minimal_curvature_wolfram_20261103.output.json",
+      "research/experiments/gst_base_coupled_higher_fold_checks.py",
+      "research/experiments/gst_minimal_curvature_run.py",
+      "GSTGradedWorldAlgebra.lean",
+      "GSTSpatialFoldResearch.lean"
+    ],
+    "bounds": {
+      "normal_forms": "All 729 triples of degree-one curvatures and all 243 lists of weights (1,1,2), coefficients -1,0,1 on P1xP1",
+      "chain_maps": "All basis states of eight explicit fixtures; both inverse orders and full absolute degrees",
+      "nilpotent_guard": "27 positive-degree coefficients b and all 81 elements x in the cube -1,0,1 of Q[x,y]/(x^2,y^2)",
+      "cohomology": "All degrees and two exact rank algorithms on all eight full fixtures"
+    },
+    "non_claims": [
+      "Finite fixtures do not establish the arbitrary-X theorem",
+      "No Lean compilation or CI dispatch",
+      "Higher rational spaces are not asserted compact complex varieties",
+      "No universal Chow-source construction or historical-priority claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T04:48:57.795692+00:00",
+    "runtime_seconds": 3.639558685000111,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_minimal_curvature_20261103.output.json",
+      "sha256": "fa5272d329975c5a7231a15944b0a5976c6b1a3590ba01b91b6086c28878a3fd",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Bit-mask versus signed-word boundary and two exact rank algorithms",
+    "Greedy minimal generators versus full ideal quotient dimensions",
+    "Every mixed-degree basis state checked under both inverse chain substitutions",
+    "Full cohomology factor and nonunit syzygy hostile controls",
+    "Wolfram raw parse roundtrip, all shared populations and both full spectra match",
+    "Changed Lean proof-escape scan, acyclic import graph, LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Geometric/topological proof is author self-review",
+    "Lean drafts remain uncompiled",
+    "Wolfram is an independent exact implementation, not independent proof review; no global literature comparison in this run"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_minimal_curvature_checks.py",
+      "sha256": "19c850e1ec93e40b054b1293189a1f929c8fab02107c7e96903d6ae1c59080b0",
+      "sha256_after": "19c850e1ec93e40b054b1293189a1f929c8fab02107c7e96903d6ae1c59080b0"
+    },
+    {
+      "path": "research/derivations/GST_minimal_curvature_fold_normal_form_2026_11_03.tex",
+      "sha256": "03a5321fc67183b36b7eaad202abbb0ff3a4d92c243d2abd166ae4029a69348e",
+      "sha256_after": "03a5321fc67183b36b7eaad202abbb0ff3a4d92c243d2abd166ae4029a69348e"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_minimal_curvature_wolfram_20261103.wl",
+      "sha256": "f00ae19a018da18412105d280362cd92ac3de5734a002b978f6c426f6396ef34",
+      "sha256_after": "f00ae19a018da18412105d280362cd92ac3de5734a002b978f6c426f6396ef34"
+    },
+    {
+      "path": "research/computations/gst_minimal_curvature_wolfram_20261103.output.json",
+      "sha256": "c8d8d0b23ed8136e6537bb13e38dd1a8c16b7336618f099891cc6cb52eb7dfa9",
+      "sha256_after": "c8d8d0b23ed8136e6537bb13e38dd1a8c16b7336618f099891cc6cb52eb7dfa9"
+    },
+    {
+      "path": "research/experiments/gst_base_coupled_higher_fold_checks.py",
+      "sha256": "383054bbb1b777c1a995ddf8062427f600a8f58f89f3efd27504f8318e314168",
+      "sha256_after": "383054bbb1b777c1a995ddf8062427f600a8f58f89f3efd27504f8318e314168"
+    },
+    {
+      "path": "research/experiments/gst_minimal_curvature_run.py",
+      "sha256": "5803e35c1f8f49d8ed6aae3ede898772b5238360e2fed3ceb6381d33e46cc913",
+      "sha256_after": "5803e35c1f8f49d8ed6aae3ede898772b5238360e2fed3ceb6381d33e46cc913"
+    },
+    {
+      "path": "GSTGradedWorldAlgebra.lean",
+      "sha256": "3b5b05ff9f8da4db7e206b2026baa6e2479e9f26f2ca615c9250b7ad00bfddd4",
+      "sha256_after": "3b5b05ff9f8da4db7e206b2026baa6e2479e9f26f2ca615c9250b7ad00bfddd4"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "f43ed3112be84c84ca21165672a69ecb48f9d72c952e1f0a1df9e3733db7c7bc",
+      "sha256_after": "f43ed3112be84c84ca21165672a69ecb48f9d72c952e1f0a1df9e3733db7c7bc"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_minimal_curvature_checks.py",
+    "research/derivations/GST_minimal_curvature_fold_normal_form_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_minimal_curvature_wolfram_20261103.wl",
+    "research/computations/gst_minimal_curvature_wolfram_20261103.output.json",
+    "research/experiments/gst_base_coupled_higher_fold_checks.py",
+    "research/experiments/gst_minimal_curvature_run.py",
+    "GSTGradedWorldAlgebra.lean",
+    "GSTSpatialFoldResearch.lean"
+  ],
+  "declared_results": [
+    "research/computations/gst_minimal_curvature_20261103.output.json"
+  ]
+}

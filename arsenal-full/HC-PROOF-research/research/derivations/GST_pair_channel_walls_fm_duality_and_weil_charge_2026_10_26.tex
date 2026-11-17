@@ -1,0 +1,608 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\WQ}{W_{\Q}}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\FMc}{\widehat\Phi}
+
+\title{The Pair-Channel Walls on the Weil Discriminator:\\
+Ring Annihilation, Fourier--Mukai Duality of the Dichotomy Bit,\\
+and the Weil-Charge Table\\
+\large GST Hodge campaign, Cycle 4, Strike 1 (structural strike on FS$_\forall$ at the forcing vertex)}
+\date{2026-10-26}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Cycle 3 compressed the Hodge conjecture to the single universal law
+FS$_\forall$ (every Hodge input has $m^*>0$), and the committed cycle-2
+state fixed the forcing vertex: on the nonsplit $\Q(i)$-Weil fourfold
+discriminator $A$, the pair form at some positive scale is equivalent to the
+dichotomy bit $S=W_\Q$ (committed W2(iii)), and $S=0$ yields the campaign's
+negative certificate. The one channel where the vertex truth can hide is the
+\emph{general holomorphic pair} $(E_+,E_-)$: the cycle-2 walls
+(Euler-zero, RR-invisibility, spread no-go, End-mass) bind exact
+\emph{carriers} only. This strike extends the wall system to all holomorphic
+pure pairs and proves three theorems from the committed, kernel-certified
+constants alone:
+\textbf{W4} (the pair invisibility corridor): the difference Euler
+characteristic of any pure pair vanishes against \emph{every} line-bundle
+twist --- the pair channel is strictly more invisible than the carrier
+channel (which retains $\mathrm{rk}\cdot k^4$);
+\textbf{W5} (Fourier--Mukai duality): the cohomological FM transform
+carries the Weil space of $A$ \emph{identically} onto the Weil space of the
+dual $\widehat A$ ($\FMc(W_R)=\widehat W_R$, $\FMc(W_I)=\widehat W_I$,
+exactly, round trip the identity), pair-existence transports along the FM
+equivalence at the \emph{same scale}, and consequently the dichotomy bit is
+duality-invariant: $S_A=W_\Q(A)\iff S_{\widehat A}=W_\Q(\widehat A)$;
+\textbf{W6} (the Weil-charge table): a pure pair is two bundles with equal
+rank, equal $c_1\in\Z\theta$, equal $c_3$, $c_2$-difference $-mW_R$,
+determined $c_4$-difference, and Weil charges
+$q(G):=\langle W_R,c_2(G)\rangle$ differing by exactly $-8m$; the mixed-End
+Euler table is computed and recovers the committed carrier End-mass law
+$\chi(A,\End F)=8m^2$ at $q=0$.
+The supporting \textbf{Lemma W0} (ring annihilation: $\theta^j\wedge W=0$ for
+all $j\ge 1$ and all $W\in\WQ$) explains the walls: the Weil classes are
+annihilators of the entire NS-sector in the cohomology ring.
+The strike sharpens the decision frame to a single rigidity question (the
+Weil-charge split within fixed-Chern strata) with both resolution polarities
+armed; no decision, no monoid-bit claim, and no exhaustiveness claim is made
+(scope box, \S\ref{sec:scope}).
+Verification: every new constant is certified by the bounded exact-arithmetic
+script \texttt{task13d\_pair\_walls\_verify.py} (exterior model, \S\ref{sec:cert});
+the committed constants it re-confirms are the kernel-certified
+$\int\theta^4=24$, the $48$-pairing collision, $\int W_R^2=8$.
+\end{abstract}
+
+\tableofcontents
+
+\section{Scope and discipline (read first)}\label{sec:scope}
+
+\paragraph{What this dossier claims.}
+\begin{enumerate}
+\item \textbf{Lemma W0, Theorems W4, W5, W6, and the Corollary frame}: new
+necessary-condition walls and transport structure on the \emph{pair channel}
+of the discriminator, proved from committed, certified constants
+(\S\ref{sec:setting}). These have the same epistemic status as the cycle-2
+walls V1/V2/V3: entry-test layers and structure theorems, \emph{not} progress
+claims on the input.
+\item \textbf{The Corollary} (\S\ref{sec:frame}) is a normalization of the
+decision frame (M3 discipline): it restates the single dichotomy bit in three
+equivalent forms, with both directions attributed (the pair-form
+equivalence is the committed W2; the duality leg is W5; the charge form is
+W6).
+\end{enumerate}
+
+\paragraph{What this dossier does NOT claim.}
+\begin{itemize}
+\item Any decision of $S=0$ versus $S=W_\Q$ on any instance.
+\item Any emptiness or nonemptiness claim on the carrier monoid
+$\mathcal M(A,W)$; any carrier-existence claim.
+\item Any exhaustiveness claim: the walls are necessary conditions; the space
+of conceivable pair constructions is not enumerated.
+\item Any claim about non-additive invariants beyond the table of Theorem W6.
+\item Any positive or negative resolution of the campaign target. The
+negative branch (all-surface vanishing $\Rightarrow$ $S=0$ $\Rightarrow$
+$W_R$ nonalgebraic, the PROMPT \S2 certificate) and the positive branch (a
+detected surface $\Rightarrow$ $S=W_\Q$, explicit cycles by the committed
+one-source reconstruction) remain the two armed routes.
+\end{itemize}
+
+\paragraph{Consistency probe (split worlds).}
+Every wall here uses hypothesis (D2) ($\NS(A)=\Z\theta$) through Lemma W0.
+On split Weil worlds (e.g.\ the CM elliptic power $E^4$), where Weil classes
+are algebraic by Weil's construction and pairs exist by the committed W2,
+the NS-rank exceeds $1$ and Lemma W0 fails; the walls do not apply there and
+contradict nothing. The walls are corridor phenomena of the nonsplit
+rank-one world --- exactly the discriminating instance the campaign fixed.
+
+\section{Setting: the committed discriminator state}\label{sec:setting}
+
+All hypotheses are the committed cycle-2 ones; nothing is re-defined.
+
+\begin{itemize}
+\item \textbf{(D1)} The standard exterior model of $H^\bullet(A,\Q)$:
+$e_1,f_1,\dots,e_4,f_4$ the symplectic integral basis of $H^1$,
+$\int e_1f_1e_2f_2e_3f_3e_4f_4=1$. The classes
+$\Omega=\bigwedge_{j=1}^4(e_j+if_j)$, $W_R=\mathrm{Re}\,\Omega$,
+$W_I=\mathrm{Im}\,\Omega\in H^4(A,\Q)$, rational $(2,2)$, primitive against
+$K$-compatible polarizations; $\WQ=\mathrm{span}_\Q\{W_R,W_I\}$.
+\item \textbf{(D2)} $\NS(A)=\Z\theta$ with $\theta=\sum_j e_j\wedge f_j$,
+$c_1(\mathcal O(\Theta))=\theta$; every line bundle $L$ on $A$ satisfies
+$L\cong\mathcal O(k\Theta)\otimes P$ with $c_1(L)=k\theta$, $k\in\Z$,
+$P\in\Pic^0(A)$, and $c_1(P)=0$ (the committed Lemma \texttt{pic0},
+exponential sequence).
+\item \textbf{(D3)} $\mathrm{td}(T_A)=1$ exactly (translations);
+$\mathrm{td}_j=0$ for $j\ge 1$.
+\item \textbf{Certified constants (committed, kernel-green)}:
+$\int\theta^4=24$ (surjection count, $4^4=256$ words);
+$\int W_R\wedge\theta^j=0$ for $j\ge 1$ ($48$-pairing index collision);
+$W_R^2=8\,\vol$ as a class; $W_I^2=8\,\vol$;
+$W_RW_I=0$; $\Omega\overline\Omega=16\,\vol$
+(.tex-level reproducing the Wolfram census;
+$\int W_R^2=8$ is Lean Part B).
+\item \textbf{Pair form (committed W2 definition, verbatim scope)}: for a
+rational $(2,2)$ class $\alpha$, \emph{pair form at scale $m\ge 1$} means
+$x\in K^0_{\mathrm{alg}}(A)$ with $\ch(x)=m\alpha$ (grade-2 only,
+$\mathrm{rank}(x)=0$); any $K^0$ class is a difference of holomorphic
+bundles (finite locally free presentations), so this is a pair
+$(E_+,E_-)$ of holomorphic bundles with
+\[
+\ch(E_+)-\ch(E_-)=m\alpha,\qquad \mathrm{all\ other\ grade\ differences\ zero}.
+\]
+\emph{Pure pair for the Weil class} means $\alpha=W_R$ (or any nonzero
+element of $\WQ$; the frame is basis-free).
+\item \textbf{Committed equivalences (W1/W2, audit-closed)}:
+pair form at some scale $\iff$ $\alpha$ algebraic (W2);
+on the discriminator, pair form $\iff S=W_\Q$ (W2(iii));
+$S=0\Rightarrow W_R,W_I$ nonalgebraic (W1(iii)) --- the negative certificate;
+$S=W_\Q\iff$ one detected surface, with explicit cycles (W1(iv)).
+\item \textbf{External leaves used as before}: GAGA (E3), HRR (E8),
+Serre duality (E9), the FM toolkit (E13: the derived FM functor, its
+perfectness, the equivalence $\FMc_{\widehat A\to A}\FMc_{A\to\widehat A}\cong(-1)^*[-8]$),
+GRR (E8-family) for the cohomological-transform formula.
+\end{itemize}
+
+\section{Lemma W0: the Weil classes annihilate the NS-sector}\label{sec:ring}
+
+\begin{lemma}[Ring annihilation]\label{lem:w0}
+In the exterior model (D1) with $\theta=\sum_j e_j\wedge f_j$:
+\[
+\theta^j\wedge W_R=0\quad\text{\emph{and}}\quad \theta^j\wedge W_I=0
+\qquad\text{as classes, for every } j\ge 1.
+\]
+Consequently $d\wedge W=0$ for every $d\in\NS(A)_\Q$ and $W\in\WQ$, and
+$\langle W, d\cdot y\rangle=0$ for every divisor class $d$ and every
+$y\in H^\bullet(A,\Q)$ of complementary degree.
+\end{lemma}
+
+\begin{proof}
+Each monomial of $\Omega=\bigwedge(e_j+if_j)$ contains, for every index $j$,
+exactly one of the letters $\{e_j,f_j\}$. Each monomial of $\theta$
+(the word $e_jf_j$) contains both letters of its index. In
+$\theta\wedge(\text{monomial})$ the letters of index $j$ are repeated, so
+every product dies by the repeated-generator collision; the same holds for
+$\theta^j$ with $j\ge 1$ (any monomial of $\theta^j$ fully occupies at least
+one index pair). Linearity gives the class identities; taking $j\ge 1$ parts
+of the product with any $y$ gives the pairing statement. The certificate
+script verifies $0$ surviving monomials for $j=1,2,3$ (the top range on the
+fourfold). The integral statements $\int W_R\theta^j=0$ follow a fortiori;
+for $j=2$ this is the committed $48$-pairing collision lemma.
+\end{proof}
+
+\begin{remark}
+Lemma W0 upgrades the committed \emph{integral} collision to a \emph{class}
+annihilation and explains the architecture of all walls below: the Weil
+grades are invisible to the entire NS-subalgebra, not merely to the specific
+periods. This is a rank-one-NS phenomenon: with $\NS$-rank $\ge 2$ the
+monomial-support argument fails (there exist divisor words avoiding a given
+letter pair), which is precisely why split worlds escape the corridor
+(consistency probe, \S\ref{sec:scope}).
+\end{remark}
+
+\section{Theorem W4: the pair invisibility corridor}\label{sec:w4}
+
+\begin{theorem}[Pair invisibility]\label{thm:w4}
+Let $(E_+,E_-)$ be a holomorphic pure pair for $W_R$ at scale $m\ge 1$ on the
+discriminator: $\ch(E_+)-\ch(E_-)=mW_R$ (grade-2 difference only, equal
+ranks). Then:
+\begin{enumerate}
+\item[(i)] $\chi(A,E_+\otimes L)-\chi(A,E_-\otimes L)=0$ for \emph{every}
+line bundle $L$ on $A$;
+\item[(ii)] $\chi(A,E_+\otimes P)-\chi(A,E_-\otimes P)=0$ for every
+$P\in\Pic^0(A)$;
+\item[(iii)] for every perfect $G\in K^0(A)$:
+\[
+\chi(A,E_+\otimes G)-\chi(A,E_-\otimes G)\;=\;m\,\langle W_R,\ch_2(G)\rangle,
+\]
+the $W_R$-pairing on the grade-2 character of $G$; for line bundles the
+right side vanishes by Lemma W0 ($\ch_2(L)=k^2\theta^2/2$).
+\end{enumerate}
+In particular the entire additive (line-bundle twist) family is blind to
+the pair, at every scale and every polarization level $k$ --- the pair
+channel is \emph{more} invisible than the carrier channel, whose wall retains
+$\mathrm{rk}\cdot k^4$ (committed V1(ii)).
+\end{theorem}
+
+\begin{proof}
+(i) By (D2) write $L\cong\mathcal O(k\Theta)\otimes P$; by the committed
+Lemma \texttt{pic0}, $c_1(P)=0$, so $e^{c_1(P)}=1$ in the rational cohomology
+ring and $\ch(E_\pm\otimes L)=\ch(E_\pm)\,e^{k\theta}$ (E5). HRR with
+$\mathrm{td}=1$ (D3, E8) gives
+\[
+\chi(A,E_+\otimes L)-\chi(A,E_-\otimes L)
+=\int_A\bigl(\ch(E_+)-\ch(E_-)\bigr)e^{k\theta}
+=\int_A mW_R\, e^{k\theta}.
+\]
+The degree-$8$ part of $mW_Re^{k\theta}$ is
+$m\sum_{j\ge 0}\frac{k^j}{j!}\,W_R\wedge\theta^{j}$ restricted to total
+degree $8$: $j=0$ has degree $4$; $j=1$ degree $6$; $j=2,3,4$ die by Lemma W0
+(class annihilation); $j\ge 5$ exceeds the top degree. The integral is $0$.
+(ii) is the special case $k=0$. (iii) HRR:
+$\chi(E_+\otimes G)-\chi(E_-\otimes G)
+=\int(\ch_+-\ch_-)\ch(G)=\int mW_R\ch(G)$; the degree-$8$ part pairs $W_R$
+with $\ch_2(G)$ only (grade bookkeeping: $\ch_0(G)$ gives degree $4$,
+$\ch_1(G)$ degree $6$, $\ch_3(G)$ degree $10$), and for $G=L$ a line bundle
+$\ch_2(L)=\tfrac{k^2}{2}\theta^2$ pairs to zero by Lemma W0.
+\end{proof}
+
+\begin{corollary}[Detection theory of the pair channel]\label{cor:detect}
+No Euler characteristic against line bundles can certify, detect, or exclude
+a pure pair. The only \emph{linear} detector is the non-additive probe
+$G\mapsto\langle W_R,\ch_2(G)\rangle$ with higher-rank $G$
+(Theorem~\ref{thm:w4}(iii)). Any future claimed pair construction or
+pair-exclusion must therefore pass through higher-rank probes; conversely any
+future wall must constrain $\langle W_R,\ch_2(G)\rangle$-type pairings.
+This sharpens the committed Corollary \texttt{mfree} (``the additive family
+is rank-only'') from the carrier layer to the pair layer.
+\end{corollary}
+
+\section{Theorem W5: Fourier--Mukai duality of the pair channel and of the dichotomy bit}\label{sec:w5}
+
+Write $\widehat A$ for the dual abelian fourfold with dual integral basis
+$\hat e_1,\hat f_1,\dots,\hat e_4,\hat f_4$ (positions matching (D1)),
+$\widehat\Omega=\bigwedge(\hat e_j+i\hat f_j)$,
+$\widehat W_R=\mathrm{Re}\,\widehat\Omega$,
+$\widehat W_I=\mathrm{Im}\,\widehat\Omega$, and
+$\widehat\WQ=\mathrm{span}_\Q\{\widehat W_R,\widehat W_I\}$.
+Let $\mathcal P$ be the Poincar\'e bundle on $A\times\widehat A$ and
+\[
+\FMc(E)=R\pi_{\widehat A,*}\bigl(\pi_A^*E\otimes\mathcal P\bigr)
+\]
+the (unshifted) Fourier--Mukai transform.
+
+\begin{lemma}[Grade reflection; cohomological transform]\label{lem:graderef}
+For $x\in H^{2k}(A,\Q)$ set
+$\FMc_{\mathrm{coh}}(x)=\pi_{\widehat A,*}\bigl(x\cdot
+\tfrac{c_1(\mathcal P)^{\,8-2k}}{(8-2k)!}\bigr)\in H^{2(4-k)}(\widehat A,\Q)$
+(the only term of $e^{c_1(\mathcal P)}$ whose $A$-degree is $8$).
+Then for every perfect $E$:
+\[
+\ch\bigl(\FMc(E)\bigr)=\FMc_{\mathrm{coh}}\bigl(\ch(E)\bigr),
+\]
+by GRR with $\mathrm{td}\equiv 1$ on $A$, $A\times\widehat A$ and
+$\widehat A$ (all abelian). In particular $\FMc_{\mathrm{coh}}$ is the
+\emph{grade reflection} $k\mapsto 4-k$ on ch-grades, and grade $2$ is
+self-reflective ($p=2=g/2$).
+\end{lemma}
+
+\begin{lemma}[Normalization; exact]\label{lem:norm}
+Under the dual-basis convention
+$c_1(\mathcal P)=\sum_{p}u_p\otimes\hat u_p$ ($u_p$ running over
+$e_1,f_1,\dots,e_4,f_4$ and $\hat u_p$ the dual basis of $H^1(\widehat A)$):
+\[
+\FMc_{\mathrm{coh}}(W_R)=\widehat W_R,\qquad
+\FMc_{\mathrm{coh}}(W_I)=\widehat W_I,
+\]
+\emph{exactly} (coefficient $1$), and the round trip
+$\FMc_{\widehat A\to A,\mathrm{coh}}\circ\FMc_{A\to\widehat A,\mathrm{coh}}$
+is the identity on $\WQ$.
+\end{lemma}
+
+\begin{proof}
+Since $c_1(\mathcal P)^4/24=\sum_T u_T\otimes\hat u_T$ (the fourth wedge
+divided by $4!$; $T$ over $4$-subsets of positions, $u_T$ the ordered
+monomials, both sides reordering with the same sign), the transform of a
+degree-$4$ monomial $u_S$ is $\pm\,\hat u_{S^c}$, the sign being the reorder
+sign of $S\cup S^c$ into canonical order. Applied to the eight monomials of
+$W_R$ (and of $W_I$): the complementary monomials with their reorder signs
+reproduce the committed sign table of $\widehat W_R$ (resp.\
+$\widehat W_I$) term by term; the certificate script verifies the two class
+identities and both round trips \emph{exactly} (all coefficients $1$,
+zero tolerance). The round trip is the cohomological shadow of the committed
+E13 identity $\FMc_{\widehat A\to A}\FMc_{A\to\widehat A}\cong(-1)^*[-8]$;
+note $g=4$ is even, so the shift $[-8]$ acts trivially on $K^0$-classes.
+\end{proof}
+
+\begin{theorem}[FM duality of the pair channel and the bit]\label{thm:w5}
+\mbox{}
+\begin{enumerate}
+\item[(i)] (Pair transport.) If a holomorphic pure pair for $W_R$ at scale
+$m$ exists on $A$, then a pure pair for $\widehat W_R$ at the \emph{same}
+scale $m$ exists on $\widehat A$; conversely. Hence pair-existence is a
+duality-invariant property of the world pair $(A,\widehat A)$:
+\[
+\exists\ \text{pure pair at scale } m \text{ on } A
+\iff
+\exists\ \text{pure pair at scale } m \text{ on } \widehat A.
+\]
+\item[(ii)] (The bit.) The dichotomy bit is duality-invariant:
+\[
+S_A=W_\Q(A)\iff S_{\widehat A}=W_\Q(\widehat A),
+\]
+and likewise the negative branch transports: $S_A=0\iff S_{\widehat A}=0$.
+The discriminator and its dual decide the Weil question \emph{together}.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) Let $x=[E_+]-[E_-]\in K^0_{\mathrm{alg}}(A)$ with $\ch(x)=mW_R$ pure
+grade-2. The FM functor is exact (E13) and its kernel is algebraic, so
+$\FMc(x)=[\FMc(E_+)]-[\FMc(E_-)]\in K^0_{\mathrm{alg}}(\widehat A)$
+(algebraicity via GAGA, E3; $K^0$ classes are differences of bundles by
+finite locally free presentations). By
+Lemmas~\ref{lem:graderef}--\ref{lem:norm}:
+\[
+\ch(\FMc(x))=\FMc_{\mathrm{coh}}(mW_R)=m\,\widehat W_R,
+\]
+pure grade-2 (self-reflective grade), scale $m$ preserved (coefficient $1$).
+The converse is the same transport along the inverse FM, using
+$\FMc_{\widehat A\to A}\FMc_{A\to\widehat A}\cong(-1)^*[-8]$ (E13) and the
+evenness of the shift in $K^0$.
+(ii) Compose (i) with the committed W2(iii) on each world: pair form at some
+scale $\iff S=W_\Q$, applied to $A$ with $W_R$ and to $\widehat A$ with
+$\widehat W_R$ (the W2 lemma is world-general). Contrapososing both sides of
+the dichotomy (committed W1(ii): $S=0$ or $S=W_\Q$ on each world) transports
+the $S=0$ branch as well.
+\end{proof}
+
+\begin{remark}[Dual world axioms; flag]
+$\widehat A$ is again a $\Q(i)$-Weil fourfold (the conjugate action via the
+Rosati), $\NS(\widehat A)=\Z\widehat\theta$ with
+$\widehat\theta=\sum_j\hat e_j\wedge\hat f_j$ and
+$\int\widehat\theta^4=24$ by the same surjection count, and nonsplit is
+preserved (an isogeny $\widehat A\sim E^4$ with $E$ the CM factor dualizes
+to $A\sim\widehat E^4\sim E^4$ since CM elliptic curves are self-dual).
+The NS-duality step is the standard polarized duality; it is used only to
+observe that the wall system (W4, Lemma W0) applies verbatim on
+$\widehat A$, and is flagged as an external-leaf usage (E-family) with its
+hypothesis stated.
+\end{remark}
+
+\begin{remark}[What the duality buys]
+Any future candidate construction on $A$ has a dual candidate on
+$\widehat A$ at the same scale, and any future exclusion theorem must be
+duality-closed. In particular, a putative all-inclusive wall that is NOT
+FM-invariant is ipso facto false; the W4 corridor and the W6 table below are
+FM-compatible (the transform of the corridor statement is the corridor
+statement on $\widehat A$; the charge table on $\widehat A$ carries the
+constant $\int\widehat W_R^2=8$). This halves the search space of the
+decision attempt and is the structural content the boss's route (b) ---
+a strike on the law rather than on instances --- demanded.
+\end{remark}
+
+\section{Theorem W6: the pair Chern table and the Weil charge}\label{sec:w6}
+
+\begin{definition}[Weil charge]\label{def:charge}
+For a holomorphic bundle $G$ on the discriminator define
+\[
+q(G):=\langle W_R, c_2(G)\rangle=\int_A W_R\wedge c_2(G)\;\in\;\Z .
+\]
+(Integrality: $W_R$ and $c_2(G)$ are integral classes.)
+\end{definition}
+
+\begin{theorem}[Pair Chern table]\label{thm:w6}
+Let $(E_+,E_-)$ be a holomorphic pure pair for $W_R$ at scale $m\ge 1$, with
+shared rank $r$ and shared first Chern class $c_1(E_+)=c_1(E_-)=c_1\in\Z\theta$
+(shared by grade-purity). Then:
+\begin{enumerate}
+\item[(i)] $c_2(E_+)-c_2(E_-)=-mW_R$;
+\item[(ii)] $c_3(E_+)=c_3(E_-)$ (the shift $-m\,c_1\wedge W_R$ vanishes by
+Lemma W0);
+\item[(iii)] $c_4(E_+)-c_4(E_-)=\tfrac12\bigl(c_2(E_+)^2-c_2(E_-)^2\bigr)
+=-\tfrac{m}{2}\,W_R\wedge\bigl(c_2(E_+)+c_2(E_-)\bigr)$
+(the $c_1^2$-term dies by Lemma W0);
+\item[(iv)] the Weil charges split by exactly the scale:
+\[
+q(E_+)-q(E_-)=-8m;
+\]
+\item[(v)] the mixed-End Euler table holds:
+\[
+\chi(A,\End E_+)-\chi(A,E_+\otimes E_-^\vee)=8m^2-m\,q(E_-),
+\]
+\[
+\chi(A,E_+\otimes E_-^\vee)-\chi(A,\End E_-)=-m\,q(E_-),
+\]
+\[
+\chi(A,\End E_+)-\chi(A,\End E_-)=8m^2-2m\,q(E_-);
+\]
+\item[(vi)] carrier consistency: for the carrier pair $(F,\mathcal O^{\oplus r})$
+($c_2(F)=-mW_R$ committed), $q(E_-)=0$ and (v) recovers the committed
+End-mass law $\chi(A,\End F)=+8m^2$ (W3 instance) together with
+$\chi(A,\mathcal O^{\oplus r^2})=0$ (Euler-zero).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+Grade purity gives equal ranks and equal $c_1$; the Newton conductor
+identities (committed form)
+\[
+\ch_1=c_1,\quad
+\ch_2=\tfrac{c_1^2-2c_2}{2},\quad
+\ch_3=\tfrac{c_1^3-3c_1c_2+3c_3}{6},\quad
+\ch_4=\tfrac{c_1^4-4c_1^2c_2+2c_2^2+4c_1c_3-4c_4}{24}
+\]
+convert the four grade-difference equations into (i)--(iii): $\Delta\ch_2=mW_R$
+gives (i); $\Delta\ch_3=0$ gives
+$0=-\tfrac12 c_1\Delta c_2+\tfrac12\Delta c_3$, i.e.\
+$\Delta c_3=c_1\Delta c_2=-m\,c_1\wedge W_R=0$ by Lemma W0 (since
+$c_1\in\Z\theta$); $\Delta\ch_4=0$ gives
+$0=-\tfrac{1}{6}c_1^2\Delta c_2+\tfrac{1}{12}\Delta(c_2^2)
++\tfrac16 c_1\Delta c_3-\tfrac16\Delta c_4$
+with the first and third terms dead by Lemma W0, whence (iii).
+(iv): $\langle W_R,\Delta c_2\rangle=-m\int W_R^2=-8m$ by the committed
+constant.
+(v): Since $E\mapsto\ch(E^\vee)=\sum_j(-1)^j\ch_j(E^\vee)$ has
+$\ch_2(E^\vee)=\ch_2(E)$ (the dual flips $c_1,c_3$, keeps $c_2,c_4$), and
+$\ch(E_+^\vee)-\ch(E_-^\vee)=mW_R$ (even grade sign), HRR gives
+\[
+\chi(\End E_+)-\chi(E_+\otimes E_-^\vee)
+=\int\ch(E_+)\cdot\bigl(\ch(E_+^\vee)-\ch(E_-^\vee)\bigr)
+=\int \ch(E_+)\,mW_R=m\,\langle W_R,\ch_2(E_+)\rangle,
+\]
+and $\langle W_R,\ch_2(E_+)\rangle
+=\tfrac12\langle W_R,c_1^2\rangle-q(E_+)=-q(E_+)$ by Lemma W0, so the first
+line is $-m\,q(E_+)=8m^2-m\,q(E_-)$ by (iv). The second line is the same
+computation anchored at $E_-$:
+$\int\ch(E_-)\,mW_R=m\langle W_R,\ch_2(E_-)\rangle=-m\,q(E_-)$. The third is
+the sum.
+(vi): For $(F,\mathcal O^{\oplus r})$: $c_2(\mathcal O)=0$ so
+$q(E_-)=0$, and $\chi(A,\End\mathcal O^{\oplus r})
+=\chi(A,\mathcal O^{\oplus r^2})=0$ by the committed Euler-zero law; the
+third line of (v) reads $\chi(A,\End F)=8m^2$.
+All identities are additionally verified synthetically (exact arithmetic)
+in the certificate script on four instances, including $c_1=k\theta\ne 0$
+and non-carrier charges $q\ne 0$, with purity of the synthetic pair checked
+grade by grade.
+\end{proof}
+
+\begin{remark}[No pair-analogue End wall]
+The carrier wall W3 bounds $h^0+h^2/2$ using the carrier's three-grade End
+character. At pair level $\End(E_+-E_-)$ is not a bundle character, and the
+correct replacement is the table (v): the End-mass \emph{difference} is
+controlled by the free integer $q(E_-)\in\Z$. The carrier layer sits at
+$q=0$; the pair channel extends through all $q$.
+\end{remark}
+
+\section{The decision frame (M3-normalized)}\label{sec:frame}
+
+\begin{corollary}[The three faces of the bit]\label{cor:frame}
+On the discriminator (and, by Theorem~\ref{thm:w5}, simultaneously on the
+dual), the following are equivalent:
+\begin{enumerate}
+\item[(a)] the dichotomy bit $S=W_\Q$ (equivalently: $W_R$ algebraic;
+equivalently: pair form at some scale --- committed W2(iii));
+\item[(b)] there exist holomorphic bundles $E_+,E_-$ on $A$ with equal rank,
+equal $c_1\in\Z\theta$, equal $c_3$, $c_2$-difference $-mW_R$
+(Theorem~\ref{thm:w6}(i)), $c_4$-difference as in
+Theorem~\ref{thm:w6}(iii), and Weil charges differing by $8m$ for some
+$m\ge 1$ (Theorem~\ref{thm:w6}(iv) and its converse, which is immediate from
+the full table (i)--(iii));
+\item[(c)] the same existence statement on $\widehat A$ with
+$\widehat W_R$ (Theorem~\ref{thm:w5}(i)).
+\end{enumerate}
+The negative branch transports along all three faces: charge-rigidity
+(every pair of bundles with shared $(r,c_1,c_3)$ and the $c_4$-constraint has
+$q$-difference $0$) on \emph{one} face forces $S=0$ there, hence everywhere
+in the frame, and yields the campaign's negative certificate
+($W_R$ nonalgebraic, committed W1(iii)).
+\end{corollary}
+
+\paragraph{The two armed routes, sharpened.}
+\begin{itemize}
+\item \textbf{NO route (charge rigidity).} Prove that the Weil charge
+$q$ is constant on the moduli strata fixed by $(r,c_1,c_3,c_4\ \text{per
+(iii)})$ --- i.e.\ the $c_2$-deformation by $-mW_R$ is unrealizable by
+bundles. The W4 corridor and Lemma W0 are the available weapons: every
+linear probe of the difference dies; the charge split
+$q(E_+)-q(E_-)=-8m$ is the only additive signature, and it lives on the
+non-line-bundle probe $G=E_\pm$ themselves.
+\item \textbf{YES route (charge split).} Produce two bundles with the
+table of Theorem~\ref{thm:w6}. The duality halves the search: a candidate on
+$A$ is a candidate on $\widehat A$. The carrier instances are the $q=0$
+points; nothing in the walls excludes $q\ne 0$ points, and the split world
+shows the channel is not empty in general (there, pairs exist by Weil +
+committed W2, outside the corridor by NS-rank).
+\end{itemize}
+
+\section{Verification layer}\label{sec:cert}
+
+\paragraph{Bounded certificate (exact arithmetic).}
+Script: \texttt{research/experiments/task13d\_pair\_walls\_verify.py}
+(the committed copy). Bounds: pure Python, exact \texttt{Fraction}
+arithmetic throughout (the Weil classes are built by the parity-exact
+construction --- no complex numbers, no floats anywhere), largest
+enumeration $2^{16}$ monomial operations, runtime $<1$\,s, memory
+$<10$\,MB; every comparison is an exact equality and every check ASSERTS
+(a mismatch aborts the script; zero tolerance).
+The script verifies:
+\begin{enumerate}
+\item the committed constants re-confirm: $\int W_R\theta^j=0$ ($j=1..4$),
+$\int\theta^4=24$, $\int W_R^2=\int W_I^2=8$, $\int W_RW_I=0$,
+$\Omega\overline\Omega=16\,\vol$;
+\item Lemma W0: zero surviving monomials for $\theta^j\wedge W_R$,
+$j=1,2,3$;
+\item Lemma~\ref{lem:norm}: $\FMc_{\mathrm{coh}}(W_R)=\widehat W_R$ and
+$\FMc_{\mathrm{coh}}(W_I)=\widehat W_I$ with all coefficients exactly $1$;
+both round trips the identity;
+\item Theorem W6 synthetically: four instances
+$(r,m,c_1)\in\{(3,1,0),(5,2,0),(4,1,\theta),(7,3,\theta)\}$, purity checked
+grade by grade, the three mixed-End identities, the charge split $-8m$,
+and the carrier instance $(F,\mathcal O^r)$ recovering $\chi(\End F)=8m^2$
+and $q(F)=-8m$;
+\item Corollary~\ref{cor:detect}: the linear-detector identity
+$\chi(E_+\otimes G)-\chi(E_-\otimes G)=m\langle W_R,\ch_2(G)\rangle$ on a
+non-line-bundle probe.
+\end{enumerate}
+
+\paragraph{Independent re-verification (Task 13-b).}
+A separate extraction-and-verification agent re-read the committed strike-1
+and strike-2 dossiers, both records, the Lean certificates and the dual
+spectrum census, re-derived the $48$-pairing collision, the $256$-word
+surjection count, the $W_R^2=8$ monomial count, the projector polynomial
+$P_W$ (expansion, key identity, spectral evaluation), the companion-action
+determinant positivity and the one-source reconstruction, and cross-checked
+$\chi(F\otimes L)=\mathrm{rk}\,k^4$ and
+$\chi(\End F\otimes L)=r^2k^4+8m^2$ on $315$- and $180$-case grids:
+\emph{zero disagreements, zero missing data}. Its brief also fixed the
+statement-level inputs of this dossier (the exact W1(v) scope, the W2 pair
+definition, the V1/V2 proof structures, the E14 statement, and ten
+pitfall flags, all absorbed above).
+
+\paragraph{Lean certificate (DELIVERED; kernel-green).}
+\texttt{GSTPairChannelWallsCertificate.lean} kernel-verifies the arithmetic
+layers of Lemma W0, W4, W5, W6 in a second encoding of the exterior model
+(the bitmask model: classes as normalized integer-coefficient mask lists;
+all kernel-evaluated statements are integer class equalities, integer period
+values, or integer conductor-numerator identities). Receipt: CI run
+40139821467 @ c6a2778 SUCCESS (third round; the arc 40138713492 and
+40139191820 failed with three diagnosed causes recorded in the certificate's
+commit messages -- non-proven kernel primitives, a kernel-caught sign slip in
+the hypothesis-form third mixed-End line, and rational arithmetic in the
+kernel, repaired to the all-integer model). Axiom line: capstone\_A
+[propext], capstone\_B [propext, Classical.choice, Quot.sound], capstone\_C
+[propext]; sorryAx-audited clean. Certified content: the six W0 class
+annihilations; the period constants re-confirmed (theta\^4 = 24, W\_R\^2 =
+W\_I\^2 = 8, W\_R W\_I = 0, Omega OmegaBar = 16); the W4 corridor
+arithmetic (universal laws); the W5 FM normalization + both round trips
+EXACT; the W6 table (four synthetic instances pure grade-by-grade with the
+charge split and the mixed-End identities in the 24-scaled integer form; the
+carrier instance recovering the committed End-mass law at the q = 0 slice;
+the detector instance). The scope box holds at the Lean layer: the
+certificate DETERMINES NO BIT.
+
+\section{Provenance}
+
+\begin{itemize}
+\item Cycle 4, Strike 1 of the GST Hodge campaign (Mode B, W6 protocol;
+boss directive 2026-10-26: route (b), the structural strike on the law,
+ULTRA MODE).
+\item Builds on: the committed Weil-forcing frame (W1/W2/W3, cycle 2
+strike 1, CI 40105212209/40108110670/40109050940, audit-closed 9-c), the
+carrier-mechanism verdict (V1/V2/V3, cycle 2 strike 2, CI 40114706009,
+audit-closed 10-c), and the for-all-N reduction (cycle 3, CI
+40125515707/40128033668, audit-closed 11-c).
+\item New theorem labels: Lemma W0 (ring annihilation), W4 (pair
+invisibility corridor), W5 (FM duality of the pair channel and the
+dichotomy bit), W6 (pair Chern table and Weil charge), Corollaries
+\ref{cor:detect}/\ref{cor:frame}. The new walls extend the committed
+W-frame series (W1--W3, strike 1); the committed strike-2 V-labels
+(V1--V4: Euler-zero, spread, scale-monoid, exact-remainder) are untouched
+and are cited by name, so no label collision arises.
+\item No mathematical content of the committed state is altered; no
+\texttt{.lean} file is touched by this commit (research-only; no workflow
+fires).
+\end{itemize}
+
+\end{document}

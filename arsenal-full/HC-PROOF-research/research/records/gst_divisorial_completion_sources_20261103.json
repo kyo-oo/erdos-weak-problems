@@ -1,0 +1,27 @@
+{
+  "checked_at": "2026-11-03",
+  "source_question": "Exact weight-spectral kernel and rational polarizable Hodge lift for a smooth projective variety minus a simple-normal-crossings divisor.",
+  "sources": [
+    {
+      "author": "Pierre Deligne",
+      "title": "Theorie de Hodge II",
+      "version": "Published original, Publications mathematiques de l'IHES 40 (1971), pages 5-57",
+      "doi": "10.1007/BF02684692",
+      "primary_url": "https://publications.ias.edu/sites/default/files/Number15.pdf",
+      "metadata_url": "https://publications.ias.edu/book/export/html/361",
+      "locators": ["2.2.6", "2.3.5", "3.1.4-3.1.8", "3.2.4", "3.2.8-3.2.10", "3.2.13(iii)"],
+      "authentication": "Author institutional publication record and linked original published scan inspected.",
+      "extraction": "Residue description yields the intersections of boundary components with Tate twists. The reindexed weight sequence has pure rows and degenerates at E2; the differently indexed Leray sequence degenerates at E3. Smooth-projective rational cohomology is polarizable.",
+      "translation": "Published compactification and its open are Y and U here. In the E1 convention E1^{-s,t}=H^{t-2s}(D^{(s)},Q)(-s). The adjacent incoming first differential is the sum of component Gysin maps. Its image is the kernel of restriction from Y.",
+      "application_verdict": "verified for the stated smooth-projective SNC hypotheses",
+      "derived_here": "The edge kernel, rational lift through the polarized kernel complement, denominator-cleared original-X cycle return and smooth-ample test are written in the companion derivation.",
+      "acquisition_note": "Direct Numdam PDF retrieval timed out; the author's IAS-hosted published scan was accessible. No full source copied into the repository."
+    }
+  ],
+  "reused_dependencies": [
+    "The project's previously proved projective return and canonical cycle comparison.",
+    "Classical exponential exact sequence, projective GAGA, rational Lefschetz (1,1), weak and hard Lefschetz, and embedded resolution under their standard complex smooth-projective hypotheses. These are existing branch inputs, not claimed as GST inventions."
+  ],
+  "review_provenance": "author self-review; no independent reviewer",
+  "overlap": "Standard Hodge-theoretic mechanisms and classical quadric cycles; no historical novelty claim or exhaustive literature search."
+}

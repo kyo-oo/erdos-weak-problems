@@ -1,0 +1,34 @@
+name: GST 406 BAD Four-Thirds Counterexample Strict Lean
+on:
+  push:
+    branches: [gpt6/problem406-strict-universal-closure-attack-20261030]
+    paths:
+      - GSTProblem406BadValuationNoGo.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_bad_valuation_countermodel.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict_no_go:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Kernel check all-depth BAD witness and theorem non-provability
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build GST406BadValuationNoGo 2>&1 | tee bad-valuation.log
+          lake env lean GSTProblem406BadValuationNoGo.lean 2>&1 | tee bad-val-axioms.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' bad-valuation.log bad-val-axioms.log
+          grep -F 'not_universal_bad_four_thirds_bound' bad-val-axioms.log
+          echo GST_406_VALUATION_NOGO_KERNEL_PASS=1

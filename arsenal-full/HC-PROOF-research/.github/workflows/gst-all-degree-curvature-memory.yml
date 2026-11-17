@@ -1,0 +1,69 @@
+name: GST All-Degree Curvature Memory
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTAllDegreeCurvatureMemory.lean'
+      - '.github/workflows/gst-all-degree-curvature-memory.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-all-degree-curvature-memory-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-install.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ github.run_id }}
+      - name: Kernel-verify the all-degree loss polynomial and specialization memory
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTAllDegreeCurvatureMemory > all-degree-curvature-memory.log 2>&1; then
+            echo "PASS GSTAllDegreeCurvatureMemory" > all-degree-curvature-memory.summary
+          else
+            echo "FAIL GSTAllDegreeCurvatureMemory" > all-degree-curvature-memory.summary
+            cat all-degree-curvature-memory.summary
+            grep -nE 'error:' all-degree-curvature-memory.log | tail -n 120 || true
+            tail -n 80 all-degree-curvature-memory.log
+            exit 1
+          fi
+          cat all-degree-curvature-memory.summary
+          if grep -E "declaration uses 'sorry'|sorryAx" all-degree-curvature-memory.log; then
+            exit 1
+          fi
+          echo "LEAN GREEN: the Round 52 all-degree loss polynomial and specialization memory kernel-verified, zero sorry"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-all-degree-curvature-memory-log
+          path: |
+            all-degree-curvature-memory.log
+            all-degree-curvature-memory.summary
+          if-no-files-found: warn

@@ -1,0 +1,70 @@
+name: GST Finite Geometric Degree
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTResearchFiniteWeightGeometricDegree.lean'
+      - '.github/workflows/gst-research-finite-geometric-degree.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-research-finite-degree-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-finite-geometric-degree
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel check bounded genuine geometric degree
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "ResearchFiniteGeometricDegree"
+          roots = ["GSTResearchFiniteWeightGeometricDegree"]
+          EOF
+          if lake build ResearchFiniteGeometricDegree > finite-degree-lean.log 2>&1; then
+            echo "LEAN PASSED: finite-weight cohomological geometric degree conservation"
+          else
+            grep -nE 'error:|sorryAx|✖' finite-degree-lean.log | tail -n 130 || true
+            tail -n 95 finite-degree-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" finite-degree-lean.log; then
+            echo 'Trust audit failed'
+            exit 1
+          fi
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-finite-geometric-degree-kernel-log
+          path: finite-degree-lean.log
+          if-no-files-found: warn

@@ -1,0 +1,69 @@
+name: GST CM All Indexed Nonzero Isogenies
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTCMAllIndexedNonzeroForcing.lean'
+      - '.github/workflows/gst-cm-all-indexed-nonzero.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-cm-all-indexed-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned toolchain and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compiled dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-cm-all-indexed
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Verify all-index Gaussian CM NM nonzero theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTCMAllIndexed"
+          roots = ["GSTCMAllIndexedNonzeroForcing"]
+          EOF
+          if lake build GSTCMAllIndexed > cm-all-indexed-lean.log 2>&1; then
+            echo "LEAN PASSED: Gaussian CM imaginary part nonzero for every corrected NM index"
+          else
+            grep -nE 'error:|sorryAx|✖' cm-all-indexed-lean.log | tail -n 130 || true
+            tail -n 85 cm-all-indexed-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" cm-all-indexed-lean.log; then
+            exit 1
+          fi
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-cm-all-indexed-lean-log
+          path: cm-all-indexed-lean.log
+          if-no-files-found: warn

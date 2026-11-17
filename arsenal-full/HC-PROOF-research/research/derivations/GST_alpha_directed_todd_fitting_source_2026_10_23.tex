@@ -1,0 +1,136 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{GST Target-Directed Source Algebra: Rational Hodge Gysin Lift, Todd-Corrected K-Theory, and Fitting Ideals}
+\date{23 October 2026}
+\begin{document}\maketitle
+\section{Exact original-world contract}
+Fix ANY smooth projective complex variety X of dimension d, integer p between 1 and d, and a prescribed rational (p,p) class alpha in H^{2p}(X,Q). The required result is a genuine original-X Chow class whose CANONICAL rational Betti class is alpha.
+
+Suppose we are supplied with an independently verifiable geometric SUPPORT datum: smooth projective Y_i of dimension d-p+1 and proper algebraic maps f_i:Y_i to X whose Gysin images satisfy
+\[
+ \alpha\in\operatorname{im}\left(
+ F=\sum_i(f_i)_*:
+ \bigoplus_i H^2(Y_i,\mathbb Q)(-(p-1))
+ \longrightarrow H^{2p}(X,\mathbb Q)\right).       \tag{1}
+\]
+The hypothesis is a cohomological support statement, NOT a Chow preimage of alpha. It is not assumed for an arbitrary Hodge class.
+
+\begin{lemma}[Actual alpha-directed rational Hodge lift]
+Choose a rational polarization of V, the direct sum source of F. Then K=ker F is a rational Hodge substructure. Its polarization-orthogonal complement K^\perp is rational, Hodge-stable, and F maps it isomorphically to im F. The unique lift
+\[
+ \boxed{\beta=(F|_{K^\perp})^{-1}(\alpha)
+         =(\beta_i)_i\in V}                        \tag{2}
+\]
+has type (p,p) after Tate twist, hence every beta_i in H^2(Y_i,Q) has type (1,1).
+\end{lemma}
+\begin{proof}
+The source and target are polarizable PURE rational Hodge structures of identical weight, and F is a rational Hodge morphism. Polarizability gives a nondegenerate restriction to the kernel and a rational Hodge orthogonal splitting. F kills precisely K, giving the rational Hodge isomorphism on its complement. Apply it to the specified rational type-(p,p) alpha.
+\end{proof}
+
+By Lefschetz (1,1) and GAGA, for each i select an ACTUAL algebraic line bundle M_i with c1(M_i)=m_i beta_i in rational Betti cohomology for a positive integer m_i. Define the genuine Chow divisor beta_i^CH=c1^CH(M_i)/m_i.
+
+\section{Corrected proof status: unrestricted geometric support is EXACTLY the target}
+The exact Mathbox audit
+\texttt{GST\_gysin\_support\_is\_exact\_chow\_image\_mathbox\_audit\_2026\_10\_23.tex}
+proves, for EVERY original smooth projective X,p,
+\[
+ \sum_{f:Y\to X}
+   f_*(H^2(Y,\mathbb Q)\cap H^{1,1}(Y))
+   =\operatorname{im}
+     (\mathrm{cl}_X^{can}:CH^p(X)_\mathbb Q
+                            \to H^{2p}(X,\mathbb Q)),
+\]
+where Y ranges over all smooth projective varieties
+of dimension d-p+1 and f all proper algebraic maps.
+The reverse inclusion uses the explicit
+$Y=\widetilde Z\times\mathbb P^1$
+for ANY original-X algebraic codimension-p cycle Z,
+with $\beta=c_1(\mathcal O_{\mathbb P^1}(1))$ on
+the projective-line factor and Gysin pushforward
+$f_*\beta=\mathrm{cl}([Z])$.
+Therefore the unrestricted condition (1) is
+NOT a weaker independently established birth law:
+its validity for every rational Hodge alpha
+is logically equivalent to the rational Hodge conjecture.
+The Todd and Fitting computations below are rigorous
+SOURCE CONVERSION given such data, but they cannot
+be called a completed universal source construction.
+This is a corrected dependency classification,
+not a withdrawal of the genuine Chow identities.
+
+\section{Real algebraic K0 geometry including all Todd corrections}
+Define the finite algebraic Chow Todd ratio
+\[
+ T_i=\frac{f_i^*\operatorname{td}(T_X)}
+                  {\operatorname{td}(T_{Y_i})}
+ \in CH^*(Y_i)_{\mathbb Q},                         \tag{3}
+\]
+and the ACTUAL rational algebraic K0 classes
+\[
+ v_i=(\operatorname{ch}_{Y_i}^{CH})^{-1}
+                  (\beta_i^{CH} T_i),\qquad
+ v_X=\sum_i(f_i)_!v_i\in K_0^{alg}(X)_{\mathbb Q}.   \tag{4}
+\]
+The inverse Chern character is an honest rational K0 inverse on smooth varieties; the pushforward is the actual alternating algebraic derived direct-image class.
+
+\begin{theorem}[Exact all-X alpha-sensitive PURE Chow source]
+The ENTIRE original-X algebraic Chern character of v_X satisfies the identity
+\[
+ \boxed{\operatorname{ch}_X^{CH}(v_X)
+       =\sum_i(f_i)_*\beta_i^{CH}\in CH^p(X)_{\mathbb Q},
+       \quad \operatorname{ch}^{CH}_j(v_X)=0
+       \text{ for }j\ne p.}                      \tag{5}
+\]
+Consequently the actual original-X rational Chow cycle
+\[
+ \boxed{Z_\alpha=\sum_i(f_i)_*\beta_i^{CH},
+       \qquad \mathrm{cl}^{can}_X(Z_\alpha)=\alpha} \tag{6}
+\]
+is constructed from the prescribed alpha and genuine support maps, without supplying an original-X algebraic representative as input.
+\end{theorem}
+\begin{proof}
+Grothendieck--Riemann--Roch gives
+\[
+ \operatorname{ch}((f_i)_!v_i)\operatorname{td}(T_X)
+ = (f_i)_*(\operatorname{ch}(v_i)\operatorname{td}(T_{Y_i})).
+\]
+Substitute the definition of v_i, cancel the Todd terms and apply the Chow projection formula. This gives precisely ch((f_i)_!v_i)=(f_i)_*beta_i^CH. The codimension shift of f_i is p-1, so beta_i^CH of grade one pushes to grade p, with NO other graded outputs. The canonical Betti map commutes with the genuine proper algebraic Gysin map. The chosen rational Hodge lift (2) therefore proves that cl(Z_alpha)=sum f_* beta_i=alpha.
+\end{proof}
+
+\section{Explicit GST Fitting ideal and original-X Chow extraction}
+Clear a positive denominator m so that m v_X=[F_+]-[F_-] in K0^alg(X) for honest algebraic bundles F_+,F_- of ranks r_\pm at least p. Pull them to ANY genuine smooth affine GST Jouanolou fold q:J to X. Each q^*F_\pm is a finitely generated projective module and hence the image of a finite REGULAR idempotent P_\pm in Mat_{M_\pm}(Gamma(J,O)). Choose generic constant sections V_\pm of size s_\pm=r_\pm-p+1. Build actual polynomial Fitting ideals
+\[
+ \boxed{I_\pm=I_{M_\pm-p+1}
+       ([I_{M_\pm}-P_\pm\mid P_\pm V_\pm])
+             \subset\Gamma(J,O).}                \tag{7}
+\]
+The schemes Sigma_\pm=V(I_\pm) of expected codimension p have actual Chow classes c_p(q^*F_\pm) by the true Thom--Porteous formula. The pure full-character equality (5) and Newton identities yield
+\[
+ \boxed{
+ Z_\alpha={(-1)^{p-1}\over m(p-1)!}
+   (q^*)^{-1}([\Sigma_+]_{CH}-[\Sigma_-]_{CH})
+       \in CH^p(X)_{\mathbb Q},\quad
+ \mathrm{cl}_X^{can}(Z_\alpha)=\alpha.}          \tag{8}
+\]
+This is a finite scheme-equation constructor, not just a Betti-valued label. Each regular idempotent is also a finite-pole incidence matrix A/s^k with equations A²=s^k A and tr A=r s^k, proved in the companion Pluecker--Fitting algebra manuscript.
+
+\section{Exact codimension-two Todd calculation}
+For a regular smooth divisor embedding i:D into X, with normal algebraic line N and x=c1(N), the Todd factor T_i=td(N) is exactly
+\[
+ \boxed{\operatorname{td}(N)
+      ={x\over1-e^{-x}}
+       =1+\frac x2+\frac{x^2}{12}
+          -\frac{x^4}{720}+\cdots.}             \tag{9}
+\]
+Take beta^CH on D created by the alpha-directed Hodge lift and define v_D=ch^{-1}(beta^CH td(N)). Grothendieck--Riemann--Roch gives the ACTUAL identity
+\[
+ \boxed{\operatorname{ch}(i_!v_D)=i_*\beta^{CH},
+              \text{ PURE codimension }2.}     \tag{10}
+\]
+The Todd terms are exact cancellation corrections; they do not independently manufacture a previously nonexistent codimension-two Chow class.
+
+\section{Exact research scope}
+The construction is VALID for every original X, every p and every prescribed rational Hodge alpha for which actual codimension-(p-1) Gysin SUPPORT (1) is established. That support is an independently stated algebraic-geometric condition, not an assumption of a cycle on X. It is not established for every arbitrary rational Hodge class by the existing GST folding laws. In particular the Todd corrections and explicit Fitting ideals cannot be promoted to unconditional universal-Hodge source birth unless genuinely new GST geometry produces the required support-free algebraic input.
+\end{document}

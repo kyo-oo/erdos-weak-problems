@@ -1,0 +1,32 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0685 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/inventory-green-even-cases.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 20:13:39 +0530  (910ec47)
+#    Last-commit  : 2026-08-16 20:13:39 +0530  (910ec47)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 20:13:39 +0530  910ec47  (ker07-dev)
+#        Inventory active kernel-green even-case theorems
+# ======================================================================
+
+name: Inventory kernel-green even cases
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/inventory-green-even-cases.yml]
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print active-looking theorem headers
+        shell: bash
+        run: |
+          set -euo pipefail
+          sha256sum ErdosTernary2.lean
+          grep -nE '^(theorem|lemma) (even_case|.*lift.*|.*mod9.*|.*mod27.*|.*mod81.*|.*universal.*|.*four_pow.*|.*navigation.*)' ErdosTernary2.lean | head -n 400 || true

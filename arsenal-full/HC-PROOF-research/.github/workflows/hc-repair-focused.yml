@@ -1,0 +1,85 @@
+name: HC Focused Integration Repair Check
+
+on:
+  push:
+    branches:
+      - clean/upgraded-advanced-only-20261009
+      - clean/advanced-gst-hodge-20261009
+      - sol/gst-plane-completeness-8408fd0
+      - sol/hodge-strict-betti-correspondence-fusion-20261003
+    paths:
+      - 'HodgeConjecture.lean'
+      - 'GSTClassicalHodgeClosedCorrespondenceSpectralAmplifier.lean'
+      - 'GSTClassicalHodgeGhostIndexedCriterionCircularity.lean'
+      - 'GSTClassicalHodgeGeneralSpaceExactOperatorFinale.lean'
+      - '.github/workflows/hc-repair-focused.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hc-repair-focused-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  focused-proof-build:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean toolchain
+        id: elan-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compiled dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+      - name: Build only the three repaired modules and their imports
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat > HCIntegrationRepairFocus.lean <<'LEAN'
+          import HodgeConjecture
+          import GSTClassicalHodgeClosedCorrespondenceSpectralAmplifier
+          import GSTClassicalHodgeGhostIndexedCriterionCircularity
+          import GSTClassicalHodgeGeneralSpaceExactOperatorFinale
+          LEAN
+          cat >> lakefile.toml <<'TOML'
+
+          [[lean_lib]]
+          name = "HCIntegrationRepairFocus"
+          roots = ["HCIntegrationRepairFocus", "GSTClassicalHodgeGhostIndexedCriterionCircularity"]
+          TOML
+          lake build HCIntegrationRepairFocus 2>&1 | tee hc-focused-repair.log
+      - name: Reject sorryAx in compiled proof receipts
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -E "declaration uses 'sorry'|sorryAx" hc-focused-repair.log; then
+            exit 1
+          fi
+      - name: Upload focused compiler diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hc-focused-integration-diagnostics
+          path: hc-focused-repair.log
+          if-no-files-found: warn

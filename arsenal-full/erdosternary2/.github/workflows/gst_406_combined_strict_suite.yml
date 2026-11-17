@@ -1,0 +1,42 @@
+name: GST 406 Combined Discovery Kernels Strict
+on:
+  push:
+    branches: [gpt6/problem406-rowtwo-first-hit-exact-20261030]
+    paths:
+      - .github/workflows/gst_406_combined_strict_suite.yml
+      - GSTProblem406RowTwoFirstHit.lean
+      - GSTProblem406PurePowerNonlocalTransport.lean
+      - GSTProblem406RationalPerronBound.lean
+      - GSTProblem406CarryCubicRecurrence.lean
+      - GSTProblem406CubicBranchCountermodels.lean
+      - lakefile.toml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  unified_strict:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Pinned Lean and mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Compile all five discovery kernels on the SAME revision
+        run: |
+          set -euo pipefail
+          lake build GST406RowTwoFirstHit GST406PurePowerNonlocalTransport GST406RationalPerronBound GST406CarryCubicRecurrence GST406CubicBranchCountermodels 2>&1 | tee all-build.log
+          for file in GSTProblem406RowTwoFirstHit GSTProblem406PurePowerNonlocalTransport GSTProblem406RationalPerronBound GSTProblem406CarryCubicRecurrence GSTProblem406CubicBranchCountermodels; do
+            lake env lean "$file.lean" > "$file.axioms.log" 2>&1
+          done
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' all-build.log GSTProblem406*.axioms.log
+          grep -F "'GSTProblem406RowTwoFirstHit.physical_first_row_two_gate_exact' depends on axioms:" GSTProblem406RowTwoFirstHit.axioms.log
+          grep -F "'GSTProblem406PurePowerNonlocalTransport.no_uniform_bounded_three_step_reappearance' depends on axioms:" GSTProblem406PurePowerNonlocalTransport.axioms.log
+          grep -F "'GSTProblem406RationalPerronBound.original_source_entropy_2482' depends on axioms:" GSTProblem406RationalPerronBound.axioms.log
+          grep -F "'GSTProblem406CarryCubicRecurrence.original_bad_trajectory_cubic' depends on axioms:" GSTProblem406CarryCubicRecurrence.axioms.log
+          grep -F "'GSTProblem406CubicBranchCountermodels.no_generic_cubic_branch_bad_descent' depends on axioms:" GSTProblem406CubicBranchCountermodels.axioms.log
+          echo GST406_COMBINED_DISCOVERIES_STRICT_PASS=1

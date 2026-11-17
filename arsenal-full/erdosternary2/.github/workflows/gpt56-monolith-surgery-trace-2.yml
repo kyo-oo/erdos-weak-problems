@@ -1,0 +1,33 @@
+name: GPT56 Monolith Surgery Trace 2
+on:
+  push:
+    branches: [sol/gpt56-canonical-tail-escape-20260827]
+  workflow_dispatch:
+
+# dispatch repaired guarded POE bridge surgery
+jobs:
+  trace2:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Verify direct local import overlaps
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          text=Path('ErdosTernary2.lean').read_text(encoding='utf-8')
+          decl_re=re.compile(r'^\s*(?:theorem|lemma|def|abbrev|inductive|structure|class)\s+([A-Za-z0-9_\.]+)',re.M)
+          root_decls=set(decl_re.findall(text))
+          imports=[]
+          for raw in text.splitlines():
+              code=raw.split('--',1)[0].strip()
+              if code.startswith('import '): imports += code[7:].split()
+          for m in dict.fromkeys(imports):
+              p=Path(*m.split('.')).with_suffix('.lean')
+              if not p.exists(): continue
+              overlap=set(decl_re.findall(p.read_text(encoding='utf-8'))) & root_decls
+              if overlap: print('REMAINING_OVERLAP',m,len(overlap),sorted(overlap)[:12])
+          print('POST_SCRATCH_IMPORT_TRACE_DONE=1')
+          PY

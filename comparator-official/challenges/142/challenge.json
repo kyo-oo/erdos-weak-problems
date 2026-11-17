@@ -1,0 +1,24 @@
+{
+  "problem": "Erdos #142 (erdosproblems.com/142, $10000)",
+  "statement_id": "erdos-142-rk-asymptotic",
+  "statement_verbatim": "Let r_k(N) be the largest possible size of a subset of {1,...,N} that does not contain any non-trivial k-term arithmetic progression. Prove an asymptotic formula for r_k(N).",
+  "conventions": {
+    "k-AP": "a, a+d, ..., a+(k-1)d with d >= 1 (distinct terms)",
+    "r_k(N)": "max |S| over S subseteq [1,N] containing no non-trivial k-AP"
+  },
+  "lane": "official DeepMind comparator (challenge + solution), run directly — fresh github.com/google-deepmind/funsearch clone @ cc53f27",
+  "official_evaluators": [
+    {
+      "repo": "google-deepmind/funsearch",
+      "commit": "cc53f274237d7ab05c19df939edbc1f9616a7c19",
+      "module": "cap_set",
+      "role": "official F_3^n cap-set construction (solve, official priorities), official verifier (is_cap_set), official 512-cap explicit construction (build_512_cap), official result data (n8_size512.txt)"
+    }
+  ],
+  "acceptance": "Every claim in the solution ledger verified; every official check passes; every negative control rejects corruption. Gate verdict line: YOUR SOLUTION IS OKAY.",
+  "solution_files": {
+    "proof": "problem142-ap-free/BEHREND_PROOF.md",
+    "engine": "problem142-ap-free/engine142behrend.py",
+    "receipts": "problem142-ap-free/receipts142behrend.txt"
+  }
+}

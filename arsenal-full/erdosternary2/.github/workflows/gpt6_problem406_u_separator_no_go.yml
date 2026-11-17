@@ -1,0 +1,29 @@
+name: GPT6 GST Direct Gate Separator No-Go Kernel
+on:
+  push:
+    branches: [gpt6/problem406-hgate-discharge-20261029]
+    paths: [GSTProblem406UGateSeparatorNoGo.lean, .github/workflows/gpt6_problem406_u_separator_no_go.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Kernel prove exact impossible GST gate sign constraints
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406UGateSeparatorNoGo.lean 2>&1 | tee gst-nogo.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gst-nogo.log
+          echo GST_406_GATE_SEPARATOR_NOGO_GREEN=1

@@ -1,0 +1,26 @@
+/- ======================================================================
+/- CHRONOLOGICAL LABEL — #0001 / 1133
+/-    Path         : .devcontainer/devcontainer.json
+/-    Ref          : main
+/-    First-commit : 2026-08-14 14:07:01 +0530
+/-    Last-commit  : 2026-08-14 14:35:36 +0530
+/-    Total commits: 2
+/- ======================================================================
+/- GIT HISTORY (chronological, oldest first)
+/- ======================================================================
+/- ====================================================================== -/
+
+{
+  "name": "Erdos Ternary-2 Lean Comparator",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-24.04",
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/rust:1": {}
+  },
+  "postCreateCommand": "bash scripts/setup-comparator.sh",
+  "customizations": {
+    "vscode": {
+      "extensions": ["leanprover.lean4"]
+    }
+  }
+}

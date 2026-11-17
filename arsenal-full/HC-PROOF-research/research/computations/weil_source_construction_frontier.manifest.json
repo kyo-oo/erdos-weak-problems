@@ -1,0 +1,87 @@
+{
+  "schema_version": 1,
+  "claim_id": "WEIL-SOURCE-EXISTENCE-FRONTIER-20261018",
+  "repository": {
+    "commit": "f5b69f58a680fe4cde22b06631af850f3b1cbd8d",
+    "dirty": true
+  },
+  "command": "mcp__codex_apps__wolfram_wolframlanguageevaluator(code=contents of research/computations/weil_source_construction_frontier.wl, timeConstraint=30)",
+  "environment": {
+    "software": [
+      "Wolfram Language 15.0.1 for Linux x86 (64-bit), July 2, 2026; remote evaluator"
+    ],
+    "hardware": "Wolfram-managed Linux x86-64; underlying hardware unreported"
+  },
+  "mathematics": {
+    "assertion_tested": "Symbolic normalized third Chern identity and line-tensor invariance; absence of anti-K elements in a quadratic field; five-dimensional ambient-block invariance in a stated seven-dimensional formal representation.",
+    "coefficient_domain": "Rational functions in r,c1,c2,c3; rational polynomial matrices; formal t-series through degree three.",
+    "conventions": "Chern index is algebraic codimension. Matrix actions are on columns. Ambient coordinates precede two formal Weil coordinates.",
+    "inputs": [
+      "research/computations/weil_source_construction_frontier.wl"
+    ],
+    "bounds": {
+      "chern_series_max_degree": 3,
+      "matrix_sizes": [
+        2,
+        7
+      ],
+      "symbolic_parameters": [
+        "r",
+        "c1",
+        "c2",
+        "c3",
+        "aa",
+        "bb",
+        "d"
+      ],
+      "exclusions": [
+        "r=0",
+        "d=0 in the quadratic centralizer conclusion"
+      ],
+      "geometric_regime": "r positive integer and d positive rational; seven-dimensional matrices are a formal model only",
+      "time_constraint_seconds": 30
+    },
+    "non_claims": [
+      "No construction of an auxiliary sheaf or algebraic source.",
+      "No Betti or Hodge realization of the formal matrices.",
+      "No exhaustion of all GST operations or all algebraic correspondences.",
+      "No refutation or proof of the Hodge conjecture.",
+      "No formalization of the external T6 theorem or canonical cycle-class map."
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-17T20:59:59.262Z",
+    "runtime_seconds": 10,
+    "exit_status": 0
+  },
+  "outputs": [
+    {
+      "path": "research/computations/weil_source_construction_frontier.output.txt",
+      "sha256": "1df46c0ed236706d1d5d6413557d8233ef346339f68cad6c2f72a2ac61338e1d"
+    }
+  ],
+  "checks": [
+    "Both symbolic Chern residuals are zero.",
+    "The quadratic centralizer commutator is zero; generic anti-K solution is aa=bb=0 for d nonzero.",
+    "Every stated generator has a zero lower-left block.",
+    "Five successive nonzero Lefschetz seed vectors have exact rank five and zero Weil coordinates.",
+    "All-word invariance follows by the separate block-multiplication argument recorded in the manuscript; no word-length sampling is used as a universal proof."
+  ],
+  "result": "Stated symbolic identities verified; they do not provide the missing geometric source or unconditional theorem.",
+  "residual_risks": [
+    "Version 1 metadata does not instrument the remote host; runtime includes API overhead.",
+    "Geometric interpretation requires the explicitly stated dictionaries.",
+    "An initial implementation used MatrixPower on a singular matrix at exponent zero; the successful run uses the direct vector recurrence NestList."
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/weil_source_construction_frontier.wl",
+      "sha256": "78943940eae18a2cfe7ce7523364791db690fe1d7d2c4b3e93daf6affc3b7bcb"
+    }
+  ]
+}

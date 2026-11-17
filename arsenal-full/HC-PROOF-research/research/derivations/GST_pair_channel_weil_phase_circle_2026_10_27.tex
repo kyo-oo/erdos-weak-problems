@@ -1,0 +1,291 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{remark}[lemma]{Remark}
+\newcommand{\WR}{W_R}
+\newcommand{\WI}{W_I}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\KA}{A}
+\newcommand{\KAd}{\widehat{A}}
+\newcommand{\fm}{\operatorname{fm}}
+\newcommand{\Phit}{\widehat\Phi}
+
+\title{GST Weil Phase Circle: the Flat-Character Exactness of the Pair Channel
+(Lemma W9) --- Round 16}
+\author{GST Hodge campaign, cycle 4 follow-up (SKILL V6 MODE B, ULTRA)}
+\date{2026-10-27}
+
+\begin{document}
+\maketitle
+
+\section*{Scope box (read first)}
+
+\textbf{Claimed here:} Lemma W9 (every holomorphic pure pair on the
+discriminator has its W8 flat line canonically constrained: the dual-side
+family is the $m$-scaling of ONE fixed ghost class --- the full five-grade
+census $(0,0,m\,\widehat\WR,0,0)$ --- and the flat character, after the
+unification and type-split below, equals $m\cdot\psi_W$ for ONE fixed phase
+point $\psi_W \in \widehat{\KAd}$: the \emph{Weil phase circle}); Corollaries
+W9.1 (the additive death: the character layer constrains nothing beyond the
+profile --- the round 15-b recorded mechanism question is answered DEAD at the
+determinant/character layer), W9.2 (the twist-scale stability at all grades),
+W9.3 (the sharpened LIVE residue). \textbf{NOT claimed:} any decision of the
+dichotomy bit; any computation of $\psi_W$; any exhaustiveness beyond the
+determinant/character layer; any statement about the non-abelian per-fiber
+monodromy representations beyond their determinants; any resolution of the
+campaign contract. This strike \textbf{DETERMINES NO BIT}; it answers the
+armed monodromy mechanism's recorded question at the additive layer and
+sharpens the reopen menu on both routes. Labels W9/W9.1/W9.2/W9.3 extend the
+committed W-frame; no committed label is reused.
+
+\section{Setting and inputs}
+
+$\KA$ is the committed nonsplit $\mathbb{Q}(i)$-Weil principally polarized
+fourfold discriminator (NS-rank one, $\theta$ the polarization class,
+$\WR,\WI$ the Weil classes; committed constants
+$\int\theta^4=24$, $\int \WR^2 = \int \WI^2 = 8$, $\int \WR\WI = 0$, all
+$\int \WR\,\theta^j = 0$). A \emph{holomorphic pure pair at scale $m\ge 1$}
+is the committed pair-form input: actual holomorphic bundles $E_\pm$ with
+$\ch(E_+) - \ch(E_-) = m\,\WR$ purely at grade 2 (equal ranks, equal
+$c_1\in\mathbb{Z}\theta$, equal $c_3$, $c_2$-difference $-m\,\WR$,
+determined $c_4$; Weil charges differing by $-8m$). Round 15-b (Lemma W8)
+certified that the pair's determinant-of-cohomology difference
+$L_{\mathrm{pair}} = \lambda(E_+)\otimes\lambda(E_-)^{-1}$ is FLAT
+($c_1 = 0$), defined the monodromy observable $\Psi_{\mathrm{pair}} \in
+\Pic^0(\KAd)$, and recorded the mechanism's question: do
+$\Psi_{\mathrm{pair}}$ and the per-fiber monodromy representations constrain
+the charge data $(m,q)$ beyond the additive profile? This round answers that
+question at the determinant/character layer.
+
+\paragraph{Committed inputs used.} The full wall system: W0 (class
+annihilation), W4 (the difference-Euler corridor), W5 (the FM duality
+normalization, coefficient 1, round trip the identity), W6 (the pair Chern
+table), W7/W7.1/W7.2 and the funnel theorem (cycle 4), W8/W8.1/W8.2 (round
+15-b) --- all kernel-green at run 40139821467 @ c6a2778 (the walls
+certificate) or certified at the model layer by the audited task13d/task14c/
+task15a scripts; and the additive-completeness theorem (the profile theorem
+of the cycle-4 decision attempt).
+
+\paragraph{External leaves (declared, standard strength; not certified
+here).}
+\begin{itemize}
+\item[P5] \emph{The Appell--Humbert/determinant-holonomy unification.} For a
+flat line $\mathcal{L}\in\Pic^0(T)$ on a complex torus, the Appell--Humbert
+character $\chi_{\mathcal{L}}:\pi_1(T)\to U(1)$ is the holonomy of the flat
+connection; for a determinant-of-cohomology line $\lambda(\xi)$ of a
+per-fiber virtual family over $T$, the holonomy of $\lambda(\xi)$ along a
+loop $\gamma$ is the determinant of the per-fiber flat
+(Gauss--Manin) monodromy of the virtual family along $\gamma$. Hence the two
+W8.1 entry-test items --- the flat position $\Psi_{\mathrm{pair}}$ and the
+per-fiber monodromy representations --- determine each other at the level of
+determinants: $\chi_{L_{\mathrm{pair}}} =
+\det(\rho_+)\cdot\det(\rho_-)^{-1}$, and
+$\Psi_{\mathrm{pair}}$ is one observable, not two. (Standard: Appell--Humbert
+theory; the determinant of a flat virtual family has monodromy the
+determinant of the family's monodromy.)
+\item[P6] \emph{The $\Pic^0$-invariance / discrete-quotient type-split of the
+phase.} For a virtual class $\xi$ of rank $0$ and Euler $0$ on $\KA$:
+(i) $\lambda(\xi\otimes P_0) \cong \lambda(\xi)$ for every $P_0\in\Pic^0(\KA)$
+--- the FM transform of a flat twist is a translate on $\KAd$, and the
+determinant of cohomology is translation-invariant on the abelian base;
+(ii) consequently the character $\xi \mapsto \chi_{\lambda(\xi)}$ is constant
+on connected holomorphic deformation families of $\xi$ and factors through
+the DISCRETE Chern lattice of the family class
+$\Phit(\xi)\in K^0(\KAd)$; (iii) the cohomological input of that
+factorization is the $(1,1)$-part of the family's Chern content --- which is
+exactly $c_1(\lambda(\xi)) = \fm_3(\ch_3(\xi))$ by leaves P1/P3 of round 15-b
+--- and the residual input is the discrete lattice value on the remaining
+grades. (Standard: Appell--Humbert; the Mukai translation identity
+$\Phit(\xi\otimes P_0) = t_{\,-P_0}^{*}\Phit(\xi)$; translation-invariance of
+cohomology on abelian varieties.)
+\end{itemize}
+
+\section{Lemma W9 and its consequences}
+
+\begin{lemma}[W9: the Weil phase circle]
+\label{lem:W9}
+Let $(E_+,E_-)$ be a holomorphic pure pair on the discriminator at any scale
+$m\ge 1$ (any rank $r\ge 1$), and write
+$\xi_{\mathrm{pair}} := [E_+] - [E_-]$. Then:
+\begin{enumerate}
+\item[(i)] \emph{(Unification, leaf P5.)} The W8 observable
+$\Psi_{\mathrm{pair}}$ equals the determinant of the per-fiber monodromy
+difference of the virtual FM family: the two W8.1 entry-test items are one
+observable.
+\item[(ii)] \emph{(The ghost census; certified at the model layer.)} The
+dual-side virtual family $\Phit(\xi_{\mathrm{pair}})$ has the FULL five-grade
+Chern census
+\[
+\ch\bigl(\Phit(\xi_{\mathrm{pair}})\bigr)
+\;=\;
+\bigl(0,\;0,\;m\cdot\widehat\WR\text{-dual},\;0,\;0\bigr),
+\]
+i.e.\ rank $0$, $c_1 = 0$, the middle grade exactly $m\cdot\widehat\WR$-dual
+(the committed W5 unit ghost scaled by $m$), $c_3 = 0$, top grade $0$. The
+census is $m$-determined: the ambient data $(r, c_1, \gamma, c_2)$ --- in
+particular the Weil charge $q$ --- is invisible in the family (the
+$(m,q)$-content of the pair's determined grade-4 difference dies at the
+Euler-cancellation face, W4).
+\item[(iii)] \emph{(The type-split; leaf P6.)} The character input of the
+phase is the family's $(1,1)$-content $= c_1(L_{\mathrm{pair}}) = 0$ (W8);
+the residual phase is the discrete-lattice value of the family class, and by
+(ii) that value is a homomorphism of the ghost lattice:
+\[
+\chi_{L_{\mathrm{pair}}} \;=\; m\cdot\chi_W,
+\qquad
+\psi_W := \text{the phase point of the unit ghost}
+\;\in\;\widehat{\KAd},
+\]
+ONE fixed phase point, independent of the pair, the rank, the ambient
+Chern data, the charge $q$, and the scale.
+\item[(iv)] \emph{(The circle.)} Every pure pair's flat line lies on the
+fixed rank-$1$ subtorus of $\Pic^0(\KAd)$:
+\[
+L_{\mathrm{pair}} \;\in\;
+\bigl\{\,\mathcal{L}_{m\cdot\psi_W}\;:\;m\in\mathbb{Z}\,\bigr\}
+\;\subset\;\Pic^0(\KAd),
+\]
+the \emph{Weil phase circle}. The W8.1 entry-test flat-line item sharpens
+from ``exhibit a flat line'' to ``exhibit the flat line ON the circle''
+--- a rank-$1$ condition.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+(i) is leaf P5. (ii): by leaf P3's grade bookkeeping (round 15-b), the
+family's grade-$j$ component is $\fm_{4-j}(\ch_{4-j}(\xi))$: grade $0$ =
+$\int\ch_4(\xi_{\mathrm{pair}}) = \chi(E_+) - \chi(E_-) = 0$ by the W4
+corridor at $L = \mathcal{O}$ (equivalently the W6-determined $c_4$
+constraint; certified on all committed instances); grade $1$ =
+$\fm_3(\ch_3(\xi_{\mathrm{pair}})) = 0$ (W8; pair grade-3 purity);
+grade $2$ = $\fm_2(\ch_2(\xi_{\mathrm{pair}})) = m\,\fm_2(\WR) =
+m\,\widehat\WR$-dual (the committed W5 normalization, coefficient exactly
+$1$); grade $3$ = $\fm_1(\ch_1(\xi_{\mathrm{pair}})) = \fm_1(0) = 0$ (equal
+$c_1$); grade $4$ = rank difference $= 0$. The $q$-invisibility: the ambient
+$(m,q)$-data enters the pair difference only through the determined
+grade-$4$ component, whose family image is the rank face --- which the
+census annihilates. All five faces are certified at the model layer on the
+full committed instance set (the four W6 table instances, the carrier, the
+detector probe $c_2(E_-) = \WR$), with the $m$-linearity of the full census
+and the identical census of the $q = 8$ probe against a synthetic $q = 0$
+instance at the same $m$. (iii) is leaf P6 applied to the census (ii): the
+character factors through the discrete Chern lattice of the family; the
+family class is the $m$-scaling of the unit ghost; a homomorphism evaluated
+on an $m$-scaled class is the $m$-scaled value. (iv) is (iii) restated.
+\end{proof}
+
+\begin{corollary}[W9.1: the additive death at the character layer]
+\label{cor:W91}
+The flat-character observable constrains nothing beyond the profile: its
+value on every pure pair is $\chi_{L_{\mathrm{pair}}} = m\cdot\chi_W$, an
+$(m)$-profile-computed datum. Both strata are character-consistent: the
+$m = 0$ stratum (pairs of equal $c_2$-content, e.g.\ the $\Pic^0$-twist
+pairs $E_\pm = F$, $E_\mp = F\otimes P_0$, whose difference is
+cohomologically trivial) carries the trivial character; every $m \ge 1$ pair
+carries $m\cdot\chi_W$, with no internal contradiction. Hence the round 15-b
+recorded mechanism question --- ``do $\Psi_{\mathrm{pair}}$ and the
+per-fiber monodromy representations constrain $(m,q)$ beyond the additive
+profile?'' --- is answered \textbf{DEAD at the determinant/character layer}:
+no separating constraint exists there; the additive-completeness theorem's
+scope extends through the monodromy determinants.
+\end{corollary}
+
+\begin{corollary}[W9.2: the twist-scale stability at all grades]
+\label{cor:W92}
+$\ch(\xi_{\mathrm{pair}}\otimes e^{k\theta}) = \ch(\xi_{\mathrm{pair}})$ for
+every $k\in\mathbb{Z}$, at every grade $0$--$4$: each correction term carries
+a $\WR\wedge\theta^j$ factor and dies by the W0 class annihilation. This
+extends the committed task14c twist checks (grades 2, 3) to grades 0, 1, 4:
+the pair's Chern character --- hence its entire family census and phase
+structure --- is invariant under every line-bundle scale. (Certified at the
+model layer: $k\in\{-3,\dots,5\}$, all committed instances, all grades.)
+\end{corollary}
+
+\begin{corollary}[W9.3: the sharpened LIVE residue]
+\label{cor:W93}
+Post-W9, the monodromy mechanism's LIVE residue is exactly:
+\textbf{(a)} the non-abelian per-fiber monodromy representations
+$\rho_\pm$ \emph{beyond their determinants} (the determinants are now
+profile-computed by W9.1; only representation-theoretic content
+non-determinantal can separate the strata); and \textbf{(b)} the phase-point
+structure of $\psi_W$ itself: if $\psi_W = 0$ then the character observable
+is VACUOUS on the pair channel (the W8.1 flat-line item carries no
+information and the entry test simplifies to the rep item alone); if
+$\psi_W \ne 0$ then the Weil phase circle is a nonzero rank-$1$ phase
+constraint on every claimed pair, LIVE only through a future mechanism that
+independently constrains phases (e.g.\ a torsion/integrality law for
+determinant-of-cohomology values of actual bundles). The value of $\psi_W$
+is a holomorphic datum and is NOT computed at the model layer. The
+\textbf{YES-side symmetric note}: with the character layer dead, one more
+obstruction family is eliminated from the kill-list perspective --- any
+future W-charged-surface construction faces a strictly simpler entry test
+(the flat-line item reduces to the rank-$1$ circle condition,
+automatically satisfiable profile-wise).
+\end{corollary}
+
+\section{Live-or-dead conditions, updated}
+
+The round 15-b conditions for the Picard--sheaf monodromy mechanism are
+updated by W9.1/W9.3: the additive/determinant layer is DEAD (both strata
+character-consistent); the mechanism survives only through its non-abelian
+and phase-structure residue. The registry row moves from ``OPENED with its
+certified entry wall'' to ``OPENED, its additive core certified DEAD, the
+non-abelian + phase residue armed.'' The row remains BLOCKED-characterized
+and DETERMINES NO BIT.
+
+\section{Verification layer}
+
+\texttt{research/experiments/task16a\_pair\_phase\_circle\_checks.py}
+(committed alongside this dossier). Bounds: pure Python, exact
+\texttt{Fraction} arithmetic throughout, no floats, zero tolerance, every
+check ASSERTS; the committed 16-letter exterior model conventions imported
+verbatim from the audited task13d/task15a certificates (parity-exact Weil
+construction, $\theta$, the exact dual-basis Poincar\'e class, the conductor
+machinery, the committed instance data); largest enumeration $\le 2^{16}$
+monomial operations; runtime $< 1$\,s. It verifies: (1) the committed
+constants re-asserted, plus the dual-side W0 annihilation in the shifted
+representation (the inherited-convention gate re-run per ledger 084, with
+the relabeling convention --- the fm pushforward maps AB-letters to low
+positions --- documented in place); (2) the FULL five-grade ghost census on
+ALL committed instances (the four W6 table instances, the carrier, and the
+detector probe $c_2(E_-)=\WR$, $r=6$, $m=2$), including the input-side
+purity $\ch$-difference $= m\WR$ purely at grade 2; (3) the $m$-linearity of
+the full census for $m\in\{1,2,3,5\}$ and the $q$-invisibility face (the
+$q=8$ probe against a synthetic $q=0$ instance at $m=2$); (4) the twist-scale
+stability at all grades $0$--$4$, $k\in\{-3,\dots,5\}$, all instances; (5)
+the character-input layer certified non-vacuous BOTH WAYS: the functor input
+space is nonzero ($\fm_3(\theta^3)\ne 0$, the $28\to28$ census with no
+silent skips, the uniform $+1$ composite --- recorded, not fitted) while the
+channel kills the input ($\fm_3(\ch_3\text{-diff}) = 0$ everywhere); (6) the
+ghost's duality face (degree-4 purity of the unit ghost's words, the
+committed W5 round trip identity, the unit census shape of the round-trip
+class). ALL GREEN on first run.
+
+The scheme-level steps (leaves P5, P6, and the round 15-b leaves P1--P4
+beneath them) are declared external leaves at standard strength and are NOT
+claimed as certified; the model layer certified here is the same layer as
+the committed W5/W6/W8 certificates (kernel-green run 40139821467 @ c6a2778
+for the wall arithmetic; the audited task15a script for the W8 entry layer).
+No new Lean file this round; the kernel content of W9's model layer (the
+census arithmetic) is pre-verified by the committed mirror pattern
+(the task14a mirror discipline) and the Lean certificate of the census
+arithmetic is the declared next movement (the same decide-able style as the
+pair-channel walls certificate), to land with CI receipts in a following
+round.
+
+\section{Provenance}
+
+Builds on: the cycle-4 wall system (W0/W4/W5/W6/W7, kernel-green run
+40139821467 @ c6a2778, audit-closed 14-b-3); round 15 (the terminal-state
+exactness repair, ledger 085; Lemma W8, the observable, the entry-test
+extension, audit-closed 15-c-2); the additive-completeness theorem (the
+cycle-4 decision attempt). The registry NO-route reopen item
+``Picard--sheaf monodromy / determinant-of-cohomology rigidity'' is the
+executed route; its recorded question is answered at the additive layer
+(DEAD), with the non-abelian + phase residue the sharpened LIVE remainder.
+Research-only round: no .lean, no .yml, no workflow fires.
+
+\end{document}

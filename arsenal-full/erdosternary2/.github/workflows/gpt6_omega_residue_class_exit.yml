@@ -1,0 +1,37 @@
+name: GPT6 GST 14 of 18 Infinite Residue Classes Kernel
+on:
+  push:
+    branches:
+      - gpt6/erdos-omega-terminal-normalform-20261029
+    paths:
+      - GSTOmegaResidueClassExit.lean
+      - .github/workflows/gpt6_omega_residue_class_exit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and GST source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectResidue
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaArbitraryDelay.olean GSTOmegaArbitraryDelay.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaExactDelayedEscape.olean GSTOmegaExactDelayedEscape.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaThreeTritMultiplierLaw.olean GSTOmegaThreeTritMultiplierLaw.lean
+      - name: Kernel prove all multipliers in 14 of 18 threefree residue classes exit
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTOmegaResidueClassExit.lean 2>&1 | tee omega-residue-class.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' omega-residue-class.log
+          echo GST_14_OF_18_GLOBAL_RESIDUE_CLASSES_KERNEL_GREEN=1

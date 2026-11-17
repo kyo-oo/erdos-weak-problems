@@ -1,0 +1,70 @@
+name: GST CM Number Manipulation Rational Trace
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTCMNumberManipulationTrace.lean'
+      - '.github/workflows/gst-cm-number-manipulation-trace.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-cm-nm-trace-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental Lake build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-cm-nm-trace
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify complex CM and rational trace
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTCMNMTrace"
+          roots = ["GSTCMNumberManipulationTrace"]
+          EOF
+          if lake build GSTCMNMTrace > cm-nm-trace-lean.log 2>&1; then
+            echo "LEAN PASSED: CM quadratic-arithmetic conjugation and indexed NM trace"
+          else
+            grep -nE 'error:|sorryAx|✖' cm-nm-trace-lean.log | tail -n 140 || true
+            tail -n 100 cm-nm-trace-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" cm-nm-trace-lean.log; then
+            echo "Trust audit failure"
+            exit 1
+          fi
+      - name: Upload Lean logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cm-nm-trace-log
+          path: cm-nm-trace-lean.log
+          if-no-files-found: warn

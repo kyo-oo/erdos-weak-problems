@@ -1,0 +1,649 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\title{GST selected-block descent, component returns, excess, and integrability}
+\author{Mathematics-first continuation; focused self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{Fixed target and proof contract}
+The input is an arbitrary smooth projective complex variety $X$, an integer
+$0\leq p\leq\dim X$, and a prescribed
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$.
+The requested output is a cycle $Z_\alpha\in\CH^p(X)_\Q$ satisfying
+$\operatorname{cl}^{\rm can}_X Z_\alpha=\alpha$.
+Base checkpoint: \texttt{feb0a99d1e08c4998a01f7239e5bb9e668851354}.
+This executes the geometric steps of the whole-space plan, rather than
+assuming its provisional Hodge premise. Lean compilation and translation
+are outside this work package.
+
+We use the actual affine Jouanolou torsor $q:J\to X$ and the
+alpha-dependent holomorphic projector/polynomial approximation already
+constructed in the October 23--24 derivations. Work componentwise, so
+$J=\operatorname{Spec}R$ is connected, smooth, affine and integral.
+Let $K\subset J^{\rm an}$ be a compact finite-cycle carrier such that
+$H^{2p}(J,\Q)\to H^{2p}(K,\Q)$ is injective.
+Choose it connected, adding finitely many connecting paths when necessary.
+All analytic neighborhoods below contain this carrier. A contour gap on
+such a neighborhood is an analytic fact, not an algebraic factorization.
+
+\section{An actual full cochain realization of the fold plan}
+Here the comparison requested in the plan is constructed for an actual
+nerve model of every smooth projective realized world $Y$. This does not
+identify an arbitrary preassigned GST graph with that nerve.
+Choose a finite good cover $\{U_i\}$ of the compact smooth manifold
+$Y^{\rm an}$. Retain its whole nerve, including every nonempty higher
+intersection. Let $\mathcal A^b$ be smooth complex-valued $b$-forms and put
+\[
+ C^{a,b}=\prod_{i_0<\cdots<i_a}\mathcal A^b(U_{i_0\cdots i_a}),
+ \qquad D|_{C^{a,b}}=\delta+(-1)^a d.                 \tag{21}
+\]
+The product omits empty intersections. The Cech differential is the
+alternating sum of restrictions. Form degree and nerve degree are distinct.
+\begin{theorem}[Filtered nerve--forms comparison and causal defect]
+The total complex (21) has $D^2=0$. Restriction of global forms gives a
+filtered quasi-isomorphism
+\[
+ (\mathcal A^\bullet(Y),F^\ell)\longrightarrow
+ (\operatorname{Tot}C,F^\ell),\qquad
+ F^\ell\mathcal A^b=\bigoplus_{u\geq\ell}\mathcal A^{u,b-u}.       \tag{22}
+\]
+The rational constant nerve complex $B_\Q^a=\prod_{i_0<\cdots<i_a}\Q$
+maps, after complexification, to (21) as constant zero-forms and induces
+the canonical comparison with $H^*(Y,\Q)\otimes\mathbb C$.
+On cohomology the filtration in (22) is the full Hodge filtration.
+Thus every coordinate of the finite-dimensional Betti fiber is retained.
+The constant nerve by itself is not endowed with a Hodge filtration by
+its vertex labels.
+
+Choose a Kahler metric and let $\Pi$ be harmonic projection, $i$ inclusion
+of harmonic forms, and $Q_H$ multiplication by $u-v$ on harmonic $(u,v)$
+forms. Then
+\[
+ \widetilde Q=i Q_H\Pi,\qquad
+ d\widetilde Q=\widetilde Qd=0                         \tag{23}
+\]
+is a genuine cochain lift of the Hodge charge. Its kernel on cohomology
+in degree $2p$ is $H^{p,p}$; its kernel on all cochains also contains
+acyclic directions and must not be identified with $H^{p,p}$.
+For actual degree-preserving cochain transports $T_j$ (or with recorded
+equal Tate shifts), the cohomology defect has the exact varying-world
+telescoping identity from the plan. In particular for a charge-zero input
+$x$, the endpoint is Hodge exactly when that defect annihilates $x$.
+\end{theorem}
+\begin{proof}
+Restrictions commute with exterior differential, so the two mixed terms
+in $D^2$ have opposite signs. The other two terms vanish by $\delta^2=0$
+and $d^2=0$. For a partition of unity $\{\rho_i\}$ subordinate to the
+cover, the augmented Cech complex of forms is contracted in positive
+nerve degree by
+$(hc)_{i_0\cdots i_{a-1}}=\sum_j\rho_j c_{j i_0\cdots i_{a-1}}$,
+with alternating extension in the indices. Products are extended by zero
+where necessary. The identity $\delta h+h\delta=1$ in positive degree
+follows by expanding and using $\sum\rho_j=1$; at degree zero the kernel
+is precisely the restrictions of global forms. Multiplication by $\rho_j$
+preserves each form type. Apply this row acyclicity to the bounded
+double complex, and separately to every $F^\ell$, to prove (22).
+The contraction is a Cech contraction; it is not falsely asserted to
+commute with $d$.
+
+Every nonempty good-cover intersection is contractible. The ordinary
+Poincare lemma on it makes its de Rham complex a resolution of the
+constant scalars. The other bounded spectral sequence consequently proves
+the constant-nerve quasi-isomorphism. This is the de Rham/nerve comparison
+with rational Betti structure, rather than a declaration of a cycle map.
+Compact Kahler Hodge theory identifies $F^\ell$ with the sum of harmonic
+types whose first index is at least $\ell$; harmonic representatives give
+both inclusions. This foundational identification is the one in Deligne's
+official problem description, Section 1, p.1.
+
+Harmonic forms are closed and orthogonal to exact forms, proving (23).
+On their degree-$2p$ subspace, $u+v=2p$ and charge $u-v=0$ give $u=v=p$.
+For $D_j=Q_jT_j-T_jQ_{j-1}$, expansion of
+\[
+ \sum_{j=1}^k T_k\cdots T_{j+1}D_jT_{j-1}\cdots T_1
+\]
+cancels adjacent internal $Q_j$ terms, leaving
+$Q_kT_k\cdots T_1-T_k\cdots T_1Q_0$.
+All operators here act on the actual cohomology just compared.
+The empty path gives zero. Safety at every world requires this test on
+each prefix; a final cancellation does not certify the prefixes.
+\end{proof}
+
+For two actual smoothly homotopic maps $f_0,f_1:Y\to Z$, the concrete
+operator $H\omega=\int_0^1\iota_{\partial t}F^*\omega\,dt$ for their
+homotopy $F$ satisfies $f_1^*-f_0^*=dH+Hd$ by Stokes. Thus the required
+two-path relation is provided when that geometric homotopy is provided;
+reachability alone still supplies none. Higher geometric cells require
+their actual parameterized maps and compatible boundary restrictions.
+The realization (21) supplies all nerve faces automatically, without
+pretending that every unrelated GST relation has such a geometric cell.
+
+Finally a product index $I=\prod_i\operatorname{Fin}(n_i)$ can coordinate
+this cohomology only after an actual basis comparison of the same dimension
+has been chosen. Then $c\mapsto\sum_{i\in I}c_i\beta_i$ is an isomorphism
+and preserves the full amplitude function. The single separated-tensor
+locus is not substituted for it. Empty products have one vacuum coordinate;
+a zero factor makes the product index empty. Neither a hole count nor a
+nerve degree has been identified with $\dim Y$.
+
+\section{A single pure-degree topological encoding}
+\begin{lemma}[Encoding without a pair of unrelated cluster problems]
+For $p>0$ there is a genuine finite-rank topological bundle $F$ on
+$J^{\rm an}$, an integer $\mu>0$, and a topological complement $G$ such that
+\[
+ F\oplus G\simeq\underline{\mathbb C}^{N},\qquad
+ \ch(F)=r+\mu q^*\alpha,\qquad
+ \ch(G)=m-\mu q^*\alpha,\quad r+m=N.                    \tag{1}
+\]
+These are equalities of the full rational even Chern character, with
+$\alpha$ placed in degree $2p$. They also hold for non-Hodge even classes.
+One may take $r,m>0$. The previous Stein realization and polynomial
+approximation therefore give a single regular matrix $a\in M_N(R)$
+with a separated rank-$r$ local cluster $F_a$ on a neighborhood $V$ of $K$,
+and $\ch_p(F_a)|_K=\mu q^*\alpha|_K$.
+\end{lemma}
+\begin{proof}
+Rational topological Chern character on the finite CW homotopy type of
+$J^{\rm an}\simeq X^{\rm an}$ is an isomorphism from rational $K^0$ to
+rational even cohomology. Clear denominators for the class having only
+the required positive-degree component. Represent the resulting integral
+$K^0$ class as $[A]-[B]$. A finite-rank complement $B'$ with
+$B\oplus B'$ trivial converts this difference to $[A\oplus B']$ minus
+a trivial bundle. Thus the genuine bundle $F=A\oplus B'$ has the required
+positive-degree character. Take a finite-rank complement $G$ for $F$.
+Adding trivial summands makes the two ranks positive.
+Pull these bundles to the Stein realization and use the earlier holomorphic
+direct-summand construction. Approximation on $K$ preserves its contour
+bundle by the gapped homotopy. This last step is precisely the previously
+proved analytic construction; it is not an algebraization theorem.
+\end{proof}
+If $\alpha\ne0$, (1) forces $r,m\geq p$: Newton's identities give
+$c_j(F)=0$ for $0<j<p$ and
+$c_p(F)=(-1)^{p-1}(p-1)!\mu q^*\alpha\ne0$, so $r\geq p$;
+the same argument applies to $G$. This rank observation will matter for
+the unpolarized excess construction.
+
+\section{Global factor descent gives the actual original-X cycle}
+Let $\chi_a(t)=\det(tI-a)$. Suppose its discriminant is not identically
+zero. On the regular spectral open, a chosen set of $r$ roots is called
+globally stable if continuation around every loop preserves that set.
+Its matching to $F_a$ is part of the assertion, not an arbitrary choice
+of some unrelated factor of the same degree.
+
+\begin{theorem}[Selected factor, coherent kernel, and canonical return]
+Suppose the local rank-$r$ cluster of $a$ is represented by a monic
+factorization
+\[
+ \chi_a=g h\quad\hbox{in }\operatorname{Frac}(R)[t],
+ \qquad \deg g=r,                                      \tag{2}
+\]
+whose roots on $V$ are exactly that cluster, with no root shared with $h$
+anywhere on $V$. Then $g,h\in R[t]$. The actual coherent sheaf
+\[
+ \mathcal M_g=\ker\bigl(g(a):\mathcal O_J^N\to\mathcal O_J^N\bigr)
+                                                               \tag{3}
+\]
+is perfect on $J$, is the selected vector bundle on
+$J\setminus V(\operatorname{Res}(g,h))$, and the actual rational cycle
+\[
+ Z_\alpha=\frac1\mu(q^*)^{-1}\ch_p^{\CH}([\mathcal M_g])
+       \in\CH^p(X)_\Q                                  \tag{4}
+\]
+has canonical Betti class $\alpha$. Resultant zeros away from $K$ are
+allowed. No vanishing of their boundary classes is required.
+\end{theorem}
+\begin{proof}
+Every root of the monic $\chi_a$ is integral over $R$. The coefficients
+of $g,h$, being elementary symmetric functions of their selected roots,
+are integral over $R$, and are in $\operatorname{Frac}(R)$ by (2).
+Normality of $R$ puts them in $R$. The resultant is not identically zero
+since the factors are coprime on $V$. After inverting it, Bezout gives
+$u g+v h=1$. Cayley--Hamilton gives $g(a)h(a)=0$. Thus
+$e=v(a)h(a)$ is an idempotent with image $\ker g(a)$; indeed
+$e(1-e)=v(a)h(a)u(a)g(a)=0$, and $e$ acts as identity on that kernel.
+On $V$ it is the Riesz cluster projector, even at collisions internal
+to $g$ or to $h$. In particular (3) restricts to $F_a$ near $K$.
+
+The kernel is a finite $R$-module. A smooth finite-dimensional affine
+coordinate ring is regular of finite global dimension, so this module
+has a finite resolution by finite projective modules and defines a genuine
+perfect-complex $K_0$ class. Its Chern character in Chow exists even where
+the sheaf is not locally free. The canonical comparison commutes with
+restriction and with the vector-bundle Chern character of that resolution.
+Consequently its degree-$2p$ Betti character restricts on $K$ to
+$\mu q^*\alpha$. Injectivity on $K$ proves equality on all of $J$.
+The actual affine-bundle Chow isomorphism and its Betti comparison now
+give (4). This argument retains all boundary terms through the coherent
+kernel instead of discarding them by localization.
+\end{proof}
+
+The globally stable root-set condition is equivalent to (2) for a
+generically separable polynomial: in its splitting field the coefficients
+of $\prod_{i\in I}(t-\lambda_i)$ are fixed precisely when the root subset
+is fixed by the Galois/monodromy action. In the complex finite etale
+description, this says that the relevant subset selector has a degree-one
+component over the regular region. It does not say every connected
+component has degree one. One must match the analytic cluster along
+continuation, not just at a single point of a disconnected intersection.
+
+This is a proved construction from an actual matched factor. Neither
+Hodge type nor small polynomial idempotency defect has supplied (2).
+
+\section{Compute the individual excess blocks, not only their total}
+First let $F\oplus G=\mathcal O_J^N$ be an actual algebraic splitting,
+of ranks $r,m>0$, and let $P$ be its projector onto $F$.
+For a selector rank $s$, put
+\[
+ k_{\min}=\max(0,s-m),\quad k_{\max}=\min(r,s),\quad l=s-k.
+\]
+On $M=\Gr_J(s,F\oplus G)=J\times\Gr(s,N)$ consider the invariant-subspace
+section $S\to (F\oplus G)/S$ induced by $P$. Its zero scheme is the disjoint
+union
+\[
+ B_k=\Gr_J(k,F)\times_J\Gr_J(l,G),\qquad
+ d_k=k(r-k)+l(m-l).                                    \tag{5}
+\]
+This is an equality of schemes: over any test algebra, $P$ preserving a
+subbundle splits it by the idempotent; its locally constant two ranks
+give exactly (5).
+
+\begin{theorem}[Exact excess contribution of a block]
+The contribution of $B_k$ to the localized zero-section intersection is
+\[
+ c_{d_k}(T_{B_k/J})\cap[B_k].                           \tag{6}
+\]
+For $p>0$, proper push of its product with $\ch_p(S)$ is
+\[
+ A_k\ch_p(F)+B_k'\ch_p(G),                             \tag{7}
+\]
+where, with binomial coefficients zero outside their usual range,
+\[
+ A_k=\binom{r-1}{k-1}\binom m{s-k},\qquad
+ B_k'=\binom rk\binom{m-1}{s-k-1}.                     \tag{8}
+\]
+Since the ambient bundle is trivial, (7) equals
+$c_k\ch_p(F)$, where $c_k=A_k-B_k'$. These are integral coefficients,
+not unspecified nonzero pairings. They satisfy
+\[
+ \sum_{k=k_{\min}}^{k_{\max}}c_k=0.                    \tag{9}
+\]
+When $s=r$, $c_r=1$. Thus the distinguished block returns exactly
+$\ch_p(F)$; its cancellation has explicit contributions from the other
+blocks. Positive-dimensional blocks use (6), not their unweighted
+fundamental cycles.
+\end{theorem}
+\begin{proof}
+On $B_k$, write $S=S_F\oplus S_G$ and the quotient as $Q_F\oplus Q_G$.
+The vertical tangent of $M$ splits as the sum of the within-block tangent
+$\Hom(S_F,Q_F)\oplus\Hom(S_G,Q_G)=T_{B_k/J}$ and the cross-block normal
+$\Hom(S_F,Q_G)\oplus\Hom(S_G,Q_F)$. The differential of the section is
+zero on the former and multiplication by $-1,+1$ on the latter.
+The normal cone therefore embeds as that cross-block subbundle in the
+section bundle, with quotient $T_{B_k/J}$. The excess formula gives (6).
+There is no real-orientation minus sign: both normal scalar maps are
+complex-linear isomorphisms.
+
+The relative Grassmann Euler-transfer identity is
+\[
+ (\Gr(k,F)\to J)_*\bigl(\ch_p(S_F)c_{k(r-k)}(T_{\Gr(k,F)/J})\bigr)
+   =\binom{r-1}{k-1}\ch_p(F),                          \tag{10}
+\]
+and the same push without $\ch_p$ is $\binom rk$.
+To verify it after splitting $F$ into line bundles, use a constant diagonal
+endomorphism with distinct eigenvalues. Its vertical tangent section has
+exactly the coordinate-subspace sections as regular zeros. On their union,
+$\ch_p(S_F)$ is the sum of the chosen line characters. Each line occurs
+in $\binom{r-1}{k-1}$ of them. The splitting principle makes this a universal
+Chow identity: on a flag bundle one has a line filtration; deformation
+of each extension to its graded sum preserves the identity by homotopy
+invariance. The pullback to the flag bundle is injective. This also proves
+the end cases $k=0,r$. Apply (10) to the two factors, using
+$\ch_p(S)=\ch_p(S_F)+\ch_p(S_G)$, to get (7).
+Both sums of (8) are $\binom{N-1}{s-1}$ by counting $s$-subsets containing
+one fixed label; subtract them to get (9). The formula for $c_r$ is immediate.
+\end{proof}
+
+\section{A finite geometric test on the actual alpha-dependent matrix}
+Now return to a regular approximation $a$ and its analytic cluster on $V$.
+Take the small generic constant perturbation from the prior regular-incidence
+theorem, so the actual invariant-subspace scheme $Z_a\subset J\times\Gr(s,N)$
+is smooth of dimension $\dim J$, all its components dominate $J$, and
+the section is regular. Put $f:Z_a\to J$.
+On $V$ the actual analytic contour projector splits the trivial bundle as
+$F_a\oplus G_a$. Every invariant subspace is preserved by this projector,
+so $f^{-1}V$ is the disjoint union of open-and-closed analytic pieces $Z_k$
+with the two dimensions $k,s-k$.
+
+\begin{lemma}[Local block return for the regular approximation]
+In rational cohomology of $V$,
+\[
+ (f|_{Z_k})_*\ch_p(S)=c_k\ch_p(F_a).                  \tag{11}
+\]
+These are Betti equalities. No Chow class of the possibly nonalgebraic
+analytic bundle $F_a$ is being asserted.
+\end{lemma}
+\begin{proof}
+Use the relative Grassmann product in (5) for the analytic splitting.
+Cross-block differentiation of invariance is the Sylvester map
+$\phi\mapsto a_G\phi-\phi a_F$ or its reverse. It is invertible because
+the two spectra are separated. The remaining section is the product of
+the internal invariant-subspace tangent sections on the two relative
+Grassmannians. Localized complex Euler classes therefore reduce its proper
+push to $\ch_p(S)c_{d_k}(T_{B_k/V})$, regardless of internal collisions.
+The regularity of $Z_a$ identifies this localized class with its actual
+fundamental class. The cohomological version of (10) gives (11).
+This also follows by homotoping the block endomorphisms to the two scalar
+blocks; the compact Grassmann fibers ensure properness throughout.
+\end{proof}
+
+There is a finite, actual construction of the block-complete packages.
+Make a bipartite graph with (a) irreducible components of $Z_a$ and (b)
+the integers $k_{\min},\ldots,k_{\max}$; connect a component to $k$ when
+its analytic restriction meets $Z_k$. Components of this finite graph
+give a partition into packages. For a package let $A$ be its set of $k$'s
+and $C_A$ the union of its global algebraic components. Every global
+component dominates $J$ and hence meets $V$; every $Z_k$ is nonempty.
+By construction
+$C_A^{\rm an}\cap f^{-1}V=\coprod_{k\in A}Z_k$.
+
+\begin{theorem}[Computed component-package source]
+Set $c_A=\sum_{k\in A}c_k$. The genuine rational Chow class
+\[
+ W_A=f_*\bigl(\ch_p^{\CH}(S|_{C_A})\cap[C_A]\bigr)
+       \in\CH^p(J)_\Q                                \tag{12}
+\]
+has canonical Betti class $c_A\mu q^*\alpha$. If some package has
+$c_A\ne0$, then
+\[
+ Z_\alpha=(\mu c_A)^{-1}(q^*)^{-1}W_A                 \tag{13}
+\]
+is the required cycle on the original $X$.
+\end{theorem}
+\begin{proof}
+The components are smooth and disjoint; their union has a genuine Chow
+fundamental class and the restricted tautological bundle is algebraic.
+Canonical proper functoriality, (11), and addition over its local pieces
+compute the restriction of its Betti class to $K$ as
+$c_A\ch_p(F_a)|_K=c_A\mu q^*\alpha|_K$.
+Injectivity on $K$ and the affine-bundle comparison prove (12)--(13).
+\end{proof}
+
+This computes the class of a specific source, rather than assuming a
+coupling for an unspecified cycle. It does not prove that a nonzero package
+exists. The total package has coefficient zero by (9). Components that cut
+individual $Z_k$ into smaller pieces can have finer classes; the package
+test neither evaluates nor rules out those finer sources.
+The operation in (11)--(12) is proper pushforward of a Chern-character
+\emph{Chow cycle}, not the Chern character of a derived sheaf pushforward.
+It therefore uses canonical Gysin compatibility directly; no Todd term
+from a different $K_0$ pushforward formula has been omitted.
+
+\begin{proposition}[Root-transitive package cancellation]
+If the actual regular spectral root monodromy is transitive on the $N$
+individual roots, every block-complete package above has $c_A=0$.
+This requires neither full symmetric monodromy nor transitivity on
+$s$-subsets. If local within-cluster monodromy contains
+$S_r\times S_m$, each global component is itself block-complete and
+therefore has zero degree-$2p$ canonical return on $J$.
+\end{proposition}
+\begin{proof}
+A package's subsets form a union of actual global monodromy orbits, and
+locally a union of the shells $|I\cap\{1,\ldots,r\}|=k$ for $k\in A$.
+The number of its subsets containing a fixed label in the first block is
+$\sum_{k\in A}A_k$; for a fixed label in the second it is
+$\sum_{k\in A}B_k'$. Root transitivity makes these numbers equal, proving
+$c_A=0$. If local within-block permutations are present, they are
+transitive on each shell, so no $Z_k$ can be split among distinct global
+components; then each component is already such a package. No assertion
+of these monodromy hypotheses for every approximation is made.
+\end{proof}
+
+\section{Execute a nonzero-Hodge-input descent test}
+The following fixture has an explicit arbitrary-$X$ implication: it refutes
+the proposed universal inference from Hodge type and a target-detecting
+contour gap to a globally selected algebraic root block. It is not a
+substitute for the universal target.
+
+Let $J_0=\{x^2+yz=1\}\subset\mathbb A^3$ and
+\[
+ P=\frac12\begin{pmatrix}1+x&y\\z&1-x\end{pmatrix},\qquad
+ a_\epsilon=P+\epsilon\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+ \quad0<\epsilon<\tfrac12.                            \tag{14}
+\]
+Here $P^2=P$ and $\operatorname{tr}P=1$. Sending a projector to its image
+line identifies $q_0:J_0\to\mathbb P^1$ as the affine-line torsor of
+complements to the tautological line. Thus $\operatorname{im}P=q_0^*\mathcal
+O(-1)$ has nonzero Chern class, and $J_0$ is the genuine Jouanolou model.
+The Hermitian-projector sphere
+$K_0=\{x\in\mathbb R,z=\overline y,x^2+|y|^2=1\}$ is a deformation
+retract and detects that class.
+
+\begin{proposition}[A genuine algebraic Hodge class with no selected sheet]
+For every $\epsilon$ as in (14), the eigencluster near $1$ on a neighborhood
+of $K_0$ has the nonzero class $-q_0^*h$. Nevertheless its characteristic
+polynomial has no proper factor over $\mathbb C(J_0)$, its global
+rank-one incidence is a connected smooth double cover, and the complete
+tautological first-character return is zero in $\CH^1(J_0)_\Q$.
+\end{proposition}
+\begin{proof}
+Direct calculation using $x^2+yz=1$ gives
+\[
+ \chi_{a_\epsilon}(t)=t^2-t-\epsilon x-\epsilon^2,
+ \quad D_\epsilon=1+4\epsilon x+4\epsilon^2.           \tag{15}
+\]
+On $K_0$, $D_\epsilon\geq(1-2\epsilon)^2>0$.
+The Hermitian eigenvalues remain separated throughout the homotopy
+$a_{t\epsilon}$, $0\leq t\leq1$. Their upper line therefore has the
+same nonzero first class as $\operatorname{im}P$.
+But $D_\epsilon$ has a simple zero along
+\[
+ x=-\frac{1+4\epsilon^2}{4\epsilon},\qquad yz=1-x^2\ne0.
+\]
+This is a smooth irreducible divisor isomorphic to $\mathbb C^*$.
+Its valuation in $D_\epsilon$ is one, so $D_\epsilon$ is not a square
+in the function field. This proves nonsplitting and connected monodromy.
+The double cover $w^2=D_\epsilon$ is smooth since the branch divisor is.
+The matrix is never scalar: scalarity would force $y=z=0$, $x=-2\epsilon$,
+and hence $4\epsilon^2=1$, excluded. Thus its eigenkernel has constant
+dimension one on this cover, identifying it with the full incidence.
+The regular-incidence top-Chern calculation, now including the branch
+fibers, gives the zero first-character return. Equivalently (8) gives
+coefficients $-1,+1$, merged into one global package.
+For $\epsilon=1/10$, $D=(26+10x)/25$ and the branch is $x=-13/5$,
+strictly outside the detecting sphere. A branch outside that sphere still
+obstructs global algebraic selection.
+\end{proof}
+The actual input here is $X=\mathbb P^1$, $p=1$, $\alpha=-h$, already
+algebraic. The result refutes the claimed selection implication, not Hodge
+algebraicity. For any original $X$, taking its product with this example
+retains the same obstruction on the $\mathbb P^1$ factor.
+
+\section{Execute the correlated-matrix excess route}
+Let $B=\Gr(s,N)$, $D=s(N-s)$, and let $a_1,\ldots,a_t$ be actual regular
+matrices on $J$, with $t\geq2$. Simultaneous invariance is the actual zero
+scheme of a section of $(T_B)^{\oplus t}$ on $J\times B$.
+For any nonnegative-degree tautological insertion its \emph{complete
+virtual} proper Chow return is zero: the ambient push is the integral of
+that insertion times $c_D(T_B)^t$, a class of degree at least $tD>D$
+on $B$ when $0<s<N$. This statement is about the complete localized
+intersection; an excess component's ordinary fundamental cycle is not
+automatically that localized class.
+
+For $a_1=\cdots=a_t=P$ and $s=r$, the distinguished actual component is
+the section $J$ corresponding to $F$. Its normal in $J\times B$ is
+$E=\Hom(F,G)$ of rank $rm$. Differentiating the $t$ equations gives
+a diagonal inclusion $E\hookrightarrow E^{\oplus t}$, up to invertible
+signs, so its exact excess contribution is
+\[
+ c_{(t-1)rm}(E^{\oplus(t-1)})\cap[J].                 \tag{16}
+\]
+For nonzero pure-degree-$p$ encoding (1), $rm\geq p^2$. Consequently
+the unpolarized contribution (16) has codimension greater than $p$ for
+$p\geq2$. It cannot itself be the missing codimension-$p$ source.
+
+This dimension obstruction does not rule out dimensional folds. They can
+be computed explicitly, rather than silently ignored. For one extra
+equation, a projective auxiliary variable and an $\mathcal O(1)$ twist
+can extract the coefficient
+\[
+ \pi_*c_{rm}(E\boxtimes\mathcal O_{\mathbb P^{rm-p}}(1))
+   =c_p(E),                                           \tag{17}
+\]
+where $\pi:J\times\mathbb P^{rm-p}\to J$.
+This follows by expanding the top Chern class as
+$\sum_{j=0}^{rm}c_j(E)h^{rm-j}$ and integrating $h^{rm-p}$.
+Under (1), its canonical degree-$2p$ character is
+\[
+ \operatorname{cl}^{\rm can}c_p(E)
+ =(-1)^{p-1}(p-1)!\,[m(-1)^p-r],\mu q^*\alpha.       \tag{18}
+\]
+Indeed $\ch(E)=\ch(F^*)\ch(G)$ has positive terms zero below $p$,
+and degree $p$ equal to $[m(-1)^p-r]\mu q^*\alpha$; Newton gives (18).
+The coefficient is nonzero for odd $p$; for even $p$ stabilization can
+make $m\ne r$. Formula (17) is a valid polarized Chern conversion whenever
+$F,G$ are actual algebraic bundles. It is not an algebraic construction
+from the merely analytic $F_a,G_a$. Moreover an individual section of
+$\mathcal O(1)$ vanishes on an auxiliary hyperplane, so any proposed
+global matrix realization of this twist must retain its additional
+boundary components. Equations (17)--(18) alone do not identify that
+realization's selected localized component. The global selection question
+has not disappeared in the dimension fold.
+
+\section{Execute the integrable-source and source-deformation test}
+The following test applies to every original $X$ via the actual smooth
+projective world $Y=X\times A$, where $A=E_1\times E_2$ is a product of
+elliptic curves. Pull back two independent constant antiholomorphic
+one-forms $\eta_1,\eta_2$ from $A$, and set on the trivial rank-two bundle
+\[
+ U=\begin{pmatrix}0&1\\0&0\end{pmatrix},\quad
+ V=\begin{pmatrix}0&0\\1&0\end{pmatrix},\quad
+ \theta=U\eta_1+V\eta_2.                              \tag{19}
+\]
+\begin{proposition}[An explicit second-order obstruction invisible to Chern type]
+The first-order operator $\bar\partial+t\theta$ defines an actual
+holomorphic deformation over $\mathbb C[t]/(t^2)$. There is no global
+$(0,1)$-form $\psi$ making $\bar\partial+t\theta+t^2\psi$ integrable
+over $\mathbb C[t]/(t^3)$, although its underlying smooth bundle is trivial
+and all its topological Chern classes are zero, hence of Hodge type.
+\end{proposition}
+\begin{proof}
+Expand the square. The coefficient of $t$ is $\bar\partial\theta=0$.
+The coefficient of $t^2$ is
+\[
+ \bar\partial\psi+\theta\wedge\theta,
+ \qquad \theta\wedge\theta=[U,V]\eta_1\wedge\eta_2,
+ \qquad [U,V]=\begin{pmatrix}1&0\\0&-1\end{pmatrix}.  \tag{20}
+\]
+The Dolbeault class $[\eta_1\wedge\eta_2]$ is nonzero on $A$:
+wedge with a nonzero constant holomorphic two-form and integrate over
+$A$; the integral is nonzero, whereas an exact form would give zero by
+Stokes. It remains nonzero after pullback to $Y$, since restriction to
+a fiber $\{x\}\times A$ is a left inverse. Its product with the nonzero
+constant matrix in (20) is therefore not $\bar\partial$-exact.
+No such $\psi$ exists. The smooth underlying bundle is fixed and trivial,
+so its Chern classes vanish independently of this deformation problem.
+Also $\operatorname{tr}[U,V]=0$: the obstruction is in a traceless
+extension direction, not detected by its trace. This example rules out
+the implication that Hodge Chern data and first-order compatibility solve
+all the nonlinear integrability equations. It does not rule out a
+different deformation direction or the trivial holomorphic bundle itself.
+\end{proof}
+
+For an actual source bundle the analogous equation is still
+$\bar\partial\Theta+\Theta\wedge\Theta=0$ in its endomorphism-valued
+Dolbeault complex. A fold's charge/period equation is a constraint on
+cohomology; it supplies neither the missing traceless obstruction
+cancellation nor the algebraic descent of a merely Stein holomorphic
+bundle. On a projective realization, GAGA applies after a genuine
+holomorphic coherent source has been constructed. It does not solve
+equation (20). Thus the integrable-source and source-deformation proposals
+must provide additional input at this nonlinear step.
+
+\section{Typed GST chain and external leaves}
+The chain actually used is:
+\[
+ (X,p,\alpha)\longmapsto(J,K,a,F_a)
+ \xrightarrow[\text{proved only when supplied}]{\text{matched factor or }c_A\ne0}
+ [\mathcal M_g]\text{ or }W_A
+ \longmapsto Z_\alpha\xrightarrow{\operatorname{cl}^{\rm can}}\alpha.
+\]
+The first arrow is the previously derived topological/Stein construction.
+The middle objects in (3) and (12) are actual algebraic sources; the last
+two arrows are the genuine $K_0$/Chow normalization and affine-bundle
+original-X return, with canonical Chern comparison. They do not use a
+Stage-2G map chosen independently of canonical Betti semantics. No numerical
+Gram identity is used as a Chow equality. Native Gram closure is unnecessary
+when (4) or (13) applies; for arbitrary further sources it remains the
+previous conditional finite-source operation, not their existence proof.
+
+Authenticated external leaves checked on 3 November 2026 in the current
+Stacks Project pages are:
+\begin{itemize}
+\item \href{https://stacks.math.columbia.edu/tag/00OE}{10.110.8, tag 00OE}
+and \href{https://stacks.math.columbia.edu/tag/0656}{15.76.3, tag 0656}:
+regular finite-dimensional affine coordinate ring and finite module imply
+a finite projective resolution. These apply to (3), not to a singular base.
+\item \href{https://stacks.math.columbia.edu/tag/037B}{10.37.1, tag 037B}:
+normal domains are integrally closed. The factor-coefficient argument above
+is provided here, rather than attributed to an unstated descent theorem.
+\item \href{https://stacks.math.columbia.edu/tag/02UK}{42.43.1, tag 02UK}:
+the line-filtration pullback is injective on Chow groups. This is the
+splitting input in (10).
+\item \href{https://stacks.math.columbia.edu/tag/0FA8}{42.44.1--2, tag 0FA8}
+and \href{https://stacks.math.columbia.edu/tag/0FBI}{42.54.3--5, tag 0FBI}:
+regular zero-section and excess-normal-bundle formulas. The explicit
+normal inclusion above verifies their hypotheses for (6) and (16).
+\end{itemize}
+For (22)--(23), Pierre Deligne,
+\href{https://www.claymath.org/wp-content/uploads/2022/06/hodge.pdf}{\emph{The Hodge Conjecture}},
+official Clay problem description, Section 1, p.1, gives the compact
+Kahler harmonic-type decomposition and filtration used here. This exact
+page was opened and checked. The Cech contraction, its filtration behavior,
+the cochain lift and telescoping computation are derived above.
+The earlier project records remain the leaves for Jouanolou, topological
+rational Chern character, Stein realization, and canonical comparison.
+They are retained with their hand-proof status. No claim that all these
+geometric structures were instantiated in Lean is made. These classical
+inputs are not attributed as new OpenAI discoveries. No novelty search
+or global novelty claim is part of this work.
+
+\section{Focused adversarial audit and exact outstanding obligation}
+The factor-to-cycle theorem is proved with its stated matched-factor
+hypothesis; it permits resultant boundary and constructs the coherent
+source there. The block/excess formulas include rank-zero selections,
+$s=0,N$, positive-dimensional excess components, and all $p>0$.
+The package construction requires the stated regular-incidence perturbation
+and retains every local block. Root transitivity alone kills its package
+coefficients; it does not prove vanishing of every finer boundary cycle.
+The test (14) has a genuinely nonzero target class, not the zero-cluster
+example of October 24. The source in (17) is conditional on algebraic
+bundles, and auxiliary-hyperplane terms have not been discarded.
+The obstruction (20) concerns a specified first-order direction and does
+not disprove existence of all holomorphic sources.
+The full filtered nerve comparison is proved for its explicitly constructed
+realization; it is not claimed for every GST graph merely bearing the same
+number of holes. Its cochain spaces can be infinite dimensional although
+their Betti cohomology is finite dimensional. The rational structure is
+retained through the constant nerve; the complex Hodge charge need not
+preserve that rational lattice.
+
+The universal conclusion remains incomplete at a geometric implication:
+for the prescribed arbitrary higher-codimension Hodge input, no proof here
+forces a matched factor, a nonzero computed package, a finer selected
+cycle with the required class, or a solution of the source integrability
+equations. The known Hodge premise of the provisional experiment cannot
+be removed by any of the implications proved here. Consequently the
+statement ``mathematics finished; only Lean remains'' is not established.
+These are completed mathematical subproofs and executed route tests,
+with a specific unproved universal leaf. Review provenance is self-review.
+\end{document}

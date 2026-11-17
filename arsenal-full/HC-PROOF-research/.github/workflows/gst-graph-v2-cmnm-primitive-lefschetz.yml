@@ -1,0 +1,77 @@
+name: GST Graph V2 Primitive Lefschetz CM NM Bridge
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTGraphV2CMNMPrimitiveUpgrade.lean'
+      - 'GSTGraphV2CMNMCoupledUniverse.lean'
+      - 'GSTGraphV2CMNMPrimitiveLefschetzBridge.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/gst-graph-v2-cmnm-primitive-lefschetz.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-graph-v2-primitive-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and cached Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compatible build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-graph-primitive
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify actual primitive geometric CM NM bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTGraphV2PrimitiveBridge"
+          roots = [
+            "GSTGraphV2CMNMPrimitiveUpgrade",
+            "GSTGraphV2CMNMCoupledUniverse",
+            "GSTUniversalProjectiveProductPrimitive",
+            "GSTGraphV2CMNMPrimitiveLefschetzBridge"
+          ]
+          EOF
+          if lake build GSTGraphV2PrimitiveBridge > graph-v2-primitive-lean.log 2>&1; then
+            echo "LEAN PASSED: graph events preserve authentic algebraic primitive-test kernels"
+          else
+            grep -nE 'error:|sorryAx|✖' graph-v2-primitive-lean.log | tail -n 120 || true
+            tail -n 100 graph-v2-primitive-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" graph-v2-primitive-lean.log; then
+            exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-graph-v2-primitive-kernel-log
+          path: graph-v2-primitive-lean.log
+          if-no-files-found: warn

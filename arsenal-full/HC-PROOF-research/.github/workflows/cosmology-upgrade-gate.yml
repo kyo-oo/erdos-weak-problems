@@ -1,0 +1,174 @@
+name: HC Cosmology Upgrade Gate
+# Explicit verification trigger for the repaired limitless cosmology head.
+
+on:
+  push:
+    branches:
+      - main
+      - sol/limitless-cosmology-bursts
+    paths:
+      - 'GSTRadixWorldDynamics.lean'
+      - 'GSTGradedWorldAlgebra.lean'
+      - 'GSTWorldRecoordinationGroupoid.lean'
+      - 'GSTUniversalAddressBridge.lean'
+      - 'GSTDimensionFreeHodgeDiagonal.lean'
+      - 'GSTGlobalPureHodgeCosmology.lean'
+      - 'GSTPureHodgeLefschetzKernel.lean'
+      - 'GSTSquarePureHodgeDuality.lean'
+      - 'GSTUniversalLefschetzDynamics.lean'
+      - 'GSTUniversalLefschetzCosmology.lean'
+      - 'GSTUniversalLefschetzPathFormula.lean'
+      - 'GSTUniversalLefschetzKernel.lean'
+      - 'GSTUniversalLefschetzCausalGeometry.lean'
+      - 'GSTLefschetzPoincareReciprocity.lean'
+      - 'GSTTruncatedWorldCohomologyRing.lean'
+      - 'GSTWorldPoincareDuality.lean'
+      - 'CardinalWorldsPrefixClassifier.lean'
+      - 'GSTWorldCosmology.lean'
+      - 'GSTWorldCrownBridge.lean'
+      - 'GST2DMixedEmergenceUpgrade.lean'
+      - 'GSTGraphV2ScaleEquivariance.lean'
+      - 'GSTCoherentCosmology.lean'
+      - 'GSTInfiniteWorldClassification.lean'
+      - 'CardinalWorldsV2.lean'
+      - 'waves/CardinalWorldsPostulateLawV2.lean'
+      - 'waves/GSTWaveCohomologyV2.lean'
+      - 'waves/GSTNCohomologyV2.lean'
+      - 'waves/GSTVortexSingularityV2.lean'
+      - 'HodgeDeRhamBridgeV2.lean'
+      - 'GSTAnalyticAbsorptionV2.lean'
+      - 'GSTLefschetzCrownV2.lean'
+      - 'GSTHodgeAssaultV2.lean'
+      - 'GSTClayOfficialV2.lean'
+      - 'GSTTransferBridgeV2.lean'
+      - '.github/workflows/cosmology-upgrade-gate.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hc-cosmology-upgrade-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  cosmology-upgrade:
+    name: Cosmology upgrade (0 errors, 0 proof escapes)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 1
+
+      - name: Install Lean and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Reject proof escapes
+        shell: bash
+        run: |
+          set -euo pipefail
+          files=(
+            GSTRadixWorldDynamics.lean
+            GSTGradedWorldAlgebra.lean
+            GSTWorldRecoordinationGroupoid.lean
+            GSTUniversalAddressBridge.lean
+            GSTDimensionFreeHodgeDiagonal.lean
+            GSTGlobalPureHodgeCosmology.lean
+            GSTPureHodgeLefschetzKernel.lean
+            GSTSquarePureHodgeDuality.lean
+            GSTUniversalLefschetzDynamics.lean
+            GSTUniversalLefschetzCosmology.lean
+            GSTUniversalLefschetzPathFormula.lean
+            GSTUniversalLefschetzKernel.lean
+            GSTUniversalLefschetzCausalGeometry.lean
+            GSTLefschetzPoincareReciprocity.lean
+            GSTTruncatedWorldCohomologyRing.lean
+            GSTWorldPoincareDuality.lean
+            CardinalWorldsPrefixClassifier.lean
+            GSTWorldCosmology.lean
+            GSTWorldCrownBridge.lean
+            GST2DMixedEmergenceUpgrade.lean
+            GSTGraphV2ScaleEquivariance.lean
+            GSTInfiniteWorldClassification.lean
+            CardinalWorldsV2.lean
+            waves/CardinalWorldsPostulateLawV2.lean
+            waves/GSTWaveCohomologyV2.lean
+            waves/GSTNCohomologyV2.lean
+            waves/GSTVortexSingularityV2.lean
+            HodgeDeRhamBridgeV2.lean
+            GSTAnalyticAbsorptionV2.lean
+            GSTLefschetzCrownV2.lean
+            GSTHodgeAssaultV2.lean
+            GSTClayOfficialV2.lean
+            GSTTransferBridgeV2.lean
+          )
+          if grep -nE '^[[:space:]]*(axiom|sorry|admit)[[:space:]]' "${files[@]}"; then
+            echo HC_UPGRADE_FORBIDDEN_PROOF_ESCAPE=1
+            exit 1
+          fi
+          echo HC_UPGRADE_PROOF_ESCAPE_CHECK=PASS
+
+      - name: Compile upgraded cosmology
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build \
+            GSTRadixWorldDynamics \
+            GSTGradedWorldAlgebra \
+            GSTWorldRecoordinationGroupoid \
+            GSTUniversalAddressBridge \
+            GSTDimensionFreeHodgeDiagonal \
+            GSTGlobalPureHodgeCosmology \
+            GSTPureHodgeLefschetzKernel \
+            GSTSquarePureHodgeDuality \
+            GSTUniversalLefschetzDynamics \
+            GSTUniversalLefschetzCosmology \
+            GSTUniversalLefschetzPathFormula \
+            GSTUniversalLefschetzKernel \
+            GSTUniversalLefschetzCausalGeometry \
+            GSTLefschetzPoincareReciprocity \
+            GSTTruncatedWorldCohomologyRing \
+            GSTWorldPoincareDuality \
+            CardinalWorldsPrefixClassifier \
+            GSTWorldCrownBridge \
+            GSTGraphV2ScaleEquivariance \
+            GSTInfiniteWorldClassification \
+            CardinalWorldsV2 \
+            waves.CardinalWorldsPostulateLawV2 \
+            waves.GSTWaveCohomologyV2 \
+            waves.GSTNCohomologyV2 \
+            waves.GSTVortexSingularityV2 \
+            HodgeDeRhamBridgeV2 \
+            GSTAnalyticAbsorptionV2 \
+            GSTLefschetzCrownV2 \
+            GSTHodgeAssaultV2 \
+            GSTClayOfficialV2 \
+            GSTTransferBridgeV2 2>&1 | tee cosmology-upgrade.log
+          echo HC_UPGRADE_BUILD_GREEN=1
+
+      - name: Verify no sorryAx in upgraded crowns
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -Fq 'sorryAx' cosmology-upgrade.log; then
+            echo HC_UPGRADE_FORBIDDEN_SORRYAX=1
+            exit 1
+          fi
+          echo HC_UPGRADE_AXIOM_AUDIT=PASS
+
+      - name: Upload upgrade diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hc-cosmology-upgrade-diagnostics
+          path: cosmology-upgrade.log
+          if-no-files-found: ignore

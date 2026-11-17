@@ -1,0 +1,110 @@
+name: GPT56 Graph V2 Production
+
+on:
+  push:
+    branches:
+      - sol/gpt56-final-perfect-power-block-20260823
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Compile current Graph V2 dependency spine
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          for f in \
+            GSTGraphV2CoupledUFlux \
+            GSTGraphV2CoupledUPhysicalBridge \
+            GST2DMixedEmergence \
+            GSTU2DAtomicBridge \
+            GSTU2DEventTransport \
+            GSTU2DExactCrossingCharge \
+            GSTU2DSharpCrossingBlock \
+            GSTCanonicalSevenAxisBridge \
+            GSTGraphV2InfiniteControl \
+            GSTU2DPureDivergence83 \
+            GSTU2DCanonicalPhaseDensity \
+            GSTGraphV2UnifiedPowerRectangle \
+            GSTGraphV2UnifiedVerticalTelescope \
+            GSTGraphV2PerfectPowerAncestry \
+            GSTGraphV2PerfectPowerBlockProbe \
+            GSTGraphV2HandwrittenOmegaUBlock \
+            GSTGraphV2HandwrittenExponentialCascade \
+            GSTGraphV2HandwrittenExponentialLTE \
+            GSTGraphV2HandwrittenAnchoredCocycle; do
+              echo "=== compiling $f ==="
+              lake env lean -o ".lake/build/lib/lean/$f.olean" "$f.lean"
+          done
+
+      - name: Compile TRUE non-Euclidean GST Graph V2
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2NonEuclidean.olean GSTGraphV2NonEuclidean.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2NonEuclideanLaws.olean GSTGraphV2NonEuclideanLaws.lean
+
+      - name: Audit true Graph V2 ontology and laws
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          construction = Path('GSTGraphV2NonEuclidean.lean').read_text(encoding='utf-8')
+          stripped = re.sub(r'/-.*?-/', '', construction, flags=re.S)
+          forbidden = []
+          for i, line in enumerate(stripped.splitlines(), 1):
+              code = line.split('--', 1)[0]
+              if re.search(r'\btheorem\b|\blemma\b|\baxiom\b|\bsorry\b|\badmit\b|\bnative_decide\b', code):
+                  forbidden.append(f'{i}:{line}')
+          if forbidden:
+              print('\n'.join(forbidden))
+              raise SystemExit('true Graph V2 construction must remain declaration/data only')
+          laws = Path('GSTGraphV2NonEuclideanLaws.lean').read_text(encoding='utf-8')
+          if re.search(r'\b(sorry|admit|axiom|native_decide)\b', laws):
+              raise SystemExit('forbidden proof escape in true Graph V2 laws')
+          required = ['x : Nat', 'xPrime : Nat', 'y : Nat', 'yPrime : Space',
+                      'z : Nat', 'zPrime : Nat', 'nAxis : Nat × Nat']
+          missing = [x for x in required if x not in construction]
+          if missing:
+              raise SystemExit('missing seven-axis fields: ' + ', '.join(missing))
+          for space in ['null', 'altMinus', 'gstPlus']:
+              if f'| {space}' not in construction:
+                  raise SystemExit('missing GST space ' + space)
+          print('True GST Graph V2 ontology: exact 3 spaces + 7 non-dimensional axes.')
+          PY
+
+      - name: Compile arithmetic projection/subgraph
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2Production.olean GSTGraphV2Production.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2ProductionLaws.olean GSTGraphV2ProductionLaws.lean
+
+      - name: Audit projection/subgraph
+        shell: bash
+        run: |
+          if grep -nE '\b(sorry|admit|axiom|native_decide)\b' GSTGraphV2ProductionLaws.lean; then
+            echo 'forbidden proof escape in arithmetic projection laws'
+            exit 1
+          fi
+          echo 'TRUE non-Euclidean Graph V2 + arithmetic subgraph compiled GREEN.'

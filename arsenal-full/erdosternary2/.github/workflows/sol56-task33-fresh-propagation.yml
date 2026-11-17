@@ -1,0 +1,56 @@
+name: SOL56 Four-Power Direct Existence
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTFourPowerDirectResidue.lean
+      - GSTFourPowerExponentTritObstruction.lean
+      - GSTFourPowerDirectExistence.lean
+      - .github/workflows/sol56-task33-fresh-propagation.yml
+  workflow_dispatch:
+
+concurrency:
+  group: sol56-four-power-direct-existence
+  cancel-in-progress: true
+
+jobs:
+  direct-existence-kernel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Prepare direct arithmetic output directory
+        shell: bash
+        run: mkdir -p .lake/build/lib/lean
+      - name: Compile and axiom-audit pure residue arithmetic
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean \
+            -o .lake/build/lib/lean/GSTFourPowerDirectResidue.olean \
+            GSTFourPowerDirectResidue.lean 2>&1 | tee direct-residue.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' \
+            direct-residue.log
+      - name: Compile and axiom-audit exponent-trit obstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean \
+            -o .lake/build/lib/lean/GSTFourPowerExponentTritObstruction.olean \
+            GSTFourPowerExponentTritObstruction.lean 2>&1 | tee direct-trit.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' \
+            direct-trit.log
+      - name: Compile and axiom-audit direct existence spine
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTFourPowerDirectExistence.lean 2>&1 | tee direct-existence.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' \
+            direct-existence.log
+
+# Direct arithmetic verification trigger: 2026-09-02

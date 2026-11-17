@@ -1,0 +1,32 @@
+name: GST 406 Pure-Cofactor Source Necessary Countermodel
+on:
+  push:
+    branches: [gpt6/problem406-source-cofactor-one-collision-20261030]
+    paths:
+      - GSTProblem406PrefixOneDyadicNoGo.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_prefix_one_dyadic_nogo.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and Mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Kernel check genuine GST binary and prefix all-depth countermodel
+        run: |
+          set -euo pipefail
+          lake build GST406PrefixOneDyadicNoGo 2>&1 | tee precise-build.log
+          lake env lean GSTProblem406PrefixOneDyadicNoGo.lean 2>&1 | tee precise-axioms.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' precise-build.log precise-axioms.log
+          grep -F 'prefix_one_high_dyadic_does_not_force_collision' precise-axioms.log
+          echo GST_406_PREFIX_ONE_HIGH_DYADIC_COUNTERMODEL_PASS=1

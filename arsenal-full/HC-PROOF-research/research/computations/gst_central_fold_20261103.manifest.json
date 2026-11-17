@@ -1,0 +1,180 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-WHOLE-SPACE-CENTRAL-CAUSAL-FOLD-20261103",
+  "repository": {
+    "commit": "ef1a452d5a91e5e8c8a740fbda5761faf4cb9e0a",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_central_fold_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language remote kernel",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64; remote hardware not exposed"
+  },
+  "mathematics": {
+    "assertion_tested": "Full exterior differential, d squared zero, exact cohomology ranks and Betti polynomials for 22 declared fixtures; all 81 small 2x2 curvature matrices and 64 declared point triples each; whole first-filtration defect and fusion cancellation.",
+    "coefficient_domain": "Z, Q; complex filtration proven in the hand derivation",
+    "conventions": "Generators Xj,Yj,Ua,Va in that order; dUa=-sum K_aj Xj wedge Yj. Full graded Leibniz signs retained. Opposedness defect is b1-2 dim F1.",
+    "inputs": [
+      "research/experiments/gst_central_fold_checks.py",
+      "research/experiments/gst_central_fold_wolfram_20261103.wl",
+      "research/computations/gst_central_fold_wolfram_20261103.output.json",
+      "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_central_fold_run.py",
+      "GSTCausalFoldDefect.lean",
+      "GSTGradedWorldAlgebra.lean",
+      "GSTGraphV2GeneralSpaceRealization.lean",
+      "GSTGraphV2UnboundedHigherCausality.lean",
+      "GSTSpatialFoldResearch.lean",
+      "waves/GSTNCohomologyV3.lean"
+    ],
+    "bounds": {
+      "one_handle": "m=0..4, every active rank t=0..m",
+      "full_spectra": "22 declared fixtures, real dimensions 0..10",
+      "all_curvature_matrices": "81 integer 2x2 matrices, entries -1..1",
+      "associativity": "all ordered triples of four declared points for each matrix"
+    },
+    "non_claims": [
+      "No Lean compilation",
+      "No classification of every GST realization",
+      "No unconditional Hodge-conjecture proof",
+      "No global historical novelty claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T02:38:59.951265+00:00",
+    "runtime_seconds": 1.8463612380000995,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_central_fold_20261103.independent.output.json",
+      "sha256": "9038a9a5ca7deba45ef150c19c6e20bef2b44bba461ef60ed008d77be3c0d87c",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Independent bit-mask and signed-list exterior differentials",
+    "Exact sparse Fraction elimination versus Wolfram MatrixRank",
+    "All shared full spectra and rank histogram match reparsed remote output",
+    "Changed Lean proof-escape scan and parsed import acyclicity",
+    "LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Geometric argument is self-reviewed",
+    "Lean drafts remain uncompiled",
+    "Remote kernel exit status and runtime not exposed",
+    "First remote evaluation returned internal error; preserved separately"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_central_fold_checks.py",
+      "sha256": "3fa7000b18fd580f48f7b6cb7475886dd876d7fa30f94ccee02dab732498d5b7",
+      "sha256_after": "3fa7000b18fd580f48f7b6cb7475886dd876d7fa30f94ccee02dab732498d5b7"
+    },
+    {
+      "path": "research/experiments/gst_central_fold_wolfram_20261103.wl",
+      "sha256": "85a3fe3ca1d71026a52a1c470471a1029e7865e4db2b81becdf2fbe28964df95",
+      "sha256_after": "85a3fe3ca1d71026a52a1c470471a1029e7865e4db2b81becdf2fbe28964df95"
+    },
+    {
+      "path": "research/computations/gst_central_fold_wolfram_20261103.output.json",
+      "sha256": "6717d86d6a6109b26de9c2ca37ffe49cbf1d2f29c8c6b9e7815ca42b737522f6",
+      "sha256_after": "6717d86d6a6109b26de9c2ca37ffe49cbf1d2f29c8c6b9e7815ca42b737522f6"
+    },
+    {
+      "path": "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+      "sha256": "eaf521312071399efdb76fe1f95f9e0251b95bb0d260b2a3a33a2c2c7548beda",
+      "sha256_after": "eaf521312071399efdb76fe1f95f9e0251b95bb0d260b2a3a33a2c2c7548beda"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_central_fold_run.py",
+      "sha256": "de6f33741b7e0484f6b016166f36ac1a29d868b72dbdb7aecd7211f218250158",
+      "sha256_after": "de6f33741b7e0484f6b016166f36ac1a29d868b72dbdb7aecd7211f218250158"
+    },
+    {
+      "path": "GSTCausalFoldDefect.lean",
+      "sha256": "089abc6cba894ae079b4b11478a2bc662d5ed34430ea6e7a11150ed7e11bb13e",
+      "sha256_after": "089abc6cba894ae079b4b11478a2bc662d5ed34430ea6e7a11150ed7e11bb13e"
+    },
+    {
+      "path": "GSTGradedWorldAlgebra.lean",
+      "sha256": "36f451146dd8a30a85b3a0f785b5e13615eaad1aa8538694504cfa04270cfca0",
+      "sha256_after": "36f451146dd8a30a85b3a0f785b5e13615eaad1aa8538694504cfa04270cfca0"
+    },
+    {
+      "path": "GSTGraphV2GeneralSpaceRealization.lean",
+      "sha256": "ab607538efaedb6c8c385d4b224f89a3a4319a4d593bd1e1fa7f8c0125416a5d",
+      "sha256_after": "ab607538efaedb6c8c385d4b224f89a3a4319a4d593bd1e1fa7f8c0125416a5d"
+    },
+    {
+      "path": "GSTGraphV2UnboundedHigherCausality.lean",
+      "sha256": "965d075a1733361e888c04426dadbce2b280b3725f4351501dedf04928ee01ef",
+      "sha256_after": "965d075a1733361e888c04426dadbce2b280b3725f4351501dedf04928ee01ef"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "b8a4201f916f24b61504786a14a07eba229c3144ba9df003c33fd7e53ea698c7",
+      "sha256_after": "b8a4201f916f24b61504786a14a07eba229c3144ba9df003c33fd7e53ea698c7"
+    },
+    {
+      "path": "waves/GSTNCohomologyV3.lean",
+      "sha256": "ad35af731b5d2518b2dd51175f2c9bbd04478f450cac35cae2c98a1aad6d20fa",
+      "sha256_after": "ad35af731b5d2518b2dd51175f2c9bbd04478f450cac35cae2c98a1aad6d20fa"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_central_fold_checks.py",
+    "research/experiments/gst_central_fold_wolfram_20261103.wl",
+    "research/computations/gst_central_fold_wolfram_20261103.output.json",
+    "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_central_fold_run.py",
+    "GSTCausalFoldDefect.lean",
+    "GSTGradedWorldAlgebra.lean",
+    "GSTGraphV2GeneralSpaceRealization.lean",
+    "GSTGraphV2UnboundedHigherCausality.lean",
+    "GSTSpatialFoldResearch.lean",
+    "waves/GSTNCohomologyV3.lean"
+  ],
+  "declared_results": [
+    "research/computations/gst_central_fold_20261103.independent.output.json"
+  ],
+  "remote_evaluation": {
+    "input_sha256_before": "85a3fe3ca1d71026a52a1c470471a1029e7865e4db2b81becdf2fbe28964df95",
+    "input_sha256_after": "85a3fe3ca1d71026a52a1c470471a1029e7865e4db2b81becdf2fbe28964df95",
+    "kernel_process_exit_status": null,
+    "kernel_runtime_seconds": null,
+    "assertion_count": 170
+  }
+}

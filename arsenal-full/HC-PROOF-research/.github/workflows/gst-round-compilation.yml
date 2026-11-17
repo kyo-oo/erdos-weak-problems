@@ -1,0 +1,98 @@
+name: GST Round Compilation Green
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTClassicalHodgeCMNativeRationalDescent.lean'
+      - 'GSTClassicalHodgeFiniteSourceCorrection.lean'
+      - 'GSTComplexTangentProjectionChainObstruction.lean'
+      - 'GSTCubicNilpotentDressing.lean'
+      - 'GSTExactSequenceTorsion.lean'
+      - 'GSTFiniteSourceCorrection.lean'
+      - 'GSTLawStackRound29.lean'
+      - 'GSTOpenAISourceCorrectionUpgrade.lean'
+      - 'GSTSplitBoundaryProjection.lean'
+      - 'GSTClassicalHodgeWordSourceRecovery.lean'
+      - 'GSTFilteredK0SourceConservation.lean'
+      - 'GSTFiniteGroupCocycleAveraging.lean'
+      - 'GSTOrderedNilpotentDressing.lean'
+      - 'GSTTargetWordRecovery.lean'
+      - 'GSTConnectedSpectralHodgeRigidity.lean'
+      - 'GSTIntegralProjectionCorrection.lean'
+      - 'GSTNilpotentProjectionConjugacy.lean'
+      - 'GSTSingularBranchExtraction.lean'
+      - 'GSTSpectralBoundaryDefect.lean'
+      - 'GSTTorsionLineConservation.lean'
+      - '.github/workflows/gst-round-compilation.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-round-compilation-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-install.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ github.run_id }}
+      - name: Kernel-verify the round's Lean modules
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          TARGETS="GSTClassicalHodgeCMNativeRationalDescent GSTClassicalHodgeFiniteSourceCorrection GSTComplexTangentProjectionChainObstruction GSTCubicNilpotentDressing GSTExactSequenceTorsion GSTFiniteSourceCorrection GSTLawStackRound29 GSTOpenAISourceCorrectionUpgrade GSTSplitBoundaryProjection GSTClassicalHodgeWordSourceRecovery GSTFilteredK0SourceConservation GSTFiniteGroupCocycleAveraging GSTOrderedNilpotentDressing GSTTargetWordRecovery GSTConnectedSpectralHodgeRigidity GSTIntegralProjectionCorrection GSTNilpotentProjectionConjugacy GSTSingularBranchExtraction GSTSpectralBoundaryDefect GSTTorsionLineConservation"
+          : > round-compilation.log
+          : > round-compilation.summary
+          FAILED=0
+          for t in $TARGETS; do
+            echo "=== TARGET $t ===" >> round-compilation.log
+            if lake build "$t" >> round-compilation.log 2>&1; then
+              echo "PASS $t" >> round-compilation.summary
+            else
+              echo "FAIL $t" >> round-compilation.summary
+              FAILED=1
+            fi
+          done
+          cat round-compilation.summary
+          if grep -E "declaration uses 'sorry'|sorryAx" round-compilation.log; then
+            echo "SORRY DETECTED" >> round-compilation.summary
+            FAILED=1
+          fi
+          if [ "$FAILED" -ne 0 ]; then
+            grep -nE 'error:' round-compilation.log | tail -n 200 || true
+            exit 1
+          fi
+          echo "LEAN GREEN: all 20 round modules kernel-verified, zero sorry"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-round-compilation-log
+          path: |
+            round-compilation.log
+            round-compilation.summary
+          if-no-files-found: warn

@@ -1,0 +1,175 @@
+\documentclass[11pt]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\im}{\operatorname{im}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{remark}[theorem]{Remark}
+\title{Exact GST reduction: rational Chow-image equality to the complex Hodge-charge kernel}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\section{Input types, project-specific GST definitions}
+Let X be an ACTUAL smooth projective complex variety of
+dimension N, and p an integer with \(0\le p\le N\).
+Set \(V_{\Q}=H^{2p}(X,\Q)\) and
+\(V_{\C}=V_{\Q}\otimes_{\Q}\C\).
+The projective rational canonical cycle-class map is
+\[
+ \operatorname{cl}^{can}_{X,p}:
+       \CH^p(X)_{\Q}\longrightarrow V_{\Q}.
+\]
+The \texttt{GSTGradedWorldAlgebra.lean} laws set
+\(D(a,b)=a+b\) and \(Q(a,b)=a-b\)
+on the unbounded cosmic bidegree lattice.
+The **separate, actual** geometric realization
+of this charge is the Hodge-circle generator
+\[
+ \boxed{G_Xv=i(a-b)v\quad
+            (v\in H^{a,b}(X)).}                   \tag{1}
+\]
+This complex-linear map is defined on \(V_{\C}\).
+There is NO assumption that \(G_X(V_{\Q})\subset V_{\Q}\);
+\(\ker G_X\cap V_{\Q}\) is, however, unambiguously typed.
+\texttt{GSTClassicalHodgeFiberedCosmology.lean}
+retains the genuine rational Hodge fiber and its
+basis-index multiplicity, whereas its
+\texttt{forgetMultiplicityToGST} forgets the latter.
+The present theorem works on the entire genuine
+bigraded Hodge realization, never the collapsed
+rank-one abstract cosmic diagonal.
+
+\section{Exactly the requested assumed rational statement}
+Assume the input equation supplied for this reduction:
+\[
+ \boxed{
+ V_{\Q}\cap\ker(G_X:V_{\C}\to V_{\C})
+    =\im\bigl(\operatorname{cl}^{can}_{X,p}\bigr).
+ }                                                 \tag{A}
+\]
+This is the rational Hodge conjecture's
+algebraicity equality for this X,p,
+expressed in Hodge-charge terminology.
+It is a HYPOTHESIS in this research route,
+not a consequence of charge conservation.
+
+\begin{theorem}[All-N, all-p GST zero-charge kernel reduction]
+For EVERY ACTUAL smooth projective complex X of
+dimension N and every 0<=p<=N, the GST charge
+realization (1) and the actual Hodge direct sum imply
+\[
+ \boxed{
+ H^{p,p}(X)=
+ \ker\!\left(G_X|_{H^{2p}(X,\C)}\right).
+ }                                                \tag{B}
+\]
+Furthermore the universal spectral polynomial
+\[
+ \boxed{
+ P_{X,p}:=\prod_{r=1}^{p}
+   \left(I+\frac{G_X^2}{4r^2}\right)
+ }                                                \tag{2}
+\]
+satisfies \(P_{X,p}^2=P_{X,p}\),
+\(\im(P_{X,p})=H^{p,p}(X)\),
+and \(P_{X,p}v=v\iff G_Xv=0\)
+for every \(v\in V_{\C}\).
+For p=0, the empty product is I.
+\end{theorem}
+\begin{proof}
+Write the ACTUAL Hodge decomposition
+\[
+ V_{\C}=\bigoplus_{a+b=2p}H^{a,b}(X),
+ \qquad v=\sum_{a+b=2p}v_{a,b}.
+\]
+By (1),
+\[
+ G_Xv=\sum_{a+b=2p}i(a-b)v_{a,b}.
+\]
+The terms lie in distinct summands of the
+direct decomposition. Consequently \(G_Xv=0\)
+iff every nonzero-charge term \(v_{a,b}\) vanishes.
+Charge zero forces a=b, and a+b=2p forces a=b=p,
+proving (B).
+
+For a vector of charge \(q=a-b\), the scalar
+eigenvalue of G is \(iq\).
+In degree 2p, all possible nonzero charges are
+\(\pm2,\pm4,\ldots,\pm2p\).
+Thus the polynomial in (2) acts as one on charge
+zero and zero on every allowed nonzero charge:
+for \(q=\pm2s\) the factor with r=s vanishes.
+Therefore \(P_{X,p}\) is the exact zero-charge
+spectral projection, proving all assertions.
+\end{proof}
+
+\begin{theorem}[GST reduction of the INPUT Chow-image equation]
+UNDER input (A), the exact combination with
+(B) and the spectral projector yields
+\[
+ \boxed{
+ \im(\operatorname{cl}^{can}_{X,p})
+ =V_{\Q}\cap H^{p,p}(X)
+ =\left\{\alpha\in V_{\Q}:P_{X,p}\alpha=\alpha\right\}.
+ }                                                \tag{C}
+\]
+Equivalently, for EVERY rational \(\alpha\in V_{\Q}\),
+\[
+ \boxed{
+ \alpha\text{ is canonically rational algebraic}
+ \ \Longleftrightarrow\
+ G_X\alpha=0
+ \ \Longleftrightarrow\
+ P_{X,p}\alpha=\alpha .
+ }                                                \tag{3}
+\]
+\end{theorem}
+\begin{proof}
+The first equality of (C) is (A) with the
+zero-charge kernel replaced by (B).
+The second uses the spectral theorem above,
+intersected with the ACTUAL rational lattice.
+Thus every implication in (3) follows without
+passing from rational vector spaces to an
+unjustified complex span.
+\end{proof}
+
+\begin{remark}[Important logical direction and mathematical evidence]
+(B) is PROVED from the GST charge realization and
+Hodge decomposition, independently of assuming (A).
+(A) then upgrades (B) to the rational
+algebraicity criterion (C). One cannot infer
+(A) merely by proving (B), since (B) does not
+establish any CHOW representative existence.
+
+Nor can one generally replace
+\(V_{\Q}\cap H^{p,p}(X)\) by the entire complex
+\(H^{p,p}(X)\) after tensoring with \(\C\).
+For instance a projective K3 surface of
+Picard rank one has
+\(\dim_{\C}H^{1,1}=20\), whereas its rational
+(1,1) subspace has dimension one.
+The divisor case of the rational Hodge
+conjecture holds, yet the complexification
+of its rational Chow image has dimension
+one, not twenty. This is a precise
+coefficient-domain check, not a contradiction.
+\end{remark}
+
+\section{Executed symbolic checks and evidence status}
+Wolfram exact evaluation tested every possible
+charge \(q=-2p,-2p+2,\ldots,2p\) for
+p=0,...,12. The eigenvalue polynomial gives
+1 exactly at q=0 and 0 at the other charges,
+for all such finite cases. The accompanying
+complex-torus binomial Hodge multiplicities
+were checked in 65 dimension/degree pairs
+N=1,...,10, 0<=p<=N.
+These finite checks validate implementation.
+The complete all-N argument is the spectral
+eigenvalue proof above. The reduction assumes
+(A), rather than proving the Hodge conjecture.
+\end{document}

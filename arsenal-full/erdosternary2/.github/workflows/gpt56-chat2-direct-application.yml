@@ -1,0 +1,80 @@
+name: GPT56 Chat2 Direct Application Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'GSTFourPowerDirectChat2Application.lean'
+      - 'GSTFourPowerDirectExistenceProviderPipeline.lean'
+      - 'GSTFourPowerAffineTwoTritClassifier.lean'
+      - 'GSTFourPowerAffinePeelClassifier.lean'
+      - 'GSTFourPowerAffineClassifierBridge.lean'
+      - 'GSTFourPowerAffineChannelAutomaton.lean'
+      - 'GSTFourPowerAffineBadState.lean'
+      - 'GSTFourPowerAffineExponentPeel.lean'
+      - 'GSTFourPowerAffineOrbit.lean'
+      - 'GSTFourPowerDirectFailedRelocationState.lean'
+      - 'GSTFourPowerDirectExistence.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/gpt56-chat2-direct-application.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  chat2-direct-application:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Install exact Lean RC2 and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile Chat2 direct application and pipeline gate
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          touch chat2-direct-application.log
+          {
+            set -euo pipefail
+            echo CHAT2_DIRECT_APPLICATION_BUILD_START=1
+            lake build GSTFourPowerDirectChat2Application GSTFourPowerDirectExistenceProviderPipeline
+            echo CHAT2_DIRECT_APPLICATION_FILE_COMPILED=1
+            echo CHAT2_PROVIDER_PIPELINE_GATE_COMPILED=1
+          } 2>&1 | tee chat2-direct-application.log
+          test ${PIPESTATUS[0]} -eq 0
+
+      - name: Reject forbidden axiom leakage
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -E '(^|[^A-Za-z0-9_.])(sorryAx|gst_four_power_direct_existence_inline)([^A-Za-z0-9_]|$)' chat2-direct-application.log; then
+            echo CHAT2_DIRECT_APPLICATION_FORBIDDEN_AXIOM_LEAK=1
+            exit 1
+          fi
+          if grep -E '^axioms .*[[][^]]*axiom[^]]*[]]' chat2-direct-application.log; then
+            echo CHAT2_DIRECT_APPLICATION_CUSTOM_AXIOM_SUSPECT=1
+            exit 1
+          fi
+          echo CHAT2_DIRECT_APPLICATION_NO_FORBIDDEN_AXIOM_MARKERS=1
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: chat2-direct-application-diagnostics
+          path: chat2-direct-application.log
+          if-no-files-found: warn

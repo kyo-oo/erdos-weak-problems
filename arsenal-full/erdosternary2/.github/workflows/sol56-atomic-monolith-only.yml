@@ -1,0 +1,194 @@
+name: SOL56 Atomic Monolith Only
+
+on:
+  push:
+    branches:
+      - sol/sol56-final-residual-production-green-20260824
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: sol56-atomic-monolith-only-${{ github.event_name }}-${{ github.sha }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  monolith:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/sol56-final-residual-production-green-20260824
+          fetch-depth: 1
+
+      - name: Restore immutable canonical monolith and apply exactly one theorem surgery
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .surgery
+          CANONICAL_SHA=78b282f001abb080b7148047a178cb2814d027a5
+          git fetch --no-tags --depth=1 origin "$CANONICAL_SHA"
+          git show "$CANONICAL_SHA:ErdosTernary2.lean" > ErdosTernary2.lean
+          test "$(git hash-object ErdosTernary2.lean)" = "22e748626ad0a35bb592fabb44cc241e26a7c264"
+          echo "CANONICAL_MONOLITH_SHA=$CANONICAL_SHA" | tee .surgery/final_transplant.log
+          python3 scripts/run_final_infinite_monolith_transplant.py 2>&1 | tee -a .surgery/final_transplant.log
+
+      - name: Prepare Lean RC2 and Mathlib cache only
+        id: leanprep
+        continue-on-error: true
+        uses: leanprover/lean-action@v1
+        with:
+          auto-config: false
+          build: false
+          test: false
+          lint: false
+          use-mathlib-cache: true
+
+      - name: Discover exact canonical dependency closure
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .surgery
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+
+          target = 'ErdosTernary2'
+          order = []
+          done = set()
+          active = []
+
+          def source_for(mod: str):
+              p = Path(*mod.split('.')).with_suffix('.lean')
+              return p if p.is_file() else None
+
+          def imports_of(mod: str):
+              p = source_for(mod)
+              if p is None:
+                  return []
+              text = p.read_text(encoding='utf-8')
+              return re.findall(r'(?m)^\s*import\s+([A-Za-z0-9_.]+)\s*$', text)
+
+          def visit(mod: str):
+              p = source_for(mod)
+              if p is None:
+                  return
+              if mod in done:
+                  return
+              if mod in active:
+                  cycle = ' -> '.join(active + [mod])
+                  raise SystemExit(f'LOCAL_IMPORT_CYCLE={cycle}')
+              if mod == target:
+                  cycle = ' -> '.join(active + [mod])
+                  raise SystemExit(f'MONOLITH_IMPORT_CYCLE={cycle}')
+              active.append(mod)
+              for dep in imports_of(mod):
+                  visit(dep)
+              active.pop()
+              done.add(mod)
+              order.append(mod)
+
+          for dep in imports_of(target):
+              visit(dep)
+
+          Path('.surgery/local_import_order.txt').write_text(
+              '\n'.join(order) + ('\n' if order else ''), encoding='utf-8')
+          print(f'LOCAL_IMPORT_COUNT={len(order)}')
+          print('\n'.join(order))
+          PY
+
+      - name: Dependency build, edited canonical monolith build, comparator
+        id: verdict
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .surgery .lake/build/lib/lean
+          export PATH="$HOME/.elan/bin:$PATH"
+          : > .surgery/final_build.log
+          set +e
+          DEP_RC=0
+          while IFS= read -r mod; do
+            [ -z "$mod" ] && continue
+            src="${mod//.//}.lean"
+            out=".lake/build/lib/lean/${mod//.//}.olean"
+            mkdir -p "$(dirname "$out")"
+            echo "=== LOCAL MODULE: $mod ===" | tee -a .surgery/final_build.log
+            lake env lean -o "$out" "$src" >> .surgery/final_build.log 2>&1
+            rc=$?
+            if [ "$rc" -ne 0 ]; then
+              echo "LOCAL_MODULE_FAILED=$mod RC=$rc" | tee -a .surgery/final_build.log
+              DEP_RC=$rc
+              break
+            fi
+          done < .surgery/local_import_order.txt
+
+          BUILD_RC=$DEP_RC
+          if [ "$DEP_RC" -eq 0 ]; then
+            echo '=== EDITED CANONICAL MONOLITH ===' | tee -a .surgery/final_build.log
+            lake build ErdosTernary2 >> .surgery/final_build.log 2>&1
+            BUILD_RC=$?
+          fi
+
+          CMP_RC=99
+          if [ "$BUILD_RC" -eq 0 ]; then
+            bash scripts/comparator.sh > .surgery/final_comparator.log 2>&1
+            CMP_RC=$?
+          else
+            printf '%s\n' 'COMPARATOR_SKIPPED_BECAUSE_MONOLITH_BUILD_FAILED' > .surgery/final_comparator.log
+          fi
+
+          GREEN=0
+          if [ "$CMP_RC" -eq 0 ] && grep -Fq 'Your solution is okay!' .surgery/final_comparator.log; then
+            GREEN=1
+          fi
+          {
+            echo "FINAL_RUN_HEAD=$(git rev-parse HEAD)"
+            echo "CANONICAL_BASE=78b282f001abb080b7148047a178cb2814d027a5"
+            echo "LEAN_PREP_OUTCOME=${{ steps.leanprep.outcome }}"
+            echo "DEPENDENCY_BUILD_RC=$DEP_RC"
+            echo "MONOLITH_BUILD_RC=$BUILD_RC"
+            echo "COMPARATOR_RC=$CMP_RC"
+            echo "GREEN_COMPARATOR=$GREEN"
+            echo '--- LOCAL IMPORT ORDER ---'
+            cat .surgery/local_import_order.txt
+            echo '--- BUILD TAIL ---'
+            tail -n 320 .surgery/final_build.log
+            echo '--- COMPARATOR TAIL ---'
+            tail -n 160 .surgery/final_comparator.log
+          } > .surgery/FINAL_RUN_STATUS.txt
+          cat .surgery/FINAL_RUN_STATUS.txt
+          exit 0
+
+      - name: Persist only a literal-green canonical surgery
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! grep -Fq 'GREEN_COMPARATOR=1' .surgery/FINAL_RUN_STATUS.txt || \
+             ! grep -Fq 'Your solution is okay!' .surgery/final_comparator.log; then
+            echo 'Not green: leaving branch monolith untouched.'
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ErdosTernary2.lean
+          if git diff --cached --quiet; then
+            echo 'Green monolith already persisted.'
+            exit 0
+          fi
+          git commit -m "FINAL: canonical one-theorem surgery comparator green [skip ci]"
+          git fetch origin sol/sol56-final-residual-production-green-20260824
+          git rebase origin/sol/sol56-final-residual-production-green-20260824
+          git push origin HEAD:sol/sol56-final-residual-production-green-20260824
+
+      - name: Require literal green comparator
+        if: always()
+        shell: bash
+        run: |
+          grep -F 'DEPENDENCY_BUILD_RC=0' .surgery/FINAL_RUN_STATUS.txt
+          grep -F 'MONOLITH_BUILD_RC=0' .surgery/FINAL_RUN_STATUS.txt
+          grep -F 'COMPARATOR_RC=0' .surgery/FINAL_RUN_STATUS.txt
+          grep -F 'GREEN_COMPARATOR=1' .surgery/FINAL_RUN_STATUS.txt
+          grep -F 'Your solution is okay!' .surgery/final_comparator.log

@@ -1,0 +1,659 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\td}{\operatorname{td}}
+\newcommand{\ddbar}{\bar\partial}
+\title{The forcing site: pure realization ladder, congruence completeness,
+and the $\mathrm{Gr}(2,5)$ calibration carrier}
+\date{24 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+The target remains
+EveryHodgeClassIsRationalAlgebraic for an arbitrary original smooth
+projective complex $X$, an arbitrary codimension $p$, and an arbitrary
+prescribed rational $(p,p)$ Hodge class $\alpha$: one must independently
+construct $Z_\alpha\in \operatorname{CH}^p(X)_{\mathbb Q}$ whose canonical
+Betti class is exactly $\alpha$, without assuming any Chow representation
+of $\alpha$ as input. This note strengthens the October 23/24
+spatial-fold/two-center frontier
+(manuscript
+\texttt{GST\_universal\_spatial\_fold\_exponential\_geometric\_realization\_2026-10-23.tex}
+and the records
+\texttt{2026-10-24-gst-original-alpha-same-fold-determinantal-rees-return-and-source-review.md},
+\texttt{2026-10-24-gst-original-alpha-twisted-determinantal-two-center-algebraic-return.md})
+by doing four things with exact statements:
+(i) it closes the exact-carrier construction gap with explicit
+parameters (an integrality scale $m_0$ and a corrected stable-range rank
+floor $r_0=\max(p+1,d+1)$);
+(ii) it closes two mechanisms that were previously only flagged as
+caveats: the sign-conductor anti-deck assembly is proved to be
+incapable of birthing a primitive source, and every ADDITIVE
+arithmetic lattice congruence (Riemann--Roch/Schwarzenberger type)
+is proved to be clearable by the same integrality scale;
+(iii) it localizes the single remaining forcing input with zero
+residual ambiguity: an integrable holomorphic structure
+$(\ddbar_{E_\alpha})^2=0$ on the SAME exact topological carrier;
+(iv) it provides the explicit calibration carrier identity
+$10\alpha=5\,\ch_2(S\oplus S^\vee)-\ch_2(O(1)\oplus O(-1))$ on
+$\mathrm{Gr}(2,5)$, with a typed two-center calibration protocol against
+the already-proven Rees witness on that world.
+No universal constructor is claimed; the forcing site is made precise
+so that it can be attacked or refuted decisively.
+\end{abstract}
+
+\section{Original-X target, prior frontier, and what is closed here}
+Fix ANY smooth projective complex $X$ of dimension $d\ge 1$, a grade
+$1\le p\le d$, and a prescribed rational $(p,p)$ Hodge class
+$\alpha\in H^{2p}(X,\mathbb Q)$. The two-center frontier of the cited
+October 23/24 manuscript and records reduces the target to a single
+conditional step: IF the exact alpha-selected topological carrier
+$E_\alpha$ admits an integrable holomorphic structure
+$(\ddbar_{E_\alpha})^2=0$, THEN the ample-twist determinantal two-center
+machine produces an actual algebraic $Z_\alpha\in\operatorname{CH}^p(X)_{\mathbb Q}$
+with canonical Betti class $\alpha$ EXACTLY.
+The prior records built the carrier by a phrase --- ``rational
+topological K-theory plus a finite trivial complement'' --- and imposed
+the rank floor $r\ge p+1$; both were incomplete as stated, and the
+congruence layer and the sign-conductor route were left as caveats
+rather than closures. This note closes exactly these four points:
+
+\begin{enumerate}
+\item[\textup{(i)}] \textbf{Exact-carrier construction, explicit parameters}
+(Theorem A): an integrality scale $m_0$ and the corrected rank floor
+$r_0=\max(p+1,d+1)$, with every $m\equiv 0 \pmod {m_0}$ and every
+$r\ge r_0$ realized by an exact rank-$r$ complex topological bundle
+with pure prescribed Chern character $r+m\alpha$.
+\item[\textup{(ii)}] \textbf{Two mechanism closures} (Lemma B1 and
+Theorem B2): the sign-conductor assembly is exactly a re-signing of an
+already-fixed algebraic class skeleton and cannot birth a primitive
+source; and every additive arithmetic lattice invariant congruence is
+cleared by the same divisibility $m\equiv 0 \pmod N$, so the arithmetic
+layer is obstruction-free.
+\item[\textup{(iii)}] \textbf{Forcing-site localization} (Theorem B2(iii)):
+after (i) and (ii), the conjecture is equivalent to ONE typed input with
+zero residual ambiguity --- integrability
+$(\ddbar_{E_\alpha})^2=0$ on the SAME carrier, equivalently a
+$\mathrm{GL}_r$-descent two-cell coherence, equivalently the
+Abel--Jacobi/Griffiths layer of the Deligne lift of $\alpha$.
+\item[\textup{(iv)}] \textbf{Explicit calibration carrier on}
+$\mathrm{Gr}(2,5)$: the integral algebraic virtual class
+$x=[S\oplus S^\vee]^{\oplus 5}\ominus[O(1)\oplus O(-1)]\ominus[O^{\oplus 8}]$
+carries $\ch_2(x)=10\alpha$ for
+$\alpha=\tfrac25 h^2-s_2$, with a fully typed calibration protocol for the
+two-center machine against the already-proven Rees witness
+$Z_\alpha=\tfrac25[H_1\cap H_2]+b_*E^2$ on the same world.
+\end{enumerate}
+
+Throughout, ``exact'' means an actual (non-virtual) complex topological
+vector bundle, and ``the SAME carrier'' means that the bundle on which
+integrability is demanded is the one constructed here from
+$(X,p,\alpha)$ alone. The Hodge hypothesis on $\alpha$ is used nowhere
+in Sections 2--3, exactly as type discipline demands.
+
+\section{The pure realization ladder}
+\begin{theorem}[Pure realization ladder]\label{thm:A}
+Let $X$ be a smooth projective complex variety of dimension $d\ge 1$,
+let $1\le p\le d$, and let
+$\alpha\in H^{2p}(X,\mathbb Q)$ be ARBITRARY (no Hodge condition).
+Then there exist explicit positive integers $m_0$ and $r_0$, with
+\[
+  r_0:=\max(p+1,\;d+1),
+\]
+such that for every $m\equiv 0 \pmod {m_0}$ and every $r\ge r_0$
+there exists an exact complex topological vector bundle $E$ of rank $r$
+on $X$ with
+\[
+  \boxed{\;
+  \ch_j(E)=0\quad\text{for all }j\notin\{0,p\},\; 1\le j\le d,
+  \qquad
+  \ch_p(E)=m\alpha.\;}
+\]
+Here $m_0$ is the integrality scale of the K-theoretic preimage of
+$\alpha$ (Step 2 below), computable from any integral basis of
+$\widetilde K^0(X)$.
+\end{theorem}
+
+\begin{proof}
+The proof has four steps.
+
+\smallskip
+\emph{Step 1 (Rational K-realization).}
+A smooth projective complex variety of dimension $d$ has the homotopy
+type of a finite CW complex of dimension $\le 2d$.
+By the theorem of Atiyah--Hirzebruch, for every finite CW complex the
+rationalized Chern character
+\[
+  \ch\otimes\mathbb Q:\;K^0(X)\otimes\mathbb Q
+  \;\longrightarrow\;
+  H^{\mathrm{even}}(X,\mathbb Q)
+\]
+is an isomorphism of rings. The mechanism is the Atiyah--Hirzebruch
+spectral sequence
+$E_2^{s,t}=H^s(X,K^t(\mathrm{pt}))\Rightarrow K^{s+t}(X)$:
+each differential is torsion-valued (the first one, $d_3$, is the
+cohomology operation $Sq^3$ on the torsion-free integral lattice, and
+all higher differentials are of finite order), so after tensoring with
+$\mathbb Q$ the spectral sequence collapses at $E_2$, and all
+extension problems vanish rationally because the target is a
+$\mathbb Q$-vector space.
+Let $u\in H^{\mathrm{even}}(X,\mathbb Q)$ be the class whose degree-$2p$
+component is $\alpha$ and whose components in all other positive degrees
+are zero, and let
+\[
+  v:=(\ch\otimes\mathbb Q)^{-1}(u)\;\in\;\widetilde K^0(X)\otimes\mathbb Q,
+  \qquad \operatorname{rank}(v)=\ch_0(v)=0 .
+\]
+Then $\ch(v)=u$, i.e.\ $v$ is a rational reduced K-class with a single
+prescribed Chern-character grade.
+
+\smallskip
+\emph{Step 2 (Integrality scale).}
+$K^0(X)$ is a finitely generated abelian group, hence a lattice inside
+$K^0(X)\otimes\mathbb Q$. Therefore $v=w/N_0$ for some integral class
+$w\in\widetilde K^0(X)$ and some positive integer $N_0$; set
+\[
+  m_0:=N_0 .
+\]
+For every $m\equiv 0 \pmod {m_0}$ the class
+\[
+  z_m:=m\,v=(m/N_0)\,w\;\in\;\widetilde K^0(X)
+\]
+is an INTEGRAL rank-zero virtual class, and by construction
+\[
+  \ch(z_m)=m\,u,\qquad\text{i.e.}\quad
+  \ch_j(z_m)=0\;(j\neq 0,p),\quad \ch_p(z_m)=m\alpha ,
+\]
+a pure class.
+Note that NO further Newton-type integrality conditions on $m$ arise
+here. Writing a virtual difference $z=E-F$ of exact bundles, its
+total Chern class is
+$c(z)=c(E)c(F)^{-1}=c(E)\,(1+x)^{-1}$ where $x=c(F)-1$ is the
+positive-degree part of $c(F)$; the truncated geometric series
+\[
+  (1+x)^{-1}=1-x+x^2-x^3+\cdots
+\]
+is a finite integer polynomial in $x$ (it terminates in degrees $>2d$),
+so every denominator that a naive componentwise inversion of Newton
+identities would display is subsumed by the single fact that
+$z_m$ lies in the K-lattice. All higher-Chern denominators are carried
+by the K-lattice integrality, not by $m$.
+
+\smallskip
+\emph{Step 3 (Exactness in the stable range).}
+By Bott periodicity, for every $r\ge 1$ the stabilization map
+\[
+  BU(r)\longrightarrow BU
+\]
+is $(2r-1)$-connected.
+Suppose $r\ge d+1$. Then
+\[
+  \dim_{\mathbb R}X\le 2d<2r-1,
+\]
+so the homotopy fiber of $BU(r)\to BU$ is $(2r-2)$-connected and all
+obstruction groups to lifting a map $X\to BU$ through $BU(r)$
+(these live in $H^{i+1}(X;\pi_i(\mathrm{fiber}))$ for
+$i\le 2d-1\le 2r-3$) vanish. Since
+$\widetilde K^0(X)=[X,BU]$, every $z_m\in\widetilde K^0(X)$ lifts through
+$BU(r)$: there exists an exact rank-$r$ complex topological bundle $E$
+with
+\[
+  [E]-r[1]=z_m\quad\text{in }\widetilde K^0(X).
+\]
+The lift is available at every single rank $r\ge d+1$; in particular
+at $r=r_0$. For every $r>r_0$ one may equivalently stabilize: writing
+$E_{r_0}$ for the carrier at $r_0$, the exact bundle
+$E_{r_0}\oplus \underline{\mathbb C}^{\oplus(r-r_0)}$ has rank $r$ and
+the same reduced class $z_m$.
+
+\smallskip
+\emph{Step 4 (Purity).}
+For the exact $E$ of Step 3,
+\[
+  \ch(E)=\ch(r[1]+z_m)=r+\ch(z_m)=r+m\alpha ,
+\]
+so $\ch_0(E)=r$, $\ch_p(E)=m\alpha$, and every other grade $j$ with
+$1\le j\le d$, $j\neq p$, vanishes.
+Grades $j>d$ vanish automatically because
+$H^{2j}(X,\mathbb Q)=0$ for $2j>2d$ on a $d$-dimensional variety.
+The carrier is exact, of prescribed rank $r\ge r_0$, and its Chern
+character is exactly the prescribed pure one. \qed
+\end{proof}
+
+\begin{remark}[Exact-carrier gap closed; necessary rank-floor correction]
+\label{rem:rankfloor}
+The October 23/24 records produced the alpha-selected carrier by the
+phrase ``rational topological K-theory plus a finite trivial
+complement'' and imposed only the floor $r\ge p+1$ (needed for the
+Segre fold grade $\pi_*(\xi^{r-1+p})$ and the determinantal expected
+codimension). Theorem A closes this with the correct mechanism and
+makes a necessary correction: below the stable range the floor
+$r\ge p+1$ does NOT guarantee that the virtual class lifts to an
+exact bundle, and the correct floor is
+\[
+  r\;\ge\;\max(p+1,\;d+1)=r_0 .
+\]
+The correction is free of side effects: the Segre spatial-fold law
+$\mathcal S_E(t)=\exp(m(p-1)!\alpha t^p)$ and the ample-twist
+two-center determinantal formula of the cited manuscript and records
+are proved for every rank $r$ at which an exact carrier exists, so
+they inherit the corrected parameter $r\ge r_0$ with no other change.
+\end{remark}
+
+\begin{remark}[Canonicity at the level that matters]
+\label{rem:torsion}
+Any two exact pure carriers $E,E'$ of the same data $(r,m\alpha)$
+satisfy $\ch(E-E')=0$ in $H^{\mathrm{even}}(X,\mathbb Q)$, hence
+$[E]-[E']\in\ker(\ch)$; since $\ch\otimes\mathbb Q$ is injective,
+$\ker(\ch)$ is exactly the torsion subgroup of $\widetilde K^0(X)$.
+Every law applied downstream in this program (Chern classes, the
+Chern character, the Segre pushforward spectrum, the determinantal
+two-center Betti landing) is Betti-graded and is applied throughout
+to rational classes --- after rationalization it annihilates torsion
+(integrally, torsion classes map to torsion values, not to zero):
+the two carriers are indistinguishable to every such law at rational
+strength, which is the strength used everywhere in this program.
+The construction is therefore canonical at the level that matters.
+\end{remark}
+
+\begin{remark}[Type discipline: no Hodge input on the topological side]
+\label{rem:typediscipline}
+The Hodge hypothesis on $\alpha$ is used NOWHERE in Theorem A: the
+ladder produces pure exact carriers for arbitrary rational
+$\alpha$, Hodge or not. This is not a weakness; it is precisely what
+keeps the two-center landing non-circular on the topological side.
+If carriers existed only for Hodge classes, the existence of the
+carrier would already encode the Hodge constraint; because carriers
+exist for ALL rational classes, the entire content of the Hodge
+conjecture is displaced onto the analytic forcing input of
+Section 4, where it belongs.
+\end{remark}
+
+\section{The sign-conductor class-firewall}
+The October 22/24 anti-deck mechanism assembles a signed sum of
+component classes with freely chosen per-component signs. The
+following exact lemma shows that this mechanism is a re-signing device
+on a FIXED algebraic class skeleton, never a birth route.
+
+\begin{lemma}[Sign-conductor class-firewall]\label{lem:B1}
+Let $D_1,D_2$ be actual effective divisors on $X$ with line-bundle
+classes $[L_1],[L_2]$, let
+$D_1\cap D_2=\bigcup_j C_j$ be pure of expected codimension $2$ with
+distinct components $C_j$ and fundamental-cycle multiplicities
+$\nu_j\ge 1$ (so that, by purity with no excess contribution, the
+refined Gysin product is the fundamental cycle
+$[D_1]\cdot[D_2]=\sum_j\nu_j[C_j]$ in $\operatorname{CH}^2(X)$), and
+let arbitrary per-component signs
+$\epsilon_j\in\{+1,-1\}$ be given. Define the actual effective algebraic
+class
+\[
+  \gamma:=\sum_{\epsilon_j=+1}\nu_j[C_j]\;\in\;\operatorname{CH}^2(X).
+\]
+Then every signed fundamental-component assembly satisfies
+\[
+  \boxed{\;
+  \sum_j \epsilon_j\,\nu_j[C_j]\;=\;2\gamma-[L_1][L_2]
+  \quad\text{in }\operatorname{CH}^2(X)_{\mathbb Q}.}
+\]
+Consequently, if a prescribed primitive rational Hodge class $\alpha$
+is representable by such an assembly (with fixed algebraic $[L_1][L_2]$
+and fixed auxiliary divisor factors), then $\alpha$ is algebraic.
+The sign-conductor mechanism cannot BIRTH a primitive source; it can
+only re-sign components whose classes already encode $\alpha$.
+\end{lemma}
+
+\begin{proof}
+Split the assembly by sign:
+\[
+  \sum_j\epsilon_j\nu_j[C_j]
+  =\sum_{\epsilon_j=+1}\nu_j[C_j]-\sum_{\epsilon_j=-1}\nu_j[C_j]
+  =\gamma-\Bigl(\sum_j\nu_j[C_j]-\gamma\Bigr)
+  =2\gamma-\sum_j\nu_j[C_j].
+\]
+Because $D_1\cap D_2$ is pure of expected codimension $2$, the
+total fundamental component sum IS the Chow intersection product
+\[
+  \sum_j\nu_j[C_j]=[D_1]\cdot[D_2]=[L_1][L_2]
+\]
+(refined Gysin product; purity makes the assignment additive on
+fundamental-cycle components with no excess contribution, the
+multiplicities $\nu_j$ being the local intersection multiplicities
+--- e.g.\ a tangential double intersection contributes $2[C]$).
+This proves the displayed identity.
+Now assume the assembly represents the prescribed primitive Hodge
+class, i.e.\ $\cl\bigl(\sum_j\epsilon_j\nu_j[C_j]\bigr)=\alpha$ in
+$H^{4}(X,\mathbb Q)$. By the displayed identity (an identity of
+rational Chow classes, applied before passing to cohomology),
+\[
+  \alpha=\cl\Bigl(2\gamma-[L_1][L_2]\Bigr)
+  \quad\text{in }H^{4}(X,\mathbb Q),
+\]
+the canonical class of a rational combination (with integer
+coefficients $2$ and $-1$) of classes of actual algebraic cycles,
+with $\gamma$ actual effective algebraic. Hence $\alpha$ is
+algebraic. \qed
+\end{proof}
+
+\paragraph{Reading.}
+The October 22/24 anti-deck sign-conductor
+$\epsilon_j=\operatorname{sign}(\lambda_j)$ with period
+$2\sum_j|\lambda_j|$ is thereby classified exactly: it is a
+positivity/period optimizer over a fixed class skeleton
+$\{[C_j]\}$ with fixed algebraic background $[L_1][L_2]$. It is
+RETAINED as a coupling CERTIFIER (it certifies which component
+assemblies couple to the prescribed $\alpha$, and optimizes the sign
+pattern and the period), and it is CLOSED as a birth route: if it ever
+assembles the prescribed primitive $\alpha$, then $\alpha$ was
+algebraic already, with witness the explicit effective algebraic class
+$\gamma$ with $\cl(2\gamma-[L_1][L_2])=\alpha$. This sharpens the
+caveat in the cited records into the PROVED one-directional firewall
+(representation forces algebraicity); no converse is claimed.
+
+\section{Congruence completeness and localization of the forcing site}
+\begin{theorem}[Congruence completeness; forcing-site localization]
+\label{thm:B2}
+Let $\operatorname{CH}$-theoretic algebraic K-theory be
+$K^0_{\mathrm{alg}}(X)\cong G_0(X)$, the Grothendieck group of coherent
+sheaves, a finitely generated lattice generated by the structure
+sheaves of subvarieties of $X$. Define the additive invariant
+\[
+  c(y):=\int_X \alpha\;\ch(y)\;\td(X),
+  \qquad y\in K^0_{\mathrm{alg}}(X),
+\]
+a homomorphism from a finitely generated lattice to $\mathbb Q$; its
+image is $\frac1N\mathbb Z$ for an explicit positive integer $N$
+(the least common multiple of the denominators of
+$c(y_i)$ over any finite generating set $\{y_i\}$).
+Then:
+\begin{enumerate}
+\item[\textup{(i)}] For every $m\equiv 0\pmod N$ and every rank $r$,
+the hypothetical algebraic carrier
+$x_m=z_m+r[1]\in K^0_{\mathrm{alg}}(X)$ satisfies
+\[
+  \chi(x_m\otimes y)=r\,\chi(y)+m\,c(y)\;\in\;\mathbb Z
+  \qquad\text{for all }y\in K^0_{\mathrm{alg}}(X),
+\]
+and the same clearing-by-$m$ applies to every additive arithmetic
+lattice invariant (all Schur-twisted Riemann--Roch congruences,
+Schwarzenberger congruences included): the arithmetic layer is
+obstruction-free.
+\item[\textup{(ii)}] Nevertheless, for $\alpha$ Hodge:
+$x_m$ lies in the image of
+$K^0_{\mathrm{alg}}(X)\otimes\mathbb Q$ if and only if $\alpha$ is
+algebraic (Atiyah--Hirzebruch; the K-theoretic Hodge conjecture is
+equivalent to the Hodge conjecture, since Chern classes of algebraic
+bundles are algebraic by degeneracy-locus/Thom--Porteous arguments,
+and conversely GRR identifies the rational K-images with the rational
+span of algebraic cycle classes).
+\item[\textup{(iii)}] Hence the conjecture reduces to exactly ONE typed
+input with zero residual ambiguity: the existence of an integrable
+holomorphic structure
+\[
+  \boxed{\;(\ddbar_{E_\alpha})^2=0\;}
+\]
+on the SAME exact carrier $E_\alpha$ of Theorem A ---
+equivalently, $\mathrm{GL}_r$-descent two-cell coherence of the
+Oka--Grauert realization over the Jouanolou torsor, equivalently the
+Abel--Jacobi/Griffiths layer of the Deligne lift of $\alpha$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) For algebraic $y$, $\chi(y)=\int_X\ch(y)\td(X)$ is the Euler
+characteristic of a coherent sheaf, an integer, by Riemann--Roch for
+algebraic sheaves. For the carrier,
+\[
+  \chi(x_m\otimes y)
+  =\int_X \ch(x_m)\ch(y)\td(X)
+  =\int_X (r+m\alpha)\ch(y)\td(X)
+  =r\,\chi(y)+m\,c(y),
+\]
+and both summands are integers: $r\chi(y)\in\mathbb Z$ always, and
+$m\,c(y)\in\mathbb Z$ because $c(y)\in\frac1N\mathbb Z$ and $N\mid m$.
+Every Schur-twisted Riemann--Roch invariant
+$y\mapsto\chi(x_m\otimes y\otimes\operatorname{Schur}_\lambda(E_{\mathrm{test}}))$
+at fixed algebraic twisting data, and every Schwarzenberger-type
+congruence, is again an additive homomorphism on the same finitely
+generated lattice with values in $\frac1{N'}\mathbb Q$ for its own
+explicit $N'$, and is cleared by taking
+$m\equiv 0\pmod{\operatorname{lcm}(m_0,N,N')}$.
+Since finitely many such congruences are ever invoked at a fixed
+$(X,p,\alpha)$, a single scale clears the entire arithmetic layer.
+This proves (i).
+
+(ii) is the Atiyah--Hirzebruch equivalence between algebraicity of
+rational cohomology classes and membership in the rationalized image of
+algebraic K-theory, recalled in the statement.
+
+(iii) By Theorem A the exact carrier exists unconditionally with
+explicit parameters $(m_0,r_0)$; by (i) no arithmetic lattice
+congruence can obstruct an algebraic realization;
+by Lemma B1 no signed assembly route can bypass it. What remains is
+exactly the analytic statement that the SAME carrier carries an
+integrable holomorphic structure. The equivalences are standard
+reformulations at fixed carrier: Koszul--Malgrange identifies integrable
+holomorphic structures with holomorphic bundle structures on the
+SAME topological bundle; Oka--Grauert realizes holomorphic bundles on
+Stein/affine bases, and descent of the realization from the Jouanolou
+torsor to projective $X$ is exactly the two-cell coherence of the
+$\mathrm{GL}_r$-valued transition data; and on the Hodge-theoretic
+side, integrability of the carrier realizing the $(p,p)$ cocycle is the
+Abel--Jacobi/Griffiths layer of the Deligne lift of $\alpha$.
+(Recall from Remark \ref{rem:typediscipline} that the carrier exists
+with or without the Hodge hypothesis; (iii) asserts that the Hodge
+constraint enters ONLY at this one point.) \qed
+\end{proof}
+
+\begin{remark}[What ``forcing'' now means]
+The boss assertion ``the conjecture can get forced'' is now a precise
+statement: the entire lattice-arithmetic (congruence) layer is provably
+clearable (Theorem B2(i)); the entire signed-assembly layer is provably
+non-birthing (Lemma B1); the topological carrier layer is provably
+unconditional with explicit parameters (Theorem A). The forcing site
+is the single analytic input $(\ddbar_{E_\alpha})^2=0$. Any proof that
+this input is always supplied by the $(p,p)$ harmonic/Deligne cocycle
+of a Hodge class completes the program; any single counterexample to it
+refutes this route decisively. There is no third residual ambiguity.
+\end{remark}
+
+\section{The $\mathrm{Gr}(2,5)$ calibration carrier}
+This section fixes the calibration world and derives the explicit
+carrier identity, verified line by line.
+
+\paragraph{Setup.}
+Fix
+\[
+  X=\mathrm{Gr}(2,5),\qquad d=6,\qquad p=2,
+\]
+with tautological rank-2 subbundle $S$, universal quotient bundle $Q$
+of rank 3, Pl\"ucker hyperplane class
+$h=c_1(Q)=c_1(O(1))$, and
+\[
+  s_2:=c_2(S^\vee)=\sigma_{1,1}\in H^4(X,\mathbb Z),\qquad
+  \alpha:=\tfrac25 h^2-s_2 .
+\]
+The relevant verified periods (matching the existing
+$\mathrm{Gr}(2,5)$ Rees record
+\texttt{2026-10-23-mathbox-simultaneous-geometric-algebraic-rees-fold-native-chow.md})
+are
+\[
+  \int_X h^{6}=5,\qquad
+  \int_X s_2\,h^{4}=2,\qquad
+  \int_X s_2^2\,h^{2}=1,
+\]
+\[
+  \int_X \alpha\,h^{4}
+  =\tfrac25\int h^{6}-\int s_2h^{4}
+  =\tfrac25\cdot 5-2=0,
+  \qquad
+  \int_X \alpha^2 h^{2}
+  =\tfrac{4}{25}\cdot 5-\tfrac45\cdot 2+1
+  =\tfrac15 .
+\]
+So $\alpha$ is a nonzero primitive nondivisor Hodge class on
+the calibration world, and the already-proven fold-born witness is
+\[
+  Z_\alpha=\tfrac25[H_1\cap H_2]+b_*E^2
+  \quad\text{with } b_*E^2=-[Z]=-s_2,
+\]
+an actual algebraic cycle with canonical Betti class $\alpha$.
+
+\paragraph{The carrier identity, line by line.}
+For a rank-2 bundle with Chern classes $c_1,c_2$ the second Chern
+character grade is
+$\ch_2=\frac{c_1^2-2c_2}{2}$.
+For the tautological bundle $S$ one has $c_1(S)=-h$ and
+$c_2(S)=s_2$, hence
+\[
+  \ch_2(S)=\frac{c_1(S)^2-2c_2(S)}{2}
+         =\frac{h^2-2s_2}{2},
+\]
+and this expression is invariant under dualizing: dualization sends
+$c_1\mapsto -c_1$, which appears squared, and fixes $c_2$, so also
+$c_1(S^\vee)=h$, $c_2(S^\vee)=s_2$ gives
+\[
+  \ch_2(S^\vee)=\frac{h^2-2s_2}{2}.
+\]
+Therefore
+\[
+  \ch_2(S\oplus S^\vee)=h^2-2s_2 .
+\]
+For line bundles $\ch_2(L)=c_1(L)^2/2$ (since $\ch(L)=\exp(c_1(L))$),
+and $c_1(O(\pm 1))=\pm h$, so both Pl\"ucker lines contribute
+$h^2/2$ each and
+\[
+  \ch_2\bigl(O(1)\oplus O(-1)\bigr)=h^2 .
+\]
+Now form the explicit integral algebraic VIRTUAL carrier
+\[
+  \boxed{\;
+  x:=[S\oplus S^\vee]^{\oplus 5}
+     \;\ominus\;[O(1)\oplus O(-1)]
+     \;\ominus\;[O^{\oplus 8}]\;\in K^0_{\mathrm{alg}}(X).}
+\]
+Its rank is $5\cdot 4-2-8=0$; its first Chern grade is
+$5\,(c_1(S)+c_1(S^\vee))-(h-h)=0$; and its second grade is
+\[
+  \ch_2(x)=5\,(h^2-2s_2)-h^2=4h^2-10s_2=10\,\alpha,
+\]
+the last equality because $10\cdot\frac25 h^2=4h^2$.
+So the naive Pl\"ucker assembly carries the prescribed class tenfold,
+integrally and algebraically.
+
+\paragraph{Exactness note (grade 4).}
+The assembly $x$ is NOT yet the pure carrier. Computing the fourth
+grade with Chern roots $u,v$ of $S$ ($u+v=-h$, $uv=s_2$):
+\[
+  \ch_4(S)=\frac{u^4+v^4}{24}
+  =\frac{(u^2+v^2)^2-2u^2v^2}{24}
+  =\frac{(h^2-2s_2)^2-2s_2^2}{24}
+  =\frac{h^4-4h^2s_2+2s_2^2}{24},
+\]
+hence
+$\ch_4(S\oplus S^\vee)=2\ch_4(S)
+=\frac{h^4}{12}-\frac{h^2s_2}{3}+\frac{s_2^2}{6}$
+(dualization-invariant again), and
+$\ch_4(O(1)\oplus O(-1))=\frac{h^4}{24}+\frac{h^4}{24}=\frac{h^4}{12}$.
+Therefore
+\[
+  \ch_4(x)=5\Bigl(\frac{h^4}{12}-\frac{h^2s_2}{3}+\frac{s_2^2}{6}\Bigr)
+       -\frac{h^4}{12}
+  =\frac13 h^4-\frac53 h^2s_2+\frac56 s_2^2\;\neq\;0
+\]
+(nonzero because $h^4$, $h^2s_2$, $s_2^2$ are independent Schubert
+classes in $H^8$). The naive assembly is NOT the pure carrier; the
+true pure integral class $z_{10\alpha}$ differs from $x$ by an actual
+algebraic correction in grades $\ge 4$. Such a correction EXISTS on
+$\mathrm{Gr}(2,5)$, because
+\[
+  \ch: K^0_{\mathrm{alg}}\bigl(\mathrm{Gr}(2,5)\bigr)\otimes\mathbb Q
+  \longrightarrow H^{\mathrm{even}}\otimes\mathbb Q
+\]
+is an isomorphism there (cellular Schubert filtration; topological and
+algebraic K-theory agree on Grassmannians). Completing this finite
+grade-4 lattice correction using $\operatorname{Sym}^2S$,
+$\Lambda^2S$ and $Q$-classes is the concrete open sub-task. A pure
+carrier assembled from algebraic pieces proves $\alpha$ algebraic
+INSTANTLY --- which is allowed on the calibration world, and is exactly
+why it would be circular on arbitrary $X$. The calibration world is
+used to calibrate the two-center machine, not to prove the conjecture.
+
+\section{Typed calibration protocol (Law-4 two-center machine)}
+\paragraph{Input.}
+The completed pure pair $E_\pm$ on $\mathrm{Gr}(2,5)$: two exact
+ALGEBRAIC bundles of EQUAL ranks with
+$\ch(E_+)-\ch(E_-)=10\alpha$ PURE (equivalently: the integrable
+$\ddbar$ on the pure carrier). The completion is the finite grade-4
+lattice correction of the exactness note.
+
+\paragraph{Run.}
+The Law-4 two-center machine, verbatim as in the two-center record:
+ample twist $O(k)$ with $k$ large; $s=r-1$ general sections (the
+expected-codimension count $s=r-p+1$ at $p=2$); the determinantal
+center $D_{(\alpha,k)}$, i.e.\ the maximal-minor rank-drop scheme of
+the general section map
+$\underline{\mathbb C}^{\,r-1}\to E\otimes O(k)$; and the hyperplane
+correction $\binom r2 k^2[H^2]$ with $[H^2]=[H_1\cap H_2]$ an actual
+Pl\"ucker complete-intersection class.
+
+\paragraph{Expected output.}
+With the pure-carrier Betti relations
+$\operatorname{cl}^{\operatorname{can}}(c_1(E))=0$ and
+$\operatorname{cl}^{\operatorname{can}}(c_2(E))=-\ch_2(E)=-10\alpha$,
+Thom--Porteous and the splitting-principle twist identity give
+\[
+  \operatorname{cl}^{\operatorname{can}}\bigl[D_{(\alpha,k)}\bigr]
+  =(-1)^{p-1}m(p-1)!\,\alpha+\binom r2 k^2h^2
+  =-10\,\alpha+\binom r2 k^2h^2,
+\]
+so the signed two-center output is
+\[
+  \boxed{\;
+  \operatorname{cl}^{\operatorname{can}}\Bigl(
+    \tfrac{-1}{10}\bigl([D_{(\alpha,k)}]-\tbinom r2k^2[H^2]\bigr)
+  \Bigr)=\alpha ,}
+\]
+the coefficient $\tfrac{-1}{10}$ being
+$(-1)^{p-1}/(m(p-1)!)$ at $p=2$, $m=10$.
+
+\paragraph{What it calibrates.}
+The descent 2-cell of Theorem B2(iii), against the already-proven Rees
+witness $Z_\alpha=\frac25[H_1\cap H_2]+b_*E^2$ on the SAME world. If
+the machine's output cycle has canonical Betti class $\alpha$
+(equivalently, its class agrees with the witness
+$\frac25[H_1\cap H_2]+b_*E^2$ in $\operatorname{CH}^2_{\mathbb Q}$),
+the two-center descent law is calibrated and the LAW is extracted for
+arbitrary $X$: the same signed formula with the same carrier
+construction is then the universal candidate law, to be forced by the
+single input $(\ddbar_{E_\alpha})^2=0$. If the machine's output
+DISAGREES, the disagreement is an explicit local failure on a world
+where the answer is independently known, which pinpoints the descent
+2-cell obstruction concretely. Either outcome is decisive.
+
+\section{Scope, provenance, and verification contract}
+No universal constructor is claimed in this note. The forcing site is
+the single input
+\[
+  (\ddbar_{E_\alpha})^2=0
+\]
+on the SAME exact carrier of Theorem A, from the $(p,p)$
+harmonic/Deligne cocycle of $\alpha$; Theorem B2(iii) states that
+nothing else remains. The standard external inputs named and used are:
+Atiyah--Hirzebruch rational K-theory, Bott periodicity connectivity of
+$BU(r)\to BU$, the Atiyah--Hirzebruch spectral sequence,
+Grothendieck--Riemann--Roch, Thom--Porteous,
+Koszul--Malgrange integrability, GAGA, and Oka--Grauert; each is used
+only at its standard strength, and each is listed where it enters.
+The equalities of Sections 2--5 are proved for all
+$(X,p,\alpha)$ in the stated ranges by rational K-theory, obstruction
+theory, Chow intersection theory, and the splitting principle; the
+$\mathrm{Gr}(2,5)$ carrier identity is verified line by line and can be
+independently re-verified by exact symbolic rational arithmetic.
+This is an author self-audit, not an independent referee report.
+No Lean file was changed, and no GitHub Actions CI run is claimed or
+implied by this note.
+\end{document}

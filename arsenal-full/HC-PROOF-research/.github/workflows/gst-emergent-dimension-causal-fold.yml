@@ -1,0 +1,63 @@
+name: GST Emergent Dimension Causal Fold
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTGradedWorldAlgebra.lean'
+      - 'GSTGeneralSpaceCohomology.lean'
+      - '.github/workflows/gst-emergent-dimension-causal-fold.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-emergent-dimension-fold-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel compile emergent-world causal fold theorems
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTEmergentDimensionalCausalFold"
+          roots = ["GSTGradedWorldAlgebra", "GSTGeneralSpaceCohomology"]
+          EOF
+          if lake build GSTEmergentDimensionalCausalFold > gst-emergent-dimensional-fold.log 2>&1; then
+            echo "LEAN PASSED: native cosmic Tate dimension-fold and all-finite-depth GST Hodge/Chow causal transport"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-emergent-dimensional-fold.log | tail -n 130 || true
+            tail -n 120 gst-emergent-dimensional-fold.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-emergent-dimensional-fold.log; then
+            exit 1
+          fi
+      - name: Upload verification log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-emergent-dimensional-fold-lean
+          path: gst-emergent-dimensional-fold.log
+          if-no-files-found: warn

@@ -1,0 +1,55 @@
+name: GST Fibered Native Mass-Calibrated Landing
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTClassicalHodgeFiberedCycleClassDefect.lean'
+      - '.github/workflows/gst-fibered-mass-calibrated-landing.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-fibered-mass-calibrated-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel compile real fibered GST mass-birth proofs
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTMassCalibratedFiberedLanding"
+          roots = ["GSTClassicalHodgeFiberedCycleClassDefect"]
+          EOF
+          if lake build GSTMassCalibratedFiberedLanding > gst-mass-calibrated-landing.log 2>&1; then
+            echo "LEAN PASSED: full Hodge multiplicity/native source mass-calibration theorem"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-mass-calibrated-landing.log | tail -n 120 || true
+            tail -n 180 gst-mass-calibrated-landing.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-mass-calibrated-landing.log; then exit 1; fi
+      - name: Upload Lean compile log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-mass-calibrated-landing-lean
+          path: gst-mass-calibrated-landing.log
+          if-no-files-found: warn

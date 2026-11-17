@@ -1,0 +1,34 @@
+name: GST 406 Deep Research Exact Origin Threshold Lean Kernel
+on:
+  push:
+    branches: [gpt6/problem406-exact-origin-gate-research-20261030]
+    paths:
+      - GSTProblem406BinaryOriginExponentScale.lean
+      - .github/workflows/gpt6_406_exact_origin_threshold.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerDirectResidue
+      - name: Kernel check new all-K exact binary identity and scale transfer
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406BinaryOriginExponentScale.lean 2>&1 | tee exact-origin.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' exact-origin.log
+          grep -F 'physical_source_exact_binary_threshold' exact-origin.log
+          grep -F 'physical_scales_at_three_step' exact-origin.log
+          echo GST_EXACT_ORIGIN_LEAN_KERNEL_PASS=1

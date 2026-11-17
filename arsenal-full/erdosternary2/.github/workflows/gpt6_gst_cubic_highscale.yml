@@ -1,0 +1,33 @@
+name: GST cubic high-scale physical row27 original HGate
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [GSTWorldtraceCubicPhysicalEscape49.lean, .github/workflows/gpt6_gst_cubic_highscale.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  highscale:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build original GST thirdWave and cubic Worldtrace dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerThirdWave GSTFourPowerDirectCreationMaster
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceQuadraticBlockLift.olean GSTWorldtraceQuadraticBlockLift.lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCubicBlockLift.olean GSTWorldtraceCubicBlockLift.lean
+      - name: Kernel check 35725 and 35726 physical row27 plus infinite multiplier class
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceCubicPhysicalEscape49.lean 2>&1 | tee cubic-highscale.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' cubic-highscale.log
+          echo GST_CUBIC_HIGHSCALE_ROW27_ORIGINAL_HGATE_PASS=1

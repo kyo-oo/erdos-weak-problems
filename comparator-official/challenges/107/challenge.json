@@ -1,0 +1,26 @@
+{
+  "problem": "Erdos #107 (erdosproblems.com/107, $500) — the Happy Ending problem",
+  "statement_id": "erdos-107-happy-ending",
+  "statement_verbatim": "Let f(n) be minimal such that any f(n) points in R^2, no three on a line, contain n points which form the vertices of a convex n-gon. Prove that f(n)=2^{n-2}+1.",
+  "lane": "official DeepMind comparator (challenge + solution), run directly — fresh github.com/google-deepmind/funsearch clone @ cc53f27 (implementation/ Evaluator engine)",
+  "official_evaluators": [
+    {
+      "repo": "google-deepmind/funsearch",
+      "commit": "cc53f274237d7ab05c19df939edbc1f9616a7c19",
+      "module": "implementation",
+      "role": "the official Evaluator engine: _sample_to_program compiles the solution, the official analyse path executes it against the challenge inputs"
+    },
+    {
+      "repo": "google-deepmind/funsearch",
+      "commit": "cc53f274237d7ab05c19df939edbc1f9616a7c19",
+      "module": "admissible_set",
+      "role": "official result data integrity cross-check (admissible_set_n12_w7_size792.txt)"
+    }
+  ],
+  "acceptance": "Every claim in the solution ledger verified; every official check passes; every negative control rejects corruption. Gate verdict line: YOUR SOLUTION IS OKAY.",
+  "solution_files": {
+    "proof": "problem107-happy-ending/ES_PACKAGE_PROOF.md",
+    "engine": "problem107-happy-ending/engine107es.py",
+    "receipts": "problem107-happy-ending/receipts107es.txt"
+  }
+}

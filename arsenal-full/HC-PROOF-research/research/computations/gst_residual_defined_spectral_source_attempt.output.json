@@ -1,0 +1,273 @@
+{
+  "constructor_tested": "Prescribed primitive residual -> Hermitian spectral symbol on Omega^2 -> actual algebraic image bundle -> original-X smooth incidence center",
+  "coefficient_domain": "Q, exact Fraction matrices and exterior products",
+  "symbol_basis": [
+    "12",
+    "13",
+    "14",
+    "23",
+    "24",
+    "34"
+  ],
+  "symbol": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "spectral_ranks": [
+    1,
+    1,
+    4
+  ],
+  "symbol_independently_recovered_from_Hodge_tensor": true,
+  "nonzero_fiber_operator_detection": 2,
+  "actual_primitive_residual_square": 8,
+  "polarization_top_degree": 24,
+  "spectral_bundle_center_period_checks": [
+    {
+      "rank": 1,
+      "twist": -7,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 1,
+      "twist": -1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 1,
+      "twist": 0,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 1,
+      "twist": 1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 1,
+      "twist": 3,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 1,
+      "twist": 11,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 2,
+      "twist": -7,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 2,
+      "twist": -1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 2,
+      "twist": 0,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 2,
+      "twist": 1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 2,
+      "twist": 3,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 2,
+      "twist": 11,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 4,
+      "twist": -7,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 4,
+      "twist": -1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 4,
+      "twist": 0,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 4,
+      "twist": 1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 4,
+      "twist": 3,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 4,
+      "twist": 11,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 6,
+      "twist": -7,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 6,
+      "twist": -1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 6,
+      "twist": 0,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 6,
+      "twist": 1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 6,
+      "twist": 3,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 6,
+      "twist": 11,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 8,
+      "twist": -7,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 8,
+      "twist": -1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 8,
+      "twist": 0,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 8,
+      "twist": 1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 8,
+      "twist": 3,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 8,
+      "twist": 11,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 12,
+      "twist": -7,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 12,
+      "twist": -1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 12,
+      "twist": 0,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 12,
+      "twist": 1,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 12,
+      "twist": 3,
+      "native_primitive_period": 0
+    },
+    {
+      "rank": 12,
+      "twist": 11,
+      "native_primitive_period": 0
+    }
+  ],
+  "basepoint_free_kernel_twists_checked": [
+    1,
+    24
+  ],
+  "trace_cancellation_integrability_test": {
+    "full_obstruction_matrix_nonzero": true,
+    "trace_powers_checked": [
+      1,
+      12
+    ],
+    "all_checked_traces_zero": true
+  },
+  "outcome": "The residual-defined spectral bundles exist algebraically but have zero primitive Chern period; this specific constructor fails the requested detector test.",
+  "unrestricted_derivation": "Constant projectors in the trivial translation-invariant Omega^2 bundle have trivial image bundles. Their polarized twists and basepoint-free evaluation kernels have Chern character in Q[theta], killed by the displayed primitive residual.",
+  "non_claims": [
+    "No counterexample to rational Hodge algebraicity",
+    "No no-go for other bundles, nonparallel incidence or component-changing constructions",
+    "A nonintegrable chosen connection does not imply its underlying bundle admits no integrable structure",
+    "The matrix symbol is normalized by a harmless nonzero scalar; no native Chern class is identified with its matrix eigenvalues"
+  ]
+}

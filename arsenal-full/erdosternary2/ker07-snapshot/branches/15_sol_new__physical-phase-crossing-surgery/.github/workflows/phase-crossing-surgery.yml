@@ -1,0 +1,42 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0717 / 1132
+#    Path         : branches/sol_physical-phase-crossing-surgery/.github/workflows/phase-crossing-surgery.yml
+#    Ref          : origin/sol/physical-phase-crossing-surgery
+#    First-commit : 2026-08-17 00:36:05 +0530  (9452780)
+#    Last-commit  : 2026-08-17 12:39:43 +0530  (76e441b)
+#    Total commits: 2
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/2] 2026-08-17 00:36:05 +0530  9452780  (ker07-dev)
+#        Add isolated canonical crossing verification workflow
+# [02/2] 2026-08-17 12:39:43 +0530  76e441b  (ker07-dev)
+#        Kernel-check pathwise BIG1 projector chord
+# ======================================================================
+
+name: Canonical Phase Crossing Surgery
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-crossing:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Compile canonical phase crossing surgery scratch
+        run: lake build CanonicalPhaseCrossingSurgeryScratch
+      - name: Compile pathwise BIG1 projector chord scratch
+        run: lake build HandwrittenBig1PathProjectorScratch

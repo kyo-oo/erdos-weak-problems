@@ -1,0 +1,540 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black]{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{obstruction}[theorem]{Obstruction}
+
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\NS}{\operatorname{NS}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\WQ}{W_{\Q}}
+\newcommand{\vol}{\mathrm{vol}}
+\newcommand{\FMc}{\widehat\Phi}
+
+\title{The Decision Attempt in the Charge Frame:\\
+Both Polarities at Their Certified Obstruction Points,\\
+Sector Rigidity of the Fourier--Mukai Transform (Lemma W7),\\
+and the Funnel to the Vertex\\
+\large GST Hodge campaign, Cycle 4, Strike 2 (the decision attempt; route (b), ULTRA MODE)}
+\date{2026-10-26}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+\noindent
+Cycle 4 strike 1 delivered the complete wall system on the pair channel
+(Lemma W0, Theorems W4, W5, W6) and compressed the decision frame to a single
+rigidity question with both polarities armed. This strike EXECUTES the decision
+attempt in the charge frame and drives both polarities to their certified
+obstruction points. On the NO route (charge rigidity) the six attack lines
+(moduli-connectedness, corridor-invisibility kill chains, FM-closure via
+product worlds, isogeny scaling, End-mass twisting, lattice/parity obstructions)
+each die at a named committed wall, and the deaths are structural: every
+additive invariant of a pure pair's difference class factors through the $(m,q)$-data (with $r$ and $k$ inert) of
+W4--W6, and that profile is consistent at every point of the certified
+$(m,q)$-grid --- so no additive wall WITHIN the profile theory can
+separate the charge strata (Theorem~\ref{thm:completeness}, the corridor
+symmetry; the profile theory is the certified factorization of every
+additive invariant through the $(m,q)$-data of W4--W6, with $r$ and $k$ inert in every profile-computed value).
+On the YES route the strike proves a new wall, \textbf{Lemma W7} (sector
+rigidity of the cohomological Fourier--Mukai transform: the complement
+structure preserves the NS/W/T sector decomposition; $\FMc(\theta^2)$ stays in
+the NS-span, $\FMc(W_R)=\widehat W_R$, $\FMc(W_I)=\widehat W_I$), whose
+corollaries kill the transform-transport and projector-correspondence
+construction families: the algebraic projector $P_W$ cannot \emph{birth}
+Weil content from NS/T content. The result is the \textbf{Funnel Theorem}
+(\S\ref{sec:funnel}): within the committed wall system the dichotomy bit is
+equivalent to the existence of a single W-charged algebraic surface class
+(equivalently a holomorphic pure pair at some scale), and every mechanism
+family in the committed arsenal generates $q=0$ content only. The decision
+attempt therefore TERMINATES at the vertex: the campaign's certified state is
+the reduction of the target on the open sector to one question --- does one
+W-charged surface exist on the discriminator? Both resolution polarities stay
+armed; neither fires inside the current system; the registry rows carry the
+reopen conditions. No decision, no resolution, and no exhaustiveness claim
+beyond the enumerated mechanism families is made (scope box, \S\ref{sec:scope}).
+\end{abstract}
+
+\section{Scope and discipline (read first)}\label{sec:scope}
+
+\paragraph{What this dossier claims.}
+\begin{enumerate}
+\item \textbf{The NO-route obstruction map} (\S\ref{sec:no}): six attack lines
+on charge rigidity, each driven to the certified wall where it dies.
+\item \textbf{Lemma W7} (sector rigidity of $\FMc$; \S\ref{sec:w7}) with its
+model certificate, and its two corollaries (the transform-transport kill; the
+projector-birth kill).
+\item \textbf{The additive-completeness theorem}
+(Theorem~\ref{thm:completeness}): the W4--W6 profile is the COMPLETE additive
+invariant theory of the pair channel, consistent at every certified grid
+point; consequently any future deciding wall must be non-additive and
+FM-closed.
+\item \textbf{The Funnel Theorem} (\S\ref{sec:funnel}): the equivalence of the
+bit with the W-charged-surface existence, plus the statement that every
+enumerated mechanism family of the committed arsenal generates $q=0$ content.
+\end{enumerate}
+
+\paragraph{What this dossier does NOT claim.}
+\begin{itemize}
+\item Any decision of $S=0$ versus $S=W_\Q$ on any instance; any resolution of
+the campaign target in either polarity.
+\item Any exhaustiveness claim about conceivable pair constructions BEYOND the
+enumerated mechanism families (the funnel covers the committed arsenal:
+divisor intersections, tensor transports, FM transforms of NS-sector inputs,
+$P_W$-correspondences, isogeny transport, Segre/pushforward on NS-sector
+cycles).
+\item Any claim that the two routes are closed permanently: the registry rows
+(\S\ref{sec:terminal}) state the reopen conditions; a structurally new mechanism
+reopens the corresponding route by the committed registry rules.
+\item Any monoid-bit movement, any new seed, any change to the committed
+equivalences.
+\end{itemize}
+
+\paragraph{Standing leaves.} All scheme-level inputs are the committed ones
+(E3 GAGA, E5 Chern multiplicativity, E8 HRR/GRR, E9 Serre duality, E13 FM
+toolkit, E14 Mukai band theorem, the dual-world axioms, the $K^0$ presentation,
+the spectrum census as a record-level hypothesis in the projector idempotence,
+the W2 pair-form equivalence content). Nothing certified in the green layers is
+re-proved here; everything certified is cited with its receipt.
+
+\section{Setting: the committed frame}\label{sec:setting}
+
+The discriminator $A$ (nonsplit $\Q(i)$-Weil fourfold, $\NS(A)=\Z\theta$),
+the model (D1)--(D3), the certified constants
+($\int\theta^4=24$, $\int W_R^2=\int W_I^2=8$, $\int W_RW_I=0$,
+$\theta^j\wedge W=0$ as classes for $j\ge 1$, $W\in\WQ$), the committed
+equivalences (W1 dichotomy $S=0$ or $S=W_\Q$; W2 pair form $\iff$ algebraic;
+on the discriminator pair form $\iff S=W_\Q$; W5 the bit is duality-invariant),
+and the strike-1 walls on the pair channel (W4 invisibility corridor: the
+difference-Euler of a pure pair vanishes against every line bundle, the only
+linear detector being $m\langle W_R,\ch_2(G)\rangle$; W6 the pair Chern table:
+equal $(r,c_1,c_3)$, $c_2$-difference $-mW_R$, charge split
+$q(E_+)-q(E_-)=-8m$, the mixed-End table). The Lean layer
+(\texttt{GSTPairChannelWallsCertificate.lean}) kernel-verifies the arithmetic
+of all of these in the bitmask exterior model; its CI arc is recorded in
+\S\ref{sec:verif}.
+
+\section{The NO route: charge rigidity --- the six-line obstruction map}\label{sec:no}
+
+The negative certificate requires: \emph{for every two holomorphic bundles with
+shared $(r,c_1\in\Z\theta,c_3)$ and the $c_4$-relation of W6(iii), the Weil
+charges agree} (then no pure pair exists at any scale, so $S=0$ by the
+committed W2(iii), and $W_R,W_I$ are nonalgebraic by W1(iii) --- the PROMPT
+\S2 negative resolution). Six attack lines, six certified deaths:
+
+\begin{obstruction}[Moduli-connectedness]
+Chern classes are locally constant in flat families over connected bases, so
+$q$ is a locally constant function on the bundle moduli. A charge split $-8m$
+is a jump between components --- permitted. Rigidity would require the moduli
+to be connected across the charge strata or the strata to be empty; neither is
+reachable from the committed walls. \emph{Dies at: nothing available --- the
+needed statement is precisely the unproved rigidity itself.}
+\end{obstruction}
+
+\begin{obstruction}[Corridor-invisibility kill chains]
+The carrier-layer kill (V2: single band $+$ Euler-zero $\Rightarrow$
+acyclic-for-all-$P$ $\Rightarrow$ $\FMc(F)=0$ $\Rightarrow$ $F=0$) needs a
+\emph{bundle} with a WIT band structure. The pair difference
+$x=[E_+]-[E_-]\in K^0$ carries no band structure, and W4 makes every additive
+probe blind to it at every scale and every polarization level.
+\emph{Dies at: W4 --- the corridor is exactly the region where the kill chain
+does not reach.}
+\end{obstruction}
+
+\begin{obstruction}[FM-closure via product worlds]
+Testing the pair on a product world ($A\times\widehat A$, or split Weil worlds)
+exits the corridor: at $\NS$-rank $\ge 2$ the annihilation Lemma W0 fails
+(the committed consistency probe), and the walls are corridor-local. Every
+attempt to manufacture a contradiction off-world loses the walls.
+\emph{Dies at: W0's own failure locus --- the corridor has no exit.}
+\end{obstruction}
+
+\begin{obstruction}[Isogeny scaling]
+Pairs transport along isogenies with the scale multiplied by the Weil-pullback
+factor; with W5 (duality transports at the SAME scale) and the committed
+principality (Theorem M: one principal scale divides every scale), the bookkeeping
+is consistent at every level; no divisibility contradiction is producible.
+\emph{Dies at: T1--T5 $+$ M --- all consistent.}
+\end{obstruction}
+
+\begin{obstruction}[End-mass twisting]
+W6(v) expresses every End-Euler difference as a linear form
+$8m^2-m\,q(E_-)$, $-m\,q(E_-)$, $8m^2-2m\,q(E_-)$ in the FREE integer
+$q(E_-)\in\Z$; the synthetic instances realize the table at $q$-values $0$, $\pm 8$
+and $-16$, and the $(m,q)$-grid certificate (\S\ref{sec:verif}) realizes it
+at every grid point. No sign, parity, or positivity obstruction exists: the
+carrier layer is the $q=0$ slice and every other $q$ is a priori live.
+\emph{Dies at: W6(v) --- $q$ is free.}
+\end{obstruction}
+
+\begin{obstruction}[Lattice and parity (the Gr(2,5) pattern)]
+The Grassmannian determination ($m^*=360$) came from a $K$-lattice necessity.
+On the discriminator the committed minimal scale is $m_0=1$ (K\"unneth
+unimodularity of the torus $K$-lattice, committed strike-1): the pair table is
+integral-feasible at $m=1$, and the $P^2$-parity mechanism has no analogue here
+(the certified $P^2$ device lives on the line-sum instance, not on the fourfold
+lattice). \emph{Dies at: the committed $m_0=1$.}
+\end{obstruction}
+
+\begin{theorem}[Additive completeness; the corridor symmetry]\label{thm:completeness}
+Let $x=[E_+]-[E_-]$ be a pure pair for $W_R$ at scale $m\ge 1$ on the
+discriminator. Then:
+\begin{enumerate}
+\item[(i)] every additive invariant $\chi(x\otimes G)$ ($G$ perfect) equals
+$m\langle W_R,\ch_2(G)\rangle$ --- the W4(iii) detector is the COMPLETE linear
+theory;
+\item[(ii)] the full additive profile of the pair's difference class
+$x=[E_+]-[E_-]$ (and of the mixed-End table of its legs) is carried by the
+data $(m,q)$ --- the difference-class values $\chi(x\otimes G)$ are
+determined by $m$ alone (W4(iii)) and the mixed-End values by $(m,q)$
+(W6(v)); $r$ and $k$ are inert in every profile-computed value --- and the
+profile is consistent at every point of the certified grid
+$m\in\{1,2,3,4\}$, $q/8\in\{0,1,2,3\}$,
+$c_1\in\{0,\theta,2\theta\}$, $\gamma\in\{0,\vol\}$, $r=5$
+(96 instances, zero failures; the grid fixes $r$);
+\item[(iii)] consequently no additive wall \emph{within the profile theory}
+--- no necessary condition expressed through the twisted Euler
+characteristics that the profile computes --- can separate the charge
+strata or exclude the pair: separation would require a profile value to be
+unrealizable, and the profile is internally consistent (the universal laws
+admit the table, and the grid certificate realizes it throughout the
+certified range $m\in\{1..4\}$, $q/8\in\{0..3\}$). Any future deciding
+wall must therefore operate OUTSIDE the profile theory (constrain data the
+profile does not compute --- for instance individual-bundle invariants,
+which are additive-flavored but invisible to the difference-class profile),
+and by W5 it must in addition be FM-closed. This is a statement about the certified profile
+theory, not an exhaustiveness claim about all conceivable additive
+constraints (scope box).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is W4(iii) with the W0-annihilated cross-grades. (ii): the universal laws
+of the table are the hypothesis-form theorems of the Lean layer
+(charge split from $\int W_R^2=8$; the mixed-End lines from the split and the
+annihilated $c_1^2$-pairing; the third line as the telescoped sum of the first
+two), and the grid certificate realizes every profile point explicitly with
+grade-by-grade purity. (iii): a wall within the profile theory is a statement about
+the values $\chi(x\otimes G)$; by (i)--(ii) these values are determined by
+$(m,q)$ (with $r$ and $k$ inert in the computed values) through the table relations (universally, as hypothesis-form
+laws); the determined values are internally consistent -- the universal laws
+admit the table by construction, and the grid certificate realizes every
+grid point in the certified range with grade-by-grade purity; hence no
+constraint expressible within the profile can exclude the pair. A constraint
+that excludes the pair must therefore constrain data OUTSIDE the profile
+(non-additive data), which is the stated conclusion. No claim is made about
+the nonexistence of non-profile additive-flavored constraints (that would be
+an exhaustiveness claim; the scope box excludes it).
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:completeness} is the precise form of the statement ``the NO
+route is unreachable within the certified profile theory'': it does not say
+rigidity is false --- it says no constraint the profile theory can express
+can establish it.
+\end{remark}
+
+\section{Lemma W7: sector rigidity of the Fourier--Mukai transform}\label{sec:w7}
+
+The degree-$4$ rational cohomology of the Weil world decomposes into the three
+sectors
+\[
+H^4(A,\Q)\;=\;\underbrace{\Q\theta^2}_{\mathrm{NS\ image}}\;\oplus\;
+\underbrace{\WQ}_{\mathrm{Weil}}\;\oplus\;T,
+\]
+where $T$ is the complementary (transcendental) sector. In the exterior model
+the cohomological FM transform $\FMc$ is the wsign-weighted complement on
+degree-$4$ monomials (committed W5 normalization).
+
+\begin{lemma}[Sector rigidity]\label{lem:w7}
+The complement structure preserves the model sectors: the complement of a
+block-union word is a block-union word ($\mathrm{NS}\to\mathrm{NS}$); the
+complement of a one-letter-per-block word is a one-letter-per-block word of
+the same parity ($W\to W$); the complement of a $T$-word is a $T$-word.
+Consequently $\FMc$ preserves the sector decomposition:
+\[
+\FMc(\Q\theta^2)=\Q\widehat\theta^2,\qquad
+\FMc(\WQ)=\widehat\WQ,\qquad \FMc(T)=\widehat T,
+\]
+and in particular $\FMc(\theta^2)$ lies in the dual NS-span,
+$\FMc(W_R)=\widehat W_R$ and $\FMc(W_I)=\widehat W_I$ exactly.
+\end{lemma}
+
+\begin{proof}
+The census: $70$ degree-$4$ words $=$ $6$ block-union words $+$ $16$ Weil
+words $+$ $48$ $T$-words. Complementing a block-union word: full blocks and
+empty blocks swap, so the complement of $\{a,b\}$-full is
+$\{c,d\}$-full --- again a block-union. Complementing a one-letter-per-block
+word flips the letter in every block, so the number of $f$-letters goes to
+$4-\#f$: the parity is preserved, the even words (the $W_R$ monomials)
+permute among themselves and the odd words (the $W_I$ monomials) among
+themselves. Since the complement map is an involution and the two model
+subspaces are closed, the set-theoretic complement of their union ($T$) is
+closed as well. Linearity gives the sector statements; the class-level
+identities $\FMc(W_R)=\widehat W_R$, $\FMc(W_I)=\widehat W_I$ are the committed
+W5 normalization (kernel-certified in the Lean layer), and
+$\FMc(\theta^2)=\widehat\theta^2$ EXACTLY (coefficient $1$) is verified in the
+model certificate.
+
+\emph{The scheme-level sector statement (dimension audit).} The model
+census runs on the $70$ words ($6+16+48$), while the scheme decomposition
+$\Q\theta^2\oplus\WQ\oplus T$ is $1+2+67$-dimensional: the scheme-level
+$T$ additionally contains the $5$-dimensional complement of $\Q\theta^2$
+inside the block-union span and the $14$-dimensional complement of $\WQ$
+inside the Weil-word span. Both complements (taken ORTHOGONAL inside their
+ambient spans --- legitimate because $\FMc$ is a Poincar\'e-pairing
+isometry up to the certified sign identities, as recorded below) are
+$\FMc$-invariant: each ambient span is invariant (the closures above), the
+distinguished subspaces are invariant ($\FMc(\theta^2)=\widehat\theta^2$
+exactly; $\FMc(\WQ)=\widehat\WQ$ by the committed normalization), and
+$\FMc$ is an involution --- so the five-piece decomposition
+\[
+\Q\theta^2\;\oplus\;(\text{5-dim})\;\oplus\;\WQ\;\oplus\;(\text{14-dim})
+\;\oplus\;(\text{48-dim})
+\]
+is invariant piece by piece, and the scheme-level $T$ (the sum of the
+second, fourth, and fifth pieces) is invariant. Equivalently (the isometry
+argument, recorded for W7.1's use): on degree-$4$ classes $\FMc$ is a
+Poincar\'e-pairing isometry up to the certified sign identities (the
+basis words pair only with their complements), and it fixes
+$\Q\theta^2\oplus\WQ$ as a set; hence it preserves the orthogonal
+complement of $\Q\theta^2\oplus\WQ$ --- the $67$-dimensional $T$ --- and
+with it the zero-Weil-content property that W7.1 uses. The scheme-level
+identification of the model sectors with
+$\Q\theta^2\oplus\WQ\oplus T$ runs through the committed leaves as always.
+\end{proof}
+
+\begin{corollary}[Transform-transport kill]\label{cor:w71}
+The FM orbit of the NS-sector never meets the Weil sector: no Fourier--Mukai
+construction whose input has zero Weil content (in particular every
+line-bundle input, every tensor transport of NS-sector classes, and every
+FM-dual of such) produces Weil content. The transform-transport family of
+conceivable YES-constructions is dead.
+\end{corollary}
+
+\begin{corollary}[Projector-birth kill]\label{cor:w72}
+Assume the committed spectrum census (the record-level hypothesis of the
+projector idempotence) and the correspondence-action compatibility (leaf E1).
+Then for every $x\in K^0_{\mathrm{alg}}(A)$ the degree-$4$ part of its
+transformed character satisfies
+\[
+\ch_4\bigl(P_W(x)\bigr)\;=\;P_W\bigl(\ch_4(x)\bigr)\;=\;\text{the Weil
+component of }\ch_4(x),
+\]
+because the committed kernel-green spectral facts give $P_W=1$ on the Weil
+plane, $P_W=0$ on the mixed factor, and $P_W(25)=0$ on the ambient
+(NS-generated) factor, and the census extends the vanishing to the
+$T$-blocks. (The committed projector action is $H^4$-scoped --- the
+committed Lemma makes no claim about $H^2$ or $H^6$ --- so the non-degree-$4$
+grades of $\ch(P_W(x))$ are outside the certified scope; they carry no
+Weil content in any case, Weil content being of type $(2,2)$.)
+Consequently the algebraic projector cannot \emph{birth} Weil content from
+NS/T content: $P_W(x)$ has nonzero Weil character in degree $4$ iff $\ch_4(x)$
+already does.
+The projector-correspondence family of conceivable YES-constructions is dead.
+\end{corollary}
+
+\begin{remark}
+Corollary~\ref{cor:w72} sharpens the committed W1(iv) one-source machinery from
+the opposite side: the projector \emph{reconstructs} explicit cycles from a
+detected source, but it never \emph{creates} a source.
+\end{remark}
+
+\section{The YES route: the Funnel Theorem}\label{sec:funnel}
+
+\begin{theorem}[Funnel]\label{thm:funnel}
+On the discriminator, the following are equivalent:
+\begin{enumerate}
+\item[(i)] the dichotomy bit fires: $S=W_\Q$ (equivalently: $W_R$ is
+algebraic);
+\item[(ii)] there exists a W-charged algebraic surface class: a codimension-$2$
+cycle $Z$ with nonzero Weil component of $\cl(Z)$;
+\item[(iii)] there exists a holomorphic pure pair at some scale $m\ge 1$
+(the committed W2 pair-form equivalence, with the W6 table as its
+Chern-class face).
+\end{enumerate}
+Moreover, every mechanism family in the committed arsenal produces $q=0$
+(zero-Weil-content) classes:
+\begin{itemize}
+\item divisor intersections: the NS-subalgebra is annihilated by $W$
+(Lemma W0 --- the whole NS-subalgebra is blind to the Weil grades);
+\item tensor/line-bundle transports: twisting by $L=\mathcal O(k\Theta)$
+preserves the scale and adds only NS-sector content (W0 $+$ the twist check:
+a pure pair twisted by any $L$ is a pure pair at the same scale, so no
+twist ever creates Weil content);
+\item Fourier--Mukai transforms: Lemma W7 / Corollary~\ref{cor:w71};
+\item algebraic projector correspondences: Corollary~\ref{cor:w72};
+\item isogeny transport: the committed T-laws transport the bit within an
+isogeny class (the minimal scale $m^*$ is transport-constant along
+pullbacks; the pair class pulls back with the world); they cannot
+transport it ACROSS non-isogenous classes, and the split worlds where
+Weil's construction produces pairs are not isogenous to the discriminator
+(the committed nonsplit hypothesis);
+\item Segre/pushforward constructions on NS-sector cycles: these realize
+carriers at the $q=0$ slice (the committed carrier instance), and their
+inputs (NS-sector cycle classes) carry no Weil component by W0. (This
+entry is family-level, justified by the committed instance and W0 on the
+inputs; the family is delimited by the PROMPT \S4 m-congruence discipline
+rather than enumerated exhaustively.)
+\end{itemize}
+Hence the entire remaining content of the YES route is the vertex: exhibit
+one W-charged surface (equivalently one pure pair at any scale).
+\end{theorem}
+
+\begin{proof}
+The equivalences (i)--(iii) are the committed W2(iii)/W1 with the W6 table
+(attributed and recorded as normalization per the M3 rule; no new equivalence
+content is claimed here). The mechanism list: each entry cites the wall that
+kills it, as proven in the cited sections and the committed receipts. The
+funnel statement is the conjunction: the bit is equivalent to the
+W-charged-surface existence, and no enumerated mechanism reaches it.
+\end{proof}
+
+\begin{remark}[What would reopen the routes]
+By the registry rules (\S\ref{sec:terminal}): the NO route reopens on a
+structurally new mechanism in the sense of the committed registry standard --- e.g.
+a non-additive, FM-closed rigidity invariant separating the charge strata
+(refined Brill--Noether type data, Picard-sheaf monodromy invariants, or a
+determinant-of-cohomology rigidity theory). The YES route reopens on any
+W-charged surface construction: per-world vertex certificates (the route (a)
+pattern of cycle $3$: lattice envelope $+$ witness production), deformations
+across the Weil family that pin algebraicity at special members and transport
+it, or non-abelian correspondence constructions beyond the committed
+$f$-algebra. Both rows stay armed; neither polarity fired inside the current
+system.
+\end{remark}
+
+\section{The certified terminal state of the decision attempt}\label{sec:terminal}
+
+\begin{itemize}
+\item The decision attempt EXECUTED in the charge frame with both polarities
+at full force and duality armed (W5).
+\item The NO route: unreachable within the certified profile theory
+(additive $+$ transport $+$ lattice arsenal;
+Theorem~\ref{thm:completeness}, with its scope statement); registry status
+\textbf{BLOCKED}, reopen condition as above.
+\item The YES route: funneled to the vertex (Theorem~\ref{thm:funnel}); registry
+status \textbf{BLOCKED-funnel}, reopen condition as above.
+\item The campaign's certified state is therefore the \textbf{reduction
+stack}, stated with the exact polarity split. Link 1:
+HC on the open sector $\iff$ FS$_\forall$ (cycle 3, CI green, audit
+closed; both directions attributed; recorded as normalization per M3 ---
+the per-input content of FS$_\forall$ is the single bit
+$m^*(X,p,\alpha) > 0$). Link 2, at the contract's fixed test world
+(PROMPT \S4: ONE nonsplit Weil fourfold): the FS$_\forall$ content is the
+vertex bit, and the CERTIFIED implications are exactly:
+(a) HC $\Rightarrow$ the vertex fires YES (an algebraic W$_R$ is
+detected: $S = W_\Q$ by W1(iv));
+(b) vertex-NO (the zero-test outcome $S = 0$, the negative value of the
+W1(ii) dichotomy) $\Rightarrow$ the NEGATIVE
+resolution of the contract by W1(iii) ($W_R, W_I$ nonalgebraic; HC false).
+The converse transport (vertex-YES $\Rightarrow$ HC) is NOT certified
+and NOT claimed: no committed theorem exports algebraicity from the
+test world to arbitrary worlds --- the funnel's mechanism kill-list
+(W0/W4/W5/W6/W7, the additive-completeness theorem) is precisely the
+certification that every committed mechanism generates $q=0$ content
+only and cannot move the bit, a fortiori cannot export it. A vertex-YES
+outcome proves W$_R$ algebraic ON THE DISCRIMINATOR --- a real result,
+a PROMPT \S3 special-family outcome, not a resolution --- and re-arms
+the universal law with the test world discharged. The vertex is the
+campaign's remaining TARGET (the funnel's output) and the canonical
+undecided input of the open sector within the committed frame, NOT a
+certified truth-equivalent of the universal law.
+\item Per the campaign contract (PROMPT \S2), the affirmative resolution is
+the full quantified theorem and the negative resolution is the zero-test
+certificate; the decision attempt shows both remain armed and neither is
+reachable within the current system --- the funnel theorem is the terminal
+certified statement of this strike, and the vertex is the campaign's
+remaining target.
+\end{itemize}
+
+\paragraph{Correction note (round 15-a, ledger 085).}
+The earlier form of the reduction-stack bullet compressed the stack
+into a two-link $\iff$ chain whose second link, read as mathematics,
+asserted vertex-YES $\Rightarrow$ HC --- an uncertified universal
+bootstrap (the cycle-1 audit's F4 class at the endgame statement). No
+theorem of this dossier is affected: the funnel theorem's own
+statement was already route-scoped (``the YES route's remaining
+content is exactly the vertex''), and the certified implications are
+exactly the polarity-split ones restated above.
+
+\section{Verification layer}\label{sec:verif}
+
+\paragraph{The decision-attempt certificate script.}
+\texttt{research/experiments/task14c\_decision\_attempt\_checks.py} (committed
+alongside this dossier). Bounds: pure Python, exact \texttt{Fraction}
+arithmetic, $\le 2^{10}$ monomial operations per instance, $96$ grid
+instances $+$ the $70$-word census $+$ the sector-closure checks $+$ $18$
+REAL twist configurations ($2$ scales $\times$ $9$ twist levels, the
+exponential twist computed grade by grade); runtime $<5$\,s, memory
+$<20$\,MB; no floats; every check ASSERTS. It
+verifies: (1) the W7 census ($6/16/48$) and all complement closures
+(NS-union $\to$ NS-union; even Weil $\to$ even Weil; odd Weil $\to$ odd Weil;
+$T\to T$), the EXACT equality $\FMc(\theta^2)=\widehat\theta^2$ (coefficient
+$1$), and the committed
+$\FMc(W_R)=W_R$, $\FMc(W_I)=W_I$; (2) the $(m,q)$-grid: purity
+grade-by-grade, the charge split $-8m$, and the three mixed-End identities at
+all $96$ points ($m\in\{1,2,3,4\}$, $c_2(E_-)=aW_R$ with $a\in\{0..3\}$,
+$c_1\in\{0,\theta,2\theta\}$, $\gamma\in\{0,\vol\}$) --- zero failures;
+(3) the REAL twist-preservation check: the actual exponential twist
+$\ch(E\otimes\mathcal O(k\Theta))=\ch(E)e^{k\theta}$ computed grade by grade,
+with the twisted pair's purity verified at grades $2$ and $3$ for
+$k\in\{-3,\dots,5\}$ ($2$ scales $\times$ $9$ twist levels $=18$
+configurations, the $\FMc(\theta^2)$-exact equality check included).
+
+\paragraph{The Lean layer (the wall arithmetic).}
+\texttt{GSTPairChannelWallsCertificate.lean}: the W0 class annihilations, the
+period constants (second encoding), the W4 corridor arithmetic, the W5 FM
+normalization $+$ round trips, and the W6 table (universal laws $+$ synthetic
+instances $+$ carrier consistency $+$ detector instance), with the
+pre-verification mirror
+\texttt{research/experiments/task14a\_lean\_data\_mirror.py} (all DATA
+cross-checked against an independent exterior reconstruction). CI arc: round 1
+(run 40138713492) failed with three diagnosed causes --- (a) kernel-stuck
+decides from non-proven primitives (bitwise ops and \texttt{flatMap}; replaced
+by the committed div/mod $+$ structural-recursion idioms), (b) a sign slip in
+the hypothesis-form third mixed-End line ($d=t_1-t_2$ corrected to the
+telescoped $d=t_1+t_2$; the direct instance computations were correct
+throughout; the kernel caught the packaging error), (c) a capstone projection
+off by one conjunction level. Round 2 pushed with all three repairs; the green
+receipt is appended to the record and INDEX when the run completes.
+
+\paragraph{Attribution discipline (M3).} The funnel theorem's equivalence
+content is the committed W2/W1 equivalence, attributed and recorded as
+normalization; the NEW content of this strike is the obstruction map
+(\S\ref{sec:no}), Lemma W7 with its corollaries, the additive-completeness
+theorem, and the mechanism-list of the funnel. No equivalence is claimed as
+new; no decision is claimed in either polarity.
+
+\section{Provenance}
+
+\begin{itemize}
+\item Cycle 4, Strike 2 of the GST Hodge campaign (Mode B, V6 protocol; boss
+directive 2026-10-26: route (b), ULTRA MODE, finish the work in this round).
+\item Builds on: the committed Weil-forcing frame W1--W3 (cycle 2 strike 1,
+audit-closed 9-c), the carrier-mechanism verdict V1--V4 (cycle 2 strike 2,
+audit-closed 10-c), the for-all-N reduction (cycle 3, audit-closed 11-c), and
+the pair-channel walls W0/W4/W5/W6 (cycle 4 strike 1, committed 147cfc4;
+Lean layer in the CI arc recorded above).
+\item New labels: Lemma W7 (sector rigidity), Corollaries W7.1/W7.2,
+Theorems of \S\ref{sec:no}/\S\ref{sec:funnel} (the obstruction map, the
+additive-completeness theorem, the funnel theorem). The label series extends
+the committed W-frame; no committed label is reused.
+\item No mathematical content of the committed state is altered; the research
+files in this commit do not fire any workflow.
+\end{itemize}
+
+\end{document}

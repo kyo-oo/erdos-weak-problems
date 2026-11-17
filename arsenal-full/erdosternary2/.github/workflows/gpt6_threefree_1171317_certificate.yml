@@ -1,0 +1,39 @@
+name: GPT6 GST 1171317 Normalized Cores Exact
+on:
+  push:
+    branches:
+      - gpt6/erdos-normalized-core-rigidity-20261029
+    paths:
+      - scripts/gpt6_threefree_1171317_certificate.py
+      - .github/workflows/gpt6_threefree_1171317_certificate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  coefficient:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exhaustive 780878-core coefficient window
+        run: python3 scripts/gpt6_threefree_1171317_certificate.py coefficient
+  low-scales:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - start: 0
+            stop: 7
+          - start: 7
+            stop: 14
+          - start: 14
+            stop: 21
+          - start: 21
+            stop: 29
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exhaustive finite 3-free low-scale block
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/gpt6_threefree_1171317_certificate.py low --start ${{ matrix.start }} --stop ${{ matrix.stop }}

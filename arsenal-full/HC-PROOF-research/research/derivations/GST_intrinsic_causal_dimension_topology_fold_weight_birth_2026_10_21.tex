@@ -1,0 +1,418 @@
+\documentclass[11pt]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\W}{\operatorname{W}}
+\newcommand{\HH}{\mathrm H}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{GST genuine causal topology folds on the original arbitrary X:
+all-N emergent mixed Hodge weights from graph incidence without dimension elevation}
+\date{21 October 2026}
+\begin{document}\maketitle
+
+\section{Corrected interpretation: dimension is born from a GST realization, not a coordinate shifted after birth}
+The user's actual proposal starts from the
+\emph{dimensionless GeneralSpace ontology},
+whose points and associative paths precede topology,
+Krull dimension, complex structure and cohomology.
+It asks for a FOLD OF THE REALIZED TOPOLOGY ITSELF,
+controlled by GST higher-causality, that forces a
+specific equation deciding the presence or absence
+of Hodge structure on ANY original X.
+This is NOT the preceding experiment
+\(\mathbf P_X(E)\), which changes an auxiliary fiber
+dimension while split-preserving all original
+Hodge/Chow defect sectors.
+It is NOT a nonholomorphic self-map of a fixed
+elliptic product, which rearranges classes but leaves
+the topology unchanged.
+
+The actual source-file interpretation is:
+\texttt{GSTGeneralSpace.lean} has no dimension field;
+\texttt{GSTGeneralSpaceSchemeDimensionObservation.lean}
+extracts Krull dimension as an actual scheme observation;
+\texttt{GSTGraphV2SelfExpandingCosmology.lean}
+allows a new world born from arbitrary-arity parent
+worlds with new internal law types;
+\texttt{GSTGraphV2RecursiveStateCausality.lean}
+has local and cross-world causal paths;
+\texttt{GSTGraphV2UnboundedHigherCausality.lean}
+has source/target boundary equations in every degree.
+These abstract laws do NOT automatically provide
+topological quotient schemes: below we construct
+such schemes ACTUALLY, over every complex X.
+
+\section{An N-fold ACTUAL intrinsic topology fold of any original smooth projective X}
+Fix ANY geometrically connected smooth projective
+complex variety X of dimension d>=1, and any N>=0.
+Choose 2N distinct closed complex points
+\[
+ p_1,q_1,\ldots,p_N,q_N\in X(\mathbb C).
+\]
+This is possible for EVERY N when d>=1.
+Construct the actual finite algebraic pinching quotient
+\[
+ \boxed{
+ \nu_N:X\longrightarrow Y_N
+        =X/(p_1\sim q_1,\ldots,p_N\sim q_N).
+ }                                                        \tag{1}
+\]
+It is a projective complex algebraic scheme;
+the normal source X is its normalization, and the
+N identified target points are isolated singularities.
+The map is finite, proper and birational.
+Its underlying geometric dimension is UNCHANGED:
+\[
+ \boxed{\dim_{\mathbb C}Y_N=d.}                       \tag{2}
+\]
+This operation folds the topology of X itself;
+it does NOT multiply X by another auxiliary variety.
+
+The exact ordinary rational-constant-sheaf
+normalization sequence is
+\[
+ 0\longrightarrow \Q_{Y_N}
+ \longrightarrow (\nu_N)_*\Q_X
+ \xrightarrow{\mathrm{diff}}
+ \bigoplus_{e=1}^N\Q_{r_e}
+ \longrightarrow 0,                                  \tag{3}
+\]
+where at the e-th pinched point r_e the difference
+map is \(a_e-b_e\) on its two normalization branches.
+For a finite proper map with finite discrete fibers,
+the higher direct images of \(\Q_X\) vanish,
+so taking sheaf cohomology is legitimate.
+X is connected: the H^0 map from Q to Q^N
+in the long exact sequence is identically ZERO
+(each global constant has equal values at p_e,q_e).
+
+\begin{theorem}[UNIVERSAL intrinsic GST N-fold causal topology birth theorem]
+For EVERY connected smooth projective complex
+d-fold X with d>=1 and EVERY integer N>=0,
+the genuine folded projective algebraic scheme Y_N
+has the same Krull dimension d but its first
+cohomology sits in the canonical short exact sequence
+of rational mixed Hodge structures
+\[
+ \boxed{
+ 0\longrightarrow\Q(0)^N
+ \longrightarrow H^1(Y_N,\Q)
+ \xrightarrow{\nu_N^*}H^1(X,\Q)
+ \longrightarrow0.
+ }                                                        \tag{4}
+\]
+Therefore its mixed-Hodge weight-zero subspace and
+weight-one graded piece satisfy
+\[
+ \boxed{
+  W_0H^1(Y_N,\Q)\cong\Q(0)^N,\quad
+  \Gr^W_1H^1(Y_N,\Q)\cong H^1(X,\Q),\quad
+  b_1(Y_N)=b_1(X)+N.
+ }                                                        \tag{5}
+\]
+For k>=2 the normalization induces an isomorphism
+of rational mixed Hodge structures
+\(H^k(Y_N,\Q)\cong H^k(X,\Q)\).
+In particular, for EVERY N>0 the projective
+Y_N does NOT have pure weight-one H^1,
+even when the original X had entirely pure
+smooth-projective Hodge structure.
+The induced change is a consequence of TRUE
+topology folding of the ORIGINAL X, with
+NO change of its algebraic dimension.
+\end{theorem}
+\begin{proof}
+Use the exact finite-normalization sheaf
+sequence (3) and the fact that N distinct
+singular points contribute a skyscraper
+coefficient \(\Q^N\) in degree zero and no
+higher sheaf cohomology.
+Since X and Y_N are connected, the map on
+global constant functions is an isomorphism
+\(\Q\to\Q\), while the map to \(\Q^N\)
+vanishes identically.
+The long exact sequence yields
+\(0\to\Q^N\to H^1(Y_N)\to H^1(X)\to0\)
+and isomorphisms in degrees k>=2.
+The constant sheaf normalization triangle
+is a morphism in the category of
+constructible mixed Hodge complexes of
+proper complex algebraic varieties;
+its H^0 skyscraper term has pure
+weight 0, while H^1(X) is pure weight 1
+because X is smooth projective.
+Strictness of the canonical mixed Hodge
+weight filtration yields exactly (4),(5).
+Finite birational maps preserve Krull
+dimension, establishing (2).
+No Hodge conjecture hypothesis was
+used in the proof.
+\end{proof}
+
+\begin{corollary}[Actual same-dimensional Hodge breaking on every projective X]
+The N-fold topology fold fails to preserve
+PURE Hodge structure if and only if N>0.
+For the boundary case X=P^d (d>=1),
+where H^1(X,Q)=0, it gives the EXACT,
+strongest simple equation
+\[
+ \boxed{H^1(Y_N,\Q)\cong\Q(0)^N.}                 \tag{6}
+\]
+Thus even varieties with completely
+algebraic even-degree cohomology acquire
+new first cohomology from causal topology alone.
+The new H^1 is of weight 0, and so it is
+NOT the H^1 of a smooth projective variety.
+The result does NOT contradict the
+rational Hodge conjecture: the new Y_N
+is singular and the relevant assertion is
+a mixed-weight anomaly, not a nonalgebraic
+rational (p,p) Hodge class on smooth X.
+\end{corollary}
+
+\section{Arbitrary finite GST CAUSAL GRAPH fold: Hodge weight zero exactly equals loop rank}
+The previous construction is the bouquet graph
+with one vertex (the original connected X)
+and N independent causal loop identifications.
+There is a more general ACTUAL algebraic folding
+law across arbitrary smooth projective input worlds.
+Let \(\Gamma=(V,E,s,t)\)
+be a finite directed multigraph.
+For each v choose a connected smooth projective
+complex variety \(X_v\) of dimension >=1.
+Choose disjoint actual closed points at the ends
+of every oriented graph edge e, and identify the
+corresponding two points. Denote the resulting
+actual projective scheme by \(Y_\Gamma\)
+and its normalization by \(\bigsqcup_v X_v\).
+Let \(c\) be the number of connected components
+of the underlying undirected graph.
+Its rational cellular 1-coboundary is
+\[
+ \boxed{\delta_\Gamma:\Q^{V}\to\Q^E,\qquad
+ (\delta_\Gamma f)(e)=f(t(e))-f(s(e)).}           \tag{7}
+\]
+The entire influence of the gluing in first
+cohomology is governed by this ACTUAL
+causal incidence matrix.
+
+\begin{theorem}[GST graph topology-fold equation, ALL graphs and ALL projective input dimensions]
+For every such actual graph gluing,
+\[
+ \boxed{
+ 0\longrightarrow\operatorname{coker}\delta_\Gamma
+ \longrightarrow H^1(Y_\Gamma,\Q)
+ \longrightarrow \bigoplus_{v\in V}H^1(X_v,\Q)
+ \longrightarrow0
+ }                                                        \tag{8}
+\]
+is an exact sequence of rational mixed Hodge structures.
+Furthermore
+\[
+ \boxed{
+ \Gr^W_0 H^1(Y_\Gamma,\Q)
+   \cong H^1(\Gamma,\Q),\qquad
+ \dim_\Q \Gr^W_0H^1(Y_\Gamma,\Q)
+   =|E|-|V|+c.
+ }                                                        \tag{9}
+\]
+Every connected graph has pure weight-one H^1
+if and only if its incidence graph is a TREE;
+if it has a loop, H^1 has a nonzero
+weight-zero sector and cannot be pure.
+The conclusion is independent of the algebraic
+dimensions of all the \(X_v\) (provided >=1).
+\end{theorem}
+\begin{proof}
+The normalization sheaf sequence is
+\(0\to\Q_Y\to \nu_*\Q_{\bigsqcup X_v}
+\to\oplus_e \Q_{r_e}\to0\).
+Taking cohomology, the map
+\(H^0(\bigsqcup_v X_v)=\Q^V
+\to \oplus_eH^0(\{r_e\})=\Q^E\)
+is precisely the signed edge incidence
+\(\delta_\Gamma\), up to a harmless
+overall sign convention.
+The same long exact sequence gives (8);
+the skyscraper term has weight zero and
+each smooth-projective H^1(X_v) has
+pure weight one.
+The kernel of \(\delta_\Gamma\)
+has dimension c (functions constant on
+graph connected components), so
+\(\operatorname{rank}\delta_\Gamma=|V|-c\).
+Thus its cokernel has dimension
+\(|E|-|V|+c\), which is precisely
+the cellular first Betti number
+of \(\Gamma\).
+For a connected graph this vanishes
+exactly when \(\Gamma\) has no graph
+cycles, i.e. when it is a tree.
+\end{proof}
+
+\section{The higher-GST CAUSAL BOUNDARY law: why source/target coherences are algebraically decisive}
+The actual
+\texttt{GSTGraphV2UnboundedHigherCausality.lean}
+has globular identities
+\[
+ s(sx)=s(tx),\qquad t(sx)=t(tx)
+ \quad \text{for every \((n+2)\)-cell }x.
+\]
+Linearize its genuine cell sets over Q:
+\(C_n^{GST}=\Q[H.\mathrm{Cell}(n)]\),
+and define signed source-minus-target
+boundary on each \((n+1)\)-cell:
+\[
+ \boxed{\partial_{n+1}[x]=[s(x)]-[t(x)].}          \tag{10}
+\]
+These are actual equations implied by the
+EXISTING higher-causality structure.
+
+\begin{theorem}[Globular GST higher-causality is an authentic chain complex]
+For every index n>=0,
+\[
+ \boxed{\partial_{n+1}\partial_{n+2}=0.}          \tag{11}
+\]
+Thus all finite higher-causal dimensions can be
+made into a rational chain complex.
+For a finite causal 1-skeleton with b1 loops,
+the higher causal 2-cells may impose linearly
+independent relations; if their signed
+boundaries span an r-dimensional subspace
+of the kernel of the 1-boundary, then
+\[
+ \boxed{\dim_\Q H_1^{GST}=b_1-r.}                 \tag{12}
+\]
+This algebraic law is an EXACT way to
+decide which topology-loop classes remain
+after enforcing second-order causal relations.
+Its identification with weight-zero
+H^1 of an ALGEBRAIC variety requires
+a further actual normalization/hypercover
+realization; arbitrary globular 2-cells
+do not automatically fill algebraic loops.
+\end{theorem}
+\begin{proof}
+Expand
+\[
+ \begin{aligned}
+ \partial_{n+1}\partial_{n+2}[x]
+ &=[s(sx)]-[t(sx)]-[s(tx)]+[t(tx)]\\
+ &=0
+ \end{aligned}
+\]
+by the two literal globular boundary equations.
+For a finite chain complex,
+\(H_1=\ker\partial_1/\mathrm{im}\partial_2\)
+and \(\mathrm{im}\partial_2\subset\ker\partial_1\).
+Subtracting the rank of \(\partial_2\)
+proves (12). The comparison with actual
+mixed Hodge cohomology is warranted only
+for geometrically certified cells;
+equations (8),(9) give that certification
+for point-pinch graph 1-skeleta.
+\end{proof}
+
+\section{Genuinely ALL-N higher-degree causal weight birth, beyond H^1}
+Let C be the actual projective
+nodal rational curve with normalization P^1
+and one point-pair pinched. Its true rational
+mixed Hodge cohomology is
+\[
+ H^0(C)=\Q(0),\quad
+ H^1(C)=\Q(0),\quad
+ H^2(C)=\Q(-1).
+\]
+For ANY original smooth projective complex
+X of arbitrary dimension and ANY N>=1,
+form the actual N-direction folded world
+\[
+ Y_{X,N}=X\times C^N
+ \quad (\dim_{\mathbb C}Y_{X,N}=\dim X+N).
+\]
+Its entire rational mixed Hodge cohomology
+is the genuine Kunneth tensor decomposition
+\[
+ \boxed{
+ H^*(Y_{X,N},\Q)
+   \cong H^*(X,\Q)\otimes
+  (\Q(0)[0]\oplus\Q(0)[1]\oplus
+                       \Q(-1)[2])^{\otimes N},
+ }                                                        \tag{13}
+\]
+where brackets give cohomological-degree
+positions, not Tate weights.
+Let \(\gamma_i\in H^1(C,\Q)=\Q(0)\)
+be the independently born causal-loop classes.
+For ANY nonzero rational \((p,p)\) Hodge class
+\(\alpha\in H^{2p}(X,\Q)\), the ACTUAL
+class
+\[
+ \boxed{
+ \beta_N=\pr_X^*\alpha\smile
+      \gamma_1\smile\cdots\smile\gamma_N
+ \in H^{2p+N}(Y_{X,N},\Q)
+ }                                                        \tag{14}
+\]
+is NONZERO for every N, by the
+Kunneth decomposition.
+Its Hodge type as a mixed-Hodge class
+is \((p,p)\), its WEIGHT is \(2p\),
+while its COHOMOLOGICAL DEGREE is \(2p+N\):
+\[
+ \boxed{
+ \operatorname{wt}(\beta_N)=
+     \deg(\beta_N)-N.
+ }                                                        \tag{15}
+\]
+This is an exact ALL-N law that makes
+causally folded topological dimensions
+emerge as a mismatch between
+cohomological degree and Hodge weight.
+It needs no rational Hodge conjecture,
+only an actual rational Hodge class alpha
+on the original X (the unit class
+alpha=1 always qualifies for p=0).
+It does NOT give a rational Hodge counterexample
+on a smooth projective variety:
+the folded Y is singular for N>=1,
+so mixed weights are the correct invariants.
+
+\section{The sharp logical test of the user's hypothetical full-Hodge premise}
+Suppose hypothetically that the rational
+Hodge conjecture holds for every
+smooth projective complex X.
+The intrinsic GST point-pinch theorem
+still produces (4) for ALL X,d,N:
+there is no contradiction because
+\(Y_N\) is singular, and the new
+weight-zero H^1 is not an unrepresented
+rational \((p,p)\) Hodge class on smooth X.
+A genuine contradiction would require
+a fold output satisfying ALL THREE:
+(i) the output Z is smooth projective,
+(ii) the output carries a genuine rational
+\((p,p)\) Betti class,
+(iii) that class is proven NOT in the
+canonical rational Chow image.
+Neither unbounded causal coherence nor
+the mixed-Hodge rank equation asserts (iii).
+
+What has changed is significant and precise:
+the new equations genuinely modify
+topology and CREATE cohomology on the
+original X of unchanged observed dimension.
+The Graph V2 causal loop rank
+\[
+       |E|-|V|+c
+\]
+directly governs the birth of a nonpure
+mixed Hodge sector. This is the first
+dimension-free GST graph-fold mechanism
+with an actual all-X, all-N
+scheme-theoretic mixed-Hodge realization,
+as opposed to a class-only transformation.
+\end{document}

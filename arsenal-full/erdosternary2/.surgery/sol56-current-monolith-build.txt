@@ -1,0 +1,2086 @@
+MONOLITH_RC=1
+⚠ [8697/8700] Built GSTTactic (5.4s)
+warning: GSTTactic.lean:69:5: Variable name `hd2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: GSTTactic.lean:75:5: Variable name `hd2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✖ [8699/8700] Building ErdosTernary2 (77s)
+trace: .> LEAN_PATH=/home/runner/work/erdosternary2/erdosternary2/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean /home/runner/work/erdosternary2/erdosternary2/ErdosTernary2.lean -o /home/runner/work/erdosternary2/erdosternary2/.lake/build/lib/lean/ErdosTernary2.olean -i /home/runner/work/erdosternary2/erdosternary2/.lake/build/lib/lean/ErdosTernary2.ilean -c /home/runner/work/erdosternary2/erdosternary2/.lake/build/ir/ErdosTernary2.c --setup /home/runner/work/erdosternary2/erdosternary2/.lake/build/ir/ErdosTernary2.setup.json --json
+warning: ErdosTernary2.lean:262:33: Variable name `hm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:495:57: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:495:70: Variable name `hb3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:1243:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc2_mod27]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1252:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc3_mod27]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1278:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc2_mod81]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1287:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc3_mod81]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1296:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc4_mod81]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1332:38: Variable name `hm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: ErdosTernary2.lean:2710:0: 'two_pow_ne_three_pow' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2711:0: 'non_cantor_product_b_mod27_13' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2712:0: 'non_cantor_product_b_mod27_25' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2713:0: 'non_cantor_product_b_mod81_4' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2714:0: 'non_cantor_product_b_mod81_49' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2715:0: 'true_duality_theory' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2789:0: 'binom_first_order' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2790:0: 'digit_formula' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2833:0: 'c_tower_stabilizes' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2834:0: 'c_mod_eq_c_stable' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2888:0: 'has_two_at_position' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:2954:0: 'has_two_mul3' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2955:0: 'has_two_mul_3pow' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2956:0: 'has_two_one_plus_3pow_mul' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2957:0: 'has_two_lift_base' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2999:0: 'hasTwoInFirstK_imp_hasTernaryTwo' depends on axioms: [propext, Classical.choice, Quot.sound]
+warning: ErdosTernary2.lean:3078:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h3k, h3_2k, Nat.mod_mod, hih]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:3103:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h3k, h3_2k, Nat.mod_mod, hih]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: ErdosTernary2.lean:3192:0: 'cascade_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3265:0: 'cascade_lift_no_two_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3266:0: 'erdos_ternary_2_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3291:0: 'true_duality_theory_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3309:0: 'bridge_crossing_explicit' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:3310:0: 'erdos_ternary_2_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3311:0: 'true_duality_theory_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3335:0: 'bridge_crossing_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3378:0: 'parity_lemma' depends on axioms: [propext, Quot.sound]
+warning: ErdosTernary2.lean:3875:31: Variable name `hR_mod3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_mod3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:3875:53: Variable name `hR_has` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_has
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6057:35: This simp argument is unused:
+  Nat.zero_div
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [gstCarry, gstDigit, gstStepCarry, Nat.pow_zero, Nat.pow_one, Nat.mod_one, Nat.mul_zero,
+    Nat.div_one, Nat.zero_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:6149:5: Variable name `h_bridge` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_bridge
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6150:5: Variable name `hR_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6150:23: Variable name `hR_mod3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_mod3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6152:5: Variable name `hC_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6165:5: Variable name `h_bridge` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_bridge
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6166:5: Variable name `hR_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6166:23: Variable name `hR_mod3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_mod3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6167:19: Variable name `hstart_pos` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hstart_pos
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6167:44: Variable name `hstart_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hstart_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6168:5: Variable name `hC_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6169:5: Variable name `h_has` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_has
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6170:5: Variable name `hd_start` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd_start
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6357:15: Variable name `hp1` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp1
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:7033:21: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7039:46: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7040:23: This simp argument is unused:
+  not_not
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [GSTOmegaBadSet, GSTOmegaZeroSet, Set.mem_setOf_eq, Set.mem_compl_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:7181:2: Try this: intro m hm j hj
+warning: ErdosTernary2.lean:7250:36: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7257:5: Variable name `hk` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hk
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:7257:18: Variable name `hm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:7823:21: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:9152:21: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:9956:5: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:9991:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: ErdosTernary2.lean:10216:23: This simp argument is unused:
+  Nat.mul_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Nat.add_mod]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:10528:32: This simp argument is unused:
+  Nat.mul_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hshape2, Nat.add_mod]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:10555:21: This simp argument is unused:
+  Nat.mul_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Nat.add_mod]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:10578:4: 'norm_num at hsplit' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ErdosTernary2.lean:10894:32: This simp argument is unused:
+  Nat.mul_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [hshape2, Nat.add_mod]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:11169:34: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ErdosTernary2.lean:11385:5: Variable name `hDN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hDN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:11820:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: ErdosTernary2.lean:11820:39: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ErdosTernary2.lean:11820:39: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ErdosTernary2.lean:13061:5: Variable name `hr` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hr
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:13281:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ErdosTernary2.lean:13434:34: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: ErdosTernary2.lean:13890:30: Try this:
+  [apply] ring_nf
+  
+  The `ring` tactic failed to close the goal. Use `ring_nf` to obtain a normal form.
+    
+  Note that `ring` works primarily in *commutative* rings. If you have a noncommutative ring, abelian group or module, consider using `noncomm_ring`, `abel` or `module` instead.
+warning: ErdosTernary2.lean:13890:26: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ErdosTernary2.lean:13926:21: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:15328:7: Variable name `T` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _T
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:15328:9: Variable name `H` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _H
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:15387:5: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:15465:31: Variable name `c` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _c
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:15533:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: ErdosTernary2.lean:15534:6: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: ErdosTernary2.lean:16607:5: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:16689:5: Variable name `hc` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hc
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:16741:17: Variable name `hs` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+error: ErdosTernary2.lean:16762:54: unexpected token 'set_option'; expected 'lemma'
+info: ErdosTernary2.lean:16927:0: GSTGraphV2CoupledUFlux.coupled_u_flux_step_exact (charge : ℕ → ℤ) (nextCarry : ℕ → ℕ → ℕ) (A : ℕ) (st : State) :
+  parentJumpWith charge nextCarry A st - ↑A * childJumpWith charge nextCarry st =
+    3 * potentialWith charge A (stepWith nextCarry A st) - potentialWith charge A st
+info: ErdosTernary2.lean:16928:0: GSTGraphV2CoupledUFlux.coupled_u_flux_telescope_exact (charge : ℕ → ℤ) (nextCarry : ℕ → ℕ → ℕ) (A : ℕ) (initial : State)
+  (K : ℕ) :
+  ∑ j ∈ Finset.range K,
+      ↑(3 ^ j) *
+        (parentJumpWith charge nextCarry A (orbitWith nextCarry A initial j) -
+          ↑A * childJumpWith charge nextCarry (orbitWith nextCarry A initial j)) =
+    ↑(3 ^ K) * potentialWith charge A (orbitWith nextCarry A initial K) - potentialWith charge A initial
+info: ErdosTernary2.lean:16929:0: GSTGraphV2CoupledUFlux.gst_coupled_u_flux_step_exact (A : ℕ) (st : State) :
+  parentJumpWith gstUChargeExact gstStepCarryExact A st - ↑A * childJumpWith gstUChargeExact gstStepCarryExact st =
+    3 * potentialWith gstUChargeExact A (stepWith gstStepCarryExact A st) - potentialWith gstUChargeExact A st
+info: ErdosTernary2.lean:16930:0: GSTGraphV2CoupledUFlux.mixed_world_scale_exact (K : ℕ) : 6 ^ K = 2 ^ K * 3 ^ K
+info: ErdosTernary2.lean:16931:0: 'GSTGraphV2CoupledUFlux.coupled_u_flux_step_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:16932:0: 'GSTGraphV2CoupledUFlux.coupled_u_flux_telescope_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:16933:0: 'GSTGraphV2CoupledUFlux.gst_coupled_u_flux_step_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:16934:0: 'GSTGraphV2CoupledUFlux.mixed_world_scale_exact' depends on axioms: [propext]
+info: ErdosTernary2.lean:17104:0: GSTGraphV2CoupledUPhysicalBridge.potential_shared_rewrite (charge : ℕ → ℤ) (A : ℕ) (st : PhysicalState)
+  (hInv : PhysicalInvariant A st) :
+  potentialWith charge A st.core =
+    reducedChargeWith charge st.core.parentSeed - ↑A * reducedChargeWith charge st.core.childCarry +
+      6 * ↑st.childResidue
+info: ErdosTernary2.lean:17105:0: GSTGraphV2CoupledUPhysicalBridge.base4_prefix_value (S N : ℕ) : ∑ i ∈ Finset.range N, 4 ^ i * base4Digit S i = S % 4 ^ N
+info: ErdosTernary2.lean:17106:0: GSTGraphV2CoupledUPhysicalBridge.horizontal_flux_telescope (charge : ℕ → ℤ) (S N : ℕ) :
+  ∑ i ∈ Finset.range N, ↑(4 ^ i) * horizontalFluxWith charge S i =
+    reducedChargeWith charge (base4Digit S 0) - ↑(4 ^ N) * reducedChargeWith charge (base4Digit S N) + 6 * ↑(S % 4 ^ N)
+info: ErdosTernary2.lean:17107:0: GSTGraphV2CoupledUPhysicalBridge.coupled_potential_is_horizontal_base4_flux (charge : ℕ → ℤ) (A N : ℕ)
+  (st : PhysicalState) (hA : A = 4 ^ N) (hInv : PhysicalInvariant A st) (hResidue : st.childResidue < A)
+  (hParent : st.core.parentSeed < 4) (hChild : st.core.childCarry < 4) :
+  potentialWith charge A st.core =
+    ∑ i ∈ Finset.range N, ↑(4 ^ i) * horizontalFluxWith charge (st.core.parentSeed + 4 * st.core.parentOffset) i
+info: ErdosTernary2.lean:17108:0: GSTGraphV2CoupledUPhysicalBridge.gst_u_potential_is_horizontal_base4_flux (A N : ℕ) (st : PhysicalState)
+  (hA : A = 4 ^ N) (hInv : PhysicalInvariant A st) (hResidue : st.childResidue < A) (hParent : st.core.parentSeed < 4)
+  (hChild : st.core.childCarry < 4) :
+  potentialWith gstUChargeExact A st.core =
+    ∑ i ∈ Finset.range N,
+      ↑(4 ^ i) * horizontalFluxWith gstUChargeExact (st.core.parentSeed + 4 * st.core.parentOffset) i
+info: ErdosTernary2.lean:17109:0: 'GSTGraphV2CoupledUPhysicalBridge.coupled_potential_is_horizontal_base4_flux' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:17110:0: 'GSTGraphV2CoupledUPhysicalBridge.gst_u_potential_is_horizontal_base4_flux' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:17351:0: GST2DMixedEmergence.mixed_cell_emergence (C d : ℕ) (hC : C < 4) (hd : d < 3) :
+  mixedDensity C d =
+    infoPotential (outDigit C d) - infoPotential d + 7 * carryPotential C - 21 * carryPotential (nextCarry C d) +
+      56 * surviveI C d
+info: ErdosTernary2.lean:17352:0: GST2DMixedEmergence.happy_chord_dichotomy (C : ℕ) (hC : C = 0 ∨ C = 3) :
+  C = 0 ∧ midDigit C 2 = 1 ∧ finalMicroDigit C 2 = 2 ∧ surviveI C 2 = 0 ∨
+    C = 3 ∧ midDigit C 2 = 2 ∧ finalMicroDigit C 2 = 2 ∧ surviveI C 2 = 2
+info: ErdosTernary2.lean:17353:0: GST2DMixedEmergence.mixed_rectangle_emergence (C d : ℕ → ℕ → ℕ) (N K : ℕ)
+  (hcell :
+    ∀ (t p : ℕ),
+      t < N →
+        p < K →
+          C t p < 4 ∧ d t p < 3 ∧ outDigit (C t p) (d t p) = d (t + 1) p ∧ nextCarry (C t p) (d t p) = C t (p + 1)) :
+  ∑ p ∈ Finset.range K, 3 ^ p * ∑ t ∈ Finset.range N, mixedDensity (C t p) (d t p) =
+    ∑ p ∈ Finset.range K, 3 ^ p * (infoPotential (d N p) - infoPotential (d 0 p)) +
+        7 * (∑ t ∈ Finset.range N, carryPotential (C t 0) - 3 ^ K * ∑ t ∈ Finset.range N, carryPotential (C t K)) +
+      56 * ∑ p ∈ Finset.range K, 3 ^ p * ∑ t ∈ Finset.range N, surviveI (C t p) (d t p)
+info: ErdosTernary2.lean:17354:0: 'GST2DMixedEmergence.mixed_cell_emergence' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:17355:0: 'GST2DMixedEmergence.mixed_rectangle_emergence' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:17517:0: GSTU2DAtomicBridge.gst_u_charge_as_carry_potential (C : ℕ) (hC : C < 4) : gstUChargeExact C = 8 * ↑C - carryPotential C
+info: ErdosTernary2.lean:17518:0: GSTU2DAtomicBridge.gst_coupled_potential_as_mixed_boundary (A : ℕ) (st : PhysicalState) (hInv : PhysicalInvariant A st)
+  (hParent : st.core.parentSeed < 4) (hChild : st.core.childCarry < 4) :
+  potentialWith gstUChargeExact A st.core =
+    ↑A * carryPotential st.core.childCarry - carryPotential st.core.parentSeed +
+      8 * (↑st.childResidue - ↑st.core.parentOffset)
+info: ErdosTernary2.lean:17519:0: GSTU2DAtomicBridge.weighted_mixed_row_emergence (w : ℕ → ℤ) (C Cnext d : ℕ → ℕ) (N : ℕ)
+  (hcell : ∀ t < N, C t < 4 ∧ d t < 3 ∧ outDigit (C t) (d t) = d (t + 1) ∧ nextCarry (C t) (d t) = Cnext t) :
+  ∑ t ∈ Finset.range N, w t * mixedDensity (C t) (d t) =
+    ∑ t ∈ Finset.range N, w t * (infoPotential (d (t + 1)) - infoPotential (d t)) +
+        7 *
+          (∑ t ∈ Finset.range N, w t * carryPotential (C t) -
+            3 * ∑ t ∈ Finset.range N, w t * carryPotential (Cnext t)) +
+      56 * ∑ t ∈ Finset.range N, w t * surviveI (C t) (d t)
+info: ErdosTernary2.lean:17520:0: GSTU2DAtomicBridge.weighted_mixed_rectangle_emergence (w : ℕ → ℤ) (C d : ℕ → ℕ → ℕ) (N K : ℕ)
+  (hcell :
+    ∀ (t p : ℕ),
+      t < N →
+        p < K →
+          C t p < 4 ∧ d t p < 3 ∧ outDigit (C t p) (d t p) = d (t + 1) p ∧ nextCarry (C t p) (d t p) = C t (p + 1)) :
+  ∑ p ∈ Finset.range K, 3 ^ p * ∑ t ∈ Finset.range N, w t * mixedDensity (C t p) (d t p) =
+    ∑ p ∈ Finset.range K, 3 ^ p * ∑ t ∈ Finset.range N, w t * (infoPotential (d (t + 1) p) - infoPotential (d t p)) +
+        7 *
+          (∑ t ∈ Finset.range N, w t * carryPotential (C t 0) -
+            3 ^ K * ∑ t ∈ Finset.range N, w t * carryPotential (C t K)) +
+      56 * ∑ p ∈ Finset.range K, 3 ^ p * ∑ t ∈ Finset.range N, w t * surviveI (C t p) (d t p)
+info: ErdosTernary2.lean:17521:0: GSTU2DAtomicBridge.weighted_info_boundary_exact (f : ℕ → ℤ) (N : ℕ) :
+  ∑ t ∈ Finset.range (N + 1), 4 ^ t * (f (t + 1) - f t) =
+    4 ^ N * f (N + 1) - f 0 - 3 * ∑ t ∈ Finset.range N, 4 ^ t * f (t + 1)
+info: ErdosTernary2.lean:17522:0: 'GSTU2DAtomicBridge.gst_coupled_potential_as_mixed_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:17523:0: 'GSTU2DAtomicBridge.weighted_mixed_rectangle_emergence' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:17524:0: 'GSTU2DAtomicBridge.weighted_info_boundary_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:17662:0: GSTU2DEventTransport.eventDensity_physical_table :
+  eventDensity 0 0 = -6 ∧
+    eventDensity 0 1 = 0 ∧
+      eventDensity 0 2 = 3 ∧
+        eventDensity 1 0 = -8 ∧
+          eventDensity 1 1 = 0 ∧
+            eventDensity 1 2 = 0 ∧
+              eventDensity 2 0 = -8 ∧
+                eventDensity 2 1 = 0 ∧
+                  eventDensity 2 2 = 0 ∧ eventDensity 3 0 = -3 ∧ eventDensity 3 1 = 0 ∧ eventDensity 3 2 = 2
+info: ErdosTernary2.lean:17663:0: GSTU2DEventTransport.eventDensity_ge_neg_eight (C d : ℕ) (hC : C < 4) (hd : d < 3) : -8 ≤ eventDensity C d
+info: ErdosTernary2.lean:17664:0: GSTU2DEventTransport.happyCell_positive_and_preserves_big2 (C d : ℕ) (h : HappyCell C d) :
+  2 ≤ eventDensity C d ∧ outDigit C d = 2
+info: ErdosTernary2.lean:17665:0: GSTU2DEventTransport.reverseEventCode_ge_eight_of_leading_happy (C d : ℕ → ℕ) (hfirst : HappyCell (C 0) (d 0)) (N : ℕ) :
+  2 ≤ N →
+    (∀ t < N, C t < 4) → (∀ t < N, d t < 3) → (∀ t < N, outDigit (C t) (d t) = d (t + 1)) → 8 ≤ reverseEventCode C d N
+info: ErdosTernary2.lean:17666:0: 'GSTU2DEventTransport.reverseEventCode_ge_eight_of_leading_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:17965:0: GSTU2DExactCrossingCharge.crossDensity_physical_table :
+  crossDensity 0 0 = -57 ∧
+    crossDensity 0 1 = -111 ∧
+      crossDensity 0 2 = 105 ∧
+        crossDensity 1 0 = -39 ∧
+          crossDensity 1 1 = -81 ∧
+            crossDensity 1 2 = -84 ∧
+              crossDensity 2 0 = -111 ∧
+                crossDensity 2 1 = -93 ∧
+                  crossDensity 2 2 = 0 ∧ crossDensity 3 0 = 0 ∧ crossDensity 3 1 = 0 ∧ crossDensity 3 2 = 105
+info: ErdosTernary2.lean:17966:0: GSTU2DExactCrossingCharge.reverseCrossCode_exact (C Cnext d : ℕ → ℕ) (N : ℕ) :
+  (∀ t < N, outDigit (C t) (d t) = d (t + 1)) →
+    (∀ t < N, nextCarry (C t) (d t) = Cnext t) →
+      reverseCrossCode C d N =
+        digitPotential (d N) - ↑(4 ^ N) * digitPotential (d 0) + reverseCarryCode C N - 3 * reverseCarryCode Cnext N +
+          84 * reverseSurviveCode C d N
+info: ErdosTernary2.lean:17967:0: GSTU2DExactCrossingCharge.reverseCrossCode_ge_exponential_of_leading_happy (C d : ℕ → ℕ)
+  (hfirst : HappyCell (C 0) (d 0)) (N : ℕ) :
+  1 ≤ N → (∀ t < N, C t < 4) → (∀ t < N, d t < 3) → 17 * ↑(4 ^ N) + 37 ≤ reverseCrossCode C d N
+info: ErdosTernary2.lean:17968:0: GSTU2DExactCrossingCharge.reverseCrossRectangle_exact (C d : ℕ → ℕ → ℕ) (N K : ℕ)
+  (hcell :
+    ∀ (t p : ℕ),
+      t < N →
+        p < K →
+          C t p < 4 ∧ d t p < 3 ∧ outDigit (C t p) (d t p) = d (t + 1) p ∧ nextCarry (C t p) (d t p) = C t (p + 1)) :
+  ∑ p ∈ Finset.range K, ↑(3 ^ p) * reverseCrossCode (fun t => C t p) (fun t => d t p) N =
+    ∑ p ∈ Finset.range K,
+          ↑(3 ^ p) *
+            (digitPotential (d N p) - ↑(4 ^ N) * digitPotential (d 0 p) +
+              84 * reverseSurviveCode (fun t => C t p) (fun t => d t p) N) +
+        reverseCarryCode (fun t => C t 0) N -
+      ↑(3 ^ K) * reverseCarryCode (fun t => C t K) N
+info: ErdosTernary2.lean:17969:0: GSTU2DExactCrossingCharge.happy_iff_crossDensity_positive (C d : ℕ) (hC : C < 4) (hd : d < 3) :
+  HappyCell C d ↔ 0 < crossDensity C d
+info: ErdosTernary2.lean:17970:0: 'GSTU2DExactCrossingCharge.reverseCrossCode_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:17971:0: 'GSTU2DExactCrossingCharge.reverseCrossCode_ge_exponential_of_leading_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:17972:0: 'GSTU2DExactCrossingCharge.reverseCrossRectangle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:17973:0: 'GSTU2DExactCrossingCharge.happy_iff_crossDensity_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:18117:0: GSTCanonicalSevenAxisBridge.canonical_cell_exact (E t p : ℕ) :
+  outDigit (vertex E t p).carry (vertex E t p).digit = (vertex E (t + 1) p).digit ∧
+    nextCarry (vertex E t p).carry (vertex E t p).digit = (vertex E t (p + 1)).carry
+info: ErdosTernary2.lean:18118:0: GSTCanonicalSevenAxisBridge.event_balance_exact (C d : ℕ) : event C d + 9 * nextCarry C d = 13 * d + 3 * C
+info: ErdosTernary2.lean:18119:0: GSTCanonicalSevenAxisBridge.canonical_happy_iff_event_eight (E t p : ℕ) :
+  HappyCell (vertex E t p).carry (vertex E t p).digit ↔ event (vertex E t p).carry (vertex E t p).digit = 8
+info: ErdosTernary2.lean:18120:0: 'GSTCanonicalSevenAxisBridge.canonical_cell_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:18121:0: 'GSTCanonicalSevenAxisBridge.event_balance_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:18122:0: 'GSTCanonicalSevenAxisBridge.canonical_happy_iff_event_eight' depends on axioms: [propext, Quot.sound]
+warning: ErdosTernary2.lean:18288:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+info: ErdosTernary2.lean:18441:0: GSTGraphV2PerfectPowerAncestry.power_origin_observables_exact (K t p : ℕ) :
+  (graph (4 ^ K) t p).seven.carry = (graph 1 (K + t) p).seven.carry ∧
+    (graph (4 ^ K) t p).seven.digit = (graph 1 (K + t) p).seven.digit ∧
+      (graph (4 ^ K) t p).eventCode = (graph 1 (K + t) p).eventCode ∧
+        (graph (4 ^ K) t p).uCharge = (graph 1 (K + t) p).uCharge ∧
+          (graph (4 ^ K) t p).mixedCharge = (graph 1 (K + t) p).mixedCharge ∧
+            (graph (4 ^ K) t p).crossingCharge = (graph 1 (K + t) p).crossingCharge ∧
+              (graph (4 ^ K) t p).survive = (graph 1 (K + t) p).survive
+info: ErdosTernary2.lean:18442:0: GSTGraphV2PerfectPowerAncestry.power_origin_happy_iff (K t p : ℕ) :
+  HappyCell (graph (4 ^ K) t p).seven.carry (graph (4 ^ K) t p).seven.digit ↔
+    HappyCell (graph 1 (K + t) p).seven.carry (graph 1 (K + t) p).seven.digit
+info: ErdosTernary2.lean:18443:0: GSTGraphV2PerfectPowerAncestry.power_origin_event_eight_iff (K t p : ℕ) :
+  (graph (4 ^ K) t p).eventCode = 8 ↔ (graph 1 (K + t) p).eventCode = 8
+info: ErdosTernary2.lean:18444:0: 'GSTGraphV2PerfectPowerAncestry.power_origin_observables_exact' depends on axioms: [propext]
+info: ErdosTernary2.lean:18445:0: 'GSTGraphV2PerfectPowerAncestry.power_origin_happy_iff' depends on axioms: [propext]
+info: ErdosTernary2.lean:18446:0: 'GSTGraphV2PerfectPowerAncestry.power_origin_event_eight_iff' depends on axioms: [propext]
+info: ErdosTernary2.lean:18730:0: GSTU2DCanonicalPhaseDensity.phaseDensity_physical_table :
+  phaseDensity 0 0 = -4 ∧
+    phaseDensity 0 1 = -1 ∧
+      phaseDensity 0 2 = 2 ∧
+        phaseDensity 1 0 = -4 ∧
+          phaseDensity 1 1 = 0 ∧
+            phaseDensity 1 2 = -1 ∧
+              phaseDensity 2 0 = -4 ∧
+                phaseDensity 2 1 = -1 ∧
+                  phaseDensity 2 2 = 0 ∧ phaseDensity 3 0 = -3 ∧ phaseDensity 3 1 = 0 ∧ phaseDensity 3 2 = 2
+info: ErdosTernary2.lean:18731:0: GSTU2DCanonicalPhaseDensity.happy_iff_phaseDensity_positive (C d : ℕ) (hC : C < 4) (hd : d < 3) :
+  HappyCell C d ↔ 0 < phaseDensity C d
+info: ErdosTernary2.lean:18732:0: GSTU2DCanonicalPhaseDensity.weightedPhaseColumnPrefix_ge_floor (C d : ℕ → ℕ) (K : ℕ) (hC : ∀ p < K, C p < 4)
+  (hd : ∀ p < K, d p < 3) : -2 * (↑(3 ^ K) - 1) ≤ weightedPhaseColumnPrefix C d K
+info: ErdosTernary2.lean:18733:0: GSTU2DCanonicalPhaseDensity.weightedPhaseColumnPrefix_positive_of_top_happy (C d : ℕ → ℕ) (q : ℕ)
+  (hC : ∀ p ≤ q, C p < 4) (hd : ∀ p ≤ q, d p < 3) (hHappy : HappyCell (C q) (d q)) :
+  0 < weightedPhaseColumnPrefix C d (q + 1)
+info: ErdosTernary2.lean:18734:0: GSTU2DCanonicalPhaseDensity.phaseRectangle_exact (C d : ℕ → ℕ → ℕ) (N K : ℕ)
+  (hcell :
+    ∀ (t p : ℕ),
+      t < N →
+        p < K →
+          C t p < 4 ∧ d t p < 3 ∧ outDigit (C t p) (d t p) = d (t + 1) p ∧ nextCarry (C t p) (d t p) = C t (p + 1)) :
+  ∑ t ∈ Finset.range N, ∑ p ∈ Finset.range K, ↑(3 ^ p) * phaseDensity (C t p) (d t p) =
+    ∑ p ∈ Finset.range K, ↑(3 ^ p) * (phaseDigitPotential (d N p) - phaseDigitPotential (d 0 p)) +
+          ∑ t ∈ Finset.range N, phaseCarryPotential (C t 0) -
+        ↑(3 ^ K) * ∑ t ∈ Finset.range N, phaseCarryPotential (C t K) +
+      ∑ t ∈ Finset.range N, ∑ p ∈ Finset.range K, ↑(3 ^ p) * surviveI (C t p) (d t p)
+info: ErdosTernary2.lean:18735:0: 'GSTU2DCanonicalPhaseDensity.phaseDensity_physical_table' does not depend on any axioms
+info: ErdosTernary2.lean:18736:0: 'GSTU2DCanonicalPhaseDensity.weightedPhaseColumnPrefix_positive_of_top_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:18737:0: 'GSTU2DCanonicalPhaseDensity.phaseRectangle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:18977:0: GSTGraphV2UnifiedPowerRectangle.unifiedState_physicalInvariant (E N p : ℕ) :
+  PhysicalInvariant (4 ^ N) (unifiedState E N p)
+info: ErdosTernary2.lean:18978:0: GSTGraphV2UnifiedPowerRectangle.unifiedState_parentDigit_exact (E N p : ℕ) :
+  parentDigit (4 ^ N) (unifiedState E N p).core = (graph E N p).seven.digit
+info: ErdosTernary2.lean:18979:0: GSTGraphV2UnifiedPowerRectangle.unified_equationIII_graph_exact (E N p : ℕ) :
+  gstUJumpExact (graph E N p).seven.carry (graph E N p).seven.digit -
+      ↑(4 ^ N) * gstUJumpExact (graph E 0 p).seven.carry (graph E 0 p).seven.digit =
+    3 * potentialWith gstUChargeExact (4 ^ N) (stepWith gstStepCarryExact (4 ^ N) (unifiedState E N p).core) -
+      potentialWith gstUChargeExact (4 ^ N) (unifiedState E N p).core
+info: ErdosTernary2.lean:18980:0: GSTGraphV2UnifiedPowerRectangle.unified_u_potential_is_graph_horizontal_flux (E N p : ℕ) :
+  potentialWith gstUChargeExact (4 ^ N) (unifiedState E N p).core =
+    ∑ i ∈ Finset.range N,
+      ↑(4 ^ i) *
+        horizontalFluxWith gstUChargeExact
+          ((unifiedState E N p).core.parentSeed + 4 * (unifiedState E N p).core.parentOffset) i
+info: ErdosTernary2.lean:18981:0: 'GSTGraphV2UnifiedPowerRectangle.unifiedState_physicalInvariant' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:18982:0: 'GSTGraphV2UnifiedPowerRectangle.unified_equationIII_graph_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:18983:0: 'GSTGraphV2UnifiedPowerRectangle.unified_u_potential_is_graph_horizontal_flux' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:19130:0: GSTGraphV2UnifiedVerticalTelescope.carryWord_vertical_balance (E p start N : ℕ) :
+  carryWord E p start N + 4 ^ N * (graph E start p).seven.digit =
+    (graph E (start + N) p).seven.digit + 3 * carryWord E (p + 1) start N
+info: ErdosTernary2.lean:19131:0: GSTGraphV2UnifiedVerticalTelescope.unifiedState_core_step_exact (E N p : ℕ) :
+  stepWith gstStepCarryExact (4 ^ N) (unifiedState E N p).core = (unifiedState E N (p + 1)).core
+info: ErdosTernary2.lean:19132:0: GSTGraphV2UnifiedVerticalTelescope.unified_equationIII_graph_closed (E N p : ℕ) :
+  gstUJumpExact (graph E N p).seven.carry (graph E N p).seven.digit -
+      ↑(4 ^ N) * gstUJumpExact (graph E 0 p).seven.carry (graph E 0 p).seven.digit =
+    3 * potentialWith gstUChargeExact (4 ^ N) (unifiedState E N (p + 1)).core -
+      potentialWith gstUChargeExact (4 ^ N) (unifiedState E N p).core
+info: ErdosTernary2.lean:19133:0: GSTGraphV2UnifiedVerticalTelescope.unified_equationIII_vertical_telescope (E N p K : ℕ) :
+  ∑ j ∈ Finset.range K,
+      ↑(3 ^ j) *
+        (gstUJumpExact (graph E N (p + j)).seven.carry (graph E N (p + j)).seven.digit -
+          ↑(4 ^ N) * gstUJumpExact (graph E 0 (p + j)).seven.carry (graph E 0 (p + j)).seven.digit) =
+    ↑(3 ^ K) * potentialWith gstUChargeExact (4 ^ N) (unifiedState E N (p + K)).core -
+      potentialWith gstUChargeExact (4 ^ N) (unifiedState E N p).core
+info: ErdosTernary2.lean:19134:0: 'GSTGraphV2UnifiedVerticalTelescope.unifiedState_core_step_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:19135:0: 'GSTGraphV2UnifiedVerticalTelescope.unified_equationIII_vertical_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:19421:0: GSTGraphV2PerfectPowerBlock.graph_phase_prefix_positive_of_happy (E t q : ℕ)
+  (hHappy : HappyCell (graph E t q).seven.carry (graph E t q).seven.digit) :
+  0 < weightedPhaseColumnPrefix (fun p => (graph E t p).seven.carry) (fun p => (graph E t p).seven.digit) (q + 1)
+info: ErdosTernary2.lean:19422:0: GSTGraphV2PerfectPowerBlock.graph_phase_prefix_nonpositive_of_bad (E t K : ℕ)
+  (hBad : ∀ p < K, ¬HappyCell (graph E t p).seven.carry (graph E t p).seven.digit) :
+  weightedPhaseColumnPrefix (fun p => (graph E t p).seven.carry) (fun p => (graph E t p).seven.digit) K ≤ 0
+info: ErdosTernary2.lean:19423:0: GSTGraphV2PerfectPowerBlock.weightedPhaseColumnPrefix_eq_sum (C d : ℕ → ℕ) (K : ℕ) :
+  weightedPhaseColumnPrefix C d K = ∑ p ∈ Finset.range K, ↑(3 ^ p) * phaseDensity (C p) (d p)
+info: ErdosTernary2.lean:19424:0: GSTGraphV2PerfectPowerBlock.digit3_weighted_prefix_nat (R K : ℕ) : ∑ p ∈ Finset.range K, 3 ^ p * digit3 R p = R % 3 ^ K
+info: ErdosTernary2.lean:19425:0: GSTGraphV2PerfectPowerBlock.graph_digit_weighted_prefix_exact (E t K : ℕ) :
+  ∑ p ∈ Finset.range K, ↑(3 ^ p) * ↑(graph E t p).seven.digit = ↑(4 ^ t * E % 3 ^ K)
+info: ErdosTernary2.lean:19426:0: GSTGraphV2PerfectPowerBlock.graph_phase_column_exact (E t K : ℕ) :
+  weightedPhaseColumnPrefix (fun p => (graph E t p).seven.carry) (fun p => (graph E t p).seven.digit) K =
+    ∑ p ∈ Finset.range K,
+            ↑(3 ^ p) *
+              (phaseDigitPotential (graph E (t + 1) p).seven.digit - phaseDigitPotential (graph E t p).seven.digit) +
+          phaseCarryPotential (graph E t 0).seven.carry -
+        ↑(3 ^ K) * phaseCarryPotential (graph E t K).seven.carry +
+      ∑ p ∈ Finset.range K, ↑(3 ^ p) * surviveI (graph E t p).seven.carry (graph E t p).seven.digit
+info: ErdosTernary2.lean:19427:0: GSTGraphV2PerfectPowerBlock.canonical_power_origin_happy_iff (s n t p : ℕ) :
+  HappyCell (graph (canonicalEnergy s n) t p).seven.carry (graph (canonicalEnergy s n) t p).seven.digit ↔
+    HappyCell (graph 1 (3 ^ (s + 1) * n + t) p).seven.carry (graph 1 (3 ^ (s + 1) * n + t) p).seven.digit
+info: ErdosTernary2.lean:19428:0: GSTGraphV2PerfectPowerBlock.graph_phase_window_positive_of_happy (E t b q : ℕ)
+  (hHappy : HappyCell (graph E t (b + q)).seven.carry (graph E t (b + q)).seven.digit) :
+  0 < graphPhaseWindow E t b (q + 1)
+info: ErdosTernary2.lean:19429:0: GSTGraphV2PerfectPowerBlock.graph_phase_window_nonpositive_of_bad (E t b K : ℕ)
+  (hBad : ∀ j < K, ¬HappyCell (graph E t (b + j)).seven.carry (graph E t (b + j)).seven.digit) :
+  graphPhaseWindow E t b K ≤ 0
+info: ErdosTernary2.lean:19430:0: GSTGraphV2PerfectPowerBlock.graph_digit_window_exact (E t b K : ℕ) :
+  ∑ j ∈ Finset.range K, ↑(3 ^ j) * ↑(graph E t (b + j)).seven.digit = ↑(4 ^ t * E / 3 ^ b % 3 ^ K)
+info: ErdosTernary2.lean:19431:0: GSTGraphV2PerfectPowerBlock.graph_phase_window_exact (E t b K : ℕ) :
+  graphPhaseWindow E t b K =
+    ∑ j ∈ Finset.range K,
+            ↑(3 ^ j) *
+              (phaseDigitPotential (graph E (t + 1) (b + j)).seven.digit -
+                phaseDigitPotential (graph E t (b + j)).seven.digit) +
+          phaseCarryPotential (graph E t b).seven.carry -
+        ↑(3 ^ K) * phaseCarryPotential (graph E t (b + K)).seven.carry +
+      ∑ j ∈ Finset.range K, ↑(3 ^ j) * surviveI (graph E t (b + j)).seven.carry (graph E t (b + j)).seven.digit
+info: ErdosTernary2.lean:19432:0: GSTGraphV2PerfectPowerBlock.graph_phase_digit_window_boundary_exact (E t b K : ℕ) :
+  ∑ j ∈ Finset.range K,
+      ↑(3 ^ j) *
+        (phaseDigitPotential (graph E (t + 1) (b + j)).seven.digit -
+          phaseDigitPotential (graph E t (b + j)).seven.digit) =
+    ↑(4 ^ (t + 1) * E / 3 ^ b % 3 ^ K) - ↑(4 ^ t * E / 3 ^ b % 3 ^ K)
+info: ErdosTernary2.lean:19433:0: 'GSTGraphV2PerfectPowerBlock.graph_phase_window_positive_of_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:19434:0: 'GSTGraphV2PerfectPowerBlock.graph_phase_window_nonpositive_of_bad' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:19435:0: 'GSTGraphV2PerfectPowerBlock.graph_phase_window_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:19436:0: 'GSTGraphV2PerfectPowerBlock.graph_phase_digit_window_boundary_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:19586:0: GSTGraphV2HandwrittenOmegaUBlock.origin_split_exact (n : ℕ) : n = originTrit n + 3 * originTail n
+info: ErdosTernary2.lean:19587:0: GSTGraphV2HandwrittenOmegaUBlock.perfect_power_u_mul_div_exact (t n : ℕ) :
+  4 ^ (3 ^ t * n) = 4 ^ (3 ^ t * originTrit n) * 4 ^ (3 ^ (t + 1) * originTail n)
+info: ErdosTernary2.lean:19588:0: GSTGraphV2HandwrittenOmegaUBlock.residual_energy_u_mul_div_exact (s k m : ℕ) :
+  residualEnergy s k m = 4 ^ (3 ^ (s + k) * originTrit m) * 4 ^ (3 ^ (s + k + 1) * originTail m)
+info: ErdosTernary2.lean:19589:0: GSTGraphV2HandwrittenOmegaUBlock.residual_parent_energy_exact (s k m : ℕ) :
+  4 ^ residualWidth s * residualEnergy s k m = 4 ^ residualParentExponent s k m
+info: ErdosTernary2.lean:19590:0: GSTGraphV2HandwrittenOmegaUBlock.residual_parent_u_mul_div_exact (s k m : ℕ) :
+  4 ^ residualParentExponent s k m = 4 ^ 3 ^ s * 4 ^ (3 ^ (s + k) * originTrit m) * 4 ^ (3 ^ (s + k + 1) * originTail m)
+info: ErdosTernary2.lean:19591:0: GSTGraphV2HandwrittenOmegaUBlock.residual_parent_observables_exact (s k m p : ℕ) :
+  (graph (residualEnergy s k m) (residualWidth s) p).seven.carry =
+      (graph 1 (residualParentExponent s k m) p).seven.carry ∧
+    (graph (residualEnergy s k m) (residualWidth s) p).seven.digit =
+        (graph 1 (residualParentExponent s k m) p).seven.digit ∧
+      (graph (residualEnergy s k m) (residualWidth s) p).eventCode =
+          (graph 1 (residualParentExponent s k m) p).eventCode ∧
+        (graph (residualEnergy s k m) (residualWidth s) p).uCharge =
+            (graph 1 (residualParentExponent s k m) p).uCharge ∧
+          (graph (residualEnergy s k m) (residualWidth s) p).mixedCharge =
+              (graph 1 (residualParentExponent s k m) p).mixedCharge ∧
+            (graph (residualEnergy s k m) (residualWidth s) p).crossingCharge =
+                (graph 1 (residualParentExponent s k m) p).crossingCharge ∧
+              (graph (residualEnergy s k m) (residualWidth s) p).survive =
+                (graph 1 (residualParentExponent s k m) p).survive
+info: ErdosTernary2.lean:19592:0: GSTGraphV2HandwrittenOmegaUBlock.residual_parent_happy_iff (s k m p : ℕ) :
+  HappyCell (graph (residualEnergy s k m) (residualWidth s) p).seven.carry
+      (graph (residualEnergy s k m) (residualWidth s) p).seven.digit ↔
+    HappyCell (graph 1 (residualParentExponent s k m) p).seven.carry
+      (graph 1 (residualParentExponent s k m) p).seven.digit
+info: ErdosTernary2.lean:19593:0: 'GSTGraphV2HandwrittenOmegaUBlock.perfect_power_u_mul_div_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:19594:0: 'GSTGraphV2HandwrittenOmegaUBlock.residual_parent_u_mul_div_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:19595:0: 'GSTGraphV2HandwrittenOmegaUBlock.residual_parent_observables_exact' depends on axioms: [propext]
+info: ErdosTernary2.lean:19774:0: GSTGraphV2HandwrittenExponentialCascade.origin_block_split_exact (n K : ℕ) :
+  n = originPrefix n K + 3 ^ K * originSuffix n K
+info: ErdosTernary2.lean:19775:0: GSTGraphV2HandwrittenExponentialCascade.perfect_power_u_block_exact (t n K : ℕ) :
+  4 ^ (3 ^ t * n) = 4 ^ uPhaseShift t n K * uTailEnergy t n K
+info: ErdosTernary2.lean:19776:0: GSTGraphV2HandwrittenExponentialCascade.graph_u_block_observables_exact (t n K x p : ℕ) :
+  (graph (4 ^ (3 ^ t * n)) x p).seven.carry = (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.carry ∧
+    (graph (4 ^ (3 ^ t * n)) x p).seven.digit = (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.digit ∧
+      (graph (4 ^ (3 ^ t * n)) x p).seven.space = (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.space ∧
+        (graph (4 ^ (3 ^ t * n)) x p).seven.descent =
+            (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.descent ∧
+          (graph (4 ^ (3 ^ t * n)) x p).seven.nextDescent =
+              (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.nextDescent ∧
+            (graph (4 ^ (3 ^ t * n)) x p).eventCode = (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).eventCode ∧
+              (graph (4 ^ (3 ^ t * n)) x p).uCharge = (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).uCharge ∧
+                (graph (4 ^ (3 ^ t * n)) x p).mixedCharge =
+                    (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).mixedCharge ∧
+                  (graph (4 ^ (3 ^ t * n)) x p).crossingCharge =
+                      (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).crossingCharge ∧
+                    (graph (4 ^ (3 ^ t * n)) x p).survive =
+                      (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).survive
+info: ErdosTernary2.lean:19777:0: GSTGraphV2HandwrittenExponentialCascade.graph_u_block_horizontal_axes_exact (t n K x p : ℕ) :
+  (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.horizontal =
+      uPhaseShift t n K + (graph (4 ^ (3 ^ t * n)) x p).seven.horizontal ∧
+    (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.horizontalNext =
+        uPhaseShift t n K + (graph (4 ^ (3 ^ t * n)) x p).seven.horizontalNext ∧
+      (graph (uTailEnergy t n K) (uPhaseShift t n K + x) p).seven.vertical =
+        (graph (4 ^ (3 ^ t * n)) x p).seven.vertical
+info: ErdosTernary2.lean:19778:0: GSTGraphV2HandwrittenExponentialCascade.graph_navigation_nullspace_flux_exact (E x p : ℕ) :
+  4 * (4 ^ x * E % 3 ^ p) = navigationNullspace (4 ^ x * E) p + 3 ^ p * (graph E x p).seven.carry
+info: ErdosTernary2.lean:19779:0: GSTGraphV2HandwrittenExponentialCascade.handwritten_exponential_navigation_flux_exact (t n K x p : ℕ) :
+  4 * (4 ^ (uPhaseShift t n K + x) * uTailEnergy t n K % 3 ^ p) =
+    navigationNullspace (4 ^ (uPhaseShift t n K + x) * uTailEnergy t n K) p +
+      3 ^ p * (graph (4 ^ (3 ^ t * n)) x p).seven.carry
+info: ErdosTernary2.lean:19780:0: GSTGraphV2HandwrittenExponentialCascade.originSuffix_eventually_zero (n : ℕ) : originSuffix n (n + 1) = 0
+info: ErdosTernary2.lean:19781:0: GSTGraphV2HandwrittenExponentialCascade.uTailEnergy_eventually_one (t n : ℕ) : uTailEnergy t n (n + 1) = 1
+info: ErdosTernary2.lean:19782:0: 'GSTGraphV2HandwrittenExponentialCascade.perfect_power_u_block_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:19783:0: 'GSTGraphV2HandwrittenExponentialCascade.graph_u_block_observables_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:19784:0: 'GSTGraphV2HandwrittenExponentialCascade.handwritten_exponential_navigation_flux_exact' depends on axioms: [propext,
+ Quot.sound]
+warning: ErdosTernary2.lean:19841:54: this tactic is never executed
+
+Note: This linter can be disabled with `set_option linter.unreachableTactic false`
+warning: ErdosTernary2.lean:19835:52: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ErdosTernary2.lean:19841:54: 'omega' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+warning: ErdosTernary2.lean:19872:2: try 'simp' instead of 'simpa'
+
+Note: This linter can be disabled with `set_option linter.unnecessarySimpa false`
+warning: ErdosTernary2.lean:19871:23: This simp argument is unused:
+  Nat.mul_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Nat.add_mod, Nat.mod_eq_of_lt hMgt1]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: ErdosTernary2.lean:19963:0: GSTGraphV2HandwrittenExponentialLTE.pow4_three_power_lte_exact (r : ℕ) : 4 ^ 3 ^ r = 1 + 3 ^ (r + 1) * lteCoeff r
+info: ErdosTernary2.lean:19964:0: GSTGraphV2HandwrittenExponentialLTE.lteCoeff_mod3_one (r : ℕ) : lteCoeff r % 3 = 1
+info: ErdosTernary2.lean:19965:0: GSTGraphV2HandwrittenExponentialLTE.pow4_scaled_mod_next (r u : ℕ) : 4 ^ (3 ^ r * u) % 3 ^ (r + 1) = 1
+info: ErdosTernary2.lean:19966:0: GSTGraphV2HandwrittenExponentialLTE.pow4_scaled_cut_carry_zero (r u : ℕ) (hr : 2 ≤ r) : carry4 (4 ^ (3 ^ r * u)) r = 0
+info: ErdosTernary2.lean:19967:0: GSTGraphV2HandwrittenExponentialLTE.pow4_scaled_cut_digit_zero (r u : ℕ) (hr : 2 ≤ r) : digit3 (4 ^ (3 ^ r * u)) r = 0
+info: ErdosTernary2.lean:19968:0: GSTGraphV2HandwrittenExponentialLTE.uTailEnergy_cut_neutral (t n K : ℕ) (hcut : 2 ≤ t + K) :
+  (graph (uTailEnergy t n K) 0 (t + K)).seven.carry = 0 ∧
+    (graph (uTailEnergy t n K) 0 (t + K)).seven.digit = 0 ∧
+      (graph (uTailEnergy t n K) 0 (t + K)).seven.space = Space.null
+info: ErdosTernary2.lean:19969:0: GSTGraphV2HandwrittenExponentialLTE.canonical_child_u_cut_neutral (s n q : ℕ) (hs : 1 ≤ s) :
+  (graph (uTailEnergy (s + 1) n (q + 1)) 0 (s + 2 + q)).seven.carry = 0 ∧
+    (graph (uTailEnergy (s + 1) n (q + 1)) 0 (s + 2 + q)).seven.digit = 0 ∧
+      (graph (uTailEnergy (s + 1) n (q + 1)) 0 (s + 2 + q)).seven.space = Space.null
+info: ErdosTernary2.lean:19970:0: 'GSTGraphV2HandwrittenExponentialLTE.pow4_three_power_lte_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:19971:0: 'GSTGraphV2HandwrittenExponentialLTE.uTailEnergy_cut_neutral' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:20230:0: GSTGraphV2HandwrittenAnchoredCocycle.carryWord_append_exact (E p start P N : ℕ) :
+  carryWord E p start (P + N) = 4 ^ N * carryWord E p start P + carryWord E p (start + P) N
+info: ErdosTernary2.lean:20231:0: GSTGraphV2HandwrittenAnchoredCocycle.graph_u_potential_cocycle_exact (E start P N p : ℕ) :
+  graphUPotential E start (P + N) p = graphUPotential E (start + P) N p + ↑(4 ^ N) * graphUPotential E start P p
+info: ErdosTernary2.lean:20232:0: GSTGraphV2HandwrittenAnchoredCocycle.graph_u_equationIII_shifted_exact (E start N p : ℕ) :
+  gstUJumpExact (graph E (start + N) p).seven.carry (graph E (start + N) p).seven.digit -
+      ↑(4 ^ N) * gstUJumpExact (graph E start p).seven.carry (graph E start p).seven.digit =
+    3 * graphUPotential E start N (p + 1) - graphUPotential E start N p
+info: ErdosTernary2.lean:20233:0: GSTGraphV2HandwrittenAnchoredCocycle.graph_u_equationIII_shifted_telescope (E start N p K : ℕ) :
+  ∑ j ∈ Finset.range K,
+      ↑(3 ^ j) *
+        (gstUJumpExact (graph E (start + N) (p + j)).seven.carry (graph E (start + N) (p + j)).seven.digit -
+          ↑(4 ^ N) * gstUJumpExact (graph E start (p + j)).seven.carry (graph E start (p + j)).seven.digit) =
+    ↑(3 ^ K) * graphUPotential E start N (p + K) - graphUPotential E start N p
+info: ErdosTernary2.lean:20234:0: GSTGraphV2HandwrittenAnchoredCocycle.happy_iff_gst_u_jump_negative (C d : ℕ) (hC : C < 4) (hd : d < 3) :
+  HappyCell C d ↔ gstUJumpExact C d < 0
+info: ErdosTernary2.lean:20235:0: GSTGraphV2HandwrittenAnchoredCocycle.graph_u_derivative_positive_of_child_happy_right_bad (E start N p : ℕ)
+  (hChild : HappyCell (graph E start p).seven.carry (graph E start p).seven.digit)
+  (hRight : ¬HappyCell (graph E (start + N) p).seven.carry (graph E (start + N) p).seven.digit) :
+  0 < 3 * graphUPotential E start N (p + 1) - graphUPotential E start N p
+info: ErdosTernary2.lean:20236:0: GSTGraphV2HandwrittenAnchoredCocycle.graph_u_jump_cocycle_exact (E start P N p : ℕ) :
+  gstUJumpExact (graph E (start + (P + N)) p).seven.carry (graph E (start + (P + N)) p).seven.digit -
+      ↑(4 ^ (P + N)) * gstUJumpExact (graph E start p).seven.carry (graph E start p).seven.digit =
+    gstUJumpExact (graph E (start + P + N) p).seven.carry (graph E (start + P + N) p).seven.digit -
+        ↑(4 ^ N) * gstUJumpExact (graph E (start + P) p).seven.carry (graph E (start + P) p).seven.digit +
+      ↑(4 ^ N) *
+        (gstUJumpExact (graph E (start + P) p).seven.carry (graph E (start + P) p).seven.digit -
+          ↑(4 ^ P) * gstUJumpExact (graph E start p).seven.carry (graph E start p).seven.digit)
+info: ErdosTernary2.lean:20237:0: GSTGraphV2HandwrittenAnchoredCocycle.canonical_u_recoordinate_exact (s n q x p : ℕ) :
+  (graph (canonicalEnergy s n) x p).seven.carry =
+      (graph (uTailEnergy (s + 1) n (q + 1)) (uPhaseShift (s + 1) n (q + 1) + x) p).seven.carry ∧
+    (graph (canonicalEnergy s n) x p).seven.digit =
+        (graph (uTailEnergy (s + 1) n (q + 1)) (uPhaseShift (s + 1) n (q + 1) + x) p).seven.digit ∧
+      (graph (canonicalEnergy s n) x p).eventCode =
+          (graph (uTailEnergy (s + 1) n (q + 1)) (uPhaseShift (s + 1) n (q + 1) + x) p).eventCode ∧
+        (graph (canonicalEnergy s n) x p).uCharge =
+          (graph (uTailEnergy (s + 1) n (q + 1)) (uPhaseShift (s + 1) n (q + 1) + x) p).uCharge
+info: ErdosTernary2.lean:20238:0: GSTGraphV2HandwrittenAnchoredCocycle.handwritten_u_anchored_cocycle_exact (s n q : ℕ) (hs : 1 ≤ s) :
+  have T := uTailEnergy (s + 1) n (q + 1);
+  have P := uPhaseShift (s + 1) n (q + 1);
+  have N := canonicalWidth s;
+  have p := s + 2 + q;
+  (graph T 0 p).seven.carry = 0 ∧
+    (graph T 0 p).seven.digit = 0 ∧
+      (graph (canonicalEnergy s n) 0 p).seven.carry = (graph T P p).seven.carry ∧
+        (graph (canonicalEnergy s n) 0 p).seven.digit = (graph T P p).seven.digit ∧
+          (graph (canonicalEnergy s n) N p).seven.carry = (graph T (P + N) p).seven.carry ∧
+            (graph (canonicalEnergy s n) N p).seven.digit = (graph T (P + N) p).seven.digit ∧
+              graphUPotential T 0 (P + N) p = graphUPotential T P N p + ↑(4 ^ N) * graphUPotential T 0 P p
+info: ErdosTernary2.lean:20239:0: 'GSTGraphV2HandwrittenAnchoredCocycle.graph_u_equationIII_shifted_telescope' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:20240:0: 'GSTGraphV2HandwrittenAnchoredCocycle.graph_u_derivative_positive_of_child_happy_right_bad' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:20241:0: 'GSTGraphV2HandwrittenAnchoredCocycle.handwritten_u_anchored_cocycle_exact' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:20606:0: GSTU2DPureDivergence83.density83_physical_table :
+  density83 0 0 = -105 ∧
+    density83 0 1 = -84 ∧
+      density83 0 2 = 168 ∧
+        density83 1 0 = -28 ∧
+          density83 1 1 = -28 ∧
+            density83 1 2 = -49 ∧
+              density83 2 0 = 0 ∧
+                density83 2 1 = -105 ∧ density83 2 2 = 0 ∧ density83 3 0 = -105 ∧ density83 3 1 = 0 ∧ density83 3 2 = 84
+info: ErdosTernary2.lean:20607:0: GSTU2DPureDivergence83.happy_iff_density83_positive (C d : ℕ) (hC : C < 4) (hd : d < 3) :
+  HappyCell C d ↔ 0 < density83 C d
+info: ErdosTernary2.lean:20608:0: GSTU2DPureDivergence83.reverseDensity83_exact (C Cnext d : ℕ → ℕ) (N : ℕ) :
+  (∀ t < N, outDigit (C t) (d t) = d (t + 1)) →
+    (∀ t < N, nextCarry (C t) (d t) = Cnext t) →
+      reverseDensity83 C d N =
+        digitPotential83 (d N) - ↑(8 ^ N) * digitPotential83 (d 0) + reverseCarry83 C N - 3 * reverseCarry83 Cnext N
+info: ErdosTernary2.lean:20609:0: GSTU2DPureDivergence83.density83_rectangle_exact (C d : ℕ → ℕ → ℕ) (N K : ℕ)
+  (hcell :
+    ∀ (t p : ℕ),
+      t < N →
+        p < K →
+          C t p < 4 ∧ d t p < 3 ∧ outDigit (C t p) (d t p) = d (t + 1) p ∧ nextCarry (C t p) (d t p) = C t (p + 1)) :
+  ∑ p ∈ Finset.range K, ↑(3 ^ p) * reverseDensity83 (fun t => C t p) (fun t => d t p) N =
+    ∑ p ∈ Finset.range K, ↑(3 ^ p) * (digitPotential83 (d N p) - ↑(8 ^ N) * digitPotential83 (d 0 p)) +
+        reverseCarry83 (fun t => C t 0) N -
+      ↑(3 ^ K) * reverseCarry83 (fun t => C t K) N
+info: ErdosTernary2.lean:20610:0: GSTU2DPureDivergence83.weightedRectanglePrefix83_positive_of_top_leading_happy (C d : ℕ → ℕ → ℕ) (N q : ℕ) (hN : 1 ≤ N)
+  (hC : ∀ (t p : ℕ), t < N → p ≤ q → C t p < 4) (hd : ∀ (t p : ℕ), t < N → p ≤ q → d t p < 3)
+  (hHappy : HappyCell (C 0 q) (d 0 q)) : 0 < weightedRectanglePrefix83 C d N (q + 1)
+info: ErdosTernary2.lean:20611:0: GSTU2DPureDivergence83.graph_density83_rectangle_exact (E N K : ℕ) :
+  ∑ p ∈ Finset.range K,
+      ↑(3 ^ p) * reverseDensity83 (fun t => (graph E t p).seven.carry) (fun t => (graph E t p).seven.digit) N =
+    ∑ p ∈ Finset.range K,
+          ↑(3 ^ p) *
+            (digitPotential83 (graph E N p).seven.digit - ↑(8 ^ N) * digitPotential83 (graph E 0 p).seven.digit) +
+        reverseCarry83 (fun t => (graph E t 0).seven.carry) N -
+      ↑(3 ^ K) * reverseCarry83 (fun t => (graph E t K).seven.carry) N
+info: ErdosTernary2.lean:20612:0: 'GSTU2DPureDivergence83.density83_rectangle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:20613:0: 'GSTU2DPureDivergence83.weightedRectanglePrefix83_positive_of_top_leading_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:20614:0: 'GSTU2DPureDivergence83.graph_density83_rectangle_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:20941:0: GSTGraphV2Production.Cell : Type
+info: ErdosTernary2.lean:20942:0: GSTGraphV2Production.graph (E : ℕ) : Sheet
+info: ErdosTernary2.lean:20943:0: GSTGraphV2Production.Direction : Type
+info: ErdosTernary2.lean:20944:0: GSTGraphV2Production.Edge : Type
+info: ErdosTernary2.lean:20945:0: GSTGraphV2Production.horizontalEdge (E t p : ℕ) : Edge
+info: ErdosTernary2.lean:20946:0: GSTGraphV2Production.verticalEdge (E t p : ℕ) : Edge
+info: ErdosTernary2.lean:20947:0: GSTGraphV2Production.Lattice : Type
+info: ErdosTernary2.lean:20948:0: GSTGraphV2Production.lattice (E : ℕ) : Lattice
+info: ErdosTernary2.lean:20949:0: GSTGraphV2Production.Neighborhood : Type
+info: ErdosTernary2.lean:20950:0: GSTGraphV2Production.neighborhood (E t p : ℕ) : Neighborhood
+info: ErdosTernary2.lean:20951:0: GSTGraphV2Production.Rectangle : Type
+info: ErdosTernary2.lean:20952:0: GSTGraphV2Production.rectangle (E N p : ℕ) : Rectangle
+info: ErdosTernary2.lean:20953:0: GSTGraphV2Production.OriginCoordinates : Type
+info: ErdosTernary2.lean:20954:0: GSTGraphV2Production.originCoordinates (t n K : ℕ) : OriginCoordinates
+info: ErdosTernary2.lean:20955:0: GSTGraphV2Production.OriginFrame : Type
+info: ErdosTernary2.lean:20956:0: GSTGraphV2Production.originFrame (t n K x p : ℕ) : OriginFrame
+info: ErdosTernary2.lean:20957:0: GSTGraphV2Production.canonicalGraph (s n : ℕ) : Sheet
+info: ErdosTernary2.lean:20958:0: GSTGraphV2Production.canonicalLattice (s n : ℕ) : Lattice
+info: ErdosTernary2.lean:20959:0: GSTGraphV2Production.canonicalRectangle (s n p : ℕ) : Rectangle
+info: ErdosTernary2.lean:20960:0: GSTGraphV2Production.residualGraph (s k m : ℕ) : Sheet
+info: ErdosTernary2.lean:20961:0: GSTGraphV2Production.residualLattice (s k m : ℕ) : Lattice
+info: ErdosTernary2.lean:20962:0: GSTGraphV2Production.residualRectangle (s k m p : ℕ) : Rectangle
+info: ErdosTernary2.lean:20963:0: GSTGraphV2Production.ResidualFrame : Type
+info: ErdosTernary2.lean:20964:0: GSTGraphV2Production.residualFrame (s k m p : ℕ) : ResidualFrame
+info: ErdosTernary2.lean:20965:0: GSTGraphV2Production.residualGateRow (s k j : ℕ) : ℕ
+info: ErdosTernary2.lean:20966:0: GSTGraphV2Production.ResidualGateFrame : Type
+info: ErdosTernary2.lean:20967:0: GSTGraphV2Production.residualGateFrame (s k m j : ℕ) : ResidualGateFrame
+info: ErdosTernary2.lean:20968:0: GSTGraphV2Production.CanonicalCutFrame : Type
+info: ErdosTernary2.lean:20969:0: GSTGraphV2Production.canonicalCutFrame (s n q : ℕ) : CanonicalCutFrame
+info: ErdosTernary2.lean:21164:0: GSTGraphV2ProductionLaws.horizontal_digit_exact (E t p : ℕ) :
+  GST2DMixedEmergence.outDigit (cell E t p).seven.carry (cell E t p).seven.digit = (cell E (t + 1) p).seven.digit
+info: ErdosTernary2.lean:21165:0: GSTGraphV2ProductionLaws.vertical_carry_exact (E t p : ℕ) :
+  GST2DMixedEmergence.nextCarry (cell E t p).seven.carry (cell E t p).seven.digit = (cell E t (p + 1)).seven.carry
+info: ErdosTernary2.lean:21166:0: GSTGraphV2ProductionLaws.navigation_nullspace_flux_exact (E t p : ℕ) :
+  4 * ((cell E t p).absoluteEnergy % 3 ^ p) = (cell E t p).navigationNullspace + 3 ^ p * (cell E t p).seven.carry
+info: ErdosTernary2.lean:21167:0: GSTGraphV2ProductionLaws.origin_frame_phased_state_exact (t n K x p : ℕ) :
+  (originFrame t n K x p).full.seven.carry = (originFrame t n K x p).phasedTail.seven.carry ∧
+    (originFrame t n K x p).full.seven.digit = (originFrame t n K x p).phasedTail.seven.digit
+info: ErdosTernary2.lean:21168:0: GSTGraphV2ProductionLaws.canonical_cut_neutral_tail (s n q : ℕ) (hs : 1 ≤ s) :
+  have F := canonicalCutFrame s n q;
+  F.uFrame.neutralTail.seven.carry = 0 ∧
+    F.uFrame.neutralTail.seven.digit = 0 ∧ F.uFrame.neutralTail.seven.space = Space.null
+info: ErdosTernary2.lean:21169:0: GSTGraphV2ProductionLaws.residual_gate_neutral_tail (s k m j : ℕ) (hs : 1 ≤ s) (hk : 1 ≤ k) :
+  have F := residualGateFrame s k m j;
+  F.originFrame.neutralTail.seven.carry = 0 ∧
+    F.originFrame.neutralTail.seven.digit = 0 ∧ F.originFrame.neutralTail.seven.space = Space.null
+info: ErdosTernary2.lean:21170:0: GSTGraphV2ProductionLaws.residual_gate_left_is_phased_tail (s k m j : ℕ) :
+  have F := residualGateFrame s k m j;
+  F.residual.block.left.seven.carry = F.originFrame.phasedTail.seven.carry ∧
+    F.residual.block.left.seven.digit = F.originFrame.phasedTail.seven.digit
+info: ErdosTernary2.lean:21171:0: GSTGraphV2ProductionLaws.residual_right_absolute_state_exact (s k m p : ℕ) :
+  have F := residualFrame s k m p;
+  F.block.right.seven.carry = (cell 1 F.parentExponent p).seven.carry ∧
+    F.block.right.seven.digit = (cell 1 F.parentExponent p).seven.digit ∧
+      F.block.right.eventCode = (cell 1 F.parentExponent p).eventCode ∧
+        F.block.right.uCharge = (cell 1 F.parentExponent p).uCharge ∧
+          F.block.right.mixedCharge = (cell 1 F.parentExponent p).mixedCharge ∧
+            F.block.right.crossingCharge = (cell 1 F.parentExponent p).crossingCharge ∧
+              F.block.right.survive = (cell 1 F.parentExponent p).survive
+info: ErdosTernary2.lean:21172:0: GSTGraphV2ProductionLaws.residual_level_one_width (k m p : ℕ) : (residualFrame 1 k m p).parentWidth = 3
+info: ErdosTernary2.lean:21173:0: GSTGraphV2ProductionLaws.residual_level_one_parent_exponent (k m p : ℕ) :
+  (residualFrame 1 k m p).parentExponent = 3 + 3 ^ (k + 1) * m
+info: ErdosTernary2.lean:21174:0: GSTGraphV2ProductionLaws.residual_level_one_origin_one_energy_step (k m p : ℕ) (hm1 : m % 3 = 1) :
+  (residualFrame 1 k m p).childEnergy = 4 ^ 3 ^ (k + 1) * (residualFrame 1 k m p).nextTailEnergy
+info: ErdosTernary2.lean:21176:0: 'GSTGraphV2ProductionLaws.horizontal_digit_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:21177:0: 'GSTGraphV2ProductionLaws.origin_frame_phased_state_exact' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:21178:0: 'GSTGraphV2ProductionLaws.canonical_cut_neutral_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:21179:0: 'GSTGraphV2ProductionLaws.residual_gate_neutral_tail' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:21180:0: 'GSTGraphV2ProductionLaws.residual_gate_left_is_phased_tail' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:21181:0: 'GSTGraphV2ProductionLaws.residual_right_absolute_state_exact' depends on axioms: [propext]
+info: ErdosTernary2.lean:21182:0: 'GSTGraphV2ProductionLaws.residual_level_one_origin_one_energy_step' depends on axioms: [propext, Quot.sound]
+warning: ErdosTernary2.lean:21396:21: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+error: ErdosTernary2.lean:22108:8: Tactic `rewrite` failed: Did not find an occurrence of the pattern
+  carryWord E p 1 N + 4 ^ N * (graph E 1 p).seven.digit
+in the target expression
+  ((graphCoupledState E N p).childResidue + 4 ^ N * (graph E 1 p).seven.digit) / 3 =
+    (graphCoupledState E N (p + 1)).childResidue
+
+case hChildResidue
+E N p : ℕ
+hout :
+  GSTV2.cellOutput (graphCoupledState E N p).childCarry ((graphCoupledState E N p).childTail % 3) =
+    (graph E 1 p).seven.digit
+hbal :
+  carryWord E p 1 N + 4 ^ N * (graph E 1 p).seven.digit = (graph E (1 + N) p).seven.digit + 3 * carryWord E (p + 1) 1 N
+hdlt : (graph E (1 + N) p).seven.digit < 3
+h3 : 0 < 3
+⊢ ((graphCoupledState E N p).childResidue + 4 ^ N * (graph E 1 p).seven.digit) / 3 =
+    (graphCoupledState E N (p + 1)).childResidue
+info: ErdosTernary2.lean:22510:0: GSTU2DExactCrossingCharge.sharpTerminalPotential_step (C d : ℕ) (hC : C < 4) (hd : d < 3) :
+  sharpTerminalPotential (outDigit C d) ≤ 4 * sharpTerminalPotential d + 5 * crossDensity C d
+info: ErdosTernary2.lean:22511:0: GSTU2DExactCrossingCharge.reverseCrossCode_ge_sharp_of_leading_happy (C d : ℕ → ℕ) (hfirst : HappyCell (C 0) (d 0))
+  (N : ℕ) :
+  1 ≤ N →
+    (∀ t < N, C t < 4) →
+      (∀ t < N, d t < 3) →
+        (∀ t < N, outDigit (C t) (d t) = d (t + 1)) →
+          94 * ↑(4 ^ N) + sharpTerminalPotential (d N) ≤ 5 * reverseCrossCode C d N
+info: ErdosTernary2.lean:22512:0: GSTU2DExactCrossingCharge.reverseCrossCode_ge_global_floor (C d : ℕ → ℕ) (N : ℕ) :
+  (∀ t < N, C t < 4) → (∀ t < N, d t < 3) → 37 - 37 * ↑(4 ^ N) ≤ reverseCrossCode C d N
+info: ErdosTernary2.lean:22513:0: GSTU2DExactCrossingCharge.weightedCrossPrefix_ge_global_floor (C d : ℕ → ℕ → ℕ) (N K : ℕ) :
+  (∀ (t p : ℕ), t < N → p < K → C t p < 4) →
+    (∀ (t p : ℕ), t < N → p < K → d t p < 3) → (37 - 37 * ↑(4 ^ N)) * (↑(3 ^ K) - 1) ≤ 2 * weightedCrossPrefix C d N K
+info: ErdosTernary2.lean:22514:0: GSTU2DExactCrossingCharge.weightedCrossPrefix_positive_of_top_leading_happy (C d : ℕ → ℕ → ℕ) (N q : ℕ) (hN : 1 ≤ N)
+  (hC : ∀ (t p : ℕ), t < N → p ≤ q → C t p < 4) (hd : ∀ (t p : ℕ), t < N → p ≤ q → d t p < 3)
+  (hout : ∀ (t p : ℕ), t < N → p ≤ q → outDigit (C t p) (d t p) = d (t + 1) p) (hHappy : HappyCell (C 0 q) (d 0 q)) :
+  0 < weightedCrossPrefix C d N (q + 1)
+info: ErdosTernary2.lean:22515:0: 'GSTU2DExactCrossingCharge.sharpTerminalPotential_step' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:22516:0: 'GSTU2DExactCrossingCharge.reverseCrossCode_ge_sharp_of_leading_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:22517:0: 'GSTU2DExactCrossingCharge.reverseCrossCode_ge_global_floor' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:22518:0: 'GSTU2DExactCrossingCharge.weightedCrossPrefix_ge_global_floor' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:22519:0: 'GSTU2DExactCrossingCharge.weightedCrossPrefix_positive_of_top_leading_happy' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+warning: ErdosTernary2.lean:22830:32: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+warning: ErdosTernary2.lean:22872:34: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+info: ErdosTernary2.lean:22875:0: GSTFinalPurePowerResidueTransplant.stripQuotient_succ (r M j : ℕ) (hM : 0 < M) :
+  stripQuotient r M (j + 1) = 4 * stripQuotient r M j + stripCarry r M j
+info: ErdosTernary2.lean:22876:0: GSTFinalPurePowerResidueTransplant.stripCarry_is_information_digit (r M i k : ℕ) (hM : 0 < M) :
+  stripQuotient r M (i + k + 1) / 4 ^ k % 4 = stripCarry r M i
+info: ErdosTernary2.lean:22877:0: GSTFinalPurePowerResidueTransplant.stripConservation_exact (B R p : ℕ) :
+  B * wideDigit R p + wideCarry B R p = wideDigit (B * R) p + 3 * wideCarry B R (p + 1)
+info: ErdosTernary2.lean:22878:0: GSTFinalPurePowerResidueTransplant.pow4_exponent_trit_lift_digit (p m c a : ℕ) (ha : a < 3)
+  (hA : 4 ^ 3 ^ p = 1 + 3 ^ (p + 1) * c) (hc : c % 3 = 1) :
+  digit3 (4 ^ (m + a * 3 ^ p)) (p + 1) = (digit3 (4 ^ m) (p + 1) + a) % 3
+info: ErdosTernary2.lean:22879:0: GSTFinalPurePowerResidueTransplant.purePowerStripInputResidue (D T E K q : ℕ) (hD : 1 ≤ D) (hE : E = 1 + 3 * D * T)
+  (hPow : E = 4 ^ K) : 4 ^ K % (3 * D * 3 ^ q) = 1 + 3 * D * (T % 3 ^ q)
+info: ErdosTernary2.lean:22880:0: GSTFinalPurePowerResidueTransplant.residueStripCarry_is_exact_power_carry (s K q i : ℕ) :
+  stripCarry (4 ^ K % residueTowerModulus (3 ^ (s + 1)) q) (residueTowerModulus (3 ^ (s + 1)) q) i =
+    carry4 (4 ^ (K + i)) (s + 2 + q)
+info: ErdosTernary2.lean:22881:0: GSTFinalPurePowerResidueTransplant.exactPowerRectangle_conservation (s N K q : ℕ) :
+  4 ^ (N + 1) * digit3 (4 ^ K) (s + 2 + q) + wideCarry (4 ^ (N + 1)) (4 ^ K) (s + 2 + q) =
+    digit3 (4 ^ (K + N + 1)) (s + 2 + q) + 3 * wideCarry (4 ^ (N + 1)) (4 ^ K) (s + 2 + q + 1)
+warning: ErdosTernary2.lean:23520:15: Variable name `hN` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hN
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:23646:5: Variable name `h0` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h0
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: ErdosTernary2.lean:23949:0: gpt56_binary_residue_gap_doubles (R p r : ℕ) (ha : GSTPhysicalKernel.binaryColumnCarry R p r = 1) :
+  3 ^ p - 2 ^ (r + 1) * R % 3 ^ p = 2 * (3 ^ p - 2 ^ r * R % 3 ^ p)
+info: ErdosTernary2.lean:23950:0: gpt56_physical_noBig1_impossible (R p : ℕ)
+  (hclear :
+    GSTBig1ClearInfinitePathS (fun r => GSTPhysicalKernel.binaryColumnCarry R p r) fun r =>
+      GSTPhysicalKernel.binaryColumnDigit R p r)
+  (h0 : GSTPhysicalKernel.binaryColumnDigit R p 0 ≠ 0) : False
+info: ErdosTernary2.lean:23951:0: gpt56_physical_path_forces_first_big1 (R p : ℕ) (h0 : GSTPhysicalKernel.binaryColumnDigit R p 0 ≠ 0) :
+  ∃ N, GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit R p r) N
+info: ErdosTernary2.lean:23952:0: 'gpt56_binary_residue_gap_doubles' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:23953:0: 'gpt56_physical_noBig1_impossible' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:23954:0: 'gpt56_physical_path_forces_first_big1' depends on axioms: [propext, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:24003:6: Ambiguous term
+  gstBinaryBridgeMassS
+Possible interpretations:
+  _root_.gstBinaryBridgeMassS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+  
+  GSTInfiniteV2.gstBinaryBridgeMassS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+error: ErdosTernary2.lean:24006:6: Ambiguous term
+  gstBinaryBridgeEventS
+Possible interpretations:
+  _root_.gstBinaryBridgeEventS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+  
+  GSTInfiniteV2.gstBinaryBridgeEventS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+info: ErdosTernary2.lean:24024:0: gpt56_child_digit_two_forces_first_big1 (T q : ℕ) (hd2 : gstDigit T q = 2) :
+  ∃ N, 1 ≤ N ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N
+info: ErdosTernary2.lean:24025:0: gpt56_child_digit_two_forces_destroy_boundary (T q : ℕ) (hd2 : gstDigit T q = 2) :
+  ∃ N,
+    1 ≤ N ∧
+      GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+        have j := N - 1;
+        GSTPhysicalKernel.binaryColumnCarry T q j = 0 ∧
+          GSTPhysicalKernel.binaryColumnDigit T q j = 2 ∧ sorry = 4 ∧ sorry = 5
+info: ErdosTernary2.lean:24026:0: 'gpt56_child_digit_two_forces_first_big1' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24027:0: 'gpt56_child_digit_two_forces_destroy_boundary' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:24058:6: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (4 ^ 3 ^ s * T) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (4 ^ 3 ^ s * T) q : ℕ
+error: ErdosTernary2.lean:24059:45: ambiguous term, use fully qualified name, possible interpretations [_root_.gstDigitS, GSTInfiniteV2.gstDigitS]
+error: ErdosTernary2.lean:24120:4: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (4 ^ 3 ^ s * T) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (4 ^ 3 ^ s * T) q : ℕ
+info: ErdosTernary2.lean:24124:0: gpt56_parent_multiplier_is_binary_bridge (s : ℕ) : 4 ^ 3 ^ s = 2 ^ (2 * 3 ^ s)
+info: ErdosTernary2.lean:24125:0: gpt56_parent_binary_endpoint_digit (s T q : ℕ) : GSTPhysicalKernel.binaryColumnDigit T q (2 * 3 ^ s) = sorry
+info: ErdosTernary2.lean:24126:0: gpt56_no_big1_before_parent_endpoint_digit_two (s T q : ℕ) (hd2 : gstDigit T q = 2)
+  (hno : ∀ r ≤ 2 * 3 ^ s, GSTPhysicalKernel.binaryColumnDigit T q r ≠ 1) : sorry = 2
+info: ErdosTernary2.lean:24127:0: 'gpt56_parent_multiplier_is_binary_bridge' depends on axioms: [propext]
+info: ErdosTernary2.lean:24128:0: 'gpt56_no_big1_before_parent_endpoint_digit_two' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+warning: ErdosTernary2.lean:24143:30: Variable name `hn` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hn
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+error: ErdosTernary2.lean:24202:6: Ambiguous term
+  gstBinaryBridgeMassS
+Possible interpretations:
+  _root_.gstBinaryBridgeMassS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+  
+  GSTInfiniteV2.gstBinaryBridgeMassS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+error: ErdosTernary2.lean:24205:6: Ambiguous term
+  gstBinaryBridgeEventS
+Possible interpretations:
+  _root_.gstBinaryBridgeEventS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+  
+  GSTInfiniteV2.gstBinaryBridgeEventS (GSTPhysicalKernel.binaryColumnCarry T q j)
+    (GSTPhysicalKernel.binaryColumnDigit T q j) : ℕ
+info: ErdosTernary2.lean:24216:0: gpt56_prefix_one_live_handwritten_package (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        1 ≤ N ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧ GSTSeededAffineBadTrace 1 X
+info: ErdosTernary2.lean:24217:0: gpt56_prefix_one_live_destroy_boundary (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        GSTSeededAffineBadTrace 1 X ∧
+          1 ≤ N ∧
+            GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+              have j := N - 1;
+              GSTPhysicalKernel.binaryColumnCarry T q j = 0 ∧
+                GSTPhysicalKernel.binaryColumnDigit T q j = 2 ∧ sorry = 4 ∧ sorry = 5
+info: ErdosTernary2.lean:24218:0: 'gpt56_prefix_one_live_handwritten_package' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24219:0: 'gpt56_prefix_one_live_destroy_boundary' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:24317:4: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS a d N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS a d N : ℕ
+error: ErdosTernary2.lean:24322:4: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS a d N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS a d N : ℕ
+error: ErdosTernary2.lean:24365:4: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS a d N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS a d N : ℕ
+error: ErdosTernary2.lean:24384:4: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS a d N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS a d N : ℕ
+error: ErdosTernary2.lean:24410:21: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (4 ^ 3 ^ s * T) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (4 ^ 3 ^ s * T) q : ℕ
+error: ErdosTernary2.lean:24439:6: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+error: ErdosTernary2.lean:24460:6: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS a d N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS a d N : ℕ
+error: ErdosTernary2.lean:24485:6: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+error: ErdosTernary2.lean:24526:23: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (A * T) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (A * T) q : ℕ
+info: ErdosTernary2.lean:24539:0: GSTInformationEqualsBigNS (d : ℕ → ℕ) (N : ℕ) : Prop
+info: ErdosTernary2.lean:24540:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+info: ErdosTernary2.lean:24541:0: gst_three_world_mixed_factor_exactS (j : ℕ) :
+  gstMixedWorldFactorS j = gstBinaryWorldFactorS j * gstTernaryWorldFactorS j
+info: ErdosTernary2.lean:24542:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+info: ErdosTernary2.lean:24543:0: gst_information_eq_bigN_exact_three_world_codeS (a d : ℕ → ℕ) (hpath : GSTInfiniteBridgePathS a d) (h0 : d 0 ≠ 0)
+  (N : ℕ) (hN : 1 ≤ N) (hbig : GSTInformationEqualsBigNS d N) :
+  sorry = 5 * (gstBinaryWorldFactorS (N - 1) * gstTernaryWorldFactorS (N - 1)) - 1
+info: ErdosTernary2.lean:24544:0: gst_information_eq_bigN_exact_joined_equationS (a d : ℕ → ℕ) (hpath : GSTInfiniteBridgePathS a d) (h0 : d 0 ≠ 0) (N : ℕ)
+  (hN : 1 ≤ N) (hbig : GSTInformationEqualsBigNS d N) :
+  sorry =
+    gstHandwrittenThreeWorldJoinedPrefixS (N - 1) + 4 * (gstBinaryWorldFactorS (N - 1) * gstTernaryWorldFactorS (N - 1))
+info: ErdosTernary2.lean:24545:0: gst_information_eq_bigN_exact_sum_equationS (a d : ℕ → ℕ) (hpath : GSTInfiniteBridgePathS a d) (h0 : d 0 ≠ 0) (N : ℕ)
+  (hN : 1 ≤ N) (hbig : GSTInformationEqualsBigNS d N) :
+  sorry = 5 * ∑ j ∈ Finset.range (N - 1), 2 ^ j * 3 ^ j + 4 * (2 ^ (N - 1) * 3 ^ (N - 1))
+info: ErdosTernary2.lean:24546:0: gpt56_parent_segment_three_world_factorS (s : ℕ) : 4 ^ 3 ^ s * 3 ^ (2 * 3 ^ s) = 6 ^ (2 * 3 ^ s)
+info: ErdosTernary2.lean:24547:0: gpt56_information_bigN_vs_parent_segmentS (s T q N : ℕ) (hd2 : gstDigit T q = 2)
+  (hbig : GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N) :
+  N ≤ 2 * 3 ^ s ∨ 2 * 3 ^ s < N ∧ sorry = 2
+info: ErdosTernary2.lean:24548:0: gpt56_prefix_one_live_information_bigN_three_world (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        1 ≤ N ∧
+          GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+            sorry = 5 * (gstBinaryWorldFactorS (N - 1) * gstTernaryWorldFactorS (N - 1)) - 1 ∧
+              GSTSeededAffineBadTrace 1 X
+info: ErdosTernary2.lean:24549:0: gpt56_prefix_one_live_information_bigN_sum_equation (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        1 ≤ N ∧
+          GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+            sorry = 5 * ∑ j ∈ Finset.range (N - 1), 2 ^ j * 3 ^ j + 4 * (2 ^ (N - 1) * 3 ^ (N - 1)) ∧
+              GSTSeededAffineBadTrace 1 X
+info: ErdosTernary2.lean:24550:0: gpt56_prefix_one_live_bigN_parent_segment_split (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+          (N ≤ 2 * 3 ^ s ∨ 2 * 3 ^ s < N ∧ sorry = 2) ∧ GSTSeededAffineBadTrace 1 X
+info: ErdosTernary2.lean:24551:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+info: ErdosTernary2.lean:24552:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24553:0: 'gst_information_eq_bigN_exact_three_world_codeS' depends on axioms: [propext, sorryAx]
+info: ErdosTernary2.lean:24554:0: 'gst_information_eq_bigN_exact_joined_equationS' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24555:0: 'gst_information_eq_bigN_exact_sum_equationS' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24556:0: 'gpt56_parent_segment_three_world_factorS' depends on axioms: [propext]
+info: ErdosTernary2.lean:24557:0: 'gpt56_information_bigN_vs_parent_segmentS' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24558:0: 'gpt56_prefix_one_live_information_bigN_three_world' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24559:0: 'gpt56_prefix_one_live_information_bigN_sum_equation' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:24560:0: 'gpt56_prefix_one_live_bigN_parent_segment_split' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+warning: ErdosTernary2.lean:24640:6: 'push_cast' tactic does nothing
+
+Note: This linter can be disabled with `set_option linter.unusedTactic false`
+error: ErdosTernary2.lean:24659:6: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+info: ErdosTernary2.lean:24682:0: gpt56_information_bigN_signed_kernel_exact (R p N : ℕ) (hd2 : gstDigit R p = 2) (hN : 1 ≤ N)
+  (hbig : GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit R p r) N) :
+  ∑ r ∈ Finset.range N,
+      GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry R p r)
+        (GSTPhysicalKernel.binaryColumnDigit R p r) =
+    7 * (↑N - 3)
+info: ErdosTernary2.lean:24683:0: gpt56_prefix_one_live_bigN_full_equation_packet (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        1 ≤ N ∧
+          GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+            sorry = 5 * ∑ j ∈ Finset.range (N - 1), 2 ^ j * 3 ^ j + 4 * (2 ^ (N - 1) * 3 ^ (N - 1)) ∧
+              ∑ r ∈ Finset.range N,
+                    GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry T q r)
+                      (GSTPhysicalKernel.binaryColumnDigit T q r) =
+                  7 * (↑N - 3) ∧
+                GSTSeededAffineBadTrace 1 X
+info: ErdosTernary2.lean:24684:0: 'gpt56_information_bigN_signed_kernel_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24685:0: 'gpt56_prefix_one_live_bigN_full_equation_packet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:24732:8: overloaded, errors 
+  24732:45 Ambiguous term
+    gstDigitS
+  Possible interpretations:
+    _root_.gstDigitS R j : ℕ
+    
+    GSTInfiniteV2.gstDigitS R j : ℕ
+  
+  24732:45 Ambiguous term
+    gstDigitS
+  Possible interpretations:
+    _root_.gstDigitS R j : ℕ
+    
+    GSTInfiniteV2.gstDigitS R j : ℕ
+error: ErdosTernary2.lean:24752:6: overloaded, errors 
+  24752:43 Ambiguous term
+    gstDigitS
+  Possible interpretations:
+    _root_.gstDigitS R j : ℕ
+    
+    GSTInfiniteV2.gstDigitS R j : ℕ
+  
+  24752:43 Ambiguous term
+    gstDigitS
+  Possible interpretations:
+    _root_.gstDigitS R j : ℕ
+    
+    GSTInfiniteV2.gstDigitS R j : ℕ
+error: ErdosTernary2.lean:24753:15: Tactic `introN` failed: There are no additional binders or `let` bindings in the goal to introduce
+
+R : ℕ
+hnav : GSTNavigationWitness R
+hex : ∃ j, gstDigit R j = 2 ∧ (gstCarry R j = 0 ∨ gstCarry R j = 3)
+q : ℕ := Nat.find hex
+hgate : gstDigit R (Nat.find hex) = 2 ∧ (gstCarry R (Nat.find hex) = 0 ∨ gstCarry R (Nat.find hex) = 3)
+j : ℕ
+hj : j < q
+⊢ sorry
+error: ErdosTernary2.lean:24733:54: unsolved goals
+R : ℕ
+hnav : GSTNavigationWitness R
+hex : ∃ j, gstDigit R j = 2 ∧ (gstCarry R j = 0 ∨ gstCarry R j = 3)
+q : ℕ := Nat.find hex
+hgate : gstDigit R (Nat.find hex) = 2 ∧ (gstCarry R (Nat.find hex) = 0 ∨ gstCarry R (Nat.find hex) = 3)
+hbad : ∀ j < q, sorry
+hC3 : gstCarry R q = 3
+⊢ 8 * (R % 3 ^ q) < 7 * 3 ^ q
+warning: ErdosTernary2.lean:24778:8: declaration uses `sorry`
+info: ErdosTernary2.lean:24896:0: gpt56_first_navigation_gate_u_control (R : ℕ) (hnav : GSTNavigationWitness R) :
+  ∃ q,
+    gstDigit R q = 2 ∧
+      (gstCarry R q = 0 ∨ gstCarry R q = 3) ∧ (∀ j < q, sorry) ∧ (gstCarry R q = 3 → 8 * (R % 3 ^ q) < 7 * 3 ^ q)
+info: ErdosTernary2.lean:24897:0: gpt56_first_navigation_gate_exact_binary_chord (R : ℕ) (hnav : GSTNavigationWitness R) :
+  ∃ q,
+    gstDigit R q = 2 ∧ gstCarry R q = 0 ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit R q r) 1 ∨
+      gstDigit R q = 2 ∧ gstCarry R q = 3 ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit R q r) 3
+info: ErdosTernary2.lean:24898:0: gpt56_first_navigation_gate_short_big1 (R : ℕ) (hnav : GSTNavigationWitness R) :
+  ∃ q N,
+    gstDigit R q = 2 ∧
+      (gstCarry R q = 0 ∨ gstCarry R q = 3) ∧
+        (N = 1 ∨ N = 3) ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit R q r) N
+info: ErdosTernary2.lean:24899:0: 'gpt56_first_navigation_gate_u_control' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24900:0: 'gpt56_first_navigation_gate_exact_binary_chord' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:24901:0: 'gpt56_first_navigation_gate_short_big1' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:24939:6: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+error: ErdosTernary2.lean:24977:6: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N : ℕ
+error: ErdosTernary2.lean:25043:8: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) 1 : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) 1 : ℕ
+error: ErdosTernary2.lean:25054:8: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) 3 : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry T q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) 3 : ℕ
+info: ErdosTernary2.lean:25116:0: gpt56_prefix_one_live_bigN_full_energy_packet (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  (∃ q N,
+      gstDigit T q = 2 ∧
+        (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+          1 ≤ N ∧
+            GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+              sorry = 5 * ∑ j ∈ Finset.range (N - 1), 2 ^ j * 3 ^ j + 4 * (2 ^ (N - 1) * 3 ^ (N - 1)) ∧
+                ∑ r ∈ Finset.range N,
+                      GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry T q r)
+                        (GSTPhysicalKernel.binaryColumnDigit T q r) =
+                    7 * (↑N - 3) ∧
+                  GSTSeededAffineBadTrace 1 X) ∧
+    4 ^ (3 ^ (s + 1) * n) = 1 + 3 ^ (s + 2) * T
+info: ErdosTernary2.lean:25117:0: gpt56_prefix_one_live_short_bigN_energy_packet (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q N,
+    gstDigit T q = 2 ∧
+      (gstCarry T q = 0 ∨ gstCarry T q = 3) ∧
+        (N = 1 ∨ N = 3) ∧
+          1 ≤ N ∧
+            GSTInformationEqualsBigNS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+              N ≤ 2 * 3 ^ s ∧
+                sorry = 5 * ∑ j ∈ Finset.range (N - 1), 2 ^ j * 3 ^ j + 4 * (2 ^ (N - 1) * 3 ^ (N - 1)) ∧
+                  ∑ r ∈ Finset.range N,
+                        GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry T q r)
+                          (GSTPhysicalKernel.binaryColumnDigit T q r) =
+                      7 * (↑N - 3) ∧
+                    GSTSeededAffineBadTrace 1 X ∧ 4 ^ (3 ^ (s + 1) * n) = 1 + 3 ^ (s + 2) * T
+info: ErdosTernary2.lean:25118:0: gpt56_prefix_one_live_exact_chord_energy_packet (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have T := gstNavigationConstant (s + 1) n;
+  have A := 4 ^ 3 ^ s;
+  have X := c s / 3 + A * T;
+  ∃ q,
+    (gstDigit T q = 2 ∧
+          gstCarry T q = 0 ∧
+            GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) 1 ∧
+              sorry = 4 ∧
+                ∑ r ∈ Finset.range 1,
+                    GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry T q r)
+                      (GSTPhysicalKernel.binaryColumnDigit T q r) =
+                  -14 ∨
+        gstDigit T q = 2 ∧
+          gstCarry T q = 3 ∧
+            GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) 3 ∧
+              sorry = 179 ∧
+                ∑ r ∈ Finset.range 3,
+                    GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry T q r)
+                      (GSTPhysicalKernel.binaryColumnDigit T q r) =
+                  0) ∧
+      GSTSeededAffineBadTrace 1 X ∧ 4 ^ (3 ^ (s + 1) * n) = 1 + 3 ^ (s + 2) * T
+info: ErdosTernary2.lean:25119:0: 'gpt56_prefix_one_live_bigN_full_energy_packet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25120:0: 'gpt56_prefix_one_live_short_bigN_energy_packet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25121:0: 'gpt56_prefix_one_live_exact_chord_energy_packet' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+warning: ErdosTernary2.lean:25169:42: Variable name `hs` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hs
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:25178:34: Used `tac1 <;> tac2` where `(tac1; tac2)` would suffice
+
+Note: This linter can be disabled with `set_option linter.unnecessarySeqFocus false`
+error: ErdosTernary2.lean:25189:2: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry (gpt56PhaseT s n) q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit (gpt56PhaseT s n) q r) 1 : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry (gpt56PhaseT s n) q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit (gpt56PhaseT s n) q r) 1 : ℕ
+error: ErdosTernary2.lean:25206:2: Ambiguous term
+  gstBig1ProjectedPathCodeS
+Possible interpretations:
+  _root_.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry (gpt56PhaseT s n) q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit (gpt56PhaseT s n) q r) 3 : ℕ
+  
+  GSTInfiniteV2.gstBig1ProjectedPathCodeS (fun r => GSTPhysicalKernel.binaryColumnCarry (gpt56PhaseT s n) q r)
+    (fun r => GSTPhysicalKernel.binaryColumnDigit (gpt56PhaseT s n) q r) 3 : ℕ
+warning: ErdosTernary2.lean:25329:28: declaration uses `sorry`
+warning: ErdosTernary2.lean:25339:6: declaration uses `sorry`
+warning: ErdosTernary2.lean:25345:28: declaration uses `sorry`
+warning: ErdosTernary2.lean:25281:8: declaration uses `sorry`
+warning: ErdosTernary2.lean:25415:21: This simp argument is unused:
+  Nat.mul_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Nat.add_mod]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:25450:58: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gpt56ParentEmitted, Nat.add_mod, Nat.mul_mod, hphase, hAmod, hchildDigit]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:25468:58: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gpt56ParentEmitted, Nat.add_mod, Nat.mul_mod, hphase, hAmod, hchildDigit]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:25479:58: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [gpt56ParentEmitted, Nat.add_mod, Nat.mul_mod, hphase, hAmod, hchildDigit]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:25491:8: declaration uses `sorry`
+error: ErdosTernary2.lean:25596:4: Unknown identifier `GSTV2.coupledOrbit_parentOffset_exact`
+error: ErdosTernary2.lean:25648:6: Unknown identifier `GSTV2.coupledOrbit_parentOffset_exact`
+error: ErdosTernary2.lean:25609:26: unsolved goals
+s n q : ℕ
+hs : 1 ≤ s
+hplus : GPT56PlusChord s n q
+T : ℕ := gpt56PhaseT s n
+P : ℕ := 3 ^ q
+R : ℕ := T % P
+hP : 0 < P
+hcarry4 : 4 * R / P = 3
+hrem4 : 4 * R % P < P
+hsplit4 : 4 * R = P * 3 + 4 * R % P
+h2lo : P ≤ 2 * R
+hRlt : R < P
+h2hi : 2 * R < 2 * P
+hdiv2lo : 1 ≤ 2 * R / P
+hdiv2hi : 2 * R / P < 2
+hdiv2 : 2 * R / P = 1
+hmod2 : 2 * T % P = 2 * R % P
+hdecomp2 : 2 * R % P + P = 2 * R
+hmul : gpt56PhaseA1 s * 2 = gpt56PhaseA s
+hnum : c s / 3 + gpt56PhaseA s * R = c s / 3 + gpt56PhaseA1 s * (2 * T % P) + P * gpt56PhaseA1 s
+⊢ (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset =
+    (coupledOrbit (gpt56PhaseA1 s) (gpt56PhaseInitialState1 s n) q).parentOffset + gpt56PhaseA1 s
+warning: ErdosTernary2.lean:25617:20: declaration uses `sorry`
+warning: ErdosTernary2.lean:25683:17: declaration uses `sorry`
+warning: ErdosTernary2.lean:25671:8: declaration uses `sorry`
+warning: ErdosTernary2.lean:25765:8: declaration uses `sorry`
+warning: ErdosTernary2.lean:25816:36: This simp argument is unused:
+  Nat.mod_mod
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Nat.add_mod, Nat.mul_mod, hphase, hAmod, hd]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: ErdosTernary2.lean:25867:0: gpt56_prefix_one_exact_gate_past_incidence (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gpt56PhaseT s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  ∃ q,
+    CoupledState.parentPast (gpt56PhaseA s) (gpt56PhaseInitialState s n) q +
+          3 ^ q * (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).childResidue =
+        (gpt56PhaseInitialState s n).childResidue + gpt56PhaseA s * (gpt56PhaseInitialState s n).childPast q ∧
+      SeededBadTrace (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentSeed
+          (CoupledState.parentWord (gpt56PhaseA s) (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q)) ∧
+        (GPT56NullChord s n q ∧ (gpt56PhaseInitialState s n).childPast q = 4 * (gpt56PhaseT s n % 3 ^ q) ∨
+          GPT56PlusChord s n q ∧ (gpt56PhaseInitialState s n).childPast q + 3 * 3 ^ q = 4 * (gpt56PhaseT s n % 3 ^ q))
+info: ErdosTernary2.lean:25868:0: gpt56_phase_A_mod_nine (s : ℕ) (hs : 1 ≤ s) : gpt56PhaseA s % 9 = 1
+info: ErdosTernary2.lean:25869:0: gpt56_phase_A1_mul_two (s : ℕ) (hs : 1 ≤ s) : gpt56PhaseA1 s * 2 = gpt56PhaseA s
+info: ErdosTernary2.lean:25870:0: gpt56_phase_A1_mod_three (s : ℕ) (hs : 1 ≤ s) : gpt56PhaseA1 s % 3 = 2
+info: ErdosTernary2.lean:25871:0: gpt56_coupledStep_parentOffset_phase (A : ℕ) (st : CoupledState) (hAmod9 : A % 9 = 1) :
+  (coupledStep A st).parentOffset % 3 = ((st.parentOffset % 3 + st.childTail % 3) / 3 + st.parentOffset / 3) % 3
+info: ErdosTernary2.lean:25872:0: gpt56_prefix_one_exact_gate_offset_phase (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gpt56PhaseT s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  ∃ q,
+    (GPT56NullChord s n q ∨ GPT56PlusChord s n q) ∧
+      (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) (q + 1)).parentOffset % 3 =
+        (((coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset % 3 +
+                (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).childTail % 3) /
+              3 +
+            (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset / 3) %
+          3
+error: ErdosTernary2.lean:25873:7: Unknown identifier `GSTV2.coupledOrbit_parentOffset_exact`
+info: ErdosTernary2.lean:25874:0: gpt56_prefix_one_exact_gate_parentOffset_closed (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gpt56PhaseT s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  ∃ q,
+    (GPT56NullChord s n q ∨ GPT56PlusChord s n q) ∧
+      (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset =
+        (c s / 3 + gpt56PhaseA s * (gpt56PhaseT s n % 3 ^ q)) / 3 ^ q
+info: ErdosTernary2.lean:25875:0: gpt56_plus_chord_one_column_offset_shift (s n q : ℕ) (hs : 1 ≤ s) (hplus : GPT56PlusChord s n q) :
+  (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset =
+    (coupledOrbit (gpt56PhaseA1 s) (gpt56PhaseInitialState1 s n) q).parentOffset + gpt56PhaseA1 s
+info: ErdosTernary2.lean:25876:0: gpt56_plus_chord_one_column_phase_shift (s n q : ℕ) (hs : 1 ≤ s) (hplus : GPT56PlusChord s n q) :
+  (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset % 3 =
+    ((coupledOrbit (gpt56PhaseA1 s) (gpt56PhaseInitialState1 s n) q).parentOffset % 3 + 2) % 3
+info: ErdosTernary2.lean:25877:0: gpt56_plus_chord_one_column_child_trap (s n q : ℕ) (hplus : GPT56PlusChord s n q) :
+  gstDigit (2 * gpt56PhaseT s n) q = 2 ∧ gstCarry (2 * gpt56PhaseT s n) q = 2
+info: ErdosTernary2.lean:25878:0: gpt56_prefix_one_exact_gate_horizontal_phase_crossing (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gpt56PhaseT s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  ∃ q,
+    GPT56NullChord s n q ∨
+      GPT56PlusChord s n q ∧
+        (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset =
+          (coupledOrbit (gpt56PhaseA1 s) (gpt56PhaseInitialState1 s n) q).parentOffset + gpt56PhaseA1 s
+info: ErdosTernary2.lean:25879:0: gpt56_parent_digit_two_phase_table (A : ℕ) (st : CoupledState) (hAmod : A % 3 = 1) (hchildDigit : st.childTail % 3 = 2)
+  (hseedlt : st.parentSeed < 4) (hbad : ¬Happy st.parentSeed (gpt56ParentEmitted A st)) :
+  (st.parentOffset % 3 = 0 →
+      gpt56ParentEmitted A st = 2 ∧ (st.parentSeed = 1 ∨ st.parentSeed = 2) ∧ (coupledStep A st).parentSeed = 3) ∧
+    (st.parentOffset % 3 = 1 →
+        gpt56ParentEmitted A st = 0 ∧ ((coupledStep A st).parentSeed = 0 ∨ (coupledStep A st).parentSeed = 1)) ∧
+      (st.parentOffset % 3 = 2 →
+        gpt56ParentEmitted A st = 1 ∧ ((coupledStep A st).parentSeed = 1 ∨ (coupledStep A st).parentSeed = 2))
+info: ErdosTernary2.lean:25880:0: gpt56_prefix_one_exact_gate_three_phase_table (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gpt56PhaseT s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  ∃ q,
+    (GPT56NullChord s n q ∨ GPT56PlusChord s n q) ∧
+      have st := coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q;
+      (st.parentOffset % 3 = 0 →
+          gpt56ParentEmitted (gpt56PhaseA s) st = 2 ∧
+            (st.parentSeed = 1 ∨ st.parentSeed = 2) ∧ (coupledStep (gpt56PhaseA s) st).parentSeed = 3) ∧
+        (st.parentOffset % 3 = 1 →
+            gpt56ParentEmitted (gpt56PhaseA s) st = 0 ∧
+              ((coupledStep (gpt56PhaseA s) st).parentSeed = 0 ∨ (coupledStep (gpt56PhaseA s) st).parentSeed = 1)) ∧
+          (st.parentOffset % 3 = 2 →
+            gpt56ParentEmitted (gpt56PhaseA s) st = 1 ∧
+              ((coupledStep (gpt56PhaseA s) st).parentSeed = 1 ∨ (coupledStep (gpt56PhaseA s) st).parentSeed = 2))
+info: ErdosTernary2.lean:25881:0: gpt56_prefix_one_zero_phase_forces_next_escape (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n)
+  (hchild : GSTNavigationWitness (gpt56PhaseT s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  ∃ q,
+    (GPT56NullChord s n q ∨ GPT56PlusChord s n q) ∧
+      ((coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentOffset % 3 = 0 →
+        ((coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentSeed = 1 ∨
+            (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) q).parentSeed = 2) ∧
+          (coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) (q + 1)).parentSeed = 3 ∧
+            ((coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) (q + 1)).parentOffset +
+                  gpt56PhaseA s * ((coupledOrbit (gpt56PhaseA s) (gpt56PhaseInitialState s n) (q + 1)).childTail % 3)) %
+                3 ≠
+              2)
+info: ErdosTernary2.lean:25882:0: 'gpt56_prefix_one_exact_gate_past_incidence' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25883:0: 'gpt56_phase_A_mod_nine' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:25884:0: 'gpt56_phase_A1_mul_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25885:0: 'gpt56_phase_A1_mod_three' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25886:0: 'gpt56_coupledStep_parentOffset_phase' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:25887:0: 'gpt56_prefix_one_exact_gate_offset_phase' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:25888:14: Unknown constant `GSTV2.coupledOrbit_parentOffset_exact`
+info: ErdosTernary2.lean:25889:0: 'gpt56_prefix_one_exact_gate_parentOffset_closed' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25890:0: 'gpt56_plus_chord_one_column_offset_shift' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25891:0: 'gpt56_plus_chord_one_column_phase_shift' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25892:0: 'gpt56_plus_chord_one_column_child_trap' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25893:0: 'gpt56_prefix_one_exact_gate_horizontal_phase_crossing' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+info: ErdosTernary2.lean:25894:0: 'gpt56_parent_digit_two_phase_table' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25895:0: 'gpt56_prefix_one_exact_gate_three_phase_table' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:25896:0: 'gpt56_prefix_one_zero_phase_forces_next_escape' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+error: ErdosTernary2.lean:26062:8: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26061:6: Type mismatch: After simplification, term
+  Eq.symm (gst_prefixed_residue_stepS 0 1 (2 ^ r * R) K)
+ has type
+  @Eq ℕ (2 ^ r * R % 3 ^ K + 3 ^ K * _root_.gstDigitS (2 ^ r * R) K) (2 ^ r * R % 3 ^ (K + 1))
+but is expected to have type
+  @Eq ℕ (2 ^ r * R % 3 ^ K + 3 ^ K * (2 ^ r * R / 3 ^ K % 3)) (2 ^ r * R % 3 ^ (K + 1))
+error: ErdosTernary2.lean:26222:8: overloaded, errors 
+  26223:35 Ambiguous term
+    gstDigitS
+  Possible interpretations:
+    _root_.gstDigitS X j : ℕ
+    
+    GSTInfiniteV2.gstDigitS X j : ℕ
+  
+  26223:35 Ambiguous term
+    gstDigitS
+  Possible interpretations:
+    _root_.gstDigitS X j : ℕ
+    
+    GSTInfiniteV2.gstDigitS X j : ℕ
+error: ErdosTernary2.lean:26225:11: Ambiguous term
+  gstHandwrittenUChargeS
+Possible interpretations:
+  ↑(_root_.gstHandwrittenUChargeS (gstAffineCarryS D X K)) : ℤ
+  
+  ↑(GSTInfiniteV2.gstHandwrittenUChargeS (gstAffineCarryS D X K)) : ℤ
+error: ErdosTernary2.lean:26226:9: Ambiguous term
+  gstHandwrittenUChargeS
+Possible interpretations:
+  ↑(_root_.gstHandwrittenUChargeS D) : ℤ
+  
+  ↑(GSTInfiniteV2.gstHandwrittenUChargeS D) : ℤ
+error: ErdosTernary2.lean:26231:37: Ambiguous term
+  gstHandwrittenUJumpS
+Possible interpretations:
+  _root_.gstHandwrittenUJumpS : ℕ → ℕ → ℤ
+  
+  GSTInfiniteV2.gstHandwrittenUJumpS : ℕ → ℕ → ℤ
+warning: ErdosTernary2.lean:26229:18: This simp argument is unused:
+  gstAffineCarryS
+
+Hint: Omit it from the simp argument list.
+  [apply] simp
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+error: ErdosTernary2.lean:26435:39: Ambiguous term
+  GSTBadPairS
+Possible interpretations:
+  _root_.GSTBadPairS : ℕ → ℕ → Prop
+  
+  GSTInfiniteV2.GSTBadPairS : ℕ → ℕ → Prop
+error: ErdosTernary2.lean:26436:26: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26434:4: Type mismatch: After simplification, term
+  hparentV2
+ has type
+  ∀ (k : ℕ),
+    canonicalParentTail s n / 3 ^ k % 3 = 2 →
+      3 ^ k ≤ 1 + 4 * (canonicalParentTail s n % 3 ^ k) ∧ ¬(1 + 4 * (canonicalParentTail s n % 3 ^ k)) / 3 ^ k = 3
+but is expected to have type
+  ∀ (j : ℕ),
+    _root_.GSTBadPairS ((1 + 4 * (canonicalParentTail s n % 3 ^ j)) / 3 ^ j)
+      (_root_.gstDigitS (canonicalParentTail s n) j)
+error: ErdosTernary2.lean:26441:6: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (canonicalChildTail s n) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (canonicalChildTail s n) q : ℕ
+error: ErdosTernary2.lean:26442:6: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (4 * canonicalChildTail s n) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (4 * canonicalChildTail s n) q : ℕ
+error: ErdosTernary2.lean:26447:10: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (canonicalChildTail s n) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (canonicalChildTail s n) q : ℕ
+error: ErdosTernary2.lean:26451:20: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26458:10: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS (canonicalChildTail s n) q : ℕ
+  
+  GSTInfiniteV2.gstDigitS (canonicalChildTail s n) q : ℕ
+error: ErdosTernary2.lean:26462:20: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26474:13: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26476:13: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26486:16: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26486:9: Type mismatch: After simplification, term
+  hx
+ has type
+  @Eq ℕ (canonicalParentTail s n / 3 ^ q % 3) 2
+but is expected to have type
+  @Eq ℕ (_root_.gstDigitS (canonicalParentTail s n) q) 2
+error: ErdosTernary2.lean:26487:16: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26487:9: Type mismatch: After simplification, term
+  hx4
+ has type
+  @Eq ℕ ((1 + 4 * canonicalParentTail s n) / 3 ^ q % 3) 2
+but is expected to have type
+  @Eq ℕ (_root_.gstDigitS (1 + 4 * canonicalParentTail s n) q) 2
+info: ErdosTernary2.lean:26491:0: GSTSpacetimeV2.physical_cell_exact (R r p : ℕ) :
+  GSTPhysicalKernel.binaryColumnCarry R p r + 2 * GSTPhysicalKernel.binaryColumnDigit R p r =
+    GSTPhysicalKernel.binaryColumnDigit R p (r + 1) + 3 * GSTPhysicalKernel.binaryColumnCarry R (p + 1) r
+info: ErdosTernary2.lean:26492:0: GSTSpacetimeV2.physical_rectangle_exact (R L K : ℕ) :
+  2 ^ L * (R % 3 ^ K) = 2 ^ L * R % 3 ^ K + 3 ^ K * (2 ^ L * (R % 3 ^ K) / 3 ^ K)
+info: ErdosTernary2.lean:26493:0: GSTSpacetimeV2.physical_signed_rectangle_incidence_exact (R L K : ℕ) :
+  ∑ p ∈ Finset.range K,
+      ∑ r ∈ Finset.range L,
+        GSTPhysicalKernel.signedKernelTwice (GSTPhysicalKernel.binaryColumnCarry R p r)
+          (GSTPhysicalKernel.binaryColumnDigit R p r) =
+    14 *
+        (∑ p ∈ Finset.range K, GSTPhysicalKernel.twoIndicator (GSTPhysicalKernel.binaryColumnDigit R p L) -
+          ∑ p ∈ Finset.range K, GSTPhysicalKernel.twoIndicator (GSTPhysicalKernel.binaryColumnDigit R p 0)) +
+      7 *
+        ∑ p ∈ Finset.range K,
+          ∑ r ∈ Finset.range L,
+            GSTPhysicalKernel.twoIndicator (GSTPhysicalKernel.binaryColumnDigit R p r) *
+              GSTPhysicalKernel.twoIndicator (GSTPhysicalKernel.binaryColumnDigit R p (r + 1))
+info: ErdosTernary2.lean:26494:0: GSTSpacetimeV2.physical_incidence_exists_of_positive (R L K : ℕ)
+  (hpos :
+    0 <
+      ∑ p ∈ Finset.range K,
+        ∑ r ∈ Finset.range L,
+          GSTPhysicalKernel.twoIndicator (GSTPhysicalKernel.binaryColumnDigit R p r) *
+            GSTPhysicalKernel.twoIndicator (GSTPhysicalKernel.binaryColumnDigit R p (r + 1))) :
+  ∃ p < K, ∃ r < L, GSTPhysicalKernel.binaryColumnDigit R p r = 2 ∧ GSTPhysicalKernel.binaryColumnDigit R p (r + 1) = 2
+info: ErdosTernary2.lean:26495:0: GSTSpacetimeV2.seeded_u_jump_flux_exact (D X K : ℕ) :
+  ∑ j ∈ Finset.range K, ↑(3 ^ j) * sorry = ↑(3 ^ K) * sorry - sorry - 24 * (↑X % 3 ^ K)
+info: ErdosTernary2.lean:26496:0: GSTSpacetimeV2.canonical_full_energy_four_column_digits (s n q : ℕ) (hs : 1 ≤ s) :
+  have E := GSTSpacetimeV2.canonicalFullEnergy s n;
+  have T := GSTSpacetimeV2.canonicalChildTail s n;
+  have X := GSTSpacetimeV2.canonicalParentTail s n;
+  have L := GSTSpacetimeV2.canonicalBinaryWidth s;
+  GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) 0 = gstDigit T q ∧
+    GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) 2 = gstDigit (4 * T) q ∧
+      GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) L = gstDigit X q ∧
+        GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) (L + 2) = gstDigit (1 + 4 * X) q
+info: ErdosTernary2.lean:26497:0: GSTSpacetimeV2.canonical_full_energy_boundary_events (s n : ℕ) (hs : 1 ≤ s)
+  (hchild : GSTNavigationWitness (GSTSpacetimeV2.canonicalChildTail s n)) (hBad : GSTOmegaInfiniteBadTrace s 1 n) :
+  have E := GSTSpacetimeV2.canonicalFullEnergy s n;
+  have L := GSTSpacetimeV2.canonicalBinaryWidth s;
+  (∃ q,
+      GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) 0 = 2 ∧
+        GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) 2 = 2) ∧
+    ∀ (q : ℕ),
+      ¬(GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) L = 2 ∧
+          GSTPhysicalKernel.binaryColumnDigit E (s + 2 + q) (L + 2) = 2)
+info: ErdosTernary2.lean:26498:0: 'GSTSpacetimeV2.physical_rectangle_exact' depends on axioms: [propext, sorryAx, Quot.sound]
+info: ErdosTernary2.lean:26499:0: 'GSTSpacetimeV2.physical_signed_rectangle_incidence_exact' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:26500:0: 'GSTSpacetimeV2.physical_incidence_exists_of_positive' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:26501:0: 'GSTSpacetimeV2.seeded_u_jump_flux_exact' depends on axioms: [propext, sorryAx, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:26502:0: 'GSTSpacetimeV2.canonical_full_energy_four_column_digits' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:26503:0: 'GSTSpacetimeV2.canonical_full_energy_boundary_events' depends on axioms: [propext,
+ sorryAx,
+ Classical.choice,
+ Quot.sound]
+error: ErdosTernary2.lean:26533:4: Ambiguous term
+  gstCarryS
+Possible interpretations:
+  _root_.gstCarryS T q : ℕ
+  
+  GSTInfiniteV2.gstCarryS T q : ℕ
+error: ErdosTernary2.lean:26542:12: Ambiguous term
+  gstCarryS
+Possible interpretations:
+  _root_.gstCarryS T q : ℕ
+  
+  GSTInfiniteV2.gstCarryS T q : ℕ
+error: ErdosTernary2.lean:26546:25: Application type mismatch: The argument
+  A
+has type
+  ℕ
+of sort `Type` but is expected to have type
+  ?m.152 > 0
+of sort `Prop` in the application
+  Nat.mul_add_div A
+error: ErdosTernary2.lean:26546:28: Ambiguous term
+  gstCarryS
+Possible interpretations:
+  _root_.gstCarryS T q : ℕ
+  
+  GSTInfiniteV2.gstCarryS T q : ℕ
+error: ErdosTernary2.lean:26549:6: No goals to be solved
+error: ErdosTernary2.lean:26564:12: Ambiguous term
+  gstCarryS
+Possible interpretations:
+  _root_.gstCarryS T q : ℕ
+  
+  GSTInfiniteV2.gstCarryS T q : ℕ
+warning: ErdosTernary2.lean:26568:30: This simp argument is unused:
+  hA
+
+Hint: Omit it from the simp argument list.
+  [apply] simp [Nat.mod_eq_of_lt ha1]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+error: ErdosTernary2.lean:26593:10: Unknown constant `Nat.dvd_pow_self`
+error: ErdosTernary2.lean:26603:2: Type mismatch
+  Eq.symm hleft
+has type
+  D = W % 4
+but is expected to have type
+  W % 4 = D
+error: ErdosTernary2.lean:26629:4: Tactic `rfl` failed: equality lhs
+  4 * 4 ^ (N - 1)
+is not definitionally equal to rhs
+  4 * 4 ^ (1 + (N - 1) - 1)
+
+N D Z W C : ℕ
+hN : 1 ≤ N
+hD : D < 4
+hEq : D + 4 * Z = W + 4 ^ N * C
+hW : W = D + 4 * (W / 4)
+hidx : N = N - 1 + 1
+⊢ 4 * 4 ^ (N - 1) = 4 * 4 ^ (1 + (N - 1) - 1)
+error: ErdosTernary2.lean:26631:2: omega could not prove the goal:
+a possible counterexample may satisfy the constraints
+  h ≥ 0
+  g ≥ 0
+  f ≥ 0
+  e ≥ 0
+  -3 ≤ 4*e - f ≤ 0
+  b ≥ 0
+  b - e ≥ 0
+  b - e - h ≤ -1
+  a ≥ 1
+where
+ a := ↑N
+ b := ↑Z
+ e := ↑W / 4
+ f := ↑W
+ g := ↑4 ^ (N - 1)
+ h := ↑(4 ^ (N - 1)) * ↑C
+error: ErdosTernary2.lean:26642:35: unsolved goals
+N D Z W C Y : ℕ
+hN : 1 ≤ N
+hD : D < 4
+hEq : D + 4 * Z = W + 4 ^ N * C
+hidx : N = N - 1 + 1
+⊢ 4 ^ (N - 1) * 4 = 4 ^ (N - 1 + 1 - 1) * 4
+error: ErdosTernary2.lean:26654:35: unsolved goals
+N W : ℕ
+hN : 1 ≤ N
+hW : W < 4 ^ N
+hidx : N = N - 1 + 1
+⊢ 4 ^ (N - 1) * 4 = 4 ^ (N - 1 + 1 - 1) * 4
+error: ErdosTernary2.lean:26714:16: Ambiguous term
+  gstDigitS
+Possible interpretations:
+  _root_.gstDigitS : ℕ → ℕ → ℕ
+  
+  GSTInfiniteV2.gstDigitS : ℕ → ℕ → ℕ
+error: ErdosTernary2.lean:26714:6: Type mismatch: After simplification, term
+  hd
+ has type
+  @Eq ℕ (gstNavigationConstant (s + 1) n / 3 ^ q % 3) 2
+but is expected to have type
+  @Eq ℕ (_root_.gstDigitS (gstNavigationConstant (s + 1) n) q) 2
+error: ErdosTernary2.lean:26776:2: Tactic `contradiction` failed
+
+s n : ℕ
+hs : 1 ≤ s
+hn : 1 ≤ n
+hBad : GSTOmegaInfiniteBadTrace s 1 n
+hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)
+T : ℕ := gstNavigationConstant (s + 1) n
+A : ℕ := 4 ^ 3 ^ s
+z : ℕ := gstCanonicalPrefixOffsetS s
+H : ℕ := z + A * T
+hchildT : GSTNavigationWitness T
+hparent : GSTSeededBadTraceS 1 H
+hchildGate : ∃ q, GSTSeededHappyS 0 T q
+hApos : 0 < A
+hAunit : A = 1 + 3 ^ (s + 1) * gstNavigationConstant s 1
+hunitPrefix : gstNavigationConstant s 1 = 1 + 3 * z
+hz1 : 1 + 4 * z < A
+q : ℕ
+hgate : GSTSeededHappyS 0 T q
+hparentSuffix :
+  GSTSeededBadTraceS (gstAffineMulCarryS 4 1 (z + A * T) (q + 1))
+    (gstAffineMulCarryS A z T (q + 1) + A * (T / 3 ^ (q + 1)))
+hchildSuffix : GSTSeededBadTraceS (gstAffineMulCarryS 4 0 T (q + 1)) (T / 3 ^ (q + 1))
+hC : gstAffineMulCarryS 4 0 T (q + 1) = 2 ∨ gstAffineMulCarryS 4 0 T (q + 1) = 3
+hlocal : GSTLocalTwoDigitRightChordS T q
+hclass3 : gstAffineMulCarryS 4 0 T (q + 1) = 3 ↔ GSTPhysicalTwoDigitBig1ClearS T q
+hclass2 : gstAffineMulCarryS 4 0 T (q + 1) = 2 ↔ ¬GSTPhysicalTwoDigitBig1ClearS T q
+hshared :
+  gstAffineMulCarryS 4 1 (z + A * T) (q + 1) + 4 * gstAffineMulCarryS A z T (q + 1) =
+    gstAffineMulCarryS A (1 + 4 * z) (4 * T) (q + 1) + A * gstAffineMulCarryS 4 0 T (q + 1)
+hW : gstAffineMulCarryS A (1 + 4 * z) (4 * T) (q + 1) < A
+D : ℕ := gstAffineMulCarryS 4 1 (z + A * T) (q + 1)
+Z : ℕ := gstAffineMulCarryS A z T (q + 1)
+W : ℕ := gstAffineMulCarryS A (1 + 4 * z) (4 * T) (q + 1)
+C : ℕ := gstAffineMulCarryS 4 0 T (q + 1)
+Y : ℕ := T / 3 ^ (q + 1)
+hparentSuffix' : GSTSeededBadTraceS D (Z + A * Y)
+hchildSuffix' : GSTSeededBadTraceS C Y
+hC' : C = 2 ∨ C = 3
+hshared' : D + 4 * Z = W + A * C
+hW' : W < A
+hDlt : D < 4
+a b e Wmid : ℕ
+hDb : D = 2 * a + b
+hCe : C = 2 + e
+ha : a < 2
+hb : b < 2
+he : e < 2
+hWmid : Wmid < A
+hmid : a + 2 * Z = Wmid + A
+hlow : b + 2 * Wmid = W + A * e
+hfuture0 : T / 3 ^ T = 0
+⊢ False
+info: ErdosTernary2.lean:26775:2: s n : ℕ
+hs : 1 ≤ s
+hn : 1 ≤ n
+hBad : GSTOmegaInfiniteBadTrace s 1 n
+hchild : GSTNavigationWitness (gstNavigationConstant (s + 1) n)
+T : ℕ := gstNavigationConstant (s + 1) n
+A : ℕ := 4 ^ 3 ^ s
+z : ℕ := gstCanonicalPrefixOffsetS s
+H : ℕ := z + A * T
+hchildT : GSTNavigationWitness T
+hparent : GSTSeededBadTraceS 1 H
+hchildGate : ∃ q, GSTSeededHappyS 0 T q
+hApos : 0 < A
+hAunit : A = 1 + 3 ^ (s + 1) * gstNavigationConstant s 1
+hunitPrefix : gstNavigationConstant s 1 = 1 + 3 * z
+hz1 : 1 + 4 * z < A
+q : ℕ
+hgate : GSTSeededHappyS 0 T q
+hparentSuffix :
+  GSTSeededBadTraceS (gstAffineMulCarryS 4 1 (z + A * T) (q + 1))
+    (gstAffineMulCarryS A z T (q + 1) + A * (T / 3 ^ (q + 1)))
+hchildSuffix : GSTSeededBadTraceS (gstAffineMulCarryS 4 0 T (q + 1)) (T / 3 ^ (q + 1))
+hC : gstAffineMulCarryS 4 0 T (q + 1) = 2 ∨ gstAffineMulCarryS 4 0 T (q + 1) = 3
+hlocal : GSTLocalTwoDigitRightChordS T q
+hclass3 : gstAffineMulCarryS 4 0 T (q + 1) = 3 ↔ GSTPhysicalTwoDigitBig1ClearS T q
+hclass2 : gstAffineMulCarryS 4 0 T (q + 1) = 2 ↔ ¬GSTPhysicalTwoDigitBig1ClearS T q
+hshared :
+  gstAffineMulCarryS 4 1 (z + A * T) (q + 1) + 4 * gstAffineMulCarryS A z T (q + 1) =
+    gstAffineMulCarryS A (1 + 4 * z) (4 * T) (q + 1) + A * gstAffineMulCarryS 4 0 T (q + 1)
+hW : gstAffineMulCarryS A (1 + 4 * z) (4 * T) (q + 1) < A
+D : ℕ := gstAffineMulCarryS 4 1 (z + A * T) (q + 1)
+Z : ℕ := gstAffineMulCarryS A z T (q + 1)
+W : ℕ := gstAffineMulCarryS A (1 + 4 * z) (4 * T) (q + 1)
+C : ℕ := gstAffineMulCarryS 4 0 T (q + 1)
+Y : ℕ := T / 3 ^ (q + 1)
+hparentSuffix' : GSTSeededBadTraceS D (Z + A * Y)
+hchildSuffix' : GSTSeededBadTraceS C Y
+hC' : C = 2 ∨ C = 3
+hshared' : D + 4 * Z = W + A * C
+hW' : W < A
+hDlt : D < 4
+a b e Wmid : ℕ
+hDb : D = 2 * a + b
+hCe : C = 2 + e
+ha : a < 2
+hb : b < 2
+he : e < 2
+hWmid : Wmid < A
+hmid : a + 2 * Z = Wmid + A
+hlow : b + 2 * Wmid = W + A * e
+hfuture0 : T / 3 ^ T = 0
+⊢ False
+error: Lean exited with code 1
+Some required targets logged failures:
+- ErdosTernary2
+error: build failed

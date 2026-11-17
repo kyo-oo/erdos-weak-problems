@@ -1,0 +1,12 @@
+name: GPT56 Monolith Surgery Apply
+
+on:
+  workflow_dispatch:
+
+jobs:
+  disarmed:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Guard against stale transplant
+        run: |
+          echo 'DISARMED: final monolith surgery will be re-enabled only after the replacement theorem is Lean-green.'

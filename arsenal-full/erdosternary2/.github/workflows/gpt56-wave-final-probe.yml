@@ -1,0 +1,67 @@
+name: GPT56 Wave Final Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - '.github/workflows/gpt56-wave-final-probe.yml'
+      - 'GSTWaveFinalProbe.lean'
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean RC2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Inventory exact wave closure surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "HEAD=$(git rev-parse HEAD)"
+          python3 - <<'PY'
+          from pathlib import Path
+          keys = [
+            'GSTPrefixOneSeedCore', 'GSTPrefixOneBadReflection',
+            'GSTSeedOneAffineWitness', 'gst_two_two_forces_happy_gate',
+            'gst_prefix_one_seed', 'gst_prefix_one_wave',
+            'canonical_parent_bad', 'canonical_n_wave', 'terminal_packet',
+            'phase_one', 'phase_zero', 'phase_two', 'SeedHappy 1 1',
+          ]
+          files = list(Path('.').glob('*.lean'))
+          for key in keys:
+            print('\n===== KEY', key, '=====')
+            count=0
+            for p in files:
+              try: lines=p.read_text(encoding='utf-8').splitlines()
+              except Exception: continue
+              for i,line in enumerate(lines):
+                if key in line:
+                  count += 1
+                  lo=max(0,i-4); hi=min(len(lines),i+9)
+                  print(f'--- {p}:{i+1} ---')
+                  for j in range(lo,hi): print(f'{j+1:06d}: {lines[j]}')
+            print('MATCH_COUNT=',count)
+          PY
+      - name: Compile optional proof probe
+        if: hashFiles('GSTWaveFinalProbe.lean') != ''
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTWaveFinalProbe.lean 2>&1 | tee wave-final-probe.log
+# trigger-3

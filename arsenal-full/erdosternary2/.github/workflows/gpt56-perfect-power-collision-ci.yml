@@ -1,0 +1,107 @@
+name: GPT56 Perfect Power Collision
+
+on:
+  push:
+    branches:
+      - sol/gpt56-final-perfect-power-block-20260823
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Compile boundary-rigidity dependency stack
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          for f in \
+            GSTGraphV2CoupledUFlux \
+            GSTGraphV2CoupledUPhysicalBridge \
+            GST2DMixedEmergence \
+            GSTU2DAtomicBridge \
+            GSTU2DEventTransport \
+            GSTU2DExactCrossingCharge \
+            GSTU2DSharpCrossingBlock \
+            GSTCanonicalSevenAxisBridge \
+            GSTGraphV2InfiniteControl \
+            GSTU2DPureDivergence83 \
+            GSTU2DCanonicalPhaseDensity \
+            GSTGraphV2UnifiedPowerRectangle \
+            GSTGraphV2UnifiedVerticalTelescope \
+            GSTGraphV2PerfectPowerAncestry \
+            GSTGraphV2PerfectPowerBlockProbe \
+            GSTGraphV2HandwrittenOmegaUBlock \
+            GSTGraphV2HandwrittenExponentialCascade \
+            GSTGraphV2HandwrittenExponentialLTE \
+            GSTGraphV2HandwrittenAnchoredCocycle \
+            GSTFinalPurePowerResidueTransplant; do
+              lake env lean -o ".lake/build/lib/lean/$f.olean" "$f.lean"
+          done
+      - name: Compile canonical boundary rigidity mathematics
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTCanonicalBoundaryRigidity.olean GSTCanonicalBoundaryRigidity.lean
+      - name: Compile perfect-power collision theorem
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2PerfectPowerBlockCollision.olean GSTGraphV2PerfectPowerBlockCollision.lean
+      - name: Apply the one-line production surgery
+        shell: bash
+        run: |
+          # Aug-24 verification: transplant the existing GREEN stack into the literal production seam.
+          python3 scripts/apply_u2d_atomic_replacement.py
+          if grep -nE '^[[:space:]]*gst_end[[:space:]]*$' ErdosTernary2.lean; then
+            echo 'literal gst_end survived the production transformation'
+            exit 1
+          fi
+          grep -n 'have hPerfectPowerCollision : False := by' ErdosTernary2.lean
+      - name: Compile transformed monolith
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTTactic ErdosTernary2
+      - name: Audit production sources
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          paths = [
+              Path('ErdosTernary2.lean'),
+              Path('GSTCanonicalBoundaryRigidity.lean'),
+              Path('GSTGraphV2PerfectPowerBlockCollision.lean'),
+              Path('GSTGraphV2PerfectPowerBlockProbe.lean'),
+              Path('GSTGraphV2PerfectPowerAncestry.lean'),
+              Path('GSTGraphV2UnifiedPowerRectangle.lean'),
+              Path('GSTGraphV2UnifiedVerticalTelescope.lean'),
+              Path('GSTU2DPureDivergence83.lean'),
+          ]
+          bad = []
+          for p in paths:
+              for i, line in enumerate(p.read_text(encoding='utf-8').splitlines(), 1):
+                  if line.lstrip().startswith('--'):
+                      continue
+                  if re.search(r'\bsorry\b|\badmit\b|\baxiom\b|\bnative_decide\b', line):
+                      bad.append(f'{p}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit('production source audit failed')
+          print('production source audit: clean')
+          PY

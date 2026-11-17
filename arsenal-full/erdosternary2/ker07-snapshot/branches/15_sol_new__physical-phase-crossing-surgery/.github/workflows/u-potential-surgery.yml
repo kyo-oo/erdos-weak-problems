@@ -1,0 +1,72 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0981 / 1132
+#    Path         : branches/sol_physical-phase-crossing-surgery/.github/workflows/u-potential-surgery.yml
+#    Ref          : origin/sol/physical-phase-crossing-surgery
+#    First-commit : 2026-08-17 10:35:44 +0530  (32d6898)
+#    Last-commit  : 2026-08-17 11:18:54 +0530  (c7a98f3)
+#    Total commits: 9
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/9] 2026-08-17 10:35:44 +0530  32d6898  (ker07-dev)
+#        Add focused U-potential kernel check
+# [02/9] 2026-08-17 10:39:42 +0530  3fd503e  (ker07-dev)
+#        Add Omega U-potential bridge kernel check
+# [03/9] 2026-08-17 10:49:50 +0530  ace0906  (ker07-dev)
+#        Add residual support bridge kernel check
+# [04/9] 2026-08-17 10:52:14 +0530  9a6870b  (ker07-dev)
+#        Add locked NULL branch reduction kernel check
+# [05/9] 2026-08-17 11:01:06 +0530  3cf621c  (ker07-dev)
+#        Add stable NULL terminal base kernel check
+# [06/9] 2026-08-17 11:02:32 +0530  a972a71  (ker07-dev)
+#        Add retained-offset U-state kernel check
+# [07/9] 2026-08-17 11:09:02 +0530  95cb282  (ker07-dev)
+#        Add NULL prefix-four cut kernel check
+# [08/9] 2026-08-17 11:14:27 +0530  f6d419f  (ker07-dev)
+#        Add canonical origin-cut intersection kernel check
+# [09/9] 2026-08-17 11:18:54 +0530  c7a98f3  (ker07-dev)
+#        Add physical six-state gate kernel check
+# ======================================================================
+
+name: U Potential Surgery
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-u-potential:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Compile U-potential detector
+        run: lake env lean HandwrittenUniversalParadoxPotentialScratch.lean
+      - name: Compile x-6 U-potential chord
+        run: lake env lean HandwrittenX6UPotentialChordScratch.lean
+      - name: Compile Omega to U-potential bridge
+        run: lake env lean OmegaUPotentialBridgeScratch.lean
+      - name: Compile locked residual support bridge
+        run: lake env lean CanonicalResidualInfiniteSupportBridgeScratch.lean
+      - name: Compile locked NULL branch reduction
+        run: lake env lean ResidualNullBranchReductionScratch.lean
+      - name: Compile NULL terminal base
+        run: lake env lean ResidualNullTerminalScratch.lean
+      - name: Compile retained-offset U-state
+        run: lake env lean RetainedOffsetUStateScratch.lean
+      - name: Compile NULL prefix-four cut
+        run: lake env lean ResidualNullPrefixFourCutScratch.lean
+      - name: Compile canonical origin-cut intersection
+        run: lake env lean CanonicalOriginCutIntersectionScratch.lean
+      - name: Compile physical six-state gate dictionary
+        run: lake env lean PhysicalSixBridgeGateScratch.lean

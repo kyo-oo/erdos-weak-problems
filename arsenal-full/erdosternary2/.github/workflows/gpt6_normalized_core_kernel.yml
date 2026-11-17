@@ -1,0 +1,40 @@
+name: GPT6 GST Normalized-Core Kernel
+on:
+  push:
+    branches:
+      - gpt6/erdos-normalized-core-rigidity-20261029
+    paths:
+      - GSTNormalizedCoreRigidity.lean
+      - GSTWorldtraceTowerWindow.lean
+      - GSTWorldtraceCoeffStability.lean
+      - .github/workflows/gpt6_normalized_core_kernel.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and prerequisite kernel files
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTCanonicalTailLTE GSTFourPowerDirectResidue GSTWorldtraceBlockLift
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceTowerWindow.olean GSTWorldtraceTowerWindow.lean 2>&1 | tee tower.log
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean 2>&1 | tee stability.log
+          ! grep -E 'error:|unsolved goals|sorryAx|unknown identifier|declaration uses .sorry.' tower.log stability.log
+      - name: Kernel check uniform stabilization and valuation normalization
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTNormalizedCoreRigidity.lean 2>&1 | tee gst-normalized-core.log
+          ! grep -E 'error:|unsolved goals|sorryAx|unknown identifier|declaration uses .sorry.' gst-normalized-core.log
+          grep -Fq 'depends on axioms:' gst-normalized-core.log
+          echo GST_NORMALIZED_CORE_KERNEL_GREEN=1

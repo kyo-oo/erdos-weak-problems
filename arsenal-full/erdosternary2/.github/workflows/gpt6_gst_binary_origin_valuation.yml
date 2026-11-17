@@ -1,0 +1,23 @@
+name: GPT6 GST Binary Origin Valuation Exact Audit
+on:
+  push:
+    branches: [gpt6/problem406-binary-origin-valuation-20261030]
+    paths:
+      - scripts/gst_406_binary_origin_valuation_audit.py
+      - .github/workflows/gpt6_gst_binary_origin_valuation.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact finite physical carry and high binary-valuation source audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/gst_406_binary_origin_valuation_audit.py --from-length 10 --to-length 240 2>&1 | tee binary-origin-audit.log
+          grep -F 'EXACT_HIGH_VALUATION_BAD_SOURCE_VIOLATIONS=0' binary-origin-audit.log
+          grep -F 'NONCLAIM=No universal exponent theorem' binary-origin-audit.log
+          echo GST_BINARY_ORIGIN_FINITE_AUDIT_PASS=1

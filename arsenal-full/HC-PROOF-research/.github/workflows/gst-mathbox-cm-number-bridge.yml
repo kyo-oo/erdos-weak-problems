@@ -1,0 +1,73 @@
+name: GST Mathbox CM Number Bridge
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTMathboxCMNumberBridge.lean'
+      - '.github/workflows/gst-mathbox-cm-number-bridge.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-mathbox-cm-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-gst-cm
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel compile symbolic CM and geometric bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "MathboxCMBridge"
+          roots = ["GSTMathboxCMNumberBridge"]
+          EOF
+          if lake build MathboxCMBridge > mathbox-cm-lean.log 2>&1; then
+            echo 'LEAN PASSED: CM number geometry bridge'
+          else
+            grep -nE 'error:|sorryAx|✖' mathbox-cm-lean.log | tail -n 100 || true
+            tail -n 85 mathbox-cm-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" mathbox-cm-lean.log; then
+            echo 'Trust audit failed'
+            exit 1
+          fi
+      - name: Upload proof diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-mathbox-cm-lean-log
+          path: mathbox-cm-lean.log
+          if-no-files-found: warn

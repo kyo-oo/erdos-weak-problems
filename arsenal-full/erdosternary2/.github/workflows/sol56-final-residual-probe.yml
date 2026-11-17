@@ -1,0 +1,14 @@
+name: SOL56 Direct Monolith Transplant (manual legacy lane)
+
+# FINAL RUN LOCK: automatic execution disabled.
+# The only active writer/compiler is sol56-atomic-monolith-only.yml.
+on:
+  workflow_dispatch:
+
+jobs:
+  legacy-disabled:
+    runs-on: ubuntu-24.04
+    steps:
+      - run: |
+          echo 'Legacy direct-transplant lane intentionally disabled during FINAL RUN.'
+          echo 'Use SOL56 Atomic Monolith Only.'

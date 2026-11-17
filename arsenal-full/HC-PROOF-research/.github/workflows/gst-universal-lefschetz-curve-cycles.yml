@@ -1,0 +1,69 @@
+name: GST Universal Curve-Cycle Hard Lefschetz Construction
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTUniversalLefschetzCurveCycles.lean'
+      - '.github/workflows/gst-universal-lefschetz-curve-cycles.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-universal-lefschetz-curves-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-curve-cycles
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel-check actual native-cycle constructor
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTUniversalCurveCycles"
+          roots = ["GSTUniversalLefschetzCurveCycles"]
+          EOF
+          if lake build GSTUniversalCurveCycles > universal-curve-cycles-lean.log 2>&1; then
+            echo "LEAN PASSED: universal (d-1) native Hodge-cycle constructor from known HL and (1,1)"
+          else
+            grep -nE 'error:|sorryAx|✖' universal-curve-cycles-lean.log | tail -n 130 || true
+            tail -n 80 universal-curve-cycles-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" universal-curve-cycles-lean.log; then
+            exit 1
+          fi
+      - name: Upload diagnostic log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-lefschetz-curve-cycle-log
+          path: universal-curve-cycles-lean.log
+          if-no-files-found: warn

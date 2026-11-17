@@ -1,0 +1,199 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Minimal Stein Folding plus Intrinsic PGL Curvature: Genuine Trace-Zero Source Beyond Divisors}
+\date{23 October 2026}
+\begin{document}\maketitle
+\section{Original-X geometry and typed target}
+Let X be ANY smooth projective complex d-fold, d>=2.
+By the sharp all-X realization theorem
+\texttt{GST\_optimal\_rank\_universal\_stein\_fold\_trace\_residual\_2026-10-23.tex},
+choose a genuine finite surjection f:X->P^d,
+degree delta, and its ACTUAL rank-d affine
+incidence fold. Write H=f^*c_1^{CH}(O(1))
+in CH^1(X)_Q and h=cl_X^{can}(H).
+There is a true rational Chow idempotent
+T_f=(1/delta) f^*f_* and a trace-zero
+subspace ker f_* in every cohomological degree.
+
+\section{Actual projective PGL curvature on the ORIGINAL X}
+Take the ACTUAL original tangent bundle
+$T_X$ of algebraic rank d, and its real
+projective-space geometry
+$\rho:\mathbb P_X(T_X)\to X$.
+Let
+\[
+ \zeta=\frac1d c_1^{CH}(T_{\mathbb P(T_X)/X})
+       \in CH^1(\mathbb P(T_X))_{\mathbb Q}.
+\]
+The GENUINE projective Gysin construction gives
+\[
+ S_{T_X}(t)=\sum_{k=0}^{d}
+   \rho_*(\zeta^{d-1+k})t^k,\qquad S_{T_X}(0)=1.
+\]
+For every 2<=p<=d define
+\[
+ \boxed{\kappa_p(X)=\frac1{(p-1)!}
+        [t^p]\log S_{T_X}(t)
+       \in CH^p(X)_{\mathbb Q}.}                    \tag{1}
+\]
+This is the intrinsic centered projective
+Chern class constructed in the branch's
+\texttt{GST\_higher\_causal\_projective\_descent\_torsion\_gerbe\_2026-10-23.tex},
+with no Hodge-to-Chow input.
+
+\begin{theorem}[NEW direct higher-rank trace-zero CHOW source, arbitrary original X]
+For every such original X, finite f,
+and every 2<=p<=d, put
+\[
+ c_{p,f}=\int_X\mathrm{cl}^{can}_X(\kappa_p(X))
+                         \smile h^{d-p}\in\mathbb Q.
+\]
+Then the explicit original-X rational CHOW class
+\[
+ \boxed{
+ \Theta_{p,f}^{CH}(X)=\kappa_p(X)
+           -\frac{c_{p,f}}{\delta}H^p
+           \in CH^p(X)_{\mathbb Q}
+ }                                                       \tag{2}
+\]
+is a GENUINE constructed algebraic cycle
+with EXACT finite trace zero
+\[
+ \boxed{
+ f_*\Theta_{p,f}^{CH}(X)=0
+                    \in CH^p(\mathbb P^d)_{\mathbb Q},
+ \qquad
+ f_*\mathrm{cl}^{can}_X(\Theta_{p,f}^{CH})=0 .
+ }                                                       \tag{3}
+\]
+It is geometrically sourced from the intrinsic
+nonabelian rank-d projective tangent fold,
+rather than a scalar incidence hyperplane
+or a source selected from a prescribed alpha.
+For any prescribed rational Hodge alpha
+the canonical Betti class
+$\theta_{p,f}=\mathrm{cl}_X^{can}(\Theta_{p,f}^{CH})$
+is an independently produced algebraic
+member of the SAME trace-zero Hodge sector
+as $\alpha_f^0$.
+\end{theorem}
+\begin{proof}
+The algebraic relative tangent bundle, its
+true relative Chow c1, powers, proper
+projective pushforward and finite logarithm
+make (1) an ACTUAL original-X Chow class.
+The finite morphism f is flat and proper,
+with f_*f^*eta=delta eta. Since
+CH^p(P^d)_Q=Q zeta^p, the coefficient of
+f_*kappa_p is determined by intersecting
+with zeta^{d-p} and integrating:
+$f_*\kappa_p=c_{p,f}\zeta^p$
+in true Chow. Also
+$f_*(H^p)=delta\zeta^p$.
+Subtract to get (3) in the CHOW group.
+Functoriality of the canonical Betti map
+gives the second equality. No arbitrary
+Hodge-to-Chow conversion is assumed.
+\end{proof}
+
+\section{A genuinely non-divisor higher-rank direction}
+\begin{theorem}[Exact non-divisor projective source on a genuine sixfold]
+Let $X=\mathrm{Gr}(2,5)$, the smooth
+projective sixfold of two-planes
+in $\mathbb C^5$. Let S be the rank-2
+tautological subbundle, Q the rank-3
+quotient, $h=c_1(S^\vee)$ the ample
+Pluecker class, and $s_2=c_2(S^\vee)$.
+In the ACTUAL codimension-two
+rational Chow ring,
+\[
+ \boxed{
+ c_1(T_X)=5h,\quad
+ c_2(T_X)=11h^2+s_2,\quad
+ \kappa_2(X)=-\frac7{12}h^2-s_2.}             \tag{4}
+\]
+The codimension-two source
+$\kappa_2(X)$ is NOT in the
+divisor-generated subalgebra
+$\mathbb Q h^2$, because $s_2$
+is the independent genuine Schubert
+class $\sigma_{1,1}$.
+Since $\operatorname{Pic}(X)_{\mathbb Q}=\mathbb Q h$,
+for EVERY finite map f:X->P^6
+the actual trace-zero source
+$\Theta_{2,f}^{CH}(X)$ in (2)
+is NONZERO and remains outside
+the divisor algebra.
+Thus the intrinsic PGL GST fold
+genuinely manufactures an
+independent higher-codimension
+Chow direction not obtainable
+from ANY of the optimal
+scalar incidence base folds.
+\end{theorem}
+\begin{proof}
+The algebraic universal exact sequence
+$0\to S\to O_X^5\to Q\to0$
+and $T_X=S^\vee\otimes Q$ give
+$c_1(Q)=h$ and $c_2(Q)=h^2-s_2$.
+Under the splitting principle write
+the two Chern roots of $S^\vee$ as
+u1,u2 and the three roots of Q as
+v1,v2,v3. The six roots of T_X
+are u_i+v_j. Since
+$u1+u2=v1+v2+v3=h$,
+\[
+ \sum_{i,j}(u_i+v_j)^2
+ =3(h^2-2s_2)+2h^2+
+       2\bigl(h^2-2(h^2-s_2)\bigr)
+ =3h^2-2s_2.
+\]
+Thus $c_1(T_X)=5h$,
+$\mathrm{ch}_2(T_X)=\tfrac32h^2-s_2$,
+and
+$c_2(T_X)=\tfrac12((5h)^2-(3h^2-2s_2))
+ =11h^2+s_2$.
+The centered rank-six projective
+class is
+$\kappa_2=\mathrm{ch}_2(T_X)
+-c_1(T_X)^2/(2\cdot6)
+=-\tfrac7{12}h^2-s_2$.
+The Chow group CH^2(X)_Q has
+independent Schubert generators
+$\sigma_2,\sigma_{1,1}$ with
+$h^2=\sigma_2+\sigma_{1,1}$
+and $s_2=\sigma_{1,1}$.
+Therefore $\kappa_2$ is nondivisor.
+For each finite f, f^*O(1) is
+ample, and Pic(X)_Q has rank1,
+so H is a rational multiple of h.
+The correction in (2) is a
+multiple of h^2 and cannot
+cancel the coefficient -1
+of the independent Schubert
+class s_2. That proves the
+universal-in-f conclusion.
+\end{proof}
+
+\begin{remark}[Precise current reach]
+The construction (2) is an actual
+nonabelian, higher-rank,
+trace-zero ORIGINAL-X source for
+every X, and (4) verifies that it
+may escape the entire divisor algebra.
+It does NOT establish that these
+intrinsic tangent/PGL sources
+span the prescribed trace-zero
+rational Hodge class on an
+arbitrary original X.
+It is a mathematically distinct
+geometric source direction,
+not a replacement of the final
+universal algebraic existence
+statement by a conditional
+surjectivity parameter.
+\end{remark}
+\end{document}

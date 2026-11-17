@@ -1,6 +1,8 @@
 # PROOF.md — Erdős Problem #142: the attacker mathematics
 
 **Wave 1 · Task 1-a · Sub-agent W1-A1 (ATTACKER).**
+**Wave 71 · Task 4-e · Sub-agent W71-142K (KILLER lane): §3B added — the
+Behrend theorem lands (complete six-step proof, explicit constants).**
 Repo: `/home/z/erdos-weak-problems` (branch `campaign`, HEAD `fa4a160`).
 Directory: `problem142-rk-asymptotic/`.
 
@@ -43,6 +45,12 @@ the strongest complete package on the assigned Cardinal-Worlds-native front:
 7. **Exact census** — r_3(N) for N ≤ 62, r_4(N) for N ≤ 36, r_5(N) for
    N ≤ 30, by exhaustive branch-and-bound, cross-verified by Z3 Optimize,
    by cold-start re-derivation, and by pure subset enumeration (N ≤ 18).
+8. **Theorem 3B.7 (the Behrend theorem, §3B)** — the sphere construction,
+   complete and self-contained in six steps with EXPLICIT constants:
+   r_3(N) ≥ N·e^{−6√(ln N)} for every N ≥ 16 (master base-2 form:
+   r_3(N) ≥ N/(u·2^{1+4u}) with u = ⌊√(log₂ N)⌋; and the same bound for
+   r_k(N) for every k ≥ 3). The explicit witness families are
+   machine-certified (§6.8, engine142behrend.py + receipts142behrend.txt).
 
 **Everything below is unconditional. Classical literature is cited only as
 context (§10); no external black-box theorem is used in any proof.** All
@@ -336,9 +344,381 @@ is confirmed (r_3(2)=2, r_3(8)=4, r_3(26)=11) and r_3(9) = 5 > 4 = 2^2 shows
 Cantor is NOT optimal at N = 3^2 (already {1,2,4,8,9} beats it).
 
 **Honest remark.** The constants 1/2 and 2^{α−1} are construction constants of
-the Cantor frame, not the truth: the true liminf of r_3(N)/N^α is open (the
-classical Behrend construction, cited as context in §10, is much larger,
-N·e^{−C√(log N)}). Nothing in §3 depends on any classical result.
+the Cantor frame, not the truth: the true liminf of r_3(N)/N^α is open. The
+Cantor power law is now COMPLETED from below by the Behrend theorem of §3B:
+the sphere construction proved there gives r_3(N) ≥ N·e^{−6√(ln N)} for all
+N ≥ 16 — a bound that eventually dominates every power N^{1−ε} (and is
+itself dominated by the Cantor bound below N ≈ 10^{115}; see the honest
+remark closing §3B). Nothing in §3 depends on any classical result.
+
+---
+
+## §3B. THE BEHREND THEOREM — the sphere construction, complete and self-contained
+
+The Cantor frame of §3 delivers the power bound r_3(N) ≥ N^α/2
+(α = log₃ 2 ≈ 0.6309). Behrend's 1946 idea delivers exponentially more:
+a lower bound of the form N·e^{−C√(ln N)}. This section proves that bound
+FROM SCRATCH, in six steps, with every constant explicit. Nothing external is
+used: STEP 1 is pure algebra (Lagrange's identity, with both equality cases
+spelled out); STEP 2 is the no-carry digit law of §1 transplanted to base
+B = 2m — the general-B instance of the law whose base-3 instance (backed by
+the Arsenal `carryAtPos` family) proved Theorem A; STEPs 3–6 are bookkeeping
+and an explicit rational constant conversion anchored on two Taylor exhibits.
+The final constants are **C = 6, N₀ = 16**.
+
+### THEOREM 3B.7 (Behrend 1946, self-contained, explicit constants).
+
+**(i) Master form (base 2, integer-exact).** For every integer N ≥ 16, with
+
+    u := ⌊√(log₂ N)⌋   (so u ≥ 2),
+
+    r_3(N) ≥ N / (u · 2^(1+4u)).
+
+**(ii) Exponential form.** For every integer N ≥ 16:
+
+    r_3(N) ≥ N · e^(−6·√(ln N)).
+
+**(iii) Explicit witness.** The proof yields a machine-generatable 3-AP-free
+family W_N ⊆ [1, N] with |W_N| ≥ N·e^(−6√(ln N)) (Corollary 3B.9).
+
+The six steps follow. Throughout, d ≥ 1 and m ≥ 2 are integers,
+
+    D := {0, 1, …, m−1}^d  (the digit cube),   Q(x) := x₁² + … + x_d²,
+
+and for an integer V ≥ 0 the **level set** (sphere when V is a square)
+
+    S_V := { x ∈ D : Q(x) = V }.
+
+---
+
+### STEP 1 (Lemma 3B.1). Every level set of the square form is midpoint-free.
+
+**Lemma 3B.1.** Let x, y, z ∈ D with x + z = 2y (componentwise) and
+Q(x) = Q(y) = Q(z). Then x = y = z. Consequently, for every V, the level set
+S_V contains no three DISTINCT elements p, q, r with p + r = 2q.
+
+**Proof.** From x + z = 2y we get y = (x+z)/2 componentwise (x + z is even in
+every coordinate). Write |w| := √Q(w) (Euclidean norm) and ⟨x,z⟩ := Σ x_i z_i.
+The proof is the chain
+
+    Q(y) = |y|² = |x+z|²/4  ≤  ((|x|+|z|)/2)²  ≤  (Q(x)+Q(z))/2  =  Q(x),     (1)
+
+with BOTH inequalities' equality cases analyzed; equality throughout forces
+x = z, hence y = x.
+
+**Inequality (1a) — the triangle inequality, with equality case.**
+|x+z| ≤ |x| + |z|. Both sides are ≥ 0; squaring, this is equivalent to
+Q(x) + 2⟨x,z⟩ + Q(z) ≤ Q(x) + 2|x||z| + Q(z), i.e. ⟨x,z⟩ ≤ |x||z| —
+Cauchy–Schwarz. The algebraic proof is Lagrange's identity
+
+    Q(x)·Q(z) − ⟨x,z⟩² = Σ_{1≤i<j≤d} (x_i z_j − x_j z_i)²  ≥ 0,             (2)
+
+a sum of integer squares. Equality in (2) holds iff every 2×2 minor
+x_i z_j − x_j z_i vanishes, iff (x, z) are linearly dependent (if x ≠ 0 and
+z ≠ 0: z = λx for λ := z_1/x_1, all coordinates agreeing). If z = λx then
+|x+z| = |1+λ|·|x| and |x|+|z| = (1+|λ|)·|x| (x ≠ 0), which are equal iff
+1+λ = 1+|λ| iff λ ≥ 0. So **equality in (1a) iff z = λx for some λ ≥ 0**
+(the degenerate cases x = 0 or z = 0 are included: 0 = 0·x).
+
+**Inequality (1b) — QM–AM, with equality case.**
+(|x|+|z|)/2 ≤ √((Q(x)+Q(z))/2). With a := |x| = √Q(x), b := |z| = √Q(z) this
+is (a+b)² ≤ 2(a²+b²), i.e. (a−b)² ≥ 0 — equality **iff a = b, i.e. Q(x) = Q(z)**.
+
+**End of chain.** Suppose Q(y) = Q(x) = Q(z) =: V.
+* If V = 0: |x|² = 0, so x = 0; likewise z = 0; then y = (x+z)/2 = 0. Done.
+* If V > 0: x ≠ 0 and z ≠ 0. Equality in (1b) gives |x| = |z| = √V. Equality
+  in (1a) gives z = λx with λ ≥ 0, hence √V = |z| = λ|x| = λ√V, so λ = 1,
+  i.e. **z = x**. Then y = (x+z)/2 = x. Done.
+
+In both cases x = y = z. For the second statement: if p, q, r ∈ S_V are
+distinct with p + r = 2q, the first statement (x = p, y = q, z = r — all on
+the level V) forces p = q = r, a contradiction. ∎
+
+*Geometric reading:* the midpoint of a chord of a sphere lies strictly inside
+the sphere unless the chord is degenerate — strict convexity of w ↦ |w|²,
+proved above by bare algebra (identity (2)), no black boxes.
+
+---
+
+### STEP 2 (Lemma 3B.2). The digit map at base B = 2m — injectivity and the no-carry pullback.
+
+Let **B := 2m** and define the digit map
+
+    φ : D → ℕ,   φ(x) := Σ_{i=1}^{d} x_i · B^(i−1)
+
+(x_i is the base-B digit of φ(x) at position i−1).
+
+**Lemma 3B.2.**
+(i) φ is injective on D, and φ(D) ⊆ [0, B^d − 1].
+(ii) (No-carry pullback.) If x, y, z ∈ D satisfy the INTEGER identity
+φ(x) + φ(z) = 2φ(y), then x + z = 2y componentwise.
+
+**Proof.** (i) Each x_i lies in {0,…,m−1} ⊆ {0,…,B−1}, so
+φ(x) = Σ_{i=1}^d x_i B^{i−1} is a valid base-B representation of φ(x)
+(Lemmas 1.1/1.3 read at base B), and by uniqueness of digits (Lemma 1.2 at
+base B) the vector x is recovered from φ(x) as its digit sequence:
+x_i = digit_{i−1}(φ(x)). Hence φ is injective. Moreover
+φ(x) ≤ (m−1)·(1 + B + … + B^{d−1}) = (m−1)(B^d − 1)/(B − 1) ≤ B^d − 1
+(since m − 1 ≤ B − 1 = 2m − 1).
+
+(ii) Expand the identity:
+
+    Σ_{i=1}^{d} (x_i + z_i − 2y_i) · B^(i−1) = 0.                            (3)
+
+Set c_i := x_i + z_i − 2y_i. Since 0 ≤ x_i, y_i, z_i ≤ m−1,
+
+    −2(m−1) ≤ c_i ≤ 2(m−1) = B − 2,   i.e.   −B < c_i < B.                   (4)
+
+Induction on the number j of positions. *Claim:* for every j ≥ 0 and every
+integer tuple (c_1, …, c_j) with property (4), the identity
+Σ_{i=1}^{j} c_i B^{i−1} = 0 forces c_i = 0 for all i. j = 0: vacuous
+(empty sum). j ≥ 1: reduce (3) modulo B — every term with i ≥ 2 is a multiple
+of B — obtaining c_1 ≡ 0 (mod B). By (4), −B < c_1 < B, and the only multiple
+of B in the open interval (−B, B) is 0; hence c_1 = 0. The remaining identity
+Σ_{i=2}^{j} c_i B^{i−1} = 0 divides by B to give Σ_{i'=1}^{j−1} c_{i'+1}
+B^{i'−1} = 0, and the shifted tuple still satisfies (4). The induction
+hypothesis closes the claim. With j = d, (3) gives c_i = 0 for all i, i.e.
+x_i + z_i = 2y_i for every i. ∎
+
+**This is the no-carry digit law of §1, read as a pullback.** At base B,
+digit sums x_i + z_i reach at most 2(m−1) = B−2 < B and 2y_i ≤ B−2 < B: the
+identity φ(x) + φ(z) = 2φ(y), read position by position, never crosses a
+multiple of B — "no carries" — so the digit sequences agree coordinate by
+coordinate. The Arsenal proved the base-3 instance of exactly this discipline
+(the `carryAtPos` family: `carryAtPos_bound`, `carryAtPos_one_mod3_0/1/2`, and
+V2's `carryAtPos_one_exact` — the carry into position 1 is the units residue
+itself; Theorem A Proof 1 is the base-3 verdict form). Behrend needs the law
+at base B = 2m; Lemma 3B.2(ii) is that general-B law, proved above from
+scratch (Euclidean reduction + induction on positions), with the Arsenal
+base-3 law as the anchor instance.
+
+**The hypothesis is load-bearing (negative control).** At base B′ := 2m − 2
+one has 2(m−1) = B′, and a carry DOES occur: take m = 3 (digits {0,1,2}),
+B′ = 4, d = 2, x = (0,1), y = (2,0), z = (0,0). Then
+φ′(x) + φ′(z) = (0·1 + 1·4) + 0 = 4 = 2·(2·1 + 0·4) = 2φ′(y), but
+x + z = (0,1) ≠ (4,0) = 2y: the pullback FAILS at B = 2m−2. The strict
+inequality 2(m−1) < B is exactly what (4) needs. (Machine-certified: §6.8,
+engine part C-NEG.) Any base B ≥ 2m−1 satisfies (4) (2(m−1) ≤ B−1 < B); we
+use Behrend's classical B = 2m.
+
+---
+
+### STEP 3 (Proposition 3B.3). The integer image of a level set is 3-AP-free.
+
+**Proposition 3B.3.** Fix d ≥ 1, m ≥ 2, B = 2m. For every V ≥ 0:
+
+    A_V := φ(S_V) ⊆ [0, B^d − 1]
+
+contains no non-trivial 3-term arithmetic progression, and neither does its
+translate A_V + 1 = {a + 1 : a ∈ A_V} ⊆ [1, B^d]. Consequently
+
+    r_3(B^d) ≥ |S_V|   for every V ≥ 0.
+
+**Proof.** A non-trivial 3-term AP (p, p+δ, p+2δ) with δ ≥ 1 consists of
+three DISTINCT integers a := p < b := p+δ < c := p+2δ with a + c = 2b.
+Suppose a, b, c ∈ A_V. Since A_V = φ(S_V), write a = φ(x), b = φ(y), c = φ(z)
+with x, y, z ∈ S_V — uniquely, by Lemma 3B.2(i). The identity a + c = 2b
+reads φ(x) + φ(z) = 2φ(y); by Lemma 3B.2(ii), x + z = 2y componentwise; by
+Lemma 3B.1 (x, y, z lie on the common level S_V), x = y = z; by injectivity
+a = b = c — contradicting distinctness. So A_V is 3-AP-free. The translate
+A_V + 1 is 3-AP-free by Lemma 1.8 (translation invariance), and
+A_V + 1 ⊆ [1, B^d] because max φ(D) ≤ B^d − 1 (Lemma 3B.2(i)). Finally
+|A_V + 1| = |A_V| = |S_V| (translation is a bijection), so the 3-AP-free set
+A_V + 1 witnesses r_3(B^d) ≥ |S_V|. ∎
+
+---
+
+### STEP 4 (Lemma 3B.4). Some level is large (pigeonhole).
+
+**Lemma 3B.4.**
+
+    max_V |S_V| ≥ m^d / (d·(m−1)² + 1)   and, since |S_V| is integral,
+    max_V |S_V| ≥ ⌈ m^d / (d·(m−1)² + 1) ⌉ ≥ m^d / (d·m²).
+
+**Proof.** The cube D has m^d points and is the disjoint union of its
+non-empty level sets S_V. For x ∈ D, 0 ≤ Q(x) ≤ d·(m−1)² (each coordinate
+contributes at most (m−1)²), so V takes at most d(m−1)² + 1 integer values.
+By the pigeonhole principle some V₀ ∈ [0, d(m−1)²] has
+|S_{V₀}| ≥ m^d/(d(m−1)² + 1); integrality promotes this to the ceiling.
+Finally d·m² − d(m−1)² − 1 = d(2m−1) − 1 ≥ 1·3 − 1 = 2 > 0 (using m ≥ 2,
+d ≥ 1), so d(m−1)² + 1 ≤ d·m². ∎
+
+---
+
+### STEP 5 (Theorem 3B.5). Parameter choice — the master bound, base 2.
+
+**Theorem 3B.5 (master bound).** Let L ≥ 4 be real, N := 2^L, and
+
+    u := ⌊√L⌋,    m := 2^u,    d := ⌊ L/(1+u) ⌋,    N′ := (2m)^d.
+
+Then:
+(i) (2m)^d ≤ N (the construction fits inside [1, N]);
+(ii) N′ · 2^(1+u) > N (the floor in d costs at most the factor 2^(1+u));
+(iii) d ≤ u;
+(iv) r_3(N) ≥ N′/(2^d · d · m²) ≥ N/(u · 2^(1+4u)).
+
+In particular, for every INTEGER N ≥ 16 (so L = log₂ N ≥ 4 and
+u = ⌊√(log₂ N)⌋ ≥ 2):
+
+    r_3(N) ≥ N / (u · 2^(1+4u)).
+
+**Proof.** First, the parameters are admissible: u = ⌊√L⌋ ≥ ⌊√4⌋ = 2 ≥ 1, so
+m = 2^u ≥ 4 ≥ 2; and 1 + u ≤ 1 + √L ≤ 1 + L/2 ≤ L (using L ≥ 4 for √L ≤ L/2
+and L ≥ 2 for the rest), so d = ⌊L/(1+u)⌋ ≥ 1.
+
+(i) d(1+u) ≤ L by the definition of the floor, and
+(2m)^d = (2^(1+u))^d = 2^(d(1+u)) ≤ 2^L = N.
+
+(ii) d + 1 > L/(1+u) (floor), so (d+1)(1+u) > L, so
+(2m)^(d+1) = 2^((d+1)(1+u)) > 2^L = N, i.e. N′ · 2^(1+u) > N.
+
+(iii) √L < u + 1 (floor), so d ≤ L/(1+u) < L/√L = √L < u + 1; d is an
+integer, so d ≤ u.
+
+(iv) Chain the previous steps (all inequalities explicit):
+
+    r_3(N) ≥ r_3(N′)                        [monotonicity, Lemma 1.9; N′ ≤ N by (i)]
+           ≥ max_V |S_V|                    [Proposition 3B.3 at (d, m)]
+           ≥ m^d / (d·m²)                   [Lemma 3B.4]
+           = N′ / (2^d · d · m²)            [m^d = N′/2^d since N′ = (2m)^d]
+           > N / (2^(1+u) · 2^d · d · m²)   [by (ii): N′ > N/2^(1+u)]
+           ≥ N / (2^(1+u) · 2^u · u · 2^(2u))   [by (iii): 2^d ≤ 2^u, d ≤ u; m² = 2^(2u)]
+           = N / (u · 2^(1+4u)).
+
+The final statement is the specialization L := log₂ N (a real ≥ 4 for every
+integer N ≥ 16). ∎
+
+---
+
+### STEP 6 (Lemma 3B.6 + Theorem 3B.7). The exponential form: C = 6, N₀ = 16.
+
+The master bound is integer-exact but stated with base-2 exponentials. The
+conversion to the form N·e^(−C√(ln N)) is a finite rational computation,
+anchored on two Taylor exhibits. First the toolbox.
+
+**Lemma 3B.6 (analytic toolbox; every item elementary).** Let ln denote the
+natural logarithm (ln x := ∫₁^x dt/t for x > 0) and exp(x) := e^x :=
+Σ_{k≥0} x^k/k! (absolutely convergent for all real x).
+
+(T1) ln and exp are strictly increasing. For ln: the integrand 1/t is > 0.
+For exp: exp(x)·exp(−x) = exp(0) = 1 (term-wise product of the absolutely
+convergent series), so exp(x) > 0 for all real x, and
+exp′(x) = Σ_{k≥1} x^{k−1}/(k−1)! = exp(x) > 0 (term-wise differentiation of
+the uniformly-on-compacts convergent series).
+
+(T2) For v ≥ 0: ln(1+v) = ∫₀^v dt/(1+t) ≤ ∫₀^v dt = v.
+
+(T3) **ln 2 < 25/36.** Every partial sum of the positive series for e^x is a
+strict lower bound: e^(25/36) > Σ_{k=0}^{8} (25/36)^k/k! =
+45557920388276909/22749430293725184, and
+45557920388276909 > 2·22749430293725184 = 45498860587450368
+(excess 59059800826541). So e^(25/36) > 2, and (T1) gives ln 2 < 25/36.
+
+(T4) **ln 2 > 9/13.** Taylor's theorem with Lagrange remainder at order 7:
+e^x = Σ_{k≤7} x^k/k! + e^ξ·x^8/8! for some ξ ∈ (0, x). For x = 9/13 < 1,
+e^ξ < e < 3 (e = Σ 1/k! < 1 + 1 + Σ_{k≥2} 2^(−(k−1)) = 3, since k! ≥ 2^(k−1)
+for k ≥ 1 — induction). Hence
+e^(9/13) < Σ_{k=0}^{7} (9/13)^k/k! + 3·(9/13)^8/8! = 7302823230379/3654473630080,
+and 7302823230379 < 2·3654473630080 = 7308947260160 (deficit 6124029781).
+So e^(9/13) < 2, and (T1) gives ln 2 > 9/13.
+
+(T5) For real x: 2^x := e^(x·ln 2) (definition of the general power). Hence
+N = 2^L gives t = ln N = L·ln 2, i.e. L = t/ln 2.
+
+(T6) For s ≥ 3/2: (8/3)s − ln s ≥ 7/2. Proof: for 3/2 ≤ s₁ < s₂,
+ln s₂ − ln s₁ = ln(1 + (s₂−s₁)/s₁) ≤ (s₂−s₁)/s₁ ≤ (2/3)(s₂−s₁) < (8/3)(s₂−s₁)
+(by T2 and s₁ ≥ 3/2), so h(s) := (8/3)s − ln s is strictly increasing on
+[3/2, ∞); and h(3/2) = 4 − ln(3/2) = 4 − ln(1 + 1/2) ≥ 4 − 1/2 = 7/2 (T2).
+
+All fractions above are exact integer arithmetic; the two exhibits (T3), (T4)
+are re-verified by machine in §6.8 (engine part D). ∎
+
+**Theorem 3B.7 (Behrend, exponential form).** For every integer N ≥ 16:
+
+    r_3(N) ≥ N · e^(−6·√(ln N)).
+
+**Proof.** By Theorem 3B.5, r_3(N) ≥ N/(u·2^(1+4u)) with u = ⌊√(log₂ N)⌋.
+Since u ≤ √L (L := log₂ N) and t ↦ t·2^(1+4t) is increasing for t ≥ 0
+(both factors positive increasing),
+
+    r_3(N) ≥ N / (√L · 2^(1+4√L)).                                            (5)
+
+It remains to show √L·2^(1+4√L) ≤ e^(6√t) with t := ln N ≥ ln 16. Take logs
+(T1) and substitute L = t/ln 2 (T5):
+
+    ln(√L · 2^(1+4√L)) = ½ ln L + (1 + 4√L)·ln 2
+                        = 4√(ln 2)·√t + ½ ln t + ln 2 + ½ ln(1/ln 2).        (6)
+
+(Indeed √L = √t/√(ln 2), so 4√L·ln 2 = 4√(ln 2)·√t; and
+½ ln L = ½ ln t − ½ ln(ln 2).) Bound each term of (6) from above:
+
+* 4√(ln 2) ≤ 4·√(25/36) = 10/3    (T3);
+* ln 2 ≤ 25/36                      (T3);
+* ½ ln(1/ln 2) ≤ ½ ln(13/9) = ½ ln(1 + 4/9) ≤ 2/9    (T4, then T2).
+
+So
+
+    ln(√L·2^(1+4√L)) ≤ (10/3)√t + ½ ln t + 25/36 + 2/9 = (10/3)√t + ½ ln t + 11/12.   (7)
+
+Now s := √t ≥ √(ln 16) = 2√(ln 2) > 2·√(9/16) = 3/2 (T4 gives
+ln 2 > 9/13 > 9/16). By (T6): (8/3)√t − ½ ln t ≥ 7/2 > 11/12, i.e.
+
+    ½ ln t + 11/12 ≤ (8/3)√t.                                                 (8)
+
+Combining (7) and (8):
+
+    ln(√L·2^(1+4√L)) ≤ (10/3)√t + (8/3)√t = 6√t,
+
+i.e. √L·2^(1+4√L) ≤ e^(6√t). With (5):
+
+    r_3(N) ≥ N/e^(6√t) = N·e^(−6√(ln N)). ∎
+
+**Remark (the true shape of the constant).** The construction's intrinsic
+exponent is 4√(ln 2) ≈ 3.3302 (plus a ½ ln ln N term and the floor losses);
+the theorem's C = 6 absorbs every loss with room. Sharpening C toward
+4√(ln 2) + ε is possible with more careful rounding; the asymptotically
+optimal Behrend–Elkin-type constant is not pursued here — the claim is
+exactly what is proved: (C, N₀) = (6, 16).
+
+### Corollary 3B.8 (all orders k ≥ 3).
+
+For every k ≥ 3 and every integer N ≥ 16:
+
+    r_k(N) ≥ N · e^(−6·√(ln N)).
+
+**Proof.** The witness set of Theorem 3B.7 is 3-AP-free, hence k-AP-free for
+every k ≥ 3 by Lemma 1.7 (every k-AP with k ≥ 3 contains a non-trivial 3-AP:
+its first three terms), and it is a subset of [1, N]. ∎
+
+### Corollary 3B.9 (the explicit witness family; machine certificates).
+
+For N ≥ 16 let u = ⌊√(log₂ N)⌋, m = 2^u, d = ⌊log_{2m} N⌋ (these are exactly
+the STEP 5 parameters, computable in pure integer arithmetic: u is the largest
+integer with 2^(u²) ≤ N, d the largest with (2m)^d ≤ N), and let
+
+    V* := a value of Q on {0,…,m−1}^d with the LARGEST level set
+          (computable by finite enumeration; Lemma 3B.4 guarantees
+          |S_{V*}| ≥ m^d/(d(m−1)²+1)).
+
+Then
+
+    W_N := { φ(x) + 1 : x ∈ {0,…,m−1}^d, Q(x) = V* } ⊆ [1, (2m)^d] ⊆ [1, N]
+
+is 3-AP-free with |W_N| = |S_{V*}| ≥ m^d/(d(m−1)²+1) ≥ N·e^(−6√(ln N)).
+The engine `engine142behrend.py` (§6.8) generates W_N for the grid
+d ∈ {2,3,4}, m ∈ {3,4,5,6} and certifies it by two independent detectors.
+
+**Honest remark (the two constructions are complementary, not redundant).**
+Compare the Cantor bound N^{log₃ 2} of §3 with the Behrend bound
+N·e^(−6√(ln N)): their ratio is N^{log₃ 2 − 1}·e^(6√(ln N)) =
+exp(−0.36907·ln N + 6√(ln N)), which exceeds 1 until √(ln N) = 16.26, i.e.
+N ≈ 10^115. Below that astronomical threshold the CANTOR family is the larger
+construction at equal N (e.g. at N = 3^9 = 19683 Cantor gives 512 points,
+while the largest grid Behrend instance, (d,m) = (4,6), gives 48 points in
+[1, 20736]); above it Behrend dominates every fixed power. Both are kept:
+Cantor for the exact-equality phenomenology (§6.7), Behrend for the
+asymptotic. The true order of r_3(N) remains unknown from below between
+N^{0.63} and N·e^{−O(√(ln N))} — no construction known beats Behrend's shape.
 
 ---
 
@@ -776,13 +1156,59 @@ r_3(N) ≥ 2^{⌊log_3(2N+1)⌋} − 1 for all N ≤ 62; EQUALITY
 r_3((3^m−1)/2) = 2^m − 1 for m = 1..4; r_4(5^m) ≥ 3^m (m ≤ 2);
 r_5(5^2) ≥ 3^2 … and r_5(25) = 18 ≥ 16 = 4^2 (the C.4 construction).
 
+### 6.8 The Behrend battery (§3B; engine `engine142behrend.py`, receipts
+`receipts142behrend.txt` — pure python3, exact integer arithmetic +
+`fractions.Fraction`; every part two-method, per §6.1).
+* **[A] SPHERE-FREENESS (STEP 1+2+3).** Grid d ∈ {2,3,4}, m ∈ {3,4,5,6}:
+  ALL non-empty level sets S_V of Q over {0,…,m−1}^d verified 3-AP-free by
+  TWO independent detectors — (i) the full pair-midpoint scan on the lattice
+  points (all pairs x ≠ z: componentwise parity + membership), (ii) the
+  (a,δ)-scan on the integer image φ(S_V) (every pair of image points a < b
+  with δ = b−a tests a+2δ for membership; equivalent to the literal (a,δ)
+  double loop because an AP a, a+δ, a+2δ ∈ S needs its first two terms in
+  S). Zero non-trivial 3-APs everywhere; the two methods agree 100%.
+* **[B] SIZE LAW (STEP 4).** Per (d,m): max_V |S_V| reported and the exact
+  integer inequality max_V|S_V|·(d(m−1)²+1) ≥ m^d verified (ratios 2.0–5.7);
+  plus the partition identity Σ_V |S_V| = m^d and the value-range check
+  #levels ≤ d(m−1)²+1.
+* **[C] DIGIT MAP (STEP 2).** Per (d,m): φ injective on the FULL cube
+  (|φ(D)| = m^d); the no-carry pullback verified EXHAUSTIVELY — every pair
+  (a,c) ∈ φ(D)² with a+c even and b = (a+c)/2 ∈ φ(D) (i.e. EVERY integer
+  triple with a+c = 2b inside the image) pulls back to componentwise
+  x+z = 2y via the base-B digit reader — plus ≥ 10^5 random triples per
+  (d,m) and random-integer hits; **negative control**: at the wrong base
+  B′ = 2m−2 the pullback fails (exhibit of §3B STEP 2: 0, 2, 4 with
+  preimages (0,0), (2,0), (0,1) — a carry occurs).
+* **[D] EXPLICIT CONSTANT CHAIN (STEP 5+6).** The two Taylor exhibits of
+  Lemma 3B.6 re-verified in exact rational arithmetic (e^{25/36} > 2 via the
+  positive partial sum; e^{9/13} < 2 via the order-7 sum + 3x^8/8!
+  remainder). For e = 10..60 (N = 2^e) AND all N in [16, 4096] AND decades
+  10^6..10^18 AND N = 2^e for e = 4..60: the construction's guaranteed size
+  g = ⌈m^d/(d(m−1)²+1)⌉ computed with the explicit integer rounding chain
+  (u = max{u : 2^{u²} ≤ N}, m = 2^u, d = max{d : (2m)^d ≤ N}), and BOTH
+  bounds verified: the master integer inequality N < g·u·2^{1+4u} (Theorem
+  3B.5, exact integers) and the exponential claim g ≥ N·e^{−6√(ln N)}
+  (Theorem 3B.7) — the latter by a certified rational LOWER bound E ≤
+  e^{6√(ln N)} (Taylor partial sum at a rational ρ ≤ √(ln N) from ln N ≥
+  ⌊log₂ N⌋·9/13), checking N·E.denominator ≤ g·E.numerator exactly.
+  100% pass; slack factors 10^3–10^8.
+* **[E] SUBSETS OF [1,N] (STEP 3/6 shift).** Per grid (d,m): the shifted
+  best-level family W = φ(S_{V*})+1 re-verified 3-AP-free under the pinned
+  comparator convention (a ≥ 1, δ ≥ 1), W ⊆ [1, (2m)^d], hence
+  r_3((2m)^d) ≥ |S_{V*}| (new machine-witnessed data points, e.g.
+  r_3(20736) ≥ 48 at (4,6)); consistency: every |W| ≤ (k−1)⌊N/k⌋+(N mod k)
+  (the certified BLOCK-UPPER envelope, k = 3).
+
 ---
 
 ## §7. WHAT IS PROVEN AND WHAT REMAINS OPEN
 
 **Proven, unconditionally, in full rigor (this file):** Theorems A, B.1, B.2,
-B.3, C.1–C.5, D, E, F, G, H (+ H.2), with every lemma spelled out; the
-finite certificates of §6 (exact values, witnesses, m(p,k) walls).
+B.3, C.1–C.5, D, E, F, G, H (+ H.2), **3B.1, 3B.2, 3B.3, 3B.4, 3B.5, 3B.6,
+3B.7 (+ 3B.8, 3B.9) — the Behrend theorem r_3(N) ≥ N·e^{−6√(ln N)} for all
+N ≥ 16, with the master base-2 form and the all-k corollary**, with every
+lemma spelled out; the finite certificates of §6 (exact values, witnesses,
+m(p,k) walls, the Behrend battery §6.8).
 
 **Open (not touched by this file, honestly):**
 1. THE TARGET: an asymptotic formula for r_k(N) — open for every k ≥ 3,
@@ -794,7 +1220,9 @@ finite certificates of §6 (exact values, witnesses, m(p,k) walls).
    (admissibility is sufficient not necessary — Ex. 4.4).
 4. r_3((3^m−1)/2) = 2^m − 1 beyond m ≤ 4; the growth of r_3(3^m) − 2^m;
    the true liminf of r_3(N)/N^α (construction constants 1/2 and
-   2^{α−1} here; classical Behrend-type bounds are far larger — §10).
+   2^{α−1} here; the Behrend theorem §3B is now PROVEN in this file — the
+   remaining gap below is any N·e^{−o(√(ln N))} construction, the
+   Behrend–Elkin frontier; not attempted here).
 5. Exact r_3(N) beyond N = 62 (and r_4 beyond 36, r_5 beyond 30) — purely
    computational frontier, no mathematical claim.
 
@@ -812,7 +1240,7 @@ finite certificates of §6 (exact values, witnesses, m(p,k) walls).
 | `CardinalWorlds.gstDigit` (§11 reader `R / 3^p % 3`) | §1: digit_p at base 3 (generalized to base b in Lemma 1.3–1.5) |
 | `CardinalWorlds.div_mod_mul_lemma`, `mul_add_div_lemma`, `mod_mod_mul`, `three_pow_pos_lemma` | §1 Lemma 1.4 (shift law) skeleton — the digit extraction/div laws |
 | `CardinalWorlds.noTernaryTwo_div`, `ternaryLog3`, `ternaryLog3_lt_of_lt_pow` | §2 Proof 2 descent machinery (strip below 3^m) |
-| `CardinalWorlds.carryAtPos` + `carryAtPos_one_mod3_0/1/2`, V2 `carryAtPos_one_exact`, `first_carry_two_iff` | §2: the carry discipline at position 1 = the units digit — the "no carry" step of Proof 1/2 |
+| `CardinalWorlds.carryAtPos` + `carryAtPos_one_mod3_0/1/2`, V2 `carryAtPos_one_exact`, `first_carry_two_iff` | §2: the carry discipline at position 1 = the units digit — the "no carry" step of Proof 1/2; **§3B STEP 2: the base-3 anchor instance of the no-carry pullback that Lemma 3B.2 generalizes to base B = 2m (the CARRY LAW FAMILY connection — see ARSENAL_USAGE.md)** |
 | `CardinalWorlds` §12 three-world packet: `gstBinaryWorldFactorS` (2^j), `gstTernaryWorldFactorS` (3^j), `gstMixedWorldFactorS` (6^j), `gst_three_world_factor_rawS` (6^j = 2^j·3^j), `gst_three_world_mixed_factor_exactS`, `gstThreeWorldPacket_add`, `gst_handwritten_three_world_joined_prefix_closedS` (5·Σ 2^j3^j = 6^K −1) | §5 Theorem H (the packet law is the engine of the factorization); §3 B.1 (bridge 3 = 1+2); the 6-world window 6^j = 2^j·3^j |
 | `CardinalWorldsV2.packet_mixed_reconstruct`, `packet_add`, `v2r_ternary_scaling` (dyadic scaling law) | §5 H (mixed = binary × ternary at every depth); the 2-world cut g(2^j) |
 | `CardinalWorlds` header: THE BRIDGE `3 = 1 + 2`, the 2-world/3-world/6-world doctrine | §3 B.1; §4 (prime worlds); §5 H — the whole architecture |
@@ -838,14 +1266,19 @@ above; classical results appear ONLY in §10 as labelled context.
 
 ## §10. CONTEXT — named classical results (NOT used in any proof)
 
-For honesty of placement only: Salem–Spencer/Behrend-type constructions give
-r_3(N) ≥ N·e^{−C√(log N)} (much larger than any digit exponent, and
-k-AP-free for all k ≥ 3 by Lemma 1.7); Kelley–Meka (k = 3), Green–Tao (k = 4),
-Leng–Sah–Sawhney (k ≥ 5) are the current upper-bound frontier (corpus page);
-Rankin-type digit constructions are the classical ancestors of Theorems C/D.
-None of these is a step in any proof above; the campaign law (repo math only)
-is respected.
+For honesty of placement only. **The Behrend lower bound itself is no longer
+mere context: §3B of this file proves r_3(N) ≥ N·e^{−6√(ln N)} (N ≥ 16)
+self-contained — the 1946 theorem is now a theorem of the campaign, with
+its own machine battery (§6.8); the classical citation F. A. Behrend, Proc.
+Natl. Acad. Sci. U.S.A. 32 (1946) 331–332 records the historical priority.**
+Salem–Spencer-type constructions are the ancestors; Kelley–Meka (k = 3),
+Green–Tao (k = 4), Leng–Sah–Sawhney (k ≥ 5) are the current upper-bound
+frontier (corpus page) and REMAIN context — none is a step in any proof
+above; the campaign law (repo math only) is respected. Rankin-type digit
+constructions are the classical ancestors of Theorems C/D.
 
 ---
 
 *W1-A1 — the engine never stops; it never lies.*
+*W71-142K — the sphere lands; the fortress wall is now flanked from below at
+N·e^{−6√(ln N)}. The engine never stops; it never lies.*

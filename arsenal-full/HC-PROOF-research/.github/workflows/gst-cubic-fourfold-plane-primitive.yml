@@ -1,0 +1,70 @@
+name: GST Cubic Fourfold Primitive Plane Geometry
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTCubicFourfoldPlanePrimitive.lean'
+      - '.github/workflows/gst-cubic-fourfold-plane-primitive.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-cubic-fourfold-primitive-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-cubic-plane
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify genuine cubic fourfold intersection lattice
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTCubicPlane"
+          roots = ["GSTCubicFourfoldPlanePrimitive"]
+          EOF
+          if lake build GSTCubicPlane > cubic-plane-lean.log 2>&1; then
+            echo "LEAN PASSED: cubic fourfold plane middle-primitive intersection arithmetic"
+          else
+            grep -nE 'error:|sorryAx|✖' cubic-plane-lean.log | tail -n 120 || true
+            tail -n 95 cubic-plane-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" cubic-plane-lean.log; then
+            exit 1
+          fi
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-cubic-plane-primitive-log
+          path: cubic-plane-lean.log
+          if-no-files-found: warn

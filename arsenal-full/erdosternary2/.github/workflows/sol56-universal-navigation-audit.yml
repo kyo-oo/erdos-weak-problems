@@ -1,0 +1,42 @@
+name: SOL56 Universal Navigation Audit
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTInfiniteFourPowerNavigation.lean
+      - GSTGraphV2PerfectPowerBlockProbe.lean
+      - GSTGraphV2UnifiedVerticalTelescope.lean
+      - GSTFinalPurePowerResidueTransplant.lean
+      - .github/workflows/sol56-universal-navigation-audit.yml
+  workflow_dispatch:
+
+jobs:
+  universal:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Compile universal navigation and audit axioms
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build \
+            GSTGraphV2PerfectPowerBlockProbe \
+            GSTGraphV2UnifiedVerticalTelescope \
+            GSTFinalPurePowerResidueTransplant \
+            2>&1 | tee universal-deps.log
+          mkdir -p .lake/build/lib/lean
+          lake env lean \
+            -o .lake/build/lib/lean/GSTInfiniteFourPowerNavigation.olean \
+            GSTInfiniteFourPowerNavigation.lean 2>&1 | tee universal.log
+          if grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' \
+            universal-deps.log universal.log; then
+            echo 'Universal navigation audit failed.'
+            exit 1
+          fi
+          echo 'Universal navigation audit clean.'

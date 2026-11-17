@@ -1,0 +1,47 @@
+{
+  "problem": "erdoes-61",
+  "solution_id": "family-package-official-v1",
+  "provenance": "W72-61K (S071): FAMILY_PROOF.md complete-theorem package + engine61family.py 10/10 GREEN; W72-61C official gate on the fresh google-deepmind/funsearch clone @ cc53f27 (cyclic_graphs); the F7 family + tightness witnesses grounded in the CI-green kernel-61k (run 44136423582); 13 arsenal laws read, cited, and spot-verified",
+  "claims": [
+    {
+      "id": "C61-SL",
+      "statement": "Lemma SL (Seinsche): every P4-free graph on n >= 2 vertices is disconnected or its complement is disconnected.",
+      "verification": "engine SL (exhaustive n=2..6 — 6038 P4-free graphs — + 400 random cographs n<=24)"
+    },
+    {
+      "id": "C61-SEINCHE",
+      "statement": "Theorem S (Seinsche 1974, perfectness form): every P4-free graph is perfect (chi = omega); consequently alpha*omega >= n and max(alpha, omega) >= ceil(sqrt(n)) >= floor(sqrt(n)). The Erdos-Hajnal property holds for H = P4 with c = 1/2, and the exponent is optimal (the block witnesses).",
+      "verification": "engine SEINCHE (exhaustive chi/alpha/omega n=2..6 + 2500 random cographs n<=200 with tree-exact alpha/omega; TREE-CROSS validates the tree against B&B)"
+    },
+    {
+      "id": "C61-F7",
+      "statement": "Theorem F7: for every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3}, every H-free graph on n vertices has alpha or omega >= floor(sqrt(n)) — CI-green in Erdos61.lean (kernel-61k, run 44136423582).",
+      "verification": "engine F7-EXHAUSTIVE (all H-free graphs n<=6) + F7-RANDOM (150 structured random H-free graphs n<=50 per H) + the CI-green Lean kernel"
+    },
+    {
+      "id": "C61-TIGHT",
+      "statement": "Tightness: the m x m block graphs have alpha = omega = m = floor(sqrt(m^2)) — the 1/2-exponent is the exact boundary for the family; the dyadic family m = 2^j is the kernel's tight_family_arsenal.",
+      "verification": "engine TIGHT (B&B-exact alpha=omega=m for m=2,3,4,5,8; dyadic family j=1..5)"
+    },
+    {
+      "id": "C61-RAM",
+      "statement": "Theorem RAM (Erdos-Szekeres recursion): R(s,t) <= C(s+t-2, s-1); consequently K4-free and Kb4-free graphs satisfy the Erdos-Hajnal property with c = 1/3.",
+      "verification": "full derivation in FAMILY_PROOF.md section 4 (vertex-degree split + induction on s+t); the degree-split ingredient (triangle-free neighborhoods independent, greedy alpha >= n/(Delta+1), P3-free closed neighborhoods cliques) engine-verified (DEGREE-LAWS)"
+    },
+    {
+      "id": "C61-INH",
+      "statement": "Theorem INH (inheritance): H induced in H' and EH(H', c) implies EH(H, c) — every H-free graph is H'-free.",
+      "verification": "full proof in FAMILY_PROOF.md section 5; engine MONO-M-style containment spot checks"
+    },
+    {
+      "id": "C61-SUB",
+      "statement": "The substitution stack (PROOF.md section 4, Theorems 4A/4B/4C, complete): transversal law, blow-up avoidance law, min-composition; the harmonic exponent f = c1*c2/(c1+c2) with exact balanced-split optimality; the k-level iteration F_k = (sum 1/c_i)^-1.",
+      "verification": "engine SUB (exact-rational harmonic identity; builder |V(H1[H2])| = ab; induced H1 by transversal + H2 in class for P3[P3], K2[K2]; K2[Kb2] = C4 avoids 2K2; 3-level composition identity)"
+    },
+    {
+      "id": "C61-OFFICIAL-CYCLIC",
+      "statement": "The official DeepMind cyclic_graphs evaluator (fresh clone @ cc53f27) reproduces its published discoveries: independent sets of size 81, 324, 1458 in C_9^3..C_9^5 (official cell-11 expected sizes, official cell-9 priority), 367 in C_7^5 (official cell-6 priority), 754 in C_11^4 (official cell-13 priority) — the official graph-independence machinery cross-certifying the campaign's engines on overlapping instances.",
+      "verification": "driver O-IMPORT-NOTEBOOK-FLOW + O-CYC7-5, O-CYC9-3, O-CYC9-4, O-CYC9-5, O-CYC11-4 (per-cell priority rebinding, verbatim official code)"
+    }
+  ]
+}

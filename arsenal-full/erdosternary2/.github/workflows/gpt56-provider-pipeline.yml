@@ -1,0 +1,67 @@
+name: GPT56 Provider Pipeline Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'GSTFourPowerDirectExistenceProviderPipeline.lean'
+      - 'GSTFourPowerDirectExistenceNoAxiom.lean'
+      - 'GSTFourPowerDirectCreationMaster.lean'
+      - 'GSTFourPowerOntologicalAdapter.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/gpt56-provider-pipeline.yml'
+  workflow_dispatch:
+
+jobs:
+  provider-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Install exact Lean RC2 and pinned Mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile provider pipeline file
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          touch provider-pipeline.log
+          {
+            set -euo pipefail
+            echo "PROVIDER_PIPELINE_DEPS_BUILD_START=1"
+            lake build GSTFourPowerDirectExistenceNoAxiom GSTFourPowerDirectExistenceProviderPipeline
+            echo "PROVIDER_PIPELINE_TARGET_LEAN_START=1"
+            lake env lean GSTFourPowerDirectExistenceProviderPipeline.lean
+            echo PROVIDER_PIPELINE_FILE_COMPILED=1
+          } 2>&1 | tee provider-pipeline.log
+          test ${PIPESTATUS[0]} -eq 0
+
+      - name: Reject forbidden axiom leakage in provider pipeline
+        run: |
+          set -euo pipefail
+          if grep -E '(^|[^A-Za-z0-9_.])(sorryAx|gst_four_power_direct_existence_inline)([^A-Za-z0-9_]|$)' provider-pipeline.log; then
+            echo PROVIDER_PIPELINE_FORBIDDEN_AXIOM_LEAK=1
+            exit 1
+          fi
+          if grep -E '^axioms .*\baxiom\b' provider-pipeline.log; then
+            echo PROVIDER_PIPELINE_CUSTOM_AXIOM_SUSPECT=1
+            exit 1
+          fi
+          echo PROVIDER_PIPELINE_NO_FORBIDDEN_AXIOM_MARKERS=1
+
+      - name: Upload diagnostics
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: provider-pipeline-diagnostics
+          path: provider-pipeline.log

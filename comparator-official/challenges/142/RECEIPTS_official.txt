@@ -1,0 +1,26 @@
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-17T22:32:41
+==============================================================================
+OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
+  github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
+  github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
+Challenge statement: erdos-142-rk-asymptotic
+Claims in solution ledger: 8
+==============================================================================
+[PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cap_set module (verbatim cells 2/6/8/12/14) imports and its own asserts hold (512 greedy, is_cap_set, explicit-set equality, 1082)
+[PASS] (official) O-512EXPL — official build_512_cap: 512 distinct vectors, official is_cap_set True
+[PASS] (official) O-512GREEDY — official solve(8) (official priority): (512,8), is_cap_set, matches official data file
+[PASS] (official) O-1082 — official solve(9) (official cell-14 priority): (1082,9), is_cap_set True
+[PASS] (official) O-BRIDGE — official is_cap_set certifies the Cantor digit sets {0,1}^d in F_3^d for d=3..9 (sizes 2^d)
+[PASS] (solution) S-ENGINE — campaign Behrend engine --verify: exit 0, >= 8 PASS, 0 FAIL
+[PASS] (solution) S-BEHREND — independent Behrend constructions for (4,3),(3,5),(4,5): AP-free, bound met
+[PASS] (solution) S-ASYMP — Corollary B* finite form: F(d) <= 2*sqrt(3 ln 2)*sqrt(ln N) + 2 ln d + 2 at every grid N; shifted ratios <= 2.885 with tail closing on the constant from below
+[PASS] (solution) S-R3-Z3 — z3 dual certificates agree with the r_3 table (9->5, 14->8, 20->9)
+[PASS] (solution) S-BLOCK — block bound (k-1)*floor(N/k)+(N mod k) dominates every certified r_3 (N<=30) and r_4 (N<=20) value
+[PASS] (solution) S-MONO — r_3(N) <= r_4(N) <= r_5(N) at every certified table point
+[PASS] (control) N-AP — planted 3-AP inside a Behrend set is DETECTED by the AP scanner
+[PASS] (control) N-CAP — corrupted official 512-cap (midpoint-completing vector swapped in) is REJECTED by the official is_cap_set
+[PASS] (control) N-R3 — corrupted r_3(10) value in a ledger copy is DETECTED by the table equality check
+==============================================================================
+CHECKS: 14/14 passed (official=5, solution=6, controls=3)
+WALL: 2.46s
+VERDICT: YOUR SOLUTION IS OKAY

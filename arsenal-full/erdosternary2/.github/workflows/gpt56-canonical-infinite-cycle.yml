@@ -1,0 +1,24 @@
+name: GPT56 Canonical Infinite Cycle CI
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+  workflow_dispatch:
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Compile exact infinite-cycle layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build GSTGraphV2CanonicalInfiniteCycle
+          lake env lean GSTGraphV2CanonicalInfiniteCycle.lean 2>&1 | tee canonical-infinite-cycle.log
+          ! grep -E 'declaration uses .sorry.|unknown identifier|unknown module prefix|unsolved goals' canonical-infinite-cycle.log

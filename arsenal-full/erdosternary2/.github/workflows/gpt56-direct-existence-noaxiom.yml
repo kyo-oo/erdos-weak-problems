@@ -1,0 +1,70 @@
+name: GPT56 Direct Existence No-Axiom Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'GSTFourPowerDirectExistenceNoAxiom.lean'
+      - '.github/workflows/gpt56-direct-existence-noaxiom.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  noaxiom-probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Install exact Lean RC2 and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile isolated no-axiom direct-existence file
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          touch direct-existence-noaxiom.log
+          {
+            set -euo pipefail
+            echo "DIRECT_EXISTENCE_CLEAN_DEPS_BUILD_START=1"
+            lake build GSTCanonicalTailStateIso GSTFourPowerDirectExistence GSTFourPowerDirectAdditionCarry
+            echo "DIRECT_EXISTENCE_TARGET_LEAN_START=1"
+            lake env lean GSTFourPowerDirectExistenceNoAxiom.lean
+            echo DIRECT_EXISTENCE_NOAXIOM_FILE_COMPILED=1
+          } 2>&1 | tee direct-existence-noaxiom.log
+          test ${PIPESTATUS[0]} -eq 0
+
+      - name: Reject custom axiom leakage in isolated theorem
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -E '(^|[^A-Za-z0-9_.])(sorryAx|gst_four_power_direct_existence_inline)([^A-Za-z0-9_]|$)' direct-existence-noaxiom.log; then
+            echo DIRECT_EXISTENCE_FORBIDDEN_AXIOM_LEAK=1
+            exit 1
+          fi
+          if grep -E '^axioms .*\baxiom\b' direct-existence-noaxiom.log; then
+            echo DIRECT_EXISTENCE_CUSTOM_AXIOM_SUSPECT=1
+            exit 1
+          fi
+          echo DIRECT_EXISTENCE_NO_FORBIDDEN_AXIOM_MARKERS=1
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: direct-existence-noaxiom-diagnostics
+          path: direct-existence-noaxiom.log
+          if-no-files-found: warn

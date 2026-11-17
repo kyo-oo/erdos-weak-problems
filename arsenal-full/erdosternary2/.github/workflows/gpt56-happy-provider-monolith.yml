@@ -1,0 +1,76 @@
+name: GPT56 Happy Provider Monolith Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'lakefile.toml'
+      - 'GSTFourPowerHappyProvider.lean'
+      - 'GSTFourPowerDirectExistenceProviderPipeline.lean'
+      - 'GSTFourPowerDirectChat2Application.lean'
+      - 'GSTFourPowerDirectHappyBridge.lean'
+      - 'GSTFourPowerDirectExistence.lean'
+      - 'GSTFourPowerDirectResidue.lean'
+      - 'GSTFourPowerDirectResidue27.lean'
+      - 'GSTFourPowerDirectResidue81.lean'
+      - '.github/workflows/gpt56-happy-provider-monolith.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  happy-provider-monolith:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Install exact Lean RC2 and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile monolith-mined Happy provider and pipeline
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          touch happy-provider-monolith.log
+          {
+            set -euo pipefail
+            echo HAPPY_PROVIDER_MONOLITH_BUILD_START=1
+            lake build GSTFourPowerHappyProvider GSTFourPowerDirectExistenceProviderPipeline
+            echo HAPPY_PROVIDER_MONOLITH_AND_PIPELINE_COMPILED=1
+          } 2>&1 | tee happy-provider-monolith.log
+          test ${PIPESTATUS[0]} -eq 0
+
+      - name: Reject forbidden axiom leakage
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -E '(^|[^A-Za-z0-9_.])(sorryAx|gst_four_power_direct_existence_inline)([^A-Za-z0-9_]|$)' happy-provider-monolith.log; then
+            echo HAPPY_PROVIDER_FORBIDDEN_AXIOM_LEAK=1
+            exit 1
+          fi
+          if grep -E '^axioms .*[[][^]]*sorryAx[^]]*[]]' happy-provider-monolith.log; then
+            echo HAPPY_PROVIDER_SORRYAX_DEPENDENCY=1
+            exit 1
+          fi
+          echo HAPPY_PROVIDER_NO_FORBIDDEN_AXIOM_MARKERS=1
+
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: happy-provider-monolith-diagnostics
+          path: happy-provider-monolith.log
+          if-no-files-found: warn

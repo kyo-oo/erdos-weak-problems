@@ -1,0 +1,952 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.92in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\td}{\operatorname{td}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\KU}{K_{\mathrm{top}}^0}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{GST Native Universal-Algebraicity Attack:\\
+High-Coniveau Rational Cosmology and a Canonical Topological \(K\)-Source}
+\author{Mathbox mathematical research and adversarial self-audit}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+An unconditional construction is provided for the \emph{topological}
+perfect-\(K\) source of every prescribed rational Hodge class on an
+arbitrary smooth projective original variety. We combine it with the
+previous GST all-channel rational ambient blowup and show that any
+prescribed original rational Hodge class can be transported faithfully
+to a middle Hodge class on a smooth projective rational variety
+with \emph{arbitrarily large prescribed absolute geometric coniveau}.
+Every middle rational Hodge class of the chosen rational world has
+that coniveau. The topological source comes with an exact
+Grothendieck--Riemann--Roch Todd correction, and its algebraizability
+is equivalent to original Hodge algebraicity. These are genuine
+geometric reductions and source objects; the required universal
+algebraization theorem is not proved.
+\end{abstract}
+
+\section{Original target, parameters, and source provenance}
+Let \(X\) be an arbitrary smooth projective complex variety of
+dimension \(d\), let \(0\le p\le d\), and fix
+\(\alpha\in\Hdg^p(X)_{\Q}\).
+Choose any integer \(k\ge1\). Start with an actual
+projective embedding \(X\hookrightarrow\mathbb P^{N_0}\)
+and select
+\[
+ M\ge \max\{d+k,\;N_0,\;p+1\}. \tag{1.1}
+\]
+Embed \(X\) by a linear inclusion into \(\mathbb P^{2M}\);
+form the genuine rational smooth world
+\[
+ Y=\operatorname{Bl}_X\mathbb P^{2M},\quad
+ c=2M-d,\quad
+ E=\mathbb P(N_{X/\mathbb P^{2M}}),\quad
+ j:E\hookrightarrow Y,\quad q:E\to X,
+ \quad\xi=c_1(\mathcal O_E(1)).
+\]
+Its complex dimension is \(2M\); the normal rank \(c\)
+is at least \(d+2k\). Define
+\(r=M-p-1\ge0\), so that \(1\le r+1=M-p\le c-1\).
+The canonical exceptional Hodge class is
+\[
+ \boxed{\beta_{\alpha}=j_*(\xi^r q^*\alpha)
+       \in \Hdg^M(Y)_{\Q}.} \tag{1.2}
+\]
+The prescribed target remains the genuine canonical Betti
+cycle-class statement on the \emph{same original} \(X\).
+
+\section{A geometrically explicit high-coniveau support}
+For a smooth projective variety \(Y\), let
+\(N^kH^n(Y,\Q)\) be geometric coniveau, defined using
+closed algebraic supports of codimension at least \(k\).
+
+We use the actual exceptional convention
+\[
+ E=\mathbb P_{\mathrm{lines}}(N),\qquad
+ \mathcal O_E(-1)\hookrightarrow q^*N,\qquad
+ N_{E/Y}=\mathcal O_E(-1).
+\]
+Equivalently, these are quotient lines of \(N^\vee\).
+Global generation of \(N\) does not imply global
+generation of this \(\mathcal O_E(1)\).
+Choose an ample line bundle \(\mathcal L\) on \(X\),
+put \(h=c_1(\mathcal L)\), and choose \(a\gg0\)
+so that \(N^\vee\otimes\mathcal L^a\) and
+\(\mathcal L^a\) are globally generated.
+The genuine divisor classes
+\[
+ A=\xi+a q^*h,\qquad B=a q^*h
+\]
+are then basepoint-free. In the actual Chow ring,
+\[
+ \xi^r=(A-B)^r
+  =\sum_{i=0}^{r}(-1)^i{r\choose i}A^{r-i}B^i.
+\]
+For \(i\le\min(r,d)\), first cut \(X\) by \(i\)
+general members of \(|\mathcal L^a|\), pull the
+smooth intersection back to \(E\), then cut by
+\(r-i\) general members of \(|A|\).
+Bertini gives a smooth complete intersection
+\(i_{r,i}:T_{r,i}\hookrightarrow E\) of codimension
+\(r\), or the empty set, with
+\([T_{r,i}]=A^{r-i}B^i\).
+Terms \(i>d\) vanish. For \(r=0\), take \(T_{0,0}=E\).
+The maps \(u_{r,i}=j\circ i_{r,i}\) give the exact
+finite Gysin expression
+\[
+ \boxed{\beta_\alpha=
+  \sum_{i=0}^{\min(r,d)}(-1)^i{r\choose i}
+  (u_{r,i})_*\bigl((q\circ i_{r,i})^*\alpha\bigr).}
+ \tag{2.1}
+\]
+Their finite union is an actual algebraic support of
+codimension at least \(r+1=M-p\) in \(Y\).
+This proves the same geometric support statement
+without assuming \(\alpha\) algebraic or changing
+the exceptional normal-line convention.
+For a second explicit construction with ONE smooth
+support carrying all grades, see
+\texttt{GST\_middle\_Euler\_arithmetic\_normalization\_2026-10-20.tex},
+Section 7.
+
+\begin{theorem}[Universal high-coniveau target realization]
+For every \(X,p,\alpha,k\) as above, the genuine rational
+middle Hodge class \(\beta_\alpha\) on the smooth
+projective rational \(2M\)-fold \(Y\) satisfies
+\[
+ \beta_\alpha\in N^{M-p}H^{2M}(Y,\Q)
+    \subseteq N^kH^{2M}(Y,\Q).
+ \tag{2.2}
+\]
+Moreover \(\beta_\alpha\) is algebraic on \(Y\)
+if and only if \(\alpha\) is algebraic on \(X\).
+\end{theorem}
+\begin{proof}
+Equation (2.1) supplies a finite Gysin sum supported
+on \(\bigcup_i u_{r,i}(T_{r,i})\), of codimension
+at least \(M-p\ge k\).
+The two-way algebraicity statement follows from the
+actual all-exceptional-channel Chern--Segre Chow/Betti
+retraction proved in the preceding GST derivation.
+\end{proof}
+
+\begin{theorem}[The entire middle Hodge fiber has arbitrarily high coniveau]
+Fix \(X,k,M,Y\) as in (1.1). Then
+\[
+ \boxed{\Hdg^M(Y)_{\Q}\subseteq
+        N^kH^{2M}(Y,\Q).} \tag{2.3}
+\]
+The algebraicity defect is nevertheless
+\[
+ \boxed{
+  D_M(Y)\cong\bigoplus_{p=0}^{d}D_p(X),\qquad
+  D_p(X)=\Hdg^p(X)_{\Q}/\im(\cl_X^p).}
+ \tag{2.4}
+\]
+\end{theorem}
+\begin{proof}
+The canonical rational Hodge blowup decomposition
+at codimension \(M\) is one projective-space middle
+component plus the exceptional components
+\(j_*(\xi^{M-p-1}q^*\Hdg^p(X)_{\Q})\) for
+\(p=0,\dots,d\). The middle projective-space
+component is a multiple of the algebraic class
+\(H^M\) and therefore has support in codimension
+\(M\ge k\). Each exceptional component has
+support in codimension \(M-p\ge M-d\ge k\)
+by the previous theorem. This proves (2.3).
+The Chow and Hodge blowup decompositions are
+compatible with canonical cycle class, so taking
+cokernels proves (2.4).
+\end{proof}
+
+\begin{corollary}[A strengthened but not solved universal Hodge reduction]
+For \emph{every fixed} integer \(k\ge1\),
+the full rational Hodge conjecture on all smooth
+projective complex varieties is equivalent to
+the algebraicity of all rational middle Hodge
+classes on smooth projective rational even-dimensional
+varieties \emph{which lie in} \(N^k\).
+In fact it suffices to establish algebraicity for
+the explicit exceptional middle classes \(\beta_\alpha\)
+on the worlds constructed in (1.1).
+\end{corollary}
+\begin{proof}
+One implication is immediate. Conversely, given
+any original \(\alpha\) choose its rational world
+with \(M\ge d+k\). The class \(\beta_\alpha\)
+has coniveau at least \(k\), hence is algebraic
+under the restricted statement. The exact GST
+Chern--Segre return gives an algebraic
+representative of \(\alpha\) on \(X\).
+\end{proof}
+The result is not the generalized Hodge conjecture:
+no assertion that coniveau alone forces algebraicity
+is made. The support carries the \emph{same}
+codimension-\(p\) Hodge source on a new geometry;
+adding more exceptional hyperplane powers does
+not lower its intrinsic Hodge complexity.
+
+\section{An exact GST middle-world intersection detector}
+There is a second completely geometric invariant on the
+rational world \(Y\): the cup-product intersection matrix
+of all the transplanted exceptional Hodge channels.
+This is especially useful for GST's rational Gram-dual
+primitive and source-detection calculations.
+
+For \(\alpha\in\Hdg^p(X)_{\Q}\) and
+\(\gamma\in\Hdg^q(X)_{\Q}\), write
+\(\beta_{p,\alpha}=j_*(\xi^{M-p-1}q^*\alpha)\)
+and \(\beta_{q,\gamma}=j_*(\xi^{M-q-1}q^*\gamma)\).
+\begin{theorem}[Exact cross-channel GST intersection kernel]
+With the Segre convention of the previous GST
+all-channel return,
+\[
+ \boxed{
+ \int_Y\beta_{p,\alpha}\smile\beta_{q,\gamma}
+ =\begin{cases}
+ -\int_X\alpha\smile\gamma\smile
+       s_{d-p-q}(N_{X/\mathbb P^{2M}}),
+       &p+q\le d,\\
+ 0,&p+q>d.
+ \end{cases}}
+ \tag{3.1}
+\]
+In particular, whenever \(p+q=d\),
+\[
+ \boxed{
+ \int_Y\beta_{p,\alpha}\beta_{d-p,\gamma}
+ =-\int_X\alpha\gamma.}
+ \tag{3.2}
+\]
+If \(d=2p\), the original middle Hodge
+intersection form is transported by an exact
+\emph{anti-isometry} into the middle Hodge
+intersection form of the smooth rational world.
+\end{theorem}
+\begin{proof}
+The exceptional divisor self-intersection is
+\(j^*j_*(v)=-\xi v\). By projection formula,
+\[
+ \int_Y\beta_{p,\alpha}\beta_{q,\gamma}
+  =-\int_E
+  \xi^{(M-p-1)+(M-q-1)+1}q^*(\alpha\gamma)
+  =-\int_E\xi^{2M-p-q-1}q^*(\alpha\gamma).
+\]
+Since the projective fibers of \(q\) have
+dimension \(c-1=2M-d-1\),
+the pushforward is \(s_{d-p-q}(N)\)
+if \(p+q\le d\). If \(p+q>d\),
+\(\alpha\gamma\) has degree exceeding
+the top cohomology of \(X\), so the
+integral vanishes. In the complementary
+case \(p+q=d\), \(s_0=1\). The
+anti-isometry assertion follows immediately.
+\end{proof}
+
+\paragraph{Global rational Gram structure.}
+Order the exceptional middle summands by
+\(p=0,\ldots,d\). The cross-channel matrix
+has \emph{zero blocks} when \(p+q>d\)
+and anti-diagonal blocks given by
+the negative Poincaré cup pairings between
+\(\Hdg^p(X)_{\Q}\) and
+\(\Hdg^{d-p}(X)_{\Q}\).
+These pairings are perfect on the
+rational Hodge-class subspaces by
+polarizability and semisimplicity of
+pure rational Hodge structures.
+Consequently the exceptional middle
+intersection matrix is nondegenerate:
+its determinant, after reversing block order,
+depends only on the nondegenerate
+anti-diagonal cup-pairing blocks.
+All Segre correction terms occur
+strictly on one side of this anti-diagonal
+and cannot destroy its invertibility.
+The ambient projective-space middle
+hyperplane class is orthogonal to each
+exceptional middle summand, since the
+relative power of \(\xi\) stays below
+the projective-bundle pushforward threshold.
+
+\paragraph{Concrete K3--fourfold detector.}
+For \(X=S\times S\), \(d=4\), \(p=2\),
+take the actual primitive diagonal
+\(D=\Delta-A-B-U/h^2\) from the
+repository's GST K3 native Gram,
+with \(\int_XD^2=21\).
+Using \(M=5\) and
+\(Y=\operatorname{Bl}_X(\mathbb P^{10})\),
+the actual algebraic middle lift
+\(\beta_D=j_*(\xi^2q^*D)\) satisfies
+\[
+ \boxed{\int_Y\beta_D^2=-21.}
+ \tag{3.3}
+\]
+This is a genuine nonzero source-period
+certificate inside a rational tenfold,
+not an assumed original-\(X\) Hodge
+preimage. It does not imply that
+arbitrary middle Hodge classes of the
+rational tenfold are algebraic.
+
+\section{Unconditional topological \(K\)-theory source}
+Write \(KU^0(E)_{\Q}=KU^0(E)\otimes\Q\).
+Because \(E\) is smooth complex projective,
+it is a finite CW complex, and the rational
+topological Chern character is an isomorphism
+\[
+ \ch_{\mathrm{top}}:KU^0(E)_{\Q}
+  \xrightarrow{\ \cong\ }
+  \bigoplus_{a\ge0}H^{2a}(E,\Q).
+ \tag{3.1}
+\]
+The exceptional normal line is
+\(N_{E/Y}=\mathcal O_E(-1)\), with
+\(c_1=-\xi\). Its Todd class is the exact
+truncated rational series
+\[
+ \td(\mathcal O_E(-1))
+  =\frac{\xi}{e^\xi-1}
+  =1-\frac{\xi}{2}+\frac{\xi^2}{12}
+   -\frac{\xi^4}{720}+\cdots .
+ \tag{3.2}
+\]
+All power series are truncated at the
+finite complex dimension of \(E\).
+Define an \emph{explicitly determined}
+rational topological virtual bundle class
+\[
+ \boxed{
+ u_\alpha=
+ \ch_{\mathrm{top}}^{-1}
+ \Big(q^*\alpha\smile\xi^{M-p-1}
+     \smile\td(\mathcal O_E(-1))\Big)
+ \in KU^0(E)_{\Q}.} \tag{3.3}
+\]
+Unlike an alleged algebraic perfect complex,
+the object (3.3) \emph{always exists}, with
+no algebraic preimage of \(\alpha\) assumed.
+
+Let \(j_!^{\mathrm{top}}:KU^0(E)_{\Q}
+\to KU^0(Y)_{\Q}\) be the complex topological
+Gysin pushforward. Topological
+Grothendieck--Riemann--Roch says
+\[
+ \ch_Y(j_!^{\mathrm{top}}u)
+  =j_*\left(\ch_E(u)
+     \smile\td(N_{E/Y})^{-1}\right).
+ \tag{3.4}
+\]
+Define \(v_\alpha=j_!^{\mathrm{top}}u_\alpha\).
+Substituting (3.3) gives the \emph{exact
+pure middle-degree formula}
+\[
+ \boxed{\ch_Y(v_\alpha)=
+ j_*(q^*\alpha\,\xi^{M-p-1})
+ =\beta_\alpha\quad
+ \text{with all other Chern character
+ degrees zero}.} \tag{3.5}
+\]
+
+\begin{theorem}[Exact algebraization criterion for the unconditional source]
+The following statements are equivalent:
+\begin{enumerate}
+ \item \(\alpha\) is the canonical Betti class
+       of a rational algebraic codimension-\(p\)
+       cycle on \(X\);
+ \item \(u_\alpha\) belongs to the rational
+       image of algebraic \(K_0(E)\) inside
+       \(KU^0(E)_{\Q}\);
+ \item \(v_\alpha\) belongs to the rational
+       image of algebraic \(K_0(Y)\) inside
+       \(KU^0(Y)_{\Q}\);
+ \item the pure middle Hodge class
+       \(\beta_\alpha\) is algebraic on \(Y\).
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+The equivalence between (1) and (4) is
+the previously proved Chern--Segre
+exceptional return.
+For (1) implies (2), if \(\alpha\)
+has a rational Chow representative,
+then \(q^*\alpha\,\xi^{M-p-1}
+\td(\mathcal O_E(-1))\) is a finite sum
+of rational algebraic Chow classes on \(E\).
+The rational Chern character
+\(K_0^{\mathrm{alg}}(E)_{\Q}
+ \to\bigoplus_a\CH^a(E)_{\Q}\)
+is an isomorphism for smooth projective
+\(E\), so an actual rational algebraic
+\(K_0\) class has the prescribed Chern
+character, and by rational injectivity
+of \(\ch_{\mathrm{top}}\) it equals \(u_\alpha\).
+For (2) implies (1), take
+the degree \(M-1\) component of its
+Chern character, which is exactly
+\(\xi^{M-p-1}q^*\alpha\) since
+the Todd class starts in degree zero.
+Multiply by \(\xi^{M-d+p}\) and push
+forward along \(q\):
+\[
+ q_*\left(
+  \xi^{M-d+p}\,
+  [\ch_E(u_\alpha)]_{M-1}
+  \right)
+  =q_*(\xi^{2M-d-1}q^*\alpha)
+  =\alpha.
+ \tag{4.1}
+\]
+The left side is a canonical Betti class
+of a rational Chow cycle because the
+assumed \(K\)-class is algebraic.
+The implication (2) to (3) follows
+by algebraic regular-immersion pushforward
+and its topological comparison.
+The implication (3) to (4) follows
+from (3.5): the degree-\(M\)
+Chern character of an algebraic
+\(K_0\) class is a rational algebraic
+Chow class, and its cycle class is
+\(\beta_\alpha\).
+Finally (4) to (1) follows by
+the original-\(X\) Chern--Segre return.
+\end{proof}
+The theorem gives a genuine topological
+source for \emph{every} target without
+circularity. The transition from that
+source to an \emph{algebraic} perfect
+complex is the still-unproved geometric
+problem: it is precisely the Hodge
+conjecture in the transported component.
+
+\section{A closed GST \(K\)-theory polynomial: the only nonalgebraic input}
+The topological Chern-character construction admits a more
+explicit \emph{native bundle ring} formula, avoiding any
+unspecified inverse on the new exceptional world.
+Define the original rational topological class
+\[
+ a_\alpha=\ch_{X,\mathrm{top}}^{-1}(\alpha)
+ \in KU^0(X)_\Q,\qquad
+ \lambda=[\mathcal O_E(1)]-1
+ \in KU^0(E)_\Q.
+\]
+Here \(\ch(a_\alpha)=\alpha\) is \emph{pure}
+in degree \(2p\), by the rational topological
+Chern-character isomorphism. On a finite-dimensional
+smooth complex projective \(E\), the
+augmentation element \(\lambda\) is nilpotent
+over \(\Q\) (equivalently, its rational
+Chern character has strictly positive degree).
+Hence the logarithm
+\[
+ L=\log(1+\lambda)
+  =\lambda-\tfrac12\lambda^2+
+   \tfrac13\lambda^3-\cdots
+\]
+is a finite rational polynomial in
+\(\lambda\), and so is
+\(g(\lambda)=L/\lambda=
+1-\lambda/2+\lambda^2/3-\cdots\).
+For the exceptional exponent \(r=M-p-1\),
+define the \emph{universal algebraic line-bundle
+word}
+\[
+ \boxed{
+ \Phi_r(\lambda)
+ =\lambda^r\,g(\lambda)^{r+1}
+ =\lambda^r
+ \left(\frac{\log(1+\lambda)}{\lambda}\right)^{r+1}.}
+ \tag{5.1}
+\]
+The notation with division is a power-series
+abbreviation for a finite polynomial; it
+does not require inverting the generally
+nonunit element \(\lambda\).
+
+\begin{theorem}[Exact finite bundle-word source formula]
+The canonical unconditional topological source
+constructed in (3.3) is given by the
+\emph{explicit rational \(K\)-ring operation}
+\[
+ \boxed{
+  u_\alpha=q^*a_\alpha\cdot\Phi_{M-p-1}(\lambda)
+ \in KU^0(E)_\Q.}
+ \tag{5.2}
+\]
+In particular, \(\Phi_r(\lambda)\) belongs to the image
+of \emph{algebraic} \(K_0(E)_\Q\)
+for every \(r\), and the only possibly
+nonalgebraic input in this GST source is
+\(a_\alpha\) on the original \(X\).
+\end{theorem}
+\begin{proof}
+Applying the Chern character to the finite
+formal expression gives
+\(\ch(\lambda)=e^\xi-1\) and
+\(\ch(L)=\log(e^\xi)=\xi\).
+Thus
+\[
+ \ch(\Phi_r(\lambda))
+ =\frac{\xi^{r+1}}{e^\xi-1}
+ =\xi^r\td(\mathcal O_E(-1)).
+\]
+Consequently
+\[
+ \ch(q^*a_\alpha\Phi_r(\lambda))
+ =q^*\alpha\,\xi^r\td(\mathcal O_E(-1)),
+\]
+which characterizes the unique rational
+topological class \(u_\alpha\) from (3.3).
+All rational powers of \(\lambda\) come from
+the actual algebraic line bundle
+\(\mathcal O_E(1)\), so the finite
+rational polynomial \(\Phi_r\) is
+algebraic independently of \(\alpha\).
+\end{proof}
+
+\paragraph{No-go boundary for purely formal GST blowup \(K_0\) upgrades.}
+The actual blowup and relative-Todd machinery
+can multiply the original topological Hodge
+source by \emph{known algebraic} \(K\)-classes
+and push it to the rational world with exact
+Chern character. Formula (5.2) shows that
+this cannot independently algebraize the
+unknown original \(a_\alpha\): if it did,
+the exact return of the previous theorem
+would already imply that \(\alpha\) was
+algebraic on \(X\). Therefore a decisive
+GST universal proof must establish a truly
+new theorem algebraizing the topological
+Hodge \(K\)-source, not merely a formal
+Chern-polynomial identity for \(\Phi_r\).
+
+\section{Exact symbolic and falsification checks}
+With the formal variable \(x=\xi\), Wolfram
+verified symbolically through \(x^8\)
+\[
+ \td(-x)=1-\tfrac{x}{2}
+     +\tfrac{x^2}{12}-\tfrac{x^4}{720}
+     +\tfrac{x^6}{30240}
+     -\tfrac{x^8}{1209600},
+\]
+and the product of this series with
+\((e^x-1)/x\) equals \(1\)
+to the checked order. The \emph{uniform}
+identity is the definition of the Todd
+class, not a finite computational
+extrapolation. All Chow and Betti
+degrees in (3.3)--(4.1) are checked
+at arbitrary \(M,d,p\).
+
+An attempted proof asserting that every
+topological Hodge \(K\)-source on a
+smooth rational variety algebraizes
+would \emph{already imply the full
+rational Hodge conjecture} by the theorem;
+rationality alone cannot be used
+as a proof of that assertion. Likewise,
+the high-coniveau construction is not
+a shortcut to algebraicity: it
+supplies support, but leaves a
+degree-\(2p\) rational Hodge source
+on that support.
+
+\section{A concrete GST one-step support-descent gate}
+High absolute coniveau alone does not solve
+the rational Hodge problem, because
+\(\beta_\alpha\in N^{M-p}\) still
+has a codimension-\(p\) source.
+The useful geometric endpoint is
+a \emph{smooth divisor-source correspondence}
+in codimension \(M-1\).
+
+\begin{theorem}[Genuine divisor-source algebraicity criterion]
+Let \(Y\) be smooth projective complex,
+and let \(\beta\in\Hdg^M(Y)_\Q\).
+Suppose there exist smooth projective
+varieties \(T_1,\ldots,T_s\), proper
+algebraic maps \(f_a:T_a\to Y\)
+that shift cohomology by codimension
+\(M-1\), and rational classes
+\(\gamma_a\in H^2(T_a,\Q)\) satisfying
+\[
+ \boxed{\beta=\sum_{a=1}^s(f_a)_*\gamma_a.}
+ \tag{7.1}
+\]
+The \(\gamma_a\) need not initially be
+declared Hodge classes. Then there are
+\emph{actual rational algebraic divisors}
+\(D_a\in\CH^1(T_a)_\Q\)
+with
+\[
+ \boxed{\beta=\cl_Y^M
+              \left(\sum_a(f_a)_*D_a\right).}
+ \tag{7.2}
+\]
+\end{theorem}
+\begin{proof}
+The direct-sum Gysin map
+\(\bigoplus_a H^2(T_a,\Q)(-(M-1))
+ \to H^{2M}(Y,\Q)\)
+is a morphism of polarizable rational
+Hodge structures. Its rational image is a
+Hodge substructure, and a surjection onto
+that image splits as a rational Hodge
+morphism by semisimplicity of the
+category of polarizable pure rational
+Hodge structures. Since \(\beta\) is
+a rational Hodge class of type
+\((M,M)\) in this image,
+it has a rational preimage of type
+\((1,1)\) in the direct sum of
+degree-two source cohomologies.
+By the divisor/Lefschetz (1,1)
+theorem, those source components
+are rational classes of actual
+divisors \(D_a\). Proper
+Gysin/nativity of canonical cycle
+class gives (7.2).
+\end{proof}
+
+\paragraph{Exact remaining work for the hard case \(p=2\).}
+For an original codimension-two Hodge
+class, the explicit rational-world lift
+\(\beta_\alpha=j_*(\xi^{M-3}q^*\alpha)\)
+already admits geometric support
+in codimension \(M-2\):
+the finite union of the smooth twisted
+complete intersections \(T_{M-3,i}\)
+constructed in Section 2, followed by \(j\).
+To apply the theorem, GST must
+\emph{construct a supplementary
+genuine codimension-one
+support descent} realizing the
+\emph{same} \(\beta_\alpha\)
+as a Gysin of rational degree-two
+cohomology on supports of codimension
+\(M-1\). Such an equality is
+not supplied by generic Bertini
+hyperplane cuts: they multiply the
+class by an additional divisor
+rather than preserve its
+original Betti value.
+That is the first algebraic
+geometric nontriviality of the
+proposed support upgrade.
+Producing the new correspondence
+for every original Hodge target
+would imply all original
+codimension-two Hodge classes
+are algebraic by the displayed
+divisor construction and the exact
+Chern--Segre return; it must not
+be assumed as an extra GST axiom.
+
+\section{One explicit universal \(K\)-source packet for ALL original grades}
+The preceding source was defined for one prescribed
+original codimension. Its construction is linear
+and its exceptional channels are independent,
+so we can combine \emph{all} original rational
+Hodge degrees in \emph{one} pure middle
+topological \(K\)-theory state.
+
+Fix the single \(Y,E,M\) chosen previously,
+and let \(\boldsymbol\alpha=(\alpha_0,\ldots,\alpha_d)\)
+be an arbitrary packet
+\(\alpha_p\in\Hdg^p(X)_{\Q}\).
+Define the actual topological virtual
+bundle packet
+\[
+ \boxed{
+ \mathcal U_{\boldsymbol\alpha}
+ =\sum_{p=0}^d
+  q^*\ch_{X,\mathrm{top}}^{-1}(\alpha_p)\,
+  \Phi_{M-p-1}(\lambda)\in KU^0(E)_\Q,
+ \qquad
+ \mathcal V_{\boldsymbol\alpha}
+  =j_!^{\mathrm{top}}\mathcal U_{\boldsymbol\alpha}
+  \in KU^0(Y)_\Q.}
+ \tag{6.1}
+\]
+Every term is \emph{unconditionally} defined
+using only original rational Betti Hodge
+data, the exceptional algebraic
+line bundle, rational topological \(K\)
+operations and the actual Gysin map.
+Its Chern character is \emph{pure
+middle degree}:
+\[
+ \boxed{\ch_Y(\mathcal V_{\boldsymbol\alpha})
+   =\sum_{p=0}^d
+    j_*(\xi^{M-p-1}q^*\alpha_p)
+   \in\Hdg^M(Y)_\Q.}
+ \tag{6.2}
+\]
+
+\begin{theorem}[The full GST defect as an explicit \(K\)-algebraization obstruction]
+For this single rational smooth world,
+\[
+ \boxed{
+ \mathcal V_{\boldsymbol\alpha}
+ \text{ is the rational realization of an
+ algebraic perfect-\(K\) class on }Y
+ \iff
+ \alpha_p\in\im(\cl_X^p)\ \text{for ALL }p.}
+ \tag{6.3}
+\]
+Likewise \(\mathcal U_{\boldsymbol\alpha}\)
+is algebraizable on \(E\) if and only if
+every \(\alpha_p\) is algebraic on the
+original \(X\). Consequently the
+two universal assignments induce
+\emph{injective rational linear maps}
+\[
+ \boxed{
+ \bigoplus_{p=0}^d D_p(X)
+ \hookrightarrow
+ KU^0(E)_\Q/\im K_0^{\mathrm{alg}}(E)_\Q
+ \quad\text{and}\quad
+ \bigoplus_{p=0}^d D_p(X)
+ \hookrightarrow
+ KU^0(Y)_\Q/\im K_0^{\mathrm{alg}}(Y)_\Q.}
+ \tag{6.4}
+\]
+\end{theorem}
+\begin{proof}
+The Todd-corrected topological Gysin
+formula applied term-by-term proves
+(6.2). If its right side is the
+Chern character of an algebraic
+\(K_0(Y)_\Q\) class, its degree-\(M\)
+component is a canonical algebraic
+Chow cycle class. Apply the existing
+all-exceptional-channel actual
+Chern--Segre return \(R_{M-p}^H\):
+every \(\alpha_p\) must be
+algebraic. Conversely, if all
+\(\alpha_p\) are algebraic,
+the rational algebraic
+\(K_0(E)\)-to-Chow Chern character
+isomorphism realizes every summand
+of (6.1) by an algebraic virtual
+perfect class; its regular-immersion
+Gysin push gives an algebraic
+\(K_0(Y)\) representative of
+\(\mathcal V_{\boldsymbol\alpha}\).
+
+For the \(E\)-side converse,
+look at the degree-\((M-1)\)
+Chern-character component
+\[
+ [\ch_E(\mathcal U_{\boldsymbol\alpha})]_{M-1}
+ =\sum_{p=0}^d
+  \xi^{M-p-1}q^*\alpha_p.
+\]
+The projective-bundle
+cohomology and Chow decompositions
+use distinct powers
+\(\xi^j\) over the base \(X\).
+Their compatible coefficient
+extraction therefore shows that
+each \(\alpha_p\) is algebraic
+when this component is algebraic.
+The two iff statements imply
+that the linear assignments
+vanish in the respective
+algebraization quotients
+precisely on the direct sum
+of algebraic original Hodge
+subspaces. Passing to quotients
+proves the injections (6.4).
+\end{proof}
+
+This is a fully quantified \emph{source
+construction} with no chosen
+Chow preimages. The outstanding
+universal problem is now one
+geometric algebraization theorem
+for its precisely specified
+topological \(K\)-state, not a
+separate arbitrary symbol for
+every Hodge sheet. The theorem
+does NOT provide that
+algebraization or imply that
+rationality of \(Y\) supplies it.
+
+\section{An exact relative-support algebraicity test}
+We can turn the preceding sufficient criterion
+into a \emph{necessary-and-sufficient}
+test by defining only those support classes
+that are genuinely generated by smooth
+projective algebraic correspondences.
+
+For \(Y\) smooth projective complex
+of dimension \(2M\), define the
+smooth-source niveau space
+\(\widetilde N^{M-1}H^{2M}(Y,\Q)\)
+to be the rational span of images
+\[
+ f_* H^{2(M-c)}(T,\Q)
+ \ \longrightarrow\ H^{2M}(Y,\Q),
+ \qquad c\in\{M-1,M\},
+ \tag{8.1}
+\]
+where \(T\) is a smooth projective
+variety of dimension \(2M-c\),
+\(f:T\to Y\) is a genuine proper
+algebraic map, and \(f_*\) is its
+complex-orientation Gysin push of
+cohomological degree \(2c\).
+Allow finite sums of maps and
+classes. Unlike an unspecified
+abstract GST state, every support
+in (8.1) is an actual smooth
+algebraic geometric source.
+
+\begin{theorem}[Exact smooth-source niveau algebraicity]
+For every smooth projective complex
+\(Y\) of dimension \(2M\), \(M\ge1\),
+\[
+ \boxed{
+ \Hdg^M(Y)_\Q\cap
+ \widetilde N^{M-1}H^{2M}(Y,\Q)
+ =\operatorname{im}(\cl_Y^M).}
+ \tag{8.2}
+\]
+Therefore, for the explicitly transported
+middle rational Hodge class
+\(\beta_\alpha\) of any original \(X\),
+\[
+ \boxed{
+ \alpha\text{ algebraic on }X
+ \iff
+ \beta_\alpha\in
+ \widetilde N^{M-1}H^{2M}(Y,\Q).}
+ \tag{8.3}
+\]
+\end{theorem}
+\begin{proof}
+Every rational codimension-\(M\)
+Chow class is a rational combination
+of irreducible algebraic supports of
+dimension \(M\). Resolution of
+singularities of each support gives
+a smooth projective \(T\) of
+dimension \(M\) and a proper map
+\(f:T\to Y\) with \(f_*1\)
+equal to the corresponding
+fundamental cycle class. Thus
+the entire algebraic image lies
+in the smooth-source niveau
+space through its \(c=M\) summand.
+
+Conversely, consider the rational
+map \(\bigoplus f_*\) over a finite
+list of supports that realizes a
+class in the intersection (8.2).
+Each source \(H^{2(M-c)}(T,\Q)(-c)\)
+and the target \(H^{2M}(Y,\Q)\)
+are polarizable pure rational Hodge
+structures of weight \(2M\).
+The image is a Hodge substructure,
+and the source surjects onto that
+image by a rational Hodge
+morphism. Polarizable rational
+Hodge semisimplicity gives a
+rational Hodge splitting; hence
+a rational \((M,M)\) class in
+the image lifts to a rational
+Hodge class of degree
+\(2(M-c)\) on the sources.
+For \(c=M\), the input
+degree is zero and the lift
+is a rational multiple of a
+fundamental class. For \(c=M-1\),
+the input degree is two and
+the rational \((1,1)\) source
+is the canonical class of a
+rational algebraic divisor by
+Lefschetz (1,1). Proper
+pushforward sends those
+actual algebraic cycles to
+codimension-\(M\) algebraic
+cycles on \(Y\), recovering
+the original middle Hodge
+class. This proves (8.2).
+Equation (8.3) follows from
+the exact original-\(X\)
+Chern--Segre return.
+\end{proof}
+
+\paragraph{The precise missing GST move.}
+The universal exceptional geometric
+support of \(\beta_\alpha\)
+has codimension \(M-p\).
+To reach the automatically
+algebraic smooth-source level
+\(M-1\), one must produce a
+\emph{same-Betti-class}
+support transfer across \(p-1\)
+additional codimension units.
+For the unresolved original
+codimension-two case, this
+is exactly ONE nontrivial
+support-descent step, regardless
+of how large \(M\) becomes.
+The source module
+\texttt{GSTClassicalHodgeRankFreeLefschetzPoincareGeneration.lean}
+already distinguishes formal
+Lefschetz/Poincaré sheet operations
+from genuine primitive rotation:
+the missing operation cannot
+simply be a string of ordinary
+hyperplane cups followed by
+formal lowering. It must be
+an actual geometric Gysin/support
+correspondence preserving the
+prescribed canonical middle
+Betti value. Equality (8.3)
+shows why this would be a real
+breakthrough and why it is not
+currently an established GST law.
+
+\section{Next exact GST operation, with no unearned hypothesis}
+The strongest constructive state we
+now possess unconditionally is
+\[
+ (\alpha,X,p)\ \rightsquigarrow\
+ (Y,E,\{T_{r,i}\}_i,\beta_\alpha,u_\alpha,v_\alpha)
+\]
+where \(Y\) is smooth projective rational,
+\(\beta_\alpha\) is middle and supported
+in arbitrarily high geometric coniveau,
+and \(v_\alpha\) is a canonical
+rational topological \(K\)-theory class
+with \emph{pure} prescribed Chern
+character \(\beta_\alpha\).
+Its algebraization is the exact
+required new geometry. A genuine GST
+law capable of crossing the remaining
+gap must build an \emph{algebraic}
+perfect complex from the explicit
+topological \(u_\alpha\) (or a
+provably cohomologous algebraic
+middle cycle) for \emph{every}
+\(X,p,\alpha\), and verify the canonical
+Betti comparison. Neither perfect
+complex existence nor middle-class
+algebraicity is asserted here.
+\end{document}

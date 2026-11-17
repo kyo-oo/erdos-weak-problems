@@ -1,0 +1,43 @@
+name: Atomic Comparator RC2
+
+on:
+  push:
+    branches:
+      - sol/gst-v2-atomic-surgery-20260818
+      - sol/gpt56-gstv2-u2d-atomic-20260822
+  pull_request:
+
+jobs:
+  comparator-root-cause:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Restore exact historical comparator environment in workspace
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+
+          p = Path('ErdosTernary2.lean')
+          s = p.read_text(encoding='utf-8')
+          marker = '-- CardinalWorldsWork.lean — GST Complete Formalization'
+          if marker not in s:
+              raise SystemExit('canonical marker not found')
+          p.write_text(s[s.index(marker):], encoding='utf-8')
+
+          Path('lean-toolchain').write_text('leanprover/lean4:v4.33.0-rc2\n', encoding='utf-8')
+          Path('lakefile.toml').write_text('''name = "erdos-ternary2-proof"\nversion = "0.1.0"\ndefaultTargets = ["GSTTactic", "ErdosTernary2"]\n\n[[require]]\nname = "mathlib"\nscope = "leanprover-community"\nrev = "v4.33.0-rc2"\n\n[[lean_lib]]\nname = "GSTTactic"\n\n[[lean_lib]]\nname = "ErdosTernary2"\n''', encoding='utf-8')
+          Path('lake-manifest.json').unlink(missing_ok=True)
+          PY
+
+      - name: Bootstrap exact RC2 manifest
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+
+      - uses: leanprover/lean-action@v1
+        with:
+          use-mathlib-cache: true

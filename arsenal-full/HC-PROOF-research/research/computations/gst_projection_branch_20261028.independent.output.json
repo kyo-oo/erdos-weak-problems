@@ -1,0 +1,129 @@
+{
+  "all_passed": true,
+  "total_checks": 109088,
+  "families": {
+    "exhaustive_modular_defect_identity": 11635,
+    "exhaustive_complement_compatibility": 11635,
+    "nilpotence_bound_matches_mod_prime_criterion": 11635,
+    "every_nilpotent_defect_corrected_at_log_bound": 6362,
+    "all_idempotent_pairs_intertwine": 23664,
+    "all_idempotent_pairs_bridge_products": 23664,
+    "all_nilpotent_difference_bridge_inverses": 10116,
+    "all_nilpotent_difference_conjugacies": 10116,
+    "universal_free_ring_newton_identity": 1,
+    "universal_idempotent_quotient_bridge_products": 1,
+    "universal_idempotent_quotient_intertwining": 1,
+    "missing_idempotence_in_bridge_formula_is_detected": 1,
+    "bridge_formula_with_idempotence": 1,
+    "universal_commutative_boundary_defect": 1,
+    "repeated_square_zero_control": 1,
+    "mixed_independent_source_survives_in_abstract_ring": 1,
+    "square_zero_power_formula": 13,
+    "all_power_sums_sample": 13,
+    "integral_torsion_counterexample_to_rationalization_omission": 7,
+    "each_complement_relation_is_load_bearing": 2,
+    "ramification_addition_matrix_smith_equivalence": 1,
+    "ramification_companion_square": 1,
+    "three_twist_extraction_polynomial": 1,
+    "every_A_chain_reflected_pair_intersection": 78,
+    "exact_exceptional_stratum_normalization": 72,
+    "adjacent_and_nonadjacent_source_coefficients": 1,
+    "split_cover_counterexample_to_unqualified_positivity": 1,
+    "changed_lean_no_escape_keywords": 8,
+    "changed_lean_no_truth_stubs": 8,
+    "changed_import_exists": 26,
+    "registered_module_exists": 19,
+    "only_two_preexisting_lexical_anomalies": 1,
+    "current_local_import_graph_acyclic": 1
+  },
+  "finite_rows": [
+    {
+      "modulus": 2,
+      "matrix_count": 16,
+      "eligible_matrices": 14,
+      "defect_nilpotence_histogram": {
+        "1": 8,
+        "2": 6
+      },
+      "idempotent_count": 8,
+      "idempotent_pair_count": 64,
+      "nilpotent_difference_pair_count": 20
+    },
+    {
+      "modulus": 3,
+      "matrix_count": 81,
+      "eligible_matrices": 30,
+      "defect_nilpotence_histogram": {
+        "1": 14,
+        "2": 16
+      },
+      "idempotent_count": 14,
+      "idempotent_pair_count": 196,
+      "nilpotent_difference_pair_count": 62
+    },
+    {
+      "modulus": 4,
+      "matrix_count": 256,
+      "eligible_matrices": 224,
+      "defect_nilpotence_histogram": {
+        "1": 26,
+        "2": 126,
+        "3": 24,
+        "4": 48
+      },
+      "idempotent_count": 26,
+      "idempotent_pair_count": 676,
+      "nilpotent_difference_pair_count": 290
+    },
+    {
+      "modulus": 5,
+      "matrix_count": 625,
+      "eligible_matrices": 80,
+      "defect_nilpotence_histogram": {
+        "1": 32,
+        "2": 48
+      },
+      "idempotent_count": 32,
+      "idempotent_pair_count": 1024,
+      "nilpotent_difference_pair_count": 272
+    },
+    {
+      "modulus": 8,
+      "matrix_count": 4096,
+      "eligible_matrices": 3584,
+      "defect_nilpotence_histogram": {
+        "1": 98,
+        "2": 510,
+        "3": 1824,
+        "4": 384,
+        "6": 768
+      },
+      "idempotent_count": 98,
+      "idempotent_pair_count": 9604,
+      "nilpotent_difference_pair_count": 4610
+    },
+    {
+      "modulus": 9,
+      "matrix_count": 6561,
+      "eligible_matrices": 2430,
+      "defect_nilpotence_histogram": {
+        "1": 110,
+        "2": 1168,
+        "3": 288,
+        "4": 864
+      },
+      "idempotent_count": 110,
+      "idempotent_pair_count": 12100,
+      "nilpotent_difference_pair_count": 4862
+    }
+  ],
+  "parsed_import_nodes": 723,
+  "known_preexisting_lexical_anomalies": [
+    "ComparatorSmokeSolution.lean",
+    "ComparatorSmokeChallenge.lean"
+  ],
+  "arithmetic": "integer, modular, Fraction and exact sparse polynomial arithmetic",
+  "lean_compiled": false,
+  "review": "self-review; independent local and Wolfram implementations",
+  "wolfram_all_six_rows_match": true
+}

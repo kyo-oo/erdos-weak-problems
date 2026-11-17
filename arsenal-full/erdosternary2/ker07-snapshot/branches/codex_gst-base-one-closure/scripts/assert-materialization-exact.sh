@@ -1,0 +1,58 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0050 / 1132
+#    Path         : branches/codex_gst-base-one-closure/scripts/assert-materialization-exact.sh
+#    Ref          : origin/codex/gst-base-one-closure
+#    First-commit : 2026-08-15 05:11:42 +0530  (1f4700d)
+#    Last-commit  : 2026-08-15 05:12:34 +0530  (e56872d)
+#    Total commits: 2
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/2] 2026-08-15 05:11:42 +0530  1f4700d  (ker07-dev)
+#        Add byte-identical materialization guard
+# [02/2] 2026-08-15 05:12:34 +0530  e56872d  (ker07-dev)
+#        Trigger repaired comparator pipeline
+# ======================================================================
+
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Independent CI guard: compiled sources must be byte-identical to the saved payload.
+ERDOS_EXPECTED="$(mktemp)"
+GST_EXPECTED="$(mktemp)"
+cleanup() {
+  rm -f "$ERDOS_EXPECTED" "$GST_EXPECTED"
+}
+trap cleanup EXIT
+
+cat \
+  payload/ErdosTernary2.parts/00 \
+  payload/ErdosTernary2.parts/01 \
+  payload/ErdosTernary2.parts/02 \
+  payload/ErdosTernary2.parts/03 \
+  payload/ErdosTernary2.parts/04a \
+  payload/ErdosTernary2.parts/04b0 \
+  payload/ErdosTernary2.parts/04b1 \
+  payload/ErdosTernary2.parts/05a \
+  payload/ErdosTernary2.parts/05b \
+  | tr -d '\r\n' | base64 -d | gzip -d > "$ERDOS_EXPECTED"
+
+tr -d '\r\n' < payload/GSTTactic.lean.gz.b64 \
+  | base64 -d | gzip -d > "$GST_EXPECTED"
+
+check_exact() {
+  local expected="$1"
+  local actual="$2"
+  if ! cmp -s "$expected" "$actual"; then
+    echo "ERROR: $actual is not byte-identical to its saved payload." >&2
+    echo "Decoded payload:" >&2
+    sha256sum "$expected" >&2
+    echo "Materialized file:" >&2
+    sha256sum "$actual" >&2
+    exit 1
+  fi
+  echo "exact materialization verified: $actual"
+}
+
+check_exact "$ERDOS_EXPECTED" ErdosTernary2.lean
+check_exact "$GST_EXPECTED" GSTTactic.lean

@@ -1,0 +1,33 @@
+name: GPT6 GST Finite-Dust Child Permutation
+on:
+  push:
+    branches:
+      - gpt6/erdos-normalized-core-rigidity-20261029
+    paths:
+      - GSTWorldtraceFiniteDust.lean
+      - .github/workflows/gpt6_finite_dust_kernel.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean RC2 and dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerDirectResidue
+      - name: Check unique ternary exponent child by Lean kernel
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceFiniteDust.lean 2>&1 | tee gst-finite-dust.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' gst-finite-dust.log
+          echo GST_FINITE_DUST_CHILD_KERNEL_GREEN=1

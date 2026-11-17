@@ -1,0 +1,157 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-ALL-DEGREE-CURVATURE-20261103",
+  "repository": {
+    "commit": "f96a12fe6c4617555a1495bd14c6ef2b06851c93",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_all_degree_curvature_run.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64"
+  },
+  "mathematics": {
+    "assertion_tested": "13 fixed exact graded DGA fixtures, complete basis multiplication/Leibniz tables, degree-by-degree cohomology and trace ranks. No finite computation proves the general geometric comparison or constructs a Chow class.",
+    "coefficient_domain": "Q; Python Fraction elimination versus actual Wolfram MatrixRank and NullSpace",
+    "conventions": "Even polynomial powers, then ordered odd base generators, then u then v. All degrees absolute; |u|=|v|=2p-1. Trace is the top original-base uv coefficient.",
+    "inputs": [
+      "research/experiments/gst_all_degree_curvature_checks.py",
+      "research/derivations/GST_all_degree_curvature_duality_specialization_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_all_degree_curvature_wolfram_20261103.wl",
+      "research/computations/gst_all_degree_curvature_wolfram_20261103.output.json",
+      "research/experiments/gst_all_degree_curvature_run.py",
+      "GSTGradedWorldAlgebra.lean",
+      "GSTSpatialFoldResearch.lean",
+      "research/derivations/GST_nonlinear_relative_fold_classification_2026_11_03.tex"
+    ],
+    "bounds": {
+      "fixtures": 13,
+      "max_base_dimension": 16,
+      "max_cochain_dimension": 64,
+      "p_values": [
+        1,
+        2
+      ],
+      "controls": "zero curvature, nonzero curvature, rational coefficients, odd base, equal handle rank but distinct all-degree profiles",
+      "first_jet_dimension_max": 128
+    },
+    "non_claims": [
+      "Finite fixtures do not prove the general Poincare double or geometric cochain comparison",
+      "The parameter family is a DGA family, not an asserted projective family",
+      "No Lean compilation, CI dispatch, Chow source or universal Hodge proof",
+      "No historical novelty or independent referee claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T14:43:19.729851+00:00",
+    "runtime_seconds": 2.1964438390000396,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_all_degree_curvature_20261103.output.json",
+      "sha256": "9d6272b54cd969ecc5794ff07ff7507ac2ea98363f4523f4f85d5ab23766ee55",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Independent full differential matrices, cohomology representatives and Poincare trace ranks in Python and Wolfram",
+    "Every basis multiplication Leibniz check in Python, including odd base and uv signs",
+    "All 13 shared tables agree with complete reparsed remote raw output",
+    "Actual first-jet matrices and first-order prescribed-target readout",
+    "Changed Lean proof-escape scan, acyclic parsed import graph and balanced LaTeX environments"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "General mathematics has author self-review, not independent review",
+    "Lean drafts uncompiled",
+    "Remote runtime and process exit status not exposed",
+    "Rational model cochains are distinct from algebraic Chow cycles"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_all_degree_curvature_checks.py",
+      "sha256": "9f3573a66a4873d4b758b2e106c64fc95dfe2aa48030bd3021b47ba49960ab61",
+      "sha256_after": "9f3573a66a4873d4b758b2e106c64fc95dfe2aa48030bd3021b47ba49960ab61"
+    },
+    {
+      "path": "research/derivations/GST_all_degree_curvature_duality_specialization_2026_11_03.tex",
+      "sha256": "60677ea6983f02c4ad63d0f2c66b278c0d8c2c552befbb4b306ce4389d8dd774",
+      "sha256_after": "60677ea6983f02c4ad63d0f2c66b278c0d8c2c552befbb4b306ce4389d8dd774"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_all_degree_curvature_wolfram_20261103.wl",
+      "sha256": "53c3d315310a3502086fc663fd516b441392d30c9e9d191f50c6ca32fbc859c9",
+      "sha256_after": "53c3d315310a3502086fc663fd516b441392d30c9e9d191f50c6ca32fbc859c9"
+    },
+    {
+      "path": "research/computations/gst_all_degree_curvature_wolfram_20261103.output.json",
+      "sha256": "1beb58caf944e6b92eed463b4e70d742e9d0921fd8d907470c411a42acc1f38a",
+      "sha256_after": "1beb58caf944e6b92eed463b4e70d742e9d0921fd8d907470c411a42acc1f38a"
+    },
+    {
+      "path": "research/experiments/gst_all_degree_curvature_run.py",
+      "sha256": "23dccd64131fd8dad89b0999ff6d4bf8e0167f860b83089aadbe595830823a96",
+      "sha256_after": "23dccd64131fd8dad89b0999ff6d4bf8e0167f860b83089aadbe595830823a96"
+    },
+    {
+      "path": "GSTGradedWorldAlgebra.lean",
+      "sha256": "25ab487bc088fe4464ae9786b67812d4e87a890be67b976c3a405d16232c86bd",
+      "sha256_after": "25ab487bc088fe4464ae9786b67812d4e87a890be67b976c3a405d16232c86bd"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "6547109b6d95cefd98383038fa8ced028aadd7dcd6ba1a9f91772f172a150d8c",
+      "sha256_after": "6547109b6d95cefd98383038fa8ced028aadd7dcd6ba1a9f91772f172a150d8c"
+    },
+    {
+      "path": "research/derivations/GST_nonlinear_relative_fold_classification_2026_11_03.tex",
+      "sha256": "ecead691eaa5afbb76480834424f108a5ce49d02766475612d39c8b3092901b2",
+      "sha256_after": "ecead691eaa5afbb76480834424f108a5ce49d02766475612d39c8b3092901b2"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_all_degree_curvature_checks.py",
+    "research/derivations/GST_all_degree_curvature_duality_specialization_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_all_degree_curvature_wolfram_20261103.wl",
+    "research/computations/gst_all_degree_curvature_wolfram_20261103.output.json",
+    "research/experiments/gst_all_degree_curvature_run.py",
+    "GSTGradedWorldAlgebra.lean",
+    "GSTSpatialFoldResearch.lean",
+    "research/derivations/GST_nonlinear_relative_fold_classification_2026_11_03.tex"
+  ],
+  "declared_results": [
+    "research/computations/gst_all_degree_curvature_20261103.output.json"
+  ]
+}

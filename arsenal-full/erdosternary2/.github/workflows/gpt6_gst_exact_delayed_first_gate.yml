@@ -1,0 +1,36 @@
+name: GST exact unbounded first two-wave gate delay
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [GSTProblem406DelayedExactHGate.lean, .github/workflows/gpt6_gst_exact_delayed_first_gate.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  first-delayed-gate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build exact canonical GST/Worldtrace source-neighbor modules
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectExistence GSTFourPowerThirdWave
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaArbitraryDelay.olean GSTOmegaArbitraryDelay.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaExactDelayedEscape.olean GSTOmegaExactDelayedEscape.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaThreeTritMultiplierLaw.olean GSTOmegaThreeTritMultiplierLaw.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaResidueClassExit.olean GSTOmegaResidueClassExit.lean
+          lake env lean -o .lake/build/lib/lean/GSTProblem406HGateCoreClass.olean GSTProblem406HGateCoreClass.lean
+      - name: Strict kernel check arbitrary delay of first simultaneous CommonTwo
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406DelayedExactHGate.lean 2>&1 | tee gst-first-delayed-gate.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' gst-first-delayed-gate.log
+          echo GST_ARBITRARILY_DELAYED_FIRST_PHYSICAL_HGATE_PASS=1

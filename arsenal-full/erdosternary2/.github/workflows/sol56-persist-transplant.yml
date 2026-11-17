@@ -1,0 +1,28 @@
+name: SOL56 Persist Final Monolith Transplant
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  persist-transplant:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/sol56-final-residual-production-green-20260824
+          fetch-depth: 1
+      - name: Apply seam-only transplant to live monolith
+        run: python3 scripts/run_final_infinite_monolith_transplant.py
+      - name: Persist edited ErdosTernary2.lean
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ErdosTernary2.lean
+          if ! git diff --cached --quiet; then
+            git commit -m "Persist seam-only monolith transplant [skip ci]"
+            git push origin HEAD:sol/sol56-final-residual-production-green-20260824
+          fi

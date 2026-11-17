@@ -1,0 +1,179 @@
+{
+  "schema_version": 2,
+  "claim_id": "gst-semantic-reflection-and-native-factor-extraction",
+  "repository": {
+    "commit": "7afae18a0027ca4ad2a572401839d73d0f0ef54e",
+    "dirty": true
+  },
+  "command": [
+    "mcp__codex_apps__wolfram_wolframlanguageevaluator",
+    "code=<verbatim contents of GST_semantic_reflection_factor_extraction_2026-10-20.wl>",
+    "timeConstraint=30"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Wolfram Language",
+        "version": "15.0.1 for Linux x86 (64-bit), July 2, 2026"
+      }
+    ],
+    "hardware": "Not exposed by the connected evaluator."
+  },
+  "mathematics": {
+    "assertion_tested": "Exact semantic reflection for every directed graph on three nodes and every seed set; the complete twelve-cell ontological positive-sector table; symbolic native lift and quotient identities; native one-sided bilinear factor extraction; exact proper-frame rank obstruction; norm-21 K3 scalar discriminator.",
+    "coefficient_domain": "Exact integers, rationals, and symbolic polynomials over Q.",
+    "conventions": "Graph g uses bit 3*i+j for edge i->j, i,j=0..2; seed bit i. Every graph including loops and every seed set is visited. Matrix vectors are columns. The factor-extraction coordinate test uses p=2,M=5 and positive Q=diag(3,5,7); beta is the second target coordinate.",
+    "inputs": [
+      "All graph integers 0..511 and all seed masks 0..7.",
+      "All physical carries 0..3 and digits 0..2.",
+      "Q=diag(3,5,7); proper-frame columns (1,1,0),(0,1,1).",
+      "Native source map Q^2 -> Q^3 includes the first two coordinates; ambient class-to-defect block is set to zero explicitly.",
+      "K3 native source norm 21; scalar target coefficient a."
+    ],
+    "bounds": {
+      "graph_nodes": 3,
+      "directed_graphs": 512,
+      "seed_subsets_per_graph": 8,
+      "graph_seed_cases": 4096,
+      "physical_cells": 12,
+      "native_block_identities": 5
+    },
+    "non_claims": [
+      "No exhaustive search over varieties, Hodge classes or native geometric sources.",
+      "No proof that a one-sided factorization exists for arbitrary original X.",
+      "No geometric Hodge counterexample from the proper-frame matrix test.",
+      "No new Lean compilation or validation of every indexed theorem."
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T20:22:57.329Z",
+    "runtime_seconds": 9.933,
+    "exit_status": null,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": 30,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/GST_semantic_reflection_factor_extraction_2026-10-20.output.txt",
+      "sha256": "18c588767477b03d008386967300f0b83cff6506a5fba032586d924d85fd513e",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    {
+      "name": "Reflection enumeration",
+      "passed": true,
+      "result": "4096 cases; no failures."
+    },
+    {
+      "name": "Twelve-state positive sector",
+      "passed": true,
+      "result": "Happy cells exactly (0,2),(3,2)."
+    },
+    {
+      "name": "Native lift and quotient identities",
+      "passed": true,
+      "result": "Five True values."
+    },
+    {
+      "name": "Bilinear factorization and extraction",
+      "passed": true,
+      "result": "Identity True; extracted target {d,e,f}."
+    },
+    {
+      "name": "Proper-frame one-sided factorization",
+      "passed": true,
+      "result": "Coefficient rank 6; augmented rank 7; no factorization through the selected frame."
+    },
+    {
+      "name": "Native K3 scalar",
+      "passed": true,
+      "result": "Coefficient a; positive period 21*a^2."
+    },
+    {
+      "name": "Input hashes",
+      "passed": true,
+      "result": "All eleven in-memory code/source strings identical before and after the successful evaluator call."
+    }
+  ],
+  "result": "Implementation and finite assertion verified in the stated exact range; universal claims remain governed by the manuscript proofs and explicit hypotheses.",
+  "residual_risks": [
+    "Remote evaluator exposes no process exit code, kernel CPU time, memory usage, hardware identifier, or execution ID. runtime_seconds is observed client wall time.",
+    "The first full RPC returned a connection failure; a small connectivity probe succeeded, then successful full runs produced the recorded exact output. No result from the failed RPC is used.",
+    "Hashes were taken over the UTF-8 content of immutable in-memory source/artifact strings; no local filesystem runner or manifest validator was available in this route.",
+    "Source catalogue extraction is a text index, not a Lean parser or compiler."
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/GST_semantic_reflection_factor_extraction_2026-10-20.wl",
+      "sha256": "0fb47e8a5c36eec38fd5fbd695df8e5d6efd438145eff50ddc91b8397a8a27f3",
+      "sha256_after": "0fb47e8a5c36eec38fd5fbd695df8e5d6efd438145eff50ddc91b8397a8a27f3"
+    },
+    {
+      "path": "GSTGraphV2OmniversalCore.lean",
+      "sha256": "6d420534b31b7fcc4090afdde36e21b20de6b0cd7b5fc89edcf58f3506b8e43f",
+      "sha256_after": "6d420534b31b7fcc4090afdde36e21b20de6b0cd7b5fc89edcf58f3506b8e43f"
+    },
+    {
+      "path": "GSTClassicalHodgeBranchPacketPlaneRealization.lean",
+      "sha256": "5fb2efb811c8db2c18beb9a673fdcb7b43509c301b5f0529bcc93699b7e97e0f",
+      "sha256_after": "5fb2efb811c8db2c18beb9a673fdcb7b43509c301b5f0529bcc93699b7e97e0f"
+    },
+    {
+      "path": "GSTClassicalHodgeOntologicalWindowReverseExistence.lean",
+      "sha256": "ff3ff5f66b2a7f2536b9f68bec8dd8af2fb33a70298e4173883a94b3554f809f",
+      "sha256_after": "ff3ff5f66b2a7f2536b9f68bec8dd8af2fb33a70298e4173883a94b3554f809f"
+    },
+    {
+      "path": "GSTClassicalHodgeKernelStableOperatorAlgebra.lean",
+      "sha256": "71a8bd31b9eb4de863f2cc8e67d62f8157682602e2e895994208c7b54154cecf",
+      "sha256_after": "71a8bd31b9eb4de863f2cc8e67d62f8157682602e2e895994208c7b54154cecf"
+    },
+    {
+      "path": "GSTClassicalHodgeRangeLiftedSpectralOperator.lean",
+      "sha256": "3de8f4be355230038e6802d057788fe56c1664e901bde2bf1acd905449be544f",
+      "sha256_after": "3de8f4be355230038e6802d057788fe56c1664e901bde2bf1acd905449be544f"
+    },
+    {
+      "path": "GSTGraphV2SelfExpandingCosmology.lean",
+      "sha256": "d004d999a615995676dad2967bff67818e915dcbab21d51f8f25b8deabb0e891",
+      "sha256_after": "d004d999a615995676dad2967bff67818e915dcbab21d51f8f25b8deabb0e891"
+    },
+    {
+      "path": "GSTClassicalHodgeSelfExpandingClosure.lean",
+      "sha256": "63247e8da4ef295dcdb3a5e5a0ea38197a39ad18d8f3022abc65970cbf14761d",
+      "sha256_after": "63247e8da4ef295dcdb3a5e5a0ea38197a39ad18d8f3022abc65970cbf14761d"
+    },
+    {
+      "path": "GSTClassicalHodgeFiberedNativeTensorArsenal.lean",
+      "sha256": "b6403ead87d06ce4bb80b346cc92f36c5a4a2c318b66f3616abfbcdf5e624955",
+      "sha256_after": "b6403ead87d06ce4bb80b346cc92f36c5a4a2c318b66f3616abfbcdf5e624955"
+    },
+    {
+      "path": "GSTClassicalHodgeCoherentNativeDescent.lean",
+      "sha256": "ab552bd3f54d50d8f45f275defbed83546dfaaf1e8eeff83fffaab503711b604",
+      "sha256_after": "ab552bd3f54d50d8f45f275defbed83546dfaaf1e8eeff83fffaab503711b604"
+    },
+    {
+      "path": "GSTPrimitiveAlgebraicMotiveProjector.lean",
+      "sha256": "5ac5b3e94288ecbbd7fc57ced57f990eff152228942dae8bac00c2cb552a723e",
+      "sha256_after": "5ac5b3e94288ecbbd7fc57ced57f990eff152228942dae8bac00c2cb552a723e"
+    }
+  ],
+  "declared_results": [
+    "Semantic reflection proved as written in the pinned GST source.",
+    "Current residual kernel acts as identity on the true algebraicity quotient.",
+    "One-sided factor extraction is proved conditional on the actual geometric factorization.",
+    "Universal original-X algebraic-source existence remains unresolved."
+  ]
+}

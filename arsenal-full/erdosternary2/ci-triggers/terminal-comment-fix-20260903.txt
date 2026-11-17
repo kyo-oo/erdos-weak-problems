@@ -1,0 +1,1 @@
+Trigger SOL Fix Erdos Terminal Comment workflow for ErdosTernary2.lean terminal comment syntax repair.

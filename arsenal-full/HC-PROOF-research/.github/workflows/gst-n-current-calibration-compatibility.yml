@@ -1,0 +1,61 @@
+name: Mathbox GST N Cohomology Native Mass Integration
+on:
+  push:
+    branches:
+      - mathbox/residual-zero-direct-audit-20261015
+    paths:
+      - GSTNCurrentCalibrationCompatibility.lean
+      - .github/workflows/gst-n-current-calibration-compatibility.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-n-native-current-calibration-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Verify actual native-cycle mass and N-cohomology bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTNActualCurrentBridge"
+          roots = [
+            "waves.GSTNCohomologyV3",
+            "GSTNCurrentCalibrationCompatibility"
+          ]
+          EOF
+          if lake build GSTNActualCurrentBridge > gst-n-current-bridge.log 2>&1; then
+            echo "LEAN PASSED: N-cohomology and actual GST native mass compatibility"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-n-current-bridge.log | tail -n 140 || true
+            tail -n 120 gst-n-current-bridge.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-n-current-bridge.log; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-n-current-calibration-bridge-log
+          path: gst-n-current-bridge.log
+          if-no-files-found: warn

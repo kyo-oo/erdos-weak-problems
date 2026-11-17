@@ -1,0 +1,194 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{GST all-dimensional spatial folds: a decisive geometric test of Hodge breaking versus algebraicity}
+\date{23 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We test the owner's two-outcome spatial hypothesis at every emerging geometric dimension: breaking the realized Hodge structure would provide a counterexample to the classical Hodge conjecture, whereas preserving it would establish the conjecture. The strongest noncircular test distinguishes full pure Hodge structure, the Hodge type of a fixed integral topological class, and canonical algebraic representability. A genuine family of smooth projective N-folds for every N at least two shows that a fixed rational class can lose its Hodge type under geometric folding even though the Hodge conjecture is true for every member in all codimensions. Actual topology-changing singular worlds can break purity, but lie outside the smooth projective statement. This falsifies the proposed decision rule, not the Hodge conjecture.
+\end{abstract}
+\section{Typed GST whole-world geometric experiment}
+The core of GST General Space is dimensionless. Scheme dimension, complex structures, rational Hodge decompositions and topology only emerge at a geometric realization. In the existing GST graded algebra, signed charge and purity gap are separate. On each realization $Y$, distinguish its full purity condition $\mathsf P(Y)$, the typed rational Hodge condition $\mathsf H_p(Y,\beta)$ and actual canonical algebraicity $\mathsf A_p(Y,\beta)$:
+\[
+ \mathsf P(Y): H^m(Y,\mathbb Q)\text{ pure of weight }m\text{ for every }m,\quad
+ \mathsf H_p(Y,\beta):\beta\in H^{2p}(Y,\mathbb Q)\cap H^{p,p}(Y),
+\]
+\[
+ \mathsf A_p(Y,\beta):\beta=\operatorname{cl}^{can}_Y(Z)
+ \text{ for some actual }Z\in CH^p(Y)_{\mathbb Q}.
+\]
+The rational Hodge conjecture is
+$\forall Y\text{ smooth projective},p,\beta:\mathsf H_p(Y,\beta)\Rightarrow\mathsf A_p(Y,\beta)$.
+We do not assume it for the experiment.
+
+\section{Actual all-N smooth-projective Hodge alignment break with true algebraicity}
+\begin{theorem}[The proposed breaking verdict has genuine false positives at every N at least two]
+For every integer $N\ge2$, set $k=N-2$ and take actual smooth projective complex N-folds
+\[
+ Y_N^0=E_i\times E_i\times\mathbb P^k,\quad
+ Y_N^1=E_i\times E_{2i}\times\mathbb P^k,\qquad
+ E_\tau=\mathbb C/(\mathbb Z+\tau\mathbb Z).
+ \tag{1}
+\]
+They are diffeomorphic under marked real torus coordinates, both have pure Hodge structures and the same entire Hodge polynomial
+\[
+ \boxed{\mathcal H_{Y_N^a}(u,v)=(1+u)^2(1+v)^2\sum_{j=0}^k(uv)^j.}\tag{2}
+\]
+The full rational Hodge conjecture is true on both in every codimension.
+Nevertheless the very same marked integral cohomology class
+\[
+ \boxed{
+ \beta_N=[(dx_1-dx_2)\wedge(dy_1-dy_2)]\smile h^k
+ \in H^{2N-2}(Y_N^a,\mathbb Z),\quad
+ h=c_1(\mathcal O_{\mathbb P^k}(1))
+ } \tag{3}
+\]
+has type $(N-1,N-1)$ on $Y_N^0$ and is NOT of that type on $Y_N^1$.
+In the aligned world $\beta_N$ is the genuine canonical algebraic class
+of the elliptic diagonal times a point in $\mathbb P^k$,
+up to global orientation sign.
+\end{theorem}
+\begin{proof}
+Using marked real coordinates and holomorphic forms
+$dz_1=dx_1+\tau\,dy_1$ and $dz_2=dx_2+\sigma\,dy_2$,
+the exterior product is exactly
+\[
+ \boxed{
+ (dx_1-dx_2)\wedge(dy_1-dy_2)\wedge dz_1\wedge dz_2
+ =(\sigma-\tau)dx_1\wedge dy_1\wedge dx_2\wedge dy_2.
+ } \tag{4}
+\]
+At $(\tau,\sigma)=(i,i)$ the scalar is zero; at $(i,2i)$ it equals $i$.
+For a real two-class on the complex two-torus, vanishing of the
+wedge with the nonzero holomorphic two-form is equivalent to its
+$(1,1)$ Hodge type: the wedge detects $(0,2)$ and complex
+conjugation detects $(2,0)$. Projective stabilization by $h^k$
+is nonzero and transports these components to degree $2N-2$.
+When the elliptic markings agree, the two-factor complex diagonal
+is an actual algebraic divisor whose normal Thom class is (3)
+at $k=0$; multiplying by the algebraic point class on
+$\mathbb P^k$ yields the asserted cycle at every $k$.
+
+Equation (2) is Kunneth applied to
+$\mathcal H_E=(1+u)(1+v)$ and
+$\mathcal H_{\mathbb P^k}=\sum_{j=0}^k(uv)^j$.
+Both worlds are smooth projective and therefore their
+whole Hodge structures are pure.
+
+Both two-elliptic-factor bases are smooth projective
+surfaces. Rational Hodge algebraicity on every such
+surface follows in codimensions zero and two from
+fundamental and point classes and in codimension one
+from the Lefschetz $(1,1)$ theorem. The genuine
+projective-bundle Chow and Hodge formulas for the
+product with $\mathbb P^k$ commute with the canonical
+Betti cycle map. Thus every rational Hodge class
+in every codimension of either $Y_N^a$ is algebraic,
+for every $N\ge2$, notwithstanding (4).
+\end{proof}
+\begin{corollary}[A proven false-positive verdict, not a counterexample to Hodge]
+There exists a Hodge-type-breaking fold among genuine smooth
+projective worlds in every dimension $N\ge2$ while the
+rational Hodge conjecture remains true on BOTH worlds.
+Therefore the implication
+\[
+ \boxed{\text{a fixed rational class loses Hodge type under a fold}
+ \ \Longrightarrow\ \text{a counterexample to the Hodge conjecture}}
+ \tag{5}
+\]
+is false as a proposed geometric decision rule.
+The breaking class on $Y_N^1$ is not a Hodge class.
+\end{corollary}
+
+
+\begin{corollary}[Spatial experiment applies over every arbitrary original smooth projective X]
+Let $X$ be any nonempty smooth projective complex variety of dimension $d$,
+with no restriction on its rational Hodge classes, and let
+$W_{X,N}^a=X\times Y_N^a$ for $N\ge2$ and $a\in\{0,1\}$.
+These two genuine smooth projective worlds have
+\emph{emergent dimension} $d+N$ and the same
+underlying marked differentiable manifold. The
+rational class $\operatorname{pr}_{Y}^*\beta_N$ is of
+type $(N-1,N-1)$ at $a=0$ and fails that type at
+$a=1$, while both FULL Hodge structures remain
+pure. In the aligned world it has a genuine
+canonical algebraic representative
+$X\times\Delta_{E_i}\times\{\mathrm{pt}\}$.
+This theorem applies to every arbitrary original $X$;
+it does not claim the full Hodge conjecture for an
+unknown $X$.
+\end{corollary}
+\begin{proof}
+Kunneth gives the direct rational Hodge summand
+$H^0(X,\mathbb Q)\otimes H^{2N-2}(Y_N^a,\mathbb Q)$.
+The unit $1_X$ is of type $(0,0)$ and the
+product class is precisely $1_X\otimes\beta_N$.
+Its nonzero off-diagonal component at $a=1$
+cannot cancel with other Kunneth summands.
+Purity of both full realized worlds follows
+from smooth projectivity, and the indicated
+actual algebraic product cycle gives the aligned
+canonical comparison.
+\end{proof}
+
+\section{Actual topological purity breaking in every dimension, but singular}
+\begin{theorem}[Genuine nodal topology-fold mixed weight]
+Let $C$ be the projective nodal curve made by identifying
+two distinct points of an elliptic curve $E$.
+Then for every $N\ge1$ the actual projective
+$Z_N=C\times\mathbb P^{N-1}$ has dimension $N$
+and
+\[
+ \boxed{\operatorname{Gr}^W_0H^1(Z_N,\mathbb Q)=\mathbb Q(0),
+ \qquad\operatorname{Gr}^W_1H^1(Z_N,\mathbb Q)=H^1(E,\mathbb Q).}\tag{6}
+\]
+Its full cohomology is not pure in degree one,
+but the variety is singular.
+\end{theorem}
+\begin{proof}
+Normalization gives the short exact constant-sheaf
+sequence
+$0\to\mathbb Q_C\to\nu_*\mathbb Q_E\to\mathbb Q_{\rm node}\to0$.
+The $H^0(E)\to H^0(\rm node)$ difference map is zero,
+since the two branches carry the same constant.
+The resulting mixed-Hodge exact sequence is
+$0\to\mathbb Q(0)\to H^1(C,\mathbb Q)\to H^1(E,\mathbb Q)\to0$.
+The projective factor does not affect $H^1$ and
+does not remove the singular node.
+\end{proof}
+
+\section{Proof-audit verdict for the spatial binary decision law}
+The first failure mode of the negative branch is precise:
+a marked cohomology class can cease to satisfy $(p,p)$
+when complex geometry is folded, \emph{even if the classical
+Hodge conjecture holds on every world involved}.
+The second failure mode is precise:
+a genuine loss of \emph{whole Hodge purity} can be
+created by a topology fold, but its output is singular
+and therefore not an admissible smooth-projective
+counterexample. Within the smooth projective category,
+purity itself holds unconditionally by Hodge theory.
+
+For the positive branch, preservation of full purity
+on all smooth projective worlds is automatic; the
+additional implication from this preservation to
+canonical algebraic representability is exactly the
+open conclusion that must be derived, not silently
+identified with purity. These facts do not disprove
+the Hodge conjecture or rule out new GST geometry.
+They give a decisive all-dimensional mathematical
+diagnosis of what a valid fold experiment has to
+measure before its output can decide the conjecture.
+
+\section{Verification}
+An independent Wolfram exact determinant and full-Hodge
+polynomial computation checks the aligned and misaligned
+parameters and the projective stabilization for $N=2$
+through $26$. The universal all-$N$ assertion is proved
+by the product, Hodge and projective-bundle formulas.
+The existing Lean charge/purity-gap laws already track
+the distinct logical meanings of the two observed breaks.
+\end{document}

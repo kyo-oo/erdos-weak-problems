@@ -1,0 +1,70 @@
+name: GST Geometric Mass Semantic Audit
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTResearchGeometricMassSemanticAudit.lean'
+      - '.github/workflows/gst-research-geometric-mass-semantic-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-research-mass-audit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned toolchain and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-native-mass-audit
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify mass semantic audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "ResearchMassSemanticAudit"
+          roots = ["GSTResearchGeometricMassSemanticAudit"]
+          EOF
+          if lake build ResearchMassSemanticAudit > mass-semantic-lean.log 2>&1; then
+            echo "LEAN PASSED: raw mass obstruction and valid cohomological degree invariance"
+          else
+            grep -nE 'error:|sorryAx|✖' mass-semantic-lean.log | tail -n 120 || true
+            tail -n 95 mass-semantic-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" mass-semantic-lean.log; then
+            echo "Trust audit failed"
+            exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-geometric-mass-audit-kernel-log
+          path: mass-semantic-lean.log
+          if-no-files-found: warn

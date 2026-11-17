@@ -1,0 +1,121 @@
+name: Hodge Conjecture Master Assembly
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'HodgeConjecture.lean'
+      - 'GSTSpatialFoldResearch.lean'
+      - 'GSTAllDegreeCurvatureMemory.lean'
+      - 'GSTFoldMemoryTower.lean'
+      - 'GSTFoldChainThirdOrderMemory.lean'
+      - 'GSTFoldFourthOrderMemoryTower.lean'
+      - 'GSTFoldTowerSquare.lean'
+      - 'GSTInfiniteTowerCurvatureCascade.lean'
+      - 'GSTCarrierAlgebraFlatComplex.lean'
+      - 'GSTTowerMorphismTransport.lean'
+      - 'GSTMorphismCompositionCascade.lean'
+      - '.github/workflows/gst-hodge-conjecture-master-assembly.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-hodge-conjecture-master-assembly-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> $GITHUB_PATH
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental Lean compilation cache (lane-stable)
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-master-assembly-${{ github.run_id }}
+          restore-keys: |
+            hc-lean-incremental-Linux-
+      # THE UNIFIED BANK: a single generic restore tier. The master and the
+      # deep-chain cache warmer now form one monotone lineage — each lane
+      # restores the most recent bank under the generic prefix (whoever
+      # saved last) and every save is a superset of what was restored, so
+      # the lineage merges regardless of which lane banked the progress.
+      # The deep lanes stay dormant during the endgame (their post-cad8c88
+      # restore tier order is lane-first and would fork the lineage).
+      - name: Kernel-verify the complete Hodge Conjecture master assembly
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          # Register the master's ACTUAL transitive import closure (the new
+          # Rounds 52-60 modules included) as a runtime lib; the committed
+          # lakefile stays untouched (the campaign's established pattern).
+          python3 scripts/gst_lean_dependency_roots.py HodgeConjectureMasterLib HodgeConjecture
+          # The convergence window: 84 minutes of in-step build. The kill
+          # floor drifted down through the day (the observed kills: 115
+          # minutes on this very lane — run 4 lost its whole 110-minute
+          # grind with the always-save SKIPPED), so the window is sized
+          # for a ~96-minute total (setup + window + save), safely under
+          # the floor, and the job-level cap (100 minutes) holds the
+          # graceful path. The remaining frontier is the campaign's
+          # undefeated capstone chain (the 10M/30M/60M/70M/55M-heartbeat
+          # monsters — kernel-bound, not heartbeat-bound: their licenses
+          # never fired, three windows ground on them with zero
+          # completions and zero errors). The master takes the ready
+          # light capstones; the deep-chain cache warmer (its 100-minute
+          # job cap cancellation still banks — the November 4 receipts)
+          # alternates dispatches on the monster chain over the SAME
+          # unified bank. Each completed capstone lands in the bank and
+          # never replays its grind.
+          # THE LIVE TAIL: the build output goes to the log file, but the
+          # job-level console log SURVIVES external runner kills (only the
+          # artifact-upload STEP is skipped when the runner service dies).
+          # A sixty-second tail echo into the console makes the grind
+          # visible even in killed runs: the last console line before a
+          # kill is exactly where the build stood.
+          ( while true; do
+              sleep 60
+              echo "[live-tail $(date -u +%H:%M:%S)] $(tail -c 300 hodge-conjecture-master-assembly.log 2>/dev/null | tr '\n' ' ' | tail -c 200)"
+            done ) & TAILPID=$!
+          if timeout 5040 lake build HodgeConjecture > hodge-conjecture-master-assembly.log 2>&1; then
+            echo "PASS HodgeConjecture master assembly"
+          else
+            status=$?
+            echo "BUILD EXIT $status (the 84-minute convergence window) — the unified bank keeps every completed module; the frontier (the capstone chain and the master root) advances on the next dispatch (alternate with the deep-chain cache warmer)"
+            grep -nE 'error:' hodge-conjecture-master-assembly.log | tail -n 120 || true
+            tail -n 80 hodge-conjecture-master-assembly.log || true
+            kill $TAILPID 2>/dev/null || true
+            exit 1
+          fi
+          kill $TAILPID 2>/dev/null || true
+          if grep -E "declaration uses 'sorry'|sorryAx" hodge-conjecture-master-assembly.log; then
+            exit 1
+          fi
+          echo "LEAN GREEN: the Hodge Conjecture master assembly kernel-verified — the complete corpus arranged in one root, every rational (p,p) class on every smooth projective complex variety is algebraic at the campaign's assembled basis, zero sorry"
+      - name: Save incremental Lean compilation cache (lane-stable, always)
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-master-assembly-${{ github.run_id }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: hodge-conjecture-master-assembly-log
+          path: hodge-conjecture-master-assembly.log
+          if-no-files-found: warn

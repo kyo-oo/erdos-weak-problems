@@ -1,0 +1,50 @@
+name: SOL56 Residual Closure Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTFinalResidualCollision.lean
+      - GSTFinalResidualChildConnector.lean
+      - Task33ResidualCollisionBridge.lean
+      - GSTNavigationCore.lean
+      - GSTGraphV2ProductionLaws.lean
+      - GSTGraphV2Production.lean
+      - GSTGraphV2HandwrittenOmegaUBlock.lean
+      - .github/workflows/sol56-residual-closure-probe.yml
+  workflow_dispatch:
+
+concurrency:
+  group: sol56-residual-closure-probe
+  cancel-in-progress: true
+
+jobs:
+  residual:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Compile finite residual collision first
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build GSTGraphV2ProductionLaws 2>&1 | tee residual-deps.log
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/GSTFinalResidualCollision.olean GSTFinalResidualCollision.lean 2>&1 | tee residual-collision.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' residual-deps.log residual-collision.log
+      - name: Compile standalone child connector
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFinalResidualChildConnector.olean GSTFinalResidualChildConnector.lean 2>&1 | tee residual-child-connector.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' residual-child-connector.log
+      - name: Compile Omega-free hard residual branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean Task33ResidualCollisionBridge.lean 2>&1 | tee residual-bridge.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' residual-bridge.log

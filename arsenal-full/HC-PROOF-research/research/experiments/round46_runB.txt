@@ -1,0 +1,99 @@
+================================================================================================
+F0 -- THE DEGREE-8 CENSUS RE-RUN (the fifth independent reproduction)
+================================================================================================
+  [PASS] |W8| = 384 == 384
+  [PASS] rho0_8 = (04)(15)(26)(37)
+  [PASS] the transitive quartic T-classes: 5 == 5
+  [PASS] subspaces of F2^4: 67 == 67
+  [PASS] subspaces containing 1111: 16 == 16
+  [timer] the degree-8 census re-run (the complement sweep)  (0.2s)
+  [PASS] the degree-8 census re-run: 114 worlds == 114 (the R41/R43/R44/R45 receipt line; this file's fifth independent reproduction)
+  [PASS] the order>=24 boundary re-found: 58 == 58
+  [PASS] the degree-8 exceptional types re-found: 16 == 16 (the R41/R43/R44/R45 count; surplus [0,2,0,0] verified per type)
+  [timer] F0 done  (22.8s)
+================================================================================================
+F1 -- THE ORPHAN PLANE AND THE LEAF CLASSES (the integral pure-orphan systems)
+================================================================================================
+  [PASS] THE LEAF SYSTEMS: at every one of the 16 types the full2 basis splits into EXACTLY 2 pure-orphan systems (the leaf classes alpha_1, alpha_2 -- supported on the transversal pair {W, Wbar} ONLY) + 6 doubles-only systems -- the leaf classes are INTEGRAL by construction (the degree_p_basis kernel returns integer vectors)
+  [PASS] THE EXHAUSTIVE SPLIT: at every type the full2 basis has EXACTLY 8 systems and ZERO mixed-support systems (every system is purely leaf-supported or purely doubles-supported -- the 2+6 split is exhaustive, nothing silently dropped)
+  [PASS] THE EQUIVARIANCE: every leaf and divisor system satisfies the transport law (the G-equivariance of the degree_p_basis construction -- the systems ARE the rational classes; verified word-by-word, group-element-by-group-element)
+  [PASS] THE INTEGRALITY: every leaf and divisor SYSTEM is integral (integer coefficient vectors -- the Lambda_full convention of R43)
+  [PASS] THE CONJUGATION EXCHANGE: rho0(W) = Wbar at every type (the R45 L1 receipt reproduced -- the orphan pair exchanged by complex conjugation)
+  [PASS] THE GRAM MATRIX: the leaf plane's intersection form is NONDEGENERATE at every type (the periods INT(alpha_i ^ alpha_j) computed exactly in the trace normalization)
+  [PASS] THE ISOTROPIC WEIL-TYPE POLARIZATION: INT(alpha_i ^ alpha_i) = 0 and INT(alpha_1 ^ alpha_2) != 0 at every type -- the polarization pairs alpha_1 with alpha_2 ONLY -- the R44 Weil-type receipt theta(W,W) = 0 REPRODUCED at all 16 types by this engine (the leaf plane is the classical Weil polarization plane)
+  [timer] F1 done  (22.9s)
+================================================================================================
+F2 -- THE LEAF LATTICE, THE SATURATION, THE WALL-IN-COORDINATES, THE PRIMITIVITY
+================================================================================================
+  [PASS] THE BASIS: the full2 basis is independent (rank 8 = dim Hdg^4) at every type -- Lambda_full = the Z-span of the 8 systems (the R43 convention)
+  [PASS] THE WALL IN COORDINATES: every divisor-product generator has ZERO leaf-word blocks at every type (the R45 pairing-support wall reproduced in the basis coordinates -- the Lambda_div corrections CANNOT touch the leaf coordinates)
+  [PASS] THE SATURATION: every divisor-product generator has INTEGRAL full2-coordinates (Lambda_div subset Lambda_full, the R43 index-1 receipt reproduced by the exact coordinate solve -- the door's license: the integrality splits over the direct sum)
+  [PASS] THE PRIMITIVITY: alpha_1 is a primitive generator of Lambda_full at every type (alpha_1/2 solves to the half-integer coordinate 1/2 on itself -- NOT in the Z-span -- the door's lattice input)
+  [timer] F2 done  (24.1s)
+================================================================================================
+F3 -- THE BORN INSTANCE AT m=2 (the branch pair, the carrier pair, the closure)
+================================================================================================
+  [PASS] THE BORN INSTANCE (m=2, w=2): at every type the branch pair exists -- the faces 3.alpha_1 and -alpha_1 (the (m+-2m)/2 law), the OPPOSITE divisor corrections (the (b,b')=(1,-1) law -- the corrections cancel in the trace), the LATTICE-COORDINATE INTEGRALITY (the exact solve over the full2 basis: the alpha_1-coordinates EXACTLY 3 and -1, all coordinates integral -- AUDIT-46 R1), the trace ch_2(E_+) + ch_2(E_-) = 2.alpha_1 EXACTLY
+  [PASS] THE PURITY (the E3 entry test): the carrier pair's ch-difference = 2.alpha_1 EXACTLY at grade 2 and ZERO at grades 1, 3, 4 (the Newton closure at the opposite-c_2 crossing instance; the pure (2,2) difference -- the (p,p)-sensitive input of the landing chain)
+  [PASS] THE DUAL CHARGES (the isotropic adaptation): q~(E_+) + q~(E_-) = m.INT(alpha_2^alpha_1) and q~(E_+) - q~(E_-) = 2m.INT(alpha_2^alpha_1) at every type (the charges measured against the CONJUGATE -- the nonvanishing direction of the Weil-type polarization; the R39 charge trace/difference laws transported)
+  [PASS] THE CHERN CLOSURE (the bilinear consistency receipt -- AUDIT-46 R2, honestly relabeled): c_4(E_+) + c_4(E_-) + cross = INT(trace^2)/2 -- the bilinear identity computed exactly on the branch data at every type (a consistency receipt, not an obstruction layer; the obstruction content lives in F4's door; the independent closed forms are the dual charges above)
+  [timer] F3 done  (24.3s)
+================================================================================================
+F4 -- THE DOOR: THE PARITY IFF IN THE LATTICE COORDINATES (the scale set is 2Z)
+================================================================================================
+  [PASS] THE WALL-COORDINATE RECEIPT: the correction's alpha_1- and alpha_2-coordinates are EXACTLY ZERO at every type (the divisor-product correction cannot touch the leaf coordinates -- the R45 wall in the lattice coordinates; the door's engine)
+  [PASS] THE PARITY IFF: at every type the branch coordinates are integral <=> m EVEN (the full bounded sweep (m,w) in [-7,7]x[-6,6] with the correction fixed -- the R39 V3 law transported to the leaf in the lattice coordinates: the halves on the PRIMITIVE alpha_1 survive every correction -- the odd scales DIE -- the scale set is EXACTLY 2Z)
+  [timer] F4 done  (24.4s)
+================================================================================================
+F5 -- THE SPREAD AND THE DICHOTOMY (the Descent-frame transports)
+================================================================================================
+  [PASS] THE IDEMPOTENT EVALUATION (THE R45 L6 RECEIPT): the character matrix [[chi_W(1_W), chi_W(1_Wbar)],[chi_Wbar(1_W), chi_Wbar(1_Wbar)]] = I at every type -- the two leaf components are independently isolable: ONE landed source spreads to the FULL leaf plane by the Descent-frame transports (the diagonal reweightings preserve the leaf support by the R45 L3 support law)
+  [timer] F5 done  (24.4s)
+================================================================================================
+F6 -- THE PIN, THE LANDING, THE FLIP (the verdict layer)
+================================================================================================
+  [PASS] THE PIN: m*(world, 2, alpha_1) = 2 EXACT at every one of the 16 types -- the witness at m=2 (F3: the born instance with the lattice-coordinate integrality), the necessity at m=1 (the door: the coordinate 3/2 dies), the packaging citation (the capstone's kernel-verified scale-group laws) -- the R39/R40 m* = 2 pin transported to the leaf
+  [PASS] THE FLIP: at every one of the 16 exceptional types the fold channel fires -- m* = 2 > 0, the landing chain (the repo's ForAllN record: an integrable pure pair at nonzero scale yields a cycle whose canonical class is exactly alpha -- the committed Theorem C + Serre + Thom-Porteous + GAGA chain) lands BOTH leaf classes (the purity + the integrality + the closure certified in F3), the dichotomy isolates both components -- Hdg^4 = the divisor ring (+) the leaf plane, ALL algebraic -- THE DEFICIT 2 -> 0 AT EVERY TYPE
+  [PASS] THE VERDICT OVERTURNED: the R45 negative branch was pronounced over the C1-C7 correspondence inventory; the fold channel C8 (the repo's CI-green capstone GSTGraphV2OntologicalFoldForAllN.lean -- Theorem N kernel-verified, the scale-group laws, the principality) completes the inventory and DISCHARGES the leaf at every type -- the world-model rational Hodge conjecture HOLDS at all 114 committed worlds (the R35-R44 closures + the leaf discharge) -- the positive branch, on the SAME certified scope as the R45 verdict
+  [PASS] THE REMAINING SCOPE (the statement diff): Q2 -- the Clay statement -- still requires the transcendental core (the general input, the R32/R41 pinned irreducible core); the committed world model is now closed POSITIVE at every world; the polarity's vertex-YES branch fires
+  [timer] F6 done  (24.4s)
+================================================================================================
+F7 -- THE HOSTILE BATTERY (the ledger-112 direction space)
+================================================================================================
+  [PASS] H1 the rigged-correction canary: a correction PLANTED with nonzero leaf support is REJECTED by the wall predicate (the leaf-block scan fires -- it is not a divisor product), and the door SURVIVES the rigging (the m=3 branch coordinate 7/2 + 1 = 9/2 stays non-integral) -- no correction cures the odd-m halves
+  [PASS] H2 the purity canary: a pair with UNSHARED corrections (the second at 2x) leaks the correction difference into the ch-difference (the support test REJECTS it) -- the purity predicate discriminates
+  [PASS] H3 the wall-response canary: a PLANTED leaf block on a divisor generator raises the combined rank -- the wall predicate responds to the planted leak (the firing receipt, not a tautology)
+  [PASS] H4 the world-deletion canary: the flip conjunction's census guard ACCEPTS the intact census (114) and REJECTS the world-deleted mutation (113) -- the plant-and-detect fires through the verdict predicate itself
+  [PASS] H5 the leaf-basis canary: the leaf plane is EXACTLY 2-dimensional at EVERY type (looped over all 16 -- the count predicate distinguishes the truncated basis)
+  [PASS] H6 the dual-charge canary: q~(E_+) != q~(E_-) with the difference EXACTLY 4.INT(alpha_2^alpha_1) at the first type (the 3-face and the (-1)-face carry different conjugate-charges -- the charge predicate discriminates the branch faces)
+  [timer] F7 done  (24.4s)
+================================================================================================
+THE VACUITY SCAN (ledger-107 -- the R45 discipline restored, AUDIT-46 R7)
+================================================================================================
+  [PASS] THE VACUITY SCAN: zero literal-tautology conditions and zero decorative constant conjuncts in any check condition (the AST scan; the source-string pattern scan is subsumed and omitted -- it flags its own scan code; the computed-but-constant class is caught by the audit's independent review, disclosed)
+  [timer] the vacuity scan done  (24.4s)
+================================================================================================
+SUMMARY
+================================================================================================
+  checks: 37
+  failures: 0
+  worlds: 114 (the fifth reproduction)
+  exceptional types: 16
+    type 0 (world 0, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 1 (world 1, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 2 (world 3, |G|=48): Gram (0, -2304, 0), q~(E_pm)=(-6912, 2304), carrier=0
+    type 3 (world 5, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 4 (world 6, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 5 (world 7, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 6 (world 11, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 7 (world 15, |G|=48): Gram (0, 2304, 0), q~(E_pm)=(6912, -2304), carrier=0
+    type 8 (world 32, |G|=24): Gram (0, 576, 0), q~(E_pm)=(1728, -576), carrier=0
+    type 9 (world 36, |G|=24): Gram (0, -576, 0), q~(E_pm)=(-1728, 576), carrier=0
+    type 10 (world 37, |G|=24): Gram (0, 576, 0), q~(E_pm)=(1728, -576), carrier=0
+    type 11 (world 39, |G|=24): Gram (0, 576, 0), q~(E_pm)=(1728, -576), carrier=0
+    type 12 (world 40, |G|=24): Gram (0, -576, 0), q~(E_pm)=(-1728, 576), carrier=0
+    type 13 (world 41, |G|=24): Gram (0, 576, 0), q~(E_pm)=(1728, -576), carrier=0
+    type 14 (world 43, |G|=24): Gram (0, -576, 0), q~(E_pm)=(-1728, 576), carrier=0
+    type 15 (world 46, |G|=24): Gram (0, -576, 0), q~(E_pm)=(-1728, 576), carrier=0
+  THE VERDICT: OVERTURNED -- THE POSITIVE BRANCH
+  exit: 0

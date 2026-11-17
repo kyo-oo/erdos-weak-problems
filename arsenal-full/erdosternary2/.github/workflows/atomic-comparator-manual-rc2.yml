@@ -1,0 +1,68 @@
+name: Atomic Comparator Manual RC2
+
+on:
+  push:
+    branches:
+      - sol/gst-v2-atomic-surgery-20260818
+  pull_request:
+
+jobs:
+  proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Normalize canonical proof workspace only
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ErdosTernary2.lean')
+          s = p.read_text(encoding='utf-8')
+          marker = '-- CardinalWorldsWork.lean — GST Complete Formalization'
+          if marker not in s:
+              raise SystemExit('canonical marker not found')
+          if not s.startswith(marker):
+              p.write_text(s[s.index(marker):], encoding='utf-8')
+          tactic = Path('GSTTactic.lean')
+          if not tactic.exists():
+              raise SystemExit('clean root GSTTactic source not found')
+          ts = tactic.read_text(encoding='utf-8')
+          if not ts.lstrip().startswith('import Lean.Elab.Tactic'):
+              raise SystemExit('GSTTactic still has a noncanonical wrapper')
+          Path('lean-toolchain').write_text('leanprover/lean4:v4.33.0-rc2\n', encoding='utf-8')
+          Path('lakefile.toml').write_text('''name = "erdos-ternary2-proof"\nversion = "0.1.0"\ndefaultTargets = ["GSTTactic", "ErdosTernary2"]\n\n[[require]]\nname = "mathlib"\nscope = "leanprover-community"\nrev = "v4.33.0-rc2"\n\n[[lean_lib]]\nname = "GSTTactic"\n\n[[lean_lib]]\nname = "ErdosTernary2"\n''', encoding='utf-8')
+          Path('lake-manifest.json').unlink(missing_ok=True)
+          PY
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve exact Mathlib dependency
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Build canonical proof targets
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTTactic ErdosTernary2
+      - name: Audit active proof sources
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          bad = []
+          for name in ['GSTTactic.lean', 'ErdosTernary2.lean']:
+              text = Path(name).read_text(encoding='utf-8')
+              for i, line in enumerate(text.splitlines(), 1):
+                  if re.search(r'\bsorry\b', line):
+                      bad.append(f'{name}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit('active proof source contains forbidden placeholder token')
+          print('active proof audit: clean')
+          PY

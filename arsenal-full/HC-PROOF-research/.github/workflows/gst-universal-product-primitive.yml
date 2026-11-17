@@ -1,0 +1,69 @@
+name: GST Universal Projective Product Primitive
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTUniversalProjectiveProductPrimitive.lean'
+      - '.github/workflows/gst-universal-product-primitive.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-universal-product-primitive-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install Lean and restore Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependency cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-projective-primitive
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify universal projective-product primitive
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTUniversalProductPrimitive"
+          roots = ["GSTUniversalProjectiveProductPrimitive"]
+          EOF
+          if lake build GSTUniversalProductPrimitive > universal-product-primitive.log 2>&1; then
+            echo "LEAN PASSED: arbitrary-dimension codimension-two projective-product primitive class"
+          else
+            grep -nE 'error:|sorryAx|✖' universal-product-primitive.log | tail -n 120 || true
+            tail -n 100 universal-product-primitive.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" universal-product-primitive.log; then
+            exit 1
+          fi
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: universal-product-primitive-lean-log
+          path: universal-product-primitive.log
+          if-no-files-found: warn

@@ -1,0 +1,69 @@
+name: GST Weil Forcing Frame Certificate
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTWeilForcingFrameCertificate.lean'
+      - '.github/workflows/gst-weil-forcing-frame-certificate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-weil-forcing-frame-certificate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-install.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ github.run_id }}
+      - name: Kernel verify Weil-forcing frame certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTWeilForcingFrameCertificate"
+          roots = ["GSTWeilForcingFrameCertificate"]
+          EOF
+          if lake build GSTWeilForcingFrameCertificate > weil-forcing-frame.log 2>&1; then
+            echo "LEAN PASSED: Weil projector correspondence algebra, exterior sign certificate INT W_R^2 = 8, and End-signature arithmetic kernel-verified"
+          else
+            grep -nE 'error:|sorryAx|✖' weil-forcing-frame.log | tail -n 140 || true
+            tail -n 120 weil-forcing-frame.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" weil-forcing-frame.log; then
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-weil-forcing-frame-certificate-log
+          path: weil-forcing-frame.log
+          if-no-files-found: warn

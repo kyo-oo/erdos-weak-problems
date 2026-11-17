@@ -1,0 +1,84 @@
+{
+  "schema_version": 1,
+  "claim_id": "WEIL4-AUXILIARY-EXTRACTION-ARITHMETIC-20261018",
+  "repository": {
+    "commit": "aa2abbe546a6de367c2d970217627bcf0131a7bb",
+    "dirty": true
+  },
+  "command": "mcp__codex_apps__wolfram_wolframlanguageevaluator(code=contents of research/computations/weil_fourfold_auxiliary_extraction.wl, timeConstraint=30)",
+  "environment": {
+    "software": [
+      "Wolfram Language 15.0.1 for Linux x86 (64-bit), July 2, 2026; remote evaluator"
+    ],
+    "hardware": "Wolfram-managed Linux x86-64; underlying hardware unreported"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact symbolic graph-intersection, tensor equalizer and contraction identities; determinant padding; fourth-power character modulo u^2+d and its orbit determinant.",
+    "coefficient_domain": "Rational polynomials and rational functions; quotient by u^2+d for the character.",
+    "conventions": "Divisor order Graph(u), F1=E x {0}, F2={0} x E, Delta. Tensor rows A0,A1; columns D0,Du. Matrices act on column vectors.",
+    "inputs": [
+      "research/computations/weil_fourfold_auxiliary_extraction.wl"
+    ],
+    "bounds": {
+      "symbolic_parameters": [
+        "d",
+        "m",
+        "x",
+        "y",
+        "a",
+        "b",
+        "c",
+        "e",
+        "t"
+      ],
+      "exclusions": [
+        "d=0 for sector0",
+        "a*b*c*e*t=0 for padded determinant"
+      ],
+      "geometric_regime": "d,a,b,c,e,t positive; m=d+1 for the safe orbit choice",
+      "time_constraint_seconds": 30
+    },
+    "non_claims": [
+      "No construction of a sixfold algebraic source or fourfold surface.",
+      "No formalization of the canonical Betti cycle class map.",
+      "No full audit of the external secant-sheaf theorem.",
+      "No proof of the universal Hodge conjecture."
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-17T20:15:26.804Z",
+    "runtime_seconds": 18.774,
+    "exit_status": 0
+  },
+  "outputs": [
+    {
+      "path": "research/computations/weil_fourfold_auxiliary_extraction.output.txt",
+      "sha256": "8ccf96065c8f6da4ecadb0385e9daac62f210e63a41c8ca762761f3fa2467cda"
+    }
+  ],
+  "checks": [
+    "All tensor equalizer residual matrices are zero.",
+    "Derived contraction matrix is -2 times the identity, determinant 4.",
+    "Auxiliary Gram matrix is diag(-2,-2d), with zero product-polarization pairings.",
+    "Padded rank-six Hermitian determinant is -1.",
+    "Fourth-power orbit determinant factors as 4*m*(m^2-d)*(x^2+d*y^2).",
+    "Independent Lean proofs submitted for these arithmetic consequences; CI status recorded separately."
+  ],
+  "result": "Exact symbolic identities reproduced by Wolfram; separate geometric source-existence and comparison obligations remain external.",
+  "residual_risks": [
+    "CAS output is not a geometric existence proof.",
+    "The geometry-to-coordinate dictionary is justified in the linked manuscript but is not formalized in Lean.",
+    "Version 1 record does not instrument Wolfram's remote host; runtime includes API overhead."
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/weil_fourfold_auxiliary_extraction.wl",
+      "sha256": "322e4592ff058fa8aa06bd18d372debba7f5249dc83ef634722bd4ce70438f36"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+/.lake
+/.lake/
+/build
+/build/
+*.olean
+*.trace
+*.log
+.lean_history

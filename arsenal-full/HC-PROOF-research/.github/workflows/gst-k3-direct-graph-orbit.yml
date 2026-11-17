@@ -1,0 +1,70 @@
+name: GST K3 Direct Primitive Graph Orbit
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - GSTK3DirectGraphOrbitDifference.lean
+      - scripts/gst_lean_dependency_roots.py
+      - .github/workflows/gst-k3-direct-graph-orbit.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-k3-direct-graph-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-k3-direct-orbit
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel prove direct primitive graph orbit and independence
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTK3DirectOrbitGate GSTK3DirectGraphOrbitDifference
+          if lake build GSTK3DirectOrbitGate > k3-direct-orbit.log 2>&1; then
+            echo "LEAN PASSED: direct primitive native graph orbit difference and rational independence"
+          else
+            grep -nE 'error:|sorryAx|✖' k3-direct-orbit.log | tail -n 120 || true
+            tail -n 100 k3-direct-orbit.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" k3-direct-orbit.log; then
+            exit 1
+          fi
+      - name: Save compiled dependency cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-k3-direct-orbit
+      - name: Upload kernel evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-k3-direct-graph-lean
+          path: k3-direct-orbit.log
+          if-no-files-found: warn

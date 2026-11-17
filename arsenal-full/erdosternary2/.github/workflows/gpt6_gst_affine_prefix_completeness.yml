@@ -1,0 +1,32 @@
+name: GST affine finite-prefix physical completeness
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [GSTFourPowerAffinePrefixIsometry.lean, GSTFourPowerAffineOntologicalCompleteness.lean, .github/workflows/gpt6_gst_affine_prefix_completeness.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prefix-isometry:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile original physical affine prefix isometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerAffineOrbit
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerExactExponentPeriod.olean GSTFourPowerExactExponentPeriod.lean
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffinePrefixIsometry.olean GSTFourPowerAffinePrefixIsometry.lean
+      - name: Kernel certify all finite original physical affine-prefix surjectivity
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTFourPowerAffineOntologicalCompleteness.lean 2>&1 | tee gst-ontological-prefix.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' gst-ontological-prefix.log
+          echo GST_PHYSICAL_AFFINE_PREFIX_COMPLETENESS_PASS=1

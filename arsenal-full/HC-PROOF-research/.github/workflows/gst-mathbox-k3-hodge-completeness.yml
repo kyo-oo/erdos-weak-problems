@@ -1,0 +1,70 @@
+name: Mathbox K3 Scalar Transcendental Full Middle Hodge
+on:
+  push:
+    branches:
+      - research/mathbox-k3-diagonal-primitive-20261015
+    paths:
+      - GSTK3TranscendentalHodgeCompleteness.lean
+      - .github/workflows/gst-mathbox-k3-hodge-completeness.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-mathbox-k3-complete-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-k3-hodge
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Lean kernel-check scalar End K3 Hodge cycle generation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTK3FullMiddleHodge"
+          roots = [
+            "GSTK3DiagonalPrimitive",
+            "GSTK3DiagonalActualStage2G",
+            "GSTK3TranscendentalHodgeCompleteness"
+          ]
+          EOF
+          if lake build GSTK3FullMiddleHodge > k3-middle-hodge.log 2>&1; then
+            echo 'LEAN PASSED: true middle Hodge algebraicity from scalar transcendental End and Kunneth kernel'
+          else
+            grep -nE 'error:|sorryAx|✖' k3-middle-hodge.log | tail -n 170 || true
+            tail -n 140 k3-middle-hodge.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" k3-middle-hodge.log; then
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-mathbox-k3-full-middle-hodge-log
+          path: k3-middle-hodge.log
+          if-no-files-found: warn

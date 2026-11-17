@@ -1,0 +1,75 @@
+name: GST Universal Mass Zeta Source
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTResearchUniversalMassZetaSource.lean'
+      - '.github/workflows/gst-research-universal-mass-zeta-source.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-research-universal-mass-zeta-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned toolchain and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-universal-mass-zeta
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify all-weight fixed zeta source
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "ResearchUniversalMassZeta"
+          roots = [
+            "GSTMathboxCorrectedZetaGeometry",
+            "GSTMathboxCorrectedZetaInfinite",
+            "GSTResearchFixedZetaGeometricSource",
+            "GSTResearchUniversalMassZetaSource"
+          ]
+          EOF
+          if lake build ResearchUniversalMassZeta > universal-mass-zeta-lean.log 2>&1; then
+            echo "LEAN PASSED: all-weight fixed scalar source constructed from conserved geometric charge"
+          else
+            grep -nE 'error:|sorryAx|✖' universal-mass-zeta-lean.log | tail -n 120 || true
+            tail -n 95 universal-mass-zeta-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" universal-mass-zeta-lean.log; then
+            echo "Trust audit failed"
+            exit 1
+          fi
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-universal-mass-zeta-kernel-log
+          path: universal-mass-zeta-lean.log
+          if-no-files-found: warn

@@ -1,0 +1,34 @@
+name: GPT56 Four Power Forcing Bridge
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTGraphV2FourPowerForcingBridge.lean
+      - GSTFourPowerDirectHappyBridge.lean
+      - GSTFourPowerDirectExistence.lean
+      - GSTFourPowerOntologicalAdapter.lean
+      - GSTCanonicalTailStateIso.lean
+      - lakefile.toml
+      - lake-manifest.json
+      - .github/workflows/gpt56-four-power-forcing-bridge.yml
+  workflow_dispatch:
+
+jobs:
+  bridge:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Compile fresh direct Graph-V2 forcing bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build GSTFourPowerDirectHappyBridge GSTFourPowerOntologicalAdapter
+          lake env lean GSTGraphV2FourPowerForcingBridge.lean 2>&1 | tee four-power-forcing-bridge.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' four-power-forcing-bridge.log
+          grep -F "'GSTFourPowerDirectHappyBridge.four_power_happy_propagates' depends on axioms: [propext, Classical.choice, Quot.sound]" four-power-forcing-bridge.log

@@ -1,0 +1,33 @@
+name: GST 406 Strict Universal Closure Attempt
+on:
+  push:
+    branches: [gpt6/problem406-strict-universal-closure-attack-20261030]
+    paths:
+      - GSTInfiniteFourPowerNavigation.lean
+      - GSTFourPowerDirectExistenceFromHappy.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_strict_universal_closure.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  original_gate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean toolchain and mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Typecheck original direct universal proof source and all imports
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build GSTProblem406DirectUniversalAttack 2>&1 | tee original-gate-check.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' original-gate-check.log
+          echo GST_ORIGINAL_UNIVERSAL_KERNEL_PASS=1

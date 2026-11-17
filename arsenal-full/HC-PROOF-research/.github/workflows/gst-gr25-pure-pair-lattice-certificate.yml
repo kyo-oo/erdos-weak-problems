@@ -1,0 +1,69 @@
+name: GST Gr25 Pure Pair Lattice Certificate
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTGr25PurePairLatticeCertificate.lean'
+      - '.github/workflows/gst-gr25-pure-pair-lattice-certificate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-gr25-pure-pair-lattice-certificate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-install.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ github.run_id }}
+      - name: Kernel verify Gr(2,5) pure pair lattice certificate
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTGr25PurePairLatticeCertificate"
+          roots = ["GSTGr25PurePairLatticeCertificate"]
+          EOF
+          if lake build GSTGr25PurePairLatticeCertificate > gr25-pure-pair.log 2>&1; then
+            echo "LEAN PASSED: Gr(2,5) presentation ring, cleared period table, naive-assembly obstruction, and completed pure pair certificate at scale 360 kernel-verified"
+          else
+            grep -nE 'error:|sorryAx|✖' gr25-pure-pair.log | tail -n 140 || true
+            tail -n 120 gr25-pure-pair.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gr25-pure-pair.log; then
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-gr25-pure-pair-lattice-certificate-log
+          path: gr25-pure-pair.log
+          if-no-files-found: warn

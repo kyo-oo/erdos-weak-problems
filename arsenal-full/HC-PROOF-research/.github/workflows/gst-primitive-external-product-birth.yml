@@ -1,0 +1,60 @@
+name: GST Primitive External Product Birth
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - GSTPrimitiveProductTowerStabilization.lean
+      - .github/workflows/gst-primitive-external-product-birth.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-primitive-external-product-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 100
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-primitive-product
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel check arbitrary-factor nondivisor GST native primitive product birth
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTPrimitiveExternalBirth GSTPrimitiveProductTowerStabilization
+          if lake build GSTPrimitiveExternalBirth > primitive-external-lean.log 2>&1; then
+            echo 'LEAN PASSED: GST primitive algebraic product birth in arbitrary rank'
+          else
+            grep -nE 'error:|sorryAx|✖' primitive-external-lean.log | tail -n 100 || true
+            tail -n 100 primitive-external-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" primitive-external-lean.log; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-primitive-external-birth-log
+          path: primitive-external-lean.log
+          if-no-files-found: warn

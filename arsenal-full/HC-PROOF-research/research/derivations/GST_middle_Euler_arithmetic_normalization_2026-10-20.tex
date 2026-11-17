@@ -1,0 +1,759 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\td}{\operatorname{td}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\KU}{\operatorname{KU}}
+\newcommand{\im}{\operatorname{im}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{GST middle-world arithmetic:\\
+normal-free Euler pairing, positive index detection,\\
+and explicit original-variety cycle reconstruction}
+\author{GST Hodge construction program}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Starting from the all-grade pure-middle topological K source already
+constructed on one rational blowup world, we derive an exact arithmetic
+law. A finite algebraic Chern-class square root removes every normal
+Segre correction: the Euler pairing of normalized sources is exactly
+the total original-variety intersection pairing, with sign
+$(-1)^{M+1}$. Its discriminant is independent of the normal bundle.
+An explicit rational Lefschetz companion makes this Euler pairing
+positive on every nonzero rational Hodge packet; clearing denominators
+gives a positive integer index. We give a determinant certificate
+and an explicit formula returning actual algebraic cycles to the
+original variety whenever actual algebraic sources supply the required
+rank. We also construct one genuine smooth support carrying all
+channels and correct the exceptional projectivization convention in
+the preceding high-coniveau argument. The pairing and detection
+theorems are unconditional mathematical deductions; a universal
+algebraic source of full rank is not constructed here.
+\end{abstract}
+
+\section{Pinned starting point and exact conventions}
+This derivation continues the three latest commits at the time of
+writing:
+\begin{itemize}
+\item \texttt{17fc96ac37df283e3a3ae41d01ee8bc510d5e68e}:
+one all-grade pure-middle topological K packet;
+\item \texttt{531734606310c25bcfb356d99160de2f2174b186}:
+injective transport of every original Hodge defect;
+\item \texttt{03239e33c1496e8b4ad31d45562567df58000ba7}:
+index and smooth-niveau formulation.
+\end{itemize}
+The detailed input is
+\texttt{GST\_high\_coniveau\_rational\_middle\_K0\_birth\_2026-10-20.tex},
+together with the uniform Chow/Betti Chern--Segre return in
+\texttt{GST\_rational\_middle\_blowup\_uniform\_Segre\_2026-10-20.tex}.
+We use those concrete blowup constructions; no arbitrary source
+existence or arbitrary native rank is inserted as a hypothesis of the
+unconditional theorems below.
+
+Let $X$ be an arbitrary smooth projective complex $d$-fold. Choose an
+actual embedding $X\hookrightarrow\mathbb P^{2M}$ with $M\ge d+1$.
+One may use the dimension-bounded choice $M=d+1$ from the preceding
+derivation; increasing $M$ allows the earlier high coniveau bound.
+Write
+\[
+ N=N_{X/\mathbb P^{2M}},\quad c=2M-d,\quad
+ Y=\operatorname{Bl}_X\mathbb P^{2M},\quad
+ E=\mathbb P_{\mathrm{lines}}(N),\quad
+ \pi:Y\to\mathbb P^{2M},\quad j:E\hookrightarrow Y,\quad q:E\to X.
+\]
+Here $\mathbb P_{\mathrm{lines}}(N)$ parameterizes one-dimensional
+subspaces of $N$. Thus
+\[
+ \mathcal O_E(-1)\hookrightarrow q^*N,\qquad
+ \xi=c_1(\mathcal O_E(1)),\qquad
+ N_{E/Y}=\mathcal O_E(-1).
+ \tag{1.1}
+\]
+Equivalently one may parameterize quotient lines of $N^\vee$.
+The projective integration convention is
+\[
+ q_*(\xi^{c-1+i}q^*z)=s_i(N)z,\qquad
+ s(N)=c(N)^{-1},\qquad s_i=0\ (i<0).
+ \tag{1.2}
+\]
+In particular $s_1(N)=-c_1(N)$. All products and characteristic
+series below are truncated above complex codimension $d$ on $X$.
+
+Set
+\[
+ \mathcal H_X=\bigoplus_{p=0}^{d}\Hdg^p(X)_{\Q},\qquad
+ \mathcal A_X=\bigoplus_{p=0}^{d}
+   \im\bigl(\cl_X^p:\CH^p(X)_{\Q}\to\Hdg^p(X)_{\Q}\bigr).
+ \tag{1.3}
+\]
+View a packet $\boldsymbol\alpha=(\alpha_0,\ldots,\alpha_d)$ also
+as its total even cohomology class. Define
+\[
+ P_X(\boldsymbol\alpha,\boldsymbol\gamma)
+   =\int_X[\boldsymbol\alpha\boldsymbol\gamma]_d
+   =\sum_{p+q=d}\int_X\alpha_p\gamma_q.
+ \tag{1.4}
+\]
+The positive pairing in Section 5 proves that $P_X$ is
+nondegenerate on $\mathcal H_X$.
+
+\section{The existing explicit pure-middle source}
+For $0\le p\le d$ put $r_p=M-p-1\ge0$. The exceptional inclusion is
+\[
+ I(\boldsymbol\alpha)
+   =\sum_{p=0}^{d}j_*(\xi^{r_p}q^*\alpha_p)
+   \in\Hdg^M(Y)_{\Q}.
+ \tag{2.1}
+\]
+The canonical blowup decomposition makes $I$ injective. Its image is
+the exceptional middle Hodge summand; the other summand is
+$\Q\,\pi^*H^M$.
+
+We recall the source rather than assuming an algebraic preimage.
+The rational topological Chern character is an isomorphism
+\[
+ \ch_{\mathrm{top},X}:\KU^0(X)_{\Q}
+     \xrightarrow{\ \sim\ }H^{\mathrm{even}}(X,\Q).
+\]
+Let $a_p=\ch_{\mathrm{top},X}^{-1}(\alpha_p)$, where the right side
+has only the indicated degree. On $E$ set
+\[
+ \lambda=[\mathcal O_E(1)]-1,\qquad
+ \Phi_r(\lambda)
+  =\lambda^r\left(\frac{\log(1+\lambda)}{\lambda}\right)^{r+1}.
+ \tag{2.2}
+\]
+The quotient is the power series
+$1-\lambda/2+\lambda^2/3-\cdots$; no inversion of the nilpotent
+$\lambda$ is intended. Since $\dim_{\mathbb C}E=2M-1$,
+$\lambda^{2M}=0$ rationally, so (2.2) is a finite rational
+polynomial in an actual algebraic line bundle. Define
+\[
+ U_{\boldsymbol\alpha}
+   =\sum_{p=0}^{d}q^*a_p\,\Phi_{r_p}(\lambda),\qquad
+ V_{\boldsymbol\alpha}=j_!^{\mathrm{top}}U_{\boldsymbol\alpha}
+      \in\KU^0(Y)_{\Q}.
+ \tag{2.3}
+\]
+Its complete Chern character is computed by
+\[
+ \ch(\Phi_r(\lambda))
+     =\frac{\xi^{r+1}}{e^\xi-1}
+     =\xi^r\td(\mathcal O_E(-1)),\qquad
+ \ch(j_!u)=j_*\bigl(\ch(u)\td(N_{E/Y})^{-1}\bigr).
+\]
+Consequently
+\[
+ \boxed{\ch(V_{\boldsymbol\alpha})
+       =I(\boldsymbol\alpha),\qquad
+       \ch_i(V_{\boldsymbol\alpha})=0\quad(i\ne M).}
+ \tag{2.4}
+\]
+The $a_p$, $U$, and $V$ are topological classes. The polynomial
+$\Phi_r$ is algebraic, but that alone does not algebraize $a_p$.
+
+\section{Deriving the entire Euler kernel}
+\begin{lemma}[Cross-channel intersection]
+For $\alpha_p\in\Hdg^p(X)_{\Q}$ and
+$\gamma_q\in\Hdg^q(X)_{\Q}$,
+\[
+ \int_Y j_*(\xi^{r_p}q^*\alpha_p)
+         j_*(\xi^{r_q}q^*\gamma_q)
+   =-\int_X\alpha_p\gamma_q\,s_{d-p-q}(N).
+ \tag{3.1}
+\]
+The right side is zero if $p+q>d$.
+\end{lemma}
+\begin{proof}
+Self-intersection is $j^*j_*(u)=-\xi u$. Thus the left side is
+$-\int_E \xi^{r_p+r_q+1}q^*(\alpha_p\gamma_q)$.
+Since $r_p+r_q+1=c-1+d-p-q$, (1.2) gives (3.1), including
+the vanishing below the fiber dimension.
+\end{proof}
+
+Let $S$ denote multiplication by $s(N)=c(N)^{-1}$ on
+$\mathcal H_X$. Summing (3.1) over all channels yields
+\[
+ \boxed{\int_Y I(\boldsymbol\alpha)I(\boldsymbol\gamma)
+          =-P_X(\boldsymbol\alpha,S\boldsymbol\gamma).}
+ \tag{3.2}
+\]
+Every term in $S-1$ raises original codimension, so $S$ is
+unipotent and $\det S=1$. Define the rational Euler pairing by
+\[
+ \chi_Y(u,v)=\operatorname{Ind}_Y(u^\vee\otimes v)
+   =\int_Y\ch(u^\vee)\ch(v)\td(T_Y).
+ \tag{3.3}
+\]
+For algebraic perfect classes it is the holomorphic Euler pairing.
+Purity (2.4) gives
+$\ch(V_{\boldsymbol\alpha}^{\vee})=(-1)^M I(\boldsymbol\alpha)$.
+The product of the two middle classes has top degree $4M$,
+so only $\td_0=1$ contributes. Therefore
+\[
+ \boxed{\chi_Y(V_{\boldsymbol\alpha},V_{\boldsymbol\gamma})
+      =(-1)^{M+1}P_X(\boldsymbol\alpha,S\boldsymbol\gamma).}
+ \tag{3.4}
+\]
+This fixes both the exceptional self-intersection sign and
+the K-duality sign.
+
+\section{Finite normal correction and discriminant conservation}
+Let $C=c(N)=1+c_1+\cdots+c_d$. Define the finite universal classes
+\[
+ R=C^{1/2}=\sum_{j=0}^{d}{1/2\choose j}(C-1)^j,\qquad
+ R^{-1}=C^{-1/2}=\sum_{j=0}^{d}{-1/2\choose j}(C-1)^j.
+ \tag{4.1}
+\]
+These formulas also define rational Chow classes $R^C,(R^C)^{-1}$.
+Positive-degree nilpotence proves
+\[
+ R^2=C,\qquad R^2S=1,\qquad RR^{-1}=1.
+ \tag{4.2}
+\]
+The first homogeneous components of $R=\sum_i\rho_i$ are
+\[
+\begin{aligned}
+ \rho_0&=1,& \rho_1&=\tfrac12c_1,\\
+ \rho_2&=\tfrac12c_2-\tfrac18c_1^2,&
+ \rho_3&=\tfrac12c_3-\tfrac14c_1c_2+\tfrac1{16}c_1^3,\\
+ \rho_4&=\tfrac12c_4-\tfrac14c_1c_3-\tfrac18c_2^2
+          +\tfrac3{16}c_1^2c_2-\tfrac5{128}c_1^4.
+\end{aligned}
+ \tag{4.3}
+\]
+Multiplication by $R$ and $R^{-1}$ preserves both $\mathcal H_X$
+and $\mathcal A_X$; only algebraic characteristic classes are used.
+
+Define the normalized explicit source
+\[
+ \widehat V_{\boldsymbol\alpha}
+      :=V_{R\boldsymbol\alpha},\qquad
+ \ch(\widehat V_{\boldsymbol\alpha})=I(R\boldsymbol\alpha).
+ \tag{4.4}
+\]
+For a single prescribed $\alpha_p$, its full middle character is
+\[
+ \ch(\widehat V_{\alpha_p})
+    =\sum_{i=0}^{d-p}
+       j_*\bigl(\xi^{M-p-i-1}q^*(\rho_i\alpha_p)\bigr).
+ \tag{4.5}
+\]
+All exponents are nonnegative, with smallest value $M-d-1$.
+
+\begin{theorem}[GST normal-free middle Euler law]
+For every original $X$, allowed $M$, and rational Hodge packets,
+\[
+ \boxed{\chi_Y(\widehat V_{\boldsymbol\alpha},
+               \widehat V_{\boldsymbol\gamma})
+       =(-1)^{M+1}P_X(\boldsymbol\alpha,\boldsymbol\gamma).}
+ \tag{4.6}
+\]
+Equivalently the normalized middle intersection form is $-P_X$.
+\end{theorem}
+\begin{proof}
+Commutativity in these even degrees and (3.4) give
+\[
+\begin{aligned}
+ \chi_Y(V_{R\boldsymbol\alpha},V_{R\boldsymbol\gamma})
+ &=(-1)^{M+1}\int_X
+       [R\boldsymbol\alpha\,S R\boldsymbol\gamma]_d\\
+ &=(-1)^{M+1}\int_X
+       [\boldsymbol\alpha\boldsymbol\gamma]_d
+\end{aligned}
+\]
+since $R^2S=1$. This cancels all normal Segre terms at once.
+\end{proof}
+
+\begin{corollary}[Exact discriminant law]
+Choose any rational graded basis $e_1,\ldots,e_h$ of $\mathcal H_X$,
+and let $p=(P_X(e_i,e_j))$. Let $g$ and $\widehat g$ be the Euler
+Gram matrices of $V_{e_i}$ and $\widehat V_{e_i}$, respectively.
+Then
+\[
+ g=(-1)^{M+1}p[S],\qquad
+ \widehat g=(-1)^{M+1}p,\qquad
+ \boxed{\det g=\det\widehat g
+           =(-1)^{(M+1)h}\det p.}
+ \tag{4.7}
+\]
+The normal-bundle coefficients do not change the discriminant.
+\end{corollary}
+\begin{proof}
+Both $S$ and $R$ have identity diagonal in the original grading,
+so $\det S=\det R=1$. Apply (3.4) and (4.6).
+A rational change of basis multiplies each discriminant by the
+same rational square.
+\end{proof}
+
+Choose $D_i\in\Z_{>0}$ with $w_i=D_i\widehat V_{e_i}$ integral
+topological K classes modulo torsion. These denominators exist
+by the definition of rational K theory. The integral index Gram
+matrix $g_{\Z}$ satisfies
+\[
+ \boxed{\det g_{\Z}
+       =\left(\prod_iD_i^2\right)
+          (-1)^{(M+1)h}\det p.}
+ \tag{4.8}
+\]
+This lattice statement does not identify topological K with
+algebraic K theory.
+
+\begin{corollary}[Normalization preserves the exact defect]
+\[
+ \widehat V_{\boldsymbol\alpha}
+      \in\im(K_0^{\mathrm{alg}}(Y)_{\Q}\to\KU^0(Y)_{\Q})
+ \quad\Longleftrightarrow\quad
+ \boldsymbol\alpha\in\mathcal A_X.
+ \tag{4.9}
+\]
+Consequently there is an injection
+\[
+ \mathcal H_X/\mathcal A_X
+   \hookrightarrow
+   \KU^0(Y)_{\Q}/\im K_0^{\mathrm{alg}}(Y)_{\Q}.
+ \tag{4.10}
+\]
+\end{corollary}
+\begin{proof}
+An algebraic source has algebraic $\ch_M$, and the actual
+Chern--Segre Chow return extracts each component of
+$R\boldsymbol\alpha$. Multiplication by $(R^C)^{-1}$ returns
+actual original-$X$ Chow witnesses for $\boldsymbol\alpha$.
+Conversely actual Chow witnesses, multiplied by $R^C$, have
+algebraic K lifts by the rational smooth K--Chow Chern character
+isomorphism. Formula (2.3) then uses only algebraic pullback,
+bundle multiplication and immersion pushforward.
+The same kernel argument proves injectivity on quotients.
+\end{proof}
+
+\section{A positive arithmetic detector for every prescribed packet}
+Fix an ample rational divisor class $\ell$ on $X$ and write
+$L(z)=\cl(\ell)z$. Hard Lefschetz gives, for each $p$,
+\[
+ \alpha_p=\sum_{q=0}^{\min(p,d-p)}L^{p-q}a_{p,q},\qquad
+ a_{p,q}\in P^{2q}(X,\Q)\cap\Hdg^q(X)_{\Q},
+ \tag{5.1}
+\]
+where $P^{2q}=\ker(L^{d-2q+1})$. These primitive components
+are uniquely determined rational Hodge classes.
+Define the rational Hodge operator
+\[
+ \boxed{(J_L\boldsymbol\alpha)_{d-p}
+     =\sum_{q=0}^{\min(p,d-p)}
+             (-1)^q L^{d-p-q}a_{p,q}.}
+ \tag{5.2}
+\]
+It reverses each primitive Lefschetz string, with sign $(-1)^q$,
+so $J_L^2=1$.
+
+\begin{lemma}[Explicit rational polarization]
+The form
+\[
+ Q_L(\boldsymbol\alpha,\boldsymbol\gamma)
+       =P_X(\boldsymbol\alpha,J_L\boldsymbol\gamma)
+ \tag{5.3}
+\]
+is symmetric and positive definite on $\mathcal H_X$. In particular,
+for $\boldsymbol\alpha\ne0$,
+\[
+ \boxed{Q_L(\boldsymbol\alpha,\boldsymbol\alpha)
+    =\sum_{p=0}^{d}
+       \sum_{q=0}^{\min(p,d-p)}
+       (-1)^q\int_X a_{p,q}^2\,L^{d-2q}>0.}
+ \tag{5.4}
+\]
+\end{lemma}
+\begin{proof}
+Only matching $p$ pair in total degree $d$.
+For primitive degrees $q<s$, a mixed term contains
+$L^{d-q-s}a_{p,s}$, which vanishes because
+$d-q-s\ge d-2s+1$. The other inequality is identical.
+Only the diagonal primitive terms remain.
+The Hodge--Riemann sign on a real primitive $(q,q)$ class is
+$(-1)^q$, giving positivity of each nonzero term.
+The same orthogonality proves symmetry. Invertibility of $J_L$
+and positivity also prove nondegeneracy of $P_X$.
+\end{proof}
+
+\begin{theorem}[Unconditional positive middle-world index detector]
+Every nonzero prescribed rational Hodge packet on every original
+$X$ has two explicit topological K sources satisfying
+\[
+ \boxed{(-1)^{M+1}
+   \chi_Y(\widehat V_{\boldsymbol\alpha},
+          \widehat V_{J_L\boldsymbol\alpha})
+     =Q_L(\boldsymbol\alpha,\boldsymbol\alpha)>0.}
+ \tag{5.5}
+\]
+For a common $D\in\Z_{>0}$ making both sources integral,
+\[
+ \boxed{(-1)^{M+1}
+ \chi_Y(D\widehat V_{\boldsymbol\alpha},
+        D\widehat V_{J_L\boldsymbol\alpha})
+       =D^2Q_L(\boldsymbol\alpha,\boldsymbol\alpha)
+       \in\Z_{>0}.}
+ \tag{5.6}
+\]
+Zero packet is equivalent to zero value in (5.5).
+\end{theorem}
+\begin{proof}
+Apply (4.6) with $\boldsymbol\gamma=J_L\boldsymbol\alpha$,
+then (5.4). Clearing denominators gives integral K classes,
+whose product has integer index.
+\end{proof}
+
+For $\alpha\in P^{2p}(X,\Q)\cap\Hdg^p(X)_{\Q}$ nonzero with $d=2p$,
+$J_L\alpha=(-1)^p\alpha$, and
+\[
+ \boxed{\chi_Y(\widehat V_\alpha,\widehat V_\alpha)
+          =(-1)^{M+1}\int_X\alpha^2,\qquad
+ (-1)^{M+p+1}
+   \chi_Y(\widehat V_\alpha,\widehat V_\alpha)>0.}
+ \tag{5.7}
+\]
+For $M=d+1=2p+1$, this Euler index equals $\int_X\alpha^2$.
+Thus the previously constructed native K3-product primitive diagonal
+of norm $21$ has exceptional intersection $-21$ and normalized
+middle Euler self-index $21$.
+
+The operator $J_L$ is defined on rational Hodge cohomology.
+An algebraic correspondence realizing its inverse-Lefschetz pieces
+is not constructed here. Similarly (5.5) supplies topological
+K sources, not new algebraic cycles. Index positivity cannot replace
+the algebraicity condition in (4.9).
+
+\section{A native arithmetic certificate and actual cycle return}
+This section is an exact reconstruction conditional on actual native
+sources, not an assertion that these sources exist for every $X$.
+
+For $1\le a\le c-1$, recall the actual Chow operators
+\[
+ T_a^C(\Gamma)=-q_*(\xi^{c-1-a}j^*\Gamma),\qquad
+ \mathcal R_a^C(\Gamma)
+    =\sum_{k=0}^{c-1-a}c_k(N)T_{a+k}^C(\Gamma).
+ \tag{6.1}
+\]
+They commute with canonical cycle class and satisfy
+\[
+ \mathcal R_a^C(j_*(\xi^{b-1}q^*z))=\delta_{ab}z,\qquad
+ \mathcal R_a^C(\pi^*H^M)=0.
+ \tag{6.2}
+\]
+For actual $\Gamma\in\CH^M(Y)_{\Q}$, set
+\[
+ A(\Gamma)=(R^C)^{-1}
+       \left(\sum_{p=0}^{d}\mathcal R_{M-p}^C(\Gamma)\right)
+       \in\bigoplus_p\CH^p(X)_{\Q}.
+ \tag{6.3}
+\]
+The sum is graded and multiplication by $(R^C)^{-1}$ is the
+finite characteristic-class convolution.
+Writing $a=\cl(A(\Gamma))$, blowup decomposition gives
+\[
+ \cl(\Gamma)=t\,\pi^*H^M+I(Ra)\qquad(t\in\Q).
+ \tag{6.4}
+\]
+The ambient term is orthogonal to every $I(\boldsymbol\alpha)$:
+its restriction to $E$ is $q^*h^M=0$ because $M>d$.
+
+A middle Chow class $\Gamma_j$ has a rational algebraic perfect
+K lift $C_j$ with $\ch_{\mathrm{alg}}(C_j)=\Gamma_j$ and all
+other Chow degrees zero, by the rational smooth K--Chow isomorphism.
+Thus its realized Chern character is pure middle.
+Alternatively, arbitrary actual algebraic perfect K sources can be
+processed by the explicit algebraic Adams filter
+\[
+ \Pi_M=\prod_{\substack{0\le r\le2M\\r\ne M}}
+        \frac{\psi^2-2^r}{2^M-2^r}.
+ \tag{6.5}
+\]
+Since $\ch_r(\psi^2 C)=2^r\ch_r(C)$, this retains just the middle
+degree. The filter processes actual sources; it does not create
+an unknown source.
+
+Choose a rational basis $e_1,\ldots,e_h$ of $\mathcal H_X$ and
+actual $\Gamma_1,\ldots,\Gamma_h\in\CH^M(Y)_{\Q}$ with such
+pure algebraic K lifts $C_j$. Set
+\[
+ t_{ij}=\chi_Y(\widehat V_{e_i},\operatorname{real}C_j),\qquad
+ b_i=\chi_Y(\widehat V_{e_i},\widehat V_{\boldsymbol\alpha}),\qquad
+ a_j=\cl(A(\Gamma_j)).
+ \tag{6.6}
+\]
+They are rational index data, made integer after denominator clearing.
+By (4.6) and ambient orthogonality,
+\[
+ \boxed{t_{ij}=(-1)^{M+1}P_X(e_i,a_j),\qquad
+        b_i=(-1)^{M+1}P_X(e_i,\boldsymbol\alpha).}
+ \tag{6.7}
+\]
+In coordinates $t=(-1)^{M+1}p\,a$.
+
+\begin{theorem}[Arithmetic certificate with actual original-$X$ output]
+If the actual native sources satisfy $\det t\ne0$, then
+\[
+ \boxed{\boldsymbol Z_{\boldsymbol\alpha}
+        =\sum_{j=1}^{h}(t^{-1}b)_j\,A(\Gamma_j)
+        \in\bigoplus_p\CH^p(X)_{\Q},\qquad
+        \cl(\boldsymbol Z_{\boldsymbol\alpha})
+              =\boldsymbol\alpha.}
+ \tag{6.8}
+\]
+For any finite family, including rectangular ones,
+\[
+ \operatorname{rank}t
+       =\dim_{\Q}\operatorname{span}\{a_j\}.
+ \tag{6.9}
+\]
+Full native arithmetic rank is equivalent to these returned
+native packets spanning $\mathcal H_X$.
+\end{theorem}
+\begin{proof}
+Let $v=t^{-1}b$. Then
+$P_X(e_i,\sum_jv_ja_j-\boldsymbol\alpha)=0$ for every $i$.
+Nondegeneracy of $P_X$ gives $\sum_jv_ja_j=\boldsymbol\alpha$.
+All terms in (6.8) are actual original-$X$ Chow classes, so this
+is the canonical Betti cycle-class equality.
+Multiplication by the invertible matrix $(-1)^{M+1}p$ preserves
+rank, proving (6.9). A rectangular full-rank family is reduced
+to a nonsingular $h$-column minor.
+\end{proof}
+
+For a target in one original grade $p$, the $p$-component of
+(6.8) is the required cycle on that same original $X$.
+Choosing $C_j=\widehat V_{e_j}$ only in topological K gives a
+nonsingular matrix automatically but does not give actual
+$\Gamma_j$ or the Chow output (6.8).
+Universal full native rank is the remaining algebraic realization
+problem, not a consequence of the topological Gram matrix.
+
+\section{One genuine smooth support carrying every original channel}
+Use the actual exceptional convention (1.1).
+Choose an ample line bundle $\mathcal L$ and $a\gg0$ so that
+$N^\vee\otimes\mathcal L^a$ is globally generated. Put
+\[
+ r_0=M-d-1,\qquad h=c_1(\mathcal L),\qquad
+ \mathcal B=(\mathcal L^a)^{\oplus r_0}.
+\]
+For $r_0=0$ take the evident map $N\to0$.
+For $r_0>0$ a general actual morphism $N\to\mathcal B$ is
+everywhere surjective: global generation makes fiber evaluation
+surjective, while the fiberwise rank-drop locus has codimension
+\[
+ c-r_0+1=M+2>d.
+\]
+The incidence dimension bound excludes any rank drop for a
+general morphism. Let
+\[
+ 0\to K\to N\to\mathcal B\to0,\quad
+ \operatorname{rank}K=M+1,\quad
+ T=\mathbb P_{\mathrm{lines}}(K),\quad
+ i:T\hookrightarrow E,\quad u=j\circ i,\quad \pi_T=q\circ i.
+ \tag{7.1}
+\]
+This is one actual smooth projective variety, independent of the
+prescribed packet, satisfying
+\[
+ \dim T=M+d,\qquad
+ \operatorname{codim}_Y u(T)=M-d,\qquad
+ [T]=(\xi+a q^*h)^{r_0}\ \text{in }\CH^{r_0}(E).
+ \tag{7.2}
+\]
+Write $\eta=i^*\xi$ and define
+\[
+ \gamma_{p,\alpha_p}
+   =\sum_{i=0}^{d-p}{-r_0\choose i}a^i\,
+       \eta^{d-p-i}\pi_T^*(h^i\alpha_p)
+       \in\Hdg^d(T)_{\Q}.
+ \tag{7.3}
+\]
+Generalized binomial coefficients include
+$ {0\choose0}=1$, $ {0\choose i}=0$ for $i>0$.
+For $r_0>0$, $ {-r_0\choose i}=(-1)^i{r_0+i-1\choose i}$.
+
+\begin{theorem}[Explicit single-support transport]
+For every original $X$ and every original Hodge packet,
+\[
+ \boxed{u_*\left(\sum_{p=0}^{d}\gamma_{p,\alpha_p}\right)
+          =I(\boldsymbol\alpha).}
+ \tag{7.4}
+\]
+The same construction on actual original Chow classes gives actual
+Chow classes on $T$ and commutes with canonical cycle class.
+\end{theorem}
+\begin{proof}
+Fix $p$ and put $k=d-p$. Projection formula reduces the claim to
+\[
+ (\xi+a q^*h)^{r_0}
+  \sum_{i=0}^{k}{-r_0\choose i}
+       (a q^*h)^i\xi^{k-i}q^*\alpha_p
+       =\xi^{r_0+k}q^*\alpha_p.
+ \tag{7.5}
+\]
+This is $(1+x)^{r_0}(1+x)^{-r_0}=1$ truncated at degree $k$.
+Terms beyond $k$ contain $h^{k+1}\alpha_p=0$ by dimension.
+Since $r_0+k=M-p-1$, applying $j_*$ proves (7.4).
+All powers in (7.5) are nonnegative; no inverse $\xi$ is used.
+The same binomial calculation and dimension vanishing hold in Chow.
+\end{proof}
+
+This single fixed smooth support carries all exceptional middle
+channels in the same source Hodge degree $d$.
+Increasing $M$ raises support codimension $M-d$ while source
+Hodge degree remains $d$. These source Hodge classes are not
+asserted algebraic when the original $\alpha_p$ is unknown algebraic.
+
+\section{Repair of the individual-channel support argument}
+The preceding high-coniveau text combined quotient-line global
+generation for $N$ with the normal-line convention (1.1).
+Global generation of $N$ does not imply global generation of
+the actual exceptional $\mathcal O_E(1)$.
+This written convention issue contradicts no Lean-checked
+arithmetic identity.
+
+For an individual channel, choose $a$ sufficiently large so that
+\[
+ A=\xi+a q^*h,\qquad B=a q^*h
+ \tag{8.1}
+\]
+are basepoint-free algebraic divisor classes on $E$.
+The first comes from
+$\mathcal O_E(1)\otimes q^*\mathcal L^a$, with sections
+$H^0(X,N^\vee\otimes\mathcal L^a)$. For $r=M-p-1$,
+\[
+ \xi^r=(A-B)^r
+     =\sum_{i=0}^{r}(-1)^i{r\choose i}A^{r-i}B^i.
+ \tag{8.2}
+\]
+For $i\le\min(r,d)$, take $i$ general members of
+$|\mathcal L^a|$ on $X$, pull their smooth intersection to $E$,
+then cut by $r-i$ general members of $|A|$.
+Bertini gives a smooth complete intersection
+$i_{r,i}:T_{r,i}\hookrightarrow E$ of codimension $r$,
+or the empty set, with class $A^{r-i}B^i$.
+Terms $i>d$ vanish. Therefore
+\[
+ \boxed{\beta_{\alpha_p}
+   =\sum_{i=0}^{\min(r,d)}(-1)^i{r\choose i}
+     (j\circ i_{r,i})_*
+       \bigl((q\circ i_{r,i})^*\alpha_p\bigr).}
+ \tag{8.3}
+\]
+For $r=0$, take $T_{0,0}=E$. The union of these finite actual
+supports has codimension at least $r+1=M-p$ in $Y$.
+Thus the earlier individual coniveau theorem holds with this
+corrected construction. The signed Gysin sum does not assert
+that the original Hodge class is algebraic.
+
+\section{Constructing the normalizer by a finite Newton word}
+The Lean continuation replaces an assumed root by an explicit
+finite algorithm in the rational Chow or even cohomology algebra.
+Start directly with $u=c(N)-1$ and $u^\nu=0$.
+The earlier GST finite inverse constructs
+\[
+ s=\sum_{k=0}^{\nu-1}(-u)^k,\qquad s(1+u)=1,\qquad
+ 1-s=su,\qquad (1-s)^\nu=s^\nu u^\nu=0.
+\]
+Thus the Segre class and its required nilpotence are both derived
+from the original Chern data; no separate inverse or root is assumed.
+Use a new notation $D_n$ for denominators, to distinguish these
+from the original dimension $d$:
+\[
+ D_0=1,\quad b_0=1,\qquad
+ D_{n+1}=2D_n^3,\quad
+ b_{n+1}=b_n(3D_n^2-sb_n^2).
+ \tag{9.1}
+\]
+Here $D_n\in\Q_{>0}$ is interpreted in the Chow algebra
+by its scalar algebra map. Every $b_n$ is a finite polynomial
+in the algebraic Segre class $s$.
+Put $\delta_n=D_n^2-sb_n^2$. The exact polynomial identity is
+\[
+ \boxed{\delta_{n+1}
+      =\delta_n^2(3D_n^2+\delta_n).}
+ \tag{9.2}
+\]
+For example, expansion of the two sides gives the same expression
+$4D_n^6-9D_n^4sb_n^2+6D_n^2s^2b_n^4-s^3b_n^6$.
+Induction starting from $\delta_0=1-s$ proves
+\[
+ \delta_n\in (1-s)^{2^n}A.
+\]
+Since $2^\nu\ge\nu$, the explicit rational characteristic-class word
+\[
+ \boxed{R_{\mathrm{Newton}}=D_\nu^{-1}b_\nu,\qquad
+       sR_{\mathrm{Newton}}^2=1}
+ \tag{9.3}
+\]
+is exact. No root-existence premise is used.
+If $s\,c(N)=1$, multiply (9.3) by $c(N)$ to obtain
+$R_{\mathrm{Newton}}^2=c(N)$.
+
+This Newton root equals the binomial root (4.1) in the
+nilpotent positive-degree algebra. Both have constant term $1$.
+Their difference times their sum is zero, whereas their sum is
+$2$ plus a nilpotent element and is therefore a unit.
+Consequently their difference is zero.
+
+For every native rational subalgebra $B$ containing $s$,
+the recurrence and rational scalar closure give
+$R_{\mathrm{Newton}}\in B$. Its inverse is
+$sR_{\mathrm{Newton}}\in B$. Thus
+\[
+ R_{\mathrm{Newton}}\alpha\in B
+       \quad\Longleftrightarrow\quad \alpha\in B.
+ \tag{9.4}
+\]
+The Lean implementation proves (9.2), the error factorization,
+(9.3), the square identity with $c(N)$, (9.4), and the Euler
+trace cancellation using this actually constructed root.
+The geometric KU/GRR identification and general
+Hodge--Riemann theorem are not newly implemented by these
+rational-ring proofs. The original-$X$ Lean compiler separately
+uses the actual native cycle type and supplied cycle-class map
+to verify inverse-matrix reconstruction. Its determinant premise
+concerns actual native columns, not topological source columns.
+
+\section{Exact checks and proof scope}
+The accompanying Wolfram Language file performs exact rational checks:
+\begin{enumerate}
+\item A heterogeneous primitive-string model of lengths $5,3,1$,
+with graded dimensions $(1,2,3,2,1)$, verifies
+$R^TPSR=P$, $\det S=\det R=1$ and discriminant ratio $1$.
+Its normal polynomial is $1+2t+3t^2-t^3+5t^4$ and square root
+$1+t+t^2-\tfrac32t^3+\tfrac72t^4$.
+\item The polarization involution squares to one; $PJ$ has
+positive eigenvalues $5,3,3,3,2,2,2,2,2$.
+This is a synthetic graded model, not an asserted geometric variety.
+\item Eighteen projective-normal tests in dimensions $0$ through $8$
+use $c(N)=(1+t)^{2M-d}$ and verify normalization and determinants.
+\item Forty tests verify the single-support binomial inverse for
+$r_0\in\{0,1,2,5,11\}$ and $0\le d-p\le7$.
+\item Seven logarithm/Todd tests, $0\le r\le6$, verify
+$\Phi_r(e^x-1)=x^{r+1}/(e^x-1)$ through order $12$.
+\end{enumerate}
+These finite checks support the formulas. Nilpotent binomial
+identities, actual self-intersection/GRR, and Lefschetz polarization
+prove the all-dimensional mathematical statements.
+No local Lean build or LaTeX compilation is claimed.
+
+The completed arithmetic law is (4.6) and (5.5)--(5.6):
+each prescribed rational Hodge packet has an explicit normal-free
+middle Euler pairing and a positive integer detector after
+denominator clearing. Formula (6.8) returns actual original-$X$
+cycles from an actual native full-rank certificate.
+Universal existence of these algebraic sources, equivalently
+algebraization in (4.9), is not proved.
+Euler integrality, nondegeneracy, positivity, rationality of $Y$,
+and increased coniveau alone do not supply that realization.
+\end{document}

@@ -1,0 +1,40 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #1066 / 1132
+#    Path         : branches/sol_5c579-final-bigN-right-chord-atomic/.github/workflows/phase-crossing-surgery.yml
+#    Ref          : origin/sol/5c579-final-bigN-right-chord-atomic
+#    First-commit : 2026-08-17 22:06:13 +0530  (deea9a0)
+#    Last-commit  : 2026-08-17 22:06:13 +0530  (deea9a0)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-17 22:06:13 +0530  deea9a0  (ker07-dev)
+#        surgery: lock 5c579 with full BIG-N right-chord research monolith
+# ======================================================================
+
+name: Canonical Phase Crossing Surgery
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-crossing:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Compile canonical phase crossing surgery scratch
+        run: lake build CanonicalPhaseCrossingSurgeryScratch
+      - name: Compile pathwise BIG1 projector chord scratch
+        run: lake build HandwrittenBig1PathProjectorScratch

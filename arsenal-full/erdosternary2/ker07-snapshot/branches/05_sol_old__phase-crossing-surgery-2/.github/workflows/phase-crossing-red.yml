@@ -1,0 +1,37 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0693 / 1132
+#    Path         : branches/sol_phase-crossing-surgery-2/.github/workflows/phase-crossing-red.yml
+#    Ref          : origin/sol/phase-crossing-surgery-2
+#    First-commit : 2026-08-17 00:18:29 +0530  (821a9e4)
+#    Last-commit  : 2026-08-17 00:18:29 +0530  (821a9e4)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-17 00:18:29 +0530  821a9e4  (ker07-dev)
+#        Add isolated RED harness for phase crossing surgery
+# ======================================================================
+
+name: Phase Crossing RED
+
+on:
+  push:
+    branches: [sol/phase-crossing-surgery-2]
+
+jobs:
+  red:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: RED — compile canonical phase crossing
+        run: lake env lean CanonicalPhaseCrossingRed.lean

@@ -1,0 +1,40 @@
+name: GST Entire Lean Source Map
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'research/computations/gst_all_lean_source_inventory.py'
+      - '.github/workflows/gst-entire-lean-source-map.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  inspect-all-lean:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+      - name: Read every tracked Lean source and build complete dependency index
+        run: |
+          set -euo pipefail
+          python3 research/computations/gst_all_lean_source_inventory.py
+          test -f gst_all_lean_source_inventory.json
+          test -f gst_all_lean_source_digest.md
+          python3 - <<'PY'
+          import json
+          data=json.load(open('gst_all_lean_source_inventory.json'))
+          assert data["counts"]["files"] >= 700
+          assert all(f["sha256"] and f["imports"] is not None for f in data["files"])
+          print("ALL_TRACKED_LEAN_FILE_BODIES_READ", data["counts"]["files"])
+          print(open("gst_all_lean_source_digest.md").read()[:11000])
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: entire-lean-source-map
+          path: |
+            gst_all_lean_source_inventory.json
+            gst_all_lean_source_digest.md
+          if-no-files-found: error

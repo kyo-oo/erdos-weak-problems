@@ -1,0 +1,35 @@
+name: GPT6 Problem406 Fourth Trit Exact CommonTwo Kernel
+on:
+  push:
+    branches: [gpt6/problem406-fourth-trit-discovery-20261029]
+    paths: [GSTProblem406HGateCoreClass.lean, .github/workflows/gpt6_problem406_fourth_trit.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build GST Worldtrace exact proof prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectExistence
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaArbitraryDelay.olean GSTOmegaArbitraryDelay.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaExactDelayedEscape.olean GSTOmegaExactDelayedEscape.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaThreeTritMultiplierLaw.olean GSTOmegaThreeTritMultiplierLaw.lean
+          lake env lean -o .lake/build/lib/lean/GSTOmegaResidueClassExit.olean GSTOmegaResidueClassExit.lean
+      - name: Kernel check new unbounded fourth-trit common-two classes
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406HGateCoreClass.lean 2>&1 | tee fourth-trit-proof.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' fourth-trit-proof.log
+          echo GST_406_FOURTH_TRIT_NEW_UNBOUNDED_CLASSES_PASS=1

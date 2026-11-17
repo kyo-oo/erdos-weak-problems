@@ -1,0 +1,261 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\cl}{\operatorname{cl}^{\mathrm{can}}}
+\title{GST curvature: exact missing-mode sequence and completion of divisorial returns}
+\author{Mathematics before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{Claim and checkpoint}
+The starting revision is \texttt{e40e328b80d3ede78202234054891b1e56edf0b3}.
+The original input is a connected smooth projective complex $n$-fold $X$,
+$1\leq p\leq n$, and a prescribed rational Hodge class
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$.
+The universal target is an actual $Z_\alpha\in\CH^p(X)_\Q$
+with $\cl_X Z_\alpha=\alpha$. Components are handled separately.
+The central-fold curvature theorem is already proved at hand level in its
+stated family. Here we make its missing-mode exact sequence explicit in
+the custom module, then solve the previously untreated \emph{divisorial}
+boundary extraction, including its rational Hodge-lift issue.
+Existence of a nullifying algebraic open for every $\alpha$ is not assumed.
+
+\section{The curvature conclusion, with its full linear exact sequence}
+For the actual central-fold family of the earlier derivation let
+$L:\C^r\to\C^m$ be the transpose of the total integral curvature matrix.
+Discarding the already pure base contribution, closed vertical degree-one
+classes form
+\[
+ E_L=\{(u,v)\in\C^r\oplus\C^r:Lu=0\}.
+\]
+Define $q:E_L\to\operatorname{im}L$ by $q(u,v)=Lv$ and
+\[
+ P_L=\{(a+b,i(a-b)):a,b\in\ker L\}.
+\]
+Then the actual linear sequence is
+\[
+ 0\longrightarrow P_L\longrightarrow E_L
+   \xrightarrow{q}\operatorname{im}L\longrightarrow0.       \tag{1}
+\]
+Indeed $q$ is onto: use $(0,v)$ for any $Lv$.
+Its kernel has $Lu=Lv=0$, with the explicit unique decomposition
+$a=(u-iv)/2$, $b=(u+iv)/2$. Conversely that decomposition is in the
+kernel. In particular $\dim(E_L/P_L)=\operatorname{rank}L$.
+The geometric comparison and filtered representatives proved in
+\texttt{GST\_whole\_space\_central\_causal\_fold\_2026\_11\_03.tex}
+identify (1) with the actual degree-one opposedness quotient.
+Consequently the stated curvature theorem is
+\[
+ \delta^1=\operatorname{rank}\Bigl(\sum_e K_e\Bigr).
+                                                               \tag{2}
+\]
+In this particular lattice-defined family, zero total matrix gives the
+actual projective product, so purity returns in \emph{all} degrees.
+For arbitrary holomorphic torus torsors zero rational curvature alone
+does not imply projectivity: their torsion-gluing criterion is retained.
+Neither assertion is an original-$X$ universal Chow source theorem.
+
+\section{The precise missing divisorial construction}
+Let $f:Y\to X$ be a surjection with $Y$ smooth connected projective,
+$\dim Y=n+r$. Fix a very ample $h\in\CH^1(Y)$ and the positive generic
+degree $d$ with $f_*(h^r)=d[X]$. The previously constructed genuine return is
+\[
+ R_{\CH}(z)=d^{-1}f_*(h^r z),\qquad R_B f^*=1.             \tag{3}
+\]
+Let $D=\bigcup_i D_i$ be a reduced simple-normal-crossings divisor on $Y$,
+$j:U=Y\setminus D\hookrightarrow Y$, and $i_i:D_i\hookrightarrow Y$.
+Every $D_i$ is smooth projective; all intersections are transverse.
+
+\begin{theorem}[Exact divisorial kernel, every degree]\label{thm:kernel}
+For every $p\geq1$,
+\[
+ \ker j^*|_{H^{2p}(Y,\Q)}
+ =\operatorname{im}\left(G:\bigoplus_i H^{2p-2}(D_i,\Q)(-1)
+                \longrightarrow H^{2p}(Y,\Q)\right),\quad
+ G((b_i))=\sum_i(i_i)_*b_i.                              \tag{4}
+\]
+If $a$ in this kernel is rational of type $(p,p)$, it has a rational
+preimage with every $b_i$ of type $(p-1,p-1)$.
+\end{theorem}
+\begin{proof}
+Write $D^{(s)}$ for the disjoint union of the $s$-fold component
+intersections, with $D^{(0)}=Y$. The logarithmic weight spectral sequence,
+in the indexing used here, is
+\[
+ E_1^{-s,t}=H^{t-2s}(D^{(s)},\Q)(-s)
+       \Longrightarrow H^{t-s}(U,\Q).                    \tag{5}
+\]
+The first differential is the alternating sum of Gysin maps; in the
+column adjacent to $Y$ it is exactly $G$. For fixed $t$ the terms are
+pure of weight $t$ and the first differential preserves their Hodge
+structures. Its cohomology is again pure of weight $t$.
+A higher differential $d_a$ for $a\geq2$ changes $t$ to $t-a+1$,
+so is zero as a morphism between unequal pure weights. Thus (5)
+degenerates at $E_2$. There are no positive columns. The edge map from
+$H^{2p}(Y)$ to $H^{2p}(U)$ therefore has kernel exactly the incoming
+$d_1$ image in (4). Higher intersections impose relations on $G$;
+they introduce no further incoming differential to this edge.
+
+For completeness the rational Hodge lift requires more than selecting
+the complex $(p-1,p-1)$ component of an arbitrary rational lift.
+Set $B=\bigoplus_i H^{2p-2}(D_i,\Q)(-1)$ and $K=\ker G$.
+Choose a rational polarization on the pure Hodge structure $B$.
+Its restriction to $K$ is nondegenerate: positivity after the Weil
+operator on the Hodge-stable real subspace rules out a radical.
+Thus $B=K\oplus K^\perp$ is a \emph{rational Hodge} decomposition.
+The restriction $G:K^\perp\to\operatorname{im}G$ is a rational Hodge
+isomorphism. Apply its inverse to $a$. After undoing the Tate twist
+the components have the asserted rational types. This proves the lift
+without assuming any higher Hodge conjecture.
+\end{proof}
+The exact external inputs for (5) are Deligne, \emph{Th\'eorie de Hodge II}
+(1971), \S3.1 residue description and \S3.2, especially (3.2.4),
+(3.2.8)--(3.2.10) and (3.2.13)(iii). Rational polarizability is stated
+in (2.2.6). The original published scan was checked at
+\href{https://publications.ias.edu/sites/default/files/Number15.pdf}{IAS}.
+This is the $E_1$ weight convention, not an incorrect assertion that
+the differently indexed Leray sequence degenerates at $E_2$.
+
+\begin{theorem}[Completed codimension-two boundary source]\label{thm:cycle}
+For $p=2$, if the actual constructed open above satisfies
+$j^*f^*\alpha=0$, actual algebraic line bundles $L_i$ on $D_i$ and a
+common positive integer $N$ give the original-$X$ cycle
+\[
+ \boxed{Z_\alpha=\frac1{dN}f_*\left(h^r\cdot
+                  \sum_i(i_i)_*c_1^{\CH}(L_i)\right),
+       \qquad\cl_X Z_\alpha=\alpha.}                    \tag{6}
+\]
+Here the $L_i$ are constructed from $\alpha$ by the rational Hodge
+lift in Theorem~\ref{thm:kernel}, denominator clearing, and the actual
+exponential-sequence/GAGA construction, not assumed as cycle witnesses.
+\end{theorem}
+\begin{proof}
+Take $a=f^*\alpha$. Formula (4) and its rational lift give rational
+$(1,1)$ classes $b_i$ with $G(b)=a$. Choose one $N>0$ making all
+$Nb_i$ integral modulo torsion. Each integral Hodge class maps to zero
+in $H^2(D_i,\mathcal O_{D_i})$, so the analytic exponential exact
+sequence constructs a holomorphic line $L_i$ with Chern class $Nb_i$.
+Projective GAGA makes it algebraic. A nonzero rational section provides
+an actual Cartier divisor if a cycle representative is desired.
+Thus the sum of their proper pushforwards has canonical class $Na$.
+Apply (3) and divide by $N$. Products, proper pushforward and Chern
+classes commute with the canonical Betti comparison, proving (6).
+There is no extra intersection correction to the sum of Gysin classes.
+\end{proof}
+This includes an arbitrary singular divisor after embedded resolution:
+resolve the pair to a smooth projective $Y'$ with reduced SNC boundary,
+apply (6) to $Y'\to X$, and push its actual cycle back. The open is
+unchanged over its smooth complement. More generally a dominant map
+from a smooth quasi-projective nullifying $U$ can first be compactified
+by closure of its graph over projective $X$, then resolved relative to $U$.
+It must be an \emph{actual algebraic} $U$ with the specified pullback;
+the higher rational homotopy fiber does not supply it automatically.
+
+For general $p$ the same proof completes the exact Gysin Hodge lift.
+Actual cycles follow if the constructed $b_i$ have codimension-$(p-1)$
+Chow representatives on the actual $D_i$. Only the $p=2$ case removes
+that lower-degree source requirement by the unconditional $(1,1)$ theorem.
+
+\section{Execute a direct arbitrary-input open construction}
+Start again from the actual arbitrary $(X,p,\alpha)$ and choose a smooth
+divisor $D\in|H^{\otimes m}|$ for $H$ very ample and $m>0$.
+This constructs an actual affine open $U=X\setminus D$ without
+assuming $\alpha$ algebraic. Put $h=c_1(H)$ and $L(b)=h\cup b$.
+Its exact nullification test is
+\[
+ \boxed{\ker(H^{2p}(X,\Q)\to H^{2p}(U,\Q))
+                   =L H^{2p-2}(X,\Q).}                 \tag{7}
+\]
+For $2p\leq n$, weak Lefschetz gives
+$H^{2p-2}(X)\simeq H^{2p-2}(D)$; the Gysin projection formula
+$i_*i^*b=mh\cup b$ proves (7). The relevant weak Lefschetz range is
+$2p-2<n-1$. For $2p>n$, hard Lefschetz makes $L$ surjective, and
+every $L$-multiple restricts to zero because $H^{\otimes m}|_U$ is
+trivial. Hence both sides in (7) are all of $H^{2p}(X)$.
+These uses have their usual rational, smooth-projective hypotheses.
+
+For $2p\leq n$, the rational Hodge Lefschetz decomposition is
+\[
+ \alpha=h\beta+\alpha_{\rm prim},\qquad
+ \alpha_{\rm prim}\in P^{2p}(X)=\ker L^{n-2p+1}.        \tag{8}
+\]
+The summands are rational Hodge summands and have zero intersection.
+Thus this actual open kills the input exactly when
+$\alpha_{\rm prim}=0$. In particular a nonzero primitive residual
+survives \emph{every} smooth ample-divisor choice, regardless of $m$.
+It cannot be eliminated by changing a connection or a de Rham primitive:
+its restriction cohomology class is nonzero.
+
+For $p=2$, the $\beta$ in (8) is rational $(1,1)$ and constructs an
+actual rational divisor $E$ by exponential sequence and GAGA.
+The explicit source produced by this attempt is
+$c_1^{\CH}(H)\cdot E$, with class $h\beta$; the residual is exactly
+$\alpha_{\rm prim}$. When $n\leq3$ the standard hard-Lefschetz/top-class
+argument produces all codimension-two inputs, as already recorded in
+October; that known result is not a fresh universal breakthrough.
+For $n\geq4$ this attempt has now computed its precise success sector
+and the surviving prescribed-input class.
+
+\section{An actual singular-boundary control for the primitive channel}
+The arbitrary-$X$ implication of this control is precise: Theorem~\ref{thm:cycle}
+handles resolved divisorial geometry beyond the smooth-ample kernel (7).
+The following tests that distinction with an actual source; it is not
+evidence of universal source existence or a replacement of the input variety.
+
+Let $X=Q^4\subset\mathbf P^5$ be a smooth quadric. Write $A,B$ for
+the two maximal-plane classes, so $h^2=A+B$ and
+$\gamma=A-B$ is nonzero primitive. Choose a point $v\in Q^4$ and
+its tangent hyperplane section $D$. This is the cone with vertex $v$
+over $Q^2\simeq\mathbf P^1\times\mathbf P^1$.
+Its ruling planes of both families contain $v$. Blow up $v$ in $X$:
+$f:Y\to X$. The reduced total boundary is $\widetilde D\cup E$,
+where $E\simeq\mathbf P^3$, $\widetilde D$ is the projective-line
+bundle resolving this cone, and their transverse intersection is the
+quadric $Q^2\subset E$. Thus this is an actual SNC compactification
+of $X\setminus D$.
+
+Let $\pi:\widetilde D\to Q^2$ be the ruling projection and
+$M=\pi^*\mathcal O_{Q^2}(1,-1)$. The inverse image of a line in
+either ruling is the strict transform of the corresponding plane
+through $v$, with multiplicity one. Consequently the actual Chow identity
+is
+\[
+ \boxed{f_*\widetilde i_*c_1^{\CH}(M)=A-B.}             \tag{9}
+\]
+Both sides of (9) are cycles, not merely numerical coordinates.
+Here $r=0,d=N=1$. The correction class $c_1(M)$ is an actual line
+on the resolved boundary, chosen by the prescribed difference of
+the two rulings. In contrast every smooth ample hyperplane complement
+retains $A-B$ by (7). The singular boundary succeeds because it has
+the needed additional divisor geometry. This rules out extending the
+smooth-ample obstruction to all divisorial opens. These quadric cycles
+are classical; the result is a constructive check of the general return.
+
+\section{Adversarial review and continuation}
+The curvature theorem (2) is established at its stated family scope.
+The exact sequence (1), the SNC kernel and rational Hodge lift (4),
+and actual divisor-line return (6) are hand proofs under their explicit
+geometric inputs. The source-dependent step (5) has been checked against
+the primary text. Mathematical review here is author self-review.
+The Lean changes prove algebraic map consequences and the explicit
+missing-mode surjection/kernel; compilation remains with the owner.
+
+Three failure controls are essential. Projectivity is not inferred from
+zero curvature for arbitrary torsors. A complex type component of an
+arbitrary rational lift is not silently declared rational. A generic
+smooth ample boundary is not asserted to nullify a prescribed primitive
+input. Equation (7) is the executed construction test, not a new
+algebraicity assumption.
+
+The divisorial extraction subconstruction is completed in codimension two
+for actual nullifying algebraic opens, and in all degrees up to the
+explicit lower-degree source input. Universal construction of such an open
+for the surviving primitive input remains unresolved. The smooth ample
+recipe is closed for that residual by (7); singular selected/excess opens
+and other genuinely different source geometries retain their open status.
+\end{document}

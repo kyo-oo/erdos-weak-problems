@@ -1,0 +1,35 @@
+name: GPT6 GST All-Ones Physical First Collision Kernel
+on:
+  push:
+    branches:
+      - gpt6/problem406-seventh-trit-worldtrace-20261029
+    paths:
+      - GSTProblem406AllOnesFirstCollision.lean
+      - GSTProblem406GSTPeelFixedPoint.lean
+      - .github/workflows/gpt6_problem406_allones_collision.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  allones:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Build GST affine peel and original hGate dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerAffineExponentPeel GSTFourPowerDirectExistence GSTFourPowerThirdWave
+          lake env lean -o .lake/build/lib/lean/GSTProblem406GSTPeelFixedPoint.olean GSTProblem406GSTPeelFixedPoint.lean
+      - name: Kernel check exact all-ones m+9 physical same-row CommonTwo
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406AllOnesFirstCollision.lean 2>&1 | tee gst-allones-kernel.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gst-allones-kernel.log
+          echo GST_406_ALLONES_ALL_M_GE_8_PHYSICAL_COMMON_TWO_PASS=1

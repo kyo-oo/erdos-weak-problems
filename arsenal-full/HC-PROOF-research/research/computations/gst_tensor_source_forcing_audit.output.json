@@ -1,0 +1,75 @@
+{
+  "status": "all exact assertions passed",
+  "basis": [
+    "1",
+    "h",
+    "h^2",
+    "h^3",
+    "h^4",
+    "s",
+    "r"
+  ],
+  "field": "Q; curve calculation also Q[g]",
+  "associativity_basis_triples": 343,
+  "automorphism_basis_pairs": 49,
+  "frobenius_pairing_determinant": "15",
+  "hard_lefschetz": [
+    {
+      "codimension": 0,
+      "power": 4,
+      "rank": 1
+    },
+    {
+      "codimension": 1,
+      "power": 2,
+      "rank": 1
+    },
+    {
+      "codimension": 2,
+      "power": 0,
+      "rank": 3
+    }
+  ],
+  "primitive_middle_dimension": 2,
+  "primitive_middle_gram": [
+    [
+      3,
+      0
+    ],
+    [
+      0,
+      5
+    ]
+  ],
+  "one_factor_admissible_dimension": 6,
+  "two_factor_admissible_dimension": 37,
+  "external_product_admissible_dimension": 36,
+  "residual_projector_trace": 1,
+  "residual_projector_idempotent": true,
+  "residual_source_periods": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "signed_doubled_euler_index": "-5",
+  "positive_negative_doubled_index": "5",
+  "alteration_degrees_checked": [
+    1,
+    2,
+    3,
+    7
+  ],
+  "curve_D_squared_coefficients_in_1_g": [
+    0,
+    -2
+  ],
+  "non_claims": [
+    "No actual variety or canonical Chow comparison is modeled.",
+    "No counterexample to the Hodge conjecture.",
+    "No claim that all geometric GST source hypotheses hold in this model.",
+    "No universal algebraic-source existence theorem or Lean compilation."
+  ]
+}

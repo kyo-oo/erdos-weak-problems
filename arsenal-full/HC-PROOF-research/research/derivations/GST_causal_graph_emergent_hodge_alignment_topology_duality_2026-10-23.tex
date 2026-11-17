@@ -1,0 +1,434 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=21mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{GST emergent complex geometry and causal topology: a dual realization of Hodge alignment and mixed-weight birth}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We test the owner's topology-first, dimension-emergent spatial program,
+rather than beginning with an algebraic Chow-surjectivity hypothesis.
+One arbitrary finite GST causal graph is given two \emph{actual}
+algebro-geometric realizations over \emph{every} original smooth projective
+complex $X$: (i) a family of smooth projective products with variable
+elliptic complex structures and entirely pure Hodge cohomology, and
+(ii) a singular nodal graph-gluing realization with topology-born
+weight-zero $H^1$. We derive exact complementary laws: the complex
+rank of Hodge-alignment constraints on rational topological edge
+classes equals $|V|-c$, whereas the topological $W_0$ birth
+dimension equals $|E|-|V|+c$. Their sum is the number of causal edges.
+An integral edge class is Hodge precisely when the corresponding
+elliptic parameters match; when it is Hodge it is explicitly the
+canonical Betti class of a \emph{genuine geometric diagonal divisor},
+not of a stipulated Chow selector. The result gives a strong,
+non-circular geometry-to-algebraicity theorem for the entire
+edge family, and shows why pure-Hodge persistence of the full
+smooth projective world and Hodge preservation of a fixed rational
+topological class are different mathematical events. No universal
+rational Hodge conjecture assumption is made or concluded.
+\end{abstract}
+
+\section{Pregeometry and the two typed geometric realizations}
+Let $\Gamma=(V,E,s,t)$ be an arbitrary finite loop-free graph.
+Parallel edges are allowed. Its underlying unoriented graph
+has $c$ connected components. Orientation is only bookkeeping.
+The GST carrier of \texttt{GSTGeneralSpace.lean} has no intrinsic
+dimension or metric. Its optional realization may separately
+select a scheme and a causality-to-geometry map; the
+$k$-cell index of \texttt{GSTGraphV2UnboundedHigherCausality.lean}
+must not be mistaken for the scheme's complex dimension.
+
+Fix \emph{arbitrary} nonempty smooth projective $X$ over $\mathbb C$.
+For each vertex $v$ choose a marked elliptic complex modulus
+$\tau_v\in\mathfrak H=\{z\in\mathbb C:\operatorname{Im}z>0\}$ and
+$E_{\tau_v}=\mathbb C/(\mathbb Z+\tau_v\mathbb Z)$.
+The \emph{smooth whole-world realization} is
+\[
+ Y_{\boldsymbol\tau}=X\times\prod_{v\in V}E_{\tau_v}.
+ \tag{1}
+\]
+Every $Y_{\boldsymbol\tau}$ is smooth projective, of complex
+dimension $\dim_{\mathbb C}X+|V|$, with a pure Hodge structure.
+Even when the actual smooth topology is held fixed as
+$X\times(S^1)^{2|V|}$, its realized holomorphic Hodge subspaces
+vary with $\boldsymbol\tau$.
+
+The \emph{topology-folded realization} is
+\[
+ T_\Gamma=X\times C_\Gamma,                             \tag{2}
+\]
+where $C_\Gamma$ is the genuine projective nodal curve obtained
+by taking one elliptic curve at each vertex and identifying
+distinct smooth points pairwise for every graph edge.
+Points for distinct edge ends are chosen disjointly.
+The dual graph of $C_\Gamma$ is $\Gamma$.
+If $\Gamma$ has an edge then $T_\Gamma$ is singular, not a
+new smooth-projective counterexample. Both (1) and (2)
+share the original geometric $X$ as an external
+component, and use the \emph{same} GST causal incidence graph;
+they are different optional realization functors.
+
+\section{Exact Hodge-class break inside pure smooth-projective geometry}
+Use real coordinates $x_v,y_v\in\mathbb R/\mathbb Z$
+and the marked holomorphic forms
+$dz_v=dx_v+\tau_v\,dy_v$.
+For an edge $e:v\to w$, pull back the integral degree-two class
+\[
+ \boxed{
+ \Omega_e=(dx_v-dx_w)\wedge(dy_v-dy_w)
+      \in H^2(Y_{\boldsymbol\tau},\mathbb Z).
+ }                                                            \tag{3}
+\]
+The topological marking identifies this class across
+different smooth-projective $\boldsymbol\tau$.
+Only the two elliptic factors at $v,w$ participate.
+
+\begin{theorem}[GST geometric Hodge-alignment/break equation]
+For every arbitrary $X,\Gamma,\boldsymbol\tau$, every edge
+$e:v\to w$ has the \emph{exact} holomorphic period
+\[
+ \boxed{
+ \Omega_e\wedge dz_v\wedge dz_w
+   =(\tau_w-\tau_v)\,
+     dx_v\wedge dy_v\wedge dx_w\wedge dy_w
+ }                                                            \tag{4}
+\]
+on its two-factor real four-torus, with the orientation
+shown. Consequently,
+\[
+ \boxed{
+ \Omega_e\in H^{1,1}(Y_{\boldsymbol\tau})
+ \ \Longleftrightarrow\ \tau_v=\tau_w.
+ }                                                            \tag{5}
+\]
+Whenever (5) holds, the two elliptic factors coincide
+as marked complex elliptic curves, and
+\[
+ \boxed{
+ \Omega_e=\mathrm{cl}^{can}_{Y_{\boldsymbol\tau}}
+ \bigl(\mathrm{pr}_{v,w}^*[\Delta_{v,w}]\bigr),
+ }                                                            \tag{6}
+\]
+where $\Delta_{v,w}\subset E_{\tau_v}\times E_{\tau_w}$
+is the \emph{actual algebraic diagonal divisor}.
+Thus the fixed integral topological edge class is
+Hodge if and only if its concrete algebraic diagonal
+representative exists in this marked geometric realization.
+These are implications proved by explicit geometry,
+not by assuming the Hodge conjecture.
+\end{theorem}
+\begin{proof}
+Expand
+$(dx_v-dx_w)\wedge(dy_v-dy_w)\wedge
+ (dx_v+\tau_vdy_v)\wedge(dx_w+\tau_wdy_w)$.
+The determinant of the coefficient matrix with rows
+$(1,0,-1,0)$, $(0,1,0,-1)$,
+$(1,\tau_v,0,0)$, $(0,0,1,\tau_w)$
+is exactly $\tau_w-\tau_v$, proving (4).
+The real rational degree-two class is of type $(1,1)$
+precisely when its $(0,2)$ component (equivalently
+the wedge against $dz_v\wedge dz_w$) vanishes:
+the two elliptic factors have complex dimension two
+and conjugation gives the other off-diagonal component.
+Pullback along the projection to those two factors
+and restriction along a chosen point of $X$ and all
+other elliptic factors show the equivalence in the
+full $Y_{\boldsymbol\tau}$.
+When $\tau_v=\tau_w$, the diagonal in the two
+complex tori is a complex subgroup and hence
+an algebraic divisor in their projective product.
+Its normal-circle topological Thom class is
+exactly $(dx_v-dx_w)\wedge(dy_v-dy_w)$ in the
+stated marking. This proves (6), including
+the \emph{canonical} algebraic cycle-class comparison.
+\end{proof}
+\begin{remark}
+Even when $\tau_v\ne\tau_w$ the \emph{whole}
+$H^\bullet(Y_{\boldsymbol\tau},\mathbb Q)$ remains
+a pure Hodge structure. What breaks is the Hodge
+status of the \emph{marked rational edge class}.
+This is an actual family of smooth projective
+geometries, not an abstract rational countermodel.
+It neither disproves the rational Hodge conjecture
+nor proves it on all $X$.
+\end{remark}
+
+\section{Causal-graph law for the full edge Hodge-alignment locus}
+Let $B_\Gamma:\mathbb C^V\to\mathbb C^E$ be the
+\emph{realized causal graph incidence operator},
+\[
+ (B_\Gamma\boldsymbol\tau)_e
+       =\tau_{t(e)}-\tau_{s(e)}.                          \tag{7}
+\]
+Unlike the GST dimensionless carrier itself,
+$\boldsymbol\tau$ has the complex-geometric meaning
+of actual elliptic moduli.
+
+\begin{theorem}[Exact complex-geometric alignment rigidity]
+The simultaneous geometric Hodge condition on every
+edge class $\Omega_e$ is \emph{exactly}
+\[
+ \boxed{
+  B_\Gamma\boldsymbol\tau=0
+   \ \Longleftrightarrow\
+  \tau_v=\tau_w
+   \text{ whenever }v,w\text{ lie in the same connected
+    component of }\Gamma.
+ }                                                        \tag{8}
+\]
+In particular the actual Hodge-alignment locus in
+$\mathfrak H^V$ is
+$\mathfrak H^{c}$ (diagonally embedded by component),
+and the complex codimension of that locus is
+\[
+ \boxed{\operatorname{rank}_{\mathbb C}B_\Gamma=|V|-c.}  \tag{9}
+\]
+Every class $\Omega_e$ simultaneously lying in the
+rational $(1,1)$ fiber has the explicitly algebraic
+diagonal representative (6).
+\end{theorem}
+\begin{proof}
+Equation (5) identifies each complex Hodge condition
+with the corresponding edge difference zero.
+Such differences vanish on every edge precisely
+when $\boldsymbol\tau$ is constant along every graph
+path. It can then vary freely, once per connected
+component, through the upper half-plane.
+Hence $\ker B_\Gamma\cong\mathbb C^c$
+and rank-nullity proves (9).
+The true diagonal construction proves the last
+sentence.
+\end{proof}
+
+\section{Genuine topology-folded realization: purity break and duality}
+\begin{theorem}[Exact causal graph mixed-weight birth]
+Let $\nu:\coprod_v E_{\tau_v}\to C_\Gamma$ be the
+normalization of the actual nodal curve in (2).
+Then the MHS exact sequence
+\[
+ 0\longrightarrow
+ \operatorname{coker}(B_\Gamma:\mathbb Q^V\to\mathbb Q^E)
+ \longrightarrow H^1(C_\Gamma,\mathbb Q)
+ \longrightarrow\bigoplus_v H^1(E_{\tau_v},\mathbb Q)
+ \longrightarrow0                                             \tag{10}
+\]
+has weight-zero subspace
+\[
+ \boxed{
+ \dim_{\mathbb Q}W_0H^1(T_\Gamma,\mathbb Q)
+ =|E|-|V|+c. }                                               \tag{11}
+\]
+For the product with arbitrary smooth projective $X$,
+$H^1(T_\Gamma)=H^1(X)\oplus H^1(C_\Gamma)$;
+the former is pure weight one, so it contributes no
+weight-zero classes. Hence the true topology fold
+breaks pure weight-one Hodge structure precisely
+when $\Gamma$ has a graph cycle. If $\Gamma$ is a
+forest, this specific topology fold does not birth
+weight-zero $H^1$.
+\end{theorem}
+\begin{proof}
+The constant-sheaf normalization exact sequence is
+$0\to\mathbb Q_{C_\Gamma}
+ \to\nu_*\mathbb Q_{\coprod E_v}
+ \to\oplus_{e}\mathbb Q_{q_e}\to0$.
+In its long cohomology sequence, the $H^0$-connecting
+map is the incidence operator
+$B_\Gamma:\mathbb Q^V\to\mathbb Q^E$.
+The skyscraper node terms are pure of weight zero;
+each smooth projective elliptic $H^1(E_v)$ is
+pure of weight one. Exactness and strictness of
+the MHS weight filtration identify
+$W_0H^1(C_\Gamma)$ with $\operatorname{coker}B_\Gamma$.
+Its rank is $|E|-(|V|-c)$.
+The product formula for $H^1$ and the purity of
+$H^1(X)$ give (11).
+\end{proof}
+
+\begin{corollary}[GST causality--Hodge alignment complementarity]
+For every finite original GST graph $\Gamma$,
+the two different actual geometric realization
+experiments satisfy the \emph{exact integer identity}
+\[
+ \boxed{
+ \underbrace{\operatorname{codim}_{\mathbb C}
+   \{\text{all smooth edge classes }\Omega_e
+     \text{ remain Hodge}\}}_{|V|-c}
+ +
+ \underbrace{\dim_{\mathbb Q}W_0H^1(T_\Gamma,\mathbb Q)}
+   _{|E|-|V|+c}
+ =\boxed{|E|}.                                                \tag{12}
+\]
+This is an identity of ranks of the \emph{same}
+causal incidence operator, realized in two genuinely
+different geometric categories. It is not an
+identification of the moduli conormal space with
+the mixed-Hodge weight-zero space, nor does it
+postulate a Hodge-to-Chow isomorphism.
+\end{corollary}
+\begin{proof}
+The first term is $\operatorname{rank}B_\Gamma$,
+the second is $\operatorname{dim}\operatorname{coker}B_\Gamma$.
+Rank-nullity at the edge-coordinate target
+$\mathbb Q^E$ proves (12), with matching
+integer ranks over $\mathbb Q$ and $\mathbb C$.
+\end{proof}
+
+
+\section{Exclusive GST causal birth-or-break law for each new edge}
+\begin{theorem}[One-edge causal dimension/topology bifurcation]
+Let $\Gamma$ be \emph{any} finite causal graph
+with a fixed vertex set $V$, and insert an edge $e$
+between vertices $v,w$ which is not yet present
+as that edge (parallel edges are allowed).
+Let $a_\Gamma=|V|-c(\Gamma)$ denote the codimension
+of the simultaneous whole-edge Hodge-alignment
+locus of the \emph{smooth} realization, and
+let $b_\Gamma=|E|-|V|+c(\Gamma)$ denote the
+weight-zero $H^1$ rank in the \emph{nodal topology fold}.
+Then the new geometric world satisfies the sharp
+mutually exclusive law
+\[
+ \boxed{
+ (\Delta a,\Delta b)=
+ \begin{cases}
+ (1,0), & v,w\text{ were in different causal components},\\
+ (0,1), & v,w\text{ were already causally connected}.
+ \end{cases}
+ }                                                              \tag{13}
+\]
+In particular,
+\[
+ \boxed{\Delta a+\Delta b=1,\qquad
+       (\Delta a)(\Delta b)=0.}                                 \tag{14}
+\]
+This is a precise algebraic-geometric versus
+topology-born mixed-Hodge \emph{bifurcation}:
+\begin{itemize}
+\item A connecting edge adds one independent
+  holomorphic modulus-alignment equation
+  $\tau_v=\tau_w$, but does not add a new
+  graph-loop weight-zero mode.
+\item A cycle-closing edge adds no independent
+  smooth-world Hodge-alignment equation, but
+  creates exactly one additional
+  weight-zero $H^1$ direction in the nodal world.
+\end{itemize}
+Both statements work for arbitrary finite causality
+depth, arbitrary number of components, arbitrary
+original smooth projective $X$, and arbitrary
+dimension of $X$.
+\end{theorem}
+\begin{proof}
+If $v,w$ lie in different connected components,
+the edge merges exactly two components, so
+$c(\Gamma+e)=c(\Gamma)-1$.
+Therefore
+$a_{\Gamma+e}-a_\Gamma=
+ (|V|-(c-1))-(|V|-c)=1$
+and
+$b_{\Gamma+e}-b_\Gamma=
+ ((|E|+1)-|V|+(c-1))-(|E|-|V|+c)=0$.
+If they were already connected, the new edge
+does not change $c$. The new equality
+$\tau_v=\tau_w$ follows from equalities along
+an existing path and is redundant, so
+$\Delta a=0$.
+The new edge independently closes one
+causal loop, and the normalized nodal curve's
+weight-zero first-cohomology rank rises by one:
+$\Delta b=1$. This proves (13)--(14)
+without invoking any rational Hodge conjecture
+assumption or constructing arbitrary Chow preimages.
+\end{proof}
+
+\begin{corollary}[Topology graph path-independent net causal law]
+For any finite edge insertion sequence from the
+edgeless graph on a fixed vertex set, at \emph{every}
+intermediate world the total number of
+connecting-edge alignment births is exactly
+$|V|-c(\Gamma)$, while the number of
+cycle-closing topology weight births is
+$|E|-|V|+c(\Gamma)$, independent of the
+chosen edge order. Reordering causal births
+may change \emph{which} edge produces a given
+kind of birth, but not either net count.
+\end{corollary}
+\begin{proof}
+Sum the two cases of (13) along the path;
+the initial counts both vanish.
+The terminal graph determines the two counts,
+so reordering the same graph's edge insertions
+leaves the net values unchanged.
+\end{proof}
+
+\section{Concrete causal tests and acceptance of the spatial experiment}
+For a connected $3$-vertex path, $(|V|,|E|,c)=(3,2,1)$:
+the two smooth edge classes are simultaneously Hodge
+only for $\tau_1=\tau_2=\tau_3$;
+the singular graph realization has $W_0H^1=0$.
+For a connected triangle, $(3,3,1)$:
+the same two independent Hodge-alignment conditions
+remain, while the topology-folded nodal realization
+births exactly one weight-zero direction.
+For the complete $5$-vertex graph, $(5,10,1)$:
+the smooth Hodge-alignment locus has complex
+codimension $4$; the nodal topology fold births
+$6$ weight-zero directions. Both sum to the
+actual ten causal edges.
+
+The corresponding Wolfram computation enumerates
+every labelled simple graph on $1\le |V|\le5$
+($1+2+8+64+1024=1099$ graphs) and independently
+checks $\mathrm{rank} B_\Gamma=|V|-c$,
+$\dim\operatorname{coker}B_\Gamma=|E|-|V|+c$,
+the constant-modulus alignment rule, and the
+exterior-product period
+$\tau_w-\tau_v$ with exact arithmetic. It is a
+finite consistency check of equations derived above.
+
+\section{Direct connection to the stated all-original-$X$ research goal}
+This experiment has now \emph{both} outcomes the
+owner requested: marked rational Hodge classes
+can lose their Hodge type during a smooth-projective
+complex-geometric deformation while the entire
+pure Hodge structure survives; and actual singular
+causal topology folds birth weight-zero classes
+which prevent the result from carrying a pure
+weight-one Hodge structure. No Hodge conjecture
+hypothesis is used at any point.
+
+A \emph{positive} geometry-to-algebraicity theorem
+is also obtained, without any rational Hodge-to-Chow
+selector: for each edge class satisfying its exact
+Hodge-alignment condition, a genuine algebraic
+diagonal realizes its canonical Betti class.
+This is a precise theorem for a geometrically
+generated edge family, stable under product with
+every arbitrary smooth projective $X$.
+
+The proposed implication that \emph{the entire pure
+Hodge structure of every smooth projective
+realization automatically algebraizes every
+rational diagonal Hodge class of arbitrary $X$}
+is a logically stronger all-$X$ statement.
+Neither the experimental period equation (4)
+nor the causal complementarity identity (12)
+asserts that stronger implication. In fact
+pure Hodge structure is present in both the
+aligned and misaligned smooth-projective
+realizations, so purity cannot distinguish the
+two outcomes \emph{without the additional
+geometric alignment law}. Establishing a general
+GST geometric alignment-to-algebraic realization
+law beyond this edge family would be new
+substantive mathematics; we do not assume it.
+
+This keeps the promised focus on whole-space
+topology, emergent dimension, Hodge birth/break
+and exact geometric realization while clearly
+separating the proved geometric implications
+from universal conjectural consequences.
+\end{document}

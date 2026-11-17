@@ -1,0 +1,89 @@
+name: GPT56 Four Power Source Audit
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTInfiniteFourPowerNavigation.lean
+      - .github/workflows/gpt56-four-power-source-audit.yml
+  workflow_dispatch:
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Compile local dependency closure and source
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          ROOT=Path('GSTInfiniteFourPowerNavigation.lean')
+          BUILD=Path('.lake/build/lib/lean')
+          imp=re.compile(r'^\s*import\s+(.+?)\s*$')
+          def p(m): return Path(*m.split('.')).with_suffix('.lean')
+          def imports(path):
+            out=[]
+            for raw in path.read_text().splitlines():
+              code=raw.split('--',1)[0].rstrip(); m=imp.match(code)
+              if m: out += m.group(1).split()
+            return out
+          order=[]; done=set(); stack=[]
+          def visit(m):
+            if m in done: return
+            path=p(m)
+            if not path.exists(): return
+            if m in stack: raise SystemExit('cycle '+str(stack+[m]))
+            stack.append(m)
+            for d in imports(path): visit(d)
+            stack.pop(); done.add(m); order.append((m,path))
+          for d in imports(ROOT): visit(d)
+          BUILD.mkdir(parents=True,exist_ok=True)
+          for m,path in order:
+            out=BUILD.joinpath(*m.split('.')).with_suffix('.olean')
+            out.parent.mkdir(parents=True,exist_ok=True)
+            if out.exists(): continue
+            print('COMPILE',m,flush=True)
+            subprocess.run(['lake','env','lean','-o',str(out),str(path)],check=True)
+          PY
+          lake env lean -o .lake/build/lib/lean/GSTInfiniteFourPowerNavigation.olean GSTInfiniteFourPowerNavigation.lean | tee four-power-source.log
+      - name: Reject placeholders
+        shell: bash
+        run: |
+          if grep -nE '(^|[^A-Za-z0-9_])(sorry|admit)([^A-Za-z0-9_]|$)' GSTInfiniteFourPowerNavigation.lean; then exit 1; fi
+      - name: Axiom audit
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat > FourPowerSourceAudit.lean <<'EOF'
+          import GSTInfiniteFourPowerNavigation
+          #print axioms GSTInfiniteFourPowerNavigation.four_power_happy_ge_three
+          #print axioms GSTInfiniteFourPowerNavigation.gst_four_power_navigation_universal
+          EOF
+          lake env lean FourPowerSourceAudit.lean | tee four-power-axioms.log
+          if grep -Fq 'sorryAx' four-power-axioms.log; then exit 1; fi
+          echo FOUR_POWER_SOURCE_AUDIT_GREEN=1
+      - name: Upload logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: four-power-source-audit
+          path: |
+            four-power-source.log
+            four-power-axioms.log
+          if-no-files-found: warn

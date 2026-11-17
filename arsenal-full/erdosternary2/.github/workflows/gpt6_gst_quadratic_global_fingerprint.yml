@@ -1,0 +1,32 @@
+name: GPT6 GST Quadratic Global All-Exponent Fingerprint
+on:
+  push:
+    branches: [gpt6/problem406-fourth-trit-discovery-20261029]
+    paths: [GSTWorldtraceQuadraticGlobalFingerprint.lean, GSTWorldtraceQuadraticBlockLift.lean, .github/workflows/gpt6_gst_quadratic_global_fingerprint.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  all-exponent-kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile exact GST Worldtrace and physical source dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectExistence
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceQuadraticBlockLift.olean GSTWorldtraceQuadraticBlockLift.lean
+      - name: Kernel-check all-exponent quadratic HGate fingerprint and exact survivor constraint
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceQuadraticGlobalFingerprint.lean 2>&1 | tee gst-quadratic-global.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' gst-quadratic-global.log
+          echo GST_QUADRATIC_GLOBAL_FINGERPRINT_KERNEL_PASS=1

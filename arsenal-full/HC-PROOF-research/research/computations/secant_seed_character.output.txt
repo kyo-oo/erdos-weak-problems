@@ -1,0 +1,20 @@
+Python: 3.12.14 exact standalone Laurent/Fraction engine
+PASS: one-pair oriented Fourier integral H(a,b)
+PASS: actual GRR rank beta_0 = 8*d
+PASS: beta_1 = -4*d*R - 2*(d-1)*theta
+PASS: Omega_1 wedge theta = 0
+PASS: Omega_1 absorbs the mixed normalization exponential
+PASS: Omega_-1 wedge theta = 0
+PASS: Omega_-1 absorbs the mixed normalization exponential
+PASS: kappa_3(E) = ambient*theta^3 - (d+1)/(4d)*(Omega_+ + Omega_-)
+PASS: all-w coefficient = -(d+1)/(2*d), nonzero for every d>0
+PASS: exceptional component is rational and nonzero; coefficients: 32
+Ambient normalized character coefficients j=0..6:
+0 8 * d
+1 0
+2 -1/4 * d + -1/2 + -1/4 * d^-1
+3 1/24 * d + 1/24 + -1/24 * d^-1 + -1/24 * d^-2
+4 -1/256 * d + 1/192 + 7/384 * d^-1 + 1/192 * d^-2 + -1/256 * d^-3
+5 1/3840 * d + -1/768 + -1/640 * d^-1 + 1/640 * d^-2 + 1/768 * d^-3 + -1/3840 * d^-4
+6 -1/73728 * d + 5/36864 + -11/368640 * d^-1 + -11/30720 * d^-2 + -11/368640 * d^-3 + 5/36864 * d^-4 + -1/73728 * d^-5
+RESULT: exact source-character identities; geometric sheaf construction and period transport are separate proof steps.

@@ -1,0 +1,44 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0682 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/inspect-green-exports.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 19:58:54 +0530  (bc4fd76)
+#    Last-commit  : 2026-08-16 19:58:54 +0530  (bc4fd76)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 19:58:54 +0530  bc4fd76  (ker07-dev)
+#        Inspect exact kernel-green theorem exports
+# ======================================================================
+
+name: Inspect kernel-green theorem exports
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/inspect-green-exports.yml]
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Print Erdos theorem declarations and nearby source
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== exact source hash ==='
+          sha256sum ErdosTernary2.lean
+          echo '=== erdos_ternary_2 declarations ==='
+          grep -nE '^(theorem|def) erdos_ternary_2' ErdosTernary2.lean || true
+          echo '=== universal declarations ==='
+          grep -nE '^(theorem|def) .*universal' ErdosTernary2.lean || true
+          echo '=== noTernaryTwo conclusions ==='
+          grep -nE 'noTernaryTwo \(2\^n\) = false|hasTernaryTwo \(2\^n\) = true' ErdosTernary2.lean || true
+          echo '=== declarations around each erdos theorem ==='
+          while IFS=: read -r n rest; do
+            start=$(( n > 3 ? n-3 : 1 )); end=$((n+28));
+            sed -n "${start},${end}p" ErdosTernary2.lean
+            echo '---'
+          done < <(grep -nE '^(theorem|def) erdos_ternary_2' ErdosTernary2.lean || true)

@@ -1,0 +1,42 @@
+================================================================================================
+S3 -- THE R3 STRIKE: THE GENERAL-INPUT MIXED SUPPLY (exact invariants)
+================================================================================================
+  ok    1  R3-A THE VANISHING at h=1, E-general (MT = GL2): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0}
+  ok    2  R3-A THE VANISHING at h=1, E = E[i] (MT = the Q(i)-torus): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0}
+  ok    3  R3-A THE VANISHING at h=2, E-general (MT = GL2): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0}
+  ok    4  R3-A THE VANISHING at h=2, E = E[i] (MT = the Q(i)-torus): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0}
+  ok    5  R3-B THE CM-MATCHED CONTROL at h=1: the intertwiner dim = 2 == 2h (the Hom/graph supply: the graphs of the Q(i)-endomorphisms, algebraic) -- THE STRATUM SENSITIVITY: general 0 -> matched 2
+  ok    6  R3-B THE CM-MATCHED CONTROL at h=2: the intertwiner dim = 4 == 2h (the Hom/graph supply: the graphs of the Q(i)-endomorphisms, algebraic) -- THE STRATUM SENSITIVITY: general 0 -> matched 4
+  ok    7  R3-C the mismatched control at K = Q(sqrt(-2)) vs E[i]: the intertwiners = 0 == 0 (no Hom between mismatched CM factors: the Weil-world's mixed sector is also empty)
+  ok    8  R3-C the mismatched control at K = Q(sqrt(-3)) vs E[i]: the intertwiners = 0 == 0 (no Hom between mismatched CM factors: the Weil-world's mixed sector is also empty)
+  ok    9  R3-C the mismatched control at K = Q(sqrt(-5)) vs E[i]: the intertwiners = 0 == 0 (no Hom between mismatched CM factors: the Weil-world's mixed sector is also empty)
+================================================================================================
+S4 -- THE R4 STRIKE: THE PHASE-GATE DICHOTOMY (the fold-birth pinned)
+================================================================================================
+  ok   10  R4-A the Weil matrix at tau = i: C^2 = -I verified exactly (the derived interpolation is internally consistent); the entry-rationality in the standard polarization: [True, True, True, True]
+  ok   11  R4-A the Weil matrix at tau = 2i: C^2 = -I verified exactly (the derived interpolation is internally consistent); the entry-rationality in the standard polarization: [True, True, True, True]
+  ok   12  R4-A the Weil matrix at tau = sqrt(-2): C^2 = -I verified exactly (the derived interpolation is internally consistent); the entry-rationality in the standard polarization: [False, False, False, False]
+  ok   13  R4-A the Weil matrix at tau = zeta_3 = (-1 + sqrt(-3))/2: C^2 = -I verified exactly (the derived interpolation is internally consistent); the entry-rationality in the standard polarization: [False, False, False, False]
+  ok   14  R4-A the Weil matrix at tau = (1 + sqrt(-3))/2: C^2 = -I verified exactly (the derived interpolation is internally consistent); the entry-rationality in the standard polarization: [False, False, False, False]
+  ok   15  R4-A the Weil matrix at tau = sqrt(-5) (the Heegner d=5 phase): C^2 = -I verified exactly (the derived interpolation is internally consistent); the entry-rationality in the standard polarization: [False, False, False, False]
+  ok   16  R4-A the Gaussian fold worlds (tau = i, 2i): the Weil operator IS Q-rational in the standard polarization (the fold supply)
+  ok   17  R4-A the naive-model receipt: tau = sqrt(-2) is NOT entry-rational in the STANDARD polarization -- the CM worlds' Weil operators are rational in the CM-ADAPTED structures (the receipt below)
+  ok   18  R4-A the CM-ADAPTED receipt at d=2: the Weil operator = the multiplication by sqrt(-2) = [[0,-2],[1,0]] in M_2(Q), squaring to -2 I: the CM worlds carry RATIONAL Weil operators in the adapted structures (the R32 fold worlds)
+  ok   19  R4-A the CM-ADAPTED receipt at d=3: the Weil operator = the multiplication by sqrt(-3) = [[0,-3],[1,0]] in M_2(Q), squaring to -3 I: the CM worlds carry RATIONAL Weil operators in the adapted structures (the R32 fold worlds)
+  ok   20  R4-A the CM-ADAPTED receipt at d=5: the Weil operator = the multiplication by sqrt(-5) = [[0,-5],[1,0]] in M_2(Q), squaring to -5 I: the CM worlds carry RATIONAL Weil operators in the adapted structures (the R32 fold worlds)
+  ok   21  R4-A the CM-ADAPTED receipt at d=7: the Weil operator = the multiplication by sqrt(-7) = [[0,-7],[1,0]] in M_2(Q), squaring to -7 I: the CM worlds carry RATIONAL Weil operators in the adapted structures (the R32 fold worlds)
+  ok   22  R4-A2 THE SYMBOLIC LAYER: the Weil entries s/(s^2-4q), -2/(s^2-4q), 2q/(s^2-4q) are NONCONSTANT rational functions of (s, q) (exact coefficient comparison: constant-equality forces s = 0 and 2q = 0) -- the transcendental inputs (algebraically independent (s, q)) carry NO rational Weil operator: THE RESIDUE'S RECEIPT
+  ok   23  R4-B the phase tau/tau-bar at tau = i: exact order = 2 == 2 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   24  R4-B the phase tau/tau-bar at tau = zeta_3: exact order = 3 == 3 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   25  R4-B the phase tau/tau-bar at tau = (1 + sqrt(-3))/2: exact order = 3 == 3 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   26  R4-B the phase tau/tau-bar at tau = sqrt(-2): exact order = 2 == 2 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   27  R4-B the phase tau/tau-bar at tau = sqrt(-5): exact order = 2 == 2 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   28  R4-B the phase tau/tau-bar at tau = 2i: exact order = 2 == 2 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   29  R4-B the phase tau/tau-bar at tau = 1 + i (the R40 order-4 world): exact order = 4 == 4 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   30  R4-B the phase tau/tau-bar at tau = 3 + sqrt(-3) (the R40 order-6 world): exact order = 6 == 6 (a root of unity: the CM/Weil fold world, the R40 collar orders)
+  ok   31  R4-B the infinite-order phase z = 7 + 4 sqrt(3): z^n != 1 for all n <= 12 (exact Z[sqrt(3)] arithmetic; |z| > 1: the order is infinite) -- the gate FIRES: the (p,p)-sensitive step is blocked at this input
+  ok   32  R4-B the symbolic layer: t^n - 1 is a NONZERO polynomial for every n = 1..24 (exact Z[t]): the root-of-unity locus is a proper algebraic subvariety of the phase circle -- the transcendental phases lie outside it
+  ok   33  R4-C THE PINNING: the fold-birth applicability locus = the finite-order-phase worlds (the CM/Weil census: orders 2/3/4/6 = the R40 collar; the CM-adapted rational Weil operators certified above) -- CLOSED by R35-R41 at the censuses + the R40 Weil family; the transcendental inputs: the phase off the root-of-unity locus (the symbolic receipt) AND the Weil entries nonconstant (R4-A2) -- the (p,p)-sensitive step BLOCKED: R4's irreducible content = the transcendental (p,p)-algebraicity: THE FINAL PINNING
+================================================================================================
+SUMMARY: 33 checks, 0 failures
+================================================================================================

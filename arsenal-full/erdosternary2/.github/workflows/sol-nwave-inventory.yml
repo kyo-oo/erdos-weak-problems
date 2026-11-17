@@ -1,0 +1,36 @@
+name: Sol NWave Inventory
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+      - name: Print exact NWave replacement surface
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '=== PUBLIC LIFT / STALE STEP6 ==='
+          grep -n -A90 -B25 'theorem gst_prefix_one_information_bad_descends_inline' ErdosTernary2.lean || true
+          echo '=== PHYSICAL X4 LIFT / CASCADE ==='
+          grep -n -A120 -B40 'gst_pure_lift_or_forced_cascade' ErdosTernary2.lean || true
+          grep -n -A80 -B30 'theorem even_case_a_mod3_2' ErdosTernary2.lean || true
+          echo '=== POWER TWO WAVE CONSUMER ==='
+          grep -n -A120 -B30 'theorem gst_power_two_wave_large' ErdosTernary2.lean || true
+          echo '=== RESIDUAL / SMALL SHIFT ==='
+          grep -n -A140 -B30 'def GSTSmallShiftNavigationLift' ErdosTernary2.lean || true
+          grep -n -A140 -B30 'def GSTResidualNavigationLift' ErdosTernary2.lean || true
+          echo '=== K1 / SEED / CUT / SYNCHRONIZER CANDIDATES ==='
+          grep -nE 'k1|k_1|cut.*k1|seed.*one|prefix.*one|young|residual|synchron|12102|badPair.*descend|witness_of_transportable|affine_product_state' ErdosTernary2.lean | tail -n 500 || true
+          echo '=== NWAVE EXPORTED THEOREMS ==='
+          grep -RniE 'theorem .*n_wave|theorem .*NWave|def .*NWave|terminal_strip_packet|strip_packet_iff|happy_iff|bad_trace_iff' --include='*.lean' . | head -n 600 || true

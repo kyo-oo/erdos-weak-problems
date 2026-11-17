@@ -1,0 +1,193 @@
+name = "ErdosTernary2"
+version = "0.1.0"
+defaultTargets = ["erdosternary2"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.33.0-rc2"
+
+[[lean_lib]]
+name = "GSTTactic"
+
+[[lean_lib]]
+name = "ErdosTernary2"
+
+[[lean_lib]]
+name = "GSTLocalClosure"
+roots = [
+  "GST2DMixedEmergence",
+  "GSTCanonicalCarryDynamics",
+  "GSTCanonicalSevenAxisBridge",
+  "GSTCanonicalTailLTE",
+  "GSTWorldtraceBlockLift",
+  "GSTWorldtraceCoeffStability",
+  "GSTProblem406ExceptionalSevenTower",
+  "GSTProblem406ExceptionalSevenTenBand",
+  "GSTProblem406ShortSeedPhysicalWave",
+  "GSTProblem406ArchimedeanPhysicalEscape",
+  "GSTProblem406SyndeticArchimedeanGate",
+  "GSTProblem406UniversalMultiplicativePair",
+  "GSTProblem406SevenStepUniversalPair",
+  "GSTCanonicalTailStateIso",
+  "GSTFinalPrefixOneStep6Infinite",
+  "GSTFinalPurePowerResidueTransplant",
+  "GSTProblem406BinaryOriginExponentScale",
+  "GSTProblem406TightPhysicalCut",
+  "GSTProblem406BinaryOriginBadSurvivor",
+  "GSTProblem406PhysicalCutGateEquivalence",
+  "GSTProblem406BinaryOriginSmallCases",
+  "GSTProblem406CarryEntropyBound",
+  "GSTProblem406DualValuationEntropy",
+  "GSTFourPowerThirdWave",
+  "GSTFourPowerAffineBadState",
+  "GSTFourPowerAffineChannelAutomaton",
+  "GSTFourPowerAffineClassifierBridge",
+  "GSTFourPowerAffineExponentPeel",
+  "GSTFourPowerAffineOrbit",
+  "GSTFourPowerAffinePeelClassifier",
+  "GSTFourPowerAffinePrefixIsometry",
+  "GSTFourPowerAffineRenormalizedOrbit",
+  "GSTFourPowerAffineTwoTritClassifier",
+  "GSTFourPowerDirectAdditionCarry",
+  "GSTFourPowerDirectChat2Application",
+  "GSTFourPowerDirectCreationMaster",
+  "GSTFourPowerDirectExistence",
+  "GSTFourPowerDirectExistenceNoAxiom",
+  "GSTFourPowerDirectExistenceProviderPipeline",
+  "GSTFourPowerDirectFailedRelocationState",
+  "GSTFourPowerDirectHappyBridge",
+  "GSTFourPowerHappyProvider",
+  "GSTFourPowerDirectNo22",
+  "GSTFourPowerDirectResidue",
+  "GSTFourPowerDirectResidue27",
+  "GSTFourPowerDirectResidue81",
+  "GSTFourPowerExponentTritObstruction",
+  "GSTFourPowerNo22Magnitude",
+  "GSTFourPowerOntologicalAdapter",
+  "GSTGraphV2CanonicalDescentOntology",
+  "GSTGraphV2CanonicalEscape",
+  "GSTGraphV2CanonicalInfiniteCycle",
+  "GSTGraphV2CanonicalNWave",
+  "GSTGraphV2CanonicalPhaseSteering",
+  "GSTGraphV2CanonicalPhaseWaveProbe",
+  "GSTGraphV2CanonicalRenormalization",
+  "GSTGraphV2CanonicalSheetTranslation",
+  "GSTGraphV2CanonicalSignedPrefixBridge",
+  "GSTGraphV2CanonicalTerminalExtinctionProbe",
+  "GSTGraphV2CoupledUFlux",
+  "GSTGraphV2CoupledUPhysicalBridge",
+  "GSTGraphV2DescentOntology",
+  "GSTGraphV2HandwrittenAnchoredCocycle",
+  "GSTGraphV2HandwrittenExponentialCascade",
+  "GSTGraphV2HandwrittenExponentialLTE",
+  "GSTGraphV2HandwrittenOmegaUBlock",
+  "GSTGraphV2InfiniteControl",
+  "GSTGraphV2InfiniteControllerBridge",
+  "GSTGraphV2NonEuclidean",
+  "GSTGraphV2PerfectPowerAncestry",
+  "GSTGraphV2PerfectPowerBlockCollision",
+  "GSTGraphV2PerfectPowerBlockProbe",
+  "GSTGraphV2Production",
+  "GSTGraphV2ProductionLaws",
+  "GSTGraphV2SeededPrefix",
+  "GSTGraphV2SixAdicOntologicalGeometry",
+  "GSTGraphV2SixAdicOntologicalGeometryLaws",
+  "GSTGraphV2SixAdicSynchronizedShadows",
+  "GSTGraphV2SixAdicUnitIsometry",
+  "GSTGraphV2UnifiedPowerRectangle",
+  "GSTGraphV2UnifiedVerticalTelescope",
+  "GSTInfiniteBadTransport",
+  "GSTInfiniteCollision",
+  "GSTInfiniteCoupledLedger",
+  "GSTInfiniteGateTransport",
+  "GSTPerfectPowerTailNavigation",
+  "GSTPrefixOneOntologicalEscape",
+  "GSTPrefixOneSeedCore",
+  "GSTPrefixOneU2DCollisionProof",
+  "GSTSeedOneShift",
+  "GSTStep6Close",
+  "GSTStep6CollisionKernel",
+  "GSTU2DAtomicBridge",
+  "GSTU2DCanonicalPhaseDensity",
+  "GSTU2DEventTransport",
+  "GSTU2DExactCrossingCharge",
+  "GSTU2DPureDivergence83",
+  "GSTU2DSharpCrossingBlock",
+  "GSTV2InfiniteCore",
+]
+
+[[lean_exe]]
+name = "erdosternary2"
+root = "Main"
+
+[[lean_lib]]
+name = "GSTInfinityBridgeAudit"
+
+[[lean_lib]]
+name = "GSTInfiniteDelayAudit"
+
+[[lean_lib]]
+name = "GSTOmegaAbsorbingZero"
+
+[[lean_lib]]
+name = "GSTCoupledControllerCountermodel"
+
+[[lean_lib]]
+name = "GSTCanonicalSeedCountermodel"
+
+# Mathbox: unconditionally compile the ACTUAL universal hGate contender.
+# No sorry imports and no axiom promotion are permitted.
+[[lean_lib]]
+name = "GSTProblem406DirectUniversalAttack"
+roots = ["GSTInfiniteFourPowerNavigation", "GSTFourPowerDirectExistenceFromHappy"]
+
+[[lean_lib]]
+name = "GST406BadValuationNoGo"
+roots = ["GSTProblem406BadValuationNoGo"]
+
+[[lean_lib]]
+name = "GST406PureUFiniteBoundary"
+roots = ["GSTProblem406TerminalUBoundary"]
+
+[[lean_lib]]
+name = "GST406PurePhaseMismatch"
+roots = ["GSTProblem406TruePowerPhaseMismatch"]
+
+[[lean_lib]]
+name = "GST406PrefixOneDyadicNoGo"
+roots = ["GSTProblem406PrefixOneDyadicNoGo"]
+
+[[lean_lib]]
+name = "GST406HGateExactOriginUpgrade"
+roots = ["GSTProblem406HGateExactOriginUpgrade"]
+
+# Mathbox GST: exact first-hit row-two orbit classification and sharp 6/7 split.
+[[lean_lib]]
+name = "GST406RowTwoFirstHit"
+roots = ["GSTProblem406RowTwoFirstHit"]
+
+# GST cross-branch verified all-horizon pure-power bad-prefix transport.
+[[lean_lib]]
+name = "GST406PurePowerNonlocalTransport"
+roots = ["GSTProblem406PurePowerNonlocalTransport"]
+
+# GST four-carry-state exact rational Perron contraction, no extra hGate.
+[[lean_lib]]
+name = "GST406RationalPerronBound"
+roots = ["GSTProblem406RationalPerronBound"]
+
+# GST exact three-state compression and carry-one cubic recurrence.
+[[lean_lib]]
+name = "GST406CarryCubicRecurrence"
+roots = ["GSTProblem406CarryCubicRecurrence"]
+
+# Mathbox GST: all-height generic cubic branch countermodels (origin-sensitive).
+[[lean_lib]]
+name = "GST406CubicBranchCountermodels"
+roots = ["GSTProblem406CubicBranchCountermodels"]
+
+# Original four-power eighth-trit HGate construction, isolated kernel target.
+[[lean_lib]]
+name = "GST406HGateEighthTrit"
+roots = ["GSTProblem406HGateEighthTrit"]

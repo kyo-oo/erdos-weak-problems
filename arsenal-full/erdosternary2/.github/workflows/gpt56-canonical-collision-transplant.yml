@@ -1,0 +1,88 @@
+name: GPT56 Canonical Collision Transplant
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - '.github/workflows/gpt56-canonical-collision-transplant.yml'
+      - 'GSTGraphV2PerfectPowerBlockCollision.lean'
+      - 'GSTGraphV2CanonicalSignedPrefixBridge.lean'
+      - 'GSTGraphV2CanonicalInfiniteCycle.lean'
+      - 'GSTGraphV2CanonicalEscape.lean'
+      - 'GSTGraphV2CanonicalTerminalExtinctionProbe.lean'
+      - 'GSTU2DCanonicalShiftedTerminalProbe.lean'
+  workflow_dispatch:
+
+concurrency:
+  group: gpt56-canonical-collision-transplant-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean and restore project cache
+        uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Materialize collision import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          root = Path("GSTGraphV2PerfectPowerBlockCollision.lean")
+          build = Path(".lake/build/lib/lean")
+          rx = re.compile(r"^\s*import\s+(.+?)\s*$")
+          order, done, stack = [], set(), []
+          def path_of(m): return Path(*m.split(".")).with_suffix(".lean")
+          def imports(path):
+              out = []
+              for raw in path.read_text(encoding="utf-8").splitlines():
+                  match = rx.match(raw.split("--",1)[0].rstrip())
+                  if match: out.extend(match.group(1).split())
+              return out
+          def visit(m):
+              if m in done: return
+              path = path_of(m)
+              if not path.exists(): return
+              if m in stack: raise SystemExit("LOCAL_IMPORT_CYCLE="+" -> ".join(stack+[m]))
+              stack.append(m)
+              for d in imports(path): visit(d)
+              stack.pop(); done.add(m); order.append((m,path))
+          for m in imports(root): visit(m)
+          build.mkdir(parents=True, exist_ok=True)
+          for m,path in order:
+              out = build.joinpath(*m.split(".")).with_suffix(".olean")
+              out.parent.mkdir(parents=True, exist_ok=True)
+              if not out.exists():
+                  print("COMPILE",m,flush=True)
+                  subprocess.run(["lake","env","lean","-o",str(out),str(path)],check=True)
+          PY
+      - name: Compile transplanted collision
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTGraphV2PerfectPowerBlockCollision.lean 2>&1 |
+            tee canonical-collision-transplant.log
+      - name: Trust audit
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -nE '(^|[^A-Za-z0-9_])(sorry|admit|native_decide|unsafe)([^A-Za-z0-9_]|$)|^[[:space:]]*axiom[[:space:]]'             GSTGraphV2PerfectPowerBlockCollision.lean             GSTGraphV2CanonicalSignedPrefixBridge.lean             GSTGraphV2CanonicalEscape.lean; then
+            echo FORBIDDEN_TRUST_EXPANSION=1
+            exit 1
+          fi
+          if [[ -f canonical-collision-transplant.log ]] &&
+             grep -Fq 'sorryAx' canonical-collision-transplant.log; then
+            echo FORBIDDEN_SORRYAX=1
+            exit 1
+          fi
+          echo CANONICAL_COLLISION_TRANSPLANT_TRUST_AUDIT_GREEN=1

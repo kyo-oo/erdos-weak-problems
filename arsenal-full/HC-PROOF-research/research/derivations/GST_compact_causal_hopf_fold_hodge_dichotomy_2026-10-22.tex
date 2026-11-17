@@ -1,0 +1,333 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\title{GST: Compact causal dimensional folds, Hodge bifurcation, and full-arity Chern threshold}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A direct test of the owner's binary spatial conjecture on EVERY original
+smooth projective complex variety X. We construct TWO smooth, compact complex
+realized worlds of the SAME emergent complex dimension, one always admitting
+pure rational Hodge structures, and the other failing even the weight-one
+Hodge parity condition. We then derive an exact all-X equation for every
+rational Betti number and an all-fold-arity threshold controlling when
+cohomological classes from the original X survive or are annihilated.
+Neither an auxiliary singular curve nor an arbitrary Hodge-label operator is
+used. The difference is a real change in causal identification topology.
+\end{abstract}
+
+\section{Original world, arbitrary fold arity, and actual geometry}
+Take any nonempty connected smooth projective complex X of dimension d,
+an ample algebraic line bundle L, and the nonzero-or-zero (depending on degree)
+class h=c_1(L). Fix arbitrary integers r>=2 and 0<=k<=r.
+Define E_{r,k}=L^{\oplus k}\oplus\mathcal O_X^{\oplus(r-k)}.
+The index r is causal fold arity, whereas k is the number of independently
+line-twisted directions; neither is assumed to equal d.
+For each real 0<q<1, define the following actual holomorphic constructions:
+\[
+ \boxed{\mathcal P_{r,k}(X)=\mathbb P(\mathcal O_X\oplus E_{r,k}),
+ \qquad
+ \mathcal H_{r,k}(X)=
+ (E_{r,k}\setminus 0_X)/\langle v\mapsto qv\rangle.} \tag{1}
+\]
+Both are smooth compact complex spaces of complex dimension d+r.
+The first is smooth projective; the second is a holomorphic
+fiber bundle with compact Hopf manifold fiber
+$(\mathbb C^r\setminus\{0\})/q^{\mathbb Z}$.
+The contracting action is free and properly discontinuous on the
+nonzero vector bundle; a radial fundamental annulus and compactness
+of X establish quotient compactness. This is not a nonholomorphic
+change of coordinates on an unchanged X.
+
+The design source in GST is the dimensionless GeneralSpace point/path ontology,
+the arbitrary-arity world-birth closure in GSTGraphV2SelfExpandingCosmology,
+the unbounded causal-cell hierarchy in GSTGraphV2UnboundedHigherCausality,
+and the signed graded birth interface in GSTGradedWorldAlgebra. Here the
+geometric realization is explicit; the existing Lean types are not
+claimed to formalize the analytic bundle quotient.
+
+\section{The requested precise Hodge/non-Hodge bifurcation}
+Choose any smooth Hermitian norm on E. The map taking a nonzero v to
+its unit direction and logarithmic radius identifies the quotient
+topologically and smoothly with
+\[
+ \boxed{\mathcal H_{r,k}(X)\cong S(E_{r,k})\times S^1.}\tag{2}
+\]
+The original complex rank r gives sphere fiber S^{2r-1};
+it is simply connected for every r>=2. The homotopy sequence of this
+sphere bundle therefore gives
+$\pi_1(S(E_{r,k}))\cong\pi_1(X)$.
+Consequently, with rational Betti numbers:
+\[
+ \boxed{b_1(\mathcal P_{r,k}(X))=b_1(X),\qquad
+ b_1(\mathcal H_{r,k}(X))=b_1(X)+1.}\tag{3}
+\]
+
+\begin{theorem}[Genuine all-X non-Hodge world birth]
+For every connected smooth projective complex X, every integer r>=2,
+and every 0<=k<=r, the world $\mathcal P_{r,k}(X)$ admits its canonical
+pure rational Hodge structure in each degree, whereas the smooth
+compact complex world $\mathcal H_{r,k}(X)$ admits NO pure rational
+weight-one Hodge structure on its first rational cohomology.
+\end{theorem}
+\begin{proof}
+Smooth projective complex X is Kahler, so $b_1(X)=2h^{1,0}(X)$ is even.
+The projective bundle is smooth projective and the projective bundle
+formula preserves $H^1(X)$.
+By (2), $b_1$ in the Hopf quotient is odd. A pure rational Hodge
+structure of weight one has conjugate summands $H^{1,0}$ and $H^{0,1}$
+of equal dimension, forcing even rank. Thus the odd-dimensional
+rational cohomology of the Hopf quotient cannot carry such a structure.
+In particular, it is non-Kahler.
+\end{proof}
+The Hopf outcome is a genuine geometric failure of the pure-Hodge
+weight-one condition, NOT merely a positive or negative MHS weight gap:
+a compact nonalgebraic complex manifold is not automatically equipped
+with Deligne's algebraic mixed-Hodge filtration. Nor can the unchanged
+original smooth projective X cease to be Hodge. It is the constructed
+new world that fails the Hodge condition.
+
+\section{The full-arity causal Chern threshold and arbitrary targets}
+By the Whitney product formula:
+\[
+ c(E_{r,k})=(1+h)^k,\qquad
+ \boxed{c_r(E_{r,k})=
+ \begin{cases}0 & k<r,\\h^r & k=r.\end{cases}}\tag{4}
+\]
+Let $\pi:\mathcal H_{r,k}(X)\to X$ be the holomorphic bundle map.
+The oriented real rank-2r unit-sphere bundle has Euler class
+$e(E_{\mathbb R})=c_r(E)$, and its exact rational Gysin segment is
+\[
+ H^{j-2r}(X)\xrightarrow{c_r(E)\smile-}H^j(X)
+  \xrightarrow{\pi_S^*}H^j(S(E)).
+\]
+The second pullback $H^j(S(E))\to H^j(S(E)\times S^1)$ is injective
+by restricting along a chosen circle point. Thus in every degree:
+\[
+ \boxed{\ker[\pi^*:H^j(X,\mathbb Q)\to
+ H^j(\mathcal H_{r,k}(X),\mathbb Q)]
+ =c_r(E_{r,k})\smile H^{j-2r}(X,\mathbb Q).}\tag{5}
+\]
+This has TWO exact regimes. When $k<r$, the bundle E has a trivial
+direct summand and thus an actual nowhere-zero holomorphic section;
+its q-orbit defines $s:X\to\mathcal H$, with $\pi s=id_X$.
+Hence $s^*\pi^*=id$ for EVERY degree and EVERY original rational
+Hodge input $\alpha$, including nonalgebraic ones (without assuming any).
+For $k=r$, the kernel is precisely the full image of $h^r$ cup product.
+If $2\le r\le d$, ampleness ensures $h^r\ne0$ since
+$\int_Xh^d>0$, so the genuine original-X algebraic Hodge class
+$h^r$ is destroyed by this topology-changing pullback, but remains
+nonzero under projective-bundle pullback:
+\[
+ \boxed{\pi_{\mathcal H_{r,r}}^*h^r=0,\qquad
+ \pi_{\mathcal P_{r,r}}^*h^r\ne0.}\tag{6}
+\]
+The constructed compact Hopf world is not falsely declared a
+smooth-projective counterexample to the rational Hodge conjecture.
+For $r>d$ the top Chern class vanishes for dimension reasons;
+Hodge failure persists by (3), but no base class is annihilated.
+
+\section{Uniform FULL Betti-spectrum equation for arbitrary original X}
+Write $b_j=\dim_{\mathbb Q}H^j(X,\mathbb Q)$, setting negative-index
+groups to zero, and introduce the true original-X multiplication ranks
+\[
+ a_j^{r,k}=\operatorname{rank}_{\mathbb Q}
+ [c_r(E_{r,k})\smile-:H^{j-2r}(X)\to H^j(X)],\quad
+ R_{r,k}(t)=\sum_j a_j^{r,k}t^j,\quad B_X(t)=\sum_j b_jt^j.
+\]
+The Gysin long exact sequence splits as short exact sequences of
+rational vector spaces, and gives
+$b_j(S(E))=b_j+b_{j-2r+1}-a_j^{r,k}-a_{j+1}^{r,k}$.
+Therefore the two entire-world, all-dimensional realization equations are:
+\[
+ \boxed{\begin{aligned}
+ B_{\mathrm{pure}}(t)
+   &=B_X(t)\sum_{i=0}^rt^{2i},\\
+ B_{\mathrm{break}}(t)
+   &=(1+t)\left[(1+t^{2r-1})B_X(t)
+        -(1+t^{-1})R_{r,k}(t)\right],\\
+ R_{r,k}(t)&=0\quad(k<r),\\
+ R_{r,r}(t)&=\sum_j\operatorname{rank}(h^r\smile-:
+ H^{j-2r}(X)\to H^j(X))t^j .
+ \end{aligned}}\tag{7}
+\]
+The apparent t^{-1} causes no negative powers because a_j=0
+for j<2r. These are actual cohomology results, not guessed
+Hodge polynomials on a non-Kahler manifold.
+
+\section{Independent exact CP^d check and all-arity formula}
+For $X=\mathbb P^d$, $L=\mathcal O(1)$, put $m=\min(d,r-1)$,
+$M=\max(2d+1,2r-1)$. Since
+$H^*(X,\mathbb Q)=\mathbb Q[h]/(h^{d+1})$, Gysin yields:
+\[
+ \boxed{\begin{aligned}
+ B_{\mathrm{pure}}
+ &=\left(\sum_{i=0}^d t^{2i}\right)
+   \left(\sum_{i=0}^r t^{2i}\right),\\
+ B_{\mathrm{break},k<r}
+ &=(1+t)(1+t^{2r-1})\sum_{i=0}^d t^{2i},\\
+ B_{\mathrm{break},k=r}
+ &=(1+t)(1+t^M)\sum_{i=0}^{m}t^{2i}.
+ \end{aligned}}\tag{8}
+\]
+For d=r=2 the rank threshold is visible without any approximation:
+\[
+ \begin{aligned}
+ B_{\mathrm{pure}}&=1+2t^2+3t^4+2t^6+t^8,\\
+ B_{\mathrm{break},k=1}
+ &=1+t+t^2+2t^3+2t^4+2t^5+t^6+t^7+t^8,\\
+ B_{\mathrm{break},k=2}
+ &=1+t+t^2+t^3+t^5+t^6+t^7+t^8.
+ \end{aligned}\tag{9}
+\]
+The Hopf outcomes have b1=1 and Euler characteristic zero,
+while the projective output has b1=0 and Euler characteristic 9.
+The attached exact Wolfram script enumerates 297 (d,r,k)
+tuples at d=0..8, r=2..7, k=0..r and audits polynomial
+duality, parity, Euler characteristic and the Chern threshold.
+
+
+\section{Arbitrary-bundle GST parity law and canonical Chow-defect reflection}
+
+The preceding split-bundle occupancy test is a special case of a stronger
+all-original-$X$ law which does not require a globally chosen trivial
+summand or an actual holomorphic section.
+
+\begin{theorem}[Universal vector-bundle causal parity and exact Euler kernel]
+Let $X$ be any connected smooth projective complex variety and let
+$E$ be \emph{any} algebraic complex vector bundle of rank $r\geq2$.
+Put
+\[
+  P_E=\mathbb P(\mathcal O_X\oplus E),\qquad
+  H_E=(E\setminus0_X)/q^{\mathbb Z},\quad 0<q<1.
+\]
+Both are smooth compact complex manifolds of dimension $\dim X+r$;
+$P_E$ is projective, whereas $H_E$ has odd first Betti number. For
+every $j\geq0$ the actual rational cohomology map satisfies
+\[
+ \boxed{\ker[H^j(X,\mathbb Q)\xrightarrow{\pi_H^*}
+              H^j(H_E,\mathbb Q)]
+      = c_r(E)\cup H^{j-2r}(X,\mathbb Q).}                    \tag{10}
+\]
+In particular, \emph{the entire graded original-$X$ rational
+cohomology survives} under $\pi_H^*$ if and only if
+$c_r(E)=0$ in $H^{2r}(X,\mathbb Q)$.
+\end{theorem}
+\begin{proof}
+A smooth Hermitian metric provides a diffeomorphism
+$H_E\simeq S(E)\times S^1$ by unit direction and logarithmic radius
+modulo $\log q$. Because $r\ge2$, the sphere fiber $S^{2r-1}$
+of $S(E)\to X$ is simply connected, giving
+$b_1(H_E)=b_1(X)+1$, which is odd.
+The Gysin exact sequence of the oriented real sphere bundle
+$S(E)\to X$ has connecting multiplication by its Euler class
+$c_r(E)$. The product with $S^1$ induces an injective map from
+$H^*(S(E),\mathbb Q)$, which proves (10).
+If $c_r(E)=0$, every displayed kernel vanishes. Conversely, if all
+pullbacks are injective, take $j=2r$ and the unit class
+$1\in H^0(X,\mathbb Q)$: exactness forces $c_r(E)=0$.
+\end{proof}
+
+The zero Euler threshold is strictly broader than the old
+$k<r$ \emph{trivial-summand} sufficient condition. For example,
+$X=\mathbb P^1$, $E=\mathcal O(-1)^{\oplus2}$ has
+$c_2(E)=0$ for dimensional reasons and $H^0(X,E)=0$.
+Nevertheless $\pi_H^*$ is injective in every rational cohomological
+degree, while $b_1(H_E)=1$. This does not require any nonzero
+holomorphic vector-bundle section.
+
+\begin{theorem}[Canonical algebraicity defect under projective folds]
+Let $E$ be any algebraic rank-$r$ bundle as above and
+$P_E=\mathbb P(\mathcal O_X\oplus E)$, with projection $\pi_P$
+and $\xi=c_1(\mathcal O_{P_E}(1))$. Write
+\[
+ \mathrm{Hdg}^p_{\mathbb Q}(X)
+   =H^{2p}(X,\mathbb Q)\cap H^{p,p}(X),\quad
+ D^p(X)=
+  \frac{\mathrm{Hdg}^p_{\mathbb Q}(X)}
+       {\operatorname{im}\bigl(
+             CH^p(X)_{\mathbb Q}
+          \xrightarrow{\mathrm{cl}_X^{\mathrm{can}}}
+             H^{2p}(X,\mathbb Q)\bigr)}.
+\]
+As rational vector spaces, naturally relative to $E$,
+\[
+ \boxed{D^p(P_E)\ \cong\
+   \bigoplus_{i=0}^{r}D^{p-i}(X).}                          \tag{11}
+\]
+Consequently the full rational Hodge conjecture holds for $P_E$
+in every codimension if and only if it holds for $X$ in every
+codimension. More sharply, for every rational $(p,p)$ class
+$\alpha$ on $X$,
+\[
+  \pi_P^*\alpha\in\operatorname{im}(\mathrm{cl}^{\mathrm{can}}_{P_E})
+  \quad\Longleftrightarrow\quad
+  \alpha\in\operatorname{im}(\mathrm{cl}^{\mathrm{can}}_X).
+                                                                  \tag{12}
+\]
+\end{theorem}
+\begin{proof}
+The algebraic projective-bundle formula and its compatible
+rational Hodge realization give respective direct sums
+\[
+ \begin{aligned}
+ CH^p(P_E)_{\mathbb Q}
+   &\cong\bigoplus_{i=0}^{r}
+      \xi^i\pi_P^* CH^{p-i}(X)_{\mathbb Q},\\
+ \mathrm{Hdg}^p_{\mathbb Q}(P_E)
+   &\cong\bigoplus_{i=0}^{r}
+      \xi^i\pi_P^*\mathrm{Hdg}^{p-i}_{\mathbb Q}(X).
+ \end{aligned}
+\]
+Terms outside actual codimension range are zero. The canonical
+Betti cycle-class map acts componentwise by naturality and the
+fact that $\xi$ is algebraic. Taking quotients yields (11).
+
+For an explicit original-$X$ return, the quotient
+$\mathcal O_X\oplus E\twoheadrightarrow\mathcal O_X$ gives a
+regular algebraic section $s:X\hookrightarrow P_E$ with
+$s^*\pi_P^*=\mathrm{id}$ and $s^*\xi=0$.
+If $\mathrm{cl}^{\mathrm{can}}_{P_E}(Z)=\pi_P^*\alpha$,
+the genuine Chow pullback $s^*Z\in CH^p(X)_{\mathbb Q}$ has
+$\mathrm{cl}_X^{\mathrm{can}}(s^*Z)=\alpha$.
+Conversely any representative of $\alpha$ pulls back to one
+on $P_E$. This proves (12).
+\end{proof}
+
+\paragraph{Exact bearing on universal rational Hodge algebraicity.}
+The projective fold retains the entire original-$X$ canonical
+Chow/Hodge defect (11), whereas the Hopf fold loses pure
+weight-one Hodge structure irrespective of that defect.
+Therefore these established two-world geometric properties cannot
+alone force $D^p(X)=0$: doing so requires an actual new
+cycle-class surjectivity theorem, or an independently constructed
+algebraic cycle on $P_E$ for the prescribed pulled-back target.
+If such a cycle were produced without assuming an original-$X$
+preimage, the explicit section pullback in (12) would immediately
+deliver the requested rational Chow source on the \emph{same}
+original $X$. No universal source is presumed in this theorem.
+
+\section{Mathematical interpretation and limits}
+The requested binary alternative has a precise positive realization:
+a topology-changing causal dilation produces a smooth compact,
+genuinely non-Hodge complex world from every original X, for
+every emergent rank r>=2. A projective completion of the same
+bundle data instead necessarily has pure Hodge structure.
+The change in all original cohomological degrees is governed
+by (5) and the FULL spectral equation (7), not by naming
+a single Hodge class or an auxiliary product direction.
+This classifies these TWO concrete realization families, not
+every imaginable GST world birth.
+
+No source for an arbitrary prescribed rational (p,p) Hodge class
+on the UNCHANGED original smooth projective X is inferred.
+The geometric proof is mathematics-first and self-reviewed;
+the current existing Lean files supply ontology and graded
+interfaces but do not yet formalize compact complex Hopf
+quotients or the Gysin realization. No Lean compilation is
+claimed for this analytic theorem.
+\end{document}

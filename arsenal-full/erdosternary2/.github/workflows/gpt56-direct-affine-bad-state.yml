@@ -1,0 +1,91 @@
+name: GPT56 Direct Affine Bad-State Verify
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'GSTFourPowerDirectResidue.lean'
+      - 'GSTFourPowerDirectResidue27.lean'
+      - 'GSTFourPowerDirectResidue81.lean'
+      - 'GSTFourPowerExponentTritObstruction.lean'
+      - 'GSTFourPowerDirectExistence.lean'
+      - 'GSTFourPowerExactExponentPeriod.lean'
+      - 'GSTCanonicalTailStateIso.lean'
+      - 'GSTFourPowerAffineOrbit.lean'
+      - 'GSTFourPowerAffineExponentPeel.lean'
+      - 'GSTFourPowerAffineBadState.lean'
+      - 'GSTFourPowerAffineChannelAutomaton.lean'
+      - 'GSTFourPowerAffineClassifierBridge.lean'
+      - 'GSTFourPowerAffinePeelClassifier.lean'
+      - 'GSTFourPowerAffinePrefixIsometry.lean'
+      - '.github/workflows/gpt56-direct-affine-bad-state.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  affine-bad-state-kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Prepare output directory
+        run: mkdir -p .lake/build/lib/lean
+      - name: Compile fresh arithmetic prerequisites
+        shell: bash
+        run: |
+          set -euo pipefail
+          for module in \
+            GSTCanonicalTailStateIso \
+            GSTFourPowerDirectResidue \
+            GSTFourPowerDirectResidue27 \
+            GSTFourPowerDirectResidue81 \
+            GSTFourPowerExponentTritObstruction \
+            GSTFourPowerDirectExistence \
+            GSTFourPowerExactExponentPeriod
+          do
+            lake env lean -o ".lake/build/lib/lean/${module}.olean" "${module}.lean" 2>&1 | tee "${module}.log"
+            ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' "${module}.log"
+          done
+      - name: Compile affine orbit
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffineOrbit.olean GSTFourPowerAffineOrbit.lean 2>&1 | tee affine-orbit.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-orbit.log
+      - name: Compile affine exponent peel
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffineExponentPeel.olean GSTFourPowerAffineExponentPeel.lean 2>&1 | tee affine-peel.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-peel.log
+      - name: Compile affine bad state
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffineBadState.olean GSTFourPowerAffineBadState.lean 2>&1 | tee affine-bad.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-bad.log
+      - name: Compile affine channel automaton
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffineChannelAutomaton.olean GSTFourPowerAffineChannelAutomaton.lean 2>&1 | tee affine-channel.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-channel.log
+      - name: Compile affine classifier bridge
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffineClassifierBridge.olean GSTFourPowerAffineClassifierBridge.lean 2>&1 | tee affine-bridge.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-bridge.log
+      - name: Compile affine peel classifier
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffinePeelClassifier.olean GSTFourPowerAffinePeelClassifier.lean 2>&1 | tee affine-peel-classifier.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-peel-classifier.log
+      - name: Compile affine prefix isometry
+        run: |
+          set -euo pipefail
+          lake env lean -o .lake/build/lib/lean/GSTFourPowerAffinePrefixIsometry.olean GSTFourPowerAffinePrefixIsometry.lean 2>&1 | tee affine-prefix-isometry.log
+          ! grep -E 'declaration uses .sorry.|sorryAx|unknown identifier|unknown module prefix|unsolved goals|error:' affine-prefix-isometry.log
+      - name: Direct affine audit marker
+        run: echo DIRECT_AFFINE_CLASSIFIER_STACK_GREEN=1

@@ -1,0 +1,47 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0684 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/inspect-spacetime-candidate.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 20:05:14 +0530  (3fee3db)
+#    Last-commit  : 2026-08-16 20:22:19 +0530  (6688795)
+#    Total commits: 4
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/4] 2026-08-16 20:05:14 +0530  3fee3db  (ker07-dev)
+#        Inspect exact historical spacetime bridge definitions
+# [02/4] 2026-08-16 20:06:08 +0530  ddb3884  (ker07-dev)
+#        Inspect full historical spacetime closure block
+# [03/4] 2026-08-16 20:12:07 +0530  f603a0d  (ker07-dev)
+#        Inspect tight historical spacetime closure window
+# [04/4] 2026-08-16 20:22:19 +0530  6688795  (ker07-dev)
+#        Inspect transfer and echo lemmas before spacetime leaf
+# ======================================================================
+
+name: Inspect historical spacetime candidate
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/inspect-spacetime-candidate.yml]
+
+jobs:
+  inspect:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Materialize historical candidate and print transfer/echo layer
+        shell: bash
+        run: |
+          set -euo pipefail
+          HIST=4669bb5e87587f04a49aeabfbce1083eecd8f975
+          git worktree add /tmp/hist "$HIST"
+          cd /tmp/hist
+          bash scripts/materialize-source.sh
+          sha256sum ErdosTernary2.lean
+          echo '=== HEADERS 7900-8305 ==='
+          sed -n '7900,8305p' ErdosTernary2.lean | grep -nE '^(theorem|lemma|def|structure|inductive)|Paradox|Transfer|Echo|Occurrence|Mirror|Active' || true
+          echo '=== FULL 8050-8305 ==='
+          sed -n '8050,8305p' ErdosTernary2.lean

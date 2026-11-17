@@ -1,0 +1,22 @@
+name: GPT6 GST Fixed-Core 566 Certificate
+on:
+  push:
+    branches:
+      - gpt6/erdos-worldtrace-block-lift-20261029
+    paths:
+      - scripts/gpt6_fixed_core_certificate.py
+      - .github/workflows/gpt6_fixed_core_certificate.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact-finite-check:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Exact GST coefficient and all low-scale cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/gpt6_fixed_core_certificate.py | tee gst-fixed-core-receipt.txt
+          grep -Fq 'GST_FIXED_CORE_CERTIFICATE_PASS=1' gst-fixed-core-receipt.txt

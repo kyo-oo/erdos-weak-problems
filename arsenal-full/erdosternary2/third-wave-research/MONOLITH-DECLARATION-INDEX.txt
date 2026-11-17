@@ -1,0 +1,986 @@
+147:def noTernaryTwo (n : Nat) : Bool :=
+157:def noTernaryTwoStruct : Nat → Nat → Bool
+164:theorem noTernaryTwo_eq_struct (n k : Nat) (hk : n + 1 ≤ k) :
+194:def hasTernaryTwo (n : Nat) : Bool :=
+204:def hasTernaryTwoStruct : Nat → Nat → Bool
+214:def hasD2AtPos (R p : Nat) : Bool :=
+218:def carryAtPos (R p : Nat) : Nat :=
+223:theorem carryAtPos_bound (R p : Nat) : carryAtPos R p < 4 := by
+232:theorem carryAtPos_one_mod3_0 (R : Nat) (h : R % 3 = 0) : carryAtPos R 1 = 0 := by
+237:theorem carryAtPos_one_mod3_1 (R : Nat) (h : R % 3 = 1) : carryAtPos R 1 = 1 := by
+242:theorem carryAtPos_one_mod3_2 (R : Nat) (h : R % 3 = 2) : carryAtPos R 1 = 2 := by
+260:theorem gst_decide_survival (R : Nat) (h : R % 3 = 2) :
+267:def c : Nat → Nat := fun j =>
+274:def powMod (b e m : Nat) : Nat :=
+279:theorem powMod_eq (b e m : Nat) (hm : 0 < m) : powMod b e m = b^e % m := by
+288:theorem mul_pow_local (a b n : Nat) : (a * b)^n = a^n * b^n := by
+293:theorem cubic_expansion (a : Nat) : (1 + a)^3 = 1 + 3*a + 3*a*a + a*a*a := by
+305:theorem c_recursion (s : Nat) (hs : 1 ≤ s) :
+314:theorem lte_cubic_step (s : Nat) (hs : 1 ≤ s) :
+383:theorem lte_identity (j : Nat) (hj : 1 ≤ j) :
+408:theorem pow3_mod9 (j : Nat) (hj : 2 ≤ j) : 3^j % 9 = 0 := by
+413:theorem mul_pow3_mod9 (j k : Nat) (hj : 2 ≤ j) : (3^j * k) % 9 = 0 := by
+416:theorem add_mod_drop2 (x a b m : Nat) (ha : a % m = 0) (hb : b % m = 0) :
+425:theorem c_mod9_all : ∀ k : Nat, c (k+1) % 9 = 7 := by
+436:theorem c_mod9 (j : Nat) (hj : 1 ≤ j) : c j % 9 = 7 := by
+440:theorem mod3_eq_mod9_mod3 (n : Nat) : n % 3 = (n % 9) % 3 := by
+447:theorem c_mod3 (j : Nat) (hj : 1 ≤ j) : c j % 3 = 1 := by
+451:theorem three_mul_three_pow (k : Nat) : 3 * 3^k = 3^(k+1) := by
+454:theorem add_mod_drop (a x m : Nat) (hx : x % m = 0) : (a + x) % m = a % m := by
+460:theorem binom_mod_sq_local (b x : Nat) : ∃ q : Nat, (1 + x)^b = 1 + b * x + x^2 * q := by
+473:theorem cascade_universal
+512:theorem cascade_universal_mod9 (s b : Nat) (hs : 1 ≤ s) (hb : 1 ≤ b) (hb3 : b % 3 ≠ 0) :
+556:theorem two_pow_even_mod3 (m : Nat) (hm : m % 2 = 0) : (2^m) % 3 = 1 := by
+565:theorem erdos_ternary_2_odd_universal :
+581:theorem mod_mod_mul (n a b : Nat) (_ha : 0 < a) : (n % (a * b)) % a = n % a :=
+584:theorem mul_add_div_lemma (k r d : Nat) (hpos : 0 < d) : (d * k + r) / d = k + r / d := by
+591:theorem div_mod_mul_lemma (n a b : Nat) (ha : 0 < a) (hb : 0 < b) :
+626:theorem three_pow_pos_lemma (k : Nat) : 0 < 3^k := by
+631:theorem hasTernaryTwo_zero_lemma : hasTernaryTwo 0 = false := by
+634:theorem one_pow_local (n : Nat) : (1 : Nat)^n = 1 := by
+639:theorem mod_has_two (k : Nat) :
+673:theorem has_two_imp_not_no_two (n : Nat) : hasTernaryTwo n = true → noTernaryTwo n = false := by
+687:theorem div_add_mod_subst (a : Nat) (ha : a % 3 = 2) : a = 3 * (a / 3) + 2 := by
+692:theorem four_pow_mod9_of_2 (a : Nat) (ha : a % 3 = 2) : (4^a) % 9 = 7 := by
+701:theorem four_pow_3b_mod27 (b : Nat) (hb : b % 3 = 2) : (4^(3*b)) % 27 = 19 := by
+709:theorem four_pow_mod27_of_7 (a : Nat) (ha : a % 9 = 7) : (4^a) % 27 = 22 := by
+716:theorem four_pow_3b_mod81_of_1 (b : Nat) (hb : b % 9 = 1) : (4^(3*b)) % 81 = 64 := by
+723:theorem seven_has_two : hasTernaryTwo 7 = true := by
+726:theorem nineteen_has_two : hasTernaryTwo 19 = true := by
+730:theorem twenty_two_has_two : hasTernaryTwo 22 = true := by
+734:theorem sixty_four_has_two : hasTernaryTwo 64 = true := by
+740:theorem even_case_a_mod3_2 (a : Nat) (ha : a % 3 = 2) : hasTernaryTwo (4^a) = true := by
+744:theorem even_case_a_0_div3_2 (a : Nat) (ha0 : a % 3 = 0) (ha23 : (a/3) % 3 = 2) :
+750:theorem even_case_a_7_mod9 (a : Nat) (ha : a % 9 = 7) : hasTernaryTwo (4^a) = true := by
+754:theorem even_case_a_0_div3_1_mod9 (a : Nat) (ha0 : a % 3 = 0) (ha19 : (a/3) % 9 = 1) :
+761:theorem exception_n0 : noTernaryTwo (2^0) = true := by
+765:theorem exception_n2 : noTernaryTwo (2^2) = true := by
+770:theorem exception_n8 : noTernaryTwo (2^8) = true := by
+779:theorem erdos_ternary_2_verified_9 : noTernaryTwo (2^9) = false := erdos_ternary_2_odd_universal 9 (by decide) (by decide : 9 % 2 = 1)
+780:theorem erdos_ternary_2_verified_10 : noTernaryTwo (2^10) = false := has_two_imp_not_no_two (4^5) (even_case_a_mod3_2 5 (by decide : 5 % 3 = 2))
+783:theorem erdos_ternary_2_odd (n : Nat) (hn : 9 ≤ n) (hnodd : n % 2 = 1) :
+786:theorem two_pow_even_eq_four (n : Nat) (hneven : n % 2 = 0) : 2^n = 4^(n/2) := by
+794:theorem erdos_ternary_2_even_mod3_2 (n : Nat) (_hn : 10 ≤ n) (hneven : n % 2 = 0)
+799:theorem erdos_ternary_2_even_6_mod9 (n : Nat) (_hn : 10 ≤ n) (hneven : n % 2 = 0)
+806:theorem erdos_ternary_2_even_7_mod9 (n : Nat) (_hn : 10 ≤ n) (hneven : n % 2 = 0)
+811:theorem erdos_ternary_2_even_3_mod27 (n : Nat) (_hn : 10 ≤ n) (hneven : n % 2 = 0)
+820:theorem erdos_ternary_2_conjecture_odd :
+824:theorem erdos_ternary_2_conjecture_even_mod3_2 :
+829:theorem erdos_ternary_2_conjecture_even_6_mod9 :
+834:theorem erdos_ternary_2_conjecture_even_7_mod9 :
+839:theorem erdos_ternary_2_conjecture_even_3_mod27 :
+844:theorem erdos_exception_n0 : noTernaryTwo (2^0) = true := exception_n0
+845:theorem erdos_exception_n2 : noTernaryTwo (2^2) = true := exception_n2
+846:theorem erdos_exception_n8 : noTernaryTwo (2^8) = true := exception_n8
+876:def d (j : Nat) : Nat :=
+880:theorem two_pow_pos (j : Nat) : 0 < 2^j := by
+885:theorem two_pow_factored (j : Nat) (hj : 1 <= j) : 2^j = 2 * 2^(j-1) := by
+891:theorem two_pow_ge2 (j : Nat) (hj : 1 <= j) : 2 <= 2^j := by
+898:theorem three_pow_odd (j : Nat) : 3^(2^j) % 2 = 1 := by
+903:theorem three_pow_sq (j : Nat) : (3^(2^j))^2 = 3^(2^(j+1)) := by
+908:theorem sq_sub_one (a : Nat) (ha : 1 <= a) : a^2 - 1 = (a - 1) * (a + 1) := by
+922:theorem three_pow_2j_pos (j : Nat) : 0 < 3^(2^j) := by
+927:theorem two_dvd_three_pow_2j_plus_1 (j : Nat) : 2 ∣ 3^(2^j) + 1 := by
+935:theorem two_pow_divides (j : Nat) (hj : 1 <= j) : 2^(j+2) ∣ (3^(2^j) - 1) := by
+956:theorem three_pow_2j_factored (j : Nat) (_hj : 1 <= j) :
+963:theorem three_pow_2j_minus_1_mod3 (j : Nat) (hj : 1 <= j) :
+979:theorem d_identity (j : Nat) (hj : 1 <= j) : 2^(j+2) * d j = 3^(2^j) - 1 := by
+989:theorem two_pow_2k_mod3 (k : Nat) : (2^(2*k)) % 3 = 1 := by
+996:theorem d_even_mod3 (j : Nat) (hj : 2 <= j) (heven : j % 2 = 0) : d j % 3 = 2 := by
+1008:theorem bridge_sig_even (j : Nat) (hj : 2 <= j) (heven : j % 2 = 0) :
+1019:theorem two_pow_6_mod9 : (2^6) % 9 = 1 := by decide
+1021:theorem two_pow_6q_mod9 (q : Nat) : (2^(6*q)) % 9 = 1 := by
+1028:theorem two_pow_5_mod9 : (2^5) % 9 = 5 := by decide
+1030:theorem two_pow_j2_mod9_j_mod6_3 (j : Nat) (hj : j % 6 = 3) :
+1035:theorem three_pow_2j_mod9 (j : Nat) (hj : 1 <= j) : (3^(2^j)) % 9 = 0 := by
+1047:theorem three_pow_2j_minus_1_mod9 (j : Nat) (hj : 1 <= j) :
+1067:theorem d_mod9_j_mod6_3 (j : Nat) (hj : 3 <= j) (hmod : j % 6 = 3) :
+1090:theorem bridge_sig_j_mod6_3 (j : Nat) (hj : 3 <= j) (hmod : j % 6 = 3) :
+1114:def v2r (k : Nat) : Nat :=
+1120:def ternaryLog3 (n : Nat) : Nat :=
+1128:theorem v2r_mul_three_strong : ∀ (n c : Nat), c ≤ n → v2r (3 * c) = v2r c := by
+1151:theorem v2r_mul_three (c : Nat) : v2r (3 * c) = v2r c :=
+1154:theorem v2r_mul_three_pow (a c : Nat) : v2r (3^a * c) = v2r c := by
+1159:theorem ternaryLog3_lt_of_lt_pow (n k : Nat) (hn : 0 < n) (hk : n < 3^k) :
+1178:theorem noTernaryTwo_div (n : Nat) (hn : 0 < n) (hntt : noTernaryTwo n = true) (hmod : n % 3 ≠ 2) :
+1186:theorem three_pow_gt (k : Nat) : 3^(k+6) > 2^(k+9) := by
+1200:theorem three_pow_gt_two_pow (n : Nat) (hn : 9 ≤ n) : 3^(n - 3) > 2^n := by
+1205:theorem v2r_two_pow (n : Nat) : v2r (2^n) = n := by
+1216:theorem v2r_four_pow (a : Nat) : v2r (4^a) = 2 * a := by
+1225:def c_stable (k : Nat) : Nat := c (k + 1) % 3^k
+1227:def c_mod_3k (j k : Nat) : Nat :=
+1238:theorem c_stable_1 : c_stable 1 = 1 := by decide
+1239:theorem c_stable_2 : c_stable 2 = 7 := by decide
+1245:theorem c_stable_3 : c_stable 3 = 16 := by
+1276:theorem c_stable_4 : c_stable 4 = 16 := by
+1317:theorem c_stable_mod3 (k : Nat) (hk : 1 ≤ k) : c_stable k % 3 = 1 := by
+1320:theorem c_stable_mod9 (k : Nat) (hk : 2 ≤ k) : c_stable k % 9 = 7 := by
+1324:def hasTwoInFirstK (n k : Nat) : Bool :=
+1331:def hasTwoInFirstKStruct : Nat → Nat → Bool
+1335:theorem hasTwoInFirstKStruct_succ (n k : Nat) :
+1338:theorem hasTwoInFirstK_eq_struct : ∀ (k n : Nat), hasTwoInFirstK n k = hasTwoInFirstKStruct n k := by
+1349:theorem powMod_correct (b e m : Nat) (hm : 1 < m) : powMod b e m = (b^e) % m := by
+1634:theorem non_cantor_product_b_mod3_2 (b : Nat) (_hb : 2 ≤ b) (hb3 : b % 3 = 2) :
+1644:theorem non_cantor_product_b_mod9_1 (b : Nat) (_hb : 2 ≤ b) (hb9 : b % 9 = 1) :
+1661:theorem two_mul_three_pow_has_two (s : Nat) : hasTernaryTwo (2 * 3^s) = true := by
+1682:theorem seven_mul_three_pow_has_two (s : Nat) : hasTernaryTwo (7 * 3^s) = true := by
+1707:theorem one_plus_two_three_pow_has_two (p : Nat) :
+1731:theorem one_plus_seven_three_pow_has_two (p : Nat) :
+1756:theorem cascade_case_digit_two (s b : Nat) (hs : 2 ≤ s) (hb : 1 ≤ b)
+1793:theorem cascade_case_no_two_false (s b : Nat) (hs : 2 ≤ s) (hb : 1 ≤ b)
+1798:theorem cmod9_case_digit_two (s b : Nat) (hs : 2 ≤ s) (hb : 1 ≤ b)
+1849:theorem cmod9_case_no_two_false (s b : Nat) (hs : 2 ≤ s) (hb : 1 ≤ b)
+1854:theorem cubic_two_injection (n : Nat) (hn : n % 9 = 7) : n^3 % 27 = 19 := by
+1866:theorem digit_two_cubic_shift_p1 (n : Nat) (hn : n % 9 = 7) :
+1869:theorem digit_two_cubic_shift (p : Nat) (hp : 1 ≤ p) (R : Nat) (hR : R % 3 = 2) :
+1998:theorem erdos_ternary_2_proven (n : Nat) (hn : 9 ≤ n)
+2036:theorem erdos_ternary_2_assembled (n : Nat) (hn : 9 ≤ n)
+2070:def digitCount3 (n : Nat) : Nat :=
+2075:theorem pow_mul_rule (a b : Nat) : 3^a * 3^b = 3^(a+b) := by rw [← Nat.pow_add]
+2076:theorem pow_pow_rule (a b : Nat) : (3^a)^b = 3^(a*b) := by rw [← Nat.pow_mul]
+2077:theorem pow_mono (a b : Nat) (h : a < b) : 3^a < 3^b := by
+2086:theorem pow_le (a b : Nat) (h : a ≤ b) : 3^a ≤ 3^b := by
+2090:theorem digitCount3_zero : digitCount3 0 = 1 := by
+2092:theorem digitCount3_succ (n : Nat) (hn : 0 < n) : digitCount3 n = 1 + digitCount3 (n / 3) := by
+2094:theorem digitCount3_pos (n : Nat) (hn : 0 < n) : 1 ≤ digitCount3 n := by
+2096:theorem digitCount3_monotone : ∀ n m : Nat, n ≤ m → digitCount3 n ≤ digitCount3 m := by
+2123:theorem c_increasing (j : Nat) (hj : 1 ≤ j) : c j ≤ c (j+1) := by
+2132:theorem c3_ge_3pow9 : 3^9 ≤ c 3 := by
+2137:theorem c_j_ge_3pow9 (j : Nat) (hj : 3 ≤ j) : 3^9 ≤ c j := by
+2148:theorem c_j_ge_c3 (j : Nat) (hj : 3 ≤ j) : c 3 ≤ c j := by
+2439:theorem cubic_h_creation_lift (m p : Nat) (hp1 : 1 ≤ p)
+2549:def v3 (a : Nat) : Nat :=
+2558:theorem v3_zero_of_not_div3 (a : Nat) (ha : 0 < a) (h3 : a % 3 ≠ 0) :
+2562:theorem v3_succ_of_div3 (a : Nat) (ha : 0 < a) (h3 : a % 3 = 0) :
+2566:theorem v3_pos_of_not_div3 (n : Nat) (hn : 0 < n) (h3 : n % 3 ≠ 0) : v3 n = 0 :=
+2569:theorem pow_v3_dvd (n : Nat) (hn : 0 < n) : 3^(v3 n) ∣ n := by
+2585:theorem v3_maximal (n : Nat) (hn : 0 < n) : (n / 3^(v3 n)) % 3 ≠ 0 := by
+2598:theorem generalized_cascade_terminates (b : Nat) (hb1 : 1 < b) (hb3 : b % 3 = 1) :
+2623:theorem generalized_cascade_base_case (b : Nat) (hb1 : 1 < b) (hb3 : b % 3 = 1) :
+2657:theorem two_pow_ne_three_pow (a b : Nat) (ha : 1 ≤ a) : 2^a ≠ 3^b := by
+2678:theorem non_cantor_product_b_mod27_13 (b : Nat) (_hb : 2 ≤ b) (hb27 : b % 27 = 13) :
+2687:theorem non_cantor_product_b_mod27_25 (b : Nat) (_hb : 2 ≤ b) (hb27 : b % 27 = 25) :
+2696:theorem non_cantor_product_b_mod81_4 (b : Nat) (_hb : 2 ≤ b) (hb81 : b % 81 = 4) :
+2705:theorem non_cantor_product_b_mod81_49 (b : Nat) (_hb : 2 ≤ b) (hb81 : b % 81 = 49) :
+2715:theorem true_duality_theory :
+2739:theorem binom_first_order (X b : Nat) :
+2779:theorem digit_formula (s b k : Nat) (hs1 : 1 ≤ s) (hsk : k ≤ s) (_hk1 : 1 ≤ k) :
+2810:theorem c_tower_stabilizes (s k : Nat) (hsk : k + 1 ≤ s) :
+2845:theorem c_mod_eq_c_stable (s k : Nat) (hsk : k + 1 ≤ s) :
+2854:theorem has_two_at_position (p r : Nat) (hr : r < 3^p) :
+2908:theorem has_two_mul3 (m : Nat) : hasTernaryTwo (3 * m) = hasTernaryTwo m := by
+2920:theorem has_two_mul_3pow (p m : Nat) : hasTernaryTwo (3^p * m) = hasTernaryTwo m := by
+2926:theorem has_two_one_plus_3pow_mul (p m : Nat) (hp : 1 ≤ p) :
+2962:theorem has_two_lift_base (m p : Nat) (hp : 1 ≤ p) (hm2 : m % 3 = 2) :
+2977:theorem hasTwoInFirstK_imp_hasTernaryTwo (n k : Nat) (hn : n < 3^k)
+3019:theorem mod_check_K16 (a : Nat)
+3031:theorem mod_check_K12 (a : Nat)
+3043:theorem hasTwoInFirstK_pos (n k : Nat) (h : hasTwoInFirstK n k = true) :
+3073:theorem c_mod81_stable (k : Nat) (hk3 : 3 ≤ k) : c k % 81 = 16 := by
+3098:theorem c_mod243_stable (k : Nat) (hk4 : 4 ≤ k) : c k % 243 = 178 := by
+3122:theorem cascade_lift (s b k : Nat) (hsk : k + 1 ≤ s) (hk1 : 1 ≤ k)
+3212:theorem cascade_lift_no_two_false (s b k : Nat) (hsk : k + 1 ≤ s) (hk1 : 1 ≤ k)
+3217:theorem erdos_ternary_2_full (n : Nat) (hn : 9 ≤ n)
+3286:theorem true_duality_theory_full :
+3311:theorem bridge_crossing_explicit (b : Nat) (hb : 2 ≤ b) (_hb3 : b % 3 ≠ 0)
+3331:theorem bridge_crossing_base (a : Nat) (_ha : 5 ≤ a) (ha2 : a % 3 = 2) :
+3357:theorem four_pow_mod_six (a : Nat) (ha : 1 ≤ a) : 4^a % 6 = 4 := by
+3365:theorem parity_lemma (a : Nat) (ha : 1 ≤ a) : (4^a - 1) / 3 % 2 = 1 := by
+3398:def bridge_k_find (b : Nat) (k : Nat) : Nat :=
+3407:def bridge_k (b : Nat) : Nat := bridge_k_find b 1
+3417:theorem three_pow_ge_9 (p : Nat) (hp : 2 ≤ p) : 9 ≤ 3^p := by
+3422:theorem four_lt_three_pow (p : Nat) (hp : 2 <= p) : 4 < 3^p := by
+3426:theorem hasTernaryTwo_of_digit (n : Nat) (q : Nat) (h : n / 3^q % 3 = 2) :
+3444:theorem hasTernaryTwo_pos (n : Nat) (h : hasTernaryTwo n = true) :
+3461:theorem four_mul_preserves_digit (X p : Nat) (hp : 2 <= p) (hX_mod : X % 3^p = 1) :
+3486:theorem carry_manifold_survives (X p : Nat) (hp : 2 <= p) (hX_mod : X % 3^p = 1)
+3491:theorem carry_manifold_has_two (X p : Nat) (hp : 2 <= p) (hX_mod : X % 3^p = 1)
+3501:theorem modular_check_base (a : Nat) (ha : 5 ≤ a) (ha500 : a ≤ 500) :
+3534:structure DimGraph where
+3542:def mockThetaAtTangent (R p : Nat) : Nat :=
+3545:def dimGraph (a : Nat) : DimGraph :=
+3557:def gstDecide (a K : Nat) : Bool :=
+3560:theorem gstDecide_correct (a K : Nat) (hK : 1 ≤ K) (h : gstDecide a K = true) :
+3580:theorem four_pow_mod27 (m : Nat) : (4^m) % 27 = (4^(m % 9)) % 27 := by
+3597:theorem four_pow_mod9 (a : Nat) : (4^a) % 9 = (4^(a % 3)) % 9 := by
+3616:theorem four_pow_mod81 (m : Nat) : (4^m) % 81 = (4^(m % 27)) % 81 := by
+3633:theorem cubic_lift_mod81 (m : Nat)
+3689:theorem mul4_lift_a9_6 (a : Nat) (ha9 : a % 9 = 6) :
+3735:theorem mod_eq_one_of_sub_mod_zero (n m : Nat) (hn : 1 ≤ n) (hm_pos : 1 < m)
+3751:theorem mul4_lift_cascade (a : Nat) (ha : 5 ≤ a) (ha3 : a % 3 = 1)
+3791:theorem div_add_of_dvd (a b c : Nat) (hpos : 0 < a) (hdvd : a ∣ b) :
+3804:theorem four_mul_mod3_eq (n : Nat) : (4 * n) % 3 = n % 3 := by
+3807:theorem four_mul_d2_equation (X p : Nat) (hp : 1 ≤ p) (hX_div : X / 3^p % 3 = 2) :
+3828:theorem gst_duality_carry0 (R : Nat) (p : Nat) (hp1 : 1 ≤ p)
+3838:theorem gst_duality_carry1 (R : Nat) (p : Nat) (hp1 : 1 ≤ p)
+3892:theorem gst_duality (R : Nat) (hR_mod3 : R % 3 = 1) (hR_has : hasTernaryTwo R = true)
+3910:theorem h_creation_4pow_survive (k : Nat) (hk5 : 5 ≤ k)
+3970:theorem digit_identity (n p : Nat) :
+4045:theorem four_mul_mod_eq (R p : Nat) (hp : 1 ≤ p) :
+4071:theorem carry_four_mul_eq (R p : Nat) (hp : 1 ≤ p) :
+4080:theorem carry_four_mul_bound (R p : Nat) (hp : 1 ≤ p) :
+4103:theorem hCreationCheck_univ :
+4120:theorem hasTernaryTwo_first_pos (n : Nat) (h : hasTernaryTwo n = true) :
+4151:theorem three_pow_mod2 (q : Nat) : 3^q % 2 = 1 := by
+4158:theorem mod_bound_all_digits_le_one (n q : Nat)
+4219:theorem first_d2_carry_ne_2 (n q : Nat)
+4244:theorem first_d2_carry_lt_two (n q : Nat)
+4260:theorem four_mul_digit_equation (X p : Nat) (hp : 1 ≤ p) :
+4281:theorem carry_propagation (R p : Nat) (hp : 1 ≤ p) :
+4315:theorem carry_reset_after_d2 (R p : Nat) (hp : 1 ≤ p)
+4325:theorem carry_bound (R p : Nat) (hp : 1 ≤ p) :
+4338:theorem highest_d2_carry (R h : Nat) (hh : 1 ≤ h)
+4359:theorem bridge_carry_zero (k : Nat) (hk : 2 ≤ k) :
+4426:theorem carry_zero_exists_after (k : Nat) (hk : 2 ≤ k) (q : Nat) (hq : q < 2*k) :
+4438:theorem carry_state3_all_ones_imp_state2 (R : Nat) (p : Nat) (hp : 1 ≤ p) :
+4476:theorem carry_state2_all_ones_imp_state2 (R : Nat) (p : Nat) (hp : 1 ≤ p) :
+4513:theorem bridge_forces_non_one (R : Nat) (p N : Nat) (hp : 1 ≤ p) (hN : p < N)
+4532:theorem carry_state_after_zero (R p : Nat) (hp : 1 ≤ p)
+4545:theorem carry_state_after_two (R p : Nat) (hp : 1 ≤ p)
+4561:theorem carry_in_123 (R p : Nat) (hp : 1 ≤ p) (h_ne0 : (4 * (R % 3^p)) / 3^p ≠ 0) :
+4575:theorem carry_state1_all_ones_imp_state1 (R : Nat) (p : Nat) (hp : 1 ≤ p) :
+4607:theorem bridge_forces_non_one_state1 (R : Nat) (p N : Nat) (hp : 1 ≤ p) (hN : p < N)
+4624:theorem find_highest_d2 : ∀ (N R : Nat), 2 ≤ N → R < 3^N → R % 3 ≠ 2 → hasTernaryTwo R = true →
+4731:theorem div_sub_of_mul_dvd (a b c : Nat) (hbc : b * c <= a) (hc : 0 < c) :
+4747:theorem bridge_forces_non_one_state2 (R : Nat) (p N : Nat) (hp : 1 ≤ p) (hN : p < N)
+4771:inductive GSTSpace where
+4778:def gstCarry (R p : Nat) : Nat := (4 * (R % 3^p)) / 3^p
+4781:def gstDigit (R p : Nat) : Nat := R / 3^p % 3
+4784:def gstWindow9 (R p : Nat) : Nat := R / 3^p % 9
+4787:def gstDescent (R p : Nat) : Nat := R / 3^p
+4790:def gstSpaceAt (R p : Nat) : GSTSpace :=
+4797:structure GSTGraphNode (R N : Nat) where
+4813:def gstGraphNode (R N p : Nat) : GSTGraphNode R N where
+4830:def GSTForwardEdge {R N : Nat} (u v : GSTGraphNode R N) : Prop :=
+4834:def GSTGraphWitness (R N p : Nat) : Prop :=
+4840:theorem gstGoodSpace_carry_mod3_zero (R p : Nat)
+4851:theorem gstGraphWitness_to_carry_mod3 {R N p : Nat}
+4865:theorem gstSpaceAt_of_carry_one_or_two (R p : Nat)
+4870:theorem gstGraphNode_forward (R N p : Nat) :
+4874:theorem gstDescent_forward_exact (R p : Nat) :
+4878:theorem gstDigit_eq_descent_mod (R p : Nat) :
+4883:def gstStepCarry (C d : Nat) : Nat := (C + 4 * d) / 3
+4886:def gstOutputDigit (C d : Nat) : Nat := (C + 4 * d) % 3
+4889:def gstStep (C d : Nat) : Nat × Nat :=
+4892:theorem gstCarry_forward_exact (R p : Nat) (hp : 1 ≤ p) :
+4896:theorem gstOutputDigit_forward_exact (R p : Nat) (hp : 1 ≤ p) :
+4901:theorem gstCarry_lt_four (R p : Nat) (hp : 1 ≤ p) : gstCarry R p < 4 := by
+4904:theorem gstDigit_lt_three (R p : Nat) : gstDigit R p < 3 := by
+4908:theorem gstDigit_mul_three_shift (R j : Nat) :
+4916:theorem gstCarry_mul_three_shift (R j : Nat) :
+4924:theorem gstSpace_mul_three_shift (R j : Nat) :
+4930:theorem gst_hCreation_exists_iff_pure (R : Nat) :
+4952:theorem gst_pure_lift_or_forced_cascade (R p : Nat) (hp : 1 ≤ p)
+4982:theorem gstStepCarry_table :
+4990:theorem gstStep_table :
+5000:theorem gstStepCarry_product_bounded (C d : Nat) (hC : C < 4) (hd : d < 3) :
+5008:def GSTBadPair (C d : Nat) : Prop :=
+5013:theorem gstBadPair_classifier (C d : Nat) (hC : C < 4) (hd : d < 3) :
+5021:theorem gstForward_from_null (R p : Nat) (hp : 1 ≤ p)
+5033:theorem gstForward_from_gstPlus (R p : Nat) (hp : 1 ≤ p)
+5045:theorem gstForward_from_altOne (R p : Nat) (hp : 1 ≤ p)
+5057:theorem gstForward_from_altTwo (R p : Nat) (hp : 1 ≤ p)
+5071:theorem gst_first_d2_navigation (R q : Nat) (hq : 1 ≤ q)
+5086:theorem gst_bridge_is_null (k : Nat) (hk : 2 ≤ k) :
+5091:theorem gstGraphNode_bridge_is_null (k : Nat) (hk : 2 ≤ k) :
+5095:theorem gstGraphNode_bridge_distance_decreases (R N p : Nat) (hp : p < N) :
+5100:theorem gstGraphWitness_of_null (R N p : Nat)
+5105:theorem gstGraphWitness_of_gstPlus (R N p : Nat)
+5114:def gstNavigationConstant (s b : Nat) : Nat :=
+5120:def GSTNavigationWitness (R : Nat) : Prop :=
+5126:theorem gstBadTrace_of_no_navigation_witness (R : Nat)
+5139:theorem gstNavigationWitness_iff_not_badTrace (R : Nat) :
+5158:theorem gstNavigationWitness_mul_three (R : Nat)
+5167:theorem gstNavigationWitness_of_digit_carry_zero (R j : Nat)
+5172:theorem gstNavigationWitness_of_digit_carry_three (R j : Nat)
+5179:theorem gst_navigation_origin (s b : Nat) (hs : 1 ≤ s) (hb : 1 ≤ b)
+5221:theorem gst_navigation_constant_b2_witness (s b : Nat) (hs : 1 ≤ s)
+5232:theorem gst_navigation_decomposition (s b : Nat) (hs : 1 ≤ s) :
+5263:theorem gst_orthogonal_origin_split (s b j : Nat) (hs : 1 ≤ s) :
+5287:theorem gst_orthogonal_origin_fingerprint (s b j : Nat) (hs : 1 ≤ s) :
+5306:theorem gst_orthogonal_badTrace_system (s b j : Nat) (hs : 1 ≤ s)
+5332:theorem gst_navigation_constant_b1_recurrence (s m : Nat) (hs : 1 ≤ s) :
+5370:theorem gst_generalized_navigation_algebra
+5390:theorem gst_navigation_constant_general_recurrence
+5420:theorem gst_affine_prefix_mod (c0 A T k j : Nat) (hj : j ≤ k) :
+5428:theorem gst_affine_prefix_carry (c0 A T k j : Nat) (hj : j ≤ k) :
+5432:theorem gst_affine_prefix_digit (c0 A T k j : Nat) (hj : j < k) :
+5441:theorem gst_affine_prefix_witness (c0 A T k j : Nat) (hj : j < k)
+5455:theorem gst_div_add_of_dvd (a b c0 : Nat) (hpos : 0 < a) (hdvd : a ∣ b) :
+5470:theorem gst_affine_cut_digit (c0 A T k : Nat) :
+5495:theorem gst_affine_cut_pure (c0 A T k r : Nat)
+5510:theorem gst_exact_residue_graph_transport (P T c0 k j : Nat)
+5544:theorem gst_badPair_descends_at_transportable_vertex (P T c0 k j : Nat)
+5556:theorem gst_shifted_residue_exact (c0 X T k q : Nat)
+5580:theorem gst_origin_block_graph_transport (P X T c0 k j : Nat)
+5595:theorem gst_navigation_affine_split (s k m : Nat) (hs : 1 ≤ s) :
+5612:theorem gst_affine_shift_digit_exact
+5623:theorem gst_affine_shift_carry_exact
+5640:theorem gst_navigation_affine_product_state
+5655:theorem gst_navigation_tail_congruent
+5677:theorem gst_navigation_block_graph_transport
+5698:theorem gst_navigation_badPair_descends_on_zero_block
+5715:theorem gst_navigation_witness_of_transportable_child
+5735:theorem gst_navigation_constant_cut_witness
+5756:theorem gst_navigation_constant_cut_k2_b1
+5777:theorem gst_navigation_constant_s1_k2_b2
+5787:theorem gst_navigation_constant_s1_cut_b2_large
+5810:theorem gst_navigation_constant_s3_k4_b1
+5818:theorem gst_navigation_constant_s3_k6_b2
+5827:theorem gst_navigation_constant_mul3 (s m : Nat) (hs : 1 ≤ s) :
+5851:theorem gst_navigation_constant_mul3_witness (s m : Nat) (hs : 1 ≤ s)
+5857:theorem gstNavigationConstant_one (s : Nat) (hs : 1 ≤ s) :
+5870:theorem gst_navigation_constant_one_witness (s : Nat) (hs : 4 ≤ s) :
+5883:theorem gst_navigation_constant_one_witness_s2 :
+5888:theorem gst_navigation_constant_one_witness_s3 :
+5892:theorem gst_navigation_constant_one_witness_all (s : Nat) (hs : 2 ≤ s) :
+5905:def GSTLargePrefixClosed (s k : Nat) : Prop :=
+5911:theorem gst_navigation_constant_large_prefix_witness
+5933:def GSTSmallShiftNavigationLift : Prop :=
+5942:theorem gst_navigation_witness_all_of_small_shift
+5976:def GSTOriginClosed (s k r : Nat) : Prop :=
+5986:def GSTResidualBoundary (s k r : Nat) : Prop :=
+5992:theorem gst_origin_not_closed_boundary
+6000:theorem gst_navigation_constant_origin_closed_witness
+6016:def GSTResidualNavigationLift : Prop :=
+6025:theorem gst_navigation_witness_all_of_residual
+6060:theorem gst_navigation_digit_shift (s b j : Nat) :
+6069:theorem gstCarry_forward_exact_all (R p : Nat) :
+6079:theorem gst_navigation_carry_shift (s b j : Nat) (hs : 1 ≤ s) (hb : 1 ≤ b)
+6095:theorem gst_navigation_space_shift (s b j : Nat) (hs : 1 ≤ s) (hb : 1 ≤ b)
+6104:theorem gst_navigation_position_universal (s b j : Nat) (hs : 1 ≤ s)
+6116:theorem gst_navigation_graph_lift (s b j : Nat) (hs : 1 ≤ s)
+6129:theorem gst_navigation_position_b2 (s b : Nat) (hs : 1 ≤ s) (hb : 1 ≤ b)
+6137:theorem gst_navigation_graph_b2 (s b : Nat) (hs : 1 ≤ s) (hb : 1 ≤ b)
+6165:theorem gst_oscillation_first_witness (R : Nat) (N : Nat)
+6181:theorem gst_oscillation_from_navigation (R : Nat) (N : Nat)
+6361:theorem all_ones_imp_c1_false (R : Nat) (start N : Nat) (hstart_lt : start < N)
+6372:theorem h_creation_cascade_lift (k s m : Nat) (hs : 2 ≤ s)
+6434:theorem gst_four_power_creation_certificate_inline (k : Nat) (hk5 : 5 ≤ k) (hk7 : k ≠ 7) :
+6715:theorem mul4_lift_gst_duality (a : Nat) (ha : 9 ≤ a)
+6731:theorem erdos_ternary_2_even_universal (a : Nat) (ha : 5 <= a) :
+6764:theorem erdos_ternary_2_universal (n : Nat) (hn : 9 <= n) :
+6783:theorem c_stable_digit1_is_2 (k : Nat) (hk : 2 ≤ k) : c_stable k / 3 % 3 = 2 := by
+6803:def gstAffineMulCarry (A z T j : Nat) : Nat :=
+6806:theorem gst_residue_succ_exact (T j : Nat) :
+6821:theorem gst_affine_mul_digit_exact (A z T j : Nat) :
+6838:theorem gst_affine_mul_carry_forward (A z T j : Nat) :
+6853:def gstInfiniteParadoxEnergy (t T j : Nat) : Nat :=
+6856:theorem gst_infinite_paradox_energy_conservation (t T j : Nat) :
+6870:structure GSTOmegaState where
+6883:def gstOmegaStep (A : Nat) (w : GSTOmegaState) : GSTOmegaState where
+6896:def gstOmega (s k m j : Nat) : GSTOmegaState :=
+6916:theorem gst_omega_universal_equation (s k m j : Nat) :
+6943:theorem gst_omega_origin_exact (s k m j : Nat) (hs : 1 ≤ s) :
+6951:theorem gst_omega_parent_projection (s k m j : Nat) (hs : 1 ≤ s) :
+6965:def GSTOmegaGatePolynomial (w : GSTOmegaState) : Int :=
+6969:theorem gst_omega_gate_polynomial_zero_iff (w : GSTOmegaState) :
+6999:theorem gst_omega_gate_zero_closes_parent
+7023:def GSTOmegaDigitTwoSet (s k m : Nat) : Set Nat :=
+7027:def GSTOmegaNullSet (s k m : Nat) : Set Nat :=
+7031:def GSTOmegaPlusSet (s k m : Nat) : Set Nat :=
+7035:def GSTOmegaZeroSet (s k m : Nat) : Set Nat :=
+7039:def GSTOmegaBadSet (s k m : Nat) : Set Nat :=
+7044:theorem gst_omega_zeroSet_eq_subspaces (s k m : Nat) :
+7053:theorem gst_omega_badSet_eq_compl (s k m : Nat) :
+7061:def GSTOmegaInfiniteBadTrace (s k m : Nat) : Prop :=
+7066:theorem gst_omega_noInfiniteBadTrace_iff_zeroSet_nonempty (s k m : Nat) :
+7084:def GSTResidualOmegaTermination : Prop :=
+7092:theorem gst_residual_navigation_lift_of_omega_termination
+7102:theorem gst_omega_descent_succ (s k m j : Nat) :
+7110:theorem gst_omega_parentCarry_succ (s k m j : Nat) :
+7118:theorem gst_omega_paradoxEnergy_succ (s k m j : Nat) :
+7126:theorem gst_omega_descent_strict (s k m j : Nat)
+7134:theorem gst_omega_zero_of_transportable_child
+7164:theorem gst_omega_noInfiniteBadTrace_of_transportable_child
+7187:def GSTOmegaBadPrefix (s k m L : Nat) : Prop :=
+7192:def GSTOmegaBadPrefixSet (s k L : Nat) : Set Nat :=
+7196:theorem gst_omega_badPrefixSet_antitone (s k L₁ L₂ : Nat) (hL : L₁ ≤ L₂) :
+7205:theorem gst_omega_noInfiniteBadTrace_iff_finite_escape (s k m : Nat) :
+7221:def GSTNaturalExponentCone (t : Nat) : Set Nat :=
+7226:theorem gst_natural_exponent_mem_terminal_cone (m : Nat) :
+7231:theorem gst_natural_exponent_descent_terminates (m : Nat) :
+7237:theorem gst_omega_descent_terminates_at_child_value (s k m : Nat) :
+7246:def GSTOmegaChildZeroSet (s k m : Nat) : Set Nat :=
+7252:theorem gst_omega_childZeroSet_nonempty_of_navigation_witness
+7273:theorem gst_residual_origin_parameter_strict (k m : Nat)
+7282:theorem gst_residual_origin_descent_certificate
+7297:def GSTSeededAffineBadTrace (seed X : Nat) : Prop :=
+7302:theorem gst_omega_infiniteBadTrace_iff_seededAffine
+7330:theorem gst_omega_affine_tail_block_echo
+7340:def gstOmegaBlockIndex (s q r : Nat) : Nat := q * (s+1) + r
+7343:def GSTOmegaBadBlock (s k m q : Nat) : Prop :=
+7348:theorem gst_omega_infiniteBadTrace_blocks
+7356:theorem gst_omega_seededAffine_block_echo
+7377:theorem gst_omega_termination_s1
+7408:theorem gst_omega_termination_s3
+7437:theorem gst_omega_termination_stable
+7466:theorem gst_residual_omega_termination : GSTResidualOmegaTermination := by
+7482:theorem gst_residual_navigation_lift : GSTResidualNavigationLift :=
+7490:theorem gst_four_pow_lt_three_pow_twice (k : Nat) (hk : 1 ≤ k) :
+7515:theorem gst_digit_two_position_lt_twice (k p : Nat) (hk : 1 ≤ k)
+7525:theorem gst_graph_witness_of_navigation
+7537:theorem gst_graph_witness_four_pow_div_three
+7578:theorem erdos_ternary_2_even_universal (a : Nat) (ha : 5 ≤ a) :
+7614:theorem erdos_ternary_2_universal (n : Nat) (hn : 9 ≤ n) :
+7633:def GSTPrefixOneNavigationLift : Prop :=
+7638:def GSTSeedOneAffineWitness (X : Nat) : Prop :=
+7642:theorem gst_prefix_one_product_state
+7651:theorem gst_prefix_one_navigation_of_seed_witness
+7667:def GSTPrefixOneBadReflection : Prop :=
+7674:def GSTPrefixOneSeedCore : Prop :=
+7680:theorem gst_prefix_one_seed_core_of_bad_reflection
+7697:theorem gst_prefix_one_navigation_lift_of_seed_core
+7704:theorem gst_prefix_one_navigation_lift_of_bad_reflection
+7710:theorem gst_seeded_affine_carry_semigroup
+7722:theorem gst_seeded_affine_digit_shift
+7728:theorem gst_seeded_affine_bad_shift
+7738:theorem gst_affine_tail_div_decomposition
+7759:theorem gst_null_two_regenerates
+7766:theorem gst_plus_two_propagates
+7774:theorem gst_child_carry_reindex_seeded
+7782:theorem gst_child_state_reindex_seeded
+7791:theorem gst_parent_state_reindex_seeded
+7801:theorem gst_child_gate_reindex_seeded
+7818:theorem gst_affine_block_memory
+7834:theorem gst_shared_information_carry_equation
+7857:theorem gst_affine_carry_lt_multiplier
+7876:theorem gst_gst_offsets_lt_multiplier
+7893:theorem gst_shared_information_null_low_quarter
+7906:theorem gst_shared_information_plus_high_quarter
+7921:theorem gstAffine_forward_exact_all (D X p : Nat) :
+7929:theorem gst_two_two_forces_happy_gate
+7945:theorem gst_navigation_constant_mul3_pow_witness
+7962:theorem gst_residual_navigation_lift_of_prefix_one
+7982:theorem gst_navigation_witness_all_of_prefix_one
+7989:theorem gst_full_power_navigation_of_constant
+7997:theorem gst_navigation_witness_four_pow_div_three_of_prefix_one
+8061:inductive GSTOmegaEvent
+8068:def gstOmegaParentOutputDigit (w : GSTOmegaState) : Nat :=
+8071:def gstOmegaEventOfState (w : GSTOmegaState) : GSTOmegaEvent :=
+8079:def gstOmegaEvent (s k m j : Nat) : GSTOmegaEvent :=
+8082:theorem gst_omega_event_survive_iff_raw (w : GSTOmegaState) :
+8104:def GSTOmegaEvent.mirror : GSTOmegaEvent → GSTOmegaEvent
+8110:def GSTOmegaEvent.Active : GSTOmegaEvent → Prop
+8116:theorem gst_omega_event_mirror_involutive :
+8121:theorem gst_omega_active_mirror_fixed_iff_survive (e : GSTOmegaEvent) :
+8125:theorem gst_omega_active_nonfixed_iff_create_or_destroy (e : GSTOmegaEvent) :
+8129:theorem gst_omega_prefix_one_parentCarry_lt_four
+8140:theorem gst_omega_prefix_one_survive_implies_gate
+8165:theorem gst_omega_prefix_one_gate_implies_survive
+8178:theorem gst_omega_prefix_one_survive_iff_gatePolynomial_zero
+8191:theorem gst_omega_prefix_one_active_fixed_iff_gate_zero
+8200:theorem gst_prefix_one_bad_implies_no_survive
+8214:def GSTOmegaMirrorFixedAt (s n j : Nat) : Prop :=
+8217:def GSTOmegaActiveAt (s n j : Nat) : Prop :=
+8220:def GSTOmegaFreeMirrorAt (s n j : Nat) : Prop :=
+8223:theorem gst_omega_freeMirror_iff_create_or_destroy (s n j : Nat) :
+8231:structure GSTPrefixOneOmegaData (s n : Nat) where
+8291:theorem gst_prefix_one_bad_implies_active_free
+8303:theorem gst_prefix_one_bad_active_is_create_or_destroy
+8312:def gstParadoxOrigin : Nat := 1
+8314:def gstParadoxFuture (t T j : Nat) : Nat :=
+8317:def gstParadoxPast (t T j : Nat) : Nat :=
+8320:theorem gst_infinite_paradox_energy_split (t T j : Nat) :
+8325:inductive GSTParadoxComponent
+8331:def GSTParadoxComponent.mirror : GSTParadoxComponent → GSTParadoxComponent
+8336:theorem gst_paradox_component_mirror_involutive :
+8341:theorem gst_paradox_component_fixed_iff_origin (x : GSTParadoxComponent) :
+8345:def gstParadoxComponentValue (t T j : Nat) : GSTParadoxComponent → Nat
+8350:theorem gst_paradox_energy_as_components (t T j : Nat) :
+8357:def gstParadoxTransfer (t T j : Nat) : Nat :=
+8360:theorem gst_paradox_future_transfer (t T j : Nat) :
+8386:theorem gst_paradox_past_transfer (t T j : Nat) :
+8397:theorem gst_paradox_transfer_exact (t T j : Nat) :
+8405:theorem gst_paradox_transfer_pos_of_digit_two
+8413:theorem gst_prefix_one_child_transfer_pos
+8423:def gstPrefixOneTail (s n : Nat) : Nat :=
+8428:theorem gst_prefix_one_parent_output_is_seeded_mirror_digit
+8441:theorem gst_prefix_one_survive_iff_shared_seeded_two
+8463:theorem gst_nat_lt_three_pow_succ (T : Nat) :
+8473:theorem gstDigit_eq_zero_above_nat_ceiling
+8485:theorem gst_prefix_one_no_child_gate_above_ceiling
+8499:theorem gst_prefix_one_child_gate_below_ceiling
+8522:def GSTCompleteBadTrace (R : Nat) : Prop :=
+8526:theorem gst_no_navigation_of_complete_bad
+8533:theorem gst_complete_bad_of_no_navigation
+8542:theorem gst_origin_digit0_bad_descends
+8557:theorem gst_origin_digit2_bad_impossible
+8569:theorem gst_origin_one_bad_impossible
+8579:theorem gst_origin_digit0_parameter_decreases
+8586:theorem gst_prefix_one_omega_bad_of_no_parent_navigation_inline
+8624:theorem gst_prefix_one_no_parent_navigation_of_omega_bad_atomic
+8688:theorem gstNavigationWitness_of_mul_three_atomic
+8712:theorem gstNavigationWitness_of_mul_three_pow_atomic
+8726:theorem gst_navigation_constant_mul3_pow_atomic
+8754:theorem origin_navigation_algebraS
+8771:theorem origin_digit_recurrenceS
+8783:theorem affine_origin_stepS
+8805:theorem affine_natural_origin_stepS
+8828:theorem natural_origin_div3_strictS (n : Nat) (hn : 0 < n) :
+8842:theorem gst_phase_one_exactS
+8853:theorem gst_phase_two_exactS
+8866:theorem gst_phase_wrap_exactS
+8886:theorem gst_phase_low_prefix_bandsS
+8899:def GSTCanonicalOriginEnergyS (Q : Nat → Nat → Nat) : Prop :=
+8905:theorem gst_pure_power_origin_splitS (t n : Nat) :
+8923:theorem gst_canonical_origin_energy_regeneratesS
+8935:theorem gst_canonical_origin_energy_zeroS
+8945:theorem gst_canonical_origin_strict_descentS
+8957:theorem gst_canonical_prefix_recurrenceS
+8993:theorem gst_canonical_prefix_mod_divS
+9011:theorem gst_canonical_prefix_residueS
+9029:def gstCarryS (R p : Nat) : Nat := (4 * (R % 3^p)) / 3^p
+9031:def gstDigitS (R p : Nat) : Nat := R / 3^p % 3
+9033:def gstStepCarryS (C d : Nat) : Nat := (C + 4*d) / 3
+9035:def gstAffineMulCarryS (A z T p : Nat) : Nat :=
+9039:theorem gstCarryS_forward_exact_all (R p : Nat) :
+9052:theorem gst_null_two_regeneratesS
+9059:theorem gst_plus_two_propagatesS
+9066:theorem gst_seeded_affine_carry_semigroupS
+9080:theorem gst_seeded_affine_digit_shiftS
+9087:theorem gst_child_carry_reindex_seededS
+9095:theorem gst_child_state_reindex_seededS
+9104:theorem gst_parent_state_reindex_seededS
+9113:theorem gst_child_gate_reindex_seededS
+9131:theorem gst_affine_block_memoryS
+9145:theorem gst_affine_tail_div_decompositionS
+9164:theorem gst_shared_information_carry_equationS
+9186:theorem gst_affine_carry_lt_multiplierS
+9205:theorem gst_gst_offsets_lt_multiplierS
+9222:theorem gst_shared_information_null_low_quarterS
+9235:theorem gst_shared_information_plus_high_quarterS
+9250:theorem gstAffineS_forward_exact_all (D X p : Nat) :
+9258:theorem gst_two_two_forces_happy_gateS
+9281:theorem gstDigitS_eq_prefix_residue_divS (R j : Nat) :
+9294:theorem gst_state_eq_of_prefix_residueS
+9315:theorem gst_canonical_state_from_origin_prefixS
+9328:theorem gst_canonical_gate_from_origin_prefixS
+9356:def GSTBadPairS (C d : Nat) : Prop :=
+9360:theorem gst_bad_trace_forbids_22S
+9374:theorem gst_word_12102_synchronizesS (C : Nat) (hC : C < 4) :
+9419:def gstHandwrittenUChargeS (C : Nat) : Nat :=
+9423:theorem gst_handwritten_u_charge_tableS :
+9439:theorem gst_bad_pair_iff_u_potential_nondecreaseS
+9452:def gstHandwrittenUJumpS (C d : Nat) : Int :=
+9457:theorem gst_handwritten_u_jump_tableS :
+9473:theorem gst_handwritten_u_jump_negative_iff_happyS
+9485:theorem gst_prefix_residue_succ_exactS (X K : Nat) :
+9496:theorem gst_bad_prefix_u_potential_boundS
+9544:theorem gst_complete_bad_u_potential_terminal_boundS
+9563:theorem gst_seed_one_complete_bad_u_boundS
+9593:def gstPrefixOneUPotentialTailS (s n : Nat) : Nat :=
+9599:theorem gst_prefix_one_omega_bad_to_u_seeded_badS
+9617:theorem gst_prefix_one_omega_bad_u_potential_boundS
+9631:theorem gst_prefix_one_omega_bad_u_terminal_boundS
+9655:theorem gst_canonical_origin_zeroS
+9666:theorem gst_canonical_origin_addS
+9698:theorem gst_canonical_origin_multiple_dvdS
+9718:theorem gst_canonical_origin_modulusS
+9737:theorem gst_canonical_Q_one_two_eq_455S
+9747:theorem gst_canonical_origin_parity_mod455S
+9767:theorem gst_information_low_coordinatesS
+9780:theorem gst_information_high_coordinatesS
+9793:def gstInformationCarryAtS (S i : Nat) : Nat :=
+9798:theorem gst_information_bottom_top_coordinatesS
+9820:theorem gst_information_word_boundS
+9839:theorem gst_information_gate_endpointS
+9861:theorem four_pow_succ_lt_three_pow_doubleS
+9887:theorem gst_information_bridge_boundS
+9902:theorem gst_information_bridge_nullS
+9917:theorem gst_shared_information_state_exactS
+9953:theorem gst_shared_information_state_forwardS
+9976:theorem gst_shared_information_bottom_coordinatesS
+9989:theorem gst_shared_information_top_coordinateS
+10012:theorem gst_parent_digit_from_informationS
+10037:def GSTSeededBadTraceS (seed R : Nat) : Prop :=
+10042:theorem gst_relative_affine_tail_divS
+10051:theorem gst_relative_affine_emitted_digitS
+10059:theorem gst_canonical_information_regeneratesS
+10102:theorem gst_seeded_bad_trace_regenerates_tailS
+10114:theorem gst_child_seed_after_regenerationS
+10121:theorem gst_parent_seed_after_regenerationS
+10129:theorem gst_null_gate_regenerates_seedS
+10136:theorem gst_plus_gate_regenerates_seedS
+10151:def GSTHardPrefixOneTailS
+10155:def GSTCanonicalBlockS (t : Nat) : Nat := 4^(3^t)
+10159:theorem gst_hard_tail_parent_navigationS
+10174:theorem gst_hard_tail_origin_one_recursionS
+10192:theorem gst_canonical_origin_two_repunitS
+10202:theorem gst_hard_tail_origin_two_recursionS
+10223:theorem gst_hard_tail_origin_one_mod3S
+10237:theorem gst_hard_tail_origin_two_mod3S
+10255:theorem gst_hard_tail_origin_one_div3S
+10274:theorem gst_hard_tail_origin_two_div3S
+10299:theorem gst_bad_hard_tail_origin_one_regeneratesS
+10321:theorem gst_bad_hard_tail_origin_two_regeneratesS
+10346:theorem gst_seed_one_fixed_of_parent_divisorS
+10356:theorem gst_hard_tail_odd_origin_binary_fixedS
+10392:theorem gst_navigation_constant_origin_energyS :
+10398:def gstCanonicalPrefixOffsetS (t : Nat) : Nat := c t / 3
+10401:theorem gst_navigation_constant_unit_prefixS
+10411:theorem gst_canonical_prefix_offset_mod3S
+10425:theorem gst_prefix_one_u_tail_eq_hard_tailS
+10433:theorem gst_residual_null_child_recurrenceS
+10457:theorem gst_residual_null_branch_reductionS
+10522:theorem gst_canonical_block_mod81_oneS
+10534:theorem gst_navigation_constant_four_mod243_stableS
+10568:def gstResidualNullTerminalS (s : Nat) : Nat :=
+10572:theorem gst_residual_null_terminal_mod27S
+10593:theorem gst_residual_null_terminal_happyS
+10620:theorem gst_residual_null_terminal_happy_s1S :
+10626:theorem gst_residual_null_terminal_happy_s2S :
+10632:theorem gst_residual_null_terminal_happy_s3S :
+10639:theorem gst_residual_null_terminal_happy_allS
+10657:theorem gst_residual_null_origin_one_terminal_eqS
+10691:theorem gst_residual_null_origin_one_bad_impossible_allS
+10706:theorem gst_residual_null_bad_forces_deeper_originS
+10732:theorem gst_canonical_block_unit_mod9S
+10748:theorem gst_canonical_block_unit_mod3S
+10764:theorem gst_canonical_Q4_mod9S
+10793:theorem gst_canonical_Q13_mod27S
+10827:theorem gst_canonical_mod27_13_residueS
+10843:theorem gst_residue19_is_null_gate2S
+10876:theorem gst_navigation_constant_four_mod27S
+10893:theorem gst_navigation_prefix_four_next_one_mod27S
+10935:theorem gst_residual_null_second_trit_one_impossibleS
+10979:theorem gst_residual_null_second_trit_zero_or_twoS
+11017:theorem gst_canonical_origin_cut_carryS
+11047:theorem gst_canonical_origin_cut_multiplier_mod3S
+11055:theorem gst_navigation_constant_mod3_allS
+11075:theorem gst_canonical_origin_cut_digitS
+11103:theorem gst_canonical_origin_cut_witnessS
+11134:theorem gst_canonical_bad_forbids_cut_shiftS
+11165:theorem gst_prefix_one_pure_power_axisS
+11176:theorem gst_prefix_one_pure_power_axis_powS
+11190:theorem gst_prefix_one_pure_two_axisS
+11209:theorem gst_canonical_prefix_one_recurrenceS
+11221:theorem gst_canonical_prefix_one_energy_squareS
+11242:theorem gst_prefixed_tail_digitS
+11255:theorem gst_prefixed_tail_carryS
+11274:theorem gst_child_energy_stateS
+11295:theorem gst_parent_forced_prefix_seedS
+11319:theorem gst_parent_energy_stateS
+11353:theorem gst_child_gate_embeds_phase_zero_energyS
+11377:theorem gst_phase_two_energy_boundary_gateS
+11418:theorem gst_three_phase_energy_orbitS
+11442:def gstOmegaPressureEnergyS (t T : Nat) : Nat :=
+11445:def gstOmegaPressureTransferS (t T j : Nat) : Nat :=
+11449:theorem gst_omega_pressure_energy_splitS
+11472:theorem gst_omega_pressure_transfer_le_energyS
+11488:theorem gst_three_pow_succ_gt_pressureS (m : Nat) :
+11500:theorem gst_omega_pressure_two_above_energyS
+11520:theorem gst_omega_pressure_no_unbounded_twoS
+11545:def gstOmegaNaturalTransferS (t T i : Nat) : Nat :=
+11548:theorem gst_omega_natural_transfer_prefixS
+11565:theorem gst_omega_natural_transfer_totalS
+11573:theorem gst_omega_natural_transfer_is_energyS
+11580:theorem gst_handwritten_navigation_omega_budgetS
+11591:theorem gst_handwritten_prefix_one_omega_budgetS
+11601:theorem gst_omega_natural_transfer_pos_of_big2S
+11609:theorem gst_omega_natural_transfer_zero_above_ceilingS
+11620:theorem gst_handwritten_child_gate_packet_and_energyS
+11635:def gstOmegaNaturalFutureS (t T i : Nat) : Nat :=
+11638:def gstOmegaNaturalPastS (t T i : Nat) : Nat :=
+11641:theorem gst_omega_natural_energy_splitS
+11648:theorem gst_omega_natural_future_transferS
+11669:theorem gst_omega_natural_past_transferS
+11684:theorem gst_omega_natural_simultaneous_transferS
+11695:def gstOriginNaturalTritS (n t : Nat) : Nat := n / 3^t % 3
+11697:theorem gst_origin_phase_prefixS
+11714:theorem gst_origin_phase_totalS
+11722:theorem gst_origin_phase_reconstructs_energyS
+11736:def gstOriginRemainingUS (t n : Nat) : Nat := 4^(3^t * n)
+11738:def gstOriginConsumedPhaseS (t n : Nat) : Nat :=
+11741:def gstOriginMultiplierStepS (M t n : Nat) : Nat :=
+11745:theorem gst_origin_simultaneous_mul_divS
+11755:def gstOriginConsumedPrefixUS (t n K : Nat) : Nat :=
+11760:theorem gst_origin_prefix_remaining_U_conservationS
+11782:theorem gst_origin_total_U_absorbedS
+11808:theorem gst_canonical_natural_origin_recurrenceS
+11828:theorem gst_omega_past_is_origin_prefixS
+11839:theorem gst_omega_past_origin_power_fingerprintS
+11895:theorem gst_canonical_information_U_commuting_stepS
+11932:theorem gst_handwritten_two_axis_same_energyS
+11956:theorem gst_retained_offset_u_state_stepS
+12027:theorem gst_retained_offset_origin_strictS
+12033:theorem gst_residual_null_retained_state_shapeS
+12070:inductive GSTSpaceV2S
+12076:def gstSpaceV2S (C : Nat) : GSTSpaceV2S :=
+12080:structure GSTSevenAxisVertexV2S where
+12093:def gstSevenAxisVertexV2S (R N p : Nat) : GSTSevenAxisVertexV2S where
+12105:structure GSTGraphV2OverlayS where
+12115:def GSTParentHappyResidue12S (S r : Nat) : Prop :=
+12123:theorem gst_parent_happy_iff_shared_residue12S
+12143:theorem gst_parent_bad_iff_avoids_shared_residue12S
+12154:theorem gst_parent_bad_at_child_two_residue12S
+12171:theorem gst_phase_micro_output01S
+12179:theorem gst_phase_micro_output12S
+12189:theorem gst_phase_micro_output20S
+12199:theorem gst_phase_micro_output_energyS
+12207:theorem gst_seeded_output_digit_exactS
+12215:theorem gst_seeded_happy_iff_common_twoS
+12238:theorem gst_seeded_bad_iff_no_common_twoS
+12255:def gstLocalRotateS (x : Nat × Nat) : Nat × Nat :=
+12261:theorem gst_local_rotate_fiveS
+12286:def gstPrefixedModulusS (B q : Nat) : Nat := B * 3^q
+12289:theorem gst_prefixed_residue_exactS
+12317:theorem gst_prefixed_residue_stepS
+12327:theorem gst_prefixed_digit_two_iff_residue_jumpS
+12360:theorem gst_prefixed_common_two_iff_double_residue_jumpS
+12375:def GSTDoubleJumpS (B E q : Nat) : Prop :=
+12383:theorem gst_phase0_common_two_iff_double_jumpS
+12398:theorem gst_phase1_common_two_iff_double_jumpS
+12426:theorem gst_pow4_mod3_oneS (m : Nat) : 4^m % 3 = 1 := by
+12432:theorem gst_pow4_exponent_lift_one_digitS
+12454:theorem gst_pow4_exponent_lift_two_digitS
+12471:theorem gst_pow4_exponent_trit_lift_digitS
+12503:def gstStripQuotientS (r M j : Nat) : Nat :=
+12506:def gstStripCarryS (r M j : Nat) : Nat :=
+12510:theorem gst_strip_quotient_succS
+12535:theorem gst_strip_carry_lt_fourS
+12546:theorem gst_strip_quotient_succ_mod4S
+12554:theorem gst_strip_quotient_succ_div4S
+12568:theorem gst_strip_quotient_shift_divS
+12586:theorem gst_strip_carry_is_information_digitS
+12603:theorem gst_shared_information_is_carry_wordS
+12708:def GSTNo22S (X : Nat) : Prop :=
+12712:theorem gst_no22_of_seeded_badS
+12721:theorem gst_no22_div_three_powS
+12734:theorem gst_no22_low_pair_le_sevenS
+12773:theorem gst_no22_nine_power_boundS
+12805:theorem gst_seeded_bad_nine_power_boundS
+12827:def GSTHighBadTraceS (R cut : Nat) : Prop :=
+12832:theorem gst_child_bad_iff_energy_high_badS
+12851:theorem gst_parent_bad_iff_energy_high_badS
+12872:theorem gst_information_descent_iff_high_tail_transferS
+12894:theorem gst_pure_power_strip_input_residueS
+12935:def gstWideCarryS (B R p : Nat) : Nat :=
+12938:def gstWideDigitS (R p : Nat) : Nat :=
+12942:theorem gst_wide_carry_forward_exactS
+12958:theorem gst_wide_quotient_decompositionS
+12978:theorem gst_wide_output_digit_exactS
+13001:theorem gst_strip_conservation_exactS
+13017:theorem gst_power_four_strip_conservationS
+13027:theorem gst_wide_carry_is_carry_wordS
+13044:def gstCellMassV2S (C d : Nat) : Nat := C + 4*d
+13046:def gstCellOutputV2S (C d : Nat) : Nat := (C + 4*d) % 3
+13048:def gstCellNextCarryV2S (C d : Nat) : Nat := (C + 4*d) / 3
+13051:theorem gst_cell_mass_conservationV2S (C d : Nat) :
+13059:theorem gst_cell_survive_iff_massV2S
+13070:theorem gst_cell_create_iff_massV2S
+13081:theorem gst_cell_destroy_iff_massV2S
+13093:theorem gst_parent_cell_mass_from_sharedV2S
+13116:theorem gst_parent_survive_iff_shared_mass_sectorV2S
+13136:theorem gst_local_rotate_mass_mod11V2S
+13149:def GSTBig2MassSpeciesV2S (M : Nat) : Prop :=
+13153:theorem gst_child_happy_has_big2_mass_speciesV2S
+13160:theorem gst_big2_species_rotate_closedV2S
+13174:theorem gst_big2_species_hits_survive_within_fourV2S
+13207:theorem gst_affine_block_step_exactV2S
+13237:theorem gst_shared_information_block_echoV2S
+13282:def gstResidueTowerModulusS (D q : Nat) : Nat := 3*D*3^q
+13285:theorem gst_residue_tower_stepS
+13296:theorem gst_pure_power_residue_tower_exactS
+13308:theorem gst_residue_tower_modulus_canonicalS
+13321:theorem gst_residue_strip_carry_is_exact_power_carryS
+13343:theorem gst_residue_strip_quotient_is_exact_power_wide_carryS
+13354:theorem gst_shared_state_is_pure_power_residue_stripS
+13375:theorem gst_shared_state_is_exact_power_rectangleS
+13406:theorem gst_exact_power_rectangle_is_shared_carrierS
+13423:theorem gst_exact_power_block_channel_echoS
+13458:theorem gst_exact_power_rectangle_conservationS
+13474:theorem gst_pure_power_parent_bad_forbids_residue_sectorS
+13539:theorem gst_seeded_shared_information_equationS
+13558:theorem gst_phase01_shared_informationS
+13574:theorem gst_phase12_shared_informationS
+13596:theorem gst_phase20_shared_informationS
+13618:theorem gst_phase_cycle_offsets_insideS
+13650:theorem gst_seeded_bad_trace_suffixS
+13662:theorem gst_seeded_gate_localizesS
+13687:theorem gst_relative_affine_suffixS
+13695:theorem gst_shared_gate_localizationS
+13725:theorem gst_shared_information_horizontal_coordinateS
+13758:theorem gst_shared_information_left_endpointS
+13799:theorem gst_shared_information_right_endpointS
+13839:def gstOutputDigitS (C d : Nat) : Nat :=
+13848:theorem gst_shared_word_regenerates_exactS
+13874:theorem gst_relative_parent_bad_regeneratesS
+13900:theorem gst_localized_gate_forcing_stepS
+13935:theorem gst_shared_high_regenerates_exactS
+13960:theorem gst_shared_high_remainder_ltS
+13983:theorem gst_shared_two_endpoint_regeneratesS
+14006:theorem gst_coupled_bad_information_regeneratesS
+14033:theorem gst_child_gate_high_realisationS
+14055:def ternaryOriginDigitS (n k : Nat) : Nat :=
+14060:def InfiniteTernarySupportS (n : Nat) : Prop :=
+14065:theorem three_pow_succ_gt_selfS (n : Nat) :
+14076:theorem ternary_origin_eventually_zeroS
+14087:theorem natural_not_infinite_ternary_supportS (n : Nat) :
+14095:theorem finite_origin_contradictionS
+14107:def GSTSeededHappyS (D X j : Nat) : Prop :=
+14113:theorem gst_exists_last_seeded_gate_belowS
+14144:theorem gst_digit_zero_above_self_ceilingS
+14156:theorem gst_no_seeded_gate_above_self_ceilingS
+14166:theorem gst_exists_global_last_seeded_gateS
+14188:theorem gst_suffix_after_last_gate_is_badS
+14230:theorem gst_canonical_two_boundary_trapS
+14305:def gstBinaryBridgeOutputS (a d : Nat) : Nat :=
+14309:def gstBinaryBridgeNextCarryS (a d : Nat) : Nat :=
+14313:def gstBinaryBridgeMassS (a d : Nat) : Nat :=
+14317:def gstBinaryBridgeEventS (a d : Nat) : Nat :=
+14321:theorem gst_binary_bridge_exactS (a d : Nat) :
+14336:theorem gst_binary_bridge_event_seven_balanceS (a d : Nat) :
+14348:theorem gst_binary_bridge_event_six_valuesS
+14365:theorem gst_binary_bridge_event_ne_sixS
+14372:theorem gst_binary_bridge_create_iff_event7S
+14384:theorem gst_binary_bridge_destroy_iff_event5S
+14396:theorem gst_binary_bridge_survive_iff_event8S
+14408:theorem gst_binary_bridge_phase1_hidden_pairS :
+14414:theorem gst_binary_bridge_null_survive_pairS :
+14420:theorem gst_binary_bridge_plus_survive_pairS :
+14427:def gstBinaryBlockOutputS (B C d : Nat) : Nat :=
+14430:def gstBinaryBlockNextCarryS (B C d : Nat) : Nat :=
+14433:def gstBinaryBlockEventS (B C d : Nat) : Nat :=
+14438:theorem gst_binary_block_event_balanceS (B C d : Nat) :
+14454:theorem gst_self_lt_three_powS : ∀ N : Nat, 1 ≤ N → N < 3^N
+14467:theorem gst_navigation_self_horizon_zeroS
+14474:theorem gst_navigation_self_digit_zeroS
+14483:theorem gst_omega_transfer_at_navigation_horizon_zeroS
+14503:def gstSixUniversePrefixS (i : Nat) : Nat :=
+14507:theorem gst_six_universe_prefix_succS (i : Nat) :
+14515:theorem gst_six_universe_prefix_closedS (i : Nat) :
+14527:theorem gst_six_universe_prefix_oneS :
+14532:theorem gst_six_square_boundary_factorS :
+14537:theorem gst_event_factor_thirteen_from_six_sevenS :
+14543:theorem gst_handwritten_kernel_normalizes_at_thirteenS :
+14548:theorem gst_first_binary_quotient_factorizationS :
+14573:def gstMicroRotate6S (m : Nat) : Nat := m / 3 + 2*(m % 3)
+14575:def gstHandwrittenKernelDenomS (m : Nat) : Nat := 6 - m
+14578:theorem gst_micro_rotate6_tableS :
+14588:theorem gst_micro_rotate6_fixed_iffS
+14596:theorem gst_micro_rotate6_nonzero_fixedS
+14605:theorem gst_micro_rotate6_four_cycleS :
+14611:theorem gst_handwritten_kernel_active_denomsS :
+14618:theorem gst_handwritten_kernel_create_destroy_doubleS :
+14624:theorem gst_handwritten_kernel_destroy_create_halfS :
+14630:theorem gst_handwritten_kernel_survive_fixedS :
+14639:theorem gst_handwritten_kernel_cycle_telescopesS :
+14651:def gstMicroHighBitS (C : Nat) : Nat := C / 2
+14652:def gstMicroLowBitS (C : Nat) : Nat := C % 2
+14655:def gstFirstMicroMassS (C d : Nat) : Nat := gstMicroHighBitS C + 2*d
+14658:def gstFirstMicroOutputS (C d : Nat) : Nat := gstFirstMicroMassS C d % 3
+14661:def gstSecondMicroMassS (C d : Nat) : Nat :=
+14665:theorem gst_micro_big2_orientation_tableS :
+14673:theorem gst_phase_one_micro_kernel_factor_twoS :
+14679:theorem gst_phase_two_micro_kernel_factor_halfS :
+14685:theorem gst_plus_survive_micro_kernel_fixedS :
+14704:def gstPhysicalMicroPairS (R p : Nat) : Nat × Nat :=
+14710:theorem gst_carryS_lt_four_allS (R p : Nat) :
+14717:theorem gst_digitS_lt_three_allS (R p : Nat) :
+14728:theorem gst_micro_pair_happy_iffS
+14742:theorem gst_physical_micro_pair_happy_iffS
+14756:theorem gst_physical_bad_forbids_happy_micro_pairsS
+14803:theorem gst_big1_clear_nonzero_bridge_forces_surviveS
+14819:def GSTBig1ClearBridgePathS
+14828:theorem gst_big1_clear_path_nonzero_forces_all_big2S
+14855:theorem gst_big1_clear_path_edges_are_surviveS
+14877:def gstBig1ProjectedPathCodeS
+14884:theorem gst_big1_projected_path_code_eq_six_pow_sub_oneS
+14914:def gstSecondMicroOutputS (C d : Nat) : Nat :=
+14920:theorem gst_two_layer_big2_information_path_tableS :
+14929:theorem gst_big1_projector_two_layer_forces_plus_surviveS
+14950:theorem gst_big1_projector_two_layer_is_physical_gst_plus_gateS
+14964:theorem gst_big1_projector_two_layer_chord_35S
+14977:theorem gst_aligned_36_max_mass_is_same_chord_35S :
+14983:def gstWorldProjectionCoefficientS (K : Nat) : Nat := K - 1
+14985:theorem gst_big1_projected_path_equals_world_projection_coefficientS
+15029:def GSTPhysicalTwoDigitBig1ClearS (R p : Nat) : Prop :=
+15037:theorem gst_second_micro_output_eq_x4_outputS
+15056:theorem gst_physical_two_digit_chord_forces_gst_plusS
+15081:theorem gst_physical_two_digit_chord_event_88S
+15096:theorem gst_physical_two_digit_chord_35S
+15113:theorem gst_happy_big2_two_digit_clear_iff_plusS
+15129:theorem gst_happy_big2_two_digit_not_clear_is_nullS
+15161:theorem gst_happy_big2_right_chord_dichotomyS
+15222:theorem gst_seed_zero_affine_carry_eq_physicalS
+15228:theorem gst_seed_zero_happy_is_physical_big2S
+15236:theorem gst_happy_big2_next_carry_two_or_threeS
+15262:theorem gst_last_child_gate_right_chordS
+15313:theorem gst_last_child_gate_next_seed_iff_clearS
+15362:def GSTCanonicalPhysicalCrossingS
+15369:def GSTCanonicalTwoBoundaryTrapS (A z T : Nat) : Prop :=
+15384:theorem gst_canonical_phase0_energy_shape_surgeryS
+15398:theorem gst_canonical_phase1_energy_shape_surgeryS
+15417:theorem gst_canonical_crossing_failure_traps_surgeryS
+15498:axiom for the GST wave. -/
+15499:def GSTCanonicalPhysicalTrapS
+15523:theorem gst_canonical_trap_is_physical_surgeryS
+15604:def GSTCanonicalLocalRightChordS (T q : Nat) : Prop :=
+15631:def GSTCanonicalCrossingFailureCertificateS
+15644:theorem gst_canonical_crossing_failure_certificate_surgeryS
+15735:theorem gst_prefixed_one_digit_shiftS
+15744:theorem gst_prefixed_one_carry_shiftS
+15754:theorem gst_prefixed_one_happy_iff_seed_oneS
+15766:theorem gst_prefixed_one_not_happy_zeroS
+15780:theorem gst_terminal_seed_one_gate_of_prefixed_oneS
+15831:theorem gst_prefix_one_residual_origin_trit_exactS
+15840:theorem gst_prefix_one_bad_forbids_origin_trit_shift_at_cutS
+15940:theorem gst_prefix_one_bad_good_big2_prefix_forces_origin_nonzeroS
+15980:def GSTCanonicalResidualInfiniteSupportBridgeS : Prop :=
+15991:theorem gst_residual_prefix_one_no_bad_of_infinite_support_bridgeS
+16004:theorem gst_residual_prefix_one_u_bad_contradiction_of_bridgeS
+16044:def GSTScopedTwoDigitBig1ClearS (C d : Nat) : Prop :=
+16051:theorem gst_scoped_two_digit_happy_gate_right_chordS
+16076:theorem gst_scoped_right_chord_is_36_state_35S
+16092:theorem gst_scoped_child_gate_forces_plus_and_postseed_threeS
+16118:theorem gst_scoped_child_gate_right_chord_high_quarterS
+16147:theorem gst_scoped_last_gate_two_boundary_plus_trapS
+16231:def GSTLocalTwoDigitRightChordS (T q : Nat) : Prop :=
+16258:theorem gst_local_two_digit_right_chord_of_gateS
+16267:def GSTCanonicalRightChordTrapS (A z T : Nat) : Prop :=
+16286:axiom is inserted. -/
+16287:theorem gst_canonical_right_chord_trapS
+16359:theorem gst_canonical_right_chord_trap_forgetS
+16370:theorem gst_canonical_right_chord_trap_is_physicalS
+16386:theorem gst_canonical_right_chord_seed_classificationS
+16427:def gstMicroTwoIndicatorS (d : Nat) : Int := if d = 2 then 1 else 0
+16429:def gstMicroEventOutputS (a d : Nat) : Nat := (a + 2*d) % 3
+16431:def gstMicroEventCarryS (a d : Nat) : Nat := (a + 2*d) / 3
+16433:def gstMicroEventSymbolS (a d : Nat) : Nat :=
+16437:def gstMicroBig2ActiveS (a d : Nat) : Prop :=
+16441:def gstMicroBig2FluxS (a d : Nat) : Int :=
+16447:def gstMicroKernelTwiceS (a d : Nat) : Int :=
+16454:theorem gst_micro_event_symbol_tableS :
+16464:theorem gst_micro_event_symbol_ne_sixS
+16474:theorem gst_micro_kernel_twice_active_tableS :
+16484:theorem gst_micro_kernel_resolvent_exactS
+16500:theorem gst_micro_big2_flux_exactS (a d : Nat) :
+16510:theorem gst_micro_big2_flux_telescopesS
+16521:theorem gst_micro_kernel_twice_decomposeS (a d : Nat) :
+16544:def gstBinaryEventWordValueS (R Y : Nat) : Nat := R + 3*Y
+16547:theorem gst_binary_seeded_event_valueS (a R : Nat) :
+16555:theorem gst_binary_two_layer_event_chargeS
+16567:def gstBinarySpaceChargeS (D : Nat) : Nat :=
+16570:theorem gst_binary_space_charge_four_valuesS
+16581:theorem gst_binary_space_charge_ne_twoS
+16589:theorem gst_binary_good_space_charge_endpointsS
+16599:theorem gst_seeded_x4_event_chargeS
+16611:theorem gst_seeded_x4_binary_layers_exactS
+16640:theorem gst_shared_x4_binary_factorS
+16731:theorem gst_shared_x4_binary_factor_last_gate_high_bitS
+16758:theorem gst_bigN_seed3_endpoint_forces_non_one_inline
+16775:theorem gst_prefix_one_bigN_future_zero_inline
+16797:theorem gst_step6_terminal_packet_kernel
+16899:theorem gst_navigation_witness_of_standalone_navigation
+16914:theorem gst_prefix_one_ontological_escape_of_master_inline
+16925:theorem gst_prefix_one_navigation_lift_of_master_inline
+16933:theorem gst_four_power_creation_master_inline :
+16941:theorem gst_prefix_one_navigation_lift :
+16950:def GSTPowerTwoWave (a : Nat) : Prop :=
+16957:def GSTTwoWaveBadTrace (R : Nat) : Prop :=
+16964:theorem gst_twoWave_badTrace_of_no_navigation
+16973:theorem gst_four_pow_adjacent (a : Nat) (ha : 1 ≤ a) :
+16985:theorem gst_power_two_wave_large
+16997:theorem erdos_ternary_2_even_universal (a : Nat) (ha : 5 ≤ a) :
+17030:theorem erdos_ternary_2_universal (n : Nat) (hn : 9 ≤ n) :

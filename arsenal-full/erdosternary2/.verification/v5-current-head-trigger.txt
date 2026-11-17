@@ -1,0 +1,3 @@
+V5 committed-tree verification trigger.
+Production proof source baseline: e8472e9b3768df66c2b5373bd37cb7ca3424cf60
+The proof files themselves are unchanged by this trigger commit.

@@ -1,0 +1,58 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0714 / 1132
+#    Path         : branches/sol_global-flux-surgery/.github/workflows/phase-crossing-surgery.yml
+#    Ref          : origin/sol/global-flux-surgery
+#    First-commit : 2026-08-17 00:36:05 +0530  (9452780)
+#    Last-commit  : 2026-08-17 14:31:15 +0530  (f546e80)
+#    Total commits: 5
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/5] 2026-08-17 00:36:05 +0530  9452780  (ker07-dev)
+#        Add isolated canonical crossing verification workflow
+# [02/5] 2026-08-17 12:39:43 +0530  76e441b  (ker07-dev)
+#        Kernel-check pathwise BIG1 projector chord
+# [03/5] 2026-08-17 14:15:39 +0530  29f5629  (ker07-dev)
+#        Compile global flux and phase-matrix surgery
+# [04/5] 2026-08-17 14:22:18 +0530  612f425  (ker07-dev)
+#        Run surgery files directly through pinned Lean
+# [05/5] 2026-08-17 14:31:15 +0530  f546e80  (ker07-dev)
+#        Compile exact historical seam reduction
+# ======================================================================
+
+name: Canonical Phase Crossing Surgery
+
+on:
+  push:
+    branches: [sol/global-flux-surgery]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-crossing:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Compile canonical phase crossing surgery scratch
+        run: lake env lean CanonicalPhaseCrossingSurgeryScratch.lean
+      - name: Compile pathwise BIG1 projector chord scratch
+        run: lake env lean HandwrittenBig1PathProjectorScratch.lean
+      - name: Compile exact physical x2 flux bridge
+        run: lake env lean GlobalPrefixOneFluxSurgeryScratch.lean
+      - name: Compile canonical binary phase matrix reduction
+        run: lake env lean GlobalPrefixOnePhaseMatrixScratch.lean
+      - name: Compile exact three-to-one renormalization
+        run: lake env lean GlobalPrefixOneRenormalizationSurgeryScratch.lean
+      - name: Compile historical one-error seam reduction
+        run: lake env lean GlobalPrefixOneHistoricalSeamScratch.lean

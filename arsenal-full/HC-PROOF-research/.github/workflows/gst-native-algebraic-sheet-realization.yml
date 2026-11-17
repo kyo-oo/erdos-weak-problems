@@ -1,0 +1,78 @@
+name: GST Native Algebraic Sheet Realization
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTClassicalHodgeGlobalSheetSaturation.lean'
+      - 'GSTClassicalHodgeGSTDegreeCertifiedSource.lean'
+      - '.github/workflows/gst-native-algebraic-sheet-realization.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-native-algebraic-sheet-realization-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore Lean dependency cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-deep-native-sheet
+          restore-keys: |
+            hc-lean-incremental-Linux-deep-native-sheet
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel-check all-X native Chow image and GST sheet-realization obstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTNativeAlgebraicSheetRealization GSTClassicalHodgeGlobalSheetSaturation GSTClassicalHodgeGSTDegreeCertifiedSource
+          set +e
+          timeout 9000 lake build GSTNativeAlgebraicSheetRealization > native-algebraic-sheet.log 2>&1
+          RC=$?
+          set -e
+          if [ "$RC" -eq 0 ]; then
+            echo "LEAN PASSED: actual original-X native Chow address-image and degree-certified point seed bridge"
+          elif [ "$RC" -eq 124 ]; then
+            echo "SLICE WINDOW EXHAUSTED (150 min of deep-chain building banked by the always-save step; modules built this attempt: $(grep -c 'Built ' native-algebraic-sheet.log || true)) — re-dispatch to resume from the banked cache"
+            exit 1
+          else
+            grep -nE 'error:|sorryAx|✖' native-algebraic-sheet.log | tail -n 130 || true
+            tail -n 90 native-algebraic-sheet.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" native-algebraic-sheet.log; then exit 1; fi
+      - name: Save Lean build cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-Linux-deep-native-sheet-${{ github.run_id }}
+      - name: Upload proof log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-algebraic-sheet-lean-log
+          path: native-algebraic-sheet.log
+          if-no-files-found: warn

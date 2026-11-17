@@ -1,0 +1,666 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=0.92in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,booktabs,longtable}
+\usepackage[T1]{fontenc}
+\usepackage[colorlinks=true,linkcolor=blue,urlcolor=blue]{hyperref}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{problem}[theorem]{Construction target}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\coker}{\operatorname{coker}}
+\newcommand{\pr}{\operatorname{pr}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Span}{\operatorname{span}}
+\title{General Space Theory and the Missing Hodge Geometry:\\
+An Exact Rank-One Kernel Construction and Native Defect Retract}
+\author{GST--Hodge mathematical derivation and Mathbox self-audit}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+This derivation answers exactly what geometric existence step remains
+after the verified GST native-cycle, Gram-residual, cosmological
+blowup, CM, and Hodge-operator developments.  For arbitrary
+smooth projective complex X of dimension d and arbitrary rational
+Hodge class alpha of codimension p, we construct a canonical rank-one
+rational Hodge correspondence kappa(alpha) on X times X.
+We prove an exact two-sided algebraic Chow/Hodge retract:
+kappa(alpha) is algebraic if and only if alpha is algebraic on the
+same original X.  The induced Hodge defect of X is therefore a
+split direct summand of the middle Hodge defect of X times X.
+This supplies a concrete, type-correct kernel and perfect-complex
+geometric construction target, proves an actual-native-image
+obstruction to purely formal GST matrix-unit completion, and
+identifies an alternative resolved-support Gysin construction.
+Neither unconditional Hodge algebraicity nor a genuine
+counterexample is claimed.
+\end{abstract}
+
+\section{Canonical geometric cycle-class construction (semantics repair)}
+
+The original-X class map in this paper is not an arbitrary
+Hodge-to-cycle selector. We construct it mathematically from the
+analytic fundamental classes of algebraic subvarieties, then identify
+precisely the separate Lean interface that still needs instantiation.
+
+Let \(X/\mathbf C\) be smooth projective of complex dimension \(d\),
+with \emph{its genuine complex analytification} \(X^{an}\). For each
+irreducible algebraic codimension-\(p\) closed subvariety \(Z\), choose
+a resolution \(\rho:\widetilde Z\to Z\) and denote the inclusion by
+\(i_Z:Z\hookrightarrow X\). The analytic fundamental cycle defines
+a rational singular-homology class
+\[
+ [Z]_{X}^{an}:=(i_Z^{an}\circ\rho^{an})_*[\widetilde Z]_
+ {2(d-p)}
+ \in H_{2(d-p)}(X^{an},\Q).
+\]
+The proper birational pushforward of fundamental cycles makes the
+class independent of the chosen resolution. Since \(X^{an}\) is a
+compact oriented real \(2d\)-manifold, Poincar\'e duality constructs
+\[
+ \boxed{\operatorname{cl}^{\mathrm{can}}_{X,p}([Z])
+   =\operatorname{PD}_{X^{an}}([Z]_{X}^{an})
+   \in H^{2p}(X^{an},\Q).}                     \tag{C1}
+\]
+Extend this map \(\Q\)-linearly to finite rational cycle sums.
+
+\begin{theorem}[Canonical comparison independent of GST semantic fields]
+Formula \textup{(C1)} descends to
+\(\operatorname{cl}^{\mathrm{can}}_{X,p}:
+\CH^p(X)_\Q\to H^{2p}(X^{an},\Q)\).
+Every image class has Hodge type \((p,p)\). The map is the unique
+rational-linear map that sends each irreducible codimension-\(p\)
+cycle to its genuine analytic fundamental-class dual.
+\end{theorem}
+\begin{proof}
+For a codimension-\((p-1)\) irreducible \(W\) and a rational
+function \(f\in\mathbf C(W)^\times\), resolve the closure of the
+graph of \(f:W\dashrightarrow\mathbf P^1\).
+The divisor \(\operatorname{div}_W(f)\) is the difference of the
+proper pushforwards of the fibers over \(0\) and \(\infty\).
+Those fibers are homologous because two points of
+\(\mathbf P^1(\mathbf C)\) are homologous. Therefore its
+fundamental-class image in \(X^{an}\) vanishes. The map is
+well-defined modulo rational equivalence. Its analytic
+integration current has bidegree \((p,p)\) and is closed;
+the K\"ahler Hodge decomposition thus places the resulting
+Betti class in \(H^{p,p}\). Finally, irreducible algebraic
+cycles generate \(\CH^p(X)_\Q\), so agreement on their classes
+forces equality everywhere.
+\end{proof}
+
+\noindent\textbf{Direct GST/Lean binding.}
+The earlier verified module
+\texttt{GSTClassicalHodgeGeometricCycleClassPointRigidity.lean}
+proves that a point-generated native class map is uniquely
+determined by its codimension-point assignments; and
+\texttt{GSTCanonicalPointGeometryStage2G.lean}
+now composes the actual original-\(X\) Euler projector with this
+point-generated map and gives an explicit finite native
+cycle-plus-residual formula. To identify that formal \texttt{pt}
+parameter with \(\operatorname{PD}_{X^{an}}[Z]^{an}\),
+one must instantiate the genuine analytification topology,
+fundamental-class construction, and its singular-cohomology
+comparison in Lean. A freely chosen \texttt{pt}, or a mere
+equivalence of underlying point sets with an arbitrary topology,
+does not suffice for the geometric identification. Nothing in
+the above geometric proof supplies algebraic representatives
+of all rational \((p,p)\) classes; it fixes the independent
+\emph{canonical semantics} of the comparison map.
+
+\section{Exact target and GST source dictionary}
+Fix a nonempty smooth projective complex variety X of dimension d,
+a very ample divisor H with class h, and 0<=p<=d.  Define
+\[
+ V_p(X)=H^{2p}(X,\Q)\cap H^{p,p}(X),\qquad
+ C_p(X)=\CH^p(X)_\Q,\qquad
+ c_p=\cl_X^p:C_p(X)\longrightarrow V_p(X).
+\]
+These are \emph{canonical Betti} cycle classes, not freely chosen
+linear maps stored in a formal Hodge-data field.  Define
+\[
+ A_p(X)=\im c_p,\qquad D_p(X)=V_p(X)/A_p(X).
+ \tag{1.1}\label{eq:defect}
+\]
+The original full-rational-Hodge goal is:
+\[
+ \boxed{\forall X,p:\;D_p(X)=0.}\tag{1.2}\label{eq:target}
+\]
+The term \emph{missing geometry} means a uniform geometric
+construction proving this exact surjectivity, without assuming
+any algebraic representative of the input Hodge target.
+
+The source modules read for this derivation distinguish:
+\begin{longtable}{p{0.38\textwidth}p{0.54\textwidth}}
+\toprule
+GST source & Earned mathematical capability; unresolved input\\
+\midrule\endhead
+\texttt{GSTGeneralSpace}, \texttt{GSTGraphV2OmniversalCore},
+\texttt{GSTGraphV2SelfExpandingCosmology}
+& Carrier-independent typed events and arbitrary world-birth closure;
+a formal born state is not automatically a born algebraic cycle.\\
+\texttt{GSTClassicalHodgeGlobalSheetSaturation},
+\texttt{GSTClassicalHodgeNativeArsenalRepresentation}
+& Rank-free rational sheet matrix algebra; actual native-cycle
+operator realization is separate.\\
+\texttt{GSTClassicalHodgeGSTSourceProgramCompiler},
+\texttt{GSTClassicalHodgeGradedGeometricProgramOrbit}
+& Geometric-program cycle evaluation and Hodge naturality.
+Universal geometric source-to-target programs do not yet exist.\\
+\texttt{GSTClassicalHodgeAmbientBettiSelfProduct},
+\texttt{GSTClassicalHodgeAmbientCorrespondenceKernelAction},
+\texttt{GSTClassicalHodgeAmbientCorrespondenceIncidenceNaturality}
+& True topological self-product/pullbacks and ambient kernel
+interfaces; the complete graded cup/Gysin and genuine comparison
+still require scheme-level instantiation.\\
+\texttt{GSTClassicalHodgeRealizedClosedCorrespondenceAlgebra},
+\texttt{GSTClassicalHodgeFiniteClosedCorrespondence}
+& Finite left-fiber correspondence syntax and native operator
+naturality; arbitrary proper Chow correspondences are wider.\\
+\texttt{GSTPrimitiveAlgebraicMotiveProjector},
+\texttt{GSTPolarizedHodgeResidualEnergy},
+\texttt{GSTActualXHodgeResidualProjection}
+& Rational Gram-dual projectors, energy reductions, original-X Chow
+source constructions and full-image annihilator barrier.\\
+\texttt{GSTUniversalResolvedSupportHodge},
+\texttt{GSTUniversalCMArithmeticObstruction}
+& Actual support, Gysin, perfect complexes, and CM candidates.
+A universal target-specific algebraic source is not supplied.\\
+\texttt{GSTClassicalHodgeActualGeometricIrreducibility},
+\texttt{GSTClassicalHodgeGeometricCycleClassSpine},
+\texttt{GSTClassicalHodgeExactClayStatement}
+& Conditional irreducibility and exactly quantified final target;
+the supplied-cycle-map interface still admits a zero-map
+semantic countermodel and needs a true canonical Betti instance.\\
+\bottomrule
+\end{longtable}
+The branch's earlier 701-file overview provides a full
+\emph{inventory}, but not an independent proof audit of every file.
+This derivation uses the named actual source implementations
+and retains their hypothesis boundaries.
+
+\section{GST native-image conservation: the fundamental firewall}
+\begin{theorem}[Native-program image invariance]\label{th:native}
+Let a genuine algebraic GST program act on actual native cycles
+by \(T_C\) and on canonical rational Hodge classes by \(T_H\),
+with a geometrically established commuting square
+\[
+                 c_p T_C=T_Hc_p. \tag{2.1}
+\]
+Then \(T_H\) preserves \(A_p(X)\).  Every finite rational combination
+and composition of such operators also preserves \(A_p(X)\).
+\end{theorem}
+\begin{proof}
+For \(a=c_p(z)\), one has \(T_H(a)=c_p(T_Cz)\in A_p(X)\).
+Composition, rational scaling and addition preserve the image.
+For cross-carrier programs, use the matching source/target
+algebraic images in place of a common \(A_p(X)\).
+\end{proof}
+Choose any rational complement \(V_p(X)=A_p(X)\oplus R_p(X)\).
+Every realized endomorphism has the matrix shape
+\[
+ T_H=\begin{pmatrix}T_{AA}&T_{AR}\\0&T_{RR}\end{pmatrix}.
+ \tag{2.2}\label{eq:block}
+\]
+If \(A_p(X)\) is a nonzero proper subspace, a formal GST
+matrix unit carrying an algebraic vector to a vector in \(R_p(X)\)
+has nonzero lower-left block and CANNOT be the Hodge action
+of any such genuine Chow-natural operator.  This explains,
+without negating any verified GST formal laws, the distinction
+between internal rank-free matrix algebra and the actual
+geometric action.  It is the content of the repository's
+native-image barriers including
+\texttt{full\_native\_annihilator\_kills\_exceptionalGRR}.
+For a detector \(\ell\) vanishing on the entire \(A_p(X)\),
+\(\ell(c_p(T_Cz))=0\) for \emph{every} native input \(z\).
+A nonzero coupling can certify growth only beyond a
+\emph{chosen incomplete} finite source frame, never beyond
+the total algebraic image.
+
+\section{New exact self-product Chow/Hodge retract}
+Let \(\delta=\int_X h^d>0\), and let \(q_1,q_2:X\times X\to X\)
+denote the projections.  Define actual Chow maps:
+\begin{align}
+ S^C_p(z)&=\frac1\delta\,q_1^*(h^{d-p})\cdot q_2^*z
+    &&\in\CH^d(X\times X)_\Q, \tag{3.1}\\
+ R^C_p(W)&=(q_2)_*\bigl(q_1^*h^p\cdot W\bigr)
+    &&\in\CH^p(X)_\Q. \tag{3.2}
+\end{align}
+Here \(h^k\) in Chow means the product of actual hyperplane
+divisor classes.  Define their canonical Hodge counterparts
+\begin{align}
+ S^H_p(\alpha)&=\frac1\delta\,q_1^*(h^{d-p})
+      \smile q_2^*\alpha &&\in\Hdg^d(X\times X)_\Q,
+      \tag{3.3}\\
+ R^H_p(\beta)&=(q_2)_*(q_1^*h^p\smile\beta)
+      &&\in V_p(X). \tag{3.4}
+\end{align}
+The Chow/Betti operations are product, flat pullback,
+proper pushforward and fiber integration; they are not
+arbitrary Hodge-to-Chow selectors.
+
+\begin{theorem}[Two exact commuting retracts]\label{th:retract}
+For all X and 0<=p<=d,
+\[
+ R^C_pS^C_p=\id_{C_p(X)},\qquad
+ R^H_pS^H_p=\id_{V_p(X)}, \tag{3.5}
+\]
+and
+\[
+ \cl_{X\times X}S^C_p=S^H_pc_p,\qquad
+ c_pR^C_p=R^H_p\cl_{X\times X}. \tag{3.6}
+\]
+The endomorphisms \(S^C_pR^C_p\) and \(S^H_pR^H_p\) are
+idempotent and commute with cycle class.
+\end{theorem}
+\begin{proof}
+By projection formula and fiber integration,
+\begin{align*}
+ R^C_pS^C_p(z)
+ &=\delta^{-1}(q_2)_*
+   (q_1^*h^p\cdot q_1^*h^{d-p}\cdot q_2^*z)\\
+ &=\delta^{-1}\left(\int_X h^d\right)z=z.
+\end{align*}
+The same calculation in canonical Betti cohomology gives
+\(R^H_pS^H_p=\mathrm{id}\).  Cycle classes are compatible with
+the stated products, flat pullbacks, and proper pushforward.
+Thus both squares commute.  If \(RS=\mathrm{id}\), then
+\((SR)^2=S(RS)R=SR\).
+\end{proof}
+All codimensions are checked: on \(X\times X\), \(S^C_p\) has
+codimension \(d-p+p=d\); after multiplication by \(h^p\)
+and pushing along a \(d\)-dimensional fiber, \(R^C_p\) lands
+in codimension \(p\).  At \(p=0\) and \(p=d\) the formulas still
+make sense.  No negative powers are used.
+
+\section{Exactly what missing geometry has to be constructed}
+For an arbitrary prescribed rational \((p,p)\) Hodge target
+\(\alpha\) on the original \(X\), form the explicit rational
+middle Hodge correspondence
+\[
+ \boxed{\kappa_\alpha=
+       \frac1\delta\,q_1^*h^{d-p}\smile q_2^*\alpha
+       \in\Hdg^d(X\times X)_\Q.}\tag{4.1}
+\]
+This is a defined cohomology class of type (d,d), not
+a claimed algebraic cycle.
+
+\begin{theorem}[Exact rank-one kernel criterion]\label{th:equivalence}
+For a fixed triple \((X,p,\alpha)\), the following are equivalent:
+\begin{enumerate}
+\item An actual original-\(X\) algebraic cycle \(z\in\CH^p(X)_\Q\)
+      satisfies \(c_p(z)=\alpha\).
+\item There is an actual algebraic Chow correspondence
+      \(W\in\CH^d(X\times X)_\Q\) whose canonical cycle class
+      equals \(\kappa_\alpha\).
+\end{enumerate}
+Given \(z\), set \(W=S^C_p(z)\).  Given \(W\), set \(z=R^C_p(W)\).
+\end{theorem}
+\begin{proof}
+The forward direction follows from the first commuting
+square of Theorem~\ref{th:retract}.  Conversely,
+\[
+ c_p(R^C_pW)=R^H_p\cl_{X\times X}(W)
+            =R^H_p S^H_p(\alpha)=\alpha.
+\]
+The construction occurs on the \emph{same} original X
+and needs no artificial target map.
+\end{proof}
+
+\begin{corollary}[Explicit target action on an algebraic seed]
+The Hodge kernel \(\kappa_\alpha\) has the rank-one ambient
+correspondence action
+\[
+ T_{\kappa_\alpha}(v)=
+   (q_2)_*(q_1^*v\smile\kappa_\alpha)
+   =\frac{\int_X v\smile h^{d-p}}{\delta}\alpha.
+   \tag{4.2}
+\]
+Hence \(T_{\kappa_\alpha}(h^p)=\alpha\) exactly.
+If an algebraic \(W\) represents \(\kappa_\alpha\), then the
+genuine Chow action on \(h^p\) constructs \(z_\alpha\).
+\end{corollary}
+
+\begin{problem}[The precise missing GST geometric operation]
+For each arbitrary original \(X\) and each rational Hodge
+target \(\alpha\), independently construct a genuine rational
+algebraic kernel \(W_\alpha\in\CH^d(X\times X)_\Q\) and prove
+\[
+             \cl(W_\alpha)=\kappa_\alpha. \tag{4.3}
+\]
+The construction may use native world births, projective
+geometry, algebraic incidence, GRR-perfect complexes,
+CM sources, and resolved supports, but may \emph{not}
+take a previously selected algebraic preimage of \(\alpha\)
+or a formal matrix unit declared algebraic as input.
+\end{problem}
+Theorem~\ref{th:equivalence} establishes that this
+kernel existence problem is exactly equivalent to the
+original rational Hodge class problem.  That is the
+mathematically sharp target, \emph{not} a claim that
+the kernel already exists.
+
+\section{A split injection of the actual Hodge defect}
+The compatible Chow/Hodge maps induce rational maps
+\[
+ \overline S_p:D_p(X)\longrightarrow D_d(X\times X),
+ \qquad
+ \overline R_p:D_d(X\times X)\longrightarrow D_p(X).
+\]
+\begin{theorem}[Defect splitting]\label{th:defectsplit}
+There is a canonical split injection with
+\[
+ \overline R_p\overline S_p=\id,\qquad
+ D_d(X\times X)\cong
+     \overline S_p(D_p(X))\oplus\ker\overline R_p.
+ \tag{5.1}
+\]
+Moreover a given \(\alpha\) is nonalgebraic on \(X\) if and only if
+the explicitly specified \(\kappa_\alpha\) is nonalgebraic
+on \(X\times X\).
+\end{theorem}
+\begin{proof}
+The maps are defined on quotients because of the two
+Chow/Betti commuting squares.  The composition equals
+the identity by Theorem~\ref{th:retract}.  The induced
+projector \(\overline S_p\overline R_p\) splits the target
+vector space into image and kernel.  Since
+\(\overline S_p([\alpha])=[\kappa_\alpha]\) and
+\(\overline S_p\) is injective, their zero classes
+are equivalent.
+\end{proof}
+Thus proving rational Hodge in middle codimension \(d\)
+on all self-products \(X\times X\) suffices to prove
+rational Hodge for all smooth projective X in every
+codimension.  A genuine counterexample downstairs
+would be an explicit counterexample upstairs.
+This is a genuine exact mathematical reduction,
+but not an unconditional Hodge solution.
+
+\section{GST primitive Gram and rank-free matrix-unit geometry}
+In the primitive rational \((p,p)\) Hodge fiber for
+\(2p\le d\), use the positive definite signed rational form
+\[
+ Q_p(u,v)=(-1)^p\int_X u\smile v\smile h^{d-2p}.
+ \tag{6.1}
+\]
+The existing GST finite-native-frame Gram formula
+for known algebraic primitive cycles \(Z_1,\ldots,Z_m\)
+with \(a_i=\cl(Z_i)\), \(G_{ij}=Q_p(a_i,a_j)\), is
+\[
+ P_A(v)=\sum_{i,j}a_i(G^{-1})_{ij}Q_p(a_j,v),
+ \qquad r_v=v-P_A(v). \tag{6.2}
+\]
+One derives \(Q_p(r_v,a_j)=0\) and the exact energy
+decomposition \(Q_p(v,v)=Q_p(P_Av,P_Av)+Q_p(r_v,r_v)\).
+When the \(a_i\) span only a finite \emph{known} source
+frame, \(r_v\) need not be outside the full algebraic image.
+When they span the full algebraic primitive image,
+all genuine algebraic sources pair trivially with \(r_v\):
+this follows from Theorem~\ref{th:native}, not from a
+missing positivity estimate.  The GST integer Gram
+threshold and rank-one residual laws remain valid
+under their separately documented hypotheses.
+
+\begin{theorem}[Algebraic primitive basis realizes actual GST units]
+\label{th:units}
+Assume the full primitive rational Hodge fiber has a
+basis \(e_1,\ldots,e_m\) of classes of genuine algebraic cycles
+\(Z_1,\ldots,Z_m\) on \(X\). Then the rational algebraic kernels
+\[
+ W_{ij}=\sum_k(G^{-1})_{jk}
+ q_1^*\bigl((-1)^pZ_k\cdot h^{d-2p}\bigr)
+ \cdot q_2^*Z_i\in\CH^d(X\times X)_\Q
+ \tag{6.3}
+\]
+have genuine Betti actions
+\[
+                  T_{W_{ij}}(e_\ell)=\delta_{j\ell}e_i.
+                  \tag{6.4}
+\]
+\end{theorem}
+\begin{proof}
+The codimension of each kernel is
+\((p+d-2p)+p=d\).  Its action on \(e_\ell\) gives
+\(\sum_k(G^{-1})_{jk}G_{\ell k}e_i
+=\delta_{j\ell}e_i\), using symmetry
+and nonsingularity of the polarized primitive Gram.
+Every displayed factor is an \emph{actual} algebraic
+Chow class under the stated hypothesis.
+\end{proof}
+Conversely, given any nonzero algebraic seed in this
+primitive fiber, if the FULL rank-free matrix-unit
+family \(E_{ij}\) already has actual algebraic-kernel
+realizations, applying its j-th column to that seed
+constructs every primitive basis vector.
+Thus global genuine unit realization with a nonzero
+seed is essentially conjecture-level: it cannot be
+inferred from the Hodge-vector-space matrix algebra
+without a geometric theorem.
+
+\paragraph{Finite correspondence firewall.}
+The actual source
+\texttt{GSTClassicalHodgeFiniteClosedCorrespondence.lean}
+requires finite left scheme fibers.  The evident
+external-product Chow kernel \(W_{ij}\) typically has
+positive-dimensional fibers over its first-factor
+support when \(0<p<d\): the second-factor cycle has
+dimension \(d-p>0\).  Therefore the source-level
+finite-fiber correspondence implementation cannot be
+silently identified with all needed middle-dimensional
+proper Chow kernels.  The ambient Betti kernel calculus,
+proper projective pushforward, and full intersection
+comparison are the correct geometric interfaces.
+
+\section{A distinct GST resolved-support construction}
+A geometrically different, more locally testable
+source route already appears in
+\texttt{GSTUniversalResolvedSupportHodge.lean}.
+Fix \(p\ge1\). Suppose there is a genuine proper map
+\(i:\widetilde Y\to X\) from a smooth projective resolution of
+a codimension-\((p-1)\) algebraic support, such that
+\[
+ \alpha\in\im\bigl(
+ i_*:H^2(Ytilde,\Q)\longrightarrow H^{2p}(X,\Q)\bigr).
+ \tag{7.1}\label{eq:support}
+\]
+A finite sum of supports is allowed.
+The rational pure Hodge structure and Gysin shift
+give a rational (1,1) preimage of the target in
+the image problem, using strictness/semisimplicity
+of polarizable rational Hodge structures.
+The Lefschetz (1,1) theorem constructs a genuine
+divisor D on the smooth source Ytilde.  Then
+\[
+                    Z=i_*D\in\CH^p(X)_\Q,
+                    \qquad\cl_XZ=\alpha. \tag{7.2}
+\]
+This is an exact construction from geometric source
+data.  The \emph{unproved universal premise} is
+the actual support existence \eqref{eq:support}
+for every prescribed Hodge class.
+
+For p=2, the target becomes a genuine divisor
+support on the arbitrary original X, its resolution,
+a rational degree-two source class, and a correctly
+graded Gysin push.  This is much more concrete than
+assuming an unexplained nonzero determinant or a
+global Hodge-to-Chow selector.  The construction
+requires actual supports, not just a GST label
+asserted to be supported.
+
+\section{Why blowup cosmology does not by itself finish the task}
+For an actual smooth center Z of codimension c>=2
+in smooth projective B, canonical Chow/Hodge
+blowup decompositions give
+\[
+ \coker(\cl_{\operatorname{Bl}_ZB}^p)
+ \cong\coker(\cl_B^p)\oplus
+ \bigoplus_{i=1}^{c-1}\coker(\cl_Z^{p-i}).
+ \tag{8.1}
+\]
+A blowup from Hodge-complete B and centers remains
+complete; a missing class in a center survives.
+For \(Y=\mathrm{Bl}_X(\mathbb P^N)\) with exceptional \(j:E\to Y\),
+\(q:E\to X\), and \(\xi=c_1(\mathcal O_E(1))\), the genuine maps
+\[
+ I(z)=j_*q^*z,\qquad
+ R(W)=-q_*(\xi^{c-2}j^!W) \tag{8.2}
+\]
+satisfy \(RI=\mathrm{id}\), using \(j^!j_*=-\xi\) and
+\(q_*(\xi^{c-1}q^*(-))=\mathrm{id}\).
+Consequently the full image of algebraic
+exceptional-return classes on original X is
+\emph{exactly}
+\[
+             \im(\cl_X\circ R)=\im(\cl_X).
+             \tag{8.3}
+\]
+The inclusion from left to right is tautological
+from the Chow-valued target; reverse inclusion
+uses RI=id.  This mathematically closes the
+unproductive attempt to gain \emph{new classes
+outside the entire algebraic image} merely by
+ordinary native exceptional birth.  Additional
+non-tautological objects may enlarge the \emph{known
+library} but cannot bypass this full-image identity.
+
+\section{Exact perfect-complex kernel acceptance test}
+The GST \(K_0\)/GRR route should construct, without an
+unknown preimage as input, a genuine virtual perfect
+complex class \(\mathcal E_\alpha\) in
+\(K_0(X\times X)\otimes\Q\) with
+\[
+ \boxed{
+   [\operatorname{ch}(E_\alpha)]_d^{\mathrm{Betti}}
+          =\kappa_\alpha.}\tag{9.1}
+\]
+Its degree-d Chow Chern-character part
+\(W_\alpha=[\operatorname{ch}(\mathcal E_\alpha)]_d\) is an actual
+\(\CH^d(X\times X)_\Q\) source. Inserting it in
+\(R^C_p\) gives a codimension-\(p\) cycle on the original \(X\)
+whose canonical Betti class is exactly \(\alpha\).
+Conversely, if \(\alpha\) already has an algebraic
+representative, the rank-one Chow kernel is
+algebraic and belongs to the degree-d part of the
+rational Chern character of some virtual perfect
+class on the smooth self-product, by the rational
+K-theory/Chow comparison.  Thus the universal
+perfect-kernel assertion is again equivalent to
+the target, not an automatic K-theoretic theorem.
+
+When executing derived direct-image/GRR formulas,
+the appropriate relative Todd correction must be
+included.  Equation (9.1) concerns the \emph{direct}
+graded Chern character of an object on X times X;
+it does not justify arbitrarily adding or deleting
+Todd factors in a pushforward.
+
+\section{Wolfram exact symbolic countercheck and Gram test}
+In the rational model \(V=\Q^3\) with algebraic image
+\(A=\Q e_1\), every genuine algebraic-image-preserving
+operator has a matrix
+\[
+ T=\begin{pmatrix}a&b&c\\0&d&e\\0&f&g\end{pmatrix}.
+\]
+The formal target kernel mapping algebraic seed
+\(e_1\) to \(e_2\) has matrix
+\[
+ U=e_2e_1^t=
+ \begin{pmatrix}0&0&0\\1&0&0\\0&0&0\end{pmatrix}.
+\]
+For \(P=e_1e_1^t\), exact Wolfram evaluation verified
+\[
+ (I-P)TP=0,\quad (I-P)UP=U\ne0,\quad
+ Ue_1=e_2,\quad P^2=P.
+\]
+The tested command (stateless Wolfram Language) was:
+\begin{verbatim}
+Clear[a,b,c,d,e,f,g];
+T={{a,b,c},{0,d,e},{0,f,g}};
+h={1,0,0}; alpha={0,1,0};
+U=Outer[Times,alpha,h]; P=Outer[Times,h,h];
+{T.h,U.h,MatrixRank[U],P.P==P,
+ (IdentityMatrix[3]-P).T.P,
+ (IdentityMatrix[3]-P).U.P}
+\end{verbatim}
+Output: \(\{(a,0,0),(0,1,0),1,\mathrm{True},0,U\}\).
+
+Independently, a general rational symmetric Gram \(G\) of rank
+three with \(\det G\ne0\) and dual frame
+\(e^j=\sum_k(G^{-1})_{jk}e_k\) gave the exact
+formal matrix units \(E_{ij}=e_i(e^j)^t G\).
+Wolfram returned
+\[
+       \sum_i E_{ii}=I_3,\qquad
+       E_{12}E_{23}-E_{13}=0
+\]
+symbolically, as expected from Theorem~\ref{th:units}.
+These computations audit finite exact \emph{linear algebra};
+they do not certify scheme existence of \(W_\alpha\)
+or the true Betti cycle-class interpretation.
+
+\section{Acceptance contract and executable mathematical continuation}
+The precise missing \emph{geometric} problem is either:
+\begin{enumerate}
+\item independently construct an actual middle Chow kernel
+\(W_\alpha\) on \(X\times X\) with
+\(\cl(W_\alpha)=\delta^{-1}q_1^*h^{d-p}q_2^*\alpha\),
+then apply the proved native return \(R^C_p\); or
+\item independently construct a genuine codimension-\((p-1)\)
+algebraic support and an \(H^2\) source as in
+\eqref{eq:support}, then apply the divisor source and Gysin return.
+\end{enumerate}
+Neither statement follows from arbitrary GST births,
+matrix units, positive Gram energies, or a source
+rank-growth theorem for a proper finite known span.
+Proving one \emph{for all X,p,alpha} would finish the
+mathematical Hodge existence obligation.  Full Lean
+completion additionally requires canonical Betti
+semantic instantiation rather than a freely supplied
+cycleClass field and a kernel axiom audit.
+
+The \emph{next checkable repository target} is a
+\texttt{GSTOriginalXRankOneKernelGeometry} module
+that supplies actual Chow product/pullback/pushforward
+and their canonical Betti commuting squares and
+formalizes Theorems~\ref{th:retract} and
+\ref{th:defectsplit}; the underlying mathematical
+proofs are complete here.  Its \emph{universal
+\(W_\alpha\) existence} must remain explicitly open
+until independently constructed from actual geometry.
+The user-requested strategy is therefore a
+LaTeX-first geometric derivation and obstruction
+audit, not a fictional new final Lean theorem.
+
+\paragraph{Evidence summary.}
+Proved in the mathematical derivation:
+native-image conservation, rank-one Chow/Hodge
+retracts, equivalence of algebraic target and
+algebraic rank-one kernel, defect direct-summand
+injection, and matrix-unit algebraic realization
+conditional on algebraic basis cycles.
+Exact finite symbolic checks: Wolfram \(\Q^3\) source
+firewall and general three-by-three Gram identities.
+Not proved: universal realization of \(W_\alpha\),
+universal support existence, canonical scheme/Betti
+formalization of all displayed geometric maps,
+and the full original rational Hodge conjecture.
+
+\bigskip\noindent
+\textbf{Repository provenance:}
+kyo-oo/HC-PROOF, branch
+\texttt{research/gpt6-native-point-primitive-span-20261017},
+read checkpoint
+\texttt{6234c1b6f4ddacbce2b40bb614059fc1621cda71},
+20 October 2026.  The derivation is a Mathbox-style
+self-audit and uses the user's GST ontology and
+verified source modules; it is \emph{not} a claim
+to have re-audited all 701 Lean proof bodies.
+\end{document}

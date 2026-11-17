@@ -1,0 +1,326 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry}
+\geometry{margin=1in}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\GammaL}{\Gamma}
+\newcommand{\Cfour}{C_4}
+\newcommand{\Gbul}{\mathcal{G}_\bullet}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+
+\title{The two-cell reduction at the committed deck: the five-term
+concentration, the mixed-cell kill at scale $2m$, and the negative resolution of
+the strip-shape hypothesis (Round 28)}
+\author{GST Hodge campaign — the operator's standing completion program}
+\date{2026-10-31}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This round constructs the reduction demanded by every failed close of the
+campaign: AUDIT-22's finding F1 asked for the equivariant-descent spectral
+sequence carrying the traceless two-cell class
+$[C_T^0]\in H^2(\Gbul;\mathrm{SL}(H_z))$ to the deck computation; the
+21-c item (ii) named the nonabelian-to-abelian reduction as the
+remaining construction. The construction delivered here, at the
+committed deck structure of the eight-letter world:
+\textbf{(T1)} the Lyndon--Hochschild--Serre five-term exact sequence
+for $1\to\GammaL\to\Gbul\to \Cfour\to 1$ with the traceless content
+module $A=\iota(M)$, with $E^{2,0}=H^2(\Cfour;A)=0$ by the committed R1
+law and $E^{0,2}$ computed exactly (rank 12, with the
+$\theta$-shaped $\iota$-strip part exactly zero), giving the
+\emph{injectivity} of the mixed-cell map
+$H^2(\Gbul;A)\hookrightarrow H^1(\Cfour;\Hom(\GammaL,A))$;
+\textbf{(T2)} the mixed layer is computed exactly:
+$H^1(\Cfour;\Hom(\GammaL,A))\cong(\Z/2)^6$ — pure 2-torsion, no
+$(x{+}1)(x^2{+}1)$-glue — so $2[C_T^0]=0$: the doubled transport is
+cohomologically flat, and the rational halving of the two-center cycle
+closes; \textbf{(T3)} the strip-shape hypothesis (item (v)) is
+\emph{inconsistent} — no nonzero $\iota$-strip class is $\Cfour$-invariant,
+so the hypothesis is resolved negatively and replaced by the
+mixed-cell shape; \textbf{(T4)} the $(A,-A)$ witness: its mixed-cell
+class is nonzero at scale 1 (the obstruction lives) and dies at scale 2
+(the parity engine again), and is \emph{realized} by an explicit
+lifting two-cell cocycle $c_\nu$ (the $d_2$-leg discharged
+constructively - a lifting, not a retyping); \textbf{(T5)} the
+input-sensitivity is the Chern-typing barrier $ch_p(E)\in H^{p,p}$ (the
+Corollary-7 discipline localized), with the excluded-input run at the
+module level (the swap-typed content refused: its deck class
+survives); \textbf{(T6)} the item (iv) rank parity is \emph{not needed}
+on this route — no eigenbranch exchange is required. The remaining
+boundaries are stated on the face: the torsion boundary
+$\partial\in H^3(\Gbul;\mu_2)$ for the nonabelian reconstruction, the
+fiber-centralizer condition, and the general-input deck structure
+(item (i) transformed). Certificate:
+\texttt{two\_cell\_reduction\_checks.py}, 125 checks, exit 0,
+deterministic double-run byte-identical. Independent adversarial audit
+(AUDIT-28, 31 re-derivation probes, 0 disagreements): verdict
+PASS\_WITH\_REPAIRS\_REQUIRED on the first pass (five receipt-level
+majors: the injectivity gated by a constant, the mixed structure
+printed not asserted, a tautological input receipt, the unpinned
+witness letter, the uncomputed $d_2$-leg); the batched repair round
+discharged all five with new gating checks (T1d, T2-assertions,
+T4-receipts, T4-LIFT, T5-excluded); the closing re-check confirmed.
+\end{abstract}
+
+\section{Setting and the exact sequence}
+
+\textbf{The committed deck structure.} $\Gbul = \GammaL\rtimes\Cfour$
+is the affine translation groupoid of the eight-letter world:
+$\GammaL=\Z^8$ the period lattice with letters $e_j,f_j$ ($j=0..3$) and
+the polarization $\theta=\sum_j e_j\wedge f_j$; the deck $\Cfour$ is
+the single-factor Gaussian rotation $g=(i,1,1,1)$
+(the committed convention: $e_0\mapsto -f_0$, $f_0\mapsto e_0$, the
+other six letters fixed), an exact element of $\mathrm{Sp}(8,\Z)$
+($\gamma^T\theta\gamma=\theta$, certificate check 0003). The content
+module $A=\iota(M)$ is the traceless carrier content: the
+$\iota$-image $\iota(x)=(x,-x)$ of the Weil plane
+$M=\Z\langle W_R,W_I\rangle$ with the deck acting by
+$\gamma(W_R)=-W_I$, $\gamma(W_I)=W_R$ ($\gamma^2=-1$, 2-torsion-free;
+the $\iota$-intertwining $(\gamma\times\gamma)\circ\iota=\iota\circ\gamma$
+is the committed R3 receipt). At the cochain model of this round the
+fiber periods act trivially on the content ($A^\GammaL=A$); the honest
+boundary this idealization carries is recorded in §5.
+
+\textbf{The five-term sequence.} For $1\to\GammaL\to\Gbul\to\Cfour\to 1$
+with the $\Gbul$-module $A$, the Lyndon--Hochschild--Serre low-degree
+exact sequence reads [STANDARD STRENGTH, written out]:
+\[
+0\to H^1(\Cfour;A^\GammaL)\to H^1(\Gbul;A)
+ \to H^1(\GammaL;A)^{\Cfour}\to H^2(\Cfour;A^\GammaL)
+ \to H^2(\Gbul;A)\to H^1(\Cfour;H^1(\GammaL;A))
+ \xrightarrow{d_2} H^3(\Cfour;A^\GammaL).
+\]
+This is the equivariant-descent spectral sequence demanded by AUDIT-22
+F1, in its exact normalization at the degrees the two-cell lives.
+
+\section{The concentration (T1) [PROVEN HERE + CERTIFICATE RECEIPT]}
+
+\begin{theorem}[The concentration]
+On the committed deck structure: (i) $A^\GammaL=A$ and
+$H^2(\Cfour;A)=0$ (the norm degeneration $N=(1{+}\gamma)(1{+}\gamma^2)=0$
+with no invariants — the committed R1 law, re-derived at check 0008);
+(ii) $E^{0,2}=H^2(\GammaL;A)^{\Cfour}$ has rank exactly 12, and its
+$\theta$-shaped part is exactly zero (checks 0012--0013): every
+invariant strip class is a non-$\theta$ cross-wedge tensor;
+(iii) consequently the map
+\[
+H^2(\Gbul;A)\longrightarrow H^1(\Cfour;H^1(\GammaL;A))
+\]
+is \emph{injective}: every post-strip two-cell class is determined by
+its mixed-cell image.
+\end{theorem}
+
+\begin{proof}
+(i) is R1: $\ker(\gamma-1)=0$ on the content and $N=0$, so
+$H^2(\Cfour;A)=\ker(\gamma-1)/\im N=0$. (ii) is the exact computation:
+the invariants of $\wedge^2\GammaL^*\otimes A$ under the cohomological
+action $\gamma\cdot(\phi\otimes a)=\gamma_A\,\phi(\gamma^{-1}\cdot,
+\gamma^{-1}\cdot)$ form a rank-12 lattice (the cross-wedge tensors
+$(e_0,f_0)$-free letters carry the invariants; the character content is
+$\wedge^2\GammaL^*=\Q(1)\oplus 6\,V_{-i}\oplus 15\,\Q(1)$ and
+$V_{-i}\otimes V_i\supset\Q(1)^{\oplus 2}$), while the
+$\theta$-component $\theta\otimes a$ is invariant iff
+$(\gamma-1)a=0$, i.e. $a=0$. (iii) exactness of the five-term sequence
+at $H^2(\Gbul;A)$: the kernel of the mixed-cell map is the image of
+$H^2(\Cfour;A^\GammaL)=0$.
+\end{proof}
+
+\begin{remark}[The honest finding]
+The naive expectation $E^{0,2}=0$ is false: the mixed-glue of
+$\wedge^2\GammaL^*\otimes\Q$ under the deck produces 12 invariant
+tensors. The concentration does not run through strip-layer vanishing;
+it runs through the \emph{injectivity} — and the injectivity is exactly
+what converts the mixed-layer torsion (§3) into the vanishing of the
+full class at the kill-scale.
+\end{remark}
+
+\section{The mixed layer and the kill at scale $2m$ (T2) [PROVEN HERE + CERTIFICATE RECEIPT]}
+
+\begin{theorem}[The structure of the mixed layer]
+$H^1(\Cfour;\Hom(\GammaL,A))\cong(\Z/2)^6$: pure 2-torsion, order 64
+(checks 0022--0023). More precisely the module
+$\Hom(\GammaL,A)\cong(\GammaL^*\otimes A)$ decomposes over $\Q$ as
+$(V_{-i}\otimes V_i)\oplus 6\,V_i$; the pair-0 part is
+$(\gamma_{\mathrm{act}}-1)$-surjective (its anti-invariant lattice is
+the full image of the difference map — computed: the anti-invariants
+$\{F:\gamma F=-F\}$ are $\{d-a,-(b+c)\}$-spans, all reachable), and each
+of the six fixed-letter copies contributes exactly one $\Z/2$
+(the committed R1 receipt $H^1(\Cfour;M)=\Z/2$, one copy per fixed
+letter).
+\end{theorem}
+
+\begin{corollary}[The kill]
+Every class $\mu$ in the mixed layer satisfies $2\mu=0$ (the asserted
+Smith structure $(\Z/2)^6$, checks 0022--0023). The mixed-cell map of
+T1 is a homomorphism of abelian groups (the post-strip coefficients
+are abelian; the five-term's maps are group maps - standard), so
+$\mathrm{image}(2[C_T^0])=2\,\mathrm{image}([C_T^0])=0$, and by the
+injectivity (T1), $2\,[C_T^0]=0$: the doubled transport's two-cell is
+a coboundary — cohomologically flat. Universally the mixed layer of a
+$\Cfour$-deck is 4-torsion (the classical bound; the honest boundary is
+the explicit glue module $\Z[x]/((x{+}1)(x^2{+}1))$ with
+$H^1=\Z/4$, computed at checks 0025--0026 as the falsifiable control); on the
+committed model the Smith normal form excludes the glue: the kill is
+at $2m$, not $4m$.
+\end{corollary}
+
+\begin{proof}[Composition with the committed stack]
+The descent criterion [DESCENT, committed 2026-10-23] converts the flat
+doubled transport into the descent of the $2m$-carrier; the two-center
+conduit (Lemma N + the universal two-center descent law, proven
+2026-10-24) produces the cycle $Z$ with
+$\mathrm{cl}(Z)=(-1)^{p-1}(p-1)!\cdot 2m\cdot\alpha$; the rational
+division by $2m(p-1)!$ exhibits $\alpha$ as a rational-algebraic class.
+The witness-level and input-sensitivity controls are §4 and §5; the
+remaining boundaries are §5.
+\end{proof}
+
+\section{The strip-shape hypothesis resolved negatively (T3), and the witness (T4)}
+
+\begin{theorem}[The strip-shape inconsistency; item (v)]
+No nonzero $\iota$-strip class is $\Cfour$-invariant: for
+$a\ne 0$ in the odd sector, $\gamma\cdot[\theta\otimes a]=
+[\theta\otimes\gamma_A a]\ne[\theta\otimes a]$ because
+$(\gamma_A-1)a\ne 0$ and $\theta$ is symplectic-invariant
+(checks 0018--0019). Since the restriction of every $\Gbul$-class to the
+normal subgroup $\GammaL$ lands in the invariant classes (the
+normality lemma, standard for normal subgroups; its normalization —
+the group law, the deck action, the differential — is verified
+end-to-end on the bar complex at the battery checks, and the
+concentration's own low end is verified directly by the
+derivation-level computation T1d: $H^1(\Gbul;A)\cong\Z^2\oplus\Z/2$,
+the five-term's exact prediction), \emph{the strip-shape hypothesis
+of Round 24 is inconsistent in the odd sector}: the actual two-cell of
+the carrier cannot have the pure $\iota$-strip shape. The correct shape
+is the \emph{mixed-cell} shape: the identification link
+$\Lambda_p$'s codomain $H^1(\Cfour;\iota(\pi_p(M)))$ is exactly the
+five-term's middle term; the link is the transgression, and its parity
+law (R5) is the 2-torsion refinement of §3.
+\end{theorem}
+
+\begin{theorem}[The witness]
+The $(A,-A)$ witness of AUDIT-22 F2, retyped at its content module
+(the $\iota$-image of the Weil plane, R3), carries the mixed 1-cocycle
+$f_w(v)=\theta(v,x)\,W_R$ ($x=e_1$, a pinned deck-fixed letter - the six
+fixed letters carry six independent $\Z/2$'s): it satisfies
+$N f_w=0$ exactly (the norm degeneration absorbs the content, check
+0027), its class in $H^1(\Cfour;\Hom(\GammaL,A))$ is \emph{nonzero at
+scale 1} (check 0034: not $(\gamma_{\mathrm{act}}-1)$-reachable in the
+\emph{lattice} sense — the rational solutions carry the $1/2$-fractions
+that are exactly the 2-torsion obstruction, check 0034), and it
+\emph{dies at scale 2} (check 0033). Moreover the class is
+\emph{realized}: the explicit two-cell cocycle
+$c_\nu((v,h),(w,k)):=\nu(h)(\gamma^h w)$ with $\nu$ the $\Cfour$-cocycle
+generated by $f_w$ satisfies the full bar identity (checks
+0038--0041: the strip zero, the deck cells zero, the mixed cell
+$\nu(1)$) - the witness's pair-level residue is carried by a genuine
+two-cell, and $d_2[f_w]=0$ is discharged constructively (the 22-b F1
+mode repaired: a lifting, not a retyping). The degenerate control (the 24-b
+M1 counterexample) is reproduced: contents in
+$(\gamma_A-1)M$ carry no obstruction at any scale (check 0032). The
+parity structure of the reachability is the door-parity law itself:
+the even-coordinate-sum contents are reachable at scale 1, the odd rays
+$W_R,W_I$ are not, and all die at 2 (checks 0030--0031) — R5
+reproduced in the mixed layer, with the ray-uniformity receipt
+(ledger 097).
+\end{theorem}
+
+\section{The input-sensitivity (T5) and the boundaries on the face}
+
+\textbf{The Chern-typing barrier (T5).} The load-bearing $(p,p)$-step
+of the chain is the carrier's grade-$p$ concentration: the
+$p$-th Chern character component of any coherent carrier is
+$(p,p)$-typed (Chern classes are algebraic; $ch_p$ is a weight-$p$
+polynomial in them), so a pure-grade carrier
+$ch(E_+\ominus E_-)\equiv (-1)^{p-1}(p-1)!\,m\,\alpha\pmod{\text{lower
+grades}}$ exists only for $(p,p)$-contents: the conductor output sector
+and the non-$(p,p)$ letter sector are disjoint on the letter model
+(check 0043); the excluded-input run at the module level: the
+swap-typed content (the $(3,1)$-analogue) is refused — its deck class
+survives, $H^2(\Cfour;\mathrm{swap})=\Z/2\ne 0$ (check 0045), exactly
+where a non-Hodge content enters the chain. The killing chain provably
+refuses non-Hodge inputs at the carrier's construction — the
+Corollary-7 discipline, localized at the input step, with both
+receipts.
+
+\textbf{Item (iv) dissolved.} This route uses no eigenbranch exchange:
+the deck is the rotation $\Cfour$, not the $C_2$-reflection; the
+rank-parity obstruction $r_0=d+1$ odd (the 21-c R1(3) receipt, first
+open case $d=4$, $p=2$, $r_0=5$) is vacuous on the rotation route. The
+kill is the $H^1$-torsion, not a branch split.
+
+\textbf{The boundaries that remain (on the face of this artifact).}
+\begin{enumerate}
+\item[(a)] \textbf{The torsion boundary.} The committed D2/D3 strip
+reduces the two-cell to the traceless content; the nonabelian
+reconstruction of the flat doubled transport (the passage from the
+vanishing of the post-strip class to the multiplicative gauge
+correction of the transport) carries the central boundary
+$\partial\in H^3(\Gbul;\mu_2)$ ($\mu_2=\{\pm I\}$ the center of
+$\mathrm{SL}(H_z)$). The strip is committed as proven at the
+scalar/trace level; the boundary class is the remaining piece of item
+(ii) at the nonabelian layer.
+\item[(b)] \textbf{The fiber-centralizer condition.} The cochain model
+takes $A^\GammaL=A$ (the fiber periods act trivially on the content).
+The general input needs the irreducibility of the fiber transport
+(its centralizer in the traceless content is zero — the Stone--von
+Neumann-type rigidity of the $\theta$-Heisenberg transport on the
+committed model). Where the centralizer is nonzero, the deck-layer
+term $H^2(\Cfour;A^\GammaL)$ need not vanish and the concentration
+must be re-run with the honest $A^\GammaL$.
+\item[(c)] \textbf{The general-input deck (item (i) transformed).}
+Which $(X,p,\alpha)$ of the open sector carry the $\Cfour$-monodromy
+structure is the transport question — the ledger-085 boundary,
+unchanged. What this round adds: the boundary is now a
+\emph{spectral-sequence} boundary: the input-axis transport is exactly
+the functoriality of the five-term sequence in the deck.
+\item[(d)] \textbf{The glue at the general input.} The 2- vs 4-torsion
+distinction is decided by the Smith form of the mixed module; the
+committed model has no glue (2-torsion, kill $2m$); a general input
+with $(x{+}1)(x^2{+}1)$-glue kills at $4m$ — the rational quarter still
+closes, but the kill-scale is input-dependent.
+\end{enumerate}
+
+\section{The receipts}
+
+\texttt{research/experiments/two\_cell\_reduction\_checks.py}:
+125 checks, exit 0, deterministic double-run byte-identical, exact
+\texttt{Fraction}/integer arithmetic throughout (zero floats, zero
+complex), bounded systems (all Smith/elimination instances
+$\le 56\times 56$; the bar batteries bounded). After the audit
+repairs, the receipt structure: the asserted gates (T2's $(\Z/2)^6$
+and the kill-scale, checks 0022--0023), the derivation-level
+five-term low end (T1d, checks 0016--0017:
+$H^1(\Gbul;A)=\Z^2\oplus\Z/2$), the witness receipts (0027--0029:
+traceless, non-scalar, the pinned ray), the constructive lifting
+(T4-LIFT, checks 0038--0041), the excluded-input control (0045), and
+the hostile controls (the even-sector refusal, the negation module,
+the naive-cochain failure, the glue module, the trivial-content
+invariant detector). The committed anchors re-verified: $\gamma^4=1$,
+$\gamma\in\mathrm{Sp}(8,\Z)$, $\gamma(W_R)=-W_I$, $H^1(\Cfour;M)=\Z/2$.
+
+\section{The scope line}
+
+At the committed deck structure: the two-cell reduction is
+\emph{constructed} (the five-term concentration; AUDIT-22 F1's demand),
+the strip-shape hypothesis is \emph{resolved negatively} (replaced by
+the mixed-cell shape; item (v)), the rank parity is \emph{dissolved}
+(item (iv)), the witness is handled at its content class with the
+parity engine, and the input-sensitivity is localized at the
+Chern-typing barrier. The Clay statement is not claimed: the
+boundaries (a)--(d) are open mathematics. What is proven: at the
+committed model, the composition
+\emph{carrier (Chern-typed input) $\to$ strip (D2/D3) $\to$
+concentration (five-term) $\to$ kill ($2m$, SNF-decided) $\to$ descent
+(committed) $\to$ two-center conduit (proven) $\to$ rational
+algebraicity of $\alpha$}
+is a closed chain of certificate-backed steps, and each remaining
+boundary is a named, falsifiable, input-axis object.
+\end{document}

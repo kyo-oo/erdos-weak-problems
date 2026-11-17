@@ -1,0 +1,60 @@
+name: Mathbox GST Primitive Integral Geometric Surgery
+on:
+  push:
+    branches:
+      - mathbox/residual-zero-direct-audit-20261015
+    paths:
+      - GSTNPrimitiveGeometricSurgery.lean
+      - .github/workflows/gst-n-primitive-geometric-surgery.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-primitive-geometric-surgery-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel verify integer homology-surgery replacement
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTNPrimitiveGeometricSurgeryLib"
+          roots = [
+            "GSTNPrimitiveGeometricSurgery"
+          ]
+          EOF
+          if lake build GSTNPrimitiveGeometricSurgeryLib > gst-primitive-surgery.log 2>&1; then
+            echo "LEAN PASSED: exact integral current replacement in P1xP1 homology model"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-primitive-surgery.log | tail -n 160 || true
+            tail -n 180 gst-primitive-surgery.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-primitive-surgery.log; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-primitive-geometric-surgery-log
+          path: gst-primitive-surgery.log
+          if-no-files-found: warn

@@ -1,0 +1,339 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The D-Family Transport Strike:\\
+the Weil-world package at every squarefree $d$ (Round 40)}
+\author{GST Hodge campaign -- research artifact}
+\date{2026-11-06 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{Scope and the standing order}
+
+Operator order (the standing finish order + the continuation order + this
+session's order: full scope, both skills live, no stopping): SKILL V6.2
+pre-read in full (752 lines, \S0--\S46); the ledger rehearsed through 113;
+the PTS repo (\texttt{prove-that-shit}) cloned live and its
+\emph{prove-open-problem} and \emph{adversarial-proof-audit} skills engaged
+side-by-side (the adversarial-auditor role discharged by the AUDIT-40
+agent). Target: the \textbf{transport families beyond the censuses} --
+Round 39's closing line named them as the first item of the remaining
+falsifiable line. This round executes the family on the Weil face: the
+Round 38/39 package transported from the nine Heegner seeds to
+\emph{every} squarefree $d$, with the exact exclusion collar computed, and
+the load-bearing arithmetic laws certified as polynomial identities in the
+symbol $d$.
+
+\section{The family and the phase classification}
+
+Throughout, $K = \mathbb{Q}(\sqrt{-d})$ with $d \geq 1$ squarefree, and
+$\alpha = a + b\sqrt{-d} \in \mathbb{Z}[\sqrt{-d}]$; the letter model (8
+letters $e_j, f_j$, $j = 1..4$; $[\alpha]^*$ the pullback/row convention;
+$\theta = \sum_j e_j \wedge f_j$; the 70 transversal-and-mixed words) is
+Round 38's, unchanged. Round 38's census committed the nine Heegner-class
+pairs $(d, \alpha)$; the round's conservative genericity criterion
+$(\alpha/\bar\alpha)^k \neq 1$ for $k \leq 4$ excluded all root-of-unity
+phases.
+
+\begin{theorem}[S29, the phase classification and the exact collar]
+\label{thm:s29}
+Write $\zeta_\alpha = \alpha/\bar\alpha$ (a norm-one element of $K$).
+The roots of unity of an imaginary quadratic field have order at most $6$,
+and only $\mathbb{Q}(i)$ (order 4) and $\mathbb{Q}(\sqrt{-3})$ (orders 3
+and 6) carry any beyond $\pm 1$. Consequently:
+\begin{enumerate}
+\item[(i)] $\zeta_\alpha$ has finite order only for
+$\alpha/\bar\alpha \in \mu(K)$, and the order lies in
+$\{1, 2, 3, 4, 6\}$;
+\item[(ii)] order 1 $\iff b = 0$; order 2 $\iff a = 0$;
+order 3 $\iff d = 3$ and $a = \pm b$; order 4 $\iff d = 1$ and $a = \pm b$;
+order 6 $\iff d = 3$ and $a = \pm 3b$;
+\item[(iii)] the \textbf{exact exclusion collar} of the family is
+\[
+\{b = 0\} \;\cup\; \{a = 0\} \;\cup\; \{(d, a, b) : d = 3,\ a = \pm b\}
+\quad\text{(the phase orders 1, 2, 3),}
+\]
+and the \textbf{order-4 and order-6 phase worlds are family members}: at
+these worlds the spectral law (dims $2/36/32$, pairwise coprimality) still
+holds -- only the Weil factor's \emph{degree} degenerates at order 4
+($\mathrm{minpoly}(\alpha^4)$ linear, $\alpha^4 \in \mathbb{Q}$), which does not
+affect any load-bearing receipt.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is the classical torsion theorem for imaginary quadratic unit groups.
+For (ii): $\zeta_\alpha = 1$ forces $\alpha = \bar\alpha$, i.e.\ $b = 0$;
+$\zeta_\alpha = -1$ forces $a = 0$. Order 3 or 6 requires
+$\zeta_\alpha \in \mathbb{Q}(\sqrt{-3})^\times$, hence $d = 3$; there
+$\zeta = \frac{(a^2 - 3b^2) + 2ab\sqrt{-3}}{a^2+3b^2}$ equals
+$e^{\pm 2\pi i/3}$ exactly when $a = \pm b$ (order 3) and equals
+$e^{\pm \pi i/3}$ exactly when $a = \pm 3b$ (order 6). Order 4 requires
+$d = 1$ and $\zeta_\alpha = \pm i$, i.e.\ $a = \pm b$. For (iii): the
+spectral factors are $\mathrm{minpoly}(\alpha^4)$, $\mathrm{minpoly}(\alpha^3\bar\alpha)$,
+$t - N(\alpha)^2$; shared roots occur exactly when
+$\alpha^4 \in \{\alpha^3\bar\alpha\text{-orbit}, N(\alpha)^2\}$, i.e.\
+when $\zeta_\alpha^3 = 1$, $\zeta_\alpha^2 = 1$, or $\zeta_\alpha = 1$
+(the orders 3, 2, 1). At order 4: $\alpha^4 = \bar\alpha^4 \in
+\mathbb{Q}$, the Weil factor is linear with root distinct from
+$N(\alpha)^2$ (which has order-2 phase) and from the mixed factor's roots
+(which carry order 3); the three factors remain pairwise coprime, the
+$\alpha^4$-primary part retains dimension $2 = \binom{4}{4} + \binom{4}{0}$,
+and every receipt of Rounds 38/39 applies verbatim. At order 6 no sharing
+condition fires at all. The certificate verifies the classification
+computationally at a 160-instance $(d, a, b)$ grid, both directions, with
+the collar worlds detected by the certificate's own coprime machinery.
+\end{proof}
+
+\begin{corollary}[The family census]
+The family
+\[
+\mathcal{F} \;=\; \{(d, a, b) : d \text{ squarefree},\ ab \neq 0,\ (d, a,
+b) \notin \text{collar}\}
+\]
+is infinite. The committed census of this round: every squarefree
+$d \leq 45$ plus the Heegner seeds $67, 163$, at the $\alpha =
+1+\sqrt{-d}$ and $\alpha = 2+\sqrt{-d}$ faces, plus the order-4 member
+$(1, 1+i)$ and the order-6 member $(3, 3+\sqrt{-3})$: 62 worlds, covering
+all nine Round-38/39 seeds and 22 non-Heegner $d$'s.
+\end{corollary}
+
+\section{The d-uniform world-interface law}
+
+\begin{theorem}[S30, the spectral law and the integral Weil lattice at the
+family]\label{thm:s30}
+At every family world $(d, \alpha)$:
+\begin{enumerate}
+\item[(i)] the $\mathbb{Q}$-spectral structure of $[\alpha]^*$ on
+$\bigwedge^4_\mathbb{Q} H^1$ is
+$\mathrm{minpoly}(\alpha^4)^{1} \oplus \mathrm{minpoly}(\alpha^3\bar\alpha)^{16} \oplus
+(t - N(\alpha)^2)^{36}$ with $2 + 32 + 36 = 70$ (trace-verified against
+the actual $70\times 70$ exterior matrix); the Weil plane $W$ = the
+$\alpha^4$-primary part has dimension exactly 2;
+\item[(ii)] the integral Weil classes
+\[
+\hat w_R = \sum_{t\ \mathrm{even}} (1, -d, d^2)\, w_T, \qquad
+\hat w_I = \sum_{t\ \mathrm{odd}} (1, -d)\, w_T
+\]
+(the 16 transversal words) are integral, primitive, lie in $W$, and
+$W \cap \mathbb{Z}^{70} = \langle \hat w_R, \hat w_I\rangle_\mathbb{Z}$
+(the $t=0/t=1$ coordinate-forcing);
+\item[(iii)] the periods
+$\mathrm{INT}\,\hat w_R^2 = 8d^2$, $\mathrm{INT}\,\hat w_I^2 = 8d$,
+$\mathrm{INT}\,\hat w_R\hat w_I = 0$,
+$\mathrm{INT}\,\hat w_R\theta^2 = 0$, $\mathrm{INT}\,\theta^4 = 24$;
+\item[(iv)] the CRT projector (the unique degree-$\leq 4$
+$\mathbb{Q}$-polynomial $P \equiv 1$ mod the Weil factor, $0$ mod the
+others) is an explicit $\mathbb{Q}$-combination of the isogeny iterates'
+graphs -- an algebraic correspondence; $P = \mathrm{id}$ on $W$,
+$P(\theta^2) = 0$, $P$ annihilates the ambient and mixed sectors.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The proofs of Rounds 38 (\S2--\S3) and 39 (\S2) are verbatim in $d$: the
+letter-pair block argument for (i) never uses the Heegner property; the
+transversal-eigen calculus for (ii) is the identity
+$\bigwedge^4(e_j + \sqrt{-d} f_j) = \hat w_R + \sqrt{-d}\,\hat w_I$
+(this round: certified \emph{symbolically} in $\mathbb{Z}[d]$, Theorem
+\ref{thm:s33} below, not sampled); the periods (iii) are polynomial in
+$d$ and are certified as polynomial identities; the CRT projector (iv)
+needs exactly the coprimality of (i), which holds on the family by
+Theorem \ref{thm:s29}(iii). The certificate verifies all receipts at the
+62-world census by exact $70\times 70$ arithmetic.
+\end{proof}
+
+\section{The crossing at the family and the K-irreducibility dichotomy}
+
+\begin{theorem}[S31, the crossing transport at the family]\label{thm:s31}
+All three discovery layers and the full Round 39 crossing assembly hold
+verbatim at every family world: the eigenbranch lattice law (the parity
+iff $m + 2w$ even; the born instances $(5,1), (4,1), (7,3)$ refused,
+$(6,2)$ admitted), the exchange-deck residue law ($H^2(C_2; M) = 0$ by
+norm-surjectivity, the invariant generation exact, the untyped control
+firing), the cited K-freeness inputs with the exterior/symmetric
+discrimination executed, and the $(6,2)/(3,3)$ assembly:
+\[
+q(E_\pm) = (\,24d^2,\ -8d^2\,),\quad
+c_4(E_\pm) = \left(\tfrac{72d^2+24}{2},\ \tfrac{8d^2+24}{2}\right),\quad
+\text{cross} = -(24d^2+24),
+\]
+the carrier $c_4 = 16d^2 = 2\,\mathrm{INT}\,\hat w_R^2$, the four faces
+$(8d^2, 16d^2, 32d^2)$, the W6 tables in the general-world form
+$t_1 = m^2 q - mq_M$ etc., the E1--E4 entry test green, and
+\[
+\boxed{\;m^*(A_K, 2, \hat w_R) = 2\ \text{EXACT at every family world.}\;}
+\]
+\end{theorem}
+
+\begin{proof}
+Round 39's proofs are $d$-uniform: the branch integrality is the
+$t=0/t=1$ coordinate-forcing (the coefficient $1$ is $d$-independent);
+the deck law is world-independent; the charges are the
+$\hat w_R$-pairings whose values are the periods of Theorem
+\ref{thm:s30}(iii). The certificate re-executes every receipt at the
+62-world census.
+\end{proof}
+
+\begin{theorem}[S32, the K-irreducibility dichotomy -- the
+sharpening]\label{thm:s32}
+For every $d$ and every $\beta = c + e\sqrt{-d} \in K$ with
+$e \neq 0$, the block of $[\beta]^*|_W$ in the $(\hat w_R, \hat w_I)$
+basis is
+\[
+[\beta]^*|_W = \begin{pmatrix} A & B \\ -dB & A \end{pmatrix},
+\qquad \beta^4 = A + B\sqrt{-d},
+\]
+the regular $K$-representation of $\beta^4$ on $K \cong
+\langle \hat w_R, \hat w_I\rangle_\mathbb{Q}$. Consequently the operator
+algebra $\{[\beta]^*|_W : \beta \in K\}$ is (a) spanned by the scalars
+$[q]^* = q^4\,\mathrm{Id}$ together with any single non-scalar block, and
+(b) \textbf{irreducible}: the only $\mathbb{Q}$-subspaces of $W$ stable
+under $[K]$ are $0$ and $W$. In particular the dichotomy holds at
+\emph{every} family world, including the order-4 and order-6 phase worlds
+where $\mathrm{minpoly}(\alpha^4)$ is linear or Round 38's
+$[\alpha]$-irreducibility criterion degenerates.
+\end{theorem}
+
+\begin{proof}
+The eigenletter identity gives $[\beta]\Omega' = \beta^4\Omega'$ and
+$[\beta]\Omega'' = \bar\alpha^4\Omega''$ with
+$\Omega' = \hat w_R + \sqrt{-d}\hat w_I$,
+$\Omega'' = \hat w_R - \sqrt{-d}\hat w_I$; solving the $2\times 2$ system
+gives the displayed block (the certificate verifies the block exactly at
+every census world). The block is the matrix of multiplication by
+$\beta^4 = A + B\sqrt{-d}$ on $K$ in the basis $(1, \sqrt{-d})$; when
+$B \neq 0$ its characteristic polynomial
+$t^2 - 2At + (A^2 + dB^2)$ has discriminant $-4dB^2 < 0$, hence is
+irreducible over $\mathbb{Q}$, so a single non-scalar block already
+admits no stable $\mathbb{Q}$-line. A subspace stable under the full
+$[K]$-algebra is in particular stable under a non-scalar block (one
+exists at every $d$: $\beta_0 = 1+\sqrt{-d}$ for $d \neq 1$, $2+i$ at
+$d = 1$, since $(1+\sqrt{-d})^4$ has $\sqrt{-d}$-part $4(1-d) \neq 0$ and
+$(2+i)^4 = -7+24i$), whence the subspace is $0$ or $W$. This replaces
+Round 38/39's $[\alpha]$-dichotomy (irreducible $\mathrm{minpoly}(\alpha^4)$),
+which fails at the order-4 worlds, with a law that is uniform in $d$.
+\end{proof}
+
+\begin{theorem}[S33, the leaf and the spread at the family]\label{thm:s33}
+At every family world: $P(\hat w_R) = \hat w_R \neq 0$ (the one-source
+leaf fires); the $[\beta]^*$-translates of $\hat w_R$ (five distinct
+$\beta$-directions, certified) span inside $W$; and by the
+K-irreducibility dichotomy, any algebraic $z \in W \setminus \{0\}$
+generates $W$ under the algebraic correspondences $[K]$ -- one algebraic
+source closes the full plane. Given the external leaf
+$W \subset \mathrm{Hdg}^4$ (the committed scope of Rounds 38/39,
+unchanged), $\mathrm{Hdg}^4 = \mathbb{Q}\theta^2 \oplus W$ is algebraic
+at every family world: the RHC at degree 4 on the family (inside the
+expanded frame, at the model level).
+\end{theorem}
+
+\section{The symbolic-d layer (the quantifier layer)}
+
+\begin{theorem}[S34, the polynomial identities]\label{thm:s34}
+In $\mathbb{Z}[d][\sqrt{-d}]$ with exact polynomial arithmetic:
+\begin{enumerate}
+\item[(i)] the eigenletter construction
+$\bigwedge^4_j(e_j + \sqrt{-d}\,f_j) = \hat w_R(d) + \sqrt{-d}\,\hat w_I(d)$
+is an identity of $\mathbb{Z}[d]$-valued classes (the 16 transversal
+words, the $(1,-d,d^2)/(1,-d)$ coefficients exact);
+\item[(ii)] $\mathrm{INT}\,\hat w_R(d)^2 = 8d^2$,
+$\mathrm{INT}\,\hat w_I(d)^2 = 8d$,
+$\mathrm{INT}\,\hat w_R(d)\hat w_I(d) = 0$,
+$\mathrm{INT}\,\hat w_R(d)\,\theta^2 = 0$,
+$\mathrm{INT}\,\theta^4 = 24$ -- polynomial identities;
+\item[(iii)] the branch charges $q(E_\pm) = (24d^2, -8d^2)$, the Chern
+closure $\big((72d^2+24)/2,\ (8d^2+24)/2,\ -(24d^2+24)\big)$, the carrier
+$16d^2$, the $Z$-face $8d^2$ and the $B$-face $16d^2$ -- polynomial
+identities.
+\end{enumerate}
+These hold at \emph{every} $d$ -- the family theorem's arithmetic content
+is a polynomial identity, not a census of samples. Evaluated at
+$d = 1..30$ they reproduce the per-world closed forms (the layer bridge).
+\end{theorem}
+
+\begin{proof}
+Direct exact computation in the polynomial ring: the certificate's
+\texttt{VSYM} layer implements $\mathbb{Z}[d]$ as dense integer tuples
+and $(r, s)$-pairs as $\mathbb{Z}[d][\sqrt{-d}]$, executes the wedge
+algebra over that ring, and checks each identity against its closed form.
+The polynomial identity theorem (two polynomials of degree $\leq D$
+agreeing at $D+1$ points are equal) certifies that these are identities
+rather than coincidences at the census; the certificate additionally
+checks the d-substitution bridge against the census layer.
+\end{proof}
+
+\section{The certificate and the scope}
+
+\texttt{d\_family\_transport\_round40\_checks.py}: 4223 checks, 0
+failures, exit 0, deterministic double-run byte-identical (post-repair md5
+\texttt{eed81484d0df4c58a26d7fff43417666}; pre-repair
+4219/\texttt{acc2455cbe07c0a88177101b5b84c3db}; seed
+\texttt{0x4D9D1F1CA7B0B5E} distinct from every prior certificate); exact
+Fraction / integer-polynomial arithmetic, zero floats; $\sim$80 s; the
+census 62 family worlds + 5 collar canaries; bounded (matrices
+$\leq 70\times 70$, parity sweeps $\leq 13\times 13\times 5$ per world
+with the full $19\times 19\times 7$ at the discriminator seed, $c_1$
+samples $\leq 150$ per world, symbolic degree $\leq 8$). Sections: V0 the
+phase classification (the 160-instance grid, both directions, the
+collar cross-detected by the coprime machinery); V1 the world-interface
+law; V2 the projector and the leaf; V3 the eigenbranch lattice law; V4
+the exchange-deck residue law (world-independent, re-certified); V5 the
+word-algebra constants (cited; the exterior/symmetric discrimination
+computed by two real product operations); V6 the crossing assembly; V7
+the pin (the content-bearing leastness scan), the spread, the
+K-irreducibility dichotomy (the exact block law), the degenerate
+canaries (the Eisenstein merge dim 34 twice, the order-2 dim 38 twice,
+the order-1 dim 70 -- five canaries); VSYM the symbolic-d
+polynomial-identity layer with the eigenletter identity, the layer
+bridge on the \emph{computed} polynomials, and the strong bridge
+(symbolic $=$ census at all 62 worlds); V8 the hostile battery (the
+world-mutation canary at non-Heegner worlds, letter-deletion,
+projector-sign, the input-sensitivity control, garbage liveness, the
+four-direction parity canaries, the theta-half mutation, the planted
+misclassification canaries) + the mechanical vacuity scan + the
+self-comparison scan.
+
+\paragraph{The audit.} AUDIT-40 (one fresh adversarial agent, the PTS
+adversarial-auditor role): verdict PASS\_WITH\_REPAIRS\_REQUIRED; all
+five external sabotages fired (exit 1); the agent's independent recompute
+(its own code, different conventions) at three worlds: 35/35 agreement,
+0 disagreements. Six findings -- the major one being a vacuous
+layer-bridge check (hardcoded tuples on both sides, the 092/107 class
+recurrence) -- all six repaired in one batched round strengthen-to-label;
+the closing re-check 4223/0/exit 0 deterministic; the post-repair
+rigging re-test on the repaired bridge caught (exit 1). Loop closed.
+
+\paragraph{The scope line (unchanged from Rounds 38/39).} The external
+leaf $W \subset \mathrm{Hdg}^4$ (the Weil-type Hodge-theoretic input,
+the repo's forcing frame) is \emph{given}, not proved here; the RHC at
+degree 4 on the family is certified at the same model-level scope as the
+discriminator's discovery-strike receipt. The letter ring is
+$\mathbb{Z}[\sqrt{-d}]$ (the maximal order at $d \equiv 1 \bmod 4$ is
+larger; out of scope, as in all prior rounds). The Clay statement is NOT
+claimed; the closing string is NOT emitted; the polarity split stands.
+
+\section*{The quantifier line (\S37)}
+
+\textbf{What this round did to the universal quantifier: the Weil face of
+the transport family is closed} -- the nine-world census is revealed as
+the seed of the infinite family $\mathcal{F}$ (every squarefree $d$, every
+$\alpha$ outside the exact collar $\{b=0\} \cup \{a=0\} \cup \{(3, a =
+\pm b)\}$), the package certified at a 62-world census spanning 31
+distinct $d$'s with the arithmetic laws certified as polynomial
+identities in $d$, the order-4/6 phase collars \emph{added} by the
+K-irreducibility sharpening, and the leaf firing at every family world.
+The remaining falsifiable line: the CM-side transport family (the
+Round-37 census boundary: degree-8 closures of order $\geq 24$, degrees
+$\geq 10$), R3 (the K-condition at general input), R4 (the transcendental
+fold-birth). Q2 NOT claimed; the closing string NOT emitted; the polarity
+split stands.
+\end{document}

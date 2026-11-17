@@ -1,0 +1,34 @@
+name: HC Advanced Lean Dependency Audit
+
+on:
+  push:
+    branches:
+      - clean/advanced-gst-hodge-20261009
+    paths:
+      - '**/*.lean'
+      - 'lakefile.toml'
+      - 'scripts/audit_lean_dependency_graph.py'
+      - '.github/workflows/advanced-gst-dependency-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  import-graph:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Audit registered modules and full local Lean import closure
+        shell: bash
+        run: python3 scripts/audit_lean_dependency_graph.py
+      - name: Upload complete dependency analysis
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: advanced-gst-hodge-import-graph
+          path: |
+            lean-dependency-audit.json
+            lean-dependency-audit.md
+          if-no-files-found: warn

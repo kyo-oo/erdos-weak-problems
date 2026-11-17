@@ -1,0 +1,345 @@
+{
+  "arithmetic": {
+    "all_passed": true,
+    "assertions": 42745,
+    "basis_index": 6,
+    "bounds": {
+      "cover_order": "N=1..6,r=0..4",
+      "finite_rows": "all 36 rows in [0,5]^2",
+      "free_rows": "all 9 rows in [-1,1]^2",
+      "isogeny_moduli": "2..12",
+      "lattice_vectors": "all 343 vectors in [-3,3]^3",
+      "saturation_multipliers": [
+        2,
+        3,
+        4
+      ],
+      "torsor_group": "Z + Z/6",
+      "vectors": "all 25 vectors in [-2,2]^2"
+    },
+    "cover_degrees": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        2,
+        1
+      ],
+      [
+        0,
+        3,
+        1
+      ],
+      [
+        0,
+        4,
+        1
+      ],
+      [
+        0,
+        5,
+        1
+      ],
+      [
+        0,
+        6,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        1,
+        2,
+        4
+      ],
+      [
+        1,
+        3,
+        9
+      ],
+      [
+        1,
+        4,
+        16
+      ],
+      [
+        1,
+        5,
+        25
+      ],
+      [
+        1,
+        6,
+        36
+      ],
+      [
+        2,
+        1,
+        1
+      ],
+      [
+        2,
+        2,
+        16
+      ],
+      [
+        2,
+        3,
+        81
+      ],
+      [
+        2,
+        4,
+        256
+      ],
+      [
+        2,
+        5,
+        625
+      ],
+      [
+        2,
+        6,
+        1296
+      ],
+      [
+        3,
+        1,
+        1
+      ],
+      [
+        3,
+        2,
+        64
+      ],
+      [
+        3,
+        3,
+        729
+      ],
+      [
+        3,
+        4,
+        4096
+      ],
+      [
+        3,
+        5,
+        15625
+      ],
+      [
+        3,
+        6,
+        46656
+      ],
+      [
+        4,
+        1,
+        1
+      ],
+      [
+        4,
+        2,
+        256
+      ],
+      [
+        4,
+        3,
+        6561
+      ],
+      [
+        4,
+        4,
+        65536
+      ],
+      [
+        4,
+        5,
+        390625
+      ],
+      [
+        4,
+        6,
+        1679616
+      ]
+    ],
+    "isogeny_kernel_counts": [
+      [
+        2,
+        1
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        4,
+        1
+      ],
+      [
+        5,
+        1
+      ],
+      [
+        6,
+        3
+      ],
+      [
+        7,
+        1
+      ],
+      [
+        8,
+        1
+      ],
+      [
+        9,
+        3
+      ],
+      [
+        10,
+        1
+      ],
+      [
+        11,
+        1
+      ],
+      [
+        12,
+        3
+      ]
+    ],
+    "lattice_vector_counts": [
+      343,
+      49,
+      9
+    ],
+    "relation_rows": [
+      [
+        [
+          -1,
+          -1
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          -1,
+          0
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          -1,
+          1
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          0,
+          -1
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        900,
+        228
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          1,
+          -1
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          1,
+          0
+        ],
+        180,
+        72
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        180,
+        72
+      ]
+    ],
+    "scope": "Finite exact group/lattice and normalization support; no analytic geometry, Lean compilation, or universal Chow-source certificate"
+  },
+  "static": {
+    "import_acyclic": true,
+    "new_theorems": {
+      "GSTCausalFoldDefect.lean": [
+        "finite_torsion_common_annihilator",
+        "isogeny_kernel_torsion",
+        "kernel_le_torsionRelation",
+        "mem_torsionRelation",
+        "projective_relation_factorization_unique",
+        "torsionRelation_eq_kernel_saturation",
+        "torsionRelation_le_curvatureKernel",
+        "torsionRelation_saturated",
+        "torsionRestoringLift_underlying",
+        "torsion_annihilator_maps"
+      ],
+      "GSTSpatialFoldResearch.lean": []
+    },
+    "parsed_import_nodes": 748,
+    "scope": "Lexical/import checks, not Lean compilation or a full-repository semantic review",
+    "tex_environments_balanced": true,
+    "theorem_count": 10,
+    "unchanged_lexical_anomalies": [
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "ComparatorSmokeChallenge.lean"
+      },
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "ComparatorSmokeSolution.lean"
+      },
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "GSTLawStackRound40.lean"
+      }
+    ]
+  },
+  "status": "completed",
+  "wolfram_comparison": {
+    "all_shared_tables_match": true,
+    "assertions": 40658,
+    "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "raw_roundtrip_verified": true
+  }
+}

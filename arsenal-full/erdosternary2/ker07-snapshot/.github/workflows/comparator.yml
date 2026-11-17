@@ -1,0 +1,103 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0013 / 1132
+#    Path         : .github/workflows/comparator.yml
+#    Ref          : main
+#    First-commit : 2026-08-14 14:37:41 +0530  (08aefd2)
+#    Last-commit  : 2026-08-14 23:59:02 +0530  (dd8a21e)
+#    Total commits: 7
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/7] 2026-08-14 14:37:41 +0530  08aefd2  (ker07-dev)
+#        ci: add Lean build and comparator verification
+# [02/7] 2026-08-14 15:17:40 +0530  381b68e  (ker07-dev)
+#        ci: split Lean/comparator verification into atomic stages
+# [03/7] 2026-08-14 15:37:50 +0530  6e50369  (ker07-dev)
+#        ci: build pinned lean4export and comparator separately
+# [04/7] 2026-08-14 15:44:54 +0530  c2b2c38  (ker07-dev)
+#        ci: use verified v4.33.0-rc2 judge commits
+# [05/7] 2026-08-14 15:52:27 +0530  883d525  (ker07-dev)
+#        ci: pin Comparator internal lean4export dependency
+# [06/7] 2026-08-14 23:44:33 +0530  ff0670f  (ker07-dev)
+#        Run comparator even when source audit reports placeholders
+# [07/7] 2026-08-14 23:59:02 +0530  dd8a21e  (ker07-dev)
+#        Always build and run the comparator on selected checkpoints
+# ======================================================================
+
+name: Lean + Comparator
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Materialize exact saved sources
+        run: bash scripts/materialize-source.sh
+
+      - name: Resolve Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)" || true
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+
+      - name: Compile GSTTactic
+        run: lake build GSTTactic
+
+      - name: Compile ErdosTernary2
+        run: lake build ErdosTernary2
+
+      - name: Compile Challenge
+        run: lake build Challenge
+
+      - name: Compile Solution
+        run: lake build Solution
+
+      - name: Build pinned lean4export
+        if: ${{ always() }}
+        run: |
+          mkdir -p .tools
+          git clone https://github.com/leanprover/lean4export.git .tools/lean4export
+          cd .tools/lean4export
+          git checkout 9fb131bb100eb32ccf6836f14e4f8328d13b6792
+          cp ../../lean-toolchain lean-toolchain
+          lake update
+          lake build lean4export
+
+      - name: Build pinned leanprover comparator
+        if: ${{ always() }}
+        run: |
+          git clone https://github.com/leanprover/comparator.git .tools/comparator
+          cd .tools/comparator
+          git checkout 75c730e9b6ef5c2c3b334fad7c3d51fe20624c88
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('lakefile.toml')
+          s = p.read_text()
+          s = s.replace('rev = "master"', 'rev = "9fb131bb100eb32ccf6836f14e4f8328d13b6792"')
+          p.write_text(s)
+          PY
+          cp ../../lean-toolchain lean-toolchain
+          lake update
+          lake build comparator
+
+      - name: Active source audit
+        if: ${{ always() }}
+        run: bash scripts/audit.sh
+
+      - name: Comparator
+        if: ${{ always() }}
+        run: bash scripts/run-comparator.sh

@@ -1,0 +1,299 @@
+\documentclass[11pt]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{GST whole-space causal folds: all-dimensional Hodge spectra, fiber multiplicity, and topology-changing realizations}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\section{Exact hypothesis and realized space types}
+GST GeneralSpace has no intrinsic complex dimension or Hodge structure.
+A realized world has additional data: a geometric space, a complex
+or mixed-Hodge realization, a graded cohomology theory, and (where
+appropriate) an algebraic-cycle class map. In a GST self-expanding
+cosmos each newborn world may have DIFFERENT internal state and law
+types. A causal graph edge does not automatically induce a Hodge
+morphism. We must separately specify its actual geometric transport.
+
+The user's experiment assumes the rational Hodge conjecture TRUE for
+all smooth projective worlds and asks whether folding the underlying
+space, its dimension, and its causal realization yields a universal
+Hodge structure or a different shape. We test the ENTIRE Hodge
+decomposition, without initially selecting rational cohomology
+classes or claiming a new Hodge conjecture proof.
+
+\section{The precise multiplicity hidden by cosmic-diagonal folding}
+The actual Lean file GSTClassicalHodgeFiberedCosmology uses a
+weight-p rational Hodge basis index i and sends every address
+(p,i) to one common GST diagonal address (p,p) under
+forgetMultiplicityToGST.
+
+\begin{theorem}[Multiplicity-loss and indistinguishable base folds]
+For a true rational Hodge fiber of rank r greater than zero,
+the restriction of multiplicity forgetting is
+\[
+ F_p:\mathbb Q^r\longrightarrow\mathbb Q,\qquad
+ (a_1,\ldots,a_r)\mapsto\sum_i a_i.
+\]
+Consequently its kernel has dimension r-1. Two rational
+fiber-fold maps may induce IDENTICAL maps on the collapsed
+cosmic address but have DIFFERENT ranks.
+\end{theorem}
+\begin{proof}
+The Lean theorem forgetMultiplicityToGST_single sends every
+basis vector to the same unit generator; linearity and
+rank-nullity give the claim. For an explicit witness, let
+\[
+ M_A=\begin{pmatrix}
+1&0&0\\0&1&0\\0&0&1\\0&0&0
+\end{pmatrix},\qquad
+ M_B=\begin{pmatrix}
+1&1&1\\0&0&0\\0&0&0\\0&0&0
+\end{pmatrix}.
+\]
+Both satisfy (1,1,1,1)M=(1,1,1), yet their ranks are
+3 and 1. Therefore target cokernels have dimensions
+1 and 3. These are exact RATIONAL LINEAR-ALGEBRA
+discriminators, not claimed geometric correspondences.
+\end{proof}
+
+\section{All-N spectral law for the WHOLE Hodge structure}
+Let X be any smooth projective complex N-fold. Its genuine
+Hodge decomposition is
+\[
+ H^m(X,\mathbb C)=\bigoplus_{a+b=m}H^{a,b}(X).
+\]
+Define the real Hodge circle infinitesimal generator G
+by its complex eigenvalues
+\[
+ \boxed{G|_{H^{a,b}}=i(a-b)\operatorname{id}.}       \tag{1}
+\]
+This whole operator belongs to the actual geometric
+REALIZATION and is not specified by the dimensionless
+GST carrier or by its abstract charge lattice alone.
+
+\begin{theorem}[Universal polynomial for the emerging full diagonal]
+For every integer N at least zero and each 0<=p<=N,
+the operator
+\[
+ \boxed{
+ P_{X,p}=\prod_{r=1}^{p}
+       \left(\operatorname{id}
+                 +\frac{G^2}{4r^2}\right)
+            \quad\text{on }H^{2p}(X,\mathbb C)          } \tag{2}
+\]
+is idempotent, and its image is precisely the ENTIRE
+complex Hodge diagonal \(H^{p,p}(X)\). Equivalently,
+\[
+ \boxed{H^{p,p}(X)=\ker(G|_{H^{2p}(X,\mathbb C)}).}   \tag{3}
+\]
+For a projective complex torus of dimension N,
+\[
+ h^{a,b}={N\choose a}{N\choose b},\qquad
+ \operatorname{rank}P_{X,p}={N\choose p}^{2}.       \tag{4}
+\]
+This complex dimension is distinct from the
+dimension over rational numbers of the rational
+Hodge classes in the diagonal.
+\end{theorem}
+\begin{proof}
+On H^{a,b} in degree 2p, the signed charge
+a-b is in the set \(-2p,-2p+2,\ldots,2p\).
+If a-b=0, every polynomial factor is one.
+If a-b=+/-2s for 1<=s<=p, the factor with r=s
+is zero. Hence (2) is exactly the Hodge-diagonal
+projector and squares to itself for ALL N,p.
+The torus formula follows from the exterior
+algebra on the N holomorphic and N anti-holomorphic
+one-forms. No conjecture about algebraic cycles
+is used in this theorem.
+\end{proof}
+
+\section{Causal shape curvature and Hodge birth/loss dimensions}
+For a typed GST causal edge from realized world X to
+realized world Y with an ACTUAL certified cohomological
+transport \(T:H^{2p}(X,\mathbb C)\to H^{2q}(Y,\mathbb C)\),
+possibly with the correct Tate shift, define
+\[
+ \boxed{\mathcal K_T=G_YT-TG_X.}                   \tag{5}
+\]
+For two composable realized edges T and U,
+\[
+ \boxed{\mathcal K_{UT}=\mathcal K_U T
+                              +U\mathcal K_T.}  \tag{6}
+\]
+This is the EXACT causal cocycle law for changing
+whole Hodge REALIZATIONS, not a generic coordinate
+identity on a fixed original X.
+
+\begin{theorem}[Whole-shape causality criterion]
+The certified transport T intertwines EVERY Hodge
+charge iff \(\mathcal K_T=0\). The old diagonal is
+taken into the new diagonal iff
+\[
+ \boxed{(I-P_{Y,q})T P_{X,p}=0.}                   \tag{7}
+\]
+If this weaker condition holds, define
+\(T^{\mathrm{diag}}:H^{p,p}(X)\to H^{q,q}(Y)\).
+Its target birth and source loss dimensions are
+\[
+ \boxed{
+ B_T=h^{q,q}(Y)-\operatorname{rank}T^{\mathrm{diag}},
+ \quad L_T=h^{p,p}(X)-\operatorname{rank}T^{\mathrm{diag}},
+ \quad B_T-L_T=h^{q,q}(Y)-h^{p,p}(X).}             \tag{8}
+\]
+A GST higher-causality 2-cell can certify equivalence
+of two such events ONLY after an equality of their
+realized cohomology maps has been provided.
+\end{theorem}
+\begin{proof}
+Both Hodge generators are diagonalizable with
+charge-labelled eigenvalues, so intertwiners are
+exactly charge-preserving maps. Formula (7)
+is the whole-diagonal projector criterion.
+Formula (6) expands and cancels the intermediate
+world generator, and (8) is rank-nullity.
+The statement needs an actual T; merely having a
+globular higher-causal identity cell does not supply it.
+\end{proof}
+
+\section{An actual varying-complex-shape ALL-N test; no nonholomorphic action on a selected class}
+For every N>=2, take genuine projective abelian worlds
+\[
+ X_{N,t}=E_i\times E_{i+t}\times E_i^{N-2},
+ \qquad t\in\mathbb R,\ |t|\ll1,
+\]
+where E_tau is the complex elliptic torus with period tau.
+The smooth rational cohomology local system is marked by
+\(e_j=dx_j,f_j=dy_j\). The ACTUAL complex structure
+changes with t, and hence changes its whole Hodge generator G_t.
+
+Put \(\eta=e_1f_2-f_1e_2=e_1f_2+e_2f_1\).
+The first two holomorphic forms are
+\(\omega_1=e_1+if_1,\omega_2=e_2+(i+t)f_2\).
+The exact period equation is
+\[
+ \boxed{\eta\wedge\omega_1\wedge\omega_2
+        =t\,e_1e_2f_1f_2.}                       \tag{9}
+\]
+At t=0 eta is the class of an ACTUAL algebraic
+combination of the diagonal and the two coordinate
+fibers. At t!=0 eta is NOT type (1,1).
+
+Even more directly, in the ordered exterior basis
+\((e_1e_2,e_1f_1,e_1f_2,e_2f_1,e_2f_2,f_1f_2)\)
+the actual WHOLE-SHAPE Hodge generator gives
+\[
+ \boxed{
+ G_t^{(2)}\eta=t(e_1f_2-e_2f_1)+t^2f_1f_2,
+ \qquad G_0^{(2)}\eta=0.}                        \tag{10}
+\]
+This calculation is from the changing holomorphic
+basis and its conjugate, not a fixed-complex-structure
+nonholomorphic pullback.
+For all 1<=p<N, the marked class
+\[
+ \alpha_{N,p}=\eta\prod_{j=3}^{p+1}(e_jf_j)
+\]
+is (p,p) at t=0, and has nonzero off-diagonal
+(p+1,p-1) and (p-1,p+1) components for t!=0,
+by the ACTUAL Kunneth decomposition.
+The Hodge NUMBERS of a complex torus stay constant
+while the geometric Hodge SUBSPACES vary: this is an
+important distinction from birth/loss of Betti dimensions.
+The hypothesis of universal Hodge algebraicity is
+consistent with every realized fiber in this family.
+
+\section{An ACTUAL topology-changing ALL-N causal fold with Hodge polynomial}
+For every N>=1, take the projective quadratic family
+\[
+ Q_t^N=\{z_0^2+\cdots+z_N^2+t w^2=0\}
+                      \subset\mathbb P^{N+1}.
+\]
+For t!=0 the world is smooth projective of dimension N.
+At t=0 it becomes the actual singular cone over a smooth
+projective quadric \(Q^{N-1}\). Thus this changes the
+underlying topology, not merely the Hodge coordinates.
+
+Let \(E(T;u,v)\) denote the Hodge--Deligne polynomial,
+and put \(w=uv\).
+The smooth quadric's algebraic cell decomposition gives
+\[
+ E(Q^N_{\rm sm})=\sum_{j=0}^N w^j+
+  \begin{cases}w^{N/2}&N\text{ even}\\0&N\text{ odd.}\end{cases}
+\]
+The singular cone minus its vertex is an
+\(\mathbb A^1\)-bundle over \(Q^{N-1}\), so
+\(E(Q^N_{\rm cone})=1+wE(Q^{N-1}_{\rm sm})\).
+
+\begin{theorem}[An EXACT all-N Hodge-shape jump across a true topology fold]
+For every N>=1,
+\[
+ \boxed{
+ E(Q^N_{\rm sm};u,v)-E(Q^N_{\rm cone};u,v)
+      =(-1)^N(uv)^{\lceil N/2\rceil}.}           \tag{11}
+\]
+In particular,
+\[
+ \boxed{\chi(Q^N_{\rm sm})-\chi(Q^N_{\rm cone})
+          =(-1)^N.}                              \tag{12}
+\]
+The local fold is an ordinary quadratic critical
+point whose Milnor fiber has homotopy type S^N.
+For even N=2p the smooth quadric has an EXTRA
+middle (p,p) geometric direction: two actual
+rulings rather than one ambient class.
+For odd N the virtual Hodge--Deligne correction
+has the opposite sign. The singular wall must
+be interpreted with MIXED Hodge cohomology;
+(11) is a polynomial identity, not an identification
+of every individual mixed cohomology group.
+\end{theorem}
+\begin{proof}
+A smooth complex quadric has one algebraic
+affine cell at each dimension 0..N and an
+additional middle cell exactly when N is even.
+The singular cone stratifies into its one vertex
+and an affine line bundle over the lower quadric.
+Additivity of compact-support Hodge--Deligne
+polynomials yields the two displayed formulas.
+For N=2p their difference is +w^p. For
+N=2p+1 it is -w^{p+1}. This proves (11);
+setting u=v=1 proves (12). In the chart w=1,
+the local smoothing equation \(\sum z_j^2+t=0\)
+has one complex Morse critical point and an
+N-sphere Milnor fiber, independently certifying
+the parity of the Euler jump.
+\end{proof}
+
+\section{Interpretation UNDER the user's all-varieties-Hodge-TRUE assumption}
+The full realized shape is the family of
+spectral subspaces of G, together with the
+causal maps and possible mixed-Hodge boundary
+data. A newly born rational class in its
+diagonal eigenspace is algebraic UNDER
+the assumed Hodge conjecture.
+A newly born class outside that eigenspace
+is not a Hodge conjecture counterexample.
+A possible genuine contradiction would
+require BOTH a rational zero-charge class
+AND a rigorous proof that it lies OUTSIDE
+the image of the canonical Chow class map
+on a smooth projective variety. The
+shape eigen-equation alone decides the
+first of those conditions, not the second.
+
+The important outcome is NOT another
+projective bundle or branch-cover packet:
+equations (2),(5)--(8),(10),(11) form a
+typed whole-realization, all-N Hodge/causality
+test, and the multiplicity theorem proves
+why the collapsed cosmic diagonal loses
+exactly the information needed to execute it.
+The source modules have been selectively
+read at their exact current Git revision;
+the repository contains 701 Lean files,
+not all of which have had full body review.
+\end{document}

@@ -1,0 +1,170 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-BASE-COUPLED-HIGHER-TRANSGRESSION-20261103",
+  "repository": {
+    "commit": "b2de3bdecf4467211702f5d5118577a014170333",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_base_coupled_higher_fold_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      }
+    ],
+    "hardware": "x86_64"
+  },
+  "mathematics": {
+    "assertion_tested": "Two complete boundary constructions and exact elimination algorithms; full one-handle cup-rank formula; mixed-degree cup-coefficient chain isomorphisms; restoring relation factorization; primitive versus nonprimitive integral kernels; noncommutative packet identities with hostile controls.",
+    "coefficient_domain": "Z, Q; actual and model Hodge filtrations separately derived by hand",
+    "conventions": "Base cohomology of declared products of projective spaces. Odd generators u_i,v_i have degree 2p_i-1, du_i=alpha_i, dv_i=0; all exterior signs and absolute degrees retained.",
+    "inputs": [
+      "research/experiments/gst_base_coupled_higher_fold_checks.py",
+      "research/derivations/GST_base_coupled_and_higher_transgression_folds_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_base_coupled_higher_fold_run.py",
+      "GSTCausalFoldDefect.lean",
+      "GSTGradedWorldAlgebra.lean",
+      "GSTSpatialFoldResearch.lean",
+      "waves/GSTNCohomologyV3.lean"
+    ],
+    "bounds": {
+      "bases": [
+        [
+          1
+        ],
+        [
+          2
+        ],
+        [
+          3
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          2,
+          2
+        ],
+        [
+          1,
+          1,
+          1
+        ]
+      ],
+      "higher_degree": "p=1..min(dim X,3); all cochain degrees retained",
+      "curvatures": "zero, first/last monomial, their sum, paired dependence and independence",
+      "quotients": "all 729 2x3 matrices in {-1,0,1}; coefficient and row cube {-1,0,1}",
+      "integral_control": "C=(2,3,5), every integral relation in [-3,3]^3",
+      "mixed_shears": "4 declared bases, codimensions (1,2),(1,3),(2,3); full basis chain identity"
+    },
+    "non_claims": [
+      "Finite fixtures do not establish the arbitrary-X theorem",
+      "No Lean compilation or CI dispatch",
+      "Higher rational spaces are not asserted compact complex varieties",
+      "No universal Chow-source construction or historical-priority claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T03:56:45.684582+00:00",
+    "runtime_seconds": 1.7489332879999893,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_base_coupled_higher_fold_20261103.output.json",
+      "sha256": "a2b23fe4e50b74d555fba95e2c66db8d91f2d2a8df7608edfdb105f6e097c468",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Bit-mask versus signed-word exterior boundary on every fixture",
+    "Sparse column elimination versus dense rational row reduction",
+    "Full spectra versus independent cup kernel/cokernel formula",
+    "Every mixed-degree basis vector tested against the chain substitution",
+    "All small quotient matrices and exact integer-lattice hostile control",
+    "Changed Lean proof-escape scan, acyclic import graph, LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Geometric/topological proof is author self-review",
+    "Lean drafts remain uncompiled",
+    "No independent external engine or global literature comparison in this run"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_base_coupled_higher_fold_checks.py",
+      "sha256": "383054bbb1b777c1a995ddf8062427f600a8f58f89f3efd27504f8318e314168",
+      "sha256_after": "383054bbb1b777c1a995ddf8062427f600a8f58f89f3efd27504f8318e314168"
+    },
+    {
+      "path": "research/derivations/GST_base_coupled_and_higher_transgression_folds_2026_11_03.tex",
+      "sha256": "fab121e7d21d9de0d1d4225633528734010e2172a3e86481ac735edb64108da1",
+      "sha256_after": "fab121e7d21d9de0d1d4225633528734010e2172a3e86481ac735edb64108da1"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_base_coupled_higher_fold_run.py",
+      "sha256": "59314f57d398be34020fb14c86104c7a561827dab2cc74ec7e36ed8a6bdb370f",
+      "sha256_after": "59314f57d398be34020fb14c86104c7a561827dab2cc74ec7e36ed8a6bdb370f"
+    },
+    {
+      "path": "GSTCausalFoldDefect.lean",
+      "sha256": "13ae27f51bfd66614d7991d35b9c0bd07002af4de46359dd759dcfa65ff73905",
+      "sha256_after": "13ae27f51bfd66614d7991d35b9c0bd07002af4de46359dd759dcfa65ff73905"
+    },
+    {
+      "path": "GSTGradedWorldAlgebra.lean",
+      "sha256": "4e09e70e85a1d89c843ab51039fbf384842f70e81a394ff2e11ed0e1da745dec",
+      "sha256_after": "4e09e70e85a1d89c843ab51039fbf384842f70e81a394ff2e11ed0e1da745dec"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "6e74211da1beef7358e002c5ae97f5b7face9c83514cd22871c1165206bffe65",
+      "sha256_after": "6e74211da1beef7358e002c5ae97f5b7face9c83514cd22871c1165206bffe65"
+    },
+    {
+      "path": "waves/GSTNCohomologyV3.lean",
+      "sha256": "8f7fce98ca03cae6b42f38a62ed8c66364caffbdb4959df3ad059c7f3c586095",
+      "sha256_after": "8f7fce98ca03cae6b42f38a62ed8c66364caffbdb4959df3ad059c7f3c586095"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_base_coupled_higher_fold_checks.py",
+    "research/derivations/GST_base_coupled_and_higher_transgression_folds_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_base_coupled_higher_fold_run.py",
+    "GSTCausalFoldDefect.lean",
+    "GSTGradedWorldAlgebra.lean",
+    "GSTSpatialFoldResearch.lean",
+    "waves/GSTNCohomologyV3.lean"
+  ],
+  "declared_results": [
+    "research/computations/gst_base_coupled_higher_fold_20261103.output.json"
+  ]
+}

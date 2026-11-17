@@ -1,0 +1,46 @@
+name: GPT56 Residual Omega Probe
+
+on:
+  workflow_dispatch:
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean RC2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve Mathlib and production monolith imports
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build ErdosTernary2
+          echo 'RESIDUAL_OMEGA_PRODUCTION_MONOLITH_PREBUILD_GREEN=1'
+      - name: Build isolated residual omega prefix probe
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          src = Path('ErdosTernary2.lean').read_text(encoding='utf-8')
+          quarantine = '/- QUARANTINED LEGACY RESIDUAL OMEGA START'
+          if quarantine not in src:
+              raise SystemExit('quarantine marker missing')
+          prefix = src.split(quarantine, 1)[0]
+          a = src.index('theorem gst_omega_termination_s1', src.index(quarantine))
+          b = src.index('/-- Level-three residual', a)
+          candidate = src[a:b].replace('gst_omega_termination_s1', 'gst_omega_termination_s1_probe', 1)
+          Path('ResidualOmegaProbe.lean').write_text(prefix + '\n' + candidate, encoding='utf-8')
+          print('PROBE_SOURCE_LINES=', len((prefix + candidate).splitlines()))
+          PY
+          lake env lean ResidualOmegaProbe.lean 2>&1 | tee residual-omega-probe.log
+          echo 'RESIDUAL_OMEGA_PROBE_GREEN=1'
+          # manual-only auxiliary probe; disabled from push CI after main comparator acceptance

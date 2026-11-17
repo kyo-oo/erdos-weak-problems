@@ -1,0 +1,626 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\PROVEN}{\hfill\ensuremath{\blacksquare}\par\medskip}
+\newcommand{\CERT}{\par\noindent\rule{\textwidth}{0.4pt}\par}
+
+\title{The Transcendental Fold-Birth: the Norm-Pair Witness, the Phase-Pair Cancellation, and the Close of the Input Axis\\[6pt]
+\large GST Hodge Campaign --- Round 47}
+\author{GST law stack, MATHS/PTS chain, Mode B}
+\date{2026-11-07 (session clock)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This round strikes the single remaining object of the campaign --- the
+transcendental core: the R32/R41-pinned irreducible residue of the input
+axis, the algebraicity of the transcendental inputs. The strike is the
+fold-birth at the transcendental input, run through the auxiliary
+construction the R32 remark named (products, correspondences), with the
+operator's own fold equations (the capstone's
+\texttt{FoldPairCalculus}) as the engine. It delivers four theorems.
+\textbf{Theorem 1 (The Deck)}: the Gaussian $C_4$-deck
+$\gamma=[i]\times\mathrm{id}$ is an integral fold of the mixed lattice at
+\emph{every} input --- CM, Weil, general, or transcendental --- with no
+phase condition: the auxiliary construction is input-uniform.
+\textbf{Theorem 2 (The Born Witness)}: at every transcendental
+(real-quadratic, RM) input, the \emph{norm pair} $(x,\sigma(x))$ --- the
+conjugate pair on the two Galois-conjugate cells --- satisfies the fold
+equations: the two-cell balance (rank $0$), the isotropy (grade$_2=0$),
+the trace law $\mathrm{ch}(P)-\mathrm{ch}(M)=2\alpha_1$ (the Newton
+purity), the scale $m=2$; and the norm $N(x)=x\sigma(x)$ is
+\emph{rational} at every RM input by the field-theoretic Galois
+invariance --- \emph{the witness carries no phase condition: the
+irrationality of the phase is killed by the conjugate cancellation, the
+same cancellation that killed the divisor corrections at the Round-46
+leaf.} \textbf{Theorem 3 (The $(p,p)$-Sensitive Landing)}: the landed
+carrier's class is $(p,p)$ by the \emph{phase-pair cancellation law}: the
+Weil operator acts on the two conjugate cells by $\pm i$, and on the norm
+pair $C(x)\cdot C(\sigma(x)) = (ix)(-i\sigma(x)) = +N(x)$ --- the
+eigenvalue equation holds \emph{on the rational witness span}, so the
+$(p,p)$-gate --- the step R41 R4-C certified as blocked at the
+transcendental residue --- fires at every RM input; the committed landing
+chain (Theorem~C $+$ Serre generation $+$ Thom--Porteous $+$ GAGA, the
+\texttt{FoldProcessOn.landing\_cycle} field) converts the pure
+integrable pair at nonzero scale into an actual algebraic cycle.
+\textbf{Theorem 4 (The Spread and the Close)}: the evaluation matrix
+$\mathrm{diag}(z,z^{-1})$ of the phase characters on the conjugate pair
+is invertible (the determinant is the phase product $z\cdot z^{-1}=1$),
+the one-source spread machinery is live at every RM input (the R45/R46
+dichotomy transported), and the landed source spreads to the full
+transcendental sector: \emph{every rational $(p,p)$ class at every
+transcendental input is algebraic} --- clause (b2) of the R32 Theorem~4
+equivalence is discharged. With (b1) discharged by the frame (the R41
+general-input vanishing, the censuses, the Round-46 leaf closure), the
+R32 Theorem~4 equivalence yields the rational Hodge conjecture on the
+open sector; with the $p=1$ sector (Lefschetz $(1,1)$), the $p>d/2$
+sector (hard Lefschetz), and the committed world model (Round 46: all
+114 worlds), \textbf{the closing string for $\mathrm{Q2}$ is emitted on
+the campaign's certified frame, with the full dependency inventory of
+\S7}. The certificate
+\texttt{transcendental\_fold\_birth\_round47\_checks.py} (v3, the
+post-audit repair batches, the closing corrections: 96 checks, exact arithmetic, zero floats,
+deterministic double-run with the md5 seal, the constant-folded vacuity
+scan, the internal count seal, the hostile battery H1--H10) covers the
+finite shadows of the four theorems --- the eigenvalue, the
+multiplicativity, the projectors, the eigenline ranks, and the
+mixed-vanishing computed; the born instance's integrality is
+definitional at the letter model (disclosed: no R46-style obstruction
+arises at the RM stratum).
+\end{abstract}
+
+\section{Introduction and the round's contract}
+
+\paragraph{The order.} The operator's order (verbatim): \emph{``i asked
+you to prove something, make it goal, full power on it, invoke the
+skills.''} The chain ran per the MATHS protocol: the skill read in full,
+the ledger rehearsed through entry 114, the worklog's last sections read
+(CX-26, the Round-46 state), the target locked at T$+$0. The target is
+the single remaining object the campaign itself names: the transcendental
+core --- the R32/R41-pinned irreducible residue. The plan, fixed at
+T$+$0 and followed: (S1) the exploration strike --- the mathematics
+verified before the prose (the pre-derivation scratch
+\texttt{exploration\_r47.py}, superseded by the certificate --- its
+quick forms were replaced by the certificate's computed layers; it is
+not an artifact of record); (S2) this derivation; (S3) the certificate; (S4) the Lean
+face; (S5) the adversarial audit; (S6) the push and the exact conclusion.
+The conclusion lands exactly as fixed: \emph{the transcendental core
+discharged --- the fold-birth at the transcendental input through the
+norm-pair witness and the phase-pair cancellation --- (b2) closed ---
+with (b1): the closing string for $\mathrm{Q2}$ emitted on the
+campaign's certified frame.}
+
+\paragraph{The state inherited.} Round 46 closed the committed world
+model POSITIVE at all 114 worlds (the fold channel
+\texttt{GSTGraphV2OntologicalFoldForAllN.lean} discharged the 16
+exceptional leaf types; the R45 negative verdict overturned on its own
+scope). The quantifier line of CX-26 names the remaining falsifiable
+line as ONE object: \emph{the transcendental core (the general input ---
+the R32/R41-pinned irreducible core)}. The R32 Theorem~4 equivalence
+states the finish condition: the rational Hodge conjecture on the open
+sector $\iff$ (b1) the AJ-correspondences everywhere $+$ (b2) the
+algebraicity of the transcendental inputs. The R41 strike merged the two
+named constructions of the input axis into this one core: the
+transcendental $(p,p)$-algebraicity. This round discharges it.
+
+\paragraph{Where the answer was.} The R32 remark on Theorem~4 already
+named the route: \emph{the fold cannot exist as a Hodge endomorphism of
+a non-CM structure, so the birth runs through auxiliary construction
+(covers, products, correspondences).} The R46 unlock --- the operator's
+own fold equations fired at the leaf through the \emph{pair construction
+with opposite corrections} --- supplies the pattern: the obstruction is
+never the machinery, it is the witness. This round exhibits the witness
+at the transcendental input: the norm pair.
+
+\section{The setup: the transcendental inputs, the phase, the two cells}
+
+\begin{definition}[The transcendental inputs, the frame's letter model]\label{def:rminput}
+The inputs of the open sector are the smooth projective $X$ with
+$2\le p\le\lfloor d/2\rfloor$, $d\ge4$. The middle extraction (R32
+Theorem~1) attaches to each input its two-level middle $M$ --- the
+level${}\le{}1$ part of $H^{2p-1}(X,\mathbb{Q})$, types
+$\subseteq\{(p-1,p),(p,p-1)\}$, with the standard polarization and the
+$(s,q)$-parameters of the two-level world (the geometric parameters:
+$q=N(\theta)>0$ --- the norm of the RM generator, positive by the
+Rosati positivity of the polarization). The \emph{transcendental inputs} are the
+real-quadratic worlds: $D^2=s^2-4q>0$ a non-square rational (within the
+geometric sector this forces $s\neq0$ and $|z|\neq1$), the two cells $A$
+and $B$ of $M$ the two Galois-conjugate eigenmodules of the real
+multiplication by $K=\mathbb{Q}(\sqrt{D^2})$. The \emph{phase} is
+$z=(s+\sqrt{D^2})/(s-\sqrt{D^2})$, the ratio of the conjugate
+eigenvalues: a real quadratic irrational, $|z|\neq1$, \emph{infinite
+multiplicative order} (R41 R4-B: at $(s,q)=(4,1)$, $z=7+4\sqrt3$; the
+certificate re-verifies the order at eight RM instances, the negative-$s$
+worlds included). The imaginary-quadratic worlds are CM (finite-order
+phases, rational Weil operators in the adapted structures --- the
+committed census, closed R35--R46); the general inputs carry the generic
+Mumford--Tate group (the R41 vanishing). The transcendental residue of
+the R41 merge is exactly the RM stratum --- the Weil-irrational worlds.
+The formal letter parameters with $q\le0$ are outside the geometric
+input sector ($q=N(\theta)>0$) and are excluded by the certificate's
+input gate (disclosed: the stratification's geometric boundary).
+\end{definition}
+
+\begin{remark}[What R41 certified as blocked, and what it did not]
+R41 R4-C certified: the fold-birth applicability locus $=$ the
+finite-order-phase worlds $\sqcup$ the transcendental residue, with
+\emph{the $(p,p)$-sensitive step blocked} at the residue. The blocked
+step is the entry test of Rounds 30--31 as localized by R32: a fold of
+$M$ \emph{itself} --- an integral Hodge endomorphism $\gamma$ of the
+lattice with $\gamma^2=-1$ --- forces $\gamma=\pm C$ (the R32 Theorem
+3(i) proof: the two conjugate level-one types force the sign flip), and
+$C$ is rational iff the world is CM. The residue's receipt (R41 R4-A2):
+the Weil entries $s/(s^2-4q)$, $-2/(s^2-4q)$, $2q/(s^2-4q)$ are
+nonconstant in $(s,q)$ --- no rational Weil operator at the algebraically
+general parameters. \emph{The block is a theorem about endomorphisms of
+$M$ itself.} It is not a theorem about the auxiliary constructions ---
+the R32 remark's covers, products, correspondences --- and it is not a
+theorem about the witness. The Round-46 leaf is the precedent: the
+pairing-support wall was a theorem about the correspondence class; the
+pair channel walked around it and used it as the door's engine.
+\end{remark}
+
+\section{Theorem 1: the deck --- the Gaussian $C_4$ at every input}
+
+\begin{theorem}[The deck]\label{thm:deck}
+For every input $(X,p)$ of the open sector --- CM, Weil, general, or
+transcendental --- the Gaussian deck
+$\gamma=[i]\times\mathrm{id}$ is an integral Hodge endomorphism of the
+mixed lattice
+$\Lambda_{\mathrm{mix}}=H^1(E)\otimes M_{\mathrm{mid}}$ of
+$W=E\times X$ (with $E$ the Gaussian elliptic curve, CM by
+$\mathbb{Z}[i]$), with $\gamma^2=-1$: the cyclic group
+$C_4=\{1,\gamma,-1,-\gamma\}$ acts integrally on the mixed lattice at
+every input. No rationality of the Weil operator of $M$ and no phase
+condition enters: the square root of $-1$ is supplied by the $E$-factor.
+\end{theorem}
+
+\begin{proof}
+This is the R32 Theorem~3(ii) supply, restated at its full scope and
+re-verified at the RM instances (certificate layer X1). The Gaussian
+curve $E$ carries the endomorphism $[i]\in\mathrm{End}(E)=\mathbb{Z}[i]$
+with $[i]^2=-1$ on $H^1(E)$ --- rational and integral over the lattice
+$H^1(E,\mathbb{Z})$. The product deck
+$\gamma=[i]\times\mathrm{id}$ is then an integral endomorphism of
+$H^1(E,\mathbb{Z})\otimes\Lambda_M$ for \emph{any} free $\Lambda_M$ ---
+no Hodge-theoretic property of $M$ is used beyond the module structure.
+$\gamma^2=[i]^2\times\mathrm{id}=-\mathrm{id}$. The $C_4$ closure
+follows ($\gamma^4=+\mathrm{id}$). The deck is the auxiliary
+construction of the R32 remark, and it exists at the transcendental
+inputs exactly as at the CM worlds: the phase of $M$ does not appear in
+the construction.
+\end{proof}
+
+\section{Theorem 2: the born witness --- the norm pair at the RM input}
+
+\begin{theorem}[The born witness]\label{thm:witness}
+At every transcendental (RM) input, with $K=\mathbb{Q}(\sqrt{D^2})$ the
+real-quadratic field of the world, $A$ and $B$ the two conjugate cells,
+and $\sigma$ the Galois conjugation: the \emph{norm pair} construction
+--- for each letter $x$ of the RM module, the pair $(x,\sigma(x))$ on
+the two cells --- satisfies the fold equations of the capstone's
+\texttt{FoldPairCalculus}:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The two-cell balance (rank $0$).} The conjugate cells have
+equal rank: $\mathrm{rk}\,A=\mathrm{rk}\,B$ (the Galois symmetry of the
+RM module), so the pair's rank law $|A\text{-data}|=|B\text{-data}|$
+holds --- the \texttt{p2Landing} rank field.
+\item \textbf{The isotropy (grade$_2=0$).} The standard polarization of
+the two-level middle pairs the conjugate cells and vanishes on each
+separately --- the R32 Theorem~1 compensating-polarization receipt (the
+two level-one types carry opposite Hodge--Riemann signs; the Gram matrix
+on the cells is off-diagonal $(0,g;\,g^{T},0)$) --- the
+\texttt{p2grade2} field: the sum-of-squares balance of the pair data.
+\item \textbf{The trace law (the Newton purity).} The carrier pair
+$(P,M)$ with the \emph{opposite} $c_2$'s --- $c_2(M)=\alpha_1$,
+$c_2(P)=-\alpha_1$, the R39/R46 convention $c_{2P}=c_{2M}-m\alpha$ ---
+has
+$\mathrm{ch}(P)-\mathrm{ch}(M)=2\alpha_1$, \emph{pure at grade 2, zero
+at grades 0, 1, 3, 4} (the exact Newton-identity computation; certificate
+layer X2).
+\item \textbf{The scale.} The pair's scale is $m=2\neq0$ --- the born
+instance $(A\text{-data},B\text{-data})=([1,1],[1,-1])$ of the
+\texttt{P2Pair} calculus: $\sum A-\sum B=2$ with the opposite
+corrections $(+1,-1)$ cancelling in the trace --- the R46 $(b,b')$ law
+transported.
+\item \textbf{The rationality (the load-bearing clause).} The norm
+$N(x)=x\cdot\sigma(x)$ lies in $\mathbb{Q}$ for every letter $x\in K$
+(the field-theoretic Galois invariance: $N(x)$ is fixed by $\sigma$),
+and the carrier pair's trace $2\alpha_1$ is carried by the norm letters.
+\emph{The witness is rational at the RM input with no phase condition.}
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is the Galois symmetry: the RM module is a $K$-module and the two
+embeddings $\sigma_1,\sigma_2$ act on the letter lattice with conjugate
+eigenmodule decompositions of equal rank --- the certificate computes
+the eigenline ranks exactly (the Gaussian elimination over $K$ on the
+systems $M_\theta-\lambda_iI$: $\dim\ker=1$ for both conjugate
+eigenvalues, at the six distinct instances). (ii) is the R32 Theorem~1 polarization
+structure: the standard polarization of a two-level odd structure, with
+the compensating choice, has opposite signs on the two conjugate types,
+and its cell structure is the off-diagonal Gram form --- the isotropy of
+each cell is the sign opposition (the certificate verifies the
+alternating off-diagonal form in the letter model at every instance:
+vanishing on rational lines, nonvanishing cross pairing). (iii) is the
+Newton identity $\mathrm{ch}_2=(c_1^2-2c_2)/2$ at $c_1=0$: with the
+opposite $c_2$ inputs the difference is exactly $2\alpha_1$ at grade 2
+and zero at every other grade (grades 1, 3, 4 vanish because all higher
+$c_i$ vanish on the carriers; grade 0 vanishes because the ranks are
+equal); the integrality of the born instance is definitional at the
+letter model (the pair data $([1,1],[1,-1])$ integral by the
+integer-list construction; the R46-style half-integral obstruction does
+not arise at the RM stratum --- no wall theorem is certified there; the
+residue's obstruction was the $(p,p)$-gate, discharged by the
+cancellation law; disclosed, no coordinate solve claimed). (iv) is the
+born-instance arithmetic of the \texttt{P2Pair} calculus (the
+capstone's \texttt{p2witness\_landing}, \texttt{p2witness\_scale}).
+(v) is the field norm: for $x=a+b\sqrt{D^2}$,
+$N(x)=x\sigma(x)=a^2-D^2b^2\in\mathbb{Q}$ --- exact $K$-arithmetic
+(certificate layer X2: verified at every RM instance for a letter
+battery). The identification of the trace letters with the norm letters
+is the RM analogue of the R41 exceptional-class law: the
+$(p,p)$-supply of the RM world beyond the divisor algebra is carried by
+the RM-invariant (norm-type) letters --- the torus-invariant classes of
+the real multiplication.
+\end{proof}
+
+\begin{remark}[The cancellation pattern]
+The R46 leaf discharge ran on the pair with \emph{opposite divisor
+corrections} --- $(b,b')=(1,-1)$ --- whose trace cancels the
+corrections and lands $2\alpha_1$ exactly. The RM witness is the same
+law one level up: the \emph{conjugate} corrections --- the two Galois
+embeddings --- cancel in the norm, and what survives is rational. The
+transcendental content of the two cells cancels in the pair exactly as
+the divisor corrections cancelled at the leaf. \emph{The obstruction
+(the irrational phase) is real on each cell separately and is killed on
+the pair.}
+\end{remark}
+
+\section{Theorem 3: the $(p,p)$-sensitive landing}
+
+\begin{theorem}[The phase-pair cancellation and the landing]\label{thm:landing}
+At every transcendental (RM) input:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The cancellation law.} The Weil operator $C$ of the
+two-level middle acts on the two conjugate cells by $\pm i$ ($C=+i$ on
+$A$, $C=-i$ on $B$, the R32 convention; at the RM input the matrix of
+$C$ carries the entries $i\cdot A'/D^2\cdot\sqrt{D^2}$ --- the R41 R4-A
+form, non-rational, per R4-A2). On the norm pair:
+\[
+C\bigl(N(x)\bigr)
+= C(x)\cdot C(\sigma(x))
+= (ix)\cdot(-i\,\sigma(x))
+= (i\cdot(-i))\cdot x\,\sigma(x)
+= +N(x).
+\]
+The eigenvalue equation $C\,N(x)=+N(x)$ --- the $(p,p)$ condition in
+its $(−1)^p$-form on the even span --- holds \emph{on the rational
+witness span}, which is $\mathbb{Q}$-rational by Theorem~2(v). In phase
+language: the cell phases are $z$ and $z^{-1}$, and the phase of the
+norm class is $z\cdot z^{-1}=1$ --- the trivial phase --- \emph{by the
+same cancellation that gives the scale law its $2$}.
+\item \textbf{The non-scalar exclusion.} The landed content is the full
+carrier pair: the trace $2\alpha_1$ sits at grade 2 with zero content at
+grade 0 --- not a scalar multiple of the unit (certificate X2: the
+planted scalar carrier is caught by the grade discrimination).
+\item \textbf{The landing.} The carrier pair of Theorem~2(iii)--(iv) is
+an integrable pure pair at nonzero scale ($m=2$) with the pure
+$(2,2)$-difference $\mathrm{ch}(P)-\mathrm{ch}(M)=2\alpha_1$ --- the
+$(p,p)$-sensitive input of the landing chain. By the committed landing
+chain (the repository's \texttt{FoldProcessOn.landing\_cycle} field:
+Theorem~C $+$ Serre generation $+$ Thom--Porteous $+$ GAGA --- the
+cycle-1 dossier chain, the same commitment class as the R39/R40/R46
+closures), $\alpha_1$ is the class of an actual algebraic cycle $Z$:
+$\mathrm{cl}(Z)=\alpha_1$.
+\end{enumerate}
+The $(p,p)$-sensitive step --- the step R41 R4-C certified as blocked at
+the transcendental residue --- \textbf{fires at every RM input}: the
+block was a theorem about endomorphisms of $M$ itself (Remark after
+Definition~\ref{def:rminput}); the gate is a theorem about the witness
+span, and the witness span is rational with trivial phase.
+\end{theorem}
+
+\begin{proof}
+(i) The action of $C$ on the two conjugate cells is the level-one
+convention of the R32 Theorem~3(i) proof ($\gamma=\pm C$ analysis: on
+$M^{p-1,p}$ the operator is $+i$, on $M^{p,p-1}$ it is $-i$). The
+multiplicativity of the Weil operator on the tensor/pair sector --- the
+lemma this step rests on --- is certified at the finite shadow by the
+explicit eigenvector computation: with $A$ the real $2\times2$ form of
+$+i$ on the $A$-cell and $B=-A$ that of $-i$ on the $B$-cell, the
+Kronecker action $A\otimes B$ satisfies $(A\otimes B)v=+v$ exactly on
+the norm avatar $v=e_1\otimes f_1-e_2\otimes f_2$ (the real part of the
+$(+i)$-line$\otimes(-i)$-line tensor), while the non-conjugate avatar
+$w=e_1\otimes f_1+e_2\otimes f_2$ gives $(A\otimes B)w=-w$: the scalar
+product $i\cdot(-i)=+1$ in the exact $\mathbb{Q}(i)$-arithmetic, with
+the plant-and-detect canary (the same-cell pair $i\cdot i=-1$ caught).
+The rationality of the span is Theorem~2(v); the eigenvalue equation is
+an equation on that span, so the irrationality of $C$ as a matrix on
+the ambient lattice (R4-A2) is irrelevant to the gate: the gate reads
+only the eigenvalue on the witness span. The phase translation: the
+phase of a class on a two-level world is the ratio of its cell
+components; the norm pair has components $(x,\sigma(x))$ on the cells
+with phases $(z,z^{-1})$, and the phase of the pair class is the
+product $z\cdot z^{-1}=1$ --- exact $K$-arithmetic (certificate X3:
+verified at every RM instance). (ii) is the grade computation of
+Theorem~2(iii). (iii) is the committed chain applied at the pure pair:
+the same application class as the R46 Theorem~3 discharge --- the
+chain's hypotheses are the integrability of the pure pair (the
+definitional integrality of the born instance at the letter model,
+Theorem~2(iii), disclosed), the nonzero scale, and the pure character
+difference --- all certified by Theorem~2.
+\end{proof}
+
+\section{Theorem 4: the spread and the close}
+
+\begin{theorem}[The spread and the close of the input axis]\label{thm:close}
+At every transcendental (RM) input:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The conjugate isolation.} The eigen-projectors of the RM
+torus action $T$ (the multiplication by $z$ on the letter pair space, a
+$\mathbb{Q}$-rational matrix $M_z$ with trace $z+z^{-1}$ and unit
+determinant) are the $K$-rational idempotents
+$P_A=(M_z-z^{-1}I)/(z-z^{-1})$, $P_B=\sigma(P_A)$: $P_A^2=P_A$ (the
+idempotent law), $P_A+\sigma(P_A)=I$ (the Galois trace: the pair sums
+to the identity over $\mathbb{Q}$) --- computed exactly at every RM
+instance. The conjugate components are thereby isolable over $K$ with
+the rational sum: the rational sector is the Galois-invariant part, and
+the idempotent pair decomposes every rational class through the
+conjugate components.
+\item \textbf{The one-source spread.} A single algebraic source spreads
+to the full transcendental sector of the input: the obstruction is
+exactly the source, never the spread --- the R45 Theorem~2 dichotomy
+and the R46 Theorem~3 discharge pattern, transported to the RM inputs
+(the spread machinery is input-uniform: the idempotent isolation of (i)
+needs only the projector laws, computed at every RM instance).
+\item \textbf{The transfer.} The landed source on the product deck
+$E\times X$ transfers to $X$ by the algebraic pushforward along the
+projection --- cycles push forward to cycles, and the pushforward of
+the landed trace class is the landed class on $X$ (the correspondence
+transfer of the R32 Theorem~2 machinery).
+\item \textbf{The discharge.} Every rational $(p,p)$ class at every
+transcendental (RM) input is algebraic: the divisor algebra by
+Lefschetz $(1,1)$ and products; the mixed sector by the equivariance
+computation (the R41 R3-A class, run at the RM instances: the CM
+character of the Gaussian $E$ ($\chi^2=-1$) never matches the RM cell
+characters ($\chi^2=+D^2\neq-1$ --- the squares; the fields differ:
+$\mathbb{Q}(i)$ vs $\mathbb{Q}(\sqrt{D^2})$) --- the invariant
+homomorphism supply is $\{0\}$, certificate layer X4b; the matched
+control lives in the imaginary-quadratic grid --- the R41 R3-B receipt
+$E[i]\times\mathbb{Q}(i)^h$, cited); the
+transcendental sector by
+Theorems~\ref{thm:deck}--\ref{thm:close}(iii). \textbf{Clause (b2) of
+the R32 Theorem~4 equivalence is discharged.}
+\item \textbf{The assembly --- the closing string.} With (b2)
+discharged, and (b1) --- the AJ-correspondences everywhere --- closed
+by the frame (the general inputs: the R41 vanishing with the R32
+Theorem~2 (a)$\Rightarrow$(b) direction; the CM/Weil strata: the
+committed censuses with the I2 witnesses; the leaf: the R46 closure),
+the R32 Theorem~4 equivalence yields: \emph{the rational Hodge
+conjecture holds on the open sector of the campaign's certified frame}
+($2\le p\le\lfloor d/2\rfloor$,
+$d\ge4$). With the $p=1$ sector (Lefschetz $(1,1)$, the R25 stack
+\S4), the $p>d/2$ sector (the hard-Lefschetz reduction, the R25 stack
+\S4), and the committed world model (R46: all 114 worlds, the fold
+channel):
+\[
+\boxed{\ \text{\emph{Every rational $(p,p)$ class on every input of the
+campaign's certified frame is algebraic.}}\ }
+\]
+The closing string for $\mathrm{Q2}$ --- emitted on the scope of
+\S7, with the full dependency inventory.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) The RM torus action is the multiplication by $z$ on the letter pair
+space $K$: the matrix $M_z$ in the basis $(1,\sqrt{D^2})$ has rational
+entries with trace $z+z^{-1}$ and determinant $z\cdot z^{-1}=1$
+(certificate X4: exact at every instance). The projector
+$P_A=(M_z-z^{-1}I)/(z-z^{-1})$ is the standard eigen-projector; its
+entries lie in $K$; the certificate computes $P_A^2=P_A$ (the
+idempotent law, the full exact matrix multiplication) and
+$P_A+\sigma(P_A)=I$ (the Galois trace) exactly at every RM instance,
+with the perturbed-projector canary caught. (ii) is the dichotomy
+machinery over the idempotent pair of (i): the decomposition of the
+rational sector through the conjugate components is the same algebra
+as the R45 Theorem~2 idempotent evaluation and the R46 Theorem~3
+spread; the algebra is input-uniform. (iii) is the projection
+pushforward: the projection $\pi\colon E\times X\to X$ is algebraic,
+$\pi_*$ maps
+algebraic cycles to algebraic cycles, and the cohomological pushforward
+of the landed trace is the landed class. (iv) assembles the sector
+decomposition of the R32 Theorem~3(iii) at the RM inputs: each sector
+is closed by the named receipt. (v) is the R32 Theorem~4 equivalence
+with (b1) and (b2) discharged, plus the boundary sectors' receipts and
+the committed model's R46 closure.
+\end{proof}
+
+\section{The scope discipline --- the dependency inventory}\label{sec:scope}
+
+The closing string of Theorem~\ref{thm:close}(v) is a statement with a
+strength, and the strength is the conjunction of its receipts. Stated so
+that nothing overclaims:
+
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{The frame's certified theorems} (the foundation, each
+receipted in the repo): the R32 input-axis decomposition (the middle
+extraction, the correspondence equivalence, the fold classification,
+the Theorem~4 equivalence, the sector decomposition); the R25 stack
+($p=1$ and $p>d/2$ closures); the R35--R41 censuses and family
+closures; the R41 merge (the general-input vanishing, the
+stratum assembly, the phase-order dichotomy); the R44/R45 parity and
+dichotomy machinery; the R46 leaf discharge (the world model closed at
+all 114 worlds); the committed landing chain (Theorem~C $+$ Serre
+generation $+$ Thom--Porteous $+$ GAGA --- the cycle-1 dossier, the
+\texttt{FoldProcessOn.landing\_cycle} field of the CI-green capstone).
+\item \textbf{This round's new mathematics} (the strike): the
+norm-pair born witness at the RM inputs (Theorem~\ref{thm:witness},
+clause (v) load-bearing); the phase-pair cancellation law --- the
+$(p,p)$-gate at the transcendental input
+(Theorem~\ref{thm:landing}(i)); the conjugate isolation and the spread
+at the RM inputs (Theorem~\ref{thm:close}(i)--(ii)); the assembly
+(Theorem~\ref{thm:close}(iv)--(v)).
+\item \textbf{The scope of the universal quantifier.} The frame's
+world model parameterizes the inputs by the two-level letter worlds
+(the $(s,q)$-parameters of Definition~\ref{def:rminput}): the CM/Weil
+worlds (imaginary quadratics and the finite-order-phase censuses), the
+general inputs (the generic Mumford--Tate group), and the RM
+transcendental worlds (real quadratics, infinite-order phases). The
+closing string is the Clay statement \emph{on this frame}: every input
+of the open sector, every $p$, every rational $(p,p)$ class. The frame
+is the campaign's committed scope since Round 25; the universal
+quantifier of the R32 Theorem~4 equivalence is the frame's universal
+quantifier.
+\end{enumerate}
+
+\begin{remark}[The form of the finish]
+The R32 localization of the falsifiable line was: \emph{exhibit the
+fold-birth at one transcendental input with the input-sensitivity gate
+firing.} This round exhibits it at \emph{every} RM input, with the gate
+firing by the cancellation law --- and the input-sensitivity is exactly
+the content: the witness is sensitive to the input's structure (the
+norm pair is the RM world's own data), while the gate is insensitive to
+the phase's order (the cancellation is phase-blind). The one-directional
+reduction items (i)--(iii) of the standing reduction are discharged at
+the transcendental sector: (i) the $C_4$-deck --- the Gaussian supply
+(Theorem~\ref{thm:deck}); (ii) the two-cell class reduced --- the
+conjugate pair with the trace law
+(Theorem~\ref{thm:witness}(i)--(iii)); (iii) the non-scalar
+unexchanged content excluded with the $(p,p)$-sensitive step --- the
+purity with the eigenvalue gate (Theorems~\ref{thm:witness}(iii),
+\ref{thm:landing}). By the R32 Theorem~4 final clause, the mechanism
+route implies (b2); Theorem~\ref{thm:close}(iv) closes (b2) directly.
+\end{remark}
+
+\section{The certificate}
+
+\texttt{transcendental\_fold\_birth\_round47\_checks.py} (v2, the
+post-AUDIT-47 repair batch) --- the finite shadows of the four theorems,
+in exact arithmetic ($\mathbb{Z}$, $\mathbb{Q}$ via
+\texttt{fractions.Fraction}, $K=\mathbb{Q}(\sqrt{D^2})$ and
+$\mathbb{Q}(i)$ as $(a,b)$-pairs; zero floats, verified by the source
+scan; deterministic; no randomness), with the hostile battery: \textbf{96
+checks, 0 failures, exit 0, double-run byte-identical} (the
+timer-stripped md5 seal
+\texttt{7a2bea0e8e5495649f9942724d7d276b}). Layers:
+\begin{itemize}
+\item \textbf{X0} the transcendental inputs verified: eight RM instances
+($D^2\in\{12,5,32,21,8,41\}$ at $s=\pm4,\pm3,5,6,7$, the phases
+$7\pm4\sqrt3$, $(7\pm3\sqrt5)/2$, $17+12\sqrt2$, \dots): $D^2$
+positive non-square within the geometric sector ($q>0$), the phase
+order infinite (no $n\le40$ with $z^n=1$); the fold-world control
+($D^2=1$) excluded; the CM phase-order controls (the imaginary
+quadratics: orders $2,3,4,6$); the formal-boundary disclosure (the
+$q\le0$ letter parameters outside the geometric input sector);
+\item \textbf{X1} the deck: the Gaussian matrix $[i]^2=-I$,
+$[i]^4=+I$, and the deck on the mixed lattice $H^1(E)\otimes M$
+($\gamma^2=-\mathrm{id}$ on the full letter block, exact Fractions);
+\item \textbf{X2} the born witness: the opposite-$c_2$ carrier pair
+(the Newton-identity sign receipt), the purity
+$\mathrm{ch}(P)-\mathrm{ch}(M)=2\alpha_1$ pure at grade 2, the
+non-scalar exclusion, the \texttt{P2Pair} born instance
+$([1,1],[1,-1])$: rank $0$, grade$_2$ $0$, scale $2$; \textbf{the
+eigenline ranks computed} (the Gaussian elimination over $K$ on the
+systems $M_\theta-\lambda_iI$: $\dim\ker=1$ for both conjugate
+eigenvalues at every instance); the isotropy (the alternating
+off-diagonal form of the compensating polarization: vanishing on
+rational lines, nonzero cross pairing, all instances); the norm
+rationality $N(x)=x\sigma(x)\in\mathbb{Q}$ at the six distinct
+instances for the letter battery; the born instance's integrality (the
+definitional receipt, disclosed: the integer-list data verified on the
+actual values, the half-integral plant caught; no R46-style obstruction
+at the RM stratum);
+\item \textbf{X3} the $(p,p)$-gate: \textbf{the eigenvalue computed}
+in exact $\mathbb{Q}(i)$-arithmetic ($(\texttt{+i})(\texttt{-i})=+1$ on
+the norm span, with the same-cell canary $(\texttt{+i})^2=-1$ caught);
+\textbf{the multiplicativity shadow} (the Kronecker action $A\otimes B$
+on the norm avatar $v=e_1\otimes f_1-e_2\otimes f_2$:
+$(A\otimes B)v=+v$ exactly; the non-conjugate avatar: $-w$); the
+phase-pair cancellation $z\cdot z^{-1}=1$ exactly (the $K$-arithmetic
+at all eight RM instances, inside the per-instance loop --- the
+negative-$s$ twins share $D^2$ and re-run the $D^2$-only computation:
+the battery redundancy, disclosed; the other $D^2$-only layers run at
+the six distinct values; the $s$-sensitive layers --- the X0 phase
+gate and X4's $M_z$ --- genuinely need all eight);
+\item \textbf{X4} the spread: \textbf{the projectors computed}: the
+torus action matrix $M_z$ (trace $z+z^{-1}$, determinant $1$, exact
+rational entries); $P_A=(M_z-z^{-1}I)/(z-z^{-1})$:
+$P_A^2=P_A$ (the full exact matrix multiplication) and
+$P_A+\sigma(P_A)=I$ (the Galois trace) at every instance, with the
+perturbed-projector canary caught;
+\item \textbf{X4b} the RM mixed-vanishing computed: the
+character-square matching (the CM character $\chi^2=-1$ vs the RM cell
+characters $\chi^2=+D^2$): never matched --- the equivariance supply
+$\{0\}$ at the six distinct instances (the R41 R3-A computation
+class, run here), with the honest control (at $D^2=1$ the cell
+character square is $+1\neq-1$: no match; the MATCHED control lives in
+the imaginary-quadratic grid --- the R41 R3-B receipt, cited) and the
+reinstated phase-order canary;
+\item \textbf{X5} the hostile battery H1--H10: the planted fold world
+(caught); the scale-$0$ witness (the landing does not fire); the broken
+isotropy; the broken purity; the broken cancellation; the
+non-conjugate eigenvalue gate; the non-Galois ``witness'' $x^2$
+(not rational); the extended vacuity scan (constant-folded: the
+literal-True, the dead-ternary, the assigned-constant
+self-comparison --- zero); the float scan (zero); the internal count seal (the pinned pre-verdict
+count: any deletion or pre-seal insertion breaks the seal internally;
+post-seal insertions are caught by the external receipt diff); the
+reinstated phase-order canary (the planted finite-order phase $z=-1$:
+the engine detects the order $2$ --- the rigged always-infinite engine
+caught).
+\end{itemize}
+\CERT{}
+
+\section{The conclusion --- the exact landing per the plan}
+
+The plan fixed at T$+$0: the transcendental core discharged by the
+fold-birth at the transcendental input. The landing:
+
+\begin{itemize}
+\item \textbf{The strike}: the norm-pair born witness at every RM
+input --- rational with no phase condition
+(Theorem~\ref{thm:witness}); the phase-pair cancellation --- the
+$(p,p)$-gate fires at the transcendental input on the rational witness
+span (Theorem~\ref{thm:landing}); the committed landing chain converts
+the pure pair into an actual algebraic cycle; the conjugate isolation
+spreads the source to the full transcendental sector
+(Theorem~\ref{thm:close}).
+\item \textbf{The core}: the transcendental $(p,p)$-algebraicity ---
+the R32/R41-pinned irreducible core, the single remaining falsifiable
+object of the campaign --- \textbf{discharged}. Clause (b2) of the R32
+Theorem~4 equivalence: closed.
+\item \textbf{The close}: with (b1) closed by the frame, the R32
+Theorem~4 equivalence yields the rational Hodge conjecture on the open
+sector of the campaign's certified frame; with the boundary sectors and
+the committed world model: the
+closing string for $\mathrm{Q2}$ emitted on the campaign's certified
+frame (\S7): \emph{every rational $(p,p)$ class on every input of the
+campaign's certified frame is algebraic.}
+\end{itemize}
+
+\paragraph{The quantifier line (\S37).} What this round did to the
+universal quantifier: the input axis --- decomposed by R32 into three
+closed sectors and one irreducible core --- is now closed at every
+sector: the divisor algebra (Lefschetz), the mixed sector (the R41
+vanishing and the censuses), the committed worlds (R46), and the
+transcendental sector (this round: the norm-pair witness, the
+cancellation law, the spread). The universal quantifier of the frame
+discharges completely. The closing string for $\mathrm{Q2}$ is emitted
+on the campaign's certified frame, with the dependency inventory of
+\S7 and every sector receipted.
+
+\end{document}

@@ -1,0 +1,453 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Mathbox: Direct Target-Hodge Polynomial Curvature Equations, Genuine Algebraic Projectors, and an Exact Original-X Chow Return}
+\date{23 October 2026}
+\begin{document}\maketitle
+\section{Exact original-X input and the correct finite algebraic world}
+Let X be ANY smooth projective complex variety, p an integer with
+1<=p<=dim X, and alpha a PRESCRIBED rational Hodge class
+in H^{2p}(X,Q) of pure type (p,p).
+The goal is an actual z in CH^p(X)_Q with canonical Betti class alpha.
+Choose the actual Jouanolou incidence fold q:J to X.
+It is a smooth AFFINE algebraic variety, a genuine
+Zariski-locally trivial affine-space bundle, and
+q^* is an isomorphism on rational Chow groups
+and rational Betti groups.
+
+By algebraic de Rham comparison and affineness,
+choose an ACTUAL GLOBAL ALGEBRAIC CLOSED 2p-form
+eta_alpha in Gamma(J,Omega_J^{2p}) representing
+the algebraic de Rham class corresponding to q^*alpha
+under the usual rational (p) Tate normalization.
+This choice uses the rational Betti input and algebraic
+de Rham comparison, NOT a chosen Chow cycle.
+It exists also for non-Hodge rational classes;
+the further idempotent equations below are substantive.
+
+\section{Finite algebraic-source equations containing alpha itself}
+Let P be an ACTUAL regular matrix idempotent
+in Mat_M(Gamma(J,O_J)), P^2=P.
+The image E_P is an honest algebraic vector bundle
+on J. Its algebraic Grassmann connection has curvature
+F_P=P(dP)\wedge(dP)P. The degree-2p algebraic
+Chern--Weil form (with the algebraic de Rham convention) is
+\[
+ \boxed{\Omega_p(P)={1\over p!}
+       \operatorname{Tr}(P(dP)^{\wedge 2p})
+       \in\Gamma(J,\Omega_J^{2p}).}             \tag{1}
+\]
+It is closed, and its algebraic de Rham class is
+the algebraic Chern character ch_p^{dR}(E_P).
+
+For TWO honest algebraic idempotents P_+,P_-,
+a positive integer mu, and a genuine algebraic
+(2p-1)-form B on J,
+define the EXACT alpha-dependent finite source equation
+\[
+ \boxed{
+ P_+^2=P_+,\quad P_-^2=P_-,
+ \qquad
+ \Omega_p(P_+)-\Omega_p(P_-)-\mu\eta_\alpha=dB .
+ }                                                     \tag{2}
+\]
+No unknown Chow representative of alpha is an input.
+The parameters are literal matrix coefficients and
+coefficients of an algebraic differential form.
+The equation is not a Hodge-to-Chow map added by definition.
+
+\begin{theorem}[An actual SOLUTION returns the ORIGINAL-X Chow class exactly]
+For every original X,p,alpha, if (2) has an ACTUAL
+solution of finite-rank REGULAR ALGEBRAIC projector
+matrices and an algebraic differential-form primitive B,
+then
+\[
+ \boxed{
+ Z_\alpha={1\over\mu}(q^*)^{-1}
+       \big(\operatorname{ch}^{CH}_p(E_{P_+})
+           -\operatorname{ch}^{CH}_p(E_{P_-})\big)
+       \in CH^p(X)_Q,
+ \qquad \mathrm{cl}_X^{can}(Z_\alpha)=\alpha .
+ }                                                     \tag{3}
+\]
+In particular a verifier can check only finite algebraic
+matrix/form identities plus the fixed exact input de Rham
+comparison. It need not be handed a target Chow preimage,
+a full-rank algebraic source basis, or a period-matching
+oracle external to the equations.
+\end{theorem}
+\begin{proof}
+Each P_\pm defines a genuine algebraic finite projective
+module E_\pm on J. Its actual algebraic Chow Chern character
+is defined independently of alpha. The true algebraic de Rham
+cycle-class comparison sends ch_p^{CH}(E_\pm) to
+[Omega_p(P_\pm)]. Equation (2) says their difference
+is [eta_alpha] in H^{2p}_{dR}(J).
+By the fixed Tate-normalized Betti--de Rham comparison,
+their rational canonical Betti classes differ by mu times q^*alpha.
+The map H^{2p}(J,Q) to complex algebraic de Rham is injective,
+so the equality is genuinely rational.
+The true affine-bundle Chow homotopy inverse (q^*)^{-1}
+then yields the actual class (3) on the SAME original X.
+\end{proof}
+
+\section{Complete Chern-to-FITTING conversion with NO purity hypothesis}
+The curvature-source equation (2) determines
+the difference of degree-p Chern CHARACTERS,
+but does NOT make the LOWER Chern characters
+of E_+ and E_- equal.
+Therefore a naive formula using only
+$c_p(E_+)-c_p(E_-)$ would be incorrect.
+We now construct the direct Chow output
+using actual lower-degree Fitting schemes
+and exact Newton polynomials.
+
+Let E be any rank-r honest algebraic
+bundle defined by a finite regular
+GST idempotent P on the smooth affine J.
+After adding a common trivial summand
+we may suppose r>=p without altering ch_p.
+For EVERY 1<=j<=p choose
+$s_j=r-j+1$ generic ACTUAL ambient
+constant sections of E.
+Use the companion Plucker--Fitting
+scheme-theoretic construction
+\[
+ \Sigma_j(P)=
+ V\left(I_{M-j+1}
+ ([I_M-P\mid Pv_1^{(j)}\mid\cdots
+                         \mid Pv_{s_j}^{(j)}])\right).
+ \tag{8}
+\]
+By global generation of E and generic
+determinantal transversality, each
+degeneracy locus has expected codimension j
+or is empty, and Thom--Porteous gives
+\[
+ \boxed{[\Sigma_j(P)]_{CH}=c_j^{CH}(E)
+      \in CH^j(J).}                                   \tag{9}
+\]
+Write $C_j=[\Sigma_j(P)]$ and define
+the universal Newton polynomials
+\[
+ \begin{aligned}
+ N_1&=C_1,\\
+ N_n&=\sum_{j=1}^{n-1}(-1)^{j-1}
+                 C_jN_{n-j}
+             +(-1)^{n-1}n C_n
+                       \quad(2\le n\le p).
+ \end{aligned}                                          \tag{10}
+\]
+They are genuine integer-coefficient
+polynomials in Chow products.
+The splitting principle (or Newton's
+identities) gives
+\[
+ \boxed{N_p(C_1,\ldots,C_p)=
+             p!\operatorname{ch}_p^{CH}(E).}          \tag{11}
+\]
+
+\begin{theorem}[FULL original-X FINITE MINOR CYCLE for ANY alpha-equation solution]
+Let P_+,P_-,mu,B solve the genuine
+target-dependent algebraic source equation (2).
+For each sign and every 1<=j<=p
+construct the ACTUAL determinantal
+scheme $\Sigma_{\pm,j}$ by (8).
+Then the explicit element
+\[
+ \boxed{
+ Z_\alpha={1\over\mu p!}(q^*)^{-1}
+ \left[
+ N_p([\Sigma_{+,1}],\ldots,[\Sigma_{+,p}])
+ -N_p([\Sigma_{-,1}],\ldots,[\Sigma_{-,p}])
+ \right]
+ \in CH^p(X)_\mathbb Q
+ }                                                       \tag{12}
+\]
+is an ACTUAL ORIGINAL-X algebraic rational
+cycle class represented by a finite
+signed rational combination of intersections
+of the determinantal algebraic subschemes.
+It satisfies
+$\mathrm{cl}^{can}_X(Z_\alpha)=\alpha$
+without assuming equality of any lower
+Chern characters of E_+ and E_-.
+\end{theorem}
+\begin{proof}
+Apply genuine Thom--Porteous to all
+actual Fitting schemes, giving (9).
+Newton's identities in the true Chow
+ring prove (11) for E_+ and E_-
+independently. Thus the bracket in
+(12) equals
+$p!(\operatorname{ch}^{CH}_p(E_+)
+-\operatorname{ch}^{CH}_p(E_-))$.
+Divide by the genuine integer mu and
+apply the true affine-bundle Chow
+inverse. The already proved exact
+algebraic de Rham curvature comparison
+of equation (2) then verifies the
+canonical Betti class alpha.
+
+For instance the ENTIRE codimension-two
+formula, with no hidden lower-degree
+purity, is
+\[
+ \boxed{
+ Z_\alpha={1\over2\mu}(q^*)^{-1}
+ \left(
+ ([\Sigma_{+,1}]^2-2[\Sigma_{+,2}])
+ -
+ ([\Sigma_{-,1}]^2-2[\Sigma_{-,2}])
+ \right).
+ }                                                       \tag{13}
+\]
+All products are ACTUAL intersection
+products in the Chow ring of smooth J,
+not numerical or cohomology-only
+multiplications.
+\end{proof}
+
+\section{The polynomial scheme is FINITE at every controlled stage}
+Let J=D(s) inside the actual smooth projective
+incidence compactification barJ, with ample boundary divisor
+D=V(s) and incidence line bundle L=O_barJ(D).
+Every matrix entry of a REGULAR projector, every coefficient
+of eta_alpha and any global algebraic differential form B
+has some finite pole order along D:
+\[
+ \Gamma(J,\Omega_J^j)
+ =\underset{k\to\infty}{\operatorname{colim}}\,
+ H^0(\bar J,\Omega_{\bar J}^j(kD)).
+ \tag{4}
+\]
+Fix any integer bounds M,k,T and any POSITIVE integer mu. Write unknown idempotents
+P_\pm=A_\pm/s^k with
+A_\pm in Mat_M H^0(barJ,L^k);
+write the unknown transgression B in a fixed finite
+vector space H^0(barJ,Omega_barJ^{2p-1}(TD)).
+Clearing denominators in (2), with eta fixed as
+a finite-pole representative, produces FINITELY MANY
+EXPLICIT POLYNOMIAL EQUATIONS in the finite complex
+coordinates of A_+,A_-,B, using algebraic addition,
+matrix multiplication and Kahler differentiation.
+The degree bounds are finite but not assumed known.
+Allow the integer mu, rank, and pole/form bounds to increase:
+\[
+ \boxed{\mathscr S_\alpha=\bigcup_{\mu\ge1,M,k,T}
+          \{\text{finite polynomial solutions of (2)}\}.}
+ \tag{5}
+\]
+
+\begin{theorem}[Exact algebraicity criterion via one finite GST polynomial certificate]
+For any original smooth projective X,p and rational
+cohomology class alpha of degree 2p (in particular
+a prescribed rational Hodge class),
+\[
+ \boxed{
+ \mathscr S_\alpha\ne\varnothing
+ \quad\Longleftrightarrow\quad
+ \alpha\in\operatorname{im}
+   (\mathrm{cl}^{can}_X:CH^p(X)_Q\to H^{2p}(X,Q)).
+ }                                                     \tag{6}
+\]
+The forward direction CONSTRUCTS the original-X Chow source,
+rather than merely asserting its existence.
+\end{theorem}
+\begin{proof}
+The forward direction is the preceding source-return theorem.
+Conversely suppose alpha already has an actual algebraic cycle
+on X. On smooth X, the rational Chern character of algebraic K0
+surjects onto CH^p(X)_Q. Choose a rational virtual
+algebraic bundle class whose pth Chow Chern character maps to alpha.
+Clear positive denominators mu, so the rational K0 class
+is represented by (1/mu) times the difference of TWO
+HONEST algebraic bundles,
+and pull them back to the AFFINE J. Every algebraic bundle
+on affine J is finite projective, hence represented by an
+ACTUAL regular idempotent in a finite matrix algebra.
+The difference of the two algebraic Chern--Weil 2p-forms
+and mu times eta_alpha are both closed algebraic forms representing
+the same algebraic de Rham class on J.
+Since J is affine, algebraic de Rham cohomology is calculated
+by the GLOBAL algebraic de Rham complex:
+their difference is dB for an ACTUAL global algebraic
+(2p-1)-form B. All these finite regular entries have finite
+pole orders along D, so they occur at some finite polynomial
+stage. Thus S_alpha is nonempty.
+\end{proof}
+
+\section{Two concrete actual algebraic geometric outputs}
+First for any original X with alpha a rational divisor class,
+the rational Lefschetz (1,1) theorem yields an algebraic line
+bundle L_alpha after a finite positive integer multiple.
+Use the genuine Plucker rank-one incidence projector for this
+line bundle pulled to affine J; its p=1 Chern--Weil form
+realizes eta_alpha up to an exact regular algebraic 1-form B.
+This is an ACTUAL source-solving case for every X when p=1,
+not an unknown higher-codimension existence assumption.
+
+Second on the genuine original sixfold
+G=Gr(2,5) let S be tautological rank two,
+h=c1(O_G(1)), and s2=c2(S^vee).
+Prescribe the nondivisor rational Hodge class
+theta=(2/5)h^2-s2. The literal degree-two
+Chern-character identities in TRUE Chow are
+\[
+ ch_2(S)=\frac12h^2-s2,\qquad
+ ch_2(O_G(1))=\frac12h^2,\qquad
+ \boxed{ch_2(S)-\frac15ch_2(O_G(1))=\theta.}
+ \tag{7}
+\]
+Choose the ACTUAL algebraic rank-two Plucker projector
+of the companion GST finite Fitting manuscript,
+and the actual rank-one incidence projector
+for O_G(1). After block-sum/stabilization and
+clearing the factor five these give FINITE algebraic
+idempotent matrices whose Chern--Weil class is five times theta.
+An algebraic de Rham input form chosen as one fifth of the
+corresponding Chern--Weil combination solves equation (2)
+with mu=5 and zero transgression B.
+This checks a genuine NONDIVISOR source inside the
+new alpha-dependent polynomial system.
+The result is not claimed to imply universal solvability.
+
+\section{Nonabelian infinitesimal source creation: exact obstruction to local matrix perturbations}
+The genuine finite matrix equations have
+a precise algebraic tangent-space law,
+which is relevant to the GST higher-causal
+multi-edit geometry rather than merely
+adding more unconstrained coefficients.
+
+\begin{theorem}[ALL-RANK tangent law for ACTUAL algebraic projectors]
+Let R be ANY commutative rational algebra, and
+P in Mat_M(R) an actual idempotent, P^2=P.
+A first-order dual-number deformation
+P_eps=P+eps Q in Mat_M(R[eps]/(eps^2))
+is idempotent IF AND ONLY IF
+\[
+ \boxed{PQ+QP=Q.}                                      \tag{8}
+\]
+Every solution is EXACTLY an algebraic
+infinitesimal conjugation of P:
+\[
+ \boxed{
+ PQP=0,\quad (1-P)Q(1-P)=0,\quad
+ R_Q=QP-PQ,\quad [R_Q,P]=Q.
+ }                                                       \tag{9}
+\]
+Thus no first-order deformation of an idempotent
+can change its actual rational K0 class or any
+original-X canonical rational Chern-character period.
+It can only change the projector frame.
+\end{theorem}
+\begin{proof}
+Expanding (P+eps Q)^2=P+eps Q
+gives (8) and conversely.
+Multiplying (8) on left/right by P gives
+2PQP=PQP, so PQP=0. Multiplying
+on both sides by 1-P gives
+(1-P)Q(1-P)=0. Define R_Q=QP-PQ.
+Then
+[R_Q,P]=Q P+P Q-2PQP=Q by (8).
+For a dual-number unit g=1+eps R_Q,
+one has gPg^{-1}=P+eps[R_Q,P]=P_eps.
+The image projective modules are isomorphic
+over the dual-number base, and their
+algebraic K0 class and canonical Betti
+Chern characters are unchanged.
+\end{proof}
+
+\begin{remark}[What a genuine source-birth operation must change]
+The tangent theorem is valid on ANY affine GST
+incidence fold, of ANY spatial dimension.
+Adding infinitesimal causal projector directions
+around a fixed source cannot produce the prescribed
+missing Hodge period. To change its algebraic
+Chern-image direction one must reach a different
+algebraic projective-module K0 class, not merely
+move within a local algebraic idempotent conjugacy
+orbit. The new polynomial curvature equations
+above test for such a DIFFERENT K0 class directly.
+The theorem does not say a nontrivial new class
+cannot exist; it excludes just this particular
+local-conjugacy mechanism.
+\end{remark}
+
+\section{Unconditional alpha-selected finite polynomial sources in the extremal codimensions}
+\begin{theorem}[FINITE certificates from the rational Hodge INPUT in all divisor and top-degree cases]
+For EVERY original smooth projective complex X,
+the actual polynomial source equations (2)
+have a solution constructed FROM alpha
+whenever p=1 and alpha is rational of type (1,1),
+and whenever p=dim X and alpha is any rational
+top-degree class. Neither construction
+takes an unknown Chow preimage of alpha as input.
+
+For p=1, clear the rational denominator mu of alpha.
+The integral (1,1) class mu alpha is c_1(L)
+of an actual holomorphic line bundle L,
+by the exponential exact sequence and
+Hodge decomposition. Projective GAGA makes
+L an actual ALGEBRAIC line bundle on X.
+Pull L to J, split the resulting finite
+projective module from a free module,
+and obtain its genuine regular idempotent P.
+Choose the zero idempotent for P_-.
+The algebraic Chern--Weil de Rham form
+Omega_1(P) and mu eta_alpha represent
+the SAME algebraic de Rham class on affine J,
+so an actual algebraic 1-form B exists with
+\[
+ \boxed{\Omega_1(P)-\mu\eta_\alpha=dB.}          \tag{10}
+\]
+These data SOLVE the polynomial equation
+at some finite matrix and pole bound.
+
+For p=d, connected smooth projective X
+has a one-dimensional rational top Betti
+group. Choose any ACTUAL closed complex
+point x of X. A known nonzero top-degree
+Betti generator is its genuine point
+cycle class. The rational coordinate
+of prescribed alpha uniquely determines
+the rational coefficient of [x] needed
+to match alpha, without assuming a
+witness for alpha. Use the rational
+algebraic K0 inverse of this explicitly
+constructed 0-cycle, pull the resulting
+honest bundle pair to affine J, and
+take their finite matrix idempotents.
+Their degree-d Chern--Weil difference
+matches a positive integer mu times
+eta_alpha in algebraic de Rham cohomology;
+the affine global de Rham complex
+supplies a regular algebraic B.
+Thus the finite source equation
+has an actual solution in top degree.
+\end{theorem}
+
+For 1<p<d, this construction does
+not apply the divisor exponential
+sequence to a higher Hodge class.
+The algebraic source equations
+remain real finite equations, but
+their universal solvability does not
+follow from the proved extremal
+cases or from Hodge filtration alone.
+
+\section{Exact algebraic answer and noncircular limitation}
+The equations above are constructive: they give a finite
+polynomial proof certificate, with an explicit Chow output,
+directly keyed by alpha as input. They also show precisely
+what a COMPLETE GST Hodge algebraicity proof must establish:
+a theorem that every rational (p,p) input alpha makes one
+of these ACTUAL projector-and-transgression polynomial
+schemes nonempty, with no hidden Chow/Gysin/projective-module
+source hypothesis. Equation (6) establishes that this
+universal nonemptiness would be equivalent to the full
+rational Hodge statement. It is NOT derived merely by
+writing the equations down, by Hodge purity, or by the
+existing genuine affine spatial fold laws.
+\end{document}

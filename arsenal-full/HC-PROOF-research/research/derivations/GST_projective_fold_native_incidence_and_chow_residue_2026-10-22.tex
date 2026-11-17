@@ -1,0 +1,391 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{lemma}{Lemma}
+\newtheorem{remark}{Remark}
+\title{GST projective-fold source attempt: explicit Chow residue, real incidence births, and original-\(X\) return}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We attack the exact source-construction problem:
+given any smooth projective complex original \(X\), a rational Hodge
+\(\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)\), and a projective
+fold \(\pi:P=\mathbb P_X(\mathcal O_X\oplus E)\to X\),
+construct a genuine algebraic \(Z_\alpha\in CH^p(P)_{\mathbb Q}\)
+with \(\mathrm{cl}_P^{\mathrm{can}}(Z_\alpha)=\pi^*\alpha\)
+without assuming an algebraic preimage of \(\alpha\) on \(X\).
+We derive the \emph{explicit} Chern-polynomial zero-section
+Chow extractor, demonstrate a real incidence source on
+positive-genus curve products with a nonzero primitive pairing,
+and construct the requested upstairs cycle for entire known
+all-\(X\) codimension ranges via Lefschetz \((1,1)\) and Hard Lefschetz.
+We then prove exactly why projective fiber operations by themselves
+cannot manufacture the general target's absent original-\(X\)
+Chow class. This is a bounded route with honest
+canonical Chow semantics, not a proof of universal surjectivity.
+\end{abstract}
+
+\section{Immutable target, geometry, and conventions}
+Let \(X\) be connected smooth projective over \(\mathbb C\) of
+dimension \(d\), with ample \(H\) and \(h=c_1(H)\).
+Let \(p\ge0\) and
+\(\alpha\in\mathrm{Hdg}_{\mathbb Q}^p(X)
+=H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)\).
+Fix an \emph{algebraic} vector bundle \(E\) of rank \(r\ge2\),
+and use the \emph{quotient-line} convention
+\[
+ P=\mathbb P_X(\mathcal O_X\oplus E),\quad
+ \pi:P\longrightarrow X,\quad
+ \xi=c_1(\mathcal O_P(1)),\quad
+ s:X\longrightarrow P
+\]
+with \(s\) from the quotient
+\(\mathcal O_X\oplus E\twoheadrightarrow\mathcal O_X\).
+Here \(\dim_{\mathbb C}P=d+r\),
+\(\xi|_{s(X)}=0\), \(\pi\circ s=\mathrm{id}_X\);
+all Chow groups have rational coefficients, and
+\(\mathrm{cl}^{\mathrm{can}}\) means the actual canonical
+rational Betti cycle-class map, never an arbitrary linear operator.
+
+The target is \emph{not} just a cohomological projector or
+a period detector: it is a bona fide algebraic
+\(Z_\alpha\in CH^p(P)_{\mathbb Q}\) with exactly
+\(\mathrm{cl}^{\mathrm{can}}_P(Z_\alpha)=\pi^*\alpha\).
+Only such a produced cycle licenses the next return theorem.
+
+\section{The exact Chern zero-section extractor}
+\begin{theorem}[GST vertical Chow-residue extraction]\label{thm:extract}
+Set
+\[
+ R_E :=
+ c_r\!\left(\pi^*E^\vee\otimes\mathcal O_P(1)\right)
+ =\sum_{j=0}^r(-1)^j\pi^*c_j(E)\,\xi^{r-j}
+ \in CH^r(P)_{\mathbb Q}. \tag{1}
+\]
+Then \(R_E=[s(X)]\) as an actual codimension-\(r\)
+algebraic cycle, and, in the entire operational Chow ring,
+\[
+ \boxed{\xi R_E=0,\qquad \pi_*(R_E)=1.} \tag{2}
+\]
+For every \(p\) and every \(Z\in CH^p(P)_{\mathbb Q}\),
+the formula
+\[
+ \boxed{\mathcal R_E(Z)=\pi_*(R_E\cdot Z)
+                   =s^*Z\in CH^p(X)_{\mathbb Q}} \tag{3}
+\]
+is the true refined original-\(X\) algebraic return.
+It selects precisely the base coefficient: if
+\(Z=\sum_{i=0}^r\xi^i\pi^*Z_i\)
+in the projective-bundle decomposition, then
+\(\mathcal R_E(Z)=Z_0\).
+At the canonical Betti level,
+\[
+ \boxed{
+ \mathrm{cl}^{\mathrm{can}}_P(Z)=\pi^*\alpha
+ \Longrightarrow
+ \mathrm{cl}^{\mathrm{can}}_X\bigl(\mathcal R_E(Z)\bigr)=\alpha.
+ } \tag{4}
+\]
+\end{theorem}
+\begin{proof}
+The universal quotient
+\(\pi^*(\mathcal O_X\oplus E)\to\mathcal O_P(1)\)
+restricts to a bundle map \(\pi^*E\to\mathcal O_P(1)\).
+Its zero locus is exactly the distinguished section \(s(X)\),
+a regular closed immersion of codimension \(r\). The defining
+section is a regular section of
+\(\pi^*E^\vee\otimes\mathcal O_P(1)\),
+so its top Chern class is the fundamental Chow class,
+giving (1). Since \(s^*\xi=0\), the refined intersection
+identity \(R_E\cdot\xi=s_*(s^*\xi)=0\);
+also \(\pi_*R_E=\pi_*s_*1=1\).
+For arbitrary \(Z\), the regular-embedding identity
+\(s_*s^*Z=R_E\cdot Z\) holds in the Chow ring of the
+smooth scheme \(P\). Applying \(\pi_*\) and
+\(\pi\circ s=\mathrm{id}\) yields (3).
+The projective-bundle presentation and \(s^*\xi=0\)
+give the coefficient extraction. Finally, apply actual
+cycle-class naturality to (3) and use
+\(s^*\pi^*=\mathrm{id}\) on singular Betti cohomology.
+\end{proof}
+
+\begin{proposition}[Uniform projective Chern--Segre selector law]
+Let \(c_j=c_j(E)\), \(c_0=1\), and let the rational Chow
+pushforward sequence \(u_k:=\pi_*(\xi^{r+k})\), \(k\ge0\),
+be defined by
+\[
+ \sum_{k\ge0}u_k t^k
+ = \left(\sum_{j=0}^r(-1)^jc_jt^j\right)^{-1}.
+ \tag{5}
+\]
+Then for all \(k\ge0\)
+\[
+ \boxed{
+ \pi_*(R_E\xi^k)
+ =\sum_{j=0}^r(-1)^jc_j\,u_{k-j}
+ =\begin{cases}1&k=0,\\0&k>0,\end{cases}}
+ \qquad u_m=0\ (m<0). \tag{6}
+\]
+\end{proposition}
+\begin{proof}
+The projective-bundle pushforward theorem gives (5),
+with these signs for the stated quotient convention.
+Equation (6) is coefficient extraction from
+\(c(E,-t)\,c(E,-t)^{-1}=1\); it also follows geometrically
+from (2). No arbitrary rank bound appears in the proof.
+\end{proof}
+
+\section{Independently constructed genuine coincidence-source births}
+\begin{theorem}[Diagonal-incidence Chow sources over any original \(X\)]
+Let \(Y\) be a smooth projective complex variety of dimension
+\(p\), and let \(f,g:X\to Y\) be \emph{actual algebraic maps}.
+The diagonal \(\Delta_Y\hookrightarrow Y\times Y\) is a
+regular codimension-\(p\) embedding. The true intersection
+pullback
+\[
+ Z_{f,g}^{P}:=
+ ((f\circ\pi,g\circ\pi):P\to Y\times Y)^*[\Delta_Y]
+  \ \in CH^p(P)_{\mathbb Q} \tag{7}
+\]
+is an algebraically constructed codimension-\(p\) class
+independent of any preselected Chow representative of
+a Hodge target. It has the canonical class
+\[
+ \mathrm{cl}^{\mathrm{can}}_P(Z_{f,g}^{P})
+ = \pi^*(f,g)^*[\Delta_Y]_{\mathrm{Betti}},\qquad
+ \mathcal R_E(Z_{f,g}^{P})
+ =(f,g)^*[\Delta_Y]_{\mathrm{Chow}}. \tag{8}
+\]
+If the two maps intersect the diagonal in expected codimension,
+(7) is represented by the actual scheme-theoretic coincidence
+locus \(\{z:f(\pi(z))=g(\pi(z))\}\);
+without this transversality, (7) remains a bona fide refined
+Chow class on smooth \(P\).
+\end{theorem}
+\begin{proof}
+Pullback in the operational Chow ring of smooth
+\(Y\times Y\) is defined for any morphism from smooth \(P\).
+The diagonal represents a true algebraic codimension-\(p\)
+class. Base-change of operational pullback proves
+\(Z_{f,g}^{P}=\pi^*(f,g)^*[\Delta_Y]\).
+Genuine canonical Betti naturality and the extractor (3)
+then give (8). The coincidence locus represents the
+unrefined class under the stated expected-codimension
+condition.
+\end{proof}
+The construction is uniformly typed for any original \(X\)
+\emph{with the specified maps \(f,g\)}.
+It does not assume such maps detect every rational Hodge class;
+indeed an arbitrary \(X\) may lack useful morphisms to a
+given lower-dimensional \(Y\).
+
+\begin{theorem}[Positive-genus nonambient primitive incidence detector]
+For every smooth connected curve \(C\) of genus \(g>0\), set
+\(X=C\times C\), \(A=C\times\{c_0\}\),
+\(B=\{c_0\}\times C\), \(\Delta=\Delta_C\),
+\(h=A+B\), and \(D=\Delta-A-B\).
+The three genuine divisor classes satisfy
+\[
+ \left((A,B,\Delta)\cdot(A,B,\Delta)^T\right)
+ =\begin{pmatrix}
+ 0&1&1\\ 1&0&1\\1&1&2-2g
+ \end{pmatrix},\quad
+ \boxed{\det=2g,\ D\cdot h=0,\ D^2=-2g.} \tag{9}
+\]
+On any \(P=\mathbb P_X(\mathcal O_X\oplus E)\), the
+genuine algebraic incidence cycle
+\[
+ \boxed{Z_D^P=
+ [( \mathrm{pr}_1\pi,\mathrm{pr}_2\pi)^{-1}(\Delta_C)]
+ -\pi^*[A]-\pi^*[B]} \tag{10}
+\]
+has canonical class \(\pi^*\mathrm{cl}_X(D)\),
+and \(\mathcal R_E(Z_D^P)=D\).
+The primitive direction is nonzero and independent of the
+ambient polarization \(h\) for \(g>0\); at genus zero the
+determinant and primitive norm vanish, correctly detecting
+collapse to the ambient span.
+\end{theorem}
+\begin{proof}
+Use \(A^2=B^2=0\), \(A\cdot B=A\cdot\Delta
+=B\cdot\Delta=1\), and
+\(\Delta^2=\deg T_C=2-2g\). Direct multiplication yields
+(9). The displayed first term of (10) is the actual diagonal
+equalizer of the two algebraic projection maps, pulled back
+by \(\pi\). Its subtraction of actual geometric coordinate
+fibers is a rational Chow cycle. Formula (8) and the return
+(3) establish its exact canonical class and return. For
+\(g>0\), \(D^2=-2g\ne0\), so \(D\) is a nonambient
+primitive direction. The \(g=0\) boundary is computed
+without dividing by \(g\).
+\end{proof}
+
+\section{Direct upstairs representatives in unconditional known ranges}
+\begin{theorem}[Constructed algebraic upstairs sources for divisor and curve codimension]
+For every original connected smooth projective \(d\)-fold \(X\),
+every algebraic \(E\), and every prescribed rational Hodge
+\(\alpha\), one can construct the exact genuine upstairs
+cycle \(Z_\alpha^P\in CH^p(P)_{\mathbb Q}\) with
+\(\mathrm{cl}_P^{\mathrm{can}}(Z_\alpha^P)=\pi^*\alpha\)
+for \(p=0,1,d-1,d\) (with out-of-range values ignored).
+For \(d\ge2,p=d-1\), the construction is:
+\[
+ \beta = (h^{d-2}\cup-)^{-1}(\alpha)
+ \in H^2(X,\mathbb Q)\cap H^{1,1}(X),\qquad
+ Z_\alpha^P =\pi^*\bigl(D_\beta\cdot H^{d-2}\bigr), \tag{11}
+\]
+where \(D_\beta\in CH^1(X)_{\mathbb Q}\) is obtained from
+the Lefschetz \((1,1)\) theorem applied to \(\beta\).
+\end{theorem}
+\begin{proof}
+The classes \(1\) and any degree-one closed point supply
+codimensions \(0\) and \(d\), respectively, after rational
+scaling; cohomology is one-dimensional in the corresponding
+degrees because \(X\) is connected. For \(p=1\), Lefschetz
+\((1,1)\) provides a rational algebraic divisor for \(\alpha\);
+pull it back by \(\pi\). For \(p=d-1\) and \(d\ge2\),
+Hard Lefschetz for the ample class \(h\) is a rational
+Hodge-structure isomorphism
+\(h^{d-2}:H^2(X,\mathbb Q)\simeq H^{2d-2}(X,\mathbb Q)\)
+of Hodge bidegree \((d-2,d-2)\).
+Therefore \(\beta\) in (11) is rational of type \((1,1)\).
+Lefschetz \((1,1)\), followed by the usual GAGA algebraicity
+of holomorphic line bundles, gives an actual rational divisor
+\(D_\beta\) with canonical Betti class \(\beta\).
+Its Chow intersection with \(H^{d-2}\) and algebraic pullback
+to \(P\) yield (11). No cycle representing the original
+\(\alpha\) was supplied as an input.
+\end{proof}
+This is a genuine all-original-\(X\) source construction
+in the stated codimension ranges, but it is a recovery of
+established Hodge-theoretic cases, not a new proof of
+middle-codimension rational Hodge algebraicity.
+
+\section{Topological K-theory versus actual algebraic perfect-complex birth}
+The original GST K\(_0\) constructor is a promising way of packaging
+genuine native sources, but the algebraic-versus-topological distinction
+must be tested at its exact coefficient type.
+\begin{theorem}[Perfect-complex algebraization is exactly the missing Chow source]
+For any rational class \(\alpha\in H^{2p}(X,\mathbb Q)\),
+the rational topological Chern character isomorphism gives
+\[
+ u_\alpha^{\mathrm{top}}\in KU^0(X)_{\mathbb Q},
+ \qquad \mathrm{ch}(u_\alpha^{\mathrm{top}})=\alpha
+ \ \text{(concentrated in degree \(2p\)).} \tag{15}
+\]
+Its pullback \(\pi^*u_\alpha^{\mathrm{top}}\) always exists
+as a topological virtual vector bundle on \(P\).
+Nevertheless the following are equivalent:
+\[
+ \begin{array}{ll}
+ \mathrm{(i)}&
+   \alpha\in \mathrm{im}(\mathrm{cl}^{\mathrm{can}}_X:
+                     CH^p(X)_{\mathbb Q}\to H^{2p}(X,\mathbb Q)),\\
+ \mathrm{(ii)}&
+   \exists\,v\in K_0^{\mathrm{alg}}(P)_{\mathbb Q}:
+     [\mathrm{ch}_{\mathrm{Betti}}(v)]_{2p}=\pi^*\alpha .
+ \end{array} \tag{16}
+\]
+Thus an arbitrarily prescribed rational Hodge class always
+has a rational \emph{topological} perfect-complex candidate,
+but the existence of a genuine \emph{algebraic} candidate
+in (ii) is the original Chow-source problem, not an automatic
+consequence of projectivity or purity.
+\end{theorem}
+\begin{proof}
+The rational topological Chern character is an isomorphism
+\(KU^0(X)\otimes\mathbb Q\simeq
+ \bigoplus_j H^{2j}(X,\mathbb Q)\)
+for finite CW complexes; a smooth projective complex variety
+has finite CW homotopy type. This gives (15).
+
+For (i)\(\Rightarrow\)(ii), let a bona fide Chow cycle
+\(Z\in CH^p(X)_{\mathbb Q}\) have canonical class \(\alpha\).
+For smooth \(X\), the rational algebraic Chern character
+\(K_0^{\mathrm{alg}}(X)_{\mathbb Q}
+ \xrightarrow{\mathrm{ch}} CH^*(X)_{\mathbb Q}\)
+is an isomorphism. Choose an algebraic virtual perfect-complex
+\(w\) with \(p\)-th Chow Chern-character component \(Z\);
+then \(v=\pi^*w\) satisfies (ii).
+
+For (ii)\(\Rightarrow\)(i), the actual algebraic section
+has a pullback \(s^*v\in K_0^{\mathrm{alg}}(X)_{\mathbb Q}\).
+Its codimension-\(p\) Chow Chern character
+\(Z=\mathrm{ch}^{\mathrm{Chow}}_p(s^*v)\)
+is an algebraic cycle class. Naturality of the canonical Betti
+Chern character, followed by \(s^*\pi^*=\mathrm{id}\),
+gives \(\mathrm{cl}^{\mathrm{can}}_X(Z)=\alpha\).
+\end{proof}
+One must not silently replace the topological representative
+\(u_\alpha^{\mathrm{top}}\) by an algebraic vector bundle:
+GAGA identifies existing holomorphic coherent sheaves on
+projective varieties with algebraic sheaves; it does not
+produce a holomorphic structure on every topological bundle.
+The avenue remains open only if a new GST geometric
+algebraization mechanism can be independently proved.
+
+\section{Sharp limitation of vertical-only births and exact next input}
+The projective-bundle formula at actual Chow level is
+\[
+ CH^p(P)_{\mathbb Q}
+ =\bigoplus_{i=0}^r
+   \xi^i\pi^*CH^{p-i}(X)_{\mathbb Q}, \tag{12}
+\]
+and the identical decomposition on the rational Hodge
+fiber is compatible with the genuine canonical Betti
+cycle-class map. Thus
+\[
+ \boxed{\pi^*\alpha \in
+  \mathrm{im}\bigl(\mathrm{cl}^{\mathrm{can}}_P\bigr)
+  \iff
+  \alpha\in\mathrm{im}\bigl(\mathrm{cl}^{\mathrm{can}}_X\bigr).}
+ \tag{13}
+\]
+The forward direction is furnished explicitly by (1)--(4);
+the reverse direction uses algebraic pullback.
+Consequently a proposed universal source factory made only from
+known algebraic \(E\), relative \(\xi\), tangent/Chern/Segre
+classes and algebraic fiber operations cannot deduce a missing
+target from projectivity or Hodge purity. It would need a
+\emph{genuinely new target-sensitive geometric incidence,
+moduli, sheaf, or alteration source} with a correct canonical
+Betti class. The positive-genus construction (10) shows an
+actual new primitive direction \emph{relative to the ambient
+hyperplane-only factory}; it does not show every arbitrary
+\(X,p,\alpha\) arises from such a curve incidence.
+
+The exact unresolved acceptance test is to independently
+construct a family of bona fide algebraic \(Z_\alpha^P\)
+for every arbitrary \(X,p,\alpha\) in the middle
+codimensions, not postulate existence in (13).
+For a primitive rational residual \(r_\alpha\) orthogonal
+to all previously constructed original-\(X\) native
+classes, a candidate incidence source must satisfy the
+actual nonzero coupling
+\[
+ \langle r_\alpha,\,
+    \mathrm{cl}_X^{\mathrm{can}}
+       (\mathcal R_E(Z_\alpha^P))\rangle \ne0. \tag{14}
+\]
+This cannot be inferred from a positive self-intersection
+of an unrelated new class; it is a target-dependent geometric
+requirement. The original Hodge conjecture remains the sole
+universal research target.
+
+\section{Exact computation and audit contract}
+The companion source
+\texttt{research/computations/gst\_projective\_chow\_residue\_incidence\_2026\_10\_22.wl}
+checks all \(44\) rational-symbolic residue-selector coefficients
+for \(1\le r\le8,\ 0\le k\le r\), including all Chern variables
+formally via recursion; it checks the genus-parametric determinant,
+primitive pairing and square as exact polynomials, and explicitly
+runs \(g=0,\ldots,5\). These are tests of derived identities,
+not formalizations of schemes, Chow pullback, or the existence
+of arbitrary original-\(X\) classes. The uniform proof is above.
+No Lean file was modified in this route, and no GitHub Actions
+Lean-green status is claimed.
+\end{document}

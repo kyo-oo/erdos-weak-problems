@@ -1,0 +1,584 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\cl}{\operatorname{cl}^{\operatorname{can}}}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\ddbar}{\bar\partial}
+\newcommand{\tensor}{\otimes}
+\newcommand{\Oo}{\mathcal O}
+
+\title{The $\Gr(2,5)$ lattice completion: explicit pure pair at scale $360$,
+and the universal two-center descent law for arbitrary $(X,p,\alpha)$}
+\author{GST Hodge campaign continuation (branch
+\texttt{research/gpt6-native-point-primitive-span-20261017})}
+\date{2026-10-24 IST}
+
+\begin{document}
+\maketitle
+
+\section*{Context}
+This note continues the forcing-site dossier
+\texttt{GST\_forcing\_site\_pure\_realization\_congruence\_closure\_calibration\_2026\_10\_24.tex}
+(commit \texttt{666e163}) and CLOSES its declared concrete open sub-task:
+the finite grade-4 lattice correction completing the pure pair on the
+calibration world $X=\Gr(2,5)$, followed by the Law-4 two-center
+calibration run against the already-proven Rees witness, and the
+extraction of the descent law in a form that transports verbatim to
+arbitrary original $(X,p,\alpha)$. All finite computations below are
+exact rational arithmetic; the complete component table is displayed so
+that every identity can be re-verified by hand and formalized. No Lean
+file is changed by this note; a Lean shadow of the certificate is the
+next commit on this branch.
+
+\section{The completed $\Gr(2,5)$ lattice}
+
+\paragraph{Setup (as in the dossier, now with the top-degree relation
+made explicit).}
+$X=\Gr(2,5)$, $d=6$, $p=2$; tautological subbundle $S$ (rank 2,
+$c_1(S)=-h$, $c_2(S)=s_2$), universal quotient $Q$ (rank 3), Pl\"ucker
+line bundle $\Oo(1)$ with $c_1(\Oo(1))=h$, and
+$\alpha=\tfrac25 h^2-s_2$ with $s_2=c_2(S^\vee)=\sigma_{1,1}$. From
+$c(S)c(Q)=1$:
+\[
+q_1=h,\qquad q_2=h^2-s_2,\qquad q_3=h^3-2hs_2,
+\]
+and consequently, in every degree $\le 6$,
+\begin{equation}
+\boxed{\;h^4=3h^2s_2-s_2^2,\qquad h^3s_2=2hs_2^2,\qquad
+s_2^3=h^2s_2^2\;}
+\label{eq:rels}
+\end{equation}
+(the third follows from the first two by multiplying by $s_2$ and $h$
+respectively: $h^4s_2=3h^2s_2^2-s_2^3=2h^2s_2^2$).
+The graded pieces have $\mathbb Q$-bases
+\[
+\deg 0:\{1\},\;\; \deg 1:\{h\},\;\;
+\deg 2:\{h^2,s_2\},\;\;
+\deg 3:\{h^3,hs_2\},\;\;
+\deg 4:\{h^2s_2,s_2^2\},\;\;
+\deg 5:\{hs_2^2\},\;\;
+\deg 6:\{h^2s_2^2\},
+\]
+$10$ dimensions in all, and the degree functional
+$\int:H^{12}\to\mathbb Q$, $\int h^2s_2^2=1$, gives the period table
+\begin{equation}
+\int h^6=5,\qquad \int s_2h^4=2,\qquad \int s_2^2h^2=1,\qquad
+\int s_2^3=1,\qquad \int \alpha h^4=0,\qquad
+\int \alpha^2h^2=\tfrac15,
+\label{eq:periods}
+\end{equation}
+each verifiable purely inside \eqref{eq:rels} (e.g.\
+$h^6=h^2h^4=3h^4s_2-h^2s_2^2=6h^2s_2^2-h^2s_2^2=5h^2s_2^2$ and
+$s_2h^4=3h^2s_2^2-s_2^3=2h^2s_2^2$). These confirm the periods used by
+the Oct-23 Rees record and the dossier, by an independent route
+(Pieri: $\sigma_1^6=5\sigma_{3,3}$, with $\sigma_{1,1}h^4=2$,
+$\sigma_{1,1}^2h^2=1$ following from \eqref{eq:rels} as
+$s_2h^4=3h^2s_2^2-s_2^3=2$ and $s_2^2h^2=1$).
+
+\paragraph{The Schur lattice basis.}
+$K^0(\Gr(2,5))$ is free abelian on the ten Schur bundles
+\[
+B_{(j,i)}:=\Sym^j S^\vee\tensor\Oo(i),
+\qquad j\ge 0,\; i\ge 0,\; j+i\le 3,
+\]
+i.e.\ on $\{\Sigma^{(j+i,\,i)}S^\vee\}$ over the $2\times3$ box
+partitions; topological and algebraic $K$-theory agree on
+Grassmannians (cellular Schubert filtration), and
+$\ch:K^0\tensor\mathbb Q\to H^{\mathrm{even}}\tensor\mathbb Q$ is an
+isomorphism. With Chern roots $r_1,r_2$ of $S^\vee$
+($r_1+r_2=h$, $r_1r_2=s_2$),
+\[
+\ch\bigl(B_{(j,i)}\bigr)=\sum_{m=0}^{j}
+\exp\bigl((j+i-m)r_1+(i+m)r_2\bigr),
+\]
+by the splitting principle and the two-variable Schur identity
+$\Sigma^{(a,b)}E\cong\Sym^{a-b}E\tensor(\det E)^b$. The complete
+component table, in the graded bases above (rows: rank, $h$-grade,
+$(h^2,s_2)$, $(h^3,hs_2)$, $(h^2s_2,s_2^2)$, $hs_2^2$, $h^2s_2^2$), is:
+\[
+\begin{array}{c|cccccccccc}
+ & \text{rk} & ch_1 & ch_2^{h^2} & ch_2^{s_2} & ch_3^{h^3} & ch_3^{hs_2}
+ & ch_4^{h^2s_2} & ch_4^{s_2^2} & ch_5 & ch_6\\ \hline
+B_{(0,0)}=\Oo & 1&0&0&0&0&0&0&0&0&0\\
+B_{(1,0)}=S^\vee & 2&1&\tfrac12&-1&\tfrac16&-\tfrac12&-\tfrac1{24}
+&\tfrac1{24}&0&0\\
+B_{(2,0)}=\Sym^2S^\vee & 3&3&\tfrac52&-4&\tfrac32&-4&-\tfrac{13}{24}
+&\tfrac58&\tfrac1{24}&\tfrac1{144}\\
+B_{(3,0)}=\Sym^3S^\vee & 4&6&7&-10&6&-15&-\tfrac{29}{12}&\tfrac{11}4
+&\tfrac14&\tfrac1{36}\\
+B_{(0,1)}=\Oo(1) & 1&1&\tfrac12&0&\tfrac16&0&\tfrac18&-\tfrac1{24}
+&\tfrac1{24}&\tfrac1{144}\\
+B_{(1,1)}=S^\vee(1) & 2&3&\tfrac52&-1&\tfrac32&-\tfrac32
+&\tfrac{23}{24}&-\tfrac58&\tfrac14&\tfrac1{36}\\
+B_{(2,1)}=\Sym^2S^\vee(1) & 3&6&7&-4&6&-8&\tfrac{43}{12}&-\tfrac{11}4
+&\tfrac56&\tfrac5{72}\\
+B_{(0,2)}=\Oo(2) & 1&2&2&0&\tfrac43&0&2&-\tfrac23&\tfrac43
+&\tfrac49\\
+B_{(1,2)}=S^\vee(2) & 2&5&\tfrac{13}2&-1&\tfrac{35}6&-\tfrac52
+&\tfrac{215}{24}&-\tfrac{95}{24}&\tfrac{25}4&\tfrac94\\
+B_{(0,3)}=\Oo(3) & 1&3&\tfrac92&0&\tfrac92&0&\tfrac{81}8&-\tfrac{27}8
+&\tfrac{81}8&\tfrac{81}{16}
+\end{array}
+\]
+Each entry is a finite $\mathbb Q$-identity from the exponential formula
+and \eqref{eq:rels}; e.g.\
+$\ch_2(S^\vee)=\tfrac{h^2-2s_2}2$,
+$\ch(\Oo(1))=e^{h}$, and
+$\ch_2(\Sym^2S^\vee)=\tfrac{4(r_1^2+r_2^2)+h^2}{2}
+=\tfrac{5h^2-8s_2}{2}$.
+
+\begin{theorem}[Completed pure class and its minimal scale]
+\label{th:pure}
+There is a unique $\xi_1\in K^0(\Gr(2,5))\tensor\mathbb Q$ with
+\[
+\ch(\xi_1)=\alpha
+\qquad\text{pure: }\; \ch_j(\xi_1)=0\;\;(j\ne 2),\;\;
+\rank(\xi_1)=0,\;\; \ch_1(\xi_1)=0 .
+\]
+Its coordinates in the Schur basis have denominator scale
+\[
+\boxed{\;m_0=360\;}
+\]
+and
+\begin{equation}
+\boxed{\;\begin{aligned}
+\xi_{360}:=360\,\xi_1={\ }&
+351\,B_{(1,0)}+5\,B_{(3,0)}+736\,B_{(1,1)}+36\,B_{(0,2)}+1\,B_{(0,3)}\\
+&-17\,B_{(0,0)}-51\,B_{(2,0)}-1620\,B_{(0,1)}-141\,B_{(2,1)}
+-9\,B_{(1,2)}
+\end{aligned}\;}
+\label{eq:xi360}
+\end{equation}
+is integral, of rank $0$, with
+\[
+\ch(\xi_{360})=360\,\alpha=144\,h^2-360\,s_2,
+\qquad
+\ch_j(\xi_{360})=0\;\;(j\ne 2).
+\]
+Moreover $360\mid m$ is NECESSARY: for every $m$, a $K$-class $V$ with
+$\ch(V)=m\alpha$ pure exists integrally iff $360\mid m$. In particular
+the dossier's scale-$10$ pure class exists only rationally:
+$10\,\xi_1=\tfrac1{36}\xi_{360}\notin K^0(\Gr(2,5))$.
+\end{theorem}
+
+\begin{proof}
+Uniqueness holds because $\ch\tensor\mathbb Q$ is an isomorphism.
+Existence and the coordinates: solve the $10$ linear equations given by
+the component table against the target
+$(0,0,\tfrac25,-1,0,0,0,0,0,0)$. Exact rational Gauss elimination
+gives
+\[
+\xi_1=\bigl(-\tfrac{17}{360},\;\tfrac{39}{40},\;-\tfrac{17}{120},\;
+\tfrac1{72},\;-\tfrac92,\;\tfrac{92}{45},\;-\tfrac{47}{120},\;
+\tfrac1{10},\;-\tfrac1{40},\;\tfrac1{360}\bigr),
+\]
+whose coordinate denominators have least common multiple $360$;
+multiplying through gives \eqref{eq:xi360}, and substituting
+\eqref{eq:xi360} into the ten component rows returns
+\[
+(0,\;0,\;144,\;-360,\;0,\;0,\;0,\;0,\;0,\;0)
+=(0,0,360\cdot\tfrac25,360\cdot(-1),0,0,0,0,0,0),
+\]
+i.e.\ $\ch(\xi_{360})=360\,\alpha$ with all other grades zero: every
+grade $>6$ vanishes for dimensional reasons. Necessity of $360\mid m$:
+if $V\in K^0$ has $\ch(V)=m\alpha$ pure then $V=m\xi_1$ by uniqueness,
+and $V$ integral forces $360\mid m$ because the Schur basis is a
+$\mathbb Z$-basis and $360$ is the least common multiple of the
+denominators of $\xi_1$'s coordinates in lowest terms. Finally
+$\tfrac1{36}\xi_{360}$ has coordinates such as
+$-\tfrac{17}{36}\notin\mathbb Z$, so the scale-$10$ class is not
+integral.
+\end{proof}
+
+\begin{corollary}[The completed pure pair]
+\label{cor:pair}
+Split \eqref{eq:xi360} into positive and negative parts:
+\begin{align*}
+E_+&:=351\,S^\vee\;\oplus\;5\,\Sym^3S^\vee\;\oplus\;736\,S^\vee(1)
+\;\oplus\;36\,\Oo(2)\;\oplus\;\Oo(3),\\
+E_-&:=17\,\Oo\;\oplus\;51\,\Sym^2S^\vee\;\oplus\;1620\,\Oo(1)
+\;\oplus\;141\,\Sym^2S^\vee(1)\;\oplus\;9\,S^\vee(2).
+\end{align*}
+These are exact algebraic bundles of EQUAL rank $2231$, with equal
+first grade
+\[
+\ch_1(E_+)=\ch_1(E_-)=2664\,h,
+\]
+and their full character table satisfies
+\[
+\ch(E_+)-\ch(E_-)=360\,\alpha
+\qquad\text{PURE: }
+\begin{cases}
+\rank E_+=\rank E_-=2231,\\
+\ch_1\text{ equal},\\
+\ch_2(E_+)-\ch_2(E_-)=144h^2-360s_2,\\
+\ch_j(E_+)=\ch_j(E_-)\quad(j=3,4,5,6).
+\end{cases}
+\]
+Explicitly both sides carry identical higher components
+\[
+\ch_3=\bigl(1245,\,-\tfrac{2709}2\bigr),\quad
+\ch_4=\bigl(\tfrac{3043}4,\,-459\bigr),\quad
+\ch_5=\tfrac{1947}8,\quad
+\ch_6=\tfrac{1999}{48}.
+\]
+\end{corollary}
+
+\begin{proof}
+Direct summation of the table rows with the stated multiplicities;
+all displayed quantities are the resulting rational numbers, and the
+differences cancel grade by grade as shown.
+\end{proof}
+
+\begin{remark}[$c_1$-normalization]
+\label{rem:c1}
+Adding the SAME exact bundle to both sides leaves
+$\ch(E_+)-\ch(E_-)$ unchanged; with $N:=\Oo(-2664)$,
+\[
+E_+'\;:=E_+\oplus\Oo(-2664),\qquad
+E_-'\;:=E_-\oplus\Oo(-2664)
+\]
+is a pure pair of equal rank $2232$ with
+$c_1(E_\pm')=2664h-2664h=0$ individually.
+\end{remark}
+
+\begin{remark}[Correction of the dossier's scale expectation]
+\label{rem:scale}
+The dossier conjectured the actual grade-4 correction at scale $10$.
+Theorem \ref{th:pure} corrects this: on $\Gr(2,5)$ the pure integral
+class first exists at scale $360$; the naive Pl\"ucker assembly
+$x=[S\oplus S^\vee]^{\oplus5}\ominus[\Oo(1)\oplus\Oo(-1)]\ominus
+[\Oo^{\oplus8}]$ (with $\ch_2(x)=10\alpha$,
+$\ch_4(x)=-\tfrac23h^2s_2+\tfrac12s_2^2$,
+$\ch_6(x)=-\tfrac1{72}h^2s_2^2$, all three verified) differs from the
+pure class $\tfrac1{36}\xi_{360}$ at scale $10$ by the virtual class
+$\tfrac1{36}\xi_{360}-x$ with
+$\ch=-\ch_4(x)-\ch_6(x)$ concentrated in grades $4,6$: the correction
+is actual and algebraic, but NOT integral at scale $10$. The Law-4
+protocol of the dossier is therefore to be run at scale $m=360$ (or
+any multiple), not at $m=10$.
+\end{remark}
+
+\section{The universal two-center descent law (all $p$)}
+
+The two lemmas and the theorem below are proved for arbitrary smooth
+complex projective $X$, $1\le p\le\dim X$, and rational
+$\alpha\in H^{2p}(X,\mathbb Q)$; they use only the splitting
+principle, Newton's identities, and Thom--Porteous. This is the
+extracted descent law, with all constants pinned.
+
+\begin{lemma}[Newton conductor]
+\label{lem:newton}
+Let $V$ be a virtual $K$-class ($V=[E_+]-[E_-]$, exact bundles of
+equal rank $r$) with
+\[
+\ch_j(V)=0\;\;(1\le j<p),\qquad \ch_p(V)=m\alpha .
+\]
+Then the Chern classes of the virtual difference satisfy
+\[
+c_j(V)=0\;\;(1\le j<p),\qquad
+\boxed{\;c_p(V)=(-1)^{p-1}(p-1)!\,m\,\alpha\;}
+\]
+where $c(V)$ is defined by the total Chern class of the virtual
+difference, $c(V):=c(E_+)/c(E_-)$.
+\end{lemma}
+
+\begin{proof}
+Write the power sums of the virtual Chern roots as
+$p_k(V):=\sum_i x_i^k-\sum_j y_j^k$ with $\{x_i\},\{y_j\}$ the root
+multisets; then $p_k(V)=k!\,\ch_k(V)$, so $p_j(V)=0$ for $j<p$ and
+$p_p(V)=p!\,m\alpha$. Newton's identities
+\[
+p_k-e_1p_{k-1}+e_2p_{k-2}-\dots+(-1)^{k-1}e_{k-1}p_1
++(-1)^k k\,e_k=0
+\]
+express $e_k=c_k(V)$ as $(-1)^{k+1}p_k/k$ plus a polynomial with zero
+constant term in $e_1,\dots,e_{k-1}$, and dually express $p_k$ as
+$(-1)^{k-1}ke_k$ plus a polynomial with zero constant term in
+$p_1,\dots,p_{k-1}$. Induction on $k<p$: $p_k=0$ for $k<p$ and the
+zero-constant-term structure give $e_k=0$ for $k<p$. At $k=p$ all
+$e_j$ ($j<p$) vanish, so $p_p=(-1)^{p-1}p\,e_p$, i.e.\
+$c_p(V)=e_p=(-1)^{p-1}p!\,m\alpha/p=(-1)^{p-1}(p-1)!\,m\alpha$.
+\end{proof}
+
+\begin{lemma}[Twist cancellation for pure pairs]
+\label{lem:twist}
+Let $E_+,E_-$ be exact bundles of equal rank $r$ with
+$c_j(E_+)=c_j(E_-)$ for $1\le j<p$. Then for EVERY line bundle $L$
+with $\ell:=c_1(L)$,
+\[
+c_p(E_+\tensor L)-c_p(E_-\tensor L)=c_p(E_+)-c_p(E_-).
+\]
+\end{lemma}
+
+\begin{proof}
+By the splitting principle, with $x_1,\dots,x_r$ the Chern roots of
+$E_\pm$,
+\[
+c_p(E\tensor L)=e_p(x_1+\ell,\dots,x_r+\ell)
+=\sum_{t=0}^{p}\binom{r-t}{p-t}\,c_t(E)\,\ell^{\,p-t},
+\]
+since a term choosing the $x$-factor from a $t$-subset $T$ arises from
+the $\binom{r-t}{p-t}$ supersets $S\supset T$, $|S|=p$. Subtracting
+the two expansions, all $t<p$ terms cancel by hypothesis, and the
+$t=p$ term carries coefficient $\binom{r-p}{0}=1$.
+\end{proof}
+
+\begin{theorem}[Universal two-center descent law]
+\label{th:law}
+Let $X$ be smooth complex projective, $1\le p\le\dim X$,
+$\alpha\in H^{2p}(X,\mathbb Q)$ rational, $m\ne0$ an integer. Suppose
+given a \emph{pure pair at scale $m$}: exact holomorphic bundles
+$E_\pm$ of equal rank $r$ with
+\begin{equation}
+\ch(E_+)-\ch(E_-)=m\,\alpha
+\quad\text{with all components off grade $p$ vanishing.}
+\label{eq:pair}
+\end{equation}
+Let $L$ be any holomorphic line bundle such that $E_\pm\tensor L$ are
+globally generated, let $s:=r-p+1$, and let
+$\sigma_\pm:\Oo^{s}\to E_\pm\tensor L$ be $s$ general sections, with
+determinantal centers
+\[
+D_\pm:=D_{s-1}(\sigma_\pm)=\{x:\ \rank\sigma_\pm(x)\le s-1\},
+\]
+of expected codimension $p=(s-(s-1))(r-(s-1))$ for general
+$\sigma_\pm$ (so that Thom--Porteous applies). Then in $\CH^p(X)_{\mathbb Q}$:
+\begin{equation}
+\boxed{\;[D_+]-[D_-]=(-1)^{p-1}(p-1)!\,m\,\alpha\;}
+\label{eq:pairlaw}
+\end{equation}
+--- CORRECTION-FREE: no hyperplane, binomial, or twist term survives
+--- and consequently
+\begin{equation}
+\boxed{\;
+W:=\frac{(-1)^{p-1}}{(p-1)!\,m}\bigl([D_+]-[D_-]\bigr)\in\CH^p(X)_{\mathbb Q},
+\qquad \cl(W)=\alpha .}
+\label{eq:output}
+\end{equation}
+In particular $\alpha$ is algebraic.
+
+If moreover the pure carrier is a SINGLE exact bundle $E$
+($\ch(E)=\rank+m\alpha$, hence $c_1(E)=0$) and $L=\Oo(k)$ with
+$c_1(\Oo(1))^{p}=[H_1\cap\dots\cap H_p]$ a complete-intersection
+class, then the single center obeys
+\begin{equation}
+\boxed{\;[D_E]=(-1)^{p-1}m(p-1)!\,\alpha
++\binom{r}{p}\,k^{p}\,[H_1\cap\dots\cap H_p]\;}
+\label{eq:single}
+\end{equation}
+which at $p=2$, $m=10$ is exactly the dossier's
+$-10\alpha+\binom r2k^2h^2$ bookkeeping.
+\end{theorem}
+
+\begin{proof}
+By \eqref{eq:pair} and the triangularity of Newton's relations,
+$c_j(E_+)=c_j(E_-)$ for $j<p$ and the virtual difference
+$V:=E_+\ominus E_-$ satisfies Lemma \ref{lem:newton}, giving
+$c_p(V)=(-1)^{p-1}(p-1)!\,m\,\alpha$ as a Betti class. By
+Thom--Porteous for the maximal degeneracy $k=s-1$ of
+$\sigma:\Oo^s\to F$ ($\rank F=r$), the determinantal center of
+expected codimension $r-s+1=p$ has class
+\[
+[D]=c_{r-s+1}\bigl(F-\Oo^{s}\bigr)=c_p(F),
+\]
+since the trivial summand contributes nothing to $c(F-\Oo^s)=c(F)$.
+(For $p=1$: the degeneracy divisor of $r$ sections has class
+$c_1(F)$; for $\Oo\to F$ of rank $2$: the zero locus has class
+$c_2(F)$; both classical.) Hence
+$[D_\pm]=c_p(E_\pm\tensor L)$ in $\CH^p_{\mathbb Q}$, and by Lemma
+\ref{lem:twist}
+\[
+[D_+]-[D_-]=c_p(E_+\tensor L)-c_p(E_-\tensor L)
+=c_p(V)=(-1)^{p-1}(p-1)!\,m\,\alpha,
+\]
+where the last equality is the image of Lemma \ref{lem:newton} under
+the canonical cycle class (algebraic Chern classes map to topological
+ones). This proves \eqref{eq:pairlaw}; applying $\cl$ and scaling
+gives \eqref{eq:output}, which exhibits $\alpha$ as the canonical
+Betti class of the explicit rational algebraic cycle $W$.
+For \eqref{eq:single}: a single pure carrier has
+$\ch_j(E)=0$ for $j\notin\{0,p\}$, hence (Newton, as above)
+$c_j(E)=0$ for all $1\le j<p$, and
+$c_p(E)=(-1)^{p-1}(p-1)!\,m\alpha$. (Newton's identities constrain
+only the classes $c_t$ with $t\le p$; no assertion is made --- or
+needed --- about $c_j(E)$ for $j>p$.) In the twist expansion only
+$t=0$ and $t=p$ survive:
+$c_p(E\tensor\Oo(k))=c_p(E)+\binom{r}{p}(k\,c_1(\Oo(1)))^{p}$, and
+Thom--Porteous gives $[D_E]=c_p(E\tensor\Oo(k))$.
+\end{proof}
+
+\begin{corollary}[Forcing implication, typed]
+\label{cor:forcing}
+On arbitrary original $(X,p,\alpha)$, the single typed input of
+Theorem B2(iii) --- an integrable holomorphic structure
+$(\ddbar_{E_\alpha})^2=0$ on the exact carrier, which in particular
+yields a pure pair \eqref{eq:pair} of exact holomorphic bundles at
+some scale $m\ne0$ (take $E_+=E_\alpha$, $E_-=\Oo^{\oplus r}$; no
+converse on the SAME carrier is claimed, by the K-torsion gap) ---
+IMPLIES that $\alpha$ is algebraic, through the explicit
+conduit \eqref{eq:output}. The conduit is now completely explicit:
+given the pair, the algebraic cycle $W$ is constructed by
+determinantal centers of general sections and its canonical Betti
+class is $\alpha$ by \eqref{eq:pairlaw}. The forcing problem is
+thereby reduced, with zero residual ambiguity, to producing the input
+pair from the GST causal-fold laws on the SAME carrier.
+\end{corollary}
+
+\begin{remark}[Non-circularity type discipline]
+The input of Corollary \ref{cor:forcing} is bundle-side
+(integrability of a $\ddbar$-operator / holomorphic structure); the
+output is cycle-side (a Chow class). No cycle-class surjectivity,
+no Hodge-surjectivity field, and no preimage selector enters
+\eqref{eq:pairlaw}--\eqref{eq:output}. By B2(ii) the input is
+equivalent in STRENGTH to the Hodge conjecture; the law above is the
+explicit two-sided conduit between the two types, and the campaign's
+forcing target is the construction of the input, not the conduit.
+\end{remark}
+
+\begin{remark}[Relation to the Oct-24 two-center record]
+The record's two-center formula
+$Z_\alpha=\tfrac{(-1)^{p-1}}{m(p-1)!}([D_{(\alpha,k)}]
+-\binom{r}{p}k^{p}[H^{p}])$ is the single-center specialization
+\eqref{eq:single} at a scale where an exact SINGLE pure carrier
+exists. The pair form \eqref{eq:pairlaw} is strictly more usable: it
+consumes any integral pure pair (which always exists as soon as
+$m\cdot\xi_1$ lies in the lattice), needs no single-carrier
+representability, and all twist corrections cancel identically. Both
+forms carry the same sign constant $(-1)^{p-1}$ and factorial
+$(p-1)!$.
+\end{remark}
+
+\section{The calibration run on $\Gr(2,5)$}
+
+\paragraph{Run.}
+Apply Theorem \ref{th:law} at $p=2$, scale $m=360$, with the completed
+pair of Corollary \ref{cor:pair} (ranks $r=2231$, equal
+$\ch_1=2664h$) and any Pl\"ucker twist $L=\Oo(k)$, $k\ge0$:
+$s=r-1=2230$ general sections of $E_\pm(k)$; centers $D_\pm$ of
+expected codimension $2$. Then
+\[
+[D_+]-[D_-]=-360\,\alpha
+\qquad\text{for every }k,
+\]
+and the machine output
+\[
+W:=-\tfrac1{360}\bigl([D_+]-[D_-]\bigr)
+\]
+is an explicit rational algebraic $2$-cycle with $\cl(W)=\alpha$.
+
+\paragraph{Component-by-component match with the Rees witness.}
+In the Schubert basis of $\CH^2(\Gr(2,5))$ (with
+$h^2=\sigma_2+\sigma_{1,1}$, $s_2=\sigma_{1,1}$):
+\[
+-360\alpha=-144h^2+360s_2=-144\,\sigma_2+216\,\sigma_{1,1},
+\]
+so
+\[
+W=\tfrac{144}{360}\sigma_2-\tfrac{216}{360}\sigma_{1,1}
+=\tfrac25\,\sigma_2-\tfrac35\,\sigma_{1,1}.
+\]
+The proven fold-born Rees witness of the Oct-23 record is
+\[
+Z_\alpha=\tfrac25[H_1\cap H_2]+b_*E^2,
+\qquad b_*E^2=-[Z]=-s_2=-\sigma_{1,1},
+\qquad [H_1\cap H_2]=h^2,
+\]
+hence
+\[
+Z_\alpha=\tfrac25(\sigma_2+\sigma_{1,1})-\sigma_{1,1}
+=\tfrac25\,\sigma_2-\tfrac35\,\sigma_{1,1}=W .
+\]
+The two-center machine's output and the Rees witness AGREE
+component-by-component in $\CH^2_{\mathbb Q}$. The disagreement branch
+of the dossier's protocol (``pinpoints the descent 2-cell
+obstruction'') is therefore CLOSED on the calibration world: the
+bookkeeping of the law --- sign $(-1)^{p-1}$, factorial $(p-1)!$,
+scale $1/m$, hyperplane correction $\binom rp k^p[H^p]$ in the
+single-center form, and its complete cancellation in the pair form ---
+is CALIBRATED against a world where the answer is independently known.
+
+\paragraph{The extracted law (what transports).}
+The descent law to be forced on arbitrary original $(X,p,\alpha)$ is
+Theorem \ref{th:law} verbatim, with the calibration world pinning
+every constant:
+\begin{itemize}
+\item pair law \eqref{eq:pairlaw}: $[D_+]-[D_-]=(-1)^{p-1}(p-1)!\,m\alpha$,
+correction-free, for every twist;
+\item output normalization \eqref{eq:output}:
+$W=\tfrac{(-1)^{p-1}}{(p-1)!\,m}([D_+]-[D_-])$ with $\cl(W)=\alpha$;
+\item single-center correction \eqref{eq:single}:
+$\binom rp k^p[H^p]$ when a single exact pure carrier exists;
+\item the exact input scale on the calibration world: $m_0=360$
+(Theorem \ref{th:pure}), the first scale at which the integrable pure
+pair exists integrally --- the naive Pl\"ucker scale $10$ is
+$36$ times too small.
+\end{itemize}
+
+\section{What remains}
+
+The forcing site is unchanged from the dossier and is now equipped
+with the completed explicit conduit: on arbitrary $(X,p,\alpha)$ the
+single remaining input is the pure pair / integrable structure
+$(\ddbar_{E_\alpha})^2=0$ on the SAME exact carrier of Theorem A
+(which exists topologically at scale $m_0(X,\alpha)$ and rank
+$r\ge\max(p+1,d+1)$). Corollary \ref{cor:forcing} converts this input
+into the algebraic cycle $W$ with $\cl(W)=\alpha$. The campaign's
+next obligation is exactly the GST-law construction of the input pair
+on the arbitrary world --- no diagnostic, no special-world
+substitution, no equivalence relabeling.
+
+\section{Scope, provenance, and verification contract}
+\begin{itemize}
+\item The finite computations of Sections 1--3 (period table
+\eqref{eq:periods}, the Schur component table, the coordinates and
+purity of $\xi_{360}$, the pair table of Corollary \ref{cor:pair},
+the Schubert-component identity) are exact rational arithmetic; the
+computation script is preserved in the campaign workspace
+(\texttt{hodge-campaign/experiments/gr25\_lattice.py}, bounded
+$10\times10$ exact solve) and every displayed identity is checkable
+by hand from the table. A Lean formalization of the certificate
+(ring with relations \eqref{eq:rels}, degree functional, period
+table, carrier and purity identities) is the NEXT commit on this
+branch and is the CI-green target.
+\item Standard external inputs, each used at standard strength and
+named where it enters: splitting principle and the Chern roots of
+tensor products (Lemmas \ref{lem:newton}, \ref{lem:twist}); Newton's
+identities (Lemma \ref{lem:newton}); Thom--Porteous degeneracy
+formula at maximal degeneracy (Theorem \ref{th:law}); genericity of
+the chosen sections, so the determinantal centers have the expected
+codimension (Theorem \ref{th:law}); $\ch$ of Schur bundles via the
+splitting principle; the Schur-bundle
+$\mathbb Z$-basis of $K^0$ of a Grassmannian and $K_{\mathrm{alg}}=
+K_{\mathrm{top}}$ there (Theorem \ref{th:pure}); the algebraic cell
+decomposition of $\operatorname{Gr}(2,5)$ (Schubert cells), which
+makes $\cl\colon\operatorname{CH}^*(\operatorname{Gr}(2,5))\to
+H^*(\operatorname{Gr}(2,5))$ an isomorphism and licenses the
+component-by-component match of Section 4; GAGA on the projective
+Grassmannian, identifying the analytic two-center run with the
+algebraic Chow groups; Atiyah--Hirzebruch
+rational $K$-theory (uniqueness of $\xi_1$).
+\item No universal constructor is claimed; no Hodge-surjectivity,
+cycle-class, or preimage hypothesis enters the law. Theorem
+\ref{th:pure} corrects the dossier's scale expectation from $10$ to
+$360$ on the calibration world (Remark \ref{rem:scale}) --- a
+statement-integrity correction, recorded as such.
+\item No Lean file is changed by this note; no CI claim is made by
+this note. Author self-audit performed on every displayed identity.
+\end{itemize}
+
+\end{document}

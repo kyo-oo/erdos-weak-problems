@@ -1,0 +1,21 @@
+name: GST cubic exact independent finite computation audit
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [scripts/gst_worldtrace_cubic_independent_audit.py, .github/workflows/gpt6_gst_cubic_independent_audit.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  finite-audit:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Run deterministic integer-only physical cubic audit
+        run: |
+          set -euo pipefail
+          python3 scripts/gst_worldtrace_cubic_independent_audit.py | tee audit-output.log
+          grep -q CUBIC_THREE_BAND_FINITE_AUDIT_PASS audit-output.log
+          grep -q 'NONLINEAR_PHYSICAL_PASS K=355 row=13' audit-output.log
+          grep -q 'NONLINEAR_PHYSICAL_PASS K=35725 row=27' audit-output.log
+          grep -q AUDIT_STATUS=finite_exact_only_not_universal_proof audit-output.log

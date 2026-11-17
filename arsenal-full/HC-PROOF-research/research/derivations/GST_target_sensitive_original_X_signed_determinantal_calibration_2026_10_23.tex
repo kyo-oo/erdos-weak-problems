@@ -1,0 +1,525 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Corrected Research Direction: Target-Sensitive Original-X Signed Geometry and Calibration Return}
+\date{23 October 2026}
+\begin{document}\maketitle
+\section{Typed universal target}
+Let X be ANY connected smooth projective complex d-fold,
+h the rational class of an ample divisor, and
+alpha a SPECIFIED rational (p,p) Hodge class, 1<=p<=d.
+The goal is an independently constructed
+Z_alpha in CH^p(X) over the rationals with
+canonical Betti class alpha.
+The object constructed here is chosen FROM alpha, on
+the ORIGINAL X, rather than being a fixed tangent Chern
+or finite-base projective source whose image is later
+compared with alpha.
+
+\section{Unconditional original-X geometric source birth}
+\begin{theorem}[Genuine alpha-dependent signed real degeneracy source]
+For ANY rational even-degree alpha in H^(2p)(X,Q),
+there are a positive integer m, an ample-class
+rational coefficient lambda, and actual finite-rank
+COMPLEX TOPOLOGICAL bundles E_+ and E_- on original X,
+whose entire Chern characters have precisely
+\[
+ \operatorname{ch}(E_+)=r_++m(\alpha+\lambda h^p),
+ \qquad
+ \operatorname{ch}(E_-)=r_-+m\lambda h^p.       \tag{1}
+\]
+Let c=(-1)^(p-1)(p-1)!m.
+There exist generic smooth section tuples
+of cardinality rank(E_\pm)-p+1 whose rank-deficiency
+loci D_+ and D_- are ACTUAL compact oriented
+Whitney-stratified integral pseudocycles on X,
+of main real codimension 2p, with
+\[
+ \mathrm{PD}_X[D_+]=c(\alpha+\lambda h^p),
+ \qquad
+ \mathrm{PD}_X[D_-]=c\lambda h^p.               \tag{2}
+\]
+Consequently the target-SELECTED signed rational
+GEOMETRIC cycle
+\[
+ T_\alpha=\frac{(-1)^{p-1}}{m(p-1)!}
+                   ([D_+]-[D_-])
+\quad\text{satisfies}\quad
+ \boxed{\mathrm{PD}_X T_\alpha=\alpha.}         \tag{3}
+\]
+No original-X algebraic cycle, target Chow preimage,
+or target-dependent full-rank algebraic source is
+used in the construction. The actual D_\pm are
+smooth-real stratified spaces, not assumed
+holomorphic/algebraic varieties.
+\end{theorem}
+\begin{proof}
+Rational topological K-theory identifies
+K^0(X) tensor Q with even rational cohomology.
+Represent the two indicated rational pure graded
+classes by virtual K-classes; clear a common
+positive integer denominator m, realize each
+integral virtual K-class by differences of honest
+complex bundles, add a finite topological
+complement to its negative part and stabilize ranks.
+The positive Chern character components in all
+degrees other than p vanish. The Newton
+identity
+\[
+ \log c(E,t)=\sum_{j\ge1}(-1)^{j-1}
+                 (j-1)!\operatorname{ch}_j(E)t^j
+\]
+therefore gives precisely equation (2)
+for the respective pth Chern classes.
+For s=rank(E)-p+1, the main rank-(s-1)
+determinantal stratum of Hom(C^s,C^rank E)
+has complex codimension p, while the
+next rank-(s-2) stratum has complex
+codimension 2p+2.
+A generic smooth section tuple is transverse
+to every rank stratum. The resulting
+stratified degeneracy set is a compact
+oriented integral pseudocycle; its main
+stratum has real codimension 2p and the
+higher strata have sufficiently high real
+codimension to define a closed integral
+homology class. The topological
+Thom--Porteous formula identifies its
+Poincare dual with c_p(E). Subtracting
+the two EXACT rational Chern class
+identities proves (3).
+\end{proof}
+
+\section{Strict target-sensitive primitive coupling}
+\begin{theorem}[Nonzero primitive period from constructed original-X real geometry]
+Suppose p<=d/2 and r is a NONZERO prescribed
+rational primitive (p,p) Hodge class:
+h^(d-2p+1)r=0.
+Choose alpha=r in the construction above.
+Then the actual signed geometric cycle T_r obeys
+\[
+ \boxed{
+ (-1)^p \langle T_r,r h^{d-2p}\rangle
+   =(-1)^p\int_X r^2 h^{d-2p}>0.
+ }                                                       \tag{4}
+\]
+The strict inequality is the true
+Hodge--Riemann primitive polarization.
+No already-algebraic target source
+enters the pairing; T_r was constructed
+from the prescribed r itself.
+\end{theorem}
+\begin{proof}
+Equation (3) identifies its exact
+Poincare dual with r, hence gives the
+displayed equality. Hodge--Riemann
+positivity for primitive rational
+classes of type (p,p) supplies strict
+positivity with sign (-1)^p.
+\end{proof}
+
+\section{Necessary signed balancing, in every dimension}
+For an actual Kähler form omega representing h,
+any nonempty effective analytic codimension-p
+cycle C has strictly positive ample volume
+$\int_C\omega^{d-p}>0$.
+But any nonzero primitive r obeys
+$\int_Xr h^{d-p}=0$ since
+h^(d-2p+1)r=0. Thus a SINGLE effective
+analytic cycle cannot represent r even when
+r is algebraic as a SIGNED rational combination.
+One must use signed sources.
+Choose lambda rational of sufficiently large
+absolute value and sign (-1)^(p-1).
+Then BOTH real determinantal cycles in (2)
+have strictly positive Kahler degree:
+\[
+ c\lambda\int_Xh^d>0,\qquad
+ c\left(\int_X\alpha h^{d-p}
+              +\lambda\int_Xh^d\right)>0.         \tag{5}
+\]
+This removes the trivial single-cycle
+sign obstruction but does not assert
+that the real cycles become analytic.
+
+\section{A rigorous geometric return from quantitative estimates}
+Let k=d-p and phi=omega^k/k!,
+the Wirtinger calibration. For any
+closed integral 2k-current T define
+its actual causal-complexity defect
+\[
+ \Delta_\omega(T)={\bf M}(T)-T(\phi)\ge0,        \tag{6}
+\]
+where M is geometric mass and positivity follows
+from the Kähler Wirtinger inequality.
+
+\begin{theorem}[Genuine ORIGINAL-X Chow cycle from bounded-mass asymptotically calibrated signed sources]
+Suppose that for the SPECIFIC alpha-dependent
+bundles E_+,E_- above there are sequences of
+actual generic smooth degeneracy cycles
+D_{\pm,j}, each in its fixed topological
+Chern homology class, such that
+\[
+ \boxed{\sup_j {\bf M}(D_{\pm,j})<\infty,\qquad
+        \Delta_\omega(D_{\pm,j})\to0.}          \tag{7}
+\]
+Then there are ACTUAL positive algebraic
+cycles C_+,C_- on ORIGINAL X with
+$\mathrm{PD}_X[C_\pm]=c_p(E_\pm)$
+and the explicit true rational Chow cycle
+\[
+ \boxed{
+ Z_\alpha=\frac{(-1)^{p-1}}{m(p-1)!}
+       ([C_+]_{\rm Chow}-[C_-]_{\rm Chow})
+ \in CH^p(X)_{\mathbb Q},\qquad
+ cl_X^{can}(Z_\alpha)=\alpha.
+ }                                                       \tag{8}
+\]
+\end{theorem}
+\begin{proof}
+Compactness of X, uniform mass and zero
+current boundaries give convergent flat
+subsequences by Federer--Fleming:
+D_{\pm,j} tends to closed integral
+currents C_\pm in the same homology class.
+The smooth closed calibration phi evaluates
+to a fixed number on each homology class.
+Lower semicontinuity of mass and (7) imply
+M(C_\pm)<=liminf M(D_{\pm,j})
+ =lim D_{\pm,j}(phi)=C_\pm(phi)<=M(C_\pm).
+Thus C_\pm are positive Kähler-calibrated
+integral currents. The standard structure
+theorem for positive closed integral
+complex currents identifies them with
+positive holomorphic chains. They are
+compact analytic cycles on the projective X
+and hence actual algebraic cycles by Chow's
+theorem. The class comparison, (2) and (3)
+yield the exact original-X Betti formula.
+\end{proof}
+
+\section{Executed decisive test of the FIRST unproved arrow}
+The topological fold, class purity,
+and Hodge--Riemann positivity determine
+the classes in (2), the periods in (4),
+and the Kähler integrals in (5).
+They do NOT determine the total geometric
+mass nor the real tangent-space
+Wirtinger defect of every generic
+smooth section tuple. Homotoping the
+sections locally preserves their
+Chern homology classes yet can make
+their real degeneracy sets noncomplex
+with larger geometric area.
+Consequently a proof of the quantitative
+selection theorem (7) requires a NEW,
+target-dependent geometric estimate;
+it cannot be inferred solely from
+cohomological fold preservation.
+
+A useful exact obstruction: for a SINGLE
+nonzero primitive class r, a current T
+with PD(T)=r has
+T(phi)=0, hence Delta(T)=M(T).
+There exists a closed smooth dual test
+form eta with T(eta) nonzero, and
+M(T)>=|T(eta)|/||eta||_comass>0.
+Thus NO asymptotically calibrated
+single nonzero primitive source exists.
+The signed balanced construction (1)--(5)
+is necessary to avoid this obstruction.
+It is NOT an automatic proof of (7).
+
+\section{A genuinely HODGE-SENSITIVE quantitative causal geometry law}
+The preceding bounded-mass/zero-defect
+criterion can be tested for classes
+of non-Hodge type, rather than simply
+assumed from arbitrary topology.
+
+Let k=d-p. On the compact Kähler X
+consider any smooth complex-valued
+degree-2k differential form psi
+of pure Hodge bidegree (a,b), a+b=2k,
+a not equal to k (hence b not equal to k).
+On every positively oriented COMPLEX
+k-plane, psi evaluates to zero, because
+either a>k or b>k.
+Let xi be any oriented unit simple
+real 2k-vector in a tangent space.
+Then there is a positive dimensional
+constant C_k, independent of x,
+such that
+\[
+ \boxed{
+ |\psi_x(\xi)|\le
+ C_k\|\psi_x\|_{\rm comass}
+  \sqrt{1-\varphi_k(\xi)},
+ \qquad \varphi_k=\omega^k/k!.
+ }                                                       \tag{10}
+\]
+Indeed the oriented real Grassmannian
+is compact, the calibrated submanifold
+of complex k-planes is the zero set
+of the nonnegative Wirtinger defect,
+and the defect grows quadratically
+in its normal Kähler-angle directions.
+The evaluation of an off-bidegree
+form vanishes on this submanifold
+and is locally Lipschitz in the
+normal angle. The ratio in (10)
+is therefore bounded near the
+zero set, and bounded away from
+it by compactness. This is a
+finite-dimensional Kähler
+geometry estimate, not a
+cohomological conjecture.
+
+\begin{theorem}[Quantitative non-Hodge obstruction to approximate geometric algebraization]
+For every closed oriented integral
+2k-current T on compact Kähler X
+and every smooth off-diagonal
+bidegree-(a,b) form psi above,
+\[
+ \boxed{
+ |T(\psi)|^2\le
+ C_k^2\|\psi\|_\infty^2\,
+     {\bf M}(T)\Delta_\omega(T).
+ }                                                       \tag{11}
+\]
+If the cohomology class gamma=PD[T]
+has a nonzero non-(p,p) component,
+there exists a SMOOTH CLOSED
+complementary off-diagonal Hodge
+form psi with T(psi) nonzero.
+Consequently ANY family T_j
+in homology class gamma
+with a uniformly bounded mass
+has its calibration defects
+uniformly bounded away from zero.
+For a rational pure (p,p)
+Hodge class alpha, EVERY such
+off-diagonal period vanishes;
+the preceding specific
+obstruction to (7) is absent.
+\end{theorem}
+\begin{proof}
+Apply (10) at almost every
+rectifiable approximate tangent
+plane of T with multiplicity.
+Write $\delta(\xi)=
+1-\varphi_k(\xi)$, so
+$\Delta_\omega(T)=
+\int\delta\,d\|T\|$.
+The pointwise bound and
+Cauchy--Schwarz give
+\[
+ |T(\psi)|
+ \le C_k\|\psi\|_\infty
+      \int\sqrt{\delta}\,d\|T\|
+ \le C_k\|\psi\|_\infty
+        \sqrt{{\bf M}(T)\Delta_\omega(T)} .
+\]
+For a closed T, the evaluation
+on a closed psi depends only
+on the Betti class of gamma.
+If gamma has a nonzero
+non-(p,p) Hodge component,
+Poincare duality and pure
+Hodge decomposition supply
+a closed smooth complementary
+off-diagonal harmonic form psi
+with nonzero evaluation.
+Square and rearrange (11);
+bounded mass gives a positive
+lower bound on the defect.
+Conversely for alpha of
+type (p,p) its pairing with
+every complementary
+off-diagonal class vanishes
+by Hodge bidegree reasons.
+This last vanishing is
+NECESSARY for the desired
+calibrated sequence but
+is not claimed sufficient:
+a genuine geometric
+construction must still
+control the nonnegative
+defect inside the Hodge
+sector.
+\end{proof}
+
+The mathematical experiment
+now has a sharply defined
+meaning: an observed
+sequence of increasingly
+complex-tangent alpha-specific
+geometric strata, together
+with an all-index theorem
+proving UNIFORM masses and
+vanishing Wirtinger defect,
+would invoke the fully
+proved compactness return
+to build original-X Chow.
+For non-Hodge inputs
+the inequality (11)
+supplies an analytic
+certificate excluding
+such a sequence.
+This distinguishes
+cohomological
+Hodge compatibility from
+the stronger geometric
+realization equation,
+without dismissing the
+exact computations as
+nonmathematical.
+
+\section{Actual target-sensitive SPATIAL DYNAMICS in the central middle dimension}
+The first genuinely difficult Hodge
+geometry already occurs when d=2p.
+In this middle-dimensional
+case the generic construction
+has a useful additional theorem.
+
+\begin{theorem}[Smooth source and actual mean-curvature causal deficit law at d=2p]
+For ANY original projective
+smooth X of complex dimension
+d=2p and prescribed alpha
+of Hodge type (p,p),
+the REAL target-sensitive
+determinantal sources D_\pm
+of section 2 can be chosen
+to be smooth compact oriented
+embedded real 2p-dimensional
+submanifolds, with no deeper
+rank-strata singularities.
+Any smooth mean-curvature
+flow D_{\pm,t} of either
+source, while it exists
+as a smooth family,
+preserves its exact
+integral homology class
+and has the differential
+geometric Lyapunov law
+\[
+ \boxed{
+ \frac{d}{dt}
+ \Delta_\omega(D_{\pm,t})
+  =-\int_{D_{\pm,t}}
+               |H_{\pm,t}|^2\,d\mu_t
+  \le0,
+ }                                                       \tag{12}
+\]
+where H is the actual
+mean-curvature vector.
+In particular the mass
+is bounded by its initial
+mass for the entire
+smooth flow lifetime;
+one of the two estimates
+in (7) is therefore
+automatic along any
+such smooth-flow sequence.
+\end{theorem}
+\begin{proof}
+The next deeper complex
+rank stratum has expected
+complex codimension
+2(p+1)>d=2p.
+For a transverse generic
+smooth section tuple
+its preimage must be EMPTY,
+since the expected real
+codimension is greater
+than dim_R X=4p.
+Therefore the first
+rank-deficiency locus
+is a closed smooth
+real codimension-2p
+submanifold, with
+the canonical complex
+normal coorientation.
+The ambient Kähler form
+is closed, so along
+an isotopy its homological
+calibration integral
+$\int_{D_t}\omega^p/p!$
+is constant.
+The smooth mean-curvature
+flow first-variation
+formula says
+$\frac{d}{dt}{\bf M}(D_t)
+  =-\int_{D_t}|H_t|^2\,d\mu_t$.
+Subtracting the
+constant calibration
+integral proves (12).
+The exact Thom--Porteous
+homology class survives
+during a smooth isotopy.
+\end{proof}
+
+\begin{remark}[What the flow does and does not force]
+This is an ACTUAL,
+alpha-dependent geometric
+DYNAMICAL construction
+rather than only a
+Hodge cohomology
+identity. It proves
+strict energy dissipation
+whenever mean curvature
+is nonzero, with full
+mass control during
+smooth existence.
+It does NOT prove
+global smooth flow
+for all time, rule out
+noncomplex stationary
+minimal submanifolds,
+or force the terminal
+defect to vanish.
+The exact integrated
+equation is
+\[
+ \Delta_\omega(D_{t})
+ =\Delta_\omega(D_0)
+   -\int_0^t\int_{D_s}
+                   |H_s|^2\,d\mu_s\,ds .
+                                                               \tag{13}
+\]
+Thus the needed
+GST geometric completion
+is an independent
+global regularization
+or singular-flow
+compactness theorem
+ensuring the ENTIRE
+initial defect is
+dissipated, rather
+than another presupposed
+Chow source.
+A bare monotonicity
+experiment cannot
+replace that
+quantitative conclusion.
+\end{remark}
+
+\section{GST continuation anchored to actual original-X source}
+This theorem constructs ACTUAL alpha-dependent
+original-X GEOMETRY and proves nonzero
+primitive native coupling, unlike any
+fixed tangent PGL or finite-base incidence
+source. It does not rename these real
+cycles as Chow. A universally valid GST
+causal-spatial deformation law producing
+the UNIFORM mass and vanishing-defect
+estimates (7) for this signed pair would
+turn the construction into actual Chow
+by the proved compactness return, rather
+than merely assuming an algebraic source.
+The quantitative geometric estimate,
+not another abstract cycle-class
+surjectivity field, is the specific
+remaining conjectural route.
+\end{document}

@@ -1,0 +1,58 @@
+name: GPT56 V5 Comparator Now
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comparator:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Verify committed tree hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .surgery/clean_sorry_check_hits.py
+          git diff -- . ':!/.lake'
+          git diff --check
+          if ! git diff --quiet -- . ':!/.lake'; then
+            echo "V5_HYGIENE_DIRTY_TREE=1"
+            echo "The comparator must test committed source without mutation."
+            exit 1
+          fi
+          echo "V5_COMMITTED_TREE_CLEAN=1"
+
+      - name: Install exact Lean RC2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Run exact repository V5 comparator on committed production proof
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          bash scripts/comparator.sh | tee v5-comparator.log
+          grep -Fq 'Your solution is okay!' v5-comparator.log
+          grep -Fq '=== COMPARATOR RESULT: PASS ===' v5-comparator.log
+          echo V5_LITERAL_PASS_CONFIRMED=1

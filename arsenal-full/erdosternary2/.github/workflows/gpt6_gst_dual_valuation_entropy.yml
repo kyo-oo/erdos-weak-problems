@@ -1,0 +1,37 @@
+name: GPT6 GST Dual-Valuation Weighted Entropy Lean Kernel
+on:
+  push:
+    branches: [gpt6/problem406-binary-origin-valuation-20261030]
+    paths:
+      - lakefile.toml
+      - GSTProblem406CarryEntropyBound.lean
+      - GSTProblem406DualValuationEntropy.lean
+      - .github/workflows/gpt6_gst_dual_valuation_entropy.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean RC2 and exact carry-entropy dependency
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+          lake build GSTProblem406CarryEntropyBound
+      - name: Strict weighted GST four-state theorem proof and axiom audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTProblem406DualValuationEntropy.lean 2>&1 | tee dual-valuation-entropy.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' dual-valuation-entropy.log
+          grep -F 'original_affine_weighted_entropy_bound' dual-valuation-entropy.log
+          grep -F 'original_affine_even_weighted_bound' dual-valuation-entropy.log
+          echo GST_DUAL_VALUATION_ENTROPY_KERNEL_PASS=1

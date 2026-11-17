@@ -1,0 +1,62 @@
+name: Mathbox GST N-Cohomology V3 Rank and Mass
+on:
+  push:
+    branches:
+      - mathbox/residual-zero-direct-audit-20261015
+    paths:
+      - waves/GSTNCohomologyV3.lean
+      - .github/workflows/gst-n-coho-v3.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-n-coho-v3-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 85
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Verify rank-faithful N-cohomology V3 and mass firewall
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTNCohoV3"
+          roots = [
+            "waves.GSTNCohomology",
+            "waves.GSTNCohomologyV2",
+            "waves.GSTNCohomologyV3"
+          ]
+          EOF
+          if lake build GSTNCohoV3 > gst-ncoho-v3.log 2>&1; then
+            echo "LEAN PASSED: independent N-hole basis and linear/nonlinear mass separator"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-ncoho-v3.log | tail -n 130 || true
+            tail -n 120 gst-ncoho-v3.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-ncoho-v3.log; then exit 1; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-n-cohomology-v3-lean-log
+          path: gst-ncoho-v3.log
+          if-no-files-found: warn

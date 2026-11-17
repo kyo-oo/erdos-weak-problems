@@ -1,0 +1,562 @@
+{
+  "claim": "Complete second-world Chow cup and pairing matrices, genuine Gram-dual two-slot source frame",
+  "domain": "Q; Fraction arithmetic, no numerical tolerances",
+  "polarization": "L=3H-E on X; Lhat=3rho*L-F on Xhat, geometrically very ample",
+  "center_relation": "h^(m+1)=0; xi^2+3h xi+2h^2=0; integral xi h^m=1",
+  "normal_chern": "(1-xi)(1+h)^(m+1)/(1+2h)",
+  "cases": [
+    {
+      "m": 1,
+      "cup_shape": [
+        3,
+        5
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "1009/36",
+          "-227/12"
+        ],
+        [
+          "-227/12",
+          "57/4"
+        ]
+      ],
+      "primitive_gram_determinant": "374/9"
+    },
+    {
+      "m": 2,
+      "cup_shape": [
+        5,
+        7
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "-9668/9",
+          "2860/3"
+        ],
+        [
+          "2860/3",
+          "-7648/9"
+        ]
+      ],
+      "primitive_gram_determinant": "324464/81"
+    },
+    {
+      "m": 3,
+      "cup_shape": [
+        7,
+        9
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "1118089/36",
+          "-118945/4"
+        ],
+        [
+          "-118945/4",
+          "113921/4"
+        ]
+      ],
+      "primitive_gram_determinant": "2662484/9"
+    },
+    {
+      "m": 4,
+      "cup_shape": [
+        9,
+        11
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "-7374179/9",
+          "2417153/3"
+        ],
+        [
+          "2417153/3",
+          "-7130995/9"
+        ]
+      ],
+      "primitive_gram_determinant": "1575949424/81"
+    },
+    {
+      "m": 5,
+      "cup_shape": [
+        11,
+        13
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "752800825/36",
+          "-249278611/12"
+        ],
+        [
+          "-249278611/12",
+          "82545073/4"
+        ]
+      ],
+      "primitive_gram_determinant": "1202444416"
+    },
+    {
+      "m": 6,
+      "cup_shape": [
+        13,
+        15
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "-4743159176/9",
+          "525632584"
+        ],
+        [
+          "525632584",
+          "-4718261320/9"
+        ]
+      ],
+      "primitive_gram_determinant": "5792359990784/81"
+    },
+    {
+      "m": 7,
+      "cup_shape": [
+        15,
+        17
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "475832177713/36",
+          "-158444238011/12"
+        ],
+        [
+          "-158444238011/12",
+          "52759309545/4"
+        ]
+      ],
+      "primitive_gram_determinant": "37284074995904/9"
+    },
+    {
+      "m": 8,
+      "cup_shape": [
+        17,
+        19
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "-2977725140831/9",
+          "992158557301/3"
+        ],
+        [
+          "992158557301/3",
+          "-2975226733663/9"
+        ]
+      ],
+      "primitive_gram_determinant": "19070397499852544/81"
+    },
+    {
+      "m": 9,
+      "cup_shape": [
+        19,
+        21
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "297923065092721/36",
+          "-33097008171305/4"
+        ],
+        [
+          "-33097008171305/4",
+          "33091454492969/4"
+        ]
+      ],
+      "primitive_gram_determinant": "118671794999934464/9"
+    },
+    {
+      "m": 10,
+      "cup_shape": [
+        21,
+        23
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "-1862394930298424/9",
+          "620756646240104/3"
+        ],
+        [
+          "620756646240104/3",
+          "-1862144955562552/9"
+        ]
+      ],
+      "primitive_gram_determinant": "59126277199997640704/81"
+    },
+    {
+      "m": 11,
+      "cup_shape": [
+        23,
+        25
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "186254510144286457/36",
+          "-62083170092931667/12"
+        ],
+        [
+          "-62083170092931667/12",
+          "20693834505311089/4"
+        ]
+      ],
+      "primitive_gram_determinant": "40030358694444327936"
+    },
+    {
+      "m": 12,
+      "cup_shape": [
+        25,
+        27
+      ],
+      "primitive_dimension": 2,
+      "primitive_gram": [
+        [
+          "-1164128211804303443/9",
+          "129346190215408763"
+        ],
+        [
+          "129346190215408763",
+          "-1164103212207423571/9"
+        ]
+      ],
+      "primitive_gram_determinant": "176429015374999962251264/81"
+    }
+  ],
+  "fourfold": {
+    "middle_basis": [
+      "rho*H^2",
+      "rho*C_A",
+      "rho*C_B",
+      "e_1(h)",
+      "e_1(xi)"
+    ],
+    "cup": [
+      [
+        "9",
+        "3",
+        "3",
+        "0",
+        "1"
+      ],
+      [
+        "-6",
+        "0",
+        "0",
+        "1",
+        "-3"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "4",
+        "-3"
+      ]
+    ],
+    "ambient_gram": [
+      [
+        "1",
+        "0",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "-1",
+        "3"
+      ]
+    ],
+    "integral_sources": [
+      [
+        "1",
+        "21",
+        "-24",
+        "6",
+        "0"
+      ],
+      [
+        "-3",
+        "-11",
+        "18",
+        "0",
+        "6"
+      ]
+    ],
+    "primitive_gram": [
+      [
+        "1009",
+        "-681"
+      ],
+      [
+        "-681",
+        "513"
+      ]
+    ],
+    "gram_determinant": 53856,
+    "gram_inverse": [
+      [
+        "57/5984",
+        "227/17952"
+      ],
+      [
+        "227/17952",
+        "1009/53856"
+      ]
+    ],
+    "dual_readouts": [
+      [
+        "-5/176",
+        "3/2992",
+        "-547/8976",
+        "-227/2992",
+        "15/88"
+      ],
+      [
+        "-23/528",
+        "-101/2992",
+        "-1601/26928",
+        "-1009/8976",
+        "23/88"
+      ]
+    ],
+    "matrix_unit_products_checked": 16,
+    "matrix_units_noncommute": true
+  },
+  "tensor_dual_pairs_checked": 5461,
+  "tensor_arities": [
+    0,
+    6
+  ],
+  "connected_parallel_births": [
+    {
+      "births": 1,
+      "world_dimension": 4,
+      "middle_dimension": 5,
+      "next_dimension": 3,
+      "primitive_dimension": 2,
+      "polarization_multiplier": 3,
+      "schur_factor": "374/81",
+      "gram_determinant": "374/81",
+      "native_matrix_unit_count": 4,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 2,
+      "world_dimension": 4,
+      "middle_dimension": 7,
+      "next_dimension": 4,
+      "primitive_dimension": 3,
+      "polarization_multiplier": 5,
+      "schur_factor": "6383/450",
+      "gram_determinant": "25532/225",
+      "native_matrix_unit_count": 9,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 3,
+      "world_dimension": 4,
+      "middle_dimension": 9,
+      "next_dimension": 5,
+      "primitive_dimension": 4,
+      "polarization_multiplier": 7,
+      "schur_factor": "2845/98",
+      "gram_determinant": "364160/49",
+      "native_matrix_unit_count": 16,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 4,
+      "world_dimension": 4,
+      "middle_dimension": 11,
+      "next_dimension": 6,
+      "primitive_dimension": 5,
+      "polarization_multiplier": 9,
+      "schur_factor": "35861/729",
+      "gram_determinant": "18360832000/19683",
+      "native_matrix_unit_count": 25,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 5,
+      "world_dimension": 4,
+      "middle_dimension": 13,
+      "next_dimension": 7,
+      "primitive_dimension": 6,
+      "polarization_multiplier": 11,
+      "schur_factor": "81325/1089",
+      "gram_determinant": "208192000000/1089",
+      "native_matrix_unit_count": 36,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 6,
+      "world_dimension": 4,
+      "middle_dimension": 15,
+      "next_dimension": 8,
+      "primitive_dimension": 7,
+      "polarization_multiplier": 13,
+      "schur_factor": "35657/338",
+      "gram_determinant": "9818721468416/169",
+      "native_matrix_unit_count": 49,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 7,
+      "world_dimension": 4,
+      "middle_dimension": 17,
+      "next_dimension": 9,
+      "primitive_dimension": 8,
+      "polarization_multiplier": 15,
+      "schur_factor": "573643/4050",
+      "gram_determinant": "36232626131104169984/1476225",
+      "native_matrix_unit_count": 64,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 8,
+      "world_dimension": 4,
+      "middle_dimension": 19,
+      "next_dimension": 10,
+      "primitive_dimension": 9,
+      "polarization_multiplier": 17,
+      "schur_factor": "476290/2601",
+      "gram_determinant": "3976743548312616960/289",
+      "native_matrix_unit_count": 81,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 9,
+      "world_dimension": 4,
+      "middle_dimension": 21,
+      "next_dimension": 11,
+      "primitive_dimension": 10,
+      "polarization_multiplier": 19,
+      "schur_factor": "83004/361",
+      "gram_determinant": "3569020069478400000000/361",
+      "native_matrix_unit_count": 100,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 10,
+      "world_dimension": 4,
+      "middle_dimension": 23,
+      "next_dimension": 12,
+      "primitive_dimension": 11,
+      "polarization_multiplier": 21,
+      "schur_factor": "2239075/7938",
+      "gram_determinant": "692010578899871334400000000000/78121827",
+      "native_matrix_unit_count": 121,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 11,
+      "world_dimension": 4,
+      "middle_dimension": 25,
+      "next_dimension": 13,
+      "primitive_dimension": 12,
+      "polarization_multiplier": 23,
+      "schur_factor": "3233153/9522",
+      "gram_determinant": "46102336823691596786003083264/4761",
+      "native_matrix_unit_count": 144,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 12,
+      "world_dimension": 4,
+      "middle_dimension": 27,
+      "next_dimension": 14,
+      "primitive_dimension": 13,
+      "polarization_multiplier": 25,
+      "schur_factor": "251471/625",
+      "gram_determinant": "7928382484390070271364806213632/625",
+      "native_matrix_unit_count": 169,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 13,
+      "world_dimension": 4,
+      "middle_dimension": 29,
+      "next_dimension": 15,
+      "primitive_dimension": 14,
+      "polarization_multiplier": 27,
+      "schur_factor": "3086915/6561",
+      "gram_determinant": "68407106803980932108020116098583772528640/3486784401",
+      "native_matrix_unit_count": 196,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 14,
+      "world_dimension": 4,
+      "middle_dimension": 31,
+      "next_dimension": 16,
+      "primitive_dimension": 15,
+      "polarization_multiplier": 29,
+      "schur_factor": "8234597/15138",
+      "gram_determinant": "267711336066836661041889280000000000000/7569",
+      "native_matrix_unit_count": 225,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 15,
+      "world_dimension": 4,
+      "middle_dimension": 33,
+      "next_dimension": 17,
+      "primitive_dimension": 16,
+      "polarization_multiplier": 31,
+      "schur_factor": "1196975/1922",
+      "gram_determinant": "70656932760411169745797120000000000000000/961",
+      "native_matrix_unit_count": 256,
+      "complete_dual_matrix_identity_checked": true
+    },
+    {
+      "births": 16,
+      "world_dimension": 4,
+      "middle_dimension": 35,
+      "next_dimension": 18,
+      "primitive_dimension": 17,
+      "polarization_multiplier": 33,
+      "schur_factor": "6928484/9801",
+      "gram_determinant": "24551139208236521823273147601225500253248142220197888/140633637507",
+      "native_matrix_unit_count": 289,
+      "complete_dual_matrix_identity_checked": true
+    }
+  ],
+  "unrestricted_mathematics": "Geometric Chow and Betti blowup decompositions give primitive dimension two for every m>=1; external products give 2^r independent primitive native sources for every finite r. On a single connected fourfold, r disjoint surface births give a complete rank-(r+1) primitive frame with explicit rational inverse Gram.",
+  "evidence_scope": "This executable verifies m=1..12, tensor arities=0..6 and connected parallel births r=1..16; unrestricted conclusions require the accompanying geometric argument. Lean separately verifies the entire two-birth fourfold kernel, matrix-unit algebra and all-r positive Schur factor."
+}

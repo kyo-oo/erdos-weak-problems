@@ -1,0 +1,76 @@
+name: GST Full Orbit Zeta Synthesis
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTResearchFullOrbitZetaSynthesis.lean'
+      - '.github/workflows/gst-research-full-orbit-zeta-synthesis.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-research-full-orbit-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 130
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependency artifacts
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-research-full-orbit
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Check Research full orbit corrected zeta Hodge synthesis
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "ResearchFullOrbitZeta"
+          roots = [
+            "GSTResearchGeometricOrbitSynthesis",
+            "GSTMathboxCorrectedZetaGeometry",
+            "GSTMathboxCorrectedZetaInfinite",
+            "GSTMathboxCorrectedZetaActualHodge",
+            "GSTResearchFullOrbitZetaSynthesis"
+          ]
+          EOF
+          if lake build ResearchFullOrbitZeta > research-full-orbit-lean.log 2>&1; then
+            echo "LEAN PASSED: full orbit and corrected infinite zeta Hodge synthesis"
+          else
+            grep -nE 'error:|sorryAx|✖' research-full-orbit-lean.log | tail -n 140 || true
+            tail -n 95 research-full-orbit-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" research-full-orbit-lean.log; then
+            echo "Lean trust audit failure"
+            exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-full-orbit-lean-proof-log
+          path: research-full-orbit-lean.log
+          if-no-files-found: warn

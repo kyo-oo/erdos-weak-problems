@@ -1,0 +1,71 @@
+name: GPT56 Coupled U Flux Verify
+
+on:
+  push:
+    branches:
+      - sol/gpt56-gstv2-coupled-u-flux-20260822
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Compile and install coupled U-flux experiment
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2CoupledUFlux.olean GSTGraphV2CoupledUFlux.lean
+
+      - name: Compile physical U-flux bridge
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTGraphV2CoupledUPhysicalBridge.lean
+
+      - name: Audit experiment sources
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          paths = [
+              Path('GSTGraphV2CoupledUFlux.lean'),
+              Path('GSTGraphV2CoupledUPhysicalBridge.lean'),
+          ]
+          bad = []
+          for p in paths:
+              for i, line in enumerate(p.read_text(encoding='utf-8').splitlines(), 1):
+                  stripped = line.lstrip()
+                  if stripped.startswith('--'):
+                      continue
+                  if re.search(r'\bsorry\b|\badmit\b|\baxiom\b|\bgst_end\b', line):
+                      bad.append(f'{p}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit('coupled U-flux bridge contains forbidden proof escape')
+          print('coupled U-flux bridge audit: clean')
+          PY
+
+      - name: Confirm exact remaining Codex seam
+        continue-on-error: true
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTTactic ErdosTernary2

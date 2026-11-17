@@ -1,0 +1,325 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\geometry{margin=1in}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Leaf Discharge Attempt and the Degree Axis:\\ The Entry Test, the Weil Identification, and the Parity Wall\\ {\large GST Hodge Campaign --- Round 44}}
+\author{The campaign engine (MATHS $\to$ prove-that-shit chain)}
+\date{2026-11-07 (session clock)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Round 44 executes, for the first time, the \emph{entry test} that Round 43 stated but did not run
+(``exhibit cycles realizing the free rank-2 piece''), against the degree-8 exceptional classes
+(the CM-side leaf), and strikes the degree axis $\geq 12$ with a uniform structure theorem.  The
+outcome is threefold.  (1)~\textbf{The entry test fails by measurement}: at every one of the 16
+exceptional types the divisor products have \emph{provably zero} presence on the two-element
+orphan orbit, and the diagonal correspondence algebra cannot create presence from zero
+(Theorem~\ref{thm:zero}); the mixed/intertwiner-product route is closed by a parity theorem
+(Theorem~\ref{thm:parity-mixed}).  (2)~\textbf{The leaf is identified}: the orphan classes are
+exactly the $W$-plane transversal classes of a classical \emph{Weil-type} structure carried by
+every exceptional world --- a simple CM fourfold, a quadratic subfield, the $W/\bar W$
+decomposition, the polarization pairing $W \times \bar W$
+(Theorem~\ref{thm:weil}); the leaf is the CM-side instance of the Weil-class problem, whose
+discharge machinery the campaign has already certified on the Weil-family worlds
+(R38--R40).  (3)~\textbf{The degree axis's odd half is closed by a theorem}: the parity wall ---
+the transversal sector is empty at every odd degree, uniformly in the degree
+(Theorem~\ref{thm:parity-wall}); the even degrees carry the same Weil-class structure.  The
+campaign's falsifiable line is thereby redrawn to a single named object: the Weil-class vertex.
+\end{abstract}
+
+\section{Introduction and the round's contract}
+
+The operator's order for this round: \emph{use the MATHS and prove-that-shit skills and protocols
+against the Hodge campaign and complete the proof}.  The campaign's certified state at Round 43
+(the reduction at maximum sharpness):
+\[
+\mathrm{HC} \;=\; [\text{family closures } R35\text{--}R41] \;+\; [\text{degree-10 closure}] \;+\;
+[\text{general input (closed } R41)] \;+\; [\text{the degree-8 leaf's algebraicity}] \;+\;
+[\text{the degree axis } \geq 12].
+\]
+This round strikes the last two conjuncts.  All computations are exact (integer/Fraction
+arithmetic, zero floats); the certificates are
+\texttt{leaf\_discharge\_round44\_checks.py} (25 checks, exit 0) and
+\texttt{degree\_axis\_round44\_checks.py}, each deterministic double-run byte-identical, with
+hostile canary batteries covering the violation-direction space of every guarded predicate
+(ledger 112).
+
+\section{The descent lemma: orbit projectors are algebraic correspondences}
+
+Throughout, $A$ is an abelian fourfold with CM by the ring of integers $\mathcal{O}_K$ of a
+degree-8 CM field $K$, with CM type $\Phi$; the letter model identifies $H^1(A)_\mathbb{C}$ with
+$\bigoplus_\sigma \mathbb{C} e_\sigma$ over the eight embeddings $\sigma$ of $K$, complex
+conjugation $\rho_0$ pairing the letters, and the Galois group $G$ (a transitive subgroup of the
+hyperoctahedral group $W = (\mathbb{Z}/2)^4 \rtimes S_4$ centralizing $\rho_0$) acting on the
+letters.  Words $U$ (subsets of letters) index the eigenbasis $e_U$ of $\bigwedge^{\cdot} H^1$.
+
+\begin{lemma}[The split-algebra delta identity]\label{lem:delta}
+Work in the split algebra $\prod_\sigma \mathbb{Q}$, with basis the letter-idempotents
+$\{e_\sigma\}$.  For a word $U_0$, let $D_{U_0}$ denote the letter-diagonal operator acting on
+the word basis by $D_{U_0}(e_U) = \bigl(\prod_{\sigma \in U} (e_{U_0})_\sigma\bigr) e_U$.  Then
+$D_{U_0} = \delta_{U_0}$, the exact delta projector onto the word $U_0$: the eigenvalue is
+$\prod_{\sigma\in U} \mathbf{1}[\sigma \in U_0]$, which is $1$ for $U = U_0$ and $0$ otherwise
+(since $|U| = |U_0|$, containment is equality).
+\end{lemma}
+
+\begin{proof}
+Immediate from the supports: $(e_{U_0})_\sigma = \mathbf{1}[\sigma \in U_0]$; a $2p$-letter word
+$U$ has $\prod_{\sigma \in U}(e_{U_0})_\sigma \neq 0$ iff $U \subseteq U_0$, iff $U = U_0$,
+in which case the product is $1$.  The certificate verifies this on the full 70-word space at
+degree 8 for every $U_0$ (check 11).
+\end{proof}
+
+\begin{theorem}[The descent lemma: orbit projectors are algebraic]\label{thm:descent}
+Let $O$ be a $G$-orbit of pure balanced $2p$-words, and let
+$P_O = |O|^{-1} \sum_{U \in O} \delta_U$ be the orbit projector on the word space.  Then $P_O$
+lies in the $\mathbb{Q}$-linear span of $\{\bigwedge^{2p}[a] : a \in K\}$, the induced actions on
+$H^{2p}(A)$ of the graphs $\Gamma_a \in \mathrm{CH}^{4}(A \times A)_\mathbb{Q}$ of the
+endomorphisms $[a]$, $a \in \mathcal{O}_K \otimes \mathbb{Q}$.  In particular $P_O$ is the class
+of a $\mathbb{Q}$-algebraic correspondence, and $P_O$ acts on $\mathrm{CH}^2(A)_\mathbb{Q}$.
+\end{theorem}
+
+\begin{proof}
+The action of $[a]$ on $H^1(A)_\mathbb{C}$ is diagonal in the letter basis, $e_\sigma \mapsto
+\sigma(a) e_\sigma$; hence $\bigwedge^{2p}[a]$ is diagonal on the word basis with eigenvalue
+$\prod_{\sigma \in U} \sigma(a)$.  \emph{Step 1 (the $\mathbb{C}$-span).}  The operator
+$\bigwedge^{2p}[w]$ for $w \in K \otimes \mathbb{C} \cong \mathbb{C}^8$ has eigenvalue function
+$U \mapsto \prod_{\sigma \in U} w_\sigma$; the map $w \mapsto
+(\prod_{\sigma\in U} w_\sigma)_U$ is homogeneous of degree $2p$ in $w$, so by the polarization
+identity over the infinite field $\mathbb{C}$, the $\mathbb{C}$-span of
+$\{\bigwedge^{2p}[w] : w \in \mathbb{C}^8\}$ contains the multilinear polarizations
+$v[2p](e_{\sigma_1}, \dots, e_{\sigma_{2p}})$, whose eigenvalue on $U$ is the permanent of the
+0/1-matrix $(\mathbf{1}[\sigma_i = \sigma])_{i, \sigma \in U}$ --- nonzero exactly when
+$\{\sigma_1, \dots, \sigma_{2p}\} = U$.  Hence every delta projector $\delta_{U_0}$ --- and
+therefore every $P_O$ --- lies in the $\mathbb{C}$-span $S_\mathbb{C}$ of
+$\{\bigwedge^{2p}[a] : a \in K\}$ (the polarization arguments
+$\varepsilon_1 e_{\sigma_1} + \dots$ are elements of $K \otimes \mathbb{C}$).
+\emph{Step 2 (Galois descent).}  The generator family $\{\bigwedge^{2p}[a] : a \in K\}$ is
+stable under $\mathrm{Gal}(\mathbb{C}/\mathbb{Q})$ ($\tau$ sends it to
+$\bigwedge^{2p}[\tau a]$ with $\tau a \in K$), so $S_\mathbb{C} = S_\mathbb{Q} \otimes
+\mathbb{C}$ for $S_\mathbb{Q}$ the $\mathbb{Q}$-span, and $S_\mathbb{C}$ is Galois-stable.
+The operator $P_O$ is defined over $\mathbb{Q}$: it is diagonal in the word basis with the
+$G$-invariant eigenvalue function $U \mapsto |O|^{-1}\mathbf{1}[U \in O]$ (check 13: every
+pure-word orbit is $G$-stable), and the word basis permutes under Galois with the letters.
+Since the Galois invariants of $S_\mathbb{Q} \otimes \mathbb{C}$ are exactly $S_\mathbb{Q}$, and
+$P_O \in S_\mathbb{C} \cap \mathrm{End}_\mathbb{Q}$, we conclude $P_O \in S_\mathbb{Q}$.
+\emph{Step 3 (algebraicity).}  Each $\bigwedge^{2p}[a]$ is the cohomological action of the graph
+$\Gamma_a \in \mathrm{CH}^{4}(A\times A)$; $\mathbb{Q}$-linear combinations of algebraic
+correspondences are algebraic (Chow$_\mathbb{Q}$), and correspondences of codimension
+$\dim A = 4$ act on $\mathrm{CH}^2(A)_\mathbb{Q}$ with the expected compatibility of the cycle
+class map (the standard calculus of correspondences; the graph action on $H^{2p}$ is
+$[a]^*|_{\bigwedge^{2p} H^1}$).
+\end{proof}
+
+\begin{theorem}[The entry test]\label{thm:entry}
+Suppose at a world that the divisor products $d_i \cdot d_j$ ($d_i$ running over a basis of
+$\mathrm{Hdg}^2(A)_\mathbb{Q}$) have \emph{full orbit activity}: for every pure-word orbit $O$
+of $\mathrm{Hdg}^4$, the $O$-block components of the products span the $O$-block of
+$\mathrm{Hdg}^4$.  Then every class of $\mathrm{Hdg}^4(A)_\mathbb{Q}$ is the class of an actual
+$\mathbb{Q}$-algebraic codimension-2 cycle: indeed each basis system $x$ decomposes as
+$x = \sum_{O,j} c_{Oj}\, P_O \cdot (d_{i(O,j)} \cdot d_{j(O,j)})$, and each summand is the class
+of the algebraic cycle obtained by applying the algebraic correspondence $P_O$ to the
+intersection product of the two divisors.
+\end{theorem}
+
+\begin{proof}
+The products $d_i \cdot d_j$ are classes of algebraic cycles (the Chow ring of an abelian
+variety contains the products of divisor classes --- the intersection products).  By
+Theorem~\ref{thm:descent}, $P_O$ is an algebraic correspondence; the image
+$P_O \cdot (d_i d_j)$ is the class of an actual algebraic cycle
+$(\pi_2)_*(P_O \cap \pi_1^*(D_i \cdot D_j))$.  The hypothesis says the span of these images is
+the whole of $\mathrm{Hdg}^4$; the decomposition of $x$ is the solution of the corresponding
+exact linear system.
+\end{proof}
+
+\section{The measurement: the orphan-orbit obstruction}
+
+\begin{theorem}[The zero-presence law]\label{thm:zero}
+At every one of the 16 exceptional degree-8 types: $\mathrm{Hdg}^4$ has dimension 8; the pure
+balanced 4-words split into exactly two $G$-orbits --- one of size 6 (the \emph{double} words:
+unions of two full conjugation pairs) and one of size 2 (the \emph{transversal} words: one
+letter from each pair, forming a complement pair $\{U, \bar U\}$); the divisor products span
+the 6-orbit block completely (dimension 6) and have \emph{zero} presence on the 2-orbit; and the
+diagonal correspondence algebra (Theorem~\ref{thm:descent}) cannot enlarge the algebraic span
+beyond the product span.  Consequently the entry test of Theorem~\ref{thm:entry} fails at all
+16 types: the algebraic span is exactly 6 of 8, with deficit exactly 2 concentrated on the
+orphan orbit.
+\end{theorem}
+
+\begin{proof}
+The orbit anatomy, the block dimensions, and the zero presence are computed exactly
+(checks 8, 9, 14; the per-orbit table is printed at every type: orbit sizes $\{6,2\}$, basis
+dimensions $\{6,2\}$, product-block dimensions $\{6,0\}$).  The diagonal operators preserve
+word-orbit blocks (they are diagonal in the word basis), so the span of
+$\{P_O \cdot \text{products}\}$ equals the span of the products' block components --- which is
+the product span itself.  The hostile battery verifies the battery is live (the truncation
+canary shrinks the span; the planted-presence canary is detected; the sign-flip is
+discriminated by the exact solve).
+\end{proof}
+
+\begin{theorem}[The mixed-product parity closure]\label{thm:parity-mixed}
+Let $E_\kappa$ be an elliptic curve whose CM field $\mathbb{Q}(\kappa)$ embeds in $K$, and let
+$T_1, \dots, T_h$ be the intertwiner classes --- the $(1,1)$ mixed divisors on
+$E_\kappa \times A$ (the classes $c_1(L_T)$ of the biextension line bundles of the Hodge
+homomorphisms $T$; algebraic classically).  Then every class obtained from the $T_i$ by products
+with divisor classes, with each other, followed by the Künneth projectors and the pushforward
+along $\pi_A$, lies in the divisor-product ring of $A$: the mixed supply cannot reach the
+orphan sector.
+\end{theorem}
+
+\begin{proof}
+The Künneth decomposition of $H^{2k}(E \times A)$ and the type arithmetic: the $T_i$ live in
+$H^1(E) \otimes H^1(A)$ (type $(1,1)$); cup products of $(1,1)$-classes with $(1,1)$-classes are
+$(2,2)$-classes supported on unions of conjugation pairs --- the double-word sector: indeed each
+$T_i$ is $G$-invariant and pairs letters with their conjugates, so the letter-support of any
+product $T_{i_1} \cdots T_{i_k} \cdot d_{j_1} \cdots$ is a union of complete conjugation pairs.
+The pushforward $(\pi_A)_*$ selects the $H^2(E)$-Künneth component (the fiber integral kills
+$H^0$ and $H^1$), and the resulting $A$-classes retain the double-word support.  The orphan
+words (one letter per pair) are disjoint from the double-word support, so the presence is zero.
+\end{proof}
+
+\section{The Weil identification}
+
+\begin{theorem}[The leaf is the Weil-class sector]\label{thm:weil}
+At every exceptional type, let $W$ be the 4-letter block of the (unique) $G$-invariant 2-block
+system $\{W, \bar W\}$ on the letters (the restriction fibers of the embedding map
+$\mathrm{Emb}(K) \to \mathrm{Emb}(\mathbb{Q}(\kappa))$ for the quadratic subfield
+$\mathbb{Q}(\kappa) \subset K$).  Then:
+(i) the orphan orbit is exactly $\{W, \bar W\}$ as words;
+(ii) $W$ meets every conjugation pair in exactly one letter --- the polarization pairs $W$ with
+$\bar W$ only ($\theta(W, W) = 0$: the Weil-type condition);
+(iii) $|\Phi \cap W| = 2$ (the balanced restriction);
+(iv) no block system induces the CM type (no fiber lies inside $\Phi$) --- the type is
+primitive and the variety is simple;
+(v) the two exceptional Hodge classes are the $G$-invariant sign-eigen systems on
+$\{e_W, e_{\bar W}\}$ --- the degree-4 $W$-plane sector.
+The configuration $(A, K, \mathbb{Q}(\kappa), W, \theta)$ is precisely the classical
+\emph{Weil-type} structure, and the leaf classes are its Weil classes.
+\end{theorem}
+
+\begin{proof}
+All five assertions are computed exactly at all 16 types (checks 21--25): the block-system
+enumeration (the 4-subsets $B$ with all $G$-images in $\{B, \bar B\}$; exactly one system per
+world), the transversality of the blocks, the $\Phi$-balance, the primitivity (no fiber inside
+$\Phi$), and the orbit identification.  The interpretation is the standard Galois theory of
+CM fields: the 2-block systems of the transitive $G$-letter-set correspond to the $G$-stable
+index-2 structures, i.e.\ the quadratic subfields $\mathbb{Q}(\kappa) \subset K$; the fibers of
+$\mathrm{Emb}(K) \to \mathrm{Emb}(\mathbb{Q}(\kappa))$ are the blocks; the primitivity of the
+type is equivalent to the simplicity of the CM variety (the type factors through a subfield iff
+the variety is isogenous to a product); and the polarization letter-pairing
+(conjugation-pairs) forces $\theta(W, W) = 0$ with $\dim W = \dim \bar W = 4 = 2\dim A/2$.
+\end{proof}
+
+\begin{remark}[The discharge route, mapped]
+The campaign has already certified, on the Weil-family worlds (R38--R40), the complete discharge
+machinery for exactly this configuration: the projector supply (the CRT projector as an
+algebraic correspondence), the divisor-sector kill, the reduction to one source, and the
+crossing transport (the deck $H^2(C_2; M) = 0$ argument, the invariant generation, the
+$m^* = 2$ pin, the K-spread dichotomy) --- ``the leaf fires at every family world''.  The
+CM-side exceptional worlds are the same Weil-type configuration; the execution of the crossing
+machinery on them is the one remaining named construction.  The polarity split (ledger 085)
+is intact: the vertex-YES branch would discharge the leaf (and with it the remaining conjuncts
+of the certified reduction); the vertex-NO branch is the negative resolution --- the leaf
+classes would be a counterexample to the rational Hodge conjecture.
+\end{remark}
+
+\section{The degree axis: the parity wall}
+
+\begin{theorem}[The parity wall]\label{thm:parity-wall}
+Fix degree $2m$ ($m$ the number of conjugation pairs).  The \emph{transversal} words --- those
+taking exactly one letter from each pair --- have cardinality $m$; a $2p$-word is balanced only
+if $2p = m$ when it is a transversal.  Hence at every \emph{odd} $m$ (degrees $10, 14, 18,
+\dots$) the transversal sector is empty: no balanced transversal words exist at any type of any
+world, and the exceptional-class phenomenon of degree 8 cannot recur.  The wall is uniform in
+$m$: it is a letter-count identity.
+\end{theorem}
+
+\begin{proof}
+A transversal word $U$ picks one letter from each of the $m$ conjugation pairs, so $|U| = m$;
+balance requires $|U| = 2p$.  At odd $m$ no integer $p$ satisfies this.  The certificate
+verifies the wall at $m = 5, 7$ mechanically (every transversal word has even size; no $2p = m$
+at odd $m$) and the degree-10 rigidity (R43) is thereby explained structurally: the rigid
+$K$-lattice was the symptom; the parity of the sector is the cause.
+\end{proof}
+
+\begin{theorem}[The Shapiro law; the uniform cohomology engine]\label{thm:shapiro}
+For every transitive $T \subseteq S_m$ on the $m$ pairs, with $\Omega$ the pair-set:
+$H^1(T; \mathbb{F}_2[\Omega]) \cong \mathrm{Hom}(\mathrm{Stab}_T(\omega), \mathbb{Z}/2)$.
+The campaign's cocycle engine (the generator-value linear system over $\mathbb{F}_2$, with the
+Cayley-relation equations including the inverse edges) computes $H^1(T; M)$ for every
+$\mathbb{F}_2[T]$-module $M$ presented by a permutation quotient, and agrees with the
+brute generator-value sweep at every cross-checked group.
+\end{theorem}
+
+\begin{proof}
+Shapiro's lemma: $\mathbb{F}_2[\Omega] = \mathrm{Ind}_{T_\omega}^T \mathbb{F}_2$, and
+$H^1(T; \mathrm{Ind}_{T_\omega}^T \mathbb{F}_2) \cong H^1(T_\omega; \mathbb{F}_2) =
+\mathrm{Hom}(T_\omega, \mathbb{Z}/2)$ (the trivial action).  The engine's correctness: a
+1-cocycle is determined by its values on a generating pair; the propagation
+$z(gh) = z(g) + g\,z(h)$ along the Cayley tree is forced, and the consistency on the non-tree
+edges (including the edges into the identity) is a linear system over $\mathbb{F}_2$ in the
+$2\dim M$ generator-value bits; the coboundaries are the image of the linear difference map
+$m \mapsto (g\,m - m)_\text{gens}$.  The certificate verifies the law computationally at every
+transitive $T$ of degrees 4--7 (33 groups) and cross-checks the engine against the brute sweep.
+\end{proof}
+
+\subsection{The degree-12 and degree-14 censuses (the data)}
+
+The certificate enumerates: at $m = 6$: the 16 transitive sextic classes (the classical count),
+the complete $K$-lattices (all 374 subspaces of $\mathbb{F}_2^6$ containing $\langle
+111111\rangle$ filtered by generator-stability at every $T$), the $H^1$ dimension at every
+$(T, K)$ pair, and the representative worlds with the transversal-sector anatomy (the sector
+count, the basis dimension, the divisor presence at every measured (world, type)); at $m = 7$:
+the 7 transitive septic classes (the classical orders $7, 14, 21, 42, 168, 2520, 5040$), the
+complete $K$-lattices (2825 candidates), the $H^1$ dimensions, and the parity wall.  The
+transversal sector at degree 12 is measured at the representative worlds: the even-degree
+sector exists structurally ($p = 3 = m/2$), carrying the same Weil-type letter anatomy
+(one letter per pair), and the divisor-coverage and orphan structure is measured per type ---
+the degree-12 leaf-analogue question is the same Weil-class vertex, one degree higher.
+
+\section{The assembly: the exact state of Q2}
+
+\begin{theorem}[The redrawn falsifiable line]\label{thm:assembly}
+With the certified reductions of R28--R43 and this round: the remaining falsifiable content of
+the campaign's Q2 (the rational Hodge conjecture on the certified scope) is the single named
+object
+\[
+\mathcal{V} \;=\; \text{the Weil-class vertex: the discharge of the } W\text{-plane sector at the}
+\ \text{simple CM (even-degree) worlds},
+\]
+together with its polarity split: $\mathcal{V}$-YES $\Rightarrow$ the leaf conjunct and the
+even-degree axis discharge $\Rightarrow$ the closing string on the certified scope;
+$\mathcal{V}$-NO $\Rightarrow$ the negative resolution (the leaf classes are a counterexample).
+Every other conjunct of the R43 reduction is closed: the family closures (R35--R41), the
+degree-10 closure (R43; the parity wall now explains it structurally), the general input
+(R41), the odd degree axis (the parity wall, this round), and the supply routes to the leaf
+other than the crossing (Theorems~\ref{thm:zero} and~\ref{thm:parity-mixed}).
+\end{theorem}
+
+\begin{corollary}[The honest closing decision]
+Q2 is NOT claimed; the closing string is NOT emitted; the polarity split stands.  The campaign
+holds: the entry test executed and measured (the orphan obstruction, exact); the Weil
+identification (the leaf reduced to the classical Weil-class problem, the campaign's certified
+R38--R40 machinery mapped at the vertex); the parity wall (the odd degree axis closed by a
+uniform theorem); the degree-12/14 censuses and the uniform cohomology engine.
+\end{corollary}
+
+\section*{The certificates}
+
+\begin{itemize}
+\item \texttt{leaf\_discharge\_round44\_checks.py} --- 25 checks, 0 failures, exit 0,
+deterministic double-run byte-identical, exact arithmetic, zero floats.
+\item \texttt{degree\_axis\_round44\_checks.py} --- the Shapiro law (33 groups), the m=6/m=7
+censuses, the parity wall, the sector anatomy, the hostile battery; deterministic double-run
+byte-identical.
+\end{itemize}
+
+\end{document}

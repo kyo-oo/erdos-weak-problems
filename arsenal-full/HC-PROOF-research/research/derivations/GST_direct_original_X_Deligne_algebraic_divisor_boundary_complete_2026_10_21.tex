@@ -1,0 +1,269 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\im}{\operatorname{im}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{GST original-\(X\) direct geometry: constructing cycles in the complete boundary codimensions and isolating the higher-codimension geometric source}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\section{The fixed target and noncircular source type}
+For every smooth projective complex variety \(X\), every
+\(p\), and every rational Hodge class
+\(\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)\),
+the immutable target is an independently geometric
+\[
+ Z_\alpha\in \CH^p(X)_\Q,\qquad
+       \cl_X^{\mathrm{canonical}}Z_\alpha=\alpha.
+\]
+The preceding GST routes supply Gram, K0, Chern, Chow-correspondence,
+world-return and normalized primitive-source operations but never
+a proof that an arbitrary middle Hodge residual is detected by
+an ACTUAL algebraic Chow source. Here we attack the original
+target through a different, genuinely target-dependent geometric
+carrier constructed directly on \(X\), followed by a complete
+algebraic source construction wherever the carrier algebraizes.
+
+\section{Construct a target-dependent holomorphic geometric lift without a cycle premise}
+Take any \(p\ge1\). Multiply the rational \(\alpha\) by an integer
+\(N>0\) so that it is the image of
+\(a\in H^{2p}(X,\Z(p))\) in rational Betti cohomology;
+torsion choices do not affect the rational conclusion.
+The analytic exponential sequence (with the customary Tate factors)
+\[
+ 0\longrightarrow\Z(p)
+ \longrightarrow\mathcal O_X
+ \xrightarrow{\exp}\mathcal O_X^\times
+ \longrightarrow1
+\]
+has connecting map
+\[
+ \delta:H^{2p-1}(X,\mathcal O_X^\times)
+                 \longrightarrow H^{2p}(X,\Z(p)).
+\]
+Since \(a\) is a rational \((p,p)\) class, its image in
+\(H^{2p}(X,\mathcal O_X)=H^{0,2p}(X)\) vanishes.
+Exactness therefore CONSTRUCTS a lift
+\[
+ \boxed{g_\alpha\in
+ H^{2p-1}(X,\mathcal O_X^\times),\qquad
+           \delta(g_\alpha)=a.}                 \tag{1}
+\]
+This is a genuine holomorphic
+\((2p-2)\)-gerbe cocycle on the ORIGINAL \(X\)
+(in particular an ordinary holomorphic line bundle when \(p=1\)).
+The construction does not choose a Chow cycle and does not assert
+the holomorphic object is algebraic.
+
+The ordinary exponential lift is TOO WEAK to encode the
+entire Hodge condition for \(p>1\). For example on a
+four-dimensional complex abelian variety the complex dimensions
+of \(H^{r,4-r}\) are
+\[
+ (1,16,36,16,1).
+\]
+The kernel of projection \(H^4(X,\C)\to H^{0,4}(X)\)
+has complex dimension \(69\), versus \(36\) for \(H^{2,2}\).
+The Hodge condition uses the full filtration, not
+the single \((0,4)\) projection.
+Wolfram verified these binomial multiplicities exactly.
+This computation DOES NOT assert the existence of
+non-Hodge rational classes in either subspace for a given
+specific \(X\).
+
+\section{Full original-\(X\) Hodge-type carrier via Deligne geometry}
+To retain all Hodge-filtration conditions, use the
+true Deligne complex \(\Z(p)_{\mathcal D}\) and the
+classical exact sequence for smooth projective complex \(X\),
+\[
+ 0\to J^p(X)
+ \longrightarrow H^{2p}_{\mathcal D}(X,\Z(p))
+ \xrightarrow{\epsilon}
+ \Hdg^{2p}(X,\Z(p))
+ \to0.                                              \tag{2}
+\]
+Here \(J^p(X)\) is the standard generalized intermediate
+Jacobian group and the right-hand term denotes integral
+Betti classes of Hodge type \((p,p)\), including torsion
+by the usual convention. In particular, for the integral
+multiple \(a=N\alpha\), exactness supplies an actual
+**Deligne-cohomology geometric lift**
+\[
+ \boxed{\widetilde a\in
+ H^{2p}_{\mathcal D}(X,\Z(p)),
+ \qquad \epsilon(\widetilde a)=a.}                  \tag{3}
+\]
+This is a genuine target-dependent holomorphic cocycle on
+the specified original \(X\); its construction uses the
+actual Hodge condition rather than an abstract chosen
+cycleClass. But the Deligne cycle-class map
+\[
+ \CH^p(X)\longrightarrow
+ H^{2p}_{\mathcal D}(X,\Z(p))                       \tag{4}
+\]
+has not thereby acquired an inverse or a lift of \(\widetilde a\).
+The exact missing algebraic-geometric operation for \(p>1\) is
+to construct an ACTUAL codimension-\(p\) cycle whose
+Deligne class has the same image under \(\epsilon\).
+Equation (3) alone is not that operation. This distinction
+prevents calling a holomorphic higher-gerbe a Chow cycle.
+
+\section{COMPLETED original-\(X\) algebraic construction in boundary codimensions}
+\begin{theorem}[All original X: exact actual rational Chow source for codimensions 0,1,d-1,d]
+Let \(X\) be ANY connected smooth projective complex variety
+of dimension \(d\), and let
+\(p\in\{0,1,d-1,d\}\cap\{0,\dots,d\}\).
+Every rational \((p,p)\) Hodge class
+\(\alpha\in H^{2p}(X,\Q)\) has a
+GENUINELY algebraic cycle
+\[
+ \boxed{
+ Z_\alpha\in\CH^p(X)_\Q,\qquad
+          \cl_X^{\rm can}(Z_\alpha)=\alpha.}      \tag{5}
+\]
+In particular the ENTIRE rational Hodge conjecture
+holds in all codimensions for every smooth projective
+complex variety of dimension \(d\le3\).
+For disconnected X perform the same construction
+independently on each connected component.
+\end{theorem}
+\begin{proof}
+For \(p=0\), the relevant rational Betti group is
+\(H^0(X,\Q)=\Q\), generated by the canonical class
+of the ACTUAL whole X; set \(Z_\alpha=q[X]\).
+
+For \(p=d\), the top Betti group is
+\(H^{2d}(X,\Q)=\Q\), generated by the canonical
+class of an ACTUAL algebraic closed point \(x\).
+Set \(Z_\alpha=q[x]\) with \(q\) chosen by
+the true canonical integration/degree pairing.
+
+For \(p=1\), clear denominators \(a=N\alpha\)
+and use (1) with \(p=1\):
+\(g_\alpha\in H^1(X,\mathcal O_X^\times)
+=\operatorname{Pic}^{an}(X)\), with
+\(c_1(g_\alpha)=a\).
+Projective GAGA algebraizes this actual holomorphic
+line bundle to an algebraic line bundle \(L\).
+On a smooth integral projective variety every
+algebraic line bundle has an ACTUAL rational Cartier
+divisor representative D; hence
+\[
+ Z_\alpha=\frac1N[D]\in\CH^1(X)_\Q,\qquad
+ \cl_X^{can}Z_\alpha=\alpha.
+\]
+This is an input-free true Chow-source construction
+from arbitrary original-X codimension-one Hodge data.
+
+For \(p=d-1\) and \(d\ge2\), let \(H\) be an
+ACTUAL algebraic ample hyperplane divisor
+and \(h=\cl_X^{can}H\).
+Genuine Hard Lefschetz gives a rational isomorphism
+\[
+ h^{d-2}: H^2(X,\Q)
+              \xrightarrow{\;\sim\;}H^{2d-2}(X,\Q).
+                                                               \tag{6}
+\]
+It is a Hodge morphism with the indicated bidegree shift.
+Thus the unique rational \(\beta=(h^{d-2})^{-1}\alpha\)
+belongs to \(H^{1,1}(X)\).
+The preceding REAL \(p=1\) construction supplies
+a rational algebraic divisor D with
+\(\cl_X^{can}D=\beta\).
+Define the genuine original-X intersection cycle
+\[
+ \boxed{Z_\alpha=D\cdot H^{d-2}
+                      \in\CH^{d-1}(X)_\Q.}         \tag{7}
+\]
+Exact canonical intersection compatibility gives
+\(\cl_X^{can}Z_\alpha=
+ \beta\smile h^{d-2}=\alpha\).
+For \(d=1\), p=d-1=0 is already covered.
+For \(d\le3\) every possible codimension
+is among the four allowed values, finishing
+the all-classes statement for those dimensions.
+\end{proof}
+
+\section{Exact GST law applications and source-firewall}
+(1) The original-X native cycle type of
+\texttt{GSTActualXHodgeResidualProjection.lean}
+accepts the ACTUAL rational Chow cycles D and
+D H^{d-2} constructed above; the input was
+NOT an arbitrary Hodge-to-Chow inverse.
+(2) The true primitive/Lefschetz laws used in
+\texttt{GSTUniversalPrimitiveHyperplaneRelative.lean}
+and the active Gate-2 contract supply the
+rational Hodge-inverse logic of (6), but
+only the genuine classical Hard Lefschetz
+instantiation justifies its application to X.
+(3) \texttt{GSTUniversalChowRetractToTarget.lean}
+supports true algebraic push/Gysin return of
+independently geometric source cycles, and
+the actual intersection in (7) is the
+precise geometric return.
+(4) The normalized finite-flat K0,
+Adams, Chern--Segre, motif projector and
+Gram residual operations preserve the
+algebraic source-image type; they are NOT
+used to conjure a higher-codimension
+source from a purely analytic gerbe.
+(5) The Stage2G supplied H.cycleClass
+is NOT silently substituted for the
+canonical analytic Chern / Betti cycle map.
+Every equality above is a statement about
+the actual canonical Betti cycle class.
+
+
+\section{Exact all-dimension reduction to primitive lower-half codimension}
+For a general arbitrary smooth projective d-fold X and any p>d/2,
+genuine Hard Lefschetz gives a canonical rational Hodge-compatible
+isomorphism
+\[
+ h^{2p-d}:H^{2(d-p)}(X,\Q)
+                   \xrightarrow{\ \simeq\ }H^{2p}(X,\Q).
+\]
+For any rational (p,p) Hodge class alpha, the unique rational
+preimage beta is type (d-p,d-p). An independently constructed
+algebraic Chow representative B of beta yields the ACTUAL
+original-X representative
+\(Z_\alpha=B\cdot H^{2p-d}\in CH^p(X)_\Q\),
+with exact canonical Betti class alpha.
+The construction does not provide B automatically when
+\(d-p\ge2\). Hence the actual universal missing range after
+Lefschetz is
+\[
+ \boxed{2\le p\le\lfloor d/2\rfloor,\qquad d\ge4,}
+\]
+and the first unknown middle case is (d,p)=(4,2).
+This is an exact domain reduction by an actual geometric ample
+intersection, NOT a claim the remaining range has been solved.
+
+\section{Exact higher-codimension unresolved implication (no hidden proof)}
+For \(2\le p\le d-2\), the Deligne lift (3)
+gives genuine target-dependent holomorphic
+geometry on any original X. The transformation
+from this lift to an ACTUAL algebraic codimension-p
+cycle with the same canonical Betti class
+is not proved by any of the preceding equations.
+In general, producing it for EVERY smooth
+projective X and EVERY rational Hodge alpha
+is the original rational Hodge conjecture;
+a statement that this follows merely from
+the existence of Deligne lifts or higher
+holomorphic gerbes is CIRCULAR.
+
+The complete verified subproblem in this file
+is the explicit algebraic boundary-codimension
+construction (5), including all smooth projective
+complex varieties of dimension <=3.
+The central primitive original-X source
+for d>=4 remains precisely the target
+of the active research program.
+\end{document}

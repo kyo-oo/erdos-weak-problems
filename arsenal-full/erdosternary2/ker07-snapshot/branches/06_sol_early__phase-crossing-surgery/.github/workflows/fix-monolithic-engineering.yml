@@ -1,0 +1,76 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0669 / 1132
+#    Path         : branches/sol_phase-crossing-surgery/.github/workflows/fix-monolithic-engineering.yml
+#    Ref          : origin/sol/phase-crossing-surgery
+#    First-commit : 2026-08-16 19:30:12 +0530  (d6aa2eb)
+#    Last-commit  : 2026-08-16 19:31:00 +0530  (eaef60f)
+#    Total commits: 2
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/2] 2026-08-16 19:30:12 +0530  d6aa2eb  (ker07-dev)
+#        Stage exact monolithic engineering repair
+# [02/2] 2026-08-16 19:31:00 +0530  eaef60f  (ker07-dev)
+#        Repair source-only patch pipeline
+# ======================================================================
+
+name: Fix monolithic engineering seam
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: sol/comparator-surgery
+          fetch-depth: 0
+
+      - name: Apply exact source-only transplant repairs
+        shell: bash
+        run: |
+          set -euo pipefail
+          EXPECTED="1437b3d31fa8b0c8ac7bed9645c7bf916e4942475fd8b2eff269499edb410bca"
+          ACTUAL="$(sha256sum ErdosTernary2.lean | awk '{print $1}')"
+          test "$ACTUAL" = "$EXPECTED"
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ErdosTernary2.lean')
+          s = p.read_text()
+
+          old1 = '''  rw [hy, hp, hx, ht'] at hfull\n  ring_nf at hfull ⊢\n  omega\n'''
+          new1 = '''  rw [hy, hp, hx, ht'] at hfull\n  simp only [gstAffineMulCarry] at hfull ⊢\n  ring_nf at hfull ⊢\n  omega\n'''
+          if s.count(old1) != 1:
+              raise SystemExit(f'carry seam pattern count = {s.count(old1)}')
+          s = s.replace(old1, new1, 1)
+
+          old2 = '''    gst_navigation_witness_all_of_residual gst_residual_navigation_lift\n      s (1 + 3*n) hs hb hb3 hdomain\n'''
+          new2 = '''    gst_navigation_witness_all_of_residual\n      (gst_residual_navigation_lift_of_omega_termination\n        gst_residual_omega_termination)\n      s (1 + 3*n) hs hb hb3 hdomain\n'''
+          if s.count(old2) != 1:
+              raise SystemExit(f'residual seam pattern count = {s.count(old2)}')
+          s = s.replace(old2, new2, 1)
+          p.write_text(s)
+          PY
+          python3 - <<'PY'
+          from pathlib import Path
+          Path('ErdosTernary2.lean').read_text().encode('utf-8')
+          print('UTF-8 OK')
+          PY
+          sha256sum ErdosTernary2.lean
+
+      - name: Commit source-only repair
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ErdosTernary2.lean
+          git commit -m "Fix monolithic carry normalization and residual lift call"
+          git push origin HEAD:sol/comparator-surgery

@@ -1,0 +1,65 @@
+name: Mathbox K3 Transcendental Motivic Projector
+on:
+  push:
+    branches: [research/mathbox-k3-diagonal-primitive-20261015]
+    paths:
+      - GSTK3TranscendentalProjector.lean
+      - .github/workflows/gst-mathbox-k3-projector.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-mathbox-k3-projector-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-k3-projector
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel check all-Picard-rank transcendental correspondence projector
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTK3Projector"
+          roots = ["GSTK3TranscendentalProjector"]
+          EOF
+          if lake build GSTK3Projector > k3-projector-lean.log 2>&1; then
+            echo 'LEAN PASSED: K3 transversal projector'
+          else
+            grep -nE 'error:|sorryAx|✖' k3-projector-lean.log | tail -n 130 || true
+            tail -n 130 k3-projector-lean.log
+            exit 1
+          fi
+          if grep -E 'declaration uses .sorry.|sorryAx' k3-projector-lean.log; then
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-mathbox-k3-projector-lean-log
+          path: k3-projector-lean.log
+          if-no-files-found: warn

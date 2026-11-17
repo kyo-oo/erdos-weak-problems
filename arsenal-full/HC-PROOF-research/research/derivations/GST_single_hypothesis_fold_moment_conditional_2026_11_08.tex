@@ -1,0 +1,338 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry}
+\geometry{margin=1in}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\cl}{\operatorname{cl}}
+\title{GST Hodge: one fold hypothesis and moment-only reconstruction}
+\author{GPT-6 mathematical handoff to GLM}
+\date{8 November 2026}
+\begin{document}
+\maketitle
+\section{Exact target}
+Fix any smooth projective complex variety X, any codimension p, and a prescribed rational Hodge class alpha. Let W be the rational (p,p) Hodge space of X, with dimension n. The desired output is a rational algebraic cycle on the ORIGINAL X with canonical Betti class alpha. The zero Hodge fiber is solved by the zero cycle.
+
+\section{Single GST fold-Hankel hypothesis}
+At each live weight assume there is ONE verified geometric package:
+a genuine native-cycle operator N arising from a GST fold correspondence, a rational Hodge operator T, a genuine codimension-p algebraic seed Z0, and a rational linear fold detector ell. Their cycle-class square must satisfy
+\[
+\cl_X(NZ)=T\cl_X(Z)\quad\text{for all native cycles }Z.
+\]
+Write \(v_0=\cl_X(Z_0)\). The ONE scalar condition is
+\[
+M_{ij}=\ell(T^{i+j}v_0),\qquad 0\le i,j<n,\qquad \boxed{\det M\neq0}.
+\]
+The fold, native operator, canonical comparison, and nondegenerate detector are NOT supplied by the current corpus for all original X; their universal realization is the named unproved hypothesis.
+
+\section{Exact conditional cycle construction}
+\begin{theorem}
+If the above native fold-Hankel package exists for every original X and every live p, the rational Hodge conjecture holds for all such X.
+\end{theorem}
+\begin{proof}
+For each j let \(Z_j=N^jZ_0\) and \(v_j=T^jv_0\).
+Naturality inductively proves \(\cl_X(Z_j)=v_j\).
+Define rational linear maps
+\[
+ C:\Q^n\to W,\quad C(e_j)=v_j,\qquad
+ O:W\to\Q^n,\quad (O\beta)_i=\ell(T^i\beta).
+\]
+By construction \(M=OC\). Since \(\det M\neq0\) and
+both the domain and codomain of C and O have dimension n,
+C and O are isomorphisms. For ANY prescribed class alpha,
+form the target-only moment vector and its coefficients:
+\[
+ b_i(\alpha)=\ell(T^i\alpha),\qquad c(\alpha)=M^{-1}b(\alpha).
+\]
+The EXPLICIT original-X native cycle is
+\[
+ \boxed{Z_\alpha=\sum_{j=0}^{n-1}c_j(\alpha)N^j Z_0.}
+\]
+All coefficients are rational and all summands are actual algebraic
+cycles. Apply O to the class:
+\[
+ O\cl_X(Z_\alpha)=OCM^{-1}b(\alpha)
+ =MM^{-1}O\alpha=O\alpha.
+\]
+Injectivity of O proves \(\cl_X(Z_\alpha)=\alpha\).
+\end{proof}
+
+\section{Wolfram exact computation and limitations}
+For symbolic rational 2-by-2 T, arbitrary seed s, detector ell
+and target alpha, Wolfram simplified
+\[
+ C(OC)^{-1}O\alpha-\alpha=(0,0)^t
+\]
+under nonzero determinant. The rational fixture
+\(T=\left(\begin{smallmatrix}0&1\\1&1\end{smallmatrix}\right)\),
+\(v_0=e_1\), \(\ell=e_1^t\) gave M=identity and
+reconstructed alpha=(7/3,-5/2) exactly.
+These results check the MATRIX IDENTITY, not the existence of a
+geometric correspondence on arbitrary X.
+
+When \(\ell T=\lambda\ell\), one has
+\(M_{ij}=\lambda^{i+j}\ell(v_0)\), rank at most one.
+Thus a pure projective degree eigen-trace cannot give a nonzero
+higher-rank determinant: the GST fold must MIX actual detectors.
+
+\section{Geometric compatibility correction}
+For \(X=E_1\times E_2\) with nonisogenous elliptic curves,
+self-maps act diagonally on the two factor-divisor Hodge directions.
+They cannot realize the off-diagonal matrix units required by the
+old universal ProjectiveTwoGenerator self-map interface.
+However the genuine product correspondence
+\[
+\Gamma=d_2\boxtimes d_2\in\CH^2(X\times X)_\Q
+\]
+sends \(d_1\mapsto d_2\) and \(d_2\mapsto0\), by the
+push-pull intersection formula. The correspondence need not be
+finite over either projection, so it must NOT be silently inserted
+into the existing bi-finite RealizedFiniteClosedCorrespondence type.
+
+\section{Excluded shortcut and exact research obligation}
+Two rational operators
+\(F=\left(\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right)\)
+and \(G=\left(\begin{smallmatrix}0&1\\0&0\end{smallmatrix}\right)\)
+have scalar common commutant, as Wolfram verified, but preserve
+the proper invariant line \(\Q e_1\). Therefore scalar commutant
+alone does not imply cyclicity absent proved semisimplicity or
+adjoint stability.
+
+The GST sector charges, causal fold commutator and infinite curvature
+tower are established for their specified types and serve as
+compatibility checks. None by itself constructs the new original-X
+native geometric fold package with full Hankel determinant.
+
+The branch already contains the kernel-proved conditional
+cyclic and determinant theorems in
+GSTClassicalHodgeRealizedCorrespondenceKrylovFinale.lean and
+GSTClassicalHodgeGeometricKrylovMomentDeterminant.lean.
+The new moment-only WITNESS FORMULA is a hand-proof extension
+to that implication, not a newly proved universal source mechanism.
+
+
+\section{Positive all-rank construction on actual original varieties}
+There is a concrete successful geometric family of the single-fold
+Hankel criterion; the calculation is not limited to formal rational
+matrices. Fix any integer \(m\ge1\) and pairwise nonisogenous complex
+elliptic curves \(E_1,\ldots,E_m\). Let
+\[
+ X=\prod_{r=1}^{m}E_r,\qquad
+ d_r=\operatorname{pr}_r^*[\mathrm{point}]\in\CH^1(X)_\Q.
+\]
+The degree-two rational Hodge space equals
+\(\bigoplus_{r=1}^m\Q\,\cl(d_r)\); the nonisogeny assumption
+eliminates cross-factor divisor directions. The intersection rules
+are exact: \(d_r^2=0\) and \(\int_Xd_1\cdots d_m=1\).
+
+For every ordered pair \((j,i)\), construct the actual codimension-m
+correspondence in the original \(X\times X\),
+\[
+ \Gamma_{ji}
+ =\pi_1^*\!\left(\prod_{k\ne i}d_k\right)
+    \cdot\pi_2^*d_j\in\CH^m(X\times X)_\Q.
+\]
+The genuine push--pull action on the divisor classes satisfies
+\[
+(\Gamma_{ji})_*(d_r)
+=\left(\int_Xd_r\prod_{k\ne i}d_k\right)d_j
+=\delta_{ir}d_j.
+\]
+Thus \(\Gamma_{ji}\) is precisely the rational matrix unit
+\(E_{ji}\) on the FULL Hodge fiber in degree two. Now let
+\[
+\Gamma=\Gamma_{2,1}+\Gamma_{3,2}+\cdots+
+\Gamma_{m,m-1}+\Gamma_{1,m},\quad
+Z_0=d_1,\quad
+\ell(\beta)=\int_X\beta\prod_{k\ne1}d_k.
+\]
+The associated operator \(T=\Gamma_*\) rotates the geometric
+divisor basis: \(T(d_i)=d_{i+1}\) for \(i<m\) and
+\(T(d_m)=d_1\). The detector reads the coefficient of \(d_1\).
+Consequently the ENTIRE Hankel matrix has the literal integer form
+\[
+M_{ij}=\begin{cases}1&(i+j)\equiv0\pmod m,\\0&\text{otherwise},
+\end{cases}
+\quad 0\le i,j<m.
+\]
+It is a permutation matrix; row zero fixes coordinate zero and
+the remaining \(m-1\) coordinates are reversed. Therefore the exact
+all-rank determinant is
+\[
+\boxed{\det M=(-1)^{(m-1)(m-2)/2}\ne0.}
+\]
+The single native orbit is \(d_1,d_2,\ldots,d_m\) and the
+moment-only reconstruction supplies every rational divisor
+Hodge class by ACTUAL algebraic cycles on the original product X.
+There is no assumption of Hodge algebraicity in higher codimension.
+
+The Wolfram check enumerated every \(m=1,\ldots,15\);
+for each size the matrix formula, full rank and claimed determinant
+agreed exactly, with integer arithmetic and zero tolerance. The
+proof above is uniform in m and is what establishes the result
+for arbitrary m; finite computation serves only as an independent
+consistency check.
+
+\emph{Crucial representation boundary}: these product
+correspondences are genuine Chow correspondences but not generally
+bi-finite correspondences and not graphs of actual self-maps.
+The existing finite-closed-correspondence Lean interface is not a
+faithful type for this construction. A future scheme-level adapter
+must accept all codimension-m Chow correspondences and prove
+canonical Betti push--pull naturality before importing it into
+the kernel-verified Krylov orbit theorem. This positive family
+does NOT prove the universal all-X determinant hypothesis.
+
+
+\section{GST full indexed spatial combinations in every codimension}
+The preceding product-family proof extends from the divisor sector
+to an EXPLICIT native geometric sector at EVERY codimension.
+Let \(X=\prod_{r=1}^{m}E_r\) and \(0\le p\le m\).
+For every subset \(I\subseteq\{1,\ldots,m\}\) with \(|I|=p\),
+let \(D_I=\prod_{r\in I}d_r\in\CH^p(X)_\Q\).
+There are \(n=\binom mp\) such indexed native cycles.
+Their complement cycles \(D_{I^c}\) have codimension \(m-p\).
+Their full rational intersection pairing is EXACTLY
+\[
+\int_X D_I D_{J^c}=\delta_{IJ},
+\quad |I|=|J|=p.
+\]
+Indeed if \(I=J\) every factor occurs exactly once, giving
+one; if \(I\ne J\) then at least one divisor appears twice,
+so the product is zero because \(d_r^2=0\).
+This proves that the \(D_I\) form an independent indexed
+native subspace \(W_p^{\mathrm{native}}\), of rank \(\binom mp\).
+
+Define the actual codimension-\(m\) product correspondence
+\[
+\Gamma_{JI}:=\pi_1^*D_{I^c}\cdot\pi_2^*D_J
+\quad\in\CH^m(X\times X)_\Q.
+\]
+The genuine Chow push--pull formula is
+\[
+(\Gamma_{JI})_*D_K
+=\left(\int_X D_KD_{I^c}\right)D_J
+=\delta_{IK}D_J.
+\]
+Thus the ENTIRE \(\binom mp\times\binom mp\) rational
+matrix-unit algebra is realized in the native codimension-\(p\)
+subspace from one consistent GST family of indexed cycles.
+
+Order the \(p\)-subsets cyclically as
+\(I_0,\ldots,I_{n-1}\), form
+\(\Gamma=\sum_{j=0}^{n-1}\Gamma_{I_{j+1},I_j}\)
+with subscripts modulo \(n\), take seed \(Z_0=D_{I_0}\),
+and detector \(\ell(\beta)=\int_X\beta D_{I_0^c}\).
+Its induced cycle-class action shifts the geometric basis,
+so the full Hankel determinant is
+\[
+\boxed{\det M=(-1)^{(n-1)(n-2)/2}\ne0,
+\qquad n=\binom mp.}
+\]
+The uniform proof is the same permutation-matrix argument.
+The exact Wolfram test checked the complement-intersection
+Gram identity and all Hankel determinants for every pair
+\(1\le m\le6,\ 0\le p\le m\): 27 tested (m,p) combinations,
+zero failures, exact integers.
+
+Scope: this proves the full one-operator GST fold-Hankel
+condition for the explicitly constructed NATIVE divisor-product
+sector \(W_p^{\mathrm{native}}\). To claim the FULL Hodge fiber
+in higher codimension, a separate proof that the full rational
+Hodge space equals this sector is necessary. The construction
+does not use such a hypothesis, and does not silently promote
+a native-span calculation to arbitrary-X Hodge algebraicity.
+The new general indexed source is a useful positive fixture
+for extending GST N-cohomology and fold geometry beyond the
+current self-map/bi-finite correspondence interfaces.
+
+
+\section{The GST fold-gauge invariance theorem}
+There is a useful exact principle about which fold operations can change
+the Hankel condition. Let \(W\) be any finite-dimensional rational Hodge
+representation, \(T\in\operatorname{End}_{\Q}(W)\), \(v\in W\) and
+\(\ell\in W^*\). Let \(U:W\to W\) be an invertible rational change
+of GST fold coordinates, with
+\[
+T'=U^{-1}TU,\qquad v'=U^{-1}v,\qquad \ell'=\ell U.
+\]
+Then for ALL \(i,j\ge0\),
+\[
+\ell'((T')^{i+j}v')
+ = \ell U (U^{-1}T^{i+j}U)U^{-1}v
+ = \ell(T^{i+j}v).
+\]
+Consequently the entire Hankel matrix, rank, and determinant are exactly
+UNCHANGED by invertible GST fold recoordination:
+\[
+\boxed{M(T',v',\ell')=M(T,v,\ell).}
+\]
+Wolfram checked the full symbolic \(2\times2\) rational-matrix
+identity with arbitrary invertible \(U\), giving the zero difference
+matrix and zero determinant difference; the proof here applies in
+every dimension.
+
+Interpretation: coordinate folding, gauge transformation, and
+invertible transport of the SAME native source and detector cannot
+turn a degenerate Hankel certificate into a nondegenerate one.
+A successful all-X GST construction must alter the supply of
+genuine native algebraic source correspondences, the genuinely
+available detector sector, or the geometric realization data,
+rather than only change coordinates. This is a route-specific
+no-go theorem, NOT a statement that all noninvertible geometric
+folds or singular source-birth mechanisms fail.
+
+
+\section{Logical strength audit: a full correspondence FH law is HC-equivalent}
+To prevent another disguised Hodge-to-Chow assumption, we identify
+the exact logical strength of the UNIVERSAL hypothesis when
+arbitrary genuine rational Chow correspondences are allowed.
+For simplicity take $X$ connected, smooth, projective,
+pure of complex dimension $d$. Assume the rational Hodge conjecture
+holds on $X$ in ALL codimensions $0,\dots,d$.
+Choose an arbitrary $\Q$-basis $v_0,\dots,v_{n-1}$ of the
+rational $(p,p)$ Hodge space $W_p$.
+By Poincare duality and the pure Hodge decomposition, the pairing
+\[
+W_p\times W_{d-p}\longrightarrow\Q,\quad
+(v,w)\longmapsto\int_X v\smile w
+\]
+is perfect. There are hence rational $(d-p,d-p)$ Hodge
+classes $u_0,\dots,u_{n-1}$ dual to the $v_i$,
+with $\int_X v_i u_j=\delta_{ij}$.
+By the assumed Hodge conjecture in these TWO codimensions,
+choose genuine algebraic cycles $Z_i\in\CH^p(X)_\Q$,
+$U_i\in\CH^{d-p}(X)_\Q$ representing $v_i,u_i$.
+The actual Chow correspondences
+\[
+\Gamma_{ji}=\pi_1^*U_i\cdot\pi_2^*Z_j
+\quad\in\CH^d(X\times X)_\Q
+\]
+implement all matrix units on $W_p$.
+Select $T=\sum_{i=0}^{n-1}(\Gamma_{i+1,i})_*$
+with subscripts modulo $n$, seed $Z_0$, and
+detector $\ell(\beta)=\int_X\beta\,u_0$.
+Then $M_{ij}$ is the same reversal permutation matrix and
+$\det M=(-1)^{(n-1)(n-2)/2}\ne0$.
+
+Therefore, with arbitrary rational Chow correspondences,
+canonical Betti push--pull and the full Hodge fibers,
+the all-varieties/all-weights FH existence statement is
+EQUIVALENT to the rational Hodge conjecture:
+\[
+\boxed{\mathsf{HC}_{\rm rational}\quad\Longleftrightarrow\quad
+\mathsf{GST\!-\!FH}_{\rm unrestricted\ Chow}.}
+\]
+In the reverse direction the direct moment-reconstruction theorem
+above supplies actual original-$X$ cycles.
+This equivalence is a precise CONDITIONAL REDUCTION,
+not an unconditional discovery that solves the conjecture.
+The dedicated research goal must be STRICTER:
+derive the required geometric fold and detector by an independent
+and UNIFORMLY SPECIFIED GST birth rule that does not take
+a preselected algebraic basis or dual cycles as input.
+Our positive elliptic-product constructions give a real model of
+such an explicit rule in the stated native sectors; universal
+source birth remains the hard hypothesis.
+
+\end{document}

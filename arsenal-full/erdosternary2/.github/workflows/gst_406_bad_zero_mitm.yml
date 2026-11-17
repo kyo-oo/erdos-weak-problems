@@ -1,0 +1,29 @@
+name: GST Problem 406 BAD Dyadic Zero Exclusion Exact Audit
+on:
+  push:
+    branches: [gpt6/problem406-universal-bad-exclusion-attack-20261030]
+    paths:
+      - scripts/gst_406_bad_zero_mitm.cpp
+      - .github/workflows/gst_406_bad_zero_mitm.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact_mitm:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile original four-state exact meet-in-the-middle test
+        shell: bash
+        run: |
+          set -euo pipefail
+          c++ -std=c++17 -O3 -Wall -Wextra -pedantic \
+            scripts/gst_406_bad_zero_mitm.cpp -o /tmp/gst_406_bad_zero_mitm
+      - name: Test designated lengths with no samples or truncation
+        shell: bash
+        run: |
+          set -euo pipefail
+          for L in 11 13 16 22 27 30 35 36; do
+            /tmp/gst_406_bad_zero_mitm "$L"
+          done
+          echo GST_BAD_DYADIC_ZERO_EXCLUSION_FINITE_AUDIT_PASS=1

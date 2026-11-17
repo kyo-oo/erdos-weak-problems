@@ -1,0 +1,104 @@
+name: GST Actual X Hodge Residual Projection
+on:
+  push:
+    branches: [research/mathbox-k3-diagonal-primitive-20261015, mathbox/residual-zero-direct-audit-20261015, research/gpt6-native-point-primitive-span-20261017]
+    paths:
+      - GSTActualXHodgeResidualProjection.lean
+      - GSTClassicalHodgePointClosureRelativeCut.lean
+      - .github/workflows/gst-actual-x-hodge-residual.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-actual-x-residual-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 95
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compatible verified GST dependency build
+        id: gst-build-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-actual-x-residual
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel compile directed cut geometry first
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTDirectedCutGeometry"
+          roots = ["GSTClassicalHodgePointClosureRelativeCut"]
+          EOF
+          if lake build GSTDirectedCutGeometry > gst-directed-cut-geometry.log 2>&1; then
+            echo "LEAN PASSED: directed cuts, exact flags, and native component source coverage"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-directed-cut-geometry.log | tail -n 155 || true
+            tail -n 125 gst-directed-cut-geometry.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-directed-cut-geometry.log; then exit 1; fi
+      - name: Kernel compile arbitrary X native Hodge projection and residual
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTActualXResidual"
+          roots = [
+            "GSTUniversalHodgeResidualProjection",
+            "GSTUniversalLefschetzCurveCycles",
+            "GSTClassicalHodgeGeometricMatrixRankLanding",
+            "GSTUniversalPrimitiveDivisorConstruction",
+            "GSTUniversalCodimensionTwoPrimitiveExtraction",
+            "GSTPrimitiveTransverseCycleExtraction",
+            "GSTGraphV2SelfExpandingCosmology",
+            "GSTPolarizedHodgeResidualEnergy",
+            "GSTUniversalResolvedSupportHodge",
+            "GSTActualXHodgeResidualProjection"
+          ]
+          EOF
+          if lake build GSTActualXResidual > gst-actual-x-residual.log 2>&1; then
+            echo "LEAN PASSED: exact algebraic source projection and residual on arbitrary X"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-actual-x-residual.log | tail -n 155 || true
+            tail -n 125 gst-actual-x-residual.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-actual-x-residual.log; then exit 1; fi
+      - name: Save verified GST dependency progress
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: ${{ steps.gst-build-cache.outputs.cache-primary-key }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-actual-x-hodge-residual-lean
+          path: |
+            gst-directed-cut-geometry.log
+            gst-actual-x-residual.log
+          if-no-files-found: warn

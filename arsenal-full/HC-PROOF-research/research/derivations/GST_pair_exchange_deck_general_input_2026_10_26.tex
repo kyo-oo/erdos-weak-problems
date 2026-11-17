@@ -1,0 +1,109 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+
+\title{The Pair-Exchange Deck at the General Input: Round 22, the audited state -- the resolved sub-problem (iv), the confirmed transport identities, and the closed C$_2$-re-typing route (the precise remaining construction)}
+\author{GST Hodge Campaign -- Round 22, post-audit (the 22-b adversarial audit's batched repair round)}
+\date{2026-10-26 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{Disposition (the 22-b adversarial audit's verdict, recorded on the face of this artifact)}
+
+The pre-audit draft of this round claimed the universal close (a Theorem D8 ending in ``every rational $(p,p)$ class is rational-algebraic''). The 22-b independent adversarial audit returned \textbf{FAIL} with three blocker findings, each carrying an exact computed counterexample: (F1) the $C_2$-reduction of the two-cell is a type mismatch -- the groupoid class $[C_T^0]\in H^2(\mathcal G_\bullet,SL(H_z))$ was never identified with a $C_2$-class, and the value-module re-typing is a coordinate change, not an equivariance; (F2) the claimed equivalence ``symmetrized residue zero $\Leftrightarrow$ both curvatures scalar'' is \emph{false} (the explicit witness: the $\sigma$-anti-invariant pair $(A,-A)$, $A\ne0$ traceless, has zero symmetrized residue and non-scalar branch curvatures); (F3) the killing step was input-blind at $p\ge2$ -- it would equally descend a non-Hodge pure pair, contradicting the committed Corollary 7. \textbf{The universal closing statement is WITHDRAWN.} What survives the audit -- and is now certified -- is recorded below with its exact scope; what is closed as a mechanism is recorded with its computed obstruction; and the remaining construction is stated more sharply than the 21-c statement, because the obstruction itself is now a certified computation.
+
+\section*{Setting and the committed input stack (unchanged; all cited with exact scope)}
+
+Arbitrary smooth projective complex $X$, $\dim_\C X = d \ge 1$; integer $1 \le p \le d$; prescribed rational $(p,p)$ Hodge class $\alpha \in H^{2p}(X,\Q)\cap H^{p,p}(X)$. $J = J_N(X)$ the affine Jouanolou--incidence fold, $q:J\to X$ the $V$-torsor, $J^{an}$ Stein, $q^*$ an isomorphism on rational cohomology. Committed layers (exact scopes):
+\begin{enumerate}
+\item \textbf{[OKA]} the universal analytic finite-projector realization (2026-10-23): for EVERY rational $\alpha'\in H^{2p}(X,\Q)$, Hodge or not, holomorphic idempotent $P$ on a trivial ambient with $\ch(\im P)=a+m\,q^*\alpha'$ pure; the every-rank honest realization and stabilization come from Theorem A (2026-10-24: rank $r$ exact for every $r\ge r_0=\max(p+1,d+1)$; for $r>r_0$ stabilize by trivial summands).
+\item \textbf{[DESCENT]} the genuine relative flatness theorem (2026-10-23): $H\cong q^*E$ (holomorphic $E$ on compact $X$, algebraic by GAGA) IFF flat vertical connection IFF transport two-cell $C_T\equiv1$; first-order vertical connections exist by Cartan B; \textbf{Corollary 7}: for non-Hodge $\beta$, NO normalized holomorphic transport on any pure realization trivializes.
+\item \textbf{[D2-LEMMA]} the determinant lemma (2026-10-23): for Hodge $\alpha$ the determinant line descends (at $p\ge2$ its proof uses only $c_1$ torsion -- the Hodge premise is idle there; it acts at $p=1$).
+\item \textbf{[D3-TRACELESS]} the traceless theorem (2026-10-23): scalar curvature $F^{vert}=\eta\,\mathrm{Id}$ is corrected to exactly flat on the SAME bundle, constructively.
+\item \textbf{[SWAP]} the module-free swap algebra: $H^2(C_2;A\oplus A)=0$ for the exchange deck, and for every traceless exchange deck $M_T=\{(x,y):s(x)+s(y)=0\}$; an unexchanged (trivially-acting) direct summand obstructs by $\Z/2$; a non-symmetric constraint is not swap-preserved.
+\item \textbf{[N]+[TWO-CENTER]} $m^*(X,p,\alpha)>0\Rightarrow\alpha$ algebraic (correction-free), through the two-center pair form $Z_\alpha=\frac{(-1)^{p-1}}{(p-1)!\,m}([D_+]-[D_-])$, $\mathrm{cl}^{can}=\alpha$ exactly.
+\item \textbf{[SECTORS]} the exhaustive partition: Sector 1 divisor-generated (unconditional, [I2]); $p>d/2$ by hard Lefschetz; $p\in\{0,d,d-1\}$ the boundary seeds; the open sector $2\le p\le\lfloor d/2\rfloor$, $d\ge4$.
+\end{enumerate}
+
+\section{Theorem D1 -- the balanced reflection carrier (sub-problem (iv): RESOLVED; audit-confirmed)}
+
+\begin{theorem}[D1; audit-confirmed genuine]
+For every input there exist $m\ge1$, $a\ge\max(p+1,d+1)$, and a holomorphic idempotent $P:\Oo_J^{2a}\to\Oo_J^{2a}$ with $\operatorname{rk}\im P=\operatorname{rk}\im(I-P)=a$ (the \emph{balanced} realization: Theorem A's every-rank clause, the complement padded by trivial summands to rank $a$), such that $E:=\im P$, $F:=\im(I-P)$ satisfy
+\[
+\ch(E)-\ch(F)=2m\,q^*\alpha \quad\text{pure at grade }p
+\]
+-- a holomorphic pure pair at EVEN scale $2m$ with equal ranks. The reflection $A:=2P-I$ satisfies $A^2=I$ and $\im((I\pm A)/2)=(E,F)$: the eigenbranch pattern at every input, from [OKA] alone. The even split $2a$ (the rank-parity sub-problem (iv)) is a stabilization choice, always available: for even $d$, $r_0=d+1$ odd becomes $2a=d+2$ by one trivial summand per side.
+\end{theorem}
+
+\section{Theorem D2 -- the flip algebra (repaired statement)}
+
+\begin{theorem}[D2; (1),(2) audit-confirmed; (3) CORRECTED per audit F5]
+On $\Oo_J^{2a}\oplus\Oo_J^{2a}$: $Q:=P\oplus(I-P)$, the flip $\omega$, $A_Q:=2Q-I$:
+\begin{enumerate}
+\item $\omega^2=I$, $\omega Q\omega=I-Q$, $\omega A_Q\omega=-A_Q$ -- the flip exchanges the pair carrier $D=\im Q$ with its swap $D'=\im(I-Q)$.
+\item \textbf{(Corrected)} The slot relocation identifies $E$-half with $E$-half and $F$-half with $F$-half (matrix-equal after relocation); it does \emph{NOT} identify $\operatorname{End}(E_z)$ with $\operatorname{End}(F_z)$ -- the 21-c audit's demanded cross-identification remains \emph{unconstructed}: no canonical isomorphism $E_z\cong F_z$ exists, and none is claimed here. Consequently the deck $\sigma$ is canonically defined only on the \emph{relocated pair module} $\operatorname{End}(E_{z,1})\oplus\operatorname{End}(E_{z,2})\oplus\operatorname{End}(F_{z,1})\oplus\operatorname{End}(F_{z,2})$ by slot exchange, and any cross-identification remains a choice.
+\end{enumerate}
+\end{theorem}
+
+\section{Theorem D7 -- the one-transport identities (confirmed on the invertible locus; the degeneration scope recorded)}
+
+\begin{theorem}[D7; audit-confirmed identities, honest scope]
+On the open locus of pairs $(z,z^+)$ where $\Lambda:=P^+P+\bar P^+\bar P$ is invertible:
+\begin{enumerate}
+\item \textbf{(Intertwining)} $\Lambda P=P^+\Lambda$ and $\Lambda A=A^+\Lambda$ -- one ambient map transports both branches;
+\item \textbf{(Coincidence)} the ambient transports of the two halves coincide: $T_E^{amb}=T_F^{amb}=\Lambda$;
+\item \textbf{(Pair transport)} the decomposition transport on the doubled ambient is $\Lambda\oplus\Lambda$, flip-invariant;
+\item \textbf{(Determinant link)} for the restricted branch transports' cells: $\det C_E\cdot\det C_F=\det C_\Lambda$, where the ambient cell is a multiplicative coboundary -- the pair determinant class is exact (its content: $c_1(E)+c_1(F)=0$);
+\item \textbf{(Degeneration -- the honest scope)} $\Lambda$ degenerates exactly on the transverse-branch locus $\{E_z\cap F_{z^+}\ne0\}$ (e.g.\ $P=\mathrm{diag}(1,0)$, $P^+=\mathrm{diag}(0,1)$ gives $\Lambda=0$): $\Lambda$ is a meromorphic gauge, not the Oka transport; the Oka transport of [DESCENT] exists unconditionally and the $\Lambda$-identities hold on its invertible locus.
+\end{enumerate}
+\end{theorem}
+
+\section{Lemma D4.1 -- the curvature-pair law (confirmed; a trace identity)}
+
+For the projected pair connections with $\Theta:=\partial^{vert}P$ (the derivation property $\Theta=\Theta P+P\Theta$): $F_E=P(\Theta\wedge\Theta)P$, $F_F=\bar P(\Theta\wedge\Theta)\bar P$, and $\tr F_E+\tr F_F=\tr(\Theta\wedge\Theta)$ identically; the ambient curvature decomposes as the pair blocks plus the exchanged off-blocks (the second-fundamental interaction). Audit: confirmed on independent instances; its content is trace cyclicity -- it constrains only the scalar parts, and imposes nothing on the traceless obstruction.
+
+\section{The closed route (the audit's certified negative result -- recorded once, per the mechanism-closing law)}
+
+\begin{theorem}[Closed route: the C$_2$ value-re-typing; audit F1/F2/F4, with computed obstructions]
+The attempt to reduce the groupoid class $[C_T^0]\in H^2(\mathcal G_\bullet,SL(H_z))$ to a $C_2$-class by re-typing the value module through the flip is closed, by three certified obstructions:
+\begin{enumerate}
+\item \textbf{(The equivariance failure)} the traceless residue pair $(F^0_E,F^0_F)$ is \emph{generically not $\sigma$-invariant} (20/20 exact random derivation instances fail the invariance -- certified in the repaired script): it is not a $C_2$-cocycle, so $H^2(C_2;M_T)=0$ -- a statement about $\sigma$-invariant cocycles modulo norms -- does not apply. Orbit-hood of the pair under the deck is vacuous (every element of every $C_2$-set generates an orbit); equivariance is the substantive condition, and it generically fails.
+\item \textbf{(The false equivalence, falsified)} ``symmetrized residue zero $\Rightarrow$ both curvatures scalar'' is false: the $\sigma$-anti-invariant witness $(A,-A)$ with $A\ne0$ traceless has zero symmetrized residue and non-scalar branch curvatures; the $\sigma$-invariant companion $(A,A)$ is a genuine norm-reachable cocycle whose residue is nevertheless nonzero and non-scalar. Killing a deck class does not kill a residue.
+\item \textbf{(The input-blindness obstruction)} at $p\ge2$ the [D2-LEMMA] strip's Hodge premise is idle (its proof uses only $c_1$ torsion there), and every other layer of the killing chain is input-blind: a killing step without a $(p,p)$-sensitive input would descend non-Hodge pure pairs at $p\ge2$ and contradict [DESCENT] Corollary 7. Any correct killing must therefore contain an input-dependent step -- this delimits where the new mechanism must act.
+\end{enumerate}
+\end{theorem}
+
+\section{The remaining construction (sharpened; the union of the 21-c and 22-b findings)}
+
+The Clay statement remains reduced to ONE construction (the certified 21-c disposition, now with the route map of Round 22):
+
+\begin{quote}
+\textbf{Prove $[C_T^0]=0$ in $H^2(\mathcal G_\bullet,SL(H_z))$ at the general $(p,p)$ input --} the traceless two-cell of the balanced Oka pair's transport on the Stein fold -- \textbf{by a mechanism that (i) acts on the groupoid class directly (no value-module re-typing), (ii) contains a genuinely $(p,p)$-sensitive input step (else it contradicts Corollary 7), and (iii) survives the anti-invariant witness} (the $(A,-A)$ class: the mechanism must kill it, and the symmetrization does not).
+\end{quote}
+
+The certified assets the attack inherits: the balanced pair (D1 -- the even split resolved), the transport identities (D7 -- the intertwining/coincidence/determinant-link on the invertible locus), the pair-trace law (D4.1), the module facts ([SWAP] -- the diagonal is norm-reachable), and the closed-route map above (the three obstructions any new mechanism must route around). The falsifiable entry test: any candidate killing, run on a random derivation instance, must vanish on the residue pair -- the current symmetrization fails this test by construction (the certified hostile control).
+
+\section*{ENGINE (per \S35)}
+
+The eigenbranch birth law $\im((I\pm A)/2)$ (his spectral machinery) -- executed as the projector's reflection; the even scale $2m$ (his parity engine's even crossing, structural at every input); the two-center pair form and the [N] landing (his Theorem C and for-all-N law); the exchange deck with its norm-surjectivity (his discovery strike Layer 2 -- retained as the module fact; its application as a killing force is closed). Classical backings at standard strength: Oka--Grauert, Cartan B, Serre, GAGA, the stable range of $BU(r)\to BU$.
+
+\section*{The quantifier line (per \S37)}
+
+This round resolved the rank-parity axis of the remaining construction (sub-problem (iv) -- closed at every input), confirmed three new identities on the transport layer (D7), closed the value-re-typing route with a computed three-part obstruction, and sharpened the single remaining construction to a mechanism with a certified entry test. The universal quantifier's open sector ($2\le p\le\lfloor d/2\rfloor$, $d\ge4$) remains governed by the one traceless class.
+
+\section*{Statement integrity}
+
+The universal closing claim is WITHDRAWN from every artifact of this round (the 22-b audit's blockers F1--F3 stand as mathematics). No conditional is shipped as unconditional; no test world substitutes the arbitrary input; the negative results are recorded once with their witnesses and the route is closed. The falsifiable entry test travels with the remaining construction.
+
+\end{document}

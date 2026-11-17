@@ -1,0 +1,61 @@
+name: GPT56 Monolith Import Path
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - .github/workflows/gpt56-monolith-import-path.yml
+  workflow_dispatch:
+
+jobs:
+  trace:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Trace exact stale import path
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          imp=re.compile(r'^\s*import\s+(.+?)\s*$')
+          def imports(mod):
+            p=Path(*mod.split('.')).with_suffix('.lean')
+            if not p.exists(): return []
+            out=[]
+            for raw in p.read_text(encoding='utf-8').splitlines():
+              code=raw.split('--',1)[0].rstrip()
+              m=imp.match(code)
+              if m: out += m.group(1).split()
+            return out
+          target='GSTHandwrittenPrefixOneLivePackage'
+          q=[('ErdosTernary2',['ErdosTernary2'])]
+          seen=set()
+          found=[]
+          while q:
+            mod,path=q.pop(0)
+            if mod in seen: continue
+            seen.add(mod)
+            for d in imports(mod):
+              np=path+[d]
+              if d==target: found.append(np)
+              elif Path(*d.split('.')).with_suffix('.lean').exists(): q.append((d,np))
+          print('STALE_PATH_COUNT=',len(found))
+          for p in found: print(' -> '.join(p))
+          print('=== DIRECT IMPORTERS ===')
+          for f in sorted(Path('.').glob('*.lean')):
+            txt=f.read_text(encoding='utf-8')
+            for raw in txt.splitlines():
+              if raw.strip()==f'import {target}': print(f'{f}: {raw.strip()}')
+          print('=== THREE WORLD IMPORTERS ===')
+          for f in sorted(Path('.').glob('*.lean')):
+            txt=f.read_text(encoding='utf-8')
+            if 'import GSTHandwrittenBigNThreeWorldFactors' in txt:
+              print(f)
+          print('=== SIGNED KERNEL IMPORTERS ===')
+          for f in sorted(Path('.').glob('*.lean')):
+            txt=f.read_text(encoding='utf-8')
+            if 'import GSTHandwrittenBigNSignedKernel' in txt:
+              print(f)
+          PY

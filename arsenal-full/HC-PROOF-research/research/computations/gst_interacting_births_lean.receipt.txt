@@ -1,0 +1,48 @@
+Revision-matched GitHub Lean evidence
+
+Commit: ebeecc7b4fd5e5135e46013ed1039fc49bfdd8e5
+Run: https://github.com/kyo-oo/HC-PROOF/actions/runs/39386684493
+Artifact ID: 12247393833
+Artifact digest: sha256:1e3d5d05a37f0321626616cc94ea165e735b8dbb16275d7660beb049045c573d
+Raw pinned-hodge-lean.log sha256: 53b9ca86126b0a39d0d9cb0a4c8046dc3d802578adcef8a3cf9a7b260c2cf9d6
+
+Build completed successfully (8967 jobs).
+Both complete JSON computation outputs agree with local recorded outputs.
+No sorryAx or declaration-uses-sorry receipt occurs in the complete log.
+All nine selected new axiom receipts use only propext, Classical.choice and Quot.sound.
+
+Verbatim selected axiom receipts follow:
+
+info: GSTUniversalResolvedSupportHodge.lean:2651:0: 'GSTUniversalResolvedSupportHodge.GSTNativeExceptionalInteraction.proper_blowup_mixed_push' depends on axioms: [propext]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:308:0: 'GSTQuadricPrimitiveRulingGeometry.second_blowup_mixed_push_is_negative_one' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:309:0: 'GSTQuadricPrimitiveRulingGeometry.mixed_birth_recovers_every_primitive_middle_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:310:0: 'GSTQuadricPrimitiveRulingGeometry.every_finite_mixed_birth_word_has_unit_readout' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:429:0: 'GSTQuadricPrimitiveRulingGeometry.second_world_matrix_unit_composition' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:430:0: 'GSTQuadricPrimitiveRulingGeometry.second_world_recovers_every_primitive_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:490:0: 'GSTQuadricPrimitiveRulingGeometry.parallel_birth_exact_schur' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:491:0: 'GSTQuadricPrimitiveRulingGeometry.parallel_birth_gram_has_positive_schur' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTQuadricPrimitiveRulingGeometry.lean:556:0: 'GSTQuadricPrimitiveRulingGeometry.parallel_birth_recovers_every_primitive_target' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

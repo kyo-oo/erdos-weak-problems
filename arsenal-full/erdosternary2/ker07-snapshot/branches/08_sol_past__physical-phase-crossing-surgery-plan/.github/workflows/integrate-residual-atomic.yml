@@ -1,0 +1,107 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0633 / 1132
+#    Path         : branches/sol_physical-phase-crossing-surgery-plan/.github/workflows/integrate-residual-atomic.yml
+#    Ref          : origin/sol/physical-phase-crossing-surgery-plan
+#    First-commit : 2026-08-16 18:40:18 +0530  (6226699)
+#    Last-commit  : 2026-08-16 18:40:18 +0530  (6226699)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 18:40:18 +0530  6226699  (ker07-dev)
+#        Stage residual integration surgery
+# ======================================================================
+
+name: Integrate residual atomic surgery
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/integrate-residual-atomic.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  integrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: sol/comparator-surgery
+      - name: Apply exact integration edits
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ErdosTernary2.lean')
+          s = p.read_text(encoding='utf-8')
+
+          # 1. Reuse the independently kernel-green information-descent equation.
+          needle = 'import Mathlib.Tactic.Ring\n'
+          if 'import InformationDescentScratch\n' not in s:
+              assert needle in s
+              s = s.replace(needle, needle + 'import InformationDescentScratch\n', 1)
+
+          start = s.index('theorem gst_shared_information_carry_equation\n')
+          end = s.index('/-- Any affine information carry remains strictly inside', start)
+          replacement = '''theorem gst_shared_information_carry_equation
+    (A z T q : Nat) :
+    gstAffineMulCarry A (1 + 4*z) (4*T) q + A * gstCarry T q =
+      gstAffineMulCarry 4 1 (z + A*T) q +
+        4 * gstAffineMulCarry A z T q := by
+  simpa [gstAffineMulCarry, gstCarry,
+    gstAffineMulCarryS, gstCarryS] using
+    (gst_shared_information_carry_equationS A z T q)
+
+'''
+          s = s[:start] + replacement + s[end:]
+
+          # 2. Reactivate the exact legacy residual proof block that supplies
+          #    gst_residual_navigation_lift.  Only comment delimiters change.
+          opening = '''/-
+  Legacy residual overproof.  The final digit theorem does not require a pure
+  Navigation witness at every exponent; the two-wave theorem below is strictly
+  weaker and sufficient.  This block remains as proof archaeology only.
+
+'''
+          assert opening in s
+          s = s.replace(opening, '''/-
+  Legacy residual overproof reactivated for the atomic prefix-one closure.
+  The declarations below are kernel checked; this comment is descriptive only.
+-/
+
+''', 1)
+
+          closing = '''
+-/
+
+-- ============================================================================
+-- §PREFIX-ONE SEED-ONE SURGERY (Sol Round 4 — Locked)
+'''
+          assert closing in s
+          s = s.replace(closing, '''
+
+-- ============================================================================
+-- §PREFIX-ONE SEED-ONE SURGERY (Sol Round 4 — Locked)
+''', 1)
+
+          p.write_text(s, encoding='utf-8')
+          PY
+
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('ErdosTernary2.lean').read_text(encoding='utf-8')
+          assert 'import InformationDescentScratch' in s
+          assert 'theorem gst_residual_navigation_lift : GSTResidualNavigationLift :=' in s
+          assert 'simpa [gstAffineMulCarry, gstCarry,' in s
+          print('integration text gates: OK')
+          PY
+
+      - name: Commit surgery and remove one-shot workflow
+        run: |
+          rm .github/workflows/integrate-residual-atomic.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ErdosTernary2.lean .github/workflows/integrate-residual-atomic.yml
+          git commit -m 'Integrate kernel-green residual lift and carry equation'
+          git push origin HEAD:sol/comparator-surgery

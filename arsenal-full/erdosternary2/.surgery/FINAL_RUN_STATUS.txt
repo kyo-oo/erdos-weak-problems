@@ -1,0 +1,344 @@
+FINAL_RUN_HEAD=6ece49ec49847b343d7e66beb6d70d750b4ae1f3
+LEAN_PREP_OUTCOME=success
+DEPENDENCY_BUILD_RC=1
+MONOLITH_BUILD_RC=1
+COMPARATOR_RC=99
+GREEN_COMPARATOR=0
+--- LOCAL IMPORT ORDER ---
+GSTTactic
+GSTGraphV2CoupledUFlux
+GSTGraphV2CoupledUPhysicalBridge
+GST2DMixedEmergence
+GSTU2DAtomicBridge
+GSTU2DEventTransport
+GSTU2DExactCrossingCharge
+GSTCanonicalSevenAxisBridge
+GSTGraphV2InfiniteControl
+GSTGraphV2PerfectPowerAncestry
+GSTU2DCanonicalPhaseDensity
+GSTGraphV2UnifiedPowerRectangle
+GSTGraphV2UnifiedVerticalTelescope
+GSTGraphV2PerfectPowerBlockProbe
+GSTGraphV2HandwrittenOmegaUBlock
+GSTGraphV2HandwrittenExponentialCascade
+GSTGraphV2HandwrittenExponentialLTE
+GSTGraphV2HandwrittenAnchoredCocycle
+GSTU2DPureDivergence83
+GSTGraphV2Production
+GSTGraphV2ProductionLaws
+GSTV2InfiniteCore
+GSTInfiniteCollision
+GSTInfiniteBadTransport
+GSTInfiniteGateTransport
+GSTInfiniteCoupledLedger
+GSTGraphV2InfiniteControllerBridge
+GSTU2DSharpCrossingBlock
+GSTFinalPurePowerResidueTransplant
+GSTGraphV2InfiniteControlScratch
+GSTGraphV2InfiniteBigNDichotomyScratch
+GSTGraphV2PhysicalSignedKernelTelescopeScratch
+GSTHandwrittenPhysicalNoBig1
+InformationDescentScratch
+GSTHandwrittenChildFirstBig1
+GSTHandwrittenHorizontalParentBridge
+GSTHandwrittenPrefixOneLivePackage
+GSTHandwrittenBigNThreeWorldFactors
+GSTHandwrittenBigNSignedKernel
+GSTCanonicalFirstGateControl
+GSTCanonicalEnergyControl
+GSTPrefixOnePhaseIncidenceControl
+InformationGeometryScratch
+InformationStateScratch
+InformationBadTraceScratch
+OriginTransducerScratch
+InformationRegenerationScratch
+GSTGraphV2Scratch
+GSTResidueSpacetimeScratch
+GSTPrefixOneSpacetimeIncidenceControl
+InformationLocalizationScratch
+CarryWordScratch
+InformationCarryWordBridgeScratch
+InformationFluxScratch
+InformationForcingScratch
+InformationIterationScratch
+InformationQuotientScratch
+PurePowerCarrierScratch
+CanonicalPrefixScratch
+CanonicalOriginModulusScratch
+PrefixOneOriginPhaseRecursionScratch
+PurePowerBadAxisScratch
+BadLanguageMagnitudeScratch
+PurePowerTailReductionScratch
+HorizontalTrapWidthDescentScratch
+StripConservationScratch
+GSTGraphV2FluxScratch
+GSTGraphV2BlockScratch
+GSTExponentLiftScratch
+PurePowerResidueGraphScratch
+PhaseCycleInformationScratch
+CanonicalCausalityScratch
+NavigationResidueCutScratch
+CanonicalOriginCutIntersectionScratch
+--- MONOLITH BUILD TAIL ---
+      GSTPhysicalKernel.binaryColumnDigit R p r)
+  (h0 : GSTPhysicalKernel.binaryColumnDigit R p 0 ≠ 0) : False
+gpt56_physical_path_forces_first_big1 (R p : ℕ) (h0 : GSTPhysicalKernel.binaryColumnDigit R p 0 ≠ 0) :
+  ∃ N, GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit R p r) N
+'gpt56_binary_residue_gap_doubles' depends on axioms: [propext, Quot.sound]
+'gpt56_physical_noBig1_impossible' depends on axioms: [propext, Quot.sound]
+'gpt56_physical_path_forces_first_big1' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== LOCAL MODULE: InformationDescentScratch ===
+InformationDescentScratch.lean:199:21: warning: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+=== LOCAL MODULE: GSTHandwrittenChildFirstBig1 ===
+gpt56_child_digit_two_forces_first_big1 (T q : ℕ) (hd2 : _root_.gstDigitS T q = 2) :
+  ∃ N, 1 ≤ N ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N
+gpt56_child_digit_two_forces_destroy_boundary (T q : ℕ) (hd2 : _root_.gstDigitS T q = 2) :
+  ∃ N,
+    1 ≤ N ∧
+      GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+        have j := N - 1;
+        GSTPhysicalKernel.binaryColumnCarry T q j = 0 ∧
+          GSTPhysicalKernel.binaryColumnDigit T q j = 2 ∧
+            gstBinaryBridgeMassS (GSTPhysicalKernel.binaryColumnCarry T q j)
+                  (GSTPhysicalKernel.binaryColumnDigit T q j) =
+                4 ∧
+              gstBinaryBridgeEventS (GSTPhysicalKernel.binaryColumnCarry T q j)
+                  (GSTPhysicalKernel.binaryColumnDigit T q j) =
+                5
+'gpt56_child_digit_two_forces_first_big1' depends on axioms: [propext, Classical.choice, Quot.sound]
+'gpt56_child_digit_two_forces_destroy_boundary' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== LOCAL MODULE: GSTHandwrittenHorizontalParentBridge ===
+gpt56_parent_multiplier_is_binary_bridge (s : ℕ) : 4 ^ 3 ^ s = 2 ^ (2 * 3 ^ s)
+gpt56_parent_binary_endpoint_digit (s T q : ℕ) :
+  GSTPhysicalKernel.binaryColumnDigit T q (2 * 3 ^ s) = _root_.gstDigitS (4 ^ 3 ^ s * T) q
+gpt56_no_big1_before_parent_endpoint_digit_two (s T q : ℕ) (hd2 : _root_.gstDigitS T q = 2)
+  (hno : ∀ r ≤ 2 * 3 ^ s, GSTPhysicalKernel.binaryColumnDigit T q r ≠ 1) : _root_.gstDigitS (4 ^ 3 ^ s * T) q = 2
+'gpt56_parent_multiplier_is_binary_bridge' depends on axioms: [propext]
+'gpt56_no_big1_before_parent_endpoint_digit_two' depends on axioms: [propext, Classical.choice, Quot.sound]
+=== LOCAL MODULE: GSTHandwrittenPrefixOneLivePackage ===
+GSTHandwrittenPrefixOneLivePackage.lean:14:14: error: Function expected at
+  GSTNavigationWitness
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  (gstNavigationConstant (s + 1) n)
+
+Hint: The identifier `GSTNavigationWitness` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:15:12: error: Function expected at
+  GSTOmegaInfiniteBadTrace
+but this term has type
+  ?m.2
+
+Note: Expected a function because this term is being applied to the argument
+  s
+
+Hint: The identifier `GSTOmegaInfiniteBadTrace` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:16:13: error: Function expected at
+  gstNavigationConstant
+but this term has type
+  ?m.3
+
+Note: Expected a function because this term is being applied to the argument
+  (s + 1)
+
+Hint: The identifier `gstNavigationConstant` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:18:13: error: Function expected at
+  c
+but this term has type
+  ?m.4
+
+Note: Expected a function because this term is being applied to the argument
+  s
+
+Hint: The identifier `c` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:20:6: error: Function expected at
+  gstDigit
+but this term has type
+  ?m.5
+
+Note: Expected a function because this term is being applied to the argument
+  T
+
+Hint: The identifier `gstDigit` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:21:7: error: Function expected at
+  gstCarry
+but this term has type
+  ?m.6
+
+Note: Expected a function because this term is being applied to the argument
+  T
+
+Hint: The identifier `gstCarry` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:21:26: error: Function expected at
+  gstCarry
+but this term has type
+  ?m.6
+
+Note: Expected a function because this term is being applied to the argument
+  T
+
+Hint: The identifier `gstCarry` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:25:6: error: Function expected at
+  GSTSeededAffineBadTrace
+but this term has type
+  ?m.7
+
+Note: Expected a function because this term is being applied to the argument
+  1
+
+Hint: The identifier `GSTSeededAffineBadTrace` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:27:11: error: Function expected at
+  gstNavigationConstant
+but this term has type
+  x✝⁴
+
+Note: Expected a function because this term is being applied to the argument
+  (s + 1)
+GSTHandwrittenPrefixOneLivePackage.lean:25:37: error: unsolved goals
+x✝⁶ : Sort u_1
+GSTNavigationWitness : x✝⁶
+x✝⁵ : Sort u_2
+GSTOmegaInfiniteBadTrace : x✝⁵
+x✝⁴ : Sort u_3
+gstNavigationConstant : x✝⁴
+x✝³ : Sort u_4
+c : x✝³
+x✝² : Sort u_5
+gstDigit : x✝²
+x✝¹ : Sort u_6
+gstCarry : x✝¹
+x✝ : Sort u_7
+GSTSeededAffineBadTrace : x✝
+s n : ℕ
+hs : 1 ≤ s
+hn : 1 ≤ n
+hchild : sorry
+hBad : sorry
+⊢ ∃ q N,
+    sorry = 2 ∧
+      (sorry = 0 ∨ sorry = 3) ∧
+        1 ≤ N ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit sorry q r) N ∧ sorry
+GSTHandwrittenPrefixOneLivePackage.lean:57:14: error: Function expected at
+  GSTNavigationWitness
+but this term has type
+  ?m.1
+
+Note: Expected a function because this term is being applied to the argument
+  (gstNavigationConstant (s + 1) n)
+
+Hint: The identifier `GSTNavigationWitness` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:58:12: error: Function expected at
+  GSTOmegaInfiniteBadTrace
+but this term has type
+  ?m.2
+
+Note: Expected a function because this term is being applied to the argument
+  s
+
+Hint: The identifier `GSTOmegaInfiniteBadTrace` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:59:13: error: Function expected at
+  gstNavigationConstant
+but this term has type
+  ?m.3
+
+Note: Expected a function because this term is being applied to the argument
+  (s + 1)
+
+Hint: The identifier `gstNavigationConstant` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:61:13: error: Function expected at
+  c
+but this term has type
+  ?m.4
+
+Note: Expected a function because this term is being applied to the argument
+  s
+
+Hint: The identifier `c` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:63:6: error: Function expected at
+  gstDigit
+but this term has type
+  ?m.5
+
+Note: Expected a function because this term is being applied to the argument
+  T
+
+Hint: The identifier `gstDigit` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:64:7: error: Function expected at
+  gstCarry
+but this term has type
+  ?m.6
+
+Note: Expected a function because this term is being applied to the argument
+  T
+
+Hint: The identifier `gstCarry` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:64:26: error: Function expected at
+  gstCarry
+but this term has type
+  ?m.6
+
+Note: Expected a function because this term is being applied to the argument
+  T
+
+Hint: The identifier `gstCarry` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:65:6: error: Function expected at
+  GSTSeededAffineBadTrace
+but this term has type
+  ?m.7
+
+Note: Expected a function because this term is being applied to the argument
+  1
+
+Hint: The identifier `GSTSeededAffineBadTrace` is unknown, and Lean's `autoImplicit` option causes an unknown identifier to be treated as an implicitly bound variable with an unknown type. However, the unknown type cannot be a function, and a function is what Lean expects here. This is often the result of a typo or a missing `import` or `open` statement.
+GSTHandwrittenPrefixOneLivePackage.lean:83:7: error: Function expected at
+  gstNavigationConstant
+but this term has type
+  x✝⁴
+
+Note: Expected a function because this term is being applied to the argument
+  (s + 1)
+gpt56_prefix_one_live_handwritten_package.{u_1, u_2, u_3, u_4, u_5, u_6, u_7, u_8, u_9} {x✝ : Sort u_1}
+  {GSTNavigationWitness : x✝} {x✝¹ : Sort u_2} {GSTOmegaInfiniteBadTrace : x✝¹} {x✝² : Sort u_3}
+  {gstNavigationConstant : x✝²} {x✝³ : Sort u_4} {c : x✝³} {x✝⁴ : Sort u_5} {gstDigit : x✝⁴} {x✝⁵ : Sort u_6}
+  {gstCarry : x✝⁵} {x✝⁶ : Sort u_7} {GSTSeededAffineBadTrace : x✝⁶} (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n) (hchild : sorry)
+  (hBad : sorry) :
+  have T := sorry;
+  have A := 4 ^ 3 ^ s;
+  have X := sorry / 3 + A * T;
+  ∃ q N,
+    sorry = 2 ∧
+      (sorry = 0 ∨ sorry = 3) ∧ 1 ≤ N ∧ GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧ sorry
+gpt56_prefix_one_live_destroy_boundary.{u_1, u_2, u_3, u_4, u_5, u_6, u_7, u_8, u_9} {x✝ : Sort u_1}
+  {GSTNavigationWitness : x✝} {x✝¹ : Sort u_2} {GSTOmegaInfiniteBadTrace : x✝¹} {x✝² : Sort u_3}
+  {gstNavigationConstant : x✝²} {x✝³ : Sort u_4} {c : x✝³} {x✝⁴ : Sort u_5} {gstDigit : x✝⁴} {x✝⁵ : Sort u_6}
+  {gstCarry : x✝⁵} {x✝⁶ : Sort u_7} {GSTSeededAffineBadTrace : x✝⁶} (s n : ℕ) (hs : 1 ≤ s) (hn : 1 ≤ n) (hchild : sorry)
+  (hBad : sorry) :
+  have T := sorry;
+  have A := 4 ^ 3 ^ s;
+  have X := sorry / 3 + A * T;
+  ∃ q N,
+    sorry = 2 ∧
+      (sorry = 0 ∨ sorry = 3) ∧
+        sorry ∧
+          1 ≤ N ∧
+            GSTFirstBig1AtS (fun r => GSTPhysicalKernel.binaryColumnDigit T q r) N ∧
+              have j := N - 1;
+              GSTPhysicalKernel.binaryColumnCarry T q j = 0 ∧
+                GSTPhysicalKernel.binaryColumnDigit T q j = 2 ∧
+                  gstBinaryBridgeMassS (GSTPhysicalKernel.binaryColumnCarry T q j)
+                        (GSTPhysicalKernel.binaryColumnDigit T q j) =
+                      4 ∧
+                    gstBinaryBridgeEventS (GSTPhysicalKernel.binaryColumnCarry T q j)
+                        (GSTPhysicalKernel.binaryColumnDigit T q j) =
+                      5
+'gpt56_prefix_one_live_handwritten_package' depends on axioms: [propext, sorryAx]
+'gpt56_prefix_one_live_destroy_boundary' depends on axioms: [propext, sorryAx]
+LOCAL_MODULE_FAILED=GSTHandwrittenPrefixOneLivePackage RC=1
+--- COMPARATOR TAIL ---
+COMPARATOR_SKIPPED_BECAUSE_MONOLITH_BUILD_FAILED

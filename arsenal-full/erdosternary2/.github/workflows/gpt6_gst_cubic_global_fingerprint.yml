@@ -1,0 +1,33 @@
+name: GST cubic all-exponent original hGate fingerprint
+on:
+  push:
+    branches: [gpt6/problem406-cubic-universal-research-20261029]
+    paths: [GSTWorldtraceCubicGlobalFingerprint.lean, GSTWorldtraceCubicBlockLift.lean, .github/workflows/gpt6_gst_cubic_global_fingerprint.yml]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  cubic-global:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Compile canonical GST dependencies and exact cubic block law
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectExistence
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceQuadraticBlockLift.olean GSTWorldtraceQuadraticBlockLift.lean
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCubicBlockLift.olean GSTWorldtraceCubicBlockLift.lean
+      - name: Kernel check same-row cubic original CommonTwo fingerprint
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTWorldtraceCubicGlobalFingerprint.lean 2>&1 | tee cubic-global-proof.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.|gst_four_power_direct_existence_inline' cubic-global-proof.log
+          echo GST_CUBIC_GLOBAL_ORIGINAL_HGATE_FINGERPRINT_PASS=1

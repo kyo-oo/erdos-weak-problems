@@ -1,0 +1,78 @@
+name: GPT56 Canonical Tail Escape CI
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Verify committed tree hygiene
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 .surgery/clean_sorry_check_hits.py
+          git diff -- . ':!/.lake'
+          git diff --check
+          if ! git diff --quiet -- . ':!/.lake'; then
+            echo 'TAIL_ESCAPE_DIRTY_TREE=1'
+            exit 1
+          fi
+          echo 'TAIL_ESCAPE_COMMITTED_TREE_CLEAN=1'
+
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile committed production monolith
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build ErdosTernary2
+          echo 'TAIL_ESCAPE_MONOLITH_GREEN=1'
+
+      - name: Kernel axiom audit no-axiom transplant endpoints
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat > ProductionTailEscapeAudit.lean <<'EOF'
+          import GSTPrefixOneOntologicalEscape
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_provider
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_commonTwoGeThree
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_prefixHitGeThree
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_no_bad_affine_channel_one
+          EOF
+          lake env lean ProductionTailEscapeAudit.lean 2>&1 | tee production-tail-escape-axioms.log
+          if grep -Fq 'sorryAx' production-tail-escape-axioms.log; then
+            echo 'TAIL_ESCAPE_FORBIDDEN_SORRYAX=1'
+            exit 1
+          fi
+          if grep -Fq 'gst_four_power_direct_existence_inline' production-tail-escape-axioms.log; then
+            echo 'TAIL_ESCAPE_FORBIDDEN_INLINE_AXIOM_REACHED_NOAXIOM_ENDPOINT=1'
+            exit 1
+          fi
+          echo 'TAIL_ESCAPE_NOAXIOM_AUDIT_GREEN=1'

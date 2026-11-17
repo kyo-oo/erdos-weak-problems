@@ -1,0 +1,75 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0638 / 1132
+#    Path         : branches/sol_5c579-final-bigN-right-chord-atomic/.github/workflows/integrate-residual-atomic-v2.yml
+#    Ref          : origin/sol/5c579-final-bigN-right-chord-atomic
+#    First-commit : 2026-08-16 18:40:58 +0530  (abfbda8)
+#    Last-commit  : 2026-08-16 18:40:58 +0530  (abfbda8)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 18:40:58 +0530  abfbda8  (ker07-dev)
+#        Run minimal residual integration surgery
+# ======================================================================
+
+name: Residual integration v2
+on:
+  push:
+    branches:
+      - sol/comparator-surgery
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: sol/comparator-surgery
+      - name: Edit
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('ErdosTernary2.lean')
+          s=p.read_text(encoding='utf-8')
+          if 'import InformationDescentScratch\n' not in s:
+              s=s.replace('import Mathlib.Tactic.Ring\n','import Mathlib.Tactic.Ring\nimport InformationDescentScratch\n',1)
+          a=s.index('theorem gst_shared_information_carry_equation\n')
+          b=s.index('/-- Any affine information carry remains strictly inside',a)
+          r='''theorem gst_shared_information_carry_equation
+    (A z T q : Nat) :
+    gstAffineMulCarry A (1 + 4*z) (4*T) q + A * gstCarry T q =
+      gstAffineMulCarry 4 1 (z + A*T) q +
+        4 * gstAffineMulCarry A z T q := by
+  simpa [gstAffineMulCarry, gstCarry, gstAffineMulCarryS, gstCarryS] using
+    (gst_shared_information_carry_equationS A z T q)
+
+'''
+          s=s[:a]+r+s[b:]
+          op='''/-
+  Legacy residual overproof.  The final digit theorem does not require a pure
+  Navigation witness at every exponent; the two-wave theorem below is strictly
+  weaker and sufficient.  This block remains as proof archaeology only.
+
+'''
+          if op in s:
+              s=s.replace(op,'/- Legacy residual proof reactivated for atomic closure. -/\n\n',1)
+          cl='''
+-/
+
+-- ============================================================================
+-- §PREFIX-ONE SEED-ONE SURGERY (Sol Round 4 — Locked)
+'''
+          if cl in s:
+              s=s.replace(cl,'\n\n-- ============================================================================\n-- §PREFIX-ONE SEED-ONE SURGERY (Sol Round 4 — Locked)\n',1)
+          p.write_text(s,encoding='utf-8')
+          PY
+          grep -q 'import InformationDescentScratch' ErdosTernary2.lean
+          grep -q 'theorem gst_residual_navigation_lift : GSTResidualNavigationLift :=' ErdosTernary2.lean
+          rm -f .github/workflows/integrate-residual-atomic.yml .github/workflows/integrate-residual-atomic-v2.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add ErdosTernary2.lean .github/workflows
+          git commit -m 'Integrate residual lift and green carry bridge'
+          git push origin HEAD:sol/comparator-surgery

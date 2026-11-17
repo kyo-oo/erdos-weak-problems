@@ -1,0 +1,16 @@
+RECEIPTS — engine107es.py (W72-107K, S071) — THE ERDOS-SZEKERES PACKAGE ENGINE
+seed 20261117 ; deterministic ; python3 ; exact integer arithmetic
+
+PASS MS — every permutation of length (r-1)(s-1)+1 for (r,s) in [(3, 3), (2, 4), (4, 2), (3, 4)] (5208 perms) + 3000 random length-13 sequences: LIS >= r or LDS >= s
+PASS MS-TIGHT — for (r,s) in {(3,3),(4,4),(3,5),(5,3)}: the block construction of length (r-1)(s-1) has LIS <= r-1 AND LDS <= s-1 (the ES bound is tight)
+PASS CC — cups-caps: 300 random general-position sets per (k,l) in [(3, 3), (3, 4), (4, 3), (4, 4), (3, 5), (5, 3)] at size C(k+l-4,k-2)+1 — every one contains a k-cup or l-cap (found: {'cup': 1023, 'cap': 777})
+PASS U-BINOM — f(n) <= C(2n-4,n-2)+1 table n=3..8 = [3, 7, 21, 71, 253, 925] (fresh); cups/caps are convex (200-sample conversion check)
+PASS WITNESS-FAMILY — the lower-bound witness family 2^(n-2): n=3 (2 pts), n=4 (4 pts), n=5 (8 pts, kernel witness), n=6 (16 pts, kernel witness) — every set general position, zero convex n-gons by exhaustive subset scan; the general doubling theorem f(n) >= 2^{n-2}+1 is cited-classical [ErSz35] in ES_PACKAGE_PROOF.md
+PASS E3-E4 — f(3)=3 exactly (2000 random triangles convex + the 2-point witness); f(4)=5 exactly (the 3+1 witness has no convex 4; 5500 random+adversarial 5-point sets all contain convex 4)
+PASS E5-WITNESS — n5 witness: 8 pts GP, no convex 5 (56 subsets); n6 witness: 16 pts GP, no convex 6 (8008 subsets) — f(5) >= 9, f(6) >= 17 (the kernel witness family, re-verified)
+PASS E5-SWEEP — 1300 random+adversarial 9-point general-position sets: every one contains a convex 5 (the f(5) <= 9 sweep lane)
+PASS LAW-SPOTCHECKS — 11/11 arsenal law spot-checks pass (CardinalWorlds, ErdosTernary2)
+PASS NEGATIVE-CONTROLS — hull-expanding 9th point yields convex 5=True; corrupted doubling yields convex 6=True; collinear triple flagged=True
+
+TOTAL: 10/10 PASS, wall 0.4s
+ES_ENGINE_GREEN=1

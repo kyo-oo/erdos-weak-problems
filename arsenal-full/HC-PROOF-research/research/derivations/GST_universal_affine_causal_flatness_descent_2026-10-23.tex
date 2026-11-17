@@ -1,0 +1,1183 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=21mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Universal Spatial Folding: Genuine Higher-Causal Holomorphic Connections, Flatness, and Original-World Algebraic Descent}
+\date{23 October 2026}
+\begin{document}\maketitle
+
+\begin{abstract}
+This is an attempt to close the exact geometric arrow of the
+owner's dimensionless-General-Space to arbitrarily high-dimensional
+actual-realization argument, without replacing the target by
+an elliptic test family or by a Chow-source compiler.
+The existing all-original-$X$ Jouanolou incidence space has
+nontrivial geometry beyond its homotopy type: it is an affine
+TORSOR under an algebraic vector bundle $V$.
+For every rational cohomology class, arbitrary original
+smooth projective $X$, and every admissible degree, we construct
+actual holomorphic bundles on the Stein total space and prove
+that (1) holomorphic vertical first-order connections ALWAYS exist,
+(2) holomorphic causal transports along EVERY individual translation
+always exist, and (3) a precise missing HIGHER-CAUSAL coherence
+equation is flatness of their two-direction vertical curvature.
+For every original $X$, a holomorphic bundle on the fold has a
+flat vertical holomorphic connection if and only if it is the
+pullback of an actual holomorphic bundle on compact $X$;
+projective GAGA then identifies the required algebraic
+geometry. For any rational Hodge class, existence of TWO such
+flat original-X compatible bundles with the prescribed entire
+Chern-character difference is equivalent to a genuine original-X
+canonical rational Chow representative.
+We prove that adjoining any number of TRIVIAL extra fold
+dimensions to a fixed holomorphic bundle does not remove this
+curvature-descent obstruction.
+The theorem isolates the genuine higher causal 2-cell relation;
+a first-order Oka connection is not itself the all-original-$X$
+integrability theorem. No conclusion about universal flatness
+is presumed.
+\end{abstract}
+
+\section{Original-world target and the actual GST geometry}
+Fix ANY connected smooth projective complex variety
+$X$ of complex dimension $d$, any $1\le p\le d$,
+and any rational Hodge class
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+The exact desired target is a genuine
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+$\mathrm{cl}^{can}_X(Z_\alpha)=\alpha$.
+
+Choose any genuine projective embedding
+$X\hookrightarrow\mathbb P^N$, allowing arbitrarily
+large N, and form the ACTUAL affine incidence fold
+\[
+ J=J_N(X)=\{(x,\ell)\in
+ X\times(\mathbb P^N)^\vee:\ell(x)\ne0\},
+ \qquad q:J\longrightarrow X.
+ \tag{1}
+\]
+Let $L=O_X(-1)$, and let $Q$ be its quotient
+in the tautological exact sequence
+\[
+ 0\to L\to O_X^{N+1}\to Q\to0.
+ \tag{2}
+\]
+The space of linear retractions
+$O_X^{N+1}\to L$ of the inclusion
+$L\hookrightarrow O_X^{N+1}$
+is an affine bundle under the rank-N
+algebraic vector bundle
+\[
+ \boxed{V=\operatorname{Hom}(Q,L).}           \tag{3}
+\]
+Indeed a nonincident dual hyperplane $\ell$
+specifies the retraction
+$w\mapsto(\ell(w)/\ell(x))x$; two retractions
+differ by a section of Hom(Q,L).
+Thus q is a genuine algebraic V-torsor.
+Its groupoid of causal translations has arrow scheme
+\[
+ G_1=V\times_X J,\qquad
+ a:G_1\to J,\quad(v,z)\mapsto z+v,
+ \tag{4}
+\]
+and composable two- and three-arrow schemes
+$G_2=V\times_XV\times_XJ$,
+$G_3=V\times_XV\times_XV\times_XJ$.
+Both $J$ and all $G_k$ are smooth affine
+algebraic (the total space of a vector
+bundle over an affine base is affine),
+hence their analytifications are Stein.
+The fibers of q are holomorphically
+$\mathbb C^N$ and simply connected.
+The q-pullback on rational Betti cohomology
+is an isomorphism of rational MHS.
+
+\section{Universal analytic source first: NO algebraic cycle input}
+\begin{lemma}[All original worlds have honest analytic fold bundles]
+For ANY rational $\alpha\in H^{2p}(X,\mathbb Q)$,
+not just those of type $(p,p)$,
+there exist positive m and finite-rank honest
+complex topological vector bundles $E_+,E_-$ on X
+whose full topological Chern-character difference is
+\[
+ \mathrm{ch}_{top}(E_+)-\mathrm{ch}_{top}(E_-)
+   =m\alpha.
+ \tag{5}
+\]
+After pullback to Stein J, these bundles have honest
+holomorphic realizations $H_+,H_-$ with
+\[
+ \mathrm{ch}_{top}(H_+)-\mathrm{ch}_{top}(H_-)
+   =m q^*\alpha\quad\text{in ALL degrees}.
+ \tag{6}
+\]
+If desired they can be included as holomorphic
+direct summands of finite trivial holomorphic bundles
+on J, by choosing finite topological complements and
+applying Oka--Grauert.
+\end{lemma}
+\begin{proof}
+The rational topological Chern character
+$K^0_{top}(X)\otimes\mathbb Q
+ \cong H^{even}(X,\mathbb Q)$
+produces a rational virtual class with
+Chern character concentrated in degree $2p$.
+Clear denominators and write its integral K-class
+as a difference of actual finite vector bundles
+$E_+-E_-$. Pull back to the Stein manifold
+$J^{an}$. Oka--Grauert replaces these
+topological bundles by honest holomorphic bundles
+without changing their topological Chern characters.
+Finite trivial complements are constructed at the
+topological level and transported holomorphically
+by Oka as in the predecessor manuscript.
+\end{proof}
+
+\section{Automatic FIRST-ORDER causal transport on the Stein world}
+For a holomorphic vector bundle H on J,
+let $\mathrm{At}_{J/X}(H)$ be its
+RELATIVE Atiyah algebroid.
+Its exact holomorphic extension is
+\[
+ 0\to\operatorname{End}(H)
+ \to\mathrm{At}_{J/X}(H)
+ \to T_{J/X}^{hol}\to0.
+ \tag{7}
+\]
+A holomorphic splitting is a
+relative holomorphic connection
+$\nabla^{vert}$ along the actual
+affine-fold directions.
+
+\begin{theorem}[All-X, all-dimensional AUTOMATIC first causal layer]
+For every original X, every fold dimension N
+and EVERY holomorphic bundle H on $J^{an}$,
+an honest holomorphic relative vertical connection
+$\nabla^{vert}$ always exists.
+No Hodge or Chow hypothesis is required.
+\end{theorem}
+\begin{proof}
+The obstruction to splitting (7) lies in
+\[
+ \operatorname{Ext}^1_{\mathcal O_J}
+ (T_{J/X}^{hol},\operatorname{End}H)
+ \cong H^1(J,\Omega^1_{J/X}
+                 \otimes\operatorname{End}H).
+ \tag{8}
+\]
+All bundles in this expression are locally free
+and coherent. J is Stein, so Cartan's theorem B
+gives zero higher coherent-sheaf cohomology,
+in particular (8) vanishes. Thus (7) splits
+holomorphically. This is the geometric
+first-order causal transport, not yet the
+higher-causal path-composition law.
+\end{proof}
+
+The actual higher-causal **curvature**
+is the tensor
+\[
+ \boxed{
+ F^{vert}_{\nabla}\in
+ H^0\!\left(J,\Omega^2_{J/X}
+                        \otimes\operatorname{End}H\right),
+ \quad
+ F^{vert}_{\nabla}(v,w)
+ =[\nabla_v,\nabla_w]-\nabla_{[v,w]}.
+ }                                                       \tag{9}
+\]
+The two natural constant affine-translation
+directions commute, so flatness is exactly
+$[\nabla_v,\nabla_w]=0$ for every pair.
+
+\section{The exact HIGHER-CAUSAL descent theorem}
+\begin{theorem}[Genuine relative flatness is equivalent to original-X holomorphic descent]
+Let $q:J\to X$ be the actual V-torsor in
+(1)--(4), and let H be an arbitrary
+holomorphic vector bundle on $J^{an}$.
+The following are equivalent:
+\begin{enumerate}
+\item There exists a holomorphic bundle E
+on the ORIGINAL compact complex X and
+an isomorphism $H\cong q^*E$ of
+holomorphic vector bundles.
+\item H admits a holomorphic relative
+connection along the affine fibers with
+\[
+ \boxed{F^{vert}_\nabla=0.}                    \tag{10}
+\]
+\item H has holomorphic parallel transport
+$T(v,z):H_z\to H_{z+v}$ along the entire
+affine translation groupoid, with
+the EXACT higher-causal composition law
+\[
+ \boxed{T(w,z+v)\,T(v,z)=T(v+w,z)}
+ \tag{11}
+\]
+for all $(v,w,z)$ in $G_2$, and
+$T(0,z)=\mathrm{id}_{H_z}$.
+\end{enumerate}
+Whenever these conditions hold, E is
+algebraic by projective GAGA.
+\end{theorem}
+\begin{proof}
+(1)->(2): the pullback bundle
+$q^*E$ is canonically constant along
+the affine torsor fibers; give it
+the tautological relative differential
+connection. It is flat.
+(2)->(3): every fiber is simply
+connected holomorphic affine space C^N.
+An integrable holomorphic connection
+has unique holomorphic horizontal
+parallel transport between any two
+points in the fiber; ordinary holomorphic
+linear ODE continuation on simply connected
+fibers makes it independent of the
+path. Relative connection coefficients
+depend holomorphically on the base,
+so the resulting transport is holomorphic
+on G_1. Uniqueness gives unit and
+composition equations (11).
+(3)->(1): choose local holomorphic
+trivializations of the V-torsor over
+an open cover $\{U_i\}$ of X, with
+holomorphic origin sections $s_i$.
+Let $E_i=s_i^*H$ be genuine
+holomorphic vector bundles on U_i.
+On overlaps, the unique V-translation
+carrying $s_i(x)$ to $s_j(x)$ and its
+holomorphic transport T produce
+holomorphic identifications
+$E_i|_{U_{ij}}\to E_j|_{U_{ij}}$.
+Equation (11) is EXACTLY the triple
+overlap cocycle, so the E_i glue
+to a holomorphic bundle E on X
+with holomorphic q^*E≅H.
+Projective GAGA algebraizes E.
+\end{proof}
+
+\section{The exact full Hodge-algebraicity theorem: a PAIR of higher-causal flat folds}
+\begin{theorem}[All-X, all-p genuine algebraic source iff coherent pair]
+For EVERY original smooth projective X,
+EVERY 1<=p<=d and EVERY rational Hodge
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$,
+the following are equivalent:
+\begin{enumerate}
+\item There is a TRUE rational
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$
+with $\mathrm{cl}^{can}_X(Z_\alpha)=\alpha$.
+\item There are an integer m>0 and TWO
+holomorphic bundles $H_+,H_-$ on the genuine
+affine spatial fold J with
+\[
+ \boxed{\mathrm{ch}_{top}(H_+)
+        -\mathrm{ch}_{top}(H_-)=m q^*\alpha
+           \quad\text{in every even grade}}
+ \tag{12}
+\]
+and holomorphic relative vertical
+connections $\nabla^\pm$ both satisfying
+\[
+ \boxed{F_{\nabla^+}^{vert}=0,\qquad
+        F_{\nabla^-}^{vert}=0.}                 \tag{13}
+\]
+\end{enumerate}
+If (12)--(13) hold, the original-X
+canonical rational Chow cycle is
+actually CONSTRUCTED, without any
+Hodge-to-Chow selector, as
+\[
+ \boxed{
+ Z_\alpha=
+ \frac{\mathrm{ch}^{CH}_p(E_+)
+       -\mathrm{ch}^{CH}_p(E_-)}{m},
+ \qquad H_\pm\cong q^*E_\pm.
+ }                                                       \tag{14}
+\]
+\end{theorem}
+\begin{proof}
+(2)->(1): flatness and the preceding
+descent theorem yield true holomorphic
+bundles E_\pm on the original projective X.
+By GAGA these are algebraic. Equation
+(12) and injectivity of q^* on rational
+Betti cohomology imply
+$\mathrm{ch}_{top}(E_+)
+ -\mathrm{ch}_{top}(E_-)=m\alpha$.
+The algebraic Chern-character components
+in (14) are true codimension-p
+rational Chow classes with precisely
+the prescribed canonical Betti image.
+(1)->(2): the rational algebraic
+Chern character isomorphism on smooth X
+supplies a rational K0 class whose
+FULL Chow Chern character is concentrated
+in grade p and equals the actual Z_\alpha.
+Multiply by m to express it as a
+difference of two actual algebraic
+vector bundles E_+-E_-.
+Pull them back holomorphically to J,
+give each the canonical FLAT relative
+connection, and use cohomological
+Chern-character naturality to obtain
+(12)--(13).
+\end{proof}
+
+\section{Sharp GST projective higher-causal law: remove the entire scalar curvature}
+
+The pure topological bundle E_alpha over
+original X from the predecessor spatial
+fold satisfies
+$\mathrm{ch}(E_\alpha)=r+m\alpha$.
+Let H_alpha be ANY holomorphic Oka
+realization of q^*E_alpha on Stein J.
+The Hodge type of the target alpha
+has ONE precise geometric consequence:
+the determinant line bundle
+$\det H_\alpha$ comes from an actual
+holomorphic line bundle on original X,
+even before higher-rank H_alpha descends.
+
+\begin{lemma}[The original Hodge condition ALGEBRAIZES the determinant]
+For a rational Hodge
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$
+and an honest topological
+$E_\alpha$ with pure
+$\mathrm{ch}(E_\alpha)=r+m\alpha$,
+there exists a holomorphic algebraic
+line bundle L on the ORIGINAL X
+such that its topological c1 is
+$c_1(E_\alpha)$. Consequently
+\[
+ \boxed{\det H_\alpha\cong q^*L}
+ \tag{19}
+\]
+holomorphically, and its determinant
+line has a canonical flat relative
+connection along all affine-fiber
+directions.
+\end{lemma}
+\begin{proof}
+If p>=2, $\mathrm{ch}_1(E_\alpha)=0$
+rationally, so the integral first
+Chern class is torsion and its
+image in $H^2(X,\mathcal O_X)$
+is zero. If p=1,
+$c_1(E_\alpha)=m\alpha$ rationally
+is of Hodge type (1,1), hence its
+image in $H^{0,2}(X)$ is zero.
+By Hodge--Dolbeault comparison
+this is the image under the
+connecting map of the holomorphic
+exponential sequence
+$H^1(X,\mathcal O_X^*)
+ \xrightarrow{c_1}H^2(X,\mathbb Z)
+ \to H^2(X,\mathcal O_X)$.
+Therefore there exists a genuine
+holomorphic line bundle L on
+compact projective X with
+$c_1(L)=c_1(E_\alpha)$,
+and GAGA makes L algebraic.
+The two holomorphic lines
+$\det H_\alpha$ and q^*L over
+Stein J have the same integral
+topological first Chern class,
+because H_alpha is the
+Oka realization of q^*E_alpha.
+By Oka--Grauert for line bundles
+on Stein spaces, they are
+holomorphically isomorphic.
+Give the latter its canonical
+translation-flat relative connection.
+\end{proof}
+
+\begin{theorem}[TRACeless higher-causal 2-cell vanishing SUFFICES, all X,p,N]
+For the fixed topological pure-class
+fold E_alpha and ANY holomorphic
+Oka realization H_alpha on J,
+suppose a holomorphic vertical
+connection $\nabla$ has
+vanishing TRACELESS curvature
+\[
+ \boxed{
+  F_\nabla^{vert}
+    -\frac1r\mathrm{tr}(F_\nabla^{vert})
+                  \,\mathrm{Id}_{H_\alpha}
+       =0.
+ }                                                       \tag{20}
+\]
+Then one can CONSTRUCT, without
+further cohomological assumptions,
+an EXACTLY FLAT holomorphic
+vertical connection $\nabla'$ on
+the SAME H_alpha. Consequently
+the actual original-X algebraic
+cycle
+\[
+ \boxed{
+ Z_\alpha=
+ \frac{(-1)^{p-1}}{m(p-1)!}
+          c_p^{CH}(E_\alpha^{alg}),
+ \qquad
+ \mathrm{cl}^{can}_X(Z_\alpha)=\alpha
+ }                                                       \tag{21}
+\]
+is obtained by holomorphic
+descent of H_alpha to
+$E_\alpha^{hol}$, and GAGA
+algebraization to $E_\alpha^{alg}$.
+\end{theorem}
+\begin{proof}
+Equation (20) says that
+$F_\nabla^{vert}=\eta\mathrm{Id}$
+for a holomorphic relative
+two-form $\eta$ on J.
+The connection induced on
+$\det H_\alpha$ has curvature
+$r\eta$. By the determinant
+lemma choose a flat relative
+holomorphic connection
+$\nabla_{\det}^0$ on
+the SAME determinant line.
+The difference of the induced
+connection and $\nabla_{\det}^0$
+is a globally defined HOLomorphic
+relative one-form $\theta$ on J:
+\[
+ \nabla_{\det}-\nabla_{\det}^0
+      =\theta,\qquad
+ d_{\mathrm{vert}}\theta=r\eta.
+\]
+Set
+$\nabla'=\nabla-\frac1r\theta\,\mathrm{Id}$.
+The scalar correction changes
+curvature by
+$-\frac1r d_{\mathrm{vert}}\theta$
+while commuting with all
+original connection coefficients.
+Therefore
+$F_{\nabla'}^{vert}
+ =\eta\mathrm{Id}-
+ \frac1r(r\eta)\mathrm{Id}=0$.
+The relative flatness descent
+theorem gives an honest
+holomorphic bundle on original
+X with the SAME topological
+Chern character r+m alpha.
+GAGA makes it algebraic.
+The Newton relation for an
+entirely pure pth rational
+Chern character gives
+$c_p=(-1)^{p-1}(p-1)!m\alpha$.
+Thus (21) has the required
+exact canonical Betti class.
+\end{proof}
+
+This result identifies the
+genuinely NONABELIAN part
+of the spatial higher-causal
+obstruction: the scalar/trace
+part is removable directly
+from the Hodge structure and
+the determinant line geometry.
+The remaining projective
+curvature is not a hidden
+rank-one issue or a failure
+of original-world Hodge purity.
+For this fixed Oka realization,
+proving equation (20)
+uniformly would complete the
+source construction by (21);
+we do not claim equation
+(20) follows without further
+geometry.
+
+\section{FIRST causal arrows always exist; the genuine two-cell may not}
+Write again $G_1=V\times_XJ$,
+and let $a,\pi_J:G_1\to J$ be respectively
+translation and source maps.
+For every holomorphic H on J,
+the two holomorphic bundles
+$a^*H$ and $\pi_J^*H$ are
+topologically isomorphic: the topological
+bundle underlying H is the pullback
+of some bundle on X, by the explicit
+Oka construction (or, more generally,
+via topological homotopy invariance
+of q); $q\circ a=q\circ\pi_J$.
+Since G_1 is Stein, Oka--Grauert
+upgrades this to a genuine
+holomorphic arrow-level bundle isomorphism
+\[
+ T(v,z):H_z\overset{\sim}\to H_{z+v}.
+ \tag{15}
+\]
+After multiplying by a suitable holomorphic
+source automorphism pulled back from J,
+we may normalize $T(0,z)=1$.
+
+Define the exact higher-causal two-cell
+COMPATIBILITY DEFECT
+\[
+ \boxed{
+ C_T(v,w,z):=
+ T(v+w,z)^{-1}
+  T(w,z+v)T(v,z)\in GL(H_z).
+ }                                                       \tag{16}
+\]
+It is a holomorphic automorphism-valued
+function on the entire composable
+two-arrow space $G_2$, with
+$C_T(0,w,z)=C_T(v,0,z)=1$.
+It obeys a nonabelian associativity
+identity on the entire three-arrow
+space G_3 because composition of
+actual bundle maps is associative.
+An actual equivariant holomorphic
+descent occurs exactly when one can
+CHOOSE the transport T with
+$C_T\equiv\mathrm{id}$. This is
+equivalent to (10) and to the
+original-X holomorphic/algebraic
+realization, as proved above.
+
+\begin{corollary}[Universal existence of first-order causal arrows does not trivialize the two-cell]
+For any rational class beta on ANY
+smooth projective original X,
+including beta NOT of type (p,p),
+the analytic Oka fold H_\beta
+and some holomorphic arrow
+transport T of the form (15) exist.
+If beta is NOT of Hodge type (p,p)
+and the chosen H_\beta has
+$\mathrm{ch}(H_\beta)=r+m q^*\beta$
+in the full degree grading,
+NO choice of normalized holomorphic
+T on that H_\beta can satisfy
+$C_T\equiv1$.
+\end{corollary}
+\begin{proof}
+Oka provides H and T as above
+without Hodge hypotheses.
+If normalized T had C_T=1,
+H would holomorphically descend
+to E over original smooth
+projective X, and GAGA would
+make E algebraic. Its Chern
+character $\mathrm{ch}_p(E)=m\beta$
+must be rational of Hodge type
+(p,p), by algebraic cycle-class
+comparison. Because m>0 and
+beta was chosen non-Hodge,
+this is impossible.
+\end{proof}
+This proves an ACTUAL geometrical
+nontriviality of the higher-causal
+coherence obstruction in the
+universal analytic fold construction,
+without claiming a counterexample
+to the rational Hodge conjecture.
+
+\section{ALL-DIMENSION stabilization does not erase original curvature}
+For the fixed affine fold q:J->X
+and holomorphic bundle H on J,
+form the genuinely higher-dimensional
+affine realization
+\[
+ q_M:J\times\mathbb C^M\to X,
+ \qquad q_M=q\circ\operatorname{pr}_J,
+ \qquad H_M=\operatorname{pr}_J^*H
+ \tag{17}
+\]
+for arbitrary nonnegative integer M.
+
+\begin{theorem}[Universal all-M CAUSAL CURVATURE STABILIZATION LAW]
+The pulled-back H_M admits a
+flat HOLomorphic relative connection
+along every new affine fiber direction
+of q_M if and only if the ORIGINAL
+holomorphic H admits one along
+the fibers of q:
+\[
+ \boxed{
+  \exists\,\nabla_M^{vert}
+     \;F_{\nabla_M}^{vert}=0
+ \quad\Longleftrightarrow\quad
+  \exists\,\nabla^{vert}
+     \;F_{\nabla}^{vert}=0.
+ }                                                       \tag{18}
+\]
+Thus adjoining ANY NUMBER of trivial
+extra emergent complex dimensions to
+a fixed analytic fold does not
+make its unsolved higher-causal
+coherence obstruction disappear.
+\end{theorem}
+\begin{proof}
+For the forward direction restrict
+$\nabla_M$ along the holomorphic
+zero section $J\to J\times\mathbb C^M$
+and take its components tangent to
+the original affine V-fibers; its
+curvature is the restriction of zero.
+For the reverse direction take the
+sum of the pulled-back original
+flat relative connection and the
+standard holomorphic de Rham
+differential in the added C^M
+directions. The two connections
+commute because the original
+coefficients are constant along
+the added coordinates, so the
+new curvature remains zero.
+Alternatively use holomorphic
+descent: H_M descends to X iff
+H does, because both the
+extension q_M and the slice
+J->J×C^M preserve the original
+base map. No choice of M enters.
+\end{proof}
+
+\section{ACTUAL CONSTRUCTIVE FLATNESS: the full divisor-generated Hodge sector in EVERY codimension}
+
+This subsection SOLVES equation (13) with an
+explicit finite geometric bundle formula
+for all rational Hodge targets generated
+by divisor classes. It is a genuine
+all-original-X, all-d, all-p, all-N
+construction, not a bounded example or
+a numerical primitive Gram test.
+
+Let $L_1,\dots,L_s$ be ANY honest
+algebraic line bundles on original X,
+and let $\lambda_i=c_1(L_i)$.
+Write
+\[
+ A_{\mathrm{div}}^p(X)_\mathbb Q
+ =H^{2p}(X,\mathbb Q)\cap
+    \mathbb Q[\lambda_1,\dots,\lambda_s],
+\]
+where the right hand side means the
+homogeneous degree-p polynomial component.
+Take any desired
+\[
+ \alpha=\sum_{|\mathbf e|=p}
+   c_{\mathbf e}\,
+   \lambda_1^{e_1}\cdots\lambda_s^{e_s},
+ \qquad c_{\mathbf e}\in\mathbb Q.
+ \tag{20}
+\]
+
+\begin{lemma}[Exact rational finite-grid moments for every grade]
+For every d>=0 and 0<=e<=d
+there exist UNIQUE rational coefficients
+$w^{(d,e)}_k\in\mathbb Q$
+for $k=0,\dots,d$ satisfying
+\[
+ \boxed{
+ \sum_{k=0}^d w^{(d,e)}_k k^j
+       =e!\,\delta_{j,e}
+ \qquad(0\le j\le d),
+ }                                                       \tag{21}
+\]
+with convention $0^0=1$.
+They can be calculated explicitly
+as $e!$ times the coefficient
+of $t^e$ in the kth
+Lagrange polynomial
+\[
+ \ell_k(t)=\prod_{\substack{0\le j\le d\\j\ne k}}
+             \frac{t-j}{k-j},
+ \qquad
+ w^{(d,e)}_k=e!\,[t^e]\ell_k(t).
+ \tag{22}
+\]
+In particular, for e=1 and d>=1,
+\[
+ \boxed{
+ w_0^{(d,1)}=-\sum_{j=1}^d\frac1j,\qquad
+ w_k^{(d,1)}
+    =\frac{(-1)^{k+1}}{k}\binom dk\quad(k\ge1).
+ }                                                       \tag{23}
+\]
+\end{lemma}
+\begin{proof}
+For any polynomial f(t) of degree
+at most d, Lagrange interpolation
+$f(t)=\sum_{k=0}^d f(k)\ell_k(t)$
+gives
+$f^{(e)}(0)=\sum_{k=0}^d f(k)
+(e![t^e]\ell_k(t))$.
+Apply to f(t)=t^j for 0<=j<=d
+to prove (21). Rationality and
+uniqueness follow because the
+rational Vandermonde matrix
+on distinct integer nodes
+0,...,d is invertible.
+Differentiate each Lagrange
+polynomial at zero to derive
+(23), including the harmonic
+number for k=0.
+\end{proof}
+
+\begin{theorem}[FINITE UNIVERSAL LINE-BUNDLE COMPILER: exact all-grade flat causal descent]
+For ANY original smooth projective X
+of dimension d, ANY p<=d, ANY
+alpha in the full divisor-generated
+codimension-p subalgebra above,
+the explicit rational algebraic K0
+class
+\[
+ \boxed{
+ {\cal K}_\alpha
+ =\sum_{|\mathbf e|=p}
+ c_{\mathbf e}
+ \sum_{\mathbf k\in\{0,\dots,d\}^s}
+ \left(\prod_{i=1}^s w_{k_i}^{(d,e_i)}\right)
+ \left[
+    \bigotimes_{i=1}^s L_i^{\otimes k_i}
+ \right]
+ }                                                       \tag{24}
+\]
+has the ENTIRE, not merely pth,
+Chern character
+\[
+ \boxed{\operatorname{ch}_{Betti}({\cal K}_\alpha)
+        =\alpha,\qquad
+   \operatorname{ch}_j({\cal K}_\alpha)=0
+     \text{ for every }j\ne p,
+ }                                                       \tag{25}
+\]
+including rank zero.
+Choose any m>0 clearing
+all rational coefficients
+in (24); split the resulting
+signed integral combination
+into TWO honest algebraic
+bundles E_+,E_- consisting
+of finite direct sums of the
+displayed tensor-power line bundles,
+so $m{\cal K}_\alpha=[E_+]-[E_-]$.
+For EVERY actual spatial fold
+$q:J_N(X)\to X$, the holomorphic
+bundles $H_\pm=q^*E_\pm$
+have globally defined EXACTLY
+FLAT holomorphic relative
+causal connections along EVERY
+affine-fiber direction and
+\[
+ \operatorname{ch}_{top}(H_+)
+  -\operatorname{ch}_{top}(H_-)=m q^*\alpha.
+ \tag{26}
+\]
+The genuine original-X cycle
+\[
+ \boxed{
+ Z_\alpha=
+  \frac1m\left(
+     \operatorname{ch}_p^{CH}(E_+)
+      -\operatorname{ch}_p^{CH}(E_-)\right)
+       \in CH^p(X)_\mathbb Q
+ }                                                       \tag{27}
+\]
+has the EXACT canonical
+Betti class alpha.
+\end{theorem}
+\begin{proof}
+For each tensor-power line bundle,
+$\operatorname{ch}(\bigotimes_i L_i^{k_i})
+=\exp(\sum_i k_i\lambda_i)$.
+All terms of cohomological
+complex codimension $>d$ vanish.
+By the independent moment
+identities (21),
+\[
+\begin{aligned}
+ &\sum_{\mathbf k}
+   \prod_i w_{k_i}^{(d,e_i)}
+      \exp\left(\sum_i k_i\lambda_i\right)\\
+ &=\prod_{i=1}^s
+    \left[\sum_{k_i=0}^d
+      w_{k_i}^{(d,e_i)}
+         \sum_{j=0}^d
+           \frac{k_i^j\lambda_i^j}{j!}\right]\\
+ &=\prod_{i=1}^s\lambda_i^{e_i}
+ \quad\text{in }H^{even}(X,\mathbb Q),
+\end{aligned}                                                \tag{28}
+\]
+because every exponent j other
+than e_i has zero moment and
+$e_i!/e_i!=1$.
+This proves the ENTIRE
+pure Chern-character statement
+(25) for every monomial and
+then linearly for alpha.
+Clearing denominators and
+splitting signs gives actual
+algebraic line-bundle sums
+E_+,E_-; their pullbacks
+carry the canonical flat
+relative connections along
+every affine torsor fiber,
+with no higher causal defect.
+Their actual algebraic Chern
+characters define (27),
+and the canonical Betti comparison
+plus (25) proves the desired
+equality exactly.
+\end{proof}
+
+\begin{corollary}[Exact boundary between abelian causal geometry and genuine higher-rank complexity]
+If the original-X bundles E_+,E_-
+admit algebraic or holomorphic
+FILTRATIONS whose associated
+graded pieces are line bundles,
+then their entire rational Chern
+characters lie in the
+subalgebra of $H^{even}(X,\mathbb Q)$
+generated by rational divisor classes.
+Consequently an original rational
+Hodge alpha OUTSIDE that
+divisor-generated algebra cannot
+be realized by a pure-character
+flat causal pair which descends
+to two such line-filtered bundles.
+A genuinely NEW geometry in the
+non-divisor-generated rational
+Hodge directions necessarily
+uses non-line-filtered higher-rank
+sources or an equivalent
+nonabelian original-X construction.
+\end{corollary}
+\begin{proof}
+For a holomorphic or algebraic
+filtration of vector bundles,
+the associated graded line
+bundles have classes
+$[E]=\sum_i[L_i]$ in K0
+by exact-sequence additivity.
+The entire rational Chern
+character of E is therefore
+$\sum_i\exp(c_1(L_i))$,
+whose every graded piece lies
+in the rational divisor algebra.
+Differences of two such bundles
+have the same property.
+Thus a prescribed alpha
+outside that algebra cannot
+equal the pure Chern character
+difference of such a filtered
+pair. This argument does not
+exclude genuinely nonabelian
+algebraic bundles; it isolates
+the source type they must supply.
+\end{proof}
+
+\section{Full causal COHOMOLOGY preservation versus the genuine two-cell equation}
+
+\begin{theorem}[Universal all-dimension whole-Hodge causal transport law]
+For the actual translation groupoid of
+EVERY incidence fold q:J→X,
+the geometric source and target maps
+$s:G_1\to J$ and $a:G_1\to J$
+obey
+$q\circ s=q\circ a$ EXACTLY.
+Consequently, for EVERY
+$\beta\in H^m(X,\mathbb Q)$
+of ANY Hodge or non-Hodge type,
+\[
+ \boxed{
+   s^*q^*\beta=a^*q^*\beta
+        \quad\text{in }H^m(G_1,\mathbb Q).
+ }                                                        \tag{28a}
+\]
+This equality is an equality of
+ACTUAL pullback cohomology classes
+and morphisms of mixed Hodge
+structures, for every original X,
+every degree m, and every finite
+emergent spatial dimension N.
+It continues coherently through
+all higher translation-groupoid
+nerve levels.
+\end{theorem}
+\begin{proof}
+Fiber translations preserve each
+original base point by definition,
+so q∘s=q∘a as algebraic
+morphisms. Apply functoriality
+of singular rational cohomology
+to both sides; algebraic
+morphism pullbacks also
+preserve the mixed Hodge
+structure filtration. Every
+simplicial source/face map in
+the higher nerve of the
+translation groupoid composes
+with q to the same original-X
+map, proving the higher-degree
+compatibilities.
+\end{proof}
+
+\begin{remark}
+This is the STRONGEST possible
+cohomological version of the
+owner's spatial causal
+preservation premise:
+it holds on the WHOLE rational
+cohomology of the actual
+infinite-extendible folded
+space, not merely on selected
+Hodge numbers or test classes.
+It ALSO holds for every
+non-Hodge rational class beta.
+Thus the actual additional
+geometric information required
+to construct an original
+algebraic cycle must enter
+through the holomorphic
+bundle's nonabelian two-cell
+coherence (11), or through
+geometric finite-pole growth
+of a true analytic source.
+The next theorem gives an
+actual algebraic Hodge example
+where full cohomology
+preservation and even flat
+bundle transport coexist,
+but a chosen positive
+geometric cycle does NOT
+acquire translation invariance.
+\end{remark}
+
+\section{The exact SPATIAL POSITIVITY obstruction: why an algebraic Hodge cycle needs signed causal geometry}
+
+The original projective X has a
+positive ample degree functional,
+unlike its noncompact affine
+spatial fold J. This difference
+yields a decisive all-X no-go
+theorem for the tempting claim
+that a single EFFECTIVE analytic
+degeneracy cycle can always be
+made exactly invariant along
+all affine causal translations.
+
+\begin{theorem}[Positive invariant folds are impossible in zero/negative ample degree]
+For arbitrary smooth projective
+original X of dimension d,
+ANY 1<=p<=d and ample class
+$h=c_1(O_X(1))$, let
+$\gamma\in H^{2p}(X,\mathbb Q)$
+satisfy
+\[
+ \boxed{
+  \gamma\ne0,\qquad
+  \int_X\gamma\smile h^{d-p}\le0.
+ }                                                       \tag{29}
+\]
+There is NO NONZERO EFFECTIVE
+complex-analytic codimension-p
+cycle W on the genuine affine
+fold J whose canonical Betti class
+is q^*gamma and which is INVARIANT
+AS AN ACTUAL CYCLE under all
+fiber translations of V:
+\[
+ \boxed{
+  a^{-1}W=\operatorname{pr}_J^{-1}W.
+ }                                                       \tag{30}
+\]
+This is true for EVERY emergent
+spatial dimension N.
+\end{theorem}
+\begin{proof}
+Full translation invariance
+forces any analytic cycle on
+the V-torsor to be the analytic
+pullback $W=q^{-1}Z$ of a
+closed analytic cycle Z on
+compact original X. This is
+proved locally by identifying
+$q^{-1}U=U\times\mathbb C^N$
+and observing that all affine
+fiber translations preserve
+W AS A CYCLE, so its support
+and positive multiplicities
+depend only on x in U.
+Chow's theorem makes Z a true
+algebraic cycle on projective
+X. Because W is assumed
+EFFECTIVE, so is Z. If Z is
+nonzero, its intersection
+with d-p generic ample
+hyperplane divisors is a
+strictly POSITIVE rational
+zero-cycle degree, hence
+\[
+   \int_X [Z]_{\rm Betti}
+             \smile h^{d-p}>0.
+\]
+But W has Betti class
+$q^*[Z]=q^*\gamma$ and
+q^* is injective, so
+$[Z]=\gamma$, contradicting
+(29). If Z=0 then W=0
+and its Betti class would
+be zero, also contradicting
+$\gamma\ne0$.
+No number of new affine
+dimensions changes this argument.
+\end{proof}
+
+\begin{theorem}[Concrete genuine GST incidence world with algebraic fold but NONINVARIANT effective source]
+Take original X=P^1,
+p=1, its TRUE incidence
+affine fold $J_1(P^1)$, and
+$h=c_1(O_{P^1}(1))$.
+The actual universal algebraic
+incidence idempotent is
+\[
+ \boxed{
+ P_{\rm amb}(x,\ell)=
+   \frac{x\,\ell}{\ell x},
+ \quad P_{\rm amb}^2=P_{\rm amb},
+ \quad\operatorname{im}P_{\rm amb}
+       =q^*O_{P^1}(-1).
+ }                                                       \tag{31}
+\]
+Its first column is a
+GLOBAL ALGEBRAIC section
+of the TRUE line subbundle
+$q^*O(-1)$, whose vanishing
+locus
+\[
+ \boxed{
+ \Sigma=\{\ell_0=0\}\cap J_1(P^1)
+ }                                                       \tag{32}
+\]
+is an ACTUAL NONEMPTY EFFECTIVE
+algebraic divisor with
+$[\Sigma]_{\rm Betti}=-q^*h$.
+The line bundle itself
+already has a PERFECTLY FLAT
+holomorphic relative connection
+along the affine fibers (being
+pulled back from O(-1) on X).
+Nevertheless Sigma cannot
+be invariant under translations,
+and there is NO nonzero
+translation-invariant holomorphic
+section of this line bundle,
+because $H^0(P^1,O(-1))=0$.
+\end{theorem}
+\begin{proof}
+The matrix polynomial identity
+$A=x\ell$, $s=\ell x$,
+$A^2=sA$ proves (31).
+Its normalized column is
+$x\,\ell_0/(\ell x)$.
+It is nonzero except where
+$\ell_0=0$. On the incidence
+complement that zero set is
+nonempty and defines a
+Cartier divisor of codimension
+one. As the zero divisor
+of a true global algebraic
+section of $q^*O(-1)$,
+its canonical Betti class is
+$c_1(q^*O(-1))=-q^*h$,
+which is NONZERO since q
+is an affine-space homotopy
+equivalence. Its original-X
+ample degree is $-1$,
+so the preceding positivity
+theorem forbids actual
+fiber-translation invariance.
+The bundle $q^*O(-1)$ has
+its tautological flat relative
+connection, and a horizontal
+invariant holomorphic section
+would descend to a section
+of O(-1) over compact P1,
+which has none. This proves
+the precise DISTINCTION
+between flat causal BUNDLE
+transport and coherence of
+a PARTICULAR effective
+analytic-cycle REPRESENTATIVE.
+\end{proof}
+
+\begin{corollary}[The necessary all-original-X signed-pair geometry]
+For target Hodge classes gamma
+satisfying (29), any genuine
+translation-coherent original-X
+analytic cycle with class gamma
+MUST permit signed rational
+multiplicities; it cannot be
+obtained by imposing translation
+invariance on a single
+nonzero effective degeneracy
+cycle with the same class.
+The TWO-BUNDLE coherent
+pair construction (12)--(14)
+is therefore logically more
+appropriate than an attempt
+to force every holomorphic
+determinantal zero locus to
+remain effective and
+fiber-translation invariant.
+\end{corollary}
+
+\section{Signatures and the decisive mathematical obligation}
+The full derived all-original-X
+GST spatial causal hierarchy is now
+\[
+ \boxed{
+ \begin{aligned}
+  \alpha &\rightsquigarrow
+    [E_+]-[E_-]\in KU^0(X),\\
+  &\rightsquigarrow
+   (H_+,H_-)\text{ holomorphic on STEIN }J,\\
+  &\rightsquigarrow
+    \nabla^{vert}_+,\nabla^{vert}_-
+       \text{ existing globally (Cartan B)},\\
+  &\rightsquigarrow
+     (F^{vert}_+,F^{vert}_-)\text{ actual two-cell curvatures},\\
+  &\xrightarrow{F^{vert}_+=F^{vert}_-=0}
+    (E_+,E_-)\text{ holomorphic on original }X,\\
+  &\xrightarrow{\mathrm{GAGA}+\mathrm{ch}^{CH}}
+    Z_\alpha\in CH^p(X)_{\mathbb Q},
+   \quad \mathrm{cl}^{can}_X Z_\alpha=\alpha .
+ \end{aligned}
+ }                                                       \tag{19}
+\]
+ALL arrows until the curvature
+zero equation follow unconditionally
+from existing actual geometry for
+every rational cohomology class.
+The last two arrows are genuine
+geometric construction theorems,
+NOT postulated Chow surjectivity.
+For arbitrary rational Hodge alpha,
+a universal rule forcing a flat
+relative connection for a PAIR
+with the pure full Chern-character
+difference (12) would therefore
+yield the classical original-X target.
+The preceding non-Hodge corollary
+shows that such a rule cannot be
+valid for every rational class and
+must genuinely use the Hodge
+condition or further structured
+GST geometry. The remaining
+curvature equation is exact and
+typed; the work does NOT declare
+it solved without constructing
+such a flat pair.
+\end{document}

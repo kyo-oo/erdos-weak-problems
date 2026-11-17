@@ -1,0 +1,32 @@
+name: GST 406 Exact Pure-Power U-Terminal Kernel
+on:
+  push:
+    branches: [gpt6/problem406-terminal-u-boundary-investigation-20261030]
+    paths:
+      - GSTProblem406TerminalUBoundary.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_u_terminal_pure.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and Mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Strict physical terminal U potential check
+        run: |
+          set -euo pipefail
+          lake build GST406PureUFiniteBoundary 2>&1 | tee terminal-build.log
+          lake env lean GSTProblem406TerminalUBoundary.lean 2>&1 | tee terminal-axioms.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' terminal-build.log terminal-axioms.log
+          grep -F 'pure_source_terminal_u_telescope' terminal-axioms.log
+          echo GST_PURE_TERMINAL_U_KERNEL_PASS=1

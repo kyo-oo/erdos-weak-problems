@@ -1,0 +1,91 @@
+name: HC Priority Lean Root QuickCheck
+
+on:
+  push:
+    branches:
+      - clean/upgraded-advanced-only-20261009
+      - clean/advanced-gst-hodge-20261009
+      - sol/gst-plane-completeness-8408fd0
+      - sol/hodge-strict-betti-correspondence-fusion-20261003
+    paths:
+      - '.github/workflows/hc-priority-root-quickcheck.yml'
+      - 'GSTClassicalHodgeOmniversalSeparatorGhostCrown.lean'
+      - 'GSTClassicalHodgeCanonicalPointIncidenceTransfer.lean'
+      - 'GSTClassicalHodgeStrictCorrespondenceChainTransfer.lean'
+      - 'GSTClassicalHodgeStrictGraphBettiTrace.lean'
+      - 'GSTClassicalHodgeFullCorrespondenceGSTPlaneCompletion.lean'
+      - 'GSTClassicalHodgeClosedCorrespondenceCosmicRealization.lean'
+      - 'GSTClassicalHodgeIncidenceRealizationEquivalence.lean'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hc-priority-quickcheck-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-roots:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore cached Lean toolchain
+        id: lean-toolchain-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache once
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-toolchain-cache.outputs.cache-hit != 'true'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Reuse compiled project dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+      - name: Compile seven integration-critical roots in one Lake build
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build \
+            GSTClassicalHodgeOmniversalSeparatorGhostCrown \
+            GSTClassicalHodgeCanonicalPointIncidenceTransfer \
+            GSTClassicalHodgeStrictCorrespondenceChainTransfer \
+            GSTClassicalHodgeStrictGraphBettiTrace \
+            GSTClassicalHodgeFullCorrespondenceGSTPlaneCompletion \
+            GSTClassicalHodgeClosedCorrespondenceCosmicRealization \
+            GSTClassicalHodgeIncidenceRealizationEquivalence \
+            2>&1 | tee hc-priority-five-roots.log
+      # Reuse dependencies even when one of the five proof roots fails.
+      - name: Save incremental priority root products
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}
+
+      - name: Upload all compiler diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hc-priority-five-roots-lean-diagnostics
+          path: hc-priority-five-roots.log
+          if-no-files-found: warn

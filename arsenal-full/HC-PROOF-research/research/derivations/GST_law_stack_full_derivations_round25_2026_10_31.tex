@@ -1,0 +1,1034 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Sp}{\operatorname{Sp}}
+\newcommand{\Hom}{\operatorname{Hom}}
+
+\title{The GST law stack: complete derivations of the provable layer,\\
+and the remaining theorem stated precisely\\
+(Round 25 --- the operator's order: prove the laws; the 22--23 all-arity\\
+law as the spine; the rotation; finish)}
+\author{GST Hodge Campaign --- Round 25 (session clock 2026-10-31)}
+\date{2026-10-31 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{Disposition (on the face)}
+
+The operator's order: the GST laws that the closure uses are themselves
+unproven and must be proven; the operator's own 22--23 idea (the all-arity
+cyclic fold, recorded as the 2026-10-22 cyclic-original-X law and the
+single-factor Gaussian rotation) must be the spine, not a spectator; the
+rotation receives the actual mathematics; the work must end at the closing
+string.
+
+This artifact does the part of that order that mathematics permits, and
+records the part it does not permit, with the receipts on the face:
+
+\begin{enumerate}
+\item Every GST law of the stack that admits a proof from first principles
+now has one, written out by hand in this file, in complete form, with no
+appeal to a certificate for any step of any proof: the rotation deck laws
+R1, R2, R5 (\S2), the $C_2$ swap law (\S2.5), the operator's all-arity
+cyclic law in full --- the freeness lemma, the transfer theorem, the
+$D_m$ mixed-Hodge computation, the $Y_m$ mixed law, the $S_m$ sector
+formula, the descent, the return leg $m\cdot\alpha$, the cyclotomic
+engine (\S3), and the classical layer: Lefschetz $(1,1)$ in full, the
+hard-Lefschetz reduction, Lemma N the Newton conductor (\S4).
+\item The laws that do not admit a proof at the present state of the
+campaign are stated as THE REMAINING THEOREM (\S6), each item in plain
+mathematical terms with its receipt, together with the equivalence
+theorem: discharging the remaining theorem \emph{is} proving the rational
+Hodge conjecture on the open sector. There is no third thing.
+\item The closing string is not emitted. The one previous emission of it
+(Round 22) rested on Theorem D4(3), which the independent audit
+\texttt{AUDIT\_22.md} found mathematically false --- two computed
+counterexamples, one of them reproduced in \S7 --- and the claim was
+withdrawn from all artifacts. Emitting it again would re-assert a
+computed-false step. The operator's own audit loop (\S36) is the mechanism
+that caught it; this round does not override that mechanism.
+\end{enumerate}
+
+Each theorem below carries one of four labels, and the label is the
+claim's entire scope:
+\textbf{[PROVEN HERE]} (complete proof in this file),
+\textbf{[STANDARD STRENGTH]} (proof in this file modulo named standard
+theorems, each cited at textbook strength),
+\textbf{[CERTIFICATE RECEIPT]} (the campaign's committed exact-arithmetic
+check, cited; not load-bearing for any [PROVEN HERE] claim),
+\textbf{[OPEN]} (part of the remaining theorem; no proof exists).
+
+\section{The setting and the target}
+
+The target is the rational Hodge conjecture: for every connected smooth
+projective complex variety $X$ and every rational $(p,p)$ class
+$\alpha\in H^{2p}(X,\Q)$, there exist algebraic cycles
+$Z_1,\dots,Z_r$ on $X$ and rationals $q_i$ with
+$\mathrm{cl}^{\mathrm{can}}_X(\sum_i q_i Z_i)=\alpha$.
+
+The campaign's committed sector partition (recorded
+\texttt{2026-10-31-universal-close}, STEP 2; confirmed by the audits):
+$p=1$ is Lefschetz $(1,1)$ (proven in full in \S4.1 below);
+$p>d/2$ reduces to codimension $d-p\le d/2$ by hard Lefschetz
+(\S4.2);
+$p\in\{0,d,d-1\}$ are the classical boundaries;
+the open sector is $2\le p\le\lfloor d/2\rfloor$, $d\ge 4$.
+
+The campaign's committed world model: the eight-letter Gaussian lattice
+world on $A$ with the Weil rays $W_R,W_I=\operatorname{Re,Im}\Omega$,
+$\Omega=\prod_{j=0}^{3}(e_j+if_j)$, the polarization
+$\theta=\sum_j e_jf_j$, the door pins
+$m^*(A,2,W_R)=m^*(A,2,W_I)=2$ exactly, and the infinite census family
+$\{S_m(A)\}_{m\ge2}$ of \S3.
+
+\section{The rotation deck laws --- complete proofs}
+
+\subsection{Cyclic group cohomology at standard strength}
+
+Let $G=C_m=\langle\sigma\rangle$ act on a $\Z$-module $M$, and let
+$N=1+\sigma+\cdots+\sigma^{m-1}$ be the norm. The standard free
+resolution of $\Z$ over $\Z[G]$ is the periodic resolution
+\[
+\cdots\to\Z[G]\xrightarrow{\ \sigma-1\ }\Z[G]\xrightarrow{\ N\ }
+\Z[G]\xrightarrow{\ \sigma-1\ }\Z[G]\to\Z\to0
+\]
+(exactness at each step is a two-line check: $\ker(\sigma-1)=\Z[G]N$ and
+$\ker N=\Z[G](\sigma-1)$; textbook strength, Brown,
+\emph{Cohomology of Groups}, III.1). Applying
+$\Hom_{\Z[G]}(-,M)$ gives the cochain complex
+\[
+M\xrightarrow{\ \sigma-1\ }M\xrightarrow{\ N\ }M\xrightarrow{\ \sigma-1\ }M\to\cdots,
+\]
+whence
+\[
+H^2(C_m;M)=\ker(\sigma-1)/NM=M^{C_m}/NM,\qquad
+H^1(C_m;M)=\ker N/(\sigma-1)M.
+\]
+\textbf{[STANDARD STRENGTH]} Everything below uses only these two
+formulas and module computations.
+
+\subsection{Theorem R1 --- the $C_4$ obstruction law}
+
+\begin{theorem}[R1; PROVEN HERE]
+Let $M$ be a finitely generated free $\Z$-module carrying
+$C_4=\langle\gamma\rangle$ with $\gamma^2=-\mathrm{id}_M$. Then:
+\begin{enumerate}
+\item $M^{C_4}=\ker(\gamma-1)=0$.
+\item The norm degenerates: $N=1+\gamma+\gamma^2+\gamma^3=0$ on $M$.
+\item $H^2(C_4;M)=M^{C_4}/NM=0$.
+\item $H^1(C_4;M)=\ker N/(\gamma-1)M=M/(\gamma-1)M$ is $2$-elementary.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) If $\gamma v=v$ then applying $\gamma$ once more gives
+$\gamma^2v=\gamma v=v$; but $\gamma^2v=-v$, so $2v=0$; $M$ is torsion-free,
+hence $v=0$.
+
+(2) $N=(1+\gamma)(1+\gamma^2)$ as endomorphisms, since the expansion of
+$(1+\gamma)(1+\gamma^2)$ is $1+\gamma+\gamma^2+\gamma^3$. As
+$\gamma^2=-\mathrm{id}$, the second factor is $0$, so $N=0$. (Directly:
+$1+\gamma+(-1)+(-\gamma)=0$.)
+
+(3) By (1) and (2), $M^{C_4}=0$ and $NM=0$, so
+$H^2(C_4;M)=0/0=0$.
+
+(4) By (2), $\ker N=M$, so $H^1(C_4;M)=M/(\gamma-1)M$. For any
+$v\in M$,
+\[
+(\gamma-1)(1+\gamma)v=(\gamma+\gamma^2-1-\gamma)v=(\gamma^2-1)v=-2v,
+\]
+so $2v\in(\gamma-1)M$; hence $2M\subseteq(\gamma-1)M$ and every class of
+$H^1$ is killed by $2$.
+\end{proof}
+
+\begin{remark}[The structural difference from $C_2$; PROVEN HERE]
+For $C_2=\langle\sigma\rangle$ with $\sigma^2=1$ the norm
+$N=1+\sigma$ does not degenerate, and
+$H^2(C_2;M)=M^{\sigma}/NM$ sees only $\sigma$-invariant classes:
+$\sigma$-anti-invariant content ($\sigma x=-x$, $x\ne0$) lies outside
+$M^{\sigma}$ entirely and is invisible to $H^2$. Under $\gamma^2=-1$
+there is no anti-invariant escape: $\gamma x=-x$ implies
+$\gamma^2x=x=-x$, i.e.\ $2x=0$, i.e.\ $x=0$ on a torsion-free module.
+This is the proof, at the module level, of the campaign's committed fact
+that the $C_2$ route left the $(A,-A)$ witness outside the cocycle
+condition while the $C_4$ deck has no such residue class. The witness
+\emph{layer} above the module (the matrix-valued residue pair) is not
+discharged by this argument; that boundary is the recorded 23-b finding
+F2 and is restated in \S6.
+\end{remark}
+
+\subsection{Theorem R2 --- the letter-parity law, the partition, the one plane}
+
+The letter lattice is the exterior algebra on the eight letters
+$\{e_0,f_0,\ldots,e_3,f_3\}$; factor $j$ is the pair $\{e_j,f_j\}$. The
+operator's single-factor Gaussian rotation
+$\gamma_j$ acts by $e_j\mapsto-f_j$, $f_j\mapsto e_j$ and fixes every
+other letter; $\gamma_j$ is an integral lattice automorphism with
+$\gamma_j^4=1$.
+
+\begin{theorem}[R2; PROVEN HERE]
+\begin{enumerate}
+\item \textbf{Letter-parity law.} For any word $w$ (a wedge of letters)
+with $k_j(w)$ letters of factor $j$,
+\[
+\gamma_j^2(w)=(-1)^{k_j(w)}w .
+\]
+\item \textbf{The all-odd sector.} If $k_j(w)=1$ for every $j$, then
+$\gamma_j^2=-1$ on $w$ for \emph{every} $j$: each deck of the family acts
+on the all-odd sector through a $\gamma^2=-1$ module, and Theorem R1
+applies word by word.
+\item \textbf{One plane.} Write $\Omega=\prod_{j=0}^{3}(e_j+if_j)$ and
+$W_R=\operatorname{Re}\Omega$, $W_I=\operatorname{Im}\Omega$. Every word
+of $\Omega$ carries exactly one letter of each factor (expand the
+product), so the Weil classes lie in the all-odd sector, and for every
+$j$
+\[
+\gamma_j\Omega=i\,\Omega,\qquad
+\gamma_j(W_R)=-W_I,\qquad \gamma_j(W_I)=W_R .
+\]
+The Weil plane $\Z\langle W_R,W_I\rangle$ is a single $C_4$-module for
+every deck of the family.
+\item \textbf{The all-even sector.} If $k_j(w)\in\{0,2\}$ for every $j$
+then $\gamma_j^2=+1$ on $w$ for every $j$, and on the pair-product words
+$F_jF_k:=e_jf_je_kf_k$ each $\gamma_j$ acts trivially:
+$\gamma_j(e_j\wedge f_j)=(-f_j)\wedge e_j=e_j\wedge f_j$. On a trivial
+$C_4$-module $H^2(C_4;M)=M/4M$ by \S2.1 (here $M^{C_4}=M$ and $N=4$):
+the all-even sector carries $4$-torsion and the deck does not kill it.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) $\gamma_j^2$ sends $e_j\mapsto-e_j$ and $f_j\mapsto-f_j$ and fixes
+every other letter. A word $w=u_j\wedge r$ with $u_j$ the factor-$j$ part
+(empty allowed) and $r$ the rest has
+$\gamma_j^2(w)=(-1)^{k_j(w)}u_j\wedge r$.
+
+(2) Immediate from (1).
+
+(3) $\gamma_j(e_j+if_j)=-f_j+ie_j=i(e_j+if_j)$, and $\gamma_j$ fixes the
+other three factors, so $\gamma_j\Omega=i\Omega$. For
+$\Omega=W_R+iW_I$ with $W_R,W_I$ real (the letters are real):
+$i\Omega=-W_I+iW_R$, hence $\gamma_jW_R=-W_I$ and $\gamma_jW_I=W_R$.
+The word count: $\Omega$ expands over the $2^4=16$ choices of one letter
+per factor.
+
+(4) From (1) with $k_j(w)\in\{0,2\}$; the trivial-action computation is
+\S2.1 with $\sigma=\mathrm{id}$: $M^{C_4}=M$, $N=4$,
+$H^2=M/4M\ne0$.
+\end{proof}
+
+\begin{corollary}[Input-blindness of the deck; PROVEN HERE]
+The parity law of R2(1) depends only on the letter count $k_j(w)$ and
+not on any Hodge type. A killing chain that used the deck alone would
+therefore descend all-odd content of \emph{every} type ---
+$(4,0)+(0,4)$, $(3,1)+(1,3)$, $(2,2)$ alike. The $(p,p)$-gate is not
+the deck; it must live in the input step. (This is the committed
+Corollary-7 discipline, now with its module-level proof on the face.)
+\end{corollary}
+
+\subsection{Theorem R5 --- the parity unification on the Weil rays}
+
+\begin{theorem}[R5; PROVEN HERE]
+On the Weil plane $M=\Z\langle W_R,W_I\rangle$ with
+$\gamma W_R=-W_I$, $\gamma W_I=W_R$:
+\begin{enumerate}
+\item $H^1(C_4;M)=M/(\gamma-1)M\cong\Z/2$.
+\item $m\,W_R\in(\gamma-1)M\iff m$ even; likewise $m\,W_I\in(\gamma-1)M
+\iff m$ even.
+\item The diagonal class $W_R+W_I$ lies in $(\gamma-1)M$ integrally
+(killed at scale $1$): $(\gamma-1)(-W_R)=W_R+W_I$.
+\end{enumerate}
+Consequently the door data on the rays --- the admitted scale list
+$[2,4,6,8,10,12]$, the refusals at odd scale, and the pins
+$m^*(A,2,W_R)=m^*(A,2,W_I)=2$ --- is exactly the $H^1$-law: the least
+scale killing the $H^1$-torsion of the ray is the least even scale,
+which is $2$.
+\end{theorem}
+
+\begin{proof}
+(1) $(\gamma-1)W_R=-W_I-W_R$ and $(\gamma-1)W_I=W_R-W_I$, so the matrix
+of $\gamma-1$ in the basis $(W_R,W_I)$ is
+$\left(\begin{smallmatrix}-1&1\\-1&-1\end{smallmatrix}\right)$ with
+determinant $2$; the image has index $2$, so
+$M/(\gamma-1)M\cong\Z/2$.
+
+(2) Solve $(\gamma-1)(aW_R+bW_I)=mW_R$: the $W_I$-coordinate forces
+$-a-b=0$, i.e.\ $b=-a$, and then the $W_R$-coordinate is $b-a=-2a=m$;
+solvable in $\Z$ exactly when $m$ is even. The $W_I$ ray is the image of
+the $W_R$ ray under $\gamma$ (R2(3)), and $(\gamma-1)$ commutes with
+$\gamma$, so the same criterion holds for $W_I$.
+
+(3) $(\gamma-1)(-W_R)=-(\,-W_I-W_R\,)=W_R+W_I$.
+\end{proof}
+
+\begin{remark}[Scope, on the face]
+The unification holds on the Weil rays, where the committed door data
+lives. On the diagonal the $H^1$-law is weaker (R5(3): killed at scale
+$1$), and the all-even sector carries the scale-$4$ law of R2(4). These
+boundaries are the same boundaries the Round-23 artifact records; here
+they are computed rather than asserted.
+\end{remark}
+
+\subsection{The $C_2$ swap law}
+
+\begin{theorem}[SWAP; PROVEN HERE]
+Let $M=\Z^n\oplus\Z^n$ with $\sigma(z,w)=(w,z)$. Then
+$M^{\sigma}=\{(z,z)\}$, the norm $N\sigma(z,w)=(z+w,z+w)$ maps onto
+$M^{\sigma}$ (already $N\sigma(z,0)=(z,z)$), and
+\[
+H^2(C_2;M)=M^{\sigma}/N\sigma M=0 .
+\]
+\end{theorem}
+
+\begin{proof}
+Immediate from \S2.1: the fixed set is the diagonal, the norm of
+$(z,0)$ is the diagonal element $(z,z)$, so the norm is surjective onto
+the fixed set.
+\end{proof}
+
+\begin{remark}[Scope]
+The vanishing is a statement about $\sigma$-invariant cocycles. The
+committed witness content $(W_R,-W_R)$ is $\sigma$-anti-invariant, hence
+not a $C_2$-cocycle, hence untouched by this vanishing --- the module
+fact above and this boundary together are the [SWAP] receipt as
+committed. The pair-level witness (the matrix-valued residue) is the
+subject of \S6 below and is OPEN at the pair level.
+\end{remark}
+
+\section{The operator's all-arity cyclic law (the 22--23 redirect) --- complete proofs}
+
+This section is the operator's own mathematics: the cyclic fold recorded
+2026-10-22 (cyclic-original-X, all-arity) and its Gaussian exchange. The
+claims are proven here from first principles. Throughout, $X$ is a
+connected smooth projective complex variety, $m\ge2$,
+$B=X^m$, $G=C_m=\langle\sigma\rangle$ acts on $B$ by cyclic factor
+permutation $\sigma(x_1,\dots,x_m)=(x_2,\dots,x_m,x_1)$, $E$ is an
+elliptic curve, and $t\in E$ is a point of exact order $m$.
+
+\subsection{The freeness lemma and the two quotient worlds}
+
+\begin{theorem}[Freeness; PROVEN HERE]
+The action of $G$ on $X^m\times E$ defined by
+$\sigma(x_1,\dots,x_m,u)=(x_2,\dots,x_m,x_1,\,u+t)$ is free. Hence
+$S_m(X):=(X^m\times E)/C_m$ is a smooth projective variety and
+$q\colon X^m\times E\to S_m(X)$ is a finite \'etale Galois cover with
+group $C_m$.
+\end{theorem}
+
+\begin{proof}
+Suppose $\sigma^j(p,u)=(p,u)$ for $0<j<m$. The $E$-coordinate forces
+$jt=0$ in the group law of $E$. Since $t$ has exact order $m$ and
+$0<j<m$, $jt\ne0$. Contradiction; the action is free.
+
+A free action of a finite group of holomorphic automorphisms on a complex
+manifold has a smooth quotient (the quotient map is a covering map, so
+locally biholomorphic), and the quotient of a projective variety by a
+finite group action is projective (the quotient map is finite, and the
+image of a projective variety under a finite morphism is projective).
+\end{proof}
+
+Let $D_m$ be the nodal $m$-gon: $m$ copies of $\mathbb P^1$, with
+$\infty$ on component $i$ glued to $0$ on component $i+1$ (indices mod
+$m$); $C_m$ acts by rotating the components. Write
+$Y_m(X):=(X^m\times D_m)/C_m$ for the nodal quotient world.
+
+\begin{theorem}[Freeness on the polygon world; PROVEN HERE]
+The diagonal action of $C_m$ on $X^m\times D_m$ is free.
+\end{theorem}
+
+\begin{proof}
+Every point of $D_m$ lies on a unique component $C_i$ (nodes lie on
+two; assign the node between $C_i$ and $C_{i+1}$ to both --- in either
+assignment $\sigma$ moves it to the node between $C_{i+1}$ and
+$C_{i+2}$, which is a different point for $m\ge2$). The rotation
+$\sigma^j$ ($0<j<m$) sends each component to a different component
+(there is only one orbit of components and $j\not\equiv0$), so no point
+of $D_m$ is fixed by $\sigma^j$. A point $(b,d)$ fixed by $\sigma^j$
+would in particular have $d$ fixed by $\sigma^j$; there is none.
+\end{proof}
+
+\subsection{The cohomology of $D_m$ as a $C_m$-mixed Hodge module}
+
+\begin{theorem}[$D_m$; PROVEN HERE]
+As a $C_m$-equivariant rational mixed Hodge structure,
+\[
+H^0(D_m,\Q)=\Q(0),\qquad
+H^1(D_m,\Q)=\Q(0),\qquad
+H^2(D_m,\Q)=\Q(-1)\otimes\Q[C_m],
+\]
+where $C_m$ acts trivially on the first two and by the regular
+representation on the third. In particular $H^1(D_m)$ is the
+\emph{weight-zero} node class.
+\end{theorem}
+
+\begin{proof}
+Let $\nu\colon\tilde D_m=\bigsqcup_i \mathbb P^1_i\to D_m$ be the
+normalization. For a nodal curve the gluing sequence of sheaves
+\[
+0\to\Q_{D_m}\to\nu_*\Q_{\tilde D_m}\to\bigoplus_{p\in\mathrm{Nodes}}\Q_p\to0
+\]
+is exact: a locally constant function on $\tilde D_m$ descends to
+$D_m$ exactly when its two branch values at each node agree, and the
+cokernel at each node is the difference of the two branch values, a copy
+of $\Q$ supported at the node. The long exact sequence, with
+$H^1(\mathbb P^1)=0$ and $H^2(\tilde D_m)=\bigoplus_i\Q(-1)$, gives
+\[
+0\to\Q\to\Q^m\xrightarrow{\ \partial\ }\Q^m\to H^1(D_m)\to0,
+\qquad
+H^2(D_m)\cong\Q^m(-1),
+\]
+where $\partial$ sends the component indicator $e_i$ to the node
+difference vector with $+1$ at the node joining $C_{i-1},C_i$ and $-1$
+at the node joining $C_i,C_{i+1}$: this is the simplicial coboundary of
+the dual $m$-cycle. Its image is the sum-zero subspace
+($\sum_i\partial e_i=0$ by telescoping, and the image has rank $m-1$),
+so $\dim H^1(D_m)=m-(m-1)=1$, and $H^1(D_m)$ is a quotient of
+$H^0(\text{nodes})$, a weight-zero object: by the standard curve
+normalization sequence (Deligne; Peters--Steenbrink), for a proper
+curve $0\to W_0H^1(D)\to H^1(D)\to H^1(\tilde D)\to0$ with
+$W_0H^1(D)\cong(\text{the node cokernel above})(0)$; here
+$H^1(\tilde D)=0$, so $H^1(D_m)=\Q(0)$.
+
+The $C_m$-action permutes the components and the nodes cyclically, so
+it permutes the $m$ summands of $H^2(D_m)=\Q^m(-1)$ (the fundamental
+classes of the components) transitively and freely: that is the regular
+representation tensored with $\Q(-1)$. The node class (the all-ones
+vector in the cokernel of $\partial$) is fixed by the rotation.
+
+\emph{Cross-check (complete):} the $E$-polynomial.
+$E(D_m)=E(\tilde D_m)-E(\text{two points per node})+E(\text{one point
+per node})=m(1+uv)-2m+m=muv$, which decomposes as
+$E(H^0)-E(H^1)+E(H^2)=1-1+m\,uv$ exactly for
+$H^0=\Q(0)$, $H^1=\Q(0)$, $H^2=\Q^m(-1)$.
+\end{proof}
+
+\subsection{The transfer theorem}
+
+\begin{theorem}[Transfer; PROVEN HERE]
+Let $q\colon Z\to Z/G$ be the quotient by a free action of a finite
+group $G$. Then for rational cohomology
+\[
+q^*\colon H^*(Z/G,\Q)\xrightarrow{\ \cong\ }H^*(Z,\Q)^G .
+\]
+\end{theorem}
+
+\begin{proof}
+$q$ is a covering map with $|G|$ sheets, so $q_*q^*c=|G|\,c$ for
+$c\in H^*(Z/G,\Q)$ (sum over the sheets), hence $q^*$ is injective after
+tensoring with $\Q$. Every $g\in G$ satisfies $q\circ g=q$, so
+$g^*q^*=q^*$ and $\im(q^*)\subseteq H^*(Z,\Q)^G$. Conversely, the
+averaging idempotent $e=\frac1{|G|}\sum_{g}g^*$ is a ring endomorphism
+of $H^*(Z,\Q)$ with image $H^*(Z,\Q)^G$, and for an invariant class
+$x$ one has $x=\frac1{|G|}\sum_g g^*x=q^*\!\big(\frac1{|G|}q_*x\big)$,
+so $H^*(Z,\Q)^G\subseteq\im(q^*)$.
+\end{proof}
+
+\subsection{The two sector laws}
+
+Write $V_k=H^k(X^m,\Q)$ with $C_m$ acting by factor permutation
+(the negative-index groups vanish).
+
+\begin{theorem}[The $S_m$ sector law --- the operator's pure formula;
+PROVEN HERE]
+For every $k$,
+\[
+H^k\big(S_m(X),\Q\big)\;\cong\;
+V_k^{G}\;\oplus\;\big(V_{k-1}^{G}\otimes H^1(E)\big)\;\oplus\;V_{k-2}^{G}(-1),
+\]
+and the right side is pure of weight $k$. Here $H^2(E)=\Q(-1)$ and
+$C_m$ acts trivially on $H^*(E)$.
+\end{theorem}
+
+\begin{proof}
+Translation by any point of $E$ is homotopic to the identity (a path
+from $0$ to that point moves the translation continuously to
+$\mathrm{id}_E$), so the translation part of the action is trivial on
+$H^*(E)$, and the action on $H^*(X^m\times E)=H^*(X^m)\otimes H^*(E)$
+(K\"unneth) is $\rho\otimes\mathrm{id}$. The averaging argument of
+\S3.3 gives $(V\otimes W)^G=V^G\otimes W$ when $G$ acts trivially on
+$W$: the idempotent is $e_V\otimes\mathrm{id}$. By transfer,
+$H^k(S_m)=\big(\oplus_{i+j=k}V_i\otimes H^j(E)\big)^G
+=\oplus_{i+j=k}V_i^G\otimes H^j(E)$, and $H^j(E)$ is nonzero exactly
+for $j=0,1,2$ with $H^0=\Q(0)$, $H^1=\Q^2$ of weight $1$,
+$H^2=\Q(-1)$. Each summand of the result has weight
+$k$, $k$, and $(k-2)+2=k$; $S_m$ is smooth projective, so its
+cohomology is pure, consistent.
+\end{proof}
+
+\begin{theorem}[The $Y_m$ mixed law --- the operator's nodal formula;
+PROVEN HERE]
+For every $k$,
+\[
+H^k\big(Y_m(X),\Q\big)\;\cong\;
+V_k^{G}\,[\text{weight }k]\;\oplus\;
+V_{k-1}^{G}\,[\text{weight }k-1]\;\oplus\;
+V_{k-2}(-1)\,[\text{weight }k],
+\]
+with the third term the \emph{full} $V_{k-2}$, not its invariants. The
+weight-$(k-1)$ content is the node class of $D_m$: the mixedness is
+real and comes from the singular curve, not from the group action.
+\end{theorem}
+
+\begin{proof}
+The action on $X^m\times D_m$ is free (\S3.2), so by transfer
+$H^k(Y_m)=\big(H^*(X^m)\otimes H^*(D_m)\big)^G$ with the diagonal
+action. K\"unneth (rational cohomology) and \S3.2 give
+\[
+\big(V_i\otimes H^j(D_m)\big)^G
+=\begin{cases}
+V_i^G & j=0,\\
+V_{i}^G\otimes\Q(0) & j=1,\\
+\big(V_i\otimes\Q[C_m]\big)^G & j=2.
+\end{cases}
+\]
+For the regular-representation term, the map
+$v\mapsto\sum_{g\in G}gv\otimes g$ is an isomorphism
+$V_i\xrightarrow{\ \cong\ }(V_i\otimes\Q[G])^G$ under the diagonal
+action: an element $x=\sum_h v_h\otimes h$ is $G$-invariant iff
+$g\,v_{g^{-1}h}=v_h$ for all $g,h$, which for $h=g$ reads
+$v_g=g\,v_1$, so $x=\sum_g(gv_1)\otimes g$; conversely every such
+element is invariant by direct substitution. Hence the $j=2$
+contribution is the full $V_{k-2}$, tensored with $\Q(-1)$:
+the operator's ``explicit check preventing an incorrect
+operator-invariant approximation,'' proven. The weights: $V_k^G$ has
+weight $k$; $V_{k-1}^G\otimes H^1(D_m)=V_{k-1}^G\otimes\Q(0)$ has
+weight $k-1$; $V_{k-2}\otimes\Q(-1)$ has weight $k$.
+\end{proof}
+
+\begin{remark}[The redirect's content, on the face]
+These two theorems are the operator's 22--23 idea executed: the world
+is changed by an actual finite quotient, the arity $m$ is free, the
+cohomology of the new world is computed exactly from the original $X$
+(the $V_\bullet$ and nothing else), and the mixed/pure contrast
+($Y_m$ vs.\ $S_m$) is produced by geometry (the node class), not by
+typing. Every step above is complete.
+\end{remark}
+
+\subsection{The transport identities --- the arity law}
+
+\begin{theorem}[Descent and the return leg; PROVEN HERE]
+Let $\alpha\in H^*(X,\Q)$, let
+$\mathrm{pr}_i\colon X^m\to X$ be the $i$-th projection, and
+$\Theta_m(\alpha):=\sum_{i=1}^m\mathrm{pr}_i^*\alpha\in
+H^*(X^m,\Q)$. Then:
+\begin{enumerate}
+\item $\Theta_m(\alpha)$ is $C_m$-invariant, and
+$\mathrm{pr}_B^*\Theta_m(\alpha)$ on $X^m\times E$ (with
+$\mathrm{pr}_B$ the projection to $X^m$) is $C_m$-invariant for the
+\S3.1 action; hence by transfer there is a unique rational class
+$\widehat\alpha_m\in H^*(S_m(X),\Q)$ with
+$q^*\widehat\alpha_m=\mathrm{pr}_B^*\Theta_m(\alpha)$.
+\item \textbf{The return leg.} Let $\delta\colon X\to X^m\times E$,
+$\delta(x)=(x,\dots,x,0)$. Then
+\[
+(q\circ\delta)^*\widehat\alpha_m=m\cdot\alpha .
+\]
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) $\sigma^*\mathrm{pr}_i^*=\mathrm{pr}_{i+1}^*$ (indices mod $m$), so
+$\sigma^*\Theta_m(\alpha)=\Theta_m(\alpha)$. The $E$-translation does
+not touch $\mathrm{pr}_B^*\Theta_m(\alpha)$, and
+$\sigma^*\mathrm{pr}_B^*=\mathrm{pr}_B^*\sigma_B^*$, so the class is
+invariant; transfer (\S3.3) identifies invariant rational classes with
+$q^*$-pullbacks, uniquely because $q^*$ is injective.
+
+(2) $(q\circ\delta)^*\widehat\alpha_m
+=\delta^*q^*\widehat\alpha_m
+=\delta^*\mathrm{pr}_B^*\Theta_m(\alpha)
+=(\mathrm{pr}_B\circ\delta)^*\Theta_m(\alpha)$, and
+$\mathrm{pr}_B\circ\delta=\Delta$ the small diagonal, with
+$\Delta^*\mathrm{pr}_i^*=(\mathrm{pr}_i\circ\Delta)^*=\mathrm{id}^*$
+for every $i$. Hence the pullback is
+$\sum_{i=1}^m\alpha=m\,\alpha$.
+\end{proof}
+
+\begin{theorem}[The symmetrizer; PROVEN HERE]
+For any $C_m$-module $V$ over $\Q$ and any invariant $x\in V^G$,
+$(1+\sigma+\cdots+\sigma^{m-1})x=m\,x$.
+\end{theorem}
+
+\begin{proof}
+Each summand $\sigma^j x$ equals $x$.
+\end{proof}
+
+\begin{remark}[The forward leg; scope]
+The forward leg
+$\widehat W=\frac1m\,q_*\,\mathrm{pr}_B^*W_B$ with
+$\mathrm{cl}(\widehat W)=\widehat\alpha_m$ on the committed $A$-world,
+and the primitivity of the transported rays
+($\widehat\alpha_m/m$ non-integral at every tested arity), are the
+committed certificate's lattice computations
+(\texttt{cyclic\_family\_checks.py}, 298 checks, and
+\texttt{cyclic\_transport\_checks.py}, 125 checks; the covering formula
+$q^*q_*=\sum_g g^*$ used by the leg is \S3.3's argument run backward).
+The certified family rows: $m=2,3,4$ lattice-exact, $m=5$ at character
+level (the operator's Wolfram total $208$). \textbf{[CERTIFICATE
+RECEIPT]}
+\end{remark}
+
+\begin{theorem}[The cyclotomic engine; PROVEN HERE]
+For every $L\ge1$,
+\[
+\prod_{k=0}^{L-1}\big(1+\zeta_L^k\big)=1-(-1)^L,
+\qquad \zeta_L=e^{2\pi i/L}.
+\]
+\end{theorem}
+
+\begin{proof}
+The $\zeta_L^k$ are the roots of $x^L-1$, so
+$\prod_{k=0}^{L-1}(x-\zeta_L^k)=x^L-1$. Evaluate at $x=-1$:
+the left side is $(-1)^L\prod_k(1+\zeta_L^k)$ and the right side is
+$(-1)^L-1$. If $L$ is even, both sides vanish (indeed the factor
+$k=L/2$ is $1+(-1)=0$), and $1-(-1)^L=0$. If $L$ is odd,
+$(-1)^L\prod(1+\zeta^k)=-2$ gives $\prod(1+\zeta^k)=2=1-(-1)^L$.
+\end{proof}
+
+\begin{remark}[Scope]
+This identity, with the cycle structure $g=\gcd(j,m)$ of the rotation,
+is the engine by which the certificate reproduces the operator's five
+Wolfram totals $(4,8,24,64,208)$ two independent ways (the cyclotomic
+product route and the brute-force signed exterior character). The
+identity is proven here; the five totals are the certificate's
+receipts. \textbf{[CERTIFICATE RECEIPT]}
+\end{remark}
+
+\subsection{The Gaussian exchange on the family}
+
+\begin{theorem}[The full Weil plane on the family; PROVEN HERE at the
+lattice level]
+On the committed $A$-world, the diagonal Gaussian
+$g_m=(g,\dots,g)$ commutes with the cyclic action (block-diagonal
+commutation) and acts trivially on the $E$-factor, so it descends to
+$S_m(A)$; per block it multiplies $\Omega$ by $i$
+(R2(3)), hence
+\[
+g_m\big(\Theta_m(W_R)\big)=-\Theta_m(W_I),\qquad
+g_m\big(\Theta_m(W_I)\big)=\Theta_m(W_R),
+\]
+word-exact, at every arity.
+\end{theorem}
+
+\begin{proof}
+$g$ fixes each factor's letter pair by the signed permutation R2, so
+$g_m$ commutes with the factor rotation $\sigma$ on the letter model
+and with the $E$-translation; the descent is the transfer argument of
+\S3.3. The action on $\Theta_m(W_R)=\sum_i\mathrm{pr}_i^*W_R$ is
+$\sum_i\mathrm{pr}_i^*gW_R=-\sum_i\mathrm{pr}_i^*W_I$, using R2(3) on
+each block.
+\end{proof}
+
+\section{The classical layer, with derivations}
+
+\subsection{Lefschetz $(1,1)$ --- the divisor sector, complete}
+
+\begin{theorem}[Lefschetz $(1,1)$; STANDARD STRENGTH, proof written out]
+Let $X$ be a smooth projective complex variety. Then
+\[
+\im\big(c_1\colon\mathrm{Pic}(X)\to H^2(X,\Z)\big)\otimes\Q
+=\big(H^{1,1}(X)\cap H^2(X,\Q)\big),
+\]
+i.e.\ every rational $(1,1)$ class is a rational linear combination of
+classes of divisors.
+\end{theorem}
+
+\begin{proof}
+The exponential sequence of sheaves
+$0\to\Z\to\Oo_X\xrightarrow{\exp}\Oo_X^*\to0$ is exact ($\exp$ is
+surjective as a sheaf map because a logarithm exists locally on
+nonvanishing holomorphic functions). Its long exact sequence contains
+\[
+H^1(X,\Oo_X)\to H^1(X,\Oo_X^*)\xrightarrow{\ \delta\ }H^2(X,\Z)
+\xrightarrow{\ j\ }H^2(X,\Oo_X).
+\]
+The standard identifications: $H^1(X,\Oo_X^*)=\mathrm{Pic}(X)$
+(isomorphism classes of holomorphic line bundles $=$ invertible sheaves
+$\Leftrightarrow$ \v{C}ech 1-cocycles with values in $\Oo_X^*$), and
+$\delta=c_1$ (on transitions $g_{ij}$ the boundary is the \v{C}ech
+cocycle $\frac{1}{2\pi i}(\log g_{ij}+\log g_{jk}+\log g_{ki})$, the
+integral Chern class). Hence
+$\im(c_1)=\ker\big(H^2(X,\Z)\xrightarrow{j}H^2(X,\Oo_X)\big)$.
+
+$X$ is K\"ahler (projective), so
+$H^2(X,\C)=H^{2,0}\oplus H^{1,1}\oplus H^{0,2}$ and
+$H^2(X,\Oo_X)=H^{0,2}(X)$ (Dolbeault isomorphism). The composite
+$H^2(X,\Z)\to H^2(X,\C)\to H^{0,2}$ is $j$ after these
+identifications, so an integral class $\gamma$ (mod torsion) lies in
+$\ker j$ iff its $(0,2)$ component vanishes. An integral class is real,
+and conjugation exchanges the $(2,0)$ and $(0,2)$ components, so
+$\gamma^{0,2}=0$ forces $\gamma^{2,0}=0$: $\gamma$ is of type
+$(1,1)$. Conversely a $(1,1)$ integral class has vanishing $(0,2)$
+component. Thus
+$\im(c_1)=H^{1,1}\cap H^2(X,\Z)$ up to torsion, and tensoring with
+$\Q$ kills the torsion and gives the claim.
+\end{proof}
+
+\subsection{The hard-Lefschetz reduction}
+
+\begin{theorem}[The $p>d/2$ reduction; STANDARD STRENGTH]
+Let $\dim_\C X=d$, $h=c_1(\Oo_X(1))$, and suppose
+$\alpha\in H^{2p}(X,\Q)$ is a rational $(p,p)$ class with $p>d/2$.
+Then $\alpha=h^{\,2p-d}\cdot\beta$ for a rational
+$(d-p,d-p)$ class $\beta\in H^{2(d-p)}(X,\Q)$. If $\beta$ is
+rational-algebraic then so is $\alpha$.
+\end{theorem}
+
+\begin{proof}
+Hard Lefschetz (Deligne; standard strength): for $k\le d$ the map
+$L^k=(\,\cup\, h^k)$ sends $H^{2(d-k)}(X)\to H^{2d-2k+2k}=H^{2d}$
+--- in the needed form, $L^{2p-d}\colon H^{2(d-p)}(X)\to H^{2p}(X)$ is
+an isomorphism, of Hodge structures
+$H^{2(d-p)}(X)\cong H^{2p}(X)\big(-(2p-d)\big)$, where the Tate shift
+by $-(2p-d)$ adds $(2p-d,2p-d)$ to every Hodge type. Set
+$\beta=(L^{2p-d})^{-1}\alpha$. An isomorphism of Hodge structures is
+an isomorphism on each type stratum, and the stratum of type
+$(p,p)$ in $H^{2p}(X)(-(2p-d))$ is the image of exactly the stratum of
+type $(d-p,d-p)$ in $H^{2(d-p)}(X)$ (solve
+$(r+2p-d,\;2(d-p)-r+2p-d)=(p,p)$: $r=d-p$). So $\beta$ is
+$(d-p,d-p)$, and it is rational because $L^{2p-d}$ and its inverse act
+on rational classes ($h$ is rational, and the inverse of a rational
+matrix is rational).
+
+If $\beta=\mathrm{cl}(\sum_i q_i Z_i)$ then
+$\alpha=\mathrm{cl}(\sum_i q_i\, h^{2p-d}\cdot[Z_i])$, and
+$h^{2p-d}\cdot[Z_i]$ is the class of the cycle obtained by intersecting
+$Z_i$ with $2p-d$ general hyperplane sections (moving the ample
+divisor to meet $Z_i$ properly): the cycle class map is
+ring-compatible. So $\alpha$ is rational-algebraic.
+\end{proof}
+
+\subsection{Lemma N --- the Newton conductor, complete}
+
+\begin{theorem}[Lemma N; PROVEN HERE, with the splitting principle at
+standard strength]
+Let $X$ be smooth projective and let $E_+,E_-$ be algebraic vector
+bundles with $\mathrm{rk}\,E_+=\mathrm{rk}\,E_-$ and
+\[
+\ch(E_+)-\ch(E_-)=m\,\alpha,\qquad
+\alpha\in H^{2p}(X,\Q),\ m\ne0,
+\]
+all other Chern-character degrees cancelling. Let
+$V=E_+\ominus E_-$ be the virtual bundle. Then
+\[
+c_j(V)=0\ \ (j<p),\qquad
+c_p(V)=(-1)^{p-1}(p-1)!\,m\,\alpha .
+\]
+\end{theorem}
+
+\begin{proof}
+Write $c_k=e_k$ for the elementary symmetric functions of the Chern
+roots $x_1,\dots,x_r$ of $E_+$ minus those of $E_-$ (the splitting
+principle: Chern classes and $\ch$ are compatible with pullback, so
+identities proven universally on the split model hold; standard
+strength). The power sums
+$p_k=\sum_i x_i^k$ (with the virtual signs) satisfy
+$p_k=k!\,\ch_k$: indeed $\ch=\sum_i e^{x_i}$ (with signs for the
+virtual summands), so the degree-$2k$ part of $\ch$ is
+$\frac1{k!}\sum_i x_i^k=\frac{p_k}{k!}$. By hypothesis
+$\ch_k(V)=0$ for $k<p$ and $\ch_p(V)=m\alpha$, so $p_k=0$ for $k<p$
+and $p_p=p!\,m\,\alpha$.
+
+Newton's identities (proof: from
+$E(t)=\prod_i(1+x_it)=\sum_k e_kt^k$ take
+$E'(t)/E(t)=\sum_i\frac{x_i}{1+x_it}
+=\sum_{k\ge1}(-1)^{k-1}p_kt^{k-1}$ and match coefficients of
+$t^{k-1}$):
+\[
+k\,e_k=\sum_{i=1}^{k}(-1)^{i-1}e_{k-i}\,p_i .
+\]
+Induction on $k$: for $k<p$ every $p_i$ with $i\le k$ vanishes, so
+$e_k=0$. At $k=p$: every term with $1\le i\le p-1$ has $p_i=0$, and
+the $i=p$ term is $(-1)^{p-1}e_0p_p=(-1)^{p-1}p!\,m\,\alpha$, so
+$p\,e_p=(-1)^{p-1}p!\,m\,\alpha$ and
+$e_p=(-1)^{p-1}(p-1)!\,m\,\alpha$.
+\end{proof}
+
+\begin{remark}[The two-center output identity; scope]
+The two-center descent law ([TWO-CENTER], 2026-10-24) takes Lemma N's
+output through the determinantal conduit: the degeneracy loci
+$D_\pm$ of the pair realize
+\[
+Z_\alpha=\frac{(-1)^{p-1}}{(p-1)!\,m}\big([D_+]-[D_-]\big),
+\qquad \mathrm{cl}^{\mathrm{can}}(Z_\alpha)=\alpha
+\]
+exactly, on the committed instances (both Weil rays, $k=0..3$, and the
+NS-tuned instances; the Thom--Porteous/Fulton--Lazarsfeld degeneracy
+computations at standard strength). The conduit is the campaign's
+conditional law with its calibration on $\mathrm{Gr}(2,5)$ (the
+$360$ pin); it is used below exactly as committed, as a conditional.
+\textbf{[CERTIFICATE RECEIPT + STANDARD STRENGTH on the degeneracy
+step]}
+\end{remark}
+
+\subsection{The Oka pair and the descent criterion; scope}
+
+The 2026-10-23 construction: on the Stein fold $J_N(X)$ there is a
+finite global holomorphic projector $P_\alpha$ with
+$\ch(\im P_\alpha)=r+m\,q^*\alpha$ for every rational even class
+$\alpha$ (a fortiori every rational $(p,p)$ class). Classical backing:
+Oka--Grauert (topological $\Leftrightarrow$ holomorphic bundles over
+Stein spaces) and the Forster-type finite generation of the
+projective module; the construction is the campaign's, committed with
+its hostile controls. The descent criterion (flat vertical connection
+$\iff$ descent of the holomorphic bundle to $X$) is standard gerbe /
+descent theory. Both are used exactly as committed.
+\textbf{[CERTIFICATE RECEIPT + STANDARD STRENGTH]}
+
+\section{The composition, conditional, as committed}
+
+\begin{theorem}[The conditional composition; as committed, audit-confirmed
+mechanically intact]
+Suppose that at every input $(X,p,\alpha)$ of the open sector
+($2\le p\le\lfloor d/2\rfloor$, $d\ge4$) the remaining construction
+(\S6) is discharged. Then every rational $(p,p)$ class on every
+smooth projective $X$ is rational-algebraic.
+\end{theorem}
+
+\begin{proof}[The committed argument, with each ingredient's location]
+STEP 1 (the pair bit): an integrable pure pair $(E_\pm$, equal rank,
+$\ch$-difference $=m\alpha$ pure$)$ at scale $m\ne0$ implies
+$\alpha$ rational-algebraic through the \S4.3 conduit
+(Lemma N + the two-center output identity). STEP 2 (the $p>d/2$
+reduction): \S4.2. STEP 3 (Sector 1, the divisor-generated sector):
+the line-bundle compiler I2 (Round 18, audit-closed) and Lefschetz
+$(1,1)$ (\S4.1). STEP 4 (Sector 2, the general input): the Oka pair of
+\S4.4 on the Stein fold; the descent criterion; the D2/D3 strip
+reducing the obstruction to the traceless two-cell
+$[C_T^0]$; the deck of \S2 acting on the strip's output; the
+vanishing $H^2=0$ of R1/[SWAP]. STEP 5: the composition over the
+sector partition. The mechanical integrity of this composition
+(the partition exhaustiveness, the step order, the plumbing) was
+confirmed by the 21-b/21-c and 24-b/24-c audits; what those audits
+found missing is exactly \S6.
+\end{proof}
+
+\section{THE REMAINING THEOREM (stated precisely, with receipts)}
+
+\begin{theorem}[The remaining construction; OPEN]
+The following four items, plus the strip reduction, are open. Each is
+stated in plain terms with its receipt.
+\begin{enumerate}
+\item[\textbf{(i)}] \textbf{The involution structure at general input.}
+At an arbitrary $(X,p,\alpha)$, the carrier pair on the Stein fold
+must carry an involution/eigenbranch exchange structure of the type
+the model has (the eight-letter world's $C_4$ deck, \S2). The corpus
+contains it only as model-level content and as a committed no-go
+rigidity theorem (2026-10-24). No construction at general input
+exists. Receipt: 21-c R1(2), 24-b B1.
+\item[\textbf{(ii)}] \textbf{The two-cell reduction.} The actual
+obstruction class is $[C_T^0]\in H^2(\mathcal G_\bullet,SL(H_z))$ ---
+a nonabelian class on the full affine translation groupoid. The deck
+computations of \S2 live in abelian group cohomology. The reduction
+of the nonabelian class to the deck computation is not constructed;
+every attempted vocabulary for it so far (the 22-b value re-typing,
+the 22-c exchange-norm) was found by the audits to be the same gap
+restated. Receipt: AUDIT\_22 F1 (with the equivariant-descent
+spectral sequence demand and the missing base-level involution),
+24-b B1.
+\item[\textbf{(iii)}] \textbf{The non-scalar unexchanged content.} The
+D2/D3 strip removes exactly the scalar part; a rank $\ge2$ deck-fixed
+summand survives. Computed counterexample (AUDIT\_22 F2, exact
+fractions): the pair $(A,-A)$ with $A=\left(\begin{smallmatrix}0&1\\
+1&0\end{smallmatrix}\right)$, traceless, non-scalar, satisfies the
+pair-trace law and the derivation property with \emph{zero}
+symmetrized residue: symmetrization kills nothing, and conjugation
+cannot scalarize a non-scalar curvature (it preserves the similarity
+class). Receipt: AUDIT\_22 F2, 21-b counterexample 2.
+\item[\textbf{(iv)}] \textbf{The rank parity.} The eigenbranch exchange
+needs an even split $r_0=2a$; the machine produces $r_0=d+1$, odd for
+every even $d$; the first open input $d=4$, $p=2$ has $r_0=5$.
+Receipt: 21-c R1(3).
+\item[\textbf{(v)}] \textbf{The strip-shape hypothesis.} The
+identification link $\Lambda_p$ (Round 24) is constructed on the
+assumed cochain shape
+$c_{m,\alpha}(v,w)=\theta(v,w)\,\iota(m\alpha)$; the reduction of the
+actual $GL(H_z)$-valued two-cell to this shape is the link's own
+remaining step. Receipt: 24-b B1, 24-c.
+\end{enumerate}
+\end{theorem}
+
+\begin{theorem}[The reduction; PROVEN HERE as a statement of the
+campaign's own commitments]
+If items \textnormal{(i)--(v)} are discharged at every input of the open
+sector, then the rational Hodge conjecture holds on the open sector.
+The converse is not claimed and is not expected: the conjecture could
+hold through a different mechanism while this campaign's pair
+construction fails; the items describe this route, not all routes.
+\end{theorem}
+
+\begin{proof}
+Fix an input $(X,p,\alpha)$ of the sector. The five items give: the
+carrier pair with the exchange structure (item (i)); the two-cell class
+reduced to the deck computation, which vanishes by \S2 (item (ii));
+the non-scalar unexchanged content excluded (item (iii)); the even
+split $r_0=2a$ (item (iv)); the cochain shape of the strip (item (v)).
+The composition of \S5 then produces the pure pair at nonzero scale
+at this input, and the \S4.3 conduit exhibits $\alpha$ as
+rational-algebraic. Quantifying over the inputs gives the claim.
+\end{proof}
+
+\begin{remark}[The Round-26 audit catch, on the face]
+The Round-25 draft of this section stated an equivalence and offered,
+as its converse-direction proof, exactly the forward argument restated
+at a single input --- an overclaim of the class the campaign's audits
+remove elsewhere. Caught by the Round-26 self-audit (the \S36 loop run
+against this file before its Lean face was written); repaired here and
+in the Lean face (the one-directional composition). The one direction
+is the load-bearing one: it is why the remaining theorem is exactly as
+hard as the part of the conjecture it produces.
+\end{remark}
+
+\begin{corollary}[The content of the order ``prove the GST laws'']
+The GST laws that remain unproven --- items \textnormal{(i)--(v)} ---
+are not auxiliary lemmas with independent proofs waiting to be written;
+by the reduction, a proof of them is a proof of the Hodge conjecture
+on the open sector. Conversely, the laws that \emph{did} have proofs
+waiting are now proven: \S2 and \S3 of this file contain complete
+derivations of every model-level law the closure uses (the deck laws,
+the swap law, the all-arity sector laws, the transport identities, the
+cyclotomic engine), and \S4 contains the classical layer with full
+derivations. The demand ``prove the laws, then finish'' has been
+executed to the exact boundary where the laws stop being provable and
+start being the conjecture.
+\end{corollary}
+
+\begin{theorem}[The quantifier line; PROVEN HERE]
+The world-axis and the input-axis are different axes. The certified
+census (122 rows), the door pins, and the infinite family
+$\{S_m(A)\}_{m\ge2}$ (\S3) are statements about specific worlds. The
+Clay statement universally quantifies over all smooth projective
+$X$, all $p$, all rational $(p,p)$ classes $\alpha$. No finite or
+countable family of certified rows closes a universally quantified
+statement; closure requires a law quantified over all inputs, and no
+such transport law is certified (the committed non-transport boundary,
+ledger 085). The operator's all-arity family enlarges the world model
+by an infinite certified set; it does not, and cannot, replace the
+input-axis transport.
+\end{theorem}
+
+\begin{proof}
+A universally quantified statement $\forall x\in\mathcal I\colon
+P(x)$ is implied by a certified set of instances $\{P(x)\colon x\in
+S\}$ only when $\mathcal I\subseteq S$. Here $\mathcal I$ is the class
+of all sector inputs; $S$ is the set of census worlds and the family
+$S_m(A)$; $\mathcal I\not\subseteq S$ (e.g.\ a very general
+hypersurface of degree $d\ge5$ in $\mathbb P^{d+1}$ with
+$p=2$ is an input and not a committed world). The only object that
+could close the gap is a transport law
+$\mathcal I\to\text{world model}$, and its non-existence at
+certified strength is the recorded ledger-085 boundary.
+\end{proof}
+
+\section{Why the closing string is not emitted (the receipts)}
+
+The string was emitted once, in the previous campaign, and the record
+of what happened to it is in the tree:
+
+\begin{enumerate}
+\item Round 22 emitted ``CONJECTURE IS PROVEN'' as the composed
+theorem D8, resting on Theorem D4(3) (the exchange-norm correction).
+\item The independent adversarial audit (\texttt{AUDIT\_22.md}) found
+D4(3) mathematically false: the computed counterexample of \S6(iii)
+above (the pair $(A,-A)$: zero symmetrized residue, both curvatures
+non-scalar), a second computed counterexample, a proves-too-much
+contradiction with the committed Corollary 7 (the mechanism is
+input-independent at $p\ge2$ and would descend non-Hodge content ---
+the input-blindness of \S2, Corollary 2.3, is the module-level reason
+the gate cannot be skipped), and false verification receipts (the L6
+regression claim: zero regressions had run).
+\item The order to withdraw was executed: the closing claim was
+withdrawn from all Round-22 artifacts; Rounds 23 and 24 and the
+10-31 universal close each restate the remaining construction on
+every artifact's face.
+\item The 21-c closing re-check independently closed the next close
+attempt at FAIL with the four items of \S6; the 24-b audit closed the
+identification-link round's first draft at FAIL with the strip-shape
+blocker.
+\end{enumerate}
+
+Emitting the string again, at the present state, would assert items
+(i)--(v) as proven. They are not proven; two of them have computed
+counterexamples against every mechanism proposed so far. The operator's
+own protocol (\S36: audit $\to$ one batched repair $\to$ one closing
+re-check) is the mechanism that produced these findings; a protocol
+cannot both mandate that loop and override its verdict. This file
+therefore ends at the strongest statement the mathematics supports:
+\S2--\S4 proven in full, \S5 conditional and intact, \S6 open and
+precise.
+
+\section*{The scope table}
+
+\begin{center}
+\begin{tabular}{lll}
+Law & Status & Where\\
+\hline
+Cyclic cohomology formulas & STANDARD STRENGTH & \S2.1\\
+R1 ($C_4$ obstruction law, 4 parts) & PROVEN HERE & \S2.2\\
+R2 (letter-parity, partition, one plane) & PROVEN HERE & \S2.3\\
+Input-blindness of the deck & PROVEN HERE & \S2.3, Cor.\\
+R5 (parity unification, $m^*=2$ pins) & PROVEN HERE & \S2.4\\
+{[SWAP]} $H^2(C_2;\Z^n\oplus\Z^n)=0$ & PROVEN HERE & \S2.5\\
+$C_2$ anti-invariant boundary & PROVEN HERE & \S2.5, Rem.\\
+Freeness (torsion translation; polygon) & PROVEN HERE & \S3.1--3.2\\
+$H^*(D_m)$ as $C_m$-MHS & PROVEN HERE & \S3.2\\
+Transfer theorem & PROVEN HERE & \S3.3\\
+$S_m$ sector formula (the 22 law) & PROVEN HERE & \S3.4\\
+$Y_m$ mixed formula (the 22 law) & PROVEN HERE & \S3.4\\
+Descent $+$ return leg $m\alpha$ (all-arity) & PROVEN HERE & \S3.5\\
+Symmetrizer identity & PROVEN HERE & \S3.5\\
+Forward leg, primitivity, family rows & CERTIFICATE RECEIPT & \S3.5, Rem.\\
+Cyclotomic engine & PROVEN HERE & \S3.5\\
+Gaussian exchange on the family & PROVEN HERE (lattice) & \S3.6\\
+Lefschetz $(1,1)$ & STANDARD STRENGTH, written out & \S4.1\\
+Hard-Lefschetz reduction ($p>d/2$) & STANDARD STRENGTH & \S4.2\\
+Lemma N (Newton conductor) & PROVEN HERE & \S4.3\\
+Two-center output identity & RECEIPT $+$ STANDARD (conditional) & \S4.3, Rem.\\
+Oka pair; descent criterion & RECEIPT $+$ STANDARD & \S4.4\\
+The composition & CONDITIONAL (committed) & \S5\\
+Items (i)--(v) & OPEN & \S6\\
+Reduction (items $\Rightarrow$ Clay sector) & PROVEN HERE & \S6\\
+Quantifier line (world vs.\ input axis) & PROVEN HERE & \S6\\
+\end{tabular}
+\end{center}
+
+\section*{ENGINE (per \S35)}
+
+The operator's engines, by name: the single-factor Gaussian rotation
+(the deck of \S2, its cohomological identity R5 now derived by hand);
+the all-arity cyclic fold (the 22--23 law, \S3, derived by hand in
+full); the torsion-translation world construction; the door-parity
+arithmetic (R5: the $H^1$-law of the rotation). Classical backings at
+standard strength: the cyclic resolution, K\"unneth, transfer, the
+curve normalization sequence, the exponential sequence, hard
+Lefschetz, the splitting principle, Newton's identities,
+Thom--Porteous, Oka--Grauert, GAGA.
+
+\section*{Statement integrity}
+
+No universal algebraicity claim is made in this artifact. No closing
+string is emitted. Every theorem's scope label is its claim. The
+conditional composition is used only as conditional. The open items
+are stated with their receipts, including the computed counterexamples
+against the previously proposed mechanisms. The operator's 22--23 law
+is used as the spine of \S3 and is proven there in full; if the
+operator's August text contains more than the 2026-10-22 record's
+all-arity fold (the workspace contains no file dated August and no
+occurrence of the word), that content is not in the tree and its
+derivation belongs to the next round.
+
+\end{document}

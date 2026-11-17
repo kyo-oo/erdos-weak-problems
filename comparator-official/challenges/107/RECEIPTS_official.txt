@@ -1,0 +1,19 @@
+OFFICIAL GATE RECEIPT — problem #107 — 2026-11-17T23:40:07
+==============================================================================
+OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
+  github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
+  github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
+Challenge statement: erdos-107-happy-ending
+Claims in solution ledger: 7
+==============================================================================
+[PASS] (official) O-EVAL — the OFFICIAL Evaluator compiles the solution program (official _sample_to_program) and executes it via the official analyse path: claim groups 1..5 score 3/3/1/3/2
+[PASS] (official) O-ADM-DATA — official admissible_set result data (n12, w7, size 792) integrity cross-check with own parser
+[PASS] (solution) S-ENGINE — campaign ES engine --verify: exit 0, >= 10 PASS, 0 FAIL
+[PASS] (solution) S-RERUN — independent re-checks: binomial table 3,7,21,71,253,925; 200 deterministic 5-point sets contain convex 4; the kernel 8-point witness re-verified (no convex 5)
+[PASS] (control) N-BADPROGRAM — the OFFICIAL Evaluator rejects a broken program (no registration)
+[PASS] (control) N-PLANT — a planted convex pentagon is DETECTED by the hull checker
+[PASS] (control) N-BINOM — a corrupted binomial table entry (21 -> 22) is DETECTED by the equality check
+==============================================================================
+CHECKS: 7/7 passed (official=2, solution=2, controls=3)
+WALL: 0.67s
+VERDICT: YOUR SOLUTION IS OKAY

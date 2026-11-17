@@ -1,0 +1,70 @@
+name: GST Universal Hyperplane Source and CM Dominance Obstruction
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTUniversalHyperplaneAndCMObstruction.lean'
+      - '.github/workflows/gst-universal-hyperplane-cm-obstruction.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-universal-source-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 65
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore dependency build cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-hyperplane-source
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify all-dimensional hyperplane-source proof and CM obstruction
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTUniversalHyperplane"
+          roots = ["GSTUniversalHyperplaneAndCMObstruction"]
+          EOF
+          if lake build GSTUniversalHyperplane > hyperplane-cm-obstruction-lean.log 2>&1; then
+            echo "LEAN PASSED: all admissible ample powers plus RH genus-two transfer no-go"
+          else
+            grep -nE 'error:|sorryAx|✖' hyperplane-cm-obstruction-lean.log | tail -n 120 || true
+            tail -n 90 hyperplane-cm-obstruction-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" hyperplane-cm-obstruction-lean.log; then
+            echo "Lean trust audit failed"
+            exit 1
+          fi
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-universal-hyperplane-cm-lean-log
+          path: hyperplane-cm-obstruction-lean.log
+          if-no-files-found: warn

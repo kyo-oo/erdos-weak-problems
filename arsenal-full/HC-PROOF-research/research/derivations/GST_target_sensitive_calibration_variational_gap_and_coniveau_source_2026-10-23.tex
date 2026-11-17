@@ -1,0 +1,652 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Original-World Source Audit: Exact Calibration Gap and Actual Divisor-Supported Primitive Chow Birth}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+The owner's exact question is why the corrected alpha-dependent
+original-X smooth determinant construction has not completed
+the Hodge conjecture. We audit its FIRST open geometric arrow,
+remove a superfluous mass condition, and prove a precise
+variational obstruction with an attained minimum. Then, using
+a DIFFERENT actual geometric input from the prescribed target
+alpha, we construct genuine original-X Chow representatives
+in every codimension-two rational Hodge direction of geometric
+coniveau at least one, by a support-Gysin Hodge lift and an
+ACTUAL algebraic divisor on a resolution of the support.
+The first result closes the inaccurate suggestion that
+topological source birth plus positive energy dissipation
+forces a holomorphic cycle; the second is an independently
+executed target-sensitive, canonical-Betti source constructor
+whose hypotheses do not presuppose a Chow cycle for alpha.
+No additional axiom or abstract Hodge-to-Chow operator is used.
+\end{abstract}
+\section{Exact input/output contract}
+Fix ANY smooth connected projective complex variety X
+of dimension d, a codimension 1<=p<=d, an actual integral
+K\"ahler class h represented by a smooth K\"ahler form
+omega, and a SPECIFIED rational (p,p) Hodge class
+alpha in H^{2p}(X,Q). The ultimate required output
+is a true cycle Z_alpha in CH^p(X)_Q
+with canonical Betti class alpha.
+
+The 2026-10-23 previous GST signed-determinant construction
+correctly produces, from ANY rational EVEN cohomology alpha
+whether Hodge or not, actual closed integral REAL
+determinantal homology cycles T_+,T_- on ORIGINAL X
+and rational coefficients yielding PD(T_+-T_-)=alpha
+after scaling. Thus it does NOT supply a property
+distinguishing Hodge classes from all rational
+cohomology classes. The remaining analytic-to-algebraic
+step was a calibration-defect limit theorem.
+
+\section{The exact and attained calibrated-cycle variational gap}
+Put k=d-p and let
+\[
+ \varphi_k=\frac{\omega^k}{k!}.
+\]
+This is the Wirtinger calibration for positively oriented
+complex k-planes. Write \(\mathcal I_{2k}(X)\) for the
+closed integral rectifiable 2k-currents in X
+(boundary zero), with integral homology class \([T]\).
+Fix an integral homology class
+\(\gamma\in H_{2k}(X,\mathbb Z)\) in the
+image of the cycle map from closed integral currents.
+Define its precise global spatial defect
+\[
+ \boxed{\mathfrak d_\omega(\gamma)=
+ \inf_{\substack{T\in\mathcal I_{2k}(X)\\[T]=\gamma}}
+  \Bigl(\mathbf M(T)-T(\varphi_k)\Bigr).
+ }                                                       \tag{1}
+\]
+Because \(\varphi_k\) is closed, its evaluation
+is a homological constant, say
+\(V_\omega(\gamma)=\langle\gamma,[\varphi_k]\rangle\).
+
+\begin{theorem}[The INFIMUM IS ATTAINED on every integral original-X class]
+For every such integral gamma, there exists
+a genuine closed integral current \(T_{\min}\)
+in homology class gamma with
+\[
+ \boxed{\mathfrak d_\omega(\gamma)=
+   \mathbf M(T_{\min})-V_\omega(\gamma)\ge0.}
+                                                               \tag{2}
+\]
+In particular for any sequence in gamma,
+\[
+ \Delta_\omega(T_j)\to0
+ \quad\Longrightarrow\quad
+ \mathbf M(T_j)\to V_\omega(\gamma),
+                                                               \tag{3}
+\]
+so a SEPARATE uniform-mass hypothesis is REDUNDANT.
+\end{theorem}
+\begin{proof}
+Choose a minimizing sequence of closed integral
+currents in the fixed class gamma. Because
+\(\mathbf M(T_j)=\Delta_\omega(T_j)
+   +V_\omega(\gamma)\) and the defects
+are eventually bounded by definition of infimum,
+their masses are uniformly bounded.
+X is compact and their boundaries have
+zero mass, so Federer--Fleming integral-current
+compactness yields an integral flat limit
+\(T_{\min}\). Integral homology class is
+constant under flat convergence on compact X:
+sufficiently small integral flat differences
+represent zero integral homology class (the
+realization of integral-current homology
+as singular integral homology).
+Therefore \([T_{\min}]=\gamma\).
+Lower semicontinuity of mass and continuity
+of evaluation on the smooth closed form
+\(\varphi_k\) show the limit realizes the
+infimum. Wirtinger calibration gives its
+nonnegativity. Finally (3) follows from
+the constant evaluation equality, independent
+of any compactness theorem.
+\end{proof}
+
+\begin{theorem}[Zero calibration gap IFF a POSITIVE original-X algebraic cycle represents gamma]
+For any integral homology class gamma as above,
+\[
+ \boxed{
+ \mathfrak d_\omega(\gamma)=0
+ \quad\Longleftrightarrow\quad
+ \gamma=[C]_{\rm hom}
+ \text{ for some effective INTEGRAL
+ algebraic codimension-p cycle }C\text{ on X}.
+ }                                                       \tag{4}
+\]
+The implication from zero gap to a cycle
+constructs an ACTUAL \(C\) on ORIGINAL X,
+not on an auxiliary folded variety.
+\end{theorem}
+\begin{proof}
+If the defect vanishes, take the attained
+minimizer T_min in (2).
+Equality in the pointwise Wirtinger inequality
+says that T_min is a positively
+complex-calibrated, closed integral current.
+The positive closed rectifiable integral-current
+structure theorem (King / Harvey--Shiffman
+holomorphic chain theorem) identifies it with
+a positive INTEGRAL holomorphic k-cycle.
+Because X is projective and the cycle is closed,
+Chow's theorem algebraizes it as an effective
+integral Chow cycle C with the same homology class.
+Conversely, the integration current of any
+effective integral complex algebraic cycle C
+is pointwise calibrated and has defect exactly
+zero, so its class gamma has gap zero.
+\end{proof}
+
+\begin{remark}[The exact limitation of the preceding signed topological construction]
+Given a nonzero primitive rational (p,p) class r,
+its pairing with \(h^{d-p}\) is zero.
+Therefore any scaled INTEGRAL homology
+class gamma_r with PD proportional to r
+cannot itself have zero calibration gap
+unless gamma_r=0: an effective nonzero
+analytic cycle has positive ample degree.
+For the two background-shifted
+classes gamma_plus, gamma_minus in the
+previous signed construction,
+zero gap for EACH implies a genuine
+signed algebraic realization of alpha.
+The previous construction proves
+gamma_plus-minus is alpha;
+it DOES NOT prove both gaps vanish.
+Equation (4) makes the missing
+geometric statement mathematically exact,
+and blocks promoting 'Hodge type' alone
+to a vanishing variational certificate.
+This is a corrected diagnosis,
+not a claim that the entire GST approach fails.
+\end{remark}
+
+\section{ONE-GAP total effective-completion theorem: a truly geometric criterion for all X,p}
+The previous signed-two-cycle theorem used
+separate calibrated limits for two
+topological bundles. In fact, allowing
+the genuine original-X algebraic
+complete-intersection background
+removes ONE of those two
+calibration existence requirements.
+
+Choose the given very ample integral
+divisor H with c1(H)=h, so h^p
+is represented by an actual effective
+complete-intersection cycle
+for every p. Let alpha be ANY rational
+even-degree class of degree 2p.
+For integers m>0 and n>=0, an INTEGRAL LIFT of
+m alpha+n h^p means an ACTUAL class
+\(\gamma\in H_{2(d-p)}(X,\mathbb Z)\)
+whose rational Poincare dual is m alpha+n h^p.
+The lift must be specified in integral homology,
+not as a canonical integral representative of
+rational cohomology modulo torsion.
+
+\begin{theorem}[ONE-GAP algebraic cycle recovery, all original varieties]
+For EVERY original X, p and rational
+alpha of degree 2p, the following
+are equivalent, with NO hypothesis
+that alpha is Hodge:
+\[
+ \boxed{
+ \begin{split}
+ &\exists\,Z_\alpha\in CH^p(X)_{\mathbb Q},
+   \quad\operatorname{cl}^{can}_X(Z_\alpha)=\alpha\\
+ &\qquad\Longleftrightarrow\
+ \exists\,m\in\mathbb Z_{>0},\
+ n\in\mathbb Z_{\ge0},\
+ \gamma\in H_{2(d-p)}(X,\mathbb Z):
+ \quad\operatorname{PD}_{\mathbb Q}(\gamma)=m\alpha+n h^p,
+ \quad\mathfrak d_\omega(\gamma)=0.
+ \end{split}
+ }                                                       \tag{8}
+\]
+When the right-hand condition holds,
+the attained zero-gap current constructs
+a genuine EFFECTIVE integral projective
+cycle C with
+\(\operatorname{cl}^{can}_X(C)=m\alpha+n h^p\).
+Any actual complete intersection
+\(B\in CH^p(X)\) with
+\(\operatorname{cl}^{can}_X(B)=h^p\)
+then gives the entirely explicit
+original-X rational Chow output
+\[
+ \boxed{Z_\alpha=\frac1m(C-nB).}               \tag{9}
+\]
+\end{theorem}
+\begin{proof}
+For the reverse implication use
+the attained calibrated current
+theorem (4) and subtract the
+explicit genuine algebraic
+complete intersection nB.
+For the forward implication choose
+a genuine rational Chow class Z
+with cl(Z)=alpha and clear a
+positive integer m so
+mZ=A-B with A and B effective
+INTEGRAL Chow cycles. Write
+B as a finite sum of integral
+codimension-p subvarieties
+with positive integer coefficients.
+
+For each integral component
+\(W\subset X\) of B, Serre
+global generation of its ideal
+sheaf in a sufficiently high
+power of H constructs p
+global hypersurface sections
+cutting out a pure
+codimension-p COMPLETE
+INTERSECTION \(Q_W\)
+containing W with generic
+intersection multiplicity one.
+Consequently
+\[
+ [Q_W]=r_W^pH^p=[W]+[R_W]
+       \quad\text{in actual }CH^p(X),
+\]
+where R_W is an EFFECTIVE
+cycle. Multiplying each by
+the multiplicity in B and
+adding gives
+\[
+ nH^p=B+R
+ \quad\text{in }CH^p(X),
+ \qquad n=\sum_W
+       (\operatorname{mult}_B W)r_W^p,
+\]
+with R effective and n a
+nonnegative integer.
+Therefore
+\(mZ+nH^p=A+R\)
+is an EFFECTIVE
+algebraic integral cycle.
+Its Betti class is
+m alpha+n h^p, and the
+associated integral positive
+complex current is calibrated,
+so its gap vanishes.
+This proves the direct implication,
+using a genuine original-X
+algebraic hypersurface
+excess-component construction
+rather than an assumed universal
+Hodge-to-Chow map.
+\end{proof}
+
+\begin{corollary}[Exact consequence for the owner's proposed infinite-dimensional experiment]
+For rational (p,p) input alpha, a
+UNIFORM geometric GST theorem forcing
+one *attained* zero-gap class
+m alpha+n h^p, with m>0 and n>=0
+and an explicit actual ample H,
+would construct the original-X
+Hodge Chow representative (9)
+in one shot. There is NO need
+for an independently bounded
+mass assumption and no need
+to realize a second
+topological bundle as a
+calibrated cycle: the
+complete-intersection
+background is already algebraic.
+
+Conversely, equation (8)
+also shows that proving this
+zero-gap existence for EVERY
+rational Hodge alpha is
+mathematically as strong as
+the original all-X
+algebraicity target. The
+variational identity is
+an exact translation to
+spatial geometry, not
+a derivation of the
+universal zero-gap law.
+\end{corollary}
+
+\section{Adversarial test: smooth mean-curvature stationarity is insufficient}
+The preceding attempt proposed using
+mean-curvature flow of the actual
+alpha-dependent smooth real
+determinantal source.
+An exact counterexample to the
+claim that stationarity FORCES
+zero calibration defect is available
+on a genuine projective variety.
+
+\begin{theorem}[Noncalibrated stationary representative of a nonzero ALGEBRAIC Hodge class]
+Equip $X=\mathbb P^1\times\mathbb P^1$
+with its product Fubini--Study K\"ahler metric.
+Let E_1,E_2 be equatorial great circles
+in its respective projective-line factors.
+Choose $q\notin E_2$ and define the
+disjoint compact oriented real cycle
+\[
+ T=(\mathbb P^1\times\{q\})
+       \ \sqcup\ (E_1\times E_2).
+\]
+Its rational Betti class is a nonzero
+algebraic Hodge (1,1) class, but
+\[
+ \boxed{
+ H_T=0,\qquad
+ \Delta_\omega(T)=
+     {\rm Area}(E_1\times E_2)>0 .
+ }                                                       \tag{10}
+\]
+Consequently mean-curvature defect
+MONOTONICITY does not prove
+the needed $\mathfrak d_\omega=0$
+or convergence to a calibrated
+source for all Hodge classes.
+\end{theorem}
+\begin{proof}
+The equators are geodesics on
+the Fubini--Study round spheres,
+so their product is totally
+geodesic, in particular stationary.
+The complex factor is also
+totally geodesic, hence the
+disjoint union is stationary.
+Since each E_i is nullhomologous
+in $\mathbb P^1$, their product
+is nullhomologous in X, so
+$[T]=[\mathbb P^1\times\{q\}]$,
+a nonzero actual algebraic
+(1,1) class. On the product
+of real equators the K\"ahler
+2-form restricts to zero, while
+the Riemannian area is positive.
+The projective-line component
+is calibrated. Add the two
+calibration defects to obtain
+(10).
+\end{proof}
+
+The example is a strict no-go
+for the claimed universal
+flow inference, NOT a Hodge
+conjecture counterexample and
+not a claim about arbitrary
+chosen GST higher-dimensional
+causal dynamics.
+
+\section{Different alpha-dependent route: codimension TWO divisor-support geometry}
+The variational audit prevents repeating the
+same open geometric implication under a new
+functional. Now return to the original X
+and use a NEW target-sensitive geometric input:
+actual algebraic SUPPORT of the prescribed
+Hodge class alpha.
+
+Let p=2 and X have arbitrary complex dimension d>=2.
+Suppose there exist finitely many smooth projective
+varieties \(Y_i\) of dimension d-1 and
+proper morphisms \(f_i:Y_i\to X\)
+whose images are contained in algebraic
+divisors of X. These Y_i can be chosen as
+resolutions of the irreducible components
+of an actual algebraic divisor support.
+Assume the specified original-X
+rational class alpha belongs to the
+ACTUAL sum of rational Gysin images
+\[
+ \boxed{
+ \alpha\in\sum_i
+ (f_i)_*H^2(Y_i,\mathbb Q)
+       \subset H^4(X,\mathbb Q).
+ }                                                       \tag{5}
+\]
+This is a condition about algebraic SUPPORT
+and maps of COHOMOLOGY, not a pre-existing
+codimension-two Chow representative of alpha.
+It is true, for example, whenever alpha is
+a coniveau-one class supported through such a
+divisor resolution.
+
+\begin{theorem}[NEW actual original-X codimension-two Chow source from arbitrary divisor support]
+For EVERY original smooth projective complex X,
+EVERY rational (2,2) Hodge alpha satisfying
+the independently testable support relation (5),
+there are rational divisor classes
+\(\beta_i\in H^2(Y_i,\mathbb Q)\cap H^{1,1}(Y_i)\)
+and actual rational ALGEBRAIC divisors
+\(D_i\in CH^1(Y_i)_\mathbb Q\) with
+\[
+ \boxed{
+ \alpha=\sum_i (f_i)_*\beta_i,\qquad
+ Z_\alpha=\sum_i (f_i)_*[D_i]
+  \in CH^2(X)_\mathbb Q,\qquad
+ \mathrm{cl}^{can}_X(Z_\alpha)=\alpha .
+ }                                                       \tag{6}
+\]
+All images use actual proper algebraic Gysin
+and Chow pushforward. No original-X Chow
+preimage of alpha occurs in the hypotheses.
+The theorem holds for any d, without a
+restriction to special CM, K3 or elliptic worlds.
+\end{theorem}
+\begin{proof}
+Put \(V=\bigoplus_i H^2(Y_i,\mathbb Q)(-1)\).
+The map \(F=\sum_i(f_i)_*:V\to H^4(X,\mathbb Q)\)
+is a morphism of POLARIZABLE pure rational
+Hodge structures of weight four.
+Because f_i is a proper morphism from
+smooth projective dimension d-1
+to smooth projective dimension d,
+its Gysin raises degree by two and
+bidegree by (1,1).
+The image \(W=F(V)\) is a rational
+Hodge substructure. The category of
+polarizable pure rational Hodge structures
+is semisimple: there is a rational
+Hodge-equivariant section of the
+surjection \(V\to W\).
+Apply it to the specified rational
+(2,2) alpha in W. It supplies a
+rational \(\beta=(\beta_i)\) of Hodge
+type (2,2) IN V, equivalently each
+\(\beta_i\) has type (1,1) in
+\(H^2(Y_i,\mathbb Q)\), and
+\(\sum_i(f_i)_*\beta_i=\alpha\).
+The Lefschetz (1,1) theorem
+and projective GAGA construct an
+ACTUAL algebraic rational Cartier
+divisor \(D_i\) on each smooth
+projective Y_i with canonical Betti
+class \(\beta_i\).
+Push those actual divisor cycles
+along the proper f_i to obtain
+the genuine codimension-two
+rational Chow cycle \(Z_\alpha\)
+on ORIGINAL X. The proper
+pushforward compatibility of
+canonical cycle classes then
+gives exactly (6).
+\end{proof}
+
+\begin{corollary}[Prescribed primitive coniveau-one original-X geometry]
+If 2p=4<=d, alpha is a NONZERO primitive
+rational (2,2) class, and (5) holds,
+the actual original-X cycle in (6) has
+nonzero native primitive pairing
+\[
+ \boxed{
+ \int_X\mathrm{cl}^{can}(Z_\alpha)\smile
+            \alpha\smile h^{d-4}
+ =\int_X\alpha^2 h^{d-4}>0.
+ }                                                       \tag{7}
+\]
+The strict sign is the Hodge--Riemann
+positivity for p=2.
+Unlike the smooth-real topological
+determinantal carrier, this source is
+GENUINELY algebraic before applying the
+original-X native projection or
+Chow-return compiler.
+\end{corollary}
+
+\section{The actual all-codimension maximal-support GST source theorem}
+The preceding divisor-support mechanism is
+not confined to codimension two.
+An actual smooth projective
+support variety of codimension
+p-1 carries degree-two
+Hodge geometry, and a
+divisor upstairs pushes to
+codimension p downstairs.
+
+\begin{theorem}[EXACT target-sensitive Chow birth from maximal geometric coniveau, arbitrary X,p]
+Let X be ANY smooth projective
+complex d-fold and 1<=p<=d.
+Fix a prescribed rational
+(p,p) Hodge class alpha.
+Suppose finitely many true
+smooth projective
+(d-p+1)-dimensional Y_i
+and proper morphisms
+$f_i:Y_i\to X$,
+whose image lies in a closed
+algebraic support of codimension
+at least p-1, satisfy
+\[
+ \boxed{
+ \alpha\in\sum_i(f_i)_*
+    H^2(Y_i,\mathbb Q)
+        \subset H^{2p}(X,\mathbb Q).
+ }                                                       \tag{11}
+\]
+Then alpha admits a genuine
+rational original-X Chow
+representative produced
+WITHOUT supplying an
+original-X Chow preimage:
+\[
+ \boxed{
+ \exists\,D_i\in CH^1(Y_i)_{\mathbb Q}:
+ \quad Z_\alpha=\sum_i(f_i)_*D_i
+       \in CH^p(X)_{\mathbb Q},\qquad
+ \mathrm{cl}^{can}_X Z_\alpha=\alpha.
+ }                                                       \tag{12}
+\]
+The construction uses the
+type-(p,p) projection of the
+ACTUAL Gysin preimages of
+the prescribed alpha, not
+an arbitrarily chosen
+algebraic basis of X.
+\end{theorem}
+\begin{proof}
+Shift each rational source
+Hodge structure H^2(Y_i)
+by the Tate twist
+(-(p-1)) so its weight
+becomes 2p. The proper
+Gysin map
+F=Σ_i(f_i)_* is an actual
+rational Hodge morphism
+from their direct sum
+V to the pure
+H^{2p}(X,Q). The image
+W=im F is a rational
+Hodge substructure.
+Since pure polarizable
+rational Hodge structures
+are semisimple, the
+surjection V→W has a
+Hodge-linear rational
+section. Apply it to
+the specified rational
+(p,p) alpha∈W to
+construct actual rational
+(1,1) lifts β_i in
+H^2(Y_i,Q).
+By the genuine
+Lefschetz (1,1)
+theorem each β_i is
+the canonical Betti
+class of a rational
+algebraic divisor D_i
+on smooth projective
+Y_i. Proper algebraic
+pushforward gives an
+ACTUAL codimension-p
+Chow class on the
+ORIGINAL X, and
+naturality of the
+canonical cycle
+class proves (12).
+\end{proof}
+
+\begin{remark}
+If the prescribed Hodge
+class does NOT have a known
+Gysin representation (11),
+none is fabricated.
+The theorem resolves
+the genuine maximally
+supported sector of
+EVERY codimension;
+the novel universal
+source-birth task is to
+supply appropriate
+supports for arbitrary
+primitive classes not
+already in that sector.
+High-coniveau blowups
+that transfer an
+arbitrary class onto
+a new rational world
+do not by themselves
+provide the requisite
+codimension-(p-1)
+support on ORIGINAL X.
+\end{remark}
+
+\section{Sharp input boundary and actual new attempt}
+The geometric operation in (6) is a genuine
+target-dependent Chow SOURCE, not an
+existing-source Gram inversion. But it
+requires an algebraic divisor support
+on which alpha admits the actual
+degree-two Gysin lift (5).
+An arbitrary rational primitive
+(2,2) Hodge alpha may have no
+known such support. The general Hodge
+condition alone does not supply (5),
+and replacing that with an assumption
+of its universal validity would be an
+unjustified source-birth postulate.
+The constructive route (6) closes
+the source problem for the entire
+divisor-supported sector, including
+any primitive directions that occur
+there; it leaves the completely
+unresolved original-X residual OUTSIDE
+the proven Gysin image.
+
+The owner-directed remaining
+geometric research should attempt
+to generate a genuine divisor-support
+Gysin representation of a prescribed
+residual alpha from actual GST
+causal geometry, rather than
+retesting fixed PGL tangent Chern
+sources or creating another
+equivalent 'existence of Chow'
+criterion.
+\end{document}

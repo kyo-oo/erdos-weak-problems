@@ -1,0 +1,492 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Spatial Folding: Automatic Causal Flatness in One Affine Dimension and the Exact Even-Cohomology Algebraization Law}
+\date{23 October 2026}
+\begin{document}\maketitle
+
+\section{The actual geometry, with every original variety retained}
+Let X be ANY smooth projective complex variety, of arbitrary dimension d.
+The GST spatial realization is an algebraic affine-line torsor
+\[
+    q:J\longrightarrow X, \qquad q^{-1}(x)\simeq\mathbb A^1_{\mathbb C},
+    \tag{1}
+\]
+locally trivial in the Zariski topology, under an actual algebraic line
+bundle on X. Assume the WHOLE complex analytic space $J^{an}$ is Stein.
+This is a statement about an actual algebraic/analytic space, not
+a local window, visual picture or test family. Do not assume
+an arbitrary X admits this geometric realization. We derive the
+exact consequence OF its existence with no rational-Hodge-to-Chow
+source input, and then obtain an absolute no-go for original X
+with off-diagonal EVEN rational cohomology.
+
+\section{An all-X automatic nonabelian flatness theorem}
+\begin{theorem}[Automatic full higher-causal transport for one-dimensional Stein folds]
+For ANY X and J satisfying (1), and ANY honest holomorphic
+complex vector bundle H of arbitrary positive rank on J,
+there exists a relative holomorphic connection
+\[
+ \nabla_{J/X}:H\longrightarrow
+    H\otimes_{\mathcal O_J}\Omega^1_{J/X}
+ \qquad\text{with }\qquad F_{\nabla}^{J/X}=0.
+ \tag{2}
+\]
+It integrates to an honest holomorphic action of the
+entire affine-translation groupoid with the EXACT causal two-cell
+composition
+\[
+ T(w,z+v)\,T(v,z)=T(v+w,z),\qquad T(0,z)=\mathrm{id}.
+ \tag{3}
+\]
+Consequently H is the pullback of an honest holomorphic vector
+bundle E on ORIGINAL compact projective X. By projective GAGA,
+E is a genuine ALGEBRAIC vector bundle.
+\end{theorem}
+\begin{proof}
+The relative holomorphic Atiyah extension of H is
+\[
+0\to\mathrm{End}(H)\to \mathrm{At}_{J/X}(H)
+       \to T^{hol}_{J/X}\to0.
+\]
+Because $T_{J/X}$ is locally free, the obstruction to its
+holomorphic splitting belongs to
+$H^1(J,\Omega^1_{J/X}\otimes\mathrm{End}(H))$.
+This is zero by Cartan's theorem B on Stein J. Thus a
+holomorphic relative connection exists unconditionally
+for H. The relative tangent bundle has COMPLEX RANK ONE.
+Its relative curvature lives in the coherent sheaf
+\[
+   F_{\nabla}^{J/X}\in
+  H^0(J,\Omega^2_{J/X}\otimes\mathrm{End}(H))=0
+\]
+because $\Omega^2_{J/X}=\bigwedge^2\Omega^1_{J/X}=0$
+identically in relative complex dimension ONE. Hence the
+connection is automatically flat, regardless of bundle rank
+and of any Hodge class. Each actual affine-line fiber
+$\mathbb C$ is connected and simply connected. Analytic
+continuation of solutions to holomorphic linear
+parallel-transport ODE along C yields unique global,
+path-independent holomorphic fiber transport; holomorphic
+dependence on base parameters yields a holomorphic
+translation-groupoid action satisfying (3).
+Local holomorphic sections of the affine-line torsor
+pull back H to local bundles on X; its transport (3)
+identifies them on pairwise overlaps and satisfies the
+triple-overlap cocycle. They glue to a holomorphic E
+on X, with H holomorphically isomorphic to q^*E.
+Finally GAGA algebraizes E because X is projective.
+\end{proof}
+
+\section{Strong positive theorem: the spatial geometry forces ALL even Betti classes algebraic}
+\begin{theorem}[Entire all-grade original-X rational algebraization law]
+If ANY original smooth projective X admits a Stein affine-line
+torsor (1), then for EVERY p with $0\le p\le d$, and EVERY
+rational cohomology class $\alpha\in H^{2p}(X,\mathbb Q)$
+(including all rational Hodge classes and rational classes NOT
+a priori known to have Hodge type),
+there exists a genuine actual original-X rational Chow cycle
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ satisfying
+\[
+ \boxed{\mathrm{cl}^{can}_X(Z_\alpha)=\alpha.}        \tag{4}
+\]
+The output is constructed by ACTUAL geometric bundle descent,
+without assuming alpha is algebraic or prescribing any
+Hodge-to-Chow map. There is no exceptional middle codimension.
+\end{theorem}
+\begin{proof}
+An arbitrary smooth projective X has the homotopy type of a
+finite CW complex. The rational topological Chern character is
+an isomorphism
+\[
+ K^0_{top}(X)\otimes\mathbb Q
+        \simeq H^{even}(X,\mathbb Q).
+\]
+For the chosen arbitrary rational class alpha, choose a rational
+virtual topological K-class whose ENTIRE Chern character equals
+alpha and whose other graded components vanish. Clearing
+denominators by m>0 yields an integral virtual K-class.
+Write it as the difference of two honest finite-rank
+topological vector bundles $E_+^{top}-E_-^{top}$ on X:
+\[
+ \boxed{\mathrm{ch}(E_+^{top})-\mathrm{ch}(E_-^{top})
+                       =m\alpha\quad\text{in ALL even grades}.}
+ \tag{5}
+\]
+Pull the two honest topological bundles back along q to Stein
+J. The Oka--Grauert principle constructs honest
+holomorphic bundle representatives H_+,H_- of both
+pullbacks with exactly the same topological Chern characters.
+Apply the preceding AUTOMATIC rank-one flatness theorem
+to each H_\pm. It produces honest holomorphic bundles
+E_\pm on original X with H_\pm≅q^*E_\pm holomorphically;
+projective GAGA makes E_\pm ALGEBRAIC.
+The affine-line torsor q is a genuine homotopy equivalence
+on the underlying topological spaces, so
+$q^*:H^{even}(X,\mathbb Q)\to H^{even}(J,\mathbb Q)$
+is an isomorphism. Since H_\pm are topologically q^*E_\pm^{top},
+Chern character naturality and this cohomology isomorphism yield
+\[
+ \mathrm{ch}_{Betti}(E_+)-\mathrm{ch}_{Betti}(E_-)=m\alpha.
+\]
+Now define the ACTUAL original-X Chow cycle
+\[
+ \boxed{
+ Z_\alpha=\frac{1}{m}
+   \bigl(\mathrm{ch}^{CH}_p(E_+)-\mathrm{ch}^{CH}_p(E_-)\bigr)
+        \in CH^p(X)_{\mathbb Q}.
+ }                                                        \tag{6}
+\]
+Algebraic Chern-character components are true rational Chow
+classes, and their canonical rational Betti images equal
+the corresponding topological Chern character components.
+Therefore $\mathrm{cl}_X^{can}(Z_\alpha)=\alpha$.
+No original-X Chow witness entered the construction.
+\end{proof}
+
+\section{Consequences: actual global fold dimension has a sharp geometric obstruction}
+\begin{corollary}[Hodge--Tate even-cohomology necessity of a Stein affine-line spatial fold]
+If an arbitrary smooth projective X has a Stein
+affine-line torsor as in (1), then
+\[
+  \boxed{H^{2p}(X,\mathbb C)=H^{p,p}(X)
+       \quad\text{for every }0\le p\le d.}            \tag{7}
+\]
+Equivalently every Hodge number
+$h^{a,b}(X)$ with $a+b$ EVEN and $a\ne b$ must vanish.
+In particular, if $h^{2,0}(X)>0$, no such rank-one
+Stein affine spatial fold can exist.
+\end{corollary}
+\begin{proof}
+Theorem (4) says EVERY rational even cohomology class
+is a rational algebraic cycle class. Each such
+class has complex Hodge type (p,p), because genuine
+algebraic cycles have type (p,p). But
+$H^{2p}(X,\mathbb Q)\otimes_{\mathbb Q}\mathbb C
+ \simeq H^{2p}(X,\mathbb C)$:
+the rational lattice spans the ENTIRE complex
+cohomology in that degree. Thus the only Hodge
+component is (p,p), proving (7).
+For $h^{2,0}>0$, (7) is impossible,
+so the indicated genuine spatial fold cannot exist.
+This is a universal geometric nonexistence theorem,
+not a counterexample to the rational Hodge conjecture.
+\end{proof}
+
+\begin{corollary}[Unbounded extra trivial causal dimensions do not simulate rank one]
+Let X be arbitrary with an off-diagonal even-degree Hodge
+component, and let J_N(X) be its genuine Stein Jouanolou
+fold of affine rank N. Its natural spatial dimension cannot
+be replaced by a Stein affine-LINE torsor over X
+without contradicting (7). Nor can one split it into
+a tower whose FIRST rank-one affine quotient over X
+is Stein: that quotient itself would violate (7).
+Adjoining trivial affine factors to J_N(X)
+does not change the original obstruction because the
+full rank-N higher-causal two-form
+$\Omega^2_{J_N/X}$ remains nonzero for N>=2.
+\end{corollary}
+
+\section{The all-dimensional holomorphic-to-algebraic GST obstruction: exact calculation, no hidden cycles}
+
+Return now to the ACTUAL arbitrary-rank Stein incidence fold
+$q_N:J_N(X)\to X$, for ANY original smooth projective X
+and ANY sufficiently high projective embedding dimension N.
+Here the fold always exists, but its relative complex rank
+need not equal one. Its exact holomorphic-versus-algebraic
+vector-bundle geometry can be computed as an entire
+group, rather than merely detecting individual
+Hodge numbers.
+
+Let $K_0^{hol}(J_N)$ denote the Grothendieck
+group of ACTUAL finite-rank holomorphic vector bundles
+over the Stein space $J_N^{an}$, and
+$K_0^{alg}(J_N)$ the algebraic Grothendieck group
+of genuine algebraic vector bundles on the smooth affine
+scheme $J_N$. The forgetful analytification functor
+induces an actual homomorphism
+\[
+ \kappa_N:K_0^{alg}(J_N)_{\mathbb Q}
+                  \longrightarrow
+           K_0^{hol}(J_N)_{\mathbb Q}.
+ \tag{8}
+\]
+
+\begin{theorem}[EXACT ALL-N GST GEOMETRY DEFECT: full holomorphic algebraization quotient]
+For EVERY original smooth projective complex X,
+EVERY actual affine Jouanolou spatial fold J_N(X),
+and ALL rational even cohomology grades simultaneously,
+there is a canonical rational vector-space isomorphism
+\[
+ \boxed{
+ \frac{K_0^{hol}(J_N)_{\mathbb Q}}
+ {\operatorname{im}\kappa_N}
+ \ \cong\
+ \bigoplus_{p=0}^{d}
+ \frac{H^{2p}(X,\mathbb Q)}
+  {\operatorname{cl}^{can}_X(CH^p(X)_{\mathbb Q})}.
+ }                                                        \tag{9}
+\]
+The RHS depends only on the ORIGINAL geometry X
+and is INDEPENDENT of N, of the ambient projective
+embedding, and of the number of extra unfolded
+trivial affine spatial dimensions.
+Its Hodge-type subspace
+\[
+ \boxed{
+ \mathfrak D_{\mathrm{Hdg}}(X)=
+ \bigoplus_{p=0}^{d}
+ \frac{H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)}
+ {\operatorname{cl}^{can}_X(CH^p(X)_{\mathbb Q})}
+ }                                                        \tag{10}
+\]
+is a canonically defined subspace of the actual
+all-degree GST fold obstruction group.
+\end{theorem}
+\begin{proof}
+Since J_N^{an} is Stein, Cartan B gives
+$H^1(J_N,\mathcal Hom(H_2,H_1))=0$
+for ANY pair of holomorphic vector bundles.
+Thus every holomorphic short exact sequence
+$0\to H_1\to H\to H_2\to0$ splits
+holomorphically, and the holomorphic Grothendieck
+group is the group completion of isomorphism classes
+under direct sum. By Oka--Grauert,
+finite holomorphic vector bundles on Stein J_N
+are classified up to isomorphism by
+finite complex topological vector bundles;
+the correspondence respects direct sums.
+Therefore
+\[
+ K_0^{hol}(J_N)_{\mathbb Q}
+    \cong K^0_{top}(J_N)_{\mathbb Q}
+    \overset{\operatorname{ch}_{top}}\cong
+           H^{even}(J_N,\mathbb Q)
+    \overset{(q_N^*)^{-1}}\cong
+           H^{even}(X,\mathbb Q).
+ \tag{11}
+\]
+Each displayed map is an actual isomorphism:
+$J_N$ has finite CW homotopy type
+because it is homotopy equivalent to compact X;
+the rational Chern character is an isomorphism
+on a finite CW complex; and the
+algebraic affine-space torsor q_N is a
+topological homotopy equivalence.
+
+On the algebraic side, smoothness gives the
+entire graded rational Chern-character isomorphism
+\[
+ K_0^{alg}(J_N)_{\mathbb Q}
+ \overset{\operatorname{ch}^{CH}}\cong
+          \bigoplus_{p=0}^{d+N}CH^p(J_N)_{\mathbb Q}
+ \overset{(q_N^*)^{-1}}\cong
+          \bigoplus_{p=0}^{d}CH^p(X)_{\mathbb Q}.
+ \tag{12}
+\]
+The last map is a TRUE rational Chow
+homotopy-invariance isomorphism for
+a Zariski locally trivial affine-space bundle.
+The canonical Betti cycle-class map is
+natural under these algebraic pullbacks and
+algebraic Chern-character analytification;
+under (11)--(12), the map $\kappa_N$
+is identified EXACTLY with the direct sum
+\[
+ \bigoplus_{p=0}^{d}
+ \mathrm{cl}_X^{can}:
+ \bigoplus_pCH^p(X)_{\mathbb Q}
+   \longrightarrow
+ \bigoplus_pH^{2p}(X,\mathbb Q).
+\]
+Taking the cokernel gives (9).
+It is essential to take the COKERNEL,
+not to claim $\kappa_N$ is injective:
+homologically trivial genuine algebraic
+Chow classes may be nonzero in K0^{alg}.
+Finally actual algebraic cycle classes
+are always of Hodge type (p,p).
+This makes the quotient in (10)
+a well-defined subspace of (9),
+completing the proof.
+\end{proof}
+
+\begin{remark}[What this whole-space invariant proves]
+The GST affine spatial folding equations
+preserve the precise quotient (9)
+for EVERY emergent dimension.
+No number of affine spatial folds,
+by itself, annihilates it: the defect is
+canonically the ORIGINAL-X cycle-image
+quotient. This is a universal identity
+of actual holomorphic and algebraic
+vector bundles on genuine spaces,
+not a finite computational test.
+It provides the exact input/output
+dictionary any stronger GST law must
+modify or kill by NEW algebraic geometry.
+\end{remark}
+
+\section{A sharper degree-two result: the entire Picard causal kernel}
+
+\begin{theorem}[Full exact Picard sequence of any genuine affine spatial fold]
+For arbitrary connected smooth projective X
+and every affine Jouanolou fold q_N:J_N(X)→X,
+there is a CANONICAL exact sequence
+\[
+ \boxed{
+ 0\to\mathrm{Pic}^0(X)
+   \to\mathrm{Pic}_{hol}(X)
+   \overset{q_N^*}{\longrightarrow}
+      \mathrm{Pic}_{hol}(J_N)
+   \longrightarrow
+   \frac{H^2(X,\mathbb Z)}
+        {\mathrm{NS}_{int}(X)}
+   \to0.
+ }                                                        \tag{13}
+\]
+Here $\mathrm{NS}_{int}(X)$ means the actual
+image of $c_1:\mathrm{Pic}_{hol}(X)\to
+H^2(X,\mathbb Z)$, INCLUDING any integral torsion.
+This is true in all dimensions and on
+all projective X; no projective-normality,
+Picard-rank or vanishing-Hodge hypothesis is made.
+\end{theorem}
+\begin{proof}
+The holomorphic exponential sequence on Stein J_N
+and Cartan B give
+\[
+ \mathrm{Pic}_{hol}(J_N)
+ =H^1(J_N,\mathcal O^*_{J_N})
+ \overset{c_1}\cong H^2(J_N,\mathbb Z)
+ \overset{(q_N^*)^{-1}}\cong H^2(X,\mathbb Z).
+\]
+The original-X pullback of a holomorphic
+line bundle has first Chern class
+$q_N^*c_1(L)$ by naturality,
+so under these isomorphisms $q_N^*$
+is EXACTLY the usual original
+integral first Chern class map.
+Its kernel is
+$\mathrm{Pic}^0(X)$ by the exponential
+sequence (the group of topologically
+trivial holomorphic lines), while its
+image is precisely $\mathrm{NS}_{int}(X)$
+by definition. Take the cokernel to
+obtain (13). GAGA identifies
+$\mathrm{Pic}_{hol}(X)$ with the true
+algebraic Picard group.
+\end{proof}
+
+\section{Finite alteration and actual original-X Chow return}
+
+A standard GST geometric strategy changes the
+original world by a genuine finite-degree
+alteration, proves algebraicity upstairs and
+uses the canonical original-X Chow pushforward.
+We now verify that entire route for the
+Stein one-dimensional causal geometry.
+
+\begin{theorem}[One-dimensional Stein spatial fold on an alteration algebraizes EVERY original target]
+Let X be ANY smooth projective connected complex variety,
+and let $f:Y\to X$ be a proper generically finite
+surjective morphism of positive generic degree
+$n$, with Y itself smooth projective.
+If Y admits a genuine Stein affine-line torsor
+$q:J\to Y$, then for EVERY p and EVERY
+rational even cohomology class
+$\alpha\in H^{2p}(X,\mathbb Q)$ there is
+an EXPLICIT genuine original-X cycle
+\[
+ \boxed{
+ Z_\alpha=\frac1n f_* Z_{f^*\alpha}
+    \ \in CH^p(X)_{\mathbb Q},\qquad
+ \operatorname{cl}^{can}_X Z_\alpha=\alpha,
+ }                                                        \tag{14}
+\]
+where $Z_{f^*\alpha}$ is constructed on
+Y by the automatic rank-one causal-flatness
+theorem (4)--(6); no original-X Chow
+witness is given as input.
+\end{theorem}
+\begin{proof}
+Apply the all-grade rank-one Stein
+construction to the actual rational
+class $f^*\alpha\in H^{2p}(Y,\mathbb Q)$,
+obtaining a true rational Chow cycle
+$Z_{f^*\alpha}$ with exact canonical
+Betti class $f^*\alpha$.
+Since f is proper and generically finite
+of degree n between smooth equidimensional
+varieties, the actual algebraic Chow
+pushforward $f_*$ is defined and preserves
+codimension p. Its canonical rational
+Betti class is the cohomological Gysin
+pushforward, by standard cycle-class
+naturality. The projection formula gives
+\[
+ f_*f^*\alpha=\alpha\smile f_*(1)
+                 =n\alpha
+\]
+because $f_*(1)=n\in H^0(X,\mathbb Q)$.
+Divide by n to prove (14).
+This is the actual finite-degree
+original-X Chow return, not a
+numerical intersection proxy.
+\end{proof}
+
+\begin{corollary}[Off-diagonal even Hodge geometry survives every generically finite alteration]
+If arbitrary smooth projective X
+has any off-diagonal Hodge component
+in EVEN total degree, then NO
+smooth projective generically finite
+surjective Y→X can admit an
+all-dimensional Stein affine-line
+torsor.
+\end{corollary}
+\begin{proof}
+For such a genuine generically finite
+morphism, $f_*f^*=n$ on rational
+cohomology; hence $f^*$ is injective.
+As f is an algebraic map of smooth
+projective varieties it respects
+Hodge bidegrees. A nonzero
+off-diagonal even Hodge class
+on X therefore pulls back to a
+nonzero off-diagonal even Hodge
+class on Y. This contradicts
+the Hodge-diagonal necessity
+(7) for any Stein affine-line
+torsor on Y. Alternatively,
+the previous theorem would
+construct an algebraic Chow cycle
+on X for EVERY even rational class,
+contradicting the existence of
+its off-diagonal Hodge component.
+\end{proof}
+
+\section{Exact boundary of this proof route}
+The theorem above is an ALL-ORIGINAL-X universal implication
+with an EXPLICIT constructed original-X Chow output.
+The hypothesis is concrete GLOBAL spatial geometry:
+the existence of a genuine affine-LINE torsor over X
+whose total analytic space is Stein.
+It is not a disguised Hodge-to-Chow selector:
+its existence does not depend on supplying alpha
+or a cycle representing alpha.
+However this geometry cannot exist on projective X with
+off-diagonal even-degree Hodge structure, by the proved
+corollary. For those X, higher-dimensional folds have
+rank at least two in the sense that the rank-one
+Stein strategy is excluded, and their actual
+traceless nonabelian two-direction causal curvature
+is not automatically zero.
+A full all-varieties conclusion would need an independent
+global law controlling that nonabelian higher-causal
+curvature, not merely the one-dimensional observation.
+
+\end{document}

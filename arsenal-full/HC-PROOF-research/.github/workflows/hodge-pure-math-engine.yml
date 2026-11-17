@@ -1,0 +1,46 @@
+name: Hodge Pure Math Engine Gate
+
+on:
+  push:
+    branches:
+      - sol/hodge-pure-math-engine
+      - astra/hodge-proof-development
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hodge-pure-math-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pure-math-engine:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 1
+      - name: Install Lean and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Compile registered pure-math geometry library
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build HodgePureMath 2>&1 | tee hodge-pure-math.log
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hodge-pure-math-engine-diagnostics
+          path: hodge-pure-math.log
+          if-no-files-found: ignore

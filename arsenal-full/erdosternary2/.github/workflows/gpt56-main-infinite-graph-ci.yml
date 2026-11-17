@@ -1,0 +1,62 @@
+name: GPT56 Main Infinite Graph Verify
+
+on:
+  push:
+    branches:
+      - sol/gpt56-gstv2-u2d-atomic-20260822
+  pull_request:
+
+jobs:
+  verify-main-graph:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Compile integrated infinite graph
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2CoupledUFlux.olean GSTGraphV2CoupledUFlux.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2CoupledUPhysicalBridge.olean GSTGraphV2CoupledUPhysicalBridge.lean
+          lake env lean -o .lake/build/lib/lean/GST2DMixedEmergence.olean GST2DMixedEmergence.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DAtomicBridge.olean GSTU2DAtomicBridge.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DEventTransport.olean GSTU2DEventTransport.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DExactCrossingCharge.olean GSTU2DExactCrossingCharge.lean
+          lake env lean -o .lake/build/lib/lean/GSTCanonicalSevenAxisBridge.olean GSTCanonicalSevenAxisBridge.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2InfiniteControl.olean GSTGraphV2InfiniteControl.lean
+          lake env lean GSTGraphV2InfiniteControlSmoke.lean
+
+      - name: Audit integrated graph source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          paths = [Path('GSTGraphV2InfiniteControl.lean'), Path('GSTGraphV2InfiniteControlSmoke.lean')]
+          bad=[]
+          for p in paths:
+              for i,line in enumerate(p.read_text(encoding='utf-8').splitlines(),1):
+                  if line.lstrip().startswith('--'):
+                      continue
+                  if re.search(r'\bsorry\b|\badmit\b|\baxiom\b|\bgst_end\b|\bnative_decide\b', line):
+                      bad.append(f'{p}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit(1)
+          print('main infinite graph audit: clean')
+          PY

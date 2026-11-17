@@ -1,0 +1,85 @@
+name: GPT56 Monolith Transplant Comparator
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTPrefixOneOntologicalEscape.lean
+      - GSTFourPowerHappyProvider.lean
+      - GSTFourPowerDirectExistenceProviderPipeline.lean
+      - ErdosTernary2.lean
+      - lakefile.toml
+      - .github/workflows/gpt56-monolith-transplant-comparator.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  comparator:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-canonical-tail-escape-20260827
+          fetch-depth: 1
+
+      - name: Install exact Lean RC2 and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+
+      - name: Compile transplanted monolith seam
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          touch monolith-transplant-comparator.log
+          {
+            set -euo pipefail
+            echo MONOLITH_TRANSPLANT_COMPARATOR_START=1
+            lake build GSTFourPowerHappyProvider GSTFourPowerDirectExistenceProviderPipeline GSTPrefixOneOntologicalEscape
+            echo MONOLITH_TRANSPLANT_SEAM_COMPILED=1
+            lake build ErdosTernary2
+            echo MONOLITH_TRANSPLANT_ERDOS_MONOLITH_COMPILED=1
+          } 2>&1 | tee monolith-transplant-comparator.log
+          test ${PIPESTATUS[0]} -eq 0
+
+      - name: Kernel axiom audit of transplanted no-axiom route
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat > MonolithTransplantComparatorAudit.lean <<'EOF'
+          import GSTPrefixOneOntologicalEscape
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_provider
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_commonTwoGeThree
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_prefixHitGeThree
+          #print axioms gst_four_power_creation_certificate_noAxiom_from_no_bad_affine_channel_one
+          EOF
+          lake env lean MonolithTransplantComparatorAudit.lean 2>&1 | tee monolith-transplant-axioms.log
+          if grep -Fq 'sorryAx' monolith-transplant-axioms.log; then
+            echo MONOLITH_TRANSPLANT_SORRYAX_DEPENDENCY=1
+            exit 1
+          fi
+          if grep -Fq 'gst_four_power_direct_existence_inline' monolith-transplant-axioms.log; then
+            echo MONOLITH_TRANSPLANT_OLD_INLINE_AXIOM_DEPENDENCY=1
+            exit 1
+          fi
+          echo MONOLITH_TRANSPLANT_NO_AXIOM_ROUTE_GREEN=1
+
+      - name: Upload comparator diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: monolith-transplant-comparator-diagnostics
+          path: |
+            monolith-transplant-comparator.log
+            monolith-transplant-axioms.log
+          if-no-files-found: ignore

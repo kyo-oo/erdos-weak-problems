@@ -1,0 +1,91 @@
+name: Hodge Compile Diagnostic Shards
+
+# Full integration already builds HodgePureMath on each push.
+# Keep all eight shards for on-demand, parallel root-level fault isolation;
+# avoid duplicating the entire expensive project graph on every source edit.
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: hodge-diagnostic-shards-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  compile-shard:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        shard: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 1
+
+      - name: Install Lean and pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+
+      # Reuse verified .olean dependencies from earlier attempts.
+      - name: Restore incremental Lean shard cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-diagnostic-shard-${{ matrix.shard }}-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}
+          restore-keys: |
+            hc-diagnostic-shard-${{ matrix.shard }}-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+      - name: Compile Hodge root shard
+        shell: bash
+        env:
+          SHARD: ${{ matrix.shard }}
+          SHARD_COUNT: 8
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          mapfile -t roots < <(
+            python3 - <<'PY'
+          import os
+          import tomllib
+
+          with open("lakefile.toml", "rb") as source:
+              configuration = tomllib.load(source)
+
+          library = next(
+              item
+              for item in configuration["lean_lib"]
+              if item["name"] == "HodgePureMath"
+          )
+          shard = int(os.environ["SHARD"])
+          shard_count = int(os.environ["SHARD_COUNT"])
+          for root in library["roots"][shard::shard_count]:
+              print(root)
+          PY
+          )
+          lake build "${roots[@]}" 2>&1 | tee "hodge-shard-${SHARD}.log"
+
+      # Successful dependency modules are reusable even if later roots fail.
+      - name: Save incremental Lean shard cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-diagnostic-shard-${{ matrix.shard }}-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}
+
+      - name: Upload shard diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hodge-compile-shard-${{ matrix.shard }}
+          path: hodge-shard-${{ matrix.shard }}.log
+          if-no-files-found: warn

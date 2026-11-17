@@ -1,0 +1,70 @@
+name: GST Mathbox Independent Third Coordinate
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTMathboxIndependentGeometricCoordinate.lean'
+      - '.github/workflows/gst-mathbox-independent-geometric-coordinate.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-mathbox-geometric-coordinate-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-geom3
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Check true independent geometry
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "MathboxIndependentGeometry"
+          roots = ["GSTMathboxIndependentGeometricCoordinate"]
+          EOF
+          if lake build MathboxIndependentGeometry > coordinate3-lean.log 2>&1; then
+            echo "LEAN PASSED: independent third geometry and arbitrary-rank native cycle extension"
+          else
+            grep -nE 'error:|sorryAx|✖' coordinate3-lean.log | tail -n 120 || true
+            tail -n 90 coordinate3-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" coordinate3-lean.log; then
+            echo "Trust audit failed: geometric independent coordinate"
+            exit 1
+          fi
+      - name: Upload compilation log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-independent-coordinate-kernel-log
+          path: coordinate3-lean.log
+          if-no-files-found: warn

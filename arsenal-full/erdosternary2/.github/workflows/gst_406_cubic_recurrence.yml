@@ -1,0 +1,32 @@
+name: GST 406 Exact Cubic BAD Trajectory Recurrence
+on:
+  push:
+    branches: [gpt6/problem406-rowtwo-first-hit-exact-20261030]
+    paths:
+      - GSTProblem406CarryCubicRecurrence.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_cubic_recurrence.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  strict:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Pinned Lean and mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Strict cubic recurrence kernel and axiom audit
+        run: |
+          set -euo pipefail
+          lake build GST406CarryCubicRecurrence 2>&1 | tee cubic-build.log
+          lake env lean GSTProblem406CarryCubicRecurrence.lean 2>&1 | tee cubic-axioms.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' cubic-build.log cubic-axioms.log
+          grep -F "'GSTProblem406CarryCubicRecurrence.original_bad_trajectory_cubic' depends on axioms:" cubic-axioms.log
+          echo GST406_CUBIC_RECURRENCE_KERNEL_PASS=1

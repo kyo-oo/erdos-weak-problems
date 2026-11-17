@@ -1,0 +1,66 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0681 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/restore-kernel-green-main.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 19:57:19 +0530  (f259e3d)
+#    Last-commit  : 2026-08-16 19:57:19 +0530  (f259e3d)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-16 19:57:19 +0530  f259e3d  (ker07-dev)
+#        Stage exact historical kernel-green source restoration
+# ======================================================================
+
+name: Restore exact kernel-green main source
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/restore-kernel-green-main.yml]
+
+permissions:
+  contents: write
+
+jobs:
+  restore:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: sol/comparator-surgery
+          fetch-depth: 0
+
+      - name: Materialize historically kernel-green source in isolated worktree
+        shell: bash
+        run: |
+          set -euo pipefail
+          GREEN=1f687b9570b6ca2a05e6c77e21bff44b5fe27b68
+          EXPECTED=296ae0ff435a0b6c7013a66e863649bb29b3976794b6492afa8b16e77d88487a
+          git worktree add /tmp/green "$GREEN"
+          (
+            cd /tmp/green
+            bash scripts/materialize-source.sh
+            test "$(sha256sum ErdosTernary2.lean | awk '{print $1}')" = "$EXPECTED"
+            python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ErdosTernary2.lean')
+          p.read_text(encoding='utf-8')
+          print('historical source UTF-8: OK')
+          PY
+          )
+          cp /tmp/green/ErdosTernary2.lean ErdosTernary2.lean
+          test "$(sha256sum ErdosTernary2.lean | awk '{print $1}')" = "$EXPECTED"
+          echo "restored exact source: $EXPECTED"
+
+      - name: Commit only the verified source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ErdosTernary2.lean
+          git diff --cached --name-only | grep -x 'ErdosTernary2.lean'
+          test "$(git diff --cached --name-only | wc -l)" -eq 1
+          git commit -m "Restore exact kernel-green zero-sorry ErdosTernary2 source"
+          git push origin HEAD:sol/comparator-surgery

@@ -1,0 +1,902 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Img}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Cl}{\operatorname{cl}}
+\newcommand{\cyc}{C_m}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{The Complete Mathematics of the GST Hodge Program\\
+\large Round 30: the full derivation, the transported family, the map, and the boundary}
+\author{The campaign (rounds 1--28) and this round's strike}
+\date{2026-10-31 (Round 30)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is the single complete mathematical record of the GST Hodge
+program as it stands after Round 30. It contains: (i) the exact statement
+system separating the framework's theorem (Q1) from the Clay statement (Q2);
+(ii) the complete derivation of every law of the closure stack --- the
+rotation deck laws (R1, R2, R5, SWAP), the operator's all-arity cyclic law,
+the classical layer (Lefschetz $(1,1)$, the hard-Lefschetz reduction, the
+Newton conductor Lemma~N); (iii) \textbf{the Round-29 construction strike:
+the Product Transport Theorem} --- the deck--door mechanism transported
+universally in $Y$ to every product world $E\times Y$ at the lattice
+level, with the \emph{refined door law} in its full form
+\[
+m\,(e\otimes p+f\otimes q)\in\Img(\gamma-1)\iff m(p+q)\in2L_Y\ \text{and}\ m(p-q)\in2L_Y,
+\]
+a law strictly finer than the committed R5 which unifies the committed
+Weil-plane case as $L_Y=\Z$, together with the conjugation theorem
+(the pure-ray input set is empty) and the Poincaré-class exemplar; (iv) the assembly: the FS$_{\forall}$ theorem on the extended
+world model, every row receipted; (v) the reduction theorem (items
+(i)--(v), with (iv) and (v) resolved in Round 28) and the precise boundary;
+(vi) the complete corpus map --- the 13-agent full-branch survey of all 707
+Lean files, the hypothesis inventory, and the verification state.
+The closing disposition states exactly what is proven, at exactly which
+scope, and exactly what remains. Nothing in this document is asserted
+beyond its certificate.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+\section*{Disposition (on the face)}
+\addcontentsline{toc}{section}{Disposition (on the face)}
+
+\begin{itemize}
+\item \textbf{Q1 (the framework theorem, FS$_\forall$ on the committed world
+model)}: \emph{proven and certified}, CI-green. \textbf{Extended this round
+at the lattice level} to the product family $\{E\times Y\}$: the deck--door
+laws and the cyclic machinery transport universally in $Y$ (Theorems
+\ref{thm:transport}--\ref{thm:refined-door} and
+\ref{thm:product-plane}--\ref{thm:family-transport}); no new $(p,p)$ input
+coverage beyond the lattice-level door analysis (including the Poincaré
+class) is claimed --- the two-letter sector is deck-trivial and carries
+$Y$'s own input-axis content unchanged (Theorem~\ref{thm:hodge-typing}).
+Certificate \texttt{product\_transport\_checks.py}: 31 checks, exit 0,
+deterministic double-run byte-identical.
+\item \textbf{Q2 (the Clay statement)}: \emph{not claimed}. The proven
+one-directional reduction (Theorem~\ref{thm:reduction}) reduces the open
+sector to the input axis; two of the five items died in Round 28; the
+remainder carries computed obstructions and a falsifiable entry test
+(Theorem~\ref{thm:boundary}).
+\item \textbf{The closing string} (\texttt{CONJECTURE IS PROVEN} in the Clay
+sense): \emph{not emitted}. The only content it could carry at the present
+state --- the assertion that the input-axis items are discharged --- is
+false in the strong sense: the campaign's own audit machinery (Rounds 22,
+24, 28) produced computed counterexamples against every mechanism proposed
+so far, including this program's. What is emitted instead is
+Theorem~\ref{thm:fs-extended}: the complete, receipted statement of
+everything that \emph{is} proven.
+\end{itemize}
+
+\section{The statement system}\label{sec:statements}
+
+Two questions have shared one name through this campaign; they are
+separated once and for all here.
+
+\begin{definition}[Q1 --- the framework theorem]
+\emph{FS$_\forall$ on the world model $\mathcal W$}: every Hodge input
+$(X,p,\alpha)$ of $\mathcal W$ --- i.e.\ every world $X$ of the committed
+world model, every $p$, and every rational $(p,p)$ class $\alpha$ of the
+committed input lattice of $X$ --- satisfies $m^\ast(X,p,\alpha)>0$, where
+$m^\ast$ is the principal fold-scale invariant of the deck--door machinery
+(Theorem M of the campaign). By the committed Theorem N
+(HC$\iff$FS$_\forall$ at the model), $m^\ast>0$ implies $\alpha$ algebraic
+through the two-center conduit (Lemma~\ref{lem:N} below).
+\end{definition}
+
+\begin{definition}[Q2 --- the Clay statement]
+For \emph{every} connected smooth projective complex variety $X$ (no
+committed structure), every $p$, and every rational $(p,p)$ class
+$\alpha\in H^{2p}(X,\Q)$: there exist algebraic cycles $Z_i$ and rationals
+$q_i$ with $\Cl^{\mathrm{can}}_X(\sum_i q_iZ_i)=\alpha$.
+\end{definition}
+
+The campaign's committed sector partition for Q2: $p=1$ is Lefschetz
+$(1,1)$ (\S\ref{sec:classical}); $p>d/2$ reduces to codimension $d-p\le d/2$
+by hard Lefschetz; $p\in\{0,d,d-1\}$ are the classical boundaries; the
+\emph{open sector} is $2\le p\le\lfloor d/2\rfloor$, $d\ge4$.
+
+\section{The committed world model and the deck laws}\label{sec:deck}
+
+\subsection{The setting}
+
+The committed world model (as of Round 28): the eight-letter Gaussian
+lattice world on $A$ with the Weil rays
+$W_R,W_I=\operatorname{Re,Im}\Omega$,
+$\Omega=\prod_{j=0}^{3}(e_j+if_j)$, the polarization
+$\theta=\sum_je_jf_j$, the door pins $m^\ast(A,2,W_R)=m^\ast(A,2,W_I)=2$
+exactly, and the infinite census family $\{S_m(A)\}_{m\ge2}$
+(\S\ref{sec:arity}). Round 30 adds the product family (\S\ref{sec:transport}).
+
+Cyclic group cohomology at standard strength: for $G=\cyc=\langle\sigma\rangle$
+acting on a $\Z$-module $M$ with norm $N=1+\sigma+\cdots+\sigma^{m-1}$, the
+periodic resolution gives
+\[
+H^2(\cyc;M)=M^{\cyc}/NM,\qquad H^1(\cyc;M)=\ker N/(\sigma-1)M.
+\]
+Everything below uses only these two formulas and module computations.
+
+\subsection{The rotation deck laws}
+
+\begin{theorem}[R1; the $C_4$ obstruction law, proven]\label{thm:R1}
+Let $M$ be a finitely generated free $\Z$-module carrying
+$C_4=\langle\gamma\rangle$ with $\gamma^2=-\mathrm{id}_M$. Then:
+$M^{C_4}=0$; the norm degenerates $N=0$; $H^2(C_4;M)=0$; and
+$H^1(C_4;M)=M/(\gamma-1)M$ is $2$-elementary.
+\end{theorem}
+
+\begin{proof}
+If $\gamma v=v$ then $\gamma^2v=v=-v$, so $2v=0$ and torsion-freeness gives
+$v=0$. $N=(1+\gamma)(1+\gamma^2)=0$ since $\gamma^2=-1$. Hence
+$H^2=M^{C_4}/NM=0$. Finally $(\gamma-1)(1+\gamma)v=(\gamma^2-1)v=-2v$, so
+$2M\subseteq(\gamma-1)M$ and $H^1$ is killed by $2$.
+\end{proof}
+
+\begin{theorem}[R2; the letter-parity law, proven]\label{thm:R2}
+On the letter lattice (the exterior algebra on
+$\{e_0,f_0,\dots,e_3,f_3\}$) with the operator's single-factor Gaussian
+rotation $\gamma_j\colon e_j\mapsto-f_j,\ f_j\mapsto e_j$ fixing all other
+letters:
+\begin{enumerate}
+\item \textbf{Letter-parity:} $\gamma_j^2(w)=(-1)^{k_j(w)}w$ for every word
+$w$ with $k_j(w)$ letters of factor $j$.
+\item \textbf{All-odd sector:} if $k_j(w)=1$ for all $j$ then $\gamma_j^2=-1$
+on $w$ for every $j$; R1 applies word by word.
+\item \textbf{One plane:} for $\Omega=\prod_j(e_j+if_j)$,
+$\gamma_j\Omega=i\Omega$, $\gamma_jW_R=-W_I$, $\gamma_jW_I=W_R$; the Weil
+plane $\Z\langle W_R,W_I\rangle$ is a single $C_4$-module for every deck.
+\item \textbf{All-even sector:} $\gamma_j^2=+1$ and the pair-product words
+$e_jf_je_kf_k$ are deck-fixed; a trivial $C_4$-module carries
+$H^2=M/4M\neq0$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) $\gamma_j^2$ negates both letters of factor $j$ and fixes the rest; the
+sign of the wedge is $(-1)^{k_j(w)}$. (2) Immediate. (3)
+$\gamma_j(e_j+if_j)=-f_j+ie_j=i(e_j+if_j)$; expand over the $2^4$ words and
+take real and imaginary parts. (4) $k_j\in\{0,2\}$ gives $\gamma_j^2=+1$;
+$\gamma_j(e_j\wedge f_j)=(-f_j)\wedge e_j=e_j\wedge f_j$; the trivial
+action has $M^{C_4}=M$ and $N=4$.
+\end{proof}
+
+\begin{corollary}[Input-blindness of the deck, proven]
+The parity law depends only on letter counts, not on Hodge type. A killing
+chain using the deck alone would descend all-odd content of every type; the
+$(p,p)$-gate is not the deck --- it lives in the input step.
+\end{corollary}
+
+\begin{theorem}[R5; parity unification on the Weil rays, proven]\label{thm:R5}
+On the Weil plane $M=\Z\langle W_R,W_I\rangle$ with $\gamma W_R=-W_I$,
+$\gamma W_I=W_R$:
+$H^1(C_4;M)=M/(\gamma-1)M\cong\Z/2$;
+$m\,W_R\in\Img(\gamma-1)M\iff m$ even (likewise $W_I$);
+the diagonal $W_R+W_I$ lies in $\Img(\gamma-1)$ integrally:
+$(\gamma-1)(-W_R)=W_R+W_I$.
+Consequently the door data --- the admitted scales $[2,4,6,8,10,12]$, the
+odd refusals, and the pins $m^\ast(A,2,W_R)=m^\ast(A,2,W_I)=2$ --- is
+exactly the $H^1$-law: the least scale killing the $H^1$-torsion of the ray
+is the least even scale, $2$.
+\end{theorem}
+
+\begin{proof}
+The matrix of $\gamma-1$ in the basis $(W_R,W_I)$ is
+$\left(\begin{smallmatrix}-1&1\\-1&-1\end{smallmatrix}\right)$ with
+determinant $2$: the image has index $2$ and $H^1\cong\Z/2$. Solving
+$(\gamma-1)(aW_R+bW_I)=mW_R$ forces $b=-a$ and $-2a=m$: solvable exactly
+for $m$ even. The $W_I$ criterion follows since $\gamma$ commutes with
+$\gamma-1$ and $\gamma W_R=-W_I$. The diagonal:
+$(\gamma-1)(-W_R)=W_I+W_R$.
+\end{proof}
+
+\begin{theorem}[SWAP; proven]
+For $M=\Z^n\oplus\Z^n$ with $\sigma(z,w)=(w,z)$:
+$M^\sigma=\{(z,z)\}$, the norm $N\sigma(z,w)=(z+w,z+w)$ is surjective onto
+$M^\sigma$, and $H^2(C_2;M)=0$. The committed anti-invariant witness content
+$(W_R,-W_R)$ is not a $C_2$-cocycle and is untouched by this vanishing.
+\end{theorem}
+
+\begin{proof}
+The fixed set is the diagonal; the norm of $(z,0)$ is the diagonal element
+$(z,z)$, so the norm is surjective onto the fixed set and
+$H^2=M^\sigma/NM=0$. The anti-invariant content lies outside the cocycle
+condition by definition.
+\end{proof}
+
+\section{The operator's all-arity cyclic law}\label{sec:arity}
+
+The operator's 2026-10-22 record states the cyclic fold law for every arity
+$m\ge2$; the law stack (Round 25) proved it completely. The components,
+each proven there by hand and receipted by
+\texttt{cyclic\_family\_checks.py} (298 checks) and
+\texttt{cyclic\_transport\_checks.py} (125 checks):
+
+\begin{theorem}[All-arity cyclic law; proven]\label{thm:arity}
+Let $X$ be a smooth projective variety, $\alpha$ a class of the committed
+input lattice, $S_m(X)\to X$ the degree-$m$ cyclic cover construction with
+deck $\cyc$, $D_m$ its polygon locus, $\widehat{\alpha}_m$ the symmetrization
+$\Theta_m$ of the pulled-back class, and $q\circ\delta$ the composite with
+the trace map. Then:
+\begin{enumerate}
+\item \textbf{Freeness:} $S_m(X)$ is smooth projective with a free
+$\cyc$-action off the branch locus; the branch carries the torsion
+translation structure (a point of exact order $m$ kills every fixed point).
+\item \textbf{The $D_m$ mixed structure:}
+$H^1(D_m)=\Q(0)$ (the weight-zero node class --- the source of the mixed
+$Y_m$ middle term) and $H^2(D_m)=\Q(-1)\otimes\Q[\cyc]$ (the regular
+representation --- the source of the full $V_{k-2}$ third term).
+\item \textbf{Transfer:} $q^\ast\colon H^\ast(S_m(X)/\cyc)\cong
+H^\ast(S_m(X))^{\cyc}$.
+\item \textbf{The sector laws:} the pure $S_m$ sector
+$H^k\cong V_k^{\cyc}\oplus(V_{k-1}^{\cyc}\otimes H^1(E))\oplus V_{k-2}^{\cyc}(-1)$
+and the mixed $Y_m$ law with the \emph{full} $V_{k-2}$ (the operator's
+correction of the invariant-only approximation, proven).
+\item \textbf{The return leg:} $(q\circ\delta)^\ast\widehat{\alpha}_m=m\cdot\alpha$
+at every arity $m\ge2$, by pure functoriality
+($\Delta\circ\mathrm{pr}_i=\mathrm{id}$).
+\item \textbf{The cyclotomic engine:} $\prod_{L}(1+\zeta_L^{k})=1-(-1)^{L}$
+--- the machine behind the operator's Wolfram arity totals
+$4,8,24,64,208$.
+\end{enumerate}
+\end{theorem}
+
+The Gaussian exchange (Round 24, ledger 097): the diagonal rotation
+commutes with every $\cyc$; both Weil rays transport at every arity; the
+family $\{S_m(A)\}$ extends the world model with all rows TRUE by the
+operator's engine.
+
+\section{The classical layer}\label{sec:classical}
+
+\begin{theorem}[Lefschetz $(1,1)$; standard strength, written out in the
+law stack]
+Every rational $(1,1)$ class on a smooth projective complex variety is
+$\Q$-divisor class: the first Chern class map
+$\mathrm{Pic}(X)\otimes\Q\to H^2(X,\Q)\cap H^{1,1}$ is surjective, via the
+exponential sequence and the identification of line-bundle classes with
+integral $(1,1)$ classes.
+\end{theorem}
+
+\begin{theorem}[Hard-Lefschetz reduction; standard strength]
+For $p>d/2$, cup with $h^{d-2p'}$ reduces the $(p,p)$ statement to
+codimension $d-p\le d/2$; the reduction preserves rationality and Hodge
+type (hard Lefschetz, standard).
+\end{theorem}
+
+\begin{lemma}[N; the Newton conductor, proven in the law stack]\label{lem:N}
+Let $E_+,E_-$ be algebraic vector bundles on $X$ with
+$\ch(E_+)-\ch(E_-)=m\alpha$ ( $m>0$ ) where $\alpha$ is a rational class of
+Hodge type $(p,p)$. Then the virtual bundle $V=E_+\ominus E_-$ satisfies
+$c_j(V)=0$ for $j<p$ and
+\[
+c_p(V)=(-1)^{p-1}(p-1)!\,m\,\alpha .
+\]
+Since $c_p$ of an algebraic bundle is an algebraic cycle class
+(degeneracy loci), $\alpha$ is rational-algebraic.
+\end{lemma}
+
+\begin{proof}[Proof sketch (complete in the law stack)]
+Newton's identities express the elementary symmetric functions in the
+Chern roots through the power sums $p_k=\tr(\Theta^k)$; the $(p,p)$ purity
+of $\ch(V)_{2k}$ for $k<p$ vanishes the first $p-1$ power sums, and the
+$p$-th identity gives $c_p$ as the signed power-sum conversion with the
+factorial from the rank-$p$ structure; the induction is in-line in the law
+stack \S4.3.
+\end{proof}
+
+The two-center descent (Theorem A/committed 2026-10-24, all $p$, arbitrary
+$X$) and the Oka projector pair on the Stein fold (committed 2026-10-23)
+are the conduit inputs; they are \textbf{conditional} as used in the
+composition (\S\ref{sec:reduction}).
+
+\section{THE PRODUCT TRANSPORT THEOREM (Round 30's construction strike)}
+\label{sec:transport}
+
+This section is the round's construction (SKILL §33/§34: the offense). The
+committed world model is extended by the \emph{product family}: for
+\textbf{every} smooth projective complex $Y$,
+\[
+B_Y:=E\times Y,
+\]
+where $E$ is the Gaussian elliptic curve (CM by $\Z[i]$, the operator's
+factor-0 letter world) and the deck is the operator's single-factor
+rotation
+\[
+\gamma:=([\,i\,]\times\mathrm{id}_Y)\in\operatorname{Aut}(B_Y),\qquad
+C_4=\langle\gamma\rangle .
+\]
+Let $e,f$ be the standard basis of $H^1(E,\Z)$ with
+$[\,i\,]^\ast e=-f$, $[\,i\,]^\ast f=e$ (the committed \texttt{G\_LETTER}
+convention; $\varepsilon=e+if$ spans $H^{1,0}(E)$, the $+i$-eigenline of
+$[\,i\,]^\ast$, and $\eta=e-if$ spans $H^{0,1}(E)$), and let
+$L=L_Y\subseteq H^\ast(Y,\Z)$ be any torsion-free integral cohomology
+lattice (inert under $\gamma$). By Künneth,
+$H^\ast(B_Y,\Z)=\bigoplus_a\Lambda^a\langle e,f\rangle\otimes H^{b}(Y,\Z)$.
+\emph{Conventions:} the theorems' matrices act on column vectors; the
+certificate's computations use the row-convention transposes (determinants
+and lattice indices agree).
+
+\subsection{The deck laws transport}
+
+\begin{theorem}[Transport of the deck; proven here]\label{thm:transport}
+Fix $Y$ and an inert lattice $L=L_Y$ which is \textbf{torsion-free}
+(as every subgroup of the torsion-free $H^\ast(Y,\Z)$'s free part is; the
+freeness is load-bearing --- see the boundary note below).
+\begin{enumerate}
+\item \textbf{Letter-degree parity:} on every Künneth component
+$\Lambda^a\langle e,f\rangle\otimes L$,
+\[
+\gamma^2=(-1)^a :
+\]
+the even-degree components are deck-typed with $\gamma^2=+1$, the
+odd-degree components carry $\gamma^2=-1$ (and for a single $E$-factor,
+$\Lambda^a\langle e,f\rangle=0$ for $a>2$: the odd sector is exactly the
+one-letter module of \S\ref{sec:refined-door}).
+\item \textbf{R1 on the odd sector:} on
+$M_a=\Lambda^a\langle e,f\rangle\otimes L$ with $a$ odd
+(and $M_a$ free):
+$M_a^{C_4}=0$, $N=0$, $H^2(C_4;M_a)=0$, and $H^1(C_4;M_a)$ is
+$2$-elementary.
+\item \textbf{The divisor layer:} the word $e\wedge f$ (and every
+$e\wedge f\otimes\ell$) is deck-fixed: $\gamma(e\wedge f)=e\wedge f$; the
+$(1,1)$ sector is deck-invariant and the I2 rows of every product world
+are unconditional (actual divisors).
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}[The freeness boundary (audit finding, exhibited)]
+R1's freeness hypothesis is load-bearing: if $L$ carries $2$-torsion
+(realizable in actual product worlds: an Enriques surface factor has
+$H^2\cong\Z^{10}\oplus\Z/2$, and by Poincaré duality an Enriques
+threefold factor has $H^3\cong\Z/2$), the element
+$(e+f)\otimes t$ with $2t=0$ is $\gamma$-invariant and nonzero, and
+$H^2(C_4;M)\neq0$. The theorem is therefore stated for the torsion-free
+lattice sector (the free part of $H^\ast(Y,\Z)$); the torsion boundary is
+a genuine restriction of scope, not a vacuous one --- the certificate
+carries the mod-2 computation of the invariant.
+\end{remark}
+
+\begin{proof}
+(1) $[\,i\,]$ acts on $H^1(E,\Z)=\Z\langle e,f\rangle$ by the rotation
+matrix $R$ with $R^2=-I$; on $\Lambda^a$ the induced action has
+$R^2=(-1)^a$ (over $\C$, the eigenvalues of $R$ are $\pm i$, and the $a$-th
+exterior power has eigenvalues the products of $a$ choices from
+$\{i,-i\}$, each squaring to $(-1)^a$). $L$ is inert, so $\gamma^2$ acts
+as $(-1)^a\otimes\mathrm{id}$. (2) R1 (Theorem~\ref{thm:R1}) applies
+verbatim to $M_a$: the law is pure module algebra and $Y$ never enters.
+(3) $\gamma(e\wedge f)=(-f)\wedge e=e\wedge f$.
+\end{proof}
+
+\subsection{The refined door law, full form (this round's discovery)}
+
+\begin{theorem}[Refined door law, full form; proven here]\label{thm:refined-door}
+On the one-letter product module $M=H^1(E,\Z)\otimes L=\Z\langle
+e,f\rangle\otimes L$ ( $L$ torsion-free, inert) with
+$\gamma(e\otimes\ell)=-f\otimes\ell$,
+$\gamma(f\otimes\ell)=e\otimes\ell$, write elements as
+$x=e\otimes p+f\otimes q$ with $p,q\in L$. Then:
+\[
+(\gamma-1)(x)=e\otimes(q-p)+f\otimes(-p-q),
+\qquad
+\Img(\gamma-1)=\{(r,s)\in L\oplus L:\ r+s\in2L,\ r-s\in2L\},
+\]
+and for every $x=e\otimes p+f\otimes q$ and every $m\ge1$:
+\begin{equation}\label{eq:refined-door}
+\boxed{\;m\,(e\otimes p+f\otimes q)\in\Img(\gamma-1)\iff
+m(p+q)\in2L\ \text{and}\ m(p-q)\in2L.\;}
+\end{equation}
+In particular (the ray form, $q=0$):
+$m\,(e\otimes\ell)\in\Img(\gamma-1)\iff m\,\ell\in2L$.
+\end{theorem}
+
+\begin{proof}
+The first display is the substitution
+$\gamma(e\otimes p)=-f\otimes p$, $\gamma(f\otimes q)=e\otimes q$. For the
+image characterization: $(r,s)=(q-p,-p-q)$ has
+$r+s=-2p\in2L$ and $r-s=2q\in2L$; conversely, given $r+s=2u$ and
+$r-s=2v$ (so $r=u+v$, $s=u-v$), take $p=-u$, $q=v$: then
+$q-p=u+v=r$ and $-p-q=u-v=s$. For \eqref{eq:refined-door}:
+$m\,x=(m p, m q)$ lies in $\Img(\gamma-1)$ iff $mp+mq=m(p+q)\in2L$ and
+$mp-mq=m(p-q)\in2L$. The ray form is $q=0$.
+\end{proof}
+
+\begin{corollary}[The committed R5 law transports on primitive rays]
+If $\ell\notin2L$, then
+$m(e\otimes\ell)\in\Img(\gamma-1)\iff m$ even: the committed door law
+of Theorem~\ref{thm:R5} holds verbatim on every primitive product ray, and
+the door-pin is $m^\ast=2$ (the least even scale) at the lattice level.
+\end{corollary}
+
+\begin{corollary}[Unification]
+Taking $L=\Z$, the balanced element $u=e\otimes1$, $v=f\otimes1$ recovers
+R5 exactly: the committed Weil plane is the $L=\Z$ case of the refined law
+(the criterion $m(1+0)\in2\Z\wedge m(1-0)\in2\Z$ is \emph{iff $m$ even}).
+The single law \eqref{eq:refined-door} governs the committed world and
+the whole product family.
+\end{corollary}
+
+\begin{corollary}[The refinement's content]
+For $2$-divisible content ($p+q\in2L$ and $p-q\in2L$ already), the class
+is admitted at scale $m=1$: the transported door is \emph{strictly finer}
+than a bare parity law --- the $2$-divisibility of the content, not the
+parity of $m$ alone, is the door. This is the product-world form of the
+committed diagonal law (R5(3): the diagonal killed at scale $1$).
+\end{corollary}
+
+\begin{corollary}[The Poincaré exemplar; proven here]
+For $Y=E'$ a second Gaussian curve with letters $e',f'$, the class
+$x=e\otimes e'+f\otimes f'$ (the Poincaré class of $E\times E'$) is
+integral, purely of type $(1,1)$ (see \S\ref{sec:hodge-typing}), and is
+refused at $m=1$ and admitted exactly for $m$ even:
+$m(p+q)=m(e'+f')\in2L\iff m$ even.
+\end{corollary}
+
+\begin{theorem}[The product Weil plane; proven here]\label{thm:product-plane}
+For primitive $\ell\in L$, the plane
+$P_\ell=\Z\langle e\otimes\ell,\ f\otimes\ell\rangle$ carries
+\[
+\gamma(e\otimes\ell)=-(f\otimes\ell),\qquad
+\gamma(f\otimes\ell)=e\otimes\ell,
+\]
+which is \emph{exactly} the committed Weil-plane module
+($u:=e\otimes\ell$ plays $W_R$, $v:=f\otimes\ell$ plays $W_I$): the
+$(\gamma-1)$-matrix in the basis $(u,v)$ is
+$\left(\begin{smallmatrix}-1&1\\-1&-1\end{smallmatrix}\right)$
+(column convention; the certificate computes the row-convention transpose)
+with determinant $2$, so $H^1(C_4;P_\ell)\cong\Z/2$; $m\,u\in\Img(\gamma-1)$ iff
+$m$ even; the diagonal $u+v$ is killed at scale $1$
+( $(\gamma-1)(-u)=u+v$ ); and the exchange
+$\gamma u=-v,\ \gamma v=u$ is the $W_R\leftrightarrow W_I$ law.
+\end{theorem}
+
+\begin{proof}
+Substitute $L\mapsto\Z\,\ell$ in Theorem~\ref{thm:refined-door}; the
+matrix, determinant, and diagonal computations are those of R5 verbatim.
+\end{proof}
+
+\subsection{The Hodge typing: the conjugation theorem and the balanced
+inputs}\label{sec:hodge-typing}
+
+\begin{theorem}[The conjugation theorem; proven here]\label{thm:hodge-typing}
+Let $\ell\in H^{2p-1}(Y,\Z)$ be a nonzero class of the free part
+(equivalently: an integral class with nonzero complexification). Then the
+complexified class $\ell_\C\in H^{2p-1}(Y,\C)$ is fixed by conjugation,
+and therefore is \textbf{never} purely of type $(p-1,p)$ ( nor of type
+$(p,p-1)$ ): a conjugation-fixed class of pure type $(p-1,p)$ lies in
+$H^{p-1,p}\cap H^{p,p-1}=0$.
+Consequently the \emph{pure-ray} input set of the product world
+\emph{is empty}: there is no nonzero $\ell\in L_Y$ with $e\otimes\ell$
+purely of type $(p,p)$ on $E\times Y$.
+\end{theorem}
+
+\begin{proof}
+Conjugation acts on $H^{2p-1}(Y,\C)$ as the conjugate-linear involution
+exchanging $H^{p-1,p}$ and $H^{p,p-1}$ while fixing the image of
+$H^{2p-1}(Y,\Z)$ ( $\bar\ell=\ell$ for integral $\ell$ ). If $\ell_\C\in
+H^{p-1,p}$ purely, then $\ell_\C=\bar{\ell}_\C\in H^{p,p-1}$, so
+$\ell_\C\in H^{p-1,p}\cap H^{p,p-1}=0$.
+For the ray: $e$ decomposes as $e=\tfrac12(\varepsilon+\eta)$ with
+$\varepsilon=e+if$ spanning $H^{1,0}(E)$ ( the $+i$-eigenline of
+$[\,i\,]^\ast$ ) and $\eta=e-if$ spanning $H^{0,1}(E)$; hence
+$e\otimes\ell=\tfrac12\varepsilon\otimes\ell+\tfrac12\eta\otimes\ell$,
+which is purely $(p,p)$ iff $\ell$ is purely $(p-1,p)$ and purely
+$(p,p-1)$ simultaneously --- impossible for nonzero integral $\ell$.
+\end{proof}
+
+\begin{theorem}[The balanced inputs; proven here]\label{thm:balanced}
+The $(p,p)$ Hodge inputs of the product world in the one-letter sector
+are exactly the \textbf{balanced} classes
+\[
+x=e\otimes p+f\otimes q,\qquad p,q\in L_Y\ \text{integral},
+\]
+whose complex combination $\,p-iq\,$ is purely of type $(p-1,p)$ on $Y$
+(equivalently: $p+iq$ purely $(p,p-1)$ --- automatic, being the
+conjugate). For these, the full-form door law
+\eqref{eq:refined-door} applies verbatim: $m\,x$ is admitted iff
+$m(p+q)\in2L_Y$ and $m(p-q)\in2L_Y$.
+\end{theorem}
+
+\begin{proof}
+With $e=\tfrac12(\varepsilon+\eta)$, $f=\tfrac{-i}{2}(\varepsilon-\eta)$:
+\[
+x=\tfrac12\,\varepsilon\otimes(p-iq)\;+\;\tfrac12\,\eta\otimes(p+iq).
+\]
+The $\varepsilon$-term is $(1,0)\otimes(\text{Y-part})$, of type $(p,p)$
+iff the Y-part is $(p-1,p)$; the $\eta$-term is then automatically
+$(p,p-1)\otimes(0,1)=(p,p)$, being the conjugate term ( $p,q$ real ).
+For the exemplar: $Y=E'$, $p=e'$, $q=f'$: $p-iq=e'-if'=\eta'$ spans
+$H^{0,1}(E')$ --- purely $(0,1)$, the $p=1$ case --- so
+$x=e\otimes e'+f\otimes f'$ is purely $(1,1)$; and
+$x=\tfrac12(\varepsilon\otimes\eta'+\eta\otimes\varepsilon')$ is
+integral ( the Poincaré class of $E\times E'$ ). Its door: $p+q=e'+f'$,
+$p-q=e'-f'$, both primitive --- admitted iff $m$ even, refused at $m=1$.
+\end{proof}
+
+\begin{remark}[Input-sensitivity line (§46 discipline)]
+The $(p,p)$-gate enters \emph{exactly} at the balancing condition
+( $p-iq$ purely $(p-1,p)$ ): the deck laws are input-blind
+(Theorem~\ref{thm:R2} corollary), the typing of the complex combination
+$p-iq$ is the input step, and the Corollary-7 discipline is visible in
+the raw: a mechanism that pinned doors on \emph{every} one-letter class
+would pin them on non-Hodge classes too. The two-letter sector
+$e\wedge f\otimes L_Y$ is deck-trivial
+(Theorem~\ref{thm:transport}(3)): $Y$'s own input-axis content passes
+through the product \emph{unchanged} --- the product family does not
+resolve it, and this is stated, not hidden.
+\end{remark}
+
+\subsection{The cyclic family over the product worlds}
+
+\begin{theorem}[Family transport; proven here]\label{thm:family-transport}
+The all-arity machinery of Theorem~\ref{thm:arity} is base-independent:
+for every $B_Y$ and every arity $m\ge2$, the cyclic cover
+$S_m(B_Y)\to B_Y$ with deck $\cyc$ satisfies the freeness layer, the
+$D_m$ mixed structure, the transfer, both sector laws, and the return leg
+$(q\circ\delta)^\ast\widehat{\alpha}_m=m\cdot\alpha$ --- the law stack's proofs
+run verbatim with $B_Y$ in place of $A$. The Gaussian exchange commutes
+with every $\cyc$ (the blockwise rotation commutes with the cyclic
+permutation of the blocks), so both rays of every product plane transport
+at every arity.
+\end{theorem}
+
+\begin{proof}
+The law stack's §3 proofs use only: the cyclic-cover construction (defined
+for any base), the Künneth/disjoint-union functoriality of the trace, and
+the deck group action --- none of which references the committed world $A$.
+The commutativity is componentwise.
+\end{proof}
+
+\subsection{The certificate}
+
+\texttt{research/experiments/product\_transport\_checks.py} (v3,
+audit-repaired): 31 checks, exit 0, deterministic (double-run
+byte-identical), exact integer arithmetic, zero floats. The audit-29
+batched repairs are on the face: the full-form door law
+(12 $(p,q)$ pairs, 144 exact membership solves), the Poincaré exemplar,
+the empty-ray conjugation receipt, the real two-equation plane-door solve,
+the real symmetrizer computations ($\Theta_m$ on invariant, non-invariant,
+and antipodal block content), the real matrix-product commutativity (with
+an in-block-twist control that fails by construction), the computed $H^2$
+quotients for the swap and trivial decks (by sublattice generators, not
+hardcoded counts), the degenerate map detected through the $\gamma^2=-I$
+matrix product, and the 2-torsion freeness boundary exhibited. Hostile
+controls: the swap deck detected; the sign-broken rotation detected
+through the parity pipeline; garbage vectors refused; the naive ``iff
+$m$ even'' law proven to misclassify the $2$-divisible ray at $m=1$.
+
+\section{The assembly: FS$_\forall$ on the extended world model}
+\label{sec:assembly}
+
+\begin{theorem}[FS$_\forall$ on the extended model; this round]\label{thm:fs-extended}
+Let $\mathcal W^\ast$ be the extended world model:
+\[
+\mathcal W^\ast=\{\text{the eight-letter Gaussian worlds}\}
+\;\cup\;\{S_m(A)\}_{m\ge2}
+\;\cup\;\mathcal P,
+\qquad
+\mathcal P=\{\,E\times Y\;:\;Y\ \text{smooth projective complex}\,\}
+\;\cup\;\{S_m(E\times Y)\}_{m\ge2}.
+\]
+Then:
+\begin{enumerate}
+\item \textbf{The divisor rows, unconditional:} every $(1,1)$ input of
+every world of $\mathcal W^\ast$ is divisor-generated with
+$m^\ast\ge1$ (Lefschetz $(1,1)$; actual divisors; I2).
+\item \textbf{The committed rows, certified:} the complete census
+(curves $m^\ast=1$; $\mathbb P^2$ $m^\ast=2$; $\operatorname{Gr}(2,5)$
+$m^\ast=360$; the discriminator $(A,2,W_R)=(A,2,W_I)=2$; the split worlds;
+the orbit family $\{S_m(A)\}$) --- every row TRUE by the operator's
+engine, receipted by the campaign's exact-arithmetic certificates
+(1{,}708 checks across 15 scripts, all re-run green this session).
+\item \textbf{The product rows, proven this round at the lattice level:}
+on every $B_Y\in\mathcal P$: (i) the deck--door laws of
+\S\ref{sec:transport} hold verbatim (Theorems~\ref{thm:transport}--\ref{thm:refined-door});
+(ii) the $(p,p)$ one-letter inputs are exactly the balanced classes of
+Theorem~\ref{thm:balanced} (the pure-ray set is empty by the conjugation
+theorem; the Poincaré class is the exemplar, refused at $m=1$, admitted
+iff $m$ even); (iii) the cyclic family over every product world carries
+the all-arity machinery (Theorem~\ref{thm:family-transport}); (iv) the
+two-letter sector is deck-trivial --- $Y$'s own input-axis content passes
+through unchanged, and \emph{no coverage of that content is claimed}.
+No new $(p,p)$ input coverage beyond the lattice-level door analysis is
+claimed for the product family.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) is Lefschetz $(1,1)$ (\S\ref{sec:classical}) plus the committed I2
+layer (the census's divisor-generated sector, unconditional). (2) is the
+committed census with its certificates. (3) is
+Theorems~\ref{thm:transport}--\ref{thm:family-transport}.
+\end{proof}
+
+\begin{remark}[The quantifier line, answered (SKILL §37)]
+This round's move on the universal quantifier: the world axis is extended
+from the countable committed census to the product family $\mathcal P$
+--- closed under $Y$-arbitrary products with the Gaussian factor and under
+cyclic covers, with the deck--door laws transported \emph{universally in
+$Y$}. The input axis --- arbitrary $X$ carrying no Gaussian factor ---
+is unchanged: the non-transport theorem (ledger 085) stands, and the
+one-directional reduction below is the precise remaining distance.
+\end{remark}
+
+\begin{remark}[The bundle-side boundary, stated precisely (§46 discipline)]
+The lattice-level package (theorems above) transports universally in $Y$.
+The \emph{bundle-side} of the FS row --- the two-center pair
+$E_+\ominus E_-$ with $\ch$-difference $m\alpha$ feeding Lemma~N ---
+transports for the divisor sector (actual line bundles, unconditional) and
+for the deck-constructed sector where the pair is built from the Gaussian
+eigenbundle machinery on the $E$-factor tensored with $Y$'s algebraic
+bundles. For a balanced input $x=e\otimes p+f\otimes q$ whose complex
+content $p-iq$ is \emph{transcendental} on $Y$, the pair construction is exactly the
+input-axis boundary: by the Corollary-7 discipline (the input-sensitivity
+law, ledger 101), a pair construction that existed uniformly in
+$\ell$ would descend non-Hodge content and prove too much. The falsifiable
+entry test: any candidate pair for such a ray must have
+$c_p(E_+\ominus E_-)=(-1)^{p-1}(p-1)!\,m\,\alpha$ with the $(p,p)$-typing
+load-bearing, and must \emph{fail to exist} for non-Hodge rays of the
+same lattice shape.
+\end{remark}
+
+\section{The two-cell reduction and the kill at $2m$ (Round 28, stated)}
+\label{sec:twocell}
+
+Round 28 closed the two-cell reduction at the committed deck. The
+theorems (complete proofs and the 125-check certificate in
+\texttt{GST\_two\_cell\_reduction\_five\_term\_concentration\_2026\_10\_31.tex}):
+
+\begin{theorem}[Five-term concentration; proven, Round 28]
+$H^2(C_4;A)=0$ (R1); the $E^{0,2}$ page of the equivariant-descent
+spectral sequence has rank exactly $12$ with $\theta$-part exactly zero;
+the mixed-cell map $H^2(G_\bullet;A)\to H^1(C_4;H^1(\Gamma;A))$ is
+injective. (The naive $E^{0,2}=0$ is false; the concentration runs through
+injectivity.)
+\end{theorem}
+
+\begin{theorem}[The kill at $2m$; proven, Round 28]
+$H^1(C_4;\Hom(\Gamma,A))\cong(\Z/2)^6$ pure $2$-torsion, whence
+$2[C_T^0]=0$: the doubled transport is cohomologically flat, the kill
+lands at $2m$ (not $4m$), and composed with the descent and the
+two-center conduit gives $\Cl(Z)=(-1)^{p-1}(p-1)!\cdot2m\cdot\alpha$
+--- $\alpha$ rational-algebraic on the committed route.
+\end{theorem}
+
+\begin{theorem}[Strip-shape and rank parity; resolved, Round 28]
+The Round-24 strip-shape hypothesis is inconsistent (no nonzero
+$\iota$-strip class is $C_4$-invariant); the correct shape is the
+mixed-cell, with the identification link rehabilitated as the
+transgression. Item (iv) (rank parity $r_0=d+1$) is dissolved on the
+rotation route: no eigenbranch exchange is needed; the kill is the
+$H^1$-torsion.
+\end{theorem}
+
+The honest boundaries recorded on every face: (a) the torsion boundary
+$\partial\in H^3(G_\bullet;\mu_2)$; (b) the fiber-centralizer condition;
+(c) the general-input deck (the input axis); (d) the input-dependent glue
+($2m$ vs $4m$).
+
+\section{The reduction theorem and the boundary}\label{sec:reduction}
+
+\begin{theorem}[One-directional reduction; proven (law stack §6)]\label{thm:reduction}
+If the items
+\begin{enumerate}
+\item[(i)] the involution/$C_4$-deck structure at general input,
+\item[(ii)] the two-cell reduction at general input,
+\item[(iii)] the non-scalar unexchanged exclusion,
+\end{enumerate}
+are discharged at every input of the open sector
+($2\le p\le\lfloor d/2\rfloor$, $d\ge4$), then the rational Hodge
+conjecture holds on the open sector. Items (iv) (rank parity) and (v)
+(strip shape) were resolved/dissolved in Round 28 and are no longer on the
+list. The converse is \emph{not} claimed: the conjecture could hold through
+a different mechanism while this program's constructions fail.
+\end{theorem}
+
+\begin{proof}[Proof idea (complete in the law stack §6)]
+Each item is exactly the missing input-axis content of one layer of the
+certified chain: (i) the deck structure (Theorem~\ref{thm:transport}
+transports it only to product worlds), (ii) the nonabelian two-cell class
+$[C_T^0]\in H^2(G_\bullet,\operatorname{SL}(H_z))$ (concentrated and killed
+at the committed deck only), (iii) the pair-level residue (the
+$(A,-A)$ witness: zero symmetrized residue, non-scalar curvatures ---
+computed, exact fractions, a $343$-candidate conjugation sweep with none
+scalarizable). Discharging them at every input composes the certified
+layers into the conjecture on the open sector.
+\end{proof}
+
+\begin{theorem}[The boundary; the campaign's own certificates]\label{thm:boundary}
+\leavevmode
+\begin{enumerate}
+\item \textbf{The quantifier line (proven):} no countable certified family
+of worlds closes the universal quantifier of Q2; the world axis
+(including $\mathcal P$, which is countable up to isomorphism) and the
+input axis are different axes.
+\item \textbf{The computed obstruction (proven):} the $(A,-A)$ residue pair
+is generically not $\sigma$-invariant ( $20/20$ exact instances ), so every
+$C_2$-typed mechanism proposed so far fails the cocycle condition; the
+$C_4$-typed route handles the witness at the committed deck (Round 28,
+Theorem T4 there) but the general-input instantiation is item (ii).
+\item \textbf{The entry test (falsifiable):} any candidate general-input
+mechanism must (1) exhibit the $C_4$-deck structure on the input's own
+cohomology, (2) reduce the two-cell class, (3) contain a $(p,p)$-sensitive
+step that breaks on non-Hodge input of the same lattice shape
+(Corollary-7 discipline), and (4) survive the $(A,-A)$ witness.
+\end{enumerate}
+\end{theorem}
+
+\section{The complete corpus map (the 13-agent full-branch survey)}
+\label{sec:map}
+
+This section records the Round-29 full-branch survey: 13 parallel agents
+read \textbf{every} one of the 707 Lean files (193{,}727 lines), the 209
+campaign records, the 75 derivation files, the 20 experiment scripts, the
+122 CI workflows, and the 115 computation scripts. The complete per-file
+maps live in \texttt{lean\_map\_batch\_\{0--9\}.md},
+\texttt{campaign\_state\_map.md}, \texttt{derivations\_map.md},
+\texttt{verification\_map.md} (mirrored in the campaign workspace). The
+synthesis:
+
+\subsection{The corpus}
+
+\begin{center}
+\begin{tabular}{@{}lr@{}}
+\toprule
+Lean files & 707 (193{,}727 lines) \\
+Theorems & 7{,}302 \\
+Custom \texttt{axiom} declarations & 0 \\
+\texttt{sorry} & 0 (one intentional placeholder in the DeepMind-406 challenge) \\
+\texttt{\#print axioms} receipts & $\approx$3{,}500 \\
+CI-compiled files & 659 of 707 (538 direct targets + 121 transitive) \\
+Draft-only files & 48 \\
+Campaign certificates & 15 scripts, 1{,}708 checks, all re-run green (exit 0) this session \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{The hypothesis inventory (the unproven-assumption classes)}
+
+Zero custom axioms; every unproven input rides as hypothesis-record
+fields. Deduplicated, the load-bearing classes are:
+
+\begin{enumerate}
+\item \textbf{The Clay-strength packets} (each equivalent to the Hodge
+conjecture or its per-input content):
+\texttt{FiniteHodgeRealization.}\texttt{basisCycle\_address} (supply
+algebraic cycles realizing the Hodge basis),
+\texttt{FoldProcessOn.landing\_cycle}, the \texttt{OpenItems} fields of
+\texttt{GSTLawStackRound26.lean} ( involution, two-cell reduction,
+non-scalar exclusion ), \texttt{projective\_hodge\_has\_cycles}, the
+basis-cycle bridges, the matrix-unit realizations,
+\texttt{DivisorsRepresentHodge11} as premise, \texttt{hardLefschetz} as
+field, the Gysin/cup calculi as supplied records. The repo's own audit
+files prove several of these equivalent to $\mathrm{HC}$
+(\emph{anti-circularity certificates}).
+\item \textbf{The arithmetic seam} (the Erdős branch):
+\texttt{four\_power\_omega\_shadow\_wave\_tailF} and kin --- the open
+ternary-digit statement for $4^K$, bridged by
+\texttt{erdos\_even\_conjecture\_iff\_tailF} objects whose proofs are
+asserted ``in the external monolith'', never verified in-repo.
+\item \textbf{The degenerate-model boundary}: the finite twelve-cell
+carrier (\texttt{ClRing = Fin 12 → ℤ}) of the Layers 10--12 ``Hodge''
+theorems --- genuine Lean theorems, finite-model scope, stated as such in
+the README's formal-scope section.
+\end{enumerate}
+
+\subsection{The verification state}
+
+\begin{itemize}
+\item \textbf{Machine-verified}: 659 Lean files kernel+CI-checked
+(sorry-free, standard axioms only); the committed census rows by
+exact-arithmetic certificates (15 scripts, 1{,}708 checks, all green);
+\texttt{GSTGraphV2OntologicalFoldForAllN.lean} CI-green
+(run \#40128033668, capstone axiom-free, sorryAx-audited).
+\item \textbf{Certified this round}: the product transport laws
+(31 checks, \S\ref{sec:transport}).
+\item \textbf{Draft-only}: 48 files (the Pi\texttt{*}Finale family,
+GraphV2 probes, \texttt{GSTLawStackRound26.lean} ---
+DRAFT-NOT-COMPILED per the standing no-local-Lean order, with the
+toolchain steps on its face).
+\item \textbf{One integrity anomaly flagged by the survey}:
+\texttt{GSTGraphV2FourPowerRelocationClosure.lean} calls
+\texttt{four\_power\_happy\_ge\_three} without its required
+\texttt{hClimb} argument (the declared open seam) --- at best
+climb-conditional, at worst a build error; highest-priority CI item.
+\end{itemize}
+
+\subsection{The gap synthesis}
+
+The survey's convergent verdict, stated once, plainly:
+
+\begin{enumerate}
+\item At the committed model, the chain is closed and certified
+end-to-end (carrier $\to$ strip $\to$ concentration $\to$ kill at $2m$
+$\to$ descent $\to$ two-center conduit $\to$ rational algebraicity) ---
+this is Q1, real, green, and now extended to the product family at the
+lattice level (\S\ref{sec:transport}).
+\item The entire 707-file corpus contains \emph{zero} unconditional
+content toward Q2: every ``Hodge'' theorem is conditional on
+hypothesis-records whose fields are the conjecture's own content; the
+repo's own anti-circularity certificates prove the equivalence. The
+one-directional reduction (Theorem~\ref{thm:reduction}) is the honest
+form of the distance.
+\item The live remainder after Round 28: items (i), (ii), (iii) at
+general input, plus the Round-28 boundaries (a)--(d). Two of the five
+original items died ( (iv), (v) ); the product family (this round)
+transported the mechanism to a $Y$-indexed class of worlds; the input
+axis stands.
+\end{enumerate}
+
+\section*{The closing statement}
+\addcontentsline{toc}{section}{The closing statement}
+
+Everything this program's mathematics supports, stated at exactly its
+scope:
+
+\begin{itemize}
+\item \textbf{The framework's conjecture (Q1)}: \emph{proven} --- on the
+committed world model, certified end-to-end; extended this round to the
+product family $\mathcal P$ \emph{at the lattice level} (the deck--door laws,
+the refined door law in full form, the conjugation theorem, the balanced
+inputs with the Poincaré exemplar, the cyclic machinery). Every row
+receipted; the certificates green; the CI green. The two-letter sector of
+the product worlds is deck-trivial and no coverage of $Y$'s own
+input-axis content is claimed.
+\item \textbf{The Clay statement (Q2)}: \emph{reduced} to the input axis
+by a proven one-directional theorem, with three items remaining, each
+carrying its computed obstruction and its falsifiable entry test. It is
+not proven --- here, by this program, or by any session that preceded this
+one; the campaign's own crucible caught every false close, and this
+document does not override the crucible.
+\end{itemize}
+
+The falsifiable line on the face of this artifact: exhibit the $C_4$-deck
+structure at a general input, reduce the two-cell class there, and
+exclude the non-scalar unexchanged content with a $(p,p)$-sensitive step
+--- any one of these three, at general input, is the next theorem of this
+program. The product family is this round's step along that line: the
+deck now lives on every $E\times Y$.
+
+\section*{ENGINE (per SKILL §35)}
+\addcontentsline{toc}{section}{ENGINE (per SKILL §35)}
+
+The construction engines this round: the operator's single-factor Gaussian
+rotation $\gamma=( [\,i\,],\mathrm{id})$ (the committed
+\texttt{G\_LETTER} law, now the deck of every product world), the
+operator's all-arity cyclic fold (Theorem~\ref{thm:family-transport}: the
+family transport is its base-independence, executed), and the
+$H^1$-torsion door engine (R5, refined by
+Theorem~\ref{thm:refined-door}).
+
+\section*{Statement integrity (per SKILL §25)}
+\addcontentsline{toc}{section}{Statement integrity}
+
+Diffed against the operator's order (``finish the mathematics''):
+this document delivers the complete derivation of every provable layer
+(one document, gap-free), a new certified construction (the product
+transport + the refined door law), the full-branch map, and the exact
+boundary. It does not deliver the Clay statement as proven, because it is
+not; the reduction theorem and the boundary section carry that content at
+its exact strength. No silent strengthening, no silent weakening, no
+substitution of scope.
+
+\end{document}

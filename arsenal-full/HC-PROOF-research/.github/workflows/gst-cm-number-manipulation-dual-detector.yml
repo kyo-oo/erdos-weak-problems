@@ -1,0 +1,70 @@
+name: GST CM Number Manipulation Dual Detector
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTCMNumberManipulationTrace.lean'
+      - 'GSTCMNumberManipulationDualDetector.lean'
+      - '.github/workflows/gst-cm-number-manipulation-dual-detector.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-cm-nm-dual-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install Lean
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-cm-nm-dual
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Verify dual rational CM detector
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTCMNMDual"
+          roots = ["GSTCMNumberManipulationTrace", "GSTCMNumberManipulationDualDetector"]
+          EOF
+          if lake build GSTCMNMDual > cm-nm-dual-lean.log 2>&1; then
+            echo "LEAN PASSED: nonzero two-channel CM detection at every legal corrected index"
+          else
+            grep -nE 'error:|sorryAx|✖' cm-nm-dual-lean.log | tail -n 120 || true
+            tail -n 95 cm-nm-dual-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" cm-nm-dual-lean.log; then
+            exit 1
+          fi
+      - name: Upload diagnostic
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cm-nm-dual-kernel-logs
+          path: cm-nm-dual-lean.log
+          if-no-files-found: warn

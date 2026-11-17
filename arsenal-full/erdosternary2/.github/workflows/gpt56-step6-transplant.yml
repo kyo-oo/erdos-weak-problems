@@ -1,0 +1,121 @@
+name: GPT56 Step6 Monolith Transplant
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'scripts/gpt56_step6_transplant.py'
+      - '.github/workflows/gpt56-step6-transplant.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: gpt56-step6-transplant-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  transplant:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 1
+
+      - name: Apply exact certified Step6 surgery locally
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/gpt56_step6_transplant.py
+          grep -F 'import GSTPrefixOneU2DCollisionProof' ErdosTernary2.lean
+          grep -F 'canonical_prefix_one_u2d_collision' ErdosTernary2.lean
+          if grep -Fq 'Exact RED frontier' ErdosTernary2.lean; then
+            echo 'OLD_RED_FRONTIER_STILL_PRESENT=1'
+            exit 1
+          fi
+          echo 'TRANSPLANT_SHAPE_GREEN=1'
+
+      - name: Install exact Lean RC2 and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Materialize exact monolith local import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          ROOT = Path('ErdosTernary2.lean')
+          BUILD = Path('.lake/build/lib/lean')
+          import_re = re.compile(r'^\s*import\s+(.+?)\s*$')
+          def local_path(module): return Path(*module.split('.')).with_suffix('.lean')
+          def imports_of(path):
+              out=[]
+              for raw in path.read_text(encoding='utf-8').splitlines():
+                  code=raw.split('--',1)[0].rstrip()
+                  m=import_re.match(code)
+                  if m: out.extend(m.group(1).split())
+              return out
+          order=[]; done=set(); temp=[]
+          def visit(module):
+              if module in done: return
+              path=local_path(module)
+              if not path.exists(): return
+              if module in temp: raise SystemExit('LOCAL_IMPORT_CYCLE='+' -> '.join(temp+[module]))
+              temp.append(module)
+              for dep in imports_of(path): visit(dep)
+              temp.pop(); done.add(module); order.append((module,path))
+          for module in imports_of(ROOT): visit(module)
+          print(f'MONOLITH_IMPORT_CLOSURE_COUNT={len(order)}')
+          BUILD.mkdir(parents=True, exist_ok=True)
+          for module,path in order:
+              out=BUILD.joinpath(*module.split('.')).with_suffix('.olean')
+              out.parent.mkdir(parents=True, exist_ok=True)
+              if out.exists(): continue
+              print(f'=== compiling {module} ===', flush=True)
+              subprocess.run(['lake','env','lean','-o',str(out),str(path)],check=True)
+          print('MONOLITH_IMPORT_CLOSURE_GREEN=1')
+          PY
+
+      - name: Compile transplanted monolith
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean ErdosTernary2.lean 2>&1 | tee step6-transplant-monolith.log
+          echo 'STEP6_TRANSPLANTED_MONOLITH_GREEN=1'
+
+      - name: Forbidden placeholder scan
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -nE '\b(sorry|admit)\b' ErdosTernary2.lean; then
+            echo 'FORBIDDEN_PLACEHOLDER_FOUND=1'
+            exit 1
+          fi
+          echo 'NO_SORRY_ADMIT=1'
+
+      - name: Commit certified surgery
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add ErdosTernary2.lean lakefile.toml
+          if git diff --cached --quiet; then
+            echo 'NO_SURGERY_DIFF=1'
+            exit 1
+          fi
+          git commit -m 'surgery: transplant certified Step6 collision into monolith'
+          git push origin HEAD:${GITHUB_REF_NAME}

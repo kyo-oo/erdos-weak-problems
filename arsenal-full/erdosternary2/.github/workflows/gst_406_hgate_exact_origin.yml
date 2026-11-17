@@ -1,0 +1,32 @@
+name: GST 406 Exact Origin HGate Source Scope Strict
+on:
+  push:
+    branches: [gpt6/problem406-hgate-exact-origin-upgrade-20261030]
+    paths:
+      - GSTProblem406HGateExactOriginUpgrade.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_hgate_exact_origin.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  exact_origin:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Check exact source-guarded hGate and axiom closure
+        run: |
+          set -euo pipefail
+          lake build GST406HGateExactOriginUpgrade 2>&1 | tee origin-build.log
+          lake env lean GSTProblem406HGateExactOriginUpgrade.lean 2>&1 | tee origin-axioms.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' origin-build.log origin-axioms.log
+          grep -F 'corrected_scope_certificate' origin-axioms.log
+          echo GST406_EXACT_SOURCE_HGATE_SCOPE_PASS=1

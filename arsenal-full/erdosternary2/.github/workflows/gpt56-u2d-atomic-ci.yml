@@ -1,0 +1,248 @@
+name: GPT56 U2D Atomic Fusion
+
+on:
+  push:
+    branches:
+      - sol/gpt56-gstv2-u2d-atomic-20260822
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+
+      - name: Build Equation III dependency
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2CoupledUFlux.olean GSTGraphV2CoupledUFlux.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2CoupledUPhysicalBridge.olean GSTGraphV2CoupledUPhysicalBridge.lean
+
+      - name: Compile U2D exact replacement stack
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GST2DMixedEmergence.olean GST2DMixedEmergence.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DAtomicBridge.olean GSTU2DAtomicBridge.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DEventTransport.olean GSTU2DEventTransport.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DExactCrossingCharge.olean GSTU2DExactCrossingCharge.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DSharpCrossingBlock.olean GSTU2DSharpCrossingBlock.lean
+          lake env lean -o .lake/build/lib/lean/GSTCanonicalSevenAxisBridge.olean GSTCanonicalSevenAxisBridge.lean
+          lake env lean GSTU2DAtomicSmoke.lean
+
+      - name: Compile main infinite GST V2 control graph
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2InfiniteControl.olean GSTGraphV2InfiniteControl.lean
+          lake env lean GSTGraphV2InfiniteControlSmoke.lean
+
+      - name: Compile pure 8x3 divergence experiment
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTU2DPureDivergence83.olean GSTU2DPureDivergence83.lean
+          lake env lean -o .lake/build/lib/lean/GSTU2DCanonicalPhaseDensity.olean GSTU2DCanonicalPhaseDensity.lean
+
+      - name: Compile unified Old-Sol power rectangle
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2UnifiedPowerRectangle.olean GSTGraphV2UnifiedPowerRectangle.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2UnifiedVerticalTelescope.olean GSTGraphV2UnifiedVerticalTelescope.lean
+
+      - name: Compile green perfect-power support stack
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2PerfectPowerAncestry.olean GSTGraphV2PerfectPowerAncestry.lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2PerfectPowerBlockProbe.olean GSTGraphV2PerfectPowerBlockProbe.lean
+
+      - name: Compile exact Graph V2 production-law dependency spine
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          mkdir -p .lake/build/lib/lean
+          for f in \
+            GSTGraphV2HandwrittenOmegaUBlock \
+            GSTGraphV2HandwrittenExponentialCascade \
+            GSTGraphV2HandwrittenExponentialLTE \
+            GSTGraphV2HandwrittenAnchoredCocycle \
+            GSTGraphV2Production \
+            GSTGraphV2ProductionLaws; do
+              echo "=== compiling $f ==="
+              lake env lean -o ".lake/build/lib/lean/$f.olean" "$f.lean"
+          done
+
+      - name: Apply atomic infinite-Graph-V2 monolith surgery
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/apply_u2d_atomic_replacement.py
+
+      - name: Verify atomic collision closure landed
+        shell: bash
+        run: |
+          set -euo pipefail
+          if grep -nE '^[[:space:]]*gst_end[[:space:]]*$' ErdosTernary2.lean; then
+            echo 'The literal residual placeholder survived the transplant.'
+            exit 1
+          fi
+          grep -n '^theorem gst_prefix_one_u2d_atomic_collision_inline' ErdosTernary2.lean
+          grep -n '^theorem gst_prefix_one_navigation_lift : GSTPrefixOneNavigationLift :=' ErdosTernary2.lean
+          grep -n '^theorem gst_h_creation_full_power_navigation_atomic' ErdosTernary2.lean
+          grep -n '^theorem gst_full_power_navigation_descends_atomic' ErdosTernary2.lean
+          test "$(grep -Ec '^theorem gst_prefix_one_navigation_lift([[:space:]]|:)' ErdosTernary2.lean)" -eq 1
+
+      - name: Materialize complete monolith local import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          import subprocess
+
+          ROOT = Path('ErdosTernary2.lean')
+          BUILD = Path('.lake/build/lib/lean')
+          import_re = re.compile(r'^\s*import\s+(.+?)\s*$')
+
+          def local_path(module: str) -> Path:
+              return Path(*module.split('.')).with_suffix('.lean')
+
+          def imports_of(path: Path):
+              result = []
+              for raw in path.read_text(encoding='utf-8').splitlines():
+                  code = raw.split('--', 1)[0].rstrip()
+                  m = import_re.match(code)
+                  if not m:
+                      continue
+                  result.extend(m.group(1).split())
+              return result
+
+          order = []
+          permanent = set()
+          temporary = set()
+
+          def visit(module: str):
+              if module == 'ErdosTernary2' or module in permanent:
+                  return
+              path = local_path(module)
+              if not path.exists():
+                  return
+              if module in temporary:
+                  raise SystemExit(f'local import cycle detected at {module}')
+              temporary.add(module)
+              for dep in imports_of(path):
+                  visit(dep)
+              temporary.remove(module)
+              permanent.add(module)
+              order.append((module, path))
+
+          for module in imports_of(ROOT):
+              visit(module)
+
+          print(f'LOCAL_IMPORT_CLOSURE_COUNT={len(order)}')
+          BUILD.mkdir(parents=True, exist_ok=True)
+          for module, path in order:
+              out = BUILD.joinpath(*module.split('.')).with_suffix('.olean')
+              out.parent.mkdir(parents=True, exist_ok=True)
+              if out.exists():
+                  print(f'=== already materialized {module} ===')
+                  continue
+              print(f'=== compiling local import {module} ===')
+              subprocess.run(
+                  ['lake', 'env', 'lean', '-o', str(out), str(path)],
+                  check=True,
+              )
+          print('LOCAL_IMPORT_CLOSURE_MATERIALIZED=1')
+          PY
+
+      - name: Compile production monolith after atomic closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTTactic ErdosTernary2
+          cat > AtomicU2DAxiomAudit.lean <<'EOF'
+          import ErdosTernary2
+          #print axioms gst_h_creation_full_power_navigation_atomic
+          #print axioms gst_full_power_navigation_descends_atomic
+          #print axioms gst_prefix_one_u2d_atomic_collision_inline
+          #print axioms gst_prefix_one_navigation_lift
+          EOF
+          lake env lean AtomicU2DAxiomAudit.lean 2>&1 | tee atomic_u2d_axioms.log
+          if grep -F 'sorryAx' atomic_u2d_axioms.log; then
+            echo 'Atomic U2D closure still depends on sorryAx.'
+            exit 1
+          fi
+
+      - name: Audit replacement sources
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          paths = [
+              Path('GSTGraphV2CoupledUFlux.lean'),
+              Path('GSTGraphV2CoupledUPhysicalBridge.lean'),
+              Path('GST2DMixedEmergence.lean'),
+              Path('GSTU2DAtomicBridge.lean'),
+              Path('GSTU2DEventTransport.lean'),
+              Path('GSTU2DExactCrossingCharge.lean'),
+              Path('GSTU2DSharpCrossingBlock.lean'),
+              Path('GSTU2DPureDivergence83.lean'),
+              Path('GSTU2DCanonicalPhaseDensity.lean'),
+              Path('GSTCanonicalSevenAxisBridge.lean'),
+              Path('GSTGraphV2InfiniteControl.lean'),
+              Path('GSTGraphV2UnifiedPowerRectangle.lean'),
+              Path('GSTGraphV2UnifiedVerticalTelescope.lean'),
+              Path('GSTGraphV2PerfectPowerAncestry.lean'),
+              Path('GSTGraphV2PerfectPowerBlockProbe.lean'),
+              Path('GSTGraphV2HandwrittenOmegaUBlock.lean'),
+              Path('GSTGraphV2HandwrittenExponentialCascade.lean'),
+              Path('GSTGraphV2HandwrittenExponentialLTE.lean'),
+              Path('GSTGraphV2HandwrittenAnchoredCocycle.lean'),
+              Path('GSTGraphV2Production.lean'),
+              Path('GSTGraphV2ProductionLaws.lean'),
+              Path('GSTGraphV2InfiniteControlSmoke.lean'),
+              Path('GSTU2DAtomicSmoke.lean'),
+          ]
+          bad = []
+          for p in paths:
+              if not p.exists():
+                  continue
+              for i, line in enumerate(p.read_text(encoding='utf-8').splitlines(), 1):
+                  if line.lstrip().startswith('--'):
+                      continue
+                  if re.search(r'\bsorry\b|\badmit\b|\baxiom\b|\bgst_end\b|\bnative_decide\b', line):
+                      bad.append(f'{p}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit('Atomic U2D replacement source audit failed')
+          print('Atomic U2D replacement source audit: clean')
+          PY
+
+      - name: Run official comparator
+        shell: bash
+        run: |
+          set -euo pipefail
+          bash scripts/comparator.sh | tee u2d_final_comparator.log
+          grep -F 'Your solution is okay!' u2d_final_comparator.log

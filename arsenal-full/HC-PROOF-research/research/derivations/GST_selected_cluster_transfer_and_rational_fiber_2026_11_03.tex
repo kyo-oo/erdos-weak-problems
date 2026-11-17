@@ -1,0 +1,315 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\title{GST spatial source selection: rational fibers and spectral monodromy}
+\author{Research continuation; hand proofs and uncompiled Lean drafts}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{Input, target, and the three executed routes}
+The input is an arbitrary original smooth projective complex variety $X$,
+an integer $0\leq p\leq\dim X$, and a prescribed rational Hodge class
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$. The output sought is an actual
+$Z_\alpha\in\CH^p(X)_\Q$ with canonical Betti class $\alpha$.
+Base revision: \texttt{b403d3aadd6ed79b2822037941e4503ca1788ec3}.
+The owner's topology-first mechanism is retained: geometry is realized from
+General Space, and the complete causal process must carry actual cycle data.
+The three routes are (i) rational repair of the break detector, (ii) an
+actual alpha-selected eigencluster source and its algebraic transfer,
+and (iii) constructive branching on the full class fiber.
+None uses universal Hodge algebraicity as an existence premise.
+
+\section{Rational repair: a scale is not a missing direction}
+\begin{theorem}[Saturation and explicit witnesses]
+For a $\Q$-linear cycle map $c:N\to H$ and $m\in\Q^\times$,
+\[
+ m\alpha\in\operatorname{im}c\quad\Longleftrightarrow\quad
+ \alpha\in\operatorname{im}c.
+\]
+If $c(Z)=m\alpha$, the representative is $m^{-1}Z$.
+For integer columns $v_i$, an integer target $v$ belongs to their rational
+span iff some nonzero positive integer multiple of $v$ belongs to their
+integer lattice.
+\end{theorem}
+\begin{proof}
+Apply linearity to $m^{-1}Z$ or $mZ$. For the lattice statement clear the
+finitely many denominators of rational coefficients; divide conversely.
+\end{proof}
+Consequently the previous Round 51 avatar $\mathbb Zu$ versus $2\mathbb Zu$
+tests an integral index, not a rational source defect. Its ten odd-multiple
+rejections are real integer-lattice results but disappear over $\Q$.
+The corrected rational control is $H=\Q^2$, $c(t)=(t,0)$, with detector
+$\delta(a,b)=b$. For example $(0,1)$ remains outside the image after every
+nonzero rational scaling. This is an abstract control, not a realized
+smooth-projective counterexample. The old certificate's shape census is
+still construction-guaranteed; its model names do not construct varieties.
+
+\section{An actual selected-cluster source on the regular spectral region}
+Use the earlier alpha-dependent construction on a smooth affine Jouanolou
+fold $q:J\to X$: rational topological $K$-theory and Stein realization give
+holomorphic idempotents encoding a nonzero integral multiple of $q^*\alpha$;
+polynomial matrices $a_\alpha$ approximate these on a finite
+cohomology-detecting compact core, retaining the local $0/1$ spectral gap.
+These precise analytic steps and their scopes are in the October 24
+alpha-selected polynomial spectral record. They do not give algebraic
+idempotents. Apply the following construction separately to the two matrices
+when their character difference is the chosen encoding.
+
+Add an arbitrarily small constant matrix $C$ while preserving the compact
+core's contour gap. One can ensure a nonempty regular spectral region:
+at one fixed point $u_0\in J$, the discriminant of $a_\alpha(u_0)+C$ is a
+nonzero polynomial in $C$ (regular semisimple matrices exist). Its nonvanishing
+set is complex dense and meets every sufficiently small ball. For finitely
+many connected components use the intersection of these nonempty dense opens.
+Let $U\subset J$ be the resulting nonempty open locus with distinct roots.
+This does not assert any particular monodromy group. Write the degree as $n$.
+Let $W\to U$ be the algebraic finite etale scheme of all ordered roots.
+It is an $S_n$-torsor, possibly disconnected, of degree $n!$.
+On $W$ the algebraic spectral projectors
+\[
+ P_i=\prod_{j\ne i}\frac{a_\alpha-\lambda_j I}{\lambda_i-\lambda_j}
+\]
+have rank one, pairwise orthogonal images $L_i$, and
+$\bigoplus_iL_i=\mathcal O_W^n$. Set $x_i=c_1(L_i)$ in actual Chow.
+Thus every elementary symmetric polynomial $e_j(x_1,\ldots,x_n)$ is zero
+for $j>0$.
+
+For $0\leq r\leq n$, the selector $f_r:T_r\to U$ is the finite etale
+quotient $W/(S_r\times S_{n-r})$. It parametrizes subsets of $r$ roots.
+The direct sum of their eigenlines descends to an actual rank-$r$ bundle
+$F_r\subset\mathcal O_{T_r}^n$, with complementary bundle $Q_r$.
+This is genuine algebraic geometry chosen from $a_\alpha$, hence from
+the target data; a topological contour by itself is not a global component
+of $T_r$.
+
+\begin{theorem}[Every full-selector Chern transfer is neutral]
+Let $P$ be a weighted-homogeneous polynomial over $\Q$ of positive
+Chow degree in the Chern classes of $F_r$ and $Q_r$. Then
+\[
+ (f_r)_*P(c(F_r),c(Q_r))=0\quad\hbox{in }\CH^{>0}(U)_\Q.\tag{1}
+\]
+More generally the same holds for an ordered partition of the eigenvalues
+into blocks of any specified ranks, using any positive-degree polynomial
+in the Chern classes of the corresponding tautological block bundles and
+tracing over the full flag-selector cover.
+\end{theorem}
+\begin{proof}
+Pull (1) back to $W$. Finite etale base change identifies it with the sum
+of $P$ over all subsets (respectively all ordered block partitions) of the
+root labels. This sum is a symmetric polynomial $S(x)$ of positive degree.
+Every symmetric polynomial is a polynomial in $e_1,\ldots,e_n$:
+one proves this directly by subtracting the elementary-symmetric monomial
+with the same largest lexicographic term, repeating in each finite degree.
+The resulting polynomial has no constant term by homogeneity. All $e_j(x)$
+vanish, so the pullback is zero. Pullback along $W\to U$ is injective
+with rational coefficients: pushing back its pullback multiplies by the
+nonzero degree $n!$. This proves the actual Chow assertion, hence its
+canonical Betti counterpart. The argument includes the empty or full block;
+no division by a Chern class or by a possibly zero target is used.
+\end{proof}
+This covers products and mixed Chern polynomials on one selector, not only
+an additive character of a single eigenline. If the original ambient bundle
+is $E$, the same trace is the symmetric polynomial in $c(E)$; it is not
+generally zero. Independent matrices with correlated monodromy, nontrivial
+ambient bundles, and classes supported on the excluded discriminant have
+not been included in (1).
+
+\section{A component is selected by monodromy, not by a local label}
+Assume $U$ connected. A connected component $W_0$ of $W$ has monodromy
+group $G\leq S_n$; its degree is $|G|$. A connected component of $T_r$
+corresponds exactly to a $G$-orbit on $r$-subsets. Its transfer pulls back
+to the sum over that orbit, not to one arbitrarily designated subset.
+If $G=S_n$, all selectors of fixed ranks are connected and (1) applies
+even to the attempt to choose one component.
+
+\begin{theorem}[Alternating monodromy and the orientation threshold]
+For $n\geq3$, $A_n$ is transitive on $r$-subsets, and on ordered
+partitions having at least one block of size $\geq2$. Thus for $G=A_n$
+these cluster/flag selectors are also connected and their transfers vanish
+in all positive degrees. For fully ordered eigenlines, arbitrary
+$A_n$-invariant polynomials of degree $d<\binom n2$ vanish after imposing
+the elementary symmetric relations. The only possible nonconstant
+invariant in the rational coinvariant ring is a multiple of
+\[
+ \Delta(x)=\prod_{i<j}(x_i-x_j),\qquad \deg\Delta=\binom n2.\tag{2}
+\]
+Its existence as a formal class does not prove a nonzero geometric return.
+\end{theorem}
+\begin{proof}
+For any two partitions choose a permutation taking one to the other.
+If it is odd, postcompose by a transposition inside a target block of
+size at least two. This preserves the partition and reverses parity.
+For proper nonempty subsets $n\geq3$ guarantees such a block; the
+empty and whole subsets are singletons already.
+
+For the invariant statement take a transposition $s$ and decompose an
+$A_n$-invariant polynomial $F$ into $(F+sF)/2+(F-sF)/2$. The first part
+is symmetric. The second changes sign under every odd permutation, so
+vanishes on each hyperplane $x_i=x_j$ and is divisible by every
+$x_i-x_j$, hence by their product. Its quotient by $\Delta$ is symmetric.
+Modulo $(e_1,\ldots,e_n)$ the two symmetric factors reduce to constants.
+The same conclusion holds for invariant classes in the quotient: averaging
+any representative over the finite group produces an invariant polynomial
+representative because the ideal is stable and $|A_n|$ is invertible.
+Below the degree in (2) the alternating summand is absent.
+\end{proof}
+In rank three the cyclic orbit cubic
+$C=x^2y+y^2z+z^2x$ satisfies
+$C=\Delta/2$ modulo $e_1,e_2,e_3$; the reverse cyclic orbit is
+$-\Delta/2$. Their full symmetric trace is zero. This supplies a real
+algebraic distinction between orbit selection and full-label averaging.
+For $p=2$ and $n\geq3$, even fully ordered Chern sources have zero
+positive-degree transfer under $A_n$ in that degree.
+
+\section{A global incidence construction includes the discriminant}
+The local transfer admits a second, independent geometric calculation that
+does not remove the branch divisor. Let $B=\operatorname{Gr}(r,n)$ and
+let $\mathcal F,\mathcal Q$ be its tautological subbundle and quotient.
+On $J\times B$, the matrix $a_\alpha$ defines the section
+\[
+ s_a:\mathcal F\longrightarrow\mathcal Q,\qquad
+ s_a(u,F)=a_\alpha(u)|_F\pmod F.
+\]
+Its zero scheme $Z_a$ is the actual scheme of invariant rank-$r$ subspaces;
+$f:Z_a\to J$ is proper. The bundles restrict to genuine algebraic bundles
+on $Z_a$. Over $U$ this is exactly the previous finite selector. A separated
+analytic spectral cluster supplies a local analytic section of $Z_a$ even
+when eigenvalues collide within that cluster.
+
+\begin{theorem}[Global full-incidence neutrality]
+One can choose an arbitrarily small constant perturbation $C$ preserving
+the compact target gap such that $Z_{a+C}$ is smooth of dimension $\dim J$,
+the section is regular, and every irreducible component meets the regular
+spectral region. For any such perturbation and every homogeneous polynomial
+$P$ of positive Chow degree in $c(\mathcal F),c(\mathcal Q)$,
+\[
+ f_*P(c(\mathcal F),c(\mathcal Q))=0
+       \quad\text{in }\CH^{>0}(J)_\Q,\qquad
+ f_*[Z_{a+C}]=\binom nr[J].\tag{4}
+\]
+For ordered partial flags replace $\binom nr$ by the number of coordinate
+flags of the prescribed type; the same positive-degree vanishing holds.
+If the regular-region monodromy is transitive on these subsets or flags,
+then $Z_{a+C}$ is irreducible, so choosing a whole component does not evade
+(4). No claim of that monodromy for every target-dependent matrix is made.
+\end{theorem}
+\begin{proof}
+Write $M=\operatorname{Mat}_n(\C)$. The universal incidence over
+$J\times B\times M$ is smooth: at each $(u,F)$, differentiation in $C$
+surjects onto $\operatorname{Hom}(F,\C^n/F)$, and its kernel has constant
+dimension. The total incidence is therefore an affine-space bundle over
+$J\times B$, of dimension $\dim J+n^2$. It dominates $M$ since every
+complex matrix has invariant subspaces of every rank. Its generic fiber
+is smooth in characteristic zero: localizing the regular coordinate rings
+at the generic parameter gives regular rings over the perfect function
+field. The nonsmooth locus is closed; its constructible image omits the
+generic parameter, so a nonempty parameter open avoids it.
+
+The inverse image of the discriminant in this universal incidence has
+dimension $\dim J+n^2-1$. On an incidence fiber over $(u,F)$ it is the
+nonzero discriminant polynomial on block-upper-triangular matrices; a
+diagonal matrix with distinct entries is a witness to nonvanishing.
+The generic-fiber dimension bound, applied to its finitely many components,
+gives dimension at most $\dim J-1$ after removing another proper parameter
+closed set. Thus no dimension-$\dim J$ component of the smooth $Z_{a+C}$
+lies wholly over the discriminant. These two dense parameter opens, and
+the regular spectral open at a fixed point, meet every small complex ball.
+The compact gap is stable under sufficiently small $C$. The section then
+has the expected codimension $d_B=r(n-r)$ and is regular. The same proof
+works for partial flags, replacing the displayed Hom bundle by $T_B$:
+the infinitesimal $\operatorname{GL}_n$ action surjects on every tangent
+space and a regular diagonal matrix has only isolated coordinate flags.
+
+Now the regular zero-section intersection formula gives
+\[
+ i_*[Z_{a+C}]=\operatorname{pr}_B^*c_{d_B}(T_B)\cap[J\times B],
+ \quad i:Z_{a+C}\hookrightarrow J\times B.
+\]
+Projection formula identifies the push in (4) with the integral over $B$
+of $P\,c_{d_B}(T_B)$. For positive degree this is zero since
+$\CH^{d_B+\deg P}(B)=0$. For degree zero, a constant diagonal matrix
+with distinct eigenvalues has precisely $\binom nr$ reduced zeros on $B$,
+so that is the degree of $c_{d_B}(T_B)$. Coordinate flags give the
+partial-flag count in exactly the same way.
+
+Finally a smooth variety's irreducible components are disjoint and open.
+Each component here meets $U$ and maps dominantly there (the regular-region
+map is finite etale onto its connected base). Transitive monodromy makes
+the whole selector over $U$ connected, so there can be only one component.
+For disconnected original $X$ apply the argument componentwise.
+\end{proof}
+This is a global vanishing of this \emph{complete} incidence-source recipe,
+not a vanishing theorem for every separately selected component, nongeneric
+excess cycle, independent mixed-matrix source, or boundary-supported cycle.
+For example an algebraic projector with constant eigenvalues may have disconnected invariant-subspace
+components whose nonzero individual classes cancel in the total.
+For arbitrary nonregular $a$, the top-Chern calculation gives the virtual
+zero-locus push, not automatically the fundamental cycle of its excess
+components. Those distinctions are essential to the source search.
+
+\section{What this computes for the prescribed original target}
+The selector and bundle are actually constructed from $a_\alpha$.
+Their canonical Chow/Betti transfer on $U$ is calculated, not postulated.
+Full $S_n$ monodromy, or the preceding $A_n$ cases, neutralizes the
+regular-region transfer. Equation (4) further neutralizes the complete
+generic incidence source globally, including its actual discriminant fibers;
+its affine-bundle Chow return to the original $X$ is exactly zero.
+For a different extension not governed by that regular incidence formula,
+if $\bar Z$ is any Chow extension of
+the zero-on-$U$ transfer to $J$, localization says
+\[
+ \bar Z\in\operatorname{im}\bigl(\CH_{\dim J-p}(J\setminus U)_\Q
+       \longrightarrow\CH^p(J)_\Q\bigr).\tag{3}
+\]
+The discriminant generally has codimension one; (3) therefore gives no
+global vanishing and no codimension-two solution. A contour section on a
+compact set can meet the repeated-eigenvalue locus internally, provided
+its two clusters remain separated. Such a section is not claimed to lie
+inside $U$ everywhere. No compact-core class is discarded on that basis.
+The remaining geometric routes are independently selected components under
+reduced/correlated monodromy, or nongeneric excess/boundary sources not
+captured by the complete regular incidence class. The mathematics here
+neither constructs them with class
+$\alpha$ nor rules them out.
+
+\section{Constructive branching on the full GST fiber}
+For an actual CyclePathRealization, form a finite list of rationally
+weighted path-transported native seeds and add the resulting cycles.
+Linearity and edge naturality prove that its class is the corresponding
+sum of transported Hodge vectors. If that sum is a prescribed $\alpha$,
+the constructed cycle is its representative; the sum equality is an
+explicit checked input, not a theorem of universal coverage.
+
+The distinction between a causal address and its full fiber is geometrically
+visible on $Y=\mathbb P^1\times\mathbb P^1$. For its two actual divisor
+classes $h_1,h_2$, $h_1^2=h_2^2=0$ and $\int_Yh_1h_2=1$.
+The unlabeled ample seed $h=h_1+h_2$ spans only a one-dimensional subspace
+in degree two. The nonzero primitive class $h_1-h_2$ has the same
+$(2,1,1)$ address and is not a rational multiple of $h$; its square is $-2$.
+Its absence from that orbit is not a Hodge counterexample: it is the
+class of the actual difference of the two ruling divisors.
+The label projectors themselves are genuine algebraic operations:
+$L(z)=\pi_1^*(\pi_1)_*(z\cdot h_2)$ and
+$R(z)=\pi_2^*(\pi_2)_*(z\cdot h_1)$. They send
+$a h_1+b h_2$ to $a h_1$ and $b h_2$, respectively, by the projective
+bundle pushforward formula. Thus they are not invented linear lifts.
+For any prescribed $a h_1+b h_2$, labeled causal births construct exactly
+the cycle $a[\mathrm{pt}\times\mathbb P^1]+b[\mathbb P^1\times\mathrm{pt}]$.
+This is a diagnostic refuting universal single-address coverage, not a
+replacement of the all-$X$ target by a surface problem.
+
+\section{Proof and evidence boundary}
+The selector, descent, Chow transfer, and localization arguments above
+are self-reviewed hand proofs. The Lean changes encode rational witnesses,
+finite native-cycle branching, rank-three orbit identities, and the
+two-ruling multiplicity calculation. They do not instantiate these schemes
+or the universal canonical comparison in Lean. Lean compilation is left
+to the owner. Exact Wolfram and independent Python computations check
+finite invariant/selector identities; the all-rank results follow from the
+proofs above, not from extrapolating those tables. No global novelty or
+unconditional rational Hodge-conjecture solution is asserted.
+\end{document}

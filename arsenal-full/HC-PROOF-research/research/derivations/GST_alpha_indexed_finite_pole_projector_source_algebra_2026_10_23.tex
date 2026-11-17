@@ -1,0 +1,819 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=21mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Alpha-Indexed Algebraic Source Algebra:
+Finite-Pole Projector Schemes, Exact Chow Period Matrices,
+and Target-Directed Dual Obstruction}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+The user requires the missing ALGEBRA that connects actual GST spatial
+folding with the original-X rational Hodge cycle target, not another
+topological or analytic proxy. We construct it as a concrete filtered
+algebra of finite-rank ALGEBRAIC idempotent matrices on the genuine GST
+Jouanolou affine fold. At each finite level these are solutions to
+explicit finite polynomial matrix equations in actual global sections
+on the projective incidence compactification. Each connected component
+of each solution scheme has an independently constructed genuine
+algebraic vector bundle and canonical rational Chow/Chern source on
+the ORIGINAL X, and only finitely many distinct Betti vectors.
+We build an exact alpha-INDEXED linear solver and, when the present
+sources miss alpha, an explicit dual rational cohomology witness
+whose nonzero pairing is a mandatory TEST for the next algebraic
+geometric source. We prove completeness of the entire filtered
+algebra for the TRUE canonical algebraic image, without inserting
+the target's Chow preimage in any finite input. An exact worked
+Grassmannian test proves a formerly missing nondivisor direction
+is found by an intrinsic PGL higher-rank source. We identify
+the source-generation implication required to make the alpha
+solver succeed for every rational Hodge class.
+\end{abstract}
+
+\section{Immutable types and the actual GST affine spatial world}
+Let X be ANY connected smooth projective complex variety of
+dimension d, let 0<=p<=d, and let
+\(\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)\)
+be a PRESCRIBED rational Hodge class.
+The output type is the genuine rational Chow group
+\(CH^p(X)_{\mathbb Q}\), with the CANONICAL cycle map
+\[
+  \mathrm{cl}^{can}_X:CH^p(X)_{\mathbb Q}
+              \longrightarrow H^{2p}(X,\mathbb Q). \tag{1}
+\]
+Choose an actual projective embedding X into P^N.
+The real algebraic GST incidence fold is
+\[
+ J=\{(x,\ell)\in X\times(\mathbb P^N)^\vee:
+                     \ell(x)\ne0\}, \qquad q:J\to X. \tag{2}
+\]
+It is a smooth affine \(\mathbb A^N\)-torsor, with the entire
+rational Hodge structure preserved by \(q^*\).
+Put \(\bar J=X\times(\mathbb P^N)^\vee\),
+\(L=O_X(1)\boxtimes O_{(\mathbb P^N)^\vee}(1)\),
+and \(s\in H^0(\bar J,L)\) the genuine incidence equation.
+Then \(J=D(s)=\bar J\setminus V(s)\), and
+\[
+ \Gamma(J,O_J)
+  =\underset{k\ge0}{\mathrm{colim}}\;
+    H^0(\bar J,L^k),
+ \quad\text{transition multiplication by }s.      \tag{3}
+\]
+The true Chow affine-bundle homotopy theorem gives
+\[
+ q^*:CH^p(X)_{\mathbb Q}\overset{\sim}{\longrightarrow}
+          CH^p(J)_{\mathbb Q}.                       \tag{4}
+\]
+All algebraic source classes below are returned to the SAME
+original X by the inverse of (4), not by an invented source map.
+
+\section{Construction: finite ALGEBRAIC projector equation schemes}
+For any integers \(M\ge1,k\ge0,0\le r\le M\), define
+the finite-dimensional complex vector space
+\[
+ \mathcal V_{M,k}
+     =\mathrm{Mat}_{M}H^0(\bar J,L^k).
+\]
+Choose any algebraic basis of its section space.
+Inside this space form the actual finite-type affine
+ALGEBRAIC SCHEME
+\[
+ \boxed{
+ \mathcal P_{M,k,r}(X)=
+ \left\{A\in\mathcal V_{M,k}:
+       A^2=s^k A,\quad\operatorname{tr}A=r s^k\right\}.
+ }                                                     \tag{5}
+\]
+The first equality lies in
+\(\mathrm{Mat}_M H^0(\bar J,L^{2k})\);
+the second in \(H^0(\bar J,L^k)\).
+Multiplication of algebraic global sections produces
+a FINITE system of explicit quadratic and linear
+polynomial equations in the section coordinates.
+This is a scheme of REAL algebraic source equations,
+not a formal holomorphic existence declaration.
+
+For each complex point \(A\) of (5) put
+\[
+ P_A=A/s^k\in\mathrm{Mat}_M\Gamma(J,O_J),\quad
+ E_A=\operatorname{im}P_A
+\]
+as an honest algebraic projective \(O_J\)-module;
+\(P_A^2=P_A\) and constant trace r imply it is an
+actual algebraic rank-r vector bundle.
+Its projective Chern character is
+\[
+ \operatorname{ch}^{CH}(E_A)
+       \in\bigoplus_{j=0}^d CH^j(J)_{\mathbb Q}.
+\]
+Define the ACTUAL original-X source class and its
+canonical rational period vector by
+\[
+ \boxed{
+ z_{A,p}=(q^*)^{-1}
+          \operatorname{ch}^{CH}_p(E_A)
+                      \in CH^p(X)_{\mathbb Q},
+ \qquad
+ v_{A,p}=\mathrm{cl}^{can}_X(z_{A,p})
+                      \in H^{2p}(X,\mathbb Q).
+ }                                                     \tag{6}
+\]
+Every class here is already algebraic by construction.
+There is NO condition in (5) presupposing
+\(\operatorname{ch}(E_A)=r+m q^*\alpha\).
+
+\begin{lemma}[A finite algebraic projector scheme gives a FINITE source inventory]
+For fixed M,k,r the scheme \(\mathcal P_{M,k,r}\)
+has only FINITELY many connected components.
+The canonical rational vector \(v_{A,p}\)
+is CONSTANT on every connected component of
+the complex-point space \(\mathcal P_{M,k,r}(\mathbb C)\).
+Consequently choosing one ACTUAL matrix point on
+each nonempty component yields FINITELY many
+algebraic original-X sources spanning
+ALL possible Betti outputs at that level.
+\end{lemma}
+\begin{proof}
+Equation (5) defines an affine scheme of finite type
+over C, with finitely many connected components.
+The polynomial idempotent \(P_A\) defines a
+continuously varying actual bundle on the product
+of J with any continuous path in the parameter
+space. A connected complex algebraic variety
+has path-connected analytification; the resulting
+topological K class and its rational Chern character
+are therefore constant under variation in that component.
+The full algebraic Chern cycle class compares with
+the topological Chern character, so (6) is constant
+on each component. No component need have a
+rational algebraic point: its actual complex point
+defines a genuine algebraic bundle on X over C.
+\end{proof}
+
+\section{The COMPLETE filtered GST algebraic source algebra}
+Set \(\mathcal I_D(p)\) equal to all nonempty connected
+components of all schemes \(\mathcal P_{M,k,r}\)
+with \(1\le M\le D\), \(0\le k\le D\),
+and \(0\le r\le M\), for an integer \(D\ge1\).
+This is FINITE for every D.
+Choose one actual point A_i from each component.
+Define the finite algebraic Chow source subspace
+\[
+ \boxed{
+ S_{D,p}=\operatorname{span}_{\mathbb Q}
+      \{z_{A_i,p}:i\in\mathcal I_D(p)\}
+             \subseteq CH^p(X)_{\mathbb Q},
+ \quad
+ V_{D,p}=\mathrm{cl}^{can}_X(S_{D,p}).
+ }                                                     \tag{7}
+\]
+Every generator is an ACTUAL Chern cycle of an algebraic
+projective module built from the finite scheme equations.
+The subspaces are increasing as D grows if
+duplicate components/generator points from lower levels
+are kept in the inventory. More conceptually form
+the free graded commutative rational algebra on symbols
+\(u_{A,j}\) of degree j associated to actual component
+points A, mapped by
+\[
+ \Phi:\mathbb Q[u_{A,j}]_{\mathrm{graded}}
+       \longrightarrow CH^*(X)_{\mathbb Q},
+ \quad
+ u_{A,j}\longmapsto
+   (q^*)^{-1}\operatorname{ch}^{CH}_j(E_A).        \tag{8}
+\]
+The image and quotient by \(\ker\Phi\)
+are an actual GST ALGEBRAIC SOURCE ALGEBRA,
+not a symbolic ring with fictional cycle-class values.
+Rational Chow products are used in (8), and
+one may choose a component generator or any algebraic
+sum thereof at each stage.
+
+\begin{theorem}[UNIVERSAL source-completeness theorem for the entire algebra]
+For EVERY actual original smooth projective X and
+EVERY 0<=p<=d,
+\[
+ \boxed{
+ \bigcup_{D\ge1}V_{D,p}
+  =\operatorname{im}
+      \big(\mathrm{cl}^{can}_X:
+      CH^p(X)_{\mathbb Q}\to H^{2p}(X,\mathbb Q)\big).
+ }                                                     \tag{9}
+\]
+In fact the generated graded rational Chow algebra (8)
+is all \(CH^*(X)_{\mathbb Q}\).
+For each FIXED original X and p, some finite cutoff
+\(D_*(X,p)\) has
+\(V_{D_*,p}=\operatorname{im}(\mathrm{cl}^{can}_X)\),
+but this argument yields NO effective bound on D_*,
+nor does any observed temporary rank plateau
+certify stabilization.
+\end{theorem}
+\begin{proof}
+Each source (6) is a rational Chow Chern character,
+so every V_D lies in the canonical algebraic image.
+Conversely for an arbitrary genuine rational algebraic
+codimension-p Chow class z on original X,
+the rational Chern character
+\[
+ \operatorname{ch}^{CH}:K_0^{alg}(X)_{\mathbb Q}
+  \overset{\sim}{\longrightarrow}
+    \bigoplus_j CH^j(X)_{\mathbb Q}
+\]
+is an isomorphism of rational groups for smooth X
+(with the standard cohomological grading).
+Choose a genuine rational virtual K0 class
+whose pth Chow Chern component is z.
+After clearing denominators represent it as
+a difference of two ACTUAL algebraic vector bundles
+F_+-F_- on original X.
+Pull these bundles along the actual affine q to J.
+Because J is affine, each pulled-back
+algebraic bundle is a finitely generated projective
+module and hence a direct summand of a FINITE free
+module: choose idempotents \(P_+,P_-\)
+with REGULAR entries in \(\Gamma(J,O_J)\).
+Each entry has some finite pole order along V(s)
+by equation (3), so choose one common finite k,
+represent \(P_\pm=A_\pm/s^k\), and set
+\(M_\pm\) equal to the respective finite matrix sizes.
+Then \(A_\pm^2=s^k A_\pm\) and
+\(\mathrm{tr}A_\pm=r_\pm s^k\),
+so each \(A_\pm\) lies in one of the genuine
+finite polynomial solution schemes (5).
+The corresponding component representatives
+have the SAME topological Chern character
+as those points, by the preceding lemma.
+Thus \(\mathrm{cl}_X^{can}(z)\) lies in V_D
+for sufficiently large D. This proves (9).
+For the stronger CHOW-generation assertion,
+use the ACTUAL original point A_\pm rather than
+a different point in its component: the
+chosen free algebra (8) includes all actual
+idempotents, and its Chow Chern classes realize
+the entire rational K0 Chow image.
+The finite-stage BETTI inventory uses one
+per connected component only because it records
+canonical cohomology, not full CH rational
+equivalence.
+Finally the image in finite-dimensional
+\(H^{2p}(X,\mathbb Q)\) has a finite
+rational basis drawn from the union,
+so that basis lies at some finite D_*.
+There is no uniform computable cutoff produced
+by this compactness-of-dimension argument.
+\end{proof}
+
+\section{NEW native polynomial-to-period map: algebraic Grassmann curvature}
+The previous source scheme does NOT
+need to regard the canonical Betti
+columns as mysterious external labels.
+Every actual finite-pole idempotent
+has a DIRECT algebraic curvature
+built from its polynomial entries.
+
+On the smooth affine spatial world J,
+write d for the honest algebraic
+Kähler differential and
+$P=A/s^k$ for a solution of
+the scheme equations (5).
+The actual projective module
+$E=\operatorname{im}P$ carries
+the algebraic Grassmann connection
+\[
+ \boxed{
+ \nabla_P=P\circ d,\qquad
+ F_P=\nabla_P^2
+       =P(dP)\wedge(dP)P.
+ }                                                     \tag{20}
+\]
+Since $P(dP)P=0$, its normalized
+closed algebraic Chern--Weil
+form of total differential degree
+2p is
+\[
+ \boxed{
+ \Omega_p(P)=\frac1{p!}
+     \left(\frac{i}{2\pi}\right)^p
+       \operatorname{Tr}
+        \big(P(dP)^{\wedge 2p}\big).
+ }                                                     \tag{21}
+\]
+Here $F_P$ is a genuine
+algebraic endomorphism-valued
+two-form, and the trace
+expression represents the
+de Rham / complex Betti image
+of the algebraic rational Chow
+Chern character $\operatorname{ch}_p^{CH}(E)$.
+The factors of $2\pi i$
+in (21) belong to the
+ordinary analytic de Rham
+comparison convention;
+without them the algebraic
+de Rham form has the usual
+Tate-period normalization.
+
+\begin{theorem}[ALL-X, all-M,k polynomial projector curvature and EXACT original-X period formula]
+Every complex point
+$A\in\mathcal P_{M,k,r}(X)$
+gives the ACTUAL rational
+Chern character Betti class
+$v_{A,p}$ from (6)
+via the completely
+explicit algebraic differential
+expression (21).
+In particular, IN ANY CHOSEN
+local algebraic trivialization of
+$L$ near a point of $J$,
+where $A$ and $s$ are expressed
+as scalar matrices and a scalar
+function respectively,
+\[
+ \boxed{
+ dP=\frac{dA}{s^k}
+       -\frac{k A\,ds}{s^{k+1}},
+ \qquad
+ \Omega_p(P)=
+ \frac1{p!}\left(\frac{i}{2\pi}\right)^p
+ \operatorname{Tr}\!
+ \left[
+ \frac{A}{s^k}
+ \left(
+   \frac{dA}{s^k}
+    -\frac{kA\,ds}{s^{k+1}}
+ \right)^{\wedge2p}
+ \right].
+ }                                                     \tag{22}
+\]
+For ANY smooth global section
+$\sigma:X^{an}\to J^{an}$
+of the true affine torsor,
+and ANY closed smooth
+complementary-degree rational
+Betti test form
+$\eta_\psi$ representing
+$\psi\in H^{2d-2p}(X,\mathbb Q)$,
+the ACTUAL native
+original-X rational pairing
+is
+\[
+ \boxed{
+ \int_Xv_{A,p}\smile\psi
+  =\int_{X^{an}}
+          \sigma^*\Omega_p(P)
+                       \wedge\eta_\psi.
+ }                                                     \tag{23}
+\]
+This is the EXACT
+polynomial-projector-to-period
+connection needed for the
+alpha-indexed source matrix
+and its dual witness.
+The right side is necessarily
+rational under the chosen
+Betti normalizations,
+although an arbitrary
+decimal numerical
+approximation to it need
+not certify its exact value.
+\end{theorem}
+\begin{proof}
+Every algebraic idempotent
+over the affine smooth ring
+defines an honest
+locally free algebraic
+module E and an algebraic
+connection by projection
+of the trivial algebraic
+differential. Its curvature
+is $P(dP)^2P$ by direct
+Leibniz and the identity
+$P(dP)P=0$. The algebraic
+Chern--Weil theorem
+identifies the de Rham
+class of (21) with the
+usual rational Chern
+character, after the stated
+comparison normalization;
+it is independent of the
+chosen connection in
+de Rham cohomology.
+Differentiating the rational
+matrix $A/s^k$ on D(s)
+gives (22). All displayed
+matrix entries are regular
+algebraic differential
+forms on J because s
+is invertible on J.
+Although dA and ds by
+themselves depend on a
+local frame of L, the
+entire rational expression
+d(A/s^k)=dP is invariant
+under changing that frame;
+the formula is therefore
+a genuine global form.
+A Zariski locally trivial
+affine-space torsor admits
+a smooth global section:
+combine local smooth affine
+origin sections using a
+partition of unity; the
+affine transition functions
+preserve affine barycentric
+combinations. It obeys
+$q\circ\sigma=\mathrm{id}$.
+Thus on rational Betti
+cohomology $\sigma^*$
+is the true inverse to
+$q^*$, and the Chern--Weil
+representative has exactly
+the pulled-back class
+in equation (6).
+Integrating its pullback
+with a closed rational
+complementary test form
+is Poincare duality
+on the ORIGINAL compact
+X, proving (23).
+\end{proof}
+
+\begin{lemma}[EXPLICIT nontrivial algebraic curvature in the genuine incidence world]
+For X=P1, the actual
+rank-one incidence matrix
+$P=x\ell^\top/(\ell x)$,
+in the affine chart
+$x=(1,u)$,
+$\ell=(1,v)$,
+has its local algebraic
+image-line connection
+\[
+  \boxed{\nabla=d+\omega,\qquad
+         \omega=\frac{v\,du}{1+uv},\qquad
+         F=d\omega=
+               -\frac{du\wedge dv}{(1+uv)^2}.}
+                                                               \tag{24}
+\]
+It represents the pullback
+of $c_1(O_{\mathbb P^1}(-1))$
+under the correct
+analytic de Rham comparison.
+The curvature is NOT
+a fictional formal
+2-form: it follows from
+the genuine algebraic
+matrix numerator and
+the actual incidence
+denominator.
+\end{lemma}
+\begin{proof}
+The local algebraic
+generator of the
+image-line bundle is
+the column $x$.
+Projection of its
+ordinary differential is
+$P(dx)=x\,(\ell^\top dx)/(\ell x)$.
+Here $\ell^\top dx=v\,du$
+and $\ell x=1+uv$,
+giving the displayed
+connection 1-form.
+Its exterior derivative is
+$d(v/(1+uv))\wedge du
+=(1+uv)^{-2}dv\wedge du$,
+which equals (24).
+The resulting true
+projective module is
+$q^*O(-1)$, so its
+Chern class is the
+original hyperplane
+class with the expected
+negative sign.
+\end{proof}
+
+\section{The prescribed-alpha rational period SOLVER and its DUAL obstruction}
+Choose an actual rational basis
+\(e_1,\ldots,e_b\) of \(H^{2p}(X,\mathbb Q)\),
+where b is the Betti number.
+Write the GIVEN alpha as a rational column
+\(a\in\mathbb Q^b\). At finite cutoff D,
+put the ACTUAL source Betti vectors
+\(v_{A_i,p}\) into the rational period matrix
+\[
+ \boxed{M_{D,p}=
+  \begin{pmatrix}
+   |&&|\\v_1&\cdots&v_t\\|&&|
+  \end{pmatrix}
+  \in\mathrm{Mat}_{b\times t}(\mathbb Q).}          \tag{10}
+\]
+This is the algebra directly linking actual GST
+projector equations and the prescribed Hodge class.
+
+\begin{theorem}[Exact finite algebraic SOURCE OUTPUT, not just pairing]
+Whenever the ACTUAL finite rational system
+\[
+ \boxed{M_{D,p}c=a,\quad c\in\mathbb Q^t}         \tag{11}
+\]
+is solvable, it CONSTRUCTS the genuine
+original-X rational Chow cycle
+\[
+ \boxed{Z_\alpha=
+        \sum_{i=1}^{t}c_i z_{A_i,p},
+ \qquad\mathrm{cl}^{can}_X(Z_\alpha)=\alpha.}     \tag{12}
+\]
+All the input sources \(z_{A_i,p}\) were
+independently constructed from polynomial
+matrix equations (5), with NO original-X
+Chow preimage of alpha supplied in advance.
+\end{theorem}
+\begin{proof}
+Every source lies in the actual rational Chow
+group by (6), so the rational linear combination
+is legitimate. Apply the TRUE canonical Betti
+class map and its additivity; the result is the
+rational vector \(M_{D,p}c=a\), exactly alpha.
+\end{proof}
+
+\begin{theorem}[Alpha-directed rational DUAL WITNESS and rank-growing source test]
+If (11) is insoluble then rational Gaussian
+elimination CONSTRUCTS a row
+\(\ell_D\in(\mathbb Q^b)^*\) satisfying
+\[
+ \boxed{\ell_D M_{D,p}=0,\qquad
+                    \ell_D a=1.}               \tag{13}
+\]
+Via exact rational Poincaré duality this is
+a rational complementary-degree cohomology class
+\(\psi_D\in H^{2d-2p}(X,\mathbb Q)\)
+with
+\[
+ \int_X \mathrm{cl}^{can}(z_{A_i,p})\psi_D=0,
+ \qquad \int_X\alpha\psi_D=1.                 \tag{14}
+\]
+Any NEW genuine algebraic GST source \(W\in CH^p(X)_Q\)
+with
+\[
+ \boxed{\int_X\mathrm{cl}^{can}(W)\psi_D\ne0}   \tag{15}
+\]
+strictly INCREASES the rank of the source period
+matrix after adjoining its column.
+If a new nonzero witness is answered by a genuine
+new algebraic source at EACH failed stage,
+at most \(\dim_\mathbb Q Hdg^p(X)_\mathbb Q\)
+rank-growing stages are needed before alpha lies
+in the algebraic span and equation (12) returns
+an actual original-X cycle.
+\end{theorem}
+\begin{proof}
+If \(a\notin\operatorname{im}M\),
+rational linear algebra on the quotient
+\(\mathbb Q^b/\operatorname{im}M\)
+produces a nonzero rational linear functional
+on the quotient taking value one on the
+nonzero rational coset of a.
+Its lift is the required ell.
+Poincaré duality provides psi in (14).
+A vector with nonzero ell is NOT in the
+old column span, proving strict rank growth.
+Each algebraic source has rational type(p,p),
+and all generated vectors lie in the
+rational Hodge subspace; its dimension bounds
+the number of independent new columns.
+If alpha remains outside at dimension equal to
+the whole rational Hodge subspace, that is a
+contradiction, so the algorithm terminates.
+This last termination statement is CONDITIONAL
+ON THE ACTUAL RANK-GROWING SOURCE-BIRTH
+OPERATION (15) succeeding whenever the
+current alpha-target fails; no such operation
+is silently assumed in this theorem.
+\end{proof}
+
+\begin{theorem}[STRONGER alpha-directed witness: the dual obstruction has rational HODGE type]
+In the preceding dual
+construction one can, for
+EVERY smooth projective
+original X,p and rational
+Hodge input alpha, choose
+the test cohomology class
+\[
+ \boxed{
+ \psi_D\in
+ H^{2d-2p}(X,\mathbb Q)
+          \cap H^{d-p,d-p}(X),
+ \quad
+ \int_Xv_i\psi_D=0,\quad
+ \int_X\alpha\psi_D=1.
+ }                                                     \tag{16}
+\]
+Thus the missing-direction
+detector itself respects the
+ENTIRE original Hodge
+structure; it is not
+merely an arbitrary
+untyped real functional.
+\end{theorem}
+\begin{proof}
+The rational source vectors
+$v_i=\operatorname{cl}(z_i)$
+and the prescribed alpha
+are all rational Hodge
+classes of type(p,p).
+Their rational span
+$W\subset H^{2p}(X,\mathbb Q)$
+is therefore a rational
+Hodge substructure of pure
+Tate type. A rational
+linear functional on W
+annihilating the source
+subspace and taking value
+one on alpha exists by
+the preceding rational
+Gaussian argument, and it
+is a morphism of rational
+Hodge structures after
+the appropriate Tate twist,
+since W consists entirely
+of (p,p) classes.
+Pure rational polarizable
+Hodge structures are
+semisimple, so W has a
+rational Hodge-compatible
+complement in $H^{2p}(X,Q)$.
+Extend the functional
+to zero on that complement:
+it is a rational Hodge
+morphism on the entire
+$H^{2p}(X,Q)$.
+Rational Poincare duality
+identifies this functional
+with a rational
+complementary degree
+class psi of Hodge type
+$(d-p,d-p)$, with exactly
+the desired pairings.
+No algebraic cycle is
+assumed to represent psi;
+it is a genuine rational
+HODGE test class, which
+may itself be nonalgebraic.
+\end{proof}
+
+\begin{corollary}[Exact positive primitive Hodge witness on the existing higher-rank GST source]
+In $X=\mathrm{Gr}(2,5)$,
+let $h,s_2$ and
+$\theta=\tfrac25h^2-s_2$
+be as in section 6.
+The ACTUAL rational
+Hodge class
+\[
+ \boxed{
+ \psi=5\theta h^2
+      =2h^4-5s_2h^2
+       \in H^{8}(X,\mathbb Q)
+                \cap H^{4,4}(X)
+ }                                                     \tag{17}
+\]
+is a rational
+ORIGINAL-X geometric
+dual detector for the
+divisor-only stage:
+\[
+ \boxed{
+ \int_Xh^2\psi=0,\qquad
+ \int_X\theta\psi=1,\qquad
+ \int_X\operatorname{pch}_2(T_X)\psi=1.
+ }                                                     \tag{18}
+\]
+Therefore the finite
+rational row witness
+$(0,-1)$ in the chosen
+basis is the actual
+Hodge-theoretic
+period pairing against
+the geometrically
+explicit psi, not
+a disconnected
+coordinate convention.
+\end{corollary}
+\begin{proof}
+The exact Schubert
+intersection identities
+$\int_Xh^6=5$,
+$\int_Xs_2h^4=2$,
+and $\int_Xs_2^2h^2=1$
+give
+$\int_X\theta h^4=0$
+and
+$\int_X\theta^2h^2=1/5$.
+Multiplying by five gives
+the first two pairings.
+Since
+$\operatorname{pch}_2(T_X)
+=-7h^2/12-s_2$,
+it differs from theta
+by a rational multiple
+of h², so has the SAME
+pairing against psi.
+\end{proof}
+
+\begin{remark}[A candidate rank plateau is NOT a negative certificate]
+A bounded-degree or bounded-projector-rank search
+may show \(M_D c=a\) insoluble for ALL sources
+in that finite search domain. This does NOT prove
+alpha is nonalgebraic: some later finite
+projector scheme \(\mathcal P_{M,k,r}\) could
+supply a missing source. A genuine negative
+certificate would require proving a rational dual
+psi annihilates ALL algebraic projector outputs
+for EVERY finite M,k,r, not just those currently
+enumerated. If alpha is Hodge, that would be an
+actual Hodge counterexample, a vastly stronger claim.
+\end{remark}
+
+\section{An EXACT higher-rank GST calculation: the first missing direction}
+To test the algebra against the branch's independently
+constructed intrinsic PGL projective source, take the
+ACTUAL projective sixfold X=Gr(2,5),
+with Pluecker h and \(s_2=c_2(S^\vee)\).
+In the genuine codimension-two Chow/Betti basis
+\((h^2,s_2)\), the known algebraic
+divisor source \(z_1=h^2\) has vector \((1,0)^t\);
+the independently constructed tangent-PGL
+source is
+\[
+ z_2=\operatorname{pch}_2(T_X)
+               =-\frac7{12}h^2-s_2,
+ \qquad v_2=(-7/12,-1)^t.                     \tag{16}
+\]
+Prescribe the rational Hodge target
+\(\alpha=\frac25h^2-s_2\),
+so \(a=(2/5,-1)^t\).
+At the divisor-only stage \(M_1=(1,0)^t\);
+equation (13) gives ell=(0,-1) and
+ell(a)=1. It explicitly demands an ACTUAL
+source carrying nonzero \(s_2\)-component.
+The new PGL source \(z_2\) satisfies
+\(\ell(v_2)=1\) and raises rank from 1 to 2.
+The EXACT alpha-indexed rational solver is
+\[
+ \boxed{
+ \begin{pmatrix}1&-7/12\\0&-1\end{pmatrix}
+ \begin{pmatrix}59/60\\1\end{pmatrix}
+ =\begin{pmatrix}2/5\\-1\end{pmatrix}.
+ }                                                     \tag{17}
+\]
+Consequently it actually RETURNS the original-X
+rational algebraic cycle
+\[
+ \boxed{Z_\alpha=\frac{59}{60}h^2+
+     \operatorname{pch}_2(T_X)
+       =\frac25h^2-s_2
+       \in CH^2(X)_{\mathbb Q}.}                \tag{18}
+\]
+This is not a conjectural source generator in the
+test: the two columns are genuine independently
+constructed algebraic Chow classes in the
+existing repository. The example shows exactly
+how the dual witness SELECTS the missing
+nonabelian algebraic geometry, rather than
+recycling fixed scalar fold operators.
+Its scope is this actual sixfold, not all X.
+
+\section{All-dimensional GST law and exact remaining source-generating equation}
+The all-N theorem from
+\texttt{GST\_target\_alpha\_tower\_period\_closure\_and\_twisted\_angle\_budget\_2026\_10\_23.tex}
+states that if actual algebraic spatial source
+period vectors converge to a rational alpha, then
+alpha already lies in a FINITE rational span.
+The algebra (5)--(12) makes that span fully
+CONSTRUCTIVE once its source matrices are given:
+each finite source is a polynomial scheme point,
+and solving a finite rational matrix equation
+produces the exact original-X Chow cycle.
+Moreover equation (9) proves that the entire
+polynomial projective-module source algebra
+matches the FULL canonical algebraic image,
+so no known algebraic direction is omitted
+by the polynomial finite-pole representation.
+
+What is not supplied by these algebraic equations is
+a theorem that for EVERY rational Hodge alpha the
+finite source period matrices eventually span a.
+Equivalently the source-birth task is:
+for each actual rational dual obstruction psi_D
+from (14), construct SOME new finite-POLYNOMIAL
+idempotent A in a source scheme (5)
+with \(\int_X v_{A,p}\psi_D\ne0\).
+This must be an INDEPENDENT GST LAW, not an axiom
+that simply declares a nonzero pairing.
+The source space (5), rational period solver (11),
+original-X cycle output (12), and dual
+geometric target (14) are the completed
+ALGEBRA connecting the whole spatial fold
+to the original canonical Chow target.
+\end{document}

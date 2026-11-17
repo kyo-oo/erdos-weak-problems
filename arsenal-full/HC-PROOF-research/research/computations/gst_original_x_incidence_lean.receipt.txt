@@ -1,0 +1,38 @@
+Revision-matched original-X smooth-center Lean evidence
+
+Commit: 1ecc8fd83d9e2c087656c74f11452ac54c8147f7
+Run: https://github.com/kyo-oo/HC-PROOF/actions/runs/39389490154
+Artifact ID: 12249510210
+Artifact digest: sha256:87c55011c7c536f9bf82892cb28323b50797c599bfe1e0baa794fd89e81d517a
+Raw pinned-hodge-lean.log sha256: 52bba551c147fed5644ec2f30b8e766437c59e18407b73af37fca082e3b1d842
+
+Build completed successfully (8967 jobs).
+Six new selected axiom receipts use only propext, Classical.choice, Quot.sound.
+Complete log has no sorryAx or declaration-uses-sorry marker.
+Complete CI computation JSON equals the locally recorded output.
+
+Verbatim selected receipts:
+
+info: GSTUniversalResolvedSupportHodge.lean:2774:0: 'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.incidence_center_projective_push_coefficient' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTUniversalResolvedSupportHodge.lean:2775:0: 'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.primitive_period_of_twisted_chern' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTUniversalResolvedSupportHodge.lean:2776:0: 'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.two_center_energy_lower_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTMaximalLinearHypersurfacePrimitive.lean:193:0: 'GSTMaximalLinearHypersurfacePrimitive.syzygy_smooth_center_mixed_feedback_positive' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTActualXHodgeResidualProjection.lean:2103:0: 'GSTActualXHodgeResidualProjection.ActualXCycleProjectionData.targetSmoothCenterCycle_energy_bound' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+info: GSTActualXHodgeResidualProjection.lean:2138:0: 'GSTActualXHodgeResidualProjection.ActualXCycleProjectionData.selectSmoothCenter_detects' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]

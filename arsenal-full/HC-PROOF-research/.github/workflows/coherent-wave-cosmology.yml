@@ -1,0 +1,46 @@
+name: Coherent wave cosmology verification
+on:
+  push:
+    branches: [astra/coherent-wave-cosmology]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache@v4
+        with:
+          path: |
+            ~/.elan
+            .lake
+          key: hc-coherent-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json') }}
+      - name: Install pinned Lean and dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Compile new cosmology and all its dependencies
+        run: |
+          set -euo pipefail
+          lake build GSTCoherentCosmology 2>&1 | tee coherent-build.log
+          lake env lean GSTCoherentCosmology.lean 2>&1 | tee coherent-axioms.log
+          if grep -Eq 'sorryAx|ofReduceBool' coherent-axioms.log; then exit 1; fi
+      - name: Independent finite arithmetic checks
+        run: python3 scripts/check_coherent_cosmology.py
+      - name: Verify complete universe
+        run: |
+          set -euo pipefail
+          bash scripts/comparator.sh 2>&1 | tee coherent-comparator.log
+          git diff --check
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: coherent-wave-verification
+          path: coherent-*.log

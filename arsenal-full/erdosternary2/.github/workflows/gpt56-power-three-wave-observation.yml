@@ -1,0 +1,41 @@
+name: GPT56 Power Three-Wave Observation
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTGraphV2PowerThreeWaveObservation.lean
+      - .github/workflows/gpt56-power-three-wave-observation.yml
+  workflow_dispatch:
+
+jobs:
+  observation:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean RC2
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: Compile and audit Graph-V2 observation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake build GSTGraphV2PerfectPowerBlockProbe \
+            GSTGraphV2UnifiedVerticalTelescope \
+            GSTFinalPurePowerResidueTransplant
+          lake env lean GSTGraphV2PowerThreeWaveObservation.lean 2>&1 | tee observation.log
+          ! grep -Fq 'sorryAx' observation.log
+          ! grep -Eq '(^|[^A-Za-z0-9_])(sorry|admit)([^A-Za-z0-9_]|$)' GSTGraphV2PowerThreeWaveObservation.lean
+          echo GRAPH_V2_POWER_THREE_WAVE_OBSERVATION_GREEN=1

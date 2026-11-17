@@ -1,0 +1,35 @@
+name: GPT6 GST Exact Delayed Escape Infinite Family Kernel
+on:
+  push:
+    branches:
+      - gpt6/erdos-omega-terminal-normalform-20261029
+    paths:
+      - GSTOmegaExactDelayedEscape.lean
+      - .github/workflows/gpt6_omega_exact_delayed_escape.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and certified worldtrace infrastructure
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTWorldtraceBlockLift GSTFourPowerDirectResidue
+          lake env lean -o .lake/build/lib/lean/GSTWorldtraceCoeffStability.olean GSTWorldtraceCoeffStability.lean 2>&1 | tee coeff-stability.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' coeff-stability.log
+      - name: Kernel proof of first two exactly at position L+3 for all L >= 5
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTOmegaExactDelayedEscape.lean 2>&1 | tee gst-exact-escape.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gst-exact-escape.log
+          echo GST_INFINITE_EXACT_DELAYED_ESCAPE_GREEN=1

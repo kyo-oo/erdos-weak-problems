@@ -1,0 +1,26 @@
+name: Atomic Surgery Probe
+
+on:
+  push:
+    branches:
+      - sol/gst-v2-atomic-surgery-20260818
+  pull_request:
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Remove malformed chronological comment preamble in probe workspace
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ErdosTernary2.lean')
+          s = p.read_text(encoding='utf-8')
+          marker = '-- CardinalWorldsWork.lean — GST Complete Formalization'
+          if marker not in s:
+              raise SystemExit('canonical marker not found')
+          p.write_text(s[s.index(marker):], encoding='utf-8')
+          PY
+      - uses: leanprover/lean-action@v1

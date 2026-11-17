@@ -1,0 +1,61 @@
+name: GST hypothesis Part 1 — native/Betti fold transfer
+
+on:
+  push:
+    branches:
+      - research/gpt6-gst-hypothesis-part1-chow-square-20261110
+    paths:
+      - 'GSTHypothesisPart1ChowAlgebraTransfer.lean'
+      - '.github/workflows/gst-hypothesis-part1-chow-transfer.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Lean kernel — fold, orbit and curvature naturality
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-gst-hypothesis-p1
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Prepare toolchain and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel compile the native/Betti source transfer
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTPart1ChowTransferLib GSTHypothesisPart1ChowAlgebraTransfer
+          if timeout 6500 lake build GSTHypothesisPart1ChowAlgebraTransfer > gst-p1-fold-transfer.log 2>&1; then
+            echo "LEAN PASSED: GSTHypothesisPart1ChowAlgebraTransfer"
+          else
+            grep -nE 'error:|sorryAx|unknown constant|unknown identifier' gst-p1-fold-transfer.log | tail -n 100 || true
+            tail -n 100 gst-p1-fold-transfer.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-p1-fold-transfer.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-hypothesis-part1-fold-lean
+          path: gst-p1-fold-transfer.log
+          if-no-files-found: warn

@@ -1,0 +1,3 @@
+PINNED_PRE = 572: SEALED
+
+ROUND 49 CERTIFICATE: 573 passed, 0 failed, pre-seal total 572, exit code 0

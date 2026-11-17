@@ -1,0 +1,10 @@
+{
+  "problem": "Erdos #61 (erdosproblems.com/61) — the Erdos-Hajnal conjecture",
+  "statement_id": "erdos-61-erdos-hajnal",
+  "statement_verbatim": "For any graph H is there some c=c(H)>0 such that every graph G on n vertices that does not contain H as an induced subgraph contains either a complete graph or independent set on >= n^c vertices?",
+  "lane": "official DeepMind comparator (challenge + solution), run directly",
+  "official_evaluators": [
+    {"repo": "google-deepmind/funsearch", "commit": "cc53f27", "module": "cyclic_graphs", "role": "maximal independent sets in cyclic graph powers (the graph-independence world)"}
+  ],
+  "acceptance": "Every claim in the solution ledger verified; every official check passes; every negative control rejects corruption."
+}

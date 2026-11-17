@@ -1,0 +1,159 @@
+================================================================================================
+V0 -- THE DEGREE-10 W-MODEL (the deciadic census universe)
+================================================================================================
+  ok    1  |W| = 3840 == 3840 (the bound 32*120)
+  ok    2  W closes as a set of distinct permutations (3840)
+  ok    3  W closes as a group (GCtx built: 3840 elements)
+  ok    4  rho0 = (05)(16)(27)(38)(49): (5, 6, 7, 8, 9, 0, 1, 2, 3, 4)
+  ok    5  rho0 fixed-point-free involution
+  ok    6  rho0 central in W (200 random commutators trivial)
+  ok    7  the W multiplication law (f,s)(f',s') = (f' XOR (f o s'), s o s') holds on 120 random pairs (wperm-verified)
+  ok    8  the flip kernel |(C2)^5| = 32
+  ok    9  rho0 = the 11111 flip
+================================================================================================
+V1 -- THE DECIADIC CENSUS (the cohomology engine, EXHAUSTIVE)
+================================================================================================
+  ok   10  transitive quintic classes: 5 == 5 (the classical count)
+  ok   11  quintic orders [5, 10, 20, 60, 120] == [5, 10, 20, 60, 120] (C5, D5, F20, A5, S5)
+  ok   12  every transitive quintic T is 2-generated (the census engine's completeness premise)
+  ok   13  subspaces of F2^4: 67 == 67 (the Gaussian-binomial count)
+  ok   14  the K-candidates: 67 subspaces of F2^5 containing 11111 (== the F2^4 lattice)
+  ok   15  THE RIGIDITY LAW at T-class 0 (|T|=120): EXACTLY 2 T-stable K's = {<rho0>, F2^5} -- the deleted permutation module F2^5/<11111> is the IRREDUCIBLE Phi_5-module over F2 under T (the 5-cycle acts irreducibly)
+  ok   16  THE RIGIDITY LAW at T-class 1 (|T|=60): EXACTLY 2 T-stable K's = {<rho0>, F2^5} -- the deleted permutation module F2^5/<11111> is the IRREDUCIBLE Phi_5-module over F2 under T (the 5-cycle acts irreducibly)
+  ok   17  THE RIGIDITY LAW at T-class 2 (|T|=20): EXACTLY 2 T-stable K's = {<rho0>, F2^5} -- the deleted permutation module F2^5/<11111> is the IRREDUCIBLE Phi_5-module over F2 under T (the 5-cycle acts irreducibly)
+  ok   18  THE RIGIDITY LAW at T-class 3 (|T|=10): EXACTLY 2 T-stable K's = {<rho0>, F2^5} -- the deleted permutation module F2^5/<11111> is the IRREDUCIBLE Phi_5-module over F2 under T (the 5-cycle acts irreducibly)
+  ok   19  THE RIGIDITY LAW at T-class 4 (|T|=5): EXACTLY 2 T-stable K's = {<rho0>, F2^5} -- the deleted permutation module F2^5/<11111> is the IRREDUCIBLE Phi_5-module over F2 under T (the 5-cycle acts irreducibly)
+  ok   20  the cocycle count at T0 K|2|: 16 = 2^4 <= COC_CAP (the enumeration is direct and complete)
+  ok   21  the B^1 receipt at T0 K|2|: coboundaries-in-cocycles = True, dim B^1 = 4 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   22  the full-cocycle paranoia receipt at T0 K|2|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   23  the cocycle count at T0 K|32|: 1 = 2^0 <= COC_CAP (the enumeration is direct and complete)
+  ok   24  the B^1 receipt at T0 K|32|: coboundaries-in-cocycles = True, dim B^1 = 0 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   25  the full-cocycle paranoia receipt at T0 K|32|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   26  the cocycle count at T1 K|2|: 16 = 2^4 <= COC_CAP (the enumeration is direct and complete)
+  ok   27  the B^1 receipt at T1 K|2|: coboundaries-in-cocycles = True, dim B^1 = 4 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   28  the full-cocycle paranoia receipt at T1 K|2|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   29  the cocycle count at T1 K|32|: 1 = 2^0 <= COC_CAP (the enumeration is direct and complete)
+  ok   30  the B^1 receipt at T1 K|32|: coboundaries-in-cocycles = True, dim B^1 = 0 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   31  the full-cocycle paranoia receipt at T1 K|32|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   32  the cocycle count at T2 K|2|: 16 = 2^4 <= COC_CAP (the enumeration is direct and complete)
+  ok   33  the B^1 receipt at T2 K|2|: coboundaries-in-cocycles = True, dim B^1 = 4 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   34  the full-cocycle paranoia receipt at T2 K|2|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   35  the cocycle count at T2 K|32|: 1 = 2^0 <= COC_CAP (the enumeration is direct and complete)
+  ok   36  the B^1 receipt at T2 K|32|: coboundaries-in-cocycles = True, dim B^1 = 0 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   37  the full-cocycle paranoia receipt at T2 K|32|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   38  the cocycle count at T3 K|2|: 16 = 2^4 <= COC_CAP (the enumeration is direct and complete)
+  ok   39  the B^1 receipt at T3 K|2|: coboundaries-in-cocycles = True, dim B^1 = 4 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   40  the full-cocycle paranoia receipt at T3 K|2|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   41  the cocycle count at T3 K|32|: 1 = 2^0 <= COC_CAP (the enumeration is direct and complete)
+  ok   42  the B^1 receipt at T3 K|32|: coboundaries-in-cocycles = True, dim B^1 = 0 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   43  the full-cocycle paranoia receipt at T3 K|32|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   44  the cocycle count at T4 K|2|: 16 = 2^4 <= COC_CAP (the enumeration is direct and complete)
+  ok   45  the B^1 receipt at T4 K|2|: coboundaries-in-cocycles = True, dim B^1 = 4 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   46  the full-cocycle paranoia receipt at T4 K|2|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   47  the cocycle count at T4 K|32|: 1 = 2^0 <= COC_CAP (the enumeration is direct and complete)
+  ok   48  the B^1 receipt at T4 K|32|: coboundaries-in-cocycles = True, dim B^1 = 0 = dim M (M^T = 0) -- dim H^1 = 0
+  ok   49  the full-cocycle paranoia receipt at T4 K|32|: the complete condition z(ab) = z(b) + (z(a) o b) verified on sampled enumerated cocycles
+  ok   50  the census found 85 distinct deciadic (G, rho0) worlds
+  [census] orders present: [10, 20, 40, 120, 160, 240, 320, 640, 1920, 3840]
+  [cohomology] T-class 0: |K| = 2, dim Z^1 = 4, dim B^1 = 4, dim H^1 = 0, worlds found = 16
+  [cohomology] T-class 0: |K| = 32, dim Z^1 = 0, dim B^1 = 0, dim H^1 = 0, worlds found = 1
+  [cohomology] T-class 1: |K| = 2, dim Z^1 = 4, dim B^1 = 4, dim H^1 = 0, worlds found = 16
+  [cohomology] T-class 1: |K| = 32, dim Z^1 = 0, dim B^1 = 0, dim H^1 = 0, worlds found = 1
+  [cohomology] T-class 2: |K| = 2, dim Z^1 = 4, dim B^1 = 4, dim H^1 = 0, worlds found = 16
+  [cohomology] T-class 2: |K| = 32, dim Z^1 = 0, dim B^1 = 0, dim H^1 = 0, worlds found = 1
+  [cohomology] T-class 3: |K| = 2, dim Z^1 = 4, dim B^1 = 4, dim H^1 = 0, worlds found = 16
+  [cohomology] T-class 3: |K| = 32, dim Z^1 = 0, dim B^1 = 0, dim H^1 = 0, worlds found = 1
+  [cohomology] T-class 4: |K| = 2, dim Z^1 = 4, dim B^1 = 4, dim H^1 = 0, worlds found = 16
+  [cohomology] T-class 4: |K| = 32, dim Z^1 = 0, dim B^1 = 0, dim H^1 = 0, worlds found = 1
+  ok   51  every census world: transitive, |G| = |K||T|, rho0 in G fpf involution (85 worlds)
+  ok   52  rho0 central in every census world (commutes with a generating set at every world)
+  ok   53  the generator-closure receipt: the K-flip + complement generators close to G at 60 worlds
+  ok   54  THE CENSUS TWO-ALGORITHM RECEIPT: the pair-lift sweep and the cohomology engine give IDENTICAL world sets at 6/6 feasible (T, K) pairs (the |T| > 24 pairs disclosed: the cohomology engine carries the exhaustion, backed by the closure + centrality + cocycle receipts at every world)
+================================================================================================
+V2/V3 -- THE LAW BATTERY AT EVERY DECIADIC WORLD
+================================================================================================
+  [conjugacy] 85 worlds -> 10 invariant buckets (the canon at 40 small worlds)
+  ok   55  the bucket reduction: 85 worlds -> 10 invariant-signature classes (canon-verified at 40; DISCLOSED: the bucket count is the invariant-signature count at the big worlds)
+  ok   56  the conjugacy-invariance receipt: a canon-identified world pair has identical dimension tables
+  ok   57  the exterior sign cocycle law holds at every world (degree 2, the disclosed pair battery)
+  ok   58  the fast/direct purity equivalence: 177/177 sampled checks (the orbit-type filter == the all-g filter)
+  ok   59  THE TWO-ALGORITHM DIMENSION LAW at the disclosed coverage: 935/935 checks (the pure-count == the sparse y-space engine; the coverage: every |G| <= 96 world + one representative per invariant bucket)
+  ok   60  the dense-RREF cross-check: 336/336 (the R41 engine reproduced at the smallest systems)
+  ok   61  primitive type-orbits found: 197 (the binomial law domain)
+  ok   62  quadratic-inducible type-orbits found: 80 (the split law domain)
+  ok   63  THE RIGIDITY COROLLARY (the deeper bucket): EMPTY at degree 10 -- every type-orbit is primitive (197 orbits, all binomial) or quadratic-inducible (80 orbits, all C(5,p)^2); NO deeper CM induction exists at the deciadic boundary (every transitive quintic T contains the 5-cycle, hence acts PRIMITIVELY on the 5 pairs: the only block systems on the 10 letters are the rho0-pair fibers)
+  ok   64  the g=5 binomial primitive rows: 197 orbits == [5, 10, 10, 5, 1] (C(5,p))
+  [discovery] the NEW primitive shapes at degree 10: []
+  ok   65  the surplus battery at 3 |G| <= 96 class representatives, 15 entries measured (the divisor-product ring span vs the full Hodge dim at every p)
+  [surplus] r34-T2-K2-G40 Phi=(0, 1, 2, 3, 9): dims=[5, 10, 10, 5, 1] surps=[0, 0, 0, 0, 0]
+  [surplus] r51-T3-K2-G20 Phi=(0, 1, 2, 3, 9): dims=[5, 10, 10, 5, 1] surps=[0, 0, 0, 0, 0]
+  [surplus] r68-T4-K2-G10 Phi=(0, 1, 2, 3, 9): dims=[5, 10, 10, 5, 1] surps=[0, 0, 0, 0, 0]
+  ok   66  THE EXCEPTIONAL-CLASS LAW AT DEGREE 10: surplus = 0 at EVERY measured primitive type in the |G| <= 96 battery (15 entries; the split types below) -- the degree-8 intermediate-orbit phenomenon ([4,8,4,1] rows with surplus [0,2,0,0]) does NOT recur at the degree-10 boundary: the rigid K-lattice kills the intermediate-orbit structure (the |G| > 96 worlds carry the shape law only, DISCLOSED)
+  [surplus-split] r34-T2-K2-G40 Phi=(0, 1, 2, 3, 4): dims=[25, 100, 100, 25, 1] surps=[0, 0, 0, 0, 0]
+  [surplus-split] r51-T3-K2-G20 Phi=(0, 1, 2, 3, 4): dims=[25, 100, 100, 25, 1] surps=[0, 0, 0, 0, 0]
+  [surplus-split] r68-T4-K2-G10 Phi=(0, 1, 2, 3, 4): dims=[25, 100, 100, 25, 1] surps=[0, 0, 0, 0, 0]
+  ok   67  THE SPLIT-TYPE SURPLUS: 3 split-type bucket representatives (the |G| <= 96 classes), the FULL p-range: surplus = 0 at every entry -- the split side of the degree-10 boundary closure (the |G| > 96 split worlds carry the two-algorithm shape law, DISCLOSED)
+================================================================================================
+V4 -- THE E x A EXTENSION FRAMES (the joint 12-letter worlds, bounded: 4 frames)
+================================================================================================
+  ok   68  the E x A disjoint-frame tensor law COMPUTED at 3 joint 12-letter worlds: dim Hdg_2(E x A) = 1 + NS(A) at every disjoint frame (1 coupled frames outside the bound, disclosed)
+  ok   69  the E x A joint surplus at degree 4: 3/3 frames, surplus = 0
+================================================================================================
+V5 -- THE G-LAW FAMILY LAYER (the g-uniformity receipts)
+================================================================================================
+  ok   70  the g=2 binomial rows: 2 primitive quartic type-orbits, all == [2, 1] (C(2,p))
+  ok   71  the g=3 binomial rows: 2 primitive sextic type-orbits, all == [3, 3, 1] (C(3,p))
+  ok   72  the g=5 binomial rows: 197 generic-orbit primitive deciadic type-orbits == [5, 10, 10, 5, 1] (C(5,p)) -- the G-UNIFORM FAMILY LAW at the generic types across g = 2, 3, 5 (g = 4 lands in the leaf section below)
+================================================================================================
+V-L -- THE CM-SIDE LEAF LATTICE CERTIFICATE (the degree-8 discovery, pinned)
+================================================================================================
+  ok   73  |W8| = 384 == 384
+  ok   74  rho0_8 = (04)(15)(26)(37)
+  ok   75  the transitive quartic T-classes: 5 == 5
+  ok   76  subspaces of F2^4: 67 == 67
+  ok   77  subspaces containing 1111: 16 == 16
+  ok   78  the degree-8 census re-run: 114 worlds == 114 (the R41 count reproduced EXACTLY)
+  ok   79  the order>=24 boundary re-found: 58 == 58 (the R41 boundary)
+  ok   80  the degree-8 exceptional types re-found: 16 primitive [4,8,4,1] rows with the verified surplus [0,2,0,0] (the R41 discovery reproduced)
+  [leaf] world 0 Phi=(0, 1, 3, 6): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 1 Phi=(0, 1, 2, 3): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 3 Phi=(0, 1, 2, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 5 Phi=(0, 1, 2, 3): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 6 Phi=(0, 1, 6, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 7 Phi=(0, 1, 2, 3): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 11 Phi=(0, 1, 2, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 15 Phi=(0, 1, 2, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 32 Phi=(0, 1, 2, 3): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 36 Phi=(0, 1, 3, 6): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 37 Phi=(0, 1, 6, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 39 Phi=(0, 1, 2, 3): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 40 Phi=(0, 1, 2, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 41 Phi=(0, 1, 2, 3): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 43 Phi=(0, 1, 2, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  [leaf] world 46 Phi=(0, 1, 2, 7): dim Hdg^4 = 8, rank(Lambda_full) = 8 (torsion []), rank(Lambda_div) = 6 (torsion []), rank(Lambda_full+Lambda_div) = 8 (torsion [])
+  ok   81  THE LEAF LATTICE CERTIFICATE: at every exceptional type (16 types): rank(Lambda_full) = dim Hdg^4 and rank(Lambda_div) = dim - 2 -- the TWO exceptional Q-classes are a LATTICE-LEVEL phenomenon (the product lattice has codimension exactly 2 in the full Hodge lattice); the torsion invariants (the saturation anatomy) measured above
+  [leaf] the saturation indices [(Lambda_full+Lambda_div):Lambda_full]: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+  ok   82  the saturation indices measured: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1] -- the entry-test anatomy of the CM-side leaf (the integral distance of the divisor-product lattice from the full Hodge lattice)
+================================================================================================
+V-R3 -- THE CORE ASSEMBLY RECEIPT (the R3 vanishing extended to h = 3, 4)
+================================================================================================
+  ok   83  R3-EXT THE VANISHING at h=3, E-general (MT = GL2): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0} (with R41's h = 1, 2: the vanishing at EVERY computed h)
+  ok   84  R3-EXT THE VANISHING at h=3, E = E[i] (MT = the Q(i)-torus): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0} (with R41's h = 1, 2: the vanishing at EVERY computed h)
+  ok   85  R3-EXT THE VANISHING at h=4, E-general (MT = GL2): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0} (with R41's h = 1, 2: the vanishing at EVERY computed h)
+  ok   86  R3-EXT THE VANISHING at h=4, E = E[i] (MT = the Q(i)-torus): dim of the (MT(E) x GSp(M))-invariant hom supply = 0 == 0 -- the mixed (p,p)-sector at the general input is {0} (with R41's h = 1, 2: the vanishing at EVERY computed h)
+  ok   87  R3-EXT THE CM-MATCHED CONTROL at h=3: the intertwiner dim = 6 == 2h (the graph supply, algebraic) -- the stratum sensitivity 0 -> 2h persists at every computed h
+  ok   88  R3-EXT THE CM-MATCHED CONTROL at h=4: the intertwiner dim = 8 == 2h (the graph supply, algebraic) -- the stratum sensitivity 0 -> 2h persists at every computed h
+================================================================================================
+V6 -- THE HOSTILE BATTERY (every control FIRES)
+================================================================================================
+  ok   89  H1 census world-deletion at world 0: the mutated set fails transitivity/order
+  ok   90  H2 basis-generator deletion: the span STRICTLY drops 10 -> 6 and the surplus FIRES (4 > 0)
+  ok   91  H3 the sign-cocycle flip: a single sign mutation breaks the cocycle law (detected)
+  ok   92  H4 the type-validity battery: 3/3 violation directions rejected at the canary world (double-letter, missing-pair, duplicate)
+  ok   93  H5 the unbalanced word (0, 1) is not purity-stable (rejected by the filter)
+  ok   94  H6 garbage liveness: the 2-element garbage world has no central fpf involution (rejected)
+  ok   95  H7 the surplus-rigging canary at the leaf world 0: dropping a product generator changes the span (6 -> 3) -- the battery is LIVE (a rigged span would not respond)
+  ok   96  the mechanical vacuity scan: 0 hits (patterns: [])
+================================================================================================
+SUMMARY: 96 checks, 0 failures
+================================================================================================

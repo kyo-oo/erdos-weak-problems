@@ -1,0 +1,37 @@
+Module[{checks={},failures={},check,pull,raw,ret,proj,g,rg,composite,
+clx,cly,cyclepull,cycletr,imageRows,inRange,z,w,rz,rw,boundaryRows,x},
+check[name_,test_]:=(AppendTo[checks,name];If[!TrueQ[test],AppendTo[failures,name]]);
+pull={{1,0},{0,1},{1,1}};raw={{4,-2,2},{-3,3,3}};ret=raw/6;proj=pull.ret;
+check["raw_degree_six",raw.pull==6 IdentityMatrix[2]];
+check["normalized_retraction",ret.pull==IdentityMatrix[2]];
+check["idempotent_projector",proj.proj==proj];
+check["remainder_return_zero",ret.(IdentityMatrix[3]-proj)==ConstantArray[0,{2,3}]];
+check["split_ranks",MatrixRank/@{pull,ret,proj,IdentityMatrix[3]-proj}=={2,2,2,1}];
+g={{1,0,0},{0,1,0},{0,0,1},{1,-1,1}};rg={{5,0,0,0},{0,5,0,0},{0,0,5,0}};
+composite=raw.rg;
+check["composite_degree_thirty",composite.g.pull==30 IdentityMatrix[2]];
+check["normalized_composition",composite/30==ret.(rg/5)];
+clx={{1,0},{0,0}};cly={{1,0,0},{0,1,0},{1,-1,0}};
+cyclepull={{1,0},{0,0},{0,1}};cycletr={{6,-4,0},{0,0,1}};
+check["cycle_pullback_comparison",cly.cyclepull==pull.clx];
+check["cycle_transfer_comparison",clx.cycletr==raw.cly];
+inRange[a_,b_]:=MatrixRank[Join[a,Transpose[{b}],2]]==MatrixRank[a];
+imageRows=Table[With[{left=inRange[cly,pull.a],right=inRange[clx,a]},
+check["source_image_"<>ToString[a,InputForm],left==right];{a,left,right}],
+{a,{{1,0},{0,1},{1,1},{0,0}}}];
+z={{2},{0},{0}};w={{2},{0},{6}};rz=cycletr.z/6;rw=cycletr.w/6;
+check["boundary_solutions_same_betti",clx.rz==clx.rw];
+check["boundary_solutions_distinct_cycles",rz!=rw];
+check["nonzero_nullifier_has_no_transfer",MatrixRank[{{0}}]<MatrixRank[{{0,1}}]];
+check["degree_zero_is_not_a_retraction",{{0}}.{{0}}=={{0}}&&MatrixRank[{{0}}]==0];
+boundaryRows={{4,2,2,True},{4,2,3,False},{4,1,1,True},{4,1,2,False}};
+Scan[(check["boundary_threshold_"<>ToString[Take[#,3],InputForm],#[[4]]==(PolynomialRemainder[x^#[[2]],x^#[[3]],x]===0)])&,boundaryRows];
+ExportString[<|"all_passed"->(failures=={}),"assertions"->Length[checks],
+"failures"->failures,"kernel_version"->$Version,
+"projector"->Map[ToString[#,InputForm]&,proj,{2}],
+"composite_raw_transfer"->Map[ToString[#,InputForm]&,composite,{2}],
+"cycle_image_rows"->imageRows,
+"returned_boundary_cycles"->Map[ToString[#,InputForm]&,{rz,rw},{3}],
+"nullifier_rank_pair"->{MatrixRank[{{0}}],MatrixRank[{{0,1}}]},
+"boundary_rows"->boundaryRows|>,"RawJSON","Compact"->True]
+]

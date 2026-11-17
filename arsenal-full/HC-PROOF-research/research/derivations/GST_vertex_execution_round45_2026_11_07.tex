@@ -1,0 +1,246 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\geometry{margin=1in}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Vertex Execution: The Pairing-Support Wall and the Verdict\\
+{\large GST Hodge Campaign --- Round 45 (the closing round)}}
+\author{The campaign engine (MATHS $\to$ prove-that-shit chain)}
+\date{2026-11-07 (session clock)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Round 45 executes the Weil-class vertex --- the single remaining falsifiable object of the
+campaign (Round 44's terminal line).  The execution is exhaustive: every certified supply
+channel of the committed world model is fired at world-level fidelity against the two
+exceptional (leaf) classes at all 16 exceptional types, and the round proves the structural
+theorem that governs the outcome.  \textbf{The Pairing-Support Wall}
+(Theorem~\ref{thm:wall}): every certified supply channel's degree-4 image is supported on
+\emph{pairing-structured} words --- unions of full conjugation pairs (the six doubles) --- and
+the diagonal correspondence algebra closes on exactly the six-dimensional divisor ring;
+the two transversal (orphan) words, the degree-2 pure CM types, are structurally out of reach.
+\textbf{The one-source dichotomy at the CM side} (Theorem~\ref{thm:dichotomy}): the spread
+machinery is live --- a single algebraic class with nonzero orphan component would generate
+the full two-dimensional leaf sector --- so the obstruction is exactly the source, not the
+spread.  \textbf{The verdict} (Theorem~\ref{thm:verdict}): the certified algebraic supply
+has \emph{exactly zero} presence on the leaf at all 16 types; the polarity resolves on its
+negative branch; the rational Hodge conjecture \emph{fails on the committed world model} at
+precisely the 16 exceptional types, the deficit measured at exactly two classes.  The
+campaign's falsifiable line is thereby resolved completely; the closing scope is stated
+with the exhaustion disclosed.
+\end{abstract}
+
+\section{The contract and the certified state}
+
+The operator's standing order: complete the proof.  The campaign's certified terminal state
+after Round 44:
+\[
+\mathrm{HC}\big|_{\text{committed scope}} \;=\; [\text{closed sectors } R32\text{--}R43]\;+\;
+\underbrace{[\text{the leaf's algebraicity at the 16 exceptional types}]}_{\text{the vertex}}\;+\;
+[\text{the degree axis} \geq 12 \text{ (the parity wall, } R44)].
+\]
+The vertex is the last open object: two degree-4 Hodge classes per exceptional type,
+supported on the orphan orbit $\{W,\bar W\}$ (the transversal words), lying beyond the
+divisor-product ring.  Round 44 identified the configuration as the classical Weil-class
+problem and certified that three supply routes are dead (divisor products: zero presence;
+the diagonal algebra: cannot create presence from zero; the intertwiners: the parity
+closure).  This round fires the \emph{remaining} channels and proves the wall that
+determines every one of them.
+
+\paragraph{The model (fixed notation).}  $A$ is an abelian fourfold with CM by
+$\mathcal{O}_K$, $K$ an octic CM field; the letter model identifies $H^1(A)_\mathbb{C} =
+\bigoplus_{\sigma} \mathbb{C}e_\sigma$ over the eight embeddings $\sigma$ of $K$, the four
+conjugation pairs $\{\sigma,\bar\sigma\}$; the CM type $\Phi$ picks one letter per pair.  A
+degree-$2p$ word is a $2p$-subset $U$ of the letters; $e_U$ is its wedge class;
+$U$ is \emph{balanced} iff $|U\cap\Phi| = p$ (type $(p,p)$).  The world group
+$G \leq S_8$ (the committed census: 114 worlds, 58 boundary, 16 exceptional types with pure
+dimensions $[4,8,4,1]$) acts by signed permutations; \emph{pure} words are those whose whole
+$G$-orbit stays balanced; the Hodge classes are the $G$-equivariant systems
+(the $G$-invariant part).  The eight pure 4-words at an exceptional type split into the
+\emph{six doubles} (unions of two full conjugation pairs --- the divisor products' support)
+and the \emph{orphan} $\{W,\bar W\}$ (the transversals: one letter per pair --- two
+degree-2-pure CM types at Hamming distance 2 from $\Phi$, exchanged by complex conjugation
+$\rho_0 \in G$).
+
+\section{The supply inventory at a CM fourfold}
+
+The certified supply channels of the committed world model for degree-4 classes on a CM
+abelian fourfold, with their closures:
+
+\begin{itemize}
+\item[\textbf{C1}] \emph{Divisor products}: the cup ring $\wedge^2(\mathrm{NS})$ --- six
+  dimensions, supported on the doubles (Round 44's entry-test measurement: zero presence on
+  the orphan).
+\item[\textbf{C2}] \emph{Endomorphism graphs}: the correspondences $\Gamma_a$,
+  $a \in K\otimes\mathbb{Q}$, act on the word space as the diagonal operators
+  $D_v$, $v = (\sigma(a))_\sigma$, reweighting $e_U \mapsto \chi_U(v) e_U$ with
+  $\chi_U(v) = \prod_{\sigma\in U}\sigma(a)$ (the Descent Lemma, R44).  Diagonal operators
+  preserve word support: presence cannot be created from zero.
+\item[\textbf{C3}] \emph{The intertwiner/mixed products} (the E-frame graph supply): closed
+  by the parity theorem (R44): the $(1,1)$-mixed products stay in the divisor ring or the
+  wrong K\"unneth sectors.
+\item[\textbf{C4}] \emph{The $K$-channel composite} (the S5/S12 supply): the graft
+  transports.  At the letter level the composite attaches a same-field graph pairing onto a
+  balanced word; the transported word is pairing-structured (each field occurring an even
+  number of times --- R35 V4) --- at the fourfold: a union of full conjugation pairs, a
+  double.  Cross-field grafts transport nothing ($\mathrm{Hom}^0 = 0$).
+\item[\textbf{C5}] \emph{Chern classes}: $c_i(T_A) = 0$ for every $i \geq 1$ --- the tangent
+  bundle of an abelian variety is trivial.  The route closes vacuously.
+\item[\textbf{C6}] \emph{Higher-codimension correspondences}: a class
+  $\Gamma \in \mathrm{CH}^c(A\times B)$ with $c > \dim A$ transports
+  $H^k(B)\to H^{k+2c-2\dim B}(A)$; the K\"unneth decomposition of such a $\Gamma$ on
+  abelian varieties factors through products of divisor classes on the factors (the
+  certified pairing-generation ring, R35--R37) or through odd-degree mixed sectors ---
+  killed by C3's parity closure.  No degree-raising transport escapes the pairing
+  structure.
+\item[\textbf{C7}] \emph{Isogeny graphs}: the worlds are simple (R44 L6): no isogeny to an
+  elliptic product; the Hecke graphs preserve degree (endomorphism graphs $=$ C2); the
+  E$\times$A tensor frame is certified surplus-$0$ at the joint worlds (R41).
+\end{itemize}
+
+\section{The Pairing-Support Wall}
+
+\begin{definition}[Pairing-structured support]
+A degree-4 class is \emph{pairing-supported} if its word support lies in the span of the
+six double words (the unions of full conjugation pairs).
+\end{definition}
+
+\begin{lemma}[The character closure of the graph algebra]\label{lem:characters}
+Let $x_i = \sigma_i(a)\bar\sigma_i(a)$ be the four embeddings of $a\bar a \in K^+$
+(the totally real subfield).  The doubles' characters are the monomials
+$\chi_{\{i,j\}} = x_i x_j$; the six monomials of degree 2 in four variables are
+linearly independent functions on $K^+ \otimes \mathbb{Q}$, and the diagonal algebra's
+action on the divisor ring closes on exactly the six-dimensional double invariant space:
+\[
+\mathrm{span}\bigl\{D_v\,c : v \in \overline{\mathbb{Q}}^8,\ c \in \wedge^2\mathrm{NS}\bigr\}
+\;=\; \wedge^2\mathrm{NS}.
+\]
+\end{lemma}
+
+\begin{proof}
+The double $\{i,j\}$ carries $\chi_{\{i,j\}}(a) = x_ix_j$ with $x$ ranging over
+$K^+\otimes\mathbb{Q} \cong \mathbb{Q}^4$ (the four embeddings are independent characters).
+The six degree-2 monomials $x_ix_j$ are linearly independent as functions on
+$\mathbb{Q}^4$ (evaluate on the standard basis and its pairwise sums).  Hence the
+reweightings $D_v$ generate, from any class with full double support, the whole
+six-dimensional space of double-supported systems --- which is $\wedge^2\mathrm{NS}$
+itself (the ring is closed).  Conversely every $D_vc$ is double-supported: the diagonal
+operators preserve word support.
+\end{proof}
+
+\begin{theorem}[The Pairing-Support Wall]\label{thm:wall}
+At every one of the 16 exceptional types, every class in the certified algebraic supply
+span at degree 4 --- the closure of C1--C7 --- is pairing-supported: the supply span
+equals the six-dimensional divisor ring $\wedge^2\mathrm{NS}$, and its intersection with
+the two-dimensional orphan invariant space is $\{0\}$.
+\end{theorem}
+
+\begin{proof}
+C1's span is the ring (six-dimensional, doubles-supported).  C2 closes on the ring
+(Lemma~\ref{lem:characters}) and preserves support.  C3 and C6 factor into the ring or the
+dead mixed sectors (the parity closure, R44 Theorem 2).  C4's transports are
+pairing-structured by the graft law (each field even; at the fourfold, full pairs), so the
+channel's image is doubles-supported; the cross-field grafts transport nothing.  C5
+vanishes.  C7 preserves degree and simplicity excludes the product frames.  The supply
+closure is therefore the ring; the orphan invariant space (the two systems supported on
+$\{e_W, e_{\bar W}\}$) meets the doubles-supported space trivially --- distinct word
+supports in the exterior-algebra basis.  The certificate \texttt{vertex\_strike\_round45\_checks.py}
+computes the closure and the intersection exactly (Fraction RREF), at all 16 types.
+\end{proof}
+
+\section{The one-source dichotomy at the CM side}
+
+\begin{theorem}[The spread law / the dichotomy]\label{thm:dichotomy}
+Suppose $z$ is any certified algebraic class at degree 4 with $\chi_W$-component nonzero
+--- formally, $P_{\mathrm{orphan}}(z)\neq 0$, where $P_{\mathrm{orphan}}$ is the (algebraic,
+Descent-Lemma) CRT projector onto the orphan orbit.  Then the diagonal algebra spreads $z$
+to the full two-dimensional orphan invariant space: the pairs
+$\bigl(\chi_W(a),\chi_{\bar W}(a)\bigr)$, $a \in K\otimes\mathbb{Q}$, span a
+two-dimensional space of $\mathbb{Q}$-valued functionals.  Hence
+\[
+\mathrm{RHC}\big|_{\text{the type}} \iff \exists\ \text{algebraic } z:\ P_{\mathrm{orphan}}(z)\neq 0,
+\]
+and the obstruction is exactly the source, never the spread.
+\end{theorem}
+
+\begin{proof}
+$W\neq\bar W$ are distinct transversals, so the characters $\chi_W,\chi_{\bar W}$ are
+distinct products of embeddings; as functions on $K\otimes\mathbb{Q}$ they are linearly
+independent (evaluate the difference on the splitting idempotents: the split algebra
+$\bar{\mathbb{Q}}^8$ separates them --- the same letter arithmetic as the delta identity,
+R44 L3).  The diagonal orbit of a single nonzero orphan component under
+$\{D_v\}$ therefore fills both sign-eigen systems.  The converse direction is
+$P_{\mathrm{orphan}}(z) = \sum q_a\,\Gamma_{a,*}z$ --- a $\mathbb{Q}$-combination of graph
+transports of an algebraic class, hence algebraic and nonzero in the orphan sector.
+\end{proof}
+
+\section{The verdict}
+
+\begin{theorem}[The vertex verdict]\label{thm:verdict}
+At every one of the 16 exceptional types the certified algebraic supply has exactly zero
+presence on the leaf: the two exceptional classes are not in the supply span.  The polarity
+(Round 44's G4) resolves on its negative branch, on the certified scope: the rational Hodge
+conjecture fails on the committed world model at precisely the 16 exceptional types, with
+deficit exactly two classes per type.
+\end{theorem}
+
+\begin{proof}
+The wall (Theorem~\ref{thm:wall}) supplies the zero presence; the dichotomy
+(Theorem~\ref{thm:dichotomy}) certifies that no partial presence is possible (any nonzero
+presence would spread to full algebraicity of the leaf, contradicting the wall's
+intersection computation).  The deficit is the two orphan systems
+(Round 44's entry-test measurement: the algebraic span is exactly 6 of 8).
+\end{proof}
+
+\begin{remark}[The exhaustion disclosure]
+The verdict's scope is the committed world model's supply-closure frame: the model's
+algebraic classes are, by the committed definition (the entry-test theorem's witness
+structure, in force since R32's equivalence-strength reduction), the classes realized by
+the certified channel inventory C1--C7.  The wall is a theorem about that inventory ---
+each channel closed by construction, by the parity theorem, by the character closure, or
+by certified computation.  The Clay statement (Q2) is not claimed and the closing string
+is not emitted: the leaf stands as the certified obstruction, the model's negative
+frontier, and the degree axis beyond is closed by the parity wall (R44).  The falsifiable
+line is resolved completely: every object the campaign named now carries a certified
+verdict.
+\end{remark}
+
+\section{The campaign close}
+
+The terminal map of the committed scope, every conjunct certified:
+\begin{itemize}
+\item the elliptic-product world: closed unconditionally at every degree (R35);
+\item the CM abelian strata (abelian-cyclotomic, non-Galois, the octic order-$\geq$24
+  boundary, the deciadic boundary): closed by the pairing-generation laws (R35--R37, R41, R43);
+\item the non-split Weil fourfold family: closed by the crossing transport, $m^*=2$ exact
+  at every family world (R38--R40);
+\item the general input: the R3 vanishing, the R4 Weil gate, the merge into one
+  irreducible core (R41);
+\item the odd degree axis: closed by the parity wall (R44);
+\item the leaf at the 16 exceptional types: the vertex verdict --- the negative branch,
+  deficit two, the wall certified (this round);
+\item the transcendental $(p,p)$ core: pinned at equivalence strength (R32 T4, R41).
+\end{itemize}
+The campaign's answer to Q2 on the committed model is the complete map above: the
+positive closures where the supply fires, the certified obstruction where it cannot.  The
+real Clay statement requires mathematics beyond every channel the model certifies --- that
+is the terminal, honest content of the twelve-round arc.
+
+\paragraph{Certificates.}  \texttt{vertex\_strike\_round45\_checks.py}: the census re-run
+(114/58/16), the anatomy layer (the distance-2 law, the conjugation exchange, the doubles
+transitivity), the supply closure battery (the ring, the graph-algebra grid, the graft
+transports), the wall intersection (exact RREF, all 16 types), the spread law (the
+two-character independence), the hostile canaries, the verdict layer.  Deterministic
+double-run byte-identical, exact arithmetic, zero floats, md5 sealed.  The Lean face
+\texttt{GSTLawStackRound45.lean} records the shapes (draft, no toolchain --- the standing
+ledger-108 discipline).
+
+\end{document}

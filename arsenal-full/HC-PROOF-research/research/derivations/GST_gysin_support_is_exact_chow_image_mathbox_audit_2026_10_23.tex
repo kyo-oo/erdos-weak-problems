@@ -1,0 +1,76 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\title{GST Mathbox: exact equivalence of Hodge divisor-Gysin support and original-X Chow algebraicity}
+\date{23 October 2026}
+\begin{document}\maketitle
+Let $X$ be any smooth projective complex variety of dimension $d$,
+$1\le p\le d$, and let
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$ be prescribed.
+Consider all proper algebraic maps $f:Y\to X$
+from smooth projective $Y$ of dimension $d-p+1$, and set
+\[
+ \mathcal G_p(X)=\sum_{(Y,f)}
+ f_*\bigl(H^2(Y,\mathbb Q)\cap H^{1,1}(Y)\bigr).
+\]
+The GST Todd--Fitting construction assumed that $\alpha$
+belongs to a finite such Gysin image.
+\begin{theorem}[Exact algebraic-source audit, every original X]
+For every such $X,p$,
+\[
+ \boxed{\mathcal G_p(X)=
+ \operatorname{im}\bigl(
+ \mathrm{cl}^{can}_X:CH^p(X)_{\mathbb Q}\to H^{2p}(X,\mathbb Q)\bigr).}
+ \tag{1}
+\]
+Consequently the previously used unrestricted support
+hypothesis on the input $\alpha$ is equivalent to
+the existence of the requested original-X rational Chow class.
+\end{theorem}
+\begin{proof}
+For inclusion from left to right, the rational Lefschetz
+$(1,1)$ theorem realizes every rational $(1,1)$ class
+on each smooth projective $Y$ by an actual rational
+algebraic divisor. Its proper algebraic pushforward
+is a codimension-p Chow class on X, and the
+canonical rational Betti comparison commutes with Gysin.
+
+Conversely let $Z\subset X$ be any irreducible
+codimension-p algebraic subvariety. Let
+$\nu:\widetilde Z\to Z$ be an actual smooth
+projective resolution of singularities.
+Put $Y=\widetilde Z\times\mathbb P^1$,
+$f:Y\xrightarrow{\mathrm{pr}_{\widetilde Z}}
+\widetilde Z\xrightarrow{\nu}Z\hookrightarrow X$,
+and $\beta=\mathrm{pr}_{\mathbb P^1}^*
+c_1^{Betti}(\mathcal O_{\mathbb P^1}(1))$.
+Then $\dim Y=d-p+1$, the rational $\beta$
+has type $(1,1)$, and the actual Gysin formula gives
+\[
+ \boxed{f_*\beta=
+ (i\circ\nu\circ\mathrm{pr}_{\widetilde Z})_*\beta
+ =\mathrm{cl}^{can}_X([Z])}
+ \tag{2}
+\]
+using $\int_{\mathbb P^1}c_1(\mathcal O(1))=1$
+and $\nu_*[\widetilde Z]=[Z]$.
+Finite rational linear combinations of irreducible
+cycles prove the reverse inclusion. No form of the
+Hodge conjecture is used to establish (1).
+\end{proof}
+
+The exact GST source-birth demand is NOT to apply
+GRR/Todd and Fitting minors to assumed Gysin support.
+It is to construct from the INPUT $(X,p,\alpha)$
+actual smooth projective $Y_i$, algebraic maps $f_i$
+and Hodge classes $\beta_i$ with
+$\alpha=\sum_i(f_i)_*\beta_i$ without
+any Chow witness of alpha as an input.
+Alternatively the source can be an independently
+constructed algebraic projector on the genuine GST
+incidence fold whose canonical original-X Betti
+class is exactly alpha; that route must construct
+the projector, not postulate that its period is alpha.
+The support theorem is an exact SOURCE TYPE CHECK,
+not a disproof of GST or of Hodge.
+\end{document}

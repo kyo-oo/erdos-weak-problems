@@ -1,0 +1,92 @@
+name: GST Spatial Fold Research Green
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTFoldPeriodDescent.lean'
+      - 'GSTCausalPairingGraphs.lean'
+      - 'GSTFoldRotation.lean'
+      - 'GSTFoldPolarization.lean'
+      - 'GSTCausalFoldDefect.lean'
+      - 'GSTVariableFoldIntegrability.lean'
+      - 'GSTGraphV2GeneralSpaceRealization.lean'
+      - 'GSTCMFiniteGeometricDegreeDescent.lean'
+      - 'GSTSpatialFoldResearch.lean'
+      - 'GSTLawStackRound51.lean'
+      - 'GSTGradedWorldAlgebra.lean'
+      - 'GSTGraphV2UnboundedHigherCausality.lean'
+      - 'GSTSpectralBoundaryDefect.lean'
+      - 'waves/GSTNCohomologyV3.lean'
+      - 'lakefile.toml'
+      - '.github/workflows/gst-spatial-fold-research.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-spatial-fold-research-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        id: lean-install
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Save cached Lean toolchain
+        if: steps.lean-install.outcome == 'success'
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}-${{ github.run_id }}
+      - name: Kernel-verify the spatial-fold research modules
+        shell: bash
+        run: |
+          set -uo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          TARGETS="GSTFoldPeriodDescent GSTCausalPairingGraphs GSTFoldRotation GSTFoldPolarization GSTCausalFoldDefect GSTVariableFoldIntegrability GSTGraphV2GeneralSpaceRealization GSTLawStackRound51 GSTGradedWorldAlgebra GSTGraphV2UnboundedHigherCausality GSTSpectralBoundaryDefect GSTCMFiniteGeometricDegreeDescent GSTSpatialFoldResearch waves.GSTNCohomologyV3"
+          : > spatial-fold-research.log
+          : > spatial-fold-research.summary
+          FAILED=0
+          for t in $TARGETS; do
+            echo "=== TARGET $t ===" >> spatial-fold-research.log
+            if lake build "$t" >> spatial-fold-research.log 2>&1; then
+              echo "PASS $t" >> spatial-fold-research.summary
+            else
+              echo "FAIL $t" >> spatial-fold-research.summary
+              FAILED=1
+            fi
+          done
+          cat spatial-fold-research.summary
+          if grep -E "declaration uses 'sorry'|sorryAx" spatial-fold-research.log; then
+            echo "SORRY DETECTED" >> spatial-fold-research.summary
+            FAILED=1
+          fi
+          if [ "$FAILED" -ne 0 ]; then
+            grep -nE 'error:' spatial-fold-research.log | tail -n 200 || true
+            exit 1
+          fi
+          echo "LEAN GREEN: all 14 spatial-fold research modules kernel-verified, zero sorry"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-spatial-fold-research-log
+          path: |
+            spatial-fold-research.log
+            spatial-fold-research.summary
+          if-no-files-found: warn

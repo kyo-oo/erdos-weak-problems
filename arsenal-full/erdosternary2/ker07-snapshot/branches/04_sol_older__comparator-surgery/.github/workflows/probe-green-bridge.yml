@@ -1,0 +1,54 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #0683 / 1132
+#    Path         : branches/sol_comparator-surgery/.github/workflows/probe-green-bridge.yml
+#    Ref          : origin/sol/comparator-surgery
+#    First-commit : 2026-08-16 20:03:04 +0530  (b1f9b3a)
+#    Last-commit  : 2026-08-16 20:06:39 +0530  (325c880)
+#    Total commits: 2
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/2] 2026-08-16 20:03:04 +0530  b1f9b3a  (ker07-dev)
+#        Probe kernel-green universal bridge dependencies
+# [02/2] 2026-08-16 20:06:39 +0530  325c880  (ker07-dev)
+#        Build green module before bridge export probe
+# ======================================================================
+
+name: Probe kernel-green bridge dependencies
+
+on:
+  push:
+    branches: [sol/comparator-surgery]
+    paths: [.github/workflows/probe-green-bridge.yml]
+
+jobs:
+  probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install pinned Lean
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Build exact kernel-green module
+        run: lake build ErdosTernary2
+      - name: Probe old GST-duality closure exports
+        run: |
+          cat > BridgeProbe.lean <<'LEAN'
+          import ErdosTernary2
+          #check gst_four_power_creation_certificate_inline
+          #check gst_duality
+          #check gst_oscillation_from_navigation
+          #check mul4_lift_a9_6
+          #check cubic_lift_mod81
+          #check even_case_a_7_mod9
+          #check modular_check_base
+          #check erdos_ternary_2_odd_universal
+          LEAN
+          lake env lean BridgeProbe.lean

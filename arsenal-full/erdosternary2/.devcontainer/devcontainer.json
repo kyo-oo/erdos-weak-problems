@@ -1,0 +1,29 @@
+{
+  "name": "ErdosTernary2 Lean Codespace",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu-22.04",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": true,
+      "configureZshAsDefaultShell": false,
+      "username": "codespace"
+    }
+  },
+  "postCreateCommand": "curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan-init.sh && sh /tmp/elan-init.sh -y --default-toolchain none && export PATH=\"$HOME/.elan/bin:$PATH\" && elan default stable && chmod +x scripts/*.sh",
+  "postStartCommand": "export PATH=\"$HOME/.elan/bin:$PATH\" && bash scripts/comparator.sh || echo 'comparator: build pending — run ./scripts/comparator.sh after editing'",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "leanprover.lean4"
+      ],
+      "settings": {
+        "lean4.serverArgs": [],
+        "lean4.input.enabled": true,
+        "editor.formatOnSave": false
+      }
+    }
+  },
+  "forwardPorts": [],
+  "remoteEnv": {
+    "PATH": "${containerEnv:PATH}:${HOME}/.elan/bin"
+  }
+}

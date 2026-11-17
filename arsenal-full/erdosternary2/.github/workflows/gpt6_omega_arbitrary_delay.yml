@@ -1,0 +1,33 @@
+name: GPT6 GST Arbitrary Delay Exact Kernel
+on:
+  push:
+    branches:
+      - gpt6/erdos-omega-terminal-normalform-20261029
+    paths:
+      - GSTOmegaArbitraryDelay.lean
+      - .github/workflows/gpt6_omega_arbitrary_delay.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean, Mathlib and digit-period library
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerDirectResidue
+      - name: Exact kernel check unbounded natural exponents and all prescribed horizons
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTOmegaArbitraryDelay.lean 2>&1 | tee omega-delay.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' omega-delay.log
+          echo GST_ARBITRARY_DELAY_UNBOUNDED_KERNEL_GREEN=1

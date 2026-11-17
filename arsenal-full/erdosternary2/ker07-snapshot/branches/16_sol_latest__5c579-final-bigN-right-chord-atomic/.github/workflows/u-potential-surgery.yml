@@ -1,0 +1,56 @@
+# ======================================================================
+# CHRONOLOGICAL LABEL -- #1067 / 1132
+#    Path         : branches/sol_5c579-final-bigN-right-chord-atomic/.github/workflows/u-potential-surgery.yml
+#    Ref          : origin/sol/5c579-final-bigN-right-chord-atomic
+#    First-commit : 2026-08-17 22:06:13 +0530  (deea9a0)
+#    Last-commit  : 2026-08-17 22:06:13 +0530  (deea9a0)
+#    Total commits: 1
+# ======================================================================
+# GIT HISTORY (chronological, oldest first)
+# ======================================================================
+# [01/1] 2026-08-17 22:06:13 +0530  deea9a0  (ker07-dev)
+#        surgery: lock 5c579 with full BIG-N right-chord research monolith
+# ======================================================================
+
+name: U Potential Surgery
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  verify-u-potential:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib and cache
+        run: |
+          elan toolchain install "$(cat lean-toolchain)"
+          elan default "$(cat lean-toolchain)"
+          lake update
+          lake exe cache get
+      - name: Compile U-potential detector
+        run: lake env lean HandwrittenUniversalParadoxPotentialScratch.lean
+      - name: Compile x-6 U-potential chord
+        run: lake env lean HandwrittenX6UPotentialChordScratch.lean
+      - name: Compile Omega to U-potential bridge
+        run: lake env lean OmegaUPotentialBridgeScratch.lean
+      - name: Compile locked residual support bridge
+        run: lake env lean CanonicalResidualInfiniteSupportBridgeScratch.lean
+      - name: Compile locked NULL branch reduction
+        run: lake env lean ResidualNullBranchReductionScratch.lean
+      - name: Compile NULL terminal base
+        run: lake env lean ResidualNullTerminalScratch.lean
+      - name: Compile retained-offset U-state
+        run: lake env lean RetainedOffsetUStateScratch.lean
+      - name: Compile NULL prefix-four cut
+        run: lake env lean ResidualNullPrefixFourCutScratch.lean
+      - name: Compile canonical origin-cut intersection
+        run: lake env lean CanonicalOriginCutIntersectionScratch.lean
+      - name: Compile physical six-state gate dictionary
+        run: lake env lean PhysicalSixBridgeGateScratch.lean

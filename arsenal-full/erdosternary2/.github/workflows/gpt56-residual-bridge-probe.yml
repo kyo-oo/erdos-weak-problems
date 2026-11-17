@@ -1,0 +1,123 @@
+name: GPT56 Residual Bridge Probe
+
+on:
+  push:
+    branches:
+      - sol/gpt56-final-perfect-power-block-20260823
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gpt56-final-perfect-power-block-20260823
+          fetch-depth: 1
+      - name: Assert exact production branch
+        shell: bash
+        run: |
+          test "$(git branch --show-current)" = "sol/gpt56-final-perfect-power-block-20260823"
+          echo "HEAD=$(git rev-parse HEAD)"
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Install exact residual bridge probe
+        shell: bash
+        run: |
+          python3 scripts/apply_residual_bridge_probe.py
+          if grep -nE '^[[:space:]]*gst_end[[:space:]]*$' ErdosTernary2.lean; then
+            echo 'literal gst_end survived residual transformation'
+            exit 1
+          fi
+          grep -n 'have hResidualBad : GSTOmegaInfiniteBadTrace s k m := by' ErdosTernary2.lean
+          grep -n 'have hchildResidual :' ErdosTernary2.lean
+          grep -n 'gst_omega_childZeroSet_nonempty_of_navigation_witness' ErdosTernary2.lean
+      - name: Compile, audit, comparator, and persist exact diagnostic
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          set +e
+          lake build GSTTactic ErdosTernary2 > whole-theorem-build.log 2>&1
+          build_rc=$?
+          set -e
+
+          if [ "$build_rc" -ne 0 ]; then
+            {
+              echo "HEAD=$(git rev-parse HEAD)"
+              echo "BUILD_RC=$build_rc"
+              echo "=== RESIDUAL BUILD ERRORS / TRACE ==="
+              grep -nE 'error:|case |⊢|trace_state|gst_prefix_one_information_bad_descends_inline|warning: ErdosTernary2.lean:16[7-9][0-9][0-9]' whole-theorem-build.log | tail -n 500 || true
+              echo "=== TAIL ==="
+              tail -n 320 whole-theorem-build.log
+            } > .surgery/gpt56-whole-theorem-diagnostic.txt
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add .surgery/gpt56-whole-theorem-diagnostic.txt
+            git commit -m 'Record residual bridge compiler diagnostic [skip ci]' || true
+            if [ "${{ github.event_name }}" = "push" ]; then
+              git push origin HEAD:sol/gpt56-final-perfect-power-block-20260823 || true
+            fi
+            cat .surgery/gpt56-whole-theorem-diagnostic.txt
+            exit "$build_rc"
+          fi
+
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p = Path('ErdosTernary2.lean')
+          bad = []
+          for i, line in enumerate(p.read_text(encoding='utf-8').splitlines(), 1):
+              if line.lstrip().startswith('--'):
+                  continue
+              if re.search(r'\bsorry\b|\badmit\b|\baxiom\b|\bnative_decide\b', line):
+                  bad.append(f'{p}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad))
+              raise SystemExit('transformed production source audit failed')
+          print('transformed production source audit: clean')
+          PY
+
+          set +e
+          bash scripts/comparator.sh > comparator-whole-theorem.log 2>&1
+          comparator_rc=$?
+          set -e
+          if [ "$comparator_rc" -ne 0 ] || ! grep -q 'Your solution is okay!' comparator-whole-theorem.log; then
+            {
+              echo "HEAD=$(git rev-parse HEAD)"
+              echo "BUILD_RC=0"
+              echo "COMPARATOR_RC=$comparator_rc"
+              echo "=== COMPARATOR ==="
+              tail -n 500 comparator-whole-theorem.log
+            } > .surgery/gpt56-whole-theorem-diagnostic.txt
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add .surgery/gpt56-whole-theorem-diagnostic.txt
+            git commit -m 'Record residual bridge comparator diagnostic [skip ci]' || true
+            if [ "${{ github.event_name }}" = "push" ]; then
+              git push origin HEAD:sol/gpt56-final-perfect-power-block-20260823 || true
+            fi
+            cat .surgery/gpt56-whole-theorem-diagnostic.txt
+            exit 1
+          fi
+
+          {
+            echo "HEAD=$(git rev-parse HEAD)"
+            echo "BUILD_RC=0"
+            echo "COMPARATOR_RC=0"
+            echo "Your solution is okay!"
+          } > .surgery/gpt56-whole-theorem-diagnostic.txt
+          cat .surgery/gpt56-whole-theorem-diagnostic.txt

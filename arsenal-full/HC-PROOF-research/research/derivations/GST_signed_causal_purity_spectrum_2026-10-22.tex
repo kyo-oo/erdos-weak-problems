@@ -1,0 +1,506 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\title{GST Signed Causal Purity Spectrum: Open, Projective and Nodal
+Realizations of Every Original-$X$ Hodge Target}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+The previous GST causal graph and holonomy theorems construct arbitrarily
+negative purity gaps on projective singular worlds. Here a DIFFERENT
+geometric causal realization, a free Kummer quotient of an algebraic
+torus twisted by cyclic permutations of $X^m$, yields all positive
+purity gaps on genuinely smooth quasi-projective worlds. We obtain
+an entire three-branch spectrum for the SAME arbitrary smooth
+projective $X$ and any prescribed rational $(p,p)$ Hodge class:
+negative on nodal-projective, zero on smooth-projective, and positive
+on smooth-open worlds. A uniform weight argument proves that every
+nonzero positive-gap target is not the usual Betti cycle class of a
+Chow cycle of the cohomologically matching codimension on the open
+world. The smooth projective middle branch preserves and reflects
+algebraicity on the original $X$. This classifies a concrete
+dimension/causality phenomenon without silently modifying the
+rational Hodge conjecture's smooth-projective domain.
+\end{abstract}
+
+\section{Immutable target, exact inputs and previous GST laws}
+Fix any nonempty smooth projective complex variety $X$
+of dimension $d$, an integer $p\geq0$, and a nonzero
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+The classical all-$X$ statement seeks an actual cycle on X with
+canonical rational Betti class $\alpha$; \emph{no such source is
+assumed here}. Fix any $m\geq2$ and let
+$B=X^m$, $G=C_m$, with $\rho$ the cyclic permutation of $m$
+factors.  The GST source is dimensionless General Space and its
+arbitrary higher-dimensional causal birth relations; the geometric
+realization below is where the complex dimension, cohomology, weight
+and types are actually derived.
+
+Write $V_k=H^k(B,\mathbb Q)$ and
+$K_k=V_k^G$. The previous cyclic and all-graph GST equations
+give the \emph{actual} projective nodal cyclic quotient $Y_m$
+with
+\[
+ P_{Y_m}=(1+t)I_m+A P_B,\quad
+ P_B=P_X^m,\quad A=t^2s^2uv,\quad
+ I_m=P_{K_*}.
+ \tag{1}
+\]
+They also give its actual smooth projective torsion-elliptic
+companion $S_m$ with
+\[
+ P_{S_m}=(1+ts(u+v)+A)I_m.
+ \tag{2}
+\]
+These are geometrically distinct realizations, not a claimed
+interpolating flat family. The Hodge-weight generating polynomial
+$P_Z(t,s,u,v)$ records ordinary Betti degree $k$, mixed-Hodge
+weight $w$, and graded type $(p,q)$ by $t^ks^wu^pv^q$.
+Set $\chi=p-q$, $\delta=w-k$.
+
+\section{New open causal holonomy realization}
+Let $\zeta$ be a primitive complex $m$th root of unity.
+On the smooth quasi-projective product
+$B\times\mathbb G_m$ let $G$ act algebraically by
+\[
+    \sigma(b,z)=(\rho b,\zeta z).
+\]
+The action is \emph{free}, since $\zeta^jz=z$ with $z\ne0$
+forces $m\mid j$, independently of fixed points of $\rho$.
+The quotient
+\[
+ \boxed{\ U_m(X)=(B\times\mathbb G_m)/C_m\ }
+ \tag{3}
+\]
+is an actual smooth quasi-projective complex variety of
+dimension $md+1$; its finite covering is algebraic and etale.
+The map $z\mapsto z^m$ exhibits an open causal loop whose
+monodromy permutes the complete $X^m$ cohomology, not merely
+a rank-one graph label.
+
+\begin{theorem}[Open causal Galois-Hodge genesis]
+For every integer $k$, with negative-index groups zero, the
+rational mixed Hodge structure is
+\[
+ \boxed{H^k(U_m(X),\mathbb Q)
+    \cong K_k\oplus K_{k-1}(-1).}
+ \tag{4}
+\]
+Here $K_k$ has pure weight $k$, whereas
+$K_{k-1}(-1)$ has pure weight $k+1$.
+In particular the open branch has the EXACT generating polynomial
+\[
+ \boxed{P_{U_m}=(1+ts^2uv)\, I_m.}
+ \tag{5}
+\]
+\end{theorem}
+\begin{proof}
+The Galois cover $B\times\mathbb G_m\to U_m$ is finite
+etale of degree $m$; rational transfer yields a mixed-Hodge
+isomorphism to its $G$-invariant cohomology.
+$H^0(\mathbb G_m,\mathbb Q)=\mathbb Q(0)$ and
+$H^1(\mathbb G_m,\mathbb Q)=\mathbb Q(-1)$, of
+cohomological degree one but weight two and type $(1,1)$.
+Multiplication by a complex root of unity is homotopic
+to identity and induces the identity on these groups.
+Rational Kunneth therefore gives (4)--(5); all summands
+are genuine MHS summands of a geometric open realization.
+\end{proof}
+
+\section{Full GST signed purity-gap spectrum: arbitrary depths}
+Let $D_1$ be the genuine rational projective curve with one
+ordinary node. It has degree/weight polynomial $1+t+A$,
+and $H^1(D_1,\mathbb Q)=\mathbb Q(0)$.
+
+For integers $a\geq1$ and $b\geq0$ define the actual
+finite-type complex algebraic world
+\[
+ U_{m;a,b}(X)=U_m(X)\times(\mathbb G_m)^{a-1}\times D_1^b.
+ \tag{6}
+\]
+Its complex dimension is $md+a+b$, it is smooth when
+$b=0$, and it is quasi-projective (not proper).
+Its full mixed-Hodge polynomial is
+\[
+ \boxed{P_{U_{m;a,b}}=
+       I_m(1+ts^2uv)^a(1+t+A)^b.}
+ \tag{7}
+\]
+For pure negative gaps one instead uses the existing genuinely
+projective, generally singular world
+\[
+ N_{m;b}(X)=Y_m(X)\times D_1^{b-1}\quad(b\geq1),
+ \qquad
+ \boxed{P_{N_{m;b}}=((1+t)I_m+A P_B)(1+t+A)^{b-1}.}
+ \tag{8}
+\]
+
+Define the cyclic Hodge lift
+\[
+ \Theta_m(\alpha)=\sum_{i=1}^m\operatorname{pr}_i^*\alpha
+                 \ \in K_{2p}.
+ \tag{9}
+\]
+Choose any closed complex point $x_0\in X(\mathbb C)$,
+and let $s:X\to B$ be the algebraic point insertion
+$s(x)=(x,x_0,\ldots,x_0)$. Let
+$e_{x_0}=c_{x_0}^*$ for the algebraic constant self-map
+$c_{x_0}:X\to X$ with value $x_0$.
+Then $e_{x_0}^2=e_{x_0}$ on rational cohomology and
+\[
+ s^*\Theta_m(\alpha)
+    =\alpha+(m-1)e_{x_0}(\alpha),\qquad
+ \left(I-\frac{m-1}{m}e_{x_0}\right)
+ s^*\Theta_m(\alpha)=\alpha.                \tag{9a}
+\]
+For every $p>0$ the constant-map pullback vanishes,
+so the formula reduces to $s^*\Theta_m(\alpha)=\alpha$.
+For connected $X$ and $p=0$, it reduces to $m\alpha$.
+For DISCONNECTED $X$, where $H^0(X,\mathbb Q)$ need not be
+one-dimensional, (9a) supplies the correct exact rational
+inverse without falsely replacing a component-dependent
+degree-zero class by one scalar. Thus the cyclic lift is
+injective in every codimension on every nonempty original $X$.
+The operator $e_{x_0}$ also acts on genuine Chow classes
+via the algebraic constant-map pullback, so the smooth
+companion's Chow return uses the same explicit inverse.
+
+\begin{theorem}[Signed GST causal Hodge spectrum]
+For EVERY nonzero rational Hodge $\alpha$ on EVERY original $X$,
+EVERY $m\ge2$, and EVERY $a\ge1,b\ge0$, there is an
+explicit nonzero rational class in
+\[
+  \operatorname{Gr}^{W}_{2p+2a}
+       H^{2p+a+b}(U_{m;a,b}(X),\mathbb Q)
+ \quad\text{of type }(p+a,p+a).
+ \tag{10}
+\]
+It is the tensor of $\Theta_m(\alpha)$ with the unique
+top exterior product of the $a$ open-torus $H^1$ generators
+and with the $b$ nodal-graph $H^1$ generators.
+Its precise GST signed invariants are
+\[
+ \boxed{\chi=0,\qquad \delta=a-b.}
+ \tag{11}
+\]
+For EVERY $b\ge1$, the projective nodal world $N_{m;b}$
+instead contains the nonzero rational pure weight-graded sector
+\[
+ \operatorname{Gr}^{W}_{2p}
+ H^{2p+b}(N_{m;b},\mathbb Q)\supset K_{2p},
+ \qquad(\chi,\delta)=(0,-b).
+ \tag{12}
+\]
+These facts hold for every Hodge $\alpha$, whether
+algebraic or not, and do not require a nonzero
+primitive or CM-specific source.
+\end{theorem}
+\begin{proof}
+The $G$-invariant Kunneth summand $\Theta_m(\alpha)$
+is nonzero by (9). The highest cohomological degree of
+the open torus $(\mathbb G_m)^a$ is one-dimensional
+$\mathbb Q(-a)$ in degree $a$ (weight $2a$);
+all $b$ nodal graph factors contribute
+$\mathbb Q(0)$ in degree $b$ (weight zero).
+Finite etale transfer, Kunneth and strictness of MHS
+prove the nonzero claimed weight-graded summand.
+The source has degree $2p+a+b$, bidegree
+$(p+a,p+a)$ and weight $2p+2a$. Direct subtraction
+proves (11).  The negative branch is the $K_{2p}$
+weight-$2p$ summand of the first fold (1), tensored
+with graph lines on $D_1^{b-1}$, giving (12).
+\end{proof}
+
+\begin{corollary}[Every integer gap, including exact cancellation]
+Varying the numbers of causal open births $a$ and nodal births
+$b$ realizes \emph{every integer value of $\delta$}
+using an actual geometric world carrying any fixed $\alpha$.
+Moreover $a=b>0$ gives $(\chi,\delta)=(0,0)$ in a
+nonproper/singular world: even zero charge AND zero gap
+do not logically guarantee the smooth-projective
+hypotheses of the rational Hodge conjecture.
+\end{corollary}
+
+\section{Same complex dimension, three radically different outcomes}
+For any $\ell\ge1$ define three concrete algebraic
+worlds of the \emph{same} complex dimension $md+2\ell$:
+\[
+ \begin{array}{lll}
+ Y^-_\ell=Y_m(X)\times D_1^{2\ell-1}
+   &\text{projective, singular},\\
+ Y^0_\ell=S_m(X)\times(\mathbb P^1)^{2\ell-1}
+   &\text{smooth, projective},\\
+ Y^+_\ell=U_m(X)\times(\mathbb G_m)^{2\ell-1}
+   &\text{smooth, quasi-projective}.
+ \end{array}                                             \tag{13}
+\]
+Their exact entire cohomological generating laws are
+\[
+ \boxed{\begin{aligned}
+ P_-&=((1+t)I_m+A P_B)(1+t+A)^{2\ell-1},\\
+ P_0&=(1+ts(u+v)+A)I_m(1+A)^{2\ell-1},\\
+ P_+&=I_m(1+ts^2uv)^{2\ell}.
+ \end{aligned}}                                          \tag{14}
+\]
+The SAME nonzero original-$X$ target $\alpha$ injects
+into nonzero associated-graded sectors of cohomological
+degree $2p+2\ell$ with
+\[
+ \boxed{
+ \begin{array}{c|c|c|c}
+    \text{world}&(p',q')&w&\delta\\ \hline
+    Y^-_\ell&(p,p)&2p&-2\ell\\
+    Y^0_\ell&(p+\ell,p+\ell)&2p+2\ell&0\\
+    Y^+_\ell&(p+2\ell,p+2\ell)&2p+4\ell&+2\ell.
+ \end{array}}                                             \tag{15}
+\]
+The middle class is the finite-etale descent
+$\widehat\alpha$ on $S_m$, cup-product with
+$\ell$ chosen algebraic hyperplane classes on
+$(\mathbb P^1)^{2\ell-1}$. This is a genuine rational
+pure Hodge class and its algebraicity on $Y^0_\ell$
+is EQUIVALENT to algebraicity of $\alpha$ on X:
+forward direction uses averaged Chow transfer and
+hyperplane products; reverse applies projective
+pushforward along the chosen $\ell$ factors and
+point restriction on the remaining factors, then
+the finite-etale pullback, the original-X point
+insertion, and the idempotent correction (9a).
+
+No implicit comparison between cohomologies of the three
+different worlds is asserted: the injections are three
+independent functorial realizations of the same original-X
+Hodge vector.
+
+\section{Uniform positive-gap NONALGEBRAIC class on smooth varieties}
+\begin{theorem}[Causal topological obstruction to a native Chow source]
+For $\ell\ge1$ and $\alpha\ne0$, the rational class
+$\beta_+=\mathfrak B^+_{\ell}(\alpha)$ constructed in
+$H^{2p+2\ell}(Y^+_\ell,\mathbb Q)$ is NOT in the image
+of the ordinary canonical rational Betti cycle-class map
+\[
+ \mathrm{cl}^{\rm can}:
+ CH^{p+\ell}(Y^+_\ell)_{\mathbb Q}
+       \longrightarrow H^{2p+2\ell}(Y^+_\ell,\mathbb Q).
+ \tag{16}
+\]
+This gives for EVERY original $X$ a smooth complex
+quasi-projective realization with a concrete nonzero,
+rational, diagonal but weight-mismatched cohomology class
+not representable by any algebraic cycle of the matching
+cohomological codimension.
+\end{theorem}
+\begin{proof}
+The fold class $\beta_+$ lies in the pure MHS summand
+$\Theta_m(\alpha)\otimes\mathbb Q(-2\ell)$ of weight
+$2p+4\ell$, with cohomological degree $2p+2\ell$.
+Because $Y^+_\ell$ is smooth quasi-projective,
+the canonical Betti class of every algebraic
+codimension-$(p+\ell)$ cycle lies in the
+weight-$2p+2\ell$, type-$(p+\ell,p+\ell)$
+Hodge part of cohomological degree $2p+2\ell$.
+Equivalently the rational Chow class map after
+Tate twisting is a morphism from pure weight-zero
+classes into the weight-zero part of
+$H^{2p+2\ell}(Y^+_\ell,\mathbb Q(p+\ell))$.
+A nonzero class of weight $2p+4\ell$ cannot
+be equal to such a cycle class because distinct
+MHS weight-graded summands intersect trivially.
+Our class is nonzero by the injective cyclic
+lift and Kunneth, hence is not algebraic.
+\end{proof}
+This is NOT a counterexample to the rational Hodge
+conjecture: the new world is smooth but NONPROPER.
+The result is instead a precise positive-branch
+purity obstruction, directly born from the causal
+topological operation rather than fabricated by
+changing the definition of Hodge structure.
+
+\begin{corollary}[The open causal class cannot be repaired by compactification]
+For every smooth projective compactification
+$j:Y^+_\ell\hookrightarrow\overline{Y^+_\ell}$
+of the smooth open causal world, and every nonzero
+original target $\alpha$, the positive-fold class obeys
+\[
+ \boxed{\quad
+ \beta_+\notin
+ \operatorname{im}\!\left[
+   j^*:H^{2p+2\ell}(\overline{Y^+_\ell},\mathbb Q)
+   \longrightarrow H^{2p+2\ell}(Y^+_\ell,\mathbb Q)
+ \right].\quad}                                        \tag{18a}
+\]
+Thus the positive-gap birth is an intrinsic open-boundary
+cohomological phenomenon; a pure smooth compactification
+cannot retain it as an ordinary degree-preserving class.
+\end{corollary}
+\begin{proof}
+The source cohomology of the smooth projective compactification
+is a pure rational Hodge structure of weight $2p+2\ell$.
+Algebraic pullback $j^*$ respects the mixed Hodge structure,
+so its image lies in the weight-$2p+2\ell$ part of the open
+target cohomology. The nonzero class $\beta_+$ is in an
+independent pure weight-$2p+4\ell$ Kunneth summand, and
+$\ell\ge1$ makes these weights unequal. Strictness and the
+explicit weight direct sum prove the stated exclusion.
+\end{proof}
+
+\section{A cohomological causal-residue decoder for EVERY target}
+The positive open birth is not merely an injection: its complete
+original-X Hodge data can be recovered \emph{cohomologically} by an
+explicit residual operation. This sharpens the source/target
+interpretation of GST N-cohomology independent hole readouts.
+
+Write $a\ge1$ and initially $b=0$.
+The degree-$m$ Kummer map on the first torus coordinate
+is $w=z^m$, and the invariant rational cohomology class
+\[
+ \lambda_1={1\over m}\left[{1\over2\pi i}{dw\over w}\right]
+ \in H^1(U_m,\mathbb Q)
+\]
+pulls back to the normalized rational class
+$[(2\pi i)^{-1}dz/z]$ on the covering product.
+For $i=2,\ldots,a$, take the usual normalized
+$\lambda_i=[(2\pi i)^{-1}dz_i/z_i]$ on the other
+torus coordinates. Their exterior product
+$\Lambda_a=\lambda_1\wedge\cdots\wedge\lambda_a$
+is nonzero, of cohomological degree $a$, weight $2a$
+and type $(a,a)$.
+
+The invariant class $\Theta_m(\alpha)$ descends uniquely
+to a rational class $\alpha_U$ along the finite etale
+$B\times\mathbb G_m\to U_m$, by rational transfer.
+Thus the \emph{actual} born topological class can be
+written without a noncanonical basis as
+\[
+ \boxed{\qquad
+ \beta^+_a(\alpha)=\alpha_U\smile\Lambda_a
+    \ \in H^{2p+a}\bigl(U_m\times(\mathbb G_m)^{a-1},
+                   \mathbb Q\bigr).
+ \qquad}                                                \tag{18}
+\]
+Let $\pi_a:B\times(\mathbb G_m)^a\to
+U_m\times(\mathbb G_m)^{a-1}$ be the finite cover.
+Projection to the last $H^a((\mathbb G_m)^a)$ Kunneth
+coefficient defines a rational weight-graded map
+\[
+ \operatorname{Res}_a:
+ H^{2p+a}\bigl(U_m\times(\mathbb G_m)^{a-1}\bigr)
+ \xrightarrow{\pi_a^*}
+ H^{2p+a}\bigl(B\times(\mathbb G_m)^a\bigr)
+ \longrightarrow H^{2p}(B)(-a).
+\]
+It obeys the exact \emph{source-address recovery law}
+\[
+ \boxed{\quad
+ \operatorname{Res}_a\beta^+_a(\alpha)
+         =\Theta_m(\alpha)\otimes\mathbf1(-a).
+ \quad}                                                \tag{19}
+\]
+Untwisting by the specified normalized torus class,
+then pulling back along the genuine point insertion
+$s:X\hookrightarrow B$, followed by the explicit
+idempotent correction $(I-(m-1)e_{x_0}/m)$,
+returns precisely $\alpha$ even when $X$ is disconnected.
+This is a full-$\alpha$ cohomological left inverse.
+
+The Tate twist $(-a)$ is essential: the residue lowers
+ordinary cohomological degree by $a$ and MHS weight by
+$2a$.  Erasing it would create a spurious contradiction
+with purity. Even though the recovered cohomology equals
+$\alpha$, the residue of a \emph{non-Chow} positive-gap
+class cannot by itself provide a cycle of $CH^p(X)$.
+The theorem supplies a verified cohomological decoder,
+not an unproved motivic or Chow realization map.
+
+\section{The strict weight/causality firewall}
+For a pure weight-$w$ rational MHS summand and a
+smooth projective target with pure cohomological
+degree $k$, every degree-preserving MHS morphism
+from the former to the latter is zero when $w\ne k$.
+Indeed morphisms respect the Hodge and weight
+filtrations, and pure MHS of unequal weights
+have no nonzero morphisms. Hence neither an
+unshifted negative-fold class of weight $k-r$
+nor an unshifted positive-fold class of weight
+$k+r$ can be converted into a nonzero pure
+smooth-projective degree-$k$ class by a
+degree-preserving MHS morphism.
+Correspondences with explicit degree shifts,
+Gysin maps and Tate twists must be typed
+separately; this theorem does NOT forbid them.
+
+At the GRADING level the two elementary GST births are
+\[
+ \begin{aligned}
+ O:(k,p,q)&\mapsto(k+1,p+1,q+1),
+    &\Delta(\chi,\delta)&=(0,+1),\\
+ D:(k,p,q)&\mapsto(k+1,p,q),
+    &\Delta(\chi,\delta)&=(0,-1).
+ \end{aligned}
+\]
+They commute, yielding for every $a,b\in\mathbb N$
+\[
+ \boxed{F_{a,b}(k,p,q)
+  =(k+a+b,p+a,q+a),\quad
+  \chi(F)=\chi,\quad
+  \delta(F)=\delta+a-b.}                               \tag{17}
+\]
+The composition law is
+$F_{a,b}\circ F_{c,d}=F_{a+c,b+d}$.
+This is a typed all-arity causal signature law in the
+existing \texttt{GSTGradedWorldAlgebra.lean} ontology.
+The preceding algebraic quotient constructions supply
+its true geometric meaning and specify which versions
+are smooth/projective/open/singular; equation (17)
+alone does NOT assert algebraic Hodge existence.
+
+\section{GST causal monodromy integration: a graded commutation theorem}
+The latest existing \texttt{GSTGradedWorldAlgebra.lean} also encodes
+the limiting mixed-Hodge monodromy weight-lowering operation
+$N_r(k,p,q)=(k,p-r,q-r)$, defined without truncation for
+$0\le r\le\min(p,q)$. Unlike the Tate-stabilization fold,
+it fixes cohomological degree while reducing weight by $2r$.
+The two new causal topology operators commute with its
+\emph{graded signature}:
+\[
+ \boxed{\quad
+ N_r F_{a,b}(k,p,q)=F_{a,b}N_r(k,p,q),\quad
+ \delta(N_r F_{a,b})=\delta+a-b-2r,\quad
+ \chi(N_r F_{a,b})=\chi.
+ \quad}                                                \tag{20}
+\]
+Proof: both sides have coordinates
+$(k+a+b,p+a-r,q+a-r)$, and subtracting the three
+coordinates gives the invariants. This identity is
+uniform for all arities and all admissible $r$, and
+was checked independently with exact Wolfram symbolic
+integer polynomial algebra. In Lean it can be added
+using the existing actual \texttt{monodromyLower} definition
+and the new \texttt{signedCausalFold} definition, not
+by inventing another carrier or an axiom.
+\emph{This is a theorem on causal/Hodge signatures:}
+the existence of a geometric degeneration whose genuine
+monodromy commutes with a particular torus/node fold
+would require a separate compatible family construction.
+
+\section{Exact computation and evidence}
+The companion Wolfram script tests the full
+equations (14) by exact finite cyclic character sums
+with Koszul signs, positivity of coefficients, and
+presence of the three selected degree/weight/bidegree
+monomials for $X=\mathbb P^1$ and $X$ elliptic over
+multiple arities and depths. Its finite results check
+the algebra, not arbitrary-X geometric scheme semantics.
+The general proofs are (3)--(17).
+
+\textbf{Outcome:} uniform geometric signed-gap spectrum
+with a new universally nonalgebraic smooth-open
+rational class, plus a smooth-projective algebraicity
+reflection bridge. No new exact cycle for every
+original-X rational Hodge target is deduced.
+\end{document}

@@ -1,0 +1,321 @@
+⚠ [8697/8699] Built GSTTactic (41s)
+warning: GSTTactic.lean:69:5: Variable name `hd2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: GSTTactic.lean:75:5: Variable name `hd2` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd2
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+✖ [8698/8699] Building ErdosTernary2 (84s)
+trace: .> LEAN_PATH=/home/runner/work/erdosternary2/erdosternary2/.lake/packages/Cli/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/batteries/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/Qq/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/aesop/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/proofwidgets/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/importGraph/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/LeanSearchClient/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/plausible/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/packages/mathlib/.lake/build/lib/lean:/home/runner/work/erdosternary2/erdosternary2/.lake/build/lib/lean /home/runner/.elan/toolchains/leanprover--lean4---v4.33.0-rc2/bin/lean /home/runner/work/erdosternary2/erdosternary2/ErdosTernary2.lean -o /home/runner/work/erdosternary2/erdosternary2/.lake/build/lib/lean/ErdosTernary2.olean -i /home/runner/work/erdosternary2/erdosternary2/.lake/build/lib/lean/ErdosTernary2.ilean -c /home/runner/work/erdosternary2/erdosternary2/.lake/build/ir/ErdosTernary2.c --setup /home/runner/work/erdosternary2/erdosternary2/.lake/build/ir/ErdosTernary2.setup.json --json
+warning: ErdosTernary2.lean:239:33: Variable name `hm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:472:57: Variable name `hb` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:472:70: Variable name `hb3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hb3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:1220:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc2_mod27]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1229:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc3_mod27]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1255:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc2_mod81]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1264:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc3_mod81]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1273:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h_t1, h_t2, Nat.mod_mod, hc4_mod81]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:1309:38: Variable name `hm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+info: ErdosTernary2.lean:2687:0: 'two_pow_ne_three_pow' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2688:0: 'non_cantor_product_b_mod27_13' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2689:0: 'non_cantor_product_b_mod27_25' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2690:0: 'non_cantor_product_b_mod81_4' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2691:0: 'non_cantor_product_b_mod81_49' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2692:0: 'true_duality_theory' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2766:0: 'binom_first_order' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2767:0: 'digit_formula' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2810:0: 'c_tower_stabilizes' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2811:0: 'c_mod_eq_c_stable' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2865:0: 'has_two_at_position' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:2931:0: 'has_two_mul3' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2932:0: 'has_two_mul_3pow' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2933:0: 'has_two_one_plus_3pow_mul' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2934:0: 'has_two_lift_base' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:2976:0: 'hasTwoInFirstK_imp_hasTernaryTwo' depends on axioms: [propext, Classical.choice, Quot.sound]
+warning: ErdosTernary2.lean:3055:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h3k, h3_2k, Nat.mod_mod, hih]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:3080:40: This simp argument is unused:
+  Nat.zero_add
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [Nat.add_mod, h3k, h3_2k, Nat.mod_mod, hih]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+info: ErdosTernary2.lean:3169:0: 'cascade_lift' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3242:0: 'cascade_lift_no_two_false' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3243:0: 'erdos_ternary_2_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3268:0: 'true_duality_theory_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3286:0: 'bridge_crossing_explicit' depends on axioms: [propext, Quot.sound]
+info: ErdosTernary2.lean:3287:0: 'erdos_ternary_2_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3288:0: 'true_duality_theory_full' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3312:0: 'bridge_crossing_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+info: ErdosTernary2.lean:3355:0: 'parity_lemma' depends on axioms: [propext, Quot.sound]
+warning: ErdosTernary2.lean:3852:31: Variable name `hR_mod3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_mod3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:3852:53: Variable name `hR_has` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_has
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6034:35: This simp argument is unused:
+  Nat.zero_div
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [gstCarry, gstDigit, gstStepCarry, Nat.pow_zero, Nat.pow_one, Nat.mod_one, Nat.mul_zero,
+    Nat.div_one, Nat.zero_add]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:6126:5: Variable name `h_bridge` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_bridge
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6127:5: Variable name `hR_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6127:23: Variable name `hR_mod3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_mod3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6129:5: Variable name `hC_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6142:5: Variable name `h_bridge` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_bridge
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6143:5: Variable name `hR_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6143:23: Variable name `hR_mod3` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hR_mod3
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6144:19: Variable name `hstart_pos` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hstart_pos
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6144:44: Variable name `hstart_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hstart_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6145:5: Variable name `hC_lt` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hC_lt
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6146:5: Variable name `h_has` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _h_has
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6147:5: Variable name `hd_start` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hd_start
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:6334:15: Variable name `hp1` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hp1
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:7010:21: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7016:46: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7017:23: This simp argument is unused:
+  not_not
+
+Hint: Omit it from the simp argument list.
+  [apply] simp only [GSTOmegaBadSet, GSTOmegaZeroSet, Set.mem_setOf_eq, Set.mem_compl_iff]
+
+Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+warning: ErdosTernary2.lean:7158:2: Try this: intro m hm j hj
+warning: ErdosTernary2.lean:7227:36: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7234:5: Variable name `hk` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hk
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:7234:18: Variable name `hm` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hm
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+warning: ErdosTernary2.lean:7356:29: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7357:2: aesop: maximum number of rule applications (200) reached. Set the 'maxRuleApplications' option to increase the limit.
+error: ErdosTernary2.lean:7340:40: unsolved goals
+k m : ℕ
+hk : 1 ≤ k
+hm : 1 ≤ m
+j : ℕ
+hm3 : ¬m % 3 = 0
+hboundary : GSTResidualBoundary 1 k (m % 3)
+hchild : GSTNavigationWitness (gstNavigationConstant (1 + k) m)
+hbad : GSTOmegaInfiniteBadTrace 1 k m
+hj : j ∈ GSTOmegaChildZeroSet 1 k m
+horigin : (gstOmega 1 k m j).paradoxEnergy = 4 ^ (3 ^ (1 + k) * m)
+hstep : gstOmega 1 k m (j + 1) = gstOmegaStep 64 (gstOmega 1 k m j)
+hseeded :
+  GSTSeededAffineBadTrace (4 * (c 1 % 3 ^ k) / 3 ^ k)
+    (c 1 / 3 ^ k + gstNavigationConstant (1 + k) m + 9 * c 1 * gstNavigationConstant (1 + k) m)
+heecho :
+  c 1 / 3 ^ k + 64 * gstNavigationConstant (1 + k) m =
+    c 1 / 3 ^ k + gstNavigationConstant (1 + k) m + 9 * c 1 * gstNavigationConstant (1 + k) m
+hblocks : ∀ (q : ℕ), GSTOmegaBadBlock 1 k m q
+hbadChild : ¬GSTOmegaGatePolynomial (gstOmega 1 k m j) = 0
+left : gstNavigationConstant 1 (1 + 3 ^ k * m) = c 1 + 3 ^ k * 64 * gstNavigationConstant (1 + k) m
+right : m < 1 + 3 ^ k * m
+⊢ False
+warning: ErdosTernary2.lean:7379:29: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7380:2: aesop: maximum number of rule applications (200) reached. Set the 'maxRuleApplications' option to increase the limit.
+error: ErdosTernary2.lean:7365:40: unsolved goals
+k m : ℕ
+hk : 1 ≤ k
+hm : 1 ≤ m
+j : ℕ
+hm3 : ¬m % 3 = 0
+hboundary : GSTResidualBoundary 3 k (m % 3)
+hchild : GSTNavigationWitness (gstNavigationConstant (3 + k) m)
+hbad : GSTOmegaInfiniteBadTrace 3 k m
+hj : j ∈ GSTOmegaChildZeroSet 3 k m
+horigin : (gstOmega 3 k m j).paradoxEnergy = 4 ^ (3 ^ (3 + k) * m)
+hstep : gstOmega 3 k m (j + 1) = gstOmegaStep 18014398509481984 (gstOmega 3 k m j)
+hseeded :
+  GSTSeededAffineBadTrace (4 * (c 3 % 3 ^ k) / 3 ^ k)
+    (c 3 / 3 ^ k + gstNavigationConstant (3 + k) m + 81 * c 3 * gstNavigationConstant (3 + k) m)
+heecho :
+  c 3 / 3 ^ k + 18014398509481984 * gstNavigationConstant (3 + k) m =
+    c 3 / 3 ^ k + gstNavigationConstant (3 + k) m + 81 * c 3 * gstNavigationConstant (3 + k) m
+hblocks : ∀ (q : ℕ), GSTOmegaBadBlock 3 k m q
+hbadChild : ¬GSTOmegaGatePolynomial (gstOmega 3 k m j) = 0
+left : gstNavigationConstant 3 (1 + 3 ^ k * m) = c 3 + 3 ^ k * 18014398509481984 * gstNavigationConstant (3 + k) m
+right : m < 1 + 3 ^ k * m
+⊢ False
+warning: ErdosTernary2.lean:7403:29: `Set.mem_setOf_eq` has been deprecated: Use `Set.mem_ofPred_eq` instead
+warning: ErdosTernary2.lean:7404:2: aesop: maximum number of rule applications (200) reached. Set the 'maxRuleApplications' option to increase the limit.
+error: ErdosTernary2.lean:7389:40: unsolved goals
+s k m : ℕ
+hs : 2 ≤ s
+j : ℕ
+hs3 : ¬s = 3
+hk : 1 ≤ k
+hm : 1 ≤ m
+hm3 : ¬m % 3 = 0
+hboundary : GSTResidualBoundary s k (m % 3)
+hchild : GSTNavigationWitness (gstNavigationConstant (s + k) m)
+hbad : GSTOmegaInfiniteBadTrace s k m
+hj : j ∈ GSTOmegaChildZeroSet s k m
+horigin : (gstOmega s k m j).paradoxEnergy = 4 ^ (3 ^ (s + k) * m)
+hstep : gstOmega s k m (j + 1) = gstOmegaStep (4 ^ 3 ^ s) (gstOmega s k m j)
+hseeded :
+  GSTSeededAffineBadTrace (4 * (c s % 3 ^ k) / 3 ^ k)
+    (c s / 3 ^ k + gstNavigationConstant (s + k) m + 3 ^ (s + 1) * c s * gstNavigationConstant (s + k) m)
+heecho :
+  c s / 3 ^ k + 4 ^ 3 ^ s * gstNavigationConstant (s + k) m =
+    c s / 3 ^ k + gstNavigationConstant (s + k) m + 3 ^ (s + 1) * c s * gstNavigationConstant (s + k) m
+hblocks : ∀ (q : ℕ), GSTOmegaBadBlock s k m q
+hbadChild : ¬GSTOmegaGatePolynomial (gstOmega s k m j) = 0
+left : gstNavigationConstant s (1 + 3 ^ k * m) = c s + 3 ^ k * 4 ^ 3 ^ s * gstNavigationConstant (s + k) m
+right : m < 1 + 3 ^ k * m
+⊢ False
+warning: ErdosTernary2.lean:7798:21: Variable name `hA` is not explicitly referenced.
+
+Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+  [apply] _hA
+
+Note: This linter can be disabled with `set_option linter.unusedVariables false`
+error: Lean exited with code 1
+Some required targets logged failures:
+- ErdosTernary2
+error: build failed

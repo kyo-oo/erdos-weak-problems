@@ -1,0 +1,34 @@
+name: GPT6 GST Direct Residual Omega All-Depth Terminalization
+on:
+  push:
+    branches:
+      - gpt6/erdos-omega-terminal-normalform-20261029
+    paths:
+      - GSTOmegaResidualFiniteSupport.lean
+      - .github/workflows/gpt6_omega_residual_terminal.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean and original Omega monolith
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build ErdosTernary2
+          lake env lean -o .lake/build/lib/lean/GSTOmegaAbsorbingZero.olean GSTOmegaAbsorbingZero.lean
+      - name: Kernel-check original residual Omega bad iff source-specific preterminal
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTOmegaResidualFiniteSupport.lean 2>&1 | tee residual-omega-terminal.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' residual-omega-terminal.log
+          echo GST_RESIDUAL_OMEGA_SOURCE_TERMINAL_GREEN=1

@@ -1,0 +1,35 @@
+name: GPT6 Arbitrary Short-Seed Physical Wave Kernel
+on:
+  push:
+    branches: [gpt6/problem406-seventh-trit-worldtrace-20261029]
+    paths:
+      - GSTProblem406ShortSeedPhysicalWave.lean
+      - .github/workflows/gpt6_hgate_short_seed_physical_wave.yml
+      - lakefile.toml
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  kernel:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Prepare exact GST Lean dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+          lake build GSTFourPowerThirdWave GSTWorldtraceBlockLift GSTWorldtraceCoeffStability
+      - name: Kernel-check arbitrary seed and exact axiom dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake env lean GSTProblem406ShortSeedPhysicalWave.lean 2>&1 | tee short-seed-physical-wave.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' short-seed-physical-wave.log
+          grep -F 'commonTwo_of_short_seed_and_multiplier_two' short-seed-physical-wave.log
+          grep -F 'thirdWave_of_short_seed_and_multiplier_two' short-seed-physical-wave.log
+          echo GST_SHORT_SEED_PHYSICAL_GATE_KERNEL_PASS=1

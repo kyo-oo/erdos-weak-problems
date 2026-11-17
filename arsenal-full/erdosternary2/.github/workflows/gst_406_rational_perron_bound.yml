@@ -1,0 +1,35 @@
+name: GST 406 Exact Rational Perron Entropy Proof
+
+on:
+  push:
+    branches: [gpt6/problem406-rowtwo-first-hit-exact-20261030]
+    paths:
+      - GSTProblem406RationalPerronBound.lean
+      - lakefile.toml
+      - .github/workflows/gst_406_rational_perron_bound.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean/mathlib
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          export PATH="$HOME/.elan/bin:$PATH"
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          lake update
+          lake exe cache get
+      - name: Strict exact kernel and axiom audit
+        run: |
+          set -euo pipefail
+          lake build GST406RationalPerronBound 2>&1 | tee entropy-build.log
+          lake env lean GSTProblem406RationalPerronBound.lean 2>&1 | tee entropy-axioms.log
+          ! grep -E 'error:|sorryAx|unsolved goals|unknown identifier|declaration uses .sorry.' entropy-build.log entropy-axioms.log
+          grep -F "'GSTProblem406RationalPerronBound.original_source_entropy_2482' depends on axioms:" entropy-axioms.log
+          echo GST406_PERRON_2482_KERNEL_PASS=1

@@ -1,0 +1,65 @@
+name: Mathbox K3 Diagonal Actual Stage2G Geometry
+on:
+  push:
+    branches: [research/mathbox-k3-diagonal-primitive-20261015]
+    paths:
+      - GSTK3DiagonalActualStage2G.lean
+      - .github/workflows/gst-mathbox-k3-stage2g.yml
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-mathbox-k3-stage2g-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 75
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and retrieve Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-k3-stage2g
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel check actual rational codimension-two cycle and primitive Hodge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTK3Stage2G"
+          roots = ["GSTK3DiagonalPrimitive", "GSTK3DiagonalActualStage2G"]
+          EOF
+          if lake build GSTK3Stage2G > k3-stage2g-lean.log 2>&1; then
+            echo 'LEAN PASSED: actual Stage-2G K3 native cycle primitive'
+          else
+            grep -nE 'error:|sorryAx|✖' k3-stage2g-lean.log | tail -n 140 || true
+            tail -n 150 k3-stage2g-lean.log
+            exit 1
+          fi
+          if grep -E 'declaration uses .sorry.|sorryAx' k3-stage2g-lean.log; then
+            exit 1
+          fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: gst-mathbox-k3-stage2g-lean-log
+          path: k3-stage2g-lean.log
+          if-no-files-found: warn

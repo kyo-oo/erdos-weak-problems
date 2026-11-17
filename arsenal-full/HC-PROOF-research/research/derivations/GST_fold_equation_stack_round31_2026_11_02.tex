@@ -1,0 +1,1142 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Img}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\F}{\mathbb F}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\Cl}{\operatorname{cl}}
+\newcommand{\cyc}{C_m}
+\newcommand{\GL}{\operatorname{GL}}
+\newcommand{\SL}{\operatorname{SL}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Spec}{\operatorname{Spec}}
+\newcommand{\CH}{\operatorname{CH}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{The Fold-Equation Stack\\
+\large Round 31: the emergence layer, the section theorem, the split-deck
+formula, the square-zero dressing law, and the integral gauge at $2m$}
+\author{The campaign (rounds 1--30) and this round's strike}
+\date{2026-11-02 (Round 31)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This document is the complete mathematical record of Round 31, the
+\emph{fold-equation stack}: the operator's directive --- take the fold
+equations themselves, force the Hodge structure out of them, and exclude
+the counterexamples --- executed at exactly the strength the mathematics
+supports. The stack, each layer proven and certified
+(\texttt{fold\_equation\_stack\_checks.py}, 36 checks, exit 0,
+deterministic double-run byte-identical, exact arithmetic, zero floats):
+\textbf{(1) the emergence layer} --- every $2$-torsion-free lattice
+carrying $\gamma^2=-1$ (the fold equation) is canonically a
+$\Z[i]$-module; the bigrading, the conjugation theorem, the door group
+$(\Z/2)^s$, the order formula $|\det(\gamma-1)|=2^s$, and the parity
+door R5 are laws of the fold equation alone, not of the committed model
+(certificate family A, on randomly conjugated $\Z[i]^s$ decks);
+\textbf{(2) the section theorem} --- the lifting cocycle $c_\nu$ of
+Round 28 is a law of \emph{any} semidirect $C_4$-extension with
+deck-pulled content: the bar identity uses only the semidirect law
+(family B); \textbf{(3) the split-deck formula} ---
+$H^1(C_4;\Hom(\Gamma,A))\cong(\Z/2)^{ts}$ for split decks, with the
+pair-block vanishing and the $\Z/4$ glue control (families C, E);
+\textbf{(4) the square-zero dressing law} --- the rotation lattice
+$L=\ker(\Phi^2+1)$ has rank $24$ with the transparent block law, and
+every equivariant realization span is square-zero: the dressing
+$M=I+X(c)$ is a homomorphic lift of the additive cocycle, so the
+multiplicative two-cell carries \emph{no quadratic obstruction}
+(family F, with the honest per-span scope receipt); \textbf{(5) THE
+INTEGRAL GAUGE AT $2m$} --- the primitive equation
+$(\gamma_{\mathrm{act}}-1)\sigma=2f_w$ has the integral solution
+$\sigma(v)=v_{f_1}(W_R-W_I)$; the additive two-cell obeys
+$\delta s=2c_\nu$; and the doubled dressed transport is exactly
+gauge-trivial, $\delta S=M_2$ with
+$S\colon G_\bullet\to\SL_8(\Z)$ integral and normalized --- the
+complete $1152$-cell basis sweep closing the universal quantifier,
+uniform over all $24$ realizations, with the scale-$1$ halves
+obstruction as the hostile receipt that the kill at $2m$ is
+load-bearing (family G); \textbf{(6) the $\mu_2$ layer} ---
+$H^p(C_4;\mu_2)=\mu_2$ for every $p$ and the gerbe ambient
+$H^3(G_\bullet;\mu_2)=\F_2^{71}$ recomputed genuinely through the
+wedge matrices of the mod-$2$ letter deck (family H). The corollary is
+the round's theorem: \textbf{the residual $\mu_2$-class of the doubled
+dressed transport --- the boundary-(a) object that Round 29 named as
+the next strike target --- is computed: zero.} The stratum theorem
+assembles the stack into the forcing argument: no counterexample
+exists in the fold-carried stratum; the counterexample locus is
+confined to the fold-free stratum, the input axis (ledger 085), where
+the deck-existence itself remains the single open object. Q2 is not
+claimed; the closing string is not emitted.
+\end{abstract}
+
+\tableofcontents
+\bigskip
+
+\section*{Disposition (on the face)}
+\addcontentsline{toc}{section}{Disposition (on the face)}
+
+\begin{itemize}
+\item \textbf{Q1 (the framework theorem, FS$_\forall$ on the committed
+world model)}: \emph{proven and certified}, CI-green (unchanged;
+Round 30 state). This round extends the certified chain \emph{through
+the multiplicative layer}: the nonabelian two-cell of the doubled
+dressed transport is integrally gauge-trivial
+(Theorem~\ref{thm:gauge}), so the residual $\mu_2$-class
+of Round 29's boundary (a) \emph{vanishes identically at the committed
+model} (Corollary~\ref{cor:residual-zero}). Certificate
+\texttt{fold\_equation\_stack\_checks.py}: 36 checks, exit 0,
+deterministic double-run byte-identical.
+\item \textbf{Q2 (the Clay statement)}: \emph{not claimed}. The
+one-directional reduction stands (Round 30, Theorem 12 there); the
+input axis is unchanged. What this round adds is the stratum theorem
+(Theorem~\ref{thm:stratum}): within the committed universe, the
+counterexample locus is now confined to the fold-free stratum --- every
+fold-carried input is discharged end-to-end through the certified
+stack, the multiplicative layer included.
+\item \textbf{The closing string} (\texttt{CONJECTURE IS PROVEN} in the
+Clay sense): \emph{not emitted}. The only content it could carry at
+the present state --- the assertion that the input-axis items are
+discharged --- is false; the deck-existence at general input is open,
+and this document does not override the campaign's crucible.
+\end{itemize}
+
+\section{The statement system and the round's position}\label{sec:position}
+
+The two questions are separated as in Round 30: \textbf{Q1} is
+FS$_\forall$ on the committed world model (every Hodge input
+$(X,p,\alpha)$ of the model satisfies $m^\ast>0$, hence $\alpha$ is
+algebraic through the committed Theorem N conduit);
+\textbf{Q2} is the Clay statement (every rational $(p,p)$ class on
+every smooth projective $X$ is rational-algebraic). Round 30
+transported the deck--door mechanism to every product world $E\times Y$
+at the lattice level and recorded the corpus map; Round 29
+(commit \texttt{ec1d8b1}) breached the committed-deck boundaries
+(a)--(d): the uniform kill at every decked input, the honest-invariant
+dichotomy, the post-strip sector $H^2(G_\bullet;A)=\Z^{12}\oplus(\Z/2)^6$,
+the gerbe ambient $H^3(G_\bullet;\mu_2)=\F_2^{71}$, and the dressed
+two-cell --- a genuine nonabelian $2$-cocycle, $24/24$ realizations ---
+with \emph{the residual $\mu_2$-class named as the next strike target}.
+
+Round 31 takes that target, and takes it through the operator's
+directive: the fold equations themselves, the Hodge structure forced
+out of them, the counterexamples excluded. The execution is the
+fold-equation stack of this document: the emergence layer (the fold
+equation alone forces the Gaussian module structure, the bigrading, the
+conjugation law, and the door), the forced-kill layer (the section
+theorem and the split-deck formula: the lifting and the mixed-layer
+kill are laws of the semidirect structure, not of the committed
+model), the square-zero dressing law (the multiplicative obstruction
+quadratic in the cocycle does not exist), and the integral gauge at
+$2m$ (the doubled transport trivializes \emph{integrally}, in
+$\SL_8(\Z)$, so the $\mu_2$-boundary class vanishes). The stratum
+theorem assembles the stack; the boundary section states exactly what
+remains.
+
+\paragraph{Notation.} $C_4=\langle\gamma\rangle$; the periodic
+resolution gives $H^2(C_4;M)=M^{C_4}/NM$ and
+$H^1(C_4;M)=\ker N/(\gamma-1)M$ with $N=1+\gamma+\gamma^2+\gamma^3$.
+$\Z[i]$ is the Gaussian ring, $N(z)=z\bar z$ its norm,
+$(1-i)$ the prime over $2$ with residue field $\Z[i]/(1-i)\cong\F_2$.
+The committed world model is the eight-letter Gaussian lattice world:
+letters $\Z^8$ with basis
+$e_0,f_0,e_1,f_1,e_2,f_2,e_3,f_3$, the deck
+$\gamma=\mathrm{rot}(e_0,f_0)\oplus\mathrm{id}$ (the matrix $G$ of
+\S\ref{sec:committed}), the content (Weil) plane
+$A=\Z W_R\oplus\Z W_I\cong\Z[i]$ with the content rotation
+$\mathrm{CONT}$, the polarization
+$\theta=\sum_j e_j\!\wedge f_j$, and the group
+$G_\bullet=\Gamma\rtimes C_4$ with
+$\Gamma\cong\Z[i]\oplus\Z^6$ (one moved pair, six fixed letters).
+$W_R,W_I=\operatorname{Re,Im}\Omega$,
+$\Omega=\prod_{j=0}^3(e_j+if_j)$.
+
+\section{The fold equation and the emergence layer}\label{sec:emergence}
+
+\begin{definition}[The fold equation]\label{def:fold}
+Let $M$ be a finitely generated free $\Z$-module. A \emph{fold} on $M$
+is an integral operator $\gamma\in\End(M)$ with
+$\gamma^2=-\mathrm{id}_M$. The pair $(M,\gamma)$ is a \emph{fold
+lattice}. The \emph{fold equations} are the identities forced on the
+cohomology of $C_4=\langle\gamma\rangle$ by this single law.
+\end{definition}
+
+\subsection{The Gaussian structure theorem}
+
+\begin{theorem}[The Gaussian structure; every fold lattice is a
+{$\Z[i]$}-module]\label{thm:gaussian}
+Let $(M,\gamma)$ be a fold lattice. Then $M$ carries a canonical
+$\Z[i]$-module structure by $i\cdot m:=\gamma m$, and
+$M\cong\Z[i]^s$ with $s=\tfrac12\operatorname{rank}M$. Conversely every
+$\Z[i]$-module is a fold lattice for $\gamma=$ multiplication by $i$.
+\end{theorem}
+
+\begin{proof}
+$i\cdot(i\cdot m)=\gamma^2m=-m=(-1)\cdot m$ and the $\Z$-module
+axioms are exactly the endomorphism axioms, so the assignment
+$i\mapsto\gamma$ extends $\Z$-linearly to a ring map
+$\Z[i]\to\End(M)$. $M$ is torsion-free over $\Z$ by hypothesis; it is
+torsion-free over $\Z[i]$ because $z\cdot m=0$ with $z=a+bi\ne 0$
+gives $N(z)\,m=\bar z\,(z\cdot m)=0$, i.e.\
+$(a^2+b^2)m=0$, hence $m=0$. $\Z[i]$ is a Euclidean domain, so the
+finitely generated torsion-free module $M$ is free:
+$M\cong\Z[i]^s$, and $\operatorname{rank}_\Z M=2s$. The converse is
+immediate.
+\end{proof}
+
+\begin{corollary}[The bigrading; the Hodge skeleton emerges]
+\label{cor:bigrading}
+For every fold lattice $(M,\gamma)$:
+\[
+M\otimes_\Z\C\;=\;M^{1,0}\oplus M^{0,1},\qquad
+M^{1,0}=\ker(\gamma-i),\quad M^{0,1}=\ker(\gamma+i),
+\]
+with $\dim_\C M^{1,0}=\dim_\C M^{0,1}=s$, complex conjugation swapping
+the two summands, and $\gamma$ acting by $+i$ on $M^{1,0}$ and $-i$ on
+$M^{0,1}$. This is exactly the skeleton of a weight-one Hodge
+structure: the fold equation forces the bigrading, the conjugation,
+and nothing else (Remark~\ref{rem:emergence-scope}).
+\end{corollary}
+
+\begin{proof}
+$M\cong\Z[i]^s$ by Theorem~\ref{thm:gaussian}; over $\C$,
+$\C\otimes_{\Z[i]}M\cong\C^s$ splits by the two idempotents
+$\tfrac12(1\mp i\gamma)$, which is the displayed decomposition. The
+conjugation $\overline{m\otimes z}$ swaps
+$\gamma$-eigenvalues $\pm i$. The dimensions are equal because
+$\gamma^2=-1$ makes the eigenvalues paired.
+\end{proof}
+
+\begin{theorem}[The conjugation theorem, universal rational form]
+\label{thm:conjugation}
+Let $(M,\gamma)$ be a fold lattice and $0\ne v\in M\otimes\Q$. Then
+$v$ is not purely one-typed: neither $\gamma v=iv$ nor
+$\gamma v=-iv$ holds in $M\otimes\Q$.
+\end{theorem}
+
+\begin{proof}
+$\gamma v\in M\otimes\Q$; if $\gamma v=\pm iv$ with $v\ne0$ then
+$\pm i=\gamma v/v\in\Q$, false. (Equivalently: the minimal polynomial
+$x^2+1$ of $\gamma$ over $\Q$ has no rational root, so $\gamma$ has no
+rational eigenvector.)
+\end{proof}
+
+This is the universal form of Round 30's conjugation theorem (there:
+integral classes are never purely $(p-1,p)$-typed; here: the statement
+is a law of the fold equation on every fold lattice, certificate
+\textbf{A001}).
+
+\subsection{The universal door laws}
+
+\begin{theorem}[R1 universal; the norm degeneration and the door group]
+\label{thm:R1u}
+Let $(M,\gamma)$ be a fold lattice. Then:
+\begin{enumerate}
+\item $M^{C_4}=\ker(\gamma-1)=0$;
+\item the norm degenerates: $N=(1+\gamma)(1+\gamma^2)=0$;
+\item $H^2(C_4;M)=0$;
+\item $H^1(C_4;M)=M/(\gamma-1)M$ is $2$-elementary with
+\[
+H^1(C_4;M)\;\cong\;M/(\gamma-1)M\;\cong\;\bigl(\Z[i]/(1-i)\bigr)^s\;\cong\;(\Z/2)^s,
+\]
+and the order formula
+$|M/(\gamma-1)M|=|\det(\gamma-1)|=N(1-i)^s=2^s$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) $\gamma v=v\Rightarrow\gamma^2v=v=-v\Rightarrow 2v=0\Rightarrow
+v=0$ (torsion-free). (2) $1+\gamma^2=0$ on the nose.
+(3) $H^2=M^{C_4}/NM=0/0$. (4) The composite
+$\Z[i]^s\xrightarrow{\ \times(1-i)\ }\Z[i]^s$ is exactly
+$\gamma-1$ up to the unit $-i$ ($i-1=-(1-i)$, $i-1=(-i)(1-i)$), so
+$M/(\gamma-1)M\cong(\Z[i]/(1-i))^s$; the ideal $(1-i)$ is the unique
+prime over $2$ ($2=-i(1-i)^2$), so $\Z[i]/(1-i)\cong\F_2$ and the
+group is $(\Z/2)^s$. The index formula:
+$[\,M:(\gamma-1)M\,]=|\det_{\Z}(\times(1-i))|^s=N(1-i)^s=2^s$.
+\end{proof}
+
+The point of Theorem~\ref{thm:R1u} for this round: \emph{the door
+group is the residue field of the Gaussian prime over $2$}. The mod-$2$
+structure of the fold universe is not a model accident --- it is the
+ramification of $2$ in $\Z[i]$, forced by the fold equation
+(certificate \textbf{A002}, \textbf{A003}, \textbf{A004}, on randomly
+conjugated $\Z[i]^s$ decks: the laws hold deck-independently).
+
+\begin{theorem}[R5 universal; the parity door]\label{thm:R5u}
+Let $(M,\gamma)$ be a fold lattice and $m\in M$ an element with
+nonzero class in $M/(\gamma-1)M\cong(\Z/2)^s$ (e.g.\ a fold-pair
+generator, or the committed $W_R$). Then
+\[
+k\,m\in(\gamma-1)M\iff k\ \text{even}.
+\]
+\end{theorem}
+
+\begin{proof}
+Under Theorem~\ref{thm:R1u}(4) the class of $km$ in
+$M/(\gamma-1)M\cong(\Z[i]/(1-i))^s$ is $k$ times the class of $m$;
+the class of $m$ is nonzero (it is a unit residue along its factor),
+so the class of $km$ vanishes iff $k=0$ in $\F_2$, i.e.\ iff $k$ is
+even.
+\end{proof}
+
+This is the committed door law R5 (the $m^\ast=2$ pin of the Weil
+plane), now proven for every fold lattice --- the admission law of the
+fold equation is the mod-$2$ class structure of the Gaussian prime
+(certificate \textbf{A005}, \textbf{E004}).
+
+\begin{remark}[The exact scope of the emergence]\label{rem:emergence-scope}
+What the fold equation forces: the $\Z[i]$-structure, the bigrading,
+the conjugation law, the door group, the parity door --- the complete
+\emph{lattice skeleton} of a weight-one Hodge structure, universally
+(family A: six randomly conjugated $\Z[i]^s$ decks, all laws
+deck-independent). What the fold equation does \emph{not} force: the
+polarization (the positivity of $\pm\theta$ on the bigraded
+summands) --- positivity is geometry, not lattice algebra, and no
+claim of this round uses it. The Hodge structures of the committed
+worlds are carried \emph{through} this skeleton; the skeleton itself is
+what the forcing argument of \S\ref{sec:stratum} uses.
+\end{remark}
+
+\section{The section theorem: the universal lifting cocycle}
+\label{sec:section}
+
+Round 28 realized the mixed-cell witness by an explicit lifting
+cocycle $c_\nu$. This section proves the construction is a law of the
+semidirect structure itself.
+
+\begin{theorem}[The section theorem]\label{thm:section}
+Let $G=\Gamma\rtimes C_4$ be a semidirect product with group law
+$(v,h)(w,k)=(v+\gamma^h w,h+k)$, and let $A$ be a $\Z$-module on which
+$G$ acts through the deck, $(v,h)\cdot a=\gamma_A^h a$, where
+$\gamma_A^2=-\mathrm{id}$ on a $2$-torsion-free $A$. Let
+$f\in\Hom_\Z(\Gamma,A)$ with $Nf=0$ (the cocycle class: on the
+deck-fixed letters this is automatic, since there
+$\gamma_{\mathrm{act}}=\gamma_A$ and
+$N=1+\gamma_A+\gamma_A^2+\gamma_A^3=0$). Define
+\[
+\nu(h)\ :=\ \sum_{i=0}^{h-1}\gamma_{\mathrm{act}}^i f\ \in\
+\Hom(\Gamma,A),\qquad
+c_\nu\bigl((v,h),(w,k)\bigr)\ :=\ \nu(h)\bigl(\gamma^h w\bigr),
+\]
+where $\gamma_{\mathrm{act}}f=\gamma_A\circ f\circ\gamma^{-1}$. Then:
+\begin{enumerate}
+\item $\nu$ is a $C_4$-cocycle ($\delta\nu=0$) \emph{iff} $Nf=0$, the
+partial-sum definition forcing the in-range telescoping
+$\nu(h+k)=\nu(h)+\gamma_{\mathrm{act}}^h\nu(k)$ for $h+k\le4$ and the
+wraparound $h+k\equiv0$ being exactly the norm relation
+$\nu(h)+\gamma_{\mathrm{act}}^h\nu(4-h)=Nf$;
+\item $c_\nu$ satisfies the bar identity: for all
+$x=(v,h)$, $y=(w,k)$, $z=(u,\ell)$,
+\[
+\gamma_A^h\,c_\nu(y,z)-c_\nu(xy,z)+c_\nu(x,yz)-c_\nu(x,y)=0,
+\]
+so $c_\nu$ is a genuine $2$-cocycle of $G$ with values in $A$;
+\item the coboundary compatibility: $c_{\nu+\delta\beta}
+=c_\nu+\delta(\beta\circ\mathrm{pr}_\Gamma)$ for every
+$\beta\in\Hom(\Gamma,A)$, where
+$\delta\beta(h)=\gamma_{\mathrm{act}}^h\beta-\beta$ and
+$(\delta(\beta\circ\mathrm{pr}))((v,h),(w,k))
+=\gamma_A^h\beta(w)-\beta(\gamma^h w)$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(1) The in-range case $h+k\le 4$ is the binomial telescoping of the
+partial sums. For the wraparound $h+k=4$:
+$\nu(h)+\gamma_{\mathrm{act}}^h\nu(4-h)
+=\sum_{i<h}\gamma_{\mathrm{act}}^if+\gamma_{\mathrm{act}}^h
+\sum_{j<4-h}\gamma_{\mathrm{act}}^jf
+=\sum_{i<4}\gamma_{\mathrm{act}}^if=Nf$, which vanishes by
+hypothesis; this is also the only relation the $C_4$-cocycle identity
+needs beyond the telescoping (the periodic resolution of $C_4$ has the
+single norm relation). (2) Expand with
+$yz=(w+\gamma^ku,k+\ell)$ and
+$xy=(v+\gamma^hw,h+k)$, using
+$\gamma^{h+k}=\gamma^{(h+k)\bmod 4}$:
+\[
+c_\nu(x,yz)=\nu(h)\bigl(\gamma^h w+\gamma^{h+k}u\bigr)
+=c_\nu(x,y)+\nu(h)\bigl(\gamma^{h+k}u\bigr),
+\]
+so the bar expression collapses to
+\[
+\gamma_A^h\nu(k)\bigl(\gamma^ku\bigr)
+-\nu(h+k)\bigl(\gamma^{h+k}u\bigr)+\nu(h)\bigl(\gamma^{h+k}u\bigr)
+=\bigl[\gamma_{\mathrm{act}}^h\nu(k)+\nu(h)-\nu(h+k)\bigr]
+\bigl(\gamma^{h+k}u\bigr),
+\]
+where
+$(\gamma_{\mathrm{act}}^h\nu(k))(\gamma^{h+k}u)
+=\gamma_A^h\,\nu(k)(\gamma^{-h}\gamma^{h+k}u)
+=\gamma_A^h\nu(k)(\gamma^ku)$ was used. The bracket vanishes by the
+cocycle law of (1). (3) Linearity of $c$ in $\nu$ reduces this to
+$c_{\delta\beta}=\delta(\beta\circ\mathrm{pr})$; expanding both sides
+with the module law $(v,h)\cdot a=\gamma_A^ha$:
+\[
+c_{\delta\beta}((v,h),(w,k))=\delta\beta(h)(\gamma^hw)
+=\bigl(\gamma_{\mathrm{act}}^h\beta-\beta\bigr)(\gamma^hw)
+=\gamma_A^h\beta(\gamma^{-h}\gamma^hw)-\beta(\gamma^hw),
+\]
+which is the displayed coboundary.
+\end{proof}
+
+\begin{corollary}[The section property; $d_2=0$]\label{cor:section}
+The assignment $[\nu]\mapsto[c_\nu]$ of
+Theorem~\ref{thm:section}(3) descends to cohomology as a
+\emph{section} of the mixed-cell map
+$H^2(G;A)\to H^1(C_4;H^1(\Gamma;A))$: every mixed class with
+representative in the image is realized by a lifted two-cell, and the
+$d_2$-leg of the equivariant-descent spectral sequence vanishes on the
+post-strip sector. The Round-28 witness construction
+($f_w=\theta(-,e_1)W_R$, $Nf_w=0$ by the deck-fixed support) is one
+instance; the construction is class-agnostic.
+\end{corollary}
+
+The honest scope, on the face: $f$ ranges over the $Nf=0$ class (the
+fixed-letter-supported homs; a generic hom on the moved pairs fails
+the norm relation and $\nu$ is not a cocycle at all). Certificate
+\textbf{B001} (five random split decks
+$(r,t,s)\in\{(1,6,1),(2,4,1),(1,4,2),(3,2,1),(2,2,2)\}$, random
+fixed-letter-supported $f$, full bar identity on random triples) and
+\textbf{B002} (the coboundary compatibility).
+
+\section{The split-deck formula: the mixed layer as a law of the deck
+shape}\label{sec:split}
+
+\begin{theorem}[The split-deck formula]\label{thm:split}
+Let $\Gamma=\Z[i]^r\oplus\Z^t$ be a split letter deck ($r$ moved
+pairs, $t$ fixed letters; $\gamma$ acts by multiplication by $-i$ on
+the pairs and by the identity on the fixed letters) and
+$A\cong\Z[i]^s$ a $2$-torsion-free content module with the content
+rotation $\gamma_A$. Then the mixed layer is
+\[
+H^1\bigl(C_4;\Hom_\Z(\Gamma,A)\bigr)\;\cong\;(\Z/2)^{ts},
+\]
+pure $2$-torsion: each fixed letter contributes exactly the content's
+door group $(\Z/2)^s$ (Theorem~\ref{thm:R1u}), and the $r$ moved
+pairs contribute \emph{nothing} (the pair-block vanishing).
+\end{theorem}
+
+\begin{proof}
+$\Hom_\Z(\Gamma,A)$ splits as the direct sum of the fixed-letter
+blocks $\Hom(\Z\ell_j,A)\cong A$ ($t$ copies, the action
+$\gamma_{\mathrm{act}}=\gamma_A$) and the pair blocks
+$\Hom_\Z(\Z[i],A)$ ($r$ copies per Gaussian rank of $A$). The
+fixed-letter blocks give $H^1(C_4;A)=(\Z/2)^s$ each by
+Theorem~\ref{thm:R1u}(4) --- this is the $(\Z/2)^{ts}$.
+
+The pair-block vanishing, in the committed shape
+($\Hom(\Z[i],\Z[i])\cong M_2(\Z)$): write the content rotation as
+$G=\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)$
+(multiplication by $-i$ in the basis $(1,i)$) and the inverse letter
+rotation as $J=G^{-1}$ (multiplication by $+i$). The mixed action on
+$F\in M_2(\Z)$ is the conjugation-type involution
+\[
+T(F)\ =\ G\,F\,G^{-1},\qquad T^2=\mathrm{id},
+\]
+so $N_4=1+T+T^2+T^3=2(1+T)$ and
+$H^1(C_4;M_2(\Z)_T)=\ker(1+T)/\Img(T-1)$. Computing both sides for
+$F=\left(\begin{smallmatrix}a&b\\c&d\end{smallmatrix}\right)$:
+\[
+T(F)=\begin{pmatrix}d&-c\\-b&a\end{pmatrix},\qquad
+(1+T)(F)=\begin{pmatrix}a+d&b-c\\c-b&d+a\end{pmatrix},\qquad
+(T-1)(F)=\begin{pmatrix}d-a&-(b+c)\\-(b+c)&-(d-a)\end{pmatrix}.
+\]
+Thus $\ker(1+T)=P^-=\{\left(\begin{smallmatrix}a&b\\b&-a\end{smallmatrix}\right)\}$
+(the anti-invariants) and $\Img(T-1)=P^-$ \emph{in full} --- given a
+target $\left(\begin{smallmatrix}u&v\\v&-u\end{smallmatrix}\right)$,
+take $d=u$, $a=0$, $c=-v$, $b=0$. Hence $H^1=0$: the pair block
+contributes nothing. For general $(r,s)$ the same commutator
+computation runs blockwise on $M_{2s\times2r}(\Z)$ (certificate
+\textbf{C002} computes the vanishing for the grid
+$(r,s)\in\{(1,1),(2,1),(1,2),(2,2),(3,1)\}$ at $t=0$; \textbf{C001}
+computes the full formula for the grid
+$(r,t,s)\in\{(1,6,1),(2,4,1),(1,4,2),(2,2,2),(3,3,1)\}$; the committed
+mixed layer is the case $(r,t,s)=(1,6,1)$, and
+\textbf{E003} re-derives $(\Z/2)^6$ through the universal engine:
+Smith normal form $[2,2,2,2,2,2]$, order $64$, free rank $0$).
+\end{proof}
+
+\begin{theorem}[The glue control; the $2m$ vs $4m$ boundary]
+\label{thm:glue}
+The split hypothesis is load-bearing: on the non-split glued module
+$\Z[x]/\bigl((x+1)(x^2+1)\bigr)$ (a single letter carrying both an
+involution part and a rotation part, integrally unsplittable),
+\[
+H^1\bigl(C_4;\,\Z[x]/((x+1)(x^2+1))\bigr)\;\cong\;\Z/4,
+\]
+so the mixed layer carries genuine $4$-torsion and the kill lands at
+$4m$, not $2m$ (certificate \textbf{C001}, \textbf{C003}: the
+companion matrix of $(x+1)(x^2+1)$ computes $H^1=\Z/4$). This is
+boundary (d) of Round 28 --- the input-dependent glue --- exhibited at
+the universal level: \emph{split decks kill at $2m$; glued decks kill
+at $4m$; the committed deck is split.}
+\end{theorem}
+
+The hostile controls (family D): the trivial deck has
+$H^2=(\Z/4)^3\ne0$ (the fold operator's $H^2=0$ is genuinely the
+$\gamma^2=-1$ law, \textbf{D001}); the involution deck
+$\gamma^2=+1$ has $H^2=\Z/2\ne0$ (\textbf{D002}); the negation deck
+$\gamma=-1$ has $H^2=0$ but $H^1=(\Z/2)^2$, a different signature
+(\textbf{D003}); and the sabotaged formula $(\Z/2)^{ns}$ fails on the
+committed shape $(n,s)=(8,1)$ --- the correct $(\Z/2)^{ts}=(\Z/2)^6$
+is load-bearing (\textbf{D004}).
+
+\section{The square-zero dressing law}\label{sec:square-zero}
+
+The multiplicative layer of Round 29 dressed the additive cocycle by
+the envelope $M=I+X(c)$, $X(c)$ the realization matrix of the content
+$c\in A$. The quadratic obstruction to
+$c\mapsto I+X(c)$ being a homomorphism of the two-cell calculus is
+the products $X(c)X(c')$. This section computes the structure of the
+realization space and proves the obstruction vanishes on every
+realization span.
+
+\begin{theorem}[The block law of the rotation lattice]\label{thm:block}
+In the committed model let
+$\Phi\in\End(\End(\Z^8))$ be the deck conjugation
+$\Phi(X)=\gamma X\gamma^{-1}$ and
+$L=\ker(\Phi^2+1)$ the rotation lattice. Then, with respect to the
+$(2\mid6)$ block split (moved pair $\mid$ fixed letters) and
+$D=\gamma^2=\mathrm{diag}(-I_2,I_6)$:
+\[
+L\ =\ \left\{\,\begin{pmatrix}0&Q\\ R&0\end{pmatrix}\ :\ 
+Q\in M_{2\times6}(\Z),\ R\in M_{6\times2}(\Z)\,\right\},
+\qquad \operatorname{rank}L=24.
+\]
+\end{theorem}
+
+\begin{proof}
+$\Phi^2(X)=\gamma^2X\gamma^{-2}=DXD$. Write
+$X=\left(\begin{smallmatrix}P&Q\\R&S\end{smallmatrix}\right)$; then
+$DXD=\left(\begin{smallmatrix}P&-Q\\-R&S\end{smallmatrix}\right)$, so
+$DXD=-X$ iff $P=-P$ and $S=-S$, i.e.\ $P=0$ and $S=0$. The rank is
+$2\cdot6+6\cdot2=24$. (Certificate \textbf{F001}: the rank is
+computed as $24$ through the integral kernel of the $64$-dimensional
+system $\Phi^2+I$.)
+\end{proof}
+
+\begin{theorem}[The equivariant realizations]\label{thm:realizations}
+Every nonzero $A'\in L$ yields the equivariant pair
+$(A',B')$ with $B':=-\Phi(A')$, satisfying
+\[
+\gamma A'\gamma^{-1}=-B',\qquad \gamma B'\gamma^{-1}=A',
+\]
+and $\Phi^2=-1$ on $L$ makes this a bijection between the elements of
+$L$ and the equivariant envelopes. The $24$ kernel-basis vectors of
+Theorem~\ref{thm:block} (each supported in a single off-diagonal
+block) give $24$ realizations (certificate \textbf{F002}: $24/24$).
+\end{theorem}
+
+\begin{proof}
+$\Phi(B')=\Phi(-\Phi(A'))=-\Phi^2(A')=A'$, and
+$\Phi(A')=-B'$ by the definition of $B'$. The basis vectors of
+$\ker(\Phi^2+I)$ computed by the integral kernel algorithm are the
+entry-supported matrices of the block space (the system
+$P=0,\ S=0$ is a coordinate projection), each lying in exactly one
+off-diagonal block.
+\end{proof}
+
+\begin{theorem}[The square-zero dressing law]\label{thm:square-zero}
+Every equivariant realization span is square-zero: for every
+realization $(A',B')$ of Theorem~\ref{thm:realizations},
+\[
+A'^2=A'B'=B'A'=B'^2=0,
+\]
+and hence $X(c)X(c')=0$ for all $c,c'$ in the content span of the
+realization. Consequently the dressing
+\[
+M(c)\ =\ I+X(c)
+\]
+is a \emph{homomorphic lift} of the additive cocycle: the
+multiplicative two-cell built from $M$ carries no quadratic
+obstruction, and $\det M(c)=1$ (the dressing lives in $\SL_8$).
+\end{theorem}
+
+\begin{proof}
+Each kernel-basis realization is supported in a single off-diagonal
+block of Theorem~\ref{thm:block} (a $Q$-type matrix
+$\left(\begin{smallmatrix}0&Q\\0&0\end{smallmatrix}\right)$ or an
+$R$-type matrix), and $\Phi$ preserves the block type (the
+conjugation by $\gamma=\mathrm{diag}(G,I_6)$ acts on $Q$ as
+$Q\mapsto GQ$ and on $R$ as $R\mapsto RG^{-1}$). So
+$\operatorname{span}\{A',B'\}$ lies entirely in one off-diagonal
+block, and the product of any two matrices of the same block type
+vanishes:
+\[
+\begin{pmatrix}0&Q_1\\0&0\end{pmatrix}
+\begin{pmatrix}0&Q_2\\0&0\end{pmatrix}=0,\qquad
+\begin{pmatrix}0&0\\R_1&0\end{pmatrix}
+\begin{pmatrix}0&0\\R_2&0\end{pmatrix}=0.
+\]
+Thus every product within the span is $0$, $X(c)$ is nilpotent with
+$X(c)^2=0$, $(I+X(c))^{-1}=I-X(c)$, and
+$\det(I+X(c))=1$ (unipotent). (Certificate \textbf{F003}: $24/24$
+spans, all four products zero on each; \textbf{F005}: $\det=1$ on
+span elements.)
+\end{proof}
+
+\begin{remark}[The honest scope of the square-zero law]
+The law is a law of the realization \emph{spans}, not of the ambient
+lattice: $96$ of the $576$ basis pairs of $L$ have nonzero cross
+products (the $Q$-$R$ pairings
+$\left(\begin{smallmatrix}0&Q\\0&0\end{smallmatrix}\right)
+\left(\begin{smallmatrix}0&0\\R&0\end{smallmatrix}\right)
+=\left(\begin{smallmatrix}QR&0\\0&0\end{smallmatrix}\right)$).
+Certificate \textbf{F004} receipts this on the face: the ambient $L$
+is not a square-zero algebra; the dressing algebra --- the spans the
+envelopes actually live on --- is. Every use below
+(Theorem~\ref{thm:gauge}) is at exactly this scope.
+\end{remark}
+
+\section{THE INTEGRAL GAUGE AT $2m$ (the strike)}\label{sec:gauge}
+
+This section is the round's construction. Round 29 built the dressed
+two-cell --- a genuine nonabelian $2$-cocycle with values in
+$\SL_8$ --- and named its residual $\mu_2$-class as the next target.
+Round 31 computes it: \emph{zero}. The mechanism is an integral gauge
+trivialization at the doubled scale.
+
+\subsection{The committed model data}\label{sec:committed}
+
+The letters $\Z^8$ with basis
+$e_0,f_0,e_1,f_1,e_2,f_2,e_3,f_3$ (indices $0,\dots,7$); the deck
+\[
+\gamma\ =\ G\oplus I_6,\qquad
+G=\begin{pmatrix}0&1\\-1&0\end{pmatrix}\quad\text{on }(e_0,f_0),
+\]
+so $\gamma e_0=-f_0$, $\gamma f_0=e_0$, and the six letters
+$e_1,f_1,e_2,f_2,e_3,f_3$ are deck-fixed ($\Gamma\cong\Z[i]\oplus\Z^6$:
+$r=1$ moved pair, $t=6$). The content plane
+$A=\Z W_R\oplus\Z W_I\cong\Z[i]$ with the content rotation
+$\mathrm{CONT}=G$ (multiplication by $-i$). The polarization
+$\theta=\sum_j e_j\wedge f_j$ (the alternating matrix $T_\theta$ with
+$\theta(f_j,e_j)=-1$, $\theta(e_j,f_j)=+1$). The committed witness
+(Round 28, T4):
+\[
+f_w\ =\ \theta(-,e_1)\otimes W_R:\qquad
+f_w(v)\ =\ \theta(v,e_1)\,W_R\ =\ -\,v_{f_1}\,W_R,
+\]
+supported on the deck-fixed letter $e_1$ (so $Nf_w=0$:
+Theorem~\ref{thm:section}, the fixed-letter norm annihilation). The
+lifting data ($\nu(h)=\sum_{i<h}\gamma_{\mathrm{act}}^if_w$,
+$c_\nu((v,h),(w,k))=\nu(h)(\gamma^hw)$) are as in
+\S\ref{sec:section}; $G_\bullet=\Gamma\rtimes C_4$ acts on $A$
+through the deck, and on $\End(\Z^8)$ by conjugation
+$(v,h)\cdot X=\gamma^hX\gamma^{-h}$.
+
+The mixed action on homs is
+$\gamma_{\mathrm{act}}f=\mathrm{CONT}\circ f\circ\gamma^{-1}$.
+
+\subsection{The primitive equation and the integral primitive}
+
+\begin{theorem}[The integral primitive]\label{thm:primitive}
+Define
+\[
+\sigma\ \in\ \Hom_\Z(\Z^8,A),\qquad
+\sigma(v)\ :=\ v_{f_1}\,\bigl(W_R-W_I\bigr)
+\]
+(the $f_1$-coefficient times the anti-invariant content vector). Then
+\[
+(\gamma_{\mathrm{act}}-1)\,\sigma\ =\ 2\,f_w,
+\]
+an exact identity of homs. In particular $2f_w$ is an integral
+$(\gamma_{\mathrm{act}}-1)$-coboundary, while $f_w$ itself is not
+(Theorem~\ref{thm:halves}): the halves obstruction dies exactly at
+scale $2$.
+\end{theorem}
+
+\begin{proof}
+Both $\sigma$ and $f_w$ read the single coefficient $v_{f_1}$ (the
+index-$3$ letter, deck-fixed: the moved pair $(e_0,f_0)$ is disjoint
+from $f_1$, so $(\gamma^{-1}v)_{f_1}=v_{f_1}$). With
+$\mathrm{CONT}=\left(\begin{smallmatrix}0&1\\-1&0\end{smallmatrix}\right)$
+in the basis $(W_R,W_I)$:
+\[
+(\gamma_{\mathrm{act}}\sigma)(v)
+=\mathrm{CONT}\,\sigma(\gamma^{-1}v)
+=v_{f_1}\,\mathrm{CONT}(W_R-W_I)
+=v_{f_1}\,\mathrm{CONT}(1,-1)
+=v_{f_1}\,\bigl(-W_R-W_I\bigr),
+\]
+so
+\[
+(\gamma_{\mathrm{act}}\sigma-\sigma)(v)
+= v_{f_1}\bigl[-(W_R+W_I)-(W_R-W_I)\bigr]
+= -2\,v_{f_1}W_R\ =\ 2\,f_w(v),
+\]
+using $f_w(v)=-v_{f_1}W_R$ ($\theta(f_1,e_1)=-1$). (Certificate
+\textbf{G001}: the identity is verified on all eight letters; the
+committed signs are as displayed.)
+\end{proof}
+
+\begin{theorem}[The scale-$1$ halves obstruction; the hostile]
+\label{thm:halves}
+$f_w$ is \emph{not} an integral
+$(\gamma_{\mathrm{act}}-1)$-coboundary: the scale-$1$ transport is not
+trivializable, and the kill at $2m$ is load-bearing
+(certificate \textbf{G006}: the $16$-dimensional Hom system has no
+integral solution for $(\gamma_{\mathrm{act}}-1)\tau=f_w$; the
+obstruction is the halves class of the door group, cf.\
+Theorem~\ref{thm:R1u}).
+\end{theorem}
+
+\subsection{The additive primitive}
+
+\begin{theorem}[The additive primitive; $\delta s=2c_\nu$]
+\label{thm:additive}
+Let $s\colon G_\bullet\to A$ be the $1$-cochain
+$s((v,h))=\sigma(v)$ and
+$\delta s((v,h),(w,k))=\gamma_A^h s(w,k)-s\bigl((v,h)(w,k)\bigr)+s(v,h)$
+the group coboundary. Then
+\[
+\delta s\ =\ 2\,c_\nu,
+\]
+i.e.\ the doubled additive two-cell is an exact integral coboundary
+through the primitive $\sigma$.
+\end{theorem}
+
+\begin{proof}
+Since $\sigma$ reads a deck-fixed coefficient, $s$ is constant on the
+deck coordinate; with $xy=(v+\gamma^hw,h+k)$ and $\sigma$ linear:
+\[
+\delta s(x,y)=\mathrm{CONT}^h\sigma(w)-\sigma(v+\gamma^hw)+\sigma(v)
+=\mathrm{CONT}^h\sigma(w)-\sigma(\gamma^hw).
+\]
+Define $T_h(w):=\sigma(\gamma^hw)-\mathrm{CONT}^h\sigma(w)$; the claim
+is $T_h(w)=-2c_\nu(h,w)$ for all $h\in\{0,1,2,3\}$, $w\in\Z^8$.
+\begin{itemize}
+\item $h=0$: $T_0=0=-2c_\nu(0,\cdot)$ (as $\nu(0)=0$).
+\item $h=1$: by Theorem~\ref{thm:primitive} applied at the argument
+$\gamma w$,
+$\mathrm{CONT}\,\sigma(w)-\sigma(\gamma w)=2f_w(\gamma w)$, so
+$T_1(w)=-2f_w(\gamma w)=-2c_\nu(1,w)$ (as
+$c_\nu(1,w)=\nu(1)(\gamma w)=f_w(\gamma w)$).
+\item Induction $h\mapsto h+1$ (indices mod $4$):
+\[
+T_{h+1}(w)=\sigma(\gamma^{h+1}w)-\mathrm{CONT}^{h+1}\sigma(w)
+=T_h(\gamma w)+\mathrm{CONT}^h\bigl[\sigma(\gamma w)-\mathrm{CONT}\sigma(w)\bigr]
+=T_h(\gamma w)+\mathrm{CONT}^hT_1(w).
+\]
+Using the expansion
+$c_\nu(h,w)=\sum_{i<h}\mathrm{CONT}^i f_w(\gamma^{h-i}w)$ (which is
+$\nu(h)(\gamma^hw)$ with
+$(\gamma_{\mathrm{act}}^if_w)(u)=\mathrm{CONT}^if_w(\gamma^{-i}u)$),
+the inductive step gives
+\[
+T_{h+1}(w)=-2\sum_{i<h}\mathrm{CONT}^if_w(\gamma^{h+1-i}w)
+\;-2\,\mathrm{CONT}^hf_w(\gamma w)
+=-2\sum_{i\le h}\mathrm{CONT}^if_w(\gamma^{h+1-i}w)
+=-2\,c_\nu(h+1,w).\qedhere
+\]
+\end{itemize}
+\end{proof}
+
+(Certificate \textbf{G002}: random triples and all structured letter
+cells, $h,k\in4\times4$.)
+
+\subsection{The gauge theorem}
+
+Now the multiplicative layer. Fix an equivariant realization
+$(A',B')$ (Theorem~\ref{thm:realizations}) and write the content
+dressing
+\[
+X(c)\ :=\ c_R\,A'+c_I\,B'\ \in\ \End(\Z^8)\qquad
+\bigl(c=c_R\,W_R+c_I\,W_I\in A\bigr),
+\]
+so that $\gamma X(c)\gamma^{-1}=X(\mathrm{CONT}\,c)$ (the
+intertwining law: $\gamma A'\gamma^{-1}=-B'$,
+$\gamma B'\gamma^{-1}=A'$), $X(c)X(c')=0$ on the span
+(Theorem~\ref{thm:square-zero}), and $M(c)=I+X(c)\in\SL_8(\Z)$.
+
+\begin{theorem}[The integral gauge at $2m$]\label{thm:gauge}
+Define the gauge
+\[
+S\colon G_\bullet\to\SL_8(\Z),\qquad
+S\bigl((v,h)\bigr)\ :=\ I+X\bigl(\sigma(v)\bigr),
+\]
+and the doubled dressed transport two-cell
+\[
+M_2\bigl((v,h),(w,k)\bigr)\ :=\ I+X\bigl(2\,c_\nu\bigl((v,h),(w,k)\bigr)\bigr).
+\]
+Then
+\[
+\delta S\ =\ M_2,
+\]
+where the nonabelian coboundary is
+\[
+(\delta S)(x,y)\ =\ S(x)\cdot\bigl(\gamma^hS(y)\gamma^{-h}\bigr)\cdot
+S(xy)^{-1}
+\]
+($x=(v,h)$, $y=(w,k)$, the $G_\bullet$-action on $\SL_8$ through the
+deck). The gauge is normalized ($S(1)=I$), integral, and
+$\det S=1$: the doubled dressed transport is \emph{exactly}
+gauge-trivial in the integral structure group.
+\end{theorem}
+
+\begin{proof}
+By the intertwining law,
+$\gamma^hS(y)\gamma^{-h}=I+X(\mathrm{CONT}^h\sigma(w))$; by the
+square-zero law, $(I+X(c))^{-1}=I-X(c)$ and all cross products of the
+$X$-terms vanish. Hence
+\begin{align*}
+(\delta S)(x,y)
+&=\bigl(I+X(\sigma(v))\bigr)\,
+   \bigl(I+X(\mathrm{CONT}^h\sigma(w))\bigr)\,
+   \bigl(I-X(\sigma(v)+\gamma^hw)\bigr)\\
+&=I+X\bigl(\sigma(v)+\mathrm{CONT}^h\sigma(w)-\sigma(v)-\sigma(\gamma^hw)\bigr)
+\qquad\text{(square-zero kills the quadratic terms)}\\
+&=I+X\bigl(\mathrm{CONT}^h\sigma(w)-\sigma(\gamma^hw)\bigr)
+=I+X\bigl(2\,c_\nu(x,y)\bigr)=M_2(x,y),
+\end{align*}
+the penultimate step being Theorem~\ref{thm:additive} (whose proof
+shows $\mathrm{CONT}^h\sigma(w)-\sigma(\gamma^hw)=-T_h(w)=2c_\nu$).
+The difference of the two sides of $\delta S=M_2$ is affine-linear in
+$(v,w)$ for fixed $(h,k)$ (all quadratic terms vanish identically by
+the square-zero law), so the \emph{complete basis sweep} --- $v\in\{0,
+e_0,\dots,e_7\}$, $w\in\{e_0,\dots,e_7\}$, $(h,k)\in4\times4$:
+$1152$ cells --- closes the universal quantifier (certificate
+\textbf{G003}). The identity is uniform in the realization:
+\textbf{G004} runs the random battery on all $24$ realizations.
+Integrality and normalization are
+$\sigma$ integral, $A',B'$ integral, $\sigma(0)=0$
+(\textbf{G005}).
+\end{proof}
+
+\begin{corollary}[The residual $\mu_2$-class is zero; the Round-29
+target discharged]\label{cor:residual-zero}
+The doubled dressed transport $M_2$ is an integral coboundary in
+$\SL_8(\Z)$, so its nonabelian class
+$[M_2]\in H^2(G_\bullet;\SL_8)$ vanishes, and the residual
+$\mu_2$-class of the doubled dressed transport --- the boundary-(a)
+object that Round 29 named as the next strike target, the class
+measured in the gerbe ambient $H^3(G_\bullet;\mu_2)=\F_2^{71}$ --- is
+\emph{computed: zero}. The reconstruction
+chain of the committed model closes through the multiplicative layer:
+boundary (a) of Round 28 is discharged at the committed deck.
+\end{corollary}
+
+The falsifiability receipts: the trivial gauge $S=I$ fails on the
+witness cell ($\delta I=I\ne M_2$; certificate \textbf{G007}), and the
+scale-$1$ gauge fails by Theorem~\ref{thm:halves} (\textbf{G006}) ---
+the doubling is not decoration; it is exactly what kills the halves
+class.
+
+\section{The $\mu_2$ layer and the gerbe ambient}\label{sec:mu2}
+
+\begin{theorem}[The mod-$2$ universe of the deck]\label{thm:mu2}
+$H^p(C_4;\mu_2)=\mu_2$ for every $p\ge1$: the entire central
+cohomology of the deck is $2$-torsion. Computed genuinely (certificate
+\textbf{H001}, $\F_2$ Gaussian elimination on the action matrices):
+with $D=\gamma-1$ and $N_4=1+\gamma+\gamma^2+\gamma^3$ over $\F_2$,
+$H^{2k}=\ker D/\Img N_4$ and $H^{2k+1}=\ker N_4/\Img D$, and the
+battery computes $\mu_2\to1$ in every degree, the swap block
+$P\to1$, the letter module ($G\bmod2$, the $(e_0,f_0)$
+transposition) $\to7$, the order-$4$ unipotents $\to1$ (size $3$)
+and $\to0$ (size $4$, $N_4=N^3\ne0$ --- the hostile: the computation
+discriminates).
+\end{theorem}
+
+\begin{theorem}[The gerbe ambient recomputed]\label{thm:gerbe}
+The split total complex of the mod-$2$ letter deck computes
+\[
+\dim_{\F_2}H^n\bigl(G_\bullet;\mu_2\bigr)
+=\sum_{q=0}^{n}d(q),\qquad
+d(q)=\binom{6}{q}+\binom{6}{q-1}+\binom{6}{q-2},
+\]
+so $\dim H^1=8$, $\dim H^2=30$, $\dim H^3=71$: the gerbe ambient
+$H^3(G_\bullet;\mu_2)=\F_2^{71}$ of Round 29 is reproduced. The
+computation is genuine (certificate \textbf{H002}): the wedge
+matrices of the mod-$2$ letter action (the $(e_0,f_0)$ transposition
+$\tau$; over $\F_2$ the wedge sign is $+1$) are built in the subset
+basis (dims $1/8/28/56$), their $C_4$-cohomology is computed by
+elimination ($d(q)=1,7,22,41$ for $q=0,1,2,3$, matching the
+binomial decomposition into trivial and swap copies), and the
+assembly sums the split degrees. With Corollary~\ref{cor:residual-zero}
+the residual class \emph{itself} is computed: zero.
+\end{theorem}
+
+The structure of the ambient: every $\mu_2$-obstruction of the
+$C_4$ universe is $2$-torsion (Theorem~\ref{thm:mu2}), so the
+doubling engine kills the obstruction layer as such; and
+Theorem~\ref{thm:gauge} computes the stronger statement: the doubled
+transport itself is integrally trivial, its gauge living in
+$\SL_8(\Z)$, with the scale-$1$ halves obstruction receipting
+(Theorem~\ref{thm:halves}) that the doubling is exactly what carries
+the kill.
+
+\section{The stratum theorem: the forcing argument}\label{sec:stratum}
+
+The operator's directive: force the Hodge structure out of the fold
+equations; that alone excludes the counterexamples. The executed form,
+at exactly the strength the certificates support:
+
+\begin{theorem}[The stratum theorem]\label{thm:stratum}
+In the committed world model, the fold-carried stratum --- the sector
+of inputs whose reconstruction chain is carried by the fold equation's
+deck machinery --- contains no counterexample:
+\begin{enumerate}
+\item \textbf{The additive chain} (Rounds 25--28, universalized this
+round): the fold equation forces the door group $(\Z/2)^s$ and the
+parity door (Theorems~\ref{thm:R1u}, \ref{thm:R5u}); the lifting is a
+law of the semidirect structure (Theorem~\ref{thm:section}); the
+mixed layer is $(\Z/2)^{ts}$ with the pair-block vanishing
+(Theorem~\ref{thm:split}); the witness class is nonzero at scale $1$
+and dies at scale $2$ (certificate \textbf{I001}).
+\item \textbf{The multiplicative chain} (this round): the dressing is
+a homomorphic lift --- no quadratic obstruction
+(Theorem~\ref{thm:square-zero}); the doubled dressed transport is
+integrally gauge-trivial in $\SL_8(\Z)$ (Theorem~\ref{thm:gauge});
+the residual $\mu_2$-class vanishes identically
+(Corollary~\ref{cor:residual-zero}).
+\item \textbf{The conduit closes at the kill scale}: the kill scale is
+computed $m_{\mathrm{kill}}=2$ (the door solve, certificate
+\textbf{I002}); the two-center conduit constant at $p=2$ is
+$(p-1)!\,m_{\mathrm{kill}}=2$, and the halving $\tfrac12$ lands in
+$\CH^2_\Q$ exactly --- the rational statement closes at the kill
+scale, and the uniform $16$ bound covers every decked input (the
+Round-29 uniform kill; the scale chain
+$\{1:\text{refused},\,2:\text{the committed kill},\,
+16:\text{the uniform bound}\}$ computed through the same integral
+solver).
+\end{enumerate}
+Therefore every fold-carried input is discharged end-to-end ---
+additively, multiplicatively, and through the conduit --- and the
+counterexample locus of the committed universe is confined to the
+\emph{fold-free stratum}: the input axis (ledger 085), where the
+$C_4$-deck structure itself is the open object.
+\end{theorem}
+
+\begin{proof}
+The certified chain composes: (1) is the certified stack of Rounds
+25--28 with the universalization of \S\ref{sec:emergence}--\ref{sec:split}
+(the lattice-level laws are deck-independent, so the chain's
+group-theoretic layers hold on every fold lattice of the committed
+shape); (2) is Theorems~\ref{thm:square-zero} and \ref{thm:gauge} with
+their certificates; (3) is the computed scale chain of
+\textbf{I002} with the committed two-center conduit (Lemma N of the
+law stack: $c_p(E^+-E^-)=(-1)^{p-1}(p-1)!\,m\,\alpha$; at $p=2$,
+$m=m_{\mathrm{kill}}=2$ the rational reconstruction needs exactly the
+coefficient $\tfrac12$). An input carried by the fold machinery
+traverses all three chains; each chain is certified at its scale; the
+composition leaves no undischarged obstruction in the stratum. The
+confinement statement is the contrapositive: a counterexample in the
+committed universe must live where the fold machinery does not carry
+the input --- the fold-free stratum.
+\end{proof}
+
+\begin{remark}[What the stratum theorem is and is not]
+The theorem is a statement about the committed world model (Q1's
+universe): the fold-carried sector is certified counterexample-free,
+the multiplicative layer included --- this is the round's content, and
+it is the honest form of the forcing directive. It is \emph{not} the
+Clay statement: Q2 quantifies over every variety with no committed
+structure, and the fold-carried stratum of the committed universe is
+a proper part of that world. The stratum theorem sharpens the
+boundary: what separates this program from Q2 is exactly the
+fold-free stratum --- the input axis --- and nothing else in the
+certified chain.
+\end{remark}
+
+\section{The boundary (on every face)}\label{sec:boundary}
+
+\begin{theorem}[The boundary after Round 31]\label{thm:boundary}
+\leavevmode
+\begin{enumerate}
+\item \textbf{The input axis (ledger 085; the single open object)}:
+the deck-existence at general input. The fold equation's laws are
+universal (this round), the committed chain closes through the
+multiplicative layer (this round), but the $C_4$-deck structure on
+the input's own cohomology --- outside the committed and product
+worlds --- is not constructed. Items (i)--(iii) of the reduction
+theorem (Round 30, Theorem 12) live here.
+\item \textbf{The discharged boundaries at the committed model}:
+(a) the residual $\mu_2$-class --- computed zero
+(Corollary~\ref{cor:residual-zero}); the gerbe ambient
+$\F_2^{71}$ stands, the class in it vanishes. (b) The
+fiber-centralizer condition and the honest-invariant dichotomy ---
+Round 29's discharge, unchanged. (d) The glue boundary --- now
+exhibited at the universal level (Theorem~\ref{thm:glue}: split
+decks kill at $2m$, glued at $4m$); the committed deck is split.
+\item \textbf{The falsifiable line (unchanged)}: exhibit the
+$C_4$-deck structure at a general input; reduce the two-cell class
+there; exclude the non-scalar unexchanged content with a
+$(p,p)$-sensitive step. Any one of the three is the next theorem of
+this program; the stratum theorem makes precise what such a theorem
+must add: a fold on the input axis.
+\end{enumerate}
+\end{theorem}
+
+\section*{The closing statement}
+\addcontentsline{toc}{section}{The closing statement}
+
+Everything this round's mathematics supports, stated at exactly its
+scope:
+
+\begin{itemize}
+\item \textbf{The fold-equation stack is certified}: the emergence
+layer (every fold lattice is a $\Z[i]$-module; the bigrading, the
+conjugation theorem, the door group, the parity door --- laws of the
+fold equation alone); the section theorem (the lifting cocycle is a
+law of any semidirect $C_4$-extension); the split-deck formula
+$(\Z/2)^{ts}$ with the pair-block vanishing and the $\Z/4$ glue
+control; the square-zero dressing law (the multiplicative two-cell
+carries no quadratic obstruction, at the receipted per-span scope);
+\textbf{the integral gauge at $2m$} ($\delta S=M_2$ with
+$S\colon G_\bullet\to\SL_8(\Z)$ integral, normalized, the $1152$-cell
+sweep closing the universal quantifier, uniform over all $24$
+realizations, the scale-$1$ halves obstruction receipting that the
+kill is load-bearing); the $\mu_2$ layer
+($H^p(C_4;\mu_2)=\mu_2$; the ambient $\F_2^{71}$ recomputed
+genuinely).
+\item \textbf{The residual $\mu_2$-class of the doubled dressed
+transport is computed: zero.} Round 29's named next-strike target is
+discharged at the committed model; the reconstruction chain closes
+through the multiplicative layer.
+\item \textbf{The stratum theorem}: no counterexample exists in the
+fold-carried stratum of the committed universe; the counterexample
+locus is confined to the fold-free stratum --- the input axis. Q1
+stands, extended through the multiplicative layer; \textbf{Q2 is not
+claimed}; the one-directional reduction stands; the closing string is
+not emitted, because the only content it could carry at the present
+state is the false assertion that the input-axis items are
+discharged. The next theorem of this program is a fold on the input
+axis.
+\end{itemize}
+
+\section*{ENGINE (per SKILL §35)}
+\addcontentsline{toc}{section}{ENGINE (per SKILL §35)}
+
+The construction engines this round: the fold equation itself
+($\gamma^2=-1$ on the $2$-torsion-free lattice --- the single law
+from which the Gaussian module structure, the bigrading, the door
+group, and the parity door are forced); the telescoping lifting
+engine $\nu(h)=\sum_{i<h}\gamma_{\mathrm{act}}^if$ (the section
+theorem); the block-conjugation engine of the pair-block vanishing;
+the off-diagonal block engine of the rotation lattice (the square-zero
+law); and the primitive-gauge engine
+$\sigma(v)=v_{f_1}(W_R-W_I)$, $S=I+X(\sigma)$ (the integral gauge at
+$2m$ --- the round's strike).
+
+\section*{Statement integrity (per SKILL §25)}
+\addcontentsline{toc}{section}{Statement integrity}
+
+Diffed against the operator's order (the fold equations themselves;
+the Hodge structures emerge from the fold equations, forcing it; that
+alone gives that no counterexample exists): this document delivers
+the emergence layer in full (the fold equation forces the Hodge
+skeleton --- the $\Z[i]$-structure, the bigrading, the conjugation
+law, the door --- universally), the forcing executed through the
+certified stack, and the counterexample exclusion in its honest form
+(the stratum theorem: the fold-carried stratum is
+counterexample-free; the locus is confined to the fold-free stratum).
+The exclusion is stated at the committed universe's scope, not the
+Clay scope, because that is the scope the certificates support; the
+polarization is not claimed to emerge (Remark~\ref{rem:emergence-scope});
+the square-zero law is stated at its per-span scope; the general-input
+deck remains open and is on the face. No silent strengthening, no
+silent weakening, no substitution of scope.
+
+\appendix
+
+\section{The certificate inventory (36 checks, exit 0)}
+\label{app:certificate}
+
+\texttt{fold\_equation\_stack\_checks.py}: exact arithmetic
+(\texttt{Fraction}/\texttt{int}), zero floats, zero randomness beyond
+fixed LCG seeds, deterministic double-run byte-identical, hostile
+controls throughout. The families:
+
+\begin{longtable}{@{}p{1.1cm}p{13.5cm}@{}}
+\toprule
+\textbf{Check} & \textbf{Content} \\
+\midrule
+\endhead
+A000 & Six random $\Z[i]^s$ fold decks constructed
+($\gamma^2=-I$ verified; unimodular conjugates of the standard complex
+structure). \\
+A001 & The fold bigrading on every random deck: no rational eigenline
+(the universal conjugation theorem, rational form). \\
+A002 & R1 universal: $N=0$, $\ker(\gamma-1)=0$, $H^2(C_4;M)=0$ on
+every random deck. \\
+A003 & $H^1(C_4;M)=(\Z/2)^s$ on every random deck (the door group). \\
+A004 & The order formula $|\det(\gamma-1)|=2^s$ on every random deck. \\
+A005 & R5 universal: $k\,e_0\in\Img(\gamma-1)$ iff $k$ even, on the
+random deck. \\
+B001 & The section theorem: the bar identity of $c_\nu$ on random
+split decks (fixed-letter-supported $f$, the $Nf=0$ class). \\
+B002 & The coboundary compatibility
+$c_{\nu+\delta\beta}=c_\nu+\delta(\beta\circ\mathrm{pr})$. \\
+C001 & The split-deck formula $H^1=(\Z/2)^{ts}$ on the grid
+$(r,t,s)\in\{(1,6,1),(2,4,1),(1,4,2),(2,2,2),(3,3,1)\}$ (the
+committed shape re-derived through the universal engine). \\
+C002 & The pair-block vanishing on the grid $(r,s)\in
+\{(1,1),(2,1),(1,2),(2,2),(3,1)\}$ ($t=0$: $H^1=0$). \\
+C003 & The glue control: $H^1=\Z/4$ on
+$\Z[x]/((x+1)(x^2+1))$ (the $2m$ vs $4m$ distinction). \\
+D001 & Hostile trivial deck: $H^2=(\Z/4)^3\ne0$, $H^1=0$. \\
+D002 & Hostile involution deck ($\gamma^2=+1$): $H^2=\Z/2\ne0$. \\
+D003 & Hostile negation deck ($\gamma=-1$): $H^2=0$,
+$H^1=(\Z/2)^2$. \\
+D004 & Sabotage: $(\Z/2)^{ns}$ fails on the committed shape (the
+correct $(\Z/2)^{ts}$ is load-bearing). \\
+E001 & The committed deck anchor: $\gamma^4=I$;
+$\gamma^2=-1$ on the moved pair, $+1$ on the six fixed letters. \\
+E002 & The content rotation $\mathrm{CONT}^2=-I$ (the Weil plane). \\
+E003 & The committed mixed layer $(\Z/2)^6$ re-derived (SNF
+$[2]^6$, order $64$). \\
+E004 & R5 on the committed Weil plane: $m W_R$ admitted iff $m$ even
+(the $m^\ast=2$ pin). \\
+E005 & $\gamma^3=\gamma^{-1}$ (the integral inverse; $C_4$). \\
+F001 & The rotation lattice $L=\ker(\Phi^2+1)$ has rank $24$. \\
+F002 & $24$ equivariant realizations
+($\gamma A'\gamma^{-1}=-B'$, $\gamma B'\gamma^{-1}=A'$). \\
+F003 & The square-zero dressing law: $24/24$ spans, all products
+zero. \\
+F004 & The honest scope receipt: $96$ of $576$ lattice-wide cross
+pairs nonzero (the law is per-span). \\
+F005 & $\det(I+X(c))=1$ on span elements (the dressing in
+$\SL_8$). \\
+G001 & The integral primitive:
+$(\gamma_{\mathrm{act}}-1)\sigma=2f_w$ on all eight letters. \\
+G002 & The additive primitive: $\delta s=2c_\nu$ (random triples +
+structured cells). \\
+G003 & The complete basis sweep: $\delta S=M_2$ on all $1152$ cells
+(the universal quantifier closed). \\
+G004 & The gauge identity on all $24$ realizations (random battery
+each). \\
+G005 & The gauge normalized and integral:
+$S\colon G_\bullet\to\SL_8(\Z)$. \\
+G006 & Hostile scale-$1$: $f_w$ not an integral coboundary (the
+halves obstruction; the kill at $2m$ load-bearing). \\
+G007 & Sabotage: the trivial gauge fails on the witness cell. \\
+H001 & $H^p(C_4;\mu_2)=\mu_2$ every $p$ (genuine $\F_2$ battery:
+$\mu_2\to1$, $P\to1$, letters $\to7$, unipotents $\to1/0$). \\
+H002 & The gerbe ambient recomputed (wedge matrices, elimination,
+$d(q)=1,7,22,41$; dims $8/30/71$). \\
+I001 & The stratum receipt: the mixed class nonzero at $1$, dead at
+$2$. \\
+I002 & The conduit at the kill scale: $m_{\mathrm{kill}}=2$ computed;
+the halving lands at denominator $2$; the scale chain
+$\{1,2,16\}$. \\
+\bottomrule
+\end{longtable}
+
+\end{document}

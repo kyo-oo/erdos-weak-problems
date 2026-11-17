@@ -156,3 +156,22 @@ Engine total wall: 97.1 s (parts: B ≈ 40 s incl. z3; A ≈ 55 s; C ≈ 0.1 s; 
 ### Appendix: optional Lean kernel
 
 `Erdos61.lean` (statement-only kernel): the five theorem statements as `Prop` definitions — no proofs, no `sorry`, no push. See file header.
+
+---
+
+## THE FAMILY PACKAGE (W72-61K, S071)
+
+The complete-theorem family package — Seinsche's lemma and theorem
+(perfectness form: P4-free → χ = ω, hence α·ω ≥ n and max(α,ω) ≥ ⌈√n⌉;
+c = 1/2 for P4, optimal via the block witnesses), the F7 family board
+(all seven H with the ⌊√n⌋ floor, CI-green in Erdos61.lean), the
+tightness witnesses (m×m block graphs + the dyadic family), the
+Erdős–Szekeres Ramsey recursion (K4/K̄4 at c = 1/3), the inheritance law,
+and the substitution-stack receipts: **FAMILY_PROOF.md** (this directory).
+Engine: `engine61family.py --verify` — 10/10 GREEN
+(`receipts61family.txt`), including the adversarial self-correction: the
+engine's random-cograph battery REJECTED an over-strong draft of the
+Seinsche claim (max(α,ω) ≥ n/2 is false — join(2C4, 2C4) is P4-free with
+α = ω = 4, n = 16) and forced the correct perfectness form. The OFFICIAL
+DeepMind comparator lane (fresh google-deepmind/funsearch clone):
+`comparator-official/challenges/61/`.

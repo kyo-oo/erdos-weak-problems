@@ -1,0 +1,71 @@
+name: GPT56 Canonical Transparent Bridge CI
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - 'GSTGraphV2CanonicalTransparentBridgeProbe.lean'
+      - 'GSTGraphV2TransparentWidthThree.lean'
+      - '.github/workflows/gpt56-canonical-transparent-bridge.yml'
+  workflow_dispatch:
+
+jobs:
+  lean:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Materialize transparent bridge import closure
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 - <<'PY'
+          from pathlib import Path
+          import re, subprocess
+          roots = [
+              Path("GSTGraphV2TransparentWidthThree.lean"),
+              Path("GSTGraphV2CanonicalTransparentBridgeProbe.lean"),
+          ]
+          build = Path(".lake/build/lib/lean")
+          rx = re.compile(r"^\s*import\s+(.+?)\s*$")
+          order, done, stack = [], set(), []
+          def path_of(m): return Path(*m.split(".")).with_suffix(".lean")
+          def imports(path):
+              out = []
+              for raw in path.read_text(encoding="utf-8").splitlines():
+                  match = rx.match(raw.split("--", 1)[0].rstrip())
+                  if match: out.extend(match.group(1).split())
+              return out
+          def visit(m):
+              if m in done: return
+              path = path_of(m)
+              if not path.exists(): return
+              if m in stack:
+                  raise SystemExit("LOCAL_IMPORT_CYCLE=" + " -> ".join(stack + [m]))
+              stack.append(m)
+              for d in imports(path): visit(d)
+              stack.pop(); done.add(m); order.append((m, path))
+          for root in roots:
+              for m in imports(root): visit(m)
+          build.mkdir(parents=True, exist_ok=True)
+          for m, path in order:
+              out = build.joinpath(*m.split(".")).with_suffix(".olean")
+              out.parent.mkdir(parents=True, exist_ok=True)
+              if not out.exists():
+                  print("COMPILE", m, flush=True)
+                  subprocess.run(["lake", "env", "lean", "-o", str(out), str(path)], check=True)
+          PY
+      - name: Compile transparent width-three and canonical bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p .lake/build/lib/lean
+          lake env lean -o .lake/build/lib/lean/GSTGraphV2TransparentWidthThree.olean GSTGraphV2TransparentWidthThree.lean 2>&1 | tee transparent-width-three.log
+          lake env lean GSTGraphV2CanonicalTransparentBridgeProbe.lean 2>&1 | tee canonical-transparent-bridge.log
+          cat transparent-width-three.log canonical-transparent-bridge.log > transparent-bridge-kernel.log
+          ! grep -E 'sorryAx|declaration uses .sorry.|unknown identifier|unknown module prefix|unsolved goals|error:' transparent-bridge-kernel.log

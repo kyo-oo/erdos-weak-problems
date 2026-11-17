@@ -1,0 +1,57 @@
+name: GST Hodge Spectral Kernel Reduction
+on:
+  push:
+    branches:
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTClassicalHodgeExactClayStatement.lean'
+      - '.github/workflows/gst-hodge-spectral-kernel-reduction.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-hodge-spectral-kernel-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install pinned Lean and restore Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Lean kernel build Hodge spectral to Chow bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTHodgeSpectralReduction"
+          roots = ["GSTClassicalHodgeExactClayStatement"]
+          EOF
+          if lake build GSTHodgeSpectralReduction > gst-hodge-spectral-kernel.log 2>&1; then
+            echo "LEAN PASSED: rational spectral kernel / Hodge native range equivalence"
+          else
+            grep -nE 'error:|sorryAx|✖' gst-hodge-spectral-kernel.log | tail -n 100 || true
+            tail -n 180 gst-hodge-spectral-kernel.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-hodge-spectral-kernel.log; then
+            exit 1
+          fi
+      - name: Upload Lean log
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-hodge-spectral-kernel-log
+          path: gst-hodge-spectral-kernel.log
+          if-no-files-found: warn

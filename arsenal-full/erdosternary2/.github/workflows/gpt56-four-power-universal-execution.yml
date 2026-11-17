@@ -1,0 +1,47 @@
+name: GPT56 Four Power Universal Execution
+
+on:
+  push:
+    branches:
+      - sol/gpt56-four-power-universal-execution-20260827
+  workflow_dispatch:
+
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install exact Lean toolchain
+        shell: bash
+        run: |
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: Resolve pinned Mathlib
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          rm -f lake-manifest.json
+          lake update
+          lake exe cache get
+      - name: Compile universal theorem
+        shell: bash
+        run: |
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake env lean GSTInfiniteFourPowerNavigation.lean
+      - name: Audit source
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          p=Path('GSTInfiniteFourPowerNavigation.lean')
+          bad=[]
+          for i,line in enumerate(p.read_text(encoding='utf-8').splitlines(),1):
+              if line.lstrip().startswith('--'):
+                  continue
+              if re.search(r'\bsorry\b|\badmit\b|\baxiom\b|\bnative_decide\b', line):
+                  bad.append(f'{p}:{i}:{line}')
+          if bad:
+              print('\n'.join(bad)); raise SystemExit(1)
+          print('universal theorem source audit: clean')
+          PY

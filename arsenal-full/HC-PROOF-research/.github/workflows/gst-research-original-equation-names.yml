@@ -1,0 +1,75 @@
+name: GST Original Three Equation Names
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+    paths:
+      - 'GSTResearchOriginalEquationNames.lean'
+      - '.github/workflows/gst-research-original-equation-names.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-research-equation-names-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean installation
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental dependency cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-research-equation-names
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel check original equation names and exact formulas
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "ResearchOriginalEquations"
+          roots = [
+            "GSTMathboxIndependentGeometricCoordinate",
+            "GSTMathboxCorrectedZetaGeometry",
+            "GSTMathboxCorrectedZetaInfinite",
+            "GSTResearchOriginalEquationNames"
+          ]
+          EOF
+          if lake build ResearchOriginalEquations > original-equations-lean.log 2>&1; then
+            echo 'LEAN PASSED: three user-authored GST equation names and typed consequences'
+          else
+            grep -nE 'error:|sorryAx|✖' original-equations-lean.log | tail -n 130 || true
+            tail -n 90 original-equations-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" original-equations-lean.log; then
+            echo "Lean trust audit failure"
+            exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: research-original-equations-lean-log
+          path: original-equations-lean.log
+          if-no-files-found: warn

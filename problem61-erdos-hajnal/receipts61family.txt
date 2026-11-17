@@ -1,0 +1,16 @@
+RECEIPTS — engine61family.py (W72-61K, S071) — THE FAMILY ENGINE
+seed 20261117 ; deterministic ; python3
+
+PASS SL — Seinsche's lemma (P4-free, n>=2 -> G or complement disconnected): exhaustive n=2..6 (6038 P4-free graphs) + 400 random cographs n<=24
+PASS SEINCHE — Seinsche (perfectness form): P4-free -> chi = omega (perfect), alpha*omega >= n, max(alpha,omega) >= floor(sqrt(n)); exhaustive n=2..6 (chi/alpha/omega exact) + 2500 random cographs n<=200 (tree-exact; worst alpha*omega/n ratio = 1.000)
+PASS TREE-CROSS — cograph tree alpha/omega == B&B alpha/omega on 150 materialized cographs n<=20
+PASS F7-EXHAUSTIVE — family board: every H-free graph n<=6 (exhaustive) has alpha or omega >= floor(sqrt(n)); H-free graph counts: [('K2', 5), ('Kb2', 5), ('K3', 6227), ('Kb3', 6227), ('P3', 5230), ('Pb3', 4211)]
+PASS F7-RANDOM — family board: 150 structured random H-free graphs n<=50 per H (bipartite / complete-ish / clique-union / multipartite): floor(sqrt(n)) law holds
+PASS TIGHT — tightness witnesses: the m x m block graphs (m=2,3,4,5,8; B&B-exact alpha=omega=m=floor(sqrt(m^2))) + the dyadic family m=2^j (j=1..5) — the 1/2-exponent boundary
+PASS SUB — substitution receipts: harmonic law 1/f = 1/c1 + 1/c2 (exact rationals); |V(H1[H2])| = ab; induced H1 by transversal + induced H2 in class (P3[P3], K2[K2]); K2[2K1] = C4 avoids 2K2; 3-level composition identity
+PASS DEGREE-LAWS — kernel ingredients: triangle-free neighborhoods independent (300); greedy alpha >= n/(Delta+1) (300); P3-free closed neighborhoods are cliques (200)
+PASS LAW-SPOTCHECKS — 13/13 arsenal law spot-checks pass (CardinalWorlds, ErdosTernary2, GSTCausalPairingGraphs)
+PASS NEGATIVE-CONTROLS — C5 has an induced P4 (filter rejects)=True; planted P4 detected=True; corrupted tight witness detected=True; false harmonic value detected=True
+
+TOTAL: 10/10 PASS, wall 339.9s
+FAMILY_ENGINE_GREEN=1

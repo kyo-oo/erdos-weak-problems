@@ -1,0 +1,79 @@
+name: GST Actual Native Correspondence Power Orbit
+# Reverify all native geometric imports against the registered Lake project roots.
+
+on:
+  push:
+    branches:
+      - research/gpt6-gst-native-rank-one-realization-20261014
+    paths:
+      - 'GSTClassicalHodgeNativeGeometricPowerOrbit.lean'
+      - 'GSTClassicalHodgeActualGeometricIdentityClosure.lean'
+      - '.github/workflows/gst-native-geometric-power-orbit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-native-power-orbit-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-native-power-orbit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compiled dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-native-orbit
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel compile actual native polynomial orbit
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTClassicalHodgeNativeGeometricPowerOrbit > geometric-power-lean.log 2>&1; then
+            echo 'LEAN PASSED: geometric finite polynomial orbit and all-rank reconstruction'
+          else
+            echo 'LEAN FAILED: geometric finite polynomial orbit'
+            grep -nE 'error:|sorryAx|✖' geometric-power-lean.log | tail -n 120 || true
+            tail -n 50 geometric-power-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" geometric-power-lean.log; then
+            echo 'Trust audit failed'
+            exit 1
+          fi
+      - name: Save compilation cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-native-orbit
+      - name: Upload kernel diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-actual-native-polynomial-orbit-lean-log
+          path: geometric-power-lean.log
+          if-no-files-found: warn

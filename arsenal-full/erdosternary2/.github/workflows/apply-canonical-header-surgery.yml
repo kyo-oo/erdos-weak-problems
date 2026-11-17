@@ -1,0 +1,50 @@
+name: Apply Canonical Header Surgery
+
+on:
+  push:
+    branches:
+      - sol/gst-v2-atomic-surgery-20260818
+
+permissions:
+  contents: write
+
+jobs:
+  strip-malformed-archive-header:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: sol/gst-v2-atomic-surgery-20260818
+      - name: Remove only malformed chronological archive preamble
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p = Path('ErdosTernary2.lean')
+          s = p.read_text(encoding='utf-8')
+          marker = '-- CardinalWorldsWork.lean — GST Complete Formalization'
+          i = s.find(marker)
+          if i < 0:
+              raise SystemExit('canonical proof marker not found')
+          if i == 0:
+              print('header already clean')
+          else:
+              removed = s[:i]
+              if '/-' not in removed:
+                  raise SystemExit('refusing surgery: expected malformed comment preamble not present')
+              p.write_text(s[i:], encoding='utf-8')
+              print(f'removed {len(removed)} bytes of archival preamble; proof body preserved byte-for-byte')
+          PY
+      - name: Commit header-only surgery if needed
+        shell: bash
+        run: |
+          if git diff --quiet -- ErdosTernary2.lean; then
+            echo 'No header surgery needed.'
+            exit 0
+          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add ErdosTernary2.lean
+          git commit -m 'fix: remove malformed archival comment preamble only'
+          git push origin HEAD:sol/gst-v2-atomic-surgery-20260818

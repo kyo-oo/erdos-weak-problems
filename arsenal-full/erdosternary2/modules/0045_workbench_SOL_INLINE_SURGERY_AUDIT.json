@@ -1,0 +1,48 @@
+/- ======================================================================
+/- CHRONOLOGICAL LABEL — #0045 / 1133
+/-    Path         : workbench/SOL_INLINE_SURGERY_AUDIT.json
+/-    Ref          : main
+/-    First-commit : 2026-08-14 21:44:31 +0530
+/-    Last-commit  : 2026-08-14 21:44:31 +0530
+/-    Total commits: 1
+/- ======================================================================
+/- GIT HISTORY (chronological, oldest first)
+/- ======================================================================
+/- ====================================================================== -/
+
+{
+  "full_monolithic_experiment": {
+    "file": "ErdosTernary2_SOL_INLINE_SURGERY_EXPERIMENT.lean",
+    "lines": 8463,
+    "bytes": 390117,
+    "sha256": "fbca614ee31139c115a6d05c31664421f6595b957b1426bd021458b73e3f2386",
+    "active_hits": {
+      "sorry": [
+        {
+          "line": 8344,
+          "source": "sorry"
+        }
+      ],
+      "admit": [],
+      "axiom_decl": [],
+      "native_decide": []
+    }
+  },
+  "zero_gap_integration_checkpoint": {
+    "file": "ErdosTernary2_SOL_INLINE_GREEN_CHECKPOINT.lean",
+    "lines": 8311,
+    "bytes": 383669,
+    "sha256": "296ae0ff435a0b6c7013a66e863649bb29b3976794b6492afa8b16e77d88487a",
+    "active_hits": {
+      "sorry": [],
+      "admit": [],
+      "axiom_decl": [],
+      "native_decide": []
+    }
+  },
+  "interpretation": {
+    "full_experiment": "Full canonical file with the four CI-green Sol modules inlined at the original prefix-one surgery point. The broad original hole is reduced to one explicit transport theorem: child gate -> parent SURVIVE occurrence.",
+    "checkpoint": "Canonical prefix plus all four CI-green Sol modules inlined, stopping before the unresolved global transport theorem. This has zero active sorry/admit/axiom/native_decide by lexical audit; it is an integration checkpoint, not the completed conjecture file.",
+    "lean_runtime": "No local Lean/Lake executable is present. GitHub Actions validation was attempted, but current runs are failing before executing step 1, so no new kernel verdict is claimed."
+  }
+}

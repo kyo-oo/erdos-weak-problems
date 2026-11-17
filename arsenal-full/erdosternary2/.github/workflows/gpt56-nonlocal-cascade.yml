@@ -1,0 +1,28 @@
+name: GPT56 Nonlocal Cascade
+
+on:
+  push:
+    branches:
+      - sol/gpt56-canonical-tail-escape-20260827
+    paths:
+      - GSTGraphV2NonlocalCascade.lean
+      - GSTGraphV2FourPowerForcingBridge.lean
+      - .github/workflows/gpt56-nonlocal-cascade.yml
+  workflow_dispatch:
+
+jobs:
+  cascade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: leanprover/lean-action@v1
+        with:
+          build: false
+          test: false
+      - name: Compile exact nonlocal cascade packet
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build GSTGraphV2InfiniteControl
+          lake env lean GSTGraphV2NonlocalCascade.lean 2>&1 | tee nonlocal-cascade.log
+          ! grep -E 'declaration uses .sorry.|unknown identifier|unknown module prefix|unsolved goals' nonlocal-cascade.log

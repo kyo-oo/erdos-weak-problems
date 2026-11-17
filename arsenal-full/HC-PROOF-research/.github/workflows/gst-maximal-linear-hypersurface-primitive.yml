@@ -1,0 +1,70 @@
+name: GST All-Dimension Hypersurface Primitive Plane
+on:
+  push:
+    branches:
+      - mathbox/bd23-single-operator-charge-wedge
+      - research/gpt6-native-point-primitive-span-20261017
+    paths:
+      - 'GSTMaximalLinearHypersurfacePrimitive.lean'
+      - '.github/workflows/gst-maximal-linear-hypersurface-primitive.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: gst-maximal-linear-hypersurface-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  lean:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore incremental build
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-hypersurface-plane
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-
+      - name: Kernel verify every-degree every-dimension primitive discriminant
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          cat >> lakefile.toml <<'EOF'
+          [[lean_lib]]
+          name = "GSTHypersurfacePrimitive"
+          roots = ["GSTMaximalLinearHypersurfacePrimitive"]
+          EOF
+          if lake build GSTHypersurfacePrimitive > hypersurface-primitive-lean.log 2>&1; then
+            echo "LEAN PASSED: maximal-plane hypersurface primitive closed form and nonzero norm"
+          else
+            grep -nE 'error:|sorryAx|✖' hypersurface-primitive-lean.log | tail -n 120 || true
+            tail -n 90 hypersurface-primitive-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" hypersurface-primitive-lean.log; then
+            exit 1
+          fi
+      - name: Upload kernel diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-hypersurface-primitive-log
+          path: hypersurface-primitive-lean.log
+          if-no-files-found: warn

@@ -1,0 +1,76 @@
+name: GST Actual Finite Closed Kernel Bridge
+
+on:
+  push:
+    branches:
+      - research/openai-cm-gale-gst-crosscarrier-20261013
+    paths:
+      - 'GSTClassicalHodgeFiniteClosedKernelBridge.lean'
+      - '.github/workflows/gst-closed-kernel-bridge.yml'
+      - 'lakefile.toml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: gst-actual-closed-kernel-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  actual-geometry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean toolchain
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-${{ runner.os }}-${{ hashFiles('lean-toolchain') }}
+      - name: Install pinned Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Restore compiled GST dependencies
+        uses: actions/cache/restore@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-closed-kernel
+          restore-keys: |
+            hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-
+      - name: Compile actual geometric kernel bridge
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          if lake build GSTClassicalHodgeFiniteClosedKernelBridge > actual-geometry-lean.log 2>&1; then
+            echo "LEAN PASSED: actual finite-closed kernel bridge"
+          else
+            echo "LEAN FAILED: actual finite-closed kernel bridge"
+            grep -nE 'error:|sorryAx|✖' actual-geometry-lean.log | tail -n 90 || true
+            tail -n 40 actual-geometry-lean.log
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" actual-geometry-lean.log; then
+            exit 1
+          fi
+      - name: Save cache
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .lake/build
+          key: hc-lean-incremental-${{ runner.os }}-${{ hashFiles('lean-toolchain', 'lake-manifest.json', 'lakefile.toml') }}-${{ github.sha }}-closed-kernel
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: actual-finite-closed-kernel-lean-log
+          path: actual-geometry-lean.log
+          if-no-files-found: warn
