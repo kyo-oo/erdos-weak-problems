@@ -1463,3 +1463,25 @@ jobs:
           test "$(grep -c 'XAUDIT_.*: CONFIRMED' crossaudit142d.log)" -ge 6
           grep -F "E142_CROSSAUDIT_GREEN" crossaudit142d.log
           echo KERNEL142D_GREEN=1
+
+  kernel-142a:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Kernel 142a - Erdos 142 r_k(N) AP-FREE W69-B AUDIT BATTERY (W69-B, second-method independent re-verification of the CI-green kernel-142k board, run 43754690872): pure python3 + z3, exact integer arithmetic, exit nonzero on ANY failure -- (A1) the exact r_3 table N=1..30 = 1,2,2,3,4,4,4,4,5,5,6,6,7,8,8,8,8,8,8,9,9,9,9,10,10,11,11,11,11,12 re-derived by a FRESH iterative-deepening DFS branch-and-bound engine (AP-completion pair-ban propagation + exact-suffix R-table bounds + state memoization; the engine pruning deliberately uses NO form of the audited block bound -- zero circularity), cross-checked by exhaustive 2^N subset brute force N<=12 (12/12) and z3 SAT/UNSAT dual certificates N<=16 (SAT witness independently re-validated + cardinality-UNSAT upper bound, 16/16); ANY deviation from the doubter's certified table => CRITICAL_FINDING + exit 2; (A2) the Cantor census k=1..10: T_k = ternary-{0,1}-digit integers in [1,3^k-1] has exactly 2^k-1 elements (two independent generation methods: digit-product + range-scan) and is 3-AP-free (literal triple enumeration k<=8 at ~2.7M triples for k=8, full pair-midpoint scan ALL k<=10, consecutive-run census max-run<=2, no-carry digit spot checks, (a,d)-scan witness re-validation k<=8); (A3) the block-bound torture N=1..60 k=3..6: every k-AP-free S satisfies |S| <= (k-1)*floor(N/k) + (N mod k) -- exhaustive N<=16 via a SECOND generalized k-AP B&B engine (AP-mask include-checks, k=3 table cross-matched against the pair-ban engine AND the certified table; k=5 tight at 16/16 points), plus 3000+ randomized greedy-order + dense-sieve + leave-one-residue + Cantor structured constructions for N=17..60, every set re-validated by an independent (a,d)-scan checker, negative controls prove the checker and bound comparison non-vacuous; (A4) the k=2 edge r_2(1)=1 and r_2(N)=1 for N>=2 (brute N<=12 + 435-pair exhaustive scan N<=30 + [1] witness); (A5) the honest gap map r_3(N)/N vs the kernel's elementary 2*floor(N/3)+(N mod 3) envelope for N=1..30 (ratio 0.400 at N=30 vs envelope 0.667 vs Cantor floor 0.269 at N=26) + the seal's honest-scope statement (kernel = elementary envelope + exact small-N values, NOT the open #142 asymptotic)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_ok=0
+          if python3 -m pip install --quiet --break-system-packages z3-solver 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages z3-solver 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet z3-solver 2>/dev/null; then install_ok=1
+          elif (sudo apt-get update -qq && sudo apt-get install -y -qq python3-z3); then install_ok=1; fi
+          if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED (battery will FAIL without z3)"; fi
+          python3 -c "import z3; print('z3 ready', z3.get_version_string())" || echo "WARNING: z3 import still failing; battery will FAIL"
+          python3 problem142-ap-free/engine142/audit_w69b.py 2>&1 | tee kernel142a.log
+          ! grep -E 'CRITICAL_FINDING|FATAL|AUDIT_W69B_RED' kernel142a.log
+          grep -F "AUDIT_W69B_GREEN" kernel142a.log
+          test "$(grep -c 'CERTIFIED' kernel142a.log)" -ge 5
+          test "$(grep -c 'CONFIRMED' kernel142a.log)" -ge 7
+          echo KERNEL142A_GREEN=1
