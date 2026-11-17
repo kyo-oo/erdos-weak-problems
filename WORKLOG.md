@@ -4437,3 +4437,34 @@ BOSS-ordered DeepMind comparators). The campaign master run on fc6c7c6 was ALL-G
   OPEN for n ≥ 7.
 
 The engine never stops; it never lies. In English, always.
+
+## S070 — W70-C FINAL SEAL: THE ERDOS-HAJNAL FAMILY KERNEL IS CI-GREEN
+
+**Run 44136423582 on head f8ba046 (w70-c-p61k): COMPLETED, SUCCESS — kernel-61k +
+kernel-a/b/c all green.** The 5-round root-kill war is won: 100 errors (run 43994298778)
+→ 22 (r1, 49 fixes) → 6 (r2, 21 fixes) → 3 (r3, 5 fixes) → 1 (r4, the missing-lemma
+kill) → 0 (r5). Campaign advanced to 29f78b0 with the 11-job kills.yml union:
+kernel-a/b/c (S066 gates) + kernel-142k/142d/142a (the #142 stack) + kernel-107k +
+kernel-142cmp/61cmp/107cmp (the three DeepMind comparators) + kernel-61k (the family
+kernel).
+
+**THE W70 WAVE — FINAL BOARD (all three fortress fronts, BOSS's ordered lanes):**
+- **#142:** ternary kernel + doubter battery + audit battery + DeepMind comparator,
+  ALL CI-GREEN. HONEST LABEL: the asymptotic formula remains OPEN for every k ≥ 3;
+  the certified stack = the complete elementary two-sided theory + exact finite tables.
+- **#61:** the FULL family kernel (F7 floor(√n) SHARP, greedy engine, tightness
+  witnesses) + DeepMind comparator, ALL CI-GREEN. HONEST LABEL: the full Erdős–Hajnal
+  conjecture remains OPEN; P4 (Seinsche) is the continuation front.
+- **#107:** witness kernel (f(3)=3 exact, f(4)≥5, f(5)≥9) + DeepMind comparator,
+  ALL CI-GREEN. HONEST LABEL: the conjecture f(n)=2^{n−2}+1 remains OPEN for n ≥ 7.
+
+**THE ENGINEERING LAWS BANKED THIS SESSION:** the display layer eats `rw [h...]` as
+`rw h...]` (byte-level patching only — od is the truth); the dispatcher kills launch
+reports but the agents' work lands (verify everything, trust nothing); cases-with
+substitutes in the goal (rfl closes, not exact h); rcases Bool.eq_false_or_eq_true's
+first disjunct elaborates as the = true case in this toolchain; forward references
+are illegal (relocate, don't hope); hmul_le needs its four explicit nats; the missing
+lemma was never defined (read the r0 log with the 100-cap in mind — masked errors
+exist below the cap).
+
+The engine never stops; it never lies. In English, always.
