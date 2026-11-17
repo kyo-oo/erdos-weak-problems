@@ -798,8 +798,10 @@ theorem closedNbhd_greedy (adj : α → α → Bool)
       · intro s hs
         rcases List.mem_cons.mp hs with h | h
         · exact List.mem_cons.mpr (Or.inl h)
-        · exact List.mem_cons.mpr (Or.inr
-            (removedOf_subset adj a (a :: t) s (hSub' s h)))
+        · have hsm : s ∈ a :: t := removedOf_subset adj a (a :: t) s (hSub' s h)
+          rcases List.mem_cons.mp hsm with h' | h'
+          · exact absurd h' ((removedOf_avoids adj a (a :: t) s (hSub' s h)).1)
+          · exact List.mem_cons.mpr (Or.inr h')
       · -- D * (1 + |S'|) ≥ |N[a]| + |removed| ≥ (a::t).length
         have hpart : (a :: t).length ≤ (cnb adj a (a :: t)).length +
             (removedOf adj a (a :: t)).length := by
@@ -971,7 +973,8 @@ theorem p3_bound (adj : α → α → Bool)
     · -- all closed neighborhoods ≤ k − 1: the greedy engine with D = k − 1
       have hdeg : ∀ v ∈ vs, (cnb adj v vs).length ≤ fsqrt vs.length - 1 := by
         intro v hv
-        have hnot : ¬ (fsqrt vs.length ≤ (cnb adj v vs).length) := hall v hv
+        have hnot : ¬ (fsqrt vs.length ≤ (cnb adj v vs).length) :=
+          fun hle => hall ⟨v, hv, hle⟩
         omega
       obtain ⟨S, hND, hInd, hSub, hCount⟩ :=
         closedNbhd_greedy adj hsym hirr (vs.length) (fsqrt vs.length - 1) vs
@@ -1237,7 +1240,10 @@ theorem div_exact_mul (q m : Nat) (hpos : 1 ≤ m) : q * m / m = q := by
   have hrec : m * (q * m / m) + q * m % m = q * m := div_add_mod_self (q * m) m
   have hcomm : q * m = m * q := Nat.mul_comm q m
   rw [hcomm] at hrec
-  have hle : m * (q * m / m) ≤ m * q := by omega
+  have hle : m * (q * m / m) ≤ m * q := by
+    have h := Nat.le_add_right (m * (q * m / m)) (q * m % m)
+    rw [hrec] at h
+    exact h
   have hX : q * m / m ≤ q := hmul_le_cancel_left m (q * m / m) q hpos hle
   rcases Nat.eq_or_lt_of_le hX with heq | hlt
   · exact heq
@@ -1245,12 +1251,12 @@ theorem div_exact_mul (q m : Nat) (hpos : 1 ≤ m) : q * m / m = q := by
     have hlt' : q * m / m < q := hlt
     have hle2 : (q * m / m) + 1 ≤ q := Nat.succ_le_of_lt hlt'
     have hle3 : m * ((q * m / m) + 1) ≤ m * q :=
-      hmul_le m m ((q * m / m) + 1) q hle2 (Nat.le_refl m)
+      hmul_le m m ((q * m / m) + 1) q (Nat.le_refl m) hle2
     have hexp : m * ((q * m / m) + 1) = m * (q * m / m) + m := by
       rw [Nat.mul_add, Nat.mul_one]
     rw [hexp] at hle3
     rw [← hrec] at hle3
-    have hle5 : m ≤ q * m % m := Nat.le_of_add_le_add_right hle3
+    have hle5 : m ≤ q * m % m := by omega
     have hmod : q * m % m < m := Nat.mod_lt (q * m) (by omega)
     omega
 
