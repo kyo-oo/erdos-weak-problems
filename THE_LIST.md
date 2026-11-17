@@ -249,3 +249,17 @@ core). **#634** (Laczkovich–Szabó deep). **#1055** (infinitude). **#1110**
    on them is a violation (S030).**
 
 *State is full. The engine never stops; it never lies.*
+
+---
+
+## §S066 — THE W66 WAVE-1 FRONTS (2026-11-16, the #142/#61/#107 fortress assault)
+
+| ID | target | status | fronts |
+|---|---|---|---|
+| W1-A | **#142 r_k(N) asymptotic** ($10000 fortress) | ATTACKED — strongest attackable front shipped: Cardinal-Worlds-native package (Theorems A–H, two-method receipts, z3 UNSAT certs); Erdos142.lean + AuditKernel142.lean statement-only kernels | problem142-rk-asymptotic/ (PROOF.md, AUDIT.md, receipts_regen.py, engines restored) |
+| W1-B | **#61 Erdős–Hajnal** | ATTACKED — Thms 1–4 unconditional (P₃ sharp ⌈√n⌉ + substitution closure f = c₁c₂/(c₁+c₂) + harmonic law, honest APS scoping); z3 36/36 certs; independent audit lane confirms | problem61-erdos-hajnal/ (PROOF.md, AUDIT.md, engine61.py, audit61.py, Erdos61.lean) |
+| W1-C | **#107 Happy Ending** ($500 fortress) | ATTACKED — f(3)=3, f(4)=5 UNCONDITIONAL complete + monotone lemma + cup/cap machinery + five machine-verified 8-pt witnesses; global bounds + small values cited-classical | problem107-happy-ending/ (PROOF.md, AUDIT.md, engine107.py, receipts107.txt) |
+
+All three exact-labels: the fortress cores remain OPEN (asymptotic formula / full EH
+conjecture / f(n) = 2^{n−2}+1) — the shipped mathematics is complete, unconditional
+where claimed, honestly scoped everywhere.
