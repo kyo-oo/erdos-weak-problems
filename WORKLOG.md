@@ -4219,3 +4219,16 @@ of record). NO local Lean (the boss law held — no Lean compiled anywhere this 
 all kernels are statement-only drafts pending the CI wave).
 
 The engine never stops; it never lies. In English, always.
+
+## S066 — W66-H: THE CI VERDICT (run 44000724519 — ALL-GREEN)
+
+**Run 44000724519 on head 2b84f04: completed, conclusion SUCCESS.** The three jobs
+(kernel-a / kernel-b / kernel-c) all green — zero regressions from the kills.yml W66
+wiring. **Kernel W66-A (Erdos142.lean + AuditKernel142.lean): SUCCESS — the #142
+statement-only kernels compile green on the verifier of record. Kernel W66-B
+(Erdos61.lean): SUCCESS — the #61 statement-only kernel compiles green.** The W66
+fortress fronts (#142 / #61 / #107) are now: packages delivered (paper + machine
+receipts + audits), statements frozen on CI-green kernels, proofs = the next kernel
+wave's work (the statement-first discipline).
+
+The engine never stops; it never lies. In English, always.
