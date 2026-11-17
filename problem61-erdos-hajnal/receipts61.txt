@@ -1,0 +1,154 @@
+ENGINE61 — Erdos-Hajnal #61 attack engine — started (wall 0.0s)
+==============================================================================
+[B] H-TABLES n<=7 (exhaustive bitmask engine) + z3 UNSAT certificates
+==============================================================================
+   h_2K_2: n=1:1  n=2:2  n=3:2  n=4:2  n=5:2  n=6:3  n=7:3  
+   h_P_3: n=1:1  n=2:2  n=3:2  n=4:2  n=5:3  n=6:3  n=7:3  
+   h_3K_1: n=1:1  n=2:2  n=3:2  n=4:2  n=5:2  n=6:3  n=7:3  
+   h_claw(K_1,3): n=1:1  n=2:2  n=3:2  n=4:2  n=5:2  n=6:3  n=7:3  
+   h_C_4: n=1:1  n=2:2  n=3:2  n=4:2  n=5:2  n=6:3  n=7:3  
+   h_K_2: n=1:1  n=2:2  n=3:3  n=4:4  n=5:5  n=6:6  n=7:7  
+[B1] Ramsey cross-checks (R(3,3)=6):
+   h_3K_1(5)=2 (expect 2), h_3K_1(6)=3 (expect 3), h_3K_1(7)=3 (expect 3)
+   all five H at n=6 have h=3 (Ramsey R(3,3)=6 forces max(omega,alpha)>=3 for EVERY graph on 6 vertices): VERIFIED
+[B2] Theorem 2 law: h_P_3(n) = ceil(sqrt(n)):
+   n=1: h=1, law=1 OK
+   n=2: h=2, law=2 OK
+   n=3: h=2, law=2 OK
+   n=4: h=2, law=2 OK
+   n=5: h=3, law=3 OK
+   n=6: h=3, law=3 OK
+   n=7: h=3, law=3 OK
+   => VERIFIED for all n<=7
+[B3] Theorem 3 law: h_3K_1(n) >= min t with t(t+1)>=n  (= ceil((sqrt(4n+1)-1)/2)) [bound; equality where noted]:
+   n=1: h=1, law=1 OK (equality)
+   n=2: h=2, law=1 OK (strict: Ramsey forcing)
+   n=3: h=2, law=2 OK (equality)
+   n=4: h=2, law=2 OK (equality)
+   n=5: h=2, law=2 OK (equality)
+   n=6: h=3, law=2 OK (strict: Ramsey forcing)
+   n=7: h=3, law=3 OK (equality)
+   => VERIFIED: h >= law everywhere (bound holds at every n<=7; witness C_5 at n=5 shows plain sqrt(n) is FALSE: h=2<sqrt(5))
+[B4] Theorem 1 receipt: h_K_2(n) = n for all n<=7: True
+[B5] witnesses (first achieving the h-value):
+   h_2K_2(5)=2 witness: 5 edges, mask=0x30d
+   h_2K_2(6)=3 witness: 6 edges, mask=0x2c07
+   h_2K_2(7)=3 witness: 9 edges, mask=0xd0077
+   h_P_3(5)=3 witness: 3 edges, mask=0xc1
+   h_P_3(6)=3 witness: 4 edges, mask=0x2007
+   h_P_3(7)=3 witness: 6 edges, mask=0x88074
+   h_3K_1(5)=2 witness: 5 edges, mask=0x30d
+   h_3K_1(6)=3 witness: 6 edges, mask=0x4474
+   h_3K_1(7)=3 witness: 11 edges, mask=0x1d0f23
+   h_claw(K_1,3)(5)=2 witness: 5 edges, mask=0x30d
+   h_claw(K_1,3)(6)=3 witness: 4 edges, mask=0x2007
+   h_claw(K_1,3)(7)=3 witness: 6 edges, mask=0x88074
+   h_C_4(5)=2 witness: 5 edges, mask=0x30d
+   h_C_4(6)=3 witness: 4 edges, mask=0x2007
+   h_C_4(7)=3 witness: 6 edges, mask=0x88074
+   h_K_2(5)=5 witness: 0 edges, mask=0x0
+   h_K_2(6)=6 witness: 0 edges, mask=0x0
+   h_K_2(7)=7 witness: 0 edges, mask=0x0
+[B6] z3 UNSAT certificates: 'exists H-free G on n with max(omega,alpha) <= h-1' must be UNSAT (certifies h >= reported).
+   H=2K_2         n=2 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=2K_2         n=3 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=2K_2         n=4 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=2K_2         n=5 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=2K_2         n=6 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=2K_2         n=7 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=P_3          n=2 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=P_3          n=3 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=P_3          n=4 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=P_3          n=5 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=P_3          n=6 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=P_3          n=7 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=3K_1         n=2 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=3K_1         n=3 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=3K_1         n=4 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=3K_1         n=5 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=3K_1         n=6 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=3K_1         n=7 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=claw(K_1,3)  n=2 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=claw(K_1,3)  n=3 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=claw(K_1,3)  n=4 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=claw(K_1,3)  n=5 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=claw(K_1,3)  n=6 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=claw(K_1,3)  n=7 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=C_4          n=2 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=C_4          n=3 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=C_4          n=4 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=C_4          n=5 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=C_4          n=6 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=C_4          n=7 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=K_2          n=2 h=2: k=1 instance -> UNSAT CERTIFIED
+   H=K_2          n=3 h=3: k=2 instance -> UNSAT CERTIFIED
+   H=K_2          n=4 h=4: k=3 instance -> UNSAT CERTIFIED
+   H=K_2          n=5 h=5: k=4 instance -> UNSAT CERTIFIED
+   H=K_2          n=6 h=6: k=5 instance -> UNSAT CERTIFIED
+   H=K_2          n=7 h=7: k=6 instance -> UNSAT CERTIFIED
+[B] wall: 40.1s (z3 instances: 36)
+==============================================================================
+[A] SUBSTITUTION BUILDER + IDENTITIES (Theorem 4 machine receipts)
+==============================================================================
+[A1] sizes: |V(H_1[H_2])| = |V(H_1)|*|V(H_2)| (verified)
+   K_2[K_2]     |V| = 4, |E| = 6
+   P_3[K_2]     |V| = 6, |E| = 11
+   P_3[P_3]     |V| = 9, |E| = 24
+   K_2[2K_1]    |V| = 4, |E| = 4
+   2K_1[K_2]    |V| = 4, |E| = 2
+[A2] identity checks (brute-permutation isomorphism):
+   K_2[K_2]  ~= K_4                              : VERIFIED
+   2K_1[K_2] ~= 2K_2                             : VERIFIED
+   K_2[2K_1] ~= C_4 (=K_{2,2})                   : VERIFIED
+   complement(P_3[K_2]) ~= C_4 + 2K_1            : VERIFIED
+[A3] induced-avoid behavior (contains-induced table, exhaustive search):
+   product      K_3    K_4    C_4    2K_2   P_3    P_4    3K_1   claw   C_5   
+   K_2[K_2]     YES    YES    no     no     no     no     no     no     no    
+   P_3[K_2]     YES    YES    no     YES    YES    no     no     no     no    
+   P_3[P_3]     YES    YES    YES    YES    YES    no     YES    YES    no    
+   K_2[2K_1]    no     no     YES    no     YES    no     no     no     no    
+   2K_1[K_2]    no     no     no     YES    no     no     no     no     no    
+[A4] uniform-pair verification of substitution products (blow-up frame):
+   K_2[K_2]     uniform pairs: OK | contains induced H_1 (transversal): True | contains induced H_2 (in class): True
+   P_3[K_2]     uniform pairs: OK | contains induced H_1 (transversal): True | contains induced H_2 (in class): True
+   P_3[P_3]     uniform pairs: OK | contains induced H_1 (transversal): True | contains induced H_2 (in class): True
+   K_2[2K_1]    uniform pairs: OK | contains induced H_1 (transversal): True | contains induced H_2 (in class): True
+   2K_1[K_2]    uniform pairs: OK | contains induced H_1 (transversal): True | contains induced H_2 (in class): True
+[A5] Theorem 4A avoidance + 4B min-bound — uniform blow-ups, H_1 = H_2 = P_3:
+   exhaustive: q,s in {1,2,3}^2: blow-ups checked = 4317, min-bound violations = 0, avoidance-law violations = 0
+   sampled: q,s in {(4,4),(5,5),(6,6),(7,4),(4,7)} x150: checked = 750, min-bound violations = 0, avoidance violations = 0
+[A6] exponent composition law receipts:
+   c_1=1 c_2=1 -> f(c_1,c_2)=c_1*c_2/(c_1+c_2)=1/2 ; balanced split: q=n^(1/2), s=n^(1/2)
+   c_1=1/2 c_2=1/2 -> f(c_1,c_2)=c_1*c_2/(c_1+c_2)=1/4 ; balanced split: q=n^(1/2), s=n^(1/2)
+   c_1=1/3 c_2=2/3 -> f(c_1,c_2)=c_1*c_2/(c_1+c_2)=2/9 ; balanced split: q=n^(2/3), s=n^(1/3)
+   c_1=1/2 c_2=1/3 -> f(c_1,c_2)=c_1*c_2/(c_1+c_2)=1/5 ; balanced split: q=n^(2/5), s=n^(3/5)
+   c_1=1/5 c_2=2/5 -> f(c_1,c_2)=c_1*c_2/(c_1+c_2)=2/15 ; balanced split: q=n^(2/3), s=n^(1/3)
+   3-level: f(f(c_1,c_2),c_3) = 1/6 = 1/(1/c_1+1/c_2+1/c_3) = 1/6  (symmetric law: VERIFIED)
+   3-level: f(f(c_1,c_2),c_3) = 2/13 = 1/(1/c_1+1/c_2+1/c_3) = 2/13  (symmetric law: VERIFIED)
+[A] wall: 94.8s
+==============================================================================
+[C] P_3-FREE STRUCTURE CENSUS n<=7 (machine classification certificate)
+==============================================================================
+   n=1: P_3-free labeled graphs = 1 (Bell(1) = 1) ; non-clique-union counterexamples = 0 ; OK
+   n=2: P_3-free labeled graphs = 2 (Bell(2) = 2) ; non-clique-union counterexamples = 0 ; OK
+   n=3: P_3-free labeled graphs = 5 (Bell(3) = 5) ; non-clique-union counterexamples = 0 ; OK
+   n=4: P_3-free labeled graphs = 15 (Bell(4) = 15) ; non-clique-union counterexamples = 0 ; OK
+   n=5: P_3-free labeled graphs = 52 (Bell(5) = 52) ; non-clique-union counterexamples = 0 ; OK
+   n=6: P_3-free labeled graphs = 203 (Bell(6) = 203) ; non-clique-union counterexamples = 0 ; OK
+   n=7: P_3-free labeled graphs = 877 (Bell(7) = 877) ; non-clique-union counterexamples = 0 ; OK
+   => every P_3-free graph on n<=7 vertices is a disjoint union of cliques: VERIFIED (classification certificate)
+[C] wall: 94.9s
+==============================================================================
+[D] CLAW-FREE SAMPLER n<=30 (EVIDENCE ONLY — not a theorem)
+==============================================================================
+   n= 8: min observed max(omega,alpha) = 4    | sqrt(n)=2.83 n^(1/3)=2.00 | families: rejection(p<=0.12)=5(acc 40/40); line-graph L(G')=4(acc 300/300); complete multipartite(parts<=2)=4(acc 200/200)
+   n=10: min observed max(omega,alpha) = 4    | sqrt(n)=3.16 n^(1/3)=2.15 | families: rejection(p<=0.12)=7(acc 40/47); line-graph L(G')=4(acc 300/300); complete multipartite(parts<=2)=5(acc 200/200); C_5-clique-blowup=4(acc 1/1)
+   n=12: min observed max(omega,alpha) = 4    | sqrt(n)=3.46 n^(1/3)=2.29 | families: rejection(p<=0.12)=8(acc 40/47); line-graph L(G')=4(acc 300/300); complete multipartite(parts<=2)=6(acc 200/200)
+   n=15: min observed max(omega,alpha) = 5    | sqrt(n)=3.87 n^(1/3)=2.47 | families: rejection(p<=0.12)=10(acc 40/56); line-graph L(G')=5(acc 300/300); complete multipartite(parts<=2)=8(acc 200/200); C_5-clique-blowup=6(acc 1/1)
+   n=20: min observed max(omega,alpha) = 6    | sqrt(n)=4.47 n^(1/3)=2.71 | families: line-graph L(G')=6(acc 300/300); complete multipartite(parts<=2)=11(acc 200/200); C_5-clique-blowup=8(acc 1/1)
+   n=25: min observed max(omega,alpha) = 7    | sqrt(n)=5.00 n^(1/3)=2.92 | families: line-graph L(G')=7(acc 300/300); complete multipartite(parts<=2)=14(acc 200/200); C_5-clique-blowup=10(acc 1/1)
+   n=30: min observed max(omega,alpha) = 7    | sqrt(n)=5.48 n^(1/3)=3.11 | families: line-graph L(G')=7(acc 300/300); complete multipartite(parts<=2)=17(acc 200/200); C_5-clique-blowup=12(acc 1/1)
+   NOTE: every sampled graph was machine-verified claw-free; sampler is evidence only.
+[D] wall: 97.1s
+==============================================================================
+ENGINE61 COMPLETE — total wall 97.1s. The engine never stops; it never lies.
