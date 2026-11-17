@@ -1,0 +1,85 @@
+============================================================================
+COMPARATOR 142 — DeepMind-style direct verification of Erdos #142
+challenge: Let r_k(N) be the largest possible size of a subset of {1,...,N} that does not contain any non-trivial k-term arithmetic progression. Prove an asymptotic formula for r_k(N).
+convention: a, a+d, ..., a+(k-1)d with integer a >= 1 and common difference d >= 1 (non-trivial = d >= 1 = terms pairwise distinct)
+============================================================================
+[C0] SPEC PARSE + STACK + CHECKER SELF-TESTS
+[C0.1] challenge.json parsed with frozen statement + conventions | statement frozen verbatim; d >= 1 pinned — VERDICT: PASS
+[C0.2] solution.json parsed; claim ids exactly the expected set | ids=BLOCK-UPPER,CANTOR-LOWER,K2-EDGE,MONO-LAW,OPEN-SCOPE,R3-TABLE,R4-TABLE,R5-TABLE — VERDICT: PASS
+[C0.3] stack: python 3.12.16, z3 5.4.1 (REQUIRED), gmpy2 present (optional) | z3 5.4.1 — VERDICT: PASS
+[C0.4] independent (a,d)-scan detector: 12 known cases correct — VERDICT: PASS
+[C0.5] three 3-AP checkers agree on 300/300 random sets — VERDICT: PASS
+[C0.6] negative control: planted 3-AP in [1,10] detected ((1, 1)) — VERDICT: PASS
+[C0.7] gmpy2.popcount identical to builtin on test vectors — VERDICT: PASS
+    t=   +0.1s
+[C1] r_3 EXACT TABLE N=1..30 — THREE FRESH METHODS
+[C1.1] M1 pair-ban B&B engine produced the full table N=1..30 | monotone +1 lemma held at every N — VERDICT: PASS
+[C1.2] M1 maximum witnesses re-validated: 30/30 subsets of [1,N], distinct, 3-AP-free ((a,d)-scan + pair-midpoint) — VERDICT: PASS
+[C1.3] M3 exhaustive 2^N brute force N<=12: 12/12 AGREE with M1 — VERDICT: PASS
+[C1.4] M2 z3 SAT/UNSAT dual certificates N<=16: 16/16 AGREE (16 cardinality-UNSAT upper bounds, every SAT model re-validated) — VERDICT: PASS
+[C1.5] AGREEMENT LAW: comparator table == solution.json R3-TABLE, 30/30 values | table=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12] — VERDICT: PASS
+[C1.6] negative control: corrupted r_3 table (N=10 bumped to 6) REJECTED (mismatch detected at N=[10]) — VERDICT: PASS
+[C1.7] negative control: corrupted r_3 table (N=30 dropped to 11) REJECTED (mismatch detected at N=[30]) — VERDICT: PASS
+    t=   +0.2s
+[C2] r_4 AND r_5 EXACT TABLES N=1..20 — GENERALIZED k-AP B&B + z3 DUAL CERTS
+[C2.4.1] M1' generalized B&B engine produced the full r_4 table N=1..20 — VERDICT: PASS
+[C2.4.2] M1' maximum witnesses re-validated: 20/20 k-AP-free subsets of [1,N] by independent (a,d)-scan — VERDICT: PASS
+[C2.4.3] M2 z3 SAT/UNSAT dual certificates N<=12: 12/12 AGREE (models re-validated, cardinality-UNSAT uppers) — VERDICT: PASS
+[C2.4.4] AGREEMENT LAW: comparator r_4 table == solution.json R4-TABLE, 20/20 values | table=[1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11, 12, 12] — VERDICT: PASS
+[C2.5.1] M1' generalized B&B engine produced the full r_5 table N=1..20 — VERDICT: PASS
+[C2.5.2] M1' maximum witnesses re-validated: 20/20 k-AP-free subsets of [1,N] by independent (a,d)-scan — VERDICT: PASS
+[C2.5.3] M2 z3 SAT/UNSAT dual certificates N<=12: 12/12 AGREE (models re-validated, cardinality-UNSAT uppers) — VERDICT: PASS
+[C2.5.4] AGREEMENT LAW: comparator r_5 table == solution.json R5-TABLE, 20/20 values | table=[1, 2, 3, 4, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16, 16] — VERDICT: PASS
+[C2.5] MONO-LAW (machine shadow of the context block): r_3(N) <= r_4(N) <= r_5(N) on N=1..20 | a (k+1)-AP contains a k-AP, so k-AP-free => (k+1)-AP-free — VERDICT: PASS
+[C2.6] r_5 TIGHTNESS (stated in the solution's R5-TABLE label): r_5(N) == (5-1)*floor(N/5) + (N mod 5) at every N=1..20 — VERDICT: PASS
+    t=   +0.2s
+[C3] CANTOR LOWER-BOUND FAMILY k=1..10 (witness generator spec)
+      k= 1: |T_k|=    1 (exp     1) max=      1 pairmid=FREE ad=FREE (<=k8) 1 <= r_3(2)=2
+      k= 2: |T_k|=    3 (exp     3) max=      4 pairmid=FREE ad=FREE (<=k8) 3 <= r_3(8)=4
+      k= 3: |T_k|=    7 (exp     7) max=     13 pairmid=FREE ad=FREE (<=k8) 7 <= r_3(26)=11
+      k= 4: |T_k|=   15 (exp    15) max=     40 pairmid=FREE ad=FREE (<=k8)
+      k= 5: |T_k|=   31 (exp    31) max=    121 pairmid=FREE ad=FREE (<=k8)
+      k= 6: |T_k|=   63 (exp    63) max=    364 pairmid=FREE ad=FREE (<=k8)
+      k= 7: |T_k|=  127 (exp   127) max=   1093 pairmid=FREE ad=FREE (<=k8)
+      k= 8: |T_k|=  255 (exp   255) max=   3280 pairmid=FREE ad=FREE (<=k8)
+      k= 9: |T_k|=  511 (exp   511) max=   9841 pairmid=FREE ad=n/a (k>8 skipped)
+      k=10: |T_k|= 1023 (exp  1023) max=  29524 pairmid=FREE ad=n/a (k>8 skipped)
+[C3.1] Cantor family k=1..10: two generation routes agree, |T_k| = 2^k - 1, T_k ⊆ [1, 3^k - 1], 3-AP-free by FULL pair-midpoint scan (all k) + independent (a,d)-scan (k<=8) | hence r_3(3^k - 1) >= 2^k - 1 for k=1..10 (exact-table tie-ins: 1 <= r_3(2)=2; 3 <= r_3(8)=4; 7 <= r_3(26)=11) — VERDICT: PASS
+[C3.2] negative control: ternary-{1,2} family (k=2) REJECTED as 3-AP-containing (witness AP (1, 3)) | family=[1, 2, 4, 5, 7, 8] — VERDICT: PASS
+    t=   +0.5s
+[C4] BLOCK UPPER BOUND |S| <= (k-1)*floor(N/k) + (N mod k), k=3..6, N=1..60
+      k=3 exhaustive N<=16: R_k=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8] (tight 6/16)
+      k=4 exhaustive N<=16: R_k=[1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 9, 10, 10] (tight 9/16)
+      k=5 exhaustive N<=16: R_k=[1, 2, 3, 4, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12, 13] (tight 16/16)
+      k=6 exhaustive N<=16: R_k=[1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 13] (tight 14/16)
+[C4.1] EXHAUSTIVE N<=16, k=3..6: every maximum k-AP-free size obeys the block bound (64 (k,N) points, 45 tight, all maximum witnesses re-validated) — VERDICT: PASS
+[C4.2] cross-engine k=3 N<=16: mask-engine == pair-ban engine == solution R3-TABLE — VERDICT: PASS
+[C4.3] r_3 maximum witnesses N=17..30 obey the k=3 block bound — VERDICT: PASS
+[C4.4] TORTURE N=17..60, k=3..6: 3145 constructions, 3145 independently re-validated k-AP-free, 0 bound violations (tight achieved 40 times) — VERDICT: PASS
+[C4.5] negative control: crippled (rhs-1) block bound at k=5 correctly FLAGGED at 16/16 points N<=16 — VERDICT: PASS
+[C4.6] negative control: AP-containing witness {1..6} REJECTED (6-AP detected=True, 3-AP detected=True) — VERDICT: PASS
+    t=   +1.1s
+[C5] k=2 EDGE: r_2(1)=1, r_2(N)=1 for N>=2
+[C5.1] 2^N brute force N<=12: r_2(N) = 1 everywhere — VERDICT: PASS
+[C5.2] exhaustive 435-pair scan N<=30: every pair {a<b} is a non-trivial 2-AP (d = b-a >= 1) — no 2-AP-free set has size >= 2 — VERDICT: PASS
+[C5.3] witness [1] is 2-AP-free inside [1,N] for all N=1..30 — hence r_2(N) >= 1, and with C5.2, r_2(N) = 1 (N>=2); r_2(1) = 1 by C5.1 — VERDICT: PASS
+    t=   +1.1s
+[C6] CONTEXT SHADOWS (machine-checkable parts of the DeepMind/SOTA context block — everything else is labeled context-only)
+[C6.1] cap-set record arithmetic sanity: FunSearch cap set = 512 = 2^9 points in F_3^8 (|F_3^8| = 3^8 = 6561, density 0.0780); integer-interval Cantor T_8 = 2^8-1 = 255 points in [1,6560] (density 0.0389) — related ternary-digit constructions, DISTINCT problems (F_3^n affine vs [1,N] interval), no comparability claimed — VERDICT: PASS
+      N=30: r_3/N = 0.4000 (12/30) vs block envelope 0.6667 (20/30) vs Cantor floor at N=26: 0.2692 (7/26)
+[C6.2] honest gap map N=1..30: r_3(N) <= 2*floor(N/3) + (N mod 3) everywhere; max observed density 1.0000; the TRUE asymptotic density is known (context: Roth 1953) to be 0 — the #142 asymptotic itself stays OPEN — VERDICT: PASS
+[C6.3] k=2 edge sits below the r_3 table (r_2(N)=1 <= r_3(N), N=1..30) — consistent with the mono law starting at k=2 — VERDICT: PASS
+    t=   +1.1s
+[C7] HONEST-LABEL AUDIT (campaign law 8)
+[C7.1] every solution claim carries a nonempty exact label — VERDICT: PASS
+[C7.2] OPEN-SCOPE declaration present: the asymptotic formula is declared OPEN for every k >= 3 (the $10000 target is NOT claimed) — VERDICT: PASS
+[C7.3] no claim asserts a closed asymptotic formula (checked all claim statements) | offenders=[] — VERDICT: PASS
+[C7.4] label vocabulary exact: EXACT TABLE x3, WITNESS lower-bound, ENVELOPE upper-bound, EDGE, MONOTONICITY, OPEN-SCOPE — VERDICT: PASS
+    t=   +1.1s
+============================================================================
+[C8] FINAL VERDICT
+  checks passed: 42 | checks failed: 0 | criticals: 0
+  CERTIFIED: r_3 table N=1..30 (3 methods) | r_4, r_5 tables N=1..20 (2 methods) | Cantor lower-bound family k=1..10 | block upper bound k=3..6 N=1..60 | r_2 edge | monotonicity shadows | honest labels + open scope
+  NOT CERTIFIED (open): the #142 asymptotic formula for every k >= 3 — exactly as the solution's OPEN-SCOPE label declares
+  comparator wall time: t=   +1.1s
+COMPARATOR_142_GREEN=1

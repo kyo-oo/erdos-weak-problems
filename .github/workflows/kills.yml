@@ -1511,3 +1511,26 @@ jobs:
           grep -F "E107_BOARD_GREEN" kernel107k.log
           grep -E "E107.(f3_upper|f3_lower|w4_gp|f4_lower|w5_gp|w5_no_convex5|erdos107_board)' (does not depend on any axioms|depends on axioms)" kernel107k.log
           echo KERNEL107K_GREEN=1
+  kernel-142cmp:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Kernel 142cmp - Erdos 142 DEEPMIND-STYLE COMPARATOR (W70-B, BOSS-ordered lane: challenge + solution + DIRECT comparator, NO Lean): pure python3 + z3 + gmpy2, exact integer arithmetic, exit nonzero on ANY failure -- the comparator DIRECTLY verifies every solution.json claim against challenge.json: (C1) exact r_3 table N=1..30 re-derived by THREE fresh methods (iterative-deepening DFS branch-and-bound with pair-ban propagation + exact-suffix bounds + memoization; z3 SAT/UNSAT dual certificates N<=16 with every SAT model independently re-validated and every upper bound a cardinality-UNSAT; exhaustive 2^N brute force N<=12), all three must equal solution.json exactly; (C2) r_4 and r_5 tables N=1..20 by the generalized k-AP B&B + z3 dual certs N<=12 + the monotonicity law r_3<=r_4<=r_5 + r_5==block-bound tightness; (C3) the Cantor lower-bound family k=1..10 (two generation routes, |T_k|=2^k-1, subset [1,3^k-1], 3-AP-free by FULL pair-midpoint scan + independent (a,d)-scan, exact-table tie-ins, hence r_3(3^k-1)>=2^k-1); (C4) the block upper bound |S|<=(k-1)*floor(N/k)+(N mod k) k=3..6 N=1..60 (exhaustive N<=16 maxima + 3145 randomized/structured torture constructions N=17..60, every set re-validated by an independent (a,d)-scan); (C5) the k=2 edge r_2(1)=r_2(N>=2)=1 (brute + 435-pair scan); (C6) context shadows (FunSearch cap-set 512=2^9 in F_3^8 arithmetic sanity vs integer-interval Cantor T_8=255 in [1,6560] -- related ternary-digit constructions, DISTINCT problems; honest gap map r_3(N)/N vs the certified envelope); (C7) honest-label audit (exact labels + the binding OPEN-SCOPE declaration: the #142 asymptotic formula is OPEN for every k>=3, NOT claimed); negative controls prove non-vacuity (corrupted tables rejected, crippled bound flagged, AP-planted witnesses rejected); DeepMind methodology: FunSearch's systematic evaluator + AlphaCode's test-based grading, applied to #142"
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_ok=0
+          if python3 -m pip install --quiet --break-system-packages z3-solver gmpy2 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages z3-solver gmpy2 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet z3-solver gmpy2 2>/dev/null; then install_ok=1
+          elif (sudo apt-get update -qq && sudo apt-get install -y -qq python3-z3); then install_ok=1; fi
+          if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED (comparator will FAIL without z3)"; fi
+          python3 -c "import z3; print('z3 ready', z3.get_version_string())" || echo "WARNING: z3 import still failing; comparator will FAIL (dual-certificate methodology mandatory)"
+          python3 problem142-rk-asymptotic/comparator/comparator.py 2>&1 | tee kernel142cmp.log
+          ! grep -E 'CRITICAL_FINDING|FATAL|COMPARATOR_142_RED' kernel142cmp.log
+          grep -F "COMPARATOR_142_GREEN=1" kernel142cmp.log
+          test "$(grep -c 'VERDICT: PASS' kernel142cmp.log)" -ge 40
+          test "$(grep -c 'VERDICT: FAIL' kernel142cmp.log)" -eq 0
+          grep -F "negative control: corrupted r_3 table (N=10 bumped to 6) REJECTED" kernel142cmp.log
+          grep -F "AGREEMENT LAW: comparator table == solution.json R3-TABLE, 30/30 values" kernel142cmp.log
+          echo KERNEL142CMP_GREEN=1

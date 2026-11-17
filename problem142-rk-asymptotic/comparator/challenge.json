@@ -1,0 +1,58 @@
+{
+  "problem": "erdoes-142",
+  "lane": "W70-B DeepMind-style comparator (challenge + solution + direct comparator, NO Lean)",
+  "title": "Erdos #142 (prize $10000): asymptotic formula for r_k(N)",
+  "statement_frozen": "Let r_k(N) be the largest possible size of a subset of {1,...,N} that does not contain any non-trivial k-term arithmetic progression. Prove an asymptotic formula for r_k(N).",
+  "statement_source": "frozen corpus statement (BRIEFING.md, campaign 4c4a072); restatements must preserve it EXACTLY",
+  "prize_usd": 10000,
+  "conventions": {
+    "non_trivial_k_ap": "a, a+d, ..., a+(k-1)d with integer a >= 1 and common difference d >= 1 (non-trivial = d >= 1 = terms pairwise distinct)",
+    "r_k_definition": "r_k(N) = max { |S| : S is a subset of {1,...,N} and S contains no non-trivial k-term arithmetic progression }",
+    "k_domain": "integer k >= 2 (k = 1 is degenerate and excluded; the campaign certifies the k = 2 edge exactly and k = 3,4,5 finite tables)",
+    "universe": "integer intervals [1,N] with N a positive integer"
+  },
+  "comparator_parameter_space": {
+    "r3_exact_table": {"N_min": 1, "N_max": 30, "method_1": "iterative-deepening DFS branch-and-bound with pair-ban propagation + exact-suffix bounds + memoization", "method_2": "z3 SAT/UNSAT dual certificates (SAT model re-validated + cardinality-UNSAT upper bound)", "method_2_N_max": 16, "method_3": "exhaustive 2^N subset brute force", "method_3_N_max": 12},
+    "r4_exact_table": {"N_min": 1, "N_max": 20, "method_1": "generalized k-AP branch-and-bound (AP-mask include-checks + exact-suffix bounds + memoization)", "method_2": "z3 SAT/UNSAT dual certificates", "method_2_N_max": 12},
+    "r5_exact_table": {"N_min": 1, "N_max": 20, "method_1": "generalized k-AP branch-and-bound (AP-mask include-checks + exact-suffix bounds + memoization)", "method_2": "z3 SAT/UNSAT dual certificates", "method_2_N_max": 12},
+    "cantor_lower_witness": {"k_min": 1, "k_max": 10, "generator": "ternary-{0,1}-digit integers in [1, 3^k - 1]", "claimed_count": "2^k - 1", "required_checks": ["two independent generation methods agree", "subset of [1, 3^k - 1]", "3-AP-free by full pair-midpoint scan", "3-AP-free by independent (a,d)-scan", "count = 2^k - 1"]},
+    "block_upper_envelope": {"k_values": [3, 4, 5, 6], "N_min": 1, "N_max": 60, "exhaustive_N_max": 16, "beyond_exhaustive": "randomized greedy-order + dense-sieve + leave-one-residue + Cantor structured constructions, every set re-validated by an independent (a,d)-scan checker"},
+    "k2_edge": {"N_max_brute": 12, "N_max_pair_scan": 30},
+    "monotonicity_law": {"statement": "r_{k+1}(N) >= r_k(N) for every k >= 2 and N >= 1 (a (k+1)-term AP contains a k-term AP: its first k terms), hence every k-AP-free set is (k+1)-AP-free", "machine_check": "r_2(N) <= r_3(N) <= r_4(N) <= r_5(N) on the certified tables N = 1..20"}
+  },
+  "acceptance_criteria": [
+    "AC-1 (exact tables with certificates): every claimed exact value r_k(N) must be reproduced by at least two independent comparator methods where the parameter space demands it (r_3: B&B + z3 dual certs N<=16 + brute N<=12; r_4/r_5: B&B + z3 dual certs N<=12), and every exhibited maximum-size witness must be re-validated as a subset of [1,N] that is k-AP-free under the pinned (a,d) convention by an independent checker.",
+    "AC-2 (lower bounds as witnesses): every claimed lower bound must come with an explicit witness family spec; the comparator must generate the family itself (two independent generation routes), verify its cardinality, verify containment in the claimed universe, and verify AP-freeness by full pair-midpoint scan plus an independent (a,d)-scan.",
+    "AC-3 (upper bounds with proofs-of-validity on the finite envelope): every claimed universal upper bound must hold on the comparator's exhaustive envelope (all k-AP-free maxima for N<=16, k=3..6) and on a torture corpus of randomized/structured k-AP-free constructions for 17<=N<=60, each re-validated independently.",
+    "AC-4 (agreement law): every comparator-derived value must EQUAL the solution.json claim exactly; any disagreement is a CRITICAL rejection (exit 2).",
+    "AC-5 (negative controls / non-vacuity): the comparator must REJECT a deliberately corrupted table (one entry bumped), must flag a crippled (bound minus one) block bound, and must reject a deliberately AP-containing witness; failure of any negative control to trigger is itself a failure.",
+    "AC-6 (honest labels): the solution must label every claim exactly (exact-table / witness-lower-bound / envelope-upper-bound / edge-case / open-scope declaration); the comparator checks the labels are present and that the open-scope declaration is not contradicted (no asymptotic claim is certified)."
+  ],
+  "context": {
+    "disambiguation_cap_set_vs_142": {
+      "note": "HONEST DISTINCTION (binding): DeepMind/FunSearch's headline cap-set result lives in the affine space F_3^n (no three distinct collinear vectors); Erdos #142 lives in integer intervals [1,N] (no non-trivial k-term AP). Both are 3-AP-free extremal problems and both admit digit/no-carry constructions, but they are DIFFERENT problems; a cap-set record neither solves nor bounds #142. The comparator machine-checks only the shadow fact that both use ternary-digit ideas: the integer-interval Cantor family T_8 has 2^8-1 = 255 elements inside [1, 3^8-1] (255/6561 ~ 3.9% density) while FunSearch's cap set has 512 elements inside F_3^8 (512/6561 ~ 7.8%) - related constructions, distinct problems, no comparability claim.",
+      "funsearch_cap_set_record": "cap set of size 512 in dimension n = 8 over F_3, discovered by FunSearch - per the Nature 2024 paper: 'The function priority: Z_3^n -> R discovered by FunSearch that results in a cap set of size 512 in n = 8 dimensions' and 'we do not just discover the set of 512 eight-dimensional vectors in itself, but a program that generates it'",
+      "label": "context baseline (DeepMind public result, fetched 2026-11 from the Nature page URL below); NOT a verification target"
+    },
+    "deepmind_methodology": {
+      "funsearch_evaluator_loop": "FunSearch (Function Search): 'an evolutionary procedure based on pairing a pretrained LLM with a systematic evaluator' (Nature 2024 abstract); candidate programs are verified DIRECTLY against the evaluator - no proof assistant in the loop.",
+      "alphacode_test_based_grading": "AlphaCode (Li et al., 'Competition-level code generation with AlphaCode', Science 378, 1092-1097, 2022): candidate solutions graded by running them against test cases (test-based grading), not by proof.",
+      "what_this_comparator_is": "The DeepMind evaluation methodology applied to Erdos #142: challenge.json = the frozen spec; solution.json = the campaign's claimed results (each honestly labeled); comparator.py = the independent evaluator that DIRECTLY verifies every claim computationally (exact integer arithmetic, z3 + gmpy2 + brute force cross-checks). NO Lean anywhere in this lane.",
+      "label": "methodology context (canonical citations)"
+    },
+    "sota_baselines_142_proper": [
+      {"name": "Behrend lower bound (k=3)", "statement": "r_3(N) >= N * exp(-C*sqrt(log N)) for an absolute constant C (spheres-in-base construction; lifts to every fixed k >= 3 because a 3-AP-free set is automatically k-AP-free)", "citation": "F. A. Behrend, 'On sets of integers which contain no three terms in arithmetical progression', Proc. Natl. Acad. Sci. U.S.A. 32 (1946) 331-332", "label": "context baseline, canonical citation (NOT verified by the comparator)"},
+      {"name": "Roth theorem (k=3)", "statement": "r_3(N) = o(N) as N -> infinity", "citation": "K. F. Roth, 'On certain sets of integers', J. London Math. Soc. 28 (1953) 104-109", "label": "context baseline, canonical citation (NOT verified by the comparator)"},
+      {"name": "Bloom-Sisask upper bound (k=3)", "statement": "r_3(N) <= N / (log N)^(1+c) for an absolute constant c > 0", "citation": "T. F. Bloom, O. Sisask, 'Breaking the logarithmic barrier in Roth's theorem on arithmetic progressions', arXiv:2007.03528 (2020)", "label": "context baseline, canonical citation (NOT verified by the comparator)"},
+      {"name": "Kelley-Meka upper bound (k=3, current best shape)", "statement": "r_3(N) <= N * exp(-c*(log N)^(1/12)) for an absolute constant c > 0", "citation": "Z. Kelley, R. Meka, 'Strong bounds for 3-progressions', Proc. 55th ACM STOC (2023); simplification by Bloom-Sisask 2023", "label": "context baseline, canonical citation (NOT verified by the comparator)"},
+      {"name": "Green-Tao upper bound (k=4)", "statement": "r_4(N) <= N / (log N)^c for some constant c > 0", "citation": "B. Green, T. Tao, 'New bounds for Szemerédi's theorem, II: a new bound for r_4(N)', Ann. Math. 185 (2017) 339-415", "label": "context baseline, canonical citation (NOT verified by the comparator)"},
+      {"name": "k >= 5 upper bounds (logarithmic-strength savings only)", "statement": "for fixed k >= 5 the best known upper bounds save only a logarithmic-type factor over N (Gowers 2001 quantitative hypergraph-removal shape N/(log log N)^{c_k}, with recent improvements by Leng-Sah-Sawhney); no N^(1-eps) upper bound is known for any fixed k >= 4, and no asymptotic formula is known for ANY k >= 3", "citation": "W. T. Gowers, 'A new proof of Szemerédi's theorem', Geom. Funct. Anal. 11 (2001) 465-588; J. Leng, A. Sah, M. Sawhney, 'Improved bounds for Szemerédi's theorem', 2024", "label": "context baseline, canonical citation (NOT verified by the comparator)"},
+      {"name": "monotonicity shadow (machine-checked)", "statement": "r_{k+1}(N) >= r_k(N) for k >= 2 (a (k+1)-AP contains a k-AP as its first k terms); hence Behrend-type lower bounds lift to every fixed k >= 3 and no fixed-k r_k(N) is O(log N)", "citation": "elementary; machine-checked by the comparator on the certified tables", "label": "machine-checked shadow of the context (the ONLY context item the comparator certifies)"}
+    ],
+    "sources_fetched": [
+      {"url": "https://www.nature.com/articles/s41586-023-06924-6", "status": "FETCHED OK (488 KB HTML, 2026-11)", "what_was_extracted": "abstract ('pairing a pretrained LLM with a systematic evaluator'; 'Applying FunSearch to a central problem in extremal combinatorics - the cap set problem - we discover new constructions of large cap sets going beyond the best-known ones, both in finite dimensional and asymptotic cases'); Fig. 4 caption ('a cap set of size 512 in n = 8 dimensions'); body ('we do not just discover the set of 512 eight-dimensional vectors in itself, but a program that generates it')"},
+      {"url": "https://deepmind.google/discover/blog/funsearch-making-new-discoveries-in-mathematical-sciences-with-large-language-models/", "status": "FETCHED OK (HTTP 200, 194 KB) but the article body is client-side rendered and not extractable from the static HTML; the blog's headline claims are the same as the Nature paper's (cited from the fetched Nature page instead)", "what_was_extracted": "page title + navigation only; headline claims taken from the Nature page"},
+      {"url": "https://www.science.org/doi/10.1126/science.abq1158", "status": "FETCH BLOCKED (5.6 KB block page); AlphaCode methodology cited from canonical knowledge: Li et al., 'Competition-level code generation with AlphaCode', Science 378, 1092-1097 (2022)", "what_was_extracted": "nothing (blocked); canonical citation used"}
+    ]
+  }
+}

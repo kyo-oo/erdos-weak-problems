@@ -1,5 +1,27 @@
 # THE LIST — THE OPERATIONAL LAW (v9, Session 041, 2026-11-09)
 
+> **v13 STATUS ADDENDUM (S067/W70-B — THE DEEPMIND COMPARATOR LANE):** BOSS's
+> order: "using google deepmind statements about those problems use comparator,
+> directly instead of lean (challenge + solution file)". Executed for #142: the
+> DeepMind evaluation methodology (FunSearch's systematic evaluator loop /
+> AlphaCode's test-based grading) built as a CI job — challenge.json (the frozen
+> spec + acceptance criteria AC-1..AC-6 + the fetched DeepMind/SOTA context block
+> with honest labels: FunSearch's 512-point cap set in F_3^8 vs #142's integer
+> intervals — related but DISTINCT problems; Behrend/Roth/Bloom–Sisask/
+> Kelley–Meka/Green–Tao/Gowers/Leng–Sah–Sawhney as canonical citations, NOT
+> comparator targets) + solution.json (the campaign's honestly-labeled claims:
+> exact r_3 N≤30 / r_4, r_5 N≤20 tables, Cantor witness family k≤10, block
+> upper bound envelope k=3..6 N≤60, k=2 edge, mono law, binding OPEN-SCOPE
+> declaration — the asymptotic stays OPEN for every k ≥ 3) + comparator.py
+> (the INDEPENDENT direct verifier: three fresh r_3 methods incl. z3
+> SAT/UNSAT dual certificates; generalized k-AP B&B; 3145-construction block
+> torture; negative controls proving non-vacuity; exit-nonzero on any failure
+> or any disagreement with solution.json). Local: 42/42 PASS,
+> COMPARATOR_142_GREEN=1 (RECEIPTS_comparator142.txt); RED-path verified
+> (corrupted solution → exit 2 CRITICAL). CI job **kernel-142cmp** wired into
+> kills.yml (python-only, NO Lean, z3 multi-route install). NO Lean anywhere
+> in this lane.
+
 > **v12 STATUS ADDENDUM (S065/W65 — THE SECOND WAVE SESSION):** BOSS's wave
 > order executed AGAIN at full aggression (MATHS v2 invoked; 6 lanes W65-A..F,
 > worktree-isolated; the adapter's dispatch report false-negative — the agents

@@ -4275,5 +4275,87 @@ the wave is commander-executed in structured succession.**
 4. **#61 kernel (W70-C) and #61 comparator (W70-D): commander-executed next
    (this session's continuation).** #107 comparator (W70-F): artifacts in
    flight, to be committed and pushed after verification.
+## SESSION 067 — W70-B — #142 DEEPMIND-STYLE COMPARATOR (challenge + solution + direct verifier, NO Lean)
+
+**BOSS's order (this lane):** "using google deepmind statements about those problems
+use comparator, directly instead of lean (challenge + solution file)" — build the
+DeepMind evaluation methodology (FunSearch's systematic evaluator, AlphaCode's
+test-based grading) as a CI job for Erdős #142.
+
+**Executed (worktree w70-b-p142comp, branch w70-b-p142comp, base 4c4a072):**
+
+1. **THE DEEPMIND RESEARCH COMPONENT (fetched live):** the Nature 2024 FunSearch
+   page (https://www.nature.com/articles/s41586-023-06924-6, FETCHED OK, 488 KB) —
+   abstract ("an evolutionary procedure based on pairing a pretrained LLM with a
+   systematic evaluator"; "Applying FunSearch to a central problem in extremal
+   combinatorics—the cap set problem—we discover new constructions of large cap
+   sets going beyond the best-known ones"), Fig. 4 ("a cap set of size 512 in
+   n = 8 dimensions"), body ("we do not just discover the set of 512
+   eight-dimensional vectors in itself, but a program that generates it"). The
+   deepmind.google FunSearch blog fetched HTTP 200 (194 KB) but the body is
+   client-side rendered — recorded honestly; the Nature page carries the same
+   claims. Science's AlphaCode page: blocked; AlphaCode cited as canonical
+   knowledge (Li et al., Science 378, 1092–1097, 2022, test-based grading).
+   All encoded in challenge.json's context block with honest labels: FunSearch's
+   cap-set record lives in F_3^n, #142 lives in [1,N] — related 3-AP-free extremal
+   problems, DISTINCT problems, no comparability claimed (the comparator
+   machine-checks only the arithmetic shadow: 512 = 2^9 of 3^8 = 6561 in F_3^8 vs
+   the interval Cantor T_8 = 255 of 6561). SOTA baselines encoded as canonical
+   citations (Behrend 1946 lower; Roth 1953; Bloom–Sisask 2020 N/(log N)^{1+c};
+   Kelley–Meka 2023; Green–Tao 2017 for k=4; Gowers 2001 / Leng–Sah–Sawhney 2024
+   logarithmic-strength savings for k ≥ 5) — all labeled "context baseline,
+   NOT verified by the comparator"; the ONLY machine-checked context item is the
+   monotonicity shadow (a (k+1)-AP contains a k-AP ⟹ r_{k+1}(N) ≥ r_k(N), hence
+   Behrend lifts to every fixed k ≥ 3 and no fixed-k r_k is O(log N)).
+
+2. **THE COMPARATOR PACKAGE (problem142-rk-asymptotic/comparator/):**
+   - **challenge.json** — the frozen verbatim statement; pinned conventions
+     (d ≥ 1, r_k definition); the comparator parameter space (N ranges per k,
+     methods mandated per range); the acceptance criteria AC-1..AC-6 (exact
+     tables with certificates; bounds with proofs-of-validity; witnesses with
+     AP-freeness; the agreement law; negative controls; honest labels); the
+     DeepMind/SOTA context block with source-fetch statuses.
+   - **solution.json** — the campaign's claimed results, each with an exact
+     label: R3-TABLE (N=1..30), R4-TABLE / R5-TABLE (N=1..20), CANTOR-LOWER
+     (witness generator spec: ternary-{0,1} digits in [1,3^k−1], count 2^k−1),
+     BLOCK-UPPER (statement + verification envelope k=3..6, N=1..60, exhaustive
+     N≤16), K2-EDGE, MONO-LAW, and the binding OPEN-SCOPE declaration (the
+     asymptotic formula is OPEN for every k ≥ 3; the solution certifies exactly
+     the elementary envelope + exact finite tables + the k=2 edge).
+   - **comparator.py** — the INDEPENDENT direct verifier (pure python3 + z3
+     REQUIRED + gmpy2 opportunistic, exact integer arithmetic; exit 0/1/2).
+     C0 spec parse + checker self-tests; C1 r_3 table by THREE fresh methods
+     (pair-ban-propagation iterative-deepening B&B; z3 SAT/UNSAT dual certs
+     N≤16 — every SAT model re-validated, every upper bound a cardinality-UNSAT;
+     exhaustive 2^N brute N≤12) — all must equal solution.json; C2 r_4/r_5 by
+     the generalized k-AP B&B + z3 dual certs N≤12 + mono law + r_5 tightness;
+     C3 Cantor family k=1..10 (two generation routes, counts, containment, FULL
+     pair-midpoint scan, independent (a,d)-scan k≤8, exact-table tie-ins);
+     C4 block bound k=3..6 N=1..60 (exhaustive N≤16 + 3145 randomized/structured
+     torture constructions, each re-validated by the independent (a,d)-scan);
+     C5 the k=2 edge; C6 context shadows; C7 honest-label audit; C8 final gate
+     printing COMPARATOR_142_GREEN=1. NEGATIVE CONTROLS: corrupted r_3 tables
+     (N=10 bumped, N=30 dropped) must be REJECTED; crippled (rhs−1) block bound
+     must trigger; AP-planted witnesses must be rejected; ternary-{1,2} family
+     must be rejected as AP-containing — the comparator is provably non-vacuous.
+   - **RECEIPTS_comparator142.txt** — local run: 42/42 checks VERDICT: PASS,
+     0 failures, 0 criticals, wall 1.2 s, COMPARATOR_142_GREEN=1, exit 0.
+     RED-path verified separately: a corrupted solution.json exits 2 with
+     CRITICAL_FINDING at the corrupted index.
+
+3. **THE CI WIRING (.github/workflows/kills.yml):** new job **kernel-142cmp**
+   (runs-on ubuntu-24.04, checkout@v5, python-only — NO Lean install): z3+gmpy2
+   via the multi-route fallback (pip --break-system-packages → pip3 → pip →
+   apt python3-z3), then the comparator with exit-nonzero gating, then
+   `! grep -E 'CRITICAL_FINDING|FATAL|COMPARATOR_142_RED'`, grep
+   COMPARATOR_142_GREEN=1, ≥40 VERDICT: PASS, =0 VERDICT: FAIL, the corrupted-
+   table negative-control receipt, the R3 agreement receipt, echo
+   KERNEL142CMP_GREEN=1. YAML validated (parse OK; every step has run/uses;
+   zero elan_init.sh underscore variants; checkout@v5 everywhere).
+
+**HONEST SCOPE:** the comparator certifies the campaign's elementary envelope +
+exact finite tables + k=2 edge — NOT the #142 asymptotic formula (OPEN for every
+k ≥ 3, $10000 prize untouched), exactly as the solution's OPEN-SCOPE label
+declares and the comparator's C7 audit enforces.
 
 The engine never stops; it never lies. In English, always.
