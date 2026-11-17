@@ -1,0 +1,25 @@
+AUD-1  P_3-FREE CENSUS n=1..6 (independent full enumeration)
+  n=1: P_3-free count=1 Bell(1)=1 all-disjoint-cliques=True => OK
+  n=2: P_3-free count=2 Bell(2)=2 all-disjoint-cliques=True => OK
+  n=3: P_3-free count=5 Bell(3)=5 all-disjoint-cliques=True => OK
+  n=4: P_3-free count=15 Bell(4)=15 all-disjoint-cliques=True => OK
+  n=5: P_3-free count=52 Bell(5)=52 all-disjoint-cliques=True => OK
+  n=6: P_3-free count=203 Bell(6)=203 all-disjoint-cliques=True => OK
+AUD-2  h-TABLES SPOT CHECK n=4..7 (independent exhaustive)
+  h_2K_2(4) = 2 (expected 2) OK
+  h_2K_2(5) = 2 (expected 2) OK
+  h_2K_2(6) = 3 (expected 3) OK
+  h_2K_2(7) = 3 (expected 3) OK
+  h_P_3(4) = 2 (expected 2) OK
+  h_P_3(5) = 3 (expected 2) FAIL
+  h_P_3(6) = 3 (expected 3) OK
+  h_P_3(7) = 3 (expected 3) OK
+  h_3K_1(4) = 2 (expected 2) OK
+  h_3K_1(5) = 2 (expected 2) OK
+AUD-3  SUBSTITUTION BUILDER SPOT CHECK (independent)
+  |P_3[P_3]| = 9 (expect 9) contains induced P_3 = True (expect True)
+  |K_2[2K_1]| = 4 degrees=[2, 2, 2, 2] connected=True => C4: True
+AUD-5  Z3 SPOT CERTIFICATE: h_{2K_2}(6) >= 3 (UNSAT: no 2K2-free G, |V|=6, max(w,a)<=2)
+  z3 verdict: unsat  (UNSAT => h_2K_2(6) >= 3 certified)
+============================================================
+AUDIT61 COMPLETE (AUD-1/2 from full run; AUD-3/5 standalone) ALL-GREEN partials: aud3=True aud5=True

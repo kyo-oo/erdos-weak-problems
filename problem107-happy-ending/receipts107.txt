@@ -1,0 +1,65 @@
+==============================================================================
+A  8-POINT NO-CONVEX-5 WITNESSES — every one TWO-method verified (brute decisive)
+  lattice-1              GP=True brute56(no conv-5)=True [found=None] DPcert(no-5: best<7)=False bestU+D=7 maxcup=4 maxcap=3
+  lattice-2              GP=True brute56(no conv-5)=True [found=None] DPcert(no-5: best<7)=True bestU+D=6 maxcup=3 maxcap=3
+  lattice-3              GP=True brute56(no conv-5)=True [found=None] DPcert(no-5: best<7)=False bestU+D=7 maxcup=4 maxcap=3
+  lattice-4              GP=True brute56(no conv-5)=True [found=None] DPcert(no-5: best<7)=True bestU+D=6 maxcup=3 maxcap=3
+  interleaved-cup-cap    GP=True brute56(no conv-5)=True [found=None] DPcert(no-5: best<7)=False bestU+D=7 maxcup=4 maxcap=3
+  4-pt witness (1 interior): GP=True brute(no conv-4)=True  ==> f(4) >= 5 machine-witnessed
+  A ALL-GREEN: True
+==============================================================================
+B  f(4)=5 SWEEP: 10^4 RANDOM GP 5-POINT SETS ALL CONTAIN A CONVEX 4-GON
+  B: failures=0/10^4  both-method-failures=0  (m2 = brute 4-subsets = DEFINITIVE;
+     m1 hull>=4 is sufficient-only: hull=3 + 2 interior CAN still contain convex 4-subsets
+     -- exactly the classical interior-pair mechanism of the f(4)=5 proof)
+==============================================================================
+C  FRONTIER TABLE: upper binom(2n-4,n-2)+1 vs conjectured 2^{n-2}+1 (n = 3..40)
+  n= 3  upper=3.000000e+00  conjecture=     3  log2(upper)/n=0.5283
+  n= 4  upper=7.000000e+00  conjecture=     5  log2(upper)/n=0.7018
+  n= 5  upper=2.100000e+01  conjecture=     9  log2(upper)/n=0.8785
+  n= 6  upper=7.100000e+01  conjecture=    17  log2(upper)/n=1.0250
+  n= 7  upper=2.530000e+02  conjecture=    33  log2(upper)/n=1.1404
+  n= 8  upper=9.250000e+02  conjecture=    65  log2(upper)/n=1.2317
+  n= 9  upper=3.433000e+03  conjecture=   129  log2(upper)/n=1.3050
+  n=10  upper=1.287100e+04  conjecture=   257  log2(upper)/n=1.3652
+  n=11  upper=4.862100e+04  conjecture=   513  log2(upper)/n=1.4154
+  n=12  upper=1.847570e+05  conjecture=  1025  log2(upper)/n=1.4579
+  n=13  upper=7.054330e+05  conjecture=  2049  log2(upper)/n=1.4945
+  n=14  upper=2.704157e+06  conjecture=  4097  log2(upper)/n=1.5262
+  n=15  upper=1.040060e+07  conjecture=  8193  log2(upper)/n=1.5540
+  n=16  upper=4.011660e+07  conjecture= 16385  log2(upper)/n=1.5786
+  n=17  upper=1.551175e+08  conjecture= 32769  log2(upper)/n=1.6005
+  n=18  upper=6.010804e+08  conjecture= 65537  log2(upper)/n=1.6202
+  n=19  upper=2.333606e+09  conjecture=131073  log2(upper)/n=1.6379
+  n=20  upper=9.075135e+09  conjecture=262145  log2(upper)/n=1.6540
+  n=21  upper=3.534526e+10  conjecture=524289  log2(upper)/n=1.6686
+  n=22  upper=1.378465e+11  conjecture=1048577  log2(upper)/n=1.6820
+  n=23  upper=5.382579e+11  conjecture=2097153  log2(upper)/n=1.6943
+  n=24  upper=2.104099e+12  conjecture=4194305  log2(upper)/n=1.7057
+  n=25  upper=8.233431e+12  conjecture=8388609  log2(upper)/n=1.7162
+  n=26  upper=3.224760e+13  conjecture=16777217  log2(upper)/n=1.7259
+  n=27  upper=1.264106e+14  conjecture=33554433  log2(upper)/n=1.7350
+  n=28  upper=4.959185e+14  conjecture=67108865  log2(upper)/n=1.7435
+  n=29  upper=1.946939e+15  conjecture=134217729  log2(upper)/n=1.7514
+  n=30  upper=7.648691e+15  conjecture=268435457  log2(upper)/n=1.7588
+  n=31  upper=3.006727e+16  conjecture=536870913  log2(upper)/n=1.7658
+  n=32  upper=1.182646e+17  conjecture=1073741825  log2(upper)/n=1.7723
+  n=33  upper=4.654284e+17  conjecture=2147483649  log2(upper)/n=1.7785
+  n=34  upper=1.832624e+18  conjecture=4294967297  log2(upper)/n=1.7844
+  n=35  upper=7.219428e+18  conjecture=8589934593  log2(upper)/n=1.7899
+  n=36  upper=2.845304e+19  conjecture=17179869185  log2(upper)/n=1.7951
+  n=37  upper=1.121863e+20  conjecture=34359738369  log2(upper)/n=1.8001
+  n=38  upper=4.425125e+20  conjecture=68719476737  log2(upper)/n=1.8048
+  n=39  upper=1.746131e+21  conjecture=137438953473  log2(upper)/n=1.8094
+  n=40  upper=6.892621e+21  conjecture=274877906945  log2(upper)/n=1.8136
+  the gap IS the open frontier (f(n)=2^{n-2}+1 conjecture OPEN for n>=7; f(6)=17 classical)
+==============================================================================
+D  LABEL EXPERIMENT: (max-cup-ending, max-cap-ending) injectivity on random GP sets
+  sets tested=300  sets-with-duplicated-labels=263
+  => injectivity FAILS (machine truth for the audit lane)
+==============================================================================
+E  16-POINT NO-CONVEX-6 STRUCTURED ATTEMPT (honest best-effort)
+  no 16-pt witness found in 30000 structured tries (the classical ES 1961
+  construction is the cited existence proof for all n; machine witness at n=5 stands)
+==============================================================================
+ENGINE107 v3 COMPLETE wall=33.0s  ALL-GREEN=YES

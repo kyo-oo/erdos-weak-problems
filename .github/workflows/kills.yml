@@ -54,7 +54,13 @@ on:
       - problem273-pminus1-covering/**
       - problem289-intervals/**
       - problem1212-coprime-composite/**
+<<<<<<< HEAD
       - problem142-ap-free/**
+=======
+      - problem142-rk-asymptotic/**
+      - problem61-erdos-hajnal/**
+      - problem107-happy-ending/**
+>>>>>>> origin/campaign
       - problem389-consecutive-product/**
       - .github/workflows/kills.yml
   workflow_dispatch:
@@ -1383,6 +1389,7 @@ jobs:
           grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
           echo KERNEL66_GREEN=1
 
+<<<<<<< HEAD
   kernel-142k:
     runs-on: ubuntu-24.04
     steps:
@@ -1397,12 +1404,17 @@ jobs:
           lake update
           lake exe cache get
       - name: "Kernel 142k - Erdos 142 r_k(N) AP-FREE TERNARY KERNEL r1 (S067, W67-142K): the complete elementary two-sided theory on BOSS's Arsenal — (1) THE TERNARY KERNEL E142.t3free (the Cantor set T := {n : noTernaryTwo n = true} — the Arsenal CardinalWorlds reader — is 3-AP-free: any x,y,z in T with x+z = 2y satisfy x = z, by the mod-3 descent: the residue triple forced to (0,0,0) or (1,1,1), the thirds stay in T by the reader's step law, fuel induction) + t3_no_nontriv (no non-trivial 3-AP in T); (2) THE CANTOR LOWER BOUND cantor_lower (r_3(3^k-1) >= 2^k-1: the genTp k witness list — all ternary digit vectors in {0,1}^k except all-zero — exactly 2^k-1 distinct elements in [1,3^k-1], 3-AP-free by t3free; CardinalWorlds.two_pow_pos applied); (3) THE BLOCK UPPER BOUND block_upper (every k-AP-free S in [1,N]: |S| <= (k-1)*floor(N/k) + N mod k, via the window pigeonhole + window coverage + the consecutive k-block partition) + r3_upper (r_3(N) <= 2*floor(N/3) + N mod 3); (4) k2_edge (r_2(N) = 1 for N >= 2, the upper law + the [1] witness); (5) r3_exact_small (r_3(N) exact for N=1..8 = 1,2,2,3,4,4,4,4: the exhaustive sublists enumeration kernel-decided r3max + explicit witnesses [1],[1,2],[1,2,4],[1,2,4,5], the ap3Free checker iff both directions, the r3max bridge dominating every AP-free set; DUAL METHOD: python mirror E142_MIRROR_GREEN + the W67-142D doubter census z3/brute to N<=30); (6) arsenal_bridge (T's closure laws 3n/3n+1) + the 7-conjunct erdos142_board; ErdosTernary2.lt_three_cases drives the residue trichotomy"
+=======
+      - name: "Kernel W66-A - Erdos 142 STATEMENT-ONLY KERNELS (S066, W66-A/B): the r_k(N) fortress-front statements — Theorem A (Cantor-verdict 3-AP-free, no-carry + family forms, over the Arsenal reader noTernaryTwo), Theorem B.2 (translated family size + AP-free halves), B.3 (rational-exponent interpolation (2|S|)^1000 >= N^630), the digitFamily frame, Theorem D (no-carry column law base 2k-3); audit lane AuditKernel142 (noTernaryTwo_ap3_free + cantor_family_no_nontrivial_ap3 + sigma_worlds_ap3_free, the Arsenal SS12 mixed 6-world law statement); STATEMENT-ONLY (no sorry; proofs = the next kernel wave); CI = verifier of record"
+        if: always()
+>>>>>>> origin/campaign
         shell: bash
         run: |
           set -euo pipefail
           lake build Arsenal.ErdosTernary2.Basic
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
+<<<<<<< HEAD
           lake env lean problem142-ap-free/Erdos142.lean 2>&1 | tee kernel142k.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142k.log
           grep -F "E142_TERNARY_GREEN" kernel142k.log
@@ -1435,3 +1447,21 @@ jobs:
           test "$(grep -c 'XAUDIT_.*: CONFIRMED' crossaudit142d.log)" -ge 6
           grep -F "E142_CROSSAUDIT_GREEN" crossaudit142d.log
           echo KERNEL142D_GREEN=1
+=======
+          lake env lean problem142-rk-asymptotic/Erdos142.lean 2>&1 | tee kernelW66A.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A.log
+          lake env lean problem142-rk-asymptotic/AuditKernel142.lean 2>&1 | tee kernelW66A2.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A2.log
+          echo KERNELW66A_GREEN=1
+      - name: "Kernel W66-B - Erdos 61 STATEMENT-ONLY KERNEL (S066, W66-C/E): the Erdos-Hajnal fortress-front statements (SimpleGraph primitives): the master conjecture + the substitution-closure law (uniform blow-up frame, exponent f = c1c2/(c1+c2)) + the small-H explicit-constant laws; STATEMENT-ONLY (no sorry); CI = verifier of record"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee kernelW66B.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66B.log
+          echo KERNELW66B_GREEN=1
+>>>>>>> origin/campaign
