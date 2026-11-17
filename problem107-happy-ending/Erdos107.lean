@@ -63,8 +63,12 @@ four triple-orientation signs is strictly positive. -/
 def convex4B (a b c d : Int × Int) : Bool :=
   decide (0 < turn a b c * turn a b d * turn a c d * turn b c d)
 
-/-- The 4-point convexity proposition. -/
-def convex4 (a b c d : Int × Int) : Prop := convex4B a b c d = true
+/-- The 4-point convexity proposition (abbrev: transparent to `decide`'s
+instance search — a plain `def` here hid the Bool equation from `Decidable`
+synthesis and killed f4_lower in run 44097016217; the reducible wrapper
+exposes `convex4B ... = true` so `instDecidableNot` + the Bool-equality
+instance — the same machinery that proved gpB/hasConv5 green — applies). -/
+abbrev convex4 (a b c d : Int × Int) : Prop := convex4B a b c d = true
 
 /-- A convex (non-degenerate) triangle. -/
 def convex3 (a b c : Int × Int) : Prop := turn a b c ≠ 0
