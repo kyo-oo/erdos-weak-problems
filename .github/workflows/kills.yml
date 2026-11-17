@@ -1395,4 +1395,8 @@ jobs:
           ! grep -E 'BATTERY VERDICT: RED|FAIL:' kernel61d.log
           grep -F "E61_DOUBTER_BATTERY_GREEN" kernel61d.log
           test "$(grep -c 'violations: 0' kernel61d.log)" -ge 5
+          python3 problem61-erdos-hajnal/engine61/doubter/escalation_w69d.py 2>&1 | tee kernel61d_w69.log
+          ! grep -E 'FAIL:|VERDICT: RED' kernel61d_w69.log
+          grep -F "TIGHT_WITNESS_GREEN" kernel61d_w69.log
+          grep -F "E61_DOUBTER_W69D_GREEN" kernel61d_w69.log
           echo KERNEL61D_GREEN=1
