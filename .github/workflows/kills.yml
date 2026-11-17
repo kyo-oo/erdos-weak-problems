@@ -1396,4 +1396,7 @@ jobs:
           python3 problem107-happy-ending/engine107/doubter/mirror_battery.py 2>&1 | tee mirror-107d.log
           grep -F "MIRROR_BATTERY_GREEN=1" mirror-107d.log
           grep -F "DUAL METHOD (LAW 3): engine queries=" mirror-107d.log
+          python3 problem107-happy-ending/engine107/witnesses/battery_w69f.py 2>&1 | tee kernel107d_w69f.log
+          ! grep -E 'FAIL\]|W69F: [0-9]+ FAILURES' kernel107d_w69f.log
+          grep -F "E107_ENGINE_W69F_GREEN" kernel107d_w69f.log
           echo KERNEL_107D_GREEN=1
