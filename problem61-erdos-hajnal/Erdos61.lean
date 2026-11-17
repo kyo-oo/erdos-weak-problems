@@ -119,6 +119,7 @@ theorem memB_iff {α : Type} [DecidableEq α] : ∀ (u : α) (l : List α),
         unfold memB
         have hneb : eqb u b = false := (eqb_false_iff u b).mpr hub
         rw [hneb, if_neg (fun hc => Bool.noConfusion hc)]
+        rfl
       rw [hf]
       constructor
       · intro h
@@ -137,9 +138,8 @@ theorem memB_false_of_nmem {α : Type} [DecidableEq α] (u : α) (l : List α) (
 theorem not_mem_of_memB_false {α : Type} [DecidableEq α] (u : α) (l : List α) (h : memB u l = false) :
     ¬ (u ∈ l) := by
   intro hc
-  cases hb : memB u l with
-  | false => exact absurd ((memB_iff u l).mpr hc) hb
-  | true => rw [hb] at h; exact Bool.noConfusion h
+  rw [(memB_iff u l).mpr hc] at h
+  exact Bool.noConfusion h
 
 /-- The house filter. -/
 def hfilt {α : Type} (p : α → Bool) : List α → List α
@@ -182,7 +182,7 @@ theorem mem_hfilt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α)
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
         · exact List.mem_cons.mpr (Or.inl h)
-        · exact (ih s).mpr ⟨h, hs.2⟩
+        · exact List.mem_cons.mpr (Or.inr ((ih s).mpr ⟨h, hs.2⟩))
     · rw [hfilt_cons_false p a t hp]
       constructor
       · intro hs
@@ -191,7 +191,7 @@ theorem mem_hfilt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α)
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
         · rw [h] at hs; exact absurd hs.2 hp
-        · exact List.mem_cons.mpr (Or.inr ((ih s).mpr ⟨h, hs.2⟩))
+        · exact (ih s).mpr ⟨h, hs.2⟩
 
 theorem hfilt_subset {α : Type} (p : α → Bool) (l : List α) :
     ∀ s ∈ hfilt p l, s ∈ l := by
@@ -242,7 +242,7 @@ theorem hfilt_length_split {α : Type} (p : α → Bool) : ∀ (l : List α), l.
       have hpos : ((fun x => !(p x)) a = true) := by
         have hpa : (!(p a)) = true := by
           cases hb : p a with
-          | false => rw [hb]; rfl
+          | false => rfl
           | true => exact absurd hb hp
         exact hpa
       rw [hfilt_cons_true (fun x => !(p x)) a t hpos]
@@ -259,7 +259,7 @@ theorem mem_app_iff {α : Type} : ∀ (l1 l2 : List α) (u : α),
   | nil =>
     intro l2 u
     simp only [List.nil_append]
-    exact ⟨Or.inr, fun h => h.elim (fun hc => absurd hc (List.not_mem_nil u)) id⟩
+    exact ⟨fun h => Or.inr h, fun h => h.elim (fun hc => absurd hc (by simp)) id⟩
   | cons a t ih =>
     intro l2 u
     rw [List.cons_append]
@@ -324,7 +324,7 @@ theorem herase_length_drop {α : Type} [DecidableEq α] (a : α) : ∀ (l : List
     · rw [hba]
       unfold herase
       rw [eqb_refl a, if_pos rfl]
-      have hle : (herase a t).length ≤ t.length := herase_length_le a t
+      have hle : (herase a t).length ≤ t.length := ih
       simp only [List.length_cons]
       omega
     · have hbea : eqb b a = false := (eqb_false_iff b a).mpr hba
@@ -367,7 +367,7 @@ theorem herase_mem_of_ne {α : Type} [DecidableEq α] (a x : α) : ∀ (l : List
 theorem herase_subset {α : Type} [DecidableEq α] (a : α) : ∀ (l : List α) (x : α), x ∈ herase a l → x ∈ l := by
   intro l
   induction l with
-  | nil => intro x hx; exact absurd hx (by simp)
+  | nil => intro x hx; exact absurd hx (by simp [herase])
   | cons b t ih =>
     intro x hx
     unfold herase at hx
@@ -447,7 +447,7 @@ theorem hmul_le (a b c d : Nat) (h1 : a ≤ b) (h2 : c ≤ d) : a * c ≤ b * d 
   have e1 : a * c ≤ b * c := by
     rw [Nat.mul_comm a c, Nat.mul_comm b c]
     exact hmul_le_right b c a h1
-  have e2 : b * c ≤ b * d := hmul_le_right d c b h2
+  have e2 : b * c ≤ b * d := hmul_le_right d b c h2
   exact Nat.le_trans e1 e2
 
 theorem hmul_lt_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b < a * c) : b < c := by
@@ -495,16 +495,15 @@ theorem fsqrt_sq_le : ∀ n : Nat, fsqrt n * fsqrt n ≤ n := by
 theorem fsqrt_lt_succ : ∀ n : Nat, n < (fsqrt n + 1) * (fsqrt n + 1) := by
   intro n
   induction n with
-  | zero => omega
+  | zero => simp [fsqrt]
   | succ m ih =>
     unfold fsqrt
     by_cases hstep : (fsqrt m + 1) * (fsqrt m + 1) ≤ m + 1
     · rw [if_pos hstep]
-      have h1 : (fsqrt m + 2) * (fsqrt m + 2) =
-          (fsqrt m + 1) * (fsqrt m + 1) + 2 * (fsqrt m + 1) + 1 :=
-        sq_succ (fsqrt m + 1)
-      have h2 : (fsqrt m + 1) * (fsqrt m + 1) = fsqrt m * fsqrt m + 2 * fsqrt m + 1 :=
-        sq_succ (fsqrt m)
+      have h1 : (fsqrt m + 1 + 1) * (fsqrt m + 1 + 1) =
+          (fsqrt m + 1) * (fsqrt m + 1) + 2 * (fsqrt m + 1) + 1 := by
+        have h := sq_succ (fsqrt m + 1)
+        omega
       omega
     · rw [if_neg hstep]
       omega
@@ -525,14 +524,16 @@ theorem fsqrt_eq (n k : Nat) (h1 : k * k ≤ n) (h2 : n < (k + 1) * (k + 1)) : f
   have hlo : fsqrt n * fsqrt n ≤ n := fsqrt_sq_le n
   have hhi : n < (fsqrt n + 1) * (fsqrt n + 1) := fsqrt_lt_succ n
   rcases Nat.lt_or_ge (fsqrt n) k with hlt | hge
-  · have hsucc : fsqrt n + 1 ≤ k := Nat.le_of_lt hlt
-    have hsq : (fsqrt n + 1) * (fsqrt n + 1) ≤ k * k := hmul_le hsucc hsucc
+  · have hsucc : fsqrt n + 1 ≤ k := by omega
+    have hsq : (fsqrt n + 1) * (fsqrt n + 1) ≤ k * k :=
+      hmul_le (fsqrt n + 1) k (fsqrt n + 1) k hsucc hsucc
     omega
   · rcases Nat.lt_or_ge k (fsqrt n) with hlt2 | hge2
-    · have hsucc2 : k + 1 ≤ fsqrt n := Nat.le_of_lt hlt2
-      have hsq2 : (k + 1) * (k + 1) ≤ fsqrt n * fsqrt n := hmul_le hsucc2 hsucc2
+    · have hsucc2 : k + 1 ≤ fsqrt n := by omega
+      have hsq2 : (k + 1) * (k + 1) ≤ fsqrt n * fsqrt n :=
+        hmul_le (k + 1) (fsqrt n) (k + 1) (fsqrt n) hsucc2 hsucc2
       omega
-    · exact Nat.le_antisymm hge hge2
+    · exact Nat.le_antisymm hge2 hge
 
 theorem fsqrt_pos_of_pos (n : Nat) (hn : 0 < n) : 0 < fsqrt n := by
   cases hf : fsqrt n with
@@ -596,19 +597,18 @@ theorem cnb_length (adj : α → α → Bool) (v : α) (vs : List α) :
 theorem cnb_nodup (adj : α → α → Bool) (hirr : ∀ i : α, adj i i = false) (v : α)
     (vs : List α) (hnd : vs.Nodup) : (cnb adj v vs).Nodup := by
   refine List.Pairwise.cons ?_ (hfilt_nodup (fun u => adj v u) vs hnd)
-  intro b hb
+  intro b hb heq
   obtain ⟨_, hbadj⟩ := (mem_hfilt_iff (fun u => adj v u) vs b).mp hb
-  intro heq
   rw [heq] at hbadj
-  rw [hirr v] at hbadj
+  rw [hirr b] at hbadj
   exact Bool.noConfusion hbadj
 
-theorem cnb_subset (adj : α → α → Bool) (v : α) (vs : List α) :
+theorem cnb_subset (adj : α → α → Bool) (v : α) (vs : List α) (hvin : v ∈ vs) :
     ∀ x ∈ cnb adj v vs, x ∈ vs := by
   intro x hx
   rcases List.mem_cons.mp hx with h | h
-  · exact (mem_hfilt_iff (fun u => adj v u) vs x).mp (List.mem_cons.mpr (Or.inr h)) |>.1
-  · exact h
+  · rw [h]; exact hvin
+  · exact ((mem_hfilt_iff (fun u => adj v u) vs x).mp h).1
 
 theorem mem_cnb_tail {adj : α → α → Bool} {v : α} {vs : List α} {u : α}
     (h : u ∈ hfilt (fun u => adj v u) vs) : u ∈ cnb adj v vs :=
@@ -641,12 +641,11 @@ theorem removed_kept_split (adj : α → α → Bool) (a : α) (vs : List α) (h
   have h := hfilt_length_split (fun u => memB u (cnb adj a vs)) vs hnd
   exact h
 
-theorem keptOf_head (adj : α → α → Bool) (a : α) (vs : List α) :
+theorem keptOf_head (adj : α → α → Bool) (a : α) (vs : List α) (hvin : a ∈ vs) :
     a ∈ keptOf adj a vs := by
-  refine (mem_hfilt_iff (fun u => memB u (cnb adj a vs)) vs a).mpr ⟨?_, ?_⟩
-  · exact List.mem_cons.mpr (Or.inl rfl)
-  · unfold cnb
-    exact memB_cons_self a a (hfilt (fun u => adj a u) vs) rfl
+  refine (mem_hfilt_iff (fun u => memB u (cnb adj a vs)) vs a).mpr ⟨hvin, ?_⟩
+  unfold cnb
+  exact memB_cons_self a a (hfilt (fun u => adj a u) vs) rfl
 
 theorem removedOf_nodup (adj : α → α → Bool) (a : α) (vs : List α) (hnd : vs.Nodup) :
     (removedOf adj a vs).Nodup :=
@@ -661,9 +660,10 @@ theorem removedOf_avoids (adj : α → α → Bool) (a : α) (vs : List α) :
   intro u hu
   have hmem := (mem_hfilt_iff (fun u => !(memB u (cnb adj a vs))) vs u).mp hu
   have hnb : memB u (cnb adj a vs) = false := by
-    rcases Bool.eq_false_or_eq_true (memB u (cnb adj a vs)) with hb | hb
-    · exact hb
-    · have hcontra : (!(memB u (cnb adj a vs))) = true := by rw [hb]; rfl
+    cases hb : memB u (cnb adj a vs) with
+    | false => exact hb
+    | true =>
+      have hcontra : (!(memB u (cnb adj a vs))) = true := by rw [hb]; rfl
       rw [hcontra] at hmem
       exact Bool.noConfusion hmem.2
   have hna : u ≠ a := by
@@ -675,12 +675,13 @@ theorem removedOf_avoids (adj : α → α → Bool) (a : α) (vs : List α) :
     rw [hmemB] at hnb
     exact Bool.noConfusion hnb
   have hna' : adj a u = false := by
-    rcases Bool.eq_false_or_eq_true (adj a u) with hau | hau
-    · exact hau
-    · have huN : u ∈ hfilt (fun u => adj a u) vs :=
+    cases hau : adj a u with
+    | false => exact hau
+    | true =>
+      have huN : u ∈ hfilt (fun u => adj a u) vs :=
         (mem_hfilt_iff (fun u => adj a u) vs u).mpr ⟨hmem.1, hau⟩
       have huR : memB u (cnb adj a vs) = true :=
-        (memB_iff u (cnb adj a vs)).mp (mem_cnb_tail (vs := vs) huN)
+        (memB_iff u (cnb adj a vs)).mpr (mem_cnb_tail (vs := vs) huN)
       rw [huR] at hnb
       exact Bool.noConfusion hnb
   exact ⟨hna, hna'⟩
@@ -702,8 +703,8 @@ theorem closedNbhd_greedy (adj : α → α → Bool)
       refine ⟨List.Pairwise.nil, ?_, ?_, ?_⟩
       · intro i hi j _ _; exact absurd hi (by simp)
       · intro s hs; exact absurd hs (by simp)
-      · omega
-    | cons a t => omega
+      · simp only [List.length_nil]; omega
+    | cons a t => exact absurd hlen (by simp)
   | succ f ih =>
     intro D vs hlen hnd hdeg
     cases vs with
@@ -712,7 +713,7 @@ theorem closedNbhd_greedy (adj : α → α → Bool)
       refine ⟨List.Pairwise.nil, ?_, ?_, ?_⟩
       · intro i hi j _ _; exact absurd hi (by simp)
       · intro s hs; exact absurd hs (by simp)
-      · omega
+      · simp only [List.length_nil]; omega
     | cons a t =>
       have ha : a ∈ a :: t := List.mem_cons.mpr (Or.inl rfl)
       have hdeg_a : (cnb adj a (a :: t)).length ≤ D := hdeg a ha
@@ -720,7 +721,8 @@ theorem closedNbhd_greedy (adj : α → α → Bool)
       have hlenshort : (removedOf adj a (a :: t)).length + 1 ≤ (a :: t).length := by
         have hsplit : (keptOf adj a (a :: t)).length + (removedOf adj a (a :: t)).length
             = (a :: t).length := removed_kept_split adj a (a :: t) hnd
-        have hkeep : a ∈ keptOf adj a (a :: t) := keptOf_head adj a (a :: t)
+        have hkeep : a ∈ keptOf adj a (a :: t) :=
+          keptOf_head adj a (a :: t) (List.mem_cons.mpr (Or.inl rfl))
         have hpos : 0 < (keptOf adj a (a :: t)).length := length_pos_of_mem a _ hkeep
         omega
       have hdeg' : ∀ v ∈ removedOf adj a (a :: t),
@@ -742,23 +744,25 @@ theorem closedNbhd_greedy (adj : α → α → Bool)
         have hNDfull : (cnb adj v (a :: t)).Nodup := cnb_nodup adj hirr v (a :: t) hnd
         have hord := subset_length_le
           (cnb adj v (removedOf adj a (a :: t))) (cnb adj v (a :: t)) hNDsub hsub
+        have hdv : (cnb adj v (a :: t)).length ≤ D := hdeg v hvmem
         omega
       have hrec := ih D (removedOf adj a (a :: t)) (by omega)
         (removedOf_nodup adj a (a :: t) hnd) hdeg'
       obtain ⟨S', hND', hInd', hSub', hCount'⟩ := hrec
       use a :: S'
       refine ⟨?_, ?_, ?_, ?_⟩
-      · refine List.Pairwise.cons ?_ hND'
-        intro s hs
-        exact (removedOf_avoids adj a (a :: t) s (hSub' s hs)).1
+      · intro s hs
+        exact (removedOf_avoids adj a (a :: t) s (hSub' s hs)).1.symm
       · intro i hi j hj hne
         rcases List.mem_cons.mp hi with hia | hia
         · rcases List.mem_cons.mp hj with hja | hja
-          · exact absurd hia (fun heq => hne heq)
-          · exact (removedOf_avoids adj a (a :: t) j (hSub' j hja)).2
+          · exact absurd (hia.trans hja.symm) hne
+          · rw [hia]
+            exact (removedOf_avoids adj a (a :: t) j (hSub' j hja)).2
         · rcases List.mem_cons.mp hj with hja | hja
           · have hfalse : adj a i = false :=
               (removedOf_avoids adj a (a :: t) i (hSub' i hia)).2
+            rw [hja]
             rw [hsym a i] at hfalse
             exact hfalse
           · exact hInd' i hia j hja hne
@@ -771,25 +775,43 @@ theorem closedNbhd_greedy (adj : α → α → Bool)
             (removedOf adj a (a :: t)).length := by
           have hsub : ∀ x ∈ a :: t, x ∈ (cnb adj a (a :: t)) ++ (removedOf adj a (a :: t)) := by
             intro x hx
-            rcases (mem_app_iff (cnb adj a (a :: t)) (removedOf adj a (a :: t)) x) with hL | hR
-            · exact hL
-            · exact hR
+            by_cases hxa : x = a
+            · subst hxa
+              exact Or.inl (List.mem_cons.mpr (Or.inl rfl))
+            · have hxt : x ∈ t := by
+                rcases List.mem_cons.mp hx with h | h
+                · exact absurd h hxa
+                · exact h
+              cases hadj : adj a x with
+              | true =>
+                exact Or.inl (mem_cnb_tail
+                  ((mem_hfilt_iff (fun u => adj a u) (a :: t) x).mpr ⟨hx, hadj⟩))
+              | false =>
+                have hxnb : memB x (cnb adj a (a :: t)) = false := by
+                  refine memB_false_of_nmem x (cnb adj a (a :: t)) ?_
+                  intro hmem
+                  rcases List.mem_cons.mp hmem with h1 | h1
+                  · exact hxa h1
+                  · have hcontra := ((mem_hfilt_iff (fun u => adj a u) (a :: t) x).mp h1).2
+                    rw [hadj] at hcontra
+                    exact Bool.noConfusion hcontra
+                exact Or.inr ((mem_hfilt_iff
+                  (fun u => !(memB u (cnb adj a (a :: t)))) (a :: t) x).mpr
+                  ⟨hx, by rw [hxnb]; rfl⟩))
           have hord := subset_length_le (a :: t)
             ((cnb adj a (a :: t)) ++ (removedOf adj a (a :: t))) hnd hsub
           rw [length_app] at hord
           omega
-        have hprod : D * (Nat.succ S'.length) = D * S'.length + D := by
-          show D * (S'.length + 1) = D * S'.length + D
+        have hprod : D * (S'.length + 1) = D * S'.length + D := by
           rw [Nat.mul_add, Nat.mul_one]
+        simp only [List.length_cons]
         rw [hprod]
         have hA : D * S'.length + D ≥ (removedOf adj a (a :: t)).length + D :=
           Nat.add_le_add hCount' (Nat.le_refl D)
         have hB : (removedOf adj a (a :: t)).length + D ≥
             (removedOf adj a (a :: t)).length + (cnb adj a (a :: t)).length :=
           Nat.add_le_add (Nat.le_refl _) hdeg_a
-        have hC : (removedOf adj a (a :: t)).length + (cnb adj a (a :: t)).length ≥
-            (a :: t).length := by omega
-        exact Nat.le_trans (Nat.le_trans hA hB) hC
+        omega
 
 /-! ## §4 The degree law, the cluster law, the trivial family -/
 
@@ -804,7 +826,6 @@ theorem k3_bound (adj : α → α → Bool)
     refine ⟨List.Pairwise.nil, ?_, ?_, ?_⟩
     · intro s hs; exact absurd hs (by simp)
     · rw [show ([] : List α).length = 0 from rfl, hk0]
-      exact Nat.le_refl 0
     · exact Or.inr (by intro i hi j _ _; exact absurd hi (by simp))
   · -- k ≥ 1
     have hk2 : fsqrt vs.length * fsqrt vs.length ≤ vs.length := fsqrt_sq_le vs.length
@@ -826,14 +847,14 @@ theorem k3_bound (adj : α → α → Bool)
       have hvj : v ≠ j := by
         intro heq
         rw [heq] at hmj
-        rw [hirr v] at hmj
+        rw [hirr j] at hmj
         exact Bool.noConfusion hmj.2
       have htri := hfree i v j hmi.1 hv hmj.1 hiv hvj hne
-      have hiva : adj i v = true := by rw [hsym v i]; exact hmi.2
+      have hiva : adj i v = true := by rw [hsym i v]; exact hmi.2
       have hvja : adj v j = true := hmj.2
-      rcases Bool.eq_false_or_eq_true (adj i j) with hbl | hbt
-      · exact hbl
-      · exact absurd ⟨hiva, hvja, hbt⟩ htri
+      cases hbl : adj i j with
+      | true => exact absurd ⟨hiva, hvja, hbl⟩ htri
+      | false => exact hbl
     · -- all open neighborhoods ≤ k − 1, so closed ≤ k: the greedy engine
       have hdeg : ∀ v ∈ vs, (cnb adj v vs).length ≤ fsqrt vs.length := by
         intro v hv
@@ -843,7 +864,7 @@ theorem k3_bound (adj : α → α → Bool)
         rw [cnb_length]
         omega
       obtain ⟨S, hND, hInd, hSub, hCount⟩ :=
-        closedNbhd_greedy adj hsym hirr (vs.length) (fsqrt vs.length)
+        closedNbhd_greedy adj hsym hirr (vs.length) (fsqrt vs.length) vs
           (Nat.le_refl _) hnd hdeg
       use S
       refine ⟨hND, hSub, ?_, Or.inr hInd⟩
@@ -863,13 +884,14 @@ theorem k3_bound (adj : α → α → Bool)
 
 theorem hmul_lt (a b c : Nat) (hpos : 0 < a) (h : b < c) : a * b < a * c := by
   have hbc : b + 1 ≤ c := Nat.succ_le_of_lt h
-  have h1 : a * (b + 1) ≤ a * c := hmul_le hbc (Nat.le_refl a)
+  have h1 : a * (b + 1) ≤ a * c := hmul_le a a (b + 1) c (Nat.le_refl a) hbc
   have h2 : a * b + a = a * (b + 1) := by rw [Nat.mul_add, Nat.mul_one]
   have h3 : a * b < a * b + a := by
     have hstep := Nat.add_lt_add_left hpos (a * b)
     rw [Nat.add_zero] at hstep
     exact hstep
-  exact Nat.lt_of_lt_of_le h3 (by rw [← h2]; exact Nat.le_refl _)
+  rw [h2] at h3
+  exact Nat.lt_of_lt_of_le h3 h1
 
 theorem hmul_pred_lt (k : Nat) (hk : 0 < k) : k * (k - 1) < k * k := by
   cases k with
@@ -894,7 +916,7 @@ theorem p3_bound (adj : α → α → Bool)
         rw [hk0] at hhi
         omega
       cases vs with
-      | nil => rw [show ([] : List α).length = 0 from rfl]; omega
+      | nil => rw [show ([] : List α).length = 0 from rfl, show fsqrt 0 = 0 from rfl]
       | cons a t => simp only [List.length_cons] at hlen0; omega
     · exact Or.inr (by intro i hi j _ _; exact absurd hi (by simp))
   · have hk2 : fsqrt vs.length * fsqrt vs.length ≤ vs.length := fsqrt_sq_le vs.length
@@ -902,16 +924,17 @@ theorem p3_bound (adj : α → α → Bool)
       with hex | hall
     · obtain ⟨v, hv, hvl⟩ := hex
       use cnb adj v vs
-      refine ⟨cnb_nodup adj hirr v vs hnd, cnb_subset adj v vs, hvl, ?_⟩
+      refine ⟨cnb_nodup adj hirr v vs hnd, cnb_subset adj v vs hv, hvl, ?_⟩
       refine Or.inl ?_
       intro i hi j hj hne
       rcases List.mem_cons.mp hi with hiv | hit
       · rcases List.mem_cons.mp hj with hjv | hjt
-        · exact absurd hiv (fun heq => hne heq)
-        · exact (mem_hfilt_iff (fun u => adj v u) vs j).mp hjt |>.2
-      · rcases List.mem_cons.mp hj with hjv | hjt
+        · exact absurd (hiv.trans hjv.symm) hne
         · rw [hiv]
-          exact (mem_hfilt_iff (fun u => adj v u) vs j).mp hjv |>.2
+          exact (mem_hfilt_iff (fun u => adj v u) vs j).mp hjt |>.2
+      · rcases List.mem_cons.mp hj with hjv | hjt
+        · rw [hjv, hsym i v]
+          exact (mem_hfilt_iff (fun u => adj v u) vs i).mp hit |>.2
         · -- both neighbors of v: P3-freeness forces adjacency
           have hmi := (mem_hfilt_iff (fun u => adj v u) vs i).mp hit
           have hmj := (mem_hfilt_iff (fun u => adj v u) vs j).mp hjt
@@ -923,21 +946,21 @@ theorem p3_bound (adj : α → α → Bool)
           have hvjn : v ≠ j := by
             intro heq
             rw [heq] at hmj
-            rw [hirr v] at hmj
+            rw [hirr j] at hmj
             exact Bool.noConfusion hmj.2
           have htri := hfree i v j hmi.1 hv hmj.1 hivn hvjn hne
-          have hiva : adj i v = true := by rw [hsym v i]; exact hmi.2
+          have hiva : adj i v = true := by rw [hsym i v]; exact hmi.2
           have hvja : adj v j = true := hmj.2
-          rcases Bool.eq_false_or_eq_true (adj i j) with hbl | hbt
-          · exact absurd ⟨hiva, hvja, hbl⟩ htri
-          · exact hbt
+          cases hbl : adj i j with
+          | true => exact hbl
+          | false => exact absurd ⟨hiva, hvja, hbl⟩ htri
     · -- all closed neighborhoods ≤ k − 1: the greedy engine with D = k − 1
       have hdeg : ∀ v ∈ vs, (cnb adj v vs).length ≤ fsqrt vs.length - 1 := by
         intro v hv
         have hnot : ¬ (fsqrt vs.length ≤ (cnb adj v vs).length) := hall v hv
         omega
       obtain ⟨S, hND, hInd, hSub, hCount⟩ :=
-        closedNbhd_greedy adj hsym hirr (vs.length) (fsqrt vs.length - 1)
+        closedNbhd_greedy adj hsym hirr (vs.length) (fsqrt vs.length - 1) vs
           (Nat.le_refl _) hnd hdeg
       use S
       refine ⟨hND, hSub, ?_, Or.inr hInd⟩
@@ -961,11 +984,10 @@ theorem hsq_pred_lt (k : Nat) (hk : 0 < k) : (k - 1) * (k - 1) < k * k := by
   | succ j =>
     rw [Nat.succ_sub_one]
     rcases Nat.eq_zero_or_pos j with hj0 | hjpos
-    · rw [Nat.zero_mul, Nat.mul_one]
-      omega
+    · rw [hj0]; omega
     · have hstep1 : j * j < j * (Nat.succ j) := hmul_lt j j (Nat.succ j) hjpos (Nat.lt_succ_self j)
       have hstep2 : j * (Nat.succ j) ≤ (Nat.succ j) * (Nat.succ j) :=
-        hmul_le (Nat.le_succ_self j) (Nat.le_refl _)
+        hmul_le j (Nat.succ j) (Nat.succ j) (Nat.succ j) (Nat.le_succ j) (Nat.le_refl _)
       exact Nat.lt_of_le_of_lt hstep1 hstep2
 
 /-! ## §6 The trivial family -/
@@ -982,7 +1004,6 @@ theorem k1_bound (adj : α → α → Bool) :
   refine ⟨List.Pairwise.nil, ?_, ?_, ?_⟩
   · intro s hs; exact absurd hs (by simp)
   · rw [show ([] : List α).length = 0 from rfl, show fsqrt 0 = 0 from rfl]
-    exact Nat.le_refl 0
   · exact Or.inr (by intro i hi j _ _; exact absurd hi (by simp))
 
 theorem k2_bound (adj : α → α → Bool) :
@@ -1014,7 +1035,7 @@ theorem cadj_symm (adj : α → α → Bool) (hsym : ∀ i j : α, adj i j = adj
   unfold cadj
   by_cases h : i = j
   · rw [if_pos h, if_pos (h.symm)]
-  · rw [if_neg h, if_neg (fun hc => h hc.symm)]
+  · rw [if_neg h, if_neg (fun hc => h hc.symm), hsym i j]
 
 theorem cadj_irr (adj : α → α → Bool) (i : α) : cadj adj i i = false := by
   unfold cadj
@@ -1026,10 +1047,9 @@ theorem cadj_true_iff_false {adj : α → α → Bool} {i j : α} (hne : i ≠ j
   rw [if_neg hne]
   constructor
   · intro h
-    rcases Bool.eq_false_or_eq_true (adj i j) with hb | hb
-    · exact hb
-    · rw [hb] at h
-      exact Bool.noConfusion h
+    cases hb : adj i j with
+    | false => exact hb
+    | true => rw [hb] at h; simp at h
   · intro h
     rw [h]
     rfl
@@ -1040,10 +1060,9 @@ theorem cadj_false_iff_true {adj : α → α → Bool} {i j : α} (hne : i ≠ j
   rw [if_neg hne]
   constructor
   · intro h
-    rcases Bool.eq_false_or_eq_true (adj i j) with hb | hb
-    · rw [hb] at h
-      exact Bool.noConfusion h
-    · exact hb
+    cases hb : adj i j with
+    | true => exact hb
+    | false => rw [hb] at h; simp at h
   · intro h
     rw [h]
     rfl
@@ -1069,7 +1088,8 @@ theorem kb3Free_iff_k3Free_comp (adj : α → α → Bool) (vs : List α) :
     have ha3 : cadj adj i k = true := (cadj_true_iff_false h3).mpr hc3
     exact hk3 i hi j hj k hk' h1 h2 h3 ⟨ha1, ha2, ha3⟩
 
-theorem pb3Free_iff_p3Free_comp (adj : α → α → Bool) (vs : List α) :
+theorem pb3Free_iff_p3Free_comp (adj : α → α → Bool) (hsym : ∀ i j : α, adj i j = adj j i)
+    (vs : List α) :
     Pb3FreeOn adj vs ↔ P3FreeOn (cadj adj) vs := by
   constructor
   · intro hpb3
@@ -1079,16 +1099,21 @@ theorem pb3Free_iff_p3Free_comp (adj : α → α → Bool) (vs : List α) :
     have ha2 : adj j k = false := (cadj_true_iff_false h2).mp hc2
     have ha3 : adj i k = true := (cadj_false_iff_true h3).mp hc3
     -- the complement pattern (ij non, jk non, ik edge) IS Pb3 (edge + two non-edges)
+    have hak : adj k i = true := by rw [← hsym i k]; exact ha3
+    have hkj : adj k j = false := by rw [← hsym j k]; exact ha2
     exact hpb3 k hk' i hi j hj
-      (fun hc => h3 hc.symm) (fun hc => h1 (hc.symm)) (fun hc => h2 hc.symm) ⟨ha3, ha1, ha2⟩
+      (fun hc => h3 hc.symm) h1 (fun hc => h2 hc.symm) ⟨hak, ha1, hkj⟩
   · intro hp3
     intro i hi j hj k hk' h1 h2 h3 htriple
     obtain ⟨hc1, hc2, hc3⟩ := htriple
-    have ha1 : cadj adj i j = true := (cadj_true_iff_false h1).mpr hc1
-    have ha2 : cadj adj j k = true := (cadj_true_iff_false h2).mpr hc2
-    have ha3 : cadj adj i k = false := (cadj_false_iff_true h3).mpr hc3
-    exact hp3 k hk' i hi j hj
-      (fun hc => h3 hc.symm) (fun hc => h1 (hc.symm)) (fun hc => h2 hc.symm) ⟨ha1, ha2, ha3⟩
+    -- Pb3 pattern on adj: (adj i j = true, adj j k = false, adj i k = false);
+    -- convert to the P3 pattern on cadj at (j,k,i): cadj j k = T, cadj k i = T, cadj j i = F
+    have hkic : adj k i = false := by rw [← hsym i k]; exact hc3
+    have hjir : adj j i = true := by rw [← hsym i j]; exact hc1
+    exact hp3 j hj k hk' i hi h2 (fun hc => h3 hc.symm) (fun hc => h1 hc.symm)
+      ⟨(cadj_true_iff_false h2).mpr hc2,
+       (cadj_true_iff_false (fun hc => h3 hc.symm)).mpr hkic,
+       (cadj_false_iff_true (fun hc => h1 hc.symm)).mpr hjir⟩
 
 theorem clique_cadj_iff_indep (adj : α → α → Bool) (S : List α) :
     CliqueOn (cadj adj) S ↔ IndepOn adj S := by
@@ -1116,8 +1141,8 @@ theorem boundCert_comp_transfer (adj : α → α → Bool) (vs : List α) :
   obtain ⟨S, hND, hSub, hlen, hdisj⟩ := hcert
   use S
   rcases hdisj with hC | hI
-  · exact ⟨hND, hSub, hlen, Or.inr (clique_cadj_iff_indep adj S).mp hC⟩
-  · exact ⟨hND, hSub, hlen, Or.inl (indep_cadj_iff_clique adj S).mp hI⟩
+  · exact ⟨hND, hSub, hlen, Or.inr ((clique_cadj_iff_indep adj S).mp hC)⟩
+  · exact ⟨hND, hSub, hlen, Or.inl ((indep_cadj_iff_clique adj S).mp hI)⟩
 
 theorem kb3_bound (adj : α → α → Bool)
     (hsym : ∀ i j : α, adj i j = adj j i)
@@ -1134,7 +1159,7 @@ theorem pb3_bound (adj : α → α → Bool)
     (hirr : ∀ i : α, adj i i = false) :
     ∀ (vs : List α), vs.Nodup → Pb3FreeOn adj vs → BoundCert adj vs := by
   intro vs hnd hfree
-  have hcomp : P3FreeOn (cadj adj) vs := (pb3Free_iff_p3Free_comp adj vs).mp hfree
+  have hcomp : P3FreeOn (cadj adj) vs := (pb3Free_iff_p3Free_comp adj hsym vs).mp hfree
   have hcert : BoundCert (cadj adj) vs :=
     p3_bound (cadj adj) (cadj_symm adj hsym) (cadj_irr adj) vs hnd hcomp
   exact boundCert_comp_transfer adj vs hcert
@@ -1143,7 +1168,7 @@ theorem pb3_bound (adj : α → α → Bool)
 
 theorem eqb_comm {α : Type} [DecidableEq α] (a b : α) : eqb a b = eqb b a := by
   by_cases hab : a = b
-  · rw [hab, eqb_refl, eqb_refl]
+  · rw [hab, eqb_refl]
   · have hba : b ≠ a := fun hc => hab (hc.symm)
     have h1 : eqb a b = false := (eqb_false_iff a b).mpr hab
     have h2 : eqb b a = false := (eqb_false_iff b a).mpr hba
@@ -1174,9 +1199,8 @@ theorem adjT_false (m a b : Nat) (h : adjT m a b = false) : a / m ≠ b / m :=
   ne_of_eqb_false (a / m) (b / m) h
 
 theorem div_add_mod_self (s m : Nat) : m * (s / m) + s % m = s := by
-  have h := Nat.div_add_mod m s
-  rw [Nat.mul_comm] at h
-  exact h
+  rw [Nat.mul_comm m (s / m)]
+  exact Nat.div_add_mod m s
 
 theorem same_block_mod_ne (s1 s2 m : Nat) (h : s1 / m = s2 / m) (hne : s1 ≠ s2) :
     s1 % m ≠ s2 % m := by
@@ -1186,11 +1210,11 @@ theorem same_block_mod_ne (s1 s2 m : Nat) (h : s1 / m = s2 / m) (hne : s1 ≠ s2
   have h2 : m * (s2 / m) + s2 % m = s2 := div_add_mod_self s2 m
   rw [h, hmod] at h1
   rw [h2] at h1
-  exact h1
+  exact h1.symm
 
 theorem div_lt_of_lt_mul (s m : Nat) (hpos : 1 ≤ m) (h : s < m * m) : s / m < m := by
   have hrec : m * (s / m) + s % m = s := div_add_mod_self s m
-  have hle1 : m * (s / m) ≤ s := Nat.le_add_right _ _
+  have hle1 : m * (s / m) ≤ s := by omega
   have hle : m * (s / m) < m * m := Nat.lt_of_le_of_lt hle1 h
   exact hmul_lt_cancel_left m (s / m) m hpos hle
 
@@ -1199,8 +1223,11 @@ theorem div_zero_of_lt (s m : Nat) (h : s < m) : s / m = 0 := by
   · exact h0
   · exfalso
     have hrec : m * (s / m) + s % m = s := div_add_mod_self s m
-    have hle1 : m * (s / m) ≤ s := Nat.le_add_right _ _
-    have hle2 : m ≤ m * (s / m) := hmul_le hp (Nat.le_refl m)
+    have hle1 : m * (s / m) ≤ s := by omega
+    have hle2 : m ≤ m * (s / m) := by
+      have h1 : 1 ≤ s / m := by omega
+      calc m = m * 1 := (Nat.mul_one m).symm
+        _ ≤ m * (s / m) := hmul_le_right (s / m) m 1 h1
     have hle3 : m ≤ s := Nat.le_trans hle2 hle1
     omega
 
@@ -1208,8 +1235,8 @@ theorem div_exact_mul (q m : Nat) (hpos : 1 ≤ m) : q * m / m = q := by
   have hrec : m * (q * m / m) + q * m % m = q * m := div_add_mod_self (q * m) m
   have hcomm : q * m = m * q := Nat.mul_comm q m
   rw [hcomm] at hrec
-  have hle : m * (q * m / m) ≤ m * q := Nat.le_add_right _ _
-  have hX : q * m / m ≤ q := hmul_le_cancel_left m _ q hpos hle
+  have hle : m * (q * m / m) ≤ m * q := by omega
+  have hX : q * m / m ≤ q := hmul_le_cancel_left m (q * m / m) q hpos hle
   rcases Nat.eq_or_lt_of_le hX with heq | hlt
   · exact heq
   · exfalso
@@ -1238,18 +1265,19 @@ theorem nodup_map_of_on : ∀ (S : List Nat) (f : Nat → Nat) (hND : S.Nodup),
     (∀ a b, a ∈ S → b ∈ S → f a = f b → a = b) → (S.map f).Nodup := by
   intro S
   induction S with
-  | nil => intro f _ _ _; exact List.Pairwise.nil
+  | nil => intro f _ _; exact List.Pairwise.nil
   | cons a t ih =>
     intro f hND hinj
     rw [List.map_cons]
     refine List.Pairwise.cons ?_ ?_
     · intro b hb
       obtain ⟨c, hc, hfc⟩ := List.mem_map.mp hb
+      intro hfab
+      have hfc' : f a = f c := hfab.trans hfc.symm
       have heq : a = c := hinj a c (List.mem_cons.mpr (Or.inl rfl))
-        (List.mem_cons.mpr (Or.inr hc)) hfc.symm
-      subst heq
+        (List.mem_cons.mpr (Or.inr hc)) hfc'
       cases hND with
-      | cons hhead _ => exact hhead c hc
+      | cons hhead _ => exact hhead c hc heq
     · cases hND with
       | cons _ htail => exact ih f htail (fun x y hx hy hfx =>
           hinj x y (List.mem_cons.mpr (Or.inr hx)) (List.mem_cons.mpr (Or.inr hy)) hfx)
@@ -1264,7 +1292,7 @@ theorem tight_family (m : Nat) (hm : 1 ≤ m) :
         S.length = m ∧ CliqueOn (adjT m) S) ∧
     (∃ T : List Nat, T.Nodup ∧ (∀ t ∈ T, t ∈ List.range (m * m)) ∧
         T.length = m ∧ IndepOn (adjT m) T) := by
-  have hrangeND : (List.range (m * m)).Nodup := List.nodup_range (m * m)
+  have hrangeND : (List.range (m * m)).Nodup := List.nodup_range (n := m * m)
   have hfsqrt : fsqrt (m * m) = m := by
     refine fsqrt_eq (m * m) m (Nat.le_refl _) ?_
     have h1 : (m + 1) * (m + 1) = m * m + 2 * m + 1 := sq_succ m
@@ -1287,11 +1315,13 @@ theorem tight_family (m : Nat) (hm : 1 ≤ m) :
     have hsubmap : ∀ x ∈ S.map (fun s => s % m), x ∈ List.range m := by
       intro x hx
       obtain ⟨s, hs, hfx⟩ := List.mem_map.mp hx
+      have hfx' : s % m = x := hfx
       have hlt : s % m < m := Nat.mod_lt s (by omega)
+      rw [← hfx']
       exact List.mem_range.mpr hlt
     have hord := subset_length_le (S.map (fun s => s % m)) (List.range m) hNDmap hsubmap
-    have hlen : (S.map (fun s => s % m)).length = S.length := List.length_map _ _
-    have hrange : (List.range m).length = m := List.length_range m
+    have hlen : (S.map (fun s => s % m)).length = S.length := by simp
+    have hrange : (List.range m).length = m := by simp
     omega
   · -- INDEP UPPER: the div map is injective on an independent set and bounded
     intro T hND hsub hI
@@ -1311,20 +1341,24 @@ theorem tight_family (m : Nat) (hm : 1 ≤ m) :
     have hsubmap : ∀ x ∈ T.map (fun t => t / m), x ∈ List.range m := by
       intro x hx
       obtain ⟨t, ht, hfxt⟩ := List.mem_map.mp hx
+      have hfxt' : t / m = x := hfxt
       have hmemT : t < m * m := List.mem_range.mp (hsub t ht)
       have hlt : t / m < m := div_lt_of_lt_mul t m hm hmemT
+      rw [← hfxt']
       exact List.mem_range.mpr hlt
     have hord := subset_length_le (T.map (fun t => t / m)) (List.range m) hNDmap hsubmap
-    have hlen : (T.map (fun t => t / m)).length = T.length := List.length_map _ _
-    have hrange : (List.range m).length = m := List.length_range m
+    have hlen : (T.map (fun t => t / m)).length = T.length := by simp
+    have hrange : (List.range m).length = m := by simp
     omega
   · -- CLIQUE WITNESS: range m (the whole block 0)
-    refine ⟨List.range m, List.nodup_range m, ?_, ?_, ?_⟩
+    refine ⟨List.range m, List.nodup_range (n := m), ?_, ?_, ?_⟩
     · intro s hs
       have hlt : s < m := List.mem_range.mp hs
-      have hle : m ≤ m * m := hmul_le hm (Nat.le_refl m)
+      have hle : m ≤ m * m := by
+        have h9 := hmul_le m m 1 m (Nat.le_refl m) hm
+        simpa using h9
       exact List.mem_range.mpr (Nat.lt_of_lt_of_le hlt hle)
-    · have h1 : (List.range m).length = m := List.length_range m
+    · have h1 : (List.range m).length = m := by simp
       exact h1
     · intro i hi j hj _
       have hi' : i < m := List.mem_range.mp hi
@@ -1336,9 +1370,9 @@ theorem tight_family (m : Nat) (hm : 1 ≤ m) :
       exact eqb_refl 0
   · -- INDEP WITNESS: the block representatives q * m
     refine ⟨(List.range m).map (fun q => q * m), ?_, ?_, ?_, ?_⟩
-    · exact nodup_map_of_on (List.range m) (fun q => q * m) (List.nodup_range m)
+    · exact nodup_map_of_on (List.range m) (fun q => q * m) (List.nodup_range (n := m))
         (fun a b ha hb hf =>
-          hmul_inj m b a hm (by rw [Nat.mul_comm m b, Nat.mul_comm m a]; exact hf))
+          hmul_inj m a b hm (by rw [Nat.mul_comm m a, Nat.mul_comm m b]; exact hf))
     · intro t ht
       obtain ⟨q, hq, hfx⟩ := List.mem_map.mp ht
       have hq' : q < m := List.mem_range.mp hq
@@ -1346,10 +1380,11 @@ theorem tight_family (m : Nat) (hm : 1 ≤ m) :
         have hstep : m * q < m * m := hmul_lt m q m (by omega) hq'
         rw [Nat.mul_comm q m]
         exact hstep
+      rw [← hfx]
       exact List.mem_range.mpr hlt
-    · have h1 : ((List.range m).map (fun q => q * m)).length = (List.range m).length :=
-        List.length_map _ _
-      have h2 : (List.range m).length = m := List.length_range m
+    · have h1 : ((List.range m).map (fun q => q * m)).length = (List.range m).length := by
+        simp
+      have h2 : (List.range m).length = m := by simp
       omega
     · intro i hi j hj hne
       -- distinct block representatives have distinct block indices
