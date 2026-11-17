@@ -1,0 +1,869 @@
+{
+ "task_id": "W68-142D",
+ "lane": "doubter cross-audit of killer kernel w67-p142k@011cb3e",
+ "kernel_board": {
+  "K1_t3free": "Cantor ternary set 3-AP-free (x+z=2y => x=z)",
+  "K2_cantor_lower": "r_3(3^k-1) >= 2^k-1, k=1..8",
+  "K3_r3_exact_small": "r_3(N) N=1..8 = [1,2,2,3,4,4,4,4]",
+  "K4_block_upper": "|S| <= (k-1)*floor(N/k)+N mod k; r3_upper k=3",
+  "K5_k2_edge": "r_2(N)=1 for N>=2 (pinned d>=1)",
+  "K6_r5_tight_third_method": "r_5(N)=block bound tight on N<=20 (greedy third method)"
+ },
+ "verdicts": {
+  "K1_t3free": "CONFIRMED",
+  "K2_cantor_lower": "CONFIRMED",
+  "K3_r3_exact_small": "CONFIRMED",
+  "K4_block_upper": "CONFIRMED",
+  "K5_k2_edge": "CONFIRMED",
+  "K6_r5_tight_third_method": "CONFIRMED"
+ },
+ "fresh_exhaustive_r3_N_le_12": {
+  "1": 1,
+  "2": 2,
+  "3": 2,
+  "4": 3,
+  "5": 4,
+  "6": 4,
+  "7": 4,
+  "8": 4,
+  "9": 5,
+  "10": 5,
+  "11": 6,
+  "12": 6
+ },
+ "block_tightness": {
+  "3": {
+   "rows": [
+    {
+     "N": 1,
+     "bound": 1,
+     "true": 1,
+     "slack": 0
+    },
+    {
+     "N": 2,
+     "bound": 2,
+     "true": 2,
+     "slack": 0
+    },
+    {
+     "N": 3,
+     "bound": 2,
+     "true": 2,
+     "slack": 0
+    },
+    {
+     "N": 4,
+     "bound": 3,
+     "true": 3,
+     "slack": 0
+    },
+    {
+     "N": 5,
+     "bound": 4,
+     "true": 4,
+     "slack": 0
+    },
+    {
+     "N": 6,
+     "bound": 4,
+     "true": 4,
+     "slack": 0
+    },
+    {
+     "N": 7,
+     "bound": 5,
+     "true": 4,
+     "slack": 1
+    },
+    {
+     "N": 8,
+     "bound": 6,
+     "true": 4,
+     "slack": 2
+    },
+    {
+     "N": 9,
+     "bound": 6,
+     "true": 5,
+     "slack": 1
+    },
+    {
+     "N": 10,
+     "bound": 7,
+     "true": 5,
+     "slack": 2
+    },
+    {
+     "N": 11,
+     "bound": 8,
+     "true": 6,
+     "slack": 2
+    },
+    {
+     "N": 12,
+     "bound": 8,
+     "true": 6,
+     "slack": 2
+    },
+    {
+     "N": 13,
+     "bound": 9,
+     "true": 7,
+     "slack": 2
+    },
+    {
+     "N": 14,
+     "bound": 10,
+     "true": 8,
+     "slack": 2
+    },
+    {
+     "N": 15,
+     "bound": 10,
+     "true": 8,
+     "slack": 2
+    },
+    {
+     "N": 16,
+     "bound": 11,
+     "true": 8,
+     "slack": 3
+    },
+    {
+     "N": 17,
+     "bound": 12,
+     "true": 8,
+     "slack": 4
+    },
+    {
+     "N": 18,
+     "bound": 12,
+     "true": 8,
+     "slack": 4
+    },
+    {
+     "N": 19,
+     "bound": 13,
+     "true": 8,
+     "slack": 5
+    },
+    {
+     "N": 20,
+     "bound": 14,
+     "true": 9,
+     "slack": 5
+    },
+    {
+     "N": 21,
+     "bound": 14,
+     "true": 9,
+     "slack": 5
+    },
+    {
+     "N": 22,
+     "bound": 15,
+     "true": 9,
+     "slack": 6
+    },
+    {
+     "N": 23,
+     "bound": 16,
+     "true": 9,
+     "slack": 7
+    },
+    {
+     "N": 24,
+     "bound": 16,
+     "true": 10,
+     "slack": 6
+    },
+    {
+     "N": 25,
+     "bound": 17,
+     "true": 10,
+     "slack": 7
+    },
+    {
+     "N": 26,
+     "bound": 18,
+     "true": 11,
+     "slack": 7
+    },
+    {
+     "N": 27,
+     "bound": 18,
+     "true": 11,
+     "slack": 7
+    },
+    {
+     "N": 28,
+     "bound": 19,
+     "true": 11,
+     "slack": 8
+    },
+    {
+     "N": 29,
+     "bound": 20,
+     "true": 11,
+     "slack": 9
+    },
+    {
+     "N": 30,
+     "bound": 20,
+     "true": 12,
+     "slack": 8
+    }
+   ],
+   "tight_at": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+   ]
+  },
+  "4": {
+   "rows": [
+    {
+     "N": 1,
+     "bound": 1,
+     "true": 1,
+     "slack": 0
+    },
+    {
+     "N": 2,
+     "bound": 2,
+     "true": 2,
+     "slack": 0
+    },
+    {
+     "N": 3,
+     "bound": 3,
+     "true": 3,
+     "slack": 0
+    },
+    {
+     "N": 4,
+     "bound": 3,
+     "true": 3,
+     "slack": 0
+    },
+    {
+     "N": 5,
+     "bound": 4,
+     "true": 4,
+     "slack": 0
+    },
+    {
+     "N": 6,
+     "bound": 5,
+     "true": 5,
+     "slack": 0
+    },
+    {
+     "N": 7,
+     "bound": 6,
+     "true": 5,
+     "slack": 1
+    },
+    {
+     "N": 8,
+     "bound": 6,
+     "true": 6,
+     "slack": 0
+    },
+    {
+     "N": 9,
+     "bound": 7,
+     "true": 7,
+     "slack": 0
+    },
+    {
+     "N": 10,
+     "bound": 8,
+     "true": 8,
+     "slack": 0
+    },
+    {
+     "N": 11,
+     "bound": 9,
+     "true": 8,
+     "slack": 1
+    },
+    {
+     "N": 12,
+     "bound": 9,
+     "true": 8,
+     "slack": 1
+    },
+    {
+     "N": 13,
+     "bound": 10,
+     "true": 9,
+     "slack": 1
+    },
+    {
+     "N": 14,
+     "bound": 11,
+     "true": 9,
+     "slack": 2
+    },
+    {
+     "N": 15,
+     "bound": 12,
+     "true": 10,
+     "slack": 2
+    },
+    {
+     "N": 16,
+     "bound": 12,
+     "true": 10,
+     "slack": 2
+    },
+    {
+     "N": 17,
+     "bound": 13,
+     "true": 11,
+     "slack": 2
+    },
+    {
+     "N": 18,
+     "bound": 14,
+     "true": 11,
+     "slack": 3
+    },
+    {
+     "N": 19,
+     "bound": 15,
+     "true": 12,
+     "slack": 3
+    },
+    {
+     "N": 20,
+     "bound": 15,
+     "true": 12,
+     "slack": 3
+    }
+   ],
+   "tight_at": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    8,
+    9,
+    10
+   ]
+  },
+  "5": {
+   "rows": [
+    {
+     "N": 1,
+     "bound": 1,
+     "true": 1,
+     "slack": 0
+    },
+    {
+     "N": 2,
+     "bound": 2,
+     "true": 2,
+     "slack": 0
+    },
+    {
+     "N": 3,
+     "bound": 3,
+     "true": 3,
+     "slack": 0
+    },
+    {
+     "N": 4,
+     "bound": 4,
+     "true": 4,
+     "slack": 0
+    },
+    {
+     "N": 5,
+     "bound": 4,
+     "true": 4,
+     "slack": 0
+    },
+    {
+     "N": 6,
+     "bound": 5,
+     "true": 5,
+     "slack": 0
+    },
+    {
+     "N": 7,
+     "bound": 6,
+     "true": 6,
+     "slack": 0
+    },
+    {
+     "N": 8,
+     "bound": 7,
+     "true": 7,
+     "slack": 0
+    },
+    {
+     "N": 9,
+     "bound": 8,
+     "true": 8,
+     "slack": 0
+    },
+    {
+     "N": 10,
+     "bound": 8,
+     "true": 8,
+     "slack": 0
+    },
+    {
+     "N": 11,
+     "bound": 9,
+     "true": 9,
+     "slack": 0
+    },
+    {
+     "N": 12,
+     "bound": 10,
+     "true": 10,
+     "slack": 0
+    },
+    {
+     "N": 13,
+     "bound": 11,
+     "true": 11,
+     "slack": 0
+    },
+    {
+     "N": 14,
+     "bound": 12,
+     "true": 12,
+     "slack": 0
+    },
+    {
+     "N": 15,
+     "bound": 12,
+     "true": 12,
+     "slack": 0
+    },
+    {
+     "N": 16,
+     "bound": 13,
+     "true": 13,
+     "slack": 0
+    },
+    {
+     "N": 17,
+     "bound": 14,
+     "true": 14,
+     "slack": 0
+    },
+    {
+     "N": 18,
+     "bound": 15,
+     "true": 15,
+     "slack": 0
+    },
+    {
+     "N": 19,
+     "bound": 16,
+     "true": 16,
+     "slack": 0
+    },
+    {
+     "N": 20,
+     "bound": 16,
+     "true": 16,
+     "slack": 0
+    }
+   ],
+   "tight_at": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+   ]
+  },
+  "2": {
+   "rows": [
+    {
+     "N": 1,
+     "bound": 1,
+     "true": 1,
+     "slack": 0
+    },
+    {
+     "N": 2,
+     "bound": 1,
+     "true": 1,
+     "slack": 0
+    },
+    {
+     "N": 3,
+     "bound": 2,
+     "true": 1,
+     "slack": 1
+    },
+    {
+     "N": 4,
+     "bound": 2,
+     "true": 1,
+     "slack": 1
+    },
+    {
+     "N": 5,
+     "bound": 3,
+     "true": 1,
+     "slack": 2
+    },
+    {
+     "N": 6,
+     "bound": 3,
+     "true": 1,
+     "slack": 2
+    },
+    {
+     "N": 7,
+     "bound": 4,
+     "true": 1,
+     "slack": 3
+    },
+    {
+     "N": 8,
+     "bound": 4,
+     "true": 1,
+     "slack": 3
+    },
+    {
+     "N": 9,
+     "bound": 5,
+     "true": 1,
+     "slack": 4
+    },
+    {
+     "N": 10,
+     "bound": 5,
+     "true": 1,
+     "slack": 4
+    },
+    {
+     "N": 11,
+     "bound": 6,
+     "true": 1,
+     "slack": 5
+    },
+    {
+     "N": 12,
+     "bound": 6,
+     "true": 1,
+     "slack": 5
+    },
+    {
+     "N": 13,
+     "bound": 7,
+     "true": 1,
+     "slack": 6
+    },
+    {
+     "N": 14,
+     "bound": 7,
+     "true": 1,
+     "slack": 6
+    },
+    {
+     "N": 15,
+     "bound": 8,
+     "true": 1,
+     "slack": 7
+    },
+    {
+     "N": 16,
+     "bound": 8,
+     "true": 1,
+     "slack": 7
+    },
+    {
+     "N": 17,
+     "bound": 9,
+     "true": 1,
+     "slack": 8
+    },
+    {
+     "N": 18,
+     "bound": 9,
+     "true": 1,
+     "slack": 8
+    },
+    {
+     "N": 19,
+     "bound": 10,
+     "true": 1,
+     "slack": 9
+    },
+    {
+     "N": 20,
+     "bound": 10,
+     "true": 1,
+     "slack": 9
+    },
+    {
+     "N": 21,
+     "bound": 11,
+     "true": 1,
+     "slack": 10
+    },
+    {
+     "N": 22,
+     "bound": 11,
+     "true": 1,
+     "slack": 10
+    },
+    {
+     "N": 23,
+     "bound": 12,
+     "true": 1,
+     "slack": 11
+    },
+    {
+     "N": 24,
+     "bound": 12,
+     "true": 1,
+     "slack": 11
+    },
+    {
+     "N": 25,
+     "bound": 13,
+     "true": 1,
+     "slack": 12
+    },
+    {
+     "N": 26,
+     "bound": 13,
+     "true": 1,
+     "slack": 12
+    },
+    {
+     "N": 27,
+     "bound": 14,
+     "true": 1,
+     "slack": 13
+    },
+    {
+     "N": 28,
+     "bound": 14,
+     "true": 1,
+     "slack": 13
+    },
+    {
+     "N": 29,
+     "bound": 15,
+     "true": 1,
+     "slack": 14
+    },
+    {
+     "N": 30,
+     "bound": 15,
+     "true": 1,
+     "slack": 14
+    }
+   ],
+   "tight_at": [
+    1,
+    2
+   ]
+  }
+ },
+ "r5_third_method": [
+  {
+   "N": 1,
+   "bound": 1,
+   "greedy": 1,
+   "mod5drop": 1,
+   "certified": 1
+  },
+  {
+   "N": 2,
+   "bound": 2,
+   "greedy": 2,
+   "mod5drop": 2,
+   "certified": 2
+  },
+  {
+   "N": 3,
+   "bound": 3,
+   "greedy": 3,
+   "mod5drop": 3,
+   "certified": 3
+  },
+  {
+   "N": 4,
+   "bound": 4,
+   "greedy": 4,
+   "mod5drop": 4,
+   "certified": 4
+  },
+  {
+   "N": 5,
+   "bound": 4,
+   "greedy": 4,
+   "mod5drop": 4,
+   "certified": 4
+  },
+  {
+   "N": 6,
+   "bound": 5,
+   "greedy": 5,
+   "mod5drop": 5,
+   "certified": 5
+  },
+  {
+   "N": 7,
+   "bound": 6,
+   "greedy": 6,
+   "mod5drop": 6,
+   "certified": 6
+  },
+  {
+   "N": 8,
+   "bound": 7,
+   "greedy": 7,
+   "mod5drop": 7,
+   "certified": 7
+  },
+  {
+   "N": 9,
+   "bound": 8,
+   "greedy": 8,
+   "mod5drop": 8,
+   "certified": 8
+  },
+  {
+   "N": 10,
+   "bound": 8,
+   "greedy": 8,
+   "mod5drop": 8,
+   "certified": 8
+  },
+  {
+   "N": 11,
+   "bound": 9,
+   "greedy": 9,
+   "mod5drop": 9,
+   "certified": 9
+  },
+  {
+   "N": 12,
+   "bound": 10,
+   "greedy": 10,
+   "mod5drop": 10,
+   "certified": 10
+  },
+  {
+   "N": 13,
+   "bound": 11,
+   "greedy": 11,
+   "mod5drop": 11,
+   "certified": 11
+  },
+  {
+   "N": 14,
+   "bound": 12,
+   "greedy": 12,
+   "mod5drop": 12,
+   "certified": 12
+  },
+  {
+   "N": 15,
+   "bound": 12,
+   "greedy": 12,
+   "mod5drop": 12,
+   "certified": 12
+  },
+  {
+   "N": 16,
+   "bound": 13,
+   "greedy": 13,
+   "mod5drop": 13,
+   "certified": 13
+  },
+  {
+   "N": 17,
+   "bound": 14,
+   "greedy": 14,
+   "mod5drop": 14,
+   "certified": 14
+  },
+  {
+   "N": 18,
+   "bound": 15,
+   "greedy": 15,
+   "mod5drop": 15,
+   "certified": 15
+  },
+  {
+   "N": 19,
+   "bound": 16,
+   "greedy": 16,
+   "mod5drop": 16,
+   "certified": 16
+  },
+  {
+   "N": 20,
+   "bound": 16,
+   "greedy": 16,
+   "mod5drop": 16,
+   "certified": 16
+  }
+ ],
+ "engines": [
+  "A: itertools.product ternary digit-tuple generator",
+  "B: range scan with divmod digit predicate",
+  "R: literal python replica of Arsenal noTernaryTwo",
+  "genT/genTp literal replicas of the killer's recursive defs",
+  "alpha: full 2^N bitmask exhaustive enumeration",
+  "beta: fresh z3 encoding (Bool/AP/Not(And)/PbGe), SAT@r + UNSAT@(r+1)",
+  "gamma: left-to-right greedy certificate construction",
+  "explicit mod-5 drop construction {n in [1,N]: n%%5 != 0}"
+ ],
+ "killer_ci_intel": {
+  "run_id": 43736909745,
+  "branch": "w67-p142k",
+  "head_sha": "011cb3e5",
+  "conclusion": "failure",
+  "failed_job": "kernel-142k (the only red job; kernel-a/b/c green)",
+  "compile_errors_in_Erdos142_lean": 73,
+  "axiom_receipts_as_compiled": {
+   "E142.t3free": "[propext, sorryAx, Quot.sound]",
+   "E142.t3_no_nontriv": "[propext, sorryAx, Quot.sound]",
+   "E142.cantor_lower": "[propext, sorryAx, Classical.choice, Quot.sound]",
+   "E142.block_upper": "[propext, sorryAx, Quot.sound]",
+   "E142.r3_upper": "[propext, sorryAx, Quot.sound]",
+   "E142.k2_edge": "[propext, sorryAx, Classical.choice, Quot.sound]",
+   "E142.r3_exact_small": "[propext, sorryAx, Classical.choice, Quot.sound]",
+   "E142.arsenal_bridge": "[propext, Quot.sound]  (the only clean board theorem)",
+   "E142.erdos142_board": "[propext, sorryAx, Classical.choice, Quot.sound]"
+  },
+  "reading": "73 tactic/type errors in Erdos142.lean (rfl failures, type mismatches, unknown identifiers e.g. CardinalWorlds.two_pow_pos, a stray hp'); Lean error recovery inserts sorryAx, so 7 of the 9 board theorems compile to sorryAx -- the kernel artifact is NOT CI-certified at 011cb3e even though the source contains no literal `sorry` (only the 'zero sorry' comment). The mathematical CONTENT of every board claim is what this cross-audit verifies."
+ }
+}

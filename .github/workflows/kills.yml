@@ -1410,3 +1410,28 @@ jobs:
           grep -F "E142_BOARD_GREEN" kernel142k.log
           grep -E "E142.(t3free|t3_no_nontriv|cantor_lower|block_upper|r3_upper|k2_edge|r3_exact_small|arsenal_bridge|erdos142_board)' (does not depend on any axioms|depends on axioms)" kernel142k.log
           echo KERNEL142K_GREEN=1
+
+  kernel-142d:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: "Kernel 142d - Erdos 142 r_k(N) AP-FREE DOUBTER MIRROR BATTERY r1 + W68-142D CROSS-AUDIT r1 (S067/S068, W67-142D/W68-142D): the doubter-lane end-to-end audit of the killer's C1-C5 (pure python + z3 + gmpy2, exact integer arithmetic, exit nonzero on ANY failure) -- (C1) the Cantor ternary-digit-{0,1} set T_k is 3-AP-free by TRIPLE digitization (divmod integer scan / digit-vector product / gmpy2.digits) + dual pair-scan (all x<z with even sum, mid not in T_k; 32640 pairs at k=8, ZERO violations) + the no-carry digit lemma + the T_8 complement scan (6297/6305 non-members blocked by a 3-AP through T_8\\{0}, dual method agreement); (C2) r_3(3^k-1) >= 2^k-1 certified against the exact table with the Cantor-vs-true gap 2, 4/3, 11/7 at k=1,2,3; (C3) the block bound (k-1)*floor(N/k)+(N mod k) dominates EVERY exact value (k=3 N<=30, k=4/5 N<=20, k=2 N<=30; margin 0 at 35 points, tight on ALL of k=5 N<=20); (C4) r_2(N)=1 for all N>=2 under the pinned d>=1 convention (any 2 distinct elements are a 2-AP); (C5) the exact r_3 table N<=30 = 1,2,2,3,4,4,4,4,5,5,6,6,7,8,8,8,8,8,8,9,9,9,9,10,10,11,11,11,11,12 by branch-and-bound with AP-completion propagation + exact-suffix bounds, z3 SAT@r/UNSAT@(r+1) dual certificates, exhaustive 2^N brute force N<=12 (100% agreement), endpoint-driven AP-census dual, every witness independently re-validated; r_4(N<=20) = 1,2,3,3,4,5,5,6,7,8,8,8,9,9,10,10,11,11,12,12 and r_5(N<=20) = 1,2,3,4,4,5,6,7,8,8,9,10,11,12,12,13,14,15,16,16 frontier tables; INTEL: the MISSION-printed reference string deviates from the certified truth at N=9,11,13,14,15,16,20 (printed 4,5,6,6,6,7,8 vs certified 5,6,7,8,8,8,9 -- our computation is the truth, mission law) -- THEN the W68-142D adversarial CROSS-AUDIT of the killer kernel (w67-p142k@011cb3e, E142 board): every kernel claim re-verified by NEW code paths (itertools digit-tuple generator / range-scan digit predicate / literal replicas of Arsenal noTernaryTwo and genT/genTp / fresh 2^N bitmask exhaustive / fresh z3 SAT-UNSAT encoding / left-to-right greedy certificate sets / explicit mod-5 drop construction): K1 t3free 0 midpoint violations over 43435 pairs k<=8; K2 cantor_lower witnesses exactly 2^k-1 and 3-AP-free; K3 r3_exact_small 1,2,2,3,4,4,4,4 re-derived exhaustively AND by z3 through N=12; K4 block_upper dominates everywhere, k=3 tight only at N=1..6 (slack up to 9), k=5 tight at ALL N<=20; K5 k2_edge by exhaustive pair census; K6 the r_5 tightness claim re-proven by the greedy third method; 6/6 CONFIRMED, negative-control validated"
+        shell: bash
+        run: |
+          set -euo pipefail
+          install_ok=0
+          if python3 -m pip install --quiet --break-system-packages z3-solver gmpy2 2>/dev/null; then install_ok=1
+          elif pip3 install --quiet --break-system-packages z3-solver gmpy2 2>/dev/null; then install_ok=1
+          elif python3 -m pip install --quiet z3-solver gmpy2 2>/dev/null; then install_ok=1
+          elif (sudo apt-get update -qq && sudo apt-get install -y -qq python3-z3); then install_ok=1; fi
+          if [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED (battery will report FATAL if z3 is missing)"; fi
+          python3 -c "import z3; print('z3 ready', z3.get_version_string())" || echo "WARNING: z3 import still failing; battery will FATAL"
+          python3 problem142-ap-free/engine142/doubter/mirror_battery.py 2>&1 | tee kernel142d.log
+          ! grep -E 'BATTERY_VERDICT: BROKEN|FATAL' kernel142d.log
+          test "$(grep -c 'CERTIFIED' kernel142d.log)" -ge 5
+          grep -F "E142_DOUBTER_BATTERY_GREEN" kernel142d.log
+          python3 problem142-ap-free/engine142/doubter/crossaudit.py 2>&1 | tee crossaudit142d.log
+          ! grep -E 'CROSSAUDIT_VERDICT: BROKEN|FATAL' crossaudit142d.log
+          test "$(grep -c 'XAUDIT_.*: CONFIRMED' crossaudit142d.log)" -ge 6
+          grep -F "E142_CROSSAUDIT_GREEN" crossaudit142d.log
+          echo KERNEL142D_GREEN=1
