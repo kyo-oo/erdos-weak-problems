@@ -457,6 +457,14 @@ theorem hmul_lt_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b < a * c) :
   · have hle : a * c ≤ a * b := hmul_le a a c b (Nat.le_refl a) (Nat.le_of_lt hgt)
     omega
 
+theorem hmul_le_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b ≤ a * c) : b ≤ c := by
+  rcases Nat.lt_trichotomy b c with hlt | heq | hgt
+  · exact Nat.le_of_lt hlt
+  · exact heq
+  · exfalso
+    have hlt2 : a * c < a * b := hmul_lt a c b (by omega) hgt
+    omega
+
 theorem hmul_lt (a b c : Nat) (hpos : 0 < a) (h : b < c) : a * b < a * c := by
   have hbc : b + 1 ≤ c := Nat.succ_le_of_lt h
   have h1 : a * (b + 1) ≤ a * c := hmul_le a a (b + 1) c (Nat.le_refl a) hbc
@@ -1238,13 +1246,14 @@ theorem div_zero_of_lt (s m : Nat) (h : s < m) : s / m = 0 := by
 
 theorem div_exact_mul (q m : Nat) (hpos : 1 ≤ m) : q * m / m = q := by
   have hrec : m * (q * m / m) + q * m % m = q * m := div_add_mod_self (q * m) m
-  have hcomm : q * m = m * q := Nat.mul_comm q m
-  rw [hcomm] at hrec
-  have hle : m * (q * m / m) ≤ m * q := by
+  have hle : m * (q * m / m) ≤ q * m := by
     have h := Nat.le_add_right (m * (q * m / m)) (q * m % m)
     rw [hrec] at h
     exact h
-  have hX : q * m / m ≤ q := hmul_le_cancel_left m (q * m / m) q hpos hle
+  have hX : q * m / m ≤ q := by
+    refine hmul_le_cancel_left m (q * m / m) q hpos ?_
+    calc m * (q * m / m) ≤ q * m := hle
+      _ = m * q := Nat.mul_comm q m
   rcases Nat.eq_or_lt_of_le hX with heq | hlt
   · exact heq
   · exfalso
@@ -1255,7 +1264,7 @@ theorem div_exact_mul (q m : Nat) (hpos : 1 ≤ m) : q * m / m = q := by
     have hexp : m * ((q * m / m) + 1) = m * (q * m / m) + m := by
       rw [Nat.mul_add, Nat.mul_one]
     rw [hexp] at hle3
-    rw [← hrec] at hle3
+    have hcomm : m * q = q * m := Nat.mul_comm m q
     have hle5 : m ≤ q * m % m := by omega
     have hmod : q * m % m < m := Nat.mod_lt (q * m) (by omega)
     omega
