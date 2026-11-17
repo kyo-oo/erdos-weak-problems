@@ -71,7 +71,7 @@ theorem ne_of_eqb_false {α : Type} [DecidableEq α] (a b : α) (h : eqb a b = f
   unfold eqb at h
   intro heq
   rw [heq] at h
-  exact Bool.noConfusion h
+  simp at h
 
 theorem eqb_false_iff {α : Type} [DecidableEq α] (a b : α) : eqb a b = false ↔ a ≠ b := by
   constructor
@@ -93,7 +93,7 @@ theorem memB_cons_self {α : Type} [DecidableEq α] (u b : α) (t : List α) (h 
     memB u (b :: t) = true := by
   rw [h]
   unfold memB
-  rw [eqb_refl b b]
+  rw [eqb_refl b]
   exact if_pos rfl
 
 theorem memB_iff {α : Type} [DecidableEq α] : ∀ (u : α) (l : List α),
@@ -118,8 +118,7 @@ theorem memB_iff {α : Type} [DecidableEq α] : ∀ (u : α) (l : List α),
     · have hf : memB u (b :: t) = memB u t := by
         unfold memB
         have hneb : eqb u b = false := (eqb_false_iff u b).mpr hub
-        rw [hneb]
-        rfl
+        rw [hneb, if_neg (fun hc => Bool.noConfusion hc)]
       rw [hf]
       constructor
       · intro h
@@ -139,7 +138,7 @@ theorem not_mem_of_memB_false {α : Type} [DecidableEq α] (u : α) (l : List α
     ¬ (u ∈ l) := by
   intro hc
   cases hb : memB u l with
-  | false => rw [hb] at h; exact Bool.noConfusion h
+  | false => exact absurd ((memB_iff u l).mpr hc) hb
   | true => rw [hb] at h; exact Bool.noConfusion h
 
 /-- The house filter. -/
@@ -177,13 +176,13 @@ theorem mem_hfilt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α)
       constructor
       · intro hs
         rcases List.mem_cons.mp hs with h | h
-        · exact ⟨List.mem_cons.mpr (Or.inl h), hp⟩
+        · exact ⟨List.mem_cons.mpr (Or.inl h), by rw [h]; exact hp⟩
         · have h2 := (ih s).mp h
           exact ⟨List.mem_cons.mpr (Or.inr h2.1), h2.2⟩
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
         · exact List.mem_cons.mpr (Or.inl h)
-        · exact List.mem_cons.mpr (Or.inr ((ih s).mpr ⟨h, hs.2⟩))
+        · exact (ih s).mpr ⟨h, hs.2⟩
     · rw [hfilt_cons_false p a t hp]
       constructor
       · intro hs
@@ -191,7 +190,7 @@ theorem mem_hfilt_iff {α : Type} (p : α → Bool) : ∀ (l : List α) (s : α)
         exact ⟨List.mem_cons.mpr (Or.inr h2.1), h2.2⟩
       · intro hs
         rcases List.mem_cons.mp hs.1 with h | h
-        · exact absurd (congrArg p h) hp
+        · rw [h] at hs; exact absurd hs.2 hp
         · exact List.mem_cons.mpr (Or.inr ((ih s).mpr ⟨h, hs.2⟩))
 
 theorem hfilt_subset {α : Type} (p : α → Bool) (l : List α) :
@@ -242,9 +241,9 @@ theorem hfilt_length_split {α : Type} (p : α → Bool) : ∀ (l : List α), l.
     · rw [hfilt_cons_false p a t hp]
       have hpos : ((fun x => !(p x)) a = true) := by
         have hpa : (!(p a)) = true := by
-          rcases Bool.eq_false_or_eq_true (p a) with hb | hb
-          · rw [hb]; rfl
-          · exact absurd hb hp
+          cases hb : p a with
+          | false => rw [hb]; rfl
+          | true => exact absurd hb hp
         exact hpa
       rw [hfilt_cons_true (fun x => !(p x)) a t hpos]
       have hIH : (hfilt p t).length + (hfilt (fun x => !(p x)) t).length = t.length := by
@@ -257,7 +256,10 @@ theorem mem_app_iff {α : Type} : ∀ (l1 l2 : List α) (u : α),
     u ∈ l1 ++ l2 ↔ (u ∈ l1 ∨ u ∈ l2) := by
   intro l1
   induction l1 with
-  | nil => intro l2 u; exact List.mem_cons.mpr (Or.inr (List.mem_cons.mpr (Or.inl rfl)))
+  | nil =>
+    intro l2 u
+    simp only [List.nil_append]
+    exact ⟨Or.inr, fun h => h.elim (fun hc => absurd hc (List.not_mem_nil u)) id⟩
   | cons a t ih =>
     intro l2 u
     rw [List.cons_append]
@@ -272,14 +274,14 @@ theorem mem_app_iff {α : Type} : ∀ (l1 l2 : List α) (u : α),
       rcases hc with h | h
       · rcases List.mem_cons.mp h with h1 | h1
         · exact List.mem_cons.mpr (Or.inl h1)
-        · exact List.mem_cons.mpr (Or.inr (Or.inl h1))
+        · exact List.mem_cons.mpr (Or.inr ((ih l2 u).mpr (Or.inl h1)))
       · exact List.mem_cons.mpr (Or.inr ((ih l2 u).mpr (Or.inr h)))
 
 theorem length_app {α : Type} : ∀ (l1 l2 : List α),
     (l1 ++ l2).length = l1.length + l2.length := by
   intro l1
   induction l1 with
-  | nil => intro l2; rfl
+  | nil => intro l2; simp
   | cons a t ih =>
     intro l2
     rw [List.cons_append]
@@ -296,12 +298,13 @@ theorem herase_length_le {α : Type} [DecidableEq α] (a : α) : ∀ (l : List �
     (herase a l).length ≤ l.length := by
   intro l
   induction l with
-  | nil => omega
+  | nil => simp [herase]
   | cons b t ih =>
     by_cases hba : b = a
     · rw [hba]
       unfold herase
-      rw [eqb_refl a a, if_pos rfl]
+      rw [eqb_refl a, if_pos rfl]
+      have hle : (herase a t).length ≤ t.length := herase_length_le a t
       simp only [List.length_cons]
       omega
     · have hbea : eqb b a = false := (eqb_false_iff b a).mpr hba
@@ -320,7 +323,7 @@ theorem herase_length_drop {α : Type} [DecidableEq α] (a : α) : ∀ (l : List
     by_cases hba : b = a
     · rw [hba]
       unfold herase
-      rw [eqb_refl a a, if_pos rfl]
+      rw [eqb_refl a, if_pos rfl]
       have hle : (herase a t).length ≤ t.length := herase_length_le a t
       simp only [List.length_cons]
       omega
@@ -355,11 +358,28 @@ theorem herase_mem_of_ne {α : Type} [DecidableEq α] (a x : α) : ∀ (l : List
         · exact h1
       unfold herase
       by_cases hba : b = a
-      · rw [hba, eqb_refl a a, if_pos rfl]
+      · rw [hba, eqb_refl a, if_pos rfl]
         exact ih hxt hne
       · have hbea : eqb b a = false := (eqb_false_iff b a).mpr hba
         rw [if_neg (fun hc => by rw [hbea] at hc; exact Bool.noConfusion hc)]
         exact List.mem_cons.mpr (Or.inr (ih hxt hne))
+
+theorem herase_subset {α : Type} [DecidableEq α] (a : α) : ∀ (l : List α) (x : α), x ∈ herase a l → x ∈ l := by
+  intro l
+  induction l with
+  | nil => intro x hx; exact absurd hx (by simp)
+  | cons b t ih =>
+    intro x hx
+    unfold herase at hx
+    by_cases hba : b = a
+    · have hbea : eqb b a = true := hba ▸ eqb_refl a
+      rw [hbea, if_pos rfl] at hx
+      exact List.mem_cons.mpr (Or.inr (ih x hx))
+    · have hbea : eqb b a = false := (eqb_false_iff b a).mpr hba
+      rw [hbea, if_neg (fun hc => Bool.noConfusion hc)] at hx
+      rcases List.mem_cons.mp hx with h1 | h1
+      · exact List.mem_cons.mpr (Or.inl h1)
+      · exact List.mem_cons.mpr (Or.inr (ih x h1))
 
 theorem herase_nodup {α : Type} [DecidableEq α] (a : α) : ∀ (l : List α), l.Nodup →
     (herase a l).Nodup := by
@@ -370,7 +390,7 @@ theorem herase_nodup {α : Type} [DecidableEq α] (a : α) : ∀ (l : List α), 
     intro hnd
     unfold herase
     by_cases hba : b = a
-    · rw [hba, eqb_refl a a, if_pos rfl]
+    · rw [hba, eqb_refl a, if_pos rfl]
       cases hnd with
       | cons _ htail => exact ih htail
     · have hbea : eqb b a = false := (eqb_false_iff b a).mpr hba
@@ -378,7 +398,7 @@ theorem herase_nodup {α : Type} [DecidableEq α] (a : α) : ∀ (l : List α), 
       refine List.Pairwise.cons ?_ ?_
       · intro x hx
         cases hnd with
-        | cons hhead _ => exact hhead x hx
+        | cons hhead _ => exact hhead x (herase_subset a t x hx)
       · cases hnd with
         | cons _ htail => exact ih htail
 
@@ -387,7 +407,7 @@ theorem subset_length_le {α : Type} [DecidableEq α] : ∀ (l tgt : List α),
     l.Nodup → (∀ x ∈ l, x ∈ tgt) → l.length ≤ tgt.length := by
   intro l
   induction l with
-  | nil => intro tgt _ _; omega
+  | nil => intro tgt _ _; simp
   | cons a t ih =>
     intro tgt hnd hsub
     have ha : a ∈ tgt := hsub a (List.mem_cons.mpr (Or.inl rfl))
@@ -397,7 +417,9 @@ theorem subset_length_le {α : Type} [DecidableEq α] : ∀ (l tgt : List α),
       refine herase_mem_of_ne a x tgt (hsub x (List.mem_cons.mpr (Or.inr hx))) ?_
       intro hc
       cases hnd with
-      | cons hhead _ => exact absurd (hc ▸ hx) (hhead a (List.mem_cons.mpr (Or.inl rfl)))
+      | cons hhead _ =>
+        have hxa : a ∈ t := by rw [← hc]; exact hx
+        exact absurd rfl (hhead a hxa)
     have hnd' : t.Nodup := by cases hnd with | cons _ ht => exact ht
     have hIH : t.length ≤ (herase a tgt).length := ih (herase a tgt) hnd' hsub'
     simp only [List.length_cons]
@@ -412,13 +434,11 @@ theorem hmul_le_right : ∀ (b c a : Nat), a ≤ b → c * a ≤ c * b := by
     intro c a h
     have ha : a = 0 := Nat.le_zero.mp h
     rw [ha, Nat.mul_zero]
-    omega
   | succ b' ih =>
     intro c a h
     rcases Nat.eq_or_lt_of_le h with heq | hlt
     · rw [heq]
-      exact Nat.le_refl _
-    · have hle : a ≤ b' := Nat.le_of_lt hlt
+    · have hle : a ≤ b' := Nat.le_of_lt_succ hlt
       have hIH := ih c a hle
       rw [Nat.mul_succ]
       omega
@@ -427,9 +447,7 @@ theorem hmul_le (a b c d : Nat) (h1 : a ≤ b) (h2 : c ≤ d) : a * c ≤ b * d 
   have e1 : a * c ≤ b * c := by
     rw [Nat.mul_comm a c, Nat.mul_comm b c]
     exact hmul_le_right b c a h1
-  have e2 : b * c ≤ b * d := by
-    rw [Nat.mul_comm b c, Nat.mul_comm b d]
-    exact hmul_le_right d b c h2
+  have e2 : b * c ≤ b * d := hmul_le_right d c b h2
   exact Nat.le_trans e1 e2
 
 theorem hmul_lt_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b < a * c) : b < c := by
@@ -437,7 +455,7 @@ theorem hmul_lt_cancel_left (a b c : Nat) (hpos : 1 ≤ a) (h : a * b < a * c) :
   · exact hlt
   · rw [heq] at h
     omega
-  · have hle : a * c ≤ a * b := hmul_le (Nat.le_refl a) (Nat.le_of_lt hgt)
+  · have hle : a * c ≤ a * b := hmul_le a a c b (Nat.le_refl a) (Nat.le_of_lt hgt)
     omega
 
 theorem length_pos_of_mem {α : Type} (a : α) : ∀ (l : List α), a ∈ l → 0 < l.length := by
@@ -457,13 +475,13 @@ def fsqrt : Nat → Nat
   | n + 1 => if (fsqrt n + 1) * (fsqrt n + 1) ≤ n + 1 then fsqrt n + 1 else fsqrt n
 
 theorem sq_succ (k : Nat) : (k + 1) * (k + 1) = k * k + 2 * k + 1 := by
-  rw [Nat.add_mul, Nat.mul_add, Nat.mul_one, Nat.mul_one]
+  rw [Nat.add_mul, Nat.mul_add, Nat.one_mul, Nat.mul_one]
   omega
 
 theorem fsqrt_sq_le : ∀ n : Nat, fsqrt n * fsqrt n ≤ n := by
   intro n
   induction n with
-  | zero => omega
+  | zero => simp [fsqrt]
   | succ m ih =>
     unfold fsqrt
     by_cases hstep : (fsqrt m + 1) * (fsqrt m + 1) ≤ m + 1
