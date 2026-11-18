@@ -4558,3 +4558,40 @@ The engine never stops; it never lies. In English, always.
   comparator verdict — locally (14/14, 10/10, 7/7, exit 0) and on GitHub
   CI — with the full arsenal read and cited (ARSENAL_USAGE.md) and the
   round ledger complete (WORKLOG_S071.md).
+
+## S072 — W73 THE HYPOTHESIS-ELIMINATION ROUND: EVERY PREMISE ELIMINATED — GATES 14/14 + 10/10 + 10/10 ALL OKAY
+
+**BOSS's order:** answer which arsenal theorems are used + eliminate
+every hypothesis from the three fortress packages. Executed (the full
+event ledger E01–E12 in WORKLOG_S072.md):
+
+- **#61 kernel — 3 Lean theorems unconditional:** Erdos61.lean ships
+  `structure SGraph α` (adj + hsym + hirr as FIELDS) and
+  `family_board_uncond` — the same seven ⌊√n⌋ conjuncts with ZERO
+  premises (Erdos61.lean:1545–1586); the commander surgery added
+  `tight_family_uncond` (the 1 ≤ m premise eliminated — m = 0 proved
+  directly) + `tight_family_arsenal_uncond` (the vestigial 1 ≤ j
+  dropped) — Erdos61.lean:1459–1509; +123 lines, 0 deletions.
+- **#107 §7 elimination package** (ES_PACKAGE_PROOF.md:288–810, +531
+  lines): Lemma SH (shear frame, det = 1, exact turn preservation) +
+  Corollary SH-R (rotation) + Theorem GP-ELIM (greedy general-position
+  extraction, N ≥ (m−1)+C(m−1,2)(t−2)+1 — CORRECTED to N ≥ 2 by its
+  own engine check: the t = 1 / N = 1 form refuted on a 1-point set at
+  m = 4) + Theorem H107 (hypothesis-free happy ending, m =
+  C(2n−4,n−2)+1, collinearity t a MEASURED parameter) + CC-UNCOND +
+  L-UNCOND (witness max collinearity exactly 2 as a measured property).
+  engine107es 16/16 (six new lanes; the n = 4 H107 instance thresholds
+  corrected to N = 7/22/37 — C(m−1,2) = 15, not C(m,2) = 21).
+- **#142 + #61 audits:** AUDIT.md 28-row zero-premise table (every
+  final theorem A–H + boards + ledger claims — the Lemma 3B.2 no-carry
+  condition proven at every use site); FAMILY_PROOF.md W73 board
+  section (the 8-claim #61 ledger verdict: no premises anywhere).
+- **Gate 107 upgraded to 10/10 — VERDICT: YOUR SOLUTION IS OKAY** (9
+  claims: C107-CC/C107-LOWER restated zero-premise + C107-GPELIM +
+  C107-H107 new; driver +245 lines: S-GPELIM/S-H107/N-UNCOND-BOARD);
+  gates #142 (14/14) + #61 (10/10) re-verified OKAY on the same pass.
+- **ARSENAL_USAGE.md W73 addendum:** 13 new citation slots (42 → 55),
+  the 34-law union unchanged — the elimination round reused the
+  already-mined laws; mod_mod_mul line corrected to :140.
+
+The engine never stops; it never lies. In English, always.

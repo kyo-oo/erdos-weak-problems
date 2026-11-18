@@ -267,3 +267,153 @@ $H_2$ in class (P3[P3], K2[K2]); $K_2[\bar K_2] = C_4$ avoids $2K_2$; the
 | 13 | `digitCount3_monotone` | ErdosTernary2.lean:2097 | §6 size monotonicity |
 
 *The engine never stops; it never lies. In English, always.*
+
+---
+
+## W73 THE HYPOTHESIS-FREE BOARD (BOSS's elimination order)
+
+**Wave 73 · Task 1-d (documentation lane).** This section documents the
+elimination of the last premises from the #61 kernel's family theorem. The
+r1 board `E61.family_board` (Erdos61.lean:1440–1451) states the seven H-laws
+under two encoding premises — `hsym : ∀ i j : α, adj i j = adj j i` and
+`hirr : ∀ i : α, adj i i = false` (Erdos61.lean:1441–1442) — inherited by
+`k3_bound` (:859–861), `p3_bound` (:929–931), `kb3_bound` (:1161–1163),
+`pb3_bound` (:1171–1173) and the greedy engine (:725–727). The parallel
+kernel lane (W73) delivers the bundled carrier that removes them; this
+section states the result, its scope, and the ledger verdicts, with every
+citation read from the files this wave.
+
+### The carrier and the board theorem
+
+**The carrier (prose).** `SGraph α` is a structure with three fields: an
+adjacency function `adj : α → α → Bool`, and two proof fields `hsym : ∀ i
+j : α, adj i j = adj j i` and `hirr : ∀ i : α, adj i i = false`. Every
+inhabitant of `SGraph α` is a simple undirected graph by construction: to
+build a value one supplies the adjacency together with proofs of symmetry
+and irreflexivity, so no inhabitant can violate either law. The carrier is
+the graph itself — the premises have become part of the data.
+
+**The board theorem (the parallel lane's delivered statement; zero
+premises — `G` is a universally quantified parameter, not a hypothesis):**
+
+    theorem family_board_uncond {α : Type} [DecidableEq α] (G : SGraph α) :
+      (∀ (vs : List α), vs.Nodup → K1FreeOn G.adj vs → BoundCert G.adj vs) ∧
+      (∀ (vs : List α), vs.Nodup → K2FreeOn G.adj vs → BoundCert G.adj vs) ∧
+      (∀ (vs : List α), vs.Nodup → Kb2FreeOn G.adj vs → BoundCert G.adj vs) ∧
+      (∀ (vs : List α), vs.Nodup → K3FreeOn G.adj vs → BoundCert G.adj vs) ∧
+      (∀ (vs : List α), vs.Nodup → Kb3FreeOn G.adj vs → BoundCert G.adj vs) ∧
+      (∀ (vs : List α), vs.Nodup → P3FreeOn G.adj vs → BoundCert G.adj vs) ∧
+      (∀ (vs : List α), vs.Nodup → Pb3FreeOn G.adj vs → BoundCert G.adj vs)
+
+Unfolding `BoundCert` (Erdos61.lean:655–657: `∃ S : List α, S.Nodup ∧
+(∀ s ∈ S, s ∈ vs) ∧ fsqrt vs.length ≤ S.length ∧ (CliqueOn adj S ∨
+IndepOn adj S)`), the mathematical content is exactly the F7 theorem of §0
+(lines 33–38 above), with the tightness as §3 states it (lines 180–186):
+for each H ∈ {K1, K2, K̄2, P3, P̄3, K3, K̄3}, every H-free graph on n ≥ 1
+vertices contains a clique or an independent set of size ≥ ⌊√n⌋; the bound
+is attained for infinitely many n (the m×m block graphs B_m have
+ω = α = m = ⌊√m²⌋ for every m ≥ 1; the dyadic family m = 2^j is the
+kernel's `tight_family_arsenal`, Erdos61.lean:1426–1438), so the 1/2-exponent
+is the exact boundary for this family. The seven conjuncts are the seven
+conjuncts of `E61.family_board` (Erdos61.lean:1443–1449) with `G.adj` in
+place of the free `adj` — the same bounds, the same tightness, verbatim.
+
+### The elimination (why the premises vanish)
+
+The premises `hsym`/`hirr` of the r1 board were the encoding cost of
+representing a simple graph as an arbitrary `Bool`-valued function: an
+unbundled `adj : α → α → Bool` can be non-symmetric or carry loops, so the
+degree split, the cluster law, and the complement transfers all had to
+demand the two laws as hypotheses before their symmetry/irreflexivity steps
+(e.g. `hsym i v` at Erdos61.lean:894 and :960; `hirr v` at :886 and :968).
+The bundled carrier satisfies both laws by construction for every
+inhabitant, so the demand is discharged at the type level. Hence the
+universal family theorem now applies with zero premises: every `SGraph`
+inhabitant `G` and every duplicate-free vertex list `vs` with the H-freeness
+of `G.adj` obtains its `BoundCert` outright. The mathematical content is
+unchanged — the same seven ⌊√n⌋ bounds (degree split for K3, cluster law
+for P3, complement transfers for K̄3/P̄3, the trivial cases for K1/K2/K̄2)
+and the same tightness witnesses; only the representation lost its side
+conditions.
+
+### The carrier's concrete witnesses
+
+The carrier ships with concrete witnesses: the empty graph on `Unit`
+(adjacency constantly `false` — both laws hold by `rfl`); the complete
+graph on `Bool` (adjacency `fun a b => a ≠ b`, with the real-edge theorem:
+the pair `true ≠ false` is adjacent and every loop is absent, so the graph
+is the two-vertex clique K2 on its vertex class); and the empty graph on
+`Bool`. Each is an inhabitant of `SGraph` on a decidable-equality type, so
+`family_board_uncond` applies to each verbatim (K2-free vs Kb2-free reading
+of the same two theorems).
+
+### Arsenal laws consumed by this section (read and line-verified)
+
+#BY GST LAW two_pow_pos [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:420] — 0 < 2^j: the dyadic tightness witnesses' sizes are positive; the kernel's own premise discharge at Erdos61.lean:1436–1438 consumes exactly this law.
+
+#BY GST LAW two_pow_ge2 [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:431] — 2 ≤ 2^j for 1 ≤ j: every dyadic witness size m = 2^j satisfies the m ≥ 1 side condition of the block-graph tightness law — the condition is derived, not assumed.
+
+#BY GST LAW sq_sub_one [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:448] — a^2 − 1 = (a−1)(a+1) for 1 ≤ a: the square-boundary algebra of the k^2 ≤ n < (k+1)^2 floor discipline that defines ⌊√n⌋ = fsqrt n inside the board's BoundCert (fsqrt_sq_le / fsqrt_lt_succ, Erdos61.lean:518–532).
+
+#BY GST LAW mul_add_div_lemma [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:143] — (d·k + r)/d = k + r/d for d > 0: the block-index arithmetic (vertex // m) of the witnesses' same-block adjacency adjT (Erdos61.lean:1199) and the one-vertex-per-block counting of §3.
+
+#BY GST LAW three_pow_pos_lemma [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:185] — 0 < 3^k: the kernel's arsenal_bridge conjunct (Erdos61.lean:1423–1424) pairs it with two_pow_pos; the same positivity discipline underwrites the witness-size bookkeeping above.
+
+### The solution ledger check (comparator-official/challenges/61/solution.json — read, NOT edited)
+
+One line per claim; the verdict is on the claim statement (does it carry a
+premise?):
+
+- **C61-SL** (solution.json:8): "every P4-free graph on n >= 2 vertices is
+  disconnected or its complement is disconnected" — ∀ over all P4-free
+  graphs. No premise.
+- **C61-SEINCHE** (solution.json:13): "every P4-free graph is perfect
+  (chi = omega); consequently alpha*omega >= n and max(alpha, omega) >=
+  ceil(sqrt(n)) >= floor(sqrt(n)); EH holds for H = P4 with c = 1/2, and
+  the exponent is optimal (the block witnesses)" — universal; the
+  optimality is witnessed by constructions. No premise.
+- **C61-F7** (solution.json:18): "for every H in {K1, K2, Kb2, K3, Kb3,
+  P3, Pb3}, every H-free graph on n vertices has alpha or omega >=
+  floor(sqrt(n))" — universal over H and G. No premise.
+- **C61-TIGHT** (solution.json:23): "the m x m block graphs have
+  alpha = omega = m = floor(sqrt(m^2)) — the 1/2-exponent is the exact
+  boundary for the family; the dyadic family m = 2^j is the kernel's
+  tight_family_arsenal" — universal over m. No premise.
+- **C61-RAM** (solution.json:28): "R(s,t) <= C(s+t-2, s-1); consequently
+  K4-free and Kb4-free graphs satisfy the Erdos-Hajnal property with
+  c = 1/3" — universal. No premise.
+- **C61-INH** (solution.json:33): "H induced in H' and EH(H', c) implies
+  EH(H, c)" — a ∀-quantified implication; the antecedents are quantifier
+  bounds. No premise.
+- **C61-SUB** (solution.json:38): the substitution stack (Theorems
+  4A/4B/4C) — universal over the uniform blow-up frame; the EH-exponent
+  hypotheses of Theorem 4B (PROOF.md:91) are implication antecedents; the
+  frame restriction is the quantifier domain, labelled in boldface at
+  PROOF.md:108. No unproven premise; the general-graph closure is
+  attributed there to Alon–Pach–Solymosi and not claimed.
+- **C61-OFFICIAL-CYCLIC** (solution.json:43): the official evaluator
+  reproductions (81/324/1458 in C_9^3..C_9^5; 367 in C_7^5; 754 in C_11^4)
+  — certified computational facts. No premise.
+
+**Verdict: none of the 8 claims carries a premise** — every claim statement
+is a universal law, a witnessed construction law, or a certified
+measurement. No edit to solution.json is needed.
+
+### Residual Lean-level side conditions found by the sweep (reported to the kernel lane)
+
+- `E61.tight_family` (Erdos61.lean:1303) carries `(hm : 1 ≤ m)` and
+  `E61.tight_family_arsenal` (:1426) carries `(hj : 1 ≤ j)`: semantically
+  "for every m ≥ 1" / "for every j ≥ 1" — quantifier bounds in
+  Lean-hypothesis form; at the dyadic use sites the m ≥ 1 condition is
+  derived from Arsenal `two_pow_pos` (Erdos61.lean:1436–1438). Not unproven
+  premises; noted for the record (a `tight_family_uncond` restatement with
+  the bound inside a ∀ would remove even the Lean-level hypothesis).
+- `E61.boundCert_nil` (:659) carries `(hzero : fsqrt 0 = 0)`, discharged by
+  `rfl` at every use (e.g. `k1_bound` at :1020). A derived condition.
+- `E61.family_board` itself (:1440–1442) carries `hsym`/`hirr` — the two
+  premises eliminated by the carrier above; the r1 statement is superseded
+  by `family_board_uncond` for the premise-free reading, with identical
+  mathematical content per the seven conjuncts.
+
+*W73-1-d — the premises become structure fields; the family board now
+applies to every simple graph outright. The engine never stops; it never lies.*

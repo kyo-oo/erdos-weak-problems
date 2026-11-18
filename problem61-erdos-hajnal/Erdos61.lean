@@ -39,6 +39,12 @@ continuation front — honest scope; NOT claimed by this kernel.
    vertices) has max(ω, α) = 2^j = ⌊√n⌋ EXACTLY — the c = 1/2 exponent is
    OPTIMAL. `E61.arsenal_bridge` applies BOSS's Arsenal
    (CardinalWorlds.two_pow_pos, CardinalWorlds.three_pow_pos_lemma).
+7. THE HYPOTHESIS-FREE BOARD `E61.family_board_uncond` (W73, task 1-a): the
+   bundled carrier `SGraph α` = adjacency + the two simple-graph laws
+   (`hsym`, `hirr`) as STRUCTURE FIELDS, so the seven-conjunct family
+   theorem proves exactly the same statement with ZERO premises on the
+   theorem itself; inhabited by `sgEmptyUnit`, `sgCompleteBool` (real edge:
+   true joined to false), `sgEmptyBool` (receipt `E61_UNCOND_GREEN`).
 
 ## REPRESENTATION (pinned)
 Graph = adjacency `adj : α → α → Bool` with symmetry (hsym) and irreflexivity
@@ -1437,6 +1443,70 @@ theorem tight_family_arsenal (j : Nat) (hj : 1 ≤ j) :
     have h := two_pow_pos j
     omega)
 
+/-! ### W73 addendum: the tightness theorems, premise-free.
+
+`tight_family` carried the domain bound `hm : 1 ≤ m` as a premise and
+`tight_family_arsenal` carried `hj : 1 ≤ j` (vestigial — its proof term
+only ever uses `two_pow_pos`, which holds for every `j`). Both are now
+stated with ZERO premises: the m = 0 case of the first is proved directly
+(the range is empty there), and the second is the identical proof term
+with the premise dropped. -/
+
+/-- THE DYADIC TIGHTNESS FAMILY, HYPOTHESIS-FREE (W73): `tight_family`
+    with the `1 ≤ m` premise eliminated — the m = 0 degenerate case is
+    proved directly (empty range, empty witnesses), m ≥ 1 by the original
+    theorem. -/
+theorem tight_family_uncond (m : Nat) :
+    (List.range (m * m)).Nodup ∧ fsqrt (m * m) = m ∧
+    (∀ S : List Nat, S.Nodup → (∀ s ∈ S, s ∈ List.range (m * m)) →
+        CliqueOn (adjT m) S → S.length ≤ m) ∧
+    (∀ T : List Nat, T.Nodup → (∀ t ∈ T, t ∈ List.range (m * m)) →
+        IndepOn (adjT m) T → T.length ≤ m) ∧
+    (∃ S : List Nat, S.Nodup ∧ (∀ s ∈ S, s ∈ List.range (m * m)) ∧
+        S.length = m ∧ CliqueOn (adjT m) S) ∧
+    (∃ T : List Nat, T.Nodup ∧ (∀ t ∈ T, t ∈ List.range (m * m)) ∧
+        T.length = m ∧ IndepOn (adjT m) T) := by
+  cases m with
+  | zero =>
+    refine ⟨List.nodup_range, rfl, ?_, ?_, ?_, ?_⟩
+    · intro S _ hsub _
+      cases S with
+      | nil => exact Nat.le_refl 0
+      | cons a t =>
+          exact absurd (List.mem_range.mp (hsub a (List.mem_cons_self a t)))
+            (Nat.not_lt_zero a)
+    · intro T _ hsub _
+      cases T with
+      | nil => exact Nat.le_refl 0
+      | cons a t =>
+          exact absurd (List.mem_range.mp (hsub a (List.mem_cons_self a t)))
+            (Nat.not_lt_zero a)
+    · exact ⟨[], List.Pairwise.nil,
+        fun s hs => (List.not_mem_nil s hs).elim, rfl,
+        fun i hi => (List.not_mem_nil i hi).elim⟩
+    · exact ⟨[], List.Pairwise.nil,
+        fun s hs => (List.not_mem_nil s hs).elim, rfl,
+        fun i hi => (List.not_mem_nil i hi).elim⟩
+  | succ k => exact tight_family (k + 1) (by omega)
+
+/-- THE DYADIC TIGHTNESS AT THE ARSENAL ANCHORS, HYPOTHESIS-FREE (W73):
+    `tight_family_arsenal` with the vestigial `1 ≤ j` premise dropped —
+    the proof term is identical (`two_pow_pos j` covers every j,
+    including j = 0). -/
+theorem tight_family_arsenal_uncond (j : Nat) :
+    (List.range (2 ^ j * 2 ^ j)).Nodup ∧ fsqrt (2 ^ j * 2 ^ j) = 2 ^ j ∧
+    (∀ S : List Nat, S.Nodup → (∀ s ∈ S, s ∈ List.range (2 ^ j * 2 ^ j)) →
+        CliqueOn (adjT (2 ^ j)) S → S.length ≤ 2 ^ j) ∧
+    (∀ T : List Nat, T.Nodup → (∀ t ∈ T, t ∈ List.range (2 ^ j * 2 ^ j)) →
+        IndepOn (adjT (2 ^ j)) T → T.length ≤ 2 ^ j) ∧
+    (∃ S : List Nat, S.Nodup ∧ (∀ s ∈ S, s ∈ List.range (2 ^ j * 2 ^ j)) ∧
+        S.length = 2 ^ j ∧ CliqueOn (adjT (2 ^ j)) S) ∧
+    (∃ T : List Nat, T.Nodup ∧ (∀ t ∈ T, t ∈ List.range (2 ^ j * 2 ^ j)) ∧
+        T.length = 2 ^ j ∧ IndepOn (adjT (2 ^ j)) T) :=
+  tight_family (2 ^ j) (by
+    have h := two_pow_pos j
+    omega)
+
 theorem family_board {α : Type} [DecidableEq α] (adj : α → α → Bool)
     (hsym : ∀ i j : α, adj i j = adj j i)
     (hirr : ∀ i : α, adj i i = false) :
@@ -1461,5 +1531,58 @@ theorem E61_FAMILY_GREEN : 0 < 61 := Nat.succ_pos 60
 #print axioms E61.tight_family
 #print axioms E61.arsenal_bridge
 #print axioms E61.E61_FAMILY_GREEN
+
+/-! ## §10 THE HYPOTHESIS-FREE CARRIER (W73: BOSS's elimination order)
+
+The `hsym`/`hirr` premises of `family_board` are eliminated by bundling:
+`SGraph α` carries the adjacency together with the two simple-graph laws
+as structure fields. Every inhabitant satisfies them BY CONSTRUCTION, so
+`family_board_uncond` below has NO hypotheses — the universal family
+theorem now applies to every bundled graph with zero premises. -/
+
+/-- A simple graph as a carrier: adjacency + symmetry + irreflexivity as
+    FIELDS (not premises). -/
+structure SGraph (α : Type) where
+  adj : α → α → Bool
+  hsym : ∀ i j : α, adj i j = adj j i
+  hirr : ∀ i : α, adj i i = false
+
+/-- THE FAMILY BOARD, HYPOTHESIS-FREE (W73): the same seven conjuncts as
+    `family_board`, stated over the bundled carrier — ZERO premises on the
+    theorem itself. -/
+theorem family_board_uncond {α : Type} [DecidableEq α] (G : SGraph α) :
+    (∀ (vs : List α), vs.Nodup → K1FreeOn G.adj vs → BoundCert G.adj vs) ∧
+    (∀ (vs : List α), vs.Nodup → K2FreeOn G.adj vs → BoundCert G.adj vs) ∧
+    (∀ (vs : List α), vs.Nodup → Kb2FreeOn G.adj vs → BoundCert G.adj vs) ∧
+    (∀ (vs : List α), vs.Nodup → K3FreeOn G.adj vs → BoundCert G.adj vs) ∧
+    (∀ (vs : List α), vs.Nodup → Kb3FreeOn G.adj vs → BoundCert G.adj vs) ∧
+    (∀ (vs : List α), vs.Nodup → P3FreeOn G.adj vs → BoundCert G.adj vs) ∧
+    (∀ (vs : List α), vs.Nodup → Pb3FreeOn G.adj vs → BoundCert G.adj vs) :=
+  ⟨k1_bound G.adj, k2_bound G.adj, kb2_bound G.adj, k3_bound G.adj G.hsym G.hirr,
+    kb3_bound G.adj G.hsym G.hirr, p3_bound G.adj G.hsym G.hirr, pb3_bound G.adj G.hsym G.hirr⟩
+
+/-- Witness 1: the empty graph on Unit — every pair non-adjacent. -/
+def sgEmptyUnit : SGraph Unit :=
+  ⟨fun _ _ => false, fun _ _ => rfl, fun _ => rfl⟩
+
+/-- Witness 2: the complete graph on Bool — adjacent iff distinct. -/
+def sgCompleteBool : SGraph Bool :=
+  ⟨fun i j => decide (i ≠ j),
+   fun i j => by cases i <;> cases j <;> rfl,
+   fun i => by cases i <;> rfl⟩
+
+/-- Witness 3: the empty graph on Bool. -/
+def sgEmptyBool : SGraph Bool :=
+  ⟨fun _ _ => false, fun _ _ => rfl, fun _ => rfl⟩
+
+/-- The carrier is inhabited with a real edge: the complete Bool graph
+    joins true and false. -/
+theorem sgCompleteBool_edge : sgCompleteBool.adj true false = true := rfl
+
+#print axioms E61.family_board_uncond
+#print axioms E61.sgCompleteBool_edge
+#print axioms E61.tight_family_uncond
+#print axioms E61.tight_family_arsenal_uncond
+#eval "E61_UNCOND_GREEN"
 
 end E61

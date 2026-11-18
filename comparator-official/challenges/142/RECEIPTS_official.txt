@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #142 — 2026-11-17T22:32:41
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-18T18:32:35
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -22,5 +22,5 @@ Claims in solution ledger: 8
 [PASS] (control) N-R3 — corrupted r_3(10) value in a ledger copy is DETECTED by the table equality check
 ==============================================================================
 CHECKS: 14/14 passed (official=5, solution=6, controls=3)
-WALL: 2.46s
+WALL: 2.36s
 VERDICT: YOUR SOLUTION IS OKAY
