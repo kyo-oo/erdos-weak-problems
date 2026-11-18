@@ -226,3 +226,35 @@ instances). The mod_mod_mul citation line corrected to :140
 at 143).
 
 The engine never stops; it never lies. In English, always.
+
+## THE W73-R REPAIR ROUND (the CI compile war, same session)
+
+- **CI run 44374856972 (commit 9f89f3d):** gates 142/61/107-official ALL
+  SUCCESS + kernel-107k/142k green; kernel-61k + kernel-c FAILED — the
+  commander's `tight_family_uncond` m=0 tactic block used two List lemma
+  spellings the pinned toolchain v4.33.0-rc2 changed: `List.mem_cons_self`
+  (now fully implicit-arg) and `List.not_mem_nil` (now takes the membership
+  proof directly, element implicit). 6 error sites, lines 1476–1489 —
+  CONFINED to the m=0 case; the same compile already showed
+  `family_board_uncond` / `sgCompleteBool_edge` / `tight_family_arsenal_uncond`
+  GREEN with clean axioms.
+- **The repair (5ac98ca):** the kernel's OWN line-120 CI-green idiom
+  `List.mem_cons.mpr (Or.inl rfl)` replaces `List.mem_cons_self`;
+  `(List.not_mem_nil hs).elim` replaces the two-arg spelling. 6 lines
+  changed, zero statement changes.
+- **CI run 44379141355 (commit 5ac98ca): COMPLETED — SUCCESS, ALL JOBS
+  GREEN.** kernel-61k receipts, printed by GitHub Actions:
+  - `'E61.family_board_uncond' depends on axioms: [propext, Classical.choice, Quot.sound]`
+  - `'E61.sgCompleteBool_edge' does not depend on any axioms`
+  - `'E61.tight_family_uncond' depends on axioms: [propext, Classical.choice, Quot.sound]` — no sorryAx
+  - `'E61.tight_family_arsenal_uncond' depends on axioms: [propext, Classical.choice, Quot.sound]`
+  - `"E61_UNCOND_GREEN"` + `KERNEL61K_GREEN=1`
+  Gates on the same run: gate-142-official SUCCESS, gate-61-official
+  SUCCESS, gate-107-official SUCCESS — the runner logs print
+  VERDICT: YOUR SOLUTION IS OKAY on all three.
+
+**THE ROUND'S FINAL STATE:** every final theorem of the three fortress
+packages is stated with zero premises; the three official DeepMind gates
+are green on CI; the kernel-61k compile war closed at round 2 (the
+List-API spelling). The engine never stops; it never lies. In English,
+always.
