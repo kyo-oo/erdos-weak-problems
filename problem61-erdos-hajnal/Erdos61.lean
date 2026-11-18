@@ -1473,20 +1473,20 @@ theorem tight_family_uncond (m : Nat) :
       cases S with
       | nil => exact Nat.le_refl 0
       | cons a t =>
-          exact absurd (List.mem_range.mp (hsub a (List.mem_cons_self a t)))
+          exact absurd (List.mem_range.mp (hsub a (List.mem_cons.mpr (Or.inl rfl))))
             (Nat.not_lt_zero a)
     · intro T _ hsub _
       cases T with
       | nil => exact Nat.le_refl 0
       | cons a t =>
-          exact absurd (List.mem_range.mp (hsub a (List.mem_cons_self a t)))
+          exact absurd (List.mem_range.mp (hsub a (List.mem_cons.mpr (Or.inl rfl))))
             (Nat.not_lt_zero a)
     · exact ⟨[], List.Pairwise.nil,
-        fun s hs => (List.not_mem_nil s hs).elim, rfl,
-        fun i hi => (List.not_mem_nil i hi).elim⟩
+        fun s hs => (List.not_mem_nil hs).elim, rfl,
+        fun i hi => (List.not_mem_nil hi).elim⟩
     · exact ⟨[], List.Pairwise.nil,
-        fun s hs => (List.not_mem_nil s hs).elim, rfl,
-        fun i hi => (List.not_mem_nil i hi).elim⟩
+        fun s hs => (List.not_mem_nil hs).elim, rfl,
+        fun i hi => (List.not_mem_nil hi).elim⟩
   | succ k => exact tight_family (k + 1) (by omega)
 
 /-- THE DYADIC TIGHTNESS AT THE ARSENAL ANCHORS, HYPOTHESIS-FREE (W73):
