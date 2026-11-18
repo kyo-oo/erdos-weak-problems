@@ -4595,3 +4595,40 @@ event ledger E01–E12 in WORKLOG_S072.md):
   already-mined laws; mod_mod_mul line corrected to :140.
 
 The engine never stops; it never lies. In English, always.
+
+## S073 — W74 THE PROOF-AUDIT ROUND: 6 audit agents released; the three fortress cores NOT fully proven (exact fronts named); all four audit defects repaired; TWO new theorems shipped; gates 16/16 + 11/11 + 11/11 OKAY
+
+BOSS's order: audit the three problems, answer "fully proven?", check
+the comparator's authenticity, prove what the audit names — same round.
+Executed (full ledger E01–E09 in WORKLOG_S073.md):
+
+- **Comparator: OFFICIAL, byte-verified.** Fresh GitHub clones of
+  google-deepmind/funsearch @ cc53f27 and code_contests @ fa7a4f8
+  match the vendored sources byte-for-byte (diff -rq, this round);
+  the gate hard-requires challenge.json + solution.json; the drivers
+  execute the real official evaluators; negative controls live.
+- **Audit verdict: the three cores are NOT fully proven.** #142: no
+  asymptotic formula for any k (lower side + small tables only).
+  #61: EH for 10 graphs (then 12 after this round), not all H.
+  #107: f(3), f(4) exact; binomial upper + 2^{n-2} lower witnesses
+  n <= 6; the full conjecture remains a fortress.
+- **Defects found and killed:** (1) BEHREND-INSTANCES table 5 wrong
+  values -> receipt values + live re-computation gate check; (2)
+  BEHREND-ASYMP domain N >= 16 false -> two-part statement with the
+  N >= 256 recipe domain + [2,255] bridge + gate check; (3)
+  FAMILY_PROOF "C(t+2,3) <= t^3/6" false -> corrected chain, claim
+  restated "every c < 1/3"; (4) ES §2 label-injectivity FALSE ->
+  §2 REPLACED by the correct classical X/Y-split induction with the
+  collinearity-trap extension lemma, full in-package proof.
+- **New mathematics:** Theorem CLAW (claw-free => max(alpha,omega) >=
+  n^{1/3}/2 via R(t,3) <= t(t+1)/2 + Caro-Wei; K3+K1 by complement;
+  in-package EH coverage 10 -> 12 graphs) and the Pascal-recursive
+  slope-window witness family (exact C(k+l-4,k-2)-size GP sets with
+  no k-cup/no l-cap for all (k,l) up to (6,6) — 20-point (5,5) and
+  70-point (6,6) witnesses, exact-both-ways binomial bound).
+- **Gates re-run locally: 142 = 16/16, 61 = 11/11, 107 = 11/11, all
+  printing VERDICT: YOUR SOLUTION IS OKAY.** kills.yml hardened
+  (comparator-official/** in the trigger paths; exact PASS thresholds).
+- CI push: this commit — verdicts recorded below when the run lands.
+
+The engine never stops; it never lies. In English, always.

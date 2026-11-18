@@ -83,97 +83,91 @@ one block: LDS $\leq s-1$. Engine-verified for $(r,s) \in
 
 #BY GST LAW digitCount3_monotone [arsenal-full/erdosternary2/ErdosTernary2.lean:2097] — $n \leq m \Rightarrow \mathrm{digitCount3}(n) \leq \mathrm{digitCount3}(m)$: the monotone counting discipline of the label tower (Claim 2's census: the label count grows monotonically with the sequence length — the engine spot-verifies the law 300 samples).
 
-## §2 THEOREM CC — FULL PROOF (induction on $k + l$)
+## §2 THEOREM CC — FULL PROOF (induction on $k + l$, the X/Y split)
 
-*Base $k = 2$ (dually $l = 2$).* A 2-cup is any 2 points (distinct $x$):
-$\binom{l-2}{0}+1 = 2$ points always contain a 2-cup ✓.
+> *W74 audit note: this section was rewritten. The earlier derivation
+> leaned on a label-injectivity step ("if the segment $pq$ has positive
+> slope, $\mathrm{cup}(q) \geq \mathrm{cup}(p)+1$") that is FALSE —
+> appending $q$ to a cup ending at $p$ requires the slope of $pq$ to
+> exceed the LAST SLOPE of that cup, not merely to be positive; the
+> repo's own receipts (receipts107.txt part D) machine-refuted the
+> injectivity (duplicate $(\mathrm{cup},\mathrm{cap})$ labels in 263
+> of 300 random general-position sets), and the 20-point $(5,5)$
+> extremal witness of §4 forces at most $16$ label pairs for $20$
+> points — injectivity is impossible on its face. The proof below is
+> the correct classical argument (Erdős–Szekeres), carried in full.*
 
-*Step.* Let $N = \binom{k+l-4}{k-2}+1$ and let $P$ be $N$ points in
-general position with distinct $x$. By the inductive sizes:
-$$N - 1 = \binom{k+l-4}{k-2} = \binom{k+l-5}{k-3} + \binom{k+l-5}{k-2}$$
-(the Pascal identity — expand both sides by the factorial formula or by
-the committee-counting bijection; engine receipt: the table
-$\binom{2n-4}{n-2}+1 = 3, 7, 21, 71, 253, 925$ for $n = 3..8$, fresh
-computation). Partition $P \setminus \{p\}$... the classical argument:
-for each point $p \in P$, classify by whether $p$ is the **right end**
-of a $(k-1)$-cup or... Let $A$ := the set of points that are the right
-endpoint of a $(k-1)$-cup (a cup of length $k-1$ ending at the point),
-$B$ := the rest.
+*Setup.* A **$k$-cup** is a set of $k$ points which, read left to right
+(increasing $x$), forms the graph of a strictly convex function: the
+consecutive slopes strictly increase. A **$k$-cap**: strictly concave
+(slopes strictly decrease). Throughout, $P$ is in general position
+(distinct $x$-coordinates; no three collinear). For $p \in P$ let
+$$\mathrm{cup}(p) := \max\{|C| : C \subseteq P,\ C \text{ a cup, right endpoint } p\},$$
+$$\mathrm{cap}(p) := \max\{|K| : K \subseteq P,\ K \text{ a cap, right endpoint } p\}.$$
 
-*Claim.* $A$ has at most $\binom{k+l-5}{k-2}$ points, $B$ at most
-$\binom{k+l-5}{k-3}$: for $B$: every $b \in B$ is not the right end of a
-$(k-1)$-cup... hmm, the clean classical split: mark each point $p$ by
-$(\mathrm{cup}(p), \mathrm{cap}(p))$ = (longest cup ending at $p$,
-longest cap ending at $p$). Distinctness: for $p$ left of $q$: if the
-segment $pq$ has positive slope, $\mathrm{cup}(q) \geq \mathrm{cup}(p)+1$;
-if negative, $\mathrm{cap}(q) \geq \mathrm{cap}(p) + 1$ — labels
-distinct (the MS discipline transported to cups/caps!). If no $k$-cup
-and no $l$-cap: $\mathrm{cup} \leq k-1$, $\mathrm{cap} \leq l-1$:
-at most $(k-1)(l-1)$ labels — but we need the sharper binomial census
-$\binom{k+l-4}{k-2}$ — the label-pigeonhole gives only $N' = (k-1)(l-1)+1
-\geq \binom{k+l-4}{k-2}+1$? NO: $(k-1)(l-1) \geq \binom{k+l-4}{k-2}$
-fails... e.g. $k=l=4$: $(3)(3) = 9 < \binom{4}{2} = 6$? $9 \geq 6$ ✓ —
-so the label argument proves CC with room to spare?? — the label count
-$(k-1)(l-1)$ EXCEEDS the binomial for $k + l \geq 8$-ish... The classical
-CC proof is sharper than the label argument: the true inductive proof
-(ES 1935): for each point $p$, let $\mathrm{cup}(p)$ = longest cup
-ENDING at $p$ (right endpoint). Partition $P$ into $A$ = points with a
-$(k-1)$-cup ending there... the actual argument: **Lemma**: any
-$\binom{k+l-5}{k-3}+1$ of the points contain a $(k-1)$-cup or an
-$l$-cap... Take $P$ with $N$ points; by MS-style duality on the
-LEFT endpoints: let $A$ = points that are LEFT endpoints of $k$-cups...
-The published proof (ES35, as in every textbook): induct; consider the
-"upper" points: $p$ is $k$-critical if... For the package, we present
-the **strengthened label argument that closes the induction exactly**:
+*Base $k = 2$ (dually $l = 2$).* $\binom{l-2}{0}+1 = 2$ points with
+distinct $x$ form a 2-cup (one edge; convexity vacuous) ✓.
 
-For each $p$, $\mathrm{cup}(p) := $ longest cup ending at $p$;
-$\mathrm{cap}(p) := $ longest cap ending at $p$. Labels distinct
-(shown above). Now the sharper census — the ES injection: a point with
-$\mathrm{cup}(p) = a$ and $\mathrm{cap}(p) = b$ has $a + b$ bounded
-along monotone chains... The clean complete route (and the one certified
-by the engine's found-cups/caps at every grid point): **the $(k,l)$-grid
-argument**: the label map $p \mapsto (\mathrm{cup}(p), \mathrm{cap}(p))$
-is INJECTIVE with the further property that the label set is an
-**antichain-compatible staircase**: if $p$ precedes $q$ (in $x$) then
-$\mathrm{cup}(q) > \mathrm{cup}(p)$ or $\mathrm{cap}(q) > \mathrm{cap}(p)$.
-Consequently, ordering points by $x$: the sequence of first labels is
-strictly increasing along one of the two coordinates at each step;
-the number of points with all labels in $[1,k-1] \times [1,l-1]$ forming
-such a staircase pattern is at most... — here the classical result is
-exactly $\binom{k+l-4}{k-2}$ (the number of monotone lattice paths from
-$(1,1)$ to $(k-1, l-1)$ with steps right/up, each point contributing one
-step: $\mathrm{cup}$-increase = right step, $\mathrm{cap}$-increase = up
-step; the staircase has $N-1$ steps in the $(k-2)+(l-2)$-grid, and
-monotone paths from corner to corner number $\binom{k+l-4}{k-2}$; with
-$N$ points the staircase has $N-1 = \binom{k+l-4}{k-2}$ steps, which
-FORCES the path to reach the corner $(k-1, l-1)$: some point has
-$\mathrm{cup} = k-1$ AND ... the path reaching the far corner means the
-final point's label is $(k-1, \cdot)$ with a $k$-cup completed by the
-next step or... precisely: a monotone path of $(k-2)+(l-2)$ right/up
-steps from $(0,0)$ reaching $(k-2, l-2)$: the LAST point $q$ has
-$\mathrm{cup}(q) - 1$ right-steps and $\mathrm{cap}(q) - 1$ up-steps
-before it; the path fitting in the box means every prefix stays within
-$[0,k-2] \times [0, l-2]$; the final label is exactly $(k-1, l-1)$-corner
-— the point $q$ with $\mathrm{cup}(q) = k-1$ and $\mathrm{cap}(q) = l-1$
-simultaneously?? — no: monotone paths number $\binom{(k-2)+(l-2)}{k-2} =
-\binom{k+l-4}{k-2}$ ✓ the census matches: $N - 1$ steps with $N - 1 =
-\binom{k+l-4}{k-2}$: the path is a FULL corner-to-corner path, so the
-cumulative steps total $(k-2)$ rights and $(l-2)$ ups: the LAST point's
-label $= (1 + \text{rights}, 1 + \text{ups})$ can be any corner-reachable
-value; but the path FITS in the box only if no prefix exceeds
-$(k-2, l-2)$: $\mathrm{cup} \leq k-1$ and $\mathrm{cap} \leq l-1$
-throughout (no $k$-cup, no $l$-cap assumed) — with exactly
-$\binom{k+l-4}{k-2}$ steps the path MUST be a full monotone path, ending
-at $(k-2, l-2)$: the final point has label $(k-1, l-1)$: it ends a
-$(k-1)$-cup AND an $(l-1)$-cap — no contradiction yet — BUT then the
-$N$-th point (there are $N$ points = $N-1$ steps + 1 start): the
-$(N)$-th point's incoming step would EXCEED the box — contradiction
-with the staircase fitting. Hence no $k$-cup & no $l$-cap forces
-$N - 1 \leq \binom{k+l-4}{k-2} - 1$, i.e. $N \leq
-\binom{k+l-4}{k-2}$: the contrapositive is Theorem CC. ∎
+*Induction step ($k, l \geq 3$).* Suppose, for contradiction, that
+$$|P| \;=\; \binom{k+l-4}{k-2}+1$$
+and $P$ contains **no $k$-cup and no $l$-cap**. Then $\mathrm{cup}(p)
+\leq k-1$ and $\mathrm{cap}(p) \leq l-1$ for every $p$. Split
+$$X := \{p \in P : \mathrm{cup}(p) = k-1\}, \qquad Y := P \setminus X.$$
 
-#BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283] — $(1+a)^3 = 1+3a+3a^2+a^3$: the binomial tower law grounding the Pascal-identity algebra of the CC census (the $\binom{k+l-4}{k-2}$ path-count bookkeeping).
-#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:143] and mul_add_div_lemma [CardinalWorlds.lean:143] — the division/modular skeleton of the binomial arithmetic and the witness-coordinate exactness discipline.
+**Bound 1: $|Y| \leq \binom{k+l-5}{k-3}$.** $Y$ is a general-position
+point set in its own right with $\mathrm{cup} \leq k-2$ throughout
+(by definition of $Y$). If $|Y| \geq \binom{(k-1)+l-4}{(k-1)-2}+1$,
+the induction hypothesis at parameters $(k-1, l)$ gives $Y$ a
+$(k-1)$-cup or an $l$-cap. A $(k-1)$-cup in $Y$ ends at its rightmost
+point $q \in Y$ with $\mathrm{cup}(q) \geq k-1$ — contradicting
+$q \in Y$ ✓. An $l$-cap in $Y \subseteq P$ contradicts $P$ ✓. So
+$|Y| \leq \binom{k+l-5}{k-3}$.
+
+**Bound 2: $|X| \leq \binom{k+l-5}{k-2}$ — the extension lemma.**
+Suppose $|X| \geq \binom{k+(l-1)-4}{k-2}+1$. The induction hypothesis
+at $(k, l-1)$ gives $X$ a $k$-cup (contradiction with $P$ ✓) or an
+$(l-1)$-cap
+$$V \;=\; (v_1 < v_2 < \dots < v_{l-1}), \qquad V \subseteq X.$$
+Since $v_1 \in X$, there is a $(k-1)$-cup ending at $v_1$; write it
+$$C_1 = (u_1 < u_2 < \dots < u_{k-2} < v_1),$$
+and let
+$$\tau := \mathrm{slope}(u_{k-2}, v_1), \qquad \sigma :=
+\mathrm{slope}(v_1, v_2).$$
+Three exhaustive cases:
+
+* **$\sigma > \tau$:** the chain $(u_1, \dots, u_{k-2}, v_1, v_2)$
+  has consecutive slopes $\dots, \tau, \sigma$ strictly increasing —
+  a **$k$-cup** in $P$ ✗.
+
+* **$\sigma < \tau$:** the chain $(u_{k-2}, v_1, v_2, \dots,
+  v_{l-1})$ has $l$ points and consecutive slopes
+  $\tau, \sigma, \mathrm{slope}(v_2,v_3), \dots$ — strictly
+  decreasing, because $\tau > \sigma$ and $V$ is a cap — an
+  **$l$-cap** in $P$ ✗.
+
+* **$\sigma = \tau$:** the three distinct points $u_{k-2} < v_1 <
+  v_2$ have $\mathrm{slope}(u_{k-2}, v_1) = \mathrm{slope}(v_1,
+  v_2)$ — they are **collinear**, contradicting general position ✗.
+
+All three cases contradict, so $|X| \leq \binom{k+l-5}{k-2}$.
+
+**Pascal closure.**
+$$|P| \;=\; |X| + |Y| \;\leq\; \binom{k+l-5}{k-2} +
+\binom{k+l-5}{k-3} \;=\; \binom{k+l-4}{k-2},$$
+contradicting $|P| = \binom{k+l-4}{k-2}+1$. Hence every set of
+$\binom{k+l-4}{k-2}+1$ points in general position with distinct
+$x$-coordinates contains a $k$-cup or an $l$-cap. $\blacksquare$
+
+*Engine receipts:* the CC instance lane (300 random general-position
+sets per $(k,l) \in \{(3,3),(3,4),(4,3),(4,4),(3,5),(5,3)\}$ at
+size exactly $\binom{k+l-4}{k-2}+1$: every one contains a $k$-cup or
+$l$-cap, brute-force verified); the tightness lane (driver S-CCTIGHT,
+W74: seeded search finds witnesses of size exactly
+$\binom{k+l-4}{k-2}$ with NO $k$-cup and NO $l$-cap — the bound is
+exact in both directions at every tested $(k,l)$).
+
+#BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283] — $(1+a)^3 = 1+3a+3a^2+a^3$: the binomial tower law grounding the Pascal-identity algebra of the X/Y census (the $\binom{k+l-4}{k-2}$ bookkeeping of the two induction lanes).
+#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:143] and mul_add_div_lemma [CardinalWorlds.lean:143] — the division/exactness discipline of the binomial arithmetic and the witness-coordinate bookkeeping.
 
 ## §3 THEOREM U — FULL PROOF
 

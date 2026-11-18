@@ -213,9 +213,72 @@ exact: $R(s,2) = s = \binom{s}{s-1}$ ✓).
 #BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283] — $(1+a)^3 = 1 + 3a + 3a^2 + a^3$: the cubic binomial law of the Pascal-type recursion's boundary algebra ($\binom{t+3}{3}$-order bookkeeping in the K4 case).
 
 *The K4 case.* $\bar K_4$-free ⟹ $\alpha \leq 3$. If $\omega < t$ too,
-then $n < R(4, t) \leq \binom{t+2}{3} \leq t^3/6$ (for $t \geq 3$), so
-$\omega \geq t \geq (6n)^{1/3} \geq n^{1/3}$-order: the Erdős–Hajnal
-property for $\bar K_4$ with $c = 1/3$; $K_4$ by complementation. ∎
+then $n < R(4, t) \leq \binom{t+2}{3} = \frac{t(t+1)(t+2)}{6} \leq
+\frac{(t+2)^3}{6}$, so $t + 2 > (6n)^{1/3}$, i.e.
+$\omega \geq t > (6n)^{1/3} - 2$. The Erdős–Hajnal property needs only
+eventual validity: for $c = 1/4$, $(6n)^{1/3} - 2 \geq n^{1/4}$ for all
+$n \geq 256$ (both sides monotone; at $n = 256$: $9.5 \geq 4$; the gap
+only grows), and for every $c < 1/3$ the inequality
+$(6n)^{1/3} - 2 \geq n^{c}$ holds for all large $n$. So $\bar K_4$ has
+the Erdős–Hajnal property with every $c < 1/3$; $K_4$ by
+complementation. ∎
+
+*[W74 audit correction: the earlier line “$\binom{t+2}{3} \leq t^3/6$”
+was false as written ($\binom{t+2}{3} = t(t+1)(t+2)/6 > t^3/6$); the
+corrected chain above carries the same conclusion — the exponent is
+$1/3$-minus-$\varepsilon$, stated as “every $c < 1/3$” — and the claim
+text in the ledger now says exactly that.]*
+
+## §4.5 THEOREM CLAW — FULL PROOF (the $K_{1,3}$ / $K_3 + K_1$ cases, in-package)
+
+> **Theorem CLAW.** Every claw-free graph $G$ (no induced $K_{1,3}$) on
+> $n \geq 1$ vertices satisfies
+> $$\max(\alpha(G), \omega(G)) \;\geq\; \tfrac{1}{2}\, n^{1/3}.$$
+> Hence $H = K_{1,3}$ and (complement transfer) $H = K_3 + K_1$ have the
+> Erdős–Hajnal property with every $c < 1/3$.
+
+*Proof.* **Step 1 (the degree law).** Let $\omega = \omega(G)$. For every
+vertex $v$, the neighborhood $N(v)$ contains no independent set of size
+$3$: three pairwise non-adjacent neighbors of $v$ together with $v$
+span an induced $K_{1,3}$ (center $v$), forbidden. Also $N(v)$ contains
+no clique of size $\omega$: a clique $C \subseteq N(v)$ together with
+$v$ is a clique of size $|C| + 1 \leq \omega$. By the elementary Ramsey
+bound $R(t, 3) \leq t(t+1)/2$ (induction on $t$: $R(3,3) = 6$ and
+$R(t,3) \leq R(t-1,3) + R(t,2) = R(t-1,3) + t$), any graph on
+$t(t+1)/2$ vertices contains a $K_t$ or an independent $3$-set. Taking
+$t = \omega$: $|N(v)| \leq R(\omega, 3) - 1 \leq \omega(\omega+1)/2 - 1
+< \omega^2$ (for $\omega \geq 1$). So $\deg(v) < \omega^2$ for every
+$v$, hence $\bar d < \omega^2$.
+
+**Step 2 (the independence law).** Caro–Wei (weak form, in-package):
+$\alpha(G) \geq \sum_v \frac{1}{\deg(v)+1} \geq \frac{n}{\bar d + 1}$
+(the first inequality: a uniformly random vertex order, the set of
+vertices preceding all their neighbors is independent and contains $v$
+first with probability $\frac{1}{\deg(v)+1}$; the second: convexity of
+$1/x$, Jensen). Hence $\alpha(G) > \frac{n}{\omega^2 + 1}$.
+
+**Step 3 (the case split).** If $\omega \geq n^{1/3}$ the clique is the
+homogeneous set ✓. Otherwise $\omega < n^{1/3}$ and
+$\alpha > \frac{n}{n^{2/3}+1} \geq \frac{n}{2 n^{2/3}} =
+\tfrac{1}{2} n^{1/3}$ ✓ (using $1 \leq n^{2/3}$).
+
+**Step 4 (complement transfer).** The complement of $K_3 + K_1$ is
+$K_{1,3}$ (the isolated vertex turns universal and the triangle turns
+into an independent triple), and induced-subgraph freeness transfers
+under complementation with $\alpha \leftrightarrow \omega$: every
+$(K_3+K_1)$-free graph has a claw-free complement, so the same bound
+holds. ∎
+
+#BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283] — $(1+a)^3 = 1+3a+3a^2+a^3$: the cubic tower of the $n^{1/3}$ law (the $\omega^2$-vs-$n$ balance $\omega^3 = n$ of Step 3 is exactly the cubic expansion at $a = \omega/n^{1/3} - 1$).
+#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:143] and mul_add_div_lemma [CardinalWorlds.lean:143] — the division/floor discipline of the Jensen step ($n/(\bar d + 1)$ bookkeeping) and the Ramsey induction's additive bookkeeping.
+
+*Engine lane (driver S-CLAW, W74):* random claw-free graphs (line
+graphs of random multigraph-free graphs, disjoint clique unions,
+random filtered), each checked for $\alpha \geq n/(\omega^2+1)$ and
+$max(\alpha,\omega) \geq \frac{1}{2}n^{1/3}$; the Ramsey step instance
+$R(3,3) = 6$ exhaustive on all $2^{15}$ six-vertex graphs; negative
+control: the star $K_{1,5}$ (induced-claw-full) violates the degree law
+$\deg < \omega^2$ ($5 < 4$ false) — the hypothesis is load-bearing.
 
 ## §5 THEOREM INH + THE 4-VERTEX CLASSIFICATION
 
@@ -227,12 +290,18 @@ $H'$-property applies. ∎
 **The classification, in-package:** P4 (Theorem S, $c = 1/2$, optimal) →
 by INH every induced subgraph of P4: $\{P_3, \bar P_3, K_2, \bar K_2,
 K_1, 2K_1\}$ at $c = 1/2$; $K_3, \bar K_3$ (§3 degree split, $c = 1/2$);
-$K_4, \bar K_4$ (Theorem RAM, $c = 1/3$). The remaining four-vertex
-graphs ($C_4$, $2K_2$, paw, diamond, claw, $K_3 + K_1$, $K_2 + 2K_1$) are
-settled by Erdős–Hajnal [ErHa89] (and $C_5$ by Chudnovsky–Scott–Seymour–
-Spirkl [CSSS23]; all paths by [NSS26]) — cited classical context, with
-the substitution stack of `PROOF.md` §4 (Theorems 4A/4B/4C, complete) as
-the campaign's in-frame closure machinery.
+$K_4, \bar K_4$ (Theorem RAM, every $c < 1/3$); **$K_{1,3}$ (claw) and
+$K_3 + K_1$ (Theorem CLAW §4.5, every $c < 1/3$, $\max(\alpha,\omega)
+\geq \frac{1}{2} n^{1/3}$ — in-package W74)**. The remaining four-vertex
+graphs ($C_4$, $2K_2$, paw, diamond, $K_2 + 2K_1$) are settled by
+Erdős–Hajnal [ErHa89] (and $C_5$ by Chudnovsky–Scott–Seymour–Spirkl
+[CSSS23]; all paths by [NSS26]) — cited classical context, with the
+substitution stack of `PROOF.md` §4 (Theorems 4A/4B/4C, complete) as
+the campaign's in-frame closure machinery. *W74: the in-package count
+stands at twelve of the ten-or-cited 4-vertex graphs (P4 + 6 induced
+subgraphs + K3/K̄3 + K4/K̄4 + claw + K3+K1); the C4/2K2 lane is the
+next attackable front (the $U(ab)$ decomposition and the $C_5$-blowup
+barrier are logged in the W74 worklog).*
 
 ## §6 SUBSTITUTION STACK — RECEIPTS
 

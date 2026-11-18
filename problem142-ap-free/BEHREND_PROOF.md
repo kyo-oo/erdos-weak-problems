@@ -215,14 +215,26 @@ $N := (2m)^d$):
 | 5 | 3 | 7776 | 30 | 1.05 |
 | 6 | 3 | 46656 | 90 | 2.24 |
 | 3 | 5 | 1000 | 6 | 0.20 |
-| 4 | 5 | 10000 | 14 | 0.30 |
-| 3 | 7 | 2744 | 6 | 0.13 |
-| 4 | 7 | 38416 | 18 | 0.17 |
-| 2 | 9 | 324 | 5 | 0.12 |
-| 5 | 2 | 1024 | 8 | 0.64 |
+| 4 | 5 | 10000 | 24 | 0.57 |
+| 3 | 7 | 2744 | 12 | 0.17 |
+| 4 | 7 | 38416 | 48 | 0.66 |
+| 2 | 9 | 324 | 2 | 0.04 |
+| 5 | 2 | 1024 | 10 | 0.89 |
 
 Every instance: AP-free by exhaustive midpoint scan, size meets the
 Theorem-B bound, range $< (2m)^d$.
+
+*W74 audit correction:* the five $|S|$ entries $14/6/18/5/8$ and the
+paired bound entries $0.30/0.13/0.17/0.12/0.64$ were transcription
+defects against the engine's certified output ($24/12/48/2/10$ and
+$0.57/0.17/0.66/0.04/0.89$; receipts142behrend.txt BEHREND-GRID, fresh
+re-run 8/8 GREEN); the table above now carries the receipt values, and
+the official gate's S-INSTANCES-TABLE check re-computes the grid live
+and requires cell-by-cell equality with the ledger table — the defect
+class is dead. The Corollary B$^*$ domain is likewise corrected: the
+recipe needs $d \geq 4, m \geq 2$, i.e. $N \geq 256$; on $[2, 255]$ the
+bound $r_3(N) \geq 2 > N e^{-2\sqrt{3\ln 2}\sqrt{\ln N}}$ holds by the
+2-point witness (RHS $\leq 0.289$ there, engine-checked).
 
 **Proof of Corollary B\*.** Write $L := \ln N$. Theorem B gives, for any
 valid $(d, m)$ with $(2m)^d \leq N$:

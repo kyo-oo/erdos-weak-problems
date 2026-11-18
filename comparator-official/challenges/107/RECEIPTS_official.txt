@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #107 — 2026-11-18T18:32:39
+OFFICIAL GATE RECEIPT — problem #107 — 2026-11-18T21:20:50
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -12,11 +12,12 @@ Claims in solution ledger: 9
 [PASS] (solution) S-RERUN — independent re-checks: binomial table 3,7,21,71,253,925; 200 deterministic 5-point sets contain convex 4; the kernel 8-point witness re-verified (no convex 5)
 [PASS] (solution) S-GPELIM — in-driver greedy GP-ELIM: 60 seeded integer boards (planted collinear structure + exact general-position parabola boards) — every above-threshold greedy reaches m with a no-3-collinear output, and every stage satisfies forbidden-count <= C(j,2)(t-2)
 [PASS] (solution) S-H107 — Theorem H107 at the exact threshold: for (n,t) in {(3,2),(3,3),(4,2)}, 15 seeded integer sets of N=(m-1)+C(m-1,2)(t-2)+1 points with measured max collinearity <= t each contain a convex n-gon (brute orientation scan)
+[PASS] (solution) S-CCTIGHT — cups-caps binomial bound is EXACT both ways: Pascal-recursive slope-window witnesses of size C(k+l-4,k-2) with no k-cup/no l-cap for ALL (k,l) in {(3,3),(4,3),(3,4),(4,4),(3,5),(5,3),(4,5),(5,4),(5,5),(6,4),(4,6),(6,5),(5,6),(6,6)} (20-point (5,5) and 70-point (6,6) included), GP verified; second-method random search confirms the small pairs
 [PASS] (control) N-BADPROGRAM — the OFFICIAL Evaluator rejects a broken program (no registration)
 [PASS] (control) N-PLANT — a planted convex pentagon is DETECTED by the hull checker
 [PASS] (control) N-BINOM — a corrupted binomial table entry (21 -> 22) is DETECTED by the equality check
 [PASS] (control) N-UNCOND-BOARD — the corrupted H107 threshold (the +1 dropped) is REFUTED: on all-collinear boards (t=N, N=3..10) the corrupted bound claims a convex 3-gon but the exact orientation and hull checkers both find zero convex triples; the true threshold N+1 makes no claim
 ==============================================================================
-CHECKS: 10/10 passed (official=2, solution=4, controls=4)
-WALL: 3.38s
+CHECKS: 11/11 passed (official=2, solution=5, controls=4)
+WALL: 3.65s
 VERDICT: YOUR SOLUTION IS OKAY

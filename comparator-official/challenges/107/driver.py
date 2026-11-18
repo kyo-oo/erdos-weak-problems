@@ -427,6 +427,124 @@ def run_solution_checks(challenge, solution):
                        ok_h and total == 45,
                        f"configs (n,t,N,m,verified)={cfgs}; total sets={total}/45",
                        time.time() - t0))
+
+    # S-CCTIGHT (W74): the binomial cups-caps bound is EXACT in both
+    # directions: the Pascal-recursive witness construction (ES-style
+    # doubling with a slope window) yields, for each (k,l), a
+    # general-position set of exactly C(k+l-4,k-2) points with NO k-cup
+    # and NO l-cap. Construction: W(2,l)=W(k,2)={one point};
+    # W(k,l) = W(k-1,l) ++ [W(k,l-1) translated far up-right so that
+    # every cross slope exceeds every internal slope] — mixed cups and
+    # mixed caps are both blocked by the window; general position is
+    # verified exhaustively and the translation is jiggled until clean.
+    # Second method: seeded random search for the small (k,l).
+    t0 = time.time()
+    try:
+        from fractions import Fraction as _Fr
+
+        def _slope(p, q):
+            return _Fr(q[1] - p[1], q[0] - p[0])
+
+        def _max_cup_cap(pts):
+            # O(n^3) exact DP: best chain ending with edge (p -> q)
+            n = len(pts)
+            best_cup = [2] * (n * n)  # default: the edge itself
+            best_cap = [2] * (n * n)
+            for q in range(n):
+                for p in range(q):
+                    spq = _slope(pts[p], pts[q])
+                    bc, bk = 2, 2
+                    for r in range(p):
+                        spr = _slope(pts[r], pts[p])
+                        if spr < spq and best_cup[r * n + p] + 1 > bc:
+                            bc = best_cup[r * n + p] + 1
+                        if spr > spq and best_cap[r * n + p] + 1 > bk:
+                            bk = best_cap[r * n + p] + 1
+                    best_cup[p * n + q] = bc
+                    best_cap[p * n + q] = bk
+            mc = max(best_cup) if n >= 2 else 1
+            mk = max(best_cap) if n >= 2 else 1
+            return (mc if n >= 2 else 1), (mk if n >= 2 else 1)
+
+        def _gp_ok(pts):
+            n = len(pts)
+            if len(set(p[0] for p in pts)) != n:
+                return False
+            from itertools import combinations as _comb
+            for a, b, c in _comb(range(n), 3):
+                if (pts[b][0] - pts[a][0]) * (pts[c][1] - pts[a][1]) == \
+                   (pts[c][0] - pts[a][0]) * (pts[b][1] - pts[a][1]):
+                    return False
+            return True
+
+        def _build_w(k, l, memo=None):
+            if memo is None:
+                memo = {}
+            if k == 2 or l == 2:
+                return [(0, 0)]
+            key = (k, l)
+            if key in memo:
+                return memo[key]
+            A = [tuple(p) for p in _build_w(k - 1, l, memo)]
+            B = [tuple(p) for p in _build_w(k, l - 1, memo)]
+            W = max(max(max(abs(p[0]), abs(p[1])) for p in A),
+                    max(max(abs(p[0]), abs(p[1])) for p in B)) + 1
+            # slope window: all cross slopes must exceed all internal slopes
+            # (internal |slopes| <= W since coordinates in [-W, W] and
+            #  x-gaps >= 1); choose T, H so (H - 2W)/(T + 2W) > 2W.
+            T = 4 * W
+            H = 2 * W * (T + 2 * W) + 2 * W + T
+            for jiggle in range(60):
+                BB = [(p[0] + T + jiggle, p[1] + H) for p in B]
+                cand = sorted(A + BB)
+                if _gp_ok(cand):
+                    memo[key] = list(cand)
+                    return memo[key]
+                H += 3 * W + 7
+            raise RuntimeError("no GP placement found for W(%d,%d)" % (k, l))
+
+        from math import comb as _comb2
+        pairs = [(3, 3), (4, 3), (3, 4), (4, 4), (3, 5), (5, 3), (4, 5), (5, 4), (5, 5), (6, 4), (4, 6), (6, 5), (5, 6), (6, 6)]
+        tight_ok = True
+        rows = []
+        for (k, l) in pairs:
+            W = _build_w(k, l)
+            n = len(W)
+            target = _comb2(k + l - 4, k - 2)
+            gp = _gp_ok(W)
+            mc, mk = _max_cup_cap(W)
+            if not (n == target and gp and mc <= k - 1 and mk <= l - 1):
+                tight_ok = False
+            rows.append((k, l, n, target, mc, k - 1, mk, l - 1))
+        # second method: seeded random search for the small pairs
+        import random as _rnd2
+        rng2 = _rnd2.Random(20261118)
+        search_ok = True
+        search_rows = []
+        for (k, l) in [(3, 3), (4, 3), (3, 4), (4, 4), (3, 5), (5, 3)]:
+            target = _comb2(k + l - 4, k - 2)
+            found = False
+            for _ in range(20000):
+                pts = [(x, rng2.randrange(0, 40)) for x in range(target)]
+                if not _gp_ok(pts):
+                    continue
+                mc, mk = _max_cup_cap(pts)
+                if mc <= k - 1 and mk <= l - 1:
+                    found = True
+                    search_rows.append((k, l, len(pts), mc, mk))
+                    break
+            if not found:
+                search_ok = False
+                search_rows.append((k, l, target, "NOT FOUND", "NOT FOUND"))
+        ok = tight_ok and search_ok
+        det = (f"constructive witnesses (k,l,n,target,maxcup,k-1,maxcap,l-1): {rows}; "
+               f"random-search second method: {search_rows}")
+    except Exception as e:
+        ok = False
+        det = repr(e)
+    checks.append(_chk("S-CCTIGHT",
+                       "cups-caps binomial bound is EXACT both ways: Pascal-recursive slope-window witnesses of size C(k+l-4,k-2) with no k-cup/no l-cap for ALL (k,l) in {(3,3),(4,3),(3,4),(4,4),(3,5),(5,3),(4,5),(5,4),(5,5),(6,4),(4,6),(6,5),(5,6),(6,6)} (20-point (5,5) and 70-point (6,6) included), GP verified; second-method random search confirms the small pairs",
+                       ok, det, time.time() - t0))
     return checks
 
 

@@ -1,47 +1,47 @@
 {
-  "problem": "erdoes-142",
-  "solution_id": "behrend-pillar-official-v1",
-  "provenance": "W72-142K (S071): BEHREND_PROOF.md six-step complete theorem + engine142behrend.py 8/8 GREEN; W72-142C official gate on the fresh google-deepmind/funsearch clone @ cc53f27; the r_3 table cross-certified against the CI-green kernel-142k ledger (run 43754690872); 18 arsenal laws read, cited, and spot-verified (arsenal-full: erdosternary2 @ bulldoze + HC-PROOF @ research)",
-  "claims": [
-    {
-      "id": "C142-BEHREND-THEOREM",
-      "statement": "Theorem B: for all d >= 1, m >= 2, B = 2m there is a 3-AP-free S subset [0, B^d) with |S| >= m^d / ((d(m-1)+1)(d(m-1)^2+1)); hence r_3(N) >= that bound for every N >= B^d.",
-      "verification": "engine BEHREND-GRID (10 instances, AP-free + size >= bound + range) + driver S-BEHREND (independent construction for (d,m) = (4,3),(3,5),(4,5))"
-    },
-    {
-      "id": "C142-BEHREND-ASYMP",
-      "statement": "Corollary B*: for every N >= 16, choosing d = floor(sqrt(3 ln N / ln 2)) and m = floor(N^(1/d)/2) >= 2 gives r_3(N) >= N*exp(-(2*sqrt(3 ln 2)+o(1))*sqrt(ln N)) with 2*sqrt(3 ln 2) = 2.885...",
-      "verification": "derived in BEHREND_PROOF.md section 6 (full optimization calculus); driver S-ASYMP (numeric: the explicit denominator bound F(d*) <= (2*sqrt(3 ln 2)+delta)*sqrt(L) verified across the N grid)"
-    },
-    {
-      "id": "C142-BEHREND-INSTANCES",
-      "statement": "Instance table (d, m, N=(2m)^d, |S| best layer x sphere): (3,3,216,6) (4,3,1296,12) (5,3,7776,30) (6,3,46656,90) (3,5,1000,6) (4,5,10000,14) (3,7,2744,6) (4,7,38416,18) (2,9,324,5) (5,2,1024,8) — all AP-free, all meeting the Theorem-B bound.",
-      "verification": "engine BEHREND-GRID (exhaustive midpoint scan)"
-    },
-    {
-      "id": "C142-CANTOR",
-      "statement": "Theorem C: the Cantor set T_d (base-3 digits avoid 2) is 3-AP-free with |T_d| = 2^d for d = 1..9; hence r_3(3^d - 1) >= 2^d - 1 (and r_3(3^d) >= 2^d).",
-      "verification": "engine CANTOR (d=1..9, exhaustive midpoint scan + exact sizes); the mod-3 descent is the CI-green Lean kernel E142.t3free"
-    },
-    {
-      "id": "C142-R3-TABLE",
-      "statement": "Theorem T: r_3(N) for N = 1..30 equals 1,2,2,3,4,4,4,4,5,5,6,6,7,8,8,8,8,8,8,9,9,9,9,10,10,11,11,11,11,12.",
-      "verification": "three-way agreement: fresh B&B (engine R3-TABLE) = embedded table = CI-certified kernel-142k ledger (run 43754690872); driver S-R3-Z3 adds independent z3 certificates (UNSAT r_3(9) <= 5 at size 6, UNSAT r_3(20) <= 9 at size 10, SAT r_3(14) >= 8)"
-    },
-    {
-      "id": "C142-BLOCK-UPPER",
-      "statement": "Block bound: for every k >= 2 and N >= 1, every k-AP-free S subset [1,N] has |S| <= (k-1)*floor(N/k) + (N mod k) (each full block of k consecutive integers contributes at most k-1: it contains the d=1 k-AP).",
-      "verification": "driver S-BLOCK: the bound dominates the certified r_3 table at every N = 1..30 and the r_4 legacy table at N = 1..20; block arithmetic verified exactly"
-    },
-    {
-      "id": "C142-MONO-LAW",
-      "statement": "r_{k+1}(N) >= r_k(N) for all k >= 2, N >= 1 (the first k terms of a (k+1)-AP form a k-AP, so k-AP-free sets are (k+1)-AP-free).",
-      "verification": "driver S-MONO: r_3(N) <= r_4(N) <= r_5(N) at every certified table point"
-    },
-    {
-      "id": "C142-CAPSET-BRIDGE",
-      "statement": "The digit vectors of T_d form the cap set {0,1}^d in F_3^d (no non-trivial 3-AP over F_3) for d = 3..9; the OFFICIAL DeepMind FunSearch records exceed it: the official greedy 512-set at d=8 (official priority, cap_set/cap_set.ipynb cell 6) and the official 1082-set at d=9 (cell 14 priority), both certified by the official verifier is_cap_set.",
-      "verification": "driver O-BRIDGE (official is_cap_set on {0,1}^d, d=3..9) + engine CAPSET-BRIDGE (independent midpoint law) + O-512GREEDY/O-1082 (official solves)"
-    }
-  ]
+ "problem": "erdoes-142",
+ "solution_id": "behrend-pillar-official-v1",
+ "provenance": "W72-142K (S071): BEHREND_PROOF.md six-step complete theorem + engine142behrend.py 8/8 GREEN; W72-142C official gate on the fresh google-deepmind/funsearch clone @ cc53f27; the r_3 table cross-certified against the CI-green kernel-142k ledger (run 43754690872); 18 arsenal laws read, cited, and spot-verified (arsenal-full: erdosternary2 @ bulldoze + HC-PROOF @ research)",
+ "claims": [
+  {
+   "id": "C142-BEHREND-THEOREM",
+   "statement": "Theorem B: for all d >= 1, m >= 2, B = 2m there is a 3-AP-free S subset [0, B^d) with |S| >= m^d / ((d(m-1)+1)(d(m-1)^2+1)); hence r_3(N) >= that bound for every N >= B^d.",
+   "verification": "engine BEHREND-GRID (10 instances, AP-free + size >= bound + range) + driver S-BEHREND (independent construction for (d,m) = (4,3),(3,5),(4,5))"
+  },
+  {
+   "id": "C142-BEHREND-ASYMP",
+   "statement": "Corollary B*: for every N >= 256 (the recipe's natural domain: d >= 4 and m >= 2 force (2m)^d >= 4^4 = 256), choosing d = max(4, floor(sqrt(3 ln N / ln 2))) and m = floor(N^(1/d)/2) >= 2 gives r_3(N) >= N*exp(-(2*sqrt(3 ln 2)+o(1))*sqrt(ln N)) with 2*sqrt(3 ln 2) = 2.885...; for 2 <= N <= 255 the same shape holds via the 2-point witness: r_3(N) >= 2 > N*exp(-2*sqrt(3 ln 2)*sqrt(ln N)) (the RHS is at most 0.289 on [2,255], engine-checked). [W74 audit: the earlier 'm >= 2 for every N >= 16' was false on the initial range (N=16..63 gives m=1); domain corrected to N >= 256 with the explicit small-N witness bridge.]",
+   "verification": "derived in BEHREND_PROOF.md section 6 (full optimization calculus); driver S-ASYMP (numeric: the explicit denominator bound F(d*) <= (2*sqrt(3 ln 2)+delta)*sqrt(L) verified across the N grid, plus the small-N bridge max_{2<=N<=255} N*exp(-2*sqrt(3 ln 2)*sqrt(ln N)) < 2 <= r_3(N))"
+  },
+  {
+   "id": "C142-BEHREND-INSTANCES",
+   "statement": "Instance table (d, m, N=(2m)^d, |S| best layer x sphere): (3,3,216,6) (4,3,1296,12) (5,3,7776,30) (6,3,46656,90) (3,5,1000,6) (4,5,10000,24) (3,7,2744,12) (4,7,38416,48) (2,9,324,2) (5,2,1024,10) — all AP-free, all meeting the Theorem-B bound. [W74 audit: the 5 values 14/6/18/5/8 were transcription defects vs the engine receipts (24/12/48/2/10); corrected and now gate-checked cell-by-cell against the live BEHREND-GRID re-computation (S-INSTANCES-TABLE).]",
+   "verification": "engine BEHREND-GRID (exhaustive midpoint scan) + driver S-INSTANCES-TABLE (ledger table == live re-computed grid, cell by cell, exit-fail on any mismatch)"
+  },
+  {
+   "id": "C142-CANTOR",
+   "statement": "Theorem C: the Cantor set T_d (base-3 digits avoid 2) is 3-AP-free with |T_d| = 2^d for d = 1..9; hence r_3(3^d - 1) >= 2^d - 1 (and r_3(3^d) >= 2^d).",
+   "verification": "engine CANTOR (d=1..9, exhaustive midpoint scan + exact sizes); the mod-3 descent is the CI-green Lean kernel E142.t3free"
+  },
+  {
+   "id": "C142-R3-TABLE",
+   "statement": "Theorem T: r_3(N) for N = 1..30 equals 1,2,2,3,4,4,4,4,5,5,6,6,7,8,8,8,8,8,8,9,9,9,9,10,10,11,11,11,11,12.",
+   "verification": "three-way agreement: fresh B&B (engine R3-TABLE) = embedded table = CI-certified kernel-142k ledger (run 43754690872); driver S-R3-Z3 adds independent z3 certificates (UNSAT r_3(9) <= 5 at size 6, UNSAT r_3(20) <= 9 at size 10, SAT r_3(14) >= 8)"
+  },
+  {
+   "id": "C142-BLOCK-UPPER",
+   "statement": "Block bound: for every k >= 2 and N >= 1, every k-AP-free S subset [1,N] has |S| <= (k-1)*floor(N/k) + (N mod k) (each full block of k consecutive integers contributes at most k-1: it contains the d=1 k-AP).",
+   "verification": "driver S-BLOCK: the bound dominates the certified r_3 table at every N = 1..30 and the r_4 legacy table at N = 1..20; block arithmetic verified exactly"
+  },
+  {
+   "id": "C142-MONO-LAW",
+   "statement": "r_{k+1}(N) >= r_k(N) for all k >= 2, N >= 1 (the first k terms of a (k+1)-AP form a k-AP, so k-AP-free sets are (k+1)-AP-free).",
+   "verification": "driver S-MONO: r_3(N) <= r_4(N) <= r_5(N) at every certified table point"
+  },
+  {
+   "id": "C142-CAPSET-BRIDGE",
+   "statement": "The digit vectors of T_d form the cap set {0,1}^d in F_3^d (no non-trivial 3-AP over F_3) for d = 3..9; the OFFICIAL DeepMind FunSearch records exceed it: the official greedy 512-set at d=8 (official priority, cap_set/cap_set.ipynb cell 6) and the official 1082-set at d=9 (cell 14 priority), both certified by the official verifier is_cap_set.",
+   "verification": "driver O-BRIDGE (official is_cap_set on {0,1}^d, d=3..9) + engine CAPSET-BRIDGE (independent midpoint law) + O-512GREEDY/O-1082 (official solves)"
+  }
+ ]
 }

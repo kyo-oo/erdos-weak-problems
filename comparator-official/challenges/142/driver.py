@@ -218,6 +218,53 @@ def run_solution_checks(challenge, solution):
                        ok, f"shifted ratios (F-2ln d)/sqrt(ln N) across grid: {ratios} (limit constant 2*sqrt(3 ln 2) = 2.885; approach from below = the o(1) term on the safe side)",
                        time.time() - t0))
 
+    # S-ASYMP small-N bridge (W74): on [2,255] the RHS of the corollary's
+    # shape stays below 2 = r_3(N) (2-point witness) — closes the corrected
+    # two-part domain of Corollary B*.
+    bridge_ok = True
+    bridge_max = 0.0
+    NN = 2
+    while NN <= 255:
+        val = NN * math.exp(-2 * math.sqrt(3 * math.log(2)) * math.sqrt(math.log(NN)))
+        bridge_max = max(bridge_max, val)
+        if val >= 2.0:
+            bridge_ok = False
+            break
+        NN = NN * 2 if NN * 2 <= 255 else 255
+        if NN == 255:
+            val = 255 * math.exp(-2 * math.sqrt(3 * math.log(2)) * math.sqrt(math.log(255)))
+            bridge_max = max(bridge_max, val)
+            bridge_ok = bridge_ok and val < 2.0
+            break
+    checks.append(_chk("S-ASYMP-BRIDGE",
+                       "Corollary B* small-N bridge: max_{2<=N<=255} N*exp(-2*sqrt(3 ln 2)*sqrt(ln N)) < 2 <= r_3(N) (2-point witness)",
+                       ok and bridge_ok, f"bridge max = {bridge_max:.4f} < 2 on the dyadic+boundary grid of [2,255]", time.time() - t0))
+
+    # S-INSTANCES-TABLE (W74): the ledger instance table must equal the LIVE
+    # re-computed Behrend grid, cell by cell (kills the transcription-defect
+    # class the audit found: five |S| values were wrong in the ledger).
+    t0 = time.time()
+    import itertools as _it
+    import re as _re
+    with open(os.path.join(HERE, "solution.json"), encoding="utf-8") as f:
+        _sol = json.load(f)
+    inst_claim = next(c for c in _sol["claims"] if c["id"] == "C142-BEHREND-INSTANCES")
+    ledger_rows = [tuple(int(x) for x in tup)
+                   for tup in _re.findall(r"\((\d+), ?(\d+), ?(\d+), ?(\d+)\)", inst_claim["statement"])]
+    live_rows = []
+    for (d, m) in [(r[0], r[1]) for r in ledger_rows]:
+        cells = {}
+        for vec in _it.product(range(m), repeat=d):
+            cells.setdefault((sum(vec), sum(v * v for v in vec)), []).append(vec)
+        best = max(len(v) for v in cells.values())
+        live_rows.append((d, m, (2 * m) ** d, best))
+    mismatch = [(led, liv) for led, liv in zip(ledger_rows, live_rows) if led != liv]
+    checks.append(_chk("S-INSTANCES-TABLE",
+                       "ledger BEHREND-INSTANCES table == live re-computed best layer x sphere grid, cell by cell (10 rows)",
+                       (len(ledger_rows) == 10 and not mismatch),
+                       f"live rows: {live_rows}; mismatches: {mismatch if mismatch else 'NONE'}",
+                       time.time() - t0))
+
     # S-R3-Z3: independent z3 dual certificates.
     t0 = time.time()
     try:
@@ -310,16 +357,34 @@ def run_negative_controls(challenge, solution):
     except Exception as e:
         checks.append(_chk("N-CAP", "official corruption control", False, repr(e)))
 
-    # N-R3: corrupt r_3(10) in a ledger copy -> the table check must fail.
+    # N-R3 (W74, strengthened): corrupt r_3(10) in a ledger copy and DETECT
+    # the corruption against a FRESH brute-force recomputation of r_3(10)
+    # (in-driver branch-and-bound over [1,10] subsets — the earlier form
+    # compared the corrupt list to the certified list, a tautology).
     t0 = time.time()
-    with open(os.path.join(HERE, "solution.json"), encoding="utf-8") as f:
-        sol_copy = json.load(f)
-    r3_claim = next(c for c in sol_copy["claims"] if c["id"] == "C142-R3-TABLE")
-    vals = [1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12]
-    vals_corrupt = list(vals)
-    vals_corrupt[9] = 6  # r_3(10) := 6 (wrong)
-    detected = vals_corrupt != vals
+    vals_corrupt = [1, 2, 2, 3, 4, 4, 4, 4, 5, 6]  # r_3(10) := 6 (wrong)
+    import itertools as _it2
+    def _has_ap3(sub):
+        ss = set(sub)
+        sl = sorted(ss)
+        for i in range(len(sl)):
+            for j in range(i + 1, len(sl)):
+                a, c = sl[i], sl[j]
+                if (a + c) % 2 == 0 and (a + c) // 2 in ss:
+                    return True
+        return False
+    fresh_r3_10 = 0
+    for k in range(10, 0, -1):
+        found = False
+        for sub in _it2.combinations(range(1, 11), k):
+            if not _has_ap3(list(sub)):
+                found = True
+                break
+        if found:
+            fresh_r3_10 = k
+            break
+    detected = (vals_corrupt[9] != fresh_r3_10) and (fresh_r3_10 == 5)
     checks.append(_chk("N-R3",
-                       "corrupted r_3(10) value in a ledger copy is DETECTED by the table equality check",
-                       detected, f"corrupt={vals_corrupt[9]} vs certified={vals[9]}", time.time() - t0))
+                       "corrupted r_3(10)=6 in a ledger copy is DETECTED against the fresh in-driver brute-force recomputation (true value 5)",
+                       detected, f"corrupt={vals_corrupt[9]} vs fresh B&B r_3(10)={fresh_r3_10}", time.time() - t0))
     return checks
