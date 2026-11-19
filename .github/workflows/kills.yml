@@ -1690,11 +1690,10 @@ jobs:
           python3 comparator-official/official_gate.py 406 2>&1 | tee gate406official.log
           test "${PIPESTATUS[0]}" -eq 0
           grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate406official.log
-          PASS=$(grep -c '"passed": true' gate406official.log || true)
-          FAIL=$(grep -c '"passed": false' gate406official.log || true)
-          echo "PASS=$PASS FAIL=$FAIL"
-          test "$FAIL" -eq 0
-          test "$PASS" -ge 12
+          grep -F "YOUR SOLUTION IS REJECTED" gate406official.log && exit 1 || true
+          test "$(grep -c '\[PASS\]' gate406official.log)" -ge 12
+          test "$(grep -c '\[FAIL\]' gate406official.log)" -eq 0
+          echo GATE406OFFICIAL_GREEN=1
 
   gate-61-official:
     runs-on: ubuntu-24.04
