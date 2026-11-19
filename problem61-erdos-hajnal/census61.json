@@ -1,0 +1,3980 @@
+{
+ "meta": {
+  "task": "W75-61E grand census + verification battery (Erdos-Hajnal #61)",
+  "engine": "engine61census.py",
+  "wall_s": 537.3,
+  "H_universe": [
+   "K1",
+   "K2",
+   "2K1",
+   "K3",
+   "P3",
+   "K2+K1",
+   "3K1",
+   "K4",
+   "4K1(K4bar)",
+   "P4",
+   "C4",
+   "2K2",
+   "paw",
+   "P3+K1",
+   "diamond",
+   "K2+2K1",
+   "K1,3(claw)",
+   "K3+K1"
+  ],
+  "complement_pairs": {
+   "K1": "K1",
+   "K2": "2K1",
+   "2K1": "K2",
+   "K3": "3K1",
+   "3K1": "K3",
+   "P3": "K2+K1",
+   "K2+K1": "P3",
+   "K4": "4K1(K4bar)",
+   "4K1(K4bar)": "K4",
+   "P4": "P4",
+   "C4": "2K2",
+   "2K2": "C4",
+   "paw": "P3+K1",
+   "P3+K1": "paw",
+   "diamond": "K2+2K1",
+   "K2+2K1": "diamond",
+   "K1,3(claw)": "K3+K1",
+   "K3+K1": "K1,3(claw)"
+  },
+  "classes4": [
+   "2K2",
+   "4K1(K4bar)",
+   "C4",
+   "K1,3(claw)",
+   "K2+2K1",
+   "K3+K1",
+   "K4",
+   "P3+K1",
+   "P4",
+   "diamond",
+   "paw"
+  ],
+  "h_all": {
+   "1": 1,
+   "2": 2,
+   "3": 2,
+   "4": 2,
+   "5": 2,
+   "6": 3,
+   "7": 3,
+   "8": 3
+  },
+  "n8_scan": {
+   "m3_stratum_size": 55881692,
+   "chunks": 32,
+   "per_H_m3_counts": {
+    "K1": 0,
+    "K2": 0,
+    "2K1": 0,
+    "K3": 17640,
+    "P3": 280,
+    "K2+K1": 280,
+    "3K1": 17640,
+    "K4": 55881692,
+    "4K1(K4bar)": 55881692,
+    "P4": 10640,
+    "C4": 3234136,
+    "2K2": 3234136,
+    "paw": 20132,
+    "P3+K1": 20132,
+    "diamond": 2657032,
+    "K2+2K1": 2657032,
+    "K1,3(claw)": 1645864,
+    "K3+K1": 1645864
+   }
+  }
+ },
+ "census": {
+  "K1": {
+   "1": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "2": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "3": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "4": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "5": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "6": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "7": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   },
+   "8": {
+    "h": null,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": ""
+   }
+  },
+  "K2": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "3": {
+    "h": 3,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "4": {
+    "h": 4,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 5,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 6,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 7,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 8,
+    "rho": 1.0,
+    "witness_mask": 0,
+    "witness_edges": [],
+    "src": "only the empty/complete graph is K2/2K1-free, m=n=8"
+   }
+  },
+  "2K1": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": 1,
+    "witness_edges": [
+     [
+      0,
+      1
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "3": {
+    "h": 3,
+    "rho": 1.0,
+    "witness_mask": 7,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "4": {
+    "h": 4,
+    "rho": 1.0,
+    "witness_mask": 63,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 5,
+    "rho": 1.0,
+    "witness_mask": 1023,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 6,
+    "rho": 1.0,
+    "witness_mask": 32767,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 7,
+    "rho": 1.0,
+    "witness_mask": 2097151,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 8,
+    "rho": 1.0,
+    "witness_mask": 268435455,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ],
+     [
+      5,
+      6
+     ],
+     [
+      5,
+      7
+     ],
+     [
+      6,
+      7
+     ]
+    ],
+    "src": "only the empty/complete graph is K2/2K1-free, m=n=8"
+   }
+  },
+  "K3": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": 1,
+    "witness_edges": [
+     [
+      0,
+      1
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 656,
+    "witness_edges": [
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 42096,
+    "witness_edges": [
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5388912,
+    "witness_edges": [
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "P3": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": 1,
+    "witness_edges": [
+     [
+      0,
+      1
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 3,
+    "rho": 0.682606,
+    "witness_mask": 19,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "K2+K1": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": 3,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 30,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 3,
+    "rho": 0.682606,
+    "witness_mask": 126,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 4060,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 259903,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 33267710,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      4,
+      7
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "3K1": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": 1,
+    "witness_edges": [
+     [
+      0,
+      1
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 5905,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 378106,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 48675698,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      7
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ],
+     [
+      5,
+      6
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "K4": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "4K1(K4bar)": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "P4": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 3,
+    "rho": 0.682606,
+    "witness_mask": 19,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "C4": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "2K2": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 13,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 619,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39642,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5074233,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "paw": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "P3+K1": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "diamond": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "K2+2K1": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 1743,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 111582,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 14284121,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      5
+     ],
+     [
+      4,
+      6
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "K1,3(claw)": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 616,
+    "witness_edges": [
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 39441,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      2,
+      4
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5048512,
+    "witness_edges": [
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      6
+     ],
+     [
+      3,
+      4
+     ],
+     [
+      3,
+      5
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  },
+  "K3+K1": {
+   "1": {
+    "h": 1,
+    "rho": null,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "2": {
+    "h": 2,
+    "rho": 1.0,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "3": {
+    "h": 2,
+    "rho": 0.63093,
+    "witness_mask": null,
+    "witness_edges": null,
+    "src": "all-graphs min (|V(H)|>n)"
+   },
+   "4": {
+    "h": 2,
+    "rho": 0.5,
+    "witness_mask": 12,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      2
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "5": {
+    "h": 2,
+    "rho": 0.430677,
+    "witness_mask": 220,
+    "witness_edges": [
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "6": {
+    "h": 3,
+    "rho": 0.613147,
+    "witness_mask": 656,
+    "witness_edges": [
+     [
+      0,
+      5
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      2,
+      3
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "7": {
+    "h": 3,
+    "rho": 0.564575,
+    "witness_mask": 42047,
+    "witness_edges": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      2,
+      5
+     ],
+     [
+      3,
+      4
+     ]
+    ],
+    "src": "pure-Python full lane (+numpy lane agree)"
+   },
+   "8": {
+    "h": 3,
+    "rho": 0.528321,
+    "witness_mask": 5382142,
+    "witness_edges": [
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      0,
+      4
+     ],
+     [
+      0,
+      5
+     ],
+     [
+      0,
+      6
+     ],
+     [
+      0,
+      7
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      1,
+      4
+     ],
+     [
+      1,
+      5
+     ],
+     [
+      1,
+      6
+     ],
+     [
+      1,
+      7
+     ],
+     [
+      2,
+      7
+     ],
+     [
+      3,
+      6
+     ],
+     [
+      4,
+      5
+     ]
+    ],
+    "src": "exhaustive n=8 m=3-stratum scan"
+   }
+  }
+ },
+ "battery": {
+  "alpha_crosscheck_disagreements": 0,
+  "omega_crosscheck_disagreements": 0,
+  "containment_crosscheck_disagreements": 0,
+  "complement_selftest_mismatches": 0,
+  "monotonicity_violations": 0,
+  "inheritance_violations": 0,
+  "banked_B_table_reproduced": true,
+  "bell_counts_reproduced": true,
+  "P4_minprod_by_n": {
+   "1": 1,
+   "2": 2,
+   "3": 3,
+   "4": 4,
+   "5": 5,
+   "6": 6,
+   "7": 7
+  },
+  "P4free_SL_violations": 0,
+  "F7_violations": 0,
+  "claw_laws": {
+   "h_ge_half_ncube": true,
+   "alpha_ge_n_over_omega2plus1": true,
+   "deg_le_omega_choose2_minus1": true,
+   "deg_lt_omega_sq": true
+  },
+  "ram": {
+   "h_K4_ge_tR_all_n": true,
+   "bridge_256_to_2p20": true
+  }
+ },
+ "lemmas": {
+  "L1a_induced_C4free_sumC2": "FALSE \u2014 7487 machine counterexamples n=4..6 (K4, diamond at n=4)",
+  "L1b_subgraph_C4free_sumC2": "TRUE \u2014 exhaustive n<=6 + polarity n=7,13,21,31 + 90 random n=9..11 + trees/cycles/Petersen",
+  "L2a_induced_C4free_reiman": "FALSE \u2014 K4 (e=6>4.61), diamond (e=5>4.61) at n=4",
+  "L2b_subgraph_C4free_reiman": "TRUE \u2014 same certified pool",
+  "L3_carowei_weak": "TRUE \u2014 every graph n<=6 exhaustive + n=7 all 2^21",
+  "L4a_pawfree_Nv_P3free": "FALSE \u2014 2177 counterexamples (the diamond); corrected laws L4b/L4c TRUE",
+  "L4b_pawfree_Nv_2K2free": "TRUE \u2014 all paw-free graphs n=4..6",
+  "L4c_diamondfree_Nv_P3free": "TRUE \u2014 all diamond-free graphs n=4..6",
+  "L5_P3free_union_of_cliques": "TRUE \u2014 all P3-free n=1..7, counts=Bell",
+  "L6_diamondfree_edge_common_nbhd_clique": "TRUE \u2014 exhaustive n=4..6 + all diamond-free n=7",
+  "L7_composite_tn_floor_all_11H": "TRUE \u2014 h_H(n)>=t_n for all 11 four-vertex H at every n<=8"
+ },
+ "witnesses": {
+  "block_family_B_k": [
+   {
+    "name": "B_1",
+    "n": 1,
+    "alpha": 1,
+    "omega": 1,
+    "m": 1,
+    "H_free": [
+     "2K2",
+     "4K1(K4bar)",
+     "C4",
+     "K1,3(claw)",
+     "K2+2K1",
+     "K3+K1",
+     "K4",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "3K1",
+     "K2+K1",
+     "P3",
+     "K3"
+    ],
+    "note": "",
+    "rho": null
+   },
+   {
+    "name": "B_2",
+    "n": 4,
+    "alpha": 2,
+    "omega": 2,
+    "m": 2,
+    "H_free": [
+     "4K1(K4bar)",
+     "C4",
+     "K1,3(claw)",
+     "K2+2K1",
+     "K3+K1",
+     "K4",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "3K1",
+     "P3",
+     "K3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "B_3",
+    "n": 9,
+    "alpha": 3,
+    "omega": 3,
+    "m": 3,
+    "H_free": [
+     "4K1(K4bar)",
+     "C4",
+     "K1,3(claw)",
+     "K4",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "P3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "B_4",
+    "n": 16,
+    "alpha": 4,
+    "omega": 4,
+    "m": 4,
+    "H_free": [
+     "C4",
+     "K1,3(claw)",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "P3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "B_5",
+    "n": 25,
+    "alpha": 5,
+    "omega": 5,
+    "m": 5,
+    "H_free": [
+     "C4",
+     "K1,3(claw)",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "P3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "B_6",
+    "n": 36,
+    "alpha": 6,
+    "omega": 6,
+    "m": 6,
+    "H_free": [
+     "C4",
+     "K1,3(claw)",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "P3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "B_7",
+    "n": 49,
+    "alpha": 7,
+    "omega": 7,
+    "m": 7,
+    "H_free": [
+     "C4",
+     "K1,3(claw)",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "P3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "B_8",
+    "n": 64,
+    "alpha": 8,
+    "omega": 8,
+    "m": 8,
+    "H_free": [
+     "C4",
+     "K1,3(claw)",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "P3"
+    ],
+    "note": "",
+    "rho": 0.5
+   }
+  ],
+  "multipartite_family": [
+   {
+    "name": "K_{1x1}",
+    "n": 1,
+    "alpha": 1,
+    "omega": 1,
+    "m": 1,
+    "H_free": [
+     "2K2",
+     "4K1(K4bar)",
+     "C4",
+     "K1,3(claw)",
+     "K2+2K1",
+     "K3+K1",
+     "K4",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "3K1",
+     "K2+K1",
+     "P3",
+     "K3"
+    ],
+    "note": "",
+    "rho": null
+   },
+   {
+    "name": "K_{2x2}",
+    "n": 4,
+    "alpha": 2,
+    "omega": 2,
+    "m": 2,
+    "H_free": [
+     "2K2",
+     "4K1(K4bar)",
+     "K1,3(claw)",
+     "K2+2K1",
+     "K3+K1",
+     "K4",
+     "P3+K1",
+     "P4",
+     "diamond",
+     "paw",
+     "3K1",
+     "K2+K1",
+     "K3"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "K_{3x3}",
+    "n": 9,
+    "alpha": 3,
+    "omega": 3,
+    "m": 3,
+    "H_free": [
+     "2K2",
+     "4K1(K4bar)",
+     "K2+2K1",
+     "K3+K1",
+     "K4",
+     "P3+K1",
+     "P4",
+     "paw",
+     "K2+K1"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "K_{4x4}",
+    "n": 16,
+    "alpha": 4,
+    "omega": 4,
+    "m": 4,
+    "H_free": [
+     "2K2",
+     "K2+2K1",
+     "K3+K1",
+     "P3+K1",
+     "P4",
+     "paw",
+     "K2+K1"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "K_{5x5}",
+    "n": 25,
+    "alpha": 5,
+    "omega": 5,
+    "m": 5,
+    "H_free": [
+     "2K2",
+     "K2+2K1",
+     "K3+K1",
+     "P3+K1",
+     "P4",
+     "paw",
+     "K2+K1"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "K_{6x6}",
+    "n": 36,
+    "alpha": 6,
+    "omega": 6,
+    "m": 6,
+    "H_free": [
+     "2K2",
+     "K2+2K1",
+     "K3+K1",
+     "P3+K1",
+     "P4",
+     "paw",
+     "K2+K1"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "K_{7x7}",
+    "n": 49,
+    "alpha": 7,
+    "omega": 7,
+    "m": 7,
+    "H_free": [
+     "2K2",
+     "K2+2K1",
+     "K3+K1",
+     "P3+K1",
+     "P4",
+     "paw",
+     "K2+K1"
+    ],
+    "note": "",
+    "rho": 0.5
+   },
+   {
+    "name": "K_{8x8}",
+    "n": 64,
+    "alpha": 8,
+    "omega": 8,
+    "m": 8,
+    "H_free": [
+     "2K2",
+     "K2+2K1",
+     "K3+K1",
+     "P3+K1",
+     "P4",
+     "paw",
+     "K2+K1"
+    ],
+    "note": "",
+    "rho": 0.5
+   }
+  ],
+  "triangle_free_frontier": [
+   {
+    "name": "C5",
+    "n": 5,
+    "alpha": 2,
+    "omega": 2,
+    "m": 2,
+    "H_free": [
+     "2K2",
+     "4K1(K4bar)",
+     "C4",
+     "K1,3(claw)",
+     "K2+2K1",
+     "K3+K1",
+     "K4",
+     "P3+K1",
+     "diamond",
+     "paw",
+     "3K1",
+     "K3"
+    ],
+    "note": "",
+    "rho": 0.43067655807339306
+   },
+   {
+    "name": "Moebius-Kantor/Wagner W8",
+    "n": 8,
+    "alpha": 3,
+    "omega": 2,
+    "m": 3,
+    "H_free": [
+     "4K1(K4bar)",
+     "K3+K1",
+     "K4",
+     "diamond",
+     "paw",
+     "K3"
+    ],
+    "note": "",
+    "rho": 0.5283208335737188
+   },
+   {
+    "name": "Petersen",
+    "n": 10,
+    "alpha": 4,
+    "omega": 2,
+    "m": 4,
+    "H_free": [
+     "C4",
+     "K3+K1",
+     "K4",
+     "diamond",
+     "paw",
+     "K3"
+    ],
+    "note": "",
+    "rho": 0.6020599913279623
+   },
+   {
+    "name": "Clebsch",
+    "n": 16,
+    "alpha": 5,
+    "omega": 2,
+    "m": 5,
+    "H_free": [
+     "K3+K1",
+     "K4",
+     "diamond",
+     "paw",
+     "K3"
+    ],
+    "note": "",
+    "rho": 0.5804820237218405
+   }
+  ],
+  "polarity": {
+   "2": {
+    "n": 7,
+    "e": 9,
+    "alpha": 3,
+    "omega": 3,
+    "m": 3,
+    "H_free": [
+     "4K1(K4bar)",
+     "C4",
+     "K4",
+     "diamond"
+    ]
+   },
+   "3": {
+    "n": 13,
+    "e": 24,
+    "alpha": 5,
+    "omega": 3,
+    "m": 5,
+    "H_free": [
+     "C4",
+     "K4",
+     "diamond"
+    ]
+   }
+  }
+ },
+ "search": {
+  "C4": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   },
+   "12": {
+    "found": 4,
+    "sqrt_n": 3.464
+   },
+   "16": {
+    "found": 5,
+    "sqrt_n": 4.0
+   },
+   "20": {
+    "found": 5,
+    "sqrt_n": 4.472
+   },
+   "24": {
+    "found": 6,
+    "sqrt_n": 4.899
+   }
+  },
+  "2K2": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   },
+   "12": {
+    "found": 4,
+    "sqrt_n": 3.464
+   },
+   "16": {
+    "found": 5,
+    "sqrt_n": 4.0
+   },
+   "20": {
+    "found": 7,
+    "sqrt_n": 4.472
+   },
+   "24": {
+    "found": 11,
+    "sqrt_n": 4.899
+   }
+  },
+  "paw": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   },
+   "12": {
+    "found": 5,
+    "sqrt_n": 3.464
+   },
+   "16": {
+    "found": 6,
+    "sqrt_n": 4.0
+   },
+   "20": {
+    "found": 7,
+    "sqrt_n": 4.472
+   },
+   "24": {
+    "found": 8,
+    "sqrt_n": 4.899
+   }
+  },
+  "diamond": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   },
+   "12": {
+    "found": 4,
+    "sqrt_n": 3.464
+   },
+   "16": {
+    "found": 5,
+    "sqrt_n": 4.0
+   },
+   "20": {
+    "found": 6,
+    "sqrt_n": 4.472
+   },
+   "24": {
+    "found": 8,
+    "sqrt_n": 4.899
+   }
+  },
+  "K2+2K1": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   },
+   "12": {
+    "found": 10,
+    "sqrt_n": 3.464
+   },
+   "16": {
+    "found": 16,
+    "sqrt_n": 4.0
+   },
+   "20": {
+    "found": 20,
+    "sqrt_n": 4.472
+   },
+   "24": {
+    "found": 24,
+    "sqrt_n": 4.899
+   }
+  },
+  "K1,3(claw)": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   }
+  },
+  "K4": {
+   "8": {
+    "found": 3,
+    "census_h": 3,
+    "match": true
+   }
+  }
+ },
+ "arsenal_laws": {
+  "bracket_skew [HC-PROOF-research/GSTCausalPairingGraphs.lean:18]": true,
+  "plucker_four [HC-PROOF-research/GSTCausalPairingGraphs.lean:37]": true,
+  "graph_append [HC-PROOF-research/GSTCausalPairingGraphs.lean:67]": true,
+  "two_pow_pos [HC-PROOF-research/CardinalWorlds.lean:419]": true,
+  "two_pow_factored [HC-PROOF-research/CardinalWorlds.lean:424]": true,
+  "two_pow_ge2 [HC-PROOF-research/CardinalWorlds.lean:430]": true,
+  "three_pow_pos_lemma [HC-PROOF-research/CardinalWorlds.lean:185]": true,
+  "sq_sub_one [HC-PROOF-research/CardinalWorlds.lean:448]": true,
+  "cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:283]": true,
+  "digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097]": true,
+  "mod_mod_mul [HC-PROOF-research/CardinalWorlds.lean:140]": true,
+  "mul_add_div_lemma [HC-PROOF-research/CardinalWorlds.lean:143]": true,
+  "worldMap_monotone (doctrine) [HC-PROOF-research/GSTGraphV2CausalComponents.lean:127]": true
+ }
+}

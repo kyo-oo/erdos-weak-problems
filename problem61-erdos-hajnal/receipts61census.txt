@@ -1,0 +1,187 @@
+============================================================================== 
+[E0] W75-61E GRAND CENSUS ENGINE — start (t=0.0s) 
+[E0] 4-vertex census from first principles: 64 labeled graphs -> 11 isomorphism classes 
+[E0]   (brute-permutation canonical form; class sizes {'2K2': 3, '4K1(K4bar)': 1, 'C4': 3, 'K1,3(claw)': 4, 'K2+2K1': 6, 'K3+K1': 4, 'K4': 1, 'P3+K1': 12, 'P4': 12, 'diamond': 6, 'paw': 12}) 
+[E0] the 11 classes: 2K2, 4K1(K4bar), C4, K1,3(claw), K2+2K1, K3+K1, K4, P3+K1, P4, diamond, paw 
+[E0] brief's list {K4,K4bar,P4,C4,2K2,paw,P3+K1,diamond,K2+2K1,K1,3,K3+K1} == our 11: True 
+[E0] complement-pair structure machine-verified for all 18 H (K4<->4K1, C4<->2K2, paw<->P3+K1, diamond<->K2+2K1, claw<->K3+K1, P4 self-complementary, ...): True 
+[E1] pure-Python full census n=1: 1 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=2: 2 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=3: 8 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=4: 64 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=5: 1024 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=6: 32768 labeled graphs (wall 1.0s) 
+[E1] pure-Python full census n=7: 2097152 labeled graphs (wall 109.5s) — the 61E independent lane (alpha B&B / complement-alpha / all-subset scan) 
+[E3] numpy vectorized full census n=7: all 2^21 graphs (wall 1.9s) — independent lane (subset-existence alpha/omega, all-subset-scan containment) 
+[E3] n=7 FULL-LANE CROSS-CHECK pure-Python vs numpy: h_H(7) agreement for all 18 H: True 
+[E4] h_all(n) = min over ALL n-vertex graphs of max(alpha,omega), n=1..7: [1, 2, 2, 2, 2, 3, 3] — n>=6 value 3 certifies R(3,3)=6 EXACTLY (every 6-vertex graph has alpha>=3 or omega>=3; C5 shows R(3,3)>5) 
+[E4] census n=1..7 assembled (both independent lanes agree everywhere) 
+[E5] n=8 EXHAUSTIVE chunked scan: all 2^28 graphs in 32 chunks (wall 103.2s); m=3 stratum (alpha<=3 AND omega<=3) size = 55881692 labeled graphs. Universal floor m>=3 at n=8 is census-certified (h_all(6)=3 + induced-subgraph monotonicity), so h_H(8)=3 iff an H-free m=3 graph exists; else h_H(8)>=4. 
+[E5] n=8 H-free m=3 counts (exhaustive over the m=3 stratum): K2:0, 2K1:0, K3:17640, P3:280, K2+K1:280, 3K1:17640, K4:55881692, 4K1(K4bar):55881692, P4:10640, C4:3234136, 2K2:3234136, paw:20132, P3+K1:20132, diamond:2657032, K2+2K1:2657032, K1,3(claw):1645864, K3+K1:1645864 
+[E5] EXACT h_H(8) row: K1=None  K2=8  2K1=8  K3=3  P3=3  K2+K1=3  3K1=3  K4=3  4K1(K4bar)=3  P4=3  C4=3  2K2=3  paw=3  P3+K1=3  diamond=3  K2+2K1=3  K1,3(claw)=3  K3+K1=3 
+[E6] COMPLEMENT SELF-TEST: h_H(n) == h_Hbar(n) (hence rho_H(n) == rho_Hbar(n)) for all 18 H x n=2..8: 0 MISMATCHES (required 0) 
+[B1] alpha cross-check (bitmask B&B) vs (numpy subset-existence): 3000 random n=7 graphs + all 18 h-witnesses: 0 disagreements (required 0) 
+[B2] omega cross-check (complement-alpha) vs (DIRECT clique B&B): all 33866 graphs n=2..6 + 3000 random n=7: 0 disagreements (required 0) 
+[B3] induced-containment cross-check (all-subset scan) vs (backtracking matcher): every graph n=3..6 (33864 graphs x 15 H) + 3000 random n=7/n=8 x 15 H: 0 disagreements (required 0) 
+[B4] h_H nondecreasing in n (deletion transport never reverses; all 18 H, n=2..8): 0 violations (required 0) 
+[B4] inheritance law on the census (CORRECTED direction): H induced in H' => h_H(n) >= h_H'(n) at every n<=8 (all certified induced-inclusion pairs among the 18 H): 0 violations (required 0) 
+[B5] banked [B]-table reproduction h_2K_2 n=1..7: ours [1, 2, 2, 2, 2, 3, 3] vs banked [1, 2, 2, 2, 2, 3, 3]: MATCH 
+[B5] banked [B]-table reproduction h_P_3 n=1..7: ours [1, 2, 2, 2, 3, 3, 3] vs banked [1, 2, 2, 2, 3, 3, 3]: MATCH 
+[B5] banked [B]-table reproduction h_3K_1 n=1..7: ours [1, 2, 2, 2, 2, 3, 3] vs banked [1, 2, 2, 2, 2, 3, 3]: MATCH 
+[B5] banked [B]-table reproduction h_claw(K_1,3) n=1..7: ours [1, 2, 2, 2, 2, 3, 3] vs banked [1, 2, 2, 2, 2, 3, 3]: MATCH 
+[B5] banked [B]-table reproduction h_C_4 n=1..7: ours [1, 2, 2, 2, 2, 3, 3] vs banked [1, 2, 2, 2, 2, 3, 3]: MATCH 
+[B5] banked [B]-table reproduction h_K_2 n=1..7: ours [1, 2, 3, 4, 5, 6, 7] vs banked [1, 2, 3, 4, 5, 6, 7]: MATCH 
+[B5] banked [C]-census reproduction: P3-free labeled counts n=1..7: ours [1, 2, 5, 15, 52, 203, 877] vs banked [1, 2, 5, 15, 52, 203, 877]: MATCH 
+[E8] F7 family board re-derived: h_H(n) >= floor(sqrt(n)) for the 7 family H x n=2..8 (K1 vacuous): 0 violations (required 0) 
+[E8] Theorem 1 (K2) re-derived: h_K2(n)=n for n=1..8: True 
+[E8] Theorem 2 (P3) re-derived: h_P3(n)=ceil(sqrt(n)) for n=1..8: [1, 2, 2, 2, 3, 3, 3, 3]: True 
+[E8] Theorem 3 (3K1) re-derived: h >= t_n=ceil((sqrt(4n+1)-1)/2) at every n<=8 [n=1:h=1,law=1= n=2:h=2,law=1> n=3:h=2,law=2= n=4:h=2,law=2= n=5:h=2,law=2= n=6:h=3,law=2> n=7:h=3,law=3= n=8:h=3,law=3=]: True (equality at n in {1,3,4,5,7,8}, Ramsey-forced strictness at n in {2,6}) 
+[E8] Theorem S (P4) re-derived: h_P4(n)=ceil(sqrt(n)) n=1..8 [1, 2, 2, 2, 3, 3, 3, 3]: True; alpha*omega>=n for EVERY P4-free graph n<=7 (min alpha*omega per n = [1, 2, 3, 4, 5, 6, 7]): True 
+[E8] Seinsche Lemma SL re-derived: all 84454 P4-free labeled graphs n=2..7 are disconnected or have disconnected complement: 0 violations (required 0) 
+[E8] Theorem CLAW re-derived: h_claw(n) = [1, 2, 2, 2, 2, 3, 3, 3] >= n^(1/3)/2 at every n<=8: True 
+[E8] CLAW step-laws on EVERY claw-free graph: alpha*(omega^2+1)>=n: n<=6 exhaustive True, n=7 exhaustive True; deg(v)<=omega(omega+1)/2-1: True; deg(v)<omega^2: True 
+[E8] Theorem RAM re-derived (K4 side; K4bar identical by complement self-test): h_K4(n) >= max{t: C(t+2,3)<=n} at every n<=8 [n=1:h=1,law=1 n=2:h=2,law=1 n=3:h=2,law=1 n=4:h=2,law=2 n=5:h=2,law=2 n=6:h=3,law=2 n=7:h=3,law=2 n=8:h=3,law=2]: True 
+[E8] RAM bridge re-derived: (6n)^(1/3)-2 >= n^c for c in {0.32, 0.30, 0.25} at all n in [256, 2^20] + positive-derivative monotonicity beyond 256: True 
+[E9] STRUCTURAL LEMMA CERTIFICATION (exhaustive n=4..6): 
+[E9]   n=4: induced-C4-free graphs: 61; subgraph-C4-free (=induced-{C4,diamond,K4}-free): 54 
+[E9]   n=4: L1a 'induced-C4-free => sum C(d_v,2)<=C(n,2)': 7 VIOLATIONS — first: [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3)] 
+[E9]   n=4: L2a 'induced-C4-free => e<=(n/4)(1+sqrt(4n-3))': 7 VIOLATIONS — first: [(0, 1), (0, 2), (0, 3), (1, 2), (1, 3)] 
+[E9]   n=4: L1b 'SUBGRAPH-C4-free => sum C(d_v,2)<=C(n,2)': 0 violations 
+[E9]   n=4: L2b 'SUBGRAPH-C4-free => e<=(n/4)(1+sqrt(4n-3))': 0 violations 
+[E9]   n=5: induced-C4-free graphs: 834; subgraph-C4-free (=induced-{C4,diamond,K4}-free): 548 
+[E9]   n=5: L1a 'induced-C4-free => sum C(d_v,2)<=C(n,2)': 196 VIOLATIONS — first: [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3)] 
+[E9]   n=5: L2a 'induced-C4-free => e<=(n/4)(1+sqrt(4n-3))': 131 VIOLATIONS — first: [(0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4)] 
+[E9]   n=5: L1b 'SUBGRAPH-C4-free => sum C(d_v,2)<=C(n,2)': 0 violations 
+[E9]   n=5: L2b 'SUBGRAPH-C4-free => e<=(n/4)(1+sqrt(4n-3))': 0 violations 
+[E9]   n=6: induced-C4-free graphs: 19258; subgraph-C4-free (=induced-{C4,diamond,K4}-free): 7984 
+[E9]   n=6: L1a 'induced-C4-free => sum C(d_v,2)<=C(n,2)': 7284 VIOLATIONS — first: [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4)] 
+[E9]   n=6: L2a 'induced-C4-free => e<=(n/4)(1+sqrt(4n-3))': 4464 VIOLATIONS — first: [(0, 1), (0, 2), (0, 3), (0, 4), (0, 5), (1, 2), (1, 3), (1, 4), (1, 5)] 
+[E9]   n=6: L1b 'SUBGRAPH-C4-free => sum C(d_v,2)<=C(n,2)': 0 violations 
+[E9]   n=6: L2b 'SUBGRAPH-C4-free => e<=(n/4)(1+sqrt(4n-3))': 0 violations 
+[E9] VERDICT L1/L2: the Reiman-type lemmas are FALSE in the induced-C4-free reading (n=4 counterexamples: K4 — e=6>4.61, sum C(d,2)=12>6; diamond — e=5>4.61, sum=8>6) and TRUE in the SUBGRAPH reading (= induced-{C4,diamond,K4}-free), certified exhaustively n<=6 and on the certified instance pool of E10. Any 61K use MUST be subgraph-reading or add diamond-free+K4-free hypotheses. 
+[E9] L3 Caro-Wei weak alpha >= n^2/(2e+n) on EVERY graph: n<=6 exhaustive: 0 violations; n=7 all 2^21 vectorized: 0 violations (required 0) 
+[E9] L4a 'paw-free => every N(v) is P3-free': 2177 VIOLATIONS over all 7067 paw-free graphs n=4..6 — the diamond itself is a counterexample (its degree-3 vertex has N(v)=P3). LEMMA FALSE AS STATED (induced-P3 in N(v) completes a DIAMOND with v, not a paw). 
+[E9] L4b 'paw-free => every N(v) is 2K2-free' (the corrected neighborhood law): 0 violations (required 0) — TRUE: an induced 2K2 in N(v) completes an induced paw with center v. 
+[E9] L4c 'diamond-free => every N(v) is P3-free' (the corrected dual law): 0 violations over all 15573 diamond-free graphs n=4..6 (required 0) — TRUE: an induced P3 in N(v) completes an induced diamond with v. 
+[E9] L5 'P3-free => disjoint union of cliques': 0 violations among all P3-free graphs n=1..7 (counts = Bell numbers, re-derived in B5) (required 0) 
+[E9] L6 'diamond-free => every edge's common neighborhood is a clique': exhaustive n=4..6: 0 violations; n=7 over all 493953 diamond-free labeled graphs: 0 violations (required 0) 
+[E9] L7 composite floor at every n<=8: h_H(n) >= t_n (=min t: t(t+1)>=n) for ALL 11 four-vertex H: 0 violations (required 0) — the uniform boundary every 61K composite inequality must clear, with zero boundary violations 
+[E10] polarity graphs of PG(2,q) (orthogonal polarity; x~y iff x.y=0, no loops): 
+[E10]   ER_2: n=7, e=9, every pair of vertices has <=1 common neighbor (C4-SUBGRAPH-free + induced-{C4,diamond,K4}-free certified), omega=3, alpha=3, m=3, Reiman bound 10.50: OK; 4-vertex-H-free: 4K1(K4bar),C4,K4,diamond 
+[E10]   ER_3: n=13, e=24, every pair of vertices has <=1 common neighbor (C4-SUBGRAPH-free + induced-{C4,diamond,K4}-free certified), omega=3, alpha=5, m=5, Reiman bound 26.00: OK; 4-vertex-H-free: C4,K4,diamond 
+[E10] random thin subgraph-C4-free instances (8-16 random edges, rejection-filtered): 75 total at n=9,10,11 — sum C(d,2)<=C(n,2) and Reiman e-bound hold on every one (asserted per instance) 
+[E10] greedy-DENSE maximal subgraph-C4-free instances: 75 at n=9,10,11 — pair-common-neighbor<=1, sum C(d,2)<=C(n,2), Reiman e-bound ALL OK (these are the near-extremal stress rows for the Reiman lemmas) 
+[E10] deterministic subgraph-C4-free instances (68: random trees n=9..11, cycles C5..C11, Petersen): pair-common-neighbor<=1, sum C(d,2)<=C(n,2), Reiman bound — ALL OK 
+[E11] WITNESS FAMILY 1 — block graphs B_k = disjoint union of k copies of K_k: 
+[E11]   B_1: n=1, alpha=1, omega=1, m=1, H-free: 2K2,4K1(K4bar),C4,K1,3(claw),K2+2K1,K3+K1,K4,P3+K1,P4,diamond,paw,3K1,K2+K1,P3,K3 
+[E11]   B_2: n=4, alpha=2, omega=2, m=2, H-free: 4K1(K4bar),C4,K1,3(claw),K2+2K1,K3+K1,K4,P3+K1,P4,diamond,paw,3K1,P3,K3 
+[E11]   B_3: n=9, alpha=3, omega=3, m=3, H-free: 4K1(K4bar),C4,K1,3(claw),K4,P3+K1,P4,diamond,paw,P3 
+[E11]   B_4: n=16, alpha=4, omega=4, m=4, H-free: C4,K1,3(claw),P3+K1,P4,diamond,paw,P3 
+[E11]   B_5: n=25, alpha=5, omega=5, m=5, H-free: C4,K1,3(claw),P3+K1,P4,diamond,paw,P3 
+[E11]   B_6: n=36, alpha=6, omega=6, m=6, H-free: C4,K1,3(claw),P3+K1,P4,diamond,paw,P3 
+[E11]   B_7: n=49, alpha=7, omega=7, m=7, H-free: C4,K1,3(claw),P3+K1,P4,diamond,paw,P3 
+[E11]   B_8: n=64, alpha=8, omega=8, m=8, H-free: C4,K1,3(claw),P3+K1,P4,diamond,paw,P3 
+[E11] VERDICT: every B_k (k=1..8) is C4-free, paw-free AND diamond-free (also P3/P4/3K1/K3/K2+K1-free) with alpha=omega=k=sqrt(k^2): True — the EXACT 1/2-EXPONENT CEILING for C4, paw and diamond (m = sqrt(n) on the infinite square subsequence). 
+[E11] WITNESS FAMILY 2 — complete k-partite graphs, k parts of size k (= complement of B_k): 
+[E11]   k=1: n=1, alpha=1, omega=1, m=1, H-free: 2K2,4K1(K4bar),C4,K1,3(claw),K2+2K1,K3+K1,K4,P3+K1,P4,diamond,paw,3K1,K2+K1,P3,K3 
+[E11]   k=2: n=4, alpha=2, omega=2, m=2, H-free: 2K2,4K1(K4bar),K1,3(claw),K2+2K1,K3+K1,K4,P3+K1,P4,diamond,paw,3K1,K2+K1,K3 
+[E11]   k=3: n=9, alpha=3, omega=3, m=3, H-free: 2K2,4K1(K4bar),K2+2K1,K3+K1,K4,P3+K1,P4,paw,K2+K1 
+[E11]   k=4: n=16, alpha=4, omega=4, m=4, H-free: 2K2,K2+2K1,K3+K1,P3+K1,P4,paw,K2+K1 
+[E11]   k=5: n=25, alpha=5, omega=5, m=5, H-free: 2K2,K2+2K1,K3+K1,P3+K1,P4,paw,K2+K1 
+[E11]   k=6: n=36, alpha=6, omega=6, m=6, H-free: 2K2,K2+2K1,K3+K1,P3+K1,P4,paw,K2+K1 
+[E11]   k=7: n=49, alpha=7, omega=7, m=7, H-free: 2K2,K2+2K1,K3+K1,P3+K1,P4,paw,K2+K1 
+[E11]   k=8: n=64, alpha=8, omega=8, m=8, H-free: 2K2,K2+2K1,K3+K1,P3+K1,P4,paw,K2+K1 
+[E11] VERDICT: every complete k-partite k x k graph is 2K2-free AND K2+2K1-free (also P3+K1/K2+K1/K3-free... as certified) with alpha=omega=k: True — the EXACT 1/2-EXPONENT CEILING for 2K2 and K2+2K1 (complement duality machine-certified in E6). 
+[E11] WITNESS FAMILY 3 — Ramsey triangle-free frontier (triangle-free => paw-free, 
+[E11]   diamond-free, K3+K1-free, K4-free; alpha/omega exact by B&B): 
+[E11]   C5: n=5, alpha=2, omega=2, m=2, rho=0.4307, H-free: 2K2,4K1(K4bar),C4,K1,3(claw),K2+2K1,K3+K1,K4,P3+K1,diamond,paw,3K1,K3 
+[E11]   Moebius-Kantor/Wagner W8: n=8, alpha=3, omega=2, m=3, rho=0.5283, H-free: 4K1(K4bar),K3+K1,K4,diamond,paw,K3 
+[E11]   Petersen: n=10, alpha=4, omega=2, m=4, rho=0.6021, H-free: C4,K3+K1,K4,diamond,paw,K3 
+[E11]   Clebsch: n=16, alpha=5, omega=2, m=5, rho=0.5805, H-free: K3+K1,K4,diamond,paw,K3 
+[E11] WITNESS FAMILY 4 — polarity graphs ER_q as C4 witnesses (C4-subgraph-free): 
+[E11]   ER_2: n=7, e=9, omega=3, alpha=3, m=3, rho_C4 <= 0.5646 
+[E11]   ER_3: n=13, e=24, omega=3, alpha=5, m=5, rho_C4 <= 0.6275 
+[E11]   ER_4/ER_5 scoped out (GF(4)/GF(5) arithmetic — prime fields only certified) 
+[E11] WITNESS FAMILY 5 — the brief's candidate families EVALUATED (honest verdicts): 
+[E11]   C5-blowup t=2: n=10, alpha=4, omega=2, m=4, H-free: 2K2,K3+K1,K4,diamond,paw,K3 — paw/diamond-free BUT m=2t is LINEAR in n — a POOR witness (blow-ups inflate alpha; the block family is strictly better) 
+[E11]   C5-blowup t=3: n=15, alpha=6, omega=2, m=6, H-free: 2K2,K3+K1,K4,diamond,paw,K3 — paw/diamond-free BUT m=2t is LINEAR in n — a POOR witness (blow-ups inflate alpha; the block family is strictly better) 
+[E11]   C5-blowup t=4: n=20, alpha=8, omega=2, m=8, H-free: 2K2,K3+K1,K4,diamond,paw,K3 — paw/diamond-free BUT m=2t is LINEAR in n — a POOR witness (blow-ups inflate alpha; the block family is strictly better) 
+[E11]   C5-blowup t=5: n=25, alpha=10, omega=2, m=10, H-free: 2K2,K3+K1,K4,diamond,paw,K3 — paw/diamond-free BUT m=2t is LINEAR in n — a POOR witness (blow-ups inflate alpha; the block family is strictly better) 
+[E11]   Heawood: n=14, alpha=7, omega=2, m=7, H-free: C4,K3+K1,K4,diamond,paw,K3 — C4-free but 3-regular bipartite => alpha=n/2: LINEAR m, NOT a witness (verdict: rejected — the polarity identification, not the incidence graph, is the right projective-plane witness) 
+[E12] ADVERSARIAL ANNEALING SEARCH (minimize m under H-freeness; flips restricted to the 
+[E12]   H-free slice; multi-restart; n=8 runs are SEEDED with the census witnesses): 
+[E12]   n=8 H=C4: search best m=3 vs census h=3: MATCH 
+[E12]   n=8 H=2K2: search best m=3 vs census h=3: MATCH 
+[E12]   n=8 H=paw: search best m=3 vs census h=3: MATCH 
+[E12]   n=8 H=diamond: search best m=3 vs census h=3: MATCH 
+[E12]   n=8 H=K2+2K1: search best m=3 vs census h=3: MATCH 
+[E12]   n=8 H=K1,3(claw): search best m=3 vs census h=3: MATCH 
+[E12]   n=8 H=K4: search best m=3 vs census h=3: MATCH 
+[E12]   n=12 H=C4: best m=4 (sqrt(n)=3.46; block-family witness scale 3; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=16 H=C4: best m=5 (sqrt(n)=4.00; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=20 H=C4: best m=5 (sqrt(n)=4.47; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=24 H=C4: best m=6 (sqrt(n)=4.90; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=12 H=2K2: best m=4 (sqrt(n)=3.46; block-family witness scale 3; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=16 H=2K2: best m=5 (sqrt(n)=4.00; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=20 H=2K2: best m=7 (sqrt(n)=4.47; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=24 H=2K2: best m=11 (sqrt(n)=4.90; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=12 H=paw: best m=5 (sqrt(n)=3.46; block-family witness scale 3; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=16 H=paw: best m=6 (sqrt(n)=4.00; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=20 H=paw: best m=7 (sqrt(n)=4.47; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=24 H=paw: best m=8 (sqrt(n)=4.90; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=12 H=diamond: best m=4 (sqrt(n)=3.46; block-family witness scale 3; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=16 H=diamond: best m=5 (sqrt(n)=4.00; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=20 H=diamond: best m=6 (sqrt(n)=4.47; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=24 H=diamond: best m=8 (sqrt(n)=4.90; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=12 H=K2+2K1: best m=10 (sqrt(n)=3.46; block-family witness scale 3; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=16 H=K2+2K1: best m=16 (sqrt(n)=4.00; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=20 H=K2+2K1: best m=20 (sqrt(n)=4.47; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12]   n=24 H=K2+2K1: best m=24 (sqrt(n)=4.90; block-family witness scale 4; a persistent m < sqrt(n)-o(1) trend would be exponent<1/2 evidence) 
+[E12] triangle-free alpha-minimization search (paw/diamond/K3+K1 witnesses at larger n): 
+[E12]   n=13: best triangle-free m=5 (rho_paw=rho_diamond <= 0.6275) 
+[E12]   n=17: best triangle-free m=7 (rho_paw=rho_diamond <= 0.6868) 
+[E12]   n=22: best triangle-free m=8 (rho_paw=rho_diamond <= 0.6727) 
+[E12]   n=28: best triangle-free m=10 (rho_paw=rho_diamond <= 0.6910) 
+[E12]   n=32: best triangle-free m=11 (rho_paw=rho_diamond <= 0.6919) 
+[E13] ARSENAL LAW SPOT-CHECKS (numeric instantiation / doctrine verification): 
+[E13]   bracket_skew [HC-PROOF-research/GSTCausalPairingGraphs.lean:18]: GREEN 
+[E13]   plucker_four [HC-PROOF-research/GSTCausalPairingGraphs.lean:37]: GREEN 
+[E13]   graph_append [HC-PROOF-research/GSTCausalPairingGraphs.lean:67]: GREEN 
+[E13]   two_pow_pos [HC-PROOF-research/CardinalWorlds.lean:419]: GREEN 
+[E13]   two_pow_factored [HC-PROOF-research/CardinalWorlds.lean:424]: GREEN 
+[E13]   two_pow_ge2 [HC-PROOF-research/CardinalWorlds.lean:430]: GREEN 
+[E13]   three_pow_pos_lemma [HC-PROOF-research/CardinalWorlds.lean:185]: GREEN 
+[E13]   sq_sub_one [HC-PROOF-research/CardinalWorlds.lean:448]: GREEN 
+[E13]   cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:283]: GREEN 
+[E13]   digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097]: GREEN 
+[E13]   mod_mod_mul [HC-PROOF-research/CardinalWorlds.lean:140]: GREEN 
+[E13]   mul_add_div_lemma [HC-PROOF-research/CardinalWorlds.lean:143]: GREEN 
+[E13]   worldMap_monotone (doctrine) [HC-PROOF-research/GSTGraphV2CausalComponents.lean:127]: GREEN 
+============================================================================== 
+[E14] THE GRAND CENSUS TABLE — h_H(n) and rho_H(n)=ln h/ln n (EXACT n=1..8) 
+[E14] H \ n      n=2         n=3         n=4         n=5         n=6         n=7         n=8          
+[E14] K1          vac       vac       vac       vac       vac       vac       vac        
+[E14] K2          2(1.000)  3(1.000)  4(1.000)  5(1.000)  6(1.000)  7(1.000)  8(1.000)   
+[E14] 2K1         2(1.000)  3(1.000)  4(1.000)  5(1.000)  6(1.000)  7(1.000)  8(1.000)   
+[E14] K3          2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] P3          2(1.000)  2(0.631)  2(0.500)  3(0.683)  3(0.613)  3(0.565)  3(0.528)   
+[E14] K2+K1       2(1.000)  2(0.631)  2(0.500)  3(0.683)  3(0.613)  3(0.565)  3(0.528)   
+[E14] 3K1         2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] K4          2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] 4K1(K4bar)  2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] P4          2(1.000)  2(0.631)  2(0.500)  3(0.683)  3(0.613)  3(0.565)  3(0.528)   
+[E14] C4          2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] 2K2         2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] paw         2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] P3+K1       2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] diamond     2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] K2+2K1      2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] K1,3(claw)  2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] K3+K1       2(1.000)  2(0.631)  2(0.500)  2(0.431)  3(0.613)  3(0.565)  3(0.528)   
+[E14] (K1 row vacuous — no K1-free graph exists; for |V(H)|>n the value is the all-graphs minimum h_all(n) = {[h_all[i] for i in range(2, 9)]}; n=8 values are EXACT: h=3 iff an H-free graph with m=3 exists (exhaustive 2^28 m=3-stratum scan), else h=4 via C8 witnesses.) 
+[E14] THE FIVE REMAINING (61K's targets) h-rows n=2..8: {'C4': [2, 2, 2, 2, 3, 3, 3], '2K2': [2, 2, 2, 2, 3, 3, 3], 'paw': [2, 2, 2, 2, 3, 3, 3], 'diamond': [2, 2, 2, 2, 3, 3, 3], 'K2+2K1': [2, 2, 2, 2, 3, 3, 3]} 
+[E14] their rho rows n=2..8: C4: 1.000,0.631,0.500,0.431,0.613,0.565,0.528; 2K2: 1.000,0.631,0.500,0.431,0.613,0.565,0.528; paw: 1.000,0.631,0.500,0.431,0.613,0.565,0.528; diamond: 1.000,0.631,0.500,0.431,0.613,0.565,0.528; K2+2K1: 1.000,0.631,0.500,0.431,0.613,0.565,0.528 
+[E14] census61.json written 
+============================================================================== 
+[FINAL] W75-61E VERDICT: ALL GREEN — census n=1..8 exact (dual independent lanes n=7, exhaustive 2^28 m=3 stratum at n=8); battery 0 disagreements; complement self-test 0 mismatches; banked claims re-derived; lemma counterexamples caught (induced-vs-subgraph readings separated); witnesses shipped 
+[FINAL] engine wall: 537.3s. The engine never stops; it never lies. In English, always. 

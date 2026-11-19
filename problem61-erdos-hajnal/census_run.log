@@ -1,0 +1,32 @@
+============================================================================== 
+[E0] W75-61E GRAND CENSUS ENGINE — start (t=0.0s) 
+[E0] 4-vertex census from first principles: 64 labeled graphs -> 11 isomorphism classes 
+[E0]   (brute-permutation canonical form; class sizes {'2K2': 3, '4K1(K4bar)': 1, 'C4': 3, 'K1,3(claw)': 4, 'K2+2K1': 6, 'K3+K1': 4, 'K4': 1, 'P3+K1': 12, 'P4': 12, 'diamond': 6, 'paw': 12}) 
+[E0] the 11 classes: 2K2, 4K1(K4bar), C4, K1,3(claw), K2+2K1, K3+K1, K4, P3+K1, P4, diamond, paw 
+[E0] brief's list {K4,K4bar,P4,C4,2K2,paw,P3+K1,diamond,K2+2K1,K1,3,K3+K1} == our 11: True 
+[E0] complement-pair structure machine-verified for all 18 H (K4<->4K1, C4<->2K2, paw<->P3+K1, diamond<->K2+2K1, claw<->K3+K1, P4 self-complementary, ...): True 
+[E1] pure-Python full census n=1: 1 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=2: 2 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=3: 8 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=4: 64 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=5: 1024 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=6: 32768 labeled graphs (wall 1.0s) 
+[E1] pure-Python full census n=7: 2097152 labeled graphs (wall 109.7s) — the 61E independent lane (alpha B&B / complement-alpha / all-subset scan) 
+[E3] numpy vectorized full census n=7: all 2^21 graphs (wall 1.8s) — independent lane (subset-existence alpha/omega, all-subset-scan containment) 
+[E3] n=7 FULL-LANE CROSS-CHECK pure-Python vs numpy: h_H(7) agreement for all 18 H: True 
+[E4] h_all(n) = min over ALL n-vertex graphs of max(alpha,omega), n=1..7: [1, 2, 2, 2, 2, 3, 3] — n>=6 value 3 certifies R(3,3)=6 EXACTLY (every 6-vertex graph has alpha>=3 or omega>=3; C5 shows R(3,3)>5) 
+[E4] census n=1..7 assembled (both independent lanes agree everywhere) 
+[E5] n=8 EXHAUSTIVE chunked scan: all 2^28 graphs in 32 chunks (wall 112.4s); m=3 stratum (alpha<=3 AND omega<=3) size = 55881692 labeled graphs. Universal floor m>=3 at n=8 is census-certified (h_all(6)=3 + induced-subgraph monotonicity), so h_H(8)=3 iff an H-free m=3 graph exists; else h_H(8)>=4. 
+[E5] n=8 H-free m=3 counts (exhaustive over the m=3 stratum): K2:0, 2K1:0, K3:17640, P3:280, K2+K1:280, 3K1:17640, K4:55881692, 4K1(K4bar):55881692, P4:10640, C4:3234136, 2K2:3234136, paw:20132, P3+K1:20132, diamond:2657032, K2+2K1:2657032, K1,3(claw):1645864, K3+K1:1645864 
+[E5] EXACT h_H(8) row: K1=None  K2=8  2K1=8  K3=3  P3=3  K2+K1=3  3K1=3  K4=3  4K1(K4bar)=3  P4=3  C4=3  2K2=3  paw=3  P3+K1=3  diamond=3  K2+2K1=3  K1,3(claw)=3  K3+K1=3 
+[E6] COMPLEMENT SELF-TEST: h_H(n) == h_Hbar(n) (hence rho_H(n) == rho_Hbar(n)) for all 18 H x n=2..8: 0 MISMATCHES (required 0) 
+[B1] alpha cross-check (bitmask B&B) vs (numpy subset-existence): 3000 random n=7 graphs + all 18 h-witnesses: 0 disagreements (required 0) 
+[B2] omega cross-check (complement-alpha) vs (DIRECT clique B&B): all 33866 graphs n=2..6 + 3000 random n=7: 0 disagreements (required 0) 
+[B3] induced-containment cross-check (all-subset scan) vs (backtracking matcher): every graph n=3..6 (33864 graphs x 15 H) + 3000 random n=7/n=8 x 15 H: 0 disagreements (required 0) 
+[B4] h_H nondecreasing in n (deletion transport never reverses; all 18 H, n=2..8): 0 violations (required 0) 
+[B4] inheritance law on the census: H induced in H' => h_H(n) <= h_H'(n) at every n<=8 (all certified induced-inclusion pairs among the 18 H): 146 violations (required 0) 
+Traceback (most recent call last):
+  File "/home/z/waves/w75-61e/problem61-erdos-hajnal/engine61census.py", line 657, in <module>
+    assert not order_bad
+           ^^^^^^^^^^^^^
+AssertionError
