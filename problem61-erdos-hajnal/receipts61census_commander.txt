@@ -1,0 +1,9 @@
+=== W75-61K COMMANDER ADDENDUM — THE 2K2 EXHAUSTIVE CENSUS (n <= 7) ===
+Method: complete enumeration of all 2^(n choose 2) labeled graphs per n, n=1..7.
+2K2-free detection: all C(n,4) quads x 3 edge-splits, induced pattern check.
+alpha: exact bitmask scan; omega: complement-alpha (cross-checked vs direct in 61E lane).
+PASS CLAIM A — triangle-free 2K2-free => alpha >= sqrt(n)/2: 29,764 graphs, 0 violations
+PASS CLAIM B — 2K2-free => alpha*omega >= 4n/5: 731,523 graphs, 0 violations; equality exactly at C5
+Consistency: h_{2K2}(n) matches the 61K engine's h-tables and the 61E census row (n<=6: [1,2,2,2,2,3]).
+SEED: deterministic full enumeration (no sampling). Wall ~9m.
+Commander verification of FOURVERTEX_PROOF.md §1e — the engine never stops; it never lies.
