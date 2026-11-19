@@ -1,0 +1,24 @@
+W75-107E ORDER-TYPE ENGINE RECEIPTS — generated 2026-11-19 19:00:10
+Exact integer/Fraction arithmetic only in every verdict path.
+==============================================================================
+[     0.0s] kernels compiled: ['cupcap', 'gridcensus', 'noconvexk', 'sweepk']
+[     2.2s] MIRROR-PROBE: probes=[{'m': 6, 'n': 5, 'target': 3, 'mirror0': 3, 'mirror1': 3}, {'m': 7, 'n': 6, 'target': 16, 'mirror0': 20, 'mirror1': 16}, {'m': 7, 'n': 7, 'target': 135, 'mirror0': 202, 'mirror1': 114}] decision=mirror-1 (mirror-IDENTIFIED: mirror pairs counted once)
+[     2.2s] ======================================================================
+[     2.2s] PART OT — ORDER-TYPE CENSUS (grid covering + stabilization + union)
+[     2.2s] convention: mirror-IDENTIFIED
+[     2.2s] grid m=3 n=4: GP-subsets=78 distinct-keys=8 (sat=0) ORDER TYPES=2 (kernel 2, unresolved 0) reps=2 [0.0s]
+[     2.2s] grid m=4 n=4: GP-subsets=1278 distinct-keys=8 (sat=0) ORDER TYPES=2 (kernel 2, unresolved 0) reps=2 [0.0s]
+[     2.2s] grid m=5 n=4: GP-subsets=9498 distinct-keys=8 (sat=0) ORDER TYPES=2 (kernel 2, unresolved 0) reps=2 [0.0s]
+[     2.2s] grid m=6 n=4: GP-subsets=47331 distinct-keys=8 (sat=0) ORDER TYPES=2 (kernel 2, unresolved 0) reps=2 [0.0s]
+[     2.2s] grid m=7 n=4: GP-subsets=175952 distinct-keys=8 (sat=0) ORDER TYPES=2 (kernel 2, unresolved 0) reps=2 [0.0s]
+[     2.3s] grid m=4 n=5: GP-subsets=1668 distinct-keys=50 (sat=0) ORDER TYPES=3 (kernel 3, unresolved 0) reps=3 [0.0s]
+[     2.3s] grid m=5 n=5: GP-subsets=25052 distinct-keys=62 (sat=0) ORDER TYPES=3 (kernel 3, unresolved 0) reps=3 [0.0s]
+[     2.3s] grid m=6 n=5: GP-subsets=215448 distinct-keys=62 (sat=0) ORDER TYPES=3 (kernel 3, unresolved 0) reps=3 [0.0s]
+[     2.3s] grid m=7 n=5: GP-subsets=1189868 distinct-keys=62 (sat=0) ORDER TYPES=3 (kernel 3, unresolved 0) reps=3 [0.0s]
+[     2.3s] grid m=5 n=6: GP-subsets=36698 distinct-keys=512 (sat=0) ORDER TYPES=13 (kernel 13, unresolved 0) reps=13 [0.0s]
+[     2.4s] grid m=6 n=6: GP-subsets=620210 distinct-keys=792 (sat=0) ORDER TYPES=15 (kernel 15, unresolved 0) reps=15 [0.0s]
+[     2.5s] grid m=7 n=6: GP-subsets=5367308 distinct-keys=874 (sat=0) ORDER TYPES=16 (kernel 16, unresolved 0) reps=16 [0.1s]
+[     3.1s] grid m=8 n=6: GP-subsets=34678364 distinct-keys=900 (sat=0) ORDER TYPES=16 (kernel 16, unresolved 0) reps=16 [0.6s]
+[     3.9s] grid m=6 n=7: GP-subsets=1073076 distinct-keys=9026 (sat=0) ORDER TYPES=85 (kernel 85, unresolved 0) reps=85 [0.8s]
+[     5.6s] grid m=7 n=7: GP-subsets=15657764 distinct-keys=14964 (sat=0) ORDER TYPES=114 (kernel 114, unresolved 0) reps=114 [1.6s]
+[    11.4s] grid m=8 n=7: GP-subsets=159413700 distinct-keys=20142 (sat=0) ORDER TYPES=128 (kernel 128, unresolved 0) reps=128 [5.9s]
