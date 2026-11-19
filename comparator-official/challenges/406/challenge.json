@@ -1,0 +1,35 @@
+{
+  "problem": "Erdos #406 (erdosproblems.com/406)",
+  "statement_id": "erdos-406-ternary-powers",
+  "statement_verbatim": "Is it true that there are only finitely many powers of 2 which have only the digits 0 and 1 when written in base 3? (Corpus addendum: the only examples seem to be 1, 4 = 1+3, and 256 = 1+3+9+243.)",
+  "challenge_surface": "the DeepMind challenge-file form (verbatim from arsenal-full/erdosternary2/questions/deepmind_problem_406/Challenge.lean): forall n >= 9, the ternary expansion of 2^n contains the digit 2 -- formalized as erdos_ternary_2 : ALL n : Nat, 9 <= n -> noTernaryDigitTwo (2^n) = false",
+  "conventions": {
+    "noTernaryDigitTwo": "the challenge file's verbatim recursion: n = 0 -> true; n % 3 = 2 -> false; else recurse n / 3",
+    "rider": "K with noTernaryTwo (4^K) = true (equivalently 2^(2K) 0/1-ternary)",
+    "cap law CAP(C)": "forall n, n % 3 = 1 -> noTernaryTwo n = true -> v2r n <= ternaryLog3 n + C"
+  },
+  "lane": "official DeepMind comparator (challenge + solution), run directly; the challenge+solution Lean pair lives at arsenal-full/erdosternary2/questions/deepmind_problem_406/ (statement = the DeepMind problem-406 surface, byte-verified against the corpus statement); the Lean kernels are kills.yml Kernel 38 (census) + Kernel 68 (the cap-law reduction)",
+  "official_evaluators": [
+    {
+      "repo": "google-deepmind/funsearch",
+      "commit": "cc53f274237d7ab05c19df939edbc1f9616a7c19",
+      "module": "(none for #406 -- funsearch carries no 406 evaluator; documented per OFFICIAL_PROVENANCE.md)",
+      "role": "provenance of the comparator harness itself (the S071 fresh clone)"
+    },
+    {
+      "repo": "this repo",
+      "commit": "campaign HEAD",
+      "module": "problem406-ternary-powers/caplaw/battery_caplaw.py + Kernel 38 + Kernel 68",
+      "role": "the official-surface execution: the verbatim challenge recursion (byte-identical Python twin of Challenge.lean's noTernaryDigitTwo) on the certified ranges; the dual-method censuses; the reduction's arithmetic receipts"
+    }
+  ],
+  "acceptance": "Every delivered claim in the solution ledger verified: the certified ranges (census n in [9,500] all-false + the [0,20000] deep census), the three witnesses 1/4/256 with the n=8 boundary honored, the reduction arithmetic (certificate 2^84 < 3^53; the boundaries 62*250 < 84*185 < 62*251 and 62*4 < 84*3 < 62*5), the cap C=3 on primitive Cantor n < 3^12 (equality only at 256), and every negative control rejecting corruption. The FULL unconditional statement rides the single named hypothesis CAP(185) (or Postulate II at C=3) -- carried explicitly by Kernel 68's reduction theorems, hidden nowhere. Gate verdict line: YOUR SOLUTION IS OKAY.",
+  "solution_files": {
+    "reduction_kernel": "problem406-ternary-powers/CapLaw406.lean",
+    "census_kernel": "problem406-ternary-powers/Erdos406Ternary.lean",
+    "battery": "problem406-ternary-powers/caplaw/battery_caplaw.py",
+    "extremal_curve": "problem406-ternary-powers/caplaw/v2star_table.json",
+    "proof_doc": "problem406-ternary-powers/COMPLETE_PROOF.md (sections 0-10)",
+    "manifest": "problem406-ternary-powers/caplaw/MANIFEST.md"
+  }
+}

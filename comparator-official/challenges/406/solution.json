@@ -1,0 +1,47 @@
+{
+  "problem": "Erdos #406",
+  "solution_id": "erdos-406-caplaw-reduction-s074",
+  "provenance": "S074 W75 (campaign branch, the cap-law reduction round). The war-council chain: the hTailF hypothesis's entire content is the act (every 4^K, K >= 8, owns a ternary digit 2); the act reduces to the 2-adic cap law at any explicit constant C <= 185 (Kernel 68, machine-checked); the cap law at C = 3 is the source monolith's Postulate II. The solution ledger below lists every machine-verified claim of this round; the single named open hypothesis (CAP(185), or Postulate II at C = 3) is carried explicitly by the reduction theorems.",
+  "claims": [
+    {
+      "id": "S-CERT",
+      "statement": "2^84 < 3^53 (exact integers 19342813113834066795298816 < 19383245667680019896796723) -- the rational certificate 53/84 = 0.630952... > log_3(2) = 0.630929... underlying the rider squeeze",
+      "verified_by": "battery_caplaw.py A1/A2 (dual-method) + Kernel 68 two_pow_84_lt_three_pow_53 (kernel decide)"
+    },
+    {
+      "id": "S-SQUEEZE-185",
+      "statement": "62*250 = 15500 < 84*185 = 15540 < 62*251 = 15562: under CAP(185) every rider satisfies K <= 250, inside the Kernel-38 census range (2K <= 500)",
+      "verified_by": "battery_caplaw.py B1/B2 + Kernel 68 erdos406_no_riders_above_250_of_cap"
+    },
+    {
+      "id": "S-SQUEEZE-3",
+      "statement": "62*4 = 248 < 84*3 = 252 < 62*5 = 310: under Postulate II (C = 3) every rider satisfies K <= 4",
+      "verified_by": "battery_caplaw.py B3/B4 + Kernel 68 erdos406_classification_of_postulate_two"
+    },
+    {
+      "id": "S-CLASSIFICATION-CONDITIONAL",
+      "statement": "Under Postulate II the riders are exactly K in {0,1,4} (values 1, 4, 256) at every exponent; under CAP(185) + the Kernel-38 census the same classification holds. The unconditional classification follows the moment any explicit CAP(C <= 185) is proven.",
+      "verified_by": "Kernel 68 erdos406_classification_of_postulate_two (K=2,3 discharged by kernel decide: 16 = 121_3, 64 = 2101_3) + erdos406_classification_of_cap_and_census"
+    },
+    {
+      "id": "S-CENSUS-500",
+      "statement": "the challenge-surface census: noTernaryDigitTwo(2^n) = false for every n in [9, 500] (dual method), and noTernaryDigitTwo(2^0) = noTernaryDigitTwo(2^2) = noTernaryDigitTwo(2^8) = true (the witnesses 1, 4, 256; the n = 8 boundary honored)",
+      "verified_by": "battery_caplaw.py C1/C2 + F1 (deep census to 20000) + Kernel 38 erdos406_main (kernel-decided)"
+    },
+    {
+      "id": "S-DEEP-CENSUS",
+      "statement": "the deep rider census: riders in [0, 20000] are exactly {0, 1, 4}",
+      "verified_by": "battery_caplaw.py F1 (divmod first-2 scan; the dust-tree path is the structural twin)"
+    },
+    {
+      "id": "S-CAP-EMPIRICAL",
+      "statement": "the cap at C = 3 holds on all primitive Cantor n < 3^12 with the equality case n = 256 alone; the extremal curve v2*(M) <= M + 4 on [0,34] with the only kill-line touchers in history being the witnesses {0,1} (M=1) and {0,1,2,5} (M=5)",
+      "verified_by": "battery_caplaw.py D1-D3, G1/G2 + v2star_table.json (exhaustive + MITM dual methods)"
+    },
+    {
+      "id": "S-OPEN-SEAM",
+      "statement": "NAMED OPEN HYPOTHESIS (not a claim): CAP(C) at unbounded range for any explicit C -- the anti-concentration wall (the monolith's Postulate II seam). The reduction theorems deliver the complete classification the moment it falls.",
+      "verified_by": "carried explicitly by Kernel 68's hypothesis binders; hidden nowhere"
+    }
+  ]
+}

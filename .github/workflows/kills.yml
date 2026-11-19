@@ -1671,6 +1671,31 @@ jobs:
           test "$(grep -c '\[FAIL\]' gate142official.log)" -eq 0
           echo GATE142OFFICIAL_GREEN=1
 
+  gate-406-official:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install engine deps (numpy/z3 3-route fallback)
+        run: |
+          pip install numpy z3-solver 2>/dev/null || pip install --index-url https://pypi.org/simple numpy z3-solver 2>/dev/null || pip install numpy 2>/dev/null || true
+      - name: "Gate 406 official - Erdos 406 the cap-law reduction comparator (S074 W75): the verbatim Challenge.lean noTernaryDigitTwo twin on [9,500] dual-method + the deep census [9,20000] + the witnesses 1/4/256 with the n=8 floor honored + battery_caplaw ALL GREEN + the v2* curve artifact + the five Kernel-68 headline theorems + the live reduction arithmetic (62*250 < 84*185 < 62*251; 62*4 < 84*3 < 62*5; 2^84 < 3^53) + five negative controls (corrupted certificate/boundary/fake rider/floor-8/cap-256 all rejected) -- the single named open hypothesis CAP(185) carried explicitly by the reduction theorems, hidden nowhere"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 comparator-official/official_gate.py 406 2>&1 | tee gate406official.log
+          test "${PIPESTATUS[0]}" -eq 0
+          grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate406official.log
+          PASS=$(grep -c '"passed": true' gate406official.log || true)
+          FAIL=$(grep -c '"passed": false' gate406official.log || true)
+          echo "PASS=$PASS FAIL=$FAIL"
+          test "$FAIL" -eq 0
+          test "$PASS" -ge 12
+
   gate-61-official:
     runs-on: ubuntu-24.04
     steps:

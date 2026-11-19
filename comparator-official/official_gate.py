@@ -21,7 +21,7 @@ import time
 import datetime
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PROBLEM_IDS = ("142", "61", "107")
+PROBLEM_IDS = ("142", "61", "107", "406")
 VERDICT_OK = "YOUR SOLUTION IS OKAY"
 VERDICT_BAD = "YOUR SOLUTION IS REJECTED"
 
