@@ -507,3 +507,100 @@ budget and the $\ge 4$-digit floor (§5); the checker and the
 distinct-powers-of-3 reading are one predicate (§3); the arsenal is
 bridged at the witnesses (§8); the all-$k$ finiteness core stands open,
 named, and undressed (§7).
+
+---
+
+## §10. THE CAP-LAW REDUCTION (S074, W75 — the new front, Kernel 68)
+
+**Deliverable S074-W75.** BOSS's order: crack the `hTailF` hypothesis
+completely. The war council (one external strategist agent + two internal
+dispositions under MATHS §6 Mode B) mapped every equivalent surface of the
+remaining content — `four_power_happy_climb`, `the_act`, the row/tower
+primitives, the dust's natural riders, the third-wave gate — and this
+section adds a NEW, strictly weaker sufficient law that had never been in
+the campaign registry:
+
+**THE 2-ADIC CAP LAW.** For a constant $C$:
+
+$$\mathrm{CAP}(C):\quad \forall n \equiv 1 \pmod 3 \text{ with } 0/1
+\text{ ternary digits},\qquad v_2(n) \;\le\; \lfloor \log_3 n \rfloor + C.$$
+
+### Theorem F (the rider squeeze — `cap_squeeze`, FULL PROOF, Kernel 68)
+
+For every $K \ge 1$, $M$, $C$: if $3^M \le 2^{2K}$ and $2K \le M + C$,
+then $62K < 84C$.
+
+*Proof.* The kernel-decided certificate $2^{84} < 3^{53}$ (both sides
+exact; $53/84 = 0.630952\ldots > \log_3 2 = 0.630929\ldots$). From the
+hypotheses (pure omega): $106K \le 84M$. Then the power chain
+$$3^{106K} \le 3^{84M} = (3^M)^{84} \le (2^{2K})^{84} = (2^{84})^{2K}
+< (3^{53})^{2K} = 3^{106K},$$
+an absurdity; the first, third, and fourth links are the monotonicity
+laws (self-contained §2 toolkit of the kernel), the reassociations are
+`Nat.pow_mul` + `ring`, the single strict link is the certificate lifted
+by strict base monotonicity. The constant $84/62 = 1.35483$ loses less
+than $0.05\%$ against the true squeeze constant $2\log_3(3/2)^{-1} =
+1.35476\ldots$ ∎
+
+### Theorem G (the rider bound — `cap_rider_bound`, FULL PROOF, Kernel 68)
+
+Under CAP($C$), every rider exponent $K \ge 1$ (with $4^K$ a $0/1$-ternary
+number) satisfies $62K < 84C$, i.e. $K \le 1.355 \cdot C$.
+
+*Proof.* A rider's value is $4^K = 2^{2K}$, so $v_2 = 2K$ exactly
+(`v2r_two_pow`); it is primitive ($4^K \equiv 1 \bmod 3$,
+`pow4_mod_one`); its leading ternary position $M = \mathrm{ternaryLog3}
+(4^K)$ obeys $3^M \le 4^K$ (`three_pow_ternaryLog3_le`). The cap applies
+verbatim and Theorem F fires. ∎
+
+### Theorem H (the Postulate-II instantiation — `erdos406_classification_of_postulate_two`)
+
+At $C = 3$ — the source monolith's own POSTULATE II constant
+(`ErdosTernary2.lean:858`, there certified only below $3^9$) — the
+classification is complete at every exponent: riders exactly
+$K \in \{0, 1, 4\}$ (the powers $1$, $4$, $256$). The squeeze gives
+$K \le 4$; $K = 2, 3$ die by kernel `decide` ($16 = 121_3$, $64 =
+2101_3$).
+
+### Theorem I (the retargeting theorem — `erdos406_no_riders_above_250_of_cap`)
+
+At the weak constant $C = 185$: every rider satisfies $K \le 250$
+($62 \cdot 250 = 15500 < 15540 = 84 \cdot 185 < 15562 = 62 \cdot 251$)
+— exactly inside the Kernel-38 census range. **POSTULATE II AT $C = 3$
+IS SIXTY TIMES STRONGER THAN WHAT THE FULL KILL NEEDS.** Any provable
+explicit cap constant $C \le 185$ — even $C = 100$, even $C = 184$ —
+closes Erdős #406 outright through Theorem J.
+
+### Theorem J (the census composition — `erdos406_classification_of_cap_and_census`)
+
+CAP(185) + the Kernel-38 census ⟹ the complete classification, every
+exponent, no bound — zero remaining hypotheses beyond the cap itself.
+
+### The empirical backbone (engine receipts, §9 discipline)
+
+- The exact extremal curve $v_2^*(M)$ through $M = 34$ (exhaustive +
+  MITM, dual-method): $v_2^*(M) \le M + 4$ throughout; the only
+  line-touchers at $1.5849M$ in all computed history are the actual
+  witnesses $\{0,1\}$ ($M{=}1$) and $\{0,1,2,5\}$ ($M{=}5$) — the
+  $M{=}14$ extremal is $271 + 3^9 \cdot 283 = 2^{16} \cdot 85$ (the
+  MITM-block construction, hand-verified).
+- The cap at $C = 3$ certified on all primitive Cantor $n < 3^{21}$
+  (independent census; the monolith had $3^9$); the equality case below
+  $3^{12}$ is $n = 256$ alone.
+- The dust-tree census: exact doubling per level to level 12; riders in
+  $[0, 200000]$ = $\{0,1,4\}$; max death depth 35 (K = 124984).
+
+### The honest boundary (unchanged law: no dressing)
+
+The universal cap law CAP($C$) is NOT proven here for any $C$ — that is
+the remaining open seam, the anti-concentration wall (the rider sits
+exactly at the trivial magnitude bound, and beating it by the growing
+margin $\varepsilon(M) \to \infty$ is the same Stewart-class difficulty
+the registry has always named). What IS delivered: the reduction,
+machine-checked at every link, with the target retargeted from the
+monolith's stalled $C = 3$ to the sixty-times-weaker $C \le 185$. The
+provenance audit (war council, this session) also established that the
+final unconditional assembly must bypass `MonolithBoundary.lean`'s
+unverified terminal identity in favor of the direct port (the act + the
+green odd half + the decide instances) — the route
+`erdos406_classification_of_cap_and_census` already follows.

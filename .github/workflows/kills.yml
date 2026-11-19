@@ -954,6 +954,24 @@ jobs:
           grep -F "(1, 4, 256, 256)" kernel38.log
           python3 problem406-ternary-powers/battery406.py
           echo ERDOS406_KERNEL_GREEN=1
+      - name: "Kernel 68 - Erdos 406 THE CAP-LAW REDUCTION (S074 W75, the cap-law front, BOSS order 'crack the hTailF hypothesis'): THE RIDER SQUEEZE (the rational certificate 2^84 < 3^53 kernel-decided, the power-chain absurdity 3^106K <= ... < 3^106K) + THE RIDER BOUND (cap law CAP(C): every primitive-Cantor rider satisfies 62K < 84C, i.e. K <= 1.355C) + THE POSTULATE-II INSTANTIATION (C=3, the source monolith's own stalled constant => the COMPLETE classification: riders exactly {0,1,4} = {1,4,256} at EVERY exponent, K=2,3 discharged by kernel decide) + THE C=185 WEAK-CAP INSTANTIATION (every rider K <= 250, inside the Kernel-38 census range) + THE CENSUS COMPOSITION (CAP(185) + the Kernel-38 census => the full classification, zero remaining hypotheses beyond the cap) — the retargeting theorem: any provable explicit cap constant C <= 185 closes Erdos #406 outright"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel68.log
+          lake env lean problem406-ternary-powers/CapLaw406.lean 2>&1 | tee -a kernel68.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel68.log
+          grep -E "cap_squeeze' (does not depend on any axioms|depends on axioms)" kernel68.log
+          grep -E "cap_rider_bound' (does not depend on any axioms|depends on axioms)" kernel68.log
+          grep -E "erdos406_classification_of_postulate_two' (does not depend on any axioms|depends on axioms)" kernel68.log
+          grep -E "erdos406_no_riders_above_250_of_cap' (does not depend on any axioms|depends on axioms)" kernel68.log
+          grep -E "erdos406_classification_of_cap_and_census' (does not depend on any axioms|depends on axioms)" kernel68.log
+          python3 problem406-ternary-powers/caplaw/battery_caplaw.py
+          echo ERDOS406_CAPLAW_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash
