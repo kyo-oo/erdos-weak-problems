@@ -1,5 +1,5 @@
 RECEIPTS — engine142table_v3.py (W77-142E) — COMPONENT 1 (r_3 N=49..64) + COMPONENT 2 (r_4/r_5 N=21..28)
-seed 20261121 ; deterministic ; z3 5.4.1 ; gcc 14.2.0 ; 2026-11-20T22:47:48 ; pysat 1.9.dev24 (Minisat22 + Cadical153)
+seed 20261121 ; deterministic ; z3 5.4.1 ; gcc 14.2.0 ; 2026-11-20T22:55:58 ; pysat 1.9.dev24 (Minisat22 + Cadical153)
 (chunked run — checkpoint state at this writing; the final run appends the closing totals)
 
 PROTOCOL per cell (the W76 discipline verbatim): [A] Z3 bisection —
@@ -93,7 +93,14 @@ PASS CELL N=60: r_3(60) = 19  [CERTIFIED-BOTH]
   pysat: sat@v minisat22=SAT(0.314s) cadical153=SAT(0.667s) ; unsat@v+1 minisat22=UNSAT(1.719s) cadical153=UNSAT(1.253s) ; witnesses_apfree=True
   oeis(60) = 19 match=True ; formula_sha 9374401c91d0a06d...
   witness(0-based) = [0, 1, 4, 5, 11, 13, 14, 16, 20, 30, 37, 38, 41, 42, 48, 50, 51, 53, 57]
-PUSH k=3 RESULT: 12 cells CERTIFIED-BOTH, frontier N=60 ; stop reason: completed range
+PASS CELL N=61: r_3(61) = 19  [CERTIFIED-BOTH]
+  z3: sat@19 in 0.845s ; unsat@20 x2 in 15.513s/133.06s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=19 nodes=68221778 in 0.5216s (forced0) ; no-force: 19 nodes=219257831 in 1.603s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  pysat: sat@v minisat22=SAT(0.886s) cadical153=SAT(0.111s) ; unsat@v+1 minisat22=UNSAT(2.841s) cadical153=UNSAT(1.899s) ; witnesses_apfree=True
+  oeis(61) = 19 match=True ; formula_sha 9d825b33cd6aefe8...
+  witness(0-based) = [0, 5, 6, 8, 13, 17, 19, 22, 23, 35, 37, 42, 43, 45, 50, 54, 56, 59, 60]
+PUSH k=3 RESULT: 13 cells CERTIFIED-BOTH, frontier N=61 ; stop reason: completed range
 
 PASS CHECKER-SELF-TEST — 15/15 (planted 3/4/5-APs flagged; k-specificity controls: a 4-AP-free set with a 3-AP passes k=4; a 5-AP-free set with a 4-AP passes k=5)
 
@@ -111,5 +118,5 @@ ARSENAL LAW SPOT-CHECKS (numerically verified this run; read-before-cite):
   #BY GST LAW sum_le_sum_of_forall [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:117] — PASS
   #BY GST LAW tower_cauchy_finite_form [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810] — PASS
 
-TOTAL: 12 cells CERTIFIED-BOTH across the three pushes ; engine wall 403.2s
+TOTAL: 13 cells CERTIFIED-BOTH across the three pushes ; engine wall 231.0s
 ENGINE142TABLE_V3_GREEN

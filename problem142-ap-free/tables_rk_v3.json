@@ -3,7 +3,7 @@
   "engine": "engine142table_v3.py + bnb142v3.c + checker142libv3.py + pysat (Minisat22/Cadical153 third-solver layer)",
   "wave": "W77-142E",
   "seed": 20261121,
-  "generated": "2026-11-20T22:47:48",
+  "generated": "2026-11-20T22:55:58",
   "z3_version": "5.4.1",
   "protocol": "per cell: Z3 bisection (SAT@v + genuine UNSAT@v+1 x2 seeds) AND fresh C branch-and-bound (forced-0 + no-force, consecutive-prefix exclusion) AND third-checker re-validation (pair-midpoint k=3 / pair-hypothesis k=4,5) AND OEIS cross-check AND pysat pair (Minisat22 + Cadical153, seqcounter cardinality CNF) on both sides of the frontier",
   "convention": "0-based vertices [0,N-1]; r_k(N) = max k-AP-free subset size; witness_1based = +1 shift into [1,N]",
@@ -3991,6 +3991,224 @@
     52,
     54,
     58
+   ],
+   "source": "W77-142E v3 push N=49..64"
+  },
+  "61": {
+   "N": 61,
+   "k": 3,
+   "value": 19,
+   "status": "CERTIFIED-BOTH",
+   "z3_sat": {
+    "target": 19,
+    "status": "sat",
+    "secs": 0.845,
+    "witness_0based": [
+     0,
+     5,
+     6,
+     8,
+     13,
+     17,
+     19,
+     22,
+     23,
+     35,
+     37,
+     42,
+     43,
+     45,
+     50,
+     54,
+     56,
+     59,
+     60
+    ],
+    "formula_sha256": "9d825b33cd6aefe82305833bbeef35615caaab0c465aa4e2631cf31c7339c30a"
+   },
+   "z3_unsat": {
+    "target": 20,
+    "status_1": "unsat",
+    "secs_1": 15.513,
+    "status_2": "unsat",
+    "secs_2": 133.06,
+    "seeds": [
+     0,
+     20261121
+    ],
+    "formula_sha256": "c13ccfd362f955279589e0cee224e47b06241054597f18f77fbcfcdc4d7d7fe6"
+   },
+   "bnb": {
+    "value": 19,
+    "nodes": 68221778,
+    "secs": 0.5216,
+    "forced0": true,
+    "witness_0based": [
+     0,
+     1,
+     4,
+     5,
+     11,
+     13,
+     14,
+     16,
+     20,
+     30,
+     37,
+     38,
+     41,
+     42,
+     48,
+     50,
+     51,
+     53,
+     57
+    ],
+    "noforce_value": 19,
+    "noforce_nodes": 219257831,
+    "noforce_secs": 1.603,
+    "optimal_completed": true
+   },
+   "checker": {
+    "z3_witness_apfree": true,
+    "z3_reason": "3-AP-free by pair-midpoint scan",
+    "bnb_witness_apfree": true,
+    "bnb_reason": "3-AP-free by pair-midpoint scan",
+    "prev_cell_witness_valid_in_N": true,
+    "method": "pair-midpoint scan"
+   },
+   "oeis": {
+    "value": 19,
+    "match": true
+   },
+   "pysat": {
+    "agree": true,
+    "witnesses_apfree": true,
+    "sat": {
+     "target": 19,
+     "n_clauses": 2474,
+     "top_literal": 859,
+     "minisat22": {
+      "status": "SAT",
+      "wall": 0.886,
+      "cpu": 0.885,
+      "witness_0based": [
+       0,
+       1,
+       4,
+       6,
+       10,
+       15,
+       17,
+       18,
+       23,
+       25,
+       37,
+       38,
+       41,
+       43,
+       47,
+       52,
+       54,
+       55,
+       60
+      ]
+     },
+     "cadical153": {
+      "status": "SAT",
+      "wall": 0.111,
+      "cpu": 0.109,
+      "witness_0based": [
+       0,
+       4,
+       6,
+       7,
+       9,
+       15,
+       16,
+       19,
+       20,
+       27,
+       37,
+       41,
+       43,
+       44,
+       46,
+       52,
+       53,
+       56,
+       57
+      ]
+     }
+    },
+    "unsat": {
+     "target": 20,
+     "n_clauses": 2520,
+     "top_literal": 881,
+     "minisat22": {
+      "status": "UNSAT",
+      "wall": 2.841,
+      "cpu": 2.834,
+      "witness_0based": null
+     },
+     "cadical153": {
+      "status": "UNSAT",
+      "wall": 1.899,
+      "cpu": 1.898,
+      "witness_0based": null
+     }
+    }
+   },
+   "n_bisect_queries": 5,
+   "runtimes_secs": {
+    "z3_bisect_total": 74.056,
+    "z3_unsat_1": 15.513,
+    "z3_unsat_2": 133.06,
+    "bnb_forced0": 0.5216,
+    "bnb_noforce": 1.603,
+    "cell_wall": 213.313
+   },
+   "witness_0based": [
+    0,
+    5,
+    6,
+    8,
+    13,
+    17,
+    19,
+    22,
+    23,
+    35,
+    37,
+    42,
+    43,
+    45,
+    50,
+    54,
+    56,
+    59,
+    60
+   ],
+   "witness_1based": [
+    1,
+    6,
+    7,
+    9,
+    14,
+    18,
+    20,
+    23,
+    24,
+    36,
+    38,
+    43,
+    44,
+    46,
+    51,
+    55,
+    57,
+    60,
+    61
    ],
    "source": "W77-142E v3 push N=49..64"
   }
