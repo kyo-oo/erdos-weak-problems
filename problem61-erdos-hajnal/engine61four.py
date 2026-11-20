@@ -1782,356 +1782,495 @@ def _triangle_free_adj(n, adj):
     return True
 
 
-def main_v2(smoke=False):
+def main_v2(smoke=False, part=None):
     """W76-61K: run the V2 sections -> receipts61four_v2.txt
-    (smoke mode: n<=6 + reduced samples -> receipts61four_v2_smoke.txt)."""
+    (smoke mode: n<=6 + reduced samples -> receipts61four_v2_smoke.txt).
+    part=1: V2-1..V2-6 only -> receipts61four_v2_p1.txt (the sandbox reaps
+    background jobs between invocations, so the full run is split in two
+    in-process parts; part=2 loads p1, runs V2-7..V2-9, writes the combined
+    receipts61four_v2.txt)."""
     NMAX = 6 if smoke else 7
     N8_DRAWS = 20000 if smoke else 200000
     N8_DESIGNS = 200 if smoke else 600
     SUB7 = 5000 if smoke else 60000
     rng2 = random.Random(SEED + 61)
-    print('W76-61K V2 engine — L-PC + L-COMP — smoke=%s seed %d, numpy %s'
-          % (smoke, SEED, HAVE_NUMPY))
+    print('W76-61K V2 engine — L-PC + L-COMP — smoke=%s part=%s seed %d, '
+          'numpy %s' % (smoke, part, SEED, HAVE_NUMPY))
     sys.stdout.flush()
+    if part == 2:
+        # restore the part-1 receipts (V2-1..V2-6) into the counters
+        with open('receipts61four_v2_p1.txt') as f:
+            for line in f:
+                line = line.rstrip('\n')
+                if line.startswith('PASS ') or line.startswith('FAIL '):
+                    NSEC[0] += 1
+                    if line.startswith('PASS '):
+                        NPASS[0] += 1
+                    RECEIPTS.append(line)
 
-    # ------------------------------------------------------------------
-    # V2-1 CENSUS-TWOCODE: counts by two independent codes + complement
-    # bijection + with-triangle counts, n <= NMAX
-    # ------------------------------------------------------------------
-    cntA = {h: [0] * (NMAX + 1) for h in V2_CLASSES}
-    triA = {h: [0] * (NMAX + 1) for h in V2_CLASSES}
-    free_masks = {}
-    comp_bij_bad = 0
-    for n in range(1, NMAX + 1):
-        prs = [(i, j) for i in range(n) for j in range(i + 1, n)]
-        if n <= 6:
-            for emask in range(1 << len(prs)):
-                adj = adj_from_emask(n, emask, prs)
-                f2 = hfree(n, adj, '2K2')
-                fc = hfree(n, adj, 'C4')
-                if f2:
-                    cntA['2K2'][n] += 1
-                if fc:
-                    cntA['C4'][n] += 1
-                # the det-1 transfer per graph: G 2K2-free <=> Gbar C4-free
-                if f2 != hfree(n, complement_adj(n, adj), 'C4'):
-                    comp_bij_bad += 1
-                if f2 and comp_has_triangle(adj, (1 << n) - 1):
-                    triA['2K2'][n] += 1
-                if fc and comp_has_triangle(adj, (1 << n) - 1):
-                    triA['C4'][n] += 1
-        else:
-            free_masks = _v2_census_masks(n, V2_CLASSES)
-            N7 = 1 << len(prs)
-            comp_idx = (~np.arange(N7)) & (N7 - 1)
-            if not np.array_equal(free_masks['2K2'],
-                                  free_masks['C4'][comp_idx]):
-                comp_bij_bad += 1
-            for h in V2_CLASSES:
-                idx = np.nonzero(free_masks[h])[0]
-                cntA[h][n] = int(idx.size)
-                t = 0
-                for em in idx:
-                    adj = adj_from_emask(n, int(em), prs)
-                    if comp_has_triangle(adj, (1 << n) - 1):
-                        t += 1
-                triA[h][n] = t
-    # counting code B (independent enumeration)
-    cntB, triB = _v2_count_codeB(NMAX, V2_CLASSES)
-    ok_counts = all(list(cntA[h][1:NMAX + 1]) == list(cntB[h][1:NMAX + 1])
-                    for h in V2_CLASSES)
-    ok_tri = all(list(triA[h][1:NMAX + 1]) == list(triB[h][1:NMAX + 1])
-                 for h in V2_CLASSES)
-    ok_banked = all(list(cntA[h][1:NMAX + 1]) == BANKED_2K2_ROW[:NMAX]
-                    for h in V2_CLASSES)
-    ok_eqc = all(cntA['C4'][k] == cntA['2K2'][k] for k in range(1, NMAX + 1))
-    tot_line = ('; both totals equal the banked 731,523 (n=1..7): %s'
-                % (sum(cntA['2K2'][1:NMAX + 1]) == 731523)) if NMAX == 7 \
-        else ''
-    section('V2-1 CENSUS-TWOCODE-n1-%d' % NMAX,
-            ok_counts and ok_tri and ok_banked and ok_eqc and comp_bij_bad == 0,
-            'code A (pattern-LUT full sweep) == code B (incremental '
-            'vertex-extension with per-graph freeness masks) on EVERY '
-            'per-n count and every with-triangle count, both classes; '
-            'C4-free n=1..%d %s ; 2K2-free n=1..%d %s ; with-triangle '
-            'C4-free %s ; with-triangle 2K2-free %s ; both match the banked '
-            'census row %s%s; per-class counts equal (complement transfer '
-            'C4 <-> 2K2); per-graph bijection G 2K2-free <=> Gbar '
-            'C4-free: %d mismatches (full n<=6 + the numpy emask-complement '
-            'mask identity at n=7)'
-            % (NMAX, list(cntA['C4'][1:NMAX + 1]), NMAX,
-               list(cntA['2K2'][1:NMAX + 1]),
-               list(triA['C4'][1:NMAX + 1]),
-               list(triA['2K2'][1:NMAX + 1]),
-               BANKED_2K2_ROW[:NMAX], tot_line, comp_bij_bad))
-
-    # ------------------------------------------------------------------
-    # V2-2/V2-3 LAW-PC exhaustive + V2-4 triangle matrix + V2-6 sharp form
-    # (one pass over the census per class)
-    # ------------------------------------------------------------------
-    res = {}
-    for h in V2_CLASSES:
-        res[h] = {'graphs': 0, 'tri': 0, 'uncov': 0, 'viol_W': 0,
-                  'viol_P': 0, 't1': 0, 't1_bad': 0, 't3': 0, 't3_edge': 0,
-                  'parts_bad': 0, 'loose_bad': 0, 'refined_bad': 0,
-                  'cube_bad': 0, 'sharp_bad': 0, 'eq5': 0, 'eq_other': 0,
-                  'tight_refined': 0, 'worst_loose': (0.0, None),
-                  'worst_refined': (0.0, None), 'worst_cube': (0.0, None),
-                  'worst_sharp': (99.0, None), 'h_table': {},
-                  'forced_bad': 0, 'sx_bad': 0, 'e_bad': 0, 'exs_bad': 0,
-                  'l6_edges': 0, 'l8_bad': 0, 'free_edge': {},
-                  'free_nonedge': {}, 'allmax_bad': 0, 'allmax_graphs': 0}
-    for n in range(1, NMAX + 1):
-        prs = [(i, j) for i in range(n) for j in range(i + 1, n)]
-        for h in V2_CLASSES:
-            R = res[h]
-            hmin = {}
+    if part != 2:
+        # ------------------------------------------------------------------
+        # V2-1 CENSUS-TWOCODE: counts by two independent codes + complement
+        # bijection + with-triangle counts, n <= NMAX
+        # ------------------------------------------------------------------
+        cntA = {h: [0] * (NMAX + 1) for h in V2_CLASSES}
+        triA = {h: [0] * (NMAX + 1) for h in V2_CLASSES}
+        free_masks = {}
+        comp_bij_bad = 0
+        for n in range(1, NMAX + 1):
+            prs = [(i, j) for i in range(n) for j in range(i + 1, n)]
             if n <= 6:
-                it = ((em, adj_from_emask(n, em, prs))
-                      for em in range(1 << len(prs)))
+                for emask in range(1 << len(prs)):
+                    adj = adj_from_emask(n, emask, prs)
+                    f2 = hfree(n, adj, '2K2')
+                    fc = hfree(n, adj, 'C4')
+                    if f2:
+                        cntA['2K2'][n] += 1
+                    if fc:
+                        cntA['C4'][n] += 1
+                    # the det-1 transfer per graph: G 2K2-free <=> Gbar C4-free
+                    if f2 != hfree(n, complement_adj(n, adj), 'C4'):
+                        comp_bij_bad += 1
+                    if f2 and comp_has_triangle(adj, (1 << n) - 1):
+                        triA['2K2'][n] += 1
+                    if fc and comp_has_triangle(adj, (1 << n) - 1):
+                        triA['C4'][n] += 1
             else:
-                it = ((int(em), adj_from_emask(n, int(em), prs))
-                      for em in np.nonzero(free_masks[h])[0])
-            for emask, adj in it:
-                if n <= 6 and not hfree(n, adj, h):
-                    continue
-                R['graphs'] += 1
-                if comp_has_triangle(adj, (1 << n) - 1):
-                    R['tri'] += 1
-                    if h == '2K2':
-                        tm = _v2_triangle_matrix(n, adj)
-                        if tm:
-                            R['forced_bad'] += tm['forced_bad']
-                            R['sx_bad'] += tm['sx_bad']
-                            R['e_bad'] += tm['e_bad']
-                            R['exs_bad'] += tm['exs_bad']
-                            R['l6_edges'] += tm['l6_edges']
-                            R['l8_bad'] += tm['l8_bad']
-                            for k, v in tm['free_edge'].items():
-                                R['free_edge'][k] = R['free_edge'].get(k, 0) + v
-                            for k, v in tm['free_nonedge'].items():
-                                R['free_nonedge'][k] = \
-                                    R['free_nonedge'].get(k, 0) + v
-                lp = _v2_lpc_c4(n, adj) if h == 'C4' else _v2_lpc_2k2(n, adj)
-                R['uncov'] += lp['uncov']
-                R['viol_W'] += lp['viol_W']
-                R['viol_P'] += lp['viol_P']
-                R['t1'] += lp['t1']
-                R['t1_bad'] += lp['t1_bad']
-                R['t3'] += lp['t3']
-                R['t3_edge'] += lp['t3_edge']
-                if not lp['n_le_parts']:
-                    R['parts_bad'] += 1
-                if not lp['n_le_loose']:
-                    R['loose_bad'] += 1
-                if not lp['n_le_refined']:
-                    R['refined_bad'] += 1
-                if lp['tight_refined']:
-                    R['tight_refined'] += 1
-                if not lp['n_le_cube']:
-                    R['cube_bad'] += 1
-                # sharp form alpha*omega >= 4n/5 (census certification)
-                if lp['aw'] * 5 < 4 * n:
-                    R['sharp_bad'] += 1
-                if lp['aw'] * 5 == 4 * n:
-                    if n == 5:
-                        R['eq5'] += 1
-                    else:
-                        R['eq_other'] += 1
-                shr = lp['aw'] / float(n)
-                if shr < R['worst_sharp'][0]:
-                    R['worst_sharp'] = (shr, (n, emask, lp['alpha'],
-                                              lp['omega']))
-                M = lp['M']
-                hmin[M] = hmin.get(M, 0) + 1
-                rf = n / max(lp['bound_loose'], 1)
-                if rf > R['worst_loose'][0]:
-                    R['worst_loose'] = (rf, (n, emask, lp['alpha'],
-                                             lp['omega']))
-                rf2 = n / max(lp['bound_refined'], 1)
-                if rf2 > R['worst_refined'][0]:
-                    R['worst_refined'] = (rf2, (n, emask, lp['alpha'],
-                                                lp['omega']))
-                if n >= 3:
-                    rc = n / max(M ** 3, 1)
-                    if rc > R['worst_cube'][0]:
-                        R['worst_cube'] = (rc, (n, emask, lp['alpha'],
-                                                lp['omega']))
-                # all-maximum-anchor verification (full n <= 6)
+                free_masks = _v2_census_masks(n, V2_CLASSES)
+                N7 = 1 << len(prs)
+                comp_idx = (~np.arange(N7)) & (N7 - 1)
+                if not np.array_equal(free_masks['2K2'],
+                                      free_masks['C4'][comp_idx]):
+                    comp_bij_bad += 1
+                for h in V2_CLASSES:
+                    idx = np.nonzero(free_masks[h])[0]
+                    cntA[h][n] = int(idx.size)
+                    t = 0
+                    for em in idx:
+                        adj = adj_from_emask(n, int(em), prs)
+                        if comp_has_triangle(adj, (1 << n) - 1):
+                            t += 1
+                    triA[h][n] = t
+        # counting code B (independent enumeration)
+        cntB, triB = _v2_count_codeB(NMAX, V2_CLASSES)
+        ok_counts = all(list(cntA[h][1:NMAX + 1]) == list(cntB[h][1:NMAX + 1])
+                        for h in V2_CLASSES)
+        ok_tri = all(list(triA[h][1:NMAX + 1]) == list(triB[h][1:NMAX + 1])
+                     for h in V2_CLASSES)
+        ok_banked = all(list(cntA[h][1:NMAX + 1]) == BANKED_2K2_ROW[:NMAX]
+                        for h in V2_CLASSES)
+        ok_eqc = all(cntA['C4'][k] == cntA['2K2'][k] for k in range(1, NMAX + 1))
+        tot_line = ('; both totals equal the banked 731,523 (n=1..7): %s'
+                    % (sum(cntA['2K2'][1:NMAX + 1]) == 731523)) if NMAX == 7 \
+            else ''
+        section('V2-1 CENSUS-TWOCODE-n1-%d' % NMAX,
+                ok_counts and ok_tri and ok_banked and ok_eqc and comp_bij_bad == 0,
+                'code A (pattern-LUT full sweep) == code B (incremental '
+                'vertex-extension with per-graph freeness masks) on EVERY '
+                'per-n count and every with-triangle count, both classes; '
+                'C4-free n=1..%d %s ; 2K2-free n=1..%d %s ; with-triangle '
+                'C4-free %s ; with-triangle 2K2-free %s ; both match the banked '
+                'census row %s%s; per-class counts equal (complement transfer '
+                'C4 <-> 2K2); per-graph bijection G 2K2-free <=> Gbar '
+                'C4-free: %d mismatches (full n<=6 + the numpy emask-complement '
+                'mask identity at n=7)'
+                % (NMAX, list(cntA['C4'][1:NMAX + 1]), NMAX,
+                   list(cntA['2K2'][1:NMAX + 1]),
+                   list(triA['C4'][1:NMAX + 1]),
+                   list(triA['2K2'][1:NMAX + 1]),
+                   BANKED_2K2_ROW[:NMAX], tot_line, comp_bij_bad))
+
+        # ------------------------------------------------------------------
+        # V2-2/V2-3 LAW-PC exhaustive + V2-4 triangle matrix + V2-6 sharp form
+        # (one pass over the census per class)
+        # ------------------------------------------------------------------
+        res = {}
+        for h in V2_CLASSES:
+            res[h] = {'graphs': 0, 'tri': 0, 'uncov': 0, 'viol_W': 0,
+                      'viol_P': 0, 't1': 0, 't1_bad': 0, 't3': 0, 't3_edge': 0,
+                      'parts_bad': 0, 'loose_bad': 0, 'refined_bad': 0,
+                      'cube_bad': 0, 'sharp_bad': 0, 'eq5': 0, 'eq_other': 0,
+                      'tight_refined': 0, 'worst_loose': (0.0, None),
+                      'worst_refined': (0.0, None), 'worst_cube': (0.0, None),
+                      'worst_sharp': (99.0, None), 'h_table': {},
+                      'forced_bad': 0, 'sx_bad': 0, 'e_bad': 0, 'exs_bad': 0,
+                      'l6_edges': 0, 'l8_bad': 0, 'free_edge': {},
+                      'free_nonedge': {}, 'allmax_bad': 0, 'allmax_graphs': 0}
+        for n in range(1, NMAX + 1):
+            prs = [(i, j) for i in range(n) for j in range(i + 1, n)]
+            for h in V2_CLASSES:
+                R = res[h]
+                hmin = {}
                 if n <= 6:
+                    it = ((em, adj_from_emask(n, em, prs))
+                          for em in range(1 << len(prs)))
+                else:
+                    it = ((int(em), adj_from_emask(n, int(em), prs))
+                          for em in np.nonzero(free_masks[h])[0])
+                for emask, adj in it:
+                    if n <= 6 and not hfree(n, adj, h):
+                        continue
+                    R['graphs'] += 1
+                    if comp_has_triangle(adj, (1 << n) - 1):
+                        R['tri'] += 1
+                        if h == '2K2':
+                            tm = _v2_triangle_matrix(n, adj)
+                            if tm:
+                                R['forced_bad'] += tm['forced_bad']
+                                R['sx_bad'] += tm['sx_bad']
+                                R['e_bad'] += tm['e_bad']
+                                R['exs_bad'] += tm['exs_bad']
+                                R['l6_edges'] += tm['l6_edges']
+                                R['l8_bad'] += tm['l8_bad']
+                                for k, v in tm['free_edge'].items():
+                                    R['free_edge'][k] = R['free_edge'].get(k, 0) + v
+                                for k, v in tm['free_nonedge'].items():
+                                    R['free_nonedge'][k] = \
+                                        R['free_nonedge'].get(k, 0) + v
+                    lp = _v2_lpc_c4(n, adj) if h == 'C4' else _v2_lpc_2k2(n, adj)
+                    R['uncov'] += lp['uncov']
+                    R['viol_W'] += lp['viol_W']
+                    R['viol_P'] += lp['viol_P']
+                    R['t1'] += lp['t1']
+                    R['t1_bad'] += lp['t1_bad']
+                    R['t3'] += lp['t3']
+                    R['t3_edge'] += lp['t3_edge']
+                    if not lp['n_le_parts']:
+                        R['parts_bad'] += 1
+                    if not lp['n_le_loose']:
+                        R['loose_bad'] += 1
+                    if not lp['n_le_refined']:
+                        R['refined_bad'] += 1
+                    if lp['tight_refined']:
+                        R['tight_refined'] += 1
+                    if not lp['n_le_cube']:
+                        R['cube_bad'] += 1
+                    # sharp form alpha*omega >= 4n/5 (census certification)
+                    if lp['aw'] * 5 < 4 * n:
+                        R['sharp_bad'] += 1
+                    if lp['aw'] * 5 == 4 * n:
+                        if n == 5:
+                            R['eq5'] += 1
+                        else:
+                            R['eq_other'] += 1
+                    shr = lp['aw'] / float(n)
+                    if shr < R['worst_sharp'][0]:
+                        R['worst_sharp'] = (shr, (n, emask, lp['alpha'],
+                                                  lp['omega']))
+                    M = lp['M']
+                    hmin[M] = hmin.get(M, 0) + 1
+                    rf = n / max(lp['bound_loose'], 1)
+                    if rf > R['worst_loose'][0]:
+                        R['worst_loose'] = (rf, (n, emask, lp['alpha'],
+                                                 lp['omega']))
+                    rf2 = n / max(lp['bound_refined'], 1)
+                    if rf2 > R['worst_refined'][0]:
+                        R['worst_refined'] = (rf2, (n, emask, lp['alpha'],
+                                                    lp['omega']))
+                    if n >= 3:
+                        rc = n / max(M ** 3, 1)
+                        if rc > R['worst_cube'][0]:
+                            R['worst_cube'] = (rc, (n, emask, lp['alpha'],
+                                                    lp['omega']))
+                    # all-maximum-anchor verification (full n <= 6)
+                    if n <= 6:
+                        if h == 'C4':
+                            anchors = _all_max_ind_masks(adj, n, lp['alpha'])
+                            for Im in anchors:
+                                R['allmax_graphs'] += 1
+                                u_, vw_ = _v2_anchor_laws(n, adj, Im, False)
+                                R['allmax_bad'] += u_ + vw_
+                        else:
+                            cadj = complement_adj(n, adj)
+                            anchors = _all_max_ind_masks(cadj, n, lp['omega'])
+                            for Km in anchors:
+                                R['allmax_graphs'] += 1
+                                u_, vw_ = _v2_anchor_laws(n, adj, Km, True)
+                                R['allmax_bad'] += u_ + vw_
+                R['h_table'][n] = min(hmin) if hmin else None
+        # seeded all-maximum-anchor subsample at n = 7
+        if NMAX >= 7:
+            prs7 = [(i, j) for i in range(7) for j in range(i + 1, 7)]
+            for h in V2_CLASSES:
+                R = res[h]
+                idx = np.nonzero(free_masks[h])[0]
+                k = min(SUB7, int(idx.size))
+                for p in rng2.sample(range(int(idx.size)), k):
+                    adj = adj_from_emask(7, int(idx[p]), prs7)
                     if h == 'C4':
-                        anchors = _all_max_ind_masks(adj, n, lp['alpha'])
-                        for Im in anchors:
+                        al = alpha_of(7, adj)
+                        for Im in _all_max_ind_masks(adj, 7, al):
                             R['allmax_graphs'] += 1
-                            u_, vw_ = _v2_anchor_laws(n, adj, Im, False)
+                            u_, vw_ = _v2_anchor_laws(7, adj, Im, False)
                             R['allmax_bad'] += u_ + vw_
                     else:
-                        cadj = complement_adj(n, adj)
-                        anchors = _all_max_ind_masks(cadj, n, lp['omega'])
-                        for Km in anchors:
+                        w = omega_of(7, adj)
+                        cadj = complement_adj(7, adj)
+                        for Km in _all_max_ind_masks(cadj, 7, w):
                             R['allmax_graphs'] += 1
-                            u_, vw_ = _v2_anchor_laws(n, adj, Km, True)
+                            u_, vw_ = _v2_anchor_laws(7, adj, Km, True)
                             R['allmax_bad'] += u_ + vw_
-            R['h_table'][n] = min(hmin) if hmin else None
-    # seeded all-maximum-anchor subsample at n = 7
-    if NMAX >= 7:
-        prs7 = [(i, j) for i in range(7) for j in range(i + 1, 7)]
         for h in V2_CLASSES:
             R = res[h]
-            idx = np.nonzero(free_masks[h])[0]
-            k = min(SUB7, int(idx.size))
-            for p in rng2.sample(range(int(idx.size)), k):
-                adj = adj_from_emask(7, int(idx[p]), prs7)
-                if h == 'C4':
-                    al = alpha_of(7, adj)
-                    for Im in _all_max_ind_masks(adj, 7, al):
-                        R['allmax_graphs'] += 1
-                        u_, vw_ = _v2_anchor_laws(7, adj, Im, False)
-                        R['allmax_bad'] += u_ + vw_
-                else:
-                    w = omega_of(7, adj)
-                    cadj = complement_adj(7, adj)
-                    for Km in _all_max_ind_masks(cadj, 7, w):
-                        R['allmax_graphs'] += 1
-                        u_, vw_ = _v2_anchor_laws(7, adj, Km, True)
-                        R['allmax_bad'] += u_ + vw_
-    for h in V2_CLASSES:
-        R = res[h]
-        side = 'I' if h == 'C4' else 'K'
-        wname = 'cliques' if h == 'C4' else 'independent'
-        form_ref = ('alpha + (omega-1)*alpha*(alpha+1)/2' if h == 'C4'
-                    else 'omega + (alpha-1)*omega*(omega+1)/2')
-        ok = (R['uncov'] == 0 and R['viol_W'] == 0 and R['viol_P'] == 0
-              and R['t1_bad'] == 0 and R['parts_bad'] == 0
-              and R['loose_bad'] == 0 and R['refined_bad'] == 0
-              and R['cube_bad'] == 0 and R['allmax_bad'] == 0)
-        section('V2-%d LAW-PC-%s-n1-%d-EXHAUSTIVE'
-                % (2 if h == 'C4' else 3, h, NMAX), ok,
-                '%d graphs (exhaustive n<=%d, %d with-triangle): coverage 0 '
-                'uncovered (every outside vertex %s-attached); W-cells %s: 0 '
-                'violations; pair-cells 0 violations; pair-placement '
-                'classification: %d concentrated placements ALL satisfied '
-                '(0 violated), %d free placements (%d edges / %d non-edges '
-                '— both occur), 0 UNCLASSIFIED; cell identity n <= '
-                'anchor + sum|W| + sum|P|: 0 violations; loose form 0 '
-                'violations (worst ratio %.4f); REFINED form n <= %s: 0 '
-                'violations (worst ratio %.4f, TIGHT at %d census graphs); '
-                'cube n <= max^3: 0 violations (worst n>=3 ratio %.4f at '
-                '%s — the C5 family); all-maximum-%s verification: %d '
-                'anchors, 0 violations'
-                % (R['graphs'], NMAX, R['tri'], side, wname,
-                   R['t1'], R['t3'], R['t3_edge'], R['t3'] - R['t3_edge'],
-                   R['worst_loose'][0], form_ref, R['worst_refined'][0],
-                   R['tight_refined'], R['worst_cube'][0],
-                   R['worst_cube'][1], side, R['allmax_graphs']))
+            side = 'I' if h == 'C4' else 'K'
+            wname = 'cliques' if h == 'C4' else 'independent'
+            form_ref = ('alpha + (omega-1)*alpha*(alpha+1)/2' if h == 'C4'
+                        else 'omega + (alpha-1)*omega*(omega+1)/2')
+            ok = (R['uncov'] == 0 and R['viol_W'] == 0 and R['viol_P'] == 0
+                  and R['t1_bad'] == 0 and R['parts_bad'] == 0
+                  and R['loose_bad'] == 0 and R['refined_bad'] == 0
+                  and R['cube_bad'] == 0 and R['allmax_bad'] == 0)
+            section('V2-%d LAW-PC-%s-n1-%d-EXHAUSTIVE'
+                    % (2 if h == 'C4' else 3, h, NMAX), ok,
+                    '%d graphs (exhaustive n<=%d, %d with-triangle): coverage 0 '
+                    'uncovered (every outside vertex %s-attached); W-cells %s: 0 '
+                    'violations; pair-cells 0 violations; pair-placement '
+                    'classification: %d concentrated placements ALL satisfied '
+                    '(0 violated), %d free placements (%d edges / %d non-edges '
+                    '— both occur), 0 UNCLASSIFIED; cell identity n <= '
+                    'anchor + sum|W| + sum|P|: 0 violations; loose form 0 '
+                    'violations (worst ratio %.4f); REFINED form n <= %s: 0 '
+                    'violations (worst ratio %.4f, TIGHT at %d census graphs); '
+                    'cube n <= max^3: 0 violations (worst n>=3 ratio %.4f at '
+                    '%s — the C5 family); all-maximum-%s verification: %d '
+                    'anchors, 0 violations'
+                    % (R['graphs'], NMAX, R['tri'], side, wname,
+                       R['t1'], R['t3'], R['t3_edge'], R['t3'] - R['t3_edge'],
+                       R['worst_loose'][0], form_ref, R['worst_refined'][0],
+                       R['tight_refined'], R['worst_cube'][0],
+                       R['worst_cube'][1], side, R['allmax_graphs']))
 
-    # V2-4 triangle matrix receipt
-    R = res['2K2']
-    ok = (R['forced_bad'] == 0 and R['sx_bad'] == 0 and R['e_bad'] == 0
-          and R['exs_bad'] == 0 and R['l8_bad'] == 0)
-    both_edge = sum(1 for k in set(R['free_edge']) & set(R['free_nonedge']))
-    section('V2-4 TRIANGLE-MATRIX-2K2-n1-%d-EXHAUSTIVE' % NMAX, ok,
-            'corrected with-triangle matrix on all %d with-triangle '
-            '2K2-free graphs (exhaustive n<=%d): FORCED law (|S_v u S_w| '
-            '<= 1 => v !~ w; the edge vw + any triangle edge avoiding the '
-            'union is an induced 2K2) 0 violations — hence S_empty, S_a, '
-            'S_b, S_c independent (0 edges: %d) and S_empty x (S_a u S_b u '
-            'S_c) non-adjacent (0 edges: %d); L8 clique decrements 0 '
-            'violations; the W75-L6 claim (S_x x S_y fully non-adjacent, '
-            'x != y) is FALSE: %d cross-class edges in the census + the '
-            'hard witness V2-4b; FREE placements genuinely free: %d '
-            'type-pairs exhibit BOTH adjacencies in the census'
-            % (R['tri'], NMAX, R['sx_bad'] + R['e_bad'], R['exs_bad'],
-               R['l6_edges'], both_edge))
+        # V2-4 triangle matrix receipt
+        R = res['2K2']
+        ok = (R['forced_bad'] == 0 and R['sx_bad'] == 0 and R['e_bad'] == 0
+              and R['exs_bad'] == 0 and R['l8_bad'] == 0)
+        both_edge = sum(1 for k in set(R['free_edge']) & set(R['free_nonedge']))
+        section('V2-4 TRIANGLE-MATRIX-2K2-n1-%d-EXHAUSTIVE' % NMAX, ok,
+                'corrected with-triangle matrix on all %d with-triangle '
+                '2K2-free graphs (exhaustive n<=%d): FORCED law (|S_v u S_w| '
+                '<= 1 => v !~ w; the edge vw + any triangle edge avoiding the '
+                'union is an induced 2K2) 0 violations — hence S_empty, S_a, '
+                'S_b, S_c independent (0 edges: %d) and S_empty x (S_a u S_b u '
+                'S_c) non-adjacent (0 edges: %d); L8 clique decrements 0 '
+                'violations; the W75-L6 claim (S_x x S_y fully non-adjacent, '
+                'x != y) is FALSE: %d cross-class edges in the census + the '
+                'hard witness V2-4b; FREE placements genuinely free: %d '
+                'type-pairs exhibit BOTH adjacencies in the census'
+                % (R['tri'], NMAX, R['sx_bad'] + R['e_bad'], R['exs_bad'],
+                   R['l6_edges'], both_edge))
 
-    # the hard witness
-    prs5 = [(i, j) for i in range(5) for j in range(i + 1, 5)]
-    ctr_emask = 0
-    for idx, (i, j) in enumerate(prs5):
-        if (i, j) in L6_WITNESS_EDGES:
-            ctr_emask |= 1 << idx
-    ctr_adj = adj_from_emask(5, ctr_emask, prs5)
-    w_ok = hfree(5, ctr_adj, '2K2') and not hfree(5, ctr_adj, 'C4')
-    # certify: v=3 in S_a (adjacent to a=0 only), w=4 in S_b, edge vw
-    w_ok = w_ok and ((ctr_adj[3] >> 0) & 1) and not ((ctr_adj[3] >> 1) & 1) \
-        and not ((ctr_adj[3] >> 2) & 1) and ((ctr_adj[4] >> 1) & 1) \
-        and not ((ctr_adj[4] >> 0) & 1) and not ((ctr_adj[4] >> 2) & 1) \
-        and ((ctr_adj[3] >> 4) & 1)
-    section('V2-4b W75-LEMMA6-COUNTEREXAMPLE-WITNESS', w_ok,
-            'the 5-vertex graph (triangle abc + v~a only + w~b only + edge '
-            'vw) is 2K2-FREE (verified) yet S_a x S_b carries the edge vw — '
-            'W75 FOURVERTEX_PROOF Lemma 6 is FALSE as stated; it also '
-            'contains an induced C4 (a-v-w-b). The corrected matrix (V2-4) '
-            'replaces it; the corrected S_x-independence law is STRONGER '
-            'than W75 Lemma 7 (NO exactly-one class ever carries an edge)')
+        # the hard witness
+        prs5 = [(i, j) for i in range(5) for j in range(i + 1, 5)]
+        ctr_emask = 0
+        for idx, (i, j) in enumerate(prs5):
+            if (i, j) in L6_WITNESS_EDGES:
+                ctr_emask |= 1 << idx
+        ctr_adj = adj_from_emask(5, ctr_emask, prs5)
+        w_ok = hfree(5, ctr_adj, '2K2') and not hfree(5, ctr_adj, 'C4')
+        # certify: v=3 in S_a (adjacent to a=0 only), w=4 in S_b, edge vw
+        w_ok = w_ok and ((ctr_adj[3] >> 0) & 1) and not ((ctr_adj[3] >> 1) & 1) \
+            and not ((ctr_adj[3] >> 2) & 1) and ((ctr_adj[4] >> 1) & 1) \
+            and not ((ctr_adj[4] >> 0) & 1) and not ((ctr_adj[4] >> 2) & 1) \
+            and ((ctr_adj[3] >> 4) & 1)
+        section('V2-4b W75-LEMMA6-COUNTEREXAMPLE-WITNESS', w_ok,
+                'the 5-vertex graph (triangle abc + v~a only + w~b only + edge '
+                'vw) is 2K2-FREE (verified) yet S_a x S_b carries the edge vw — '
+                'W75 FOURVERTEX_PROOF Lemma 6 is FALSE as stated; it also '
+                'contains an induced C4 (a-v-w-b). The corrected matrix (V2-4) '
+                'replaces it; the corrected S_x-independence law is STRONGER '
+                'than W75 Lemma 7 (NO exactly-one class ever carries an edge)')
 
-    # ------------------------------------------------------------------
-    # V2-5 composed cubic (L-COMP) + h-tables + PIGEONHOLE-SIX
-    # ------------------------------------------------------------------
-    cube_ok = all(res[h]['cube_bad'] == 0 for h in V2_CLASSES)
-    # L-COMP arithmetic on a wide grid
-    arith_bad = 0
-    for M in range(1, 2000):
-        if M + (M - 1) * M * (M + 1) // 2 > M ** 3:
-            arith_bad += 1
-        if M >= 2 and M + M * M + _comb(M, 2) * M > M ** 3:
-            arith_bad += 1
-    for M in range(1, 2000):
-        if M ** 3 - (M ** 3 + M) // 2 != M * (M - 1) * (M + 1) // 2:
-            arith_bad += 1
-        if M >= 2 and M ** 3 - (M + M * M + _comb(M, 2) * M) \
-                != M * (M - 2) * (M + 1) // 2:
-            arith_bad += 1
-    # PIGEONHOLE-SIX: every 6-vertex graph has alpha >= 3 or omega >= 3
-    prs6 = [(i, j) for i in range(6) for j in range(i + 1, 6)]
-    pig_ok = True
-    pig_cnt = 0
-    for emask in range(1 << 15):
-        adj = adj_from_emask(6, emask, prs6)
-        pig_cnt += 1
-        if alpha_of(6, adj) < 3 and omega_of(6, adj) < 3:
-            pig_ok = False
-            break
-    ht = {h: [res[h]['h_table'][k] for k in range(1, NMAX + 1)]
-          for h in V2_CLASSES}
-    worst = max(res[h]['worst_cube'] for h in V2_CLASSES)
-    section('V2-5 COMPOSED-CUBIC-L-COMP-n1-%d' % NMAX,
-            cube_ok and arith_bad == 0 and pig_ok,
-            'L-COMP: n <= max(alpha,omega)^3 on EVERY census graph, both '
-            'classes, exhaustive (0 violations); worst n>=3 n/M^3 ratio '
-            '%.4f at %s (the C5: 5/8 = 0.625); the L-COMP arithmetic '
-            'verified on M = 1..1999 (0 failures): refined a + '
-            '(w-1)a(a+1)/2 <= M^3 with slack M^3-(M^3+M)/2 = '
-            'M(M-1)(M+1)/2 (the sq_sub_one factorization), loose M + M^2 '
-            '+ C(M,2)M <= M^3 with slack M(M-2)(M+1)/2 for M >= 2; '
-            'h-tables (min of max(alpha,omega), n=1..%d): C4 %s, 2K2 %s '
-            '(h(6) = h(7) = 3 cross-checked by PIGEONHOLE-SIX: every '
-            '6-vertex graph has alpha >= 3 or omega >= 3, verified on all '
-            '%d graphs n=6 — machine-checked, no classical citation '
-            'load-bearing)'
-            % (worst[0], worst[1], NMAX, ht['C4'], ht['2K2'],
-               pig_cnt))
+        # --------------------------------------------------------------
+        # V2-4c the corrected constraint matrix TABLE (the sec.1f matrix):
+        # all 36 unordered attachment-class type-pairs classify EXACTLY as
+        # 7 FORCED non-adjacent (|S u S'| <= 1) + 29 FREE (both adjacencies
+        # occur); internal edges ONLY in the >= 2 classes; L-DOM (internal
+        # edge dominated by every outside vertex with a new attachment) and
+        # L-DOM-GEN (EVERY edge vw dominated by every u with an attachment
+        # outside S_v u S_w) both 0 violations.
+        # --------------------------------------------------------------
+        pe = {}
+        pn = {}
+        ie = {}
+        dom_bad = dom_tests = gen_bad = gen_tests = 0
+        for nn in range(3, 7):
+            prsn = [(i, j) for i in range(nn) for j in range(i + 1, nn)]
+            for emask in range(1 << len(prsn)):
+                adjx = adj_from_emask(nn, emask, prsn)
+                if not hfree(nn, adjx, '2K2'):
+                    continue
+                tri = None
+                for q in itertools.combinations(range(nn), 3):
+                    x_, y_, z_ = q
+                    if (adjx[x_] >> y_) & 1 and (adjx[x_] >> z_) & 1 \
+                            and (adjx[y_] >> z_) & 1:
+                        tri = q
+                        break
+                if tri is None:
+                    continue
+                bit = {tri[0]: 1, tri[1]: 2, tri[2]: 4}
+                clsv = {}
+                for v in range(nn):
+                    if v in tri:
+                        continue
+                    Sv = 0
+                    for t in tri:
+                        if (adjx[v] >> t) & 1:
+                            Sv |= bit[t]
+                    clsv[v] = Sv
+                vs_ = sorted(clsv)
+                for i in range(len(vs_)):
+                    for j in range(i + 1, len(vs_)):
+                        v, u = vs_[i], vs_[j]
+                        S, S2 = clsv[v], clsv[u]
+                        key = (min(S, S2), max(S, S2))
+                        if popcount(S | S2) <= 1:
+                            pass    # FORCED non-adjacent (proved, V2-4)
+                        elif (adjx[v] >> u) & 1:
+                            pe[key] = pe.get(key, 0) + 1
+                        else:
+                            pn[key] = pn.get(key, 0) + 1
+                for v in clsv:
+                    for w in clsv:
+                        if v >= w or not ((adjx[v] >> w) & 1):
+                            continue
+                        S, S2 = clsv[v], clsv[w]
+                        un = S | S2
+                        internal = (S == S2)
+                        if internal:
+                            ie[S] = ie.get(S, 0) + 1
+                        for u2 in clsv:
+                            if u2 in (v, w):
+                                continue
+                            if clsv[u2] & ~un:
+                                gen_tests += 1
+                                if not ((adjx[u2] >> v) & 1) \
+                                        and not ((adjx[u2] >> w) & 1):
+                                    gen_bad += 1
+                                    if internal:
+                                        dom_bad += 1
+                                if internal:
+                                    dom_tests += 1
+        allp = set()
+        for S in (0, 1, 2, 4, 3, 5, 6, 7):
+            for S2 in (0, 1, 2, 4, 3, 5, 6, 7):
+                if S <= S2:
+                    allp.add((S, S2))
+        forced_theory = set(p for p in allp if popcount(p[0] | p[1]) <= 1)
+        both = set(pe) & set(pn)
+        both7 = set(res['2K2']['free_edge']) & set(res['2K2']['free_nonedge'])
+        ok4c = (len(allp) == 36 and len(forced_theory) == 7
+                and len(both) == 29 and len(both7) == 29
+                and both == allp - forced_theory
+                and (set(pe) | set(pn)) == allp - forced_theory
+                and set(ie) == {3, 5, 6, 7}
+                and dom_bad == 0 and gen_bad == 0
+                and dom_tests > 0 and gen_tests > 0)
+        section('V2-4c CORRECTED-MATRIX-TABLE-2K2-n1-6-EXHAUSTIVE', ok4c,
+                'the FULL pairwise constraint matrix of the eight attachment '
+                'classes: all 36 unordered type-pairs classify EXACTLY as 7 '
+                'FORCED non-adjacent (|S_v u S_w| <= 1: S_empty, S_a, S_b, '
+                'S_c independent + S_empty x S_x non-adjacent — 0 census '
+                'edges) + 29 FREE (both adjacencies occur; every pair with '
+                '|S u S2| >= 2 — INCLUDING the W75-L6 pairs S_x x S_y) — '
+                'no other pairwise non-adjacency is forced (the classification '
+                'is complete); internal edges ONLY in the four >=2 classes '
+                'S_ab/S_ac/S_bc/S_abc (counts %s); L-DOM: every internal '
+                'edge vw of a class S is dominated (u ~ v or u ~ w) by every '
+                'outside vertex u whose class has an attachment outside S: '
+                '0 violations in %d tests; L-DOM-GEN: EVERY edge vw (classes '
+                'S, S2) is dominated by every u with an attachment outside '
+                'S u S2: 0 violations in %d tests; cross-check n<=%d: the '
+                'V2-4 both-adjacency type-pairs = the same 29'
+                % ({'S_ab': ie.get(3, 0), 'S_ac': ie.get(5, 0),
+                    'S_bc': ie.get(6, 0), 'S_abc': ie.get(7, 0),
+                    'S_empty': ie.get(0, 0), 'S_a': ie.get(1, 0),
+                    'S_b': ie.get(2, 0), 'S_c': ie.get(4, 0)},
+                   dom_tests, gen_tests, NMAX))
 
-    # ------------------------------------------------------------------
-    # V2-6 sharp form (census certification)
-    # ------------------------------------------------------------------
-    sharp_ok = all(res[h]['sharp_bad'] == 0 for h in V2_CLASSES)
-    section('V2-6 SHARP-FORM-alpha-omega-n1-%d-EXHAUSTIVE' % NMAX, sharp_ok,
-            'the census-sharp form alpha*omega >= 4n/5 on every 2K2-free '
-            'and (by the complement transfer — counts equal in V2-1) every '
-            'induced-C4-free graph, exhaustive n <= %d: 0 violations; '
-            'worst alpha*omega/n = %.4f at %s (the C5: 4/5 exactly); '
-            'equality alpha*omega = 4n/5 at n=5: %d (C4) / %d (2K2) '
-            'labeled graphs (the 12 labeled C5s each; no equality at any '
-            'other n <= %d: %d)'
-            % (NMAX, res['2K2']['worst_sharp'][0],
-               res['2K2']['worst_sharp'][1], res['C4']['eq5'],
-               res['2K2']['eq5'], NMAX,
-               res['C4']['eq_other'] + res['2K2']['eq_other']))
+        # ------------------------------------------------------------------
+        # V2-5 composed cubic (L-COMP) + h-tables + PIGEONHOLE-SIX
+        # ------------------------------------------------------------------
+        cube_ok = all(res[h]['cube_bad'] == 0 for h in V2_CLASSES)
+        # L-COMP arithmetic on a wide grid
+        arith_bad = 0
+        for M in range(1, 2000):
+            if M + (M - 1) * M * (M + 1) // 2 > M ** 3:
+                arith_bad += 1
+            if M >= 2 and M + M * M + _comb(M, 2) * M > M ** 3:
+                arith_bad += 1
+        for M in range(1, 2000):
+            if M ** 3 - (M ** 3 + M) // 2 != M * (M - 1) * (M + 1) // 2:
+                arith_bad += 1
+            if M >= 2 and M ** 3 - (M + M * M + _comb(M, 2) * M) \
+                    != M * (M - 2) * (M + 1) // 2:
+                arith_bad += 1
+        # PIGEONHOLE-SIX: every 6-vertex graph has alpha >= 3 or omega >= 3
+        prs6 = [(i, j) for i in range(6) for j in range(i + 1, 6)]
+        pig_ok = True
+        pig_cnt = 0
+        for emask in range(1 << 15):
+            adj = adj_from_emask(6, emask, prs6)
+            pig_cnt += 1
+            if alpha_of(6, adj) < 3 and omega_of(6, adj) < 3:
+                pig_ok = False
+                break
+        ht = {h: [res[h]['h_table'][k] for k in range(1, NMAX + 1)]
+              for h in V2_CLASSES}
+        worst = max(res[h]['worst_cube'] for h in V2_CLASSES)
+        section('V2-5 COMPOSED-CUBIC-L-COMP-n1-%d' % NMAX,
+                cube_ok and arith_bad == 0 and pig_ok,
+                'L-COMP: n <= max(alpha,omega)^3 on EVERY census graph, both '
+                'classes, exhaustive (0 violations); worst n>=3 n/M^3 ratio '
+                '%.4f at %s (the C5: 5/8 = 0.625); the L-COMP arithmetic '
+                'verified on M = 1..1999 (0 failures): refined a + '
+                '(w-1)a(a+1)/2 <= M^3 with slack M^3-(M^3+M)/2 = '
+                'M(M-1)(M+1)/2 (the sq_sub_one factorization), loose M + M^2 '
+                '+ C(M,2)M <= M^3 with slack M(M-2)(M+1)/2 for M >= 2; '
+                'h-tables (min of max(alpha,omega), n=1..%d): C4 %s, 2K2 %s '
+                '(h(6) = h(7) = 3 cross-checked by PIGEONHOLE-SIX: every '
+                '6-vertex graph has alpha >= 3 or omega >= 3, verified on all '
+                '%d graphs n=6 — machine-checked, no classical citation '
+                'load-bearing)'
+                % (worst[0], worst[1], NMAX, ht['C4'], ht['2K2'],
+                   pig_cnt))
+
+        # ------------------------------------------------------------------
+        # V2-6 sharp form (census certification)
+        # ------------------------------------------------------------------
+        sharp_ok = all(res[h]['sharp_bad'] == 0 for h in V2_CLASSES)
+        section('V2-6 SHARP-FORM-alpha-omega-n1-%d-EXHAUSTIVE' % NMAX, sharp_ok,
+                'the census-sharp form alpha*omega >= 4n/5 on every 2K2-free '
+                'and (by the complement transfer — counts equal in V2-1) every '
+                'induced-C4-free graph, exhaustive n <= %d: 0 violations; '
+                'worst alpha*omega/n = %.4f at %s (the C5: 4/5 exactly); '
+                'equality alpha*omega = 4n/5 at n=5: %d (C4) / %d (2K2) '
+                'labeled graphs (the 12 labeled C5s each; no equality at any '
+                'other n <= %d: %d)'
+                % (NMAX, res['2K2']['worst_sharp'][0],
+                   res['2K2']['worst_sharp'][1], res['C4']['eq5'],
+                   res['2K2']['eq5'], NMAX,
+                   res['C4']['eq_other'] + res['2K2']['eq_other']))
+
+        # ------------------------------------------------------------------
+        # END OF PART 1 (V2-1..V2-6): checkpoint the receipts
+        # ------------------------------------------------------------------
+        if part == 1:
+            with open('receipts61four_v2_p1.txt', 'w') as f:
+                f.write('RECEIPTS — engine61four.py v2 (W76-61K) — PART 1 '
+                        '(V2-1..V2-6)\n')
+                f.write('seed %d ; deterministic ; smoke=%s ; python3 ; numpy '
+                        '%s\n\n' % (SEED, smoke, HAVE_NUMPY))
+                f.write('\n'.join(RECEIPTS))
+                f.write('\n')
+            print('V2 PART 1 DONE: %d/%d PASS, wall %.1fs -> '
+                  'receipts61four_v2_p1.txt' % (NPASS[0], NSEC[0], wall()))
+            return 0 if NPASS[0] == NSEC[0] else 1
 
     # ------------------------------------------------------------------
     # V2-7 n = 8 sampled strata
     # ------------------------------------------------------------------
+    prs6 = [(i, j) for i in range(6) for j in range(i + 1, 6)]  # V2-8 needs it
     n8 = 8
     prs8 = [(i, j) for i in range(n8) for j in range(i + 1, n8)]
     n8res = {h: {'seen': 0, 'tri': 0, 'uncov': 0, 'viol_W': 0, 'viol_P': 0,
@@ -2667,6 +2806,10 @@ def main_v2(smoke=False):
                     if NPASS[0] == NSEC[0] else 'W76_61K_V2_ENGINE_GREEN=0')
     outname = 'receipts61four_v2_smoke.txt' if smoke else 'receipts61four_v2.txt'
     with open(outname, 'w') as f:
+        if part == 2:
+            f.write('(two-part in-process run: part 1 = V2-1..V2-6 in '
+                    'receipts61four_v2_p1.txt, part 2 = V2-7..V2-9 here; '
+                    'part 2 sections run with a fresh rng2 draw stream)\n')
         f.write('RECEIPTS — engine61four.py v2 (W76-61K) — THE C4/2K2 '
                 'CLOSE: L-PC + L-COMP\n')
         f.write('seed %d ; deterministic ; smoke=%s ; python3 ; numpy %s\n\n'
@@ -2682,6 +2825,10 @@ def main_v2(smoke=False):
 if __name__ == '__main__':
     if len(sys.argv) > 1 and sys.argv[1] == 'v2':
         sys.exit(main_v2(smoke=False))
+    if len(sys.argv) > 1 and sys.argv[1] == 'v2p1':
+        sys.exit(main_v2(smoke=False, part=1))
+    if len(sys.argv) > 1 and sys.argv[1] == 'v2p2':
+        sys.exit(main_v2(smoke=False, part=2))
     if len(sys.argv) > 1 and sys.argv[1] == 'v2smoke':
         sys.exit(main_v2(smoke=True))
     sys.exit(main())
