@@ -191,7 +191,7 @@ theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
       subst ha0
       have hb : 0 < b := by omega
       have hbp : 0 < b^(f+2) := Nat.pow_pos hb
-      rw [Nat.zero_pow_succ]
+      rw [Nat.pow_succ (0:Nat) (f+1), Nat.mul_zero]
       exact hbp
     · -- 1 ≤ a: the strict monotonicity route (positivity available)
       have hapos : 0 < a := by omega
