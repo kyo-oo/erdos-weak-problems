@@ -368,7 +368,7 @@ theorem adjacent_ones_kill (u j : Nat) (hj : 1 ≤ j)
       ring
     rw [h31] at hq ⊢
     rw [h32] at hq ⊢
-    linear_combination (-4) * hq
+    linear_combination 4 * hq.symm
   -- the digit at position d+1 is exactly 2
   have hdig : (4*u+1) / 3^(d+1) % 3 = 2 := by
     have hp : 0 < 3^(d+1) := Nat.pow_pos (by decide)

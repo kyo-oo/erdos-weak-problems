@@ -191,7 +191,7 @@ theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
       have hexp : a^(f+1) * (a + s + 1) = a^(f+1) * a + (s + 1) * a^(f+1) := by
         ring
       have hstep : 0 < (s + 1) * a^(f+1) := by
-        have hpos : 0 < a^(f+1) := Nat.pow_pos (by decide)
+        have hpos : 0 < a^(f+1) := Nat.pow_pos (by omega)
         obtain ⟨k, hk⟩ : ∃ k : Nat, a^(f+1) = k + 1 := ⟨a^(f+1) - 1, by omega⟩
         rw [hk]
         have hms : (s + 1) * (k + 1) = (s + 1) * k + (s + 1) :=
