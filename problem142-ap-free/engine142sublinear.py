@@ -355,13 +355,14 @@ def ep_ck():
             if p <= 1009:
                 T2 = cyclic_ap_count_scan(p, inB)
             else:
-                # independent method 2 at scale: scan d-profile by dot products
+                # independent method 2 at scale: scan the FULL difference
+                # profile by dot products (ALL x in Z_p — the difference need
+                # NOT lie in B; the previous `if inB[x]` was the p>1009 bug)
                 v = np.array([1 if inB[x] else 0 for x in range(p)], dtype=np.int64)
                 idx = np.arange(p)
                 T2 = 0
                 for x in range(p):
-                    if inB[x]:
-                        T2 += int(np.dot(v, v[(idx+x)%p] * v[(idx+2*x)%p]))
+                    T2 += int(np.dot(v, v[(idx+x)%p] * v[(idx+2*x)%p]))
             check2(f"EP-CK-T2agree-p{p}-{tag}", T1 == T2, f"T1={T1} T2={T2}")
             # exact identities with F = p*1_B - M  (f = F/p):
             F, C, R = cyclic_correlations(p, inB, M)
@@ -386,10 +387,14 @@ def ep_ck():
             cs_ok = (sRB*sRB <= M * p*p * sC) if sRB >= 0 else ((-sRB)**2 <= M*p*p*sC)
             check2(f"EP-CK-csbound-p{p}-{tag}", cs_ok,
                    f"(sumR_B)^2={sRB*sRB} <= M*p^2*sumC={M*p*p*sC}")
-            # (5) sanity of c_0 and symmetry
-            c0 = int(C[0]); M2 = M*(p-M)
+            # (5) sanity of c_0 and symmetry.  NOTE THE SCALE: C is the
+            # F-correlation with F = p*1_B - M, so
+            #   C_0 = sum F^2 = p^2*M - p*M^2 = p*M*(p-M)
+            # (with f = F/p: sum f^2 = M(p-M)/p and Parseval p*sum f^2 =
+            # M(p-M) — the L-EP(ii) confinement, as documented).
+            c0 = int(C[0]); M2 = p*M*(p-M)
             check2(f"EP-CK-c0sym-p{p}-{tag}", c0 == M2 and all(C[e] == C[(p-e)%p] for e in range(1, min(p, 40))),
-                   f"C_0={c0}=M(p-M)={M2}, C symmetric")
+                   f"C_0={c0}=p*M(p-M)={M2}, C symmetric")
             # (ii) core: for cyclically-AP-free sets, T = M and
             #   sum_{e!=0} c_e^2 >= delta*p*(delta^2 p - 1)^2 - delta^2(1-delta)^2 p^2
             if tag == "greedy-apfree":
