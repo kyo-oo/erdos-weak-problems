@@ -150,9 +150,8 @@ theorem dust_shift (j r t : Nat) :
     rw [e, Nat.add_mod]
     rw [Nat.mul_mod]
     rw [hW]
-    have hz : (3 * K * 4^r) % 3 = 0 := by
-      rw [Nat.mul_mod]
-      omega
+    have hz : (3 * K * 4^r) % 3 = 0 :=
+      Nat.mod_eq_zero_of_dvd ⟨K * 4^r, by ring⟩
     rw [hz]
     omega
   rw [hmod]
@@ -175,9 +174,8 @@ theorem digit_period (q k m : Nat) :
     rw [h4, hc1, hK, e1, e2]
     ring
   rw [hdecomp, digit_add_mul]
-  have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 := by
-    rw [Nat.mul_mod]
-    omega
+  have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 :=
+    Nat.mod_eq_zero_of_dvd ⟨m * c1 * 4^k + 3 * K * 4^k, by ring⟩
   rw [h0]
   omega
 
@@ -248,6 +246,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
   rcases ErdosTernary2.lt_three_cases t (by omega) with ht0 | ht1 | ht2
   · -- t = 0
     rw [ht0, Nat.zero_mul, Nat.add_zero]
+    rw [Nat.add_zero]
     unfold dustStep
     rcases ErdosTernary2.lt_three_cases ((digit3 (4^r) (j+1)) % 3)
         (Nat.mod_lt _ (show 0 < 3 by decide)) with hd | hd | hd
@@ -286,7 +285,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        exact absurd (by rw [Nat.add_mod, hd]; omega) hdig
+        exact absurd (by rw [Nat.add_mod, hd]) hdig
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
@@ -303,7 +302,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        exact absurd (by rw [Nat.add_mod, hd]; omega) hdig
+        exact absurd (by rw [Nat.add_mod, hd]) hdig
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
