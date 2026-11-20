@@ -72,7 +72,7 @@ theorem mem_filt {P : Nat → Bool} {x : Nat} {V : List Nat}
       rcases List.mem_cons.mp h with he | hm
       · refine ⟨?_, ?_⟩
         · rw [he]
-          exact List.mem_cons_self a t
+          exact (List.mem_cons.mpr (Or.inl rfl))
         · rw [← he]
           exact hP
       · exact ⟨List.mem_cons_of_mem _ (ih hm).1, (ih hm).2⟩
@@ -165,23 +165,23 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
     · have hcl : (a :: t).length = t.length + 1 := rfl
       have hlen : t.length = 2 := by omega
       cases t with
-      | nil => simp only [List.length_nil] at hlen; omega
+      | nil => exact absurd hlen (by decide)
       | cons b t2 =>
         cases t2 with
-        | nil => simp only [List.length_cons, List.length_nil] at hlen; omega
+        | nil => exact absurd hlen (by decide)
         | cons c t3 =>
           have hbc : b ≠ c := by
             intro hcon; subst hcon
-            exact absurd rfl (hall c (List.mem_cons_self c t3))
+            exact absurd rfl (hall c ((List.mem_cons.mpr (Or.inl rfl))))
           have hba : b ≠ a := by
             intro hcon; subst hcon
-            exact absurd rfl (hall b (List.mem_cons_self b (c :: t3)))
+            exact absurd rfl (hall b ((List.mem_cons.mpr (Or.inl rfl))))
           have hca : c ≠ a := by
             intro hcon; subst hcon
-            exact absurd rfl (hall c (List.mem_cons_self c t3))
-          refine ⟨a, b, c, List.mem_cons_self a (b :: c :: t3),
-            List.mem_cons_of_mem a (List.mem_cons_self b (c :: t3)),
-            List.mem_cons_of_mem a (List.mem_cons_of_mem b (List.mem_cons_self c t3)),
+            exact absurd rfl (hall c ((List.mem_cons.mpr (Or.inl rfl))))
+          refine ⟨a, b, c, (List.mem_cons.mpr (Or.inl rfl)),
+            List.mem_cons_of_mem a ((List.mem_cons.mpr (Or.inl rfl))),
+            List.mem_cons_of_mem a (List.mem_cons_of_mem b ((List.mem_cons.mpr (Or.inl rfl)))),
             hba, hca, hbc⟩
 
 /-- The canonical vertex tail is a distinct list. -/
@@ -276,13 +276,16 @@ theorem r33_math (G : List (Nat × Nat)) :
     · rcases h with h | h | h
       · exact Or.inl ⟨0, a, b, by
           show (ed G 0 a && ed G 0 b && ed G a b) = true
-          rw [memN a ha, memN b hb, h]⟩
+          rw [memN a ha, memN b hb, h]
+          rfl⟩
       · exact Or.inl ⟨0, b, c, by
           show (ed G 0 b && ed G 0 c && ed G b c) = true
-          rw [memN b hb, memN c hc, h]⟩
+          rw [memN b hb, memN c hc, h]
+          rfl⟩
       · exact Or.inl ⟨0, a, c, by
           show (ed G 0 a && ed G 0 c && ed G a c) = true
-          rw [memN a ha, memN c hc, h]⟩
+          rw [memN a ha, memN c hc, h]
+          rfl⟩
     · exact Or.inr ⟨a, b, c, h⟩
   · have hM3 : 3 ≤ (filt (fun w => !ed G 0 w) [1, 2, 3, 4, 5]).length := by omega
     obtain ⟨a, b, c, ha, hb, hc, hab, hac, hbc⟩ :=
@@ -298,13 +301,16 @@ theorem r33_math (G : List (Nat × Nat)) :
       rcases h with h | h | h
       · exact Or.inr ⟨0, a, b, by
           show (!ed G 0 a && !ed G 0 b && !ed G a b) = true
-          rw [memM a ha, memM b hb, h]⟩
+          rw [memM a ha, memM b hb, h]
+          rfl⟩
       · exact Or.inr ⟨0, b, c, by
           show (!ed G 0 b && !ed G 0 c && !ed G b c) = true
-          rw [memM b hb, memM c hc, h]⟩
+          rw [memM b hb, memM c hc, h]
+          rfl⟩
       · exact Or.inr ⟨0, a, c, by
           show (!ed G 0 a && !ed G 0 c && !ed G a c) = true
-          rw [memM a ha, memM c hc, h]⟩
+          rw [memM a ha, memM c hc, h]
+          rfl⟩
     · -- all pairs adjacent: {a,b,c} is a triangle
       exact Or.inl ⟨a, b, c, h⟩
 
