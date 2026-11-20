@@ -1,0 +1,8 @@
+[ext] k=3 N=29 r_k=11 bnb_opt=True z3_agree=True certified=True (0.3s)
+[ext] k=3 N=30 r_k=12 bnb_opt=True z3_agree=True certified=True (0.3s)
+[ext] k=3 N=31 r_k=12 bnb_opt=True z3_agree=True certified=True (0.5s)
+[ext] k=3 N=32 r_k=13 bnb_opt=True z3_agree=True certified=True (0.5s)
+[ext] k=3 N=33 r_k=13 bnb_opt=True z3_agree=True certified=True (0.8s)
+[ext] k=3 N=34 r_k=13 bnb_opt=True z3_agree=True certified=True (1.2s)
+[ext] k=3 N=35 r_k=13 bnb_opt=True z3_agree=True certified=True (1.9s)
+[ext] k=3 N=36 r_k=14 bnb_opt=True z3_agree=True certified=True (1.8s)

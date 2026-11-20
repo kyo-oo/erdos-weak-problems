@@ -1734,3 +1734,52 @@ jobs:
           test "$(grep -c '\[PASS\]' gate107official.log)" -ge 13
           test "$(grep -c '\[FAIL\]' gate107official.log)" -eq 0
           echo GATE107OFFICIAL_GREEN=1
+
+
+      - name: "Kernel 66 - Erdos 142 AP-FRONTIER (S060 wave): the exact-value theorems r_3(9)=5, r_3(11)=6, r_3(13)=7 (both directions, decide) + the Stanley/ternary arsenal bridge (S(0) cap [81]: 16 elements, 3-AP-free, decide) + the witness frontier cells (r_3(20)>=9, r_3(27)>=11, r_3(38)>=14, r_4(42)>=22) + the 188-cell dual-method certified tables (z3+bnb, zero OEIS b-file mismatches) + the ratio frontier + the board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel66.log
+          lake env lean problem142-ap-free/Erdos142.lean 2>&1 | tee -a kernel66.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel66.log
+          grep -F "E142_APFRONTIER_GREEN" kernel66.log
+          grep -E "E142.(e142_board|e142_arsenal_bridge|stanley_apfree_80|e142_r3_9_upper|e142_w_r4_42)' (does not depend on any axioms|depends on axioms)" kernel66.log
+          python3 problem142-ap-free/battery142.py
+          echo ERDOS142_APFRONTIER_KERNEL_GREEN=1
+
+      - name: "Kernel 67 - Erdos 61 ERDOS-HAJNAL RING (S060 wave): R(3,3)=6 decide over all 2^15 graphs (32 chunks) + the C5 tightness + the K3 laws (alpha >= L_3(n) at n=5,6) + the P4 cograph laws at n=5 (decomposition: disconnected-or-codisconnected over all 1024 graphs; omega.alpha shadow) + the P3 law + the 2K2 tightness family + the census interlock (all graphs n <= 7, 21 H-families) + the corrected Theorem-1 Ramsey route (the Turan-route draft REFUTED by the census) + the board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel67.log
+          lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee -a kernel67.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel67.log
+          grep -F "E61_ERDOSHAJNAL_GREEN" kernel67.log
+          grep -E "E61.(e61_board|e61_r33_c0|e61_k3n6_c31|e61_p4_decomp_5|e61_twoK2)' (does not depend on any axioms|depends on axioms)" kernel67.log
+          python3 problem61-erdos-hajnal/battery61.py
+          echo ERDOS61_ERDOSHAJNAL_KERNEL_GREEN=1
+
+      - name: "Kernel 68 - Erdos 107 HAPPY ENDING (S060 wave): the E_4 witness (GP + non-convex, decide) + THE CHIROTOPE CERTIFICATE of f(4) <= 5 (all 2^20 sign patterns in 32 decide chunks; the 62-consistent-classification with the engine-verified 8 realizable 4-patterns) + THE E_5 WITNESS (8 integer points: GP 56 dets + no convex 5 (56 subsets) + convex 4 present, decide) => f(5) >= 9 machine-certified + the board"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel68.log
+          lake env lean problem107-happy-ending/Erdos107.lean 2>&1 | tee -a kernel68.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel68.log
+          grep -F "E107_HAPPYENDING_GREEN" kernel68.log
+          grep -E "E107.(e107_board|e107_e5_noConvex5|e107_chi_c0|e107_e4_notConvex)' (does not depend on any axioms|depends on axioms)" kernel68.log
+          python3 problem107-happy-ending/battery107.py
+          echo ERDOS107_HAPPYENDING_KERNEL_GREEN=1
