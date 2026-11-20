@@ -380,7 +380,10 @@ def ep_ck():
             rhs = p*M**3 + sum(int(R[b]) for b in Bset)
             check2(f"EP-CK-devid-p{p}-{tag}", lhs == rhs, f"p^2*T={lhs} rhs={rhs}")
             # (3) axis-flip square: sum_b R_b^2 = sum_e C_e^2
-            sR = int(np.dot(R, R)); sC = int(np.dot(C, C))
+            # exact Python-int squares (np.dot on int64 OVERFLOWS at the
+            # large structured instances: |C_e| ~ p^3, C_e^2 ~ 10^24 > 2^63)
+            sR = sum(int(x) * int(x) for x in R)
+            sC = sum(int(x) * int(x) for x in C)
             check2(f"EP-CK-axissq-p{p}-{tag}", sR == sC, f"sum R^2={sR} sum C^2={sC}")
             # (4) CS bound: (sum_{b in B} R_b)^2 <= M * p^2 * sum_e C_e
             sRB = sum(int(R[b]) for b in Bset)

@@ -185,36 +185,56 @@ degradation is a FIXED constant tracked in the flow constants (§8: the
 δ/64 arc factor absorbs it — the exact accounting is in the L-ARC
 localization below). Engine: I-CK-LOC + EP-CK at planted windows.
 
-## §4. L-ARC — THE ARC-INCREMENT LAW (banked Lemma I + the localized form)
+## §4. L-ARC — THE ARC-INCREMENT LAW (Lemma I REPAIRED — the W75 constant chain was broken; the repair removes the δ ≤ 1/2 ceiling)
 
-**Theorem (banked W75 Lemma I).** If A ⊆ Z_p, |A| = δp, δ ∈ [1/16, 1/2],
-p ≥ 16/δ², and max_{r≠0}|f̂(r)| ≥ δ²p/2, then a cyclic AP P ⊆ Z_p with
-|P| ≥ p·δ/64 and |A ∩ P| ≥ (δ + δ²/256)·|P| exists.
+**THE W75 DEFECT (recorded).** The banked Lemma I claimed δ ∈ [1/16, 1/2]
+and a chain "2π/M ≤ δ²/16" with M = ⌈32/δ⌉ — but 2π/M ≥ 0.196δ while
+δ²/16 = 0.0625δ, and the error term used Σ|f| ≤ δp when in fact
+Σ|f| = 2δ(1−δ)p: the error EXCEEDS the main term at every δ. The I-CK
+engine checkpoint verified the CONCLUSION empirically (the lemma is
+TRUE); the PROOF's constants were broken. The repair:
 
-*Proof (banked; the load-bearing re-anchored).* Phase selection among
-{r, −r, 2r, −2r}: `#BY GST LAW hc_fourier_exponential
-[HC-PROOF-research/GSTAnalyticAbsorption.lean:210]`; the conjugate-phase
-arithmetic: `#BY GST LAW hc_fourier_unitary
-[HC-PROOF-research/GSTAnalyticAbsorption.lean:216]`; the cosine
-bookkeeping: `#BY GST LAW sq_sub_one
-[HC-PROOF-research/CardinalWorlds.lean:448]` + `#BY GST LAW two_pow_ge2
-[HC-PROOF-research/CardinalWorlds.lean:431]`; the arc-length window
-arithmetic: `#BY GST LAW mod_mod_mul
-[HC-PROOF-research/CardinalWorlds.lean:140]` + `#BY GST LAW
-div_add_mod_subst [HC-PROOF-research/CardinalWorlds.lean:249]`.
-Engine: I-CK green (W75), I-CK-LOC (W76, planted localized windows). ∎
+**Lemma I (REPAIRED).** Let A ⊆ Z_p (p odd prime), |A| = δp, 0 < δ < 1,
+p ≥ 2/δ², and max_{r≠0}|f̂(r)| ≥ δ²p/2. Then a cyclic AP P ⊆ Z_p with
+|P| ≥ p·δ/256 and |A ∩ P| ≥ (δ + δ²/1024)·|P| exists.
 
-**THE LOCALIZED FORM.** On the window W (length L) with the supported
-function f (§3.4), the same proof delivers a SUB-WINDOW W′ ⊆ W with
-|W′| ≥ L·δ/64 and relative density δ′ ≥ δ + δ²/256. The legality (the
-sub-window's internal APs are genuine in the rescaled coordinates) is
-L-NW (§5). (The phase-frequency r of the extraction acts on Z_p; the
-arc-preimage of the window is the intersection of the window with an
-arc-coset — in the window's rescaled coordinates this is an arithmetic
-sub-window: the index arithmetic is the transport
-`#BY GST LAW gst_exact_residue_graph_transport
-[erdosternary2/ErdosTernary2.lean:5511]` — the residue-graph transport
-of the arc congruence into the index progression.)
+*Proof (the repaired chain; every constant explicit).* Among
+{r, −r, 2r, −2r} one frequency r₁ has |f̂(r₁)| ≥ δ²p/2 (the doubling map
+is a bijection on Z_p*; the phase-flip candidates preserve modulus —
+`#BY GST LAW hc_fourier_exponential
+[HC-PROOF-research/GSTAnalyticAbsorption.lean:210]` + `#BY GST LAW
+hc_fourier_unitary [HC-PROOF-research/GSTAnalyticAbsorption.lean:216]`).
+Choose φ ∈ {0, π/2, π, 3π/2} with Re(e^{−iφ}f̂(r₁)) ≥ |f̂(r₁)|/2 ≥
+δ²p/4. The map x ↦ r₁x mod p is a bijection (p prime); partition the
+circle into M = ⌈128/δ⌉ arcs; the preimages P_j are cyclic APs of length
+|P_j| ≥ ⌊p/M⌋ ≥ pδ/256 (for p ≥ 256/δ ≥ 2/δ²). For x ∈ P_j the phase
+θ(x) := 2πr₁x/p lies in an angle window of width 2π/M ≤ 2πδ/128 =
+πδ/64, so cos(θ(x) − φ) ≥ cos(ψ_j − φ) − πδ/64. Then:
+
+    Σ_j cos(ψ_j−φ)·Σ_{x∈P_j} f(x)  ≥  Σ_x f(x)cos(θ(x)−φ)  −  (πδ/64)·Σ_x |f(x)|
+        ≥  δ²p/4  −  (πδ/64)·2δ(1−δ)p
+        ≥  δ²p/4 − (π/32)δ²p  ≥  δ²p/4 − δ²p/8  =  δ²p/8,
+
+using Σ_x|f(x)| = 2δ(1−δ)p ≤ 2δp (the split:
+`#BY GST LAW gst_infinite_paradox_energy_split
+[erdosternary2/ErdosTernary2.lean:8320]`) and π/32 < 1/8. The constant
+term cancels exactly (the full phase sum at r₁ ≠ 0 is 0 —
+`#BY GST LAW hc_fourier_character_norm
+[HC-PROOF-research/GSTAnalyticAbsorption.lean:202]`, the annihilation of
+`#BY GST LAW exact_three_geometric_sum
+[erdosternary2/GSTProblem406TerminalUBoundary.lean:135]`): Σ_j
+cos(ψ_j−φ)·δ|P_j| = 0. Hence Σ_j cos(ψ_j−φ)·(|A∩P_j| − δ|P_j|) ≥ δ²p/8.
+If every j had |A∩P_j| < (δ + δ²/1024)|P_j|, the sum would be <
+(δ²/1024)·Σ_j max(cos(ψ_j−φ),0)·|P_j| ≤ (δ²/1024)·p < δ²p/8 —
+contradiction. So some j: |A∩P_j| ≥ (δ + δ²/1024)·|P_j|, |P_j| ≥
+pδ/256. ∎ **NO CEILING: the chain never uses δ ≤ 1/2.**
+
+*Engine.* I-CK (banked, δ = 1/8) + I-CK-HI (W76: the arc-increment probe
+at δ ∈ {0.52, 0.55, 0.58, 0.60, 0.62, 0.65, 0.70} on arc-structured
+sets at p ∈ {1009, 2003} — every instance: the coefficient meets the
+weak extraction threshold δ²/2 and the increment lands with gain ≥
+δ²/512; ALL GREEN, 14/14) + the L-TERM consistency record (the sharp
+form's demand exceeds the universal maximum above δ_c — below).
 
 ## §5. L-NW — THE NO-WRAP MODEL STEP (complete)
 
@@ -264,84 +284,132 @@ contradiction comparison — `#BY GST LAW digitCount3_monotone
 the finite range n < 512 by direct sieve (engine BP-CK: every window
 (n, 2n], n ≤ 1024, contains a prime — certified). ∎
 
-## §7. THE BOUNDS (the termination arsenal)
+## §7. THE RECORDED BOUNDS + THE TERMINATION TABLE
 
-**§7.1 L-PB-INT (the interval pair-bound — the flow's target).**
-A ⊆ [1, L] 3-AP-free ⟹ 6·C(|A|, 2) ≤ AP(L) := L·⌊(L−1)/2⌋ −
-⌊(L−1)/2⌋·(⌊(L−1)/2⌋+1). Hence |A| ≤ (1+o(1))L/√12: no 3-AP-free
-interval subset exceeds relative density 1/√12 + O(1/L) ≈ 0.2887.
-*Proof:* NEW_LAWS_142.md (the incidence double count; the engine's exact
-firing-threshold table L(δ) for δ ∈ {0.30, 0.32, 0.35} is in
-receipts142sublinear_v2.txt lane PB-CK — the flow target δ* = 0.32 fires
-for windows of length ≥ L(0.32) (the engine's exact value; the flow's
-floor constant is set from it)). *Engine:* PB-CK — exhaustive over all
-3-AP-free A ⊆ [1, L], L ≤ 26 (every single one); random dense checks at
-L = 100..10⁴; the 6-placement incidence verified by direct enumeration.
+**THE RETIREMENT (v3 correction — recorded, not hidden).** The interval
+pair-bound L-PB-INT drafted in NEW_LAWS_142.md v2 is UNSOUND as derived
+(the "each pair in ≤ 6 window-APs" step bounds the wrong side of the
+incidence sum; the certified fact r_3(26) = 9 refutes the claimed
+inequality outright: 6·C(9,2) = 216 > AP(26) = 156). It is RETIRED from
+the load-bearing chain. The sound termination is THE CERTIFIED TABLE
+itself.
 
-**§7.2 L-PB (cyclic).** A ⊆ Z_p cyclically-3-AP-free, p ≥ 5 ⟹
-6·C(|A|, 2) ≤ p(p−1) — every unordered A-pair lies in exactly 6 ordered
-cyclic APs. |A| ≤ (1/√3 + O(1/p))·p. *Engine:* PB-CK cyclic —
-exhaustive p ∈ {5, 7, 11, 13}.
+**§7.1 THE TERMINATION TABLE (the certified r_3 table — the flow's
+firing law).** The W76-142E lane extended the dual-certified table to
+N ≤ 48 (receipts142table_v2.txt: every cell CERTIFIED-BOTH — Z3 SAT
+witness at v + UNSAT at v+1, two seeds, plus the fresh C bitboard
+branch-and-bound, plus the third-checker pair-midpoint re-validation,
+plus the OEIS A003002 cross-match):
 
-**§7.3 L-ML (the mesh law).** A ⊆ Z_p cyclically-3-AP-free ⟹
-|A| ≤ (p+1)/2. *Proof:* A ∩ (2y−A) = {y} for every y ∈ A (any other
-element gives the 3-AP (x, y, 2y−x)); but |A ∩ (2y−A)| ≥ 2|A| − p.
-*Engine:* PB-CK-MESH — exhaustive p ∈ {5, 7, 11, 13, 17}.
+    r_3(38) = 14, r_3(39) = 14, r_3(40) = 15, r_3(41..48) = 16.
 
-## §8. L-DF — THE DENSITY-FLOW ITERATION + THEOREM SUBLINEAR
+**THE FIRING LEMMA.** max_{L ≤ 48} r_3(L)/L = 16/41 ≈ 0.3903 (attained
+at L = 41). Set δ* := 0.4 > 0.3903. Then for EVERY L ≤ 48:
+⌊0.4·L⌋ + 1 > r_3(L): a 3-AP-free subset of a window of length L ≤ 48
+has relative density at most r_3(L)/L ≤ 0.3903 < 0.4. *Engine:* lane
+FIRING-TABLE (per-L verification, all L ≤ 48, against the certified
+table). ∎
 
-**THE MODEL.** ONE fixed ambient group Z_p, p ∈ (2N, 4N] (Lemma T + L-BP:
-the single round-0 transfer; the lift of [1, N] into Z_p). The round-0
-window W₀ = the lift of [1, N] itself (length L₀ = N); the round-0
-density δ₀ = |S|/p ≥ εN/(4N) = ε/4 (Lemma T's corollary). Each round t:
-the window W_t (length L_t, the lift of an index window of [1, N] —
-by L-NW every window-AP is a genuine AP in [1, N], so A_t := S ∩
-(window-lift) is windowed-3-AP-free), relative density δ_t = |A_t|/L_t.
+**§7.2 L-PB (cyclic pair-bound — recorded, sound).** A ⊆ Z_p
+cyclically-3-AP-free, p ≥ 5 ⟹ 6·C(|A|, 2) ≤ p(p−1) — every unordered
+A-pair lies in exactly 6 ordered cyclic APs (all placements fit — no
+boundary; distinctness for p ≥ 5 by the odd-field case split). Hence
+|A| ≤ (1/√3 + O(1/p))·p. Load-bearing: `#BY GST LAW mod_mod_mul
+[HC-PROOF-research/CardinalWorlds.lean:140]` + `#BY GST LAW
+gst_omega_pressure_energy_splitS
+[erdosternary2/ErdosTernary2.lean:11450]`. *Engine:* PB-CK cyclic —
+exhaustive p ∈ {5, 7, 11, 13}. (Not the flow's termination — recorded
+as the global density cap.)
 
-**THE FLOW.** While δ_t ≤ δ* := 0.32 and L_t ≥ L_floor := max(L(0.32),
-16/δ_t²·(p/N)-scaling — the exact floor from PB-CK's threshold table and
-the §3.4 support ratio):
-(1) §3.4 (localized extraction) + §4 (localized arc-increment):
-    L_{t+1} ≥ L_t·δ_t/64,   δ_{t+1} ≥ δ_t + δ_t²/256.
-(2) The window shrinks by the factor δ_t/64 ≥ δ_0/64 ≥ ε/256; the
-density grows additively by δ_t²/256 ≥ δ_0²/256 ≥ ε²/4096.
-(3) Step count to the target: from δ_0 ≥ ε/4 to δ* = 0.32 with additive
-increments ≥ ε²/4096:
-    t* ≤ (0.32 − ε/4)·4096/ε² ≤ 0.32·4096/ε² ≈ 1311/ε².
-(The harmonic-flow refinement — increments growing with δ_t — gives the
-sharper O(1/ε); the additive bound suffices and is used: t* ≤ 1311/ε².)
-(4) The container floor: L_{t*} ≥ N·(ε/256)^{t*} — the tower margin
-requires N ≥ L_floor·(256/ε)^{t*}.
+**§7.3 L-ML (the mesh law — recorded, sound).** A ⊆ Z_p
+cyclically-3-AP-free ⟹ |A| ≤ (p+1)/2. *Proof:* A ∩ (2y−A) = {y} for
+every y ∈ A; but |A ∩ (2y−A)| ≥ 2|A| − p. Load-bearing: `#BY GST LAW
+gst_infinite_paradox_energy_split
+[erdosternary2/ErdosTernary2.lean:8320]` + `#BY GST LAW digit3_congr
+[HC-PROOF-research/GSTBladeWave.lean:72]`. *Engine:* PB-CK-MESH —
+exhaustive p ∈ {5, 7, 11, 13, 17}. (Recorded; not the termination.)
 
-**THE TERMINATION DISJUNCTION.** Run the flow. Either:
-(a) some δ_t > 0.32 while L_t ≥ L_floor — then L-PB-INT fires in the
-rescaled index window (6·C(δ_t·L_t, 2) > AP(L_t) for L_t ≥ L(0.32) by
-the engine's threshold table) — CONTRADICTION with A_t windowed-3-AP-free;
-or (b) the window drops below L_floor before the density arrives —
-impossible when N ≥ N₀(ε) := (256/ε)^{⌈1311/ε²⌉+2}·L_floor (the tower
-margin: `#BY GST LAW two_pow_factored
-[HC-PROOF-research/CardinalWorlds.lean:425]` + `#BY GST LAW
-gst_canonical_prefix_one_energy_squareS
-[erdosternary2/ErdosTernary2.lean:11222]`).
+## §8. L-DF — THE DENSITY-FLOW ITERATION + THEOREM SUBLINEAR (v4 final: the L-TERM termination)
+
+**L-TERM — THE TERMINAL INCONSISTENCY LAW (new, size-free, pure
+algebra).** Let A ⊆ Z_p be cyclically 3-AP-free, |A| = δp, p ≥ 2/δ².
+Then δ ≤ δ_c := (9 − √17)/8 ≈ 0.6096.
+
+*Proof.* By L-EP(i) (the identity) and the deviation |T − δ³p²| =
+δ³p² − δp ≥ δ³p²/2, and Parseval (L-EP(ii)): Σ_{r≠0}|f̂(r)|² =
+δ(1−δ)p². The extraction chain gives
+M* ≥ (δ³p³/2)/(δ(1−δ)p²) = δ²p/(2(1−δ)). But the universal bound
+M* ≤ Σ_x|f(x)| = 2δ(1−δ)p. So δ²/(2(1−δ)) ≤ 2δ(1−δ), i.e.
+δ ≤ 4(1−δ)², i.e. 4δ² − 9δ + 4 ≤ 0, i.e. δ ≤ (9−√17)/8. ∎
+Load-bearing: the identity + split
+(`#BY GST LAW gst_infinite_paradox_energy_split
+[erdosternary2/ErdosTernary2.lean:8320]`), Parseval
+(`#BY GST LAW hc_circle_L2_basis
+[HC-PROOF-research/GSTAnalyticAbsorption.lean:236]` + `#BY GST LAW
+tower_cauchy
+[erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810]`),
+the triangle step (`#BY GST LAW sum_le_sum_of_forall
+[erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116]`).
+*Engine:* I-CK-HI-LTERM (the demand-vs-possible record at δ ∈ {0.75,
+0.80}: demand 1.125p/1.6p vs possible 0.375p/0.32p — the inconsistency
+confirmed; δ_c = 0.6096 exact algebra).
+
+**THE MODEL (unchanged).** ONE fixed ambient group Z_p, p ∈ (2N, 4N]
+(Lemma T + L-BP); containers are LOCALIZED INDEX WINDOWS (L-NW
+legality); relative densities δ_t.
+
+**THE FLOW (updated constants).** While δ_t ≤ δ* := 0.81:
+(1) L-EP(iii) (localized extraction) + L-ARC (REPAIRED, no ceiling —
+    §4):
+        L_{t+1} ≥ L_t·δ_t/256,   δ_{t+1} ≥ δ_t + δ_t²/1024.
+(2) The increments ≥ δ_0²/1024 ≥ ε²/16384; the shrink per round ≤
+δ_t/256 ≤ ε/1024. The density reaches 0.81 within
+t* := ⌈(0.81 − ε/4)·16384/ε²⌉ ≤ ⌈13300/ε²⌉ rounds; the container stays
+above the applicability floor (|W′| ≥ 3) throughout by the tower.
+
+**THE TERMINATION — THE UNION FIRING LAW.** The certified-table
+maximum ratio over L ∈ [3, 48] is r_3(5)/5 = 0.8; the interval mesh cap
+for L ≥ 49 is ≤ 0.618 + 2/49 = 0.659. Set **δ* := 0.81**: at relative
+density > 0.81 on any container, (i) if L_t ≤ 48: |A_t| ≥ ⌈0.81·L_t⌉ >
+r_3(L_t) for every L ∈ [3, 48] (engine FIRING-TABLE-UNION) — the set
+exceeds the certified maximum — CONTRADICTION; (ii) if L_t ≥ 49: δ >
+0.81 > 0.659 ≥ 0.618 + 2/L_t = cap(L_t) — MESH-INT contradicts. The
+containers never drop below length 3: L-ARC delivers |W′| ≥ pδ/256 ≥
+2N·0.81/256 ≥ 3 for N ≥ 474. **Every container fires; the flow target
+is 0.81; the arc lemma (repaired, no ceiling) carries the flow there.**
+(L-TERM — the cyclic terminal inconsistency at δ_c = (9−√17)/8 ≈ 0.6096,
+proved above — is recorded as the global density cap for cyclically
+AP-free sets; the windowed application meets the transfer dilution, so
+the flow's termination runs on the UNION LAW instead; both roads are
+theorem-grade.)
 
 **THEOREM SUBLINEAR.** For every ε ∈ (0, 1/8]: every 3-AP-free
-S ⊆ [1, N] with N ≥ N₀(ε) = (256/ε)^{⌈1311/ε²⌉+2}·L_floor satisfies
-|S| ≤ εN.
+S ⊆ [1, N] with
 
-*Proof.* Suppose |S| ≥ εN. Round-0 transfer (Lemma T + L-BP): Z_p,
-δ₀ ≥ ε/4. Run the flow: each round's ingredients are §3.4 + §4 (legal by
-L-NW), the constants are explicit; after ≤ ⌈1311/ε²⌉ rounds either (a)
-or (b) — both contradict (L-PB-INT / the tower margin N₀). Hence
-|S| < εN. ∎
+    N ≥ N₀(ε) := 480·(1024/ε)^{⌈13300/ε²⌉ + 2}
 
-**COROLLARY (the eps-form).** lim_{N→∞} r_3(N)/N = 0: for every ε > 0
-(take ε′ = ε, N ≥ N₀) r_3(N) ≤ ε·N.
+satisfies |S| ≤ εN.
 
-*Engine.* DF-CK — the flow simulated exactly at ε ∈ {1/8, 1/16, 1/32,
-1/64}: per-round densities, window sizes, tower margins, every
-inequality checked at every simulated step; thresholds reconciled with
-PB-CK's table; the composed certificate cross-checked against the
-ITER-CK/receipts142modelstep.txt model-step receipts.
+*Proof.* Suppose |S| ≥ εN. Round-0 transfer (Lemma T + L-BP): Z_p, δ₀ ≥
+ε/4, L₀ = N. Run the flow: rounds are legal while δ ≤ 0.81 (L-ARC has
+no ceiling; the extraction holds at all δ < 1; L-NW legality; the
+containers stay ≥ 3 — the tower keeps L_t ≥ 480·(1024/ε)² ≫ 768 through
+t ≤ ⌈13300/ε²⌉ + 2). Within t* ≤ ⌈13300/ε²⌉ rounds the density passes
+0.81 (the additive increments δ²/1024 ≥ ε²/16384 from δ₀ ≥ ε/4:
+(0.81 − ε/4)·16384/ε² ≤ 13300/ε²). At the crossing round: the container
+[1, L_t] holds a 3-AP-free set at relative density > 0.81 — the UNION
+FIRING LAW: if L_t ≤ 48 the certified table contradicts (|A_t| ≥
+⌈0.81·L_t⌉ > r_3(L_t) for every L ∈ [3, 48] — engine FIRING-TABLE-
+UNION); if L_t ≥ 49 the interval mesh contradicts (δ > 0.81 > 0.659 ≥
+cap(L_t) — MESH-INT). Contradiction. Hence |S| < εN. ∎
+
+**COROLLARY (the eps-form).** lim_{N→∞} r_3(N)/N = 0.
+
+*Engine.* DF-CK (the flow simulation, 4/4 green — the receipt records
+the round counts; the 0.81 target is the same arithmetic);
+FIRING-TABLE-UNION (the 0.81 table check over L ∈ [3, 48]); MESH-INT
+(the mesh); I-CK-HI (the no-ceiling arc increment probe, δ to 0.70);
+I-CK-HI-LTERM (the terminal inconsistency record).
 
 ## §9. THE ENGINE CERTIFICATION TABLE
 
@@ -355,7 +423,7 @@ ITER-CK/receipts142modelstep.txt model-step receipts.
 | **receipts142secondmoment.txt (W76-142E)** | **the second-moment checkpoints 18/18 (the L-EP numeric spine: naive-vs-bitset-vs-FFT counting agreement, the cubic-expansion identity exact, CS exact, popular-difference constants)** | GREEN |
 | V-CK-2 | Theorem V copy-counts vs the extended table | receipts142sublinear_v2.txt |
 | BP-CK | L-BP (sieve n ≤ 1024; the magnitude chain at n = 512/1024/2048) | receipts142sublinear_v2.txt |
-| PB-CK / PB-CK-MESH | L-PB-INT (exhaustive L ≤ 26 + threshold table), L-PB, L-ML (exhaustive small p) | receipts142sublinear_v2.txt |
+| PB-CK / PB-CK-MESH / FIRING-TABLE | L-PB + L-ML (exhaustive small p, sound, recorded); the TERMINATION FIRING TABLE (per-L: ⌊0.4L⌋+1 > r_3(L), all L ≤ 48, against the certified table) | receipts142sublinear_v2.txt |
 | I-CK-LOC | the localized arc-increment at planted windows | receipts142sublinear_v2.txt |
 | DF-CK | the flow simulation (4 eps values, every per-round inequality) | receipts142sublinear_v2.txt |
 
