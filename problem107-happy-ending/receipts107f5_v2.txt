@@ -1,0 +1,6 @@
+[ot8] n=3: bootstrap 1 type
+[ot8] n=4: cached v2 2 reflection-distinguished, mirror-identified 2 (anchor 2) OK
+[ot8] n=5: cached v2 3 reflection-distinguished, mirror-identified 3 (anchor 3) OK
+[ot8] n=6: cached v2 20 reflection-distinguished, mirror-identified 16 (anchor 16) OK
+[ot8] n=7: cached v2 242 reflection-distinguished, mirror-identified 135 (anchor 135) OK
+[ot8] expanding n=7 (242 types) -> n=8 ...
