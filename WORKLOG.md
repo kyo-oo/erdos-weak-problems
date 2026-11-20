@@ -4878,3 +4878,43 @@ citations across the 142 laws, 11 across the 61 laws, all verified by
 the LAW-SPEC engines. Zero classical engines as load-bearing.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## SESSION S077 / WAVE 77 — THE CHARTER ROUND (the behavior system + the fortress wave + LOGDECAY)
+
+**BOSS's orders:** (1) build the permanent behavior-fix system; (2) full
+fire on #61 (ALL finite H), #142 (the asymptotic), #107 (ALL n + the
+infinite laws); English; BOSS's mathematics only; combinations → new laws.
+
+**Delivered:**
+1. **THE ENGINE CHARTER** (ENGINE_CHARTER.md, campaign 06fe8b8, copy at
+   skill-bag root): the 8-point permanent protocol — BOSS address, work
+   first, maths law, verification law, THE ONE INVARIANT (the engine never
+   lies — no fabricated proofs, exact labels), wave law, continuity, scope
+   law. Binding on every session and lane from S077 forward.
+2. **WAVE W77 armed:** six lane briefs vaulted (W77_BRIEFS/: 61E closure
+   algebra + coverage machine; 61K the 5-vertex frontier — bull/house/K5;
+   142E tables N=49+ + k=4 model-step/second-moment; 142K the law stack;
+   107E ES-ALLN all-n theorem + ES-INF infinite law; 107K the f(5)=9
+   completion with the W76 bank inherited). Six worktrees live at
+   /home/z/waves/w77-*. Weapons restored (z3 5.4.1, gmpy2 2.3.2).
+   Campaign reconciled with the vault (S076 repair rounds absorbed).
+3. **THE DISPATCH CHANNEL DOWN at release** (all six Task launches
+   context-deadline — the S076/S058 failure mode); commander absorbed the
+   lanes per precedent.
+4. **W77-142K LANDED — THEOREM LOGDECAY** (branch w77-142k @ 2c00982):
+   for every N >= ceil(exp(4*10^7)): r_3(N) <= sqrt(26600)*N*sqrt(lnlnN/lnN)
+   — the FIRST POLYLOG SAVING in-package, by exact inversion of the banked
+   SUBLINEAR tower (the identity 13300/eps^2 = L/(2*ell); two sandwiches
+   with derivative-signed monotonicity; engine 19/19 dual-method, grid
+   L in [4e7, 1e50] + extremes to 1e120; negative controls load-bearing;
+   eps-boundary localized L* ~ 2.9268e7). LOGDECAY.md + NEW_CLAIMS.md
+   (C142-LOGDECAY) + WORKLOG_W77_142K.md.
+5. **In flight (commander-absorbed, next rounds):** ES-ALLN (the 107E
+   all-n theorem — rotation lemma + (a,b)-lemma + composition + ES-INF);
+   the 61 closure machine; the 107K f(5) enumeration (bank inherited from
+   w76-107k: engine107f5v2 + ot caches + the n=8 fix receipts); the 142E
+   table pushes. Guardian cron armed for vault seals.
+
+The engine never stops; it never lies. In English, always.
