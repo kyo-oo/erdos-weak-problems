@@ -372,3 +372,19 @@ arsenal laws above spot-checked numerically, 11/11, statements as quoted).
 **All eleven graphs on at most 4 vertices satisfy Erdős–Hajnal with
 explicit unconditional exponents, in-package, zero premises.**
 The engine never stops; it never lies. In English, always.
+
+## W77-61K KILL 1 additions (this branch, K5_PROOF.md)
+
+### THEOREM K5 (proven; the first 5-vertex kill)
+Every K5-free graph G on n >= 1 vertices satisfies
+alpha(G) >= floor((24n)^{1/4}) - 3, by the in-package Ramsey tower
+R(5,t) <= C(t+3,4) (recursion R(r,s) <= R(r-1,s)+R(r,s-1) + hockey-stick).
+EH(K5) follows with c = 1/5 for every n >= 1 (case ladder in K5_PROOF.md
+section 4: R(5,3) <= 15 and R(5,4) <= 35 rungs + monotone tail).
+Complement transfer kills E5 = K5bar with the same constants.
+TWO OF THE 34 FIVE-VERTEX GRAPHS DOWN.
+#BY GST LAW worldMap_monotone [HC-PROOF-research/GSTGraphV2CausalComponents.lean:127]
+#BY GST LAW cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:283]
+#BY GST LAW two_pow_factored [HC-PROOF-research/CardinalWorlds.lean:425]
+#BY GST LAW digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097]
+#BY GST LAW sq_sub_one [erdosternary2/ErdosTernary2.lean:909]
