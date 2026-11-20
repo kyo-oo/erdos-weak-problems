@@ -1,0 +1,25 @@
+[cell] interval N=1000 delta=0.3: T3=22350 agree=True/True identity=True CS=True wall=0.0s
+[cell] random   N=1000 delta=0.3: T3=6535 agree=True/True identity=True CS=True wall=0.0s
+[cell] beatty   N=1000 delta=0.3: T3=12350 agree=True/True identity=True CS=True wall=0.0s
+[cell] interval N=1000 delta=0.5: T3=62250 agree=True/True identity=True CS=True wall=0.0s
+[cell] random   N=1000 delta=0.5: T3=31136 agree=True/True identity=True CS=True wall=0.0s
+[cell] beatty   N=1000 delta=0.5: T3=62250 agree=True/True identity=True CS=True wall=0.0s
+[cell] interval N=1000 delta=0.7: T3=122150 agree=True/True identity=True CS=True wall=0.1s
+[cell] random   N=1000 delta=0.7: T3=84753 agree=True/True identity=True CS=True wall=0.0s
+[cell] beatty   N=1000 delta=0.7: T3=82150 agree=True/True identity=True CS=True wall=0.0s
+[cell] interval N=10000 delta=0.3: T3=2248500 agree=True/True identity=True CS=True wall=1.9s
+[cell] random   N=10000 delta=0.3: T3=676462 agree=True/True identity=True CS=True wall=1.2s
+[cell] beatty   N=10000 delta=0.3: T3=1248500 agree=True/True identity=True CS=True wall=1.4s
+[cell] interval N=10000 delta=0.5: T3=6247500 agree=True/True identity=True CS=True wall=5.3s
+[cell] random   N=10000 delta=0.5: T3=3100128 agree=True/True identity=True CS=True wall=4.2s
+[cell] beatty   N=10000 delta=0.5: T3=6247500 agree=True/True identity=True CS=True wall=4.4s
+[cell] interval N=10000 delta=0.7: T3=12246500 agree=True/True identity=True CS=True wall=9.3s
+[cell] random   N=10000 delta=0.7: T3=8604434 agree=True/True identity=True CS=True wall=8.1s
+[cell] beatty   N=10000 delta=0.7: T3=8246500 agree=True/True identity=True CS=True wall=7.8s
+Traceback (most recent call last):
+  File "/home/z/waves/w76-142e/problem142-ap-free/experiments_v2/engine142secondmoment.py", line 402, in <module>
+    main()
+  File "/home/z/waves/w76-142e/problem142-ap-free/experiments_v2/engine142secondmoment.py", line 393, in main
+    f"negative controls {sum(neg.values())}/{len(neg)} ; engine wall {round(time.time()-t0,1)}s")
+                         ^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'str'

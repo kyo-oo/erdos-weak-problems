@@ -119,3 +119,48 @@ regime is strict); density bookkeeping on planted progressions.
 - Files: receipts142modelstep.txt + experiments_v2/{wrapscan142.c,
   engine142modelstep.py, wrapscan_*.jsonl}.
 - PUSHED: milestone commit.
+
+## S003 — COMPONENT 3: the second-moment checkpoints (14:50–15:00)
+
+- engine142secondmoment.py written: 18 cells (N in {10^3, 10^4}) x
+  (delta in {0.3, 0.5, 0.7}) x (interval / seeded random / Beatty families),
+  |A| = delta*N exactly in every cell.
+- LAW SHAPES verified per cell:
+  SM-0 two independent counting codes (naive loops vs bitset big-int; pair
+      spectrum a third way by FFT convolution) — exact agreement on T3,
+      f3-spectrum, r-spectrum.
+  SM-1 cubic expansion identity EXACT in integers:
+      N^3 T3 = m^3 T0 + m^2 S1 + m S2 + S3 (the cubic_expansion law made
+      empirical; g = N*1_A - m integer centered indicator).
+  SM-2 Cauchy-Schwarz on the cubic remainder: S3^2 <= S4*S5 exact.
+  SM-3 spectral second moment: sum f3^2 >= T3^2/D.
+  SM-4 popular differences: sum r(d) = C(m,2); max r(d) >= ceil(C(m,2)/(N-1));
+      max f3(d) >= ceil(T3/D); observed constants c_obs in [0.105, 0.699],
+      c3_obs in [0.045, 0.699] — all above the c(delta)=delta^2/2 claim level.
+- BUG 6 (self-test): my first "odds have no 3-AP" negative-control premise was
+  WRONG ((1,5,9) lives in the odds) — replaced by the Stanley AP-free set
+  {1,2,4,5,10,11,13,14} in [1,20] (n-1 ternary digits in {0,1}), T3=0 by both
+  codes, cross-certified by the component-1 third checker.
+- BUG 7 (trivial): receipts totals line summed a dict with a string value —
+  fixed to sum booleans only. All 18 cells had already run green before it.
+- RESULT: 18/18 cells GREEN + 4/4 negative controls, engine wall 67s.
+  Notable data: random-family baseline ratio T3/(delta^3 T0) = 0.96..1.00;
+  interval family 1.43..3.34 (the structured deviation the L-EP law bounds);
+  interval T3 == floor((m-1)^2/4) closed-form anchor verified at all 6
+  interval cells; the AP-free planted set forces the exact cancellation of
+  the deviation terms (identity holds with T3=0, delta^3 T0 = 5.76).
+- Files: receipts142secondmoment.txt + tables_secondmoment_v2.json +
+  experiments_v2/engine142secondmoment.py.
+
+## S004 — Deliverables assembly (15:00–15:05)
+
+- NEW_CLAIMS.md written: C142-TABLE-EXT, C142-MODELSTEP-CERT (both required
+  by the brief) + C142-SECONDMOMENT-CK (the third component, for the K-lane's
+  L-EP consumption), schema {"id","statement","verification"}.
+- All five deliverables present:
+  1. tables_rk_v2.json + receipts142table_v2.txt (10/10 CERTIFIED-BOTH)
+  2. receipts142modelstep.txt (4/4 primes, both methods)
+  3. receipts142secondmoment.txt (18/18 cells)
+  4. NEW_CLAIMS.md
+  5. WORKLOG_W76_142E.md (this file)
+- Final push to w76-142e.
