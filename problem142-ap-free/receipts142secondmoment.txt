@@ -1,0 +1,212 @@
+RECEIPTS — engine142secondmoment.py (W76-142E) — THE SECOND-MOMENT CHECKPOINTS (L-EP)
+seed 20261120 ; deterministic ; numpy 2.1.3 ; python 3.12.16 ; 2026-11-20T14:50:49
+
+LAW SHAPES UNDER TEST (empirical forms of the K-lane ENERGY-POPULARITY law):
+  SM-0  two independent counting codes agree (naive loops vs bitset big-int;
+        pair spectrum cross-checked a third way by FFT convolution).
+  SM-1  cubic expansion identity (EXACT integers): with f = 1_A - delta over the
+        window W = {(x,d): 1<=x, x+2d<=N}, |W| = T0 = sum_d (N-2d):
+          T3(A) = delta^3 T0 + delta^2 L1 + delta Q + C
+        scaled: N^3 T3 = m^3 T0 + m^2 S1 + m S2 + S3 (g = N*1_A - m).
+  SM-2  Cauchy-Schwarz second-moment bound on the cubic remainder:
+          S3^2 <= S4*S5 (i.e. |C| <= sqrt(E2')*sqrt(V2), E2' the difference-axis
+        second moment of centered-indicator products, V2 = sum_W f(x+2d)^2);
+        the deviation Dev = T3 - delta^3 T0 = delta^2 L1 + delta Q + C exactly.
+  SM-3  spectral second moment: sum_d f3(d)^2 >= T3^2 / D.
+  SM-4  popular differences: max_d r(d) >= ceil(C(m,2)/(N-1)) and
+        max_d f3(d) >= ceil(T3/D) (pigeonhole over the difference axis);
+        observed constants c_obs = max r(d)/N vs the c(delta)*N claim.
+
+=== interval N=1000 delta=0.3 (m=300, D=499):
+PASS SM-0 CODES — T3 naive 22350 == T3 bitset 22350: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.0s
+PASS SM-1 IDENTITY — N^3 T3 = 22350000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 22350000000000: True  (T0=249500, S1=-30000000, S2=40185000000, S3=6258000000000)
+PASS SM-2 CS-BOUND — S3^2 = 39162564000000000000000000 <= S4*S5 = 483362129250000000000000000: True ; deviation T3 - delta^3 T0 = 15613.50 ; baseline ratio T3/(delta^3 T0) = 3.317747
+PASS SM-3 SPECTRAL — sum f3^2 = 4455100 >= T3^2/D = 1001047: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 299 at d=1 >= floor 45: True ; c_obs = max r/N = 0.2990 vs claim c(delta)=delta^2/2 = 0.0450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 298 at d=1 >= floor 45: True ; c3_obs = max f3/N = 0.2980 (mean f3/N = 0.0448)
+PASS INTERVAL-ANCHOR — T3 == floor((m-1)^2/4) = 22350: True
+        cell wall 0.0s
+
+=== random N=1000 delta=0.3 (m=300, D=499):
+PASS SM-0 CODES — T3 naive 6535 == T3 bitset 6535: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.0s
+PASS SM-1 IDENTITY — N^3 T3 = 6535000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 6535000000000: True  (T0=249500, S1=-1871000, S2=-42400000, S3=-20390000000)
+PASS SM-2 CS-BOUND — S3^2 = 415752100000000000000 <= S4*S5 = 567563941230000000000000000: True ; deviation T3 - delta^3 T0 = -201.50 ; baseline ratio T3/(delta^3 T0) = 0.970088
+PASS SM-3 SPECTRAL — sum f3^2 = 118737 >= T3^2/D = 85583: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 105 at d=36 >= floor 45: True ; c_obs = max r/N = 0.1050 vs claim c(delta)=delta^2/2 = 0.0450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 45 at d=36 >= floor 14: True ; c3_obs = max f3/N = 0.0450 (mean f3/N = 0.0131)
+        cell wall 0.0s
+
+=== beatty N=1000 delta=0.3 (m=300, D=499):
+PASS SM-0 CODES — T3 naive 12350 == T3 bitset 12350: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.0s
+PASS SM-1 IDENTITY — N^3 T3 = 12350000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 12350000000000: True  (T0=249500, S1=0, S2=2185000000, S3=4958000000000)
+PASS SM-2 CS-BOUND — S3^2 = 24581764000000000000000000 <= S4*S5 = 575535625250000000000000000: True ; deviation T3 - delta^3 T0 = 5613.50 ; baseline ratio T3/(delta^3 T0) = 1.833296
+PASS SM-3 SPECTRAL — sum f3^2 = 1788700 >= T3^2/D = 305656: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 297 at d=10 >= floor 45: True ; c_obs = max r/N = 0.2970 vs claim c(delta)=delta^2/2 = 0.0450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 294 at d=10 >= floor 25: True ; c3_obs = max f3/N = 0.2940 (mean f3/N = 0.0247)
+        cell wall 0.0s
+
+=== interval N=1000 delta=0.5 (m=500, D=499):
+PASS SM-0 CODES — T3 naive 62250 == T3 bitset 62250: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.0s
+PASS SM-1 IDENTITY — N^3 T3 = 62250000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 62250000000000: True  (T0=249500, S1=0, S2=62125000000, S3=0)
+PASS SM-2 CS-BOUND — S3^2 = 0 <= S4*S5 = 972660156250000000000000000: True ; deviation T3 - delta^3 T0 = 31062.50 ; baseline ratio T3/(delta^3 T0) = 1.995992
+PASS SM-3 SPECTRAL — sum f3^2 = 20708500 >= T3^2/D = 7765656: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 499 at d=1 >= floor 125: True ; c_obs = max r/N = 0.4990 vs claim c(delta)=delta^2/2 = 0.1250 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 498 at d=1 >= floor 125: True ; c3_obs = max f3/N = 0.4980 (mean f3/N = 0.1247)
+PASS INTERVAL-ANCHOR — T3 == floor((m-1)^2/4) = 62250: True
+        cell wall 0.0s
+
+=== random N=1000 delta=0.5 (m=500, D=499):
+PASS SM-0 CODES — T3 naive 31136 == T3 bitset 31136: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.1s
+PASS SM-1 IDENTITY — N^3 T3 = 31136000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 31136000000000: True  (T0=249500, S1=807000, S2=-292000000, S3=-107250000000)
+PASS SM-2 CS-BOUND — S3^2 = 11502562500000000000000 <= S4*S5 = 972660156250000000000000000: True ; deviation T3 - delta^3 T0 = -51.50 ; baseline ratio T3/(delta^3 T0) = 0.998349
+PASS SM-3 SPECTRAL — sum f3^2 = 2614072 >= T3^2/D = 1942786: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 264 at d=3 >= floor 125: True ; c_obs = max r/N = 0.2640 vs claim c(delta)=delta^2/2 = 0.1250 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 148 at d=3 >= floor 63: True ; c3_obs = max f3/N = 0.1480 (mean f3/N = 0.0624)
+        cell wall 0.1s
+
+=== beatty N=1000 delta=0.5 (m=500, D=499):
+PASS SM-0 CODES — T3 naive 62250 == T3 bitset 62250: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.0s
+PASS SM-1 IDENTITY — N^3 T3 = 62250000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 62250000000000: True  (T0=249500, S1=0, S2=62125000000, S3=0)
+PASS SM-2 CS-BOUND — S3^2 = 0 <= S4*S5 = 972660156250000000000000000: True ; deviation T3 - delta^3 T0 = 31062.50 ; baseline ratio T3/(delta^3 T0) = 1.995992
+PASS SM-3 SPECTRAL — sum f3^2 = 20708500 >= T3^2/D = 7765656: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 499 at d=2 >= floor 125: True ; c_obs = max r/N = 0.4990 vs claim c(delta)=delta^2/2 = 0.1250 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 498 at d=2 >= floor 125: True ; c3_obs = max f3/N = 0.4980 (mean f3/N = 0.1247)
+        cell wall 0.1s
+
+=== interval N=1000 delta=0.7 (m=700, D=499):
+PASS SM-0 CODES — T3 naive 122150 == T3 bitset 122150: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.1s
+PASS SM-1 IDENTITY — N^3 T3 = 122150000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 122150000000000: True  (T0=249500, S1=30000000, S2=40185000000, S3=-6258000000000)
+PASS SM-2 CS-BOUND — S3^2 = 39162564000000000000000000 <= S4*S5 = 588345329250000000000000000: True ; deviation T3 - delta^3 T0 = 36571.50 ; baseline ratio T3/(delta^3 T0) = 1.427344
+PASS SM-3 SPECTRAL — sum f3^2 = 56921900 >= T3^2/D = 29901047: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 699 at d=1 >= floor 245: True ; c_obs = max r/N = 0.6990 vs claim c(delta)=delta^2/2 = 0.2450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 698 at d=1 >= floor 245: True ; c3_obs = max f3/N = 0.6980 (mean f3/N = 0.2448)
+PASS INTERVAL-ANCHOR — T3 == floor((m-1)^2/4) = 122150: True
+        cell wall 0.1s
+
+=== random N=1000 delta=0.7 (m=700, D=499):
+PASS SM-0 CODES — T3 naive 84753 == T3 bitset 84753: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.0s
+PASS SM-1 IDENTITY — N^3 T3 = 84753000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 84753000000000: True  (T0=249500, S1=-1416000, S2=-210600000, S3=15760000000)
+PASS SM-2 CS-BOUND — S3^2 = 248377600000000000000 <= S4*S5 = 582225887829200000000000000: True ; deviation T3 - delta^3 T0 = -825.50 ; baseline ratio T3/(delta^3 T0) = 0.990354
+PASS SM-3 SPECTRAL — sum f3^2 = 19219303 >= T3^2/D = 14394931: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 498 at d=8 >= floor 245: True ; c_obs = max r/N = 0.4980 vs claim c(delta)=delta^2/2 = 0.2450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 352 at d=8 >= floor 170: True ; c3_obs = max f3/N = 0.3520 (mean f3/N = 0.1698)
+        cell wall 0.0s
+
+=== beatty N=1000 delta=0.7 (m=700, D=499):
+PASS SM-0 CODES — T3 naive 82150 == T3 bitset 82150: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 0.1s
+PASS SM-1 IDENTITY — N^3 T3 = 82150000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 82150000000000: True  (T0=249500, S1=0, S2=2185000000, S3=-4958000000000)
+PASS SM-2 CS-BOUND — S3^2 = 24581764000000000000000000 <= S4*S5 = 575700601250000000000000000: True ; deviation T3 - delta^3 T0 = -3428.50 ; baseline ratio T3/(delta^3 T0) = 0.959937
+PASS SM-3 SPECTRAL — sum f3^2 = 23589100 >= T3^2/D = 13524293: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 693 at d=10 >= floor 245: True ; c_obs = max r/N = 0.6930 vs claim c(delta)=delta^2/2 = 0.2450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 686 at d=10 >= floor 165: True ; c3_obs = max f3/N = 0.6860 (mean f3/N = 0.1646)
+        cell wall 0.1s
+
+=== interval N=10000 delta=0.3 (m=3000, D=4999):
+PASS SM-0 CODES — T3 naive 2248500 == T3 bitset 2248500: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 3.7s
+PASS SM-1 IDENTITY — N^3 T3 = 2248500000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 2248500000000000000: True  (T0=24995000, S1=-30000000000, S2=404685000000000, S3=629580000000000000)
+PASS SM-2 CS-BOUND — S3^2 = 396370976400000000000000000000000000 <= S4*S5 = 4859180957925000000000000000000000000: True ; deviation T3 - delta^3 T0 = 1573635.00 ; baseline ratio T3/(delta^3 T0) = 3.331777
+PASS SM-3 SPECTRAL — sum f3^2 = 4495501000 >= T3^2/D = 1011352720: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 2999 at d=1 >= floor 450: True ; c_obs = max r/N = 0.2999 vs claim c(delta)=delta^2/2 = 0.0450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 2998 at d=1 >= floor 450: True ; c3_obs = max f3/N = 0.2998 (mean f3/N = 0.0450)
+PASS INTERVAL-ANCHOR — T3 == floor((m-1)^2/4) = 2248500: True
+        cell wall 4.0s
+
+=== random N=10000 delta=0.3 (m=3000, D=4999):
+PASS SM-0 CODES — T3 naive 676462 == T3 bitset 676462: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 2.3s
+PASS SM-1 IDENTITY — N^3 T3 = 676462000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 676462000000000000: True  (T0=24995000, S1=190460000, S2=-132360000000, S3=279940000000000)
+PASS SM-2 CS-BOUND — S3^2 = 78366403600000000000000000000 <= S4*S5 = 5793500317928371200000000000000000000: True ; deviation T3 - delta^3 T0 = 1597.00 ; baseline ratio T3/(delta^3 T0) = 1.002366
+PASS SM-3 SPECTRAL — sum f3^2 = 123475790 >= T3^2/D = 91538475: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 946 at d=190 >= floor 450: True ; c_obs = max r/N = 0.0946 vs claim c(delta)=delta^2/2 = 0.0450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 311 at d=87 >= floor 136: True ; c3_obs = max f3/N = 0.0311 (mean f3/N = 0.0135)
+        cell wall 2.5s
+
+=== beatty N=10000 delta=0.3 (m=3000, D=4999):
+PASS SM-0 CODES — T3 naive 1248500 == T3 bitset 1248500: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 1.6s
+PASS SM-1 IDENTITY — N^3 T3 = 1248500000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 1248500000000000000: True  (T0=24995000, S1=0, S2=24685000000000, S3=499580000000000000)
+PASS SM-2 CS-BOUND — S3^2 = 249580176400000000000000000000000000 <= S4*S5 = 5784844187525000000000000000000000000: True ; deviation T3 - delta^3 T0 = 573635.00 ; baseline ratio T3/(delta^3 T0) = 1.850000
+PASS SM-3 SPECTRAL — sum f3^2 = 1828837000 >= T3^2/D = 311812812: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 2997 at d=10 >= floor 450: True ; c_obs = max r/N = 0.2997 vs claim c(delta)=delta^2/2 = 0.0450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 2994 at d=10 >= floor 250: True ; c3_obs = max f3/N = 0.2994 (mean f3/N = 0.0250)
+        cell wall 1.8s
+
+=== interval N=10000 delta=0.5 (m=5000, D=4999):
+PASS SM-0 CODES — T3 naive 6247500 == T3 bitset 6247500: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 5.3s
+PASS SM-1 IDENTITY — N^3 T3 = 6247500000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 6247500000000000000: True  (T0=24995000, S1=0, S2=624625000000000, S3=0)
+PASS SM-2 CS-BOUND — S3^2 = 0 <= S4*S5 = 9761719140625000000000000000000000000: True ; deviation T3 - delta^3 T0 = 3123125.00 ; baseline ratio T3/(delta^3 T0) = 1.999600
+PASS SM-3 SPECTRAL — sum f3^2 = 20820835000 >= T3^2/D = 7807812812: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 4999 at d=1 >= floor 1250: True ; c_obs = max r/N = 0.4999 vs claim c(delta)=delta^2/2 = 0.1250 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 4998 at d=1 >= floor 1250: True ; c3_obs = max f3/N = 0.4998 (mean f3/N = 0.1250)
+PASS INTERVAL-ANCHOR — T3 == floor((m-1)^2/4) = 6247500: True
+        cell wall 5.6s
+
+=== random N=10000 delta=0.5 (m=5000, D=4999):
+PASS SM-0 CODES — T3 naive 3100128 == T3 bitset 3100128: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 3.9s
+PASS SM-1 IDENTITY — N^3 T3 = 3100128000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 3100128000000000000: True  (T0=24995000, S1=-917990000, S2=-320200000000, S3=303750000000000)
+PASS SM-2 CS-BOUND — S3^2 = 92264062500000000000000000000 <= S4*S5 = 9761719140625000000000000000000000000: True ; deviation T3 - delta^3 T0 = -24247.00 ; baseline ratio T3/(delta^3 T0) = 0.992239
+PASS SM-3 SPECTRAL — sum f3^2 = 2547293798 >= T3^2/D = 1922543231: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 2534 at d=16 >= floor 1250: True ; c_obs = max r/N = 0.2534 vs claim c(delta)=delta^2/2 = 0.1250 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 1308 at d=15 >= floor 621: True ; c3_obs = max f3/N = 0.1308 (mean f3/N = 0.0620)
+        cell wall 4.2s
+
+=== beatty N=10000 delta=0.5 (m=5000, D=4999):
+PASS SM-0 CODES — T3 naive 6247500 == T3 bitset 6247500: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 4.0s
+PASS SM-1 IDENTITY — N^3 T3 = 6247500000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 6247500000000000000: True  (T0=24995000, S1=0, S2=624625000000000, S3=0)
+PASS SM-2 CS-BOUND — S3^2 = 0 <= S4*S5 = 9761719140625000000000000000000000000: True ; deviation T3 - delta^3 T0 = 3123125.00 ; baseline ratio T3/(delta^3 T0) = 1.999600
+PASS SM-3 SPECTRAL — sum f3^2 = 20820835000 >= T3^2/D = 7807812812: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 4999 at d=2 >= floor 1250: True ; c_obs = max r/N = 0.4999 vs claim c(delta)=delta^2/2 = 0.1250 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 4998 at d=2 >= floor 1250: True ; c3_obs = max f3/N = 0.4998 (mean f3/N = 0.1250)
+        cell wall 4.2s
+
+=== interval N=10000 delta=0.7 (m=7000, D=4999):
+PASS SM-0 CODES — T3 naive 12246500 == T3 bitset 12246500: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 13.8s
+PASS SM-1 IDENTITY — N^3 T3 = 12246500000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 12246500000000000000: True  (T0=24995000, S1=30000000000, S2=404685000000000, S3=-629580000000000000)
+PASS SM-2 CS-BOUND — S3^2 = 396370976400000000000000000000000000 <= S4*S5 = 5916724157925000000000000000000000000: True ; deviation T3 - delta^3 T0 = 3673215.00 ; baseline ratio T3/(delta^3 T0) = 1.428449
+PASS SM-3 SPECTRAL — sum f3^2 = 57142169000 >= T3^2/D = 30001352720: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 6999 at d=1 >= floor 2450: True ; c_obs = max r/N = 0.6999 vs claim c(delta)=delta^2/2 = 0.2450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 6998 at d=1 >= floor 2450: True ; c3_obs = max f3/N = 0.6998 (mean f3/N = 0.2450)
+PASS INTERVAL-ANCHOR — T3 == floor((m-1)^2/4) = 12246500: True
+        cell wall 14.3s
+
+=== random N=10000 delta=0.7 (m=7000, D=4999):
+PASS SM-0 CODES — T3 naive 8604434 == T3 bitset 8604434: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 15.7s
+PASS SM-1 IDENTITY — N^3 T3 = 8604434000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 8604434000000000000: True  (T0=24995000, S1=674800000, S2=-210300000000, S3=-444100000000000)
+PASS SM-2 CS-BOUND — S3^2 = 197224810000000000000000000000 <= S4*S5 = 5755262343302657600000000000000000000: True ; deviation T3 - delta^3 T0 = 31149.00 ; baseline ratio T3/(delta^3 T0) = 1.003633
+PASS SM-3 SPECTRAL — sum f3^2 = 19749887188 >= T3^2/D = 14810218935: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 4921 at d=3 >= floor 2450: True ; c_obs = max r/N = 0.4921 vs claim c(delta)=delta^2/2 = 0.2450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 3475 at d=22 >= floor 1722: True ; c3_obs = max f3/N = 0.3475 (mean f3/N = 0.1721)
+        cell wall 16.2s
+
+=== beatty N=10000 delta=0.7 (m=7000, D=4999):
+PASS SM-0 CODES — T3 naive 8246500 == T3 bitset 8246500: True ; f3-spectrum naive==bitset: True ; r-spectrum naive==bitset==FFT: True ; naive wall 13.3s
+PASS SM-1 IDENTITY — N^3 T3 = 8246500000000000000 == m^3 T0 + m^2 S1 + m S2 + S3 = 8246500000000000000: True  (T0=24995000, S1=0, S2=24685000000000, S3=-499580000000000000)
+PASS SM-2 CS-BOUND — S3^2 = 249580176400000000000000000000000000 <= S4*S5 = 5785011885125000000000000000000000000: True ; deviation T3 - delta^3 T0 = -326785.00 ; baseline ratio T3/(delta^3 T0) = 0.961883
+PASS SM-3 SPECTRAL — sum f3^2 = 23808841000 >= T3^2/D = 13603673184: True
+PASS SM-4 POPULAR — pairwise: sum_d r(d) == C(m,2): True ; max r(d) = 6993 at d=10 >= floor 2450: True ; c_obs = max r/N = 0.6993 vs claim c(delta)=delta^2/2 = 0.2450 (observed >= delta^2/2 * N: True)
+        triple: max f3(d) = 6986 at d=10 >= floor 1650: True ; c3_obs = max f3/N = 0.6986 (mean f3/N = 0.1650)
+        cell wall 13.7s
+
+NEGATIVE CONTROLS (soundness of the counting codes):
+  Stanley AP-free set in [1,20] (n-1 ternary digits 0/1): T3 = 0 by BOTH codes: True ; certified AP-free by the component-1 third checker: True
+  hand case N=8 A={1,2,3,5,6,7} T3 = 4 by BOTH codes, spectra equal: True
+  AP-free planted deviation, identity exact cancellation (T3=0): True (T3=0 vs delta^3*T0 = 5.7600 (delta=0.4))
+
+ARSENAL CITATIONS (load-bearing; spot-verified in receipts142table_v2.txt):
+  #BY GST LAW cubic_expansion [CardinalWorlds.lean:283] — (1+a)^3 = 1+3a+3a^2+a^3 is
+    LITERALLY the SM-1 identity: 1_A = delta + f, the triple product expands to
+    delta^3 + delta^2(linear) + delta(pairwise) + (cubic), the three window positions
+    carrying the 3's; verified EXACTLY (integers) on all 18 cells.
+  #BY GST LAW carryAtPos_bound [CardinalWorlds.lean:108] — the no-carry bound behind the
+    bitset code's shift discipline (the difference-axis shifts never overlap-carry).
+  #BY GST LAW sum_le_sum_of_forall [Erdos261Tower.lean:116] — termwise-implies-total:
+    the averaging backbone of SM-4 (a spectrum bounded by its mean somewhere above).
+  #BY GST LAW tower_cauchy [Erdos261Tower.lean:810] — the Cauchy property whose finite
+    form (Cauchy-Schwarz) carries SM-2 and SM-3.
+  #BY GST LAW digit3_mod_pow [GSTBladeWave.lean:56] / digit3_congr [GSTBladeWave.lean:72] —
+    the residue-coordinate laws behind the difference-index bookkeeping of the spectra
+    (d fixed by residues mod the window law, consistent across all three codes).
+  #BY GST LAW mod_mod_mul [CardinalWorlds.lean:140] / div_mod_mul_lemma [CardinalWorlds.lean:150]
+    / div_add_mod_subst [CardinalWorlds.lean:249] — the modular skeleton of the window
+    arithmetic (the (x, x+d, x+2d) coordinate recovery in every counting code).
+
+TOTALS — 18/18 cells fully green (SM-0..SM-4 + anchors); negative controls 4/4 ; engine wall 67.0s
+ENGINE142SECONDMOMENT_GREEN

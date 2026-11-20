@@ -4793,3 +4793,30 @@ recorded), the counting-kill's named input = anti-clustering; (4) the
 sandbox protection system (BACKUP.md + backup.sh + vault branch + cron
 guardian 539857 + .bashrc anchor). CI: kernel-b job extended with DustLaw406
 compile + dust axiom greps. The engine never stops; it never lies.
+
+---
+
+## WAVE 76 LANE 61K — 2026-11-20 — THE C4/2K2 CLOSE: THE 4-VERTEX CLASSIFICATION COMPLETE
+
+Deliverables (full record in problem61-erdos-hajnal/WORKLOG_W76_61K.md):
+(1) THE CLOSE — THEOREM C4 + THEOREM 2K2: every induced-C4-free and every
+2K2-free graph on n >= 1 vertices satisfies max(alpha,omega) >= n^(1/3),
+in-package, zero premises — hence ALL ELEVEN graphs on <= 4 vertices are
+EH-closed with explicit unconditional exponents; (2) NEW LAW L-PC (PAIR-CELL
+LAW) + NEW LAW L-COMP (COMPOSITION LAW) — statements, full proofs, arsenal
+combinations (5 + 6 laws, 11 distinct, all read-before-cite at
+arsenal-full/ locations); (3) the W75 Lemma 6/7 refutation sealed (certified
+5-vertex witness; 1,509,881 census cross-class edges) and the CORRECTED
+constraint matrix C1-C5 (7 FORCED + 29 FREE type-pairs — the classification
+complete; internal edges only in the >= 2 classes; L-DOM/L-DOM-GEN edge
+domination) — the correction is STRONGER where W75 was right (every
+exactly-one class independent); (4) engine61four.py v2 + V2-4c:
+receipts61four_v2.txt 11/11 GREEN (exhaustive n <= 7 census 731,523
+graphs/class by two independent counting codes; L-PC per-graph; the matrix
+table; L-COMP arithmetic M = 1..1999; sharp form alpha*omega >= 4n/5
+exhaustive n <= 7 equality only at the 12 labeled C5s; n = 8 strata 200K
+draws + 644 structured; negative controls; 11 arsenal spot-checks); (5)
+FOURVERTEX_PROOF.md completed (all eleven CLOSED), NEW_LAWS_61.md,
+NEW_CLAIMS.md (C61-C4, C61-2K2, C61-FOURVERTEX-COMPLETE, C61-LAW-PC,
+C61-LAW-COMP). The exponent cap c <= 1/2 recorded (K_{m x m}). The engine
+never stops; it never lies.

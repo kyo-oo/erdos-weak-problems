@@ -1,0 +1,13 @@
+[cell] N=39 v=14 status=CERTIFIED-BOTH wall=0.65s
+[cell] N=40 v=15 status=CERTIFIED-BOTH wall=0.982s
+[cell] N=41 v=16 status=CERTIFIED-BOTH wall=0.887s
+[cell] N=42 v=16 status=CERTIFIED-BOTH wall=0.704s
+[cell] N=43 v=16 status=CERTIFIED-BOTH wall=1.081s
+[cell] N=44 v=16 status=CERTIFIED-BOTH wall=1.228s
+[cell] N=45 v=16 status=CERTIFIED-BOTH wall=1.321s
+[cell] N=46 v=16 status=CERTIFIED-BOTH wall=3.143s
+[cell] N=47 v=16 status=CERTIFIED-BOTH wall=4.16s
+[cell] N=48 v=16 status=CERTIFIED-BOTH wall=6.038s
+WROTE /home/z/waves/w76-142e/problem142-ap-free/tables_rk_v2.json
+WROTE /home/z/waves/w76-142e/problem142-ap-free/receipts142table_v2.txt
+cells CERTIFIED-BOTH: 10/10 ; wall 21.5s

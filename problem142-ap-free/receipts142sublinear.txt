@@ -1,0 +1,31 @@
+=== engine142sublinear W75-142K commander battery, seed 20270117 ===
+PASS V-CK-count-N10000-m9 copies=6245000 formula=6245000
+PASS V-CK-nu-N10000-m9 min nu in band = 6300 (claim >= 625)
+=== engine142sublinear W75-142K commander battery, seed 20270117 ===
+PASS V-CK-count-N10000-m9 formula=6245000 sampled-valid
+PASS V-CK-nu-N10000-m9 min nu in band = 6300 (claim >= 625)
+PASS V-CK-copycap-N10000-m9 A apfree=True sampled worst |A^c|=4 <= r3(9)=5
+PASS V-CK-count-N10000-m30 formula=1719140 sampled-valid
+PASS V-CK-nu-N10000-m30 min nu in band = 5781 (claim >= 625)
+PASS V-CK-copycap-N10000-m30 A apfree=True sampled worst |A^c|=9 <= r3(30)=12
+PASS F1-CK-p101-t0 T=153 rhs=153.00
+PASS F1-CK-parseval-p101-t0 par=1900.0 claim=1900.0
+PASS F1-CK-p101-t1 T=30 rhs=30.00
+PASS F1-CK-parseval-p101-t1 par=1068.0 claim=1068.0
+PASS F1-CK-p101-t2 T=24 rhs=24.00
+PASS F1-CK-parseval-p101-t2 par=1068.0 claim=1068.0
+PASS F1-CK-p199-t0 T=593 rhs=593.00
+PASS F1-CK-parseval-p199-t0 par=7350.0 claim=7350.0
+PASS F1-CK-p199-t1 T=82 rhs=82.00
+PASS F1-CK-parseval-p199-t1 par=4200.0 claim=4200.0
+PASS F1-CK-p199-t2 T=611 rhs=611.00
+PASS F1-CK-parseval-p199-t2 par=7350.0 claim=7350.0
+PASS I-CK-large-coef max|fhat| at r=883: 123.7
+PASS I-CK-increment arc 0: |P|=31 density 1.0000 vs base 0.1259 + 0.00006
+PASS I-CK-length |P|=31 >= p*delta/64=2.0
+PASS ITER-CK-nowrap-p101 L=10 <= sqrt(p)=10, 2L < p: True
+PASS ITER-CK-ap-bijection-p101 cyclic=40 index=40
+PASS ITER-CK-nowrap-p199 L=14 <= sqrt(p)=14, 2L < p: True
+PASS ITER-CK-ap-bijection-p199 cyclic=84 index=84
+TOTAL: 25 PASS / 0 FAIL (wall 3s)
+SUBLINEAR_ENGINE_GREEN=1

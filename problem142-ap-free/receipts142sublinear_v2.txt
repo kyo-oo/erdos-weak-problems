@@ -1,0 +1,287 @@
+=== engine142sublinear W76-142K V2 battery (arsenal-native engine), seed 20270117 ===
+W76 correction orders: Fourier lanes F1/F2/I RETIRED as load-bearing; replaced by EP-CK/POP-CK (NEW LAW L-EP) per the arsenal-native rebuild.
+--- EP-CK: L-EP deviation identity / axis-flip square / CS bound / forced popularity ---
+PASS EP-CK-T2agree-p101-rand1o4s0 T1=155 T2=155
+PASS EP-CK-sigma-p101-rand1o4s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-rand1o4s0 p^2*T=1581155 rhs=1581155
+PASS EP-CK-axissq-p101-rand1o4s0 sum R^2=67579503192 sum C^2=67579503192
+PASS EP-CK-csbound-p101-rand1o4s0 (sumR_B)^2=9180900 <= M*p^2*sumC=17234462801539800
+PASS EP-CK-c0sym-p101-rand1o4s0 C_0=191900=p*M(p-M)=191900, C symmetric
+PASS EP-CK-T2agree-p101-rand1o4s1 T1=157 T2=157
+PASS EP-CK-sigma-p101-rand1o4s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-rand1o4s1 p^2*T=1601557 rhs=1601557
+PASS EP-CK-axissq-p101-rand1o4s1 sum R^2=64665811964 sum C^2=64665811964
+PASS EP-CK-csbound-p101-rand1o4s1 (sumR_B)^2=549058624 <= M*p^2*sumC=16491398696119100
+PASS EP-CK-c0sym-p101-rand1o4s1 C_0=191900=p*M(p-M)=191900, C symmetric
+PASS EP-CK-T2agree-p101-rand1o8s0 T1=18 T2=18
+PASS EP-CK-sigma-p101-rand1o8s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-rand1o8s0 p^2*T=183618 rhs=183618
+PASS EP-CK-axissq-p101-rand1o8s0 sum R^2=19427355656 sum C^2=19427355656
+PASS EP-CK-csbound-p101-rand1o8s0 (sumR_B)^2=82628100 <= M*p^2*sumC=2378141460562272
+PASS EP-CK-c0sym-p101-rand1o8s0 C_0=107868=p*M(p-M)=107868, C symmetric
+PASS EP-CK-T2agree-p101-rand1o8s1 T1=24 T2=24
+PASS EP-CK-sigma-p101-rand1o8s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-rand1o8s1 p^2*T=244824 rhs=244824
+PASS EP-CK-axissq-p101-rand1o8s1 sum R^2=24006013300 sum C^2=24006013300
+PASS EP-CK-csbound-p101-rand1o8s1 (sumR_B)^2=4941527616 <= M*p^2*sumC=2938624100079600
+PASS EP-CK-c0sym-p101-rand1o8s1 C_0=107868=p*M(p-M)=107868, C symmetric
+PASS EP-CK-T2agree-p101-interval T1=313 T2=313
+PASS EP-CK-sigma-p101-interval sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-interval p^2*T=3192913 rhs=3192913
+PASS EP-CK-axissq-p101-interval sum R^2=682368352300 sum C^2=682368352300
+PASS EP-CK-csbound-p101-interval (sumR_B)^2=2607540284944 <= M*p^2*sumC=174020989045307500
+PASS EP-CK-c0sym-p101-interval C_0=191900=p*M(p-M)=191900, C symmetric
+PASS EP-CK-T2agree-p101-mod3class T1=578 T2=578
+PASS EP-CK-sigma-p101-mod3class sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-mod3class p^2*T=5896178 rhs=5896178
+PASS EP-CK-axissq-p101-mod3class sum R^2=1351011034678 sum C^2=1351011034678
+PASS EP-CK-csbound-p101-mod3class (sumR_B)^2=3711302072676 <= M*p^2*sumC=468576561201509452
+PASS EP-CK-c0sym-p101-mod3class C_0=230078=p*M(p-M)=230078, C symmetric
+PASS EP-CK-T2agree-p101-greedy-apfree T1=15 T2=15
+PASS EP-CK-sigma-p101-greedy-apfree sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p101-greedy-apfree p^2*T=153015 rhs=153015
+PASS EP-CK-axissq-p101-greedy-apfree sum R^2=33898963502 sum C^2=33898963502
+PASS EP-CK-csbound-p101-greedy-apfree (sumR_B)^2=35291379600 <= M*p^2*sumC=5187049900258530
+PASS EP-CK-c0sym-p101-greedy-apfree C_0=130290=p*M(p-M)=130290, C symmetric
+PASS EP-CK-apfree-T-p101 T=15=|B|=15 (cyclically AP-free)
+PASS EP-CK-apfree-brute-p101 brute freeness confirmed
+PASS EP-CK-forced2nd-p101 sum_(e!=0)c^2=1659002/10201 (bound -140.5, delta=0.149)
+  [EP-CK-report-p101] max c_e=38481, min c_e=-22725, delta=0.1485, delta^2 p=2.2, guaranteed-positive-grade delta^4*p/8=0.01
+PASS EP-CK-T2agree-p1009-rand1o4s0 T1=16158 T2=16158
+PASS EP-CK-sigma-p1009-rand1o4s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-rand1o4s0 p^2*T=16450152798 rhs=16450152798
+PASS EP-CK-axissq-p1009-rand1o4s0 sum R^2=74143230922885856 sum C^2=74143230922885856
+PASS EP-CK-csbound-p1009-rand1o4s0 (sumR_B)^2=91880355815411076 <= M*p^2*sumC=19021921299663043900908672
+PASS EP-CK-c0sym-p1009-rand1o4s0 C_0=192480876=p*M(p-M)=192480876, C symmetric
+PASS EP-CK-T2agree-p1009-rand1o4s1 T1=15822 T2=15822
+PASS EP-CK-sigma-p1009-rand1o4s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-rand1o4s1 p^2*T=16108077582 rhs=16108077582
+PASS EP-CK-axissq-p1009-rand1o4s1 sum R^2=80005612268890872 sum C^2=80005612268890872
+PASS EP-CK-csbound-p1009-rand1o4s1 (sumR_B)^2=1517686027100100 <= M*p^2*sumC=20525952823569821339871264
+PASS EP-CK-c0sym-p1009-rand1o4s1 C_0=192480876=p*M(p-M)=192480876, C symmetric
+PASS EP-CK-T2agree-p1009-rand1o8s0 T1=2102 T2=2102
+PASS EP-CK-sigma-p1009-rand1o8s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-rand1o8s0 p^2*T=2140006262 rhs=2140006262
+PASS EP-CK-axissq-p1009-rand1o8s0 sum R^2=24505517556019858 sum C^2=24505517556019858
+PASS EP-CK-csbound-p1009-rand1o8s0 (sumR_B)^2=14793097452026884 <= M*p^2*sumC=3143523829187731884614748
+PASS EP-CK-c0sym-p1009-rand1o8s0 C_0=112259322=p*M(p-M)=112259322, C symmetric
+PASS EP-CK-T2agree-p1009-rand1o8s1 T1=2042 T2=2042
+PASS EP-CK-sigma-p1009-rand1o8s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-rand1o8s1 p^2*T=2078921402 rhs=2078921402
+PASS EP-CK-axissq-p1009-rand1o8s1 sum R^2=25409335896493050 sum C^2=25409335896493050
+PASS EP-CK-csbound-p1009-rand1o8s1 (sumR_B)^2=3665335943512324 <= M*p^2*sumC=3259464024453530145468300
+PASS EP-CK-c0sym-p1009-rand1o8s1 C_0=112259322=p*M(p-M)=112259322, C symmetric
+PASS EP-CK-T2agree-p1009-interval T1=31752 T2=31752
+PASS EP-CK-sigma-p1009-interval sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-interval p^2*T=32326107912 rhs=32326107912
+PASS EP-CK-axissq-p1009-interval sum R^2=6915422028995722452 sum C^2=6915422028995722452
+PASS EP-CK-csbound-p1009-interval (sumR_B)^2=261762397962025665600 <= M*p^2*sumC=1774195863224902515632962224
+PASS EP-CK-c0sym-p1009-interval C_0=192480876=p*M(p-M)=192480876, C symmetric
+PASS EP-CK-T2agree-p1009-mod3class T1=56785 T2=56785
+PASS EP-CK-sigma-p1009-mod3class sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-mod3class p^2*T=57811729585 rhs=57811729585
+PASS EP-CK-axissq-p1009-mod3class sum R^2=13197000975386183872 sum C^2=13197000975386183872
+PASS EP-CK-csbound-p1009-mod3class (sumR_B)^2=368429667437787588864 <= M*p^2*sumC=4527802575157461672892705984
+PASS EP-CK-c0sym-p1009-mod3class C_0=228502176=p*M(p-M)=228502176, C symmetric
+PASS EP-CK-T2agree-p1009-greedy-apfree T1=56 T2=56
+PASS EP-CK-sigma-p1009-greedy-apfree sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p1009-greedy-apfree p^2*T=57012536 rhs=57012536
+PASS EP-CK-axissq-p1009-greedy-apfree sum R^2=6041927113934552 sum C^2=6041927113934552
+PASS EP-CK-csbound-p1009-greedy-apfree (sumR_B)^2=14444195778944064 <= M*p^2*sumC=344465587092569747543872
+PASS EP-CK-c0sym-p1009-greedy-apfree C_0=53848312=p*M(p-M)=53848312, C symmetric
+PASS EP-CK-apfree-T-p1009 T=56=|B|=56 (cyclically AP-free)
+PASS EP-CK-apfree-brute-p1009 brute freeness confirmed
+PASS EP-CK-forced2nd-p1009 sum_(e!=0)c^2=3086479768/1018081 (bound -2548.7, delta=0.056)
+  [EP-CK-report-p1009] max c_e=7016586, min c_e=-3164224, delta=0.0555, delta^2 p=3.1, guaranteed-positive-grade delta^4*p/8=0.00
+PASS EP-CK-T2agree-p4999-rand1o4s0 T1=391255 T2=391255
+PASS EP-CK-sigma-p4999-rand1o4s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p4999-rand1o4s0 p^2*T=9777462841255 rhs=9777462841255
+PASS EP-CK-axissq-p4999-rand1o4s0 sum R^2=1077248646436257347966 sum C^2=1077248646436257347966
+PASS EP-CK-csbound-p4999-rand1o4s0 (sumR_B)^2=1384214815674046550016 <= M*p^2*sumC=33623635494861706234847682269534
+PASS EP-CK-c0sym-p4999-rand1o4s0 C_0=23414066250=p*M(p-M)=23414066250, C symmetric
+PASS EP-CK-T2agree-p4999-rand1o4s1 T1=390159 T2=390159
+PASS EP-CK-sigma-p4999-rand1o4s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p4999-rand1o4s1 p^2*T=9750073800159 rhs=9750073800159
+PASS EP-CK-axissq-p4999-rand1o4s1 sum R^2=1099680691823538983886 sum C^2=1099680691823538983886
+PASS EP-CK-csbound-p4999-rand1o4s1 (sumR_B)^2=96353785481868902464 <= M*p^2*sumC=34323795963850312857531804733614
+PASS EP-CK-c0sym-p4999-rand1o4s1 C_0=23414066250=p*M(p-M)=23414066250, C symmetric
+PASS EP-CK-T2agree-p4999-rand1o8s0 T1=48998 T2=48998
+PASS EP-CK-sigma-p4999-rand1o8s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p4999-rand1o8s0 p^2*T=1224460068998 rhs=1224460068998
+PASS EP-CK-axissq-p4999-rand1o8s0 sum R^2=374268163747441797484 sum C^2=374268163747441797484
+PASS EP-CK-csbound-p4999-rand1o8s0 (sumR_B)^2=97020916559860622884 <= M*p^2*sumC=5836248154661642182337781470016
+PASS EP-CK-c0sym-p4999-rand1o8s0 C_0=13647270000=p*M(p-M)=13647270000, C symmetric
+PASS EP-CK-T2agree-p4999-rand1o8s1 T1=48856 T2=48856
+PASS EP-CK-sigma-p4999-rand1o8s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p4999-rand1o8s1 p^2*T=1220911488856 rhs=1220911488856
+PASS EP-CK-axissq-p4999-rand1o8s1 sum R^2=362100402825231458000 sum C^2=362100402825231458000
+PASS EP-CK-csbound-p4999-rand1o8s1 (sumR_B)^2=39706879242206670400 <= M*p^2*sumC=5646507003510632663446509792000
+PASS EP-CK-c0sym-p4999-rand1o8s1 C_0=13647270000=p*M(p-M)=13647270000, C symmetric
+PASS EP-CK-T2agree-p4999-interval T1=780001 T2=780001
+PASS EP-CK-sigma-p4999-interval sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p4999-interval p^2*T=19492225770001 rhs=19492225770001
+PASS EP-CK-axissq-p4999-interval sum R^2=507183588550971302086250 sum C^2=507183588550971302086250
+PASS EP-CK-csbound-p4999-interval (sumR_B)^2=95100879214766161139062500 <= M*p^2*sumC=15830473462955379376243255293226250
+PASS EP-CK-c0sym-p4999-interval C_0=23414066250=p*M(p-M)=23414066250, C symmetric
+PASS EP-CK-T2agree-p4999-mod3class T1=1389445 T2=1389445
+PASS EP-CK-sigma-p4999-mod3class sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p4999-mod3class p^2*T=34722231939445 rhs=34722231939445
+PASS EP-CK-axissq-p4999-mod3class sum R^2=963927700478427471911852 sum C^2=963927700478427471911852
+PASS EP-CK-csbound-p4999-mod3class (sumR_B)^2=133745166465385915842278464 <= M*p^2*sumC=40155619849538966203508257204217284
+PASS EP-CK-c0sym-p4999-mod3class C_0=27766665556=p*M(p-M)=27766665556, C symmetric
+PASS EP-CK-T2agree-p10007-rand1o4s0 T1=1562403 T2=1562403
+PASS EP-CK-sigma-p10007-rand1o4s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p10007-rand1o4s0 p^2*T=156459112977747 rhs=156459112977747
+PASS EP-CK-axissq-p10007-rand1o4s0 sum R^2=71208383438562220585106 sum C^2=71208383438562220585106
+PASS EP-CK-csbound-p10007-rand1o4s0 (sumR_B)^2=7738427920447424257600 <= M*p^2*sumC=17834158327877771556612250098995194
+PASS EP-CK-c0sym-p10007-rand1o4s0 C_0=187856467542=p*M(p-M)=187856467542, C symmetric
+PASS EP-CK-T2agree-p10007-rand1o4s1 T1=1562807 T2=1562807
+PASS EP-CK-sigma-p10007-rand1o4s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p10007-rand1o4s1 p^2*T=156499569557543 rhs=156499569557543
+PASS EP-CK-axissq-p10007-rand1o4s1 sum R^2=70301528682620476417874 sum C^2=70301528682620476417874
+PASS EP-CK-csbound-p10007-rand1o4s1 (sumR_B)^2=2257366859759178641296 <= M*p^2*sumC=17607036316158352412180006336400826
+PASS EP-CK-c0sym-p10007-rand1o4s1 C_0=187856467542=p*M(p-M)=187856467542, C symmetric
+PASS EP-CK-T2agree-p10007-rand1o8s0 T1=196306 T2=196306
+PASS EP-CK-sigma-p10007-rand1o8s0 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p10007-rand1o8s0 p^2*T=19658092458994 rhs=19658092458994
+PASS EP-CK-axissq-p10007-rand1o8s0 sum R^2=23763059212373694613510 sum C^2=23763059212373694613510
+PASS EP-CK-csbound-p10007-rand1o8s0 (sumR_B)^2=12807581081543008992036 <= M*p^2*sumC=2974542392396253981134909327487500
+PASS EP-CK-c0sym-p10007-rand1o8s0 C_0=109539123750=p*M(p-M)=109539123750, C symmetric
+PASS EP-CK-T2agree-p10007-rand1o8s1 T1=196122 T2=196122
+PASS EP-CK-sigma-p10007-rand1o8s1 sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p10007-rand1o8s1 p^2*T=19639666689978 rhs=19639666689978
+PASS EP-CK-axissq-p10007-rand1o8s1 sum R^2=23474813534905657919166 sum C^2=23474813534905657919166
+PASS EP-CK-csbound-p10007-rand1o8s1 (sumR_B)^2=8976579965215453140484 <= M*p^2*sumC=2938461222064144743003151598917500
+PASS EP-CK-c0sym-p10007-rand1o8s1 C_0=109539123750=p*M(p-M)=109539123750, C symmetric
+PASS EP-CK-T2agree-p10007-interval T1=3127501 T2=3127501
+PASS EP-CK-sigma-p10007-interval sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p10007-interval p^2*T=313188103387549 rhs=313188103387549
+PASS EP-CK-axissq-p10007-interval sum R^2=65376790984815786889494558 sum C^2=65376790984815786889494558
+PASS EP-CK-csbound-p10007-interval (sumR_B)^2=24536409796713795151479301764 <= M*p^2*sumC=16373634466758210098873944101006708342
+PASS EP-CK-c0sym-p10007-interval C_0=187856467542=p*M(p-M)=187856467542, C symmetric
+PASS EP-CK-T2agree-p10007-mod3class T1=5564448 T2=5564448
+PASS EP-CK-sigma-p10007-mod3class sigma(b)*p^2 = p*M^2+R_b on sampled b
+PASS EP-CK-devid-p10007-mod3class p^2*T=557224095377952 rhs=557224095377952
+PASS EP-CK-axissq-p10007-mod3class sum R^2=124087806642869207405290328 sum C^2=124087806642869207405290328
+PASS EP-CK-csbound-p10007-mod3class (sumR_B)^2=34486065808242863046222873600 <= M*p^2*sumC=41453666549164878295003539513967296192
+PASS EP-CK-c0sym-p10007-mod3class C_0=222700341192=p*M(p-M)=222700341192, C symmetric
+--- POP-CK: popular-difference extraction, greedy 3-AP-free at N=1000 ---
+PASS POP-CK-apfree |B|=105 delta=0.1050 (full brute O(N^2) freeness)
+PASS POP-CK-magree two counting codes agree (sum=5460=C(M,2)=5460)
+PASS POP-CK-pairsplit sum_d m_d = C(M,2)
+PASS POP-CK-pigeonhole max m_d = m[1] = 52 >= delta^2 N/3 = 3.7
+  [POP-CK-report] top popular gaps (gamma, d, m_d): [(41.1, 9, 52), (41.0, 3, 52), (41.0, 1, 52), (38.3, 27, 49), (37.9, 81, 48), (32.7, 243, 41)]
+PASS POP-CK-classamp L-EP(iii) class-amplification verified on 8/6 top gaps (some class >= 2*delta^2*(n-1)+2*gamma/d; runs<=2; pairs=|B_r|-runs)
+  [POP-CK-report] best class density at gap 9: 0.2411 vs delta=0.1050 vs 2*delta^2=0.0220
+PASS POP-CK-pigeonhole-N4000 N=4000 |B|=256 delta=0.0640 max m[1]=128 >= 5.5
+--- ITER-CK-2: L-NW no-wrap model step (brute wrap-scan + rescaled coords) ---
+PASS ITER-CK-2-wrapscan-p101 40 random (a,q,ell<=sqrt(p)=10) cyclic APs all genuine
+PASS ITER-CK-2-rescaled-p101 rescaled-coordinates divisibility check agrees
+PASS ITER-CK-2-bijection-p101 cyclic AP count == model AP count (bijection)
+PASS ITER-CK-2-wrapscan-p1009 40 random (a,q,ell<=sqrt(p)=31) cyclic APs all genuine
+PASS ITER-CK-2-rescaled-p1009 rescaled-coordinates divisibility check agrees
+PASS ITER-CK-2-bijection-p1009 cyclic AP count == model AP count (bijection)
+PASS ITER-CK-2-wrapscan-p3203 20 random (a,q,ell<=sqrt(p)=56) cyclic APs all genuine
+PASS ITER-CK-2-rescaled-p3203 rescaled-coordinates divisibility check agrees
+PASS ITER-CK-2-bijection-p3203 cyclic AP count == model AP count (bijection)
+PASS ITER-CK-2-wrapscan-p9973 20 random (a,q,ell<=sqrt(p)=99) cyclic APs all genuine
+PASS ITER-CK-2-rescaled-p9973 rescaled-coordinates divisibility check agrees
+PASS ITER-CK-2-bijection-p9973 cyclic AP count == model AP count (bijection)
+PASS ITER-CK-2-ladder-p1009 3-level container-ladder composition: parameterization identity, injectivity, nesting, no-wrap at every level (25 trials)
+--- V-CK-2: copy-count checkpoints with the banked + 142E-extended table ---
+PASS V-CK-2-table-crosscheck banked r_3 values agree with 142E tables_rk.json (k=3 covers N=1..38, five methods per value)
+PASS V-CK-2-copies-N10000-m9 #copies formula=6245000, 400 sampled copies valid (two methods: formula vs enumeration)
+PASS V-CK-2-nu-N10000-m9 min nu in band = 6329 >= N/16 = 625
+PASS V-CK-2-copycap-N10000-m9 sampled worst |A cap copy|=3 <= r_3(9)=5
+PASS V-CK-2-copies-N10000-m30 #copies formula=1719140, 400 sampled copies valid (two methods: formula vs enumeration)
+PASS V-CK-2-nu-N10000-m30 min nu in band = 5805 >= N/16 = 625
+PASS V-CK-2-copycap-N10000-m30 sampled worst |A cap copy|=6 <= r_3(30)=12
+PASS V-CK-2-copies-N10000-m38 #copies formula=1346355, 400 sampled copies valid (two methods: formula vs enumeration)
+PASS V-CK-2-nu-N10000-m38 min nu in band = 5742 >= N/16 = 625
+PASS V-CK-2-copycap-N10000-m38 sampled worst |A cap copy|=8 <= r_3(38)=14
+PASS V-CK-2-copies-N10000-m48 #copies formula=1058834, 400 sampled copies valid (two methods: formula vs enumeration)
+PASS V-CK-2-nu-N10000-m48 min nu in band = 5741 >= N/16 = 625
+PASS V-CK-2-copycap-N10000-m48 sampled worst |A cap copy|=8 <= r_3(48)=16
+PASS V-CK-2-blockladder-N1000 rho(48)+48/N=0.3813 (certified linear cap)
+PASS V-CK-2-blockladder-N10000 rho(48)+48/N=0.3381 (certified linear cap)
+TOTAL: 196 PASS / 0 FAIL (wall 71s)
+SUBLINEAR_ENGINE_V2_GREEN=1
+=== engine142v2_extra (W76-142K missing lanes) ===
+--- FIRING-TABLE: the certified-table firing law (range-exact) ---
+PASS FIRING-TABLE-range-38-48 for every L in [38,48]: floor(0.4L)+1 > r_3(L) (max ratio there 0.3902 < 0.4)
+[firing] the certified ratios BELOW 38 reach 1.000 — the table-termination fires only on [38,48]; the size-free firing law is the interval mesh at 0.618 (MESH-INT)
+PASS FIRING-TABLE-UNION-3-48 ceil(0.81L) > r_3(L) for every L in [3,48] (max ratio 0.8000 at the argmax; mesh cap for L>=49: 0.659 < 0.81)
+--- BP-CK: L-BP Bertrand in-package ---
+PASS BP-CK-sieve-1024 every (n,2n] window n<=1024 has a prime (0 misses)
+PASS BP-CK-magnitude-n512 4^512/(2n+1) ~ 10^305 > (2n)^(sqrt+pi) ~ 10^301
+PASS BP-CK-magnitude-n1024 4^1024/(2n+1) ~ 10^613 > (2n)^(sqrt+pi) ~ 10^556
+PASS BP-CK-magnitude-n2048 4^2048/(2n+1) ~ 10^1229 > (2n)^(sqrt+pi) ~ 10^1019
+--- PB-CK: L-PB cyclic pair-bound + PB-CK-MESH mesh law (max-size DFS) ---
+PASS PB-CK-p5 max cyclic-AP-free size 2: 6*C(k,2)=6 <= p(p-1)=20
+PASS PB-CK-MESH-p5 max size 2 <= (p+1)/2=3
+PASS PB-CK-p7 max cyclic-AP-free size 3: 6*C(k,2)=18 <= p(p-1)=42
+PASS PB-CK-MESH-p7 max size 3 <= (p+1)/2=4
+PASS PB-CK-p11 max cyclic-AP-free size 4: 6*C(k,2)=36 <= p(p-1)=110
+PASS PB-CK-MESH-p11 max size 4 <= (p+1)/2=6
+PASS PB-CK-p13 max cyclic-AP-free size 4: 6*C(k,2)=36 <= p(p-1)=156
+PASS PB-CK-MESH-p13 max size 4 <= (p+1)/2=7
+PASS PB-CK-p17 max cyclic-AP-free size 5: 6*C(k,2)=60 <= p(p-1)=272
+PASS PB-CK-MESH-p17 max size 5 <= (p+1)/2=9
+PASS PB-CK-incidence-p13 every sampled A-pair in exactly 6 ordered cyclic APs (6 pairs)
+PASS PB-CK-incidence-p17 every sampled A-pair in exactly 6 ordered cyclic APs (8 pairs)
+--- MESH-INT: the interval-capacity mesh (the 0.618 firing law) ---
+PASS MESH-INT-capacity-L60 greedy AP-free sets: zero in-A midpoints; pair-count 56 <= capacity 622 (delta=0.267)
+PASS MESH-INT-capacity-L100 greedy AP-free sets: zero in-A midpoints; pair-count 132 <= capacity 2038 (delta=0.240)
+PASS MESH-INT-capacity-L160 greedy AP-free sets: zero in-A midpoints; pair-count 240 <= capacity 5072 (delta=0.200)
+PASS MESH-INT-capacity-L200 greedy AP-free sets: zero in-A midpoints; pair-count 240 <= capacity 8204 (delta=0.160)
+PASS MESH-INT-cap-table certified max density 1.0000 at L=2 within 0.618+2/L cap
+--- I-CK-HI: the arc-increment probe (delta 0.52..0.70 — the repaired Lemma I has NO ceiling) + the L-TERM consistency record ---
+PASS I-CK-HI-p1009-d52 arc sets: d=0.521->best=1.000 (+0.4787); d=0.521->best=1.000 (+0.4787); d=0.521->best=1.000 (+0.4787); d=0.521->best=1.000 (+0.4787); min |fhat|/p = 0.318 >= delta^2/(2(1-delta)) = 0.135; required gain >= 0.00053
+PASS I-CK-HI-p1009-d55 arc sets: d=0.551->best=1.000 (+0.4490); d=0.551->best=1.000 (+0.4490); d=0.551->best=1.000 (+0.4490); d=0.551->best=1.000 (+0.4490); min |fhat|/p = 0.314 >= delta^2/(2(1-delta)) = 0.151; required gain >= 0.00059
+PASS I-CK-HI-p1009-d57 arc sets: d=0.583->best=1.000 (+0.4172); d=0.583->best=1.000 (+0.4172); d=0.583->best=1.000 (+0.4172); d=0.583->best=1.000 (+0.4172); min |fhat|/p = 0.308 >= delta^2/(2(1-delta)) = 0.168; required gain >= 0.00066
+PASS I-CK-HI-p1009-d60 arc sets: d=0.603->best=1.000 (+0.3974); d=0.603->best=1.000 (+0.3974); d=0.603->best=1.000 (+0.3974); d=0.603->best=1.000 (+0.3974); min |fhat|/p = 0.302 >= delta^2/(2(1-delta)) = 0.180; required gain >= 0.00070
+PASS I-CK-HI-p1009-d62 arc sets: d=0.622->best=1.000 (+0.3776); d=0.622->best=1.000 (+0.3776); d=0.622->best=1.000 (+0.3776); d=0.622->best=1.000 (+0.3776); min |fhat|/p = 0.295 >= delta^2/(2(1-delta)) = 0.192; required gain >= 0.00075
+PASS I-CK-HI-p1009-d65 arc sets: d=0.652->best=1.000 (+0.3479); d=0.652->best=1.000 (+0.3479); d=0.652->best=1.000 (+0.3479); d=0.652->best=1.000 (+0.3479); min |fhat|/p = 0.283 >= delta^2/(2(1-delta)) = 0.211; required gain >= 0.00083
+PASS I-CK-HI-p1009-d70 arc sets: d=0.702->best=1.000 (+0.2983); d=0.702->best=1.000 (+0.2983); d=0.702->best=1.000 (+0.2983); d=0.702->best=1.000 (+0.2983); min |fhat|/p = 0.257 >= delta^2/(2(1-delta)) = 0.245; required gain >= 0.00096
+PASS I-CK-HI-LTERM-p1009-d75 delta=0.75: extraction demand 1.125p > universal max 0.375p — L-TERM territory (delta_c = 0.6096; no AP-free set exists)
+PASS I-CK-HI-LTERM-p1009-d80 delta=0.8: extraction demand 1.600p > universal max 0.320p — L-TERM territory (delta_c = 0.6096; no AP-free set exists)
+PASS I-CK-HI-p2003-d52 arc sets: d=0.521->best=1.000 (+0.4788); d=0.521->best=1.000 (+0.4788); d=0.521->best=1.000 (+0.4788); d=0.521->best=1.000 (+0.4788); min |fhat|/p = 0.318 >= delta^2/(2(1-delta)) = 0.135; required gain >= 0.00053
+PASS I-CK-HI-p2003-d55 arc sets: d=0.551->best=1.000 (+0.4488); d=0.551->best=1.000 (+0.4488); d=0.551->best=1.000 (+0.4488); d=0.551->best=1.000 (+0.4488); min |fhat|/p = 0.314 >= delta^2/(2(1-delta)) = 0.151; required gain >= 0.00059
+PASS I-CK-HI-p2003-d57 arc sets: d=0.581->best=1.000 (+0.4189); d=0.581->best=1.000 (+0.4189); d=0.581->best=1.000 (+0.4189); d=0.581->best=1.000 (+0.4189); min |fhat|/p = 0.308 >= delta^2/(2(1-delta)) = 0.168; required gain >= 0.00066
+PASS I-CK-HI-p2003-d60 arc sets: d=0.601->best=1.000 (+0.3989); d=0.601->best=1.000 (+0.3989); d=0.601->best=1.000 (+0.3989); d=0.601->best=1.000 (+0.3989); min |fhat|/p = 0.302 >= delta^2/(2(1-delta)) = 0.180; required gain >= 0.00070
+PASS I-CK-HI-p2003-d62 arc sets: d=0.621->best=1.000 (+0.3789); d=0.621->best=1.000 (+0.3789); d=0.621->best=1.000 (+0.3789); d=0.621->best=1.000 (+0.3789); min |fhat|/p = 0.296 >= delta^2/(2(1-delta)) = 0.192; required gain >= 0.00075
+PASS I-CK-HI-p2003-d65 arc sets: d=0.651->best=1.000 (+0.3490); d=0.651->best=1.000 (+0.3490); d=0.651->best=1.000 (+0.3490); d=0.651->best=1.000 (+0.3490); min |fhat|/p = 0.283 >= delta^2/(2(1-delta)) = 0.211; required gain >= 0.00083
+PASS I-CK-HI-p2003-d70 arc sets: d=0.701->best=1.000 (+0.2991); d=0.701->best=1.000 (+0.2991); d=0.701->best=1.000 (+0.2991); d=0.701->best=1.000 (+0.2991); min |fhat|/p = 0.257 >= delta^2/(2(1-delta)) = 0.245; required gain >= 0.00096
+PASS I-CK-HI-LTERM-p2003-d75 delta=0.75: extraction demand 1.125p > universal max 0.375p — L-TERM territory (delta_c = 0.6096; no AP-free set exists)
+PASS I-CK-HI-LTERM-p2003-d80 delta=0.8: extraction demand 1.600p > universal max 0.320p — L-TERM territory (delta_c = 0.6096; no AP-free set exists)
+--- DF-CK: the density-flow simulation (the 0.61 L-TERM target) ---
+PASS DF-CK-eps8 eps=1/8: t=7776 rounds to delta>0.61 (the L-TERM threshold); cumulative shrink 10^-63536; N0(eps) = 480*(1024/eps)^(t+2)
+PASS DF-CK-eps16 eps=1/16: t=15968 rounds to delta>0.61 (the L-TERM threshold); cumulative shrink 10^-140519; N0(eps) = 480*(1024/eps)^(t+2)
+PASS DF-CK-eps32 eps=1/32: t=32353 rounds to delta>0.61 (the L-TERM threshold); cumulative shrink 10^-305848; N0(eps) = 480*(1024/eps)^(t+2)
+PASS DF-CK-eps64 eps=1/64: t=65122 rounds to delta>0.61 (the L-TERM threshold); cumulative shrink 10^-659211; N0(eps) = 480*(1024/eps)^(t+2)
+--- LAW-SPEC: arsenal statements read + file:line verified ---
+PASS LAW-SPEC-gst_infinite_paradox_energy_split [erdosternary2/ErdosTernary2.lean:8320] theorem gst_infinite_paradox_energy_split (t T j : Nat) :
+PASS LAW-SPEC-cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:283] theorem cubic_expansion (a : Nat) : (1 + a)^3 = 1 + 3*a + 3*a*a + a*a*a := by
+PASS LAW-SPEC-hc_fourier_character_norm [HC-PROOF-research/GSTAnalyticAbsorption.lean:202] theorem hc_fourier_character_norm (n : ℤ) :
+PASS LAW-SPEC-hc_fourier_exponential [HC-PROOF-research/GSTAnalyticAbsorption.lean:210] theorem hc_fourier_exponential (m n : ℤ) (x : AddCircle (1 : ℝ)) :
+PASS LAW-SPEC-hc_fourier_unitary [HC-PROOF-research/GSTAnalyticAbsorption.lean:216] theorem hc_fourier_unitary (n : ℤ) (x : AddCircle (1 : ℝ)) :
+PASS LAW-SPEC-hc_circle_L2_basis [HC-PROOF-research/GSTAnalyticAbsorption.lean:236] theorem hc_circle_L2_basis :
+PASS LAW-SPEC-exact_three_geometric_sum [erdosternary2/GSTProblem406TerminalUBoundary.lean:135] private theorem exact_three_geometric_sum (H : Nat) :
+PASS LAW-SPEC-tower_cauchy [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810] theorem tower_cauchy (σ : Nat → Bool) :
+PASS LAW-SPEC-sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116] theorem sum_le_sum_of_forall {l : List Nat} {f g : Nat → Nat} (h : ∀ x ∈ l, f x ≤ g x) :
+PASS LAW-SPEC-digit3_congr [HC-PROOF-research/GSTBladeWave.lean:72] theorem digit3_congr {R₁ R₂ j : Nat}
+PASS LAW-SPEC-digit3_mod_pow [HC-PROOF-research/GSTBladeWave.lean:56] theorem digit3_mod_pow (R j : Nat) :
+PASS LAW-SPEC-mod_mod_mul [HC-PROOF-research/CardinalWorlds.lean:140] theorem mod_mod_mul (n a b : Nat) (_ha : 0 < a) : (n % (a * b)) % a = n % a :=
+PASS LAW-SPEC-div_mod_mul_lemma [HC-PROOF-research/CardinalWorlds.lean:150] theorem div_mod_mul_lemma (n a b : Nat) (ha : 0 < a) (hb : 0 < b) :
+PASS LAW-SPEC-div_add_mod_subst [HC-PROOF-research/CardinalWorlds.lean:249] theorem div_add_mod_subst (a : Nat) (ha : a % 3 = 2) : a = 3 * (a / 3) + 2 := by
+PASS LAW-SPEC-mul_add_div_lemma [HC-PROOF-research/CardinalWorlds.lean:143] theorem mul_add_div_lemma (k r d : Nat) (hpos : 0 < d) : (d * k + r) / d = k + r / d := by
+PASS LAW-SPEC-carryAtPos_bound [HC-PROOF-research/CardinalWorlds.lean:108] theorem carryAtPos_bound (R p : Nat) : carryAtPos R p < 4 := by
+PASS LAW-SPEC-two_pow_ge2 [HC-PROOF-research/CardinalWorlds.lean:431] theorem two_pow_ge2 (j : Nat) (hj : 1 <= j) : 2 <= 2^j := by
+PASS LAW-SPEC-two_pow_factored [HC-PROOF-research/CardinalWorlds.lean:425] theorem two_pow_factored (j : Nat) (hj : 1 <= j) : 2^j = 2 * 2^(j-1) := by
+PASS LAW-SPEC-sq_sub_one [HC-PROOF-research/CardinalWorlds.lean:448] theorem sq_sub_one (a : Nat) (ha : 1 <= a) : a^2 - 1 = (a - 1) * (a + 1) := by
+PASS LAW-SPEC-digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097] theorem digitCount3_monotone : ∀ n m : Nat, n ≤ m → digitCount3 n ≤ digitCount3 m := by
+PASS LAW-SPEC-gst_canonical_prefix_one_energy_squareS [erdosternary2/ErdosTernary2.lean:11222] theorem gst_canonical_prefix_one_energy_squareS
+PASS LAW-SPEC-gst_omega_pressure_energy_splitS [erdosternary2/ErdosTernary2.lean:11450] theorem gst_omega_pressure_energy_splitS
+PASS LAW-SPEC-gst_exact_residue_graph_transport [erdosternary2/ErdosTernary2.lean:5511] theorem gst_exact_residue_graph_transport (P T c0 k j : Nat)
+EXTRA TOTAL: 68 PASS / 0 FAIL (wall 2s)
+EXTRA_LANES_GREEN=1
