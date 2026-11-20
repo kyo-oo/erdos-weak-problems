@@ -182,7 +182,7 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
           refine ⟨a, b, c, (List.mem_cons.mpr (Or.inl rfl)),
             List.mem_cons_of_mem a ((List.mem_cons.mpr (Or.inl rfl))),
             List.mem_cons_of_mem a (List.mem_cons_of_mem b ((List.mem_cons.mpr (Or.inl rfl)))),
-            hba, hca, hbc⟩
+            Ne.symm hba, Ne.symm hca, hbc⟩
 
 /-- The canonical vertex tail is a distinct list. -/
 theorem dlist_12345 : DList [1, 2, 3, 4, 5] := by
