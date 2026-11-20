@@ -1,0 +1,13 @@
+============================================================================== 
+[E0] W75-61E GRAND CENSUS ENGINE — start (t=0.0s) 
+[E0] 4-vertex census from first principles: 64 labeled graphs -> 11 isomorphism classes 
+[E0]   (brute-permutation canonical form; class sizes {'2K2': 3, '4K1(K4bar)': 1, 'C4': 3, 'K1,3(claw)': 4, 'K2+2K1': 6, 'K3+K1': 4, 'K4': 1, 'P3+K1': 12, 'P4': 12, 'diamond': 6, 'paw': 12}) 
+[E0] the 11 classes: 2K2, 4K1(K4bar), C4, K1,3(claw), K2+2K1, K3+K1, K4, P3+K1, P4, diamond, paw 
+[E0] brief's list {K4,K4bar,P4,C4,2K2,paw,P3+K1,diamond,K2+2K1,K1,3,K3+K1} == our 11: True 
+[E0] complement-pair structure machine-verified for all 18 H (K4<->4K1, C4<->2K2, paw<->P3+K1, diamond<->K2+2K1, claw<->K3+K1, P4 self-complementary, ...): True 
+[E1] pure-Python full census n=1: 1 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=2: 2 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=3: 8 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=4: 64 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=5: 1024 labeled graphs (wall 0.0s) 
+[E1] pure-Python full census n=6: 32768 labeled graphs (wall 1.9s) 
