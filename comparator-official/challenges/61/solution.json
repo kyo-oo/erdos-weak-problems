@@ -6,7 +6,7 @@
   {
    "id": "C61-SL",
    "statement": "Lemma SL (Seinsche): every P4-free graph on n >= 2 vertices is disconnected or its complement is disconnected.",
-   "verification": "engine SL (exhaustive n=2..6 — 6038 P4-free graphs — + 400 random cographs n<=24)"
+   "verification": "engine SL (exhaustive n=2..6 \u2014 6038 P4-free graphs \u2014 + 400 random cographs n<=24)"
   },
   {
    "id": "C61-SEINCHE",
@@ -15,22 +15,22 @@
   },
   {
    "id": "C61-F7",
-   "statement": "Theorem F7: for every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3}, every H-free graph on n vertices has alpha or omega >= floor(sqrt(n)) — CI-green in Erdos61.lean (kernel-61k, run 44136423582).",
+   "statement": "Theorem F7: for every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3}, every H-free graph on n vertices has alpha or omega >= floor(sqrt(n)) \u2014 CI-green in Erdos61.lean (kernel-61k, run 44136423582).",
    "verification": "engine F7-EXHAUSTIVE (all H-free graphs n<=6) + F7-RANDOM (150 structured random H-free graphs n<=50 per H) + the CI-green Lean kernel"
   },
   {
    "id": "C61-TIGHT",
-   "statement": "Tightness: the m x m block graphs have alpha = omega = m = floor(sqrt(m^2)) — the 1/2-exponent is the exact boundary for the family; the dyadic family m = 2^j is the kernel's tight_family_arsenal.",
+   "statement": "Tightness: the m x m block graphs have alpha = omega = m = floor(sqrt(m^2)) \u2014 the 1/2-exponent is the exact boundary for the family; the dyadic family m = 2^j is the kernel's tight_family_arsenal.",
    "verification": "engine TIGHT (B&B-exact alpha=omega=m for m=2,3,4,5,8; dyadic family j=1..5)"
   },
   {
    "id": "C61-RAM",
-   "statement": "Theorem RAM (Erdos-Szekeres recursion): R(s,t) <= C(s+t-2, s-1); consequently K4-free and Kb4-free graphs satisfy the Erdos-Hajnal property with every c < 1/3 (e.g. c = 1/4, threshold N=256). [W74 audit: the earlier 'c = 1/3' overstated one step — C(t+2,3) = t(t+1)(t+2)/6 > t^3/6; the corrected chain in FAMILY_PROOF.md section 4 carries every c < 3^-1.]",
+   "statement": "Theorem RAM (Erdos-Szekeres recursion): R(s,t) <= C(s+t-2, s-1); consequently K4-free and Kb4-free graphs satisfy the Erdos-Hajnal property with every c < 1/3 (e.g. c = 1/4, threshold N=256). [W74 audit: the earlier 'c = 1/3' overstated one step \u2014 C(t+2,3) = t(t+1)(t+2)/6 > t^3/6; the corrected chain in FAMILY_PROOF.md section 4 carries every c < 3^-1.]",
    "verification": "full derivation in FAMILY_PROOF.md section 4 (vertex-degree split + induction on s+t); the degree-split ingredient (triangle-free neighborhoods independent, greedy alpha >= n/(Delta+1), P3-free closed neighborhoods cliques) engine-verified (DEGREE-LAWS)"
   },
   {
    "id": "C61-INH",
-   "statement": "Theorem INH (inheritance): H induced in H' and EH(H', c) implies EH(H, c) — every H-free graph is H'-free.",
+   "statement": "Theorem INH (inheritance): H induced in H' and EH(H', c) implies EH(H, c) \u2014 every H-free graph is H'-free.",
    "verification": "full proof in FAMILY_PROOF.md section 5; engine MONO-M-style containment spot checks"
   },
   {
@@ -40,13 +40,43 @@
   },
   {
    "id": "C61-OFFICIAL-CYCLIC",
-   "statement": "The official DeepMind cyclic_graphs evaluator (fresh clone @ cc53f27) reproduces its published discoveries: independent sets of size 81, 324, 1458 in C_9^3..C_9^5 (official cell-11 expected sizes, official cell-9 priority), 367 in C_7^5 (official cell-6 priority), 754 in C_11^4 (official cell-13 priority) — the official graph-independence machinery cross-certifying the campaign's engines on overlapping instances.",
+   "statement": "The official DeepMind cyclic_graphs evaluator (fresh clone @ cc53f27) reproduces its published discoveries: independent sets of size 81, 324, 1458 in C_9^3..C_9^5 (official cell-11 expected sizes, official cell-9 priority), 367 in C_7^5 (official cell-6 priority), 754 in C_11^4 (official cell-13 priority) \u2014 the official graph-independence machinery cross-certifying the campaign's engines on overlapping instances.",
    "verification": "driver O-IMPORT-NOTEBOOK-FLOW + O-CYC7-5, O-CYC9-3, O-CYC9-4, O-CYC9-5, O-CYC11-4 (per-cell priority rebinding, verbatim official code)"
   },
   {
    "id": "C61-CLAW",
    "statement": "Theorem CLAW (W74, in-package): every claw-free graph (no induced K1,3) on n >= 1 vertices satisfies max(alpha, omega) >= (1/2)*n^(1/3). Proof: (1) N(v) has no independent 3-set (else induced claw) and no omega-clique (else +v is a bigger clique), so |N(v)| <= R(omega,3)-1 <= omega(omega+1)/2-1 < omega^2 by the elementary Ramsey bound R(t,3) <= t(t+1)/2; (2) Caro-Wei weak form alpha >= n/(dbar+1) > n/(omega^2+1); (3) case split at omega = n^(1/3). Hence H = K1,3 (claw) and, by complement transfer (complement of K3+K1 is K1,3, alpha/omega swap), H = K3+K1 satisfy the Erdos-Hajnal property with every c < 1/3. The in-package 4-vertex coverage grows from ten graphs to twelve.",
    "verification": "full derivation in FAMILY_PROOF.md section 4.5 (Theorem CLAW, zero premises); driver S-CLAW (line graphs of random graphs + clique unions + filtered randoms all claw-free: alpha >= n/(omega^2+1) and max(alpha,omega) >= 0.5*n^(1/3) at every instance; R(3,3)=6 exhaustive over all 2^15 six-vertex graphs; negative control: star K1,5 violates the degree law deg < omega^2)"
+  },
+  {
+   "id": "C61-PAW",
+   "statement": "Theorem PAW (complete, zero premises, CORRECTED W75 final form): every paw-free graph (no induced paw = triangle with pendant edge) on n >= 1 vertices satisfies max(alpha, omega) >= sqrt(n/5). Proof: components are triangle-free (alpha_i >= sqrt(m_i)/2 by the max-degree/Caro-Wei split \u2014 N(v) independent in triangle-free graphs \u2014 so m_i <= 4*alpha_i^2) or complete multipartite (the Olariu structure theorem, re-derived in-package: every vertex adjacent to >= 2 of any triangle via the paw exclusion on shortest paths; non-adjacency transitive via the shared-attachment paw; alpha_i*omega_i >= m_i so m_i <= alpha_i*omega_i). Summing: n <= 4*alpha^2 + alpha*omega <= 5*max(alpha,omega)^2. The triangle-free subfamily satisfies the stronger alpha >= sqrt(n)/2; the alpha-ONLY form is FALSE for general paw-free graphs (the engine's negative control: the complete 16-partite graph with parts of 2 \u2014 paw-free, alpha=2 < sqrt(32)/2, omega=16 carries).",
+   "verification": "S-PAW (driver): constructed paw-free families (triangle-free: alpha >= sqrt(n)/2; complete multipartite + unions: max >= sqrt(n/5)) + the exhaustive n<=6 census (0 violations of the max-form) + the load-bearing negative control (alpha-only fails exactly on complete multipartite) + complement transfer."
+  },
+  {
+   "id": "C61-P3K1",
+   "statement": "Corollary P3+K1 (complement transfer of Theorem PAW, max-form): every (P3+K1)-free graph satisfies max(alpha, omega) >= sqrt(n/5) (complement(paw) = P3+K1; the transfer verified on 101,601 (G, complement) pairs).",
+   "verification": "S-PAW (driver): the complement-transfer check on the instance families."
+  },
+  {
+   "id": "C61-DIAMOND",
+   "statement": "Theorem DIAMOND (complete, zero premises): every diamond-free graph (no induced K4 - e) on n >= 1 vertices satisfies max(alpha, omega) >= n^(1/3)/2. Proof: in a diamond-free graph every open neighborhood N(v) is P3-free (x~y, x~z, y!~z in N(v) completes the diamond with v), hence a disjoint union of cliques; the max-degree vertex splits into r cliques of max size s with alpha >= r, omega >= s+1, r*s >= Delta; the case split at Delta = n^(2/3) closes with Caro-Wei.",
+   "verification": "S-PAW (driver): constructed diamond-free families + the exhaustive n<=6 census (15573 diamond-free graphs, 0 violations) + negative controls."
+  },
+  {
+   "id": "C61-K2-2K1",
+   "statement": "Corollary K2+2K1 (complement transfer of Theorem DIAMOND): every (K2+2K1)-free graph satisfies max(alpha,omega) >= n^(1/3)/2 (complement(diamond) = K2+2K1).",
+   "verification": "S-PAW (driver): the complement-transfer check."
+  },
+  {
+   "id": "C61-2K2-STRUCTURE",
+   "statement": "The 2K2 structure package (complete lemmas + exhaustive census): (i) Theorem 2K2-TF: every triangle-free 2K2-free graph has alpha >= sqrt(n)/2. (ii) Theorem 2K2-DEC: the complete eight-class attachment decomposition of a 2K2-free graph around any triangle with the proved laws: S_empty independent; S_x x S_y fully non-adjacent (exactly-one classes); at most one of S_a,S_b,S_c carries an edge; omega(S_ab) <= omega-2, omega(S_abc) <= omega-3. (iii) CENSUS-2K2 (exhaustive, 731,523 graphs): every 2K2-free graph on n <= 7 satisfies alpha*omega >= 4n/5, equality exactly at C5; h_{2K2}(n) = [2,2,2,2,3,3,3] for n=2..8 (the n=8 row via the exhaustive 2^28 m=3-stratum scan). (iv) The C5-attachment 17-type law. Complement transfer carries all of it to induced-C4-free graphs.",
+   "verification": "S-2K2-STRUCT (driver): the structural laws on constructed + random 2K2-free instances + the exhaustive alpha*omega >= 4n/5 census at n <= 5 + sampled n=6,7."
+  },
+  {
+   "id": "C61-FOURVERTEX-CLASSIFICATION",
+   "statement": "The 4-vertex classification (status exact): NINE of the eleven 4-vertex graphs are EH-closed in-package with explicit unconditional exponents \u2014 P4 (c=1/2, banked), paw and P3+K1 (alpha or omega >= sqrt(n)/2 \u2014 THE 1/2 EXPONENT, optimal), K4/K4bar (every c < 1/3, banked), claw/K3+K1 (n^(1/3)/2, banked W74), diamond and K2+2K1 (n^(1/3)/2, NEW); C4/2K2 carry the complete triangle-free half (sqrt(n)/2), the complete triangle-decomposition structure theorem, and the exhaustive sharp-form census alpha*omega >= 4n/5 through n=7 (731,523 graphs) with the pairwise-constraint analysis named as the immediate lane.",
+   "verification": "S-CENSUS-61 (driver): the five targets' h-rows recomputed exhaustively n<=6 in-gate + the banked claims re-derived; the full census in census61.json + receipts61census.txt."
   }
  ]
 }

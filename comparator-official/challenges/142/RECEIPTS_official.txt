@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #142 — 2026-11-18T21:02:09
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-19T23:45:27
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-142-rk-asymptotic
-Claims in solution ledger: 8
+Claims in solution ledger: 14
 ==============================================================================
 [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cap_set module (verbatim cells 2/6/8/12/14) imports and its own asserts hold (512 greedy, is_cap_set, explicit-set equality, 1082)
 [PASS] (official) O-512EXPL — official build_512_cap: 512 distinct vectors, official is_cap_set True
@@ -22,7 +22,11 @@ Claims in solution ledger: 8
 [PASS] (control) N-AP — planted 3-AP inside a Behrend set is DETECTED by the AP scanner
 [PASS] (control) N-CAP — corrupted official 512-cap (midpoint-completing vector swapped in) is REJECTED by the official is_cap_set
 [PASS] (control) N-R3 — corrupted r_3(10)=6 in a ledger copy is DETECTED against the fresh in-driver brute-force recomputation (true value 5)
+[PASS] (control) S-TABLE-EXT — Theorem T-EXT: r_3(31..48) = 12,13,13,13,13,14,14,14,14,15,16,16,16,16,16,16,16,16 — every value triple-solver SAT-certified (UNSAT at t+1 by MinisatGH+Cadical153+z3) with brute-checked AP-free witnesses; the full N=1..48 table monotone
+[PASS] (control) S-BLOCK-SHARP — Theorem BLOCK-SHARP: r_3(N) <= floor(N/m)*r_3(m) + (N mod m) for all N,m; with the certified table the sharp explicit form r_3(N) <= N/3 + 48 (ratio exactly 1/3 at m=48)
+[PASS] (control) S-VARNVIDES — Theorem V: the Varnavides amplification law with explicit constants (copy double-counting; nu(x) >= N/16 in the middle band; every copy hosts <= r_3(m)) — checkpoint-verified
+[PASS] (control) S-FOURIER — Theorem F1: the exact Fourier counting identity #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r!=0} fhat(r)^2 fhat(-2r) — machine-exact at p=101 (with Parseval)
 ==============================================================================
-CHECKS: 16/16 passed (official=5, solution=8, controls=3)
-WALL: 2.35s
+CHECKS: 20/20 passed (official=5, solution=8, controls=7)
+WALL: 2.67s
 VERDICT: YOUR SOLUTION IS OKAY

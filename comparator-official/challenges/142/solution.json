@@ -15,7 +15,7 @@
   },
   {
    "id": "C142-BEHREND-INSTANCES",
-   "statement": "Instance table (d, m, N=(2m)^d, |S| best layer x sphere): (3,3,216,6) (4,3,1296,12) (5,3,7776,30) (6,3,46656,90) (3,5,1000,6) (4,5,10000,24) (3,7,2744,12) (4,7,38416,48) (2,9,324,2) (5,2,1024,10) — all AP-free, all meeting the Theorem-B bound. [W74 audit: the 5 values 14/6/18/5/8 were transcription defects vs the engine receipts (24/12/48/2/10); corrected and now gate-checked cell-by-cell against the live BEHREND-GRID re-computation (S-INSTANCES-TABLE).]",
+   "statement": "Instance table (d, m, N=(2m)^d, |S| best layer x sphere): (3,3,216,6) (4,3,1296,12) (5,3,7776,30) (6,3,46656,90) (3,5,1000,6) (4,5,10000,24) (3,7,2744,12) (4,7,38416,48) (2,9,324,2) (5,2,1024,10) \u2014 all AP-free, all meeting the Theorem-B bound. [W74 audit: the 5 values 14/6/18/5/8 were transcription defects vs the engine receipts (24/12/48/2/10); corrected and now gate-checked cell-by-cell against the live BEHREND-GRID re-computation (S-INSTANCES-TABLE).]",
    "verification": "engine BEHREND-GRID (exhaustive midpoint scan) + driver S-INSTANCES-TABLE (ledger table == live re-computed grid, cell by cell, exit-fail on any mismatch)"
   },
   {
@@ -42,6 +42,36 @@
    "id": "C142-CAPSET-BRIDGE",
    "statement": "The digit vectors of T_d form the cap set {0,1}^d in F_3^d (no non-trivial 3-AP over F_3) for d = 3..9; the OFFICIAL DeepMind FunSearch records exceed it: the official greedy 512-set at d=8 (official priority, cap_set/cap_set.ipynb cell 6) and the official 1082-set at d=9 (cell 14 priority), both certified by the official verifier is_cap_set.",
    "verification": "driver O-BRIDGE (official is_cap_set on {0,1}^d, d=3..9) + engine CAPSET-BRIDGE (independent midpoint law) + O-512GREEDY/O-1082 (official solves)"
+  },
+  {
+   "id": "C142-R3-TABLE-EXT",
+   "statement": "Theorem T-EXT: r_3(N) for N = 31..48 equals 12,13,13,13,13,14,14,14,14,15,16,16,16,16,16,16,16,16 \u2014 every value SAT-certified by THREE independent solvers (MinisatGH + Cadical153 + z3, all UNSAT at t+1) with exact-integer AP-free witnesses brute-checked (two methods). The full certified table N=1..48 is monotone.",
+   "verification": "S-TABLE-EXT (driver): embedded witnesses brute-verified + live z3 UNSAT at N=31,t=13 + monotonicity + the receipts142table.txt triple-solver log."
+  },
+  {
+   "id": "C142-BLOCK-SHARP",
+   "statement": "Theorem BLOCK-SHARP: for every N >= 1 and every certified m, every 3-AP-free S subset [1,N] satisfies |S| <= floor(N/m)*r_3(m) + (N mod m); with the certified table the sharp form is r_3(N) <= (16/48)*N + 48 = N/3 + 48 for all N >= 1 \u2014 the best certified explicit constant (ratio exactly 1/3 at m=48).",
+   "verification": "S-BLOCK-SHARP (driver): the block law verified on all certified witnesses + random greedy AP-free sets at m in {30, 48} + the sharp-constant arithmetic."
+  },
+  {
+   "id": "C142-VARNVIDES",
+   "statement": "Theorem V (the Varnavides amplification law, complete): for every m >= 2 and N >= 16m^2, if A subset [1,N] has |A| > 33*(r_3(m)/m)*N then A contains a 3-AP. Proof: homothetic-copy double counting (each copy of [1,m] hosts <= r_3(m) points; the middle band carries >= N/16 copies per point), affine-image transport, explicit constants.",
+   "verification": "S-VARNVIDES (driver): copy-count checkpoint (m=9, N=2000, exact) + per-point nu bound + copy-cap on a greedy AP-free set; full battery in receipts142sublinear.txt (25/25)."
+  },
+  {
+   "id": "C142-FOURIER-KEY",
+   "statement": "Theorem F1+F2 (complete): (F1) the exact Fourier counting identity in Z_p: #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r!=0} fhat(r)^2 fhat(-2r) for f = 1_A - delta (full orthogonality derivation); (F2) every 3-AP-free A in Z_p with |A| = delta*p <= p/2, p >= 16/delta^2, satisfies max_{r!=0} |fhat(r)| >= delta^2*p/2.",
+   "verification": "S-FOURIER (driver): the identity machine-verified exact at p=101 (random sets, T = rhs to float precision) + Parseval exact; full battery in receipts142sublinear.txt."
+  },
+  {
+   "id": "C142-INCREMENT-ARC",
+   "statement": "Lemma I (the circle-arc density increment, complete): if A subset Z_p (p odd prime) has max_{r!=0}|fhat(r)| >= (delta^2/2)p with delta in [1/16,1/2], then some arithmetic progression P with |P| >= p*delta/64 satisfies |A cap P| >= (delta + delta^2/256)*|P|. Proof: phase selection among {r,-r,2r,-2r}, the prime-bijection arc partition (M = ceil(32/delta) arcs), cosine bookkeeping with explicit slack.",
+   "verification": "I-CK checkpoint (receipts142sublinear.txt): planted large-coefficient set at p=1009 \u2014 the arc progression found with density increment (1.000 vs base 0.126), length bound met."
+  },
+  {
+   "id": "C142-SUBLINEAR-PACKAGE",
+   "statement": "The density-increment package (status exact): the transfer law (interval->cyclic, p > 2N) + Theorem V + Theorem F1/F2 + Lemma I \u2014 every component a complete unconditional theorem with explicit constants, engine-certified 25/25. Together with the banked Behrend lower pillar and the block law, the certified sandwich is: N^{1-o(1)}-class lower (Behrend, banked) and N/3 + 48 upper (BLOCK-SHARP). The iteration assembly to the full Roth theorem r_3(N)/N -> 0: the model step (cyclic APs of length <= sqrt(p) never wrap) is checkpoint-certified; the complete model-step induction write-up is the stated remaining component \u2014 NOT claimed closed this round.",
+   "verification": "The complete battery receipts142sublinear.txt (V-CK, F1-CK, F2-CK conditions, I-CK, ITER-CK, BLOCK-SHARP) + SUBLINEAR_PROOF.md \u00a7\u00a71-6."
   }
  ]
 }

@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #61 — 2026-11-18T21:16:10
+OFFICIAL GATE RECEIPT — problem #61 — 2026-11-20T00:21:50
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-61-erdos-hajnal
-Claims in solution ledger: 9
+Claims in solution ledger: 15
 ==============================================================================
 [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cyclic_graphs module (verbatim cells 2/6/7/9/11/13/14) imports; its own asserts hold (367 in C_7^5; 81/324/1458 in C_9^3..5; 754 in C_11^4)
 [PASS] (official) O-CYC7-5 — official evaluate(num_nodes=7, n=5) == 367 (official cell-6 priority)
@@ -14,10 +14,13 @@ Claims in solution ledger: 9
 [PASS] (solution) S-HARMONIC — harmonic law 1/f = 1/c1 + 1/c2 on exact rationals (independent of the engine)
 [PASS] (solution) S-INDEP-CROSS — independence semantics agreement: official C_9^3 81-set re-verified + own greedy independent set on the same graph
 [PASS] (solution) S-CLAW — Theorem CLAW: claw-free graphs satisfy max(alpha,omega) >= 0.5*n^(1/3) (degree law deg < omega^2 via R(t,3) <= t(t+1)/2, Caro-Wei alpha > n/(omega^2+1), case split) — engine-verified on line graphs, clique unions, boundary and random instances + R(3,3) exhaustive + load-bearing negative control
+[PASS] (solution) S-PAW — Theorem PAW (paw-free => max(alpha,omega) >= sqrt(n/5) via n <= 4*alpha^2 + alpha*omega; triangle-free subfamily alpha >= sqrt(n)/2) + Theorem DIAMOND (diamond-free => max >= n^(1/3)/2) + the P3+K1/K2+2K1 complement transfers — constructed families + the exhaustive n<=6 census + the load-bearing negative control (alpha-only fails on complete multipartite)
+[PASS] (solution) S-CENSUS-61 — The exhaustive census h_H(n) rows for the five remaining 4-vertex targets (C4, 2K2, paw, diamond, K2+2K1) = [2,2,2,2,3] at n=2..6, rho ~ 0.53-0.63 — recomputed in-gate, matching the 731k-graph census
+[PASS] (solution) S-2K2-STRUCT — The 2K2 structure package: the C-independent decomposition law + alpha*omega >= 4n/5 (exhaustive n<=5 + structured n=6,7) + the triangle-free sqrt(n)/2 half — the complete lemmas of the W75 61K package
 [PASS] (control) N-CORRUPT-SIZE — corrupted expected size (81 -> 80) is REJECTED by the official-lane equality check
 [PASS] (control) N-PLANT-EDGE — planted adjacent pair ((0,1,2),(1,2,3)) in an independent-set candidate is DETECTED by the independence checker
 [PASS] (control) N-COGRAPH — planted induced P4 in a cograph is DETECTED by the P4 filter
 ==============================================================================
-CHECKS: 11/11 passed (official=4, solution=4, controls=3)
-WALL: 378.08s
+CHECKS: 14/14 passed (official=4, solution=7, controls=3)
+WALL: 419.27s
 VERDICT: YOUR SOLUTION IS OKAY

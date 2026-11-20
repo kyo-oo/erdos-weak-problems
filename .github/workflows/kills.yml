@@ -1667,7 +1667,7 @@ jobs:
           test "${PIPESTATUS[0]}" -eq 0
           grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate142official.log
           grep -F "YOUR SOLUTION IS REJECTED" gate142official.log && exit 1 || true
-          test "$(grep -c '\[PASS\]' gate142official.log)" -ge 16
+          test "$(grep -c '\[PASS\]' gate142official.log)" -ge 20
           test "$(grep -c '\[FAIL\]' gate142official.log)" -eq 0
           echo GATE142OFFICIAL_GREEN=1
 
@@ -1711,7 +1711,7 @@ jobs:
           python3 comparator-official/official_gate.py 61 2>&1 | tee gate61official.log
           test "${PIPESTATUS[0]}" -eq 0
           grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate61official.log
-          test "$(grep -c '\[PASS\]' gate61official.log)" -ge 11
+          test "$(grep -c '\[PASS\]' gate61official.log)" -ge 14
           test "$(grep -c '\[FAIL\]' gate61official.log)" -eq 0
           echo GATE61OFFICIAL_GREEN=1
 
@@ -1731,6 +1731,6 @@ jobs:
           python3 comparator-official/official_gate.py 107 2>&1 | tee gate107official.log
           test "${PIPESTATUS[0]}" -eq 0
           grep -F "VERDICT: YOUR SOLUTION IS OKAY" gate107official.log
-          test "$(grep -c '\[PASS\]' gate107official.log)" -ge 11
+          test "$(grep -c '\[PASS\]' gate107official.log)" -ge 13
           test "$(grep -c '\[FAIL\]' gate107official.log)" -eq 0
           echo GATE107OFFICIAL_GREEN=1
