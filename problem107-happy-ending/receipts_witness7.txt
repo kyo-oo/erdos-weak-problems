@@ -1,0 +1,20 @@
+=== build_witness7: the 32-point no-convex-7 witness (W75-107E) ===
+T_0 = E(7,2): |T|=1 (target 1) GP=True maxcup=1<=6 maxcap=1<=1 OK=True
+T_1 = E(6,3): |T|=5 (target 5) GP=True maxcup=5<=5 maxcap=2<=2 OK=True
+T_2 = E(5,4): |T|=10 (target 10) GP=True maxcup=4<=4 maxcap=3<=3 OK=True
+T_3 = E(4,5): |T|=10 (target 10) GP=True maxcup=3<=3 maxcap=4<=4 OK=True
+T_4 = E(3,6): |T|=5 (target 5) GP=True maxcup=2<=2 maxcap=5<=5 OK=True
+T_5 = E(2,7): |T|=1 (target 1) GP=True maxcup=1<=1 maxcap=1<=6 OK=True
+cluster sizes: [1, 5, 10, 10, 5, 1] total = 32 (= 2^5 = 32)
+intra-slope scaling factors: [1, 17179869184, 17179869184, 17179869184, 17179869184, 1]
+witness points: 32
+GP certified: True (32 points, no 3 collinear)
+intra-slopes <= 1/16 = 0.0625 | min inter-cluster slope = 0.00 | separation OK = False
+witness written: /home/z/waves/w75-107e/problem107-happy-ending/witness7_32pts.txt
+certifying: no convex 7-gon among all C(32,7) = 3,365,856 subsets (exact __int128) ...
+noconvexk output:
+NOT-GP triple 5 12 13
+NOCONVEXK RESULT gp=0
+
+python second-method spot check: 3000 random 7-subsets, convex-7 found: 410 (required 0)
+WITNESS7_FAILED
