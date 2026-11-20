@@ -4,3 +4,10 @@
 [ot8] n=6: cached v2 20 reflection-distinguished, mirror-identified 16 (anchor 16) OK
 [ot8] n=7: cached v2 242 reflection-distinguished, mirror-identified 135 (anchor 135) OK
 [ot8] expanding n=7 (242 types) -> n=8 ...
+[chunkot8 21:09:54] resume: 0/242 parents done, types so far 0, this chunk: 242
+[chunkot8 21:17:48] wall guard hit — checkpointing
+[chunkot8 21:17:48] chunk done: +139 parents (139/242), types 6334 (473s)
+[chunkot8 21:18:06] resume: 139/242 parents done, types so far 6334, this chunk: 103
+[chunkot8 21:25:04] chunk done: +103 parents (242/242), types 6405 (418s)
+[chunkot8 21:25:14] FINAL n=8: 6405 reflection-distinguished, self-mirror 225, mirror-identified 3315 (anchor 3315) closure=True [OK — CERTIFIED]
+[chunkot8 21:25:14] wrote engine107f5_cache/ot8_v2.pkl (6405 types with exact realizations) | totals: cells=39204 conc_combos=152460 conc_crossed=12243 par_combos=101640 par_crossed=20209 sweep_grabs=0 walk_cfgs=674

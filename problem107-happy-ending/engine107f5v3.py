@@ -93,7 +93,7 @@ def stage_chunkot8(n_chunk, wall_guard=470.0):
         done = set(prog['done'])
         stats_agg = prog.get('stats', {})
     if os.path.exists(PART8):
-        results = pickle.load(open(PART8))
+        results = pickle.load(open(PART8, 'rb'))
     todo = [(i, k, v) for i, (k, v) in enumerate(parents) if i not in done]
     R(f"[chunkot8 {now()}] resume: {len(done)}/{len(parents)} parents done, "
       f"types so far {len(results)}, this chunk: {min(n_chunk, len(todo))}")
@@ -227,7 +227,7 @@ def stage_chunkouter(n_chunk, wall_guard=470.0):
     if os.path.exists(PROGO):
         done = set(json.load(open(PROGO))['done'])
     if os.path.exists(PARTO):
-        results = pickle.load(open(PARTO))
+        results = pickle.load(open(PARTO, 'rb'))
     todo = [(i, k, v) for i, (k, v) in enumerate(parents) if i not in done]
     R(f"[chunkouter {now()}] resume: {len(done)}/{len(parents)} parents, "
       f"outer types so far {len(results)}, chunk {min(n_chunk, len(todo))}")
