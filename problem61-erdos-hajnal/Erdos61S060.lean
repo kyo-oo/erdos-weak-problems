@@ -168,11 +168,13 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
       | nil => exact absurd hlen (by decide)
       | cons b t2 =>
         cases t2 with
-        | nil => exact absurd hlen (by decide)
+        | nil => simp at hlen
         | cons c t3 =>
           have hbc : b ≠ c := by
-            intro hcon; subst hcon
-            exact absurd rfl (hall c (by simp))
+            cases ht with
+            | cons b2 t2'' hallb _ =>
+                intro hcon; subst hcon
+                exact absurd rfl (hallb _ (by simp))
           have hba : b ≠ a := by
             intro hcon; subst hcon
             exact absurd rfl (hall b (by simp))
@@ -458,7 +460,7 @@ theorem e61_arsenal_bridge :
 theorem e61_board :
     (∀ G : List (Nat × Nat),
       (∃ p q r, triB G p q r = true) ∨ (∃ p q r, ind3B G p q r = true)) ∧
-    c5_last_tri ∧ c5_last_ind ∧
+    triB c5 2 3 4 = false ∧ ind3B c5 2 3 4 = false ∧
     graphs5A.all k3law5 = true ∧ graphs5B.all k3law5 = true ∧
     graphs5A.all p4law = true ∧ graphs5B.all p4law = true ∧
     graphs5A.all p4shadow = true ∧ graphs5B.all p4shadow = true ∧
