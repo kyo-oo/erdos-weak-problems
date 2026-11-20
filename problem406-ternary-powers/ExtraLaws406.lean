@@ -73,16 +73,15 @@ plus core Nat lemmas — BOSS's mathematics only, no external theory.
 
 /-- **THE LEVEL LAW.**  Every level-`j` ternary digit of a `0/1`-ternary
 number is not `2` — the checker's verdict, extracted at every depth. -/
-theorem noTernaryTwo_lvl (n : Nat) (h : noTernaryTwo n = true) :
-    ∀ j : Nat, (n / 3^j) % 3 ≠ 2 := by
-  intro j
+theorem noTernaryTwo_lvl (n : Nat) :
+    noTernaryTwo n = true → ∀ j : Nat, (n / 3^j) % 3 ≠ 2 := by
   induction n using Nat.strongRecOn with
   | ind n ih =>
+    intro h j
     by_cases hn : n = 0
     · subst hn
-      have h0 : (0 / 3^j) % 3 = 0 := by
-        rw [Nat.zero_div]
-        omega
+      have hz : (0:Nat) / 3^j = 0 := Nat.zero_div _
+      rw [hz]
       omega
     · have hn0 : n ≠ 0 := hn
       rw [noTernaryTwo.eq_def n, if_neg hn0] at h
@@ -112,11 +111,11 @@ half of its leading range.  (For a rider `K` this is
 `2·4^K < 3^(⌊log₃ 4^K⌋ + 1)`, i.e. `{K·log₃ 4} < 1 − log₃ 2 ≈ 0.36907` —
 the law kills every exponent whose leading fractional lands in the upper
 band, forever.) -/
-theorem cantor_half_line (n : Nat) (hn : 0 < n)
-    (h : noTernaryTwo n = true) :
-    2 * n < 3^(ternaryLog3 n + 1) := by
+theorem cantor_half_line (n : Nat) :
+    0 < n → noTernaryTwo n = true → 2 * n < 3^(ternaryLog3 n + 1) := by
   induction n using Nat.strongRecOn with
   | ind n ih =>
+    intro hn h
     by_cases h3 : n < 3
     · rw [ternaryLog3.eq_def n, if_pos h3]
       have e3 : (3:Nat)^(0 + 1) = 3 := by decide
@@ -135,16 +134,25 @@ theorem cantor_half_line (n : Nat) (hn : 0 < n)
       · rw [if_neg h2] at h
         have hdiv : 0 < n / 3 := by omega
         have hrec := ih (n / 3) (Nat.div_lt_self (by omega)
-          (by decide : 1 < 3)) hdiv h
+          (by decide : 1 < 3)) hn0 hdiv h
         have hlog : ternaryLog3 n = 1 + ternaryLog3 (n / 3) := by
           rw [ternaryLog3.eq_def n, if_neg h3]
         have hdm : n = 3 * (n / 3) + n % 3 := (Nat.div_add_mod n 3).symm
         have hm : n % 3 ≤ 1 := by omega
-        have hexp : (3:Nat)^(1 + ternaryLog3 (n/3) + 1)
-            = 3 * 3^(ternaryLog3 (n/3) + 1) := by
-          simp [Nat.pow_add, Nat.pow_one]
-        rw [hlog] at hrec ⊢
-        rw [hexp]
+        have hA : (3:Nat)^(1 + ternaryLog3 (n/3) + 1)
+            = 9 * 3^(ternaryLog3 (n/3)) := by
+          have er : 1 + ternaryLog3 (n/3) + 1 = ternaryLog3 (n/3) + 2 := by omega
+          have e2 : (3:Nat)^2 = 9 := by decide
+          rw [er, Nat.pow_add, e2]
+          ring
+        have hB : (3:Nat)^(ternaryLog3 (n/3) + 1)
+            = 3 * 3^(ternaryLog3 (n/3)) := by
+          have e3 : (3:Nat)^1 = 3 := Nat.pow_one 3
+          rw [Nat.pow_add, e3]
+          ring
+        rw [hlog]
+        rw [hA]
+        rw [hB] at hrec
         omega
 
 /-- **THE RIDER HALF-LINE LAW (L1).**  Every rider `K` (`4^K` a `0/1`-ternary
@@ -163,7 +171,11 @@ theorem erdos406_half_line_kill (K : Nat)
     (hGe : 3^(ternaryLog3 (4^K) + 1) ≤ 2 * 4^K) :
     noTernaryTwo (4^K) = false := by
   by_contra hRider
-  have hlt := rider_half_line K hRider
+  have hTrue : noTernaryTwo (4^K) = true := by
+    cases hh : noTernaryTwo (4^K) with
+    | false => exact absurd hh hRider
+    | true => rfl
+  have hlt := rider_half_line K hTrue
   omega
 
 /-! ## §3 THE TAIL LAW (L2) — the high-digit truncation -/
@@ -171,10 +183,10 @@ theorem erdos406_half_line_kill (K : Nat)
 /-- **THE TAIL LAW.**  The high-digit truncation `n / 3^c` of a `0/1`-ternary
 number is `0/1`-ternary (the digit recursion is prefix-closed under
 right-shift). -/
-theorem noTernaryTwo_div_pow3 (n : Nat) (h : noTernaryTwo n = true) :
+theorem noTernaryTwo_div_pow3 : ∀ (n : Nat), noTernaryTwo n = true →
     ∀ c : Nat, noTernaryTwo (n / 3^c) = true := by
-  intro c
-  induction c with
+  intro n h c
+  induction c generalizing n with
   | zero =>
       rw [Nat.pow_zero, Nat.div_one]
       exact h
@@ -186,14 +198,15 @@ theorem noTernaryTwo_div_pow3 (n : Nat) (h : noTernaryTwo n = true) :
       rw [noTernaryTwo.eq_def n] at h
       by_cases hn : n = 0
       · subst hn
-        have h0 : (0 / 3) / 3^c = 0 := by rw [Nat.zero_div, Nat.zero_div]
-        rw [h0]
+        have hz : (0 / 3) / 3^c = 0 := by
+          rw [Nat.zero_div, Nat.zero_div]
+        rw [hz]
         rfl
       · rw [if_neg hn] at h
         by_cases h2 : n % 3 = 2
         · rw [if_pos h2] at h; simp at h
         · rw [if_neg h2] at h
-          exact ih
+          exact ih (n / 3) h
 
 /-- **THE RIDER TAIL LAW (L2).**  For every rider `K`, the top-zone number
 `⌊4^K / 3^(K+1)⌋ = ⌊(4/3)^K / 3⌋` is `0/1`-ternary — a NEW necessary
@@ -325,37 +338,48 @@ theorem adjacent_ones_kill (u j : Nat) (hj : 1 ≤ j)
     (hu : u % 3^(j+1) = 3^(j-1) + 3^j) :
     noTernaryTwo (4*u+1) = false := by
   by_contra hRider
+  have hTrue : noTernaryTwo (4*u+1) = true := by
+    cases hh : noTernaryTwo (4*u+1) with
+    | false => exact absurd hh hRider
+    | true => rfl
   obtain ⟨d, hd⟩ : ∃ d, j = d + 1 := ⟨j - 1, by omega⟩
   subst hd
-  rw [show (d + 1 + 1) = d + 2 from by omega] at hu
-  rw [show (d + 1 - 1) = d from by omega] at hu
-  -- the division decomposition: u = 3^(d+2) * w + 3^d + 3^(d+1)
+  have hu' : u % 3^(d+2) = 3^d + 3^(d+1) := by
+    have e1 : (d:Nat) + 1 + 1 = d + 2 := by omega
+    have e2 : (d:Nat) + 1 - 1 = d := by omega
+    rw [e1, e2] at hu
+    exact hu
+  -- the division decomposition, with the quotient opaque
   have hq : 3^(d+2) * (u / 3^(d+2)) + u % 3^(d+2) = u :=
     Nat.div_add_mod u (3^(d+2))
-  rw [hu] at hq
+  rw [hu'] at hq
   -- the key identity: 4u+1 = 3^(d+1) * (12w + 5) + (3^d + 1)
   have hkey : 4 * u + 1
       = 3^(d+1) * (12 * (u / 3^(d+2)) + 5) + (3^d + 1) := by
     have h31 : 3^(d+1) = 3 * 3^d := by
       rw [Nat.pow_succ 3 d]
+      ring
     have h32 : 3^(d+2) = 9 * 3^d := by
-      rw [Nat.pow_add, Nat.pow_add, Nat.pow_one, Nat.pow_one]
-      omega
+      rw [Nat.pow_add 3 d 2]
+      have e2 : (3:Nat)^2 = 9 := by decide
+      rw [e2]
+      ring
     rw [h31] at hq ⊢
     rw [h32] at hq ⊢
     linear_combination 4 * hq
   -- the digit at position d+1 is exactly 2
   have hdig : (4*u+1) / 3^(d+1) % 3 = 2 := by
     have hp : 0 < 3^(d+1) := Nat.pow_pos (by decide)
-    rw [hkey, mul_add_div_lemma (12 * (u / 3^(d+2)) + 5) (3^d + 1)
+    rw [hkey]
+    rw [mul_add_div_lemma (12 * (u / 3^(d+2)) + 5) (3^d + 1)
       (3^(d+1)) hp]
-    have hs : 0 < 3^d := Nat.pow_pos (by decide)
     have hlt : 3^d + 1 < 3^(d+1) := by
       rw [Nat.pow_succ 3 d]
+      have hs : 0 < 3^d := Nat.pow_pos (by decide)
       omega
     rw [Nat.div_eq_of_lt hlt]
     omega
-  have hrec := noTernaryTwo_lvl (4*u+1) hRider (d+1)
+  have hrec := noTernaryTwo_lvl (4*u+1) hTrue (d+1)
   omega
 
 /-! ## §7 THE RECEIPTS -/
@@ -388,28 +412,48 @@ theorem adjacent_ones_kill (u j : Nat) (hj : 1 ≤ j)
 #print axioms cantor_T2_mod3
 #print axioms adjacent_ones_kill
 
--- Kill receipts: exponents dead by the half-line law alone (integer facts).
-theorem half_line_kill_6 : noTernaryTwo (4^6) = false :=
-  erdos406_half_line_kill 6 (by decide)
-theorem half_line_kill_7 : noTernaryTwo (4^7) = false :=
-  erdos406_half_line_kill 7 (by decide)
-theorem half_line_kill_10 : noTernaryTwo (4^10) = false :=
-  erdos406_half_line_kill 10 (by decide)
-theorem half_line_kill_11 : noTernaryTwo (4^11) = false :=
-  erdos406_half_line_kill 11 (by decide)
-theorem half_line_kill_12 : noTernaryTwo (4^12) = false :=
-  erdos406_half_line_kill 12 (by decide)
+-- Kill receipts: exponents dead by fact (struct-eval, kernel-decided —
+-- the half-line family members 6, 7, 10, 11, 12 are all dead).
+theorem half_line_kill_6 : noTernaryTwo (4^6) = false := by
+  rw [noTernaryTwo_eq_struct (4^6) 4097 (by decide)]
+  decide
+theorem half_line_kill_7 : noTernaryTwo (4^7) = false := by
+  rw [noTernaryTwo_eq_struct (4^7) 16385 (by decide)]
+  decide
+theorem half_line_kill_10 : noTernaryTwo (4^10) = false := by
+  rw [noTernaryTwo_eq_struct (4^10) 1048577 (by decide)]
+  decide
+theorem half_line_kill_11 : noTernaryTwo (4^11) = false := by
+  rw [noTernaryTwo_eq_struct (4^11) 4194305 (by decide)]
+  decide
+theorem half_line_kill_12 : noTernaryTwo (4^12) = false := by
+  rw [noTernaryTwo_eq_struct (4^12) 16777217 (by decide)]
+  decide
 
 -- Rider receipts: the three known riders satisfy every law of this kernel.
-theorem rider_receipt_0 : 2 * 4^0 < 3^(ternaryLog3 (4^0) + 1) := by decide
-theorem rider_receipt_1 : 2 * 4^1 < 3^(ternaryLog3 (4^1) + 1) := by decide
-theorem rider_receipt_4 : 2 * 4^4 < 3^(ternaryLog3 (4^4) + 1) := by decide
-theorem rider_tail_receipt_1 : noTernaryTwo (4^1 / 3^2) = true := by decide
-theorem rider_tail_receipt_4 : noTernaryTwo (4^4 / 3^5) = true := by decide
+theorem rider_receipt_0 : noTernaryTwo (4^0) = true := by
+  rw [noTernaryTwo_eq_struct (4^0) 2 (by decide)]
+  decide
+theorem rider_receipt_1 : noTernaryTwo (4^1) = true := by
+  rw [noTernaryTwo_eq_struct (4^1) 5 (by decide)]
+  decide
+theorem rider_receipt_4 : noTernaryTwo (4^4) = true := by
+  rw [noTernaryTwo_eq_struct (4^4) 257 (by decide)]
+  decide
+theorem rider_half_line_receipt_0 :
+    2 * 4^0 < 3^(ternaryLog3 (4^0) + 1) :=
+  rider_half_line 0 rider_receipt_0
+theorem rider_half_line_receipt_1 :
+    2 * 4^1 < 3^(ternaryLog3 (4^1) + 1) :=
+  rider_half_line 1 rider_receipt_1
+theorem rider_half_line_receipt_4 :
+    2 * 4^4 < 3^(ternaryLog3 (4^4) + 1) :=
+  rider_half_line 4 rider_receipt_4
+theorem rider_tail_receipt_1 : noTernaryTwo (4^1 / 3^2) = true :=
+  rider_tail_law 1 rider_receipt_1
+theorem rider_tail_receipt_4 : noTernaryTwo (4^4 / 3^5) = true :=
+  rider_tail_law 4 rider_receipt_4
 
--- Kernel green marker (CI greps for this string).
--- EXTRA406_KERNEL_GREEN appears in the #check block above via theorem names;
--- the explicit marker line follows.
 #print axioms half_line_kill_6
 #print axioms half_line_kill_7
 #print axioms half_line_kill_10
@@ -418,5 +462,8 @@ theorem rider_tail_receipt_4 : noTernaryTwo (4^4 / 3^5) = true := by decide
 #print axioms rider_receipt_0
 #print axioms rider_receipt_1
 #print axioms rider_receipt_4
+#print axioms rider_half_line_receipt_0
+#print axioms rider_half_line_receipt_1
+#print axioms rider_half_line_receipt_4
 #print axioms rider_tail_receipt_1
 #print axioms rider_tail_receipt_4
