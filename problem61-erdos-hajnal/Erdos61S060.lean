@@ -23,16 +23,11 @@ set_option maxHeartbeats 16000000
 3. THE P₄ COGRAPH LAWS at n = 5 (decide, two chunks): the decomposition
    (disconnected or co-disconnected) and the ω·α shadow.
 4. THE P₃ LAW at n = 5 (decide, two chunks).
-5. THE TIGHTNESS: 2·K₂ is P₃-free and P₄-free with ω = α = 2.
+5. THE TIGHTNESS: 2·K₂ is P₃-free and P₄-free with ω = α = 2 on 4 vertices.
 6. THE BOARD + arsenal bridge.
 -/
 
 namespace E61S
-
-/-- The campaign's List.all. -/
-def allT (p : Nat → Bool) : List Nat → Bool
-  | [] => true
-  | a :: t => p a && allT p t
 
 /-- All sublists (structural). -/
 def sublists {α : Type*} : List α → List (List α)
@@ -58,8 +53,7 @@ inductive DList : List Nat → Prop
   | cons (a : Nat) (t : List Nat) (h : ∀ x ∈ t, x ≠ a)
       (ht : DList t) : DList (a :: t)
 
-/-- The campaign's own filter (green-kernel idiom: core List.filter is
-    simp-fragile under the pinned toolchain). -/
+/-- The campaign's own filter (structural bif; no Decidable fragility). -/
 def filt (P : Nat → Bool) : List Nat → List Nat
   | [] => []
   | a :: t => bif P a then a :: filt P t else filt P t
@@ -76,7 +70,9 @@ theorem mem_filt {P : Nat → Bool} {x : Nat} {V : List Nat}
         rfl
       rw [hrw] at h
       rcases List.mem_cons.mp h with he | hm
-      · exact ⟨he, hP⟩
+      · refine ⟨?_, hP⟩
+        rw [he]
+        exact List.mem_cons_self a t
       · exact ⟨List.mem_cons_of_mem _ (ih hm).1, (ih hm).2⟩
     · have hPa : P a = false := by
         cases hh : P a with
@@ -128,7 +124,8 @@ theorem filt_split (P : Nat → Bool) (V : List Nat) :
         rfl
       have hnp : (!P a) = false := by rw [hP]; rfl
       have h2 : filt (fun v => !P v) (a :: t) = filt (fun v => !P v) t := by
-        show (bif (!P a) then a :: filt (fun v => !P v) t else filt (fun v => !P v) t) = filt (fun v => !P v) t
+        show (bif (!P a) then a :: filt (fun v => !P v) t
+              else filt (fun v => !P v) t) = filt (fun v => !P v) t
         rw [hnp]
         rfl
       rw [h1, h2]
@@ -144,7 +141,8 @@ theorem filt_split (P : Nat → Bool) (V : List Nat) :
         rfl
       have hnp : (!P a) = true := by rw [hPa]; rfl
       have h2 : filt (fun v => !P v) (a :: t) = a :: filt (fun v => !P v) t := by
-        show (bif (!P a) then a :: filt (fun v => !P v) t else filt (fun v => !P v) t) = a :: filt (fun v => !P v) t
+        show (bif (!P a) then a :: filt (fun v => !P v) t
+              else filt (fun v => !P v) t) = a :: filt (fun v => !P v) t
         rw [hnp]
         rfl
       rw [h1, h2]
@@ -199,8 +197,8 @@ theorem dlist_12345 : DList [1, 2, 3, 4, 5] := by
 
 /-! ## §1 RAMSEY R(3,3) = 6 — THE COMPLETE MATH PROOF -/
 
-/-- The 3-vertex trichotomy: three distinct vertices either contain an
-    edge or are independent. -/
+/-- The 3-vertex trichotomy: three vertices either contain an edge or
+    are independent. -/
 theorem tri_or_ind3 {G : List (Nat × Nat)} (a b c : Nat) :
     (ed G a b = true ∨ ed G b c = true ∨ ed G a c = true) ∨
     (ind3B G a b c = true) := by
@@ -211,20 +209,49 @@ theorem tri_or_ind3 {G : List (Nat × Nat)} (a b c : Nat) :
     · by_cases h3 : ed G a c = true
       · exact Or.inl (Or.inr (Or.inr h3))
       · right
+        have e1 : ed G a b = false := by
+          cases hh : ed G a b with
+          | false => rfl
+          | true => exact absurd hh h1
+        have e2 : ed G b c = false := by
+          cases hh : ed G b c with
+          | false => rfl
+          | true => exact absurd hh h2
+        have e3 : ed G a c = false := by
+          cases hh : ed G a c with
+          | false => rfl
+          | true => exact absurd hh h3
         show (!ed G a b && !ed G a c && !ed G b c) = true
-        rw [show ed G a b = false from by
-              cases hh : ed G a b with
-              | false => rfl
-              | true => exact absurd hh h1,
-            show ed G a c = false from by
-              cases hh : ed G a c with
-              | false => rfl
-              | true => exact absurd hh h3,
-            show ed G b c = false from by
-              cases hh : ed G b c with
-              | false => rfl
-              | true => exact absurd hh h2]
+        rw [e1, e3, e2]
         rfl
+
+/-- The dual trichotomy: three vertices either contain a non-edge or
+    form a triangle. -/
+theorem ind_or_tri3 {G : List (Nat × Nat)} (a b c : Nat) :
+    (ed G a b = false ∨ ed G b c = false ∨ ed G a c = false) ∨
+    (triB G a b c = true) := by
+  by_cases h1 : ed G a b = true
+  · by_cases h2 : ed G b c = true
+    · by_cases h3 : ed G a c = true
+      · right
+        show (ed G a b && ed G a c && ed G b c) = true
+        rw [h1, h3, h2]
+        rfl
+      · left
+        exact Or.inr (Or.inr (by
+          cases hh : ed G a c with
+          | false => rfl
+          | true => exact absurd hh h3))
+    · left
+      exact Or.inr (Or.inl (by
+        cases hh : ed G b c with
+        | false => rfl
+        | true => exact absurd hh h2))
+  · left
+    exact Or.inl (by
+      cases hh : ed G a b with
+      | false => rfl
+      | true => exact absurd hh h1)
 
 /-- THE R(3,3) = 6 THEOREM: every graph (any edge list) on the vertex set
     {0,1,2,3,4,5} has a triangle or an independent 3-set. -/
@@ -242,7 +269,7 @@ theorem r33_math (G : List (Nat × Nat)) :
       dlist_pick3 _ hN hN3
     have memN : ∀ x ∈ filt (fun w => ed G 0 w) [1, 2, 3, 4, 5], ed G 0 x = true := by
       intro x hx; exact (mem_filt hx).2
-    rcases tri_or_ind3 G a b c with h | h
+    rcases tri_or_ind3 (G := G) a b c with h | h
     · rcases h with h | h | h
       · exact Or.inl ⟨0, a, b, by
           show (ed G 0 a && ed G 0 b && ed G a b) = true
@@ -263,31 +290,20 @@ theorem r33_math (G : List (Nat × Nat)) :
       cases hh : ed G 0 x with
       | false => rfl
       | true => rw [hh] at h2; exact absurd h2 (by rfl)
-    rcases tri_or_ind3 G a b c with h | h
-    · rcases h with h | h | h
-      · exact Or.inl ⟨a, b, c, by
-          show (ed G a b && ed G a c && ed G b c) = true
-          rw [h]; rfl⟩
-      · exact Or.inl ⟨b, c, a, by
-          show (ed G b c && ed G b a && ed G c a) = true
-          rw [h]
-          have e1 : ed G b a = true := by rw [ed, ed]; exact Or.symm h
-          rw [e1]
-          have e2 : ed G c a = true := by rw [ed, ed]; exact Or.symm h
-          rw [e2]⟩
-      · exact Or.inl ⟨a, c, b, by
-          show (ed G a c && ed G a b && ed G c b) = true
-          rw [h]
-          have e1 : ed G a b = true := by rw [ed, ed]; exact Or.symm h
-          rw [e1]
-          have e2 : ed G c b = true := by rw [ed, ed]; exact Or.symm h
-          rw [e2]⟩
-    · exact Or.inr ⟨0, a, b, by
-        show (!ed G 0 a && !ed G 0 b && !ed G a b) = true
-        rw [memM a ha, memM b hb]
-        cases hh : ed G a b with
-        | false => rfl
-        | true => exact absurd (Or.inl hh) h⟩
+    rcases ind_or_tri3 (G := G) a b c with h | h
+    · -- some pair non-adjacent: that pair with 0 is independent
+      rcases h with h | h | h
+      · exact Or.inr ⟨0, a, b, by
+          show (!ed G 0 a && !ed G 0 b && !ed G a b) = true
+          rw [memM a ha, memM b hb, h]⟩
+      · exact Or.inr ⟨0, b, c, by
+          show (!ed G 0 b && !ed G 0 c && !ed G b c) = true
+          rw [memM b hb, memM c hc, h]⟩
+      · exact Or.inr ⟨0, a, c, by
+          show (!ed G 0 a && !ed G 0 c && !ed G a c) = true
+          rw [memM a ha, memM c hc, h]⟩
+    · -- all pairs adjacent: {a,b,c} is a triangle
+      exact Or.inl ⟨a, b, c, h⟩
 
 /-! ## §2 THE C₅ TIGHTNESS (R(3,3) > 5) -/
 
@@ -328,7 +344,8 @@ def hasInd35 (G : List (Nat × Nat)) : Bool :=
   || ind3B G 0 2 4 || ind3B G 0 3 4 || ind3B G 1 2 3 || ind3B G 1 2 4
   || ind3B G 1 3 4 || ind3B G 2 3 4
 
-/-- The K₃ law at n = 5: triangle-free ⟹ some non-adjacent pair. -/
+/-- The K₃ law at n = 5: a triangle exists OR a non-adjacent pair exists
+    (i.e., triangle-free graphs have independent pairs). -/
 def k3law5 (G : List (Nat × Nat)) : Bool :=
   hasTri5 G || [0,1,2,3,4].any (fun a => [0,1,2,3,4].any (fun b =>
     a < b && !ed G a b))
@@ -336,12 +353,12 @@ def k3law5 (G : List (Nat × Nat)) : Bool :=
 theorem e61_k3law5_A : graphs5A.all k3law5 = true := by decide
 theorem e61_k3law5_B : graphs5B.all k3law5 = true := by decide
 
-/-- The induced 4-mask on (a,b,c,d): bits (ab,ac,ad,bc,bd,cd). -/
+/-- The induced 4-mask on (a,b,c,d): bits (ab,ac,ad,bc,bd,cd) MSB→LSB. -/
 def ind4mask (G : List (Nat × Nat)) (a b c d : Nat) : Nat :=
   (ed G a b).toNat * 32 + (ed G a c).toNat * 16 + (ed G a d).toNat * 8
   + (ed G b c).toNat * 4 + (ed G b d).toNat * 2 + (ed G c d).toNat
 
-/-- The 12 labeled P₄ 6-bit masks (engine-verified). -/
+/-- The 12 labeled P₄ 6-bit masks in this encoding (python-verified). -/
 def p4masks : List Nat :=
   [13, 14, 19, 22, 26, 28, 35, 37, 41, 44, 49, 50]
 
@@ -352,7 +369,7 @@ def p4Free5 (G : List (Nat × Nat)) : Bool :=
   && !(p4masks.contains (ind4mask G 0 2 3 4))
   && !(p4masks.contains (ind4mask G 1 2 3 4))
 
-/-- The induced 3-mask on (a,b,c): bits (ab,ac,bc); induced P₃ = 3, 5, 6. -/
+/-- The induced 3-mask on (a,b,c): bits (ab,ac,bc); induced P₃ ∈ {3,5,6}. -/
 def ind3mask (G : List (Nat × Nat)) (a b c : Nat) : Nat :=
   (ed G a b).toNat * 4 + (ed G a c).toNat * 2 + (ed G b c).toNat
 
@@ -412,8 +429,6 @@ def twoK2 : List (Nat × Nat) := [(0,1), (2,3)]
 theorem twoK2_facts :
     p3Free5 twoK2 = true ∧ p4Free5 twoK2 = true ∧
     hasTri5 twoK2 = false ∧
-    -- the 4-vertex tightness: among {0,1,2,3} neither a triangle nor an
-    -- independent triple (omega = alpha = 2, omega*alpha = 4 = n)
     (triB twoK2 0 1 2 = false ∧ triB twoK2 0 1 3 = false ∧
      triB twoK2 0 2 3 = false ∧ triB twoK2 1 2 3 = false) ∧
     (ind3B twoK2 0 1 2 = false ∧ ind3B twoK2 0 1 3 = false ∧
@@ -432,22 +447,16 @@ theorem e61_arsenal_bridge :
 /-! ## §6 THE BOARD -/
 
 theorem e61_board :
-    -- R(3,3) = 6: the complete math proof + the C5 tightness
     (∀ G : List (Nat × Nat),
       (∃ p q r, triB G p q r = true) ∨ (∃ p q r, ind3B G p q r = true)) ∧
     c5_last_tri ∧ c5_last_ind ∧
-    -- the K3 law at n=5
     graphs5A.all k3law5 = true ∧ graphs5B.all k3law5 = true ∧
-    -- the P4 laws at n=5
     graphs5A.all p4law = true ∧ graphs5B.all p4law = true ∧
     graphs5A.all p4shadow = true ∧ graphs5B.all p4shadow = true ∧
-    -- the P3 law at n=5
     graphs5A.all p3law = true ∧ graphs5B.all p3law = true ∧
-    -- the 2K2 tightness
     (p3Free5 twoK2 = true ∧ p4Free5 twoK2 = true ∧ hasTri5 twoK2 = false) ∧
-    -- the arsenal bridge
     (ErdosTernary2.isTernaryDigit 0 = true ∧ ErdosTernary2.isTernaryDigit 3 = false) :=
-  ⟨r33_math, c5_no_tri_ind3.10, c5_no_tri_ind3.20,
+  ⟨r33_math, c5_last_tri, c5_last_ind,
     e61_k3law5_A, e61_k3law5_B,
     e61_p4law5_A, e61_p4law5_B, e61_p4shadow5_A, e61_p4shadow5_B,
     e61_p3law5_A, e61_p3law5_B,
