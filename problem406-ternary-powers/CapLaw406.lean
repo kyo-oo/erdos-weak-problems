@@ -211,17 +211,17 @@ theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
           omega
         rw [hs, hexp]
         omega
-    have h2 : a^(f+1) * b ≤ b^(f+1) * b := by
-      have hle : a^(f+1) ≤ b^(f+1) := Nat.le_of_lt ih
-      obtain ⟨t, ht⟩ : ∃ t : Nat, b^(f+1) = a^(f+1) + t :=
-        ⟨b^(f+1) - a^(f+1), by omega⟩
-      have hexp : (a^(f+1) + t) * b = a^(f+1) * b + t * b := by ring
-      rw [ht, hexp]
-      omega
-    calc a^(f+1+1) = a^(f+1) * a := Nat.pow_succ a (f+1)
-      _ < a^(f+1) * b := h1
-      _ ≤ b^(f+1) * b := h2
-      _ = b^(f+1+1) := (Nat.pow_succ b (f+1)).symm
+      have h2 : a^(f+1) * b ≤ b^(f+1) * b := by
+        have hle : a^(f+1) ≤ b^(f+1) := Nat.le_of_lt ih
+        obtain ⟨t, ht⟩ : ∃ t : Nat, b^(f+1) = a^(f+1) + t :=
+          ⟨b^(f+1) - a^(f+1), by omega⟩
+        have hexp : (a^(f+1) + t) * b = a^(f+1) * b + t * b := by ring
+        rw [ht, hexp]
+        omega
+      calc a^(f+1+1) = a^(f+1) * a := Nat.pow_succ a (f+1)
+        _ < a^(f+1) * b := h1
+        _ ≤ b^(f+1) * b := h2
+        _ = b^(f+1+1) := (Nat.pow_succ b (f+1)).symm
 
 /-- The power-reassociation identity: `(a^m)^n = a^(n*m)`. -/
 theorem pow_mul_comm_shape (a m n : Nat) : (a^m)^n = a^(n*m) := by
