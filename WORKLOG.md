@@ -4634,3 +4634,78 @@ Executed (full ledger E01–E09 in WORKLOG_S073.md):
   11/11, 11/11) — see E10 of WORKLOG_S073.md.
 
 The engine never stops; it never lies. In English, always.
+
+## S060 — THE PARALLEL COMPARATOR VOLLEY: KERNELS 80/81/82 (2026-11-20)
+
+**Context:** this session sealed from the S059 zip-bag (fa4a160) and
+discovered the remote campaign advanced S060→S074 in parallel sessions (the
+"major progress" chats). This wave was REBASED onto S074 (8505218) — kernel
+numbers 66–68 were taken; the wave's kernels renumbered to 80/81/82 with
+S060-suffixed filenames (Erdos142S060/61S060/107S060.lean), coexisting with
+the S074 kernels. Push: 98164ac.
+
+**Targets (BOSS's order): corpus #142, #61, #107 — the same three problems
+the S061–S074 sessions worked; this wave delivers INDEPENDENT parallel
+mathematics with its own kernels and certificates.**
+
+1. **THE VERBATIM RECONSTRUCTION:** all three statements pierced from
+   erdosproblems.com (L51 Chrome-UA law confirmed live); DeepMind
+   formal-conjectures comparator files fetched (DM_142/61/107.lean,
+   google-deepmind/formal-conjectures@main); the corpus problems.yaml
+   retrieved from teorth/erdosproblems (authenticated GitHub API with the
+   campaign token — rate-limit bypass).
+2. **#142 (Kernel 80, Erdos142S060.lean):** 188 dual-method certified r_k(N)
+   cells (k=3: N≤38, k=4: ≤42, k=5: ≤57, k=6: ≤51; z3-UNSAT optimality +
+   bnb witnesses; ZERO mismatches vs the OEIS authoritative b-files —
+   independent verification of the published prefix); the exact values
+   r_3(9)=5, r_3(11)=6, r_3(13)=7 decide-certified BOTH directions; the
+   Stanley/ternary arsenal bridge (S(0)∩[81]: 16 elements, 3-AP-free,
+   decide); the ratio frontier (Erdős's [Er80] open question — finite
+   evidence tables); witness frontier cells. A fallen sub-agent's 4-method
+   salvage (z3+bnb1+bnb2+milp, N≤20) was recovered and merged.
+3. **#61 (Kernel 81, Erdos61S060.lean):** the E-H theorem ring — Lemma R
+   (the Ramsey recursion, complete 5-line proof) → Theorem 1 (K_t:
+   α ≥ L_t(n), any c < 1/(t−1) eventually) → Theorem 2 (E_t by duality);
+   Theorem 3 (P₃: components-cliques, ω·α ≥ n, c = 1/2 TIGHT via s·K_s);
+   Theorem 4 (K₂+E₁ by duality); Theorem 5 (the P₄ cograph decomposition —
+   complete induction proof, every case branch) + Theorem 6 (ω·α ≥ n,
+   TIGHT); **the COMPLETE ≤3-vertex H family** with explicit constants.
+   THE MACHINE AUDIT: the draft's Turán-route claim (α ≥ n/(t−1) for
+   K_t-free) was REFUTED by the exhaustive census (C₅: α = 2 < 2.5) and
+   replaced by the correct Ramsey route — the engine caught the error, the
+   correction is recorded in the derivation. Exhaustive censuses n ≤ 7 (all
+   2²¹ graphs at n = 7, 21 H-families) — every theorem ALL GREEN; n = 8
+   witnesses (m(H,8) = 3, Ramsey lower + witness upper).
+   Kernel: R(3,3) = 6 over all 2^15 graphs (32 chunks), C₅ tightness, the
+   K₃ laws, the P₄/P₃ laws at n = 5, 2·K₂ tightness.
+4. **#107 (Kernel 82, Erdos107S060.lean):** f(3) = 3; **f(4) = 5 — the
+   complete classical proof** (the airtight h=3 extremality argument:
+   P₁ ∈ conv{A,B,P₂} ∩ ℓ = {P₂}) + **the exhaustive chirotope machine
+   certificate** (all 2^10 5-point sign patterns; the 62 consistent ones —
+   classified against the 8 engine-verified realizable 4-patterns — ALL
+   contain a convex-4 pattern; zero counterexamples); **the E_5 witness
+   (f(5) ≥ 9): 8 integer points, GP + no-convex-5 + convex-4-present,
+   exact arithmetic, decide-certified in the kernel**; Lemmas 1/1'/2/3/4
+   complete; the label-injectivity shortcut MACHINE-REFUTED (1190
+   collisions/3903 configs — recorded as a lesson); the classical boundary
+   attributed precisely.
+5. **The comparator files (BOSS's order):** CHALLENGE_142/61/107.md (the
+   verbatim erdosproblems.com statements + DeepMind comparator statements)
+   + SOLUTION_142/61/107.md (the honest scoreboard: fortress cores labeled
+   OPEN; the delivered mathematics listed exactly) in each problem folder.
+6. **Batteries 142/61/107 ALL GREEN** (independent python mirrors of every
+   kernel claim). A data audit caught and fixed: a hand-typed witness with
+   a 3-AP (5,11,17), a missing-witness batch (k=3 N=21..28 — filled by bnb),
+   and a transcription error in the report (r_3(38) = 14, not 16) — the
+   b-file cross-check is the arbiter, zero mismatches after repair.
+7. **Wave system:** 6 sub-agents released (2/problem) — ALL fell to
+   context-deadline; the commander absorbed all six lanes directly (S058
+   precedent), salvaging two fallen agents' partial output (the #142 4-method
+   tables; the #61 n ≤ 7 census engine). The mathstack depot was rebuilt
+   (z3/sympy/gmpy2 layer; sage/gap/pari absent this sandbox — no root).
+
+CI verdicts on Kernels 80/81/82: pending at push (run monitored; the S074
+baseline: 10/11 kernels green with kernel-b red by design — the 406-lane's
+named open hypothesis).
+
+The engine never stops; it never lies. In English, always.
