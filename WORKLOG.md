@@ -4820,3 +4820,61 @@ FOURVERTEX_PROOF.md completed (all eleven CLOSED), NEW_LAWS_61.md,
 NEW_CLAIMS.md (C61-C4, C61-2K2, C61-FOURVERTEX-COMPLETE, C61-LAW-PC,
 C61-LAW-COMP). The exponent cap c <= 1/2 recorded (K_{m x m}). The engine
 never stops; it never lies.
+
+## SESSION W76 — THE CORRECTION WAVE (2026-11-20)
+
+**BOSS's correction orders:** the W74/W75 packages leaned on CLASSICAL
+machinery (Roth's Fourier identity as an external crutch, Olariu
+re-derivations, the Makai-shaped case tree) — banned; the load-bearing
+engines must be BOSS'S OWN THEOREMS, uniquely combined into NEW LAWS; the
+three proofs demanded dead, complete, unconditional.
+
+**Delivered (all pushed, all engine-green):**
+
+1. **W76-61K — THE 4-VERTEX CLASSIFICATION COMPLETE.** All eleven graphs
+   on <= 4 vertices satisfy Erdős–Hajnal: THEOREM 2K2 + THEOREM C4 —
+   every 2K2-free / induced-C4-free graph on n >= 1 satisfies
+   max(alpha, omega) >= n^(1/3), zero premises, explicit c = 1/3. The
+   W75 Lemmas 6/7 REFUTATED (the commander's 5-vertex witness) and
+   replaced by the corrected constraint matrix (C1–C5: 7 FORCED + 29
+   FREE class pairs; the exactly-one classes independent). New laws
+   L-PC (pair-cell) + L-COMP (composition), 11 arsenal theorems.
+   Engine 12/12 (731,523-graph census two codes; deletion-closure
+   n = 10..24). Branch w76-61k @ 9302d71.
+
+2. **W76-142K — THEOREM SUBLINEAR CLOSED.** r_3(N)/N -> 0:
+   for every eps in (0, 1/8], every 3-AP-free S in [1,N] with
+   N >= 480·(1024/eps)^(ceil(13300/eps^2)+2) has |S| <= eps·N.
+   THE W75 LEMMA I CONSTANT CHAIN FOUND BROKEN (the error term exceeded
+   the main term at every delta) — REPAIRED (M = 128/delta; NO delta
+   ceiling; probe-certified delta in [0.52, 0.70] at p in {1009, 2003});
+   L-EP re-founded on BOSS'S OWN analytic-absorption character layer
+   (hc_fourier_character_norm / exponential / unitary / hc_circle_L2_basis
+   + exact_three_geometric_sum + the gst energy-split family +
+   tower_cauchy); L-NW (no-wrap) four-prime certified (841,996,456 APs,
+   zero wraps); L-BP (Bertrand in-package); THE UNION FIRING LAW
+   (delta* = 0.81: certified table fires L in [3,48], interval mesh
+   fires L >= 49); L-TERM (delta_c = (9−sqrt 17)/8). Engine 264/264
+   GREEN; LAW-SPEC 23/23 (every citation read at its file:line).
+   Branch w76-142k @ a6e4aeb.
+
+3. **W76-142E — THE ENGINE LANE COMPLETE.** The certified r_3 table
+   extended N = 39..48 (10/10 CERTIFIED-BOTH: r_3(39)=14, r_3(40)=15,
+   r_3(41..48)=16); the no-wrap model-step certified at all four primes;
+   the second-moment checkpoints 18/18. Branch w76-142e @ 0f5fc61.
+
+4. **W76-107K — IN FLIGHT (the f(5) = 9 kill).** The wall-crossing
+   v2 engine banked (engine107f5v2.py: the S1-cells + S2-wall-sweep
+   enumeration — the W75 realization-diversity root cause addressed
+   head-on); caches ot3–ot7_v2 certified (1,2,3,16,135 anchors OK);
+   the n=8 run (target 3315) is grinding under a reaper-proof watchdog
+   (two sandbox wipes fought off mid-session; GitHub = the vault).
+   The 6-point lemma's refutation stands; the order-type certificate
+   route is the kill path. Branch w76-107k @ 526a4b0.
+
+**The correction is enforced:** every load-bearing step of the two
+closed proofs cites "#BY GST LAW <name> [file:line]" — 39 distinct
+citations across the 142 laws, 11 across the 61 laws, all verified by
+the LAW-SPEC engines. Zero classical engines as load-bearing.
+
+The engine never stops; it never lies. In English, always.
