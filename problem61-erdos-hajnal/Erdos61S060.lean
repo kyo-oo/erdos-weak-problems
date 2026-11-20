@@ -55,7 +55,7 @@ def ind3B (G : List (Nat × Nat)) (a b c : Nat) : Bool :=
 /-- A list of distinct naturals (self-contained Nodup). -/
 inductive DList : List Nat → Prop
   | nil : DList []
-  | cons (a : Nat) (t : List Nat) (h : t.all (fun x => x != a))
+  | cons (a : Nat) (t : List Nat) (h : ∀ x ∈ t, x ≠ a)
       (ht : DList t) : DList (a :: t)
 
 /-- The campaign's own filter (green-kernel idiom: core List.filter is
@@ -161,7 +161,8 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
     · obtain ⟨b, c, d, hb, hc, hd, h1, h2, h3'⟩ := ih ht3
       exact ⟨b, c, d, List.mem_cons_of_mem _ hb, List.mem_cons_of_mem _ hc,
         List.mem_cons_of_mem _ hd, h1, h2, h3'⟩
-    · have hlen : t.length = 2 := by omega
+    · have hcl : (a :: t).length = t.length + 1 := rfl
+      have hlen : t.length = 2 := by omega
       cases t with
       | nil => simp only [List.length_nil] at hlen; omega
       | cons b t2 =>
@@ -170,13 +171,13 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
         | cons c t3 =>
           have hbc : b ≠ c := by
             intro hcon; subst hcon
-            exact absurd (hall c (List.mem_cons_self c t3)) (by simp)
+            exact absurd rfl (hall c (List.mem_cons_self c t3))
           have hba : b ≠ a := by
             intro hcon; subst hcon
-            exact absurd (hall b (List.mem_cons_self b (c :: t3))) (by simp)
+            exact absurd rfl (hall b (List.mem_cons_self b (c :: t3)))
           have hca : c ≠ a := by
             intro hcon; subst hcon
-            exact absurd (hall c (List.mem_cons_self c t3)) (by simp)
+            exact absurd rfl (hall c (List.mem_cons_self c t3))
           refine ⟨a, b, c, List.mem_cons_self a (b :: c :: t3),
             List.mem_cons_of_mem a (List.mem_cons_self b (c :: t3)),
             List.mem_cons_of_mem a (List.mem_cons_of_mem b (List.mem_cons_self c t3)),
@@ -185,15 +186,15 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
 /-- The canonical vertex tail is a distinct list. -/
 theorem dlist_12345 : DList [1, 2, 3, 4, 5] := by
   refine DList.cons 1 [2, 3, 4, 5] ?_ ?_
-  · decide
+  · intro x hx; simp at hx; omega
   · refine DList.cons 2 [3, 4, 5] ?_ ?_
-    · decide
+    · intro x hx; simp at hx; omega
     · refine DList.cons 3 [4, 5] ?_ ?_
-      · decide
+      · intro x hx; simp at hx; omega
       · refine DList.cons 4 [5] ?_ ?_
-        · decide
+        · intro x hx; simp at hx; omega
         · refine DList.cons 5 [] ?_ ?_
-          · decide
+          · intro x hx; simp at hx
           · exact DList.nil
 
 /-! ## §1 RAMSEY R(3,3) = 6 — THE COMPLETE MATH PROOF -/
@@ -302,6 +303,9 @@ theorem c5_no_tri_ind3 :
     ind3B c5 1 2 3 = false ∧ ind3B c5 1 2 4 = false ∧ ind3B c5 1 3 4 = false ∧
     ind3B c5 2 3 4 = false := by decide
 
+theorem c5_last_tri : triB c5 2 3 4 = false := by decide
+theorem c5_last_ind : ind3B c5 2 3 4 = false := by decide
+
 /-! ## §3 THE n = 5 SWEEPS (two 512-chunks each) -/
 
 def k5edges : List (Nat × Nat) :=
@@ -326,7 +330,7 @@ def hasInd35 (G : List (Nat × Nat)) : Bool :=
 
 /-- The K₃ law at n = 5: triangle-free ⟹ some non-adjacent pair. -/
 def k3law5 (G : List (Nat × Nat)) : Bool :=
-  !hasTri5 G || [0,1,2,3,4].any (fun a => [0,1,2,3,4].any (fun b =>
+  hasTri5 G || [0,1,2,3,4].any (fun a => [0,1,2,3,4].any (fun b =>
     a < b && !ed G a b))
 
 theorem e61_k3law5_A : graphs5A.all k3law5 = true := by decide
@@ -339,7 +343,7 @@ def ind4mask (G : List (Nat × Nat)) (a b c d : Nat) : Nat :=
 
 /-- The 12 labeled P₄ 6-bit masks (engine-verified). -/
 def p4masks : List Nat :=
-  [9, 18, 20, 33, 36, 40, 5, 10, 24, 17, 34, 12]
+  [13, 14, 19, 22, 26, 28, 35, 37, 41, 44, 49, 50]
 
 def p4Free5 (G : List (Nat × Nat)) : Bool :=
   !(p4masks.contains (ind4mask G 0 1 2 3))
@@ -407,7 +411,13 @@ def twoK2 : List (Nat × Nat) := [(0,1), (2,3)]
 
 theorem twoK2_facts :
     p3Free5 twoK2 = true ∧ p4Free5 twoK2 = true ∧
-    hasTri5 twoK2 = false ∧ hasInd35 twoK2 = false ∧
+    hasTri5 twoK2 = false ∧
+    -- the 4-vertex tightness: among {0,1,2,3} neither a triangle nor an
+    -- independent triple (omega = alpha = 2, omega*alpha = 4 = n)
+    (triB twoK2 0 1 2 = false ∧ triB twoK2 0 1 3 = false ∧
+     triB twoK2 0 2 3 = false ∧ triB twoK2 1 2 3 = false) ∧
+    (ind3B twoK2 0 1 2 = false ∧ ind3B twoK2 0 1 3 = false ∧
+     ind3B twoK2 0 2 3 = false ∧ ind3B twoK2 1 2 3 = false) ∧
     (0,1) ∈ twoK2 ∧ (2,3) ∈ twoK2 := by decide
 
 /-! ## §5 THE ARSENAL BRIDGE -/
@@ -425,7 +435,7 @@ theorem e61_board :
     -- R(3,3) = 6: the complete math proof + the C5 tightness
     (∀ G : List (Nat × Nat),
       (∃ p q r, triB G p q r = true) ∨ (∃ p q r, ind3B G p q r = true)) ∧
-    triB c5 2 3 4 = false ∧ ind3B c5 2 3 4 = false ∧
+    c5_last_tri ∧ c5_last_ind ∧
     -- the K3 law at n=5
     graphs5A.all k3law5 = true ∧ graphs5B.all k3law5 = true ∧
     -- the P4 laws at n=5
