@@ -62,7 +62,7 @@ inductive DList : List Nat → Prop
     simp-fragile under the pinned toolchain). -/
 def filt (P : Nat → Bool) : List Nat → List Nat
   | [] => []
-  | a :: t => if P a = true then a :: filt P t else filt P t
+  | a :: t => bif P a then a :: filt P t else filt P t
 
 theorem mem_filt {P : Nat → Bool} {x : Nat} {V : List Nat}
     (h : x ∈ filt P V) : x ∈ V ∧ P x = true := by
@@ -71,18 +71,19 @@ theorem mem_filt {P : Nat → Bool} {x : Nat} {V : List Nat}
   | cons a t ih =>
     by_cases hP : P a = true
     · have hrw : filt P (a :: t) = a :: filt P t := by
-        show (if P a = true then a :: filt P t else filt P t) = _
+        show (bif P a then a :: filt P t else filt P t) = a :: filt P t
         rw [hP]
-      rw [hrw] at h ⊢
+        rfl
+      rw [hrw] at h
       rcases List.mem_cons.mp h with he | hm
       · exact ⟨he, hP⟩
       · exact ⟨List.mem_cons_of_mem _ (ih hm).1, (ih hm).2⟩
-    · have hrw : filt P (a :: t) = filt P t := by
-        show (if P a = true then a :: filt P t else filt P t) = _
-        have hPa : P a = false := by
-          cases hh : P a with
-          | false => rfl
-          | true => exact absurd hh hP
+    · have hPa : P a = false := by
+        cases hh : P a with
+        | false => rfl
+        | true => exact absurd hh hP
+      have hrw : filt P (a :: t) = filt P t := by
+        show (bif P a then a :: filt P t else filt P t) = filt P t
         rw [hPa]
         rfl
       rw [hrw] at h
@@ -97,18 +98,19 @@ theorem dlist_filt (P : Nat → Bool) (V : List Nat) (hV : DList V) :
   | cons a t hall ht ih =>
     by_cases hP : P a = true
     · have hrw : filt P (a :: t) = a :: filt P t := by
-        show (if P a = true then a :: filt P t else filt P t) = _
+        show (bif P a then a :: filt P t else filt P t) = a :: filt P t
         rw [hP]
+        rfl
       rw [hrw]
       refine DList.cons a (filt P t) ?_ ih
       intro x hx
       exact hall x (mem_filt hx).1
-    · have hrw : filt P (a :: t) = filt P t := by
-        show (if P a = true then a :: filt P t else filt P t) = _
-        have hPa : P a = false := by
-          cases hh : P a with
-          | false => rfl
-          | true => exact absurd hh hP
+    · have hPa : P a = false := by
+        cases hh : P a with
+        | false => rfl
+        | true => exact absurd hh hP
+      have hrw : filt P (a :: t) = filt P t := by
+        show (bif P a then a :: filt P t else filt P t) = filt P t
         rw [hPa]
         rfl
       exact ih
@@ -121,11 +123,12 @@ theorem filt_split (P : Nat → Bool) (V : List Nat) :
   | cons a t ih =>
     by_cases hP : P a = true
     · have h1 : filt P (a :: t) = a :: filt P t := by
-        show (if P a = true then a :: filt P t else filt P t) = _
+        show (bif P a then a :: filt P t else filt P t) = a :: filt P t
         rw [hP]
+        rfl
       have hnp : (!P a) = false := by rw [hP]; rfl
       have h2 : filt (fun v => !P v) (a :: t) = filt (fun v => !P v) t := by
-        show (if (!P a) = true then a :: filt _ t else filt _ t) = _
+        show (bif (!P a) then a :: filt (fun v => !P v) t else filt (fun v => !P v) t) = filt (fun v => !P v) t
         rw [hnp]
         rfl
       rw [h1, h2]
@@ -136,13 +139,14 @@ theorem filt_split (P : Nat → Bool) (V : List Nat) :
         | false => rfl
         | true => exact absurd hh hP
       have h1 : filt P (a :: t) = filt P t := by
-        show (if P a = true then a :: filt P t else filt P t) = _
+        show (bif P a then a :: filt P t else filt P t) = filt P t
         rw [hPa]
         rfl
       have hnp : (!P a) = true := by rw [hPa]; rfl
       have h2 : filt (fun v => !P v) (a :: t) = a :: filt (fun v => !P v) t := by
-        show (if (!P a) = true then a :: filt _ t else filt _ t) = _
+        show (bif (!P a) then a :: filt (fun v => !P v) t else filt (fun v => !P v) t) = a :: filt (fun v => !P v) t
         rw [hnp]
+        rfl
       rw [h1, h2]
       simp only [List.length_cons]
       omega

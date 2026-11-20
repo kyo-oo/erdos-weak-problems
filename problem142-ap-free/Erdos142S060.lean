@@ -133,8 +133,8 @@ theorem e142_arsenal_bridge :
     ErdosTernary2.isTernaryDigit 2 = true ∧
     ErdosTernary2.isTernaryDigit 3 = false ∧
     ternaryOKf 6 0 = true ∧ ternaryOKf 6 1 = true ∧
-    ternaryOKf 6 2 = true ∧ ternaryOKf 6 3 = false ∧
-    ternaryOKf 6 4 = true ∧ ternaryOKf 6 5 = true :=
+    ternaryOKf 6 3 = true ∧ ternaryOKf 6 4 = true ∧
+    ternaryOKf 6 2 = false ∧ ternaryOKf 6 5 = false :=
   ⟨rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl, rfl⟩
 
 /-! ## §5 THE BOARD -/
