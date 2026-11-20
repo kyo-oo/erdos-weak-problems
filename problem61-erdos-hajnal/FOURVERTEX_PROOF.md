@@ -15,7 +15,8 @@ the laws exactly where W75 was wrong: every exactly-one attachment class
 is independent (W75 Lemma 7 had only "at most one of them carries an
 edge"). The full statement of the two new laws with their arsenal
 combinations is NEW_LAWS_61.md; the engine receipts are
-receipts61four_v2.txt (11/11 PASS, exhaustive n ≤ 7 + sampled n = 8).
+receipts61four_v2.txt (12/12 PASS, exhaustive n ≤ 7 + sampled n = 8 +
+deletion-closure n = 10..24).
 
 The eleven unlabeled graphs on 4 vertices (complements paired):
 K4 ↔ K̄4, P4 ↔ P̄4 (= P4), C4 ↔ 2K2, paw ↔ P3+K1, diamond (K4−e) ↔ K2+2K1,
@@ -214,7 +215,7 @@ The named remaining lane of W75 is closed by re-anchoring the whole
 analysis — triangle-free and with-triangle alike — on a MAXIMUM independent
 set (side C4) / MAXIMUM clique (side 2K2). The full statements, proofs, and
 arsenal combinations are NEW_LAWS_61.md; the receipts are
-receipts61four_v2.txt (11/11 PASS). Summary:
+receipts61four_v2.txt (12/12 PASS). Summary:
 
 **NEW LAW L-PC (PAIR-CELL LAW).** Side C4 (G induced-C4-free, I a maximum
 independent set, A(v) = N(v) ∩ I): (i) COVERAGE A(v) ≠ ∅ (pure maximality);
@@ -421,7 +422,7 @@ even_mul_left [KernelLaw.lean:72]; bracket_skew
 
 ## §6. ENGINE CERTIFICATION
 
-**W76 (the close): engine61four.py v2 — 11/11 PASS (receipts61four_v2.txt,
+**W76 (the close): engine61four.py v2 — 12/12 PASS (receipts61four_v2.txt,
 W76_61K_V2_ENGINE_GREEN=1), two independent counting codes agreeing on
 every census number:** V2-1 the n ≤ 7 census by pattern-LUT sweep vs
 incremental vertex-extension (731,523 graphs per class, with-triangle
@@ -437,7 +438,10 @@ n ≤ 7; the W75-Lemma-6 hard witness certified; the full 36-pair table
 L-COMP arithmetic M = 1..1999 + the composed cube on every census graph +
 h-tables + PIGEONHOLE-SIX; V2-6 the sharp form αω ≥ 4n/5 exhaustive n ≤ 7;
 V2-7 n = 8 strata (200,000 random draws + 644 structured with-triangle
-generators, 215,262 survivors, 0 law violations); V2-8 negative controls
+generators, 215,262 survivors, 0 law violations); V2-7b deletion-closure
+strata beyond census size (n = 10, 14, 18, 24; 595 + 596 survivors, 539 +
+476 with-triangle; the FULL L-PC + L-COMP suite 0 violations; sharp form
+0 violations); V2-8 negative controls
 (the pair-cell law iff induced-C4-free in BOTH directions on all 32,768
 graphs n ≤ 6; maximality load-bearing; the R(3,5)-cap form witness
 C_12(2,3) + complement; the gst margin-transport control); V2-9 the 11

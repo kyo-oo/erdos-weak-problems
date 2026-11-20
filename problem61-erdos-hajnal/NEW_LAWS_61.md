@@ -235,7 +235,10 @@ adjacencies, 0 unclassified, cell identity 0 violations, refined form 0
 violations TIGHT at 25 census graphs, all-maximum-anchor verification
 233,417 anchors 0 violations); V2-3 (side 2K2, same scale); V2-7 (n = 8:
 200,000 random draws + 644 structured with-triangle generators, 215,262
-sampled survivors, 0 law violations); V2-8 (negative controls: the
+sampled survivors, 0 law violations); V2-7b (deletion-closure strata
+beyond census size: n = 10, 14, 18, 24, 600 draws per class — 595 C4-free
++ 596 2K2-free survivors, 539 + 476 with-triangle, the FULL law suite
+0 violations, sharp form 0 violations); V2-8 (negative controls: the
 pair-cell law holds IFF induced-C4-free, both directions, all 32,768
 graphs n ≤ 6; coverage + W-cells universal with no H-freeness assumed;
 maximality load-bearing — 312 non-maximum anchors with uncovered vertices

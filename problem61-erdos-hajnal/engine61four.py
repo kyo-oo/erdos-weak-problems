@@ -2427,6 +2427,76 @@ def main_v2(smoke=False, part=None):
                n8res['C4']['sharp_bad'], n8res['2K2']['sharp_bad']))
 
     # ------------------------------------------------------------------
+    # V2-7b deletion-closure strata at n = 10..24 (beyond census size):
+    # start from a random graph, repeatedly delete one vertex from the first
+    # induced H copy until H-free; verify the full L-PC + L-COMP suite.
+    # ------------------------------------------------------------------
+    rngd = random.Random(SEED + 7676)
+    delclo = {h: 0 for h in V2_CLASSES}
+    delclo_bad = {h: 0 for h in V2_CLASSES}
+    delclo_sharp = {h: 0 for h in V2_CLASSES}
+    delclo_tri = {h: 0 for h in V2_CLASSES}
+    for nn in (10, 14, 18, 24):
+        prsn = [(i, j) for i in range(nn) for j in range(i + 1, nn)]
+        for _ in range(150):
+            p = rngd.uniform(0.15, 0.85)
+            emask = 0
+            for idx in range(len(prsn)):
+                if rngd.random() < p:
+                    emask |= 1 << idx
+            for h in V2_CLASSES:
+                adj = adj_from_emask(nn, emask, prsn)
+                guard = 0
+                while guard < 4 * nn:
+                    guard += 1
+                    m = len(adj)
+                    bad = None
+                    for q in itertools.combinations(range(m), 4):
+                        if pattern_of(adj, q) in H_PAT[h]:
+                            bad = q
+                            break
+                    if bad is None:
+                        break
+                    v = bad[rngd.randrange(4)]
+                    keep = [u for u in range(m) if u != v]
+                    nadj = [0] * len(keep)
+                    for i2, u2 in enumerate(keep):
+                        for j2, w2 in enumerate(keep):
+                            if i2 != j2 and (adj[u2] >> w2) & 1:
+                                nadj[i2] |= 1 << j2
+                    adj = nadj
+                m = len(adj)
+                if m < 5:
+                    continue
+                if not hfree(m, adj, h):
+                    delclo_bad[h] += 1      # closure failed (impossible)
+                    continue
+                delclo[h] += 1
+                if comp_has_triangle(adj, (1 << m) - 1):
+                    delclo_tri[h] += 1
+                lp = _v2_lpc_c4(m, adj) if h == 'C4' else _v2_lpc_2k2(m, adj)
+                if (lp['uncov'] or lp['viol_W'] or lp['viol_P']
+                        or lp['t1_bad'] or not lp['n_le_parts']
+                        or not lp['n_le_loose'] or not lp['n_le_refined']
+                        or not lp['n_le_cube']):
+                    delclo_bad[h] += 1
+                if lp['aw'] * 5 < 4 * m:
+                    delclo_sharp[h] += 1
+    section('V2-7b DELETION-CLOSURE-STRATA-n10-24',
+            all(delclo_bad[h] == 0 for h in V2_CLASSES)
+            and all(delclo[h] >= 400 for h in V2_CLASSES),
+            'random deletion-closure H-free graphs at n = 10, 14, 18, 24 '
+            '(600 draws per class, one vertex deleted from each induced H '
+            'copy until free): C4 %d survivors (%d with-triangle), 2K2 %d '
+            'survivors (%d with-triangle), FULL L-PC + L-COMP suite '
+            '(coverage, W-cells, pair-cells, placements, identity, loose + '
+            'refined concentration forms, the cube): %d + %d violations; '
+            'sharp form alpha*omega >= 4n/5 violations: C4 %d, 2K2 %d'
+            % (delclo['C4'], delclo_tri['C4'], delclo['2K2'],
+               delclo_tri['2K2'], delclo_bad['C4'], delclo_bad['2K2'],
+               delclo_sharp['C4'], delclo_sharp['2K2']))
+
+    # ------------------------------------------------------------------
     # V2-8 negative controls
     # ------------------------------------------------------------------
     # (a)+(b) the pair-cell laws <=> H-freeness, exhaustive n<=6 all graphs

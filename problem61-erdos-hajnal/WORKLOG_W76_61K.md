@@ -43,7 +43,7 @@ exists and why every milestone below is committed and pushed immediately.
    witness; L-COMP arithmetic M = 1..1999; the sharp form αω ≥ 4n/5
    exhaustive with equality exactly at the 12 labeled C5s.
 
-5. **FULL RUN part 2 (v2p2): 11/11 PASS total, 57.5 s.** n = 8 sampled
+5. **FULL RUN part 2 (v2p2): 11/11 PASS total at that point, 57.5 s.** n = 8 sampled
    strata (200,000 random draws on the p-grid + 644 structured with-triangle
    generators: split graphs, books, unequal C5-blowups + complements,
    corrected-decomposition random designs; 107,390 + 107,872 survivors,
@@ -127,3 +127,24 @@ over triangles at all. The triangle matrix survives as the corrected
 structure bank (C1–C5 + L-DOM), complete and self-contained.
 
 The engine never stops; it never lies. In English, always.
+
+13. **V2-7b added (the beyond-census stress test).** Deletion-closure
+    strata at n = 10, 14, 18, 24 (600 draws per class; one vertex deleted
+    from each induced H copy until H-free; a relabeling bug in the first
+    draft of the deletion step caught and fixed before any run): 595
+    C4-free + 596 2K2-free survivors (539 + 476 with-triangle), the FULL
+    L-PC + L-COMP suite 0 violations, sharp form 0 violations — the laws
+    hold far beyond census size. Part 2 re-run: **12/12 PASS, 44.8 s**;
+    smoke regression 12/12. All documents updated to the 12/12 receipts.
+14. **Independent second-method audit (standalone code, no engine
+    imports).** Brute-force alpha/omega by subset enumeration (no memoized
+    MIS, no engine cell code): all C4-free graphs n <= 5 exhaustive + 4,000
+    random n = 6..9 filtered — 2,052 graphs, the L-PC refined form
+    n <= alpha + (omega-1)alpha(alpha+1)/2: 0 violations; the L-COMP cube
+    n <= max^3: 0 violations; the C5 refined bound = 5 = n (TIGHT)
+    confirmed. The exponent cap verified on the CORRECT construction
+    (complete multipartite, non-adjacency classes): K_{m x m} is 2K2-free
+    with alpha = omega = m = sqrt(n) for m = 2..5 (the audit's first draft
+    built disjoint cliques by mistake — caught because the filter rejected
+    them; the corrected build passes). Two-method discipline closed: proof
+    + engine census + independent brute-force all agree.
