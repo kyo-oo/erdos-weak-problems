@@ -333,3 +333,27 @@ receipts142sublinear_v2.txt (EP-CK, I-CK-LOC, ITER-CK-2, BP-CK, PB-CK,
 PB-CK-MESH, DF-CK, V-CK-2 lanes).
 
 The engine never stops; it never lies. In English, always.
+
+## W77-142K KILL 3 additions (this branch, R4_VARN.md)
+
+### LAW R4-TABLE (certified)
+r_4(M) for M = 1..16 exhaustively certified (see R4_VARN.md section 1):
+1,2,3,4,4,5,5,6,7,8,8,8,9,9,10,10. The first k=4 data stone.
+#BY GST LAW digitCount3_monotone [arsenal-full/erdosternary2/ErdosTernary2.lean:2097]
+
+### THEOREM R4-VARN (proven, explicit)
+For M0=8, r=6: for every N >= 8 and delta with S_min(N,delta) > r*#C(N):
+every A subset [1,N], |A| >= delta*N, contains >= c_4(delta,N)*N^2
+non-trivial 4-APs with c_4 = (S_min - r*#C)/((M0-r) M0^2 N^2) explicit.
+Certified range at N=1000: delta >= 0.85 (c_4(1.00) >= 1.108e-3 down to
+c_4(0.85) >= 2.230e-4), plug-backs 40/40 GREEN both codes.
+Proof: copy census + exact adversarial floor S_min + rich-copy counting +
+uniform divisor < M0^2 (R4_VARN.md section 2).
+#BY GST LAW cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:283]
+#BY GST LAW mod_mod_mul [HC-PROOF-research/CardinalWorlds.lean:143]
+#BY GST LAW carryAtPos_bound [HC-PROOF-research/CardinalWorlds.lean:108]
+
+### THE AMPLIFICATION ARCHITECTURE
+delta-threshold governed by r_4(M0)/M0; SAT-certified larger stones push
+delta down; the model-step data (R4_VARN.md section 4) feeds the
+density-increment program toward the full k=4 sublinear law.

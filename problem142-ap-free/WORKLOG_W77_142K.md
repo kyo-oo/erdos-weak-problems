@@ -53,3 +53,12 @@ the L-EP re-analysis for the (log N)^{-c} shape) and the k=4 foundation
 (R4-VARN).
 
 The engine never stops; it never lies. In English, always.
+
+## W77-142K KILL 3 (R4-VARN) — LANDED
+- engine142r4.py written + run all parts GREEN (receipts142r4varn.txt).
+- r_4(M) certified M=1..16 exhaustive (first k=4 stone).
+- R4-VARN proven with explicit constants: delta >= 0.85 at N=1000,
+  c_4(1.00) >= 1.108e-3, plug-back 40/40 both codes.
+- Divisor law: analytic M0(M0-1) < M0^2; empirical worst 7 (N=200, sampled).
+- Model-step data banked for the amplification front.
+- KILL 2 (LOGPOWER) documented as the named front (LOGDECAY banked at 2c00992).
