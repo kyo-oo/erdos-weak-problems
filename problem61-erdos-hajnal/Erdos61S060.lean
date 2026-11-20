@@ -73,7 +73,7 @@ theorem mem_filt {P : Nat → Bool} {x : Nat} {V : List Nat}
       · refine ⟨?_, ?_⟩
         · rw [he]
           exact (List.mem_cons.mpr (Or.inl rfl))
-        · rw [← he]
+        · rw [he]
           exact hP
       · exact ⟨List.mem_cons_of_mem _ (ih hm).1, (ih hm).2⟩
     · have hPa : P a = false := by
@@ -156,7 +156,7 @@ theorem filt_split (P : Nat → Bool) (V : List Nat) :
 theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
     ∃ a b c, a ∈ L ∧ b ∈ L ∧ c ∈ L ∧ a ≠ b ∧ a ≠ c ∧ b ≠ c := by
   induction hL with
-  | nil => omega
+  | nil => exact absurd h3 (by decide)
   | cons a t hall ht ih =>
     by_cases ht3 : 3 ≤ t.length
     · obtain ⟨b, c, d, hb, hc, hd, h1, h2, h3'⟩ := ih ht3
@@ -172,16 +172,16 @@ theorem dlist_pick3 (L : List Nat) (hL : DList L) (h3 : 3 ≤ L.length) :
         | cons c t3 =>
           have hbc : b ≠ c := by
             intro hcon; subst hcon
-            exact absurd rfl (hall c ((List.mem_cons.mpr (Or.inl rfl))))
+            exact absurd rfl (hall c (by simp))
           have hba : b ≠ a := by
             intro hcon; subst hcon
-            exact absurd rfl (hall b ((List.mem_cons.mpr (Or.inl rfl))))
+            exact absurd rfl (hall b (by simp))
           have hca : c ≠ a := by
             intro hcon; subst hcon
-            exact absurd rfl (hall c ((List.mem_cons.mpr (Or.inl rfl))))
-          refine ⟨a, b, c, (List.mem_cons.mpr (Or.inl rfl)),
-            List.mem_cons_of_mem a ((List.mem_cons.mpr (Or.inl rfl))),
-            List.mem_cons_of_mem a (List.mem_cons_of_mem b ((List.mem_cons.mpr (Or.inl rfl)))),
+            exact absurd rfl (hall c (by simp))
+          refine ⟨a, b, c, (by simp),
+            List.mem_cons_of_mem a (by simp),
+            List.mem_cons_of_mem a (List.mem_cons_of_mem b (by simp)),
             Ne.symm hba, Ne.symm hca, hbc⟩
 
 /-- The canonical vertex tail is a distinct list. -/
@@ -295,7 +295,7 @@ theorem r33_math (G : List (Nat × Nat)) :
       have h2 := (mem_filt hx).2
       cases hh : ed G 0 x with
       | false => rfl
-      | true => rw [hh] at h2; exact absurd h2 (by rfl)
+      | true => rw [hh] at h2; exact absurd h2 (by simp)
     rcases ind_or_tri3 (G := G) a b c with h | h
     · -- some pair non-adjacent: that pair with 0 is independent
       rcases h with h | h | h
