@@ -1735,7 +1735,19 @@ jobs:
           test "$(grep -c '\[FAIL\]' gate107official.log)" -eq 0
           echo GATE107OFFICIAL_GREEN=1
 
-
+  kernel-s060:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
       - name: "Kernel 80 - Erdos 142 AP-FRONTIER (S060 parallel wave) (S060 wave): the exact-value theorems r_3(9)=5, r_3(11)=6, r_3(13)=7 (both directions, decide) + the Stanley/ternary arsenal bridge (S(0) cap [81]: 16 elements, 3-AP-free, decide) + the witness frontier cells (r_3(20)>=9, r_3(27)>=11, r_3(38)>=14, r_4(42)>=22) + the 188-cell dual-method certified tables (z3+bnb, zero OEIS b-file mismatches) + the ratio frontier + the board"
         if: always()
         shell: bash
