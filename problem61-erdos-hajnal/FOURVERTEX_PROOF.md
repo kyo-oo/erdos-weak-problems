@@ -302,7 +302,10 @@ are pairwise completely adjacent — complete multipartite. ∎
 
 **Theorem PAW (the corrected assembly).** A paw-free graph's components are
 triangle-free (Lemma 4: αᵢ ≥ √(mᵢ)/2, i.e. mᵢ ≤ 4αᵢ²) or complete
-multipartite (Lemma 6: αᵢωᵢ ≥ mᵢ, i.e. mᵢ ≤ αᵢ·ωᵢ ≤ αᵢ·ω(G)). Then:
+multipartite (the complete-multipartite product bound αᵢωᵢ ≥ mᵢ — αᵢ is
+the largest part, ωᵢ the number of parts, and max(p_j)·k ≥ Σp_j = mᵢ —
+so mᵢ ≤ αᵢ·ωᵢ ≤ αᵢ·ω(G); W75 mislabeled this trivial bound "Lemma 6",
+a numbering collision with the refuted §1c Lemma 6, fixed here). Then:
 
     n = Σmᵢ ≤ Σ_tf 4αᵢ² + Σ_mp αᵢ·ω(G) ≤ 4(Σ_tf αᵢ)² + (Σ_mp αᵢ)·ω(G)
       ≤ 4α(G)² + α(G)·ω(G) ≤ 5·max(α,ω)².

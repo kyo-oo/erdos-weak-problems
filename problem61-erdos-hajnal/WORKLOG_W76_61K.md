@@ -148,3 +148,9 @@ The engine never stops; it never lies. In English, always.
     built disjoint cliques by mistake — caught because the filter rejected
     them; the corrected build passes). Two-method discipline closed: proof
     + engine census + independent brute-force all agree.
+15. **Stale-reference fix.** The W75 Theorem PAW assembly cited
+    "(Lemma 6: αᵢωᵢ ≥ mᵢ)" for the complete-multipartite product bound —
+    a numbering collision with the refuted §1c Lemma 6. Replaced with the
+    inline statement of the trivial bound (α = largest part, ω = number of
+    parts, max·k ≥ sum). Final lemma-reference audit of the whole file
+    clean.
