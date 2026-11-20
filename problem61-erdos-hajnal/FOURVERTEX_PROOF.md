@@ -1,7 +1,8 @@
 # FOURVERTEX_PROOF.md — THE 4-VERTEX CLASSIFICATION (W75-61K, S074)
 
 **THEOREM (the 4-vertex completion — status exact).** Nine of the eleven
-4-vertex graphs are closed in-package with explicit unconditional EH bounds
+4-vertex graphs are closed in-package (the paw/P3+K1 pair at the corrected
+max-form √(n/5)) with explicit unconditional EH bounds
 this round (paw, P3+K1 at the optimal 1/2-exponent; diamond, K2+2K1 at
 1/3; the six banked ones re-verified). C4 and 2K2 (a complement pair) carry:
 the complete 1/2-exponent theorem for the triangle-free half, the complete
@@ -31,7 +32,7 @@ n^{1/3}/2 — W74).
 - **THEOREM PAW:** every paw-free graph has α ≥ √n/2 (the 1/2-exponent,
   optimal — the m×m block twins are the ceiling).
 - **THEOREM DIAMOND:** every diamond-free graph has max(α,ω) ≥ n^{1/3}/2.
-- **Corollaries by complement transfer:** P3+K1 (ω ≥ √n/2), K2+2K1
+- **Corollaries by complement transfer:** P3+K1 (max ≥ √(n/5)), K2+2K1
   (max ≥ n^{1/3}/2).
 
 Notation: α = independence, ω = clique number, Δ = max degree. "H-free" =
@@ -171,7 +172,7 @@ C5-blow-up as the unique extremal architecture of §1e.
 
 ---
 
-## §2. THEOREM PAW — every paw-free graph satisfies α ≥ √n/2 (complete)
+## §2. THEOREM PAW — max(α,ω) ≥ √(n/5) (complete; the W75 correction)
 
 **Lemma 9 (Olariu structure, in-package).** Every connected paw-free graph
 containing a triangle is complete multipartite.
@@ -193,15 +194,26 @@ T-attachment set; take t ∈ N(u)∩N(w)∩T = N(v)∩T: {u,v,w,t} induces the p
 (triangle uwt + pendant v on t). So non-adjacency is an equivalence; classes
 are pairwise completely adjacent — complete multipartite. ∎
 
-**Theorem PAW.** A paw-free graph's components are triangle-free (αᵢ ≥ √(mᵢ)/2
-by Lemma 4) or complete multipartite (αᵢ = largest part, ωᵢ = number of
-parts, αᵢωᵢ ≥ mᵢ). Then **α(G) = Σαᵢ ≥ Σ√(mᵢ)/2 ≥ √n/2** (concavity).
-The 1/2-exponent is optimal (m×m block twins — engine S5). ∎
+**Theorem PAW (the corrected assembly).** A paw-free graph's components are
+triangle-free (Lemma 4: αᵢ ≥ √(mᵢ)/2, i.e. mᵢ ≤ 4αᵢ²) or complete
+multipartite (Lemma 6: αᵢωᵢ ≥ mᵢ, i.e. mᵢ ≤ αᵢ·ωᵢ ≤ αᵢ·ω(G)). Then:
 
-**Corollary P3+K1 (complement transfer).** complement(paw) = P3+K1: every
-(P3+K1)-free graph G has Ḡ paw-free, so ω(G) = α(Ḡ) ≥ √n/2. (Engine S3
-certified the transfer on 101,601 (G, Ḡ) pairs and the negative control:
-the F7-inheritance route does NOT carry P3+K1 — P4 is P3+K1-free but not
+    n = Σmᵢ ≤ Σ_tf 4αᵢ² + Σ_mp αᵢ·ω(G) ≤ 4(Σ_tf αᵢ)² + (Σ_mp αᵢ)·ω(G)
+      ≤ 4α(G)² + α(G)·ω(G) ≤ 5·max(α,ω)².
+
+Hence **max(α,ω) ≥ √(n/5)**. The triangle-free subfamily carries the
+stronger α ≥ √n/2 (Lemma 4 directly). The α-ONLY form is FALSE in general —
+the engine's load-bearing negative control: the complete 16-partite graph
+with parts of size 2 (n = 32) is paw-free with α = 2 < √32/2 ≈ 2.83 while
+ω = 16 carries the max. (The W75 first draft asserted the α-only form; the
+61E engine's negative control refuted it; this is the corrected final
+theorem.) ∎
+
+**Corollary P3+K1 (complement transfer, max-form).** complement(paw) =
+P3+K1: every (P3+K1)-free graph G has Ḡ paw-free, so
+max(α(G),ω(G)) = max(α(Ḡ),ω(Ḡ)) ≥ √(n/5). (Engine S3 certified the
+transfer on 101,601 (G, Ḡ) pairs and the negative control: the
+F7-inheritance route does NOT carry P3+K1 — P4 is P3+K1-free but not
 P3-free; the transfer is the correct route.) ∎
 
 ---
@@ -240,8 +252,8 @@ every (K2+2K1)-free graph satisfies max(α,ω) ≥ n^{1/3}/2. ∎
 |---|---|---|---|
 | K4 / K̄4 | RAM (banked) | every c < 1/3 | CI-green |
 | P4 | Seinsche (banked) | α·ω ≥ n, c = 1/2 | CI-green |
-| paw | THEOREM PAW (§2) | α ≥ √n/2 | **CLOSED W75** |
-| P3+K1 | transfer of PAW (§2) | ω ≥ √n/2 | **CLOSED W75** |
+| paw | THEOREM PAW (§2) | max ≥ √(n/5); triangle-free subfamily α ≥ √n/2 | **CLOSED W75** |
+| P3+K1 | transfer of PAW (§2) | max ≥ √(n/5) | **CLOSED W75** |
 | diamond | THEOREM DIAMOND (§3) | max ≥ n^{1/3}/2 | **CLOSED W75** |
 | K2+2K1 | transfer of DIAMOND (§3) | max ≥ n^{1/3}/2 | **CLOSED W75** |
 | K1,3 / K3+K1 | CLAW (banked W74) | n^{1/3}/2 | CI-green |
