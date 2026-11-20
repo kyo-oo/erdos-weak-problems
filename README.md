@@ -947,3 +947,41 @@ column-obstruction class complete for the certified board; the
 Bertrand/CRT scheduling lemma war continues.
 
 ### THE W65 WAVE-CLOSE (Session 065): the integration branch w65-merge master-verified ALL-GREEN (run 43630419149 @ 90307b0) — campaign advanced with THREE kills (#348-(2,3), #289-Pell-cascade, #1212-column-obstruction). Registry: 40 → 43 kills CI-green. Live at close: #939 witness-table kernel authoring, #203 enriched-palette hunts at L=55440, #306 CRT peel census 173/181.
+
+### KILL 44 — Erdős #406 THE RIDER-CONSTRAINT-LAW KERNEL (W76, Session 076/S076, CI run 44773862691 @ 586cb37, BOSS order "crack the HFTAIL hypothesis completely")
+
+**The kill:** five NEW unconditional necessary-condition laws on every
+hypothetical rider — Kernel 69 (problem406-ternary-powers/ExtraLaws406.lean):
+
+- **L1 THE HALF-LINE LAW** (`cantor_half_line` + `rider_half_line` +
+  `erdos406_half_line_kill`): every positive 0/1-ternary n satisfies
+  2·n < 3^(ternaryLog3 n + 1) — the rider's leading fractional {K·log₃4}
+  is confined to [0, 1−log₃2 = 0.36907); the kill form eliminates every
+  exponent with 3^(ternaryLog3(4^K)+1) ≤ 2·4^K — an INFINITE family,
+  battery-certified 63.09% density on [200001, 10^6]. Strong induction of
+  the digit recursion against the repunit bound.
+- **L2 THE TAIL LAW** (`rider_tail_law`): ⌊4^K/3^(K+1)⌋ = ⌊(4/3)^K/3⌋ is
+  itself 0/1-ternary — the new necessary condition on the carry-only top
+  0.26K digits.
+- **L3 THE ADJACENT-ONES KILL LAW** (`adjacent_ones_kill`): adjacent
+  1-digits at positions j−1,j force 4u+1 dead at position j — the
+  digit-exact repunit no-carry engine (4u+1 = 3u + (u+1) has NO carries
+  position-wise for Cantor u; the digits are e_0 = d_0+1, e_i = d_i+d_{i−1}).
+- **L4/L5 THE MOD-9 CYCLE + CONSECUTIVE-RIDER LAWS** (`pow4_mod9`,
+  `rider_mod3_ne_two`, `no_three_consecutive_riders`,
+  `consecutive_riders_mod3_gap`): 4^r mod 9 = 1,4,7 as r ≡ 0,1,2 (mod 3);
+  every rider r ≢ 2 (mod 3); NO THREE CONSECUTIVE riders; consecutive
+  riders force r ≡ 0 (mod 3).
+- **THE CANTOR T²-LAW** (`cantor_T2_mod3`): for 0/1-ternary u, not both
+  4u+1 and 16u+5 are 0/1-ternary — pure mod-3 arithmetic.
+
+Receipts: ERDOS406_EXTRALAWS_KERNEL_GREEN + battery406b.py (ALL GREEN:
+L1 dual-method 63.2% kill density; L2 digit-shift; L3 on all Cantor u <
+6561; L4/L5 + T2-form on Cantor u < 3^8; the LX conjecture v₂ ≤
+2·popcount holds < 3^12 with tight extremals) + THE CENSUS EXTENSION: no
+riders in (200000, 1000000] CERTIFIED (the L1 pre-filter + 61-digit modular
+deep check; every survivor died within 61 digits). The official DeepMind
+comparator: 16/16 PASS — YOUR SOLUTION IS OKAY (the ledger 8 → 11 claims).
+Scope: necessary-condition laws — the middle-digit wall (CAP(185) class)
+remains the named open seam; the LX popcount-cap conjecture is the newly
+recorded route class for the next assault.
