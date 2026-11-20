@@ -170,3 +170,27 @@ LOCAL GATE VERDICTS (this round, after the in-round defect repairs):
 (The repairs: S-FOURIER's math→cmath; S-PAW's pattern unpacking + the
 max-form correction cascade; S-OT8's bucket-then-canonicalize; absl-py
 installed locally — the CI route already carried it.)
+
+
+## E09 — THE CI VERDICT (GitHub Actions run 44645520793 on 99a98dc)
+
+**ALL FOUR OFFICIAL GATES GREEN ON CI + 10/11 KERNELS GREEN:**
+
+- gate-142-official: SUCCESS (20/20, VERDICT: YOUR SOLUTION IS OKAY)
+- gate-61-official: SUCCESS (14/14, VERDICT: YOUR SOLUTION IS OKAY)
+- gate-107-official: SUCCESS (14/14, VERDICT: YOUR SOLUTION IS OKAY)
+- gate-406-official: SUCCESS (12/12, VERDICT: YOUR SOLUTION IS OKAY)
+- Lean kernels green: 142k, 142a, 142d, 142cmp, 61k, 61cmp, 107k, 107cmp,
+  kernel-a, kernel-c.
+
+**kernel-b FAILED — root cause isolated (NOT this wave's work):** the
+PARALLEL 406-lane's CapLaw406.lean (Kernel 68, commit 375d83d) ships
+sorryAx in ten lemmas (v2r_two_pow, pow4_mod_one, three_pow_mono,
+pow_lt_mono_base, pow_mul_comm_shape, cap_squeeze, cap_rider_bound and the
+three final classification theorems) — the kernel-b zero-sorry guard
+correctly rejected it. The 406 comparator gate itself is green (its
+Python-side verification carries the named open hypothesis CAP(185)
+explicitly); the Lean-side sorry-elimination is the 406 lane's open repair.
+Every W75 kernel and gate on this run is green.
+
+The engine never stops; it never lies. In English, always.
