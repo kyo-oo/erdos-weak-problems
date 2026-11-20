@@ -134,7 +134,7 @@ theorem cantor_half_line (n : Nat) :
       · rw [if_neg h2] at h
         have hdiv : 0 < n / 3 := by omega
         have hrec := ih (n / 3) (Nat.div_lt_self (by omega)
-          (by decide : 1 < 3)) hn0 hdiv h
+          (by decide : 1 < 3)) hdiv h
         have hlog : ternaryLog3 n = 1 + ternaryLog3 (n / 3) := by
           rw [ternaryLog3.eq_def n, if_neg h3]
         have hdm : n = 3 * (n / 3) + n % 3 := (Nat.div_add_mod n 3).symm
@@ -198,10 +198,12 @@ theorem noTernaryTwo_div_pow3 : ∀ (n : Nat), noTernaryTwo n = true →
       rw [noTernaryTwo.eq_def n] at h
       by_cases hn : n = 0
       · subst hn
-        have hz : (0 / 3) / 3^c = 0 := by
-          rw [Nat.zero_div, Nat.zero_div]
+        have h1 : (0:Nat) / 3 = 0 := Nat.zero_div 3
+        have hz : (0:Nat) / 3 / 3^c = 0 := by
+          rw [h1]
+          exact Nat.zero_div _
         rw [hz]
-        rfl
+        rw [noTernaryTwo.eq_def 0, if_pos rfl]
       · rw [if_neg hn] at h
         by_cases h2 : n % 3 = 2
         · rw [if_pos h2] at h; simp at h
@@ -366,7 +368,7 @@ theorem adjacent_ones_kill (u j : Nat) (hj : 1 ≤ j)
       ring
     rw [h31] at hq ⊢
     rw [h32] at hq ⊢
-    linear_combination 4 * hq
+    linear_combination (-4) * hq
   -- the digit at position d+1 is exactly 2
   have hdig : (4*u+1) / 3^(d+1) % 3 = 2 := by
     have hp : 0 < 3^(d+1) := Nat.pow_pos (by decide)
