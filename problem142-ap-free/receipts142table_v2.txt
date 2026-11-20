@@ -1,0 +1,124 @@
+RECEIPTS — engine142table_v2.py (W76-142E) — THE r_3 TABLE EXTENSION N=39..48
+seed 20261120 ; deterministic ; z3 5.4.1 ; gcc 14.2.0 ; python 3.12.16 ; 2026-11-20T14:37:26
+
+PROTOCOL per cell: [A] Z3 feasibility bisection — SAT witness at v saved,
+  UNSAT at v+1 confirmed TWICE (independent solver seeds 0/20261120);
+  a `timeout`/`unknown` verdict is NEVER accepted as UNSAT.
+  Translation symmetry x_0=true (WLOG: A - min(A) is AP-free, same size,
+  contains 0) — valid for both SAT and UNSAT directions.
+[B] Fresh C branch-and-bound bnb142.c (bitboard exclusion propagation:
+  taking v marks w=2v-p for every p in S; bound count+popcount(avail);
+  forced-0 run AND no-force run must both return the same optimum).
+[C] Third checker checker142lib.py — pair-midpoint scan (no AP enumeration):
+  for every pair x<z in W with x+z even, (x+z)/2 must NOT be in W.
+  Applied to BOTH the Z3 witness and the BnB witness, plus size/bounds.
+[D] OEIS A003002 b-file external anchor.
+
+PASS CELL N=39: r_3(39) = 14  [CERTIFIED-BOTH]
+  z3: sat@14 in 0.019s ; unsat@15 x2 in 0.095s/0.096s (statuses unsat/unsat) ; bisect queries 4
+  bnb: optimal=14 nodes=258323 in 0.0018s (forced0) ; no-force: 14 nodes=761229 in 0.005s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(39) = 14 match=True ; formula_sha ccbc7bc5507f67f3...
+  witness(0-based) = [0, 1, 3, 7, 9, 10, 16, 21, 27, 28, 30, 34, 36, 37]
+  witness(1-based) = [1, 2, 4, 8, 10, 11, 17, 22, 28, 29, 31, 35, 37, 38]
+PASS CELL N=40: r_3(40) = 15  [CERTIFIED-BOTH]
+  z3: sat@15 in 0.082s ; unsat@16 x2 in 0.156s/0.211s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=15 nodes=222861 in 0.0015s (forced0) ; no-force: 15 nodes=656509 in 0.0045s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(40) = 15 match=True ; formula_sha 260279e8896f77c2...
+  witness(0-based) = [0, 2, 3, 5, 9, 11, 12, 14, 27, 29, 30, 35, 36, 38, 39]
+  witness(1-based) = [1, 3, 4, 6, 10, 12, 13, 15, 28, 30, 31, 36, 37, 39, 40]
+PASS CELL N=41: r_3(41) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.127s ; unsat@17 x2 in 0.069s/0.095s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=16 nodes=189982 in 0.0013s (forced0) ; no-force: 16 nodes=574931 in 0.0037s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(41) = 16 match=True ; formula_sha dde67f094ec550ab...
+  witness(0-based) = [0, 1, 3, 4, 9, 10, 12, 13, 27, 28, 30, 31, 36, 37, 39, 40]
+  witness(1-based) = [1, 2, 4, 5, 10, 11, 13, 14, 28, 29, 31, 32, 37, 38, 40, 41]
+PASS CELL N=42: r_3(42) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.045s ; unsat@17 x2 in 0.105s/0.113s (statuses unsat/unsat) ; bisect queries 4
+  bnb: optimal=16 nodes=283367 in 0.0019s (forced0) ; no-force: 16 nodes=858294 in 0.0057s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(42) = 16 match=True ; formula_sha c36472f6447a0c4e...
+  witness(0-based) = [0, 2, 3, 5, 9, 11, 12, 14, 27, 29, 30, 32, 36, 38, 39, 41]
+  witness(1-based) = [1, 3, 4, 6, 10, 12, 13, 15, 28, 30, 31, 33, 37, 39, 40, 42]
+PASS CELL N=43: r_3(43) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.108s ; unsat@17 x2 in 0.165s/0.2s (statuses unsat/unsat) ; bisect queries 4
+  bnb: optimal=16 nodes=417460 in 0.0028s (forced0) ; no-force: 16 nodes=1275749 in 0.0084s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(43) = 16 match=True ; formula_sha 9a9fad03a5a347ad...
+  witness(0-based) = [0, 1, 3, 4, 9, 10, 12, 13, 28, 29, 31, 32, 37, 38, 40, 41]
+  witness(1-based) = [1, 2, 4, 5, 10, 11, 13, 14, 29, 30, 32, 33, 38, 39, 41, 42]
+PASS CELL N=44: r_3(44) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.057s ; unsat@17 x2 in 0.212s/0.19s (statuses unsat/unsat) ; bisect queries 4
+  bnb: optimal=16 nodes=622066 in 0.0041s (forced0) ; no-force: 16 nodes=1897809 in 0.0126s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(44) = 16 match=True ; formula_sha b54c6779edd43360...
+  witness(0-based) = [0, 1, 4, 6, 9, 10, 13, 15, 27, 31, 33, 34, 36, 40, 42, 43]
+  witness(1-based) = [1, 2, 5, 7, 10, 11, 14, 16, 28, 32, 34, 35, 37, 41, 43, 44]
+PASS CELL N=45: r_3(45) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.019s ; unsat@17 x2 in 0.273s/0.275s (statuses unsat/unsat) ; bisect queries 4
+  bnb: optimal=16 nodes=907030 in 0.0062s (forced0) ; no-force: 16 nodes=2804832 in 0.0188s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(45) = 16 match=True ; formula_sha d47e0c95476cf8bc...
+  witness(0-based) = [0, 4, 6, 7, 9, 13, 15, 16, 27, 31, 33, 34, 36, 40, 42, 43]
+  witness(1-based) = [1, 5, 7, 8, 10, 14, 16, 17, 28, 32, 34, 35, 37, 41, 43, 44]
+PASS CELL N=46: r_3(46) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.027s ; unsat@17 x2 in 0.595s/0.403s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=16 nodes=1363193 in 0.0092s (forced0) ; no-force: 16 nodes=4168017 in 0.0281s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(46) = 16 match=True ; formula_sha 3727bb0923faa6c7...
+  witness(0-based) = [0, 1, 3, 4, 10, 11, 13, 14, 29, 30, 32, 33, 38, 39, 41, 42]
+  witness(1-based) = [1, 2, 4, 5, 11, 12, 14, 15, 30, 31, 33, 34, 39, 40, 42, 43]
+PASS CELL N=47: r_3(47) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.027s ; unsat@17 x2 in 0.571s/0.626s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=16 nodes=1987535 in 0.0136s (forced0) ; no-force: 16 nodes=6155543 in 0.0416s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(47) = 16 match=True ; formula_sha a8e227c90af697fa...
+  witness(0-based) = [0, 1, 3, 4, 10, 11, 13, 14, 31, 33, 34, 36, 42, 43, 45, 46]
+  witness(1-based) = [1, 2, 4, 5, 11, 12, 14, 15, 32, 34, 35, 37, 43, 44, 46, 47]
+PASS CELL N=48: r_3(48) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.048s ; unsat@17 x2 in 1.204s/0.917s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=16 nodes=2919777 in 0.0202s (forced0) ; no-force: 16 nodes=9075310 in 0.0637s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis A003002(48) = 16 match=True ; formula_sha 26ddbe806d227e47...
+  witness(0-based) = [0, 3, 5, 9, 11, 12, 14, 20, 30, 32, 33, 38, 39, 41, 42, 47]
+  witness(1-based) = [1, 4, 6, 10, 12, 13, 15, 21, 31, 33, 34, 39, 40, 42, 43, 48]
+
+TABLE r_3(39..48) = [14, 15, 16, 16, 16, 16, 16, 16, 16, 16]
+
+PASS CHECKER-SELF-TEST — 7/7 (planted APs flagged, good sets pass)
+PASS BANKED-REPRODUCTION — fresh C bnb re-derives r_3(1..38) == banked table (38/38 values, 38/38 witnesses AP-free by the third checker): True
+PASS NEGATIVE-CONTROLS — checker_planted_AP_flagged=True ; z3_only_d1_clauses_sat_at_17=True + relaxed_witness_not_apfree=True (keeping only the d=1 AP clauses makes 17 feasible in [0,48) and the returned witness FAILS the full 3-AP check — the d>=2 clauses are exactly what forces UNSAT) ; sha_and_verdict_reproducible=True
+
+ARSENAL LAW SPOT-CHECKS (numerically verified this run; file:line read from arsenal-full/):
+  #BY GST LAW cubic_expansion [CardinalWorlds.lean:283] — PASS
+  #BY GST LAW digit3_mod_pow [GSTBladeWave.lean:56] — PASS
+  #BY GST LAW digit3_congr [GSTBladeWave.lean:72] — PASS
+  #BY GST LAW mod_mod_mul [CardinalWorlds.lean:140] — PASS
+  #BY GST LAW div_mod_mul_lemma [CardinalWorlds.lean:150] — PASS
+  #BY GST LAW div_add_mod_subst [CardinalWorlds.lean:249] — PASS
+  #BY GST LAW carryAtPos_bound [CardinalWorlds.lean:108] — PASS
+  #BY GST LAW sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116] — PASS
+
+LOAD-BEARING ARSENAL CITATIONS of this engine:
+  #BY GST LAW cubic_expansion [CardinalWorlds.lean:283] — the (1+a)^3 = 1+3a+3a^2+a^3
+    split is the certified shape behind the two-method cell protocol: the Z3 cardinality
+    >= v is the witness split, the UNSAT at v+1 the completion side; the same expansion
+    carries the second-moment checkpoints (receipts142secondmoment.txt).
+  #BY GST LAW mod_mod_mul [CardinalWorlds.lean:140] + div_mod_mul_lemma [CardinalWorlds.lean:150]
+    + div_add_mod_subst [CardinalWorlds.lean:249] — the modular skeleton of the index/difference
+    bookkeeping in the model-step rescaling (receipts142modelstep.txt) and of the witness
+    coordinate recovery there; spot-verified above.
+  #BY GST LAW digit3_mod_pow [GSTBladeWave.lean:56] + digit3_congr [GSTBladeWave.lean:72] —
+    the residue-fixes-coordinate law shape (R % 3^(j+1) fixes digit3 R j): the same shape as
+    x mod p fixing the rescaled index in the model step; carries the greedy ternary seed
+    validity (Stanley bridge, WITNESS_REPORT.md).
+  #BY GST LAW carryAtPos_bound [CardinalWorlds.lean:108] — the no-carry discipline bound
+    (carry < 4 at every position) behind the digitwise bookkeeping the dense-set
+    constructions use in the second-moment checkpoints.
+  #BY GST LAW sum_le_sum_of_forall [Erdos261Tower.lean:116] — the termwise-implies-total
+    law: the averaging backbone of the popular-difference extraction (max f(d) >= mean).
+
+TOTAL: 10/10 cells CERTIFIED-BOTH, 0/10 WITNESS-ONLY ; engine wall 21.5s
+ENGINE142TABLE_V2_GREEN
