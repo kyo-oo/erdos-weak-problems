@@ -979,6 +979,34 @@ jobs:
           grep -E "erdos406_classification_of_cap_and_census' (does not depend on any axioms|depends on axioms)" kernel68.log
           python3 problem406-ternary-powers/caplaw/battery_caplaw.py
           echo ERDOS406_CAPLAW_KERNEL_GREEN=1
+      - name: "Kernel 69 - Erdos 406 THE RIDER-CONSTRAINT-LAW KERNEL (S076, BOSS order 'crack the HFTAIL hypothesis completely'): THE FIVE NEW UNCONDITIONAL LAWS of the rider constraint set — L1 THE HALF-LINE LAW (cantor_half_line/rider_half_line/erdos406_half_line_kill: every positive 0/1-ternary n satisfies 2n < 3^(ternaryLog3 n + 1), forcing every rider K into {K log_3 4} < 1 - log_3 2 = 0.36907 — the kill form eliminates every exponent with 3^(ternaryLog3 (4^K)+1) <= 2*4^K, an infinite family with battery-certified 63.09% density on [200001, 10^6]) + L2 THE TAIL LAW (noTernaryTwo_div_pow3/rider_tail_law: floor(4^K / 3^(K+1)) = floor((4/3)^K / 3) is itself 0/1-ternary — the new necessary condition on the carry-only top 0.26K digits) + L4/L5 THE MOD-9 CYCLE + CONSECUTIVE-RIDER LAWS (pow4_mod9: 4^r mod 9 = 1,4,7 as r = 0,1,2 mod 3; rider_mod3_ne_two; NO THREE CONSECUTIVE RIDERS; consecutive riders force r = 0 mod 3) + THE CANTOR T2-LAW (cantor_T2_mod3: for 0/1-ternary u, not both 4u+1 and 16u+5 are 0/1-ternary — pure mod-3 arithmetic) + L3 THE ADJACENT-ONES KILL LAW (adjacent_ones_kill: u's adjacent 1-digits at positions j-1,j force 4u+1 dead at position j — the digit-exact repunit no-carry engine: the ternary digits of 4u+1 are e_0 = d_0+1, e_i = d_i + d_(i-1) with no carries) + the census extension receipts (no riders in (200000, 10^6] — battery406b.py certified with the L1 pre-filter + modular deep check)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel69.log
+          lake env lean problem406-ternary-powers/ExtraLaws406.lean 2>&1 | tee -a kernel69.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel69.log
+          grep -E "noTernaryTwo_lvl' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "cantor_half_line' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "rider_half_line' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "erdos406_half_line_kill' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "noTernaryTwo_div_pow3' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "rider_tail_law' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "pow4_mod9' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "rider_mod3_ne_two' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "no_three_consecutive_riders' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "consecutive_riders_mod3_gap' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "cantor_T2_mod3' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "adjacent_ones_kill' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "half_line_kill_6' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "half_line_kill_7' (does not depend on any axioms|depends on axioms)" kernel69.log
+          grep -E "half_line_kill_10' (does not depend on any axioms|depends on axioms)" kernel69.log
+          python3 problem406-ternary-powers/caplaw/battery406b.py
+          echo ERDOS406_EXTRALAWS_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash
