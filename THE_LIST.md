@@ -274,6 +274,22 @@ core). **#634** (Laczkovich–Szabó deep). **#1055** (infinitude). **#1110**
 
 ---
 
+## S060 PARALLEL-WAVE ADDENDUM (2026-11-20, rebased onto S074)
+
+BOSS assigned the SAME three corpus targets (#142, #61, #107) to a parallel
+wave (the S059-seal session, rebased: kernels renumbered 80/81/82, files at
+the S060-suffixed paths). Delivered: the independent dual-method r_k(N)
+tables (188 cells, zero OEIS b-file mismatches) + the E-H theorem ring
+(the complete ≤3-vertex family + P₄ cograph laws, machine-audited — one
+draft error caught by the census and corrected) + f(4) = 5 complete proof
+with the exhaustive chirotope certificate + the E_5 witness (f(5) ≥ 9)
++ the CHALLENGE/SOLUTION comparator files per problem + batteries ALL
+GREEN. The wave coexists with the S061–S074 lanes; the rebase collision
+(the rename that ate the S074 kernels) was root-caused and repaired in
+966567d. CI verdicts: monitored.
+
+---
+
 ## §S066 — THE W66 WAVE-1 FRONTS (2026-11-16, the #142/#61/#107 fortress assault)
 
 | ID | target | status | fronts |
