@@ -7,7 +7,7 @@
    "component": 1,
    "anchor": {
     "N": 48,
-    "value": 18,
+    "value": 19,
     "witness_valid": true
    },
    "cells": {
@@ -1197,10 +1197,723 @@
       53,
       57
      ]
+    },
+    "58": {
+     "N": 58,
+     "k": 3,
+     "value": 19,
+     "status": "CERTIFIED-BOTH",
+     "z3_sat": {
+      "target": 19,
+      "status": "sat",
+      "secs": 7.51,
+      "witness_0based": [
+       0,
+       1,
+       4,
+       5,
+       11,
+       13,
+       14,
+       16,
+       20,
+       30,
+       37,
+       38,
+       41,
+       42,
+       48,
+       50,
+       51,
+       53,
+       57
+      ],
+      "formula_sha256": "23da94c9b6463e28aac31ce6b368f93fba2f5c45733a93d577080da145361bbd"
+     },
+     "z3_unsat": {
+      "target": 20,
+      "status_1": "unsat",
+      "secs_1": 4.847,
+      "status_2": "unsat",
+      "secs_2": 10.853,
+      "seeds": [
+       0,
+       20261121
+      ],
+      "formula_sha256": "26fbc34e0eb17e3f77e3476ab6c48ea97122e723cf49b1b09eb3f069c7833c68"
+     },
+     "bnb": {
+      "value": 19,
+      "nodes": 23793024,
+      "secs": 0.1732,
+      "forced0": true,
+      "witness_0based": [
+       0,
+       1,
+       4,
+       5,
+       11,
+       13,
+       14,
+       16,
+       20,
+       30,
+       37,
+       38,
+       41,
+       42,
+       48,
+       50,
+       51,
+       53,
+       57
+      ],
+      "noforce_value": 19,
+      "noforce_nodes": 75299225,
+      "noforce_secs": 0.5566,
+      "optimal_completed": true
+     },
+     "checker": {
+      "z3_witness_apfree": true,
+      "z3_reason": "3-AP-free by pair-midpoint scan",
+      "bnb_witness_apfree": true,
+      "bnb_reason": "3-AP-free by pair-midpoint scan",
+      "prev_cell_witness_valid_in_N": true,
+      "method": "pair-midpoint scan"
+     },
+     "oeis": {
+      "value": 19,
+      "match": true
+     },
+     "pysat": {
+      "agree": true,
+      "witnesses_apfree": true,
+      "sat": {
+       "target": 19,
+       "n_clauses": 2275,
+       "top_literal": 799,
+       "minisat22": {
+        "status": "SAT",
+        "wall": 0.675,
+        "cpu": 0.674,
+        "witness_0based": [
+         0,
+         1,
+         4,
+         5,
+         11,
+         13,
+         14,
+         16,
+         20,
+         30,
+         37,
+         38,
+         41,
+         42,
+         48,
+         50,
+         51,
+         53,
+         57
+        ]
+       },
+       "cadical153": {
+        "status": "SAT",
+        "wall": 0.331,
+        "cpu": 0.33,
+        "witness_0based": [
+         0,
+         4,
+         6,
+         7,
+         9,
+         15,
+         16,
+         19,
+         20,
+         27,
+         37,
+         41,
+         43,
+         44,
+         46,
+         52,
+         53,
+         56,
+         57
+        ]
+       }
+      },
+      "unsat": {
+       "target": 20,
+       "n_clauses": 2315,
+       "top_literal": 818,
+       "minisat22": {
+        "status": "UNSAT",
+        "wall": 1.131,
+        "cpu": 1.112,
+        "witness_0based": null
+       },
+       "cadical153": {
+        "status": "UNSAT",
+        "wall": 0.789,
+        "cpu": 0.788,
+        "witness_0based": null
+       }
+      }
+     },
+     "n_bisect_queries": 5,
+     "runtimes_secs": {
+      "z3_bisect_total": 13.108,
+      "z3_unsat_1": 4.847,
+      "z3_unsat_2": 10.853,
+      "bnb_forced0": 0.1732,
+      "bnb_noforce": 0.5566,
+      "cell_wall": 32.226
+     },
+     "witness_0based": [
+      0,
+      1,
+      4,
+      5,
+      11,
+      13,
+      14,
+      16,
+      20,
+      30,
+      37,
+      38,
+      41,
+      42,
+      48,
+      50,
+      51,
+      53,
+      57
+     ],
+     "witness_1based": [
+      1,
+      2,
+      5,
+      6,
+      12,
+      14,
+      15,
+      17,
+      21,
+      31,
+      38,
+      39,
+      42,
+      43,
+      49,
+      51,
+      52,
+      54,
+      58
+     ]
+    },
+    "59": {
+     "N": 59,
+     "k": 3,
+     "value": 19,
+     "status": "CERTIFIED-BOTH",
+     "z3_sat": {
+      "target": 19,
+      "status": "sat",
+      "secs": 1.649,
+      "witness_0based": [
+       0,
+       4,
+       6,
+       7,
+       9,
+       15,
+       16,
+       19,
+       20,
+       27,
+       37,
+       41,
+       43,
+       44,
+       46,
+       52,
+       53,
+       56,
+       57
+      ],
+      "formula_sha256": "a31ed7794d4d39350dc50a2e311e88421961d594a3e20d15861664ee327a9e41"
+     },
+     "z3_unsat": {
+      "target": 20,
+      "status_1": "unsat",
+      "secs_1": 37.009,
+      "status_2": "unsat",
+      "secs_2": 20.734,
+      "seeds": [
+       0,
+       20261121
+      ],
+      "formula_sha256": "02592a92f7948f6f4aa53099160eeb486b4d3b0e8ef16d1cd5be7700300d0451"
+     },
+     "bnb": {
+      "value": 19,
+      "nodes": 33626812,
+      "secs": 0.2516,
+      "forced0": true,
+      "witness_0based": [
+       0,
+       1,
+       4,
+       5,
+       11,
+       13,
+       14,
+       16,
+       20,
+       30,
+       37,
+       38,
+       41,
+       42,
+       48,
+       50,
+       51,
+       53,
+       57
+      ],
+      "noforce_value": 19,
+      "noforce_nodes": 107612344,
+      "noforce_secs": 0.7761,
+      "optimal_completed": true
+     },
+     "checker": {
+      "z3_witness_apfree": true,
+      "z3_reason": "3-AP-free by pair-midpoint scan",
+      "bnb_witness_apfree": true,
+      "bnb_reason": "3-AP-free by pair-midpoint scan",
+      "prev_cell_witness_valid_in_N": true,
+      "method": "pair-midpoint scan"
+     },
+     "oeis": {
+      "value": 19,
+      "match": true
+     },
+     "pysat": {
+      "agree": true,
+      "witnesses_apfree": true,
+      "sat": {
+       "target": 19,
+       "n_clauses": 2341,
+       "top_literal": 819,
+       "minisat22": {
+        "status": "SAT",
+        "wall": 1.16,
+        "cpu": 1.159,
+        "witness_0based": [
+         0,
+         4,
+         6,
+         7,
+         9,
+         15,
+         16,
+         19,
+         20,
+         27,
+         37,
+         41,
+         43,
+         44,
+         46,
+         52,
+         53,
+         56,
+         57
+        ]
+       },
+       "cadical153": {
+        "status": "SAT",
+        "wall": 1.455,
+        "cpu": 1.454,
+        "witness_0based": [
+         0,
+         4,
+         6,
+         7,
+         9,
+         15,
+         16,
+         19,
+         20,
+         27,
+         37,
+         41,
+         43,
+         44,
+         46,
+         52,
+         53,
+         56,
+         57
+        ]
+       }
+      },
+      "unsat": {
+       "target": 20,
+       "n_clauses": 2383,
+       "top_literal": 839,
+       "minisat22": {
+        "status": "UNSAT",
+        "wall": 1.228,
+        "cpu": 1.227,
+        "witness_0based": null
+       },
+       "cadical153": {
+        "status": "UNSAT",
+        "wall": 0.934,
+        "cpu": 0.932,
+        "witness_0based": null
+       }
+      }
+     },
+     "n_bisect_queries": 5,
+     "runtimes_secs": {
+      "z3_bisect_total": 50.0,
+      "z3_unsat_1": 37.009,
+      "z3_unsat_2": 20.734,
+      "bnb_forced0": 0.2516,
+      "bnb_noforce": 0.7761,
+      "cell_wall": 113.045
+     },
+     "witness_0based": [
+      0,
+      4,
+      6,
+      7,
+      9,
+      15,
+      16,
+      19,
+      20,
+      27,
+      37,
+      41,
+      43,
+      44,
+      46,
+      52,
+      53,
+      56,
+      57
+     ],
+     "witness_1based": [
+      1,
+      5,
+      7,
+      8,
+      10,
+      16,
+      17,
+      20,
+      21,
+      28,
+      38,
+      42,
+      44,
+      45,
+      47,
+      53,
+      54,
+      57,
+      58
+     ]
+    },
+    "60": {
+     "N": 60,
+     "k": 3,
+     "value": 19,
+     "status": "CERTIFIED-BOTH",
+     "z3_sat": {
+      "target": 19,
+      "status": "sat",
+      "secs": 60.408,
+      "witness_0based": [
+       0,
+       1,
+       4,
+       5,
+       11,
+       13,
+       14,
+       16,
+       20,
+       30,
+       37,
+       38,
+       41,
+       42,
+       48,
+       50,
+       51,
+       53,
+       57
+      ],
+      "formula_sha256": "9374401c91d0a06d0cb777c88ce1e2d4584d108ddff2da37f811b7bb1fbdd4ed"
+     },
+     "z3_unsat": {
+      "target": 20,
+      "status_1": "unsat",
+      "secs_1": 54.09,
+      "status_2": "unsat",
+      "secs_2": 57.803,
+      "seeds": [
+       0,
+       20261121
+      ],
+      "formula_sha256": "5bca048775ba3492fc981467bebfdb3911bb47570ef826c15365e21b3c9498e6"
+     },
+     "bnb": {
+      "value": 19,
+      "nodes": 47756522,
+      "secs": 0.3566,
+      "forced0": true,
+      "witness_0based": [
+       0,
+       1,
+       4,
+       5,
+       11,
+       13,
+       14,
+       16,
+       20,
+       30,
+       37,
+       38,
+       41,
+       42,
+       48,
+       50,
+       51,
+       53,
+       57
+      ],
+      "noforce_value": 19,
+      "noforce_nodes": 153547378,
+      "noforce_secs": 1.1197,
+      "optimal_completed": true
+     },
+     "checker": {
+      "z3_witness_apfree": true,
+      "z3_reason": "3-AP-free by pair-midpoint scan",
+      "bnb_witness_apfree": true,
+      "bnb_reason": "3-AP-free by pair-midpoint scan",
+      "prev_cell_witness_valid_in_N": true,
+      "method": "pair-midpoint scan"
+     },
+     "oeis": {
+      "value": 19,
+      "match": true
+     },
+     "pysat": {
+      "agree": true,
+      "witnesses_apfree": true,
+      "sat": {
+       "target": 19,
+       "n_clauses": 2407,
+       "top_literal": 839,
+       "minisat22": {
+        "status": "SAT",
+        "wall": 0.314,
+        "cpu": 0.313,
+        "witness_0based": [
+         0,
+         4,
+         6,
+         7,
+         9,
+         15,
+         16,
+         19,
+         20,
+         27,
+         37,
+         41,
+         43,
+         44,
+         46,
+         52,
+         53,
+         56,
+         57
+        ]
+       },
+       "cadical153": {
+        "status": "SAT",
+        "wall": 0.667,
+        "cpu": 0.665,
+        "witness_0based": [
+         0,
+         4,
+         6,
+         7,
+         9,
+         15,
+         16,
+         19,
+         20,
+         27,
+         37,
+         41,
+         43,
+         44,
+         46,
+         52,
+         53,
+         56,
+         57
+        ]
+       }
+      },
+      "unsat": {
+       "target": 20,
+       "n_clauses": 2451,
+       "top_literal": 860,
+       "minisat22": {
+        "status": "UNSAT",
+        "wall": 1.719,
+        "cpu": 1.718,
+        "witness_0based": null
+       },
+       "cadical153": {
+        "status": "UNSAT",
+        "wall": 1.253,
+        "cpu": 1.252,
+        "witness_0based": null
+       }
+      }
+     },
+     "n_bisect_queries": 5,
+     "runtimes_secs": {
+      "z3_bisect_total": 123.862,
+      "z3_unsat_1": 54.09,
+      "z3_unsat_2": 57.803,
+      "bnb_forced0": 0.3566,
+      "bnb_noforce": 1.1197,
+      "cell_wall": 240.233
+     },
+     "witness_0based": [
+      0,
+      1,
+      4,
+      5,
+      11,
+      13,
+      14,
+      16,
+      20,
+      30,
+      37,
+      38,
+      41,
+      42,
+      48,
+      50,
+      51,
+      53,
+      57
+     ],
+     "witness_1based": [
+      1,
+      2,
+      5,
+      6,
+      12,
+      14,
+      15,
+      17,
+      21,
+      31,
+      38,
+      39,
+      42,
+      43,
+      49,
+      51,
+      52,
+      54,
+      58
+     ]
     }
    },
    "stop_reason": null,
    "done": false
   }
- }
+ },
+ "laws_cache": [
+  [
+   "cubic_expansion",
+   "Arsenal/CardinalWorlds.lean:283",
+   true
+  ],
+  [
+   "quartic_expansion_of_one_add_pow",
+   "Arsenal/CardinalWorlds.lean:283+GSTBladeWave.lean:184 (binomial family)",
+   true
+  ],
+  [
+   "one_add_pow_dvd",
+   "arsenal-full/HC-PROOF-research/GSTBladeWave.lean:184",
+   true
+  ],
+  [
+   "sq_sub_one",
+   "Arsenal/CardinalWorlds.lean:448",
+   true
+  ],
+  [
+   "digit3_mod_pow",
+   "arsenal-full/HC-PROOF-research/GSTBladeWave.lean:56",
+   true
+  ],
+  [
+   "digit3_congr",
+   "arsenal-full/HC-PROOF-research/GSTBladeWave.lean:72",
+   true
+  ],
+  [
+   "mod_mod_mul",
+   "Arsenal/CardinalWorlds.lean:140",
+   true
+  ],
+  [
+   "div_mod_mul_lemma",
+   "Arsenal/CardinalWorlds.lean:150",
+   true
+  ],
+  [
+   "div_add_mod_subst",
+   "Arsenal/CardinalWorlds.lean:249",
+   true
+  ],
+  [
+   "carryAtPos_bound",
+   "Arsenal/CardinalWorlds.lean:108",
+   true
+  ],
+  [
+   "sum_le_sum_of_forall",
+   "arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:117",
+   true
+  ],
+  [
+   "tower_cauchy_finite_form",
+   "arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810",
+   true
+  ]
+ ]
 }

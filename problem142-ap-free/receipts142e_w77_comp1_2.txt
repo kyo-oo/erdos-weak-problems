@@ -1,0 +1,115 @@
+RECEIPTS — engine142table_v3.py (W77-142E) — COMPONENT 1 (r_3 N=49..64) + COMPONENT 2 (r_4/r_5 N=21..28)
+seed 20261121 ; deterministic ; z3 5.4.1 ; gcc 14.2.0 ; 2026-11-20T22:47:48 ; pysat 1.9.dev24 (Minisat22 + Cadical153)
+(chunked run — checkpoint state at this writing; the final run appends the closing totals)
+
+PROTOCOL per cell (the W76 discipline verbatim): [A] Z3 bisection —
+  SAT witness at v saved, genuine UNSAT at v+1 TWICE (seeds 0/20261121); timeout/unknown NEVER accepted as UNSAT;
+  translation symmetry x_0=true (valid SAT and UNSAT).
+[B] Fresh C BnB bnb142v3.c — consecutive-prefix exclusion (k=3:
+  w=2v-p; k=4: v=2q-p marks 3q-2p; k=5: consecutive triple + v=3q-2p
+  marks 4q-3p), forced-0 AND no-force runs must agree.
+[C] Third checker checker142libv3.py on BOTH witnesses (k=3 pair-
+  midpoint; k=4/5 pair-hypothesis: every pair + every position
+  hypothesis reconstructs the full k-AP and tests membership).
+[D] OEIS anchors A003002/A003003/A003004.
+[E] pysat third-solver layer: Minisat22 AND Cadical153 on the
+  same formula as a CNF (seqcounter >= target): SAT@v (witness
+  re-validated by the third checker) and UNSAT@v+1 — both
+  solvers must agree with the z3/BnB frontier on every cell.
+
+=== PUSH k=3 N=49..64 (component 1, anchor N=48: r_3=19, anchor witness valid: True)
+PASS CELL N=49: r_3(49) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.125s ; unsat@17 x2 in 2.686s/4.207s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=16 nodes=4303744 in 0.06s (forced0) ; no-force: 16 nodes=13379043 in 0.161s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(49) = 16 match=True ; formula_sha b3ccbcdc7126631f...
+  witness(0-based) = [0, 1, 6, 7, 10, 15, 17, 18, 22, 25, 31, 39, 41, 42, 46, 48]
+PASS CELL N=50: r_3(50) = 16  [CERTIFIED-BOTH]
+  z3: sat@16 in 0.03s ; unsat@17 x2 in 7.591s/7.941s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=16 nodes=6305737 in 0.1406s (forced0) ; no-force: 16 nodes=19684768 in 0.3008s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(50) = 16 match=True ; formula_sha 76bd4da3ff23661f...
+  witness(0-based) = [0, 1, 3, 4, 9, 10, 12, 22, 31, 33, 36, 37, 45, 46, 48, 49]
+PASS CELL N=51: r_3(51) = 17  [CERTIFIED-BOTH]
+  z3: sat@17 in 0.171s ; unsat@18 x2 in 2.315s/5.346s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=17 nodes=5150194 in 0.0508s (forced0) ; no-force: 17 nodes=16399044 in 0.1978s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(51) = 17 match=True ; formula_sha ae065381f41b309d...
+  witness(0-based) = [0, 1, 5, 6, 8, 13, 14, 17, 19, 35, 36, 39, 40, 46, 47, 49, 50]
+PASS CELL N=52: r_3(52) = 17  [CERTIFIED-BOTH]
+  z3: sat@17 in 0.764s ; unsat@18 x2 in 11.108s/11.42s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=17 nodes=7559394 in 0.0765s (forced0) ; no-force: 17 nodes=23940076 in 0.2671s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(52) = 17 match=True ; formula_sha 0164ba8253b29299...
+  witness(0-based) = [0, 1, 5, 6, 8, 13, 14, 17, 19, 35, 36, 39, 41, 44, 45, 48, 50]
+PASS CELL N=53: r_3(53) = 17  [CERTIFIED-BOTH]
+  z3: sat@17 in 0.706s ; unsat@18 x2 in 23.619s/24.663s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=17 nodes=10883177 in 0.1803s (forced0) ; no-force: 17 nodes=34822560 in 0.4615s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(53) = 17 match=True ; formula_sha e3f9950d6a8e22fa...
+  witness(0-based) = [0, 1, 4, 5, 11, 13, 27, 29, 30, 34, 35, 37, 42, 46, 48, 51, 52]
+PASS CELL N=54: r_3(54) = 18  [CERTIFIED-BOTH]
+  z3: sat@18 in 4.912s ; unsat@19 x2 in 22.388s/7.196s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=18 nodes=9610445 in 0.1175s (forced0) ; no-force: 18 nodes=29832870 in 0.3666s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(54) = 18 match=True ; formula_sha 3e3b95204cbee608...
+  witness(0-based) = [0, 2, 3, 5, 11, 12, 15, 16, 23, 33, 37, 39, 40, 42, 48, 49, 52, 53]
+PASS CELL N=55: r_3(55) = 18  [CERTIFIED-BOTH]
+  z3: sat@18 in 1.929s ; unsat@19 x2 in 3.706s/5.796s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=18 nodes=13116363 in 0.1255s (forced0) ; no-force: 18 nodes=42389478 in 0.594s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(55) = 18 match=True ; formula_sha 2d38edf3dcb8eaa8...
+  witness(0-based) = [0, 1, 5, 6, 8, 13, 14, 17, 19, 35, 36, 40, 41, 43, 48, 49, 52, 54]
+PASS CELL N=56: r_3(56) = 18  [CERTIFIED-BOTH]
+  z3: sat@18 in 3.631s ; unsat@19 x2 in 20.86s/6.995s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=18 nodes=18787160 in 0.2695s (forced0) ; no-force: 18 nodes=61094298 in 1.0038s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(56) = 18 match=True ; formula_sha db5907a9d29b55a5...
+  witness(0-based) = [0, 1, 4, 5, 11, 13, 14, 16, 29, 35, 36, 38, 39, 46, 48, 51, 52, 55]
+PASS CELL N=57: r_3(57) = 18  [CERTIFIED-BOTH]
+  z3: sat@18 in 0.728s ; unsat@19 x2 in 40.206s/25.062s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=18 nodes=26627978 in 0.3462s (forced0) ; no-force: 18 nodes=87695402 in 1.2739s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  oeis(57) = 18 match=True ; formula_sha 7a247ea42bda2439...
+  witness(0-based) = [0, 3, 4, 10, 12, 13, 15, 19, 29, 36, 37, 40, 41, 47, 49, 50, 52, 56]
+PASS CELL N=58: r_3(58) = 19  [CERTIFIED-BOTH]
+  z3: sat@19 in 7.51s ; unsat@20 x2 in 4.847s/10.853s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=19 nodes=23793024 in 0.1732s (forced0) ; no-force: 19 nodes=75299225 in 0.5566s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  pysat: sat@v minisat22=SAT(0.675s) cadical153=SAT(0.331s) ; unsat@v+1 minisat22=UNSAT(1.131s) cadical153=UNSAT(0.789s) ; witnesses_apfree=True
+  oeis(58) = 19 match=True ; formula_sha 23da94c9b6463e28...
+  witness(0-based) = [0, 1, 4, 5, 11, 13, 14, 16, 20, 30, 37, 38, 41, 42, 48, 50, 51, 53, 57]
+PASS CELL N=59: r_3(59) = 19  [CERTIFIED-BOTH]
+  z3: sat@19 in 1.649s ; unsat@20 x2 in 37.009s/20.734s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=19 nodes=33626812 in 0.2516s (forced0) ; no-force: 19 nodes=107612344 in 0.7761s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  pysat: sat@v minisat22=SAT(1.16s) cadical153=SAT(1.455s) ; unsat@v+1 minisat22=UNSAT(1.228s) cadical153=UNSAT(0.934s) ; witnesses_apfree=True
+  oeis(59) = 19 match=True ; formula_sha a31ed7794d4d3935...
+  witness(0-based) = [0, 4, 6, 7, 9, 15, 16, 19, 20, 27, 37, 41, 43, 44, 46, 52, 53, 56, 57]
+PASS CELL N=60: r_3(60) = 19  [CERTIFIED-BOTH]
+  z3: sat@19 in 60.408s ; unsat@20 x2 in 54.09s/57.803s (statuses unsat/unsat) ; bisect queries 5
+  bnb: optimal=19 nodes=47756522 in 0.3566s (forced0) ; no-force: 19 nodes=153547378 in 1.1197s
+  checker: z3-witness AP-FREE (3-AP-free by pair-midpoint scan), bnb-witness AP-FREE ; prev-cell witness valid in [0,N): True
+  pysat: sat@v minisat22=SAT(0.314s) cadical153=SAT(0.667s) ; unsat@v+1 minisat22=UNSAT(1.719s) cadical153=UNSAT(1.253s) ; witnesses_apfree=True
+  oeis(60) = 19 match=True ; formula_sha 9374401c91d0a06d...
+  witness(0-based) = [0, 1, 4, 5, 11, 13, 14, 16, 20, 30, 37, 38, 41, 42, 48, 50, 51, 53, 57]
+PUSH k=3 RESULT: 12 cells CERTIFIED-BOTH, frontier N=60 ; stop reason: completed range
+
+PASS CHECKER-SELF-TEST — 15/15 (planted 3/4/5-APs flagged; k-specificity controls: a 4-AP-free set with a 3-AP passes k=4; a 5-AP-free set with a 4-AP passes k=5)
+
+ARSENAL LAW SPOT-CHECKS (numerically verified this run; read-before-cite):
+  #BY GST LAW cubic_expansion [Arsenal/CardinalWorlds.lean:283] — PASS
+  #BY GST LAW quartic_expansion_of_one_add_pow [Arsenal/CardinalWorlds.lean:283+GSTBladeWave.lean:184 (binomial family)] — PASS
+  #BY GST LAW one_add_pow_dvd [arsenal-full/HC-PROOF-research/GSTBladeWave.lean:184] — PASS
+  #BY GST LAW sq_sub_one [Arsenal/CardinalWorlds.lean:448] — PASS
+  #BY GST LAW digit3_mod_pow [arsenal-full/HC-PROOF-research/GSTBladeWave.lean:56] — PASS
+  #BY GST LAW digit3_congr [arsenal-full/HC-PROOF-research/GSTBladeWave.lean:72] — PASS
+  #BY GST LAW mod_mod_mul [Arsenal/CardinalWorlds.lean:140] — PASS
+  #BY GST LAW div_mod_mul_lemma [Arsenal/CardinalWorlds.lean:150] — PASS
+  #BY GST LAW div_add_mod_subst [Arsenal/CardinalWorlds.lean:249] — PASS
+  #BY GST LAW carryAtPos_bound [Arsenal/CardinalWorlds.lean:108] — PASS
+  #BY GST LAW sum_le_sum_of_forall [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:117] — PASS
+  #BY GST LAW tower_cauchy_finite_form [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810] — PASS
+
+TOTAL: 12 cells CERTIFIED-BOTH across the three pushes ; engine wall 403.2s
+ENGINE142TABLE_V3_GREEN
