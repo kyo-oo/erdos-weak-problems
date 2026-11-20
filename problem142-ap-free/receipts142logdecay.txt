@@ -1,0 +1,26 @@
+[PASS] CHAIN-BOUNDARY-L2 eps=0.107891<=1/8 margin1=1.020e+07 margin2=2.208e+07
+[PASS] DIRECT-BOUNDARY-L2 expo_margin=2.954e+07
+[PASS] SANDWICH-A-ANCHOR h(4e7)=1.020e+07; h' > 0 for L>1702400; L2>1702400
+[PASS] SANDWICH-B-ANCHOR coef=0.552008
+[PASS] SANDWICH-B-ELLBOUND ell=17.504 <= L/1000=40000.0
+[PASS] SANDWICH-C lhs=2.194e+07
+[PASS] GRID-200-GEOM 200/200 green, L in [4e7, 1e50]
+[PASS] EXTREME-L=4.000e+07 
+[PASS] EXTREME-L=4.000e+07 
+[PASS] EXTREME-L=1.000e+08 
+[PASS] EXTREME-L=1.000e+12 
+[PASS] EXTREME-L=1.000e+30 
+[PASS] EXTREME-L=1.000e+60 
+[PASS] EXTREME-L=1.000e+120 
+[PASS] NEGCTL-L=1e6-eps-range eps(1e6)=0.6062 > 1/8 — banked theorem NOT applicable (hypothesis load-bearing)
+[PASS] NEGCTL-L=2.9e7 chain fails below the eps-boundary (L* ~ 2.99e7)
+[PASS] EPS-BOUNDARY eps=1/8 at L* ~ 2.926765e+07 (N_2 = 4e7 sits above with margin 1.073e+07)
+[PASS] CONSTANT-K K = sqrt(26600) = 163.095064
+[PASS] CONSTANT-N2 N_2 = ceil(exp(4*10^7)) — explicit; ln N_2 = 4*10^7
+
+=== THEOREM LOGDECAY: 19/19 checks green ===
+STATEMENT: for every integer N >= N_2 = ceil(exp(4*10^7)):
+  r_3(N) <= sqrt(26600) * N * sqrt(ln ln N / ln N)
+PROOF CHAIN: banked THEOREM SUBLINEAR (eps = sqrt(26600*lnlnN/lnN) in (0,1/8]
+  for all N >= N_2 by sandwich (a); tower threshold satisfied by sandwich (b)+(c);
+  conclude |S| <= eps*N for every 3-AP-free S — hence r_3(N) <= eps(N)*N).
