@@ -1760,7 +1760,7 @@ jobs:
           lake env lean problem142-ap-free/Erdos142S060.lean 2>&1 | tee -a kernel80.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel80.log
           grep -F "E142_APFRONTIER_GREEN" kernel80.log
-          grep -E "E142.(e142_board|e142_arsenal_bridge|stanley_apfree_80|e142_r3_9_upper|e142_w_r4_42)' (does not depend on any axioms|depends on axioms)" kernel80.log
+          grep -E "E142S.(e142_board|e142_arsenal_bridge|stanley80_apfree|e142_r3_9_upper|e142_w_r4_42)' (does not depend on any axioms|depends on axioms)" kernel80.log
           python3 problem142-ap-free/battery142.py
           echo ERDOS142_APFRONTIER_KERNEL_GREEN=1
 
@@ -1776,7 +1776,7 @@ jobs:
           lake env lean problem61-erdos-hajnal/Erdos61S060.lean 2>&1 | tee -a kernel81.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel81.log
           grep -F "E61_ERDOSHAJNAL_GREEN" kernel81.log
-          grep -E "E61.(e61_board|e61_r33_c0|e61_k3n6_c31|e61_p4_decomp_5|e61_twoK2)' (does not depend on any axioms|depends on axioms)" kernel81.log
+          grep -E "E61S.(e61_board|r33_math|e61_p4law5_A|e61_k3law5_A|twoK2_facts)' (does not depend on any axioms|depends on axioms)" kernel81.log
           python3 problem61-erdos-hajnal/battery61.py
           echo ERDOS61_ERDOSHAJNAL_KERNEL_GREEN=1
 
@@ -1792,6 +1792,6 @@ jobs:
           lake env lean problem107-happy-ending/Erdos107S060.lean 2>&1 | tee -a kernel82.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel82.log
           grep -F "E107_HAPPYENDING_GREEN" kernel82.log
-          grep -E "E107.(e107_board|e107_e5_noConvex5|e107_chi_c0|e107_e4_notConvex)' (does not depend on any axioms|depends on axioms)" kernel82.log
+          grep -E "E107S.(e107_board|e107_e5_noConvex5|e107_chi_c0|e107_e4_notConvex)' (does not depend on any axioms|depends on axioms)" kernel82.log
           python3 problem107-happy-ending/battery107.py
           echo ERDOS107_HAPPYENDING_KERNEL_GREEN=1
