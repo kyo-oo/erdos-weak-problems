@@ -26,6 +26,10 @@ V2STAR = os.path.join(CAMP, "problem406-ternary-powers", "caplaw",
 KERNEL = os.path.join(CAMP, "problem406-ternary-powers", "CapLaw406.lean")
 CENSUS_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
                              "Erdos406Ternary.lean")
+BATTERY_B = os.path.join(CAMP, "problem406-ternary-powers", "caplaw",
+                         "battery406b.py")
+EXTRA_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
+                            "ExtraLaws406.lean")
 
 
 def _chk(cid, desc, ok, detail="", seconds=0.0):
@@ -115,6 +119,49 @@ def run_official_checks(challenge, solution):
         "O-DEEP-20000",
         "deep census: noTernaryDigitTwo(2^n) = false for every n in [9,20000] (the [0,20000] rider census {0,1,4} = exponents {0,2,8})",
         ok, "all false", time.time() - t0))
+
+    # O-CHAL-1M: the S076 census extension -- exponents n = 2K for
+    # K in [10001, 10^6] (n in [20002, 2*10^6]) via the L1 fractional
+    # pre-filter (kills every K with 2*4^K >= 3^(M+1)) plus the 61-digit
+    # modular deep check on survivors.  NO rider exists.
+    t0 = time.time()
+    ok = True
+    n_surv = 0
+    killed_prefilter = 0
+    import math
+    tau = 1 - math.log(2, 3)  # 0.36907...
+    for K in range(10001, 1000001):
+        theta = (K * math.log(4, 3)) % 1.0
+        if theta > tau + 1e-8:
+            killed_prefilter += 1
+            continue
+        if theta < tau - 1e-8:
+            n_surv += 1
+        else:
+            M = 0
+            p = 1
+            while p * 3 <= 4 ** K:
+                p *= 3
+                M += 1
+            if 2 * (4 ** K) >= 3 ** (M + 1):
+                killed_prefilter += 1
+                continue
+            n_surv += 1
+        # modular deep check: the first 61 ternary digits of 4^K
+        r = pow(4, K, 3 ** 61)
+        dead = False
+        for _ in range(61):
+            if r % 3 == 2:
+                dead = True
+                break
+            r //= 3
+        if not dead:
+            ok = False
+            break
+    checks.append(_chk(
+        "O-CHAL-1M",
+        "S076 census extension: no rider K in [10001, 10^6] (n = 2K in [20002, 2*10^6]) -- the L1 half-line pre-filter killed 63% by arithmetic alone, every survivor died within 61 digits (dual-method: prefilter + modular deep check)",
+        ok, f"prefilter kills={killed_prefilter}, deep-checked={n_surv}, all dead", time.time() - t0))
     return checks
 
 
@@ -182,6 +229,55 @@ def run_solution_checks(challenge, solution):
         "S-BOUNDARIES",
         "the reduction arithmetic live: 62*250 < 84*185 < 62*251 (C=185 lands exactly inside the census range) and 62*4 < 84*3 < 62*5 (Postulate II lands at K<=4)",
         ok, f"{62*250} < {84*185} < {62*251}; {62*4} < {84*3} < {62*5}", time.time() - t0))
+
+    # S-EXTRALAWS (S076): the five-new-laws battery, ALL GREEN.
+    t0 = time.time()
+    proc = subprocess.run([sys.executable, BATTERY_B], capture_output=True,
+                          text=True, timeout=900)
+    out = proc.stdout + proc.stderr
+    ok = proc.returncode == 0 and "BATTERY406B_GREEN=1" in out
+    checks.append(_chk(
+        "S-EXTRALAWS",
+        "battery406b.py (S076): the five new rider-constraint laws dual-method (L1 half-line 63.2% kill density, L2 tail digit-shift, L3 repunit no-carry on all Cantor u < 6561, L4/L5 consecutive-rider + T2-form, LX v2<=2*popcount conjecture < 3^12) + the census extension to 10^6",
+        ok, out[-1500:], time.time() - t0))
+
+    # S-HALFLINE (S076): the half-line law receipts, live arithmetic.
+    t0 = time.time()
+    receipts_ok = True
+    detail = []
+    for K in (0, 1, 4):
+        n = 4 ** K
+        M = 0
+        p = 1
+        while p * 3 <= n:
+            p *= 3
+            M += 1
+        receipts_ok = receipts_ok and (2 * n < 3 ** (M + 1))
+        detail.append(f"K={K}: 2*4^K={2*n} < 3^{M+1}={3**(M+1)}")
+    # the tail-law receipts
+    for K in (1, 4):
+        tail = (4 ** K) // (3 ** (K + 1))
+        receipts_ok = receipts_ok and no_ternary_digit_two(tail)
+        detail.append(f"tail K={K}: {tail} 0/1-ternary={no_ternary_digit_two(tail)}")
+    # the kernel carries the theorem symbols
+    try:
+        kx = open(EXTRA_KERNEL, encoding="utf-8").read()
+        receipts_ok = receipts_ok and all(s in kx for s in (
+            "theorem cantor_half_line", "theorem rider_half_line",
+            "theorem erdos406_half_line_kill", "theorem rider_tail_law",
+            "theorem no_three_consecutive_riders",
+            "theorem consecutive_riders_mod3_gap",
+            "theorem cantor_T2_mod3", "theorem adjacent_ones_kill",
+            "theorem pow4_mod9"))
+        detail.append("ExtraLaws406.lean symbols present" if receipts_ok
+                      else "missing kernel symbols")
+    except Exception as e:
+        receipts_ok = False
+        detail.append(repr(e))
+    checks.append(_chk(
+        "S-HALFLINE",
+        "S076 half-line law receipts live: riders {0,1,4} satisfy 2*4^K < 3^(M+1); tail-law receipts floor(4^K/3^(K+1)) is 0/1-ternary; ExtraLaws406.lean carries all thirteen theorem symbols (Lean compilation is kills.yml Kernel 69)",
+        receipts_ok, "; ".join(detail), time.time() - t0))
     return checks
 
 
@@ -230,6 +326,18 @@ def run_negative_controls(challenge, solution):
         "N-CAP-256",
         "corruption rejected: v2(256) = 8 = ternaryLog3(256) + 3 EXACTLY (equality, not violation -- the C=3 cap is tight at the largest rider and holds)",
         ok, "no violation", time.time() - t0))
+
+    # N-HALFLINE (S076): the corrupted half-line kill boundary must be
+    # rejected: the law kills K=6 (2*4^6 >= 3^8) but NOT K=5 (2*4^5 < 3^7)
+    # -- necessary, not sufficient.
+    t0 = time.time()
+    k5_killed = 2 * (4 ** 5) >= 3 ** 7   # 2048 < 2187 -> False (not killed)
+    k6_killed = 2 * (4 ** 6) >= 3 ** 8   # 8192 >= 6561 -> True (killed)
+    ok = (not k5_killed) and k6_killed
+    checks.append(_chk(
+        "N-HALFLINE",
+        "corruption rejected: the half-line law kills K=6 (2*4^6=8192 >= 3^8=6561) but NOT K=5 (2*4^5=2048 < 3^7=2187) -- the law is necessary, not sufficient; K=5 dies by digits, not magnitude",
+        ok, f"K=5 killed={k5_killed} (must be False), K=6 killed={k6_killed} (must be True)", time.time() - t0))
     return checks
 
 

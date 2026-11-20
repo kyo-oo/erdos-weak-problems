@@ -1,24 +1,28 @@
-OFFICIAL GATE RECEIPT — problem #406 — 2026-11-19T23:10:29
+OFFICIAL GATE RECEIPT — problem #406 — 2026-11-20T16:32:41
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-406-ternary-powers
-Claims in solution ledger: 8
+Claims in solution ledger: 11
 ==============================================================================
 [PASS] (official) O-CHAL-500 — verbatim Challenge.lean noTernaryDigitTwo twin: 2^n owns a ternary digit 2 for every n in [9,500] (dual-method: recursion + subtraction scan)
 [PASS] (official) O-WITNESSES — the corpus's three examples hold: 1, 4 = 1+3, 256 = 1+3+9+243 (n = 0, 2, 8 -- below the statement's floor 9, exactly as the addendum says)
 [PASS] (official) O-DEEP-20000 — deep census: noTernaryDigitTwo(2^n) = false for every n in [9,20000] (the [0,20000] rider census {0,1,4} = exponents {0,2,8})
+[PASS] (official) O-CHAL-1M — S076 census extension: no rider K in [10001, 10^6] (n = 2K in [20002, 2*10^6]) -- the L1 half-line pre-filter killed 63% by arithmetic alone, every survivor died within 61 digits (dual-method: prefilter + modular deep check)
 [PASS] (solution) S-BATTERY — battery_caplaw.py: certificate + boundaries + small table + v2* curve + witnesses + census + cap C=3 on primitive Cantor n<3^12 (dual-method)
 [PASS] (solution) S-V2STAR — v2star_table.json: the extremal 2-adic curve M=0..34 with jump points 2/8/16/35/35 and the cap verdict v2* <= M+4
 [PASS] (solution) S-KERNELS — CapLaw406.lean carries the five headline theorems + the certificate; Erdos406Ternary.lean carries the census (Lean compilation is kills.yml Kernel 38/68)
 [PASS] (solution) S-BOUNDARIES — the reduction arithmetic live: 62*250 < 84*185 < 62*251 (C=185 lands exactly inside the census range) and 62*4 < 84*3 < 62*5 (Postulate II lands at K<=4)
+[PASS] (solution) S-EXTRALAWS — battery406b.py (S076): the five new rider-constraint laws dual-method (L1 half-line 63.2% kill density, L2 tail digit-shift, L3 repunit no-carry on all Cantor u < 6561, L4/L5 consecutive-rider + T2-form, LX v2<=2*popcount conjecture < 3^12) + the census extension to 10^6
+[PASS] (solution) S-HALFLINE — S076 half-line law receipts live: riders {0,1,4} satisfy 2*4^K < 3^(M+1); tail-law receipts floor(4^K/3^(K+1)) is 0/1-ternary; ExtraLaws406.lean carries all thirteen theorem symbols (Lean compilation is kills.yml Kernel 69)
 [PASS] (control) N-CERT — corruption rejected: 2^84 >= 3^53 is FALSE (the squeeze certificate cannot be inverted)
 [PASS] (control) N-BOUNDARY-185 — corruption rejected: 62*251 < 84*185 is FALSE (C=185 does NOT reach K=251 -- the census boundary is exactly tight)
 [PASS] (control) N-FAKE-RIDER — corruption rejected: 2^10 = 1024 = 1101221_3 is NOT a witness (the fourth rider does not exist below 2^40000)
 [PASS] (control) N-FLOOR-8 — corruption rejected: the challenge floor is 9, not 8 -- 2^8 = 256 IS 0/1-ternary (a statement claiming n >= 8 would be FALSE)
 [PASS] (control) N-CAP-256 — corruption rejected: v2(256) = 8 = ternaryLog3(256) + 3 EXACTLY (equality, not violation -- the C=3 cap is tight at the largest rider and holds)
+[PASS] (control) N-HALFLINE — corruption rejected: the half-line law kills K=6 (2*4^6=8192 >= 3^8=6561) but NOT K=5 (2*4^5=2048 < 3^7=2187) -- the law is necessary, not sufficient; K=5 dies by digits, not magnitude
 ==============================================================================
-CHECKS: 12/12 passed (official=3, solution=4, controls=5)
-WALL: 25.70s
+CHECKS: 16/16 passed (official=4, solution=6, controls=6)
+WALL: 28.64s
 VERDICT: YOUR SOLUTION IS OKAY

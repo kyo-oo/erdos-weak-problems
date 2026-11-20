@@ -42,6 +42,21 @@
       "id": "S-OPEN-SEAM",
       "statement": "NAMED OPEN HYPOTHESIS (not a claim): CAP(C) at unbounded range for any explicit C -- the anti-concentration wall (the monolith's Postulate II seam). The reduction theorems deliver the complete classification the moment it falls.",
       "verified_by": "carried explicitly by Kernel 68's hypothesis binders; hidden nowhere"
+    },
+    {
+      "id": "C406-EXTRALAWS-S076",
+      "statement": "Kernel 69 (ExtraLaws406.lean): THE FIVE NEW UNCONDITIONAL RIDER-CONSTRAINT LAWS \u2014 L1 THE HALF-LINE LAW (2n < 3^(ternaryLog3 n + 1) for every positive 0/1-ternary n; the kill form eliminates every exponent K with 3^(ternaryLog3(4^K)+1) <= 2*4^K \u2014 an infinite family), L2 THE TAIL LAW (floor(4^K/3^(K+1)) is 0/1-ternary for every rider K), L4/L5 THE MOD-9 CYCLE + NO THREE CONSECUTIVE RIDERS + THE MOD-3 GAP, THE CANTOR T2-LAW (for 0/1-ternary u not both 4u+1 and 16u+5 are 0/1-ternary), L3 THE ADJACENT-ONES KILL LAW (the digit-exact repunit no-carry engine)",
+      "verified_by": "kills.yml Kernel 69 (lake env lean, zero sorry, axiom receipts) + battery406b.py (dual-method, ALL GREEN)"
+    },
+    {
+      "id": "C406-CENSUS-1M-S076",
+      "statement": "THE CENSUS EXTENSION: no rider K in [10001, 10^6] (n = 2K in [20002, 2*10^6]) \u2014 the certified no-rider range extended from 200000 to 10^6 by the L1 half-line pre-filter (63.09% of exponents killed by magnitude arithmetic alone) + the 61-digit modular deep check (every survivor died within 61 ternary digits)",
+      "verified_by": "battery406b.py census_deep (dual-stage) + the official gate O-CHAL-1M (live re-derivation)"
+    },
+    {
+      "id": "C406-HALFLINE-RECEIPTS-S076",
+      "statement": "The three riders {0,1,4} satisfy every S076 law (half-line receipts 2, 8, 512 < 3, 9, 729; tail receipts floor(4/9)=0, floor(256/243)=1 both 0/1-ternary), and the half-line kill boundary is exact: the law kills K=6 (2*4^6 = 8192 >= 3^8 = 6561) but spares K=5 (2*4^5 = 2048 < 3^7 = 2187) \u2014 necessary, not sufficient",
+      "verified_by": "the official gate S-HALFLINE + N-HALFLINE (live arithmetic)"
     }
   ]
 }
