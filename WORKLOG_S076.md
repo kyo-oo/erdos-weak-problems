@@ -117,3 +117,46 @@ popcount-cap conjecture (the new route class discovered this round); (c)
 the middle-digit equidistribution-free structure.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## E10 — THE CI WAR RECORD (the full honesty ledger)
+
+The Kernel 69 compile war (the campaign's standard 4-round pattern, executed over
+7 CI rounds):
+
+| Round | Run | State | Root-causes killed |
+|---|---|---|---|
+| r1 | 44773862691 | 15 errors | the strongRecOn motive structure (hypotheses into goals), the div_pow3 generalizing-n induction, the by_contra Bool conversions, the WF-dec-block (struct-eval receipts), the Mathlib drift in CapLaw406's pow_lt_mono_base |
+| r2 | 44780760384 | 4 errors | the ih argument order, the zero-case idioms (if_pos rfl from the campaign's own CardinalWorlds:191), the linear_combination sign (the residual 8u-72W-32 was exactly twice the mis-signed combination) |
+| r3 | 44788154275 | 2 errors | Nat has no Neg: -4 * hq restated as 4 * hq.symm; the free-variable decide -> omega |
+| r4 | 44794078616 | 1 error | **KERNEL 69 CI-GREEN** (ERDOS406_EXTRALAWS_KERNEL_GREEN=1, zero sorryAx across all 13 theorems); CapLaw's a=0 case split needed (a < b admits a = 0) |
+| r5-r7 | 44800094096-44812340800 | CapLaw healing | Nat.zero_pow_succ does not exist (pow_succ + mul_zero decomposition); Nat.mul_le_mul_right drift (e289-style self-contained); THE STRUCTURAL ROOT-KILL: the by_cases neg-branch never closed its goal (h2+calc stranded at the outer level) |
+| r8 | 44816882584 | CapLaw GREEN | DustLaw406 exposed (never CI-verified in S075) — 14 sites |
+
+**THE DEEP LEARNINGS (L-fresh, for the adaptive ledger):**
+- L-DUST1: omega CANNOT abstract through `digit3`'s internal division by
+  `3^(j+1)` (a VARIABLE divisor breaks its model — every counterexample
+  report shows consistent atoms). Never omega near a digit3-term; use
+  absurd/explicit-congruence/dvd forms.
+- L-DUST2: `rw [Nat.add_zero]` rewrites only the FIRST instantiated
+  pattern — the t=0 branch's RHS `(A+0)%3` survived the r-side
+  normalization; a second rw needed.
+- L-DUST3: the new Mathlib's `simp only [List.mem_cons, List.mem_singleton]`
+  normalizes self-eq disjuncts to True — `Or.inl rfl` sites become
+  `simp` sites.
+- L-DUST4: the anonymous-constructor defeq unification fails on the
+  `1*3^j` vs `3^j` factor — omega bridges (`by omega` for the witness).
+- L-DUST5: the match TACTIC needs dot-patterns (`.zero`/`.succ q`), and
+  rcases never accepts tactic-blocks in its `with` clause.
+- L-DUST6: `Nat.mod_eq_zero_of_dvd ⟨witness, by ring⟩` — the omega-free
+  zero-mod route for 3-multiples.
+
+**The remaining DustLaw406 map (the next session's entry point — 8 sites,
+all in the dustStep_spec/dust_spec region): 180 (h0's omega — the digit3
+abstraction), 266/268 (the t=0 d=2 branch's omega + the absurd type), 286/303
+(the t=1/t=2 hdig branches), 385/393/414 (the dust_spec succ-case's witness
+unifications). The pattern: every failing omega sits near a digit3-term —
+L-DUST1 applies.**
+
+The engine never stops; it never lies. In English, always.
