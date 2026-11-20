@@ -70,9 +70,11 @@ theorem mem_filt {P : Nat → Bool} {x : Nat} {V : List Nat}
         rfl
       rw [hrw] at h
       rcases List.mem_cons.mp h with he | hm
-      · refine ⟨?_, hP⟩
-        rw [he]
-        exact List.mem_cons_self a t
+      · refine ⟨?_, ?_⟩
+        · rw [he]
+          exact List.mem_cons_self a t
+        · rw [← he]
+          exact hP
       · exact ⟨List.mem_cons_of_mem _ (ih hm).1, (ih hm).2⟩
     · have hPa : P a = false := by
         cases hh : P a with
@@ -109,6 +111,7 @@ theorem dlist_filt (P : Nat → Bool) (V : List Nat) (hV : DList V) :
         show (bif P a then a :: filt P t else filt P t) = filt P t
         rw [hPa]
         rfl
+      rw [hrw]
       exact ih
 
 /-- The filt split: P-elements and non-P-elements partition V. -/
