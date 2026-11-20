@@ -4709,3 +4709,71 @@ baseline: 10/11 kernels green with kernel-b red by design — the 406-lane's
 named open hypothesis).
 
 The engine never stops; it never lies. In English, always.
+
+## S060 FINAL SEAL — THE PARALLEL WAVE CI-CERTIFIED (2026-11-20, run 44733074262)
+
+**THE VERDICT (GitHub Actions, run 44733074262 on 10c5233): 15/16 jobs
+green. THE WAVE'S kernel-s060 JOB GREEN — all three kernels certified:**
+
+- **KERNEL 80 (Erdos142S060.lean)** — ERDOS142_APFRONTIER_KERNEL_GREEN=1:
+  r_3(9)=5, r_3(11)=6, r_3(13)=7 exact (both directions, decide);
+  the Stanley/ternary arsenal bridge (S(0)∩[80]: 16 elements, 3-AP-free,
+  decide + the filter identity); the witness frontier (r_3(20)≥9,
+  r_3(27)≥11, r_3(38)≥14, r_4(42)≥22); battery142 ALL GREEN. Receipts
+  axiom-clean.
+- **KERNEL 81 (Erdos61S060.lean)** — ERDOS61_ERDOSHAJNAL_KERNEL_GREEN=1:
+  **R(3,3) = 6 BY THE COMPLETE MATH PROOF** (the degree argument in Lean:
+  the DList machinery (own filt + mem_filt + dlist_filt + filt_split +
+  dlist_pick3 with the second-level destructor), the dual trichotomies,
+  zero enumeration); the C₅ tightness; the K₃ law, the P₄ decomposition +
+  ω·α shadow, the P₃ law at n=5 (two 512-chunks each); the 2·K₂ tightness
+  (4-vertex form); battery61 ALL GREEN.
+- **KERNEL 82 (Erdos107S060.lean)** — ERDOS107_HAPPYENDING_KERNEL_GREEN=1:
+  f(4) ≥ 5 (the E₄ witness); **the f(4) ≤ 5 chirotope certificate** (all
+  1024 sign patterns, 8 decide chunks + the full sweep, zero
+  counterexamples); **the E₅ witness: f(5) ≥ 9** (8 integer points, GP +
+  no-convex-5 + convex-4, exact arithmetic decide); battery107 ALL GREEN.
+- All four comparator gates green (gate-142/61/107/406-official); all
+  S074 kernels green; the one red job (kernel-b) is the S074 baseline's
+  known 406-lane state (CapLaw406.lean's named open hypothesis CAP(185),
+  the zero-sorry guard correctly rejecting — sealed as such at S074,
+  unchanged by this wave).
+
+**THE REPAIR SAGA (10 rounds, root-caused and recorded):** R1 the rebase
+rename-collision (the wave's renumber ate the S074 kernel files — restored);
+R2 the wave steps landed in gate-107-official (no lake — moved to the
+dedicated kernel-s060 job); R3 the kernel rebuild on green idioms (structural
+sublists, own filt, fuel, no mask arithmetic — the mask-enumeration decides
+did not reduce); R4 ternaryOKf claims corrected (2 and 5 carry ternary digit
+2) + filt to bif; R5 the p4masks recomputed in the Lean MSB encoding + the
+k3law5 inverted disjunct + the 2K₂ 4-vertex tightness + DList Bool→Prop;
+R6 the clean rewrite + the dual trichotomy (the non-neighbor case's logic);
+R7 the two genuine proof fixes (mem_filt's refine, dlist_filt's rw); R8 the
+toolchain lessons (List.mem_cons_self arity — the S072 idiom; L89 explicit
+rfl after rw); R8b the Ne.symm args; R9 mem-proofs to (by simp), the
+pick3-nil absurd-decide; R10 the hbc second-level DList hypothesis (the
+structural bug), the t2-nil simp closer, the board's proposition-spelling.
+
+**NEW CAMPAIGN LESSONS (for THE_CORE's ledger):**
+- **L98:** the tool-output DISPLAY pipeline eats `[h` sequences — file
+  content must be verified via python string checks, never via sed/grep
+  displays (the phantom 'rw corruption' cost two repair rounds; the file
+  was clean; the compiler is the only truth channel).
+- **L99:** `decide` cannot close negations containing free variables
+  (¬(b :: []).length = 2) — use simp at h / structural destruction.
+- **L100:** an inductive Prop's Bool-typed field auto-coerces to an
+  equation on the eliminator — declare membership fields as ∀ x ∈ t, x ≠ a
+  directly.
+- **L101:** distinctness of DEEP list elements requires the recursive
+  DList destructor level (the top-level field only gives x ≠ head).
+
+**The wave's full deliverable set** (all in-repo): the verbatim statements
+(L51 pierce) + DeepMind comparator files; CHALLENGE/SOLUTION × 3; 188
+dual-method certified r_k(N) cells (zero OEIS b-file mismatches); the E-H
+theorem ring (complete ≤3-vertex family + P₄ cograph + Ramsey-route K_t/E_t,
+machine-audited with the Turán-route refutation recorded); the exhaustive
+n ≤ 7 censuses (21 H-families, all theorems ALL GREEN); f(4) = 5 complete
+proof + the chirotope machine certificate; the E₅ witness (f(5) ≥ 9);
+kernels 80/81/82 + batteries, CI-certified.
+
+The engine never stops; it never lies. In English, always.
