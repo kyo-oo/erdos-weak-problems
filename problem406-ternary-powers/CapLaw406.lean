@@ -117,7 +117,7 @@ theorem v2r_two_pow (j : Nat) : v2r (2^j) = j := by
     simp
   | succ j ih =>
     have hp : 0 < (2:Nat)^j := Nat.pow_pos (by decide)
-    have hval : (2:Nat)^(j+1) = 2 * 2^j := by rw [Nat.pow_succ]
+    have hval : (2:Nat)^(j+1) = 2 * 2^j := by rw [Nat.pow_succ, Nat.mul_comm]
     have hne : 2 * 2^j ≠ 0 := by omega
     have hmod : (2 * 2^j) % 2 = 0 := by omega
     have hdiv : (2 * 2^j) / 2 = 2^j := by omega
@@ -131,7 +131,6 @@ theorem pow4_mod_one (K : Nat) : 4^K % 3 = 1 := by
   | zero => decide
   | succ K ih =>
     rw [Nat.pow_succ, Nat.mul_mod, ih]
-    decide
 
 /-- The floor law for the ternary logarithm: `3^(ternaryLog3 n) ≤ n` for
 every positive `n` (the leading-position magnitude bound). -/
@@ -164,10 +163,9 @@ theorem three_pow_ternaryLog3_le (n : Nat) :
 theorem three_pow_mono (x y : Nat) (h : x ≤ y) : 3^x ≤ 3^y := by
   obtain ⟨d, hd⟩ : ∃ d, y = x + d := ⟨y - x, by omega⟩
   rw [hd, Nat.pow_add]
-  have heq : 3^x = 3^x * 1 := (Nat.mul_one _).symm
-  rw [heq]
   have hpd : 0 < (3:Nat)^d := Nat.pow_pos (by decide)
-  exact Nat.mul_le_mul (le_refl _) hpd
+  calc 3^x = 3^x * 1 := (Nat.mul_one _).symm
+    _ ≤ 3^x * 3^d := Nat.mul_le_mul_left _ hpd
 
 /-- Base monotonicity for powers: `a ≤ b → a^e ≤ b^e`. -/
 theorem pow_mono_base (a b e : Nat) (h : a ≤ b) : a^e ≤ b^e := by
@@ -187,18 +185,17 @@ theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
     rw [Nat.zero_add, Nat.pow_one, Nat.pow_one]
     exact h
   | succ f ih =>
-    have hb0 : 0 < b := by omega
-    rw [Nat.pow_succ, Nat.pow_succ]
-    obtain ⟨δ, hδ⟩ : ∃ δ, b^(f+1) = a^(f+1) + δ :=
-      ⟨b^(f+1) - a^(f+1), by omega⟩
-    rw [hδ, Nat.add_mul]
-    have hδb : 0 < δ * b := Nat.mul_pos (by omega) hb0
-    have h1 : a^(f+1) * a ≤ a^(f+1) * b := Nat.mul_le_mul_left _ (by omega)
-    omega
+    show a^(f+1+1) < b^(f+1+1)
+    have h1 : a^(f+1) * a < a^(f+1) * b := Nat.mul_lt_mul_left _ h
+    have h2 : a^(f+1) * b ≤ b^(f+1) * b := Nat.mul_le_mul_right _ (Nat.le_of_lt ih)
+    calc a^(f+1+1) = a^(f+1) * a := Nat.pow_succ a (f+1)
+      _ < a^(f+1) * b := h1
+      _ ≤ b^(f+1) * b := h2
+      _ = b^(f+1+1) := (Nat.pow_succ b (f+1)).symm
 
 /-- The power-reassociation identity: `(a^m)^n = a^(n*m)`. -/
 theorem pow_mul_comm_shape (a m n : Nat) : (a^m)^n = a^(n*m) := by
-  rw [Nat.pow_mul, Nat.mul_comm]
+  rw [← Nat.pow_mul, Nat.mul_comm]
 
 /-! ## §3 THE RIDER SQUEEZE — the rational certificate engine -/
 
@@ -346,7 +343,11 @@ theorem erdos406_no_riders_above_250_of_cap
   intro K hK
   by_contra hRider
   have hK1 : 1 ≤ K := by omega
-  have hbound := cap_rider_bound 185 hCap K hK1 hRider
+  have hRiderT : noTernaryTwo (4^K) = true := by
+    cases h : noTernaryTwo (4^K) with
+    | false => exact absurd h hRider
+    | true => rfl
+  have hbound := cap_rider_bound 185 hCap K hK1 hRiderT
   omega
 
 /-- **THE CENSUS COMPOSITION — the complete classification from the weak

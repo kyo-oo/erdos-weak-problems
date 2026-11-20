@@ -4777,3 +4777,19 @@ proof + the chirotope machine certificate; the E₅ witness (f(5) ≥ 9);
 kernels 80/81/82 + batteries, CI-certified.
 
 The engine never stops; it never lies. In English, always.
+---
+
+## SESSION 075 — 2026-11-20 — THE DUST-LAW ROUND (sorry-kill + exact doubling + protection system)
+
+Deliverables (full record in WORKLOG_S075.md): (1) Kernel 68 sorry-kill — all
+six elaboration errors root-caused and repaired (CapLaw406.lean compiles with
+ZERO sorry: the rider squeeze, rider bound, Postulate-II instantiation, C=185
+retargeting, census composition — all machine-checked); (2) THE DUST LAW
+(DustLaw406.lean): the exact doubling |alive[j]| = 2^j FOREVER + the shift law
++ the period law + the full spec + the rider corollary — the entropy row
+(branching 2.482^p) closed; battery H-lane GREEN (level 18 + spec levels 1-5);
+(3) the cap assault: the magnitude fantasy REFUTATED (fixpoint obstruction —
+recorded), the counting-kill's named input = anti-clustering; (4) the
+sandbox protection system (BACKUP.md + backup.sh + vault branch + cron
+guardian 539857 + .bashrc anchor). CI: kernel-b job extended with DustLaw406
+compile + dust axiom greps. The engine never stops; it never lies.

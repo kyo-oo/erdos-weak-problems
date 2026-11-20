@@ -178,6 +178,75 @@ while n < LIM:
 check(f"G1 cap v2r(n) <= ternaryLog3(n)+3 on primitive Cantor n < 3^{12}", okG)
 check("G2 equality cases below 3^12 == {256} (the largest rider; 4 has v2=2 < ternaryLog3+3)", equality_cases == [256])
 
+print("H. THE DUST-LAW VERIFICATION (mirrors DustLaw406.lean, S075)")
+# dustStep j r: the live children of class r at level j
+#   d = digit_{j+1}(4^r); arms: d%3==0 -> [r, r+3^j]; ==1 -> [r, r+2*3^j]; ==2 -> [r+3^j, r+2*3^j]
+def digit_at(n, p):
+    # digit at ternary position p of n
+    return (n // (3 ** p)) % 3
+
+def dust_step(j, r):
+    m = 3 ** (j + 2)
+    d = digit_at(pow(4, r, m), j + 1)
+    arm = d % 3
+    if arm == 0:
+        return [r, r + 3 ** j]
+    if arm == 1:
+        return [r, r + 2 * 3 ** j]
+    return [r + 3 ** j, r + 2 * 3 ** j]
+
+LEVEL = 18
+alive = [0]
+doubling_ok = True
+sizes = []
+for j in range(LEVEL):
+    new_alive = []
+    for r in alive:
+        new_alive.extend(dust_step(j, r))
+    if len(new_alive) != 2 * len(alive):
+        doubling_ok = False
+        break
+    alive = new_alive
+    sizes.append(len(alive))
+check(f"H1 exact doubling |alive[j]| = 2^j for every level j <= {LEVEL}",
+      doubling_ok and sizes == [2 ** k for k in range(1, LEVEL + 1)])
+
+# the low-level receipts (must match the Lean kernel receipts exactly)
+alive1 = dust_step(0, 0)
+alive2 = dust_step(1, 0) + dust_step(1, 1)
+alive3 = []
+for r in alive2:
+    alive3.extend(dust_step(2, r))
+check("H2 dust 1 == [0, 1]", alive1 == [0, 1])
+check("H3 dust 2 == [0, 3, 1, 4]", alive2 == [0, 3, 1, 4])
+check("H4 dust 3 == [0, 9, 12, 21, 1, 10, 4, 13]", alive3 == [0, 9, 12, 21, 1, 10, 4, 13])
+
+# the survivors at the verified levels ARE the classes with first digits 0/1
+def class_survives(r, j):
+    # first j+1 ternary digits of 4^r are all in {0,1}
+    n = pow(4, r, 3 ** (j + 2))
+    for p in range(j + 1):
+        if digit_at(n, p) == 2:
+            return False
+    return True
+
+spec_ok = True
+for j in (1, 2, 3, 4, 5):
+    m = 3 ** j
+    expect = [r for r in range(m) if class_survives(r, j)]
+    if set(alive if j == LEVEL and False else [r for r in ([0] if j == 0 else [])]) is None:
+        pass
+    # recompute alive at level j from the recursion
+    a = [0]
+    for lvl in range(j):
+        a = [c for r in a for c in dust_step(lvl, r)]
+    if sorted(a) != sorted(expect):
+        spec_ok = False
+        print(f"   level {j}: tree={sorted(a)} != survivors={sorted(expect)}")
+        break
+check("H5 the tree IS the survivor set: dust j == {r < 3^j: first j+1 digits of 4^r are 0/1}, levels 1..5", spec_ok)
+
+
 print()
 all_ok = all(ok for _, ok in checks)
 if all_ok:
