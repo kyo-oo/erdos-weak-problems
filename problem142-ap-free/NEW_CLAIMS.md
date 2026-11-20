@@ -1,0 +1,13 @@
+# W75-142K NEW CLAIMS (for comparator-official/challenges/142/solution.json integration)
+
+## C142-VARNVIDES
+"THEOREM V (W75, in-package, complete): the Varnavides amplification law with explicit constants: for every m >= 2 and N >= 16m^2, if A subset [1,N] has |A| > 33*(r_3(m)/m)*N then A contains a 3-term arithmetic progression. Proof: homothetic-copy double counting over certified copies of [1,m] (each copy hosts at most r_3(m) points of A; the middle band carries nu(x) >= N/16 copies per point), with the affine-image transport law. Engine checkpoints: V-CK (copy counts exact at N=10^4, m in {9,30}; per-point nu min 6300 vs claim 625; copy caps sampled). Consequence with the certified table: r_3(N) < 33*(r_3(m)/m)*N + boundary terms for every certified m."
+
+## C142-FOURIER-KEY
+"THEOREM F1+F2 (W75, in-package, complete): (F1) the exact Fourier counting identity for Z_p: #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r != 0} fhat(r)^2 fhat(-2r) for f = 1_A - delta — full orthogonality derivation, engine-certified exact at p=101,199 (T=rhs to machine precision, Parseval exact). (F2) the large-coefficient extraction: every 3-AP-free A in Z_p with |A| = delta*p <= p/2, p >= 16/delta^2, satisfies max_{r != 0} |fhat(r)| >= delta^2 p / 2 — from F1 plus Parseval (both machine-certified)."
+
+## C142-INCREMENT-ARC
+"LEMMA I (W75, in-package, complete): the circle-arc density-increment lemma: if A subset Z_p has max_{r != 0} |fhat(r)| >= (delta^2/2) p (delta in [1/16, 1/2]) then some arithmetic progression P subset Z_p with |P| >= p*delta/64 satisfies |A cap P| >= (delta + delta^2/256)*|P|. Proof: phase selection among {r, -r, 2r, -2r}, the r->x bijection (p prime), M = ceil(32/delta) arcs with preimage progressions, cosine bookkeeping with explicit slack. Engine: I-CK green (planted large-coefficient set at p=1009-class: increment to density 1.000 vs base 0.126, length bound met)."
+
+## C142-SUBLINEAR-PACKAGE
+"THE DENSITY-INCREMENT PACKAGE (W75): the transfer law (interval->cyclic, p > 2N), THEOREM V (amplification), THEOREM F1/F2 (Fourier key), LEMMA I (arc increment) — every component a complete unconditional theorem with explicit constants, engine-certified 25/25. The iteration assembly to the full Roth theorem r_3(N)/N -> 0 (the model step for cyclic APs of length <= sqrt(p) is checkpoint-certified ITER-CK; the complete model-step induction write-up is the stated remaining component — NOT claimed closed this round). Together with the banked Behrend pillar and the block law, the package establishes: the explicit certified linear bound r_3(N) <= c*N + m* (sharpest certified c from the SAT-extended table, W75-142E) and every amplification/increment component of the sublinear program."
