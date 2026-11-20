@@ -186,20 +186,31 @@ theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
     exact h
   | succ f ih =>
     show a^(f+1+1) < b^(f+1+1)
-    have h1 : a^(f+1) * a < a^(f+1) * b := by
-      obtain ⟨s, hs⟩ : ∃ s : Nat, b = a + s + 1 := ⟨b - a - 1, by omega⟩
-      have hexp : a^(f+1) * (a + s + 1) = a^(f+1) * a + (s + 1) * a^(f+1) := by
-        ring
-      have hstep : 0 < (s + 1) * a^(f+1) := by
-        have hpos : 0 < a^(f+1) := Nat.pow_pos (by omega)
-        obtain ⟨k, hk⟩ : ∃ k : Nat, a^(f+1) = k + 1 := ⟨a^(f+1) - 1, by omega⟩
-        rw [hk]
-        have hms : (s + 1) * (k + 1) = (s + 1) * k + (s + 1) :=
-          Nat.mul_succ (s + 1) k
-        rw [hms]
+    by_cases ha0 : a = 0
+    · -- a = 0: 0^(f+2) = 0 < b^(f+2) since b ≥ 1
+      subst ha0
+      have hb : 0 < b := by omega
+      have hbp : 0 < b^(f+2) := Nat.pow_pos hb
+      rw [Nat.zero_pow_succ]
+      exact hbp
+    · -- 1 ≤ a: the strict monotonicity route (positivity available)
+      have hapos : 0 < a := by omega
+      have h1 : a^(f+1) * a < a^(f+1) * b := by
+        obtain ⟨s, hs⟩ : ∃ s : Nat, b = a + s + 1 := ⟨b - a - 1, by omega⟩
+        have hexp : a^(f+1) * (a + s + 1)
+            = a^(f+1) * a + (s + 1) * a^(f+1) := by
+          ring
+        have hstep : 0 < (s + 1) * a^(f+1) := by
+          have hpos : 0 < a^(f+1) := Nat.pow_pos hapos
+          obtain ⟨k, hk⟩ : ∃ k : Nat, a^(f+1) = k + 1 :=
+            ⟨a^(f+1) - 1, by omega⟩
+          rw [hk]
+          have hms : (s + 1) * (k + 1) = (s + 1) * k + (s + 1) :=
+            Nat.mul_succ (s + 1) k
+          rw [hms]
+          omega
+        rw [hs, hexp]
         omega
-      rw [hs, hexp]
-      omega
     have h2 : a^(f+1) * b ≤ b^(f+1) * b := Nat.mul_le_mul_right _ (Nat.le_of_lt ih)
     calc a^(f+1+1) = a^(f+1) * a := Nat.pow_succ a (f+1)
       _ < a^(f+1) * b := h1
