@@ -146,12 +146,13 @@ theorem dust_shift (j r t : Nat) :
   have hmod : (t * c1 * 4^r + 3 * K * 4^r) % 3 = t % 3 := by
     have hW : (c1 * 4^r) % 3 = 1 := by
       rw [Nat.mul_mod, h4m, hc1m]
-      omega
     have e : t * c1 * 4^r = t * (c1 * 4^r) := by ring
     rw [e, Nat.add_mod]
     rw [Nat.mul_mod]
     rw [hW]
-    have hz : (3 * K * 4^r) % 3 = 0 := by omega
+    have hz : (3 * K * 4^r) % 3 = 0 := by
+      rw [Nat.mul_mod]
+      omega
     rw [hz]
     omega
   rw [hmod]
@@ -174,7 +175,9 @@ theorem digit_period (q k m : Nat) :
     rw [h4, hc1, hK, e1, e2]
     ring
   rw [hdecomp, digit_add_mul]
-  have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 := by omega
+  have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 := by
+    rw [Nat.mul_mod]
+    omega
   rw [h0]
   omega
 
@@ -263,8 +266,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        exfalso
-        omega
+        exact absurd hd hdig
   · -- t = 1
     rw [ht1, Nat.one_mul]
     unfold dustStep
@@ -284,8 +286,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        exfalso
-        omega
+        exact absurd (by rw [Nat.add_mod, hd]; omega) hdig
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
@@ -302,8 +303,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        exfalso
-        omega
+        exact absurd (by rw [Nat.add_mod, hd]; omega) hdig
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
@@ -354,8 +354,8 @@ theorem dust_spec (j : Nat) : ∀ r : Nat,
       rw [hr, Nat.pow_zero]
       show (1 / 3^q) % 3 ≠ 2
       match q with
-      | zero => decide
-      | succ q =>
+      | .zero => decide
+      | .succ q =>
         have hq : 3 ≤ 3^(q+1) := by
           have hp : 0 < 3^q := Nat.pow_pos (by decide)
           have hps := Nat.pow_succ 3 q
