@@ -75,3 +75,47 @@ coordinate recovery phi(x) = (x-a)d^{-1} mod p == construction index for
 every point; the 2(L-1) < p no-wrap condition; forward AP direction);
 negative controls at L > (p+1)/2 (wraps MUST exist there — the sqrt(p)
 regime is strict); density bookkeeping on planted progressions.
+
+## S002 — COMPONENT 2: model-step NO-WRAP certification (14:40–14:50)
+
+- wrapscan142.c written (method a): point-level brute over ALL (d, L ≤ √p)
+  parametrizations (a=0 + random a-samples), Barrett-reduced midpoint
+  lookups; counts internal 3-APs, original-coordinate wraps (allowed),
+  rescaled-coordinate wraps (must be 0).
+  - BUG 4: the first version's membership test omitted the `index < L`
+    condition (the point table covers L_max; sub-progression membership
+    needs idx < L). Never triggered in the law range (odd-sum midpoint
+    indices land >= (p+1)/2 > √p, so main-scan results were correct), but
+    the negative-control range over-counted: phantom "wraps" at L=50 for
+    p=101 (theory: first wrap at L=52). Fixed; after the fix the data
+    matches theory EXACTLY: clean for L <= (p+1)/2, wraps from
+    L = (p+3)/2 with EXACTLY 2 wrapping triples per (a,d) at the threshold
+    — both wrap directions (2j = i+k+p and 2j = i+k-p).
+- engine142modelstep.py written (method b): B1 phi-recovery EXHAUSTIVE
+  over all d, all points (phi(x_i) == i; gmpy2 inverses; a-samples);
+  B2 forward identity (numpy-exhaustive over all d at L_max + independent
+  pure-python/gmpy2 sample re-check); B3 the no-wrap bound 2(L-1) < p per
+  L; B4 the exact-threshold negative control (algebraic wrapping triples);
+  B5 density bookkeeping on 6 planted progressions per p (bijection, density
+  preservation, relative lengths, nested double-rescale, 3-AP count
+  transfer by two independent counting codes at both levels).
+  - BUG 5: nested-subprogression planting picked alpha/e without keeping
+    the index window {alpha + t·e} inside [0,L) (P' ⊄ P in some rows);
+    fixed by planting e <= (L-1)/(L'-1) and alpha <= L-1-(L'-1)e
+    (an off-by-one in the alpha randrange bound was caught by the assert
+    and fixed in the same round).
+- RESULT: ALL FOUR PRIMES GREEN, both methods:
+    p=101:  1,000 parametrizations,      7,000 internal 3-APs, 0 rescaled wraps
+    p=1009: 31,248 parametrizations,  2,378,880 internal 3-APs, 0 rescaled wraps
+    p=3203: 179,312 parametrizations, 45,590,076 internal 3-APs, 0 rescaled wraps
+    p=9973: 987,228 parametrizations, 794,020,500 internal 3-APs, 0 rescaled wraps
+  + 1,962,788 phi-recovery checks + 27,843,402 forward-identity checks.
+  Structural prediction verified: per-(L,d) internal-AP count is
+  d-invariant AND equals the integer-AP count of [0,L-1] for every L at
+  every prime (the law's content: internal 3-APs of P ≅ integer 3-APs of
+  the index interval). a-samples identical to a=0.
+  Negative controls: threshold exactly L0=(p+3)/2, 2 wraps per (a,d) there,
+  clean at (p+1)/2 — the √p regime has margin p - 2(√p - 1) ≥ 83/949/3093/9777.
+- Files: receipts142modelstep.txt + experiments_v2/{wrapscan142.c,
+  engine142modelstep.py, wrapscan_*.jsonl}.
+- PUSHED: milestone commit.

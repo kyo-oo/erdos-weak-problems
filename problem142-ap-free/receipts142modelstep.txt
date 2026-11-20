@@ -1,0 +1,113 @@
+RECEIPTS — engine142modelstep.py + wrapscan142.c (W76-142E) — THE MODEL-STEP NO-WRAP CERTIFICATION
+seed 20261120 ; deterministic ; gmpy2 2.3.2 ; sympy 1.14.0 ; numpy 2.1.3 ; gcc 14.2.0 ; 2026-11-20T14:44:47
+
+THE LAW (L-NW, model step): for prime p and cyclic AP P(a,d,L) = {a+i*d mod p : i in [0,L)}
+with L <= floor(sqrt(p)), every internal 3-AP of P ({x,y,z} subset P, x != z, x+z == 2y mod p)
+is GENUINE in rescaled coordinates phi(t) = (t-a)*d^{-1} mod p:  phi(x)+phi(z) = 2*phi(y) in Z.
+WHY IT HOLDS (the certified arithmetic): for points of P, phi(x_i) = i, so the claim is
+i+k = 2j in Z whenever i+k == 2j (mod p); but |i+k-2j| <= 2(L-1) < p for L <= sqrt(p),
+and a nonzero multiple of p cannot have absolute value < p.  The sqrt(p) regime sits deep
+inside the true clean range L <= (p+1)/2 (negative controls below pin the exact threshold).
+
+METHOD (a) — wrapscan142.c, POINT-LEVEL brute (never uses the index algebra): for every
+  d in [1,p), every L in [1,floor(sqrt(p))]: build the actual point set, scan EVERY endpoint
+  pair, compute the Z_p midpoint of the actual residues, look it up in the actual point set,
+  recover the index, check 2*j == i+k in Z.  Counts original-coordinate wraps (allowed) and
+  rescaled-coordinate wraps (FORBIDDEN — must be 0).  a-translation invariance confirmed on
+  random a-samples; per-(L,d) count d-invariance confirmed (min == max) and equal to the
+  integer-AP count of [0,L-1] — the law's structural prediction, verified for every L.
+METHOD (b) — this engine, ALGEBRAIC rescaled coordinates: B1 phi-recovery (exhaustive over
+  all d, all points: phi(x_i) == i); B2 forward identity (every integer index-AP maps to a
+  genuine Z_p-AP of the points; exhaustive over all d at L_max, numpy; independent
+  pure-python/gmpy2 re-check on samples); B3 the no-wrap bound 2(L-1) < p per L; B4 the
+  exact-threshold negative control; B5 the density bookkeeping on planted progressions.
+
+=== p = 101  (prime: sympy=True, gmpy2=True; L_max = floor(sqrt(p)) = 10; margin p - 2(L_max-1) = 83)
+PASS NOWRAP-BOUND  — 2(L-1) < p for every L <= 10: True
+PASS PHI-RECOVERY — exhaustive a=0: 1000 checks over all d, all i < L_max, phi(x_i) == i: True ; a-samples: 20000 checks: True
+PASS FORWARD-ID   — 2000 pair checks (exhaustive all d at L_max): True ; independent sample re-check (22369 checks): True
+PASS BRUTE-WRAPSCAN (method a) — 1000 parametrizations (d,L), 7000 internal 3-APs scanned, 3212 original-coordinate wraps (allowed, expected), RESCALED WRAPS: 0 (LAW HOLDS) ; wall 0.0s
+  per-(L,d) counts d-invariant and == integer-AP count of [0,L-1] for every L: True ; a-samples same counts as a=0: True (a-sample rescaled wraps: 0)
+PASS NEGATIVE-CONTROL — exact threshold L0 = (p+3)/2 = 52: the two algebraic wrapping triples [0, 51, 1] (2j = i+k+p) and [50, 0, 51] (2j = i+k-p) verified in-range/Z_p-AP/non-integer (True; identities True/True)
+  C-scan threshold confirmation at L in [45, 101] over 100 d: per-L rescaled wraps {45: 0, 46: 0, 47: 0, 48: 0, 49: 0, 50: 0, 51: 0, 52: 200, 53: 600, 54: 1200, 55: 2000, 56: 3000, 57: 4200, 58: 5600, 59: 7200, 60: 9000, 61: 11000, 62: 13200, 63: 15600, 64: 18200, 65: 21000, 66: 24000, 67: 27200, 68: 30600, 69: 34200, 70: 38000, 71: 42000, 72: 46200, 73: 50600, 74: 55200, 75: 60000, 76: 65000, 77: 70200, 78: 75600, 79: 81200, 80: 87000, 81: 93000, 82: 99200, 83: 105600, 84: 112200, 85: 119000, 86: 126000, 87: 133200, 88: 140600, 89: 148200, 90: 156000, 91: 164000, 92: 172200, 93: 180600, 94: 189200, 95: 198000, 96: 207000, 97: 216200, 98: 225600, 99: 235200, 100: 245000, 101: 255000} (clean at (p+1)/2, exactly 2 per (a,d) at (p+3)/2)
+PASS DENSITY-BOOKKEEPING — 6 planted progressions per p (interval/random/two-block dense patterns): bijection |phi^-1(S)| == |S|, A subset P, density |A∩P|/L == |S|/L, relative length L/p, nested subprogression P' subset P with double-rescale phi' == t and (outer index - alpha)/e bookkeeping, relative lengths multiply exactly (L'/L)*(L/p) == L'/p, and the 3-AP COUNT TRANSFER point-scan == integer-scan on BOTH levels: True
+  planted a=96 d=36 L=8 [interval]: |S|=6 |A|=6 bij=True A⊆P=True ap_transfer 6==6:True ; nested L'=2 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=35 d=92 L=6 [random]: |S|=3 |A|=3 bij=True A⊆P=True ap_transfer 0==0:True ; nested L'=2 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=17 d=31 L=7 [two_blocks]: |S|=3 |A|=3 bij=True A⊆P=True ap_transfer 0==0:True ; nested L'=2 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=5 d=100 L=8 [interval]: |S|=6 |A|=6 bij=True A⊆P=True ap_transfer 6==6:True ; nested L'=2 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=18 d=27 L=5 [random]: |S|=3 |A|=3 bij=True A⊆P=True ap_transfer 0==0:True ; nested L'=2 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=93 d=4 L=10 [two_blocks]: |S|=5 |A|=5 bij=True A⊆P=True ap_transfer 1==1:True ; nested L'=3 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  p=101 wall: 0.03s ; LAW: CERTIFIED (both methods)
+
+=== p = 1009  (prime: sympy=True, gmpy2=True; L_max = floor(sqrt(p)) = 31; margin p - 2(L_max-1) = 949)
+PASS NOWRAP-BOUND  — 2(L-1) < p for every L <= 31: True
+PASS PHI-RECOVERY — exhaustive a=0: 31248 checks over all d, all i < L_max, phi(x_i) == i: True ; a-samples: 124000 checks: True
+PASS FORWARD-ID   — 226800 pair checks (exhaustive all d at L_max): True ; independent sample re-check (98986 checks): True
+PASS BRUTE-WRAPSCAN (method a) — 31248 parametrizations (d,L), 2378880 internal 3-APs scanned, 1138468 original-coordinate wraps (allowed, expected), RESCALED WRAPS: 0 (LAW HOLDS) ; wall 0.023s
+  per-(L,d) counts d-invariant and == integer-AP count of [0,L-1] for every L: True ; a-samples same counts as a=0: True (a-sample rescaled wraps: 0)
+PASS NEGATIVE-CONTROL — exact threshold L0 = (p+3)/2 = 506: the two algebraic wrapping triples [0, 505, 1] (2j = i+k+p) and [504, 0, 505] (2j = i+k-p) verified in-range/Z_p-AP/non-integer (True; identities True/True)
+  C-scan threshold confirmation at L in [505, 506] over 32 d: per-L rescaled wraps {505: 0, 506: 64} (clean at (p+1)/2, exactly 2 per (a,d) at (p+3)/2)
+PASS DENSITY-BOOKKEEPING — 6 planted progressions per p (interval/random/two-block dense patterns): bijection |phi^-1(S)| == |S|, A subset P, density |A∩P|/L == |S|/L, relative length L/p, nested subprogression P' subset P with double-rescale phi' == t and (outer index - alpha)/e bookkeeping, relative lengths multiply exactly (L'/L)*(L/p) == L'/p, and the 3-AP COUNT TRANSFER point-scan == integer-scan on BOTH levels: True
+  planted a=734 d=860 L=19 [interval]: |S|=13 |A|=13 bij=True A⊆P=True ap_transfer 36==36:True ; nested L'=4 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=534 d=78 L=31 [random]: |S|=18 |A|=18 bij=True A⊆P=True ap_transfer 44==44:True ; nested L'=5 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=759 d=623 L=22 [two_blocks]: |S|=12 |A|=12 bij=True A⊆P=True ap_transfer 15==15:True ; nested L'=4 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=36 d=310 L=16 [interval]: |S|=11 |A|=11 bij=True A⊆P=True ap_transfer 25==25:True ; nested L'=4 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=79 d=817 L=23 [random]: |S|=13 |A|=13 bij=True A⊆P=True ap_transfer 16==16:True ; nested L'=4 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=742 d=971 L=27 [two_blocks]: |S|=15 |A|=15 bij=True A⊆P=True ap_transfer 29==29:True ; nested L'=5 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  p=1009 wall: 0.09s ; LAW: CERTIFIED (both methods)
+
+=== p = 3203  (prime: sympy=True, gmpy2=True; L_max = floor(sqrt(p)) = 56; margin p - 2(L_max-1) = 3093)
+PASS NOWRAP-BOUND  — 2(L-1) < p for every L <= 56: True
+PASS PHI-RECOVERY — exhaustive a=0: 179312 checks over all d, all i < L_max, phi(x_i) == i: True ; a-samples: 224000 checks: True
+PASS FORWARD-ID   — 2420712 pair checks (exhaustive all d at L_max): True ; independent sample re-check (267693 checks): True
+PASS BRUTE-WRAPSCAN (method a) — 179312 parametrizations (d,L), 45590076 internal 3-APs scanned, 22187188 original-coordinate wraps (allowed, expected), RESCALED WRAPS: 0 (LAW HOLDS) ; wall 0.551s
+  per-(L,d) counts d-invariant and == integer-AP count of [0,L-1] for every L: True ; a-samples same counts as a=0: True (a-sample rescaled wraps: 0)
+PASS NEGATIVE-CONTROL — exact threshold L0 = (p+3)/2 = 1603: the two algebraic wrapping triples [0, 1602, 1] (2j = i+k+p) and [1601, 0, 1602] (2j = i+k-p) verified in-range/Z_p-AP/non-integer (True; identities True/True)
+  C-scan threshold confirmation at L in [1602, 1603] over 16 d: per-L rescaled wraps {1602: 0, 1603: 32} (clean at (p+1)/2, exactly 2 per (a,d) at (p+3)/2)
+PASS DENSITY-BOOKKEEPING — 6 planted progressions per p (interval/random/two-block dense patterns): bijection |phi^-1(S)| == |S|, A subset P, density |A∩P|/L == |S|/L, relative length L/p, nested subprogression P' subset P with double-rescale phi' == t and (outer index - alpha)/e bookkeeping, relative lengths multiply exactly (L'/L)*(L/p) == L'/p, and the 3-AP COUNT TRANSFER point-scan == integer-scan on BOTH levels: True
+  planted a=2480 d=2724 L=39 [interval]: |S|=27 |A|=27 bij=True A⊆P=True ap_transfer 169==169:True ; nested L'=6 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=977 d=1340 L=54 [random]: |S|=32 |A|=32 bij=True A⊆P=True ap_transfer 142==142:True ; nested L'=7 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=1669 d=321 L=40 [two_blocks]: |S|=23 |A|=23 bij=True A⊆P=True ap_transfer 67==67:True ; nested L'=6 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=1774 d=840 L=40 [interval]: |S|=27 |A|=27 bij=True A⊆P=True ap_transfer 169==169:True ; nested L'=6 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=921 d=1482 L=46 [random]: |S|=27 |A|=27 bij=True A⊆P=True ap_transfer 94==94:True ; nested L'=6 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=879 d=2588 L=53 [two_blocks]: |S|=30 |A|=30 bij=True A⊆P=True ap_transfer 120==120:True ; nested L'=7 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  p=3203 wall: 0.24s ; LAW: CERTIFIED (both methods)
+
+=== p = 9973  (prime: sympy=True, gmpy2=True; L_max = floor(sqrt(p)) = 99; margin p - 2(L_max-1) = 9777)
+PASS NOWRAP-BOUND  — 2(L-1) < p for every L <= 99: True
+PASS PHI-RECOVERY — exhaustive a=0: 987228 checks over all d, all i < L_max, phi(x_i) == i: True ; a-samples: 396000 checks: True
+PASS FORWARD-ID   — 23942772 pair checks (exhaustive all d at L_max): True ; independent sample re-check (862070 checks): True
+PASS BRUTE-WRAPSCAN (method a) — 987228 parametrizations (d,L), 794020500 internal 3-APs scanned, 390545346 original-coordinate wraps (allowed, expected), RESCALED WRAPS: 0 (LAW HOLDS) ; wall 4.495s
+  per-(L,d) counts d-invariant and == integer-AP count of [0,L-1] for every L: True ; a-samples same counts as a=0: True (a-sample rescaled wraps: 0)
+PASS NEGATIVE-CONTROL — exact threshold L0 = (p+3)/2 = 4988: the two algebraic wrapping triples [0, 4987, 1] (2j = i+k+p) and [4986, 0, 4987] (2j = i+k-p) verified in-range/Z_p-AP/non-integer (True; identities True/True)
+  C-scan threshold confirmation at L in [4987, 4988] over 8 d: per-L rescaled wraps {4987: 0, 4988: 16} (clean at (p+1)/2, exactly 2 per (a,d) at (p+3)/2)
+PASS DENSITY-BOOKKEEPING — 6 planted progressions per p (interval/random/two-block dense patterns): bijection |phi^-1(S)| == |S|, A subset P, density |A∩P|/L == |S|/L, relative length L/p, nested subprogression P' subset P with double-rescale phi' == t and (outer index - alpha)/e bookkeeping, relative lengths multiply exactly (L'/L)*(L/p) == L'/p, and the 3-AP COUNT TRANSFER point-scan == integer-scan on BOTH levels: True
+  planted a=6746 d=7996 L=65 [interval]: |S|=44 |A|=44 bij=True A⊆P=True ap_transfer 462==462:True ; nested L'=8 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=5299 d=8982 L=82 [random]: |S|=49 |A|=49 bij=True A⊆P=True ap_transfer 322==322:True ; nested L'=9 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=5845 d=3735 L=57 [two_blocks]: |S|=33 |A|=33 bij=True A⊆P=True ap_transfer 154==154:True ; nested L'=7 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=5858 d=1600 L=77 [interval]: |S|=52 |A|=52 bij=True A⊆P=True ap_transfer 650==650:True ; nested L'=8 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=1404 d=5102 L=73 [random]: |S|=43 |A|=43 bij=True A⊆P=True ap_transfer 254==254:True ; nested L'=8 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  planted a=4405 d=8171 L=82 [two_blocks]: |S|=47 |A|=47 bij=True A⊆P=True ap_transfer 310==310:True ; nested L'=9 ⊆P=True dbl_rescale=True ap_transfer_nested=True
+  p=9973 wall: 0.92s ; LAW: CERTIFIED (both methods)
+
+ARSENAL CITATIONS (load-bearing for this certification; all spot-checked in receipts142table_v2.txt):
+  #BY GST LAW mod_mod_mul [CardinalWorlds.lean:140] — the nested-modular law (n%(a*b))%a = n%a:
+    the rescaled coordinate phi(t) = (t-a)*d^{-1} mod p may be computed by rescale-then-reduce or
+    reduce-then-rescale; the law is the certified shape of that order-independence.
+  #BY GST LAW div_mod_mul_lemma [CardinalWorlds.lean:150] — (n%(a*b))/a = (n/a)%b: the certified
+    shape of coordinate recovery from residues (the index from the point), the same shape as
+    the nested-rescale bookkeeping (outer index - alpha)/e above.
+  #BY GST LAW div_add_mod_subst [CardinalWorlds.lean:249] — the division-with-remainder
+    reconstruction a = 3*(a/3)+2: the certified shape of the point reconstruction
+    x = a + phi(x)*d (mod p) checked by phi-recovery B1.
+  #BY GST LAW digit3_mod_pow [GSTBladeWave.lean:56] and digit3_congr [GSTBladeWave.lean:72] —
+    the residue-fixes-coordinate law family (R % 3^(j+1) fixes digit3 R j; congruent naturals
+    share digits): the same law shape carries the no-wrap step — i+k == 2j (mod p) with
+    i,j,k in the coordinate window [0,L) forces i+k = 2j in Z (congruence + range => equality).
+  #BY GST LAW carryAtPos_bound [CardinalWorlds.lean:108] — the no-carry bound (carry < 4) behind
+    the digitwise discipline of the dense-set bookkeeping patterns in B5.
+  #BY GST LAW cubic_expansion [CardinalWorlds.lean:283] — the (1+a)^3 split: the shape of the
+    triple-count transfer identity verified in B5 (3-AP counts commute with rescaling).
+
+TOTALS — 1198788 cyclic-AP parametrizations brute-scanned (method a) with 841996456 internal 3-APs; 1962788 phi-recovery checks + 27843402 forward-identity checks (method b); rescaled wraps in the sqrt(p) regime: 0 across ALL primes and ALL a-samples.
+ENGINE142MODELSTEP_GREEN
