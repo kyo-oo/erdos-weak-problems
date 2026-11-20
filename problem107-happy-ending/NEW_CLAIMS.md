@@ -1,0 +1,7 @@
+# W75-107K NEW CLAIMS
+
+## C107-OT8
+"THE n=8 ORDER-TYPE ENUMERATION (W75): the realization-diversified cell-insertion enumeration: 242 n=7 parents (certified 135 mirror-identified, anchor match) x 616 type-preserving realizations x all arrangement cells (slab method, per-parent cell counts EXACTLY matching the line-arrangement formula on all 242 parents) = 99,742 insertions -> 6402 reflection-distinguished types, 225 self-mirror, 3313/3315 mirror-identified (anchor 3315). ROOT-CAUSE DISCOVERY (mathematical, in-package): the cell set of the pair-line arrangement is NOT an order-type invariant — within one order type's realization space, cells appear/disappear across 3-line-concurrency walls, so single-realization insertion provably misses children (1 mirror-closure failure exhibited and diagnosed; the realization-diversification recovers 13 identified types). The remaining 2 types are the named extremal-cell cases; the n=9 full certificate (158,817 anchor) is the compute-planned next lane (15x10-minute chunked runs, the anchor count is the certificate)."
+
+## C107-SIXPOINT-REFUTATION
+"THE ADVERSARIAL CATCH (W75): the naive 'triangle + 3 interior => convex 5' lemma is FALSE — exact-rational counterexample: concentric triangles A(0,10) B(-9,-8) C(9,-8) with u(0,10/3) v(-3,-8/3) w(3,-8/3): all 6 five-subsets have hull size 3 or 4. The f(5) <= 9 case tree must route through the outer quadrilateral/triangle vertices (the true Makai structure) — the engine caught the false lemma before it shipped (the campaign's no-wrong-construction doctrine)."
