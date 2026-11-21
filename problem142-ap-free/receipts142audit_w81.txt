@@ -1,0 +1,39 @@
+RECEIPTS — engine142audit_w81.py (W81-142B) — THE INDEPENDENT AUDIT ENGINE
+seed 142142 ; deterministic ; fresh algorithms (lex-DFS tables, exact F_q DFT,
+own census, corrected BG-E margin) ; wall 81.1s
+==============================================================================
+[PASS] AUD-TABLES
+    r_3(1..30) mine=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12]; r_4(1..16) mine=[1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 9, 10, 10]; r_5(1..18) mine=[1, 2, 3, 4, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12, 13, 14, 15]; r_6(1..18) mine=[1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 13, 14, 15]| my DFS == banked on every recomputed cell| all 211 banked witnesses re-verified (size + freeness, both my codes)| all tables monotone
+[PASS] AUD-R4VARN-TABLE
+    R4_VARN.md row r_4(1..16)=[1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 9, 10, 10] vs my exhaustive=[1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 9, 10, 10] — agree cell by cell
+[PASS] AUD-K7
+    k=7 table N=1..46: N<=42 exact (multiples-of-7 witness + floor law, both my codes); 43..46 constructed/receipt witnesses verified; INDEPENDENT z3 second-code uppers: r_7(43)<=36:z3 unsat; r_7(44)<=36:z3 unsat; r_7(45)<=36:z3 unsat; r_7(46)<=37:z3 unsat; >=37:z3 sat — the X-code-only cells now carry two codes
+[PASS] AUD-BGE-PLUGBACK
+    TRUE margin ln((m^(d-k)-d^2)/d^2)-(lnN-C_k*sqrt(lnN)) >= 0 everywhere; grid TRUE worst margins: k=3: +4.2034 @2^41.04 (d=11); k=4: +3.3273 @2^43.12 (d=13); k=5: +3.2545 @2^41.04 (d=14); k=6: +3.5816 @2^50.01 (d=17); k=7: +2.0188 @2^41.04 (d=16); k=8: +2.5177 @2^49.10 (d=19); k=9: +2.5725 @2^59.11 (d=23); k=10: +3.0218 @2^64.05 (d=25) | k=3: 59686 recipe cells (d<=46) all endpoints >= +3.8394 (worst at d,m=(11, 6)) | k=4: 3852 recipe cells (d<=46) all endpoints >= +3.2544 (worst at d,m=(13, 4)) | k=5: 763 recipe cells (d<=46) all endpoints >= +2.8895 (worst at d,m=(14, 3)) | k=6: 277 recipe cells (d<=46) all endpoints >= +3.0427 (worst at d,m=(18, 3)) | k=7: 142 recipe cells (d<=46) all endpoints >= +1.8454 (worst at d,m=(18, 2)) | k=8: 89 recipe cells (d<=46) all endpoints >= +2.2779 (worst at d,m=(20, 2)) | k=9: 65 recipe cells (d<=46) all endpoints >= +2.4116 (worst at d,m=(23, 2)) | k=10: 51 recipe cells (d<=46) all endpoints >= +2.8005 (worst at d,m=(25, 2))
+[PASS] AUD-BGE-FARRANGE
+    plug-back on 2^6000..2^40000 (coarse grid + low-m cell endpoints + mhi monotonicity spot-checks): k=3 far-range min margin +85.55 (638 low/high-m cells); k=4 far-range min margin +82.53 (738 low/high-m cells); k=5 far-range min margin +80.57 (824 low/high-m cells); k=6 far-range min margin +79.24 (902 low/high-m cells); k=7 far-range min margin +78.32 (977 low/high-m cells); k=8 far-range min margin +77.68 (1040 low/high-m cells); k=9 far-range min margin +77.26 (1105 low/high-m cells); k=10 far-range min margin +77.00 (1166 low/high-m cells)
+[PASS] AUD-BGE-CONSTRUCT
+    3 direct-construction cells (my own layer x h-sphere code): k=3 N=2^20 (d,m)=(7,3) |S|=210 bound=5.0 APfree=True/True plugback-margin=+7.602; k=4 N=2^20 (d,m)=(8,2) |S|=70 bound=3.2 APfree=True/True plugback-margin=+7.957; k=7 N=2^24 (d,m)=(12,2) |S|=924 bound=24.2 APfree=True/True plugback-margin=+13.480
+[PASS] AUD-BGE-CONSTANTS
+    BEHREND_GEN.md §6.3 table (8 rows) == formula C_k=2sqrt((k+1)ln2)+1 and asymptotic 2sqrt(k ln2): all 16 numeric cells exact
+[PASS] AUD-ENVELOPE
+    444 inequality checks on 200 random (k,N,L) triples via the certified tables: U-GEN-0, BLOCK, SLIDE-GEN all hold; stones (61,19),(42,22),(55,36),(43,31),(45,36) exact; M-1 ladder r3<=r4<=r5<=r6<=r7 on the common range — zero violations
+[PASS] AUD-FOURIER-EXACT
+    F1 verified EXACTLY in F_q (my own DFT, roots of unity of order p): p=101: exact F_q identity (3 primes q, my DFT) verified on 3 random sets + Parseval; p=1009: exact F_q identity (3 primes q, my DFT) verified on 2 random sets + Parseval; edge empty: T=0 identity exact; edge full: T=10201 identity exact; edge single: T=1 identity exact
+[PASS] AUD-DEVIATION-K
+    order-k deviation identity machinery, exact F_q verification: k=3 p=11: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=11); k=3 p=13: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=6); k=4 p=11: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=3); k=4 p=13: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=1); k=5 p=11: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=2); k=5 p=17: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=6); k=6 p=13: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=19); k=7 p=17: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=7); k=8 p=17: layers s=1,2 vanish exactly; assembly + full-layer identity exact (T=27); EDGE k=4 p=3: layer S={0,3} = 18 != 0 — the p > k hypothesis of the deviation identity is LOAD-BEARING (vanishing fails exactly as predicted)
+[PASS] AUD-TGEN
+    T-GEN at k=4,N=12,p=53: all 2233 4-AP-free subsets (banked nonempty count 2232 == 2232; my sweep adds the empty set) cyclically 4-AP-free (0 violations); negative control {1,5,9,10} 4-AP-free in Z but cyclic 4-AP (x,d)=(10, 4) mod 13 — the window bound p > kN is load-bearing
+[PASS] AUD-RKVARN
+    RK-VARN-GEN constants recomputed by my own census at N=1000, plug-backs with two independent counters: k=4 d=0.65: #C=11700 S_min=259102 DIV=273 c_k>=3.117e-07 (doc 3.12e-07) plug-back ok; k=4 d=0.70: #C=11700 S_min=290640 DIV=273 c_k>=6.088e-06 (doc 6.10e-06) plug-back ok; k=4 d=0.75: #C=11700 S_min=322930 DIV=273 c_k>=1.200e-05 (doc 1.20e-05) plug-back ok; k=5 d=0.75: #C=8766 S_min=315990 DIV=351 c_k>=6.208e-08 (doc 6.20e-08) plug-back ok; k=5 d=0.80: #C=8766 S_min=348474 DIV=351 c_k>=4.933e-06 (doc 4.90e-06) plug-back ok; k=6 d=0.80: #C=11408 S_min=355178 DIV=164 c_k>=7.774e-07 (doc 7.80e-07) plug-back ok; k=7 d=0.86: #C=10868 S_min=394026 DIV=147 c_k>=2.100e-06 (doc 2.10e-06) plug-back ok
+[PASS] AUD-VGEN
+    V-GEN band/copy machinery recomputed at the banked instances + copy cap on a planted set: (m=5,N=400): D0=5 minnu=25 >= m*D0=25 #C0=1940 <= N*D0=2000 band-excl=40; (m=9,N=1296): D0=4 minnu=36 >= m*D0=36 #C0=5104 <= N*D0=5184 band-excl=64; (m=14,N=3136): D0=4 minnu=56 >= m*D0=56 #C0=12414 <= N*D0=12544 band-excl=104; planted greedy 3-AP-free set in [1,1296]: worst copy occupancy 4 <= r_3(9)=5
+[PASS] AUD-LOGDECAY
+    LOGDECAY chain re-derived at 60 digits, my own two methods: anchors: ell2=17.504390 coef=0.552008 h(4e7)=10200526; L*=2.9268e+07 (N2 above by 1.0732e+07); boundary+extremes: chain and direct tower both green; negative controls fire (eps(1e6)=0.6062 > 1/8; chain fails at 2.9e7)
+[PASS] AUD-NEGCTL
+    planted r_3(10)=6 detected (true 5); planted r_4(4)=4 detected (true 3 = N - floor(N/4), the floor law); corrupted Fourier identity (swapped exponents) detected by the exact F_q check; D4 demonstrated: at the k=7 worst cell with C_7-0.4 the OLD banked margin formula passes (5.432) while the TRUE margin fails (-0.114) — the omitted /d^2 made the banked check vacuous by 2 ln d; planted 3-AP in a Behrend set detected by both my scanners
+[PASS] AUD-K3REPRO
+    k=3 banked reproduction on 3 cells: (d,m)=(4,3): banked 12, mine 12 (ledger 12), AP-free=True; (d,m)=(3,5): banked 6, mine 6 (ledger 6), AP-free=True; (d,m)=(4,5): banked 24, mine 24 (ledger 24), AP-free=True
+==============================================================================
+AUDIT ENGINE: 16/16 checks green, wall 81.1s
+AUDIT142_ENGINE_GREEN=1

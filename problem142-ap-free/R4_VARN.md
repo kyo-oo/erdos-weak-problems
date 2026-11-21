@@ -15,7 +15,11 @@ two codes) for M = 1..16:
 
 | M | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 |
 |---|---|---|---|---|---|---|---|---|---|----|----|----|----|----|----|----|
-| r_4(M) | 1 | 2 | 3 | 4 | 4 | 5 | 5 | 6 | 7 | 8 | 8 | 8 | 9 | 9 | 10 | 10 |
+| r_4(M) | 1 | 2 | 3 | 3 | 4 | 5 | 5 | 6 | 7 | 8 | 8 | 8 | 9 | 9 | 10 | 10 |
+
+(W81-142B audit correction: the M=4 cell previously read 4 — the exhaustive
+truth is 3, since {1,2,3} is 4-AP-free while the full interval {1,2,3,4} is
+the 4-AP with d=1; consistent with U-GEN-0: r_4(4) <= 4 - floor(4/4) = 3.)
 
 Witnesses recorded in the receipts (e.g. r_4(8) = 6 with witness
 {1,2,3,5,6,8}; r_4(16) = 10 with witness {1,2,4,5,7,8,9,12,14,15}).
