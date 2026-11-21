@@ -100,3 +100,10 @@ claims (retained below, superseded where marked) are the bank.
   }
 ]
 ```
+
+## W81 (W81-61A lane)
+
+- C61-P5CROSS — Theorem P5-CROSS (complete): the z-stratum cross law; proof = the induced-P5 argument. See PRIMES_W81.md §1.
+- C61-C5ANCHORS — Theorems C5-1ANCHOR + C5-2ANCHOR (complete): the triangle-anchor forbidden configurations; proofs = the induced-C5 cycle arguments. See PRIMES_W81.md §1.
+- C61-TOWERCAP-P5BULL — Theorem TOWER-CAP (complete): c(P5), c(bull) <= log2/log5 = 0.430676 via the C5 substitution tower (P5-free and bull-free at every level, hom = 2^t on 5^t). See PRIMES_W81.md §1.
+- C61-PRIMES-CENSUS — the W81 prime census (complete finite facts): h-tables, n^0.43 floors (43,396 graphs), the 36-pair anchor table, the bull I-anchor concentration, the z-only map (372 graphs). See PRIMES_W81.md §2.

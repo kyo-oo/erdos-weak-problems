@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #61 — 2026-11-20T00:21:50
+OFFICIAL GATE RECEIPT — problem #61 — 2026-11-21T16:24:14
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-61-erdos-hajnal
-Claims in solution ledger: 15
+Claims in solution ledger: 19
 ==============================================================================
 [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cyclic_graphs module (verbatim cells 2/6/7/9/11/13/14) imports; its own asserts hold (367 in C_7^5; 81/324/1458 in C_9^3..5; 754 in C_11^4)
 [PASS] (official) O-CYC7-5 — official evaluate(num_nodes=7, n=5) == 367 (official cell-6 priority)
@@ -20,7 +20,8 @@ Claims in solution ledger: 15
 [PASS] (control) N-CORRUPT-SIZE — corrupted expected size (81 -> 80) is REJECTED by the official-lane equality check
 [PASS] (control) N-PLANT-EDGE — planted adjacent pair ((0,1,2),(1,2,3)) in an independent-set candidate is DETECTED by the independence checker
 [PASS] (control) N-COGRAPH — planted induced P4 in a cograph is DETECTED by the P4 filter
+[PASS] (control) S-PRIMES-W81 — The W81 five-vertex prime battery: P5-CROSS, C5-1/2-ANCHOR (complete induced-subgraph proofs), TOWER-CAP-P5/BULL, and the full census — 22/22 green
 ==============================================================================
-CHECKS: 14/14 passed (official=4, solution=7, controls=3)
-WALL: 419.27s
+CHECKS: 15/15 passed (official=4, solution=7, controls=4)
+WALL: 439.29s
 VERDICT: YOUR SOLUTION IS OKAY
