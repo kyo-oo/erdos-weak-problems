@@ -9,3 +9,8 @@
 [ladder 14:40:42] n=6->7: |bank|=242 |C|=242 miss=0 extra=0 parents=20 cells=1700 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.6s -> SET EQUALITY OK
 [ladder 14:41:09] n=7->8: |bank|=6405 |C|=6405 miss=0 extra=0 parents=242 cells=39204 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=27.0s -> SET EQUALITY OK
 [ladder 14:41:09] LADDER GREEN — n=4..8 SET EQUALITY at every level; the C port is the python machinery
+[grind 14:47:04] resume: 0/6405 parents done, census lines 0, this run: 16 parents max, workers=2
+[grind 14:47:13] resume: 0/6405 parents done, census lines 0, this run: 16 parents max, workers=2
+[grind 14:47:13] launched chunk 0 (8 parents)
+[grind 14:47:13] launched chunk 1 (8 parents)
+[grind 14:47:25] chunk 1: +8 parents (8/6405; hull<=4: 8/5158), +2491 new types (census 2491), new-hull-hist {3: 1992, 4: 499}, C-wall 6s, total 12s
