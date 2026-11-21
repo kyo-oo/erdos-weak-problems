@@ -340,3 +340,5 @@
 [grind 17:06:20] chunk 149: +24 parents (3800/6405; hull<=4: 3800/5158), +477 new types (census 286983), new-hull-hist {4: 53, 5: 424}, C-wall 20s, total 449s
 [grind 17:06:20] launched chunk 151 (24 parents)
 [grind 17:06:23] chunk 150: +24 parents (3824/6405; hull<=4: 3824/5158), +459 new types (census 287442), new-hull-hist {4: 116, 5: 343}, C-wall 21s, total 453s
+[grind 17:06:23] wall budget 520s at 453s — draining 1 running chunks, deferring 107
+[grind 17:06:44] chunk 151: +24 parents (3848/6405; hull<=4: 3848/5158), +499 new types (census 287941), new-hull-hist {4: 154, 5: 345}, C-wall 22s, total 474s
