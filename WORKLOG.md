@@ -5093,3 +5093,13 @@ carrying complete structural packages with first in-frame exponent caps
 f(n)=2^{n−2}+1 stands for n ≥ 7 (f(6)=17 = the named next stone).
 
 The engine never stops; it never lies. In English, always.
+
+**W81 CI VERDICT (sealed):** run 44956868932 at f62e72f — COMPLETED, SUCCESS,
+all jobs green: gate-142-official (after the two CI fixes: z3 solver budgets
+60s→240s with honest retry + mpmath added to the runner deps — the AUD-LOGDECAY
+60-digit re-derivation needs it), gate-61-official, gate-107-official (THE
+f(5)=9 CERTIFICATE GREEN ON GITHUB ACTIONS), gate-406-official, and every
+kernel job (a/b/c/s060/142a/142d/142k/142cmp/61k/61cmp/107k/107cmp) —
+the full 16-job board.
+
+The engine never stops; it never lies.
