@@ -116,3 +116,30 @@ are the wall's new address — CAP(185) stands as the kill chain.
   cleanly under the rebase.
 
 The engine never stops; it never lies.
+
+---
+
+## F. THE CI WAR — THE FINAL VERDICT (5 repair rounds)
+
+| Round | Commit | Verdict | Errors |
+|---|---|---|---|
+| r0 (first exposure) | fb243c9 | kernel-b RED (only K73) | 34 |
+| r1 | 441cad1 | kernel-b RED (only K73) | 15 |
+| r2 | 33fa678 | kernel-b RED (only K73) | 4 (parse cascade) |
+| r3 | d9019d2 | kernel-b RED (only K73) | 4 (the ';' parse) |
+| r4 | 1353da0 | kernel-b RED (only K73) | 3 (shallow) |
+| **r5 (FINAL)** | **b6d4044** | **16/16 JOBS GREEN — RUN-LEVEL SUCCESS (run 44947619392)** | **0** |
+
+**KERNEL 73 RECEIPTS (all constructive-clean, zero sorryAx):**
+pow4_cut_residue_exact [propext, Quot.sound] · rider_second_digit_residue
+[propext, Classical.choice, Quot.sound] · diagonal_window_law ·
+window_fire_level1-5 (including the NEW levels 4 and 5) ·
+fire_1296_row_nine · fire_14094_row_eleven · fire_42282_row_twelve ·
+pow4_killing_trit [propext, Quot.sound] · wheel_fire_exists ·
+wheel_fire_unique. Battery 52/52 in CI. ERDOS406_BLOCKLAW_KERNEL_GREEN.
+
+**The heal of DustFamily406 held green across every round** (the S078
+claim's verification basis restored). The queue congestion (two ~50min
+stalls) cost wall time; the verdicts are what count.
+
+THE ENGINE NEVER STOPS; IT NEVER LIES.

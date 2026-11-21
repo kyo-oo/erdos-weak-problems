@@ -1067,3 +1067,11 @@ streams, Lean-portable exactly as the paper derivation shows. The named
 next lanes: the block-3 kernel port + the deep-survivor attack (u = 7,
 331, 400, 463); the v₂* engine re-run (the CAP falsification hunt); the
 entropy law; Frame W.
+
+**THE S079 FINAL VERDICT (the CI war, 5 repair rounds):** run 44947619392
+at b6d4044 — **16/16 JOBS GREEN, RUN-LEVEL SUCCESS**. Kernel 73
+BlockLaw406.lean fully certified: every receipt constructive-clean
+[propext, Classical.choice, Quot.sound], zero sorryAx; battery 52/52 in
+CI; the comparator gate 32/32 (24 claims); DustFamily406's heal held
+green across every round. The board is the greenest in campaign history
+(seven 406 kernels: 38, 68, 69, 70, 71, 72, 73 — all CI-GREEN).
