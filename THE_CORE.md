@@ -896,3 +896,70 @@ full-proof campaign continues.
 - **Registry: 41 kills CI-green.** The wave-1 firing order stands:
   P1108 → P686 → P727 → P1056 next (the square front, the k=3
   witness-lottery lanes all firing in engines).
+
+---
+
+## §20. SESSION 077 ADDENDUM (2026-11-21) — THE WAR-COUNCIL ROUND ON #406 (LX refuted; the 2-adic budget tower banked; the dust edge armed)
+
+**BOSS's order:** "TARGET #406 ONLY... crack the HFTAIL hypothesis completely...
+read the commit history... using google deepmind statements about those problem
+use comparator, directly instead of lean (challenge + solution file)...
+build a system that protects the sandbox even if we completely reset it."
+
+**The war council (MATHS §6 Mode B — two dispatched agents, both returned
+full reports):**
+- **ATTACKER:** the S076-named LX conjecture (v₂(cantor n) ≤ 2·popcount₃(n))
+  is **FALSE** — the minimal counterexample `3^0+3^7+3^8+3^13 = 1,603,072 =
+  2^9·3131` (0/1-ternary, popcount 4, v₂ = 9 > 8) sits ONE leading position
+  past the S076 census boundary (positions < 12). The falsity is total (the
+  far-cap family `13+3^d` — the 2-adic dlog of −13 in ⟨3⟩ = {1,3} mod 8 —
+  at popcount 4 and every even popcount ≥ 4; LX provable only ≤ 3).
+- **STRATEGIST:** the surface inventory — weakest sufficient surface = the
+  dust anti-clustering (any base a > 1 kills census-free); CapLaw406
+  re-confirmed monolith-free (the kill chain: CAP(185) ALONE; the one
+  assembly gap = the noTernaryTwo census bridge); Frame W (the 3-adic
+  log-word decomposition) and Frame D (the dust edge) extracted.
+
+**The S077 deliveries (all pushed, commit 617f71b + the vault seals):**
+1. **DustLaw406 HEALED** (7 CI errors root-killed: the `digit3_lt_three`
+   range law; the `dustStep_val0/1/2` value-lemma idiom; the full
+   `dustStep_spec` rewrite with manual membership destructure; the defeq
+   bridges) + **THE DUST-EDGE THEOREM** (`dust_edge`: a dust member with
+   `4^r < 3^(j+1)` is a rider outright — Frame D banked).
+2. **KERNEL 70 `TwoAdic406.lean`** (the 2-adic twin of the DustLaw): the
+   square certificate, the near-unity congruence, the period twin
+   (ord_{2^t}(3) = 2^(t−2)), the digit representation, **THE 2-ADIC BUDGET
+   TOWER** (`budget_tower`: n ≡ censusSum(s,n,M) mod 2^(s+2) — the digit
+   census weighted by residue-class powers; level 1 = the mod-8 budget),
+   **THE RIDER TOWER** (every rider's census solves the tower at every
+   level s+2 ≤ 2K), the pairing laws, the LX refutation receipts
+   (kernel-decided), battery406c.py **20/20 GREEN**.
+3. **The official comparator extended** (BOSS's lane): solution ledger 15
+   claims; driver +S-TOWER +S-TOWER-LIVE +S-DUST-EDGE +N-LX +N-TOWER;
+   **GATE 21/21 PASS — "YOUR SOLUTION IS OKAY"** (wall 29.3s).
+4. **The sandbox protection system rebuilt** (fresh machine): backup.sh
+   engine (seal → push campaign → force-refresh sandbox-vault), the
+   bashrc anchor, cron guardian 540617 (8h fixed-rate), the token vault
+   (.secrets, chmod 600, NEVER in git), BACKUP.md anchor + the S077
+   runbook in-repo.
+
+**THE HONEST BOUNDARY (unchanged):** the middle-digit wall stands — CAP(C)
+open at any explicit C. The corrected LX successor: **THE ENTROPY LAW**
+v₂(n) ≲ k·log₂(eM/k) + O(1) — rider-killing if proven (peaks below 2K at
+rider scale). The named next lanes: (1) the census bridge (composes with
+dust_edge into the first infinite-family anti-clustering law); (2) the
+entropy law; (3) Frame W.
+
+**THE LESSON LEDGER (S077 additions):**
+- **L91 (THE ONE-LEVEL-SHORT LAW):** a conjecture evidenced "through N" is
+  a conjecture about N+1 — always probe the boundary +1 before any proof
+  effort (LX died at exactly position 13 = the census boundary 12 + 1).
+- **L92 (THE TWIN-SWAP LAW):** when a campaign architecture works for one
+  base pair, SWAP the bases and check the twin (the DustLaw cube
+  certificate for (4,3) became the square certificate for (3,2) — the
+  budget tower was sitting inside the campaign's own machinery all along).
+- **L93 (THE GREP -F/-E LAW):** CI receipt greps with alternation patterns
+  `a|b` MUST use `grep -E`; `grep -F` with a pipe character is a literal
+  that never matches — six dust receipts were silently unmatchable.
+
+The engine never stops; it never lies. In English, always.

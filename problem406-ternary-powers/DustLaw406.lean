@@ -305,8 +305,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         exact absurd (by decide) hQ
     · rw [hd, dustStep_val2 hd]
       exact ⟨fun _ => by omega,
-        fun _ => List.mem_cons.2 (Or.inr
-          (List.mem_singleton.2 (by rw [Nat.one_mul])))⟩
+        fun _ => List.mem_cons.2 (Or.inl (by rw [Nat.one_mul]))⟩
   · -- the t = 2 child: dead exactly when the parent digit is 0
     rw [ht2]
     rcases ErdosTernary2.lt_three_cases ((digit3 (4^r) (j+1)) % 3)
