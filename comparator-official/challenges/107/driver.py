@@ -773,6 +773,59 @@ def run_solution_checks(challenge, solution):
         "The order-type machinery: counts reproduced (n=4: 2, n=5: 3 in-gate; n=6: 16, n=7: 135 certified by the insertion enumeration), the six-point refutation counterexample re-verified exactly, the n=8 realization-diversity arithmetic (3313/3315 + the root-cause: arrangement cells are not type-invariant)",
         ok, det, time.time()-t0))
 
+    # S-AUDIT-W81 (W81-107B / W81-107B-F): the auditor/doubler engine —
+    # fresh-code independent re-verification of the whole #107 package
+    # (no campaign engine code imported; exact int/Fraction arithmetic).
+    # The comparator battery runs --stage gate (cache-independent): A1
+    # f(4)=5 both directions, A2 the banked 8-point witnesses, A3 the
+    # ES-SANDWICH rebuild n=3..8 (max-convex = n-1), A4 the U-BIS closed
+    # form, A5 the binomial table + VANDERMONDE-DOUBLE identities, A8 the
+    # (3,3) CC three-case + GP-ELIM N>=2 boundary lanes, A7 negative
+    # controls. PASS = exit 0, >= 8 PASS lines, 0 FAIL lines, and the
+    # receipts file sealed with AUDIT_ENGINE_GREEN=1.
+    t0 = time.time()
+    AUDIT_ENGINE = os.path.join(CAMP, "problem107-happy-ending",
+                                "engine107audit_w81.py")
+    AUDIT_RECEIPTS = os.path.join(CAMP, "problem107-happy-ending",
+                                  "receipts107audit_w81.txt")
+    if os.path.isfile(AUDIT_ENGINE):
+        try:
+            proc = subprocess.run(
+                [sys.executable, AUDIT_ENGINE, "--stage", "gate"],
+                capture_output=True, text=True, timeout=600,
+                cwd=os.path.dirname(AUDIT_ENGINE))
+            out = proc.stdout + proc.stderr
+            n_pass = out.count("PASS ")
+            n_fail = out.count("FAIL ")
+            green = "AUDIT_ENGINE_GREEN=1" in out
+            receipts_ok = False
+            receipts_det = "receipts file missing"
+            if os.path.isfile(AUDIT_RECEIPTS):
+                with open(AUDIT_RECEIPTS, encoding="utf-8") as f:
+                    rec = f.read()
+                receipts_ok = ("AUDIT_ENGINE_GREEN=1" in rec
+                               and "FAIL" not in rec
+                               and rec.count("PASS ") >= 8
+                               and "stage gate" in rec)
+                receipts_det = (f"receipts sealed: {rec.count('PASS ')} "
+                                f"PASS lines, 0 FAIL, "
+                                f"green={'AUDIT_ENGINE_GREEN=1' in rec}")
+            ok = (proc.returncode == 0 and n_fail == 0 and n_pass >= 8
+                  and green and receipts_ok)
+            tail = [l for l in out.strip().splitlines()
+                    if l.startswith(("PASS", "FAIL", "TOTAL",
+                                     "AUDIT_ENGINE_GREEN"))][-4:]
+            checks.append(_chk(
+                "S-AUDIT-W81",
+                "the W81-107B auditor/doubler engine --stage gate (fresh code: f(4)=5 both directions, the banked 8-point no-convex-5 witnesses, the ES-SANDWICH lower-side rebuild n=3..8 with max-convex=n-1, the U-BIS closed form n=3..11, the binomial table + VANDERMONDE-DOUBLE, the (3,3) CC three-case + GP-ELIM N>=2 boundary lanes, negative controls): exit 0, >= 8 PASS, 0 FAIL, receipts sealed AUDIT_ENGINE_GREEN=1",
+                ok, tail + [receipts_det], time.time() - t0))
+        except subprocess.TimeoutExpired:
+            checks.append(_chk("S-AUDIT-W81", "audit engine within 600s",
+                               False, "timeout"))
+    else:
+        checks.append(_chk("S-AUDIT-W81", "audit engine present", False,
+                           AUDIT_ENGINE + " missing"))
+
     return checks
 
 

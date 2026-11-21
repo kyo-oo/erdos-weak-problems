@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #107 — 2026-11-20T00:22:40
+OFFICIAL GATE RECEIPT — problem #107 — 2026-11-21T15:57:21
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -16,11 +16,12 @@ Claims in solution ledger: 13
 [PASS] (solution) S-CUPCON — Theorem CUPCON: every k-cup is in convex position (the between-adjacent-slopes supporting-line proof, engine-verified on generated cups k=3..8) — with Theorem CC at (6,6): f(6) <= 71 complete and in-package
 [PASS] (solution) S-CLUSTER7 — The 32-point n=7 witness cluster family: T_i = E(7-i,i+2), sizes C(5,i) = 1+5+10+10+5+1 = 32, every cluster certified (GP, no (7-i)-cup, no (i+2)-cap) — the Lovasz/Morris-Soltan blueprint components
 [PASS] (solution) S-OT8 — The order-type machinery: counts reproduced (n=4: 2, n=5: 3 in-gate; n=6: 16, n=7: 135 certified by the insertion enumeration), the six-point refutation counterexample re-verified exactly, the n=8 realization-diversity arithmetic (3313/3315 + the root-cause: arrangement cells are not type-invariant)
+[PASS] (solution) S-AUDIT-W81 — the W81-107B auditor/doubler engine --stage gate (fresh code: f(4)=5 both directions, the banked 8-point no-convex-5 witnesses, the ES-SANDWICH lower-side rebuild n=3..8 with max-convex=n-1, the U-BIS closed form n=3..11, the binomial table + VANDERMONDE-DOUBLE, the (3,3) CC three-case + GP-ELIM N>=2 boundary lanes, negative controls): exit 0, >= 8 PASS, 0 FAIL, receipts sealed AUDIT_ENGINE_GREEN=1
 [PASS] (control) N-BADPROGRAM — the OFFICIAL Evaluator rejects a broken program (no registration)
 [PASS] (control) N-PLANT — a planted convex pentagon is DETECTED by the hull checker
 [PASS] (control) N-BINOM — a corrupted binomial table entry (21 -> 22) is DETECTED by the equality check
 [PASS] (control) N-UNCOND-BOARD — the corrupted H107 threshold (the +1 dropped) is REFUTED: on all-collinear boards (t=N, N=3..10) the corrupted bound claims a convex 3-gon but the exact orientation and hull checkers both find zero convex triples; the true threshold N+1 makes no claim
 ==============================================================================
-CHECKS: 14/14 passed (official=2, solution=8, controls=4)
-WALL: 5.62s
+CHECKS: 15/15 passed (official=2, solution=9, controls=4)
+WALL: 42.38s
 VERDICT: YOUR SOLUTION IS OKAY
