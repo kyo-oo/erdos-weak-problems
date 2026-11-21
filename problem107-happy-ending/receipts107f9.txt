@@ -227,3 +227,5 @@
 [grind 16:53:41] chunk 94: +24 parents (2480/6405; hull<=4: 2480/5158), +1157 new types (census 235529), new-hull-hist {4: 292, 5: 865}, C-wall 23s, total 164s
 [grind 16:53:41] launched chunk 96 (24 parents)
 [grind 16:54:00] chunk 95: +24 parents (2504/6405; hull<=4: 2504/5158), +1063 new types (census 236592), new-hull-hist {4: 242, 5: 821}, C-wall 23s, total 184s
+[grind 16:54:02] launched chunk 97 (24 parents)
+[grind 16:54:12] chunk 96: +24 parents (2528/6405; hull<=4: 2528/5158), +1016 new types (census 237608), new-hull-hist {4: 268, 5: 748}, C-wall 25s, total 195s
