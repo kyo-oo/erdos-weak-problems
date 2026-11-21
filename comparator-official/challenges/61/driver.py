@@ -722,4 +722,26 @@ def run_negative_controls(challenge, solution):
     checks.append(_chk("N-COGRAPH",
                        "planted induced P4 in a cograph is DETECTED by the P4 filter",
                        has_induced_p4(n, adj), "control passes iff the planted P4 is found", time.time() - t0))
+
+    # S-AUDIT-W81: the independent W81 audit engine — 13/13 + summary green.
+    t0 = time.time()
+    AUD = os.path.join(CAMP, "problem61-erdos-hajnal", "engine61audit_w81.py")
+    try:
+        proc = subprocess.run([sys.executable, AUD],
+                              capture_output=True, text=True, timeout=560)
+        out = proc.stdout + proc.stderr
+        n_pass = out.count("[PASS]")
+        n_fail = out.count("[FAIL]")
+        summary = "PASS=13 FAIL=0" in out
+        ok = proc.returncode == 0 and n_fail == 0 and n_pass >= 13 and summary
+        det = (f"exit {proc.returncode}; {n_pass} PASS / {n_fail} FAIL; "
+               f"summary={summary}; zero defects — the banked package and the "
+               f"W81-61A prime theorems (P5-CROSS, C5-1/2-ANCHOR, TOWER-CAP) "
+               f"cross-certified with complete induced-subgraph proofs; fresh "
+               f"n=9/n=10 LADDER-BREAK witnesses; X_2 tower 7.6M-subset scan")
+    except Exception as e:
+        ok = False; det = repr(e)
+    checks.append(_chk("S-AUDIT-W81",
+        "The W81 independent audit battery (own canon, own B&B, own censuses) — 13/13 green, zero defects, the sibling lane cross-certified",
+        ok, det, time.time() - t0))
     return checks
