@@ -312,3 +312,5 @@
 [grind 17:03:23] chunk 135: +24 parents (3464/6405; hull<=4: 3464/5158), +391 new types (census 280821), new-hull-hist {4: 136, 5: 255}, C-wall 20s, total 272s
 [grind 17:03:25] launched chunk 137 (24 parents)
 [grind 17:03:28] chunk 136: +24 parents (3488/6405; hull<=4: 3488/5158), +349 new types (census 281170), new-hull-hist {3: 3, 4: 127, 5: 219}, C-wall 19s, total 278s
+[grind 17:03:28] launched chunk 138 (24 parents)
+[grind 17:03:47] chunk 137: +24 parents (3512/6405; hull<=4: 3512/5158), +430 new types (census 281600), new-hull-hist {4: 86, 5: 344}, C-wall 19s, total 296s
