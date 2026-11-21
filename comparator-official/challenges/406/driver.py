@@ -31,6 +31,11 @@ BATTERY_B = os.path.join(CAMP, "problem406-ternary-powers", "caplaw",
 EXTRA_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
                             "ExtraLaws406.lean")
 BATTERY_C = os.path.join(CAMP, "problem406-ternary-powers", "battery406c.py")
+BATTERY_D = os.path.join(CAMP, "problem406-ternary-powers", "battery406d.py")
+ANTICLUSTER_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
+                                  "AntiCluster406.lean")
+DUSTFAMILY_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
+                                 "DustFamily406.lean")
 TWOADIC_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
                               "TwoAdic406.lean")
 DUST_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
@@ -364,6 +369,103 @@ def run_solution_checks(challenge, solution):
         "S077 the dust-edge theorem live: the tree doubles to level 10 (2^j alive per level), every edge member (4^r < 3^(j+1)) is a rider, and the edge members below 100 are exactly {0,1,4}",
         edge_ok, f"edge members: {edge_members}; below 100: {edge_small}",
         time.time() - t0))
+
+    # S-CENSUS-BRIDGE (S078): the named assembly gap closed — the even
+    # census in noTernaryTwo form, live dual-method + kernel symbols.
+    t0 = time.time()
+    good_dm = []
+    for k in range(0, 501, 2):
+        if no_ternary_digit_two(2 ** k):
+            good_dm.append(k)
+    good_arr = []
+    for k in range(0, 501, 2):
+        if no_ternary_digit_two_arr(2 ** k):
+            good_arr.append(k)
+    bridge_ok = good_dm == [0, 2, 8] == good_arr
+    try:
+        ka = open(ANTICLUSTER_KERNEL, encoding="utf-8").read()
+        bridge_ok = bridge_ok and all(sym in ka for sym in (
+            "theorem noTernaryTwo_of_digits", "theorem digits_of_noTernaryTwo",
+            "theorem cantorScan_eq", "theorem noTwo_even_census",
+            "theorem rider_edge_anticluster",
+            "theorem rider_edge_anticluster_deep"))
+    except Exception as e:
+        bridge_ok = False
+    checks.append(_chk(
+        "S-CENSUS-BRIDGE",
+        "S078 the census bridge live: dual-method even census (divmod + array) — the only even k <= 500 with 2^k 0/1-ternary are {0,2,8}; AntiCluster406.lean symbols present (verdict bridge both directions, sharp-fuel scanner, even census in verdict form, the anti-clustering law and its deep form)",
+        bridge_ok, f"good exponents divmod = {good_dm}; array = {good_arr}",
+        time.time() - t0))
+
+    # S-ANTICLUSTER (S078): the first infinite-family anti-clustering law,
+    # live: levels 0..20 x r <= 250, plus battery406d ALL GREEN.
+    t0 = time.time()
+    anti_ok = True
+    anti_detail = []
+    for r in range(0, 251):
+        t = []
+        n = 4 ** r
+        while n:
+            t.append(n % 3)
+            n //= 3
+        death = next((i for i, x in enumerate(t) if x == 2), None)
+        for j in range(0, 21):
+            if 4 ** r >= 3 ** (j + 1):
+                continue
+            if (death is None or death > j) and r not in (0, 1, 4):
+                anti_ok = False
+                anti_detail.append(f"VIOLATION j={j} r={r}")
+    proc = subprocess.run([sys.executable, BATTERY_D], capture_output=True,
+                          text=True, timeout=900)
+    out = proc.stdout + proc.stderr
+    anti_ok = anti_ok and proc.returncode == 0 and "BATTERY406D_GREEN=1" in out
+    anti_detail.append("battery406d: " + ("GREEN" if "BATTERY406D_GREEN=1" in out
+                                           else "FAILED"))
+    checks.append(_chk(
+        "S-ANTICLUSTER",
+        "S078 the rider-edge anti-clustering law live: for every level j in [0,20] and r <= 250 with 4^r < 3^(j+1), surviving the level-j digit test forces r in {0,1,4} — the first infinite-family anti-clustering law; battery406d.py ALL GREEN (dual-method even census, anti-clustering, family laws to level 16, shadow dust + pi-points, window increment)",
+        anti_ok, "; ".join(anti_detail[-6:]), time.time() - t0))
+
+    # S-FAMILY (S078): the five exact family laws, live to level 12.
+    t0 = time.time()
+    fam_ok = True
+    fam_detail = []
+    alive = [0]
+    for j in range(1, 13):
+        nxt = []
+        for r in alive:
+            d = (4 ** r // 3 ** (j)) % 3
+            for t in (0, 1, 2):
+                if (d + t) % 3 != 2:
+                    nxt.append(r + t * 3 ** (j - 1))
+        alive = sorted(set(nxt))
+        c1 = sum(1 for r in alive if r % 9 == 1)
+        c4 = sum(1 for r in alive if r % 9 == 4)
+        c7 = sum(1 for r in alive if r % 9 == 7)
+        ct = sum(1 for r in alive if r % 3 == 0)
+        cm = sum(1 for r in alive if r % 3 == 2)
+        want = (2 ** (j - 2) if j >= 2 else None,
+                2 ** (j - 2) if j >= 2 else None, 0, 2 ** (j - 1), 0)
+        if j >= 2 and (c1, c4, c7, ct, cm) != want:
+            fam_ok = False
+            fam_detail.append(f"j={j}: {(c1, c4, c7, ct, cm)} != {want}")
+        if len(alive) != 2 ** j:
+            fam_ok = False
+            fam_detail.append(f"j={j}: |alive| = {len(alive)} != {2 ** j}")
+    try:
+        kf = open(DUSTFAMILY_KERNEL, encoding="utf-8").read()
+        fam_ok = fam_ok and all(sym in kf for sym in (
+            "theorem dust_mod3two_zero", "theorem dust_tower_card",
+            "theorem dust_fam7_zero", "theorem dust_fam1_card",
+            "theorem dust_fam4_card"))
+    except Exception as e:
+        fam_ok = False
+        fam_detail.append(repr(e))
+    checks.append(_chk(
+        "S-FAMILY",
+        "S078 the five exact family laws live: tree A to level 12 — fam1 = 2^(j-2), fam4 = 2^(j-2), fam7 = 0, tower = 2^(j-1), mod3two = 0 at every level; DustFamily406.lean symbols present",
+        fam_ok, "; ".join(fam_detail[-6:]) or "all levels exact",
+        time.time() - t0))
     return checks
 
 
@@ -412,6 +514,17 @@ def run_negative_controls(challenge, solution):
         "N-CAP-256",
         "corruption rejected: v2(256) = 8 = ternaryLog3(256) + 3 EXACTLY (equality, not violation -- the C=3 cap is tight at the largest rider and holds)",
         ok, "no violation", time.time() - t0))
+
+    # N-DEEP-315 (S078): the deep-threshold corruption must be rejected —
+    # at j = 314 the window does NOT yet cover r = 250 (the level-uniform
+    # law's threshold 315 is exactly tight).
+    t0 = time.time()
+    ok = not (2 ** 500 < 3 ** 315)  # 2^500 > 3^315: the window fails at 314
+    checks.append(_chk(
+        "N-DEEP-315",
+        "corruption rejected: 2^500 < 3^315 is FALSE (at level j = 314 the edge window does NOT cover r = 250 — the deep level-uniform anti-clustering law's threshold is exactly 315)",
+        ok, f"2^500 vs 3^315: {'<' if 2**500 < 3**315 else '>='} (window covers the census range from j = 315 on)",
+        time.time() - t0))
 
     # N-HALFLINE (S076): the corrupted half-line kill boundary must be
     # rejected: the law kills K=6 (2*4^6 >= 3^8) but NOT K=5 (2*4^5 < 3^7)

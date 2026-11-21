@@ -161,10 +161,10 @@ theorem digits_of_noTernaryTwo : ∀ n : Nat,
       · rw [if_neg hm] at hval
         have hd3 : 0 < n := by omega
         have hdiv : n / 3 < n := Nat.div_lt_self hd3 (by decide)
-        rcases Nat.eq_zero_or_succ q with hq0 | ⟨m, hm2⟩
-        · rw [hq0, digit3_zero]
+        rcases q with _ | m
+        · rw [digit3_zero]
           omega
-        · rw [hm2, digit3_succ]
+        · rw [digit3_succ]
           exact ih (n / 3) hdiv hval m
 
 /-! ## §2 THE SHARP-FUEL SCANNER — the decide-compatible twin -/
@@ -255,7 +255,6 @@ theorem noTwo_even_census (k : Nat) (hk : k ≤ 500) (hmod : k % 2 = 0)
   have hscan : cantorScan (2^(2 * (k / 2))) 316
       = noTernaryTwo (2^(2 * (k / 2))) :=
     cantorScan_eq 316 _ hlt
-  rw [← h2m] at hval
   rw [← h2m] at hscan
   have hc := (List.all_eq_true.mp evenCensus_chunk) (k / 2)
     (List.mem_range.mpr hm250)

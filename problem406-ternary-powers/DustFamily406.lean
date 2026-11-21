@@ -145,7 +145,11 @@ theorem filter_cons_two (f : Nat → Bool) (a b : Nat) :
 `m ∣ 3^j` (the child-residue law). -/
 theorem child_mod (m j r t : Nat) (hdiv : m ∣ 3^j) :
     (r + t * 3^j) % m = r % m := by
-  have hd : (t * 3^j) % m = 0 := Nat.mod_eq_zero_of_dvd ⟨t, by ring⟩
+  obtain ⟨c, hc⟩ := hdiv
+  have hd : (t * 3^j) % m = 0 := by
+    refine Nat.mod_eq_zero_of_dvd ⟨t * c, ?_⟩
+    rw [hc]
+    ring
   rw [Nat.add_mod, hd, Nat.add_zero]
 
 /-- **THE FAMILY-FILTER STEP LAW.**  If `m ∣ 3^j` and `f` is constant on
@@ -212,16 +216,14 @@ theorem dustJoin_filter_len {m : Nat} (j : Nat) (hdiv : m ∣ 3^j)
 /-- `9 ∣ 3^j` for `j ≥ 2` (the mod-9 family preservation). -/
 theorem dvd9_of_two_le (j : Nat) (hj : 2 ≤ j) : 9 ∣ 3^j := by
   refine ⟨3^(j-2), ?_⟩
-  rw [← Nat.pow_add]
-  congr 1
-  omega
+  rw [show (9:Nat) = 3^2 from rfl, ← Nat.pow_add,
+    show 2 + (j - 2) = j from by omega]
 
 /-- `3 ∣ 3^j` for `j ≥ 1` (the mod-3 family preservation). -/
 theorem dvd3_of_one_le (j : Nat) (hj : 1 ≤ j) : 3 ∣ 3^j := by
   refine ⟨3^(j-1), ?_⟩
-  rw [← Nat.pow_add]
-  congr 1
-  omega
+  rw [show (3:Nat) = 3^1 from rfl, ← Nat.pow_add,
+    show 1 + (j - 1) = j from by omega]
 
 /-! ## §4 THE FIVE EXACT FAMILY LAWS -/
 

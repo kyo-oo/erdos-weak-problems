@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T00:43:46
+OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T09:22:01
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-406-ternary-powers
-Claims in solution ledger: 15
+Claims in solution ledger: 18
 ==============================================================================
 [PASS] (official) O-CHAL-500 — verbatim Challenge.lean noTernaryDigitTwo twin: 2^n owns a ternary digit 2 for every n in [9,500] (dual-method: recursion + subtraction scan)
 [PASS] (official) O-WITNESSES — the corpus's three examples hold: 1, 4 = 1+3, 256 = 1+3+9+243 (n = 0, 2, 8 -- below the statement's floor 9, exactly as the addendum says)
@@ -19,15 +19,19 @@ Claims in solution ledger: 15
 [PASS] (solution) S-TOWER — battery406c.py (S077): the 2-adic budget tower dual-method (square certificate 3^(2^s)=1+2^(s+2)c, period twin, the tower on all 512 Cantor numbers < 3^9 x 4 levels, rider tower receipts at all legal levels, pairing laws, the census-window kill power, the dust-edge 26 members) (Lean compilation is kills.yml Kernel 70)
 [PASS] (solution) S-TOWER-LIVE — S077 the tower + LX refutation live: 256's digit census solves all 6 legal levels; 1603072 = 3^0+3^7+3^8+3^13 is 0/1-ternary with v2 = 9 > 2*4 (LX REFUTED, one position past the S076 census boundary); the far-cap 13+3^69 carries v2 = 11; kernel symbols present
 [PASS] (solution) S-DUST-EDGE — S077 the dust-edge theorem live: the tree doubles to level 10 (2^j alive per level), every edge member (4^r < 3^(j+1)) is a rider, and the edge members below 100 are exactly {0,1,4}
+[PASS] (solution) S-CENSUS-BRIDGE — S078 the census bridge live: dual-method even census (divmod + array) — the only even k <= 500 with 2^k 0/1-ternary are {0,2,8}; AntiCluster406.lean symbols present (verdict bridge both directions, sharp-fuel scanner, even census in verdict form, the anti-clustering law and its deep form)
+[PASS] (solution) S-ANTICLUSTER — S078 the rider-edge anti-clustering law live: for every level j in [0,20] and r <= 250 with 4^r < 3^(j+1), surviving the level-j digit test forces r in {0,1,4} — the first infinite-family anti-clustering law; battery406d.py ALL GREEN (dual-method even census, anti-clustering, family laws to level 16, shadow dust + pi-points, window increment)
+[PASS] (solution) S-FAMILY — S078 the five exact family laws live: tree A to level 12 — fam1 = 2^(j-2), fam4 = 2^(j-2), fam7 = 0, tower = 2^(j-1), mod3two = 0 at every level; DustFamily406.lean symbols present
 [PASS] (control) N-CERT — corruption rejected: 2^84 >= 3^53 is FALSE (the squeeze certificate cannot be inverted)
 [PASS] (control) N-BOUNDARY-185 — corruption rejected: 62*251 < 84*185 is FALSE (C=185 does NOT reach K=251 -- the census boundary is exactly tight)
 [PASS] (control) N-FAKE-RIDER — corruption rejected: 2^10 = 1024 = 1101221_3 is NOT a witness (the fourth rider does not exist below 2^40000)
 [PASS] (control) N-FLOOR-8 — corruption rejected: the challenge floor is 9, not 8 -- 2^8 = 256 IS 0/1-ternary (a statement claiming n >= 8 would be FALSE)
 [PASS] (control) N-CAP-256 — corruption rejected: v2(256) = 8 = ternaryLog3(256) + 3 EXACTLY (equality, not violation -- the C=3 cap is tight at the largest rider and holds)
+[PASS] (control) N-DEEP-315 — corruption rejected: 2^500 < 3^315 is FALSE (at level j = 314 the edge window does NOT cover r = 250 — the deep level-uniform anti-clustering law's threshold is exactly 315)
 [PASS] (control) N-HALFLINE — corruption rejected: the half-line law kills K=6 (2*4^6=8192 >= 3^8=6561) but NOT K=5 (2*4^5=2048 < 3^7=2187) -- the law is necessary, not sufficient; K=5 dies by digits, not magnitude
 [PASS] (control) N-LX — corruption rejected: the LX popcount-cap conjecture (v2 <= 2*popcount3) is FALSE — 1603072 = 3^0+3^7+3^8+3^13 is 0/1-ternary with popcount 4 and v2 = 9 > 8; any ledger still carrying LX as a claim is corrupt (the S077 refutation, one position past the S076 census boundary)
 [PASS] (control) N-TOWER — corruption rejected: the tower is an identity (n == census mod 2^(s+2)), not a zero-law — 4 = 3^0+3^1 has census 1+3 = 4 != 0 mod 8 (only RIDERS force census == 0, via n == 0 in the window)
 ==============================================================================
-CHECKS: 21/21 passed (official=4, solution=9, controls=8)
-WALL: 29.30s
+CHECKS: 25/25 passed (official=4, solution=12, controls=9)
+WALL: 34.94s
 VERDICT: YOUR SOLUTION IS OKAY

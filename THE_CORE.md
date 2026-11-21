@@ -963,3 +963,47 @@ entropy law; (3) Frame W.
   that never matches — six dust receipts were silently unmatchable.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S078 — THE ASSAULT ROUND (the census bridge + the anti-clustering law + the five family laws)
+
+**BOSS order:** crack the HFTAIL hypothesis completely — go full proof.
+Sandbox found reset; full restore from the progress vault (clone campaign
+at ded8aea, token re-armed). The map assembled: `the_act` = the even half
+is the whole remaining content; the rider condition = **C(K) = (4^K −
+1)/3^(v₃(K)+1) is a Cantor number**; every remaining named primitive is
+an anti-concentration statement on the cut word's tail.
+
+**The S078 deliveries:**
+1. **KERNEL 71 `AntiCluster406.lean`** (the S077-named lane #1 CLOSED):
+   the verdict bridge (noTernaryTwo ⟺ all digits avoid 2, both
+   directions); the sharp-fuel scanner (cantorScan_eq: fuel = digit
+   count); **THE EVEN CENSUS IN VERDICT FORM** (the assembly gap closed:
+   even k ≤ 500, verdict → k ∈ {0,2,8}, one legal 251-chunk decide);
+   **THE RIDER-EDGE ANTI-CLUSTERING LAW** (every level j: the dust's edge
+   window holds only {0,1,4} — the FIRST infinite-family
+   anti-clustering law); the deep level-uniform form (j ≥ 315: dust j ∩
+   [0,250] = {0,1,4} forever, threshold exactly tight).
+2. **KERNEL 72 `DustFamily406.lean`** (the five exact family laws, every
+   level forever): fam7 = 0 (row-2 fire), fam1 = 2^(j−2), fam4 = 2^(j−2)
+   (row families split the non-tower dust evenly), tower = 2^(j−1)
+   (tower sheets exactly half), mod3two = 0 (cut-row fire).
+3. **THE ASSAULT ENGINE** (assault406.py + assault406b.py + battery406d.py
+   6/6 GREEN): W's trits; **THE THREE π-POINTS** 2·W·π = −7/−1/+5 in ℤ₃
+   (all three non-natural 3-adics — the infinite shadow dust contains no
+   natural core); the shadow dust = exactly 2 classes per family with the
+   π-point always present (levels 4..12); the window increment law
+   trit_{s+1}(ω_{s+1}) = trit_{s+1}(ω_s) + 1 (the escalate-branch
+   engine); riders < 3^13 = {0,1,4}.
+4. **The official comparator extended**: ledger 15 → 18 claims; driver
+   +S-CENSUS-BRIDGE +S-ANTICLUSTER +S-FAMILY +N-DEEP-315; **GATE 25/25
+   PASS — "YOUR SOLUTION IS OKAY"** (wall 34.9s).
+
+**THE HONEST BOUNDARY (unchanged):** CAP(185) stands as the kill chain.
+New named lane: **the π-point lane** (the shadow dust's three fixed
+points are non-natural; proving no natural core carries the full shadow
+package kills the tower family's package carriers). The entropy law and
+Frame W stand.
+
+The engine never stops; it never lies. In English, always.

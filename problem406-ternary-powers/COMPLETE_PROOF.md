@@ -697,3 +697,142 @@ The kill chain remains: **CAP(185) alone** (everything else green,
 self-contained, monolith-free — the Strategist's provenance audit
 re-confirmed); the named next lanes: the census bridge (the dust-edge
 composition), the entropy law, the W-word tower decomposition.
+
+---
+
+## §12. THE S078 ASSAULT ROUND (the census bridge + the anti-clustering law + the five family laws)
+
+**Deliverable S078.** BOSS order: crack the `hTailF` hypothesis completely —
+go full proof. The round delivered the S077-named lane #1 in full, plus a
+new cardinality layer the assault engine discovered.
+
+### THE CENSUS BRIDGE, CLOSED (Kernel 71, `AntiCluster406.lean`)
+
+The S077 worklog named the gap: the census was proven in `tfold` form
+(Kernel 38); the dust-edge and the shadow-package machinery speak
+`noTernaryTwo`. The bridge is now a theorem chain, all unconditional:
+
+* **THE VERDICT BRIDGE** (`noTernaryTwo_of_digits`, `digits_of_noTernaryTwo`):
+  the Arsenal's verdict `noTernaryTwo n = true` holds **iff** every ternary
+  digit of `n` avoids 2 — both directions.
+* **THE SHARP-FUEL SCANNER** (`cantorScan_eq`): `n < 3^k →
+  cantorScan n k = noTernaryTwo n` — a decide-compatible twin whose fuel is
+  the ternary digit count (316 covers all of 2^500; the Arsenal's own
+  struct bridge demands fuel ≥ n+1, unusable at census scale).
+* **THE EVEN CENSUS IN VERDICT FORM** (`noTwo_even_census`): for every even
+  $k \le 500$: `noTernaryTwo (2^k) = true → k ∈ {0, 2, 8}` — the Kernel-38
+  census on the Arsenal's own reader, one legal 251-element kernel-decided
+  chunk (the NO-OOM cap 501 honored).
+
+### THE RIDER-EDGE ANTI-CLUSTERING LAW — the first infinite family
+
+$$r \in \mathrm{dust}(j) \;\wedge\; 4^r < 3^{j+1} \;\wedge\; 2r \le 500
+\;\Longrightarrow\; r \in \{0, 1, 4\} \quad \textbf{at EVERY level } j.$$
+
+* **`rider_edge_anticluster`** (the digit form, self-contained): if all
+  ternary digits of $4^r$ at positions $\le j$ avoid 2, and the power fits
+  the window $4^r < 3^{j+1}$ (i.e. $r < 0.79(j+1)$), and $2r \le 500$,
+  then $r$ is one of the three known riders. The dust may not cluster
+  near the origin — at every level, the edge window holds only
+  $\{0, 1, 4\}$.
+* **`rider_edge_anticluster_deep`** (the level-uniform form): from level
+  $j = 315$ on, the window covers the whole census range:
+  $\mathrm{dust}(j) \cap [0, 250] = \{0, 1, 4\}$ for every $j \ge 315$,
+  forever (the receipt $2^{500} < 3^{316}$, kernel-decided; the threshold
+  is exactly tight — at $j = 314$ the window does not yet cover $r = 250$,
+  the comparator's N-DEEP-315 control).
+
+### THE FIVE EXACT FAMILY LAWS (Kernel 72, `DustFamily406.lean`)
+
+The assault engine computed the family split of the survivor tree and
+found five exact laws; the kernel proves them for every level, forever
+(the engine: children of a level-$j$ node stay in the parent's class
+mod 9 for $j \ge 2$ / mod 3 for $j \ge 1$, so every family count exactly
+doubles per level; the base counts are kernel-decided):
+
+1. **`dust_fam7_zero`**: $|\mathrm{dust}(j) \cap \{r \equiv 7 \pmod 9\}| = 0$
+   — the row-2 fire as a cardinality law: no class $\equiv 7 \pmod 9$
+   ever survives.
+2. **`dust_fam1_card`**: $|\mathrm{dust}(j) \cap \{r \equiv 1 \pmod 9\}| =
+   2^{j-2}$ — the hard family holds exactly a quarter of the tree.
+3. **`dust_fam4_card`**: $|\mathrm{dust}(j) \cap \{r \equiv 4 \pmod 9\}| =
+   2^{j-2}$ — the witness family (of the riders 1 and 4) also exactly a
+   quarter: the row families split the non-tower dust evenly.
+4. **`dust_tower_card`**: $|\mathrm{dust}(j) \cap \{3 \mid r\}| = 2^{j-1}$
+   — the tower-sheet (scaled-exponent) classes are exactly half the tree.
+5. **`dust_mod3two_zero`**: $|\mathrm{dust}(j) \cap \{r \equiv 2 \pmod 3\}|
+   = 0$ — the cut-row fire.
+
+### THE ASSAULT ENGINE'S DISCOVERIES (S078, `caplaw/assault406.py` + `assault406b.py` + `battery406d.py`)
+
+* **The unit word's trits**: $W = \lim_s (4^{3^s}-1)/3^{s+1}$ computed to
+  60 trits (`121022010212101121000120012010002120112102000111102110102201₃`,
+  $W \equiv 7 \bmod 9$, $W \equiv 16 \bmod 27$).
+* **THE THREE MIDDLE-THIRD π-POINTS**: the infinite shadow dust is pinned
+  by the campaign's dust-shape law to the solutions of $2W\pi = -7, -1,
+  +5$ in $\mathbb{Z}_3$ (one 3-adic point per family). All three computed
+  to 60 trits: **all three are non-natural 3-adic irrationals** (13-20
+  trit-2s scattered through 60 positions, no termination) — the infinite
+  shadow dust contains no natural core.
+* **THE SHADOW DUST'S SHAPE**: at every level 4..12, the window-dodging +
+  diagonal-clean cores are **exactly 2 per family**, and the family's
+  π-point is always among them (the second is a transient that dies at
+  deeper levels).
+* **THE WINDOW INCREMENT LAW**: $\mathrm{trit}_{s+1}(\omega_{s+1}) =
+  \mathrm{trit}_{s+1}(\omega_s) + 1 \pmod 3$ for all cores, all sheets
+  $s \ge 1$ — the engine behind the three-window dichotomy's escalate
+  branch, now standalone-verified (15 cores × 12 sheets).
+* **THE RIDER WINDOW LAW (derivation)**: a tower rider at sheet $s$ has
+  windows $\in \{0, 2\}$ at all sheets below (never the middle — the
+  escalation), its own window $\le 1$: the rider's window pattern is
+  bottom-or-top below the sheet, never middle.
+
+### The honest boundary (unchanged law: no dressing)
+
+The CAP(185) seam stands: the anti-clustering law constrains the dust's
+EDGE, not its interior freedom; the family laws map the battlefield's
+shape, not the riders' fate. The kill chain remains **CAP(185) alone**
+(everything else green, self-contained, monolith-free). The named next
+lanes: the entropy law (the LX successor), Frame W (the 3-adic
+logarithm tower), and now the π-point lane (the shadow dust's
+non-naturality: a route to killing the tower family's full package
+carriers).
+
+The engine never stops; it never lies.
+
+### §12b. THE π-POINT COLLAPSE (pass 3, `caplaw/assault406c.py` + the nested scan)
+
+The deep nested scan (shadow-dust conditions are nested, so each level
+costs O(1): carry the survivors forward, split into 3 children) with the
+FULL dust-shape condition set (windows at all sheets ≥ 1 dodge AND
+diagonal trits ≤ 1 at all positions ≥ 2) delivers **THE COLLAPSE**:
+
+* the companion classes (the second survivor per family) die at levels
+  31–36;
+* from level 36 on, the shadow dust is **EXACTLY ONE class per family**;
+* at level 60, all three final survivors ARE the π-points
+  (π₄ mod 3^61 = 68350949682967876566738142093,
+  π₇ mod 3^61 = 64267339165701958313626862986,
+  π₁ mod 3^61 = 60183728648436040060515583879 — dual-verified against the
+  independent Hensel lifting).
+
+**THE ENGINE-LEVEL STATEMENT: the infinite shadow dust = EXACTLY
+{π₄, π₇, π₁} — three 3-adic points, no more — and all three are
+non-natural** (trits with 2s scattered through 60 positions: π₄ has 2s at
+positions 3, 5, 14, 15, 19, 27, 28, 39, ...; π₇ at 1, 6, 7, 9, 11, 13,
+14, 15, 20, 28, ...; π₁ at 8, 13, 17, 23, 24, 25, 29, 34, 35, 36, ...).
+
+**The formal route (named for the next round):** the campaign's own
+dust-shape law (middle-third) forces every all-sheets dodger's diagonal
+to the exact all-ones pattern above position 2, hence
+2·W·core = 2c₀ + 6c₁ − 9 in ℤ₃; the family fixes (c₀, c₁); the unique
+solution is π_family (the fixed-point arithmetic: W·π has the pattern,
+and by the window increment law every window of π is the bottom third —
+π never fires, never escalates — π IS the unique infinite survivor). A
+Lean port of this collapse (the cut-word machinery into a 406-lane
+kernel) is the named π-point lane's first strike.
+
+**The honest scope:** the collapse governs the FULL package carriers
+(all-sheets dodgers), a proper subset of the rider package
+(omegaShadowTailF's finite clauses) — it does not by itself close the
+act. The wall stands; the map is now exact.
