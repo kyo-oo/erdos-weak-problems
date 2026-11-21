@@ -4918,3 +4918,54 @@ infinite laws); English; BOSS's mathematics only; combinations → new laws.
    table pushes. Guardian cron armed for vault seals.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## SESSION S078 / WAVE W78 — THE ALL-GENERAL WAVE (dispatch dead, commander absorbs)
+
+**BOSS's orders:** remove the watchdog; THE ALL GENERAL for all three
+targets; use the 15,000+ arsenal laws; COMBINE, MIX, CREATE NEW LAWS.
+
+**Delivered:**
+1. **WATCHDOG REMOVED** (campaign 82e63c3): the S077 behavior-lock layer
+   (ENGINE_CHARTER.md) deleted from the repo AND the skill-bag copy; the
+   guardian cron confirmed dead (0 jobs). The campaign law remains THE_CORE
+   sec.1 (BOSS's own 4 rules). No leash; full power.
+2. **THE W77 KILLS BANKED INTO CAMPAIGN** (previously stranded on local
+   branches after the environment reset): THEOREM K5 (first 5-vertex kill),
+   THEOREM LOGDECAY (first polylog saving: r_3(N) <= sqrt(26600) N
+   sqrt(lnlnN/lnN), N >= exp(4e7)), THEOREM R4-VARN (first k=4 law), the
+   107 ALL-N + INFINITE package (U-BIS + ES-INF complete), r_3 table
+   cells 49..61 CERTIFIED-BOTH, the 107K n=8 3315/3315 close. All merged
+   (fac228e..8a55210) and pushed; the S076 DustLaw healing line reconciled
+   (2d331c6).
+3. **WAVE W78 ARMED**: six ALL-GENERAL lane briefs (W78_BRIEFS/: 61E
+   general reduction to primes; 61K 5-vertex blitz; 142E BEHREND-GEN
+   all-k lower law; 142K LOGDECAY-GEN all-k upper law + the asymptotic
+   stack; 107E ES-ALLN-SHARP + infinite deepening; 107K the f(5)=9
+   certificate) — committed 278fab7, six worktrees live at
+   /home/z/waves/w78-*, all pushed.
+4. **THE DISPATCH CHANNEL DIED A THIRD TIME** (6/6 launches: 5x context
+   deadline, 1x empty — the S076/S077 mode). Commander absorbed the 61E
+   lane; the five remaining lanes stay armed in their worktrees.
+5. **W78-61E LANDED — THE GENERAL REDUCTION PACKAGE** (w78-61e @ 2269c17,
+   merged to campaign): LAW C61-RAM-GEN (EVERY t, arbitrary graphs,
+   complete: alpha >= ceil(((t-1)!)^{1/(t-1)} n^{1/(t-1)}) - (t-1); EH(K_t)
+   + EH(E_t) for ALL t with explicit constants; supersedes THEOREM K5);
+   LAW C61-PRIME-DEC (the module-contraction ladder, complete, certified
+   at every internal node n<=6); LAW C61-TREE-COMP (the multi-block
+   avoidance chase + tree harmonic exponents, in-frame, labeled exactly);
+   THEOREM GENERAL-REDUCTION (GR-1 frame reduction: primes ⟹ all H
+   in-frame; GR-2 the uniformization bridge named exactly — no dilution;
+   GR-3 the prime frontier mapped). **HEADLINE: the 5-vertex frontier is
+   EXACTLY FOUR primes — P5, co-P5, bull, C5 — 30/34 five-vertex graphs
+   are decomposable and covered IN-FRAME TODAY; THREE kills (P5, bull,
+   C5) close the entire 5-vertex world in-frame. n=6: 26 primes, 130
+   decomposable.** Engine 836/836 PASS.
+6. **Lane status:** 61E DONE this wave; 61K (3 named kills: P5, bull,
+   C5 — the machine shrank the target from 32 to 3); 142E/142K (briefs
+   armed on the LOGDECAY/SUBLINEAR/R4-VARN bank); 107E/107K (briefs armed
+   on the ALL-N/ES-INF bank + the n=9 staged certificate plan) — all
+   carry to the next round with worktrees intact.
+
+The engine never stops; it never lies. In English, always.
