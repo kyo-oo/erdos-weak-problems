@@ -1084,6 +1084,36 @@ jobs:
           grep -E "fire_42282_row_twelve' (does not depend on any axioms|depends on axioms)" kernel73.log
           python3 problem406-ternary-powers/battery406e.py
           echo ERDOS406_BLOCKLAW_KERNEL_GREEN=1
+      - name: "Kernel 74 - Erdos 406 THE π-POINT COLLAPSE KERNEL (S080, BOSS order 'PROVE MY OWN HYPOTHESIS — the π-point lane, the S078-named first strike, executed'): THE GHOST RAY (GhostRay: the stabilized middle-third dust shape — the full shadow package carrier) + LEMMA A (ghost_residue_shape: the exact all-ones tail 2*residue + 9 = 2*head + 3^k at every depth) + LEMMA B (ghost_congruence: the infinite middle-third ray compresses to one fixed signed constant) + THE COLLAPSE (ghost_congruent_all_depths: two same-head ghost rays are congruent mod 3^k for EVERY k — the infinite shadow dust is at most SIX 3-adic points, one per admissible head; the doubling tree's eternal survivors are finitely many points) + THE UNIT WORD (W61 = c_60 mod 3^61 via the certified mod-recursion cMod, dual-verified against the S078 Hensel lift: W ≡ 7 mod 9, 16 mod 27) + THE THREE FIXED POINTS (pi_fam4/pi_fam7/pi_fam1 solving 2*W*π = -7/-1/+5 in Z_3, kernel-decided mod 3^61, all three dual-verified) + THE PIN (every_ghost_is_its_pi_point_fam4/fam7/fam1: every ghost ray with head 1/4/7 IS its π-point mod 3^61) + THE 2-TRIT RECEIPTS (13/20/18 scattered twos through 60 positions — the three points are not eventually zero in their first 61 trits) + THE FINITE BASE (cantorian_base: every exponent 8 <= K <= 500 fires — two legal decide chunks 251+242, each case the exact 632-row scan of 4^K) + THE TWO-GRANT CROWN (erdos406_crown_of_ghost_extinction: the FULL statement follows from exactly two named grants — ghost extinction + residual ghost compression; everything else unconditional) + battery406f.py 26/26 ALL GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel74.log
+          lake env lean problem406-ternary-powers/PiCollapse406.lean 2>&1 | tee -a kernel74.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74.log
+          grep -F "ERDOS406_PICOLLAPSE_KERNEL_GREEN" kernel74.log
+          grep -E "ghost_residue_shape' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "ghost_congruence' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "ghost_congruent_all_depths' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "ghost_head_not_three' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "cMod_eq' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "W61_receipt' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "pi_fam4_receipt' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "pi_fam7_receipt' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "pi_fam1_receipt' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "pi_fam4_trit3' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "pi_fam7_trit1' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "pi_fam1_trit8' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "hasTwoScan_iff' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "cantorian_base' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "hasTwo_of_digit' (does not depend on any axioms|depends on axioms)" kernel74.log
+          grep -E "erdos406_crown_of_ghost_extinction' (does not depend on any axioms|depends on axioms)" kernel74.log
+          python3 problem406-ternary-powers/battery406f.py
+          echo ERDOS406_PICOLLAPSE_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash
