@@ -97,9 +97,9 @@ named.
 
 | Round | Commit | Run | Verdict | Notes |
 |---|---|---|---|---|
-| r0 | a44d5e2 | 44889117286 | (see below) | first exposure of Kernels 71+72 |
+| r0 | a44d5e2 | 44889117286 | (superseded mid-run) | carried the pre-audit kernels; the adversarial self-audit (run during the serial compile queue) found and killed FOUR root causes before the verdict could land: (1) `noTwo_even_census`'s spurious `rw [← h2m] at hval` (hval holds `2^k`, not `2^(2*(k/2))` — the rewrite could never fire), (2) `Nat.eq_zero_or_succ` (uncertain core name — replaced by the bulletproof `rcases q with _ \| m`), (3) `child_mod`'s dvd witness (`by ring` cannot use the hypothesis — obtain + rw + ring), (4) `dvd9/dvd3`'s pow-form bridges (the literal `9` cannot match `Nat.pow_add` — `show (9:Nat) = 3^2 from rfl`). The repairs shipped in W2 (`d3fa3fb`, rebased over the concurrent W79-142E merge `4d02a36`). |
+| r1 | d3fa3fb | (the corrected kernels) | (verdict below) | the L94–L96 lessons applied pre-flight: explicit args, pow_succ order, the auto-rfl dance (every rw-chain ending in a literal-arithmetic identity left unclosed-by-design; every matcher reduction keeps its explicit rfl). |
 
-(The war table updates as the verdicts land; the L94–L96 lessons were
-applied pre-flight: explicit args, pow_succ order, the auto-rfl dance.)
+(The table updates as the verdicts land.)
 
 The engine never stops; it never lies. In English, always.
