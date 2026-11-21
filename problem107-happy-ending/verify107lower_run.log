@@ -1,0 +1,15 @@
+[    0.0s] VERIFY-107-LOWER start (independent rebuild of ES-LOWER-ALLN)
+[    0.0s] n=3: built |X|=2 (expect 2), den=50331648
+[    0.0s]   V1 size+clusters: True   V2 GP: True
+[    0.0s]   V3 no-convex-3: codeA=True (0 subsets scanned), codeB=True (0/0 scanned)
+[    0.0s]   V4 (n-1)-convex transversals: 1/1 convex
+[    0.0s] n=4: built |X|=4 (expect 4), den=150994944
+[    0.0s]   V1 size+clusters: True   V2 GP: True
+[    0.0s]   V3 no-convex-4: codeA=True (1 subsets scanned), codeB=True (1/1 scanned)
+[    0.0s]   V4 (n-1)-convex transversals: 2/2 convex
+[    0.0s] n=5: built |X|=8 (expect 8), den=603979776
+[    0.0s]   V1 size+clusters: True   V2 GP: True
+[    0.0s]   V3 no-convex-5: codeA=True (56 subsets scanned), codeB=True (56/56 scanned)
+[    0.0s]   V4 (n-1)-convex transversals: 9/9 convex
+[    0.0s] n=7: built |X|=32 (expect 32), den=289910292480
+[    0.0s]   V1 size+clusters: True   V2 GP: True
