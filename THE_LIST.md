@@ -301,3 +301,19 @@ GREEN. The wave coexists with the S061–S074 lanes; the rebase collision
 All three exact-labels: the fortress cores remain OPEN (asymptotic formula / full EH
 conjecture / f(n) = 2^{n−2}+1) — the shipped mathematics is complete, unconditional
 where claimed, honestly scoped everywhere.
+
+---
+
+## §S080 — THE W80 WAVE (2026-11-21, BOSS: "all problems like this; 142 upper bounds for ALL k; control the sub-agents, let none die")
+
+| ID | target | delivered | status |
+|---|---|---|---|
+| W80-142U | **#142 ALL-k UPPER bounds** (F-UP-1 LOGDECAY-GEN) | U-GEN-0 (r_k(N) <= N - floor(N/k), all k>=3 all N, tight); V-GEN sharp (constant 33 -> <=1.5, k-independent band); SLIDE-GEN; U-LIN-GEN all-k all-N envelope (fresh k=7 table N=1..46, k=3..6 re-verified); T-GEN (Z_p transfer all k); RK-VARN-GEN (k=4 delta 0.85->0.65; FIRST k=5/6/7 count laws) — engine 56/56 GREEN | LINEAR HALF OF F-UP-1 DEAD; sublinear half blocked exactly at the ORDER-k DEVIATION IDENTITY (named, GST towers inventoried as non-carriers) |
+| W80-61E | **#61 the C5 frontier** | C61-C5-SUBST (complete projection proof); C61-C5-CAP (exponent cap c <= log3/log8 = 0.52832, tight tower); C61-C5-HTABLE (h_C5 exact n<=10); C61-C5-LADDER-BREAK (sqrt-ladder FALSE at n=10, witness two-code) — engine 47/47 PASS | 32/34 held; EH(C5) open with window (0, 0.52832]; the last five-vertex prime measured, capped, reshaped |
+| W80-107E | **#107 ALL-n** | THEOREM ES-SANDWICH-ALLN: 2^{n-2}+1 <= f(n) <= C(2n-4,n-2)+1 for EVERY n>=3, lower side proven for all n (Lemma E/M/Theorem L induction), exact f(3)=3, f(4)=5; n=7 exhaustive C(32,7) both codes; verify ALL PASS 52 load-bearing | THE ALL-n TWO-SIDED THEOREM BANKED; f(5)=9 certificate remains the next staged kill |
+
+Dispatch record: 5 launches, 3 delivered, 2 context-deadlines — BOTH dead
+lanes recovered by checkpoint-salvage + finisher agents + commander absorb
+(the W80-107E finisher's commits landed posthumously; the commander killed
+two report-layer bugs and completed the n=7 scan). No work lost. The
+commander-absorb law held.
