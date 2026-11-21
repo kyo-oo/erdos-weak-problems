@@ -1,0 +1,60 @@
+name: GST Image 3 arbitrary N zero-local-SURVIVE companion source
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-image3-navigation-cm-star-ncoho-20261111
+    paths:
+      - 'GSTImageThreeCompanionSourceTransport.lean'
+      - '.github/workflows/gst-image3-allN-companion-native-source.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-gst-image3-navigation
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Prepare pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Verify universal finite-N native companion zero-source laws
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTImage3CompanionNativeLib GSTImageThreeCompanionSourceTransport
+          if timeout 6800 lake build GSTImageThreeCompanionSourceTransport > gst-image3-companion.log 2>&1; then
+            echo "LEAN PASSED: original GST all-N companion native zero-local-source construction"
+          else
+            grep -nE 'error:|sorryAx|unknown identifier|unsolved goals|failed to synthesize' gst-image3-companion.log | tail -n 100 || true
+            tail -n 120 gst-image3-companion.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-image3-companion.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Preserve diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-image3-companion
+          path: gst-image3-companion.log
+          if-no-files-found: warn

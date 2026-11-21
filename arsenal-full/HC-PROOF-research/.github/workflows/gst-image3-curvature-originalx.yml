@@ -1,0 +1,57 @@
+name: GST curvature-only TRUE original-X correspondence compiler
+on:
+  push:
+    branches:
+      - research/gpt6-image3-curvature-only-resonance-20261111
+    paths:
+      - 'GSTImageThreeOriginalXCurvatureLanding.lean'
+      - '.github/workflows/gst-image3-curvature-originalx.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-gst-image3-curvature-originalx
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Install Lean and Mathlib cache
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel-check actual original-X native source compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTCurvatureOriginalXLib GSTImageThreeOriginalXCurvatureLanding
+          if timeout 6700 lake build GSTImageThreeOriginalXCurvatureLanding > gst-curvature-originalx.log 2>&1; then
+            echo "LEAN PASSED: GSTImageThreeOriginalXCurvatureLanding"
+          else
+            grep -nE 'error:|sorryAx|unknown identifier|unsolved goals|failed to synthesize' gst-curvature-originalx.log | tail -n 85 || true
+            tail -n 105 gst-curvature-originalx.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-curvature-originalx.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-curvature-originalx-lean
+          path: gst-curvature-originalx.log
+          if-no-files-found: warn
