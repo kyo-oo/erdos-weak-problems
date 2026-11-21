@@ -722,4 +722,26 @@ def run_negative_controls(challenge, solution):
     checks.append(_chk("N-COGRAPH",
                        "planted induced P4 in a cograph is DETECTED by the P4 filter",
                        has_induced_p4(n, adj), "control passes iff the planted P4 is found", time.time() - t0))
+
+    # S-PRIMES-W81: the W81 prime-census engine — 22/22 + GREEN flag.
+    t0 = time.time()
+    PR = os.path.join(CAMP, "problem61-erdos-hajnal", "engine61primes_w81.py")
+    try:
+        proc = subprocess.run([sys.executable, PR],
+                              capture_output=True, text=True, timeout=560)
+        out = proc.stdout + proc.stderr
+        n_pass = out.count("[PASS]")
+        n_fail = out.count("[FAIL]")
+        green = "PRIMES_W81_ENGINE_GREEN=1" in out
+        ok = proc.returncode == 0 and n_fail == 0 and n_pass >= 22 and green
+        det = (f"exit {proc.returncode}; {n_pass} PASS / {n_fail} FAIL; "
+               f"GREEN={green}; delivers P5-CROSS + C5-1/2-ANCHOR "
+               f"(complete theorems) + the TOWER-CAP c(P5),c(bull) <= "
+               f"log2/log5 + the prime census (h-tables, n^0.43 floors, "
+               f"anchor tables, z-only map)")
+    except Exception as e:
+        ok = False; det = repr(e)
+    checks.append(_chk("S-PRIMES-W81",
+        "The W81 five-vertex prime battery: P5-CROSS, C5-1/2-ANCHOR (complete induced-subgraph proofs), TOWER-CAP-P5/BULL, and the full census — 22/22 green",
+        ok, det, time.time() - t0))
     return checks

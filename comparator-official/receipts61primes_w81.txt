@@ -1,0 +1,61 @@
+[PASS] S0-identities :: complement(P5)=house; bull, C5 self-complementary (canonical forms)
+[PASS] S0-classifier-duel :: 7200/7200 two-code agreements (n=6,7 random)
+[PASS] S0-negative-controls :: H self-rejected by own classifier; 600 planted-H hosts all rejected
+[NOTE] wall after S0: 3.6s
+[PASS] S1-bull-htable-n6 :: h_bull(n) n=1..6 recomputed = [1, 2, 2, 2, 2, 3] (bank [1,2,2,2,2,3]); counts [1, 2, 8, 64, 964, 24248]
+[PASS] S1-bull-L1-reverified :: BULL-L1 cross-one complete: 8340/8340 pairs adjacent over 19058 with-triangle bull-free graphs n=4..6 (every triangle)
+[PASS] S1-bull-alpha-union-reverified :: alpha(S_a u S_b u S_c) = max alpha(S_x): 45612/45612
+[PASS] S1-bull-omega-sum-reverified :: omega >= omega(S_a)+omega(S_b)+omega(S_c): 64212/64212
+[PASS] S1-bull-decrements-reverified :: omega(S_S) <= omega - |S| for nonempty S: 143768/143768
+[NOTE] S1 S_empty-heavy stratum (some triangle with |S_empty| >= (n-3)/2, n>=5): 3405 graphs; min hom = 3; max |S_empty| = 3 at n<=6
+[PASS] S1-bull-Ianchor-pure-laws :: over 25286 bull-free graphs n<=6 (canonical max IS): coverage True, W-cells cliques True, alpha(P_A)<=|A| True, omega(P_A)<=omega-1 True, |P_A|<=4(omega-1)^2 at |A|=2 True, n<=6*max^4 True
+[NOTE] S1 bull T_hi census n<=6: max |T_hi| = 3; 10990 graphs with T_hi nonempty; min hom among them = 3
+[PASS] S1-bull-structured-families :: C5-blowups (triangle-free bull-free), join chains, X_2 tower — all bull-free, all satisfy n <= 6*max(alpha,omega)^4; C5-blowup x2: n=10 alpha=4 omega=2 T_hi=2 n<=6M^4=True; C5-blowup x3: n=15 alpha=6 omega=2 T_hi=9 n<=6M^4=True; C5-blowup x4: n=20 alpha=8 omega=2 T_hi=12 n<=6M^4=True; join-chain k=2: n=7 alpha=3 omega=3 T_hi=4 n<=6M^4=True; join-chain k=4: n=13 alpha=3 omega=5 T_hi=10 n<=6M^4=True; join-chain k=6: n=19 alpha=3 omega=7 T_hi=16 n<=6M^4=True; X_2=C5[C5]: n=25 alpha=4 omega=4 T_hi=5 n<=6M^4=True
+[NOTE] S1 bull two-disjoint-triangles: 5120 disjoint pairs at n=6; 512/512 cross-patterns present, 0 absent
+[NOTE] wall after S1 (bull): 6.8s
+[PASS] S2-c5-htable-n6 :: h_C5(n) n=1..6 recomputed = [1, 2, 2, 2, 3, 3] (bank [1,2,2,2,3,3])
+[PASS] S2-c5-core-census :: C5-free cores (conn AND coconn): n=5: 420 (bank 420), n=6: 18840 (bank 18840); min hom 3, 3; core+ (also triangle AND indep triple): n=5: 60, n=6: 12840, min hom 3, 3
+[NOTE] S2 C5 core+ triangle-anchor table over 12900 graphs (n=5,6 exhaustive): FORCED-EDGE: 0xabc(720); FORCED-NONEDGE: abxabc(240), acxabc(240), bcxabc(240); FREE: 31 pairs
+[PASS] S2-c5-2anchor-law :: 2-ANCHOR LAW (edge xy of T; p in N(x)\N(y), q in N(y)\N(x), r outside both: p~r and q~r imply p~q): 11520 role instances over 12900 core+ graphs (every triangle), 0 violations
+[NOTE] S2 C5 triangle-anchor table (n<=6 exhaustive core+ + 16923 sampled n=7 cores): FORCED-EDGE: none; FORCED-NONEDGE: none; FREE: 36
+[PASS] S2-c5-1anchor-law-n7 :: 1-ANCHOR LAW (a in T; b,e in N(a), c,d outside: b~c & c~d & d~e & b!~d & b!~e & c!~e forbidden): 0 violations over 16923 sampled n=7 cores (every triangle, every anchor vertex)
+[PASS] S2-c5-Ianchor-pure-laws :: over 12900 C5 core+ graphs n=5,6 (canonical max IS): coverage True, W-cliques True, alpha(P_A)<=|A| True, omega(P_A)<=omega-1 True, |P_A|<=4(omega-1)^2 at |A|=2 True, n<=6*max^4 True
+[NOTE] S2 C5 core+ T_hi census n=5,6: max |T_hi| = 2; 6390 graphs with T_hi nonempty; min hom among them = 3
+[NOTE] wall after S2 (C5): 12.0s
+[PASS] S3-p5-conn-census :: connected P5-free n=1..6: per-n [1, 1, 4, 38, 668, 19264] (total 19976, bank 19976); shape cross-tab (K1,K2,K3,P3 presence) -> count: (False, False, False, True):372; (False, False, True, False):120; (False, True, False, True):3020; (False, True, True, True):11220; (True, True, False, False):1; (True, True, False, True):18; (True, True, True, False):4; (True, True, True, True):5220
+[NOTE] S3 z-only stratum (no dominating K1, no dominating K2, dominating P3): 372 graphs n<=6; K3-but-no-P3 z-only: 120
+[NOTE] S3 z-only per n: {5: 12, 6: 360}
+[PASS] S3-p5-CROSS-law :: P5-CROSS (dominating P3 e1-ctr-e2: every vertex adjacent only to e1 is adjacent to every vertex adjacent only to e2): 3660/3660 pairs over all z-only graphs x all dominating P3s, 0 violations
+[NOTE] S3 z-only P3-anchor table: FORCED-EDGE: e2xce2(360), e2xe1(3660), e1xe1c(360); FORCED-NONEDGE: e2xe1e2(360), e2xe1c(360), e2xe1ce2(360), ce2xe1(360), e1xe1e2(360), e1xe1ce2(360); FREE: 4: e2xe2(360/360), e2xc(360/360), cxe1(360/360), e1xe1(360/360)
+[NOTE] S3 z-only specimen n=5 emask=220: edges [(0, 3), (0, 4), (1, 2), (1, 4), (2, 3)]
+[NOTE] S3 z-only specimen n=5 emask=234: edges [(0, 2), (0, 4), (1, 3), (1, 4), (2, 3)]
+[NOTE] S3 z-only specimen n=5 emask=316: edges [(0, 3), (0, 4), (1, 2), (1, 3), (2, 4)]
+[NOTE] S3 z-only specimen n=5 emask=358: edges [(0, 2), (0, 3), (1, 3), (1, 4), (2, 4)]
+[NOTE] S3 z-only specimen n=5 emask=425: edges [(0, 1), (0, 4), (1, 3), (2, 3), (2, 4)]
+[NOTE] S3 z-only specimen n=5 emask=453: edges [(0, 1), (0, 3), (1, 4), (2, 3), (2, 4)]
+[NOTE] S3 z-only specimen n=5 emask=570: edges [(0, 2), (0, 4), (1, 2), (1, 3), (3, 4)]
+[NOTE] S3 z-only specimen n=5 emask=598: edges [(0, 2), (0, 3), (1, 2), (1, 4), (3, 4)]
+[NOTE] S3 z-only specimen n=5 emask=665: edges [(0, 1), (0, 4), (1, 2), (2, 3), (3, 4)]
+[NOTE] S3 z-only specimen n=5 emask=707: edges [(0, 1), (0, 2), (1, 4), (2, 3), (3, 4)]
+[PASS] S3-p5-BT-explorer :: induction-step census: 49352 (G, v, D) instances with v undominated (n=4,5 exhaustive; n=6: 6000 sampled + all z-only); a candidate from {u},{5,u},{u,d},{5,u,d},{u,d,d'} dominated in 49352/49352
+[NOTE] S3 BT case D=K1, |N(u) cap D|=1: 20178/20178 instances with a working candidate
+[NOTE] S3 BT case D=K2, |N(u) cap D|=1: 30364/30364 instances with a working candidate
+[NOTE] S3 BT case D=K2, |N(u) cap D|=2: 15097/15097 instances with a working candidate
+[NOTE] S3 BT case D=K3, |N(u) cap D|=1: 2376/2376 instances with a working candidate
+[NOTE] S3 BT case D=K3, |N(u) cap D|=2: 3030/3030 instances with a working candidate
+[NOTE] S3 BT case D=K3, |N(u) cap D|=3: 1086/1086 instances with a working candidate
+[NOTE] S3 BT case D=P3, |N(u) cap D|=1: 2772/2772 instances with a working candidate
+[NOTE] S3 BT case D=P3, |N(u) cap D|=2: 7384/7384 instances with a working candidate
+[NOTE] S3 BT case D=P3, |N(u) cap D|=3: 2750/2750 instances with a working candidate
+[PASS] S3-p5-tower-X2 :: X_2 = C5[C5] (25 vertices): P5-free=True, bull-free=True, alpha=4 (=4), omega=4 (=4), C5-free=False (contains C5, as it must); the C5 tower caps c(P5) and c(bull) asymptotically: hom(X_t) = 2^t at n = 5^t => c <= log2/log5 = 0.4306
+[NOTE] S3 z-only separation (sec.4 candidates): N(v)-vertices with a neighbor in a far component: complete-to-that-component 720, partial 5160
+[NOTE] wall after S3 (P5): 15.5s
+[PASS] S4-floors :: hom >= n^0.43: exhaustive n<=6 + sampled n=7 (12223 P5-free, 10385 bull-free, 20788 C5-free sampled), 0 violations
+[PASS] S4-witness-duel :: all n=5,6 h-witnesses (P5/bull/C5): H-free by Code 2, hom by 2^n brute
+[PASS] S4-structured-evidence :: structured families (bipartite n=8,12,20 C5/bull-free; C5-blowups n=10,20 P5/bull-free): all hom >= n^(1/3); bipartite n=8: hom=4; bipartite n=12: hom=6; bipartite n=20: hom=10; C5-blowup x2 n=10: hom=4; C5-blowup x4 n=20: hom=8
+[NOTE] wall after S4: 17.6s
+h_bull(n), n=1..6: [1, 2, 2, 2, 2, 3]
+h_C5(n), n=1..6: [1, 2, 2, 2, 3, 3]
+h_P5(n), n=1..6: [1, 2, 2, 2, 2, 3]
+TOTALS: PASS=22 FAIL=0 wall=17.6s
+PRIMES_W81_ENGINE_GREEN=1
