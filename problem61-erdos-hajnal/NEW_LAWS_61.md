@@ -502,3 +502,115 @@ All four classes: hom >= n^0.43 certified at every n <= 7 (the C5 rung
 connected P5-free graph has a dominating K1/K2/K3/P3): census-certified
 19,976 graphs n<=6 exhaustive + 7,986 sampled n=7 — hand-proof GAP named
 (the z-only-dominated leak in the leaf induction); NOT claimed proven.
+
+---
+
+# W80-61E ADDITIONS — THE C5 SUBSTITUTION ENDGAME (finisher wave W80-61E-F)
+# (engine: engine61c5.py + rerun receipts61c5_rerun.txt 47/0 + postrun receipts61c5_postrun.txt 47/0;
+#  independent finisher verification: verify61c5_witness.py, receipts61c5_verify.txt 64/3;
+#  audit of the stale 41/6 checkpoint receipts: appended to receipts61c5.txt)
+
+## LAW C61-C5-SUBST (substitution closure of C5-freeness — complete)
+If Q is C5-free on slots {1..t} and every piece M_i (i=1..t) is C5-free,
+then the substitution G = Q[M_1, ..., M_t] (disjoint pieces; complete
+bipartite joins exactly between slots adjacent in Q) is C5-free.
+*Proof.* Suppose S, |S| = 5, induces a C5 in G, cyclically v_1..v_5. Two
+vertices in the same slot have IDENTICAL neighborhoods outside their slot.
+(i) If some slot holds two cycle-vertices at cyclic distance 1 (say v_1, v_2
+in slot i): v_2 ~ v_3 forces v_1 ~ v_3 (identical outside-slot adjacency),
+a chord unless v_3 is also in slot i; likewise v_1 ~ v_5 forces v_2 ~ v_5,
+so v_5 in slot i; then v_3 ~ v_4 with v_3 in slot i forces v_4 adjacent to
+v_5's slot-partner pattern — concretely v_4 ~ v_5 and v_4 ~ v_3 while
+v_4 ≁ v_1: but v_1, v_5 share slot i, so v_4 ~ v_5 iff slot(v_4) ~ slot i
+iff v_4 ~ v_1 — contradiction. (ii) Distance 2 (v_1, v_3 in slot i):
+v_1 ~ v_5 forces v_3 ~ v_5, a chord (v_3's cycle-neighbors are v_2, v_4)
+unless v_5 in slot i — reducing to case (i) via the pair (v_3, v_5) or
+(v_1, v_5). (iii) Distance 3 (v_1, v_4): v_4 ~ v_5 forces v_1 ~ v_5 — but
+they are cycle-neighbors, fine; v_4 ~ v_3 forces v_1 ~ v_3, a chord unless
+v_3 in slot i — reducing to case (ii) via (v_1, v_3). So if S meets slot i
+twice, ALL of S lies in slot i, and the C5 lies inside a piece — excluded.
+Hence a C5 not inside one piece occupies FIVE DISTINCT slots, and its
+cycle edges are exactly the frame edges between those slots (each present
+edge is cross-slot and so reflects a frame adjacency; each absent chord
+likewise reflects a frame non-adjacency): the frame contains an induced
+C5 — excluded. ∎
+Engine: 206 substitutions of C5-free frames x pieces all C5-free (both
+codes, deterministic battery); 200 C5-frame negative controls all detected;
+1500 module contractions all C5-free. Finisher: +150 fresh instances (my
+own frames/pieces/rng, two independent detectors) all clean; X_2 = W8[W8x8]
+fully exhaustively scanned (all C(64,5) = 7,624,512 5-subsets, zero hits);
+X_3 sampled (200k subsets, zero hits).
+
+## LAW C61-C5-CAP (the class exponent cap — complete)
+If every C5-free graph on n vertices satisfies max(alpha, omega) >= n^c,
+then c <= log 3 / log 8 = 0.528320823...
+*Proof.* Let W8 = K1 ∨ C7: C5-free, alpha = omega = 3 (n = 8). Define
+X_1 = W8 and X_t = W8[X_{t-1}, ..., X_{t-1}] (8 equal pieces). By
+C61-C5-SUBST and induction, every X_t is C5-free, with n_t = 8^t. The
+substitution formulas
+  alpha(Q[M]) = max over INDEPENDENT I in Q of sum_{i in I} alpha(M_i),
+  omega(Q[M]) = max over CLIQUES K in Q of sum_{i in K} omega(M_i)
+(>= : a maximum independent set of G meets two frame-adjacent slots never,
+so its slot trace is independent and each trace is a union of independent
+piece-sets; <= : conversely, unions of piece-independent sets along a
+frame-independent slot family are independent — cliques dually) give, for
+equal pieces, alpha(X_t) = alpha(W8)·alpha(X_{t-1}) and omega likewise,
+so alpha(X_t) = omega(X_t) = 3^t. Then 3^t >= (8^t)^c for every t, i.e.
+8^{tc} <= 3^t; taking t = 1 (or dividing by t > 0 and taking logarithms —
+strict monotonicity of the power function) gives c <= log3/log8. The cap is
+TIGHT for this family: hom(X_t) = 3^t = (8^t)^{log3/log8} exactly, so the
+X_t tower realizes the exponent 0.52832 along an infinite sequence. ∎
+Engine: X_2 machine-checked (64 vertices, alpha = omega = 9 = 3^2).
+Finisher: X_2 alpha/omega = 9 by independent branch&bound = formula
+(constructive 9-independent-set and 9-clique exhibited); X_3 = 8^3 = 512
+vertices with alpha = 27 = 3^3 by the tower formula; t = 1..8 arithmetic
+verified exactly.
+#BY GST LAW pow_mul_rule [erdosternary2/ErdosTernary2.lean:2075]
+#BY GST LAW pow_pow_rule [erdosternary2/ErdosTernary2.lean:2077]
+#BY GST LAW pow_mono [erdosternary2/ErdosTernary2.lean:2078]
+#BY GST LAW pow_le [erdosternary2/ErdosTernary2.lean:2087]
+#BY GST LAW digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097]
+#BY GST LAW two_pow_ge2 [erdosternary2/ErdosTernary2.lean:891]
+#BY GST LAW sq_sub_one [erdosternary2/ErdosTernary2.lean:908]
+
+## LAW C61-C5-HTABLE (the measured frontier h_C5(n), n = 1..12)
+h_C5(n) = min over C5-free G on n vertices of max(alpha(G), omega(G)):
+  n      : 1  2  3  4  5  6  7  8  9  10  11     12
+  h_C5   : 1  2  2  2  3  3  3  3  3  3   [3,4]  [3,4]
+CERTIFIED EXACT at n <= 10. Floors: n <= 7 by the exhaustive engine sweeps
+(S1 direct emask sweep n <= 6; S2 numpy 2^21 sweep at n = 7 — counts
+cross-checked against the bank, h-rungs re-derived); n >= 6 by R(3,3) = 6
+(certified exhaustively by the finisher: all 32,768 graphs on 6 vertices
+have alpha >= 3 or omega >= 3; C5 on 5 vertices with alpha = omega = 2 is
+the tightness witness) — any 6 vertices of a C5-free graph force
+hom >= 3. Ceilings by witnesses (all finisher-verified, two independent
+induced-C5 codes + brute alpha/omega): n = 8 W8 itself (and an 8-vertex
+CORE hom-3 witness); n = 9, n = 10 hom-3 witnesses (the n = 10 witness is
+a CORE: connected, co-connected, triangle, independent triple); n = 11, 12
+hom-4 witnesses. The checkpoint's h(11) <= 3 is RETRACTED: its witness is
+corrupt (audit-2 in receipts61c5.txt) and no repair found (both fresh
+hunts topped out at hom 4; an exhaustive 2 x 1024 one-vertex extension
+probe of both verified n = 10 hom-3 witnesses yields no n = 11 hom-3
+graph); h_C5(11), h_C5(12) remain open cells in [3,4].
+
+## LAW C61-C5-LADDER-BREAK (the sqrt-ladder is FALSE — complete)
+The pointwise ladder "h_C5(n)^2 >= n" holds for n = 1..9 (equality at
+n in {1, 4}; certified n <= 8 by the engine ladder arithmetic + h(9) = 3
+with 9 >= 9) and BREAKS at n = 10: h_C5(10) = 3 EXACTLY (the verified
+rerun witness has alpha = omega = 3; the R(3,3) = 6 floor forces >= 3),
+and 3^2 = 9 < 10. The break is realized INSIDE the named core frontier:
+the n = 10 witness is connected, co-connected, contains a triangle and an
+independent triple — precisely the C5-DICH remaining stratum.
+Interpretation for C5-DICH (FIVEVERTEX_PROOF §2): the two CLOSED strata
+stand unchanged (triangle-free => alpha >= sqrt(n)/2; alpha <= 2 =>
+omega >= sqrt(n)/2 — the n = 10 witness has neither shape and violates
+neither). What dies is any extension of the dichotomy to the core stratum
+at POINTWISE strength sqrt(n): a core-stratum bound hom >= c·sqrt(n)
+pointwise must have c <= 3/sqrt(10) = 0.9487 (and if h(11) = 3, c <=
+3/sqrt(11) = 0.9045). Asymptotically the question stays open ABOVE the
+cap: the X_t tower (which is NOT core — W8 is not co-connected, and
+co-X_2 = co-W8[co-W8 x 8] is disconnected, so the tower falls to
+C5-REDUCTION's union levels) realizes hom = n^{0.52832} > sqrt(n), so the
+cap does not refute an eventual h >= sqrt(n)/K law; it only forbids any
+class-wide exponent above 0.52832. The honest state: EH(C5) remains OPEN;
+its exponent, if it exists, lies in (0, log3/log8].
