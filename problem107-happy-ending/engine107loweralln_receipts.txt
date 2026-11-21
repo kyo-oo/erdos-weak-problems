@@ -1,0 +1,204 @@
+ENGINE-107-LOWER-ALLN receipts (W80-107E)
+exact Fraction/integer arithmetic; two-code discipline throughout
+
+[    0.0s] ENGINE-107-LOWER-ALLN start
+[    0.0s] S0: E(a,b;delta) construction, all 2<=a,b, a+b<=10
+[    0.0s] S0 GREEN: 28 E-sets, sizes=C(a+b-4,a-2), pairwise slopes in (0,delta], GP  [True]
+[    0.0s] S1: E has no a-cup / no b-cap (two codes: brute subset scan vs slope-frontier DP)
+[    0.1s] S1 GREEN: 20 E-sets, max cup = a-1, max cap = b-1, both codes agree  [True]
+[    0.1s] S2: X_n structure n=3..10 (sizes, GP, slope bands, margins, cluster laws)
+[    0.1s]   n=3: N=2 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=1 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[    0.1s]   n=4: N=4 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[    0.1s]   n=5: N=8 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[    0.1s]   n=6: N=16 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[    0.1s]   n=7: N=32 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[    0.4s]   n=8: N=64 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[    2.9s]   n=9: N=128 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[   22.7s]   n=10: N=256 size=1 cluster_sizes=1 cluster_sizes_code2=1 y_distinct=1 y_bands_disjoint_ordered=1 gp=1 slope_bands=0 cluster_cupcap=1 sagitta_margin=1 drift_margin=1
+[   22.7s] S2 GREEN: False
+[   22.7s] S3: exhaustive no-convex-n, n=3..7
+[   22.7s]   n=3: no-convex-3 codeA=True codeB=True (0 subsets), (n-1)-convex witness=YES
+[   22.7s]   n=4: no-convex-4 codeA=True codeB=True (1 subsets), (n-1)-convex witness=YES
+[   22.7s]   n=5: no-convex-5 codeA=True codeB=True (56 subsets), (n-1)-convex witness=YES
+[   22.9s]   n=6: no-convex-6 codeA=True codeB=True (8008 subsets), (n-1)-convex witness=YES
+[   59.9s]   n=7: no-convex-7 codeA=True codeB=True (3365856 subsets), (n-1)-convex witness=YES
+[   59.9s] S3 GREEN: True
+[   59.9s] S4: randomized/hillclimb convex-subset search n=8..10, structure checks
+[  119.9s]   n=8: max convex found = 7 (<= n-1 = 7: True), hits=529106, structure=True
+[  179.9s]   n=9: max convex found = 8 (<= n-1 = 8: True), hits=449529, structure=True
+[  239.9s]   n=10: max convex found = 9 (<= n-1 = 9: True), hits=318138, structure=True
+[  239.9s] S4 GREEN: True (max found never >= n)
+[  239.9s] S5: gap law C(2m,m) <= 4^m/sqrt(2m+1) and >= 4^m/(2m+1), m=0..30, two codes
+[  239.9s] S5 GREEN: central-binomial sandwich verified m=0..30 two codes  [True]
+[  239.9s] S5b: sandwich table n=3..16: 2^(n-2)+1 <= f(n) <= C(2n-4,n-2)+1 <= 4^(n-2)/sqrt(2n-3)+1
+[  239.9s]   n=3: lower=3 upper=3 ratio=1.00 central-bound-ok=True
+[  239.9s]   n=4: lower=5 upper=7 ratio=1.40 central-bound-ok=True
+[  239.9s]   n=5: lower=9 upper=21 ratio=2.33 central-bound-ok=True
+[  239.9s]   n=6: lower=17 upper=71 ratio=4.18 central-bound-ok=True
+[  239.9s]   n=7: lower=33 upper=253 ratio=7.67 central-bound-ok=True
+[  239.9s]   n=8: lower=65 upper=925 ratio=14.23 central-bound-ok=True
+[  239.9s]   n=9: lower=129 upper=3433 ratio=26.61 central-bound-ok=True
+[  239.9s]   n=10: lower=257 upper=12871 ratio=50.08 central-bound-ok=True
+[  239.9s]   n=11: lower=513 upper=48621 ratio=94.78 central-bound-ok=True
+[  239.9s]   n=12: lower=1025 upper=184757 ratio=180.25 central-bound-ok=True
+[  239.9s]   n=13: lower=2049 upper=705433 ratio=344.28 central-bound-ok=True
+[  239.9s]   n=14: lower=4097 upper=2704157 ratio=660.03 central-bound-ok=True
+[  239.9s]   n=15: lower=8193 upper=10400601 ratio=1269.45 central-bound-ok=True
+[  239.9s]   n=16: lower=16385 upper=40116601 ratio=2448.37 central-bound-ok=True
+[  239.9s] S6: negative controls (corrupted inputs must fail)
+[  239.9s] S6 GREEN: negative controls behave  [True]
+[  239.9s] VERDICT: RED
+
+{
+ "S0_E_construction": true,
+ "S1_E_cupcap": true,
+ "S2_structure": {
+  "3": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": true,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "4": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "5": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "6": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "7": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "8": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "9": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  },
+  "10": {
+   "size": true,
+   "cluster_sizes": true,
+   "cluster_sizes_code2": true,
+   "y_distinct": true,
+   "y_bands_disjoint_ordered": true,
+   "gp": true,
+   "slope_bands": false,
+   "cluster_cupcap": true,
+   "sagitta_margin": true,
+   "drift_margin": true
+  }
+ },
+ "S3_exhaustive": {
+  "3": {
+   "okA": true,
+   "okB": true,
+   "scanned": 0,
+   "witness": true
+  },
+  "4": {
+   "okA": true,
+   "okB": true,
+   "scanned": 1,
+   "witness": true
+  },
+  "5": {
+   "okA": true,
+   "okB": true,
+   "scanned": 56,
+   "witness": true
+  },
+  "6": {
+   "okA": true,
+   "okB": true,
+   "scanned": 8008,
+   "witness": true
+  },
+  "7": {
+   "okA": true,
+   "okB": true,
+   "scanned": 3365856,
+   "witness": true
+  }
+ },
+ "S4_randomized": {
+  "8": {
+   "max_convex_found": 7,
+   "hits": 529106,
+   "struct_ok": true
+  },
+  "9": {
+   "max_convex_found": 8,
+   "hits": 449529,
+   "struct_ok": true
+  },
+  "10": {
+   "max_convex_found": 9,
+   "hits": 318138,
+   "struct_ok": true
+  }
+ },
+ "S5_gaplaw": true,
+ "S6_negctl": true
+}
