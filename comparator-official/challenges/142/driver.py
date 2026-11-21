@@ -114,6 +114,45 @@ def run_official_checks(challenge, solution):
 
 # ---------------------------------------------------------------- solution
 
+DEV_ENGINE = os.path.join(CAMP, "problem142-ap-free", "engine142deviation.py")
+DEV_RECEIPTS = os.path.join(CAMP, "problem142-ap-free", "receipts142deviation.txt")
+
+
+def _dev_dft(f, p):
+    """Fresh DFT (independent code path): fhat(r) = sum_x f(x) zeta^{-rx}."""
+    import cmath
+    zeta = cmath.exp(2j * cmath.pi / p)
+    return [sum(f[x] * zeta ** ((-r * x) % p) for x in range(p))
+            for r in range(p)]
+
+
+def _dev_T_brute(Aset, k, p):
+    T = 0
+    for x in range(p):
+        for d in range(p):
+            if all(((x + i * d) % p) in Aset for i in range(k)):
+                T += 1
+    return T
+
+
+def _dev_layer_brute(fh, p, S):
+    """Sum over V_S of prod fhat(r_i) by BRUTE enumeration of Z_p^s
+    (constraint-tested directly — no parametrization, independent of the
+    engine's LEMMA-PAR route)."""
+    s = len(S)
+    total = 0j
+    n_sol = 0
+    for rs in itertools.product(range(p), repeat=s):
+        if (sum(rs) % p == 0
+                and sum(S[i] * rs[i] for i in range(s)) % p == 0):
+            n_sol += 1
+            pr = 1 + 0j
+            for i in range(s):
+                pr *= fh[rs[i]]
+            total += pr
+    return total, n_sol
+
+
 def _own_behrend(d, m):
     """Independent construction (different code path/tie-break than engine)."""
     cells = {}
@@ -311,6 +350,143 @@ def run_solution_checks(challenge, solution):
     except Exception as e:
         checks.append(_chk("S-BLOCK", "legacy data read", False, repr(e)))
         checks.append(_chk("S-MONO", "legacy data read", False, repr(e)))
+
+    # ---------------- S-DEVIATION-W81 family (W81-142A) ----------------
+    # The order-k deviation identity: D1-k + V2-k + the extraction layer.
+    # S-DEVIATION-ENGINE: subprocess the campaign engine; PASS = exit 0
+    #   + 51/51 in the receipts + ALL GREEN verdict.
+    t0 = time.time()
+    if os.path.isfile(DEV_ENGINE):
+        try:
+            proc = subprocess.run([sys.executable, DEV_ENGINE, "--verify"],
+                                  capture_output=True, text=True, timeout=420)
+            out = proc.stdout + proc.stderr
+            receipts_txt = ""
+            if os.path.isfile(DEV_RECEIPTS):
+                with open(DEV_RECEIPTS, encoding="utf-8") as f:
+                    receipts_txt = f.read()
+            ok = (proc.returncode == 0
+                  and "CHECKS: 51/51 passed" in receipts_txt
+                  and "ENGINE VERDICT: ALL GREEN" in receipts_txt
+                  and "51/51 passed" in out)
+            det = ("exit=%d; receipts: %s" % (
+                proc.returncode,
+                [ln for ln in receipts_txt.splitlines()
+                 if ln.startswith(("CHECKS:", "ENGINE VERDICT", "WALL"))]))
+            checks.append(_chk(
+                "S-DEVIATION-ENGINE",
+                "engine142deviation.py --verify: exit 0 + 51/51 passed + ENGINE VERDICT: ALL GREEN in receipts142deviation.txt (D1-k identity 4-method battery, V2-k vanishing, extraction plug-backs on 14 greedy cells, 5 negative controls)",
+                ok, det, time.time() - t0))
+        except subprocess.TimeoutExpired:
+            checks.append(_chk("S-DEVIATION-ENGINE",
+                               "engine142deviation.py --verify within 420s",
+                               False, "subprocess timed out", time.time() - t0))
+    else:
+        checks.append(_chk("S-DEVIATION-ENGINE", "deviation engine present",
+                           False, DEV_ENGINE + " missing"))
+
+    # S-DEVIATION-IDENTITY: independent in-driver verification of D1-k and
+    # V2-k by BRUTE constraint enumeration (fresh code, no engine import).
+    t0 = time.time()
+    try:
+        import random as _r
+        rng = _r.Random(81142)
+        ok = True
+        det = []
+        for (k, p) in [(3, 13), (4, 11)]:
+            for t in range(2):
+                A = set(rng.sample(range(p), p // 3))
+                a = len(A)
+                delta = a / p
+                f = [(1 if x in A else 0) - delta for x in range(p)]
+                fh = _dev_dft(f, p)
+                T = _dev_T_brute(A, k, p)
+                # D1-k RHS by brute layers (s=1,2 verified zero on the way)
+                rhs = delta ** k * p * p
+                vanish12 = True
+                dim_ok = True
+                for s in range(1, k + 1):
+                    for S in itertools.combinations(range(k), s):
+                        tot, n_sol = _dev_layer_brute(fh, p, S)
+                        if s <= 2:
+                            # V2-k: only the trivial solution, layer = 0
+                            vanish12 &= (n_sol == 1 and abs(tot) < 1e-9)
+                        # dimension law: #V_S = p^{s-2} for s >= 2
+                        # (s=1: the single constraint r = 0 has 1 solution)
+                        dim_ok &= (n_sol == (p ** (s - 2) if s >= 2 else 1))
+                        rhs += (delta ** (k - s)) * (p ** (2 - s)) * tot
+                id_ok = abs(rhs - T) <= 1e-8 * max(1.0, T)
+                ok &= id_ok and vanish12 and dim_ok
+                if k == 3 and t == 0:
+                    # F1-REPRO: the k=3 layer is exactly the F1 kernel
+                    F1 = sum(fh[r] * fh[r] * fh[(-2 * r) % p]
+                             for r in range(p))
+                    ok &= abs(rhs - (delta ** 3 * p * p + F1 / p)) <= 1e-8
+                    det.append("k=3: D1-k == F1 kernel form (byte-level)")
+                det.append("k=%d p=%d |A|=%d: brute T=%d, D1-k rhs %.6f, "
+                           "s<=2 vanish=%s, #V_S=p^{s-2}=%s"
+                           % (k, p, a, T, rhs.real, vanish12, dim_ok))
+        checks.append(_chk(
+            "S-DEVIATION-IDENTITY",
+            "THEOREM D1-k + V2-k verified by independent brute-force constraint enumeration at (k=3,p=13) and (k=4,p=11): T_k = delta^k p^2 + sum_{s>=3} delta^{k-s} D_s exactly; every s<=2 constraint system has ONLY the trivial solution with zero layer; #V_S = p^{s-2}; k=3 reduces to the banked F1 kernel",
+            ok, "; ".join(det), time.time() - t0))
+    except Exception as e:
+        checks.append(_chk("S-DEVIATION-IDENTITY", "independent D1-k check",
+                           False, repr(e), time.time() - t0))
+
+    # S-DEVIATION-CONSTANTS: the extraction-layer constants, exact arithmetic.
+    t0 = time.time()
+    try:
+        from fractions import Fraction
+        import math
+        ok = True
+        det = []
+        # TC-4 carriage biconditional in EXACT rationals (delta=2/3 boundary)
+        tc4 = all((((1 - d) ** 2 / d ** 2 <= Fraction(1, 4))
+                   == (d >= Fraction(2, 3)))
+                  for d in [Fraction(1, 2), Fraction(3, 5), Fraction(2, 3),
+                            Fraction(7, 10), Fraction(9, 10)])
+        ok &= tc4
+        det.append("TC-4 (1-d)^2/d^2 <= 1/4 iff d >= 2/3 exact in Fractions "
+                   "(boundary (1/9)/(4/9) = 1/4): %s" % tc4)
+        # OB-4: 2 p^2 21^2 < (31p-462)^2 — passes at every prime >= 359,
+        # fails at 349 and 353; gap polynomial positive for all p >= 355.
+        def _ob4(p):
+            return 2 * (p ** 2) * (21 ** 2) < (31 * p - 462) ** 2
+        ob4 = (all(_ob4(p) for p in [359, 367, 383, 1009, 10007, 104729])
+               and not _ob4(349) and not _ob4(353)
+               and all(_ob4(p) for p in range(355, 420)))
+        ok &= ob4
+        det.append("OB-4 2p^2*21^2 < (31p-462)^2: holds at every integer "
+                   "p >= 355 (primes >= 359), fails at 349/353: %s" % ob4)
+        # c_4 sign law + terminal crossings (algebra: c_4(delta*) = 1-delta*
+        # at delta* = (10-sqrt(10))/9; c_4 = 0 at delta = 2-sqrt(2))
+        def _c4(d):
+            return (d * d / 2 - (1 - d) ** 2) / (4 * (1 - d))
+        d3 = 2 - math.sqrt(2)
+        d4 = (10 - math.sqrt(10)) / 9
+        ok &= all((_c4(d) > 0) == (d > d3)
+                  for d in [0.3, 0.5, 0.58, 0.5857, 0.5858, 0.586, 0.7, 0.9])
+        ok &= abs(_c4(d3)) < 1e-12
+        ok &= abs(_c4(d4) - (1 - d4)) < 1e-12
+        # L-TERM-3-SHARP sharpens the banked L-TERM constant
+        ok &= d3 < (9 - math.sqrt(17)) / 8
+        # k=3 demand crossing at the same 2-sqrt(2) (L-TERM-3-SHARP algebra)
+        ok &= abs(d3 ** 2 / (2 * (1 - d3)) - (1 - d3)) < 1e-12
+        # terminal constants bracketed
+        ok &= 0.7597 < d4 < 0.7598 and 0.5857 < d3 < 0.5858
+        det.append("c_4 sign law (iff delta > 2-sqrt2); c_4((10-sqrt10)/9) "
+                   "= 1-(10-sqrt10)/9 (the L-TERM-4 crossing); "
+                   "2-sqrt2 = %.9f < banked (9-sqrt17)/8 = %.9f (SHARPENS)"
+                   % (d3, (9 - math.sqrt(17)) / 8))
+        checks.append(_chk(
+            "S-DEVIATION-CONSTANTS",
+            "The extraction-layer constants exact: TC-4 carriage biconditional in exact rationals (boundary delta=2/3 gives exactly 1/4); OB-4 integer arithmetic (every prime p >= 359 passes, 349/353 fail); c_4(delta) > 0 iff delta > 2-sqrt(2); L-TERM-4 crossing c_4 = 1-delta at (10-sqrt(10))/9 = 0.759746...; L-TERM-3-SHARP 2-sqrt(2) = 0.585786... sharpens the banked (9-sqrt(17))/8 = 0.6096",
+            ok, "; ".join(det), time.time() - t0))
+    except Exception as e:
+        checks.append(_chk("S-DEVIATION-CONSTANTS",
+                           "extraction constants exact check", False,
+                           repr(e), time.time() - t0))
     return checks
 
 
