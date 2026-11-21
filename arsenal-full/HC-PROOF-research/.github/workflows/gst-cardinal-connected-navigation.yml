@@ -1,0 +1,60 @@
+name: GST connected cardinal-world navigation
+
+on:
+  push:
+    branches:
+      - research/gpt6-gst-cardinal-intent-reconstruction-20261110
+    paths:
+      - 'GSTCardinalConnectedNavigation.lean'
+      - '.github/workflows/gst-cardinal-connected-navigation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore pinned Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-gst-cardinal-navigation
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Set up Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Kernel check connected cardinal navigation
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTCardinalNavLib GSTCardinalConnectedNavigation
+          if timeout 6500 lake build GSTCardinalConnectedNavigation > gst-cardinal-navigation.log 2>&1; then
+            echo "LEAN PASSED: GSTCardinalConnectedNavigation"
+          else
+            grep -nE 'error:|sorryAx|unknown identifier|unsolved goals|failed to synthesize' gst-cardinal-navigation.log | tail -n 100 || true
+            tail -n 100 gst-cardinal-navigation.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-cardinal-navigation.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Preserve compile diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-cardinal-navigation-lean
+          path: gst-cardinal-navigation.log
+          if-no-files-found: warn

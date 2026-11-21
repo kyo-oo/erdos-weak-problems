@@ -1,0 +1,107 @@
+name: GST Image 3 mutual CM/N-cohomology source birth full native and original-X Lean
+
+on:
+  push:
+    branches:
+      - research/gpt6-native-image3-navigation-cm-star-ncoho-20261111
+    paths:
+      - 'GSTImageThreeMutualWaveNavigation.lean'
+      - 'GSTImageThreeGeometricTwoSourceBirth.lean'
+      - 'GSTImageThreeMutualOriginalXLanding.lean'
+      - '.github/workflows/gst-image3-mutual-native-source-birth.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  geometry:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-gst-image3-originalx
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Prepare pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Prove true original-X two-source birth and mutual Chow/Betti compiler
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTImage3MutualGeometryLib GSTImageThreeMutualOriginalXLanding
+          if timeout 6800 lake build GSTImageThreeMutualOriginalXLanding > gst-image3-mutual-geometry.log 2>&1; then
+            echo "LEAN PASSED: two-source birth and mutual native Chow square"
+          else
+            grep -nE 'error:|sorryAx|unknown identifier|unsolved goals|failed to synthesize' gst-image3-mutual-geometry.log | tail -n 110 || true
+            tail -n 120 gst-image3-mutual-geometry.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-image3-mutual-geometry.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Save geometry diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-image3-mutual-geometry
+          path: gst-image3-mutual-geometry.log
+          if-no-files-found: warn
+  native:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v5
+      - name: Restore Lean
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.elan
+          key: hc-lean-toolchain-Linux-gst-image3-navigation
+          restore-keys: |
+            hc-lean-toolchain-Linux-
+      - name: Prepare pinned Lean and Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ ! -x "$HOME/.elan/bin/lake" ]; then
+            curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          fi
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake exe cache get
+      - name: Prove native original U/J/M two-world mutual-source CM identity
+        shell: bash
+        run: |
+          set -euo pipefail
+          export PATH="$HOME/.elan/bin:$PATH"
+          python3 scripts/gst_lean_dependency_roots.py GSTImage3MutualNativeLib GSTImageThreeMutualWaveNavigation
+          if timeout 6800 lake build GSTImageThreeMutualWaveNavigation > gst-image3-mutual-native.log 2>&1; then
+            echo "LEAN PASSED: native original coupled CM source identity"
+          else
+            grep -nE 'error:|sorryAx|unknown identifier|unsolved goals|failed to synthesize' gst-image3-mutual-native.log | tail -n 110 || true
+            tail -n 120 gst-image3-mutual-native.log || true
+            exit 1
+          fi
+          if grep -E "declaration uses 'sorry'|sorryAx" gst-image3-mutual-native.log; then
+            echo "Unexpected sorry axiom" && exit 1
+          fi
+      - name: Save native diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gst-image3-mutual-native
+          path: gst-image3-mutual-native.log
+          if-no-files-found: warn
