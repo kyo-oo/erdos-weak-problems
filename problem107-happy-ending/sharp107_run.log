@@ -1,0 +1,19 @@
+=== engine107sharp — THE SHARP ALL-n ENGINE (W78-107E) ===
+seed: 20261178
+PASS S0-SETUP banked otbank re-verified: {3: 1, 4: 2, 5: 3, 6: 20, 7: 242, 8: 6405} reflection-distinguished (= mirror-identified {3: 1, 4: 2, 5: 3, 6: 16, 7: 135, 8: 3315}; n=8 selfmirror 225 = 2*3315-6405); extremal bank sizes {'(3,3)': 2, '(4,4)': 6, 
+PASS S1-LAVOID-LAW L-AVOID-SHARP: NO i-cup and NO j-cap inside ANY label class P_ij — 127414 classes (143783 points) over 19623 frames (ALL order types n<=7 x ALL direction cells; n=8 sample 400 types; extremal S(3,3)..S(7,7); 3000 random n in [8,16]); bigges
+PASS S3-MLT-SHARP |P_ij| <= C(i+j-4,i-2) everywhere (two counting codes agree on every frame: banked cross-DP vs independent Fraction-slope DP; TRUE brute-force labels re-verified on 17275 sets n<=9); the law is TIGHT — the extremal saturation: S(5,5): 9 cla
+PASS S2-LAVOID-MECH the proof's steps, machine shadow: Step 1 (left-anchored exclusion) on 461242 longest-at-right chains x 3493335 left-witness pairs — cross(w,p1,p2)<0 on every cup and >0 on every cap, ZERO exceptions; the pair shadow (dagger/dagger-prime) o
+PASS S4-ASSEMBLY HOCKEY sum_{t=r}^{N} C(t,r)=C(N+1,r+1): 1891 instances (r,N in [0,60]); VANDERMONDE-DOUBLE 1+sum_{i=2}^{a-1}sum_{j=2}^{b-1}C(i+j-4,i-2)=C(a+b-4,a-2): 3364 instances (a,b in [3,60]); every value by TWO independent binomial codes (math.comb v
+PASS S5-CC-SHARP-EXH the (a,b)-lemma EXHAUSTIVELY on ALL banked order types n<=7 (1,2,3,16,135 mirror-identified = 1,2,3,20,242 reflection-distinguished) x ALL direction cells: N=3:(a,b)=[(3, 3)] over ALL 1 types x cells(<= 3); N=4:(a,b)=[(3, 4), (4, 3)] over A
+PASS S6-CC-RANDOM random GP batteries at the exact threshold C(a+b-4,a-2)+1: (3,3):N=3 32000/32000, (3,4):N=4 10000/10000, (4,3):N=4 10000/10000, (3,5):N=5 8000/8000, (5,3):N=5 8000/8000, (3,6):N=6 6000/6000, (6,3):N=6 6000/6000, (4,4):N=7 10000/10000, (4,5)
+PASS S7-SHARP-COMPOSE ES-ALLN-SHARP instances (any-x GP set -> integer det>0 frame -> (n,n) label DP -> chain -> convex by BOTH codes): n=3:N=3 40/40 (chain->convex BOTH codes), n=4:N=7 40/40 (chain->convex BOTH codes), n=5:N=21 30/30 (chain->convex BOTH codes),
+PASS S8-INF-PEAKS the peaks law: 400 DISTINCT-value sequences (n in [50,400)): branch census {'peaks': 169, 'ascent': 231}, peaks branch STRICTLY decreasing, ascent branch STRICTLY increasing and halting EXACTLY at the final position (the finite surrogate of
+PASS S9-INF-DICH the box-census law |{p: cup<=a-1, cap<=b-1}| <= C(a+b-4,a-2): 42776 (a,b)-box checks over all frames (order types n<=6 x cells, n=8 sample, extremals, 600 random), BOTH counting codes agree; extremal EQUALITY: S(4,4): box(3,3)=6=|S|=C(4,2);
+PASS S10-INF-RAM3 60 abstract 2-colorings of triples (N in [20,60)): the a_i/X_i/c*_i build certified STRUCTURALLY on every one (anchors increasing, col(a_i,a_j,a_k)=c*_i for all i<j<k, majority subsequence H fully homogeneous; |A| in [2,4], |H| in [1,3] — t
+PASS S11-CARD-ARITH the cardinal-strength arithmetic: packet composition 2/3/6-pow (j,k in [0,25)) exact; joined-prefix recurrence J(k+1)=J(k)+5*6^k (k<30); towers k+4<=2^(k+2) (k<60), k^2<=2^k (4<=k<60); terminal cone m<3^m (m<40); every finite bound dwarfed:
+PASS S12-LAW-SPOTS 23/23 arsenal law spot-checks pass at statement: GSTCausalPairingGraphs (bracket_skew/self/transform/shear, plucker_four, graph_transform); GSTDiagonalRead + ErdosTernary2 (binom_two_term = binom_first_order = binom_mod_sq_local, the mod-x^
+PASS S13-NEG-CONTROLS the full-set pseudo-class (contains its own max cup) is FLAGGED by the L-AVOID checker; a planted census above C(i+j-4,i-2) is FLAGGED; a corrupted label array is DETECTED by the two-code comparison; triangle+interior NON-convex on both cod
+
+TOTAL: 14/14 PASS, wall 128.2s
+SHARP_ENGINE_GREEN=1

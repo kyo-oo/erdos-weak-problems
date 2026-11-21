@@ -101,3 +101,43 @@ ALLN_ENGINE_GREEN=0
 [23:43:49] S4c THE AVOID LAW — P_ij (points of label exactly (i,j)) contains NO i-cup and NO j-cap as a standalone set
 [23:43:50] S4c RESULT: 3322 label classes (mult>=2) in 4000 random sets: i-cups in P_ij: 0; j-caps in P_ij: 0; (i+1)-cups: 0; (j+1)-caps: 0. THE AVOID LAW HOLDS: P_ij avoids i-cups and j-caps. THE M-LAW REDUCES TO AVOID + the strong induction (i+j). #BY GST LAW sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116] (the subset-sum discipline of the label decomposition).
 [23:43:50] === W77-107E engine107alln.py DONE (stage s4c) ===
+
+=== ADDENDUM W78-107E (2026-11-18) — POST-RUN CORRECTIONS, APPEND-ONLY ===
+The W77 run recorded above closed at TOTAL 8/13. The five FAILs carried
+three engine-side defects, all found and fixed by the W78-107E lane
+(worktree w78-107e); the W77 lines above are preserved verbatim.
+
+1. INF-MS / COMP-ESALLN (peaks): with ANY peak convention the final
+   position of a finite sequence is a vacuous peak, so base.peaks_monotone's
+   ascent branch ("after the last peak") was ALWAYS empty — the branch
+   census {'decreasing': 129, 'increasing': 171} returned 171 EMPTY
+   ascent outputs. Corrected machine: engine107sharp.peaks_law_machine
+   (weak peaks; ascent from the last NON-FINAL peak; strictly increasing,
+   halting exactly at the final position — the finite surrogate of
+   never-halts). Certified S8-INF-PEAKS, receipts107sharp.txt.
+
+2. INF-RAM3: the |H|>=3 demand on RANDOM colorings is a finite-Ramsey
+   tower demand (N ~ 2^2^k); the greedy clique also missed the true
+   monotone fans. Corrected: structural certificate on abstract builds;
+   the geometric construction rebuilt on the TRUE longest monotone fan
+   (two monotone codes cross-checked) — the peaks route of
+   INFINITE_107.md §2. Certified S10-INF-RAM3, receipts107sharp.txt.
+
+3. LAW-SPOTCHECKS: the sum_le_sum_of_forall spot-check used f=x%7,
+   g=x%5+2 which VIOLATES the law's hypothesis at x=6 (6%7=6 > 6%5+2=3) —
+   a false test. Corrected: f=x%5, g=x%5+2 (and x//3 <= x//2), hypothesis
+   verified pointwise. The badPrefix antitone shadow had the inclusion
+   direction reversed. Certified S12-LAW-SPOTS 23/23.
+
+4. NEG-CONTROLS: root cause = the point_outside_scan SIGN FLIP in this
+   engine (alln107/engine107alln.py): the separation test required all of
+   'others' on the SAME side of line(a,b) as p instead of the OPPOSITE
+   side — convex_position_scan returned True for interior points
+   (e.g. (1,1) inside the triangle (0,0),(5,0),(0,5)). FIXED in place
+   (see the correction note in the function); verified both directions:
+   triangle+interior/square+center False, triangle/square/cups/caps True,
+   hull-vs-scan agreement 400/400 random sets, 599 chains convex by both
+   codes. All W77 positive certificates that used convex_both (ROT
+   invariance, CONV-CHAIN) are re-certified with the corrected code by
+   engine107sharp.py (S7, S10) — receipts107sharp.txt 14/14,
+   SHARP_ENGINE_GREEN=1.
