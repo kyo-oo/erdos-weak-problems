@@ -11,3 +11,6 @@
 [chunkot8 21:25:04] chunk done: +103 parents (242/242), types 6405 (418s)
 [chunkot8 21:25:14] FINAL n=8: 6405 reflection-distinguished, self-mirror 225, mirror-identified 3315 (anchor 3315) closure=True [OK — CERTIFIED]
 [chunkot8 21:25:14] wrote engine107f5_cache/ot8_v2.pkl (6405 types with exact realizations) | totals: cells=39204 conc_combos=152460 conc_crossed=12243 par_combos=101640 par_crossed=20209 sweep_grabs=0 walk_cfgs=674
+[hull8 00:30:41] hull-size classification of the certified n=8 types
+[hull8] n=8 hull census (reflection-distinguished): h=3:2296, h=4:2862, h=5:1081, h=6:156, h=7:9, h=8:1
+[hull8] total 6405 | hull<=4 stratum: 5158 parents for stage 2 | cross-check GREEN
