@@ -144,20 +144,19 @@ theorem three_pow_twopow_struct : ∀ s : Nat, 1 ≤ s → ∃ c : Nat,
   induction s with
   | zero => intro h; exact absurd h (by omega)
   | succ s ih =>
+    intro _
     rcases Nat.eq_zero_or_pos s with hs | hs
     · subst hs
       exact ⟨1, by decide, by decide⟩
     · obtain ⟨c, hc, hcodd⟩ := ih (by omega)
       have hpow : 3^(2^(s+1)) = (3^(2^s))^2 := by
-        rw [show (2:Nat)^(s+1) = 2^s * 2 from Nat.pow_succ 2 s,
-          Nat.mul_comm, ← Nat.pow_mul]
+        rw [show (2:Nat)^(s+1) = 2^s * 2 from Nat.pow_succ 2 s, Nat.pow_mul]
       refine ⟨c + 2^(s+1) * c * c, ?_, ?_⟩
       · rw [hpow, hc]
-        have e1 : (2:Nat)^(s+3) = 2 * 2^(s+2) := by
-          rw [Nat.pow_succ]; ring
-        have e6 : (2:Nat)^(s+2) = 2 * 2^(s+1) := by
-          rw [Nat.pow_succ]; ring
-        rw [e1, e6]
+        have eA : (2:Nat)^(s+2) = 2^s * 2^2 := Nat.pow_add 2 s 2
+        have eB : (2:Nat)^((s+1)+2) = 2^(s+1) * 2^2 := Nat.pow_add 2 (s+1) 2
+        have eC : (2:Nat)^(s+1) = 2^s * 2 := Nat.pow_succ 2 s
+        rw [eA, eB, eC]
         ring
       · have heven : 2^(s+1) * c * c % 2 = 0 := by
           refine Nat.mod_eq_zero_of_dvd ⟨2^s * c * c, ?_⟩
@@ -173,7 +172,7 @@ near-unity unit moves the residue by exactly one window). -/
 theorem near_unity_pow (s z k : Nat) :
     ∃ K : Nat, (1 + 2^(s+2) * z)^k = 1 + 2^(s+2) * K := by
   induction k with
-  | zero => exact ⟨0, by rw [Nat.pow_zero]; ring⟩
+  | zero => exact ⟨0, by rw [Nat.pow_zero, Nat.mul_zero, Nat.add_zero]⟩
   | succ k ih =>
     obtain ⟨K, hK⟩ := ih
     refine ⟨K + z + 2^(s+2) * z * K, ?_⟩
@@ -252,18 +251,31 @@ def censusSum (s : Nat) (n : Nat) : Nat → Nat
   | M+1 => censusSum s n M + digit3 n M * 3^(M % 2^s)
 
 /-- The two sums are congruent level-by-level (the period twin applied
-termwise). -/
+termwise, every rewrite an explicit instantiation — no ambiguous pattern
+matching). -/
 theorem sum_congr_mod (s : Nat) (hs : 1 ≤ s) : ∀ M n : Nat,
     (digitsRep n M) % 2^(s+2) = (censusSum s n M) % 2^(s+2) := by
   intro M
   induction M with
-  | zero => rfl
+  | zero => intro n; rfl
   | succ M ih =>
     intro n
     show (digitsRep n M + digit3 n M * 3^M) % 2^(s+2)
       = (censusSum s n M + digit3 n M * 3^(M % 2^s)) % 2^(s+2)
-    rw [Nat.add_mod, Nat.add_mod, ih n]
-    rw [Nat.mul_mod, Nat.mul_mod, three_pow_mod_period s M hs]
+    have hL : (digitsRep n M + digit3 n M * 3^M) % 2^(s+2)
+        = (digitsRep n M % 2^(s+2) + (digit3 n M * 3^M) % 2^(s+2)) % 2^(s+2) :=
+      Nat.add_mod _ _ _
+    have hR : (censusSum s n M + digit3 n M * 3^(M % 2^s)) % 2^(s+2)
+        = (censusSum s n M % 2^(s+2)
+            + (digit3 n M * 3^(M % 2^s)) % 2^(s+2)) % 2^(s+2) :=
+      Nat.add_mod _ _ _
+    have hPL : (digit3 n M * 3^M) % 2^(s+2)
+        = ((digit3 n M % 2^(s+2)) * (3^M % 2^(s+2))) % 2^(s+2) :=
+      Nat.mul_mod _ _ _
+    have hPR : (digit3 n M * 3^(M % 2^s)) % 2^(s+2)
+        = ((digit3 n M % 2^(s+2)) * (3^(M % 2^s) % 2^(s+2))) % 2^(s+2) :=
+      Nat.mul_mod _ _ _
+    rw [hL, hR, hPL, hPR, ih n, three_pow_mod_period s M hs]
 
 /-- **THE 2-ADIC BUDGET TOWER.** For every `n < 3^M` and every level
 `s ≥ 1`: `n` equals its level-`s` census sum modulo `2^(s+2)` — the digit
@@ -289,8 +301,9 @@ theorem rider_budget_tower (K s M : Nat) (hs : 1 ≤ s) (hK : s + 2 ≤ 2 * K)
   have hp : (4:Nat)^K = 2^(2*K) := by
     rw [show (4:Nat) = 2^2 from rfl, ← Nat.pow_mul]
   have h2 : 2^(s+2) ∣ 4^K := by
-    rw [hp, ← Nat.pow_add]
+    rw [hp]
     refine ⟨2^(2*K - (s+2)), ?_⟩
+    rw [← Nat.pow_add]
     congr 1
     omega
   have hmod : (4^K) % 2^(s+2) = 0 := Nat.mod_eq_zero_of_dvd h2
