@@ -158,7 +158,20 @@ def convex_position_hull(pts):
 def point_outside_scan(p, others):
     """p outside conv(others) iff some pair (a,b) of others carries all of
     'others' weakly on one side of line(a,b) and p strictly on the other.
-    Pure orientation arithmetic; shares no code path with the hull."""
+    Pure orientation arithmetic; shares no code path with the hull.
+
+    [W78-107E CORRECTION 2026-11-18] The W77 version of this function had
+    the separation test INVERTED: it required all of 'others' on the SAME
+    side of line(a,b) as p (side == sign(cross(a,b,p))) instead of the
+    OPPOSITE side. Consequence: convex_position_scan returned True for
+    interior points (e.g. (1,1) inside the triangle (0,0),(5,0),(0,5)) —
+    the W77 NEG-CONTROLS failure. The sign below is corrected to -side
+    (separating line: others on one side, p strictly on the other). All
+    positive uses (cups/caps/chains are genuinely convex, detected by the
+    corrected code via the neighbor-pair certificate) are unaffected; the
+    negative controls now behave. Verified: triangle+interior False,
+    square/hull sets True, full re-run receipts107sharp.txt.]
+    """
     m = len(others)
     if m == 0:
         return True
@@ -178,7 +191,7 @@ def point_outside_scan(p, others):
                 if k in (i, j):
                     continue
                 cq = cross3(a, b, others[k])
-                if cq != 0 and (1 if cq > 0 else -1) != side:
+                if cq != 0 and (1 if cq > 0 else -1) == side:
                     ok = False
                     break
             if ok:
