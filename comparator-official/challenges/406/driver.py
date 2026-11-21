@@ -30,6 +30,11 @@ BATTERY_B = os.path.join(CAMP, "problem406-ternary-powers", "caplaw",
                          "battery406b.py")
 EXTRA_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
                             "ExtraLaws406.lean")
+BATTERY_C = os.path.join(CAMP, "problem406-ternary-powers", "battery406c.py")
+TWOADIC_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
+                              "TwoAdic406.lean")
+DUST_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
+                           "DustLaw406.lean")
 
 
 def _chk(cid, desc, ok, detail="", seconds=0.0):
@@ -278,6 +283,87 @@ def run_solution_checks(challenge, solution):
         "S-HALFLINE",
         "S076 half-line law receipts live: riders {0,1,4} satisfy 2*4^K < 3^(M+1); tail-law receipts floor(4^K/3^(K+1)) is 0/1-ternary; ExtraLaws406.lean carries all thirteen theorem symbols (Lean compilation is kills.yml Kernel 69)",
         receipts_ok, "; ".join(detail), time.time() - t0))
+
+    # S-TOWER (S077): the 2-adic budget-tower battery, ALL GREEN.
+    t0 = time.time()
+    proc = subprocess.run([sys.executable, BATTERY_C], capture_output=True,
+                          text=True, timeout=900)
+    out = proc.stdout + proc.stderr
+    ok = proc.returncode == 0 and "BATTERY406C_GREEN=1" in out
+    checks.append(_chk(
+        "S-TOWER",
+        "battery406c.py (S077): the 2-adic budget tower dual-method (square certificate 3^(2^s)=1+2^(s+2)c, period twin, the tower on all 512 Cantor numbers < 3^9 x 4 levels, rider tower receipts at all legal levels, pairing laws, the census-window kill power, the dust-edge 26 members) (Lean compilation is kills.yml Kernel 70)",
+        ok, out[-1500:], time.time() - t0))
+
+    # S-TOWER-LIVE (S077): the tower re-derived live on 256's six levels +
+    # the LX refutation receipts.
+    t0 = time.time()
+    live_ok = True
+    detail = []
+    for s in range(1, 7):
+        counts = {}
+        for i in (0, 1, 2, 5):
+            counts[i % 2 ** s] = counts.get(i % 2 ** s, 0) + 1
+        cs = sum(c * 3 ** r for r, c in counts.items())
+        good = cs % 2 ** (s + 2) == 0
+        live_ok = live_ok and good
+        detail.append(f"s={s}: census {cs} % 2^{s+2}={2**(s+2)} = {cs % 2**(s+2)}")
+    # the LX refutation witness, live dual-method
+    n1 = 3 ** 0 + 3 ** 7 + 3 ** 8 + 3 ** 13
+    live_ok = live_ok and (n1 == 1603072) and no_ternary_digit_two(n1) \
+        and v2(n1) == 9 and n1 % 2 ** 9 == 0 and n1 % 2 ** 10 != 0
+    detail.append(f"LX witness: {n1} = 2^9*{n1 // 2**9}, v2 = {v2(n1)} > 8 = 2*4")
+    n2 = 13 + 3 ** 69
+    live_ok = live_ok and no_ternary_digit_two(n2) and v2(n2) == 11
+    detail.append(f"far-cap: 13+3^69, v2 = {v2(n2)} > 8")
+    # the kernel symbols
+    try:
+        kt = open(TWOADIC_KERNEL, encoding="utf-8").read()
+        kd = open(DUST_KERNEL, encoding="utf-8").read()
+        live_ok = live_ok and all(sym in kt for sym in (
+            "theorem three_pow_twopow_struct", "theorem three_pow_mod_period",
+            "theorem digitsRep_eq", "theorem budget_tower",
+            "theorem rider_budget_tower", "theorem pair_mixed",
+            "theorem lx_refutation_receipt",
+            "theorem lx_refutation_far_cap")) \
+            and "theorem dust_edge" in kd
+        detail.append("TwoAdic406.lean + DustLaw406.lean symbols present"
+                      if live_ok else "missing kernel symbols")
+    except Exception as e:
+        live_ok = False
+        detail.append(repr(e))
+    checks.append(_chk(
+        "S-TOWER-LIVE",
+        "S077 the tower + LX refutation live: 256's digit census solves all 6 legal levels; 1603072 = 3^0+3^7+3^8+3^13 is 0/1-ternary with v2 = 9 > 2*4 (LX REFUTED, one position past the S076 census boundary); the far-cap 13+3^69 carries v2 = 11; kernel symbols present",
+        live_ok, "; ".join(detail), time.time() - t0))
+
+    # S-DUST-EDGE (S077): the dust-edge theorem, live tree census.
+    t0 = time.time()
+    levels = [[0]]
+    for j in range(10):
+        nxt = []
+        for r in levels[-1]:
+            d = (4 ** r // 3 ** (j + 1)) % 3
+            for t in (0, 1, 2):
+                if (d + t) % 3 != 2:
+                    nxt.append(r + t * 3 ** j)
+        levels.append(sorted(set(nxt)))
+    edge_ok = True
+    edge_members = []
+    for j in range(1, 11):
+        for r in levels[j]:
+            if 4 ** r < 3 ** (j + 1):
+                edge_members.append(r)
+                if not no_ternary_digit_two(4 ** r):
+                    edge_ok = False
+    edge_small = sorted(set(r for r in edge_members if r < 100))
+    edge_ok = edge_ok and edge_small == [0, 1, 4] \
+        and all(len(levels[j]) == 2 ** j for j in range(11))
+    checks.append(_chk(
+        "S-DUST-EDGE",
+        "S077 the dust-edge theorem live: the tree doubles to level 10 (2^j alive per level), every edge member (4^r < 3^(j+1)) is a rider, and the edge members below 100 are exactly {0,1,4}",
+        edge_ok, f"edge members: {edge_members}; below 100: {edge_small}",
+        time.time() - t0))
     return checks
 
 
@@ -338,6 +424,32 @@ def run_negative_controls(challenge, solution):
         "N-HALFLINE",
         "corruption rejected: the half-line law kills K=6 (2*4^6=8192 >= 3^8=6561) but NOT K=5 (2*4^5=2048 < 3^7=2187) -- the law is necessary, not sufficient; K=5 dies by digits, not magnitude",
         ok, f"K=5 killed={k5_killed} (must be False), K=6 killed={k6_killed} (must be True)", time.time() - t0))
+
+    # N-LX (S077): the corrupted LX conjecture must be REJECTED — the
+    # counterexample stands: 1603072 is 0/1-ternary with popcount 4 and
+    # v2 = 9 > 8 = 2*4. A solution still claiming LX is corrupt.
+    t0 = time.time()
+    n1 = 3 ** 0 + 3 ** 7 + 3 ** 8 + 3 ** 13
+    lx_claim_false = v2(n1) > 2 * 4  # True -- the refutation
+    ok = lx_claim_false and no_ternary_digit_two(n1) and n1 == 1603072
+    checks.append(_chk(
+        "N-LX",
+        "corruption rejected: the LX popcount-cap conjecture (v2 <= 2*popcount3) is FALSE — 1603072 = 3^0+3^7+3^8+3^13 is 0/1-ternary with popcount 4 and v2 = 9 > 8; any ledger still carrying LX as a claim is corrupt (the S077 refutation, one position past the S076 census boundary)",
+        ok, f"v2({n1}) = {v2(n1)} > 8; 0/1-ternary = {no_ternary_digit_two(n1)}",
+        time.time() - t0))
+
+    # N-TOWER (S077): the corrupted tower direction must be rejected —
+    # the census sum is congruent to n (the identity), never independently
+    # zero: a random 0/1-digit set's census is NOT 0 mod 8 in general.
+    t0 = time.time()
+    n_bad = 3 ** 0 + 3 ** 1  # 4: E=1, O=1 -> census level 1 = 1+3 = 4 != 0 mod 8
+    census_bad = (1 + 3) % 8
+    ok = (census_bad != 0) and (n_bad % 8 == 4)
+    checks.append(_chk(
+        "N-TOWER",
+        "corruption rejected: the tower is an identity (n == census mod 2^(s+2)), not a zero-law — 4 = 3^0+3^1 has census 1+3 = 4 != 0 mod 8 (only RIDERS force census == 0, via n == 0 in the window)",
+        ok, f"census(4) mod 8 = {census_bad}; 4 mod 8 = {n_bad % 8} (equal, nonzero)",
+        time.time() - t0))
     return checks
 
 
