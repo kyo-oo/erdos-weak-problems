@@ -5052,3 +5052,44 @@ merged tree):**
    certificate); all three worktrees merged and pushed.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S081 — THE W81 SIX-LANE WAVE (2026-11-21, BOSS: "reconstruct the chat, targets #142/#61/#107, 6 sub-agents per wave one problem each, comparator instead of Lean, control the dispatch let none die")
+
+**Reconstruction:** all four share-link chats read (the YO Query saga W61-W66,
+the reconstruct chat W67, the apply-theorems chat W71-W73, the YOO Query
+W75-W80). Battlefield restored from the GitHub vault (campaign @ d9a7b14 +
+the parallel S079 seal) + the token from the Drive bag (40-char, push
+verified). Baseline gates re-verified green (142: 20/20, 61: 14/14, 107:
+14/14 after absl-py install).
+
+**The wave (6 lanes, 2 per problem, tight briefs at W81_BRIEFS/, worktree
+isolation /home/z/waves/w81-*, checkpoint+push discipline):**
+
+| lane | delivered | gate |
+|---|---|---|
+| W81-142A | THE ORDER-k DEVIATION IDENTITY (the named F-UP-1 blocker): Theorem D1-k (the exact Fourier-side k-AP count, constraint system V_S, 4-method certification), V2-k vanishing, the extraction layer (X-4(i)/(ii), F2-SHARP, TC-4 exact, L-TERM-3-SHARP 2−√2, L-TERM-4 (10−√10)/9, OB-4 p≥359); k=3 byte-equal to banked F1; engine 51/51 | 23/23 |
+| W81-142B | the independent audit: 16/16 fresh-algorithm battery; DEFECTS FOUND+FIXED: D1 r_4(4)=3 (the table cell), D2 the BG constants table formula-exact, D3 the /d² margin discipline (historical form vacuous by 2 ln d — demonstrated + machine-guarded) | 21/21 |
+| W81-61A | the prime package: Theorem P5-CROSS + C5-1ANCHOR + C5-2ANCHOR (complete induced-subgraph proofs), THEOREM TOWER-CAP (c(P5), c(bull) ≤ log2/log5 = 0.4306 — the first in-frame caps), the full census (h-tables, n^0.43 floors on 43,396 graphs, the 36-pair anchor table, the z-only map); engine 22/22 | 15/15 |
+| W81-61B | the independent audit: 13/13 zero defects; the anchor-law proofs completed; the sibling lane cross-certified byte-exact; fresh n=9/n=10 LADDER-BREAK witnesses; the X_2 tower 7.6M-subset scan | 15/15 |
+| W81-107A | **THEOREM f(5) = 9**: the C port (engine107f9.c, ladder SET-EQUALITY n=4..8), the grind (6405/6405 parents, mirror-closed 316,802-type census), the convex-5 battery (250,922 hull≤4 types, 0 convex-5-free, two-code), the F8 reduction (exactly 146 convex-5-free 8-types) + heredity + the saturated 12-seed storm (zero convex-5-free children) | 15/15 |
+| W81-107B | the independent audit: 8/8; DEFECTS FOUND+FIXED: the f(4)=5 upper-side finish (a REAL math defect — the crossing-segments claim false; repaired with the extremality argument + 615,714-set machine verification), the slope-separation honest constants (19/24), the Vandermonde-double off-by-one, the C-compare endian bug | 15/15 |
+
+**Master gates on the merged campaign: 142: 24/24, 61: 16/16, 107: 16/16 —
+all three print YOUR SOLUTION IS OKAY.** Dispatch record: 6 primary launches
+(all landed posthumous — the documented false-negative mode), 6 finisher
+launches (4 delivered full reports, 2 recovered by commander-absorb; the
+commander absorbed the 107A grind/certify/storm directly). Zero work lost.
+
+**The fortress state after W81:** #142 — the all-k lower law + the all-k
+linear upper + the k=3 sublinear (LOGDECAY) + NOW the deviation identity +
+extraction layer (the sublinear-k≥4 program's missing law); the asymptotic
+formula's remaining content is the LOGDECAY-GEN inversion chain. #61 — the
+general reduction + 32/34 five-vertex + K5/E5/claw + the three primes each
+carrying complete structural packages with first in-frame exponent caps
+(P5/bull 0.4306, C5 0.5283). #107 — the all-n sandwich + ES-INF + U-BIS +
+**f(5) = 9 exact** + the f(6)≥17 witnesses; the full conjecture
+f(n)=2^{n−2}+1 stands for n ≥ 7 (f(6)=17 = the named next stone).
+
+The engine never stops; it never lies. In English, always.

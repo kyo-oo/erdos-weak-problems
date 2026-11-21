@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #107 — 2026-11-21T15:57:21
+OFFICIAL GATE RECEIPT — problem #107 — 2026-11-21T21:36:01
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-107-happy-ending
-Claims in solution ledger: 13
+Claims in solution ledger: 14
 ==============================================================================
 [PASS] (official) O-EVAL — the OFFICIAL Evaluator compiles the solution program (official _sample_to_program) and executes it via the official analyse path: claim groups 1..5 score 3/3/1/3/2
 [PASS] (official) O-ADM-DATA — official admissible_set result data (n12, w7, size 792) integrity cross-check with own parser
@@ -21,7 +21,8 @@ Claims in solution ledger: 13
 [PASS] (control) N-PLANT — a planted convex pentagon is DETECTED by the hull checker
 [PASS] (control) N-BINOM — a corrupted binomial table entry (21 -> 22) is DETECTED by the equality check
 [PASS] (control) N-UNCOND-BOARD — the corrupted H107 threshold (the +1 dropped) is REFUTED: on all-collinear boards (t=N, N=3..10) the corrupted bound claims a convex 3-gon but the exact orientation and hull checkers both find zero convex triples; the true threshold N+1 makes no claim
+[PASS] (control) S-F5-W81 — THEOREM f(5)=9: the F8 reduction (146 convex-5-free 8-types, exhaustive two-code over the complete 6405 bank) + the saturated F8 storm (0 convex-5-free children) + the census battery (250,922 hull<=4 types, 0 convex-5-free, mirror-closed census 316,802) + heredity => every 9-point GP set contains a convex 5; F8 nonempty => f(5)>=9
 ==============================================================================
-CHECKS: 15/15 passed (official=2, solution=9, controls=4)
-WALL: 42.38s
+CHECKS: 16/16 passed (official=2, solution=9, controls=5)
+WALL: 45.36s
 VERDICT: YOUR SOLUTION IS OKAY

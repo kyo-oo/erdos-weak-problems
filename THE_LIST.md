@@ -317,3 +317,19 @@ lanes recovered by checkpoint-salvage + finisher agents + commander absorb
 (the W80-107E finisher's commits landed posthumously; the commander killed
 two report-layer bugs and completed the n=7 scan). No work lost. The
 commander-absorb law held.
+
+---
+
+## §S081 — THE W81 WAVE (2026-11-21, the six-lane comparator war)
+
+| ID | target | delivered | status |
+|---|---|---|---|
+| W81-142A | #142 the sublinear blocker | THE ORDER-k DEVIATION IDENTITY (D1-k + V2-k + the extraction layer, constants sharpened: L-TERM-3-SHARP 2−√2, L-TERM-4 (10−√10)/9, OB-4 p≥359); engine 51/51 | THE NAMED F-UP-1 LAW IS BANKED — the k≥4 sublinear program unblocked; the LOGDECAY-GEN inversion chain is the named next |
+| W81-142B | #142 audit | 16/16 fresh battery; D1-D3 fixed (r_4(4)=3; the BG constants table; the /d² margin discipline) | CLEAN |
+| W81-61A | #61 the five-vertex primes | P5-CROSS + C5-1/2-ANCHOR (complete proofs) + TOWER-CAP c(P5),c(bull) ≤ 0.4306 (first in-frame caps) + the census 22/22 | the primes carry complete structural packages; windows (0, 0.4306] / (0, 0.5283] |
+| W81-61B | #61 audit | 13/13 zero defects; anchor-law proofs; cross-certified | CLEAN |
+| W81-107A | #107 f(5) | **THEOREM f(5) = 9** (the F8 reduction + heredity + the storm + the battery + the ladder; census 316,802 mirror-closed) | THE THIRD EXACT VALUE IS DEAD (f(3)=3, f(4)=5, f(5)=9); f(6)=17 the named next |
+| W81-107B | #107 audit | 8/8; five defects fixed (incl. the f(4)=5 finish math repair) | CLEAN |
+
+Master gates (merged campaign): 142: 24/24, 61: 16/16, 107: 16/16 —
+YOUR SOLUTION IS OKAY ×3. CI verdicts: (this seal's push).
