@@ -1,0 +1,14 @@
+=== ot8 realization-diversity fix (commander surgery, W75-107K) ===
+parents: 242 | extra perturbations per parent: up to 300
+  parent 0/242: types so far 158 (3s)
+  parent 40/242: types so far 2715 (74s)
+  parent 80/242: types so far 4210 (156s)
+  parent 120/242: types so far 5060 (208s)
+  parent 160/242: types so far 5763 (286s)
+  parent 200/242: types so far 6158 (351s)
+  parent 240/242: types so far 6401 (493s)
+TOTAL insertions: 99742 | realizations used: 616 | types: 6402
+!! mirror-closure failure: (1, 1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1,
+reflection-distinguished: 6402 | self-mirror: 225 | mirror-identified: 3313 (anchor 3315)
+!! STILL MISMATCH: identified=3313 vs 3315, closure_ok=False
+wall: 530s

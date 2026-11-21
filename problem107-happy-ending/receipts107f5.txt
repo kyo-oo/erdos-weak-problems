@@ -1,0 +1,8 @@
+[ot] n=3: bootstrap 1 type
+[ot] n=4: 2 reflection-distinguished types (2 self-mirror + 0 chiral pairs) -> mirror-identified 2 (anchor 2) [OK] | parents=1 cell-insertions=2 wall=0.0s
+[ot] n=5: 3 reflection-distinguished types (3 self-mirror + 0 chiral pairs) -> mirror-identified 3 (anchor 3) [OK] | parents=2 cell-insertions=5 wall=0.0s
+[ot] n=6: 20 reflection-distinguished types (12 self-mirror + 4 chiral pairs) -> mirror-identified 16 (anchor 16) [OK] | parents=3 cell-insertions=36 wall=0.1s
+[ot] n=7: 242 reflection-distinguished types (28 self-mirror + 107 chiral pairs) -> mirror-identified 135 (anchor 135) [OK] | parents=20 cell-insertions=886 wall=2.0s
+[ot] !! MIRROR-CLOSURE FAILURE at n=8
+[ot] n=8: 6402 reflection-distinguished types (198 self-mirror + 3102 chiral pairs) -> mirror-identified 3300 (anchor 3315) [MISMATCH] | parents=242 cell-insertions=28316 wall=76.6s
+[ot] !! COUNT CERTIFICATE MISMATCH at n=8: aborting.
