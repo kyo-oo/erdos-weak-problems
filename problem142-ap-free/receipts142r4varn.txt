@@ -1,0 +1,51 @@
+[23:50:11] === W77-142K KILL3 engine142r4.py START (all) ===
+[23:50:11] PART 1 — r_4(M) certified exhaustively for M <= 16 (both codes agree on freeness of every extremal witness)
+[23:50:11] r_4(1) = 1   witness=[1]
+[23:50:11] r_4(2) = 2   witness=[1, 2]
+[23:50:11] r_4(3) = 3   witness=[1, 2, 3]
+[23:50:11] r_4(4) = 3   witness=[1, 2, 3]
+[23:50:11] r_4(5) = 4   witness=[1, 2, 3, 5]
+[23:50:11] r_4(6) = 5   witness=[1, 2, 3, 5, 6]
+[23:50:11] r_4(7) = 5   witness=[1, 2, 3, 5, 6]
+[23:50:11] r_4(8) = 6   witness=[1, 2, 3, 5, 6, 8]
+[23:50:11] r_4(9) = 7   witness=[1, 2, 3, 5, 6, 8, 9]
+[23:50:11] r_4(10) = 8   witness=[1, 2, 3, 5, 6, 8, 9, 10]
+[23:50:11] r_4(11) = 8   witness=[1, 2, 3, 5, 6, 8, 9, 10]
+[23:50:11] r_4(12) = 8   witness=[1, 2, 3, 5, 6, 8, 9, 10]
+[23:50:11] r_4(13) = 9   witness=[1, 2, 3, 6, 7, 8, 10, 11, 13]
+[23:50:11] r_4(14) = 9   witness=[1, 2, 3, 6, 7, 8, 10, 11, 13]
+[23:50:11] r_4(15) = 10   witness=[1, 2, 4, 5, 7, 8, 9, 12, 14, 15]
+[23:50:11] r_4(16) = 10   witness=[1, 2, 4, 5, 7, 8, 9, 12, 14, 15]
+[23:50:11] ANCHOR: r_4(8) = 6 (exhaustive) — the M0=8 stone
+[23:50:11] PART 2 — copy machinery at M0=8, N=1000
+[23:50:11] #copies = 70929; min copies(x) = 142; max = 756
+[23:50:12] divisor empirical worst (N=200, 200 sampled 4-APs): 7 <= M0^2 = 64: True
+[23:50:12] PART 3 — R4-VARN explicit constants: the honest delta sweep (the numerator's sign IS the theorem's delta-range)
+[23:50:14] delta=1.00: numerator=+141858, c_4 >= 1.108e-03; plug-back 40/40 GREEN (both codes agree)
+[23:50:17] delta=0.95: numerator=+104058, c_4 >= 8.130e-04; plug-back 40/40 GREEN (both codes agree)
+[23:50:19] delta=0.90: numerator=+66276, c_4 >= 5.178e-04; plug-back 40/40 GREEN (both codes agree)
+[23:50:21] delta=0.85: numerator=+28538, c_4 >= 2.230e-04; plug-back 40/40 GREEN (both codes agree)
+[23:50:21] delta=0.80: numerator -8770 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.75: numerator -45348 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.70: numerator -81198 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.65: numerator -116318 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.60: numerator -150710 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.55: numerator -184290 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.50: numerator -216408 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.45: numerator -246926 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.40: numerator -275838 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.35: numerator -303146 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.30: numerator -328850 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] delta=0.25: numerator -352574 <= 0 — outside the M0=8 stone's reach (r_4(M0)/M0 = 0.750); the delta-threshold needs a larger certified M0 (the amplification front)
+[23:50:21] R4-VARN delta-range at M0=8, N=1000: delta >= 0.85 (numerator positive); the theorem is stated for this range with the explicit c_4(delta) above.
+[23:50:21] PART 4 — the k=4 model-step data (density sweep, both codes)
+[23:50:21] N=200, delta=0.3: avg 4-APs = 44.0 (min 34)
+[23:50:21] N=200, delta=0.2: avg 4-APs = 9.0 (min 4)
+[23:50:21] N=200, delta=0.1: avg 4-APs = 0.4 (min 0)
+[23:50:21] N=400, delta=0.3: avg 4-APs = 212.6 (min 172)
+[23:50:21] N=400, delta=0.2: avg 4-APs = 39.6 (min 24)
+[23:50:21] N=400, delta=0.1: avg 4-APs = 1.9 (min 0)
+[23:50:21] N=800, delta=0.3: avg 4-APs = 810.5 (min 732)
+[23:50:21] N=800, delta=0.2: avg 4-APs = 173.0 (min 139)
+[23:50:21] N=800, delta=0.1: avg 4-APs = 10.4 (min 4)
+[23:50:21] === W77-142K KILL3 engine142r4.py DONE (all) ===

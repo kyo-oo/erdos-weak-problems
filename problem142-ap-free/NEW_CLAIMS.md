@@ -64,3 +64,7 @@ exact file:line in arsenal-full/ this session and numerically spot-checked
 #BY GST LAW carryAtPos_bound [CardinalWorlds.lean:108]
 #BY GST LAW sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116]
 #BY GST LAW tower_cauchy [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810]
+
+## W77-142K claim (commander-absorbed lane)
+
+{"id": "C142-LOGDECAY", "statement": "For every integer N >= ceil(exp(4*10^7)): r_3(N) <= sqrt(26600) * N * sqrt(ln ln N / ln N). Zero premises; explicit constants.", "verification": "Pure-arithmetic inversion of the banked THEOREM SUBLINEAR (W76-142K, receipts142sublinear_v2.txt 264/264): Steps 1-4 in LOGDECAY.md (the eps-range sandwich with derivative-signed monotonicity; the tower-domination sandwich; the exact identity 13300/eps^2 = L/(2*ell)). Engine: engine142logdecay.py 19/19 green (receipts142logdecay.txt) — Method A exact chain + Method B direct 60-digit tower evaluation, 200-point grid L in [4e7, 1e50] + extremes to 1e120, negative controls at L=1e6 and L=2.9e7 proving the eps-range hypothesis load-bearing, eps-boundary localized at L* ~ 2.9268e7."}
