@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #61 — 2026-11-20T00:21:50
+OFFICIAL GATE RECEIPT — problem #61 — 2026-11-21T13:17:55
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -22,5 +22,5 @@ Claims in solution ledger: 15
 [PASS] (control) N-COGRAPH — planted induced P4 in a cograph is DETECTED by the P4 filter
 ==============================================================================
 CHECKS: 14/14 passed (official=4, solution=7, controls=3)
-WALL: 419.27s
+WALL: 424.49s
 VERDICT: YOUR SOLUTION IS OKAY

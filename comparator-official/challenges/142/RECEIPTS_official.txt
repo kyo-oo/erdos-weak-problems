@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #142 — 2026-11-19T23:45:27
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-21T13:10:46
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -28,5 +28,5 @@ Claims in solution ledger: 14
 [PASS] (control) S-FOURIER — Theorem F1: the exact Fourier counting identity #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r!=0} fhat(r)^2 fhat(-2r) — machine-exact at p=101 (with Parseval)
 ==============================================================================
 CHECKS: 20/20 passed (official=5, solution=8, controls=7)
-WALL: 2.67s
+WALL: 2.65s
 VERDICT: YOUR SOLUTION IS OKAY
