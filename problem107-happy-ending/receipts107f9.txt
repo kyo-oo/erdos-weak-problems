@@ -50,3 +50,11 @@
 [grind 15:01:05] chunk 13: +48 parents (592/6405; hull<=4: 592/5158), +5659 new types (census 111388), new-hull-hist {3: 3507, 4: 2152}, C-wall 41s, total 464s
 [grind 15:01:05] wall budget 500s at 464s — draining 1 running chunks, deferring 121
 [grind 15:01:26] chunk 14: +48 parents (640/6405; hull<=4: 640/5158), +4183 new types (census 115571), new-hull-hist {3: 2280, 4: 1903}, C-wall 46s, total 485s
+[grind 15:01:28] GRIND COMPLETE: 640/6405 parents, census 115571 reflection-distinguished types
+[grind 16:06:34] resume: 640/6405 parents done, census lines 115571, this run: 5765 parents max, workers=2
+[grind 16:06:34] launched chunk 15 (48 parents)
+[grind 16:06:34] launched chunk 16 (48 parents)
+[grind 16:34:14] resume: 640/6405 parents done, census lines 115571, this run: 5765 parents max, workers=2
+[grind 16:34:15] launched chunk 15 (4 parents)
+[grind 16:34:15] launched chunk 16 (4 parents)
+[grind 16:34:19] chunk 15: +4 parents (644/6405; hull<=4: 644/5158), +364 new types (census 115935), new-hull-hist {3: 200, 4: 164}, C-wall 3s, total 5s
