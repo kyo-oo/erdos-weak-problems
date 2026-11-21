@@ -222,6 +222,7 @@ def stage_ladder():
 PROG = os.path.join(F9DIR, "f9_progress.json")
 CENSUS = os.path.join(F9DIR, "f9_census.jsonl")
 CHUNKDIR = os.path.join(F9DIR, "chunks")
+os.makedirs(CHUNKDIR, exist_ok=True)
 
 def _parent_list():
     """All 6405 n=8 parents in hull-class order (hull<=4 FIRST — the
@@ -293,7 +294,12 @@ def _certify_chunk(children, results_set, prog, verify_all=True, sample_rate=0.0
         prog["census_lines"] = prog.get("census_lines", 0) + len(out_lines)
     return n_new, n_bad, hull_hist
 
-def stage_grind(chunk=128, walk_steps=6, max_chunks=None):
+def _git(args):
+    return subprocess.run(["git", "-C", HERE] + args,
+                          capture_output=True, text=True)
+
+def stage_grind(chunk=128, walk_steps=6, max_chunks=None, workers=1,
+                push_every=4, wall_budget=None):
     t_start = time.time()
     prog = _load_progress()
     done = set(prog["done"])
@@ -301,34 +307,31 @@ def stage_grind(chunk=128, walk_steps=6, max_chunks=None):
     todo = [(i, r) for i, r in enumerate(parents) if i not in done]
     R(f"[grind {now()}] resume: {len(done)}/{len(parents)} parents done, "
       f"census lines {prog.get('census_lines', 0)}, this run: "
-      f"{min(len(todo), chunk * (max_chunks or 10**9))} parents max")
+      f"{min(len(todo), chunk * (max_chunks or 10**9))} parents max, "
+      f"workers={workers}")
     results_set = _load_census_keys()
     n_chunk_id = len(prog["results"])
     n_chunks_this_run = 0
-    while todo:
-        batch = todo[:chunk]
-        bpath = os.path.join(CHUNKDIR, f"c{n_chunk_id:04d}.txt")
-        opath = os.path.join(F9DIR, "current.out")
-        write_batch(bpath, [(pack_signs(r[2]), 8,
-                             r[3]["chi"], r[3]["pts"]) for r in batch])
-        wall = run_engine(bpath, opath, walk_steps=walk_steps)
-        children, stats, errors = read_engine_output(opath, 9)
+    le4_total = sum(1 for r in parents if r[0] == 0)
+    census_committed = prog.get("census_committed", 0)
+
+    def certify_and_checkpoint(cid, batch, children, stats, errors, wall):
+        nonlocal census_committed
         if errors:
-            R(f"[grind {now()}] !! chunk {n_chunk_id}: {len(errors)} "
+            R(f"[grind {now()}] !! chunk {cid}: {len(errors)} "
               f"GENERIC-FAIL parents — STOP (must not happen at n=8)")
             return False
         for i, st in stats.items():
             if st.get("selfcheck") == "0" or st.get("formula") == "0":
-                R(f"[grind {now()}] !! chunk {n_chunk_id}: parent {i} "
-                  f"selfcheck/formula FAIL — STOP")
+                R(f"[grind {now()}] !! chunk {cid}: parent {i} "
+                   f"selfcheck/formula FAIL — STOP")
                 return False
         n_new, n_bad, hh = _certify_chunk(children, results_set, prog,
-                                          rngseed=n_chunk_id)
+                                          rngseed=cid)
         if n_bad:
-            R(f"[grind {now()}] !! chunk {n_chunk_id}: {n_bad} certification "
-              f"failures — STOP THE WORLD")
+            R(f"[grind {now()}] !! chunk {cid}: {n_bad} certification "
+               f"failures — STOP THE WORLD")
             return False
-        # update stats
         agg = prog.setdefault("stats", {})
         for i, st in stats.items():
             for k in ("cells", "conc", "par", "sweep_grabs", "walk", "children"):
@@ -341,25 +344,113 @@ def stage_grind(chunk=128, walk_steps=6, max_chunks=None):
                     else:
                         agg[k] = agg.get(k, 0) + int(v)
             agg["parents"] = agg.get("parents", 0) + 1
-        for i, r in enumerate(batch):
+        for i, r in batch:
             done.add(i)
         prog["done"] = sorted(done)
-        # hull-class progress: how many hull<=4 parents are done
         le4_done = sum(1 for i in done if parents[i][0] == 0)
-        le4_total = sum(1 for r in parents if r[0] == 0)
-        msg = (f"chunk {n_chunk_id}: +{len(batch)} parents "
+        msg = (f"chunk {cid}: +{len(batch)} parents "
                f"({len(done)}/{len(parents)}; hull<=4: {le4_done}/{le4_total}), "
                f"+{n_new} new types (census {len(results_set)}), "
                f"new-hull-hist {dict(sorted(hh.items()))}, "
                f"C-wall {wall:.0f}s, total {time.time()-t_start:.0f}s")
-        prog["results"].append([f"C{n_chunk_id:04d}", True, msg])
+        prog["results"].append([f"C{cid:04d}", True, msg])
         _save_progress(prog)
         R(f"[grind {now()}] {msg}")
-        n_chunk_id += 1
-        n_chunks_this_run += 1
-        todo = todo[chunk:]
-        if max_chunks and n_chunks_this_run >= max_chunks:
-            break
+        # commit + push checkpoint discipline
+        files = [RECEIPTS, PROG]
+        milestone = ""
+        if le4_done == le4_total and census_committed < 1:
+            census_committed = 1
+            prog["census_committed"] = census_committed
+            _save_progress(prog)
+            files.append(CENSUS)
+            milestone = " HULL<=4 STRATUM COMPLETE (census banked)"
+        _git(["add"] + files)
+        _git(["commit", "-q", "-m",
+              f"W81-107A grind chunk {cid}: {len(done)}/6405 parents, "
+              f"census {len(results_set)} types{milestone}"])
+        if (cid + 1) % push_every == 0:
+            _git(["push", "-q", "origin", "w81-107a"])
+        return True
+
+    if workers <= 1:
+        while todo:
+            batch = todo[:chunk]
+            bpath = os.path.join(CHUNKDIR, f"c{n_chunk_id:04d}.txt")
+            opath = os.path.join(F9DIR, "current.out")
+            write_batch(bpath, [(pack_signs(r[2]), 8,
+                                 r[3]["chi"], r[3]["pts"])
+                                for (_, r) in batch])
+            wall = run_engine(bpath, opath, walk_steps=walk_steps)
+            children, stats, errors = read_engine_output(opath, 9)
+            if not certify_and_checkpoint(n_chunk_id, batch, children, stats,
+                                          errors, wall):
+                return False
+            n_chunk_id += 1
+            n_chunks_this_run += 1
+            todo = todo[chunk:]
+            if max_chunks and n_chunks_this_run >= max_chunks:
+                break
+    else:
+        # parallel C workers, certification pipelined in this process
+        from collections import deque
+        queue = deque()
+        for k in range(0, len(todo), chunk):
+            if max_chunks and len(queue) >= max_chunks:
+                break
+            queue.append((n_chunk_id + len(queue), todo[k:k + chunk]))
+        running = []
+        while queue or running:
+            # wall-clock budget: stop LAUNCHING new chunks near the budget
+            # (running chunks always complete + certify + checkpoint first)
+            if wall_budget is not None:
+                elapsed = time.time() - t_start
+                if elapsed > wall_budget - 70:
+                    if queue:
+                        R(f"[grind {now()}] wall budget {wall_budget}s at "
+                          f"{elapsed:.0f}s — draining {len(running)} running "
+                          f"chunks, deferring {len(queue)}")
+                    queue.clear()
+            while queue and len(running) < workers:
+                cid, batch = queue.popleft()
+                bpath = os.path.join(CHUNKDIR, f"c{cid:04d}.txt")
+                opath = os.path.join(F9DIR, f"out_c{cid:04d}.txt")
+                write_batch(bpath, [(pack_signs(r[2]), 8,
+                                     r[3]["chi"], r[3]["pts"])
+                                    for (_, r) in batch])
+                t0 = time.time()
+                proc = subprocess.Popen(
+                    [ENGINE9, "--walk-steps", str(walk_steps),
+                     "--seed", "1070707"],
+                    stdin=open(bpath), stdout=open(opath, "w"),
+                    stderr=subprocess.PIPE)
+                running.append((cid, batch, proc, opath, t0))
+                R(f"[grind {now()}] launched chunk {cid} "
+                  f"({len(batch)} parents)")
+            # wait for any running chunk to finish
+            finished = None
+            while finished is None:
+                for ent in running:
+                    if ent[2].poll() is not None:
+                        finished = ent
+                        break
+                if finished is None:
+                    time.sleep(0.5)
+            cid, batch, proc, opath, t0 = finished
+            running.remove(finished)
+            err = proc.stderr.read().decode()
+            wall = time.time() - t0
+            if proc.returncode != 0:
+                R(f"[grind {now()}] !! chunk {cid}: engine rc="
+                  f"{proc.returncode}: {err[:500]} — STOP THE WORLD")
+                return False
+            children, stats, errors = read_engine_output(opath, 9)
+            if not certify_and_checkpoint(cid, batch, children, stats,
+                                          errors, wall):
+                return False
+            n_chunks_this_run += 1
+    if (n_chunk_id + n_chunks_this_run) % push_every != 0:
+        _git(["push", "-q", "origin", "w81-107a"])
     R(f"[grind {now()}] GRIND COMPLETE: {len(done)}/{len(parents)} parents, "
       f"census {len(results_set)} reflection-distinguished types")
     return True
@@ -497,6 +588,8 @@ def main():
     ap.add_argument("--chunk", type=int, default=128)
     ap.add_argument("--walk-steps", type=int, default=6)
     ap.add_argument("--max-chunks", type=int, default=None)
+    ap.add_argument("--workers", type=int, default=1)
+    ap.add_argument("--wall-budget", type=int, default=None)
     ap.add_argument("--sample", type=int, default=400)
     ap.add_argument("--quick", action="store_true")
     args = ap.parse_args()
@@ -504,7 +597,8 @@ def main():
         stage_ladder()
     elif args.stage == "grind":
         stage_grind(chunk=args.chunk, walk_steps=args.walk_steps,
-                    max_chunks=args.max_chunks)
+                    max_chunks=args.max_chunks, workers=args.workers,
+                    wall_budget=args.wall_budget)
     elif args.stage == "certify":
         stage_certify(sample=args.sample, quick=args.quick)
     elif args.stage == "status":
