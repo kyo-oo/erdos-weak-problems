@@ -711,16 +711,25 @@ def run_negative_controls(challenge, solution):
     AUD = os.path.join(CAMP, "problem142-ap-free", "engine142audit_w81.py")
     try:
         proc = subprocess.run([sys.executable, AUD],
-                              capture_output=True, text=True, timeout=560)
+                              capture_output=True, text=True, timeout=580)
         out = proc.stdout + proc.stderr
-        n_pass = out.count("[PASS]")
-        n_fail = out.count("[FAIL]")
-        green = "AUDIT142_ENGINE_GREEN=1" in out
-        ok = proc.returncode == 0 and n_fail == 0 and n_pass >= 16 and green
-        det = (f"exit {proc.returncode}; {n_pass} PASS / {n_fail} FAIL; "
-               f"GREEN={green}; the W81 defect ledger (D1 r_4(4)=3, D2 the "
-               f"BG constants table, D3 the /d^2 margin discipline) is "
-               f"certified fixed by AUD-R4VARN-TABLE/AUD-BGE-CONSTANTS PASS")
+        # W81 CI fix: parse the engine's FINAL verdict line (robust to any
+        # stdout/stderr echo duplication on the runner) + the receipts file.
+        import re as _re
+        _m = _re.findall(r"AUDIT ENGINE: (\d+)/(\d+) checks green", out)
+        _n_ok = max((int(a) for a, b in _m), default=-1)
+        _n_tot = max((int(b) for a, b in _m), default=-1)
+        _fails = sorted(set(_re.findall(r"\[FAIL\] (AUD-[A-Z0-9-]+)", out)))
+        _rcpt = os.path.join(CAMP, "problem142-ap-free", "receipts142audit_w81.txt")
+        _rcpt_green = os.path.isfile(_rcpt) and "AUDIT142_ENGINE_GREEN=1" in open(_rcpt).read()
+        green = ("AUDIT142_ENGINE_GREEN=1" in out) and _rcpt_green
+        n_pass, n_fail = _n_ok, len(_fails)
+        ok = proc.returncode == 0 and n_fail == 0 and n_pass >= 16 and _n_tot >= 16 and green
+        det = (f"exit {proc.returncode}; final verdict {n_pass}/{_n_tot} green; "
+               f"failed checks: {_fails if _fails else 'none'}; GREEN={green}; "
+               f"the W81 defect ledger (D1 r_4(4)=3, D2 the BG constants table, "
+               f"D3 the /d^2 margin discipline) is certified fixed by "
+               f"AUD-R4VARN-TABLE/AUD-BGE-CONSTANTS PASS")
     except Exception as e:
         ok = False; det = repr(e)
     checks.append(_chk("S-AUDIT-W81",

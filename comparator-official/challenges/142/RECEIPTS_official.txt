@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #142 — 2026-11-21T21:39:22
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-21T22:14:57
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -32,5 +32,5 @@ Claims in solution ledger: 18
 [PASS] (control) S-AUDIT-W81 — The W81 independent audit battery (fresh algorithms: lex-DFS tables, exact F_q DFT, own censuses) — 16/16 green, defects D1-D3 fixed and machine-guarded
 ==============================================================================
 CHECKS: 24/24 passed (official=5, solution=11, controls=8)
-WALL: 198.46s
+WALL: 199.36s
 VERDICT: YOUR SOLUTION IS OKAY

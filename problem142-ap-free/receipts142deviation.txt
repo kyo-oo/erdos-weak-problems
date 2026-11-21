@@ -1,5 +1,5 @@
 ENGINE142DEVIATION RECEIPTS — W81-142A THE ORDER-k DEVIATION IDENTITY
-started 2026-11-21T21:36:06  seed=81142  budget=330s
+started 2026-11-21T22:11:40  seed=81142  budget=330s
 
 PASS S1-IDENTITY k=3 p=11 — 6 sets, methods {M2-float,M3-mod,M4-int}, 24 subchecks so far
 PASS S1-IDENTITY k=3 p=13 — 6 sets, methods {M2-float,M3-mod,M4-int}, 48 subchecks so far
@@ -21,7 +21,7 @@ PASS S1-IDENTITY k=3 p=1009 — 2 sets, methods {M2-float,M3-mod}, 351 subchecks
 PASS S1-IDENTITY k=4 p=1009 — 2 sets, methods {M2-float,M3-mod}, 357 subchecks so far
 PASS S1-OPT k=5 p=1009 — 1 set, M3-mod at q=10091: exact
 PASS S1-F1-REPRO — k=3 layer == banked F1 kernel (1/p)sum fhat(r)^2 fhat(-2r): float + modular byte-equality, and the full identity reduces to F1, at p in {11,101,1009}
-[stage S1 completed at wall 106.1s]
+[stage S1 completed at wall 108.6s]
 PASS S2-VANISH-s2 — every 2-subset constraint system (k=3..8, p in {11,13,17,101}) has exactly the trivial solution (worst solution count = 1)
 PASS S2-VANISH-s1 — sum over (x,d) of f(x+id) = 0 for every position i (the mean-zero layer), verified exactly in integers at p in {11,17,101}
 PASS S2-DIMENSION — #V_S = p^{s-2} exactly for every s-subset (k<=6, p<=17); every parametrized tuple satisfies both constraints; s<=4 exhaustive cross-enumeration agrees
@@ -30,7 +30,7 @@ PASS S2-CLASSIFY — 3-subset affine classes lambda=(i3-i1)/(i2-i1): mult tables
 PASS S2-AFFINE-INVARIANCE — E_S equal within each affine class lambda, and E_lambda = E_{lambda/(lambda-1)} (dihedral symmetry), k=5,6 at p in {13,101}
 PASS S2-K4-CLOSED-FORMS — k=4: D_3(4) = 2E_2 + 2E_3 with E_2 = (1/p)sum fhat^2 fhat(-2.) (the F1 kernel) and E_3 = (1/p)sum fhat(2.)fhat(-3.)fhat(.);  D_4(4) = (1/p^2) sum_{u,v} fhat(u)fhat(v)fhat(-3u-2v)fhat(2u+v) — float-verified p in {13,101}
 PASS S2-NEGCONTROL-p<=k — at p=5, k=8 the 2-subset {0,5} has 5 solutions (positions collide mod p) — the p>k hypothesis of V2-k is load-bearing
-[stage S2 completed at wall 107.3s]
+[stage S2 completed at wall 109.9s]
 PASS S3-GREEDY k=3 p=11 — k=3 p=11 |A|=4 delta=0.3636 T=4 M=2.5
 PASS S3-GREEDY k=3 p=13 — k=3 p=13 |A|=4 delta=0.3077 T=4 M=2.9
 PASS S3-GREEDY k=3 p=17 — k=3 p=17 |A|=4 delta=0.2353 T=4 M=3.3
@@ -49,14 +49,14 @@ PASS S3-OB4-ARITH — 11/21 + 22/p < 2 - sqrt(2) exactly (integer arithmetic: 2 
 PASS S3-C4-SIGN — c4(delta) = [delta^2/2 - (1-delta)^2]/(4(1-delta)) > 0 iff delta > 2-sqrt(2) = 0.585786 (the X-4(i) positivity threshold)
 PASS S3-TERM-CONSTS — L-TERM-4 constant (10-sqrt(10))/9 = 0.759746927;  L-TERM-3-SHARP constant 2-sqrt(2) = 0.585786438
 PASS S3-TC4-CARRIAGE — TC-4 carriage law: (1-delta)^2/delta^2 <= 1/4 iff delta >= 2/3 — EXACT rational arithmetic at delta in {1/2, 3/5, 2/3, 7/10, 9/10} (delta=2/3 boundary exact: (1/9)/(4/9) = 1/4); at delta >= 2/3 the D_4 layer carries at most a quarter of the deviation (certified)
-[stage S3 completed at wall 108.6s]
+[stage S3 completed at wall 111.3s]
 PASS S4-NC1-SIGN-CORRUPT — swapping fhat(-2t)->fhat(+2t) in the E_2 kernel breaks the identity (|corrupt - T| = 0.9231 > tol) — corruption DETECTED
 PASS S4-NC2-MULTIPLICITY — corrupting the affine-class multiplicity (2E_2+1E_3 instead of 2E_2+2E_3) breaks the identity (|corrupt - T| = 0.1775) — corruption DETECTED
 PASS S4-NC3-PHANTOM-LAYER — adding a phantom s=2 layer term breaks the identity (|corrupt - T| = 7.6686) — the V2-k vanishing is load-bearing
 PASS S4-NC4-PLANTED-AP — planting the 4-AP (x, x+5, x+10, x+15) into a greedy 4-AP-free set: T_4 = 19 > |A| = 9 — the freeness premise checker DETECTS it
 PASS S4-NC5-PREMISE-REFUSES — random dense set (not 4-AP-free): T_4 = 91 != |A| = 13 — the L-EP-k premise checker refuses to certify (T_k = |A| is the premise)
-[stage S4 completed at wall 108.6s]
+[stage S4 completed at wall 111.3s]
 
 CHECKS: 51/51 passed
-WALL: 108.6s
+WALL: 111.3s
 ENGINE VERDICT: ALL GREEN

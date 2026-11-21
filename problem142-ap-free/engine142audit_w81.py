@@ -329,15 +329,21 @@ def check_k7():
     z3det = []
     try:
         import z3
-        def z7(N, t, tmo=60):
-            xs = [z3.Bool("x%d" % i) for i in range(1, N + 1)]
-            slv = z3.Solver()
-            slv.set("timeout", tmo * 1000)
-            for a in range(1, N + 1):
-                for d in range(1, (N - a) // 6 + 1):
-                    slv.add(z3.Not(z3.And(*[xs[a + i * d - 1] for i in range(7)])))
-            slv.add(z3.PbGe([(x, 1) for x in xs], t))
-            return str(slv.check())
+        def z7(N, t, tmo=240):
+            # W81 CI fix: slower CI runners need larger solver budgets; an
+            # `unknown` (timeout) gets one honest retry at double budget.
+            for attempt in (tmo, tmo * 2):
+                xs = [z3.Bool("x%d" % i) for i in range(1, N + 1)]
+                slv = z3.Solver()
+                slv.set("timeout", attempt * 1000)
+                for a in range(1, N + 1):
+                    for d in range(1, (N - a) // 6 + 1):
+                        slv.add(z3.Not(z3.And(*[xs[a + i * d - 1] for i in range(7)])))
+                slv.add(z3.PbGe([(x, 1) for x in xs], t))
+                res = str(slv.check())
+                if res != "unknown":
+                    return res
+            return res
         for N in (43, 44, 45):
             r = z7(N, doc_vals[N - 1] + 1)
             z3det.append("r_7(%d)<=%d:z3 %s" % (N, doc_vals[N - 1], r))

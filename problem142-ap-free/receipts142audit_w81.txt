@@ -1,6 +1,6 @@
 RECEIPTS — engine142audit_w81.py (W81-142B) — THE INDEPENDENT AUDIT ENGINE
 seed 142142 ; deterministic ; fresh algorithms (lex-DFS tables, exact F_q DFT,
-own census, corrected BG-E margin) ; wall 86.7s
+own census, corrected BG-E margin) ; wall 84.8s
 ==============================================================================
 [PASS] AUD-TABLES
     r_3(1..30) mine=[1, 2, 2, 3, 4, 4, 4, 4, 5, 5, 6, 6, 7, 8, 8, 8, 8, 8, 8, 9, 9, 9, 9, 10, 10, 11, 11, 11, 11, 12]; r_4(1..16) mine=[1, 2, 3, 3, 4, 5, 5, 6, 7, 8, 8, 8, 9, 9, 10, 10]; r_5(1..18) mine=[1, 2, 3, 4, 4, 5, 6, 7, 8, 8, 9, 10, 11, 12, 12, 13, 14, 15]; r_6(1..18) mine=[1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 9, 10, 11, 12, 13, 13, 14, 15]| my DFS == banked on every recomputed cell| all 211 banked witnesses re-verified (size + freeness, both my codes)| all tables monotone
@@ -35,5 +35,5 @@ own census, corrected BG-E margin) ; wall 86.7s
 [PASS] AUD-K3REPRO
     k=3 banked reproduction on 3 cells: (d,m)=(4,3): banked 12, mine 12 (ledger 12), AP-free=True; (d,m)=(3,5): banked 6, mine 6 (ledger 6), AP-free=True; (d,m)=(4,5): banked 24, mine 24 (ledger 24), AP-free=True
 ==============================================================================
-AUDIT ENGINE: 16/16 checks green, wall 86.7s
+AUDIT ENGINE: 16/16 checks green, wall 84.8s
 AUDIT142_ENGINE_GREEN=1
