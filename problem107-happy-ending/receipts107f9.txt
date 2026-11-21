@@ -1,0 +1,11 @@
+[ladder 14:36:16] THE VALIDATION LADDER: C re-enumerates n=4..8; SET EQUALITY vs the python bank at every level
+[ladder 14:36:16] n=3->4: |bank|=2 |C|=2 miss=0 extra=0 parents=1 cells=7 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=2/2 wall=0.0s -> SET EQUALITY OK
+[ladder 14:36:16] n=4->5: |bank|=3 |C|=3 miss=0 extra=0 parents=2 cells=36 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=5/5 wall=0.0s -> SET EQUALITY OK
+[ladder 14:36:16] n=5->6: |bank|=20 |C|=20 miss=0 extra=0 parents=3 cells=123 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:41] THE VALIDATION LADDER: C re-enumerates n=4..8; SET EQUALITY vs the python bank at every level
+[ladder 14:40:41] n=3->4: |bank|=2 |C|=2 miss=0 extra=0 parents=1 cells=7 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=2/2 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:41] n=4->5: |bank|=3 |C|=3 miss=0 extra=0 parents=2 cells=36 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=5/5 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:41] n=5->6: |bank|=20 |C|=20 miss=0 extra=0 parents=3 cells=123 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:42] n=6->7: |bank|=242 |C|=242 miss=0 extra=0 parents=20 cells=1700 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.6s -> SET EQUALITY OK
+[ladder 14:41:09] n=7->8: |bank|=6405 |C|=6405 miss=0 extra=0 parents=242 cells=39204 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=27.0s -> SET EQUALITY OK
+[ladder 14:41:09] LADDER GREEN — n=4..8 SET EQUALITY at every level; the C port is the python machinery

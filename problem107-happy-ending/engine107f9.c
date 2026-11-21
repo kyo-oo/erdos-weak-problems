@@ -93,6 +93,17 @@ static void scratch_init(void) {
 /* ------------------------------------------------------------------ */
 typedef struct { mpq_t x, y; } PT;
 
+
+/* GMP TRAP: mpq_set_si does NOT reduce common factors, and mpq_equal is a
+ * RAW field compare — non-canonical rationals make mpq_equal lie (e.g.
+ * 30/16 "!=" 15/8) and no-op arithmetic (+0, *1) does not canonicalize.
+ * Every set_si in this engine therefore goes through the canonicalizing
+ * wrapper.  (Found by the W81-107A validation ladder: SIGFPE at n=6->7.) */
+static void qset_si(mpq_t q, long n, long d) {
+    mpq_set_si(q, n, d);
+    mpq_canonicalize(q);
+}
+
 static void pt_init(PT *p) { mpq_init(p->x); mpq_init(p->y); }
 static void pt_set(PT *d, const PT *s) { mpq_set(d->x, s->x); mpq_set(d->y, s->y); }
 static void pt_clear(PT *p) { mpq_clear(p->x); mpq_clear(p->y); }
@@ -354,7 +365,7 @@ static void arr_build(const PT *pts, int n) {
 static int shear_distinct_x(const PT *pts, int n, PT *out) {
     for (int t = 0; t <= 4 * n * n + 63; t++) {
         for (int i = 0; i < n; i++) {
-            mpq_set_si(qT1, (long)t, 1);
+            qset_si(qT1, (long)t, 1);
             mpq_mul(qT1, qT1, pts[i].y);
             mpq_add(out[i].x, pts[i].x, qT1);
             mpq_set(out[i].y, pts[i].y);
@@ -416,8 +427,8 @@ static int make_arrangement_generic(const PT *pts, int n, const signed char *chi
         long dxn = rng_randint(-12, 12), dyn = rng_randint(-12, 12);
         long dxd = ddens[rng_below(5)], dyd = ddens[rng_below(5)];
         for (int i = 0; i < n; i++) pt_set(&cand[i], &pts[i]);
-        mpq_set_si(qT1, dxn, dxd); mpq_add(cand[m].x, cand[m].x, qT1);
-        mpq_set_si(qT2, dyn, dyd); mpq_add(cand[m].y, cand[m].y, qT2);
+        qset_si(qT1, dxn, dxd); mpq_add(cand[m].x, cand[m].x, qT1);
+        qset_si(qT2, dyn, dyd); mpq_add(cand[m].y, cand[m].y, qT2);
         if (is_gp(cand, n)) {
             chi_of_points(cand, n, c2);
             if (chi_eq(c2, chi, ntri[n]) && arrangement_generic(cand, n)) {
@@ -499,17 +510,17 @@ static int arrangement_cell_samples(const PT *pts, int n, CELLS *out,
     /* slab x positions: xs[0]-1, midpoints, xs[nx-1]+1 */
     int sx = 0;
     if (nx > 0) {
-        mpq_set_si(cs_slabx[sx], -1, 1);
+        qset_si(cs_slabx[sx], -1, 1);
         mpq_add(cs_slabx[sx], cs_xs[0], cs_slabx[sx]); sx++;
         for (int i = 0; i + 1 < nx; i++) {
             mpq_add(cs_slabx[sx], cs_xs[i], cs_xs[i + 1]);
             mpq_div_2exp(cs_slabx[sx], cs_slabx[sx], 1);
             sx++;
         }
-        mpq_set_si(cs_slabx[sx], 1, 1);
+        qset_si(cs_slabx[sx], 1, 1);
         mpq_add(cs_slabx[sx], cs_xs[nx - 1], cs_slabx[sx]); sx++;
     } else {
-        mpq_set_si(cs_slabx[sx], 0, 1); sx++;
+        qset_si(cs_slabx[sx], 0, 1); sx++;
     }
 
     u64set_clear(&cs_seen);
@@ -534,7 +545,7 @@ static int arrangement_cell_samples(const PT *pts, int n, CELLS *out,
         qsort(cs_ye, (size_t)L, sizeof(YENT), cmp_yent);
         /* tope below all lines at (x0, ye[0].y - 1) */
         mpq_set(probe.x, cs_slabx[s]);
-        mpq_set_si(qT1, -1, 1);
+        qset_si(qT1, -1, 1);
         mpq_add(probe.y, cs_yv[cs_ye[0].lid], qT1);
         uint32_t tope_below = 0;
         for (int l = 0; l < L; l++)
@@ -545,7 +556,7 @@ static int arrangement_cell_samples(const PT *pts, int n, CELLS *out,
             mpq_add(cs_ycan[1 + k], cs_yv[cs_ye[k].lid], cs_yv[cs_ye[k + 1].lid]);
             mpq_div_2exp(cs_ycan[1 + k], cs_ycan[1 + k], 1);
         }
-        mpq_set_si(qT1, 1, 1);
+        qset_si(qT1, 1, 1);
         mpq_add(cs_ycan[L], cs_yv[cs_ye[L - 1].lid], qT1);
         int ncand = L + 1;
         /* moving up crosses line ye[k].lid between cand k and k+1 */
@@ -783,8 +794,8 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                 mpq_set(sw_bx, pts[partner].x); mpq_set(sw_by, pts[partner].y);
                 mpq_sub(sw_dx, sw_pmx, sw_bx); mpq_sub(sw_dy, sw_pmy, sw_by);
                 int nc = 0;
-                mpq_set_si(sw_crit[nc], 0, 1); nc++;
-                mpq_set_si(sw_crit[nc], 1, 1); nc++;
+                qset_si(sw_crit[nc], 0, 1); nc++;
+                qset_si(sw_crit[nc], 1, 1); nc++;
                 for (int p = 0; p < rest_n[m]; p++) {
                     mpq_mul(qT1, rlines[m][p].A, sw_dx);
                     mpq_mul(qT2, rlines[m][p].B, sw_dy);
@@ -826,7 +837,7 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                     int grabbed_any = 0;
                     for (int si = 0; si < 4; si++) {
                         /* mq = mstar + s*nvec/dd, nvec = (-dy, dx) */
-                        mpq_set_si(qT1, snum[si], sden[si]);
+                        qset_si(qT1, snum[si], sden[si]);
                         mpq_mul(qT2, qT1, sw_dy); mpq_neg(qT2, qT2);
                         mpq_div(qT3, qT2, sw_dd);
                         mpq_add(sw_sx, sw_mx, qT3);
@@ -848,10 +859,10 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                         /* g = centroid of the three isects */
                         mpq_add(sw_gx, sw_a1x, sw_a2x);
                         mpq_add(sw_gx, sw_gx, sw_a3x);
-                        mpq_set_si(qT1, 1, 3); mpq_mul(sw_gx, sw_gx, qT1);
+                        qset_si(qT1, 1, 3); mpq_mul(sw_gx, sw_gx, qT1);
                         mpq_add(sw_gy, sw_a1y, sw_a2y);
                         mpq_add(sw_gy, sw_gy, sw_a3y);
-                        mpq_set_si(qT1, 1, 3); mpq_mul(sw_gy, sw_gy, qT1);
+                        qset_si(qT1, 1, 3); mpq_mul(sw_gy, sw_gy, qT1);
                         sv_of_point_bytes(sw_cfg, n, sw_gx, sw_gy, sw_sv);
                         int zero = 0;
                         for (int p = 0; p < P; p++) if (sw_sv[p] == 0) { zero = 1; break; }
@@ -891,7 +902,7 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                 st->par_combos++;
                 mpq_set(sw_bx, pts[partner].x); mpq_set(sw_by, pts[partner].y);
                 int nc = 0;
-                mpq_set_si(sw_crit[nc], 0, 1); nc++;
+                qset_si(sw_crit[nc], 0, 1); nc++;
                 for (int p = 0; p < rest_n[m]; p++) {
                     mpq_mul(qT1, rlines[m][p].A, sw_dx);
                     mpq_mul(qT2, rlines[m][p].B, sw_dy);
@@ -940,7 +951,7 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                     u64set_clear(&sw_grabbed);
                     int grabbed_any = 0;
                     for (int si = 0; si < 4; si++) {
-                        mpq_set_si(qT1, snum[si], sden[si]);
+                        qset_si(qT1, snum[si], sden[si]);
                         mpq_mul(qT2, qT1, sw_dy); mpq_neg(qT2, qT2);
                         mpq_div(qT3, qT2, sw_dd);
                         mpq_add(sw_sx, sw_mx, qT3);
@@ -953,7 +964,7 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                         chi_of_points(sw_cfg, n, sw_c2);
                         if (!chi_eq(sw_c2, base_chi, ntri[n])) continue;
                         /* Bn = max coord abs + 16 */
-                        mpq_set_si(sw_Bn, 16, 1);
+                        qset_si(sw_Bn, 16, 1);
                         for (int i = 0; i < n; i++) {
                             mpq_abs(qT2, sw_cfg[i].x);
                             if (mpq_cmp(qT2, sw_Bn) > 0) mpq_set(sw_Bn, qT2);
@@ -971,7 +982,7 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                         static const long frn[3] = {1, 1, 3};
                         static const long frd[3] = {2, 4, 4};
                         for (int xi = 0; xi < 4; xi++) {
-                            mpq_set_si(qT1, Xk[xi], 1);
+                            qset_si(qT1, Xk[xi], 1);
                             mpq_mul(qT2, qT1, sw_Bn);       /* X = k*Bn */
                             mpq_mul(qT3, sw_L1.A, qT2);
                             mpq_sub(qT4, sw_L1.C, qT3);
@@ -980,7 +991,7 @@ static void sweep_parent(PT *pts, int n, const signed char *base_chi,
                             mpq_sub(qT4, Lo->C, qT3);
                             mpq_div(sw_y2, qT4, Lo->B);
                             for (int fri = 0; fri < 3; fri++) {
-                                mpq_set_si(qT1, frn[fri], frd[fri]);
+                                qset_si(qT1, frn[fri], frd[fri]);
                                 mpq_sub(qT3, sw_y2, sw_y1);
                                 mpq_mul(qT3, qT3, qT1);
                                 mpq_add(qT3, sw_y1, qT3);   /* y = y1 + fr*(y2-y1) */
@@ -1039,12 +1050,12 @@ static int walk_parent(const PT *pts, int n, const signed char *base_chi, int st
     }
     /* W = (hi - lo) + 4 */
     mpq_sub(wk_W, wk_hi, wk_lo);
-    mpq_set_si(qT1, 4, 1);
+    qset_si(qT1, 4, 1);
     mpq_add(wk_W, wk_W, qT1);
     /* randint bounds: int((lo-W)*16), int((hi+W)*16) — python int() truncates
      * toward zero */
     mpq_sub(wk_tmp, wk_lo, wk_W);
-    mpq_set_si(qT2, 16, 1);
+    qset_si(qT2, 16, 1);
     mpq_mul(wk_tmp, wk_tmp, qT2);
     mpz_tdiv_q(mpq_numref(qT3), mpq_numref(wk_tmp), mpq_denref(wk_tmp));
     long a_lo = mpz_get_si(mpq_numref(qT3));
@@ -1066,8 +1077,8 @@ static int walk_parent(const PT *pts, int n, const signed char *base_chi, int st
         for (int tr = 0; tr < 300 && !placed; tr++) {
             long vx = rng_randint((int)a_lo, (int)a_hi);
             long vy = rng_randint((int)a_lo, (int)a_hi);
-            mpq_set_si(wk_q.x, vx, 16);
-            mpq_set_si(wk_q.y, vy, 16);
+            qset_si(wk_q.x, vx, 16);
+            qset_si(wk_q.y, vy, 16);
             int rn2 = 0, ok = 1;
             for (int p = 0; p < P; p++) {
                 int i = pairs[n][p][0], j = pairs[n][p][1];
