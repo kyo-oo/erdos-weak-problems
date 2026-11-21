@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T14:44:18
+OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T15:38:37
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -40,5 +40,5 @@ Claims in solution ledger: 24
 [PASS] (control) N-WITNESS-ROW — corruption rejected: the uniform witness 4^1296 fires at row 9 EXACTLY (the level-4 law's prediction v+1+4 = 9) — a receipt claiming row 10 is FALSE
 ==============================================================================
 CHECKS: 32/32 passed (official=4, solution=17, controls=11)
-WALL: 35.82s
+WALL: 35.72s
 VERDICT: YOUR SOLUTION IS OKAY

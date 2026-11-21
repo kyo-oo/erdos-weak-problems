@@ -45,11 +45,11 @@ laws every rider must obey, all levels, all scales:
   `K = 1296 = 3^4·16` fires at row 9; `K = 14094 = 3^5·58` fires at
   row 11; `K = 42282 = 3^6·58` fires at row 12 — no bounded decide.
 * **§5 THE EXPONENT-TRIT KILLING LAW** (`pow4_killing_trit`): for
-  `r < 3^j` and `t < 3`,
+  every `r t j`,
   `digit3 (4^(r + t·3^j)) (j+1) = (digit3 (4^r) (j+1) + t) % 3` — the
   exponent trit at position `j` ADDS to the payload digit at position
   `j+1`.  THE MASTER DYNAMICS: exactly one of the three dust lifts
-  fires (`wheel_one_fire`) — the dust tree is a full binary tree.
+  fires (`wheel_fire_exists`) — the dust tree is a full binary tree.
 
 ## THE HONEST SCOPE
 
@@ -122,12 +122,23 @@ theorem digit3_add_pow (A B m : Nat) :
   rw [Nat.add_mul_div_left _ _ hp, Nat.add_mod]
   omega
 
+/-- `3^(p+1) = 3 * 3^p` (the succ shape, usable left-to-right on
+`3^(p+1)`). -/
+theorem pow_succ_mul (p : Nat) : 3^(p+1) = 3 * 3^p := by
+  rw [Nat.pow_succ]
+  ring
+
+/-- `3^(v+2) = 3 * 3^(v+1)` (the double-succ shape). -/
+theorem pow_succ_two (v : Nat) : 3^(v+2) = 3 * 3^(v+1) := by
+  rw [show (v:Nat) + 2 = (v+1) + 1 from by omega, Nat.pow_succ]
+  ring
+
 /-- The digit of one is zero at every positive position. -/
 theorem digit3_one_pos (p : Nat) (hp : 1 ≤ p) : digit3 1 p = 0 := by
   unfold digit3
   have h1 : 1 < 3^p := by
     have h0 : 3^1 ≤ 3^p :=
-      Nat.pow_le_pow_of_le (by decide : 1 ≤ 3) (by omega)
+      Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
     omega
   rw [Nat.div_eq_of_lt h1]
   decide
@@ -140,40 +151,36 @@ theorem digit3_of_residue_two (R p : Nat) (hp1 : 1 ≤ p)
   have hlt : 1 + 2 * 3^p < 3^(p+1) := by
     have h1 : 1 < 3^p := by
       have h0 : 3^1 ≤ 3^p :=
-        Nat.pow_le_pow_of_le (by decide : 1 ≤ 3) (by omega)
+        Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
+      rw [pow_succ_mul]
       omega
-    have hbig : 3 * 3^p = 3^(p+1) := by rw [Nat.pow_succ]; ring
+    rw [pow_succ_mul]
     omega
   have hmod : (1 + 2 * 3^p) % 3^(p+1) = 1 + 2 * 3^p :=
     Nat.mod_eq_of_lt hlt
   have hcongr := digit3_mod_congr R (1 + 2 * 3^p) p (by rw [hr, hmod])
-  rw [hcongr, digit3_add_pow 1 2 p, digit3_one_pos p hp1]
+  rw [hcongr, show 1 + 2 * 3^p = 1 + 3^p * 2 from by ring,
+      digit3_add_pow 1 2 p, digit3_one_pos p hp1]
   decide
 
-/-- The residue-to-digit bridge, one case: `R ≡ 1 + 3^p` gives digit
-`p` equal to one. -/
-theorem digit3_of_residue_one (R p : Nat)
-    (hr : R % 3^(p+1) = 1 + 1 * 3^p) :
+/-- The residue-to-digit bridge, one case: `R ≡ 1 + 3^p` with `p ≥ 1`
+gives digit `p` equal to one. -/
+theorem digit3_of_residue_one (R p : Nat) (hp1 : 1 ≤ p)
+    (hr : R % 3^(p+1) = 1 + 3^p) :
     digit3 R p = 1 := by
-  have hcongr := digit3_mod_congr R (1 + 1 * 3^p) p
-    (by rw [hr, Nat.mod_eq_of_lt (by
-        have h1 : 1 + 3^p < 3 * 3^p := by
-          have h3 : 1 < 3^p := by
-            have h0 : 3^0 ≤ 3^p :=
-              Nat.pow_le_pow_of_le (by decide : 1 ≤ 3) (by omega)
-            omega
-          omega
-        rw [Nat.pow_succ]
-        omega)])
-  rw [hcongr, digit3_add_pow 1 1 p]
-  have : digit3 1 p + 1 = 0 + 1 ∨ digit3 1 p + 1 = 1 + 1 := by omega
-  rcases this with h | h
-  · rw [h]
-    have hd : digit3 1 p = 0 := by omega
-    rw [hd]; decide
-  · rw [h]
-    have hd : digit3 1 p = 1 := by omega
-    rw [hd]; decide
+  have hlt : 1 + 3^p < 3^(p+1) := by
+    have h1 : 1 < 3^p := by
+      have h0 : 3^1 ≤ 3^p :=
+        Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
+      omega
+    rw [pow_succ_mul]
+    omega
+  have hmod : (1 + 3^p) % 3^(p+1) = 1 + 3^p :=
+    Nat.mod_eq_of_lt hlt
+  have hcongr := digit3_mod_congr R (1 + 3^p) p (by rw [hr, hmod])
+  rw [hcongr, show 1 + 3^p = 1 + 3^p * 1 from by ring,
+      digit3_add_pow 1 1 p, digit3_one_pos p hp1]
+  decide
 
 /-- **The verdict bridge.**  A digit two at any position kills the
 Cantor verdict. -/
@@ -258,6 +265,13 @@ theorem lteCoeff_mod3_one : ∀ r : Nat, lteCoeff r % 3 = 1
         simp
       simp [Nat.add_mod, Nat.mul_mod, hpow1, hpow2, ih]
 
+/-- Every power of four is one modulo three. -/
+theorem pow4_mod3 (r : Nat) : 4^r % 3 = 1 := by
+  induction r with
+  | zero => decide
+  | succ r ih =>
+      rw [Nat.pow_succ, Nat.mul_mod, ih]
+
 /-- Any multiple of the scale exponent is one modulo the next ternary
 cut. -/
 theorem pow4_scaled_mod_next (r u : Nat) :
@@ -272,15 +286,21 @@ theorem pow4_scaled_mod_next (r u : Nat) :
     simp [Nat.add_mod, Nat.mul_mod, Nat.mod_eq_of_lt hMgt1]
   simpa [hbase, Nat.mod_eq_of_lt hMgt1]
 
-/-- Every power of four is one modulo three. -/
-theorem pow4_mod3 (r : Nat) : 4^r % 3 = 1 := by
-  induction r with
-  | zero => decide
-  | succ r ih =>
-      rw [Nat.pow_succ, Nat.mul_mod, ih]
-      decide
-
 /-! ## §2 THE CUT RESIDUE — THE SECOND-DIGIT LAW -/
+
+/-- The bounded-residue helper: `1 + r·3^(v+1) < 3^(v+2)` for `r < 3`. -/
+theorem lt_cut_residue (v r : Nat) (hr : r < 3) :
+    1 + r * 3^(v+1) < 3^(v+2) := by
+  have h1 : 1 ≤ 3^(v+1) := by
+    have hp := Nat.pow_pos (by decide : 0 < 3) v
+    omega
+  rcases ErdosTernary2.lt_three_cases r hr with h0 | h0 | h0
+  · rw [h0, pow_succ_two]
+    omega
+  · rw [h0, pow_succ_two]
+    omega
+  · rw [h0, pow_succ_two]
+    omega
 
 /-- **THE CUT RESIDUE, EXACT.**  For every valuation cut `v` and every
 multiplier `u`: `4^(3^v·u) % 3^(v+2) = 1 + (u % 3)·3^(v+1)` — the first
@@ -291,43 +311,35 @@ theorem pow4_cut_residue_exact (v u : Nat) :
   have hK : 4^(3^v * u) = (1 + 3^(v+1) * lteCoeff v)^u := by
     rw [Nat.pow_mul, pow4_three_power_lte_exact]
   obtain ⟨s, hs⟩ := binom_two_term (3^(v+1) * lteCoeff v) u
-  have hcorrdvd : 3^(v+2) ∣ (3^(v+1) * lteCoeff v) *
-      (3^(v+1) * lteCoeff v) * s := by
-    refine ⟨3^v * (lteCoeff v * lteCoeff v * s), ?_⟩
+  have huc : u * lteCoeff v % 3 = u % 3 := by
+    rw [Nat.mul_mod, lteCoeff_mod3_one]
+    omega
+  -- the three-part split: the power = target + multiple of 3^(v+2)
+  have hsplit : 4^(3^v * u) = (1 + (u % 3) * 3^(v+1)) +
+      3^(v+2) * ((u * lteCoeff v) / 3 +
+        3^v * (lteCoeff v * lteCoeff v * s)) := by
+    rw [hK, hs]
+    have hk := Nat.div_add_mod (u * lteCoeff v) 3
+    rw [huc] at hk
+    -- hk : 3 * ((u * lteCoeff v) / 3) + u % 3 = u * lteCoeff v
+    have hmul : u * (3^(v+1) * lteCoeff v) =
+        3^(v+2) * ((u * lteCoeff v) / 3) + (u % 3) * 3^(v+1) := by
+      calc u * (3^(v+1) * lteCoeff v)
+          = 3^(v+1) * (u * lteCoeff v) := by ring
+        _ = 3^(v+1) * (3 * ((u * lteCoeff v) / 3) + u % 3) := by rw [hk]
+        _ = 3^(v+2) * ((u * lteCoeff v) / 3) + (u % 3) * 3^(v+1) := by
+            rw [pow_succ_mul]
+            ring
     have hp2 : 3^(v+1) * 3^(v+1) = 3^(v+2) * 3^v := by
       rw [← Nat.pow_add, ← Nat.pow_add]
       congr 1; omega
-    calc (3^(v+1) * lteCoeff v) * (3^(v+1) * lteCoeff v) * s
-        = (3^(v+1) * 3^(v+1)) * (lteCoeff v * lteCoeff v * s) := by
-            ring
-      _ = (3^(v+2) * 3^v) * (lteCoeff v * lteCoeff v * s) := by
-            rw [hp2]
-      _ = 3^(v+2) * (3^v * (lteCoeff v * lteCoeff v * s)) := by
-            ring
-  have hcongr : 4^(3^v * u) % 3^(v+2) =
-      (1 + 3^(v+1) * (u % 3)) % 3^(v+2) := by
-    rw [hK, hs]
-    have hsplit : u * (3^(v+1) * lteCoeff v) =
-        3^(v+1) * (u * lteCoeff v) := by ring
-    rw [hsplit, add_mod_of_dvd _ _ _ hcorrdvd]
-    have huc : u * lteCoeff v % 3 = u % 3 := by
-      rw [Nat.mul_mod, lteCoeff_mod3_one]
-      omega
-    rw [huc]
-    congr 1
-    rw [Nat.add_mod, Nat.mul_mod, Nat.mul_mod, Nat.mod_mod_of_dvd]
-    · omega
-    · exact ⟨3^v, by rw [← Nat.pow_add]; congr 1; omega⟩
-  rw [hcongr]
-  have hlt : 1 + (u % 3) * 3^(v+1) < 3^(v+2) := by
-    have h3 : u % 3 < 3 := Nat.mod_lt _ (by decide)
-    have hbig : 3 * 3^(v+1) ≤ 3^(v+2) := by
-      rw [Nat.pow_succ]
-      exact Nat.le_mul_of_pos_left (by omega)
-    have hbound : 1 + (u % 3) * 3^(v+1) ≤ 1 + 2 * 3^(v+1) := by
-      omega
-    omega
-  rw [Nat.mod_eq_of_lt hlt]
+    rw [hmul, hp2]
+    ring
+  rw [hsplit, add_mod_of_dvd _ _ _ (by
+    refine ⟨(u * lteCoeff v) / 3 + 3^v * (lteCoeff v * lteCoeff v * s),
+      ?_⟩
+    ring),
+    Nat.mod_eq_of_lt (lt_cut_residue v (u % 3) (Nat.mod_lt _ (by decide)))]
 
 /-- Every positive exponent decomposes as `3^v·u` with `u` not
 divisible by three — the valuation cut. -/
@@ -369,22 +381,12 @@ theorem rider_second_digit_residue (K : Nat)
     · exact h
     · exfalso
       have hres := pow4_cut_residue_exact v u
-      rw [hKu, h] at hres
+      rw [h] at hres
       have hv1 : 1 ≤ v + 1 := by omega
       have hfire : digit3 (4^K) (v+1) = 2 := by
         have hcon := digit3_mod_congr (4^K) (1 + 2 * 3^(v+1)) (v+1)
-          (by rw [hres, Nat.mod_eq_of_lt (by
-              have h3 : (2:Nat) < 3 := by decide
-              have hbig : 3 * 3^(v+1) ≤ 3^((v+1)+1) := by
-                rw [Nat.pow_succ]
-                exact Nat.le_mul_of_pos_left (by omega)
-              have hlt : 1 + 2 * 3^(v+1) < 3 * 3^(v+1) := by
-                have h1 : 1 < 3^(v+1) := by
-                  have h0 : 3^1 ≤ 3^(v+1) :=
-                    Nat.pow_le_pow_of_le (by decide : 1 ≤ 3) (by omega)
-                  omega
-                omega
-              omega)])
+          (by rw [← hKu, hres, Nat.mod_eq_of_lt
+              (lt_cut_residue v 2 (by decide))])
         rw [hcon]
         exact digit3_of_residue_two (1 + 2 * 3^(v+1)) (v+1) hv1 rfl
       rw [noTernaryTwo_of_digit_two (v+1) (4^K) hfire] at hrider
@@ -392,41 +394,29 @@ theorem rider_second_digit_residue (K : Nat)
   refine ⟨v, u, hKu, hu1, ?_, ?_, ?_⟩
   · -- digit 0 = 1
     unfold digit3
-    have hp0 : 0 < 3^0 := Nat.pow_pos (by decide)
     rw [Nat.pow_zero, Nat.div_one]
-    have h := pow4_mod3 K
-    omega
-  · -- digits 1..v are zero
+    exact (pow4_mod3 K).symm
+  · -- digits 1..v are zero: 4^K ≡ 1 mod 3^(v+1), and the congruence
+    -- descends to every 3^(j+1) with j ≤ v
     intro j hjpos hjv
-    have hnext := pow4_scaled_mod_next v u
-    rw [← hKu] at hnext
+    have hnext : 4^(3^v * u) % 3^(v+1) = 1 := pow4_scaled_mod_next v u
     have hdvd : 3^(j+1) ∣ 3^(v+1) := by
       refine ⟨3^(v-j), ?_⟩
       rw [← Nat.pow_add]
       congr 1; omega
     have hmodj : 4^K % 3^(j+1) = 1 % 3^(j+1) := by
-      rw [← Nat.mod_mod_of_dvd (4^K) hdvd, hnext]
+      rw [← hKu, ← Nat.mod_mod_of_dvd (4^(3^v * u)) hdvd, hnext]
       rfl
     have hcon := digit3_mod_congr (4^K) 1 j hmodj
     rw [hcon]
     exact digit3_one_pos j hjpos
   · -- digit v+1 = 1 (u % 3 = 1)
     have hres := pow4_cut_residue_exact v u
-    rw [hKu, hu1] at hres
     have hcon := digit3_mod_congr (4^K) (1 + 1 * 3^(v+1)) (v+1)
-      (by rw [hres, Nat.mod_eq_of_lt (by
-          have hbig : 3 * 3^(v+1) ≤ 3^((v+1)+1) := by
-            rw [Nat.pow_succ]
-            exact Nat.le_mul_of_pos_left (by omega)
-          have hlt : 1 + 1 * 3^(v+1) < 3 * 3^(v+1) := by
-            have h1 : 1 < 3^(v+1) := by
-              have h0 : 3^1 ≤ 3^(v+1) :=
-                Nat.pow_le_pow_of_le (by decide : 1 ≤ 3) (by omega)
-              omega
-            omega
-          omega)])
+      (by rw [← hKu, hres, hu1, Nat.mod_eq_of_lt
+          (lt_cut_residue v 1 (by decide))])
     rw [hcon]
-    exact digit3_of_residue_one (1 + 1 * 3^(v+1)) (v+1) rfl
+    exact digit3_of_residue_one (1 + 1 * 3^(v+1)) (v+1) (by omega) rfl
 
 /-! ## §3 THE WINDOW LAW — the digit stream reads the diagonal -/
 
@@ -486,7 +476,7 @@ theorem diagonal_window_law (v u j : Nat) (hj : j ≤ v) :
     | zero => norm_num
     | succ v =>
         have h0 : 0 < 3^(v+1) := Nat.pow_pos (by decide)
-        rw [Nat.pow_succ]
+        rw [pow_succ_mul]
         omega
   rw [prefix_slice_digit_exact (v+1) 1 (u * lteCoeff v) j h1lt]
 
@@ -715,40 +705,40 @@ theorem window_fire_level5 (v : Nat) (hv : 5 ≤ v) (u : Nat)
     · have humod : (u * lteCoeff v) % 729 = 526 := by
         rw [Nat.mul_mod, h4, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 683 := by
+    · have humod : (u * lteCoeff v) % 729 = 568 := by
         rw [Nat.mul_mod, h5, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 446 := by
+    · have humod : (u * lteCoeff v) % 729 = 517 := by
         rw [Nat.mul_mod, h6, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 578 := by
+    · have humod : (u * lteCoeff v) % 729 = 499 := by
         rw [Nat.mul_mod, h7, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 569 := by
+    · have humod : (u * lteCoeff v) % 729 = 490 := by
         rw [Nat.mul_mod, h8, hc]
       omega
     · have humod : (u * lteCoeff v) % 729 = 523 := by
         rw [Nat.mul_mod, h9, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 497 := by
+    · have humod : (u * lteCoeff v) % 729 = 514 := by
         rw [Nat.mul_mod, h10, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 500 := by
+    · have humod : (u * lteCoeff v) % 729 = 607 := by
         rw [Nat.mul_mod, h11, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 689 := by
+    · have humod : (u * lteCoeff v) % 729 = 598 := by
         rw [Nat.mul_mod, h12, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 485 := by
+    · have humod : (u * lteCoeff v) % 729 = 496 := by
         rw [Nat.mul_mod, h13, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 574 := by
+    · have humod : (u * lteCoeff v) % 729 = 487 := by
         rw [Nat.mul_mod, h14, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 494 := by
+    · have humod : (u * lteCoeff v) % 729 = 580 := by
         rw [Nat.mul_mod, h15, hc]
       omega
-    · have humod : (u * lteCoeff v) % 729 = 647 := by
+    · have humod : (u * lteCoeff v) % 729 = 571 := by
         rw [Nat.mul_mod, h16, hc]
       omega
   rw [show v + 6 = v + 1 + 5 from rfl, hw]
@@ -760,14 +750,16 @@ theorem window_fire_level5 (v : Nat) (hv : 5 ≤ v) (u : Nat)
 the uniform level-one family (`9 = 3^2·1`, `u = 1 ≡ 1 mod 9`). -/
 theorem fire_nine_row_four : digit3 (4^9) 4 = 2 := by
   have h := window_fire_level1 2 (by omega) 1 (by decide)
-  norm_num at h ⊢
+  have hK : (3:Nat)^2 * 1 = 9 := by decide
+  rw [hK] at h
   exact h
 
 /-- Witness receipt: `4^108` fires its digit two at row 7, delivered by
 the uniform level-three family (`108 = 3^3·4`, `u = 4 ≡ 4 mod 81`). -/
 theorem fire_108_row_seven : digit3 (4^108) 7 = 2 := by
   have h := window_fire_level3 3 (by omega) 4 (Or.inl (by decide))
-  norm_num at h ⊢
+  have hK : (3:Nat)^3 * 4 = 108 := by decide
+  rw [hK] at h
   exact h
 
 /-- **NEW WITNESS (S079).**  `K = 1296 = 3^4·16` fires its digit two at
@@ -775,8 +767,7 @@ row 9, delivered by the uniform level-four family — no bounded decide. -/
 theorem fire_1296_row_nine : digit3 (4^1296) 9 = 2 := by
   have h := window_fire_level4 4 (by omega) 16 (Or.inl (by decide))
   have hK : (3:Nat)^4 * 16 = 1296 := by decide
-  conv at h => rw [← hK]
-  norm_num at h ⊢
+  rw [hK] at h
   exact h
 
 /-- **NEW WITNESS (S079).**  `K = 14094 = 3^5·58` fires its digit two
@@ -784,8 +775,7 @@ at row 11, delivered by the uniform level-five family. -/
 theorem fire_14094_row_eleven : digit3 (4^14094) 11 = 2 := by
   have h := window_fire_level5 5 (by omega) 58 (Or.inl (by decide))
   have hK : (3:Nat)^5 * 58 = 14094 := by decide
-  conv at h => rw [← hK]
-  norm_num at h ⊢
+  rw [hK] at h
   exact h
 
 /-- **NEW WITNESS (S079).**  `K = 42282 = 3^6·58` fires its digit two
@@ -793,8 +783,7 @@ at row 12, delivered by the uniform level-five family at cut six. -/
 theorem fire_42282_row_twelve : digit3 (4^42282) 12 = 2 := by
   have h := window_fire_level5 6 (by omega) 58 (Or.inl (by decide))
   have hK : (3:Nat)^6 * 58 = 42282 := by decide
-  conv at h => rw [← hK]
-  norm_num at h ⊢
+  rw [hK] at h
   exact h
 
 /-- The full kill-chain instance: `4^1296` fails `noTernaryTwo`, by the
@@ -853,8 +842,16 @@ theorem pow4_killing_trit (r t j : Nat) :
   have hc1 : lteCoeff j % 3 = 1 := lteCoeff_mod3_one j
   have hc2 : 4^r % 3 = 1 := pow4_mod3 r
   have hmod3 : (t * lteCoeff j * 4^r) % 3 = t % 3 := by
-    rw [Nat.mul_mod, Nat.mul_mod, hc1, hc2]
-    omega
+    have e1 : (t * lteCoeff j) % 3 = t % 3 := by
+      rw [Nat.mul_mod, hc1]
+      omega
+    have e2 : (t % 3 * (4^r % 3)) % 3 = t % 3 := by
+      rw [hc2]
+      omega
+    calc t * lteCoeff j * 4^r % 3
+        = (t * lteCoeff j) % 3 * (4^r % 3) % 3 := Nat.mul_mod _ _ _
+      _ = t % 3 * (4^r % 3) % 3 := by rw [e1]
+      _ = t % 3 := e2
   omega
 
 /-- **THE WHEEL: EXACTLY ONE LIFT FIRES.**  Of the three trit lifts of
@@ -864,7 +861,8 @@ one dead child and two live children. -/
 theorem wheel_fire_exists (r j : Nat) :
     ∃ t : Nat, t < 3 ∧ digit3 (4^(r + t * 3^j)) (j+1) = 2 := by
   have hd := digit3_lt_three (4^r) (j+1)
-  rcases hd with h | h | h
+  rcases ErdosTernary2.lt_three_cases (digit3 (4^r) (j+1)) hd
+    with h | h | h
   · refine ⟨2, by omega, ?_⟩
     rw [pow4_killing_trit r 2 j, h]
     decide

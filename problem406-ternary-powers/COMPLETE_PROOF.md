@@ -836,3 +836,98 @@ kernel) is the named π-point lane's first strike.
 (all-sheets dodgers), a proper subset of the rider package
 (omegaShadowTailF's finite clauses) — it does not by itself close the
 act. The wall stands; the map is now exact.
+
+---
+
+## §13. THE S079 BLOCK-LAW ROUND (Kernel 73 — the block decomposition of the rider payload)
+
+**Deliverable S079.** BOSS order: crack the `hTailF` hypothesis completely —
+full proof, BOSS's laws only, no classical methods. The round banked the
+BLOCK DECOMPOSITION: the payload of every tower power, read band by band
+as explicit coefficient streams — all levels, all scales, unconditional,
+in the campaign's own kernel (self-contained on the Arsenal).
+
+### THE TOWER IDENTITY, SELF-CONTAINED (`pow4_three_power_lte_exact`)
+
+$4^{3^v} = 1 + 3^{v+1}\,\mathrm{lteCoeff}(v)$, by division-free cube
+induction (the green TailLTE engine ported into the 406 lane); the
+coefficient is $\equiv 1 \pmod 3$ (`lteCoeff_mod3_one`) — the wheel's
+engine.
+
+### THE CUT RESIDUE — THE SECOND-DIGIT LAW (`pow4_cut_residue_exact`)
+
+For every valuation cut $v$ and multiplier $u$:
+$$4^{3^v u} \bmod 3^{v+2} \;=\; 1 + (u \bmod 3)\cdot 3^{v+1}, \quad
+\text{EXACTLY}.$$
+The first two nonzero ternary digits of every tower power are $1$ and
+$u \bmod 3$, with every digit between them zero.
+
+### THE RIDER FORM (`rider_second_digit_residue`)
+
+Every rider $K = 3^v u$ (so $u \equiv 1 \bmod 3$) owns: digit $0 = 1$,
+digits $1..v = 0$, digit $v+1 = 1$. **The second-lowest set digit of
+every rider IS $v_3(K)+1$** — the LTE valuation law
+$v_3(4^K - 1) = v_3(K) + 1$ read as a digit law.
+
+### THE WINDOW LAW, PORTED (`diagonal_window_law`)
+
+For every $v, u$ and every $j \le v$:
+$\mathrm{digit}_3(4^{3^v u})(v+1+j) = \mathrm{digit}_3(u\cdot
+\mathrm{lteCoeff}(v))(j)$ — the digit stream of the power in the band
+$v+1..2v+1$ IS the trit stream of $u \cdot \mathrm{lteCoeff}(v)$, every
+scale at once.
+
+### THE FIRE LADDER, LEVELS 4 AND 5 (NEW uniform families)
+
+* **F₄** (`window_fire_level4`): every $u \in \{16, 31, 61, 76, 124,
+  139, 169, 184\} \pmod{243}$ fires its digit two at row $v+5$, for ALL
+  $v \ge 4$ (the frozen diagonal $\mathrm{lteCoeff}(v) \equiv 178
+  \pmod{243}$).
+* **F₅** (`window_fire_level5`): every $u \in \{58, 103, 193, 205, 238,
+  250, 340, 385, 463, 508, 529, 574, 598, 643, 664, 709\} \pmod{729}$
+  fires at row $v+6$, for ALL $v \ge 5$ (frozen $664 \pmod{729}$).
+* **Three new uniform witnesses** (the uniform law alone, no bounded
+  decide): $4^{1296} = 4^{3^4 \cdot 16}$ fires at row 9;
+  $4^{14094} = 4^{3^5 \cdot 58}$ fires at row 11;
+  $4^{42282} = 4^{3^6 \cdot 58}$ fires at row 12.
+
+### THE EXPONENT-TRIT KILLING LAW (`pow4_killing_trit` — the master dynamics)
+
+$$\mathrm{digit}_3\!\left(4^{r + t\cdot 3^j}\right)(j+1) \;=\;
+\left(\mathrm{digit}_3(4^r)(j+1) + t\right) \bmod 3$$
+for EVERY $r, t, j$ — maximally general, no hypotheses. **The exponent
+trit ADDS to the payload digit.** Corollaries (`wheel_fire_exists`,
+`wheel_fire_unique`): exactly one of the three dust lifts fires at every
+node — the dust tree is a full binary tree, now a theorem of the
+campaign's own kernel (the S078 driver had used this dynamics
+empirically; it is now proven).
+
+### THE STRATEGIC AUTOPSY (battery406e.py T10 — where the window dust dies)
+
+At valuation cut $v = 4$: of the 32 window-dust cores ($u \bmod 486$),
+**28 die inside block 2** (rows $2v+2..3v+2 = 10..14$), 4 die later
+($u = 7$ at row 21; $331$ at 15; $400$ at 20; $463$ at 16), **zero
+riders**. At $v = 5$: of 64 cores, **62 die inside block 2**, 2 later
+($400$ at row 20; $1030$ at 19), **zero riders**. The second block of
+the binomial tower is the executioner of the window dust.
+
+### THE COMPARATOR (the official gate, extended)
+
+The ledger now carries 24 claims (6 new: S-SECONDDIGIT, S-WINDOWLAW,
+S-KILLTRIT, S-FIRE45, S-BLOCKAUTOPSY, S-OPEN-SEAM-S079) and the driver
+7 new checks + 2 new controls (N-BLOCKLAW, N-WITNESS-ROW):
+**GATE 32/32 PASS — "YOUR SOLUTION IS OKAY"** (wall 35.8s).
+
+### THE HONEST BOUNDARY (unchanged law: no dressing)
+
+The CAP(185) seam stands: the block decomposition reads the payload
+band-by-band (window law at band 1, the block-2 coefficient stream at
+band 2), and the autopsy shows block 2 kills 28/32 and 62/64 of the
+window-dust cores — but the block tower is infinite, and the middle
+blocks (block 3 and beyond) are the named next lane: the block-$b$
+coefficient streams of the binomial tower, Lean-ported exactly as
+`block_two_law` was for $b = 2$ (the paper derivation is complete; the
+kernel port is the next round's first strike). The kill chain remains
+CAP(185) alone — everything else green, self-contained, monolith-free.
+
+The engine never stops; it never lies.
