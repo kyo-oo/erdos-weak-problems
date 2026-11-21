@@ -1,0 +1,92 @@
+============================================================================
+PART 1 — the COMMITTED receipts witnesses (salvage claims, receipts61c5.txt)
+============================================================================
+[PASS] COMMIT8-decode :: n=8 adjacency decodes, symmetric, loop-free
+[PASS] COMMIT8-C5free-2codes :: n=8: C5-free by subset-scan AND walk-chase
+[PASS] COMMIT8-alphaomega-core :: n=8: alpha=3, omega=3, core=True — GENUINE
+[PASS] COMMIT9-decode :: n=9 adjacency decodes, symmetric, loop-free
+[PASS] COMMIT9-C5free-2codes :: n=9: C5-free by subset-scan AND walk-chase
+[PASS] COMMIT9-alphaomega-core :: n=9: alpha=3, omega=3, core=True — GENUINE
+[PASS] COMMIT10-decode :: n=10 adjacency decodes, symmetric, loop-free
+[FAIL] COMMIT10-C5free-2codes :: n=10: C5-free by subset-scan AND walk-chase
+[PASS] COMMIT10-CORRUPT-confirmed :: n=10 committed witness carries 2 induced C5s (witness INVALID; alpha=3, omega=3 match — the noting bug, not the numbers)
+[PASS] COMMIT11-decode :: n=11 adjacency decodes, symmetric, loop-free
+[FAIL] COMMIT11-C5free-2codes :: n=11: C5-free by subset-scan AND walk-chase
+[PASS] COMMIT11-CORRUPT-confirmed :: n=11 committed witness carries 10 induced C5s (witness INVALID; alpha=3, omega=3 match — the noting bug, not the numbers)
+[PASS] COMMIT12-decode :: n=12 adjacency decodes, symmetric, loop-free
+[FAIL] COMMIT12-C5free-2codes :: n=12: C5-free by subset-scan AND walk-chase
+[PASS] COMMIT12-CORRUPT-confirmed :: n=12 committed witness carries 9 induced C5s (witness INVALID; alpha=4, omega=4 match — the noting bug, not the numbers)
+============================================================================
+PART 1B — the RERUN witnesses (receipts61c5_rerun.txt, committed engine)
+============================================================================
+[PASS] RERUN8-decode :: n=8 adjacency decodes, symmetric, loop-free
+[PASS] RERUN8-C5free-2codes :: n=8: C5-free by subset-scan AND walk-chase
+[PASS] RERUN8-alphaomega-core :: n=8: alpha=3, omega=3, core=True — GENUINE
+[PASS] RERUN9-decode :: n=9 adjacency decodes, symmetric, loop-free
+[PASS] RERUN9-C5free-2codes :: n=9: C5-free by subset-scan AND walk-chase
+[PASS] RERUN9-alphaomega-core :: n=9: alpha=3, omega=3, core=True — GENUINE
+[PASS] RERUN10-decode :: n=10 adjacency decodes, symmetric, loop-free
+[PASS] RERUN10-C5free-2codes :: n=10: C5-free by subset-scan AND walk-chase
+[PASS] RERUN10-alphaomega-core :: n=10: alpha=3, omega=3, core=True — GENUINE
+[PASS] RERUN11-decode :: n=11 adjacency decodes, symmetric, loop-free
+[PASS] RERUN11-C5free-2codes :: n=11: C5-free by subset-scan AND walk-chase
+[PASS] RERUN11-alphaomega-core :: n=11: alpha=4, omega=3, core=True — GENUINE
+[PASS] RERUN12-decode :: n=12 adjacency decodes, symmetric, loop-free
+[PASS] RERUN12-C5free-2codes :: n=12: C5-free by subset-scan AND walk-chase
+[PASS] RERUN12-alphaomega-core :: n=12: alpha=4, omega=4, core=True — GENUINE
+[PASS] POSTRUN8-decode :: n=8 adjacency decodes, symmetric, loop-free
+[PASS] POSTRUN8-C5free-2codes :: n=8: C5-free by subset-scan AND walk-chase
+[PASS] POSTRUN8-alphaomega-core :: n=8 (dispatcher's posthumous 199.2s re-run): alpha=3, omega=3, core=True — GENUINE
+[PASS] POSTRUN9-decode :: n=9 adjacency decodes, symmetric, loop-free
+[PASS] POSTRUN9-C5free-2codes :: n=9: C5-free by subset-scan AND walk-chase
+[PASS] POSTRUN9-alphaomega-core :: n=9 (dispatcher's posthumous 199.2s re-run): alpha=3, omega=3, core=True — GENUINE
+[PASS] POSTRUN10-decode :: n=10 adjacency decodes, symmetric, loop-free
+[PASS] POSTRUN10-C5free-2codes :: n=10: C5-free by subset-scan AND walk-chase
+[PASS] POSTRUN10-alphaomega-core :: n=10 (dispatcher's posthumous 199.2s re-run): alpha=3, omega=3, core=True — GENUINE
+[PASS] POSTRUN11-decode :: n=11 adjacency decodes, symmetric, loop-free
+[PASS] POSTRUN11-C5free-2codes :: n=11: C5-free by subset-scan AND walk-chase
+[PASS] POSTRUN11-alphaomega-core :: n=11 (dispatcher's posthumous 199.2s re-run): alpha=3, omega=4, core=True — GENUINE
+[PASS] POSTRUN12-decode :: n=12 adjacency decodes, symmetric, loop-free
+[PASS] POSTRUN12-C5free-2codes :: n=12: C5-free by subset-scan AND walk-chase
+[PASS] POSTRUN12-alphaomega-core :: n=12 (dispatcher's posthumous 199.2s re-run): alpha=4, omega=4, core=True — GENUINE
+============================================================================
+PART 1C — n=11 repair probe: exhaustive one-vertex extensions of the
+         two VERIFIED n=10 hom-3 witnesses (2 x 1024 extensions)
+============================================================================
+[PASS] n11-extension-probe :: no one-vertex extension of either verified n=10 hom-3 witness is an n=11 hom-3 graph (2 x 1024 extensions exhaustively checked) — h_C5(11) stays in [3,4]; the committed h(11)<=3 claim is RETRACTED (corrupt witness)
+============================================================================
+PART 2 — X_1 = W8 = K1 v C7, hand-built
+============================================================================
+[PASS] W8-hand-valid :: 8 vertices, symmetric, loop-free
+[PASS] W8-hand-C5free :: hand-built K1∨C7 C5-free by both codes
+[PASS] W8-hand-alphaomega :: alpha=3, omega=3 (expect 3,3)
+[PASS] W8-hand-structure :: connected, NOT co-connected (complement = K1 ⊔ C7) — the C5-REDUCTION J-case, not a core
+============================================================================
+PART 3 — fresh substitution battery (my own frames/pieces/rng)
+============================================================================
+[PASS] MY-subst-battery :: 150 fresh substitutions of C5-free frames × pieces: all C5-free (both my codes)
+[PASS] MY-subst-formulas :: 150 instances: alpha/omega substitution formulas == brute force (mismatches x0)
+============================================================================
+PART 4 — X_2 = W8[W8 x 8] (64 vertices), hand-coded, FULL exhaustive scan
+============================================================================
+[PASS] X2-size :: X_2 has n = 64 vertices (8 x 8)
+[PASS] X2-C5free-codeA :: ALL C(64,5) = 7,624,512 5-subsets scanned, zero 2-regular (wall 6.0s)
+[PASS] X2-C5free-codeB :: full canonical walk chase, zero induced C5 (wall 0.0s)
+[PASS] X2-alpha :: alpha(X_2) = 9 by B&B = 9 by the formula (3 · alpha(W8) = 9)
+[PASS] X2-omega :: omega(X_2) = 9 by B&B = 9 by the formula (3 · omega(W8) = 9)
+[PASS] X2-ind9-constructive :: exhibited independent set of size 9 (slots 1,3,5 × piece 1,3,5)
+[PASS] X2-cli9-constructive :: exhibited clique of size 9 (slots 0,1,2 × piece 0,1,2)
+[PASS] X3-size :: X_3 has n = 512 = 8^3 vertices
+[PASS] X3-sampled-scan :: 200,000 random 5-subsets of X_3: zero induced C5 (sampled evidence for the tower)
+[PASS] X3-formula-tower :: alpha(X_3) = 3·alpha(X_2) = 27 = 3^3 (tower formula); n = 512 = 8^3
+============================================================================
+PART 5 — the R(3,3)=6 floor + the h_C5(10)=3 exactness + the CAP
+============================================================================
+[PASS] R(3,3)=6-exhaustive :: all 32,768 graphs on 6 vertices have alpha>=3 or omega>=3 (floor h>=3 for n>=6)
+[PASS] R(3,3)-tightness :: C5 on 5 vertices: alpha=omega=2 — no floor above 3 below n=6 (and h(5)=3 needs the S1 exhaustive sweep)
+[PASS] h_C5(10)=3-EXACT :: VERIFIED rerun witness gives h(10) <= 3; R(3,3)=6 floor gives h(10) >= 3 ==> h_C5(10) = 3 EXACTLY; 3^2 = 9 < 10: the sqrt-ladder h(n)^2 >= n BREAKS at n=10
+[PASS] frontier-bounds :: h(11) <= 4 and h(12) <= 4 (VERIFIED witnesses; floor only 3 via R(3,3) — both cells stay in [3,4]; the committed h(11)<=3 is retracted: corrupt witness)
+[PASS] CAP-arithmetic :: c <= log3/log8 = 0.528321: X_t C5-free, n_t = 8^t, hom = 3^t = n_t^c exactly (t=1..8 verified); any c' > c is refuted (t=1 already: 3 < 8^c')
+============================================================================
+VERIFY61C5 SUMMARY: PASS=64 FAIL=3 wall=8.2s
+Interpretation: committed S4 witnesses n=10/11/12 CORRUPT (old-harness noting bug), rerun witnesses all GENUINE. h_C5 exact n<=10: [1,2,2,2,3,3,3,3,3,3] (n<=7 exhaustive engine sweeps n=1..7 + floors/witnesses); h_C5(11) in [3,4]; h_C5(12) in [3,4]; sqrt-ladder BREAKS at n=10; CAP c <= log3/log8 = 0.528321.

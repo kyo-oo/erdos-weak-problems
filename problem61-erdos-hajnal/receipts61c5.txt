@@ -1,0 +1,80 @@
+[PASS] S0-signatures :: 12 labeled C5 signatures built (got 12)
+[PASS] S0-C5-detected :: C5 detected by both codes
+[PASS] S0-C7-clean :: C7 clean by both codes
+[PASS] S0-C7chord-clean :: C7+chord(0,2) clean by both codes
+[PASS] S0-W8-clean :: K1∨C7 (W8) clean by both codes
+[PASS] S0-Petersen-detected :: Petersen carries an induced C5 (both codes) — negative control
+[PASS] S0-duel-20k :: 8000 random n=7 graphs: code1 vs code2 disagree x0
+[PASS] S1-n1-two-code :: n=1: C5-free labeled = 1, two-code full agreement
+[PASS] S1-n1-h-rung :: n=1: h_C5 = 1 (bank 1)
+[NOTE] S1-n1-core-count :: n=1: cores = 0 (new census row)
+[NOTE] S1-n1-core-minhom :: n=1: core min hom = None, witness em=None
+[PASS] S1-n2-two-code :: n=2: C5-free labeled = 2, two-code full agreement
+[PASS] S1-n2-h-rung :: n=2: h_C5 = 2 (bank 2)
+[NOTE] S1-n2-core-count :: n=2: cores = 0 (new census row)
+[NOTE] S1-n2-core-minhom :: n=2: core min hom = None, witness em=None
+[PASS] S1-n3-two-code :: n=3: C5-free labeled = 8, two-code full agreement
+[PASS] S1-n3-h-rung :: n=3: h_C5 = 2 (bank 2)
+[NOTE] S1-n3-core-count :: n=3: cores = 0 (new census row)
+[NOTE] S1-n3-core-minhom :: n=3: core min hom = None, witness em=None
+[PASS] S1-n4-two-code :: n=4: C5-free labeled = 64, two-code full agreement
+[PASS] S1-n4-h-rung :: n=4: h_C5 = 2 (bank 2)
+[NOTE] S1-n4-core-count :: n=4: cores = 0 (new census row)
+[NOTE] S1-n4-core-minhom :: n=4: core min hom = None, witness em=None
+[PASS] S1-n5-two-code :: n=5: C5-free labeled = 1012, two-code full agreement
+[PASS] S1-n5-h-rung :: n=5: h_C5 = 3 (bank 3)
+[FAIL] S1-n5-core-count :: n=5: cores = 60 (bank 420)
+[NOTE] S1-n5-core-minhom :: n=5: core min hom = 3, witness em=(59, 3, 3)
+[PASS] S1-n5-aomega-duel :: n=5: α/ω B&B-vs-brute duel on cores fail x0
+[PASS] S1-n5-core-wit-hom3 :: n=5 core with α=ω=3 exists: em=(59, 3, 3)
+[PASS] S1-n6-two-code :: n=6: C5-free labeled = 30824, two-code full agreement
+[PASS] S1-n6-h-rung :: n=6: h_C5 = 3 (bank 3)
+[FAIL] S1-n6-core-count :: n=6: cores = 12840 (bank 18840)
+[NOTE] S1-n6-core-minhom :: n=6: core min hom = 3, witness em=(633, 3, 3)
+[PASS] S1-n6-aomega-duel :: n=6: α/ω B&B-vs-brute duel on cores fail x0
+[PASS] S1-n6-core-wit-hom3 :: n=6 core with α=ω=3 exists: em=(633, 3, 3)
+[PASS] S2-n7-count-vs-bank :: n=7 C5-free labeled = 1742336 (bank 1,742,336)
+[PASS] S2-n7-core-census :: n=7 C5-free cores = 1172640 (exhaustive over 1742336 C5-free labeled graphs), wall 15.1s
+[NOTE] S2-n7-core-wit :: first core emask = 251
+[PASS] S2-n7-core-hom3-wit :: n=7 core with α=ω=3 exists (em=39459) → h_core(7)=3
+[PASS] S2-C7chord-core :: C7+chord(0,2): C5-free (both codes), core, α=ω=3 — certified h_core(7)=3 witness
+[PASS] S2-n7-duel-20k :: 20k sampled C5-free (code1/numpy) all clean under code2
+[PASS] S2-h7-rung :: h_C5(7)=3 re-derived: C7 witness α=3,ω=2; lower by banked R(3,3)=6 anchor (any 6 vertices force hom>=3)
+[PASS] S3-W8-C5free :: W8 = K1∨C7 is C5-free (both codes)
+[PASS] S3-W8-hom3 :: W8 α=3, ω=3 (expect 3,3)
+[PASS] S3-W8-connected :: W8 connected
+[PASS] S3-W8-NOT-core :: W8 NOT co-connected (complement = point ⊔ C̄7) → falls to C5-REDUCTION case J, as it must
+[PASS] S3-W8-brute-duel :: W8 α/ω B&B vs 2^8 brute: agree
+[FAIL] S3-subst-battery :: 206 substitutions of C5-free frames×pieces: all C5-free (both codes), wall 0.4s
+[PASS] S3-subst-negative :: 200 C5-frames with singleton pieces: C5 detected every time
+[PASS] S3-contraction-battery :: 1500 module contractions of C5-free graphs: quotients all C5-free, wall 12.1s
+[PASS] S3-X2-scan :: X_2 = W8[W8×8] (64 vertices): 200000 random 5-subsets, zero induced C5 (both codes), wall 3.2s
+[PASS] S3-X2-alphaomega :: X_2 α = ω = 9 by the substitution formulas (α(Q[M]) = max_I Σ α(M_i)); n = 64 → hom = 9 = 64^(log8 3)
+[NOTE] S3-CAP :: c ≤ log3/log8 = 0.52832: X_t = W8[W8×8]^{t-1} is C5-free (C61-C5-SUBST law), n_t = 8^t, hom = 3^t — any class-wide exponent c obeys 3^t ≥ 8^{ct}
+[PASS] S3-sqrt-ladder :: h_C5(n)^2 >= n for n=1..8: n=1:h=1:EQ, n=2:h=2:GE, n=3:h=2:GE, n=4:h=2:EQ, n=5:h=3:GE, n=6:h=3:GE, n=7:h=3:GE, n=8:h=3:GE
+[PASS] S4-n8core-verify :: n=8: best hom found = 3 (α=3,ω=3), C5-free both codes, brute duel ok, core=True; starts=1740, states=695947
+[NOTE] S4-n8core-core-probe :: n=8 core-stratum hunt: best hom = 3, best-is-core = True, hom-3 core found = True
+[PASS] S4-n9-verify :: n=9: best hom found = 3 (α=3,ω=3), C5-free both codes, brute duel ok, core=True; starts=2398, states=959106
+[FAIL] S4-n10-verify :: n=10: best hom found = 3 (α=3,ω=3), C5-free both codes, brute duel ok, core=True; starts=1809, states=723481
+[FAIL] S4-n11-verify :: n=11: best hom found = 3 (α=3,ω=3), C5-free both codes, brute duel ok, core=True; starts=992, states=396705
+[FAIL] S4-n12-verify :: n=12: best hom found = 4 (α=4,ω=4), C5-free both codes, brute duel ok, core=True; starts=783, states=312945
+[NOTE] S4-frontier-n8 :: min hom found at n=8: 3 (starts=1740, states=695947)
+[NOTE] S4-witness-n8 :: adjacency witness: ['0x4a', '0x1d', '0x2a', '0x17', '0xca', '0x4', '0x91', '0x50']
+[NOTE] S4-frontier-n9 :: min hom found at n=9: 3 (starts=2398, states=959106)
+[NOTE] S4-witness-n9 :: adjacency witness: ['0x194', '0x48', '0x131', '0x172', '0x2d', '0x11c', '0xa', '0x101', '0xad']
+[NOTE] S4-frontier-n10 :: min hom found at n=10: 3 (starts=1809, states=723481)
+[NOTE] S4-witness-n10 :: adjacency witness: ['0x352', '0x79', '0x380', '0x32', '0x20b', '0x4a', '0x1a3', '0x144', '0xc5', '0x15']
+[NOTE] S4-frontier-n11 :: min hom found at n=11: 3 (starts=992, states=396705)
+[NOTE] S4-witness-n11 :: adjacency witness: ['0x184', '0x518', '0x499', '0x556', '0x24e', '0x640', '0x338', '0x105', '0xcb', '0x470', '0x22e']
+[NOTE] S4-frontier-n12 :: min hom found at n=12: 4 (starts=783, states=312945)
+[NOTE] S4-witness-n12 :: adjacency witness: ['0xce2', '0xa15', '0x32', '0x380', '0xa6', '0x1d5', '0x821', '0x739', '0x2a8', '0x98a', '0x81', '0x243']
+[NOTE] S4-sqrt-probe :: the √n-ladder (h(n)^2 >= n) is CERTIFIED for n<=8 (S3); the first possible break is a hom-3 graph at n=10 (9 < 10). The hunt above probes n=9..12.
+SUMMARY :: PASS=41 FAIL=6 wall=238.8s numpy=True
+
+--- W80-61E-F FINISHER RERUN + AUDIT APPENDIX (2026-11-21) ---
+[RERUN] engine61c5.py (the committed code) rerun by finisher: SUMMARY :: PASS=47 FAIL=0 wall=190.3s numpy=True -> receipts61c5_rerun.txt
+[POSTRUN] a third completed run discovered in the working tree (mtime 11:46:17, launched ~11:42:57 by the dispatcher right after the last engine edit at 11:42:54, finishing AFTER the checkpoint commit 11:45:13): SUMMARY :: PASS=47 FAIL=0 wall=199.2s -> preserved as receipts61c5_postrun.txt
+[AUDIT-1] The committed receipts above (41 PASS / 6 FAIL, wall 238.8s) were produced by an EARLIER, uncommitted harness version: their line names (S1-n5-core-count) cannot be emitted by the committed engine (S1-n5-coarse-core-count). The 6 FAILs are STALE-HARNESS expected-value mismatches, NOT mathematical failures: (a) S1-n5/n6-core-count compared FRONTIER cores (60/12840: conn+co-conn+triangle+indep-triple) against the COARSE core bank (420/18840: conn+co-conn only) — definitional mismatch, the committed engine compares like-for-like and PASSES; (b) S3-subst-battery FAILED on a count threshold while its own message says all 206 substitutions were C5-free (the committed engine's bat>=200 passes deterministically at bat=206); (c) S4-n10/n11/n12-verify FAILED on hom/ladder expectations carried by the old ok() while the messages report clean verification — the discoveries (hom-3 at n=10/11, hom-4 at n=12) violated the old expected values.
+[AUDIT-2] WITNESS CORRUPTION (the material finding): the committed S4 witnesses at n=10, 11, 12 are NOT C5-free — independent two-code verification (verify61c5_witness.py, receipts61c5_verify.txt) counts 2, 10, 9 induced C5s in them respectively (alpha/omega/core values DO match: an old-harness witness-NOTING bug — a post-mutation adjacency was noted instead of the verified best). The n=8 and n=9 committed witnesses are GENUINE.
+[AUDIT-3] REPAIR: all ten S4 witnesses of the rerun and postrun runs are GENUINE (two independent induced-C5 codes + brute alpha/omega + core checks). h_C5(10)=3 EXACT is hereby certified by the RERUN n=10 witness (C5-free, alpha=omega=3) + the R(3,3)=6 floor (certified exhaustively). The committed h_C5(11)<=3 claim is RETRACTED (corrupt witness; both fresh runs found only hom-4 at n=11; an exhaustive 2x1024 one-vertex extension probe of both verified n=10 hom-3 witnesses found no n=11 hom-3 graph) — h_C5(11) in [3,4]. h_C5(12) in [3,4] (witness 4; floor 3).
+[VERIFY] verify61c5_witness.py :: PASS=64 FAIL=3 wall=8.2s — the 3 FAILs are the corruption confirmations themselves (COMMIT10/11/12-C5free-2codes); everything else green: X_2 full exhaustive 7,624,512-subset scan clean, alpha=omega=9 by B&B = formula, 150-instance substitution battery clean, R(3,3)=6 exhaustive, CAP c <= log3/log8 = 0.528321.
