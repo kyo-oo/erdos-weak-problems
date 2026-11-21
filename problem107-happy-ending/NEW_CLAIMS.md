@@ -55,3 +55,7 @@ The commander integrates; this lane does not edit solution.json.
 
 ## C107-SIXPOINT-REFUTATION (W75-107K lane)
 "THE ADVERSARIAL CATCH: the naive 'triangle + 3 interior => convex 5' lemma is FALSE — exact-rational counterexample: concentric triangles A(0,10) B(-9,-8) C(9,-8) with u(0,10/3) v(-3,-8/3) w(3,-8/3): all 6 five-subsets have hull size 3 or 4. The f(5) <= 9 case tree must route through the outer quadrilateral/triangle vertices (the true Makai structure) — the engine caught the false lemma before it shipped (the campaign's no-wrong-construction doctrine)."
+
+## W81 (W81-107A lane)
+
+- C107-E5-EXACT — THEOREM f(5) = 9 exactly. The F8 reduction (146 convex-5-free 8-types, exhaustive two-code over the complete bank) + heredity + the saturated F8 storm (zero convex-5-free children) + the census battery (250,922 hull<=4 types, zero convex-5-free) + the validation ladder (SET EQUALITY n=4..8). See F5_CERTIFICATE.md.

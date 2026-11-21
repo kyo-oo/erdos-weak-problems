@@ -1,0 +1,12 @@
+F8 parents: 146
+seed 31337: +33949 distinct children (union 33949); census +0 [269s]
+STORM DONE: union children of F8: 33949; new-to-census: 0; CONVEX-5-FREE CHILDREN: 0
+census now: 316802
+  200000/316802 (54s) le4 checked: 200000, bad: 0
+HULL CENSUS: {3: 110330, 4: 140592, 5: 56300, 6: 8973, 7: 591, 8: 15, 9: 1}
+hull<=4 checked (two-code): 250922; witness-verified: 250922
+CONVEX-5-FREE TYPES: 0
+VERDICT: EVERY hull<=4 type in the census CONTAINS a convex 5 (two-code)
+wall 66s
+n=8 bank: 6405 reflection-distinguished types
+CONVEX-5-FREE 8-point types: 146

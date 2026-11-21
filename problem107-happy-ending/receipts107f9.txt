@@ -1,0 +1,672 @@
+[ladder 14:36:16] THE VALIDATION LADDER: C re-enumerates n=4..8; SET EQUALITY vs the python bank at every level
+[ladder 14:36:16] n=3->4: |bank|=2 |C|=2 miss=0 extra=0 parents=1 cells=7 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=2/2 wall=0.0s -> SET EQUALITY OK
+[ladder 14:36:16] n=4->5: |bank|=3 |C|=3 miss=0 extra=0 parents=2 cells=36 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=5/5 wall=0.0s -> SET EQUALITY OK
+[ladder 14:36:16] n=5->6: |bank|=20 |C|=20 miss=0 extra=0 parents=3 cells=123 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:41] THE VALIDATION LADDER: C re-enumerates n=4..8; SET EQUALITY vs the python bank at every level
+[ladder 14:40:41] n=3->4: |bank|=2 |C|=2 miss=0 extra=0 parents=1 cells=7 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=2/2 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:41] n=4->5: |bank|=3 |C|=3 miss=0 extra=0 parents=2 cells=36 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=5/5 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:41] n=5->6: |bank|=20 |C|=20 miss=0 extra=0 parents=3 cells=123 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.0s -> SET EQUALITY OK
+[ladder 14:40:42] n=6->7: |bank|=242 |C|=242 miss=0 extra=0 parents=20 cells=1700 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=0.6s -> SET EQUALITY OK
+[ladder 14:41:09] n=7->8: |bank|=6405 |C|=6405 miss=0 extra=0 parents=242 cells=39204 formula_bad=0 selfcheck_bad=0 generic_fail=0 spot(cert)=40/40 wall=27.0s -> SET EQUALITY OK
+[ladder 14:41:09] LADDER GREEN — n=4..8 SET EQUALITY at every level; the C port is the python machinery
+[grind 14:47:04] resume: 0/6405 parents done, census lines 0, this run: 16 parents max, workers=2
+[grind 14:47:13] resume: 0/6405 parents done, census lines 0, this run: 16 parents max, workers=2
+[grind 14:47:13] launched chunk 0 (8 parents)
+[grind 14:47:13] launched chunk 1 (8 parents)
+[grind 14:47:25] chunk 1: +8 parents (8/6405; hull<=4: 8/5158), +2491 new types (census 2491), new-hull-hist {3: 1992, 4: 499}, C-wall 6s, total 12s
+[grind 14:47:31] chunk 0: +8 parents (16/6405; hull<=4: 16/5158), +2586 new types (census 5077), new-hull-hist {3: 2038, 4: 548}, C-wall 11s, total 18s
+[grind 14:47:32] GRIND COMPLETE: 16/6405 parents, census 5077 reflection-distinguished types
+[grind 14:48:25] resume: 16/6405 parents done, census lines 5077, this run: 6389 parents max, workers=2
+[grind 14:48:25] launched chunk 2 (64 parents)
+[grind 14:48:25] launched chunk 3 (64 parents)
+[grind 14:50:24] resume: 16/6405 parents done, census lines 5077, this run: 6389 parents max, workers=2
+[grind 14:50:24] launched chunk 2 (64 parents)
+[grind 14:50:24] launched chunk 3 (64 parents)
+[grind 14:53:21] resume: 16/6405 parents done, census lines 5077, this run: 6389 parents max, workers=2
+[grind 14:53:21] launched chunk 2 (48 parents)
+[grind 14:53:21] launched chunk 3 (48 parents)
+[grind 14:54:38] chunk 2: +48 parents (64/6405; hull<=4: 64/5158), +13890 new types (census 18967), new-hull-hist {3: 11055, 4: 2835}, C-wall 43s, total 77s
+[grind 14:54:38] launched chunk 4 (48 parents)
+[grind 14:55:25] chunk 3: +48 parents (112/6405; hull<=4: 112/5158), +11912 new types (census 30879), new-hull-hist {3: 9012, 4: 2900}, C-wall 77s, total 124s
+[grind 14:55:27] launched chunk 5 (48 parents)
+[grind 14:56:02] chunk 4: +48 parents (160/6405; hull<=4: 160/5158), +10880 new types (census 41759), new-hull-hist {3: 8373, 4: 2507}, C-wall 49s, total 161s
+[grind 14:56:02] launched chunk 6 (48 parents)
+[grind 14:56:37] chunk 5: +48 parents (208/6405; hull<=4: 208/5158), +9743 new types (census 51502), new-hull-hist {3: 7165, 4: 2578}, C-wall 40s, total 196s
+[grind 14:56:37] launched chunk 7 (48 parents)
+[grind 14:57:14] chunk 6: +48 parents (256/6405; hull<=4: 256/5158), +10443 new types (census 61945), new-hull-hist {3: 8203, 4: 2240}, C-wall 38s, total 233s
+[grind 14:57:14] launched chunk 8 (48 parents)
+[grind 14:57:50] chunk 7: +48 parents (304/6405; hull<=4: 304/5158), +9272 new types (census 71217), new-hull-hist {3: 6698, 4: 2574}, C-wall 41s, total 269s
+[grind 14:57:52] launched chunk 9 (48 parents)
+[grind 14:58:15] chunk 8: +48 parents (352/6405; hull<=4: 352/5158), +6832 new types (census 78049), new-hull-hist {3: 4693, 4: 2139}, C-wall 38s, total 294s
+[grind 14:58:15] launched chunk 10 (48 parents)
+[grind 14:58:52] chunk 9: +48 parents (400/6405; hull<=4: 400/5158), +7217 new types (census 85266), new-hull-hist {3: 5018, 4: 2199}, C-wall 38s, total 332s
+[grind 14:58:52] launched chunk 11 (48 parents)
+[grind 14:59:18] chunk 10: +48 parents (448/6405; hull<=4: 448/5158), +7154 new types (census 92420), new-hull-hist {3: 4908, 4: 2246}, C-wall 39s, total 357s
+[grind 14:59:18] launched chunk 12 (48 parents)
+[grind 15:00:01] chunk 11: +48 parents (496/6405; hull<=4: 496/5158), +6755 new types (census 99175), new-hull-hist {3: 4396, 4: 2359}, C-wall 45s, total 400s
+[grind 15:00:03] launched chunk 13 (48 parents)
+[grind 15:00:29] chunk 12: +48 parents (544/6405; hull<=4: 544/5158), +6554 new types (census 105729), new-hull-hist {3: 3992, 4: 2562}, C-wall 48s, total 428s
+[grind 15:00:29] launched chunk 14 (48 parents)
+[grind 15:01:05] chunk 13: +48 parents (592/6405; hull<=4: 592/5158), +5659 new types (census 111388), new-hull-hist {3: 3507, 4: 2152}, C-wall 41s, total 464s
+[grind 15:01:05] wall budget 500s at 464s — draining 1 running chunks, deferring 121
+[grind 15:01:26] chunk 14: +48 parents (640/6405; hull<=4: 640/5158), +4183 new types (census 115571), new-hull-hist {3: 2280, 4: 1903}, C-wall 46s, total 485s
+[grind 15:01:28] GRIND COMPLETE: 640/6405 parents, census 115571 reflection-distinguished types
+[grind 16:06:34] resume: 640/6405 parents done, census lines 115571, this run: 5765 parents max, workers=2
+[grind 16:06:34] launched chunk 15 (48 parents)
+[grind 16:06:34] launched chunk 16 (48 parents)
+[grind 16:34:14] resume: 640/6405 parents done, census lines 115571, this run: 5765 parents max, workers=2
+[grind 16:34:15] launched chunk 15 (4 parents)
+[grind 16:34:15] launched chunk 16 (4 parents)
+[grind 16:34:19] chunk 15: +4 parents (644/6405; hull<=4: 644/5158), +364 new types (census 115935), new-hull-hist {3: 200, 4: 164}, C-wall 3s, total 5s
+[grind 16:34:21] launched chunk 17 (4 parents)
+[grind 16:34:22] chunk 16: +4 parents (648/6405; hull<=4: 648/5158), +473 new types (census 116408), new-hull-hist {3: 260, 4: 213}, C-wall 6s, total 8s
+[grind 16:34:23] launched chunk 18 (4 parents)
+[grind 16:34:26] chunk 17: +4 parents (652/6405; hull<=4: 652/5158), +481 new types (census 116889), new-hull-hist {3: 266, 4: 215}, C-wall 3s, total 12s
+[grind 16:34:26] wall budget 80s at 12s — draining 1 running chunks, deferring 1438
+[grind 16:34:28] chunk 18: +4 parents (656/6405; hull<=4: 656/5158), +422 new types (census 117311), new-hull-hist {3: 243, 4: 179}, C-wall 4s, total 14s
+[grind 16:34:30] GRIND COMPLETE: 656/6405 parents, census 117311 reflection-distinguished types
+[grind 16:35:01] resume: 656/6405 parents done, census lines 117311, this run: 5749 parents max, workers=2
+[grind 16:35:02] launched chunk 19 (24 parents)
+[grind 16:35:02] launched chunk 20 (24 parents)
+[grind 16:35:29] chunk 20: +24 parents (680/6405; hull<=4: 680/5158), +2430 new types (census 119741), new-hull-hist {3: 1369, 4: 1061}, C-wall 21s, total 28s
+[grind 16:35:29] launched chunk 21 (24 parents)
+[grind 16:35:37] chunk 19: +24 parents (704/6405; hull<=4: 704/5158), +2436 new types (census 122177), new-hull-hist {3: 1372, 4: 1064}, C-wall 28s, total 36s
+[grind 16:35:40] launched chunk 22 (24 parents)
+[grind 16:35:55] chunk 21: +24 parents (728/6405; hull<=4: 728/5158), +2233 new types (census 124410), new-hull-hist {3: 1151, 4: 1082}, C-wall 17s, total 54s
+[grind 16:35:55] launched chunk 23 (24 parents)
+[grind 16:36:08] chunk 22: +24 parents (752/6405; hull<=4: 752/5158), +2109 new types (census 126519), new-hull-hist {3: 1102, 4: 1007}, C-wall 20s, total 67s
+[grind 16:36:08] launched chunk 24 (24 parents)
+[grind 16:36:21] chunk 23: +24 parents (776/6405; hull<=4: 776/5158), +2456 new types (census 128975), new-hull-hist {3: 1337, 4: 1119}, C-wall 18s, total 81s
+[grind 16:36:23] launched chunk 25 (24 parents)
+[grind 16:36:32] chunk 24: +24 parents (800/6405; hull<=4: 800/5158), +1792 new types (census 130767), new-hull-hist {3: 767, 4: 1025}, C-wall 17s, total 91s
+[grind 16:36:32] launched chunk 26 (24 parents)
+[grind 16:36:52] chunk 25: +24 parents (824/6405; hull<=4: 824/5158), +2095 new types (census 132862), new-hull-hist {3: 1026, 4: 1069}, C-wall 22s, total 111s
+[grind 16:36:52] launched chunk 27 (24 parents)
+[grind 16:37:01] chunk 26: +24 parents (848/6405; hull<=4: 848/5158), +2189 new types (census 135051), new-hull-hist {3: 976, 4: 1213}, C-wall 22s, total 121s
+[grind 16:37:01] launched chunk 28 (24 parents)
+[grind 16:37:20] chunk 27: +24 parents (872/6405; hull<=4: 872/5158), +2133 new types (census 137184), new-hull-hist {3: 975, 4: 1158}, C-wall 20s, total 139s
+[grind 16:37:22] launched chunk 29 (24 parents)
+[grind 16:37:32] chunk 28: +24 parents (896/6405; hull<=4: 896/5158), +3001 new types (census 140185), new-hull-hist {3: 1533, 4: 1468}, C-wall 20s, total 151s
+[grind 16:37:32] launched chunk 30 (24 parents)
+[grind 16:37:52] chunk 29: +24 parents (920/6405; hull<=4: 920/5158), +3053 new types (census 143238), new-hull-hist {3: 1507, 4: 1546}, C-wall 20s, total 172s
+[grind 16:37:52] launched chunk 31 (24 parents)
+[grind 16:38:04] chunk 30: +24 parents (944/6405; hull<=4: 944/5158), +2025 new types (census 145263), new-hull-hist {3: 760, 4: 1265}, C-wall 24s, total 183s
+[grind 16:38:04] launched chunk 32 (24 parents)
+[grind 16:38:21] chunk 31: +24 parents (968/6405; hull<=4: 968/5158), +2018 new types (census 147281), new-hull-hist {3: 854, 4: 1164}, C-wall 20s, total 200s
+[grind 16:38:23] launched chunk 33 (24 parents)
+[grind 16:38:30] chunk 32: +24 parents (992/6405; hull<=4: 992/5158), +1913 new types (census 149194), new-hull-hist {3: 741, 4: 1172}, C-wall 20s, total 210s
+[grind 16:38:30] launched chunk 34 (24 parents)
+[grind 16:38:54] chunk 33: +24 parents (1016/6405; hull<=4: 1016/5158), +1975 new types (census 151169), new-hull-hist {3: 782, 4: 1193}, C-wall 26s, total 233s
+[grind 16:38:54] launched chunk 35 (24 parents)
+[grind 16:39:01] chunk 34: +24 parents (1040/6405; hull<=4: 1040/5158), +2268 new types (census 153437), new-hull-hist {3: 996, 4: 1272}, C-wall 23s, total 241s
+[grind 16:39:01] launched chunk 36 (24 parents)
+[grind 16:39:23] chunk 35: +24 parents (1064/6405; hull<=4: 1064/5158), +1529 new types (census 154966), new-hull-hist {3: 486, 4: 1043}, C-wall 23s, total 262s
+[grind 16:39:24] launched chunk 37 (24 parents)
+[grind 16:39:30] chunk 36: +24 parents (1088/6405; hull<=4: 1088/5158), +1440 new types (census 156406), new-hull-hist {3: 436, 4: 1004}, C-wall 23s, total 269s
+[grind 16:39:30] launched chunk 38 (24 parents)
+[grind 16:39:52] chunk 37: +24 parents (1112/6405; hull<=4: 1112/5158), +1573 new types (census 157979), new-hull-hist {3: 451, 4: 1122}, C-wall 23s, total 291s
+[grind 16:39:52] launched chunk 39 (24 parents)
+[grind 16:39:56] chunk 38: +24 parents (1136/6405; hull<=4: 1136/5158), +1293 new types (census 159272), new-hull-hist {3: 327, 4: 966}, C-wall 21s, total 296s
+[grind 16:39:56] launched chunk 40 (24 parents)
+[grind 16:40:15] chunk 39: +24 parents (1160/6405; hull<=4: 1160/5158), +1283 new types (census 160555), new-hull-hist {3: 346, 4: 937}, C-wall 19s, total 314s
+[grind 16:40:17] launched chunk 41 (24 parents)
+[grind 16:40:22] chunk 40: +24 parents (1184/6405; hull<=4: 1184/5158), +1416 new types (census 161971), new-hull-hist {3: 413, 4: 1003}, C-wall 21s, total 321s
+[grind 16:40:22] launched chunk 42 (24 parents)
+[grind 16:40:41] chunk 41: +24 parents (1208/6405; hull<=4: 1208/5158), +1636 new types (census 163607), new-hull-hist {3: 578, 4: 1058}, C-wall 19s, total 340s
+[grind 16:40:41] launched chunk 43 (24 parents)
+[grind 16:40:47] chunk 42: +24 parents (1232/6405; hull<=4: 1232/5158), +1493 new types (census 165100), new-hull-hist {3: 473, 4: 1020}, C-wall 20s, total 347s
+[grind 16:40:48] launched chunk 44 (24 parents)
+[grind 16:41:07] chunk 43: +24 parents (1256/6405; hull<=4: 1256/5158), +1382 new types (census 166482), new-hull-hist {3: 371, 4: 1011}, C-wall 21s, total 366s
+[grind 16:41:08] launched chunk 45 (24 parents)
+[grind 16:41:13] chunk 44: +24 parents (1280/6405; hull<=4: 1280/5158), +1238 new types (census 167720), new-hull-hist {3: 335, 4: 903}, C-wall 21s, total 373s
+[grind 16:41:14] launched chunk 46 (24 parents)
+[grind 16:41:34] chunk 46: +24 parents (1304/6405; hull<=4: 1304/5158), +885 new types (census 168605), new-hull-hist {3: 150, 4: 735}, C-wall 18s, total 393s
+[grind 16:41:34] launched chunk 47 (24 parents)
+[grind 16:41:39] chunk 45: +24 parents (1328/6405; hull<=4: 1328/5158), +1424 new types (census 170029), new-hull-hist {3: 377, 4: 1047}, C-wall 26s, total 399s
+[grind 16:41:39] launched chunk 48 (24 parents)
+[grind 16:42:01] chunk 47: +24 parents (1352/6405; hull<=4: 1352/5158), +1132 new types (census 171161), new-hull-hist {3: 182, 4: 950}, C-wall 23s, total 420s
+[grind 16:42:03] launched chunk 49 (24 parents)
+[grind 16:42:08] chunk 48: +24 parents (1376/6405; hull<=4: 1376/5158), +1419 new types (census 172580), new-hull-hist {3: 377, 4: 1042}, C-wall 23s, total 427s
+[grind 16:42:08] launched chunk 50 (24 parents)
+[grind 16:42:30] chunk 49: +24 parents (1400/6405; hull<=4: 1400/5158), +1061 new types (census 173641), new-hull-hist {3: 174, 4: 887}, C-wall 23s, total 450s
+[grind 16:42:30] launched chunk 51 (24 parents)
+[grind 16:42:36] chunk 50: +24 parents (1424/6405; hull<=4: 1424/5158), +1393 new types (census 175034), new-hull-hist {3: 338, 4: 1055}, C-wall 23s, total 455s
+[grind 16:42:36] wall budget 520s at 456s — draining 1 running chunks, deferring 207
+[grind 16:42:52] chunk 51: +24 parents (1448/6405; hull<=4: 1448/5158), +1563 new types (census 176597), new-hull-hist {3: 444, 4: 1119}, C-wall 18s, total 471s
+[grind 16:42:54] GRIND COMPLETE: 1448/6405 parents, census 176597 reflection-distinguished types
+[grind 16:43:01] resume: 1448/6405 parents done, census lines 176597, this run: 4957 parents max, workers=2
+[grind 16:43:02] launched chunk 52 (24 parents)
+[grind 16:43:02] launched chunk 53 (24 parents)
+[grind 16:43:32] chunk 52: +24 parents (1472/6405; hull<=4: 1472/5158), +1269 new types (census 177866), new-hull-hist {3: 257, 4: 1012}, C-wall 26s, total 31s
+[grind 16:43:32] launched chunk 54 (24 parents)
+[grind 16:43:38] chunk 53: +24 parents (1496/6405; hull<=4: 1496/5158), +1419 new types (census 179285), new-hull-hist {3: 334, 4: 1085}, C-wall 31s, total 37s
+[grind 16:43:38] launched chunk 55 (24 parents)
+[grind 16:44:00] chunk 54: +24 parents (1520/6405; hull<=4: 1520/5158), +1386 new types (census 180671), new-hull-hist {3: 273, 4: 1113}, C-wall 23s, total 59s
+[grind 16:44:00] launched chunk 56 (24 parents)
+[grind 16:44:06] chunk 55: +24 parents (1544/6405; hull<=4: 1544/5158), +1477 new types (census 182148), new-hull-hist {3: 272, 4: 1205}, C-wall 23s, total 65s
+[grind 16:44:08] launched chunk 57 (24 parents)
+[grind 16:44:32] chunk 56: +24 parents (1568/6405; hull<=4: 1568/5158), +1253 new types (census 183401), new-hull-hist {3: 128, 4: 1125}, C-wall 28s, total 91s
+[grind 16:44:32] launched chunk 58 (24 parents)
+[grind 16:44:38] chunk 57: +24 parents (1592/6405; hull<=4: 1592/5158), +1588 new types (census 184989), new-hull-hist {3: 207, 4: 1381}, C-wall 24s, total 97s
+[grind 16:44:38] launched chunk 59 (24 parents)
+[grind 16:44:54] chunk 58: +24 parents (1616/6405; hull<=4: 1616/5158), +1155 new types (census 186144), new-hull-hist {3: 109, 4: 1046}, C-wall 18s, total 114s
+[grind 16:44:54] launched chunk 60 (24 parents)
+[grind 16:45:04] chunk 59: +24 parents (1640/6405; hull<=4: 1640/5158), +1299 new types (census 187443), new-hull-hist {3: 130, 4: 1169}, C-wall 22s, total 123s
+[grind 16:45:06] launched chunk 61 (24 parents)
+[grind 16:45:31] chunk 60: +24 parents (1664/6405; hull<=4: 1664/5158), +1374 new types (census 188817), new-hull-hist {3: 169, 4: 1205}, C-wall 32s, total 150s
+[grind 16:45:31] launched chunk 62 (24 parents)
+[grind 16:45:36] chunk 61: +24 parents (1688/6405; hull<=4: 1688/5158), +1186 new types (census 190003), new-hull-hist {3: 139, 4: 1047}, C-wall 25s, total 155s
+[grind 16:45:36] launched chunk 63 (24 parents)
+[grind 16:45:58] chunk 62: +24 parents (1712/6405; hull<=4: 1712/5158), +1149 new types (census 191152), new-hull-hist {3: 66, 4: 1083}, C-wall 23s, total 177s
+[grind 16:45:58] launched chunk 64 (24 parents)
+[grind 16:46:05] chunk 63: +24 parents (1736/6405; hull<=4: 1736/5158), +1057 new types (census 192209), new-hull-hist {3: 91, 4: 966}, C-wall 25s, total 184s
+[grind 16:46:07] launched chunk 65 (24 parents)
+[grind 16:46:25] chunk 64: +24 parents (1760/6405; hull<=4: 1760/5158), +1162 new types (census 193371), new-hull-hist {3: 45, 4: 1117}, C-wall 22s, total 205s
+[grind 16:46:25] launched chunk 66 (24 parents)
+[grind 16:46:39] chunk 65: +24 parents (1784/6405; hull<=4: 1784/5158), +1175 new types (census 194546), new-hull-hist {3: 43, 4: 1132}, C-wall 27s, total 219s
+[grind 16:46:39] launched chunk 67 (24 parents)
+[grind 16:46:55] chunk 66: +24 parents (1808/6405; hull<=4: 1808/5158), +1182 new types (census 195728), new-hull-hist {3: 30, 4: 1152}, C-wall 25s, total 234s
+[grind 16:46:55] launched chunk 68 (24 parents)
+[grind 16:47:07] chunk 67: +24 parents (1832/6405; hull<=4: 1832/5158), +1096 new types (census 196824), new-hull-hist {3: 18, 4: 1078}, C-wall 23s, total 246s
+[grind 16:47:08] launched chunk 69 (24 parents)
+[grind 16:47:21] chunk 68: +24 parents (1856/6405; hull<=4: 1856/5158), +1283 new types (census 198107), new-hull-hist {3: 19, 4: 1264}, C-wall 21s, total 260s
+[grind 16:47:21] launched chunk 70 (24 parents)
+[grind 16:47:35] chunk 69: +24 parents (1880/6405; hull<=4: 1880/5158), +1148 new types (census 199255), new-hull-hist {3: 6, 4: 1142}, C-wall 22s, total 275s
+[grind 16:47:35] launched chunk 71 (24 parents)
+[grind 16:47:56] chunk 70: +24 parents (1904/6405; hull<=4: 1904/5158), +1138 new types (census 200393), new-hull-hist {3: 11, 4: 1127}, C-wall 30s, total 295s
+[grind 16:47:56] launched chunk 72 (24 parents)
+[grind 16:48:02] chunk 71: +24 parents (1928/6405; hull<=4: 1928/5158), +909 new types (census 201302), new-hull-hist {3: 27, 4: 882}, C-wall 23s, total 302s
+[grind 16:48:05] launched chunk 73 (24 parents)
+[grind 16:48:22] chunk 72: +24 parents (1952/6405; hull<=4: 1952/5158), +919 new types (census 202221), new-hull-hist {3: 16, 4: 903}, C-wall 22s, total 321s
+[grind 16:48:22] launched chunk 74 (24 parents)
+[grind 16:48:32] chunk 73: +24 parents (1976/6405; hull<=4: 1976/5158), +747 new types (census 202968), new-hull-hist {3: 4, 4: 743}, C-wall 24s, total 331s
+[grind 16:48:32] launched chunk 75 (24 parents)
+[grind 16:48:45] chunk 74: +24 parents (2000/6405; hull<=4: 2000/5158), +930 new types (census 203898), new-hull-hist {3: 7, 4: 923}, C-wall 20s, total 344s
+[grind 16:48:45] launched chunk 76 (24 parents)
+[grind 16:48:58] chunk 75: +24 parents (2024/6405; hull<=4: 2024/5158), +995 new types (census 204893), new-hull-hist {3: 20, 4: 975}, C-wall 22s, total 357s
+[grind 16:49:00] launched chunk 77 (24 parents)
+[grind 16:49:08] chunk 76: +24 parents (2048/6405; hull<=4: 2048/5158), +830 new types (census 205723), new-hull-hist {3: 1, 4: 829}, C-wall 19s, total 367s
+[grind 16:49:08] launched chunk 78 (24 parents)
+[grind 16:49:26] chunk 77: +24 parents (2072/6405; hull<=4: 2072/5158), +944 new types (census 206667), new-hull-hist {3: 5, 4: 939}, C-wall 22s, total 385s
+[grind 16:49:26] launched chunk 79 (24 parents)
+[grind 16:49:34] chunk 78: +24 parents (2096/6405; hull<=4: 2096/5158), +966 new types (census 207633), new-hull-hist {3: 5, 4: 961}, C-wall 22s, total 393s
+[grind 16:49:34] launched chunk 80 (24 parents)
+[grind 16:49:58] chunk 80: +24 parents (2120/6405; hull<=4: 2120/5158), +951 new types (census 208584), new-hull-hist {3: 4, 4: 947}, C-wall 21s, total 417s
+[grind 16:49:58] launched chunk 81 (24 parents)
+[grind 16:50:03] chunk 79: +24 parents (2144/6405; hull<=4: 2144/5158), +1009 new types (census 209593), new-hull-hist {3: 10, 4: 999}, C-wall 32s, total 422s
+[grind 16:50:05] launched chunk 82 (24 parents)
+[grind 16:50:24] chunk 81: +24 parents (2168/6405; hull<=4: 2168/5158), +921 new types (census 210514), new-hull-hist {3: 2, 4: 919}, C-wall 22s, total 443s
+[grind 16:50:24] launched chunk 83 (24 parents)
+[grind 16:50:30] chunk 82: +24 parents (2192/6405; hull<=4: 2192/5158), +910 new types (census 211424), new-hull-hist {3: 1, 4: 909}, C-wall 21s, total 449s
+[grind 16:50:30] launched chunk 84 (24 parents)
+[grind 16:50:46] chunk 83: +24 parents (2216/6405; hull<=4: 2216/5158), +752 new types (census 212176), new-hull-hist {3: 1, 4: 751}, C-wall 18s, total 465s
+[grind 16:50:48] wall budget 520s at 467s — draining 1 running chunks, deferring 174
+[grind 16:50:52] chunk 84: +24 parents (2240/6405; hull<=4: 2240/5158), +900 new types (census 213076), new-hull-hist {3: 3, 4: 897}, C-wall 20s, total 471s
+[grind 16:50:54] GRIND COMPLETE: 2240/6405 parents, census 213076 reflection-distinguished types
+[grind 16:50:57] resume: 2240/6405 parents done, census lines 213076, this run: 4165 parents max, workers=2
+[grind 16:50:58] launched chunk 85 (24 parents)
+[grind 16:50:58] launched chunk 86 (24 parents)
+[grind 16:51:21] chunk 86: +24 parents (2264/6405; hull<=4: 2264/5158), +893 new types (census 213969), new-hull-hist {3: 6, 4: 887}, C-wall 20s, total 24s
+[grind 16:51:21] launched chunk 87 (24 parents)
+[grind 16:51:24] chunk 85: +24 parents (2288/6405; hull<=4: 2288/5158), +780 new types (census 214749), new-hull-hist {3: 3, 4: 777}, C-wall 23s, total 27s
+[grind 16:51:24] launched chunk 88 (24 parents)
+[grind 16:51:45] chunk 87: +24 parents (2312/6405; hull<=4: 2312/5158), +1191 new types (census 215940), new-hull-hist {4: 544, 5: 647}, C-wall 19s, total 48s
+[grind 16:51:47] launched chunk 89 (24 parents)
+[grind 16:51:53] chunk 88: +24 parents (2336/6405; hull<=4: 2336/5158), +1396 new types (census 217336), new-hull-hist {4: 550, 5: 846}, C-wall 23s, total 57s
+[grind 16:51:53] launched chunk 90 (24 parents)
+[grind 16:52:18] chunk 89: +24 parents (2360/6405; hull<=4: 2360/5158), +2684 new types (census 220020), new-hull-hist {4: 1850, 5: 834}, C-wall 22s, total 81s
+[grind 16:52:18] launched chunk 91 (24 parents)
+[grind 16:52:37] chunk 90: +24 parents (2384/6405; hull<=4: 2384/5158), +5173 new types (census 225193), new-hull-hist {4: 4174, 5: 999}, C-wall 25s, total 100s
+[grind 16:52:37] launched chunk 92 (24 parents)
+[grind 16:52:59] chunk 91: +24 parents (2408/6405; hull<=4: 2408/5158), +5164 new types (census 230357), new-hull-hist {4: 4129, 5: 1035}, C-wall 22s, total 122s
+[grind 16:53:00] launched chunk 93 (24 parents)
+[grind 16:53:12] chunk 92: +24 parents (2432/6405; hull<=4: 2432/5158), +2780 new types (census 233137), new-hull-hist {4: 1639, 5: 1141}, C-wall 23s, total 135s
+[grind 16:53:12] launched chunk 94 (24 parents)
+[grind 16:53:32] chunk 93: +24 parents (2456/6405; hull<=4: 2456/5158), +1235 new types (census 234372), new-hull-hist {4: 325, 5: 910}, C-wall 25s, total 156s
+[grind 16:53:32] launched chunk 95 (24 parents)
+[grind 16:53:41] chunk 94: +24 parents (2480/6405; hull<=4: 2480/5158), +1157 new types (census 235529), new-hull-hist {4: 292, 5: 865}, C-wall 23s, total 164s
+[grind 16:53:41] launched chunk 96 (24 parents)
+[grind 16:54:00] chunk 95: +24 parents (2504/6405; hull<=4: 2504/5158), +1063 new types (census 236592), new-hull-hist {4: 242, 5: 821}, C-wall 23s, total 184s
+[grind 16:54:02] launched chunk 97 (24 parents)
+[grind 16:54:12] chunk 96: +24 parents (2528/6405; hull<=4: 2528/5158), +1016 new types (census 237608), new-hull-hist {4: 268, 5: 748}, C-wall 25s, total 195s
+[grind 16:54:12] launched chunk 98 (24 parents)
+[grind 16:54:31] chunk 97: +24 parents (2552/6405; hull<=4: 2552/5158), +978 new types (census 238586), new-hull-hist {4: 255, 5: 723}, C-wall 23s, total 214s
+[grind 16:54:31] launched chunk 99 (24 parents)
+[grind 16:54:38] chunk 98: +24 parents (2576/6405; hull<=4: 2576/5158), +853 new types (census 239439), new-hull-hist {4: 185, 5: 668}, C-wall 21s, total 221s
+[grind 16:54:38] launched chunk 100 (24 parents)
+[grind 16:55:00] chunk 99: +24 parents (2600/6405; hull<=4: 2600/5158), +1070 new types (census 240509), new-hull-hist {4: 336, 5: 734}, C-wall 24s, total 243s
+[grind 16:55:02] launched chunk 101 (24 parents)
+[grind 16:55:07] chunk 100: +24 parents (2624/6405; hull<=4: 2624/5158), +880 new types (census 241389), new-hull-hist {3: 1, 4: 262, 5: 617}, C-wall 24s, total 250s
+[grind 16:55:07] launched chunk 102 (24 parents)
+[grind 16:55:30] chunk 101: +24 parents (2648/6405; hull<=4: 2648/5158), +2321 new types (census 243710), new-hull-hist {4: 1486, 5: 835}, C-wall 19s, total 273s
+[grind 16:55:30] launched chunk 103 (24 parents)
+[grind 16:55:46] chunk 102: +24 parents (2672/6405; hull<=4: 2672/5158), +4036 new types (census 247746), new-hull-hist {4: 2983, 5: 1053}, C-wall 23s, total 289s
+[grind 16:55:46] launched chunk 104 (24 parents)
+[grind 16:56:02] chunk 103: +24 parents (2696/6405; hull<=4: 2696/5158), +3604 new types (census 251350), new-hull-hist {4: 2575, 5: 1029}, C-wall 19s, total 305s
+[grind 16:56:04] launched chunk 105 (24 parents)
+[grind 16:56:21] chunk 104: +24 parents (2720/6405; hull<=4: 2720/5158), +3394 new types (census 254744), new-hull-hist {4: 2284, 5: 1110}, C-wall 21s, total 324s
+[grind 16:56:21] launched chunk 106 (24 parents)
+[grind 16:56:37] chunk 105: +24 parents (2744/6405; hull<=4: 2744/5158), +3155 new types (census 257899), new-hull-hist {4: 2073, 5: 1082}, C-wall 21s, total 341s
+[grind 16:56:37] launched chunk 107 (24 parents)
+[grind 16:56:50] chunk 106: +24 parents (2768/6405; hull<=4: 2768/5158), +1600 new types (census 259499), new-hull-hist {4: 719, 5: 881}, C-wall 22s, total 353s
+[grind 16:56:50] launched chunk 108 (24 parents)
+[grind 16:57:00] chunk 107: +24 parents (2792/6405; hull<=4: 2792/5158), +800 new types (census 260299), new-hull-hist {4: 69, 5: 731}, C-wall 18s, total 363s
+[grind 16:57:02] launched chunk 109 (24 parents)
+[grind 16:57:12] chunk 108: +24 parents (2816/6405; hull<=4: 2816/5158), +803 new types (census 261102), new-hull-hist {4: 96, 5: 707}, C-wall 18s, total 376s
+[grind 16:57:12] launched chunk 110 (24 parents)
+[grind 16:57:27] chunk 109: +24 parents (2840/6405; hull<=4: 2840/5158), +553 new types (census 261655), new-hull-hist {4: 88, 5: 465}, C-wall 22s, total 391s
+[grind 16:57:27] launched chunk 111 (24 parents)
+[grind 16:57:37] chunk 110: +24 parents (2864/6405; hull<=4: 2864/5158), +810 new types (census 262465), new-hull-hist {4: 90, 5: 720}, C-wall 20s, total 400s
+[grind 16:57:37] launched chunk 112 (24 parents)
+[grind 16:57:54] chunk 111: +24 parents (2888/6405; hull<=4: 2888/5158), +697 new types (census 263162), new-hull-hist {4: 103, 5: 594}, C-wall 22s, total 417s
+[grind 16:57:55] launched chunk 113 (24 parents)
+[grind 16:58:06] chunk 112: +24 parents (2912/6405; hull<=4: 2912/5158), +617 new types (census 263779), new-hull-hist {4: 153, 5: 464}, C-wall 25s, total 430s
+[grind 16:58:06] launched chunk 114 (24 parents)
+[grind 16:58:20] chunk 113: +24 parents (2936/6405; hull<=4: 2936/5158), +867 new types (census 264646), new-hull-hist {4: 130, 5: 737}, C-wall 20s, total 443s
+[grind 16:58:20] launched chunk 115 (24 parents)
+[grind 16:58:36] chunk 114: +24 parents (2960/6405; hull<=4: 2960/5158), +722 new types (census 265368), new-hull-hist {4: 71, 5: 651}, C-wall 25s, total 459s
+[grind 16:58:36] wall budget 520s at 459s — draining 1 running chunks, deferring 143
+[grind 16:58:46] chunk 115: +24 parents (2984/6405; hull<=4: 2984/5158), +769 new types (census 266137), new-hull-hist {4: 133, 5: 636}, C-wall 22s, total 469s
+[grind 16:58:48] GRIND COMPLETE: 2984/6405 parents, census 266137 reflection-distinguished types
+[grind 16:58:51] resume: 2984/6405 parents done, census lines 266137, this run: 3421 parents max, workers=2
+[grind 16:58:52] launched chunk 116 (24 parents)
+[grind 16:58:52] launched chunk 117 (24 parents)
+[grind 16:59:18] chunk 116: +24 parents (3008/6405; hull<=4: 3008/5158), +911 new types (census 267048), new-hull-hist {4: 286, 5: 625}, C-wall 23s, total 27s
+[grind 16:59:18] launched chunk 118 (24 parents)
+[grind 16:59:22] chunk 117: +24 parents (3032/6405; hull<=4: 3032/5158), +892 new types (census 267940), new-hull-hist {4: 249, 5: 643}, C-wall 26s, total 32s
+[grind 16:59:22] launched chunk 119 (24 parents)
+[grind 16:59:43] chunk 118: +24 parents (3056/6405; hull<=4: 3056/5158), +823 new types (census 268763), new-hull-hist {4: 221, 5: 602}, C-wall 21s, total 53s
+[grind 16:59:43] launched chunk 120 (24 parents)
+[grind 16:59:48] chunk 119: +24 parents (3080/6405; hull<=4: 3080/5158), +981 new types (census 269744), new-hull-hist {4: 274, 5: 707}, C-wall 21s, total 57s
+[grind 16:59:49] launched chunk 121 (24 parents)
+[grind 17:00:12] chunk 120: +24 parents (3104/6405; hull<=4: 3104/5158), +897 new types (census 270641), new-hull-hist {4: 220, 5: 677}, C-wall 25s, total 81s
+[grind 17:00:12] launched chunk 122 (24 parents)
+[grind 17:00:16] chunk 121: +24 parents (3128/6405; hull<=4: 3128/5158), +841 new types (census 271482), new-hull-hist {3: 2, 4: 242, 5: 597}, C-wall 22s, total 86s
+[grind 17:00:16] launched chunk 123 (24 parents)
+[grind 17:00:39] chunk 122: +24 parents (3152/6405; hull<=4: 3152/5158), +1100 new types (census 272582), new-hull-hist {4: 280, 5: 820}, C-wall 22s, total 109s
+[grind 17:00:39] launched chunk 124 (24 parents)
+[grind 17:00:45] chunk 123: +24 parents (3176/6405; hull<=4: 3176/5158), +984 new types (census 273566), new-hull-hist {4: 283, 5: 701}, C-wall 23s, total 115s
+[grind 17:00:47] launched chunk 125 (24 parents)
+[grind 17:01:05] chunk 124: +24 parents (3200/6405; hull<=4: 3200/5158), +854 new types (census 274420), new-hull-hist {4: 219, 5: 635}, C-wall 21s, total 135s
+[grind 17:01:05] launched chunk 126 (24 parents)
+[grind 17:01:15] chunk 125: +24 parents (3224/6405; hull<=4: 3224/5158), +756 new types (census 275176), new-hull-hist {4: 202, 5: 554}, C-wall 23s, total 144s
+[grind 17:01:15] launched chunk 127 (24 parents)
+[grind 17:01:28] chunk 126: +24 parents (3248/6405; hull<=4: 3248/5158), +583 new types (census 275759), new-hull-hist {4: 153, 5: 430}, C-wall 19s, total 157s
+[grind 17:01:28] launched chunk 128 (24 parents)
+[grind 17:01:44] chunk 127: +24 parents (3272/6405; hull<=4: 3272/5158), +653 new types (census 276412), new-hull-hist {4: 128, 5: 525}, C-wall 25s, total 174s
+[grind 17:01:46] launched chunk 129 (24 parents)
+[grind 17:01:49] chunk 128: +24 parents (3296/6405; hull<=4: 3296/5158), +565 new types (census 276977), new-hull-hist {4: 165, 5: 400}, C-wall 18s, total 179s
+[grind 17:01:49] launched chunk 130 (24 parents)
+[grind 17:02:13] chunk 129: +24 parents (3320/6405; hull<=4: 3320/5158), +831 new types (census 277808), new-hull-hist {4: 243, 5: 588}, C-wall 23s, total 203s
+[grind 17:02:13] launched chunk 131 (24 parents)
+[grind 17:02:17] chunk 130: +24 parents (3344/6405; hull<=4: 3344/5158), +759 new types (census 278567), new-hull-hist {4: 159, 5: 600}, C-wall 24s, total 207s
+[grind 17:02:17] launched chunk 132 (24 parents)
+[grind 17:02:33] chunk 131: +24 parents (3368/6405; hull<=4: 3368/5158), +426 new types (census 278993), new-hull-hist {4: 115, 5: 311}, C-wall 18s, total 223s
+[grind 17:02:36] launched chunk 133 (24 parents)
+[grind 17:02:42] chunk 132: +24 parents (3392/6405; hull<=4: 3392/5158), +474 new types (census 279467), new-hull-hist {4: 119, 5: 355}, C-wall 22s, total 231s
+[grind 17:02:42] launched chunk 134 (24 parents)
+[grind 17:03:01] chunk 133: +24 parents (3416/6405; hull<=4: 3416/5158), +387 new types (census 279854), new-hull-hist {4: 73, 5: 314}, C-wall 22s, total 250s
+[grind 17:03:01] launched chunk 135 (24 parents)
+[grind 17:03:06] chunk 134: +24 parents (3440/6405; hull<=4: 3440/5158), +576 new types (census 280430), new-hull-hist {4: 108, 5: 468}, C-wall 21s, total 256s
+[grind 17:03:06] launched chunk 136 (24 parents)
+[grind 17:03:23] chunk 135: +24 parents (3464/6405; hull<=4: 3464/5158), +391 new types (census 280821), new-hull-hist {4: 136, 5: 255}, C-wall 20s, total 272s
+[grind 17:03:25] launched chunk 137 (24 parents)
+[grind 17:03:28] chunk 136: +24 parents (3488/6405; hull<=4: 3488/5158), +349 new types (census 281170), new-hull-hist {3: 3, 4: 127, 5: 219}, C-wall 19s, total 278s
+[grind 17:03:28] launched chunk 138 (24 parents)
+[grind 17:03:47] chunk 137: +24 parents (3512/6405; hull<=4: 3512/5158), +430 new types (census 281600), new-hull-hist {4: 86, 5: 344}, C-wall 19s, total 296s
+[grind 17:03:47] launched chunk 139 (24 parents)
+[grind 17:03:52] chunk 138: +24 parents (3536/6405; hull<=4: 3536/5158), +373 new types (census 281973), new-hull-hist {3: 1, 4: 146, 5: 226}, C-wall 22s, total 302s
+[grind 17:03:52] launched chunk 140 (24 parents)
+[grind 17:04:14] chunk 139: +24 parents (3560/6405; hull<=4: 3560/5158), +362 new types (census 282335), new-hull-hist {4: 112, 5: 250}, C-wall 24s, total 324s
+[grind 17:04:16] launched chunk 141 (24 parents)
+[grind 17:04:20] chunk 140: +24 parents (3584/6405; hull<=4: 3584/5158), +340 new types (census 282675), new-hull-hist {4: 29, 5: 311}, C-wall 24s, total 329s
+[grind 17:04:20] launched chunk 142 (24 parents)
+[grind 17:04:42] chunk 141: +24 parents (3608/6405; hull<=4: 3608/5158), +362 new types (census 283037), new-hull-hist {4: 78, 5: 284}, C-wall 24s, total 352s
+[grind 17:04:42] launched chunk 143 (24 parents)
+[grind 17:04:46] chunk 142: +24 parents (3632/6405; hull<=4: 3632/5158), +651 new types (census 283688), new-hull-hist {4: 108, 5: 543}, C-wall 23s, total 355s
+[grind 17:04:46] launched chunk 144 (24 parents)
+[grind 17:05:06] chunk 143: +24 parents (3656/6405; hull<=4: 3656/5158), +565 new types (census 284253), new-hull-hist {4: 91, 5: 474}, C-wall 21s, total 376s
+[grind 17:05:08] launched chunk 145 (24 parents)
+[grind 17:05:11] chunk 144: +24 parents (3680/6405; hull<=4: 3680/5158), +482 new types (census 284735), new-hull-hist {4: 118, 5: 364}, C-wall 22s, total 380s
+[grind 17:05:11] launched chunk 146 (24 parents)
+[grind 17:05:32] chunk 145: +24 parents (3704/6405; hull<=4: 3704/5158), +483 new types (census 285218), new-hull-hist {4: 69, 5: 414}, C-wall 22s, total 401s
+[grind 17:05:32] launched chunk 147 (24 parents)
+[grind 17:05:35] chunk 146: +24 parents (3728/6405; hull<=4: 3728/5158), +396 new types (census 285614), new-hull-hist {4: 75, 5: 321}, C-wall 21s, total 404s
+[grind 17:05:35] launched chunk 148 (24 parents)
+[grind 17:05:55] chunk 147: +24 parents (3752/6405; hull<=4: 3752/5158), +613 new types (census 286227), new-hull-hist {4: 123, 5: 490}, C-wall 20s, total 424s
+[grind 17:05:57] launched chunk 149 (24 parents)
+[grind 17:05:59] chunk 148: +24 parents (3776/6405; hull<=4: 3776/5158), +279 new types (census 286506), new-hull-hist {4: 54, 5: 225}, C-wall 22s, total 428s
+[grind 17:05:59] launched chunk 150 (24 parents)
+[grind 17:06:20] chunk 149: +24 parents (3800/6405; hull<=4: 3800/5158), +477 new types (census 286983), new-hull-hist {4: 53, 5: 424}, C-wall 20s, total 449s
+[grind 17:06:20] launched chunk 151 (24 parents)
+[grind 17:06:23] chunk 150: +24 parents (3824/6405; hull<=4: 3824/5158), +459 new types (census 287442), new-hull-hist {4: 116, 5: 343}, C-wall 21s, total 453s
+[grind 17:06:23] wall budget 520s at 453s — draining 1 running chunks, deferring 107
+[grind 17:06:44] chunk 151: +24 parents (3848/6405; hull<=4: 3848/5158), +499 new types (census 287941), new-hull-hist {4: 154, 5: 345}, C-wall 22s, total 474s
+[grind 17:06:46] GRIND COMPLETE: 3848/6405 parents, census 287941 reflection-distinguished types
+[grind 17:06:49] resume: 3848/6405 parents done, census lines 287941, this run: 2557 parents max, workers=2
+[grind 17:06:50] launched chunk 152 (24 parents)
+[grind 17:06:50] launched chunk 153 (24 parents)
+[grind 17:07:12] chunk 152: +24 parents (3872/6405; hull<=4: 3872/5158), +434 new types (census 288375), new-hull-hist {3: 2, 4: 116, 5: 316}, C-wall 20s, total 24s
+[grind 17:07:12] launched chunk 154 (24 parents)
+[grind 17:07:16] chunk 153: +24 parents (3896/6405; hull<=4: 3896/5158), +394 new types (census 288769), new-hull-hist {3: 1, 4: 84, 5: 309}, C-wall 23s, total 27s
+[grind 17:07:16] launched chunk 155 (24 parents)
+[grind 17:07:38] chunk 154: +24 parents (3920/6405; hull<=4: 3920/5158), +414 new types (census 289183), new-hull-hist {4: 114, 5: 300}, C-wall 23s, total 49s
+[grind 17:07:38] launched chunk 156 (24 parents)
+[grind 17:07:42] chunk 155: +24 parents (3944/6405; hull<=4: 3944/5158), +275 new types (census 289458), new-hull-hist {4: 62, 5: 213}, C-wall 23s, total 53s
+[grind 17:07:44] launched chunk 157 (24 parents)
+[grind 17:08:04] chunk 156: +24 parents (3968/6405; hull<=4: 3968/5158), +583 new types (census 290041), new-hull-hist {4: 96, 5: 487}, C-wall 22s, total 75s
+[grind 17:08:04] launched chunk 158 (24 parents)
+[grind 17:08:09] chunk 157: +24 parents (3992/6405; hull<=4: 3992/5158), +432 new types (census 290473), new-hull-hist {4: 91, 5: 341}, C-wall 23s, total 80s
+[grind 17:08:09] launched chunk 159 (24 parents)
+[grind 17:08:28] chunk 158: +24 parents (4016/6405; hull<=4: 4016/5158), +289 new types (census 290762), new-hull-hist {4: 76, 5: 213}, C-wall 22s, total 99s
+[grind 17:08:28] launched chunk 160 (24 parents)
+[grind 17:08:34] chunk 159: +24 parents (4040/6405; hull<=4: 4040/5158), +326 new types (census 291088), new-hull-hist {4: 74, 5: 252}, C-wall 23s, total 105s
+[grind 17:08:36] launched chunk 161 (24 parents)
+[grind 17:08:52] chunk 160: +24 parents (4064/6405; hull<=4: 4064/5158), +763 new types (census 291851), new-hull-hist {4: 205, 5: 558}, C-wall 20s, total 123s
+[grind 17:08:52] launched chunk 162 (24 parents)
+[grind 17:09:01] chunk 161: +24 parents (4088/6405; hull<=4: 4088/5158), +1027 new types (census 292878), new-hull-hist {4: 356, 5: 671}, C-wall 20s, total 132s
+[grind 17:09:01] launched chunk 163 (24 parents)
+[grind 17:09:17] chunk 162: +24 parents (4112/6405; hull<=4: 4112/5158), +808 new types (census 293686), new-hull-hist {4: 166, 5: 642}, C-wall 20s, total 148s
+[grind 17:09:17] launched chunk 164 (24 parents)
+[grind 17:09:25] chunk 163: +24 parents (4136/6405; hull<=4: 4136/5158), +791 new types (census 294477), new-hull-hist {4: 164, 5: 627}, C-wall 19s, total 156s
+[grind 17:09:27] launched chunk 165 (24 parents)
+[grind 17:09:46] chunk 164: +24 parents (4160/6405; hull<=4: 4160/5158), +541 new types (census 295018), new-hull-hist {4: 78, 5: 463}, C-wall 25s, total 177s
+[grind 17:09:46] launched chunk 166 (24 parents)
+[grind 17:09:55] chunk 165: +24 parents (4184/6405; hull<=4: 4184/5158), +756 new types (census 295774), new-hull-hist {4: 186, 5: 570}, C-wall 23s, total 186s
+[grind 17:09:55] launched chunk 167 (24 parents)
+[grind 17:10:10] chunk 166: +24 parents (4208/6405; hull<=4: 4208/5158), +739 new types (census 296513), new-hull-hist {4: 148, 5: 591}, C-wall 20s, total 201s
+[grind 17:10:10] launched chunk 168 (24 parents)
+[grind 17:10:17] chunk 167: +24 parents (4232/6405; hull<=4: 4232/5158), +821 new types (census 297334), new-hull-hist {4: 174, 5: 647}, C-wall 19s, total 209s
+[grind 17:10:19] launched chunk 169 (24 parents)
+[grind 17:10:36] chunk 168: +24 parents (4256/6405; hull<=4: 4256/5158), +627 new types (census 297961), new-hull-hist {4: 75, 5: 552}, C-wall 22s, total 227s
+[grind 17:10:36] launched chunk 170 (24 parents)
+[grind 17:10:42] chunk 169: +24 parents (4280/6405; hull<=4: 4280/5158), +543 new types (census 298504), new-hull-hist {4: 32, 5: 511}, C-wall 19s, total 233s
+[grind 17:10:42] launched chunk 171 (24 parents)
+[grind 17:11:00] chunk 170: +24 parents (4304/6405; hull<=4: 4304/5158), +665 new types (census 299169), new-hull-hist {4: 72, 5: 593}, C-wall 21s, total 252s
+[grind 17:11:00] launched chunk 172 (24 parents)
+[grind 17:11:04] chunk 171: +24 parents (4328/6405; hull<=4: 4328/5158), +598 new types (census 299767), new-hull-hist {4: 31, 5: 567}, C-wall 19s, total 255s
+[grind 17:11:06] launched chunk 173 (24 parents)
+[grind 17:11:25] chunk 172: +24 parents (4352/6405; hull<=4: 4352/5158), +582 new types (census 300349), new-hull-hist {4: 51, 5: 531}, C-wall 22s, total 277s
+[grind 17:11:25] launched chunk 174 (24 parents)
+[grind 17:11:28] chunk 173: +24 parents (4376/6405; hull<=4: 4376/5158), +471 new types (census 300820), new-hull-hist {4: 16, 5: 455}, C-wall 20s, total 280s
+[grind 17:11:28] launched chunk 175 (24 parents)
+[grind 17:11:51] chunk 174: +24 parents (4400/6405; hull<=4: 4400/5158), +356 new types (census 301176), new-hull-hist {4: 14, 5: 342}, C-wall 23s, total 302s
+[grind 17:11:51] launched chunk 176 (24 parents)
+[grind 17:11:53] chunk 175: +24 parents (4424/6405; hull<=4: 4424/5158), +294 new types (census 301470), new-hull-hist {4: 6, 5: 288}, C-wall 22s, total 304s
+[grind 17:11:55] launched chunk 177 (24 parents)
+[grind 17:12:14] chunk 176: +24 parents (4448/6405; hull<=4: 4448/5158), +225 new types (census 301695), new-hull-hist {4: 7, 5: 218}, C-wall 22s, total 325s
+[grind 17:12:14] launched chunk 178 (24 parents)
+[grind 17:12:16] chunk 177: +24 parents (4472/6405; hull<=4: 4472/5158), +229 new types (census 301924), new-hull-hist {4: 14, 5: 215}, C-wall 19s, total 327s
+[grind 17:12:16] launched chunk 179 (24 parents)
+[grind 17:12:34] chunk 178: +24 parents (4496/6405; hull<=4: 4496/5158), +196 new types (census 302120), new-hull-hist {4: 6, 5: 190}, C-wall 18s, total 345s
+[grind 17:12:34] launched chunk 180 (24 parents)
+[grind 17:12:36] chunk 179: +24 parents (4520/6405; hull<=4: 4520/5158), +140 new types (census 302260), new-hull-hist {4: 12, 5: 128}, C-wall 18s, total 347s
+[grind 17:12:38] launched chunk 181 (24 parents)
+[grind 17:12:55] chunk 180: +24 parents (4544/6405; hull<=4: 4544/5158), +184 new types (census 302444), new-hull-hist {4: 1, 5: 183}, C-wall 19s, total 366s
+[grind 17:12:55] launched chunk 182 (24 parents)
+[grind 17:13:02] chunk 181: +24 parents (4568/6405; hull<=4: 4568/5158), +212 new types (census 302656), new-hull-hist {4: 5, 5: 207}, C-wall 22s, total 373s
+[grind 17:13:02] launched chunk 183 (24 parents)
+[grind 17:13:17] chunk 182: +24 parents (4592/6405; hull<=4: 4592/5158), +206 new types (census 302862), new-hull-hist {4: 2, 5: 204}, C-wall 20s, total 388s
+[grind 17:13:17] launched chunk 184 (24 parents)
+[grind 17:13:25] chunk 183: +24 parents (4616/6405; hull<=4: 4616/5158), +143 new types (census 303005), new-hull-hist {4: 12, 5: 131}, C-wall 21s, total 396s
+[grind 17:13:27] launched chunk 185 (24 parents)
+[grind 17:13:45] chunk 184: +24 parents (4640/6405; hull<=4: 4640/5158), +155 new types (census 303160), new-hull-hist {4: 4, 5: 151}, C-wall 26s, total 416s
+[grind 17:13:45] launched chunk 186 (24 parents)
+[grind 17:13:49] chunk 185: +24 parents (4664/6405; hull<=4: 4664/5158), +145 new types (census 303305), new-hull-hist {4: 1, 5: 144}, C-wall 20s, total 420s
+[grind 17:13:49] launched chunk 187 (24 parents)
+[grind 17:14:09] chunk 186: +24 parents (4688/6405; hull<=4: 4688/5158), +222 new types (census 303527), new-hull-hist {5: 222}, C-wall 21s, total 440s
+[grind 17:14:09] launched chunk 188 (24 parents)
+[grind 17:14:11] chunk 187: +24 parents (4712/6405; hull<=4: 4712/5158), +154 new types (census 303681), new-hull-hist {4: 3, 5: 151}, C-wall 21s, total 442s
+[grind 17:14:13] launched chunk 189 (24 parents)
+[grind 17:14:29] chunk 188: +24 parents (4736/6405; hull<=4: 4736/5158), +162 new types (census 303843), new-hull-hist {4: 3, 5: 159}, C-wall 18s, total 460s
+[grind 17:14:29] wall budget 520s at 460s — draining 1 running chunks, deferring 69
+[grind 17:14:36] chunk 189: +24 parents (4760/6405; hull<=4: 4760/5158), +296 new types (census 304139), new-hull-hist {4: 5, 5: 291}, C-wall 21s, total 467s
+[grind 17:14:37] GRIND COMPLETE: 4760/6405 parents, census 304139 reflection-distinguished types
+[grind 17:14:41] resume: 4760/6405 parents done, census lines 304139, this run: 1645 parents max, workers=2
+[grind 17:14:42] launched chunk 190 (24 parents)
+[grind 17:14:42] launched chunk 191 (24 parents)
+[grind 17:15:07] chunk 190: +24 parents (4784/6405; hull<=4: 4784/5158), +557 new types (census 304696), new-hull-hist {4: 2, 5: 555}, C-wall 22s, total 25s
+[grind 17:15:07] launched chunk 192 (24 parents)
+[grind 17:15:08] chunk 191: +24 parents (4808/6405; hull<=4: 4808/5158), +209 new types (census 304905), new-hull-hist {4: 1, 5: 208}, C-wall 24s, total 27s
+[grind 17:15:10] launched chunk 193 (24 parents)
+[grind 17:15:29] chunk 192: +24 parents (4832/6405; hull<=4: 4832/5158), +175 new types (census 305080), new-hull-hist {4: 1, 5: 174}, C-wall 20s, total 48s
+[grind 17:15:29] launched chunk 194 (24 parents)
+[grind 17:15:39] chunk 193: +24 parents (4856/6405; hull<=4: 4856/5158), +157 new types (census 305237), new-hull-hist {4: 4, 5: 153}, C-wall 27s, total 58s
+[grind 17:15:39] launched chunk 195 (24 parents)
+[grind 17:15:52] chunk 194: +24 parents (4880/6405; hull<=4: 4880/5158), +132 new types (census 305369), new-hull-hist {4: 1, 5: 131}, C-wall 21s, total 71s
+[grind 17:15:52] launched chunk 196 (24 parents)
+[grind 17:15:59] chunk 195: +24 parents (4904/6405; hull<=4: 4904/5158), +106 new types (census 305475), new-hull-hist {5: 106}, C-wall 19s, total 78s
+[grind 17:16:01] launched chunk 197 (24 parents)
+[grind 17:16:16] chunk 196: +24 parents (4928/6405; hull<=4: 4928/5158), +85 new types (census 305560), new-hull-hist {5: 85}, C-wall 23s, total 95s
+[grind 17:16:16] launched chunk 198 (24 parents)
+[grind 17:16:23] chunk 197: +24 parents (4952/6405; hull<=4: 4952/5158), +88 new types (census 305648), new-hull-hist {5: 88}, C-wall 20s, total 102s
+[grind 17:16:23] launched chunk 199 (24 parents)
+[grind 17:16:41] chunk 198: +24 parents (4976/6405; hull<=4: 4976/5158), +65 new types (census 305713), new-hull-hist {4: 1, 5: 64}, C-wall 24s, total 120s
+[grind 17:16:41] launched chunk 200 (24 parents)
+[grind 17:16:46] chunk 199: +24 parents (5000/6405; hull<=4: 5000/5158), +87 new types (census 305800), new-hull-hist {4: 4, 5: 83}, C-wall 22s, total 125s
+[grind 17:16:48] launched chunk 201 (24 parents)
+[grind 17:17:03] chunk 200: +24 parents (5024/6405; hull<=4: 5024/5158), +59 new types (census 305859), new-hull-hist {5: 59}, C-wall 20s, total 142s
+[grind 17:17:04] launched chunk 202 (24 parents)
+[grind 17:17:11] chunk 201: +24 parents (5048/6405; hull<=4: 5048/5158), +34 new types (census 305893), new-hull-hist {5: 34}, C-wall 21s, total 150s
+[grind 17:17:11] launched chunk 203 (24 parents)
+[grind 17:17:28] chunk 202: +24 parents (5072/6405; hull<=4: 5072/5158), +72 new types (census 305965), new-hull-hist {4: 1, 5: 71}, C-wall 23s, total 167s
+[grind 17:17:28] launched chunk 204 (24 parents)
+[grind 17:17:36] chunk 203: +24 parents (5096/6405; hull<=4: 5096/5158), +394 new types (census 306359), new-hull-hist {4: 1, 5: 393}, C-wall 21s, total 175s
+[grind 17:17:38] launched chunk 205 (24 parents)
+[grind 17:17:50] chunk 204: +24 parents (5120/6405; hull<=4: 5120/5158), +30 new types (census 306389), new-hull-hist {5: 30}, C-wall 20s, total 189s
+[grind 17:17:50] launched chunk 206 (24 parents)
+[grind 17:18:06] chunk 205: +24 parents (5144/6405; hull<=4: 5144/5158), +28 new types (census 306417), new-hull-hist {5: 28}, C-wall 27s, total 205s
+[grind 17:18:06] launched chunk 207 (24 parents)
+[grind 17:18:15] chunk 206: +24 parents (5168/6405; hull<=4: 5158/5158), +317 new types (census 306734), new-hull-hist {5: 32, 6: 285}, C-wall 21s, total 214s
+[grind 17:18:18] launched chunk 208 (24 parents)
+[grind 17:18:33] chunk 207: +24 parents (5192/6405; hull<=4: 5158/5158), +733 new types (census 307467), new-hull-hist {5: 33, 6: 700}, C-wall 21s, total 232s
+[grind 17:18:47] launched chunk 209 (24 parents)
+[grind 17:18:53] chunk 208: +24 parents (5216/6405; hull<=4: 5158/5158), +994 new types (census 308461), new-hull-hist {5: 387, 6: 607}, C-wall 29s, total 252s
+[grind 17:18:53] launched chunk 210 (24 parents)
+[grind 17:19:14] chunk 209: +24 parents (5240/6405; hull<=4: 5158/5158), +378 new types (census 308839), new-hull-hist {5: 1, 6: 377}, C-wall 23s, total 273s
+[grind 17:19:14] launched chunk 211 (24 parents)
+[grind 17:19:23] chunk 210: +24 parents (5264/6405; hull<=4: 5158/5158), +514 new types (census 309353), new-hull-hist {5: 2, 6: 512}, C-wall 25s, total 282s
+[grind 17:19:23] launched chunk 212 (24 parents)
+[grind 17:19:39] chunk 211: +24 parents (5288/6405; hull<=4: 5158/5158), +364 new types (census 309717), new-hull-hist {5: 8, 6: 356}, C-wall 21s, total 298s
+[grind 17:19:52] launched chunk 213 (24 parents)
+[grind 17:19:55] chunk 212: +24 parents (5312/6405; hull<=4: 5158/5158), +298 new types (census 310015), new-hull-hist {6: 298}, C-wall 29s, total 314s
+[grind 17:19:55] launched chunk 214 (24 parents)
+[grind 17:20:18] chunk 213: +24 parents (5336/6405; hull<=4: 5158/5158), +242 new types (census 310257), new-hull-hist {5: 2, 6: 240}, C-wall 24s, total 337s
+[grind 17:20:18] launched chunk 215 (24 parents)
+[grind 17:20:21] chunk 214: +24 parents (5360/6405; hull<=4: 5158/5158), +322 new types (census 310579), new-hull-hist {5: 17, 6: 305}, C-wall 23s, total 340s
+[grind 17:20:21] launched chunk 216 (24 parents)
+[grind 17:20:43] chunk 215: +24 parents (5384/6405; hull<=4: 5158/5158), +555 new types (census 311134), new-hull-hist {5: 29, 6: 526}, C-wall 21s, total 362s
+[grind 17:20:56] launched chunk 217 (24 parents)
+[grind 17:21:00] chunk 216: +24 parents (5408/6405; hull<=4: 5158/5158), +441 new types (census 311575), new-hull-hist {5: 22, 6: 419}, C-wall 35s, total 379s
+[grind 17:21:00] launched chunk 218 (24 parents)
+[grind 17:21:22] chunk 217: +24 parents (5432/6405; hull<=4: 5158/5158), +350 new types (census 311925), new-hull-hist {5: 11, 6: 339}, C-wall 23s, total 401s
+[grind 17:21:22] launched chunk 219 (24 parents)
+[grind 17:21:26] chunk 218: +24 parents (5456/6405; hull<=4: 5158/5158), +358 new types (census 312283), new-hull-hist {5: 20, 6: 338}, C-wall 22s, total 405s
+[grind 17:21:26] launched chunk 220 (24 parents)
+[grind 17:21:47] chunk 219: +24 parents (5480/6405; hull<=4: 5158/5158), +225 new types (census 312508), new-hull-hist {5: 6, 6: 219}, C-wall 22s, total 426s
+[grind 17:22:02] launched chunk 221 (24 parents)
+[grind 17:22:05] chunk 220: +24 parents (5504/6405; hull<=4: 5158/5158), +198 new types (census 312706), new-hull-hist {5: 8, 6: 190}, C-wall 37s, total 444s
+[grind 17:22:05] launched chunk 222 (24 parents)
+[grind 17:22:26] chunk 221: +24 parents (5528/6405; hull<=4: 5158/5158), +264 new types (census 312970), new-hull-hist {5: 23, 6: 241}, C-wall 21s, total 464s
+[grind 17:22:26] wall budget 520s at 464s — draining 1 running chunks, deferring 36
+[grind 17:22:28] chunk 222: +24 parents (5552/6405; hull<=4: 5158/5158), +304 new types (census 313274), new-hull-hist {5: 15, 6: 289}, C-wall 21s, total 467s
+[grind 17:22:41] GRIND COMPLETE: 5552/6405 parents, census 313274 reflection-distinguished types
+[grind 17:22:46] resume: 5552/6405 parents done, census lines 313274, this run: 853 parents max, workers=2
+[grind 17:22:47] launched chunk 223 (24 parents)
+[grind 17:22:47] launched chunk 224 (24 parents)
+[grind 17:23:11] chunk 223: +24 parents (5576/6405; hull<=4: 5158/5158), +284 new types (census 313558), new-hull-hist {5: 15, 6: 269}, C-wall 21s, total 25s
+[grind 17:23:24] launched chunk 225 (24 parents)
+[grind 17:23:26] chunk 224: +24 parents (5600/6405; hull<=4: 5158/5158), +263 new types (census 313821), new-hull-hist {5: 22, 6: 241}, C-wall 36s, total 40s
+[grind 17:23:26] launched chunk 226 (24 parents)
+[grind 17:23:47] chunk 225: +24 parents (5624/6405; hull<=4: 5158/5158), +189 new types (census 314010), new-hull-hist {5: 13, 6: 176}, C-wall 21s, total 61s
+[grind 17:23:47] launched chunk 227 (24 parents)
+[grind 17:23:50] chunk 226: +24 parents (5648/6405; hull<=4: 5158/5158), +201 new types (census 314211), new-hull-hist {5: 1, 6: 200}, C-wall 21s, total 64s
+[grind 17:23:50] launched chunk 228 (24 parents)
+[grind 17:24:12] chunk 227: +24 parents (5672/6405; hull<=4: 5158/5158), +280 new types (census 314491), new-hull-hist {5: 19, 6: 261}, C-wall 22s, total 86s
+[grind 17:24:25] launched chunk 229 (24 parents)
+[grind 17:24:27] chunk 228: +24 parents (5696/6405; hull<=4: 5158/5158), +231 new types (census 314722), new-hull-hist {4: 1, 5: 24, 6: 206}, C-wall 34s, total 101s
+[grind 17:24:27] launched chunk 230 (24 parents)
+[grind 17:24:47] chunk 229: +24 parents (5720/6405; hull<=4: 5158/5158), +219 new types (census 314941), new-hull-hist {5: 7, 6: 212}, C-wall 20s, total 121s
+[grind 17:24:47] launched chunk 231 (24 parents)
+[grind 17:24:54] chunk 230: +24 parents (5744/6405; hull<=4: 5158/5158), +68 new types (census 315009), new-hull-hist {6: 68}, C-wall 24s, total 128s
+[grind 17:24:54] launched chunk 232 (24 parents)
+[grind 17:25:10] chunk 231: +24 parents (5768/6405; hull<=4: 5158/5158), +124 new types (census 315133), new-hull-hist {5: 1, 6: 123}, C-wall 20s, total 144s
+[grind 17:25:24] launched chunk 233 (24 parents)
+[grind 17:25:26] chunk 232: +24 parents (5792/6405; hull<=4: 5158/5158), +186 new types (census 315319), new-hull-hist {5: 11, 6: 175}, C-wall 30s, total 161s
+[grind 17:25:26] launched chunk 234 (24 parents)
+[grind 17:25:48] chunk 233: +24 parents (5816/6405; hull<=4: 5158/5158), +143 new types (census 315462), new-hull-hist {5: 2, 6: 141}, C-wall 22s, total 182s
+[grind 17:25:48] launched chunk 235 (24 parents)
+[grind 17:25:50] chunk 234: +24 parents (5840/6405; hull<=4: 5158/5158), +79 new types (census 315541), new-hull-hist {6: 79}, C-wall 22s, total 184s
+[grind 17:25:50] launched chunk 236 (24 parents)
+[grind 17:26:13] chunk 235: +24 parents (5864/6405; hull<=4: 5158/5158), +33 new types (census 315574), new-hull-hist {5: 1, 6: 32}, C-wall 24s, total 208s
+[grind 17:26:25] launched chunk 237 (24 parents)
+[grind 17:26:27] chunk 236: +24 parents (5888/6405; hull<=4: 5158/5158), +94 new types (census 315668), new-hull-hist {6: 94}, C-wall 35s, total 221s
+[grind 17:26:27] launched chunk 238 (24 parents)
+[grind 17:26:50] chunk 237: +24 parents (5912/6405; hull<=4: 5158/5158), +114 new types (census 315782), new-hull-hist {5: 1, 6: 113}, C-wall 22s, total 244s
+[grind 17:26:50] launched chunk 239 (24 parents)
+[grind 17:26:54] chunk 238: +24 parents (5936/6405; hull<=4: 5158/5158), +77 new types (census 315859), new-hull-hist {6: 77}, C-wall 25s, total 248s
+[grind 17:26:54] launched chunk 240 (24 parents)
+[grind 17:27:16] chunk 239: +24 parents (5960/6405; hull<=4: 5158/5158), +20 new types (census 315879), new-hull-hist {6: 20}, C-wall 24s, total 270s
+[grind 17:27:29] launched chunk 241 (24 parents)
+[grind 17:27:31] chunk 240: +24 parents (5984/6405; hull<=4: 5158/5158), +27 new types (census 315906), new-hull-hist {6: 27}, C-wall 34s, total 285s
+[grind 17:27:31] launched chunk 242 (24 parents)
+[grind 17:27:54] chunk 242: +24 parents (6008/6405; hull<=4: 5158/5158), +23 new types (census 315929), new-hull-hist {6: 23}, C-wall 22s, total 308s
+[grind 17:27:54] launched chunk 243 (24 parents)
+[grind 17:27:56] chunk 241: +24 parents (6032/6405; hull<=4: 5158/5158), +14 new types (census 315943), new-hull-hist {5: 1, 6: 13}, C-wall 25s, total 310s
+[grind 17:27:56] launched chunk 244 (24 parents)
+[grind 17:28:15] chunk 243: +24 parents (6056/6405; hull<=4: 5158/5158), +34 new types (census 315977), new-hull-hist {6: 34}, C-wall 19s, total 329s
+[grind 17:28:28] launched chunk 245 (24 parents)
+[grind 17:28:30] chunk 244: +24 parents (6080/6405; hull<=4: 5158/5158), +26 new types (census 316003), new-hull-hist {6: 26}, C-wall 32s, total 344s
+[grind 17:28:30] launched chunk 246 (24 parents)
+[grind 17:28:52] chunk 245: +24 parents (6104/6405; hull<=4: 5158/5158), +50 new types (census 316053), new-hull-hist {6: 50}, C-wall 22s, total 366s
+[grind 17:28:52] launched chunk 247 (24 parents)
+[grind 17:28:54] chunk 246: +24 parents (6128/6405; hull<=4: 5158/5158), +27 new types (census 316080), new-hull-hist {6: 27}, C-wall 22s, total 368s
+[grind 17:28:54] launched chunk 248 (24 parents)
+[grind 17:29:15] chunk 248: +24 parents (6152/6405; hull<=4: 5158/5158), +9 new types (census 316089), new-hull-hist {6: 9}, C-wall 20s, total 389s
+[grind 17:29:15] launched chunk 249 (24 parents)
+[grind 17:29:18] chunk 247: +24 parents (6176/6405; hull<=4: 5158/5158), +3 new types (census 316092), new-hull-hist {6: 3}, C-wall 24s, total 392s
+[grind 17:29:33] launched chunk 250 (24 parents)
+[grind 17:29:38] chunk 249: +24 parents (6200/6405; hull<=4: 5158/5158), +7 new types (census 316099), new-hull-hist {6: 7}, C-wall 21s, total 412s
+[grind 17:29:38] launched chunk 251 (24 parents)
+[grind 17:29:56] chunk 250: +24 parents (6224/6405; hull<=4: 5158/5158), +16 new types (census 316115), new-hull-hist {6: 16}, C-wall 21s, total 431s
+[grind 17:29:56] launched chunk 252 (24 parents)
+[grind 17:30:02] chunk 251: +24 parents (6248/6405; hull<=4: 5158/5158), +134 new types (census 316249), new-hull-hist {6: 9, 7: 125}, C-wall 21s, total 437s
+[grind 17:30:18] wall budget 520s at 452s — draining 1 running chunks, deferring 6
+[grind 17:30:21] chunk 252: +24 parents (6272/6405; hull<=4: 5158/5158), +222 new types (census 316471), new-hull-hist {7: 222}, C-wall 22s, total 455s
+[grind 17:30:35] GRIND COMPLETE: 6272/6405 parents, census 316471 reflection-distinguished types
+[grind 17:30:38] resume: 6272/6405 parents done, census lines 316471, this run: 133 parents max, workers=2
+[grind 17:30:39] launched chunk 253 (24 parents)
+[grind 17:30:39] launched chunk 254 (24 parents)
+[grind 17:31:02] chunk 254: +24 parents (6296/6405; hull<=4: 5158/5158), +133 new types (census 316604), new-hull-hist {7: 133}, C-wall 21s, total 25s
+[grind 17:31:02] launched chunk 255 (24 parents)
+[grind 17:31:05] chunk 253: +24 parents (6320/6405; hull<=4: 5158/5158), +56 new types (census 316660), new-hull-hist {7: 56}, C-wall 24s, total 28s
+[grind 17:31:05] launched chunk 256 (24 parents)
+[grind 17:31:26] chunk 255: +24 parents (6344/6405; hull<=4: 5158/5158), +33 new types (census 316693), new-hull-hist {6: 1, 7: 32}, C-wall 21s, total 48s
+[grind 17:31:38] launched chunk 257 (24 parents)
+[grind 17:31:40] chunk 256: +24 parents (6368/6405; hull<=4: 5158/5158), +19 new types (census 316712), new-hull-hist {7: 19}, C-wall 33s, total 63s
+[grind 17:31:40] launched chunk 258 (13 parents)
+[grind 17:32:04] chunk 258: +13 parents (6381/6405; hull<=4: 5158/5158), +20 new types (census 316732), new-hull-hist {7: 4, 8: 15, 9: 1}, C-wall 12s, total 86s
+[grind 17:32:05] chunk 257: +24 parents (6405/6405; hull<=4: 5158/5158), +0 new types (census 316732), new-hull-hist {}, C-wall 26s, total 88s
+[grind 17:32:18] GRIND COMPLETE: 6405/6405 parents, census 316732 reflection-distinguished types
+[certify 17:32:24] THE n=9 CERTIFICATION
+[certify] census: 316732 reflection-distinguished types
+[certify]   mirror pass 50000/316732 (73s)
+[certify]   mirror pass 100000/316732 (149s)
+[certify]   mirror pass 150000/316732 (226s)
+[certify]   mirror pass 200000/316732 (294s)
+[certify]   mirror pass 250000/316732 (384s)
+[certify]   mirror pass 300000/316732 (482s)
+[certify] mirror closure FAIL (42); self-mirror 824; mirror-identified None (anchor 158817) [MISMATCH]
+[certify] !! refusing to certify — count mismatch
+[grind 17:57:45] resume: 6138/6405 parents done, census lines 316732, this run: 267 parents max, workers=2
+[grind 17:57:46] launched chunk 259 (24 parents)
+[grind 17:57:46] launched chunk 260 (24 parents)
+[grind 17:58:15] chunk 260: +24 parents (6162/6405; hull<=4: 4945/5158), +3 new types (census 316735), new-hull-hist {3: 3}, C-wall 28s, total 30s
+[grind 17:58:15] launched chunk 261 (24 parents)
+[grind 17:58:17] chunk 259: +24 parents (6186/6405; hull<=4: 4969/5158), +9 new types (census 316744), new-hull-hist {3: 8, 4: 1}, C-wall 29s, total 32s
+[grind 17:58:34] launched chunk 262 (24 parents)
+[grind 17:58:41] chunk 261: +24 parents (6210/6405; hull<=4: 4993/5158), +2 new types (census 316746), new-hull-hist {3: 2}, C-wall 25s, total 57s
+[grind 17:58:41] launched chunk 263 (24 parents)
+[grind 17:59:06] chunk 262: +24 parents (6234/6405; hull<=4: 5017/5158), +1 new types (census 316747), new-hull-hist {3: 1}, C-wall 31s, total 81s
+[grind 17:59:06] launched chunk 264 (24 parents)
+[grind 17:59:14] chunk 263: +24 parents (6258/6405; hull<=4: 5041/5158), +1 new types (census 316748), new-hull-hist {3: 1}, C-wall 32s, total 90s
+[grind 17:59:30] launched chunk 265 (24 parents)
+[grind 17:59:36] chunk 264: +24 parents (6282/6405; hull<=4: 5065/5158), +2 new types (census 316750), new-hull-hist {3: 2}, C-wall 29s, total 111s
+[grind 17:59:36] launched chunk 266 (24 parents)
+[grind 18:00:03] chunk 265: +24 parents (6306/6405; hull<=4: 5089/5158), +2 new types (census 316752), new-hull-hist {4: 2}, C-wall 32s, total 138s
+[grind 18:00:03] launched chunk 267 (24 parents)
+[grind 18:00:07] chunk 266: +24 parents (6330/6405; hull<=4: 5113/5158), +0 new types (census 316752), new-hull-hist {}, C-wall 29s, total 142s
+[grind 18:00:07] launched chunk 268 (24 parents)
+[grind 18:00:29] chunk 267: +24 parents (6354/6405; hull<=4: 5137/5158), +1 new types (census 316753), new-hull-hist {4: 1}, C-wall 25s, total 164s
+[grind 18:00:43] launched chunk 269 (24 parents)
+[grind 18:00:44] chunk 268: +24 parents (6378/6405; hull<=4: 5158/5158), +1 new types (census 316754), new-hull-hist {4: 1}, C-wall 36s, total 179s
+[grind 18:00:44] launched chunk 270 (3 parents)
+[grind 18:00:48] chunk 270: +3 parents (6381/6405; hull<=4: 5158/5158), +0 new types (census 316754), new-hull-hist {}, C-wall 4s, total 183s
+[grind 18:01:10] chunk 269: +24 parents (6405/6405; hull<=4: 5158/5158), +2 new types (census 316756), new-hull-hist {5: 2}, C-wall 26s, total 205s
+[grind 18:01:23] GRIND COMPLETE: 6405/6405 parents, census 316756 reflection-distinguished types
+[certify 18:02:18] THE n=9 CERTIFICATION
+[certify] census: 316756 reflection-distinguished types
+[certify]   mirror pass 50000/316756 (73s)
+[certify]   mirror pass 100000/316756 (148s)
+[certify]   mirror pass 150000/316756 (225s)
+[certify]   mirror pass 200000/316756 (293s)
+[certify]   mirror pass 250000/316756 (383s)
+[certify]   mirror pass 300000/316756 (481s)
+[certify] mirror closure FAIL (29); self-mirror 825; mirror-identified None (anchor 158817) [MISMATCH]
+[certify] !! refusing to certify — count mismatch
+[grind 18:11:50] resume: 6138/6405 parents done, census lines 316756, this run: 267 parents max, workers=2
+[grind 18:11:51] launched chunk 271 (24 parents)
+[grind 18:11:51] launched chunk 272 (24 parents)
+[grind 18:12:38] chunk 272: +24 parents (6162/6405; hull<=4: 4945/5158), +2 new types (census 316758), new-hull-hist {3: 2}, C-wall 46s, total 49s
+[grind 18:12:38] launched chunk 273 (24 parents)
+[grind 18:12:43] chunk 271: +24 parents (6186/6405; hull<=4: 4969/5158), +5 new types (census 316763), new-hull-hist {3: 5}, C-wall 50s, total 53s
+[grind 18:12:58] launched chunk 274 (24 parents)
+[grind 18:13:32] chunk 273: +24 parents (6210/6405; hull<=4: 4993/5158), +5 new types (census 316768), new-hull-hist {3: 5}, C-wall 52s, total 102s
+[grind 18:13:32] launched chunk 275 (24 parents)
+[grind 18:13:49] chunk 274: +24 parents (6234/6405; hull<=4: 5017/5158), +4 new types (census 316772), new-hull-hist {3: 4}, C-wall 50s, total 119s
+[grind 18:13:49] launched chunk 276 (24 parents)
+[grind 18:14:27] chunk 275: +24 parents (6258/6405; hull<=4: 5041/5158), +1 new types (census 316773), new-hull-hist {3: 1}, C-wall 54s, total 157s
+[grind 18:14:42] launched chunk 277 (24 parents)
+[grind 18:14:43] chunk 276: +24 parents (6282/6405; hull<=4: 5065/5158), +1 new types (census 316774), new-hull-hist {3: 1}, C-wall 53s, total 173s
+[grind 18:14:43] launched chunk 278 (24 parents)
+[grind 18:15:36] chunk 278: +24 parents (6306/6405; hull<=4: 5089/5158), +2 new types (census 316776), new-hull-hist {4: 2}, C-wall 52s, total 226s
+[grind 18:15:36] launched chunk 279 (24 parents)
+[grind 18:15:39] chunk 277: +24 parents (6330/6405; hull<=4: 5113/5158), +1 new types (census 316777), new-hull-hist {4: 1}, C-wall 56s, total 229s
+[grind 18:15:39] launched chunk 280 (24 parents)
+[grind 18:16:21] chunk 279: +24 parents (6354/6405; hull<=4: 5137/5158), +3 new types (census 316780), new-hull-hist {4: 1, 5: 2}, C-wall 44s, total 272s
+[grind 18:16:36] launched chunk 281 (24 parents)
+[grind 18:16:37] chunk 280: +24 parents (6378/6405; hull<=4: 5158/5158), +0 new types (census 316780), new-hull-hist {}, C-wall 57s, total 287s
+[grind 18:16:37] launched chunk 282 (3 parents)
+[grind 18:16:44] chunk 282: +3 parents (6381/6405; hull<=4: 5158/5158), +0 new types (census 316780), new-hull-hist {}, C-wall 7s, total 294s
+[grind 18:17:21] chunk 281: +24 parents (6405/6405; hull<=4: 5158/5158), +0 new types (census 316780), new-hull-hist {}, C-wall 44s, total 332s
+[grind 18:17:35] GRIND COMPLETE: 6405/6405 parents, census 316780 reflection-distinguished types
+[certify 18:17:37] THE n=9 CERTIFICATION
+[certify] census: 316780 reflection-distinguished types
+[certify]   mirror pass 50000/316780 (73s)
+[certify]   mirror pass 100000/316780 (148s)
+[certify]   mirror pass 150000/316780 (225s)
+[certify]   mirror pass 200000/316780 (293s)
+[certify]   mirror pass 250000/316780 (383s)
+[certify]   mirror pass 300000/316780 (481s)
+[certify] mirror closure FAIL (15); self-mirror 825; mirror-identified None (anchor 158817) [MISMATCH]
+[certify] !! refusing to certify — count mismatch
+[certify 19:21:26] THE n=9 CERTIFICATION
+[certify] census: 316797 reflection-distinguished types
+[certify]   mirror pass 50000/316797 (73s)
+[certify]   mirror pass 100000/316797 (148s)
+[certify]   mirror pass 150000/316797 (225s)
+[certify]   mirror pass 200000/316797 (293s)
+[certify]   mirror pass 250000/316797 (382s)
+[certify]   mirror pass 300000/316797 (480s)
+[certify] mirror closure FAIL (2); self-mirror 825; mirror-identified None (anchor 158817) [MISMATCH]
+[certify] !! refusing to certify — count mismatch
+[certify 19:39:41] THE n=9 CERTIFICATION
+[certify] census: 316799 reflection-distinguished types
+[certify]   mirror pass 50000/316799 (73s)
+[certify]   mirror pass 100000/316799 (149s)
+[certify]   mirror pass 150000/316799 (225s)
+[certify]   mirror pass 200000/316799 (294s)
+[certify]   mirror pass 250000/316799 (384s)
+[certify]   mirror pass 300000/316799 (482s)
+[certify] mirror closure OK; self-mirror 825; mirror-identified 158812 (anchor 158817) [MISMATCH]
+[certify] !! refusing to certify — count mismatch

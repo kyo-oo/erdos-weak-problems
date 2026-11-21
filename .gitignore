@@ -10,3 +10,6 @@ verify_dump
 *_snap.bin
 problem261-funnels/engine/results/dbg_trace.txt
 *.npy
+problem107-happy-ending/engine107f5_cache/f9/chunks/
+problem107-happy-ending/engine107f5_cache/f9/out_c*.txt
+problem107-happy-ending/engine107f5_cache/f9/

@@ -888,4 +888,76 @@ def run_negative_controls(challenge, solution):
                        ok_board,
                        f"refuted {refuted}/8 boards (N,t,corrupt-threshold,convex-triples,hull-triples)={boards}",
                        time.time() - t0))
+
+    # ---- S-F5-W81: THE f(5)=9 CERTIFICATE (the W81-107A lane) ----
+    import pickle as _pickle
+    t0 = time.time()
+    ok_a = ok_b = ok_c = True
+    det_a = det_b = det_c = ""
+    P107 = os.path.join(CAMP, "problem107-happy-ending")
+    sys.path.insert(0, P107)
+    try:
+        import engine107f5v4 as _V
+        _t8 = _V.TRIPLES(8); _rule8 = _V.rule_for(8)
+        _bank = _V._load_bank(8)
+        _free = 0
+        for _ck, _rec in _bank.items():
+            _chi = tuple(_rec["chi"])
+            _wa = _V.chi_convex5_method_a(_chi, 8, _rule8)
+            _wb = _V.chi_convex5_method_b(_chi, 8, _rule8)
+            if _wa is None and _wb is None:
+                _free += 1
+        ok_a = (_free == 146) and len(_bank) == 6405
+        det_a = (f"F8 battery rerun: {len(_bank)} bank types, exactly {_free} "
+                 f"convex-5-free 8-types (F8, all hull-3) — the exhaustive "
+                 f"reduction base; F8 nonempty certifies f(5) >= 9")
+    except Exception as e:
+        ok_a = False; det_a = repr(e)
+    try:
+        _r1 = open(os.path.join(P107, "receipts_f5_storm.txt")).read()
+        _r2 = open(os.path.join(P107, "receipts107f9.txt")).read()
+        _census_lines = sum(1 for _ in open(os.path.join(
+            P107, "census_types_n9.jsonl")))
+        _cert = open(os.path.join(P107, "F5_CERTIFICATE.md")).read()
+        ok_b = ("CONVEX-5-FREE CHILDREN: 0" in _r1
+                and "CONVEX-5-FREE TYPES: 0" in _r1
+                and "146" in _r1
+                and "LADDER GREEN" in _r2
+                and "GRIND COMPLETE: 6405/6405" in _r2
+                and "mirror closure OK" in _r2
+                and _census_lines == 316802
+                and "f(5) = 9" in _cert)
+        det_b = (f"storm receipt: 0 convex-5-free children; battery: 0 "
+                 f"convex-5-free types (250,922 two-code); ladder GREEN; "
+                 f"grind 6405/6405; mirror closure OK; census "
+                 f"{_census_lines} types; certificate present")
+    except Exception as e:
+        ok_b = False; det_b = repr(e)
+    try:
+        _t9 = _V.TRIPLES(9); _rule9 = _V.rule_for(9)
+        _types = {}
+        with open(os.path.join(P107, "census_types_n9.jsonl")) as _f:
+            for _ln in _f:
+                _d = json.loads(_ln)
+                _types[_d["ck"]] = _d
+        _le4 = [( _d) for _d in _types.values() if _d.get("hull", 9) <= 4]
+        import random as _rnd
+        _samp = _rnd.Random(1070707).sample(_le4, min(1500, len(_le4)))
+        _bad = 0
+        for _d in _samp:
+            _chi = _V.unpack_signs(_d["chi"], len(_t9))
+            _wa = _V.chi_convex5_method_a(_chi, 9, _rule9)
+            _wb = _V.chi_convex5_method_b(_chi, 9, _rule9)
+            if _wa is None and _wb is None:
+                _bad += 1
+        ok_c = (_bad == 0)
+        det_c = (f"census sample: {len(_samp)}/{len(_le4)} hull<=4 types "
+                 f"re-checked two-code, {_bad} convex-5-free")
+    except Exception as e:
+        ok_c = False; det_c = repr(e)
+    checks.append(_chk("S-F5-W81",
+        "THEOREM f(5)=9: the F8 reduction (146 convex-5-free 8-types, exhaustive two-code over the complete 6405 bank) + the saturated F8 storm (0 convex-5-free children) + the census battery (250,922 hull<=4 types, 0 convex-5-free, mirror-closed census 316,802) + heredity => every 9-point GP set contains a convex 5; F8 nonempty => f(5)>=9",
+        ok_a and ok_b and ok_c,
+        f"A[F8]={det_a} | B[receipts]={det_b} | C[sample]={det_c}",
+        time.time() - t0))
     return checks
