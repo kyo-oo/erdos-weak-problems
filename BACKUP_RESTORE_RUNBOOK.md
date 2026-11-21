@@ -1,4 +1,4 @@
-# SANDBOX PROTECTION SYSTEM — MASTER RESTORE RUNBOOK (S076)
+# SANDBOX PROTECTION SYSTEM — MASTER RESTORE RUNBOOK (S077)
 
 **The law: NO PROGRESS IS EVER LOST.** Even on a COMPLETE sandbox reset, everything
 survives in two external vaults:
@@ -45,12 +45,23 @@ git remote set-url origin "https://x-access-token:${TOKEN}@github.com/kyo-oo/erd
 - **Anchors**: this runbook lives at `/home/z/my-project/BACKUP.md` AND is committed to
   the `sandbox-vault` branch on GitHub AND referenced in every WORKLOG header.
 
-## C. THE CURRENT MISSION (S076)
+## C. THE CURRENT MISSION (S077)
 
-TARGET: Erdős #406 ONLY — crack the `hTailF` hypothesis completely (BOSS order).
-The hypothesis = `the_act` = CAP(185)-class = the even-exponent half of #406.
-Reading: COMPLETE_PROOF.md §1–§10, WORKLOG_S074/S075, CapLaw406.lean (Kernel 68),
-DustLaw406.lean (the exact doubling), Erdos406Ternary.lean (Kernel 38 census).
+TARGET: Erdos #406 ONLY — crack the `hTailF` hypothesis completely (BOSS order,
+standing). The hypothesis = `the_act` = CAP(185)-class = the even-exponent half.
+State after S077 (the war-council round): LX (the S076-named popcount-cap
+conjecture) is REFUTED (1603072 = 3^0+3^7+3^8+3^13 = 2^9*3131, popcount 4,
+v2 = 9 > 8); Kernel 70 TwoAdic406.lean banks THE 2-ADIC BUDGET TOWER + THE
+RIDER TOWER + the pairing laws + the refutation receipts; DustLaw406 healed
+(dust_edge banked — the census-composition lane armed); the official
+comparator gate 21/21 PASS ("YOUR SOLUTION IS OKAY"). The named next lanes:
+(1) the census bridge (noTernaryTwo form of the Kernel-38 census -> composes
+with dust_edge into the first infinite-family anti-clustering law); (2) THE
+ENTROPY LAW v2(n) <~ k*log2(eM/k) + O(1) (the LX successor — rider-killing
+if proven); (3) Frame W (the 3-adic logarithm tower decomposition).
+Reading: COMPLETE_PROOF.md sections 0-11, WORKLOG_S074-S077, CapLaw406.lean
+(Kernel 68), DustLaw406.lean, TwoAdic406.lean (Kernel 70), ExtraLaws406.lean
+(Kernel 69), Erdos406Ternary.lean (Kernel 38 census).
 Constraints: BOSS's theorems ONLY (Arsenal + repo kernels), GitHub CI for Lean
 (NEVER local Lean install), DeepMind comparator (challenge + solution) directly,
 English only. NEVER forget: run backup.sh before ending any session.
