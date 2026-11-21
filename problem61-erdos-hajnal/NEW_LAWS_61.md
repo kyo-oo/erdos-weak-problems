@@ -388,3 +388,49 @@ TWO OF THE 34 FIVE-VERTEX GRAPHS DOWN.
 #BY GST LAW two_pow_factored [HC-PROOF-research/CardinalWorlds.lean:425]
 #BY GST LAW digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097]
 #BY GST LAW sq_sub_one [erdosternary2/ErdosTernary2.lean:909]
+
+---
+
+# W78-61E ADDITIONS — THE GENERAL REDUCTION PACKAGE
+# (full proofs: GENERAL_REDUCTION.md; engine: engine61closure.py; receipts: receipts61closure.txt)
+
+## LAW C61-RAM-GEN (THE RAMSEY ROUTE, ALL SIZES — arbitrary graphs, complete)
+For every t >= 3 and every K_t-free graph G on n >= 1 vertices:
+  alpha(G) >= ceil( ((t-1)!)^{1/(t-1)} * n^{1/(t-1)} ) - (t-1),
+with the asymptotic form alpha >= (1/2)((t-1)!)^{1/(t-1)} n^{1/(t-1)} for
+n >= N0(t) = (2(t-1))^{t-1}/(t-1)!, and EH(K_t) and EH(E_t) at the
+explicit exponent c(t) = min(1/(2(t-1)), ln2/(2 ln N0(t))) for ALL n >= 1.
+Proof: the banked Ramsey recursion R(a,b) <= C(a+b-2,a-1) (Pascal
+hockey-stick induction, anchored R(2,b)=b) + the contrapositive ladder +
+ceiling arithmetic (GENERAL_REDUCTION.md, complete). Supersedes THEOREM K5
+as the general law (t=5 recovers it: (24)^{1/4} n^{1/4} - 4 form).
+Engine: exhaustive n<=6 (t=3,4,5) zero violations; sampled constructions
+t=3..8 to n=100 zero violations.
+
+## LAW C61-PRIME-DEC (THE MODULAR DECOMPOSITION LADDER — complete)
+Every graph on >= 2 vertices is prime or H = Q[M, singletons] for any
+nontrivial module M (Q = contraction, |Q| < |H|, 2 <= |M| < |H|); strong
+induction gives the finite decomposition tree with prime/singleton leaves.
+Engine: EVERY graph n <= 6 decomposed; the local ladder identity verified
+by canonical-form equality at every internal node (469/469).
+
+## LAW C61-TREE-COMP (TREE SUBSTITUTION COMPOSITION — the uniform blow-up frame)
+Multi-block generalization of the banked Theorems 4A/4B/4C: if Q contains
+induced A on {i_p} and class X_{i_p} contains induced J_p (the J_p
+possibly different), the blow-up contains induced A[J_1,...,J_a] (the
+multi-block chase — the banked 4A(2) proof verbatim, no step uses that
+the blocks coincide; 160/160 engine trials + 60/60 min-law negative
+controls). Along a decomposition tree with leaf exponents c(F): the
+tree harmonic exponent c(T) = (sum of reciprocal leaf exponents along
+the level structure)^{-1} (the banked F_k law on trees; exact-rational
+arithmetic, receipts).
+
+## THEOREM GENERAL-REDUCTION (THE BRIDGE — exact, no dilution)
+(GR-1) If every prime P satisfies EH(P) for arbitrary graphs, then every
+finite H satisfies EH(H) at the tree harmonic exponent WITHIN the uniform
+blow-up frame (PRIME-DEC + TREE-COMP). (GR-2) The remaining content for
+arbitrary graphs is the UNIFORMIZATION BRIDGE — named exactly; the
+classical route (regularity + removal, APS01) is neither in the package
+nor used. (GR-3) The direct-kill frontier is exactly the primes: at n=5
+precisely {P5, co-P5, bull, C5} (CLOSURE_MAP.md) — three kills close the
+5-vertex world in-frame; at n=6 exactly 26 primes.

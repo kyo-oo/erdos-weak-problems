@@ -1,0 +1,4778 @@
+[
+ {
+  "n": 1,
+  "canon": 0,
+  "edges": 0,
+  "prime": false,
+  "complement_canon": 0,
+  "decomposable": false,
+  "leaves": [
+   [
+    1,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 2,
+  "canon": 0,
+  "edges": 0,
+  "prime": true,
+  "complement_canon": 1,
+  "decomposable": false,
+  "leaves": [
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 2,
+  "canon": 1,
+  "edges": 1,
+  "prime": true,
+  "complement_canon": 0,
+  "decomposable": false,
+  "leaves": [
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 3,
+  "canon": 0,
+  "edges": 0,
+  "prime": false,
+  "complement_canon": 7,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 3,
+  "canon": 1,
+  "edges": 1,
+  "prime": false,
+  "complement_canon": 3,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 3,
+  "canon": 3,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 1,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 3,
+  "canon": 7,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 0,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 0,
+  "edges": 0,
+  "prime": false,
+  "complement_canon": 63,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 1,
+  "edges": 1,
+  "prime": false,
+  "complement_canon": 31,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 3,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 15,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 7,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 11,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 11,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 7,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 12,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 30,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 13,
+  "edges": 3,
+  "prime": true,
+  "complement_canon": 13,
+  "decomposable": false,
+  "leaves": [
+   [
+    4,
+    13
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 15,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 3,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 30,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 12,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 31,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 1,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 4,
+  "canon": 63,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 0,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 0,
+  "edges": 0,
+  "prime": false,
+  "complement_canon": 1023,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 1,
+  "edges": 1,
+  "prime": false,
+  "complement_canon": 511,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 3,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 255,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 7,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 191,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 15,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 183,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 19,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 127,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 20,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 495,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 21,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 223,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 23,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 63,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 28,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 254,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 29,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 187,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 31,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 55,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 54,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 207,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 55,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 31,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 58,
+  "edges": 4,
+  "prime": true,
+  "complement_canon": 221,
+  "decomposable": false,
+  "leaves": [
+   [
+    5,
+    58
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 59,
+  "edges": 5,
+  "prime": true,
+  "complement_canon": 59,
+  "decomposable": false,
+  "leaves": [
+   [
+    5,
+    59
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 62,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 185,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 63,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 23,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 126,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 184,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 127,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 19,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 183,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 15,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 184,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 126,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 185,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 62,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 187,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 29,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 191,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 7,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 207,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 54,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 220,
+  "edges": 5,
+  "prime": true,
+  "complement_canon": 220,
+  "decomposable": false,
+  "leaves": [
+   [
+    5,
+    220
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 221,
+  "edges": 6,
+  "prime": true,
+  "complement_canon": 58,
+  "decomposable": false,
+  "leaves": [
+   [
+    5,
+    221
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 223,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 21,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 254,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 28,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 255,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 3,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 495,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 20,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 511,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 1,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 5,
+  "canon": 1023,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 0,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 0,
+  "edges": 0,
+  "prime": false,
+  "complement_canon": 32767,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1,
+  "edges": 1,
+  "prime": false,
+  "complement_canon": 16383,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 3,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 8191,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 6143,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 15,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 5887,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 31,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 5871,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 35,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 4095,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 36,
+  "edges": 2,
+  "prime": false,
+  "complement_canon": 15871,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 37,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 7167,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 39,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 2047,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 44,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 8159,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 45,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 6015,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 47,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 1791,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 60,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 6142,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 61,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 5879,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 63,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 1775,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 102,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 6655,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 103,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 1023,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 106,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 7103,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    5,
+    58
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 107,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 1919,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    5,
+    59
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 110,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 5951,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 111,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 767,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 120,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 8157,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 121,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 6007,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 122,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 6014,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    58
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 123,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 1783,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    59
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 126,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 5875,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 127,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 751,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 238,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 5919,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 239,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 639,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 246,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 5950,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    58
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 247,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 759,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    59
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 254,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 5873,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 255,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 623,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 510,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 5872,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 511,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 615,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 615,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 511,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 616,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 4063,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 617,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 2015,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 619,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 959,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 623,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 255,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 632,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 4061,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 633,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 2013,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 635,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 955,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 639,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 239,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 655,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 1759,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 656,
+  "edges": 3,
+  "prime": false,
+  "complement_canon": 15870,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 657,
+  "edges": 4,
+  "prime": false,
+  "complement_canon": 7166,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 659,
+  "edges": 5,
+  "prime": true,
+  "complement_canon": 6011,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    659
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 662,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 2046,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 663,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 1789,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 671,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 1743,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 684,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 7071,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    5,
+    220
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 685,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 1887,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    5,
+    221
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 687,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 703,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 691,
+  "edges": 6,
+  "prime": true,
+  "complement_canon": 1915,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    691
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 692,
+  "edges": 5,
+  "prime": true,
+  "complement_canon": 7101,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    692
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 693,
+  "edges": 6,
+  "prime": true,
+  "complement_canon": 5943,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    693
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 694,
+  "edges": 6,
+  "prime": true,
+  "complement_canon": 1917,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    694
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 695,
+  "edges": 7,
+  "prime": true,
+  "complement_canon": 763,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    695
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 700,
+  "edges": 6,
+  "prime": true,
+  "complement_canon": 6010,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    700
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 701,
+  "edges": 7,
+  "prime": true,
+  "complement_canon": 1781,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    701
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 703,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 687,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    4,
+    13
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 750,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 927,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 751,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 127,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 758,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 957,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    58
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 759,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 247,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    59
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 760,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 2014,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    58
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 761,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 1751,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    59
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 762,
+  "edges": 7,
+  "prime": true,
+  "complement_canon": 1885,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    762
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 763,
+  "edges": 8,
+  "prime": true,
+  "complement_canon": 695,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    763
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 766,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 923,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 767,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 111,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 920,
+  "edges": 5,
+  "prime": false,
+  "complement_canon": 6654,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 921,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 1022,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 922,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 5949,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    58
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 923,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 766,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 926,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 1788,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 927,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 750,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 954,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 5911,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 955,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 635,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 956,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 5948,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    220
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 957,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 758,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    221
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 958,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 1780,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    221
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 959,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 619,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1022,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 921,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1023,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 103,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1743,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 671,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1749,
+  "edges": 7,
+  "prime": true,
+  "complement_canon": 1883,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1749
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1751,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 761,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    59
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1759,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 655,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1775,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 63,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1780,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 958,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    58
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1781,
+  "edges": 8,
+  "prime": true,
+  "complement_canon": 701,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1781
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1783,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 123,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    59
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1788,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 926,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1789,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 663,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1791,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 47,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1880,
+  "edges": 6,
+  "prime": true,
+  "complement_canon": 7100,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1880
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1881,
+  "edges": 7,
+  "prime": true,
+  "complement_canon": 1916,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1881
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1883,
+  "edges": 8,
+  "prime": true,
+  "complement_canon": 1749,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1883
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1884,
+  "edges": 7,
+  "prime": true,
+  "complement_canon": 5941,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1884
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1885,
+  "edges": 8,
+  "prime": true,
+  "complement_canon": 762,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1885
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1887,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 685,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    5,
+    58
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1915,
+  "edges": 9,
+  "prime": true,
+  "complement_canon": 691,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1915
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1916,
+  "edges": 8,
+  "prime": true,
+  "complement_canon": 1881,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1916
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1917,
+  "edges": 9,
+  "prime": true,
+  "complement_canon": 694,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    1917
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 1919,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 107,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    5,
+    59
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 2012,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 5907,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 2013,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 633,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 2014,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 760,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    221
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 2015,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 617,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 2046,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 662,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 2047,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 39,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 4060,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 5905,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 4061,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 632,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 4063,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 616,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 4095,
+  "edges": 12,
+  "prime": false,
+  "complement_canon": 35,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5871,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 31,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5872,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 510,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5873,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 254,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5875,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 126,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5879,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 61,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5887,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 15,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5905,
+  "edges": 6,
+  "prime": false,
+  "complement_canon": 4060,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5907,
+  "edges": 7,
+  "prime": false,
+  "complement_canon": 2012,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5911,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 954,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5919,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 238,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5941,
+  "edges": 8,
+  "prime": true,
+  "complement_canon": 1884,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    5941
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5943,
+  "edges": 9,
+  "prime": true,
+  "complement_canon": 693,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    5943
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5948,
+  "edges": 8,
+  "prime": false,
+  "complement_canon": 956,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    220
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5949,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 922,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    221
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5950,
+  "edges": 9,
+  "prime": false,
+  "complement_canon": 246,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    221
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 5951,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 110,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6007,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 121,
+  "decomposable": true,
+  "leaves": [
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6010,
+  "edges": 9,
+  "prime": true,
+  "complement_canon": 700,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    6010
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6011,
+  "edges": 10,
+  "prime": true,
+  "complement_canon": 659,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    6011
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6014,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 122,
+  "decomposable": true,
+  "leaves": [
+   [
+    5,
+    221
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6015,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 45,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6142,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 60,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6143,
+  "edges": 12,
+  "prime": false,
+  "complement_canon": 7,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6654,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 920,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 6655,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 102,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7071,
+  "edges": 10,
+  "prime": false,
+  "complement_canon": 684,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    5,
+    220
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7100,
+  "edges": 9,
+  "prime": true,
+  "complement_canon": 1880,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    7100
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7101,
+  "edges": 10,
+  "prime": true,
+  "complement_canon": 692,
+  "decomposable": false,
+  "leaves": [
+   [
+    6,
+    7101
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7103,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 106,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    5,
+    221
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7166,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 657,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 7167,
+  "edges": 12,
+  "prime": false,
+  "complement_canon": 37,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    4,
+    13
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 8157,
+  "edges": 11,
+  "prime": false,
+  "complement_canon": 120,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 8159,
+  "edges": 12,
+  "prime": false,
+  "complement_canon": 44,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 8191,
+  "edges": 13,
+  "prime": false,
+  "complement_canon": 3,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 15870,
+  "edges": 12,
+  "prime": false,
+  "complement_canon": 656,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 15871,
+  "edges": 13,
+  "prime": false,
+  "complement_canon": 36,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 16383,
+  "edges": 14,
+  "prime": false,
+  "complement_canon": 1,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    0
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ },
+ {
+  "n": 6,
+  "canon": 32767,
+  "edges": 15,
+  "prime": false,
+  "complement_canon": 0,
+  "decomposable": true,
+  "leaves": [
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ],
+   [
+    2,
+    1
+   ]
+  ]
+ }
+]

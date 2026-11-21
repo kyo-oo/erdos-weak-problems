@@ -41,3 +41,32 @@ claims (retained below, superseded where marked) are the bank.
 
 ## C61-FOURVERTEX-CLASSIFICATION (W75 — superseded by C61-FOURVERTEX-COMPLETE)
 "THE 4-VERTEX CLASSIFICATION (W75 status): 9 of the 11 unlabeled 4-vertex graphs are EH-closed in-package with explicit unconditional exponents (P4 and paw/P3+K1 at the optimal 1/2; K4/K4bar every c<1/3; claw/K3+K1, diamond/K2+2K1 at 1/3); C4/2K2 carry the complete triangle-free half (alpha >= sqrt(n)/2), the complete triangle-decomposition structure theorem, and the exhaustive sharp-form census alpha*omega >= 4n/5 through n=7. All claims engine-certified (receipts61four.txt 14/14 + the 731K census addendum). [W76: the classification is COMPLETE — C61-FOURVERTEX-COMPLETE.]"
+
+---
+
+# W78-61E CLAIMS ADDITIONS (appended; the claims above are the bank)
+
+```json
+[
+  {
+    "id": "C61-RAM-GEN",
+    "statement": "For every t >= 3 and every K_t-free graph G on n >= 1 vertices: alpha(G) >= ceil(((t-1)!)^{1/(t-1)} * n^{1/(t-1)}) - (t-1); asymptotically alpha >= (1/2)((t-1)!)^{1/(t-1)} n^{1/(t-1)} for n >= (2(t-1))^{t-1}/(t-1)!; hence EH(K_t) and EH(E_t) at c(t) = min(1/(2(t-1)), ln2/(2 ln N0(t))) for all n >= 1. Complete in-package proof (Pascal recursion + contrapositive ladder + ceiling arithmetic).",
+    "verification": "GENERAL_REDUCTION.md LAW C61-RAM-GEN; receipts61closure.txt RAMGEN-exh (exhaustive n<=6, t=3,4,5, zero violations) + RAMGEN-samp (t=3..8, n to 100, constructions, zero violations)"
+  },
+  {
+    "id": "C61-PRIME-DEC",
+    "statement": "Every graph on >=2 vertices is prime or a uniform blow-up H = Q[M, singletons] over any nontrivial module M (|Q| < |H|, 2 <= |M| < |H|); iteration gives the finite decomposition tree with prime/singleton leaves. Complete in-package proof.",
+    "verification": "GENERAL_REDUCTION.md LAW C61-PRIME-DEC; receipts61closure.txt PD-ladder (all internal nodes across every graph n<=6, canonical-form equality, zero failures)"
+  },
+  {
+    "id": "C61-TREE-COMP",
+    "statement": "Multi-block avoidance (in the uniform blow-up frame): if quotient Q contains induced A and each corresponding class X contains induced J_p, the blow-up contains induced A[J_1,...,J_a] with possibly different J_p; consequently the tree harmonic exponent c(T) = (sum of reciprocals along the level structure)^{-1} governs H-free compatible blow-ups. In-frame; frame labeled exactly.",
+    "verification": "GENERAL_REDUCTION.md LAW C61-TREE-COMP; receipts61closure.txt MB-avoid (100/100) + MB-minlaw (60/60 negative controls)"
+  },
+  {
+    "id": "C61-GENERAL-REDUCTION",
+    "statement": "(GR-1) EH for all prime graphs implies EH for all finite graphs within the uniform blow-up frame, at the tree harmonic exponent. (GR-2) The uniformization bridge is the named exact remaining content for arbitrary graphs. (GR-3) The direct-kill frontier at n=5 is exactly {P5, co-P5, bull, C5} (three kills close the 5-vertex world in-frame; 30/34 five-vertex graphs are decomposable, covered in-frame today); at n=6 exactly 26 primes.",
+    "verification": "GENERAL_REDUCTION.md; CLOSURE_MAP.md; alln61/coverage_map.json; receipts61closure.txt (836/836 PASS)"
+  }
+]
+```

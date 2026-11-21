@@ -1,0 +1,842 @@
+engine61closure.py — W78-61E receipts (the general reduction coverage machine)
+census counts (numpy code + pure-python two-code spot agreement): [1, 2, 4, 11, 34, 156] vs expected [1, 2, 4, 11, 34, 156]
+n<=6 totals: graphs=208 primes=33 decomposable=174
+{"1": {"prime": 0, "decomposable": 0, "frontier_prime": 0, "banked_prime": 0}, "2": {"prime": 2, "decomposable": 0, "frontier_prime": 0, "banked_prime": 0}, "3": {"prime": 0, "decomposable": 4, "frontier_prime": 0, "banked_prime": 0}, "4": {"prime": 1, "decomposable": 10, "frontier_prime": 0, "banked_prime": 1}, "5": {"prime": 4, "decomposable": 30, "frontier_prime": 4, "banked_prime": 0}, "6": {"prime": 26, "decomposable": 130, "frontier_prime": 26, "banked_prime": 0}}
+frontier primes: n=5=4 n=6=26
+PASS: 836  FAIL: 0  wall=100.1s
+PASS :: canon-two-code n=1 :: 1/1 agree (1 perms)
+PASS :: canon-two-code n=2 :: 2/2 agree (2 perms)
+PASS :: canon-two-code n=3 :: 8/8 agree (6 perms)
+PASS :: canon-two-code n=4 :: 60/60 agree (24 perms)
+PASS :: canon-two-code n=5 :: 60/60 agree (120 perms)
+PASS :: canon-two-code n=6 :: 60/60 agree (720 perms)
+PASS :: census-counts :: got [1, 2, 4, 11, 34, 156]
+PASS :: PD-classified n=1 c=0
+PASS :: PD-classified n=2 c=0
+PASS :: PD-classified n=2 c=1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=3 c=0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=3 c=1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=3 c=3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=3 c=7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 0 want 0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=4 c=0
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=4 c=1
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=4 c=3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=4 c=7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 11 want 11
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=4 c=11
+PASS :: PD-ladder n=4 q=3 k=2 :: got 12 want 12
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=4 c=12
+PASS :: PD-classified n=4 c=13
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=4 c=15
+PASS :: PD-ladder n=4 q=3 k=2 :: got 30 want 30
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=4 c=30
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=4 c=31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 63 want 63
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=4 c=63
+PASS :: PD-ladder n=5 q=4 k=2 :: got 0 want 0
+PASS :: PD-ladder n=4 q=3 k=2 :: got 0 want 0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=5 c=0
+PASS :: PD-ladder n=5 q=4 k=2 :: got 1 want 1
+PASS :: PD-ladder n=4 q=3 k=2 :: got 0 want 0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=5 c=1
+PASS :: PD-ladder n=5 q=4 k=2 :: got 3 want 3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=3
+PASS :: PD-ladder n=5 q=4 k=2 :: got 7 want 7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=7
+PASS :: PD-ladder n=5 q=4 k=2 :: got 15 want 15
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=15
+PASS :: PD-ladder n=5 q=4 k=2 :: got 19 want 19
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=19
+PASS :: PD-ladder n=5 q=4 k=2 :: got 20 want 20
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=5 c=20
+PASS :: PD-ladder n=5 q=2 k=4 :: got 21 want 21
+PASS :: PD-classified n=5 c=21
+PASS :: PD-ladder n=5 q=4 k=2 :: got 23 want 23
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=23
+PASS :: PD-ladder n=5 q=4 k=2 :: got 28 want 28
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=28
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=5 c=29
+PASS :: PD-ladder n=5 q=4 k=2 :: got 31 want 31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=31
+PASS :: PD-ladder n=5 q=4 k=2 :: got 54 want 54
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=54
+PASS :: PD-ladder n=5 q=4 k=2 :: got 55 want 55
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=55
+PASS :: PD-classified n=5 c=58
+PASS :: PD-classified n=5 c=59
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=5 c=62
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=63
+PASS :: PD-ladder n=5 q=4 k=2 :: got 126 want 126
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=126
+PASS :: PD-ladder n=5 q=4 k=2 :: got 127 want 127
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=127
+PASS :: PD-ladder n=5 q=4 k=2 :: got 183 want 183
+PASS :: PD-ladder n=4 q=3 k=2 :: got 11 want 11
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=183
+PASS :: PD-ladder n=5 q=4 k=2 :: got 184 want 184
+PASS :: PD-ladder n=4 q=3 k=2 :: got 12 want 12
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=5 c=184
+PASS :: PD-ladder n=5 q=4 k=2 :: got 185 want 185
+PASS :: PD-classified n=5 c=185
+PASS :: PD-ladder n=5 q=4 k=2 :: got 187 want 187
+PASS :: PD-classified n=5 c=187
+PASS :: PD-ladder n=5 q=4 k=2 :: got 191 want 191
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=191
+PASS :: PD-ladder n=5 q=4 k=2 :: got 207 want 207
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=207
+PASS :: PD-classified n=5 c=220
+PASS :: PD-classified n=5 c=221
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=5 c=223
+PASS :: PD-ladder n=5 q=4 k=2 :: got 254 want 254
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=254
+PASS :: PD-ladder n=5 q=4 k=2 :: got 255 want 255
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=5 c=255
+PASS :: PD-ladder n=5 q=4 k=2 :: got 495 want 495
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=5 c=495
+PASS :: PD-ladder n=5 q=4 k=2 :: got 511 want 511
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=5 c=511
+PASS :: PD-ladder n=5 q=4 k=2 :: got 1023 want 1023
+PASS :: PD-ladder n=4 q=3 k=2 :: got 63 want 63
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=5 c=1023
+PASS :: PD-ladder n=6 q=5 k=2 :: got 0 want 0
+PASS :: PD-ladder n=5 q=4 k=2 :: got 0 want 0
+PASS :: PD-ladder n=4 q=3 k=2 :: got 0 want 0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=0
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1 want 1
+PASS :: PD-ladder n=5 q=4 k=2 :: got 0 want 0
+PASS :: PD-ladder n=4 q=3 k=2 :: got 0 want 0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=1
+PASS :: PD-ladder n=6 q=5 k=2 :: got 3 want 3
+PASS :: PD-ladder n=5 q=4 k=2 :: got 1 want 1
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=3
+PASS :: PD-ladder n=6 q=5 k=2 :: got 7 want 7
+PASS :: PD-ladder n=5 q=4 k=2 :: got 3 want 3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=7
+PASS :: PD-ladder n=6 q=5 k=2 :: got 15 want 15
+PASS :: PD-ladder n=5 q=4 k=2 :: got 7 want 7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=15
+PASS :: PD-ladder n=6 q=5 k=2 :: got 31 want 31
+PASS :: PD-ladder n=5 q=4 k=2 :: got 15 want 15
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=31
+PASS :: PD-ladder n=6 q=5 k=2 :: got 35 want 35
+PASS :: PD-ladder n=5 q=4 k=2 :: got 1 want 1
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=35
+PASS :: PD-ladder n=6 q=5 k=2 :: got 36 want 36
+PASS :: PD-ladder n=5 q=4 k=2 :: got 1 want 1
+PASS :: PD-ladder n=4 q=3 k=2 :: got 0 want 0
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=36
+PASS :: PD-ladder n=6 q=3 k=4 :: got 37 want 37
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=37
+PASS :: PD-ladder n=6 q=5 k=2 :: got 39 want 39
+PASS :: PD-ladder n=5 q=4 k=2 :: got 3 want 3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=39
+PASS :: PD-ladder n=6 q=5 k=2 :: got 44 want 44
+PASS :: PD-ladder n=5 q=4 k=2 :: got 3 want 3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=44
+PASS :: PD-ladder n=6 q=5 k=2 :: got 45 want 45
+PASS :: PD-ladder n=5 q=2 k=4 :: got 21 want 21
+PASS :: PD-classified n=6 c=45
+PASS :: PD-ladder n=6 q=5 k=2 :: got 47 want 47
+PASS :: PD-ladder n=5 q=4 k=2 :: got 7 want 7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=47
+PASS :: PD-ladder n=6 q=5 k=2 :: got 60 want 60
+PASS :: PD-ladder n=5 q=4 k=2 :: got 7 want 7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=60
+PASS :: PD-ladder n=6 q=5 k=2 :: got 61 want 61
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=61
+PASS :: PD-ladder n=6 q=5 k=2 :: got 63 want 63
+PASS :: PD-ladder n=5 q=4 k=2 :: got 15 want 15
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=63
+PASS :: PD-ladder n=6 q=5 k=2 :: got 102 want 102
+PASS :: PD-ladder n=5 q=4 k=2 :: got 3 want 3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=102
+PASS :: PD-ladder n=6 q=5 k=2 :: got 103 want 103
+PASS :: PD-ladder n=5 q=4 k=2 :: got 3 want 3
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=103
+PASS :: PD-ladder n=6 q=2 k=5 :: got 106 want 106
+PASS :: PD-classified n=6 c=106
+PASS :: PD-ladder n=6 q=2 k=5 :: got 107 want 107
+PASS :: PD-classified n=6 c=107
+PASS :: PD-ladder n=6 q=5 k=2 :: got 110 want 110
+PASS :: PD-ladder n=5 q=2 k=4 :: got 21 want 21
+PASS :: PD-classified n=6 c=110
+PASS :: PD-ladder n=6 q=5 k=2 :: got 111 want 111
+PASS :: PD-ladder n=5 q=4 k=2 :: got 23 want 23
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=111
+PASS :: PD-ladder n=6 q=5 k=2 :: got 120 want 120
+PASS :: PD-ladder n=5 q=4 k=2 :: got 28 want 28
+PASS :: PD-ladder n=4 q=3 k=2 :: got 12 want 12
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=120
+PASS :: PD-ladder n=6 q=5 k=2 :: got 121 want 121
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=121
+PASS :: PD-ladder n=6 q=5 k=2 :: got 122 want 122
+PASS :: PD-classified n=6 c=122
+PASS :: PD-ladder n=6 q=5 k=2 :: got 123 want 123
+PASS :: PD-classified n=6 c=123
+PASS :: PD-ladder n=6 q=5 k=2 :: got 126 want 126
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=126
+PASS :: PD-ladder n=6 q=5 k=2 :: got 127 want 127
+PASS :: PD-ladder n=5 q=4 k=2 :: got 31 want 31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=127
+PASS :: PD-ladder n=6 q=5 k=2 :: got 238 want 238
+PASS :: PD-ladder n=5 q=4 k=2 :: got 7 want 7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=238
+PASS :: PD-ladder n=6 q=5 k=2 :: got 239 want 239
+PASS :: PD-ladder n=5 q=4 k=2 :: got 7 want 7
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=239
+PASS :: PD-ladder n=6 q=5 k=2 :: got 246 want 246
+PASS :: PD-classified n=6 c=246
+PASS :: PD-ladder n=6 q=5 k=2 :: got 247 want 247
+PASS :: PD-classified n=6 c=247
+PASS :: PD-ladder n=6 q=5 k=2 :: got 254 want 254
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=6 c=254
+PASS :: PD-ladder n=6 q=5 k=2 :: got 255 want 255
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=255
+PASS :: PD-ladder n=6 q=5 k=2 :: got 510 want 510
+PASS :: PD-ladder n=5 q=4 k=2 :: got 15 want 15
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=510
+PASS :: PD-ladder n=6 q=5 k=2 :: got 511 want 511
+PASS :: PD-ladder n=5 q=4 k=2 :: got 15 want 15
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=511
+PASS :: PD-ladder n=6 q=5 k=2 :: got 615 want 615
+PASS :: PD-ladder n=5 q=4 k=2 :: got 19 want 19
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=615
+PASS :: PD-ladder n=6 q=5 k=2 :: got 616 want 616
+PASS :: PD-ladder n=5 q=4 k=2 :: got 20 want 20
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=616
+PASS :: PD-ladder n=6 q=5 k=2 :: got 617 want 617
+PASS :: PD-ladder n=5 q=2 k=4 :: got 21 want 21
+PASS :: PD-classified n=6 c=617
+PASS :: PD-ladder n=6 q=5 k=2 :: got 619 want 619
+PASS :: PD-ladder n=5 q=2 k=4 :: got 21 want 21
+PASS :: PD-classified n=6 c=619
+PASS :: PD-ladder n=6 q=5 k=2 :: got 623 want 623
+PASS :: PD-ladder n=5 q=4 k=2 :: got 23 want 23
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=623
+PASS :: PD-ladder n=6 q=5 k=2 :: got 632 want 632
+PASS :: PD-ladder n=5 q=4 k=2 :: got 28 want 28
+PASS :: PD-ladder n=4 q=3 k=2 :: got 12 want 12
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=632
+PASS :: PD-ladder n=6 q=5 k=2 :: got 633 want 633
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=633
+PASS :: PD-ladder n=6 q=5 k=2 :: got 635 want 635
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=635
+PASS :: PD-ladder n=6 q=5 k=2 :: got 639 want 639
+PASS :: PD-ladder n=5 q=4 k=2 :: got 31 want 31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=639
+PASS :: PD-ladder n=6 q=5 k=2 :: got 655 want 655
+PASS :: PD-ladder n=5 q=4 k=2 :: got 23 want 23
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=655
+PASS :: PD-ladder n=6 q=5 k=2 :: got 656 want 656
+PASS :: PD-ladder n=5 q=4 k=2 :: got 20 want 20
+PASS :: PD-ladder n=4 q=3 k=2 :: got 1 want 1
+PASS :: PD-ladder n=3 q=2 k=2 :: got 0 want 0
+PASS :: PD-classified n=6 c=656
+PASS :: PD-ladder n=6 q=5 k=2 :: got 657 want 657
+PASS :: PD-ladder n=5 q=2 k=4 :: got 21 want 21
+PASS :: PD-classified n=6 c=657
+PASS :: PD-classified n=6 c=659
+PASS :: PD-ladder n=6 q=5 k=2 :: got 662 want 662
+PASS :: PD-ladder n=5 q=4 k=2 :: got 28 want 28
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=662
+PASS :: PD-ladder n=6 q=5 k=2 :: got 663 want 663
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=663
+PASS :: PD-ladder n=6 q=5 k=2 :: got 671 want 671
+PASS :: PD-ladder n=5 q=4 k=2 :: got 31 want 31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=671
+PASS :: PD-ladder n=6 q=2 k=5 :: got 684 want 684
+PASS :: PD-classified n=6 c=684
+PASS :: PD-ladder n=6 q=2 k=5 :: got 685 want 685
+PASS :: PD-classified n=6 c=685
+PASS :: PD-ladder n=6 q=3 k=4 :: got 687 want 687
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=687
+PASS :: PD-classified n=6 c=691
+PASS :: PD-classified n=6 c=692
+PASS :: PD-classified n=6 c=693
+PASS :: PD-classified n=6 c=694
+PASS :: PD-classified n=6 c=695
+PASS :: PD-classified n=6 c=700
+PASS :: PD-classified n=6 c=701
+PASS :: PD-ladder n=6 q=3 k=4 :: got 703 want 703
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=703
+PASS :: PD-ladder n=6 q=5 k=2 :: got 750 want 750
+PASS :: PD-ladder n=5 q=4 k=2 :: got 23 want 23
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=750
+PASS :: PD-ladder n=6 q=5 k=2 :: got 751 want 751
+PASS :: PD-ladder n=5 q=4 k=2 :: got 23 want 23
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=751
+PASS :: PD-ladder n=6 q=5 k=2 :: got 758 want 758
+PASS :: PD-classified n=6 c=758
+PASS :: PD-ladder n=6 q=5 k=2 :: got 759 want 759
+PASS :: PD-classified n=6 c=759
+PASS :: PD-ladder n=6 q=5 k=2 :: got 760 want 760
+PASS :: PD-classified n=6 c=760
+PASS :: PD-ladder n=6 q=5 k=2 :: got 761 want 761
+PASS :: PD-classified n=6 c=761
+PASS :: PD-classified n=6 c=762
+PASS :: PD-classified n=6 c=763
+PASS :: PD-ladder n=6 q=5 k=2 :: got 766 want 766
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=6 c=766
+PASS :: PD-ladder n=6 q=5 k=2 :: got 767 want 767
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=767
+PASS :: PD-ladder n=6 q=5 k=2 :: got 920 want 920
+PASS :: PD-ladder n=5 q=4 k=2 :: got 28 want 28
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=920
+PASS :: PD-ladder n=6 q=5 k=2 :: got 921 want 921
+PASS :: PD-ladder n=5 q=4 k=2 :: got 28 want 28
+PASS :: PD-ladder n=4 q=3 k=2 :: got 3 want 3
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=921
+PASS :: PD-ladder n=6 q=5 k=2 :: got 922 want 922
+PASS :: PD-classified n=6 c=922
+PASS :: PD-ladder n=6 q=5 k=2 :: got 923 want 923
+PASS :: PD-ladder n=5 q=4 k=2 :: got 185 want 185
+PASS :: PD-classified n=6 c=923
+PASS :: PD-ladder n=6 q=5 k=2 :: got 926 want 926
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=6 c=926
+PASS :: PD-ladder n=6 q=5 k=2 :: got 927 want 927
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=927
+PASS :: PD-ladder n=6 q=5 k=2 :: got 954 want 954
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=954
+PASS :: PD-ladder n=6 q=5 k=2 :: got 955 want 955
+PASS :: PD-ladder n=5 q=4 k=2 :: got 29 want 29
+PASS :: PD-classified n=6 c=955
+PASS :: PD-ladder n=6 q=5 k=2 :: got 956 want 956
+PASS :: PD-classified n=6 c=956
+PASS :: PD-ladder n=6 q=5 k=2 :: got 957 want 957
+PASS :: PD-classified n=6 c=957
+PASS :: PD-ladder n=6 q=5 k=2 :: got 958 want 958
+PASS :: PD-classified n=6 c=958
+PASS :: PD-ladder n=6 q=5 k=2 :: got 959 want 959
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=6 c=959
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1022 want 1022
+PASS :: PD-ladder n=5 q=4 k=2 :: got 31 want 31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=1022
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1023 want 1023
+PASS :: PD-ladder n=5 q=4 k=2 :: got 31 want 31
+PASS :: PD-ladder n=4 q=3 k=2 :: got 7 want 7
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=1023
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1743 want 1743
+PASS :: PD-ladder n=5 q=4 k=2 :: got 55 want 55
+PASS :: PD-ladder n=4 q=3 k=2 :: got 11 want 11
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=1743
+PASS :: PD-classified n=6 c=1749
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1751 want 1751
+PASS :: PD-classified n=6 c=1751
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1759 want 1759
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=1759
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1775 want 1775
+PASS :: PD-ladder n=5 q=4 k=2 :: got 55 want 55
+PASS :: PD-ladder n=4 q=3 k=2 :: got 11 want 11
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=1775
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1780 want 1780
+PASS :: PD-classified n=6 c=1780
+PASS :: PD-classified n=6 c=1781
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1783 want 1783
+PASS :: PD-classified n=6 c=1783
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1788 want 1788
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=6 c=1788
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1789 want 1789
+PASS :: PD-ladder n=5 q=4 k=2 :: got 187 want 187
+PASS :: PD-classified n=6 c=1789
+PASS :: PD-ladder n=6 q=5 k=2 :: got 1791 want 1791
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=1791
+PASS :: PD-classified n=6 c=1880
+PASS :: PD-classified n=6 c=1881
+PASS :: PD-classified n=6 c=1883
+PASS :: PD-classified n=6 c=1884
+PASS :: PD-classified n=6 c=1885
+PASS :: PD-ladder n=6 q=2 k=5 :: got 1887 want 1887
+PASS :: PD-classified n=6 c=1887
+PASS :: PD-classified n=6 c=1915
+PASS :: PD-classified n=6 c=1916
+PASS :: PD-classified n=6 c=1917
+PASS :: PD-ladder n=6 q=2 k=5 :: got 1919 want 1919
+PASS :: PD-classified n=6 c=1919
+PASS :: PD-ladder n=6 q=5 k=2 :: got 2012 want 2012
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=6 c=2012
+PASS :: PD-ladder n=6 q=5 k=2 :: got 2013 want 2013
+PASS :: PD-ladder n=5 q=4 k=2 :: got 62 want 62
+PASS :: PD-classified n=6 c=2013
+PASS :: PD-ladder n=6 q=5 k=2 :: got 2014 want 2014
+PASS :: PD-classified n=6 c=2014
+PASS :: PD-ladder n=6 q=5 k=2 :: got 2015 want 2015
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=6 c=2015
+PASS :: PD-ladder n=6 q=5 k=2 :: got 2046 want 2046
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=2046
+PASS :: PD-ladder n=6 q=5 k=2 :: got 2047 want 2047
+PASS :: PD-ladder n=5 q=4 k=2 :: got 63 want 63
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=2047
+PASS :: PD-ladder n=6 q=5 k=2 :: got 4060 want 4060
+PASS :: PD-ladder n=5 q=4 k=2 :: got 126 want 126
+PASS :: PD-ladder n=4 q=3 k=2 :: got 30 want 30
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=4060
+PASS :: PD-ladder n=6 q=5 k=2 :: got 4061 want 4061
+PASS :: PD-ladder n=5 q=4 k=2 :: got 126 want 126
+PASS :: PD-ladder n=4 q=3 k=2 :: got 30 want 30
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=4061
+PASS :: PD-ladder n=6 q=5 k=2 :: got 4063 want 4063
+PASS :: PD-ladder n=5 q=4 k=2 :: got 127 want 127
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=4063
+PASS :: PD-ladder n=6 q=5 k=2 :: got 4095 want 4095
+PASS :: PD-ladder n=5 q=4 k=2 :: got 127 want 127
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=4095
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5871 want 5871
+PASS :: PD-ladder n=5 q=4 k=2 :: got 183 want 183
+PASS :: PD-ladder n=4 q=3 k=2 :: got 11 want 11
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=5871
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5872 want 5872
+PASS :: PD-ladder n=5 q=4 k=2 :: got 184 want 184
+PASS :: PD-ladder n=4 q=3 k=2 :: got 12 want 12
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=5872
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5873 want 5873
+PASS :: PD-ladder n=5 q=4 k=2 :: got 185 want 185
+PASS :: PD-classified n=6 c=5873
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5875 want 5875
+PASS :: PD-ladder n=5 q=4 k=2 :: got 185 want 185
+PASS :: PD-classified n=6 c=5875
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5879 want 5879
+PASS :: PD-ladder n=5 q=4 k=2 :: got 187 want 187
+PASS :: PD-classified n=6 c=5879
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5887 want 5887
+PASS :: PD-ladder n=5 q=4 k=2 :: got 191 want 191
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=5887
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5905 want 5905
+PASS :: PD-ladder n=5 q=4 k=2 :: got 184 want 184
+PASS :: PD-ladder n=4 q=3 k=2 :: got 12 want 12
+PASS :: PD-ladder n=3 q=2 k=2 :: got 1 want 1
+PASS :: PD-classified n=6 c=5905
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5907 want 5907
+PASS :: PD-ladder n=5 q=4 k=2 :: got 185 want 185
+PASS :: PD-classified n=6 c=5907
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5911 want 5911
+PASS :: PD-ladder n=5 q=4 k=2 :: got 185 want 185
+PASS :: PD-classified n=6 c=5911
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5919 want 5919
+PASS :: PD-ladder n=5 q=4 k=2 :: got 207 want 207
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=5919
+PASS :: PD-classified n=6 c=5941
+PASS :: PD-classified n=6 c=5943
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5948 want 5948
+PASS :: PD-classified n=6 c=5948
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5949 want 5949
+PASS :: PD-classified n=6 c=5949
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5950 want 5950
+PASS :: PD-classified n=6 c=5950
+PASS :: PD-ladder n=6 q=5 k=2 :: got 5951 want 5951
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=6 c=5951
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6007 want 6007
+PASS :: PD-ladder n=5 q=4 k=2 :: got 187 want 187
+PASS :: PD-classified n=6 c=6007
+PASS :: PD-classified n=6 c=6010
+PASS :: PD-classified n=6 c=6011
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6014 want 6014
+PASS :: PD-classified n=6 c=6014
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6015 want 6015
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=6 c=6015
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6142 want 6142
+PASS :: PD-ladder n=5 q=4 k=2 :: got 191 want 191
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=6142
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6143 want 6143
+PASS :: PD-ladder n=5 q=4 k=2 :: got 191 want 191
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=6143
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6654 want 6654
+PASS :: PD-ladder n=5 q=4 k=2 :: got 207 want 207
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=6654
+PASS :: PD-ladder n=6 q=5 k=2 :: got 6655 want 6655
+PASS :: PD-ladder n=5 q=4 k=2 :: got 207 want 207
+PASS :: PD-ladder n=4 q=3 k=2 :: got 15 want 15
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=6655
+PASS :: PD-ladder n=6 q=2 k=5 :: got 7071 want 7071
+PASS :: PD-classified n=6 c=7071
+PASS :: PD-classified n=6 c=7100
+PASS :: PD-classified n=6 c=7101
+PASS :: PD-ladder n=6 q=2 k=5 :: got 7103 want 7103
+PASS :: PD-classified n=6 c=7103
+PASS :: PD-ladder n=6 q=5 k=2 :: got 7166 want 7166
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=6 c=7166
+PASS :: PD-ladder n=6 q=5 k=2 :: got 7167 want 7167
+PASS :: PD-ladder n=5 q=2 k=4 :: got 223 want 223
+PASS :: PD-classified n=6 c=7167
+PASS :: PD-ladder n=6 q=5 k=2 :: got 8157 want 8157
+PASS :: PD-ladder n=5 q=4 k=2 :: got 254 want 254
+PASS :: PD-ladder n=4 q=3 k=2 :: got 30 want 30
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=8157
+PASS :: PD-ladder n=6 q=5 k=2 :: got 8159 want 8159
+PASS :: PD-ladder n=5 q=4 k=2 :: got 255 want 255
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=8159
+PASS :: PD-ladder n=6 q=5 k=2 :: got 8191 want 8191
+PASS :: PD-ladder n=5 q=4 k=2 :: got 255 want 255
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 3 want 3
+PASS :: PD-classified n=6 c=8191
+PASS :: PD-ladder n=6 q=5 k=2 :: got 15870 want 15870
+PASS :: PD-ladder n=5 q=4 k=2 :: got 495 want 495
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=6 c=15870
+PASS :: PD-ladder n=6 q=5 k=2 :: got 15871 want 15871
+PASS :: PD-ladder n=5 q=4 k=2 :: got 495 want 495
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=6 c=15871
+PASS :: PD-ladder n=6 q=5 k=2 :: got 16383 want 16383
+PASS :: PD-ladder n=5 q=4 k=2 :: got 511 want 511
+PASS :: PD-ladder n=4 q=3 k=2 :: got 31 want 31
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=6 c=16383
+PASS :: PD-ladder n=6 q=5 k=2 :: got 32767 want 32767
+PASS :: PD-ladder n=5 q=4 k=2 :: got 1023 want 1023
+PASS :: PD-ladder n=4 q=3 k=2 :: got 63 want 63
+PASS :: PD-ladder n=3 q=2 k=2 :: got 7 want 7
+PASS :: PD-classified n=6 c=32767
+PASS :: PD-singleton
+PASS :: PD-counts :: total=208 primes=33 decomp_top=174 internal_nodes=466
+PASS :: PD-counts :: total=208 primes=33 decomp=174 (+1 n=1 leaf)
+PASS :: MB-avoid trial=0 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=1 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=2 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=3 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=4 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=5 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=6 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=7 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=8 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=9 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=10 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=11 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=12 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=13 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=14 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=15 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=16 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=17 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=18 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=19 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=20 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=21 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=22 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=23 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=24 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=25 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=26 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=27 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=28 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=29 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=30 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=31 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=32 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=33 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=34 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=35 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=36 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=37 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=38 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=39 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=40 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=41 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=42 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=43 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=44 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=45 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=46 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=47 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=48 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=49 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=50 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=51 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=52 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=53 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=54 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=55 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=56 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=57 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=58 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=59 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=60 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=61 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=62 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=63 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=64 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=65 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=66 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=67 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=68 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=69 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=70 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=71 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=72 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=73 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=74 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=75 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=76 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=77 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=78 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=79 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=80 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=81 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=82 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=83 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=84 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=85 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=86 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=87 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=88 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=89 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=90 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=91 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=92 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=93 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=94 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=95 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=96 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=97 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=98 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-avoid trial=99 :: chase failed: expected induced A[J_1..J_a]
+PASS :: MB-minlaw trial=1 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=7 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=12 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=19 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=21 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=22 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=25 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=26 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=27 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=31 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=32 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=36 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=37 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=53 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=55 :: A-free quotient but G contains A[J,J]?!
+PASS :: MB-minlaw trial=59 :: A-free quotient but G contains A[J,J]?!
+PASS :: RAMGEN-exh t=3 n=1 :: 0 violations / 1 K_t-free
+PASS :: RAMGEN-exh t=3 n=2 :: 0 violations / 2 K_t-free
+PASS :: RAMGEN-exh t=3 n=3 :: 0 violations / 7 K_t-free
+PASS :: RAMGEN-exh t=3 n=4 :: 0 violations / 41 K_t-free
+PASS :: RAMGEN-exh t=3 n=5 :: 0 violations / 388 K_t-free
+PASS :: RAMGEN-exh t=3 n=6 :: 0 violations / 5789 K_t-free
+PASS :: RAMGEN-exh t=4 n=1 :: 0 violations / 1 K_t-free
+PASS :: RAMGEN-exh t=4 n=2 :: 0 violations / 2 K_t-free
+PASS :: RAMGEN-exh t=4 n=3 :: 0 violations / 8 K_t-free
+PASS :: RAMGEN-exh t=4 n=4 :: 0 violations / 63 K_t-free
+PASS :: RAMGEN-exh t=4 n=5 :: 0 violations / 958 K_t-free
+PASS :: RAMGEN-exh t=4 n=6 :: 0 violations / 27626 K_t-free
+PASS :: RAMGEN-exh t=5 n=1 :: 0 violations / 1 K_t-free
+PASS :: RAMGEN-exh t=5 n=2 :: 0 violations / 2 K_t-free
+PASS :: RAMGEN-exh t=5 n=3 :: 0 violations / 8 K_t-free
+PASS :: RAMGEN-exh t=5 n=4 :: 0 violations / 64 K_t-free
+PASS :: RAMGEN-exh t=5 n=5 :: 0 violations / 1023 K_t-free
+PASS :: RAMGEN-exh t=5 n=6 :: 0 violations / 32596 K_t-free
+PASS :: RAMGEN-samp t=3 n=20 :: 0 viol / 4 checked
+PASS :: RAMGEN-samp t=3 n=50 :: 0 viol / 0 checked
+PASS :: RAMGEN-samp t=3 n=100 :: 0 viol / 0 checked
+PASS :: RAMGEN-samp t=4 n=20 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=4 n=50 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=4 n=100 :: 0 viol / 3 checked
+PASS :: RAMGEN-samp t=5 n=20 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=5 n=50 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=5 n=100 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=6 n=20 :: 0 viol / 17 checked
+PASS :: RAMGEN-samp t=6 n=50 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=6 n=100 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=7 n=20 :: 0 viol / 17 checked
+PASS :: RAMGEN-samp t=7 n=50 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=7 n=100 :: 0 viol / 8 checked
+PASS :: RAMGEN-samp t=8 n=20 :: 0 viol / 17 checked
+PASS :: RAMGEN-samp t=8 n=50 :: 0 viol / 13 checked
+PASS :: RAMGEN-samp t=8 n=100 :: 0 viol / 8 checked
