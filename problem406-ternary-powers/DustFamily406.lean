@@ -165,7 +165,9 @@ the parent's family and 0 off it. -/
 theorem dustStep_filter_len {m : Nat} (j r : Nat) (hdiv : m ∣ 3^j)
     (f : Nat → Bool) (hf : ∀ x y, x % m = y % m → f x = f y) :
     ((dustStep j r).filter f).length = if f r then 2 else 0 := by
-  have hmod1 : (r + 3^j) % m = r % m := child_mod m j r 1 hdiv
+  have hmod1 : (r + 3^j) % m = r % m := by
+    have h := child_mod m j r 1 hdiv
+    rwa [Nat.one_mul] at h
   have hmod2 : (r + 2 * 3^j) % m = r % m := child_mod m j r 2 hdiv
   have hc1 : f (r + 3^j) = f r := hf _ _ hmod1
   have hc2 : f (r + 2 * 3^j) = f r := hf _ _ hmod2
@@ -175,21 +177,21 @@ theorem dustStep_filter_len {m : Nat} (j r : Nat) (hdiv : m ∣ 3^j)
     by_cases h : f r = true
     · have hc1' : f (r + 3^j) = true := by rw [hc1]; exact h
       rw [if_pos h, if_pos hc1', if_pos h]
-    · have hc1' : f (r + 3^j) = false := by rw [hc1]; exact h
+    · have hc1' : ¬(f (r + 3^j) = true) := by rw [hc1]; exact h
       rw [if_neg h, if_neg hc1', if_neg h]
   · rw [dustStep_val1 j r hd, filter_cons_two]
     by_cases h : f r = true
     · have hc2' : f (r + 2 * 3^j) = true := by rw [hc2]; exact h
       rw [if_pos h, if_pos hc2', if_pos h]
-    · have hc2' : f (r + 2 * 3^j) = false := by rw [hc2]; exact h
+    · have hc2' : ¬(f (r + 2 * 3^j) = true) := by rw [hc2]; exact h
       rw [if_neg h, if_neg hc2', if_neg h]
   · rw [dustStep_val2 j r hd, filter_cons_two]
     by_cases h : f r = true
     · have hc1' : f (r + 3^j) = true := by rw [hc1]; exact h
       have hc2' : f (r + 2 * 3^j) = true := by rw [hc2]; exact h
       rw [if_pos hc1', if_pos hc2', if_pos h]
-    · have hc1' : f (r + 3^j) = false := by rw [hc1]; exact h
-      have hc2' : f (r + 2 * 3^j) = false := by rw [hc2]; exact h
+    · have hc1' : ¬(f (r + 3^j) = true) := by rw [hc1]; exact h
+      have hc2' : ¬(f (r + 2 * 3^j) = true) := by rw [hc2]; exact h
       rw [if_neg hc1', if_neg hc2', if_neg h]
 
 /-- **THE JOIN LAW.**  The `f`-count of a joined level doubles the

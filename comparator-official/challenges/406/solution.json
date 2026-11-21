@@ -1,97 +1,127 @@
 {
- "problem": "Erdos #406",
- "solution_id": "erdos-406-caplaw-reduction-s074",
- "provenance": "S074 W75 (campaign branch, the cap-law reduction round). The war-council chain: the hTailF hypothesis's entire content is the act (every 4^K, K >= 8, owns a ternary digit 2); the act reduces to the 2-adic cap law at any explicit constant C <= 185 (Kernel 68, machine-checked); the cap law at C = 3 is the source monolith's Postulate II. The solution ledger below lists every machine-verified claim of this round; the single named open hypothesis (CAP(185), or Postulate II at C = 3) is carried explicitly by the reduction theorems.",
- "claims": [
-  {
-   "id": "S-CERT",
-   "statement": "2^84 < 3^53 (exact integers 19342813113834066795298816 < 19383245667680019896796723) -- the rational certificate 53/84 = 0.630952... > log_3(2) = 0.630929... underlying the rider squeeze",
-   "verified_by": "battery_caplaw.py A1/A2 (dual-method) + Kernel 68 two_pow_84_lt_three_pow_53 (kernel decide)"
-  },
-  {
-   "id": "S-SQUEEZE-185",
-   "statement": "62*250 = 15500 < 84*185 = 15540 < 62*251 = 15562: under CAP(185) every rider satisfies K <= 250, inside the Kernel-38 census range (2K <= 500)",
-   "verified_by": "battery_caplaw.py B1/B2 + Kernel 68 erdos406_no_riders_above_250_of_cap"
-  },
-  {
-   "id": "S-SQUEEZE-3",
-   "statement": "62*4 = 248 < 84*3 = 252 < 62*5 = 310: under Postulate II (C = 3) every rider satisfies K <= 4",
-   "verified_by": "battery_caplaw.py B3/B4 + Kernel 68 erdos406_classification_of_postulate_two"
-  },
-  {
-   "id": "S-CLASSIFICATION-CONDITIONAL",
-   "statement": "Under Postulate II the riders are exactly K in {0,1,4} (values 1, 4, 256) at every exponent; under CAP(185) + the Kernel-38 census the same classification holds. The unconditional classification follows the moment any explicit CAP(C <= 185) is proven.",
-   "verified_by": "Kernel 68 erdos406_classification_of_postulate_two (K=2,3 discharged by kernel decide: 16 = 121_3, 64 = 2101_3) + erdos406_classification_of_cap_and_census"
-  },
-  {
-   "id": "S-CENSUS-500",
-   "statement": "the challenge-surface census: noTernaryDigitTwo(2^n) = false for every n in [9, 500] (dual method), and noTernaryDigitTwo(2^0) = noTernaryDigitTwo(2^2) = noTernaryDigitTwo(2^8) = true (the witnesses 1, 4, 256; the n = 8 boundary honored)",
-   "verified_by": "battery_caplaw.py C1/C2 + F1 (deep census to 20000) + Kernel 38 erdos406_main (kernel-decided)"
-  },
-  {
-   "id": "S-DEEP-CENSUS",
-   "statement": "the deep rider census: riders in [0, 20000] are exactly {0, 1, 4}",
-   "verified_by": "battery_caplaw.py F1 (divmod first-2 scan; the dust-tree path is the structural twin)"
-  },
-  {
-   "id": "S-CAP-EMPIRICAL",
-   "statement": "the cap at C = 3 holds on all primitive Cantor n < 3^12 with the equality case n = 256 alone; the extremal curve v2*(M) <= M + 4 on [0,34] with the only kill-line touchers in history being the witnesses {0,1} (M=1) and {0,1,2,5} (M=5)",
-   "verified_by": "battery_caplaw.py D1-D3, G1/G2 + v2star_table.json (exhaustive + MITM dual methods)"
-  },
-  {
-   "id": "S-OPEN-SEAM",
-   "statement": "NAMED OPEN HYPOTHESIS (not a claim): CAP(C) at unbounded range for any explicit C -- the anti-concentration wall (the monolith's Postulate II seam). The reduction theorems deliver the complete classification the moment it falls.",
-   "verified_by": "carried explicitly by Kernel 68's hypothesis binders; hidden nowhere"
-  },
-  {
-   "id": "C406-EXTRALAWS-S076",
-   "statement": "Kernel 69 (ExtraLaws406.lean): THE FIVE NEW UNCONDITIONAL RIDER-CONSTRAINT LAWS — L1 THE HALF-LINE LAW (2n < 3^(ternaryLog3 n + 1) for every positive 0/1-ternary n; the kill form eliminates every exponent K with 3^(ternaryLog3(4^K)+1) <= 2*4^K — an infinite family), L2 THE TAIL LAW (floor(4^K/3^(K+1)) is 0/1-ternary for every rider K), L4/L5 THE MOD-9 CYCLE + NO THREE CONSECUTIVE RIDERS + THE MOD-3 GAP, THE CANTOR T2-LAW (for 0/1-ternary u not both 4u+1 and 16u+5 are 0/1-ternary), L3 THE ADJACENT-ONES KILL LAW (the digit-exact repunit no-carry engine)",
-   "verified_by": "kills.yml Kernel 69 (lake env lean, zero sorry, axiom receipts) + battery406b.py (dual-method, ALL GREEN)"
-  },
-  {
-   "id": "C406-CENSUS-1M-S076",
-   "statement": "THE CENSUS EXTENSION: no rider K in [10001, 10^6] (n = 2K in [20002, 2*10^6]) — the certified no-rider range extended from 200000 to 10^6 by the L1 half-line pre-filter (63.09% of exponents killed by magnitude arithmetic alone) + the 61-digit modular deep check (every survivor died within 61 ternary digits)",
-   "verified_by": "battery406b.py census_deep (dual-stage) + the official gate O-CHAL-1M (live re-derivation)"
-  },
-  {
-   "id": "C406-HALFLINE-RECEIPTS-S076",
-   "statement": "The three riders {0,1,4} satisfy every S076 law (half-line receipts 2, 8, 512 < 3, 9, 729; tail receipts floor(4/9)=0, floor(256/243)=1 both 0/1-ternary), and the half-line kill boundary is exact: the law kills K=6 (2*4^6 = 8192 >= 3^8 = 6561) but spares K=5 (2*4^5 = 2048 < 3^7 = 2187) — necessary, not sufficient",
-   "verified_by": "the official gate S-HALFLINE + N-HALFLINE (live arithmetic)"
-  },
-  {
-   "id": "C406-TOWER-S077",
-   "statement": "Kernel 70 (TwoAdic406.lean): THE 2-ADIC BUDGET TOWER — for every n < 3^M and every level s >= 1, n == censusSum(s,n,M) mod 2^(s+2), where the census sum is the ternary digit census weighted by the residue-class powers 3^(i mod 2^s); level s=1 recovers the mod-8 budget law (E + 3O == 0 mod 8); THE RIDER TOWER: every rider's digit census satisfies the tower at every level s with s+2 <= 2K (an infinite standing-constraint family); THE SQUARE CERTIFICATE 3^(2^s) = 1 + 2^(s+2)c with c odd; THE PERIOD TWIN 3^i mod 2^(s+2) depends only on i mod 2^s (the order law ord_{2^t}(3) = 2^(t-2)); THE PAIRING LAWS (mixed-parity pairs v2 exactly 2, same-parity exactly 1); the tower verified exhaustively on all 512 Cantor numbers < 3^9 at four levels",
-   "verified_by": "kills.yml Kernel 70 (lake env lean, zero sorry, axiom receipts) + battery406c.py (dual-method, ALL GREEN) + the official gate S-TOWER / S-TOWER-LIVE / N-TOWER (live re-derivation)"
-  },
-  {
-   "id": "C406-LX-REFUTED-S077",
-   "statement": "THE LX REFUTATION: the S076-named conjecture v2(cantor n) <= 2*popcount3(n) is FALSE — the minimal counterexample 3^0 + 3^7 + 3^8 + 3^13 = 1,603,072 = 2^9 * 3131 is 0/1-ternary with popcount 4 and v2 = 9 > 8, exactly ONE leading position past the S076 census boundary (positions < 12); the far-cap family 13 + 3^d extends it (d = 69: v2 = 11); the falsity is total at popcount 4 and every even popcount >= 4 (the 2-adic dlog of -13 in the subgroup <3> = {1,3} mod 8); the far-cap family {0,1,2,d} is hereby the standard counterexample generator for every future popcount-side conjecture",
-   "verified_by": "Kernel 70 lx_refutation_receipt + lx_refutation_far_cap (kernel decide: 2^9 | 1603072, not 2^10 |; 2^11 | 13+3^69, not 2^12 |) + battery406c.py T7 (dual method) + the official gate S-TOWER-LIVE + N-LX (live)"
-  },
-  {
-   "id": "C406-DUST-EDGE-S077",
-   "statement": "THE DUST-EDGE THEOREM (DustLaw406.lean): a dust-tree member r at level j with 4^r < 3^(j+1) is a rider outright (noTernaryTwo (4^r) = true) — the Strategist's Frame D; composed with the Kernel-38 census in noTernaryTwo form (the named bridge lane), it pins dust j intersect [0, 0.79*j) to {0,1,4} at every level — the first infinite-family anti-clustering law; verified live: the tree doubles to level 10, all 26 edge members are riders, the edge members below 100 are exactly {0,1,4}",
-   "verified_by": "kills.yml Kernel 70 (dust_edge compile + axiom receipts) + battery406c.py T9 + the official gate S-DUST-EDGE (live tree census)"
-  },
-  {
-   "id": "S-OPEN-SEAM-S077",
-   "statement": "NAMED OPEN HYPOTHESIS (not a claim — the corrected successor of the dead LX): THE ENTROPY LAW v2(n) < k*log2(e*M/k) + O(1) for 0/1-ternary n with popcount k and leading position M — at rider scale (M = 1.2619K) it peaks below 2K, killing every rider K > 12 if proven; wall-class difficulty (the 2-adic twin of the middle-digit wall). The CAP(185) seam stands unchanged; the budget tower is the census-side constraint family sharpening every future assault",
-   "verified_by": "carried explicitly by COMPLETE_PROOF.md section 11 (the S077 assault record); hidden nowhere"
-  },
-  {
-   "id": "C406-CENSUS-BRIDGE-S078",
-   "statement": "THE CENSUS BRIDGE, CLOSED (the S077-named assembly gap): the Kernel-38 census restated on the Arsenal's own verdict reader — for every even k <= 500, noTernaryTwo (2^k) = true -> k in {0,2,8}.  Engine: the verdict bridge both directions (noTernaryTwo n = true iff every ternary digit of n avoids 2) + the sharp-fuel scanner (cantorScan n k = noTernaryTwo n whenever n < 3^k — fuel = the ternary digit count, 316 covers all of 2^500; the Arsenal's own struct bridge demanded fuel >= n+1, unusable at census scale), one legal 251-element kernel-decided chunk (NO-OOM cap 501 honored)",
-   "verified_by": "kills.yml kernel7172 (AntiCluster406.lean compile + axiom receipts: noTwo_even_census, cantorScan_eq) + battery406d.py T1 (dual method) + the official gate S-CENSUS-BRIDGE (live)"
-  },
-  {
-   "id": "C406-ANTICLUSTER-S078",
-   "statement": "THE RIDER-EDGE ANTI-CLUSTERING LAW — the first infinite-family anti-clustering law: at EVERY level j, every r whose 4^r ternary digits avoid 2 through position j, with 4^r < 3^(j+1) (the edge window, r < 0.79*(j+1)) and 2r <= 500 (the census range), is one of the three known riders {0,1,4} — the dust may not cluster near the origin.  Deep level-uniform form: for every j >= 315, dust j INTERSECT [0,250] = {0,1,4}, every level, forever (the edge window covers the whole census range from level 315 on)",
-   "verified_by": "kills.yml kernel7172 (AntiCluster406.lean: rider_edge_anticluster + rider_edge_anticluster_deep compile + axiom receipts) + battery406d.py T2 (levels 0..40 x r <= 250, zero violations) + the official gate S-ANTICLUSTER (live) + N-DEEP-315 (threshold control)"
-  },
-  {
-   "id": "C406-DUST-FAMILY-S078",
-   "statement": "THE FIVE EXACT FAMILY LAWS of the dust tree (every level, forever): fam7 = 0 (no class r = 7 mod 9 ever survives — the row-2 fire as a cardinality law); fam1 = 2^(j-2) and fam4 = 2^(j-2) (the row families hold exactly half the non-tower dust, split evenly between = 1 and = 4 mod 9 — the witness family of the riders 1 and 4 and the hard family, a quarter of the tree each); tower = 2^(j-1) (the tower-sheet scaled-exponent classes exactly half); mod3two = 0 (the cut-row fire).  Engine: children of a level-j node stay in the parent's class mod 9 (j >= 2) / mod 3 (j >= 1), so every family count exactly doubles per level; base counts kernel-decided.  Assault-engine discoveries certified alongside: the shadow dust is exactly 2 classes per family with the middle-third pi-point (2*W*pi = -7/-1/+5 in Z_3) always among them; the window increment law trit_{s+1}(w_{s+1}) = trit_{s+1}(w_s) + 1 (the escalate-branch engine)",
-   "verified_by": "kills.yml kernel7172 (DustFamily406.lean: dust_fam7_zero, dust_fam1_card, dust_fam4_card, dust_tower_card, dust_mod3two_zero compile + axiom receipts) + battery406d.py T3/T4/T5 (tree A levels 1..16 all exact; shadow dust levels 4..12; increment law 15 cores x 12 sheets) + the official gate S-FAMILY (live)"
-  }
- ]
+  "problem": "Erdos #406",
+  "solution_id": "erdos-406-caplaw-reduction-s074",
+  "provenance": "S074 W75 (campaign branch, the cap-law reduction round). The war-council chain: the hTailF hypothesis's entire content is the act (every 4^K, K >= 8, owns a ternary digit 2); the act reduces to the 2-adic cap law at any explicit constant C <= 185 (Kernel 68, machine-checked); the cap law at C = 3 is the source monolith's Postulate II. The solution ledger below lists every machine-verified claim of this round; the single named open hypothesis (CAP(185), or Postulate II at C = 3) is carried explicitly by the reduction theorems.",
+  "claims": [
+    {
+      "id": "S-CERT",
+      "statement": "2^84 < 3^53 (exact integers 19342813113834066795298816 < 19383245667680019896796723) -- the rational certificate 53/84 = 0.630952... > log_3(2) = 0.630929... underlying the rider squeeze",
+      "verified_by": "battery_caplaw.py A1/A2 (dual-method) + Kernel 68 two_pow_84_lt_three_pow_53 (kernel decide)"
+    },
+    {
+      "id": "S-SQUEEZE-185",
+      "statement": "62*250 = 15500 < 84*185 = 15540 < 62*251 = 15562: under CAP(185) every rider satisfies K <= 250, inside the Kernel-38 census range (2K <= 500)",
+      "verified_by": "battery_caplaw.py B1/B2 + Kernel 68 erdos406_no_riders_above_250_of_cap"
+    },
+    {
+      "id": "S-SQUEEZE-3",
+      "statement": "62*4 = 248 < 84*3 = 252 < 62*5 = 310: under Postulate II (C = 3) every rider satisfies K <= 4",
+      "verified_by": "battery_caplaw.py B3/B4 + Kernel 68 erdos406_classification_of_postulate_two"
+    },
+    {
+      "id": "S-CLASSIFICATION-CONDITIONAL",
+      "statement": "Under Postulate II the riders are exactly K in {0,1,4} (values 1, 4, 256) at every exponent; under CAP(185) + the Kernel-38 census the same classification holds. The unconditional classification follows the moment any explicit CAP(C <= 185) is proven.",
+      "verified_by": "Kernel 68 erdos406_classification_of_postulate_two (K=2,3 discharged by kernel decide: 16 = 121_3, 64 = 2101_3) + erdos406_classification_of_cap_and_census"
+    },
+    {
+      "id": "S-CENSUS-500",
+      "statement": "the challenge-surface census: noTernaryDigitTwo(2^n) = false for every n in [9, 500] (dual method), and noTernaryDigitTwo(2^0) = noTernaryDigitTwo(2^2) = noTernaryDigitTwo(2^8) = true (the witnesses 1, 4, 256; the n = 8 boundary honored)",
+      "verified_by": "battery_caplaw.py C1/C2 + F1 (deep census to 20000) + Kernel 38 erdos406_main (kernel-decided)"
+    },
+    {
+      "id": "S-DEEP-CENSUS",
+      "statement": "the deep rider census: riders in [0, 20000] are exactly {0, 1, 4}",
+      "verified_by": "battery_caplaw.py F1 (divmod first-2 scan; the dust-tree path is the structural twin)"
+    },
+    {
+      "id": "S-CAP-EMPIRICAL",
+      "statement": "the cap at C = 3 holds on all primitive Cantor n < 3^12 with the equality case n = 256 alone; the extremal curve v2*(M) <= M + 4 on [0,34] with the only kill-line touchers in history being the witnesses {0,1} (M=1) and {0,1,2,5} (M=5)",
+      "verified_by": "battery_caplaw.py D1-D3, G1/G2 + v2star_table.json (exhaustive + MITM dual methods)"
+    },
+    {
+      "id": "S-OPEN-SEAM",
+      "statement": "NAMED OPEN HYPOTHESIS (not a claim): CAP(C) at unbounded range for any explicit C -- the anti-concentration wall (the monolith's Postulate II seam). The reduction theorems deliver the complete classification the moment it falls.",
+      "verified_by": "carried explicitly by Kernel 68's hypothesis binders; hidden nowhere"
+    },
+    {
+      "id": "C406-EXTRALAWS-S076",
+      "statement": "Kernel 69 (ExtraLaws406.lean): THE FIVE NEW UNCONDITIONAL RIDER-CONSTRAINT LAWS — L1 THE HALF-LINE LAW (2n < 3^(ternaryLog3 n + 1) for every positive 0/1-ternary n; the kill form eliminates every exponent K with 3^(ternaryLog3(4^K)+1) <= 2*4^K — an infinite family), L2 THE TAIL LAW (floor(4^K/3^(K+1)) is 0/1-ternary for every rider K), L4/L5 THE MOD-9 CYCLE + NO THREE CONSECUTIVE RIDERS + THE MOD-3 GAP, THE CANTOR T2-LAW (for 0/1-ternary u not both 4u+1 and 16u+5 are 0/1-ternary), L3 THE ADJACENT-ONES KILL LAW (the digit-exact repunit no-carry engine)",
+      "verified_by": "kills.yml Kernel 69 (lake env lean, zero sorry, axiom receipts) + battery406b.py (dual-method, ALL GREEN)"
+    },
+    {
+      "id": "C406-CENSUS-1M-S076",
+      "statement": "THE CENSUS EXTENSION: no rider K in [10001, 10^6] (n = 2K in [20002, 2*10^6]) — the certified no-rider range extended from 200000 to 10^6 by the L1 half-line pre-filter (63.09% of exponents killed by magnitude arithmetic alone) + the 61-digit modular deep check (every survivor died within 61 ternary digits)",
+      "verified_by": "battery406b.py census_deep (dual-stage) + the official gate O-CHAL-1M (live re-derivation)"
+    },
+    {
+      "id": "C406-HALFLINE-RECEIPTS-S076",
+      "statement": "The three riders {0,1,4} satisfy every S076 law (half-line receipts 2, 8, 512 < 3, 9, 729; tail receipts floor(4/9)=0, floor(256/243)=1 both 0/1-ternary), and the half-line kill boundary is exact: the law kills K=6 (2*4^6 = 8192 >= 3^8 = 6561) but spares K=5 (2*4^5 = 2048 < 3^7 = 2187) — necessary, not sufficient",
+      "verified_by": "the official gate S-HALFLINE + N-HALFLINE (live arithmetic)"
+    },
+    {
+      "id": "C406-TOWER-S077",
+      "statement": "Kernel 70 (TwoAdic406.lean): THE 2-ADIC BUDGET TOWER — for every n < 3^M and every level s >= 1, n == censusSum(s,n,M) mod 2^(s+2), where the census sum is the ternary digit census weighted by the residue-class powers 3^(i mod 2^s); level s=1 recovers the mod-8 budget law (E + 3O == 0 mod 8); THE RIDER TOWER: every rider's digit census satisfies the tower at every level s with s+2 <= 2K (an infinite standing-constraint family); THE SQUARE CERTIFICATE 3^(2^s) = 1 + 2^(s+2)c with c odd; THE PERIOD TWIN 3^i mod 2^(s+2) depends only on i mod 2^s (the order law ord_{2^t}(3) = 2^(t-2)); THE PAIRING LAWS (mixed-parity pairs v2 exactly 2, same-parity exactly 1); the tower verified exhaustively on all 512 Cantor numbers < 3^9 at four levels",
+      "verified_by": "kills.yml Kernel 70 (lake env lean, zero sorry, axiom receipts) + battery406c.py (dual-method, ALL GREEN) + the official gate S-TOWER / S-TOWER-LIVE / N-TOWER (live re-derivation)"
+    },
+    {
+      "id": "C406-LX-REFUTED-S077",
+      "statement": "THE LX REFUTATION: the S076-named conjecture v2(cantor n) <= 2*popcount3(n) is FALSE — the minimal counterexample 3^0 + 3^7 + 3^8 + 3^13 = 1,603,072 = 2^9 * 3131 is 0/1-ternary with popcount 4 and v2 = 9 > 8, exactly ONE leading position past the S076 census boundary (positions < 12); the far-cap family 13 + 3^d extends it (d = 69: v2 = 11); the falsity is total at popcount 4 and every even popcount >= 4 (the 2-adic dlog of -13 in the subgroup <3> = {1,3} mod 8); the far-cap family {0,1,2,d} is hereby the standard counterexample generator for every future popcount-side conjecture",
+      "verified_by": "Kernel 70 lx_refutation_receipt + lx_refutation_far_cap (kernel decide: 2^9 | 1603072, not 2^10 |; 2^11 | 13+3^69, not 2^12 |) + battery406c.py T7 (dual method) + the official gate S-TOWER-LIVE + N-LX (live)"
+    },
+    {
+      "id": "C406-DUST-EDGE-S077",
+      "statement": "THE DUST-EDGE THEOREM (DustLaw406.lean): a dust-tree member r at level j with 4^r < 3^(j+1) is a rider outright (noTernaryTwo (4^r) = true) — the Strategist's Frame D; composed with the Kernel-38 census in noTernaryTwo form (the named bridge lane), it pins dust j intersect [0, 0.79*j) to {0,1,4} at every level — the first infinite-family anti-clustering law; verified live: the tree doubles to level 10, all 26 edge members are riders, the edge members below 100 are exactly {0,1,4}",
+      "verified_by": "kills.yml Kernel 70 (dust_edge compile + axiom receipts) + battery406c.py T9 + the official gate S-DUST-EDGE (live tree census)"
+    },
+    {
+      "id": "S-OPEN-SEAM-S077",
+      "statement": "NAMED OPEN HYPOTHESIS (not a claim — the corrected successor of the dead LX): THE ENTROPY LAW v2(n) < k*log2(e*M/k) + O(1) for 0/1-ternary n with popcount k and leading position M — at rider scale (M = 1.2619K) it peaks below 2K, killing every rider K > 12 if proven; wall-class difficulty (the 2-adic twin of the middle-digit wall). The CAP(185) seam stands unchanged; the budget tower is the census-side constraint family sharpening every future assault",
+      "verified_by": "carried explicitly by COMPLETE_PROOF.md section 11 (the S077 assault record); hidden nowhere"
+    },
+    {
+      "id": "C406-CENSUS-BRIDGE-S078",
+      "statement": "THE CENSUS BRIDGE, CLOSED (the S077-named assembly gap): the Kernel-38 census restated on the Arsenal's own verdict reader — for every even k <= 500, noTernaryTwo (2^k) = true -> k in {0,2,8}.  Engine: the verdict bridge both directions (noTernaryTwo n = true iff every ternary digit of n avoids 2) + the sharp-fuel scanner (cantorScan n k = noTernaryTwo n whenever n < 3^k — fuel = the ternary digit count, 316 covers all of 2^500; the Arsenal's own struct bridge demanded fuel >= n+1, unusable at census scale), one legal 251-element kernel-decided chunk (NO-OOM cap 501 honored)",
+      "verified_by": "kills.yml kernel7172 (AntiCluster406.lean compile + axiom receipts: noTwo_even_census, cantorScan_eq) + battery406d.py T1 (dual method) + the official gate S-CENSUS-BRIDGE (live)"
+    },
+    {
+      "id": "C406-ANTICLUSTER-S078",
+      "statement": "THE RIDER-EDGE ANTI-CLUSTERING LAW — the first infinite-family anti-clustering law: at EVERY level j, every r whose 4^r ternary digits avoid 2 through position j, with 4^r < 3^(j+1) (the edge window, r < 0.79*(j+1)) and 2r <= 500 (the census range), is one of the three known riders {0,1,4} — the dust may not cluster near the origin.  Deep level-uniform form: for every j >= 315, dust j INTERSECT [0,250] = {0,1,4}, every level, forever (the edge window covers the whole census range from level 315 on)",
+      "verified_by": "kills.yml kernel7172 (AntiCluster406.lean: rider_edge_anticluster + rider_edge_anticluster_deep compile + axiom receipts) + battery406d.py T2 (levels 0..40 x r <= 250, zero violations) + the official gate S-ANTICLUSTER (live) + N-DEEP-315 (threshold control)"
+    },
+    {
+      "id": "C406-DUST-FAMILY-S078",
+      "statement": "THE FIVE EXACT FAMILY LAWS of the dust tree (every level, forever): fam7 = 0 (no class r = 7 mod 9 ever survives — the row-2 fire as a cardinality law); fam1 = 2^(j-2) and fam4 = 2^(j-2) (the row families hold exactly half the non-tower dust, split evenly between = 1 and = 4 mod 9 — the witness family of the riders 1 and 4 and the hard family, a quarter of the tree each); tower = 2^(j-1) (the tower-sheet scaled-exponent classes exactly half); mod3two = 0 (the cut-row fire).  Engine: children of a level-j node stay in the parent's class mod 9 (j >= 2) / mod 3 (j >= 1), so every family count exactly doubles per level; base counts kernel-decided.  Assault-engine discoveries certified alongside: the shadow dust is exactly 2 classes per family with the middle-third pi-point (2*W*pi = -7/-1/+5 in Z_3) always among them; the window increment law trit_{s+1}(w_{s+1}) = trit_{s+1}(w_s) + 1 (the escalate-branch engine)",
+      "verified_by": "kills.yml kernel7172 (DustFamily406.lean: dust_fam7_zero, dust_fam1_card, dust_fam4_card, dust_tower_card, dust_mod3two_zero compile + axiom receipts) + battery406d.py T3/T4/T5 (tree A levels 1..16 all exact; shadow dust levels 4..12; increment law 15 cores x 12 sheets) + the official gate S-FAMILY (live)"
+    },
+    {
+      "id": "C406-SECONDDIGIT-S079",
+      "statement": "THE CUT RESIDUE + SECOND-DIGIT LAW (BlockLaw406.lean, Kernel 73): for every valuation cut v and multiplier u, 4^(3^v*u) % 3^(v+2) = 1 + (u%3)*3^(v+1) EXACTLY; consequently every rider K = 3^v*u (u = 1 mod 3) owns digit 0 = 1, digits 1..v = 0, digit v+1 = 1 — the second-lowest set digit of every rider IS v3(K)+1, the LTE valuation law read as a digit law.",
+      "verified_by": "kills.yml kernel73 (BlockLaw406.lean compile + axiom receipts) + battery406e.py T1/T6 + the comparator S-SECONDDIGIT live check"
+    },
+    {
+      "id": "C406-WINDOWLAW-S079",
+      "statement": "THE WINDOW LAW PORTED (diagonal_window_law in the campaign kernel): for every v u and every j <= v, digit3(4^(3^v*u))(v+1+j) = digit3(u*lteCoeff v)(j) — the digit stream of the power in the band v+1..2v+1 IS the trit stream of u*lteCoeff v, every scale at once, self-contained on the campaign Arsenal.",
+      "verified_by": "kills.yml kernel73 (compile + receipts) + battery406e.py T2 + the comparator S-WINDOWLAW live dual-method check"
+    },
+    {
+      "id": "C406-KILLTRIT-S079",
+      "statement": "THE EXPONENT-TRIT KILLING LAW + THE WHEEL (pow4_killing_trit, maximally general, no hypotheses): digit3(4^(r+t*3^j))(j+1) = (digit3(4^r)(j+1)+t)%3 for every r t j — the exponent trit ADDS to the payload digit; and exactly one of the three dust lifts fires (wheel_fire_exists + wheel_fire_unique) — the dust tree is a full binary tree, the master dynamics.",
+      "verified_by": "kills.yml kernel73 (compile + receipts) + battery406e.py T3/T7 + the comparator S-KILLTRIT live check"
+    },
+    {
+      "id": "C406-FIRELADDER45-S079",
+      "statement": "THE FIRE LADDER EXTENDED TO LEVELS 4 AND 5 (window_fire_level4/5): every u in {16,31,61,76,124,139,169,184} mod 243 fires its digit two at row v+5 for ALL v >= 4 (frozen coefficient 178 mod 243), and every u in {58,103,193,205,238,250,340,385,463,508,529,574,598,643,664,709} mod 729 fires at row v+6 for ALL v >= 5 (frozen coefficient 664 mod 729) — with three NEW uniform witnesses: 4^1296 = 4^(3^4*16) fires at row 9, 4^14094 = 4^(3^5*58) fires at row 11, 4^42282 = 4^(3^6*58) fires at row 12, no bounded decide.",
+      "verified_by": "kills.yml kernel73 (compile + receipts) + battery406e.py T4/T9 + the comparator S-FIRE45 live check (families + witnesses verified live big-int)"
+    },
+    {
+      "id": "C406-BLOCKAUTOPSY-S079",
+      "statement": "THE STRATEGIC AUTOPSY (where the window dust dies): at valuation cut v = 4, of the 32 window-dust cores exactly 28 die INSIDE BLOCK 2 (rows 2v+2..3v+2 = 10..14), 4 die later (u = 7 at row 21, 331 at 15, 400 at 20, 463 at 16), ZERO riders; at v = 5, of 64 cores exactly 62 die inside block 2, 2 later (400 at row 20, 1030 at 19), ZERO riders. The second block of the binomial tower is the executioner of the window dust.",
+      "verified_by": "battery406e.py T10 (the full enumeration, dual fire-scan) + the comparator S-BLOCKAUTOPSY live check + battery406e.py exit 0"
+    },
+    {
+      "id": "S-OPEN-SEAM-S079",
+      "statement": "NAMED OPEN HYPOTHESIS (not a claim — the honest boundary, BOSS law: no dressing): the CAP(185) seam stands. The block decomposition now reads the payload band-by-band (window law at band 1, the block-2 coefficient stream at band 2), and the autopsy shows block 2 kills 28/32 and 62/64 of the window-dust cores — but the block tower is infinite and the middle blocks (block 3 and beyond) are the named next lane. The kill chain remains CAP(185) alone (everything else green).",
+      "verified_by": "the honest boundary discipline (THE_CORE); no verification applicable — named, not claimed"
+    }
+  ]
 }

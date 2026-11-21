@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T09:22:01
+OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T14:44:18
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-406-ternary-powers
-Claims in solution ledger: 18
+Claims in solution ledger: 24
 ==============================================================================
 [PASS] (official) O-CHAL-500 — verbatim Challenge.lean noTernaryDigitTwo twin: 2^n owns a ternary digit 2 for every n in [9,500] (dual-method: recursion + subtraction scan)
 [PASS] (official) O-WITNESSES — the corpus's three examples hold: 1, 4 = 1+3, 256 = 1+3+9+243 (n = 0, 2, 8 -- below the statement's floor 9, exactly as the addendum says)
@@ -22,6 +22,11 @@ Claims in solution ledger: 18
 [PASS] (solution) S-CENSUS-BRIDGE — S078 the census bridge live: dual-method even census (divmod + array) — the only even k <= 500 with 2^k 0/1-ternary are {0,2,8}; AntiCluster406.lean symbols present (verdict bridge both directions, sharp-fuel scanner, even census in verdict form, the anti-clustering law and its deep form)
 [PASS] (solution) S-ANTICLUSTER — S078 the rider-edge anti-clustering law live: for every level j in [0,20] and r <= 250 with 4^r < 3^(j+1), surviving the level-j digit test forces r in {0,1,4} — the first infinite-family anti-clustering law; battery406d.py ALL GREEN (dual-method even census, anti-clustering, family laws to level 16, shadow dust + pi-points, window increment)
 [PASS] (solution) S-FAMILY — S078 the five exact family laws live: tree A to level 12 — fam1 = 2^(j-2), fam4 = 2^(j-2), fam7 = 0, tower = 2^(j-1), mod3two = 0 at every level; DustFamily406.lean symbols present
+[PASS] (solution) S-SECONDDIGIT — S079 the cut residue + second-digit law live: 4^(3^v*u) % 3^(v+2) = 1 + (u%3)*3^(v+1) on v<=6 x u<30; riders 1,4 carry digit 0 = 1, digits 1..v = 0, digit v+1 = 1; BlockLaw406.lean symbols present
+[PASS] (solution) S-WINDOWLAW — S079 the window law live (dual-method): digit3(4^(3^v*u), v+1+j) = digit3(u*lteCoeff v, j) for every j <= v, v <= 6, u < 25; kernel symbol present
+[PASS] (solution) S-KILLTRIT — S079 the killing-trit law + the wheel live: digit3(4^(r+t*3^j), j+1) = (digit3(4^r,j+1)+t)%3 on j<=6 x r<40 x t<3, and exactly one of the three lifts fires at every node; kernel symbols present
+[PASS] (solution) S-FIRE45 — S079 the fire ladder levels 4+5 live: the 8 residues mod 243 (coeff 178) and 16 residues mod 729 (coeff 664) fire their trits at every cut; the uniform witnesses 4^1296 (row 9), 4^14094 (row 11), 4^42282 (row 12) verified live; kernel symbols present
+[PASS] (solution) S-BLOCKAUTOPSY — S079 the strategic autopsy live: at cut v=4 exactly 32 window-dust cores, 28 die inside block 2, zero riders; at v=5 exactly 64 cores, 62 die inside block 2, zero riders; battery406e.py exits 0 (52/52)
 [PASS] (control) N-CERT — corruption rejected: 2^84 >= 3^53 is FALSE (the squeeze certificate cannot be inverted)
 [PASS] (control) N-BOUNDARY-185 — corruption rejected: 62*251 < 84*185 is FALSE (C=185 does NOT reach K=251 -- the census boundary is exactly tight)
 [PASS] (control) N-FAKE-RIDER — corruption rejected: 2^10 = 1024 = 1101221_3 is NOT a witness (the fourth rider does not exist below 2^40000)
@@ -31,7 +36,9 @@ Claims in solution ledger: 18
 [PASS] (control) N-HALFLINE — corruption rejected: the half-line law kills K=6 (2*4^6=8192 >= 3^8=6561) but NOT K=5 (2*4^5=2048 < 3^7=2187) -- the law is necessary, not sufficient; K=5 dies by digits, not magnitude
 [PASS] (control) N-LX — corruption rejected: the LX popcount-cap conjecture (v2 <= 2*popcount3) is FALSE — 1603072 = 3^0+3^7+3^8+3^13 is 0/1-ternary with popcount 4 and v2 = 9 > 8; any ledger still carrying LX as a claim is corrupt (the S077 refutation, one position past the S076 census boundary)
 [PASS] (control) N-TOWER — corruption rejected: the tower is an identity (n == census mod 2^(s+2)), not a zero-law — 4 = 3^0+3^1 has census 1+3 = 4 != 0 mod 8 (only RIDERS force census == 0, via n == 0 in the window)
+[PASS] (control) N-BLOCKLAW — corruption rejected: the frozen diagonal's coefficient is 178 mod 243 (all 8 level-4 fire residues burn) — the corrupted coefficient 179 breaks the family
+[PASS] (control) N-WITNESS-ROW — corruption rejected: the uniform witness 4^1296 fires at row 9 EXACTLY (the level-4 law's prediction v+1+4 = 9) — a receipt claiming row 10 is FALSE
 ==============================================================================
-CHECKS: 25/25 passed (official=4, solution=12, controls=9)
-WALL: 34.94s
+CHECKS: 32/32 passed (official=4, solution=17, controls=11)
+WALL: 35.82s
 VERDICT: YOUR SOLUTION IS OKAY

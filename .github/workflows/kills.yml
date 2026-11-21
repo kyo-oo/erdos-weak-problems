@@ -1059,6 +1059,31 @@ jobs:
           python3 problem406-ternary-powers/battery406d.py
           echo ERDOS406_ANTICLUSTER_KERNEL_GREEN=1
           echo ERDOS406_DUSTFAMILY_KERNEL_GREEN=1
+      - name: "Kernel 73 - Erdos 406 THE BLOCK-LAW KERNEL (S079, BOSS order 'crack the hTailF hypothesis completely — full proof, my laws only'): THE TOWER IDENTITY (4^(3^v) = 1 + 3^(v+1)*lteCoeff v, division-free cube recursion, the green TailLTE engine ported self-contained) + lteCoeff_mod3_one (the coefficient is 1 mod 3 — the wheel's engine) + pow4_scaled_mod_next (every multiple of the scale is 1 mod the next cut) + THE CUT RESIDUE (pow4_cut_residue_exact: 4^(3^v*u) % 3^(v+2) = 1 + (u%3)*3^(v+1) EXACTLY — the first two nonzero digits of every tower power are 1 and u%3) + THE SECOND-DIGIT LAW (rider_second_digit_residue: every rider K = 3^v*u owns digit 0 = 1, digits 1..v = 0, digit v+1 = 1 — the second-lowest set digit of every rider IS v3(K)+1, the LTE valuation law read as a digit law) + THE WINDOW LAW (diagonal_window_law: digit3(4^(3^v*u))(v+1+j) = digit3(u*lteCoeff v)(j) for every j <= v — the digit stream of the power in the band v+1..2v+1 IS the trit stream of u*lteCoeff v, every scale at once) + THE FIRE LADDER LEVELS 1-5 (window_fire_level1/2/3 = the green Diagonal Read families; LEVEL 4 NEW: u in {16,31,61,76,124,139,169,184} mod 243 fires at row v+5 for ALL v >= 4; LEVEL 5 NEW: u in {58,103,193,205,238,250,340,385,463,508,529,574,598,643,664,709} mod 729 fires at row v+6 for ALL v >= 5 — with the frozen diagonal receipts lteCoeff_mod243 = 178 and lteCoeff_mod729 = 664) + THREE NEW UNIFORM WITNESSES (4^1296 = 4^(3^4*16) fires at row 9; 4^14094 = 4^(3^5*58) fires at row 11; 4^42282 = 4^(3^6*58) fires at row 12 — no bounded decide, the uniform law alone) + THE EXPONENT-TRIT KILLING LAW (pow4_killing_trit, maximally general, no hypotheses: digit3(4^(r+t*3^j))(j+1) = (digit3(4^r)(j+1)+t)%3 — the exponent trit ADDS to the payload digit, the master dynamics) + THE WHEEL (wheel_fire_exists + wheel_fire_unique: exactly one of the three dust lifts fires — the dust tree is a full binary tree) + battery406e.py 52/52 ALL GREEN (the cut residue, the window, the killing trit, the fire ladder 1-5, the frozen diagonal, the second-digit law on riders, the wheel, both dust trees, the three witnesses, the strategic autopsy: at cut v=4 of 32 cores 28 die inside block 2; at v=5 of 64 cores 62 die inside block 2; ZERO riders)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel73.log
+          lake env lean problem406-ternary-powers/BlockLaw406.lean 2>&1 | tee -a kernel73.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel73.log
+          grep -F "ERDOS406_BLOCKLAW_KERNEL_GREEN" kernel73.log
+          grep -E "pow4_cut_residue_exact' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "rider_second_digit_residue' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "diagonal_window_law' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "window_fire_level4' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "window_fire_level5' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "pow4_killing_trit' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "wheel_fire_exists' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "wheel_fire_unique' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "fire_1296_row_nine' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "fire_14094_row_eleven' (does not depend on any axioms|depends on axioms)" kernel73.log
+          grep -E "fire_42282_row_twelve' (does not depend on any axioms|depends on axioms)" kernel73.log
+          python3 problem406-ternary-powers/battery406e.py
+          echo ERDOS406_BLOCKLAW_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash

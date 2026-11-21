@@ -32,6 +32,9 @@ EXTRA_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
                             "ExtraLaws406.lean")
 BATTERY_C = os.path.join(CAMP, "problem406-ternary-powers", "battery406c.py")
 BATTERY_D = os.path.join(CAMP, "problem406-ternary-powers", "battery406d.py")
+BATTERY_E = os.path.join(CAMP, "problem406-ternary-powers", "battery406e.py")
+BLOCKLAW_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
+                               "BlockLaw406.lean")
 ANTICLUSTER_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
                                   "AntiCluster406.lean")
 DUSTFAMILY_KERNEL = os.path.join(CAMP, "problem406-ternary-powers",
@@ -466,6 +469,211 @@ def run_solution_checks(challenge, solution):
         "S078 the five exact family laws live: tree A to level 12 — fam1 = 2^(j-2), fam4 = 2^(j-2), fam7 = 0, tower = 2^(j-1), mod3two = 0 at every level; DustFamily406.lean symbols present",
         fam_ok, "; ".join(fam_detail[-6:]) or "all levels exact",
         time.time() - t0))
+
+    # S-SECONDDIGIT (S079): the cut-residue / second-digit law, live.
+    t0 = time.time()
+    sd_ok = True
+    sd_detail = []
+    for v in range(0, 7):
+        for u in range(1, 30):
+            lhs = (4 ** (3 ** v * u)) % (3 ** (v + 2))
+            rhs = 1 + (u % 3) * (3 ** (v + 1))
+            if lhs != rhs:
+                sd_ok = False
+                sd_detail.append(f"v={v} u={u}: {lhs} != {rhs}")
+                break
+        if not sd_ok:
+            break
+    # rider form on the true riders 1 and 4
+    for K in (1, 4):
+        vv = 0
+        kk = K
+        while kk % 3 == 0:
+            kk //= 3
+            vv += 1
+        n = 4 ** K
+        dig0 = n % 3
+        digv1 = (n // 3 ** (vv + 1)) % 3
+        mids = all((n // 3 ** j) % 3 == 0 for j in range(1, vv + 1))
+        if not (dig0 == 1 and mids and digv1 == 1):
+            sd_ok = False
+            sd_detail.append(f"rider K={K} shape fails")
+    try:
+        kb = open(BLOCKLAW_KERNEL, encoding="utf-8").read()
+        sd_ok = sd_ok and all(sym in kb for sym in (
+            "theorem pow4_cut_residue_exact",
+            "theorem rider_second_digit_residue"))
+    except Exception as e:
+        sd_ok = False
+        sd_detail.append(repr(e))
+    checks.append(_chk(
+        "S-SECONDDIGIT",
+        "S079 the cut residue + second-digit law live: 4^(3^v*u) % 3^(v+2) = 1 + (u%3)*3^(v+1) on v<=6 x u<30; riders 1,4 carry digit 0 = 1, digits 1..v = 0, digit v+1 = 1; BlockLaw406.lean symbols present",
+        sd_ok, "; ".join(sd_detail[-4:]) or "all residues exact",
+        time.time() - t0))
+
+    # S-WINDOWLAW (S079): the window law, live dual-method.
+    t0 = time.time()
+    wl_ok = True
+    wl_detail = []
+    for v in range(0, 7):
+        cv = (4 ** (3 ** v) - 1) // (3 ** (v + 1))
+        for u in range(1, 25):
+            n = 4 ** (3 ** v * u)
+            for j in range(0, v + 1):
+                a = (n // 3 ** (v + 1 + j)) % 3
+                b = (u * cv // 3 ** j) % 3
+                if a != b:
+                    wl_ok = False
+                    wl_detail.append(
+                        f"v={v} u={u} j={j}: {a} != {b}")
+                    break
+            if not wl_ok:
+                break
+        if not wl_ok:
+            break
+    try:
+        kb = open(BLOCKLAW_KERNEL, encoding="utf-8").read()
+        wl_ok = wl_ok and "theorem diagonal_window_law" in kb
+    except Exception as e:
+        wl_ok = False
+        wl_detail.append(repr(e))
+    checks.append(_chk(
+        "S-WINDOWLAW",
+        "S079 the window law live (dual-method): digit3(4^(3^v*u), v+1+j) = digit3(u*lteCoeff v, j) for every j <= v, v <= 6, u < 25; kernel symbol present",
+        wl_ok, "; ".join(wl_detail[-4:]) or "all bands read exactly",
+        time.time() - t0))
+
+    # S-KILLTRIT (S079): the exponent-trit killing law + the wheel, live.
+    t0 = time.time()
+    kt_ok = True
+    kt_detail = []
+    for j in range(0, 7):
+        for r in range(0, 40):
+            d = (4 ** r // 3 ** (j + 1)) % 3
+            for t in (0, 1, 2):
+                a = (4 ** (r + t * 3 ** j) // 3 ** (j + 1)) % 3
+                if a != (d + t) % 3:
+                    kt_ok = False
+                    kt_detail.append(
+                        f"r={r} t={t} j={j}: {a} != {(d+t)%3}")
+                fires = sum(1 for tt in (0, 1, 2)
+                            if (4 ** (r + tt * 3 ** j)
+                                // 3 ** (j + 1)) % 3 == 2)
+                if fires != 1:
+                    kt_ok = False
+                    kt_detail.append(
+                        f"wheel r={r} j={j}: {fires} fires")
+    try:
+        kb = open(BLOCKLAW_KERNEL, encoding="utf-8").read()
+        kt_ok = kt_ok and all(sym in kb for sym in (
+            "theorem pow4_killing_trit", "theorem wheel_fire_exists",
+            "theorem wheel_fire_unique"))
+    except Exception as e:
+        kt_ok = False
+        kt_detail.append(repr(e))
+    checks.append(_chk(
+        "S-KILLTRIT",
+        "S079 the killing-trit law + the wheel live: digit3(4^(r+t*3^j), j+1) = (digit3(4^r,j+1)+t)%3 on j<=6 x r<40 x t<3, and exactly one of the three lifts fires at every node; kernel symbols present",
+        kt_ok, "; ".join(kt_detail[-4:]) or "the master dynamics hold + the wheel is exact",
+        time.time() - t0))
+
+    # S-FIRE45 (S079): the fire ladder levels 4 and 5, live.
+    t0 = time.time()
+    f45_ok = True
+    f45_detail = []
+    F4 = (16, 31, 61, 76, 124, 139, 169, 184)
+    F5 = (58, 103, 193, 205, 238, 250, 340, 385, 463, 508, 529,
+          574, 598, 643, 664, 709)
+    for v in (4, 5, 6):
+        cv = (4 ** (3 ** v) - 1) // (3 ** (v + 1))
+        if cv % 243 != 178:
+            f45_ok = False
+            f45_detail.append(f"c_{v} % 243 = {cv % 243} != 178")
+    for r in F4:
+        if ((r * 178) % 243) // 81 != 2:
+            f45_ok = False
+            f45_detail.append(f"F4 residue {r} does not fire")
+    cv5 = (4 ** (3 ** 5) - 1) // (3 ** 6)
+    if cv5 % 729 != 664:
+        f45_ok = False
+        f45_detail.append(f"c_5 % 729 = {cv5 % 729} != 664")
+    for r in F5:
+        if ((r * 664) % 729) // 243 != 2:
+            f45_ok = False
+            f45_detail.append(f"F5 residue {r} does not fire")
+    # the three uniform witnesses, live big-int verification
+    for K, row in ((1296, 9), (14094, 11), (42282, 12)):
+        d = (4 ** K // 3 ** row) % 3
+        if d != 2:
+            f45_ok = False
+            f45_detail.append(f"witness 4^{K} row {row}: {d} != 2")
+    try:
+        kb = open(BLOCKLAW_KERNEL, encoding="utf-8").read()
+        f45_ok = f45_ok and all(sym in kb for sym in (
+            "theorem window_fire_level4", "theorem window_fire_level5",
+            "theorem fire_1296_row_nine",
+            "theorem fire_14094_row_eleven",
+            "theorem fire_42282_row_twelve"))
+    except Exception as e:
+        f45_ok = False
+        f45_detail.append(repr(e))
+    checks.append(_chk(
+        "S-FIRE45",
+        "S079 the fire ladder levels 4+5 live: the 8 residues mod 243 (coeff 178) and 16 residues mod 729 (coeff 664) fire their trits at every cut; the uniform witnesses 4^1296 (row 9), 4^14094 (row 11), 4^42282 (row 12) verified live; kernel symbols present",
+        f45_ok, "; ".join(f45_detail[-4:]) or "both families burn at every cut",
+        time.time() - t0))
+
+    # S-BLOCKAUTOPSY (S079): the strategic autopsy + the battery exit.
+    t0 = time.time()
+    ba_ok = True
+    ba_detail = []
+    for v, n_exp, b2_exp in ((4, 32, 28), (5, 64, 62)):
+        c = (4 ** (3 ** v) - 1) // (3 ** (v + 1))
+        mod = 3 ** (v + 1)
+        base = [u for u in range(mod)
+                if u % 3 == 1
+                and all(((u * c) // 3 ** jj) % 3 != 2
+                        for jj in range(v + 1))]
+        cores = sorted(set(base + [u + mod for u in base]))
+        in_b2 = 0
+        riders = 0
+        for u in cores:
+            K = 3 ** v * u
+            n = 4 ** K
+            fire = None
+            p = 0
+            while 3 ** p <= n:
+                if (n // 3 ** p) % 3 == 2:
+                    fire = p
+                    break
+                p += 1
+            if fire is None:
+                riders += 1
+            elif 2 * v + 2 <= fire <= 3 * v + 2:
+                in_b2 += 1
+        if not (len(cores) == n_exp and in_b2 == b2_exp
+                and riders == 0):
+            ba_ok = False
+            ba_detail.append(
+                f"v={v}: cores={len(cores)} b2={in_b2} "
+                f"riders={riders} != {n_exp}/{b2_exp}/0")
+    try:
+        res = subprocess.run(
+            ["python3", BATTERY_E], capture_output=True,
+            text=True, timeout=600)
+        if res.returncode != 0:
+            ba_ok = False
+            ba_detail.append("battery406e.py FAILED")
+    except Exception as e:
+        ba_ok = False
+        ba_detail.append(repr(e))
+    checks.append(_chk(
+        "S-BLOCKAUTOPSY",
+        "S079 the strategic autopsy live: at cut v=4 exactly 32 window-dust cores, 28 die inside block 2, zero riders; at v=5 exactly 64 cores, 62 die inside block 2, zero riders; battery406e.py exits 0 (52/52)",
+        ba_ok, "; ".join(ba_detail[-4:]) or "the block-2 band is the executioner",
+        time.time() - t0))
+
     return checks
 
 
@@ -562,6 +770,34 @@ def run_negative_controls(challenge, solution):
         "N-TOWER",
         "corruption rejected: the tower is an identity (n == census mod 2^(s+2)), not a zero-law — 4 = 3^0+3^1 has census 1+3 = 4 != 0 mod 8 (only RIDERS force census == 0, via n == 0 in the window)",
         ok, f"census(4) mod 8 = {census_bad}; 4 mod 8 = {n_bad % 8} (equal, nonzero)",
+        time.time() - t0))
+
+    # N-BLOCKLAW (S079): the corrupted frozen diagonal must be rejected —
+    # the level-4 fire family rides the coefficient 178 mod 243; a
+    # corrupted coefficient 179 breaks the family.
+    t0 = time.time()
+    true_fires = sum(1 for r in (16, 31, 61, 76, 124, 139, 169, 184)
+                     if ((r * 178) % 243) // 81 == 2)
+    fake_fires = sum(1 for r in (16, 31, 61, 76, 124, 139, 169, 184)
+                     if ((r * 179) % 243) // 81 == 2)
+    ok = (true_fires == 8) and (fake_fires < 8)
+    checks.append(_chk(
+        "N-BLOCKLAW",
+        "corruption rejected: the frozen diagonal's coefficient is 178 mod 243 (all 8 level-4 fire residues burn) — the corrupted coefficient 179 breaks the family",
+        ok, f"true coeff: {true_fires}/8 fire; corrupted 179: {fake_fires}/8 fire",
+        time.time() - t0))
+
+    # N-WITNESS-ROW (S079): the corrupted witness row must be rejected —
+    # 4^1296 fires at row 9 (the uniform level-4 law), NOT at row 10.
+    t0 = time.time()
+    n_w = 4 ** 1296
+    row9 = (n_w // 3 ** 9) % 3
+    row10 = (n_w // 3 ** 10) % 3
+    ok = (row9 == 2) and (row10 != 2)
+    checks.append(_chk(
+        "N-WITNESS-ROW",
+        "corruption rejected: the uniform witness 4^1296 fires at row 9 EXACTLY (the level-4 law's prediction v+1+4 = 9) — a receipt claiming row 10 is FALSE",
+        ok, f"row 9 digit = {row9} (fires); row 10 digit = {row10}",
         time.time() - t0))
     return checks
 
