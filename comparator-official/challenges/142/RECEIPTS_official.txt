@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #142 — 2026-11-21T13:10:46
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-21T14:25:32
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-142-rk-asymptotic
-Claims in solution ledger: 14
+Claims in solution ledger: 17
 ==============================================================================
 [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cap_set module (verbatim cells 2/6/8/12/14) imports and its own asserts hold (512 greedy, is_cap_set, explicit-set equality, 1082)
 [PASS] (official) O-512EXPL — official build_512_cap: 512 distinct vectors, official is_cap_set True
@@ -19,6 +19,9 @@ Claims in solution ledger: 14
 [PASS] (solution) S-R3-Z3 — z3 dual certificates agree with the r_3 table (9->5, 14->8, 20->9)
 [PASS] (solution) S-BLOCK — block bound (k-1)*floor(N/k)+(N mod k) dominates every certified r_3 (N<=30) and r_4 (N<=20) value
 [PASS] (solution) S-MONO — r_3(N) <= r_4(N) <= r_5(N) at every certified table point
+[PASS] (solution) S-DEVIATION-ENGINE — engine142deviation.py --verify: exit 0 + 51/51 passed + ENGINE VERDICT: ALL GREEN in receipts142deviation.txt (D1-k identity 4-method battery, V2-k vanishing, extraction plug-backs on 14 greedy cells, 5 negative controls)
+[PASS] (solution) S-DEVIATION-IDENTITY — THEOREM D1-k + V2-k verified by independent brute-force constraint enumeration at (k=3,p=13) and (k=4,p=11): T_k = delta^k p^2 + sum_{s>=3} delta^{k-s} D_s exactly; every s<=2 constraint system has ONLY the trivial solution with zero layer; #V_S = p^{s-2}; k=3 reduces to the banked F1 kernel
+[PASS] (solution) S-DEVIATION-CONSTANTS — The extraction-layer constants exact: TC-4 carriage biconditional in exact rationals (boundary delta=2/3 gives exactly 1/4); OB-4 integer arithmetic (every prime p >= 359 passes, 349/353 fail); c_4(delta) > 0 iff delta > 2-sqrt(2); L-TERM-4 crossing c_4 = 1-delta at (10-sqrt(10))/9 = 0.759746...; L-TERM-3-SHARP 2-sqrt(2) = 0.585786... sharpens the banked (9-sqrt(17))/8 = 0.6096
 [PASS] (control) N-AP — planted 3-AP inside a Behrend set is DETECTED by the AP scanner
 [PASS] (control) N-CAP — corrupted official 512-cap (midpoint-completing vector swapped in) is REJECTED by the official is_cap_set
 [PASS] (control) N-R3 — corrupted r_3(10)=6 in a ledger copy is DETECTED against the fresh in-driver brute-force recomputation (true value 5)
@@ -27,6 +30,6 @@ Claims in solution ledger: 14
 [PASS] (control) S-VARNVIDES — Theorem V: the Varnavides amplification law with explicit constants (copy double-counting; nu(x) >= N/16 in the middle band; every copy hosts <= r_3(m)) — checkpoint-verified
 [PASS] (control) S-FOURIER — Theorem F1: the exact Fourier counting identity #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r!=0} fhat(r)^2 fhat(-2r) — machine-exact at p=101 (with Parseval)
 ==============================================================================
-CHECKS: 20/20 passed (official=5, solution=8, controls=7)
-WALL: 2.65s
+CHECKS: 23/23 passed (official=5, solution=11, controls=7)
+WALL: 121.06s
 VERDICT: YOUR SOLUTION IS OKAY

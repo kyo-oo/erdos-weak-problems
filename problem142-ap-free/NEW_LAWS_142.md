@@ -498,3 +498,80 @@ arsenal's higher-order towers are DG-algebra jet laws, not k-AP laws
 GSTFoldChainThirdOrderMemory.lean:79/:170-188,
 GSTAllDegreeCurvatureMemory.lean:34-216, GSTFoldMemoryTower.lean:64).
 F-UP-1's sublinear half remains open; T-GEN + V-GEN are now in place for it.
+
+---
+
+# W81-142A ADDITIONS — THE ORDER-k DEVIATION IDENTITY (the named blocker, delivered)
+
+The law UPPER_STACK.md's WHAT REMAINS section named as the single missing
+piece for the k>=4 sublinear arc. Complete document: DEVIATION_IDENTITY.md.
+Engine: engine142deviation.py 51/51 GREEN wall 111.0s
+(receipts142deviation.txt). At k=3 everything reproduces the banked F1/F2
+byte-identically (S1-F1-REPRO) — a strict generalization, zero regression.
+
+## LAW C142-DEVIATION-K (THEOREM D1-k, the order-k deviation identity; NEW, complete)
+For every prime p, every k with p > k >= 3, every A subset Z_p with
+|A| = delta*p, f = 1_A - delta, fhat(r) = sum_x f(x)e(-rx/p):
+T_k(A) = delta^k p^2 + sum_{s=3}^{k} delta^{k-s} D_s(k), with
+D_s(k) = sum_{|S|=s} E_S, E_S = p^{2-s} sum_{V_S} prod fhat(r_i),
+V_S = {(r_i): sum r_i = 0 (p), sum i*r_i = 0 (p)}. Derivation: the
+order-k deviation split, Fourier inversion per factor, the two geometric
+sums (the x-sweep kills sum r_i != 0, the d-sweep kills sum i*r_i != 0).
+Companions: LEMMA PAR (#V_S = p^{s-2}, explicit linear bijection);
+THEOREM CLS-3 (3-layers classified by the affine class
+lambda=(i3-i1)/(i2-i1), dihedral E_lambda = E_{lambda/(lambda-1)};
+D_3(4) = 2E_2+2E_3; D_4(4) = (1/p^2)sum_{u,v} fhat(u)fhat(v)fhat(-3u-2v)fhat(2u+v)).
+Exactness: cyclotomic-integer cleared form p^{k-2}T_k = a^k + sum a^{k-s}N_s
+verified in F_q at two independent primes per cell; pure-integer expansion
+p^k T_k = sum_s a^{k-s} Es_int exact in int64.
+#BY GST LAW gst_infinite_paradox_energy_split [arsenal-full/erdosternary2/ErdosTernary2.lean:8320]
+#BY GST LAW hc_fourier_exponential [arsenal-full/HC-PROOF-research/GSTAnalyticAbsorption.lean:210]
+#BY GST LAW hc_fourier_unitary [arsenal-full/HC-PROOF-research/GSTAnalyticAbsorption.lean:216]
+#BY GST LAW hc_circle_L2_basis [arsenal-full/HC-PROOF-research/GSTAnalyticAbsorption.lean:236]
+#BY GST LAW exact_three_geometric_sum [arsenal-full/erdosternary2/GSTProblem406TerminalUBoundary.lean:135]
+#BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283]
+#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:140]
+#BY GST LAW digit3_congr [arsenal-full/HC-PROOF-research/GSTBladeWave.lean:72]
+
+## LAW C142-VANISH-K (THEOREM V2-k, the s<=2 vanishing; NEW, complete)
+The s=1 layers vanish (permutation + sum f = 0); the s=2 layers vanish
+IDENTICALLY: the constraint system r+s = 0, i*r+j*s = 0 has only (0,0)
+((i-j) invertible mod p since 0 < |i-j| <= k-1 < p) and fhat(0) = 0.
+#V_S = p^{s-2}; 3-subset directions all-nonzero mod p. NEGATIVE CONTROL:
+at p <= k (p=5, k=8, subset {0,5}) all p residues solve — p > k is
+load-bearing. The phantom-layer control (S4-NC3) plants a nonzero s=2
+layer and the identity breaks: the vanishing is load-bearing.
+#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:140]
+#BY GST LAW digit3_congr [arsenal-full/HC-PROOF-research/GSTBladeWave.lean:72]
+#BY GST LAW hc_fourier_character_norm [arsenal-full/HC-PROOF-research/GSTAnalyticAbsorption.lean:202]
+
+## LAW C142-EXTRACT-K (the extraction layer; NEW, complete, all constants exact)
+LEMMA FREE (T_k = |A| for cyclically k-AP-free A). L-EP-k (deviation floor
+|delta*p - delta^k p^2| >= delta^k p^2/2 under delta^{k-1} p >= 2).
+PB-GEN (Parseval B = delta(1-delta)p^2 exact; |E_S| <= M*B/p;
+|D_3(k)| <= C(k,3)*M*B/p; cap M <= min(delta,1-delta)*p). D4-GEN
+(|D_4(4)| <= B^2/p^2 and <= M^2 B/p). X-4(i): M >= c_4(delta)*p with
+c_4 = (delta^2/2 - (1-delta)^2)/(4(1-delta)) when delta > 2-sqrt(2).
+X-4(ii) the sqrt-route (threshold-free): M >= sqrt(4 delta^2 +
+delta^3 p/(2(1-delta))) - 2 delta. F2-SHARP (k=3: M >= delta^2 p/(2(1-delta)),
+implying banked F2's delta^2 p/2). TC-4 carriage ((1-delta)^2/delta^2 <= 1/4
+iff delta >= 2/3 — exact rational arithmetic, boundary (1/9)/(4/9) = 1/4).
+L-TERM-3-SHARP (delta <= 2-sqrt(2) = 0.585786; sharpens banked L-TERM's
+(9-sqrt(17))/8 = 0.6096). L-TERM-4 (delta <= (10-sqrt(10))/9 = 0.759747).
+OB-4 (the quantified k=4 obstruction): 11/21 + 22/p < 2-sqrt(2) for every
+prime p >= 359 — integer form 2 p^2 21^2 < (31p-462)^2, gap polynomial
+79p^2-28644p+213444 positive for all p >= 355, largest failing prime 353 —
+so the p-scale single-coefficient extraction cannot fire at certified stone
+densities (r_4(42)=22 ceiling delta <= 11/21 + 22/p); the k>=4 sublinear
+arc's named next front: the correlation route along (r, r', -r-r').
+#BY GST LAW tower_cauchy [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810]
+#BY GST LAW sum_le_sum_of_forall [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116]
+#BY GST LAW two_pow_ge2 [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:431]
+#BY GST LAW sq_sub_one [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:448]
+#BY GST LAW digitCount3_monotone [arsenal-full/erdosternary2/ErdosTernary2.lean:2097]
+#BY GST LAW carryAtPos_bound [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:108]
+#BY GST LAW div_add_mod_subst [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:249]
+
+16 distinct arsenal laws across the three (every one read at its line);
+the F-UP-1 sublinear half's missing input is now DELIVERED at the identity
+level; the correlation increment is the named next front.
