@@ -1,0 +1,75 @@
+[PASS] S0-house-eq-coP5 :: complement(P5) isomorphic to house (canonical forms equal): 221 vs 221
+[PASS] S0-bull-selfcomp :: complement(bull) isomorphic to bull: canon 59
+[PASS] S0-C5-selfcomp :: complement(C5) isomorphic to C5: canon 220
+[NOTE] S0 P5: edges=4 degrees=[1, 1, 2, 2, 2] canon=58
+[NOTE] S0 house: edges=6 degrees=[2, 2, 2, 3, 3] canon=221
+[NOTE] S0 bull: edges=5 degrees=[1, 1, 2, 3, 3] canon=59
+[NOTE] S0 C5: edges=5 degrees=[2, 2, 2, 2, 2] canon=220
+[NOTE] S0 gem: edges=7 degrees=[2, 2, 3, 3, 4] canon=223
+[NOTE] S0 dart: edges=5 degrees=[1, 1, 2, 2, 4] canon=31
+[NOTE] S0 banner: edges=5 degrees=[1, 2, 2, 2, 3] canon=62
+[PASS] S0-orbit-P5 :: orbit size 60
+[PASS] S0-orbit-house :: orbit size 60
+[PASS] S0-orbit-bull :: orbit size 60
+[PASS] S0-orbit-C5 :: orbit size 12
+[PASS] S1-counts-two-code-n1 :: n=1: P5=1, house=1, bull=1, C5=1
+[NOTE] S1 n=1 h-table: h_P5(1)=1, h_house(1)=1, h_bull(1)=1, h_C5(1)=1
+[PASS] S1-counts-two-code-n2 :: n=2: P5=2, house=2, bull=2, C5=2
+[NOTE] S1 n=2 h-table: h_P5(2)=2, h_house(2)=2, h_bull(2)=2, h_C5(2)=2
+[PASS] S1-counts-two-code-n3 :: n=3: P5=8, house=8, bull=8, C5=8
+[NOTE] S1 n=3 h-table: h_P5(3)=2, h_house(3)=2, h_bull(3)=2, h_C5(3)=2
+[PASS] S1-counts-two-code-n4 :: n=4: P5=64, house=64, bull=64, C5=64
+[NOTE] S1 n=4 h-table: h_P5(4)=2, h_house(4)=2, h_bull(4)=2, h_C5(4)=2
+[PASS] S1-counts-two-code-n5 :: n=5: P5=964, house=964, bull=964, C5=1012
+[NOTE] S1 n=5 h-table: h_P5(5)=2, h_house(5)=2, h_bull(5)=2, h_C5(5)=3
+[PASS] S1-classifier-duel-n6 :: n=6: 4000x4 classifier agreements 16000/16000
+[NOTE] S1 n=6 h-table: h_P5(6)=3, h_house(6)=3, h_bull(6)=3, h_C5(6)=3
+[PASS] S1-h-monotone :: h_H(n) nondecreasing n=1..6 for all four classes (F4)
+[PASS] S1-h-ge2 :: h_H(n) >= 2 for n>=2 (any pair is edge or non-edge)
+[PASS] S1-alpha-duel :: bnb vs 2^n brute on 600 random n=6 graphs
+[NOTE] S2 n=7 counts: P5=1019492, house=1019492, bull=876632, C5=1742336
+[PASS] S2-ramsey-anchored :: every 7-vertex graph has an independent or clique triple (R(3,3)=6)
+[NOTE] S2 h_P5(7) = 3
+[PASS] S2-witness-P5-7 :: witness m=39441: H-free(code2)=True, alpha=3, omega=3, hom=3
+[NOTE] S2 h_house(7) = 3
+[PASS] S2-witness-house-7 :: witness m=39441: H-free(code2)=True, alpha=3, omega=3, hom=3
+[NOTE] S2 h_bull(7) = 3
+[PASS] S2-witness-bull-7 :: witness m=39441: H-free(code2)=True, alpha=3, omega=3, hom=3
+[NOTE] S2 h_C5(7) = 3
+[PASS] S2-witness-C5-7 :: witness m=39441: H-free(code2)=True, alpha=3, omega=3, hom=3
+[PASS] S2-classifier-duel-n7 :: 8000/8000 agreements (2000x4 random graphs)
+[PASS] S3-BULL-L1-crosscomplete :: all cross-one class pairs adjacent: 4292/4292 tests over 19058 bull-free graphs with triangles (n=4..6 exhaustive)
+[NOTE] S3 forced-EDGE pairs: axb(1460), axc(1412), bxc(1420)
+[NOTE] S3 forced-NONEDGE pairs: none
+[NOTE] S3 FREE pairs: 16 of 36: 0xa(1718/1826), 0xb(1744/1826), 0xc(1714/1760), 0xab(519/605), 0xac(998/1174), 0xbc(1475/1743), 0xabc(525/701), axab(302/429), axac(564/814), axbc(1401/1443), axabc(344/487), bxbc(1088/1293) ...
+[PASS] S3-BULL-union-structure :: independent sets inside S_a u S_b u S_c live in one class: 9057 subsets tested (n=4..6 exhaustive)
+[PASS] S4-P5-bacsotuza-n<=6 :: every connected P5-free graph n<=6 (19976 graphs, exhaustive) has a dominating K1/K2/K3/P3; shape census {'K1': 5244, 'K2': 14240, 'P3': 372, 'K3': 120}
+[PASS] S4-P5-bacsotuza-n7-sampled :: sampled n=7: 7986 connected P5-free graphs, all dominated by K/P3
+[NOTE] S4 negative control: C5 dominating K/P3 exists = True (P3) — C5 is P5-free (no control violation expected since C5 IS P5-free)
+[NOTE] S4 banner (P5-containing): dominating K/P3 exists = True (no requirement)
+[PASS] S5-C5-union-join-closure :: 10680 random C5-free pairs: disjoint union C5-free=True, join C5-free=True (n1+n2 in 5..8)
+[PASS] S5-C5-complement-closure :: 5785 sampled C5-free graphs n=5,6: complement C5-free
+[NOTE] S5 C5-free (connected AND co-connected) cores: n=5: 420 (min hom 3), n=6: 18840 (min hom 3)
+[NOTE] S6 P5: h-table [(1, 1), (2, 2), (3, 2), (4, 2), (5, 2), (6, 3), (7, 3)]; c=0.3333333333333333: OK; c=0.4: OK; c=0.43: OK
+[NOTE] S6 house: h-table [(1, 1), (2, 2), (3, 2), (4, 2), (5, 2), (6, 3), (7, 3)]; c=0.3333333333333333: OK; c=0.4: OK; c=0.43: OK
+[NOTE] S6 bull: h-table [(1, 1), (2, 2), (3, 2), (4, 2), (5, 2), (6, 3), (7, 3)]; c=0.3333333333333333: OK; c=0.4: OK; c=0.43: OK
+[NOTE] S6 C5: h-table [(1, 1), (2, 2), (3, 2), (4, 2), (5, 3), (6, 3), (7, 3)]; c=0.3333333333333333: OK; c=0.4: OK; c=0.43: OK
+[PASS] S6-deletion-walk-P5 :: 400 deletion walks n=24->5: min hom/n^(1/3) = 2.924
+[PASS] S6-deletion-walk-house :: 400 deletion walks n=24->5: min hom/n^(1/3) = 2.924
+[PASS] S6-deletion-walk-bull :: 400 deletion walks n=24->5: min hom/n^(1/3) = 2.924
+[PASS] S6-deletion-walk-C5 :: 400 deletion walks n=24->5: min hom/n^(1/3) = 2.924
+[PASS] S6-random-89-P5 :: 3000 random P5-free graphs n=8,9: min hom/n^(1/3) = 1.500
+[PASS] S6-random-89-house :: 3000 random house-free graphs n=8,9: min hom/n^(1/3) = 1.442
+[PASS] S6-random-89-bull :: 3000 random bull-free graphs n=8,9: min hom/n^(1/3) = 1.500
+[PASS] S6-random-89-C5 :: 3000 random C5-free graphs n=8,9: min hom/n^(1/3) = 1.442
+[PASS] S6-negative-control-P5 :: P5 itself rejected by its own classifier
+[PASS] S6-negative-control-house :: house itself rejected by its own classifier
+[PASS] S6-negative-control-bull :: bull itself rejected by its own classifier
+[PASS] S6-negative-control-C5 :: C5 itself rejected by its own classifier
+[PASS] S6-planted-H-rejection :: 200x4 planted-H graphs all rejected
+[PASS] S7-witness-duel :: all n=5,6 h-witnesses: H-free by code 2, hom by 2^n brute — exact match
+h_P5(n), n=1..7: [1, 2, 2, 2, 2, 3, 3]
+h_house(n), n=1..7: [1, 2, 2, 2, 2, 3, 3]
+h_bull(n), n=1..7: [1, 2, 2, 2, 2, 3, 3]
+h_C5(n), n=1..7: [1, 2, 2, 2, 3, 3, 3]
+TOTALS: PASS=42 FAIL=0 wall=110.4s

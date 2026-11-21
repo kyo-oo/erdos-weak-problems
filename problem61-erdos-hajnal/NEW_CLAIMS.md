@@ -67,6 +67,36 @@ claims (retained below, superseded where marked) are the bank.
     "id": "C61-GENERAL-REDUCTION",
     "statement": "(GR-1) EH for all prime graphs implies EH for all finite graphs within the uniform blow-up frame, at the tree harmonic exponent. (GR-2) The uniformization bridge is the named exact remaining content for arbitrary graphs. (GR-3) The direct-kill frontier at n=5 is exactly {P5, co-P5, bull, C5} (three kills close the 5-vertex world in-frame; 30/34 five-vertex graphs are decomposable, covered in-frame today); at n=6 exactly 26 primes.",
     "verification": "GENERAL_REDUCTION.md; CLOSURE_MAP.md; alln61/coverage_map.json; receipts61closure.txt (836/836 PASS)"
+  },
+  {
+    "id": "C61-C5-CLOSURE-REDUCTION",
+    "statement": "The C5-free class is closed under complement, disjoint union, and join (complete proofs: straddle splits 1+4 force a degree-4 vertex vs 2-regular C5; 2+3 forces >=6 edges vs exactly 5; C5 connected kills union straddles). Consequently for any c0 in (0,1]: if every connected AND co-connected C5-free graph satisfies hom >= m^c0 then every C5-free graph satisfies hom >= n^c0 (union levels add alpha, join levels add omega, subadditivity spine Sum x_i^c0 >= (Sum x_i)^c0).",
+    "verification": "FIVEVERTEX_PROOF.md sec.2; receipts61five.txt S5-C5-union-join-closure (10,680 pairs), S5-C5-complement-closure (5,785 graphs), S0-C5-selfcomp"
+  },
+  {
+    "id": "C61-C5-DICH",
+    "statement": "Every C5-free graph that is triangle-free satisfies alpha >= sqrt(n)/2; every C5-free graph with alpha <= 2 satisfies omega >= sqrt(n)/2. The remaining C5 EH frontier is exactly the cores that are connected AND co-connected AND contain a triangle AND contain an independent triple.",
+    "verification": "FIVEVERTEX_PROOF.md sec.2 THEOREM C5-DICH (banked Lemma 4 + complement transfer)"
+  },
+  {
+    "id": "C61-BULL-DEC",
+    "statement": "Every bull-free graph with a triangle T={a,b,c} decomposes into the eight attachment classes with: (L1) for distinct x,y in T every u in S_x and w in S_y are adjacent (else the 5-set {u,w,a,b,c} induces exactly the bull, degrees (3,3,2,1,1)); (alpha) alpha(S_a u S_b u S_c) = max alpha(S_x); (omega) omega(G) >= omega(S_a)+omega(S_b)+omega(S_c); (L2) omega(S_x) <= omega(G)-1, omega(S_xy) <= omega(G)-2, omega(S_abc) <= omega(G)-3; (L3) all classes hereditary bull-free. Census freedom matrix: forced-EDGE pairs exactly {axb,axc,bxc}, zero forced-nonedge pairs.",
+    "verification": "FIVEVERTEX_PROOF.md sec.3; receipts61five.txt S3-BULL-L1-crosscomplete (4292/4292 over 19,058 graphs n=4..6 exhaustive), S3-BULL-union-structure (9,057 subsets)"
+  },
+  {
+    "id": "C61-P5-IDENT-EXTREMAL",
+    "statement": "complement(P5) = house (canonical form 221): one EH kill covers both. C5 is P5-free, house-free, and bull-free with hom(C5)=2, so h_{P5}(5)=h_{house}(5)=h_{bull}(5)=2 and any theorem hom >= n^c for these three classes obeys c <= log2/log5 = 0.4306...",
+    "verification": "FIVEVERTEX_PROOF.md sec.1/sec.4; receipts61five.txt S0-house-eq-coP5, S0-bull-selfcomp, S1 h-tables (two codes), S7-witness-duel"
+  },
+  {
+    "id": "C61-FIVE-H-TABLES",
+    "statement": "Exact h-tables n<=7 (two counting codes, witness duels): h_P5 = h_house = h_bull = [1,2,2,2,2,3,3]; h_C5 = [1,2,2,2,3,3,3]. All four classes satisfy hom >= n^0.43 at every n <= 7.",
+    "verification": "receipts61five.txt S1 (counts two-code n<=5, classifier duels 16000/16000 + 8000/8000), S2 (2^21 exhaustive n=7, Ramsey anchor re-certified, witness brute duel), S6 (c=0.43 OK all four), S7 (42/42 PASS total)"
+  },
+  {
+    "id": "C61-P5-DOM-SHAPE (census-certified, hand-proof open)",
+    "statement": "Every connected P5-free graph on n<=6 vertices (all 19,976, exhaustive) has a dominating set of size <=3 inducing K1, K2, K3, or P3; 7,986 sampled connected P5-free n=7 graphs agree. CENSUS-CERTIFIED ONLY: the hand-proof gap (the z-only-dominated stratum in the leaf induction) is named in FIVEVERTEX_PROOF.md sec.4; NOT claimed proven.",
+    "verification": "receipts61five.txt S4-P5-bacsotuza-n<=6 (19,976/19,976), S4-P5-bacsotuza-n7-sampled (7,986/7,986)"
   }
 ]
 ```

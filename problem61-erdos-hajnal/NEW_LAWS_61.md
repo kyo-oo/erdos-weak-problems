@@ -434,3 +434,71 @@ classical route (regularity + removal, APS01) is neither in the package
 nor used. (GR-3) The direct-kill frontier is exactly the primes: at n=5
 precisely {P5, co-P5, bull, C5} (CLOSURE_MAP.md) — three kills close the
 5-vertex world in-frame; at n=6 exactly 26 primes.
+
+---
+
+# W78-61K ADDITIONS — THE FOUR-PRIME CENSUS + STRUCTURE PACKAGE
+# (full proofs: FIVEVERTEX_PROOF.md; engine: engine61five.py; receipts: receipts61five.txt, 42/42 PASS)
+
+## LAW C5-CLOSURE (complete)
+The C5-free class is closed under complement (C5 self-complementary),
+disjoint union (C5 connected), and join (straddle splits 1+4 give a
+degree-4 vertex vs 2-regular; 2+3 gives >= 6 edges vs exactly 5).
+Proofs: FIVEVERTEX_PROOF.md sec.2 Lemmas C5-CL1/CL2/CL3. Engine: 10,680
+random C5-free pairs (union+join C5-free in all), 5,785 sampled
+complements — receipts S5.
+
+## LAW C5-REDUCTION (the cotree bridge, complete)
+For any c0 in (0,1]: if every connected AND co-connected C5-free graph
+satisfies hom >= m^c0, then EVERY C5-free graph satisfies hom >= n^c0.
+Union levels add alpha, join levels add omega; the spine is the
+subadditivity law Sum x_i^c0 >= (Sum x_i)^c0 (0 < c0 <= 1), by induction
+on the cotree. Proof: FIVEVERTEX_PROOF.md sec.2 (complete, both directions
+of closure used).
+
+## LAW C5-DICH (the closed strata, complete)
+C5-free + triangle-free => alpha >= sqrt(n)/2 (banked Lemma 4);
+C5-free + alpha <= 2 => omega >= sqrt(n)/2 (complement transfer).
+The remaining C5 frontier is exactly: connected AND co-connected AND
+contains a triangle AND contains an independent triple (NAMED).
+
+## LAW BULL-L1 (the cross-one law, complete)
+In a bull-free graph with triangle T = {a,b,c}: for distinct x,y in T,
+every u in S_x (attachment exactly {x}) and w in S_y are ADJACENT —
+u !~ w would induce exactly the bull (5 edges ua, wb, ab, bc, ca;
+degrees (3,3,2,1,1)). Consequences: alpha(S_a u S_b u S_c) =
+max alpha(S_x) (BULL-alpha); omega(G) >= omega(S_a)+omega(S_b)+omega(S_c)
+(BULL-omega). Engine: 4,292/4,292 cross-one pairs over 19,058 bull-free
+triangle-carrying graphs n=4..6 exhaustive; 9,057 union-subset tests.
+
+## LAW BULL-L2 (clique decrements, complete) + BULL-L3 (heredity)
+omega(S_x) <= omega(G)-1; omega(S_xy) <= omega(G)-2; omega(S_abc) <=
+omega(G)-3 ({x} u K, {x,y} u K, T u K are cliques). Every class induces
+a bull-free graph. The freedom matrix (census n<=6): forced-EDGE pairs
+EXACTLY {axb, axc, bxc}; ZERO forced-nonedge pairs; the S_0 stratum
+recurses undiminished (K2 sq K3 and banner shapes are not the bull) —
+the elementary log-recursion route is CLOSED-OFF, named exactly.
+
+## LAW P5-IDENT + P5-C5-EXTREMAL (complete)
+complement(P5) = house (canonical form 221; one kill covers both — hom
+is complement-invariant). C5 is P5-free, house-free, bull-free with
+hom(C5) = 2: the shared n=5 extremal; the sharpness cap for all three
+classes is c <= log2/log5 = 0.4306...
+#BY GST LAW worldMap_monotone [HC-PROOF-research/GSTGraphV2CausalComponents.lean:127]
+#BY GST LAW graph_append [HC-PROOF-research/GSTCausalPairingGraphs.lean:67]
+#BY GST LAW bracket_skew [HC-PROOF-research/GSTCausalPairingGraphs.lean:18]
+#BY GST LAW plucker_four [HC-PROOF-research/GSTCausalPairingGraphs.lean:37]
+#BY GST LAW sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116]
+#BY GST LAW cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:282]
+#BY GST LAW two_pow_factored [erdosternary2/ErdosTernary2.lean:885]
+#BY GST LAW two_pow_ge2 [erdosternary2/ErdosTernary2.lean:891]
+#BY GST LAW sq_sub_one [erdosternary2/ErdosTernary2.lean:908]
+#BY GST LAW digitCount3_monotone [erdosternary2/ErdosTernary2.lean:2097]
+
+## THE CERTIFIED h-TABLES (exact, exhaustive n<=7, two codes)
+h_P5 = h_house = h_bull = [1,2,2,2,2,3,3]; h_C5 = [1,2,2,2,3,3,3].
+All four classes: hom >= n^0.43 certified at every n <= 7 (the C5 rung
+5^0.43 = 1.998 <= 2 is the binding one). P5-DOMINATION SHAPE (every
+connected P5-free graph has a dominating K1/K2/K3/P3): census-certified
+19,976 graphs n<=6 exhaustive + 7,986 sampled n=7 — hand-proof GAP named
+(the z-only-dominated leak in the leaf induction); NOT claimed proven.
