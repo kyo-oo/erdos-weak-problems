@@ -357,3 +357,52 @@ uniform divisor < M0^2 (R4_VARN.md section 2).
 delta-threshold governed by r_4(M0)/M0; SAT-certified larger stones push
 delta down; the model-step data (R4_VARN.md section 4) feeds the
 density-increment program toward the full k=4 sublinear law.
+
+---
+
+# W79-142E ADDITIONS — THE GENERAL-k LOWER LAW (BEHREND-GEN)
+
+## LAW M-1 (containment; complete)
+For every k >= 3, every k-AP-free set is (k+1)-AP-free (a non-trivial
+(k+1)-AP's first k terms are a non-trivial k-AP). Hence the ladder
+r_3(N) <= r_4(N) <= ... and the dilation law r_k(cN) >= r_k(N).
+
+## LAW NOCARRY-K (general-k digitization; complete)
+Base B = 2m, digits < m: every interior second difference of an integer
+k-AP among lifted digit vectors digitizes with zero carries — for EVERY
+k >= 3 at once (no division by k-1 anywhere); chaining gives
+A_i = A_0 + iE. Engine: GEN-NOCARRY-K both directions + adversarial.
+#BY GST LAW carryAtPos_bound [HC-PROOF-research/CardinalWorlds.lean:108]
+#BY GST LAW div_add_mod_subst [HC-PROOF-research/CardinalWorlds.lean:249]
+
+## LAW POWER-IDENTITY (Lemma 4.1; complete)
+If A_0 + iE in the box for i = 0..k-1 and T_{k-1}(A_0 + iE) constant,
+then q(i) = Σ_j (A_0j + iE_j)^(k-1) - t is identically zero; its top two
+coefficients vanish: Σ E_j^(k-1) = 0 and (k-1)·Σ A_0j E_j^(k-2) = 0.
+#BY GST LAW mul_pow_local [HC-PROOF-research/CardinalWorlds.lean:278]
+#BY GST LAW cubic_expansion [HC-PROOF-research/CardinalWorlds.lean:283]
+#BY GST LAW two_pow_ge2 [HC-PROOF-research/CardinalWorlds.lean:431]
+
+## LAW KILL-ORTHANT (Lemma 4.2; complete, both parities)
+Under POWER-IDENTITY: E = 0. h = k-1 even: ΣE_j^h = 0 with all terms >= 0.
+h odd: Σ A_0j E_j^(h-1) = 0 with h-1 even forces A_0j = 0 or E_j = 0 per j;
+then E >= 0 (A_1 = E in the box) and Σ E_j^h = 0 forces E = 0. The odd-h
+leak example E = (1,1,-1,-1) at h=3 shows the second coefficient is
+load-bearing. Engine: GEN-IDENTITY (0/1321 counterexamples).
+
+## THEOREM BG (THE GENERAL-k LOWER LAW; complete)
+For all k >= 3, d >= 1, m >= 2, B = 2m: exists k-AP-free S ⊆ [0,B^d) with
+|S| >= m^d/((d(m-1)+1)(d(m-1)^(k-1)+1)). The h-sphere-in-layer construction
+(NO-CARRY-K + POWER-IDENTITY + KILL-ORTHANT + the two-pigeonhole census).
+Corollary BG*: r_k(N) >= N·exp(-(2√((k+1)ln2)+1)√(ln N)) for all k >= 3,
+N >= 2^40 — THE EXPONENT-1 LAW, UNIVERSAL IN k. Full proof + 18 arsenal
+citations: BEHREND_GEN.md. Engine: engine142behrendgen.py 9/9 GREEN.
+#BY GST LAW div_mod_mul_lemma [HC-PROOF-research/CardinalWorlds.lean:150]
+#BY GST LAW sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/ErdosTernary2.lean:116]
+#BY GST LAW tower_cauchy [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810]
+
+## THE SUM-CLASSIFIER CEILING (complete)
+Any power-sum classifier on the full box optimizes to exponent 1/2 in ln N
+for every fixed k; best power h=2 (constant 2√(3 ln2) = 2.8853, the banked
+k=3 Behrend constant). Rankin's exp(-C_k(ln N)^(1/(k-1))) for k >= 4
+requires a non-sum-type mechanism — NAMED FRONT F-LOW-1.

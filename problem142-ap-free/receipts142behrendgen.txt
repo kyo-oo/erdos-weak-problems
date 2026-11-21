@@ -1,0 +1,16 @@
+RECEIPTS — engine142behrendgen.py (W79-142E) — THE BEHREND-GEN ENGINE
+seed 79142 ; deterministic ; python3
+Theorem BG: for all k>=3, d>=1, m>=2 (B=2m): exists k-AP-free S in [0,B^d) with |S| >= m^d/((d(m-1)+1)(d(m-1)^(k-1)+1)).
+
+PASS GEN-GRID — 80 instances (k=3..10 x 10-cell (d,m) grid); k-AP-free by 3 codes (endpoints/first-two/bit-parallel); |S| >= Theorem-BG bound exact (min ratio actual/bound = 11.250); range < (2m)^d; every set also 3-, (k+1)-, (k+2)-AP-free (M-1 corroborated per instance)
+PASS GEN-NOCARRY-K — general-k digitization: digitwise vector APs lift to integer k-APs; random integer k-APs among digit-<m numbers digitize to A_i = A_0 + iE (all interior second differences carry-free in base 2m); adversarial max-digit holds; k=3..10
+PASS GEN-IDENTITY — Lemma 4.1 binomial identities verified on 400 random (A0,E,k) by full expansion + closed forms; contrapositive kill: 1321 random in-box nonzero-E vector APs, 0 with constant T_h (must be 0); even-h sign law 2000 samples; odd-h leak example E=(1,1,-1,-1) h=3 present; positivity dichotomy 2000 samples
+PASS GEN-PLUGBACK — recipe inequality m^(d-k)/d^2-1 >= N exp(-C_k sqrt(ln N)), C_k = 2 sqrt((k+1) ln 2)+1, grid N = 2^40..2^6000 step 2^0.13: k=3: 45847 pts, min margin 8.9991; k=4: 45847 pts, min margin 8.4572; k=5: 45847 pts, min margin 8.5326; k=6: 45847 pts, min margin 9.2480; k=7: 45847 pts, min margin 7.5640; k=8: 45847 pts, min margin 8.4066; k=9: 45847 pts, min margin 8.8435; k=10: 45847 pts, min margin 9.4519
+PASS GEN-PLUGBACK-REAL — constructive certification: real sets built at recipe (d,m), k-AP-free (codes A+B[+C]), |S|-1 >= N exp(-C_k sqrt(ln N)) directly: k=3: N=2^20.0 (d,m)=(7,3) |S|=210 margin=7.602; k=4: N=2^20.0 (d,m)=(8,2) |S|=70 margin=7.957; k=5: N=2^20.0 (d,m)=(10,2) |S|=252 margin=10.572; k=6: N=2^20.0 (d,m)=(10,2) |S|=252 margin=11.789; k=7: N=2^24.0 (d,m)=(12,2) |S|=924 margin=13.48; k=8: N=2^28.0 (d,m)=(14,2) |S|=3432 margin=15.145; k=9: arithmetic-only (no enumerable recipe window) ; k=10: arithmetic-only (no enumerable recipe window) 
+PASS GEN-K3REPRO — k=3 degenerates to the banked engine exactly: byte-equal sets, keys, and the 10 certified sizes (6,12,30,90,6,24,12,48,2,10) and bounds on the full banked grid (receipts142behrend.txt BEHREND-GRID values)
+PASS GEN-MONO — LAW M-1 corroborated: every constructed k-AP-free set re-verified (k+1)-AP-free (all three codes); the containment identity (a,a+d,...,a+(k-1)d) ⊃ (a,a+d,a+2d) verified structurally x1000
+PASS GEN-NEGCTL — planted k-APs (k=3,5,7) detected by all 3 codes; layer-only set contains a 3-AP (sphere load-bearing); full digit box flagged; size-control discipline live
+PASS GEN-LAWSPOT — the banked arsenal law battery (engine142behrend.law_spotchecks) re-run this wave: 18/18
+
+TOTAL: 9/9 PASS, wall 67.6s
+BEHREND_GEN_ENGINE_GREEN=1
