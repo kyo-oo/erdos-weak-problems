@@ -155,7 +155,7 @@ theorem filter_cons_two (f : Nat → Bool) (a b : Nat) :
 theorem child_mod (m j r t : Nat) (hdiv : m ∣ 3^j) :
     (r + t * 3^j) % m = r % m := by
   obtain ⟨c, hc⟩ := hdiv
-  have hcong : t * 3^j = m * (t * c) := by rw [hc]; ring
+  have hcong : t * 3^j = t * c * m := by rw [hc]; ring
   rw [hcong]
   exact Nat.add_mul_mod_self_right r (t * c) m
 
@@ -164,7 +164,7 @@ classes mod `m`, then the `f`-count of any node's live children is 2 on
 the parent's family and 0 off it. -/
 theorem dustStep_filter_len {m : Nat} (j r : Nat) (hdiv : m ∣ 3^j)
     (f : Nat → Bool) (hf : ∀ x y, x % m = y % m → f x = f y) :
-    (dustStep j r).filter f |>.length = if f r then 2 else 0 := by
+    ((dustStep j r).filter f).length = if f r then 2 else 0 := by
   have hmod1 : (r + 3^j) % m = r % m := child_mod m j r 1 hdiv
   have hmod2 : (r + 2 * 3^j) % m = r % m := child_mod m j r 2 hdiv
   have hc1 : f (r + 3^j) = f r := hf _ _ hmod1
@@ -197,7 +197,7 @@ theorem dustStep_filter_len {m : Nat} (j r : Nat) (hdiv : m ∣ 3^j)
 theorem dustJoin_filter_len {m : Nat} (j : Nat) (hdiv : m ∣ 3^j)
     (f : Nat → Bool) (hf : ∀ x y, x % m = y % m → f x = f y) :
     ∀ l : List Nat,
-      (dustJoin j l).filter f |>.length = 2 * (l.filter f).length := by
+      ((dustJoin j l).filter f).length = 2 * (l.filter f).length := by
   intro l
   induction l with
   | nil => rfl
@@ -228,9 +228,10 @@ theorem dvd9_of_two_le (j : Nat) (hj : 2 ≤ j) : 9 ∣ 3^j := by
 
 /-- `3 ∣ 3^j` for `j ≥ 1` (the mod-3 family preservation). -/
 theorem dvd3_of_one_le (j : Nat) (hj : 1 ≤ j) : 3 ∣ 3^j := by
-  refine ⟨3^(j-1), ?_⟩
-  rw [show (3:Nat) = 3^1 from rfl, ← Nat.pow_add,
-    show 1 + (j - 1) = j from by omega]
+  obtain ⟨j', rfl⟩ : ∃ j' : Nat, j = j' + 1 := ⟨j - 1, by omega⟩
+  refine ⟨3^j', ?_⟩
+  rw [Nat.pow_succ]
+  exact Nat.mul_comm _ _
 
 /-! ## §4 THE FIVE EXACT FAMILY LAWS -/
 
@@ -238,7 +239,7 @@ theorem dvd3_of_one_le (j : Nat) (hj : 1 ≤ j) : 3 ∣ 3^j := by
 `j ≥ 1`: the cut-row fire (every class `≡ 2 mod 3` fires at row 1) as a
 cardinality law — the fired family holds nothing, forever. -/
 theorem dust_mod3two_zero : ∀ j : Nat, 1 ≤ j →
-    (dust j).filter mod3twoB |>.length = 0 := by
+    ((dust j).filter mod3twoB).length = 0 := by
   intro j
   induction j with
   | zero => intro hj; exact absurd hj (by omega)
@@ -256,7 +257,7 @@ theorem dust_mod3two_zero : ∀ j : Nat, 1 ≤ j →
 the tower-sheet half of the dust is exactly half the tree, at every
 level, forever. -/
 theorem dust_tower_card : ∀ j : Nat, 1 ≤ j →
-    (dust j).filter towerB |>.length = 2^(j-1) := by
+    ((dust j).filter towerB).length = 2^(j-1) := by
   intro j
   induction j with
   | zero => intro hj; exact absurd hj (by omega)
@@ -275,7 +276,7 @@ theorem dust_tower_card : ∀ j : Nat, 1 ≤ j →
 no class `≡ 7 mod 9` ever survives — the row-2 fire as a cardinality law
 (every `K ≡ 7 mod 9` owns its ternary digit two at position 2). -/
 theorem dust_fam7_zero : ∀ j : Nat, 2 ≤ j →
-    (dust j).filter fam7B |>.length = 0 := by
+    ((dust j).filter fam7B).length = 0 := by
   intro j
   induction j with
   | zero => intro hj; exact absurd hj (by omega)
@@ -293,7 +294,7 @@ theorem dust_fam7_zero : ∀ j : Nat, 2 ≤ j →
 `j ≥ 2`: the hard-family (sheet-zero `≡ 1 mod 9`) survivors are exactly
 a quarter of the tree, doubling per level, forever. -/
 theorem dust_fam1_card : ∀ j : Nat, 2 ≤ j →
-    (dust j).filter fam1B |>.length = 2^(j-2) := by
+    ((dust j).filter fam1B).length = 2^(j-2) := by
   intro j
   induction j with
   | zero => intro hj; exact absurd hj (by omega)
@@ -312,7 +313,7 @@ theorem dust_fam1_card : ∀ j : Nat, 2 ≤ j →
 `j ≥ 2`: the sheet-zero `≡ 4 mod 9` family — the family of the rider
 witnesses 1 and 4 — also exactly a quarter, doubling per level, forever. -/
 theorem dust_fam4_card : ∀ j : Nat, 2 ≤ j →
-    (dust j).filter fam4B |>.length = 2^(j-2) := by
+    ((dust j).filter fam4B).length = 2^(j-2) := by
   intro j
   induction j with
   | zero => intro hj; exact absurd hj (by omega)
@@ -332,16 +333,16 @@ theorem dust_fam4_card : ∀ j : Nat, 2 ≤ j →
 /-- The family counts at level 3 (the engine's F3 row: fam1 = 2,
 fam4 = 2, fam7 = 0, tower = 4 — the first nontrivial level). -/
 theorem fam3_receipt :
-    (dust 3).filter fam1B |>.length = 2 ∧
-    (dust 3).filter fam4B |>.length = 2 ∧
-    (dust 3).filter fam7B |>.length = 0 ∧
-    (dust 3).filter towerB |>.length = 4 := by decide
+    ((dust 3).filter fam1B).length = 2 ∧
+    ((dust 3).filter fam4B).length = 2 ∧
+    ((dust 3).filter fam7B).length = 0 ∧
+    ((dust 3).filter towerB).length = 4 := by decide
 
 /-- The level-4 counts (fam1 = 4, fam4 = 4, tower = 8). -/
 theorem fam4_receipt :
-    (dust 4).filter fam1B |>.length = 4 ∧
-    (dust 4).filter fam4B |>.length = 4 ∧
-    (dust 4).filter towerB |>.length = 8 := by decide
+    ((dust 4).filter fam1B).length = 4 ∧
+    ((dust 4).filter fam4B).length = 4 ∧
+    ((dust 4).filter towerB).length = 8 := by decide
 
 /-! ## §6 The receipt board -/
 

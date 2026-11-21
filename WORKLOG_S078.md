@@ -104,3 +104,15 @@ named.
 (The table updates as the verdicts land.)
 
 The engine never stops; it never lies. In English, always.
+
+## E10b — THE LATE ROUNDS (r3's verdict + the total DustFamily map)
+
+| Round | Commit | Verdict | The killed root causes |
+|---|---|---|---|
+| r3 | 36a1578 | AntiCluster406.lean GREEN (clean axioms: [propext, Classical.choice, Quot.sound] — the census bridge, the anti-clustering law, the deep form all compile); DustFamily RED (its FIRST compile) | (1) Nat.add_mul_mod_self_right's actual shape is (a + b*c) % c = a % c — child_mod's hcong restated to t * c * m to match; (2) **THE PIPE-SWALLOW LAW (L99)**: `X |>.length = e` does NOT parse — the `|>` swallows the `=` (r3: parse error at exactly the `=`); every statement now uses `((X).filter f).length = ...`; DustLaw406's green `|>` uses are all pipe-terminal; (3) dvd3's `(3:Nat) = 3^1 from rfl` rewrite corrupted the POWER BASES (3^j became (3^1)^j) — re-routed through the j'+1 decomposition + Nat.pow_succ + mul_comm. |
+| r4 | (W6) | (verdict below) | the total map applied. |
+
+**L99 (THE PIPE-SWALLOW LAW):** `|>` in a statement followed by `=` swallows the
+equality into the piped function — always parenthesize: `((X).filter f).length = e`.
+
+The engine never stops; it never lies.
