@@ -15,3 +15,14 @@
 [grind 14:47:13] launched chunk 1 (8 parents)
 [grind 14:47:25] chunk 1: +8 parents (8/6405; hull<=4: 8/5158), +2491 new types (census 2491), new-hull-hist {3: 1992, 4: 499}, C-wall 6s, total 12s
 [grind 14:47:31] chunk 0: +8 parents (16/6405; hull<=4: 16/5158), +2586 new types (census 5077), new-hull-hist {3: 2038, 4: 548}, C-wall 11s, total 18s
+[grind 14:47:32] GRIND COMPLETE: 16/6405 parents, census 5077 reflection-distinguished types
+[grind 14:48:25] resume: 16/6405 parents done, census lines 5077, this run: 6389 parents max, workers=2
+[grind 14:48:25] launched chunk 2 (64 parents)
+[grind 14:48:25] launched chunk 3 (64 parents)
+[grind 14:50:24] resume: 16/6405 parents done, census lines 5077, this run: 6389 parents max, workers=2
+[grind 14:50:24] launched chunk 2 (64 parents)
+[grind 14:50:24] launched chunk 3 (64 parents)
+[grind 14:53:21] resume: 16/6405 parents done, census lines 5077, this run: 6389 parents max, workers=2
+[grind 14:53:21] launched chunk 2 (48 parents)
+[grind 14:53:21] launched chunk 3 (48 parents)
+[grind 14:54:38] chunk 2: +48 parents (64/6405; hull<=4: 64/5158), +13890 new types (census 18967), new-hull-hist {3: 11055, 4: 2835}, C-wall 43s, total 77s
