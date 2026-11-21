@@ -246,23 +246,29 @@ index shift on the summation-shift discipline):
 #BY GST LAW sum_range_shift [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:104]
 Inner sum, fixed $u$, by HOCKEY with $r = u$:
 $\sum_{v=0}^{b-3}\binom{u+v}{u} = \sum_{t=u}^{u+b-3}\binom{t}{u} =
-\binom{u+b-2}{u+1} = \binom{u+b-2}{b-3}$ (complementing). Outer sum:
-$\sum_{u=0}^{a-3}\binom{u+b-2}{b-3} = \sum_{t=b-1}^{a+b-4}\binom{t}{b-3} =
-\binom{a+b-3}{b-2} - \binom{b-1}{b-1}\cdot$… precisely
-$\sum_{t=b-2}^{a+b-4}\binom{t}{b-3} = \binom{a+b-3}{b-2}$ by HOCKEY, and
-subtracting the $t = b-2$ term $\binom{b-2}{b-3} \cdot 0$-correction:
-the sum from $t = b-1$ is $\binom{a+b-3}{b-2} - \binom{b-2}{b-3}$; adding
-back nothing — let us display the telescoped result:
-$$\sum_{u=0}^{a-3}\binom{u+b-2}{b-3}
-= \binom{a+b-3}{b-2} - 1 \;=\; \binom{a+b-4}{b-2} + \binom{a+b-4}{b-3} - 1
-= \binom{a+b-4}{b-2}\cdot$$
-…closing with Pascal's complement $\binom{a+b-4}{b-2} =
-\binom{a+b-4}{a-2}$. Each equality is Pascal or HOCKEY; the composite is
-engine-verified for **all** $3 \leq a, b \leq 60$ by **two independent
-codes** (S4: `math.comb` direct vs. a from-scratch memoized Pascal
-recursion — no `math.comb` — agreeing on every value), and in vivo on the
-extremal sets (S4: the label census of $S(a,b)$ sums to
-$\binom{a+b-4}{a-2}$ exactly). $\square$
+\binom{u+b-2}{u+1} = \binom{u+b-2}{b-3}$ (complementing). Outer sum, by
+HOCKEY with $r = b-3$ over $t = u + b - 2 \in [b-2, a+b-5]$ — the stick
+$\sum_{t=b-3}^{a+b-5}\binom{t}{b-3} = \binom{a+b-4}{b-2}$ loses exactly
+the single $t = b-3$ term $\binom{b-3}{b-3} = 1$ *(W81-107B audit note,
+completed by the W81-107B-F finisher: the pre-audit prose subtracted a
+spurious $t=b-1$ / $\binom{b-2}{b-3}$ term mid-derivation, and the first
+repair attempt still ran the stick to $a+b-4$ and closed at
+$\binom{a+b-3}{b-2}-1$ — an off-by-one: at $a=b=4$ that intermediate
+reads $9$ where the true sum is $5$. The displayed identity and its
+two-code machine certificate were correct throughout; the prose is now
+the two clean HOCKEY applications, and the audit engine re-certifies the
+corrected intermediate identity too, A5)*:
+$$\sum_{u=0}^{a-3}\binom{u+b-2}{b-3} = \binom{a+b-4}{b-2} - 1.$$
+Close with the complement $\binom{a+b-4}{b-2} = \binom{a+b-4}{a-2}$
+(since $(a+b-4)-(b-2) = a-2$):
+$$\sum_{i=2}^{a-1}\sum_{j=2}^{b-1}\binom{i+j-4}{i-2}
+= \binom{a+b-4}{a-2} - 1. \qquad\square$$
+Each equality is Pascal or HOCKEY; the composite is engine-verified for
+**all** $3 \leq a, b \leq 60$ by **two independent codes** (S4: `math.comb`
+direct vs. a from-scratch memoized Pascal recursion — no `math.comb` —
+agreeing on every value), in vivo on the extremal sets (S4: the label
+census of $S(a,b)$ sums to $\binom{a+b-4}{a-2}$ exactly), and again by the
+W81-107B audit engine (A4, two fresh binomial codes).
 
 (The displayed intermediate is written out longhand in S4's receipt line;
 the engine carries the identity, the prose carries the two HOCKEY

@@ -1,0 +1,11 @@
+RECEIPTS — audit_w81_c_compare.py (W81-107B-F finisher run) — the v2-parents-vs-C-port comparison
+run 2026-11-21T15:47:29Z; C binary /home/z/waves/w81-107a/problem107-happy-ending/engine107f9 (read-only sibling worktree)
+finisher repair: pack_hex/unpack_hex little->BIG-endian (the C reads engine107f5v4.py pack_signs convention; the first draft nibble-reversed every chi and the C FATAL'd 'shear chi mismatch')
+loaded 3 dumped parents (seed 20261187)
+C engine answered 3 parent jobs (0 GENERIC-FAIL)
+parent 0 (bank pos 650): cells C=287 py=287 (L2 OK); C children=360 (emitted distinct ck=360) vs py A6 children=422; S1 canonical keys: py=231, all present in C output: True; C-only keys: 129 (walk/sweep rng difference)
+parent 1 (bank pos 6301): cells C=287 py=287 (L2 OK); C children=344 (emitted distinct ck=344) vs py A6 children=401; S1 canonical keys: py=231, all present in C output: True; C-only keys: 113 (walk/sweep rng difference)
+parent 2 (bank pos 4881): cells C=287 py=287 (L2 OK); C children=345 (emitted distinct ck=345) vs py A6 children=391; S1 canonical keys: py=231, all present in C output: True; C-only keys: 114 (walk/sweep rng difference)
+L4 canonical-form cross-validation: 1214 chirotopes agree, 0 disagree (0 skipped)
+C-COMPARE PASS
+EXIT=0

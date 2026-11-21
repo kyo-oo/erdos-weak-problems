@@ -220,37 +220,42 @@ triangles convex; the 2-point witness.)
 three — no convex 4 (the interior point is never a hull vertex; the hull
 has 3). Upper: any 5 points in general position contain a convex 4:
 take the hull $H$. If $|H| \geq 4$: any 4 hull vertices work (hull
-vertices are in convex position ✓). If $|H| = 3$: two points $p, q$
-inside the triangle; the line $pq$ splits the triangle's vertices 2-and-1
-($\{a, b\}$ on one side, $c$ on the other, names chosen so); then
-$\{a, b, p, q\}$ is convex: $p, q$ are separated from $ab$ by... the
-standard finish: the line through $p, q$ has $a, b$ strictly on one side
-and $c$ strictly on the other; the quadrilateral $a p b q$... precisely:
-$\{p, q\} \cup \{a, b\}$: both $p, q$ lie strictly inside the triangle,
-hence strictly on the $c$-side... no: $a, b$ on one side of line $pq$,
-$p, q$ ON the line: the 4 points $\{a, b, p, q\}$: hull = $\{a, b\} \cup
-\{p, q\}$ iff all four are extreme: $a, b$ are on the same side —
-quadrilateral with vertices $a, p, b, q$ (alternating): edges $ap, pb,
-bq, qa$: convex iff the diagonals $ab$ and $pq$ cross — $a, b$ strictly
-on one side of LINE $pq$ means the SEGMENT $ab$ doesn't cross line
-$pq$... hmm — the correct classical statement: the line through $p$ and
-$q$ leaves one triangle vertex alone on one side: $\{p, q, a, b\}$ where
-$a, b$ are the two vertices on the OTHER side: then $p$ and $q$ see the
-segment $ab$... The clean argument: rotate so line $pq$ is vertical,
-$p$ below $q$; $a, b$ strictly right, $c$ strictly left. The quadrilateral
-$c$-side... take $\{c, p, q\} \cup$ one of $a/b$? — simplest correct
-route (the one the engine certifies): among $\{a,b,p,q\}$, $\{a,b,c,p\}$,
-$\{a,b,c,q\}$, $\{a,c,p,q\}$, ... one of the five 4-subsets is convex —
-in fact the classical lemma: $\{a, b, p, q\}$ IS convex: $a, b$ strictly
-on one side of line $pq$, and $p, q$ strictly on the same side of line
-$ab$?? (p, q inside the triangle are on the same side of edge-line $ab$
-as $c$ ✓). Both pairs separated from each other's lines → the segments
-$ab$ and $pq$ cross? — two segments cross iff their endpoints are
-strictly separated by the other's line ✓✓: $a, b$ strictly on one side
-of line $pq$ (✓ from the split), $p, q$ strictly on the $c$-side of line
-$ab$ (✓ interior) — so segments $ab$ and $pq$ properly cross → the four
-points form a convex quadrilateral with $ab, pq$ as crossing diagonals ✓.
-∎ (Engine: 5500 random + adversarial 5-sets, all contain convex 4.)
+vertices are in convex position ✓). If $|H| = 3$: write
+$S = \{a, b, c, p, q\}$ with $p, q$ strictly inside triangle $abc$. The
+line $pq$ splits the triangle's vertices 2-and-1 — $\{a, b\}$ strictly on
+one side, $c$ strictly on the other (no vertex lies ON the line: GP
+excludes collinearity with $p, q$; and all three strictly on one side
+would put the open triangle strictly on that side, contradicting
+$p, q \in$ open triangle $\cap$ line $pq$).
+
+> **Claim: $\{a, b, p, q\}$ is in convex position.** *(W81-107B audit
+> repair — the earlier text's finish "segments $ab$ and $pq$ properly
+> cross" was FALSE: $a, b$ lie on the SAME side of line $pq$, so $ab$ and
+> $pq$ are opposite EDGES of the quadrilateral, not crossing diagonals;
+> the correct instrument is extremality, as in PROOF.md §2.)*
+>
+> *($\alpha$) $p \notin \mathrm{conv}\{a, b, q\}$.* Every point
+> $x = \lambda a + \mu b + \nu q$ of $\mathrm{conv}\{a, b, q\}$
+> ($\lambda, \mu, \nu \geq 0$, $\lambda + \mu + \nu = 1$) has signed
+> distance $\lambda\, d(a) + \mu\, d(b) + \nu \cdot 0$ from line $pq$,
+> where $d(a), d(b) > 0$ (same side) — so
+> $\mathrm{conv}\{a, b, q\} \cap \mathrm{line}(pq) = \{q\}$ exactly (the
+> combination lands on the line only when $\lambda = \mu = 0$). Since
+> $p \in \mathrm{line}(pq)$ and $p \neq q$: $p$ is outside
+> $\mathrm{conv}\{a, b, q\}$. Symmetrically
+> $q \notin \mathrm{conv}\{a, b, p\}$.
+>
+> *($\beta$) $a \notin \mathrm{conv}\{b, p, q\}$.* $a$ is a vertex of
+> $\operatorname{conv}(S)$, hence extreme: not a convex combination of
+> the OTHER points of $S$ — in particular not of $b, p, q$. Symmetrically
+> $b \notin \mathrm{conv}\{a, p, q\}$.
+>
+> All four points are extreme in $\{a, b, p, q\}$: convex position ✓.
+
+∎ (Engine: 5500 random + adversarial 5-sets, all contain convex 4; the
+W81-107B audit engine re-proves the mechanism in code — 87/87 in-grid
+hull-3 witnesses have the 2-1-split quadruple $\{a, b, p, q\}$ convex by
+BOTH codes, `receipts107audit_w81.txt` check A1.)
 
 *$f(5) \geq 9$.* The kernel's 8-point exact-integer witness: general
 position, zero convex 5-gons among $\binom{8}{5} = 56$ subsets (engine
