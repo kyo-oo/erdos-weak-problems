@@ -113,11 +113,42 @@ The named next lanes (in priority order):
 3. **Frame W** — the tower half as digit statements about the 3-adic
    logarithm W (the two-window deep-tail law first).
 
-## E10 — THE CI WAR RECORD
+## E10 — THE CI WAR RECORD (the full honesty ledger — 4 rounds to TOTAL GREEN)
 
-The push `617f71b` fires the full board: kernel-a (Kernel 38 census),
-kernel-b (Kernels 19-37 + 68 CapLaw+DustLaw + 69 ExtraLaws + 70 TwoAdic),
-gate-406-official, kernel-c, gates 61/107/142. The war table fills as the
-runs land; the verdicts ride the next commit.
+| Round | Commit | Run | Verdict | The killed root causes |
+|---|---|---|---|---|
+| r0 | 617f71b/b8bea58 | 44846558805 | kernel-b RED | (predicted by the self-audit BEFORE the run: the implication-goals needing intro _, the mul_comm dead-end 3^(2*2^s)=3^(2^s*2), the rfl-on-forall, the pow_add-on-Dvd) + 3 unpredicted: the dustStep_val explicit j r args (hd in the j slot, 9 sites), Nat.pow_succ's mul-order (3^M*3 not 3*3^M), the dust_spec child-membership transport |
+| r1 | e9b2c16 | 44850454523 | kernel-b RED (progress) | the audit fixes CONFIRMED HOLDING (three_pow_twopow_struct / near_unity_pow / three_pow_mod_period / sum_congr_mod ALL print clean); residuals = exactly the 3 root causes (fixed in 6c3fca8) + ONE new pattern: trailing rfl's after auto-closing rw's (0%3=0, ((9%8)*1)%8=4, (1+1)%8=2 close by kernel defeq — the explicit rfl lines error "No goals") |
+| r2 | 6c3fca8 | 44851341581 | kernel-b RED (the rfl's) | the 3 root causes killed; the rfl pattern identified from e9b2c16's map |
+| r3 | eeca329 | **44854429197** | **16/16 JOBS GREEN — RUN-LEVEL SUCCESS** | the rfl removals; ALL RECEIPTS PRINT CLEAN |
+
+**THE GREEN STATE (run 44854429197, all receipts [propext, Quot.sound] or
+[propext] — constructive-clean):**
+- Kernel 38 (Erdos406Ternary): ERDOS406_KERNEL_GREEN=1
+- Kernel 68 (CapLaw406 + THE HEALED DustLaw406): ERDOS406_CAPLAW_KERNEL_GREEN=1
+  (dust_spec, dust_doubling, dust_card, dust_rider_classes, dust_shift,
+  four_pow_3j_struct + THE NEW dust_edge — all clean)
+- Kernel 69 (ExtraLaws406): ERDOS406_EXTRALAWS_KERNEL_GREEN=1
+- **Kernel 70 (TwoAdic406): ERDOS406_TWOADIC_KERNEL_GREEN=1** — THE 2-ADIC
+  BUDGET TOWER (budget_tower), THE RIDER TOWER (rider_budget_tower), the
+  square certificate, the period twin, the digit representation, the pairing
+  laws, THE LX REFUTATION receipts (lx_refutation_receipt,
+  lx_refutation_far_cap — [propext] only), the tower receipts — all clean
+- BATTERY406C_GREEN=1 (the battery, in CI)
+- gate-406-official: SUCCESS (the comparator lane)
+- The whole board green: kernel-a/b/c, kernels 61/107/142 (a/d/k/cmp),
+  gates 61/107/142, kernel-s060 — 16/16.
+
+**THE NEW LESSONS (L94-L96, for the ledger):**
+- L94 (THE EXPLICIT-ARGS LAW): a rw-list term `lem h` with lem (a b : Nat)
+  (h : P) puts h in the a-slot — always write `lem j r h` when the leading
+  args are explicit.
+- L95 (THE POW_SUCC ORDER LAW): Nat.pow_succ's RHS is `a^n * a` — a have
+  typed `a^(n+1) = a * a^n` mismatches on mul-order; restate in the lemma's
+  own order or prove by `rw [Nat.pow_succ]; ring`.
+- L96 (THE AUTO-RFL LAW): rw's built-in rfl closes any goal that kernel-
+  whnf equalizes (0 % m, literal mod-chains like ((9%8)*1)%8) — a trailing
+  explicit rfl then errors "No goals to be solved"; matcher-reduction
+  (match-on-literal) does NOT auto-close and KEEPS its explicit rfl.
 
 The engine never stops; it never lies. In English, always.
