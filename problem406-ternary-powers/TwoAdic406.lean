@@ -132,7 +132,6 @@ theorem digit3_of_lt (x j q : Nat) (hx : x < 3^(j+1)) (hq : j+1 ≤ q) :
   have hd : x / 3^q = 0 := Nat.div_eq_of_lt hxq
   unfold digit3
   rw [hd]
-  rfl
 
 /-! ## §1 The square certificate — the near-unity structure of `3^(2^s)` -/
 
@@ -317,20 +316,17 @@ theorem nine_pow_mod8 (a : Nat) : (9:Nat)^a % 8 = 1 := by
   | zero => rfl
   | succ a ih =>
     rw [Nat.pow_succ, Nat.mul_mod, ih]
-    rfl
 
 /-- **THE MIXED-PARITY PAIR LAW.** `9^a + 3·9^b ≡ 4 (mod 8)` — every
 mixed-parity pair of powers of 3 carries 2-adic valuation exactly 2. -/
 theorem pair_mixed (a b : Nat) : (9^a + 3 * 9^b) % 8 = 4 := by
   rw [Nat.add_mod, nine_pow_mod8, Nat.mul_mod, nine_pow_mod8]
-  rfl
 
 /-- **THE SAME-PARITY PAIR LAW.** `9^a + 9^b ≡ 2 (mod 8)` — every
 same-parity pair carries valuation exactly 1; no two powers of 3 ever sum
 to `0 mod 8`. -/
 theorem pair_same (a b : Nat) : (9^a + 9^b) % 8 = 2 := by
   rw [Nat.add_mod, nine_pow_mod8, nine_pow_mod8]
-  rfl
 
 /-! ## §8 The verdict bridge — digits to the Cantor checker -/
 

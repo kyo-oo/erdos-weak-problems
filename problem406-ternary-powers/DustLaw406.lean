@@ -511,7 +511,6 @@ theorem digit3_of_lt (x j q : Nat) (hx : x < 3^(j+1)) (hq : j+1 ≤ q) :
   have hd : x / 3^q = 0 := Nat.div_eq_of_lt hxq
   unfold digit3
   rw [hd]
-  rfl
 
 /-- Every number whose ternary digits avoid 2 passes the Cantor verdict
 (the verdict bridge). -/
