@@ -1,0 +1,34 @@
+[23:52:36] === W77-61K KILL1 engine61k5.py START ===
+[23:52:36] PART 1 — R(3,3) = 6 certified exhaustively (2^15 graphs)
+[23:52:36] R(3,3) >= 6 side: every triangle-free 6-vertex graph has alpha >= 3 — CONFIRMED (2^15 exhaustive, both alpha codes agree on every graph). The K6 minus... the anchor holds. #BY GST LAW two_pow_ge2 [ErdosTernary2.lean:891]
+[23:52:36] PART 2 — the recursion step certified on instance graphs: R(r,s) <= R(r-1,s) + R(r,s-1)
+[23:52:36] recursion step: 458 explicit clique-extension instances verified (a K_r in N(v) completes with v to K_(r+1)) — the two-neighborhood split is sound. #BY GST LAW worldMap_monotone [HC-PROOF-research/GSTGraphV2CausalComponents.lean:127]
+[23:52:36] PART 3 — THEOREM K5 census: every K5-free graph satisfies alpha >= (n/30)^{1/4} - 1 (exhaustive n<=6, sampled n=7..10)
+[23:52:37] exhaustive n=1..6: 33694 K5-free graphs, violations: 0
+[23:52:46] sampled n=7..10: 143652 K5-free graphs, violations: 0
+[23:52:55] structured 4-partite family n=8..64: alpha >= n/4 >= bound everywhere — GREEN
+[23:52:59] negative control: 0 K5-CONTAINING graphs at n=10 violate the bound — the K5-freeness hypothesis is load-bearing
+[23:52:59] PART 4 — the two alpha codes duel (branch&bound vs subset-scan brute) on 6000 random graphs n<=7
+[23:53:00] 6,000/6,000 agreement — both alpha codes exact
+[23:53:00] === W77-61K KILL1 engine61k5.py DONE ===
+[23:53:25] === W77-61K KILL1 engine61k5.py START ===
+[23:53:25] PART 1 — R(3,3) = 6 certified exhaustively (2^15 graphs)
+[23:53:25] R(3,3) >= 6 side: every triangle-free 6-vertex graph has alpha >= 3 — CONFIRMED (2^15 exhaustive, both alpha codes agree on every graph). The K6 minus... the anchor holds. #BY GST LAW two_pow_ge2 [ErdosTernary2.lean:891]
+[23:53:25] PART 2 — the recursion step certified on instance graphs: R(r,s) <= R(r-1,s) + R(r,s-1)
+[23:53:25] recursion step: 458 explicit clique-extension instances verified (a K_r in N(v) completes with v to K_(r+1)) — the two-neighborhood split is sound. #BY GST LAW worldMap_monotone [HC-PROOF-research/GSTGraphV2CausalComponents.lean:127]
+[23:53:25] PART 3 — THEOREM K5 census: every K5-free graph satisfies alpha >= (24n)^{1/4} - 4 (exhaustive n<=6, sampled n=7..10, structured n up to 4096)
+[23:53:26] exhaustive n=1..6: 33694 K5-free graphs, violations: 0
+[23:53:35] sampled n=7..10: 143652 K5-free graphs, violations: 0
+[23:53:35]   n=48: bound=2 (non-trivial), 4-partite alpha=12 >= 2 GREEN
+[23:53:35]   n=64: bound=2 (non-trivial), 4-partite alpha=16 >= 2 GREEN
+[23:53:35]   n=128: bound=3 (non-trivial), 4-partite alpha=32 >= 3 GREEN
+[23:53:35]   n=256: bound=5 (non-trivial), 4-partite alpha=64 >= 5 GREEN
+[23:53:35]   n=512: bound=7 (non-trivial), 4-partite alpha=128 >= 7 GREEN
+[23:53:35]   n=1024: bound=9 (non-trivial), 4-partite alpha=256 >= 9 GREEN
+[23:53:35]   n=2048: bound=11 (non-trivial), 4-partite alpha=512 >= 11 GREEN
+[23:53:35]   n=4096: bound=14 (non-trivial), 4-partite alpha=1024 >= 14 GREEN
+[23:53:35] structured 4-partite family n=8..4096: alpha = ceil(n/4) >= bound everywhere — GREEN (non-trivial rows logged above)
+[23:53:39] negative control: 0 K5-CONTAINING graphs at n=10 violate the bound — the K5-freeness hypothesis is load-bearing
+[23:53:39] PART 4 — the two alpha codes duel (branch&bound vs subset-scan brute) on 6000 random graphs n<=7
+[23:53:39] 6,000/6,000 agreement — both alpha codes exact
+[23:53:39] === W77-61K KILL1 engine61k5.py DONE ===
