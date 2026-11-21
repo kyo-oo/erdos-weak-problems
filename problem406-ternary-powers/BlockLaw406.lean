@@ -392,10 +392,12 @@ theorem rider_second_digit_residue (K : Nat)
           rw [show ((v:Nat)+1)+1 = v+2 from by omega, hKu, hres,
               Nat.mod_eq_of_lt (lt_cut_residue v 2 (by decide))]
         have hcon := digit3_mod_congr (4^K) (1 + 2 * 3^(v+1)) (v+1) hmod
+        have hres2 : (1 + 2 * 3^(v+1)) % 3^((v+1)+1)
+            = 1 + 2 * 3^(v+1) := by
+          rw [show ((v:Nat)+1)+1 = v+2 from by omega]
+          exact Nat.mod_eq_of_lt (lt_cut_residue v 2 (by decide))
         rw [hcon]
-        exact digit3_of_residue_two (1 + 2 * 3^(v+1)) (v+1) hv1
-          (by rw [show ((v:Nat)+1)+1 = v+2 from by omega];
-           exact Nat.mod_eq_of_lt (lt_cut_residue v 2 (by decide)))
+        exact digit3_of_residue_two (1 + 2 * 3^(v+1)) (v+1) hv1 hres2
       rw [noTernaryTwo_of_digit_two (v+1) (4^K) hfire] at hrider
       exact absurd hrider (by decide)
   refine ⟨v, u, hKu, hu1, ?_, ?_, ?_⟩
@@ -423,11 +425,13 @@ theorem rider_second_digit_residue (K : Nat)
         (1 + 1 * 3^(v+1)) % 3^((v+1)+1) := by
       rw [show ((v:Nat)+1)+1 = v+2 from by omega, hKu, hres, hu1,
           Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide))]
+    have hres2 : (1 + 1 * 3^(v+1)) % 3^((v+1)+1)
+        = 1 + 1 * 3^(v+1) := by
+      rw [show ((v:Nat)+1)+1 = v+2 from by omega]
+      exact Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide))
     have hcon := digit3_mod_congr (4^K) (1 + 1 * 3^(v+1)) (v+1) hmod
     rw [hcon]
-    exact digit3_of_residue_one (1 + 1 * 3^(v+1)) (v+1) (by omega)
-      (by rw [show ((v:Nat)+1)+1 = v+2 from by omega];
-       exact Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide)))
+    exact digit3_of_residue_one (1 + 1 * 3^(v+1)) (v+1) (by omega) hres2
 
 /-! ## §3 THE WINDOW LAW — the digit stream reads the diagonal -/
 
