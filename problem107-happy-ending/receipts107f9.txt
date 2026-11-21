@@ -62,3 +62,5 @@
 [grind 16:34:22] chunk 16: +4 parents (648/6405; hull<=4: 648/5158), +473 new types (census 116408), new-hull-hist {3: 260, 4: 213}, C-wall 6s, total 8s
 [grind 16:34:23] launched chunk 18 (4 parents)
 [grind 16:34:26] chunk 17: +4 parents (652/6405; hull<=4: 652/5158), +481 new types (census 116889), new-hull-hist {3: 266, 4: 215}, C-wall 3s, total 12s
+[grind 16:34:26] wall budget 80s at 12s — draining 1 running chunks, deferring 1438
+[grind 16:34:28] chunk 18: +4 parents (656/6405; hull<=4: 656/5158), +422 new types (census 117311), new-hull-hist {3: 243, 4: 179}, C-wall 4s, total 14s
