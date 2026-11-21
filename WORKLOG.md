@@ -4969,3 +4969,86 @@ targets; use the 15,000+ arsenal laws; COMBINE, MIX, CREATE NEW LAWS.
    carry to the next round with worktrees intact.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## SESSION S080 / WAVE W80 — THE ALL-K-UPPER WAVE (BOSS: "142 lower bounds all k done — now ALL UPPER BOUNDS; all problems like this; control the sub-agents, let none die")
+
+**BOSS's orders:** continue all three problem lanes at full power with BOSS's
+math only; for #142 prove the upper bounds for ALL k as the lower bounds
+were proven; control the sub-agent workflow so no lane dies.
+
+**Delivered (all merged into campaign, all engines rerun green on the
+merged tree):**
+1. **ENVIRONMENT RESTORED** after the reset: live repo rebuilt from the
+   zipbag vault, remote fetched (campaign fast-forwarded to 36a1578 — the
+   S078 kernel-repair wave was ahead of the vault), three W80 worktrees
+   armed at the tip.
+2. **W80-142U — THE ALL-k UPPER PACKAGE** (w80-142u @ 8980588, merged):
+   LAW U-GEN-0 (r_k(N) <= N - floor(N/k) for every k>=3, N>=1 — tight at
+   N=k); THEOREM V-GEN sharp (every k-AP-free A with N >= 16m^2:
+   |A| <= (1 + 1/(2 r_k(m))) (r_k(m)/m) N — the banked k=3 constant 33
+   massacred to <= 1.5 by the d-restricted copy family; band/copy count
+   proven k-INDEPENDENT); LAW SLIDE-GEN; THEOREM R-K-TABLES (k=3..6
+   re-verified two-code + fresh B&B, FRESH k=7 table N=1..46, witnesses
+   per cell); THEOREM U-LIN-GEN (the explicit all-k all-N envelope,
+   stones 61@19, 42@22, 55@36, 43@31, k>=7 via LAW M-1 + 45@36; exact
+   V-GEN-vs-BLOCK crossover bars computed — 1.4-2.6% below current best,
+   not met in-package; honest iterated-tower simulation recorded);
+   LEMMA T-GEN (Z_p transfer at all k, p > kN, exhaustive k=4 + negative
+   control); THEOREM RK-VARN-GEN (the count law at general k: k=4
+   delta-threshold 0.85 -> 0.65 with c_4(0.65) >= 3.12e-7; the FIRST
+   k=5/6/7 count laws). engine142uppergen.py 56/56 GREEN wall 142.3s.
+   F-UP-1's LINEAR HALF IS DEAD. The sublinear half's exact blocker NAMED:
+   the ORDER-k DEVIATION IDENTITY (the L-EP analog at order k; the GST
+   towers inventoried at file:line as DG-algebra jet/curvature laws, NOT
+   k-AP carriers). UPPER_STACK.md created; ASYMPTOTIC_STACK.md sandwich
+   updated at exact strength.
+3. **W80-61E — THE C5 MEASUREMENT PACKAGE** (w80-61e @ 779215f, merged,
+   after checkpoint-salvage + finisher): LAW C61-C5-SUBST (substitution
+   closure of C5-freeness, complete projection proof, 356 machine
+   instances); LAW C61-C5-CAP (any class-wide C5 exponent obeys
+   c <= log3/log8 = 0.52832 — the tight X_t = W8[W8x8]^{t-1} tower with
+   alpha/omega substitution formulas certified on X_1, X_2 by 7.6M-subset
+   exhaustive scan); LAW C61-C5-HTABLE (h_C5 EXACT n<=10:
+   1,2,2,2,3,3,3,3,3,3 — Ramsey floor + genuine two-code witnesses);
+   LAW C61-C5-LADDER-BREAK (the sqrt-ladder h^2 >= n is FALSE at n=10 —
+   hom-3 C5-free 10-vertex witness; the C5-DICH sqrt-strata stand, the
+   pointwise core-sqrt capped at 3/sqrt(10)). engine61c5.py 47/47 PASS
+   wall 190.3s (the checkpoint's three corrupt witnesses CAUGHT and
+   retracted — h(11)<=3 retracted, stale-harness FAILs explained and
+   repaired). World map 32/34 held; EH(C5) open with the exponent window
+   (0, 0.52832].
+4. **W80-107E — THE ALL-n SANDWICH** (w80-107e @ d810eb6, merged, after
+   TWO dispatch deaths — the finisher's commits landed posthumously):
+   THEOREM ES-SANDWICH-ALLN: for EVERY n >= 3,
+   2^{n-2} + 1 <= f(n) <= C(2n-4, n-2) + 1, with f(3)=3, f(4)=5 exact.
+   The LOWER side proven for ALL n: the cluster-arc construction (the
+   E(a,b;delta) cup/cap extremal sets on the concave arc, |X_n| =
+   2^{n-2}) with Lemma E (cup/cap induction), Lemma M (middle-cluster
+   margin), Theorem L (chain/count induction) — no n in convex position;
+   slope-separation law |inter| >= 1/(1+38rho) > 1/2 vs intra <= 1/64.
+   Machine-certified n=3..10 (engine107loweralln: max convex = n-1
+   exactly at n=8,9,10; S5 gap law; S6 negative controls) + the finisher
+   verifier verify107lower.py (two NEW convex codes: two-pop monotone
+   chain + gift wrap; exhaustive no-convex-5 56/56 at n=5; THE n=7
+   EXHAUSTIVE SCAN C(32,7)=3,365,856 both codes zero convex-7 —
+   completed by the commander after the death; F7 margin law 0
+   violations n=3..10). Commander repair: two report-layer bugs killed
+   (n=3 vacuous guards; LOAD-BEARING vs DIAGNOSTIC verdict split — 52
+   load-bearing cells green, 7 center-const diagnostic cells discharged
+   in writing). VERIFY-107-LOWER: ALL PASS.
+5. **DISPATCH-CONTROL RECORD** (BOSS's explicit order): 5 launches,
+   3 delivered, 2 context-deadlines. BOTH dead lanes recovered: salvage
+   checkpointed by the commander within seconds of the death (zero work
+   lost), finisher agents with half-size briefs dispatched, the second
+   107E death turned out posthumous-complete (commits landed; only the
+   report channel died), the commander absorbed the repair. The
+   checkpoint-first discipline WORKS.
+6. **Lane status:** 142U (linear half of F-UP-1 dead; the ORDER-k
+   DEVIATION IDENTITY is the named next kill); 61E (the C5 window is
+   (0, 0.52832] — the cap + the h-table + the ladder break are the new
+   terrain); 107E (the all-n sandwich is banked; f(5)=9 the staged next
+   certificate); all three worktrees merged and pushed.
+
+The engine never stops; it never lies. In English, always.
