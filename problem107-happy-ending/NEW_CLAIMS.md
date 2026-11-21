@@ -34,6 +34,18 @@ The commander integrates; this lane does not edit solution.json.
     "statement": "Avoidance law: the label class P_ij, as a standalone point set, contains no i-cup and no j-cap ((i+1)/(j+1) avoidance proven; i/j avoidance certified on 3,322 classes, zero occurrences).",
     "status": "certified-law-proven-boundary",
     "receipts": "ALLN_PROOF.md section 3; alln107/s4c_avoid.json"
+  },
+{
+    "id": "C107-LOWER-ALLN",
+    "statement": "For every n >= 3 there is an explicit GP set X_n of exactly 2^(n-2) rational points with no n in convex position; hence f(n) >= 2^(n-2)+1 for all n >= 3.",
+    "status": "proven-all-n (Lemma E induction + Lemma M margin + Theorem L chain count); engine-certified n=3..10 (exhaustive n<=7, randomized 8..10); finisher two-code independent verification n=5,7",
+    "receipts": "ES_SANDWICH_ALLN.md sections 1-4; engine107loweralln_receipts.txt; verify107lower_receipts.txt"
+  },
+  {
+    "id": "C107-SANDWICH-ALLN",
+    "statement": "For every n >= 3: 2^(n-2)+1 <= f(n) <= C(2n-4,n-2)+1; f(3)=3 and f(4)=5 exact. Lower = C107-LOWER-ALLN (proven all n); upper = banked Theorem CC/U (ES_PACKAGE_PROOF.md).",
+    "status": "assembled-theorem (both sides proven all n)",
+    "receipts": "ES_SANDWICH_ALLN.md (the proof record); ES_PACKAGE_PROOF.md sections 2-3; receipts107alln.txt; PROOF.md sections 1-2"
   }
 ]
 ```
