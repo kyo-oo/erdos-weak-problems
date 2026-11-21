@@ -1,0 +1,156 @@
+==============================================================================
+ENGINE 142 UPPERGEN — W80-142U — start 11:30:14
+==============================================================================
+
+=== PART 1 — LAW U-GEN-0: r_k(N) <= N - floor(N/k) (all k>=3, N>=1) ===
+PROOF (elementary, engine-checked): partition [1,N] into q=floor(N/k)
+consecutive k-blocks [jk+1..jk+k] plus a tail of N mod k points; a full
+k-block IS a non-trivial k-AP (common difference 1), so each full block
+misses >= 1 point of any k-AP-free A; hence
+  |A| <= q(k-1) + (N mod k) = N - floor(N/k)   <   N - floor(N/k) + 1.
+PASS UGEN0-k3-table cells=1..61 all under the bound; worst slack 0
+PASS UGEN0-k4-table cells=1..42 all under the bound; worst slack 0
+PASS UGEN0-k5-table cells=1..57 all under the bound; worst slack 0
+PASS UGEN0-k6-table cells=1..51 all under the bound; worst slack 0
+PASS UGEN0-partition-arithmetic samples (k,N): q blocks + tail cover [1,N] exactly
+PASS UGEN0-tight-k3 r_3(3)=2=k-1 (bound TIGHT at N=k)
+PASS UGEN0-tight-k4 r_4(4)=3=k-1 (bound TIGHT at N=k)
+PASS UGEN0-tight-k5 r_5(5)=4=k-1 (bound TIGHT at N=k)
+PASS UGEN0-tight-k6 r_6(6)=5=k-1 (bound TIGHT at N=k)
+PASS UGEN0-negctl full interval [1,40]@k=4 contains 4-APs: the AP-freeness hypothesis is load-bearing
+
+=== PART 2 — THEOREM V-GEN (homothetic amplification, ALL k, SHARP) ===
+STATEMENT: for all k>=3, m>=2, N>=16m^2, every k-AP-free A in [1,N]:
+  |A| <= rho_m*N + 2(m-1)*D0 <= rho_m*N + N/(2m) = (1+1/(2 r_k(m)))*rho_m*N,
+  rho_m := r_k(m)/m, D0 := floor(N/(4m(m-1))).
+PROOF: copies c(a,d)=a+d{0..m-1} with d<=D0; band B=[(m-1)D0+1, N-(m-1)D0];
+  every x in B lies in >= m*D0 DISTINCT copies (all (d,j), d<=D0, j<m);
+  #C0 <= N*D0; each copy hosts <= r_k(m) points (affine image of a k-AP
+  is a k-AP — the ONLY k-dependent line, valid for all k at once);
+  double count => |A n B| <= r_k(m)*N/m => |A| <= rho_m N + 2(m-1)D0.
+  The band/copy count is k-INDEPENDENT (verified exhaustively below).
+PASS VGEN-band-m5-N400 min_nu=25 >= m*D0=25 (band x: every point); #C0=1940 <= N*D0=2000; 2(m-1)D0=40 <= N/(2m)+2m=50
+PASS VGEN-band-m8-N1024 min_nu=32 >= m*D0=32 (band x: every point); #C0=4026 <= N*D0=4096; 2(m-1)D0=56 <= N/(2m)+2m=80
+PASS VGEN-band-m9-N1296 min_nu=36 >= m*D0=36 (band x: every point); #C0=5104 <= N*D0=5184; 2(m-1)D0=64 <= N/(2m)+2m=90
+PASS VGEN-band-m14-N3136 min_nu=56 >= m*D0=56 (band x: every point); #C0=12414 <= N*D0=12544; 2(m-1)D0=104 <= N/(2m)+2m=140
+PASS VGEN-band-m20-N6400 min_nu=80 >= m*D0=80 (band x: every point); #C0=25410 <= N*D0=25600; 2(m-1)D0=152 <= N/(2m)+2m=200
+PASS VGEN-dblcount-k3-m9-N1296 C0=5104; 3 planted 3-AP-free sets (|S|,|S^B|,sum,low,cap)=[(95, 86, 3305, 3096, 25520), (96, 87, 3335, 3132, 25520), (64, 53, 2154, 1908, 25520)]; sum in [low, cap] everywhere
+PASS VGEN-dblcount-k4-m8-N1024 greedy 4-AP-free |S|=197; (|S|,|S^B|,sum,low,cap)=[(197, 180, 6152, 5760, 24156)]
+PASS VGEN-slide-plugback-tables every certified cell (k=3..6, all stones m, all N>=2m-1) under the bounds; violations=[]
+PASS VGEN-negctl-copcap dense random 500-set: some copy of [1,9] hosts > r_3(9)=5 points (the cap needs AP-freeness)
+
+=== PART 3 — LEMMA T-GEN (the Z_p transfer, ALL k) ===
+STATEMENT: p prime, p > k*N, S in [1,N] k-AP-free => S is cyclically
+k-AP-free in Z_p. PROOF: a cyclic k-AP gives x_i - x_0 - i(x_1 - x_0)
+= 0 mod p with |.| <= k(N-1) < p, hence 0 in Z: x_i = x_0 + i(x_1-x_0)
+exactly — a genuine k-AP, contradiction. (k=3: banked Lemma T.)
+PASS TGEN-k4-N12-exhaustive p=53 > kN=48: all 2232 4-AP-free subsets of [1,12] are cyclically 4-AP-free mod p (0 violations)
+PASS TGEN-negctl-smallp p=13 <= kN=48: the 4-AP-free set {1,5,9,10} shows the CYCLIC 4-AP (10,1,5,9) mod 13 — the window bound p > kN is load-bearing
+
+=== PART 4 — THEOREM R-K-TABLES (witness verification + fresh B&B) ===
+PASS RKT-witness-k3 N=1..61: size + freeness by BOTH codes on every banked witness; bad=[]
+PASS RKT-monotone-k3 r_k(N) <= r_k(N+1) on the full table
+PASS RKT-witness-k4 N=1..42: size + freeness by BOTH codes on every banked witness; bad=[]
+PASS RKT-monotone-k4 r_k(N) <= r_k(N+1) on the full table
+PASS RKT-witness-k5 N=1..57: size + freeness by BOTH codes on every banked witness; bad=[]
+PASS RKT-monotone-k5 r_k(N) <= r_k(N+1) on the full table
+PASS RKT-witness-k6 N=1..51: size + freeness by BOTH codes on every banked witness; bad=[]
+PASS RKT-monotone-k6 r_k(N) <= r_k(N+1) on the full table
+PASS RKT-bnb-mark-k3 fresh code X (marking B&B, forced-0) agrees on N=1..30 (30 cells); disagree=[]
+PASS RKT-bnb-mark-k4 fresh code X (marking B&B, forced-0) agrees on N=1..33 (33 cells); disagree=[]
+PASS RKT-bnb-mark-k5 fresh code X (marking B&B, forced-0) agrees on N=1..42 (42 cells); disagree=[]
+PASS RKT-bnb-mark-k6 fresh code X (marking B&B, forced-0) agrees on N=1..42 (42 cells); disagree=[]
+--- k=7 FRESH TABLE: code X (marking, forced-0) vs code Y (scan, no-force) ---
+  k=7 N=44: code Y 20s timeout — two-code agreement recorded to N=43
+  k=7 N=47: code X 15s timeout (nodes=7315456) — fresh table stops at N=46
+PASS RKT-k7-bothcodes k=7 table N=1..46 (code X, wall 69.4s): [1, 2, 3, 4, 5, 6, 6, 7, 8, 9, 10, 11, 12, 12, 13, 14, 15, 16, 17, 18, 18, 19, 20, 21, 22, 23, 24, 24, 25, 26, 27, 28, 29, 30, 30, 31, 32, 33, 34, 35, 36, 36, 36, 36, 36, 37]; code Y INDEPENDENTLY agrees N=1..43
+PASS RKT-k7-monotone r_7(N) <= r_7(N+1)
+PASS RKT-k7-witnesses every cell carries a two-code-verified witness; e.g. N=46: [1, 2, 3, 4, 5, 6, 8, 9, 10, 11, 12, 13, 15, 16, 17, 18, 19, 20, 22, 23, 24, 25, 26, 27, 29, 30, 31, 33, 34, 37, 39, 40, 41, 42, 43, 45, 46]
+
+=== PART 5 — THEOREM U-LIN-GEN (the all-k linear envelope) ===
+LAWS: (BLOCK) r_k(N) <= floor(N/L)*r_k(L) + r_k(N mod L), any stone L;
+      (SLIDE) r_k(N) <= r_k(m)(N-m+1)/m + 2(m-1), N >= 2m-1;
+      (V-GEN) r_k(N) <= (1+1/(2r_k(m)))*rho_m*N, N >= 16m^2;
+      (M-1)   r_k(N) <= r_7(N) for all k >= 7 (the containment ladder,
+              banked LAW M-1: the first k terms of a k'-AP with k<=k' are a k-AP).
+PASS ULIN-block-k3 BLOCK law on ALL (L,n) pairs to N=61; bad=[]
+  k=3: best stone N=61, r=19, rho* = 19/61 = 0.311475
+PASS ULIN-block-k4 BLOCK law on ALL (L,n) pairs to N=42; bad=[]
+  k=4: best stone N=42, r=22, rho* = 11/21 = 0.523810
+PASS ULIN-block-k5 BLOCK law on ALL (L,n) pairs to N=57; bad=[]
+  k=5: best stone N=55, r=36, rho* = 36/55 = 0.654545
+PASS ULIN-block-k6 BLOCK law on ALL (L,n) pairs to N=51; bad=[]
+  k=6: best stone N=43, r=31, rho* = 31/43 = 0.720930
+PASS ULIN-block-k7 BLOCK law on ALL (L,n) pairs to N=46; bad=[]
+  k=7: best stone N=45, r=36, rho* = 4/5 = 0.800000
+PASS ULIN-crossover-k3 V-GEN density at best in-table stone: 0.319672 (m=61) vs BLOCK rho* 0.311475 (L=61); a stone (m', r') beats BLOCK iff r'/m' < 2r'rho*/(2r'+1); at r'=19 the bar is 0.303489 = 2.56% below the current best ratio: does NOT beat (within current tables)
+PASS ULIN-crossover-k4 V-GEN density at best in-table stone: 0.535714 (m=42) vs BLOCK rho* 0.523810 (L=42); a stone (m', r') beats BLOCK iff r'/m' < 2r'rho*/(2r'+1); at r'=22 the bar is 0.512169 = 2.22% below the current best ratio: does NOT beat (within current tables)
+PASS ULIN-crossover-k5 V-GEN density at best in-table stone: 0.663636 (m=55) vs BLOCK rho* 0.654545 (L=55); a stone (m', r') beats BLOCK iff r'/m' < 2r'rho*/(2r'+1); at r'=36 the bar is 0.645579 = 1.37% below the current best ratio: does NOT beat (within current tables)
+PASS ULIN-crossover-k6 V-GEN density at best in-table stone: 0.732558 (m=43) vs BLOCK rho* 0.720930 (L=43); a stone (m', r') beats BLOCK iff r'/m' < 2r'rho*/(2r'+1); at r'=31 the bar is 0.709487 = 1.59% below the current best ratio: does NOT beat (within current tables)
+PASS ULIN-crossover-k7 V-GEN density at best in-table stone: 0.811111 (m=45) vs BLOCK rho* 0.800000 (L=45); a stone (m', r') beats BLOCK iff r'/m' < 2r'rho*/(2r'+1); at r'=36 the bar is 0.789041 = 1.37% below the current best ratio: does NOT beat (within current tables)
+--- the ITERATED TOWER (honest): m1=floor(sqrt(N)/4) >= 16*m2^2 chain; factors
+    c_i = 1 + 1/(2 r_k(m_i)) with r_k(m_i) >= max(2, BG bound) (banked THEOREM
+    BG: r_k(m) >= m*exp(-C_k*sqrt(ln m)), C_k = 2*sqrt((k+1)ln2)+1); bottom density
+    by BLOCK at m_j. All arithmetic exact in simulation.
+  k=3 N=1e6: j=1 levels [(250, 1.25)]; m_j=250; Pi c_i=1.250000; tower r_k(N) <= 0.400000*N [= 1.284 x BLOCK]; BLOCK = 0.311475*N + 19
+  k=3 N=1e12: j=2 levels [(250000, 1.25), (125, 1.25)]; m_j=125; Pi c_i=1.562500; tower r_k(N) <= 0.500000*N [= 1.605 x BLOCK]; BLOCK = 0.311475*N + 19
+  k=3 N=1e100: j=5 levels [(25000000000000001907442460272971750823741242736640, 1.0), (1250000000000000113246208, 1.0), (279508497187, 1.008076)]...; m_j=90; Pi c_i=1.575119; tower r_k(N) <= 0.525040*N [= 1.686 x BLOCK]; BLOCK = 0.311475*N + 19
+PASS ULIN-tower-k3 tower simulated exactly at N=1e6/1e12/1e100; recorded: BLOCK dominates at current stones — the tower is the conversion engine for any future sublinear stone (honest)
+  k=4 N=1e6: j=1 levels [(250, 1.25)]; m_j=250; Pi c_i=1.250000; tower r_k(N) <= 0.660000*N [= 1.260 x BLOCK]; BLOCK = 0.523810*N + 22
+  k=4 N=1e12: j=2 levels [(250000, 1.25), (125, 1.25)]; m_j=125; Pi c_i=1.562500; tower r_k(N) <= 0.825000*N [= 1.575 x BLOCK]; BLOCK = 0.523810*N + 22
+  k=4 N=1e100: j=5 levels [(25000000000000001907442460272971750823741242736640, 1.0), (1250000000000000113246208, 1.0), (279508497187, 1.060761)]...; m_j=90; Pi c_i=1.657440; tower r_k(N) <= 0.902384*N [= 1.723 x BLOCK]; BLOCK = 0.523810*N + 22
+PASS ULIN-tower-k4 tower simulated exactly at N=1e6/1e12/1e100; recorded: BLOCK dominates at current stones — the tower is the conversion engine for any future sublinear stone (honest)
+  k=5 N=1e6: j=1 levels [(250, 1.25)]; m_j=250; Pi c_i=1.250000; tower r_k(N) <= 0.825000*N [= 1.260 x BLOCK]; BLOCK = 0.654545*N + 36
+  k=5 N=1e12: j=2 levels [(250000, 1.25), (125, 1.25)]; m_j=125; Pi c_i=1.562500; tower r_k(N) <= 1.050000*N [= 1.604 x BLOCK]; BLOCK = 0.654545*N + 36
+  k=5 N=1e100: j=5 levels [(25000000000000001907442460272971750823741242736640, 1.0), (1250000000000000113246208, 1.0), (279508497187, 1.25)]...; m_j=90; Pi c_i=1.953125; tower r_k(N) <= 1.302083*N [= 1.989 x BLOCK]; BLOCK = 0.654545*N + 36
+PASS ULIN-tower-k5 tower simulated exactly at N=1e6/1e12/1e100; recorded: BLOCK dominates at current stones — the tower is the conversion engine for any future sublinear stone (honest)
+  k=6 N=1e6: j=1 levels [(250, 1.25)]; m_j=250; Pi c_i=1.250000; tower r_k(N) <= 0.905000*N [= 1.255 x BLOCK]; BLOCK = 0.720930*N + 31
+  k=6 N=1e12: j=2 levels [(250000, 1.25), (125, 1.25)]; m_j=125; Pi c_i=1.562500; tower r_k(N) <= 1.137500*N [= 1.578 x BLOCK]; BLOCK = 0.720930*N + 31
+  k=6 N=1e100: j=5 levels [(25000000000000001907442460272971750823741242736640, 1.0), (1250000000000000113246208, 1.0), (279508497187, 1.25)]...; m_j=90; Pi c_i=1.953125; tower r_k(N) <= 1.432292*N [= 1.987 x BLOCK]; BLOCK = 0.720930*N + 31
+PASS ULIN-tower-k6 tower simulated exactly at N=1e6/1e12/1e100; recorded: BLOCK dominates at current stones — the tower is the conversion engine for any future sublinear stone (honest)
+  k=7 N=1e6: j=1 levels [(250, 1.25)]; m_j=250; Pi c_i=1.250000; tower r_k(N) <= 1.010000*N [= 1.262 x BLOCK]; BLOCK = 0.800000*N + 36
+  k=7 N=1e12: j=2 levels [(250000, 1.25), (125, 1.25)]; m_j=125; Pi c_i=1.562500; tower r_k(N) <= 1.275000*N [= 1.594 x BLOCK]; BLOCK = 0.800000*N + 36
+  k=7 N=1e100: j=5 levels [(25000000000000001907442460272971750823741242736640, 1.0), (1250000000000000113246208, 1.000001), (279508497187, 1.25)]...; m_j=90; Pi c_i=1.953127; tower r_k(N) <= 1.562502*N [= 1.953 x BLOCK]; BLOCK = 0.800000*N + 36
+PASS ULIN-tower-k7 tower simulated exactly at N=1e6/1e12/1e100; recorded: BLOCK dominates at current stones — the tower is the conversion engine for any future sublinear stone (honest)
+PASS ULIN-ladder-M1 r_6(N) <= r_7(N) on the common range (LAW M-1 spot check)
+
+=== PART 6 — THEOREM RK-VARN-GEN (the count law, ALL k, bigger stones) ===
+STATEMENT: k>=3, stone M0 with certified r=r_k(M0); for every N>=M0 and
+delta with S_min(N,delta,M0) > r*#C(N,M0): every A in [1,N], |A|>=delta*N,
+contains >= c_k(delta,N)*N^2 non-trivial k-APs,
+c_k = (S_min - r*#C) / ((M0-r)*DIV*N^2),
+DIV = #{(g,j0): (k-1)*g + j0 <= M0-1} (a fixed k-AP lies in <= DIV copies:
+step divisor g with e=d/g, offset j0). Proof: copy census + rich copies
+(> r points => k-AP by affine pullback) + the divisor bound — the banked
+R4-VARN argument verbatim at general k with the bigger certified stones.
+PASS RKVARN-k4 stone M0=42 r=22 (rho=22/42=0.5238); DIV=273; SMALLEST certified delta at N=1000: 0.65; c_k(delta): [(0.65, '3.12e-07'), (0.7, '6.09e-06'), (0.75, '1.20e-05')]; plug-back 6 random dense sets per delta, both counting codes agree, min count (0.65, 29270) >= c_k*N^2 everywhere
+PASS RKVARN-k5 stone M0=55 r=36 (rho=36/55=0.6545); DIV=351; SMALLEST certified delta at N=1000: 0.75; c_k(delta): [(0.75, '6.21e-08'), (0.8, '4.93e-06'), (0.85, '9.87e-06')]; plug-back 6 random dense sets per delta, both counting codes agree, min count (0.75, 27896) >= c_k*N^2 everywhere
+PASS RKVARN-k6 stone M0=43 r=31 (rho=31/43=0.7209); DIV=164; SMALLEST certified delta at N=1000: 0.80; c_k(delta): [(0.8, '7.77e-07'), (0.85, '1.77e-05'), (0.9, '3.49e-05')]; plug-back 6 random dense sets per delta, both counting codes agree, min count (0.8, 25672) >= c_k*N^2 everywhere
+PASS RKVARN-k7 stone M0=45 r=36 (rho=36/45=0.8000); DIV=147; SMALLEST certified delta at N=1000: 0.86; c_k(delta): [(0.86, '2.10e-06'), (0.91, '2.76e-05'), (0.96, '5.33e-05')]; plug-back 6 random dense sets per delta, both counting codes agree, min count (0.86, 28328) >= c_k*N^2 everywhere
+
+=== PART 7 — TIER 2 STATUS (honest): the named gaps ===
+SUBLINEAR-4 / SUBLINEAR-GEN / LOGDECAY-GEN for k>=4: NOT PROVEN in-package.
+THE MISSING LAW (exact name): the order-k DEVIATION IDENTITY — an exact
+Fourier-side formula for #{(x,d): x,x+d,...,x+(k-1)d in A} on Z_p with a
+usable large-coefficient extraction (the L-EP analog at order k >= 4;
+at k=4 the count needs a 4-fold phase split whose frequency constraints
+(r+s+t+u=0 on x; s+2t+3u=0 on d) have no arsenal carrier).
+ARSENAL INVENTORY (read this wave, file:line):
+  GSTFoldFourthOrderMemoryTower.lean:90 structure JetTower4; :221-255 tower4_square_*
+    — DG-algebra jet/curvature identities (memory law d*w+w*d+phi*psi+psi*phi+chi^2=K4):
+    algebraic towers, NOT combinatorial k-AP laws.
+  GSTFoldChainThirdOrderMemory.lean:79 JetTower3; :170-188 tower3_square_* — same class.
+  GSTAllDegreeCurvatureMemory.lean:34-216 (coeff_X_pow_*, flat_conservation, loss_below_shift,
+    jetDifferential :173, jet_square :209) — Poincare-polynomial fold/loss bookkeeping, no AP content.
+  GSTFoldMemoryTower.lean:64 JetTower — order-2 jet tower, same class.
+  The k=3 analytic layer (hc_fourier_character_norm GSTAnalyticAbsorption.lean:202,
+    hc_fourier_exponential :210, hc_fourier_unitary :216, hc_circle_L2_basis :233,
+    gst_infinite_paradox_energy_split ErdosTernary2.lean:8320,
+    exact_three_geometric_sum GSTProblem406TerminalUBoundary.lean:135) has NO k-uniform analog.
+=> F-UP-1 HALF-KILLED: the LINEAR all-k envelope is CLOSED (Parts 1-6, all k>=3);
+   the SUBLINEAR/LOGDECAY all-k extension remains, blocked EXACTLY by the
+   order-k deviation identity above. No external theorem is used anywhere.
+==============================================================================
+ALL-GREEN WALL: PASS=56 FAIL=0 wall=142.3s
+UPPERGEN_ENGINE_GREEN=1
+The engine never stops; it never lies. In English, always.

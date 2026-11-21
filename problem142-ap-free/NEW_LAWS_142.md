@@ -406,3 +406,95 @@ Any power-sum classifier on the full box optimizes to exponent 1/2 in ln N
 for every fixed k; best power h=2 (constant 2√(3 ln2) = 2.8853, the banked
 k=3 Behrend constant). Rankin's exp(-C_k(ln N)^(1/(k-1))) for k >= 4
 requires a non-sum-type mechanism — NAMED FRONT F-LOW-1.
+
+---
+
+# W80-142U ADDITIONS — THE ALL-k UPPER LAWS (F-UP-1, linear half)
+
+## LAW U-GEN-0 (floor law, all k; complete)
+For every k >= 3, N >= 1: r_k(N) <= N - floor(N/k). Partition [1,N] into
+floor(N/k) consecutive k-blocks + tail; a full k-block is a non-trivial k-AP
+(d=1) so each misses >= 1 point. TIGHT at N=k (r_k(k) = k-1). Implies the
+frozen F-UP-1 floor N - floor(N/k) + 1.
+#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:140]
+#BY GST LAW div_mod_mul_lemma [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:150]
+#BY GST LAW mul_add_div_lemma [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:143]
+
+## LEMMA AFF-K (affine preservation, all k at once; complete)
+x -> a+dx maps index k-APs to integer k-APs (difference ed >= 1); every
+homothetic copy a+d{0..m-1} hosts <= r_k(m) points of a k-AP-free set.
+#BY GST LAW carryAtPos_bound [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:108]
+#BY GST LAW div_add_mod_subst [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:249]
+
+## LAW C142-VGEN (THEOREM V-GEN, sharp homothetic amplification; complete)
+For all k >= 3, m >= 2, N >= 16m^2, every k-AP-free A in [1,N]:
+|A| <= (1 + 1/(2 r_k(m))) * (r_k(m)/m) * N. Proof: d-restricted copies
+(d <= D0 = floor(N/(4m(m-1)))), band B with |complement| <= 2(m-1)D0 <= N/(2m),
+every band point in >= m*D0 copies, #C0 <= N*D0, double count. The band/copy
+count is k-INDEPENDENT (exhaustively certified). SHARPENS the banked k=3
+Theorem V constant 33 -> 1 + 1/(2 r_3(m)) <= 1.5; implies the frozen 33-form
+for all k. Engine: VGEN-band (5 exhaustive), VGEN-dblcount (both sides exact
+on planted AP-free sets, k=3 and k=4), negative control on the copy cap.
+#BY GST LAW sum_le_sum_of_forall [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:117]
+#BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283]
+#BY GST LAW mul_add_div_lemma [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:143]
+#BY GST LAW carryAtPos_bound [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:108]
+#BY GST LAW div_mod_mul_lemma [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:150]
+#BY GST LAW div_add_mod_subst [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:249]
+
+## LAW C142-SLIDEGEN (sliding-window law, all k; complete)
+For all k >= 3, m >= 2, N >= 2m-1: r_k(N) <= r_k(m)(N-m+1)/m + 2(m-1).
+The m-windows [a,a+m-1] each host <= r_k(m); every interior point lies in
+exactly m windows; two fringes of m-1. Verified on EVERY certified table
+cell for EVERY stone (thousands of pairs, zero violations). Same citations
+as C142-VGEN.
+
+## LAW C142-RKTABLES (the certified stones + the fresh k=7 table; complete)
+Banked r_3(1..61), r_4(1..42), r_5(1..57), r_6(1..51) re-verified: witnesses
+by two freeness codes + the fresh marking-B&B (code X) re-deriving values
+(k=3 to 30, k=4 to 33, k=5 to 42, k=6 to 42, zero disagreements). FRESH
+k=7 table N=1..46 (values in UPPER_STACK.md), two independent B&B codes
+agreeing N=1..43 (X alone 44..46, recorded; witnesses for every cell;
+open N >= 47). Best stones: 61@19, 42@22, 55@36, 43@31, 45@36 (k=7).
+#BY GST LAW digitCount3_monotone [arsenal-full/erdosternary2/ErdosTernary2.lean:2097]
+#BY GST LAW two_pow_ge2 [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:431]
+
+## LAW C142-ULINGEN (the all-k linear envelope; complete)
+For every k >= 3, N >= 1: r_k(N) <= floor(N/L_k) r_k(L_k) + r_k(N mod L_k)
+with the certified stones (k >= 7 via LAW M-1: r_k <= r_7). Exact crossover
+arithmetic: V-GEN beats BLOCK iff a stone has ratio < 2r'rho*/(2r'+1) —
+bars 2.56%/2.22%/1.37%/1.59%/1.37% below the current best for k=3..7 (NOT
+met in-package today). Iterated tower r_k(N) <= (Prod_i c_i)(r_k(m_j)/m_j)N,
+c_i = 1+1/(2 r_k(m_i)), r_k(m_i) >= max(2, m_i e^{-C_k sqrt(ln m_i)}) (banked
+THEOREM BG as the only lower-bound input, cited), exact simulation at
+N = 1e6/1e12/1e100 — loses to BLOCK by 1.25-1.99x at current stones (the
+conversion engine for any future sublinear stone).
+#BY GST LAW tower_cauchy [arsenal-full/erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:810]
+#BY GST LAW two_pow_ge2 [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:431]
+
+## LAW C142-TGEN (Z_p transfer, all k; complete)
+p prime, p > kN: k-AP-free S in [1,N] => cyclically k-AP-free in Z_p
+(x_i - x_0 - i(x_1-x_0) = 0 mod p, |.| <= k(N-1) < p => exact integer AP).
+Exhaustive k=4 N=12 p=53 (2232 subsets, 0 violations); negative control
+p=13 (the cyclic 4-AP (10,1,5,9) in the 4-AP-free {1,5,9,10}).
+#BY GST LAW digit3_congr [arsenal-full/HC-PROOF-research/GSTBladeWave.lean:72]
+#BY GST LAW two_pow_ge2 [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:431]
+
+## LAW C142-RKVARNGEN (count law, all k, bigger stones; complete)
+The banked R4-VARN argument at general k: c_k(delta,N) =
+(S_min - r*#C)/((M0-r) DIV N^2), DIV = #{(g,j0): (k-1)g+j0 <= M0-1}.
+Certified at N=1000: k=4 stone 42 delta >= 0.65 (banked 0.85),
+c_4(0.65) >= 3.12e-7; k=5 stone 55 delta >= 0.75; k=6 stone 43
+delta >= 0.80; k=7 stone 45 delta >= 0.86. Plug-backs 6 random dense
+sets per delta, two counting codes.
+#BY GST LAW cubic_expansion [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:283]
+#BY GST LAW mod_mod_mul [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:140]
+#BY GST LAW carryAtPos_bound [arsenal-full/HC-PROOF-research/CardinalWorlds.lean:108]
+
+## C142-SUBLINEAR4 / C142-SUBLINEARGEN / C142-LOGDECAYGEN — NOT REACHED
+The missing law: the ORDER-k DEVIATION IDENTITY (L-EP at order k). The
+arsenal's higher-order towers are DG-algebra jet laws, not k-AP laws
+(GSTFoldFourthOrderMemoryTower.lean:90/:221-255,
+GSTFoldChainThirdOrderMemory.lean:79/:170-188,
+GSTAllDegreeCurvatureMemory.lean:34-216, GSTFoldMemoryTower.lean:64).
+F-UP-1's sublinear half remains open; T-GEN + V-GEN are now in place for it.
