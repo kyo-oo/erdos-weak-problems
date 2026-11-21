@@ -1,7 +1,14 @@
 # W77-107E — ES-ALLN, U-BIS, AND THE INFINITE LAW (ALLN_PROOF.md)
 
 Task ID: W77-107E. Lane: ENGINE (all-n scope + the infinite theorems).
-Engine: `engine107alln.py` (stages s1–s9, all GREEN). Receipts:
+Engine: `engine107alln.py` (stages s1–s9; the W77 run closed **8/13** —
+three engine-side defects, including the `point_outside_scan` sign flip,
+were found and fixed by the W78-107E lane; every affected positive
+certificate was re-run post-fix: S8's composition batteries n=4,5,6 =
+3000/2000/500 sets, 0 violations — see the append-only addendum in
+`receipts107alln.txt` and the 14/14 re-certification in
+`receipts107sharp.txt`; *W81-107B audit note: the earlier header's "all
+GREEN" overstated the raw W77 receipts*). Receipts:
 `receipts107alln.txt`. Checkpoints: `alln107/*.json`. Exact integer and
 `Fraction` arithmetic throughout; every machine claim two-method verified.
 

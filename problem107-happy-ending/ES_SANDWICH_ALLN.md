@@ -54,14 +54,35 @@ $X_n$ is GP (engine S2 cell `gp`, exact orientation scan; finisher V2).
 
 **Slope separation (the load-bearing law).** Every same-cluster pair has slope
 in $(0,s]$ (inherited from $E$, positive scaling); every cross-cluster pair has
-$|\text{slope}| \geq \sigma := 1/(1+38\rho) > 1/2$, while $s \leq 1/64$:
+$|\text{slope}| \geq \sigma := 1/(1+38\rho) > 1/2 > s$ (and $s \leq 1/64$
+exactly for $n \geq 5$, i.e.\ $m \geq 3$; at $n = 3, 4$: $s = 1/32, 1/48$ —
+*W81-107B audit note: the constant $1/64$ is an $n \geq 5$ statement; the
+load-bearing ordering $s < 1/2 < \sigma \leq |\text{inter}|$ holds for EVERY
+$n \geq 3$*):
 *proof.* For centers, $\text{slope}(c_i,c_j) = -m/(m-i-j)$, so
 $|\text{slope}| = m/|m-i-j| \geq 1$ (vertical when $i+j=m$). A perturbed pair
-moves each endpoint by at most $(19/32)\rho$ in $x$ and $(19/48)s\rho$ in $y$;
-with $|\Delta y| \geq |i-j|/4 - (19/12)s\rho$ and
-$|\Delta x| \leq |i-j|/4 + (19/8)\rho$,
-$$|\text{slope}| \geq \frac{1-(19/12)s\rho/|i-j|}{1+(19/2)\rho/|i-j|}
- \geq \frac{1}{1+38\rho} > \frac12 > \frac{1}{16(m+1)} = s. \qquad\square$$
+moves each endpoint by at most $(19/32)\rho$ in $x$ and $(19/48)s\rho$ in $y$
+(the $E$-sets live in $[0,\,24/23]\times[0,\,18s/23]$ by the recursion, and
+the offset $(19/32,\,19s/48)$ sits past the midpoint of both ranges:
+$24/23-19/32 < 19/32$, $18/23-19/48 < 19/48$); hence, with $d := |i-j|$,
+$|\Delta y| \geq d/4 - 2\cdot(19/48)s\rho = d/4 - (19/24)s\rho$ and
+$|\Delta x| \leq d/4 + 2\cdot(19/32)\rho = d/4 + (19/16)\rho$
+(divide by $d/4 \geq 1/4$; *W81-107B audit note, completed by the W81-107B-F
+finisher: the pre-audit display had two slips — it normalized the
+perturbations by $d$ instead of $d/4$, and printed the pair constant
+$(19/12)$ where $2\cdot(19/48) = (19/24)$; both slips were conservative
+(each weakens the bound), and the final bound is re-derived here with the
+honest constants and machine-verified by the audit engine, A3*):
+$$|\text{slope}| \;\geq\; \frac{1-(19/6)\,s\rho/d}{1+(19/4)\,\rho/d}
+ \;\geq\; \frac{1}{1+38\rho} \;>\; \frac12 \;>\; \frac{1}{16(m+1)} = s,
+ \qquad (m \geq 1,\ d \geq 1,\ s \leq 1/32,\ \rho \leq 2^{-15}),$$
+the second inequality by exact algebra:
+$$\Bigl(1-\tfrac{19}{6}\tfrac{s\rho}{d}\Bigr)(1+38\rho)-\Bigl(1+\tfrac{19}{4}\tfrac{\rho}{d}\Bigr)
+= \rho\,\Bigl[38-\tfrac{19}{4d}-\tfrac{19s}{6d}-\tfrac{361\,s\rho}{3d}\Bigr]
+\;\geq\; \rho\,\Bigl[38-\tfrac{19}{4}-\tfrac{19}{192}-\tfrac{361}{3\cdot 32\cdot 2^{15}}\Bigr]
+\;>\; 33\,\rho \;>\; 0$$
+(using $d \geq 1$, $s \leq 1/32$, $\rho \leq 2^{-15}$; the audit engine
+re-checks the whole chain exactly, A3). $\qquad\square$
 
 *Engine bookkeeping note (the S2 `slope_bands` red cell).* S2 demanded the
 sharper center-only constant $m/(m-1)$ for **perturbed** points; the
