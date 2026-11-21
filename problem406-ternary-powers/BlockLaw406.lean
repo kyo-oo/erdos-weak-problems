@@ -404,7 +404,7 @@ theorem rider_second_digit_residue (K : Nat)
   · -- digit 0 = 1
     unfold digit3
     rw [Nat.pow_zero, Nat.div_one]
-    exact (pow4_mod3 K).symm
+    exact pow4_mod3 K
   · -- digits 1..v are zero: 4^K ≡ 1 mod 3^(v+1), and the congruence
     -- descends to every 3^(j+1) with j ≤ v
     intro j hjpos hjv
@@ -415,7 +415,6 @@ theorem rider_second_digit_residue (K : Nat)
       congr 1; omega
     have hmodj : 4^K % 3^(j+1) = 1 % 3^(j+1) := by
       rw [hKu, ← Nat.mod_mod_of_dvd (4^(3^v * u)) hdvd, hnext]
-      rfl
     have hcon := digit3_mod_congr (4^K) 1 j hmodj
     rw [hcon]
     exact digit3_one_pos j hjpos
@@ -426,9 +425,11 @@ theorem rider_second_digit_residue (K : Nat)
       rw [show ((v:Nat)+1)+1 = v+2 from by omega, hKu, hres, hu1,
           Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide))]
     have hres2 : (1 + 1 * 3^(v+1)) % 3^((v+1)+1)
-        = 1 + 1 * 3^(v+1) := by
+        = 1 + 3^(v+1) := by
       rw [show ((v:Nat)+1)+1 = v+2 from by omega]
-      exact Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide))
+      have h := Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide))
+      rw [h]
+      ring
     have hcon := digit3_mod_congr (4^K) (1 + 1 * 3^(v+1)) (v+1) hmod
     rw [hcon]
     exact digit3_of_residue_one (1 + 1 * 3^(v+1)) (v+1) (by omega) hres2
