@@ -130,27 +130,34 @@ theorem mod3twoB_congr : ∀ x y : Nat, x % 3 = y % 3 → mod3twoB x = mod3twoB 
 
 /-! ## §2 The filter-length engine -/
 
-/-- The length of a filtered two-element list (the `if` form). -/
+/-- The length of a filtered two-element list (the `if` form; the fully
+deterministic rw chain — every closer is an explicit `rfl`, per the L96
+matcher law). -/
 theorem filter_cons_two (f : Nat → Bool) (a b : Nat) :
     ([a, b].filter f).length = (if f a then 1 else 0) + (if f b then 1 else 0) := by
+  rw [List.filter_cons, List.filter_cons, List.filter_nil]
   by_cases h1 : f a = true
-  · by_cases h2 : f b = true
-    · simp [List.filter, h1, h2]
-    · simp [List.filter, h1, h2]
-  · by_cases h2 : f b = true
-    · simp [List.filter, h1, h2]
-    · simp [List.filter, h1, h2]
+  · rw [if_pos h1]
+    by_cases h2 : f b = true
+    · rw [if_pos h2, if_pos h1, if_pos h2]
+      rfl
+    · rw [if_neg h2, if_pos h1, if_neg h2]
+      rfl
+  · rw [if_neg h1]
+    by_cases h2 : f b = true
+    · rw [if_pos h2, if_neg h1, if_pos h2]
+      rfl
+    · rw [if_neg h2, if_neg h1, if_neg h2]
+      rfl
 
 /-- Adding a multiple of `3^j` preserves the class mod `m` whenever
 `m ∣ 3^j` (the child-residue law). -/
 theorem child_mod (m j r t : Nat) (hdiv : m ∣ 3^j) :
     (r + t * 3^j) % m = r % m := by
   obtain ⟨c, hc⟩ := hdiv
-  have hd : (t * 3^j) % m = 0 := by
-    refine Nat.mod_eq_zero_of_dvd ⟨t * c, ?_⟩
-    rw [hc]
-    ring
-  rw [Nat.add_mod, hd, Nat.add_zero]
+  have hcong : t * 3^j = m * (t * c) := by rw [hc]; ring
+  rw [hcong]
+  exact Nat.add_mul_mod_self_right r (t * c) m
 
 /-- **THE FAMILY-FILTER STEP LAW.**  If `m ∣ 3^j` and `f` is constant on
 classes mod `m`, then the `f`-count of any node's live children is 2 on

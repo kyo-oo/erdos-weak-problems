@@ -184,6 +184,7 @@ theorem cantorScan_zero : ∀ k : Nat, cantorScan 0 k = true := by
     show (((0:Nat) % 3 != 2) && cantorScan (0 / 3) k) = true
     have h03 : (0:Nat) / 3 = 0 := by omega
     rw [h03, ih]
+    rfl
 
 /-- **THE SHARP FUEL LAW.**  `n < 3^k → cantorScan n k = noTernaryTwo n`:
 fuel equal to the ternary digit count suffices (316 covers all of 2^500). -/
@@ -214,11 +215,13 @@ theorem cantorScan_eq : ∀ (k n : Nat), n < 3^k → cantorScan n k = noTernaryT
         show (((n:Nat) % 3 != 2) && cantorScan (n / 3) k) = false
         have hb : (n % 3 != 2) = false := by simp [hm]
         rw [hb]
+        rfl
       · rw [if_neg hm]
         show (((n:Nat) % 3 != 2) && cantorScan (n / 3) k) = noTernaryTwo (n / 3)
         rw [ih (n / 3) hdiv]
         have hb : (n % 3 != 2) = true := by simp [hm]
         rw [hb]
+        rfl
 
 /-! ## §3 THE EVEN CENSUS IN VERDICT FORM (the named bridge, one chunk) -/
 
