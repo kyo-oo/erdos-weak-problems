@@ -604,3 +604,96 @@ final unconditional assembly must bypass `MonolithBoundary.lean`'s
 unverified terminal identity in favor of the direct port (the act + the
 green odd half + the decide instances) — the route
 `erdos406_classification_of_cap_and_census` already follows.
+
+---
+
+## §11. THE S077 WAR-COUNCIL ROUND (the LX refutation + the 2-adic budget tower + the dust edge)
+
+**Deliverable S077.** BOSS's order: crack the `hTailF` hypothesis completely.
+The war council (Attacker + Strategist dispositions, MATHS §6 Mode B) fired
+on every named surface. The verdict that changed the map:
+
+### THE LX REFUTATION (the S076-named conjecture is FALSE)
+
+The S076 session named LX — $v_2(\text{cantor } n) \le 2\cdot\mathrm{popcount}_3(n)$
+— as the next target, evidenced "with zero excess through $3^{12}$." The
+Attacker found the boundary: **the falsity begins at leading position 13,
+exactly one level past the census.**
+
+$$n_1 = 3^0 + 3^7 + 3^8 + 3^{13} = 1{,}603{,}072 = 2^9 \cdot 3131,$$
+
+a 0/1-ternary number with digit set $\{0,7,8,13\}$: popcount 4, $v_2 = 9 >
+8 = 2 \cdot 4$. The far-cap family $13 + 3^{d_t}$ (the 2-adic discrete
+logarithm of $-13$ in $\langle 3 \rangle = \{1, 3\} \bmod 8$) drives $v_2$
+to infinity at popcount 4: $d = 69$ gives $v_2 = 11$; the construction
+generalizes to every even popcount $\ge 4$. **LX is provable only for
+popcount $\le 3$.** The receipts are kernel-decided
+(`lx_refutation_receipt`, `lx_refutation_far_cap`).
+
+### THE 2-ADIC BUDGET TOWER (Kernel 70, `TwoAdic406.lean` — LX's replacement)
+
+The mechanism that killed LX is the 2-adic twin of the DustLaw architecture
+(swap the bases: cube induction on $4^{3^j}$ near $3^{j+1}$ becomes square
+induction on $3^{2^s}$ near $2^{s+2}$):
+
+* **The square certificate** (`three_pow_twopow_struct`): $3^{2^s} =
+  1 + 2^{s+2} c$ with $c$ odd, by square induction.
+* **The period twin** (`three_pow_mod_period`): $3^i \bmod 2^{s+2}$
+  depends only on $i \bmod 2^s$ — the order law
+  $\mathrm{ord}_{2^t}(3) = 2^{t-2}$ in residue form.
+* **THE TOWER** (`budget_tower`): for every $n < 3^M$ and every level
+  $s \ge 1$:
+  $$n \;\equiv\; \sum_{i<M} d_i(n)\cdot 3^{\,i \bmod 2^s}
+  \pmod{2^{s+2}},$$
+  the digit census weighted by the residue-class powers of 3 IS the number
+  in the $2$-adic window. Level $s=1$ recovers the mod-8 budget law
+  (Theorem C, §5: $E + 3O \equiv 0 \bmod 8$); every level is one explicit
+  linear congruence on the digit census.
+* **THE RIDER TOWER** (`rider_budget_tower`): every rider $K$ has its digit
+  census satisfying the tower at **every** level $s$ with $s + 2 \le 2K$ —
+  an infinite standing-constraint family on every hypothetical large
+  solution (e.g. 256's census solves all six legal levels: $2+3\cdot2=8$,
+  $1+2\cdot3+9=16$, $\ldots$, $256 \equiv 0 \bmod 256$).
+* **The pairing laws** (`pair_mixed`, `pair_same`): mixed-parity pairs
+  carry $v_2$ exactly 2, same-parity pairs exactly 1 — no two powers of 3
+  ever sum to $0 \bmod 8$.
+
+The tower's lens (battery T8, honest): the census congruence is equivalent
+to the 2-adic window — the tower's content is that a rider's *digit class
+counts* $c_r$ must solve $\sum_r c_r 3^r \equiv 0 \bmod 2^{s+2}$ at every
+level, a structural constraint readable from the digit set alone, without
+computing the (astronomically large) number. The census-window kill power
+on random digit configurations: 97.8% at four levels.
+
+### THE DUST-EDGE THEOREM (DustLaw406.lean, the Strategist's Frame D)
+
+A dust-tree member whose power fits inside the window is a rider outright:
+
+$$r \in \mathrm{dust}(j) \;\wedge\; 4^r < 3^{j+1}
+\;\Longrightarrow\; \mathrm{noTernaryTwo}(4^r) = \mathrm{true}.$$
+
+Composed with the Kernel-38 census in `noTernaryTwo` form (the named
+bridge lane — one focused round), this pins
+$\mathrm{dust}(j) \cap [0, 0.79j)$ to $\{0,1,4\}$ at **every** level — the
+first infinite-family anti-clustering law, splitting the S075 front against
+the already-green census. Verified live to level 10: all 26 edge members
+are riders; the edge members below 100 are exactly $\{0,1,4\}$.
+
+### The honest boundary (unchanged law: no dressing)
+
+The middle-digit wall stands: CAP($C$) is not proven at any explicit $C$,
+and the tower constrains the digit census, not the middle digits' freedom.
+The corrected successor of the dead LX — the new named conjecture:
+
+**THE ENTROPY LAW.** $v_2(n) \lesssim k \log_2(eM/k) + O(1)$ for
+0/1-ternary $n$ with popcount $k$ and leading position $M$. At rider scale
+($M \approx 1.2619K$, $v_2 = 2K$) the bound peaks below $2K$ — it kills
+every rider $K \gtrsim 12$ if proven. Wall-class difficulty (the 2-adic
+twin of the middle-digit wall), now precisely stated, with the far-cap
+family as its equality mechanism and the standard counterexample generator
+for every future popcount-side conjecture.
+
+The kill chain remains: **CAP(185) alone** (everything else green,
+self-contained, monolith-free — the Strategist's provenance audit
+re-confirmed); the named next lanes: the census bridge (the dust-edge
+composition), the entropy law, the W-word tower decomposition.

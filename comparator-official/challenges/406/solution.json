@@ -57,6 +57,26 @@
       "id": "C406-HALFLINE-RECEIPTS-S076",
       "statement": "The three riders {0,1,4} satisfy every S076 law (half-line receipts 2, 8, 512 < 3, 9, 729; tail receipts floor(4/9)=0, floor(256/243)=1 both 0/1-ternary), and the half-line kill boundary is exact: the law kills K=6 (2*4^6 = 8192 >= 3^8 = 6561) but spares K=5 (2*4^5 = 2048 < 3^7 = 2187) \u2014 necessary, not sufficient",
       "verified_by": "the official gate S-HALFLINE + N-HALFLINE (live arithmetic)"
+    },
+    {
+      "id": "C406-TOWER-S077",
+      "statement": "Kernel 70 (TwoAdic406.lean): THE 2-ADIC BUDGET TOWER \u2014 for every n < 3^M and every level s >= 1, n == censusSum(s,n,M) mod 2^(s+2), where the census sum is the ternary digit census weighted by the residue-class powers 3^(i mod 2^s); level s=1 recovers the mod-8 budget law (E + 3O == 0 mod 8); THE RIDER TOWER: every rider's digit census satisfies the tower at every level s with s+2 <= 2K (an infinite standing-constraint family); THE SQUARE CERTIFICATE 3^(2^s) = 1 + 2^(s+2)c with c odd; THE PERIOD TWIN 3^i mod 2^(s+2) depends only on i mod 2^s (the order law ord_{2^t}(3) = 2^(t-2)); THE PAIRING LAWS (mixed-parity pairs v2 exactly 2, same-parity exactly 1); the tower verified exhaustively on all 512 Cantor numbers < 3^9 at four levels",
+      "verified_by": "kills.yml Kernel 70 (lake env lean, zero sorry, axiom receipts) + battery406c.py (dual-method, ALL GREEN) + the official gate S-TOWER / S-TOWER-LIVE / N-TOWER (live re-derivation)"
+    },
+    {
+      "id": "C406-LX-REFUTED-S077",
+      "statement": "THE LX REFUTATION: the S076-named conjecture v2(cantor n) <= 2*popcount3(n) is FALSE \u2014 the minimal counterexample 3^0 + 3^7 + 3^8 + 3^13 = 1,603,072 = 2^9 * 3131 is 0/1-ternary with popcount 4 and v2 = 9 > 8, exactly ONE leading position past the S076 census boundary (positions < 12); the far-cap family 13 + 3^d extends it (d = 69: v2 = 11); the falsity is total at popcount 4 and every even popcount >= 4 (the 2-adic dlog of -13 in the subgroup <3> = {1,3} mod 8); the far-cap family {0,1,2,d} is hereby the standard counterexample generator for every future popcount-side conjecture",
+      "verified_by": "Kernel 70 lx_refutation_receipt + lx_refutation_far_cap (kernel decide: 2^9 | 1603072, not 2^10 |; 2^11 | 13+3^69, not 2^12 |) + battery406c.py T7 (dual method) + the official gate S-TOWER-LIVE + N-LX (live)"
+    },
+    {
+      "id": "C406-DUST-EDGE-S077",
+      "statement": "THE DUST-EDGE THEOREM (DustLaw406.lean): a dust-tree member r at level j with 4^r < 3^(j+1) is a rider outright (noTernaryTwo (4^r) = true) \u2014 the Strategist's Frame D; composed with the Kernel-38 census in noTernaryTwo form (the named bridge lane), it pins dust j intersect [0, 0.79*j) to {0,1,4} at every level \u2014 the first infinite-family anti-clustering law; verified live: the tree doubles to level 10, all 26 edge members are riders, the edge members below 100 are exactly {0,1,4}",
+      "verified_by": "kills.yml Kernel 70 (dust_edge compile + axiom receipts) + battery406c.py T9 + the official gate S-DUST-EDGE (live tree census)"
+    },
+    {
+      "id": "S-OPEN-SEAM-S077",
+      "statement": "NAMED OPEN HYPOTHESIS (not a claim \u2014 the corrected successor of the dead LX): THE ENTROPY LAW v2(n) < k*log2(e*M/k) + O(1) for 0/1-ternary n with popcount k and leading position M \u2014 at rider scale (M = 1.2619K) it peaks below 2K, killing every rider K > 12 if proven; wall-class difficulty (the 2-adic twin of the middle-digit wall). The CAP(185) seam stands unchanged; the budget tower is the census-side constraint family sharpening every future assault",
+      "verified_by": "carried explicitly by COMPLETE_PROOF.md section 11 (the S077 assault record); hidden nowhere"
     }
   ]
 }

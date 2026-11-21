@@ -75,6 +75,12 @@ theorem digit_add_mul (p y V : Nat) :
   rw [Nat.add_comm y (3^p * V), mul_add_div_lemma V y (3^p) hp,
     Nat.add_comm V (y / 3^p), Nat.add_mod]
 
+/-- The digit reader is ranged: every `digit3` value is a genuine ternary
+digit (the range law the omegas of this kernel consume). -/
+theorem digit3_lt_three (x p : Nat) : digit3 x p < 3 := by
+  unfold digit3
+  exact Nat.mod_lt _ (show 0 < 3 by decide)
+
 /-! ## §1 The certificate: the near-unity structure of `4^(3^j)` -/
 
 /-- **THE CERTIFICATE.** `4^(3^j) = 1 + 3^(j+1)·c` with `c ≡ 1 mod 3`.
@@ -176,6 +182,7 @@ theorem digit_period (q k m : Nat) :
   rw [hdecomp, digit_add_mul]
   have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 :=
     Nat.mod_eq_zero_of_dvd ⟨m * c1 * 4^k + 3 * K * 4^k, by ring⟩
+  have hdig3 : digit3 (4^k) q < 3 := digit3_lt_three _ _
   rw [h0]
   omega
 
@@ -238,79 +245,89 @@ theorem dust_card (j : Nat) : (dust j).length = 2^j := by
 
 /-! ## §6 The semantic specification — the tree IS the survivor set -/
 
+/-- The three dustStep value laws: the step list is pinned by the parent's
+own new-digit value (the `dustStep_length` idiom, made reusable). -/
+theorem dustStep_val0 (j r : Nat) (h : (digit3 (4^r) (j+1)) % 3 = 0) :
+    dustStep j r = [r, r + 3^j] := by unfold dustStep; rw [h]; rfl
+
+theorem dustStep_val1 (j r : Nat) (h : (digit3 (4^r) (j+1)) % 3 = 1) :
+    dustStep j r = [r, r + 2 * 3^j] := by unfold dustStep; rw [h]; rfl
+
+theorem dustStep_val2 (j r : Nat) (h : (digit3 (4^r) (j+1)) % 3 = 2) :
+    dustStep j r = [r + 3^j, r + 2 * 3^j] := by unfold dustStep; rw [h]; rfl
+
 /-- The live children are exactly the children whose new digit is not 2. -/
 theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
     (r + t * 3^j ∈ dustStep j r ↔ digit3 (4^(r + t * 3^j)) (j+1) ≠ 2) := by
   have hB : 0 < 3^j := Nat.pow_pos (by decide)
-  rw [dust_shift]
+  have hdig : digit3 (4^r) (j+1) < 3 := digit3_lt_three _ _
+  have hd3 : (digit3 (4^r) (j+1)) % 3 = digit3 (4^r) (j+1) :=
+    Nat.mod_eq_of_lt hdig
+  rw [dust_shift, ← hd3]
   rcases ErdosTernary2.lt_three_cases t (by omega) with ht0 | ht1 | ht2
-  · -- t = 0
-    rw [ht0, Nat.zero_mul, Nat.add_zero]
-    rw [Nat.add_zero]
-    unfold dustStep
+  · -- the t = 0 child: dead exactly when the parent digit is 2
+    rw [ht0]
     rcases ErdosTernary2.lt_three_cases ((digit3 (4^r) (j+1)) % 3)
         (Nat.mod_lt _ (show 0 < 3 by decide)) with hd | hd | hd
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
-      constructor
-      · intro _; omega
-      · intro _; simp
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
-      constructor
-      · intro _; omega
-      · intro _; simp
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
+    · rw [hd, dustStep_val0 hd]
+      exact ⟨fun _ => by omega,
+        fun _ => List.mem_cons.2 (Or.inl (by rw [Nat.zero_mul, Nat.add_zero]))⟩
+    · rw [hd, dustStep_val1 hd]
+      exact ⟨fun _ => by omega,
+        fun _ => List.mem_cons.2 (Or.inl (by rw [Nat.zero_mul, Nat.add_zero]))⟩
+    · rw [hd, dustStep_val2 hd]
       constructor
       · intro hm
-        rcases hm with he | he
-        · omega
-        · omega
-      · intro hdig
-        exact absurd hd hdig
-  · -- t = 1
-    rw [ht1, Nat.one_mul]
-    unfold dustStep
+        rcases List.mem_cons.1 hm with he | htail
+        · exfalso; omega
+        · rcases List.mem_cons.1 htail with he | hnil
+          · exfalso; omega
+          · cases hnil
+      · intro hQ
+        exact absurd (by decide) hQ
+  · -- the t = 1 child: dead exactly when the parent digit is 1
+    rw [ht1]
     rcases ErdosTernary2.lt_three_cases ((digit3 (4^r) (j+1)) % 3)
         (Nat.mod_lt _ (show 0 < 3 by decide)) with hd | hd | hd
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
+    · rw [hd, dustStep_val0 hd]
+      exact ⟨fun _ => by omega,
+        fun _ => List.mem_cons.2 (Or.inr
+          (List.mem_singleton.2 (by rw [Nat.one_mul])))⟩
+    · rw [hd, dustStep_val1 hd]
       constructor
       · intro hm
-        rcases hm with he | he
-        · omega
-        · omega
-      · intro _; simp
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
-      constructor
-      · intro hm
-        rcases hm with he | he
-        · omega
-        · omega
-      · intro hdig
-        exact absurd (by rw [Nat.add_mod, hd]) hdig
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
-      constructor
-      · intro _; omega
-      · intro _; simp
-  · -- t = 2
+        rcases List.mem_cons.1 hm with he | htail
+        · exfalso; omega
+        · rcases List.mem_cons.1 htail with he | hnil
+          · exfalso; omega
+          · cases hnil
+      · intro hQ
+        exact absurd (by decide) hQ
+    · rw [hd, dustStep_val2 hd]
+      exact ⟨fun _ => by omega,
+        fun _ => List.mem_cons.2 (Or.inl (by rw [Nat.one_mul]))⟩
+  · -- the t = 2 child: dead exactly when the parent digit is 0
     rw [ht2]
-    unfold dustStep
     rcases ErdosTernary2.lt_three_cases ((digit3 (4^r) (j+1)) % 3)
         (Nat.mod_lt _ (show 0 < 3 by decide)) with hd | hd | hd
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
+    · rw [hd, dustStep_val0 hd]
       constructor
       · intro hm
-        rcases hm with he | he
-        · omega
-        · omega
-      · intro hdig
-        exact absurd (by rw [Nat.add_mod, hd]) hdig
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
-      constructor
-      · intro _; omega
-      · intro _; simp
-    · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
-      constructor
-      · intro _; omega
-      · intro _; simp
+        rcases List.mem_cons.1 hm with he | htail
+        · exfalso; omega
+        · rcases List.mem_cons.1 htail with he | hnil
+          · exfalso; omega
+          · cases hnil
+      · intro hQ
+        exact absurd (by decide) hQ
+    · rw [hd, dustStep_val1 hd]
+      exact ⟨fun _ => by omega,
+        fun _ => List.mem_cons.2 (Or.inr
+          (List.mem_singleton.2 rfl))⟩
+    · rw [hd, dustStep_val2 hd]
+      exact ⟨fun _ => by omega,
+        fun _ => List.mem_cons.2 (Or.inr
+          (List.mem_singleton.2 rfl))⟩
 
 /-- Membership in the join. -/
 theorem dustJoin_mem (j : Nat) : ∀ (l : List Nat) (r : Nat),
@@ -382,17 +399,17 @@ theorem dust_spec (j : Nat) : ∀ r : Nat,
           rcases List.mem_cons.1 hstep with he | htail
           · exact ⟨0, by omega, by rw [he, Nat.zero_mul, Nat.add_zero]⟩
           · have he := List.mem_singleton.1 htail
-            exact ⟨1, by omega, he⟩
+            exact ⟨1, by omega, by omega⟩
         · rw [hd] at hstep
           rcases List.mem_cons.1 hstep with he | htail
           · exact ⟨0, by omega, by rw [he, Nat.zero_mul, Nat.add_zero]⟩
           · have he := List.mem_singleton.1 htail
-            exact ⟨2, by omega, he⟩
+            exact ⟨2, by omega, by omega⟩
         · rw [hd] at hstep
           rcases List.mem_cons.1 hstep with he | htail
-          · exact ⟨1, by omega, he⟩
+          · exact ⟨1, by omega, by omega⟩
           · have he := List.mem_singleton.1 htail
-            exact ⟨2, by omega, he⟩
+            exact ⟨2, by omega, by omega⟩
       have hbound : t * 3^j ≤ 2 * 3^j := Nat.mul_le_mul_right _ ht
       have hparent₀ := (ih r₀ |>.1 hr₀).1
       refine ⟨by omega, ?_⟩
@@ -411,7 +428,9 @@ theorem dust_spec (j : Nat) : ∀ r : Nat,
       · -- q = j+1: the step spec
         have hqe : q = j+1 := by omega
         rw [hqe, hrt]
-        exact (dustStep_spec j r₀ t ht |>.1) hstep
+        have hstep' : r₀ + t * 3^j ∈ dustStep j r₀ := by
+          rw [← hrt]; exact hstep
+        exact (dustStep_spec j r₀ t ht |>.1) hstep'
     · intro ⟨hlt, hdig⟩
       -- split r into its parent class and child index
       have hdm : 3^j * (r / 3^j) + r % 3^j = r := Nat.div_add_mod r (3^j)
@@ -457,6 +476,76 @@ theorem dust_rider_classes (K j : Nat) (hj : K < 3^j)
     (hDigits : ∀ q, digit3 (4^K) q ≠ 2) : K ∈ dust j :=
   (dust_spec j K |>.2) ⟨hj, fun q _ => hDigits q⟩
 
+/-! ## §7b THE DUST-EDGE THEOREM (S077, the Strategist's Frame D) -/
+
+/-- The unit digit is the residue. -/
+theorem digit3_zero (n : Nat) : digit3 n 0 = n % 3 := by
+  unfold digit3
+  rw [Nat.pow_zero, Nat.div_one]
+
+/-- The digit shift law: the digits of `n / 3` are the digits of `n` above
+position zero. -/
+theorem digit3_succ (n M : Nat) : digit3 n (M+1) = digit3 (n / 3) M := by
+  unfold digit3
+  rw [show (3:Nat)^(M+1) = 3 * 3^M from Nat.pow_succ 3 M,
+    ← Nat.div_div_eq_div_mul]
+
+/-- The power monotonicity law, self-contained (the pin's
+`Nat.pow_le_pow_right` drift avoided). -/
+theorem three_pow_le_of_le (a b : Nat) (h : a ≤ b) : 3^a ≤ 3^b := by
+  obtain ⟨d, hd⟩ : ∃ d : Nat, b = a + d := ⟨b - a, by omega⟩
+  rw [hd, Nat.pow_add]
+  have hp : 0 < 3^d := Nat.pow_pos (by decide)
+  obtain ⟨t, ht⟩ : ∃ t : Nat, 3^d = 1 + t := ⟨3^d - 1, by omega⟩
+  have hexp : 3^a * 3^d = 3^a + 3^a * t := by rw [ht]; ring
+  omega
+
+/-- Digits above the window are zero. -/
+theorem digit3_of_lt (x j q : Nat) (hx : x < 3^(j+1)) (hq : j+1 ≤ q) :
+    digit3 x q = 0 := by
+  have h3q : 3^(j+1) ≤ 3^q := three_pow_le_of_le _ _ hq
+  have hxq : x < 3^q := by omega
+  have hd : x / 3^q = 0 := Nat.div_eq_of_lt hxq
+  unfold digit3
+  rw [hd]
+  rfl
+
+/-- Every number whose ternary digits avoid 2 passes the Cantor verdict
+(the verdict bridge). -/
+theorem noTernaryTwo_of_digits : ∀ n : Nat,
+    (∀ q : Nat, digit3 n q ≠ 2) → noTernaryTwo n = true := by
+  intro n
+  induction n using Nat.strongRecOn with
+  | ind n ih =>
+    intro h
+    rw [noTernaryTwo.eq_def n]
+    by_cases hz : n = 0
+    · subst hz
+      rw [if_pos rfl]
+    · have hne : ¬ (n % 3 = 2) := by
+        intro h2
+        exact h 0 (by rw [digit3_zero]; exact h2)
+      rw [if_neg hz, if_neg hne]
+      have hd3 : 0 < n := by omega
+      have hdiv : n / 3 < n := Nat.div_lt_self hd3 (by decide)
+      exact ih (n / 3) hdiv
+        (fun q => by rw [← digit3_succ]; exact h (q+1))
+
+/-- **THE DUST-EDGE THEOREM.** A dust member whose power fits inside `j+1`
+ternary digits is a rider outright: `noTernaryTwo (4^r) = true`. Composed
+with the Kernel-38 census (in `noTernaryTwo` form — the named bridge lane),
+this pins `dust j ∩ [0, 0.79·j)` to the three known riders at every level
+— the first infinite-family anti-clustering law. -/
+theorem dust_edge (j r : Nat) (hdust : r ∈ dust j) (hsmall : 4^r < 3^(j+1)) :
+    noTernaryTwo (4^r) = true := by
+  obtain ⟨_, hdig⟩ := dust_spec j r |>.1 hdust
+  refine noTernaryTwo_of_digits _ (fun q => ?_)
+  rcases Nat.lt_or_ge q (j+1) with hq | hq
+  · exact hdig q (by omega)
+  · have h0 : digit3 (4^r) q = 0 := digit3_of_lt (4^r) j q hsmall (by omega)
+    rw [h0]
+    omega
+
 /-! ## §8 The receipts -/
 
 #check digit_add_mul
@@ -473,6 +562,7 @@ theorem dust_rider_classes (K j : Nat) (hj : K < 3^j)
 #check dustJoin_mem
 #check dust_spec
 #check dust_rider_classes
+#check dust_edge
 
 #print axioms digit_add_mul
 #print axioms four_pow_3j_struct
@@ -488,6 +578,7 @@ theorem dust_rider_classes (K j : Nat) (hj : K < 3^j)
 #print axioms dustJoin_mem
 #print axioms dust_spec
 #print axioms dust_rider_classes
+#print axioms dust_edge
 
 -- Level receipts (kernel-decided, matching the Python census):
 theorem dust_1_receipt : dust 1 = [0, 1] := by decide
