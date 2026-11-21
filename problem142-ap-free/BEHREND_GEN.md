@@ -282,19 +282,30 @@ the boundary $L_k$, and constructs real sets at moderate $N$.
 
 | $k$ | $C_k$ (certified) | asymptotic $2\sqrt{k\ln2}$ | $N_k$ (engine, §7) |
 |---|---|---|---|
-| 3 | 4.665 | 2.8853 | $2^{40}$ |
-| 4 | 5.117 | 3.3302 | $2^{40}$ |
-| 5 | 5.521 | 3.7202 | $2^{40}$ |
-| 6 | 5.893 | 4.0717 | $2^{40}$ |
-| 7 | 6.240 | 4.3938 | $2^{40}$ |
-| 8 | 6.568 | 4.6924 | $2^{40}$ |
-| 9 | 6.880 | 4.9718 | $2^{40}$ |
-| 10 | 7.178 | 5.2348 | $2^{40}$ |
+| 3 | 4.3302 | 2.8841 | $2^{40}$ |
+| 4 | 4.7233 | 3.3302 | $2^{40}$ |
+| 5 | 5.0787 | 3.7233 | $2^{40}$ |
+| 6 | 5.4055 | 4.0787 | $2^{40}$ |
+| 7 | 5.7096 | 4.4055 | $2^{40}$ |
+| 8 | 5.9953 | 4.7096 | $2^{40}$ |
+| 9 | 6.2655 | 4.9953 | $2^{40}$ |
+| 10 | 6.5225 | 5.2655 | $2^{40}$ |
+
+(W81-142B audit correction: the previous table's numeric column drifted from
+its own header formula at 15 of 16 entries (e.g. k=3: 4.665 vs the formula's
+4.3302). The values above are the formula-exact constants
+$C_k = 2\sqrt{(k+1)\ln 2}+1$ and $2\sqrt{k\ln 2}$, and the audit engine
+re-certified the FULL plug-back inequality $\ln(m^{d-k}/d^2 - 1) \geq
+\ln N - C_k\sqrt{\ln N}$ at these constants with far-range margins +77.0
+to +85.6 across k=3..10 — the certified claims carry these constants.)
 
 (The engine additionally verifies the SHARPER plug-back with the asymptotic
 constant family $2\sqrt{k\ln2}+\varepsilon$ at large $N$ — the margin
 table is in the receipts; the certified table above is the safe explicit
-claim.)
+claim. Audit note (W81-142B NEGCTL D4): the margin formula MUST carry the
+/d^2 factor — $\ln(m^{d-k}/d^2 - 1)$, exactly as line 262 and §7 state;
+the historical check form without /d^2 is vacuous by $2\ln d$ — the
+demonstration is in receipts142audit_w81.txt AUD-NEGCTL.)
 
 ### §6.4 The k=3 reproduction (the banked constants, exactly)
 

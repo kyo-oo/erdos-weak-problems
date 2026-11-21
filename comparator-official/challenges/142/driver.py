@@ -706,4 +706,25 @@ def run_negative_controls(challenge, solution):
         "Theorem F1: the exact Fourier counting identity #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r!=0} fhat(r)^2 fhat(-2r) — machine-exact at p=101 (with Parseval)",
         ok, det, time.time()-t0))
 
+    # S-AUDIT-W81: the independent W81 audit engine — 16/16 + GREEN flag.
+    t0 = time.time()
+    AUD = os.path.join(CAMP, "problem142-ap-free", "engine142audit_w81.py")
+    try:
+        proc = subprocess.run([sys.executable, AUD],
+                              capture_output=True, text=True, timeout=560)
+        out = proc.stdout + proc.stderr
+        n_pass = out.count("[PASS]")
+        n_fail = out.count("[FAIL]")
+        green = "AUDIT142_ENGINE_GREEN=1" in out
+        ok = proc.returncode == 0 and n_fail == 0 and n_pass >= 16 and green
+        det = (f"exit {proc.returncode}; {n_pass} PASS / {n_fail} FAIL; "
+               f"GREEN={green}; the W81 defect ledger (D1 r_4(4)=3, D2 the "
+               f"BG constants table, D3 the /d^2 margin discipline) is "
+               f"certified fixed by AUD-R4VARN-TABLE/AUD-BGE-CONSTANTS PASS")
+    except Exception as e:
+        ok = False; det = repr(e)
+    checks.append(_chk("S-AUDIT-W81",
+        "The W81 independent audit battery (fresh algorithms: lex-DFS tables, exact F_q DFT, own censuses) — 16/16 green, defects D1-D3 fixed and machine-guarded",
+        ok, det, time.time()-t0))
+
     return checks
