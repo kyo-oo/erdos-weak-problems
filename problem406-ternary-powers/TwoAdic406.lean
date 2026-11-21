@@ -106,7 +106,7 @@ theorem digit3_lt_three (x p : Nat) : digit3 x p < 3 := by
 position zero. -/
 theorem digit3_succ (n M : Nat) : digit3 n (M+1) = digit3 (n / 3) M := by
   unfold digit3
-  rw [show (3:Nat)^(M+1) = 3 * 3^M from Nat.pow_succ 3 M,
+  rw [show (3:Nat)^(M+1) = 3 * 3^M from by rw [Nat.pow_succ]; ring,
     ← Nat.div_div_eq_div_mul]
 
 /-- The unit digit is the residue. -/
@@ -220,7 +220,7 @@ theorem digitsRep_succ (n : Nat) : ∀ M : Nat, digitsRep n (M+1)
     show digitsRep n (M+1) + digit3 n (M+1) * 3^(M+1)
       = (digitsRep (n / 3) M + digit3 (n / 3) M * 3^M) * 3 + n % 3
     rw [ih, digit3_succ]
-    have hp : (3:Nat)^(M+1) = 3 * 3^M := Nat.pow_succ 3 M
+    have hp : (3:Nat)^(M+1) = 3^M * 3 := Nat.pow_succ 3 M
     rw [hp]
     ring
 
@@ -236,7 +236,7 @@ theorem digitsRep_eq : ∀ M n : Nat, n < 3^M → digitsRep n M = n := by
     rfl
   | succ M ih =>
     intro n hn
-    have hp : (3:Nat)^(M+1) = 3 * 3^M := Nat.pow_succ 3 M
+    have hp : (3:Nat)^(M+1) = 3^M * 3 := Nat.pow_succ 3 M
     rw [hp] at hn
     have hn3 : n / 3 < 3^M := by omega
     rw [digitsRep_succ, ih (n / 3) hn3]
