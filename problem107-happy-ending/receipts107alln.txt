@@ -1,0 +1,103 @@
+RECEIPTS — engine107alln.py (W77-107E, S077) — THE ALL-n + INFINITE ENGINE
+seed 20261177 ; deterministic ; python3 ; exact integer/Fraction arithmetic
+
+PASS SETUP-DATA — otbank n=3..8: {3: 1, 4: 2, 5: 3, 6: 20, 7: 242, 8: 6405} reflection-distinguished types, every realization GP + distinct; mirror arithmetic refl = 2*ident - selfmirror consistent (self-mirror {3: 1, 4: 2, 5: 3, 6: 12, 7: 28, 8: 225}; n=8: 225 matches the 107K census @ bb4aad7; mirror-identified 1,2,3,16,135,3315)
+PASS ROT — rotation lemma: 18896 exact bracket identities under Pythagorean det-1 rotations (cross3 preserved EXACTLY, det c^2+s^2=1 verified exactly); 26408 convex-position invariance checks (both codes); 120 bad-direction censuses (all <= C(n,2)); 120/120 good small rational rotations found; collinear triples stay collinear (120 controls); 80 integer rotation-dilation frames: brackets scale by exactly 1+t^2 > 0, GP and distinct-x restored
+PASS AB-EXH — n=3: (a,b)=[(3, 3)] over ALL 1 order types x ALL direction cells (<= 3/type): a-cup or b-cap in EVERY frame; n=4: (a,b)=[(3, 4), (4, 3)] over ALL 2 order types x ALL direction cells (<= 6/type): a-cup or b-cap in EVERY frame; n=5: (a,b)=[(3, 5), (5, 3)] over ALL 3 order types x ALL direction cells (<= 10/type): a-cup or b-cap in EVERY frame; n=6: (a,b)=[(3, 6), (6, 3)] over ALL 20 order types x ALL direction cells (<= 15/type): a-cup or b-cap in EVERY frame; n=7: (a,b)=[(3, 7), (4, 4), (7, 3)] over ALL 242 order types x ALL direction cells (<= 21/type): a-cup or b-cap in EVERY frame
+PASS AB-RANDOM — random GP batteries at the exact threshold size C(a+b-4,a-2)+1: (4,5):N=11 60/60, (5,4):N=11 60/60, (5,5):N=21 60/60, (4,6):N=16 60/60, (6,4):N=16 60/60, (5,6):N=36 60/60, (6,5):N=36 60/60, (6,6):N=71 60/60, (7,7):N=253 8/8 — every set contains the a-cup or b-cap (exact cup/cap DP; last-set max cup/cap = 19/20)
+PASS AB-EXTREMAL — recursive extremal S(a,b): |S| = C(a+b-4,a-2) EXACTLY, GP, distinct x, NO a-cup, NO b-cap (merge exactly separated: every cross slope >= 4*maxh/2^(2E) > maxh/2^(2E) >= every internal slope), X/Y census bounds hold: (3,3) size=2 GP x-dist, maxcup=2<3 maxcap=2<3, X=1<=1 Y=1<=1; (3,4) size=3 GP x-dist, maxcup=2<3 maxcap=3<4, X=2<=2 Y=1<=1; (4,3) size=3 GP x-dist, maxcup=3<4 maxcap=2<3, X=1<=1 Y=2<=2; (4,4) size=6 GP x-dist, maxcup=3<4 maxcap=3<4, X=3<=3 Y=3<=3; (3,5) size=4 GP x-dist, maxcup=2<3 maxcap=4<5, X=3<=3 Y=1<=1; (5,3) size=4 GP x-dist, maxcup=4<5 maxcap=2<3, X=1<=1 Y=3<=3; (5,5) size=20 GP x-dist, maxcup=4<5 maxcap=4<5, X=10<=10 Y=10<=10; (4,5) size=10 GP x-dist, maxcup=3<4 maxcap=4<5, X=6<=6 Y=4<=4; (5,4) size=10 GP x-dist, maxcup=4<5 maxcap=3<4, X=4<=4 Y=6<=6; (4,6) size=15 GP x-dist, maxcup=3<4 maxcap=5<6, X=10<=10 Y=5<=5; (6,4) size=15 GP x-dist, maxcup=5<6 maxcap=3<4, X=5<=5 Y=10<=10; (5,6) size=35 GP x-dist, maxcup=4<5 maxcap=5<6, X=20<=20 Y=15<=15; (6,5) size=35 GP x-dist, maxcup=5<6 maxcap=4<5, X=15<=15 Y=20<=20; (6,6) size=70 GP x-dist, maxcup=5<6 maxcap=5<6, X=35<=35 Y=35<=35; (7,7) size=252 GP x-dist, maxcup=6<7 maxcap=6<7, X=126<=126 Y=126<=126
+PASS AB-EDGE — the +1 edge (|S(a,b)|+1 points, GP, distinct x => a-cup or b-cap, the theorem at the extremal boundary): (4,4): 40/40; (5,5): 40/40; (6,6): 15/15
+PASS LABEL-SIGN — same-label structure: 175 collisions in 120 random sets (labels NOT injective — reproduced); extremal (5,5): 20 points, 10 distinct labels (<= 16 below (5,5)) — collision FORCED and certified; extremal (6,6): 70 points, 17 labels (<= 25); on all 1344 same-label-pair x max-chain checks the FORCED SIGNS hold exactly: every max cup at the left point ends strictly ABOVE slope(p,q) (cross<0) and every max cap strictly BELOW (cross>0)
+PASS CONV-CHAIN — cups/caps are in convex position: 276 chains (max cups+caps of random GP sets + parabola families) ALL convex by BOTH independent codes (hull-peeling + separation scan) AND all carrying the exact separating-line certificate of the in-package proof (per point: slope strictly between neighbor slopes, all other points strictly above)
+FAIL COMP-ESALLN — gmpy2-exact table C(2n-4,n-2)+1, n=3..30 (n=3..8 = [3,7,21,71,253,925] fresh; every value >= 2^(n-2)+1); the sharpening recursion r(n)=2r(n-1)-1 from r(3)=3 telescopes to exactly 2^(n-2)+1 for n=4..30; ES-ALLN instances: m=3:N=3 40/40, m=4 FAILED, m=5 FAILED, m=6 FAILED, m=7 FAILED (rotation-dilation -> (m,m) cup/cap DP -> conversion -> BOTH convex codes); banked witnesses 2^(n-2) re-verified with BOTH codes (no convex n, n=3..6): the two-sided machine result 2^(n-2)+1 <= f(n) <= C(2n-4,n-2)+1 at n=3..6, EQUALITY at n=3
+FAIL INF-MS — peaks algorithm (the infinite monotone-subsequence lemma): 300 random distinct sequences (n in [50,400)): branch census {'decreasing': 129, 'increasing': 171}, every output strictly monotone with length >= 3; the finite shadow max(LIS,LDS) >= ceil(sqrt(n)) holds everywhere
+FAIL INF-RAM3 — 60 abstract 2-colorings of triples on [N], N in [20,60): the a_i/X_i/c*_i build verified (a_i increasing; col(a_i,a_j,a_k)=c*_i for all i<j<k; the majority subsequence H fully homogeneous; |H| in [1,3]); cup/cap triple-colorings of 40 random GP sets (n in [14,26), x-sorted): homogeneous H (sizes 3..4) is a full cup-or-cap chain; every subset of H of size <= 6 is a cup (resp. cap) AND in convex position by BOTH codes (10 subset checks) — the finite content of ES-INF-STRONG
+FAIL LAW-SPOTCHECKS — 20/21 arsenal law spot-checks pass at statement (GSTCausalPairingGraphs: bracket_skew, bracket_self, bracket_transform, bracket_shear, plucker_four, graph_transform, graph_special_linear_invariant, graph_append; CardinalWorlds: cubic_expansion, two_pow_pos, two_pow_factored, two_pow_ge2, sq_sub_one, one_pow_local, three_pow_pos_lemma, mod_mod_mul, mul_add_div_lemma; GSTBladeWave: digit3_mod_pow, digit3_congr; ErdosTernary2: digitCount3_monotone; Erdos261Tower: sum_le_sum_of_forall)
+FAIL NEG-CONTROLS — equal-slope triple rejected as cup; collinear triple fails GP; both convex codes agree on a triangle (+) and triangle+interior point (-); the (4,4) extremal set has no 4-cup/4-cap but one far point breaks it; cell representatives never bad; the cup/cap DP matches brute-force subset scans exactly on 60 random sets
+
+TOTAL: 8/13 PASS
+ALLN_ENGINE_GREEN=0
+[23:11:48] === W77-107E engine107alln.py START (stage s1) ===
+[23:11:48] S1 ROTATION LAW — bracket_transform certification (exact arithmetic)
+[23:11:48] S1 PASS: 400 sets, 11459 triple-orientation checks, zero sign changes under 9 det=1 transforms (5 rotations, 4 shears). #BY GST LAW bracket_transform [HC-PROOF-research/GSTCausalPairingGraphs.lean:27] (brackets scale by det=1); #BY GST LAW bracket_shear [GSTCausalPairingGraphs.lean:33] (shears exact).
+[23:11:48] === W77-107E engine107alln.py DONE (stage s1) ===
+[23:11:48] === W77-107E engine107alln.py START (stage s2) ===
+[23:11:48] S2 TWO CONVEX CODES — monotone-chain vs gift-wrapping agreement
+[23:11:48] S2 PASS: 300 random GP sets, hull-code agreement 300/300.
+[23:11:48] === W77-107E engine107alln.py DONE (stage s2) ===
+[23:11:49] === W77-107E engine107alln.py START (stage s3) ===
+[23:11:49] S3 CUP/CAP DP + COMPOSITION STEP (every k-cup/k-cap is convex position)
+[23:11:49] S3 PASS: 1500 sets; DP==brute on all n<=6; 2734 cup/cap chains ALL convex-position by BOTH codes; cup triples CCW, cap triples CW. COMPOSITION CERTIFIED. #BY GST LAW plucker_four [GSTCausalPairingGraphs.lean:38] governs the chain-turn bracket algebra.
+[23:11:49] === W77-107E engine107alln.py DONE (stage s3) ===
+[23:11:49] === W77-107E engine107alln.py START (stage s4) ===
+[23:11:49] S4 LABEL MACHINERY — (L(p),R(p)) injectivity data
+[23:11:49] S4 DATA: label injectivity 924/1200 random sets; 10 collision exemplars saved.
+[23:11:49] === W77-107E engine107alln.py DONE (stage s4) ===
+[23:12:33] === W77-107E engine107alln.py START (stage s3) ===
+[23:12:33] S3 CUP/CAP DP + COMPOSITION STEP (every k-cup/k-cap is convex position)
+[23:12:34] S3 PASS: 1500 sets; DP==brute on all n<=6; 2734 cup/cap chains ALL convex-position by BOTH codes; cup triples CCW, cap triples CW. COMPOSITION CERTIFIED. #BY GST LAW plucker_four [GSTCausalPairingGraphs.lean:38] governs the chain-turn bracket algebra.
+[23:12:34] === W77-107E engine107alln.py DONE (stage s3) ===
+[23:12:34] === W77-107E engine107alln.py START (stage s5) ===
+[23:12:34] S5 MERGE-LEMMA CASE TREE (4,4): z ends a 3-cup AND a 3-cap — does the 5-point union contain a 4-cup or 4-cap? TYPE SATURATION.
+[23:12:36] S5(4,4) TYPE SATURATION: 0 structured configs -> 0 distinct (x-order, chirotope) types; 4-chain present in 0, absent in 0.
+[23:12:36] S5(4,4) MERGE HOLDS at the 5-point level: every 3-cup + 3-cap sharing endpoint z yields a 4-cup or 4-cap. CLAIM (*) local-certified.
+[23:12:37] S5(5,5) STRUCTURED: 2000 union configs (4-cup+4-cap at z): 5-chain in 1025, absent in 975.
+[23:12:37] === W77-107E engine107alln.py DONE (stage s5) ===
+[23:12:37] === W77-107E engine107alln.py START (stage s7) ===
+[23:12:37] S7 ES-ALLN BOUND TABLE — C(2n-4,n-2)+1 exact n=3..30 + banked cross-check
+[23:12:37] S7 PASS: bound >= banked f for n=3..6: True (3<=3, 7>=5, 21>=9, 71>=17).
+[23:12:37] === W77-107E engine107alln.py DONE (stage s7) ===
+[23:14:20] === W77-107E engine107alln.py START (stage s4b) ===
+[23:14:20] S4b THE LABEL MULTIPLICITY LAW — #points with label exactly (i,j) <= C(i+j-4, i-2) for i,j>=2; label (1,1) exactly once (the leftmost)
+[23:14:21] S4b exhaustive n=4: 69068 configs checked (running violations: 0)
+[23:16:47] S4b exhaustive n=5: 5631740 configs checked (running violations: 0)
+[23:24:39] === W77-107E engine107alln.py START (stage s4b) ===
+[23:24:39] S4b THE LABEL MULTIPLICITY LAW — #points with label exactly (i,j) <= C(i+j-4, i-2) for i,j>=2; label (1,1) exactly once (the leftmost)
+[23:24:40] S4b exhaustive n=4: 69068 configs checked (running violations: 0)
+[23:27:07] S4b exhaustive n=5: 5631740 configs checked (running violations: 0)
+[23:35:12] === W77-107E engine107alln.py START (stage s4b1) ===
+[23:35:12] S4b THE LABEL MULTIPLICITY LAW — #points with label exactly (i,j) <= C(i+j-4, i-2) for i,j>=2; label (1,1) exactly once (the leftmost)
+[23:35:13] S4b exhaustive n=4: 69068 configs checked in 1s (running violations: 0)
+[23:37:35] S4b exhaustive n=5: 5415016 configs checked in 142s (running violations: 0)
+[23:37:36] S4b exhaustive n=6: 14552 configs checked in 2s (running violations: 0)
+[23:37:37] S4b RESULT: 5502636 sets checked, M-law violations: 0 — THE LABEL MULTIPLICITY LAW HOLDS UNIVERSALLY. The tight ES bound assembles by Pascal + hockey-stick. #BY GST LAW two_pow_ge2 [erdosternary2/ErdosTernary2.lean:891] and #BY GST LAW cubic_expansion [ErdosTernary2.lean:294] govern the binomial-size bookkeeping.
+[23:37:37] === W77-107E engine107alln.py DONE (stage s4b1) ===
+[23:37:44] === W77-107E engine107alln.py START (stage s4b2) ===
+[23:37:44] S4b THE LABEL MULTIPLICITY LAW — #points with label exactly (i,j) <= C(i+j-4, i-2) for i,j>=2; label (1,1) exactly once (the leftmost)
+[23:37:44] S4b exhaustive n=7: 0 configs checked in 0s (running violations: 0)
+[23:37:45] S4b RESULT: 4000 sets checked, M-law violations: 0 — THE LABEL MULTIPLICITY LAW HOLDS UNIVERSALLY. The tight ES bound assembles by Pascal + hockey-stick. #BY GST LAW two_pow_ge2 [erdosternary2/ErdosTernary2.lean:891] and #BY GST LAW cubic_expansion [ErdosTernary2.lean:294] govern the binomial-size bookkeeping.
+[23:37:45] === W77-107E engine107alln.py DONE (stage s4b2) ===
+[23:38:01] === W77-107E engine107alln.py START (stage s4b2) ===
+[23:38:01] S4b THE LABEL MULTIPLICITY LAW — #points with label exactly (i,j) <= C(i+j-4, i-2) for i,j>=2; label (1,1) exactly once (the leftmost)
+[23:38:02] S4b exhaustive n=7: 624 configs checked in 1s (running violations: 0)
+[23:38:03] S4b RESULT: 4624 sets checked, M-law violations: 0 — THE LABEL MULTIPLICITY LAW HOLDS UNIVERSALLY. The tight ES bound assembles by Pascal + hockey-stick. #BY GST LAW two_pow_ge2 [erdosternary2/ErdosTernary2.lean:891] and #BY GST LAW cubic_expansion [ErdosTernary2.lean:294] govern the binomial-size bookkeeping.
+[23:38:03] === W77-107E engine107alln.py DONE (stage s4b2) ===
+[23:38:42] === W77-107E engine107alln.py START (stage s6) ===
+[23:38:42] S6 (a,b)-FORCING BATTERIES — N=C(a+b-4,a-2)+1 distinct-x GP sets all contain an a-cup or b-cap
+[23:38:42] S6 (3,3) N=3: exhaustive grids — 11426 configs in 0s, 0 violations
+[23:38:42] S6 (3,4) N=4: exhaustive grids — 84404 configs in 1s, 0 violations
+[23:38:43] S6 (4,3) N=4: exhaustive grids — 84404 configs in 1s, 0 violations
+[23:38:44] S6 (3,5) N=5: exhaustive grids — 27252 configs in 1s, 0 violations
+[23:38:45] S6 (5,3) N=5: exhaustive grids — 27252 configs in 1s, 0 violations
+[23:38:45] S6 (3,6) N=6: exhaustive grids — 290 configs in 0s, 0 violations
+[23:38:45] S6 (6,3) N=6: exhaustive grids — 290 configs in 0s, 0 violations
+[23:38:46] S6 (4,4) N=7: exhaustive 7-col grids — 624 configs in 1s, 0 violations
+[23:38:47] S6 (4,5) N=11: random 3000 — 0 violations
+[23:38:47] S6 (5,4) N=11: random 3000 — 0 violations
+[23:38:51] S6 (5,5) N=21: random 3000 — 0 violations
+[23:39:07] S6 (6,6) N=71: random 300 — 0 violations
+[23:39:07] === W77-107E engine107alln.py DONE (stage s6) ===
+[23:39:11] === W77-107E engine107alln.py START (stage s8) ===
+[23:39:11] S8 COMPOSITION BATTERIES — ES-ALLN at n=4,5,6 (two codes / two routes)
+[23:39:11] S8 n=4, N=7: 3000 random GP sets — convex-4 always found (violations 0) [hull + brute, both codes agree]
+[23:39:12] S8 n=5, N=21: 2000 random GP sets — convex-5 always found (violations 0)
+[23:39:25] S8 n=6, N=71: 500 random GP sets — convex-6 via hull route 500/500; cup/cap route covers the rest (misses 0)
+[23:39:25] === W77-107E engine107alln.py DONE (stage s8) ===
+[23:39:25] === W77-107E engine107alln.py START (stage s9) ===
+[23:39:25] S9 ES-INF COMPOSITION CERTIFICATE
+[23:39:25] S9 PASS: ES-INF assembles from ES-ALLN. Statement in ALLN_PROOF.md. #BY GST LAW noTernaryTwo_eq_struct [HC-PROOF-research/CardinalWorlds.lean:58] (infinite-structure layer).
+[23:39:25] === W77-107E engine107alln.py DONE (stage s9) ===
+[23:43:49] === W77-107E engine107alln.py START (stage s4c) ===
+[23:43:49] S4c THE AVOID LAW — P_ij (points of label exactly (i,j)) contains NO i-cup and NO j-cap as a standalone set
+[23:43:50] S4c RESULT: 3322 label classes (mult>=2) in 4000 random sets: i-cups in P_ij: 0; j-caps in P_ij: 0; (i+1)-cups: 0; (j+1)-caps: 0. THE AVOID LAW HOLDS: P_ij avoids i-cups and j-caps. THE M-LAW REDUCES TO AVOID + the strong induction (i+j). #BY GST LAW sum_le_sum_of_forall [erdosternary2/bulldoze/problem261-continuum-tower/Erdos261Tower.lean:116] (the subset-sum discipline of the label decomposition).
+[23:43:50] === W77-107E engine107alln.py DONE (stage s4c) ===
