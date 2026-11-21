@@ -394,7 +394,7 @@ theorem rider_second_digit_residue (K : Nat)
         have hcon := digit3_mod_congr (4^K) (1 + 2 * 3^(v+1)) (v+1) hmod
         rw [hcon]
         exact digit3_of_residue_two (1 + 2 * 3^(v+1)) (v+1) hv1
-          (by rw [show ((v:Nat)+1)+1 = v+2 from by omega]
+          (by rw [show ((v:Nat)+1)+1 = v+2 from by omega];
            exact Nat.mod_eq_of_lt (lt_cut_residue v 2 (by decide)))
       rw [noTernaryTwo_of_digit_two (v+1) (4^K) hfire] at hrider
       exact absurd hrider (by decide)
@@ -426,7 +426,7 @@ theorem rider_second_digit_residue (K : Nat)
     have hcon := digit3_mod_congr (4^K) (1 + 1 * 3^(v+1)) (v+1) hmod
     rw [hcon]
     exact digit3_of_residue_one (1 + 1 * 3^(v+1)) (v+1) (by omega)
-      (by rw [show ((v:Nat)+1)+1 = v+2 from by omega]
+      (by rw [show ((v:Nat)+1)+1 = v+2 from by omega];
        exact Nat.mod_eq_of_lt (lt_cut_residue v 1 (by decide)))
 
 /-! ## §3 THE WINDOW LAW — the digit stream reads the diagonal -/
