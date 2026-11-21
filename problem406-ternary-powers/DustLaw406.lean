@@ -94,10 +94,7 @@ theorem four_pow_3j_struct : ∀ j : Nat, ∃ c : Nat,
     refine ⟨u + 3 * (3^j * u * u + 3^j * 3^j * u * u * u), ?_, ?_⟩
     · rw [hpow, hu, hc, e1, e2]
       ring
-    · rw [e1]
-      show (u + 3 * (3^j * u * u + 3^j * 3^j * u * u * u)) % 3 = 1
-      rw [Nat.add_mod, Nat.mul_mod]
-      omega
+    · omega
 
 /-! ## §2 The binomial congruence (the near-identity raised to a power) -/
 
@@ -147,10 +144,15 @@ theorem dust_shift (j r t : Nat) :
   rw [hdecomp, digit_add_mul]
   have h4m : (4:Nat)^r % 3 = 1 := four_pow_mod3 r
   have hmod : (t * c1 * 4^r + 3 * K * 4^r) % 3 = t % 3 := by
-    rw [Nat.add_mod, Nat.mul_mod, Nat.mul_mod, Nat.mul_mod, h4m, hc1m]
-    have hK3 : (3 * K * 4^r) % 3 = 0 := by rw [show 3 * K * 4^r = (K * 4^r) * 3 from by ring, Nat.mul_mod]; omega
-    have h3 : (3:Nat) % 3 = 0 := by omega
-    rw [hK3, h3]
+    have hW : (c1 * 4^r) % 3 = 1 := by
+      rw [Nat.mul_mod, h4m, hc1m]
+    have e : t * c1 * 4^r = t * (c1 * 4^r) := by ring
+    rw [e, Nat.add_mod]
+    rw [Nat.mul_mod]
+    rw [hW]
+    have hz : (3 * K * 4^r) % 3 = 0 :=
+      Nat.mod_eq_zero_of_dvd ⟨K * 4^r, by ring⟩
+    rw [hz]
     omega
   rw [hmod]
   omega
@@ -172,10 +174,8 @@ theorem digit_period (q k m : Nat) :
     rw [h4, hc1, hK, e1, e2]
     ring
   rw [hdecomp, digit_add_mul]
-  have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 := by
-    rw [show 3 * (m * c1 * 4^k + 3 * K * 4^k)
-          = (m * c1 * 4^k + 3 * K * 4^k) * 3 from by ring, Nat.mul_mod]
-    omega
+  have h0 : (3 * (m * c1 * 4^k + 3 * K * 4^k)) % 3 = 0 :=
+    Nat.mod_eq_zero_of_dvd ⟨m * c1 * 4^k + 3 * K * 4^k, by ring⟩
   rw [h0]
   omega
 
@@ -246,17 +246,18 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
   rcases ErdosTernary2.lt_three_cases t (by omega) with ht0 | ht1 | ht2
   · -- t = 0
     rw [ht0, Nat.zero_mul, Nat.add_zero]
+    rw [Nat.add_zero]
     unfold dustStep
     rcases ErdosTernary2.lt_three_cases ((digit3 (4^r) (j+1)) % 3)
         (Nat.mod_lt _ (show 0 < 3 by decide)) with hd | hd | hd
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
-      · intro _; exact Or.inl rfl
+      · intro _; simp
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
-      · intro _; exact Or.inl rfl
+      · intro _; simp
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro hm
@@ -264,7 +265,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        omega
+        exact absurd hd hdig
   · -- t = 1
     rw [ht1, Nat.one_mul]
     unfold dustStep
@@ -276,7 +277,7 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         rcases hm with he | he
         · omega
         · omega
-      · intro _; exact Or.inr rfl
+      · intro _; simp
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro hm
@@ -284,11 +285,11 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        omega
+        exact absurd (by rw [Nat.add_mod, hd]) hdig
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
-      · intro _; exact Or.inl rfl
+      · intro _; simp
   · -- t = 2
     rw [ht2]
     unfold dustStep
@@ -301,15 +302,15 @@ theorem dustStep_spec (j r t : Nat) (ht : t ≤ 2) :
         · omega
         · omega
       · intro hdig
-        omega
+        exact absurd (by rw [Nat.add_mod, hd]) hdig
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
-      · intro _; exact Or.inr rfl
+      · intro _; simp
     · rw [hd]; simp only [List.mem_cons, List.mem_singleton]
       constructor
       · intro _; omega
-      · intro _; exact Or.inr rfl
+      · intro _; simp
 
 /-- Membership in the join. -/
 theorem dustJoin_mem (j : Nat) : ∀ (l : List Nat) (r : Nat),
@@ -326,7 +327,7 @@ theorem dustJoin_mem (j : Nat) : ∀ (l : List Nat) (r : Nat),
     constructor
     · intro hm
       rcases hm with h | h
-      · exact ⟨r₁, List.mem_cons.2 (Or.inl h), h⟩
+      · exact ⟨r₁, List.mem_cons.2 (Or.inl rfl), h⟩
       · obtain ⟨r₀, hr₀, hr⟩ := (ih r |>.1) h
         exact ⟨r₀, List.mem_cons.2 (Or.inr hr₀), hr⟩
     · intro ⟨r₀, hr₀, hr⟩
@@ -351,9 +352,9 @@ theorem dust_spec (j : Nat) : ∀ r : Nat,
       intro q _
       rw [hr, Nat.pow_zero]
       show (1 / 3^q) % 3 ≠ 2
-      rcases q with
-      | zero => decide
-      | succ q =>
+      match q with
+      | .zero => decide
+      | .succ q =>
         have hq : 3 ≤ 3^(q+1) := by
           have hp : 0 < 3^q := Nat.pow_pos (by decide)
           have hps := Nat.pow_succ 3 q
