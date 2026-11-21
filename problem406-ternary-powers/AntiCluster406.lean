@@ -181,7 +181,7 @@ theorem cantorScan_zero : ∀ k : Nat, cantorScan 0 k = true := by
   induction k with
   | zero => rfl
   | succ k ih =>
-    show (0 % 3 != 2) && cantorScan (0 / 3) k = true
+    show (((0:Nat) % 3 != 2) && cantorScan (0 / 3) k) = true
     have h03 : (0:Nat) / 3 = 0 := by omega
     rw [h03, ih]
 
@@ -211,11 +211,11 @@ theorem cantorScan_eq : ∀ (k n : Nat), n < 3^k → cantorScan n k = noTernaryT
     · rw [if_neg hz]
       by_cases hm : n % 3 = 2
       · rw [if_pos hm]
-        show (n % 3 != 2) && cantorScan (n / 3) k = false
+        show (((n:Nat) % 3 != 2) && cantorScan (n / 3) k) = false
         have hb : (n % 3 != 2) = false := by simp [hm]
         rw [hb]
       · rw [if_neg hm]
-        show (n % 3 != 2) && cantorScan (n / 3) k = noTernaryTwo (n / 3)
+        show (((n:Nat) % 3 != 2) && cantorScan (n / 3) k) = noTernaryTwo (n / 3)
         rw [ih (n / 3) hdiv]
         have hb : (n % 3 != 2) = true := by simp [hm]
         rw [hb]
@@ -249,7 +249,7 @@ theorem noTwo_even_census (k : Nat) (hk : k ≤ 500) (hmod : k % 2 = 0)
     (hval : noTernaryTwo (2^k) = true) : k = 0 ∨ k = 2 ∨ k = 8 := by
   have hm : k = 2 * (k / 2) := by omega
   have hm250 : k / 2 < 251 := by omega
-  have h2m : 2^k = 2^(2 * (k / 2)) := by rw [hm]
+  have h2m : (2:Nat)^k = 2^(2 * (k / 2)) := congrArg (fun x => (2:Nat)^x) hm
   have hle : 2^(2 * (k / 2)) ≤ 2^500 := two_pow_le_of_le _ _ (by omega)
   have hlt : 2^(2 * (k / 2)) < 3^316 := by omega
   have hscan : cantorScan (2^(2 * (k / 2))) 316
