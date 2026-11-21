@@ -1033,6 +1033,32 @@ jobs:
           grep -E "rider_tower_receipt_256' (does not depend on any axioms|depends on axioms)" kernel70.log
           python3 problem406-ternary-powers/battery406c.py
           echo ERDOS406_TWOADIC_KERNEL_GREEN=1
+      - name: "Kernel 71+72 - Erdos 406 THE CENSUS-BRIDGE + ANTI-CLUSTERING + DUST-FAMILY KERNELS (S078, BOSS order 'crack the HFTAIL hypothesis completely — go full proof'): K71 THE VERDICT BRIDGE (noTernaryTwo n = true iff every ternary digit of n avoids 2, both directions — the verdict and the digit reader are one predicate) + THE SHARP-FUEL SCANNER (cantorScan n k = noTernaryTwo n whenever n < 3^k — fuel = the ternary digit count, 316 covers all of 2^500) + THE EVEN CENSUS IN VERDICT FORM (the named S077 assembly gap CLOSED: for every even k <= 500, noTernaryTwo (2^k) = true -> k in {0,2,8} — the Kernel-38 census bridged to the Arsenal's own verdict reader, one legal 251-element kernel-decided chunk, NO-OOM cap 501 honored) + THE RIDER-EDGE ANTI-CLUSTERING LAW (rider_edge_anticluster: at EVERY level j, every r whose 4^r digits avoid 2 through position j with 4^r < 3^(j+1) and 2r <= 500 is a known rider {0,1,4} — the FIRST INFINITE-FAMILY ANTI-CLUSTERING LAW: dust j's edge window holds only the three riders, every level, forever) + THE DEEP LEVEL-UNIFORM FORM (rider_edge_anticluster_deep: j >= 315 -> dust j INTERSECT [0,250] = {0,1,4} at every level, forever) + K72 THE FIVE EXACT FAMILY LAWS of the dust tree (dust_fam7_zero: |dust j ∩ r≡7 mod 9| = 0 — the row-2 fire as a cardinality law; dust_fam1_card = 2^(j-2) and dust_fam4_card = 2^(j-2) — the row families hold exactly half the non-tower dust, split evenly between ≡1 and ≡4 mod 9; dust_tower_card = 2^(j-1) — the tower sheets exactly half the tree; dust_mod3two_zero = 0 — the cut-row fire) — the fine structure of the anti-concentration battlefield at every level + battery406d.py ALL GREEN (dual-method even census {0,2,8}; anti-clustering j in [0,40] x r <= 250 zero violations; family laws tree A levels 1..16 all exact; shadow dust 2-per-family with the middle-third pi-points present at levels 4..12; the window increment law 15 cores x 12 sheets)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel7172.log
+          lake env lean problem406-ternary-powers/AntiCluster406.lean 2>&1 | tee -a kernel7172.log
+          lake env lean problem406-ternary-powers/DustFamily406.lean 2>&1 | tee -a kernel7172.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel7172.log
+          grep -F "ERDOS406_ANTICLUSTER_KERNEL_GREEN" kernel7172.log
+          grep -F "ERDOS406_DUSTFAMILY_KERNEL_GREEN" kernel7172.log
+          grep -E "cantorScan_eq' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "noTwo_even_census' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "rider_edge_anticluster' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "rider_edge_anticluster_deep' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "dust_mod3two_zero' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "dust_tower_card' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "dust_fam7_zero' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "dust_fam1_card' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          grep -E "dust_fam4_card' (does not depend on any axioms|depends on axioms)" kernel7172.log
+          python3 problem406-ternary-powers/battery406d.py
+          echo ERDOS406_ANTICLUSTER_KERNEL_GREEN=1
+          echo ERDOS406_DUSTFAMILY_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash
