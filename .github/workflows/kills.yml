@@ -168,6 +168,36 @@ jobs:
           ! grep -E "'(DM142B.r3_216_ge|DM142B.r3_7776_ge|DM142B.r3_46656_ge|DM142B.dm142b_board)'.*sorryAx" kernel142dmb.log
           echo KERNEL_142DM_B_GREEN=1
 
+  # W84 wave: the named continuations of the DM lanes — U-GEN-0 (#142),
+  # P4/K5/E5 (#61), ersz_lower (#107). Each kernel is a standalone file
+  # compiled by `lake env lean`; the job name is the wave ledger.
+  kernel-dm-w84:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 142DM-C — W84 U-GEN-0: THE BLOCK FLOOR LAW over the official Set.IsAPOfLengthFree.maxCard — theorem DM142C.u_gen_zero : ∀ k ≥ 3, ∀ N ≥ 1, r k N ≤ N − N/k (Nat floor division), TIGHT at N = k (DM142C.u_gen_zero_tight : r k k = k − 1) — the partition of [1,N] into ⌊N/k⌋ consecutive k-blocks + tail, each full block a non-trivial k-AP (d=1) forcing ≥ 1 miss per block (window_isAP + window_bound + window_union_bound induction + core_bound assembly); Arsenal bridge: CardinalWorlds.mul_add_div_lemma [:143] genuinely used for the k/k = 1 block-count identity in the tightness companion; house machinery attributed to DM142A. Derived W80-142U (D3), engine-validated 56/56, now kernel'd. Complete proof: zero sorry, zero native_decide."
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel142dmc.log
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel142dmc.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel142dmc.log
+          lake env lean problem142-rk-asymptotic/DM142_Proof_C.lean 2>&1 | tee -a kernel142dmc.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmc.log
+          grep -F "DM142C_UGEN0_GREEN" kernel142dmc.log
+          grep -E "'(DM142C.u_gen_zero|DM142C.u_gen_zero_tight|DM142C.core_bound|DM142C.window_union_bound|DM142C.window_bound|DM142C.window_isAP|DM142C.dm142c_board)' (does not depend on any axioms|depends on axioms)" kernel142dmc.log
+          ! grep -E "'DM142C..*'.*sorryAx" kernel142dmc.log
+          echo KERNEL_142DM_C_GREEN=1
+
   kernel-a:
     runs-on: ubuntu-24.04
     steps:
