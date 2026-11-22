@@ -811,13 +811,16 @@ def run_negative_controls(challenge, solution):
     t0 = time.time()
     try:
         ktxt = open(kills, encoding="utf-8").read()
-        ok_ci = ("kernel-61dm-a:" in ktxt and "kernel-61dm-b:" in ktxt
-                 and "DM61A_FAMILY_GREEN" in ktxt and "DM61B_CLOSURE_GREEN" in ktxt)
-        det = "kernel-61dm-a + kernel-61dm-b jobs wired with the GREEN markers"
+        ok_ci = ("kernel-dm-w82:" in ktxt
+                 and "DM61_Proof_A.lean" in ktxt and "DM61_Closure.lean" in ktxt
+                 and "DM61A_FAMILY_GREEN" in ktxt and "DM61B_CLOSURE_GREEN" in ktxt
+                 and "sorryAx" in ktxt)
+        det = ("kernel-dm-w82 job wires the 61DM-A + 61DM-B steps (both kernel "
+               "files, GREEN markers, sorryAx rejection greps)")
     except Exception as e:
         ok_ci = False; det = repr(e)
     checks.append(_chk("S-W82-CI",
-        "kills.yml wires the W82 kernel jobs (kernel-61dm-a, kernel-61dm-b) with the error/sorryAx rejection greps",
+        "kills.yml wires the W82 kernel jobs (kernel-dm-w82: the 61DM-A + 61DM-B steps) with the error/sorryAx rejection greps",
         ok_ci, det, time.time() - t0))
 
     t0 = time.time()

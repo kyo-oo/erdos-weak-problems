@@ -47,9 +47,10 @@ formula itself (the official open core) is claimed by no one.
   the division bookkeeping of the block count (D3's derivation spine).
 - `Arsenal.CardinalWorlds.mod_mod_mul` [CardinalWorlds.lean:140] — the
   residue discipline of the block/tail split.
-- `Arsenal.ErdosTernary2.lt_three_cases` [ErdosTernary2/Basic.lean:16] —
+- `ErdosTernary2.lt_three_cases` [Arsenal/ErdosTernary2/Basic.lean:16] —
   the ternary 3-case split, used at the pair-scan's i-trichotomy
-  (`scanTrichotomy` below: i = 0 ∨ i = 1 ∨ 2 ≤ i).
+  (`scanTrichotomy` below: the residue trichotomy i % 3 ∈ {0,1,2} drives
+  i = 0 ∨ i = 1 ∨ 2 ≤ i).
 
 ## LAWS OF THE HOUSE
 Zero sorry/sorryAx; `#print axioms` on every headline; CI (`kernel-142dm-a`)
@@ -85,12 +86,12 @@ theorem allT_true_iff {p : Nat → Bool} :
   | cons a t ih =>
       constructor
       · intro h x hx
-        obtain ⟨h1, h2⟩ := Bool.and_eq_true.1 h
+        obtain ⟨h1, h2⟩ := Bool.and_eq_true_iff.1 h
         rcases List.mem_cons.1 hx with hxa | hx'
         · rw [hxa]; exact h1
         · exact ih.1 h2 x hx'
       · intro h
-        refine Bool.and_eq_true.2 ⟨h a ?_, ih.2 ?_⟩
+        refine Bool.and_eq_true_iff.2 ⟨h a ?_, ih.2 ?_⟩
         · exact h a (by simp)
         · intro x hx
           exact h x (by simp [hx])
@@ -173,7 +174,7 @@ theorem mem_of_memFinsetCoe {W : List Nat} {x : ℕ} {T : Set ℕ}
 nonzero (k ≥ 2). -/
 theorem apDiff_ne_zero {k : ℕ} (hk : 2 ≤ k) {t u : Set ℕ} {a d : ℕ}
     (hset : t = u) (hcard : ENat.card t = ((k : ℕ) : ENat))
-    (hu : ∀ y ∈ u, ∃ n : ℕ, y = a + n * d) : d ≠ 0 := by
+    (hu : ∀ y ∈ t, ∃ n : ℕ, y = a + n * d) : d ≠ 0 := by
   intro h0
   subst h0
   have hsub : t ⊆ ({a} : Set ℕ) := by
@@ -182,9 +183,12 @@ theorem apDiff_ne_zero {k : ℕ} (hk : 2 ≤ k) {t u : Set ℕ} {a d : ℕ}
     have hy' : y = a := by rw [hn, Nat.mul_zero, Nat.add_zero]
     subst hy'
     simp
-  have h1 : ENat.card t ≤ ENat.card ({a} : Set ℕ) := Set.card_mono hsub
-  rw [Set.card_singleton, hcard] at h1
-  have h2 : k ≤ 1 := by exact_mod_cast h1
+  have hc : t.encard = ((k : ℕ) : ENat) := hcard
+  have h1 : t.encard ≤ ({a} : Set ℕ).encard := Set.encard_le_encard hsub
+  rw [Set.encard_singleton] at h1
+  rw [hc] at h1
+  have h1' : ((k : ℕ) : ENat) ≤ ((1 : ℕ) : ENat) := h1
+  have h2 : k ≤ 1 := ENat.natCast_le_natCast.1 h1'
   omega
 
 /-! ## §1 THE GENERAL REFLECTION LEMMA (all k ≥ 2 at once) -/
@@ -201,13 +205,15 @@ def pairScanOK (k : Nat) (W : List Nat) : Bool :=
     !(decide (x < y) && innerScan k x y W)) W) W
 
 /-- The i-trichotomy via the Arsenal ternary law: every offset index is 0,
-1, or ≥ 2 (`ErdosTernary2.lt_three_cases`, ErdosTernary2/Basic.lean:16 —
-the admissible-digit trichotomy driving the scan's split). -/
+1, or ≥ 2 (`ErdosTernary2.lt_three_cases`, Arsenal/ErdosTernary2/Basic.lean:16 —
+the admissible-digit trichotomy driving the scan's split: the residue
+i % 3 ∈ {0, 1, 2} splits, and each residue case closes the trichotomy). -/
 theorem scanTrichotomy (i : ℕ) : i = 0 ∨ i = 1 ∨ 2 ≤ i := by
-  rcases Arsenal.ErdosTernary2.lt_three_cases i (by omega) with h | h | h
-  · exact Or.inl h
-  · exact Or.inr (Or.inl h)
-  · exact Or.inr (Or.inr (by omega))
+  have h3 : i % 3 < 3 := by omega
+  rcases ErdosTernary2.lt_three_cases (i % 3) h3 with h | h | h
+  · omega
+  · omega
+  · omega
 
 /-- **THE GENERAL REFLECTION LEMMA.** A pair-scan-clean list (every
 `x < y` in `W` has some `2 ≤ i < k` with `x + i·(y−x) ∉ W`) coerces to an
@@ -344,7 +350,7 @@ theorem r_mono {k N : ℕ} (hk : k ≠ 1) : r k N ≤ r (k + 1) N := by
     rw [Set.IsAPOfLengthFree.maxCard_zero, Set.IsAPOfLengthFree.maxCard_one]
   · have hk2 : 2 ≤ k := by omega
     simp only [Set.IsAPOfLengthFree.maxCard]
-    refine csSup_le_csSup ?_ ?_
+    refine csSup_le_csSup' ?_ ?_
     · exact ⟨(Finset.Icc 1 N).card, mem_upperBounds.2 ?_⟩
       rintro n ⟨T, hTsub, -, rfl⟩
       exact Finset.card_mono hTsub
@@ -355,7 +361,7 @@ theorem r_mono {k N : ℕ} (hk : k ≠ 1) : r k N ≤ r (k + 1) N := by
 `∀ k N, r k N ≤ r (k+1) N` is FALSE at k = 1 over the official
 definition: `r 1 2 = 2 > 1 ≥ r 2 2`. -/
 theorem r_mono_unrestricted_false :
-    ¬ (∀ k N : ℕ, r k N ≤ r (k + 1) N := by
+    ¬ (∀ k N : ℕ, r k N ≤ r (k + 1) N) := by
   intro h
   have h1 : r 1 2 = 2 := Set.IsAPOfLengthFree.maxCard_one 2
   have h2 : r 2 2 ≤ 1 := by
@@ -426,7 +432,7 @@ theorem subset_Icc_of_inRange {W : List Nat} {N : Nat}
   intro x hx
   have hxW : x ∈ W := List.mem_toFinset.1 hx
   have hpair := allT_true_iff.1 h x hxW
-  obtain ⟨h1, h2⟩ := Bool.and_eq_true.1 hpair
+  obtain ⟨h1, h2⟩ := Bool.and_eq_true_iff.1 hpair
   exact Finset.mem_Icc.2 ⟨of_decide_eq_true h1, of_decide_eq_true h2⟩
 
 /-- Strictly-increasing check. -/
@@ -446,7 +452,7 @@ theorem ltAll_cons : ∀ (t : List Nat) (a : Nat), ltHead a t = true →
   | cons b t ih =>
       intro a hlt hch y hy
       have hpair : (ltHead b t && chainLt t) = true := hch
-      obtain ⟨hltb, hcht⟩ := Bool.and_eq_true.1 hpair
+      obtain ⟨hltb, hcht⟩ := Bool.and_eq_true_iff.1 hpair
       have hab : a < b := of_decide_eq_true hlt
       rcases List.mem_cons.1 hy with hy' | hy''
       · rw [hy']; exact hab
@@ -459,7 +465,7 @@ theorem nodup_of_chainLt : ∀ (W : List Nat), chainLt W = true → W.Nodup := b
   | cons a t ih =>
       intro h
       have hpair : (ltHead a t && chainLt t) = true := h
-      obtain ⟨hlt, hch⟩ := Bool.and_eq_true.1 hpair
+      obtain ⟨hlt, hch⟩ := Bool.and_eq_true_iff.1 hpair
       refine List.nodup_cons.2 ⟨?_, ih hch⟩
       intro hain
       have : a < a := ltAll_cons t a hlt hch a hain
@@ -472,7 +478,7 @@ theorem stone {k N m : ℕ} (W : List Nat) (hk : 2 ≤ k)
     (hscan : pairScanOK k W = true) (hlen : W.length = m) :
     m ≤ r k N := by
   have hcard : W.toFinset.card = m := by
-    rw [List.card_toFinset (nodup_of_chainLt W hchain), hlen]
+    rw [List.toFinset_card_of_nodup (nodup_of_chainLt W hchain), hlen]
   exact le_trans (le_of_eq hcard.symm)
     (maxCard_ge_of_witness W.toFinset (subset_Icc_of_inRange hrange)
       (apFree_of_pairscan hk hscan))
