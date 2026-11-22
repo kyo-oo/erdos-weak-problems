@@ -106,7 +106,7 @@ theorem allT_true_iff {p : Nat → Bool} :
         · exact ih.1 h2 x hx'
       · intro h
         refine Bool.and_eq_true_iff.2 ⟨h a ?_, ih.2 ?_⟩
-        · exact List.mem_cons_self a t
+        · exact List.mem_cons_self
         · intro x hx
           exact h x (by simp [hx])
 
@@ -132,12 +132,13 @@ theorem memL_true_iff (x : Nat) :
       · have hd : decide (x = b) = false := by simp [hxb]
         constructor
         · intro h
+          simp only [memL] at h
           rw [hd, Bool.false_or] at h
           exact List.mem_cons_of_mem _ (ih.1 h)
         · intro hm
           rcases List.mem_cons.1 hm with hx' | hx'
           · exact absurd hx' hxb
-          · rw [hd, ih.2 hx']
+          · simp only [memL, hd, ih.2 hx', Bool.false_or]
 
 /-- `true && x = true`-style conjunction eliminator (three conjuncts). -/
 theorem not_and3_true {A B C : Bool} (hA : A = true) (hB : B = true)
@@ -190,15 +191,16 @@ def midFree3 (W : List Nat) : Bool :=
 distinct endpoints. -/
 def k4Free (W : List Nat) : Bool :=
   allT (fun w => allT (fun x => allT (fun y => allT (fun z =>
-    !(decide (2 * x = w + y) && decide (2 * y = x + z) && decide (w ≠ z))
-      W) W) W) W
+    !(decide (2 * x = w + y) && decide (2 * y = x + z) && !(decide (w = z)))
+      W) W) W) W)
 
 /-- k=5 scan: no quintuple with the three consecutive-midpoint equations
 and distinct endpoints. -/
 def k5Free (W : List Nat) : Bool :=
   allT (fun u => allT (fun p => allT (fun q => allT (fun v => allT (fun s =>
     !(decide (2 * p = u + q) && decide (2 * q = p + v) &&
-      decide (2 * v = q + s) && decide (u ≠ s)) W) W) W) W) W
+      decide (2 * v = q + s) && !(decide (u = s)))
+      W) W) W) W) W)
 
 /-! ## §3 The official-def bridges -/
 
@@ -242,7 +244,7 @@ theorem isAPOfLengthFree_three {W : List Nat} (hmid : midFree3 W = true) :
   obtain ⟨a, d, hset⟩ := Set.IsAPOfLength.eq ht
   have hcard : ENat.card t = ((3 : ℕ) : ENat) := ht.card
   have hd : d ≠ 0 := by
-    refine apDiff_ne_zero (by omega) hset hcard ?_
+    refine apDiff_ne_zero (a := a) (by omega) hset hcard ?_
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
@@ -251,8 +253,12 @@ theorem isAPOfLengthFree_three {W : List Nat} (hmid : midFree3 W = true) :
     intro i hi
     rw [hset]
     exact ⟨i, coe_lt_coe_k hi, by rw [nsmul_nat]⟩
-  have e0 : a ∈ W := mem_of_memFinsetCoe (hmem 0 (by omega)) hts
-  have e1 : a + d ∈ W := mem_of_memFinsetCoe (hmem 1 (by omega)) hts
+  have h0 := hmem 0 (by omega)
+  rw [Nat.zero_mul, Nat.add_zero] at h0
+  have e0 : a ∈ W := mem_of_memFinsetCoe h0 hts
+  have h1' := hmem 1 (by omega)
+  rw [Nat.one_mul] at h1'
+  have e1 : a + d ∈ W := mem_of_memFinsetCoe h1' hts
   have e2 : a + 2 * d ∈ W := mem_of_memFinsetCoe (hmem 2 (by omega)) hts
   have hscan : ∀ x z m : ℕ, x ∈ W → z ∈ W → x < z → (x + z) % 2 = 0 →
       (x + z) / 2 = m → m ∈ W → False := by
@@ -274,7 +280,7 @@ theorem isAPOfLengthFree_four {W : List Nat} (h4 : k4Free W = true) :
   obtain ⟨a, d, hset⟩ := Set.IsAPOfLength.eq ht
   have hcard : ENat.card t = ((4 : ℕ) : ENat) := ht.card
   have hd : d ≠ 0 := by
-    refine apDiff_ne_zero (by omega) hset hcard ?_
+    refine apDiff_ne_zero (a := a) (by omega) hset hcard ?_
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
@@ -283,8 +289,12 @@ theorem isAPOfLengthFree_four {W : List Nat} (h4 : k4Free W = true) :
     intro i hi
     rw [hset]
     exact ⟨i, coe_lt_coe_k hi, by rw [nsmul_nat]⟩
-  have e0 : a ∈ W := mem_of_memFinsetCoe (hmem 0 (by omega)) hts
-  have e1 : a + d ∈ W := mem_of_memFinsetCoe (hmem 1 (by omega)) hts
+  have h0 := hmem 0 (by omega)
+  rw [Nat.zero_mul, Nat.add_zero] at h0
+  have e0 : a ∈ W := mem_of_memFinsetCoe h0 hts
+  have h1' := hmem 1 (by omega)
+  rw [Nat.one_mul] at h1'
+  have e1 : a + d ∈ W := mem_of_memFinsetCoe h1' hts
   have e2 : a + 2 * d ∈ W := mem_of_memFinsetCoe (hmem 2 (by omega)) hts
   have e3 : a + 3 * d ∈ W := mem_of_memFinsetCoe (hmem 3 (by omega)) hts
   have hscan : ∀ w x y z : ℕ, w ∈ W → x ∈ W → y ∈ W → z ∈ W →
@@ -294,8 +304,10 @@ theorem isAPOfLengthFree_four {W : List Nat} (h4 : k4Free W = true) :
     have hx' := (allT_true_iff _).1 hw' x hx
     have hy' := (allT_true_iff _).1 hx' y hy
     have hz' := (allT_true_iff _).1 hy' z hz
-    exact not_and3_true (decide_eq_true h1) (decide_eq_true h2)
-      (decide_eq_true hne) hz'
+    refine not_and3_true (decide_eq_true h1) (decide_eq_true h2) ?_ hz'
+    cases hdd : decide (w = z) with
+    | false => rfl
+    | true => exact absurd (of_decide_eq_true hdd) hne
   exact (hscan a (a + d) (a + 2 * d) (a + 3 * d) e0 e1 e2 e3
     (by omega) (by omega) (by omega)).elim
 
@@ -308,7 +320,7 @@ theorem isAPOfLengthFree_five {W : List Nat} (h5 : k5Free W = true) :
   obtain ⟨a, d, hset⟩ := Set.IsAPOfLength.eq ht
   have hcard : ENat.card t = ((5 : ℕ) : ENat) := ht.card
   have hd : d ≠ 0 := by
-    refine apDiff_ne_zero (by omega) hset hcard ?_
+    refine apDiff_ne_zero (a := a) (by omega) hset hcard ?_
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
@@ -317,8 +329,12 @@ theorem isAPOfLengthFree_five {W : List Nat} (h5 : k5Free W = true) :
     intro i hi
     rw [hset]
     exact ⟨i, coe_lt_coe_k hi, by rw [nsmul_nat]⟩
-  have e0 : a ∈ W := mem_of_memFinsetCoe (hmem 0 (by omega)) hts
-  have e1 : a + d ∈ W := mem_of_memFinsetCoe (hmem 1 (by omega)) hts
+  have h0 := hmem 0 (by omega)
+  rw [Nat.zero_mul, Nat.add_zero] at h0
+  have e0 : a ∈ W := mem_of_memFinsetCoe h0 hts
+  have h1' := hmem 1 (by omega)
+  rw [Nat.one_mul] at h1'
+  have e1 : a + d ∈ W := mem_of_memFinsetCoe h1' hts
   have e2 : a + 2 * d ∈ W := mem_of_memFinsetCoe (hmem 2 (by omega)) hts
   have e3 : a + 3 * d ∈ W := mem_of_memFinsetCoe (hmem 3 (by omega)) hts
   have e4 : a + 4 * d ∈ W := mem_of_memFinsetCoe (hmem 4 (by omega)) hts
@@ -330,8 +346,11 @@ theorem isAPOfLengthFree_five {W : List Nat} (h5 : k5Free W = true) :
     have hq' := (allT_true_iff _).1 hp' q hq
     have hv' := (allT_true_iff _).1 hq' v hv
     have hs' := (allT_true_iff _).1 hv' s hs
-    exact not_and4_true (decide_eq_true h1) (decide_eq_true h2)
-      (decide_eq_true h3) (decide_eq_true hne) hs'
+    refine not_and4_true (decide_eq_true h1) (decide_eq_true h2)
+      (decide_eq_true h3) ?_ hs'
+    cases hdd : decide (u = s) with
+    | false => rfl
+    | true => exact absurd (of_decide_eq_true hdd) hne
   exact (hscan a (a + d) (a + 2 * d) (a + 3 * d) (a + 4 * d) e0 e1 e2 e3 e4
     (by omega) (by omega) (by omega) (by omega)).elim
 
