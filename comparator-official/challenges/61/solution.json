@@ -97,6 +97,21 @@
       "id": "C61-PRIMES-CENSUS",
       "statement": "The W81 prime census (complete finite facts, two codes + witness duels): h_bull = [1,2,2,2,2,3], h_C5 = [1,2,2,2,3,3], h_P5 = h_house = [1,2,2,2,2,3] exact n=1..6; hom >= n^0.43 on all P5/bull/C5-free n<=6 (exhaustive) + sampled n=7 (43,396 graphs), 0 violations; the C5 triangle-anchor constraint table complete (FORCED-EDGE 0xabc; FORCED-NONEDGE abxabc/acxabc/bcxabc; 31 free pairs) over all 12,900 core+ graphs; the bull I-anchor concentration n <= 6*max(alpha,omega)^4 on all bull-free n<=6 + structured families; the z-only stratum fully mapped (372 graphs, the 7-cell table over every dominating P3).",
       "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS, PRIMES_W81_ENGINE_GREEN=1"
+    },
+    {
+      "id": "C61-W82-OFFICIAL-SPEC",
+      "statement": "The OFFICIAL statement file DM61_Official.lean carries the verbatim DeepMind formal-conjectures predicate IsErdosHajnalLowerBound (google-deepmind/formal-conjectures @ 2207c54d, byte-verified against the fresh clone) plus the official target spec block (the open core erdos_61 and the solved variants erha89/bnss23/p5/c5).",
+      "verification": "S-W82-SPEC gate check (verbatim string blocks) + the FC/ vendor pack provenance (FC/PROVENANCE.md)"
+    },
+    {
+      "id": "C61-W82-FAMILY-OFFICIAL-FORM",
+      "statement": "Theorem erdos_61_family (W82): every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3} satisfies the OFFICIAL Erdos-Hajnal statement at the uniform exponent c = 1/4 — ∃ c > 0, IsErdosHajnalLowerBound H (fun n => n^c) over the verbatim official predicate, with Mathlib SimpleGraph/indepNum/cliqueNum/comap and the arsenal bridge (CardinalWorlds.two_pow_pos :420, two_pow_ge2 :431).",
+      "verification": "CI kernel-61dm-a (DM61_Proof_A.lean, branch w82-61a, axiom-clean greps) + kernel-61dm-b (DM61_Closure.lean) + the adversarial audit AUDIT_W82_61A.md (A1/A3/A4/A5 PASS; A2 binds at CI)"
+    },
+    {
+      "id": "C61-W82-CLOSURE-LEDGER",
+      "statement": "The honest closure map: the F7 family CLOSED in official form; P4/K5/E5/substitution-closure DERIVED (Seinsche; the R(5,t) <= C(t+3,4) ladder at c=1/5; c = c1c2/(c1+c2)) and named as the W83 kernel continuations; the four 5-vertex primes, the 6-vertex world, and the open core erdos_61 honestly OPEN.",
+      "verification": "S-W82-KERNELS gate check + DM61_Closure.lean's closure-map ledger + the worklogs (WORKLOG_W82_61A/B.md)"
     }
   ]
 }

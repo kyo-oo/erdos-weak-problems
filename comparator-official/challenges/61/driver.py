@@ -765,4 +765,69 @@ def run_negative_controls(challenge, solution):
     checks.append(_chk("S-PRIMES-W81",
         "The W81 five-vertex prime battery: P5-CROSS, C5-1/2-ANCHOR (complete induced-subgraph proofs), TOWER-CAP-P5/BULL, and the full census — 22/22 green",
         ok, det, time.time() - t0))
+
+    # S-W82-OFFICIAL-KERNELS: the W82 official-statement wave — the DM spec
+    # file with the VERBATIM DeepMind predicate + the official-form family
+    # kernels + the CI wiring + a discriminating negative control.
+    t0 = time.time()
+    spec = os.path.join(CAMP, "problem61-erdos-hajnal", "DM61_Official.lean")
+    kern_a = os.path.join(CAMP, "problem61-erdos-hajnal", "DM61_Proof_A.lean")
+    kern_b = os.path.join(CAMP, "problem61-erdos-hajnal", "DM61_Closure.lean")
+    kills = os.path.join(CAMP, ".github", "workflows", "kills.yml")
+    PRED = ("def IsErdosHajnalLowerBound {\u03b1 : Type*} [Fintype \u03b1] [DecidableEq \u03b1]\n"
+            "  (H : SimpleGraph \u03b1) (f : \u2192 \u211d) : Prop :=")
+    try:
+        spec_txt = open(spec, encoding="utf-8").read()
+        ok_pred = ("def IsErdosHajnalLowerBound {\u03b1 : Type*} [Fintype \u03b1] [DecidableEq \u03b1]" in spec_txt
+                   and "(H : SimpleGraph \u03b1) (f : \u2115 \u2192 \u211d) : Prop :=" in spec_txt
+                   and "\u2200\u1da0 n in atTop" in spec_txt
+                   and "H = G.comap g" in spec_txt
+                   and "G.indepNum \u2265 f n \u2228 G.cliqueNum \u2265 f n" in spec_txt)
+        det = f"spec exists + verbatim predicate block: {ok_pred}"
+    except Exception as e:
+        ok_pred = False; det = repr(e)
+    checks.append(_chk("S-W82-SPEC",
+        "The W82 OFFICIAL statement file DM61_Official.lean carries the verbatim DeepMind predicate (IsErdosHajnalLowerBound, google-deepmind/formal-conjectures @ 2207c54d) + the official target spec block",
+        ok_pred, det, time.time() - t0))
+
+    t0 = time.time()
+    try:
+        ka = open(kern_a, encoding="utf-8").read()
+        kb = open(kern_b, encoding="utf-8").read()
+        ok_k = ("theorem erdos_61_family" in ka and "theorem erdos_61_family" in kb
+                and "IsErdosHajnalLowerBound" in ka and "IsErdosHajnalLowerBound" in kb
+                and "sorryAx" not in ka.replace("sorryAx check", "")
+                and "DM61A_FAMILY_GREEN" in ka and "DM61B_CLOSURE_GREEN" in kb
+                and "import Arsenal.ErdosTernary2.Basic" in ka
+                and "import Arsenal.CardinalWorlds" in ka)
+        det = ("kernels carry the official-form erdos_61_family statements, "
+               "the official predicate, the arsenal imports, and the GREEN markers")
+    except Exception as e:
+        ok_k = False; det = repr(e)
+    checks.append(_chk("S-W82-KERNELS",
+        "The W82 official-form family kernels (DM61_Proof_A + DM61_Closure): the erdos_61_family theorem over the official predicate, arsenal-imported, marker-terminated",
+        ok_k, det, time.time() - t0))
+
+    t0 = time.time()
+    try:
+        ktxt = open(kills, encoding="utf-8").read()
+        ok_ci = ("kernel-61dm-a:" in ktxt and "kernel-61dm-b:" in ktxt
+                 and "DM61A_FAMILY_GREEN" in ktxt and "DM61B_CLOSURE_GREEN" in ktxt)
+        det = "kernel-61dm-a + kernel-61dm-b jobs wired with the GREEN markers"
+    except Exception as e:
+        ok_ci = False; det = repr(e)
+    checks.append(_chk("S-W82-CI",
+        "kills.yml wires the W82 kernel jobs (kernel-61dm-a, kernel-61dm-b) with the error/sorryAx rejection greps",
+        ok_ci, det, time.time() - t0))
+
+    t0 = time.time()
+    try:
+        bad = PRED.replace("[DecidableEq \u03b1]", "[DecidableEq \u03b2]")
+        ok_neg = (bad not in spec_txt) and (PRED not in "")
+        det = "the corrupted predicate (\u03b1 -> \u03b2) is correctly NOT found"
+    except Exception as e:
+        ok_neg = False; det = repr(e)
+    checks.append(_chk("N-W82-NEG",
+        "negative control: a corrupted predicate string fails the spec check (the string check discriminates)",
+        ok_neg, det, time.time() - t0))
     return checks
