@@ -124,8 +124,7 @@ theorem memL_true_iff (x : Nat) :
         · intro hm
           rcases List.mem_cons.1 hm with hx' | hx'
           · exact absurd hx' hxb
-          · simp only [memL]
-            rw [hd, ih.2 hx']
+          · simp only [memL, hd, ih.2 hx', Bool.false_or]
 
 theorem not_and2_true {A B : Bool} (hA : A = true) (hB : B = true)
     (h : !(A && B) = true) : False := by
@@ -236,26 +235,32 @@ theorem apFree_of_pairscan {W : List Nat} {k : ℕ} (hk : 2 ≤ k)
   have hlt : a < a + d := by omega
   -- the scan says its inner conjunction is false: some i ∈ [2,k) misses W
   have hpair := (allT_true_iff _).1 ((allT_true_iff _).1 hscan a e0) (a + d) e1
-  have hpair' : !(decide (a < a + d) && innerScan k a (a + d) W) = true := hpair
-  rw [decide_eq_true hlt] at hpair'
+  beta_reduce at hpair
+  rw [decide_eq_true hlt] at hpair
   have hinner : innerScan k a (a + d) W = false := by
     by_contra hne
-    simp at hpair'
-    exact absurd hpair' hne
+    simp at hpair
+    exact absurd hpair hne
   -- unfold the false inner conjunction to the existential miss
   have hmiss : ∃ i : ℕ, i ∈ List.range' 2 (k - 2) ∧
       memL (a + i * ((a + d) - a)) W = false := by
     by_contra hno
     push_neg at hno
+    have hall : ∀ L : List Nat, (∀ i ∈ L, memL (a + i * ((a + d) - a)) W = true) →
+        allT (fun i => memL (a + i * ((a + d) - a)) W) L = true := by
+      intro L
+      induction L with
+      | nil => intro _; rfl
+      | cons b t ih =>
+          intro hm
+          refine Bool.and_eq_true_iff.2 ⟨hm b (by simp),
+            ih (fun i hi => hm i (by simp [hi]))⟩
     have htrue : innerScan k a (a + d) W = true := by
       show allT (fun i => memL (a + i * ((a + d) - a)) W) (List.range' 2 (k - 2)) = true
-      induction (List.range' 2 (k - 2)) with
-      | nil => rfl
-      | cons b t ih =>
-          refine Bool.and_eq_true_iff.2 ⟨hno b (by simp), ?_⟩
-          refine ih ?_
-          intro i hi
-          exact hno i (by simp [hi])
+      refine hall _ ?_
+      intro i hi
+      have hb := hno i hi
+      simp_all
     rw [htrue] at hinner
     exact Bool.noConfusion hinner
   obtain ⟨i, himem, hout⟩ := hmiss
@@ -353,7 +358,7 @@ theorem r_mono {k N : ℕ} (hk : k ≠ 1) : r k N ≤ r (k + 1) N := by
   · have hk2 : 2 ≤ k := by omega
     show Set.IsAPOfLengthFree.maxCard k N ≤ Set.IsAPOfLengthFree.maxCard (k + 1) N
     refine csSup_le_csSup' ?_ ?_
-    · exact ⟨(Finset.Icc 1 N).card, mem_upperBounds.2 ?_⟩
+    · refine ⟨(Finset.Icc 1 N).card, mem_upperBounds.2 ?_⟩
       rintro n ⟨T, hTsub, -, rfl⟩
       exact Finset.card_mono hTsub
     · rintro n ⟨S, hSsub, hSfree, rfl⟩
@@ -412,8 +417,9 @@ theorem r_mono_unrestricted_false :
         rcases Nat.lt_or_ge x y with hlt | hge
         · exact ⟨x, y - x, Nat.isAPOfLengthWith_pair hlt⟩
         · have hyx : y < x := lt_of_le_of_ne hge (Ne.symm hxy')
-          rw [Set.insert_comm]
-          exact ⟨y, x - y, Nat.isAPOfLengthWith_pair hyx⟩
+          have hw := Nat.isAPOfLengthWith_pair hyx
+          rw [show ({y, x} : Set ℕ) = ({x, y} : Set ℕ) from Set.insert_comm y x ∅] at hw
+          exact ⟨y, x - y, hw⟩
       have hsub : ({x, y} : Set ℕ) ⊆ (↑S : Set ℕ) := by
         intro z hz
         simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz
