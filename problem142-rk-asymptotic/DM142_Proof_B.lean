@@ -100,12 +100,12 @@ theorem allT_true_iff {p : Nat → Bool} :
   | cons a t ih =>
       constructor
       · intro h x hx
-        obtain ⟨h1, h2⟩ := Bool.and_eq_true.1 h
+        obtain ⟨h1, h2⟩ := Bool.and_eq_true_iff.1 h
         rcases List.mem_cons.1 hx with hxa | hx'
         · rw [hxa]; exact h1
         · exact ih.1 h2 x hx'
       · intro h
-        refine Bool.and_eq_true.2 ⟨h a ?_, ih.2 ?_⟩
+        refine Bool.and_eq_true_iff.2 ⟨h a ?_, ih.2 ?_⟩
         · exact h a (by simp)
         · intro x hx
           exact h x (by simp [hx])
@@ -167,8 +167,8 @@ theorem nsmul_nat (i d : ℕ) : i • d = i * d := by simp
 
 /-- Cast: `i < k` lifts to `(i : ℕ∞) < (k : ℕ∞)` (the official set-builder
 bounds the digit index by the coerced length). -/
-theorem coe_lt_coe_k {i k : ℕ} (h : i < k) : ((i : ℕ) : ENat) < ((k : ℕ) : ENat) := by
-  exact_mod_cast h
+theorem coe_lt_coe_k {i k : ℕ} (h : i < k) : ((i : ℕ) : ENat) < ((k : ℕ) : ENat) :=
+  ENat.natCast_lt_natCast.2 h
 
 /-! ## §1 The sSup-membership transfer (from the maxCard definition) -/
 
@@ -187,7 +187,30 @@ theorem maxCard_ge_of_witness {k N : ℕ} (S : Finset ℕ)
   rintro n ⟨T, hTsub, -, rfl⟩
   exact Finset.card_mono hTsub
 
-/-! ## §2 The official-def bridges -/
+/-! ## §2 The scan checkers (Bool, kernel-decidable) -/
+
+/-- k=3 scan: no pair `x < z` in `W` with `x + z` even and midpoint
+`(x + z) / 2` back in `W` (a 3-AP `a, a+d, a+2d` is exactly such a pair
+with `x = a`, `z = a + 2d`). -/
+def midFree3 (W : List Nat) : Bool :=
+  allT (fun x => allT (fun z =>
+    !(decide (x < z) && decide ((x + z) % 2 = 0) && memL ((x + z) / 2) W)) W) W
+
+/-- k=4 scan: no quadruple with the two consecutive-midpoint equations and
+distinct endpoints. -/
+def k4Free (W : List Nat) : Bool :=
+  allT (fun w => allT (fun x => allT (fun y => allT (fun z =>
+    !(decide (2 * x = w + y) && decide (2 * y = x + z) && decide (w ≠ z))
+      W) W) W) W
+
+/-- k=5 scan: no quintuple with the three consecutive-midpoint equations
+and distinct endpoints. -/
+def k5Free (W : List Nat) : Bool :=
+  allT (fun u => allT (fun p => allT (fun q => allT (fun v => allT (fun s =>
+    !(decide (2 * p = u + q) && decide (2 * q = p + v) &&
+      decide (2 * v = q + s) && decide (u ≠ s)) W) W) W) W) W
+
+/-! ## §3 The official-def bridges -/
 
 /-- The difference of a length-`k` AP through the official predicate is
 nonzero (k ≥ 2): with `d = 0` every element of the progression set equals
@@ -196,7 +219,7 @@ the FC file's own `Set.IsAPOfLength.eq` (FC/Combinatorics/AP/Basic.lean:145),
 abstracted over the set to keep the bridge cast-clean. -/
 theorem apDiff_ne_zero {k : ℕ} (hk : 2 ≤ k) {t : Set ℕ} {a d : ℕ} {u : Set ℕ}
     (hset : t = u) (hcard : ENat.card t = ((k : ℕ) : ENat))
-    (hu : ∀ y ∈ u, ∃ n : ℕ, y = a + n * d) : d ≠ 0 := by
+    (hu : ∀ y ∈ t, ∃ n : ℕ, y = a + n * d) : d ≠ 0 := by
   intro h0
   subst h0
   have hsub : t ⊆ ({a} : Set ℕ) := by
@@ -205,9 +228,12 @@ theorem apDiff_ne_zero {k : ℕ} (hk : 2 ≤ k) {t : Set ℕ} {a d : ℕ} {u : S
     have hy' : y = a := by rw [hn, Nat.mul_zero, Nat.add_zero]
     subst hy'
     simp
-  have h1 : ENat.card t ≤ ENat.card ({a} : Set ℕ) := Set.card_mono hsub
-  rw [Set.card_singleton, hcard] at h1
-  have h2 : k ≤ 1 := by exact_mod_cast h1
+  have hc : t.encard = ((k : ℕ) : ENat) := hcard
+  have h1 : t.encard ≤ ({a} : Set ℕ).encard := Set.encard_le_encard hsub
+  rw [Set.encard_singleton] at h1
+  rw [hc] at h1
+  have h1' : ((k : ℕ) : ENat) ≤ ((1 : ℕ) : ENat) := h1
+  have h2 : k ≤ 1 := ENat.natCast_le_natCast.1 h1'
   omega
 
 /-- Membership bridge: an element of a subset `T` of the coerced witness
@@ -246,7 +272,7 @@ theorem isAPOfLengthFree_three {W : List Nat} (hmid : midFree3 W = true) :
     refine not_and3_true (decide_eq_true hlt) (decide_eq_true heven) ?_ hz'
     rw [hdiv]
     exact memL_true_iff _ _ |>.2 hm
-  exact hscan a (a + 2 * d) (a + d) e0 e2 (by omega) (by omega) (by omega) e1
+  exact (hscan a (a + 2 * d) (a + d) e0 e2 (by omega) (by omega) (by omega) e1).elim
 
 /-- **THE k=4 BRIDGE.** No quadruple `w x y z ∈ W` with `2x = w + y`,
 `2y = x + z`, `w ≠ z` (the two-consecutive-midpoints form: a 4-AP
@@ -280,8 +306,8 @@ theorem isAPOfLengthFree_four {W : List Nat} (h4 : k4Free W = true) :
     have hz' := allT_true_iff.1 hy' z hz
     exact not_and3_true (decide_eq_true h1) (decide_eq_true h2)
       (decide_eq_true hne) hz'
-  exact hscan a (a + d) (a + 2 * d) (a + 3 * d) e0 e1 e2 e3
-    (by omega) (by omega) (by omega)
+  exact (hscan a (a + d) (a + 2 * d) (a + 3 * d) e0 e1 e2 e3
+    (by omega) (by omega) (by omega)).elim
 
 /-- **THE k=5 BRIDGE.** No quintuple `u p q r s ∈ W` with the three
 consecutive-midpoint equations and `u ≠ s` ⇒ the official
@@ -316,31 +342,10 @@ theorem isAPOfLengthFree_five {W : List Nat} (h5 : k5Free W = true) :
     have hs' := allT_true_iff.1 hv' s hs
     exact not_and4_true (decide_eq_true h1) (decide_eq_true h2)
       (decide_eq_true h3) (decide_eq_true hne) hs'
-  exact hscan a (a + d) (a + 2 * d) (a + 3 * d) (a + 4 * d) e0 e1 e2 e3 e4
-    (by omega) (by omega) (by omega) (by omega)
+  exact (hscan a (a + d) (a + 2 * d) (a + 3 * d) (a + 4 * d) e0 e1 e2 e3 e4
+    (by omega) (by omega) (by omega) (by omega)).elim
 
-/-! ## §3 The scan checkers (Bool, kernel-decidable) -/
-
-/-- k=3 scan: no pair `x < z` in `W` with `x + z` even and midpoint
-`(x + z) / 2` back in `W` (a 3-AP `a, a+d, a+2d` is exactly such a pair
-with `x = a`, `z = a + 2d`). -/
-def midFree3 (W : List Nat) : Bool :=
-  allT (fun x => allT (fun z =>
-    !(decide (x < z) && decide ((x + z) % 2 = 0) && memL ((x + z) / 2) W)) W) W
-
-/-- k=4 scan: no quadruple with the two consecutive-midpoint equations and
-distinct endpoints. -/
-def k4Free (W : List Nat) : Bool :=
-  allT (fun w => allT (fun x => allT (fun y => allT (fun z =>
-    !(decide (2 * x = w + y) && decide (2 * y = x + z) && decide (w ≠ z))
-      W) W) W) W
-
-/-- k=5 scan: no quintuple with the three consecutive-midpoint equations
-and distinct endpoints. -/
-def k5Free (W : List Nat) : Bool :=
-  allT (fun u => allT (fun p => allT (fun q => allT (fun v => allT (fun s =>
-    !(decide (2 * p = u + q) && decide (2 * q = p + v) &&
-      decide (2 * v = q + s) && decide (u ≠ s)) W) W) W) W) W
+/-! ## §4 Range, monotone-chain and Nodup machinery -/
 
 /-- Range check: every element of `W` in `[1, N]`. -/
 def inRange (W : List Nat) (N : Nat) : Bool :=
@@ -351,7 +356,7 @@ theorem subset_Icc_of_inRange {W : List Nat} {N : Nat}
   intro x hx
   have hxW : x ∈ W := List.mem_toFinset.1 hx
   have hpair := allT_true_iff.1 h x hxW
-  obtain ⟨h1, h2⟩ := Bool.and_eq_true.1 hpair
+  obtain ⟨h1, h2⟩ := Bool.and_eq_true_iff.1 hpair
   exact Finset.mem_Icc.2 ⟨of_decide_eq_true h1, of_decide_eq_true h2⟩
 
 /-- Strictly-increasing check (first component of the Nodup derivation). -/
@@ -371,7 +376,7 @@ theorem ltAll_cons : ∀ (t : List Nat) (a : Nat), ltHead a t = true →
   | cons b t ih =>
       intro a hlt hch y hy
       have hpair : (ltHead b t && chainLt t) = true := hch
-      obtain ⟨hltb, hcht⟩ := Bool.and_eq_true.1 hpair
+      obtain ⟨hltb, hcht⟩ := Bool.and_eq_true_iff.1 hpair
       have hab : a < b := of_decide_eq_true hlt
       rcases List.mem_cons.1 hy with hy' | hy''
       · rw [hy']; exact hab
@@ -384,13 +389,13 @@ theorem nodup_of_chainLt : ∀ (W : List Nat), chainLt W = true → W.Nodup := b
   | cons a t ih =>
       intro h
       have hpair : (ltHead a t && chainLt t) = true := h
-      obtain ⟨hlt, hch⟩ := Bool.and_eq_true.1 hpair
+      obtain ⟨hlt, hch⟩ := Bool.and_eq_true_iff.1 hpair
       refine List.nodup_cons.2 ⟨?_, ih hch⟩
       intro hain
       have : a < a := ltAll_cons t a hlt hch a hain
       omega
 
-/-! ## §4 The stone builders -/
+/-! ## §5 The stone builders -/
 
 theorem stone3 {N m : ℕ} (W : List Nat)
     (hrange : inRange W N = true) (hchain : chainLt W = true)
@@ -398,7 +403,7 @@ theorem stone3 {N m : ℕ} (W : List Nat)
     m ≤ Set.IsAPOfLengthFree.maxCard 3 N := by
   have h := maxCard_ge_of_witness W.toFinset (subset_Icc_of_inRange hrange)
     (isAPOfLengthFree_three hmid)
-  rwa [List.length_toFinset (nodup_of_chainLt W hchain), hlen] at h
+  rwa [List.toFinset_card_of_nodup (nodup_of_chainLt W hchain), hlen] at h
 
 theorem stone4 {N m : ℕ} (W : List Nat)
     (hrange : inRange W N = true) (hchain : chainLt W = true)
@@ -406,7 +411,7 @@ theorem stone4 {N m : ℕ} (W : List Nat)
     m ≤ Set.IsAPOfLengthFree.maxCard 4 N := by
   have h := maxCard_ge_of_witness W.toFinset (subset_Icc_of_inRange hrange)
     (isAPOfLengthFree_four h4)
-  rwa [List.length_toFinset (nodup_of_chainLt W hchain), hlen] at h
+  rwa [List.toFinset_card_of_nodup (nodup_of_chainLt W hchain), hlen] at h
 
 theorem stone5 {N m : ℕ} (W : List Nat)
     (hrange : inRange W N = true) (hchain : chainLt W = true)
@@ -414,9 +419,9 @@ theorem stone5 {N m : ℕ} (W : List Nat)
     m ≤ Set.IsAPOfLengthFree.maxCard 5 N := by
   have h := maxCard_ge_of_witness W.toFinset (subset_Icc_of_inRange hrange)
     (isAPOfLengthFree_five h5)
-  rwa [List.length_toFinset (nodup_of_chainLt W hchain), hlen] at h
+  rwa [List.toFinset_card_of_nodup (nodup_of_chainLt W hchain), hlen] at h
 
-/-! ## §5 The Behrend-fiber witnesses and the stones
+/-! ## §6 The Behrend-fiber witnesses and the stones
 
 The banked ladder (receipts142b_audit.txt B2, all PASS with the
 difference-set scanner AND the midpoint scanner, plus B2-LADDER: the same
@@ -469,7 +474,7 @@ def w38416 : List Nat := [649, 662, 831, 857, 1026, 1039, 3184, 3223, 3366,
 def w324 : List Nat := [1, 18]
 
 /-- The (d, m) = (5, 2) fiber: B = 4, N = 1024, |S| = 10 — the base-4
-weight-2 {0,1}-digit family (the Cantor-sibling; §6). -/
+weight-2 {0,1}-digit family (the Cantor-sibling; §7). -/
 def w1024 : List Nat := [5, 17, 20, 65, 68, 80, 257, 260, 272, 320]
 
 /-! ### The k=3 stones (the full ten-fiber banked ladder) -/
@@ -547,7 +552,7 @@ theorem r3_7776_ge_official : 30 ≤ Set.IsAPOfLengthFree.maxCard 3 7776 :=
 theorem r3_46656_ge_official : 90 ≤ Set.IsAPOfLengthFree.maxCard 3 46656 :=
   r3_46656_ge
 
-/-! ## §6 The arsenal bridge (BOSS's law: ≥2 laws cited by file:line,
+/-! ## §7 The arsenal bridge (BOSS's law: ≥2 laws cited by file:line,
 read before cite; both genuinely used below)
 
 * `noTernaryTwo` — Arsenal/CardinalWorlds.lean:41 — the Cantor verdict
@@ -589,7 +594,7 @@ theorem first_quat_digit_lt (x : ℕ) (hx : x ≠ 0)
 w1024 element fails the Arsenal reader `noTernaryTwoStruct`
 (CardinalWorlds.lean:51) — the digit-fiber construction is strictly richer
 than the Cantor {0,1}-ternary family (10 elements in [1, 1024] vs the
-Cantor 2^5 = 8 in [1, 3^5]). Decided on the Arsenal's own reader. -/
+Cantor family's 2^5 = 32). Decided on the Arsenal's own reader. -/
 theorem w1024_not_cantor :
     allT (fun x => !(noTernaryTwoStruct x (x + 1))) w1024 = true := by
   decide
@@ -615,7 +620,7 @@ theorem ternary_cantor_digit01 (x : ℕ) (hx : x ≠ 0)
   · exact Or.inr h1
   · exact absurd h2 (ternary_first_digit x hx h)
 
-/-! ## §7 The board -/
+/-! ## §8 The board -/
 
 /-- The kernel board: the transfer + the three headline ladders (k=3 full,
 k=4/k=5 decide-budget fibers) over the official r. -/
@@ -630,14 +635,14 @@ theorem dm142b_board :
    r4_1024_ge, r4_1000_ge, r4_1296_ge, r4_2744_ge, r5_216_ge, r5_324_ge,
    r5_1000_ge⟩
 
-#print axioms maxCard_ge_of_witness
-#print axioms isAPOfLengthFree_three
-#print axioms r3_216_ge
-#print axioms r3_7776_ge
-#print axioms r3_46656_ge
-#print axioms dm142b_board
-#print axioms w1024_not_cantor
-#print axioms ternary_cantor_digit01
+#print axioms DM142B.maxCard_ge_of_witness
+#print axioms DM142B.isAPOfLengthFree_three
+#print axioms DM142B.r3_216_ge
+#print axioms DM142B.r3_7776_ge
+#print axioms DM142B.r3_46656_ge
+#print axioms DM142B.dm142b_board
+#print axioms DM142B.w1024_not_cantor
+#print axioms DM142B.ternary_cantor_digit01
 
 #eval "DM142B_LOWER_GREEN"
 

@@ -3,7 +3,7 @@ import Arsenal.ErdosTernary2.Basic
 import Arsenal.CardinalWorlds
 
 /-!
-# DM61_Proof_A — THE OFFICIAL-FORM FAMILY THEOREM (W82-61A)
+# DM61_Proof_A — THE OFFICIAL-FORM FAMILY THEOREM (W82-61A, W83 repair)
 
 BOSS's W82 order: THE OFFICIAL STATEMENTS, complete proofs, the arsenal
 cited, GitHub CI the only verdict. This kernel proves, over the OFFICIAL
@@ -25,10 +25,20 @@ kernel; the derivation is banked in WORKLOG_W82_61A.md §2 (P4 LAW) and
 remains the named continuation. The official open core `erdos_61` (all H)
 and the solved variants erha89/bnss23/p5/c5 are NOT claimed by anyone.
 
+W83 REPAIR NOTE: rebuilt against the Mathlib v4.33.0-rc2 API (CI run
+45017357264 post-mortem): `SimpleGraph.irrefl` (loopless is now a
+`Std.Irrefl Adj` structure field), `mem_neighborFinset v w` (explicit
+vertex arguments), `Finset.notMem_empty` (the not_mem→notMem rename),
+`Finset.mem_biUnion` (iff form), `Real.rpow_mul` (stated `x^(y*z) =
+(x^y)^z`), `Nat.mul_le_mul_left` explicit-key form, root-namespace
+Arsenal citations (`two_pow_pos`/`two_pow_ge2` live at the file's root
+namespace, verified Arsenal/CardinalWorlds.lean:420/431), `open Filter`
+for `atTop`, and `ᶜ` parenthesization on `pathGraph 3`.
+
 ## THE LAWS (the campaign's W68/W76 ⌊√n⌋ family kills, official form)
 
 1. THE COMPLEMENT TRANSFER (official level): `H` at `c` ⟹ `Hᶜ` at `c`,
-   via `(X.comap g)ᶜ = Xᶜ.comap g` (injectivity) + `indepNum_compl`.
+   via `(X.comap g)ᶜ = (G.comap g)ᶜ` (injectivity) + `indepNum_compl`.
 2. THE NO-COPY LADDER: no induced `K3` copy ⟹ `CliqueFree 3`; no `K2`
    copy ⟹ no edges; no `P3` copy ⟹ every closed neighborhood is a clique
    (an induced `a—v—w` is a `pathGraph 3` copy).
@@ -37,20 +47,21 @@ and the solved variants erha89/bnss23/p5/c5 are NOT claimed by anyone.
 4. THE DICHOTOMY FINISHER at `D = ⌊√n⌋`, then `⌊√n⌋ ≥ n^{1/4}` (n ≥ 4).
 
 ## ARSENAL BRIDGE (read-before-cite; both genuinely used below)
-- `Arsenal.CardinalWorlds.two_pow_pos` [Arsenal/CardinalWorlds.lean:420] —
-  `0 < 2^j` — the dyadic base of `arsenal_threshold` (the √n floor gate).
-- `Arsenal.CardinalWorlds.two_pow_ge2` [Arsenal/CardinalWorlds.lean:431] —
-  `2 ≤ 2^j` (`j ≥ 1`) — the second component of `arsenal_threshold`,
-  feeding the `2 ≤ ⌊√n⌋` floor through `Nat.le_sqrt`.
+- `two_pow_pos` [Arsenal/CardinalWorlds.lean:420] — `0 < 2^j` — the dyadic
+  base of `arsenal_threshold` (the √n floor gate). Root namespace.
+- `two_pow_ge2` [Arsenal/CardinalWorlds.lean:431] — `2 ≤ 2^j` (`j ≥ 1`) —
+  the second component of `arsenal_threshold`, feeding the `2 ≤ ⌊√n⌋`
+  floor through `Nat.le_sqrt`. Root namespace.
 
 ## LAWS OF THE HOUSE
-Zero sorry/sorryAx; `#print axioms` on every headline (the standard three
-only); CI (`kernel-61dm-a`) is the only Lean verdict.
+Zero sorry, zero sorry-axiom proofs; `#print axioms` on every headline (the
+standard three only); CI (`kernel-dm-w82` step Kernel 61DM-A) is the only Lean verdict.
 -/
 set_option maxHeartbeats 2000000
 set_option maxRecDepth 65536
 
 open scoped Classical
+open Filter
 
 namespace Erdos61A
 
@@ -104,7 +115,7 @@ theorem top_comap_of_pairwise {n k : ℕ} {G : SimpleGraph (Fin n)} (f : Fin k �
   · intro hadj'
     intro heq
     subst heq
-    exact G.loopless i hadj'
+    exact G.irrefl hadj'
 
 /-- The induced-P3 copy: edges `a—v`, `v—y`, non-edge `a—y` (distinct
 vertices) give `pathGraph 3 = G.comap ![a, v, y]`. -/
@@ -114,10 +125,16 @@ theorem pathGraph3_comap {n : ℕ} {G : SimpleGraph (Fin n)} {a v y : Fin n}
     (SimpleGraph.pathGraph 3) = G.comap (emb3 a v y hav hvy hay) := by
   ext i j
   simp only [SimpleGraph.comap_adj, SimpleGraph.pathGraph_adj]
-  fin_cases i <;> fin_cases j <;>
-    simp [emb3_zero, emb3_one, emb3_two, h1, h2, h3,
-      G.adj_symm h1, G.adj_symm h2, fun h => h3 (G.adj_symm h),
-      fun h => G.loopless a h, fun h => G.loopless v h, fun h => G.loopless y h]
+  fin_cases i <;> fin_cases j
+  · exact iff_of_false (by decide) G.irrefl
+  · exact iff_of_true (by decide) h1
+  · exact iff_of_false (by decide) h3
+  · exact iff_of_true (by decide) (G.adj_symm h1)
+  · exact iff_of_false (by decide) G.irrefl
+  · exact iff_of_true (by decide) h2
+  · exact iff_of_false (by decide) (fun h => h3 (G.adj_symm h))
+  · exact iff_of_true (by decide) (G.adj_symm h2)
+  · exact iff_of_false (by decide) G.irrefl
 
 /-! ## §2 NO-COPY CONSEQUENCES -/
 
@@ -137,7 +154,7 @@ theorem cliqueFree3_of_no_induced {n : ℕ} {G : SimpleGraph (Fin n)}
       exact hij (e.injective (Subtype.ext heq))
     exact hs.isClique (by simp [hmem_i]) (by simp [hmem_j]) hne
   exact hG ⟨(Finset.subtype s).comp (e.toEmbedding),
-    top_comap_of_pairwise _ hadj⟩
+    top_comap_of_pairwise ((Finset.subtype s).comp (e.toEmbedding)) hadj⟩
 
 /-- No induced `K2` copy implies no edges at all. -/
 theorem no_edge_of_no_induced_K2 {n : ℕ} {G : SimpleGraph (Fin n)}
@@ -145,13 +162,13 @@ theorem no_edge_of_no_induced_K2 {n : ℕ} {G : SimpleGraph (Fin n)}
     ∀ a b : Fin n, ¬ G.Adj a b := by
   intro a b hab
   have hne : a ≠ b := G.ne_of_adj hab
-  refine hG ⟨emb2 a b hne, top_comap_of_pairwise _ ?_⟩
+  refine hG ⟨emb2 a b hne, top_comap_of_pairwise (emb2 a b hne) ?_⟩
   intro i j hij
-  fin_cases i <;> fin_cases j <;>
-    simp [emb2_zero a b hne, emb2_one a b hne, Matrix.cons_val_zero,
-      Matrix.cons_val_one, Matrix.head_cons]
+  fin_cases i <;> fin_cases j
+  · exact absurd rfl hij
   · exact hab
   · exact G.adj_symm hab
+  · exact absurd rfl hij
 
 /-- No induced `P3` copy implies every closed neighborhood is a clique. -/
 theorem closedNbhd_clique_of_no_induced_P3 {n : ℕ} {G : SimpleGraph (Fin n)}
@@ -160,26 +177,29 @@ theorem closedNbhd_clique_of_no_induced_P3 {n : ℕ} {G : SimpleGraph (Fin n)}
     G.IsClique ↑(insert v (G.neighborFinset v)) := by
   intro a ha b hb hab
   simp only [Finset.coe_insert, Set.mem_insert_iff, Finset.mem_coe] at ha hb
-  rcases ha with rfl | ha' <;> rcases hb with rfl | hb'
-  · exact absurd rfl hab
-  · -- a = v, b ∈ N(v): b ≠ v (else hab), so G.Adj v b
-    have hbv : b ≠ v := by rintro rfl; exact hab rfl
-    exact (SimpleGraph.mem_neighborFinset.mp hb')
-  · -- a ∈ N(v), b = v
-    have hav : a ≠ v := by rintro rfl; exact hab rfl
-    exact G.adj_symm (SimpleGraph.mem_neighborFinset.mp ha')
-  · -- a, b ∈ N(v): if ¬ G.Adj a b then (a, v, b) is an induced P3
-    by_contra hnoadj
+  have hA : a = v ∨ G.Adj v a := by
+    rcases ha with h | h
+    · exact Or.inl h
+    · exact Or.inr (SimpleGraph.mem_neighborFinset v a |>.mp h)
+  have hB : b = v ∨ G.Adj v b := by
+    rcases hb with h | h
+    · exact Or.inl h
+    · exact Or.inr (SimpleGraph.mem_neighborFinset v b |>.mp h)
+  rcases hA with ha1 | ha2 <;> rcases hB with hb1 | hb2
+  · exact absurd (ha1.trans hb1.symm) hab
+  · rw [ha1]; exact hb2
+  · rw [hb1]; exact G.adj_symm ha2
+  · by_contra hnoadj
     have hva : a ≠ v := by
-      rintro rfl
-      exact absurd (SimpleGraph.mem_neighborFinset.mp ha') (G.loopless v)
+      intro h
+      subst h
+      exact G.irrefl ha2
     have hvb : b ≠ v := by
-      rintro rfl
-      exact absurd (SimpleGraph.mem_neighborFinset.mp hb') (G.loopless v)
-    have h1 : G.Adj a v := G.adj_symm (SimpleGraph.mem_neighborFinset.mp ha')
-    have h2 : G.Adj v b := SimpleGraph.mem_neighborFinset.mp hb'
+      intro h
+      subst h
+      exact G.irrefl hb2
     exact hG ⟨emb3 a v b hva (Ne.symm hvb) hab,
-      pathGraph3_comap hva (Ne.symm hvb) hab h1 h2 hnoadj⟩
+      pathGraph3_comap hva (Ne.symm hvb) hab (G.adj_symm ha2) hb2 hnoadj⟩
 
 /-! ## §3 THE GREEDY CORE (maximal independent set) -/
 
@@ -198,7 +218,7 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     refine ⟨∅, ?_⟩
     simp only [hpool, Finset.mem_filter, Finset.mem_univ, true_and]
     intro a ha b hb _
-    exact absurd (Finset.mem_coe.mp ha) (Finset.not_mem_empty a)
+    exact absurd (Finset.mem_coe.mp ha) (Finset.notMem_empty a)
   obtain ⟨s, hs_mem, hs_max⟩ := Finset.exists_max_image pool (fun t => t.card) hpool_ne
   have hsindep : G.IsIndepSet (↑s : Set α) := (Finset.mem_filter.mp hs_mem).2
   have hsmax : ∀ t : Finset α, G.IsIndepSet (↑t : Set α) → t.card ≤ s.card := by
@@ -212,11 +232,15 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     have hins : G.IsIndepSet (↑(insert v s : Finset α) : Set α) := by
       intro a ha b hb hab
       simp only [Finset.coe_insert, Set.mem_insert_iff, Finset.mem_coe] at ha hb
-      rcases ha with rfl | ha' <;> rcases hb with rfl | hb'
-      · exact absurd rfl hab
-      · exact hno b hb'
-      · exact fun hadj => hno a ha' (G.adj_symm hadj)
-      · exact hsindep a (Finset.mem_coe.mpr ha') b (Finset.mem_coe.mpr hb') hab
+      rcases ha with ha1 | ha' <;> rcases hb with hb1 | hb'
+      · exact absurd (ha1.trans hb1.symm) hab
+      · intro hadj
+        rw [ha1] at hadj
+        exact hno b hb' hadj
+      · intro hadj
+        rw [hb1] at hadj
+        exact hno a ha' (G.adj_symm hadj)
+      · exact hsindep (Finset.mem_coe.mpr ha') (Finset.mem_coe.mpr hb') hab
     have hcard := hsmax (insert v s) hins
     rw [Finset.card_insert_of_notMem hv] at hcard
     omega
@@ -228,36 +252,42 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     by_cases hvs : v ∈ s
     · exact Finset.mem_union_left _ hvs
     · obtain ⟨w, hws, hvw⟩ := hdom v hvs
-      exact Finset.mem_union_right _ (Finset.mem_biUnion hws hvw)
+      exact Finset.mem_union_right _ (Finset.mem_biUnion.mpr ⟨w, hws, hvw⟩)
   have hcard1 := Finset.card_le_card hcover
-  rw [Finset.card_union_le, Finset.card_biUnion_le] at hcard1
+  have hu : (s ∪ s.biUnion (fun w => G.neighborFinset w)).card
+      ≤ s.card + (s.biUnion (fun w => G.neighborFinset w)).card :=
+    Finset.card_union_le _ _
+  have hbi : (s.biUnion (fun w => G.neighborFinset w)).card
+      ≤ ∑ w ∈ s, (G.neighborFinset w).card :=
+    Finset.card_biUnion_le
   have hcard2 : Fintype.card α = (Finset.univ : Finset α).card := by simp
   have hsum : ∑ w ∈ s, (G.neighborFinset w).card ≤ s.card * (D - 1) := by
     refine le_trans (Finset.sum_le_sum ?_) ?_
     · intro w hws
       have hb := hbnd w
       rw [Finset.card_insert_of_notMem
-        (fun hmem => G.loopless w (SimpleGraph.mem_neighborFinset.mp hmem))] at hb
+        (fun hmem => G.irrefl ((SimpleGraph.mem_neighborFinset w w).mp hmem))] at hb
       omega
     · rw [Finset.sum_const, smul_eq_mul]
   have hfinal : Fintype.card α ≤ s.card + s.card * (D - 1) := by omega
   have hD'' : D * s.card = s.card + s.card * (D - 1) := by
-    have : D * s.card - s.card = s.card * (D - 1) := by
-      rw [Nat.mul_sub, Nat.mul_one]
-      omega
+    have hsucc : Nat.succ (D - 1) = D := by omega
+    have h := Nat.mul_succ s.card (D - 1)
+    rw [hsucc] at h
+    rw [Nat.mul_comm D s.card]
     omega
   omega
 
 /-! ## §4 THE ARITHMETIC + THE ARSENAL BRIDGE -/
 
 /-- The Arsenal dyadic threshold: `0 < 4` and `2 ≤ 4` from
-`CardinalWorlds.two_pow_pos` [CardinalWorlds.lean:420] and
-`CardinalWorlds.two_pow_ge2` [CardinalWorlds.lean:431] at `j = 2`
-(signatures read at those lines this session — read-before-cite). -/
+`two_pow_pos` [CardinalWorlds.lean:420] and `two_pow_ge2`
+[CardinalWorlds.lean:431] at `j = 2` (root-namespace declarations,
+signatures read at those lines — read-before-cite). -/
 theorem arsenal_threshold : (0:ℕ) < 4 ∧ 2 ≤ 4 := by
-  have h1 := CardinalWorlds.two_pow_pos 2
-  have h2 := CardinalWorlds.two_pow_ge2 2 (by norm_num)
-  rw [show (2:Nat) ^ 2 = 4 by norm_num] at h1 h2
+  have h1 : (0:ℕ) < 2^2 := two_pow_pos 2
+  have h2 : (2:ℕ) ≤ 2^2 := two_pow_ge2 2 (by norm_num)
+  norm_num at h1 h2
   exact ⟨h1, h2⟩
 
 /-- For `n ≥ 4`: `n ≤ (Nat.sqrt n) ^ 4` (via `n < (s+1)² ≤ (s·s)²`, `s ≥ 2`). -/
@@ -267,8 +297,11 @@ theorem le_sqrt_pow_four {n : ℕ} (hn : 4 ≤ n) : n ≤ (Nat.sqrt n) ^ 4 := by
     have h := Nat.lt_succ_sqrt' n
     simpa [Nat.pow_two] using h
   have hstep : Nat.sqrt n + 1 ≤ Nat.sqrt n * Nat.sqrt n := by
-    have h1 : 2 * Nat.sqrt n ≤ Nat.sqrt n * Nat.sqrt n :=
+    have h1 : Nat.sqrt n * 2 ≤ Nat.sqrt n * Nat.sqrt n :=
       Nat.mul_le_mul_left _ hs2
+    have h1' : 2 * Nat.sqrt n ≤ Nat.sqrt n * Nat.sqrt n := by
+      rw [Nat.mul_comm 2 (Nat.sqrt n)]
+      exact h1
     omega
   have hle : (Nat.sqrt n + 1) * (Nat.sqrt n + 1) ≤
       (Nat.sqrt n * Nat.sqrt n) * (Nat.sqrt n * Nat.sqrt n) :=
@@ -291,11 +324,10 @@ theorem rpow_quarter_le_sqrt {n : ℕ} (hn : 4 ≤ n) :
     exact_mod_cast le_sqrt_pow_four hn
   have h1 : (n : ℝ) ^ ((1:ℝ)/4) ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ 4) ^ ((1:ℝ)/4) :=
     Real.rpow_le_rpow (by positivity) hkey (by positivity)
-  have h2 : (((Nat.sqrt n : ℕ) : ℝ) ^ 4) ^ ((1:ℝ)/4)
-      = ((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℝ) * ((1:ℝ)/4))) := by
-    rw [← Real.rpow_mul (by positivity : (0:ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ))]
-  rw [show ((4:ℝ) * ((1:ℝ)/4)) = 1 by ring, Real.rpow_one] at h2
-  exact h2 ▸ h1
+  refine le_trans h1 ?_
+  have hx : (0:ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) := by positivity
+  rw [(Real.rpow_mul hx 4 ((1:ℝ)/4)).symm,
+    show ((4:ℝ) * ((1:ℝ)/4)) = 1 by ring, Real.rpow_one]
 
 /-! ## §5 THE FAMILY LAWS -/
 
@@ -314,26 +346,32 @@ theorem isEH_compl {H : SimpleGraph α} {f : ℕ → ℝ}
   have hGc : ¬∃ g : α ↪ Fin n, H = (Gᶜ).comap g := by
     rintro ⟨g, hg⟩
     refine hG ⟨g, ?_⟩
-    -- Hᶜ = (Gᶜ.comap g)ᶜ = ((G.comap g)ᶜ)ᶜ = G.comap g
-    have h1 : Hᶜ = ((Gᶜ).comap g)ᶜ := by rw [hg]
+    -- H = (Gᶜ).comap g ⟹ Hᶜ = (G.comap g)ᶜ ⟹ H = G.comap g
     have hcoe : ((Gᶜ).comap g)ᶜ = (G.comap g)ᶜ := by
       ext x y
-      simp only [SimpleGraph.compl_adj, SimpleGraph.comap_adj]
-      constructor
-      · rintro ⟨hn', hne⟩
-        refine ⟨?_, hne⟩
-        rintro hadj
-        exact hn' ⟨hadj, fun heq => hne (g.injective heq)⟩
-      · rintro ⟨hn', hne⟩
-        exact ⟨fun hadj => hn' hadj, hne⟩
-    rw [hcoe, SimpleGraph.compl_compl] at h1
-    exact h1.symm
+      by_cases hxy : x = y
+      · subst hxy
+        simp [SimpleGraph.compl_adj, SimpleGraph.comap_adj, G.irrefl]
+      · simp only [SimpleGraph.compl_adj, SimpleGraph.comap_adj]
+        have hginj : g x ≠ g y := fun heq => hxy (g.injective heq)
+        constructor
+        · rintro ⟨_, hne⟩
+          exact ⟨hxy, fun ha => hne ⟨hginj, ha⟩⟩
+        · rintro ⟨_, hne⟩
+          exact ⟨hxy, fun hp => hne hp.2⟩
+    have h1 : Hᶜ = ((Gᶜ).comap g)ᶜ := by rw [hg]
+    rw [hcoe] at h1
+    have h2 : H = G.comap g := by
+      have h3 := congrArg (fun X : SimpleGraph (Fin n) => Xᶜ) h1
+      simp only [compl_compl] at h3
+      exact h3
+    exact h2
   have happ := hN n hn Gᶜ hGc
   rw [SimpleGraph.indepNum_compl] at happ
   have hcl : Gᶜ.cliqueNum = G.indepNum := by
     have h := SimpleGraph.indepNum_compl (G := Gᶜ)
-    rw [SimpleGraph.compl_compl] at h
-    exact h
+    rw [compl_compl] at h
+    exact h.symm
   rw [hcl] at happ
   rcases happ with h' | h'
   · exact hcon.2 h'
@@ -346,8 +384,8 @@ theorem official_bound_of_sqrt {n : ℕ} (hn : 4 ≤ n) {G : SimpleGraph (Fin n)
     G.indepNum ≥ (n : ℝ) ^ ((1:ℝ)/4) ∨ G.cliqueNum ≥ (n : ℝ) ^ ((1:ℝ)/4) := by
   have hle := rpow_quarter_le_sqrt hn
   rcases h with h | h
-  · left; exact le_trans (Nat.cast_le.2 h) hle
-  · right; exact le_trans (Nat.cast_le.2 h) hle
+  · left; exact le_trans hle (Nat.cast_le.2 h)
+  · right; exact le_trans hle (Nat.cast_le.2 h)
 
 /-- **K2** (the edge): every K2-free graph is edgeless, so `α = n`. -/
 theorem eh_K2 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 2))
@@ -392,21 +430,52 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
       by_contra hadj
       have hva : G.Adj v a := ha
       have hvb : G.Adj v b := hb
+      have hmem3 : ∀ x : Fin n,
+          x ∈ (insert v (insert a (insert b (∅ : Finset (Fin n)))) : Finset (Fin n)) →
+          x = v ∨ x = a ∨ x = b := by
+        intro x hx
+        simp only [Finset.mem_insert, Finset.mem_singleton] at hx
+        rcases hx with h | h
+        · exact Or.inl h
+        rcases h with h | h
+        · exact Or.inr (Or.inl h)
+        rcases h with h | h
+        · exact Or.inr (Or.inr h)
+        · exact absurd h (Finset.notMem_empty x)
       have h3 : G.IsNClique 3 (insert v (insert a (insert b (∅ : Finset (Fin n))))) :=
         ⟨by
           intro x hx y hy hxy
-          simp only [Finset.mem_insert, Finset.mem_singleton] at hx hy
-          rcases hx with rfl | hx' <;> rcases hy with rfl | hy'
-          · exact absurd rfl hxy
-          · exact hva
-          · exact G.adj_symm hva
-          · rcases hx' with rfl | hx'' <;> rcases hy' with rfl | hy''
-            · exact absurd rfl hxy
-            · exact hadj
-            · exact G.adj_symm hadj
-            · exact absurd rfl hxy
+          have hx3 := hmem3 x hx
+          have hy3 := hmem3 y hy
+          rcases hx3 with hx1 | hx1 <;> rcases hy3 with hy1 | hy1
+          · exact absurd (hx1.trans hy1.symm) hxy
+          · rw [hx1, hy1]; exact hva
+          · rw [hx1, hy1]; exact hvb
+          · rw [hy1]; exact G.adj_symm hva
+          · exact absurd (hx1.trans hy1.symm) hxy
+          · rw [hx1, hy1]; exact hadj
+          · rw [hy1]; exact G.adj_symm hvb
+          · rw [hx1, hy1]; exact G.adj_symm hadj
+          · exact absurd (hx1.trans hy1.symm) hxy
         , by
-          simp [Finset.card_insert_of_notMem, hva.ne, hvb.ne, hab]⟩
+          have h1 : v ∉ insert a (insert b (∅ : Finset (Fin n))) := by
+            intro h
+            simp only [Finset.mem_insert, Finset.mem_singleton] at h
+            rcases h with h | h
+            · exact G.ne_of_adj hva h
+            · rcases h with h | h
+              · exact G.ne_of_adj hvb h
+              · exact absurd h (Finset.notMem_empty v)
+          have h2 : a ∉ insert b (∅ : Finset (Fin n)) := by
+            intro h
+            simp only [Finset.mem_insert, Finset.mem_singleton] at h
+            rcases h with h | h
+            · exact hab h
+            · exact absurd h (Finset.notMem_empty a)
+          have h3b : b ∉ (∅ : Finset (Fin n)) := Finset.notMem_empty b
+          rw [Finset.card_insert_of_notMem h1, Finset.card_insert_of_notMem h2,
+            Finset.card_insert_of_notMem h3b]
+          simp⟩
       exact hcf _ h3
     have hle := (G.IsIndepSet.card_le_indepNum (t := G.neighborFinset v)
       (tc := hindep))
@@ -415,7 +484,7 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
     have hbnd : ∀ v : Fin n, (insert v (G.neighborFinset v)).card ≤ Nat.sqrt n := by
       intro v
       rw [Finset.card_insert_of_notMem
-        (fun hmem => G.loopless v (SimpleGraph.mem_neighborFinset.mp hmem))]
+        (fun hmem => G.irrefl ((SimpleGraph.mem_neighborFinset v v).mp hmem))]
       have := hA v
       omega
     obtain ⟨s, hsindep, hcount⟩ := exists_isIndepSet_mul_ge G (Nat.sqrt n)
@@ -428,8 +497,12 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
       have hle' : G.indepNum ≤ Nat.sqrt n - 1 := by omega
       have h1 : Nat.sqrt n * G.indepNum ≤ Nat.sqrt n * (Nat.sqrt n - 1) :=
         Nat.mul_le_mul_left _ hle'
-      have h2 : Nat.sqrt n * (Nat.sqrt n - 1) < Nat.sqrt n * Nat.sqrt n :=
-        Nat.mul_lt_mul_left (by omega) (by omega)
+      have h2 : Nat.sqrt n * (Nat.sqrt n - 1) < Nat.sqrt n * Nat.sqrt n := by
+        have he : Nat.sqrt n - 1 + 1 = Nat.sqrt n := by omega
+        have hm : Nat.sqrt n * (Nat.sqrt n - 1) + Nat.sqrt n * 1
+            = Nat.sqrt n * Nat.sqrt n := by
+          rw [← Nat.mul_add, he]
+        omega
       have h3 : n ≤ Nat.sqrt n * s.card := by rw [← hcardn]; exact hcount
       have h4' : Nat.sqrt n * s.card ≤ Nat.sqrt n * G.indepNum :=
         Nat.mul_le_mul_left _ hle
@@ -462,7 +535,7 @@ theorem eh_P3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3)
     exact official_bound_of_sqrt hn (Or.inr (le_trans hv hle))
   · push_neg at hA
     have hbnd : ∀ v : Fin n, (insert v (G.neighborFinset v)).card ≤ Nat.sqrt n :=
-      fun v => (hA v).le
+      fun v => (Nat.not_le.mp (hA v)).le
     obtain ⟨s, hsindep, hcount⟩ := exists_isIndepSet_mul_ge G (Nat.sqrt n)
       (by omega) hbnd
     have hcardn : Fintype.card (Fin n) = n := by simp
@@ -473,8 +546,12 @@ theorem eh_P3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3)
       have hle' : G.indepNum ≤ Nat.sqrt n - 1 := by omega
       have h1 : Nat.sqrt n * G.indepNum ≤ Nat.sqrt n * (Nat.sqrt n - 1) :=
         Nat.mul_le_mul_left _ hle'
-      have h2 : Nat.sqrt n * (Nat.sqrt n - 1) < Nat.sqrt n * Nat.sqrt n :=
-        Nat.mul_lt_mul_left (by omega) (by omega)
+      have h2 : Nat.sqrt n * (Nat.sqrt n - 1) < Nat.sqrt n * Nat.sqrt n := by
+        have he : Nat.sqrt n - 1 + 1 = Nat.sqrt n := by omega
+        have hm : Nat.sqrt n * (Nat.sqrt n - 1) + Nat.sqrt n * 1
+            = Nat.sqrt n * Nat.sqrt n := by
+          rw [← Nat.mul_add, he]
+        omega
       have h3 : n ≤ Nat.sqrt n * s.card := by rw [← hcardn]; exact hcount
       have h4' : Nat.sqrt n * s.card ≤ Nat.sqrt n * G.indepNum :=
         Nat.mul_le_mul_left _ hle
@@ -482,7 +559,7 @@ theorem eh_P3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3)
     exact official_bound_of_sqrt hn (Or.inl halpha)
 
 /-- **P̄3**: by the complement transfer from P3. -/
-theorem eh_Pbar3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3 ᶜ)
+theorem eh_Pbar3 : IsErdosHajnalLowerBound ((SimpleGraph.pathGraph 3)ᶜ)
     (fun n => (n : ℝ) ^ ((1:ℝ)/4)) := isEH_compl eh_P3
 
 /-- **K1**: vacuous — for `n ≥ 1` the one-vertex graph is always copied,
@@ -500,7 +577,7 @@ theorem eh_K1 : IsErdosHajnalLowerBound (⊥ : SimpleGraph (Fin 1))
   have hab : a = b := Subsingleton.elim a b
   subst hab
   simp only [SimpleGraph.bot_adj, SimpleGraph.comap_adj, iff_false]
-  exact fun h => G.loopless _ h
+  exact fun h => G.irrefl h
 
 /-! ## §6 THE BOARD -/
 
@@ -514,7 +591,7 @@ theorem erdos_61_family : ∃ c > (0:ℝ),
     IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3)) (fun n => (n : ℝ) ^ c) ∧
     IsErdosHajnalLowerBound (⊥ : SimpleGraph (Fin 3)) (fun n => (n : ℝ) ^ c) ∧
     IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3) (fun n => (n : ℝ) ^ c) ∧
-    IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3 ᶜ) (fun n => (n : ℝ) ^ c) ∧
+    IsErdosHajnalLowerBound ((SimpleGraph.pathGraph 3)ᶜ) (fun n => (n : ℝ) ^ c) ∧
     IsErdosHajnalLowerBound (⊥ : SimpleGraph (Fin 1)) (fun n => (n : ℝ) ^ c) := by
   refine ⟨(1:ℝ)/4, by positivity, ?_, ?_, ?_, ?_, ?_, ?_, ?_⟩
   · exact eh_K2

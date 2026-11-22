@@ -164,8 +164,8 @@ jobs:
           lake env lean problem142-rk-asymptotic/DM142_Proof_B.lean 2>&1 | tee -a kernel142dmb.log
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmb.log
           grep -F "DM142B_LOWER_GREEN" kernel142dmb.log
-          grep -E "'(r3_216_ge|r3_7776_ge|r3_46656_ge|dm142b_board)' (does not depend on any axioms|depends on axioms)" kernel142dmb.log
-          ! grep -E "'(r3_216_ge|r3_7776_ge|r3_46656_ge|dm142b_board)'.*sorryAx" kernel142dmb.log
+          grep -E "'(DM142B.r3_216_ge|DM142B.r3_7776_ge|DM142B.r3_46656_ge|DM142B.dm142b_board)' (does not depend on any axioms|depends on axioms)" kernel142dmb.log
+          ! grep -E "'(DM142B.r3_216_ge|DM142B.r3_7776_ge|DM142B.r3_46656_ge|DM142B.dm142b_board)'.*sorryAx" kernel142dmb.log
           echo KERNEL_142DM_B_GREEN=1
 
   kernel-a:
