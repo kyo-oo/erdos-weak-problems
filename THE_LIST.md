@@ -333,3 +333,14 @@ commander-absorb law held.
 
 Master gates (merged campaign): 142: 24/24, 61: 16/16, 107: 16/16 —
 YOUR SOLUTION IS OKAY ×3. CI verdicts: (this seal's push).
+
+---
+
+## §S084 — THE TAILF DECOMPOSITION WAVE (2026-11-22, the full-recovery round)
+
+| ID | target | delivered | status |
+|---|---|---|---|
+| S084-recovery | the campaign state | full sandbox reset survived: token re-armed from the Drive bag, repo at S083 seal, push channel verified, protection engine re-sealed | THE VAULTS HELD |
+| S084-map | BOSS's complete theorem list | the named machinery located and read: the monolith boundary (erdos_even_conjecture_iff_tailF), the Ω-wave law, the tailF chamber (the dimensional laws), the six-adic machinery, the infinite paradox energy, the u-jump laws, the vertical telescope cocycle, the infinite four-power navigation, the causal/algebraic/forced-digit-2 mechanisms, kernels 1-75 | THE COMPLETE WEAPON MAP (WORKLOG_S084 §B) |
+| S084-76 | #406 the tailF hypothesis | KERNEL 76 TailFDecomposition406.lean: the row/tower decomposition ported + THE COMPRESSION LAW (Cantorian = one integer's digit-freeness) + THE FULL OBSERVER (no window bound) + THE SIX-ADIC GHOST SKEW + THE PARADOX WALL (the eternal non-negative flux, the frozen +10 tail) + THE CROWN V3; battery406h 44/44 | FIRST EXPOSURE IN FLIGHT |
+| S084-board | the true CI board | CORRECTED: kernel-74 never received an uninterrupted compile (all post-repair "failures" were W83-loop cancellations); kernel-75 never compiled — two static defects found and fixed (the dropped rw [Nat.pow_succ], the botched hhead block); kernels 74→75→76 now queued for their first full sequence | THE VERDICT WATCH IS LIVE |
