@@ -158,7 +158,10 @@ only — the file-wide sorryAx grep guards the axiom profile).
 - [x] linrock chain vendored (commit 9d6b952, within first 10 minutes).
 - [x] DM107_Proof_A.lean written (complete port, zero sorry).
 - [x] CI job kernel-107dm-a wired.
-- [ ] CI green (repair loop from Actions logs — see below for the history).
+- [x] **CI GREEN** (run 44968437049, job 137042629607, commit 1fc89c1):
+  `KERNEL_107DM_A_GREEN=1`; log contains `"DM107A_NONEMPTY_CARDSET_GREEN"`
+  and `'Erdos107.nonempty_cardSet' depends on axioms:
+  [propext, Classical.choice, Quot.sound]` — the standard three, NO sorryAx.
 
 ### Repair history
 (round 1 = first push; append per round)
