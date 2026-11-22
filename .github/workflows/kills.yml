@@ -95,6 +95,7 @@ jobs:
 
   kernel-107dm-a:
   kernel-61dm-a:
+  kernel-61dm-b:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -130,6 +131,17 @@ jobs:
           grep -E "'Erdos61A.erdos_61_family' (does not depend on any axioms|depends on axioms)" kernel61dma.log
           ! grep -E "'Erdos61A.erdos_61_family'.*sorryAx" kernel61dma.log
           echo KERNEL_61DM_A_GREEN=1
+      - name: "Kernel 61DM-B — W82 THE OFFICIAL-FORM CLOSURE MAP v1: the F7 family floor (K1/K2/Kbar2/K3/Kbar3/P3/Pbar3 at c=1/4 over the official IsErdosHajnalLowerBound predicate — the W82-61A proofs re-derived in-frame under Erdos61B, attributed) + THE HONEST CLOSURE LEDGER (P4/K5/E5/substitution: derived, named W83 continuations; the four 5-vertex primes + the 6-vertex world + the open core: honestly OPEN); Arsenal bridge: two_pow_pos [:420] + two_pow_ge2 [:431]"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel61dmb.log
+          lake env lean problem61-erdos-hajnal/DM61_Closure.lean 2>&1 | tee -a kernel61dmb.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dmb.log
+          grep -F "DM61B_CLOSURE_GREEN" kernel61dmb.log
+          grep -E "'Erdos61B.erdos_61_family' (does not depend on any axioms|depends on axioms)" kernel61dmb.log
+          ! grep -E "'Erdos61B..*'.*sorryAx" kernel61dmb.log
+          echo KERNEL_61DM_B_GREEN=1
 
   kernel-a:
     runs-on: ubuntu-24.04
