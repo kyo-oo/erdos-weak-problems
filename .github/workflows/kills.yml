@@ -93,11 +93,12 @@ jobs:
           grep -F "DM107_ANCHORS_GREEN" kernelfc.log
           echo KERNEL_FC_OFFICIAL_FOUNDATION_GREEN=1
 
-  kernel-107dm-a:
-  kernel-61dm-a:
-  kernel-61dm-b:
-  kernel-142dm-a:
-  kernel-142dm-b:
+  # W82 merge repair: the four null job keys (kernel-107dm-a/kernel-61dm-a/
+  # kernel-61dm-b/kernel-142dm-a) are deleted — GitHub rejects null jobs and
+  # the whole board went red with zero jobs started (runs 44967816376+).
+  # The five DM kernel bodies were already merged as steps of one job; that
+  # job is now honestly named kernel-dm-w82.
+  kernel-dm-w82:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
