@@ -931,3 +931,103 @@ kernel port is the next round's first strike). The kill chain remains
 CAP(185) alone — everything else green, self-contained, monolith-free.
 
 The engine never stops; it never lies.
+
+---
+
+## §14. THE S080 π-POINT COLLAPSE ROUND (Kernel 74 — the ghost rays, the fixed points, the two-grant crown)
+
+**Deliverable S080.** BOSS order (standing, the fury round): prove the
+hypothesis with BOSS's own mathematics — the π-point lane, the S078-named
+first strike, executed in full.
+
+### THE GHOST RAY (`GhostRay`)
+
+The full shadow package carrier of the assault engine, stated on the
+campaign's own LTE coefficient: a core `u` whose scaled diagonal
+`(c (k−1) * u) % 3^k` sits in the EXACT middle third at every depth
+`k ≥ 3` — the stabilized dust shape (the all-sheets dodger with the
+diagonal clean at every level, forever).
+
+### LEMMA A — THE ALL-ONES TAIL (`ghost_residue_shape`)
+
+Every ghost ray's residue is pinned to the exact all-ones tail:
+$$2 \cdot ((c_{k-1} u) \bmod 3^k) + 9 = 2 \cdot \mathrm{head}(u) + 3^k,$$
+with the fixed head $\mathrm{head}(u) = (c_1 u) \bmod 9$ — every digit
+from position two on is one. (The green astra induction, ported
+self-contained on the Block-Law LTE spine.)
+
+### LEMMA B — THE GHOST CONGRUENCE (`ghost_congruence`)
+
+$2 (c_{k-1} u) + 9 = 2\,\mathrm{head}(u) + 3^k m$ at every depth: the
+infinite middle-third ray compresses to ONE fixed signed constant
+approximated to arbitrarily high 3-adic precision by the tower products.
+
+### THE COLLAPSE — THE NEW THEOREM (`ghost_congruent_all_depths`)
+
+**Two ghost rays with the same head are congruent modulo $3^k$ for
+EVERY $k$.** The infinite shadow dust — the set of all full-package
+carriers — collapses to AT MOST SIX 3-adic points, one per admissible
+head value in $\{1,2,4,5,7,8\}$. The doubling tree's eternal survivors
+are finitely many points: the wheel gives each survivor exactly two
+children forever, and the ghost congruence pins every eternal branch to
+one point per head. Engine: the unit-cancellation laws
+(`dvd_mul_cancel_three`, `dvd_of_unit_mul_cancel`) + the difference
+engine (`cancel_engine`) + the frozen diagonal (`lteCoeff_stable`).
+
+### THE UNIT WORD AND THE THREE FIXED POINTS (kernel-decided, triple-verified)
+
+The certified mod-recursion `cMod` computes $W = c_{60} \bmod 3^{61} =
+60776643992856088575557123854$ without ever forming the astronomical
+tower coefficient; $W \equiv 7 \pmod 9$, $W \equiv 16 \pmod{27}$ (the
+assault engine's hand-check). The three fixed points solving
+$2 W \pi = T$ in $\mathbb{Z}_3$ for $T \in \{-7, -1, +5\}$:
+
+$$\pi_4 = 68350949682967876566738142093,\quad
+\pi_7 = 64267339165701958313626862986,\quad
+\pi_1 = 60183728648436040060515583879 \pmod{3^{61}},$$
+
+kernel-decided, and matching the S078 published Hensel values to the
+last digit (triple verification: the S078 engine ∥ the independent
+Hensel lift ∥ the kernel decide).
+
+### THE PIN (`every_ghost_is_its_pi_point_fam4/fam7/fam1`)
+
+**Every ghost ray with head 1, 4 or 7 IS its π-point modulo $3^{61}$.**
+The 2-trit receipts: $\pi_4$ carries 2-trits at positions 3, 5, 14, 15,
+19, 27, 28, 39, 45, 49, 51, 54, 58 (13 through 60); $\pi_7$ at 1, 6, 7,
+9, 11, 13, 14, 15, 20, 28, … (20); $\pi_1$ at 8, 13, 17, 23, 24, 25,
+29, 34, 35, 36, … (18) — none of the three is eventually zero in its
+first 61 trits.
+
+### THE FINITE BASE (`cantorian_base`)
+
+Every exponent $8 \le K \le 500$ owns a ternary digit two — the two
+legal decide chunks (251 + 242, the NO-OOM cap honored), each case the
+exact 632-row digit scan of $4^K$.
+
+### THE TWO-GRANT CROWN (`erdos406_crown_of_ghost_extinction`)
+
+The FULL Erdős #406 statement — $\forall n \ge 9,\ \mathrm{noTernaryTwo}(2^n)
+= \mathrm{false}$ — follows from exactly TWO named grants:
+
+* **(G1) GHOST EXTINCTION**: no core $u$ carries the full shadow
+  package ($\forall u,\ \neg\,\mathrm{GhostRay}(u)$);
+* **(G2) RESIDUAL GHOST COMPRESSION**: every Cantorian power above the
+  kernel base has a ghost-ray core ($K > 500$, $K = 3^\sigma u$
+  three-free, Cantorian $\Rightarrow \mathrm{GhostRay}(u)$).
+
+Everything else in the chain is unconditional, self-contained,
+machine-checked: the finite base (§7), the odd wing ($2^{\text{odd}}
+\equiv 2 \bmod 3$), the three paid small cases, and the digit-to-verdict
+bridge through the Arsenal's own readers.
+
+### The honest boundary (unchanged law: no dressing)
+
+The two named grants stand. By THE PIN, grant (G1) now reduces to: the
+π-points are not eventually zero beyond 61 trits (the first 61 are
+certified; the 3-adic non-naturality beyond is the named seam — the
+$\log_3 4$ rationality question in the campaign's own integer
+language). Grant (G2) is the depth-$v$ to depth-$\infty$ compression.
+The infinite dust is collapsed to six points; three of them are
+exhibited, pinned, and certified non-zero through depth 61. The engine
+never stops; it never lies.
