@@ -106,7 +106,7 @@ theorem allT_true_iff {p : Nat → Bool} :
         · exact ih.1 h2 x hx'
       · intro h
         refine Bool.and_eq_true_iff.2 ⟨h a ?_, ih.2 ?_⟩
-        · exact h a (by simp)
+        · exact List.mem_cons_self a t
         · intro x hx
           exact h x (by simp [hx])
 
@@ -128,26 +128,16 @@ theorem memL_true_iff (x : Nat) :
   | cons b t ih =>
       by_cases hxb : x = b
       · subst hxb
+        simp [memL]
+      · have hd : decide (x = b) = false := by simp [hxb]
         constructor
-        · intro _
-          exact Or.inl rfl
-        · intro _
-          have h2 : (decide (b = b) || memL b t) = true := by
-            rw [decide_eq_true rfl]
-          exact h2
-      · constructor
         · intro h
-          have hd : decide (x = b) = false := by simp [hxb]
-          have h2 : (decide (x = b) || memL x t) = true := h
-          rw [hd] at h2
-          refine Or.inr (ih.1 h2)
+          rw [hd, Bool.false_or] at h
+          exact List.mem_cons_of_mem _ (ih.1 h)
         · intro hm
-          have hd : decide (x = b) = false := by simp [hxb]
-          rcases List.mem_cons.1 hm with hxb' | hx'
-          · exact absurd hxb' hxb
-          · have h2 : (decide (x = b) || memL x t) = true := by
-              rw [hd, ih.2 hx']
-            exact h2
+          rcases List.mem_cons.1 hm with hx' | hx'
+          · exact absurd hx' hxb
+          · rw [hd, ih.2 hx']
 
 /-- `true && x = true`-style conjunction eliminator (three conjuncts). -/
 theorem not_and3_true {A B C : Bool} (hA : A = true) (hB : B = true)
@@ -267,8 +257,8 @@ theorem isAPOfLengthFree_three {W : List Nat} (hmid : midFree3 W = true) :
   have hscan : ∀ x z m : ℕ, x ∈ W → z ∈ W → x < z → (x + z) % 2 = 0 →
       (x + z) / 2 = m → m ∈ W → False := by
     intro x z m hx hz hlt heven hdiv hm
-    have hx' := allT_true_iff.1 hmid x hx
-    have hz' := allT_true_iff.1 hx' z hz
+    have hx' := (allT_true_iff _).1 hmid x hx
+    have hz' := (allT_true_iff _).1 hx' z hz
     refine not_and3_true (decide_eq_true hlt) (decide_eq_true heven) ?_ hz'
     rw [hdiv]
     exact memL_true_iff _ _ |>.2 hm
@@ -300,10 +290,10 @@ theorem isAPOfLengthFree_four {W : List Nat} (h4 : k4Free W = true) :
   have hscan : ∀ w x y z : ℕ, w ∈ W → x ∈ W → y ∈ W → z ∈ W →
       2 * x = w + y → 2 * y = x + z → w ≠ z → False := by
     intro w x y z hw hx hy hz h1 h2 hne
-    have hw' := allT_true_iff.1 h4 w hw
-    have hx' := allT_true_iff.1 hw' x hx
-    have hy' := allT_true_iff.1 hx' y hy
-    have hz' := allT_true_iff.1 hy' z hz
+    have hw' := (allT_true_iff _).1 h4 w hw
+    have hx' := (allT_true_iff _).1 hw' x hx
+    have hy' := (allT_true_iff _).1 hx' y hy
+    have hz' := (allT_true_iff _).1 hy' z hz
     exact not_and3_true (decide_eq_true h1) (decide_eq_true h2)
       (decide_eq_true hne) hz'
   exact (hscan a (a + d) (a + 2 * d) (a + 3 * d) e0 e1 e2 e3
@@ -335,11 +325,11 @@ theorem isAPOfLengthFree_five {W : List Nat} (h5 : k5Free W = true) :
   have hscan : ∀ u p q v s : ℕ, u ∈ W → p ∈ W → q ∈ W → v ∈ W → s ∈ W →
       2 * p = u + q → 2 * q = p + v → 2 * v = q + s → u ≠ s → False := by
     intro u p q v s hu hp hq hv hs h1 h2 h3 hne
-    have hu' := allT_true_iff.1 h5 u hu
-    have hp' := allT_true_iff.1 hu' p hp
-    have hq' := allT_true_iff.1 hp' q hq
-    have hv' := allT_true_iff.1 hq' v hv
-    have hs' := allT_true_iff.1 hv' s hs
+    have hu' := (allT_true_iff _).1 h5 u hu
+    have hp' := (allT_true_iff _).1 hu' p hp
+    have hq' := (allT_true_iff _).1 hp' q hq
+    have hv' := (allT_true_iff _).1 hq' v hv
+    have hs' := (allT_true_iff _).1 hv' s hs
     exact not_and4_true (decide_eq_true h1) (decide_eq_true h2)
       (decide_eq_true h3) (decide_eq_true hne) hs'
   exact (hscan a (a + d) (a + 2 * d) (a + 3 * d) (a + 4 * d) e0 e1 e2 e3 e4
@@ -355,7 +345,7 @@ theorem subset_Icc_of_inRange {W : List Nat} {N : Nat}
     (h : inRange W N = true) : W.toFinset ⊆ Finset.Icc 1 N := by
   intro x hx
   have hxW : x ∈ W := List.mem_toFinset.1 hx
-  have hpair := allT_true_iff.1 h x hxW
+  have hpair := (allT_true_iff _).1 h x hxW
   obtain ⟨h1, h2⟩ := Bool.and_eq_true_iff.1 hpair
   exact Finset.mem_Icc.2 ⟨of_decide_eq_true h1, of_decide_eq_true h2⟩
 

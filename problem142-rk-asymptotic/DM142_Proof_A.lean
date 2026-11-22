@@ -92,7 +92,7 @@ theorem allT_true_iff {p : Nat → Bool} :
         · exact ih.1 h2 x hx'
       · intro h
         refine Bool.and_eq_true_iff.2 ⟨h a ?_, ih.2 ?_⟩
-        · exact h a (by simp)
+        · exact List.mem_cons_self a t
         · intro x hx
           exact h x (by simp [hx])
 
@@ -114,26 +114,16 @@ theorem memL_true_iff (x : Nat) :
   | cons b t ih =>
       by_cases hxb : x = b
       · subst hxb
+        simp [memL]
+      · have hd : decide (x = b) = false := by simp [hxb]
         constructor
-        · intro _
-          exact Or.inl rfl
-        · intro _
-          have h2 : (decide (b = b) || memL b t) = true := by
-            rw [decide_eq_true rfl]
-          exact h2
-      · constructor
         · intro h
-          have hd : decide (x = b) = false := by simp [hxb]
-          have h2 : (decide (x = b) || memL x t) = true := h
-          rw [hd] at h2
-          refine Or.inr (ih.1 h2)
+          rw [hd, Bool.false_or] at h
+          exact List.mem_cons_of_mem _ (ih.1 h)
         · intro hm
-          have hd : decide (x = b) = false := by simp [hxb]
-          rcases List.mem_cons.1 hm with hxb' | hx'
-          · exact absurd hxb' hxb
-          · have h2 : (decide (x = b) || memL x t) = true := by
-              rw [hd, ih.2 hx']
-            exact h2
+          rcases List.mem_cons.1 hm with hx' | hx'
+          · exact absurd hx' hxb
+          · rw [hd, ih.2 hx']
 
 theorem not_and2_true {A B : Bool} (hA : A = true) (hB : B = true)
     (h : !(A && B) = true) : False := by
@@ -225,7 +215,7 @@ theorem apFree_of_pairscan {W : List Nat} {k : ℕ} (hk : 2 ≤ k)
   obtain ⟨a, d, hset⟩ := Set.IsAPOfLength.eq ht
   have hcard : ENat.card t = ((k : ℕ) : ENat) := ht.card
   have hd : d ≠ 0 := by
-    refine apDiff_ne_zero (by omega) hset hcard ?_
+    refine apDiff_ne_zero (a := a) (by omega) hset hcard ?_
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
@@ -235,11 +225,15 @@ theorem apFree_of_pairscan {W : List Nat} {k : ℕ} (hk : 2 ≤ k)
     rw [hset]
     exact ⟨i, coe_lt_coe_k hi, by rw [nsmul_nat]⟩
   -- the pair (a, a+d) is in W, in order
-  have e0 : a ∈ W := mem_of_memFinsetCoe (hmem 0 (by omega)) hts
-  have e1 : a + d ∈ W := mem_of_memFinsetCoe (hmem 1 (by omega)) hts
+  have h0 := hmem 0 (by omega)
+  rw [Nat.zero_mul, Nat.add_zero] at h0
+  have e0 : a ∈ W := mem_of_memFinsetCoe h0 hts
+  have h1' := hmem 1 (by omega)
+  rw [Nat.one_mul] at h1'
+  have e1 : a + d ∈ W := mem_of_memFinsetCoe h1' hts
   have hlt : a < a + d := by omega
   -- the scan says its inner conjunction is false: some i ∈ [2,k) misses W
-  have hpair := allT_true_iff.1 (allT_true_iff.1 hscan a e0) (a + d) e1
+  have hpair := (allT_true_iff _).1 ((allT_true_iff _).1 hscan a e0) (a + d) e1
   have hfalse : !(decide (a < a + d) && innerScan k a (a + d) W) = true :=
     hpair
   rw [decide_eq_true hlt] at hfalse
@@ -285,7 +279,7 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
   obtain ⟨a, d, hset⟩ := Set.IsAPOfLength.eq ht
   have hcard : ENat.card t = (((k + 1 : ℕ) : ENat)) := ht.card
   have hd : d ≠ 0 := by
-    refine apDiff_ne_zero (by omega) hset hcard ?_
+    refine apDiff_ne_zero (a := a) (by omega) hset hcard ?_
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
@@ -297,7 +291,7 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
     rintro y ⟨n, hn, hy⟩
     rw [hset]
     refine ⟨n, ?_, by rw [hy, nsmul_nat]⟩
-    exact lt_of_lt_of_le' hn (by exact_mod_cast (Nat.le_succ k))
+    exact lt_of_lt_of_le hn (by exact_mod_cast (Nat.le_succ k))
   have hu_mem : ∀ i : ℕ, i < k → a + i * d ∈ u := by
     intro i hi
     refine ⟨i, coe_lt_coe_k hi, by rw [nsmul_nat]⟩
@@ -305,9 +299,7 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
   -- injectivity of n ↦ a + n•d (d ≠ 0)
   have hu_inj : ∀ m n : ℕ, m < k → n < k → a + m * d = a + n * d → m = n := by
     intro m n hm hn heq
-    have : m * d = n * d := by
-      have := Nat.add_right_cancel heq
-      exact this
+    have hmn : m * d = n * d := Nat.add_left_cancel heq
     by_contra hne
     rcases lt_or_gt_of_ne hne with h | h
     · have hlt : m * d < n * d := Nat.mul_lt_mul_of_pos_right h (by omega)
@@ -319,10 +311,12 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
     have h1 : u = (fun n : ℕ => a + n * d) '' (↑(Finset.range k) : Set ℕ) := by
       apply Set.eq_of_subset_of_subset
       · rintro y ⟨n, hn, hy⟩
-        exact ⟨n, by simp [show ((n : ℕ) : ENat) < ((k : ℕ) : ENat) from hn],
+        exact ⟨n, by
+            have hn' : n < k := ENat.natCast_lt_natCast.1 hn
+            simp [hn'],
           by rw [hy, nsmul_nat]⟩
       · rintro y ⟨n, hn, hy⟩
-        refine ⟨n, coe_lt_coe_k (by simpa using hn), by rw [hy, nsmul_nat]⟩
+        refine ⟨n, coe_lt_coe_k (by simpa using hn), by rw [← hy, nsmul_nat]⟩
     have h2 : u = (↑((Finset.range k).image (fun n : ℕ => a + n * d)) : Set ℕ) := by
       rw [h1, Finset.coe_image]
     show u.encard = ((k : ℕ) : ENat)
@@ -331,15 +325,15 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
         intro m hm n hn heq
         exact hu_inj m n (by simpa using hm) (by simpa using hn) heq),
       Finset.card_range]
-    exact_mod_cast rfl
   have hu_ap : u.IsAPOfLength ((k : ℕ) : ENat) := by
     refine ⟨a, d, hu_card, ?_⟩
-    apply Subset.antisymm
+    apply Set.Subset.antisymm
     · rintro y ⟨n, hn, hy⟩
       exact ⟨n, hn, by rw [hy, nsmul_nat]⟩
     · rintro y ⟨n, hn, hy⟩
       exact ⟨n, hn, by rw [hy, nsmul_nat]⟩
-  have := hs u (hu_subset.trans hts) hu_ap
+  have htop := hs u (hu_subset.trans hts) hu_ap
+  have hkc : k ≤ 1 := ENat.natCast_le_natCast.1 htop
   omega
 
 /-- **LAW M-1 (the monotonicity ladder).** For k ≠ 1:
@@ -347,7 +341,11 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
 theorem r_mono {k N : ℕ} (hk : k ≠ 1) : r k N ≤ r (k + 1) N := by
   by_cases hk0 : k = 0
   · subst hk0
-    rw [Set.IsAPOfLengthFree.maxCard_zero, Set.IsAPOfLengthFree.maxCard_one]
+    have e0 : r 0 N = N := Set.IsAPOfLengthFree.maxCard_zero N
+    have e1 : r (0 + 1) N = N := by
+      rw [Nat.zero_add]
+      exact Set.IsAPOfLengthFree.maxCard_one N
+    rw [e0, e1]
   · have hk2 : 2 ≤ k := by omega
     simp only [Set.IsAPOfLengthFree.maxCard]
     refine csSup_le_csSup' ?_ ?_
@@ -375,9 +373,8 @@ theorem r_mono_unrestricted_false :
       have hsub : t ⊆ ({1} : Set ℕ) := by
         intro y hy
         have hy1 : y ∈ (↑({1} : Finset ℕ) : Set ℕ) := hts hy
-        have hy2 : y ∈ ({1} : Set ℕ) := Finset.mem_coe.1 hy1
-        have : y = 1 := (Set.mem_singleton_iff.1 hy2)
-        rw [this]
+        simp only [Finset.mem_coe, Finset.mem_singleton] at hy1
+        rw [hy1]
         simp
       have hc0 : t.encard = ((2 : ℕ) : ENat) := ht.card
       have hc1 : t.encard ≤ ({1} : Set ℕ).encard := Set.encard_le_encard hsub
@@ -392,7 +389,7 @@ theorem r_mono_unrestricted_false :
       have h2' : 2 ≤ S.card := by omega
       obtain ⟨x, hx⟩ : ∃ x, x ∈ S := by
         by_contra hempty
-        have hS0 : S = ∅ := Finset.eq_empty_iff_forall_not_mem.2 hempty
+        have hS0 : S = ∅ := Finset.eq_empty_iff_forall_notMem.2 hempty
         rw [hS0] at hgt
         omega
       obtain ⟨y, hy, hxy⟩ : ∃ y ∈ S, y ≠ x := by
@@ -401,25 +398,30 @@ theorem r_mono_unrestricted_false :
         have hSx : S ⊆ {x} := by
           intro z hz
           by_contra hzx
-          exact hno z hz hzx
+          exact hzx (by rw [hno z hz]; simp)
         have : S.card ≤ 1 := le_trans (Finset.card_mono hSx) (by simp)
         omega
       have hxy' : x ≠ y := fun h => hxy h.symm
       -- {x, y} ⊆ ↑S is a 2-AP: the vendored pair lemma
       have hpair : ({x, y} : Set ℕ).IsAPOfLength ((2 : ℕ) : ENat) := by
         rcases Nat.lt_or_ge x y with hlt | hge
-        · exact ⟨x, y - x, Set.isAPOfLengthWith_pair hlt⟩
-        · exact ⟨y, x - y, Set.isAPOfLengthWith_pair (Ne.symm hxy')⟩
+        · exact ⟨x, y - x, Nat.isAPOfLengthWith_pair hlt⟩
+        · exact ⟨y, x - y,
+            Nat.isAPOfLengthWith_pair (lt_of_le_of_ne hge (Ne.symm hxy'))⟩
       have hsub : ({x, y} : Set ℕ) ⊆ (↑S : Set ℕ) := by
         intro z hz
-        rcases Set.mem_pair.1 hz with rfl | rfl
+        simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz
+        rcases hz with rfl | rfl | hfalse
         · exact Finset.mem_coe.2 hx
         · exact Finset.mem_coe.2 hy
+        · exact absurd hfalse (by simp)
       have := hSfree {x, y} hsub hpair
       have : (2 : ℕ) ≤ 1 := by exact_mod_cast this
       omega
-  have := h 1 2
-  rw [h1] at this
+  have h3 : (2:ℕ) ≤ r 2 2 := by
+    have h4 := h 1 2
+    rw [h1] at h4
+    exact h4
   omega
 
 /-! ## §3 The stone builders -/
@@ -432,7 +434,7 @@ theorem subset_Icc_of_inRange {W : List Nat} {N : Nat}
     (h : inRange W N = true) : W.toFinset ⊆ Finset.Icc 1 N := by
   intro x hx
   have hxW : x ∈ W := List.mem_toFinset.1 hx
-  have hpair := allT_true_iff.1 h x hxW
+  have hpair := (allT_true_iff _).1 h x hxW
   obtain ⟨h1, h2⟩ := Bool.and_eq_true_iff.1 hpair
   exact Finset.mem_Icc.2 ⟨of_decide_eq_true h1, of_decide_eq_true h2⟩
 
@@ -545,7 +547,8 @@ theorem dm142a_board :
     19 ≤ r 3 61 ∧ 16 ≤ r 3 48 ∧ 22 ≤ r 4 42 ∧ 36 ≤ r 5 55 ∧
     31 ≤ r 6 43 ∧ 36 ≤ r 7 45 ∧
     (∀ k N : ℕ, k ≠ 1 → r k N ≤ r (k + 1) N) :=
-  ⟨r3_61_ge, r3_48_ge, r4_42_ge, r5_55_ge, r6_43_ge, r7_45_ge, r_mono⟩
+  ⟨r3_61_ge, r3_48_ge, r4_42_ge, r5_55_ge, r6_43_ge, r7_45_ge,
+    fun k N hk => r_mono hk⟩
 
 #print axioms DM142A.r_mono
 #print axioms DM142A.r_mono_unrestricted_false
