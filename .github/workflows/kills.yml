@@ -3,6 +3,7 @@ on:
   push:
     branches: ['**']
     paths:
+      - FC/**
       - comparator-official/**
       - bulldoze/problem271-stanley-a2/StanleyA2.lean
       - bulldoze/problem404-padic-kernel/KernelLaw.lean
@@ -65,6 +66,33 @@ on:
 permissions:
   contents: read
 jobs:
+  kernel-fc:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel FC — W82 THE OFFICIAL-STATEMENT FOUNDATION: the vendored DeepMind formal-conjectures definitions (google-deepmind/formal-conjectures @ 2207c54d, module syntax stripped, declarations byte-identical: Set.IsAPOfLengthFree.maxCard, NonTrilinear, ConvexIndep, HasConvexNGon, Triplewise, pathGraph) + the three OFFICIAL statement files with verbatim anchors (DM107 f_zero_eq / convexIndep_triple_of_not_collinear / f_three_eq — if these compile unchanged the vendored definitions are certified faithful)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernelfc.log
+          lake env lean problem61-erdos-hajnal/DM61_Official.lean 2>&1 | tee -a kernelfc.log
+          lake env lean problem142-rk-asymptotic/DM142_Official.lean 2>&1 | tee -a kernelfc.log
+          lake env lean problem107-happy-ending/DM107_Official.lean 2>&1 | tee -a kernelfc.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelfc.log
+          grep -F "DM61_STATEMENTS_GREEN" kernelfc.log
+          grep -F "DM142_STATEMENTS_GREEN" kernelfc.log
+          grep -F "DM107_ANCHORS_GREEN" kernelfc.log
+          echo KERNEL_FC_OFFICIAL_FOUNDATION_GREEN=1
+
   kernel-a:
     runs-on: ubuntu-24.04
     steps:

@@ -16,3 +16,11 @@ rev = "v4.33.0-rc2"
 [[lean_lib]]
 name = "Arsenal"
 globs = ["Arsenal.+"]
+
+# The vendored OFFICIAL DeepMind formal-conjectures definitions (W82):
+# google-deepmind/formal-conjectures @ 2207c54d, module-system syntax
+# stripped, declarations byte-identical. These carry the official
+# definitions behind the DM_61/DM_107/DM_142 challenge statements.
+[[lean_lib]]
+name = "FC"
+globs = ["FC.+"]
