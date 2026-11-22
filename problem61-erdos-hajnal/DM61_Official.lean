@@ -9,9 +9,11 @@ Transformation (provenance-recorded, statement-preserving ONLY):
 - module-system syntax stripped (`module`, `public import` -> `import`,
   `@[expose] public section` removed, `@[category …]` attribute lines
   removed — attributes are metadata, not statement content).
-- `FormalConjecturesUtil` import replaced by `Mathlib` +
-  the vendored FC definitions (`FC.Combinatorics.SimpleGraph.PathGraph`
-  provides `pathGraph`, referenced-but-undefined in the upstream file).
+- `FormalConjecturesUtil` import replaced by `Mathlib` (Mathlib
+  v4.33.0-rc2 provides `SimpleGraph.pathGraph` and `SimpleGraph.cycleGraph`
+  in `Mathlib.Combinatorics.SimpleGraph.CycleGraph` — verified on CI in
+  W82; the upstream FC file references `pathGraph`, which resolves to
+  Mathlib's own definition here).
 
 This file carries the OFFICIAL DEFINITION `IsErdosHajnalLowerBound` verbatim
 and the OFFICIAL TARGET STATEMENTS verbatim (as spec text). Proof kernels
@@ -19,7 +21,6 @@ and the OFFICIAL TARGET STATEMENTS verbatim (as spec text). Proof kernels
 statement signature and a complete proof — no sorry, no hidden hypotheses.
 -/
 import Mathlib
-import FC.Combinatorics.SimpleGraph.PathGraph
 
 /-!
 # Erdős Problem 61 -- Erdős–Hajnal Conjecture
