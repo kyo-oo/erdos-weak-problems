@@ -94,6 +94,7 @@ jobs:
           echo KERNEL_FC_OFFICIAL_FOUNDATION_GREEN=1
 
   kernel-107dm-a:
+  kernel-61dm-a:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -118,6 +119,17 @@ jobs:
           grep -F "DM107A_NONEMPTY_CARDSET_GREEN" kernel107dma.log
           grep -E "'Erdos107.nonempty_cardSet' (does not depend on any axioms|depends on axioms)" kernel107dma.log
           echo KERNEL_107DM_A_GREEN=1
+      - name: "Kernel 61DM-A — W82 THE OFFICIAL-FORM FAMILY THEOREM: erdos_61_family at c=1/4 over the official IsErdosHajnalLowerBound predicate (verbatim DeepMind @ 2207c54d) for K1, K2, Kbar2, K3, Kbar3, P3, Pbar3 — the complement transfer + the no-copy ladder (CliqueFree 3, no-edge, closed-neighborhood clique) + the greedy core (maximal independent set, Turán domination) + the sqrt-vs-rpow finisher; Arsenal bridge: CardinalWorlds.two_pow_pos [:420] + two_pow_ge2 [:431] via arsenal_threshold; P4 honestly NOT claimed (Seinsche continuation named in the worklog)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel61dma.log
+          lake env lean problem61-erdos-hajnal/DM61_Proof_A.lean 2>&1 | tee -a kernel61dma.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dma.log
+          grep -F "DM61A_FAMILY_GREEN" kernel61dma.log
+          grep -E "'Erdos61A.erdos_61_family' (does not depend on any axioms|depends on axioms)" kernel61dma.log
+          ! grep -E "'Erdos61A.erdos_61_family'.*sorryAx" kernel61dma.log
+          echo KERNEL_61DM_A_GREEN=1
 
   kernel-a:
     runs-on: ubuntu-24.04
