@@ -420,7 +420,8 @@ theorem r_mono_unrestricted_false :
           have hw := Nat.isAPOfLengthWith_pair hyx
           have hset : ({y, x} : Set ℕ) = ({x, y} : Set ℕ) := by
             ext z
-            simp
+            simp only [Set.mem_insert_iff, Set.mem_singleton_iff]
+            tauto
           rw [hset] at hw
           exact ⟨y, x - y, hw⟩
       have hsub : ({x, y} : Set ℕ) ⊆ (↑S : Set ℕ) := by
