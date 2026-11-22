@@ -54,3 +54,20 @@ misses ≥ 1 point per block.
 3. The `rintro ... rfl` maxCard-family destructuring — green-verbatim.
 
 The engine never stops; it never lies. In English, always.
+
+## REPAIR R1 (run 45065271636 post-mortem, 7 defects fixed)
+
+1. zero-case `Nat.card_Icc` omega after auto-rfl close — dropped the omega.
+2. §3 hcu: the `rw [hcover]` SELF-REFERENCE (the equation's RHS contains S —
+   rw looped the goal into the union-intersected form) — replaced by
+   `congrArg Finset.card hcover` + a safe pattern-rewrite of the leading
+   `S.card` only.
+3. §4 hcu: the same fix.
+4. u_gen_zero: `csSup_le` takes a NONEMPTY witness (the green
+   r_mono_unrestricted_false pattern ⟨1, ⟨{1}, hsub, hfree, rfl⟩⟩), not a
+   BddAbove pair — mirrored verbatim.
+5. r_kk_ge: the maxCard unification needed the card equation FIRST
+   (h1 : k−1 = (Ico 1 k).card via Nat.card_Ico.symm, then rw + exact).
+6. The Arsenal call: `mul_add_div_lemma` is ROOT-namespace (the file has no
+   namespace declarations; DM142A's header prose was never a call site).
+7. dm142c_board: the hN argument was dropped in the lambda — passed.

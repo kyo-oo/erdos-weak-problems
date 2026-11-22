@@ -173,7 +173,7 @@ theorem window_union_bound (k : ℕ) (hk : 2 ≤ k) :
   | zero =>
       intro S hfree hsub
       rw [Nat.zero_mul] at hsub ⊢
-      have hcard0 : (Finset.Icc 1 0).card = 0 := by rw [Nat.card_Icc]; omega
+      have hcard0 : (Finset.Icc 1 0).card = 0 := by rw [Nat.card_Icc]
       have h0 : S.card ≤ (Finset.Icc 1 0).card := Finset.card_mono hsub
       omega
   | succ q ih =>
@@ -196,7 +196,11 @@ theorem window_union_bound (k : ℕ) (hk : 2 ≤ k) :
           · exact hxS
       have hcu : S.card ≤ (S ∩ Finset.Icc 1 (q * k)).card +
           (S ∩ Finset.Icc (q * k + 1) (q * k + k)).card := by
-        rw [hcover]
+        have hcardeq : S.card =
+            ((S ∩ Finset.Icc 1 (q * k)) ∪
+              (S ∩ Finset.Icc (q * k + 1) (q * k + k))).card :=
+          congrArg Finset.card hcover
+        rw [hcardeq]
         exact Finset.card_union_le _ _
       have hA : (S ∩ Finset.Icc 1 (q * k)).card ≤ q * (k - 1) :=
         ih (S ∩ Finset.Icc 1 (q * k)) (apFree_coe_inter_left S _ hfree)
@@ -240,7 +244,10 @@ theorem core_bound (k N : ℕ) (hk : 2 ≤ k) (S : Finset ℕ)
       · exact hxS
   have hcu : S.card ≤ (S ∩ Finset.Icc 1 p).card +
       (S ∩ Finset.Icc (p + 1) N).card := by
-    rw [hcover]
+    have hcardeq : S.card =
+        ((S ∩ Finset.Icc 1 p) ∪ (S ∩ Finset.Icc (p + 1) N)).card :=
+      congrArg Finset.card hcover
+    rw [hcardeq]
     exact Finset.card_union_le _ _
   have hA : (S ∩ Finset.Icc 1 p).card ≤ N / k * (k - 1) := by
     have hpe : Finset.Icc 1 p = Finset.Icc 1 (N / k * k) := by rw [hp]
@@ -267,9 +274,22 @@ Derived in WORKLOG_W80_142U.md event 3 (D3), engine-validated 56/56
 theorem u_gen_zero (k N : ℕ) (hk : 3 ≤ k) (hN : 1 ≤ N) :
     r k N ≤ N - N / k := by
   simp only [Set.IsAPOfLengthFree.maxCard]
-  refine csSup_le ⟨(Finset.Icc 1 N).card, mem_upperBounds.2 ?_⟩ ?_
-  · rintro n ⟨T, hTsub, -, rfl⟩
-    exact Finset.card_mono hTsub
+  refine csSup_le ⟨(1 : ℕ), ⟨({1} : Finset ℕ), ?_, ?_, rfl⟩⟩ ?_
+  · intro z hz
+    simp only [Finset.mem_singleton] at hz
+    rw [hz]
+    simp only [Finset.mem_Icc]
+    omega
+  · intro t hts ht
+    have hcardt : ENat.card t = ((k : ℕ) : ENat) := ht.card
+    have hsub : t ⊆ ({1} : Set ℕ) := hts
+    have hle : t.encard ≤ ({1} : Set ℕ).encard := Set.encard_le_encard hsub
+    rw [Set.encard_singleton] at hle
+    have hcardt' : t.encard = ((k : ℕ) : ENat) := hcardt
+    have hbad : ((k : ℕ) : ENat) ≤ ((1 : ℕ) : ENat) := by
+      rw [← hcardt']; exact hle
+    have hfin : k ≤ 1 := by exact_mod_cast hbad
+    omega
   · rintro n ⟨S, hSsub, hSfree, rfl⟩
     exact core_bound k N (by omega) S hSsub hSfree
 
@@ -278,11 +298,8 @@ theorem u_gen_zero (k N : ℕ) (hk : 3 ≤ k) (hN : 1 ≤ N) :
 /-- The lower witness at N = k: {1, …, k−1} is k-AP-free (a k-AP has
 cardinality k — it cannot fit in a set of cardinality k − 1). -/
 theorem r_kk_ge (k : ℕ) (hk : 3 ≤ k) : k - 1 ≤ r k k := by
-  refine maxCard_ge_of_witness (Finset.Ico 1 k) ?_ ?_
-  · intro x hx
-    simp only [Finset.mem_Ico, Finset.mem_Icc] at hx ⊢
-    omega
-  · intro t hts ht
+  have hfree : (↑(Finset.Ico 1 k) : Set ℕ).IsAPOfLengthFree ((k : ℕ) : ENat) := by
+    intro t hts ht
     have hcardt : ENat.card t = ((k : ℕ) : ENat) := ht.card
     have hle : t.encard ≤ (↑(Finset.Ico 1 k) : Set ℕ).encard :=
       Set.encard_le_encard hts
@@ -292,6 +309,13 @@ theorem r_kk_ge (k : ℕ) (hk : 3 ≤ k) : k - 1 ≤ r k k := by
       rw [← hcardt']; exact hle
     have hfin : k ≤ k - 1 := by exact_mod_cast hbad
     exact absurd hfin (by omega)
+  have hsub : Finset.Ico 1 k ⊆ Finset.Icc 1 k := by
+    intro x hx
+    simp only [Finset.mem_Ico, Finset.mem_Icc] at hx ⊢
+    omega
+  have h1 : k - 1 = (Finset.Ico 1 k).card := (Nat.card_Ico 1 k).symm
+  rw [h1]
+  exact maxCard_ge_of_witness (Finset.Ico 1 k) hsub hfree
 
 /-- **U-GEN-0 TIGHT AT N = k.** For k ≥ 3: `r k k = k − 1`. The ≤ side
 is U-GEN-0 at N = k (with `k / k = 1` via the Arsenal block-count lemma
@@ -301,7 +325,7 @@ theorem u_gen_zero_tight (k : ℕ) (hk : 3 ≤ k) : r k k = k - 1 := by
   apply le_antisymm
   · have hle := u_gen_zero k k hk (by omega)
     have hkk : k / k = 1 := by
-      have h1 := Arsenal.CardinalWorlds.mul_add_div_lemma 1 0 k (by omega)
+      have h1 := mul_add_div_lemma 1 0 k (by omega)
       rw [Nat.mul_one, Nat.add_zero, Nat.zero_div, Nat.add_zero] at h1
       exact h1
     rw [hkk] at hle
@@ -313,7 +337,7 @@ theorem u_gen_zero_tight (k : ℕ) (hk : 3 ≤ k) : r k k = k - 1 := by
 theorem dm142c_board :
     (∀ k N : ℕ, 3 ≤ k → 1 ≤ N → r k N ≤ N - N / k) ∧
     (∀ k : ℕ, 3 ≤ k → r k k = k - 1) :=
-  ⟨fun k N hk _ => u_gen_zero k N hk, fun k hk => u_gen_zero_tight k hk⟩
+  ⟨fun k N hk hN => u_gen_zero k N hk hN, fun k hk => u_gen_zero_tight k hk⟩
 
 #print axioms DM142C.window_isAP
 #print axioms DM142C.window_bound
