@@ -5225,3 +5225,52 @@ whole board: kernel-dm-w82 (all six DM steps now expected GREEN), the
 three gates, kernel-75 (the S083 lane), and the standing board.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S083 — THE W83 CLOSE: ALL SIX DM KERNELS GREEN — THE THREE FRONTS CLOSED (2026-11-22, run 45036892102)
+
+**THE VERDICT (GitHub Actions, run 45036892102 @ f281e43, job
+kernel-dm-w82 COMPLETED SUCCESS):**
+
+| step | theorem | axioms |
+|---|---|---|
+| 107DM-A | `Erdos107.nonempty_cardSet` (∀ n ≥ 3, the official solved variant) | [propext, Classical.choice, Quot.sound] |
+| 107DM-B | `Erdos107.ersz_upper` (f n ≤ C(2n−4,n−2)+1, ALL n ≥ 3, official defs) | [propext, Classical.choice, Quot.sound] |
+| 61DM-A | `Erdos61A.erdos_61_family` (K1, K2, K̄2, K3, K̄3, P3, P̄3 at c = 1/4 over the official IsErdosHajnalLowerBound) | [propext, Classical.choice, Quot.sound] |
+| 61DM-B | `Erdos61B.erdos_61_family` + the closure map (the honest ledger) | [propext, Classical.choice, Quot.sound] |
+| 142DM-A | `DM142A.r_mono` + `r_mono_unrestricted_false` + `apFree_of_pairscan` + six witness stones + the board | [propext, Classical.choice, Quot.sound] |
+| 142DM-B | 19 decide-certified lower stones over the official r (k=3/4/5 ladders) + `DM142B.dm142b_board` | [propext, Classical.choice, Quot.sound] |
+
+ALL FOUR OFFICIAL GATES GREEN on the same run: gate-61-official,
+gate-107-official, gate-142-official, gate-406-official — the official
+DeepMind comparator verdicts ("YOUR SOLUTION IS OKAY") on every lane.
+
+**THE WAR (12 CI rounds, runs 45017357264 → 45036892102, each post-mortem
+feeding the next repair):** the W82 kernels were written blind against an
+older Mathlib API. The repair forged the verified v4.33.0-rc2 playbook
+(Mathlib sources pulled from the tag and read directly — no guessing):
+`G.irrefl` (loopless is a Std.Irrefl field), G-first `mem_neighborFinset`,
+`notMem_empty`, iff-form `mem_biUnion`, inequality card lemmas via le_trans,
+REVERSED `Real.rpow_mul`, `csSup_le_csSup'` (the 2-arg sibling),
+`Bool.and_eq_true_iff` (and_eq_true is a Prop-Eq at this pin), root-namespace
+Arsenal citations, `open Filter`, ᶜ-parenthesization, the rcases-rfl
+variable-elimination trap, beta-redex bridges (beta_reduce / typed-haves),
+the `) W` lambda-close-then-list tail order, the `!(...) = true`
+binder-position decide-wrap trap (Bool.not explicit), the OfNat-vs-natCast
+literal discipline, and `exact`-cannot-leave-?_ (refine). Two REAL math
+defects were caught and fixed on the way: the comap-complement identity was
+stated backwards (((Gᶜ).comap g)ᶜ = (G.comap g)ᶜ is FALSE; the correct
+induced-complement identity is ((Gᶜ).comap g)ᶜ = G.comap g at injective g),
+and the r_mono_unrestricted_false statement carried an unclosed paren.
+
+**The honest frontier (unchanged, now with everything closed that closes):**
+#142 — the official-r law family (monotonicity + the honesty counterexample +
+the general reflection lemma + 25 witness stones); the asymptotic formula
+(the official open core) claimed by no one. #61 — the official-form family
+floor at c = 1/4 + the closure map; P4/K5/E5/substitution derived, the W83
+kernel targets; the general erdos_61 and erha89/bnss23/p5/c5 not claimed.
+#107 — nonempty_cardSet + ersz_upper over the official defs; the lower side
+2^(n−2)+1 ≤ f n and the full conjecture f(n) = 2^(n−2}+1 open.
+
+The engine never stops; it never lies. In English, always.
