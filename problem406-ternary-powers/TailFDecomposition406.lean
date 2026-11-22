@@ -355,9 +355,8 @@ theorem digit3_of_residue_two (R p : Nat) (hp1 : 1 ≤ p)
     unfold digit3
     have hp : 0 < (3:Nat)^p := Nat.pow_pos (by decide)
     rw [show (1:Nat) + 2 * 3^p = 1 + 3^p * 2 from by ring]
-    rw [Nat.add_mul_div_left 1 (2 : Nat) hp,
-        Nat.div_eq_of_lt (by omega : (1:Nat) < 3^p), Nat.add_zero,
-        Nat.mul_mod]
+    rw [Nat.add_mul_div_left _ _ hp,
+        Nat.div_eq_of_lt (by omega : (1:Nat) < 3^p), Nat.add_zero]
     omega
   rw [hcongr, hzero]
 
@@ -926,8 +925,7 @@ theorem carry4_lt_four (R p : Nat) : carry4 R p < 4 := by
     Nat.mul_le_mul_left _ h4
   have hcomb := Nat.le_trans hle (Nat.le_add_right _ _)
   rw [← hdm] at hcomb
-  have hlt : 4 * (R % 3^p) < 4 * 3^p :=
-    Nat.mul_lt_mul_of_le_of_lt (Nat.le_refl 4) hmod (by decide)
+  have hlt : 4 * (R % 3^p) < 4 * 3^p := by omega
   have hmul : 4 * 3^p = 3^p * 4 := by ring
   omega
 
