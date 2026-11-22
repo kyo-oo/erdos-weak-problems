@@ -656,26 +656,31 @@ def cMod : Nat → Nat → Nat
       let c := cMod k s
       (c + 3^(s+1) * c^2 + 3^(2*s+1) * c^3) % 3^k
 
-/-- Congruence respects addition. -/
+/-- Congruence respects addition (hardened: explicit lemma applications —
+the double-rw form re-matches the outer term under the W82 Mathlib). -/
 theorem mod_add_congr (k a b c d : Nat) (h1 : a % k = b % k)
     (h2 : c % k = d % k) : (a + c) % k = (b + d) % k := by
-  rw [Nat.add_mod, Nat.add_mod, h1, h2]
+  calc (a + c) % k = ((a % k) + (c % k)) % k := Nat.add_mod a c k
+    _ = ((b % k) + (d % k)) % k := by rw [h1, h2]
+    _ = (b + d) % k := (Nat.add_mod b d k).symm
 
-/-- Congruence respects multiplication. -/
+/-- Congruence respects multiplication (hardened the same way). -/
 theorem mod_mul_congr (k a b c d : Nat) (h1 : a % k = b % k)
     (h2 : c % k = d % k) : (a * c) % k = (b * d) % k := by
-  rw [Nat.mul_mod, Nat.mul_mod, h1, h2]
+  calc (a * c) % k = ((a % k) * (c % k)) % k := Nat.mul_mod a c k
+    _ = ((b % k) * (d % k)) % k := by rw [h1, h2]
+    _ = (b * d) % k := (Nat.mul_mod b d k).symm
 
-/-- Congruence respects powers. -/
+/-- Congruence respects powers (hardened: explicit pow_succ shapes). -/
 theorem mod_pow_congr (k : Nat) : ∀ (n a b : Nat), a % k = b % k →
     (a^n) % k = (b^n) % k
   | 0, a, b, _ => by simp
   | n+1, a, b, h => by
       have ih := mod_pow_congr k n a b h
-      have hstep : a^(n+1) % k = b^(n+1) % k := by
-        rw [Nat.pow_succ, Nat.pow_succ]
-        exact mod_mul_congr k (a * a^n) (b * b^n) a b ih h
-      exact hstep
+      have pa : a^(n+1) = a * a^n := Nat.pow_succ a n
+      have pb : b^(n+1) = b * b^n := Nat.pow_succ b n
+      rw [pa, pb]
+      exact mod_mul_congr k (a * a^n) (b * b^n) a b ih h
 
 theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
   | 0 => by
