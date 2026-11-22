@@ -16,7 +16,15 @@ BOSS arsenal as the proof machinery, on GitHub CI.
 | `Geometry/Metric.lean` | `FormalConjecturesForMathlib/Geometry/Metric.lean` | dependency of `Geometry.2d` |
 | `Geometry/TwoD.lean` | `FormalConjecturesForMathlib/Geometry/2d.lean` (module renamed `2d` → `TwoD`; `2d` is not a valid Lean module identifier) | `ℝ²`, `NonTrilinear`, `ConvexIndep`, `HasConvexNGon` — the #107 official definitions |
 | `Combinatorics/AP/Basic.lean` | `FormalConjecturesForMathlib/Combinatorics/AP/Basic.lean` | `Set.IsAPOfLength`, `Set.IsAPOfLengthFree`, `Set.IsAPOfLengthFree.maxCard` — the official `r_k(N)` of #142 |
-| `Combinatorics/SimpleGraph/PathGraph.lean` | **NEW** (documented addition) | `pathGraph n` — referenced by the official `erdos_61.variants.p5` but defined nowhere (verified: absent from Mathlib v4.33.0-rc2 AND from `FormalConjecturesForMathlib` at 2207c54d); provided canonically in the style of `SimpleGraph.cycleGraph` |
+
+Note on `pathGraph` (W82 CI verdict): the upstream `erdos_61.variants.p5`
+references `pathGraph`, which I initially vendored as a new definition —
+the first kernel-fc CI run proved Mathlib v4.33.0-rc2 ALREADY declares
+`SimpleGraph.pathGraph` (in `Mathlib.Combinatorics.SimpleGraph.CycleGraph`).
+The vendored duplicate was DELETED (commit: the kernel-fc repair); the
+official statement resolves against Mathlib's own definition. No vendored
+graph-theory definitions remain — `FC/` carries only the AP and geometry
+files above.
 
 ## Transformation law (statement-preserving only)
 
