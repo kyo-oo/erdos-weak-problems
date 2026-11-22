@@ -262,13 +262,14 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     Finset.card_biUnion_le
   have hcard2 : Fintype.card α = (Finset.univ : Finset α).card := by simp
   have hsum : ∑ w ∈ s, (G.neighborFinset w).card ≤ s.card * (D - 1) := by
-    refine le_trans (Finset.sum_le_sum ?_) ?_
-    · intro w hws
-      have hb := hbnd w
-      rw [Finset.card_insert_of_notMem
-        (fun hmem => G.irrefl ((G.mem_neighborFinset w w).mp hmem))] at hb
-      omega
-    · rw [Finset.sum_const, smul_eq_mul]
+    have h1 : ∑ w ∈ s, (G.neighborFinset w).card ≤ ∑ w ∈ s, (D - 1) :=
+      Finset.sum_le_sum (fun w _ => by
+        have hb := hbnd w
+        rw [Finset.card_insert_of_notMem
+          (fun hmem => G.irrefl ((G.mem_neighborFinset w w).mp hmem))] at hb
+        omega)
+    refine le_trans h1 ?_
+    rw [Finset.sum_const, smul_eq_mul]
   have hfinal : Fintype.card α ≤ s.card + s.card * (D - 1) := by omega
   have hD'' : D * s.card = s.card + s.card * (D - 1) := by
     have hsucc : Nat.succ (D - 1) = D := by omega
@@ -321,19 +322,20 @@ theorem le_sqrt_pow_four {n : ℕ} (hn : 4 ≤ n) : n ≤ (Nat.sqrt n) ^ 4 := by
 /-- The real finisher: `(n : ℝ)^(1/4) ≤ Nat.sqrt n` for `n ≥ 4`. -/
 theorem rpow_quarter_le_sqrt {n : ℕ} (hn : 4 ≤ n) :
     (n : ℝ) ^ ((1:ℝ) / 4) ≤ (Nat.sqrt n : ℝ) := by
-  have hkey : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ 4 := by
-    exact_mod_cast le_sqrt_pow_four hn
   have hx : (0:ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) := by positivity
-  have h1 : (n : ℝ) ^ ((1:ℝ)/4)
-      ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ ((4:ℝ))) ^ ((1:ℝ)/4) := by
-    refine Real.rpow_le_rpow (by positivity) ?_ (by positivity)
+  have hkey : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℕ):ℝ)) := by
+    have h0 : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ (4:ℕ) := by
+      exact_mod_cast le_sqrt_pow_four hn
     rw [Real.rpow_natCast]
-    exact hkey
+    exact h0
+  have h1 : (n : ℝ) ^ ((1:ℝ)/4)
+      ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℕ):ℝ))) ^ ((1:ℝ)/4) :=
+    Real.rpow_le_rpow (by positivity) hkey (by positivity)
   refine le_trans h1 ?_
-  have h2 : (((Nat.sqrt n : ℕ) : ℝ) ^ ((4:ℝ))) ^ ((1:ℝ)/4)
-      = ((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℝ) * ((1:ℝ)/4))) :=
-    (Real.rpow_mul hx 4 ((1:ℝ)/4)).symm
-  have h3 : ((4:ℝ) * ((1:ℝ)/4)) = 1 := by ring
+  have h2 : (((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℕ):ℝ))) ^ ((1:ℝ)/4)
+      = ((Nat.sqrt n : ℕ) : ℝ) ^ ((((4:ℕ):ℝ) * ((1:ℝ)/4))) :=
+    (Real.rpow_mul hx ((4:ℕ):ℝ) ((1:ℝ)/4)).symm
+  have h3 : (((4:ℕ):ℝ) * ((1:ℝ)/4)) = 1 := by ring
   rw [h3] at h2
   rw [h2, Real.rpow_one]
 
@@ -587,8 +589,8 @@ theorem eh_K1 : IsErdosHajnalLowerBound (⊥ : SimpleGraph (Fin 1))
   ext a b
   have hab : a = b := Subsingleton.elim a b
   subst hab
-  simp only [SimpleGraph.bot_adj, SimpleGraph.comap_adj, iff_false]
-  exact fun h => G.irrefl h
+  simp only [SimpleGraph.bot_adj, SimpleGraph.comap_adj]
+  exact iff_of_false (fun h => h) G.irrefl
 
 /-! ## §6 THE BOARD -/
 
