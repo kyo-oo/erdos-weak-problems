@@ -93,6 +93,32 @@ jobs:
           grep -F "DM107_ANCHORS_GREEN" kernelfc.log
           echo KERNEL_FC_OFFICIAL_FOUNDATION_GREEN=1
 
+  kernel-107dm-a:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 107DM-A — W82 KILL A: the OFFICIAL DeepMind formal-conjectures solved variant of Erdős #107 (happy ending): theorem Erdos107.nonempty_cardSet : ∀ n ≥ 3, (cardSet n).Nonempty over the vendored FC.Geometry.TwoD definitions — a port of the formal_proof cited upstream (linrock/math-proofs @ cd3cf0b176e95209584bf35555a7c0e501255f6e, erdos-107): horizontal-shear reduction to distinct x-coordinates, x-sorting bridge, the Erdős–Szekeres 1935 cup–cap Pascal-splitting pigeonhole induction with witness N = C(2n−4, n−2)+1 ∈ cardSet n, and all-triple cup/cap ConvexIndep via strict half-plane separation. BOSS's arsenal imported and cited by file:line (ErdosTernary2.lt_three_cases :16; CardinalWorlds two_pow_pos :420, two_pow_ge2 :431, two_pow_factored :425). Complete proof: zero sorry, zero native_decide."
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel107dma.log
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel107dma.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107dma.log
+          lake env lean problem107-happy-ending/DM107_Proof_A.lean 2>&1 | tee -a kernel107dma.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107dma.log
+          grep -F "DM107A_NONEMPTY_CARDSET_GREEN" kernel107dma.log
+          grep -E "'Erdos107.nonempty_cardSet' (does not depend on any axioms|depends on axioms)" kernel107dma.log
+          echo KERNEL_107DM_A_GREEN=1
+
   kernel-a:
     runs-on: ubuntu-24.04
     steps:
