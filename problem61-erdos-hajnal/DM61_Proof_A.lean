@@ -153,8 +153,13 @@ theorem cliqueFree3_of_no_induced {n : ℕ} {G : SimpleGraph (Fin n)}
       intro heq
       exact hij (e.injective (Subtype.ext heq))
     exact hs.isClique (by simp [hmem_i]) (by simp [hmem_j]) hne
-  exact hG ⟨(Finset.subtype s).comp (e.toEmbedding),
-    top_comap_of_pairwise ((Finset.subtype s).comp (e.toEmbedding)) hadj⟩
+  have hcoeinj : Function.Injective (fun i : Fin 3 => (e i : Fin n)) := by
+    intro i j hij
+    apply e.injective
+    exact Subtype.ext hij
+  refine hG ⟨⟨fun i => (e i : Fin n), hcoeinj⟩, ?_⟩
+  apply top_comap_of_pairwise
+  exact hadj
 
 /-- No induced `K2` copy implies no edges at all. -/
 theorem no_edge_of_no_induced_K2 {n : ℕ} {G : SimpleGraph (Fin n)}
@@ -180,11 +185,11 @@ theorem closedNbhd_clique_of_no_induced_P3 {n : ℕ} {G : SimpleGraph (Fin n)}
   have hA : a = v ∨ G.Adj v a := by
     rcases ha with h | h
     · exact Or.inl h
-    · exact Or.inr (SimpleGraph.mem_neighborFinset v a |>.mp h)
+    · exact Or.inr ((G.mem_neighborFinset v a).mp h)
   have hB : b = v ∨ G.Adj v b := by
     rcases hb with h | h
     · exact Or.inl h
-    · exact Or.inr (SimpleGraph.mem_neighborFinset v b |>.mp h)
+    · exact Or.inr ((G.mem_neighborFinset v b).mp h)
   rcases hA with ha1 | ha2 <;> rcases hB with hb1 | hb2
   · exact absurd (ha1.trans hb1.symm) hab
   · rw [ha1]; exact hb2
@@ -252,7 +257,8 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     by_cases hvs : v ∈ s
     · exact Finset.mem_union_left _ hvs
     · obtain ⟨w, hws, hvw⟩ := hdom v hvs
-      exact Finset.mem_union_right _ (Finset.mem_biUnion.mpr ⟨w, hws, hvw⟩)
+      exact Finset.mem_union_right _
+        (Finset.mem_biUnion.mpr ⟨w, hws, (G.mem_neighborFinset w v).mpr (G.adj_symm hvw)⟩)
   have hcard1 := Finset.card_le_card hcover
   have hu : (s ∪ s.biUnion (fun w => G.neighborFinset w)).card
       ≤ s.card + (s.biUnion (fun w => G.neighborFinset w)).card :=
@@ -262,13 +268,14 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     Finset.card_biUnion_le
   have hcard2 : Fintype.card α = (Finset.univ : Finset α).card := by simp
   have hsum : ∑ w ∈ s, (G.neighborFinset w).card ≤ s.card * (D - 1) := by
-    refine le_trans (Finset.sum_le_sum ?_) ?_
-    · intro w hws
-      have hb := hbnd w
-      rw [Finset.card_insert_of_notMem
-        (fun hmem => G.irrefl ((SimpleGraph.mem_neighborFinset w w).mp hmem))] at hb
-      omega
-    · rw [Finset.sum_const, smul_eq_mul]
+    have h1 : ∑ w ∈ s, (G.neighborFinset w).card ≤ ∑ w ∈ s, (D - 1) :=
+      Finset.sum_le_sum (fun w _ => by
+        have hb := hbnd w
+        rw [Finset.card_insert_of_notMem
+          (fun hmem => G.irrefl ((G.mem_neighborFinset w w).mp hmem))] at hb
+        omega)
+    refine le_trans h1 ?_
+    rw [Finset.sum_const, smul_eq_mul]
   have hfinal : Fintype.card α ≤ s.card + s.card * (D - 1) := by omega
   have hD'' : D * s.card = s.card + s.card * (D - 1) := by
     have hsucc : Nat.succ (D - 1) = D := by omega
@@ -287,7 +294,8 @@ signatures read at those lines — read-before-cite). -/
 theorem arsenal_threshold : (0:ℕ) < 4 ∧ 2 ≤ 4 := by
   have h1 : (0:ℕ) < 2^2 := two_pow_pos 2
   have h2 : (2:ℕ) ≤ 2^2 := two_pow_ge2 2 (by norm_num)
-  norm_num at h1 h2
+  have e : (2:ℕ)^2 = 4 := by decide
+  rw [e] at h1 h2
   exact ⟨h1, h2⟩
 
 /-- For `n ≥ 4`: `n ≤ (Nat.sqrt n) ^ 4` (via `n < (s+1)² ≤ (s·s)²`, `s ≥ 2`). -/
@@ -320,14 +328,22 @@ theorem le_sqrt_pow_four {n : ℕ} (hn : 4 ≤ n) : n ≤ (Nat.sqrt n) ^ 4 := by
 /-- The real finisher: `(n : ℝ)^(1/4) ≤ Nat.sqrt n` for `n ≥ 4`. -/
 theorem rpow_quarter_le_sqrt {n : ℕ} (hn : 4 ≤ n) :
     (n : ℝ) ^ ((1:ℝ) / 4) ≤ (Nat.sqrt n : ℝ) := by
-  have hkey : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ 4 := by
-    exact_mod_cast le_sqrt_pow_four hn
-  have h1 : (n : ℝ) ^ ((1:ℝ)/4) ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ 4) ^ ((1:ℝ)/4) :=
+  have hx : (0:ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) := by positivity
+  have hkey : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℕ):ℝ)) := by
+    have h0 : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ (4:ℕ) := by
+      exact_mod_cast le_sqrt_pow_four hn
+    rw [Real.rpow_natCast]
+    exact h0
+  have h1 : (n : ℝ) ^ ((1:ℝ)/4)
+      ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℕ):ℝ))) ^ ((1:ℝ)/4) :=
     Real.rpow_le_rpow (by positivity) hkey (by positivity)
   refine le_trans h1 ?_
-  have hx : (0:ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) := by positivity
-  rw [(Real.rpow_mul hx 4 ((1:ℝ)/4)).symm,
-    show ((4:ℝ) * ((1:ℝ)/4)) = 1 by ring, Real.rpow_one]
+  have h2 : (((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℕ):ℝ))) ^ ((1:ℝ)/4)
+      = ((Nat.sqrt n : ℕ) : ℝ) ^ ((((4:ℕ):ℝ) * ((1:ℝ)/4))) :=
+    (Real.rpow_mul hx ((4:ℕ):ℝ) ((1:ℝ)/4)).symm
+  have h3 : (((4:ℕ):ℝ) * ((1:ℝ)/4)) = 1 := by ring
+  rw [h3] at h2
+  rw [h2, Real.rpow_one]
 
 /-! ## §5 THE FAMILY LAWS -/
 
@@ -346,26 +362,24 @@ theorem isEH_compl {H : SimpleGraph α} {f : ℕ → ℝ}
   have hGc : ¬∃ g : α ↪ Fin n, H = (Gᶜ).comap g := by
     rintro ⟨g, hg⟩
     refine hG ⟨g, ?_⟩
-    -- H = (Gᶜ).comap g ⟹ Hᶜ = (G.comap g)ᶜ ⟹ H = G.comap g
-    have hcoe : ((Gᶜ).comap g)ᶜ = (G.comap g)ᶜ := by
+    -- H = (Gᶜ).comap g ⟹ Hᶜ = ((Gᶜ).comap g)ᶜ = G.comap g (the induced
+    -- complement identity at injective g): contradiction with hG
+    have hcoe : ((Gᶜ).comap g)ᶜ = G.comap g := by
       ext x y
       by_cases hxy : x = y
       · subst hxy
-        simp [SimpleGraph.compl_adj, SimpleGraph.comap_adj, G.irrefl]
+        exact iff_of_false (by simp [SimpleGraph.compl_adj, SimpleGraph.comap_adj]) G.irrefl
       · simp only [SimpleGraph.compl_adj, SimpleGraph.comap_adj]
         have hginj : g x ≠ g y := fun heq => hxy (g.injective heq)
         constructor
         · rintro ⟨_, hne⟩
-          exact ⟨hxy, fun ha => hne ⟨hginj, ha⟩⟩
-        · rintro ⟨_, hne⟩
-          exact ⟨hxy, fun hp => hne hp.2⟩
+          by_contra hna
+          exact hne ⟨hginj, hna⟩
+        · intro hadj
+          exact ⟨hxy, fun hp => hp.2 hadj⟩
     have h1 : Hᶜ = ((Gᶜ).comap g)ᶜ := by rw [hg]
     rw [hcoe] at h1
-    have h2 : H = G.comap g := by
-      have h3 := congrArg (fun X : SimpleGraph (Fin n) => Xᶜ) h1
-      simp only [compl_compl] at h3
-      exact h3
-    exact h2
+    exact h1
   have happ := hN n hn Gᶜ hGc
   rw [SimpleGraph.indepNum_compl] at happ
   have hcl : Gᶜ.cliqueNum = G.indepNum := by
@@ -374,8 +388,8 @@ theorem isEH_compl {H : SimpleGraph α} {f : ℕ → ℝ}
     exact h.symm
   rw [hcl] at happ
   rcases happ with h' | h'
-  · exact hcon.2 h'
-  · exact hcon.1 h'
+  · linarith
+  · linarith
 
 /-- The dichotomy finisher: `indepNum` or `cliqueNum` ≥ `Nat.sqrt n`
 implies the official bound at `c = 1/4` (for `n ≥ 4`). -/
@@ -394,12 +408,11 @@ theorem eh_K2 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 2))
   refine ⟨4, ?_⟩
   intro n hn G hG
   have hno := no_edge_of_no_induced_K2 hG
-  left
   have hindep : G.IsIndepSet ↑(Finset.univ : Finset (Fin n)) := by
     intro a _ b _ _
     exact hno a b
-  have hle := (G.IsIndepSet.card_le_indepNum (t := (Finset.univ : Finset (Fin n)))
-    (tc := hindep))
+  have hle := (SimpleGraph.IsIndepSet.card_le_indepNum
+    (t := (Finset.univ : Finset (Fin n))) (tc := hindep))
   have hcard : (Finset.univ : Finset (Fin n)).card = n := by simp
   rw [hcard] at hle
   have hsqrt : Nat.sqrt n ≤ n := Nat.sqrt_le_self n
@@ -447,14 +460,14 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
           intro x hx y hy hxy
           have hx3 := hmem3 x hx
           have hy3 := hmem3 y hy
-          rcases hx3 with hx1 | hx1 <;> rcases hy3 with hy1 | hy1
+          rcases hx3 with hx1 | hx1 | hx1 <;> rcases hy3 with hy1 | hy1 | hy1
           · exact absurd (hx1.trans hy1.symm) hxy
           · rw [hx1, hy1]; exact hva
           · rw [hx1, hy1]; exact hvb
-          · rw [hy1]; exact G.adj_symm hva
+          · rw [hx1, hy1]; exact G.adj_symm hva
           · exact absurd (hx1.trans hy1.symm) hxy
           · rw [hx1, hy1]; exact hadj
-          · rw [hy1]; exact G.adj_symm hvb
+          · rw [hx1, hy1]; exact G.adj_symm hvb
           · rw [hx1, hy1]; exact G.adj_symm hadj
           · exact absurd (hx1.trans hy1.symm) hxy
         , by
@@ -477,20 +490,20 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
             Finset.card_insert_of_notMem h3b]
           simp⟩
       exact hcf _ h3
-    have hle := (G.IsIndepSet.card_le_indepNum (t := G.neighborFinset v)
+    have hle := (SimpleGraph.IsIndepSet.card_le_indepNum (t := G.neighborFinset v)
       (tc := hindep))
     exact official_bound_of_sqrt hn (Or.inl (le_trans hv hle))
   · push_neg at hA
     have hbnd : ∀ v : Fin n, (insert v (G.neighborFinset v)).card ≤ Nat.sqrt n := by
       intro v
       rw [Finset.card_insert_of_notMem
-        (fun hmem => G.irrefl ((SimpleGraph.mem_neighborFinset v v).mp hmem))]
+        (fun hmem => G.irrefl ((G.mem_neighborFinset v v).mp hmem))]
       have := hA v
       omega
-    obtain ⟨s, hsindep, hcount⟩ := exists_isIndepSet_mul_ge G (Nat.sqrt n)
+    obtain ⟨s, hsindep, hcount⟩ := exists_isIndepSet_mul_ge G (D := Nat.sqrt n)
       (by omega) hbnd
     have hcardn : Fintype.card (Fin n) = n := by simp
-    have hle := (G.IsIndepSet.card_le_indepNum (t := s) (tc := hsindep))
+    have hle := (SimpleGraph.IsIndepSet.card_le_indepNum (t := s) (tc := hsindep))
     have hsq : Nat.sqrt n * Nat.sqrt n ≤ n := Nat.sqrt_le n
     have halpha : Nat.sqrt n ≤ G.indepNum := by
       by_contra hlt
@@ -503,7 +516,10 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
             = Nat.sqrt n * Nat.sqrt n := by
           rw [← Nat.mul_add, he]
         omega
-      have h3 : n ≤ Nat.sqrt n * s.card := by rw [← hcardn]; exact hcount
+      have h3 : n ≤ Nat.sqrt n * s.card := by
+        have hc := hcount
+        rw [hcardn] at hc
+        exact hc
       have h4' : Nat.sqrt n * s.card ≤ Nat.sqrt n * G.indepNum :=
         Nat.mul_le_mul_left _ hle
       omega
@@ -530,16 +546,16 @@ theorem eh_P3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3)
   · obtain ⟨v, hv⟩ := hA
     have hclique : G.IsClique ↑(insert v (G.neighborFinset v)) :=
       closedNbhd_clique_of_no_induced_P3 hG v
-    have hle := (G.IsClique.card_le_cliqueNum (t := insert v (G.neighborFinset v))
-      (tc := hclique))
+    have hle := (SimpleGraph.IsClique.card_le_cliqueNum
+      (t := insert v (G.neighborFinset v)) (tc := hclique))
     exact official_bound_of_sqrt hn (Or.inr (le_trans hv hle))
   · push_neg at hA
     have hbnd : ∀ v : Fin n, (insert v (G.neighborFinset v)).card ≤ Nat.sqrt n :=
-      fun v => (Nat.not_le.mp (hA v)).le
-    obtain ⟨s, hsindep, hcount⟩ := exists_isIndepSet_mul_ge G (Nat.sqrt n)
+      fun v => (hA v).le
+    obtain ⟨s, hsindep, hcount⟩ := exists_isIndepSet_mul_ge G (D := Nat.sqrt n)
       (by omega) hbnd
     have hcardn : Fintype.card (Fin n) = n := by simp
-    have hle := (G.IsIndepSet.card_le_indepNum (t := s) (tc := hsindep))
+    have hle := (SimpleGraph.IsIndepSet.card_le_indepNum (t := s) (tc := hsindep))
     have hsq : Nat.sqrt n * Nat.sqrt n ≤ n := Nat.sqrt_le n
     have halpha : Nat.sqrt n ≤ G.indepNum := by
       by_contra hlt
@@ -552,7 +568,10 @@ theorem eh_P3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3)
             = Nat.sqrt n * Nat.sqrt n := by
           rw [← Nat.mul_add, he]
         omega
-      have h3 : n ≤ Nat.sqrt n * s.card := by rw [← hcardn]; exact hcount
+      have h3 : n ≤ Nat.sqrt n * s.card := by
+        have hc := hcount
+        rw [hcardn] at hc
+        exact hc
       have h4' : Nat.sqrt n * s.card ≤ Nat.sqrt n * G.indepNum :=
         Nat.mul_le_mul_left _ hle
       omega
@@ -569,15 +588,15 @@ theorem eh_K1 : IsErdosHajnalLowerBound (⊥ : SimpleGraph (Fin 1))
   rw [IsErdosHajnalLowerBound, Filter.eventually_atTop]
   refine ⟨4, ?_⟩
   intro n hn G hG
-  have hemb : Fin 1 ↪ Fin n := ⟨fun _ => 0, by
+  have hemb : Fin 1 ↪ Fin n := ⟨fun _ => ⟨0, by omega⟩, by
     intro a b _
     exact Subsingleton.elim a b⟩
-  refine hG ⟨hemb, ?_⟩
+  refine (hG ⟨hemb, ?_⟩).elim
   ext a b
   have hab : a = b := Subsingleton.elim a b
   subst hab
-  simp only [SimpleGraph.bot_adj, SimpleGraph.comap_adj, iff_false]
-  exact fun h => G.irrefl h
+  simp only [SimpleGraph.bot_adj, SimpleGraph.comap_adj]
+  exact iff_of_false (fun h => h) G.irrefl
 
 /-! ## §6 THE BOARD -/
 
