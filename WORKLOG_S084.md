@@ -173,3 +173,47 @@ machine-checked: the base, the riders, the observers, the compression
 law, the six-adic skew, the paradox wall, the crown.
 
 The engine never stops; it never lies.
+
+## F. THE CI WAR (the five-kill mystery, live-recorded)
+
+The 406 lane's first full sequence attempt uncovered a five-kill
+pattern: the kernel-74 step's compile dies with an EXTERNAL runner
+shutdown (exit 143, "runner received a shutdown signal") at 2-10
+minutes in — on fresh jobs and old jobs alike — while every sibling
+job (including the 80-minute kernel-b walk and kernel-a's heavy
+decides) stays green.  The war log:
+
+1. **Kill #1** (run 45065391314, 20:18→20:51): kernel-b at the 74
+   step, 4 min into the compile.  Blamed the parallel push (wrong).
+2. **Kills #2-#3** (45067958662 at 21:25, 45065395346 at ~22:15):
+   same signature, 7-10 min in.  Spot-eviction theory formed.
+3. **THE EVICTION SHIELD** (r4): kernel-b split into kernel-b /
+   kernel-406a / kernel-406b / kernel-406c — the never-compiled trio
+   (74/75/76) got a dedicated fresh job.  kernel-406a GREEN instantly.
+4. **Kill #4** (fresh kernel-406b job, 10 min old): the spot-eviction
+   theory died — a 10-minute-old VM is not spot-recalled.
+5. **THE INSTRUMENTATION** (r5/r6): 66 checkpoints injected — the
+   first round proved #eval output is BLOCK-BUFFERED and dies
+   unflushed with the killed process (the checkpoints ran but their
+   output went to the grave); replaced with message-channel
+   `#print axioms` checkpoints + a 10-second memory sampler +
+   `timeout 600`.
+6. **Kill #5** (telemetrized): died at 5m02s — before ANY checkpoint
+   or the sampler output surfaced — the shutdown kills the job
+   process tree including the sampler.
+7. **THE CONTROL EXPERIMENT** (r7): a position-1 step compiling the
+   KNOWN-GREEN kernel-73 file — void on first attempt (my insertion
+   bug: the control ran BEFORE the Lean install, exit 127 cascade;
+   fixed in r8, rerunning).
+
+**The board the control will decide:** control GREEN + 74 dead = the
+PiCollapse file is a memory bomb (the elaborator grows unbounded on
+one declaration) and the next round bisects the file; control dead =
+the kernel-406b job allocation is cursed and the job is recreated
+under a new name.
+
+## G. THE HONEST BOUNDARY (updated)
+
+Kernel 76's mathematics stands (battery 44/44); its first compile is
+gated behind the 74/75 sequence.  The two grants stand in their
+monolith language.  The engine never stops; it never lies.
