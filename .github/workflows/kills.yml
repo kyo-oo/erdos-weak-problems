@@ -212,6 +212,30 @@ jobs:
           ! grep -E "'Erdos61D..*'.*sorryAx" kernel61dmd.log
           echo KERNEL_61DM_D_GREEN=1
 
+  kernel-61e-probe:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 61E-PROBE — the Mathlib v4.33 API surface survey for the Seinsche/P4 kernel (NEVER FAILS: the log is the receipt)"
+        shell: bash
+        run: |
+          set -uo pipefail
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee probe61e.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a probe61e.log
+          lake env lean problem61-erdos-hajnal/DM61_API_Probe.lean 2>&1 | tee -a probe61e.log || true
+          echo "=== PROBE ERROR COUNT: $(grep -c 'error:' probe61e.log || true) ==="
+          grep -E "error:|DM61E_PROBE_DONE" probe61e.log || true
+          echo KERNEL_61E_PROBE_COMPLETE=1
+
   kernel-a:
     runs-on: ubuntu-24.04
     steps:
