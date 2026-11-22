@@ -1248,6 +1248,43 @@ jobs:
           grep -E "rider_wall_v2' (does not depend on any axioms|depends on axioms)" kernel75.log
           python3 problem406-ternary-powers/battery406g.py
           echo ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN=1
+      - name: "Kernel 76 - Erdos 406 THE TAILF DECOMPOSITION KERNEL (S084, BOSS order 'invoke the maths skill v2 and its engine — my laws only, the complete theorem list mapped and used'): the monolith's terminal identity names the hypothesis exactly (erdos_even_conjecture_iff_tailF — the even statement and four_power_omega_shadow_wave_tailF are ONE object) and the monolith's own chamber decomposes the input into TWO named primitives — THIS KERNEL ports the full decomposition into the campaign language and drives every named weapon onto it: §1 THE OMEGA-CUT WORD (geoSum/omegaCutWord/omega_cut_factor: 4^(3^s*core) = 1 + 3^(s+1)*(lteCoeff s * geoSum s core), division-free port of the monolith's Ω-machinery, + the diagonal congruence cutword == diag*core mod 3^(s+1) + the prefix-slice digit transfer at EVERY depth) + §2 THE FULL OBSERVER (tower_digit_eq_cutword: digit3(4^(3^s*core))(s+1+q) = digit3(cutword) q — NO window bound, the monolith's window-limited observer extended to the ENTIRE deep tail; + digit_residue_fire_iff: digit = 2 iff residue in the top third, every depth at once) + §3 THE COMPRESSION LAW (cantorian_iff_cutword_clean: CantorianPower(3^s*core) IFF the cut word carries no ternary digit two at ANY position — the (G2) grant in its exact monolith language: the whole Cantorian hypothesis is ONE integer's digit-freeness) + §4 THE DECOMPOSITION (the monolith's omegaShadowTailF + tailF_row_primitive + tailF_tower_primitive stated in campaign language + tailF_of_row_and_tower: the two named primitives compose into the full second-observer input, machine-checked) + §5 THE SIX-ADIC GHOST SKEW (BOSS's six-adic machinery: six_adic_pair_saturation 6^k | 4^t*d when 3^k | d and k <= 2t — the dyadic burn + triadic shadow; lteCoeff_odd: every tower coefficient odd — the frozen diagonal is a dyadic unit; ghost_pair_collapse_of_congr: the ghost-pair collapse via triadic cancellation + unboundedness — an independent campaign proof of uniqueness) + §6 THE PARADOX WALL (the monolith's exact twelve-cell u-jump table kernel-decided + u_jump_happy_negative: Happy cells (digit 2, carry 0/3) jump STRICTLY NEGATIVE + u_jump_not_happy_nonneg: every non-Happy physical cell nonnegative + cantorian_jump_wall: a Cantorian power rides an ETERNALLY NON-NEGATIVE flux at every position + frozen_tail_jump_ten: beyond 3K+3 the wave is FROZEN at (0,0) with jump exactly TEN — the eternal-dodge fuel gauge + cantorian_paradox_wall receipt) + §7 THE CROWN V3 (erdos406_crown_v3: FULL #406 from (G1') ghost extinction on the rider sheet + (G2') compression in cut-word form — everything else unconditional: the census base both decide chunks, the rider's core law, the odd wing, the digit-to-verdict bridge) + battery406h.py 44/44 ALL GREEN (the cut factor dual-method incl. modular cross-checks, the diagonal, the full observer grid, the fire classifier 300 random, the compression law verdict-agreement grid, the row family's full 110-core fire census, the tower family fire + position consistency, the six-adic saturation 200 random + negative control, the depth-limited congruence mechanics, the jump table, the happy sign law on live waves 8..16, the frozen tail, the crown's small cases, W61/W100 byte-for-byte compatibility with kernels 74/75)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel76.log
+          lake env lean problem406-ternary-powers/TailFDecomposition406.lean 2>&1 | tee -a kernel76.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel76.log
+          grep -F "ERDOS406_TAILFDECOMPOSITION_KERNEL_GREEN" kernel76.log
+          grep -E "omega_cut_factor' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cutword_diag_congr' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cutword_one' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "prefix_slice_digit' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "tower_digit_eq_cutword' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "digit_residue_fire_iff' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "tower_fire_iff_full' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cantorian_iff_cutword_clean' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "tailF_of_row_and_tower' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "six_adic_pair_saturation' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "lteCoeff_odd' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "ghost_pair_collapse_of_congr' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "gst_u_jump_table' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "u_jump_happy_negative' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "u_jump_not_happy_nonneg' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "carry4_lt_four' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cell_not_happy_of_cantorian' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cantorian_jump_wall' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "pow4_succ_lt' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "frozen_tail_jump_ten' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cantorian_paradox_wall' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "cantorian_base' (does not depend on any axioms|depends on axioms)" kernel76.log
+          grep -E "erdos406_crown_v3' (does not depend on any axioms|depends on axioms)" kernel76.log
+          python3 problem406-ternary-powers/battery406h.py
+          echo ERDOS406_TAILFDECOMPOSITION_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash
