@@ -58,3 +58,45 @@ executed: **BOTH K5 AND E5 ARE IN LEAN** (DM61_Proof_D.lean).
    decide evaluates closed Nat.choose ✓ (computable).
 
 The engine never stops; it never lies. In English, always.
+
+## REPAIR R2 (run 45071141985 post-mortem, 9 defects fixed — the S085 commander strike)
+
+1. 119:45 `rw [← Nat.pow_add]` auto-closed via rfl (2+8 kernel-reduces to 10) — the
+   trailing `norm_num` had no goals; DROPPED it.
+2. 225:4 / 402:12 — `simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx hy`
+   made NO progress on Finset-coe membership (`↑({a,b} : Finset)` is not a Set
+   insert); replaced with the VERIFIED Finset route `Finset.mem_coe,
+   Finset.mem_insert, Finset.mem_singleton` (the combo CI-verified at lines 257/332
+   of this very file).
+3. LATENT (behind the 225 abort): both `{a,b}` branch ladders rewrote only ONE of
+   x/y (`rw [hxa]` left `G.Adj a y` against `hab : G.Adj a b`); now
+   `rw [hxa, hyb]` in all four branches (two_clique + the s=2 base).
+4. 293:23 — THE MATH DEFECT: `indep_extend` was FALSE as stated (v ∈ B with
+   ⟨v⟩ ∈ I breaks the card claim: insert v (image I) collapses). Added the
+   hypothesis `(hvnotB : v ∉ B)`; hvnot now: v ∈ image → ⟨x, hx1, hx2⟩ with
+   ↑x = v → `rw [← hx2]; exact x.2` → v ∈ B → contradiction. Caller updated
+   (hvnotinB: v ∉ univ \ insert v N(v) via mem_sdiff + mem_insert (Or.inl rfl)).
+5. 394:10 — `simpa using Nat.choose_succ_self_right (r-1)` simplified its own TYPE
+   to True (simp couldn't bridge (r-1)+1 = r without positivity); replaced by the
+   explicit `obtain ⟨r', rfl⟩ : ∃ r', r = r' + 1` + `rw [show r'+1-1 = r' by omega]`
+   + `exact Nat.choose_succ_self_right r'`.
+6. 425:51 — `lt_of_le_of_lt` argument-shape error (choose_pos gives STRICT `<`,
+   hcard gives `≤`); corrected to `Nat.lt_of_lt_of_le (Nat.choose_pos ...) hcard`
+   (0 < choose ≤ card → 0 < card).
+7. 511:4 — `Finset.exists_smaller_set` DOES NOT EXIST in Mathlib v4.33.0-rc2
+   (unknown constant); wrote the CUSTOM MODULE (BOSS-authorized):
+   `exists_subset_card_le` — Finset.induction_on, the m ≤ card split, the
+   m = S.card+1 branch via ih S.card + insert-extend. Call site replaced.
+8. 572:2 — `Nat.le_of_mul_le_mul_left hfin` missing the positivity argument
+   (signature takes (h : mul_le) (hk : 0 < k)); now
+   `Nat.le_of_mul_le_mul_left hfin (by norm_num)`.
+9. 616:19 — the third `by omega` proves `2 ≤ root5 n + 1` which needs the REAL
+   fact root5 n ≥ 1 (root5 n is an OPAQUE atom to omega); hoisted
+   `hr5pos : 1 ≤ root5 n` before the ladder call: root5 n = 0 →
+   root5_lt_succ_pow gives n < (0+1)^5 = 1 (norm_num) → contradiction with
+   hn : 1024 ≤ n. omega then closes with hr5pos in context.
+
+All nine from the run's log; the latent branch-ladder defects caught by
+commander audit BEFORE they cost a CI round. 142C: CI-GREEN on the same run
+(all 8 theorems axiom-clean [propext, Classical.choice, Quot.sound],
+DM142C_UGEN0_GREEN printed). The wall is 61D alone.
