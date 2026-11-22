@@ -1,117 +1,122 @@
 {
-  "problem": "erdoes-61",
-  "solution_id": "family-package-official-v1",
-  "provenance": "W72-61K (S071): FAMILY_PROOF.md complete-theorem package + engine61family.py 10/10 GREEN; W72-61C official gate on the fresh google-deepmind/funsearch clone @ cc53f27 (cyclic_graphs); the F7 family + tightness witnesses grounded in the CI-green kernel-61k (run 44136423582); 13 arsenal laws read, cited, and spot-verified",
-  "claims": [
-    {
-      "id": "C61-SL",
-      "statement": "Lemma SL (Seinsche): every P4-free graph on n >= 2 vertices is disconnected or its complement is disconnected.",
-      "verification": "engine SL (exhaustive n=2..6 — 6038 P4-free graphs — + 400 random cographs n<=24)"
-    },
-    {
-      "id": "C61-SEINCHE",
-      "statement": "Theorem S (Seinsche 1974, perfectness form): every P4-free graph is perfect (chi = omega); consequently alpha*omega >= n and max(alpha, omega) >= ceil(sqrt(n)) >= floor(sqrt(n)). The Erdos-Hajnal property holds for H = P4 with c = 1/2, and the exponent is optimal (the block witnesses).",
-      "verification": "engine SEINCHE (exhaustive chi/alpha/omega n=2..6 + 2500 random cographs n<=200 with tree-exact alpha/omega; TREE-CROSS validates the tree against B&B)"
-    },
-    {
-      "id": "C61-F7",
-      "statement": "Theorem F7: for every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3}, every H-free graph on n vertices has alpha or omega >= floor(sqrt(n)) — CI-green in Erdos61.lean (kernel-61k, run 44136423582).",
-      "verification": "engine F7-EXHAUSTIVE (all H-free graphs n<=6) + F7-RANDOM (150 structured random H-free graphs n<=50 per H) + the CI-green Lean kernel"
-    },
-    {
-      "id": "C61-TIGHT",
-      "statement": "Tightness: the m x m block graphs have alpha = omega = m = floor(sqrt(m^2)) — the 1/2-exponent is the exact boundary for the family; the dyadic family m = 2^j is the kernel's tight_family_arsenal.",
-      "verification": "engine TIGHT (B&B-exact alpha=omega=m for m=2,3,4,5,8; dyadic family j=1..5)"
-    },
-    {
-      "id": "C61-RAM",
-      "statement": "Theorem RAM (Erdos-Szekeres recursion): R(s,t) <= C(s+t-2, s-1); consequently K4-free and Kb4-free graphs satisfy the Erdos-Hajnal property with every c < 1/3 (e.g. c = 1/4, threshold N=256). [W74 audit: the earlier 'c = 1/3' overstated one step — C(t+2,3) = t(t+1)(t+2)/6 > t^3/6; the corrected chain in FAMILY_PROOF.md section 4 carries every c < 3^-1.]",
-      "verification": "full derivation in FAMILY_PROOF.md section 4 (vertex-degree split + induction on s+t); the degree-split ingredient (triangle-free neighborhoods independent, greedy alpha >= n/(Delta+1), P3-free closed neighborhoods cliques) engine-verified (DEGREE-LAWS)"
-    },
-    {
-      "id": "C61-INH",
-      "statement": "Theorem INH (inheritance): H induced in H' and EH(H', c) implies EH(H, c) — every H-free graph is H'-free.",
-      "verification": "full proof in FAMILY_PROOF.md section 5; engine MONO-M-style containment spot checks"
-    },
-    {
-      "id": "C61-SUB",
-      "statement": "The substitution stack (PROOF.md section 4, Theorems 4A/4B/4C, complete): transversal law, blow-up avoidance law, min-composition; the harmonic exponent f = c1*c2/(c1+c2) with exact balanced-split optimality; the k-level iteration F_k = (sum 1/c_i)^-1.",
-      "verification": "engine SUB (exact-rational harmonic identity; builder |V(H1[H2])| = ab; induced H1 by transversal + H2 in class for P3[P3], K2[K2]; K2[Kb2] = C4 avoids 2K2; 3-level composition identity)"
-    },
-    {
-      "id": "C61-OFFICIAL-CYCLIC",
-      "statement": "The official DeepMind cyclic_graphs evaluator (fresh clone @ cc53f27) reproduces its published discoveries: independent sets of size 81, 324, 1458 in C_9^3..C_9^5 (official cell-11 expected sizes, official cell-9 priority), 367 in C_7^5 (official cell-6 priority), 754 in C_11^4 (official cell-13 priority) — the official graph-independence machinery cross-certifying the campaign's engines on overlapping instances.",
-      "verification": "driver O-IMPORT-NOTEBOOK-FLOW + O-CYC7-5, O-CYC9-3, O-CYC9-4, O-CYC9-5, O-CYC11-4 (per-cell priority rebinding, verbatim official code)"
-    },
-    {
-      "id": "C61-CLAW",
-      "statement": "Theorem CLAW (W74, in-package): every claw-free graph (no induced K1,3) on n >= 1 vertices satisfies max(alpha, omega) >= (1/2)*n^(1/3). Proof: (1) N(v) has no independent 3-set (else induced claw) and no omega-clique (else +v is a bigger clique), so |N(v)| <= R(omega,3)-1 <= omega(omega+1)/2-1 < omega^2 by the elementary Ramsey bound R(t,3) <= t(t+1)/2; (2) Caro-Wei weak form alpha >= n/(dbar+1) > n/(omega^2+1); (3) case split at omega = n^(1/3). Hence H = K1,3 (claw) and, by complement transfer (complement of K3+K1 is K1,3, alpha/omega swap), H = K3+K1 satisfy the Erdos-Hajnal property with every c < 1/3. The in-package 4-vertex coverage grows from ten graphs to twelve.",
-      "verification": "full derivation in FAMILY_PROOF.md section 4.5 (Theorem CLAW, zero premises); driver S-CLAW (line graphs of random graphs + clique unions + filtered randoms all claw-free: alpha >= n/(omega^2+1) and max(alpha,omega) >= 0.5*n^(1/3) at every instance; R(3,3)=6 exhaustive over all 2^15 six-vertex graphs; negative control: star K1,5 violates the degree law deg < omega^2)"
-    },
-    {
-      "id": "C61-PAW",
-      "statement": "Theorem PAW (complete, zero premises, CORRECTED W75 final form): every paw-free graph (no induced paw = triangle with pendant edge) on n >= 1 vertices satisfies max(alpha, omega) >= sqrt(n/5). Proof: components are triangle-free (alpha_i >= sqrt(m_i)/2 by the max-degree/Caro-Wei split — N(v) independent in triangle-free graphs — so m_i <= 4*alpha_i^2) or complete multipartite (the Olariu structure theorem, re-derived in-package: every vertex adjacent to >= 2 of any triangle via the paw exclusion on shortest paths; non-adjacency transitive via the shared-attachment paw; alpha_i*omega_i >= m_i so m_i <= alpha_i*omega_i). Summing: n <= 4*alpha^2 + alpha*omega <= 5*max(alpha,omega)^2. The triangle-free subfamily satisfies the stronger alpha >= sqrt(n)/2; the alpha-ONLY form is FALSE for general paw-free graphs (the engine's negative control: the complete 16-partite graph with parts of 2 — paw-free, alpha=2 < sqrt(32)/2, omega=16 carries).",
-      "verification": "S-PAW (driver): constructed paw-free families (triangle-free: alpha >= sqrt(n)/2; complete multipartite + unions: max >= sqrt(n/5)) + the exhaustive n<=6 census (0 violations of the max-form) + the load-bearing negative control (alpha-only fails exactly on complete multipartite) + complement transfer."
-    },
-    {
-      "id": "C61-P3K1",
-      "statement": "Corollary P3+K1 (complement transfer of Theorem PAW, max-form): every (P3+K1)-free graph satisfies max(alpha, omega) >= sqrt(n/5) (complement(paw) = P3+K1; the transfer verified on 101,601 (G, complement) pairs).",
-      "verification": "S-PAW (driver): the complement-transfer check on the instance families."
-    },
-    {
-      "id": "C61-DIAMOND",
-      "statement": "Theorem DIAMOND (complete, zero premises): every diamond-free graph (no induced K4 - e) on n >= 1 vertices satisfies max(alpha, omega) >= n^(1/3)/2. Proof: in a diamond-free graph every open neighborhood N(v) is P3-free (x~y, x~z, y!~z in N(v) completes the diamond with v), hence a disjoint union of cliques; the max-degree vertex splits into r cliques of max size s with alpha >= r, omega >= s+1, r*s >= Delta; the case split at Delta = n^(2/3) closes with Caro-Wei.",
-      "verification": "S-PAW (driver): constructed diamond-free families + the exhaustive n<=6 census (15573 diamond-free graphs, 0 violations) + negative controls."
-    },
-    {
-      "id": "C61-K2-2K1",
-      "statement": "Corollary K2+2K1 (complement transfer of Theorem DIAMOND): every (K2+2K1)-free graph satisfies max(alpha,omega) >= n^(1/3)/2 (complement(diamond) = K2+2K1).",
-      "verification": "S-PAW (driver): the complement-transfer check."
-    },
-    {
-      "id": "C61-2K2-STRUCTURE",
-      "statement": "The 2K2 structure package (complete lemmas + exhaustive census): (i) Theorem 2K2-TF: every triangle-free 2K2-free graph has alpha >= sqrt(n)/2. (ii) Theorem 2K2-DEC: the complete eight-class attachment decomposition of a 2K2-free graph around any triangle with the proved laws: S_empty independent; S_x x S_y fully non-adjacent (exactly-one classes); at most one of S_a,S_b,S_c carries an edge; omega(S_ab) <= omega-2, omega(S_abc) <= omega-3. (iii) CENSUS-2K2 (exhaustive, 731,523 graphs): every 2K2-free graph on n <= 7 satisfies alpha*omega >= 4n/5, equality exactly at C5; h_{2K2}(n) = [2,2,2,2,3,3,3] for n=2..8 (the n=8 row via the exhaustive 2^28 m=3-stratum scan). (iv) The C5-attachment 17-type law. Complement transfer carries all of it to induced-C4-free graphs.",
-      "verification": "S-2K2-STRUCT (driver): the structural laws on constructed + random 2K2-free instances + the exhaustive alpha*omega >= 4n/5 census at n <= 5 + sampled n=6,7."
-    },
-    {
-      "id": "C61-FOURVERTEX-CLASSIFICATION",
-      "statement": "The 4-vertex classification (status exact): NINE of the eleven 4-vertex graphs are EH-closed in-package with explicit unconditional exponents — P4 (c=1/2, banked), paw and P3+K1 (alpha or omega >= sqrt(n)/2 — THE 1/2 EXPONENT, optimal), K4/K4bar (every c < 1/3, banked), claw/K3+K1 (n^(1/3)/2, banked W74), diamond and K2+2K1 (n^(1/3)/2, NEW); C4/2K2 carry the complete triangle-free half (sqrt(n)/2), the complete triangle-decomposition structure theorem, and the exhaustive sharp-form census alpha*omega >= 4n/5 through n=7 (731,523 graphs) with the pairwise-constraint analysis named as the immediate lane.",
-      "verification": "S-CENSUS-61 (driver): the five targets' h-rows recomputed exhaustively n<=6 in-gate + the banked claims re-derived; the full census in census61.json + receipts61census.txt."
-    },
-    {
-      "id": "C61-P5CROSS",
-      "statement": "Theorem P5-CROSS (complete, all P5-free graphs): for every induced P3 (e1, ctr, e2) and every pair u, w outside with u adjacent to e1 only and w adjacent to e2 only (of the three), u is adjacent to w. Proof: otherwise {u,e1,ctr,e2,w} induces the P5 u-e1-ctr-e2-w. Certified: 15,960 instances (all P5-free n=3..6, both orientations) + 3,660 z-only instances, 0 violations; 1,338 planted violations each machine-verified to induce a P5.",
-      "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS + the audit lane's independent cross-check"
-    },
-    {
-      "id": "C61-C5ANCHORS",
-      "statement": "Theorems C5-1ANCHOR and C5-2ANCHOR (complete, all C5-free graphs): (2-anchor) for every triangle T, edge xy of T, p in N(x)-N(y), q in N(y)-N(x), r outside both: p~r and q~r imply p~q (else {p,x,y,q,r} induces the C5 cycle p-x-y-q-r-p); (1-anchor) for every anchor a in T, b,e in N(a), c,d outside N[a]: b~c, c~d, d~e, b!~d, b!~e, c!~e is forbidden (else {b,c,d,e,a} induces the C5 cycle b-c-d-e-a-b). Certified: 11,520 + 16,923 role instances, 0 violations; planted violations each machine-verify as induced C5s.",
-      "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS + the audit lane's independent cross-check"
-    },
-    {
-      "id": "C61-TOWERCAP-P5BULL",
-      "statement": "Theorem TOWER-CAP (complete): the substitution tower X_t = C5[X_{t-1}]^x5 (X_1 = C5) is P5-free and bull-free at every level t with hom(X_t) = 2^t on n = 5^t vertices (X_2: alpha=omega=4 on 25; X_3: constructive 8+8 on 125; the slot lemma certified for both H). Consequently any class-wide Erdos-Hajnal exponent for P5-free or bull-free graphs obeys c <= log2/log5 = 0.430676 (the first in-frame cap for these classes).",
-      "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS (S3-p5-tower-X2, S4) + the audit lane's X_2/X_3 certification"
-    },
-    {
-      "id": "C61-PRIMES-CENSUS",
-      "statement": "The W81 prime census (complete finite facts, two codes + witness duels): h_bull = [1,2,2,2,2,3], h_C5 = [1,2,2,2,3,3], h_P5 = h_house = [1,2,2,2,2,3] exact n=1..6; hom >= n^0.43 on all P5/bull/C5-free n<=6 (exhaustive) + sampled n=7 (43,396 graphs), 0 violations; the C5 triangle-anchor constraint table complete (FORCED-EDGE 0xabc; FORCED-NONEDGE abxabc/acxabc/bcxabc; 31 free pairs) over all 12,900 core+ graphs; the bull I-anchor concentration n <= 6*max(alpha,omega)^4 on all bull-free n<=6 + structured families; the z-only stratum fully mapped (372 graphs, the 7-cell table over every dominating P3).",
-      "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS, PRIMES_W81_ENGINE_GREEN=1"
-    },
-    {
-      "id": "C61-W82-OFFICIAL-SPEC",
-      "statement": "The OFFICIAL statement file DM61_Official.lean carries the verbatim DeepMind formal-conjectures predicate IsErdosHajnalLowerBound (google-deepmind/formal-conjectures @ 2207c54d, byte-verified against the fresh clone) plus the official target spec block (the open core erdos_61 and the solved variants erha89/bnss23/p5/c5).",
-      "verification": "S-W82-SPEC gate check (verbatim string blocks) + the FC/ vendor pack provenance (FC/PROVENANCE.md)"
-    },
-    {
-      "id": "C61-W82-FAMILY-OFFICIAL-FORM",
-      "statement": "Theorem erdos_61_family (W82): every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3} satisfies the OFFICIAL Erdos-Hajnal statement at the uniform exponent c = 1/4 — ∃ c > 0, IsErdosHajnalLowerBound H (fun n => n^c) over the verbatim official predicate, with Mathlib SimpleGraph/indepNum/cliqueNum/comap and the arsenal bridge (CardinalWorlds.two_pow_pos :420, two_pow_ge2 :431).",
-      "verification": "CI kernel-61dm-a (DM61_Proof_A.lean, branch w82-61a, axiom-clean greps) + kernel-61dm-b (DM61_Closure.lean) + the adversarial audit AUDIT_W82_61A.md (A1/A3/A4/A5 PASS; A2 binds at CI)"
-    },
-    {
-      "id": "C61-W82-CLOSURE-LEDGER",
-      "statement": "The honest closure map: the F7 family CLOSED in official form; P4/K5/E5/substitution-closure DERIVED (Seinsche; the R(5,t) <= C(t+3,4) ladder at c=1/5; c = c1c2/(c1+c2)) and named as the W83 kernel continuations; the four 5-vertex primes, the 6-vertex world, and the open core erdos_61 honestly OPEN.",
-      "verification": "S-W82-KERNELS gate check + DM61_Closure.lean's closure-map ledger + the worklogs (WORKLOG_W82_61A/B.md)"
-    }
-  ]
+ "problem": "erdoes-61",
+ "solution_id": "family-package-official-v1",
+ "provenance": "W72-61K (S071): FAMILY_PROOF.md complete-theorem package + engine61family.py 10/10 GREEN; W72-61C official gate on the fresh google-deepmind/funsearch clone @ cc53f27 (cyclic_graphs); the F7 family + tightness witnesses grounded in the CI-green kernel-61k (run 44136423582); 13 arsenal laws read, cited, and spot-verified",
+ "claims": [
+  {
+   "id": "C61-SL",
+   "statement": "Lemma SL (Seinsche): every P4-free graph on n >= 2 vertices is disconnected or its complement is disconnected.",
+   "verification": "engine SL (exhaustive n=2..6 — 6038 P4-free graphs — + 400 random cographs n<=24)"
+  },
+  {
+   "id": "C61-SEINCHE",
+   "statement": "Theorem S (Seinsche 1974, perfectness form): every P4-free graph is perfect (chi = omega); consequently alpha*omega >= n and max(alpha, omega) >= ceil(sqrt(n)) >= floor(sqrt(n)). The Erdos-Hajnal property holds for H = P4 with c = 1/2, and the exponent is optimal (the block witnesses).",
+   "verification": "engine SEINCHE (exhaustive chi/alpha/omega n=2..6 + 2500 random cographs n<=200 with tree-exact alpha/omega; TREE-CROSS validates the tree against B&B)"
+  },
+  {
+   "id": "C61-F7",
+   "statement": "Theorem F7: for every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3}, every H-free graph on n vertices has alpha or omega >= floor(sqrt(n)) — CI-green in Erdos61.lean (kernel-61k, run 44136423582).",
+   "verification": "engine F7-EXHAUSTIVE (all H-free graphs n<=6) + F7-RANDOM (150 structured random H-free graphs n<=50 per H) + the CI-green Lean kernel"
+  },
+  {
+   "id": "C61-TIGHT",
+   "statement": "Tightness: the m x m block graphs have alpha = omega = m = floor(sqrt(m^2)) — the 1/2-exponent is the exact boundary for the family; the dyadic family m = 2^j is the kernel's tight_family_arsenal.",
+   "verification": "engine TIGHT (B&B-exact alpha=omega=m for m=2,3,4,5,8; dyadic family j=1..5)"
+  },
+  {
+   "id": "C61-RAM",
+   "statement": "Theorem RAM (Erdos-Szekeres recursion): R(s,t) <= C(s+t-2, s-1); consequently K4-free and Kb4-free graphs satisfy the Erdos-Hajnal property with every c < 1/3 (e.g. c = 1/4, threshold N=256). [W74 audit: the earlier 'c = 1/3' overstated one step — C(t+2,3) = t(t+1)(t+2)/6 > t^3/6; the corrected chain in FAMILY_PROOF.md section 4 carries every c < 3^-1.]",
+   "verification": "full derivation in FAMILY_PROOF.md section 4 (vertex-degree split + induction on s+t); the degree-split ingredient (triangle-free neighborhoods independent, greedy alpha >= n/(Delta+1), P3-free closed neighborhoods cliques) engine-verified (DEGREE-LAWS)"
+  },
+  {
+   "id": "C61-INH",
+   "statement": "Theorem INH (inheritance): H induced in H' and EH(H', c) implies EH(H, c) — every H-free graph is H'-free.",
+   "verification": "full proof in FAMILY_PROOF.md section 5; engine MONO-M-style containment spot checks"
+  },
+  {
+   "id": "C61-SUB",
+   "statement": "The substitution stack (PROOF.md section 4, Theorems 4A/4B/4C, complete): transversal law, blow-up avoidance law, min-composition; the harmonic exponent f = c1*c2/(c1+c2) with exact balanced-split optimality; the k-level iteration F_k = (sum 1/c_i)^-1.",
+   "verification": "engine SUB (exact-rational harmonic identity; builder |V(H1[H2])| = ab; induced H1 by transversal + H2 in class for P3[P3], K2[K2]; K2[Kb2] = C4 avoids 2K2; 3-level composition identity)"
+  },
+  {
+   "id": "C61-OFFICIAL-CYCLIC",
+   "statement": "The official DeepMind cyclic_graphs evaluator (fresh clone @ cc53f27) reproduces its published discoveries: independent sets of size 81, 324, 1458 in C_9^3..C_9^5 (official cell-11 expected sizes, official cell-9 priority), 367 in C_7^5 (official cell-6 priority), 754 in C_11^4 (official cell-13 priority) — the official graph-independence machinery cross-certifying the campaign's engines on overlapping instances.",
+   "verification": "driver O-IMPORT-NOTEBOOK-FLOW + O-CYC7-5, O-CYC9-3, O-CYC9-4, O-CYC9-5, O-CYC11-4 (per-cell priority rebinding, verbatim official code)"
+  },
+  {
+   "id": "C61-CLAW",
+   "statement": "Theorem CLAW (W74, in-package): every claw-free graph (no induced K1,3) on n >= 1 vertices satisfies max(alpha, omega) >= (1/2)*n^(1/3). Proof: (1) N(v) has no independent 3-set (else induced claw) and no omega-clique (else +v is a bigger clique), so |N(v)| <= R(omega,3)-1 <= omega(omega+1)/2-1 < omega^2 by the elementary Ramsey bound R(t,3) <= t(t+1)/2; (2) Caro-Wei weak form alpha >= n/(dbar+1) > n/(omega^2+1); (3) case split at omega = n^(1/3). Hence H = K1,3 (claw) and, by complement transfer (complement of K3+K1 is K1,3, alpha/omega swap), H = K3+K1 satisfy the Erdos-Hajnal property with every c < 1/3. The in-package 4-vertex coverage grows from ten graphs to twelve.",
+   "verification": "full derivation in FAMILY_PROOF.md section 4.5 (Theorem CLAW, zero premises); driver S-CLAW (line graphs of random graphs + clique unions + filtered randoms all claw-free: alpha >= n/(omega^2+1) and max(alpha,omega) >= 0.5*n^(1/3) at every instance; R(3,3)=6 exhaustive over all 2^15 six-vertex graphs; negative control: star K1,5 violates the degree law deg < omega^2)"
+  },
+  {
+   "id": "C61-PAW",
+   "statement": "Theorem PAW (complete, zero premises, CORRECTED W75 final form): every paw-free graph (no induced paw = triangle with pendant edge) on n >= 1 vertices satisfies max(alpha, omega) >= sqrt(n/5). Proof: components are triangle-free (alpha_i >= sqrt(m_i)/2 by the max-degree/Caro-Wei split — N(v) independent in triangle-free graphs — so m_i <= 4*alpha_i^2) or complete multipartite (the Olariu structure theorem, re-derived in-package: every vertex adjacent to >= 2 of any triangle via the paw exclusion on shortest paths; non-adjacency transitive via the shared-attachment paw; alpha_i*omega_i >= m_i so m_i <= alpha_i*omega_i). Summing: n <= 4*alpha^2 + alpha*omega <= 5*max(alpha,omega)^2. The triangle-free subfamily satisfies the stronger alpha >= sqrt(n)/2; the alpha-ONLY form is FALSE for general paw-free graphs (the engine's negative control: the complete 16-partite graph with parts of 2 — paw-free, alpha=2 < sqrt(32)/2, omega=16 carries).",
+   "verification": "S-PAW (driver): constructed paw-free families (triangle-free: alpha >= sqrt(n)/2; complete multipartite + unions: max >= sqrt(n/5)) + the exhaustive n<=6 census (0 violations of the max-form) + the load-bearing negative control (alpha-only fails exactly on complete multipartite) + complement transfer."
+  },
+  {
+   "id": "C61-P3K1",
+   "statement": "Corollary P3+K1 (complement transfer of Theorem PAW, max-form): every (P3+K1)-free graph satisfies max(alpha, omega) >= sqrt(n/5) (complement(paw) = P3+K1; the transfer verified on 101,601 (G, complement) pairs).",
+   "verification": "S-PAW (driver): the complement-transfer check on the instance families."
+  },
+  {
+   "id": "C61-DIAMOND",
+   "statement": "Theorem DIAMOND (complete, zero premises): every diamond-free graph (no induced K4 - e) on n >= 1 vertices satisfies max(alpha, omega) >= n^(1/3)/2. Proof: in a diamond-free graph every open neighborhood N(v) is P3-free (x~y, x~z, y!~z in N(v) completes the diamond with v), hence a disjoint union of cliques; the max-degree vertex splits into r cliques of max size s with alpha >= r, omega >= s+1, r*s >= Delta; the case split at Delta = n^(2/3) closes with Caro-Wei.",
+   "verification": "S-PAW (driver): constructed diamond-free families + the exhaustive n<=6 census (15573 diamond-free graphs, 0 violations) + negative controls."
+  },
+  {
+   "id": "C61-K2-2K1",
+   "statement": "Corollary K2+2K1 (complement transfer of Theorem DIAMOND): every (K2+2K1)-free graph satisfies max(alpha,omega) >= n^(1/3)/2 (complement(diamond) = K2+2K1).",
+   "verification": "S-PAW (driver): the complement-transfer check."
+  },
+  {
+   "id": "C61-2K2-STRUCTURE",
+   "statement": "The 2K2 structure package (complete lemmas + exhaustive census): (i) Theorem 2K2-TF: every triangle-free 2K2-free graph has alpha >= sqrt(n)/2. (ii) Theorem 2K2-DEC: the complete eight-class attachment decomposition of a 2K2-free graph around any triangle with the proved laws: S_empty independent; S_x x S_y fully non-adjacent (exactly-one classes); at most one of S_a,S_b,S_c carries an edge; omega(S_ab) <= omega-2, omega(S_abc) <= omega-3. (iii) CENSUS-2K2 (exhaustive, 731,523 graphs): every 2K2-free graph on n <= 7 satisfies alpha*omega >= 4n/5, equality exactly at C5; h_{2K2}(n) = [2,2,2,2,3,3,3] for n=2..8 (the n=8 row via the exhaustive 2^28 m=3-stratum scan). (iv) The C5-attachment 17-type law. Complement transfer carries all of it to induced-C4-free graphs.",
+   "verification": "S-2K2-STRUCT (driver): the structural laws on constructed + random 2K2-free instances + the exhaustive alpha*omega >= 4n/5 census at n <= 5 + sampled n=6,7."
+  },
+  {
+   "id": "C61-FOURVERTEX-CLASSIFICATION",
+   "statement": "The 4-vertex classification (status exact): NINE of the eleven 4-vertex graphs are EH-closed in-package with explicit unconditional exponents — P4 (c=1/2, banked), paw and P3+K1 (alpha or omega >= sqrt(n)/2 — THE 1/2 EXPONENT, optimal), K4/K4bar (every c < 1/3, banked), claw/K3+K1 (n^(1/3)/2, banked W74), diamond and K2+2K1 (n^(1/3)/2, NEW); C4/2K2 carry the complete triangle-free half (sqrt(n)/2), the complete triangle-decomposition structure theorem, and the exhaustive sharp-form census alpha*omega >= 4n/5 through n=7 (731,523 graphs) with the pairwise-constraint analysis named as the immediate lane.",
+   "verification": "S-CENSUS-61 (driver): the five targets' h-rows recomputed exhaustively n<=6 in-gate + the banked claims re-derived; the full census in census61.json + receipts61census.txt."
+  },
+  {
+   "id": "C61-P5CROSS",
+   "statement": "Theorem P5-CROSS (complete, all P5-free graphs): for every induced P3 (e1, ctr, e2) and every pair u, w outside with u adjacent to e1 only and w adjacent to e2 only (of the three), u is adjacent to w. Proof: otherwise {u,e1,ctr,e2,w} induces the P5 u-e1-ctr-e2-w. Certified: 15,960 instances (all P5-free n=3..6, both orientations) + 3,660 z-only instances, 0 violations; 1,338 planted violations each machine-verified to induce a P5.",
+   "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS + the audit lane's independent cross-check"
+  },
+  {
+   "id": "C61-C5ANCHORS",
+   "statement": "Theorems C5-1ANCHOR and C5-2ANCHOR (complete, all C5-free graphs): (2-anchor) for every triangle T, edge xy of T, p in N(x)-N(y), q in N(y)-N(x), r outside both: p~r and q~r imply p~q (else {p,x,y,q,r} induces the C5 cycle p-x-y-q-r-p); (1-anchor) for every anchor a in T, b,e in N(a), c,d outside N[a]: b~c, c~d, d~e, b!~d, b!~e, c!~e is forbidden (else {b,c,d,e,a} induces the C5 cycle b-c-d-e-a-b). Certified: 11,520 + 16,923 role instances, 0 violations; planted violations each machine-verify as induced C5s.",
+   "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS + the audit lane's independent cross-check"
+  },
+  {
+   "id": "C61-TOWERCAP-P5BULL",
+   "statement": "Theorem TOWER-CAP (complete): the substitution tower X_t = C5[X_{t-1}]^x5 (X_1 = C5) is P5-free and bull-free at every level t with hom(X_t) = 2^t on n = 5^t vertices (X_2: alpha=omega=4 on 25; X_3: constructive 8+8 on 125; the slot lemma certified for both H). Consequently any class-wide Erdos-Hajnal exponent for P5-free or bull-free graphs obeys c <= log2/log5 = 0.430676 (the first in-frame cap for these classes).",
+   "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS (S3-p5-tower-X2, S4) + the audit lane's X_2/X_3 certification"
+  },
+  {
+   "id": "C61-PRIMES-CENSUS",
+   "statement": "The W81 prime census (complete finite facts, two codes + witness duels): h_bull = [1,2,2,2,2,3], h_C5 = [1,2,2,2,3,3], h_P5 = h_house = [1,2,2,2,2,3] exact n=1..6; hom >= n^0.43 on all P5/bull/C5-free n<=6 (exhaustive) + sampled n=7 (43,396 graphs), 0 violations; the C5 triangle-anchor constraint table complete (FORCED-EDGE 0xabc; FORCED-NONEDGE abxabc/acxabc/bcxabc; 31 free pairs) over all 12,900 core+ graphs; the bull I-anchor concentration n <= 6*max(alpha,omega)^4 on all bull-free n<=6 + structured families; the z-only stratum fully mapped (372 graphs, the 7-cell table over every dominating P3).",
+   "verification": "driver S-PRIMES-W81: engine61primes_w81.py 22/22 PASS, PRIMES_W81_ENGINE_GREEN=1"
+  },
+  {
+   "id": "C61-W82-OFFICIAL-SPEC",
+   "statement": "The OFFICIAL statement file DM61_Official.lean carries the verbatim DeepMind formal-conjectures predicate IsErdosHajnalLowerBound (google-deepmind/formal-conjectures @ 2207c54d, byte-verified against the fresh clone) plus the official target spec block (the open core erdos_61 and the solved variants erha89/bnss23/p5/c5).",
+   "verification": "S-W82-SPEC gate check (verbatim string blocks) + the FC/ vendor pack provenance (FC/PROVENANCE.md)"
+  },
+  {
+   "id": "C61-W82-FAMILY-OFFICIAL-FORM",
+   "statement": "Theorem erdos_61_family (W82): every H in {K1, K2, Kb2, K3, Kb3, P3, Pb3} satisfies the OFFICIAL Erdos-Hajnal statement at the uniform exponent c = 1/4 — ∃ c > 0, IsErdosHajnalLowerBound H (fun n => n^c) over the verbatim official predicate, with Mathlib SimpleGraph/indepNum/cliqueNum/comap and the arsenal bridge (CardinalWorlds.two_pow_pos :420, two_pow_ge2 :431).",
+   "verification": "CI kernel-61dm-a (DM61_Proof_A.lean, branch w82-61a, axiom-clean greps) + kernel-61dm-b (DM61_Closure.lean) + the adversarial audit AUDIT_W82_61A.md (A1/A3/A4/A5 PASS; A2 binds at CI)"
+  },
+  {
+   "id": "C61-W82-CLOSURE-LEDGER",
+   "statement": "The honest closure map: the F7 family CLOSED in official form; P4/K5/E5/substitution-closure DERIVED (Seinsche; the R(5,t) <= C(t+3,4) ladder at c=1/5; c = c1c2/(c1+c2)) and named as the W83 kernel continuations; the four 5-vertex primes, the 6-vertex world, and the open core erdos_61 honestly OPEN.",
+   "verification": "S-W82-KERNELS gate check + DM61_Closure.lean's closure-map ledger + the worklogs (WORKLOG_W82_61A/B.md)"
+  },
+  {
+   "id": "C61-W84-K5E5-OFFICIAL",
+   "statement": "THE K5/E5 FAMILY THEOREM over the official predicate: erdos_61_k5_e5 — exists c = 1/5 > 0 with IsErdosHajnalLowerBound (top : SimpleGraph (Fin 5)) (fun n => (n:R)^c) AND IsErdosHajnalLowerBound (bot : SimpleGraph (Fin 5)) (same f) — the first five-vertex primes in the OFFICIAL DeepMind statement form. The custom ramsey_ladder module (explicit-set conclusions, plain induction on r+s, vertex peel, Pascal choose_succ_succ', comap Subtype.val transfers, v-extension both sides) + the integer fifth root root5 (Finset filter/max') + the falling-factorial ladder 24*C(m,4) <= m^4 + the pure-N spine (w+4)^4 <= 81w^4 <= 24w^5 <= 24n + the rpow finisher; threshold n >= 1024 rides the eventually-filter.",
+   "verification": "Lean kernel DM61_Proof_D.lean — repair war R1 (17 defects) + R2 (9 defects incl. THE MATH REPAIR: indep_extend was FALSE as stated, hypothesis v-not-in-B added) + R3 (7 defects: the IH-arity repair, the Pascal-fed omega, the custom Finset shrink module exists_subset_card_le — Finset.exists_smaller_set absent from Mathlib v4.33.0-rc2). CI verdict on eb99e1f pending at claim-filing; the four arithmetic sub-theorems (choose_le_of_ge_1024, rpow_fifth_le_root5_succ, arsenal_threshold_K5, four_and_twenty_choose_four_le) ALREADY axiom-clean per run 45077290661's prints. Arsenal bridge: CardinalWorlds.two_pow_pos [:420] + two_pow_ge2 [:431]."
+  }
+ ]
 }
