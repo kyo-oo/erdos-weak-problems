@@ -454,16 +454,7 @@ theorem ghost_residue_shape (u : Nat) (hg : GhostRay u) :
         have hstab : (lteCoeff j * u) % 3^j
             = (lteCoeff (j-1) * u) % 3^j := by
           rw [Nat.mul_mod, Nat.mul_mod, hcs]
-        have hhead : ghostHead u = (lteCoeff (j-1) * u) % 9 := by
-          unfold ghostHead
-          have h1 : lteCoeff (j-1) % 9 = lteCoeff 1 % 9 := by
-            have h := lteCoeff_stable 1 (j-1) (by omega)
-            rw [show 1 + 1 = 2 from rfl] at h
-            have h2 : (lteCoeff (j-1)) % 9 = (lteCoeff (j-1)) % 3^2 := by
-              rw [show (3:Nat)^2 = 9 from by decide]
-            rw [h2, ← h]
-            norm_num
-          rw [Nat.mul_mod, h1, ← Nat.mul_mod]
+        rw [Nat.pow_succ]
         omega
 
 /-- **LEMMA B (the fundamental finite ghost congruence).**  A ghost ray
