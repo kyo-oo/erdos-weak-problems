@@ -1726,6 +1726,36 @@ jobs:
           grep -F "E107_BOARD_GREEN" kernel107k.log
           grep -E "E107.(f3_upper|f3_lower|w4_gp|f4_lower|w5_gp|w5_no_convex5|erdos107_board)' (does not depend on any axioms|depends on axioms)" kernel107k.log
           echo KERNEL107K_GREEN=1
+
+  kernel-107dm-b:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 107DM-B — W82 KILL B: the OFFICIAL upper bound of the DeepMind formal-conjectures solved two-sided variant of Erdős #107 (happy ending): theorem Erdos107.ersz_upper : ∀ n ≥ 3, f n ≤ Nat.choose (2 * n - 4) (n - 2) + 1 over the vendored FC.Geometry.TwoD official definitions — a port of the formal_proof chain cited upstream (linrock/math-proofs @ cd3cf0b176e95209584bf35555a7c0e501255f6e, erdos-107: horizontal-shear reduction to distinct x-coordinates, x-sorting bridge, the Erdős–Szekeres 1935 cup–cap Pascal-splitting pigeonhole induction with witness N = C(2n−4, n−2)+1 ∈ cardSet n, all-triple cup/cap ConvexIndep via strict half-plane separation, and the sInf membership bound f n ≤ C(2n−4, n−2)+1; the n≥3 existence corollary nonempty_cardSet included). BOSS's arsenal imported and cited by file:line (ErdosTernary2.lt_three_cases :16; CardinalWorlds two_pow_pos :420, two_pow_ge2 :431, two_pow_factored :425). HONEST SCOPE: the lower side 2^(n−2)+1 ≤ f n (ES-1960) is NOT claimed (ersz_lower_scope_pos marks the open stretch). Complete proof: zero sorry, zero native_decide."
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel107dmb.log
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel107dmb.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107dmb.log
+          lake env lean problem107-happy-ending/DM107_Proof_B.lean 2>&1 | tee -a kernel107dmb.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107dmb.log
+          grep -F "DM107B_ERSZ_GREEN" kernel107dmb.log
+          grep -E "'Erdos107.ersz_upper' (does not depend on any axioms|depends on axioms)" kernel107dmb.log
+          grep -E "'Erdos107.f_le_erdosSzekeresUpper' (does not depend on any axioms|depends on axioms)" kernel107dmb.log
+          grep -E "'Erdos107.erdosSzekeresUpper_mem_cardSet' (does not depend on any axioms|depends on axioms)" kernel107dmb.log
+          grep -E "'Erdos107.ersz_lower_scope_pos' (does not depend on any axioms|depends on axioms)" kernel107dmb.log
+          echo KERNEL_107DM_B_GREEN=1
+
   kernel-142cmp:
     runs-on: ubuntu-24.04
     steps:
