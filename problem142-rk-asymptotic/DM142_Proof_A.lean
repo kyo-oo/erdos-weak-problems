@@ -256,7 +256,7 @@ theorem apFree_of_pairscan {W : List Nat} {k : ℕ} (hk : 2 ≤ k)
     induction (List.range' 2 (k - 2)) with
     | nil => rfl
     | cons b t ih =>
-        refine Bool.and_eq_true.2 ⟨hno b (by
+        refine Bool.and_eq_true_iff.2 ⟨hno b (by
           rcases List.mem_cons.1 (List.mem_cons_self b t) with _ | _
           · exact List.mem_cons_self b t
           · exact absurd rfl (by simp)), ?_⟩
@@ -379,11 +379,12 @@ theorem r_mono_unrestricted_false :
         have : y = 1 := (Set.mem_singleton_iff.1 hy2)
         rw [this]
         simp
-      have hc1 : ENat.card t ≤ ENat.card ({1} : Set ℕ) := Set.card_mono hsub
-      rw [Set.card_singleton] at hc1
-      have hc2 := ht.card
-      have hc3 : ((2 : ℕ) : ENat) ≤ 1 := le_trans hc2.symm hc1
-      have hc4 : (2 : ℕ) ≤ 1 := by exact_mod_cast hc3
+      have hc0 : t.encard = ((2 : ℕ) : ENat) := ht.card
+      have hc1 : t.encard ≤ ({1} : Set ℕ).encard := Set.encard_le_encard hsub
+      rw [Set.encard_singleton] at hc1
+      rw [hc0] at hc1
+      have hc3 : ((2 : ℕ) : ENat) ≤ ((1 : ℕ) : ENat) := hc1
+      have hc4 : (2 : ℕ) ≤ 1 := ENat.natCast_le_natCast.1 hc3
       omega
     · rintro n ⟨S, hSsub, hSfree, rfl⟩
       -- every 2-AP-free subset of {1,2} has ≤ 1 element
