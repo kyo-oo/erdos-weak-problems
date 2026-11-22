@@ -96,6 +96,7 @@ jobs:
   kernel-107dm-a:
   kernel-61dm-a:
   kernel-61dm-b:
+  kernel-142dm-a:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
@@ -142,6 +143,17 @@ jobs:
           grep -E "'Erdos61B.erdos_61_family' (does not depend on any axioms|depends on axioms)" kernel61dmb.log
           ! grep -E "'Erdos61B..*'.*sorryAx" kernel61dmb.log
           echo KERNEL_61DM_B_GREEN=1
+      - name: "Kernel 142DM-A — W82 THE OFFICIAL-r UPPER LAWS: LAW M-1 r_mono (k ≠ 1, every k-witness is a (k+1)-witness via the prefix law) + r_mono_unrestricted_false (the k=1 honesty counterexample: r 1 2 = 2 > 1 ≥ r 2 2 via the vendored pair lemma) + THE GENERAL REFLECTION LEMMA apFree_of_pairscan (all k ≥ 2 at once) + the six banked witness stones decide-certified over the official Set.IsAPOfLengthFree.maxCard (19 ≤ r 3 61, 16 ≤ r 3 48, 22 ≤ r 4 42, 36 ≤ r 5 55, 31 ≤ r 6 43, 36 ≤ r 7 45); Arsenal bridge: lt_three_cases [:16] used in scanTrichotomy + mul_add_div_lemma [:143]/mod_mod_mul [:140] cited (U-GEN-0 derivation, worklog D3); U-GEN-0/V-GEN derived+engine-validated, kernel continuation named"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel142dma.log
+          lake env lean problem142-rk-asymptotic/DM142_Proof_A.lean 2>&1 | tee -a kernel142dma.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dma.log
+          grep -F "DM142A_UPPER_GREEN" kernel142dma.log
+          grep -E "'(DM142A.r_mono|DM142A.r_mono_unrestricted_false|DM142A.apFree_of_pairscan|DM142A.dm142a_board)' (does not depend on any axioms|depends on axioms)" kernel142dma.log
+          ! grep -E "'DM142A..*'.*sorryAx" kernel142dma.log
+          echo KERNEL_142DM_A_GREEN=1
 
   kernel-a:
     runs-on: ubuntu-24.04
