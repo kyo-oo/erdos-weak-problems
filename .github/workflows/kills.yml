@@ -1248,6 +1248,19 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v5
+      - name: "CONTROL STEP - compiles the KNOWN-GREEN kernel-73 file at job position 1 (the S084 kill-pattern diagnosis: five external runner shutdowns at 2-10 min, always the kernel-74 step, never any other step; if THIS control dies too the job allocation is cursed and the job gets renamed/recreated; if it lives and 74 still dies, the PiCollapse file is the bomb and gets bisected next round)"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > control73.log
+          timeout 600 lake env lean problem406-ternary-powers/BlockLaw406.lean 2>&1 | tee -a control73.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' control73.log
+          grep -F "ERDOS406_BLOCKLAW_KERNEL_GREEN" control73.log
+          echo CONTROL73_GREEN=1
       - name: Install Lean Mathlib
         shell: bash
         run: |
