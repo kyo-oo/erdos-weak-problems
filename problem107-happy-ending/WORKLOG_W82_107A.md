@@ -162,3 +162,16 @@ only — the file-wide sorryAx grep guards the axiom profile).
 
 ### Repair history
 (round 1 = first push; append per round)
+
+**Round 1 (commit 9cc7f48, run 44966751185 / job 137037401089): RED —
+foundation collision, not the kernel.** `lake build FC` failed with
+`FC/Combinatorics/SimpleGraph/PathGraph.lean:23:4: \`SimpleGraph.pathGraph\`
+has already been declared` (+ `pathGraph_adj`, + two omega errors inside that
+file) — Mathlib v4.33.0-rc2 ships its own `SimpleGraph.pathGraph`
+(Mathlib.Combinatorics.SimpleGraph.CycleGraph), so the vendored duplicate is
+uncompilable. Nothing in DM107_Proof_A.lean or the 107 cone references
+PathGraph (grep: zero imports of `FC.Combinatorics.SimpleGraph.PathGraph` in
+the lane); the kill merely inherits the broken `lake build FC` prerequisite.
+Fix: merged origin/campaign @ f2b9949 (the kernel-fc repair that deletes the
+file; DM61_Official.lean re-imports Mathlib's pathGraph) into w82-107a —
+merge commit 65c8abf, no conflicts, kernel file untouched. Pushed for round 2.
