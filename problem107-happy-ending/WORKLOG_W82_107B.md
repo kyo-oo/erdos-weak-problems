@@ -129,24 +129,48 @@ Imports: `Arsenal.ErdosTernary2.Basic`, `Arsenal.CardinalWorlds`.
 
 - **LANDED (this round): the FLOOR** — `Erdos107.ersz_upper : ∀ n ≥ 3,
   f n ≤ Nat.choose (2 * n - 4) (n - 2) + 1`, complete, zero sorry, over the
-  official definitions, CI-green in job `kernel-107dm-b`
-  (DM107_Proof_B.lean + kills.yml). Plus AUDIT_W82_107A.md.
+  official definitions, in `DM107_Proof_B.lean` (kernel §12: the port of
+  Unified435:1620–1623 `f_le_erdosSzekeresUpper_of_mem_cardSet` + XMono:589
+  `f_le_erdosSzekeresUpper` + Solution.lean:64 — the official statement
+  shape; kernel §0–§11 are the shared linrock cone, reusing the toolchain
+  adaptation executed and CI-verified by sibling lane W82-107A for
+  `nonempty_cardSet`, with attribution — same upstream source, same campaign
+  methodology). Plus: `nonempty_cardSet` re-derived here as a corollary
+  (independent verification of lane A's kill from the same cone), the
+  n = 3 anchor sanity `ersz_upper_n3` (f 3 ≤ 3, the upper side of the
+  official anchor `f_three_eq`), the arsenal bridge `dm107b_arsenal_bridge`,
+  and the honest scope marker `ersz_lower_scope_pos`. CI job `kernel-107dm-b`
+  wired in kills.yml. Plus AUDIT_W82_107A.md (verdict: STRUCTURALLY GREEN,
+  no defects; lane A's only failure was the campaign foundation PathGraph
+  collision, pre-kernel).
 - **NOT claimed: the lower side** `2^(n-2) + 1 ≤ f n` for ALL n (the ES-1960
   doubling construction / the campaign's ES_SANDWICH_ALLN machine package —
   Lemma E cup/cap extremal sets, Lemma M, Theorem L). Neither linrock's
   public proof (only n ≤ 5 witnesses) nor this kernel covers it. The stretch
-  stays open; the kernel ships only what is complete.
+  stays open; the kernel ships only what is complete (`ersz_lower_scope_pos`
+  certifies exactly the compatibility facts around the open side).
 - CI runs: see §6 (repair loop record).
 
 ## 6. CI REPAIR LOOP
 
 (run record appended as the round proceeds)
 
+- r0 (pre-push, foundation law): merged `origin/campaign` f2b9949 — the
+  vendored `FC/Combinatorics/SimpleGraph/PathGraph.lean` duplicate was
+  DELETED upstream (Mathlib v4.33.0-rc2 already declares
+  `SimpleGraph.pathGraph`; the first kernel-fc CI run proved the collision,
+  and lane A's run 44966751185 failed `lake build FC` on exactly this).
+  Merge commit 653e00d pushed first, before any kernel exposure.
+
 ## 7. AUDIT VERDICT ON LANE W82-107A (cross-reference)
 
 See `AUDIT_W82_107A.md` (adversarial, fresh eyes: statement byte-match vs
-DM107_Official.lean spec, sorry/axiom scan, definition drift vs
-FC/Geometry/TwoD.lean). Verdict summary at the time of writing: lane A had
-pushed NOTHING to origin/w82-107a beyond the W82 foundation (no
-DM107_Proof_A.lean) — audit checks PENDING on their kernel; the audit also
-re-verifies the foundation anchors themselves (all green).
+DM107_Official.lean spec, sorry/axiom scan, hidden hypotheses, definition
+drift vs FC/Geometry/TwoD.lean, upstream port fidelity vs the vendored
+linrock copies, CI verdict trail). **Verdict: STRUCTURALLY GREEN — no
+defects found** (statement byte-identical; cardSet/f re-declared verbatim;
+zero sorry; no hidden hypotheses; zero definition drift; the one
+`Set.image_diff` site is the verified deprecated alias of `Set.image_sdiff`
+at Mathlib v4.33.0-rc2). Their kernel-107dm-a failure in run 44966751185 was
+the campaign foundation PathGraph collision (kernel never compiled); repair
+r1 (1fc89c1) re-runs it.
