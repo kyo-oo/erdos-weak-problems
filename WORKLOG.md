@@ -5274,3 +5274,47 @@ kernel targets; the general erdos_61 and erha89/bnss23/p5/c5 not claimed.
 2^(n−2)+1 ≤ f n and the full conjecture f(n) = 2^(n−2}+1 open.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S084 (W84 WAVE) — THE NAMED-CONTINUATION ASSAULT: U-GEN-0 + K5/E5 KERNELLED (2026-11-22, runs 45065271636 →, verdicts pending)
+
+BOSS's W84 order: no more fronts — the named continuations of the DM
+lanes, kernel'd, CI the only verdict. The subagent channel was dead
+(context deadline); the commander wrote the kernels in-thread.
+
+**THE WAVE (2 new kernels, both over the official DeepMind statements):**
+
+| kernel | law | statement | CI state |
+|---|---|---|---|
+| DM142_Proof_C (142DM-C) | **U-GEN-0, THE BLOCK FLOOR LAW** | `∀ k ≥ 3, N ≥ 1: r k N ≤ N − ⌊N/k⌋`, TIGHT at N=k (`r k k = k−1`) — the W80-142U derived law (D3), engine-validated 56/56, now in Lean: window_isAP (a full k-block IS an official k-AP, d=1) + window_bound (each block costs ≥1) + window_union_bound (the ⌊N/k⌋ induction) + core_bound (the truncated-ℕ assembly) + the maxCard transfer + the Arsenal `mul_add_div_lemma` (root-ns, CardinalWorlds.lean:143) for k/k = 1 in the tightness | 7 defects (run 45065271636) → 1 defect (187d246) → repaired (26439c8: the singleton coe-bridge — green's manual mem_coe route); verdict pending |
+| DM61_Proof_D (61DM-D) | **THE K5/E5 RAMSEY LADDER at c = 1/5** | `IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 5)) (n ↦ n^(1/5))` + E5 by complement transfer — K5_PROOF.md §1–§4 executed: the custom ramsey_ladder (explicit-set conclusions, plain r+s induction, vertex peel, Pascal, comap transfers) + root5 (the integer fifth root as a Finset search) + the P2/P3/P4 falling-factorial ladder (24·C(m,4) ≤ m⁴) + the pure-ℕ spine (w+4)⁴ ≤ 81w⁴ ≤ 24w⁵ ≤ 24n + the green rpow finisher | first compile pending (if:always() wired at 26439c8 so it surfaces regardless of 142C) |
+
+**THE WAR SO FAR (runs 45065271636 → 26439c8):** the W83 playbook paid
+again — the first 142C compile's 7 defects were ALL playbook-shaped: the
+`csSup_le` NONEMPTY-witness (not BddAbove — the green false-theorem
+pattern), the rw-self-reference trap (hcover's RHS contains S — fixed by
+`congrArg Finset.card` + leading-pattern-only rewrite), the
+`Nat.card_Icc` auto-rfl close (omega → dropped), the maxCard
+card-equation-first unification, the Arsenal ROOT-namespace law (the
+file has no namespace — DM142A's prose citation was never a call site),
+and the board's dropped hN. Second round: ONE defect left (the
+Finset-coe-to-set-literal singleton subset — not defeq-transparent;
+green's manual `Finset.mem_coe` route). Third push: repaired + `if:
+always()` on the 61DM-D step so both kernels compile independently per
+round.
+
+**HONEST STATE (verdicts pending at press time):** the two kernels are
+written, zero sorry, every API green-verified or source-verified at
+v4.33.0-rc2; the CI verdict is the only truth. The remaining named
+continuations — #61 P4 (Seinsche MASTER analysis fully derived in
+WORKLOG_W82_61A.md §2, reconstructed and verified in-frame this session),
+#61 substitution closure (FAMILY_PROOF.md 4A/4B/4C), #142 V-GEN (the
+integer form `2m·r k N ≤ (2·r k m + 1)·N` for N ≥ 16m², UPPER_STACK),
+#107 ersz_lower (ES_SANDWICH_ALLN.md — the all-n construction,
+machine-verified n=3..10; the n≤5 floor witnesses in vendor_linrock) —
+stand derived and ready for the next wave's kernels. The official open
+cores (erdos_142 asymptotic, erdos_61 general, erdos_107 full
+conjecture) remain open mathematics, claimed by no one.
+
+The engine never stops; it never lies. In English, always.
