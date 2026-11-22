@@ -100,3 +100,28 @@ All nine from the run's log; the latent branch-ladder defects caught by
 commander audit BEFORE they cost a CI round. 142C: CI-GREEN on the same run
 (all 8 theorems axiom-clean [propext, Classical.choice, Quot.sound],
 DM142C_UGEN0_GREEN printed). The wall is 61D alone.
+
+## R4 + THE VERDICT (run 45083231558, job kernel-dm-w84, commit f43cab7): **GREEN — ALL EIGHT THEOREMS AXIOM-CLEAN**
+
+The last defect on earth was the Or.imp ETA (hTsub : T ⊆ S does not unify as a
+bare function argument at reducible transparency — the implicit-binder ∀ under
+the Subset abbreviation; eta-expanded to (fun h => hTsub h)). With it:
+
+    'Erdos61D.ramsey_ladder'            [propext, Classical.choice, Quot.sound]
+    'Erdos61D.choose_le_of_ge_1024'     [propext, Classical.choice, Quot.sound]
+    'Erdos61D.rpow_fifth_le_root5_succ' [propext, Classical.choice, Quot.sound]
+    'Erdos61D.eh_K5'                    [propext, Classical.choice, Quot.sound]
+    'Erdos61D.eh_E5'                    [propext, Classical.choice, Quot.sound]
+    'Erdos61D.erdos_61_k5_e5'           [propext, Classical.choice, Quot.sound]
+    'Erdos61D.arsenal_threshold_K5'     [propext, Quot.sound]
+    'Erdos61D.four_and_twenty_choose_four_le' [propext, Quot.sound]
+
+ZERO sorryAx. KERNEL_61DM_D_GREEN=1. DM61D_K5_GREEN printed. The K5/E5
+official-form family theorem — the custom Ramsey ladder over the verbatim
+DeepMind predicate at c = 1/5 — is KILLED, four repair rounds, one math
+repair (the false-as-stated indep_extend), one custom Mathlib module
+(exists_subset_card_le), 34 defects total.
+
+The #61 official lane scoreboard: kernel-A (7-member family, c=1/4) GREEN,
+kernel-B (closure ledger) GREEN, kernel-D (K5/E5 Ramsey) GREEN. The named
+next: 61E (P4/Seinsche — architecture banked + probe receipts, all green).
