@@ -27,7 +27,7 @@ authorization; Mathlib at this pin carries no finite binomial Ramsey
 bound of this shape):
 
     ramsey_ladder : 2 ≤ r → 2 ≤ s → choose (r+s-2) (r-1) ≤ card β →
-      (∃ K, K.card = r ∧ IsClique K) ∨ (∃ I, I.card = s ∧ IsIndepSet I)
+      (∃ K, r ≤ K.card ∧ IsClique K) ∨ (∃ I, s ≤ I.card ∧ IsIndepSet I)
 
 by plain induction on r+s: peel a vertex v, split into N(v) and its
 complement, Pascal's identity `choose_succ_succ'` paying the two
@@ -116,7 +116,7 @@ theorem four_le_1024 : (4:ℕ) ≤ 1024 := by
   calc (4:ℕ) = (2:ℕ) ^ 2 := by norm_num
     _ = (2:ℕ) ^ 2 * 1 := by ring
     _ ≤ (2:ℕ) ^ 2 * 2 ^ 8 := Nat.mul_le_mul_left _ (one_le_pow 2 8 (by norm_num))
-    _ = (2:ℕ) ^ 10 := by rw [Nat.pow_add]; norm_num
+    _ = (2:ℕ) ^ 10 := by rw [← Nat.pow_add]; norm_num
     _ = 1024 := by norm_num
 
 /-! ## §2 THE FALLING-FACTORIAL LADDER (P2/P3/P4, all ℕ) -/
@@ -189,7 +189,7 @@ theorem four_and_twenty_choose_four_le (m : ℕ) (hm : 4 ≤ m) :
 /-- The integer fifth root: the greatest `t ≤ n` with `t⁵ ≤ n`. -/
 def root5 (n : ℕ) : ℕ :=
   ((Finset.range (n + 1)).filter (fun t => t ^ 5 ≤ n)).max'
-    ⟨0, Finset.mem_filter.2 ⟨Finset.mem_range.2 (Nat.lt_succ_self n), by simp⟩⟩
+    ⟨0, Finset.mem_filter.2 ⟨Finset.mem_range.2 (Nat.zero_lt_succ n), by simp⟩⟩
 
 theorem root5_pow_le (n : ℕ) : root5 n ^ 5 ≤ n := by
   have h : root5 n ∈ (Finset.range (n + 1)).filter (fun t => t ^ 5 ≤ n) :=
@@ -206,7 +206,7 @@ theorem root5_lt_succ_pow (n : ℕ) : n < (root5 n + 1) ^ 5 := by
   have hmem : root5 n + 1 ∈
       (Finset.range (n + 1)).filter (fun t => t ^ 5 ≤ n) :=
     Finset.mem_filter.2 ⟨Finset.mem_range.2 (by omega), hle⟩
-  have hmax := Finset.le_max' _ _ hmem
+  have hmax : root5 n + 1 ≤ root5 n := Finset.le_max' _ _ hmem
   omega
 
 /-! ## §4 THE RAMSEY LADDER (custom module; Lemma REC + Pascal) -/
@@ -218,14 +218,16 @@ variable {α : Type} [Fintype α] [DecidableEq α]
 /-- The 2-clique witness: an edge. -/
 theorem two_clique {G : SimpleGraph α} {a b : α} (hab : G.Adj a b) :
     ∃ K : Finset α, K.card = 2 ∧ G.IsClique (↑K : Set α) := by
-  refine ⟨{a, b}, by simp [G.ne_of_adj hab], ?_⟩
-  intro x hx y hy hxy
-  simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx hy
-  rcases hx with rfl | rfl <;> rcases hy with rfl | rfl
-  · exact absurd rfl hxy
-  · exact hab
-  · exact G.adj_symm hab
-  · exact absurd rfl hxy
+  refine ⟨{a, b}, ?_, ?_⟩
+  · rw [Finset.card_insert_of_notMem (by simp [G.ne_of_adj hab] : a ∉ ({b} : Finset α)),
+      Finset.card_singleton]
+  · intro x hx y hy hxy
+    simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx hy
+    rcases hx with hxa | hxa <;> rcases hy with hyb | hyb
+    · exact absurd (hxa.trans hyb.symm) hxy
+    · rw [hxa]; exact hab
+    · rw [hyb]; exact G.adj_symm hab
+    · exact absurd (hxa.trans hyb.symm) hxy
 
 /-- The edgeless graph is all-independent. -/
 theorem all_indep_of_no_edge {G : SimpleGraph α}
@@ -253,24 +255,26 @@ theorem clique_extend (G : SimpleGraph α) (v : α) (A : Finset α)
     (fun _ _ _ _ h => Subtype.ext h)]⟩
   intro a ha b hb hab
   simp only [Finset.coe_insert, Set.mem_insert_iff, Finset.mem_coe] at ha hb
-  rcases ha with rfl | ha' <;> rcases hb with rfl | hb'
-  · exact absurd rfl hab
+  rcases ha with ha1 | ha' <;> rcases hb with hb1 | hb'
+  · exact absurd (ha1.trans hb1.symm) hab
   · rw [Finset.mem_image] at hb'
     obtain ⟨x, hx1, hx2⟩ := hb'
     have hadj : G.Adj v (Subtype.val x) := hvA x.1 x.2
     rw [hx2] at hadj
+    rw [ha1]
     exact hadj
   · rw [Finset.mem_image] at ha'
     obtain ⟨x, hx1, hx2⟩ := ha'
     have hadj : G.Adj (Subtype.val x) v := G.adj_symm (hvA x.1 x.2)
     rw [hx2] at hadj
+    rw [hb1]
     exact hadj
   · rw [Finset.mem_image] at ha' hb'
     obtain ⟨x, hx1, hx2⟩ := ha'
     obtain ⟨y, hy1, hy2⟩ := hb'
     have hxy : x ≠ y := by
       intro heq
-      exact hab (by rw [hx2, hy2, heq])
+      exact hab (by rw [← hx2, ← hy2, heq])
     have hcl := hK (Finset.mem_coe.2 hx1) (Finset.mem_coe.2 hy1) hxy
     rw [← hx2, ← hy2]
     exact hcl
@@ -291,24 +295,27 @@ theorem indep_extend (G : SimpleGraph α) (v : α) (B : Finset α)
     (fun _ _ _ _ h => Subtype.ext h)]⟩
   intro a ha b hb hab
   simp only [Finset.coe_insert, Set.mem_insert_iff, Finset.mem_coe] at ha hb
-  rcases ha with rfl | ha' <;> rcases hb with rfl | hb'
-  · exact absurd rfl hab
+  rcases ha with ha1 | ha' <;> rcases hb with hb1 | hb'
+  · exact absurd (ha1.trans hb1.symm) hab
   · rw [Finset.mem_image] at hb'
     obtain ⟨x, hx1, hx2⟩ := hb'
     have hnadj : ¬ G.Adj v (Subtype.val x) := hvB x.1 x.2
     rw [hx2] at hnadj
+    rw [ha1]
     exact hnadj
   · rw [Finset.mem_image] at ha'
     obtain ⟨x, hx1, hx2⟩ := ha'
-    have hnadj : ¬ G.Adj (Subtype.val x) v := fun hadj => hvB x.1 x.2 (G.adj_symm hadj)
+    have hnadj : ¬ G.Adj (Subtype.val x) v :=
+      fun hadj => hvB x.1 x.2 (G.adj_symm hadj)
     rw [hx2] at hnadj
+    rw [hb1]
     exact hnadj
   · rw [Finset.mem_image] at ha' hb'
     obtain ⟨x, hx1, hx2⟩ := ha'
     obtain ⟨y, hy1, hy2⟩ := hb'
     have hxy : x ≠ y := by
       intro heq
-      exact hab (by rw [hx2, hy2, heq])
+      exact hab (by rw [← hx2, ← hy2, heq])
     have hind := hI (Finset.mem_coe.2 hx1) (Finset.mem_coe.2 hy1) hxy
     rw [← hx2, ← hy2]
     exact hind
@@ -327,7 +334,7 @@ theorem clique_image (G : SimpleGraph α) (A : Finset α)
   obtain ⟨y, hy1, hy2⟩ := hb
   have hxy : x ≠ y := by
     intro heq
-    exact hab (by rw [hx2, hy2, heq])
+    exact hab (by rw [← hx2, ← hy2, heq])
   have hcl := hK (Finset.mem_coe.2 hx1) (Finset.mem_coe.2 hy1) hxy
   rw [← hx2, ← hy2]
   exact hcl
@@ -346,21 +353,22 @@ theorem indep_image (G : SimpleGraph α) (A : Finset α)
   obtain ⟨y, hy1, hy2⟩ := hb
   have hxy : x ≠ y := by
     intro heq
-    exact hab (by rw [hx2, hy2, heq])
+    exact hab (by rw [← hx2, ← hy2, heq])
   have hind := hI (Finset.mem_coe.2 hx1) (Finset.mem_coe.2 hy1) hxy
   rw [← hx2, ← hy2]
   exact hind
 
 /-- **THE RAMSEY LADDER (Lemma REC + the tower, K5_PROOF.md §1–§2).**
-For `r, s ≥ 2`: any graph on at least `C(r+s-2, r-1)` vertices carries an
-`r`-clique or an `s`-independent-set. Plain induction on `r + s`; the
-peel splits at a vertex, Pascal (`choose_succ_succ'`) pays both sides. -/
+For `r, s ≥ 2`: any graph on at least `C(r+s-2, r-1)` vertices carries a
+clique of size `≥ r` or an independent set of size `≥ s`. Plain induction
+on `r + s`; the peel splits at a vertex, Pascal (`choose_succ_succ'`)
+pays both sides. -/
 theorem ramsey_ladder :
     ∀ (N r s : ℕ), r + s = N → 2 ≤ r → 2 ≤ s →
       ∀ (β : Type) [Fintype β] [DecidableEq β] (G : SimpleGraph β),
         Nat.choose (r + s - 2) (r - 1) ≤ Fintype.card β →
-        (∃ K : Finset β, K.card = r ∧ G.IsClique (↑K : Set β)) ∨
-        (∃ I : Finset β, I.card = s ∧ G.IsIndepSet (↑I : Set β)) := by
+        (∃ K : Finset β, r ≤ K.card ∧ G.IsClique (↑K : Set β)) ∨
+        (∃ I : Finset β, s ≤ I.card ∧ G.IsIndepSet (↑I : Set β)) := by
   intro N
   induction N with
   | zero => intro r s hrs hr hs _ _ _ _; omega
@@ -381,23 +389,28 @@ theorem ramsey_ladder :
       by_cases hs2 : s = 2
       · -- BASE s = 2 (dual): a non-edge is a 2-independent-set
         subst hs2
-        rw [show 2 + 2 - 2 = 2 by omega, show 2 - 1 = 1 by omega,
-          Nat.choose_one_right] at hcard
+        rw [show r + 2 - 2 = r by omega] at hcard
+        have hchoose : Nat.choose r (r - 1) = r := by
+          simpa using Nat.choose_succ_self_right (r - 1)
+        rw [hchoose] at hcard
         by_cases hpair : ∃ a b : β, a ≠ b ∧ ¬ G.Adj a b
         · obtain ⟨a, b, hab, hnadj⟩ := hpair
-          refine Or.inr ⟨{a, b}, by simp [hab], ?_⟩
-          intro x hx y hy hxy
-          simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx hy
-          rcases hx with rfl | rfl <;> rcases hy with rfl | rfl
-          · exact absurd rfl hxy
-          · exact fun hadj => hnadj (G.adj_symm hadj)
-          · exact fun hadj => hnadj hadj
-          · exact absurd rfl hxy
+          refine Or.inr ⟨{a, b}, ?_, ?_⟩
+          · rw [Finset.card_insert_of_notMem (by simp [hab] : a ∉ ({b} : Finset β)),
+              Finset.card_singleton]
+          · intro x hx y hy hxy
+            simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hx hy
+            rcases hx with hxa | hxa <;> rcases hy with hyb | hyb
+            · exact absurd (hxa.trans hyb.symm) hxy
+            · rw [hxa]; exact fun hadj => hnadj (G.adj_symm hadj)
+            · rw [hyb]; exact fun hadj => hnadj hadj
+            · exact absurd (hxa.trans hyb.symm) hxy
         · push_neg at hpair
           -- complete graph: univ is a clique of full size
-          refine Or.inl ⟨Finset.univ, Finset.card_univ, ?_⟩
-          intro a _ b _ hab
-          exact hpair a b hab
+          refine Or.inl ⟨Finset.univ, ?_, ?_⟩
+          · rw [Finset.card_univ]; exact hcard
+          · intro a _ b _ hab
+            exact hpair a b hab
       -- PEEL: r, s ≥ 3
       obtain ⟨R, rfl⟩ : ∃ R, r = R + 2 := ⟨r - 2, by omega⟩
       obtain ⟨S, rfl⟩ : ∃ S, s = S + 2 := ⟨s - 2, by omega⟩
@@ -408,9 +421,8 @@ theorem ramsey_ladder :
         rw [show (R + S + 1) + 1 = R + S + 2 by omega] at h
         exact h
       -- the vertex (β nonempty: card ≥ C ≥ 1)
-      have hchoosepos : 0 < Nat.choose (R + S + 2) (R + 1) :=
-        Nat.choose_pos (by omega)
-      have hcardpos : 0 < Fintype.card β := lt_of_le_of_lt (by omega) hcard
+      have hcardpos : 0 < Fintype.card β :=
+        lt_of_le_of_lt (Nat.choose_pos (by omega)) hcard
       obtain ⟨v⟩ : Nonempty β := Fintype.card_pos_iff.mp hcardpos
       -- the split: |A| + |B| + 1 = card β
       have hvA : v ∉ G.neighborFinset v := fun hmem =>
@@ -435,14 +447,14 @@ theorem ramsey_ladder :
           rw [show (R + 1) - 1 = R by omega]
           exact hAbig
         obtain hIH := ih ((R + 1) + (S + 2)) (R + 1) (S + 2) (by omega) (by omega)
-          (by omega) {x // x ∈ G.neighborFinset v} _ _
+          (by omega) {x // x ∈ G.neighborFinset v}
           (G.comap (Subtype.val : {x // x ∈ G.neighborFinset v} → β)) hsub
         rcases hIH with ⟨K, hKc, hK⟩ | ⟨I, hIc, hI⟩
         · obtain ⟨hcl, hcard'⟩ := clique_extend G v (G.neighborFinset v)
             (fun w hw => (G.mem_neighborFinset v w).mp hw) hK
           exact Or.inl ⟨insert v (K.image Subtype.val), by omega, hcl⟩
         · obtain ⟨hind, hcard''⟩ := indep_image G (G.neighborFinset v) hI
-          exact Or.inr ⟨I.image Subtype.val, hcard''.symm.trans hIc, hind⟩
+          exact Or.inr ⟨I.image Subtype.val, by omega, hind⟩
       · -- B-side: |B| ≥ C(R+S+1, R+1); recurse with (R+2, S+1); extend by v
         have hBbig : Nat.choose (R + S + 1) (R + 1)
             ≤ ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v))).card := by
@@ -456,13 +468,13 @@ theorem ramsey_ladder :
           exact hBbig
         obtain hIH := ih ((R + 2) + (S + 1)) (R + 2) (S + 1) (by omega) (by omega)
           (by omega) {x // x ∈
-            ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v)))} _ _
+            ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v)))}
           (G.comap (Subtype.val : {x // x ∈
             ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v)))} → β)) hsub
         rcases hIH with ⟨K, hKc, hK⟩ | ⟨I, hIc, hI⟩
         · obtain ⟨hcl, hcard'⟩ := clique_image G
             ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v))) hK
-          exact Or.inl ⟨K.image Subtype.val, hcard'.symm.trans hKc, hcl⟩
+          exact Or.inl ⟨K.image Subtype.val, by omega, hcl⟩
         · obtain ⟨hind, hcard''⟩ := indep_extend G v
             ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v)))
             (fun w hw => by
@@ -489,21 +501,25 @@ theorem top_comap_of_pairwise {n k : ℕ} {G : SimpleGraph (Fin n)} (f : Fin k �
     subst heq
     exact G.irrefl hadj'
 
-/-- **The bridge.** A 5-clique Finset in an induced-K5-free graph is
-impossible: the order-isomorphism image is a complete-graph copy. -/
+/-- **The bridge.** A clique of size ≥ 5 in an induced-K5-free graph is
+impossible: a 5-subset carries the complete-graph copy. -/
 theorem no_five_clique_of_no_induced {n : ℕ} {G : SimpleGraph (Fin n)}
     (hG : ¬∃ g : Fin 5 ↪ Fin n, (⊤ : SimpleGraph (Fin 5)) = G.comap g)
     (K : Finset (Fin n)) (hK : G.IsClique (↑K : Set (Fin n)))
-    (hK5 : K.card = 5) : False := by
-  set e := Finset.orderIsoOfFin K hK5 with he
+    (hK5 : 5 ≤ K.card) : False := by
+  obtain ⟨T, hTsub, hTcard⟩ : ∃ T : Finset (Fin n), T ⊆ K ∧ T.card = 5 :=
+    Finset.exists_smaller_set K 5 (by omega)
+  have hTclique : G.IsClique (↑T : Set (Fin n)) :=
+    fun a ha b hb hab => hK (hTsub ha) (hTsub hb) hab
+  set e := Finset.orderIsoOfFin T hTcard with he
   have hadj : ∀ i j : Fin 5, i ≠ j → G.Adj (e i : Fin n) (e j : Fin n) := by
     intro i j hij
-    have hmem_i : (e i : Fin n) ∈ K := Subtype.coe_prop (e i)
-    have hmem_j : (e j : Fin n) ∈ K := Subtype.coe_prop (e j)
+    have hmem_i : (e i : Fin n) ∈ T := Subtype.coe_prop (e i)
+    have hmem_j : (e j : Fin n) ∈ T := Subtype.coe_prop (e j)
     have hne : (e i : Fin n) ≠ (e j : Fin n) := by
       intro heq
       exact hij (e.injective (Subtype.ext heq))
-    exact hK (by simp [hmem_i]) (by simp [hmem_j]) hne
+    exact hTclique (by simp [hmem_i]) (by simp [hmem_j]) hne
   have hcoeinj : Function.Injective (fun i : Fin 5 => (e i : Fin n)) := by
     intro i j hij
     apply e.injective
@@ -538,9 +554,8 @@ theorem choose_le_of_ge_1024 {n : ℕ} (hn : 1024 ≤ n) :
   have h1 : root5 n + 4 ≤ 3 * root5 n := by omega
   have h2 : (root5 n + 4) ^ 4 ≤ (3 * root5 n) ^ 4 := pow_le_pow_of_le h1 4
   have h3 : (3 * root5 n) ^ 4 = 81 * (root5 n) ^ 4 := by
-    have hsplit : (3 * root5 n) ^ 4 = 3 ^ 4 * (root5 n) ^ 4 := by
-      rw [← Nat.pow_mul]; congr 1; norm_num
-    rw [hsplit]; norm_num
+    rw [mul_pow]
+    norm_num
   have h4 : 81 * (root5 n) ^ 4 ≤ 24 * (root5 n) ^ 5 := by
     have h81 : (81:ℕ) ≤ 24 * root5 n := by omega
     have hle : (root5 n) ^ 4 * 81 ≤ (root5 n) ^ 4 * (24 * root5 n) :=
@@ -549,10 +564,11 @@ theorem choose_le_of_ge_1024 {n : ℕ} (hn : 1024 ≤ n) :
     calc 81 * (root5 n) ^ 4 = (root5 n) ^ 4 * 81 := by ring
       _ ≤ (root5 n) ^ 4 * (24 * root5 n) := hle
       _ = 24 * (root5 n) ^ 5 := hrr
+  rw [← h3] at h4
   have h5 : 24 * (root5 n) ^ 5 ≤ 24 * n := Nat.mul_le_mul_left _ hw5
   have hP4 := four_and_twenty_choose_four_le (root5 n + 4) (by omega)
-  have hfin : 24 * Nat.choose (root5 n + 4) 4 ≤ 24 * n := le_trans hP4
-    (le_trans h2 (le_trans h3 (le_trans h4 h5)))
+  have hfin : 24 * Nat.choose (root5 n + 4) 4 ≤ 24 * n :=
+    le_trans hP4 (le_trans h2 (le_trans h4 h5))
   exact Nat.le_of_mul_le_mul_left hfin
 
 /-! ## §7 THE REAL FINISHER (the green rpow template) -/
@@ -576,8 +592,9 @@ theorem rpow_fifth_le_root5_succ (n : ℕ) (hn : 1 ≤ n) :
       = ((root5 n + 1 : ℕ) : ℝ) ^ ((((5:ℕ):ℝ) * ((1:ℝ)/5))) :=
     (Real.rpow_mul (by positivity) ((5:ℕ):ℝ) ((1:ℝ)/5)).symm
   have h3 : (((5:ℕ):ℝ) * ((1:ℝ)/5)) = 1 := by ring
-  rw [h3] at hstep2
-  rw [hcast, hstep2, Real.rpow_one]
+  rw [hcast] at hstep1
+  rw [hstep2, h3, Real.rpow_one] at hstep1
+  exact hstep1
 
 /-! ## §8 THE HEADLINES -/
 
@@ -596,14 +613,14 @@ theorem eh_K5 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 5))
     rw [he]
     exact h
   have hlad := ramsey_ladder (5 + (root5 n + 1)) 5 (root5 n + 1) (by omega)
-    (by omega) (by omega) (Fin n) _ _ G (by
+    (by omega) (by omega) (Fin n) G (by
       rw [show 5 + (root5 n + 1) - 2 = root5 n + 4 by omega]
       rw [show 5 - 1 = 4 by omega]
       exact hcount)
   rcases hlad with ⟨K, hKc, hK⟩ | ⟨I, hIc, hI⟩
-  · -- a 5-clique is an induced K5 copy: contradiction
+  · -- a 5+-clique is an induced K5 copy: contradiction
     exact (no_five_clique_of_no_induced hG K hK hKc).elim
-  · -- the independent set of size w+1 finishes
+  · -- the independent set of size ≥ w+1 finishes
     have hindep := SimpleGraph.IsIndepSet.card_le_indepNum (t := I) (tc := hI)
     have hrpow := rpow_fifth_le_root5_succ n (by omega)
     exact Or.inl (le_trans hrpow (Nat.cast_le.2 (le_trans hIc hindep)))
