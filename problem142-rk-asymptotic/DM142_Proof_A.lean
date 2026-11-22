@@ -92,7 +92,7 @@ theorem allT_true_iff {p : Nat → Bool} :
         · exact ih.1 h2 x hx'
       · intro h
         refine Bool.and_eq_true_iff.2 ⟨h a ?_, ih.2 ?_⟩
-        · exact List.mem_cons_self a t
+        · exact List.mem_cons_self
         · intro x hx
           exact h x (by simp [hx])
 
@@ -118,12 +118,14 @@ theorem memL_true_iff (x : Nat) :
       · have hd : decide (x = b) = false := by simp [hxb]
         constructor
         · intro h
+          simp only [memL] at h
           rw [hd, Bool.false_or] at h
           exact List.mem_cons_of_mem _ (ih.1 h)
         · intro hm
           rcases List.mem_cons.1 hm with hx' | hx'
           · exact absurd hx' hxb
-          · rw [hd, ih.2 hx']
+          · simp only [memL]
+            rw [hd, ih.2 hx']
 
 theorem not_and2_true {A B : Bool} (hA : A = true) (hB : B = true)
     (h : !(A && B) = true) : False := by
@@ -219,7 +221,7 @@ theorem apFree_of_pairscan {W : List Nat} {k : ℕ} (hk : 2 ≤ k)
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
-    exact ⟨n, by rw [hn, nsmul_nat]⟩
+    exact ⟨n, by rw [← hn, nsmul_nat]⟩
   have hmem : ∀ i : ℕ, i < k → a + i * d ∈ t := by
     intro i hi
     rw [hset]
@@ -234,39 +236,41 @@ theorem apFree_of_pairscan {W : List Nat} {k : ℕ} (hk : 2 ≤ k)
   have hlt : a < a + d := by omega
   -- the scan says its inner conjunction is false: some i ∈ [2,k) misses W
   have hpair := (allT_true_iff _).1 ((allT_true_iff _).1 hscan a e0) (a + d) e1
-  have hfalse : !(decide (a < a + d) && innerScan k a (a + d) W) = true :=
-    hpair
-  rw [decide_eq_true hlt] at hfalse
+  have hpair' : !(decide (a < a + d) && innerScan k a (a + d) W) = true := hpair
+  rw [decide_eq_true hlt] at hpair'
   have hinner : innerScan k a (a + d) W = false := by
     by_contra hne
-    rw [hne] at hfalse
-    exact Bool.noConfusion hfalse
+    simp at hpair'
+    exact absurd hpair' hne
   -- unfold the false inner conjunction to the existential miss
   have hmiss : ∃ i : ℕ, i ∈ List.range' 2 (k - 2) ∧
       memL (a + i * ((a + d) - a)) W = false := by
     by_contra hno
     push_neg at hno
-    apply hinner
-    induction (List.range' 2 (k - 2)) with
-    | nil => rfl
-    | cons b t ih =>
-        refine Bool.and_eq_true_iff.2 ⟨hno b (by
-          rcases List.mem_cons.1 (List.mem_cons_self b t) with _ | _
-          · exact List.mem_cons_self b t
-          · exact absurd rfl (by simp)), ?_⟩
-        refine ih ?_
-        intro i hi
-        exact hno i (by simp [hi])
+    have htrue : innerScan k a (a + d) W = true := by
+      show allT (fun i => memL (a + i * ((a + d) - a)) W) (List.range' 2 (k - 2)) = true
+      induction (List.range' 2 (k - 2)) with
+      | nil => rfl
+      | cons b t ih =>
+          refine Bool.and_eq_true_iff.2 ⟨hno b (by simp), ?_⟩
+          refine ih ?_
+          intro i hi
+          exact hno i (by simp [hi])
+    rw [htrue] at hinner
+    exact Bool.noConfusion hinner
   obtain ⟨i, himem, hout⟩ := hmiss
   have hirange : 2 ≤ i ∧ i < k := by
-    have := List.mem_range' himem
+    have h1 : i ∈ List.range' 2 (k - 2) := himem
+    simp only [List.mem_range'] at h1
+    obtain ⟨j, hj, heq⟩ := h1
     omega
   -- but a + i*d ∈ t ⊆ ↑W.toFinset, so it IS in W — contradiction
   have hin : a + i * d ∈ W :=
     mem_of_memFinsetCoe (hmem i hirange.2) hts
-  rw [show (a + d) - a = d by omega, Nat.mul_comm] at hout
-  rw [memL_true_iff] at hout
-  exact hout hin
+  rw [show (a + d) - a = d by omega] at hout
+  have hmem' : memL (a + i * d) W = true := (memL_true_iff _ _).2 hin
+  rw [hmem'] at hout
+  exact Bool.noConfusion hout
 
 /-! ## §2 LAW M-1 — the monotonicity ladder -/
 
@@ -283,7 +287,7 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
-    exact ⟨n, by rw [hn, nsmul_nat]⟩
+    exact ⟨n, by rw [← hn, nsmul_nat]⟩
   -- the k-prefix u := {a + n•d | n < k}
   set u : Set ℕ := {y | ∃ n : ℕ, ((n : ℕ) : ENat) < ((k : ℕ) : ENat) ∧
     y = a + n • d} with hu_def
@@ -329,9 +333,9 @@ theorem apFree_succ {s : Set ℕ} {k : ℕ} (hk : 2 ≤ k)
     refine ⟨a, d, hu_card, ?_⟩
     apply Set.Subset.antisymm
     · rintro y ⟨n, hn, hy⟩
-      exact ⟨n, hn, by rw [hy, nsmul_nat]⟩
+      exact ⟨n, hn, hy.symm⟩
     · rintro y ⟨n, hn, hy⟩
-      exact ⟨n, hn, by rw [hy, nsmul_nat]⟩
+      exact ⟨n, hn, hy.symm⟩
   have htop := hs u (hu_subset.trans hts) hu_ap
   have hkc : k ≤ 1 := ENat.natCast_le_natCast.1 htop
   omega
@@ -347,7 +351,7 @@ theorem r_mono {k N : ℕ} (hk : k ≠ 1) : r k N ≤ r (k + 1) N := by
       exact Set.IsAPOfLengthFree.maxCard_one N
     rw [e0, e1]
   · have hk2 : 2 ≤ k := by omega
-    simp only [Set.IsAPOfLengthFree.maxCard]
+    show Set.IsAPOfLengthFree.maxCard k N ≤ Set.IsAPOfLengthFree.maxCard (k + 1) N
     refine csSup_le_csSup' ?_ ?_
     · exact ⟨(Finset.Icc 1 N).card, mem_upperBounds.2 ?_⟩
       rintro n ⟨T, hTsub, -, rfl⟩
@@ -389,8 +393,9 @@ theorem r_mono_unrestricted_false :
       have h2' : 2 ≤ S.card := by omega
       obtain ⟨x, hx⟩ : ∃ x, x ∈ S := by
         by_contra hempty
+        push_neg at hempty
         have hS0 : S = ∅ := Finset.eq_empty_iff_forall_notMem.2 hempty
-        rw [hS0] at hgt
+        rw [hS0, Finset.card_empty] at hgt h2'
         omega
       obtain ⟨y, hy, hxy⟩ : ∃ y ∈ S, y ≠ x := by
         by_contra hno
@@ -406,15 +411,15 @@ theorem r_mono_unrestricted_false :
       have hpair : ({x, y} : Set ℕ).IsAPOfLength ((2 : ℕ) : ENat) := by
         rcases Nat.lt_or_ge x y with hlt | hge
         · exact ⟨x, y - x, Nat.isAPOfLengthWith_pair hlt⟩
-        · exact ⟨y, x - y,
-            Nat.isAPOfLengthWith_pair (lt_of_le_of_ne hge (Ne.symm hxy'))⟩
+        · have hyx : y < x := lt_of_le_of_ne hge (Ne.symm hxy')
+          rw [Set.insert_comm]
+          exact ⟨y, x - y, Nat.isAPOfLengthWith_pair hyx⟩
       have hsub : ({x, y} : Set ℕ) ⊆ (↑S : Set ℕ) := by
         intro z hz
         simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hz
-        rcases hz with rfl | rfl | hfalse
+        rcases hz with rfl | rfl
         · exact Finset.mem_coe.2 hx
         · exact Finset.mem_coe.2 hy
-        · exact absurd hfalse (by simp)
       have := hSfree {x, y} hsub hpair
       have : (2 : ℕ) ≤ 1 := by exact_mod_cast this
       omega
