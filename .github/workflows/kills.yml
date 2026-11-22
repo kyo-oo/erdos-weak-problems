@@ -197,6 +197,19 @@ jobs:
           grep -E "'(DM142C.u_gen_zero|DM142C.u_gen_zero_tight|DM142C.core_bound|DM142C.window_union_bound|DM142C.window_bound|DM142C.window_isAP|DM142C.dm142c_board)' (does not depend on any axioms|depends on axioms)" kernel142dmc.log
           ! grep -E "'DM142C..*'.*sorryAx" kernel142dmc.log
           echo KERNEL_142DM_C_GREEN=1
+      - name: "Kernel 61DM-D — W84 THE K5/E5 RAMSEY LADDER: the R(5,t) ≤ C(t+3,4) tower over the official IsErdosHajnalLowerBound predicate at c = 1/5 — theorem Erdos61D.eh_K5 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 5)) (fun n => (n:ℝ)^(1/5)) + Erdos61D.eh_E5 (the complement) + Erdos61D.erdos_61_k5_e5 (the board) — the custom ramsey_ladder module (explicit-set conclusions, plain induction on r+s, vertex peel, Pascal choose_succ_succ', comap Subtype.val transfers, v-extension on both sides) + the integer fifth root root5 (Finset filter/max') + the falling-factorial ladder 24·C(m,4) ≤ m⁴ + the pure-ℕ spine (w+4)⁴ ≤ 81w⁴ ≤ 24w⁵ ≤ 24n + the green rpow finisher template; Arsenal bridge: CardinalWorlds.two_pow_pos [:420] + two_pow_ge2 [:431] (the 1024 = 2¹⁰ threshold gates). K5_PROOF.md §1–§4 executed. Complete proof: zero sorry, zero native_decide."
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel61dmd.log
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel61dmd.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel61dmd.log
+          lake env lean problem61-erdos-hajnal/DM61_Proof_D.lean 2>&1 | tee -a kernel61dmd.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dmd.log
+          grep -F "DM61D_K5_GREEN" kernel61dmd.log
+          grep -E "'(Erdos61D.eh_K5|Erdos61D.eh_E5|Erdos61D.erdos_61_k5_e5|Erdos61D.ramsey_ladder|Erdos61D.choose_le_of_ge_1024|Erdos61D.rpow_fifth_le_root5_succ|Erdos61D.four_and_twenty_choose_four_le)' (does not depend on any axioms|depends on axioms)" kernel61dmd.log
+          ! grep -E "'Erdos61D..*'.*sorryAx" kernel61dmd.log
+          echo KERNEL_61DM_D_GREEN=1
 
   kernel-a:
     runs-on: ubuntu-24.04
