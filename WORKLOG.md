@@ -5156,3 +5156,72 @@ nonempty_cardSet GREEN; ersz_upper + the lower side the continuations;
 the full conjecture f(n) = 2^{n−2}+1 open.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S083 — THE W83 REPAIR WAVE: the four DM kernels rebuilt against the real v4.33 API (2026-11-22, BOSS: "why the fuck its stuck at 3 fronts ... finish the proof, right now, in this round")
+
+**THE ROUND (commander surgery + one agent lane; the CI run 45017357264
+post-mortem as ground truth):** the W82 seal's kernel-dm-w82 job died at
+Kernel 61DM-A — DM61_Proof_A.lean was written blind against an OLDER
+Mathlib API and carried ~30 defect sites; the job's `set -euo pipefail`
+killed 61DM-B/142DM-A/142DM-B before they ever compiled. 107DM-A and
+107DM-B were GREEN (byte-identical dependency cones of the once-green
+107A + the small B-only extension, dual-audited GREEN-EXPECT).
+
+**The verified-API playbook (Mathlib v4.33.0-rc2 sources pulled from the
+tag and read directly — no guessing):**
+- `SimpleGraph.loopless : Std.Irrefl Adj` is a STRUCTURE field — the
+  accessor is `G.irrefl : ¬ G.Adj v v` (Basic.lean:163).
+- `SimpleGraph.mem_neighborFinset (v w : V)` — BOTH vertices explicit
+  (Finite.lean:178); `.mp` on the unapplied name is an unknown constant.
+- `Finset.not_mem_empty` → `notMem_empty`; `mem_biUnion` is an IFF;
+  `card_union_le`/`card_biUnion_le` are inequalities (never `rw`-able).
+- `Real.rpow_mul (hx) (y z) : x^(y*z) = (x^y)^z` — REVERSED orientation.
+- `le_csSup (h₁ : BddAbove s) (h₂ : a ∈ s)`; `csSup_le (h₁ : s.Nonempty)
+  (h₂ : ∀ b ∈ s, b ≤ a)`; `csSup_le_csSup` takes THREE args — the 2-arg
+  kernel need is `csSup_le_csSup'`.
+- `Bool.and_eq_true` is a Prop-Eq at this pin — `.1/.2` projections are
+  invalid; the working form is `Bool.and_eq_true_iff` (found by the 142B
+  repair agent — missed by the audit).
+- `Set.Pairwise` keeps the `x ≠ y` guard (5-arg intro) — but `rcases …
+  with rfl` on `x = v` with v a theorem parameter ELIMINATES v and kills
+  every later reference (the "unknown identifier v" cascade) — the safe
+  idiom is `rcases with h1 | h'` + `rw [h1]`.
+- `SimpleGraph.pathGraph` lives in Hasse.lean; postfix `ᶜ` binds the
+  preceding ATOM — `pathGraph 3 ᶜ` parses as `pathGraph (3ᶜ)` → Compl ℕ
+  synth failure; always `((pathGraph 3))ᶜ`.
+- Arsenal/CardinalWorlds.lean has NO namespace — `two_pow_pos`/`
+  two_pow_ge2` are ROOT declarations (the `CardinalWorlds.` prefix was an
+  unknown identifier); ErdosTernary2's lemmas live under `ErdosTernary2.`.
+
+**THE LANES:**
+
+| lane | action | status |
+|---|---|---|
+| 61A DM61_Prooff_A.lean | FULL COMMANDER REWRITE (30 sites): open Filter for atTop, G.irrefl everywhere, explicit mem_neighborFinset v w, the per-case pathGraph3_comap (9 explicit iff_of_true/iff_of_false branches over pathGraph_adj's `.val + 1` form), the explicit-f top_comap_of_pairwise call (the metavariable-pinning repair), substitution-trap-free closedNbhd/hins case analyses, the le_trans chain for the domination count (card_union_le/card_biUnion_le as hypotheses, never rw), the Nat.mul_succ identity for D·s = s + s(D−1), the REVERSED rpow_mul finisher, official_bound_of_sqrt's le_trans direction, the (pathGraph 3)ᶜ parenthesization | pushed 9a756ce |
+| 61B DM61_Closure.lean | FULL COMMANDER REWRITE in lockstep (the file was a verbatim copy of the broken 61A) — closure-map ledger preserved, family floor re-derived in-frame under Erdos61B, DM61B_CLOSURE_GREEN receipt | pushed 9a756ce |
+| 142A DM142_Proof_A.lean | 11 SURGICAL REPAIRS: the apDiff binder (u→t) + the encard chain (Set.encard_le_encard/encard_singleton + ENat.natCast_le_natCast), Bool.and_eq_true_iff ×5, the scanTrichotomy residue split (ErdosTernary2.lt_three_cases on i % 3 — the old call fed an unprovable i < 3), csSup_le_csSup' (the 3-arg lemma's 2-arg sibling), the r_mono_unrestricted_false UNCLOSED-PAREN syntax error (missed by every audit), List.toFinset_card_of_nodup | pushed 9a756ce |
+| 142B DM142_Proof_B.lean | AGENT LANE (the one subagent survivor): D1 binder, D2 scanner block hoisted above the bridges, D3 .elim endings, D5 encard API, D6 toFinset_card_of_nodup, + the Bool.and_eq_true Prop-Eq discovery (5 projections), all 8 receipts DM142B.-prefixed | pushed 9a756ce |
+| gate-61 driver | S-W82-CI updated to the consolidated kernel-dm-w82 reality (the old check demanded the deleted kernel-61dm-a/b job keys — the 9a29c0e null-key repair's orphan); S-W82-KERNELS's sorryAx-string check now clean (the doc-line rephrase) | pushed 9a756ce |
+| kills.yml | the 142B axioms-grep DM142B. prefix (the namespaced #print axioms output could never match the bare-name grep — CI RED even after a clean compile) | pushed 9a756ce |
+
+**The audits:** W83-AUDIT-107A (GREEN-EXPECT — byte-identical to the green
+run's inputs), W83-AUDIT-107B (GREEN-EXPECT — the B-only cone is small,
+Nat.sInf_le cross-certified), W83-AUDIT-142B (the full defect map + the
+decide-size table: all 59 decides on closed literal lists, worst ≈729K
+kernel steps ≪ budget; all 19 witness literal lengths match the claimed
+stone sizes), W83-REPAIR-142B (the repair record). 107A/107B needed
+nothing — they were already green on run 45017357264 (107B: KERNEL_107DM_B
+GREEN on its first-ever compile).
+
+**Parallel-session courtesy:** the S083 #406 lane (Kernel 75,
+ghost-extinction) pushed 1b58ed6a/e7c197d mid-round — the W83 wave
+REBASED on top (zero overlap: their lanes are #406; ours are the DM
+kernels). Zero conflict.
+
+**CI:** run 45024995120 at 9a756ce (fired 12:58:12Z) — the verdict on the
+whole board: kernel-dm-w82 (all six DM steps now expected GREEN), the
+three gates, kernel-75 (the S083 lane), and the standing board.
+
+The engine never stops; it never lies. In English, always.
