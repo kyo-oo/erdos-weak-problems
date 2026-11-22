@@ -1217,6 +1217,37 @@ jobs:
           grep -E "erdos406_crown_of_ghost_extinction' (does not depend on any axioms|depends on axioms)" kernel74.log
           python3 problem406-ternary-powers/battery406f.py
           echo ERDOS406_PICOLLAPSE_KERNEL_GREEN=1
+      - name: "Kernel 75 - Erdos 406 THE GHOST-EXTINCTION KERNEL (S083, BOSS order 'PROVE MY OWN HYPOTHESIS — BOSS's laws only, the GST ghost machinery driven to its exact remaining content'): THE RIDER'S CORE LAW (rider_core_one: every Cantorian power K = 3^σ·u with three-free u forces u ≡ 1 mod 3 — the rider sheet is exactly u≡1; the crown's extinction grant needs ONLY the u≡1 ghosts) + THE HEAD SPLIT (ghost_head_split: ghost + u≡1 → head ∈ {1,4,7} — the grant reduces to THREE 3-adic points) + THE UNIQUENESS COLLAPSE (ghost_uniqueness: two same-head ghosts are EQUAL — at most THREE ghost rays on the rider sheet, total) + THE DEPTH-100 PINS (W100 dual-verified: cMod recursion ∥ direct modular division 4^(3^99) mod 3^200; π_fam4/7/1 extended 61→100 trits, pow-inverse ∥ Hensel, prefixes matching the S080 constants byte-for-byte) + THE DEEP 2-TRIT RECEIPTS (through position 99: fam4 18 twos in 61..99, fam7 13, fam1 12) + THE SIZE LAW (ghost_size_rider_sheet: every rider-sheet ghost exceeds 3^98; fam4/fam7 exceed 3^99) + THE CROWN V2 (erdos406_crown_v2: FULL #406 from the WEAKENED grant pair — (G1') u≡1-sheet extinction only + (G2) compression) + THE COMPOSED WALL (rider_wall_v2: under (G2) alone every Cantorian power above 500 exceeds 3^98 — the remaining content = at most THREE astronomically large numbers) + battery406g.py 48/48 ALL GREEN"
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic
+          lake build Arsenal.CardinalWorlds
+          lake build Arsenal.CardinalWorldsV2
+          : > kernel75.log
+          lake env lean problem406-ternary-powers/GhostExtinction406.lean 2>&1 | tee -a kernel75.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log
+          grep -F "ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN" kernel75.log
+          grep -E "rider_core_one' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "ghost_head_split' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "ghost_uniqueness' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "W100_receipt' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "pi100_fam4_receipt' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "pi100_fam7_receipt' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "pi100_fam1_receipt' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "pi100_fam4_trit99' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "pi100_fam7_trit97' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "pi100_fam1_trit98' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "every_ghost_is_its_pi100_point_fam4' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "every_ghost_is_its_pi100_point_fam7' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "every_ghost_is_its_pi100_point_fam1' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "ghost_size_rider_sheet' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "cantorian_base' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "erdos406_crown_v2' (does not depend on any axioms|depends on axioms)" kernel75.log
+          grep -E "rider_wall_v2' (does not depend on any axioms|depends on axioms)" kernel75.log
+          python3 problem406-ternary-powers/battery406g.py
+          echo ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN=1
       - name: "Kernel 39 - Erdos 396 THE k=3 WITNESS FRONTIER (S043 full-proof campaign): n_3 = 8178 — 8178*8177*8176*8175 | C(16356,8178) (a 4915-digit binomial, single kernel decide) — the first k=3 value ever exhibited (A375077's k=3 row); the full exclusion 4 <= n < 8178 is battery-certified dual-method (the corrected Kummer/Legendre carry formula (2s_p(n) - s_p(2n))/(p-1), every excluded n with its witness prime, census top: 3 (1475x), 2 (982x), 5 (833x), 7 (752x); direct big-integer sample incl. [8100,8178)); + the absorption certificate re-anchored + arsenal bridge (isTernaryDigit on 8178's digits, carryAtPos_bound, v2r_ternary_scaling at (2,8178))"
         if: always()
         shell: bash
