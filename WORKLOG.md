@@ -5103,3 +5103,56 @@ kernel job (a/b/c/s060/142a/142d/142k/142cmp/61k/61cmp/107k/107cmp) —
 the full 16-job board.
 
 The engine never stops; it never lies.
+
+---
+
+## S082 — THE W82 OFFICIAL-STATEMENT WAVE (2026-11-22, BOSS: "THEY ARE NOT OFFICIAL STATEMENT OF THE PROBLEMS TO BE PROVE … USE MY LEAN FILES, TO PROVE AND COMPLETE PROOF")
+
+**THE CORRECTION:** every kernel now states and proves THE OFFICIAL
+STATEMENTS — verbatim from google-deepmind/formal-conjectures @ 2207c54d
+(cloned fresh this session; the vendored deepmind-comparator/DM_*.lean
+byte-verified identical) — over the OFFICIAL definitions (the FC vendor
+pack: Set.IsAPOfLengthFree.maxCard, NonTrilinear, ConvexIndep,
+HasConvexNGon, Set.Triplewise — FC/, module syntax stripped, declarations
+byte-identical, PROVENANCE.md), with BOSS's Arsenal as the proof machinery
+and GitHub CI as the only Lean verdict.
+
+**The foundation (commander-built):** the FC vendor pack (7 files) + the
+three OFFICIAL statement files (DM61/DM142/DM107_Official.lean: official
+defs verbatim + DM107's three test proofs VERBATIM as the faithfulness
+anchors + the official target spec blocks) + the kernel-fc CI job. One
+repair round: Mathlib v4.33.0-rc2 already declares SimpleGraph.pathGraph —
+the vendored duplicate deleted (f2b9949).
+
+**The wave (6 lanes, 2 per problem; dispatch false-negatives per the
+documented mode — all six primaries landed, banked their early milestones,
+and died posthumous; 6 finishers launched: 2 delivered full reports, 4
+recovered by COMMANDER-ABSORB — every lane's work checkpointed within
+minutes of each death, zero work lost):**
+
+| lane | delivered | CI |
+|---|---|---|
+| W82-107A | **THEOREM nonempty_cardSet** (the official #107 solved variant, ∀ n ≥ 3) — the linrock @ cd3cf0b1 cup-cap chain ported onto the vendored defs; arsenal bridge cited | **GREEN** (run 44968437049, axiom-clean [propext, Classical.choice, Quot.sound]) |
+| W82-107B | **ersz_upper** (f n ≤ C(2n−4,n−2)+1, ALL n ≥ 3, official defs) — the linrock cone + lane's own kill assembly; AUDIT of 107A (no defects) | run queued |
+| W82-61A | **THEOREM erdos_61_family** (the official statement form at c = 1/4 for K1, K2, K̄2, K3, K̄3, P3, P̄3) — the complement transfer + the no-copy ladder + the greedy core + the sqrt/rpow finisher; P4 honestly named (Seinsche derivation banked) | run queued |
+| W82-61B | DM61_Closure.lean v1 (the honest closure map) + **AUDIT_W82_61A COMPLETE** (A1/A3/A4/A5 PASS, A2 binds at CI) + the 61 gate extended (S-W82-SPEC/KERNELS/CI + N-W82-NEG) + solution.json W82 claims | run queued |
+| W82-142A | **LAW M-1 r_mono** (k ≠ 1) + **r_mono_unrestricted_false** (the k=1 honesty counterexample — the brief's literal 61 ≤ r 3 19 caught as a transposition, the TRUE stones proved) + **THE GENERAL REFLECTION LEMMA** (all k ≥ 2 at once) + the six banked stones (19 ≤ r 3 61, 16 ≤ r 3 48, 22 ≤ r 4 42, 36 ≤ r 5 55, 31 ≤ r 6 43, 36 ≤ r 7 45) | run queued |
+| W82-142B | DM142_Proof_B.lean (19 decide-certified lower stones over the official r, k=3/4/5 ladders; the arsenal Cantor-reader bridge genuinely used) + OFFICIAL_POSITION_W82.md (the honest two-sided ledger) + the audit engine (all B2 receipts PASS) + the 142 gate extension | run queued |
+
+**The seal:** all six lanes merged into campaign (kills.yml union: 23 jobs —
+kernel-fc + six kernel-*-dm jobs + the existing board). The full-board run
+fires on push. NOTE: the parallel S080 session's kernel-b (PiCollapse406,
+#406 lane) is red from ITS in-flight work — not a W82 lane; its owner
+session iterates.
+
+**The honest frontier after W82:** #61 — the family floor in official form
++ the closure map; P4/K5/E5/substitution derived, the W83 kernel targets;
+erha89's easy-case induction derived (c(H) = c(H−u)/√2), the hard case
+(connected + co-connected H) open. #142 — the official-r laws (M-1 + the
+stones + the counterexample) + the two-sided position document; U-GEN-0/
+V-GEN derived + engine-validated, the kernel continuations named; the
+asymptotic formula (the open core) claimed by no one. #107 —
+nonempty_cardSet GREEN; ersz_upper + the lower side the continuations;
+the full conjecture f(n) = 2^{n−2}+1 open.
+
+The engine never stops; it never lies. In English, always.
