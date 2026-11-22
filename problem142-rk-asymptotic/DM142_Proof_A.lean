@@ -418,7 +418,10 @@ theorem r_mono_unrestricted_false :
         · exact ⟨x, y - x, Nat.isAPOfLengthWith_pair hlt⟩
         · have hyx : y < x := lt_of_le_of_ne hge (Ne.symm hxy')
           have hw := Nat.isAPOfLengthWith_pair hyx
-          rw [show ({y, x} : Set ℕ) = ({x, y} : Set ℕ) from Set.insert_comm y x ∅] at hw
+          have hset : ({y, x} : Set ℕ) = ({x, y} : Set ℕ) := by
+            ext z
+            simp
+          rw [hset] at hw
           exact ⟨y, x - y, hw⟩
       have hsub : ({x, y} : Set ℕ) ⊆ (↑S : Set ℕ) := by
         intro z hz
