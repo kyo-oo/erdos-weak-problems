@@ -114,3 +114,32 @@ Engines derived so far (validated by hand; census to follow):
   Mathlib v4.33.0-rc2 API verified against pinned commit 51e6992e (Clique.lean:
   cliqueNum/indepNum/compl lemmas present). Route decision: DIRECT over
   SimpleGraph. This worklog committed (milestone 1).
+
+## 6. COMMANDER-ABSORBED KERNEL (W82-61A, main-thread)
+
+The finisher agent died posthumous after the campaign merge (b963ce9). The
+commander wrote DM61_Proof_A.lean directly from §2's complete derivation:
+- §0 the official predicate VERBATIM (byte-matches DM61_Official.lean);
+- §1 builders: emb2/emb3 (fin_cases + Matrix.cons_val simp), top_comap_of_pairwise
+  (ext + comap_adj + top_adj), pathGraph3_comap (the 9-case grid over
+  SimpleGraph.pathGraph_adj);
+- §2 the no-copy ladder: cliqueFree3_of_no_induced (Finset.orderIsoOfFin),
+  no_edge_of_no_induced_K2, closedNbhd_clique_of_no_induced_P3;
+- §3 the greedy core: maximal independent set via Finset.exists_max_image,
+  Turán-style domination (univ ⊆ s ∪ ΣN(w)), NO induction;
+- §4 the arithmetic: le_sqrt_pow_four (n < (s+1)² ≤ (s·s)² via Nat.mul_le_mul,
+  s ≥ 2 from Nat.le_sqrt), rpow_quarter_le_sqrt (Real.rpow_le_rpow +
+  rpow_mul + rpow_one); ARSENAL BRIDGE: arsenal_threshold from
+  CardinalWorlds.two_pow_pos [:420] + two_pow_ge2 [:431] (read at their
+  lines this session);
+- §5 the family laws: K1 (vacuous), K2 (edgeless → α = n), K3 (the
+  neighborFinset-independent dichotomy — IsNClique 3 {v,a,b} contradiction),
+  P3 (closed-neighborhood clique dichotomy), Kbar2/Kbar3/Pbar3 via
+  isEH_compl ((X.comap g)ᶜ = Xᶜ.comap g by injectivity + indepNum_compl);
+- §6 THE BOARD: erdos_61_family — ∃ c = 1/4 > 0, all seven members in the
+  OFFICIAL statement form.
+HONEST SCOPE: P4 NOT claimed (the Seinsche split derivation stands in §2,
+the continuation is named). erha89: the E1-E4 engine + easy-case induction
+c(H) = c(H−u)/√2 derived in §4 of this worklog; the hard case
+(connected + co-connected H) remains open in-frame — NOT claimed.
+CI: kernel-61dm-a wired (the kernel-fc pattern + axiom-clean greps).
