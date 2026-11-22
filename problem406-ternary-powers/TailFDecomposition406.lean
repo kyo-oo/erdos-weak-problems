@@ -74,7 +74,6 @@ never stops; it never lies.
 
 namespace TailFDecomposition406
 
-#eval "CK76_CK01_________0_The_engine__ported_verbatim_fr"
 /-! ## §0 The engine (ported verbatim from the green kernels) -/
 
 /-- The ternary digit at position `p`. -/
@@ -412,7 +411,6 @@ theorem rider_core_one (K : Nat) (hK : 0 < K)
       exact digit3_of_residue_two (4^K) (v+1) hv1 hmod
     exact hCant (v+1) hv1 hfire
 
-#eval "CK76_CK02_________1_The___cut_word__the_monolith_s"
 /-! ## §1 The Ω-cut word (the monolith's machinery, campaign-ported) -/
 
 /-- The geometric block of the Ω-decomposition: `geoSum s core` is the
@@ -435,7 +433,6 @@ theorem cutword_zero (s : Nat) : omegaCutWord s 0 = 0 := by
   rw [geoSum_zero]
   exact Nat.mul_zero _
 
-#eval "CK76_CK03_theorem_omega_cut_factor__s_core___Nat__"
 /-- **THE Ω-CUT FACTORIZATION** (the monolith's `omega_cut_factor`,
 ported division-free): for every sheet level and every core mass,
 `4^(3^s·core) = 1 + 3^(s+1) · omegaCutWord s core`. -/
@@ -467,7 +464,6 @@ theorem omega_cut_factor (s core : Nat) :
 theorem geo_term_mod (s j : Nat) :
     4^(3^s * j) % 3^(s+1) = 1 := pow4_scaled_mod_next s j
 
-#eval "CK76_CK04_theorem_cutword_diag_congr__s_core___Nat"
 /-- **THE DIAGONAL CONGRUENCE** — inside the window, the cut word IS the
 diagonal-times-core: `omegaCutWord s core ≡ lteCoeff s · core
 [MOD 3^(s+1)]`.  This is why the monolith's window observer reads the
@@ -503,7 +499,6 @@ theorem cutword_one (s : Nat) : omegaCutWord s 1 = lteCoeff s := by
   rw [h1]
   ring
 
-#eval "CK76_CK05_theorem_prefix_slice_digit__m_W_q___Nat_"
 /-- **THE PREFIX-SLICE LAW** — the digit transfer at every depth: for
 `m ≥ 1`, the digit of `1 + 3^m·W` at position `m+q` is the digit of `W`
 at position `q`.  The `+1` never carries past position `m`. -/
@@ -529,8 +524,8 @@ theorem prefix_slice_digit (m W q : Nat) (hm : 1 ≤ m) :
   rw [show (3:Nat)^(m+q) = 3^m * 3^q from by rw [Nat.pow_add],
       ← Nat.div_div_eq_div_mul, hdiv]
 
-#eval "CK76_CK06_________2_The_full_observer__every_depth"
 /-! ## §2 The full observer (every depth at once) -/
+#print axioms TailFDecomposition406.omega_cut_factor  -- CK76 SECTION BOUNDARY
 
 /-- **THE FULL OBSERVER (tower digit = cut-word digit).**  For every
 sheet level `s`, every core and EVERY depth `q` — no window bound — the
@@ -543,7 +538,6 @@ theorem tower_digit_eq_cutword (s core q : Nat) :
   refine prefix_slice_digit (s+1) (omegaCutWord s core) q ?_
   omega
 
-#eval "CK76_CK07_theorem_digit_residue_fire_iff__W_q___Na"
 /-- **THE RESIDUE-FIRE CLASSIFIER** — the digit at any position is two
 exactly when the residue window lands in the top third. -/
 theorem digit_residue_fire_iff (W q : Nat) :
@@ -608,8 +602,8 @@ theorem tower_fire_iff_full (s core q : Nat) :
       ↔ 2 * 3^q ≤ (omegaCutWord s core) % 3^(q+1) := by
   rw [tower_digit_eq_cutword s core q, digit_residue_fire_iff]
 
-#eval "CK76_CK08_________3_THE_COMPRESSION_LAW___the_Cant"
 /-! ## §3 THE COMPRESSION LAW — the Cantorian hypothesis is ONE integer's
+#print axioms TailFDecomposition406.tower_fire_iff_full  -- CK76 SECTION BOUNDARY
 digit-freeness -/
 
 /-- The power's low digits vanish: positions `1..s` of `4^(3^s·core)`
@@ -629,7 +623,6 @@ theorem pow4_low_digits_zero (s core p : Nat) (hp1 : 1 ≤ p) (hps : p ≤ s) :
   rw [h]
   exact digit3_one_pos p hp1
 
-#eval "CK76_CK09_theorem_cantorian_iff_cutword_clean__s_c"
 /-- **THE COMPRESSION LAW (NEW).**  For every sheet level and core:
 `CantorianPower (3^s·core)` holds exactly when the cut word
 `omegaCutWord s core` carries NO ternary digit two at ANY position.
@@ -653,8 +646,8 @@ theorem cantorian_iff_cutword_clean (s core : Nat) :
           tower_digit_eq_cutword s core (p - (s+1))]
       exact hclean (p - (s+1))
 
-#eval "CK76_CK10_________4_The_decomposition___the_monoli"
 /-! ## §4 The decomposition — the monolith's two named primitives -/
+#print axioms TailFDecomposition406.cantorian_iff_cutword_clean  -- CK76 SECTION BOUNDARY
 
 /-- **THE Ω-SHADOW TAIL (SECOND OBSERVER FORM)** — the monolith's exact
 residual input, ported verbatim (with `omegaCutWord` in campaign
@@ -699,7 +692,6 @@ def tailF_tower_primitive : Prop :=
       ∃ i : Nat, s+2 ≤ i ∧
         2 * 3^i ≤ (omegaCutWord s core) % 3^(i+1)
 
-#eval "CK76_CK11_theorem_tailF_of_row_and_tower"
 /-- **THE DECOMPOSITION OF THE INPUT (NEW, campaign-ported).**  The two
 named primitives compose into the full second-observer input: the row
 primitive carries the sheet-zero family through the full observer at
@@ -743,10 +735,9 @@ theorem tailF_of_row_and_tower
     rw [hKsc]
     exact (tower_fire_iff_full s core i).2 hfire
 
-#eval "CK76_CK12_________5_The_six_adic_ghost_skew__BOSS_"
 /-! ## §5 The six-adic ghost skew (BOSS's six-adic machinery) -/
+#print axioms TailFDecomposition406.tailF_of_row_and_tower  -- CK76 SECTION BOUNDARY
 
-#eval "CK76_CK13_theorem_six_adic_pair_saturation__d_k_t_"
 /-- **THE SIX-ADIC PAIR SATURATION (NEW).**  If the triadic shadow holds
 at depth `k` and the x4 chart has supplied at least `k` dyadic factors
 (`k ≤ 2t`), then the six-adic resolution holds: `6^k ∣ 4^t·d`.  The
@@ -823,7 +814,6 @@ theorem dvd_of_unit_mul_cancel : ∀ (k g d : Nat), ¬ (3:Nat) ∣ g →
       obtain ⟨f, hf⟩ := hd3
       exact ⟨f, by rw [hd', hf, Nat.pow_succ]; try ring⟩
 
-#eval "CK76_CK14_theorem_ghost_pair_collapse_of_congr__u_"
 /-- **THE GHOST-PAIR COLLAPSE (NEW).**  Two ghosts whose diagonal
 products are triadically congruent at every depth are EQUAL: cancel the
 odd, three-free diagonal (a unit at every depth), then the
@@ -864,8 +854,8 @@ theorem ghost_pair_collapse_of_congr (u u' : Nat)
   rw [hq0, Nat.mul_zero] at hq
   omega
 
-#eval "CK76_CK15_________6_The_paradox_wall___the_u_jump_"
 /-! ## §6 The paradox wall — the u-jump sign laws and the frozen tail -/
+#print axioms TailFDecomposition406.ghost_pair_collapse_of_congr  -- CK76 SECTION BOUNDARY
 
 /-- The handwritten-U charge (the monolith's exact table). -/
 def gstUCharge (C : Nat) : Int :=
@@ -874,7 +864,6 @@ def gstUCharge (C : Nat) : Int :=
 /-- The exact step carry of the x4/base3 wave. -/
 def gstStepCarry (C d : Nat) : Nat := (C + 4*d) / 3
 
-#eval "CK76_CK16_def_gstUJump__C_d___Nat____Int___"
 /-- The exact handwritten-U jump (the monolith's `jumpWith`). -/
 def gstUJump (C d : Nat) : Int :=
   3 * (gstUCharge (gstStepCarry C d)) - gstUCharge C - 24 * (d : Int)
@@ -999,7 +988,6 @@ theorem pow4_succ_lt (K : Nat) : 4^(K+1) < 3^(3*K+3) := by
   calc 4 * 4^K ≤ 4 * 27^K := Nat.mul_le_mul_left _ hle
     _ < 27 * 27^K := by omega
 
-#eval "CK76_CK17_theorem_frozen_tail_jump_ten__K_p___Nat_"
 /-- **THE FROZEN TAIL (NEW).**  Beyond position `3K+3` the wave of
 `4^K` is frozen: digit zero, carry zero, and the exact jump is TEN —
 the strictly positive frozen flux, forever. -/
@@ -1041,15 +1029,14 @@ theorem cantorian_paradox_wall (K : Nat) (hCant : CantorianPower K) :
   ⟨cantorian_jump_wall K hCant,
     fun p hp => (frozen_tail_jump_ten K p hp).2.2⟩
 
-#eval "CK76_CK18_________7_The_crown_v3___the_assembly___"
 /-! ## §7 The crown v3 — the assembly -/
+#print axioms TailFDecomposition406.cantorian_paradox_wall  -- CK76 SECTION BOUNDARY
 
 /-- The digit-two scan (the kernel-75 census engine, ported). -/
 def hasTwoScan : Nat → Nat → Bool
   | _, 0 => false
   | n, B+1 => (n % 3 == 2) || hasTwoScan (n / 3) B
 
-#eval "CK76_CK19_theorem_hasTwoScan_iff______B_n___Nat__"
 theorem hasTwoScan_iff : ∀ (B n : Nat),
     hasTwoScan n B = true ↔ ∃ p : Nat, p < B ∧ digit3 n p = 2 := by
   intro B
@@ -1097,7 +1084,6 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
 /-- The census case: the exact digit scan of `4^(8+i)` at fuel 632. -/
 def baseCaseB (i : Nat) : Bool := hasTwoScan (4^(8+i)) 632
 
-#eval "CK76_CK20_theorem_base_chunk_one____List_range_251"
 theorem base_chunk_one : (List.range 251).all
     (fun i => baseCaseB i) = true := by decide
 
@@ -1155,7 +1141,6 @@ theorem hasTwo_of_digit : ∀ (n p : Nat), digit3 n p = 2 →
       · rw [if_neg h2]
         exact ih _ h
 
-#eval "CK76_CK21_theorem_erdos406_crown_v3"
 /-- **THE CROWN V3 (NEW).**  The FULL Erdős #406 statement —
 `∀ n ≥ 9, noTernaryTwo (2^n) = false` — follows from the weakened
 grant pair, with the compression in its exact monolith cut-word form:
@@ -1224,8 +1209,8 @@ theorem erdos406_crown_v3
       hasTwo_of_digit (2^n) 0 hdig
     exact has_two_imp_not_no_two (2^n) hhas
 
-#eval "CK76_CK22_________8_Receipts___"
 /-! ## §8 Receipts -/
+#print axioms TailFDecomposition406.erdos406_crown_v3  -- CK76 SECTION BOUNDARY
 
 #print axioms TailFDecomposition406.omega_cut_factor
 #print axioms TailFDecomposition406.cutword_diag_congr

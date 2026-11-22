@@ -1266,7 +1266,12 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           : > kernel74.log
-          lake env lean problem406-ternary-powers/PiCollapse406.lean 2>&1 | tee -a kernel74.log
+          : > mem74.log
+          ( while true; do echo "=== $(date -u +%T) ===" >> mem74.log; ps -eo rss,comm --sort=-rss | head -4 >> mem74.log 2>/dev/null || true; sleep 10; done ) & SAMPLER74=$!
+          timeout 600 lake env lean problem406-ternary-powers/PiCollapse406.lean 2>&1 | tee -a kernel74.log || echo "COMPILE_KILLED_OR_TIMEOUT at $(date -u +%T)" | tee -a kernel74.log
+          kill $SAMPLER74 2>/dev/null || true
+          echo "=== MEMORY CURVE 74 ==="
+          cat mem74.log || true
           ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74.log
           grep -F "ERDOS406_PICOLLAPSE_KERNEL_GREEN" kernel74.log
           grep -E "ghost_residue_shape' (does not depend on any axioms|depends on axioms)" kernel74.log
