@@ -73,6 +73,7 @@ and certified non-zero through depth 61.
 
 namespace PiCollapse406
 
+#eval "CK74_CK01_________0_The_engine__self_contained__th"
 /-! ## §0 The engine (self-contained; the green Block-Law toolkit) -/
 
 /-- The ternary digit at position `p`. -/
@@ -185,6 +186,7 @@ theorem lteCoeff_stable (v w : Nat) (hw : v ≤ w) :
         subst hvw
         rfl
 
+#eval "CK74_CK02_________1_The_ghost_ray___"
 /-! ## §1 The ghost ray -/
 
 /-- **THE GHOST RAY** — the stabilized middle-third condition: a core
@@ -201,8 +203,10 @@ def GhostRay (u : Nat) : Prop :=
 tail. -/
 def ghostHead (u : Nat) : Nat := (lteCoeff 1 * u) % 9
 
+#eval "CK74_CK03_________2_Lemma_A___the_exact_all_ones_t"
 /-! ## §2 Lemma A — the exact all-ones tail shape -/
 
+#eval "CK74_CK04_theorem_ghost_residue_shape__u___Nat___h"
 /-- **LEMMA A (the exact ghost shape).**  A ghost ray forces the residue
 of `c (k-1) * u` modulo `3^k` to be the all-ones tail
 `head + (3^k - 9) / 2` — stated free of division as
@@ -261,6 +265,7 @@ theorem ghost_residue_shape (u : Nat) (hg : GhostRay u) :
         rw [Nat.pow_succ]
         omega
 
+#eval "CK74_CK05_________3_Lemma_B___the_finite_ghost_con"
 /-! ## §3 Lemma B — the finite ghost congruence -/
 
 /-- **LEMMA B (the fundamental finite ghost congruence).**  A ghost ray
@@ -280,6 +285,7 @@ theorem ghost_congruence (u : Nat) (hg : GhostRay u) (k : Nat) (hk : 3 ≤ k) :
         + 2 * ((lteCoeff (k-1) * u) % 3^k) := by ring
   omega
 
+#eval "CK74_CK06_________4_The_unit_cancellation_engine__"
 /-! ## §4 The unit cancellation engine -/
 
 /-- Cancel a factor of three: if `3 ∣ g * d` and `3 ∤ g` then `3 ∣ d`. -/
@@ -336,8 +342,10 @@ theorem dvd_of_unit_mul_cancel : ∀ (k g d : Nat), ¬ (3:Nat) ∣ g →
       obtain ⟨f, hf⟩ := hd3
       exact ⟨f, by rw [hd', hf, Nat.pow_succ]; try ring⟩
 
+#eval "CK74_CK07_________5_The_collapse___the_new_theorem"
 /-! ## §5 The collapse — the new theorem -/
 
+#eval "CK74_CK08_theorem_cancel_engine__k_u_u__H___Nat_"
 /-- The difference engine: two congruences against the same head, with
 the first core at least the second, give the scale-divisibility of the
 difference (and hence the congruence witness). -/
@@ -429,6 +437,7 @@ theorem ghost_head_lt_nine (u : Nat) : ghostHead u < 9 := by
   unfold ghostHead
   exact Nat.mod_lt _ (by decide)
 
+#eval "CK74_CK09_________6_The___points__kernel_decided__"
 /-! ## §6 The π-points, kernel-decided -/
 
 /-- The certified mod-recursion: `cMod k s = lteCoeff s % 3^k`, computed
@@ -466,6 +475,7 @@ theorem mod_pow_congr (k : Nat) : ∀ (n a b : Nat), a % k = b % k →
       rw [pa, pb]
       exact mod_mul_congr k (a * a^n) (b * b^n) a b ih h
 
+#eval "CK74_CK10_theorem_cMod_eq__k___Nat______s___Nat__c"
 theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
   | 0 => by
       simp only [cMod, lteCoeff]
@@ -553,8 +563,10 @@ theorem pi_fam7_trit6 : digit3 pi_fam7 6 = 2 := by decide
 theorem pi_fam1_trit8 : digit3 pi_fam1 8 = 2 := by decide
 theorem pi_fam1_trit13 : digit3 pi_fam1 13 = 2 := by decide
 
+#eval "CK74_CK11_________6b_The_pin___every_ghost_ray_IS_"
 /-! ## §6b The pin — every ghost ray IS its π-point -/
 
+#eval "CK74_CK12_theorem_pin_of_W_congruence__u___D___Nat"
 /-- **THE PIN ENGINE.**  If both a core `u` and a fixed point `π < 3^61`
 solve the same W-form congruence `2·W61·x + D ≡ 0 [MOD 3^61]`, then
 `u ≡ π [MOD 3^61]`. -/
@@ -661,14 +673,17 @@ theorem every_ghost_is_its_pi_point_fam1 (u : Nat) (hg : GhostRay u)
     (ghost_W_congruence_fam1 u hg hhead)
     (Nat.dvd_of_mod_eq_zero pi_fam1_receipt) pi_fam1_lt
 
+#eval "CK74_CK13_________7_The_finite_base___every_expone"
 /-! ## §7 The finite base — every exponent 8..500 fires -/
 
+#eval "CK74_CK14_def_hasTwoScan___Nat___Nat___Bool"
 /-- The digit-two scan: `hasTwoScan n B = true` iff some ternary digit
 of `n` at a position `< B` equals two. -/
 def hasTwoScan : Nat → Nat → Bool
   | _, 0 => false
   | n, B+1 => (n % 3 == 2) || hasTwoScan (n / 3) B
 
+#eval "CK74_CK15_theorem_hasTwoScan_iff______B_n___Nat__"
 theorem hasTwoScan_iff : ∀ (B n : Nat),
     hasTwoScan n B = true ↔ ∃ p : Nat, p < B ∧ digit3 n p = 2 := by
   intro B
@@ -717,6 +732,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
 (every exponent in range has at most 631 ternary digits). -/
 def baseCaseB (i : Nat) : Bool := hasTwoScan (4^(8+i)) 632
 
+#eval "CK74_CK16_theorem_base_chunk_one____List_range_251"
 theorem base_chunk_one : (List.range 251).all
     (fun i => baseCaseB i) = true := by decide
 
@@ -739,6 +755,7 @@ theorem cantorian_base (K : Nat) (hK8 : 8 ≤ K) (hK500 : K ≤ 500) :
     rw [hsplit] at hc
     exact (hasTwoScan_iff 632 _).mp hc
 
+#eval "CK74_CK17_________8_The_two_grant_crown___"
 /-! ## §8 The two-grant crown -/
 
 /-- The Cantorian power predicate: every ternary digit from position
@@ -818,6 +835,7 @@ theorem hasTwo_of_digit : ∀ (n p : Nat), digit3 n p = 2 →
       · rw [if_neg h2]
         exact ih (n / 3) h
 
+#eval "CK74_CK18_theorem_erdos406_crown_of_ghost_extincti"
 /-- **THE TWO-GRANT CROWN.**  The FULL Erdős #406 statement follows from
 exactly two named grants: (G1) ghost extinction — no core carries the
 full shadow package; (G2) residual ghost compression — every Cantorian
@@ -881,6 +899,7 @@ theorem erdos406_crown_of_ghost_extinction
       hasTwo_of_digit (2^n) 0 hdig
     exact has_two_imp_not_no_two (2^n) hhas
 
+#eval "CK74_CK19_________9_Receipts___"
 /-! ## §9 Receipts -/
 
 #check PiCollapse406.ghost_residue_shape

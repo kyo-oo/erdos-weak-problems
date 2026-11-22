@@ -68,6 +68,7 @@ extension, and the size wall.  The engine never stops; it never lies.
 
 namespace GhostExtinction406
 
+#eval "CK75_CK01_________0_The_engine__self_contained__th"
 /-! ## §0 The engine (self-contained; the green Block-Law/Pi-Collapse toolkit) -/
 
 /-- The ternary digit at position `p`. -/
@@ -190,6 +191,7 @@ theorem lteCoeff_stable (v w : Nat) (hw : v ≤ w) :
         subst hvw
         rfl
 
+#eval "CK75_CK02_________0b_The_cut_residue_toolkit__the_"
 /-! ## §0b The cut-residue toolkit (the green Block-Law helpers) -/
 
 /-- The two-term binomial shape. -/
@@ -350,6 +352,7 @@ theorem digit3_of_residue_two (R p : Nat) (hp1 : 1 ≤ p)
   rw [hcongr, show 1 + 2 * 3^p = 1 + 3^p * 2 from by ring,
       digit3_add_pow 1 2 p, digit3_one_pos p hp1]
 
+#eval "CK75_CK03_________1_The_Cantorian_predicate_and_th"
 /-! ## §1 The Cantorian predicate and the ghost ray -/
 
 /-- The Cantorian power predicate: every ternary digit from position
@@ -369,6 +372,7 @@ def GhostRay (u : Nat) : Prop :=
 tail. -/
 def ghostHead (u : Nat) : Nat := (lteCoeff 1 * u) % 9
 
+#eval "CK75_CK04_________2_THE_RIDER_S_CORE_LAW___riders_"
 /-! ## §2 THE RIDER'S CORE LAW — riders ride only the u ≡ 1 sheet -/
 
 /-- **THE RIDER'S CORE LAW (NEW).**  Every Cantorian power `K` with
@@ -398,8 +402,10 @@ theorem rider_core_one (K : Nat) (hK : 0 < K)
       exact digit3_of_residue_two (4^K) (v+1) hv1 hmod
     exact hCant (v+1) hv1 hfire
 
+#eval "CK75_CK05_________3_Lemma_A_and_Lemma_B__the_green"
 /-! ## §3 Lemma A and Lemma B (the green Pi-Collapse engine) -/
 
+#eval "CK75_CK06_theorem_ghost_residue_shape__u___Nat___h"
 /-- **LEMMA A (the exact ghost shape).**  A ghost ray forces the residue
 of `c (k-1) * u` modulo `3^k` to be the all-ones tail — stated free of
 division as `2 * residue + 9 = 2 * head + 3^k`. -/
@@ -474,6 +480,7 @@ theorem ghost_congruence (u : Nat) (hg : GhostRay u) (k : Nat) (hk : 3 ≤ k) :
         + 2 * ((lteCoeff (k-1) * u) % 3^k) := by ring
   omega
 
+#eval "CK75_CK07_________4_THE_HEAD_SPLIT___the_rider_she"
 /-! ## §4 THE HEAD SPLIT — the rider sheet carries exactly three heads -/
 
 /-- **THE HEAD SPLIT (NEW).**  Every ghost ray on the rider sheet
@@ -508,6 +515,7 @@ theorem ghost_head_split (u : Nat) (hg : GhostRay u) (hu3 : u % 3 = 1) :
     rw [hu9]
     decide
 
+#eval "CK75_CK08_________5_The_cancellation_engine__the_c"
 /-! ## §5 The cancellation engine, the collapse, and the uniqueness -/
 
 /-- Cancel a factor of three: if `3 ∣ g * d` and `3 ∣ g` then `3 ∣ d`. -/
@@ -564,6 +572,7 @@ theorem dvd_of_unit_mul_cancel : ∀ (k g d : Nat), ¬ (3:Nat) ∣ g →
       obtain ⟨f, hf⟩ := hd3
       exact ⟨f, by rw [hd', hf, Nat.pow_succ]; try ring⟩
 
+#eval "CK75_CK09_theorem_cancel_engine__k_u_u__H___Nat_"
 /-- The difference engine: two congruences against the same head give
 the scale-divisibility of the difference. -/
 theorem cancel_engine (k u u' H : Nat)
@@ -629,6 +638,7 @@ theorem ghost_congruent_all_depths (u u' : Nat)
     exact mod_dvd_modeq _ _ _ _ (pow_dvd_pow (3:Nat) (by omega)) h3
   · exact ghost_congruent_ge_three u u' hg hg' hhead k hge
 
+#eval "CK75_CK10_theorem_ghost_uniqueness__u_u____Nat_"
 /-- **THE UNIQUENESS COLLAPSE (NEW).**  Two ghost rays with the same
 head are EQUAL: the total number of ghost rays on the rider sheet
 (`u ≡ 1 mod 3`) is at most three — one per head in `{1, 4, 7}`. -/
@@ -642,8 +652,10 @@ theorem ghost_uniqueness (u u' : Nat)
   rw [Nat.mod_eq_of_lt hu, Nat.mod_eq_of_lt hu'] at h
   exact h
 
+#eval "CK75_CK11_________6_The_depth_100_pins___the_three"
 /-! ## §6 The depth-100 pins — the three π-points, kernel-decided -/
 
+#eval "CK75_CK12_def_cMod___Nat___Nat___Nat"
 /-- The certified mod-recursion: `cMod k s = lteCoeff s % 3^k`, computed
 without ever forming the astronomically large tower coefficient. -/
 def cMod : Nat → Nat → Nat
@@ -678,6 +690,7 @@ theorem mod_pow_congr (k : Nat) : ∀ (n a b : Nat), a % k = b % k →
       rw [pa, pb]
       exact mod_mul_congr k (a * a^n) (b * b^n) a b ih h
 
+#eval "CK75_CK13_theorem_cMod_eq__k___Nat______s___Nat__c"
 theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
   | 0 => by
       simp only [cMod, lteCoeff]
@@ -698,6 +711,7 @@ theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
           (mod_add_congr k _ _ _ _ rfl e2) e3
       rw [eL, ← ih]
 
+#eval "CK75_CK14_def_W100___Nat____7954272830010826026964"
 /-- **W100** — the unit word at depth 100 (dual-verified by the assault
 engine: the cMod recursion ∥ the direct modular division
 `4^(3^99) mod 3^200`; `% 9 = 7`, `% 3 = 1` — the three-adic unit). -/
@@ -724,6 +738,7 @@ theorem coeff_split100 (u : Nat) :
         conv_lhs => rw [hc]
     _ = 3^100 * ((lteCoeff 99 / 3^100) * u) + W100 * u := by ring
 
+#eval "CK75_CK15_def_pi100_fam4___Nat____4429632021182861"
 /-- **THE THREE FIXED POINTS AT DEPTH 100** — the assault engine's π
 family extended from 61 to 100 trits (dual-verified: pow-inverse ∥
 independent Hensel lift; the 61-trit prefixes match the S080 kernel
@@ -760,6 +775,7 @@ theorem pi100_fam1_trit98 : digit3 pi100_fam1 98 = 2 := by decide
 theorem pi100_fam1_trit95 : digit3 pi100_fam1 95 = 2 := by decide
 theorem pi100_fam1_trit91 : digit3 pi100_fam1 91 = 2 := by decide
 
+#eval "CK75_CK16_theorem_pin100_of_W_congruence__u___D___"
 /-- **THE PIN ENGINE AT DEPTH 100.**  If both a core `u` and a fixed
 point `π < 3^100` solve the same W-form congruence, then
 `u ≡ π [MOD 3^100]`. -/
@@ -863,6 +879,7 @@ theorem every_ghost_is_its_pi100_point_fam1 (u : Nat) (hg : GhostRay u)
     (ghost_W100_congruence_fam1 u hg hhead)
     (Nat.dvd_of_mod_eq_zero pi100_fam1_receipt) pi100_fam1_lt
 
+#eval "CK75_CK17_________7_THE_SIZE_LAW___every_ghost_on_"
 /-! ## §7 THE SIZE LAW — every ghost on the rider sheet is astronomical -/
 
 theorem pi100_fam4_gt : 3^99 < pi100_fam4 := by decide
@@ -906,14 +923,17 @@ theorem ghost_size_rider_sheet (u : Nat) (hg : GhostRay u)
     omega
   · exact ghost_size_fam1 u hg h
 
+#eval "CK75_CK18_________8_The_finite_base___every_expone"
 /-! ## §8 The finite base — every exponent 8..500 fires -/
 
+#eval "CK75_CK19_def_hasTwoScan___Nat___Nat___Bool"
 /-- The digit-two scan: `hasTwoScan n B = true` iff some ternary digit
 of `n` at a position `< B` equals two. -/
 def hasTwoScan : Nat → Nat → Bool
   | _, 0 => false
   | n, B+1 => (n % 3 == 2) || hasTwoScan (n / 3) B
 
+#eval "CK75_CK20_theorem_hasTwoScan_iff______B_n___Nat__"
 theorem hasTwoScan_iff : ∀ (B n : Nat),
     hasTwoScan n B = true ↔ ∃ p : Nat, p < B ∧ digit3 n p = 2 := by
   intro B
@@ -961,6 +981,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
 /-- The census case: the exact digit scan of `4^(8+i)` at fuel 632. -/
 def baseCaseB (i : Nat) : Bool := hasTwoScan (4^(8+i)) 632
 
+#eval "CK75_CK21_theorem_base_chunk_one____List_range_251"
 theorem base_chunk_one : (List.range 251).all
     (fun i => baseCaseB i) = true := by decide
 
@@ -983,6 +1004,7 @@ theorem cantorian_base (K : Nat) (hK8 : 8 ≤ K) (hK500 : K ≤ 500) :
     rw [hsplit] at hc
     exact (hasTwoScan_iff 632 _).mp hc
 
+#eval "CK75_CK22_________9_THE_CROWN_V2___one_and_a_half_"
 /-! ## §9 THE CROWN V2 — one-and-a-half grants -/
 
 theorem pow4_mod3 (r : Nat) : 4^r % 3 = 1 := by
@@ -1033,6 +1055,7 @@ theorem hasTwo_of_digit : ∀ (n p : Nat), digit3 n p = 2 →
       · rw [if_neg h2]
         exact ih _ h
 
+#eval "CK75_CK23_theorem_erdos406_crown_v2"
 /-- **THE CROWN V2 (NEW).**  The FULL Erdős #406 statement —
 `∀ n ≥ 9, noTernaryTwo (2^n) = false` — follows from the WEAKENED
 grant pair:
@@ -1097,6 +1120,7 @@ theorem erdos406_crown_v2
       hasTwo_of_digit (2^n) 0 hdig
     exact has_two_imp_not_no_two (2^n) hhas
 
+#eval "CK75_CK24_theorem_rider_wall_v2"
 /-- **THE COMPOSED WALL (NEW).**  Under the single grant (G2), every
 Cantorian power above 500 exceeds `3^98` — the remaining content of
 Erdős #406 is at most THREE astronomically large exponents, one per
@@ -1115,6 +1139,7 @@ theorem rider_wall_v2
     exact hle
   omega
 
+#eval "CK75_CK25_________10_Receipts___"
 /-! ## §10 Receipts -/
 
 #check GhostExtinction406.rider_core_one
