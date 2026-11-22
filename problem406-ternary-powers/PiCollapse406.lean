@@ -129,7 +129,7 @@ theorem pow4_three_power_lte_exact : ∀ r : Nat,
             ring
           rw [hcube]
           simp only [lteCoeff]
-          ring
+          try ring
 
 theorem lteCoeff_mod3_one : ∀ r : Nat, lteCoeff r % 3 = 1
   | 0 => by decide
@@ -148,7 +148,7 @@ theorem lteCoeff_mod3_one : ∀ r : Nat, lteCoeff r % 3 = 1
 theorem lteCoeff_succ_mod (w : Nat) :
     lteCoeff (w+1) % 3^(w+1) = lteCoeff w % 3^(w+1) := by
   have h1 : 3^(w+1) ∣ 3^(w+1) * (lteCoeff w)^2 :=
-    Nat.mul_dvd_mul_left _ dvd_rfl
+    ⟨(lteCoeff w)^2, by ring⟩
   have h2 : 3^(w+1) ∣ 3^(2*w+1) * (lteCoeff w)^3 := by
     refine ⟨3^w * (lteCoeff w)^3, ?_⟩
     rw [← Nat.pow_add]
@@ -235,6 +235,7 @@ theorem ghost_residue_shape (u : Nat) (hg : GhostRay u) :
         have hd := Nat.div_add_mod ((lteCoeff 2 * u) % 27) 9
         have h27 : (lteCoeff 2 * u) % 27 < 27 := Nat.mod_lt _ (by decide)
         unfold ghostHead at *
+        norm_num
         omega
       · have ihj := ih hj
         rw [show j + 1 - 1 = j from rfl]
@@ -252,7 +253,7 @@ theorem ghost_residue_shape (u : Nat) (hg : GhostRay u) :
         rw [← hr'] at hmodk
         have hcs : lteCoeff j % 3^j = lteCoeff (j-1) % 3^j := by
           have h := lteCoeff_stable (j-1) j (by omega)
-          rw [show (j-1)+1 = j from rfl] at h
+          rw [show (j-1)+1 = j from by omega] at h
           exact h
         have hstab : (lteCoeff j * u) % 3^j
             = (lteCoeff (j-1) * u) % 3^j := by
@@ -314,7 +315,7 @@ theorem dvd_mul_cancel_three (g d : Nat) (hg : ¬ (3:Nat) ∣ g)
 three can be removed from a divisibility by `3^k`. -/
 theorem dvd_of_unit_mul_cancel : ∀ (k g d : Nat), ¬ (3:Nat) ∣ g →
     3^k ∣ g * d → 3^k ∣ d
-  | 0, g, d, _, _ => dvd_rfl
+  | 0, g, d, _, _ => by simp
   | k+1, g, d, hg, hdvd => by
       have hprev : 3^k ∣ g * d :=
         (pow_dvd_pow (3:Nat) (Nat.le_succ k)).trans hdvd
@@ -324,14 +325,16 @@ theorem dvd_of_unit_mul_cancel : ∀ (k g d : Nat), ¬ (3:Nat) ∣ g →
       have hgd : g * d = 3^k * (g * d') := by rw [hd']; ring
       have hpow : 3^(k+1) = 3^k * 3 := Nat.pow_succ 3 k
       have he2 : 3^k * (3 * e) = 3^k * (g * d') := by
-        rw [Nat.mul_assoc, ← hpow]
-        omega
+        calc 3^k * (3 * e) = (3^k * 3) * e := by ring
+          _ = 3^(k+1) * e := by rw [← hpow]
+          _ = g * d := he.symm
+          _ = 3^k * (g * d') := hgd
       have hcancel : 3 * e = g * d' :=
         Nat.eq_of_mul_eq_mul_left (Nat.pow_pos (by decide)) he2
       have hgd3 : (3:Nat) ∣ g * d' := ⟨e, by rw [hcancel]; ring⟩
       have hd3 : (3:Nat) ∣ d' := dvd_mul_cancel_three g d' hg hgd3
       obtain ⟨f, hf⟩ := hd3
-      exact ⟨f, by rw [hd', hf, Nat.pow_succ]; ring⟩
+      exact ⟨f, by rw [hd', hf, Nat.pow_succ]; try ring⟩
 
 /-! ## §5 The collapse — the new theorem -/
 
@@ -347,21 +350,25 @@ theorem cancel_engine (k u u' H : Nat)
   obtain ⟨m, hm⟩ := hm
   obtain ⟨m', hm'⟩ := hm'
   have hu : u = u' + (u - u') := by omega
-  have hsplit : lteCoeff (k-1) * u
+  have hmul : lteCoeff (k-1) * u
       = lteCoeff (k-1) * u' + lteCoeff (k-1) * (u - u') := by
-    calc lteCoeff (k-1) * u = lteCoeff (k-1) * (u' + (u - u')) := by
-          exact congrArg (fun x => lteCoeff (k-1) * x) hu
-      _ = lteCoeff (k-1) * u' + lteCoeff (k-1) * (u - u') := by
-          rw [Nat.mul_add]
-  rw [hsplit] at hm
-  have hNm : 2 * (lteCoeff (k-1) * (u - u')) + 3^k * m' = 3^k * m := by
-    omega
+    calc lteCoeff (k-1) * u = lteCoeff (k-1) * (u' + (u - u')) := by rw [hu]
+      _ = lteCoeff (k-1) * u' + lteCoeff (k-1) * (u - u') :=
+          Nat.mul_add _ _ _
+  rw [hmul] at hm
+  have hdist : 2 * (lteCoeff (k-1) * u' + lteCoeff (k-1) * (u - u'))
+      = 2 * (lteCoeff (k-1) * u') + 2 * (lteCoeff (k-1) * (u - u')) := by
+    ring
+  rw [hdist] at hm
+  -- hm  : 2*(X*u') + 2*(X*(u-u')) + 9 = 2*H + 3^k*m
+  -- hm' : 2*(X*u') + 9 = 2*H + 3^k*m'
   have hdvd : 3^k ∣ 2 * (lteCoeff (k-1) * (u - u')) := by
     refine ⟨m - m', ?_⟩
-    rw [Nat.mul_sub]
+    rw [show 3^k * (m - m') = 3^k * m - 3^k * m' from
+      Nat.mul_sub (3^k) m m']
     omega
   have hcancel := dvd_of_unit_mul_cancel k (2 * lteCoeff (k-1)) (u - u')
-    hunit hdvd
+    hunit (by rw [Nat.mul_assoc]; exact hdvd)
   obtain ⟨t, ht⟩ := hcancel
   exact ⟨t, by omega⟩
 
@@ -382,12 +389,12 @@ theorem ghost_congruent_ge_three (u u' : Nat)
   by_cases hle : u' ≤ u
   · obtain ⟨t, ht⟩ := cancel_engine k u u' (ghostHead u) hunit
       ⟨m, hm⟩ ⟨m', hm'⟩ hle
-    rw [ht, Nat.add_mul_mod_self_right]
+    rw [ht, Nat.add_mul_mod_self_left]
   · have hgt : u ≤ u' := by omega
     obtain ⟨t, ht⟩ := cancel_engine k u' u (ghostHead u) hunit
       ⟨m', hm'⟩ ⟨m, hm⟩ hgt
     have hmod : u % 3^k = u' % 3^k := by
-      rw [ht, Nat.add_mul_mod_self_right]
+      rw [ht, Nat.add_mul_mod_self_left]
     rw [hmod]
 
 /-- **THE COLLAPSE — same-head ghosts are one point.**  Two ghost rays
