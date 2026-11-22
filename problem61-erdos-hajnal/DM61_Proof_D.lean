@@ -451,7 +451,7 @@ theorem ramsey_ladder :
           rw [show (R + 1) + (S + 2) - 2 = R + S + 1 by omega]
           rw [show (R + 1) - 1 = R by omega]
           exact hAbig
-        obtain hIH := ih ((R + 1) + (S + 2)) (R + 1) (S + 2) (by omega) (by omega)
+        obtain hIH := ih (R + 1) (S + 2) (by omega) (by omega)
           (by omega) {x // x ∈ G.neighborFinset v}
           (G.comap (Subtype.val : {x // x ∈ G.neighborFinset v} → β)) hsub
         rcases hIH with ⟨K, hKc, hK⟩ | ⟨I, hIc, hI⟩
@@ -463,6 +463,8 @@ theorem ramsey_ladder :
       · -- B-side: |B| ≥ C(R+S+1, R+1); recurse with (R+2, S+1); extend by v
         have hBbig : Nat.choose (R + S + 1) (R + 1)
             ≤ ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v))).card := by
+          rw [show (R + 2) + (S + 2) - 2 = R + S + 2 by omega,
+              show (R + 2) - 1 = R + 1 by omega] at hcard
           omega
         have hsub : Nat.choose ((R + 2) + (S + 1) - 2) ((R + 2) - 1) ≤
             Fintype.card {x // x ∈
@@ -471,7 +473,7 @@ theorem ramsey_ladder :
           rw [show (R + 2) + (S + 1) - 2 = R + S + 1 by omega]
           rw [show (R + 2) - 1 = R + 1 by omega]
           exact hBbig
-        obtain hIH := ih ((R + 2) + (S + 1)) (R + 2) (S + 1) (by omega) (by omega)
+        obtain hIH := ih (R + 2) (S + 1) (by omega) (by omega)
           (by omega) {x // x ∈
             ((Finset.univ : Finset β) \ (insert v (G.neighborFinset v)))}
           (G.comap (Subtype.val : {x // x ∈
@@ -519,15 +521,16 @@ theorem exists_subset_card_le {α : Type} [DecidableEq α] :
   refine Finset.induction_on S ?_ ?_
   · intro m hm
     refine ⟨∅, Finset.empty_subset _, ?_⟩
-    rw [Finset.card_empty]
+    have h0 : (∅ : Finset α).card = 0 := Finset.card_empty
     omega
   · intro a S haS ih m hm
     rw [Finset.card_insert_of_notMem haS] at hm
     by_cases h : m ≤ S.card
     · obtain ⟨T, hTsub, hTcard⟩ := ih m h
-      exact ⟨T, Finset.subset_trans hTsub (Finset.subset_insert a S), hTcard⟩
+      refine ⟨T, fun x hx => Finset.mem_insert.2 (Or.inr (hTsub hx)), hTcard⟩
     · obtain ⟨T, hTsub, hTcard⟩ := ih S.card (le_refl _)
-      refine ⟨insert a T, Finset.insert_subset_insert hTsub, ?_⟩
+      refine ⟨insert a T, fun x hx =>
+        Finset.mem_insert.2 ((Finset.mem_insert.1 hx).imp id hTsub), ?_⟩
       rw [Finset.card_insert_of_notMem (fun hc => haS (hTsub hc)), hTcard]
       omega
 
