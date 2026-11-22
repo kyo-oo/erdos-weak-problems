@@ -530,7 +530,7 @@ theorem exists_subset_card_le {α : Type} [DecidableEq α] :
       refine ⟨T, fun x hx => Finset.mem_insert.2 (Or.inr (hTsub hx)), hTcard⟩
     · obtain ⟨T, hTsub, hTcard⟩ := ih S.card (le_refl _)
       refine ⟨insert a T, fun x hx =>
-        Finset.mem_insert.2 ((Finset.mem_insert.1 hx).imp id hTsub), ?_⟩
+        Finset.mem_insert.2 ((Finset.mem_insert.1 hx).imp id (fun h => hTsub h)), ?_⟩
       rw [Finset.card_insert_of_notMem (fun hc => haS (hTsub hc)), hTcard]
       omega
 
