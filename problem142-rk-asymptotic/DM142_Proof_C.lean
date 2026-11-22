@@ -282,7 +282,12 @@ theorem u_gen_zero (k N : ℕ) (hk : 3 ≤ k) (hN : 1 ≤ N) :
     omega
   · intro t hts ht
     have hcardt : ENat.card t = ((k : ℕ) : ENat) := ht.card
-    have hsub : t ⊆ ({1} : Set ℕ) := hts
+    have hsub : t ⊆ ({1} : Set ℕ) := by
+      intro y hy
+      have hy1 : y ∈ (↑({1} : Finset ℕ) : Set ℕ) := hts hy
+      simp only [Finset.mem_coe, Finset.mem_singleton] at hy1
+      rw [hy1]
+      simp
     have hle : t.encard ≤ ({1} : Set ℕ).encard := Set.encard_le_encard hsub
     rw [Set.encard_singleton] at hle
     have hcardt' : t.encard = ((k : ℕ) : ENat) := hcardt
