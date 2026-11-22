@@ -143,3 +143,22 @@ discipline), Arsenal/ErdosTernary2/Basic.lean:16 `lt_three_cases` (the ternary
 - CI: job `kernel-142dm-a` (kernel-fc pattern + arsenal builds), verdicts below.
 
 *The engine never stops; it never lies. In English, always.*
+
+## KERNEL v1 LANDED (commander-absorbed, W82-142A)
+
+The primary agent banked the complete derivation package + validation engine
+(all parts GREEN, W82_142A_ENGINE_GREEN) then died posthumous. The commander
+wrote DM142_Proof_A.lean from D1/D2:
+- §0 house machinery (the DM142_Proof_B idiom, attributed);
+- §1 THE GENERAL REFLECTION LEMMA apFree_of_pairscan — all k ≥ 2 at once
+  (the pair-scan contrapositive; the offset list List.range' 2 (k-2));
+- §2 apFree_succ (the prefix law) + r_mono (k ≠ 1; k = 0 via the vendored
+  maxCard_zero/one) + r_mono_unrestricted_false (the k=1 counterexample);
+- §3 the stone builder (inRange + chainLt + pairScanOK + length) —
+- §4 the SIX stones decide-certified over the official r: 19 ≤ r 3 61,
+  16 ≤ r 3 48, 22 ≤ r 4 42, 36 ≤ r 5 55, 31 ≤ r 6 43, 36 ≤ r 7 45;
+- §5 the board. Arsenal: lt_three_cases [:16] used (scanTrichotomy);
+  mul_add_div_lemma [:143] + mod_mod_mul [:140] read-and-cited (D3 spine).
+U-GEN-0/V-GEN: derived + engine-validated (D3/D4 above) — the kernel
+continuation is named (the block-partition assembly). NOT claimed here.
+CI: kernel-142dm-a wired; campaign f2b9949 merged (PathGraph deletion).
