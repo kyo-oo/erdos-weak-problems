@@ -1,0 +1,36 @@
+[PASS] B1-TABLE-EXT all 18 witness sets (N=31..48): size == banked table, subset [1,N], AP3-free by the difference-set scanner AND the midpoint scanner
+[PASS] B2-BEHREND-3-3 |S|=6 (ledger 6), max=78 < B^d=216, AP3-free (two scanners)
+[PASS] B2-LADDER-3-3 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-4-3 |S|=12 (ledger 12), max=468 < B^d=1296, AP3-free (two scanners)
+[PASS] B2-LADDER-4-3 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-5-3 |S|=30 (ledger 30), max=2844 < B^d=7776, AP3-free (two scanners)
+[PASS] B2-LADDER-5-3 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-6-3 |S|=90 (ledger 90), max=18396 < B^d=46656, AP3-free (two scanners)
+[PASS] B2-LADDER-6-3 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-3-5 |S|=6 (ledger 6), max=210 < B^d=1000, AP3-free (two scanners)
+[PASS] B2-LADDER-3-5 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-4-5 |S|=24 (ledger 24), max=3210 < B^d=10000, AP3-free (two scanners)
+[PASS] B2-LADDER-4-5 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-3-7 |S|=12 (ledger 12), max=1205 < B^d=2744, AP3-free (two scanners)
+[PASS] B2-LADDER-3-7 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-4-7 |S|=48 (ledger 48), max=17081 < B^d=38416, AP3-free (two scanners)
+[PASS] B2-LADDER-4-7 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-2-9 |S|=2 (ledger 2), max=18 < B^d=324, AP3-free (two scanners)
+[PASS] B2-LADDER-2-9 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B2-BEHREND-5-2 |S|=10 (ledger 10), max=320 < B^d=1024, AP3-free (two scanners)
+[PASS] B2-LADDER-5-2 same fiber also 4-AP-free and 5-AP-free (LAW M-1 instance)
+[PASS] B3-NEG-PLANTED 1,2,3 is detected as a 3-AP
+[PASS] B3-NEG-PLANTED4 1,2,3,4 detected as a 4-AP (the k=4 scanner is non-vacuous)
+[PASS] B3-NEG-CLEAN 1,2,4 correctly accepted (no false positive)
+[INFO] B4 fiber (d=3,m=3): 0 in S = False
+[INFO] B4 fiber (d=4,m=3): 0 in S = False
+[INFO] B4 fiber (d=5,m=3): 0 in S = False
+[INFO] B4 fiber (d=6,m=3): 0 in S = False
+[INFO] B4 fiber (d=3,m=5): 0 in S = False
+[INFO] B4 fiber (d=4,m=5): 0 in S = False
+[INFO] B4 fiber (d=3,m=7): 0 in S = False
+[INFO] B4 fiber (d=4,m=7): 0 in S = False
+[INFO] B4 fiber (d=2,m=9): 0 in S = False
+[INFO] B4 fiber (d=5,m=2): 0 in S = False
+AUDIT142B_CHECKS: 24/24 passed
+AUDIT142B_ENGINE_GREEN=1
