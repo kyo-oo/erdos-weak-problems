@@ -153,7 +153,11 @@ theorem cliqueFree3_of_no_induced {n : ℕ} {G : SimpleGraph (Fin n)}
       intro heq
       exact hij (e.injective (Subtype.ext heq))
     exact hs.isClique (by simp [hmem_i]) (by simp [hmem_j]) hne
-  refine hG ⟨(Finset.subtype s).comp (e.toEmbedding), ?_⟩
+  have hcoeinj : Function.Injective (fun i : Fin 3 => (e i : Fin n)) := by
+    intro i j hij
+    apply e.injective
+    exact Subtype.ext hij
+  refine hG ⟨⟨fun i => (e i : Fin n), hcoeinj⟩, ?_⟩
   apply top_comap_of_pairwise
   exact hadj
 
@@ -254,7 +258,7 @@ theorem exists_isIndepSet_mul_ge {α : Type*} [Fintype α] [DecidableEq α]
     · exact Finset.mem_union_left _ hvs
     · obtain ⟨w, hws, hvw⟩ := hdom v hvs
       exact Finset.mem_union_right _
-        (Finset.mem_biUnion.mpr ⟨w, hws, (G.mem_neighborFinset w v).mp (G.adj_symm hvw)⟩)
+        (Finset.mem_biUnion.mpr ⟨w, hws, (G.mem_neighborFinset w v).mpr (G.adj_symm hvw)⟩)
   have hcard1 := Finset.card_le_card hcover
   have hu : (s ∪ s.biUnion (fun w => G.neighborFinset w)).card
       ≤ s.card + (s.biUnion (fun w => G.neighborFinset w)).card :=
@@ -325,11 +329,14 @@ theorem rpow_quarter_le_sqrt {n : ℕ} (hn : 4 ≤ n) :
     (n : ℝ) ^ ((1:ℝ) / 4) ≤ (Nat.sqrt n : ℝ) := by
   have hkey : (n : ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) ^ 4 := by
     exact_mod_cast le_sqrt_pow_four hn
-  have h1 : (n : ℝ) ^ ((1:ℝ)/4) ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ 4) ^ ((1:ℝ)/4) :=
-    Real.rpow_le_rpow (by positivity) hkey (by positivity)
-  refine le_trans h1 ?_
   have hx : (0:ℝ) ≤ ((Nat.sqrt n : ℕ) : ℝ) := by positivity
-  have h2 : (((Nat.sqrt n : ℕ) : ℝ) ^ 4) ^ ((1:ℝ)/4)
+  have h1 : (n : ℝ) ^ ((1:ℝ)/4)
+      ≤ (((Nat.sqrt n : ℕ) : ℝ) ^ ((4:ℝ))) ^ ((1:ℝ)/4) := by
+    refine Real.rpow_le_rpow (by positivity) ?_ (by positivity)
+    rw [Real.rpow_natCast]
+    exact hkey
+  refine le_trans h1 ?_
+  have h2 : (((Nat.sqrt n : ℕ) : ℝ) ^ ((4:ℝ))) ^ ((1:ℝ)/4)
       = ((Nat.sqrt n : ℕ) : ℝ) ^ (((4:ℝ) * ((1:ℝ)/4))) :=
     (Real.rpow_mul hx 4 ((1:ℝ)/4)).symm
   have h3 : ((4:ℝ) * ((1:ℝ)/4)) = 1 := by ring
@@ -399,7 +406,6 @@ theorem eh_K2 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 2))
   refine ⟨4, ?_⟩
   intro n hn G hG
   have hno := no_edge_of_no_induced_K2 hG
-  left
   have hindep : G.IsIndepSet ↑(Finset.univ : Finset (Fin n)) := by
     intro a _ b _ _
     exact hno a b
@@ -508,7 +514,10 @@ theorem eh_K3 : IsErdosHajnalLowerBound (⊤ : SimpleGraph (Fin 3))
             = Nat.sqrt n * Nat.sqrt n := by
           rw [← Nat.mul_add, he]
         omega
-      have h3 : n ≤ Nat.sqrt n * s.card := by rw [← hcardn]; exact hcount
+      have h3 : n ≤ Nat.sqrt n * s.card := by
+        have hc := hcount
+        rw [hcardn] at hc
+        exact hc
       have h4' : Nat.sqrt n * s.card ≤ Nat.sqrt n * G.indepNum :=
         Nat.mul_le_mul_left _ hle
       omega
@@ -557,7 +566,10 @@ theorem eh_P3 : IsErdosHajnalLowerBound (SimpleGraph.pathGraph 3)
             = Nat.sqrt n * Nat.sqrt n := by
           rw [← Nat.mul_add, he]
         omega
-      have h3 : n ≤ Nat.sqrt n * s.card := by rw [← hcardn]; exact hcount
+      have h3 : n ≤ Nat.sqrt n * s.card := by
+        have hc := hcount
+        rw [hcardn] at hc
+        exact hc
       have h4' : Nat.sqrt n * s.card ≤ Nat.sqrt n * G.indepNum :=
         Nat.mul_le_mul_left _ hle
       omega
@@ -577,7 +589,7 @@ theorem eh_K1 : IsErdosHajnalLowerBound (⊥ : SimpleGraph (Fin 1))
   have hemb : Fin 1 ↪ Fin n := ⟨fun _ => ⟨0, by omega⟩, by
     intro a b _
     exact Subsingleton.elim a b⟩
-  refine hG ⟨hemb, ?_⟩
+  refine (hG ⟨hemb, ?_⟩).elim
   ext a b
   have hab : a = b := Subsingleton.elim a b
   subst hab
