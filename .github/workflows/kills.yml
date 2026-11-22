@@ -93,6 +93,31 @@ jobs:
           grep -F "DM107_ANCHORS_GREEN" kernelfc.log
           echo KERNEL_FC_OFFICIAL_FOUNDATION_GREEN=1
 
+  kernel-142dm-b:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 142DM-B — W82 THE OFFICIAL-r LOWER-STONE KERNEL: 19 decide-certified witness stones over the official Set.IsAPOfLengthFree.maxCard (k=3 ladder: 6@216, 12@1296, 30@7776, 90@46656, 6@1000, 24@10000, 12@2744, 48@38416, 2@324, 10@1024; k=4: 6@216, 2@324, 10@1024, 6@1000, 12@1296, 12@2744; k=5: 6@216, 2@324, 6@1000) via the maxCard_ge_of_witness transfer + the reflection AP-freeness lemmas + the Arsenal bridge (noTernaryTwo/noTernaryTwoStruct CardinalWorlds.lean:41/51, ErdosTernary2.lt_three_cases :16 — genuinely used: w1024_quat_clean, w1024_not_cantor, ternary_cantor_digit01)"
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel142dmb.log
+          lake env lean problem142-rk-asymptotic/DM142_Proof_B.lean 2>&1 | tee -a kernel142dmb.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmb.log
+          grep -F "DM142B_LOWER_GREEN" kernel142dmb.log
+          grep -E "'(r3_216_ge|r3_7776_ge|r3_46656_ge|dm142b_board)' (does not depend on any axioms|depends on axioms)" kernel142dmb.log
+          ! grep -E "'(r3_216_ge|r3_7776_ge|r3_46656_ge|dm142b_board)'.*sorryAx" kernel142dmb.log
+          echo KERNEL_142DM_B_GREEN=1
+
   kernel-a:
     runs-on: ubuntu-24.04
     steps:
