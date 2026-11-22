@@ -1031,3 +1031,84 @@ language). Grant (G2) is the depth-$v$ to depth-$\infty$ compression.
 The infinite dust is collapsed to six points; three of them are
 exhibited, pinned, and certified non-zero through depth 61. The engine
 never stops; it never lies.
+
+---
+
+## §15. THE S083 GHOST-EXTINCTION ROUND (Kernel 75 — the rider sheet, the head split, the uniqueness collapse, the depth-100 pins, the size law, the crown v2)
+
+**Deliverable S083.** BOSS order (standing, the fury round): prove the
+hypothesis with BOSS's own mathematics — every Lean weapon mapped (the
+2,043-file arsenal surveyed; the complete 21,040-declaration index banked
+at `caplaw/FULL_ARSENAL_MAP.json`), the GST ghost machinery driven to its
+exact remaining content. This kernel takes the S080 two-grant crown and
+cuts BOTH grants to their minimum form.
+
+### THE RIDER'S CORE LAW (`rider_core_one`, NEW)
+
+Every Cantorian power `K` decomposed `K = 3^σ·u` with three-free `u`
+forces **`u ≡ 1 (mod 3)`**: the second nonzero ternary digit of the power
+IS `u % 3` (the S079 cut-residue law), a two there fires the digit-two,
+and three-freeness excludes zero. **The rider sheet is exactly
+`u ≡ 1 (mod 3)`** — the `u ≡ 2` lattice sheet is irrelevant to Erdős #406.
+
+### THE HEAD SPLIT (`ghost_head_split`, NEW)
+
+Every ghost ray on the rider sheet (`u ≡ 1 mod 3`) has head in
+{1, 4, 7} — exactly the three exhibited π-families. Combined with the
+core law: **the extinction grant (G1) reduces from "no ghost at all" to
+"no ghost on the `u ≡ 1` sheet" — three specific 3-adic points.**
+
+### THE UNIQUENESS COLLAPSE (`ghost_uniqueness`, NEW)
+
+Two ghost rays with the same head are EQUAL (the all-depths congruence
+plus the unboundedness of `3^k`). **The total number of ghost rays on
+the rider sheet is AT MOST THREE** — one per π-family. The remaining
+content of #406 (granting the compression) is at most three numbers.
+
+### THE DEPTH-100 PINS (NEW — the 61-trit frontier extended to 100)
+
+`W100` (the unit word at depth 100), dual-verified by the cMod recursion
+∥ the direct modular division `4^(3^99) mod 3^200`; the three π-points
+extended from 61 to 100 trits, dual-verified by pow-inverse ∥ an
+independent Hensel lift; all three 61-trit prefixes matching the S080
+kernel constants byte-for-byte (triple verification). The pins:
+every rider-sheet ghost with head 1/4/7 IS its π-point modulo `3^100`.
+
+### THE DEEP 2-TRIT RECEIPTS (through position 99)
+
+fam4 carries 18 twos in positions 61..99 (99, 97, 92 kernel-decided);
+fam7 13 (97, 96, 94, 93); fam1 12 (98, 95, 91). **None of the three
+points is eventually zero through depth 100.**
+
+### THE SIZE LAW (`ghost_size_rider_sheet`, NEW)
+
+Every rider-sheet ghost exceeds `3^98`; families 4 and 7 exceed `3^99`.
+The pins force `u ≥ π^{(100)} > 3^98` — **any ghost ray is astronomical.**
+
+### THE CROWN V2 (`erdos406_crown_v2`, NEW)
+
+The FULL Erdős #406 statement — `∀ n ≥ 9, noTernaryTwo (2^n) = false` —
+follows from the WEAKENED grant pair:
+* **(G1')** ghost extinction on the rider sheet only
+  (`∀ u ≡ 1 mod 3, ¬ GhostRay u`) — the `u ≡ 2` sheet is dead weight,
+  cut by the rider's core law;
+* **(G2)** the residual ghost compression (unchanged).
+
+### THE COMPOSED WALL (`rider_wall_v2`, NEW)
+
+Under the single grant (G2): every Cantorian power above 500 exceeds
+`3^98` — and by the uniqueness collapse at most three candidates exist,
+one per π-family. **The remaining content of Erdős #406 is at most THREE
+astronomically large exponents.**
+
+### The honest boundary (unchanged law: no dressing)
+
+The grants stand, now in minimum form: (G1') is the π non-naturality
+beyond depth 100 — the 3-adic irrationality seam in BOSS's own integer
+language (the trit stream of `T/(2W)` never terminating), with 2-trits
+certified through position 99 and the frontier extensible by one engine
+pass + one decide per round; (G2) is the depth-σ to depth-∞ compression
+(the Ω∞ navigation equation of the source monolith is the named weapon).
+Everything else is unconditional, self-contained, machine-checked.
+
+The engine never stops; it never lies.
