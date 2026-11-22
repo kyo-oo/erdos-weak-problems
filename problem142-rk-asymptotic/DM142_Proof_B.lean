@@ -142,13 +142,13 @@ theorem memL_true_iff (x : Nat) :
 
 /-- `true && x = true`-style conjunction eliminator (three conjuncts). -/
 theorem not_and3_true {A B C : Bool} (hA : A = true) (hB : B = true)
-    (hC : C = true) (h : !(A && B && C) = true) : False := by
+    (hC : C = true) (h : Bool.not (A && B && C) = true) : False := by
   rw [hA, hB, hC] at h
   exact Bool.noConfusion h
 
 /-- Four conjuncts. -/
 theorem not_and4_true {A B C D : Bool} (hA : A = true) (hB : B = true)
-    (hC : C = true) (hD : D = true) (h : !(A && B && C && D) = true) : False := by
+    (hC : C = true) (hD : D = true) (h : Bool.not (A && B && C && D) = true) : False := by
   rw [hA, hB, hC, hD] at h
   exact Bool.noConfusion h
 
@@ -192,7 +192,7 @@ distinct endpoints. -/
 def k4Free (W : List Nat) : Bool :=
   allT (fun w => allT (fun x => allT (fun y => allT (fun z =>
     !(decide (2 * x = w + y) && decide (2 * y = x + z) && !(decide (w = z)))
-      W) W) W) W)
+      ) W) W) W) W
 
 /-- k=5 scan: no quintuple with the three consecutive-midpoint equations
 and distinct endpoints. -/
@@ -200,7 +200,7 @@ def k5Free (W : List Nat) : Bool :=
   allT (fun u => allT (fun p => allT (fun q => allT (fun v => allT (fun s =>
     !(decide (2 * p = u + q) && decide (2 * q = p + v) &&
       decide (2 * v = q + s) && !(decide (u = s)))
-      W) W) W) W) W)
+      ) W) W) W) W) W
 
 /-! ## §3 The official-def bridges -/
 
@@ -248,7 +248,7 @@ theorem isAPOfLengthFree_three {W : List Nat} (hmid : midFree3 W = true) :
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
-    exact ⟨n, by rw [hn, nsmul_nat]⟩
+    exact ⟨n, by rw [← hn, nsmul_nat]⟩
   have hmem : ∀ i : ℕ, i < 3 → a + i * d ∈ t := by
     intro i hi
     rw [hset]
@@ -284,7 +284,7 @@ theorem isAPOfLengthFree_four {W : List Nat} (h4 : k4Free W = true) :
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
-    exact ⟨n, by rw [hn, nsmul_nat]⟩
+    exact ⟨n, by rw [← hn, nsmul_nat]⟩
   have hmem : ∀ i : ℕ, i < 4 → a + i * d ∈ t := by
     intro i hi
     rw [hset]
@@ -324,7 +324,7 @@ theorem isAPOfLengthFree_five {W : List Nat} (h5 : k5Free W = true) :
     intro y hy
     rw [hset] at hy
     obtain ⟨n, -, hn⟩ := hy
-    exact ⟨n, by rw [hn, nsmul_nat]⟩
+    exact ⟨n, by rw [← hn, nsmul_nat]⟩
   have hmem : ∀ i : ℕ, i < 5 → a + i * d ∈ t := by
     intro i hi
     rw [hset]
