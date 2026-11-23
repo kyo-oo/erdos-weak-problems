@@ -24,3 +24,15 @@ globs = ["Arsenal.+"]
 [[lean_lib]]
 name = "FC"
 globs = ["FC.+"]
+
+# THE MONOLITH CHAMBER (S085 r7, BOSS order USE MY MATHS): the 39-file mission
+# closure of BOSS's own HC-PROOF-research monolith, vendored verbatim from
+# arsenal-full (53 import rewrites, byte-identical declarations). This is the
+# tailF chamber: the dimensional laws, the row+tower decomposition, the
+# Omega-wave law, the boundary, the six-adic machinery, the vertical telescope,
+# the u-jump laws, the navigation, the forced-digit-2 no-22, the tactic core.
+# Toolchain: the monolith's own pin (Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2)
+# — identical to the campaign pin, zero version friction.
+[[lean_lib]]
+name = "Monolith"
+globs = ["Monolith.+"]

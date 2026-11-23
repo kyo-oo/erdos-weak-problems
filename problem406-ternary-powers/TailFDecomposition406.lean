@@ -137,8 +137,6 @@ theorem pow4_three_power_lte_exact : ∀ r : Nat,
             rw [h1, h2, h3]
             ring
           rw [hcube]
-          simp only [lteCoeff]
-          try ring
 
 theorem lteCoeff_mod3_one : ∀ r : Nat, lteCoeff r % 3 = 1
   | 0 => by decide
@@ -183,18 +181,14 @@ theorem lteCoeff_odd : ∀ r : Nat, lteCoeff r % 2 = 1
 
 theorem lteCoeff_succ_mod (w : Nat) :
     lteCoeff (w+1) % 3^(w+1) = lteCoeff w % 3^(w+1) := by
-  have h1 : 3^(w+1) ∣ 3^(w+1) * (lteCoeff w)^2 :=
-    ⟨(lteCoeff w)^2, by ring⟩
-  have h2 : 3^(w+1) ∣ 3^(2*w+1) * (lteCoeff w)^3 := by
-    refine ⟨3^w * (lteCoeff w)^3, ?_⟩
+  have hsplit : 3^(2*w+1) = 3^(w+1) * 3^w := by
     rw [← Nat.pow_add]
-    congr 1
-    omega
-  have hsum : 3^(w+1) ∣ 3^(w+1) * (lteCoeff w)^2 + 3^(2*w+1) * (lteCoeff w)^3 :=
-    Nat.dvd_add h1 h2
+    congr 1; omega
+  have hd1 : 3^(w+1) ∣ 3^(w+1) * (lteCoeff w)^2 := ⟨_, rfl⟩
+  have hd2 : 3^(w+1) ∣ 3^(2*w+1) * (lteCoeff w)^3 :=
+    ⟨3^w * (lteCoeff w)^3, by rw [hsplit]; ring⟩
   simp only [lteCoeff]
-  obtain ⟨q, rfl⟩ := hsum
-  rw [Nat.add_assoc, Nat.add_mul_mod_self_left]
+  rw [add_mod_of_dvd _ _ _ hd2, add_mod_of_dvd _ _ _ hd1]
 
 theorem mod_dvd_modeq (a b m n : Nat) (hmn : m ∣ n) (h : a % n = b % n) :
     a % m = b % m := by
@@ -809,7 +803,7 @@ theorem dvd_of_unit_mul_cancel : ∀ (k g d : Nat), ¬ (3:Nat) ∣ g →
           _ = 3^k * (g * d') := hgd
       have hcancel : 3 * e = g * d' :=
         Nat.eq_of_mul_eq_mul_left (Nat.pow_pos (by decide)) he2
-      have hgd3 : (3:Nat) ∣ g * d' := ⟨e, by rw [hcancel]; ring⟩
+      have hgd3 : (3:Nat) ∣ g * d' := ⟨e, hcancel.symm⟩
       have hd3 : (3:Nat) ∣ d' := dvd_mul_cancel_three g d' hg hgd3
       obtain ⟨f, hf⟩ := hd3
       exact ⟨f, by rw [hd', hf, Nat.pow_succ]; try ring⟩
