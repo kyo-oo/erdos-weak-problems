@@ -414,8 +414,10 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     -- assemble: |P| ≤ Σ fibers ≤ Σ (r k m) = Q.card * (r k m)
     have hsum : P.card ≤ ∑ q ∈ Q,
         (P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).card := by
-      rw [← hcover]
-      exact Finset.card_bUnion_le _ _
+      have h := Finset.card_bUnion_le Q
+        (fun q => P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q))
+      rw [← hcover] at h
+      exact h
     have hle : ∑ q ∈ Q,
         (P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).card ≤
         ∑ _ ∈ Q, (r k m) :=

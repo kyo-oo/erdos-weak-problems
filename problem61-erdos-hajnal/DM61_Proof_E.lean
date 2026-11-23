@@ -355,7 +355,7 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
         (G.comap (Subtype.val : {x : α // x ≠ u} → α)) w v := by
     intro v
     obtain ⟨w, hw1, hw2⟩ := last_exit G u v.2 (hconn u v)
-    exact ⟨w, hw1, hw2 v.2⟩
+    exact ⟨w, hw1, hw2⟩
   by_cases hmix : ∃ a b : {x : α // x ≠ u},
       GReach (G.comap (Subtype.val : {x : α // x ≠ u} → α)) a b ∧
       G.Adj u (a : α) ∧ ¬ G.Adj u (b : α)
