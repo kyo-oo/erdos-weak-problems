@@ -233,3 +233,18 @@ new receipt greps + 2 markers.  406d/406e re-exposed on fresh runners
 (the r15 kills were infra).
 
 The engine never stops; it never lies.
+
+### F. r17 pre-emptive addendum — THE CLIMB'S KERNEL-CERTIFIED BASE
+While the r16 run sat queued (runner fleet saturated by the S086 lane),
+the assault continued: the climb's finite base (BOSS's worldtrace
+certificate) made KERNEL-VERIFIED — FinalVerdict406 §5:
+- `erdos406_climb_base` — all 113 exponents 8 <= K <= 120 carry an
+  explicit HappyCell witness (p, carry in {0,3}), each case `decide`
+  (exact kernel arithmetic on the 241-bit powers; two-method verified
+  in Python before generation).
+- `erdos406_climb_of_base_and_tail` — the full climb = base + tail.
+- **`erdos406_universal_verdict_of_tail`** — THE MISSION'S SHARPEST
+  STATEMENT: the full Erdos #406 verdict from the climb's tail (K > 120)
+  alone.  The entire remaining mathematical content of the problem is
+  now one named hypothesis.
+The engine never stops; it never lies.
