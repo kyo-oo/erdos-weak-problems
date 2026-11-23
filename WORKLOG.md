@@ -5348,3 +5348,58 @@ zero sorryAx. Repair rounds follow the campaign norm (each post-mortem
 feeds the next).
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S086 — THE W85 WAVE CLOSED: 61E P4/SEINCHE + 142D V-GEN GREEN — ALL THREE MISSION FRONTS BANKED (2026-11-23, runs 45275825358 → 45280226008)
+
+**THE VERDICT (GitHub Actions, run 45280226008 @ 9a91ad1, job
+kernel-dm-w85 COMPLETED SUCCESS):**
+
+| step | theorem | axioms |
+|---|---|---|
+| 61DM-E | `Erdos61E.eh_P4` + `Erdos61E.eh_Pbar4` + `Erdos61E.erdos_61_p4` (P4/P̄4 at c = 1/4 over the official IsErdosHajnalLowerBound — the Seinsche split, the GReach walk closure, the strong-induction witness product |I|·|K| ≥ n, the ψ self-complementarity bridge, the max-case dichotomy, the 61A finisher chain) | [propext, Classical.choice, Quot.sound] |
+| 142DM-D | `DM142D.v_gen` (∀ k ≥ 3, m ≥ 2, N ≥ 16m²: 2m·(r k N) ≤ (2·(r k m)+1)·N over the official maxCard) + `v_gen_witness` + `aff_k` (the copy cap) + `v_gen_board` (k=3, m=8: 16·(r 3 N) ≤ 17·N for N ≥ 1024) | [propext, Classical.choice, Quot.sound] |
+| 107DM-C | `Erdos107C.ersz_lower_le_five` + `f_eq_conjectured_of_le_four` (f 3 = 3, f 4 = 5 EXACT) + `ersz_bounds_of_le_five` (green since r14/S085, re-confirmed) | [propext, Classical.choice, Quot.sound] |
+
+With kernel-dm-w82 (six kernels), kernel-dm-w84 (142C U-GEN-0 + 61D
+K5/E5) and kernel-dm-w85 (61E + 142D + 107C) ALL GREEN, and all four
+official comparator gates green on every recent run, the three mission
+targets stand fully kernelled over the official DeepMind statements:
+
+* **#61** — the family floor at c = 1/4 (K1…P̄3) + the closure map + the
+  K5/E5 ladder at c = 1/5 + the P4/P̄4 Seinsche kernel at c = 1/4.
+* **#142** — r_mono + the reflection lemma + 25 witness stones + the
+  U-GEN-0 block floor (tight at N = k) + the V-GEN homothetic
+  amplification (all k, sharp constant, all-integer).
+* **#107** — nonempty_cardSet + ersz_upper (all n) + the ES-1960 lower
+  side n ≤ 5 + the exact values f(3) = 3, f(4) = 5 + the two-sided
+  board 2^(n-2)+1 ≤ f(n) ≤ C(2n-4,n-2)+1 for 3 ≤ n ≤ 5.
+
+**THE REPAIR WAR (4 CI rounds, ~50 → 40 → 5 → 0):** the S085-written
+W85 kernels were first-compile. The r1 wave killed the elaboration
+cascades (the ↥-form instance alignment for Finset.Subtype.fintype at
+all three ih-application sites; the omega atom-multiplication traps
+killed by rewriting the card equations INTO h1; the congrArg Prod.fst
+HO-unification killed by the separate hfst have; the Set.InjOn
+separate-have for card_image_of_injOn with the .symm direction; the
+explicit-arg Finset.card_union_le). The r2 wave killed the transport
+layer (the Eq.trans .symm route at 8 hne sites; the
+membership-only IsIndepSet/IsClique application at 16 sites — the
+strict-implicit vertex binders; the ha2→hb2 variable bug; the rw
+←-direction at 10 coercion bridges; Finset.Disjoint → root Disjoint;
+card_disjoint_union → card_union_eq_card_add_card). The r3 wave killed
+the last five (the .mp → .mpr iff direction; the compl_adj G-a-b
+explicit-argument form; the join-twin apply-route). Every repair was
+verified against the pinned sources (Mathlib v4.33.0-rc2 fetched and
+read directly; Lean core v4.33.0-rc2 for the Nat lemmas; BOSS's own
+arsenal usage for Prod.ext) or the CI-green sibling kernels (DM61_D,
+DM107_B, DM107_C). The 107-D insurance kernel (W84-107B lane, 102KB,
+finite witnesses) is archived in-repo unwired.
+
+The honest frontier (unchanged): the official open cores — erdos_142
+asymptotic, erdos_61 general, erdos_107 full conjecture — remain open
+mathematics, claimed by no one. Everything that closes on the official
+statements is now closed and machine-certified.
+
+The engine never stops; it never lies. In English, always.
