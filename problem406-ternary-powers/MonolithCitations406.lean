@@ -35,6 +35,8 @@ diverged branches — this kernel imports Monolith modules ONLY.
 
 namespace MonolithCitations406
 
+open GSTCanonicalSevenAxisBridge
+
 /-! ## §1 The composition, cited by real name -/
 
 /-- **THE ROW + TOWER COMPOSITION, CITED.**  BOSS's own chamber theorem,
@@ -49,7 +51,7 @@ theorem tailF_of_row_and_tower_cited
 boundary slot `hB` is the terminal identity — proven in the source
 monolith §7.15, vendored CI-green as the MonolithGate theorem (r9). -/
 theorem even_conjecture_of_row_and_tower_cited
-    (hB : MonolithBoundary.erdos_even_conjecture_iff_tailF)
+    (hB : erdos_even_conjecture_iff_tailF)
     (hRow : GSTTailFFourthDimension.tailF_row_primitive)
     (hTower : GSTTailFFourthDimension.tailF_tower_primitive) :
     ∀ K : Nat, 8 ≤ K → noTernaryTwo (4^K) = false :=
@@ -58,7 +60,7 @@ theorem even_conjecture_of_row_and_tower_cited
 /-- **THE CROWN FROM THE TWO PRIMITIVES, CITED.**  Erdős #406's universal
 verdict, with the boundary slot explicit. -/
 theorem erdos_ternary_2_universal_of_row_and_tower_cited
-    (hB : MonolithBoundary.erdos_ternary_2_universal_of_tailF)
+    (hB : erdos_ternary_2_universal_of_tailF)
     (hRow : GSTTailFFourthDimension.tailF_row_primitive)
     (hTower : GSTTailFFourthDimension.tailF_tower_primitive)
     (n : Nat) (hn : 9 ≤ n) :
@@ -95,10 +97,10 @@ theorem no_common_pow4_forbids_all_22_cited (K : Nat)
 /-- **THE BOUNDARY ADAPTER, CITED.**  The tailF input hands the
 even-exponent statement through the identity. -/
 theorem erdos_even_conjecture_of_tailF_boundary_cited
-    (hB : MonolithBoundary.erdos_even_conjecture_iff_tailF)
+    (hB : erdos_even_conjecture_iff_tailF)
     (hTailF : GSTGraphV2OmegaWaveLaw.four_power_omega_shadow_wave_tailF) :
     ∀ K : Nat, 8 ≤ K → noTernaryTwo (4^K) = false :=
-  MonolithBoundary.erdos_even_conjecture_of_tailF_boundary hB hTailF
+  erdos_even_conjecture_of_tailF_boundary hB hTailF
 
 /-! ## §3 Receipts — every cited theorem, its axiom profile -/
 
