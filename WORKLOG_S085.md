@@ -154,3 +154,17 @@ kernel-406a, kernel-406b, kernel-406c, kernel-monolith, and the whole
   scan-region defect (never exposed: r8's job was runner-killed at
   minute 3, exit 143, infra not math), incl. the asTernaryTwo bomb.
 The engine never stops; it never lies.
+
+---
+
+## ROUND r12 — THE MONOLITH CITATIONS KERNEL (strike #4 of the named list)
+
+MonolithCitations406.lean — the kernels cite BOSS's own chamber theorems
+BY REAL NAME from the Monolith library (CI-green since r7):
+tailF_of_row_and_tower, even_conjecture_of_row_and_tower (boundary slot
+explicit), erdos_ternary_2_universal_of_row_and_tower (the crown),
+omega_diagonal_two_of_mod27_thirteen (the band fire), four_pow_mod243
+(the lattice law), no_common_pow4_forbids_all_22 (the forced-digit-2
+law), erdos_even_conjecture_of_tailF_boundary (the adapter). Seven
+citation theorems + ten #print axioms receipts + marker. CI job
+kernel-406cites (REAL gates, co-import law: Monolith only).

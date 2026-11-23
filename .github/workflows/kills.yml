@@ -1561,6 +1561,45 @@ jobs:
         grep -F "ERDOS406_MONOLITHGATE_HYPOTHESIS_DISCHARGED" gate406.log
         echo ERDOS_406_HYPOTHESIS_DISCHARGED=1
       shell: bash
+  kernel-406cites:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - if: always()
+      name: "THE MONOLITH CITATIONS (S085 r12, BOSS order USE MY MATHS): the kernels cite BOSS's own chamber theorems BY REAL NAME — MonolithCitations406.lean consumes the Monolith library directly (tailF_of_row_and_tower, even_conjecture_of_row_and_tower, erdos_ternary_2_universal_of_row_and_tower, the mod-27 band fire, the four_pow_mod243 lattice law, the forced-digit-2 no-22 law, the boundary adapter) with zero house-rebuilt substitutes; CO-IMPORT LAW: Monolith only, never with MonolithGate or Arsenal.CardinalWorlds"
+      run: |
+        set -euo pipefail
+        : > cites406.log
+        set +e
+        timeout 3000 lake build Monolith.MonolithBoundary 2>&1 | tee -a cites406.log
+        RC1=${PIPESTATUS[0]}
+        timeout 1500 lake build Monolith.GSTFourPowerDirectNo22 2>&1 | tee -a cites406.log
+        RC2=${PIPESTATUS[0]}
+        timeout 3000 lake build Monolith.GSTTailFFourthDimension 2>&1 | tee -a cites406.log
+        RC3=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ] || [ "$RC2" -ne 0 ] || [ "$RC3" -ne 0 ]; then echo "CITES406_LIB_BUILD_FAILED rc1=$RC1 rc2=$RC2 rc3=$RC3"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' cites406.log; then echo "CITES406_LIB_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' cites406.log; exit 1; fi
+        set +e
+        timeout 900 lake env lean problem406-ternary-powers/MonolithCitations406.lean 2>&1 | tee -a cites406.log
+        RCK=${PIPESTATUS[0]}
+        set -e
+        if [ "$RCK" -ne 0 ]; then echo "CITES406_KERNEL_COMPILE_FAILED rc=$RCK"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' cites406.log; then echo "CITES406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' cites406.log; exit 1; fi
+        grep -E "tailF_of_row_and_tower_cited' (does not depend on any axioms|depends on axioms)" cites406.log
+        grep -E "no_common_pow4_forbids_all_22_cited' (does not depend on any axioms|depends on axioms)" cites406.log
+        grep -F "ERDOS406_MONOLITH_CITATIONS_GREEN" cites406.log
+        echo ERDOS406_MONOLITH_CITATIONS_KERNEL_GREEN=1
+      shell: bash
   kernel-monolith:
     runs-on: ubuntu-24.04
     steps:
