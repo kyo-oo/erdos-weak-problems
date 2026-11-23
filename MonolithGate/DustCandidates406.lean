@@ -349,7 +349,8 @@ theorem dust_core_class_determined (core core' : Nat)
     · have hc : core % 3^k = core' % 3^k := ih (by omega)
       have hmodw : ∀ (W n m : Nat), (W * n) % m = (W * (n % m)) % m := by
         intro W n m
-        rw [Nat.mul_mod, Nat.mod_mod_of_dvd (Nat.dvd_refl _)]
+        rw [Nat.mul_mod W n m, Nat.mul_mod W (n % m) m,
+          Nat.mod_mod_of_dvd n (dvd_refl _)]
       obtain ⟨x, hx, hcx⟩ : ∃ x : Nat, x < 3 ∧
           core % 3^(k+1) = core % 3^k + 3^k * x :=
         ⟨core / 3^k % 3, Nat.mod_lt _ (by decide), mod_pow_succ_split core k⟩
