@@ -217,3 +217,33 @@ under a new name.
 Kernel 76's mathematics stands (battery 44/44); its first compile is
 gated behind the 74/75 sequence.  The two grants stand in their
 monolith language.  The engine never stops; it never lies.
+
+## H. THE BISECT VERDICT (the round's closing data)
+
+1. **THE CONTROL: GREEN** (kernel-73's file at position 1 — the job,
+   the runner, the pipeline all healthy).
+2. **KERNEL 74 SLIM: GREEN — THE GHOST MACHINERY IS CERTIFIED**
+   (Lemma A `ghost_residue_shape`, Lemma B `ghost_congruence`, the
+   cancel engine, the collapse `ghost_congruent_all_depths`,
+   `ghost_head_not_three` — the S080 mathematics compiles clean,
+   constructive axioms only, first CI certification ever).
+3. **KERNEL 74b PINS: FAILED FAST** — a real compile error (not a
+   hang): the bomb was never a hang — the pins half's errors were
+   masked by seven runner-level kills.  The pins half (§6-§9: cMod,
+   W61, the π-points, THE PIN, the census, the crown) carries defects
+   addressable by the standard repair loop next round (the fast
+   failure's error list lands with the completing run's log).
+4. **The seven-kill mystery: RESOLVED IN SUBSTANCE** — the kills were
+   external runner shutdowns correlated with the FULL file's
+   elaboration profile; the split (slim+pins) changed the game — slim
+   compiles green, pins fails fast with real errors, and the lane is
+   finally MOVING.
+5. Kernels 75/76 first exposures: pending (the job wedged at
+   75-pending after 74b's failure — the verdicts land next round;
+   both files carry the r3 static repairs + the instrumentation).
+
+**The named next strike:** pull 74b's error list from the completing
+run's log, run the standard repair loop on the pins half (§6-§9),
+then the 75/76 first-exposure verdicts, then the full lane green.
+
+The engine never stops; it never lies.
