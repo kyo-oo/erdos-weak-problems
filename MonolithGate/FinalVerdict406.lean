@@ -139,24 +139,25 @@ theorem erdos406_high_sheets_die_of_not_dust (core : Nat)
 
 BOSS's own climb file certifies the primitive "empirically by the
 worldtrace simulation at N = 1500".  This section makes the empirical
-certificate KERNEL-VERIFIED for the base band 8 ≤ K ≤ 120: every case
-carried by an explicit witness `p` with `3 ≤ p`, the HappyCell checked
-by `decide` (exact kernel arithmetic on the 241-bit powers).  The
-remaining content of the climb narrows to the TAIL `K > 120` — and the
-mission's sharpest statement follows: the universal verdict from the
-tail alone. -/
+certificate KERNEL-VERIFIED for the base band 8 ≤ K ≤ 500 — the
+campaign's own Pins band — every case carried by an explicit witness
+`p` (max 41) with `3 ≤ p`, the HappyCell checked by `decide` (exact
+kernel arithmetic on the 1001-bit powers, two-method verified before
+generation).  The remaining content of the climb narrows to the TAIL
+`K > 500` — and the mission's sharpest statement follows: the universal
+verdict from the tail alone. -/
 
 open GSTU2DEventTransport in
 open GSTCanonicalSevenAxisBridge in
 /-- **THE CLIMB'S FINITE BASE, KERNEL-CERTIFIED.**  Every exponent from
-eight through one hundred twenty owns its physical Happy row at a
-ternary coordinate at least three — 113 explicit witnesses, each
-verified by exact kernel arithmetic. -/
+eight through five hundred owns its physical Happy row at a ternary
+coordinate at least three — 493 explicit witnesses, each verified by
+exact kernel arithmetic. -/
 theorem erdos406_climb_base :
-    ∀ K : Nat, 8 ≤ K → K ≤ 120 →
+    ∀ K : Nat, 8 ≤ K → K ≤ 500 →
       ∃ p : Nat, 3 ≤ p ∧
         HappyCell (carry4 (4^K) p) (digit3 (4^K) p) := by
-  intro K hK8 hK120
+  intro K hK8 hK500
   interval_cases K
     exact ⟨4, by decide, by decide⟩
     exact ⟨7, by decide, by decide⟩
@@ -271,27 +272,407 @@ theorem erdos406_climb_base :
     exact ⟨6, by decide, by decide⟩
     exact ⟨10, by decide, by decide⟩
     exact ⟨10, by decide, by decide⟩
+    exact ⟨20, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨28, by decide, by decide⟩
+    exact ⟨16, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨29, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨15, by decide, by decide⟩
+    exact ⟨15, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨16, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨16, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨16, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨26, by decide, by decide⟩
+    exact ⟨24, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨19, by decide, by decide⟩
+    exact ⟨19, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨23, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨40, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨14, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨25, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨21, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨28, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨15, by decide, by decide⟩
+    exact ⟨15, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨26, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨23, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨19, by decide, by decide⟩
+    exact ⟨17, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨22, by decide, by decide⟩
+    exact ⟨25, by decide, by decide⟩
+    exact ⟨18, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨11, by decide, by decide⟩
+    exact ⟨12, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨9, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨5, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨10, by decide, by decide⟩
+    exact ⟨15, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨6, by decide, by decide⟩
+    exact ⟨14, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨8, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨4, by decide, by decide⟩
+    exact ⟨13, by decide, by decide⟩
+    exact ⟨16, by decide, by decide⟩
+    exact ⟨41, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨7, by decide, by decide⟩
+    exact ⟨3, by decide, by decide⟩
 
 /-- **THE CLIMB FROM BASE AND TAIL.**  The full climb primitive follows
-from the kernel-certified base band plus the tail above one hundred
-twenty — the mission's remaining content, stated as one hypothesis. -/
+from the kernel-certified base band plus the tail above five hundred —
+the mission's remaining content, stated as one hypothesis. -/
 theorem erdos406_climb_of_base_and_tail
-    (htail : ∀ K : Nat, 120 < K →
+    (htail : ∀ K : Nat, 500 < K →
       ∃ p : Nat, 3 ≤ p ∧
         HappyCell (carry4 (4^K) p) (digit3 (4^K) p)) :
     GSTInfiniteFourPowerNavigation.four_power_happy_climb := by
   intro K hK8
-  rcases Nat.lt_or_ge K 121 with h | h
+  rcases Nat.lt_or_ge K 501 with h | h
   · exact erdos406_climb_base K hK8 (by omega)
   · exact htail K (by omega)
 
 /-- **THE MISSION'S SHARPEST STATEMENT — the verdict from the tail
 alone.**  Erdős #406's universal verdict follows from the climb's tail
-above one hundred twenty alone: the base band is kernel-certified, the
+above five hundred alone: the base band is kernel-certified, the
 composition is machine-proven, and the entire remaining mathematical
 content of the problem is the single named hypothesis. -/
 theorem erdos406_universal_verdict_of_tail
-    (htail : ∀ K : Nat, 120 < K →
+    (htail : ∀ K : Nat, 500 < K →
       ∃ p : Nat, 3 ≤ p ∧
         HappyCell (carry4 (4^K) p) (digit3 (4^K) p)) :
     ∀ n : Nat, 9 ≤ n → noTernaryTwo (2^n) = false :=
