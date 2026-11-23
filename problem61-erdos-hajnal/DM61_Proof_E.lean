@@ -791,7 +791,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
               exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
             exact h2 h1
           have hIcard : (I₁' ∪ I₂').card = I₁'.card + I₂'.card :=
-            Finset.card_union_eq_card_add_card.mp hdisj
+            Finset.card_union_eq_card_add_card.mpr hdisj
           -- The four membership helpers.
           have hindepUnion : G.IsIndepSet (↑(I₁' ∪ I₂') : Set α) := by
             intro a ha b hb hab
@@ -966,7 +966,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
               exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
             exact h2 h1
           have hKcard : (K₁' ∪ K₂').card = K₁'.card + K₂'.card :=
-            Finset.card_union_eq_card_add_card.mp hdisj
+            Finset.card_union_eq_card_add_card.mpr hdisj
           have hcliqueUnion : G.IsClique (↑(K₁' ∪ K₂') : Set α) := by
             intro a ha b hb hab
             have ha' : a ∈ K₁' ∪ K₂' := Finset.mem_coe.1 ha
@@ -995,7 +995,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
                   rw [h] at hain
                   exact hbin hain
                 by_contra hg
-                exact hscross a hain b hbin (SimpleGraph.compl_adj.2 ⟨hne, hg⟩)
+                exact hscross a hain b hbin ((SimpleGraph.compl_adj G a b).2 ⟨hne, hg⟩)
             · rcases Finset.mem_union.1 hb' with hb1 | hb2
               · obtain ⟨a2, _, ha2v⟩ := Finset.mem_image.1 ha2
                 obtain ⟨b1, _, hb1v⟩ := Finset.mem_image.1 hb1
@@ -1006,11 +1006,12 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
                   exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
                 have hne : a ≠ b := by
                   rintro h
-                  rw [h] at hbin
-                  exact hain hbin
+                  apply hain
+                  rw [h]
+                  exact hbin
                 by_contra hg
                 exact hscross b hbin a hain
-                  (SimpleGraph.compl_adj.2
+                  ((SimpleGraph.compl_adj G b a).2
                     ⟨Ne.symm hne, fun h => hg (G.adj_symm h)⟩)
               · obtain ⟨a2, ha2m, ha2v⟩ := Finset.mem_image.1 ha2
                 obtain ⟨b2, hb2m, hb2v⟩ := Finset.mem_image.1 hb2
