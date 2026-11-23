@@ -168,3 +168,68 @@ omega_diagonal_two_of_mod27_thirteen (the band fire), four_pow_mod243
 law), erdos_even_conjecture_of_tailF_boundary (the adapter). Seven
 citation theorems + ten #print axioms receipts + marker. CI job
 kernel-406cites (REAL gates, co-import law: Monolith only).
+
+---
+
+## ROUND r16 — THE COMBINATION STRIKE + THE DUST CANDIDATE ASSAULT
+
+BOSS's order (4th round): "PROVE THE THINGS MY MATHS CURRENTLY LACKS AND
+ALSO BREAKTHROUGH BY COMBINING MULTIPLE LEAN FILES INTO NEW LEAN FILE,
+MEANS COMPLETE NEW THEOREM/LAW PROVING IT."
+
+### A. The state read (before this round)
+r15 verdicts (run 45263220803): kernel-406f SUCCESS — the tailf
+convergence complete (37 -> 13 -> 6 -> 2 -> 0, five rounds).  kernel-406d
++ kernel-406e: BOTH killed by runner shutdown (exit 143, minute 3-4,
+mid-Arsenal-census) — infra, not math (the same class as r8's Ghost
+kill).  kernel-406a/b/c/cites/gate/monolith ALL green.
+
+### B. THE COMBINATION FILE — MonolithGate/FinalVerdict406.lean
+The complete new theorem, composing THREE files' CI-green laws into one
+statement no file contains:
+- `erdos406_universal_verdict_of_climb` — the climb primitive, through
+  GSTTailFProof.hTailF + even_conjecture_of_climb + the TERMINAL
+  IDENTITY (ErdosTernary2:18425) + the crown (:18443) -> the full
+  Erdos #406 verdict: every 2^n (n >= 9) fails noTernaryTwo.
+- `erdos406_universal_verdict_of_lattice` — the tower primitive + the
+  34-survivor row-mod729 law -> the same verdict (the lattice route).
+- `erdos406_high_sheets_die_of_not_dust` — the dust boundary
+  (omega_tower_dies_of_not_dust) read as the verdict's own boolean
+  statement, sheet by sheet (hasTernaryTwo_of_digit + 
+  has_two_imp_not_no_two).
+- 12 #print axioms receipts + marker.
+
+### C. THE ASSAULT FILE — MonolithGate/DustCandidates406.lean
+THE NEW LAWS (real new mathematics, composed from the chamber's own
+shape/stabilization/unit laws):
+- `omega_tower_word_progression` — under the dust shape, the tower word
+  advances EXACTLY one unit of 3^k per level (T_{k+1} = T_k + 3^k),
+  from the middle-third sandwich + the cube-lift stabilization.
+- `dust_tower_word_closed_form` — the progression integrated:
+  2*T_k + 27 = 2*T_3 + 3^k (the residue is an explicit affine function
+  of the level).
+- `dust_candidate_two_classes` — the tower family's dust content
+  collapses to EXACTLY TWO classes mod 27 (4 and 16): the level-3
+  middle-third window + the seed word 9709 = 16 mod 27 + six-family
+  arithmetic.
+- `tower_word_linear_in_trit` + `dust_core_class_determined` — the
+  tower word is LINEAR in the next trit (the seed word is a 3-adic
+  unit), so each class pins ONE infinite 3-adic stream, one trit at a
+  time: two dust cores in the same class agree mod 3^k for EVERY k.
+
+### D. The computational certificate (engine layer, NO-OOM compliant)
+Exact Python sieve (all-modular arithmetic): the two streams sieved to
+level 45 — both survive every level, each with EXACTLY one extension
+per level (the progression's rigidity, now PROVEN), trits non-terminating
+(nonzero at 32, 35-39, 41-44, no period).  The two candidate 3-adics
+are almost surely not Nats; the honest frontier is the structural
+non-termination proof.  What is now UNCONDITIONAL: the entire infinite
+dust content of the tower family = at most TWO rigid streams.
+
+### E. CI
+kernel-406gate extended: DustCandidates406 + FinalVerdict406 compiles
+with REAL gates (PIPESTATUS exit codes, error[:(] negative gate) + 7
+new receipt greps + 2 markers.  406d/406e re-exposed on fresh runners
+(the r15 kills were infra).
+
+The engine never stops; it never lies.

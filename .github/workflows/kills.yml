@@ -1552,12 +1552,28 @@ jobs:
         RCK=${PIPESTATUS[0]}
         set -e
         if [ "$RC4" -ne 0 ] || [ "$RCK" -ne 0 ]; then echo "GATE406_TAILFPROOF_OR_KERNEL_FAILED rc4=$RC4 rck=$RCK"; exit 1; fi
+        set +e
+        timeout 900 lake env lean MonolithGate/DustCandidates406.lean 2>&1 | tee -a gate406.log
+        RCD=${PIPESTATUS[0]}
+        timeout 900 lake env lean MonolithGate/FinalVerdict406.lean 2>&1 | tee -a gate406.log
+        RCF=${PIPESTATUS[0]}
+        set -e
+        if [ "$RCD" -ne 0 ] || [ "$RCF" -ne 0 ]; then echo "GATE406_DUST_OR_FINAL_FAILED rcd=$RCD rcf=$RCF"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gate406.log; then echo "GATE406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gate406.log; exit 1; fi
         echo "MONOLITHGATE MODULES BUILT:"
         grep -cE '(Built|Replayed) MonolithGate\.' gate406.log
         grep -E "erdos_even_conjecture_iff_tailF' (does not depend on any axioms|depends on axioms)" gate406.log
         grep -E "erdos_ternary_2_universal_of_tailF' (does not depend on any axioms|depends on axioms)" gate406.log
         grep -E "tailF_of_row_and_tower' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "DustCandidates406.omega_tower_word_progression' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "DustCandidates406.dust_tower_word_closed_form' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "DustCandidates406.dust_candidate_two_classes' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "DustCandidates406.dust_core_class_determined' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "erdos406_universal_verdict_of_climb' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "erdos406_universal_verdict_of_lattice' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "erdos406_high_sheets_die_of_not_dust' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -F "ERDOS406_DUST_CANDIDATES_GREEN" gate406.log
+        grep -F "ERDOS406_FINAL_VERDICT_GREEN" gate406.log
         grep -F "ERDOS406_MONOLITHGATE_HYPOTHESIS_DISCHARGED" gate406.log
         echo ERDOS_406_HYPOTHESIS_DISCHARGED=1
       shell: bash
