@@ -88,7 +88,7 @@ jobs:
           lake env lean problem61-erdos-hajnal/DM61_Official.lean 2>&1 | tee -a kernelfc.log
           lake env lean problem142-rk-asymptotic/DM142_Official.lean 2>&1 | tee -a kernelfc.log
           lake env lean problem107-happy-ending/DM107_Official.lean 2>&1 | tee -a kernelfc.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelfc.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelfc.log
           grep -F "DM61_STATEMENTS_GREEN" kernelfc.log
           grep -F "DM142_STATEMENTS_GREEN" kernelfc.log
           grep -F "DM107_ANCHORS_GREEN" kernelfc.log
@@ -120,7 +120,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel107dma.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107dma.log
           lake env lean problem107-happy-ending/DM107_Proof_A.lean 2>&1 | tee -a kernel107dma.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107dma.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107dma.log
           grep -F "DM107A_NONEMPTY_CARDSET_GREEN" kernel107dma.log
           grep -E "'Erdos107.nonempty_cardSet' (does not depend on any axioms|depends on axioms)" kernel107dma.log
           echo KERNEL_107DM_A_GREEN=1
@@ -130,7 +130,7 @@ jobs:
           set -euo pipefail
           lake build FC 2>&1 | tee kernel61dma.log
           lake env lean problem61-erdos-hajnal/DM61_Proof_A.lean 2>&1 | tee -a kernel61dma.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dma.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dma.log
           grep -F "DM61A_FAMILY_GREEN" kernel61dma.log
           grep -E "'Erdos61A.erdos_61_family' (does not depend on any axioms|depends on axioms)" kernel61dma.log
           ! grep -E "'Erdos61A.erdos_61_family'.*sorryAx" kernel61dma.log
@@ -141,7 +141,7 @@ jobs:
           set -euo pipefail
           lake build FC 2>&1 | tee kernel61dmb.log
           lake env lean problem61-erdos-hajnal/DM61_Closure.lean 2>&1 | tee -a kernel61dmb.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dmb.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dmb.log
           grep -F "DM61B_CLOSURE_GREEN" kernel61dmb.log
           grep -E "'Erdos61B.erdos_61_family' (does not depend on any axioms|depends on axioms)" kernel61dmb.log
           ! grep -E "'Erdos61B..*'.*sorryAx" kernel61dmb.log
@@ -152,7 +152,7 @@ jobs:
           set -euo pipefail
           lake build FC 2>&1 | tee kernel142dma.log
           lake env lean problem142-rk-asymptotic/DM142_Proof_A.lean 2>&1 | tee -a kernel142dma.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dma.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dma.log
           grep -F "DM142A_UPPER_GREEN" kernel142dma.log
           grep -E "'(DM142A.r_mono|DM142A.r_mono_unrestricted_false|DM142A.apFree_of_pairscan|DM142A.dm142a_board)' (does not depend on any axioms|depends on axioms)" kernel142dma.log
           ! grep -E "'DM142A..*'.*sorryAx" kernel142dma.log
@@ -163,7 +163,7 @@ jobs:
           set -euo pipefail
           lake build FC 2>&1 | tee kernel142dmb.log
           lake env lean problem142-rk-asymptotic/DM142_Proof_B.lean 2>&1 | tee -a kernel142dmb.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmb.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmb.log
           grep -F "DM142B_LOWER_GREEN" kernel142dmb.log
           grep -E "'(DM142B.r3_216_ge|DM142B.r3_7776_ge|DM142B.r3_46656_ge|DM142B.dm142b_board)' (does not depend on any axioms|depends on axioms)" kernel142dmb.log
           ! grep -E "'(DM142B.r3_216_ge|DM142B.r3_7776_ge|DM142B.r3_46656_ge|DM142B.dm142b_board)'.*sorryAx" kernel142dmb.log
@@ -193,7 +193,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel142dmc.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel142dmc.log
           lake env lean problem142-rk-asymptotic/DM142_Proof_C.lean 2>&1 | tee -a kernel142dmc.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmc.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142dmc.log
           grep -F "DM142C_UGEN0_GREEN" kernel142dmc.log
           grep -E "'(DM142C.u_gen_zero|DM142C.u_gen_zero_tight|DM142C.core_bound|DM142C.window_union_bound|DM142C.window_bound|DM142C.window_isAP|DM142C.dm142c_board)' (does not depend on any axioms|depends on axioms)" kernel142dmc.log
           ! grep -E "'DM142C..*'.*sorryAx" kernel142dmc.log
@@ -207,7 +207,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel61dmd.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel61dmd.log
           lake env lean problem61-erdos-hajnal/DM61_Proof_D.lean 2>&1 | tee -a kernel61dmd.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dmd.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61dmd.log
           grep -F "DM61D_K5_GREEN" kernel61dmd.log
           grep -E "'(Erdos61D.eh_K5|Erdos61D.eh_E5|Erdos61D.erdos_61_k5_e5|Erdos61D.ramsey_ladder|Erdos61D.choose_le_of_ge_1024|Erdos61D.rpow_fifth_le_root5_succ|Erdos61D.four_and_twenty_choose_four_le)' (does not depend on any axioms|depends on axioms)" kernel61dmd.log
           ! grep -E "'Erdos61D..*'.*sorryAx" kernel61dmd.log
@@ -239,7 +239,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee kernel61e.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel61e.log
           lake env lean problem61-erdos-hajnal/DM61_Proof_E.lean 2>&1 | tee -a kernel61e.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61e.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61e.log
           grep -F "DM61E_P4_GREEN" kernel61e.log
           grep -E "'(Erdos61E.eh_P4|Erdos61E.eh_Pbar4|Erdos61E.erdos_61_p4|Erdos61E.seinsche_split|Erdos61E.p4_witness_product|Erdos61E.last_exit|Erdos61E.walk_crosses)' (does not depend on any axioms|depends on axioms)" kernel61e.log
           ! grep -E "'Erdos61E..*'.*sorryAx" kernel61e.log
@@ -253,7 +253,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel142d.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel142d.log
           lake env lean problem142-rk-asymptotic/DM142_Proof_D.lean 2>&1 | tee -a kernel142d.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142d.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142d.log
           grep -F "DM142D_VGEN_GREEN" kernel142d.log
           grep -E "'(DM142D.v_gen|DM142D.v_gen_witness|DM142D.aff_k|DM142D.v_gen_board)' (does not depend on any axioms|depends on axioms)" kernel142d.log
           ! grep -E "'DM142D..*'.*sorryAx" kernel142d.log
@@ -266,7 +266,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee kernel107c.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107c.log
           lake env lean problem107-happy-ending/DM107_Proof_C.lean 2>&1 | tee -a kernel107c.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107c.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107c.log
           grep -F "DM107C_LOWER_GREEN" kernel107c.log
           grep -E "'(Erdos107C.f_eq_conjectured_of_le_four|Erdos107C.ersz_lower_le_five|Erdos107C.ersz_bounds_of_le_five|Erdos107C.f_three_eq|Erdos107C.four_not_mem_cardSet_four|Erdos107C.not_hasConvexFiveGon_esEightFinset|Erdos107C.nine_le_f_five)' (does not depend on any axioms|depends on axioms)" kernel107c.log
           ! grep -E "'Erdos107C..*'.*sorryAx" kernel107c.log
@@ -314,7 +314,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean bulldoze/problem271-stanley-a2/StanleyA2.lean 2>&1 | tee stanley-a2.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' stanley-a2.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' stanley-a2.log
           grep -F "[0, 2, 3, 5, 9, 11, 12, 14, 27, 29, 30, 32, 36, 38, 39, 41]" stanley-a2.log
           grep -F "[1, 2, 4, 8, 16, 32, 64, 128]" stanley-a2.log
           echo STANLEY_A2_KERNEL_GREEN=1
@@ -323,7 +323,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean bulldoze/problem404-padic-kernel/KernelLaw.lean 2>&1 | tee kernel-law.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel-law.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel-law.log
           grep -F "[3, 3, 3]" kernel-law.log
           grep -F "[7, 7]" kernel-law.log
           grep -F "[10, 10]" kernel-law.log
@@ -334,7 +334,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean bulldoze/problem261-two-solutions/TwoSolutions.lean 2>&1 | tee two-solutions.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' two-solutions.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' two-solutions.log
           test "$(grep -cF '(1 : Rat)/2' two-solutions.log)" -ge 3
           grep -F "(128, 128, 128)" two-solutions.log
           grep -F "(104, 104)" two-solutions.log
@@ -346,7 +346,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean bulldoze/problem261-continuum-tower/Erdos261Tower.lean 2>&1 | tee tower.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tower.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tower.log
           grep -F "(1, 4, 11, 26, 57, 120, 247, 502)" tower.log
           grep -F "(2, 2)" tower.log
           grep -F "(16, 16)" tower.log
@@ -363,7 +363,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem404-full/PadicReduction.lean 2>&1 | tee padic-reduction.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' padic-reduction.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' padic-reduction.log
           grep -F "5184" padic-reduction.log
           grep -F "(1, 1)" padic-reduction.log
           grep -F "(3, 3)" padic-reduction.log
@@ -384,7 +384,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem261-q3bridge/BlockIdentity.lean 2>&1 | tee block-identity.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' block-identity.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' block-identity.log
           grep -F "(16, 16)" block-identity.log
           grep -F "(88, 88)" block-identity.log
           grep -F "(416, 416)" block-identity.log
@@ -399,7 +399,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem404-gadget-supply/GadgetSupply.lean 2>&1 | tee gadget-supply.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gadget-supply.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gadget-supply.log
           grep -cF "depends on axioms" gadget-supply.log
           grep -F "'lift_law' depends on axioms: [propext, Quot.sound]" gadget-supply.log
           grep -F "'pair_law' depends on axioms: [propext, Quot.sound]" gadget-supply.log
@@ -412,7 +412,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem261-funnels/FunnelStructure.lean 2>&1 | tee funnels.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' funnels.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' funnels.log
           grep -F "'death_fuel_mono' depends on axioms: [propext, Quot.sound]" funnels.log
           grep -F "(12231, 393, 217, 12231)" funnels.log
           grep -xF "192" funnels.log
@@ -423,7 +423,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem404-p2-classification/ObstructionFamilies.lean 2>&1 | tee p2class.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' p2class.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' p2class.log
           grep -F "'obs_T2' depends on axioms: [propext, Quot.sound]" p2class.log
           grep -F "'obs_T3' depends on axioms: [propext, Quot.sound]" p2class.log
           grep -F "'obs_T4' depends on axioms: [propext, Classical.choice, Quot.sound]" p2class.log
@@ -499,7 +499,7 @@ jobs:
             echo "=== $M ===" >> kernel10.log
             lake env lean -o oleans/$M.olean problem404-q3-chain/$M.lean 2>&1 | tee -a kernel10.log
           done
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel10.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel10.log
           grep -F "254" kernel10.log | head -3
           grep -F "118" kernel10.log
           grep -F "true" kernel10.log | head -3
@@ -512,7 +512,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem404-full/TheoremBGeneral.lean 2>&1 | tee theorem-b-general.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' theorem-b-general.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' theorem-b-general.log
           grep -F "(3, 2, 2, 1)" theorem-b-general.log
           test "$(grep -cF '(0, 0)' theorem-b-general.log)" -ge 3
           grep -F "(3, 3)" theorem-b-general.log
@@ -525,7 +525,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem404-q3-chain/ExactF62.lean 2>&1 | tee exact-f62.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' exact-f62.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' exact-f62.log
           grep -F "'erdos404_f62_lower' depends on axioms: [propext, Quot.sound]" exact-f62.log
           grep -F "'erdos404_f62_exact' depends on axioms: [propext, Classical.choice, Quot.sound]" exact-f62.log
           echo EXACT_F62_KERNEL_GREEN=1
@@ -535,7 +535,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem1108-subset-kernel/SubsetKernelLaw.lean 2>&1 | tee subset-kernel.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' subset-kernel.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' subset-kernel.log
           grep -F "(4, 3, 1)" subset-kernel.log
           grep -F "(6, 3, 3)" subset-kernel.log
           grep -F "(3, 1, 2)" subset-kernel.log
@@ -560,7 +560,7 @@ jobs:
             echo "=== $M ===" >> kernel14.log
             lake env lean -o oleans/$M.olean problem404-q3-chain/$M.lean 2>&1 | tee -a kernel14.log
           done
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel14.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel14.log
           grep -F "133" kernel14.log | head -3
           grep -F "129" kernel14.log | head -3
           grep -F "'obstructionCheck_true' depends on axioms: [propext, Quot.sound]" kernel14.log
@@ -577,7 +577,7 @@ jobs:
           #   v₂(Σ a!) = (2j₀ − s₂(j₀)) + v₂(C)   (explicit_cascade)
           #   square ⟹ s₂(j₀) ≡ v₂(C) (mod 2)     (square_parity_s2 — the payoff)
           lake env lean problem1108-subset-kernel/SubsetKernelLaw.lean 2>&1 | tee legendre.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' legendre.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' legendre.log
           grep -F "(0, 1, 3, 8, 1)" legendre.log
           grep -F "(8, 8, 8)" legendre.log
           grep -F "(20, 20)" legendre.log
@@ -607,7 +607,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem686-pell-ratio/Erdos686.lean 2>&1 | tee erdos686.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos686.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos686.log
           grep -F "ERDOS686_KERNEL_GREEN" erdos686.log
           grep -F "90" erdos686.log | head -2
           grep -F "true" erdos686.log | head -2
@@ -622,7 +622,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem727-factorial-square/FactorialSquare.lean 2>&1 | tee factorial-square.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' factorial-square.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' factorial-square.log
           grep -F "ERDOS727_KERNEL_GREEN" factorial-square.log
           grep -F "19" factorial-square.log | head -2
           grep -E "'erdos727_k2_witness' (does not depend on any axioms|depends on axioms)" factorial-square.log
@@ -641,7 +641,7 @@ jobs:
           lake env lean problem1056-factorial-intervals/FI_K2_K8.lean 2>&1 | tee -a kernel18.log
           echo "=== FI_K9 ===" >> kernel18.log
           lake env lean problem1056-factorial-intervals/FI_K9.lean 2>&1 | tee -a kernel18.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_K2_K8_GREEN" kernel18.log
           grep -F "FI_K9_GREEN" kernel18.log
           echo FI_A_GREEN=1
@@ -658,7 +658,7 @@ jobs:
             echo "=== $M ===" >> kernel18.log
             lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
           done
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_D3a_GREEN" kernel18.log
           grep -F "FI_D3b_GREEN" kernel18.log
           echo FI_B_GREEN=1
@@ -672,7 +672,7 @@ jobs:
             echo "=== $M ===" >> kernel18.log
             lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
           done
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_D3c_GREEN" kernel18.log
           grep -F "FI_D4a_GREEN" kernel18.log
           echo FI_C_GREEN=1
@@ -686,7 +686,7 @@ jobs:
             echo "=== $M ===" >> kernel18.log
             lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
           done
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_D4b_GREEN" kernel18.log
           grep -F "FI_D4c_GREEN" kernel18.log
           echo FI_D_GREEN=1
@@ -700,7 +700,7 @@ jobs:
             echo "=== $M ===" >> kernel18.log
             lake env lean -o oleans/$M.olean problem1056-factorial-intervals/$M.lean 2>&1 | tee -a kernel18.log
           done
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_D4d_GREEN" kernel18.log
           grep -F "FI_D4e_GREEN" kernel18.log
           echo FI_E_GREEN=1
@@ -719,7 +719,7 @@ jobs:
           lake env lean problem1056-factorial-intervals/FI_Anchors.lean 2>&1 | tee -a kernel18.log
           echo "=== FI_Bridge ===" >> kernel18.log
           lake env lean problem1056-factorial-intervals/FI_Bridge.lean 2>&1 | tee -a kernel18.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_K10_GREEN" kernel18.log
           grep -F "FI_K11_GREEN" kernel18.log
           grep -F "FI_ANCHORS_SMALL_GREEN" kernel18.log
@@ -746,7 +746,7 @@ jobs:
           lake env lean -o oleans/FI_K11_FINAL.olean problem1056-factorial-intervals/FI_K11_FINAL.lean 2>&1 | tee -a kernel18.log
           echo "=== FI_FINAL ===" >> kernel18.log
           lake env lean problem1056-factorial-intervals/FI_FINAL.lean 2>&1 | tee -a kernel18.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel18.log
           grep -F "FI_FINAL_GREEN" kernel18.log
           grep -E "'erdos1056_final_k(2|3|4|5|6|7|8|9|10|11)' (does not depend on any axioms|depends on axioms)" kernel18.log
           grep -E "'erdos1056_case_frontier' (does not depend on any axioms|depends on axioms)" kernel18.log
@@ -773,7 +773,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem700-binomial-gcd/Erdos700.lean 2>&1 | tee erdos700.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos700.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' erdos700.log
           grep -F "ERDOS700_KERNEL_GREEN" erdos700.log
           grep -F "(5, 3)" erdos700.log
           grep -F "(1, 1, 1, 1)" erdos700.log
@@ -807,7 +807,7 @@ jobs:
           LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
           export LEAN_PATH="$PWD/oleans1063${LP:+:$LP}"
           lake env lean problem1063-binomial-frontier/Erdos1063_FINAL.lean 2>&1 | tee -a kernel20.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel20.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel20.log
           grep -F "ERDOS1063_A_GREEN" kernel20.log
           grep -F "ERDOS1063_B_GREEN" kernel20.log
           grep -F "ERDOS1063_C_GREEN" kernel20.log
@@ -839,7 +839,7 @@ jobs:
           LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
           export LEAN_PATH="$PWD/oleans451${LP:+:$LP}"
           lake env lean problem451-interval-prime-free/Erdos451.lean 2>&1 | tee -a kernel21.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel21.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel21.log
           grep -F "ERDOS451_DATA_GREEN" kernel21.log
           grep -F "ERDOS451_KERNEL_GREEN" kernel21.log
           grep -E "Erdos451.erdos451_crit' (does not depend on any axioms|depends on axioms)" kernel21.log
@@ -867,7 +867,7 @@ jobs:
           LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
           export LEAN_PATH="$PWD/oleans1072${LP:+:$LP}"
           lake env lean problem1072-wilson-chain/Erdos1072.lean 2>&1 | tee -a kernel22.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel22.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel22.log
           grep -F "ERDOS1072_DATA_GREEN" kernel22.log
           grep -F "ERDOS1072_KERNEL_GREEN" kernel22.log
           grep -F "ERDOS1072_COMPLETE_GREEN" kernel22.log
@@ -895,7 +895,7 @@ jobs:
           LP=$(lake env printenv LEAN_PATH 2>/dev/null || true)
           export LEAN_PATH="$PWD/oleans394${LP:+:$LP}"
           lake env lean problem394-consecutive-crt/Erdos394.lean 2>&1 | tee -a kernel23.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel23.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel23.log
           grep -F "ERDOS394_DATA_GREEN" kernel23.log
           grep -F "ERDOS394_KERNEL_GREEN" kernel23.log
           grep -E "Erdos394.erdos394_(crt_sound|unique_pos|prime_landing|tk_char|table_main|arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel23.log
@@ -915,7 +915,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel24.log
           lake env lean problem711-divisor-matching/Erdos711.lean 2>&1 | tee -a kernel24.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel24.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel24.log
           grep -F "ERDOS711_KERNEL_GREEN" kernel24.log
           grep -E "Erdos711.erdos711_(forced_pair|obstruction|two|three|law|period|cover|arsenal_bridge|universal_bounded|max_exact_bounded|fn_bounded|ask2_bounded|gap_24|upper_general|universal|max_exact|ask1_eps|ask2_tends)' (does not depend on any axioms|depends on axioms)" kernel24.log
           python3 problem711-divisor-matching/battery711.py
@@ -931,7 +931,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel25.log
           lake env lean problem961-smooth-runs/Erdos961.lean 2>&1 | tee -a kernel25.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel25.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel25.log
           grep -F "ERDOS961_KERNEL_GREEN" kernel25.log
           grep -E "Erdos961.erdos961_(census23|run23|f2|f3|f4|lower_57|lower_712|pell_dict|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel25.log
           grep -E "Erdos961.erdos961_(frontier_k5_k12|runs11|frontier_13)' (does not depend on any axioms|depends on axioms)" kernel25.log
@@ -949,7 +949,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel26.log
           lake env lean problem686-pell-ratio/Erdos686Squares.lean 2>&1 | tee -a kernel26.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel26.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel26.log
           grep -F "ERDOS686SQ_KERNEL_GREEN" kernel26.log
           grep -E "Erdos686Sq.(erdos686sq_(family|99|noRep|census|arsenal_bridge|main)|census_scan_true)' (does not depend on any axioms|depends on axioms)" kernel26.log
           python3 problem686-pell-ratio/battery686sq.py
@@ -965,7 +965,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel27.log
           lake env lean problem1074-ehs-pillai/Erdos1074.lean 2>&1 | tee -a kernel27.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel27.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel27.log
           grep -F "ERDOS1074_EHS_KERNEL_GREEN" kernel27.log
           grep -E "Erdos1074.erdos1074_(factor_bound|finite_char|census19|large|dictionary|pillai_bound|pillai_table|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel27.log
           grep -F "ERDOS1074_COMPLETE_GREEN" kernel27.log
@@ -983,7 +983,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel28.log
           lake env lean problem282-odd-greedy/Erdos282.lean 2>&1 | tee -a kernel28.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel28.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel28.log
           grep -F "ERDOS282_STEIN_KERNEL_GREEN" kernel28.log
           grep -F "ERDOS282_COMPLETE_GREEN" kernel28.log
           grep -E "Erdos282.(erdos282_(odd_closure|step_bound|census|arsenal_bridge|main)|simTerm_sound)' (does not depend on any axioms|depends on axioms)" kernel28.log
@@ -1001,7 +1001,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel29.log
           lake env lean problem954-rosen-sequence/Erdos954.lean 2>&1 | tee -a kernel29.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel29.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel29.log
           grep -F "ERDOS954_ROSEN_KERNEL_GREEN" kernel29.log
           grep -E "Erdos954.erdos954_(construction|count_law|arsenal_bridge|main)' (does not depend on any axioms|depends on axioms)" kernel29.log
           grep -F "ERDOS954_COMPLETE_GREEN" kernel29.log
@@ -1025,7 +1025,7 @@ jobs:
           lake env lean -o oleans1108/SubsetKernelLaw.olean problem1108-subset-kernel/SubsetKernelLaw.lean 2>&1 | tee -a kernel30.log
           echo "=== Erdos1108AllPrime ===" >> kernel30.log
           lake env lean problem1108-allprime/Erdos1108AllPrime.lean 2>&1 | tee -a kernel30.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel30.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel30.log
           grep -F "ERDOS1108_ALLPRIME_KERNEL_GREEN" kernel30.log
           grep -F "ERDOS1108_COMPLETE_GREEN" kernel30.log
           grep -E "Erdos1108AP.(singleton_bottom_residue|all_prime_isolated_min|isolated_min_congruence|all_prime_power_obstruction|isolated_min_block_form|erdos1108ap_arsenal_bridge|erdos1108ap_main|erdos1108_complete|erdos1108ap_complete)' (does not depend on any axioms|depends on axioms)" kernel30.log
@@ -1049,7 +1049,7 @@ jobs:
           lake env lean -o oleans/Erdos396_Data.olean problem396-prod-binomial/Erdos396_Data.lean 2>&1 | tee -a kernel31.log
           echo "=== Erdos396 FINAL ===" >> kernel31.log
           lake env lean problem396-prod-binomial/Erdos396.lean 2>&1 | tee -a kernel31.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel31.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel31.log
           grep -F "ERDOS396_KERNEL_GREEN" kernel31.log
           grep -E "Erdos396.(erdos396_k2|erdos396_frontier|erdos396_binomP_absorb|erdos396_arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel31.log
           python3 problem396-prod-binomial/battery396.py
@@ -1064,7 +1064,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel32.log
           lake env lean problem686-pell-ratio/Erdos686K3.lean 2>&1 | tee -a kernel32.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel32.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel32.log
           grep -F "ERDOS686K3_KERNEL_GREEN" kernel32.log
           grep -E "Erdos686K3.(erdos686k3_chain|edge4756|erdos686k3_rep1189|erdos686k3_rep4756|erdos686k3_existence|erdos686k3_main|erdos686k3_arsenal_bridge)' (does not depend on any axioms|depends on axioms)" kernel32.log
           python3 problem686-pell-ratio/battery686k3.py
@@ -1080,7 +1080,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel33.log
           lake env lean problem374-factorial-square/Erdos374.lean 2>&1 | tee -a kernel33.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel33.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel33.log
           grep -F "ERDOS374_KERNEL_GREEN" kernel33.log
           grep -E "Erdos374.(erdos374_family|erdos374_D2_law|d2_census_decide|d3_squares|d4_squares|even_vals_square|erdos374_main)' (does not depend on any axioms|depends on axioms)" kernel33.log
           grep -E "Erdos374.(product_criterion|erdos374_prime_excluded|erdos374_prime_excluded_k|d2_count_250|d3_F3|d4_F4|erdos374_complete)' (does not depend on any axioms|depends on axioms)" kernel33.log
@@ -1098,7 +1098,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel34.log
           lake env lean problem1073-factorial-mod/Erdos1073.lean 2>&1 | tee -a kernel34.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel34.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel34.log
           grep -F "ERDOS1073_KERNEL_GREEN" kernel34.log
           grep -E "Erdos1073.(erdos1073_window|erdos1073_saturation|small_prime_divisor|erdos1073_census|erdos1073_A10k|erdos1073_witnesses|erdos1073_wilson|erdos1073_brocard|erdos1073_arsenal_bridge|erdos1073_main)' (does not depend on any axioms|depends on axioms)" kernel34.log
           grep -E "Erdos1073.(erdos1073_rough|erdos1073_master|erdos1073_master_sqrt|erdos1073_cluster|hitB_iff|erdos1073_wilson_gen|erdos1073_brocard_gen|erdos1073_complete)' (does not depend on any axioms|depends on axioms)" kernel34.log
@@ -1117,7 +1117,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel35.log
           lake env lean problem461-smooth-component/Erdos461.lean 2>&1 | tee -a kernel35.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel35.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel35.log
           grep -F "ERDOS461_KERNEL_GREEN" kernel35.log
           grep -E "Erdos461.(spart_dvd|spart_eq_pow|scomp_dvd|achieve1|achieve2|achieve3|stab1|stab2|stab3|ergra|erdos461_min14|erdos461_min20|erdos461_min30|erdos461_min40|erdos461_arsenal_bridge|erdos461_main)' (does not depend on any axioms|depends on axioms)" kernel35.log
           grep -E "Erdos461.(erdos461_anchor|erdos461_dvd_sub|erdos461_spacing|erdos461_complete)' (does not depend on any axioms|depends on axioms)" kernel35.log
@@ -1135,7 +1135,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel36.log
           lake env lean problem271-status/StanleyGrowth.lean 2>&1 | tee -a kernel36.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel36.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel36.log
           grep -F "ERDOS271_KERNEL_GREEN" kernel36.log
           grep -E "growth_G3' (does not depend on any axioms|depends on axioms)" kernel36.log
           grep -E "growth_G2' (does not depend on any axioms|depends on axioms)" kernel36.log
@@ -1155,7 +1155,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel37.log
           lake env lean problem404-full/ResidualTail.lean 2>&1 | tee -a kernel37.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel37.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel37.log
           grep -F "ERDOS404_RESIDUAL_TAIL_KERNEL_GREEN" kernel37.log
           grep -E "erdos404_residual_tail' (does not depend on any axioms|depends on axioms)" kernel37.log
           grep -E "erdos404_class_p_minus_3' (does not depend on any axioms|depends on axioms)" kernel37.log
@@ -1173,7 +1173,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel38.log
           lake env lean problem406-ternary-powers/Erdos406Ternary.lean 2>&1 | tee -a kernel38.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel38.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel38.log
           grep -F "ERDOS406_TERNARY_KERNEL_GREEN" kernel38.log
           grep -E "erdos406_odd_excluded' (does not depend on any axioms|depends on axioms)" kernel38.log
           grep -E "erdos406_mod8_budget' (does not depend on any axioms|depends on axioms)" kernel38.log
@@ -1209,7 +1209,7 @@ jobs:
           : > kernel68.log
           lake env lean problem406-ternary-powers/CapLaw406.lean 2>&1 | tee -a kernel68.log
           lake env lean problem406-ternary-powers/DustLaw406.lean 2>&1 | tee -a kernel68.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel68.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel68.log
           grep -E "dust_doubling' (does not depend on any axioms|depends on axioms)" kernel68.log
           grep -E "dust_card' (does not depend on any axioms|depends on axioms)" kernel68.log
           grep -E "dust_spec' (does not depend on any axioms|depends on axioms)" kernel68.log
@@ -1233,7 +1233,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel69.log
           lake env lean problem406-ternary-powers/ExtraLaws406.lean 2>&1 | tee -a kernel69.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel69.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel69.log
           grep -E "noTernaryTwo_lvl' (does not depend on any axioms|depends on axioms)" kernel69.log
           grep -E "cantor_half_line' (does not depend on any axioms|depends on axioms)" kernel69.log
           grep -E "rider_half_line' (does not depend on any axioms|depends on axioms)" kernel69.log
@@ -1262,7 +1262,7 @@ jobs:
           : > kernel70.log
           lake env lean problem406-ternary-powers/TwoAdic406.lean 2>&1 | tee -a kernel70.log
           lake env lean problem406-ternary-powers/DustLaw406.lean 2>&1 | tee -a kernel70.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel70.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel70.log
           grep -E "three_pow_twopow_struct' (does not depend on any axioms|depends on axioms)" kernel70.log
           grep -E "near_unity_pow' (does not depend on any axioms|depends on axioms)" kernel70.log
           grep -E "three_pow_mod_period' (does not depend on any axioms|depends on axioms)" kernel70.log
@@ -1288,7 +1288,7 @@ jobs:
           : > kernel7172.log
           lake env lean problem406-ternary-powers/AntiCluster406.lean 2>&1 | tee -a kernel7172.log
           lake env lean problem406-ternary-powers/DustFamily406.lean 2>&1 | tee -a kernel7172.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel7172.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel7172.log
           grep -F "ERDOS406_ANTICLUSTER_KERNEL_GREEN" kernel7172.log
           grep -F "ERDOS406_DUSTFAMILY_KERNEL_GREEN" kernel7172.log
           grep -E "cantorScan_eq' (does not depend on any axioms|depends on axioms)" kernel7172.log
@@ -1313,7 +1313,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel73.log
           lake env lean problem406-ternary-powers/BlockLaw406.lean 2>&1 | tee -a kernel73.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel73.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel73.log
           grep -F "ERDOS406_BLOCKLAW_KERNEL_GREEN" kernel73.log
           grep -E "pow4_cut_residue_exact' (does not depend on any axioms|depends on axioms)" kernel73.log
           grep -E "rider_second_digit_residue' (does not depend on any axioms|depends on axioms)" kernel73.log
@@ -1352,7 +1352,7 @@ jobs:
         timeout 600 lake env lean problem406-ternary-powers/BlockLaw406.lean 2>&1 | tee -a control73.log
         RC=${PIPESTATUS[0]}
         if [ "$RC" -ne 0 ]; then echo "CONTROL73_COMPILE_FAILED_RC=$RC"; exit 1; fi
-        if grep -qE 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' control73.log; then echo "CONTROL73_NEGATIVE_GATE_TRIPPED"; grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' control73.log; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' control73.log; then echo "CONTROL73_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' control73.log; exit 1; fi
         grep -F "ERDOS406_BLOCKLAW_KERNEL_GREEN" control73.log
         echo CONTROL73_GREEN=1
       shell: bash
@@ -1369,7 +1369,7 @@ jobs:
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "KERNEL74_COMPILE_FAILED_RC=$RC"; exit 1; fi
-        if grep -qE 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74.log; then echo "KERNEL74_NEGATIVE_GATE_TRIPPED"; grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74.log; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74.log; then echo "KERNEL74_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74.log; exit 1; fi
         grep -F "ERDOS406_PICOLLAPSE_SLIM_GREEN" kernel74.log
         grep -E "ghost_residue_shape' (does not depend on any axioms|depends on axioms)" kernel74.log
         grep -E "ghost_congruence' (does not depend on any axioms|depends on axioms)" kernel74.log
@@ -1403,7 +1403,7 @@ jobs:
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
-        if grep -qE 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -F "ERDOS406_PICOLLAPSE_KERNEL_GREEN" kernel74b.log
         grep -E "cMod_eq' (does not depend on any axioms|depends on axioms)" kernel74b.log
         grep -E "W61_receipt' (does not depend on any axioms|depends on axioms)" kernel74b.log
@@ -1443,7 +1443,7 @@ jobs:
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
-        if grep -qE 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -F "ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN" kernel75.log
         grep -E "rider_core_one' (does not depend on any axioms|depends on axioms)" kernel75.log
         grep -E "ghost_head_split' (does not depend on any axioms|depends on axioms)" kernel75.log
@@ -1489,7 +1489,7 @@ jobs:
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "TAILF_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
-        if grep -qE 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel76.log; then echo "TAILF_NEGATIVE_GATE_TRIPPED"; grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel76.log; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel76.log; then echo "TAILF_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel76.log; exit 1; fi
         grep -F "ERDOS406_TAILFDECOMPOSITION_KERNEL_GREEN" kernel76.log
         grep -E "omega_cut_factor' (does not depend on any axioms|depends on axioms)" kernel76.log
         grep -E "cutword_diag_congr' (does not depend on any axioms|depends on axioms)" kernel76.log
@@ -1576,7 +1576,7 @@ jobs:
           lake env lean -o oleans/Erdos396_Base.olean problem396-prod-binomial/Erdos396_Base.lean 2>&1 | tee -a kernel39.log
           echo "=== Erdos396K3 ===" >> kernel39.log
           lake env lean problem396-prod-binomial/Erdos396K3.lean 2>&1 | tee -a kernel39.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel39.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel39.log
           grep -F "ERDOS396_K3_KERNEL_GREEN" kernel39.log
           grep -E "erdos396_k3_witness' (does not depend on any axioms|depends on axioms)" kernel39.log
           grep -E "erdos396_k3_absorb' (does not depend on any axioms|depends on axioms)" kernel39.log
@@ -1588,7 +1588,7 @@ jobs:
         shell: bash
         run: |
           lake env lean problem686-pell-ratio/Erdos686K2Class.lean 2>&1 | tee kernel42.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel42.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel42.log
           grep -F "ERDOS686K2CLASS_KERNEL_GREEN" kernel42.log
           grep -E "Erdos686K2Class.(cassini|chain_of_mutual|erdos686k2class|erdos686k2_nogo|erdos686k2class_main)' (does not depend on any axioms|depends on axioms)" kernel42.log
           python3 problem686-pell-ratio/battery686k2class.py
@@ -1603,7 +1603,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem389-consecutive-product/Erdos389.lean 2>&1 | tee kernel67.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel67.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel67.log
           grep -F "E389_CONSECUTIVE_PRODUCT_GREEN" kernel67.log
           grep -E "E389.(e389_shift_law|e389_swap|e389_crown|e389_witness_10_45144|e389_witness_11_45143|e389_minimal_6|e389_crown_inst_2_3_4_2|erdos389_board)' (does not depend on any axioms|depends on axioms)" kernel67.log
           echo KERNEL67_GREEN=1
@@ -1626,7 +1626,7 @@ jobs:
         shell: bash
         run: |
           lake env lean problem261-full/APRationality.lean 2>&1 | tee kernel43.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel43.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel43.log
           grep -F "AP261_KERNEL_GREEN" kernel43.log
           grep -E "ap_sum_kernel' (does not depend on any axioms|depends on axioms)" kernel43.log
           grep -E "apSum_split' (does not depend on any axioms|depends on axioms)" kernel43.log
@@ -1643,7 +1643,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel44.log
           lake env lean problem271-status/OdStFamily.lean 2>&1 | tee -a kernel44.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel44.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel44.log
           grep -F "ODST_FAMILY_KERNEL_GREEN" kernel44.log
           grep -E "memE_prof' (does not depend on any axioms|depends on axioms)" kernel44.log
           grep -E "memE_no_ap' (does not depend on any axioms|depends on axioms)" kernel44.log
@@ -1672,7 +1672,7 @@ jobs:
           lake env lean -o oleans404full/ResidualTail.olean problem404-full/ResidualTail.lean 2>&1 | tee -a kernel45.log
           echo "=== Erdos404Full ===" >> kernel45.log
           lake env lean problem404-full/Erdos404Full.lean 2>&1 | tee -a kernel45.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel45.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel45.log
           grep -F "ERDOS404_FULL_KERNEL_GREEN" kernel45.log
           grep -E "Erdos404Full.erdos404_(theoremA|theoremB|f22_witness|f62_witness|no_infinite_chain|full_classification)' (does not depend on any axioms|depends on axioms)" kernel45.log
           grep -E "erdos404_residual_tail' (does not depend on any axioms|depends on axioms)" kernel45.log
@@ -1683,7 +1683,7 @@ jobs:
         run: |
           set -euo pipefail
           lake env lean problem961-smooth-runs/Erdos961Census_Base.lean 2>&1 | tee kernel46.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel46.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel46.log
           grep -F "E961P_KERNEL46_GREEN" kernel46.log
           grep -E "E961P.(pell_compose|pell_sol|descent_Y1_lt_Y|descent_XY1_lt|descent_pos|descent_sol)' (does not depend on any axioms|depends on axioms)" kernel46.log
           echo KERNEL46_GREEN=1
@@ -1699,7 +1699,7 @@ jobs:
           lake env lean -o oleans961/Erdos961.olean problem961-smooth-runs/Erdos961.lean 2>&1 | tee -a kernel47.log
           echo "=== Erdos961Census ===" >> kernel47.log
           lake env lean problem961-smooth-runs/Erdos961Census.lean 2>&1 | tee -a kernel47.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel47.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel47.log
           grep -F "E961C_CENSUS_GREEN" kernel47.log
           grep -E "E961C.(prime101|fset_nonempty_101|e961c_frontier_13_47|e961c_frontier_13_97|e961c_frontier_5_97|e961c_smooth11_dict|erdos961_census_board)' (does not depend on any axioms|depends on axioms)" kernel47.log
           echo KERNEL47_GREEN=1
@@ -1718,7 +1718,7 @@ jobs:
           lake env lean -o oleans961x/Erdos961Census_Base.olean problem961-smooth-runs/Erdos961Census_Base.lean 2>&1 | tee -a kernel48.log
           echo "=== Erdos961Exclusion ===" >> kernel48.log
           lake env lean problem961-smooth-runs/Erdos961Exclusion.lean 2>&1 | tee -a kernel48.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel48.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel48.log
           grep -F "E961X_EXCLUSION_GREEN" kernel48.log
           grep -E "E961X.(pell_tower_X_pos|pell_tower_Y_pos|pell_tower_X_strict_mono|pell_tower_Y_strict_mono|pell_tower_growth|pell_tower_exp_bound|pell29_fundamental|pell29_fundamental_sol|pell29_tower_growth|pell29_tower_sol|pell29_tower_one|pell29_tower_two|e961x_exclusion_board)' (does not depend on any axioms|depends on axioms)" kernel48.log
           echo KERNEL48_GREEN=1
@@ -1731,7 +1731,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem306-semiprime-egyptian/Erdos306.lean 2>&1 | tee kernel49.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel49.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel49.log
           grep -F "E306_SEMIPRIME_GREEN" kernel49.log
           grep -E "E306.(e306_semiprime_law|semiprime_even|split_lemma|rep_1_2|rep_2_3|rep_3_5|no_rep_quarter_two|e306_arsenal_bridge|e306_rep_board|e306_distinct_board|e306_witness_board)' (does not depend on any axioms|depends on axioms)" kernel49.log
           echo KERNEL49_GREEN=1
@@ -1744,7 +1744,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem885-factor-difference/Erdos885.lean 2>&1 | tee kernel50.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel50.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel50.log
           grep -F "E885_FACTOR_DIFF_GREEN" kernel50.log
           grep -E "E885.(dset_mem_iff|e885_parity|dset_square_fwd|dset_square_rev|dset_square_criterion|dset_square_criterion_parity|k2_witness|k3_witness|k3_distinct_sorted|e885_arsenal_bridge|e885_case_board)' (does not depend on any axioms|depends on axioms)" kernel50.log
           echo KERNEL50_GREEN=1
@@ -1757,7 +1757,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem885-factor-difference/Erdos885K4.lean 2>&1 | tee kernel50b.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel50b.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel50b.log
           grep -F "E885_K4_GREEN" kernel50b.log
           grep -E "E885K4.(dset_mem_iff|dset_witness|k4_witness|k4_distinct_sorted|e885_k4_arsenal_bridge|e885_k4_board)' (does not depend on any axioms|depends on axioms)" kernel50b.log
           echo KERNEL50B_GREEN=1
@@ -1770,7 +1770,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem243-sylvester/Erdos243.lean 2>&1 | tee kernel51.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel51.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel51.log
           grep -F "E243_SYLVESTER_GREEN" kernel51.log
           grep -E "E243.(sylv_exact_6|sylv_strict_mono|sylv_prod_succ|sylv_telescope|sylv_greedy_identity|greedy_window|greedy_window_sylv|sylv_window|sylv_forced_terminal|forced_terminal_42|forced_terminal_6|two_term_one|e243_ternary_digit_window|e243_arsenal_bridge|e243_sylvester_board)' (does not depend on any axioms|depends on axioms)" kernel51.log
           echo KERNEL51_GREEN=1
@@ -1783,7 +1783,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem124-begl96/Erdos124.lean 2>&1 | tee kernel52.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel52.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel52.log
           grep -F "E124_BEGL96_GREEN" kernel52.log
           grep -E "E124.(S347_closed_mul|S347_sorted_first|S347_nonmember|S347_table|unit_split_decided|split_law_instances|split_all|split_all_S347|e124_critical_juncture|e124_arsenal_bridge|e124_begl96_board)' (does not depend on any axioms|depends on axioms)" kernel52.log
           echo KERNEL52_GREEN=1
@@ -1796,7 +1796,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem677-equal-lcm/Erdos677.lean 2>&1 | tee kernel53.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel53.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel53.log
           grep -F "E677_EQUAL_LCM_GREEN" kernel53.log
           grep -E "E677.(M677_mono|M677_dvd_window|M677_le_prod|known_cross_32|known_cross_42|e677_window_table|winCollFree_spec|no_coll_k1|no_coll_k2|no_coll_k3|no_coll_k4|no_coll_k5|e677_no_collision_box|e677_arsenal_bridge|e677_board)' (does not depend on any axioms|depends on axioms)" kernel53.log
           echo KERNEL53_GREEN=1
@@ -1809,7 +1809,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem348-redundant-complete/Erdos348.lean 2>&1 | tee kernel54.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel54.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel54.log
           grep -F "E348_REDUNDANT_GREEN" kernel54.log
           grep -F "E348_CONSTRUCTION23_GREEN" kernel54.log
           grep -E "E348.(reachable_iff_sumSet|sumSet_le_sum|gap_law|greedy_complete|greedy_complete_prefix|powers_complete|powers_decide_500|never_one|redundant_seed|no_finite_prefix_seed|e348_arsenal_bridge|e348_board|w23_complete|w23_inf_complete|w23_two_removal|w23_two_removal_inf|w23k_no_odd|w23k_not_complete|SubN_kill|w23_decide_battery|e348_construction_23)' (does not depend on any axioms|depends on axioms)" kernel54.log
@@ -1823,7 +1823,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem274-coset-tilings/Erdos274.lean 2>&1 | tee kernel55.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel55.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel55.log
           grep -F "E274_COSET_TILING_GREEN" kernel55.log
           grep -E "E274.(tilingSizes_self|feasible_structure|two_coset_impossible|no_two_coset_tiling|no_two_coset_half|divisor_le_half|feasible_6|feasible_12|cyclic_6_negative|cyclic_12_negative|cyclic_census_le_12|e274_arsenal_bridge|e274_board)' (does not depend on any axioms|depends on axioms)" kernel55.log
           echo KERNEL55_GREEN=1
@@ -1836,7 +1836,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem288-two-interval/Erdos288.lean 2>&1 | tee kernel56.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel56.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel56.log
           grep -F "E288_TWO_INTERVAL_GREEN" kernel56.log
           grep -E "E288.(wprod_pos|hnum_pos|window_mono_step|single_lt_pair|empty_never_nonempty|anchor_values|e288_no_disjoint_pair_le12|e288_single_never_right_le24|e288_arsenal_bridge|e288_board)' (does not depend on any axioms|depends on axioms)" kernel56.log
           echo KERNEL56_GREEN=1
@@ -1849,7 +1849,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem850-radical-triple/Erdos850.lean 2>&1 | tee kernel57.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel57.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel57.log
           grep -F "E850_RADICAL_TRIPLE_GREEN" kernel57.log
           grep -E "E850.(sameRad_refl|sameRad_symm|sameRad_trans|rad_dvd|radSet_one|ew2_pair_6_48|ew2_pair_75_1215|e850_no_witness_50|e850_arsenal_bridge|e850_board)' (does not depend on any axioms|depends on axioms)" kernel57.log
           echo KERNEL57_GREEN=1
@@ -1862,7 +1862,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem708-product-divisibility/Erdos708.lean 2>&1 | tee kernel62.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel62.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel62.log
           grep -F "E708_PRODUCT_DIVISIBILITY_GREEN" kernel62.log
           grep -E "E708.(e708_prod_append|e708_enum_sound|e708_enum_complete|e708_exact_6_10_14_15|erdos708_board)' (does not depend on any axioms|depends on axioms)" kernel62.log
           grep -F "E708_G4_MASTER_GREEN" kernel62.log
@@ -1877,7 +1877,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem289-intervals/Erdos289.lean 2>&1 | tee kernel64.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel64.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel64.log
           grep -F "E289_INTERVALS_GREEN" kernel64.log
           grep -E "E289.(join_adjacent|adjacent_collapse|e289_no_pair_any_le12|e289_hm_family|e289_arsenal_bridge|erdos289_board)' (does not depend on any axioms|depends on axioms)" kernel64.log
           grep -E "E289.(dSeq_mono|e289_dSeq_add|e289_pell|e289_srel|e289_split|e289_cascade_values|e289_cascade_anchor_values|e289_cascade_family_k5|e289_cascade_family_k7|e289_cascade_board)' (does not depend on any axioms|depends on axioms)" kernel64.log
@@ -1897,7 +1897,7 @@ jobs:
           lake env lean -o oleans961x2/Erdos961Census_Base.olean problem961-smooth-runs/Erdos961Census_Base.lean 2>&1 | tee -a kernel58.log
           echo "=== Erdos961Exclusion2 ===" >> kernel58.log
           lake env lean problem961-smooth-runs/Erdos961Exclusion2.lean 2>&1 | tee -a kernel58.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel58.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel58.log
           grep -F "E961X2_EXCLUSION2_GREEN" kernel58.log
           grep -E "E961X2.(pell29_minimal|pell29_gap3_min|pell_tower_gap_mono|pell_tower_X_ge_X1_mul|pell29_min_Y_lower|e961x2_exclusion2_board3)' (does not depend on any axioms|depends on axioms)" kernel58.log
           echo KERNEL58_GREEN=1
@@ -1910,7 +1910,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem273-pminus1-covering/Erdos273.lean 2>&1 | tee kernel59.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel59.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel59.log
           grep -F "E273_PMINUS1_COVERING_GREEN" kernel59.log
           grep -E "E273.(kraft_confinement|length_le_kraft|leafOK_bound|no_single_leaf|pool12_kraft|pool400_kraft|pool400_census|pool400_density|granul_wall_4to12|e273_arsenal_bridge|erdos273_board)' (does not depend on any axioms|depends on axioms)" kernel59.log
           echo KERNEL59_GREEN=1
@@ -1923,7 +1923,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem939-rpowerful/Erdos939.lean 2>&1 | tee kernel60.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60.log
           grep -F "E939_RPOWERFUL_GREEN" kernel60.log
           grep -E "E939.(divAll_row|rpow_prime_div|mod16_obstruction|census_r2_complete|no_small_solution_r4|odd_pairs_no_r4_sum|witness1|witness2|board939)' (does not depend on any axioms|depends on axioms)" kernel60.log
           echo KERNEL60_GREEN=1
@@ -1936,7 +1936,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem939-rpowerful/Erdos939R4.lean 2>&1 | tee kernel60b.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60b.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel60b.log
           grep -F "E939R4_CENSUS_GREEN" kernel60b.log
           grep -E "E939R4.(census_r4_members|no_small_solution_r4|board939_r4)' (does not depend on any axioms|depends on axioms)" kernel60b.log
           echo KERNEL60B_GREEN=1
@@ -1949,7 +1949,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem411-iterated-totient/Erdos411.lean 2>&1 | tee kernel61.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61.log
           grep -F "ERDOS411_KERNEL_GREEN" kernel61.log
           grep -E "Erdos411.(table_bounds|erdos411_witness|erdos411_partition|erdos411_census|erdos411_ten|erdos411_94|erdos411_arsenal_bridge|erdos411_main)' (does not depend on any axioms|depends on axioms)" kernel61.log
           echo KERNEL61_GREEN=1
@@ -1962,7 +1962,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem1212-coprime-composite/Erdos1212.lean 2>&1 | tee kernel65.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel65.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel65.log
           grep -F "E1212_COPRIME_COMPOSITE_GREEN" kernel65.log
           grep -E "E1212.(degBound|adj_parity_flip|comp925_no_exit|comp925_closed|phase203_sweep|p103_valid|p103_shape|directed_death|e1212_arsenal_bridge|erdos1212_board)' (does not depend on any axioms|depends on axioms)" kernel65.log
           grep -E "E1212.(e1212_antidiag|e1212_ivt|e1212_periodic_kill_2310|e1212_periodic_kill_210|e1212_periodic_kill_30030|p105_valid|p105_shape|e1212_column_board)' (does not depend on any axioms|depends on axioms)" kernel65.log
@@ -1976,7 +1976,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem317-signed-harmonic/Erdos317.lean 2>&1 | tee kernel63.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel63.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel63.log
           grep -F "E317_SIGNED_HARMONIC_GREEN" kernel63.log
           grep -E "E317.(hsum_two_sided|hsum_envelope|e317_witness_table|e317_min_value_5|e317_min_value_6|e317_min_value_7|e317_no_unit_over_L5|e317_frontier_c3|e317_arsenal_bridge|erdos317_board)' (does not depend on any axioms|depends on axioms)" kernel63.log
           echo KERNEL63_GREEN=1
@@ -1989,7 +1989,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem961-smooth-runs/Erdos961Exclusion3.lean 2>&1 | tee kernel66.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel66.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel66.log
           grep -F "E961X3_EXCLUSION3_GREEN" kernel66.log
           grep -E "E961X3.(pell_tower_X_supermul|pell_tower_X_ge_pow|pell_tower_gap_mono|pell13_row|pell19_row|pell23_row|pell31_row|pell37_row|e961x3_exclusion3_board)' (does not depend on any axioms|depends on axioms)" kernel66.log
           echo KERNEL66_GREEN=1
@@ -2003,9 +2003,9 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem142-rk-asymptotic/Erdos142.lean 2>&1 | tee kernelW66A.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A.log
           lake env lean problem142-rk-asymptotic/AuditKernel142.lean 2>&1 | tee kernelW66A2.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A2.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66A2.log
           echo KERNELW66A_GREEN=1
       - name: "Kernel W66-B - Erdos 61 STATEMENT-ONLY KERNEL (S066, W66-C/E): the Erdos-Hajnal fortress-front statements (SimpleGraph primitives): the master conjecture + the substitution-closure law (uniform blow-up frame, exponent f = c1c2/(c1+c2)) + the small-H explicit-constant laws; STATEMENT-ONLY (no sorry); CI = verifier of record"
         if: always()
@@ -2016,7 +2016,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee kernelW66B.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66B.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernelW66B.log
           echo KERNELW66B_GREEN=1
 
   kernel-142k:
@@ -2040,7 +2040,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem142-ap-free/Erdos142.lean 2>&1 | tee kernel142k.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142k.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142k.log
           grep -F "E142_TERNARY_GREEN" kernel142k.log
           grep -F "E142_CANTOR_GREEN" kernel142k.log
           grep -F "E142_BOARD_GREEN" kernel142k.log
@@ -2114,7 +2114,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem107-happy-ending/Erdos107.lean 2>&1 | tee kernel107k.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107k.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107k.log
           grep -F "E107_F3_GREEN" kernel107k.log
           grep -F "E107_BOARD_GREEN" kernel107k.log
           grep -E "E107.(f3_upper|f3_lower|w4_gp|f4_lower|w5_gp|w5_no_convex5|erdos107_board)' (does not depend on any axioms|depends on axioms)" kernel107k.log
@@ -2141,7 +2141,7 @@ jobs:
           lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel107dmb.log
           lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107dmb.log
           lake env lean problem107-happy-ending/DM107_Proof_B.lean 2>&1 | tee -a kernel107dmb.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107dmb.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107dmb.log
           grep -F "DM107B_ERSZ_GREEN" kernel107dmb.log
           grep -E "'Erdos107.ersz_upper' (does not depend on any axioms|depends on axioms)" kernel107dmb.log
           grep -E "'Erdos107.f_le_erdosSzekeresUpper' (does not depend on any axioms|depends on axioms)" kernel107dmb.log
@@ -2264,7 +2264,7 @@ jobs:
           lake build Arsenal.CardinalWorlds
           lake build Arsenal.CardinalWorldsV2
           lake env lean problem61-erdos-hajnal/Erdos61.lean 2>&1 | tee kernel61k.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61k.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61k.log
           grep -F "E61_FAMILY_GREEN" kernel61k.log
           grep -E "E61.(family_board|closedNbhd_greedy|k3_bound|p3_bound|kb3_bound|pb3_bound|tight_family|arsenal_bridge|E61_FAMILY_GREEN)' (does not depend on any axioms|depends on axioms)" kernel61k.log
           echo KERNEL61K_GREEN=1
@@ -2377,7 +2377,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel80.log
           lake env lean problem142-ap-free/Erdos142S060.lean 2>&1 | tee -a kernel80.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel80.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel80.log
           grep -F "E142_APFRONTIER_GREEN" kernel80.log
           grep -E "E142S.(e142_board|e142_arsenal_bridge|stanley80_apfree|e142_r3_9_upper|e142_w_r4_42)' (does not depend on any axioms|depends on axioms)" kernel80.log
           python3 problem142-ap-free/battery142.py
@@ -2393,7 +2393,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel81.log
           lake env lean problem61-erdos-hajnal/Erdos61S060.lean 2>&1 | tee -a kernel81.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel81.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel81.log
           grep -F "E61_ERDOSHAJNAL_GREEN" kernel81.log
           grep -E "E61S.(e61_board|r33_math|e61_p4law5_A|e61_k3law5_A|twoK2_facts)' (does not depend on any axioms|depends on axioms)" kernel81.log
           python3 problem61-erdos-hajnal/battery61.py
@@ -2409,7 +2409,7 @@ jobs:
           lake build Arsenal.CardinalWorldsV2
           : > kernel82.log
           lake env lean problem107-happy-ending/Erdos107S060.lean 2>&1 | tee -a kernel82.log
-          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel82.log
+          ! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel82.log
           grep -F "E107_HAPPYENDING_GREEN" kernel82.log
           grep -E "E107S.(e107_board|e107_e5_noConvex5|e107_chi_c0|e107_e4_notConvex)' (does not depend on any axioms|depends on axioms)" kernel82.log
           python3 problem107-happy-ending/battery107.py

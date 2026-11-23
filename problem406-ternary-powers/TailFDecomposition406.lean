@@ -91,7 +91,7 @@ theorem three_pow_le_of_le (a b : Nat) (h : a ≤ b) : 3^a ≤ 3^b := by
 /-- Powers of three are unbounded. -/
 theorem three_pow_unbounded : ∀ n : Nat, ∃ k : Nat, n < 3^k
   | 0 => ⟨1, by decide⟩
-  | n+1 =>
+  | n+1 => by
       obtain ⟨k, hk⟩ := three_pow_unbounded n
       refine ⟨k + 1, ?_⟩
       have hp : 0 < 3^k := Nat.pow_pos (by decide) k
@@ -156,7 +156,10 @@ theorem three_pow_odd : ∀ r : Nat, 3^r % 2 = 1
   | 0 => by decide
   | r+1 => by
       rw [Nat.pow_succ, Nat.mul_mod, three_pow_odd r]
-      decide
+
+theorem odd_mul_odd (a b : Nat) (ha : a % 2 = 1) (hb : b % 2 = 1) :
+    (a * b) % 2 = 1 := by
+  rw [Nat.mul_mod, ha, hb, Nat.mul_one]
 
 /-- **THE ODD DIAGONAL (NEW).**  Every tower coefficient is odd — the
 frozen diagonal is a dyadic unit (the six-adic skew's odd half). -/
@@ -166,18 +169,29 @@ theorem lteCoeff_odd : ∀ r : Nat, lteCoeff r % 2 = 1
       have ih := lteCoeff_odd r
       have h1 : (3:Nat)^(r+1) % 2 = 1 := three_pow_odd (r+1)
       have h2 : (3:Nat)^(2*r+1) % 2 = 1 := three_pow_odd (2*r+1)
-      have hc2 : (lteCoeff r)^2 % 2 = 1 := by
-        rw [Nat.mul_mod, ih, ih]
-        decide
-      have hc3 : (lteCoeff r)^3 % 2 = 1 := by
-        rw [show (lteCoeff r)^3 = (lteCoeff r)^2 * lteCoeff r from by ring,
-            Nat.mul_mod, hc2, ih]
+      have hs : ((lteCoeff r) * (lteCoeff r)) % 2 = 1 := odd_mul_odd _ _ ih ih
+      have hc : ((lteCoeff r) * (lteCoeff r) * (lteCoeff r)) % 2 = 1 :=
+        odd_mul_odd _ _ hs ih
+      have hA : 3^(r+1) * (lteCoeff r)^2 % 2 = 1 := by
+        rw [show (lteCoeff r)^2 = (lteCoeff r) * (lteCoeff r) from by ring]
+        exact odd_mul_odd _ _ h1 hs
+      have hB : 3^(2*r+1) * (lteCoeff r)^3 % 2 = 1 := by
+        rw [show (lteCoeff r)^3 = (lteCoeff r) * (lteCoeff r) * (lteCoeff r) from by ring]
+        exact odd_mul_odd _ _ h2 hc
+      have hdvd : (2:Nat) ∣ 3^(r+1) * (lteCoeff r)^2 + 3^(2*r+1) * (lteCoeff r)^3 := by
+        rw [Nat.dvd_iff_mod_eq_zero, Nat.add_mod, hA, hB]
         decide
       simp only [lteCoeff]
-      rw [Nat.add_mod, Nat.add_mod,
-          Nat.mul_mod, Nat.mul_mod, Nat.mul_mod,
-          h1, h2, hc2, hc3, ih]
-      decide
+      rw [Nat.add_assoc, add_mod_of_dvd _ _ _ hdvd]
+      exact ih
+
+/-- Mod-zero folding: if `m ∣ b` then `(a + b) % m = a % m`. -/
+theorem add_mod_of_dvd (a b m : Nat) (hdvd : m ∣ b) :
+    (a + b) % m = a % m := by
+  obtain ⟨q, rfl⟩ := hdvd
+  first
+    | rw [Nat.add_mul_mod_self_left]
+    | rw [Nat.add_mul_mod_self_right]
 
 theorem lteCoeff_succ_mod (w : Nat) :
     lteCoeff (w+1) % 3^(w+1) = lteCoeff w % 3^(w+1) := by

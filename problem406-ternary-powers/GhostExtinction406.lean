@@ -147,6 +147,14 @@ theorem lteCoeff_mod3_one : ∀ r : Nat, lteCoeff r % 3 = 1
         simp
       simp [Nat.add_mod, Nat.mul_mod, hpow1, hpow2, ih]
 
+/-- Mod-zero folding: if `m ∣ b` then `(a + b) % m = a % m`. -/
+theorem add_mod_of_dvd (a b m : Nat) (hdvd : m ∣ b) :
+    (a + b) % m = a % m := by
+  obtain ⟨q, rfl⟩ := hdvd
+  first
+    | rw [Nat.add_mul_mod_self_left]
+    | rw [Nat.add_mul_mod_self_right]
+
 /-- One-step frozen-diagonal drop: the lift adds a multiple of the scale. -/
 theorem lteCoeff_succ_mod (w : Nat) :
     lteCoeff (w+1) % 3^(w+1) = lteCoeff w % 3^(w+1) := by
