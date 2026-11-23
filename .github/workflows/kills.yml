@@ -18,6 +18,7 @@ on:
       - problem1108-subset-kernel/**
       - Arsenal/**
       - Monolith/**
+      - MonolithGate/**
       - lakefile.toml
       - problem686-pell-ratio/**
       - problem374-factorial-square/**
@@ -1511,6 +1512,54 @@ jobs:
         grep -E "erdos406_crown_v3' (does not depend on any axioms|depends on axioms)" kernel76.log
         python3 problem406-ternary-powers/battery406h.py
         echo ERDOS406_TAILFDECOMPOSITION_KERNEL_GREEN=1
+      shell: bash
+  kernel-406gate:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - if: always()
+      name: "THE HYPOTHESIS DISCHARGED (S085 r9, BOSS order FINISH THE PROOF): BOSS's own source monolith (kyo-oo/erdosternary2, branch sol/kyo-gate-universe-wire, head cb29501) vendored as the MonolithGate library — 88 files, 190 import rewrites, the exact toolchain pin — carrying THE TERMINAL IDENTITY erdos_even_conjecture_iff_tailF (ErdosTernary2.lean:18425, both directions, axiom profile [propext, choice, Quot.sound]) + the tailF proof chamber (GSTTailFProof.hTailF, GSTTailFFourthDimension.tailF_of_row_and_tower). The kernel MonolithGateBoundary406.lean discharges the campaign hypothesis by BOSS's own theorem, cites the crown chain by name, and names the honest seam (the climb / the row+tower primitives). CO-IMPORT LAW: this job builds MonolithGate ONLY, never co-imported with Monolith."
+      run: |
+        set -euo pipefail
+        : > gate406.log
+        set +e
+        timeout 1500 lake build MonolithGate.GSTInfiniteFourPowerNavigation 2>&1 | tee -a gate406.log
+        RC1=${PIPESTATUS[0]}
+        timeout 1500 lake build MonolithGate.GSTTailFFourthDimension 2>&1 | tee -a gate406.log
+        RC2=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ] || [ "$RC2" -ne 0 ]; then echo "GATE406_SMALL_CHAMBERS_FAILED rc1=$RC1 rc2=$RC2"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' gate406.log; then echo "GATE406_SMALL_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' gate406.log; exit 1; fi
+        set +e
+        timeout 5400 lake build MonolithGate.ErdosTernary2 2>&1 | tee -a gate406.log
+        RC3=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC3" -ne 0 ]; then echo "GATE406_MONOLITH_BUILD_FAILED_OR_TIMEOUT_RC=$RC3"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' gate406.log; then echo "GATE406_MONOLITH_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' gate406.log; exit 1; fi
+        set +e
+        timeout 1500 lake build MonolithGate.GSTTailFProof 2>&1 | tee -a gate406.log
+        RC4=${PIPESTATUS[0]}
+        timeout 900 lake env lean problem406-ternary-powers/MonolithGateBoundary406.lean 2>&1 | tee -a gate406.log
+        RCK=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC4" -ne 0 ] || [ "$RCK" -ne 0 ]; then echo "GATE406_TAILFPROOF_OR_KERNEL_FAILED rc4=$RC4 rck=$RCK"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gate406.log; then echo "GATE406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' gate406.log; exit 1; fi
+        echo "MONOLITHGATE MODULES BUILT:"
+        grep -cE '(Built|Replayed) MonolithGate\.' gate406.log
+        grep -E "erdos_even_conjecture_iff_tailF' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "erdos_ternary_2_universal_of_tailF' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -E "tailF_of_row_and_tower' (does not depend on any axioms|depends on axioms)" gate406.log
+        grep -F "ERDOS406_MONOLITHGATE_HYPOTHESIS_DISCHARGED" gate406.log
+        echo ERDOS_406_HYPOTHESIS_DISCHARGED=1
       shell: bash
   kernel-monolith:
     runs-on: ubuntu-24.04

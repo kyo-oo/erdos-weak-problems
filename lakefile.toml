@@ -36,3 +36,19 @@ globs = ["FC.+"]
 [[lean_lib]]
 name = "Monolith"
 globs = ["Monolith.+"]
+
+# THE MONOLITH GATE (S085 r9, BOSS order FINISH THE PROOF): the 88-file world
+# of BOSS's own source monolith (kyo-oo/erdosternary2, branch
+# sol/kyo-gate-universe-wire, head cb29501), vendored verbatim (190 import
+# rewrites, byte-identical declarations): the 84-file ErdosTernary2 import
+# closure — including THE TERMINAL IDENTITY theorem erdos_even_conjecture_
+# iff_tailF at ErdosTernary2.lean:18425, kernel-certified both directions,
+# axiom profile [propext, choice, Quot.sound] — plus the 4-file tailF proof
+# chamber (GSTTailFProof / GSTTailFFourthDimension / GSTGraphV2Ontological /
+# GSTGraphV2PowerThreeWaveObservation). Toolchain: the monolith's own pin
+# (Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2) — identical to the campaign pin.
+# CO-IMPORT LAW: MonolithGate and Monolith share declaration names (the
+# branches diverged); NEVER import both into the same file.
+[[lean_lib]]
+name = "MonolithGate"
+globs = ["MonolithGate.+"]

@@ -1216,3 +1216,66 @@ fixed at its root.
    six-adic skew); (4) the kernel citations of the Monolith library.
 
 The engine never stops; it never lies.
+
+### §17.r9 — THE HYPOTHESIS DISCHARGED (BOSS order: FINISH THE PROOF)
+
+BOSS's verdict on r7/r8: the mapping and the vendoring were real, but the
+campaign hypothesis `erdos_even_conjecture_iff_tailF` was still standing
+as an INPUT. This round delivers THE NAMED NEXT STRIKE #1: the gate-
+universe-wire terminal identity proof, vendored.
+
+THE FACTS (read from BOSS's own source, before any code was written):
+- The gate branch (`sol/kyo-gate-universe-wire`, head `cb29501`, cloned
+  at erdosternary2-gate/) carries `theorem erdos_even_conjecture_iff_
+  tailF` AT ROOT NAMESPACE, ErdosTernary2.lean:18425 — BOTH DIRECTIONS,
+  with the monolith's own `#print axioms` receipts at 18493-18528
+  (profile `[propext, choice, Quot.sound]`).
+- The crown chain is COMPLETE on that branch: erdos_ternary_2_universal_
+  of_tailF (:18344), erdos_even_conjecture_of_tailF (:18452), the
+  chokehold, the witness extraction.
+- The monolith's own honest seam, named by the monolith itself: the
+  third-wave climb `GSTInfiniteFourPowerNavigation.four_power_happy_
+  climb` (GSTInfiniteFourPowerNavigation.lean:141, "the universe's own
+  declared seam, consumed by name and hidden nowhere"), equivalently the
+  row+tower decomposition (GSTTailFFourthDimension.lean:612/621/633 —
+  tailF_row_primitive + tailF_tower_primitive composed by the PROVEN
+  tailF_of_row_and_tower; GSTTailFProof.lean §3: "the two named
+  law-binders of the old decomposition were indirection — the climb
+  subsumes both at once").
+
+THE DELIVERY (r9):
+- `MonolithGate/` — 88 files verbatim (the 84-file ErdosTernary2 import
+  closure + the 4-file tailF proof chamber: GSTTailFProof,
+  GSTTailFFourthDimension, GSTGraphV2Ontological,
+  GSTGraphV2PowerThreeWaveObservation), 190 import rewrites, toolchain
+  EXACT (the monolith's own pin = the campaign pin: v4.33.0-rc2).
+  CO-IMPORT LAW: MonolithGate and Monolith share declaration names (the
+  branches diverged; 33/36 shared modules) — NEVER co-imported; the
+  kernel imports MonolithGate ONLY.
+- `problem406-ternary-powers/MonolithGateBoundary406.lean` — THE KERNEL:
+  §1 the hypothesis DISCHARGED by BOSS's own theorem (both directions);
+  §2 the crown chain cited by name; §3 the seam named by the monolith
+  (the climb composition + the row+tower composition); §4 the full
+  chains (climb → tailF → universal; row+tower → tailF → universal);
+  §5 receipts (#print axioms on all seven kernel theorems + the three
+  vendored compositions) + the marker.
+- CI job `kernel-406gate` (REAL gates: exit codes + PIPESTATUS +
+  error[:(] greps + sorryAx + marker grep + axiom-receipt greps), split
+  into small chambers → the monolith build (timeout 5400) → GSTTailFProof
+  → the kernel. Paths filter: MonolithGate/** added.
+
+R8 VERDICTS (run 45108365751, honest gates): kernel-406b GREEN (the
+add_mod_of_dvd house-lemma fix landed — the FIRST honest 406 kernel
+green), kernel-406a/c GREEN, kernel-monolith GREEN, 107/142/61/dm lanes
+ALL GREEN; kernel-406d (pins) / kernel-406e (ghost) / kernel-406f
+(tailf, 18 error sites) FAILED HONESTLY — the self-contained lane's
+repair rounds continue.
+
+THE MISSION BOARD, UPDATED: the hypothesis is no longer an input of the
+build — it is a THEOREM of BOSS's own monolith, vendored, cited, receipt-
+ed. What remains open is what BOSS's own monolith declares open: the
+climb (equivalently row+tower), the campaign's 406 chamber assault
+(PiCollapse GREEN / pins / ghost / tailf), and the kernel citations of
+the Monolith library (next rounds).
+
+The engine never stops; it never lies.
