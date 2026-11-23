@@ -1279,3 +1279,60 @@ climb (equivalently row+tower), the campaign's 406 chamber assault
 the Monolith library (next rounds).
 
 The engine never stops; it never lies.
+
+### §17.r10–r15 — THE CONVERGENCE WAR + THE CITATIONS (the same round)
+
+R9 VERDICT (run 45247604312, job kernel-406gate): **THE HYPOTHESIS
+DISCHARGED, CI-GREEN ON FIRST EXPOSURE.** The golden receipt, verbatim:
+`MonolithGate/ErdosTernary2.lean:18525:0: 'erdos_even_conjecture_iff_tailF'
+depends on axioms: [propext, Classical.choice, Quot.sound]` — both
+directions, zero sorryAx, zero custom axioms. 88 MonolithGate modules
+built at the exact pin. Reproduced GREEN on r10, r11, r12, r13 (4x).
+
+R10–R15 (the self-contained 406 lane, the geometric kill):
+- 406f TailFDecomposition406: 37 → 13 → 6 → 2 → 0-target. The defect
+  classes fixed: the add_mod_of_dvd ordering (declared AFTER first use),
+  5 dead tactics after rw auto-close, the v4.33 pow_pos signature (no
+  trailing exponent arg), the calc flip, the pow_mono_base +
+  pow_lt_mono_base ports (CapLaw's green laws verbatim), the
+  hallucinated `asTernaryTwo.eq_def` idiom (replaced by the ARSENAL
+  ALIAS: CardinalWorlds.hasTernaryTwo_of_digit, root-namespace, green,
+  gstDigit ≡ digit3 defeq), the census unfold+exponent rewrites, the
+  h2n congr fix (rw [hm] ate the RHS), THE MOD-ORIENTATION LAW
+  (v4.33's Nat.add_mul_mod_self_right takes the modulus as the SECOND
+  mul factor — every modulus-first use switched to _left), the fire
+  classifier REBUILT with no-omega calc routes (the mp case by the
+  pure calc chain, the mpr case by trichotomy + mod_eq_of_lt; omega
+  fails on 3^q*T products — abstraction loses the connection), the
+  hdm direction (Eq.symm misuse), ring-is-equality-only (le_of_eq),
+  the congr 1 auto-close, the insert-REPLACES-line semantics trap
+  (my docstring insert ate the docstring line).
+- 406e GhostExtinction: 8 → 0-known (the :88 equation-style parse
+  bomb, the GREEN-VERBATIM hstab route from PiCollapse406:264, the
+  div_add_mod symm, the mod-orientation twins at :794/:807 — never
+  tested before because r8's elaboration DIED at :700 under the
+  runner kill). Runners killed the job TWICE (exit 143, infra —
+  the depth-100 pin decides run long); the fixes await a surviving
+  runner.
+- 406d Pins: 7 latent-twin fixes + 2 mod-orientation fixes applied;
+  r11's job failed with a LOST LOG BLOB (infra); r13-r15 re-test.
+- 406cites (r12, NEW): the citations kernel — seven citation theorems
+  citing BOSS's Monolith chamber BY REAL NAME (tailF_of_row_and_tower,
+  even_conjecture_of_row_and_tower, erdos_ternary_2_universal_of_
+  row_and_tower, the mod-27 band fire, four_pow_mod243, the
+  forced-digit-2 no-22 law, the boundary adapter) + ten receipts.
+  First exposure: 9 errors (digit3's home unopened —
+  GSTCanonicalSevenAxisBridge; the boundary names are ROOT-level, my
+  MonolithBoundary. prefix was invented) — fixed in r14.
+
+THE MISSION BOARD, FINAL STATE OF THIS ROUND:
+1. THE HYPOTHESIS erdos_even_conjecture_iff_tailF — DISCHARGED (BOSS's
+   own monolith theorem, vendored, cited, CI-green 4x, receipts live).
+2. The Monolith library — cited by real name (kernel-406cites, r14
+   repair in flight).
+3. The self-contained 406 lane — geometric convergence to green.
+4. THE HONEST SEAM — unchanged, named by BOSS's own monolith: the climb
+   (four_power_happy_climb), equivalently row+tower. This is the open
+   mathematical content; the campaign's 406 chamber is the assault.
+
+The engine never stops; it never lies.
