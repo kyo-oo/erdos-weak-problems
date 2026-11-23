@@ -83,6 +83,16 @@ theorem sum_const_nat (Q : Finset ℕ) (c : ℕ) :
       rw [Finset.sum_insert ha, ih, Finset.card_insert_of_notMem ha]
       omega
 
+/-- The DIY bUnion-card bound (zero API risk, the card_union_le induction). -/
+theorem card_bUnion_le' {β : Type} (Q : Finset ℕ) (F : ℕ → Finset β) :
+    (Q.bUnion F).card ≤ ∑ q ∈ Q, (F q).card := by
+  classical
+  induction Q using Finset.induction_on with
+  | empty => simp
+  | insert a Q ha ih =>
+      rw [Finset.bUnion_insert, Finset.sum_insert ha]
+      exact Nat.add_le_add (Finset.card_union_le _ _) ih
+
 /-! ## §1 AFF-K: THE COPY CAP -/
 
 /-- **LEMMA AFF-K (the homothetic copy cap).** For k ≥ 2, d ≥ 1, m ≥ 1:
@@ -103,8 +113,9 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
   have hT'sub : T' ⊆ Finset.Icc 1 m := by
     intro y hy
     obtain ⟨j, hj, hje⟩ := Finset.mem_image.1 hy
-    have hjm : j < m := (Finset.mem_filter.1 hj).1
-    rw [← hje]
+    have hjm : j < m := Finset.mem_range.1 ((Finset.mem_filter.1 hj).1)
+    have hje' : j + 1 = y := hje
+    rw [← hje']
     simp only [Finset.mem_Icc]
     omega
   -- T+1 is officially k-AP-free (the forward index transfer)
@@ -155,7 +166,7 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
       have hyW : y ∈ (Finset.range k).image (fun i => a + (a' + i * d' - 1) * d) :=
         Finset.mem_coe.1 hy
       obtain ⟨i, hi, hie⟩ := Finset.mem_image.1 hyW
-      have hik : i < k := hi
+      have hik : i < k := Finset.mem_range.1 hi
       have hxu : a' + i * d' ∈ u := by
         have h1 : a' + i * d' ∈
             {a' + n • d' | (n : ℕ) (_ : n < ((k : ℕ) : ENat))} := by
@@ -164,6 +175,7 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
         rw [hset]; exact h1
       have hxT'fin : a' + i * d' ∈ T' := Finset.mem_coe.1 (husub hxu)
       obtain ⟨j, hj, hje⟩ := Finset.mem_image.1 hxT'fin
+      have hje' : j + 1 = a' + i * d' := hje
       have hSj : a + j * d ∈ S := (Finset.mem_filter.1 hj).2
       have hyj : y = a + j * d := by
         rw [← hie]
@@ -175,29 +187,34 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
     have hWap : Set.IsAPOfLength (↑W : Set ℕ) ((k : ℕ) : ENat) := by
       refine ⟨A, D, ?_, ?_⟩
       · -- encard ↑W = k
+        show (↑W : Set ℕ).encard = ((k : ℕ) : ENat)
         have hcardW : W.card = k := by
-          rw [hW]
-          refine Finset.card_image_of_injOn (fun i hi i' _ heq => ?_)
-          have h1 : (a' + i * d' - 1) * d = (a' + i' * d' - 1) * d :=
-            Nat.add_right_cancel heq
-          have h2 : a' + i * d' - 1 = a' + i' * d' - 1 :=
-            Nat.eq_of_mul_eq_mul_right hd h1
-          have h3 : i * d' = i' * d' := by omega
-          exact Nat.eq_of_mul_eq_mul_right hd' h3
+          rw [hW, Finset.card_image_of_injOn (fun i _ i' _ heq => by
+            have h1 : (a' + i * d' - 1) * d = (a' + i' * d' - 1) * d :=
+              Nat.add_right_cancel heq
+            have h2 : a' + i * d' - 1 = a' + i' * d' - 1 :=
+              Nat.eq_of_mul_eq_mul_right hd h1
+            have h3 : i * d' = i' * d' := by omega
+            exact Nat.eq_of_mul_eq_mul_right hd' h3), Finset.card_range]
         rw [Set.encard_coe_eq_coe_finsetCard, hcardW]
       · -- ↑W = {A + n•D | n < k}
         ext y
         constructor
-        · rintro ⟨i, hi, hie⟩
-          refine ⟨i, by exact_mod_cast hi, ?_⟩
-          rw [nsmul_nat, ← hie]
+        · intro hy
+          obtain ⟨i, hi, hie⟩ := Finset.mem_image.1 (Finset.mem_coe.1 hy)
+          have hie' : a + (a' + i * d' - 1) * d = y := hie
+          refine ⟨i, by exact_mod_cast (Finset.mem_range.1 hi), ?_⟩
+          rw [nsmul_nat, ← hie']
+          rw [hA, hD]
           have h1 : a' + i * d' - 1 = (a' - 1) + i * d' := by omega
           rw [h1]
           ring
-        · rintro ⟨n, hn, hneq⟩
+        · intro hy
+          obtain ⟨n, hn, hneq⟩ := hy
           have hnk : n < k := by exact_mod_cast hn
-          refine ⟨n, hnk, ?_⟩
+          refine Finset.mem_coe.2 (Finset.mem_image.2 ⟨n, Finset.mem_range.2 hnk, ?_⟩)
           rw [nsmul_nat] at hneq
+          rw [hA, hD] at hneq
           have h1 : a' + n * d' - 1 = (a' - 1) + n * d' := by omega
           rw [h1] at hneq ⊢
           rw [← hneq]
@@ -234,16 +251,18 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
   set D0 : ℕ := N / (4 * m * (m - 1)) with hD0def
   -- (F1) 4*m*(m-1) ≤ N
   have hF1 : 4 * m * (m - 1) ≤ N := by
-    calc 4 * m * (m - 1) ≤ 4 * m * m := Nat.mul_le_mul_left _ (by omega)
+    calc 4 * m * (m - 1) ≤ 4 * m * m :=
+          Nat.mul_le_mul_left (4 * m) (by omega : m - 1 ≤ m)
       _ = 4 * (m * m) := by ring
       _ ≤ 16 * (m * m) := by
           calc 4 * (m * m) = (m * m) * 4 := Nat.mul_comm _ _
-            _ ≤ (m * m) * 16 := Nat.mul_le_mul_left _ (by omega)
+            _ ≤ (m * m) * 16 := Nat.mul_le_mul_left (m * m) (by omega : (4:ℕ) ≤ 16)
             _ = 16 * (m * m) := Nat.mul_comm _ _
       _ = 16 * m * m := by ring
       _ ≤ N := hN
   have hD0pos : 0 < 4 * m * (m - 1) :=
-    Nat.mul_pos (by omega) (Nat.mul_pos (by omega) (by omega))
+    Nat.mul_pos (by omega : (0:ℕ) < 4 * m)
+      (Nat.mul_pos (by omega : (0:ℕ) < m) (by omega : (0:ℕ) < m - 1))
   -- (F2) D0 ≥ 1
   have hD0ge1 : 1 ≤ D0 := Nat.div_pos hF1 hD0pos
   -- (F3) 4*m*(m-1)*D0 ≤ N
@@ -414,7 +433,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     -- assemble: |P| ≤ Σ fibers ≤ Σ (r k m) = Q.card * (r k m)
     have hsum : P.card ≤ ∑ q ∈ Q,
         (P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).card := by
-      have h := Finset.card_bUnion_le Q
+      have h := card_bUnion_le' Q
         (fun q => P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q))
       rw [← hcover] at h
       exact h
@@ -514,7 +533,8 @@ theorem v_gen (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m) (hN : 16 * m * m ≤ N
     2 * m * (r k N) ≤ (2 * (r k m) + 1) * N := by
   have hNpos : 1 ≤ N := by
     have h1 : 16 * (2 * 2) ≤ 16 * (m * m) :=
-      Nat.mul_le_mul_left 16 (Nat.mul_le_mul (by omega) (by omega))
+      Nat.mul_le_mul_left 16
+        (Nat.mul_le_mul (by omega : (2:ℕ) ≤ m) (by omega : (2:ℕ) ≤ m))
     have h2 : 16 * (2 * 2) = 64 := by norm_num
     omega
   have hstep : Set.IsAPOfLengthFree.maxCard k N ≤
@@ -543,7 +563,7 @@ theorem v_gen (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m) (hN : 16 * m * m ≤ N
       omega
     · rintro n ⟨S, hSsub, hSfree, rfl⟩
       have h2 := v_gen_witness k m N hk hm hN S hSsub hSfree
-      exact (Nat.le_div_iff_mul_le (2 * m) (by omega)).2
+      exact (Nat.le_div_iff_mul_le (2 * m)).2
         (by rw [Nat.mul_comm n (2 * m)]; exact h2)
   have h1 : 2 * m * (Set.IsAPOfLengthFree.maxCard k N) ≤
       2 * m * ((2 * (r k m) + 1) * N / (2 * m)) :=

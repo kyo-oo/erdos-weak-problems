@@ -43,6 +43,8 @@ Zero sorry, zero native_decide; `#print axioms` on every headline. -/
 set_option maxHeartbeats 16000000
 set_option maxRecDepth 262144
 
+open Filter
+
 namespace Erdos61E
 
 /-! ## §0 THE OFFICIAL PREDICATE (verbatim from DM61_Official.lean) -/
@@ -56,10 +58,12 @@ def IsErdosHajnalLowerBound {α : Type*} [Fintype α] [DecidableEq α]
 
 /-! ## §1 THE PATH P4 (hand-rolled, zero pathGraph API) -/
 
-/-- The 4-vertex path: adjacency is exactly "indices differ by one". -/
+/-- The 4-vertex path: adjacency is exactly "indices differ by one"
+(the v4.33 Std field shapes: `symm : Std.Symm Adj` with the explicit
+`∀ a b` field, `loopless : Std.Irrefl Adj`). -/
 def P4 : SimpleGraph (Fin 4) where
   Adj i j := ((i : ℕ) + 1 = (j : ℕ) ∨ (j : ℕ) + 1 = (i : ℕ))
-  adj_comm := ⟨fun h => Or.symm h⟩
+  symm := ⟨fun _ _ h => Or.symm h⟩
   loopless := ⟨fun a => by
     show ¬ (((a : ℕ) + 1 = (a : ℕ)) ∨ ((a : ℕ) + 1 = (a : ℕ)))
     omega⟩
@@ -67,58 +71,35 @@ def P4 : SimpleGraph (Fin 4) where
 theorem P4_adj (i j : Fin 4) :
     P4.Adj i j ↔ ((i : ℕ) + 1 = (j : ℕ) ∨ (j : ℕ) + 1 = (i : ℕ)) := Iff.rfl
 
-/-- The 4-point embedding `![w, x, y, z]` (the green `emb2`/`emb3`
-Matrix.cons pattern, extended; the 16 explicit inj' cells — no
-`cons_val_three` dependency, audit D11). -/
-def emb4 {n : ℕ} (w x y z : Fin n) (hwx : w ≠ x) (hwy : w ≠ y) (hwz : w ≠ z)
-    (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z) : Fin 4 ↪ Fin n where
+/-- The 4-point embedding `![w, x, y, z]` at an arbitrary vertex type
+(the green `emb3` Matrix.cons pattern, extended; the inj' by the green
+simp set — no forward references). -/
+def emb4 {α : Type} (w x y z : α) (hwx : w ≠ x) (hwy : w ≠ y) (hwz : w ≠ z)
+    (hxy : x ≠ y) (hxz : x ≠ z) (hyz : y ≠ z) : Fin 4 ↪ α where
   toFun := ![w, x, y, z]
   inj' := by
     intro i j h
-    fin_cases i <;> fin_cases j
-    · rfl
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h hwx
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h hwy
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h hwz
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h.symm hwx
-    · rfl
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h hxy
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h hxz
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h.symm hwy
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h.symm hxy
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h.symm hxz
-    · rfl
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h.symm hwz
-    · simp only [emb4_zero, emb4_one, emb4_two, emb4_three] at h
-      exact absurd h.symm hyz
-    · rfl
+    fin_cases i <;> fin_cases j <;>
+      simp_all [Matrix.cons_val_zero, Matrix.cons_val_one,
+        Matrix.cons_val_two, Matrix.cons_val_succ, Matrix.head_cons]
 
-@[simp] theorem emb4_zero {n : ℕ} {w x y z : Fin n} {h1 h2 h3 h4 h5 h6} :
-    emb4 w x y z h1 h2 h3 h4 h5 h6 0 = w := rfl
+@[simp] theorem emb4_zero {α : Type} {w x y z : α} {h1 h2 h3 h4 h5 h6} :
+    emb4 (α := α) w x y z h1 h2 h3 h4 h5 h6 0 = w := rfl
 
-@[simp] theorem emb4_one {n : ℕ} {w x y z : Fin n} {h1 h2 h3 h4 h5 h6} :
-    emb4 w x y z h1 h2 h3 h4 h5 h6 1 = x := rfl
+@[simp] theorem emb4_one {α : Type} {w x y z : α} {h1 h2 h3 h4 h5 h6} :
+    emb4 (α := α) w x y z h1 h2 h3 h4 h5 h6 1 = x := rfl
 
-@[simp] theorem emb4_two {n : ℕ} {w x y z : Fin n} {h1 h2 h3 h4 h5 h6} :
-    emb4 w x y z h1 h2 h3 h4 h5 h6 2 = y := rfl
+@[simp] theorem emb4_two {α : Type} {w x y z : α} {h1 h2 h3 h4 h5 h6} :
+    emb4 (α := α) w x y z h1 h2 h3 h4 h5 h6 2 = y := rfl
 
-@[simp] theorem emb4_three {n : ℕ} {w x y z : Fin n} {h1 h2 h3 h4 h5 h6} :
-    emb4 w x y z h1 h2 h3 h4 h5 h6 3 = z := rfl
+@[simp] theorem emb4_three {α : Type} {w x y z : α} {h1 h2 h3 h4 h5 h6} :
+    emb4 (α := α) w x y z h1 h2 h3 h4 h5 h6 3 = z := rfl
 
-/-- The induced-P4 certificate: a path w—x—y—z (edges, non-edges, distinct)
-carries the P4 copy. The green `pathGraph3_comap` 9-cell grid, extended to
-the 16-cell Fin 4 grid (cells (2,3)/(3,2) de-transposed per audit D1/D2). -/
-theorem p4_comap_of_path {n : ℕ} {G : SimpleGraph (Fin n)} {w x y z : Fin n}
+/-- The induced-P4 certificate at an arbitrary vertex type: a path
+w—x—y—z (edges, non-edges, distinct) carries the P4 copy. The green
+`pathGraph3_comap` 9-cell grid, extended to the 16-cell Fin 4 grid
+(cells (2,3)/(3,2) de-transposed per audit D1/D2). -/
+theorem p4_comap_of_path {α : Type} {G : SimpleGraph α} {w x y z : α}
     (hwx : w ≠ x) (hwy : w ≠ y) (hwz : w ≠ z) (hxy : x ≠ y) (hxz : x ≠ z)
     (hyz : y ≠ z)
     (e1 : G.Adj w x) (e2 : G.Adj x y) (e3 : G.Adj y z)
@@ -154,34 +135,36 @@ inductive GReach {α : Type} (G : SimpleGraph α) : α → α → Prop
       GReach G x z
 
 /-- Prepending an edge (derivation induction; the refl case rides the
-`append x x y (refl x)` trick — branch binders only, audit D6). -/
+`append x x y (refl x)` trick). The v4.33 case shapes: `refl` takes ZERO
+names (both indices identified), `append` takes FIVE (start, middle, hrec,
+hadj, ih — the end index is consumed into the theorem's `z`). -/
 theorem GReach.prepend {G : SimpleGraph α} {y z : α}
     (h : GReach G y z) : ∀ {x : α}, G.Adj x y → GReach G x z := by
   induction h with
-  | refl a =>
+  | refl =>
       intro x hadj
-      exact GReach.append x x a (GReach.refl x) hadj
-  | append a b c hrec hadj ih =>
+      exact GReach.append x x _ (GReach.refl x) hadj
+  | append a b hrec hadj ih =>
       intro x hadjxy
-      exact GReach.append x b c (ih hadjxy) hadj
+      exact GReach.append x b z (ih hadjxy) hadj
 
-/-- Symmetry (reversal) of reachability (branch binder, audit D7). -/
+/-- Symmetry (reversal) of reachability. -/
 theorem GReach.symm {G : SimpleGraph α} {x z : α} (h : GReach G x z) :
     GReach G z x := by
   induction h with
-  | refl a => exact GReach.refl a
-  | append a b c hrec hadj ih =>
-      exact (GReach.prepend ih (G.adj_symm hadj) :
-        GReach G c a)
+  | refl => exact GReach.refl _
+  | append a b hrec hadj ih =>
+      exact GReach.prepend ih (G.adj_symm hadj)
 
 /-- Transitivity of reachability (induction on the SECOND walk, peeling its
-far end — the draft's first-walk strategy was circular, audit D8). -/
+far end; `h1` reverted explicitly so the motive carries it). -/
 theorem GReach.trans {G : SimpleGraph α} {x y z : α}
     (h1 : GReach G x y) (h2 : GReach G y z) : GReach G x z := by
+  revert h1
   induction h2 with
   | refl => intro h; exact h
-  | append a b c hrec hadj ih =>
-      exact fun h => GReach.append x b c (ih h) hadj
+  | append a b hrec hadj ih =>
+      exact fun h => GReach.append x b z (ih h) hadj
 
 /-- **The walk-crossing lemma** (audit D12 — the missing inventory piece):
 a walk from `a` to `b` crosses every separation between them. -/
@@ -189,18 +172,18 @@ theorem walk_crosses {G : SimpleGraph α} {a b : α} (h : GReach G a b) :
     ∀ (s : Finset α), a ∈ s → b ∉ s →
       ∃ p q, p ∈ s ∧ q ∉ s ∧ G.Adj p q := by
   induction h with
-  | refl c =>
+  | refl =>
       intro s hs hs'
       exact absurd hs hs'
-  | append x y z hrec hadj ih =>
+  | append p q hrec hadj ih =>
       intro s hs hs'
-      by_cases hy : y ∈ s
-      · exact ⟨y, z, hy, hs', hadj⟩
-      · exact ih s hs hy
+      by_cases hq : q ∈ s
+      · exact ⟨q, b, hq, hs', hadj⟩
+      · exact ih s hs hq
 
+open Classical in
 /-- The unreachable pair yields a separation: the reachability class of `x`
 is a nonempty proper Finset with no cross edges. -/
-open Classical in
 theorem sep_class_of_unreachable {α : Type} [Fintype α] [DecidableEq α]
     (G : SimpleGraph α) {x y : α} (hnr : ¬ GReach G x y) :
     ∃ s : Finset α, s.Nonempty ∧ s ≠ Finset.univ ∧
@@ -261,8 +244,8 @@ injective carrier maps; the defeq repair, audit D5). -/
 theorem p4free_comap {α β : Type} (G : SimpleGraph α) (f : β → α)
     (hf : Function.Injective f) (h : P4free G) : P4free (G.comap f) := by
   intro ⟨g, hg⟩
-  refine h ⟨⟨(g : Fin 4 → α) ∘ f, fun a b hab => g.injective (hf hab)⟩, ?_⟩
-  exact hg.trans (comap_comap' G f g)
+  refine h ⟨⟨fun i => f (g i), fun a b hab => g.injective (hf hab)⟩, ?_⟩
+  exact hg.trans (comap_comap' G f (g : Fin 4 → β))
 
 /-! ## §4 THE SEINCHE ENGINE -/
 
@@ -277,19 +260,19 @@ theorem last_exit_aux {α : Type} (G : SimpleGraph α) (u : α) :
           (G.comap (Subtype.val : {x : α // x ≠ u} → α)) w ⟨j, hj⟩ := by
   intro i j h
   induction h with
-  | refl c =>
+  | refl =>
       intro hcu hcu'
       exact absurd hcu hcu'
-  | append a b c hrec hadj ih =>
+  | append a b hrec hadj ih =>
       intro hau hcu
       by_cases hbu : b = u
-      · refine ⟨⟨c, hcu⟩, ?_, fun _ => GReach.refl ⟨c, hcu⟩⟩
-        show G.Adj u (c : α)
+      · refine ⟨⟨j, hcu⟩, ?_, fun _ => GReach.refl ⟨j, hcu⟩⟩
+        show G.Adj u (j : α)
         rw [← hbu]
         exact hadj
       · obtain ⟨w, hwadj, hwreach⟩ := ih hau hbu
         refine ⟨w, hwadj, fun _ => ?_⟩
-        exact GReach.append w ⟨b, hbu⟩ ⟨c, hcu⟩ (hwreach hbu)
+        exact GReach.append w ⟨b, hbu⟩ ⟨j, hcu⟩ (hwreach hbu)
           (by simp only [SimpleGraph.comap_adj, Subtype.coe_mk]; exact hadj)
 
 theorem last_exit {α : Type} (G : SimpleGraph α) (u : α) {z : α}
@@ -313,28 +296,27 @@ theorem flip {α : Type} (G : SimpleGraph α) (u : α) :
         GReach (G.comap (Subtype.val : {x : α // x ≠ u} → α)) a q := by
   intro a b h
   induction h with
-  | refl c => intro h1 h2; exact absurd h1 h2
-  | append x y z hrec hadj ih =>
+  | refl => intro h1 h2; exact absurd h1 h2
+  | append p q hrec hadj ih =>
       intro hxu hyu
-      by_cases hmy : G.Adj u (y : α)
-      · refine ⟨y, z, ?_, hmy, hyu, hrec, GReach.append x y z hrec hadj⟩
+      by_cases hmy : G.Adj u (q : α)
+      · refine ⟨q, b, ?_, hmy, hyu, hrec, GReach.append p q b hrec hadj⟩
         simp only [SimpleGraph.comap_adj, Subtype.coe_mk] at hadj
         exact hadj
       · exact ih hxu hmy
 
 /-- **The isolated-vertex micro-lemma** (audit §1.2 STEP 3): a walk from an
-isolated vertex stays put. -/
+isolated vertex stays put (the isolation reverted into the motive). -/
 theorem reach_isolated {α : Type} (H : SimpleGraph α) (u : α)
-    (hiso : ∀ v : α, ¬ H.Adj u v) :
-    ∀ {z : α}, GReach H u z → z = u := by
-  intro z h
+    (hiso : ∀ v : α, ¬ H.Adj u v) {z : α} (h : GReach H u z) : z = u := by
+  revert hiso
   induction h with
-  | refl c => intro _; rfl
-  | append x y z' hrec hadj ih =>
+  | refl => intro _; rfl
+  | append a b hrec hadj ih =>
       intro hiso'
-      have hxy : y = x := ih hiso'
-      rw [hxy] at hadj
-      exact absurd hadj (hiso' z')
+      have hba : b = a := ih hiso'
+      rw [hba] at hadj
+      exact absurd hadj (hiso' z)
 
 /-- **caseA — the heart of Seinsche** (audit §1.2, machine-verified 23,724
 constructive instances): if G and Gᶜ are both walk-connected, G is P4-free,
@@ -425,7 +407,7 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
         G.Adj u (a : α) → G.Adj u (b : α) := by
       intro a b hab hua'
       by_contra hb
-      exact hmix a b hab hua' hb
+      exact hb (hmix a b hab hua')
     have huniv : ∀ v : {x : α // x ≠ u}, G.Adj u (v : α) := by
       intro v
       obtain ⟨w, hwadj, hwreach⟩ := step1 v
@@ -463,19 +445,26 @@ theorem p4free_compl {α : Type} (G : SimpleGraph α) (h : P4free G) :
     P4free (Gᶜ) := by
   intro ⟨g, hg⟩
   refine h ⟨⟨(g : Fin 4 → α) ∘ psiInv,
-    fun a b hab => g.injective (by simpa only [Function.comp_apply] using hab)⟩, ?_⟩
+    fun a b hab => by
+      have h2 : psiInv a = psiInv b := g.injective hab
+      have h3 : (psi ∘ psiInv) a = (psi ∘ psiInv) b := congrArg psi h2
+      rw [psi_comp] at h3
+      exact h3⟩, ?_⟩
   -- P4ᶜ = (Gᶜ.comap g)ᶜ = G.comap g.
   have hcoe : (P4ᶜ) = G.comap (g : Fin 4 → α) := by
     have h1 : (P4ᶜ) = ((Gᶜ).comap g)ᶜ := by rw [← hg]
     rw [compl_comap _ _ (fun a b hab => g.injective hab),
-      SimpleGraph.compl_compl] at h1
+      compl_compl] at h1
     exact h1
   -- P4 = (P4ᶜ).comap ψ⁻¹ (pull back along the reverse carrier).
   have h2 : P4 = (P4ᶜ).comap psiInv := by
     have h3 : (P4.comap psi).comap psiInv = P4.comap (psi ∘ psiInv) :=
       comap_comap' P4 psi psiInv
     rw [psi_comp, ← p4_compl_comap] at h3
-    have h4 : P4.comap (id : Fin 4 → Fin 4) = P4 := SimpleGraph.comap_id
+    have h4 : P4.comap (id : Fin 4 → Fin 4) = P4 := by
+      ext a b
+      simp only [SimpleGraph.comap_adj]
+      rfl
     rw [h4] at h3
     exact h3.symm
   rw [h2, hcoe]
@@ -483,10 +472,11 @@ theorem p4free_compl {α : Type} (G : SimpleGraph α) (h : P4free G) :
 
 /-! ### The card bookkeeping + the Seinsche split (strong induction) -/
 
-/-- The card bookkeeping for the vertex-peel: |{x // x ≠ u}| + 1 = |α|. -/
+/-- The card bookkeeping for the vertex-peel: |{x // x ≠ u}| + 1 = |α|
+(via `Fintype.card_subtype_compl` + the Unique singleton card). -/
 theorem card_peel {α : Type} [Fintype α] [DecidableEq α] (u : α) :
     Fintype.card {x : α // x ≠ u} + 1 = Fintype.card α := by
-  have h1 := Fintype.card_add_card_compl (p := fun x : α => x = u)
+  have h1 := Fintype.card_subtype_compl (p := fun x : α => x = u)
   have h2 : Fintype.card {x : α // x = u} = 1 := by
     haveI : Unique {x : α // x = u} :=
       ⟨⟨u, rfl⟩, fun y => Subtype.ext y.2⟩
@@ -494,6 +484,13 @@ theorem card_peel {α : Type} [Fintype α] [DecidableEq α] (u : α) :
   have h3 : Fintype.card {x : α // ¬ (x = u)}
       = Fintype.card {x : α // x ≠ u} := rfl
   rw [h3] at h1
+  rw [h2] at h1
+  have h4 : (1 : ℕ) ≤ Fintype.card α := by
+    have h5 : Fintype.card {x : α // x = u} ≤ Fintype.card α :=
+      Fintype.card_le_of_injective
+        (Subtype.val : {x : α // x = u} → α) Subtype.val_injective
+    rw [h2] at h5
+    exact h5
   omega
 
 /-- **THE SEINCHE SPLIT** (1974): every P4-free graph on ≥ 2 vertices has a
@@ -631,7 +628,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
             · exfalso
               have hconnC := conn_of_no_sep (Gᶜ) hsepGc
               have hconn : ∀ x y : α, GReach ((Gᶜ)ᶜ) x y := by
-                rw [SimpleGraph.compl_compl]
+                rw [compl_compl]
                 exact conn_of_no_sep G hsepG
               obtain ⟨x', hx'⟩ := hsne
               have hy' : ∃ a : {x : α // x ≠ u}, a ∉ s := by
