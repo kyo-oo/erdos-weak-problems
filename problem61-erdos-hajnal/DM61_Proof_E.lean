@@ -779,19 +779,19 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
             rw [← hcard1]; exact hprod₁
           have hprod2' : I₂.card * K₂.card ≥ (Finset.univ \ s).card := by
             rw [← hcard2]; exact hprod₂
-          have hdisj : Finset.Disjoint I₁' I₂' := by
+          have hdisj : Disjoint I₁' I₂' := by
             rw [Finset.disjoint_iff_inter_eq_empty]
             refine Finset.eq_empty_iff_forall_notMem.2 fun a ha => ?_
             obtain ⟨ha1, ha2⟩ := Finset.mem_inter.1 ha
             obtain ⟨a1, _, ha1v⟩ := Finset.mem_image.1 ha1
             obtain ⟨a2, _, ha2v⟩ := Finset.mem_image.1 ha2
-            have h1 : a ∈ s := by rw [ha1v]; exact a1.2
+            have h1 : a ∈ s := by rw [← ha1v]; exact a1.2
             have h2 : a ∉ s := by
-              have h2' : a ∈ Finset.univ \ s := by rw [ha2v]; exact a2.2
+              have h2' : a ∈ Finset.univ \ s := by rw [← ha2v]; exact a2.2
               exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
             exact h2 h1
           have hIcard : (I₁' ∪ I₂').card = I₁'.card + I₂'.card :=
-            Finset.card_disjoint_union hdisj
+            Finset.card_union_eq_card_add_card.mp hdisj
           -- The four membership helpers.
           have hindepUnion : G.IsIndepSet (↑(I₁' ∪ I₂') : Set α) := by
             intro a ha b hb hab
@@ -803,27 +803,27 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
                 obtain ⟨b1, hb1m, hb1v⟩ := Finset.mem_image.1 hb1
                 have hne : a1 ≠ b1 := by
                   rintro h
-                  exact hab (ha1v.trans (h ▸ hb1v))
-                have hbadj := hI₁ a1 (Finset.mem_coe.2 ha1m)
-                  b1 (Finset.mem_coe.2 hb1m) hne
+                  exact hab (ha1v.symm.trans (h ▸ hb1v))
+                have hbadj := hI₁ (Finset.mem_coe.2 ha1m)
+                  (Finset.mem_coe.2 hb1m) hne
                 simp only [SimpleGraph.comap_adj] at hbadj
                 rw [ha1v, hb1v] at hbadj
                 exact hbadj
               · obtain ⟨a1, _, ha1v⟩ := Finset.mem_image.1 ha1
-                obtain ⟨b2, _, hb2v⟩ := Finset.mem_image.1 ha2
-                have hain : a ∈ s := by rw [ha1v]; exact a1.2
+                obtain ⟨b2, _, hb2v⟩ := Finset.mem_image.1 hb2
+                have hain : a ∈ s := by rw [← ha1v]; exact a1.2
                 have hbin : b ∉ s := by
                   have h2' : b ∈ Finset.univ \ s := by
-                    rw [hb2v]; exact b2.2
+                    rw [← hb2v]; exact b2.2
                   exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
                 exact hscross a hain b hbin
             · rcases Finset.mem_union.1 hb' with hb1 | hb2
               · obtain ⟨a2, _, ha2v⟩ := Finset.mem_image.1 ha2
                 obtain ⟨b1, _, hb1v⟩ := Finset.mem_image.1 hb1
-                have hbin : b ∈ s := by rw [hb1v]; exact b1.2
+                have hbin : b ∈ s := by rw [← hb1v]; exact b1.2
                 have hain : a ∉ s := by
                   have h2' : a ∈ Finset.univ \ s := by
-                    rw [ha2v]; exact a2.2
+                    rw [← ha2v]; exact a2.2
                   exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
                 intro hadj
                 exact hscross b hbin a hain (G.adj_symm hadj)
@@ -831,9 +831,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
                 obtain ⟨b2, hb2m, hb2v⟩ := Finset.mem_image.1 hb2
                 have hne : a2 ≠ b2 := by
                   rintro h
-                  exact hab (ha2v.trans (h ▸ hb2v))
-                have hbadj := hI₂ a2 (Finset.mem_coe.2 ha2m)
-                  b2 (Finset.mem_coe.2 hb2m) hne
+                  exact hab (ha2v.symm.trans (h ▸ hb2v))
+                have hbadj := hI₂ (Finset.mem_coe.2 ha2m)
+                  (Finset.mem_coe.2 hb2m) hne
                 simp only [SimpleGraph.comap_adj] at hbadj
                 rw [ha2v, hb2v] at hbadj
                 exact hbadj
@@ -845,9 +845,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
               Finset.mem_image.1 (Finset.mem_coe.1 hb)
             have hne : a1 ≠ b1 := by
               rintro h
-              exact hab (ha1v.trans (h ▸ hb1v))
-            have hadj := hK₁ a1 (Finset.mem_coe.2 ha1m)
-              b1 (Finset.mem_coe.2 hb1m) hne
+              exact hab (ha1v.symm.trans (h ▸ hb1v))
+            have hadj := hK₁ (Finset.mem_coe.2 ha1m)
+              (Finset.mem_coe.2 hb1m) hne
             simp only [SimpleGraph.comap_adj] at hadj
             rw [ha1v, hb1v] at hadj
             exact hadj
@@ -859,9 +859,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
               Finset.mem_image.1 (Finset.mem_coe.1 hb)
             have hne : a2 ≠ b2 := by
               rintro h
-              exact hab (ha2v.trans (h ▸ hb2v))
-            have hadj := hK₂ a2 (Finset.mem_coe.2 ha2m)
-              b2 (Finset.mem_coe.2 hb2m) hne
+              exact hab (ha2v.symm.trans (h ▸ hb2v))
+            have hadj := hK₂ (Finset.mem_coe.2 ha2m)
+              (Finset.mem_coe.2 hb2m) hne
             simp only [SimpleGraph.comap_adj] at hadj
             rw [ha2v, hb2v] at hadj
             exact hadj
@@ -954,19 +954,19 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
             rw [← hcard1]; exact hprod₁
           have hprod2' : I₂.card * K₂.card ≥ (Finset.univ \ s).card := by
             rw [← hcard2]; exact hprod₂
-          have hdisj : Finset.Disjoint K₁' K₂' := by
+          have hdisj : Disjoint K₁' K₂' := by
             rw [Finset.disjoint_iff_inter_eq_empty]
             refine Finset.eq_empty_iff_forall_notMem.2 fun a ha => ?_
             obtain ⟨ha1, ha2⟩ := Finset.mem_inter.1 ha
             obtain ⟨a1, _, ha1v⟩ := Finset.mem_image.1 ha1
             obtain ⟨a2, _, ha2v⟩ := Finset.mem_image.1 ha2
-            have h1 : a ∈ s := by rw [ha1v]; exact a1.2
+            have h1 : a ∈ s := by rw [← ha1v]; exact a1.2
             have h2 : a ∉ s := by
-              have h2' : a ∈ Finset.univ \ s := by rw [ha2v]; exact a2.2
+              have h2' : a ∈ Finset.univ \ s := by rw [← ha2v]; exact a2.2
               exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
             exact h2 h1
           have hKcard : (K₁' ∪ K₂').card = K₁'.card + K₂'.card :=
-            Finset.card_disjoint_union hdisj
+            Finset.card_union_eq_card_add_card.mp hdisj
           have hcliqueUnion : G.IsClique (↑(K₁' ∪ K₂') : Set α) := by
             intro a ha b hb hab
             have ha' : a ∈ K₁' ∪ K₂' := Finset.mem_coe.1 ha
@@ -977,18 +977,18 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
                 obtain ⟨b1, hb1m, hb1v⟩ := Finset.mem_image.1 hb1
                 have hne : a1 ≠ b1 := by
                   rintro h
-                  exact hab (ha1v.trans (h ▸ hb1v))
-                have hadj := hK₁ a1 (Finset.mem_coe.2 ha1m)
-                  b1 (Finset.mem_coe.2 hb1m) hne
+                  exact hab (ha1v.symm.trans (h ▸ hb1v))
+                have hadj := hK₁ (Finset.mem_coe.2 ha1m)
+                  (Finset.mem_coe.2 hb1m) hne
                 simp only [SimpleGraph.comap_adj] at hadj
                 rw [ha1v, hb1v] at hadj
                 exact hadj
               · obtain ⟨a1, _, ha1v⟩ := Finset.mem_image.1 ha1
-                obtain ⟨b2, _, hb2v⟩ := Finset.mem_image.1 ha2
-                have hain : a ∈ s := by rw [ha1v]; exact a1.2
+                obtain ⟨b2, _, hb2v⟩ := Finset.mem_image.1 hb2
+                have hain : a ∈ s := by rw [← ha1v]; exact a1.2
                 have hbin : b ∉ s := by
                   have h2' : b ∈ Finset.univ \ s := by
-                    rw [hb2v]; exact b2.2
+                    rw [← hb2v]; exact b2.2
                   exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
                 have hne : a ≠ b := by
                   rintro h
@@ -999,10 +999,10 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
             · rcases Finset.mem_union.1 hb' with hb1 | hb2
               · obtain ⟨a2, _, ha2v⟩ := Finset.mem_image.1 ha2
                 obtain ⟨b1, _, hb1v⟩ := Finset.mem_image.1 hb1
-                have hbin : b ∈ s := by rw [hb1v]; exact b1.2
+                have hbin : b ∈ s := by rw [← hb1v]; exact b1.2
                 have hain : a ∉ s := by
                   have h2' : a ∈ Finset.univ \ s := by
-                    rw [ha2v]; exact a2.2
+                    rw [← ha2v]; exact a2.2
                   exact fun hbs => (Finset.mem_sdiff.1 h2').2 hbs
                 have hne : a ≠ b := by
                   rintro h
@@ -1016,9 +1016,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
                 obtain ⟨b2, hb2m, hb2v⟩ := Finset.mem_image.1 hb2
                 have hne : a2 ≠ b2 := by
                   rintro h
-                  exact hab (ha2v.trans (h ▸ hb2v))
-                have hadj := hK₂ a2 (Finset.mem_coe.2 ha2m)
-                  b2 (Finset.mem_coe.2 hb2m) hne
+                  exact hab (ha2v.symm.trans (h ▸ hb2v))
+                have hadj := hK₂ (Finset.mem_coe.2 ha2m)
+                  (Finset.mem_coe.2 hb2m) hne
                 simp only [SimpleGraph.comap_adj] at hadj
                 rw [ha2v, hb2v] at hadj
                 exact hadj
@@ -1030,9 +1030,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
               Finset.mem_image.1 (Finset.mem_coe.1 hb)
             have hne : a1 ≠ b1 := by
               rintro h
-              exact hab (ha1v.trans (h ▸ hb1v))
-            have hbadj := hI₁ a1 (Finset.mem_coe.2 ha1m)
-              b1 (Finset.mem_coe.2 hb1m) hne
+              exact hab (ha1v.symm.trans (h ▸ hb1v))
+            have hbadj := hI₁ (Finset.mem_coe.2 ha1m)
+              (Finset.mem_coe.2 hb1m) hne
             simp only [SimpleGraph.comap_adj] at hbadj
             rw [ha1v, hb1v] at hbadj
             exact hbadj
@@ -1044,9 +1044,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
               Finset.mem_image.1 (Finset.mem_coe.1 hb)
             have hne : a2 ≠ b2 := by
               rintro h
-              exact hab (ha2v.trans (h ▸ hb2v))
-            have hbadj := hI₂ a2 (Finset.mem_coe.2 ha2m)
-              b2 (Finset.mem_coe.2 hb2m) hne
+              exact hab (ha2v.symm.trans (h ▸ hb2v))
+            have hbadj := hI₂ (Finset.mem_coe.2 ha2m)
+              (Finset.mem_coe.2 hb2m) hne
             simp only [SimpleGraph.comap_adj] at hbadj
             rw [ha2v, hb2v] at hbadj
             exact hbadj

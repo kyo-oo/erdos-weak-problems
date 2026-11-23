@@ -95,7 +95,7 @@ theorem card_bUnion_le' {α β : Type} [DecidableEq α] [DecidableEq β] (Q : Fi
       rw [hbi, Finset.sum_insert ha]
       have hu : (F a ∪ Q.biUnion F).card ≤ (F a).card + (Q.biUnion F).card :=
         Finset.card_union_le (F a) (Q.biUnion F)
-      exact Nat.add_le_add hu ih
+      exact le_trans hu (Nat.add_le_add (Nat.le_refl _) ih)
 
 /-! ## §1 AFF-K: THE COPY CAP -/
 
