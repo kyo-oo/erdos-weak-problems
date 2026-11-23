@@ -591,7 +591,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
         have h2D : 2 ≤ Fintype.card {x : α // x ≠ u} := by omega
         have hnD : Fintype.card {x : α // x ≠ u} ≤ n := by omega
         obtain hsepD | hsepD :=
-          seinsche_split_aux n {x : α // x ≠ u} _ _ hnD h2D _ hDfree
+          seinsche_split_aux n {x : α // x ≠ u} hnD h2D _ hDfree
         · -- sep (G−u): extract the unreachable pair, run caseA on G.
           obtain ⟨s, hsne, hsne', hscross⟩ := hsepD
           by_cases hsepG : ∃ s : Finset α, s.Nonempty ∧ s ≠ Finset.univ ∧
@@ -661,7 +661,7 @@ theorem seinsche_split {α : Type} [Fintype α] [DecidableEq α]
       ∀ a ∈ s, ∀ b ∉ s, ¬ G.Adj a b) ∨
     (∃ s : Finset α, s.Nonempty ∧ s ≠ Finset.univ ∧
       ∀ a ∈ s, ∀ b ∉ s, ¬ (Gᶜ).Adj a b) :=
-  seinsche_split_aux (Fintype.card α) α _ _ (Nat.le_refl _) hn G hP4
+  seinsche_split_aux (Fintype.card α) α (Nat.le_refl _) hn G hP4
 
 /-! ## §5 THE WITNESS PRODUCT LAW -/
 
@@ -739,11 +739,11 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
             rw [hcard2]; omega
           obtain ⟨I₁, K₁, hI₁, hK₁, hprod₁⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ s} _ _ hn1 _
+            p4_witness_product_aux n {x : α // x ∈ s} hn1 _
               (p4free_comap G (Subtype.val : {x : α // x ∈ s} → α)
                 Subtype.val_injective hP4)
           obtain ⟨I₂, K₂, hI₂, hK₂, hprod₂⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ Finset.univ \ s} _ _ hn2 _
+            p4_witness_product_aux n {x : α // x ∈ Finset.univ \ s} hn2 _
               (p4free_comap G
                 (Subtype.val : {x : α // x ∈ Finset.univ \ s} → α)
                 Subtype.val_injective hP4)
@@ -914,11 +914,11 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
             rw [hcard2]; omega
           obtain ⟨I₁, K₁, hI₁, hK₁, hprod₁⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ s} _ _ hn1 _
+            p4_witness_product_aux n {x : α // x ∈ s} hn1 _
               (p4free_comap G (Subtype.val : {x : α // x ∈ s} → α)
                 Subtype.val_injective hP4)
           obtain ⟨I₂, K₂, hI₂, hK₂, hprod₂⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ Finset.univ \ s} _ _ hn2 _
+            p4_witness_product_aux n {x : α // x ∈ Finset.univ \ s} hn2 _
               (p4free_comap G
                 (Subtype.val : {x : α // x ∈ Finset.univ \ s} → α)
                 Subtype.val_injective hP4)
@@ -1076,7 +1076,7 @@ theorem p4_witness_product {α : Type} [Fintype α] [DecidableEq α]
     (G : SimpleGraph α) (hP4 : P4free G) :
     ∃ I K : Finset α, G.IsIndepSet (↑I : Set α) ∧ G.IsClique (↑K : Set α) ∧
       I.card * K.card ≥ Fintype.card α :=
-  p4_witness_product_aux (Fintype.card α) α _ _ (Nat.le_refl _) G hP4
+  p4_witness_product_aux (Fintype.card α) α (Nat.le_refl _) G hP4
 
 /-! ## §6 THE √n FLOOR + THE RPOW FINISHER (the 61A green chain, ported) -/
 
