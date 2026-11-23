@@ -81,16 +81,16 @@ theorem sum_const_nat (Q : Finset ℕ) (c : ℕ) :
   | empty => simp
   | insert a Q ha ih =>
       rw [Finset.sum_insert ha, ih, Finset.card_insert_of_notMem ha]
-      omega
+      ring
 
-/-- The DIY bUnion-card bound (zero API risk, the card_union_le induction). -/
+/-- The DIY biUnion-card bound (zero API risk, the card_union_le induction). -/
 theorem card_bUnion_le' {β : Type} (Q : Finset ℕ) (F : ℕ → Finset β) :
-    (Q.bUnion F).card ≤ ∑ q ∈ Q, (F q).card := by
+    (Q.biUnion F).card ≤ ∑ q ∈ Q, (F q).card := by
   classical
   induction Q using Finset.induction_on with
   | empty => simp
   | insert a Q ha ih =>
-      rw [Finset.bUnion_insert, Finset.sum_insert ha]
+      rw [Finset.biUnion_insert, Finset.sum_insert ha]
       exact Nat.add_le_add (Finset.card_union_le _ _) ih
 
 /-! ## §1 AFF-K: THE COPY CAP -/
@@ -134,7 +134,7 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
         intro x hx
         have hxu : x ∈ {a' + n • d' | (n : ℕ) (_ : n < ((k : ℕ) : ENat))} := by
           rw [← hset]; exact hx
-        obtain ⟨-, -, hneq⟩ := hxu
+        rcases hxu with ⟨-, -, hneq⟩
         simp only [Set.mem_singleton_iff]
         rw [← hneq, nsmul_nat, hd'eq, Nat.mul_zero, Nat.add_zero]
       have hle : u.encard ≤ ({a'} : Set ℕ).encard :=
@@ -191,7 +191,7 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
         have hcardW : W.card = k := by
           rw [hW, Finset.card_image_of_injOn (fun i _ i' _ heq => by
             have h1 : (a' + i * d' - 1) * d = (a' + i' * d' - 1) * d :=
-              Nat.add_right_cancel heq
+              Nat.add_left_cancel heq
             have h2 : a' + i * d' - 1 = a' + i' * d' - 1 :=
               Nat.eq_of_mul_eq_mul_right hd h1
             have h3 : i * d' = i' * d' := by omega
@@ -216,7 +216,7 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
           rw [nsmul_nat] at hneq
           rw [hA, hD] at hneq
           have h1 : a' + n * d' - 1 = (a' - 1) + n * d' := by omega
-          rw [h1] at hneq ⊢
+          rw [h1]
           rw [← hneq]
           ring
     exact hfree ↑W hWsub hWap
@@ -246,8 +246,8 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
   have hxmem : ∀ x ∈ S, 1 ≤ x ∧ x ≤ N := by
     intro x hx
     have hxI : x ∈ Finset.Icc 1 N := hSsub hx
-    have := Finset.mem_Icc.1 hxI
-    omega
+    obtain ⟨h1, h2⟩ := Finset.mem_Icc.1 hxI
+    exact ⟨h1, h2⟩
   set D0 : ℕ := N / (4 * m * (m - 1)) with hD0def
   -- (F1) 4*m*(m-1) ≤ N
   have hF1 : 4 * m * (m - 1) ≤ N := by
@@ -261,17 +261,16 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       _ = 16 * m * m := by ring
       _ ≤ N := hN
   have hD0pos : 0 < 4 * m * (m - 1) :=
-    Nat.mul_pos (by omega : (0:ℕ) < 4 * m)
-      (Nat.mul_pos (by omega : (0:ℕ) < m) (by omega : (0:ℕ) < m - 1))
+    Nat.mul_pos (by omega : (0:ℕ) < 4 * m) (by omega : (0:ℕ) < m - 1)
   -- (F2) D0 ≥ 1
   have hD0ge1 : 1 ≤ D0 := Nat.div_pos hF1 hD0pos
   -- (F3) 4*m*(m-1)*D0 ≤ N
   have hF3 : 4 * m * (m - 1) * D0 ≤ N := Nat.mul_div_le N (4 * m * (m - 1))
   -- (F4) (m-1)*D0 ≤ N (the fringe intervals fit)
   have hF4 : (m - 1) * D0 ≤ N := by
-    have h1 : (m - 1) * D0 ≤ (4 * m) * ((m - 1) * D0) :=
-      Nat.mul_le_mul_left ((m - 1) * D0) (by omega)
-    have h2 : (4 * m) * ((m - 1) * D0) = 4 * m * (m - 1) * D0 := by ring
+    have h1 : (m - 1) * D0 * 1 ≤ (m - 1) * D0 * (4 * m) :=
+      Nat.mul_le_mul_left ((m - 1) * D0) (by omega : (1:ℕ) ≤ 4 * m)
+    have h2 : (m - 1) * D0 * (4 * m) = 4 * m * (m - 1) * D0 := by ring
     omega
   -- The band points of S
   set bandS : Finset ℕ := S.filter
@@ -282,7 +281,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       (fun q => q.2 + (m - 1) * q.1 ≤ N) with hQ
   -- The incidence Finset P := {(x, (d, j)) : x ∈ S, 1 ≤ d ≤ D0, j < m,
   -- j*d ≤ x-1, x+(m-1-j)*d ≤ N}
-  set P : Finset ℕ :=
+  set P : Finset (ℕ × (ℕ × ℕ)) :=
     (S.product ((Finset.Icc 1 D0).product (Finset.Ico 0 m))).filter
       (fun p => p.2.2 * p.2.1 ≤ p.1 - 1 ∧ p.1 + (m - 1 - p.2.2) * p.2.1 ≤ N)
     with hP
@@ -363,16 +362,16 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
   -- UPPER: |P| ≤ (r k m) * Q.card
   have hupper : P.card ≤ (r k m) * Q.card := by
     -- the cover: P = ⋃_{q ∈ Q} (the fiber at q)
-    have hcover : P = Q.bUnion
+    have hcover : P = Q.biUnion
         (fun q => P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)) := by
       ext p
       constructor
       · intro hp
         have hq := hmemQ p hp
-        exact Finset.mem_bUnion.2 ⟨(p.2.1, p.1 - p.2.2 * p.2.1), hq,
+        exact Finset.mem_biUnion.2 ⟨(p.2.1, p.1 - p.2.2 * p.2.1), hq,
           Finset.mem_filter.2 ⟨hp, rfl⟩⟩
       · intro hb
-        obtain ⟨q, -, hpf⟩ := Finset.mem_bUnion.1 hb
+        obtain ⟨q, -, hpf⟩ := Finset.mem_biUnion.1 hb
         exact (Finset.mem_filter.1 hpf).1
     -- each fiber ≤ r k m (AFF-K at the fiber's copy, via the j-injection)
     have hfib : ∀ q ∈ Q,
@@ -414,7 +413,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       -- the j-map is injective on the fiber
       have hcard : (P.filter
           (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).card
-          = (P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).image
+          = ((P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).image
               (fun p => p.2.2)).card :=
         Finset.card_image_of_injOn (fun p hp p' hp' hje => by
           have hje' : p.2.2 = p'.2.2 := hje
@@ -561,10 +560,10 @@ theorem v_gen (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m) (hN : 16 * m * m ≤ N
         rw [← hcardt']; exact hle
       have hbad' : k ≤ 1 := by exact_mod_cast hbad
       omega
-    · rintro n ⟨S, hSsub, hSfree, rfl⟩
+    · rintro ⟨S, hSsub, hSfree, rfl⟩
       have h2 := v_gen_witness k m N hk hm hN S hSsub hSfree
       exact (Nat.le_div_iff_mul_le (2 * m)).2
-        (by rw [Nat.mul_comm n (2 * m)]; exact h2)
+        (by rw [Nat.mul_comm S.card (2 * m)]; exact h2)
   have h1 : 2 * m * (Set.IsAPOfLengthFree.maxCard k N) ≤
       2 * m * ((2 * (r k m) + 1) * N / (2 * m)) :=
     Nat.mul_le_mul_left (2 * m) hstep

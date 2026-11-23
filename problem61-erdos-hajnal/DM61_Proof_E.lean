@@ -146,7 +146,7 @@ theorem GReach.prepend {G : SimpleGraph α} {y z : α}
       exact GReach.append x x _ (GReach.refl x) hadj
   | append a b hrec hadj ih =>
       intro x hadjxy
-      exact GReach.append x b z (ih hadjxy) hadj
+      exact GReach.append x a b (ih hadjxy) hadj
 
 /-- Symmetry (reversal) of reachability. -/
 theorem GReach.symm {G : SimpleGraph α} {x z : α} (h : GReach G x z) :
@@ -164,7 +164,7 @@ theorem GReach.trans {G : SimpleGraph α} {x y z : α}
   induction h2 with
   | refl => intro h; exact h
   | append a b hrec hadj ih =>
-      exact fun h => GReach.append x b z (ih h) hadj
+      exact fun h => GReach.append x a b (ih h) hadj
 
 /-- **The walk-crossing lemma** (audit D12 — the missing inventory piece):
 a walk from `a` to `b` crosses every separation between them. -/
@@ -177,9 +177,9 @@ theorem walk_crosses {G : SimpleGraph α} {a b : α} (h : GReach G a b) :
       exact absurd hs hs'
   | append p q hrec hadj ih =>
       intro s hs hs'
-      by_cases hq : q ∈ s
-      · exact ⟨q, b, hq, hs', hadj⟩
-      · exact ih s hs hq
+      by_cases hp : p ∈ s
+      · exact ⟨p, q, hp, hs', hadj⟩
+      · exact ih s hs hp
 
 open Classical in
 /-- The unreachable pair yields a separation: the reachability class of `x`
@@ -194,7 +194,7 @@ theorem sep_class_of_unreachable {α : Type} [Fintype α] [DecidableEq α]
     have hmy : y ∈ Finset.univ.filter (fun z => GReach G x z) := by
       rw [hful]; exact Finset.mem_univ y
     exact hnr (Finset.mem_filter.1 hmy).2
-  · intro a ha b hb hab
+  · intro a ha b hb
     have hra : GReach G x a := (Finset.mem_filter.1 ha).2
     have hmb : b ∉ Finset.univ.filter (fun z => GReach G x z) := hb
     intro hadj
@@ -223,7 +223,7 @@ theorem compl_comap {α β : Type} (G : SimpleGraph α) (f : β → α)
   simp only [SimpleGraph.compl_adj, SimpleGraph.comap_adj]
   constructor
   · rintro ⟨h1, h2⟩
-    exact ⟨h1, fun heq => h1 (hf heq)⟩
+    exact ⟨fun heq => h1 (hf heq), h2⟩
   · rintro ⟨h1, h2⟩
     exact ⟨fun heq => h1 (congrArg f heq), h2⟩
 
@@ -265,14 +265,14 @@ theorem last_exit_aux {α : Type} (G : SimpleGraph α) (u : α) :
       exact absurd hcu hcu'
   | append a b hrec hadj ih =>
       intro hau hcu
-      by_cases hbu : b = u
-      · refine ⟨⟨j, hcu⟩, ?_, fun _ => GReach.refl ⟨j, hcu⟩⟩
-        show G.Adj u (j : α)
-        rw [← hbu]
+      by_cases hau' : a = u
+      · refine ⟨⟨b, hcu⟩, ?_, fun _ => GReach.refl ⟨b, hcu⟩⟩
+        show G.Adj u (b : α)
+        rw [← hau']
         exact hadj
-      · obtain ⟨w, hwadj, hwreach⟩ := ih hau hbu
+      · obtain ⟨w, hwadj, hwreach⟩ := ih hau hau'
         refine ⟨w, hwadj, fun _ => ?_⟩
-        exact GReach.append w ⟨b, hbu⟩ ⟨j, hcu⟩ (hwreach hbu)
+        exact GReach.append w ⟨a, hau'⟩ ⟨b, hcu⟩ (hwreach hau')
           (by simp only [SimpleGraph.comap_adj, Subtype.coe_mk]; exact hadj)
 
 theorem last_exit {α : Type} (G : SimpleGraph α) (u : α) {z : α}
@@ -299,8 +299,8 @@ theorem flip {α : Type} (G : SimpleGraph α) (u : α) :
   | refl => intro h1 h2; exact absurd h1 h2
   | append p q hrec hadj ih =>
       intro hxu hyu
-      by_cases hmy : G.Adj u (q : α)
-      · refine ⟨q, b, ?_, hmy, hyu, hrec, GReach.append p q b hrec hadj⟩
+      by_cases hmy : G.Adj u (p : α)
+      · refine ⟨p, q, ?_, hmy, hyu, hrec, GReach.append a p q hrec hadj⟩
         simp only [SimpleGraph.comap_adj, Subtype.coe_mk] at hadj
         exact hadj
       · exact ih hxu hmy
@@ -314,9 +314,9 @@ theorem reach_isolated {α : Type} (H : SimpleGraph α) (u : α)
   | refl => intro _; rfl
   | append a b hrec hadj ih =>
       intro hiso'
-      have hba : b = a := ih hiso'
-      rw [hba] at hadj
-      exact absurd hadj (hiso' z)
+      have hau : a = u := ih hiso'
+      rw [hau] at hadj
+      exact absurd hadj (hiso' b)
 
 /-- **caseA — the heart of Seinsche** (audit §1.2, machine-verified 23,724
 constructive instances): if G and Gᶜ are both walk-connected, G is P4-free,
@@ -380,7 +380,7 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
     have hqp : (q : α) ≠ (p : α) := by
       rintro h
       rw [← h] at hpq
-      exact absurd hpq (G.irrefl _)
+      exact absurd hpq G.irrefl
     have hqu : (q : α) ≠ u := fun h => q.2 h
     have hpu : (p : α) ≠ u := fun h => p.2 h
     have hqz' : (q : α) ≠ (z' : α) := by
@@ -398,7 +398,8 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
     -- q—u, q—z′, p—z′. Contradiction with P4free.
     exact hP4 ⟨emb4 (q : α) (p : α) u (z' : α) hqp hqu hqz' hpu hpz' huz',
       p4_comap_of_path hqp hqu hqz' hpu hpz' huz'
-        (G.adj_symm hpq) (G.adj_symm hup) huz huq hqz hpz⟩
+        (G.adj_symm hpq) (G.adj_symm hup) huz
+        (fun h => huq (G.adj_symm h)) hqz hpz⟩
   · -- STEP 3 (the uniform case): uniformity + STEP 1 ⟹ u G-universal ⟹
     -- u isolated in Gᶜ ⟹ Gᶜ disconnected — contradiction.
     push_neg at hmix
@@ -415,8 +416,8 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
     have hisoC : ∀ v : α, ¬ (Gᶜ).Adj u v := by
       intro v hv
       rcases eq_or_ne v u with rfl | hne
-      · exact (SimpleGraph.compl_adj.1 hv).1 rfl
-      · exact (SimpleGraph.compl_adj.1 hv).2 (huniv ⟨v, hne⟩)
+      · exact (SimpleGraph.compl_adj.mp hv).1 rfl
+      · exact (SimpleGraph.compl_adj.mp hv).2 (huniv ⟨v, hne⟩)
     have hreachC := hconnC u (y' : α)
     have hyu : (y' : α) = u := reach_isolated (Gᶜ) u hisoC hreachC
     exact y'.2 hyu.symm
@@ -557,7 +558,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
               · exact absurd h hbx
               · exact h
             rw [hax, hby] at hadjC
-            exact (SimpleGraph.compl_adj.1 hadjC).2 hadj
+            exact (SimpleGraph.compl_adj.mp hadjC).2 hadj
         · -- The pair is G-edgeless: {x} separates G.
           refine Or.inl ⟨{he.symm (0 : Fin 2)},
             ⟨he.symm (0 : Fin 2), Finset.mem_singleton.2 rfl⟩, ?_, ?_⟩
@@ -565,7 +566,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
             have hym : he.symm (1 : Fin 2) ∈
                 ({he.symm (0 : Fin 2)} : Finset α) := by
               rw [hful]; exact Finset.mem_univ _
-            exact hxy (Finset.mem_singleton.1 hym)
+            exact hxy (Finset.mem_singleton.1 hym).symm
           · intro a ha b hb hadjG
             have hax : a = he.symm (0 : Fin 2) := Finset.mem_singleton.1 ha
             have hbx : b ≠ he.symm (0 : Fin 2) :=
@@ -588,7 +589,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
         have h2D : 2 ≤ Fintype.card {x : α // x ≠ u} := by omega
         have hnD : Fintype.card {x : α // x ≠ u} ≤ n := by omega
         obtain hsepD | hsepD :=
-          seinsche_split_aux n {x : α // x ≠ u} hnD h2D _ hDfree
+          ih {x : α // x ≠ u} hnD h2D _ hDfree
         · -- sep (G−u): extract the unreachable pair, run caseA on G.
           obtain ⟨s, hsne, hsne', hscross⟩ := hsepD
           by_cases hsepG : ∃ s : Finset α, s.Nonempty ∧ s ≠ Finset.univ ∧
@@ -687,7 +688,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
       by_cases hsmall : Fintype.card α ≤ 1
       · -- The ≤ 1 world: the full vertex set is both independent and a
         -- clique (no distinct pairs exist).
-        rcases Nat.eq_zero_or_eq_one (Fintype.card α) with h0 | h1
+        by_cases h0 : Fintype.card α = 0
         · have hemp : IsEmpty α := Fintype.card_eq_zero.1 h0
           refine ⟨∅, ∅, ?_, ?_, ?_⟩
           · intro a ha _ _ _
@@ -696,7 +697,8 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
             exact absurd ha (Set.notMem_empty a)
           · have h1' : (∅ : Finset α).card = 0 := Finset.card_empty
             omega
-        · obtain ⟨hu⟩ := Fintype.card_eq_one.1 h1
+        · have h1 : Fintype.card α = 1 := by omega
+          obtain ⟨hu⟩ := Fintype.card_eq_one.1 h1
           haveI := hu
           refine ⟨Finset.univ, Finset.univ, ?_, ?_, ?_⟩
           · intro a _ b _ hab
@@ -723,24 +725,24 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hsdiffcard : (Finset.univ \ s).card
               = Fintype.card α - s.card := by
             rw [← hunivcard]
-            exact Finset.card_sdiff (Finset.subset_univ s)
+            rw [Finset.card_sdiff, Finset.inter_univ]
           have hspos : 0 < s.card := Finset.card_pos.2 hsne
           have hdiffpos : 0 < (Finset.univ \ s).card :=
             Finset.card_pos.2 ⟨y, hy⟩
           have hcard1 : Fintype.card {x : α // x ∈ s} = s.card :=
-            Fintype.card_coe
+            Fintype.card_coe s
           have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
-              (Finset.univ \ s).card := Fintype.card_coe
+              (Finset.univ \ s).card := Fintype.card_coe (Finset.univ \ s)
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
             rw [hcard1]; omega
           have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
             rw [hcard2]; omega
           obtain ⟨I₁, K₁, hI₁, hK₁, hprod₁⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ s} hn1 _
+            ih {x : α // x ∈ s} hn1 _
               (p4free_comap G (Subtype.val : {x : α // x ∈ s} → α)
                 Subtype.val_injective hP4)
           obtain ⟨I₂, K₂, hI₂, hK₂, hprod₂⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ Finset.univ \ s} hn2 _
+            ih {x : α // x ∈ Finset.univ \ s} hn2 _
               (p4free_comap G
                 (Subtype.val : {x : α // x ∈ Finset.univ \ s} → α)
                 Subtype.val_injective hP4)
@@ -898,24 +900,24 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hsdiffcard : (Finset.univ \ s).card
               = Fintype.card α - s.card := by
             rw [← hunivcard]
-            exact Finset.card_sdiff (Finset.subset_univ s)
+            rw [Finset.card_sdiff, Finset.inter_univ]
           have hspos : 0 < s.card := Finset.card_pos.2 hsne
           have hdiffpos : 0 < (Finset.univ \ s).card :=
             Finset.card_pos.2 ⟨y, hy⟩
           have hcard1 : Fintype.card {x : α // x ∈ s} = s.card :=
-            Fintype.card_coe
+            Fintype.card_coe s
           have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
-              (Finset.univ \ s).card := Fintype.card_coe
+              (Finset.univ \ s).card := Fintype.card_coe (Finset.univ \ s)
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
             rw [hcard1]; omega
           have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
             rw [hcard2]; omega
           obtain ⟨I₁, K₁, hI₁, hK₁, hprod₁⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ s} hn1 _
+            ih {x : α // x ∈ s} hn1 _
               (p4free_comap G (Subtype.val : {x : α // x ∈ s} → α)
                 Subtype.val_injective hP4)
           obtain ⟨I₂, K₂, hI₂, hK₂, hprod₂⟩ :=
-            p4_witness_product_aux n {x : α // x ∈ Finset.univ \ s} hn2 _
+            ih {x : α // x ∈ Finset.univ \ s} hn2 _
               (p4free_comap G
                 (Subtype.val : {x : α // x ∈ Finset.univ \ s} → α)
                 Subtype.val_injective hP4)
