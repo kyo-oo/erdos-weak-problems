@@ -1336,3 +1336,59 @@ THE MISSION BOARD, FINAL STATE OF THIS ROUND:
    mathematical content; the campaign's 406 chamber is the assault.
 
 The engine never stops; it never lies.
+
+### §17.r16-r19 — THE COMBINATION STRIKE, THE DUST CANDIDATE ASSAULT, THE KERNEL-CERTIFIED BASE
+
+BOSS's 4th-round order: prove what the maths lacks + combine multiple
+files into a complete new theorem.  Executed in four rounds:
+
+**r16 — THE COMBINATION FILE** (MonolithGate/FinalVerdict406.lean):
+- `erdos406_universal_verdict_of_climb` — the complete new theorem:
+  three files' CI-green laws (GSTInfiniteFourPowerNavigation's climb +
+  GSTTailFProof's bridge + ErdosTernary2's terminal identity and crown)
+  composed into one statement: the climb yields Erdős #406's universal
+  verdict (every 2^n, n ≥ 9, fails noTernaryTwo).
+- `erdos406_universal_verdict_of_lattice` — the tower + 34-survivor
+  row-mod729 route to the same verdict.
+- `erdos406_high_sheets_die_of_not_dust` — the dust boundary read as
+  the verdict's boolean face, sheet by sheet.
+
+**r16 — THE DUST CANDIDATE ASSAULT** (MonolithGate/DustCandidates406.lean):
+FOUR NEW LAWS composed from the chamber's own shape/stabilization/unit
+laws — no house substitutes:
+- `omega_tower_word_progression` — under the dust shape the tower word
+  advances EXACTLY +3^k per level (the middle-third sandwich + the
+  cube-lift stabilization).
+- `dust_tower_word_closed_form` — integrated: 2·T_k + 27 = 2·T_3 + 3^k.
+- `dust_candidate_two_classes` — the tower family's dust collapses to
+  EXACTLY TWO classes mod 27 (4 and 16): the seed word 9709 ≡ 16 (mod
+  27) + six-family arithmetic.
+- `dust_core_class_determined` — the linear-trit pinning: one class =
+  one infinite 3-adic stream (the tower word is linear in the next
+  trit; the base cancels; the trit is unique).
+Computational certificate (exact Python, NO-OOM): both streams sieved
+to level 109 — each level has EXACTLY one extension (the progression's
+rigidity, now proven), trits ~70% nonzero, no period ≤ 25.  The two
+candidate 3-adics are almost surely not Nats; the frontier is the
+structural non-termination proof.
+
+**r18 — the hmodw pre-emptive repair** (the plain rw [Nat.mul_mod]
+instantiation trap, caught in self-audit before first exposure).
+
+**r17/r19 — THE CLIMB'S KERNEL-CERTIFIED BASE** (FinalVerdict406 §5):
+- `erdos406_climb_base` — 493 decide-certified HappyCell witnesses for
+  8 ≤ K ≤ 500 (the campaign's own Pins band; max witness p = 41; the
+  1001-bit powers kernel-evaluated; two-method verified in Python
+  before generation).
+- `erdos406_climb_of_base_and_tail` — the climb = base + tail.
+- **`erdos406_universal_verdict_of_tail`** — THE MISSION'S SHARPEST
+  STATEMENT: the full verdict from the tail alone (K > 500).  The
+  entire remaining mathematical content of Erdős #406 is now ONE named
+  hypothesis.
+
+THE HONEST MAP after r19: the iff is discharged (r9); the climb's base
+band is kernel-certified; the dust is pinned to two rigid streams; the
+remaining content = the climb's tail above 500 = the structural
+non-termination of the two streams + the row family's own sieve — the
+monolith's own declared seam, now with its exact shape computed and
+its frontier named.
