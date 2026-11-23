@@ -266,7 +266,7 @@ theorem last_exit_aux {α : Type} (G : SimpleGraph α) (u : α) :
   | append a b hrec hadj ih =>
       intro hau hcu
       by_cases hau' : a = u
-      · refine ⟨⟨b, hcu⟩, ?_, fun hj => GReach.refl ⟨b, hj⟩⟩
+      · refine ⟨⟨b, hcu⟩, ?_, fun _ => GReach.refl _⟩
         show G.Adj u (b : α)
         rw [← hau']
         exact hadj
@@ -416,11 +416,11 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
     have hisoC : ∀ v : α, ¬ (Gᶜ).Adj u v := by
       intro v hv
       rcases eq_or_ne v u with rfl | hne
-      · exact ((SimpleGraph.compl_adj G u v).mp hv).1 rfl
-      · exact ((SimpleGraph.compl_adj G u v).mp hv).2 (huniv ⟨v, hne⟩)
+      · exact ((SimpleGraph.compl_adj G _ _).mp hv).1 rfl
+      · exact ((SimpleGraph.compl_adj G _ _).mp hv).2 (huniv ⟨v, hne⟩)
     have hreachC := hconnC u (y' : α)
     have hyu : (y' : α) = u := reach_isolated (Gᶜ) u hisoC hreachC
-    exact y'.2 hyu.symm
+    exact y'.2 hyu
 
 /-! ### The ψ self-complementarity bridge (audit §1.3) -/
 
@@ -674,14 +674,13 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
   induction n with
   | zero =>
       intro α _ _ hcard G _
-      have h0 : Fintype.card α = 0 := le_antisymm hcard (Nat.zero_le _)
-      have hemp : IsEmpty α := Fintype.card_eq_zero.1 h0
       refine ⟨∅, ∅, ?_, ?_, ?_⟩
       · intro a ha _ _ _
-        exact absurd ha (Set.notMem_empty a)
+        exact absurd ha (by simp)
       · intro a ha _ _ _
-        exact absurd ha (Set.notMem_empty a)
-      · have h1 : (∅ : Finset α).card = 0 := Finset.card_empty
+        exact absurd ha (by simp)
+      · have h0 : Fintype.card α = 0 := le_antisymm hcard (Nat.zero_le _)
+        have h1 : (∅ : Finset α).card = 0 := Finset.card_empty
         omega
   | succ n ih =>
       intro α _ _ hcard G hP4
@@ -709,9 +708,9 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
             omega
           refine ⟨Finset.univ, Finset.univ, ?_, ?_, ?_⟩
           · intro a _ b _ hab
-            exact absurd hab hnods
+            exact hnods a b hab
           · intro a _ b _ hab
-            exact absurd hab hnods
+            exact hnods a b hab
           · have h1' : (Finset.univ : Finset α).card = Fintype.card α :=
               Finset.card_univ
             omega
@@ -736,8 +735,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hspos : 0 < s.card := Finset.card_pos.2 hsne
           have hdiffpos : 0 < (Finset.univ \ s).card :=
             Finset.card_pos.2 ⟨y, hy⟩
-          have hcard1 : Fintype.card {x : α // x ∈ s} = s.card :=
-            Fintype.card_coe s
+          have hcard1 : Fintype.card {x : α // x ∈ s} = s.card := by simp
           have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
               (Finset.univ \ s).card := by simp
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
@@ -911,8 +909,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hspos : 0 < s.card := Finset.card_pos.2 hsne
           have hdiffpos : 0 < (Finset.univ \ s).card :=
             Finset.card_pos.2 ⟨y, hy⟩
-          have hcard1 : Fintype.card {x : α // x ∈ s} = s.card :=
-            Fintype.card_coe s
+          have hcard1 : Fintype.card {x : α // x ∈ s} = s.card := by simp
           have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
               (Finset.univ \ s).card := by simp
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
@@ -1091,7 +1088,8 @@ ring normalization is mandatory, omega sees (m+1)² as one atom). -/
 theorem sqrt_le_of_sq {n m : ℕ} (h : n ≤ m * m) : Nat.sqrt n ≤ m := by
   by_contra hcon
   push_neg at hcon
-  have h2 : m * m < n := Nat.lt_sqrt.1 hcon
+  have h2 : m + 1 ≤ Nat.sqrt n := by omega
+  have h3 : (m + 1) * (m + 1) ≤ n := Nat.le_sqrt.mp h2
   have h4 : (m + 1) * (m + 1) = m * m + 2 * m + 1 := by ring
   omega
 
@@ -1228,11 +1226,11 @@ theorem eh_P4 : IsErdosHajnalLowerBound P4 (fun n => (n : ℝ) ^ ((1:ℝ)/4)) :=
   have hsq : Nat.sqrt n ≤ M := sqrt_le_of_sq (le_trans hprod hmul)
   rcases le_total I.card K.card with hI' | hI'
   · have hle := SimpleGraph.IsClique.card_le_cliqueNum (t := K) (tc := hK)
-    have hKeq : K.card = M := by rw [hM]; exact Nat.max_eq_right hI'
+    have hKeq : K.card = M := by rw [hM]; exact (Nat.max_eq_right hI').symm
     rw [hKeq] at hle
     exact official_bound_of_sqrt hn (Or.inr (le_trans hsq hle))
   · have hle := SimpleGraph.IsIndepSet.card_le_indepNum (t := I) (tc := hI)
-    have hIeq : I.card = M := by rw [hM]; exact Nat.max_eq_left hI'
+    have hIeq : I.card = M := by rw [hM]; exact (Nat.max_eq_left hI').symm
     rw [hIeq] at hle
     exact official_bound_of_sqrt hn (Or.inl (le_trans hsq hle))
 

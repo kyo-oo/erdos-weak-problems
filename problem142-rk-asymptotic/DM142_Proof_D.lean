@@ -90,7 +90,8 @@ theorem card_bUnion_le' {β : Type} [DecidableEq β] (Q : Finset ℕ) (F : ℕ �
   induction Q using Finset.induction_on with
   | empty => simp
   | insert a Q ha ih =>
-      rw [Finset.biUnion_insert, Finset.sum_insert ha]
+      have hbi : (insert a Q).biUnion F = F a ∪ Q.biUnion F := Finset.biUnion_insert
+      rw [hbi, Finset.sum_insert ha]
       exact Nat.add_le_add (Finset.card_union_le _ _) ih
 
 /-! ## §1 AFF-K: THE COPY CAP -/
@@ -134,7 +135,7 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
         intro x hx
         have hxu : x ∈ {a' + n • d' | (n : ℕ) (_ : n < ((k : ℕ) : ENat))} := by
           rw [← hset]; exact hx
-        rcases hxu with ⟨-, -, hneq⟩
+        obtain ⟨n, hn, hneq⟩ := hxu
         simp only [Set.mem_singleton_iff]
         rw [← hneq, nsmul_nat, hd'eq, Nat.mul_zero, Nat.add_zero]
       have hle : u.encard ≤ ({a'} : Set ℕ).encard :=
@@ -305,7 +306,10 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     have hQsub : Q ⊆ (Finset.Icc 1 D0).product (Finset.Ico 1 (N + 1)) :=
       Finset.filter_subset _ _
     have h1 := Finset.card_mono hQsub
-    rw [Finset.card_product] at h1
+    have hcp : ((Finset.Icc 1 D0).product (Finset.Ico 1 (N + 1))).card
+        = (Finset.Icc 1 D0).card * (Finset.Ico 1 (N + 1)).card :=
+      Finset.card_product _ _
+    rw [hcp] at h1
     have h2 : (Finset.Icc 1 D0).card = D0 := by rw [Nat.card_Icc]; omega
     have h3 : (Finset.Ico 1 (N + 1)).card = N := by rw [Nat.card_Ico]; omega
     omega
@@ -354,7 +358,13 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       exact Finset.mem_filter.2 ⟨Finset.mem_product.2 ⟨hpS, hp2⟩,
         ⟨hval1, hval2⟩⟩
     have h1 := Finset.card_mono hsub
-    simp only [Finset.card_product] at h1
+    have hcp1 : (bandS.product ((Finset.Icc 1 D0).product (Finset.Ico 0 m))).card
+        = bandS.card * ((Finset.Icc 1 D0).product (Finset.Ico 0 m)).card :=
+      Finset.card_product _ _
+    have hcp2 : ((Finset.Icc 1 D0).product (Finset.Ico 0 m)).card
+        = (Finset.Icc 1 D0).card * (Finset.Ico 0 m).card :=
+      Finset.card_product _ _
+    rw [hcp1, hcp2] at h1
     have h2 : (Finset.Icc 1 D0).card = D0 := by rw [Nat.card_Icc]; omega
     have h3 : (Finset.Ico 0 m).card = m := by rw [Nat.card_Ico]; omega
     omega
@@ -483,12 +493,12 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       have hxS : x ∈ S := (Finset.mem_filter.1 hx).1
       have hbad := (Finset.mem_filter.1 hx).2
       have hxN := hxmem x hxS
-      push_neg at hbad
-      rcases hbad with h | h
+      by_cases hb1 : (m - 1) * D0 ≤ x - 1
+      · have hb2 := hbad hb1
+        exact Finset.mem_union.2
+          (Or.inr (Finset.mem_Icc.2 ⟨by omega, hxN.2⟩))
       · exact Finset.mem_union.2
           (Or.inl (Finset.mem_Icc.2 ⟨hxN.1, by omega⟩))
-      · exact Finset.mem_union.2
-          (Or.inr (Finset.mem_Icc.2 ⟨by omega, hxN.2⟩))
     have hcard1 : (Finset.Icc 1 ((m - 1) * D0)).card = (m - 1) * D0 := by
       rw [Nat.card_Icc]; omega
     have hcard2 : (Finset.Icc (N - (m - 1) * D0 + 1) N).card
@@ -519,8 +529,9 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       exact hF3
     have e1 : (2 * (r k m) + 1) * N = 2 * ((r k m) * N) + N := by ring
     have h4 : 2 * (bandS.card * m) + 4 * m * ((m - 1) * D0)
-        ≤ 2 * ((r k m) * N) + N := by omega
-    omega
+        ≤ 2 * ((r k m) * N) + N :=
+      Nat.add_le_add h2 h3
+    exact le_trans h1 (le_trans h4 (le_of_eq e1.symm))
   exact hfinal
 
 /-! ## §5 THE SUP TRANSFER: THE HEADLINE -/
@@ -568,7 +579,7 @@ theorem v_gen (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m) (hN : 16 * m * m ≤ N
       omega
     · rintro n ⟨S, hSsub, hSfree, rfl⟩
       have h2 := v_gen_witness k m N hk hm hN S hSsub hSfree
-      exact (Nat.le_div_iff_mul_le (2 * m)).2
+      exact (Nat.le_div_iff_mul_le (by omega : (0:ℕ) < 2 * m)).2
         (by rw [Nat.mul_comm S.card (2 * m)]; exact h2)
   have h1 : 2 * m * (Set.IsAPOfLengthFree.maxCard k N) ≤
       2 * m * ((2 * (r k m) + 1) * N / (2 * m)) :=
