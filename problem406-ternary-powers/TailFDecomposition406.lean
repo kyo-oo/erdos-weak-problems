@@ -486,7 +486,8 @@ theorem cutword_diag_congr (s core : Nat) :
         ring
       have htermm : (lteCoeff s * 4^(3^s * core)) % 3^(s+1)
           = lteCoeff s % 3^(s+1) := by
-        rw [Nat.mul_mod, geo_term_mod s core, Nat.mul_one]
+        rw [Nat.mul_mod, geo_term_mod s core, Nat.mul_one,
+            Nat.mod_mod_of_dvd _ (dvd_refl _)]
       have hrhs : (lteCoeff s * (core+1)) % 3^(s+1)
           = ((lteCoeff s * core) % 3^(s+1)
               + lteCoeff s % 3^(s+1)) % 3^(s+1) := by
@@ -514,7 +515,7 @@ theorem prefix_slice_digit (m W q : Nat) (hm : 1 ≤ m) :
       Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
     omega
   have hmod : (1 + 3^m * W) % 3^m = 1 := by
-    rw [Nat.add_mul_mod_self_right, Nat.mod_eq_of_lt h1]
+    rw [Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt h1]
   have hdm := Nat.div_add_mod (1 + 3^m * W) (3^m)
   rw [hmod] at hdm
   -- hdm : 1 + 3^m * W = 3^m * ((1 + 3^m * W) / 3^m) + 1
@@ -557,7 +558,6 @@ theorem digit_residue_fire_iff (W q : Nat) :
     Nat.mod_lt _ (Nat.pow_pos (by decide))
   constructor
   · intro hd
-    -- digit two forces the quotient at the window top to be two
     have hdX : digit3 (W % 3^(q+1)) q = 2 := by
       rw [hcongr]
       exact hd
@@ -569,27 +569,34 @@ theorem digit_residue_fire_iff (W q : Nat) :
       omega
     have hdiv2 : (W % 3^(q+1)) / 3^q = 2 := by
       unfold digit3 at hdX
-      set A := (W % 3^(q+1)) / 3^q at *
-      omega
-    have hmul : 3^q * ((W % 3^(q+1)) / 3^q) = 3^q * 2 := by
-      rw [hdiv2]
-    omega
+      rw [← Nat.mod_eq_of_lt hdivlt]
+      exact hdX
+    calc 2 * 3^q ≤ 3^q * 2 := by ring
+      _ = 3^q * ((W % 3^(q+1)) / 3^q) := by rw [hdiv2]
+      _ ≤ 3^q * ((W % 3^(q+1)) / 3^q) + (W % 3^(q+1)) % 3^q :=
+          Nat.le_add_right _ _
+      _ = W % 3^(q+1) := hdm.symm
   · intro hge
-    -- the top-third residue forces the quotient to be two
+    have hlt2 : (W % 3^(q+1)) / 3^q < 3 := by
+      by_contra hge3
+      have h3 : 3 ≤ (W % 3^(q+1)) / 3^q := by omega
+      have hbig : 3^q * 3 ≤ 3^q * ((W % 3^(q+1)) / 3^q) :=
+        Nat.mul_le_mul_left _ h3
+      omega
     have hdiv : (W % 3^(q+1)) / 3^q = 2 := by
-      by_contra hne
-      rcases Nat.lt_or_ge ((W % 3^(q+1)) / 3^q) 2 with hlt2 | hge2
-      · have hle : (W % 3^(q+1)) / 3^q ≤ 1 := by omega
+      rcases Nat.lt_trichotomy ((W % 3^(q+1)) / 3^q) 2 with h | h | h
+      · exfalso
+        have hle : (W % 3^(q+1)) / 3^q ≤ 1 := by omega
         have hsmall : 3^q * ((W % 3^(q+1)) / 3^q) ≤ 3^q * 1 :=
           Nat.mul_le_mul_left _ hle
         omega
-      · have h3 : 3 ≤ (W % 3^(q+1)) / 3^q := by omega
-        have hbig : 3^q * 3 ≤ 3^q * ((W % 3^(q+1)) / 3^q) :=
-          Nat.mul_le_mul_left _ h3
+      · exact h
+      · exfalso
         omega
     have hdX : digit3 (W % 3^(q+1)) q = 2 := by
       unfold digit3
       rw [hdiv]
+      decide
     rw [← hcongr]
     exact hdX
 
@@ -987,19 +994,63 @@ theorem pow4_lt_three_pow (K : Nat) : 4^K < 3^(3*K+1) := by
     omega
   omega
 
-/-- The successor tail bound: `4^(K+1) < 3^(3K+3)` (the frozen-carry
+/-- Strict base monotonicity: `a < b` and `e ≥ 1` give `a^e < b^e`
+(the CapLaw kernel's own law, ported verbatim). -/
+theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
+    a^e < b^e := by
+  obtain ⟨f, rfl⟩ : ∃ f : Nat, e = f + 1 := ⟨e - 1, by omega⟩
+  clear he
+  induction f with
+  | zero =>
+    rw [Nat.zero_add, Nat.pow_one, Nat.pow_one]
+    exact h
+  | succ f ih =>
+    show a^(f+1+1) < b^(f+1+1)
+    by_cases ha0 : a = 0
+    · -- a = 0: 0^(f+2) = 0 < b^(f+2) since b ≥ 1
+      subst ha0
+      have hb : 0 < b := by omega
+      have hbp : 0 < b^(f+2) := Nat.pow_pos hb
+      rw [Nat.pow_succ (0:Nat) (f+1), Nat.mul_zero]
+      exact hbp
+    · -- 1 ≤ a: the strict monotonicity route (positivity available)
+      have hapos : 0 < a := by omega
+      have h1 : a^(f+1) * a < a^(f+1) * b := by
+        obtain ⟨s, hs⟩ : ∃ s : Nat, b = a + s + 1 := ⟨b - a - 1, by omega⟩
+        have hexp : a^(f+1) * (a + s + 1)
+            = a^(f+1) * a + (s + 1) * a^(f+1) := by
+          ring
+        have hstep : 0 < (s + 1) * a^(f+1) := by
+          have hpos : 0 < a^(f+1) := Nat.pow_pos hapos
+          obtain ⟨k, hk⟩ : ∃ k : Nat, a^(f+1) = k + 1 :=
+            ⟨a^(f+1) - 1, by omega⟩
+          rw [hk]
+          have hms : (s + 1) * (k + 1) = (s + 1) * k + (s + 1) :=
+            Nat.mul_succ (s + 1) k
+          rw [hms]
+          omega
+        rw [hs, hexp]
+        omega
+      have h2 : a^(f+1) * b ≤ b^(f+1) * b := by
+        have hle : a^(f+1) ≤ b^(f+1) := Nat.le_of_lt ih
+        obtain ⟨t, ht⟩ : ∃ t : Nat, b^(f+1) = a^(f+1) + t :=
+          ⟨b^(f+1) - a^(f+1), by omega⟩
+        have hexp : (a^(f+1) + t) * b = a^(f+1) * b + t * b := by ring
+        rw [ht, hexp]
+        omega
+      calc a^(f+1+1) = a^(f+1) * a := Nat.pow_succ a (f+1)
+        _ < a^(f+1) * b := h1
+        _ ≤ b^(f+1) * b := h2
+        _ = b^(f+1+1) := (Nat.pow_succ b (f+1)).symm
+
 engine). -/
 theorem pow4_succ_lt (K : Nat) : 4^(K+1) < 3^(3*K+3) := by
   have h3eq : (3:Nat)^(3*K+3) = 27^(K+1) := by
     rw [show (27:Nat) = 3^3 from rfl, ← Nat.pow_mul]
     congr 1
     omega
-  have hle : 4^K ≤ 27^K :=
-    pow_mono_base 4 27 K (by decide : (4:Nat) ≤ 27)
-  have hpos : 0 < (27:Nat)^K := Nat.pow_pos (by decide)
-  rw [h3eq, Nat.pow_succ, Nat.pow_succ]
-  calc 4 * 4^K ≤ 4 * 27^K := Nat.mul_le_mul_left _ hle
-    _ < 27 * 27^K := by omega
+  rw [h3eq]
+  exact pow_lt_mono_base 4 27 (K+1) (by decide : (4:Nat) < 27) (by omega)
 
 /-- **THE FROZEN TAIL (NEW).**  Beyond position `3K+3` the wave of
 `4^K` is frozen: digit zero, carry zero, and the exact jump is TEN —
@@ -1109,13 +1160,13 @@ owns a ternary digit two. -/
 theorem cantorian_base (K : Nat) (hK8 : 8 ≤ K) (hK500 : K ≤ 500) :
     ∃ p : Nat, digit3 (4^K) p = 2 := by
   rcases Nat.lt_or_ge K (8 + 251) with hlt | hge
-    have hc := (List.all_eq_true.mp base_chunk_one) (K - 8)
+  · have hc := (List.all_eq_true.mp base_chunk_one) (K - 8)
       (List.mem_range.mpr (by omega))
     unfold baseCaseB at hc
     rw [show 8 + (K - 8) = K from by omega] at hc
     obtain ⟨p, _, hd⟩ := (hasTwoScan_iff 632 _).mp hc
     exact ⟨p, hd⟩
-    have hc := (List.all_eq_true.mp base_chunk_two) (K - 8 - 251)
+  · have hc := (List.all_eq_true.mp base_chunk_two) (K - 8 - 251)
       (List.mem_range.mpr (by omega))
     unfold baseCaseB at hc
     rw [show 8 + (251 + (K - 8 - 251)) = K from by omega] at hc
@@ -1179,7 +1230,8 @@ theorem erdos406_crown_v3
       hasTwo_of_digit (4^(n / 2)) p hp
     have h2n : 2^n = 4^(n / 2) := by
       rw [hm, two_pow_two_mul]
-    rw [h2n]
+      congr 1
+      omega
     exact has_two_imp_not_no_two (4^(n / 2)) hhas
   · have hnodd : n = 2 * (n / 2) + 1 := by omega
     have hmod : (2^n) % 3 = 2 := by
@@ -1188,7 +1240,6 @@ theorem erdos406_crown_v3
         rw [two_pow_two_mul]
         exact pow4_mod3 _
       rw [Nat.mul_mod, h2m]
-      decide
     have hdig : digit3 (2^n) 0 = 2 := by
       unfold digit3
       rw [Nat.pow_zero, Nat.div_one, hmod]

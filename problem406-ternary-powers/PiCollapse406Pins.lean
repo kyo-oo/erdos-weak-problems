@@ -590,7 +590,7 @@ theorem pin_of_W_congruence (u π D : Nat)
     have hcancel := dvd_of_unit_mul_cancel 61 (2 * W61) (u - π) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have huπ : u = π + 3^61 * t := by omega
-    rw [huπ, Nat.add_mul_mod_self_right, Nat.mod_eq_of_lt hπlt]
+    rw [huπ, Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt hπlt]
   · have hgt : u < π := by omega
     have hE : (2 * W61 * π + D) - (2 * W61 * u + D)
         = 2 * W61 * (π - u) := by
@@ -603,7 +603,7 @@ theorem pin_of_W_congruence (u π D : Nat)
     obtain ⟨t, ht⟩ := hcancel
     have hπu : π = u + 3^61 * t := by omega
     have hmod : u % 3^61 = π % 3^61 := by
-      rw [hπu, Nat.add_mul_mod_self_right]
+      rw [hπu, Nat.add_mul_mod_self_left]
     rw [hmod, Nat.mod_eq_of_lt hπlt]
 
 /-- The ghost-to-W congruence, family four: head one, `D = 7`. -/

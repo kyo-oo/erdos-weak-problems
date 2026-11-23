@@ -791,7 +791,7 @@ theorem pin100_of_W_congruence (u π D : Nat)
     have hcancel := dvd_of_unit_mul_cancel 100 (2 * W100) (u - π) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have huπ : u = π + 3^100 * t := by omega
-    rw [huπ, Nat.add_mul_mod_self_right, Nat.mod_eq_of_lt hπlt]
+    rw [huπ, Nat.add_mul_mod_self_left, Nat.mod_eq_of_lt hπlt]
   · have hgt : u < π := by omega
     have hE : (2 * W100 * π + D) - (2 * W100 * u + D)
         = 2 * W100 * (π - u) := by
@@ -804,7 +804,7 @@ theorem pin100_of_W_congruence (u π D : Nat)
     obtain ⟨t, ht⟩ := hcancel
     have hπu : π = u + 3^100 * t := by omega
     have hmod : u % 3^100 = π % 3^100 := by
-      rw [hπu, Nat.add_mul_mod_self_right]
+      rw [hπu, Nat.add_mul_mod_self_left]
     rw [hmod, Nat.mod_eq_of_lt hπlt]
 
 /-- The ghost-to-W congruence at depth 100, family four (head one). -/
@@ -1089,7 +1089,8 @@ theorem erdos406_crown_v2
       hasTwo_of_digit (4^(n / 2)) p hp
     have h2n : 2^n = 4^(n / 2) := by
       rw [hm, two_pow_two_mul]
-    rw [h2n]
+      congr 1
+      omega
     exact has_two_imp_not_no_two (4^(n / 2)) hhas
   · have hnodd : n = 2 * (n / 2) + 1 := by omega
     have hmod : (2^n) % 3 = 2 := by
@@ -1098,7 +1099,6 @@ theorem erdos406_crown_v2
         rw [two_pow_two_mul]
         exact pow4_mod3 _
       rw [Nat.mul_mod, h2m]
-      decide
     have hdig : digit3 (2^n) 0 = 2 := by
       unfold digit3
       rw [Nat.pow_zero, Nat.div_one, hmod]
