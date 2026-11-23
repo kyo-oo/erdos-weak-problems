@@ -575,7 +575,7 @@ theorem digit_residue_fire_iff (W q : Nat) :
       _ = 3^q * ((W % 3^(q+1)) / 3^q) := by rw [hdiv2]
       _ ≤ 3^q * ((W % 3^(q+1)) / 3^q) + (W % 3^(q+1)) % 3^q :=
           Nat.le_add_right _ _
-      _ = W % 3^(q+1) := hdm.symm
+      _ = W % 3^(q+1) := hdm
   · intro hge
     have hlt2 : (W % 3^(q+1)) / 3^q < 3 := by
       by_contra hge3
@@ -596,7 +596,6 @@ theorem digit_residue_fire_iff (W q : Nat) :
     have hdX : digit3 (W % 3^(q+1)) q = 2 := by
       unfold digit3
       rw [hdiv]
-      decide
     rw [← hcongr]
     exact hdX
 
@@ -1043,6 +1042,7 @@ theorem pow_lt_mono_base (a b e : Nat) (h : a < b) (he : 1 ≤ e) :
         _ ≤ b^(f+1) * b := h2
         _ = b^(f+1+1) := (Nat.pow_succ b (f+1)).symm
 
+/-- The successor tail bound: `4^(K+1) < 3^(3K+3)` (the frozen-carry
 engine). -/
 theorem pow4_succ_lt (K : Nat) : 4^(K+1) < 3^(3*K+3) := by
   have h3eq : (3:Nat)^(3*K+3) = 27^(K+1) := by
@@ -1232,6 +1232,7 @@ theorem erdos406_crown_v3
       rw [hm, two_pow_two_mul]
       congr 1
       omega
+    rw [h2n]
     exact has_two_imp_not_no_two (4^(n / 2)) hhas
   · have hnodd : n = 2 * (n / 2) + 1 := by omega
     have hmod : (2^n) % 3 = 2 := by
