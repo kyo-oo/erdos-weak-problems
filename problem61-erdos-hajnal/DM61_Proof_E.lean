@@ -266,7 +266,7 @@ theorem last_exit_aux {α : Type} (G : SimpleGraph α) (u : α) :
   | append a b hrec hadj ih =>
       intro hau hcu
       by_cases hau' : a = u
-      · refine ⟨⟨b, hcu⟩, ?_, fun _ => GReach.refl ⟨b, hcu⟩⟩
+      · refine ⟨⟨b, hcu⟩, ?_, fun hj => GReach.refl ⟨b, hj⟩⟩
         show G.Adj u (b : α)
         rw [← hau']
         exact hadj
@@ -416,8 +416,8 @@ theorem caseA {α : Type} (G : SimpleGraph α) (u : α)
     have hisoC : ∀ v : α, ¬ (Gᶜ).Adj u v := by
       intro v hv
       rcases eq_or_ne v u with rfl | hne
-      · exact (SimpleGraph.compl_adj.mp hv).1 rfl
-      · exact (SimpleGraph.compl_adj.mp hv).2 (huniv ⟨v, hne⟩)
+      · exact ((SimpleGraph.compl_adj G u v).mp hv).1 rfl
+      · exact ((SimpleGraph.compl_adj G u v).mp hv).2 (huniv ⟨v, hne⟩)
     have hreachC := hconnC u (y' : α)
     have hyu : (y' : α) = u := reach_isolated (Gᶜ) u hisoC hreachC
     exact y'.2 hyu.symm
@@ -509,7 +509,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
       intro α _ _ hcard h2 _ _
       exfalso
       omega
-  | succ n =>
+  | succ n ih =>
       intro α _ _ hcard h2 G hP4
       by_cases hbase : Fintype.card α = 2
       · -- THE n = 2 BASE: the edge dichotomy (the world fact by the
@@ -548,7 +548,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
             have hym : he.symm (1 : Fin 2) ∈
                 ({he.symm (0 : Fin 2)} : Finset α) := by
               rw [hful]; exact Finset.mem_univ _
-            exact hxy (Finset.mem_singleton.1 hym)
+            exact hxy (Finset.mem_singleton.1 hym).symm
           · intro a ha b hb hadjC
             have hax : a = he.symm (0 : Fin 2) := Finset.mem_singleton.1 ha
             have hbx : b ≠ he.symm (0 : Fin 2) :=
@@ -558,7 +558,7 @@ theorem seinsche_split_aux (n : ℕ) : ∀ (α : Type) [Fintype α] [DecidableEq
               · exact absurd h hbx
               · exact h
             rw [hax, hby] at hadjC
-            exact (SimpleGraph.compl_adj.mp hadjC).2 hadj
+            exact ((SimpleGraph.compl_adj G _ _).mp hadjC).2 hadj
         · -- The pair is G-edgeless: {x} separates G.
           refine Or.inl ⟨{he.symm (0 : Fin 2)},
             ⟨he.symm (0 : Fin 2), Finset.mem_singleton.2 rfl⟩, ?_, ?_⟩
@@ -683,30 +683,37 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
         exact absurd ha (Set.notMem_empty a)
       · have h1 : (∅ : Finset α).card = 0 := Finset.card_empty
         omega
-  | succ n =>
+  | succ n ih =>
       intro α _ _ hcard G hP4
       by_cases hsmall : Fintype.card α ≤ 1
       · -- The ≤ 1 world: the full vertex set is both independent and a
         -- clique (no distinct pairs exist).
         by_cases h0 : Fintype.card α = 0
-        · have hemp : IsEmpty α := Fintype.card_eq_zero.1 h0
-          refine ⟨∅, ∅, ?_, ?_, ?_⟩
+        · refine ⟨∅, ∅, ?_, ?_, ?_⟩
           · intro a ha _ _ _
-            exact absurd ha (Set.notMem_empty a)
+            exact absurd ha (by simp)
           · intro a ha _ _ _
-            exact absurd ha (Set.notMem_empty a)
+            exact absurd ha (by simp)
           · have h1' : (∅ : Finset α).card = 0 := Finset.card_empty
             omega
-        · have h1 : Fintype.card α = 1 := by omega
-          obtain ⟨hu⟩ := Fintype.card_eq_one.1 h1
-          haveI := hu
+        · have hnods : ∀ a b : α, a ≠ b → False := by
+            intro a b hab
+            have hinj : Function.Injective (fun i : Fin 2 => ![a, b] i) := by
+              intro i j h
+              fin_cases i <;> fin_cases j <;>
+                simp_all [Matrix.cons_val_zero, Matrix.cons_val_one,
+                  Matrix.cons_val_two, Matrix.cons_val_succ, Matrix.head_cons]
+            have hcard := Fintype.card_le_of_injective
+              (fun i : Fin 2 => ![a, b] i) hinj
+            simp at hcard
+            omega
           refine ⟨Finset.univ, Finset.univ, ?_, ?_, ?_⟩
           · intro a _ b _ hab
-            exact absurd hab (Subsingleton.elim a b)
+            exact absurd hab hnods
           · intro a _ b _ hab
-            exact absurd hab (Subsingleton.elim a b)
-          · have h1' : (Finset.univ : Finset α).card = 1 := by
-              rw [Finset.card_univ, h1]
+            exact absurd hab hnods
+          · have h1' : (Finset.univ : Finset α).card = Fintype.card α :=
+              Finset.card_univ
             omega
       · -- The ≥ 2 world: split by Seinsche.
         have h2 : 2 ≤ Fintype.card α := by omega
@@ -716,7 +723,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hy' : ∃ y : α, y ∈ Finset.univ \ s := by
             by_contra hcon
             push_neg at hcon
-            refine hsne' (Finset.eq_univ_iff_forall.2 fun a _ => ?_)
+            refine hsne' (Finset.eq_univ_iff_forall.2 fun a => ?_)
             by_contra has
             exact hcon a (Finset.mem_sdiff.2 ⟨Finset.mem_univ a, has⟩)
           obtain ⟨y, hy⟩ := hy'
@@ -732,7 +739,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hcard1 : Fintype.card {x : α // x ∈ s} = s.card :=
             Fintype.card_coe s
           have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
-              (Finset.univ \ s).card := Fintype.card_coe (Finset.univ \ s)
+              (Finset.univ \ s).card := by simp
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
             rw [hcard1]; omega
           have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
@@ -891,7 +898,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hy' : ∃ y : α, y ∈ Finset.univ \ s := by
             by_contra hcon
             push_neg at hcon
-            refine hsne' (Finset.eq_univ_iff_forall.2 fun a _ => ?_)
+            refine hsne' (Finset.eq_univ_iff_forall.2 fun a => ?_)
             by_contra has
             exact hcon a (Finset.mem_sdiff.2 ⟨Finset.mem_univ a, has⟩)
           obtain ⟨y, hy⟩ := hy'
@@ -907,7 +914,7 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hcard1 : Fintype.card {x : α // x ∈ s} = s.card :=
             Fintype.card_coe s
           have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
-              (Finset.univ \ s).card := Fintype.card_coe (Finset.univ \ s)
+              (Finset.univ \ s).card := by simp
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
             rw [hcard1]; omega
           have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by

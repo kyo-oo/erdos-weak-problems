@@ -84,7 +84,7 @@ theorem sum_const_nat (Q : Finset ℕ) (c : ℕ) :
       ring
 
 /-- The DIY biUnion-card bound (zero API risk, the card_union_le induction). -/
-theorem card_bUnion_le' {β : Type} (Q : Finset ℕ) (F : ℕ → Finset β) :
+theorem card_bUnion_le' {β : Type} [DecidableEq β] (Q : Finset ℕ) (F : ℕ → Finset β) :
     (Q.biUnion F).card ≤ ∑ q ∈ Q, (F q).card := by
   classical
   induction Q using Finset.induction_on with
@@ -178,9 +178,9 @@ theorem aff_k (k m a d : ℕ) (hk : 2 ≤ k) (hd : 1 ≤ d) (S : Finset ℕ)
       have hje' : j + 1 = a' + i * d' := hje
       have hSj : a + j * d ∈ S := (Finset.mem_filter.1 hj).2
       have hyj : y = a + j * d := by
-        rw [← hie]
+        have hie' : a + (a' + i * d' - 1) * d = y := hie
         have h1 : a' + i * d' - 1 = j := by omega
-        omega
+        rw [← hie', h1]
       rw [hyj]
       exact Finset.mem_coe.2 hSj
     -- W is an official k-AP with first term A and difference D
@@ -276,7 +276,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
   set bandS : Finset ℕ := S.filter
     (fun x => (m - 1) * D0 ≤ x - 1 ∧ (m - 1) * D0 ≤ N - x) with hbandS
   -- The copy-index Finset Q := {(d, a) : 1 ≤ d ≤ D0, 1 ≤ a ≤ N, a+(m-1)d ≤ N}
-  set Q : Finset ℕ :=
+  set Q : Finset (ℕ × ℕ) :=
     ((Finset.Icc 1 D0).product (Finset.Ico 1 (N + 1))).filter
       (fun q => q.2 + (m - 1) * q.1 ≤ N) with hQ
   -- The incidence Finset P := {(x, (d, j)) : x ∈ S, 1 ≤ d ≤ D0, j < m,
@@ -299,7 +299,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     have ha := Finset.mem_Icc.1 hp2a
     have hb := Finset.mem_Ico.1 hp2b
     have hx := hxmem p.1 hp1
-    exact ⟨hp1, ha.1, ha.2, hb, hv1, hv2, hx.1⟩
+    exact ⟨hp1, ha.1, ha.2, hb.2, hv1, hv2, hx.1⟩
   -- |Q| ≤ D0 * N
   have hQcard : Q.card ≤ D0 * N := by
     have hQsub : Q ⊆ (Finset.Icc 1 D0).product (Finset.Ico 1 (N + 1)) :=
@@ -354,8 +354,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       exact Finset.mem_filter.2 ⟨Finset.mem_product.2 ⟨hpS, hp2⟩,
         ⟨hval1, hval2⟩⟩
     have h1 := Finset.card_mono hsub
-    rw [Finset.card_product, Finset.card_product,
-      Finset.card_product] at h1
+    simp only [Finset.card_product] at h1
     have h2 : (Finset.Icc 1 D0).card = D0 := by rw [Nat.card_Icc]; omega
     have h3 : (Finset.Ico 0 m).card = m := by rw [Nat.card_Ico]; omega
     omega
@@ -446,7 +445,11 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     omega
   -- THE CANCELLATION: |bandS| * m ≤ (r k m) * N
   have hcancel : bandS.card * m ≤ (r k m) * N := by
-    have h1 : bandS.card * (D0 * m) ≤ (r k m) * (D0 * N) := le_trans hlower hupper
+    have h1 : bandS.card * (D0 * m) ≤ (r k m) * (D0 * N) := by
+      have hA := le_trans hlower hupper
+      have hB : (r k m) * Q.card ≤ (r k m) * (D0 * N) :=
+        Nat.mul_le_mul_left _ hQcard
+      exact le_trans hA hB
     by_contra hcon
     push_neg at hcon
     have h2 : (r k m) * N < bandS.card * m := hcon
@@ -503,17 +506,20 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     omega
   -- THE FINAL ASSEMBLY (all integer)
   have hfinal : 2 * m * S.card ≤ (2 * (r k m) + 1) * N := by
-    have e1 : (2 * (r k m) + 1) * N = 2 * ((r k m) * N) + N := by ring
-    have h1 : 2 * m * S.card ≤ 2 * m * (bandS.card + 2 * ((m - 1) * D0)) :=
-      Nat.mul_le_mul_left (2 * m) hfringe
-    have e2 : 2 * m * (bandS.card + 2 * ((m - 1) * D0))
-        = 2 * (bandS.card * m) + 4 * m * ((m - 1) * D0) := by ring
+    have h1 : 2 * m * S.card
+        ≤ 2 * (bandS.card * m) + 4 * m * ((m - 1) * D0) := by
+      calc 2 * m * S.card ≤ 2 * m * (bandS.card + 2 * ((m - 1) * D0)) :=
+            Nat.mul_le_mul_left (2 * m) hfringe
+        _ = 2 * (bandS.card * m) + 4 * m * ((m - 1) * D0) := by ring
     have h2 : 2 * (bandS.card * m) ≤ 2 * ((r k m) * N) :=
       Nat.mul_le_mul_left 2 hcancel
     have h3 : 4 * m * ((m - 1) * D0) ≤ N := by
       have e3 : 4 * m * ((m - 1) * D0) = 4 * m * (m - 1) * D0 := by ring
       rw [e3]
       exact hF3
+    have e1 : (2 * (r k m) + 1) * N = 2 * ((r k m) * N) + N := by ring
+    have h4 : 2 * (bandS.card * m) + 4 * m * ((m - 1) * D0)
+        ≤ 2 * ((r k m) * N) + N := by omega
     omega
   exact hfinal
 
@@ -560,7 +566,7 @@ theorem v_gen (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m) (hN : 16 * m * m ≤ N
         rw [← hcardt']; exact hle
       have hbad' : k ≤ 1 := by exact_mod_cast hbad
       omega
-    · rintro ⟨S, hSsub, hSfree, rfl⟩
+    · rintro n ⟨S, hSsub, hSfree, rfl⟩
       have h2 := v_gen_witness k m N hk hm hN S hSsub hSfree
       exact (Nat.le_div_iff_mul_le (2 * m)).2
         (by rw [Nat.mul_comm S.card (2 * m)]; exact h2)
