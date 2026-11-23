@@ -571,7 +571,7 @@ theorem digit_residue_fire_iff (W q : Nat) :
       unfold digit3 at hdX
       rw [← Nat.mod_eq_of_lt hdivlt]
       exact hdX
-    calc 2 * 3^q ≤ 3^q * 2 := by ring
+    calc 2 * 3^q ≤ 3^q * 2 := Nat.le_of_eq (by ring)
       _ = 3^q * ((W % 3^(q+1)) / 3^q) := by rw [hdiv2]
       _ ≤ 3^q * ((W % 3^(q+1)) / 3^q) + (W % 3^(q+1)) % 3^q :=
           Nat.le_add_right _ _
@@ -1048,7 +1048,6 @@ theorem pow4_succ_lt (K : Nat) : 4^(K+1) < 3^(3*K+3) := by
   have h3eq : (3:Nat)^(3*K+3) = 27^(K+1) := by
     rw [show (27:Nat) = 3^3 from rfl, ← Nat.pow_mul]
     congr 1
-    omega
   rw [h3eq]
   exact pow_lt_mono_base 4 27 (K+1) (by decide : (4:Nat) < 27) (by omega)
 
