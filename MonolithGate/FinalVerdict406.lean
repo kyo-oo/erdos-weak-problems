@@ -159,499 +159,499 @@ theorem erdos406_climb_base :
         HappyCell (carry4 (4^K) p) (digit3 (4^K) p) := by
   intro K hK8 hK500
   interval_cases K
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨14, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨20, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨19, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨15, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨14, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨20, by decide, by decide⟩
-  exact ⟨27, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨20, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨28, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨29, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨15, by decide, by decide⟩
-  exact ⟨15, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨26, by decide, by decide⟩
-  exact ⟨24, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨19, by decide, by decide⟩
-  exact ⟨19, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨23, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨40, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨14, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨25, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨21, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨28, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨15, by decide, by decide⟩
-  exact ⟨15, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨26, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨23, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨19, by decide, by decide⟩
-  exact ⟨17, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨22, by decide, by decide⟩
-  exact ⟨25, by decide, by decide⟩
-  exact ⟨18, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨11, by decide, by decide⟩
-  exact ⟨12, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨9, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨5, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨10, by decide, by decide⟩
-  exact ⟨15, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨6, by decide, by decide⟩
-  exact ⟨14, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨8, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨4, by decide, by decide⟩
-  exact ⟨13, by decide, by decide⟩
-  exact ⟨16, by decide, by decide⟩
-  exact ⟨41, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨7, by decide, by decide⟩
-  exact ⟨3, by decide, by decide⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨14, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨20, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨19, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨15, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨14, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨20, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨27, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨20, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨28, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨29, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨15, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨15, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨26, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨24, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨19, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨19, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨23, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨40, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨14, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨25, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨21, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨28, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨15, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨15, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨26, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨23, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨19, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨17, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨22, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨25, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨18, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨11, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨12, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨9, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨5, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨10, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨15, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨6, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨14, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨8, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨4, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨13, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨16, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨41, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨7, by decide, by norm_num [HappyCell, carry4, digit3]⟩
+  exact ⟨3, by decide, by norm_num [HappyCell, carry4, digit3]⟩
 
 /-- **THE CLIMB FROM BASE AND TAIL.**  The full climb primitive follows
 from the kernel-certified base band plus the tail above five hundred —

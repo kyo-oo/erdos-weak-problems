@@ -59,6 +59,7 @@ theorem mul_mod_pow (k M : Nat) :
       _ = 3^k * (M % 3) + 3^(k+1) * (M / 3) := by rw [Nat.pow_succ]; ring
   rw [hE, Nat.add_mul_mod_self_left]
   exact Nat.mod_eq_of_lt (by
+    have hp : (0:Nat) < 3^k := Nat.pow_pos (by decide)
     have h1 : M % 3 < 3 := Nat.mod_lt _ (by decide)
     have h2 : 3^(k+1) = 3^k * 3 := by rw [Nat.pow_succ]
     have h3 : 3^k * (M % 3) ≤ 3^k * 2 := Nat.mul_le_mul_left _ (by omega)
@@ -69,19 +70,20 @@ theorem mul_mod_pow (k M : Nat) :
 times some trit `w < 3`. -/
 theorem exists_trit_split (x k : Nat) :
     ∃ w : Nat, w < 3 ∧ x % 3^(k+1) = x % 3^k + 3^k * w := by
+  have hp3 : 3^(k+1) = 3^k * 3 := by rw [Nat.pow_succ]
+  have hmod : x % 3^(k+1) % 3^k = x % 3^k :=
+    Nat.mod_mod_of_dvd _ (⟨3, by rw [Nat.pow_succ]⟩ : (3:Nat)^k ∣ 3^(k+1))
+  have hdm := Nat.div_add_mod (x % 3^(k+1)) (3^k)
+  rw [hmod] at hdm
   refine ⟨(x % 3^(k+1)) / 3^k, ?_, ?_⟩
-  · have hp3 : 3^(k+1) = 3^k * 3 := by rw [Nat.pow_succ]
+  · by_contra hcon
+    push_neg at hcon
+    have hbig : 3^k * 3 ≤ 3^k * ((x % 3^(k+1)) / 3^k) :=
+      Nat.mul_le_mul_left _ hcon
     have hRlt : x % 3^(k+1) < 3^(k+1) :=
       Nat.mod_lt _ (Nat.pow_pos (by decide))
-    have hle : 3^k * ((x % 3^(k+1)) / 3^k) ≤ x % 3^(k+1) :=
-      Nat.mul_div_le _ 3^k
-    have hlt2 : 3^k * ((x % 3^(k+1)) / 3^k) < 3^k * 3 := by omega
-    exact Nat.lt_of_mul_lt_mul_left hlt2
-  · have hmod : x % 3^(k+1) % 3^k = x % 3^k :=
-      Nat.mod_mod_of_dvd _ (⟨3, by rw [Nat.pow_succ]⟩ : (3:Nat)^k ∣ 3^(k+1))
-    have hdm := Nat.div_add_mod (x % 3^(k+1)) 3^k
-    rw [hmod] at hdm
     omega
+  · omega
 
 /-- **THE WRAPPED RESIDUE.**  For `X` in `[m, 2m)`, the residue of `X`
 modulo `m` is `X - m`. -/
@@ -155,15 +157,16 @@ theorem omega_tower_word_progression (core : Nat)
       = ((omegaCutWord (k-1) 1 * core) % 3^k
           + (3^k * t * core) % 3^k) % 3^k := Nat.add_mod _ _ _
   have hsplit : (omegaCutWord k 1 * core) % 3^k = T := by
-    rw [htk, Nat.add_mul, hAM, hmodkill, Nat.add_zero]
+    rw [htk, Nat.add_mul, hAM, hmodkill, Nat.add_zero,
+      Nat.mod_mod_of_dvd _ (dvd_refl _)]
     exact hTdef.symm
   -- KEY 2: the level-k+1 tower residue is 3^k * d + T
   have hT1mod : T1 % 3^k = T := by
-    rw [hT1def, Nat.mod_mod_of_dvd
+    rw [hT1def, Nat.mod_mod_of_dvd _
       (⟨3, by rw [Nat.pow_succ]⟩ : (3:Nat)^k ∣ 3^(k+1))]
     exact hsplit
   obtain ⟨d, hd⟩ : ∃ d : Nat, 3^k * d + T1 % 3^k = T1 :=
-    ⟨T1 / 3^k, Nat.div_add_mod T1 3^k⟩
+    ⟨T1 / 3^k, Nat.div_add_mod T1 (3^k)⟩
   rw [hT1mod] at hd
   -- hd : 3^k * d + T = T1
   -- KEY 3: the shape sandwich forces d = 1
@@ -260,7 +263,7 @@ theorem dust_candidate_two_classes (core : Nat)
   obtain ⟨b, hb, hbdef⟩ : ∃ b : Nat, b < 3 ∧
       core % 27 = core % 9 + 9 * b := by
     refine ⟨(core % 27) / 9, ?_, ?_⟩
-    · have hle : 9 * ((core % 27) / 9) ≤ core % 27 := Nat.mul_div_le _ 9
+    · have hdm9 := Nat.div_add_mod (core % 27) 9
       omega
     · have hdm := Nat.div_add_mod (core % 27) 9
       omega
@@ -360,11 +363,17 @@ theorem dust_core_class_determined (core core' : Nat)
       -- the two towers' level-k+1 words, in class form
       have hlin : (omegaCutWord k 1 * core) % 3^(k+1)
           = ((omegaCutWord k 1 * (core % 3^k)) % 3^(k+1) + 3^k * x) % 3^(k+1) := by
-        rw [hmodw (omegaCutWord k 1) core 3^(k+1), hcx,
+        have hW1 : (omegaCutWord k 1 * core) % 3^(k+1)
+            = (omegaCutWord k 1 * (core % 3^(k+1))) % 3^(k+1) :=
+          hmodw (omegaCutWord k 1) core (3^(k+1))
+        rw [hW1, hcx,
           tower_word_linear_in_trit k (core % 3^k) x hx]
       have hlin' : (omegaCutWord k 1 * core') % 3^(k+1)
           = ((omegaCutWord k 1 * (core' % 3^k)) % 3^(k+1) + 3^k * x') % 3^(k+1) := by
-        rw [hmodw (omegaCutWord k 1) core' 3^(k+1), hcx',
+        have hW1' : (omegaCutWord k 1 * core') % 3^(k+1)
+            = (omegaCutWord k 1 * (core' % 3^(k+1))) % 3^(k+1) :=
+          hmodw (omegaCutWord k 1) core' (3^(k+1))
+        rw [hW1', hcx',
           tower_word_linear_in_trit k (core' % 3^k) x' hx']
       -- the towers agree at level k, hence at level k+1 (progression)
       have hTk : (omegaCutWord (k-1) 1 * core) % 3^k
