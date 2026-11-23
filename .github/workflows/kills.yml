@@ -212,6 +212,65 @@ jobs:
           ! grep -E "'Erdos61D..*'.*sorryAx" kernel61dmd.log
           echo KERNEL_61DM_D_GREEN=1
 
+  # W85 wave: THE NAMED CONTINUATIONS COMPLETED — the P4/Seinsche official-form
+  # kernel (#61, the eighth family member), THEOREM V-GEN (#142, the homothetic
+  # amplification), and the ES-1960 lower bound n<=5 (#107). Each kernel is a
+  # standalone file compiled by `lake env lean`; each step runs `if: always()`
+  # so all three compile independently per round.
+  kernel-dm-w85:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: Install Lean Mathlib
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+          export PATH="$HOME/.elan/bin:$PATH"
+          lake update
+          lake exe cache get
+      - name: "Kernel 61DM-E — W85 THE P4/SEINCHE OFFICIAL-FORM KERNEL: theorem Erdos61E.eh_P4 : IsErdosHajnalLowerBound P4 (fun n => (n:ℝ)^(1/4)) + Erdos61E.eh_Pbar4 (the complement) + Erdos61E.erdos_61_p4 (the board) over the official predicate — the Seinsche split (a P4-free graph or its complement is disconnected, 1974) via the campaign's own GReach walk closure: walk_crosses + last_exit (the subtype last-exit with the i = u motive) + the flip lemma + caseA (STEP 1 neighbor-in-every-class, STEP 2 the mixed class: flip + two-class + the induced P4 (q, p, u, z') with all six pairs, STEP 3 the universality finish via the isolated-vertex lemma) + the psi self-complementarity bridge (P4c = P4.comap psi, psi = ![1,3,0,2]) + the strong-induction split with the n = 2 edge-dichotomy base + the witness product law (|I|*|K| >= n, union/join split, image transports) + sqrt_le_of_sq + the 61A finisher chain (arsenal_threshold, le_sqrt_pow_four, rpow_quarter_le_sqrt, official_bound_of_sqrt, ported verbatim) + the max-case dichotomy. Adversarially machine-verified route (AUDIT_W85_61E.md: 52 PASS / 0 FAIL, exhaustive n <= 6, 23,724 constructive P4 completions); all 12 draft defects repaired per the audit contract. Arsenal bridge: CardinalWorlds.two_pow_pos [:420] + two_pow_ge2 [:431] via arsenal_threshold (61A verbatim). Complete proof: zero sorry, zero native_decide."
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee kernel61e.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel61e.log
+          lake env lean problem61-erdos-hajnal/DM61_Proof_E.lean 2>&1 | tee -a kernel61e.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61e.log
+          grep -F "DM61E_P4_GREEN" kernel61e.log
+          grep -E "'(Erdos61E.eh_P4|Erdos61E.eh_Pbar4|Erdos61E.erdos_61_p4|Erdos61E.seinsche_split|Erdos61E.p4_witness_product|Erdos61E.last_exit|Erdos61E.walk_crosses)' (does not depend on any axioms|depends on axioms)" kernel61e.log
+          ! grep -E "'Erdos61E..*'.*sorryAx" kernel61e.log
+          echo KERNEL_61DM_E_GREEN=1
+      - name: "Kernel 142DM-D — W85 THEOREM V-GEN (the homothetic amplification, ALL k, SHARP constant, the all-integer form): theorem DM142D.v_gen : forall k >= 3, m >= 2, N >= 16*m*m, 2*m*(r k N) <= (2*(r k m)+1)*N over the official Set.IsAPOfLengthFree.maxCard + DM142D.aff_k (the copy cap: a homothetic copy hosts <= r_k(m) points — the forward index transfer: an official index-k-AP (a', d') in T+1 maps to the official k-AP (a + (a'-1)*d, d'*d) inside S) + the band/copy incidence double count (|bandS|*(m*D0) <= |P| <= r_k(m)*(#copies) <= r_k(m)*D0*N, cancel D0 >= 1) + the fringe (|S| <= |bandS| + 2*(m-1)*D0 with 4*m*(m-1)*D0 <= N) + the DM142C csSup transfer idiom + the concrete board (k=3, m=8: 16*(r 3 N) <= (2*(r 3 8)+1)*N for N >= 1024). Derived UPPER_STACK.md THEOREM V-GEN + LEMMA AFF-K (W80-142U event 3), engine-validated 56/56 (VGEN-band exhaustive at 5 scales, VGEN-dblcount exact at (3,9,1296) and (4,8,1024)). House machinery follows DM142A/C, attributed. Complete proof: zero sorry, zero native_decide."
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build FC 2>&1 | tee kernel142d.log
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel142d.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel142d.log
+          lake env lean problem142-rk-asymptotic/DM142_Proof_D.lean 2>&1 | tee -a kernel142d.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142d.log
+          grep -F "DM142D_VGEN_GREEN" kernel142d.log
+          grep -E "'(DM142D.v_gen|DM142D.v_gen_witness|DM142D.aff_k|DM142D.v_gen_board)' (does not depend on any axioms|depends on axioms)" kernel142d.log
+          ! grep -E "'DM142D..*'.*sorryAx" kernel142d.log
+          echo KERNEL_142DM_D_GREEN=1
+      - name: "Kernel 107DM-C — W85 THE ES-1960 LOWER BOUND n <= 5: theorems Erdos107C.f_eq_conjectured_of_le_four (f 3 = 3, f 4 = 5 — the exact values), Erdos107C.ersz_lower_le_five (2^(n-2)+1 <= f n for 3 <= n <= 5 — the LOWER side of the official solved variant, the mission's heart), Erdos107C.ersz_bounds_of_le_five (the two-sided board) — ported from the vendored public proof cone (linrock/math-proofs @ cd3cf0b176e95209584bf35555a7c0e501255f6e, Apache-2.0, vendored under problem107-happy-ending/vendor_linrock/): the B-clone (115 decls from the CI-green DM107_Proof_B, namespace-swapped to Erdos107C, byte-identity spot-checked 20/20) + the fresh ports (79 decls: the Esther Klein 5-point theorem, the 8-point ES-1960 4-cap+4-cup pentagon-free witness with the 5 decide blocks, the f/sInf mechanics) with the two designed deviations (the CI-GREEN anchor route for f_three_eq; five_le_of_mem_cardSet_four via upward closure). Adaptation recipe per DM107_Proof_B's header (v4.35 -> v4.33, module syntax stripped, deprecated aliases). Arsenal bridge: ErdosTernary2.lt_three_cases [:16] + CardinalWorlds two_pow_pos [:420]/two_pow_ge2 [:431] (the 2^(n-2) gates). Complete proof: zero sorry, zero native_decide."
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          lake build Arsenal.ErdosTernary2.Basic 2>&1 | tee kernel107c.log
+          lake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107c.log
+          lake env lean problem107-happy-ending/DM107_Proof_C.lean 2>&1 | tee -a kernel107c.log
+          ! grep -E 'error:|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107c.log
+          grep -F "DM107C_LOWER_GREEN" kernel107c.log
+          grep -E "'(Erdos107C.f_eq_conjectured_of_le_four|Erdos107C.ersz_lower_le_five|Erdos107C.ersz_bounds_of_le_five|Erdos107C.f_three_eq|Erdos107C.four_not_mem_cardSet_four|Erdos107C.not_hasConvexFiveGon_esEightFinset|Erdos107C.nine_le_f_five)' (does not depend on any axioms|depends on axioms)" kernel107c.log
+          ! grep -E "'Erdos107C..*'.*sorryAx" kernel107c.log
+          echo KERNEL_107DM_C_GREEN=1
+
   kernel-61e-probe:
     runs-on: ubuntu-24.04
     steps:

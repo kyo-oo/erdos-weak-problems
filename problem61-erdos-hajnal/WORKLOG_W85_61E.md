@@ -38,6 +38,16 @@ the eighth family member (completes erdos_61_family8: F7 + P4).
 - last_exit / seinsche_split / p4_witness_product / rpow tail: derived on
   paper above, bodies to write (next round).
 - NOT wired into kills.yml yet (the sorry draft must never touch CI).
+- W85-61E-A ADVERSARIAL AUDIT LANDED (AUDIT_W85_61E.md + audit61e_w85.py +
+  receipts61e_audit.txt, 52/0 GREEN): the ARCHITECTURE is sound (the caseA
+  route machine-verified exhaustively n≤6 + sampled n=7,8; the W82 §2
+  uniform-case sentence is DEFECTIVE — do not use; use the universality
+  finish). The DRAFT has 12 defects, incl. compl_comap FALSE as stated
+  (missing injectivity — critical path of caseB + ψ-bridge), last_exit's
+  statement ill-typed, GReach.trans's strategy broken (induct on h2), 2
+  transposed grid cells (lines 104/107), and 2 missing lemmas the §4
+  inventory must add (walk_crosses, isolated-vertex). All repairs
+  specified in the audit §4. Fix before CI.
 
 ## The API probe (kernel-61e-probe job, run on 10ee62c) receipts the
 connectivity/cograph surface — though the architecture now avoids ALL of it

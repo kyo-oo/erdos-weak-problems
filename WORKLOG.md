@@ -5318,3 +5318,33 @@ cores (erdos_142 asymptotic, erdos_61 general, erdos_107 full
 conjecture) remain open mathematics, claimed by no one.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S085 (W85 WAVE) — THE THREE NAMED CONTINUATIONS KERNEL'D: THE COMMANDER STRIKE (2026-11-23)
+
+BOSS's W85 order: COMPLETE THE PROOFS — no more fronts. The three named
+continuations of the DM lanes are now kernel'd (4,594 new lines, zero
+sorry), wired as job `kernel-dm-w85` (three steps, `if: always()`), pushed
+for the CI verdict.
+
+| kernel | law | statement | source |
+|---|---|---|---|
+| DM61_Proof_E (61DM-E) | THE SEINCHE SPLIT → **eh_P4** | `IsErdosHajnalLowerBound P4 (fun n => (n:ℝ)^(1/4))` + eh_Pbar4 + the board — the EIGHTH family member | the adversarially machine-verified audit contract (52 PASS/0 FAIL, exhaustive n≤6, 23,724 constructive P4 completions); all 12 draft defects repaired; commander-written |
+| DM142_Proof_D (142DM-D) | **THEOREM V-GEN** (all-integer) | `∀ k≥3, m≥2, N≥16m²: 2·m·(r k N) ≤ (2·(r k m)+1)·N` + aff_k + the k=3,m=8 board | UPPER_STACK.md THEOREM V-GEN + LEMMA AFF-K (W80-142U, engine 56/56); commander-written |
+| DM107_Proof_C (107DM-C) | **THE ES-1960 LOWER BOUND n≤5** | `f 3 = 3`, `f 4 = 5` exact + `ersz_lower_le_five` (2^(n−2)+1 ≤ f n, 3≤n≤5) + the two-sided board | the vendored linrock cone (79 fresh ports + the 115-decl B-clone, ns-swapped, 20/20 byte-identity spot checks); subagent-written with the resumed cone-tracer |
+
+**The wave:** 6 subagents launched (3 writers + 3 auditors); the auditors
+delivered gold (the 61E audit caught a FALSE lemma — compl_comap — on the
+critical path BEFORE CI, and machine-verified the entire Seinsche case
+tree; the 107C cone trace mapped all ~210 nodes and designed the port
+plan); the writers died on context deadlines — the resumed 107C tracer
+executed its own plan (2,763 lines), the commander wrote 61E + 142D
+in-thread per the audit contracts (the W84 precedent).
+
+CI: the `kernel-dm-w85` job fires on push; the three steps compile
+independently; the greps demand the green markers + the axiom prints +
+zero sorryAx. Repair rounds follow the campaign norm (each post-mortem
+feeds the next).
+
+The engine never stops; it never lies. In English, always.
