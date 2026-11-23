@@ -110,3 +110,47 @@ self-contained assault (406d pins / 406e ghost / 406f tailf, 18 error
 sites at r8) continues next rounds. No dressing.
 
 The engine never stops; it never lies.
+
+---
+
+## ROUND r9 VERDICT — THE HYPOTHESIS DISCHARGED, CI-GREEN
+
+Run 45247604312 (campaign @ 5b5fe86), job kernel-406gate: SUCCESS.
+THE RECEIPT, verbatim from the CI log:
+  MonolithGate/ErdosTernary2.lean:18525:0:
+  'erdos_even_conjecture_iff_tailF' depends on axioms:
+  [propext, Classical.choice, Quot.sound]
+Both directions, zero sorryAx, zero custom axioms. Also green:
+erdos_ternary_2_universal_of_tailF (:18493), the chokehold chain,
+four_power_omega_shadow_wave_tailF (GSTGraphV2OmegaWaveLaw:3023).
+Marker ERDOS406_MONOLITHGATE_HYPOTHESIS_DISCHARGED printed; all REAL
+gates passed (exit codes, error[:(] greps, sorryAx, marker, receipts).
+88 MonolithGate modules built at the exact pin. Also GREEN this run:
+kernel-406a, kernel-406b, kernel-406c, kernel-monolith, and the whole
+107/142/61/dm front (one dm-w85 failure, unrelated lane).
+
+## ROUND r10 — THE 406d/e/f REPAIR WAVE (44 fixes, pre-staged)
+
+- TailFDecomposition406.lean — 28 fixes: the add_mod_of_dvd MOVE (was
+  declared AFTER first use — the r8 fix landed in the wrong file), the
+  dead decide/omega removals (5 rw-auto-close sites), the pow_pos
+  signature drops (k/K), the calc flip (:768), the pow_mono_base port
+  (CapLaw's green law, replacing the misapplied Nat.pow_le_pow_of_le),
+  the hmod raw-form fix, the dvd absurd fix, the mul_one fix, the
+  mod_mod_of_dvd symm fix, the hdiv2 set+omega (nonlinear div atom),
+  the hsh mul_comm (v4.33 pow_succ right-mul form), the beq→simpa fix,
+  the census unfold+exponent-rw fixes (baseCaseB), the h2n congr+omega
+  (rw [hm] ate the RHS), hasTwo_of_digit → the ARSENAL ALIAS
+  (CardinalWorlds.hasTernaryTwo_of_digit, root, green, gstDigit ≡
+  digit3 defeq — kills the hallucinated asTernaryTwo.eq_def idiom).
+- GhostExtinction406.lean — 9 fixes: the :88 parse bomb (obtain in
+  equation-style body without by — TailF got the fix in r8, Ghost was
+  missed), the hidden pow_pos drop, the GREEN-VERBATIM hstab route
+  (rw [Nat.mul_mod, hcs, ← Nat.mul_mod] from PiCollapse406:264 — the
+  broken copy had [Nat.mul_mod, Nat.mul_mod, hcs]), the div_add_mod
+  symm (v4.33 orientation), the shared spine fixes (dead omega, mod
+  peel, absurd, hmod raw form, pow_pos σ).
+- PiCollapse406Pins.lean — 7 fixes: the latent twins of every TailF
+  scan-region defect (never exposed: r8's job was runner-killed at
+  minute 3, exit 143, infra not math), incl. the asTernaryTwo bomb.
+The engine never stops; it never lies.

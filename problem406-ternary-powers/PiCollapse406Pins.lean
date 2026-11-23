@@ -688,7 +688,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
   | zero =>
       intro n
       constructor
-      · intro h; exact absurd h (by decide)
+      · intro h; exact absurd h (by simp [hasTwoScan])
       · intro ⟨p, hp, _⟩; exact absurd hp (by omega)
   | succ B ih =>
       intro n
@@ -698,7 +698,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
       have hsh : ∀ p : Nat, digit3 n (p + 1) = digit3 (n / 3) p := by
         intro p
         unfold digit3
-        rw [Nat.pow_succ, Nat.div_div_eq_div_mul]
+        rw [Nat.pow_succ, Nat.div_div_eq_div_mul, Nat.mul_comm (3^p) (3:Nat)]
       by_cases hb : n % 3 = 2
       · have hbeq : (n % 3 == 2) = true := by rw [hb]; rfl
         simp only [hasTwoScan, hbeq, Bool.true_or]
@@ -706,10 +706,12 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
         · intro _
           exact ⟨0, by omega, by rw [h0, hb]⟩
         · intro _
-          rfl
+          simp [hasTwoScan, hbeq]
       · have hbeq : (n % 3 == 2) = false := by
           cases hbb : (n % 3 == 2) with
-          | true => exact absurd (Nat.eq_of_beq_eq_true hbb) hb
+          | true =>
+              have h22 : n % 3 = 2 := by simpa using hbb
+              exact absurd h22 hb
           | false => rfl
         simp only [hasTwoScan, hbeq, Bool.false_or]
         constructor
@@ -740,16 +742,18 @@ digit two: the kernel-decided census, both chunks, the full scan. -/
 theorem cantorian_base (K : Nat) (hK8 : 8 ≤ K) (hK500 : K ≤ 500) :
     ∃ p : Nat, digit3 (4^K) p = 2 := by
   rcases Nat.lt_or_ge K (8 + 251) with hlt | hge
-  · have hc := (List.all_eq_true.mp base_chunk_one) (K - 8)
+    have hc := (List.all_eq_true.mp base_chunk_one) (K - 8)
       (List.mem_range.mpr (by omega))
-    exact (hasTwoScan_iff 632 _).mp hc
-  · have hc := (List.all_eq_true.mp base_chunk_two) (K - 8 - 251)
+    unfold baseCaseB at hc
+    rw [show 8 + (K - 8) = K from by omega] at hc
+    obtain ⟨p, _, hd⟩ := (hasTwoScan_iff 632 _).mp hc
+    exact ⟨p, hd⟩
+    have hc := (List.all_eq_true.mp base_chunk_two) (K - 8 - 251)
       (List.mem_range.mpr (by omega))
-    have hsplit : 4^(8 + (251 + (K - 8 - 251))) = 4^K := by
-      congr 1
-      omega
-    rw [hsplit] at hc
-    exact (hasTwoScan_iff 632 _).mp hc
+    unfold baseCaseB at hc
+    rw [show 8 + (251 + (K - 8 - 251)) = K from by omega] at hc
+    obtain ⟨p, _, hd⟩ := (hasTwoScan_iff 632 _).mp hc
+    exact ⟨p, hd⟩
 
 /-! ## §8 The two-grant crown -/
 #print axioms PiCollapse406.cantorian_base  -- CK74 SECTION BOUNDARY
@@ -799,37 +803,8 @@ theorem two_pow_two_mul (K : Nat) : 2^(2*K) = 4^K := by
 /-- A ternary digit two at any position certifies the Arsenal's
 has-reader, by induction on the position (the `.eq_def` idiom). -/
 theorem hasTwo_of_digit : ∀ (n p : Nat), digit3 n p = 2 →
-    hasTernaryTwo n = true := by
-  intro n p
-  induction p generalizing n with
-  | zero =>
-      intro h
-      have h0 : digit3 n 0 = n % 3 := by
-        unfold digit3
-        rw [Nat.pow_zero, Nat.div_one]
-      rw [h0] at h
-      have hn0 : n ≠ 0 := by
-        intro hne
-        rw [hne, Nat.zero_mod] at h
-        exact absurd h (by decide)
-      rw [hasTernaryTwo.eq_def n, if_neg hn0, if_pos h]
-  | succ p ih =>
-      intro h
-      have hsh : digit3 n (p+1) = digit3 (n / 3) p := by
-        unfold digit3
-        rw [Nat.pow_succ, Nat.div_div_eq_div_mul]
-      rw [hsh] at h
-      have hne : n ≠ 0 := by
-        intro h0
-        rw [h0, Nat.zero_div] at h
-        unfold digit3 at h
-        rw [Nat.zero_div, Nat.zero_mod] at h
-        exact absurd h (by decide)
-      rw [hasTernaryTwo.eq_def n, if_neg hne]
-      by_cases h2 : n % 3 = 2
-      · rw [if_pos h2]
-      · rw [if_neg h2]
-        exact ih (n / 3) h
+    hasTernaryTwo n = true :=
+  fun n p hp => hasTernaryTwo_of_digit n p hp
 
 /-- **THE TWO-GRANT CROWN.**  The FULL Erdős #406 statement follows from
 exactly two named grants: (G1) ghost extinction — no core carries the

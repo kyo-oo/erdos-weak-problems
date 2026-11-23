@@ -94,7 +94,7 @@ theorem three_pow_unbounded : ∀ n : Nat, ∃ k : Nat, n < 3^k
   | n+1 => by
       obtain ⟨k, hk⟩ := three_pow_unbounded n
       refine ⟨k + 1, ?_⟩
-      have hp : 0 < 3^k := Nat.pow_pos (by decide) k
+      have hp : 0 < 3^k := Nat.pow_pos (by decide)
       have h3 : 3^(k+1) = 3^k * 3 := by rw [Nat.pow_succ]
       omega
 
@@ -161,6 +161,14 @@ theorem odd_mul_odd (a b : Nat) (ha : a % 2 = 1) (hb : b % 2 = 1) :
     (a * b) % 2 = 1 := by
   rw [Nat.mul_mod, ha, hb, Nat.mul_one]
 
+/-- Mod-zero folding: if `m ∣ b` then `(a + b) % m = a % m`. -/
+theorem add_mod_of_dvd (a b m : Nat) (hdvd : m ∣ b) :
+    (a + b) % m = a % m := by
+  obtain ⟨q, rfl⟩ := hdvd
+  first
+    | rw [Nat.add_mul_mod_self_left]
+    | rw [Nat.add_mul_mod_self_right]
+
 /-- **THE ODD DIAGONAL (NEW).**  Every tower coefficient is odd — the
 frozen diagonal is a dyadic unit (the six-adic skew's odd half). -/
 theorem lteCoeff_odd : ∀ r : Nat, lteCoeff r % 2 = 1
@@ -180,18 +188,9 @@ theorem lteCoeff_odd : ∀ r : Nat, lteCoeff r % 2 = 1
         exact odd_mul_odd _ _ h2 hc
       have hdvd : (2:Nat) ∣ 3^(r+1) * (lteCoeff r)^2 + 3^(2*r+1) * (lteCoeff r)^3 := by
         rw [Nat.dvd_iff_mod_eq_zero, Nat.add_mod, hA, hB]
-        decide
       simp only [lteCoeff]
       rw [Nat.add_assoc, add_mod_of_dvd _ _ _ hdvd]
       exact ih
-
-/-- Mod-zero folding: if `m ∣ b` then `(a + b) % m = a % m`. -/
-theorem add_mod_of_dvd (a b m : Nat) (hdvd : m ∣ b) :
-    (a + b) % m = a % m := by
-  obtain ⟨q, rfl⟩ := hdvd
-  first
-    | rw [Nat.add_mul_mod_self_left]
-    | rw [Nat.add_mul_mod_self_right]
 
 theorem lteCoeff_succ_mod (w : Nat) :
     lteCoeff (w+1) % 3^(w+1) = lteCoeff w % 3^(w+1) := by
@@ -271,7 +270,6 @@ theorem digit3_one_pos (p : Nat) (hp : 1 ≤ p) : digit3 1 p = 0 := by
       Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
     omega
   rw [Nat.div_eq_of_lt (by omega : (1:Nat) < 3^p)]
-  omega
 
 theorem lt_cut_residue (v r : Nat) (hr : r < 3) :
     1 + r * 3^(v+1) < 3^(v+2) := by
@@ -324,7 +322,8 @@ theorem pow4_cut_residue_exact (v u : Nat) :
     have hpow : 3^(v+2) = 3^(v+1) * 3 := by rw [Nat.pow_succ]
     rw [hpow]
     ring
-  rw [hsplit, Nat.add_mul_mod_self_left]
+  rw [hsplit, Nat.add_mul_mod_self_left,
+      Nat.mod_eq_of_lt (lt_cut_residue v (u % 3) (Nat.mod_lt _ (by decide)))]
 
 theorem valuation_decomp (K : Nat) :
     0 < K → ∃ v u : Nat, K = 3^v * u ∧ u % 3 ≠ 0 := by
@@ -365,7 +364,6 @@ theorem digit3_of_residue_two (R p : Nat) (hp1 : 1 ≤ p)
     rw [show (1:Nat) + 2 * 3^p = 1 + 3^p * 2 from by ring]
     rw [Nat.add_mul_div_left _ _ hp,
         Nat.div_eq_of_lt (by omega : (1:Nat) < 3^p), Nat.add_zero]
-    omega
   rw [hcongr, hzero]
 
 theorem pow4_mod3 (r : Nat) : 4^r % 3 = 1 := by
@@ -403,7 +401,7 @@ theorem rider_core_one (K : Nat) (hK : 0 < K)
   obtain ⟨v, u, hKu, hu3⟩ := valuation_decomp K hK
   have hlt : u % 3 < 3 := Nat.mod_lt _ (by decide)
   rcases ErdosTernary2.lt_three_cases (u % 3) hlt with h | h | h
-  · exact absurd (Nat.dvd_iff_mod_eq_zero.mpr h) hu3
+  · exact absurd h hu3
   · refine ⟨v, u, hKu, ?_, h⟩
     intro hd
     exact hu3 (Nat.dvd_iff_mod_eq_zero.mp hd)
@@ -412,10 +410,8 @@ theorem rider_core_one (K : Nat) (hK : 0 < K)
     rw [h] at hres
     have hv1 : 1 ≤ v + 1 := by omega
     have hfire : digit3 (4^K) (v+1) = 2 := by
-      have hmod : 4^K % 3^((v+1)+1) =
-          (1 + 2 * 3^(v+1)) % 3^((v+1)+1) := by
+      have hmod : 4^K % 3^((v+1)+1) = 1 + 2 * 3^(v+1) := by
         rw [show ((v:Nat)+1)+1 = v+2 from by omega, hKu, hres]
-        exact (Nat.mod_eq_of_lt (lt_cut_residue v 2 (by decide))).symm
       exact digit3_of_residue_two (4^K) (v+1) hv1 hmod
     exact hCant (v+1) hv1 hfire
 
@@ -490,7 +486,7 @@ theorem cutword_diag_congr (s core : Nat) :
         ring
       have htermm : (lteCoeff s * 4^(3^s * core)) % 3^(s+1)
           = lteCoeff s % 3^(s+1) := by
-        rw [Nat.mul_mod, geo_term_mod s core, Nat.one_mul]
+        rw [Nat.mul_mod, geo_term_mod s core, Nat.mul_one]
       have hrhs : (lteCoeff s * (core+1)) % 3^(s+1)
           = ((lteCoeff s * core) % 3^(s+1)
               + lteCoeff s % 3^(s+1)) % 3^(s+1) := by
@@ -518,10 +514,7 @@ theorem prefix_slice_digit (m W q : Nat) (hm : 1 ≤ m) :
       Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
     omega
   have hmod : (1 + 3^m * W) % 3^m = 1 := by
-    rw [Nat.add_mod, Nat.mul_mod, Nat.mod_self, Nat.zero_mul,
-        Nat.add_zero]
-    rw [Nat.mod_mod_of_dvd (1:Nat) (dvd_refl (3^m)),
-        Nat.mod_eq_of_lt h1]
+    rw [Nat.add_mul_mod_self_right, Nat.mod_eq_of_lt h1]
   have hdm := Nat.div_add_mod (1 + 3^m * W) (3^m)
   rw [hmod] at hdm
   -- hdm : 1 + 3^m * W = 3^m * ((1 + 3^m * W) / 3^m) + 1
@@ -576,6 +569,7 @@ theorem digit_residue_fire_iff (W q : Nat) :
       omega
     have hdiv2 : (W % 3^(q+1)) / 3^q = 2 := by
       unfold digit3 at hdX
+      set A := (W % 3^(q+1)) / 3^q at *
       omega
     have hmul : 3^q * ((W % 3^(q+1)) / 3^q) = 3^q * 2 := by
       rw [hdiv2]
@@ -596,7 +590,6 @@ theorem digit_residue_fire_iff (W q : Nat) :
     have hdX : digit3 (W % 3^(q+1)) q = 2 := by
       unfold digit3
       rw [hdiv]
-      decide
     rw [← hcongr]
     exact hdX
 
@@ -627,7 +620,8 @@ theorem pow4_low_digits_zero (s core p : Nat) (hp1 : 1 ≤ p) (hps : p ≤ s) :
   have h := digit3_mod_congr (4^(3^s * core)) 1 p
     (show 4^(3^s * core) % 3^(p+1) = 1 % 3^(p+1) from by
       rw [← Nat.mod_mod_of_dvd (4^(3^s * core)) hdvd,
-          ← Nat.mod_mod_of_dvd 1 hdvd, hmod])
+          ← Nat.mod_mod_of_dvd 1 hdvd, hmod]
+      exact (Nat.mod_mod_of_dvd (1:Nat) hdvd).symm)
   rw [h]
   exact digit3_one_pos p hp1
 
@@ -765,9 +759,9 @@ theorem six_adic_pair_saturation (d k t : Nat)
     rw [← Nat.pow_add]
     congr 1
     omega
-  calc 2^k * 3^k * (2^(2*t-k) * a)
-      = (2^k * 2^(2*t-k)) * (3^k * a) := by ring
-    _ = 2^(2*t) * (3^k * a) := by rw [hsub]
+  calc 2^(2*t) * (3^k * a)
+      = (2^k * 2^(2*t-k)) * (3^k * a) := by rw [hsub]
+    _ = 2^k * 3^k * (2^(2*t-k) * a) := by ring
 
 /-- The three-free cancellation (ported verbatim from kernel 75). -/
 theorem dvd_mul_cancel_three (g d : Nat) (hg : ¬ (3:Nat) ∣ g)
@@ -936,7 +930,9 @@ theorem carry4_lt_four (R p : Nat) : carry4 R p < 4 := by
   have hrem : (4 * (R % 3^p)) % 3^p < 3^p := Nat.mod_lt _ hp
   have hle : 3^p * 4 ≤ 3^p * ((4 * (R % 3^p)) / 3^p) :=
     Nat.mul_le_mul_left _ h4
-  have hcomb := Nat.le_trans hle (Nat.le_add_right _ _)
+  have hcomb := Nat.le_trans hle
+    (Nat.le_add_right (3^p * ((4 * (R % 3^p)) / 3^p))
+      ((4 * (R % 3^p)) % 3^p))
   rw [← hdm] at hcomb
   have hlt : 4 * (R % 3^p) < 4 * 3^p := by omega
   have hmul : 4 * 3^p = 3^p * 4 := by ring
@@ -968,10 +964,19 @@ theorem cantorian_jump_wall (K : Nat) (hCant : CantorianPower K) :
     (carry4_lt_four _ _) (digit3_lt_three _ _)
     (fun h => cell_not_happy_of_cantorian K hCant p h)
 
+/-- Base monotonicity: `a ≤ b` gives `a^e ≤ b^e` (the CapLaw kernel's
+own law, ported verbatim). -/
+theorem pow_mono_base (a b e : Nat) (h : a ≤ b) : a^e ≤ b^e := by
+  induction e with
+  | zero => rfl
+  | succ e ih =>
+    rw [Nat.pow_succ, Nat.pow_succ]
+    exact Nat.mul_le_mul ih h
+
 /-- The size law for the tail bound: `4^K < 3^(3K+1)`. -/
 theorem pow4_lt_three_pow (K : Nat) : 4^K < 3^(3*K+1) := by
   have hle : 4^K ≤ 27^K :=
-    Nat.pow_le_pow_of_le (by decide : (4:Nat) ≤ 27) (Nat.le_refl K)
+    pow_mono_base 4 27 K (by decide : (4:Nat) ≤ 27)
   have h27 : 27^K = 3^(3*K) := by
     rw [show (27:Nat) = 3^3 from rfl, Nat.pow_mul]
   have h1 : 3^(3*K) < 3^(3*K+1) := by
@@ -990,8 +995,8 @@ theorem pow4_succ_lt (K : Nat) : 4^(K+1) < 3^(3*K+3) := by
     congr 1
     omega
   have hle : 4^K ≤ 27^K :=
-    Nat.pow_le_pow_of_le (by decide : (4:Nat) ≤ 27) (Nat.le_refl K)
-  have hpos : 0 < (27:Nat)^K := Nat.pow_pos (by decide) K
+    pow_mono_base 4 27 K (by decide : (4:Nat) ≤ 27)
+  have hpos : 0 < (27:Nat)^K := Nat.pow_pos (by decide)
   rw [h3eq, Nat.pow_succ, Nat.pow_succ]
   calc 4 * 4^K ≤ 4 * 27^K := Nat.mul_le_mul_left _ hle
     _ < 27 * 27^K := by omega
@@ -1010,7 +1015,6 @@ theorem frozen_tail_jump_ten (K p : Nat) (hp : 3*K+3 ≤ p) :
   have hd : digit3 (4^K) p = 0 := by
     unfold digit3
     rw [Nat.div_eq_of_lt hKlt]
-    decide
   have hcarrylt : 4 * (4^K % 3^p) < 3^p := by
     have h4K : 4 * 4^K = 4^(K+1) := by
       rw [Nat.pow_succ]
@@ -1018,7 +1022,7 @@ theorem frozen_tail_jump_ten (K p : Nat) (hp : 3*K+3 ≤ p) :
     have hlt2 : 4^(K+1) < 3^(3*K+3) := pow4_succ_lt K
     have hle2 : 3^(3*K+3) ≤ 3^p := three_pow_le_of_le (3*K+3) p hp
     have hleM : 4 * (4^K % 3^p) ≤ 4 * 4^K :=
-      Nat.mul_le_mul_left _ (Nat.le_of_lt hmod)
+      Nat.mul_le_mul_left _ (Nat.mod_le (4^K) (3^p))
     omega
   have hc : carry4 (4^K) p = 0 := by
     unfold carry4
@@ -1052,7 +1056,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
   | zero =>
       intro n
       constructor
-      · intro h; exact absurd h (by decide)
+      · intro h; exact absurd h (by simp [hasTwoScan])
       · intro ⟨p, hp, _⟩; exact absurd hp (by omega)
   | succ B ih =>
       intro n
@@ -1062,7 +1066,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
       have hsh : ∀ p : Nat, digit3 n (p + 1) = digit3 (n / 3) p := by
         intro p
         unfold digit3
-        rw [Nat.pow_succ, Nat.div_div_eq_div_mul]
+        rw [Nat.pow_succ, Nat.div_div_eq_div_mul, Nat.mul_comm (3^p) (3:Nat)]
       by_cases hb : n % 3 = 2
       · have hbeq : (n % 3 == 2) = true := by rw [hb]; rfl
         simp only [hasTwoScan, hbeq, Bool.true_or]
@@ -1070,10 +1074,12 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
         · intro _
           exact ⟨0, by omega, by rw [h0, hb]⟩
         · intro _
-          rfl
+          simp [hasTwoScan, hbeq]
       · have hbeq : (n % 3 == 2) = false := by
           cases hbb : (n % 3 == 2) with
-          | true => exact absurd (Nat.eq_of_beq_eq_true hbb) hb
+          | true =>
+              have h22 : n % 3 = 2 := by simpa using hbb
+              exact absurd h22 hb
           | false => rfl
         simp only [hasTwoScan, hbeq, Bool.false_or]
         constructor
@@ -1103,51 +1109,24 @@ owns a ternary digit two. -/
 theorem cantorian_base (K : Nat) (hK8 : 8 ≤ K) (hK500 : K ≤ 500) :
     ∃ p : Nat, digit3 (4^K) p = 2 := by
   rcases Nat.lt_or_ge K (8 + 251) with hlt | hge
-  · have hc := (List.all_eq_true.mp base_chunk_one) (K - 8)
+    have hc := (List.all_eq_true.mp base_chunk_one) (K - 8)
       (List.mem_range.mpr (by omega))
-    exact (hasTwoScan_iff 632 _).mp hc
-  · have hc := (List.all_eq_true.mp base_chunk_two) (K - 8 - 251)
+    unfold baseCaseB at hc
+    rw [show 8 + (K - 8) = K from by omega] at hc
+    obtain ⟨p, _, hd⟩ := (hasTwoScan_iff 632 _).mp hc
+    exact ⟨p, hd⟩
+    have hc := (List.all_eq_true.mp base_chunk_two) (K - 8 - 251)
       (List.mem_range.mpr (by omega))
-    have hsplit : 4^(8 + (251 + (K - 8 - 251))) = 4^K := by
-      congr 1
-      omega
-    rw [hsplit] at hc
-    exact (hasTwoScan_iff 632 _).mp hc
+    unfold baseCaseB at hc
+    rw [show 8 + (251 + (K - 8 - 251)) = K from by omega] at hc
+    obtain ⟨p, _, hd⟩ := (hasTwoScan_iff 632 _).mp hc
+    exact ⟨p, hd⟩
 
 /-- A ternary digit two at any position certifies the Arsenal's
 has-reader. -/
 theorem hasTwo_of_digit : ∀ (n p : Nat), digit3 n p = 2 →
-    hasTernaryTwo n = true := by
-  intro n p
-  induction p generalizing n with
-  | zero =>
-      intro h
-      have h0 : digit3 n 0 = n % 3 := by
-        unfold digit3
-        rw [Nat.pow_zero, Nat.div_one]
-      rw [h0] at h
-      have hn0 : n ≠ 0 := by
-        intro hne
-        rw [hne, Nat.zero_mod] at h
-        exact absurd h (by decide)
-      rw [asTernaryTwo.eq_def n, if_neg hn0, if_pos h]
-  | succ p ih =>
-      intro h
-      have hsh : digit3 n (p+1) = digit3 (n / 3) p := by
-        unfold digit3
-        rw [Nat.pow_succ, Nat.div_div_eq_div_mul]
-      rw [hsh] at h
-      have hne : n ≠ 0 := by
-        intro h0
-        rw [h0, Nat.zero_div] at h
-        unfold digit3 at h
-        rw [Nat.zero_div, Nat.zero_mod] at h
-        exact absurd h (by decide)
-      rw [asTernaryTwo.eq_def n, if_neg hne]
-      by_cases h2 : n % 3 = 2
-      · rw [if_pos h2]
-      · rw [if_neg h2]
-        exact ih _ h
+    hasTernaryTwo n = true :=
+  fun n p hp => hasTernaryTwo_of_digit n p hp
 
 /-- **THE CROWN V3 (NEW).**  The FULL Erdős #406 statement —
 `∀ n ≥ 9, noTernaryTwo (2^n) = false` — follows from the weakened

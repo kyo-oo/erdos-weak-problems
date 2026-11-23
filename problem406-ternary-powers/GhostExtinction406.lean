@@ -85,10 +85,10 @@ theorem three_pow_le_of_le (a b : Nat) (h : a ≤ b) : 3^a ≤ 3^b := by
 /-- Powers of three are unbounded (the uniqueness engine's fuel). -/
 theorem three_pow_unbounded : ∀ n : Nat, ∃ k : Nat, n < 3^k
   | 0 => ⟨1, by decide⟩
-  | n+1 =>
+      | n+1 => by
       obtain ⟨k, hk⟩ := three_pow_unbounded n
       refine ⟨k + 1, ?_⟩
-      have hp : 0 < 3^k := Nat.pow_pos (by decide) k
+      have hp : 0 < 3^k := Nat.pow_pos (by decide)
       have h3 : 3^(k+1) = 3^k * 3 := by rw [Nat.pow_succ]
       omega
 
@@ -242,7 +242,6 @@ theorem digit3_one_pos (p : Nat) (hp : 1 ≤ p) : digit3 1 p = 0 := by
       Nat.pow_le_pow_of_le (by decide : 1 < 3) (by omega)
     omega
   rw [Nat.div_eq_of_lt (by omega : (1:Nat) < 3^p)]
-  omega
 
 /-- The bounded-residue helper: `1 + r·3^(v+1) < 3^(v+2)` for `r < 3`. -/
 theorem lt_cut_residue (v r : Nat) (hr : r < 3) :
@@ -301,7 +300,8 @@ theorem pow4_cut_residue_exact (v u : Nat) :
     have hpow : 3^(v+2) = 3^(v+1) * 3 := by rw [Nat.pow_succ]
     rw [hpow]
     ring
-  rw [hsplit, Nat.add_mul_mod_self_left]
+  rw [hsplit, Nat.add_mul_mod_self_left,
+      Nat.mod_eq_of_lt (lt_cut_residue v (u % 3) (Nat.mod_lt _ (by decide)))]
 
 /-- The valuation decomposition: every positive `K` is `3^v·u` with
 `u % 3 ≠ 0`. -/
@@ -384,7 +384,7 @@ theorem rider_core_one (K : Nat) (hK : 0 < K)
   obtain ⟨v, u, hKu, hu3⟩ := valuation_decomp K hK
   have hlt : u % 3 < 3 := Nat.mod_lt _ (by decide)
   rcases ErdosTernary2.lt_three_cases (u % 3) hlt with h | h | h
-  · exact absurd (Nat.dvd_iff_mod_eq_zero.mpr h) hu3
+  · exact absurd h hu3
   · refine ⟨v, u, hKu, ?_, h⟩
     intro hd
     exact hu3 (Nat.dvd_iff_mod_eq_zero.mp hd)
@@ -394,10 +394,8 @@ theorem rider_core_one (K : Nat) (hK : 0 < K)
     rw [h] at hres
     have hv1 : 1 ≤ v + 1 := by omega
     have hfire : digit3 (4^K) (v+1) = 2 := by
-      have hmod : 4^K % 3^((v+1)+1) =
-          (1 + 2 * 3^(v+1)) % 3^((v+1)+1) := by
+      have hmod : 4^K % 3^((v+1)+1) = 1 + 2 * 3^(v+1) := by
         rw [show ((v:Nat)+1)+1 = v+2 from by omega, hKu, hres]
-        exact (Nat.mod_eq_of_lt (lt_cut_residue v 2 (by decide))).symm
       exact digit3_of_residue_two (4^K) (v+1) hv1 hmod
     exact hCant (v+1) hv1 hfire
 
@@ -457,7 +455,7 @@ theorem ghost_residue_shape (u : Nat) (hg : GhostRay u) :
           exact h
         have hstab : (lteCoeff j * u) % 3^j
             = (lteCoeff (j-1) * u) % 3^j := by
-          rw [Nat.mul_mod, Nat.mul_mod, hcs]
+          rw [Nat.mul_mod, hcs, ← Nat.mul_mod]
         rw [Nat.pow_succ]
         omega
 
@@ -491,7 +489,8 @@ theorem ghost_head_split (u : Nat) (hg : GhostRay u) (hu3 : u % 3 = 1) :
   have hm : (u % 9) % 3 = u % 3 := by
     rw [Nat.mod_mod_of_dvd u (by decide : (3:Nat) ∣ 9)]
   rw [hu3] at hm
-  have hdm : u % 9 = 3 * (u % 9 / 3) + (u % 9) % 3 := Nat.div_add_mod _ 3
+  have hdm : u % 9 = 3 * (u % 9 / 3) + (u % 9) % 3 :=
+    (Nat.div_add_mod (u % 9) 3).symm
   have hq : u % 9 / 3 < 3 := by omega
   rcases Nat.lt_three_cases (u % 9 / 3) hq with h0 | h0 | h0
   · refine Or.inr (Or.inr ?_)
@@ -1120,7 +1119,7 @@ theorem rider_wall_v2
   have hghost := hComp K σ u hK hKu hufree hCant
   have hsize := ghost_size_rider_sheet u hghost hu1
   have hmul : u ≤ 3^σ * u := by
-    have hle : u ≤ u * 3^σ := Nat.le_mul_of_pos_right u (Nat.pow_pos (by decide) σ)
+    have hle : u ≤ u * 3^σ := Nat.le_mul_of_pos_right u (Nat.pow_pos (by decide))
     rw [Nat.mul_comm] at hle
     exact hle
   omega
