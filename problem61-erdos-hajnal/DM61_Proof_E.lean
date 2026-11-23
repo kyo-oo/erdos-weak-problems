@@ -710,12 +710,11 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           · intro a _ b _ hab
             exact fun _ => hnods a b hab
           · intro a _ b _ hab
-            exact fun _ => hnods a b hab
+            exact (hnods a b hab).elim
           · have h1' : (Finset.univ : Finset α).card = Fintype.card α :=
               Finset.card_univ
             have hc : Fintype.card α = 1 := by omega
             rw [h1', hc]
-            norm_num
       · -- The ≥ 2 world: split by Seinsche.
         have h2 : 2 ≤ Fintype.card α := by omega
         obtain hsep | hsep := seinsche_split G h2 hP4
@@ -724,7 +723,11 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hy' : ∃ y : α, y ∈ Finset.univ \ s := by
             by_contra hcon
             push_neg at hcon
-            exact hsne' (Finset.eq_univ_iff_forall.2 hcon)
+            have hall : ∀ y : α, y ∈ s := by
+              intro y
+              by_contra hys
+              exact hcon y (Finset.mem_sdiff.2 ⟨Finset.mem_univ y, hys⟩)
+            exact hsne' (Finset.eq_univ_iff_forall.2 hall)
           obtain ⟨y, hy⟩ := hy'
           have hunivcard : (Finset.univ : Finset α).card
               = Fintype.card α := Finset.card_univ
@@ -736,18 +739,18 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hdiffpos : 0 < (Finset.univ \ s).card :=
             Finset.card_pos.2 ⟨y, hy⟩
           have hcard1 : Fintype.card {x : α // x ∈ s} = s.card := by simp
-          have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
-              (Finset.univ \ s).card := by simp
+          have hcard2 : Fintype.card ↥(Finset.univ \ s) =
+              (Finset.univ \ s).card := by simp [hsdiffcard]
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
             rw [hcard1]; omega
-          have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
+          have hn2 : Fintype.card ↥(Finset.univ \ s) ≤ n := by
             rw [hcard2]; omega
           obtain ⟨I₁, K₁, hI₁, hK₁, hprod₁⟩ :=
             @ih {x : α // x ∈ s} _ _ hn1 _
               (p4free_comap G (Subtype.val : {x : α // x ∈ s} → α)
                 Subtype.val_injective hP4)
           obtain ⟨I₂, K₂, hI₂, hK₂, hprod₂⟩ :=
-            @ih {x : α // x ∈ Finset.univ \ s} _ _ hn2 _
+            @ih ↥(Finset.univ \ s) _ _ hn2 _
               (p4free_comap G
                 (Subtype.val : {x : α // x ∈ Finset.univ \ s} → α)
                 Subtype.val_injective hP4)
@@ -896,7 +899,11 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hy' : ∃ y : α, y ∈ Finset.univ \ s := by
             by_contra hcon
             push_neg at hcon
-            exact hsne' (Finset.eq_univ_iff_forall.2 hcon)
+            have hall : ∀ y : α, y ∈ s := by
+              intro y
+              by_contra hys
+              exact hcon y (Finset.mem_sdiff.2 ⟨Finset.mem_univ y, hys⟩)
+            exact hsne' (Finset.eq_univ_iff_forall.2 hall)
           obtain ⟨y, hy⟩ := hy'
           have hunivcard : (Finset.univ : Finset α).card
               = Fintype.card α := Finset.card_univ
@@ -908,18 +915,18 @@ theorem p4_witness_product_aux (n : ℕ) : ∀ (α : Type) [Fintype α]
           have hdiffpos : 0 < (Finset.univ \ s).card :=
             Finset.card_pos.2 ⟨y, hy⟩
           have hcard1 : Fintype.card {x : α // x ∈ s} = s.card := by simp
-          have hcard2 : Fintype.card {x : α // x ∈ Finset.univ \ s} =
-              (Finset.univ \ s).card := by simp
+          have hcard2 : Fintype.card ↥(Finset.univ \ s) =
+              (Finset.univ \ s).card := by simp [hsdiffcard]
           have hn1 : Fintype.card {x : α // x ∈ s} ≤ n := by
             rw [hcard1]; omega
-          have hn2 : Fintype.card {x : α // x ∈ Finset.univ \ s} ≤ n := by
+          have hn2 : Fintype.card ↥(Finset.univ \ s) ≤ n := by
             rw [hcard2]; omega
           obtain ⟨I₁, K₁, hI₁, hK₁, hprod₁⟩ :=
             @ih {x : α // x ∈ s} _ _ hn1 _
               (p4free_comap G (Subtype.val : {x : α // x ∈ s} → α)
                 Subtype.val_injective hP4)
           obtain ⟨I₂, K₂, hI₂, hK₂, hprod₂⟩ :=
-            @ih {x : α // x ∈ Finset.univ \ s} _ _ hn2 _
+            @ih ↥(Finset.univ \ s) _ _ hn2 _
               (p4free_comap G
                 (Subtype.val : {x : α // x ∈ Finset.univ \ s} → α)
                 Subtype.val_injective hP4)

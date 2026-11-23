@@ -74,7 +74,7 @@ theorem maxCard_ge_of_witness {k N : ℕ} (S : Finset ℕ)
   exact Finset.card_mono hTsub
 
 /-- The DIY sum-const (zero API risk): `∑ _ ∈ Q, c = Q.card * c`. -/
-theorem sum_const_nat (Q : Finset ℕ) (c : ℕ) :
+theorem sum_const_nat {α : Type} [DecidableEq α] (Q : Finset α) (c : ℕ) :
     (Q.sum fun _ => c) = Q.card * c := by
   classical
   induction Q using Finset.induction_on with
@@ -84,7 +84,8 @@ theorem sum_const_nat (Q : Finset ℕ) (c : ℕ) :
       ring
 
 /-- The DIY biUnion-card bound (zero API risk, the card_union_le induction). -/
-theorem card_bUnion_le' {β : Type} [DecidableEq β] (Q : Finset ℕ) (F : ℕ → Finset β) :
+theorem card_bUnion_le' {α β : Type} [DecidableEq α] [DecidableEq β] (Q : Finset α)
+    (F : α → Finset β) :
     (Q.biUnion F).card ≤ ∑ q ∈ Q, (F q).card := by
   classical
   induction Q using Finset.induction_on with
@@ -92,7 +93,9 @@ theorem card_bUnion_le' {β : Type} [DecidableEq β] (Q : Finset ℕ) (F : ℕ �
   | insert a Q ha ih =>
       have hbi : (insert a Q).biUnion F = F a ∪ Q.biUnion F := Finset.biUnion_insert
       rw [hbi, Finset.sum_insert ha]
-      exact Nat.add_le_add (Finset.card_union_le _ _) ih
+      have hu : (F a ∪ Q.biUnion F).card ≤ (F a).card + (Q.biUnion F).card :=
+        Finset.card_union_le (F a) (Q.biUnion F)
+      exact Nat.add_le_add hu ih
 
 /-! ## §1 AFF-K: THE COPY CAP -/
 
@@ -312,7 +315,8 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     rw [hcp] at h1
     have h2 : (Finset.Icc 1 D0).card = D0 := by rw [Nat.card_Icc]; omega
     have h3 : (Finset.Ico 1 (N + 1)).card = N := by rw [Nat.card_Ico]; omega
-    omega
+    rw [h2, h3] at h1
+    exact h1
   -- the copy index of p ∈ P lands in Q
   have hmemQ : ∀ p ∈ P, (p.2.1, p.1 - p.2.2 * p.2.1) ∈ Q := by
     intro p hp
@@ -320,7 +324,9 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     have hage1 : 1 ≤ p.1 - p.2.2 * p.2.1 := by omega
     have haval : p.1 - p.2.2 * p.2.1 + (m - 1) * p.2.1 ≤ N := by
       have h1 : (m - 1 - p.2.2) * p.2.1 + p.2.2 * p.2.1 = (m - 1) * p.2.1 := by
-        rw [← Nat.mul_add, Nat.add_sub_cancel' (by omega)]
+        have hx : p.2.2 ≤ m - 1 := by omega
+        have hxy : p.2.2 * p.2.1 ≤ (m - 1) * p.2.1 := Nat.mul_le_mul_right _ hx
+        rw [Nat.sub_mul, Nat.sub_add_cancel hxy]
       have h2 : p.1 ≤ N := by
         have := hxmem p.1 hpS
         omega
@@ -367,7 +373,8 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
     rw [hcp1, hcp2] at h1
     have h2 : (Finset.Icc 1 D0).card = D0 := by rw [Nat.card_Icc]; omega
     have h3 : (Finset.Ico 0 m).card = m := by rw [Nat.card_Ico]; omega
-    omega
+    rw [h2, h3] at h1
+    exact h1
   -- UPPER: |P| ≤ (r k m) * Q.card
   have hupper : P.card ≤ (r k m) * Q.card := by
     -- the cover: P = ⋃_{q ∈ Q} (the fiber at q)
@@ -401,9 +408,11 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
         have hpP : p ∈ P := (Finset.mem_filter.1 hp).1
         have hio : (p.2.1, p.1 - p.2.2 * p.2.1) = q := (Finset.mem_filter.1 hp).2
         obtain ⟨hpS, -, -, hjm, hv1, -, hx1⟩ := hPfacts p hpP
-        have h1 : p.2.1 = q.1 := congrArg Prod.fst hio
+        have hfst := congrArg Prod.fst hio
+        have h1 : p.2.1 = q.1 := hfst
         have h2 : p.1 - p.2.2 * p.2.1 = q.2 := congrArg Prod.snd hio
         rw [h1] at hv1
+        rw [h1] at h2
         have h3 : p.1 = q.2 + p.2.2 * q.1 := by omega
         exact ⟨hjm, h3⟩
       -- the fiber's j-image ⊆ Tq
@@ -416,26 +425,37 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
         obtain ⟨hjm', hxeq⟩ := hfacts p hp
         have hpP : p ∈ P := (Finset.mem_filter.1 hp).1
         have hpS : p.1 ∈ S := (hPfacts p hpP).1
-        refine Finset.mem_filter.2 ⟨hjm', ?_⟩
-        rw [← hje', hxeq] at hpS
+        have hjlt : j < m := by rw [← hje']; exact hjm'
+        refine Finset.mem_filter.2 ⟨Finset.mem_range.2 hjlt, ?_⟩
+        rw [hxeq, hje'] at hpS
         exact hpS
       -- the j-map is injective on the fiber
+      have hinj : Set.InjOn (fun p : ℕ × (ℕ × ℕ) => p.2.2)
+          (↑(P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)) :
+            Set (ℕ × (ℕ × ℕ))) := by
+        intro p hp p' hp' hje
+        have hje' : p.2.2 = p'.2.2 := hje
+        have hpf : p ∈ P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q) :=
+          Finset.mem_coe.2 hp
+        have hpf' : p' ∈ P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q) :=
+          Finset.mem_coe.2 hp'
+        obtain ⟨-, hxeq⟩ := hfacts p hpf
+        obtain ⟨-, hxeq'⟩ := hfacts p' hpf'
+        have hio : (p.2.1, p.1 - p.2.2 * p.2.1) = q := (Finset.mem_filter.1 hpf).2
+        have hio' : (p'.2.1, p'.1 - p'.2.2 * p'.2.1) = q := (Finset.mem_filter.1 hpf').2
+        have hfst := congrArg Prod.fst hio
+        have hfst' := congrArg Prod.fst hio'
+        have h1 : p.2.1 = q.1 := hfst
+        have h1' : p'.2.1 = q.1 := hfst'
+        rw [hje'] at hxeq
+        have hxe : p.1 = p'.1 := hxeq.trans hxeq'.symm
+        have hde : p.2.1 = p'.2.1 := h1.trans h1'.symm
+        exact Prod.ext hxe (Prod.ext hde hje')
       have hcard : (P.filter
           (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).card
           = ((P.filter (fun p => (p.2.1, p.1 - p.2.2 * p.2.1) = q)).image
               (fun p => p.2.2)).card :=
-        Finset.card_image_of_injOn (fun p hp p' hp' hje => by
-          have hje' : p.2.2 = p'.2.2 := hje
-          obtain ⟨hjm, hxeq⟩ := hfacts p (Finset.mem_coe.2 hp)
-          obtain ⟨hjm', hxeq'⟩ := hfacts p' (Finset.mem_coe.2 hp')
-          have h1 : p.2.1 = q.1 :=
-            congrArg Prod.fst ((Finset.mem_filter.1 (Finset.mem_coe.2 hp)).2)
-          have h1' : p'.2.1 = q.1 :=
-            congrArg Prod.fst ((Finset.mem_filter.1 (Finset.mem_coe.2 hp')).2)
-          rw [hje'] at hxeq'
-          have hxe : p.1 = p'.1 := by omega
-          have hde : p.2.1 = p'.2.1 := by omega
-          exact Prod.ext hxe (Prod.ext hde hje'))
+        (Finset.card_image_of_injOn hinj).symm
       rw [hcard]
       exact le_trans (Finset.card_mono himg) hTqcap
     -- assemble: |P| ≤ Σ fibers ≤ Σ (r k m) = Q.card * (r k m)
@@ -494,7 +514,7 @@ theorem v_gen_witness (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m)
       have hbad := (Finset.mem_filter.1 hx).2
       have hxN := hxmem x hxS
       by_cases hb1 : (m - 1) * D0 ≤ x - 1
-      · have hb2 := hbad hb1
+      · have hb2 : ¬ ((m - 1) * D0 ≤ N - x) := fun h => hbad ⟨hb1, h⟩
         exact Finset.mem_union.2
           (Or.inr (Finset.mem_Icc.2 ⟨by omega, hxN.2⟩))
       · exact Finset.mem_union.2
@@ -548,10 +568,11 @@ validated 56/56 (VGEN-band exhaustive at 5 scales, VGEN-dblcount exact at
 theorem v_gen (k m N : ℕ) (hk : 3 ≤ k) (hm : 2 ≤ m) (hN : 16 * m * m ≤ N) :
     2 * m * (r k N) ≤ (2 * (r k m) + 1) * N := by
   have hNpos : 1 ≤ N := by
-    have h1 : 16 * (2 * 2) ≤ 16 * (m * m) :=
+    have h2 : 16 * (2 * 2) ≤ 16 * (m * m) :=
       Nat.mul_le_mul_left 16
         (Nat.mul_le_mul (by omega : (2:ℕ) ≤ m) (by omega : (2:ℕ) ≤ m))
-    have h2 : 16 * (2 * 2) = 64 := by norm_num
+    have h3 : 16 * (2 * 2) = 64 := by norm_num
+    have h4 : 16 * m * m = 16 * (m * m) := Nat.mul_assoc 16 m m
     omega
   have hstep : Set.IsAPOfLengthFree.maxCard k N ≤
       (2 * (r k m) + 1) * N / (2 * m) := by
