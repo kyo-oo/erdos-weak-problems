@@ -437,3 +437,37 @@ FACE B (MonolithGate/TailAssault406B.lean, kernel-406tail2):
   above 3000 alone.
 
 The engine never stops; it never lies.
+
+## r31: FACE C — THE CIRCLE CLOSED (kernel-406tail3)
+
+r30 VERDICT (run 45484520689): **kernel-406tail2 SUCCESS ON FIRST
+EXPOSURE.** All six Face B theorems sorry-free; the 1500-witness
+fire-row decide at bare [propext]; TAIL_ASSAULT_B_GREEN. THE KERNEL
+BASE IS NOW 3000. (kernel-406tail re-verified SUCCESS in the same run.)
+
+FACE C — the circle closed. The discovery: Face A's tree law
+(treeBad_iff_prefix_killing_trit) and the obstruction chamber's row law
+(row_common_two_iff_prefix_killing_trit) have THE SAME RIGHT-HAND SIDE.
+Chained, they give the UNCONDITIONAL CIRCLE LINK:
+
+  treeBad K p  <->  common two of 4^K and 4^(K+1) at row p+1
+
+at EVERY level — no regime restriction, no edge cases. The tree fire,
+the row common two, and the climb's Happy row are one object read from
+three sides. Face C (MonolithGate/TailAssault406C.lean):
+
+- SECTION 14 treeBad_iff_common_two — one line, two green theorems.
+- SECTION 15 happy_iff_common_two_ge_three — the climb's complete
+  circle (stated in the tree law's own fully-qualified form so the
+  rewrite fires verbatim).
+- SECTION 16 no_common_two_iff_tree_silence — a counterexample is
+  exactly an exponent whose trit-tree never fires: the sieve's
+  completeness, both directions.
+- SECTION 17 counterexample_trit_dodge — the one-trit dodge law: the
+  counterexample's exponent trit dodges the unique killing value at
+  every level where the prefix pair agrees (at most one trit value dies
+  per node — WHY the survivor tree is immortal).
+- SECTION 18 erdos406_universal_verdict_of_common_two_tail — the whole
+  problem from the common-two tail above the base alone.
+
+The engine never stops; it never lies.
