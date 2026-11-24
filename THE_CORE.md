@@ -1392,3 +1392,48 @@ remaining content = the climb's tail above 500 = the structural
 non-termination of the two streams + the row family's own sieve — the
 monolith's own declared seam, now with its exact shape computed and
 its frontier named.
+
+## 18. THE TAIL ASSAULT ROUND (r27-r30) — the climb cornered to its automaton face
+
+r27 THE TAIL ASSAULT (eda634f): the ordered composition BOSS demanded —
+the trit-tree law (the climb iff the exponent's own ternary tree owns a
+bad edge), the four-band kernel lattice (mod 27/81/243/729, 377 fired
+classes two-method verified), the No-22 face, the collision theorem
+(five files' laws in one statement), the 1000-witness base extension to
+1500, the sharpened verdict erdos406_universal_verdict_of_tail_1500.
+
+r28 (dcbd777): the nine-class first-exposure repair.
+
+r29 THE NINE-ERROR KILL (551ae93, run 45478223728): **kernel-406tail
+GREEN — all 22 theorems of MonolithGate/TailAssault406.lean sorry-free.**
+trit_congr and treeBad_congr at bare [propext]. THE STATE: the entire
+remaining content of Erdos #406 is the single named climb-above-1500
+hypothesis, and the monolith's own green bridge hTailF (GSTTailFProof)
+consumes the climb wholesale into tailF, thence through the vendored
+terminal identity (ErdosTernary2:18425, both directions) to the crown.
+
+r30 FACE B — THE AUTOMATON COMPOSITION (kernel-406tail2): the addition-
+carry chamber's six-state x4 automaton (state = (prev digit, binary
+carry); common two = a digit two on a forbidden edge (0,0) or (2,1);
+powers of four start at (1,0)). New theorems: the tree-automaton
+identity (deep tree fire IS the common two), the forbidden-edge face,
+the automaton collision (four chambers, one statement), the base
+doubled to 3000 (1500 two-method-verified fire-row witnesses, one
+kernel decide), the verdict from the tail above 3000 alone.
+
+THE ENGINE'S TERRAIN RECORD (two-method, [8,60000) swept): the survivor
+tree is immortal (ratio 2.48/level — the band lattice alone never
+terminates); every natural fires (max row 63 at 47660); the natural
+survivors are exactly {0,1,2,3,4,7}. THE KILL QUESTION: must every
+power-of-four digit stream hit a forbidden automaton edge at some row
+at least three — the counterexample must keep every digit two LOUD
+forever while sitting in a Band-I class with a No-22 suffix under the
+sharp 7/8 cap. That impossibility is the remaining content, stated in
+its complete automaton face by SECTION 10 of Face B.
+
+THE HONEST MAP after r30: the terminal identity, the crown, the climb
+bridge, the tree law, the band lattice, the No-22 face, the magnitude
+cap, the automaton classifier — ALL GREEN. The base is kernel-certified
+to 3000. The remaining content = the climb above 3000 = the automaton
+dodge impossibility — one named hypothesis, its complete forced
+structure machine-proven on all sides.

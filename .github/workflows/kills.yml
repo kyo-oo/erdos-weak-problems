@@ -1647,6 +1647,55 @@ jobs:
         grep -F "TAIL_ASSAULT_GREEN" tail406.log
         echo ERDOS_406_TAIL_ASSAULT=1
       shell: bash
+  kernel-406tail2:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "MEMORY SHIELD (the witness-row decide evaluates 1500 treeBad cases on powers up to 6004 bits)"
+      run: |
+        if [ ! -f /swapfile2 ]; then
+          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+        fi
+        sudo swapon /swapfile2 2>/dev/null || true
+        free -h
+      shell: bash
+    - name: "Kernel 406tail2 - THE TAIL ASSAULT FACE B (S085 r30, the composition round two): the r29-green tail assault composed with the addition-carry automaton chamber into NEW THEOREMS - the tree-automaton identity (deep tree fire IS the common two), the forbidden-edge face (a counterexample forces every ternary digit two off both forbidden automaton states (0,0) and (2,1)), the automaton collision (Band-I survivor AND all-loud AND No-22 AND the 7/8 cap, four chambers one statement), the base extended 1500 to 3000 with 1500 two-method-verified fire-row witnesses re-decided by the kernel, and the sharpened verdict from the tail above 3000 alone"
+      run: |
+        set -euo pipefail
+        : > tail406b.log
+        set +e
+        timeout 5400 lake build MonolithGate.TailAssault406 2>&1 | tee -a tail406b.log
+        RC1=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ]; then echo "TAIL406B_IMPORT_CLOSURE_FAILED rc=$RC1"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' tail406b.log; then echo "TAIL406B_CLOSURE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' tail406b.log; exit 1; fi
+        set +e
+        timeout 5400 lake env lean MonolithGate/TailAssault406B.lean 2>&1 | tee -a tail406b.log
+        RC2=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC2" -ne 0 ]; then echo "TAIL406B_COMPILE_FAILED_OR_TIMEOUT_RC=$RC2"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tail406b.log; then echo "TAIL406B_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tail406b.log; exit 1; fi
+        echo "TAIL ASSAULT B RECEIPTS:"
+        grep -E "treeBad_deep_iff_common_two' (does not depend on any axioms|depends on axioms)" tail406b.log
+        grep -E "no_climb_forbids_edges' (does not depend on any axioms|depends on axioms)" tail406b.log
+        grep -E "tail_collision_automaton_face' (does not depend on any axioms|depends on axioms)" tail406b.log
+        grep -E "erdos406_climb_base_3000_band' (does not depend on any axioms|depends on axioms)" tail406b.log
+        grep -E "erdos406_climb_base_3000' (does not depend on any axioms|depends on axioms)" tail406b.log
+        grep -E "erdos406_universal_verdict_of_tail_3000' (does not depend on any axioms|depends on axioms)" tail406b.log
+        grep -F "TAIL_ASSAULT_B_GREEN" tail406b.log
+        echo ERDOS_406_TAIL_ASSAULT_B=1
+      shell: bash
   kernel-406cites:
     runs-on: ubuntu-24.04
     steps:
