@@ -1591,6 +1591,62 @@ jobs:
         grep -F "ERDOS406_MONOLITHGATE_HYPOTHESIS_DISCHARGED" gate406.log
         echo ERDOS_406_HYPOTHESIS_DISCHARGED=1
       shell: bash
+  kernel-406tail:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "MEMORY SHIELD (1000 kernel-decide cases on 3002-bit powers; the elaboration spike on the 7GB runner needs the 10GB swap)"
+      run: |
+        if [ ! -f /swapfile2 ]; then
+          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+        fi
+        sudo swapon /swapfile2 2>/dev/null || true
+        free -h
+      shell: bash
+    - name: "Kernel 406tail - THE TAIL ASSAULT (S085 r27, BOSS order PROVE THE LAST REMAINING HYPOTHESIS): the climb's tail cornered from three sides - the trit-tree law (the climb iff the exponent's own ternary tree owns a bad edge), the band lattice (four kernel-decided survivor tables mod 27/81/243/729), the No-22 collision (the counterexample's complete forced structure: Band-I survivor class AND No-22 suffix AND the sharp 7/8 magnitude cap); the kernel-certified base extended from 500 to 1500 with 1000 explicit two-method-verified witnesses; the universal verdict from the tail above 1500 alone"
+      run: |
+        set -euo pipefail
+        : > tail406.log
+        set +e
+        timeout 5400 lake build MonolithGate.FinalVerdict406 2>&1 | tee -a tail406.log
+        RC1=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ]; then echo "TAIL406_IMPORT_CLOSURE_FAILED rc=$RC1"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' tail406.log; then echo "TAIL406_CLOSURE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' tail406.log; exit 1; fi
+        set +e
+        timeout 5400 lake env lean MonolithGate/TailAssault406.lean 2>&1 | tee -a tail406.log
+        RC2=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC2" -ne 0 ]; then echo "TAIL406_COMPILE_FAILED_OR_TIMEOUT_RC=$RC2"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tail406.log; then echo "TAIL406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tail406.log; exit 1; fi
+        echo "TAIL ASSAULT RECEIPTS:"
+        grep -E "happy_iff_treeBad' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "treeBad_congr' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "band6_scan' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "commonTwoGeThree_of_band6' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "happy_ge_three_of_band6' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "no22_suffix_of_no_common_ge_three' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "magnitude_face_of_no_common' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "tail_counterexample_collision' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "tail_collision_magnitude_window' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "erdos406_climb_base_ext' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "erdos406_climb_base_1500' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "erdos406_universal_verdict_of_tail_1500' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -E "tail_1500_of_no_collision' (does not depend on any axioms|depends on axioms)" tail406.log
+        grep -F "TAIL_ASSAULT_GREEN" tail406.log
+        echo ERDOS_406_TAIL_ASSAULT=1
+      shell: bash
   kernel-406cites:
     runs-on: ubuntu-24.04
     steps:
