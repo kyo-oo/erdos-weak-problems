@@ -471,3 +471,38 @@ three sides. Face C (MonolithGate/TailAssault406C.lean):
   problem from the common-two tail above the base alone.
 
 The engine never stops; it never lies.
+
+## r32: FACE D — THE TOWER ORIGIN KILL (kernel-406tail4)
+
+r31 VERDICT (run 45488401958): **kernel-406tail3 SUCCESS ON FIRST
+EXPOSURE.** All five Face C theorems sorry-free at [propext,
+Classical.choice, Quot.sound]. THE CIRCLE IS CI-CERTIFIED: treeBad iff
+the common two at every level; the climb, the tree, and the common-two
+statement are one object; a counterexample is exactly total tree
+silence; the one-trit dodge explains the immortal tree; the whole
+problem from the common-two tail alone.
+
+FACE D — the tower origin kill. THE MONOLITH'S OWN ORIGIN LAW
+(gst_navigation_origin, green in the vendored ErdosTernary2): for every
+tower 4^(3^s * b) with s >= 1 and 3 not dividing b, the GST graph's
+origin vertex at row s+1 carries carry NULL and digit exactly b % 3.
+THE KILL: for b % 3 = 2 and s >= 2 the origin IS a quiet digit two —
+carry zero, digit two — and the addition-carry chamber's digit law
+hands the same digit two to the successor power; the provider's bridge
+converts the pair into the climb's Happy row. THE ENTIRE TOWER FAMILY
+K = 3^s * b (s >= 2, b % 3 = 2) IS DEAD UNCONDITIONALLY AT ROW s+1 —
+a family the band lattice can never reach (every K divisible by 729
+sits in survivor class zero of the level-six table).
+
+Face D (MonolithGate/TailAssault406D.lean):
+- SECTION 20 THE DEFEQ BRIDGES — gstCarry = directCarry4, gstDigit =
+  digit3, verbatim formulas, one world.
+- SECTION 21 THE TOWER ORIGIN KILL — climb_of_tower_origin: the whole
+  family, one row, three green theorems.
+- SECTION 22 THE THREE-ADIC SHAPE (exists_three_shape, strong
+  recursion — the monolith's own green idiom Nat.strongRecOn) and THE
+  TOWER-FREE SHARPENED VERDICT — erdos406_universal_verdict_of_tail_
+  3000_non_tower: the remaining hypothesis no longer quantifies over
+  the tower family at all.
+
+The engine never stops; it never lies.
