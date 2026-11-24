@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #142 — 2026-11-21T22:14:57
+OFFICIAL GATE RECEIPT — problem #142 — 2026-11-24T20:09:02
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-142-rk-asymptotic
-Claims in solution ledger: 18
+Claims in solution ledger: 21
 ==============================================================================
 [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cap_set module (verbatim cells 2/6/8/12/14) imports and its own asserts hold (512 greedy, is_cap_set, explicit-set equality, 1082)
 [PASS] (official) O-512EXPL — official build_512_cap: 512 distinct vectors, official is_cap_set True
@@ -32,5 +32,5 @@ Claims in solution ledger: 18
 [PASS] (control) S-AUDIT-W81 — The W81 independent audit battery (fresh algorithms: lex-DFS tables, exact F_q DFT, own censuses) — 16/16 green, defects D1-D3 fixed and machine-guarded
 ==============================================================================
 CHECKS: 24/24 passed (official=5, solution=11, controls=8)
-WALL: 199.36s
+WALL: 201.17s
 VERDICT: YOUR SOLUTION IS OKAY

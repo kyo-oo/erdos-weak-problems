@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #61 — 2026-11-21T21:48:38
+OFFICIAL GATE RECEIPT — problem #61 — 2026-11-24T20:18:23
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-61-erdos-hajnal
-Claims in solution ledger: 19
+Claims in solution ledger: 23
 ==============================================================================
 [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cyclic_graphs module (verbatim cells 2/6/7/9/11/13/14) imports; its own asserts hold (367 in C_7^5; 81/324/1458 in C_9^3..5; 754 in C_11^4)
 [PASS] (official) O-CYC7-5 — official evaluate(num_nodes=7, n=5) == 367 (official cell-6 priority)
@@ -22,7 +22,11 @@ Claims in solution ledger: 19
 [PASS] (control) N-PLANT-EDGE — planted adjacent pair ((0,1,2),(1,2,3)) in an independent-set candidate is DETECTED by the independence checker
 [PASS] (control) N-COGRAPH — planted induced P4 in a cograph is DETECTED by the P4 filter
 [PASS] (control) S-PRIMES-W81 — The W81 five-vertex prime battery: P5-CROSS, C5-1/2-ANCHOR (complete induced-subgraph proofs), TOWER-CAP-P5/BULL, and the full census — 22/22 green
+[PASS] (control) S-W82-SPEC — The W82 OFFICIAL statement file DM61_Official.lean carries the verbatim DeepMind predicate (IsErdosHajnalLowerBound, google-deepmind/formal-conjectures @ 2207c54d) + the official target spec block
+[PASS] (control) S-W82-KERNELS — The W82 official-form family kernels (DM61_Proof_A + DM61_Closure): the erdos_61_family theorem over the official predicate, arsenal-imported, marker-terminated
+[PASS] (control) S-W82-CI — kills.yml wires the W82 kernel jobs (kernel-dm-w82: the 61DM-A + 61DM-B steps) with the error/sorryAx rejection greps
+[PASS] (control) N-W82-NEG — negative control: a corrupted predicate string fails the spec check (the string check discriminates)
 ==============================================================================
-CHECKS: 16/16 passed (official=5, solution=7, controls=4)
-WALL: 553.17s
+CHECKS: 20/20 passed (official=5, solution=7, controls=8)
+WALL: 551.86s
 VERDICT: YOUR SOLUTION IS OKAY

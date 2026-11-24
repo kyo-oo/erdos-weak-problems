@@ -12,5 +12,5 @@ PASS DEGREE-LAWS — kernel ingredients: triangle-free neighborhoods independent
 PASS LAW-SPOTCHECKS — 13/13 arsenal law spot-checks pass (CardinalWorlds, ErdosTernary2, GSTCausalPairingGraphs)
 PASS NEGATIVE-CONTROLS — C5 has an induced P4 (filter rejects)=True; planted P4 detected=True; corrupted tight witness detected=True; false harmonic value detected=True
 
-TOTAL: 10/10 PASS, wall 341.5s
+TOTAL: 10/10 PASS, wall 339.8s
 FAMILY_ENGINE_GREEN=1
