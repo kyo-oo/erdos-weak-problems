@@ -653,11 +653,11 @@ theorem erdos406_climb_base :
   exact ⟨7, by decide, by simp only [HappyCell, carry4, digit3]; decide⟩
   exact ⟨3, by decide, by simp only [HappyCell, carry4, digit3]; decide⟩
 
+open GSTU2DEventTransport in
+open GSTCanonicalSevenAxisBridge in
 /-- **THE CLIMB FROM BASE AND TAIL.**  The full climb primitive follows
 from the kernel-certified base band plus the tail above five hundred —
 the mission's remaining content, stated as one hypothesis. -/
-open GSTU2DEventTransport in
-open GSTCanonicalSevenAxisBridge in
 theorem erdos406_climb_of_base_and_tail
     (htail : ∀ K : Nat, 500 < K →
       ∃ p : Nat, 3 ≤ p ∧
@@ -668,13 +668,13 @@ theorem erdos406_climb_of_base_and_tail
   · exact erdos406_climb_base K hK8 (by omega)
   · exact htail K (by omega)
 
+open GSTU2DEventTransport in
+open GSTCanonicalSevenAxisBridge in
 /-- **THE MISSION'S SHARPEST STATEMENT — the verdict from the tail
 alone.**  Erdős #406's universal verdict follows from the climb's tail
 above five hundred alone: the base band is kernel-certified, the
 composition is machine-proven, and the entire remaining mathematical
 content of the problem is the single named hypothesis. -/
-open GSTU2DEventTransport in
-open GSTCanonicalSevenAxisBridge in
 theorem erdos406_universal_verdict_of_tail
     (htail : ∀ K : Nat, 500 < K →
       ∃ p : Nat, 3 ≤ p ∧
