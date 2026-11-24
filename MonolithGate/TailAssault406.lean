@@ -47,11 +47,12 @@ The engine never stops; it never lies.
 
 namespace GSTTailAssault406
 
-open GSTFourPowerDirectResidue
 open GSTFourPowerExponentTritObstruction
+open GSTFourPowerDirectAdditionCarry
 
 /-! ## §1 The trit-tree law — the climb as the exponent's own tree -/
 
+open GSTFourPowerDirectResidue in
 /-- **THE BAD EDGE, COMPUTABLE.**  The level-`p` bad edge of the
 exponent-trit tree: the prefix pair's power digits align at row `p+1`
 and the `p`-th exponent trit is the unique killing trit. -/
@@ -63,6 +64,7 @@ def treeBad (K p : Nat) : Bool :=
 at row `p` is exactly a shared ternary digit-two of the consecutive
 powers `4^K` and `4^(K+1)` — the carry condition dissolves into the
 x4 digit law.  Self-proved through the addition-carry engine. -/
+open GSTFourPowerDirectResidue in
 theorem consecutive_digits_of_happy (K p : Nat)
     (h : GSTCanonicalTailStateIso.HappyCell
         (GSTCanonicalTailStateIso.carry4 (4^K) p)
@@ -87,6 +89,7 @@ theorem consecutive_digits_of_happy (K p : Nat)
   · rw [h3, hd'] at h4
     simpa [pow_succ, Nat.mul_comm, Nat.mul_left_comm, Nat.mul_assoc] using h4
 
+open GSTFourPowerDirectResidue in
 /-- The bad edge is exactly the prefix-killing-trit pair of the chamber's
 equivalence. -/
 theorem treeBad_iff_prefix_killing_trit (K p : Nat) :
@@ -103,30 +106,25 @@ exponent modulo `3^(p+1)`. -/
 theorem trit_congr (K r p : Nat) (h : K % 3^(p+1) = r % 3^(p+1)) :
     K / 3^p % 3 = r / 3^p % 3 := by
   have hpos : 0 < 3^p := Nat.pow_pos (by decide)
-  obtain ⟨u, hu⟩ : ∃ u, K = 3^(p+1) * u + r % 3^(p+1) := by
+  obtain ⟨u, hu⟩ : ∃ u, K = u * 3^(p+1) + r % 3^(p+1) := by
     refine ⟨K / 3^(p+1), ?_⟩
     have hstd := Nat.div_add_mod K (3^(p+1))
     rw [h] at hstd
-    rw [Nat.mul_comm] at hstd
     exact hstd.symm
-  obtain ⟨w, hw⟩ : ∃ w, r = 3^(p+1) * w + r % 3^(p+1) := by
+  obtain ⟨w, hw⟩ : ∃ w, r = w * 3^(p+1) + r % 3^(p+1) := by
     refine ⟨r / 3^(p+1), ?_⟩
-    have hstd := Nat.div_add_mod r (3^(p+1))
-    rw [Nat.mul_comm] at hstd
-    exact hstd.symm
+    exact (Nat.div_add_mod r (3^(p+1))).symm
   have hpp : ∀ x : Nat,
-      (3^(p+1) * x + r % 3^(p+1)) / 3^p % 3
+      (x * 3^(p+1) + r % 3^(p+1)) / 3^p % 3
         = (r % 3^(p+1)) / 3^p % 3 := by
     intro x
-    have hA : 3^(p+1) * x = (3 * x) * 3^p := by
-      rw [Nat.pow_succ]
-      ring
-    rw [hA, Nat.add_mul_div_left _ _ hpos, Nat.mul_comm (3 * x),
-      Nat.add_mul_mod_self_right]
+    have hA : x * 3^(p+1) = (x * 3) * 3^p := by
+      rw [Nat.pow_succ, Nat.mul_assoc]
+    rw [hA, Nat.add_mul_div_left _ _ hpos, Nat.add_mul_mod_self_left]
   calc K / 3^p % 3
-      = (3^(p+1) * u + r % 3^(p+1)) / 3^p % 3 := by rw [hu]
-    _ = (3^(p+1) * w + r % 3^(p+1)) / 3^p % 3 := by rw [hpp u, hpp w]
-    _ = r / 3^p % 3 := by rw [hw]
+      = (u * 3^(p+1) + r % 3^(p+1)) / 3^p % 3 := by rw [hu]
+    _ = (w * 3^(p+1) + r % 3^(p+1)) / 3^p % 3 := by rw [hpp u, hpp w]
+    _ = r / 3^p % 3 := by rw [← hw]
 
 /-- **THE TREE'S CONGRUENCE LAW.**  The bad edge at level `p` sees only the
 exponent modulo `3^(p+1)`: two exponents congruent there own the same edge. -/
@@ -137,9 +135,9 @@ theorem treeBad_congr (K r p : Nat)
     rw [Nat.pow_succ]
     exact dvd_mul_right (3^p) 3
   have hKp : K % 3^p = (K % 3^(p+1)) % 3^p :=
-    (Nat.mod_mod_of_dvd hp5 K).symm
+    (Nat.mod_mod_of_dvd K hp5).symm
   have hrp : r % 3^p = (r % 3^(p+1)) % 3^p :=
-    (Nat.mod_mod_of_dvd hp5 r).symm
+    (Nat.mod_mod_of_dvd r hp5).symm
   unfold treeBad
   rw [hKp, hrp, h, trit_congr K r p h]
 
@@ -248,7 +246,8 @@ theorem commonTwoGeThree_of_band6 (K : Nat)
     GSTFourPowerHappyProvider.CommonTwoGeThree K := by
   have hr729 : K % 729 < 729 := Nat.mod_lt _ (by norm_num)
   rcases band6_scan (K % 729) hr729 with hS | hT
-  · exact absurd hS hout
+  · rw [hout] at hS
+    exact (Bool.false_ne_true hS).elim
   · have hfire : ∃ p : Nat, 2 ≤ p ∧ p ≤ 5 ∧ treeBad (K % 729) p = true := by
       rcases hT with h2 | h3
       · exact ⟨2, by norm_num, by norm_num, h2⟩
@@ -264,17 +263,17 @@ theorem commonTwoGeThree_of_band6 (K : Nat)
         rw [← Nat.pow_add]
         congr 1
         omega
-      rw [h6, hsplit]
+      rw [← h6, hsplit]
       exact dvd_mul_right _ _
     have hcon : treeBad K p = treeBad (K % 729) p :=
-      treeBad_congr K (K % 729) p (Nat.mod_mod_of_dvd hdvd K).symm
+      treeBad_congr K (K % 729) p (Nat.mod_mod_of_dvd K hdvd).symm
     rw [hcon] at hbad
     exact commonTwoGeThree_of_treeBad K p hp2 hbad
 
-/-- **THE ROW-SIX HAPPY LAW.**  The band-six fire law delivered as the
-climb's own physical statement. -/
 open GSTU2DEventTransport in
 open GSTCanonicalSevenAxisBridge in
+/-- **THE ROW-SIX HAPPY LAW.**  The band-six fire law delivered as the
+climb's own physical statement. -/
 theorem happy_ge_three_of_band6 (K : Nat)
     (hout : tailS6.contains (K % 729) = false) :
     ∃ p : Nat, 3 ≤ p ∧
@@ -284,8 +283,7 @@ theorem happy_ge_three_of_band6 (K : Nat)
 
 /-! ## §3 The No-22 face — the counterexample's digit side, rows ≥ 3 -/
 
-open GSTFourPowerDirectAdditionCarry
-
+open GSTFourPowerDirectResidue in
 /-- **THE ISOLATED TWO, ROWS AT LEAST THREE.**  Under a counterexample to
 the row-three-or-higher common-two statement, every source digit two at a
 row at least three forces the next binary carry bit to one.  The chamber's
@@ -317,6 +315,7 @@ theorem source_two_forces_next_binary_one_of_no_common_ge_three
     simpa [pow_succ, Nat.mul_comm] using hcommon.2
   omega
 
+open GSTFourPowerDirectResidue in
 /-- **THE ADAPTED NO-22 LAW.**  A counterexample to the row-three-or-higher
 common-two statement has no adjacent ternary `22` pair at any row at least
 three. -/
@@ -336,6 +335,7 @@ theorem no_common_ge_three_forbids_source_22
   refine ⟨p+1, by omega, hcommon.1, ?_⟩
   simpa [pow_succ, Nat.mul_comm] using hcommon.2
 
+open GSTFourPowerDirectResidue in
 /-- **THE NO-22 SUFFIX.**  A counterexample's whole ternary suffix beyond
 row three is No-22: the chamber's suffix-stable ternary language, entered
 through the adapted isolation law. -/
@@ -355,6 +355,7 @@ theorem no22_suffix_of_no_common_ge_three (K : Nat)
     simpa [Nat.add_comm, Nat.add_left_comm] using h22.2
   exact no_common_ge_three_forbids_source_22 K (j+3) hp3 hNo hfirst hsecond
 
+open GSTFourPowerDirectResidue in
 /-- **THE MAGNITUDE FACE.**  The counterexample's suffix obeys the chamber's
 sharp finite magnitude law: the 7/8 density constant, extremal at the
 alternating word 2121...21. -/
@@ -375,7 +376,7 @@ classes; (2) the owner of a No-22 ternary suffix beyond row three; and
 (3) bounded by the sharp 7/8 magnitude law on every nine-power window.
 The remaining content of Erdos #406 is the impossibility of this triple
 collision. -/
-theorem tail_counterexample_collision (K : Nat) (hK : 501 ≤ K)
+theorem tail_counterexample_collision (K : Nat) (_hK : 501 ≤ K)
     (hNo : ¬ GSTFourPowerHappyProvider.CommonTwoGeThree K) :
     (tailS6.contains (K % 729) = true) ∧
     GSTFourPowerNo22Magnitude.No22Ternary (4^K / 27) ∧
@@ -391,13 +392,13 @@ theorem tail_counterexample_collision (K : Nat) (hK : 501 ≤ K)
 extended base sits in a level-six survivor class AND its suffix magnitude
 is capped in the window of its own trit length: the two sides of the
 collision, stated on the same window. -/
-theorem tail_collision_magnitude_window (K : Nat) (hK : 501 ≤ K)
+theorem tail_collision_magnitude_window (K : Nat) (_hK : 501 ≤ K)
     (hNo : ¬ GSTFourPowerHappyProvider.CommonTwoGeThree K)
     (m : Nat) (hX : 4^K / 27 < 9^m) :
     tailS6.contains (K % 729) = true ∧
       8 * (4^K / 27) ≤ 7 * (9^m - 1) :=
   ⟨(tail_counterexample_collision K hK hNo).1,
-    (tail_counterexample_collision K hK hNo).2.2 m hX]
+    (tail_counterexample_collision K hK hNo).2.2 m hX⟩
 
 /-! ## §5 The extended base — the climb kernel-certified to 1500 -/
 
@@ -1415,10 +1416,10 @@ theorem erdos406_climb_base_ext :
   exact ⟨3, by decide, by simp only [HappyCell, carry4, digit3]; decide⟩
   exact ⟨4, by decide, by simp only [HappyCell, carry4, digit3]; decide⟩
 
-/-- **THE FULL BASE TO 1500** — the original 493-witness base composed
-with the 1000-witness extension. -/
 open GSTU2DEventTransport in
 open GSTCanonicalSevenAxisBridge in
+/-- **THE FULL BASE TO 1500** — the original 493-witness base composed
+with the 1000-witness extension. -/
 theorem erdos406_climb_base_1500 :
     ∀ K : Nat, 8 ≤ K → K ≤ 1500 →
       ∃ p : Nat, 3 ≤ p ∧
@@ -1430,6 +1431,8 @@ theorem erdos406_climb_base_1500 :
 
 /-! ## §6 The sharpened verdict — the whole problem above 1500 -/
 
+open GSTU2DEventTransport in
+open GSTCanonicalSevenAxisBridge in
 /-- **THE MISSION'S SHARPEST STATEMENT, SHARPENED.**  Erdos #406's
 universal verdict follows from the climb's tail above one thousand five
 hundred alone: the base band is kernel-certified to 1500, the composition
