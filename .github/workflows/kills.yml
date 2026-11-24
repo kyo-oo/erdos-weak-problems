@@ -1395,10 +1395,12 @@ jobs:
       name: "Kernel 74b - Erdos 406 THE PI-POINT PINS HALF (the S084 bisect, now its OWN fresh-runner job per the eviction-shield law: the seven kills all hit the 74b compile mid-flight on a shared runner; this job starts the compile at minute zero) — cMod, W61, the three pi-points, THE PIN, the census base, THE TWO-GRANT CROWN + battery406f.py + the S085 r7 five-defect repair applied"
       run: |
         set -euo pipefail
-        sudo fallocate -l 10G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=10240
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
+        if [ ! -f /swapfile2 ]; then
+          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+        fi
+        sudo swapon /swapfile2 2>/dev/null || true
         free -h
         lake build Arsenal.ErdosTernary2.Basic
         lake build Arsenal.CardinalWorlds
@@ -1440,10 +1442,12 @@ jobs:
       name: "Kernel 75 - Erdos 406 THE GHOST-EXTINCTION KERNEL (S083/S085r7: first true exposure — every prior run skipped it after the 74b failure/kill; own fresh runner now) + the S085 r7 five-defect repair applied"
       run: |
         set -euo pipefail
-        sudo fallocate -l 10G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=10240
-        sudo chmod 600 /swapfile
-        sudo mkswap /swapfile
-        sudo swapon /swapfile
+        if [ ! -f /swapfile2 ]; then
+          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+        fi
+        sudo swapon /swapfile2 2>/dev/null || true
         free -h
         lake build Arsenal.ErdosTernary2.Basic
         lake build Arsenal.CardinalWorlds
