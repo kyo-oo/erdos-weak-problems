@@ -60,11 +60,11 @@ def treeBad (K p : Nat) : Bool :=
     (digit3 (4^(K % 3^p)) (p+1) == digit3 (4^((K % 3^p)+1)) (p+1)) &&
     (K / 3^p % 3 == 2 - digit3 (4^(K % 3^p)) (p+1))
 
+open GSTFourPowerDirectResidue in
 /-- **THE HAPPY FACE READ AS DIGITS.**  A physical Happy cell of `4^K`
 at row `p` is exactly a shared ternary digit-two of the consecutive
 powers `4^K` and `4^(K+1)` — the carry condition dissolves into the
 x4 digit law.  Self-proved through the addition-carry engine. -/
-open GSTFourPowerDirectResidue in
 theorem consecutive_digits_of_happy (K p : Nat)
     (h : GSTCanonicalTailStateIso.HappyCell
         (GSTCanonicalTailStateIso.carry4 (4^K) p)
@@ -109,18 +109,21 @@ theorem trit_congr (K r p : Nat) (h : K % 3^(p+1) = r % 3^(p+1)) :
   obtain ⟨u, hu⟩ : ∃ u, K = u * 3^(p+1) + r % 3^(p+1) := by
     refine ⟨K / 3^(p+1), ?_⟩
     have hstd := Nat.div_add_mod K (3^(p+1))
-    rw [h] at hstd
+    rw [h, Nat.mul_comm] at hstd
     exact hstd.symm
   obtain ⟨w, hw⟩ : ∃ w, r = w * 3^(p+1) + r % 3^(p+1) := by
     refine ⟨r / 3^(p+1), ?_⟩
-    exact (Nat.div_add_mod r (3^(p+1))).symm
+    have hstd := Nat.div_add_mod r (3^(p+1))
+    rw [Nat.mul_comm] at hstd
+    exact hstd.symm
   have hpp : ∀ x : Nat,
       (x * 3^(p+1) + r % 3^(p+1)) / 3^p % 3
         = (r % 3^(p+1)) / 3^p % 3 := by
     intro x
-    have hA : x * 3^(p+1) = (x * 3) * 3^p := by
-      rw [Nat.pow_succ, Nat.mul_assoc]
-    rw [hA, Nat.add_mul_div_left _ _ hpos, Nat.add_mul_mod_self_left]
+    have hA : x * 3^(p+1) = 3^p * (x * 3) := by
+      rw [Nat.pow_succ, Nat.mul_left_comm]
+    rw [hA, Nat.add_comm (3^p * (x * 3)) (r % 3^(p+1)),
+      Nat.add_mul_div_left _ _ hpos, Nat.add_mul_mod_self_right]
   calc K / 3^p % 3
       = (u * 3^(p+1) + r % 3^(p+1)) / 3^p % 3 := by rw [hu]
     _ = (w * 3^(p+1) + r % 3^(p+1)) / 3^p % 3 := by rw [hpp u, hpp w]
@@ -267,7 +270,7 @@ theorem commonTwoGeThree_of_band6 (K : Nat)
       exact dvd_mul_right _ _
     have hcon : treeBad K p = treeBad (K % 729) p :=
       treeBad_congr K (K % 729) p (Nat.mod_mod_of_dvd K hdvd).symm
-    rw [hcon] at hbad
+    rw [← hcon] at hbad
     exact commonTwoGeThree_of_treeBad K p hp2 hbad
 
 open GSTU2DEventTransport in
@@ -392,7 +395,7 @@ theorem tail_counterexample_collision (K : Nat) (_hK : 501 ≤ K)
 extended base sits in a level-six survivor class AND its suffix magnitude
 is capped in the window of its own trit length: the two sides of the
 collision, stated on the same window. -/
-theorem tail_collision_magnitude_window (K : Nat) (_hK : 501 ≤ K)
+theorem tail_collision_magnitude_window (K : Nat) (hK : 501 ≤ K)
     (hNo : ¬ GSTFourPowerHappyProvider.CommonTwoGeThree K)
     (m : Nat) (hX : 4^K / 27 < 9^m) :
     tailS6.contains (K % 729) = true ∧
@@ -1460,10 +1463,10 @@ theorem tail_1500_of_no_collision
         GSTFourPowerNo22Magnitude.No22Ternary (4^K / 27))) :
     ∀ K : Nat, 1500 < K →
       GSTFourPowerHappyProvider.CommonTwoGeThree K := by
-  intro K hK hnc
+  intro K hK
   by_contra hNo
   have hcol := tail_counterexample_collision K (by omega) hNo
-  exact hnc K hK ⟨hcol.1, hcol.2.1⟩
+  exact h K hK ⟨hcol.1, hcol.2.1⟩
 
 /-! ## §7 Receipts -/
 
