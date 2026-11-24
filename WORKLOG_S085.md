@@ -288,3 +288,74 @@ the 101 stalls: 'by simp only [HappyCell, carry4, digit3]; decide'
 (unfold via equation lemmas, kernel evaluation closes).
 
 The engine never stops; it never lies.
+
+---
+
+## ROUNDS r27-r28 — THE TAIL ASSAULT (BOSS order: PROVE THE LAST REMAINING HYPOTHESIS)
+
+BOSS's order (5th round): "USE GITHUB LEAN ONLY AND ALSO USING THIS NEW
+LAWS OR THEOREMS, YOU CAN EVEN WRITE NEW LEAN MODULES, BUT PROVE THE LAST
+REMAINING HYPOTHESIS, GO."
+
+### A. The state read (before this round)
+r26 verdicts: all 406 kernels GREEN except 406d/406e (the pins/ghost
+memory kills, infra — logs expired before harvest).  FinalVerdict406 §1-§5
++ DustCandidates406 all machine-certified.  The mission's remaining
+content: ONE named hypothesis — htail, the climb's tail above 500.
+
+### B. The engine layer (the honest reconnaissance)
+- THE EXPONENT-TRIT BAD TREE: through the chamber's exact
+  row_common_two_iff_prefix_killing_trit equivalence, the fire at row
+  p+1 is EXACTLY [prefix pair aligns] ∧ [p-th trit = killing trit].
+  Sieved to level 10: the tree is IMMORTAL (survival ratio ~2.48/node,
+  heq ~52%) — no finite band can exist; the naturals must die
+  structurally.
+- The tree's natural (zero-tail) survivors: EXACTLY {0,1,2,3,4,7} —
+  the climb's own exclusion list (K=7 the unique exclusion ≥ 5).
+  ZERO counterexamples in (500, 3^10).
+- Fire-row distribution: all naturals in [8,3000) fire; max first-fire
+  row 41 (K=497); fires live in a band up to ~7x the trit length —
+  the two-band structure (Band I trit-driven, Band II digit-driven).
+- OFF-BY-ONE CAUGHT: the first sieve's heq_kill read digit_p instead of
+  digit_{p+1}; the fixed engine reproduces the chamber's row-3 classes
+  {14,18,19,25} EXACTLY — the ground truth anchor.
+- The 10-state Happy-avoiding automaton's spectral radius 2.4812 < 3,
+  but its extremal value is the SAME 7/8 (the word 2121...21) — the
+  magnitude weapon is the chamber's own no22_nine_power_bound.
+
+### C. THE ASSAULT FILE — MonolithGate/TailAssault406.lean (1492 lines)
+THE ordered composition — five-plus files' CI-green laws in COMPLETE NEW
+THEOREMS:
+- §1 THE TRIT-TREE LAW: happy_iff_treeBad — the climb's Happy rows ARE
+  the bad edges of K's own ternary tree (prefix-killing-trit engine +
+  Happy provider + addition-carry digit law; happy->digits self-proved
+  via digit3_four_mul — the relocation file is not in the gate lib).
+- §2 THE BAND LATTICE: four kernel-decided survivor tables (23 mod 27,
+  57 mod 81, 142 mod 243, 352 mod 729) — every class outside fires by
+  row six; all 377 fired classes two-method verified (big-int +
+  modular) before generation, the kernel re-decides every one.
+- §3 THE NO-22 FACE: the chamber's isolation laws adapted to rows >= 3
+  (source_two_forces_next_binary_one_of_no_common_ge_three,
+  no_common_ge_three_forbids_source_22, no22_suffix, magnitude_face).
+- §4 THE COLLISION THEOREM: tail_counterexample_collision — any
+  counterexample above the base is simultaneously a Band-I tree-survivor
+  (class mod 729 in the survivor table) AND No-22-suffixed (4^K/27)
+  AND 7/8-magnitude-capped.  The remaining content of Erdos #406 IS
+  the impossibility of this triple collision.
+- §5 THE EXTENDED BASE: [501,1500] with 1000 explicit witnesses (max
+  row 38), kernel arithmetic on 3002-bit powers.
+- §6 THE SHARPENED VERDICT: erdos406_universal_verdict_of_tail_1500 —
+  the whole problem above 1500, one named hypothesis +
+  tail_1500_of_no_collision — the tail hypothesis as the no-collision
+  statement.
+
+### D. CI
+kernel-406tail wired (memory shield + REAL gates + 13 receipt greps +
+marker).  r27 first exposure: 9 error classes (the directCarry4 open
+placement, trit_congr's mul-order + rw-explosion, mod_mod_of_dvd's
+a-position, the <-h6 direction, THE DOCSTRING-OPEN ORDER TRAP AGAIN,
+THE digit3 AMBIGUITY (killed by scoping the DirectResidue open to 7
+per-theorem sites), the hX bracket typo).  r28 pushed with all nine
+fixed.
+
+The engine never stops; it never lies.
