@@ -94,7 +94,7 @@ theorem exists_three_shape (K : Nat) :
   induction K using Nat.strongRecOn with
   | ind K ih =>
     rcases Nat.eq_zero_or_pos K with hK0 | hK1
-    · exact ⟨0, 0, by rw [hK0, Nat.pow_zero]; norm_num, Or.inl rfl⟩
+    · exact ⟨0, 0, by rw [hK0, Nat.pow_zero], Or.inl rfl⟩
     · by_cases h3 : 3 ∣ K
       · obtain ⟨m, hm⟩ := h3
         have hmlt : m < K := by omega
@@ -102,7 +102,7 @@ theorem exists_three_shape (K : Nat) :
         refine ⟨s+1, b, ?_, hbshape⟩
         rw [hm, hsb, Nat.pow_succ]
         ring
-      · exact ⟨0, K, rfl, Or.inr h3⟩
+      · exact ⟨0, K, by simp, Or.inr h3⟩
 
 /-- **THE SHARPENED VERDICT, TOWER-FREE.**  Erdos #406's universal
 verdict from the tail above the kernel base 3000, quantified only over
