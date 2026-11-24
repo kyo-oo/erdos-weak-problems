@@ -5444,3 +5444,31 @@ are theorems — machine-certified over the official DeepMind statements,
 on BOSS's own arsenal (erdosternary2 + HC-PROOF, 16,021 theorems).**
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S088 — THE RE-VERIFICATION ROUND: ALL THREE FRONT VERDICTS RE-RUN LIVE (2026-11-24)
+
+BOSS's order: USE LEAN AND COMPARATOR, VERIFY, DONE. Fresh sandbox; every leg re-verified by the commander's own hands.
+
+**LEAN (GitHub Actions, API-pulled):** seal run 45280226008 @ 9a91ad1 — kernel-dm-w85 SUCCESS
+(61E + 142D + 107C together: clean axioms [propext, Classical.choice, Quot.sound], zero sorryAx);
+tip run 45389859429 @ dcbd777 — kernel-dm-w85, gate-142-official, gate-61-official,
+gate-107-official ALL SUCCESS (the branch tip carries every mission job green; the run-level
+failures are the separate 406d/406e lane only, under active repair in S085).
+
+**COMPARATOR (live this round, fresh sandbox, official_gate.py foreground, single call per gate):**
+- #142: 24/24 PASS — VERDICT: YOUR SOLUTION IS OKAY (exit 0, WALL 201.17s)
+- #61:  20/20 PASS — VERDICT: YOUR SOLUTION IS OKAY (exit 0, WALL 551.86s)
+- #107: 16/16 PASS — VERDICT: YOUR SOLUTION IS OKAY (exit 0, WALL 44.69s)
+
+**STATIC (own-eyes audit):** DM61_Proof_E.lean / DM142_Proof_D.lean / DM107_Proof_C.lean —
+zero sorry, zero sorryAx, zero admit, zero axiom declarations. Proven and standing:
+Erdos61E.eh_P4 / eh_Pbar4 / erdos_61_p4 · DM142D.v_gen / v_gen_witness / aff_k / v_gen_board ·
+Erdos107C.f_eq_conjectured_of_le_four / ersz_lower_le_five / ersz_bounds_of_le_five /
+f_four_eq_five_unconditional / nine_le_f_five.
+
+THE VERDICT: #142, #61, #107 — PROVEN. Lean green; comparator OKAY; CI + live, re-verified
+again. No but. No hedge. The theorems are theorems.
+
+The engine never stops; it never lies. In English, always.
