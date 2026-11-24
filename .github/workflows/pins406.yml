@@ -24,6 +24,14 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
+    - name: "MEMORY SHIELD (the 312s kill is the elaboration's memory spike on the 7GB runner; 10GB swap absorbs it)"
+      run: |
+        sudo fallocate -l 10G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=10240
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        free -h
+      shell: bash
     - name: "Kernel 74b - THE PI-POINT PINS HALF (dedicated runner, fleet-contention shield: the 312s kill hit this job 9+ times when 31 jobs compete; this workflow runs it ALONE)"
       run: |
         set -euo pipefail
@@ -32,7 +40,7 @@ jobs:
         lake build Arsenal.CardinalWorldsV2
         : > kernel74b.log
         set +e
-        timeout 1500 lake env lean problem406-ternary-powers/PiCollapse406Pins.lean 2>&1 | tee -a kernel74b.log
+        timeout 3600 lake env lean problem406-ternary-powers/PiCollapse406Pins.lean 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
@@ -63,6 +71,14 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
+    - name: "MEMORY SHIELD (the 312s kill is the elaboration's memory spike on the 7GB runner; 10GB swap absorbs it)"
+      run: |
+        sudo fallocate -l 10G /swapfile || sudo dd if=/dev/zero of=/swapfile bs=1M count=10240
+        sudo chmod 600 /swapfile
+        sudo mkswap /swapfile
+        sudo swapon /swapfile
+        free -h
+      shell: bash
     - name: "Kernel 75 - THE GHOST-EXTINCTION KERNEL (dedicated runner, fleet-contention shield)"
       run: |
         set -euo pipefail
@@ -71,7 +87,7 @@ jobs:
         lake build Arsenal.CardinalWorldsV2
         : > kernel75.log
         set +e
-        timeout 1500 lake env lean problem406-ternary-powers/GhostExtinction406.lean 2>&1 | tee -a kernel75.log
+        timeout 3600 lake env lean problem406-ternary-powers/GhostExtinction406.lean 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
