@@ -506,3 +506,38 @@ Face D (MonolithGate/TailAssault406D.lean):
   the tower family at all.
 
 The engine never stops; it never lies.
+
+## r33 VERDICT: FACE D GREEN — THE FOUR-FACE CAMPAIGN STANDS
+
+r33 (8a96fa5, run 45493475301): **kernel-406tail4 SUCCESS.** All five
+Face D theorems sorry-free — the defeq bridges at [propext], the tower
+origin kill at [propext, Classical.choice, Quot.sound], the shape at
+[propext, Quot.sound], the tower-free verdict clean. TAIL_ASSAULT_D_
+GREEN. Vault sealed (sandbox-vault bd936c3..8a96fa5).
+
+THE FOUR-FACE RECORD (this session-series, all CI-green, 38 theorems):
+- FACE A (r27-r29, run 45478223728): the trit-tree law, the four-band
+  kernel lattice, the No-22 face, the collision theorem, the 1000-
+  witness base to 1500, the sharpened verdict. 22 theorems.
+- FACE B (r30, run 45484520689): the six-state automaton, the
+  forbidden-edge face, the automaton collision, THE BASE DOUBLED TO
+  3000 (1500 fire-row witnesses, one kernel decide). 6 theorems.
+- FACE C (r31, run 45488401958): THE CIRCLE CLOSED — treeBad iff the
+  common two at every level; the climb, the tree, and the common-two
+  statement are one object; total tree silence; the one-trit dodge.
+  5 theorems.
+- FACE D (r32-r33, run 45493475301): THE TOWER ORIGIN KILL — the
+  monolith's origin law composed into the unconditional death of the
+  entire tower family K = 3^s * b (s >= 2, b % 3 = 2) at row s+1; the
+  tower-free sharpened verdict. 5 theorems.
+
+THE REMAINING HYPOTHESIS, SHARPENED FOUR TIMES: the climb above 3000,
+non-tower exponents only (v_3(K) <= 1, or v_3 >= 2 with cofactor one
+mod three), total tree silence, all-loud power-digit twos, No-22
+suffix under the 7/8 cap, exponent trits dodging the unique killing
+value at every level. One named hypothesis, machine-closed on every
+side, its next faces mapped (E: the omega chamber's diagonal-kill
+machinery; F: the even-conjecture route through the crown's own
+green bridge).
+
+The engine never stops; it never lies.
