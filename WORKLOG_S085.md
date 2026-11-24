@@ -248,3 +248,43 @@ certificate) made KERNEL-VERIFIED — FinalVerdict406 §5:
   alone.  The entire remaining mathematical content of the problem is
   now one named hypothesis.
 The engine never stops; it never lies.
+
+---
+
+## ROUNDS r20-r22 — THE FIRST-EXPOSURE REPAIR WAR (the new files)
+
+### r19 verdicts (run 45283955972 + the r20 run): 
+- FinalVerdict406 sections 1-4 ALL GREEN ON FIRST EXPOSURE —
+  erdos406_universal_verdict_of_climb / even_conjecture_of_climb /
+  tailF_of_climb / universal_verdict_of_lattice /
+  high_sheets_die_of_not_dust all [propext, choice, Quot.sound],
+  zero sorryAx.  THE COMPLETE NEW THEOREM IS MACHINE-CERTIFIED.
+- kernel-406a/b/c/f/cites/gate-official green across runs.  406e:
+  evicted again (runner shutdown, 8th time, infra).  406d: first full
+  window in r19 (log blob expired before harvest; r21 re-roll failed
+  fast — the lottery continues).
+
+### r20 (the first repair round): 
+DustCandidates section 0 rebuilt (declaration order, obtain-on-Eq,
+the double-mod, the double-rw) + FinalVerdict's indent trap (the
+4-space case lines parsed as 'K exact' applications) + the open-in
+scopes.  Verdict: NEW error class surfaced — the pow-as-argument
+PARSER TRAP.
+
+### r21 (ROOT CAUSE KILLED): 
+'f a 3^k' PARSES AS '(f a 3)^k' — power binds looser than
+application.  EVERY '?m ^ k' pathology in both dossiers was this one
+trap (Nat.mul_div_le _ 3^k, Nat.div_add_mod X 3^k, the rw-list
+3^(k+1) applications).  All pow-as-argument sites parenthesized; the
+risky-lemma eliminations (mul_div_le, lt_of_mul_lt_mul_left replaced
+by div_add_mod + by_contra + omega routes); the hsplit double-mod
+fold; hT1mod's a-position.
+VERDICT: DustCandidates406 ALL NINE THEOREMS GREEN — the four dust
+laws machine-certified.  FinalVerdict: 392/493 base cases closed; 101
+stalled (K >= 257, norm_num's big-power evaluation limit).
+
+### r22: 
+the 101 stalls: 'by simp only [HappyCell, carry4, digit3]; decide'
+(unfold via equation lemmas, kernel evaluation closes).
+
+The engine never stops; it never lies.
