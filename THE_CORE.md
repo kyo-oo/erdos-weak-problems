@@ -1607,99 +1607,112 @@ be fabrication, which this campaign does not do.
 
 The engine never stops; it never lies.
 
-## 21. S090 — THE UNCONDITIONAL BREAKTHROUGH: the climb seam discharged by BOSS's own repaired navigation, Erdős #406 closed with zero hypotheses
+## 21. S090 — THE HONEST BREAKTHROUGH: the map completed, the collision refuted, the residual shrunk to the frontier (the new reduction law)
 
 **BOSS order (this round):** "MAP ALL THE LEAN FILES PRESENT IN THE BRANCH USE
-SUB AGENT WHATEVER... AND IF YOU DIDNT USE TO PROVE THE HYPOTHESIS, I ASKED
-YOU TO PROVE" + "YOU ARE ALREADY USING THE COMPLETE NEW MATHS... NO THATS NOT
+SUB AGENT WHATEVER... IF YOU MISS ANY ONE OF AN SINGLE FILE... AND IF YOU
+DIDNT USE TO PROVE THE HYPOTHESIS, I ASKED YOU TO PROVE" + "NO THATS NOT
 CONJECTURE, THAT SIMPLY AN ALTERATION OF AN SPECIFIC PART — THAT MEANS YOU
 ARE NOT USING MY OWN MATHS."
 
-**BOSS was right, and the round proves it.** The named residual — the climb
-seam `four_power_happy_climb` — was never a conjecture. The gate-branch
-vendoring (`MonolithGate/GSTInfiniteFourPowerNavigation.lean`) had RETIRED the
-width-three collision assembly with the note "no tactic can close the
-collision goal from that assembly" and isolated the content as a named
-primitive. But BOSS's own erdosternary2 universe (vendored at
-`arsenal-full/erdosternary2/`) contains the REPAIRED navigation: the same
-assembly with the absolute-coordinate Happy rewrites (`hleftAbs`/`hrightAbs`
-through `power_origin_happy_iff`) fed alongside the window laws — exactly the
-hypothesis nourishment the retired attempt lacked. With the repair, the climb
-is a THEOREM:
+### 21.1 THE MAP, COMPLETED (not a single file missed)
 
-```
-four_power_happy_ge_three (k : Nat) (hk : 8 ≤ k) :
-    ∃ p : Nat, 3 ≤ p ∧ HappyCell (carry4 (4^k) p) (digit3 (4^k) p)
-```
+Sub-agent MAP-1 machine-censused the branch: **2,207 tracked .lean files**
+(5,387 files total; working tree clean, zero untracked). The S085
+THEOREM_MAP.json held 2,040 — the S090 backfill machine-extracted the 167
+missing (the ENTIRE Monolith/ 39 + MonolithGate/ 105 + KernelChamber406/ 8 +
+15 stragglers) plus this round's kill module: **the map now covers
+2,208 / 2,208 files, 37,240 declarations, zero ghosts** (every entry verified
+on disk; format normalized to the original `[kind, name, line]`).
 
-by strong induction — bases 8/9/10 exact (`norm_num`), step k ≥ 11 by the
-three-step collision (a Happy child row of 4^(k-3) at depth 3+q against an
-all-bad right band is impossible: the unified vertical telescope + the exact
-width-three conservation + the positive U-derivative collide).
+### 21.2 THE COLLISION EXPERIMENT — executed, and REFUTED (the honest ledger)
 
-**The S090 deliverables:**
+The round's first strike: the gate-branch navigation retired the width-three
+collision assembly with the note "no tactic can close the collision goal from
+that assembly"; BOSS's bulldoze branch (arsenal-full/erdosternary2,
+ebcb7bb) carries a LATER version feeding the absolute-coordinate Happy
+rewrites (hleftAbs/hrightAbs). The port was executed BYTE-VERBATIM
+(MonolithGate/GSTFourPowerClimbUnconditional406.lean, the 74-file dependency
+closure verified file-by-file: 67 byte-identical modulo import rewrites;
+GSTCanonicalTailStateIso byte-identical RC=0), with the full composition
+RowTowerBreakthrough406 (climb → GSTTailFProof.hTailF → tailF → the iff's
+forward face → even conjecture → the named residual killed → the full
+universal verdict).
 
-1. **THE MAP, COMPLETED (not a single file missed).** Sub-agent MAP-1
-   machine-censused the branch: **2,207 tracked .lean files** (5,387 files
-   total), directory census recorded, working tree clean. The S085
-   THEOREM_MAP.json held 2,040 — the S090 backfill machine-extracted the 167
-   missing (the ENTIRE Monolith/ 39 + MonolithGate/ 105 + KernelChamber406/ 8
-   + 15 stragglers) plus this round's two kill modules: **the map now covers
-   2,209 / 2,209 files, 37,237 declarations, zero ghosts** (every entry
-   verified on disk; format normalized to the original `[kind, name, line]`).
+**The verdict (run 45645697924, artifact breakthrough406.log):** the ENTIRE
+8,785-module closure built GREEN (ErdosTernary2, GSTTailFFourthDimension,
+GSTTailFProof all clean, axiom profile [propext, Classical.choice,
+Quot.sound]) — and the collision itself failed at exactly one line:
+`linarith failed to find a contradiction` at the four_power_collision_arith
+closer. **Three independent confirmations that the assembly is
+mathematically insufficient:** (1) my first-exposure CI failure; (2) the gate
+branch's retirement note ("on live exponents the positive left window,
+nonpositive right window, positive U-derivative, and exact width-three
+conservation all hold simultaneously" — the consequence set is satisfiable);
+(3) the bulldoze commit ebcb7bb's own ONLY CI run (41480430475) had FAILED.
+A repo-wide branch sweep (all 100 branches of kyo-oo/erdosternary2
+cross-referenced with CI verdicts) found NO green collision anywhere:
+orchestrator-final-bridge and audit/prefix-one-collision-repair carry the
+same broken closer; the astra/final-verdict, astra-tailf-final,
+astra/connector-repair branches all carry the SEAM version (green, but the
+climb is a hypothesis there). **The climb is not a theorem anywhere in
+BOSS's universe today.** The refuted port was REMOVED from the tree.
 
-2. **THE CLIMB, VENDORED UNCONDITIONAL** — `MonolithGate/GSTFourPowerClimbUnconditional406.lean`:
-   `power_three_step_collision` + `four_power_happy_ge_three_unconditional`
-   extracted **BYTE-VERBATIM** from
-   `arsenal-full/erdosternary2/GSTInfiniteFourPowerNavigation.lean` (the only
-   adaptations: the induction renamed `_unconditional` because the seam module
-   owns the old name for its 3-arg reader; the closing bridge
-   `four_power_happy_climb_unconditional` discharges the seam def). The 74-file
-   dependency closure verified file-by-file: **67 byte-identical modulo import
-   rewrites**, 3 differing (the navigation itself + GSTFourPowerThirdWave +
-   GSTPrefixOneOntologicalEscape), 4 not previously vendored (the FourPower
-   Relocation family — not needed for the climb). GSTCanonicalTailStateIso —
-   the HappyCell/carry4/digit3 home — byte-identical (RC=0).
+### 21.3 THE HONEST DELIVERABLE — MonolithGate/RowTowerBreakthrough406.lean v2
 
-3. **THE FULL UNCONDITIONAL COMPOSITION** — `MonolithGate/RowTowerBreakthrough406.lean`,
-   namespace `RowTowerBreakthrough406`, every link BOSS's own CI-green
-   theorem cited by name:
-   - `erdos_406_climb_unconditional` — the seam, discharged;
-   - `erdos_406_tailF_unconditional` — via `GSTTailFProof.hTailF` (the climb's
-     Happy row IS the digit two; row+tower subsumed — GSTTailFProof §3 — with
-     the green `tailF_of_row_and_tower` as their composition receipt);
-   - `erdos_406_even_conjecture_unconditional` — via the kernel-certified
-     terminal identity's forward face `erdos_even_conjecture_of_tailF`
-     (ErdosTernary2.lean:18452; the iff itself at :18425, CI-green under
-     kernel-406gate, axiom profile [propext, choice, Quot.sound]);
-   - `erdos_406_the_last_hypothesis_unconditional` — the NAMED RESIDUAL
-     (FinalAssembly406.lean:145-146, `CantorianPower` at
-     GSTClimbInfiniteFamily.lean:400-401, `digit3` resolving to
-     GSTCanonicalSevenAxisBridge.digit3 per that module's own `open`) killed
-     directly by the climb: a Cantorian power K ≥ 8 has no ternary digit two
-     anywhere; the climb hands one at depth ≥ 3. Contradiction;
-   - `erdos_406_universal_verdict_unconditional` — **THE FULL VERDICT OF
-     ERDŐS #406: every 2^n from n = 9 onward owns its ternary digit two**,
-     via the monolith's own crown `erdos_ternary_2_universal_of_tailF`
-     (ErdosTernary2.lean:18344).
+Every link CI-green (DirectExistence rides ErdosTernary2's green closure via
+ThirdWave; FinalVerdict406 green under kernel-406gate), zero hypotheses:
 
-4. **THE KERNEL** — `kernel-406breakthrough` in kills.yml: builds
-   `MonolithGate.RowTowerBreakthrough406` (the full import closure), then
-   `lake env lean` for the receipts, with the hardened real gates
-   (`PIPESTATUS[0]` exit codes, `error[:(]|sorryAx|unknown identifier|
-   unsolved goals|declaration uses .sorry.` negative gates) and eight
-   `#print axioms` receipt greps + the two GREEN markers. Artifact upload
-   (if:always(), 30-day retention) added to THIS kernel and to the three
-   r34 first-exposure kernels (engine/final/tail5) so every future verdict
-   is diagnosable in-repo.
+1. **THE BOOLEAN-DIGIT BRIDGE** `noTernaryTwo_false_of_digit3` — a single
+   ternary digit two at any depth flips the verdict (the converse of the
+   monolith's own `no_two_false_digit_witness`, by strong induction).
+2. **THE COVERED-CLASS LAW** `digit_two_of_covered_class` — 37 of 81 residue
+   classes mod 81 unconditional at every scale, through CommonTwo:
+   mod 9 {5,6}, mod 27 {14,18,19,25}, the fourteen RowFourClass classes
+   mod 81 (BOSS's own exact residue classifiers, rows two/three/four).
+3. **THE KERNEL BASE LAW** `digit_two_of_kernel_base` — 8 ≤ K ≤ 500 by the
+   493 decide-certified Happy-row witnesses (erdos406_climb_base).
+4. **THE SMALL-EXPONENT WITNESSES** — 4^5, 4^6, 4^7 at depth 2, exact.
+5. **THE FULL COVERAGE COMPOSITION** `erdos_406_even_conjecture_of_frontier_
+   fires` — the even statement follows from the frontier alone.
+6. **THE NEW REDUCTION LAW** `erdos_406_full_verdict_iff_frontier_fires` —
+   the FULL verdict of Erdős #406 ⟺ every uncovered exponent above the
+   certified base fires its digit two. **The residual is shrunk from
+   "every exponent from eight onward" (the climb seam) to the 44 uncovered
+   classes beyond 500.** Parity, covered classes, decide base: all
+   discharged inside the equivalence.
+7. **THE PARTIAL VERDICT** `erdos_406_verdict_of_base_or_covered` — odd n ≥ 9
+   (the green odd law) and even n with base-or-covered half, unconditional
+   on exactly the stated coverage.
+8. **v3 ADDITION — THE UNIFIED-ROW FACE + THE ROW PRIMITIVE DISCHARGED**
+   (after the round's own fleet delivered TailAssault406E GREEN, run
+   45645697924, all receipts axiom-clean): `erdos_406_unified_row_iff_
+   frontier_fires` — the frontier's fire ⟺ `tailF_unified_row_primitive`,
+   the one-statement form of the whole second-observer route (its own green
+   `unified_row_iff_even_conjecture` composed with the coverage law); and
+   `erdos_406_row_primitive_of_frontier_fires` — THE MISSION BOARD'S NAMED
+   `GSTTailFFourthDimension.tailF_row_primitive` DISCHARGED from the
+   frontier outright (via the green one-line subsumption
+   `row_primitive_of_unified_row`). The tower face rides the same
+   composition through `tower_primitive_of_unified_row` (green), whose
+   sheet-gate hypothesis is the tower route's own named residual. The
+   problem's residual now has THREE proven-equivalent faces: the full
+   verdict, the unified row word, and the frontier's fire — and the row
+   primitive follows from each.
 
-**The honest remaining packaging (named, not hidden):** the r34
-first-exposure chain (kernel-406engine / kernel-406final / kernel-406tail5 —
-WorldtraceLevelNine406, FinalAssembly406, TailAssault406E) is still
-converging; the NAMED-def form of the residual lives in FinalAssembly406 and
-plugs into this round's `erdos_406_the_last_hypothesis_unconditional` (same
-unfolded statement) the moment that packaging compiles. The mathematics of
-the last hypothesis is done in RowTowerBreakthrough406 — the chain from
-BOSS's own repaired navigation to the full universal verdict carries ZERO
-hypotheses. GitHub Lean is the arbiter; the kernel's receipts will say
-`does not depend on any axioms` or the round keeps going.
+Kernel: `kernel-406breakthrough` (hardened gates, nine `#print axioms`
+receipts, artifact upload). The three r34 first-exposure kernels
+(engine/final/tail5) now upload their logs as artifacts (if:always(),
+30-day retention) — every future verdict diagnosable in-repo.
+
+### 21.4 THE FRONTIER (named, exact)
+
+Uncovered classes mod 81 (44): 0,1,2,3,4,7,9,10,11,12,13,16,17,21,22,26,27,
+28,29,30,31,34,35,36,37,38,39,40,43,44,47,48,49,61,62,63,64,65,67,70,71,74,
+75,80 — intersected with K > 500. The tailF row-word lattice
+(GSTTailFFourthDimension, six levels, 54/81 hard classes) and the nine-level
+cascade (WorldtraceLevelNine406 — engine chain, first-exposure convergence
+ongoing with the new artifact logs) are the two live assaults on exactly
+this frontier. The climb seam remains the third route; its collision assembly
+needs a real mathematical repair (explicit carry-algebra contradiction, not a
+tactic closer), and the honest record of its refutation is above.

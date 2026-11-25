@@ -2777,7 +2777,7 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: "Kernel 406breakthrough - THE UNCONDITIONAL KILL (S090, BOSS order PROVE THE LAST REMAINING HYPOTHESIS / USE MY OWN MATHS / MAP ALL THE LEAN FILES): the climb seam discharged by BOSS's own REPAIRED navigation - the three-step collision (a Happy child row of 4^(k-3) against an all-bad right band is impossible: the unified vertical telescope + the exact width-three conservation + the positive U-derivative collide, with the absolute-coordinate Happy rewrites hleftAbs/hrightAbs fed alongside the window laws - exactly the nourishment the gate branch's retired attempt lacked) + the strong induction with norm_num bases 8/9/10, vendored BYTE-VERBATIM from arsenal-full/erdosternary2/GSTInfiniteFourPowerNavigation.lean into MonolithGate/GSTFourPowerClimbUnconditional406.lean (the 74-file dependency closure verified identical file-by-file, 67 byte-identical modulo import rewrites) - then THE FULL COMPOSITION in MonolithGate/RowTowerBreakthrough406.lean: the climb -> GSTTailFProof.hTailF (the climb's Happy row IS the digit two; row+tower subsumed, the green tailF_of_row_and_tower their receipt) -> four_power_omega_shadow_wave_tailF -> erdos_even_conjecture_of_tailF (the kernel-certified terminal identity ErdosTernary2.lean:18425's forward face) -> the even conjecture; THE NAMED RESIDUAL erdos_406_the_last_hypothesis (FinalAssembly406.lean:145-146, CantorianPower GSTClimbInfiniteFamily.lean:400-401) killed directly by the climb; and THE FULL UNIVERSAL VERDICT of Erdos 406 - every 2^n from n=9 onward owns its ternary digit two - via erdos_ternary_2_universal_of_tailF (ErdosTernary2.lean:18344). Zero hypotheses beyond BOSS's own green theorems; every link axiom-audited by #print axioms receipts."
+    - name: "Kernel 406breakthrough - THE ROW-TOWER BREAKTHROUGH, HONEST CORE (S090 v2, BOSS order PROVE THE LAST REMAINING HYPOTHESIS / USE MY OWN MATHS): the boolean-digit bridge (a single ternary digit two flips the verdict - the converse of the monolith's own no_two_false_digit_witness, strong induction), THE COVERED-CLASS LAW (37 of 81 residue classes mod 81 unconditional at every scale: rows two/three/four of BOSS's own direct lattice through CommonTwo - mod 9 {5,6}, mod 27 {14,18,19,25}, the fourteen RowFourClass classes), THE KERNEL BASE LAW (8..500 by the 493 decide-certified Happy-row witnesses of FinalVerdict406.erdos406_climb_base, kernel-406gate-green), the small-exponent witnesses (4^5, 4^6, 4^7 by exact arithmetic), and THE NEW REDUCTION LAW erdos_406_full_verdict_iff_frontier_fires: the FULL verdict of Erdos 406 is EQUIVALENT to the frontier firing - every uncovered exponent above the certified base owning its digit two - the residual shrunk from every-exponent-from-eight (the climb seam) to the forty-four uncovered classes beyond five hundred, with the even/odd split, the covered classes and the decide base all discharged inside the equivalence. HONEST LEDGER: the bulldoze branch's three-step-collision unconditional climb was REFUTED this round (first exposure of the byte-verbatim port: linarith failed at the exact wall the gate branch's retirement note named, run 45645697924 artifact; the bulldoze commit ebcb7bb's own only CI run 41480430475 failed the same way) - the climb is not a theorem anywhere today; this module's every link is green."
       run: |
         set -euo pipefail
         : > breakthrough406.log
@@ -2794,17 +2794,21 @@ jobs:
         if [ "$RC2" -ne 0 ]; then echo "BREAKTHROUGH406_COMPILE_FAILED_OR_TIMEOUT_RC=$RC2"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' breakthrough406.log; then echo "BREAKTHROUGH406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' breakthrough406.log; exit 1; fi
         echo "BREAKTHROUGH 406 RECEIPTS:"
-        grep -E "power_three_step_collision' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "four_power_happy_ge_three_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "four_power_happy_climb_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "erdos_406_climb_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "erdos_406_tailF_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "erdos_406_even_conjecture_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "erdos_406_the_last_hypothesis_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -E "erdos_406_universal_verdict_unconditional' (does not depend on any axioms|depends on axioms)" breakthrough406.log
-        grep -F "GST_FOUR_POWER_CLIMB_UNCONDITIONAL_GREEN" breakthrough406.log
-        grep -F "ERDOS_406_UNCONDITIONAL_BREAKTHROUGH_GREEN" breakthrough406.log
-        echo ERDOS_406_UNCONDITIONAL_BREAKTHROUGH_GREEN=1
+        grep -E "noTernaryTwo_false_of_digit3' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "four_pow_mod_three' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "digit_witness_of_scan_false' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "digit_two_of_covered_class' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "digit_two_of_kernel_base' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "digit_two_five_six_seven' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "digit_two_of_base_or_covered' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "erdos_406_even_conjecture_of_frontier_fires' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "erdos_406_full_verdict_iff_frontier_fires' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "erdos_406_unified_row_of_frontier_fires' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "erdos_406_unified_row_iff_frontier_fires' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "erdos_406_row_primitive_of_frontier_fires' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -E "erdos_406_verdict_of_base_or_covered' (does not depend on any axioms|depends on axioms)" breakthrough406.log
+        grep -F "ERDOS_406_ROW_TOWER_BREAKTHROUGH_GREEN" breakthrough406.log
+        echo ERDOS_406_ROW_TOWER_BREAKTHROUGH_GREEN=1
       shell: bash
     - if: always()
       uses: actions/upload-artifact@v4

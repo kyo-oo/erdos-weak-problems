@@ -13769,26 +13769,6 @@
   ],
   "lines": 75
  },
- "MonolithGate/GSTFourPowerClimbUnconditional406.lean": {
-  "decls": [
-   [
-    "theorem",
-    "power_three_step_collision",
-    72
-   ],
-   [
-    "theorem",
-    "four_power_happy_ge_three_unconditional",
-    128
-   ],
-   [
-    "theorem",
-    "four_power_happy_climb_unconditional",
-    172
-   ]
-  ],
-  "lines": 183
- },
  "MonolithGate/GSTFourPowerDirectAdditionCarry.lean": {
   "decls": [
    [
@@ -20008,31 +19988,81 @@
   "decls": [
    [
     "theorem",
-    "erdos_406_climb_unconditional",
-    71
-   ],
-   [
-    "theorem",
-    "erdos_406_tailF_unconditional",
-    83
-   ],
-   [
-    "theorem",
-    "erdos_406_even_conjecture_unconditional",
+    "noTernaryTwo_false_of_digit3",
     94
    ],
    [
     "theorem",
-    "erdos_406_the_last_hypothesis_unconditional",
-    108
+    "four_pow_mod_three",
+    120
    ],
    [
     "theorem",
-    "erdos_406_universal_verdict_unconditional",
-    125
+    "digit_witness_of_scan_false",
+    133
+   ],
+   [
+    "def",
+    "erdos_406_covered_class",
+    151
+   ],
+   [
+    "theorem",
+    "digit_two_of_covered_class",
+    160
+   ],
+   [
+    "theorem",
+    "digit_two_of_kernel_base",
+    181
+   ],
+   [
+    "theorem",
+    "digit_two_five_six_seven",
+    192
+   ],
+   [
+    "theorem",
+    "digit_two_of_base_or_covered",
+    200
+   ],
+   [
+    "def",
+    "erdos_406_frontier_class",
+    219
+   ],
+   [
+    "theorem",
+    "erdos_406_even_conjecture_of_frontier_fires",
+    229
+   ],
+   [
+    "theorem",
+    "erdos_406_full_verdict_iff_frontier_fires",
+    254
+   ],
+   [
+    "theorem",
+    "erdos_406_unified_row_of_frontier_fires",
+    278
+   ],
+   [
+    "theorem",
+    "erdos_406_unified_row_iff_frontier_fires",
+    291
+   ],
+   [
+    "theorem",
+    "erdos_406_row_primitive_of_frontier_fires",
+    313
+   ],
+   [
+    "theorem",
+    "erdos_406_verdict_of_base_or_covered",
+    329
    ]
   ],
-  "lines": 140
+  "lines": 368
  },
  "MonolithGate/TailAssault406.lean": {
   "decls": [
