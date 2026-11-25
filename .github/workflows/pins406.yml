@@ -57,16 +57,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Pins 1/5: PinsSpine (the ghost rays, the fixed points)"
       run: |
         set -euo pipefail
         : > kernel74b.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        timeout 1500 lake build KernelChamber406.PinsSpine 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsSpine 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsSpine rc=$RC"; exit 1; fi
@@ -117,18 +119,32 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Pins 2/5: PinsWord (cMod, W61, the three fixed points + receipts)"
       run: |
         set -euo pipefail
         : > kernel74b.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
+        ( while true; do
+            TS=$(date +%H:%M:%S)
+            P=$(pgrep -f 'PinsWord.lean' | head -1 || true)
+            if [ -n "$P" ] && [ -r /proc/$P/io ]; then
+              echo "WATCH $TS pid=$P read_bytes=$(awk '/^read_bytes/{print $2}' /proc/$P/io) rss_kb=$(awk '/VmRSS/{print $2}' /proc/$P/status)"
+            else
+              echo "WATCH $TS no-lean-proc"
+            fi
+            sleep 15
+          done ) &
+        WATCHDOG=$!
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        timeout 1500 lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
+        kill $WATCHDOG 2>/dev/null || true
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -E "W61' (does not depend on any axioms|depends on axioms)" kernel74b.log
@@ -179,16 +195,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Pins 3/5: PinsPins (THE PIN ENGINE + the three PIN theorems)"
       run: |
         set -euo pipefail
         : > kernel74b.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        timeout 1500 lake build KernelChamber406.PinsPins 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsPins 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsPins rc=$RC"; exit 1; fi
@@ -240,16 +258,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Pins 4/5: PinsCensus (the finite base, every exponent 8..500 fires)"
       run: |
         set -euo pipefail
         : > kernel74b.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        timeout 1500 lake build KernelChamber406.PinsCensus 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsCensus 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsCensus rc=$RC"; exit 1; fi
@@ -301,16 +321,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Pins 5/5: PinsCrown (THE TWO-GRANT CROWN) + full gate set + battery"
       run: |
         set -euo pipefail
         : > kernel74b.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        timeout 1500 lake build KernelChamber406.PinsCrown 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsCrown 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsCrown rc=$RC"; exit 1; fi
@@ -372,16 +394,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Ghost 1/5: GhostSpine (rider core law, head split, uniqueness)"
       run: |
         set -euo pipefail
         : > kernel75.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        timeout 1500 lake build KernelChamber406.GhostSpine 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostSpine 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostSpine rc=$RC"; exit 1; fi
@@ -433,18 +457,32 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Ghost 2/5: GhostWord (cMod, W100, the three depth-100 fixed points + receipts)"
       run: |
         set -euo pipefail
         : > kernel75.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
+        ( while true; do
+            TS=$(date +%H:%M:%S)
+            P=$(pgrep -f 'GhostWord.lean' | head -1 || true)
+            if [ -n "$P" ] && [ -r /proc/$P/io ]; then
+              echo "WATCH $TS pid=$P read_bytes=$(awk '/^read_bytes/{print $2}' /proc/$P/io) rss_kb=$(awk '/VmRSS/{print $2}' /proc/$P/status)"
+            else
+              echo "WATCH $TS no-lean-proc"
+            fi
+            sleep 15
+          done ) &
+        WATCHDOG=$!
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        timeout 1500 lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
+        kill $WATCHDOG 2>/dev/null || true
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -E "ghost_uniqueness' (does not depend on any axioms|depends on axioms)" kernel75.log
@@ -495,16 +533,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Ghost 3/5: GhostPins (THE PIN ENGINE AT DEPTH 100 + the three PIN theorems)"
       run: |
         set -euo pipefail
         : > kernel75.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        timeout 1500 lake build KernelChamber406.GhostPins 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostPins 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostPins rc=$RC"; exit 1; fi
@@ -556,16 +596,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Ghost 4/5: GhostSize (the size law)"
       run: |
         set -euo pipefail
         : > kernel75.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        timeout 1500 lake build KernelChamber406.GhostSize 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostSize 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostSize rc=$RC"; exit 1; fi
@@ -617,16 +659,18 @@ jobs:
       uses: actions/cache@v4
       with:
         path: .lake/build
-        key: pins406-${{ runner.os }}-${{ github.sha }}
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
         restore-keys: |
+          pins406-${{ runner.os }}-${{ github.job }}-
+          pins406-${{ runner.os }}-${{ startsWith(github.job, 'ghost') && 'ghost' || 'pins' }}-
           pins406-${{ runner.os }}-
     - name: "Ghost 5/5: GhostCrown (census + crown v2 + receipts) + full gate set + battery"
       run: |
         set -euo pipefail
         : > kernel75.log
-        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        timeout 1500 lake build KernelChamber406.GhostCrown 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostCrown 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostCrown rc=$RC"; exit 1; fi
