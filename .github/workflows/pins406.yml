@@ -23,7 +23,7 @@ on:
 jobs:
   pins-spine:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -43,18 +43,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -68,12 +80,32 @@ jobs:
         : > kernel74b.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsSpine 2>&1 | tee -a kernel74b.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.PinsSpine 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsSpine rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload pins-spine log"
       uses: actions/upload-artifact@v4
@@ -85,7 +117,7 @@ jobs:
   pins-word:
     needs: pins-spine
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -105,18 +137,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -141,8 +185,21 @@ jobs:
         WATCHDOG=$!
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         kill $WATCHDOG 2>/dev/null || true
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsWord rc=$RC"; exit 1; fi
@@ -150,6 +207,13 @@ jobs:
         grep -E "W61' (does not depend on any axioms|depends on axioms)" kernel74b.log
         grep -E "ghost_congruent_all_depths' (does not depend on any axioms|depends on axioms)" kernel74b.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload pins-word log"
       uses: actions/upload-artifact@v4
@@ -161,7 +225,7 @@ jobs:
   pins-pins:
     needs: pins-word
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -181,18 +245,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -206,13 +282,33 @@ jobs:
         : > kernel74b.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsPins 2>&1 | tee -a kernel74b.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.PinsPins 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsPins rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -E "every_ghost_is_its_pi_point_fam4' (does not depend on any axioms|depends on axioms)" kernel74b.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload pins-pins log"
       uses: actions/upload-artifact@v4
@@ -224,7 +320,7 @@ jobs:
   pins-census:
     needs: pins-pins
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -244,18 +340,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -269,13 +377,33 @@ jobs:
         : > kernel74b.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsCensus 2>&1 | tee -a kernel74b.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.PinsCensus 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsCensus rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -E "every_ghost_is_its_pi_point_fam1' (does not depend on any axioms|depends on axioms)" kernel74b.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload pins-census log"
       uses: actions/upload-artifact@v4
@@ -287,7 +415,7 @@ jobs:
   pins-crown:
     needs: pins-census
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -307,18 +435,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -332,8 +472,21 @@ jobs:
         : > kernel74b.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.PinsCrown 2>&1 | tee -a kernel74b.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.PinsCrown 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsCrown rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
@@ -350,6 +503,13 @@ jobs:
         python3 problem406-ternary-powers/battery406f.py
         echo ERDOS406_PICOLLAPSE_KERNEL_GREEN=1
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload pins-crown log"
       uses: actions/upload-artifact@v4
@@ -360,7 +520,7 @@ jobs:
 
   ghost-spine:
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -380,18 +540,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -405,13 +577,33 @@ jobs:
         : > kernel75.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostSpine 2>&1 | tee -a kernel75.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.GhostSpine 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostSpine rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -E "ghost_head_split' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload ghost-spine log"
       uses: actions/upload-artifact@v4
@@ -423,7 +615,7 @@ jobs:
   ghost-word:
     needs: ghost-spine
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -443,18 +635,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -479,8 +683,21 @@ jobs:
         WATCHDOG=$!
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         kill $WATCHDOG 2>/dev/null || true
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostWord rc=$RC"; exit 1; fi
@@ -488,6 +705,13 @@ jobs:
         grep -E "ghost_uniqueness' (does not depend on any axioms|depends on axioms)" kernel75.log
         grep -E "coeff_split100' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload ghost-word log"
       uses: actions/upload-artifact@v4
@@ -499,7 +723,7 @@ jobs:
   ghost-pins:
     needs: ghost-word
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -519,18 +743,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -544,13 +780,33 @@ jobs:
         : > kernel75.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostPins 2>&1 | tee -a kernel75.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.GhostPins 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostPins rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -E "every_ghost_is_its_pi100_point_fam4' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload ghost-pins log"
       uses: actions/upload-artifact@v4
@@ -562,7 +818,7 @@ jobs:
   ghost-size:
     needs: ghost-pins
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -582,18 +838,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -607,13 +875,33 @@ jobs:
         : > kernel75.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostSize 2>&1 | tee -a kernel75.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.GhostSize 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostSize rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -E "every_ghost_is_its_pi100_point_fam1' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload ghost-size log"
       uses: actions/upload-artifact@v4
@@ -625,7 +913,7 @@ jobs:
   ghost-crown:
     needs: ghost-size
     runs-on: ubuntu-24.04
-    timeout-minutes: 40
+    timeout-minutes: 55
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -645,18 +933,30 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
       run: |
-        if [ ! -f /swapfile2 ]; then
-          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
-          sudo chmod 600 /swapfile2
-          sudo mkswap /swapfile2
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
         fi
-        sudo swapon /swapfile2 2>/dev/null || true
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
         free -h
+        swapon --show || true
       shell: bash
     - name: Restore lake oleans (chain cache)
-      uses: actions/cache@v4
+      uses: actions/cache/restore@v4
       with:
         path: .lake/build
         key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
@@ -670,8 +970,21 @@ jobs:
         : > kernel75.log
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        stdbuf -oL -eL timeout 1500 lake build KernelChamber406.GhostCrown 2>&1 | tee -a kernel75.log
-        RC=${PIPESTATUS[0]}
+        ( stdbuf -oL -eL lake build KernelChamber406.GhostCrown 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 2400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'Chamber406' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'Chamber406' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
         set -e
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostCrown rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
@@ -691,6 +1004,13 @@ jobs:
         python3 problem406-ternary-powers/battery406g.py
         echo ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN=1
       shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.job }}-${{ github.sha }}
     - if: always()
       name: "Upload ghost-crown log"
       uses: actions/upload-artifact@v4
