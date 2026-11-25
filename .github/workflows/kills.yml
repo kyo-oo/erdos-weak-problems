@@ -1677,6 +1677,50 @@ jobs:
         grep -F "TAIL_ASSAULT_D_GREEN" tail406d.log
         echo ERDOS_406_TAIL_ASSAULT_D=1
       shell: bash
+  kernel-406tail5:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "Kernel 406tail5 - THE TAIL ASSAULT FACE E (S085 r34, the unification): the row word of a tower witness is the sheet-s cut word shifted by exactly s trits (omegaCutWord 0 (3^s * core) = 3^s * omegaCutWord s core, both cut-factor readings of the one power 4^K) - the row family and the tower family of the fourth dimension's decomposition are ONE object read at two depths; THE UNIFIED ROW PRIMITIVE (every exponent from eight onward, the row word (4^K - 1)/3 fires its top third at some depth) consumes the entire second-observer package wholesale through the uniform row law (the master composition: no clause consulted, the shadow package bypassed); the equivalence receipt (unified iff even conjecture, through the monolith's own kernel-certified terminal identity and the witness extraction); the crowns (the even conjecture, the monolith's universal theorem, Erdos 406's universal verdict from the one primitive); the subsumption receipts (the unified primitive IS the row primitive with the residue clause dropped, and with the sheet gate alone it delivers the tower primitive's deep tail through the shallow pin); and THE WALL'S COORDINATE (the full package's every clause - residue class, diagonal window dodge, sheet gate, both second-sheet gates - is exactly the non-fire of the witness's cut word at depths zero through s+2: the fire of a full shadow-package witness can only live at cut depth s+3 or beyond, the residual's final sharpest coordinate)"
+      run: |
+        set -euo pipefail
+        : > tail406e.log
+        set +e
+        timeout 5400 lake build MonolithGate.TailAssault406D MonolithGate.GSTTailFFourthDimension 2>&1 | tee -a tail406e.log
+        RC1=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ]; then echo "TAIL406E_IMPORT_CLOSURE_FAILED rc=$RC1"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' tail406e.log; then echo "TAIL406E_CLOSURE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' tail406e.log; exit 1; fi
+        set +e
+        timeout 3600 lake env lean MonolithGate/TailAssault406E.lean 2>&1 | tee -a tail406e.log
+        RC2=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC2" -ne 0 ]; then echo "TAIL406E_COMPILE_FAILED_OR_TIMEOUT_RC=$RC2"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tail406e.log; then echo "TAIL406E_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' tail406e.log; exit 1; fi
+        echo "TAIL ASSAULT E RECEIPTS:"
+        grep -E "omegaCutWord_zero_shift' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "cut_fire_iff_row_fire' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "row_fire_of_gstDigit_two' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "tailF_of_unified_row' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "unified_row_iff_even_conjecture' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "even_conjecture_of_unified_row' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "erdos_ternary_2_universal_of_unified_row' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "erdos406_universal_verdict_of_unified_row' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "row_primitive_of_unified_row' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "tower_primitive_of_unified_row' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -E "tower_witness_cut_word_pinned' (does not depend on any axioms|depends on axioms)" tail406e.log
+        grep -F "TAIL_ASSAULT_E_GREEN" tail406e.log
+        echo ERDOS_406_TAIL_ASSAULT_E=1
+      shell: bash
   kernel-406cites:
     runs-on: ubuntu-24.04
     steps:
