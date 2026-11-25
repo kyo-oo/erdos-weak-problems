@@ -7,6 +7,7 @@ on:
       - problem406-ternary-powers/GhostExtinction406.lean
       - problem406-ternary-powers/battery406f.py
       - problem406-ternary-powers/battery406g.py
+      - KernelChamber406/**
       - .github/workflows/pins406.yml
   workflow_dispatch:
 
@@ -24,7 +25,7 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: "MEMORY SHIELD (the 312s kill is the elaboration's memory spike on the 7GB runner; 10GB swap absorbs it)"
+    - name: "MEMORY SHIELD (10GB swap absorbs elaboration spikes)"
       run: |
         if [ ! -f /swapfile2 ]; then
           sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
@@ -34,18 +35,22 @@ jobs:
         sudo swapon /swapfile2 2>/dev/null || true
         free -h
       shell: bash
-    - name: "Kernel 74b - THE PI-POINT PINS HALF (dedicated runner, fleet-contention shield: the 312s kill hit this job 9+ times when 31 jobs compete; this workflow runs it ALONE)"
+    - if: always()
+      name: "Kernel 74b - Erdos 406 THE PI-POINT PINS HALF (S089 SPLIT: four olean-cached modules, each a short elaboration — the 46-minute monolith process was reaped by the hosted-runner recycler at 5-19 min; the parts dodge it and localize defects) — cMod, W61, the three pi-points, THE PIN, the census base, THE TWO-GRANT CROWN + battery406f.py"
       run: |
         set -euo pipefail
         lake build Arsenal.ErdosTernary2.Basic
         lake build Arsenal.CardinalWorlds
         lake build Arsenal.CardinalWorldsV2
         : > kernel74b.log
-        set +e
-        timeout 3600 lake env lean problem406-ternary-powers/PiCollapse406Pins.lean 2>&1 | tee -a kernel74b.log
-        RC=${PIPESTATUS[0]}
-        set -e
-        if [ "$RC" -ne 0 ]; then echo "PINS_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
+        for M in KernelChamber406.PinsSpine KernelChamber406.PinsHalf KernelChamber406.PinsCensus KernelChamber406.PinsCrown; do
+          echo "=== PART BUILD: $M ==="
+          set +e
+          timeout 1500 lake build "$M" 2>&1 | tee -a kernel74b.log
+          RC=${PIPESTATUS[0]}
+          set -e
+          if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=$M rc=$RC"; exit 1; fi
+        done
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -F "ERDOS406_PICOLLAPSE_KERNEL_GREEN" kernel74b.log
         grep -E "cMod_eq' (does not depend on any axioms|depends on axioms)" kernel74b.log
@@ -73,7 +78,7 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: "MEMORY SHIELD (the 312s kill is the elaboration's memory spike on the 7GB runner; 10GB swap absorbs it)"
+    - name: "MEMORY SHIELD (10GB swap absorbs elaboration spikes)"
       run: |
         if [ ! -f /swapfile2 ]; then
           sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
@@ -83,18 +88,22 @@ jobs:
         sudo swapon /swapfile2 2>/dev/null || true
         free -h
       shell: bash
-    - name: "Kernel 75 - THE GHOST-EXTINCTION KERNEL (dedicated runner, fleet-contention shield)"
+    - if: always()
+      name: "Kernel 75 - Erdos 406 THE GHOST-EXTINCTION KERNEL (S089 SPLIT: four olean-cached modules — rider core law, head split, uniqueness, depth-100 pins, size law, census, crown v2) + battery406g.py"
       run: |
         set -euo pipefail
         lake build Arsenal.ErdosTernary2.Basic
         lake build Arsenal.CardinalWorlds
         lake build Arsenal.CardinalWorldsV2
         : > kernel75.log
-        set +e
-        timeout 3600 lake env lean problem406-ternary-powers/GhostExtinction406.lean 2>&1 | tee -a kernel75.log
-        RC=${PIPESTATUS[0]}
-        set -e
-        if [ "$RC" -ne 0 ]; then echo "GHOST_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
+        for M in KernelChamber406.GhostSpine KernelChamber406.GhostHalf KernelChamber406.GhostSize KernelChamber406.GhostCrown; do
+          echo "=== PART BUILD: $M ==="
+          set +e
+          timeout 1500 lake build "$M" 2>&1 | tee -a kernel75.log
+          RC=${PIPESTATUS[0]}
+          set -e
+          if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=$M rc=$RC"; exit 1; fi
+        done
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -F "ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN" kernel75.log
         grep -E "rider_core_one' (does not depend on any axioms|depends on axioms)" kernel75.log

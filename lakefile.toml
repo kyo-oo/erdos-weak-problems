@@ -52,3 +52,13 @@ globs = ["Monolith.+"]
 [[lean_lib]]
 name = "MonolithGate"
 globs = ["MonolithGate.+"]
+
+# THE KERNEL CHAMBER 406 (S089): the olean-cached split of the two 406
+# monolith kernels (Pins 74b + Ghost 75) — pure module surgery, every
+# declaration byte-identical to the monoliths. Rationale: the 46-minute
+# single-process elaborations were reaped by the hosted-runner recycler
+# at 5-19 minutes; four short elaborations per kernel dodge the reaper
+# AND localize any future defect to one part.
+[[lean_lib]]
+name = "KernelChamber406"
+globs = ["KernelChamber406.+"]
