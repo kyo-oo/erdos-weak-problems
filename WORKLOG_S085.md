@@ -541,3 +541,70 @@ machinery; F: the even-conjecture route through the crown's own
 green bridge).
 
 The engine never stops; it never lies.
+
+## r34: FACE E — THE UNIFICATION (kernel-406tail5)
+
+THE DISCOVERY OF THIS ROUND: the row word of a tower witness and the
+tower family's cut word are ONE OBJECT.  Both are readings of the one
+power 4^K = 1 + 3^(s+1) * omegaCutWord s core through the cut-factor
+identity at sheet s and at sheet zero:
+
+  omegaCutWord 0 (3^s * core) = 3^s * omegaCutWord s core
+
+The sheet-zero word of the witness is the sheet-s cut word shifted left
+by exactly s trits (s trailing zeros).  The two named primitives of the
+fourth dimension's decomposition — the ROW primitive (the sheet-zero
+family) and the TOWER primitive (the deep tail of the sheet-s cut word)
+— read one object at two depths.
+
+FACE E (MonolithGate/TailAssault406E.lean, kernel-406tail5):
+- SECTION 24 THE WORD-SHIFT LAW (omegaCutWord_zero_shift) + the modulus
+  shift (pow_mod_shift).
+- SECTION 25 THE FIRE DICTIONARY (cut_fire_iff_row_fire): the cut word
+  at sheet s fires at depth i iff the witness's row word fires at
+  depth s+i.
+- SECTION 26 THE UNIFIED ROW PRIMITIVE (tailF_unified_row_primitive):
+  every exponent from eight onward, the row word (4^K - 1)/3 fires its
+  top third at some depth — ONE statement, no families, no sheets, no
+  residue clauses, no windows.  THE MASTER COMPOSITION
+  (tailF_of_unified_row): the unified primitive consumes the entire
+  second-observer package WHOLESALE through the uniform row law — the
+  shadow package bypassed, no clause consulted.  THE EQUIVALENCE
+  RECEIPT (unified_row_iff_even_conjecture): the unified primitive IS
+  the even-exponent statement, through the monolith's kernel-certified
+  terminal identity and the witness extraction (no_two_false_digit_
+  witness → row_fire_of_gstDigit_two).  THE CROWNS: even_conjecture_of_
+  unified_row, erdos_ternary_2_universal_of_unified_row,
+  erdos406_universal_verdict_of_unified_row — the whole problem from
+  the one primitive.
+- SECTION 27 THE SUBSUMPTION RECEIPTS: row_primitive_of_unified_row
+  (one line — the unified IS the row primitive with the residue clause
+  dropped) and tower_primitive_of_unified_row (the unified + the sheet
+  gate alone delivers the tower primitive's deep tail through the
+  shallow pin: the residues at depths 0,1 via lteCoeff_mod9_seven +
+  cut_word_mod9_of_class, the diagonal window dodge at depths 2..s via
+  cut_word_diag_pin and the linear law, the sheet gate at depth s+1).
+- SECTION 28 THE WALL'S COORDINATE (tower_witness_cut_word_pinned):
+  the full package's every clause — residue class, diagonal window
+  dodge, sheet gate, both second-sheet gates — is EXACTLY the non-fire
+  of the witness's cut word at depths zero through s+2 (the C-zone
+  pins cut_word_czone_pin_four/seven via the correction collapses
+  czone_correction_four/seven on the green second-order law
+  omega_cut_word_full3).  The fire of a full shadow-package witness
+  can only live at cut depth s+3 or beyond — the residual's final,
+  sharpest coordinate, machine-certified.
+
+THE HONEST MAP AFTER FACE E: the entire remaining content of Erdős
+#406's second-observer route is the SINGLE statement
+tailF_unified_row_primitive — every exponent's row word fires — which
+IS the even-exponent statement (the equivalence receipt).  The four
+faces sharpened the climb; Face E collapsed the climb's residual
+target's package structure into the one row-word statement and
+machine-certified the exact boundary of what the package's clauses
+already control (depths 0..s+2 of the cut word; everything shallower
+is pinned non-fire).  The wall: the deep fire (cut depth >= s+3 for
+tower witnesses, all depths for row witnesses) — the Cantor-power
+question itself, the problem's open core, now isolated in its purest
+form with every structural clause consumed as a pin.
+
+The engine never stops; it never lies.

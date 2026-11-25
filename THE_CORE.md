@@ -1496,3 +1496,49 @@ conjecture; the omega chamber already killed the level-two tower
 classes core % 9 in {1,5,6}).
 
 The engine never stops; it never lies.
+
+## 20. THE FACE E ROUND (r34) — the unification
+
+THE DISCOVERY: the row word of a tower witness IS the sheet-s cut word
+shifted left by exactly s trits (omegaCutWord_zero_shift: both
+cut-factor readings of the one power 4^K).  The row family and the
+tower family of the fourth dimension's decomposition are ONE object
+read at two depths.
+
+FACE E (MonolithGate/TailAssault406E.lean, kernel-406tail5, in CI):
+the fire dictionary (cut fires at depth i iff the row word fires at
+s+i); THE UNIFIED ROW PRIMITIVE — every exponent from eight onward,
+the row word (4^K - 1)/3 fires its top third at some depth — ONE
+statement with no families, sheets, residue clauses, or windows; THE
+MASTER COMPOSITION — the unified primitive consumes the entire
+second-observer package wholesale through the uniform row law (the
+shadow package bypassed, no clause consulted); the equivalence receipt
+(the unified primitive IS the even-exponent statement, through the
+kernel-certified terminal identity and the witness extraction); the
+crowns (the even conjecture, the monolith's universal, Erdős #406's
+universal verdict from the one primitive); the subsumption receipts
+(the unified IS the row primitive with the residue clause dropped;
+the unified + the sheet gate delivers the tower primitive's deep tail
+through the shallow pin); and THE WALL'S COORDINATE — the full
+package's every clause is EXACTLY the non-fire of the witness's cut
+word at depths zero through s+2, so the fire of a full-package witness
+can only live at cut depth s+3 or beyond: the residual's final,
+sharpest coordinate, machine-certified.
+
+THE HONEST MAP AFTER FIVE FACES: the entire remaining content is the
+SINGLE statement tailF_unified_row_primitive — every exponent's row
+word fires — equivalent to the even-exponent statement itself.  The
+wall: the deep fire — for tower witnesses, cut depths >= s+3; for row
+witnesses, every depth — the Cantor-power question (must 4^K contain
+a ternary digit two), the problem's open core, now isolated in its
+purest form with every structural clause of the residual package
+consumed as a machine-certified pin.  The dust analysis (this round's
+map work): an all-levels diagonal dodge pins core·U = m/2 with U =
+lim (4^(3^s)-1)/3^(s+1) — the 3-adic logarithm quotient — so the
+dust's emptiness for natural cores is exactly U's irrationality, an
+infinite-level statement no finite lattice level can reach (the
+survivor tree is immortal, ratio 2.48/level).  The next faces: the
+omega chamber's wave engine at the deep tail, or the diagonal fire
+forced by non-dust structure — the campaign continues.
+
+The engine never stops; it never lies.
