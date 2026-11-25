@@ -65,6 +65,13 @@ jobs:
         python3 problem406-ternary-powers/battery406f.py
         echo ERDOS406_PICOLLAPSE_KERNEL_GREEN=1
       shell: bash
+    - if: always()
+      name: "Upload kernel74b log (the log-blackout fix)"
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel74b-log
+        path: kernel74b.log
+        retention-days: 30
   kernel-406e:
     runs-on: ubuntu-24.04
     steps:
@@ -121,3 +128,10 @@ jobs:
         python3 problem406-ternary-powers/battery406g.py
         echo ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN=1
       shell: bash
+    - if: always()
+      name: "Upload kernel75 log (the log-blackout fix)"
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel75-log
+        path: kernel75.log
+        retention-days: 30

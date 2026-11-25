@@ -24,6 +24,7 @@ theorem ghost_size_fam4 (u : Nat) (hg : GhostRay u)
     (hhead : ghostHead u = 1) : 3^99 < u := by
   have hpin := every_ghost_is_its_pi100_point_fam4 u hg hhead
   have hdm := Nat.div_add_mod u (3^100)
+  have hgt := pi100_fam4_gt
   omega
 
 /-- **THE SIZE LAW, FAMILY SEVEN (NEW).**  Every ghost ray with head
@@ -32,6 +33,7 @@ theorem ghost_size_fam7 (u : Nat) (hg : GhostRay u)
     (hhead : ghostHead u = 4) : 3^99 < u := by
   have hpin := every_ghost_is_its_pi100_point_fam7 u hg hhead
   have hdm := Nat.div_add_mod u (3^100)
+  have hgt := pi100_fam7_gt
   omega
 
 /-- **THE SIZE LAW, FAMILY ONE (NEW).**  Every ghost ray with head seven
@@ -40,6 +42,7 @@ theorem ghost_size_fam1 (u : Nat) (hg : GhostRay u)
     (hhead : ghostHead u = 7) : 3^98 < u := by
   have hpin := every_ghost_is_its_pi100_point_fam1 u hg hhead
   have hdm := Nat.div_add_mod u (3^100)
+  have hgt := pi100_fam1_gt
   omega
 
 /-- **THE UNIFORM SIZE LAW (NEW).**  Every ghost ray on the rider sheet
