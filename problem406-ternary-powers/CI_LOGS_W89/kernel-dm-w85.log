@@ -1,0 +1,663 @@
+﻿2026-11-24T22:03:32.2631336Z Current runner version: '2.338.2'
+2026-11-24T22:03:32.2651243Z ##[group]Runner Image Provisioner
+2026-11-24T22:03:32.2651911Z Hosted Compute Agent
+2026-11-24T22:03:32.2652322Z Version: 20261111.635
+2026-11-24T22:03:32.2652815Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+2026-11-24T22:03:32.2653358Z Build Date: 2026-11-11T01:49:01Z
+2026-11-24T22:03:32.2653845Z Worker ID: {e916cee5-7e5a-4438-a907-f8e7b54d53b0}
+2026-11-24T22:03:32.2654431Z Region: us-east-1
+2026-11-24T22:03:32.2654841Z Cloud: AWS
+2026-11-24T22:03:32.2655244Z ##[endgroup]
+2026-11-24T22:03:32.2656200Z ##[group]Operating System
+2026-11-24T22:03:32.2656636Z Ubuntu
+2026-11-24T22:03:32.2657032Z 24.04.5
+2026-11-24T22:03:32.2657395Z LTS
+2026-11-24T22:03:32.2657768Z ##[endgroup]
+2026-11-24T22:03:32.2658147Z ##[group]Runner Image
+2026-11-24T22:03:32.2658586Z Image: ubuntu-24.04
+2026-11-24T22:03:32.2659020Z Version: 20261116.133.1
+2026-11-24T22:03:32.2659928Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261116.133/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-24T22:03:32.2661262Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261116.133
+2026-11-24T22:03:32.2661960Z ##[endgroup]
+2026-11-24T22:03:32.2662751Z ##[group]GITHUB_TOKEN Permissions
+2026-11-24T22:03:32.2664632Z Contents: read
+2026-11-24T22:03:32.2665036Z Metadata: read
+2026-11-24T22:03:32.2665411Z ##[endgroup]
+2026-11-24T22:03:32.2666968Z Secret source: Actions
+2026-11-24T22:03:32.2667617Z Cache mode: write
+2026-11-24T22:03:32.2668299Z Prepare workflow directory
+2026-11-24T22:03:32.2893406Z Prepare all required actions
+2026-11-24T22:03:32.2929314Z Getting action download info
+2026-11-24T22:03:32.4624529Z Download action repository 'actions/checkout@v5' (SHA:fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09)
+2026-11-24T22:03:34.3112390Z Complete job name: kernel-dm-w85
+2026-11-24T22:03:34.3751753Z ##[group]Run actions/checkout@v5
+2026-11-24T22:03:34.3752613Z with:
+2026-11-24T22:03:34.3753057Z   repository: kyo-oo/erdos-weak-problems
+2026-11-24T22:03:34.3756301Z   token: ***
+2026-11-24T22:03:34.3756748Z   ssh-strict: true
+2026-11-24T22:03:34.3757176Z   ssh-user: git
+2026-11-24T22:03:34.3757610Z   persist-credentials: true
+2026-11-24T22:03:34.3758062Z   clean: true
+2026-11-24T22:03:34.3758669Z   sparse-checkout-cone-mode: true
+2026-11-24T22:03:34.3759560Z   fetch-depth: 1
+2026-11-24T22:03:34.3760696Z   fetch-tags: false
+2026-11-24T22:03:34.3761168Z   show-progress: true
+2026-11-24T22:03:34.3761670Z   lfs: false
+2026-11-24T22:03:34.3762103Z   submodules: false
+2026-11-24T22:03:34.3762568Z   set-safe-directory: true
+2026-11-24T22:03:34.3763027Z   allow-unsafe-pr-checkout: false
+2026-11-24T22:03:34.3763930Z ##[endgroup]
+2026-11-24T22:03:37.4105262Z Syncing repository: kyo-oo/erdos-weak-problems
+2026-11-24T22:03:37.4106601Z ##[group]Getting Git version info
+2026-11-24T22:03:37.4107191Z Working directory is '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-24T22:03:37.4107860Z [command]/usr/bin/git version
+2026-11-24T22:03:37.6899593Z git version 2.56.1
+2026-11-24T22:03:37.6915538Z ##[endgroup]
+2026-11-24T22:03:37.6928120Z Temporarily overriding HOME='/home/runner/work/_temp/699939bc-eee5-4e2d-9e47-6bce43f9fb5d' before making global git config changes
+2026-11-24T22:03:37.6929113Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-24T22:03:37.6932963Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:03:37.6981122Z Deleting the contents of '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-24T22:03:37.6985309Z ##[group]Initializing the repository
+2026-11-24T22:03:37.6989508Z [command]/usr/bin/git init /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:03:37.7732347Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-24T22:03:37.7733021Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-24T22:03:37.7733457Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-24T22:03:37.7734240Z hint: call:
+2026-11-24T22:03:37.7734631Z hint:
+2026-11-24T22:03:37.7734972Z hint: 	git config --global init.defaultBranch <name>
+2026-11-24T22:03:37.7735395Z hint:
+2026-11-24T22:03:37.7735798Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-24T22:03:37.7736341Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-24T22:03:37.7736749Z hint:
+2026-11-24T22:03:37.7737024Z hint: 	git branch -m <name>
+2026-11-24T22:03:37.7737384Z hint:
+2026-11-24T22:03:37.7737757Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-24T22:03:37.7738396Z Initialized empty Git repository in /home/runner/work/erdos-weak-problems/erdos-weak-problems/.git/
+2026-11-24T22:03:37.7746488Z [command]/usr/bin/git remote add origin https://github.com/kyo-oo/erdos-weak-problems
+2026-11-24T22:03:37.7794025Z ##[endgroup]
+2026-11-24T22:03:37.7794680Z ##[group]Disabling automatic garbage collection
+2026-11-24T22:03:37.7796417Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-24T22:03:37.7821077Z ##[endgroup]
+2026-11-24T22:03:37.7821802Z ##[group]Setting up auth
+2026-11-24T22:03:37.7826714Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-24T22:03:37.7853263Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-24T22:03:38.1148812Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-24T22:03:38.1173407Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-24T22:03:38.1321540Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-24T22:03:38.1345060Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-24T22:03:38.1489408Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-24T22:03:38.1515578Z ##[endgroup]
+2026-11-24T22:03:38.1516167Z ##[group]Fetching the repository
+2026-11-24T22:03:38.1526798Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8a96fa571b726163f90d7502676c53f3b63f2ecd:refs/remotes/origin/sandbox-vault
+2026-11-24T22:03:39.7813414Z From https://github.com/kyo-oo/erdos-weak-problems
+2026-11-24T22:03:39.7814560Z  * [new ref]         8a96fa571b726163f90d7502676c53f3b63f2ecd -> origin/sandbox-vault
+2026-11-24T22:03:39.7828156Z ##[endgroup]
+2026-11-24T22:03:39.7829024Z ##[group]Determining the checkout info
+2026-11-24T22:03:39.7830878Z ##[endgroup]
+2026-11-24T22:03:39.7842144Z [command]/usr/bin/git sparse-checkout disable
+2026-11-24T22:03:39.7911733Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-24T22:03:39.7916148Z ##[group]Checking out the ref
+2026-11-24T22:03:39.7920975Z [command]/usr/bin/git checkout --progress --force -B sandbox-vault refs/remotes/origin/sandbox-vault
+2026-11-24T22:03:40.3276205Z Switched to a new branch 'sandbox-vault'
+2026-11-24T22:03:40.3301417Z branch 'sandbox-vault' set up to track 'origin/sandbox-vault'.
+2026-11-24T22:03:40.3306370Z ##[endgroup]
+2026-11-24T22:03:40.3350404Z [command]/usr/bin/git log -1 --format=%H
+2026-11-24T22:03:40.3371286Z 8a96fa571b726163f90d7502676c53f3b63f2ecd
+2026-11-24T22:03:40.3568379Z ##[group]Run set -euo pipefail
+2026-11-24T22:03:40.3568751Z [36;1mset -euo pipefail[0m
+2026-11-24T22:03:40.3569322Z [36;1mcurl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2[0m
+2026-11-24T22:03:40.3569879Z [36;1mecho "$HOME/.elan/bin" >> "$GITHUB_PATH"[0m
+2026-11-24T22:03:40.3570710Z [36;1mexport PATH="$HOME/.elan/bin:$PATH"[0m
+2026-11-24T22:03:40.3571005Z [36;1mlake update[0m
+2026-11-24T22:03:40.3571276Z [36;1mlake exe cache get[0m
+2026-11-24T22:03:40.6982544Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-24T22:03:40.6983136Z ##[endgroup]
+2026-11-24T22:03:40.7759083Z info: downloading installer
+2026-11-24T22:03:41.0018508Z info: default toolchain set to 'leanprover/lean4:v4.33.0-rc2'
+2026-11-24T22:03:41.3707321Z info: downloading https://releases.lean-lang.org/lean4/v4.33.0-rc2/lean-4.33.0-rc2-linux.tar.zst
+2026-11-24T22:03:47.5938255Z info: installing /home/runner/.elan/toolchains/leanprover--lean4---v4.33.0-rc2
+2026-11-24T22:03:52.9670772Z info: leanprover-community/mathlib: cloning https://github.com/leanprover-community/mathlib4
+2026-11-24T22:04:14.8902552Z info: leanprover-community/mathlib: checking out revision '51e6992efd06126df61a496bebf8f49482a4e129'
+2026-11-24T22:04:15.8196435Z info: toolchain not updated; already up-to-date
+2026-11-24T22:04:16.5296342Z info: plausible: cloning https://github.com/leanprover-community/plausible
+2026-11-24T22:04:16.6752150Z info: plausible: checking out revision '123d15766ba49356c02ebad2a4462dfe12d79899'
+2026-11-24T22:04:16.6839003Z info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+2026-11-24T22:04:16.8085815Z info: LeanSearchClient: checking out revision 'f5c090429dff3cf66cb65562526c9ea6e8edfbcb'
+2026-11-24T22:04:16.8159415Z info: importGraph: cloning https://github.com/leanprover-community/import-graph
+2026-11-24T22:04:17.0919720Z info: importGraph: checking out revision 'bb3469a87774349fe01898d8bf2fc6a1ce6411ca'
+2026-11-24T22:04:17.1038469Z info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+2026-11-24T22:04:17.4020366Z info: proofwidgets: checking out revision '222c58dad7706a6e7cae46c0edd65ea881d3ee27'
+2026-11-24T22:04:17.8550983Z info: aesop: cloning https://github.com/leanprover-community/aesop
+2026-11-24T22:04:18.1481676Z info: aesop: checking out revision '7db8190085343afde2f5d2cdcc9bac719b6ec02c'
+2026-11-24T22:04:18.1613579Z info: Qq: cloning https://github.com/leanprover-community/quote4
+2026-11-24T22:04:18.3145403Z info: Qq: checking out revision 'ef42f8944eaf5b6cbfbe75d1917d824c7dd6cf33'
+2026-11-24T22:04:18.3225393Z info: batteries: cloning https://github.com/leanprover-community/batteries
+2026-11-24T22:04:20.1772733Z info: batteries: checking out revision '76e1c118b0700b4ceafe99532e887d6431625e1a'
+2026-11-24T22:04:20.2008618Z info: Cli: cloning https://github.com/leanprover/lean4-cli
+2026-11-24T22:04:20.3553773Z info: Cli: checking out revision '1319485273bf87833fa472afbcefdedecb16b45f'
+2026-11-24T22:04:20.3638966Z info: mathlib: running post-update hooks
+2026-11-24T22:04:20.7666367Z ✔ [2/6] Built Cache.Cli (237ms)
+2026-11-24T22:04:20.7666897Z ✔ [3/6] Built Cache.Lean (267ms)
+2026-11-24T22:04:23.3683435Z ✔ [8/27] Built Cache.Cli:c.o (124ms)
+2026-11-24T22:04:23.3684043Z ✔ [9/27] Built Cache.Lean:c.o (165ms)
+2026-11-24T22:04:23.5685529Z ✔ [11/27] Built Cache.Infra (338ms)
+2026-11-24T22:04:23.6687003Z ✔ [12/27] Built Cache.Infra:c.o (148ms)
+2026-11-24T22:04:24.1702097Z ✔ [13/27] Built Cache.IO (997ms)
+2026-11-24T22:04:24.6712656Z ✔ [14/27] Built Cache.Hashing (502ms)
+2026-11-24T22:04:24.9702064Z ✔ [15/27] Built Cache.Hashing:c.o (303ms)
+2026-11-24T22:04:25.3701098Z ✔ [16/27] Built Cache.IO:c.o (1.2s)
+2026-11-24T22:04:26.1709848Z ✔ [17/27] Built Cache.Requests (1.4s)
+2026-11-24T22:04:26.4713891Z ✔ [18/27] Built Cache.Marker (381ms)
+2026-11-24T22:04:26.6722598Z ✔ [19/27] Built Cache.Marker:c.o (107ms)
+2026-11-24T22:04:26.9732166Z ✔ [20/27] Built Cache.Query (476ms)
+2026-11-24T22:04:27.2732305Z ✔ [21/27] Built Cache.Query:c.o (270ms)
+2026-11-24T22:04:27.4732074Z ✔ [22/27] Built Cache.Warning (510ms)
+2026-11-24T22:04:27.7728934Z ✔ [23/27] Built Cache.Warning:c.o (231ms)
+2026-11-24T22:04:28.1737483Z ✔ [24/27] Built Cache.Requests:c.o (2.0s)
+2026-11-24T22:04:28.3738258Z ✔ [25/27] Built Cache.Main (822ms)
+2026-11-24T22:04:28.9743955Z ✔ [26/27] Built Cache.Main:c.o (652ms)
+2026-11-24T22:04:29.4786028Z ✔ [27/27] Built cache:exe (541ms)
+2026-11-24T22:04:30.8383955Z Current branch: HEAD
+2026-11-24T22:04:30.8384466Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-11-24T22:04:30.8385325Z Attempting to download 8681 file(s) from leanprover-community/mathlib4 cache at https://lakecache.blob.core.windows.net/mathlib4-master
+2026-11-24T22:04:31.7486521Z 
+2026-11-24T22:04:31.8484043Z Downloaded: 1 file(s) [attempted 1/8681 = 0%, 19 KB/s], Decompressed: 0
+2026-11-24T22:04:31.9516947Z Downloaded: 76 file(s) [attempted 76/8681 = 0%, 149 KB/s], Decompressed: 48
+2026-11-24T22:04:32.0518627Z Downloaded: 189 file(s) [attempted 189/8681 = 2%, 2026 KB/s], Decompressed: 76
+2026-11-24T22:04:32.1561481Z Downloaded: 306 file(s) [attempted 306/8681 = 3%, 323 KB/s], Decompressed: 76
+2026-11-24T22:04:32.2579725Z Downloaded: 432 file(s) [attempted 432/8681 = 4%, 326 KB/s], Decompressed: 144
+2026-11-24T22:04:32.3611513Z Downloaded: 558 file(s) [attempted 558/8681 = 6%, 1479 KB/s], Decompressed: 144
+2026-11-24T22:04:32.4594847Z Downloaded: 693 file(s) [attempted 693/8681 = 7%, 2140 KB/s], Decompressed: 144
+2026-11-24T22:04:32.5621540Z Downloaded: 822 file(s) [attempted 822/8681 = 9%, 738 KB/s], Decompressed: 144
+2026-11-24T22:04:32.6621596Z Downloaded: 964 file(s) [attempted 964/8681 = 11%, 1211 KB/s], Decompressed: 330
+2026-11-24T22:04:32.7630831Z Downloaded: 1101 file(s) [attempted 1101/8681 = 12%, 925 KB/s], Decompressed: 330
+2026-11-24T22:04:32.8619782Z Downloaded: 1241 file(s) [attempted 1241/8681 = 14%, 765 KB/s], Decompressed: 330
+2026-11-24T22:04:32.9664493Z Downloaded: 1376 file(s) [attempted 1376/8681 = 15%, 1023 KB/s], Decompressed: 330
+2026-11-24T22:04:33.0689106Z Downloaded: 1513 file(s) [attempted 1513/8681 = 17%, 1178 KB/s], Decompressed: 330
+2026-11-24T22:04:33.1698139Z Downloaded: 1648 file(s) [attempted 1648/8681 = 18%, 1903 KB/s], Decompressed: 330
+2026-11-24T22:04:33.2692858Z Downloaded: 1783 file(s) [attempted 1783/8681 = 20%, 3246 KB/s], Decompressed: 330
+2026-11-24T22:04:33.3741439Z Downloaded: 1909 file(s) [attempted 1909/8681 = 21%, 2624 KB/s], Decompressed: 330
+2026-11-24T22:04:33.4714126Z Downloaded: 2046 file(s) [attempted 2046/8681 = 23%, 795 KB/s], Decompressed: 330
+2026-11-24T22:04:33.5743993Z Downloaded: 2170 file(s) [attempted 2170/8681 = 24%, 2475 KB/s], Decompressed: 330
+2026-11-24T22:04:33.6723354Z Downloaded: 2317 file(s) [attempted 2317/8681 = 26%, 94 KB/s], Decompressed: 330
+2026-11-24T22:04:33.7738495Z Downloaded: 2445 file(s) [attempted 2445/8681 = 28%, 546 KB/s], Decompressed: 330
+2026-11-24T22:04:33.8729731Z Downloaded: 2577 file(s) [attempted 2577/8681 = 29%, 465 KB/s], Decompressed: 330
+2026-11-24T22:04:33.9745878Z Downloaded: 2710 file(s) [attempted 2710/8681 = 31%, 2608 KB/s], Decompressed: 330
+2026-11-24T22:04:34.0743379Z Downloaded: 2850 file(s) [attempted 2850/8681 = 32%, 204 KB/s], Decompressed: 912
+2026-11-24T22:04:34.1757017Z Downloaded: 2971 file(s) [attempted 2971/8681 = 34%, 921 KB/s], Decompressed: 912
+2026-11-24T22:04:34.2804679Z Downloaded: 3115 file(s) [attempted 3115/8681 = 35%, 851 KB/s], Decompressed: 912
+2026-11-24T22:04:34.3780478Z Downloaded: 3257 file(s) [attempted 3257/8681 = 37%, 925 KB/s], Decompressed: 912
+2026-11-24T22:04:34.4775676Z Downloaded: 3399 file(s) [attempted 3399/8681 = 39%, 4751 KB/s], Decompressed: 912
+2026-11-24T22:04:34.6017841Z Downloaded: 3543 file(s) [attempted 3543/8681 = 40%, 177 KB/s], Decompressed: 912
+2026-11-24T22:04:34.7037785Z Downloaded: 3595 file(s) [attempted 3595/8681 = 41%, 58 KB/s], Decompressed: 912
+2026-11-24T22:04:34.8082365Z Downloaded: 3744 file(s) [attempted 3744/8681 = 43%, 983 KB/s], Decompressed: 912
+2026-11-24T22:04:34.9081057Z Downloaded: 3890 file(s) [attempted 3890/8681 = 44%, 1231 KB/s], Decompressed: 912
+2026-11-24T22:04:35.0092074Z Downloaded: 4026 file(s) [attempted 4026/8681 = 46%, 977 KB/s], Decompressed: 912
+2026-11-24T22:04:35.1076384Z Downloaded: 4161 file(s) [attempted 4161/8681 = 47%, 95 KB/s], Decompressed: 912
+2026-11-24T22:04:35.2075356Z Downloaded: 4296 file(s) [attempted 4296/8681 = 49%, 3282 KB/s], Decompressed: 912
+2026-11-24T22:04:35.3080894Z Downloaded: 4431 file(s) [attempted 4431/8681 = 51%, 302 KB/s], Decompressed: 912
+2026-11-24T22:04:35.4102788Z Downloaded: 4570 file(s) [attempted 4570/8681 = 52%, 843 KB/s], Decompressed: 912
+2026-11-24T22:04:35.5109519Z Downloaded: 4705 file(s) [attempted 4705/8681 = 54%, 1674 KB/s], Decompressed: 912
+2026-11-24T22:04:35.6122419Z Downloaded: 4847 file(s) [attempted 4847/8681 = 55%, 1170 KB/s], Decompressed: 912
+2026-11-24T22:04:35.7161803Z Downloaded: 4989 file(s) [attempted 4989/8681 = 57%, 649 KB/s], Decompressed: 912
+2026-11-24T22:04:35.8125930Z Downloaded: 5127 file(s) [attempted 5127/8681 = 59%, 921 KB/s], Decompressed: 912
+2026-11-24T22:04:35.9130009Z Downloaded: 5260 file(s) [attempted 5260/8681 = 60%, 7019 KB/s], Decompressed: 912
+2026-11-24T22:04:36.0141484Z Downloaded: 5399 file(s) [attempted 5399/8681 = 62%, 1563 KB/s], Decompressed: 912
+2026-11-24T22:04:36.1139315Z Downloaded: 5537 file(s) [attempted 5537/8681 = 63%, 620 KB/s], Decompressed: 912
+2026-11-24T22:04:36.2202203Z Downloaded: 5680 file(s) [attempted 5680/8681 = 65%, 815 KB/s], Decompressed: 912
+2026-11-24T22:04:36.3235572Z Downloaded: 5814 file(s) [attempted 5814/8681 = 66%, 3075 KB/s], Decompressed: 912
+2026-11-24T22:04:36.4255980Z Downloaded: 5835 file(s) [attempted 5835/8681 = 67%, 2455 KB/s], Decompressed: 912
+2026-11-24T22:04:36.5272535Z Downloaded: 5981 file(s) [attempted 5981/8681 = 68%, 297 KB/s], Decompressed: 912
+2026-11-24T22:04:36.6301992Z Downloaded: 6119 file(s) [attempted 6119/8681 = 70%, 2547 KB/s], Decompressed: 912
+2026-11-24T22:04:36.7312168Z Downloaded: 6249 file(s) [attempted 6249/8681 = 71%, 416 KB/s], Decompressed: 912
+2026-11-24T22:04:36.8304339Z Downloaded: 6393 file(s) [attempted 6393/8681 = 73%, 359 KB/s], Decompressed: 912
+2026-11-24T22:04:36.9331285Z Downloaded: 6526 file(s) [attempted 6526/8681 = 75%, 3722 KB/s], Decompressed: 912
+2026-11-24T22:04:37.0341871Z Downloaded: 6668 file(s) [attempted 6668/8681 = 76%, 1735 KB/s], Decompressed: 912
+2026-11-24T22:04:37.1371947Z Downloaded: 6803 file(s) [attempted 6803/8681 = 78%, 1030 KB/s], Decompressed: 912
+2026-11-24T22:04:37.2381417Z Downloaded: 6941 file(s) [attempted 6941/8681 = 79%, 900 KB/s], Decompressed: 912
+2026-11-24T22:04:37.3401962Z Downloaded: 7080 file(s) [attempted 7080/8681 = 81%, 3612 KB/s], Decompressed: 912
+2026-11-24T22:04:37.4387695Z Downloaded: 7213 file(s) [attempted 7213/8681 = 83%, 4175 KB/s], Decompressed: 912
+2026-11-24T22:04:37.5377791Z Downloaded: 7346 file(s) [attempted 7346/8681 = 84%, 356 KB/s], Decompressed: 912
+2026-11-24T22:04:37.6384757Z Downloaded: 7483 file(s) [attempted 7483/8681 = 86%, 322 KB/s], Decompressed: 912
+2026-11-24T22:04:37.7427259Z Downloaded: 7623 file(s) [attempted 7623/8681 = 87%, 398 KB/s], Decompressed: 912
+2026-11-24T22:04:37.8761772Z Downloaded: 7762 file(s) [attempted 7762/8681 = 89%, 975 KB/s], Decompressed: 912
+2026-11-24T22:04:37.9771493Z Downloaded: 7866 file(s) [attempted 7866/8681 = 90%, 2025 KB/s], Decompressed: 912
+2026-11-24T22:04:38.0786684Z Downloaded: 8012 file(s) [attempted 8012/8681 = 92%, 2569 KB/s], Decompressed: 912
+2026-11-24T22:04:38.1821677Z Downloaded: 8135 file(s) [attempted 8135/8681 = 93%, 1289 KB/s], Decompressed: 912
+2026-11-24T22:04:38.2822667Z Downloaded: 8272 file(s) [attempted 8272/8681 = 95%, 295 KB/s], Decompressed: 912
+2026-11-24T22:04:38.3842762Z Downloaded: 8410 file(s) [attempted 8410/8681 = 96%, 454 KB/s], Decompressed: 912
+2026-11-24T22:04:38.5251807Z Downloaded: 8549 file(s) [attempted 8549/8681 = 98%, 2200 KB/s], Decompressed: 912
+2026-11-24T22:04:38.5278115Z Downloaded: 8680 file(s) [attempted 8680/8681 = 99%, 1468 KB/s], Decompressed: 912
+2026-11-24T22:04:38.5278954Z Downloaded: 8681 file(s) [attempted 8681/8681 = 100%, 1468 KB/s], Decompressed: 912
+2026-11-24T22:04:58.7716471Z Decompressed 8681 file(s)
+2026-11-24T22:04:58.7717063Z Already decompressed 8681 file(s)
+2026-11-24T22:05:01.6217437Z Current branch: HEAD
+2026-11-24T22:05:01.6218091Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-11-24T22:05:01.6218862Z No files to download
+2026-11-24T22:05:01.6219186Z Already decompressed 8681 file(s)
+2026-11-24T22:05:01.6510792Z ##[group]Run set -euo pipefail
+2026-11-24T22:05:01.6511613Z [36;1mset -euo pipefail[0m
+2026-11-24T22:05:01.6512143Z [36;1mlake build Arsenal.ErdosTernary2.Basic 2>&1 | tee kernel61e.log[0m
+2026-11-24T22:05:01.6512578Z [36;1mlake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel61e.log[0m
+2026-11-24T22:05:01.6513043Z [36;1mlake env lean problem61-erdos-hajnal/DM61_Proof_E.lean 2>&1 | tee -a kernel61e.log[0m
+2026-11-24T22:05:01.6513601Z [36;1m! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel61e.log[0m
+2026-11-24T22:05:01.6514100Z [36;1mgrep -F "DM61E_P4_GREEN" kernel61e.log[0m
+2026-11-24T22:05:01.6514814Z [36;1mgrep -E "'(Erdos61E.eh_P4|Erdos61E.eh_Pbar4|Erdos61E.erdos_61_p4|Erdos61E.seinsche_split|Erdos61E.p4_witness_product|Erdos61E.last_exit|Erdos61E.walk_crosses)' (does not depend on any axioms|depends on axioms)" kernel61e.log[0m
+2026-11-24T22:05:01.6515568Z [36;1m! grep -E "'Erdos61E..*'.*sorryAx" kernel61e.log[0m
+2026-11-24T22:05:01.6515973Z [36;1mecho KERNEL_61DM_E_GREEN=1[0m
+2026-11-24T22:05:01.6546418Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-24T22:05:01.6546751Z ##[endgroup]
+2026-11-24T22:05:02.5742072Z ✔ [2/2] Built Arsenal.ErdosTernary2.Basic (203ms)
+2026-11-24T22:05:02.5750997Z Build completed successfully (2 jobs).
+2026-11-24T22:05:12.7166526Z ⚠ [8697/8697] Built Arsenal.CardinalWorlds (6.4s)
+2026-11-24T22:05:12.7167525Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-24T22:05:12.7167844Z 
+2026-11-24T22:05:12.7168252Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-24T22:05:12.7168856Z   [apply] _hm
+2026-11-24T22:05:12.7168991Z 
+2026-11-24T22:05:12.7169166Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-24T22:05:12.7169680Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-24T22:05:12.7170013Z 
+2026-11-24T22:05:12.7170589Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-24T22:05:12.7171194Z   [apply] _hm
+2026-11-24T22:05:12.7171314Z 
+2026-11-24T22:05:12.7171583Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-24T22:05:12.7172227Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-24T22:05:12.7173021Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-24T22:05:12.7173705Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-24T22:05:12.7174464Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-24T22:05:12.7175216Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-24T22:05:12.7175664Z   4 * X / 3 ^ p % 3 = 2
+2026-11-24T22:05:12.7176114Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-24T22:05:12.7176733Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-24T22:05:12.7177338Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-24T22:05:12.7178177Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-24T22:05:12.7178921Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-24T22:05:12.7179553Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-24T22:05:12.7180057Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-24T22:05:12.7180577Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-24T22:05:12.7181090Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-24T22:05:12.7181626Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-24T22:05:12.7182284Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-24T22:05:12.7182957Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-24T22:05:12.7183340Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-24T22:05:12.7183790Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-24T22:05:12.7184675Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-24T22:05:12.7185058Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-24T22:05:12.7185476Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-24T22:05:12.7186245Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-24T22:05:12.7186896Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7187521Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7188037Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7188586Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7189186Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7189773Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:12.7251132Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-24T22:05:12.7251887Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7252772Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7253543Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7254344Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:12.7255046Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-24T22:05:12.7255659Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-24T22:05:12.7256323Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-24T22:05:12.7257107Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:12.7362309Z Build completed successfully (8697 jobs).
+2026-11-24T22:05:23.0657909Z problem61-erdos-hajnal/DM61_Proof_E.lean:84:29: warning: This simp argument is unused:
+2026-11-24T22:05:23.0658651Z   Matrix.cons_val_succ
+2026-11-24T22:05:23.0658840Z 
+2026-11-24T22:05:23.0659053Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.0660021Z   [apply] simp_all [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.head_cons]
+2026-11-24T22:05:23.0660716Z 
+2026-11-24T22:05:23.0661002Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.0661548Z problem61-erdos-hajnal/DM61_Proof_E.lean:276:48: warning: This simp argument is unused:
+2026-11-24T22:05:23.0662070Z   Subtype.coe_mk
+2026-11-24T22:05:23.0662294Z 
+2026-11-24T22:05:23.0662414Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.0662805Z   [apply] simp only [SimpleGraph.comap_adj]
+2026-11-24T22:05:23.0663067Z 
+2026-11-24T22:05:23.0663320Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.0663903Z problem61-erdos-hajnal/DM61_Proof_E.lean:304:42: warning: This simp argument is unused:
+2026-11-24T22:05:23.0664362Z   Subtype.coe_mk
+2026-11-24T22:05:23.0664484Z 
+2026-11-24T22:05:23.0664612Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.0664923Z   [apply] simp only [SimpleGraph.comap_adj] at hadj
+2026-11-24T22:05:23.0665139Z 
+2026-11-24T22:05:23.0665310Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.0665883Z problem61-erdos-hajnal/DM61_Proof_E.lean:405:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.0666517Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.0666893Z ```
+2026-11-24T22:05:23.0667111Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.0667433Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.0667726Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.0668004Z ```
+2026-11-24T22:05:23.0668304Z problem61-erdos-hajnal/DM61_Proof_E.lean:372:44: warning: This simp argument is unused:
+2026-11-24T22:05:23.0668659Z   Subtype.coe_mk
+2026-11-24T22:05:23.0668819Z 
+2026-11-24T22:05:23.0668920Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.0669219Z   [apply] simp only [SimpleGraph.comap_adj]
+2026-11-24T22:05:23.0669395Z 
+2026-11-24T22:05:23.0669601Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.0670069Z problem61-erdos-hajnal/DM61_Proof_E.lean:482:4: warning: Try this: 
+2026-11-24T22:05:23.0671014Z   haveI̵
+2026-11-24T22:05:23.0671201Z 
+2026-11-24T22:05:23.0671359Z The goal is a proposition, so `have` is preferred over `haveI`.
+2026-11-24T22:05:23.0671748Z The difference between `have` and `haveI` is that `haveI` inlines the value.
+2026-11-24T22:05:23.0672152Z But this is not relevant for proofs because of proof irrelevance.
+2026-11-24T22:05:23.0672374Z 
+2026-11-24T22:05:23.0672566Z Note: This linter can be disabled with `set_option linter.style.haveILetI false`
+2026-11-24T22:05:23.0673087Z problem61-erdos-hajnal/DM61_Proof_E.lean:531:10: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.0673656Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.0674018Z ```
+2026-11-24T22:05:23.0674234Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.0674503Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.0674793Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.0675085Z ```
+2026-11-24T22:05:23.0675483Z problem61-erdos-hajnal/DM61_Proof_E.lean:607:16: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.0676032Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.0676372Z ```
+2026-11-24T22:05:23.0676558Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.0676870Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.0677176Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.0677426Z ```
+2026-11-24T22:05:23.0677804Z problem61-erdos-hajnal/DM61_Proof_E.lean:637:16: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.0678542Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.0679071Z ```
+2026-11-24T22:05:23.0679276Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.0679555Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.0679872Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.0680351Z ```
+2026-11-24T22:05:23.0680686Z problem61-erdos-hajnal/DM61_Proof_E.lean:537:16: warning: This simp argument is unused:
+2026-11-24T22:05:23.0681053Z   Matrix.cons_val_succ
+2026-11-24T22:05:23.0681203Z 
+2026-11-24T22:05:23.0681290Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.0681691Z   [apply] simp_all [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.head_cons]
+2026-11-24T22:05:23.0681974Z 
+2026-11-24T22:05:23.0682172Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.0682621Z problem61-erdos-hajnal/DM61_Proof_E.lean:537:38: warning: This simp argument is unused:
+2026-11-24T22:05:23.0682978Z   Matrix.head_cons
+2026-11-24T22:05:23.0683111Z 
+2026-11-24T22:05:23.0683199Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.0683566Z   [apply] simp_all [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_succ]
+2026-11-24T22:05:23.0683842Z 
+2026-11-24T22:05:23.0684008Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.0684605Z problem61-erdos-hajnal/DM61_Proof_E.lean:725:12: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.0685182Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.0685528Z ```
+2026-11-24T22:05:23.0685851Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.0686140Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.0686480Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.0686731Z ```
+2026-11-24T22:05:23.0687084Z problem61-erdos-hajnal/DM61_Proof_E.lean:901:12: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.4732695Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.4733124Z ```
+2026-11-24T22:05:23.4733386Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.4733693Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.4734016Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.4734742Z ```
+2026-11-24T22:05:23.4735073Z problem61-erdos-hajnal/DM61_Proof_E.lean:704:18: warning: This simp argument is unused:
+2026-11-24T22:05:23.4735481Z   Matrix.cons_val_two
+2026-11-24T22:05:23.4735613Z 
+2026-11-24T22:05:23.4735739Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.4736157Z   [apply] simp_all [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_succ, Matrix.head_cons]
+2026-11-24T22:05:23.4736465Z 
+2026-11-24T22:05:23.4736665Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.4737122Z problem61-erdos-hajnal/DM61_Proof_E.lean:704:39: warning: This simp argument is unused:
+2026-11-24T22:05:23.4737476Z   Matrix.cons_val_succ
+2026-11-24T22:05:23.4737647Z 
+2026-11-24T22:05:23.4737745Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.4738179Z   [apply] simp_all [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.head_cons]
+2026-11-24T22:05:23.4738481Z 
+2026-11-24T22:05:23.4738705Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.4739149Z problem61-erdos-hajnal/DM61_Proof_E.lean:704:61: warning: This simp argument is unused:
+2026-11-24T22:05:23.4739489Z   Matrix.head_cons
+2026-11-24T22:05:23.4739650Z 
+2026-11-24T22:05:23.4739745Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.4740295Z   [apply] simp_all [Matrix.cons_val_zero, Matrix.cons_val_one, Matrix.cons_val_two, Matrix.cons_val_succ]
+2026-11-24T22:05:23.4740811Z 
+2026-11-24T22:05:23.4741038Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.4741632Z problem61-erdos-hajnal/DM61_Proof_E.lean:1096:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.4742164Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.4742561Z ```
+2026-11-24T22:05:23.4742766Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.4743063Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.4743380Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.4743649Z ```
+2026-11-24T22:05:23.4744071Z problem61-erdos-hajnal/DM61_Proof_E.lean:1185:2: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:23.4744606Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:23.4744950Z ```
+2026-11-24T22:05:23.4745160Z open Lean.Parser.Tactic in
+2026-11-24T22:05:23.4745432Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:23.4745759Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:23.4746008Z ```
+2026-11-24T22:05:23.4746343Z problem61-erdos-hajnal/DM61_Proof_E.lean:1193:37: warning: This simp argument is unused:
+2026-11-24T22:05:23.4746712Z   SimpleGraph.compl_adj
+2026-11-24T22:05:23.4746836Z 
+2026-11-24T22:05:23.4746961Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.4747262Z   [apply] simp [SimpleGraph.comap_adj]
+2026-11-24T22:05:23.4747411Z 
+2026-11-24T22:05:23.4747604Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.4748034Z problem61-erdos-hajnal/DM61_Proof_E.lean:1193:60: warning: This simp argument is unused:
+2026-11-24T22:05:23.4748417Z   SimpleGraph.comap_adj
+2026-11-24T22:05:23.4748569Z 
+2026-11-24T22:05:23.4748665Z Hint: Omit it from the simp argument list.
+2026-11-24T22:05:23.4748994Z   [apply] simp [SimpleGraph.compl_adj]
+2026-11-24T22:05:23.4749145Z 
+2026-11-24T22:05:23.4749341Z Note: This linter can be disabled with `set_option linter.unusedSimpArgs false`
+2026-11-24T22:05:23.4749751Z 'Erdos61E.last_exit' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4750344Z 'Erdos61E.walk_crosses' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4750796Z 'Erdos61E.seinsche_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4751276Z 'Erdos61E.p4_witness_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4751727Z 'Erdos61E.sqrt_le_of_sq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4752161Z 'Erdos61E.eh_P4' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4752585Z 'Erdos61E.eh_Pbar4' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4753001Z 'Erdos61E.erdos_61_p4' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4753464Z 'Erdos61E.arsenal_threshold' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.4753833Z "DM61E_P4_GREEN"
+2026-11-24T22:05:23.6419350Z "DM61E_P4_GREEN"
+2026-11-24T22:05:23.6423776Z 'Erdos61E.last_exit' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6424375Z 'Erdos61E.walk_crosses' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6424887Z 'Erdos61E.seinsche_split' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6425360Z 'Erdos61E.p4_witness_product' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6425800Z 'Erdos61E.eh_P4' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6426236Z 'Erdos61E.eh_Pbar4' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6426661Z 'Erdos61E.erdos_61_p4' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:23.6437163Z KERNEL_61DM_E_GREEN=1
+2026-11-24T22:05:23.6468654Z ##[group]Run set -euo pipefail
+2026-11-24T22:05:23.6468981Z [36;1mset -euo pipefail[0m
+2026-11-24T22:05:23.6469248Z [36;1mlake build FC 2>&1 | tee kernel142d.log[0m
+2026-11-24T22:05:23.6469658Z [36;1mlake build Arsenal.ErdosTernary2.Basic 2>&1 | tee -a kernel142d.log[0m
+2026-11-24T22:05:23.6470084Z [36;1mlake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel142d.log[0m
+2026-11-24T22:05:23.6471005Z [36;1mlake env lean problem142-rk-asymptotic/DM142_Proof_D.lean 2>&1 | tee -a kernel142d.log[0m
+2026-11-24T22:05:23.6471578Z [36;1m! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel142d.log[0m
+2026-11-24T22:05:23.6472019Z [36;1mgrep -F "DM142D_VGEN_GREEN" kernel142d.log[0m
+2026-11-24T22:05:23.6472582Z [36;1mgrep -E "'(DM142D.v_gen|DM142D.v_gen_witness|DM142D.aff_k|DM142D.v_gen_board)' (does not depend on any axioms|depends on axioms)" kernel142d.log[0m
+2026-11-24T22:05:23.6473226Z [36;1m! grep -E "'DM142D..*'.*sorryAx" kernel142d.log[0m
+2026-11-24T22:05:23.6473501Z [36;1mecho KERNEL_142DM_D_GREEN=1[0m
+2026-11-24T22:05:23.6500280Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-24T22:05:23.6500786Z ##[endgroup]
+2026-11-24T22:05:25.4482202Z ✔ [1328/1333] Built FC.Data.Sym.Sym2 (1.0s)
+2026-11-24T22:05:25.5500070Z ✔ [1329/1527] Built FC.Logic.Equiv.Fin.Rotate (896ms)
+2026-11-24T22:05:25.9518056Z ✔ [2221/2385] Built FC.Data.Set.Triplewise (1.5s)
+2026-11-24T22:05:26.4515640Z ✔ [2443/2446] Built FC.Combinatorics.AP.Basic (1.0s)
+2026-11-24T22:05:26.7516467Z ✔ [2444/2446] Built FC.Geometry.Metric (1.2s)
+2026-11-24T22:05:29.2554831Z ✔ [2445/2446] Built FC.Geometry.TwoD (2.5s)
+2026-11-24T22:05:29.2605591Z Build completed successfully (2446 jobs).
+2026-11-24T22:05:29.9719929Z Build completed successfully (2 jobs).
+2026-11-24T22:05:33.0776233Z ⚠ [8697/8697] Replayed Arsenal.CardinalWorlds
+2026-11-24T22:05:33.0776941Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-24T22:05:33.0777357Z 
+2026-11-24T22:05:33.0777788Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-24T22:05:33.0778405Z   [apply] _hm
+2026-11-24T22:05:33.0778561Z 
+2026-11-24T22:05:33.0779058Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-24T22:05:33.0780040Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-24T22:05:33.0780602Z 
+2026-11-24T22:05:33.0780962Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-24T22:05:33.0781526Z   [apply] _hm
+2026-11-24T22:05:33.0781692Z 
+2026-11-24T22:05:33.0781928Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-24T22:05:33.0782670Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-24T22:05:33.0783534Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-24T22:05:33.0784339Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-24T22:05:33.0785185Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-24T22:05:33.0786090Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-24T22:05:33.0786624Z   4 * X / 3 ^ p % 3 = 2
+2026-11-24T22:05:33.0787168Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-24T22:05:33.0787932Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-24T22:05:33.0789126Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-24T22:05:33.0790038Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-24T22:05:33.0790848Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-24T22:05:33.0791478Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-24T22:05:33.0792101Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-24T22:05:33.0792511Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-24T22:05:33.0793146Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-24T22:05:33.0793799Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-24T22:05:33.0794569Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-24T22:05:33.0795359Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-24T22:05:33.0795809Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-24T22:05:33.0796328Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-24T22:05:33.0797012Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-24T22:05:33.0797506Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-24T22:05:33.0798032Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-24T22:05:33.0799029Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-24T22:05:33.0799840Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0807047Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0807692Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0808443Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0809134Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0809854Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:33.0810743Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-24T22:05:33.0811371Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0812152Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0812915Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0813668Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:33.0814383Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-24T22:05:33.0815104Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-24T22:05:33.0815746Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-24T22:05:33.0816570Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:33.0976188Z Build completed successfully (8697 jobs).
+2026-11-24T22:05:37.2082410Z problem142-rk-asymptotic/DM142_Proof_D.lean:135:6: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:37.2083052Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:37.2083537Z ```
+2026-11-24T22:05:37.2083765Z open Lean.Parser.Tactic in
+2026-11-24T22:05:37.2084106Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:37.2084447Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:37.2084708Z ```
+2026-11-24T22:05:37.2085093Z problem142-rk-asymptotic/DM142_Proof_D.lean:484:4: warning: `push_neg` has been deprecated. Prefer using `push Not` instead.
+2026-11-24T22:05:37.2085701Z If you'd rather continue using `push_neg` in your project, you can implement it as follows:
+2026-11-24T22:05:37.2086074Z ```
+2026-11-24T22:05:37.2086295Z open Lean.Parser.Tactic in
+2026-11-24T22:05:37.2086626Z macro "push_neg" cfg:optConfig loc:(location)? : tactic =>
+2026-11-24T22:05:37.2086931Z   `(tactic| push $cfg:optConfig Not $[$loc]?)
+2026-11-24T22:05:37.2087211Z ```
+2026-11-24T22:05:37.2087496Z 'DM142D.aff_k' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.2087925Z 'DM142D.v_gen_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.2088380Z 'DM142D.v_gen' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.2088776Z 'DM142D.v_gen_board' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.2089140Z "DM142D_VGEN_GREEN"
+2026-11-24T22:05:37.3735368Z "DM142D_VGEN_GREEN"
+2026-11-24T22:05:37.3744129Z 'DM142D.aff_k' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.3744751Z 'DM142D.v_gen_witness' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.3745285Z 'DM142D.v_gen' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.3745788Z 'DM142D.v_gen_board' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:37.3753423Z KERNEL_142DM_D_GREEN=1
+2026-11-24T22:05:37.3788303Z ##[group]Run set -euo pipefail
+2026-11-24T22:05:37.3788678Z [36;1mset -euo pipefail[0m
+2026-11-24T22:05:37.3789019Z [36;1mlake build Arsenal.ErdosTernary2.Basic 2>&1 | tee kernel107c.log[0m
+2026-11-24T22:05:37.3789441Z [36;1mlake build Arsenal.CardinalWorlds 2>&1 | tee -a kernel107c.log[0m
+2026-11-24T22:05:37.3789898Z [36;1mlake env lean problem107-happy-ending/DM107_Proof_C.lean 2>&1 | tee -a kernel107c.log[0m
+2026-11-24T22:05:37.3790906Z [36;1m! grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel107c.log[0m
+2026-11-24T22:05:37.3791384Z [36;1mgrep -F "DM107C_LOWER_GREEN" kernel107c.log[0m
+2026-11-24T22:05:37.3792383Z [36;1mgrep -E "'(Erdos107C.f_eq_conjectured_of_le_four|Erdos107C.ersz_lower_le_five|Erdos107C.ersz_bounds_of_le_five|Erdos107C.f_three_eq|Erdos107C.four_not_mem_cardSet_four|Erdos107C.not_hasConvexFiveGon_esEightFinset|Erdos107C.nine_le_f_five)' (does not depend on any axioms|depends on axioms)" kernel107c.log[0m
+2026-11-24T22:05:37.3793409Z [36;1m! grep -E "'Erdos107C..*'.*sorryAx" kernel107c.log[0m
+2026-11-24T22:05:37.3793711Z [36;1mecho KERNEL_107DM_C_GREEN=1[0m
+2026-11-24T22:05:37.3820836Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-24T22:05:37.3821211Z ##[endgroup]
+2026-11-24T22:05:38.0831925Z Build completed successfully (2 jobs).
+2026-11-24T22:05:41.1988217Z ⚠ [8697/8697] Replayed Arsenal.CardinalWorlds
+2026-11-24T22:05:41.1988854Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-24T22:05:41.1989166Z 
+2026-11-24T22:05:41.1989483Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-24T22:05:41.1990006Z   [apply] _hm
+2026-11-24T22:05:41.1990364Z 
+2026-11-24T22:05:41.1990963Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-24T22:05:41.1991496Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-24T22:05:41.1991778Z 
+2026-11-24T22:05:41.1992102Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-24T22:05:41.1992587Z   [apply] _hm
+2026-11-24T22:05:41.1992680Z 
+2026-11-24T22:05:41.1992905Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-24T22:05:41.1993515Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-24T22:05:41.1994256Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-24T22:05:41.1995134Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-24T22:05:41.1996011Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-24T22:05:41.1996898Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-24T22:05:41.1997424Z   4 * X / 3 ^ p % 3 = 2
+2026-11-24T22:05:41.1997954Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-24T22:05:41.1998781Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-24T22:05:41.1999594Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-24T22:05:41.2000651Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-24T22:05:41.2001292Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-24T22:05:41.2002142Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-24T22:05:41.2002761Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-24T22:05:41.2003200Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-24T22:05:41.2003783Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-24T22:05:41.2004437Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-24T22:05:41.2005174Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-24T22:05:41.2005971Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-24T22:05:41.2006435Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-24T22:05:41.2006958Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-24T22:05:41.2007636Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-24T22:05:41.2008089Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-24T22:05:41.2008636Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-24T22:05:41.2009509Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-24T22:05:41.2040849Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2041609Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2042250Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2043138Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2043859Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2044573Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:41.2045236Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-24T22:05:41.2045859Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2046604Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2047337Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2048106Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-24T22:05:41.2048794Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-24T22:05:41.2049395Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-24T22:05:41.2050089Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-24T22:05:41.2051048Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:41.2161200Z Build completed successfully (8697 jobs).
+2026-11-24T22:05:51.7245542Z "DM107C_LOWER_GREEN"
+2026-11-24T22:05:51.7246134Z 'Erdos107C.f_eq_conjectured_of_le_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7246695Z 'Erdos107C.ersz_lower_le_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7247846Z 'Erdos107C.ersz_bounds_of_le_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7248405Z 'Erdos107C.f_three_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7248975Z 'Erdos107C.f_four_eq_five_unconditional' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7249538Z 'Erdos107C.five_mem_cardSet_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7250115Z 'Erdos107C.not_hasConvexFiveGon_esEightFinset' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7250946Z 'Erdos107C.nine_le_f_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7251482Z 'Erdos107C.f_le_erdosSzekeresUpper' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.7252084Z 'Erdos107C.nonempty_cardSet' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8901394Z "DM107C_LOWER_GREEN"
+2026-11-24T22:05:51.8915602Z 'Erdos107C.f_eq_conjectured_of_le_four' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8917102Z 'Erdos107C.ersz_lower_le_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8917683Z 'Erdos107C.ersz_bounds_of_le_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8918149Z 'Erdos107C.f_three_eq' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8918844Z 'Erdos107C.not_hasConvexFiveGon_esEightFinset' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8919386Z 'Erdos107C.nine_le_f_five' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-24T22:05:51.8925624Z KERNEL_107DM_C_GREEN=1
+2026-11-24T22:05:51.9021439Z Post job cleanup.
+2026-11-24T22:05:51.9665183Z [command]/usr/bin/git version
+2026-11-24T22:05:51.9698775Z git version 2.56.1
+2026-11-24T22:05:51.9728786Z Temporarily overriding HOME='/home/runner/work/_temp/ffc01be7-86ac-43cb-8fe9-746623e72bc6' before making global git config changes
+2026-11-24T22:05:51.9729772Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-24T22:05:51.9733868Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:05:51.9762622Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-24T22:05:51.9786532Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-24T22:05:51.9957106Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-24T22:05:51.9977185Z http.https://github.com/.extraheader
+2026-11-24T22:05:52.0009169Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-24T22:05:52.0012728Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-24T22:05:52.0194433Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-24T22:05:52.0222434Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-24T22:05:52.0492545Z Cleaning up orphan processes

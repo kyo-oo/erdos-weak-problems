@@ -1,0 +1,377 @@
+﻿2026-11-25T01:11:52.0014363Z Current runner version: '2.338.2'
+2026-11-25T01:11:52.0030722Z ##[group]Runner Image Provisioner
+2026-11-25T01:11:52.0031358Z Hosted Compute Agent
+2026-11-25T01:11:52.0031815Z Version: 20261111.635
+2026-11-25T01:11:52.0032501Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+2026-11-25T01:11:52.0032984Z Build Date: 2026-11-11T01:49:01Z
+2026-11-25T01:11:52.0033470Z Worker ID: {7b31e2fe-dd61-4eaf-9d7c-5970828df599}
+2026-11-25T01:11:52.0033949Z Region: centralus
+2026-11-25T01:11:52.0034333Z Cloud: Azure
+2026-11-25T01:11:52.0034696Z ##[endgroup]
+2026-11-25T01:11:52.0035609Z ##[group]Operating System
+2026-11-25T01:11:52.0036042Z Ubuntu
+2026-11-25T01:11:52.0036382Z 24.04.5
+2026-11-25T01:11:52.0036740Z LTS
+2026-11-25T01:11:52.0037091Z ##[endgroup]
+2026-11-25T01:11:52.0037455Z ##[group]Runner Image
+2026-11-25T01:11:52.0037860Z Image: ubuntu-24.04
+2026-11-25T01:11:52.0038278Z Version: 20261116.376.1
+2026-11-25T01:11:52.0039157Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261116.376/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-25T01:11:52.0040190Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261116.376
+2026-11-25T01:11:52.0040825Z ##[endgroup]
+2026-11-25T01:11:52.0041642Z ##[group]GITHUB_TOKEN Permissions
+2026-11-25T01:11:52.0043545Z Contents: read
+2026-11-25T01:11:52.0043937Z Metadata: read
+2026-11-25T01:11:52.0044345Z Packages: read
+2026-11-25T01:11:52.0044719Z ##[endgroup]
+2026-11-25T01:11:52.0046127Z Secret source: Actions
+2026-11-25T01:11:52.0046733Z Cache mode: write
+2026-11-25T01:11:52.0047181Z Prepare workflow directory
+2026-11-25T01:11:52.0279856Z Prepare all required actions
+2026-11-25T01:11:52.0317046Z Getting action download info
+2026-11-25T01:11:52.2522962Z Download action repository 'actions/checkout@v5' (SHA:fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09)
+2026-11-25T01:11:52.4862804Z Complete job name: kernel-406d
+2026-11-25T01:11:52.5421448Z ##[group]Run actions/checkout@v5
+2026-11-25T01:11:52.5422398Z with:
+2026-11-25T01:11:52.5422886Z   repository: kyo-oo/erdos-weak-problems
+2026-11-25T01:11:52.5425759Z   token: ***
+2026-11-25T01:11:52.5426105Z   ssh-strict: true
+2026-11-25T01:11:52.5426490Z   ssh-user: git
+2026-11-25T01:11:52.5426849Z   persist-credentials: true
+2026-11-25T01:11:52.5427224Z   clean: true
+2026-11-25T01:11:52.5427629Z   sparse-checkout-cone-mode: true
+2026-11-25T01:11:52.5428060Z   fetch-depth: 1
+2026-11-25T01:11:52.5428420Z   fetch-tags: false
+2026-11-25T01:11:52.5428776Z   show-progress: true
+2026-11-25T01:11:52.5429119Z   lfs: false
+2026-11-25T01:11:52.5429476Z   submodules: false
+2026-11-25T01:11:52.5429836Z   set-safe-directory: true
+2026-11-25T01:11:52.5430249Z   allow-unsafe-pr-checkout: false
+2026-11-25T01:11:52.5430813Z ##[endgroup]
+2026-11-25T01:11:52.7674790Z Syncing repository: kyo-oo/erdos-weak-problems
+2026-11-25T01:11:52.7676367Z ##[group]Getting Git version info
+2026-11-25T01:11:52.7677191Z Working directory is '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-25T01:11:52.7678280Z [command]/usr/bin/git version
+2026-11-25T01:11:52.7765362Z git version 2.56.1
+2026-11-25T01:11:52.7779098Z ##[endgroup]
+2026-11-25T01:11:52.7787015Z Temporarily overriding HOME='/home/runner/work/_temp/e1a80ca6-09ad-40a7-950d-7d264923619f' before making global git config changes
+2026-11-25T01:11:52.7788461Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-25T01:11:52.7790684Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-25T01:11:52.7829749Z Deleting the contents of '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-25T01:11:52.7832745Z ##[group]Initializing the repository
+2026-11-25T01:11:52.7835212Z [command]/usr/bin/git init /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-25T01:11:52.7930963Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-25T01:11:52.7931762Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-25T01:11:52.7933154Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-25T01:11:52.7933703Z hint: call:
+2026-11-25T01:11:52.7934040Z hint:
+2026-11-25T01:11:52.7934458Z hint: 	git config --global init.defaultBranch <name>
+2026-11-25T01:11:52.7934937Z hint:
+2026-11-25T01:11:52.7935560Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-25T01:11:52.7936250Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-25T01:11:52.7936781Z hint:
+2026-11-25T01:11:52.7937277Z hint: 	git branch -m <name>
+2026-11-25T01:11:52.7937800Z hint:
+2026-11-25T01:11:52.7938469Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-25T01:11:52.7939591Z Initialized empty Git repository in /home/runner/work/erdos-weak-problems/erdos-weak-problems/.git/
+2026-11-25T01:11:52.7954668Z [command]/usr/bin/git remote add origin https://github.com/kyo-oo/erdos-weak-problems
+2026-11-25T01:11:52.8008334Z ##[endgroup]
+2026-11-25T01:11:52.8009123Z ##[group]Disabling automatic garbage collection
+2026-11-25T01:11:52.8009821Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-25T01:11:52.8045697Z ##[endgroup]
+2026-11-25T01:11:52.8046589Z ##[group]Setting up auth
+2026-11-25T01:11:52.8050408Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-25T01:11:52.8075311Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-25T01:11:52.8368949Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-25T01:11:52.8399060Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-25T01:11:52.8539787Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-25T01:11:52.8564197Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-25T01:11:52.8710647Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-25T01:11:52.8873911Z ##[endgroup]
+2026-11-25T01:11:52.8874745Z ##[group]Fetching the repository
+2026-11-25T01:11:52.8882827Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d290274f2eee84c55257fc92fef593bf7b1b667d:refs/remotes/origin/campaign
+2026-11-25T01:11:54.7619422Z From https://github.com/kyo-oo/erdos-weak-problems
+2026-11-25T01:11:54.7620911Z  * [new ref]         d290274f2eee84c55257fc92fef593bf7b1b667d -> origin/campaign
+2026-11-25T01:11:54.7624036Z ##[endgroup]
+2026-11-25T01:11:54.7625150Z ##[group]Determining the checkout info
+2026-11-25T01:11:54.7626388Z ##[endgroup]
+2026-11-25T01:11:54.7633994Z [command]/usr/bin/git sparse-checkout disable
+2026-11-25T01:11:54.7690441Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-25T01:11:54.7717865Z ##[group]Checking out the ref
+2026-11-25T01:11:54.7729834Z [command]/usr/bin/git checkout --progress --force -B campaign refs/remotes/origin/campaign
+2026-11-25T01:11:55.2532618Z Switched to a new branch 'campaign'
+2026-11-25T01:11:55.2536242Z branch 'campaign' set up to track 'origin/campaign'.
+2026-11-25T01:11:55.2551395Z ##[endgroup]
+2026-11-25T01:11:55.2588489Z [command]/usr/bin/git log -1 --format=%H
+2026-11-25T01:11:55.2609450Z d290274f2eee84c55257fc92fef593bf7b1b667d
+2026-11-25T01:11:55.2826532Z ##[group]Run set -euo pipefail
+2026-11-25T01:11:55.2827576Z [36;1mset -euo pipefail[0m
+2026-11-25T01:11:55.2828817Z [36;1mcurl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2[0m
+2026-11-25T01:11:55.2829953Z [36;1mecho "$HOME/.elan/bin" >> "$GITHUB_PATH"[0m
+2026-11-25T01:11:55.2830948Z [36;1mexport PATH="$HOME/.elan/bin:$PATH"[0m
+2026-11-25T01:11:55.2831747Z [36;1mlake update[0m
+2026-11-25T01:11:55.2832684Z [36;1mlake exe cache get[0m
+2026-11-25T01:11:55.2848968Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-25T01:11:55.2849829Z ##[endgroup]
+2026-11-25T01:11:55.3403509Z info: downloading installer
+2026-11-25T01:11:55.7266887Z info: default toolchain set to 'leanprover/lean4:v4.33.0-rc2'
+2026-11-25T01:11:56.1355080Z info: downloading https://releases.lean-lang.org/lean4/v4.33.0-rc2/lean-4.33.0-rc2-linux.tar.zst
+2026-11-25T01:12:02.8978723Z info: installing /home/runner/.elan/toolchains/leanprover--lean4---v4.33.0-rc2
+2026-11-25T01:12:09.7923596Z info: leanprover-community/mathlib: cloning https://github.com/leanprover-community/mathlib4
+2026-11-25T01:12:34.7263248Z info: leanprover-community/mathlib: checking out revision '51e6992efd06126df61a496bebf8f49482a4e129'
+2026-11-25T01:12:35.6160194Z info: toolchain not updated; already up-to-date
+2026-11-25T01:12:36.3030257Z info: plausible: cloning https://github.com/leanprover-community/plausible
+2026-11-25T01:12:36.7062554Z info: plausible: checking out revision '123d15766ba49356c02ebad2a4462dfe12d79899'
+2026-11-25T01:12:36.7167162Z info: LeanSearchClient: cloning https://github.com/leanprover-community/LeanSearchClient
+2026-11-25T01:12:37.0147223Z info: LeanSearchClient: checking out revision 'f5c090429dff3cf66cb65562526c9ea6e8edfbcb'
+2026-11-25T01:12:37.0233455Z info: importGraph: cloning https://github.com/leanprover-community/import-graph
+2026-11-25T01:12:37.3634952Z info: importGraph: checking out revision 'bb3469a87774349fe01898d8bf2fc6a1ce6411ca'
+2026-11-25T01:12:37.3757042Z info: proofwidgets: cloning https://github.com/leanprover-community/ProofWidgets4
+2026-11-25T01:12:38.0160337Z info: proofwidgets: checking out revision '222c58dad7706a6e7cae46c0edd65ea881d3ee27'
+2026-11-25T01:12:38.4377078Z info: aesop: cloning https://github.com/leanprover-community/aesop
+2026-11-25T01:12:38.9691093Z info: aesop: checking out revision '7db8190085343afde2f5d2cdcc9bac719b6ec02c'
+2026-11-25T01:12:38.9825375Z info: Qq: cloning https://github.com/leanprover-community/quote4
+2026-11-25T01:12:39.3550003Z info: Qq: checking out revision 'ef42f8944eaf5b6cbfbe75d1917d824c7dd6cf33'
+2026-11-25T01:12:39.3645840Z info: batteries: cloning https://github.com/leanprover-community/batteries
+2026-11-25T01:12:41.8175278Z info: batteries: checking out revision '76e1c118b0700b4ceafe99532e887d6431625e1a'
+2026-11-25T01:12:41.8432599Z info: Cli: cloning https://github.com/leanprover/lean4-cli
+2026-11-25T01:12:42.1517654Z info: Cli: checking out revision '1319485273bf87833fa472afbcefdedecb16b45f'
+2026-11-25T01:12:42.1604297Z info: mathlib: running post-update hooks
+2026-11-25T01:12:42.5627884Z ✔ [2/6] Built Cache.Cli (228ms)
+2026-11-25T01:12:42.6627514Z ✔ [3/6] Built Cache.Lean (274ms)
+2026-11-25T01:12:46.1677256Z ✔ [8/27] Built Cache.Cli:c.o (130ms)
+2026-11-25T01:12:46.1678264Z ✔ [9/27] Built Cache.Lean:c.o (139ms)
+2026-11-25T01:12:46.3686674Z ✔ [11/27] Built Cache.Infra (319ms)
+2026-11-25T01:12:46.5689782Z ✔ [12/27] Built Cache.Infra:c.o (151ms)
+2026-11-25T01:12:46.9693883Z ✔ [13/27] Built Cache.IO (953ms)
+2026-11-25T01:12:47.5700673Z ✔ [14/27] Built Cache.Hashing (531ms)
+2026-11-25T01:12:47.8703118Z ✔ [15/27] Built Cache.Hashing:c.o (297ms)
+2026-11-25T01:12:48.1706980Z ✔ [16/27] Built Cache.IO:c.o (1.2s)
+2026-11-25T01:12:48.9714018Z ✔ [17/27] Built Cache.Requests (1.4s)
+2026-11-25T01:12:49.3718975Z ✔ [18/27] Built Cache.Marker (388ms)
+2026-11-25T01:12:49.4720329Z ✔ [19/27] Built Cache.Marker:c.o (100ms)
+2026-11-25T01:12:49.7725278Z ✔ [20/27] Built Cache.Query (482ms)
+2026-11-25T01:12:49.9736004Z ✔ [21/27] Built Cache.Query:c.o (202ms)
+2026-11-25T01:12:50.2754443Z ✔ [22/27] Built Cache.Warning (497ms)
+2026-11-25T01:12:50.4747911Z ✔ [23/27] Built Cache.Warning:c.o (221ms)
+2026-11-25T01:12:50.8752403Z ✔ [24/27] Built Cache.Requests:c.o (1.9s)
+2026-11-25T01:12:51.0753067Z ✔ [25/27] Built Cache.Main (804ms)
+2026-11-25T01:12:51.6759082Z ✔ [26/27] Built Cache.Main:c.o (609ms)
+2026-11-25T01:12:52.2766367Z ✔ [27/27] Built cache:exe (573ms)
+2026-11-25T01:12:53.5471473Z Current branch: HEAD
+2026-11-25T01:12:53.5472106Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-11-25T01:12:53.5473774Z Attempting to download 8681 file(s) from leanprover-community/mathlib4 cache at https://lakecache.blob.core.windows.net/mathlib4-master
+2026-11-25T01:12:54.2390608Z 
+2026-11-25T01:12:54.3453707Z Downloaded: 1 file(s) [attempted 1/8681 = 0%, 51 KB/s], Decompressed: 0
+2026-11-25T01:12:54.4446554Z Downloaded: 147 file(s) [attempted 147/8681 = 1%, 869 KB/s], Decompressed: 22
+2026-11-25T01:12:54.5450035Z Downloaded: 474 file(s) [attempted 474/8681 = 5%, 1175 KB/s], Decompressed: 22
+2026-11-25T01:12:54.6453315Z Downloaded: 938 file(s) [attempted 938/8681 = 10%, 12638 KB/s], Decompressed: 22
+2026-11-25T01:12:54.7493156Z Downloaded: 1321 file(s) [attempted 1321/8681 = 15%, 22141 KB/s], Decompressed: 96
+2026-11-25T01:12:54.8473298Z Downloaded: 1711 file(s) [attempted 1711/8681 = 19%, 2458 KB/s], Decompressed: 96
+2026-11-25T01:12:54.9531027Z Downloaded: 2138 file(s) [attempted 2138/8681 = 24%, 2639 KB/s], Decompressed: 96
+2026-11-25T01:12:55.0507933Z Downloaded: 2473 file(s) [attempted 2473/8681 = 28%, 5222 KB/s], Decompressed: 96
+2026-11-25T01:12:55.1557294Z Downloaded: 2932 file(s) [attempted 2932/8681 = 33%, 1682 KB/s], Decompressed: 96
+2026-11-25T01:12:55.2604592Z Downloaded: 3288 file(s) [attempted 3288/8681 = 37%, 7850 KB/s], Decompressed: 96
+2026-11-25T01:12:55.3632916Z Downloaded: 3820 file(s) [attempted 3820/8681 = 44%, 8309 KB/s], Decompressed: 96
+2026-11-25T01:12:55.4616115Z Downloaded: 4233 file(s) [attempted 4233/8681 = 48%, 1039 KB/s], Decompressed: 96
+2026-11-25T01:12:55.5615844Z Downloaded: 4604 file(s) [attempted 4604/8681 = 53%, 4872 KB/s], Decompressed: 96
+2026-11-25T01:12:55.6698596Z Downloaded: 4967 file(s) [attempted 4967/8681 = 57%, 58724 KB/s], Decompressed: 96
+2026-11-25T01:12:55.7838241Z Downloaded: 5405 file(s) [attempted 5405/8681 = 62%, 4320 KB/s], Decompressed: 96
+2026-11-25T01:12:55.8864802Z Downloaded: 5605 file(s) [attempted 5605/8681 = 64%, 2707 KB/s], Decompressed: 96
+2026-11-25T01:12:55.9857201Z Downloaded: 6036 file(s) [attempted 6036/8681 = 69%, 1780 KB/s], Decompressed: 96
+2026-11-25T01:12:56.0872609Z Downloaded: 6436 file(s) [attempted 6436/8681 = 74%, 6303 KB/s], Decompressed: 96
+2026-11-25T01:12:56.1886157Z Downloaded: 6877 file(s) [attempted 6877/8681 = 79%, 35678 KB/s], Decompressed: 96
+2026-11-25T01:12:56.2890469Z Downloaded: 7331 file(s) [attempted 7331/8681 = 84%, 1414 KB/s], Decompressed: 96
+2026-11-25T01:12:56.3907599Z Downloaded: 7738 file(s) [attempted 7738/8681 = 89%, 5377 KB/s], Decompressed: 96
+2026-11-25T01:12:56.4933292Z Downloaded: 8132 file(s) [attempted 8132/8681 = 93%, 3479 KB/s], Decompressed: 96
+2026-11-25T01:12:56.5939567Z Downloaded: 8511 file(s) [attempted 8511/8681 = 98%, 2723 KB/s], Decompressed: 96
+2026-11-25T01:12:56.5983645Z Downloaded: 8681 file(s) [attempted 8681/8681 = 100%, 2714 KB/s], Decompressed: 96
+2026-11-25T01:12:56.5984711Z Downloaded: 8681 file(s) [attempted 8681/8681 = 100%, 2714 KB/s], Decompressed: 96
+2026-11-25T01:13:32.2412564Z Decompressed 8681 file(s)
+2026-11-25T01:13:32.2414301Z Already decompressed 8681 file(s)
+2026-11-25T01:13:34.8231570Z Current branch: HEAD
+2026-11-25T01:13:34.8232391Z Using cache from origin: (some leanprover-community/mathlib4)
+2026-11-25T01:13:34.8232901Z No files to download
+2026-11-25T01:13:34.8233518Z Already decompressed 8681 file(s)
+2026-11-25T01:13:34.8724564Z ##[group]Run if [ ! -f /swapfile2 ]; then
+2026-11-25T01:13:34.8724893Z [36;1mif [ ! -f /swapfile2 ]; then[0m
+2026-11-25T01:13:34.8725270Z [36;1m  sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240[0m
+2026-11-25T01:13:34.8725649Z [36;1m  sudo chmod 600 /swapfile2[0m
+2026-11-25T01:13:34.8725899Z [36;1m  sudo mkswap /swapfile2[0m
+2026-11-25T01:13:34.8726183Z [36;1mfi[0m
+2026-11-25T01:13:34.8726418Z [36;1msudo swapon /swapfile2 2>/dev/null || true[0m
+2026-11-25T01:13:34.8726839Z [36;1mfree -h[0m
+2026-11-25T01:13:34.8741669Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-25T01:13:34.8742157Z ##[endgroup]
+2026-11-25T01:13:35.0299067Z Setting up swapspace version 1, size = 10 GiB (10737414144 bytes)
+2026-11-25T01:13:35.0300438Z no label, UUID=73c2fcab-76d5-4c66-a273-4256a34222d2
+2026-11-25T01:13:35.0380991Z                total        used        free      shared  buff/cache   available
+2026-11-25T01:13:35.0383193Z Mem:            15Gi       1.1Gi       2.0Gi        43Mi        12Gi        14Gi
+2026-11-25T01:13:35.0383732Z Swap:           12Gi          0B        12Gi
+2026-11-25T01:13:35.1002673Z ##[group]Run set -euo pipefail
+2026-11-25T01:13:35.1002999Z [36;1mset -euo pipefail[0m
+2026-11-25T01:13:35.1003268Z [36;1mlake build Arsenal.ErdosTernary2.Basic[0m
+2026-11-25T01:13:35.1003547Z [36;1mlake build Arsenal.CardinalWorlds[0m
+2026-11-25T01:13:35.1003833Z [36;1mlake build Arsenal.CardinalWorldsV2[0m
+2026-11-25T01:13:35.1004103Z [36;1m: > kernel74b.log[0m
+2026-11-25T01:13:35.1004363Z [36;1mset +e[0m
+2026-11-25T01:13:35.1004740Z [36;1mtimeout 3600 lake env lean problem406-ternary-powers/PiCollapse406Pins.lean 2>&1 | tee -a kernel74b.log[0m
+2026-11-25T01:13:35.1005140Z [36;1mRC=${PIPESTATUS[0]}[0m
+2026-11-25T01:13:35.1005356Z [36;1mset -e[0m
+2026-11-25T01:13:35.1005641Z [36;1mif [ "$RC" -ne 0 ]; then echo "PINS_COMPILE_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi[0m
+2026-11-25T01:13:35.1006515Z [36;1mif grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi[0m
+2026-11-25T01:13:35.1007283Z [36;1mgrep -F "ERDOS406_PICOLLAPSE_KERNEL_GREEN" kernel74b.log[0m
+2026-11-25T01:13:35.1007761Z [36;1mgrep -E "cMod_eq' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1008191Z [36;1mgrep -E "W61_receipt' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1008641Z [36;1mgrep -E "pi_fam4_receipt' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1009157Z [36;1mgrep -E "every_ghost_is_its_pi_point_fam4' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1009689Z [36;1mgrep -E "every_ghost_is_its_pi_point_fam7' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1010234Z [36;1mgrep -E "every_ghost_is_its_pi_point_fam1' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1010722Z [36;1mgrep -E "cantorian_base' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1011178Z [36;1mgrep -E "hasTwo_of_digit' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1011690Z [36;1mgrep -E "erdos406_crown_of_ghost_extinction' (does not depend on any axioms|depends on axioms)" kernel74b.log[0m
+2026-11-25T01:13:35.1012394Z [36;1mpython3 problem406-ternary-powers/battery406f.py[0m
+2026-11-25T01:13:35.1012721Z [36;1mecho ERDOS406_PICOLLAPSE_KERNEL_GREEN=1[0m
+2026-11-25T01:13:35.1022877Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-25T01:13:35.1023233Z ##[endgroup]
+2026-11-25T01:13:36.0241081Z ✔ [2/2] Built Arsenal.ErdosTernary2.Basic (199ms)
+2026-11-25T01:13:36.0250547Z Build completed successfully (2 jobs).
+2026-11-25T01:13:45.9390465Z ⚠ [8697/8697] Built Arsenal.CardinalWorlds (6.3s)
+2026-11-25T01:13:45.9391433Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-25T01:13:45.9391801Z 
+2026-11-25T01:13:45.9392382Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-25T01:13:45.9392964Z   [apply] _hm
+2026-11-25T01:13:45.9393148Z 
+2026-11-25T01:13:45.9393331Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-25T01:13:45.9394081Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-25T01:13:45.9394364Z 
+2026-11-25T01:13:45.9394716Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-25T01:13:45.9395175Z   [apply] _hm
+2026-11-25T01:13:45.9395278Z 
+2026-11-25T01:13:45.9395469Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-25T01:13:45.9396253Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-25T01:13:45.9396860Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-25T01:13:45.9397463Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-25T01:13:45.9398326Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-25T01:13:45.9399355Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-25T01:13:45.9399922Z   4 * X / 3 ^ p % 3 = 2
+2026-11-25T01:13:45.9400433Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-25T01:13:45.9401001Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-25T01:13:45.9401600Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-25T01:13:45.9402592Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-25T01:13:45.9403429Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-25T01:13:45.9404032Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-25T01:13:45.9404583Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-25T01:13:45.9405127Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-25T01:13:45.9405758Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-25T01:13:45.9406910Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-25T01:13:45.9407696Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-25T01:13:45.9408436Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-25T01:13:45.9408893Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-25T01:13:45.9409458Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-25T01:13:45.9410125Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-25T01:13:45.9410586Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-25T01:13:45.9411054Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-25T01:13:45.9412102Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-25T01:13:45.9412865Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9413484Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9414084Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9414910Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9415573Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9416283Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-25T01:13:45.9416962Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-25T01:13:45.9417666Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9418354Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9419064Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9419787Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:45.9420418Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-25T01:13:45.9421063Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-25T01:13:45.9421668Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-25T01:13:45.9422632Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-25T01:13:45.9553784Z Build completed successfully (8697 jobs).
+2026-11-25T01:13:48.9728856Z ⚠ [8697/8698] Replayed Arsenal.CardinalWorlds
+2026-11-25T01:13:48.9729605Z warning: Arsenal/CardinalWorlds.lean:270:33: Variable name `hm` is not explicitly referenced.
+2026-11-25T01:13:48.9729999Z 
+2026-11-25T01:13:48.9730499Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-25T01:13:48.9731199Z   [apply] _hm
+2026-11-25T01:13:48.9731378Z 
+2026-11-25T01:13:48.9731645Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-25T01:13:48.9732708Z warning: Arsenal/CardinalWorlds.lean:768:38: Variable name `hm` is not explicitly referenced.
+2026-11-25T01:13:48.9733181Z 
+2026-11-25T01:13:48.9733653Z Hint: The binding can be removed (if unused) or named `_` (if used implicitly). Alternatively, prefix the name with `_` to silence this warning:
+2026-11-25T01:13:48.9734389Z   [apply] _hm
+2026-11-25T01:13:48.9734600Z 
+2026-11-25T01:13:48.9734883Z Note: This linter can be disabled with `set_option linter.unusedVariables false`
+2026-11-25T01:13:48.9735749Z info: Arsenal/CardinalWorlds.lean:1220:0: d_identity (j : ℕ) (hj : 1 ≤ j) : 2 ^ (j + 2) * d j = 3 ^ 2 ^ j - 1
+2026-11-25T01:13:48.9736609Z info: Arsenal/CardinalWorlds.lean:1221:0: bridge_sig_even (j : ℕ) (hj : 2 ≤ j) (heven : j % 2 = 0) : hasTernaryTwo (d j) = true
+2026-11-25T01:13:48.9737544Z info: Arsenal/CardinalWorlds.lean:1222:0: bridge_sig_j_mod6_3 (j : ℕ) (hj : 3 ≤ j) (hmod : j % 6 = 3) : hasTernaryTwo (d j) = true
+2026-11-25T01:13:48.9738510Z info: Arsenal/CardinalWorlds.lean:1223:0: four_mul_preserves_digit (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) : 4 * X / 3 ^ p % 3 = X / 3 ^ p % 3
+2026-11-25T01:13:48.9739643Z info: Arsenal/CardinalWorlds.lean:1224:0: carry_manifold_survives (X p : ℕ) (hp : 2 ≤ p) (hX_mod : X % 3 ^ p = 1) (hX_digit : X / 3 ^ p % 3 = 2) :
+2026-11-25T01:13:48.9740290Z   4 * X / 3 ^ p % 3 = 2
+2026-11-25T01:13:48.9740929Z info: Arsenal/CardinalWorlds.lean:1225:0: modular_check_base (a : ℕ) (ha : 5 ≤ a) (ha500 : a ≤ 500) : hasTernaryTwo (4 ^ a) = true
+2026-11-25T01:13:48.9741748Z info: Arsenal/CardinalWorlds.lean:1226:0: four_pow_mod81 (m : ℕ) : 4 ^ m % 81 = 4 ^ (m % 27) % 81
+2026-11-25T01:13:48.9742763Z info: Arsenal/CardinalWorlds.lean:1227:0: no_two_false_digit_witness (n : ℕ) (h : noTernaryTwo n = false) : ∃ p, gstDigit n p = 2
+2026-11-25T01:13:48.9744216Z info: Arsenal/CardinalWorlds.lean:1228:0: omega_shadow_kill_all_of_even_conjecture (hConj : ∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) (K : ℕ) :
+2026-11-25T01:13:48.9744958Z   8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-25T01:13:48.9745655Z info: Arsenal/CardinalWorlds.lean:1229:0: erdos_even_conjecture_of_kill_all (hKill : ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2) (K : ℕ) :
+2026-11-25T01:13:48.9746327Z   8 ≤ K → noTernaryTwo (4 ^ K) = false
+2026-11-25T01:13:48.9746936Z info: Arsenal/CardinalWorlds.lean:1230:0: erdos_even_verdict_iff_digit_witness :
+2026-11-25T01:13:48.9747647Z   (∀ (K : ℕ), 8 ≤ K → noTernaryTwo (4 ^ K) = false) ↔ ∀ (K : ℕ), 8 ≤ K → ∃ p, 4 ^ K / 3 ^ p % 3 = 2
+2026-11-25T01:13:48.9748357Z info: Arsenal/CardinalWorlds.lean:1231:0: gst_three_world_factor_rawS (j : ℕ) : 6 ^ j = 2 ^ j * 3 ^ j
+2026-11-25T01:13:48.9749278Z info: Arsenal/CardinalWorlds.lean:1232:0: gstThreeWorldPacketMul (A B : GSTThreeWorldExponentialPacketS) : GSTThreeWorldExponentialPacketS
+2026-11-25T01:13:48.9750185Z info: Arsenal/CardinalWorlds.lean:1233:0: gstThreeWorldPacket_add (j k : ℕ) :
+2026-11-25T01:13:48.9750689Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-25T01:13:48.9751317Z     gstThreeWorldPacketMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-25T01:13:48.9752260Z info: Arsenal/CardinalWorlds.lean:1234:0: gstThreeWorldPacket_mixed_exact (j : ℕ) :
+2026-11-25T01:13:48.9752799Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-25T01:13:48.9753394Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-25T01:13:48.9754442Z info: Arsenal/CardinalWorlds.lean:1235:0: gst_handwritten_three_world_joined_prefix_closedS (K : ℕ) : gstHandwrittenThreeWorldJoinedPrefixS K = 6 ^ K - 1
+2026-11-25T01:13:48.9755338Z info: Arsenal/CardinalWorlds.lean:1237:0: 'd_identity' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9756022Z info: Arsenal/CardinalWorlds.lean:1238:0: 'bridge_sig_even' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9756695Z info: Arsenal/CardinalWorlds.lean:1239:0: 'bridge_sig_j_mod6_3' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9757463Z info: Arsenal/CardinalWorlds.lean:1240:0: 'four_mul_preserves_digit' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9758217Z info: Arsenal/CardinalWorlds.lean:1241:0: 'carry_manifold_survives' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9759065Z info: Arsenal/CardinalWorlds.lean:1242:0: 'modular_check_base' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-25T01:13:48.9759786Z info: Arsenal/CardinalWorlds.lean:1243:0: 'four_pow_mod81' depends on axioms: [propext]
+2026-11-25T01:13:48.9760440Z info: Arsenal/CardinalWorlds.lean:1244:0: 'no_two_false_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9761260Z info: Arsenal/CardinalWorlds.lean:1245:0: 'omega_shadow_kill_all_of_even_conjecture' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9762353Z info: Arsenal/CardinalWorlds.lean:1246:0: 'erdos_even_conjecture_of_kill_all' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9763197Z info: Arsenal/CardinalWorlds.lean:1247:0: 'erdos_even_verdict_iff_digit_witness' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:48.9763987Z info: Arsenal/CardinalWorlds.lean:1248:0: 'gst_three_world_factor_rawS' depends on axioms: [propext]
+2026-11-25T01:13:48.9764637Z info: Arsenal/CardinalWorlds.lean:1249:0: 'gstThreeWorldPacket_add' depends on axioms: [propext]
+2026-11-25T01:13:48.9765374Z info: Arsenal/CardinalWorlds.lean:1250:0: 'gstThreeWorldPacket_mixed_exact' depends on axioms: [propext]
+2026-11-25T01:13:48.9766245Z info: Arsenal/CardinalWorlds.lean:1251:0: 'gst_handwritten_three_world_joined_prefix_closedS' depends on axioms: [propext, Classical.choice, Quot.sound]
+2026-11-25T01:13:51.8776765Z ℹ [8698/8698] Built Arsenal.CardinalWorldsV2 (2.8s)
+2026-11-25T01:13:51.8778074Z info: Arsenal/CardinalWorldsV2.lean:140:0: CardinalWorldsV2.has_two_iff_no_two_false (n : ℕ) : hasTernaryTwo n = true ↔ noTernaryTwo n = false
+2026-11-25T01:13:51.8779142Z info: Arsenal/CardinalWorldsV2.lean:141:0: CardinalWorldsV2.has_two_iff_first_signature (n : ℕ) :
+2026-11-25T01:13:51.8779751Z   hasTernaryTwo n = true ↔ ∃ q, n / 3 ^ q % 3 = 2 ∧ ∀ p < q, n / 3 ^ p % 3 ≠ 2
+2026-11-25T01:13:51.8780524Z info: Arsenal/CardinalWorldsV2.lean:142:0: CardinalWorldsV2.no_two_false_iff_digit_witness (n : ℕ) : noTernaryTwo n = false ↔ ∃ p, gstDigit n p = 2
+2026-11-25T01:13:51.8781697Z info: Arsenal/CardinalWorldsV2.lean:143:0: CardinalWorldsV2.carryAtPos_one_exact (R : ℕ) : carryAtPos R 1 = R % 3
+2026-11-25T01:13:51.8783261Z info: Arsenal/CardinalWorldsV2.lean:144:0: CardinalWorldsV2.first_carry_two_iff (R : ℕ) : carryAtPos R 1 = 2 ↔ R % 3 = 2
+2026-11-25T01:13:51.8784222Z info: Arsenal/CardinalWorldsV2.lean:145:0: CardinalWorldsV2.v2r_ternary_scaling (a c : ℕ) : v2r (3 ^ a * c) = v2r c
+2026-11-25T01:13:51.8784976Z info: Arsenal/CardinalWorldsV2.lean:146:0: CardinalWorldsV2.packet_add (j k : ℕ) :
+2026-11-25T01:13:51.8785439Z   gstThreeWorldExponentialPacketS (j + k) =
+2026-11-25T01:13:51.8785916Z     packetMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-25T01:13:51.8786563Z info: Arsenal/CardinalWorldsV2.lean:147:0: CardinalWorldsV2.packetMul_assoc (A B C : GSTThreeWorldExponentialPacketS) :
+2026-11-25T01:13:51.8787197Z   packetMul (packetMul A B) C = packetMul A (packetMul B C)
+2026-11-25T01:13:51.8787763Z info: Arsenal/CardinalWorldsV2.lean:148:0: CardinalWorldsV2.packet_mixed_reconstruct (j : ℕ) :
+2026-11-25T01:13:51.8788329Z   (gstThreeWorldExponentialPacketS j).mixed =
+2026-11-25T01:13:51.8789044Z     (gstThreeWorldExponentialPacketS j).binary * (gstThreeWorldExponentialPacketS j).ternary
+2026-11-25T01:13:51.8790017Z info: Arsenal/CardinalWorldsV2.lean:149:0: CardinalWorldsV2.joined_prefix_succ (K : ℕ) :
+2026-11-25T01:13:51.8790681Z   gstHandwrittenThreeWorldJoinedPrefixS (K + 1) = gstHandwrittenThreeWorldJoinedPrefixS K + 5 * 6 ^ K
+2026-11-25T01:13:51.8791296Z info: Arsenal/CardinalWorldsV2.lean:150:0: CardinalWorldsV2.cardinal_worlds_v2_crown :
+2026-11-25T01:13:51.8791836Z   (∀ (n : ℕ), hasTernaryTwo n = true ↔ noTernaryTwo n = false) ∧
+2026-11-25T01:13:51.8792415Z     (∀ (R : ℕ), carryAtPos R 1 = R % 3) ∧
+2026-11-25T01:13:51.8792919Z       (∀ (a c : ℕ), v2r (3 ^ a * c) = v2r c) ∧
+2026-11-25T01:13:51.8793288Z         ∀ (j k : ℕ),
+2026-11-25T01:13:51.8793613Z           gstThreeWorldExponentialPacketS (j + k) =
+2026-11-25T01:13:51.8794109Z             packetMul (gstThreeWorldExponentialPacketS j) (gstThreeWorldExponentialPacketS k)
+2026-11-25T01:13:51.8794825Z info: Arsenal/CardinalWorldsV2.lean:152:0: 'CardinalWorldsV2.has_two_iff_no_two_false' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:51.8795581Z info: Arsenal/CardinalWorldsV2.lean:153:0: 'CardinalWorldsV2.has_two_iff_first_signature' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:51.8796368Z info: Arsenal/CardinalWorldsV2.lean:154:0: 'CardinalWorldsV2.carryAtPos_one_exact' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:51.8797053Z info: Arsenal/CardinalWorldsV2.lean:155:0: 'CardinalWorldsV2.packet_add' depends on axioms: [propext]
+2026-11-25T01:13:51.8797774Z info: Arsenal/CardinalWorldsV2.lean:156:0: 'CardinalWorldsV2.cardinal_worlds_v2_crown' depends on axioms: [propext, Quot.sound]
+2026-11-25T01:13:51.8972427Z Build completed successfully (8698 jobs).
+2026-11-25T01:22:08.2667022Z ##[error]The runner has received a shutdown signal. This can happen when the runner service is stopped, or a manually started runner is canceled.
+2026-11-25T01:22:08.2675293Z ##[error]Process completed with exit code 143.
+2026-11-25T01:22:08.4291733Z Cleaning up orphan processes

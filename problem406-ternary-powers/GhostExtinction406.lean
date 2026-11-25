@@ -939,7 +939,7 @@ theorem hasTwoScan_iff : ∀ (B n : Nat),
       have hsh : ∀ p : Nat, digit3 n (p + 1) = digit3 (n / 3) p := by
         intro p
         unfold digit3
-        rw [Nat.pow_succ, Nat.div_div_eq_div_mul]
+        rw [Nat.pow_succ, Nat.div_div_eq_div_mul, Nat.mul_comm (3^p) (3:Nat)]
       by_cases hb : n % 3 = 2
       · have hbeq : (n % 3 == 2) = true := by rw [hb]; rfl
         simp only [hasTwoScan, hbeq, Bool.true_or]
@@ -1028,7 +1028,7 @@ theorem hasTwo_of_digit : ∀ (n p : Nat), digit3 n p = 2 →
       intro h
       have hsh : digit3 n (p+1) = digit3 (n / 3) p := by
         unfold digit3
-        rw [Nat.pow_succ, Nat.div_div_eq_div_mul]
+        rw [Nat.pow_succ, Nat.div_div_eq_div_mul, Nat.mul_comm (3^p) (3:Nat)]
       rw [hsh] at h
       have hne : n ≠ 0 := by
         intro h0

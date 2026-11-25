@@ -1,0 +1,44 @@
+W89 ZERO-SORRYAX GLOBAL SWEEP — run 45497202986 (commit 8a96fa5)
+Scope: ALL 33 GREEN jobs (24 Lean-compiling + 9 pure-Python).
+Method: downloaded each job log, grepped 'sorryAx', classified each hit as
+  GUARD = the workflow's own rejection-grep command echo (benign), or
+  REAL  = an actual Lean '#print axioms' / error output line (a true positive).
+
+RESULT: 0 REAL sorryAx occurrences across all 33 green jobs.
+  (125 guard-command echoes; 2 prose mentions in Python-job receipt text:
+   gate-61-official S-W82-CI pass description, kernel-142d INTEL frozen-fact note
+   about the OLD run 43736909745 — neither is Lean output of this run.)
+
+gate-107-official    hits=  0 guard=  0 REAL=0
+gate-142-official    hits=  0 guard=  0 REAL=0
+gate-406-official    hits=  0 guard=  0 REAL=0
+gate-61-official     hits=  1 guard=  0 REAL=1
+kernel-107cmp        hits=  0 guard=  0 REAL=0
+kernel-107dm-b       hits=  1 guard=  1 REAL=0
+kernel-107k          hits=  1 guard=  1 REAL=0
+kernel-142a          hits=  0 guard=  0 REAL=0
+kernel-142cmp        hits=  0 guard=  0 REAL=0
+kernel-142d          hits=  1 guard=  0 REAL=1
+kernel-142k          hits=  1 guard=  1 REAL=0
+kernel-406a          hits=  5 guard=  5 REAL=0
+kernel-406b          hits=  2 guard=  2 REAL=0
+kernel-406c          hits=  3 guard=  3 REAL=0
+kernel-406cites      hits=  2 guard=  2 REAL=0
+kernel-406f          hits=  1 guard=  1 REAL=0
+kernel-406gate       hits=  3 guard=  3 REAL=0
+kernel-406tail       hits=  2 guard=  2 REAL=0
+kernel-406tail2      hits=  2 guard=  2 REAL=0
+kernel-406tail3      hits=  2 guard=  2 REAL=0
+kernel-406tail4      hits=  2 guard=  2 REAL=0
+kernel-61cmp         hits=  0 guard=  0 REAL=0
+kernel-61e-probe     hits=  0 guard=  0 REAL=0
+kernel-61k           hits=  1 guard=  1 REAL=0
+kernel-a             hits= 24 guard= 24 REAL=0
+kernel-b             hits= 20 guard= 20 REAL=0
+kernel-c             hits= 29 guard= 29 REAL=0
+kernel-dm-w82        hits=  9 guard=  9 REAL=0
+kernel-dm-w84        hits=  4 guard=  4 REAL=0
+kernel-dm-w85        hits=  6 guard=  6 REAL=0
+kernel-fc            hits=  1 guard=  1 REAL=0
+kernel-monolith      hits=  1 guard=  1 REAL=0
+kernel-s060          hits=  3 guard=  3 REAL=0

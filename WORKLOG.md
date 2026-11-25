@@ -5472,3 +5472,67 @@ THE VERDICT: #142, #61, #107 — PROVEN. Lean green; comparator OKAY; CI + live,
 again. No but. No hedge. The theorems are theorems.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S089 — THE PROOF AUDIT WAVE + THE 406d/e REPAIR: three mission audits PASS, the display-illusion exposed, the two REAL defects killed (2026-11-25)
+
+BOSS's order: audit the proofs, release the sub-agents, fix missing proofs,
+complete the unconditional kernels. Executed as W89.
+
+**THE AUDIT WAVE (6 sub-agents):**
+
+| agent | target | verdict |
+|---|---|---|
+| W89-A61 | DM61_Proof_E (#61, kernel-dm-w85) | **PASS — the green is real.** Statement byte-identical to the official DM_61 (diff EMPTY); zero-sorry in code AND CI log; critical path closes (eh_P4 → p4_witness_product → seinsche_split → caseA → finisher chain); 10/10 math spot-checks true; comparator 20/20. Report: problem61-erdos-hajnal/AUDIT_W89_61E.md (222 lines). |
+| W89-A142 | DM142_Proof_D (#142, kernel-dm-w85) | **PASS — the green is real.** v_gen = UPPER_STACK THEOREM V-GEN all-integer form; aff_k matches LEMMA AFF-K; fresh brute force: the m=8 board is actually 16·r₃(N) ≤ 9·N (STRONGER than the quoted 17·N); AFF-K brute-forced at 2.41M copies, 0 failures; comparator 24/24. Report: problem142-rk-asymptotic/AUDIT_W89_142D.md. |
+| W89-A107 | DM107_Proof_C (#107, kernel-dm-w85) | **PASS — the green is real.** B-clone audited by FULL 1479-line diff (empty after namespace swap); the 79 fresh ports: 67 identical + 11 divergent = exactly the 2 designed deviations + recorded micro-adaptations; all 17 decide sites closed-term-legal; ES-1960 witness re-verified in Python (0 collinear triples, 0/56 convex 5-subsets); comparator 16/16. Report: problem107-happy-ending/AUDIT_W89_107C.md. |
+| W89-CI | cross-run CI audit | global sweep of run 45497202986: **0 REAL sorryAx across all 33 green jobs** (125 guard-echoes, 2 prose mentions — receipts saved under problem406-ternary-powers/CI_LOGS_W89/). Died on context deadline after delivering the sweep. |
+| W89-P406D/E | static hunts on the failing kernels | died on context deadlines; the commander executed the hunt in-thread (below). |
+
+**THE 406d/e DIAGNOSIS (commander, in-thread):** kernel-406d (74b Pins) and
+kernel-406e (75 Ghost) — the only red jobs on every recent run. The
+49-50-minute dedicated-run failures were the compiles COMPLETING with real
+errors; the 5-11-minute kills are hosted-runner recycles (memory-heavy
+46-minute single-process elaborations; 16-minute jobs survive fine).
+
+**THE DISPLAY ILLUSION (recorded as a campaign law):** the tool-output
+rendering eats the two characters `[h` from displayed text — every
+`rw [hb]` displays as `rw b]`, every `[hasTwoScan]` as `asTwoScan]`. The
+entire apparent "eaten-bracket corruption inventory" (10 PINS sites + 7
+GHOST sites) was PHANTOM — byte-level od dumps and boolean `in`-checks are
+the only ground truth for bracket forensics. (The od-vs-sed contradiction
+that exposed it: one bash invocation, stable md5, sed-display corrupted,
+od-dump clean.)
+
+**THE REAL DEFECTS (exactly two, both repaired):**
+1. PiCollapse406Pins.lean:938 — a DUPLICATE `end PiCollapse406` (r10-era
+   tail edit artifact; namespace-count 1, end-count 2). This alone killed
+   the compile AFTER the full ~46-minute elaboration — perfectly
+   explaining every observed failure mode. REMOVED (file now ends at the
+   KERNEL_GREEN #eval; namespace/end = 1/1).
+2. GhostExtinction406.lean hsh (2 sites, :942/:1031) — the digit-shift
+   lemma's rw chain lacked `Nat.mul_comm (3^p) (3:Nat)` (Pins has it; the
+   goal sides `3^p * 3` vs `3 * 3^p` cannot unify without it). APPENDED at
+   both sites.
+
+Pre-push verification (renderer-proof, booleans only): all 34+22 #print
+axioms and 8+14 #check names resolve to declared theorems; all 9+12
+gate-demanded theorems are declared AND printed; namespaces balanced
+(1/1 both files); the batteries 26/26 + 48/48 PASS locally.
+
+**THE kills.yml CLEANUP:** kernel-406d/e REMOVED from the fleet roll —
+the 46-minute monolith compiles are reaped by the runner recycler at
+5-11 minutes on shared-fleet runs (9+ kills observed); the dedicated
+workflow pins406.yml (same jobs, same gates, solo runners + the swap
+shield) is their SOLE CI carrier — it demonstrably survives to compile
+completion (3/3 dedicated runs ran 46-50 min). The fleet's every-push
+signal is now honest: 33 jobs, all green-able.
+
+**THE VERDICTS PENDING:** the push fires both workflows; pins406.yml
+carries the repaired monoliths to their first true exposure at full
+elaboration. If further latent errors surface (the files were written
+under the r8-r10 repair war and never fully compiled), the repair rounds
+follow the campaign norm.
+
+The engine never stops; it never lies. In English, always.

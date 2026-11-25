@@ -1,0 +1,179 @@
+﻿2026-11-24T22:09:46.2018483Z Current runner version: '2.338.2'
+2026-11-24T22:09:46.2054718Z ##[group]Runner Image Provisioner
+2026-11-24T22:09:46.2056229Z Hosted Compute Agent
+2026-11-24T22:09:46.2057303Z Version: 20261111.635
+2026-11-24T22:09:46.2058598Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+2026-11-24T22:09:46.2060177Z Build Date: 2026-11-11T01:49:01Z
+2026-11-24T22:09:46.2061636Z Worker ID: {5fbd00eb-2e50-4c72-b066-cabd902a09c2}
+2026-11-24T22:09:46.2063142Z Region: northcentralus
+2026-11-24T22:09:46.2064240Z Cloud: Azure
+2026-11-24T22:09:46.2065440Z ##[endgroup]
+2026-11-24T22:09:46.2067714Z ##[group]Operating System
+2026-11-24T22:09:46.2068797Z Ubuntu
+2026-11-24T22:09:46.2069955Z 24.04.5
+2026-11-24T22:09:46.2070812Z LTS
+2026-11-24T22:09:46.2071526Z ##[endgroup]
+2026-11-24T22:09:46.2072104Z ##[group]Runner Image
+2026-11-24T22:09:46.2072694Z Image: ubuntu-24.04
+2026-11-24T22:09:46.2073372Z Version: 20261116.376.1
+2026-11-24T22:09:46.2074630Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261116.376/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-24T22:09:46.2076252Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261116.376
+2026-11-24T22:09:46.2077226Z ##[endgroup]
+2026-11-24T22:09:46.2078518Z ##[group]GITHUB_TOKEN Permissions
+2026-11-24T22:09:46.2080999Z Contents: read
+2026-11-24T22:09:46.2081791Z Metadata: read
+2026-11-24T22:09:46.2082361Z ##[endgroup]
+2026-11-24T22:09:46.2084507Z Secret source: Actions
+2026-11-24T22:09:46.2085463Z Cache mode: write
+2026-11-24T22:09:46.2086467Z Prepare workflow directory
+2026-11-24T22:09:46.2527510Z Prepare all required actions
+2026-11-24T22:09:46.2598686Z Getting action download info
+2026-11-24T22:09:46.4724701Z Download action repository 'actions/checkout@v5' (SHA:fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09)
+2026-11-24T22:09:46.7430893Z Complete job name: gate-142-official
+2026-11-24T22:09:46.8284868Z ##[group]Run actions/checkout@v5
+2026-11-24T22:09:46.8285756Z with:
+2026-11-24T22:09:46.8286226Z   repository: kyo-oo/erdos-weak-problems
+2026-11-24T22:09:46.8290398Z   token: ***
+2026-11-24T22:09:46.8290846Z   ssh-strict: true
+2026-11-24T22:09:46.8291290Z   ssh-user: git
+2026-11-24T22:09:46.8291744Z   persist-credentials: true
+2026-11-24T22:09:46.8292234Z   clean: true
+2026-11-24T22:09:46.8292679Z   sparse-checkout-cone-mode: true
+2026-11-24T22:09:46.8293206Z   fetch-depth: 1
+2026-11-24T22:09:46.8293640Z   fetch-tags: false
+2026-11-24T22:09:46.8294094Z   show-progress: true
+2026-11-24T22:09:46.8294546Z   lfs: false
+2026-11-24T22:09:46.8294964Z   submodules: false
+2026-11-24T22:09:46.8295422Z   set-safe-directory: true
+2026-11-24T22:09:46.8295935Z   allow-unsafe-pr-checkout: false
+2026-11-24T22:09:46.8296731Z ##[endgroup]
+2026-11-24T22:09:47.0888266Z Syncing repository: kyo-oo/erdos-weak-problems
+2026-11-24T22:09:47.0891430Z ##[group]Getting Git version info
+2026-11-24T22:09:47.0893048Z Working directory is '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-24T22:09:47.0895152Z [command]/usr/bin/git version
+2026-11-24T22:09:47.0990037Z git version 2.56.1
+2026-11-24T22:09:47.1020652Z ##[endgroup]
+2026-11-24T22:09:47.1028271Z Temporarily overriding HOME='/home/runner/work/_temp/b020985f-fa65-4a3c-8ad8-6ea2ebe86b83' before making global git config changes
+2026-11-24T22:09:47.1031208Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-24T22:09:47.1033617Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:09:47.1093156Z Deleting the contents of '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-24T22:09:47.1098271Z ##[group]Initializing the repository
+2026-11-24T22:09:47.1102906Z [command]/usr/bin/git init /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:09:47.1224125Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-24T22:09:47.1226396Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-24T22:09:47.1228937Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-24T22:09:47.1230979Z hint: call:
+2026-11-24T22:09:47.1231975Z hint:
+2026-11-24T22:09:47.1233147Z hint: 	git config --global init.defaultBranch <name>
+2026-11-24T22:09:47.1234524Z hint:
+2026-11-24T22:09:47.1235834Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-24T22:09:47.1237828Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-24T22:09:47.1239692Z hint:
+2026-11-24T22:09:47.1241861Z hint: 	git branch -m <name>
+2026-11-24T22:09:47.1243014Z hint:
+2026-11-24T22:09:47.1244483Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-24T22:09:47.1247035Z Initialized empty Git repository in /home/runner/work/erdos-weak-problems/erdos-weak-problems/.git/
+2026-11-24T22:09:47.1251895Z [command]/usr/bin/git remote add origin https://github.com/kyo-oo/erdos-weak-problems
+2026-11-24T22:09:47.1295806Z ##[endgroup]
+2026-11-24T22:09:47.1297424Z ##[group]Disabling automatic garbage collection
+2026-11-24T22:09:47.1300119Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-24T22:09:47.1336879Z ##[endgroup]
+2026-11-24T22:09:47.1338454Z ##[group]Setting up auth
+2026-11-24T22:09:47.1345650Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-24T22:09:47.1387377Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-24T22:09:47.1801948Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-24T22:09:47.1856170Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-24T22:09:47.2108866Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-24T22:09:47.2158760Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-24T22:09:47.2442922Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-24T22:09:47.2497859Z ##[endgroup]
+2026-11-24T22:09:47.2499763Z ##[group]Fetching the repository
+2026-11-24T22:09:47.2513008Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8a96fa571b726163f90d7502676c53f3b63f2ecd:refs/remotes/origin/sandbox-vault
+2026-11-24T22:09:48.5580902Z From https://github.com/kyo-oo/erdos-weak-problems
+2026-11-24T22:09:48.5584140Z  * [new ref]         8a96fa571b726163f90d7502676c53f3b63f2ecd -> origin/sandbox-vault
+2026-11-24T22:09:48.5599711Z ##[endgroup]
+2026-11-24T22:09:48.5601856Z ##[group]Determining the checkout info
+2026-11-24T22:09:48.5604070Z ##[endgroup]
+2026-11-24T22:09:48.5608278Z [command]/usr/bin/git sparse-checkout disable
+2026-11-24T22:09:48.5676473Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-24T22:09:48.5718289Z ##[group]Checking out the ref
+2026-11-24T22:09:48.5720647Z [command]/usr/bin/git checkout --progress --force -B sandbox-vault refs/remotes/origin/sandbox-vault
+2026-11-24T22:09:49.2420560Z Switched to a new branch 'sandbox-vault'
+2026-11-24T22:09:49.2460556Z branch 'sandbox-vault' set up to track 'origin/sandbox-vault'.
+2026-11-24T22:09:49.2480436Z ##[endgroup]
+2026-11-24T22:09:49.2535714Z [command]/usr/bin/git log -1 --format=%H
+2026-11-24T22:09:49.2570955Z 8a96fa571b726163f90d7502676c53f3b63f2ecd
+2026-11-24T22:09:49.2815640Z ##[group]Run set -euo pipefail
+2026-11-24T22:09:49.2816058Z [36;1mset -euo pipefail[0m
+2026-11-24T22:09:49.2816310Z [36;1minstall_ok=0[0m
+2026-11-24T22:09:49.2816840Z [36;1mif python3 -m pip install --quiet --break-system-packages numpy z3-solver mpmath 2>/dev/null; then install_ok=1[0m
+2026-11-24T22:09:49.2817651Z [36;1melif pip3 install --quiet --break-system-packages numpy z3-solver mpmath 2>/dev/null; then install_ok=1[0m
+2026-11-24T22:09:49.2818625Z [36;1melif python3 -m pip install --quiet numpy z3-solver mpmath 2>/dev/null; then install_ok=1; fi[0m
+2026-11-24T22:09:49.2819697Z [36;1mif [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED"; exit 1; fi[0m
+2026-11-24T22:09:49.2820402Z [36;1mpython3 comparator-official/official_gate.py 142 2>&1 | tee gate142official.log[0m
+2026-11-24T22:09:49.2820847Z [36;1mtest "${PIPESTATUS[0]}" -eq 0[0m
+2026-11-24T22:09:49.2821257Z [36;1mgrep -F "VERDICT: YOUR SOLUTION IS OKAY" gate142official.log[0m
+2026-11-24T22:09:49.2821734Z [36;1mgrep -F "YOUR SOLUTION IS REJECTED" gate142official.log && exit 1 || true[0m
+2026-11-24T22:09:49.2822206Z [36;1mtest "$(grep -c '\[PASS\]' gate142official.log)" -ge 20[0m
+2026-11-24T22:09:49.2822611Z [36;1mtest "$(grep -c '\[FAIL\]' gate142official.log)" -eq 0[0m
+2026-11-24T22:09:49.2822977Z [36;1mecho GATE142OFFICIAL_GREEN=1[0m
+2026-11-24T22:09:49.2847255Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-24T22:09:49.2847637Z ##[endgroup]
+2026-11-24T22:09:55.5426383Z py-deps install: OK
+2026-11-24T22:12:32.3000887Z [142] official: 5 checks, 5 pass
+2026-11-24T22:12:32.3001334Z [142] solution: 11 checks, 11 pass
+2026-11-24T22:12:32.3001728Z [142] control: 8 checks, 8 pass
+2026-11-24T22:12:32.3002515Z OFFICIAL GATE RECEIPT — problem #142 — 2026-11-24T22:12:32
+2026-11-24T22:12:32.3003079Z ==============================================================================
+2026-11-24T22:12:32.3003676Z OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
+2026-11-24T22:12:32.3004256Z   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
+2026-11-24T22:12:32.3004894Z   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
+2026-11-24T22:12:32.3005477Z Challenge statement: erdos-142-rk-asymptotic
+2026-11-24T22:12:32.3005924Z Claims in solution ledger: 21
+2026-11-24T22:12:32.3006358Z ==============================================================================
+2026-11-24T22:12:32.3007976Z [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cap_set module (verbatim cells 2/6/8/12/14) imports and its own asserts hold (512 greedy, is_cap_set, explicit-set equality, 1082)
+2026-11-24T22:12:32.3009762Z [PASS] (official) O-512EXPL — official build_512_cap: 512 distinct vectors, official is_cap_set True
+2026-11-24T22:12:32.3010966Z [PASS] (official) O-512GREEDY — official solve(8) (official priority): (512,8), is_cap_set, matches official data file
+2026-11-24T22:12:32.3012130Z [PASS] (official) O-1082 — official solve(9) (official cell-14 priority): (1082,9), is_cap_set True
+2026-11-24T22:12:32.3013312Z [PASS] (official) O-BRIDGE — official is_cap_set certifies the Cantor digit sets {0,1}^d in F_3^d for d=3..9 (sizes 2^d)
+2026-11-24T22:12:32.3014429Z [PASS] (solution) S-ENGINE — campaign Behrend engine --verify: exit 0, >= 8 PASS, 0 FAIL
+2026-11-24T22:12:32.3015516Z [PASS] (solution) S-BEHREND — independent Behrend constructions for (4,3),(3,5),(4,5): AP-free, bound met
+2026-11-24T22:12:32.3017106Z [PASS] (solution) S-ASYMP — Corollary B* finite form: F(d) <= 2*sqrt(3 ln 2)*sqrt(ln N) + 2 ln d + 2 at every grid N; shifted ratios <= 2.885 with tail closing on the constant from below
+2026-11-24T22:12:32.3018762Z [PASS] (solution) S-ASYMP-BRIDGE — Corollary B* small-N bridge: max_{2<=N<=255} N*exp(-2*sqrt(3 ln 2)*sqrt(ln N)) < 2 <= r_3(N) (2-point witness)
+2026-11-24T22:12:32.3020559Z [PASS] (solution) S-INSTANCES-TABLE — ledger BEHREND-INSTANCES table == live re-computed best layer x sphere grid, cell by cell (10 rows)
+2026-11-24T22:12:32.3022146Z [PASS] (solution) S-R3-Z3 — z3 dual certificates agree with the r_3 table (9->5, 14->8, 20->9)
+2026-11-24T22:12:32.3023304Z [PASS] (solution) S-BLOCK — block bound (k-1)*floor(N/k)+(N mod k) dominates every certified r_3 (N<=30) and r_4 (N<=20) value
+2026-11-24T22:12:32.3024728Z [PASS] (solution) S-MONO — r_3(N) <= r_4(N) <= r_5(N) at every certified table point
+2026-11-24T22:12:32.3026980Z [PASS] (solution) S-DEVIATION-ENGINE — engine142deviation.py --verify: exit 0 + 51/51 passed + ENGINE VERDICT: ALL GREEN in receipts142deviation.txt (D1-k identity 4-method battery, V2-k vanishing, extraction plug-backs on 14 greedy cells, 5 negative controls)
+2026-11-24T22:12:32.3030935Z [PASS] (solution) S-DEVIATION-IDENTITY — THEOREM D1-k + V2-k verified by independent brute-force constraint enumeration at (k=3,p=13) and (k=4,p=11): T_k = delta^k p^2 + sum_{s>=3} delta^{k-s} D_s exactly; every s<=2 constraint system has ONLY the trivial solution with zero layer; #V_S = p^{s-2}; k=3 reduces to the banked F1 kernel
+2026-11-24T22:12:32.3035168Z [PASS] (solution) S-DEVIATION-CONSTANTS — The extraction-layer constants exact: TC-4 carriage biconditional in exact rationals (boundary delta=2/3 gives exactly 1/4); OB-4 integer arithmetic (every prime p >= 359 passes, 349/353 fail); c_4(delta) > 0 iff delta > 2-sqrt(2); L-TERM-4 crossing c_4 = 1-delta at (10-sqrt(10))/9 = 0.759746...; L-TERM-3-SHARP 2-sqrt(2) = 0.585786... sharpens the banked (9-sqrt(17))/8 = 0.6096
+2026-11-24T22:12:32.3037870Z [PASS] (control) N-AP — planted 3-AP inside a Behrend set is DETECTED by the AP scanner
+2026-11-24T22:12:32.3039476Z [PASS] (control) N-CAP — corrupted official 512-cap (midpoint-completing vector swapped in) is REJECTED by the official is_cap_set
+2026-11-24T22:12:32.3041256Z [PASS] (control) N-R3 — corrupted r_3(10)=6 in a ledger copy is DETECTED against the fresh in-driver brute-force recomputation (true value 5)
+2026-11-24T22:12:32.3043723Z [PASS] (control) S-TABLE-EXT — Theorem T-EXT: r_3(31..48) = 12,13,13,13,13,14,14,14,14,15,16,16,16,16,16,16,16,16 — every value triple-solver SAT-certified (UNSAT at t+1 by MinisatGH+Cadical153+z3) with brute-checked AP-free witnesses; the full N=1..48 table monotone
+2026-11-24T22:12:32.3046357Z [PASS] (control) S-BLOCK-SHARP — Theorem BLOCK-SHARP: r_3(N) <= floor(N/m)*r_3(m) + (N mod m) for all N,m; with the certified table the sharp explicit form r_3(N) <= N/3 + 48 (ratio exactly 1/3 at m=48)
+2026-11-24T22:12:32.3048866Z [PASS] (control) S-VARNVIDES — Theorem V: the Varnavides amplification law with explicit constants (copy double-counting; nu(x) >= N/16 in the middle band; every copy hosts <= r_3(m)) — checkpoint-verified
+2026-11-24T22:12:32.3051609Z [PASS] (control) S-FOURIER — Theorem F1: the exact Fourier counting identity #{(x,d): x,x+d,x+2d in A} = delta^3 p^2 + (1/p) sum_{r!=0} fhat(r)^2 fhat(-2r) — machine-exact at p=101 (with Parseval)
+2026-11-24T22:12:32.3053788Z [PASS] (control) S-AUDIT-W81 — The W81 independent audit battery (fresh algorithms: lex-DFS tables, exact F_q DFT, own censuses) — 16/16 green, defects D1-D3 fixed and machine-guarded
+2026-11-24T22:12:32.3055042Z ==============================================================================
+2026-11-24T22:12:32.3055620Z CHECKS: 24/24 passed (official=5, solution=11, controls=8)
+2026-11-24T22:12:32.3056072Z WALL: 156.72s
+2026-11-24T22:12:32.3056358Z VERDICT: YOUR SOLUTION IS OKAY
+2026-11-24T22:12:32.3056594Z 
+2026-11-24T22:12:32.3233243Z VERDICT: YOUR SOLUTION IS OKAY
+2026-11-24T22:12:32.3280242Z GATE142OFFICIAL_GREEN=1
+2026-11-24T22:12:32.3503562Z Post job cleanup.
+2026-11-24T22:12:32.4358314Z [command]/usr/bin/git version
+2026-11-24T22:12:32.4438097Z git version 2.56.1
+2026-11-24T22:12:32.4485377Z Temporarily overriding HOME='/home/runner/work/_temp/6f9720d9-5547-4753-986f-5665fb475461' before making global git config changes
+2026-11-24T22:12:32.4486384Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-24T22:12:32.4492287Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:12:32.4535728Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-24T22:12:32.4574781Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-24T22:12:32.4888471Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-24T22:12:32.4925850Z http.https://github.com/.extraheader
+2026-11-24T22:12:32.4938154Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-24T22:12:32.4991179Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-24T22:12:32.5314408Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-24T22:12:32.5365202Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-24T22:12:32.5801996Z Cleaning up orphan processes

@@ -934,5 +934,3 @@ end PiCollapse406
 #print axioms PiCollapse406.erdos406_crown_of_ghost_extinction
 
 #eval "ERDOS406_PICOLLAPSE_KERNEL_GREEN"
-
-end PiCollapse406

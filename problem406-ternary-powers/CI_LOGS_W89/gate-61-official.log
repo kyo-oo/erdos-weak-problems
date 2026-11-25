@@ -1,0 +1,174 @@
+﻿2026-11-24T22:07:07.9957660Z Current runner version: '2.338.2'
+2026-11-24T22:07:07.9992798Z ##[group]Runner Image Provisioner
+2026-11-24T22:07:07.9994424Z Hosted Compute Agent
+2026-11-24T22:07:07.9995550Z Version: 20261111.635
+2026-11-24T22:07:07.9996696Z Commit: b8a594ea514ff44cadb5342986c68b1eac6e22ed
+2026-11-24T22:07:07.9998177Z Build Date: 2026-11-11T01:49:01Z
+2026-11-24T22:07:07.9999468Z Worker ID: {1f7272ec-09f7-41cb-8b35-68064660356b}
+2026-11-24T22:07:08.0000795Z Region: eastus
+2026-11-24T22:07:08.0001952Z Cloud: Azure
+2026-11-24T22:07:08.0003220Z ##[endgroup]
+2026-11-24T22:07:08.0005459Z ##[group]Operating System
+2026-11-24T22:07:08.0006682Z Ubuntu
+2026-11-24T22:07:08.0007689Z 24.04.5
+2026-11-24T22:07:08.0008654Z LTS
+2026-11-24T22:07:08.0009552Z ##[endgroup]
+2026-11-24T22:07:08.0010710Z ##[group]Runner Image
+2026-11-24T22:07:08.0011901Z Image: ubuntu-24.04
+2026-11-24T22:07:08.0013314Z Version: 20261116.376.1
+2026-11-24T22:07:08.0015905Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20261116.376/images/ubuntu/Ubuntu2404-Readme.md
+2026-11-24T22:07:08.0018932Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20261116.376
+2026-11-24T22:07:08.0020802Z ##[endgroup]
+2026-11-24T22:07:08.0023117Z ##[group]GITHUB_TOKEN Permissions
+2026-11-24T22:07:08.0026086Z Contents: read
+2026-11-24T22:07:08.0027187Z Metadata: read
+2026-11-24T22:07:08.0028254Z ##[endgroup]
+2026-11-24T22:07:08.0032529Z Secret source: Actions
+2026-11-24T22:07:08.0034267Z Cache mode: write
+2026-11-24T22:07:08.0035803Z Prepare workflow directory
+2026-11-24T22:07:08.0505405Z Prepare all required actions
+2026-11-24T22:07:08.0576179Z Getting action download info
+2026-11-24T22:07:08.2858802Z Download action repository 'actions/checkout@v5' (SHA:fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09)
+2026-11-24T22:07:08.5702564Z Complete job name: gate-61-official
+2026-11-24T22:07:08.6562188Z ##[group]Run actions/checkout@v5
+2026-11-24T22:07:08.6563306Z with:
+2026-11-24T22:07:08.6563792Z   repository: kyo-oo/erdos-weak-problems
+2026-11-24T22:07:08.6567866Z   token: ***
+2026-11-24T22:07:08.6568305Z   ssh-strict: true
+2026-11-24T22:07:08.6568749Z   ssh-user: git
+2026-11-24T22:07:08.6569198Z   persist-credentials: true
+2026-11-24T22:07:08.6569686Z   clean: true
+2026-11-24T22:07:08.6570124Z   sparse-checkout-cone-mode: true
+2026-11-24T22:07:08.6570640Z   fetch-depth: 1
+2026-11-24T22:07:08.6571070Z   fetch-tags: false
+2026-11-24T22:07:08.6571565Z   show-progress: true
+2026-11-24T22:07:08.6572015Z   lfs: false
+2026-11-24T22:07:08.6572592Z   submodules: false
+2026-11-24T22:07:08.6573050Z   set-safe-directory: true
+2026-11-24T22:07:08.6573558Z   allow-unsafe-pr-checkout: false
+2026-11-24T22:07:08.6574349Z ##[endgroup]
+2026-11-24T22:07:08.9749758Z Syncing repository: kyo-oo/erdos-weak-problems
+2026-11-24T22:07:08.9751985Z ##[group]Getting Git version info
+2026-11-24T22:07:08.9753482Z Working directory is '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-24T22:07:08.9754830Z [command]/usr/bin/git version
+2026-11-24T22:07:08.9872710Z git version 2.56.1
+2026-11-24T22:07:08.9897451Z ##[endgroup]
+2026-11-24T22:07:08.9921925Z Temporarily overriding HOME='/home/runner/work/_temp/1c0daa21-dbfd-40d9-a3e1-4f6b758c942b' before making global git config changes
+2026-11-24T22:07:08.9925442Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-24T22:07:08.9935623Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:07:09.0020173Z Deleting the contents of '/home/runner/work/erdos-weak-problems/erdos-weak-problems'
+2026-11-24T22:07:09.0026970Z ##[group]Initializing the repository
+2026-11-24T22:07:09.0032258Z [command]/usr/bin/git init /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:07:09.0173815Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-11-24T22:07:09.0176424Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-11-24T22:07:09.0177713Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-11-24T22:07:09.0179060Z hint: call:
+2026-11-24T22:07:09.0180252Z hint:
+2026-11-24T22:07:09.0181023Z hint: 	git config --global init.defaultBranch <name>
+2026-11-24T22:07:09.0181827Z hint:
+2026-11-24T22:07:09.0182981Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-11-24T22:07:09.0185333Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-11-24T22:07:09.0187170Z hint:
+2026-11-24T22:07:09.0188225Z hint: 	git branch -m <name>
+2026-11-24T22:07:09.0189590Z hint:
+2026-11-24T22:07:09.0191339Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-11-24T22:07:09.0194650Z Initialized empty Git repository in /home/runner/work/erdos-weak-problems/erdos-weak-problems/.git/
+2026-11-24T22:07:09.0203638Z [command]/usr/bin/git remote add origin https://github.com/kyo-oo/erdos-weak-problems
+2026-11-24T22:07:09.0264857Z ##[endgroup]
+2026-11-24T22:07:09.0266695Z ##[group]Disabling automatic garbage collection
+2026-11-24T22:07:09.0269597Z [command]/usr/bin/git config --local gc.auto 0
+2026-11-24T22:07:09.0310927Z ##[endgroup]
+2026-11-24T22:07:09.0313206Z ##[group]Setting up auth
+2026-11-24T22:07:09.0320443Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-24T22:07:09.0363611Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-24T22:07:09.0891377Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-24T22:07:09.0941654Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-24T22:07:09.1211349Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-24T22:07:09.1261891Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-24T22:07:09.1506341Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-11-24T22:07:09.1556043Z ##[endgroup]
+2026-11-24T22:07:09.1557743Z ##[group]Fetching the repository
+2026-11-24T22:07:09.1571424Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +8a96fa571b726163f90d7502676c53f3b63f2ecd:refs/remotes/origin/sandbox-vault
+2026-11-24T22:07:10.3383176Z From https://github.com/kyo-oo/erdos-weak-problems
+2026-11-24T22:07:10.3386323Z  * [new ref]         8a96fa571b726163f90d7502676c53f3b63f2ecd -> origin/sandbox-vault
+2026-11-24T22:07:10.3390572Z ##[endgroup]
+2026-11-24T22:07:10.3391803Z ##[group]Determining the checkout info
+2026-11-24T22:07:10.3393648Z ##[endgroup]
+2026-11-24T22:07:10.3397575Z [command]/usr/bin/git sparse-checkout disable
+2026-11-24T22:07:10.3478252Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-11-24T22:07:10.3517925Z ##[group]Checking out the ref
+2026-11-24T22:07:10.3523871Z [command]/usr/bin/git checkout --progress --force -B sandbox-vault refs/remotes/origin/sandbox-vault
+2026-11-24T22:07:11.0156100Z Switched to a new branch 'sandbox-vault'
+2026-11-24T22:07:11.0160854Z branch 'sandbox-vault' set up to track 'origin/sandbox-vault'.
+2026-11-24T22:07:11.0198641Z ##[endgroup]
+2026-11-24T22:07:11.0262766Z [command]/usr/bin/git log -1 --format=%H
+2026-11-24T22:07:11.0297084Z 8a96fa571b726163f90d7502676c53f3b63f2ecd
+2026-11-24T22:07:11.0540104Z ##[group]Run set -euo pipefail
+2026-11-24T22:07:11.0540516Z [36;1mset -euo pipefail[0m
+2026-11-24T22:07:11.0540775Z [36;1minstall_ok=0[0m
+2026-11-24T22:07:11.0541240Z [36;1mif python3 -m pip install --quiet --break-system-packages numpy 2>/dev/null; then install_ok=1[0m
+2026-11-24T22:07:11.0541925Z [36;1melif pip3 install --quiet --break-system-packages numpy 2>/dev/null; then install_ok=1[0m
+2026-11-24T22:07:11.0543156Z [36;1melif python3 -m pip install --quiet numpy 2>/dev/null; then install_ok=1; fi[0m
+2026-11-24T22:07:11.0543819Z [36;1mif [ "$install_ok" = "1" ]; then echo "py-deps install: OK"; else echo "py-deps install: ALL ROUTES FAILED"; exit 1; fi[0m
+2026-11-24T22:07:11.0544496Z [36;1mpython3 comparator-official/official_gate.py 61 2>&1 | tee gate61official.log[0m
+2026-11-24T22:07:11.0544940Z [36;1mtest "${PIPESTATUS[0]}" -eq 0[0m
+2026-11-24T22:07:11.0545320Z [36;1mgrep -F "VERDICT: YOUR SOLUTION IS OKAY" gate61official.log[0m
+2026-11-24T22:07:11.0545795Z [36;1mtest "$(grep -c '\[PASS\]' gate61official.log)" -ge 14[0m
+2026-11-24T22:07:11.0546210Z [36;1mtest "$(grep -c '\[FAIL\]' gate61official.log)" -eq 0[0m
+2026-11-24T22:07:11.0546549Z [36;1mecho GATE61OFFICIAL_GREEN=1[0m
+2026-11-24T22:07:11.0571294Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-11-24T22:07:11.0571880Z ##[endgroup]
+2026-11-24T22:07:15.4270824Z py-deps install: OK
+2026-11-24T22:15:27.7904238Z [61] official: 5 checks, 5 pass
+2026-11-24T22:15:27.7904918Z [61] solution: 7 checks, 7 pass
+2026-11-24T22:15:27.7905438Z [61] control: 8 checks, 8 pass
+2026-11-24T22:15:27.7906361Z OFFICIAL GATE RECEIPT — problem #61 — 2026-11-24T22:15:27
+2026-11-24T22:15:27.7907143Z ==============================================================================
+2026-11-24T22:15:27.7908604Z OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
+2026-11-24T22:15:27.7909228Z   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
+2026-11-24T22:15:27.7909946Z   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
+2026-11-24T22:15:27.7910517Z Challenge statement: erdos-61-erdos-hajnal
+2026-11-24T22:15:27.7910939Z Claims in solution ledger: 23
+2026-11-24T22:15:27.7911348Z ==============================================================================
+2026-11-24T22:15:27.7913077Z [PASS] (official) O-IMPORT-NOTEBOOK-FLOW — official cyclic_graphs module (verbatim cells 2/6/7/9/11/13/14) imports; its own asserts hold (367 in C_7^5; 81/324/1458 in C_9^3..5; 754 in C_11^4)
+2026-11-24T22:15:27.7914612Z [PASS] (official) O-CYC7-5 — official evaluate(num_nodes=7, n=5) == 367 (official cell-6 priority)
+2026-11-24T22:15:27.7915959Z [PASS] (official) O-CYC9-345 — official evaluate(num_nodes=9, n=3/4/5) == 81/324/1458 (official cell-9 priority, the official cell-11 expected sizes)
+2026-11-24T22:15:27.7917603Z [PASS] (official) O-CYC11-4 — official evaluate(num_nodes=11, n=4) == 754 (official cell-13 priority) AND the returned 754-set is independent (own checker)
+2026-11-24T22:15:27.7919308Z [PASS] (official) S-AUDIT-W81 — The W81 independent audit battery (own canon, own B&B, own censuses) — 13/13 green, zero defects, the sibling lane cross-certified
+2026-11-24T22:15:27.7920609Z [PASS] (solution) S-ENGINE — campaign family engine --verify: exit 0, >= 10 PASS, 0 FAIL
+2026-11-24T22:15:27.7921685Z [PASS] (solution) S-HARMONIC — harmonic law 1/f = 1/c1 + 1/c2 on exact rationals (independent of the engine)
+2026-11-24T22:15:27.7923342Z [PASS] (solution) S-INDEP-CROSS — independence semantics agreement: official C_9^3 81-set re-verified + own greedy independent set on the same graph
+2026-11-24T22:15:27.7925942Z [PASS] (solution) S-CLAW — Theorem CLAW: claw-free graphs satisfy max(alpha,omega) >= 0.5*n^(1/3) (degree law deg < omega^2 via R(t,3) <= t(t+1)/2, Caro-Wei alpha > n/(omega^2+1), case split) — engine-verified on line graphs, clique unions, boundary and random instances + R(3,3) exhaustive + load-bearing negative control
+2026-11-24T22:15:27.7930577Z [PASS] (solution) S-PAW — Theorem PAW (paw-free => max(alpha,omega) >= sqrt(n/5) via n <= 4*alpha^2 + alpha*omega; triangle-free subfamily alpha >= sqrt(n)/2) + Theorem DIAMOND (diamond-free => max >= n^(1/3)/2) + the P3+K1/K2+2K1 complement transfers — constructed families + the exhaustive n<=6 census + the load-bearing negative control (alpha-only fails on complete multipartite)
+2026-11-24T22:15:27.7934841Z [PASS] (solution) S-CENSUS-61 — The exhaustive census h_H(n) rows for the five remaining 4-vertex targets (C4, 2K2, paw, diamond, K2+2K1) = [2,2,2,2,3] at n=2..6, rho ~ 0.53-0.63 — recomputed in-gate, matching the 731k-graph census
+2026-11-24T22:15:27.7937718Z [PASS] (solution) S-2K2-STRUCT — The 2K2 structure package: the C-independent decomposition law + alpha*omega >= 4n/5 (exhaustive n<=5 + structured n=6,7) + the triangle-free sqrt(n)/2 half — the complete lemmas of the W75 61K package
+2026-11-24T22:15:27.7939555Z [PASS] (control) N-CORRUPT-SIZE — corrupted expected size (81 -> 80) is REJECTED by the official-lane equality check
+2026-11-24T22:15:27.7940999Z [PASS] (control) N-PLANT-EDGE — planted adjacent pair ((0,1,2),(1,2,3)) in an independent-set candidate is DETECTED by the independence checker
+2026-11-24T22:15:27.7942618Z [PASS] (control) N-COGRAPH — planted induced P4 in a cograph is DETECTED by the P4 filter
+2026-11-24T22:15:27.7944336Z [PASS] (control) S-PRIMES-W81 — The W81 five-vertex prime battery: P5-CROSS, C5-1/2-ANCHOR (complete induced-subgraph proofs), TOWER-CAP-P5/BULL, and the full census — 22/22 green
+2026-11-24T22:15:27.7946997Z [PASS] (control) S-W82-SPEC — The W82 OFFICIAL statement file DM61_Official.lean carries the verbatim DeepMind predicate (IsErdosHajnalLowerBound, google-deepmind/formal-conjectures @ 2207c54d) + the official target spec block
+2026-11-24T22:15:27.7949732Z [PASS] (control) S-W82-KERNELS — The W82 official-form family kernels (DM61_Proof_A + DM61_Closure): the erdos_61_family theorem over the official predicate, arsenal-imported, marker-terminated
+2026-11-24T22:15:27.7951836Z [PASS] (control) S-W82-CI — kills.yml wires the W82 kernel jobs (kernel-dm-w82: the 61DM-A + 61DM-B steps) with the error/sorryAx rejection greps
+2026-11-24T22:15:27.7953918Z [PASS] (control) N-W82-NEG — negative control: a corrupted predicate string fails the spec check (the string check discriminates)
+2026-11-24T22:15:27.7954961Z ==============================================================================
+2026-11-24T22:15:27.7956367Z CHECKS: 20/20 passed (official=5, solution=7, controls=8)
+2026-11-24T22:15:27.7957423Z WALL: 492.32s
+2026-11-24T22:15:27.7958103Z VERDICT: YOUR SOLUTION IS OKAY
+2026-11-24T22:15:27.7958673Z 
+2026-11-24T22:15:27.8059417Z VERDICT: YOUR SOLUTION IS OKAY
+2026-11-24T22:15:27.8093080Z GATE61OFFICIAL_GREEN=1
+2026-11-24T22:15:27.8228018Z Post job cleanup.
+2026-11-24T22:15:27.9112006Z [command]/usr/bin/git version
+2026-11-24T22:15:27.9159885Z git version 2.56.1
+2026-11-24T22:15:27.9204953Z Temporarily overriding HOME='/home/runner/work/_temp/cf42a50b-ca46-4e05-80d3-33177acde7bc' before making global git config changes
+2026-11-24T22:15:27.9207121Z Adding repository directory to the temporary git global config as a safe directory
+2026-11-24T22:15:27.9211643Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/erdos-weak-problems/erdos-weak-problems
+2026-11-24T22:15:27.9253490Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-11-24T22:15:27.9291854Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-11-24T22:15:27.9585743Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-11-24T22:15:27.9616533Z http.https://github.com/.extraheader
+2026-11-24T22:15:27.9630167Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-11-24T22:15:27.9674426Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-11-24T22:15:27.9991553Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-11-24T22:15:28.0040983Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-11-24T22:15:28.0467407Z Cleaning up orphan processes
