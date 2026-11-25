@@ -2662,3 +2662,86 @@ jobs:
           grep -E "E107S.(e107_board|e107_e5_noConvex5|e107_chi_c0|e107_e4_notConvex)' (does not depend on any axioms|depends on axioms)" kernel82.log
           python3 problem107-happy-ending/battery107.py
           echo ERDOS107_HAPPYENDING_KERNEL_GREEN=1
+  kernel-406engine:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "Kernel 406engine - THE KILL ENGINE VENDORED (S085 r34, BOSS order USE MY MATHS / ARE YOU EVEN USING THOSE LEAN FILES): the HC-PROOF research branch's eight kill-engine chambers vendored into the MonolithGate universe with two documented adaptations (import rewrites + the two boundary binder unfolds) - GSTBladeWave, GSTTowerFire, GSTTheActConstruction, GSTTheAct (the act named, the front law), GSTClimbTruthValue (the conditionality certificate), GSTDiagonalRead (the triage: every K >= 8 fires or is WindowCleanDust; the socket: dust empty => hTailF), GSTClimbInfiniteFamily (the cascade levels 2-4, the Cantorian core, the unbounded deep-third-wave climb family), GSTWorldtraceArithmetic (the descent engine, the pair-read, the worldtrace ladder to level eight: 64 fires + the 128-survivor Cantorian pin mod 6561) - PLUS the ninth cascade level (WorldtraceLevelNine406: the quintic blade mod 59049, the 128 dead classes of row nine, the re-doubled 256-survivor Cantorian pin mod 19683, two-method verified against the boss's own green level-eight lists)"
+      run: |
+        set -euo pipefail
+        : > engine406.log
+        set +e
+        timeout 5400 lake build MonolithGate.GSTWorldtraceArithmetic 2>&1 | tee -a engine406.log
+        RC1=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ]; then echo "ENGINE406_CLOSURE_FAILED rc=$RC1"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' engine406.log; then echo "ENGINE406_CLOSURE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' engine406.log; exit 1; fi
+        for f in GSTBladeWave GSTTowerFire GSTTheActConstruction GSTTheAct GSTClimbTruthValue GSTDiagonalRead GSTClimbInfiniteFamily GSTWorldtraceArithmetic WorldtraceLevelNine406; do
+          set +e
+          timeout 3600 lake env lean MonolithGate/$f.lean 2>&1 | tee -a engine406.log
+          RCF=${PIPESTATUS[0]}
+          set -e
+          if [ "$RCF" -ne 0 ]; then echo "ENGINE406_FILE_FAILED file=$f rc=$RCF"; exit 1; fi
+          if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; then echo "ENGINE406_NEGATIVE_GATE_TRIPPED file=$f"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; exit 1; fi
+        done
+        echo "ENGINE 406 RECEIPTS:"
+        grep -E "front_law' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "every_exponent_fires' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "the_act_iff_no_cantorian' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "wave3_deep_unbounded' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "cantorian_dust_mod_6561' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "dust_fire_row_nine' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "cantorian_dust_mod_19683' (does not depend on any axioms|depends on axioms)" engine406.log
+        echo ERDOS_406_ENGINE_GREEN=1
+      shell: bash
+  kernel-406final:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "Kernel 406final - THE FINAL ASSEMBLY (S085 r34): the complete composition - the vendored engine's hypothesis slots DISCHARGED by the MonolithGate theorems themselves (erdos_even_conjecture_iff_tailF, erdos_ternary_2_conjecture_odd - both PROVEN at root) - the unconditional identity (the act iff tailF), the full-statement equivalence, FIVE unconditional crown routes (the act / the core / the dust / the climb / ROW+TOWER), the triage, the NEW LAW cantorian_is_dust (a Cantorian power IS window-clean dust), the nine-level total cascade (255 dead classes), the class-one verdict at level nine (die or live in the 256 survivors mod 19683), the general pair-read kill, the unbounded climb family, the below-eight witness, and THE NAMED RESIDUAL erdos_406_the_last_hypothesis - certified exact (iff the act, hence iff the full universal) - the remaining mathematical content of Erdos #406 in its sharpest machine form, everything else unconditional"
+      run: |
+        set -euo pipefail
+        : > final406.log
+        set +e
+        timeout 5400 lake build MonolithGate.WorldtraceLevelNine406 2>&1 | tee -a final406.log
+        RC1=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ]; then echo "FINAL406_IMPORT_CLOSURE_FAILED rc=$RC1"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' final406.log; then echo "FINAL406_CLOSURE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' final406.log; exit 1; fi
+        set +e
+        timeout 5400 lake env lean MonolithGate/FinalAssembly406.lean 2>&1 | tee -a final406.log
+        RC2=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC2" -ne 0 ]; then echo "FINAL406_COMPILE_FAILED_OR_TIMEOUT_RC=$RC2"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; then echo "FINAL406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; exit 1; fi
+        echo "FINAL ASSEMBLY RECEIPTS:"
+        grep -E "the_act_iff_tailF_unconditional' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "cantorian_is_dust' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_no_cantorian' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_dust_empty' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_climb' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_row_and_tower' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "no22_of_cascade_total' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "class_one_verdict_19683' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_last_hypothesis' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "the_final_assembly' (does not depend on any axioms|depends on axioms)" final406.log
+        echo ERDOS_406_FINAL_ASSEMBLY_GREEN=1
+      shell: bash
