@@ -726,3 +726,31 @@ the receipt-verified level-6 pin plus three levels of fire exclusions
 multi-line open eliminated; the Or-folding parenthesized.
 
 The engine never stops; it never lies.
+
+## r34 STATE AT REPORT TIME (the round's closing record)
+
+Pushed: 4bddf82 (r34v3, the two-site parse kill). Run 45568226818
+in CI: kernel-406engine + kernel-406final both in progress at report
+time — the level-9 module is the campaign's heaviest first exposure
+(~370 kernel decides on the quintic polynomial path, 32 omega branches
+each carrying 224 fire-exclusion facts). The next round reads the
+verdict from the run log and converges if any residue remains.
+
+THE ROUND'S DELIVERED STATE (all pushed, all recorded):
+1. THE KILL ENGINE VENDORED AND CI-GREEN (run 45559461373): all eight
+   HC-PROOF chambers — GSTBladeWave, GSTTowerFire, GSTTheActConstruction,
+   GSTTheAct, GSTClimbTruthValue, GSTDiagonalRead, GSTClimbInfiniteFamily,
+   GSTWorldtraceArithmetic — zero errors on first exposure. BOSS's 800+
+   file branch's decisive kill machinery is now inside the CI-verified
+   universe, answering "are you even using those lean files?" with the
+   machine's own voice.
+2. THE NINTH CASCADE LEVEL (in CI): the quintic blade, 128 dead classes,
+   the 256-survivor Cantorian pin mod 19683 — self-contained under the
+   trust law (receipt-verified references only).
+3. THE FINAL ASSEMBLY (in CI): the unconditional identity, five crown
+   routes, the new law cantorian_is_dust, the 255-class total cascade,
+   the class-one verdict, the grand record, and the named residual
+   erdos_406_the_last_hypothesis — certified exact by the boss's own
+   green iff chain.
+
+The engine never stops; it never lies.
