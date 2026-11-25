@@ -89,14 +89,14 @@ theorem pow_mod_shift (s W i : Nat) :
     (3^s * W) % 3^(s+i+1) = 3^s * (W % 3^(i+1)) := by
   have hp : (3:Nat)^(s+i+1) = 3^s * 3^(i+1) := by
     rw [show s+i+1 = s+(i+1) from by omega, Nat.pow_add]
-  have hdm : W % 3^(i+1) + 3^(i+1) * (W / 3^(i+1)) = W :=
+  have hdm : 3^(i+1) * (W / 3^(i+1)) + W % 3^(i+1) = W :=
     Nat.div_add_mod W (3^(i+1))
   have hsplit : 3^s * W
       = 3^s * (W % 3^(i+1)) + 3^(s+i+1) * (W / 3^(i+1)) := by
-    have h1 : 3^s * (W % 3^(i+1) + 3^(i+1) * (W / 3^(i+1)))
+    have h1 : 3^s * (3^(i+1) * (W / 3^(i+1)) + W % 3^(i+1))
         = 3^s * W := by rw [hdm]
     rw [Nat.mul_add, ← Nat.mul_assoc, ← hp] at h1
-    exact h1.symm
+    exact h1.symm.trans (Nat.add_comm _ _)
   have hlt : 3^s * (W % 3^(i+1)) < 3^(s+i+1) := by
     have h1 : W % 3^(i+1) < 3^(i+1) :=
       Nat.mod_lt _ (Nat.pow_pos (by decide))
@@ -181,7 +181,7 @@ theorem row_fire_of_gstDigit_two (K p : Nat) (h : gstDigit (4^K) p = 2) :
     have h13 : (1 + 3 * omegaCutWord 0 K) / 3 = omegaCutWord 0 K := by
       rw [Nat.add_mul_div_left _ _ (by decide : (0:Nat) < 3)]
       omega
-    rw h13
+    rw [h13]
   rw [hj] at h
   have h2 : (omegaCutWord 0 K) / 3^j % 3 = 2 := by
     rw [← hd]
@@ -360,7 +360,7 @@ theorem cut_word_diag_pin (s core i : Nat) (hi2 : 2 ≤ i) (his : i ≤ s)
     rw [← Nat.pow_add]
     congr 1
     omega
-  rw [ht, hd, ← Nat.mul_assoc, Nat.add_mul_mod_self_left]
+  rw [ht, hd, Nat.mul_assoc, Nat.add_mul_mod_self_left]
   have hpin := hD (i+1) (by omega) (by omega)
   rw [show i+1-1 = i from by omega] at hpin
   exact hpin
@@ -443,7 +443,6 @@ theorem czone_correction_four (s core : Nat) (hs : 1 ≤ s)
   have hu3 : (lteCoeff s) % 3 = 1 := lteCoeff_mod3_one s
   have hll : (lteCoeff s * lteCoeff s) % 3 = 1 := by
     rw [Nat.mul_mod, hu3]
-    decide
   have hb : (core * (core - 1) / 2) % 9 = 6 :=
     omega_binom_mod9_four core hcore
   have hB9 : (lteCoeff s * lteCoeff s * (core * (core - 1) / 2)) % 9 = 6 :=
@@ -473,7 +472,6 @@ theorem czone_correction_seven (s core : Nat) (hs : 1 ≤ s)
   have hu3 : (lteCoeff s) % 3 = 1 := lteCoeff_mod3_one s
   have hll : (lteCoeff s * lteCoeff s) % 3 = 1 := by
     rw [Nat.mul_mod, hu3]
-    decide
   have hb : (core * (core - 1) / 2) % 9 = 3 :=
     omega_binom_mod9_seven core hcore
   have hB9 : (lteCoeff s * lteCoeff s * (core * (core - 1) / 2)) % 9 = 3 :=
@@ -483,7 +481,7 @@ theorem czone_correction_seven (s core : Nat) (hs : 1 ≤ s)
       = 3^(s+1) * (lteCoeff s * lteCoeff s * (core * (core - 1) / 2)) := by
     ring
   rw [hshape, omega_powmul_mod_cubed s _, hB9]
-  have h3 : (3:Nat)^(s+1) * 3 = 3^(s+2) := by rw [Nat.pow_succ]
+  have h3 : (3:Nat)^(s+1) * 3 = 3^(s+2) := by rw [← Nat.pow_succ]
   have hlt : 3^(s+2) < 3^(s+3) := by
     have hp : (3:Nat)^(s+3) = 3 * 3^(s+2) := by rw [Nat.pow_succ]; ring
     have h0 : (0:Nat) < 3^(s+2) := Nat.pow_pos (by decide)
@@ -506,7 +504,7 @@ theorem cut_word_czone_pin_four (s core : Nat) (hs : 1 ≤ s)
   have hmod : ((lteCoeff s * core % 3^(s+3)) + 2 * 3^(s+2)) % 3^(s+3)
       = (lteCoeff s * core % 3^(s+3)) - 3^(s+2) := by
     have hE : (lteCoeff s * core % 3^(s+3)) + 2 * 3^(s+2)
-        = 3^(s+3) * 1 + ((lteCoeff s * core % 3^(s+3)) - 3^(s+2)) := by
+        = (lteCoeff s * core % 3^(s+3)) - 3^(s+2) + 3^(s+3) * 1 := by
       omega
     have hlt2 : (lteCoeff s * core % 3^(s+3)) - 3^(s+2) < 3^(s+3) := by
       omega
@@ -534,8 +532,7 @@ theorem cut_word_czone_pin_seven (s core : Nat) (hs : 1 ≤ s)
     rw [Nat.mod_eq_of_lt hlt]
     omega
   · have hE : (lteCoeff s * core % 3^(s+3)) + 3^(s+2)
-      = 3^(s+3) * 1
-        + ((lteCoeff s * core % 3^(s+3)) - 2 * 3^(s+2)) := by
+      = (lteCoeff s * core % 3^(s+3)) - 2 * 3^(s+2) + 3^(s+3) * 1 := by
       omega
     have hlt2 : (lteCoeff s * core % 3^(s+3)) - 2 * 3^(s+2) < 3^(s+3) := by
       omega
