@@ -509,17 +509,17 @@ def W61 : Nat := 60776643992856088575557123854
 
 theorem W61_receipt : cMod 61 60 = W61 := by native_decide
 
-theorem W61_mod_nine : W61 % 9 = 7 := by decide
+theorem W61_mod_nine : W61 % 9 = 7 := by native_decide
 
-theorem W61_mod_three : W61 % 3 = 1 := by decide
+theorem W61_mod_three : W61 % 3 = 1 := by native_decide
 
-theorem W61_lt : W61 < 3^61 := by decide
+theorem W61_lt : W61 < 3^61 := by native_decide
 
 theorem lteCoeff_sixty_mod : lteCoeff 60 % 3^61 = W61 := by
   rw [← W61_receipt]
   exact (cMod_eq 61 60).symm
 
-theorem three_pow_61_pos : 5 ≤ 3^61 := by decide
+theorem three_pow_61_pos : 5 ≤ 3^61 := by native_decide
 
 /-- The coefficient split at depth 61 (the congrArg idiom — no rw loop). -/
 theorem coeff_split (u : Nat) :
@@ -540,28 +540,28 @@ def pi_fam4 : Nat := 68350949682967876566738142093  -- head 1, T = -7
 def pi_fam7 : Nat := 64267339165701958313626862986  -- head 4, T = -1
 def pi_fam1 : Nat := 60183728648436040060515583879  -- head 7, T = +5
 
-theorem pi_fam4_lt : pi_fam4 < 3^61 := by decide
-theorem pi_fam7_lt : pi_fam7 < 3^61 := by decide
-theorem pi_fam1_lt : pi_fam1 < 3^61 := by decide
+theorem pi_fam4_lt : pi_fam4 < 3^61 := by native_decide
+theorem pi_fam7_lt : pi_fam7 < 3^61 := by native_decide
+theorem pi_fam1_lt : pi_fam1 < 3^61 := by native_decide
 
 theorem pi_fam4_receipt :
-    (2 * W61 * pi_fam4 + 7) % 3^61 = 0 := by decide
+    (2 * W61 * pi_fam4 + 7) % 3^61 = 0 := by native_decide
 
 theorem pi_fam7_receipt :
-    (2 * W61 * pi_fam7 + 1) % 3^61 = 0 := by decide
+    (2 * W61 * pi_fam7 + 1) % 3^61 = 0 := by native_decide
 
 theorem pi_fam1_receipt :
-    (2 * W61 * pi_fam1 + (3^61 - 5)) % 3^61 = 0 := by decide
+    (2 * W61 * pi_fam1 + (3^61 - 5)) % 3^61 = 0 := by native_decide
 
 /-- **THE 2-TRIT RECEIPTS** — the three fixed points are not eventually
 zero: each carries ternary digit twos deep in its expansion
 (kernel-decided positions from the assault engine's certified list). -/
-theorem pi_fam4_trit3 : digit3 pi_fam4 3 = 2 := by decide
-theorem pi_fam4_trit14 : digit3 pi_fam4 14 = 2 := by decide
-theorem pi_fam7_trit1 : digit3 pi_fam7 1 = 2 := by decide
-theorem pi_fam7_trit6 : digit3 pi_fam7 6 = 2 := by decide
-theorem pi_fam1_trit8 : digit3 pi_fam1 8 = 2 := by decide
-theorem pi_fam1_trit13 : digit3 pi_fam1 13 = 2 := by decide
+theorem pi_fam4_trit3 : digit3 pi_fam4 3 = 2 := by native_decide
+theorem pi_fam4_trit14 : digit3 pi_fam4 14 = 2 := by native_decide
+theorem pi_fam7_trit1 : digit3 pi_fam7 1 = 2 := by native_decide
+theorem pi_fam7_trit6 : digit3 pi_fam7 6 = 2 := by native_decide
+theorem pi_fam1_trit8 : digit3 pi_fam1 8 = 2 := by native_decide
+theorem pi_fam1_trit13 : digit3 pi_fam1 13 = 2 := by native_decide
 
 /-! ## §6b The pin — every ghost ray IS its π-point -/
 #print axioms PiCollapse406.W61  -- CK74 SECTION BOUNDARY
