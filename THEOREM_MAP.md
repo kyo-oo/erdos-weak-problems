@@ -7,21 +7,33 @@ machine, every law BOSS named located at its exact file:line.
 declaration that EXISTS in the tree. The full machine-readable index:
 `THEOREM_MAP.json` (file → declarations → line numbers).
 
-## 1. THE COUNTS (extracted 2026-11-23, campaign @ 3d32c99 + this round)
+## 1. THE COUNTS (COMPLETE @ S090 — EVERY LEAN FILE, ZERO MISSED)
+
+**S090 completion (BOSS order: MAP ALL THE LEAN FILES / NOT A SINGLE FILE
+MISSED):** the S085 census missed 167 files — the ENTIRE `Monolith/` (39),
+`MonolithGate/` (105), `KernelChamber406/` (8) directories plus 15 stragglers
+— because it was cut before those landed. The S090 backfill machine-extracted
+every one of them (plus this round's two new kill modules:
+`MonolithGate/GSTFourPowerClimbUnconditional406.lean` and
+`MonolithGate/RowTowerBreakthrough406.lean`), so the map now covers
+**EVERY .lean file tracked in the branch: 2,209 / 2,209, zero missing, zero
+ghosts** (verified against `git ls-tree -r HEAD`, working tree clean).
 
 | Empire | Files | Declarations |
 |---|---|---|
-| **HC-PROOF-research (the monolith)** | 800 | 11,797 |
-| **erdosternary2 (bulldoze)** | 1,030 | 8,719 |
-| campaign kernels (problem-*) | 194 | 12,463 |
-| Arsenal build subset | 3 | 135 |
-| campaign other | 13 | 240 |
-| **TOTAL** | **2,040** | **33,354** |
+| arsenal-full/HC-PROOF-research | 804 | (in the 1,841) |
+| arsenal-full/erdosternary2 | 1,037 | (in the 1,841) |
+| **arsenal-full/ total** | **1841** | **20,516** |
+| **MonolithGate/** (gate-branch vendoring + the S090 kill modules) | **107** | machine-indexed |
+| **Monolith/** (HC-PROOF mission closure) | **39** | machine-indexed |
+| **KernelChamber406/** (the 406 monolith kernel split) | **8** | machine-indexed |
+| campaign problem-* kernels + Arsenal + FC + the rest | the remainder | machine-indexed |
+| **TOTAL** | **2209** | **37,237** |
 
-By kind: **24,043 theorems** + 95 lemmas + 8,952 defs + 223 abbrevs +
-41 instances. (Union provenance: erdosternary2 @ bulldoze
-`ebcb7bb` + HC-PROOF @ research `gpt6-gst-cardinal-topology-transfinite-fold-20261110`
-— see `arsenal-full/ARSENAL_PROVENANCE.md`.)
+By kind: **27,227 theorems** + 96 lemmas + 9,649 defs + 224 abbrevs + 41 instances.
+Machine-readable index: `THEOREM_MAP.json` (file → `[kind, name, line]`
+declarations), regenerated at S090 against HEAD; the S085 union provenance
+stands (see `arsenal-full/ARSENAL_PROVENANCE.md`).
 
 ## 2. BOSS'S NAMED ARSENAL — THE CHAMBERS LOCATED (exact theorems, exact lines)
 
