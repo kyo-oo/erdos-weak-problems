@@ -29,7 +29,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -81,7 +89,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -135,7 +151,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -188,7 +212,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -241,7 +273,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -304,7 +344,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -357,7 +405,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -411,7 +467,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -464,7 +528,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -517,7 +589,15 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
