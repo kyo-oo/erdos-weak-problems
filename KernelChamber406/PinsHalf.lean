@@ -158,8 +158,11 @@ theorem pin_of_W_congruence (u π D : Nat)
       rw [Nat.mul_sub]
       omega
     have hsub : 3^61 ∣ 2 * W61 * (u - π) := by
-      rw [hE]
-      exact Nat.dvd_sub hπ hu
+      obtain ⟨b, hb⟩ := hu
+      obtain ⟨a, ha⟩ := hπ
+      refine ⟨b - a, ?_⟩
+      rw [Nat.mul_sub, Nat.mul_sub]
+      omega
     have hcancel := dvd_of_unit_mul_cancel 61 (2 * W61) (u - π) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have huπ : u = π + 3^61 * t := by omega
@@ -170,8 +173,11 @@ theorem pin_of_W_congruence (u π D : Nat)
       rw [Nat.mul_sub]
       omega
     have hsub : 3^61 ∣ 2 * W61 * (π - u) := by
-      rw [hE]
-      exact Nat.dvd_sub hu hπ
+      obtain ⟨a, ha⟩ := hu
+      obtain ⟨b, hb⟩ := hπ
+      refine ⟨a - b, ?_⟩
+      rw [Nat.mul_sub, Nat.mul_sub]
+      omega
     have hcancel := dvd_of_unit_mul_cancel 61 (2 * W61) (π - u) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have hπu : π = u + 3^61 * t := by omega

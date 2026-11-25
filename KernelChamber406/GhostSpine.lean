@@ -492,7 +492,7 @@ theorem ghost_head_split (u : Nat) (hg : GhostRay u) (hu3 : u % 3 = 1) :
   have hdm : u % 9 = 3 * (u % 9 / 3) + (u % 9) % 3 :=
     (Nat.div_add_mod (u % 9) 3).symm
   have hq : u % 9 / 3 < 3 := by omega
-  rcases Nat.lt_three_cases (u % 9 / 3) hq with h0 | h0 | h0
+  rcases ErdosTernary2.lt_three_cases (u % 9 / 3) hq with h0 | h0 | h0
   · refine Or.inr (Or.inr ?_)
     unfold ghostHead
     rw [hc1, Nat.mul_mod]

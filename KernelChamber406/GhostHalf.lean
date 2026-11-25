@@ -149,8 +149,11 @@ theorem pin100_of_W_congruence (u π D : Nat)
       rw [Nat.mul_sub]
       omega
     have hsub : 3^100 ∣ 2 * W100 * (u - π) := by
-      rw [← hE]
-      exact Nat.dvd_sub hπ hu
+      obtain ⟨b, hb⟩ := hu
+      obtain ⟨a, ha⟩ := hπ
+      refine ⟨b - a, ?_⟩
+      rw [Nat.mul_sub, Nat.mul_sub]
+      omega
     have hcancel := dvd_of_unit_mul_cancel 100 (2 * W100) (u - π) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have huπ : u = π + 3^100 * t := by omega
@@ -161,8 +164,11 @@ theorem pin100_of_W_congruence (u π D : Nat)
       rw [Nat.mul_sub]
       omega
     have hsub : 3^100 ∣ 2 * W100 * (π - u) := by
-      rw [← hE]
-      exact Nat.dvd_sub hu hπ
+      obtain ⟨a, ha⟩ := hu
+      obtain ⟨b, hb⟩ := hπ
+      refine ⟨a - b, ?_⟩
+      rw [Nat.mul_sub, Nat.mul_sub]
+      omega
     have hcancel := dvd_of_unit_mul_cancel 100 (2 * W100) (π - u) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have hπu : π = u + 3^100 * t := by omega

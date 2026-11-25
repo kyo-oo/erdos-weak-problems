@@ -492,7 +492,7 @@ theorem ghost_head_split (u : Nat) (hg : GhostRay u) (hu3 : u % 3 = 1) :
   have hdm : u % 9 = 3 * (u % 9 / 3) + (u % 9) % 3 :=
     (Nat.div_add_mod (u % 9) 3).symm
   have hq : u % 9 / 3 < 3 := by omega
-  rcases Nat.lt_three_cases (u % 9 / 3) hq with h0 | h0 | h0
+  rcases ErdosTernary2.lt_three_cases (u % 9 / 3) hq with h0 | h0 | h0
   · refine Or.inr (Or.inr ?_)
     unfold ghostHead
     rw [hc1, Nat.mul_mod]
@@ -786,8 +786,11 @@ theorem pin100_of_W_congruence (u π D : Nat)
       rw [Nat.mul_sub]
       omega
     have hsub : 3^100 ∣ 2 * W100 * (u - π) := by
-      rw [← hE]
-      exact Nat.dvd_sub hπ hu
+      obtain ⟨b, hb⟩ := hu
+      obtain ⟨a, ha⟩ := hπ
+      refine ⟨b - a, ?_⟩
+      rw [Nat.mul_sub, Nat.mul_sub]
+      omega
     have hcancel := dvd_of_unit_mul_cancel 100 (2 * W100) (u - π) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have huπ : u = π + 3^100 * t := by omega
@@ -798,8 +801,11 @@ theorem pin100_of_W_congruence (u π D : Nat)
       rw [Nat.mul_sub]
       omega
     have hsub : 3^100 ∣ 2 * W100 * (π - u) := by
-      rw [← hE]
-      exact Nat.dvd_sub hu hπ
+      obtain ⟨a, ha⟩ := hu
+      obtain ⟨b, hb⟩ := hπ
+      refine ⟨a - b, ?_⟩
+      rw [Nat.mul_sub, Nat.mul_sub]
+      omega
     have hcancel := dvd_of_unit_mul_cancel 100 (2 * W100) (π - u) hunit hsub
     obtain ⟨t, ht⟩ := hcancel
     have hπu : π = u + 3^100 * t := by omega
