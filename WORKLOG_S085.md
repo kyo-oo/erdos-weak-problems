@@ -608,3 +608,61 @@ question itself, the problem's open core, now isolated in its purest
 form with every structural clause consumed as a pin.
 
 The engine never stops; it never lies.
+
+## r35 VERDICT: FACE E GREEN — THE UNIFICATION STANDS
+
+r34 (f2de497, run 45531321283): kernel-406tail5 FAILED ON FIRST
+EXPOSURE — eleven errors, all in the five arithmetic helpers (the
+master, the equivalence, the crowns, the subsumptions, the dictionary,
+and the full pin statement itself all elaborated clean).
+
+r35 THE ELEVEN-ERROR KILL (f7bed9a, run 45535508591): **kernel-406tail5
+SUCCESS.** All twenty-one Face E theorems sorry-free at [propext,
+Classical.choice, Quot.sound]:
+- THE SHIFT (omegaCutWord_zero_shift), the modulus shift, the fire
+  dictionary (cut_fire_iff_row_fire);
+- THE MASTER (tailF_of_unified_row), the equivalence receipt
+  (unified_row_iff_even_conjecture), the crowns (even_conjecture_of_
+  unified_row, erdos_ternary_2_universal_of_unified_row,
+  erdos406_universal_verdict_of_unified_row);
+- THE SUBSUMPTIONS (row_primitive_of_unified_row,
+  tower_primitive_of_unified_row) with their pin infrastructure
+  (lteCoeff_mod9_seven, cut_word_mod9_of_class, the shallow residue
+  pin, the diagonal window pin, the shallow pin);
+- THE WALL'S COORDINATE (tower_witness_cut_word_pinned) with the C-zone
+  machinery (czone_correction_four/seven, cut_word_czone_pin_four/
+  seven) — every one sorry-free, the marker TAIL_ASSAULT_E_GREEN in
+  the log, ERDOS_406_TAIL_ASSAULT_E=1.
+
+THE FIVE-FACE CAMPAIGN STANDS (this session-series, all CI-green, 59
+theorems): Face A's 22 (the trit-tree law, the band lattice, the
+No-22 face, the collision, the 1500-base, the 1500-verdict), Face B's
+6 (the automaton, the 3000-base, the 3000-verdict), Face C's 5 (the
+circle), Face D's 5 (the tower origin kill, the tower-free verdict),
+Face E's 21 (the unification: the shift, the dictionary, the unified
+primitive, the master, the equivalence, the crowns, the subsumptions,
+the wall's coordinate).
+
+THE ELEVEN ERRORS OF THE DOSSIER (all killed in one repair round):
+(1) Nat.div_add_mod's summand order is k*(m/k)+m%k — restated;
+(2) a bare `rw h13` missing brackets — the cascade root of :161/:178;
+(3) the mul_assoc direction in the diag pin (forward, not reverse);
+(4,5) trailing `decide` after rw's own auto-rfl closure — dropped;
+(6) the forward pow_succ hit the wrong exponent — reversed;
+(7,8) the czone hE shapes had the product first — add_mul_mod_self_
+left needs it second — restated.
+
+THE STATE AFTER FACE E: the entire remaining content of Erdős #406's
+second-observer route is the SINGLE machine-stated primitive
+tailF_unified_row_primitive — every exponent from eight onward, the
+row word (4^K - 1)/3 fires its top third at some depth — certified
+EQUIVALENT to the even-exponent statement through the monolith's own
+kernel-certified terminal identity (both directions green in this
+face).  The wall's coordinate is machine-certified: a full shadow-
+package witness's cut word is pinned non-fire at every depth through
+s+2, so the fire — if it exists — lives at cut depth s+3 or beyond.
+The next faces: the deep-tail fire itself (the Cantor-power question,
+the problem's open core, now isolated in its purest single-statement
+form).
+
+The engine never stops; it never lies.
