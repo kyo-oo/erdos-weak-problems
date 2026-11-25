@@ -64,10 +64,6 @@ on:
       - problem107-happy-ending/**
       - problem389-consecutive-product/**
       - .github/workflows/kills.yml
-    paths-ignore:
-      - problem406-ternary-powers/PiCollapse406Pins.lean
-      - problem406-ternary-powers/GhostExtinction406.lean
-      - KernelChamber406/**
   workflow_dispatch:
 permissions:
   contents: read
