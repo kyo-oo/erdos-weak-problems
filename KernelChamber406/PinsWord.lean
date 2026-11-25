@@ -10,6 +10,7 @@ import KernelChamber406.PinsSpine
 -- sub-module targets <9 min.
 
 -- Family pattern (green kernels): explicit depth headroom.
+set_option profiler true
 set_option maxRecDepth 262144
 set_option maxHeartbeats 4000000
 set_option exponentiation.threshold 1000
