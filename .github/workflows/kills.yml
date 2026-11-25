@@ -2698,8 +2698,9 @@ jobs:
         grep -E "every_exponent_fires' (does not depend on any axioms|depends on axioms)" engine406.log
         grep -E "the_act_iff_no_cantorian' (does not depend on any axioms|depends on axioms)" engine406.log
         grep -E "wave3_deep_unbounded' (does not depend on any axioms|depends on axioms)" engine406.log
-        grep -E "cantorian_dust_mod_6561' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "wt_quintic_mod59049' (does not depend on any axioms|depends on axioms)" engine406.log
         grep -E "dust_fire_row_nine' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "no22_of_cascade_eight' (does not depend on any axioms|depends on axioms)" engine406.log
         grep -E "cantorian_dust_mod_19683' (does not depend on any axioms|depends on axioms)" engine406.log
         echo ERDOS_406_ENGINE_GREEN=1
       shell: bash

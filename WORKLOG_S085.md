@@ -693,3 +693,36 @@ artifact diagnosed in earlier rounds — the boss's code is forward rw [hKu],
 mine now matches byte-for-byte in the three proof shapes).
 
 The engine never stops; it never lies.
+
+## r34v2: THE FIRST-EXPOSURE VERDICT AND THE SELF-CONTAINED REWRITE
+
+Run 45559461373 (8795f3f): **kernel-406engine — THE EIGHT VENDORED
+CHAMBERS ALL GREEN ON FIRST EXPOSURE** (GSTBladeWave, GSTTowerFire,
+GSTTheActConstruction, GSTTheAct, GSTClimbTruthValue, GSTDiagonalRead,
+GSTClimbInfiniteFamily, GSTWorldtraceArithmetic — zero errors, the full
+kill engine is now inside the CI-verified universe).  Only the new
+ninth-level module failed, with four error classes:
+(1) the open referenced GSTWorldtraceArithmetic.cantorian_dust_mod_6561 —
+CI: Unknown constant — the level-8 pin's standalone name does not resolve
+from the import (the local displays had fabricated its existence; the CI
+is the only eye);
+(2) the cascade unknowns wt_choose_one/wt_rebase — downstream of the
+failed open;
+(3) digit3_eq_of_mod_next not opened (its home is
+GSTFourPowerDirectResidue, opened only inside the vendored file);
+(4) the Or-folding in no22_of_cascade_eight passed the bare hypothesis
+where the 128-disjunction is expected.
+
+THE REWRITE (r34v2, the trust law): both new modules regenerated
+SELF-CONTAINED — every cross-chamber reference is now receipt-verified
+(feedback_fire_of_class, wt_choose_one, wt_rebase, wt_row_seven_read,
+wt_row_eight_read, the level-6 pin cantorian_dust_mod_729, fire_of_mod243/
+729, no22_of_pair_read_general, and the engine's iff/crown/odd theorems)
+or this round's own; the total cascade routes exclusively through the
+level-generic uniform engine and eight new ladder wrappers
+(ladder_fire_mod9..6561 + fire_of_mod19683); the level-9 pin is based on
+the receipt-verified level-6 pin plus three levels of fire exclusions
+(32 + 64 + 128), every one through this round's own wrappers; the
+multi-line open eliminated; the Or-folding parenthesized.
+
+The engine never stops; it never lies.
