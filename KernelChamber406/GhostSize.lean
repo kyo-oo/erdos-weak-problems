@@ -1,4 +1,4 @@
-import KernelChamber406.GhostHalf
+import KernelChamber406.GhostPins
 
 -- KernelChamber406 split (S089): olean-cached part of the monolith kernel
 -- Ghost part 3/4: the size law (§7)

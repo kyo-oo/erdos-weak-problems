@@ -11,17 +11,14 @@ on:
       - .github/workflows/pins406.yml
   workflow_dispatch:
 
-# S089h RESTRUCTURE: the single-job 4-module loop died at the hosted-runner
-# wall (~50 min: 49:01 / 51:07 / 50:01 observed) with step=None and no
-# artifacts — the runner itself is killed, `if: always()` cannot fire.
-# The fix: ONE MODULE PER JOB with actions/cache carrying the .lake/build
-# oleans down the needs-chain. Each job = install (2m) + cache (0.5m) +
-# Arsenal prebuild (3m, cached after spine) + ONE module (<=25m) ~= 10-15m
-# — far under the wall. Per-job conclusions = per-module verdicts in the
-# API. Each job greps the receipts its own module prints; the crown jobs
-# re-print the full consolidated receipt blocks, so they run the complete
-# original gate sets. Log artifacts upload after every step (survives
-# runner death for completed steps).
+# S089k THE SPLIT-OF-THE-SPLIT: the half modules elaborated 10-17 min and
+# raced the hosted-runner reaper strike window (11-18 min) — photo-finish,
+# lost stochastically (GhostHalf: green in ~10 min in run 45558536529,
+# killed at 16.6 min in run 45573897066 — same code, different runner).
+# Every module now targets <9 min: word (receipts) and pins (engine) are
+# separate olean-cached modules. Per-job conclusions = automatic bisection.
+# The retry law: reaper kills (shutdown signal / exit 143, zero Lean
+# errors) are retried via rerun-failed-jobs until every module goes green.
 
 jobs:
   pins-spine:
@@ -32,7 +29,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -55,7 +52,7 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Pins 1/4: PinsSpine (the ghost rays, the fixed points)"
+    - name: "Pins 1/5: PinsSpine (the ghost rays, the fixed points)"
       run: |
         set -euo pipefail
         : > kernel74b.log
@@ -75,7 +72,7 @@ jobs:
         path: kernel74b.log
         retention-days: 30
 
-  pins-half:
+  pins-word:
     needs: pins-spine
     runs-on: ubuntu-24.04
     timeout-minutes: 40
@@ -84,7 +81,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -107,30 +104,30 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Pins 2/4: PinsHalf (cMod, W61, the pi-points, THE PIN)"
+    - name: "Pins 2/5: PinsWord (cMod, W61, the three fixed points + receipts)"
       run: |
         set -euo pipefail
         : > kernel74b.log
         lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
         set +e
-        timeout 1500 lake build KernelChamber406.PinsHalf 2>&1 | tee -a kernel74b.log
+        timeout 1500 lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log
         RC=${PIPESTATUS[0]}
         set -e
-        if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsHalf rc=$RC"; exit 1; fi
+        if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -E "W61' (does not depend on any axioms|depends on axioms)" kernel74b.log
         grep -E "ghost_congruent_all_depths' (does not depend on any axioms|depends on axioms)" kernel74b.log
       shell: bash
     - if: always()
-      name: "Upload pins-half log"
+      name: "Upload pins-word log"
       uses: actions/upload-artifact@v4
       with:
-        name: pins-half-log
+        name: pins-word-log
         path: kernel74b.log
         retention-days: 30
 
-  pins-census:
-    needs: pins-half
+  pins-pins:
+    needs: pins-word
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
@@ -138,7 +135,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -161,7 +158,60 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Pins 3/4: PinsCensus (the finite base, every exponent 8..500 fires)"
+    - name: "Pins 3/5: PinsPins (THE PIN ENGINE + the three PIN theorems)"
+      run: |
+        set -euo pipefail
+        : > kernel74b.log
+        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel74b.log
+        set +e
+        timeout 1500 lake build KernelChamber406.PinsPins 2>&1 | tee -a kernel74b.log
+        RC=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsPins rc=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
+        grep -E "every_ghost_is_its_pi_point_fam4' (does not depend on any axioms|depends on axioms)" kernel74b.log
+      shell: bash
+    - if: always()
+      name: "Upload pins-pins log"
+      uses: actions/upload-artifact@v4
+      with:
+        name: pins-pins-log
+        path: kernel74b.log
+        retention-days: 30
+
+  pins-census:
+    needs: pins-pins
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+      run: |
+        if [ ! -f /swapfile2 ]; then
+          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+        fi
+        sudo swapon /swapfile2 2>/dev/null || true
+        free -h
+      shell: bash
+    - name: Restore lake oleans (chain cache)
+      uses: actions/cache@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.sha }}
+        restore-keys: |
+          pins406-${{ runner.os }}-
+    - name: "Pins 4/5: PinsCensus (the finite base, every exponent 8..500 fires)"
       run: |
         set -euo pipefail
         : > kernel74b.log
@@ -191,7 +241,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -214,7 +264,7 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Pins 4/4: PinsCrown (THE TWO-GRANT CROWN) + full gate set + battery"
+    - name: "Pins 5/5: PinsCrown (THE TWO-GRANT CROWN) + full gate set + battery"
       run: |
         set -euo pipefail
         : > kernel74b.log
@@ -254,7 +304,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -277,7 +327,7 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Ghost 1/4: GhostSpine (rider core law, head split, uniqueness)"
+    - name: "Ghost 1/5: GhostSpine (rider core law, head split, uniqueness)"
       run: |
         set -euo pipefail
         : > kernel75.log
@@ -298,7 +348,7 @@ jobs:
         path: kernel75.log
         retention-days: 30
 
-  ghost-half:
+  ghost-word:
     needs: ghost-spine
     runs-on: ubuntu-24.04
     timeout-minutes: 40
@@ -307,7 +357,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -330,29 +380,30 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Ghost 2/4: GhostHalf (the depth-100 pins)"
+    - name: "Ghost 2/5: GhostWord (cMod, W100, the three depth-100 fixed points + receipts)"
       run: |
         set -euo pipefail
         : > kernel75.log
         lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
         set +e
-        timeout 1500 lake build KernelChamber406.GhostHalf 2>&1 | tee -a kernel75.log
+        timeout 1500 lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log
         RC=${PIPESTATUS[0]}
         set -e
-        if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostHalf rc=$RC"; exit 1; fi
+        if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -E "ghost_uniqueness' (does not depend on any axioms|depends on axioms)" kernel75.log
+        grep -E "coeff_split100' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
     - if: always()
-      name: "Upload ghost-half log"
+      name: "Upload ghost-word log"
       uses: actions/upload-artifact@v4
       with:
-        name: ghost-half-log
+        name: ghost-word-log
         path: kernel75.log
         retention-days: 30
 
-  ghost-size:
-    needs: ghost-half
+  ghost-pins:
+    needs: ghost-word
     runs-on: ubuntu-24.04
     timeout-minutes: 40
     steps:
@@ -360,7 +411,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -383,7 +434,60 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Ghost 3/4: GhostSize (the size law)"
+    - name: "Ghost 3/5: GhostPins (THE PIN ENGINE AT DEPTH 100 + the three PIN theorems)"
+      run: |
+        set -euo pipefail
+        : > kernel75.log
+        lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorlds Arsenal.CardinalWorldsV2 2>&1 | tee -a kernel75.log
+        set +e
+        timeout 1500 lake build KernelChamber406.GhostPins 2>&1 | tee -a kernel75.log
+        RC=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostPins rc=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
+        grep -E "every_ghost_is_its_pi100_point_fam4' (does not depend on any axioms|depends on axioms)" kernel75.log
+      shell: bash
+    - if: always()
+      name: "Upload ghost-pins log"
+      uses: actions/upload-artifact@v4
+      with:
+        name: ghost-pins-log
+        path: kernel75.log
+        retention-days: 30
+
+  ghost-size:
+    needs: ghost-pins
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: MEMORY SHIELD (10GB swap absorbs elaboration spikes)
+      run: |
+        if [ ! -f /swapfile2 ]; then
+          sudo fallocate -l 10G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=10240
+          sudo chmod 600 /swapfile2
+          sudo mkswap /swapfile2
+        fi
+        sudo swapon /swapfile2 2>/dev/null || true
+        free -h
+      shell: bash
+    - name: Restore lake oleans (chain cache)
+      uses: actions/cache@v4
+      with:
+        path: .lake/build
+        key: pins406-${{ runner.os }}-${{ github.sha }}
+        restore-keys: |
+          pins406-${{ runner.os }}-
+    - name: "Ghost 4/5: GhostSize (the size law)"
       run: |
         set -euo pipefail
         : > kernel75.log
@@ -413,7 +517,7 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan_init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
         lake update
@@ -436,7 +540,7 @@ jobs:
         key: pins406-${{ runner.os }}-${{ github.sha }}
         restore-keys: |
           pins406-${{ runner.os }}-
-    - name: "Ghost 4/4: GhostCrown (census + crown v2 + receipts) + full gate set + battery"
+    - name: "Ghost 5/5: GhostCrown (census + crown v2 + receipts) + full gate set + battery"
       run: |
         set -euo pipefail
         : > kernel75.log
@@ -459,7 +563,7 @@ jobs:
         grep -E "every_ghost_is_its_pi100_point_fam7' (does not depend on any axioms|depends on axioms)" kernel75.log
         grep -E "every_ghost_is_its_pi100_point_fam1' (does not depend on any axioms|depends on axioms)" kernel75.log
         grep -E "ghost_size_rider_sheet' (does not depend on any axioms|depends on axioms)" kernel75.log
-        grep -E "cantorian_base' (does not depend on any axioms|depends on axioms)" kernel75.log
+        grep -E "cantarian_base' (does not depend on any axioms|depends on axioms)" kernel75.log
         python3 problem406-ternary-powers/battery406g.py
         echo ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN=1
       shell: bash

@@ -1,4 +1,4 @@
-import KernelChamber406.PinsHalf
+import KernelChamber406.PinsPins
 
 -- KernelChamber406 split (S089): olean-cached part of the monolith kernel
 -- Pins part 3/4: the finite base census (§7)
