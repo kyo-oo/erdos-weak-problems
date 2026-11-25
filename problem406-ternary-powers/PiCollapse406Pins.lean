@@ -858,6 +858,8 @@ theorem erdos406_crown_of_ghost_extinction
       hasTwo_of_digit (4^(n / 2)) p hp
     have h2n : 2^n = 4^(n / 2) := by
       rw [hm, two_pow_two_mul]
+      congr 1
+      omega
     rw [h2n]
     exact has_two_imp_not_no_two (4^(n / 2)) hhas
   · have hnodd : n = 2 * (n / 2) + 1 := by omega
@@ -867,7 +869,6 @@ theorem erdos406_crown_of_ghost_extinction
         rw [two_pow_two_mul]
         exact pow4_mod3 _
       rw [Nat.mul_mod, h2m]
-      decide
     have hdig : digit3 (2^n) 0 = 2 := by
       unfold digit3
       rw [Nat.pow_zero, Nat.div_one, hmod]

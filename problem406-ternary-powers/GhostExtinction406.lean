@@ -1094,6 +1094,7 @@ theorem erdos406_crown_v2
       rw [hm, two_pow_two_mul]
       congr 1
       omega
+    rw [h2n]
     exact has_two_imp_not_no_two (4^(n / 2)) hhas
   · have hnodd : n = 2 * (n / 2) + 1 := by omega
     have hmod : (2^n) % 3 = 2 := by
