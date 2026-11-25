@@ -73,7 +73,7 @@ engine: the cMod recursion ∥ the direct modular division
 `4^(3^99) mod 3^200`; `% 9 = 7`, `% 3 = 1` — the three-adic unit). -/
 def W100 : Nat := 79542728300108260269642213640611567864276448732
 
-theorem W100_receipt : cMod 100 99 = W100 := by decide
+theorem W100_receipt : cMod 100 99 = W100 := by native_decide
 
 theorem W100_mod_three : W100 % 3 = 1 := by decide
 

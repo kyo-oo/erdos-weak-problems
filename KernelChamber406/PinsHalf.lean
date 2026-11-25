@@ -80,7 +80,7 @@ depth 60, computed by the certified recursion (dual-verified against
 the independent S078 Hensel lift: `W ≡ 7 (mod 9)`, `W ≡ 16 (mod 27)`). -/
 def W61 : Nat := 60776643992856088575557123854
 
-theorem W61_receipt : cMod 61 60 = W61 := by decide
+theorem W61_receipt : cMod 61 60 = W61 := by native_decide
 
 theorem W61_mod_nine : W61 % 9 = 7 := by decide
 
