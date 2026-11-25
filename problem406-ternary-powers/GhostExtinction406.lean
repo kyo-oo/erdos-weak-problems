@@ -498,19 +498,16 @@ theorem ghost_head_split (u : Nat) (hg : GhostRay u) (hu3 : u % 3 = 1) :
     rw [hc1, Nat.mul_mod]
     have hu9 : u % 9 = 1 := by omega
     rw [hu9]
-    decide
-  · refine Or.inr (Or.inl ?_)
+  · refine Or.inl ?_
     unfold ghostHead
     rw [hc1, Nat.mul_mod]
     have hu9 : u % 9 = 4 := by omega
     rw [hu9]
-    decide
-  · refine Or.inl ?_
+  · refine Or.inr (Or.inl ?_)
     unfold ghostHead
     rw [hc1, Nat.mul_mod]
     have hu9 : u % 9 = 7 := by omega
     rw [hu9]
-    decide
 
 /-! ## §5 The cancellation engine, the collapse, and the uniqueness -/
 #print axioms GhostExtinction406.ghost_head_split  -- CK75 SECTION BOUNDARY
