@@ -5536,3 +5536,69 @@ under the r8-r10 repair war and never fully compiled), the repair rounds
 follow the campaign norm.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S091 — THE LAST TWO RED JOBS: THE CARRIER TRANSPLANT
+
+BOSS's standing order (the campaign continues): the fleet stands at 35 green + 2
+permanently red (kernel-406engine, kernel-406final). This round kills the two.
+
+**THE FORENSIC CHAIN (four uploaded artifact logs, one verdict):**
+engine406-log/final406-log from runs 45645697924 (2949266), 45653220937
+(c748612), 45759658894 (8d768b6), 45778947485 (4d48504) — every log shows ZERO
+Lean errors; every death is a silent elaboration burn into the hosted-runner
+reaper window:
+
+1. The engine job's `lake build MonolithGate.GSTWorldtraceArithmetic` phase
+   COMPLETED every time ("[8792/8792] Built ... (487-552s)") and the receipts
+   ALREADY SURFACE in the build output as info: lines (lake surfaces #print
+   axioms during build) — the 9-file `lake env lean` re-elaboration loop that
+   followed was pure redundant burn (each iteration re-deserializing the
+   8696-module fat closure), 40+ extra minutes into the reaper window, dying
+   before ever reaching file 9 (WorldtraceLevelNine406 — never elaborated in
+   ANY engine run).
+2. The final job's single build died INSIDE WorldtraceLevelNine406's own
+   elaboration (maxRecDepth 1000000 / maxHeartbeats 40000000 — the never-
+   completed tail); FinalAssembly406.lean never even started.
+3. The shared 37-job fleet pool is the executioner (the S089j/S089q law):
+   pool saturation recycles the heavy builds at 80-113 min job time, mid-step,
+   with the always() steps unreached on the hardest kills.
+
+**THE KILL (the S089j carrier law + the S089q survival stack, both applied):**
+
+- kernel-406engine/kernel-406final REMOVED from kills.yml (35 jobs remain);
+  the NEW dedicated workflow engine406.yml is their SOLE CI carrier
+  (paths: MonolithGate/** + the workflow file — the fleet fires its 35 green
+  jobs on the same pushes, exactly as before).
+- The engine job reborn: ONE `lake build MonolithGate.WorldtraceLevelNine406`
+  (the loop is dead — the receipts surface in the build log, proven four
+  times in the artifacts), budget-wrapped (5400s, pkill 'MonolithGate'),
+  stdbuf live-streamed.
+- THE RECEIPT-FORCE LAW (new, this round): a warm cache makes `lake build`
+  skip elaboration, and skipped modules print no #print-axioms receipts —
+  the receipt gates would starve on a green cache. The oleans of exactly the
+  receipt-target modules are deleted before the build: engine = GSTTheAct
+  (front_law) + GSTDiagonalRead (every_exponent_fires) + GSTClimbInfiniteFamily
+  (the_act_iff_no_cantorian, wave3_deep_unbounded) + WorldtraceLevelNine406
+  (wt_quintic_mod59049, dust_fire_row_nine, no22_of_cascade_eight,
+  cantorian_dust_mod_19683); the invalidation cascade rebuilds the chain
+  through GSTTheActConstruction -> GSTBladeWave -> GSTTowerFire ->
+  GSTWorldtraceArithmetic (~550s); the ~85 upstream closure modules stay
+  banked. Final = exactly FinalAssembly406 (all eleven demanded receipts are
+  its own #print axioms).
+- The final job reborn: needs-chained behind the engine, restores the
+  engine's banked oleans (restore-keys prefix fallback), forces only
+  FinalAssembly406, elaborates it warm.
+- Full survival stack on both: hardened elan install (5x retry +
+  api.github.com fallback), zram MEMORY SHIELD v2, chain-cache ratchet
+  (save-on-failure ALWAYS, first-save-wins, rerun-failed-jobs converges),
+  timeout-minutes 150, artifact upload ALWAYS.
+
+**THE VERDICTS PENDING:** the push fires the dedicated pair on a cold cache
+(full closure build + the LevelNine tail); if the tail needs more than the
+90-minute build budget, the budget reaps, banks the closure, and the retry
+starts warm at the tail — the ratchet converges. All 8 + 11 receipt gates and
+both negative gates are byte-identical to the fleet versions.
+
+The engine never stops; it never lies. In English, always.

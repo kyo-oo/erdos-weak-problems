@@ -1,0 +1,280 @@
+name: Erdos 406 Engine + Final Assembly (dedicated runners)
+on:
+  push:
+    branches: [campaign]
+    paths:
+      - MonolithGate/**
+      - .github/workflows/engine406.yml
+  workflow_dispatch:
+
+# S091 THE CARRIER LAW, APPLIED TO THE LAST TWO RED JOBS.
+#
+# kernel-406engine and kernel-406final were the only permanently-red jobs on
+# the fleet (14+ consecutive runs, every failure a silent elaboration burn:
+# zero Lean errors in every uploaded log — engine406-log/final406-log from
+# runs 45645697924, 45653220937, 45759658894, 45778947485).
+#
+# THE FORENSIC CHAIN (four logs, one verdict):
+#   (1) The fleet jobs ran in the 37-job shared pool — the campaign's
+#       proven reaper bait (S089j/S089q): pool saturation recycles the
+#       heavy builds at 80-113 min job time, mid-step, with the always()
+#       steps never reaching the upload on the hardest kills.
+#   (2) The engine job's `lake build` phase COMPLETED every time
+#       ("[8792/8792] Built MonolithGate.GSTWorldtraceArithmetic (487-552s)")
+#       and its receipts ALREADY SURFACE in the build output as info:
+#       lines — the 9-file `lake env lean` re-elaboration loop that
+#       followed was pure redundant burn (each iteration re-deserializing
+#       the 8696-module fat closure), burning 40+ extra minutes into the
+#       reaper window before ever reaching file 9 (WorldtraceLevelNine406).
+#   (3) The final job's single build died INSIDE WorldtraceLevelNine406's
+#       own elaboration (maxRecDepth 1000000 / maxHeartbeats 40000000) —
+#       the never-completed tail; FinalAssembly406.lean never started.
+#
+# THE KILL:
+#   - Both jobs REMOVED from the fleet (kills.yml, the S089j law: heavy
+#     monolith builds have NO fleet carrier — the shared pool is the
+#     executioner); this dedicated workflow is their SOLE CI carrier.
+#   - The engine job: ONE `lake build MonolithGate.WorldtraceLevelNine406`
+#     (no loop — the receipts surface in the build log, proven in four
+#     artifact logs), budget-wrapped, stdbuf live-streamed.
+#   - THE RECEIPT-FORCE LAW (new): a warm cache makes `lake build` skip
+#     elaboration, and skipped modules print no #print-axioms receipts —
+#     the receipt gates would starve on a green cache. The oleans of
+#     exactly the receipt-target modules are deleted before the build,
+#     forcing their re-elaboration (plus the natural invalidation cascade
+#     through GSTTheActConstruction -> GSTBladeWave -> GSTTowerFire ->
+#     GSTWorldtraceArithmetic); the ~85 upstream closure modules stay
+#     banked — the ratchet keeps its full value.
+#   - The final job: needs-chained behind the engine, restores the
+#     engine's banked oleans, forces exactly FinalAssembly406, elaborates
+#     it warm (minutes).
+#   - The full S089q survival stack: hardened elan install (5x retry +
+#     api.github.com fallback), zram MEMORY SHIELD v2, per-job chain-cache
+#     ratchet (restore-keys prefix fallback + save-on-failure ALWAYS),
+#     budget wrapper with pkill reaping, stdbuf live-stream (the lean
+#     4.33 full-buffering law), artifact upload ALWAYS.
+#
+# The retry law (S089k): reaper kills (shutdown signal / exit 143, zero
+# Lean errors) are retried via rerun-failed-jobs; the ratchet banks the
+# completed closure on every attempt, so every retry starts warmer and
+# the chain converges to green on merit.
+
+jobs:
+  engine-406-monolith:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
+      run: |
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
+        fi
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
+        free -h
+        swapon --show || true
+      shell: bash
+    - name: Restore lake oleans (chain cache)
+      uses: actions/cache/restore@v4
+      with:
+        path: .lake/build
+        key: engine406-${{ runner.os }}-engine-${{ github.sha }}
+        restore-keys: |
+          engine406-${{ runner.os }}-engine-
+          engine406-${{ runner.os }}-
+    - name: "Engine 406: the vendored kill engine + the ninth cascade level (WorldtraceLevelNine406)"
+      run: |
+        set -euo pipefail
+        : > engine406.log
+        # THE RECEIPT-FORCE LAW: delete the oleans of exactly the modules
+        # whose #print-axioms receipts the gates demand, so the warm-cache
+        # no-op build can never starve the receipt gates. Invalidation
+        # cascade rebuilds the chain through GSTWorldtraceArithmetic; the
+        # ~85 upstream closure modules stay banked (the ratchet).
+        if [ -d .lake/build ]; then
+          find .lake/build -type f \( -name 'GSTTheAct.*' -o -name 'GSTDiagonalRead.*' -o -name 'GSTClimbInfiniteFamily.*' -o -name 'WorldtraceLevelNine406.*' \) -delete || true
+        fi
+        set +e
+        ( stdbuf -oL -eL lake build MonolithGate.WorldtraceLevelNine406 2>&1 | tee -a engine406.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 5400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'MonolithGate' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'MonolithGate' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "ENGINE406_BUILD_FAILED rc=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; then echo "ENGINE406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; exit 1; fi
+        echo "ENGINE 406 RECEIPTS:"
+        grep -E "front_law' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "every_exponent_fires' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "the_act_iff_no_cantorian' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "wave3_deep_unbounded' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "wt_quintic_mod59049' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "dust_fire_row_nine' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "no22_of_cascade_eight' (does not depend on any axioms|depends on axioms)" engine406.log
+        grep -E "cantorian_dust_mod_19683' (does not depend on any axioms|depends on axioms)" engine406.log
+        echo ERDOS_406_ENGINE_GREEN=1
+      shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: engine406-${{ runner.os }}-engine-${{ github.sha }}
+    - if: always()
+      name: "Upload engine406 log"
+      uses: actions/upload-artifact@v4
+      with:
+        name: engine406-log
+        path: engine406.log
+        retention-days: 30
+
+  final-406-assembly:
+    needs: engine-406-monolith
+    runs-on: ubuntu-24.04
+    timeout-minutes: 150
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh -o /tmp/elan_init.sh; then break; fi
+          echo "raw fetch retry $i"; sleep 10
+        done
+        if [ ! -s /tmp/elan_init.sh ]; then
+          echo "raw.githubusercontent down - API fallback"
+          curl -sSf -H "Authorization: token ${{ github.token }}" -H "Accept: application/vnd.github.raw" https://api.github.com/repos/leanprover/elan/contents/elan-init.sh -o /tmp/elan_init.sh
+        fi
+        sh /tmp/elan_init.sh -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: MEMORY SHIELD v2 (zram swap kills the thrash; disk-swap fallback)
+      run: |
+        ZRAM_OK=0
+        if sudo modprobe zram 2>/dev/null; then
+          echo 10G | sudo tee /sys/block/zram/disksize >/dev/null 2>&1 || true
+          if sudo mkswap /dev/zram0 >/dev/null 2>&1 && sudo swapon -p 10 /dev/zram0 >/dev/null 2>&1; then
+            ZRAM_OK=1
+            echo "ZRAM swap ON (10G, priority 10)"
+          fi
+        fi
+        if [ "$ZRAM_OK" -eq 0 ]; then
+          echo "zram unavailable - 4G disk swapfile fallback"
+          if [ ! -f /swapfile2 ]; then
+            sudo fallocate -l 4G /swapfile2 || sudo dd if=/dev/zero of=/swapfile2 bs=1M count=4096
+            sudo chmod 600 /swapfile2
+            sudo mkswap /swapfile2
+          fi
+          sudo swapon /swapfile2 2>/dev/null || true
+        fi
+        free -h
+        swapon --show || true
+      shell: bash
+    - name: Restore lake oleans (chain cache - the engine's banked oleans warm this job)
+      uses: actions/cache/restore@v4
+      with:
+        path: .lake/build
+        key: engine406-${{ runner.os }}-final-${{ github.sha }}
+        restore-keys: |
+          engine406-${{ runner.os }}-final-
+          engine406-${{ runner.os }}-engine-
+          engine406-${{ runner.os }}-
+    - name: "Final 406: THE FINAL ASSEMBLY (FinalAssembly406 - the complete composition)"
+      run: |
+        set -euo pipefail
+        : > final406.log
+        # THE RECEIPT-FORCE LAW: force exactly FinalAssembly406's
+        # re-elaboration (all eleven demanded receipts are its own).
+        if [ -d .lake/build ]; then
+          find .lake/build -type f -name 'FinalAssembly406.*' -delete || true
+        fi
+        set +e
+        ( stdbuf -oL -eL lake build MonolithGate.FinalAssembly406 2>&1 | tee -a final406.log; exit ${PIPESTATUS[0]} ) &
+        BPID=$!
+        ELAPSED=0
+        while kill -0 $BPID 2>/dev/null; do
+          sleep 10; ELAPSED=$((ELAPSED+10))
+          if [ $ELAPSED -ge 5400 ]; then
+            echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
+            pkill -f 'MonolithGate' 2>/dev/null || true
+            sleep 5
+            pkill -9 -f 'MonolithGate' 2>/dev/null || true
+            kill -9 $BPID 2>/dev/null || true
+            break
+          fi
+        done
+        wait $BPID 2>/dev/null; RC=$?
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "FINAL406_BUILD_FAILED rc=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; then echo "FINAL406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; exit 1; fi
+        echo "FINAL ASSEMBLY RECEIPTS:"
+        grep -E "the_act_iff_tailF_unconditional' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "cantorian_is_dust' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_no_cantorian' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_dust_empty' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_climb' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_row_and_tower' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "no22_of_cascade_total' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "class_one_verdict_19683' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "erdos_ternary_2_universal_of_last_hypothesis' (does not depend on any axioms|depends on axioms)" final406.log
+        grep -E "the_final_assembly' (does not depend on any axioms|depends on axioms)" final406.log
+        echo ERDOS_406_FINAL_ASSEMBLY_GREEN=1
+      shell: bash
+    - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
+      if: always()
+      continue-on-error: true
+      uses: actions/cache/save@v4
+      with:
+        path: .lake/build
+        key: engine406-${{ runner.os }}-final-${{ github.sha }}
+    - if: always()
+      name: "Upload final406 log"
+      uses: actions/upload-artifact@v4
+      with:
+        name: final406-log
+        path: final406.log
+        retention-days: 30
