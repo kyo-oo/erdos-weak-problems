@@ -1897,3 +1897,19 @@ is the first true isolated elaboration cost of the vendored heavy
 chambers (GSTClimbInfiniteFamily, GSTWorldtraceArithmetic,
 WorldtraceLevelNine406) — now measurable, guarded, and
 diagnosis-preserving if any one of them is itself a bomb.
+
+**THE DEFUSAL, VERIFIED (fleet run 45892357567, commit 0740819): ALL
+THIRTY-SIX FLEET JOBS GREEN** — the second fully-green fleet run of the
+campaign era — with all four of the bomb's carriers green
+(kernel-406tail2, the module's own solo elaboration; kernel-406tail4;
+kernel-406breakthrough; kernel-406windowfire) and the linear
+certificate's axiom receipt clean in the tail2 log.  The engine lane's
+own ladder run (run 45890966440, S091's artifact) confirms the same:
+"the defused bomb works, GSTWorldtraceArithmetic green in the ladder" —
+the ladder's first complete pass through all eight prior chambers, with
+WorldtraceLevelNine406 (never elaborated before in CI) surfacing its
+first true first-exposure defect at :742 (the 128-case Or-tree's
+last-case shape, fixed in 84f98c2) and its elaboration climbing to
+13.14 GB at the guard line — the engine lane's last open question (the
+threshold may need raising if the fixed elaboration needs the room;
+the guard turns the question into a measurable answer either way).
