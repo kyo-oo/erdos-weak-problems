@@ -1749,15 +1749,87 @@ coverage hypothesis) → v5 GREEN. The full fleet on the same run: 34 green
 at breakthrough-time, with the heavy engine/final builds carrying their
 artifact logs.
 
-### 21.5 THE FRONTIER (named, exact)
+### 21.5 THE FRONTIER (named, exact — the v5/Ω-wave form)
 
+Uncovered classes mod 81 (FOURTEEN, intersected with K > 500): the five
+3-free row-family classes {1, 10, 28, 37, 64} (all ≡ 1 mod 9) and the nine
+tower-family classes {0, 12, 21, 27, 36, 39, 48, 63, 75} (divisible by three,
+maximal core ≡ 4, 7 mod 9) — EXACTLY the domains of the mission board's two
+named primitives (GSTTailFFourthDimension: `tailF_row_primitive` /
+`tailF_tower_primitive`). The Ω-wave law (`digit_two_of_omega_covered`,
+CI-green this round) erases every divisible-by-three exponent whose maximal
+core is NOT ≡ 4, 7 mod 9 — the 44-class frontier of the v3 module became
+fourteen classes in v4/v5, all three faces (full verdict / unified row /
+frontier fire) certified equivalent in the green reduction law
+(`erdos_406_full_verdict_iff_frontier_fires`).
 
-Uncovered classes mod 81 (44): 0,1,2,3,4,7,9,10,11,12,13,16,17,21,22,26,27,
-28,29,30,31,34,35,36,37,38,39,40,43,44,47,48,49,61,62,63,64,65,67,70,71,74,
-75,80 — intersected with K > 500. The tailF row-word lattice
-(GSTTailFFourthDimension, six levels, 54/81 hard classes) and the nine-level
-cascade (WorldtraceLevelNine406 — engine chain, first-exposure convergence
-ongoing with the new artifact logs) are the two live assaults on exactly
-this frontier. The climb seam remains the third route; its collision assembly
-needs a real mathematical repair (explicit carry-algebra contradiction, not a
-tactic closer), and the honest record of its refutation is above.
+### 21.6 THE ENGINE/FINAL LONG POLES — the resource-kill mechanism, read; the carriers transplanted
+
+Both S085-era long-pole jobs (`kernel-406engine`, `kernel-406final`) had
+NEVER completed: every prior run dies ~100 minutes into the FIRST command
+(`timeout 5400 lake build MonolithGate.GSTWorldtraceArithmetic` /
+`...WorldtraceLevelNine406`), with the build step's conclusion `None`, the
+`if: always()` artifact upload never reached, and the job log blob lost
+(BlobNotFound on retrieval) — the signature of the HOSTED RUNNER ITSELF
+losing the job, not a Lean error and not the 90-minute timeout (a timeout
+would exit rc=124 through the script's own gates).
+
+The mechanism, read from the green breakthrough job's own log: `lake build`
+elaborates the closure's heavy vendored chambers IN PARALLEL (the hosted
+runner's 4 vCPUs) — GSTWorldtraceArithmetic (138 decides),
+WorldtraceLevelNine406 (478 decides on 59049-structures),
+GSTClimbInfiniteFamily (56 decides + 64 axiom walks), and the rest of the
+nine-chamber ladder — and the four-at-a-time elaboration exceeds the 16 GB
+hosted runner while NO single chamber ever received its own isolated
+process (the per-file `lake env lean` loop is second in the script and
+never reached). The breakthrough closure (green, ~10.5 min) carries none
+of these chambers — that is the whole difference.
+
+THE RESOLUTION (the S091 carrier transplant, superseding this session's
+per-chamber diet draft): both jobs removed from the shared 37-job pool
+(the S089j law: the pool is the executioner) and reborn in the dedicated
+`engine406.yml` with the full S089q survival stack — the one budget-wrapped
+stdbuf live-streamed build of `MonolithGate.WorldtraceLevelNine406`
+carrying all eight gates (the redundant 9-file re-elaboration loop
+deleted: its receipts already surface in the lake build output, proven in
+four artifact logs), the receipt-force law (the receipt-target modules'
+oleans deleted pre-build so a warm cache cannot starve the gates), the
+final job needs-chained behind the engine, the zram memory shield, and
+artifact upload ALWAYS. Both negative gates and all 8+11 receipt gates
+byte-identical to the fleet versions. This session's independent reading
+of the kill mechanism stands as the diagnosis: the four-at-a-time parallel
+elaboration sum exceeds the runner while no single chamber ever got its
+own isolated process. The climb seam remains the third route; the honest
+record of the collision's refutation is above (§21.2).
+
+### 21.7 THE WINDOW FIRE (v6, the tower frontier carved)
+
+MonolithGate/WindowFire406.lean — the tower side of the fourteen-class
+frontier carved by the vendored diagonal read's own fire bands, all
+unconditional: `digit_two_of_window_covered` (the level-two band
+`K = 3^a·core`, `a ≥ 2`, `core ≡ 13, 25 (mod 27)`, fires at row `a + 3`;
+the level-three band `a ≥ 3`, `core ≡ 4, 34, 49, 70 (mod 81)`, fires at
+row `a + 4` — `GSTDiagonalRead.window_fire_level2/3`, uniform in the
+valuation scale) and the SHARP REDUCTION LAW
+`erdos_406_full_verdict_iff_sharp_frontier_fires`: the full verdict is
+EQUIVALENT to the sharp frontier firing — the fourteen-class frontier
+minus the window bands, now TEN named (valuation, core-class) cells:
+
+* the five 3-free row classes {1, 10, 28, 37, 64} mod 81 (the window at
+  valuation zero reads one trit; the fire bands begin at valuation one);
+* the five valuation-one tower classes 12, 21, 39, 48, 75 mod 81
+  (K = 3·core, core ≡ 4, 7, 13, 16, 25 mod 27);
+* the valuation-two remainders: class 36 with core ≡ 4, 22 mod 27 (the
+  13-band fires), class 63 with core ≡ 7, 16 mod 27 (the 25-band fires);
+* the valuation-three-plus remainders: classes 27/0 with core in
+  {7, 16, 22, 31, 43, 58, 61, 76} mod 81 (after both bands fire).
+
+The green dust collapse (`DustCandidates406.dust_candidate_two_classes`)
+pins the tailF-route dust cores to the two classes 4, 16 mod 27 — through
+the mission board's own tower primitive composition, the three
+valuation-one classes with core ≡ 7, 13, 25 mod 27 (classes 21, 39, 75)
+are the next kill candidates. CI carrier: `kernel-406windowfire` (the
+three vendored chambers GSTClimbTruthValue, GSTTheAct, GSTDiagonalRead
+pre-built serially RSS-guarded — their first CI exposure outside the
+engine lane — then the closure, the module, three axiom receipts and the
+GREEN marker).

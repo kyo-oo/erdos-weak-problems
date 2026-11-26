@@ -2722,3 +2722,74 @@ jobs:
         name: breakthrough406-log
         path: breakthrough406.log
         retention-days: 30
+  kernel-406windowfire:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "WindowFire406 chambers pre-build (serial, RSS-guarded): the three vendored chambers this module adds to the green breakthrough closure (GSTClimbTruthValue, GSTTheAct, GSTDiagonalRead - first CI exposure of the diagonal read outside the engine lane)"
+      run: |
+        set -euo pipefail
+        : > windowfire406.log
+        ( while sleep 20; do
+            NOW=$(date -u +%H:%M:%S)
+            PEAK=$(ps -eo rss=,comm= | awk '$2=="lean"{if($1>m)m=$1} END{print m+0}')
+            echo "$NOW peak_lean_rss_kb=$PEAK" >> rss-windowfire406.log
+            for pid in $(pgrep -x lean); do
+              R=$(ps -o rss= -p "$pid" 2>/dev/null || echo 0)
+              if [ "$R" -gt 13000000 ]; then
+                echo "$NOW RSS_GUARD killing lean pid=$pid rss=${R}KB" | tee -a windowfire406.log >> rss-windowfire406.log
+                kill -9 "$pid"
+              fi
+            done
+          done ) &
+        GUARD=$!
+        trap 'kill $GUARD 2>/dev/null || true' EXIT
+        for f in GSTClimbTruthValue GSTTheAct GSTDiagonalRead; do
+          set +e
+          timeout 1800 lake build MonolithGate.$f 2>&1 | tee -a windowfire406.log
+          RC=${PIPESTATUS[0]}
+          set -e
+          if [ "$RC" -ne 0 ]; then echo "WINDOWFIRE406_CHAMBER_FAILED file=$f rc=$RC" | tee -a windowfire406.log; exit 1; fi
+          if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' windowfire406.log; then echo "WINDOWFIRE406_CHAMBER_NEGATIVE_GATE_TRIPPED file=$f" | tee -a windowfire406.log; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' windowfire406.log; exit 1; fi
+          echo "WINDOWFIRE406_CHAMBER_OK file=$f"
+        done
+      shell: bash
+    - name: "Kernel 406windowfire - THE WINDOW FIRE (S090 v6, BOSS order COMPLETE THE TASK / USE MY OWN MATHS): the tower frontier carved by the diagonal read's own fire bands - the window-covered law (digit_two_of_window_covered: the level-two band K = 3^a*core, a >= 2, core = 13,25 mod 27, fires at row a+3; the level-three band a >= 3, core = 4,34,49,70 mod 81, fires at row a+4 - both uniform in the valuation scale, the vendored diagonal read's own theorems) and THE SHARP REDUCTION LAW (erdos_406_full_verdict_iff_sharp_frontier_fires: the FULL verdict EQUIVALENT to the sharp frontier firing - the fourteen-class frontier minus the window bands, now TEN named (valuation, core-class) cells: the five row classes {1,10,28,37,64} mod 81, the five valuation-one tower classes 12,21,39,48,75 mod 81 (core = 4,7,13,16,25 mod 27), the valuation-two remainders class 36 with core = 4,22 mod 27 and class 63 with core = 7,16 mod 27, and the valuation-three-plus remainders classes 27/0 with core in {7,16,22,31,43,58,61,76} mod 81 - the green dust collapse's own two classes 4,16 mod 27 pinning the valuation-one kill candidates 21,39,75 for the tailF route's tower primitive composition)"
+      run: |
+        set -euo pipefail
+        set +e
+        timeout 3600 lake build MonolithGate.WindowFire406 2>&1 | tee -a windowfire406.log
+        RC1=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC1" -ne 0 ]; then echo "WINDOWFIRE406_IMPORT_CLOSURE_FAILED rc=$RC1"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx' windowfire406.log; then echo "WINDOWFIRE406_CLOSURE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx' windowfire406.log; exit 1; fi
+        set +e
+        timeout 3600 lake env lean MonolithGate/WindowFire406.lean 2>&1 | tee -a windowfire406.log
+        RC2=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC2" -ne 0 ]; then echo "WINDOWFIRE406_COMPILE_FAILED_OR_TIMEOUT_RC=$RC2"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' windowfire406.log; then echo "WINDOWFIRE406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' windowfire406.log; exit 1; fi
+        echo "WINDOWFIRE 406 RECEIPTS:"
+        grep -E "digit_two_of_window_covered' (does not depend on any axioms|depends on axioms)" windowfire406.log
+        grep -E "erdos_406_even_conjecture_of_sharp_frontier_fires' (does not depend on any axioms|depends on axioms)" windowfire406.log
+        grep -E "erdos_406_full_verdict_iff_sharp_frontier_fires' (does not depend on any axioms|depends on axioms)" windowfire406.log
+        grep -F "ERDOS_406_WINDOW_FIRE_GREEN" windowfire406.log
+        echo ERDOS_406_WINDOW_FIRE_GREEN=1
+      shell: bash
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: windowfire406-log
+        path: |
+          windowfire406.log
+          rss-windowfire406.log
+        retention-days: 30
