@@ -1,6 +1,7 @@
 import Arsenal.ErdosTernary2.Basic
 import Arsenal.CardinalWorldsCore
-import Mathlib.Tactic
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.NormNum
 
 -- Family pattern (green kernels): explicit depth headroom.
 set_option maxRecDepth 262144

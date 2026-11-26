@@ -78,7 +78,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel74b.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.PinsSpine 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -183,7 +183,7 @@ jobs:
             sleep 15
           done ) &
         WATCHDOG=$!
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -280,7 +280,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel74b.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.PinsPins 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -375,7 +375,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel74b.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.PinsCensus 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -470,7 +470,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel74b.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel74b.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.PinsCrown 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -575,7 +575,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel75.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.GhostSpine 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -681,7 +681,7 @@ jobs:
             sleep 15
           done ) &
         WATCHDOG=$!
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -778,7 +778,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel75.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.GhostPins 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -873,7 +873,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel75.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.GhostSize 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
@@ -968,7 +968,7 @@ jobs:
       run: |
         set -euo pipefail
         : > kernel75.log
-        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic 2>&1 | tee -a kernel75.log
+        stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
         ( stdbuf -oL -eL lake build KernelChamber406.GhostCrown 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
