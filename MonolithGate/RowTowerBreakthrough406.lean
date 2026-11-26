@@ -410,16 +410,15 @@ lattice laws and the boolean-digit bridge.  No hidden hypotheses: the
 coverage condition is the theorem's own statement. -/
 theorem erdos_406_verdict_of_base_or_covered (n : Nat) (hn : 9 ≤ n)
     (hcover : n % 2 = 1 ∨
-      (n % 2 = 0 → (n / 2 ≤ 500 ∨ erdos_406_covered_class (n / 2) ∨
+      (n % 2 = 0 ∧ (n / 2 ≤ 500 ∨ erdos_406_covered_class (n / 2) ∨
         erdos_406_omega_covered (n / 2)))) :
     noTernaryTwo (2 ^ n) = false := by
-  rcases hcover with hodd | heven
+  rcases hcover with hodd | ⟨he, hbc⟩
   · exact _root_.erdos_ternary_2_conjecture_odd n hn hodd
-  · have he : n % 2 = 0 := by omega
-    have hmd := Nat.mod_add_div n 2
+  · have hmd := Nat.mod_add_div n 2
     have hm5 : 5 ≤ n / 2 := by omega
     have hn2 : n = 2 * (n / 2) := by omega
-    obtain ⟨p, -, hd2⟩ := digit_two_of_base_or_covered (n / 2) hm5 (heven he)
+    obtain ⟨p, -, hd2⟩ := digit_two_of_base_or_covered (n / 2) hm5 hbc
     have hv4 : noTernaryTwo (4 ^ (n / 2)) = false :=
       noTernaryTwo_false_of_digit3 _ p hd2
     have hp2 : (2 : ℕ) ^ (2 * (n / 2)) = 4 ^ (n / 2) := by
