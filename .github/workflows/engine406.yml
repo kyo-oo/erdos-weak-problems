@@ -134,7 +134,7 @@ jobs:
             echo "$NOW peak_lean_rss_kb=$PEAK" >> rss-engine406.log
             for pid in $(pgrep -x lean); do
               R=$(ps -o rss= -p "$pid" 2>/dev/null || echo 0)
-              if [ "$R" -gt 13000000 ]; then
+              if [ "$R" -gt 15500000 ]; then
                 echo "$NOW RSS_GUARD killing lean pid=$pid rss=${R}KB" | tee -a engine406.log
                 kill -9 "$pid"
               fi
@@ -274,7 +274,7 @@ jobs:
             echo "$NOW peak_lean_rss_kb=$PEAK" >> rss-final406.log
             for pid in $(pgrep -x lean); do
               R=$(ps -o rss= -p "$pid" 2>/dev/null || echo 0)
-              if [ "$R" -gt 13000000 ]; then
+              if [ "$R" -gt 15500000 ]; then
                 echo "$NOW RSS_GUARD killing lean pid=$pid rss=${R}KB" | tee -a final406.log
                 kill -9 "$pid"
               fi
