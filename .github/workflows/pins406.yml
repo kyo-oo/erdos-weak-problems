@@ -175,7 +175,7 @@ jobs:
         : > kernel74b.log
         ( while true; do
             TS=$(date +%H:%M:%S)
-            P=$(pgrep -f 'PinsWord' | head -1 || true)
+            P=$(pgrep -f 'PiCollapse406Pins' | head -1 || true)
             if [ -n "$P" ] && [ -r /proc/$P/io ]; then
               echo "WATCH $TS pid=$P read_bytes=$(awk '/^read_bytes/{print $2}' /proc/$P/io) rss_kb=$(awk '/VmRSS/{print $2}' /proc/$P/status)"
             else
@@ -186,7 +186,7 @@ jobs:
         WATCHDOG=$!
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
-        ( stdbuf -oL -eL lake build KernelChamber406.PinsWord KernelChamber406.PinsWordR 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        ( stdbuf -oL -eL lake env lean problem406-ternary-powers/PiCollapse406Pins.lean 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
@@ -206,6 +206,7 @@ jobs:
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -E "W61' (does not depend on any axioms|depends on axioms)" kernel74b.log
+        grep -F "ERDOS406_PICOLLAPSE_KERNEL_GREEN" kernel74b.log
       shell: bash
     - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
       if: always()
@@ -673,7 +674,7 @@ jobs:
         : > kernel75.log
         ( while true; do
             TS=$(date +%H:%M:%S)
-            P=$(pgrep -f 'GhostWord' | head -1 || true)
+            P=$(pgrep -f 'GhostExtinction406' | head -1 || true)
             if [ -n "$P" ] && [ -r /proc/$P/io ]; then
               echo "WATCH $TS pid=$P read_bytes=$(awk '/^read_bytes/{print $2}' /proc/$P/io) rss_kb=$(awk '/VmRSS/{print $2}' /proc/$P/status)"
             else
@@ -684,7 +685,7 @@ jobs:
         WATCHDOG=$!
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
-        ( stdbuf -oL -eL lake build KernelChamber406.GhostWord KernelChamber406.GhostWordR 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        ( stdbuf -oL -eL lake env lean problem406-ternary-powers/GhostExtinction406.lean 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
@@ -703,7 +704,7 @@ jobs:
         kill $WATCHDOG 2>/dev/null || true
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
-        grep -E "coeff_split100' (does not depend on any axioms|depends on axioms)" kernel75.log
+        grep -F "ERDOS406_GHOSTEXTINCTION_KERNEL_GREEN" kernel75.log
       shell: bash
     - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
       if: always()
