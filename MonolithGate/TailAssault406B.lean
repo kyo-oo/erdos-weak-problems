@@ -372,14 +372,93 @@ def witnessRows3000 : List (Nat × Nat) := [
   (2995, 0), (2996, 3), (2997, 4), (2998, 4), (2999, 5), (3000, 9)
 ]
 
+/-- **THE INDEXED WITNESS ROWS.**  The table zipped with its positions,
+built head-first by this module's own recursion: the position-`start`
+prefix pairs each row with its index.  This is the kernel certificate's
+carrier — a LINEAR object: one cons cell per row, no per-exponent
+re-scan of the whole table. -/
+def indexedRows : (start : Nat) → List (Nat × Nat) →
+    List ((Nat × Nat) × Nat)
+  | _, [] => []
+  | start, pr :: t => ((pr, start) : (Nat × Nat) × Nat) ::
+      indexedRows (start + 1) t
+
+/-- **THE LINEAR KERNEL CERTIFICATE.**  One kernel decision over the
+indexed rows: each row is checked ONCE, at its own position — the row
+at position `i` carries the exponent `1501 + i` and its tree edge
+fires.  Fifteen hundred row checks total (the S085 r30 form walked
+every row for every exponent — over a million kernel allocations with
+no collection, the silent memory bomb that killed the breakthrough,
+windowfire, engine and final jobs at random; this form is linear and
+allocates nothing that survives a row). -/
+theorem erdos406_climb_base_3000_band_linear :
+    (List.all (indexedRows 0 witnessRows3000) (fun pq =>
+      pq.1.1 == 1501 + pq.2 &&
+        GSTTailAssault406.treeBad pq.1.1 (2 + pq.1.2))) = true := by
+  decide
+
+/-- **THE INDEX-TO-ROW BRIDGE.**  If every indexed row fires, then for
+every index below the table's length there is a MEMBER row carrying
+that index's exponent with a firing tree edge.  Pure induction on the
+table, position-tracked — no kernel scan. -/
+theorem firing_row_of_indexed {l : List (Nat × Nat)} {start i : Nat}
+    (hi : start ≤ i) (hilt : i < start + l.length)
+    (h : ∀ pq ∈ indexedRows start l,
+      (pq.1.1 == 1501 + pq.2 &&
+        GSTTailAssault406.treeBad pq.1.1 (2 + pq.1.2)) = true) :
+    ∃ pr ∈ l, pr.1 = 1501 + i ∧
+      GSTTailAssault406.treeBad pr.1 (2 + pr.2) = true := by
+  revert hi hilt h
+  induction l generalizing start i with
+  | nil =>
+      intro hi hilt _
+      simp at hilt
+      omega
+  | cons a t ih =>
+      intro hi hilt h
+      have hh := h (a, start) (by
+        simp only [indexedRows]
+        exact List.mem_cons_self _ _)
+      simp only [Bool.and_eq_true, beq_iff_eq] at hh
+      obtain ⟨hhK, hhfire⟩ := hh
+      rcases Nat.eq_or_lt_of_le hi with heq | hlt
+      · refine ⟨a, List.mem_cons_self _ _, ?_, hhfire⟩
+        rw [heq] at hhK
+        exact hhK
+      · have htail : ∀ pq ∈ indexedRows (start + 1) t,
+            (pq.1.1 == 1501 + pq.2 &&
+              GSTTailAssault406.treeBad pq.1.1 (2 + pq.1.2)) = true := by
+          intro pq hpq
+          exact h pq (by
+            simp only [indexedRows]
+            exact List.mem_cons_of_mem _ hpq)
+        have hlen : (a :: t).length = t.length + 1 := rfl
+        obtain ⟨pr, hprmem, hprK, hprfire⟩ :=
+          ih (start + 1) i (by omega) (by omega) htail
+        exact ⟨pr, List.mem_cons_of_mem _ hprmem, hprK, hprfire⟩
+
 /-- **THE WITNESS FIRE.**  Every exponent in [1501, 3000] owns a table
-pair whose tree edge fires: one kernel decision over all 1500 bands,
-each an any-scan that short-circuits at the matching pair. -/
+pair whose tree edge fires: the linear kernel certificate above plus
+the index-to-row bridge, composed into the original single-band
+statement — the quadratic kernel scan is GONE (replaced by one linear
+decision and pure logic). -/
 theorem erdos406_climb_base_3000_band : (List.all (List.range 1500) (fun i =>
     List.any witnessRows3000 (fun pr =>
       pr.1 == 1501 + i &&
         GSTTailAssault406.treeBad pr.1 (2 + pr.2)))) = true := by
-  decide
+  have hlen : witnessRows3000.length = 1500 := by decide
+  apply List.all_eq_true.mpr
+  intro i hi
+  have hi' : i < 1500 := List.mem_range.mp hi
+  obtain ⟨pr, hprmem, hprK, hprfire⟩ :=
+    firing_row_of_indexed (l := witnessRows3000) (start := 0) (i := i)
+      (by omega) (by rwa [Nat.zero_add, hlen])
+      (fun pq hpq =>
+        (List.all_eq_true.mp erdos406_climb_base_3000_band_linear) pq hpq)
+  have hbool : (pr.1 == 1501 + i &&
+      GSTTailAssault406.treeBad pr.1 (2 + pr.2)) = true := by
+    rw [beq_iff_eq.mpr hprK, hprfire]
+  exact List.any_eq_true.mpr ⟨pr, hprmem, hbool⟩
 
 open GSTU2DEventTransport in
 open GSTCanonicalSevenAxisBridge in
@@ -436,6 +515,8 @@ theorem erdos406_universal_verdict_of_tail_3000
 #print axioms treeBad_deep_iff_common_two
 #print axioms no_climb_forbids_edges
 #print axioms tail_collision_automaton_face
+#print axioms erdos406_climb_base_3000_band_linear
+#print axioms firing_row_of_indexed
 #print axioms erdos406_climb_base_3000_band
 #print axioms erdos406_climb_base_3000
 #print axioms erdos406_universal_verdict_of_tail_3000
