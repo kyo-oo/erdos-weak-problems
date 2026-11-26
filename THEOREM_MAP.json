@@ -19989,80 +19989,95 @@
    [
     "theorem",
     "noTernaryTwo_false_of_digit3",
-    94
+    117
    ],
    [
     "theorem",
     "four_pow_mod_three",
-    120
+    146
    ],
    [
     "theorem",
     "digit_witness_of_scan_false",
-    133
+    159
    ],
    [
     "def",
     "erdos_406_covered_class",
-    151
+    177
    ],
    [
     "theorem",
     "digit_two_of_covered_class",
-    160
+    186
+   ],
+   [
+    "def",
+    "erdos_406_omega_covered",
+    209
+   ],
+   [
+    "theorem",
+    "digit_two_of_omega_covered",
+    220
+   ],
+   [
+    "theorem",
+    "erdos_406_climb_fragment_class_two",
+    237
    ],
    [
     "theorem",
     "digit_two_of_kernel_base",
-    181
+    251
    ],
    [
     "theorem",
     "digit_two_five_six_seven",
-    192
+    261
    ],
    [
     "theorem",
     "digit_two_of_base_or_covered",
-    200
+    269
    ],
    [
     "def",
     "erdos_406_frontier_class",
-    219
+    293
    ],
    [
     "theorem",
     "erdos_406_even_conjecture_of_frontier_fires",
-    229
+    303
    ],
    [
     "theorem",
     "erdos_406_full_verdict_iff_frontier_fires",
-    254
+    333
    ],
    [
     "theorem",
     "erdos_406_unified_row_of_frontier_fires",
-    278
+    357
    ],
    [
     "theorem",
     "erdos_406_unified_row_iff_frontier_fires",
-    291
+    370
    ],
    [
     "theorem",
     "erdos_406_row_primitive_of_frontier_fires",
-    313
+    395
    ],
    [
     "theorem",
     "erdos_406_verdict_of_base_or_covered",
-    329
+    411
    ]
   ],
-  "lines": 368
+  "lines": 452
  },
  "MonolithGate/TailAssault406.lean": {
   "decls": [

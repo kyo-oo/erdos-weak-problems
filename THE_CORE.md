@@ -1684,7 +1684,37 @@ ThirdWave; FinalVerdict406 green under kernel-406gate), zero hypotheses:
 7. **THE PARTIAL VERDICT** `erdos_406_verdict_of_base_or_covered` — odd n ≥ 9
    (the green odd law) and even n with base-or-covered half, unconditional
    on exactly the stated coverage.
-8. **v3 ADDITION — THE UNIFIED-ROW FACE + THE ROW PRIMITIVE DISCHARGED**
+8. **v4 ADDITION — THE Ω-WAVE FAMILIES + THE UNIFIED-ROW FACE + THE ROW
+   PRIMITIVE DISCHARGED**: `digit_two_of_omega_covered` — the class-two
+   family (K = 3^a·core, a ≥ 1, core ≡ 2 mod 3: the physical Happy row at
+   the LTE cut, `omega_wave_existence_class_two` OmegaWaveLaw:477) and the
+   level-two family (core ≡ 1, 5, 6 mod 9: the digit two at row a+2,
+   `omega_wave_digit_two_class_level_two` :497) — every divisible-by-three
+   exponent outside the tower family now covered UNCONDITIONALLY, with
+   `erdos_406_climb_fragment_class_two` the receipt that class-two at
+   level a ≥ 2 satisfies the climb statement itself
+   (`omega_wave_climb_class_two` :487). THE FRONTIER SHRINKS FROM 44 TO 14
+   CLASSES MOD 81: the five row-family classes {1,10,28,37,64} and the
+   nine tower-family classes {0,12,21,27,36,39,48,63,75} — exactly the
+   two domains of the mission board's named primitives. After the round's
+   own fleet delivered TailAssault406E GREEN (run 45645697924, all
+   receipts axiom-clean): `erdos_406_unified_row_iff_frontier_fires` — the
+   frontier's fire ⟺ `tailF_unified_row_primitive`, the one-statement
+   form of the whole second-observer route (its own green
+   `unified_row_iff_even_conjecture` composed with the coverage law); and
+   `erdos_406_row_primitive_of_frontier_fires` — THE MISSION BOARD'S NAMED
+   `GSTTailFFourthDimension.tailF_row_primitive` DISCHARGED from the
+   frontier outright (via the green one-line subsumption
+   `row_primitive_of_unified_row`). The tower face rides the same
+   composition through `tower_primitive_of_unified_row` (green), whose
+   sheet-gate hypothesis is the tower route's own named residual — and
+   the tower family is exactly the nine classes above, cornered further
+   by the green dust analysis (DustCandidates406: the full dust shape
+   collapses to the two classes 4 and 16 mod 27, with stream uniqueness).
+   The problem's residual now has THREE proven-equivalent faces: the full
+   verdict, the unified row word, and the frontier's fire — and the row
+   primitive follows from each.
+   (Superseded v3 note:
    (after the round's own fleet delivered TailAssault406E GREEN, run
    45645697924, all receipts axiom-clean): `erdos_406_unified_row_iff_
    frontier_fires` — the frontier's fire ⟺ `tailF_unified_row_primitive`,
