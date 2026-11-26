@@ -401,7 +401,7 @@ theorem erdos406_climb_base_3000_band_linear :
 every index below the table's length there is a MEMBER row carrying
 that index's exponent with a firing tree edge.  Pure induction on the
 table, position-tracked — no kernel scan. -/
-theorem firing_row_of_indexed {l : List (Nat × Nat)} {start i : Nat}
+theorem firing_row_of_indexed {l : List (Nat × Nat)} (start i : Nat)
     (hi : start ≤ i) (hilt : i < start + l.length)
     (h : ∀ pq ∈ indexedRows start l,
       (pq.1.1 == 1501 + pq.2 &&
@@ -418,11 +418,11 @@ theorem firing_row_of_indexed {l : List (Nat × Nat)} {start i : Nat}
       intro hi hilt h
       have hh := h (a, start) (by
         simp only [indexedRows]
-        exact List.mem_cons_self _ _)
+        exact List.mem_cons_self)
       simp only [Bool.and_eq_true, beq_iff_eq] at hh
       obtain ⟨hhK, hhfire⟩ := hh
       rcases Nat.eq_or_lt_of_le hi with heq | hlt
-      · refine ⟨a, List.mem_cons_self _ _, ?_, hhfire⟩
+      · refine ⟨a, List.mem_cons_self, ?_, hhfire⟩
         rw [heq] at hhK
         exact hhK
       · have htail : ∀ pq ∈ indexedRows (start + 1) t,
@@ -451,13 +451,15 @@ theorem erdos406_climb_base_3000_band : (List.all (List.range 1500) (fun i =>
   intro i hi
   have hi' : i < 1500 := List.mem_range.mp hi
   obtain ⟨pr, hprmem, hprK, hprfire⟩ :=
-    firing_row_of_indexed (l := witnessRows3000) (start := 0) (i := i)
+    firing_row_of_indexed (l := witnessRows3000) 0 i
       (by omega) (by rwa [Nat.zero_add, hlen])
       (fun pq hpq =>
         (List.all_eq_true.mp erdos406_climb_base_3000_band_linear) pq hpq)
+  have h1 : (pr.1 == 1501 + i) = true := by simp [hprK]
   have hbool : (pr.1 == 1501 + i &&
       GSTTailAssault406.treeBad pr.1 (2 + pr.2)) = true := by
-    rw [beq_iff_eq.mpr hprK, hprfire]
+    rw [h1, hprfire]
+    rfl
   exact List.any_eq_true.mpr ⟨pr, hprmem, hbool⟩
 
 open GSTU2DEventTransport in
