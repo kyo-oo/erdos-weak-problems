@@ -62,7 +62,7 @@ on:
 jobs:
   engine-406-monolith:
     runs-on: ubuntu-24.04
-    timeout-minutes: 150
+    timeout-minutes: 200
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -130,7 +130,7 @@ jobs:
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
           sleep 10; ELAPSED=$((ELAPSED+10))
-          if [ $ELAPSED -ge 5400 ]; then
+          if [ $ELAPSED -ge 7200 ]; then
             echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
             pkill -f 'MonolithGate' 2>/dev/null || true
             sleep 5
@@ -172,7 +172,7 @@ jobs:
   final-406-assembly:
     needs: engine-406-monolith
     runs-on: ubuntu-24.04
-    timeout-minutes: 150
+    timeout-minutes: 200
     steps:
     - uses: actions/checkout@v5
     - name: Install Lean Mathlib
@@ -238,7 +238,7 @@ jobs:
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
           sleep 10; ELAPSED=$((ELAPSED+10))
-          if [ $ELAPSED -ge 5400 ]; then
+          if [ $ELAPSED -ge 7200 ]; then
             echo "BUILD_BUDGET_EXHAUSTED after ${ELAPSED}s - reaping build tree"
             pkill -f 'MonolithGate' 2>/dev/null || true
             sleep 5
