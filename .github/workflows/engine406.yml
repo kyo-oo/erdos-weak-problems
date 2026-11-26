@@ -125,7 +125,7 @@ jobs:
           find .lake/build -type f \( -name 'GSTTheAct.*' -o -name 'GSTDiagonalRead.*' -o -name 'GSTClimbInfiniteFamily.*' -o -name 'WorldtraceLevelNine406.*' \) -delete || true
         fi
         set +e
-        ( stdbuf -oL -eL lake build MonolithGate.WorldtraceLevelNine406 2>&1 | tee -a engine406.log; exit ${PIPESTATUS[0]} ) &
+        ( stdbuf -oL -eL lake build -j 1 MonolithGate.WorldtraceLevelNine406 2>&1 | tee -a engine406.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
@@ -233,7 +233,7 @@ jobs:
           find .lake/build -type f -name 'FinalAssembly406.*' -delete || true
         fi
         set +e
-        ( stdbuf -oL -eL lake build MonolithGate.FinalAssembly406 2>&1 | tee -a final406.log; exit ${PIPESTATUS[0]} ) &
+        ( stdbuf -oL -eL lake build -j 1 MonolithGate.FinalAssembly406 2>&1 | tee -a final406.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
