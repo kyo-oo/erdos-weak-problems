@@ -1735,7 +1735,22 @@ receipts, artifact upload). The three r34 first-exposure kernels
 (engine/final/tail5) now upload their logs as artifacts (if:always(),
 30-day retention) — every future verdict diagnosable in-repo.
 
-### 21.4 THE FRONTIER (named, exact)
+### 21.4 THE GREEN VERDICT (run 45780774197, commit 71fcf4b)
+
+**kernel-406breakthrough: CI-GREEN.** MonolithGate/RowTowerBreakthrough406
+compiles in GitHub Lean with all hardened gates passed (zero errors, zero
+sorryAx), all FIFTEEN #print-axioms receipts printed with the standard
+clean profile ([propext, Classical.choice, Quot.sound] — zero sorryAx), and
+the GREEN marker `ERDOS_406_ROW_TOWER_BREAKTHROUGH_GREEN` in the log. The
+convergence trail: v3 first exposure (4 defects: the hsplit pow_succ
+direction, the climb_base root-namespace name, the h2K rewrite direction,
+the parity omega context) → v4 (1 defect: the §8 implication-shaped
+coverage hypothesis) → v5 GREEN. The full fleet on the same run: 34 green
+at breakthrough-time, with the heavy engine/final builds carrying their
+artifact logs.
+
+### 21.5 THE FRONTIER (named, exact)
+
 
 Uncovered classes mod 81 (44): 0,1,2,3,4,7,9,10,11,12,13,16,17,21,22,26,27,
 28,29,30,31,34,35,36,37,38,39,40,43,44,47,48,49,61,62,63,64,65,67,70,71,74,
