@@ -1,4 +1,4 @@
-import KernelChamber406.PinsWord
+import KernelChamber406.PinsWordR
 
 -- KernelChamber406 split (S089k, the split-of-the-split): olean-cached part
 -- of the monolith kernel Pins 2b/5: THE PIN ENGINE (§6b) — pin_of_W_

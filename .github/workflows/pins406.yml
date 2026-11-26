@@ -175,7 +175,7 @@ jobs:
         : > kernel74b.log
         ( while true; do
             TS=$(date +%H:%M:%S)
-            P=$(pgrep -f 'PinsWord.lean' | head -1 || true)
+            P=$(pgrep -f 'PinsWord' | head -1 || true)
             if [ -n "$P" ] && [ -r /proc/$P/io ]; then
               echo "WATCH $TS pid=$P read_bytes=$(awk '/^read_bytes/{print $2}' /proc/$P/io) rss_kb=$(awk '/VmRSS/{print $2}' /proc/$P/status)"
             else
@@ -186,7 +186,7 @@ jobs:
         WATCHDOG=$!
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel74b.log
         set +e
-        ( stdbuf -oL -eL lake build KernelChamber406.PinsWord 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
+        ( stdbuf -oL -eL lake build KernelChamber406.PinsWord KernelChamber406.PinsWordR 2>&1 | tee -a kernel74b.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
@@ -673,7 +673,7 @@ jobs:
         : > kernel75.log
         ( while true; do
             TS=$(date +%H:%M:%S)
-            P=$(pgrep -f 'GhostWord.lean' | head -1 || true)
+            P=$(pgrep -f 'GhostWord' | head -1 || true)
             if [ -n "$P" ] && [ -r /proc/$P/io ]; then
               echo "WATCH $TS pid=$P read_bytes=$(awk '/^read_bytes/{print $2}' /proc/$P/io) rss_kb=$(awk '/VmRSS/{print $2}' /proc/$P/status)"
             else
@@ -684,7 +684,7 @@ jobs:
         WATCHDOG=$!
         stdbuf -oL -eL lake build Arsenal.ErdosTernary2.Basic Arsenal.CardinalWorldsCore Mathlib.Tactic.Ring Mathlib.Tactic.NormNum 2>&1 | tee -a kernel75.log
         set +e
-        ( stdbuf -oL -eL lake build KernelChamber406.GhostWord 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
+        ( stdbuf -oL -eL lake build KernelChamber406.GhostWord KernelChamber406.GhostWordR 2>&1 | tee -a kernel75.log; exit ${PIPESTATUS[0]} ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do

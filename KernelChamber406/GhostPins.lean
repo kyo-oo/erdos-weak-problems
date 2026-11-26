@@ -1,4 +1,4 @@
-import KernelChamber406.GhostWord
+import KernelChamber406.GhostWordR
 
 -- KernelChamber406 split (S089k, the split-of-the-split): olean-cached part
 -- of the monolith kernel Ghost 2b/5: THE PIN ENGINE AT DEPTH 100 —
