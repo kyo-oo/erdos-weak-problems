@@ -437,4 +437,5 @@ theorem ghost_head_not_three (u : Nat) (h3 : ¬ (3:Nat) ∣ u) :
 theorem ghost_head_lt_nine (u : Nat) : ghostHead u < 9 := by
   unfold ghostHead
   exact Nat.mod_lt _ (by decide)
+#print axioms PiCollapse406.ghost_congruent_all_depths  -- S089t: receipt relocated from PinsWord (the walk was the word jobs first-command sink)
 end PiCollapse406

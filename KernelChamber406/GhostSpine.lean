@@ -645,4 +645,5 @@ theorem ghost_uniqueness (u u' : Nat)
   have hu' : u' < 3^k := Nat.lt_of_le_of_lt (Nat.le_max_right u u') hk
   rw [Nat.mod_eq_of_lt hu, Nat.mod_eq_of_lt hu'] at h
   exact h
+#print axioms GhostExtinction406.ghost_uniqueness  -- S089t: receipt relocated from GhostWord
 end GhostExtinction406

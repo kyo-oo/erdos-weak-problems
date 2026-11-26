@@ -677,10 +677,10 @@ theorem mod_pow_congr (k : Nat) : ∀ (n a b : Nat), a % k = b % k →
   | 0, a, b, _ => by simp
   | n+1, a, b, h => by
       have ih := mod_pow_congr k n a b h
-      have pa : a^(n+1) = a * a^n := Nat.pow_succ a n
-      have pb : b^(n+1) = b * b^n := Nat.pow_succ b n
+      have pa : a^(n+1) = a^n * a := Nat.pow_succ a n
+      have pb : b^(n+1) = b^n * b := Nat.pow_succ b n
       rw [pa, pb]
-      exact mod_mul_congr k (a * a^n) (b * b^n) a b ih h
+      exact mod_mul_congr k (a^n) (b^n) a b ih h
 
 theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
   | 0 => by
@@ -689,18 +689,26 @@ theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
       have ih := cMod_eq k s
       simp only [cMod, lteCoeff]
       have e2 : (3^(s+1) * (lteCoeff s)^2) % 3^k
-          = (3^(s+1) * (cMod k s)^2) % 3^k :=
-        mod_mul_congr k _ _ _ _ rfl (mod_pow_congr k 2 _ _ ih)
+          = (3^(s+1) * (cMod k s)^2) % 3^k := by
+        have ihm : (lteCoeff s)^2 % 3^k = (cMod k s)^2 % 3^k := by
+          rw [ih]
+          exact mod_pow_congr (3^k) 2 _ _ (Nat.mod_mod _ _).symm
+        exact mod_mul_congr (3^k) _ _ _ _ rfl ihm
       have e3 : (3^(2*s+1) * (lteCoeff s)^3) % 3^k
-          = (3^(2*s+1) * (cMod k s)^3) % 3^k :=
-        mod_mul_congr k _ _ _ _ rfl (mod_pow_congr k 3 _ _ ih)
+          = (3^(2*s+1) * (cMod k s)^3) % 3^k := by
+        have ihm : (lteCoeff s)^3 % 3^k = (cMod k s)^3 % 3^k := by
+          rw [ih]
+          exact mod_pow_congr (3^k) 3 _ _ (Nat.mod_mod _ _).symm
+        exact mod_mul_congr (3^k) _ _ _ _ rfl ihm
+      have ihb : lteCoeff s % 3^k = cMod k s % 3^k :=
+        (Nat.mod_mod (lteCoeff s) (3^k)).symm.trans (congrArg (fun x => x % 3^k) ih.symm)
       have eL : ((lteCoeff s + 3^(s+1) * (lteCoeff s)^2)
           + 3^(2*s+1) * (lteCoeff s)^3) % 3^k
           = ((cMod k s + 3^(s+1) * (cMod k s)^2)
           + 3^(2*s+1) * (cMod k s)^3) % 3^k :=
-        mod_add_congr k _ _ _ _
-          (mod_add_congr k _ _ _ _ rfl e2) e3
-      rw [eL, ← ih]
+        mod_add_congr (3^k) _ _ _ _
+          (mod_add_congr (3^k) _ _ _ _ ihb e2) e3
+      rw [eL]
 
 /-- **W100** — the unit word at depth 100 (dual-verified by the assault
 engine: the cMod recursion ∥ the direct modular division
@@ -725,7 +733,7 @@ theorem coeff_split100 (u : Nat) :
   rw [lteCoeff_99_mod] at hc
   calc lteCoeff 99 * u
       = (3^100 * (lteCoeff 99 / 3^100) + W100) * u := by
-        conv_lhs => rw [hc]
+        conv => lhs; rw [<- hc]
     _ = 3^100 * ((lteCoeff 99 / 3^100) * u) + W100 * u := by ring
 
 /-- **THE THREE FIXED POINTS AT DEPTH 100** — the assault engine's π

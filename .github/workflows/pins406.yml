@@ -98,6 +98,7 @@ jobs:
         set -e
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsSpine rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
+        grep -E "ghost_congruent_all_depths' (does not depend on any axioms|depends on axioms)" kernel74b.log
       shell: bash
     - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
       if: always()
@@ -205,7 +206,6 @@ jobs:
         if [ "$RC" -ne 0 ]; then echo "PINS_PART_FAILED module=PinsWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; then echo "PINS_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel74b.log; exit 1; fi
         grep -E "W61' (does not depend on any axioms|depends on axioms)" kernel74b.log
-        grep -E "ghost_congruent_all_depths' (does not depend on any axioms|depends on axioms)" kernel74b.log
       shell: bash
     - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
       if: always()
@@ -596,6 +596,7 @@ jobs:
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostSpine rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
         grep -E "ghost_head_split' (does not depend on any axioms|depends on axioms)" kernel75.log
+        grep -E "ghost_uniqueness' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
     - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
       if: always()
@@ -702,7 +703,6 @@ jobs:
         kill $WATCHDOG 2>/dev/null || true
         if [ "$RC" -ne 0 ]; then echo "GHOST_PART_FAILED module=GhostWord rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; then echo "GHOST_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel75.log; exit 1; fi
-        grep -E "ghost_uniqueness' (does not depend on any axioms|depends on axioms)" kernel75.log
         grep -E "coeff_split100' (does not depend on any axioms|depends on axioms)" kernel75.log
       shell: bash
     - name: Save lake oleans (ALWAYS - banks progress even on failed jobs)
