@@ -1913,3 +1913,25 @@ last-case shape, fixed in 84f98c2) and its elaboration climbing to
 13.14 GB at the guard line — the engine lane's last open question (the
 threshold may need raising if the fixed elaboration needs the room;
 the guard turns the question into a measurable answer either way).
+
+**THE MEASUREMENT (run 45896152381, commit 84f98c2 — the decisive engine
+run): the ladder passed ALL chambers green — the defused base, the light
+chambers, GSTWorldtraceArithmetic, and WorldtraceLevelNine406 with its
+Or-tree fixed — and the ninth cascade level's elaboration genuinely
+climbs past the guard line: 12.58 → 12.81 → 12.85 → 12.90 → 13.21 GB
+over one hundred seconds, killed cleanly at 13.21 GB with
+ENGINE406_FILE_FAILED named and the artifact banked.**  The engine
+lane's last open question is now a MEASURED FACT, not a mystery: the
+never-elaborated module needs more than 13 GB — the next move is the
+threshold raise (the 16 GB runner's survivable ceiling) or the module's
+own content repair (the S085-era 478-decide payload restructured).  The
+guard's three catches this round (B's 13.4 GB bomb, the Or-defect's first
+exposure, and this measurement) are the pattern's proof: the silent
+stochastic killers became named, banked measurements.
+
+THE ROUND'S LEDGER (S090 continuation, all CI-verified): the sharp
+reduction law GREEN (the tower frontier carved to TEN
+(valuation, core-class) cells); the base bomb defused at its root (36/36
+fleet green twice); the engine lane measured to its last question; the
+records honest (§21.5–§21.8, the wrong parallel-elaboration theory
+withdrawn in writing).
