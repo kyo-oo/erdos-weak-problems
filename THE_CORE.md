@@ -1849,3 +1849,51 @@ all three axiom receipts printed clean
 [propext, Classical.choice, Quot.sound]), zero errors, zero real
 sorryAx (the only log hits are the script's own gate-pattern echoes), and
 the GREEN marker `ERDOS_406_WINDOW_FIRE_GREEN` in the log.
+
+### 21.8 THE BASE BOMB — caught, named, and DEFUSED at its root
+
+The windowfire job's RSS guard (its first catch, run 45879195900,
+commit 3a6d47d) turned the campaign's oldest stochastic killer into a
+clean diagnosis: a single lean process climbing 11.5 → 12.5 → 13.4 GB
+in forty seconds, killed cleanly at 19:16:16 while
+`✖ [8790/8794] Building MonolithGate.TailAssault406B (114s)`.  THE
+BOMB: `TailAssault406B.erdos406_climb_base_3000_band`'s S085 r30 proof
+— `by decide` on `List.all (List.range 1500) (fun i => List.any
+witnessRows3000 ...)`: fifteen hundred any-searches, each walking the
+whole table to its match — over a MILLION kernel allocations with no
+collection, a 13.4 GB single-process elaboration.  This one module is
+the silent killer of the breakthrough job (green on runs 45780774197
+and 45879024099, DEAD on run 45878012472 with the runner-kill
+signature), of the windowfire job's first guarded run, and a 13.4 GB
+pressure source in every closure build carrying it — breakthrough,
+windowfire, tail2/tail4, engine, final.
+
+THE DEFUSAL (commit `S090 THE BASE BOMB DEFUSED`): the quadratic
+kernel scan is replaced by a LINEAR certificate plus a pure-logic
+bridge — `indexedRows` (the table zipped with its positions,
+head-first recursion), `erdos406_climb_base_3000_band_linear`
+(`by decide`: 1500 row checks total, one per row, nothing that
+survives a row) and `firing_row_of_indexed` (the index-to-row bridge:
+pure induction on the table, only repo-proven lemma forms —
+`Bool.and_eq_true`/`beq_iff_eq` per the green TailAssault406:102,
+`Nat.eq_or_lt_of_le` per the green DustCandidates406:212).
+`erdos406_climb_base_3000_band`'s STATEMENT is byte-identical; the
+witness table and the consumer `erdos406_climb_base_3000` are
+unchanged; two new axiom receipts added.  Two first-exposure proof
+defects were caught and fixed before push (the induction hypothesis
+call shape; the omega-unreachable list length).
+
+THE ENGINE LANE, SAME ROUND (the parallel S091 session's transplant
+carries it): S091's fix 2 (`lake build -j 1`) died in two minutes —
+`error: unknown short option '-j'` (run 45890285030; the flag does not
+exist in this lake).  Fixed flag-free (S091 fix 3, S090 assist): the
+serial law implemented as the per-chamber dependency-ordered
+incremental ladder (nine chambers, each builds ALONE through ordinary
+`lake build`, peak RSS = the single-chamber max) under the same RSS
+guard, with S091's budget wrapper, 7200s reaper, receipt-force law,
+zram shield and all gates/receipts preserved byte-identical.  With the
+base bomb defused at its root, the engine ladder's remaining unknown
+is the first true isolated elaboration cost of the vendored heavy
+chambers (GSTClimbInfiniteFamily, GSTWorldtraceArithmetic,
+WorldtraceLevelNine406) — now measurable, guarded, and
+diagnosis-preserving if any one of them is itself a bomb.
