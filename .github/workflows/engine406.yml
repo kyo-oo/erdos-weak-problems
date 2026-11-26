@@ -125,7 +125,36 @@ jobs:
           find .lake/build -type f \( -name 'GSTTheAct.*' -o -name 'GSTDiagonalRead.*' -o -name 'GSTClimbInfiniteFamily.*' -o -name 'WorldtraceLevelNine406.*' \) -delete || true
         fi
         set +e
-        ( stdbuf -oL -eL lake build -j 1 MonolithGate.WorldtraceLevelNine406 2>&1 | tee -a engine406.log; exit ${PIPESTATUS[0]} ) &
+        # RSS guard: any single runaway lean past 13 GB dies cleanly
+        # (the windowfire carrier's proven pattern, run 45879195900: the
+        # guard caught TailAssault406B's 13.4 GB climb and named it)
+        ( while sleep 20; do
+            NOW=$(date -u +%H:%M:%S)
+            PEAK=$(ps -eo rss=,comm= | awk '$2=="lean"{if($1>m)m=$1} END{print m+0}')
+            echo "$NOW peak_lean_rss_kb=$PEAK" >> rss-engine406.log
+            for pid in $(pgrep -x lean); do
+              R=$(ps -o rss= -p "$pid" 2>/dev/null || echo 0)
+              if [ "$R" -gt 13000000 ]; then
+                echo "$NOW RSS_GUARD killing lean pid=$pid rss=${R}KB" | tee -a engine406.log
+                kill -9 "$pid"
+              fi
+            done
+          done ) &
+        GUARD=$!
+        # THE SERIAL LAW, FLAG-FREE: lake build -j 1 is not a valid flag in
+        # this lake (run 45890285030: "error: unknown short option '-j'");
+        # the serial law is implemented instead by the per-chamber
+        # dependency-ordered incremental ladder - each chamber builds ALONE,
+        # peak RSS = the single-chamber max.
+        ( for m in GSTClimbTruthValue GSTTheAct GSTDiagonalRead GSTClimbInfiniteFamily GSTTheActConstruction GSTBladeWave GSTTowerFire GSTWorldtraceArithmetic WorldtraceLevelNine406; do
+            echo "ENGINE406_CHAMBER_BEGIN file=$m"
+            stdbuf -oL -eL lake build MonolithGate.$m 2>&1 | tee -a engine406.log
+            RC=${PIPESTATUS[0]}
+            if [ "$RC" -ne 0 ]; then echo "ENGINE406_FILE_FAILED file=$m rc=$RC" | tee -a engine406.log; exit 1; fi
+            if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; then echo "ENGINE406_CHAMBER_NEGATIVE_GATE_TRIPPED file=$m" | tee -a engine406.log; exit 1; fi
+            echo "ENGINE406_CHAMBER_OK file=$m"
+          done
+          exit 0 ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
@@ -140,6 +169,7 @@ jobs:
           fi
         done
         wait $BPID 2>/dev/null; RC=$?
+        kill $GUARD 2>/dev/null || true
         set -e
         if [ "$RC" -ne 0 ]; then echo "ENGINE406_BUILD_FAILED rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; then echo "ENGINE406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' engine406.log; exit 1; fi
@@ -166,7 +196,9 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: engine406-log
-        path: engine406.log
+        path: |
+          engine406.log
+          rss-engine406.log
         retention-days: 30
 
   final-406-assembly:
@@ -233,7 +265,36 @@ jobs:
           find .lake/build -type f -name 'FinalAssembly406.*' -delete || true
         fi
         set +e
-        ( stdbuf -oL -eL lake build -j 1 MonolithGate.FinalAssembly406 2>&1 | tee -a final406.log; exit ${PIPESTATUS[0]} ) &
+        # RSS guard: any single runaway lean past 13 GB dies cleanly
+        # (the windowfire carrier's proven pattern, run 45879195900: the
+        # guard caught TailAssault406B's 13.4 GB climb and named it)
+        ( while sleep 20; do
+            NOW=$(date -u +%H:%M:%S)
+            PEAK=$(ps -eo rss=,comm= | awk '$2=="lean"{if($1>m)m=$1} END{print m+0}')
+            echo "$NOW peak_lean_rss_kb=$PEAK" >> rss-final406.log
+            for pid in $(pgrep -x lean); do
+              R=$(ps -o rss= -p "$pid" 2>/dev/null || echo 0)
+              if [ "$R" -gt 13000000 ]; then
+                echo "$NOW RSS_GUARD killing lean pid=$pid rss=${R}KB" | tee -a final406.log
+                kill -9 "$pid"
+              fi
+            done
+          done ) &
+        GUARD=$!
+        # THE SERIAL LAW, FLAG-FREE: lake build -j 1 is not a valid flag in
+        # this lake (run 45890285030: "error: unknown short option '-j'");
+        # the serial law is implemented instead by the per-chamber
+        # dependency-ordered incremental ladder - each chamber builds ALONE,
+        # peak RSS = the single-chamber max.
+        ( for m in GSTClimbTruthValue GSTTheAct GSTDiagonalRead GSTClimbInfiniteFamily GSTTheActConstruction GSTBladeWave GSTTowerFire GSTWorldtraceArithmetic WorldtraceLevelNine406 FinalAssembly406; do
+            echo "FINAL406_CHAMBER_BEGIN file=$m"
+            stdbuf -oL -eL lake build MonolithGate.$m 2>&1 | tee -a final406.log
+            RC=${PIPESTATUS[0]}
+            if [ "$RC" -ne 0 ]; then echo "FINAL406_FILE_FAILED file=$m rc=$RC" | tee -a final406.log; exit 1; fi
+            if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; then echo "FINAL406_CHAMBER_NEGATIVE_GATE_TRIPPED file=$m" | tee -a final406.log; exit 1; fi
+            echo "FINAL406_CHAMBER_OK file=$m"
+          done
+          exit 0 ) &
         BPID=$!
         ELAPSED=0
         while kill -0 $BPID 2>/dev/null; do
@@ -248,6 +309,7 @@ jobs:
           fi
         done
         wait $BPID 2>/dev/null; RC=$?
+        kill $GUARD 2>/dev/null || true
         set -e
         if [ "$RC" -ne 0 ]; then echo "FINAL406_BUILD_FAILED rc=$RC"; exit 1; fi
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; then echo "FINAL406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' final406.log; exit 1; fi
@@ -276,5 +338,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: final406-log
-        path: final406.log
+        path: |
+          final406.log
+          rss-final406.log
         retention-days: 30
