@@ -1,4 +1,5 @@
 import Mathlib
+import Arsenal.CardinalWorldsCore
 
 /-!
 # THE CARDINAL WORLDS — the deep theorems
@@ -37,15 +38,8 @@ set_option maxHeartbeats 10000000
 
 /-! ## §1 The ternary readers — the verdict and the signature scan -/
 
-/-- The Cantor verdict: does the ternary expansion of `n` avoid the digit 2? -/
-def noTernaryTwo (n : Nat) : Bool :=
-  if n = 0 then true
-  else if n % 3 = 2 then false
-  else noTernaryTwo (n / 3)
-termination_by n
-decreasing_by
-  have hk : 0 < n := by omega
-  exact Nat.div_lt_self hk (by decide : 1 < 3)
+-- noTernaryTwo moved VERBATIM to Arsenal.CardinalWorldsCore (S089r import diet;
+-- same root-level constant via this file's import — the fleet scope is unchanged).
 
 -- Structural version of noTernaryTwo for decide compatibility
 def noTernaryTwoStruct : Nat → Nat → Bool
@@ -80,13 +74,8 @@ theorem noTernaryTwo_eq_struct (n k : Nat) (hk : n + 1 ≤ k) :
           have hk'_ge : (n / 3) + 1 ≤ k' := by omega
           exact ih (n / 3) hdiv k' hk'_ge
 
-/-- The signature scan: does the ternary expansion of `n` carry the digit 2? -/
-def hasTernaryTwo (n : Nat) : Bool :=
-  if n = 0 then false
-  else if n % 3 = 2 then true
-  else hasTernaryTwo (n / 3)
-termination_by n
-decreasing_by exact Nat.div_lt_self (by omega) (by decide : 1 < 3)
+-- hasTernaryTwo moved VERBATIM to Arsenal.CardinalWorldsCore (S089r import diet;
+-- same root-level constant via this file's import — the fleet scope is unchanged).
 
 /-- Structural version of hasTernaryTwo (no WellFounded, decide can reduce) -/
 def hasTernaryTwoStruct : Nat → Nat → Bool
@@ -782,24 +771,9 @@ theorem three_pow_ge_9 (p : Nat) (hp : 2 ≤ p) : 9 ≤ 3^p := by
 theorem four_lt_three_pow (p : Nat) (hp : 2 <= p) : 4 < 3^p := by
   have h9 : 9 ≤ 3^p := three_pow_ge_9 p hp; omega
 
-/-- **THE DIGIT-TO-SCAN LAW.**  A ternary digit 2 at any position fires the
-signature scan. -/
-theorem hasTernaryTwo_of_digit (n : Nat) (q : Nat) (h : n / 3^q % 3 = 2) :
-    hasTernaryTwo n = true := by
-  induction q generalizing n with
-  | zero =>
-    rw [Nat.pow_zero, Nat.div_one] at h
-    have hn : n ≠ 0 := by intro hnn; rw [hnn, Nat.zero_mod] at h; exact absurd h (by decide)
-    rw [hasTernaryTwo.eq_def n, if_neg hn, if_pos h]
-  | succ q ih =>
-    have hn : n ≠ 0 := by intro hnn; rw [hnn, Nat.zero_div, Nat.zero_mod] at h; exact absurd h (by decide)
-    have hkey : n / 3^(q+1) = (n / 3) / 3^q := by
-      rw [show 3^(q+1) = 3 * 3^q from by rw [Nat.pow_succ]; ac_rfl, Nat.div_div_eq_div_mul]
-    rw [hkey] at h
-    have hih : hasTernaryTwo (n / 3) = true := ih (n / 3) h
-    by_cases hmod : n % 3 = 2
-    · rw [hasTernaryTwo.eq_def n, if_neg hn, if_pos hmod]
-    · rw [hasTernaryTwo.eq_def n, if_neg hn, if_neg hmod]; exact hih
+-- hasTernaryTwo_of_digit moved VERBATIM to Arsenal.CardinalWorldsCore (S089r
+-- import diet; same root-level constant via this file's import — the fleet
+-- scope is unchanged).
 
 theorem hasTernaryTwo_pos (n : Nat) (h : hasTernaryTwo n = true) :
     ∃ p : Nat, n / 3^p % 3 = 2 := by
