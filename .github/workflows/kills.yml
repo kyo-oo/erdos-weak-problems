@@ -2766,6 +2766,20 @@ jobs:
     - name: "Kernel 406windowfire - THE WINDOW FIRE (S090 v6, BOSS order COMPLETE THE TASK / USE MY OWN MATHS): the tower frontier carved by the diagonal read's own fire bands - the window-covered law (digit_two_of_window_covered: the level-two band K = 3^a*core, a >= 2, core = 13,25 mod 27, fires at row a+3; the level-three band a >= 3, core = 4,34,49,70 mod 81, fires at row a+4 - both uniform in the valuation scale, the vendored diagonal read's own theorems) and THE SHARP REDUCTION LAW (erdos_406_full_verdict_iff_sharp_frontier_fires: the FULL verdict EQUIVALENT to the sharp frontier firing - the fourteen-class frontier minus the window bands, now TEN named (valuation, core-class) cells: the five row classes {1,10,28,37,64} mod 81, the five valuation-one tower classes 12,21,39,48,75 mod 81 (core = 4,7,13,16,25 mod 27), the valuation-two remainders class 36 with core = 4,22 mod 27 and class 63 with core = 7,16 mod 27, and the valuation-three-plus remainders classes 27/0 with core in {7,16,22,31,43,58,61,76} mod 81 - the green dust collapse's own two classes 4,16 mod 27 pinning the valuation-one kill candidates 21,39,75 for the tailF route's tower primitive composition)"
       run: |
         set -euo pipefail
+        ( while sleep 20; do
+            NOW=$(date -u +%H:%M:%S)
+            PEAK=$(ps -eo rss=,comm= | awk '$2=="lean"{if($1>m)m=$1} END{print m+0}')
+            echo "$NOW peak_lean_rss_kb=$PEAK" >> rss-windowfire406.log
+            for pid in $(pgrep -x lean); do
+              R=$(ps -o rss= -p "$pid" 2>/dev/null || echo 0)
+              if [ "$R" -gt 13000000 ]; then
+                echo "$NOW RSS_GUARD killing lean pid=$pid rss=${R}KB" | tee -a windowfire406.log >> rss-windowfire406.log
+                kill -9 "$pid"
+              fi
+            done
+          done ) &
+        GUARD=$!
+        trap 'kill $GUARD 2>/dev/null || true' EXIT
         set +e
         timeout 3600 lake build MonolithGate.WindowFire406 2>&1 | tee -a windowfire406.log
         RC1=${PIPESTATUS[0]}
