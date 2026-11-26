@@ -1763,44 +1763,45 @@ fourteen classes in v4/v5, all three faces (full verdict / unified row /
 frontier fire) certified equivalent in the green reduction law
 (`erdos_406_full_verdict_iff_frontier_fires`).
 
-### 21.6 THE ENGINE/FINAL LONG POLES — the resource-kill mechanism, read; the carriers transplanted
+### 21.6 THE ENGINE/FINAL LONG POLES — the resource-kill mechanism, read and named; the carriers transplanted
 
 Both S085-era long-pole jobs (`kernel-406engine`, `kernel-406final`) had
-NEVER completed: every prior run dies ~100 minutes into the FIRST command
-(`timeout 5400 lake build MonolithGate.GSTWorldtraceArithmetic` /
-`...WorldtraceLevelNine406`), with the build step's conclusion `None`, the
-`if: always()` artifact upload never reached, and the job log blob lost
-(BlobNotFound on retrieval) — the signature of the HOSTED RUNNER ITSELF
-losing the job, not a Lean error and not the 90-minute timeout (a timeout
-would exit rc=124 through the script's own gates).
+NEVER completed in fourteen-plus runs: the build step's conclusion `None`,
+the `if: always()` artifact upload never reached, and the job log blob
+lost (BlobNotFound on retrieval) — the signature of the HOSTED RUNNER
+ITSELF losing the job, not a Lean error (zero Lean errors in every
+uploaded log) and not the 90-minute timeout (a timeout would exit rc=124
+through the script's own gates).
 
-The mechanism, read from the green breakthrough job's own log: `lake build`
-elaborates the closure's heavy vendored chambers IN PARALLEL (the hosted
-runner's 4 vCPUs) — GSTWorldtraceArithmetic (138 decides),
-WorldtraceLevelNine406 (478 decides on 59049-structures),
-GSTClimbInfiniteFamily (56 decides + 64 axiom walks), and the rest of the
-nine-chamber ladder — and the four-at-a-time elaboration exceeds the 16 GB
-hosted runner while NO single chamber ever received its own isolated
-process (the per-file `lake env lean` loop is second in the script and
-never reached). The breakthrough closure (green, ~10.5 min) carries none
-of these chambers — that is the whole difference.
+THE MECHANISM, named (the S091 diagnosis, confirmed by this session's own
+windowfire log): the jobs' SECOND stage — the redundant per-file
+`lake env lean MonolithGate/<chamber>.lean` re-elaboration loop — is the
+bomb carrier. The closure builds themselves were never the problem: the
+four prior artifact logs (runs 45645697924 / 45653220937 / 45759658894 /
+45778947485) show the full closure building GREEN with receipts
+(`[8792/8792] Built GSTWorldtraceArithmetic (487-552s)`), and the
+windowfire job's own log now shows the light chambers building in three
+seconds flat (GSTClimbTruthValue 2.9s, GSTTheAct 2.9s, GSTDiagonalRead
+3.6s — their first isolated CI exposure, GREEN). The re-elaboration loop
+recompiles each chamber FROM SOURCE against the DESERIALIZED oleans, and
+the S089 deserialization law applies: the `#print axioms` walks on
+deserialized terms are the silent memory bomb — the loop burns ~90+
+minutes in silence and the runner dies. (This session's first reading —
+four-at-a-time parallel elaboration in the closure build — was WRONG and
+is withdrawn: the closure builds were green all along.)
 
-THE RESOLUTION (the S091 carrier transplant, superseding this session's
-per-chamber diet draft): both jobs removed from the shared 37-job pool
-(the S089j law: the pool is the executioner) and reborn in the dedicated
-`engine406.yml` with the full S089q survival stack — the one budget-wrapped
-stdbuf live-streamed build of `MonolithGate.WorldtraceLevelNine406`
-carrying all eight gates (the redundant 9-file re-elaboration loop
-deleted: its receipts already surface in the lake build output, proven in
-four artifact logs), the receipt-force law (the receipt-target modules'
-oleans deleted pre-build so a warm cache cannot starve the gates), the
-final job needs-chained behind the engine, the zram memory shield, and
-artifact upload ALWAYS. Both negative gates and all 8+11 receipt gates
-byte-identical to the fleet versions. This session's independent reading
-of the kill mechanism stands as the diagnosis: the four-at-a-time parallel
-elaboration sum exceeds the runner while no single chamber ever got its
-own isolated process. The climb seam remains the third route; the honest
-record of the collision's refutation is above (§21.2).
+THE RESOLUTION (the S091 carrier transplant): both jobs removed from the
+shared 37-job pool (the S089j law: the pool is the executioner) and reborn
+in the dedicated `engine406.yml` with the full S089q survival stack — the
+ONE budget-wrapped stdbuf live-streamed build of
+`MonolithGate.WorldtraceLevelNine406` carrying all eight gates (the
+redundant 9-file re-elaboration loop DELETED), the receipt-force law (the
+receipt-target modules' oleans deleted pre-build so a warm cache cannot
+starve the gates), the final job needs-chained behind the engine, the
+zram memory shield, and artifact upload ALWAYS. Both negative gates and
+all 8+11 receipt gates byte-identical to the fleet versions. The climb
+seam remains the third route; the honest record of the collision's
+refutation is above (§21.2).
 
 ### 21.7 THE WINDOW FIRE (v6, the tower frontier carved)
 
@@ -1833,3 +1834,18 @@ three vendored chambers GSTClimbTruthValue, GSTTheAct, GSTDiagonalRead
 pre-built serially RSS-guarded — their first CI exposure outside the
 engine lane — then the closure, the module, three axiom receipts and the
 GREEN marker).
+
+**THE GREEN VERDICT (run 45879024099, commit c10c555): CI-GREEN, first
+exposure, zero defects.** The three vendored chambers built green in
+their first isolated CI exposure (GSTClimbTruthValue 2.9s, GSTTheAct
+2.9s, GSTDiagonalRead 3.6s — the diagonal read's own window receipts
+`window_fire_level1/2/3`, `diagonal_window_law` surfacing with the
+standard clean profile), the module compiled green (WindowFire406 3.1s),
+all three axiom receipts printed clean
+(`WindowFire406.digit_two_of_window_covered`:
+[propext, Classical.choice, Quot.sound];
+`WindowFire406.erdos_406_even_conjecture_of_sharp_frontier_fires` and
+`WindowFire406.erdos_406_full_verdict_iff_sharp_frontier_fires`:
+[propext, Classical.choice, Quot.sound]), zero errors, zero real
+sorryAx (the only log hits are the script's own gate-pattern echoes), and
+the GREEN marker `ERDOS_406_WINDOW_FIRE_GREEN` in the log.
