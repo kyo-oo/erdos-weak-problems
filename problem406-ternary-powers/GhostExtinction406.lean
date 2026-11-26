@@ -682,12 +682,24 @@ theorem mod_pow_congr (k : Nat) : ∀ (n a b : Nat), a % k = b % k →
       rw [pa, pb]
       exact mod_mul_congr k (a^n) (b^n) a b ih h
 
+-- S089u THE IMPORT-EXPLOSION FIX (locally proven, forensics V11/V12):
+-- 'simp only [cMod, lteCoeff]' on the IMPORTED recursive lteCoeff explodes
+-- (300+s hang locally, the CI's 25-min 15GB burn). Single-shot helper
+-- equations with shared subterms replace the simp unfold.
+theorem cMod_succ (k s : Nat) : cMod k (s+1) =
+    (cMod k s + 3^(s+1) * (cMod k s)^2 + 3^(2*s+1) * (cMod k s)^3) % 3^k := by
+  rw [cMod]
+
+theorem lteCoeff_succ_eq (s : Nat) : lteCoeff (s+1) =
+    lteCoeff s + 3^(s+1) * (lteCoeff s)^2 + 3^(2*s+1) * (lteCoeff s)^3 := by
+  rw [lteCoeff]
+
 theorem cMod_eq (k : Nat) : ∀ s : Nat, cMod k s = lteCoeff s % 3^k
   | 0 => by
-      simp only [cMod, lteCoeff]
+      rw [cMod, lteCoeff]
   | s+1 => by
       have ih := cMod_eq k s
-      simp only [cMod, lteCoeff]
+      rw [cMod_succ, lteCoeff_succ_eq]
       have e2 : (3^(s+1) * (lteCoeff s)^2) % 3^k
           = (3^(s+1) * (cMod k s)^2) % 3^k := by
         have ihm : (lteCoeff s)^2 % 3^k = (cMod k s)^2 % 3^k := by
