@@ -1935,3 +1935,73 @@ reduction law GREEN (the tower frontier carved to TEN
 fleet green twice); the engine lane measured to its last question; the
 records honest (§21.5–§21.8, the wrong parallel-elaboration theory
 withdrawn in writing).
+
+## §22. S092 — THE MAHLER BRIDGE ROUND (the bag re-recovered; the universe vendored; the ghost chamber enters the CI-verified proof; the tower family reduced to the ONE named Mahler input)
+
+**THE ROUND'S INPUTS (BOSS's orders, all executed):** the zip bag
+re-recovered from the Drive link through the share-chat storage trail
+(the token live, both skills activated, English only — the law); the
+erdos problem repo's LATEST BRANCH (kyo-oo/HC-PROOF main, 183 files)
+copied ENTIRELY into the campaign as library HCUniverse (the parallel
+session's Mission A, two repair rounds); GitHub CI the only Lean judge
+(zero local Lean); the sandbox protection system rebuilt (backup.sh +
+cron guardian 551284 + the bashrc anchor + the token never in git).
+
+**THE MATHEMATICS (this session's Mission C, kernel kernel-406mahler):**
+the ghost chamber (GSTGhostRayExclusion — the ghost ray, the all-ones
+middle third, the tower lock, the witness divisibility) and the
+relative-precision Mahler chamber (GSTWorldtraceMahler — MahlerSharp,
+the relative lock, the extinction theorem, the crown) vendored into the
+CI-verified MonolithGate universe, then composed into NEW laws no
+single source file contains (MonolithGate/MahlerBridge406.lean):
+
+1. **THE IDENTIFICATION** `c_eq_omegaCutWord`: the LTE tower
+   coefficient and the seed-one omega cut word are ONE object (the
+   unique quotient of the exact cut factorization) — the ghost
+   language and the dust language now interchangeable.
+2. **THE BRIDGE** `ghost_of_dust_shape`: the mission board's full dust
+   shape IS the ghost ray — the middle-third escalation plus the
+   identification. Two languages, one object.
+3. **THE MAHLER DUST FRACTURE** `mahler_dust_fracture`: under the
+   Mahler sharpness input, every three-free core's diagonal FIRES at a
+   named depth — the all-ones placement the ghost demands at every
+   depth is impossible at some depth for EVERY integer core. The dust
+   shape is dead on arrival under MahlerSharp.
+4. **THE DIAGONAL-TO-TOWER FIRE** `tower_digit_two_of_diagonal_fire`:
+   a diagonal fire at depth k₀ ≤ s+1 is a ternary digit two of the
+   tower 4^(3^s·core) at the NAMED row s+k₀ — the window law reading
+   the frozen diagonal's top-third fire into the power's digit stream,
+   through the mixed-coefficient trit transfer (c(s) ≡ c(k₀−1) mod
+   3^k₀ — the frozen diagonal's own stabilization).
+5. **THE TOWER VERDICT** `tower_verdict_of_mahler`: under Mahler
+   sharpness, every tower EITHER owns its digit two outright at a named
+   row (cut s ≥ k₀−1, the minimal fire depth by well-ordering) OR
+   carries its dodge band intact (every depth k ≤ s+1 dodges — exactly
+   the mission board's tower-primitive hypothesis domain). THE TOWER
+   FAMILY'S ENTIRE REMAINING CONTENT IS THE ONE NAMED MAHLER INPUT PLUS
+   THE BOARD'S OWN PRIMITIVE FOR THE BELOW-FIRE CUTS.
+
+**THE HONEST BOUNDARY (the law: no dressing):** the #406 residual after
+this round is EXACTLY TWO named objects, both carried as explicit defs
+in the vendored GSTWorldtraceMahler: (1) MAHLERSHARP — no admissible
+(a,u) pair receives the relative lock; equivalently 2u·L is never the
+half-integer 2a−9, where L is the frozen diagonal (the limit LTE
+coefficient, 3-adically log(4)/3) — the 3-adic irrationality family;
+the numerical shadow: every 3-free core < 200 fires by depth ≤ 20
+(battery406f.py T5); (2) THE COMPRESSION — CantorianPower K implies
+its core's ghost ray. Under both, the crown is unconditional
+(worldtrace_mahler_no_cantorian → the act → tailF → the full Erdős
+statement — all green compositions). The row family's content: the
+census-bridge / anti-clustering / entropy lane (the 2-adic budget
+side: the measured max v₂ over 0/1-ternary sums below 3^M runs ≈ M
+against the kill threshold 1.585·M — huge margin; the entropy law is
+the named next lane; battery406f.py T4's strong form verified: no
+0/1-ternary below 3^M(K) divisible by 4^K for K ∈ {8,10,12}).
+
+**THE OFFICIAL COMPARATOR: 35/35 PASS — "YOUR SOLUTION IS OKAY"** (the
+gate extended with the S092 claims: the Mahler-bridge battery
+dual-method — the ghost congruence on both dust-candidate streams to
+level 30, the stream non-termination evidence (15/27, 17/27 nonzero, no
+period ≤ 12), the survivor tree law (exact doubling, one dead child per
+parent, through level 11), the rider anti-clustering strong form, the
+fracture scan; the kernel symbol check; the N-STREAM negative control).
