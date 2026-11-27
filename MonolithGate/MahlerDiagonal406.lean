@@ -156,6 +156,13 @@ theorem digit_shift_at (σ W j : Nat) :
     have hm : 3^(σ+1) * (3^j - 1) < 3^(σ+1) * 3^j :=
       Nat.mul_lt_mul_of_pos_left hltj hpos
     rw [hpow] at hm
+    have hgap : 3^(σ+1+j) = 3^(σ+1) * (3^j - 1) + 3^(σ+1) := by
+      linear_combination -hpow
+    have h2 : (2:Nat) ≤ 3^(σ+1) := by
+      obtain ⟨s', rfl⟩ : ∃ s', σ + 1 = s' + 1 := ⟨σ, by omega⟩
+      rw [Nat.pow_succ]
+      have hs' : (1:Nat) ≤ 3^s' := by positivity
+      omega
     omega
   have hdiv : (1 + 3^(σ+1) * (W % 3^j) + 3^(σ+1+j) * (W / 3^j)) / 3^(σ+1+j)
       = W / 3^j := by
@@ -337,7 +344,7 @@ theorem c_not_three (n : Nat) : ¬ 3 ∣ GSTTowerFire.c n := by
           by rw [hm]; ring⟩
       have hcorr0 : (3^(n+1) * (GSTTowerFire.c n * GSTTowerFire.c n
           + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n))) % 3 = 0 :=
-        (Nat.dvd_iff_mod_eq_zero _ _).mp hcorr
+        Nat.dvd_iff_mod_eq_zero.mp hcorr
       rw [hstep, Nat.add_mod, hcorr0] at hdiv
       omega
 
@@ -538,8 +545,8 @@ theorem exists_val : ∀ (n : Nat) (x : ℤ), x.natAbs = n → x ≠ 0 →
         rw [hy, pow_succ_three] at hdvd
         obtain ⟨k, hk⟩ := hdvd
         refine ⟨k, ?_⟩
-        have hring : 3 * ((3:ℤ)^(t+1) * k) = 3 * y := by
-          linear_combination -hk
+        have hring : 3 * y = 3 * ((3:ℤ)^(t+1) * k) := by
+          linear_combination hk
         exact Int.eq_of_mul_eq_mul_left (by norm_num : (3:ℤ) ≠ 0) hring
     · exact ⟨0, one_dvd x, by simpa using h3⟩
 
