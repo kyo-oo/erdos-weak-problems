@@ -116,7 +116,7 @@ theorem pow_three_cancel_aux : ∀ (s : Nat) (x y : ℤ), ¬ (3:ℤ) ∣ x →
       have h2 : (3:ℤ)^(s+1) ∣ y := ih x y hx h1
       obtain ⟨k, hk⟩ := h
       obtain ⟨j, hj⟩ := h2
-      have hpow : (3:ℤ)^((s+1)+1) = 3 * (3:ℤ)^(s+1) :=
+      have hpow : (3:ℤ)^((s+1)+1) = (3:ℤ)^(s+1) * 3 :=
         pow_succ (3:ℤ) (s+1)
       rw [hpow] at hk
       have hcan : (3:ℤ)^(s+1) * (x * j) = (3:ℤ)^(s+1) * (3 * k) := by
@@ -158,12 +158,7 @@ theorem nat_eq_zero_of_dvd_of_lt {a b : Nat} (h : a ∣ b) (hlt : b < a) :
 /-- The cast of a power of three is the power of the cast. -/
 theorem int_pow_three_cast (t : Nat) :
     ((3^(t+1) : ℕ) : ℤ) = (3:ℤ)^(t+1) := by
-  induction t with
-  | zero => norm_num
-  | succ t ih =>
-      rw [Nat.pow_succ 3 (t+1), pow_succ (3:ℤ) (t+1)]
-      push_cast
-      rw [ih]
+  push_cast
 
 /-- An integer power of three dividing a natural cast divides the
 natural number. -/
@@ -202,14 +197,12 @@ theorem c_mono (t s : Nat) (hts : t ≤ s) :
         intro ht0
         have ht : t = 0 := by omega
         rw [ht]
-        exact le_refl _
     | succ s ih =>
         intro hts'
         rcases Nat.lt_or_ge t (s+1) with hlt | hge
         · exact le_trans (ih (by omega)) (c_le_succ s)
         · have hte : t = s + 1 := by omega
           rw [hte]
-          exact le_refl _
   exact key s hts
 
 /-- **THE CUMULATIVE STABILIZATION.**  For `t ≤ s`, the tower
@@ -225,11 +218,11 @@ theorem c_diff_dvd (t s : Nat) (hts : t ≤ s) :
   have hds' : (GSTTowerFire.c s : ℤ)
       = ((3^(t+1) : ℕ) : ℤ) * ((GSTTowerFire.c s / 3^(t+1) : ℕ) : ℤ)
       + ((GSTTowerFire.c t % 3^(t+1) : ℕ) : ℤ) := by
-    exact_mod_cast hds
+    exact_mod_cast hds.symm
   have hdt' : (GSTTowerFire.c t : ℤ)
       = ((3^(t+1) : ℕ) : ℤ) * ((GSTTowerFire.c t / 3^(t+1) : ℕ) : ℤ)
       + ((GSTTowerFire.c t % 3^(t+1) : ℕ) : ℤ) := by
-    exact_mod_cast hdt
+    exact_mod_cast hdt.symm
   rw [int_pow_three_cast t] at hds' hdt'
   linear_combination hds' - hdt'
 
@@ -273,10 +266,12 @@ theorem rider_global_pin (a u : Nat)
 theorem two_mul_c_not_dvd_three (s : Nat) :
     ¬ (3:ℤ) ∣ (2 * (GSTTowerFire.c s : ℤ)) := by
   intro h
-  rw [Int.dvd_iff_emod_eq_zero, Int.mul_emod] at h
-  norm_num at h
-  rcases mul_eq_zero.mp h with h2 | hX
-  · norm_num at h2
+  rw [Int.dvd_iff_emod_eq_zero] at h
+  rw [Int.mul_emod] at h
+  have h2 : (2:ℤ) % 3 = 2 := by norm_num
+  rw [h2] at h
+  rcases mul_eq_zero.mp h with hz | hX
+  · norm_num at hz
   · exact coe_not_three_dvd (c_not_three s) hX
 
 /-- **THE CLASS COLLAPSE.**  At every depth `s`, all same-head riders
@@ -333,7 +328,7 @@ theorem chain_of_riderGE (a u : Nat) (hu : ¬ 3 ∣ u) (h : RiderGE a u) :
     have hmS : S₀ ≤ max S₀ t := le_max_left _ _
     have hmt : t ≤ max S₀ t := le_max_right _ _
     have hGE : (3:ℤ)^((max S₀ t)+1) ∣ D a u (max S₀ t) :=
-      h (max S₀ t) hmS
+      h (max S₀ t)
     have hF : ¬ (3:ℤ)^(t+1) ∣ D a u (max S₀ t) :=
       (hf (max S₀ t) hmS).2
     exact hF ((pow_dvd_pow 3 (by omega)).trans hGE)
@@ -449,7 +444,7 @@ theorem c_int_mod81 (s : Nat) (hs : 3 ≤ s) :
   have hcast : ((81 : ℕ) : ℤ) = (3:ℤ)^(3+1) := by norm_num
   have hdm' : (GSTTowerFire.c s : ℤ)
       = ((81 : ℕ) : ℤ) * ((GSTTowerFire.c s / 81 : ℕ) : ℤ) + 16 := by
-    exact_mod_cast hdm
+    exact_mod_cast hdm.symm
   rw [hcast] at hdm'
   linear_combination hdm'
 
@@ -482,7 +477,9 @@ theorem rider_six_family_pin (a u : Nat) (ha : a < 9) (hA : ¬ 3 ∣ a)
     (a = 4 ∧ (27:ℤ) ∣ ((u:ℤ) - 16)) ∨ (a = 5 ∧ (27:ℤ) ∣ ((u:ℤ) - 11)) ∨
     (a = 7 ∧ (27:ℤ) ∣ ((u:ℤ) - 1)) ∨ (a = 8 ∧ (27:ℤ) ∣ ((u:ℤ) - 23)) := by
   have hd2 := rider_depth_two a u h
-  rcases (six_head_iff a |>.mp ⟨ha, hA⟩) with rfl | rfl | rfl | rfl | rfl | rfl
+  have hsix : a = 1 ∨ a = 2 ∨ a = 4 ∨ a = 5 ∨ a = 7 ∨ a = 8 :=
+    (six_head_iff a).mp ⟨ha, hA⟩
+  rcases hsix with rfl | rfl | rfl | rfl | rfl | rfl
   · refine Or.inl ⟨rfl, ?_⟩
     have heq : ((u:ℤ) - 11 * (2 * ((1:Nat):ℤ) - 9)) = ((u:ℤ) + 77) := by
       norm_num

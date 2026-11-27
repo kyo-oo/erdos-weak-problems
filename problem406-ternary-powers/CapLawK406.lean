@@ -143,7 +143,7 @@ theorem v2r_two_pow_mul_odd (t : Nat) (m : Nat) (hm : m % 2 = 1) :
     rw [Nat.pow_zero, Nat.one_mul]
     exact v2r_eq_zero_of_odd hm
   | succ t ih =>
-    have hp : 2^(t + 1) = 2 * 2^t := pow_succ 2 t
+    have hp : 2^(t + 1) = 2^t * 2 := pow_succ 2 t
     have hmul : 2^(t + 1) * m = 2 * (2^t * m) := by rw [hp]; ring
     have hne : ¬ 2^(t + 1) * m = 0 := by
       have hm1 : 1 ≤ m := by omega
@@ -174,8 +174,8 @@ theorem exists_two_pow_decomp (n : Nat) (hn : 0 < n) :
       calc n = 2 * (n / 2) := by omega
         _ = 2 * (2^t * m) := by rw [heq]
         _ = (2 * 2^t) * m := by ring
-        _ = 2^(t + 1) * m := by rw [Nat.pow_succ 2 t]
-    · exact ⟨0, n, by rw [Nat.pow_zero, Nat.mul_one], h⟩
+        _ = 2^(t + 1) * m := by rw [pow_succ 2 t]; ring
+    · exact ⟨0, n, by rw [Nat.pow_zero, Nat.one_mul], h⟩
 
 /-- **THE MULTIPLICATIVITY LAW.**  `v2r (a * b) = v2r a + v2r b` for
 positive `a b` — the full valuation law, self-contained. -/
@@ -275,11 +275,17 @@ theorem v2r_product_four (x y : Nat) :
   have vy := v2r_one_add_three_pow y
   rcases Nat.mod_two_eq_zero_or_one x with hx1 | hx1
   · rw [if_neg (by omega : ¬ x % 2 = 1)] at vx
+    rcases Nat.mod_two_eq_zero_or_one y with hy1 | hy1
+    · rw [if_neg (by omega : ¬ y % 2 = 1)] at vy
+      omega
+    · rw [if_pos (by omega : y % 2 = 1)] at vy
+      omega
   · rw [if_pos (by omega : x % 2 = 1)] at vx
-  rcases Nat.mod_two_eq_zero_or_one y with hy1 | hy1
-  · rw [if_neg (by omega : ¬ y % 2 = 1)] at vy
-  · rw [if_pos (by omega : y % 2 = 1)] at vy
-  omega
+    rcases Nat.mod_two_eq_zero_or_one y with hy1 | hy1
+    · rw [if_neg (by omega : ¬ y % 2 = 1)] at vy
+      omega
+    · rw [if_pos (by omega : y % 2 = 1)] at vy
+      omega
 
 /-- **THE PRODUCT-QUADRUPLE CAP.**  The product family obeys the cap law
 with constant `C = 4`. -/
