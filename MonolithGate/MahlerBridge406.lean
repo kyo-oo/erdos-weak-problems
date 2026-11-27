@@ -55,36 +55,33 @@ exactly `2`.  Pure division arithmetic, self-contained. -/
 theorem digit_two_of_mid_range (X j : Nat)
     (hlo : 2 * 3^j ≤ X % 3^(j+1)) :
     X / 3^j % 3 = 2 := by
-  have hp : 3^(j+1) = 3 * 3^j := by rw [Nat.pow_succ]
-  have hlt : X % 3^(j+1) < 3 * 3^j := by
-    rw [← hp]; exact Nat.mod_lt _ (Nat.pow_pos (by decide))
-  have hRj : (X % 3^(j+1)) / 3^j = 2 := by
-    have hge : 2 ≤ (X % 3^(j+1)) / 3^j := by
-      have h2 : (2 * 3^j) / 3^j ≤ (X % 3^(j+1)) / 3^j :=
-        Nat.div_le_div_right hlo
-      rw [Nat.mul_div_cancel _ (Nat.pow_pos (by decide))] at h2
-      exact h2
-    have hlt3 : (X % 3^(j+1)) / 3^j < 3 := by
-      have h1 : 3 * ((X % 3^(j+1)) / 3^j)
-          ≤ X % 3^(j+1) := Nat.div_mul_le_self _ _
-      have h2 : X % 3^(j+1) < 3 * 3^j := by
-        rw [← hp]; exact Nat.mod_lt _ (Nat.pow_pos (by decide))
-      have h3 : 3 * ((X % 3^(j+1)) / 3^j) < 3 * 3^j :=
-        Nat.lt_of_le_of_lt h1 h2
-      exact Nat.lt_of_mul_lt_mul_left h3
-    omega
-  have hX' : X = (X % 3^(j+1)) + 3^(j+1) * (X / 3^(j+1)) := by
-    rw [Nat.add_comm]
-    exact (Nat.div_add_mod X (3^(j+1))).symm
-  have hreassoc : 3^(j+1) * (X / 3^(j+1))
-      = 3^j * (3 * (X / 3^(j+1))) := by
-    rw [hp]; ring
+  have hp : 3^(j+1) = 3 * 3^j := by rw [Nat.pow_succ]; ring
+  have hQ : 3^(j+1) * (X / 3^(j+1)) + X % 3^(j+1) = X :=
+    Nat.div_add_mod X (3^(j+1))
+  have hX : X = (X % 3^(j+1)) + 3^j * (3 * (X / 3^(j+1))) := by
+    calc X = 3^(j+1) * (X / 3^(j+1)) + X % 3^(j+1) := hQ.symm
+      _ = (X % 3^(j+1)) + 3^j * (3 * (X / 3^(j+1))) := by
+          rw [hp]; ring
+  have hRge : 2 ≤ (X % 3^(j+1)) / 3^j := by
+    have h2 : (2 * 3^j) / 3^j ≤ (X % 3^(j+1)) / 3^j :=
+      Nat.div_le_div_right hlo
+    rw [Nat.mul_div_cancel _ (Nat.pow_pos (by decide))] at h2
+    exact h2
+  have hRlt : (X % 3^(j+1)) / 3^j < 3 := by
+    have h1 : ((X % 3^(j+1)) / 3^j) * 3^j ≤ X % 3^(j+1) :=
+      Nat.div_mul_le_self _ _
+    have h2 : X % 3^(j+1) < 3 * 3^j := by
+      rw [← hp]; exact Nat.mod_lt _ (Nat.pow_pos (by decide))
+    have h3 : ((X % 3^(j+1)) / 3^j) * 3^j < 3 * 3^j :=
+      Nat.lt_of_le_of_lt h1 h2
+    exact Nat.lt_of_mul_lt_mul_right h3
+  have hRj : (X % 3^(j+1)) / 3^j = 2 := by omega
   have hdiv : X / 3^j
-      = (X % 3^(j+1)) / 3^j + 3 * (X / 3^(j+1)) := by
-    rw [hX', hreassoc]
-    exact Nat.add_mul_div_left _ _ (Nat.pow_pos (by decide))
-  rw [hdiv, hRj, Nat.add_mod, Nat.mul_mod_right,
-    Nat.mod_mod, Nat.mod_self, Nat.zero_add, Nat.mod_mod]
+      = (X % 3^(j+1)) / 3^j + 3 * (X / 3^(j+1)) :=
+    Nat.add_mul_div_left (X % 3^(j+1)) (3 * (X / 3^(j+1)))
+      (Nat.pow_pos (by decide))
+  rw [hdiv, hRj]
+  omega
 
 /-! ## §1 The identification — one object, two names -/
 
@@ -179,7 +176,7 @@ depth `k0` (in the `c (k0-1)` coefficient form) and `k0 ≤ s+1`, then the
 frozen diagonal at cut `s` carries the same top-third fire: the
 coefficient's trits are frozen below the cut. -/
 theorem c_trit_fire_transfer (s k0 core : Nat)
-    (hk : k0 ≤ s + 1)
+    (hk0 : 3 ≤ k0) (hk : k0 ≤ s + 1)
     (hfire : 2 * 3^(k0-1) ≤ (GSTTowerFire.c (k0-1) * core) % 3^k0) :
     2 * 3^(k0-1) ≤ (core * lteCoeff s) % 3^k0 := by
   have hc : GSTTowerFire.c (k0-1) = lteCoeff (k0-1) :=
@@ -188,7 +185,7 @@ theorem c_trit_fire_transfer (s k0 core : Nat)
       = lteCoeff (k0-1) % 3^((k0-1)+1) :=
     GSTDiagonalRead.lteCoeff_stable (k0-1) s (by omega)
   have hE : 3^((k0-1)+1) = 3^k0 := by
-    congr 1; omega
+    rw [show (k0-1)+1 = k0 from by omega]
   rw [hE] at hstab
   have hmod : (core * lteCoeff s) % 3^k0
       = (core * lteCoeff (k0-1)) % 3^k0 := by
@@ -207,11 +204,11 @@ is a ternary digit two of the tower `4^(3^s·core)` at the NAMED row
 `s + k0`: the window law reads the frozen diagonal's top-third fire
 directly into the power's digit stream. -/
 theorem tower_digit_two_of_diagonal_fire (s k0 core : Nat)
-    (hk : k0 ≤ s + 1)
+    (hk0 : 3 ≤ k0) (hk : k0 ≤ s + 1)
     (hfire : 2 * 3^(k0-1) ≤ (GSTTowerFire.c (k0-1) * core) % 3^k0) :
     digit3 (4^(3^s * core)) (s + k0) = 2 := by
   have hlo : 2 * 3^(k0-1) ≤ (core * lteCoeff s) % 3^k0 :=
-    c_trit_fire_transfer s k0 core hk hfire
+    c_trit_fire_transfer s k0 core hk0 hk hfire
   have htrit : (core * lteCoeff s) / 3^(k0-1) % 3 = 2 :=
     digit_two_of_mid_range (core * lteCoeff s) (k0-1)
       (by rw [show (k0-1)+1 = k0 from by omega]; exact hlo)
@@ -232,18 +229,27 @@ theorem exists_least_fire (core : Nat)
       2 * 3^(m0-1) ≤ (GSTTowerFire.c (m0-1) * core) % 3^m0 ∧
       ∀ k : Nat, 3 ≤ k → k < m0 →
         (GSTTowerFire.c (k-1) * core) % 3^k < 2 * 3^(k-1) := by
+  have key : ∀ m : Nat, 3 ≤ m →
+      2 * 3^(m-1) ≤ (GSTTowerFire.c (m-1) * core) % 3^m →
+      ∃ m0 : Nat, 3 ≤ m0 ∧
+        2 * 3^(m0-1) ≤ (GSTTowerFire.c (m0-1) * core) % 3^m0 ∧
+        ∀ k : Nat, 3 ≤ k → k < m0 →
+          (GSTTowerFire.c (k-1) * core) % 3^k < 2 * 3^(k-1) := by
+    intro m
+    induction m using Nat.strongRecOn with
+    | ind m ih =>
+      intro hm3 hmfire
+      by_cases hleast : ∃ k : Nat, 3 ≤ k ∧ k < m ∧
+          2 * 3^(k-1) ≤ (GSTTowerFire.c (k-1) * core) % 3^k
+      · obtain ⟨k, hk3, hkm, hkfire⟩ := hleast
+        exact ih k hkm hk3 hkfire
+      · refine ⟨m, hm3, hmfire, ?_⟩
+        intro k hk3 hkm
+        by_contra hc
+        push_neg at hc
+        exact hleast ⟨k, hk3, hkm, hc⟩
   obtain ⟨m, hm3, hmfire⟩ := hex
-  induction m using Nat.strongRecOn with
-  | ind m ih =>
-    by_cases hleast : ∃ k : Nat, 3 ≤ k ∧ k < m ∧
-        2 * 3^(k-1) ≤ (GSTTowerFire.c (k-1) * core) % 3^k
-    · obtain ⟨k, hk3, hkm, hkfire⟩ := hleast
-      exact ih k hkm ⟨k, hk3, hkfire⟩
-    · refine ⟨m, hm3, hmfire, ?_⟩
-      intro k hk3 hkm
-      by_contra hc
-      push_neg at hc
-      exact hleast ⟨k, hk3, hkm, hc⟩
+  exact key m hm3 hmfire
 
 /-- **THE TOWER VERDICT.**  Under the Mahler sharpness input, every
 tower `3^s·core` over a three-free core with dodging sheet windows
@@ -265,7 +271,7 @@ theorem tower_verdict_of_mahler (H : GSTWorldtraceMahler.MahlerSharp)
   obtain ⟨kf, hkf3, hkffire, hkmin⟩ := exists_least_fire core ⟨k, hk3, hfire⟩
   by_cases hle : kf ≤ s + 1
   · exact Or.inl ⟨s + kf,
-      tower_digit_two_of_diagonal_fire s kf core hle hkffire⟩
+      tower_digit_two_of_diagonal_fire s kf core hkf3 hle hkffire⟩
   · refine Or.inr ?_
     intro k hk3' hks
     have hlt : k < kf := by omega
