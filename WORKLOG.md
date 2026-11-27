@@ -5704,3 +5704,41 @@ approach registry, adversarial audit, GitHub CI the only Lean judge, the
 boss's own maths the only weapons.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S094 — THE COUNCIL ROUNDS (addendum: the repair war + the CAP kernel + the guardian)
+
+**ROUND 2 (82ab3d6):** the first-exposure repairs — (1) the S092
+congrArg/Nat.add_assoc repair PORTED to the branch's own
+GSTGraphV2CanonicalInfiniteCycle:292 (the repair existed only in the old
+vendoring; the boss's branch still carried the broken congr 2/omega form);
+(2) GSTLawStackRound32's mangled `[mo` line repaired + `import Mathlib`
+prepended to all 18 import-less LawStack drafts and the 4 Wave-44-47
+custom tools; (3) THE EXCLUSION LAW: research/pin/** (48 verbatim Mathlib
+source pins — building them would redeclare Mathlib itself; the dash in
+the directory name is not a legal module component), pi/fsb (Mathlib
+module-system syntax pins), repairs/** (12 staging fragments spliced into
+their target modules) carried as FILES but not build roots — 882 build
+roots, dotted targets (the r1 slash bug killed s9 outright).
+
+**ROUND 3 (b037a78):** Kernel 406-CAPK (`CapLawK406.lean`) — the first
+unconditional block of the CAP(185) frontier: the ODD-POPCOUNT LAW (odd
+digit count ⟹ v₂ = 0 exactly — half the subset lattice valuation-dead),
+the PAIR LAW EXACT (v₂(3^a+3^b) = 2/1 by gap parity — the complete
+2-digit classification), the PRODUCT-QUADRUPLE LAW (≤ 4 via the
+self-contained v2r multiplicativity — the 2^t-decomposition engine), and
+the CAP forms (C = 2, C = 4, all scales, zero hypotheses). CI job
+kernel-406capk (11 receipt gates). Plus THE S094 COUNCIL RECORD
+(council/S094_COUNCIL_RECORD.md): the full socket-weapon map, the
+attacker's verified laws, the doubter's frontier, the honest verdict —
+the named lanes sharpened to their exact missing statements (the
+non-periodicity theorem for the frozen diagonal; the u-jump compression;
+the two-regime CAP).
+
+**THE GUARDIAN RE-ARMED:** the skills installed (skills/MATHS +
+skills/prove-that-shit from the boss's skill bag), backup.sh sealed and
+pushing, the 8-hour cron guardian armed (job 552614), the token vault
+restored from the zip bag (Drive id 1ZCY5hbZyId7AWeBD-o0yOiRFlxGmKnW-).
+
+The engine never stops; it never lies. In English, always.
