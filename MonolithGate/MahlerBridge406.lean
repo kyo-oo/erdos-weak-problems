@@ -65,15 +65,24 @@ theorem digit_two_of_mid_range (X j : Nat)
       rw [Nat.mul_div_cancel _ (Nat.pow_pos (by decide))] at h2
       exact h2
     have hlt3 : (X % 3^(j+1)) / 3^j < 3 := by
-      rw [Nat.div_lt_iff_lt_mul (Nat.pow_pos (by decide))]
-      omega
+      have h1 : 3 * ((X % 3^(j+1)) / 3^j)
+          ≤ X % 3^(j+1) := Nat.div_mul_le_self _ _
+      have h2 : X % 3^(j+1) < 3 * 3^j := by
+        rw [← hp]; exact Nat.mod_lt _ (Nat.pow_pos (by decide))
+      have h3 : 3 * ((X % 3^(j+1)) / 3^j) < 3 * 3^j :=
+        Nat.lt_of_le_of_lt h1 h2
+      exact Nat.lt_of_mul_lt_mul_left h3
     omega
-  obtain ⟨Q, hQ⟩ := Nat.div_add_mod X (3^(j+1))
-  have hX : X = (X % 3^(j+1)) + 3^j * (3 * Q) := by
-    rw [hQ, hp]; ring
+  have hX' : X = (X % 3^(j+1)) + 3^(j+1) * (X / 3^(j+1)) := by
+    rw [Nat.add_comm]
+    exact (Nat.div_add_mod X (3^(j+1))).symm
+  have hreassoc : 3^(j+1) * (X / 3^(j+1))
+      = 3^j * (3 * (X / 3^(j+1))) := by
+    rw [hp]; ring
   have hdiv : X / 3^j
-      = (X % 3^(j+1)) / 3^j + 3 * Q := by
-    rw [hX, Nat.add_mul_div_left _ _ (Nat.pow_pos (by decide))]
+      = (X % 3^(j+1)) / 3^j + 3 * (X / 3^(j+1)) := by
+    rw [hX', hreassoc]
+    exact Nat.add_mul_div_left _ _ (Nat.pow_pos (by decide))
   rw [hdiv, hRj, Nat.add_mod, Nat.mul_mod_right,
     Nat.mod_mod, Nat.mod_self, Nat.zero_add, Nat.mod_mod]
 
@@ -183,7 +192,13 @@ theorem c_trit_fire_transfer (s k0 core : Nat)
   rw [hE] at hstab
   have hmod : (core * lteCoeff s) % 3^k0
       = (core * lteCoeff (k0-1)) % 3^k0 := by
-    rw [Nat.mul_mod, Nat.mul_mod, hstab]
+    have h1 : (core * lteCoeff s) % 3^k0
+        = ((core % 3^k0) * (lteCoeff s % 3^k0)) % 3^k0 :=
+      Nat.mul_mod core (lteCoeff s) (3^k0)
+    have h2 : (core * lteCoeff (k0-1)) % 3^k0
+        = ((core % 3^k0) * (lteCoeff (k0-1) % 3^k0)) % 3^k0 :=
+      Nat.mul_mod core (lteCoeff (k0-1)) (3^k0)
+    rw [h1, h2, hstab]
   rw [hmod, ← hc, Nat.mul_comm core (GSTTowerFire.c (k0-1))]
   exact hfire
 
@@ -197,16 +212,38 @@ theorem tower_digit_two_of_diagonal_fire (s k0 core : Nat)
     digit3 (4^(3^s * core)) (s + k0) = 2 := by
   have hlo : 2 * 3^(k0-1) ≤ (core * lteCoeff s) % 3^k0 :=
     c_trit_fire_transfer s k0 core hk hfire
-  have htrit : (core * lteCoeff s) / 3^(k0-1) % 3 = 2 := by
-    refine digit_two_of_mid_range (core * lteCoeff s) (k0-1) ?_
-    rw [show (k0-1)+1 = k0 from by omega] at hlo
-    exact hlo
+  have htrit : (core * lteCoeff s) / 3^(k0-1) % 3 = 2 :=
+    digit_two_of_mid_range (core * lteCoeff s) (k0-1)
+      (by rw [show (k0-1)+1 = k0 from by omega]; exact hlo)
   have hwin := GSTDiagonalRead.diagonal_window_law s core (k0-1) (by omega)
   have hrow : s + k0 = s + 1 + (k0-1) := by omega
   rw [hrow, hwin]
   exact htrit
 
 /-! ## §5 The tower verdict — the honest disjunction -/
+
+/-- **THE LEAST-FIRE LEMMA.**  From any diagonal fire witness, the
+least one exists — pure strong induction, no decidability, no choice:
+either the witness is least, or a smaller fire descends. -/
+theorem exists_least_fire (core : Nat)
+    (hex : ∃ m : Nat, 3 ≤ m ∧
+      2 * 3^(m-1) ≤ (GSTTowerFire.c (m-1) * core) % 3^m) :
+    ∃ m0 : Nat, 3 ≤ m0 ∧
+      2 * 3^(m0-1) ≤ (GSTTowerFire.c (m0-1) * core) % 3^m0 ∧
+      ∀ k : Nat, 3 ≤ k → k < m0 →
+        (GSTTowerFire.c (k-1) * core) % 3^k < 2 * 3^(k-1) := by
+  obtain ⟨m, hm3, hmfire⟩ := hex
+  induction m using Nat.strongRecOn with
+  | ind m ih =>
+    by_cases hleast : ∃ k : Nat, 3 ≤ k ∧ k < m ∧
+        2 * 3^(k-1) ≤ (GSTTowerFire.c (k-1) * core) % 3^k
+    · obtain ⟨k, hk3, hkm, hkfire⟩ := hleast
+      exact ih k hkm ⟨k, hk3, hkfire⟩
+    · refine ⟨m, hm3, hmfire, ?_⟩
+      intro k hk3 hkm
+      by_contra hc
+      push_neg at hc
+      exact hleast ⟨k, hk3, hkm, hc⟩
 
 /-- **THE TOWER VERDICT.**  Under the Mahler sharpness input, every
 tower `3^s·core` over a three-free core with dodging sheet windows
@@ -225,25 +262,14 @@ theorem tower_verdict_of_mahler (H : GSTWorldtraceMahler.MahlerSharp)
     (∀ k : Nat, 3 ≤ k → k ≤ s + 1 →
       (GSTTowerFire.c (k-1) * core) % 3^k < 2 * 3^(k-1)) := by
   obtain ⟨k, hk3, hfire⟩ := mahler_dust_fracture_c H core hfree hwin
-  have hex : ∃ m : Nat, 3 ≤ m ∧
-      2 * 3^(m-1) ≤ (GSTTowerFire.c (m-1) * core) % 3^m :=
-    ⟨k, hk3, hfire⟩
-  obtain ⟨kf, hkf⟩ := Nat.find hex
-  have hkf3 : 3 ≤ kf := hkf.1
-  have hkffire : 2 * 3^(kf-1)
-      ≤ (GSTTowerFire.c (kf-1) * core) % 3^kf := hkf.2
+  obtain ⟨kf, hkf3, hkffire, hkmin⟩ := exists_least_fire core ⟨k, hk3, hfire⟩
   by_cases hle : kf ≤ s + 1
   · exact Or.inl ⟨s + kf,
       tower_digit_two_of_diagonal_fire s kf core hle hkffire⟩
   · refine Or.inr ?_
     intro k hk3' hks
     have hlt : k < kf := by omega
-    have hnf : ¬ (3 ≤ k ∧
-        2 * 3^(k-1) ≤ (GSTTowerFire.c (k-1) * core) % 3^k) :=
-      Nat.find_min hex hlt
-    by_contra hc
-    push_neg at hc
-    exact hnf ⟨hk3', hc⟩
+    exact hkmin k hk3' hlt
 
 /-! ## §6 The honest record — the reduction law -/
 
@@ -269,6 +295,7 @@ theorem mahler_fracture_record (H : GSTWorldtraceMahler.MahlerSharp)
 #print axioms mahler_dust_fracture_c
 #print axioms c_trit_fire_transfer
 #print axioms tower_digit_two_of_diagonal_fire
+#print axioms exists_least_fire
 #print axioms tower_verdict_of_mahler
 #print axioms mahler_fracture_record
 
