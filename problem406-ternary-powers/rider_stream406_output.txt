@@ -1,0 +1,61 @@
+=== KERNEL S095 RECEIPT: the six rider streams, depth 40 ===
+heads: [1, 2, 4, 5, 7, 8]   (m = 2a-9 = [-7, -5, -1, 1, 5, 7])
+  [PASS] c_0 = 1
+  [PASS] c_1 = 7
+  [PASS] c_2 = 9709
+  [PASS] c_s % 9 = 7 for 1<=s<=D
+  [PASS] c_s % 81 = 16 for 3<=s<=D
+  [PASS] c_s = L mod 3^(s+1) for all s<=D (tower-limit id)
+  [PASS] L = 7 mod 9
+  [PASS] L = 16 mod 27
+  [PASS] L = 16 mod 81
+  [PASS] L = 178 mod 243
+
+--- METHOD A: the ladder (uhat_s = m*(2c_s)^-1 mod 3^(s+1)) ---
+  head a=1 (m=-7): depth 0..5 residues [1, 4, 4, 58, 58, 544], nesting OK, uhat_D = 9658897097221243687
+  head a=2 (m=-5): depth 0..5 residues [2, 8, 26, 53, 215, 701], nesting OK, uhat_D = 22530496373945511092
+  head a=4 (m=-1): depth 0..5 residues [1, 7, 16, 43, 43, 286], nesting OK, uhat_D = 11800698550223259499
+  head a=5 (m=+1): depth 0..5 residues [2, 2, 11, 38, 200, 443], nesting OK, uhat_D = 24672297826947526904
+  head a=7 (m=+5): depth 0..5 residues [1, 1, 1, 28, 28, 28], nesting OK, uhat_D = 13942500003225275311
+  head a=8 (m=+7): depth 0..5 residues [2, 5, 23, 23, 185, 185], nesting OK, uhat_D = 26814099279949542716
+
+--- METHOD B: the diagonal (uhat = m*(2L)^-1 mod 3^K) ---
+  head a=1: methods A and B agree at every depth 0..40 PASS
+  head a=2: methods A and B agree at every depth 0..40 PASS
+  head a=4: methods A and B agree at every depth 0..40 PASS
+  head a=5: methods A and B agree at every depth 0..40 PASS
+  head a=7: methods A and B agree at every depth 0..40 PASS
+  head a=8: methods A and B agree at every depth 0..40 PASS
+
+--- the mod-81 six-residue pin (kernel rider_c_mod81_pin) ---
+  head a=1: uhat mod 81 = 58 (expected 58) PASS
+  head a=2: uhat mod 81 = 53 (expected 53) PASS
+  head a=4: uhat mod 81 = 43 (expected 43) PASS
+  head a=5: uhat mod 81 = 38 (expected 38) PASS
+  head a=7: uhat mod 81 = 28 (expected 28) PASS
+  head a=8: uhat mod 81 = 23 (expected 23) PASS
+
+--- the mod-27 six-class pin (kernel rider_six_family_pin) ---
+  head a=1: uhat mod 27 = 4 (expected 4) PASS
+  head a=2: uhat mod 27 = 26 (expected 26) PASS
+  head a=4: uhat mod 27 = 16 (expected 16) PASS
+  head a=5: uhat mod 27 = 11 (expected 11) PASS
+  head a=7: uhat mod 27 = 1 (expected 1) PASS
+  head a=8: uhat mod 27 = 23 (expected 23) PASS
+
+--- FINITE KILL CERTIFICATE (adaptive depth, base D = 40) ---
+  head a=1 (m=-7): pinned u0 = 9658897097221243687; depth-42 check FAILS for u0 -> NO RIDER BELOW 3^42 AT HEAD 1
+  head a=2 (m=-5): pinned u0 = 22530496373945511092; depth-42 check FAILS for u0 -> NO RIDER BELOW 3^42 AT HEAD 2
+  head a=4 (m=-1): pinned u0 = 11800698550223259499; depth-41 check FAILS for u0 -> NO RIDER BELOW 3^41 AT HEAD 4
+  head a=5 (m=+1): pinned u0 = 24672297826947526904; depth-41 check FAILS for u0 -> NO RIDER BELOW 3^41 AT HEAD 5
+  head a=7 (m=+5): pinned u0 = 13942500003225275311; depth-41 check FAILS for u0 -> NO RIDER BELOW 3^41 AT HEAD 7
+  head a=8 (m=+7): pinned u0 = 26814099279949542716; depth-41 check FAILS for u0 -> NO RIDER BELOW 3^41 AT HEAD 8
+
+=== VERDICT ===
+ALL TWO-METHOD CROSS-CHECKS PASS: the six streams are pinned,
+nested, and diagonal-identified; L = lim c_s is re-derived at
+every depth; the S092/S094 pins hold; the kernel's mod-27 and
+mod-81 residue laws are machine-confirmed.  The socket is now
+SIX EXPLICIT 3-ADIC STREAMS; killing each stream's termination
+kills MahlerSharp.
+FINITE KILL LANDED: no rider u < 3^41 at ANY head.

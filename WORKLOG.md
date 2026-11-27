@@ -5774,3 +5774,108 @@ non-periodicity of the frozen diagonal (L ≡ 7 mod 9, 16 mod 27, 16 mod
 to it.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S095 — THE RIDER-CLASS COLLAPSE (the council's engine built; the GitHub audit answered)
+
+**BOSS's order:** "SEE THE ENTIRE GITHUB, I HEARD THIS HYPOTHESIS WAS
+ALREADY RESOLVED IN THE GITHUB, CHECK ALL THE LATEST BRANCH, AND WHAT
+BRANCH YOU ARE WORKING AND SEE. I DON'T WANT 'BREACHED'. I WANT
+HYPOTHESIS PROVEN, PERIOD. INVOKE THE MATHS SKILL AND BEGAN."
+
+**THE GITHUB AUDIT (the boss's question, answered from primary sources):**
+
+1. **NOT RESOLVED — anywhere.** The full sweep: erdos-weak-problems
+   (60+ branches, freshest = `campaign` @ 4db4c66, 2026-11-27 — the
+   working branch); HC-PROOF (115+ branches, freshest =
+   `research/gpt6-gst-hypothesis-part1-chow-square-20261110` @ 59e5d093,
+   2026-11-27 — vendored entire into `HCUniverse2/`, all 2158 files
+   mapped); erdosternary2 (123 branches, fresh-cloned and audited).
+   In the freshest HC-PROOF branch the climb is STILL the declared
+   open seam (`GSTInfiniteFourPowerNavigation`: "the exact residual
+   open seam"); the monolith's newest branches are other problems
+   (#261, #271, #404).
+2. **The rumor's source, identified with receipts:** the Sept 10-13
+   "green" runs passed a MOCK comparator (`scripts/comparator.sh`
+   printed "Your solution is okay!" after ANY clean build); the REAL
+   official comparator (`problem406-official-comparator.yml`,
+   lean4export + statement match + axiom gate) was red **0/20 ever**.
+   The monolith's own terminal autopsy — `astra/final-verdict` @
+   5305fe2, "THE FINAL VERDICT: campaign autopsy - single seam
+   equivalence map, WCP refutation receipts" — says it in one line:
+   *"The remembered 'complete green proof' never existed."* The
+   `astra-tailf-closure`/`astra-tailf-final` branch NAMES sound like
+   closure; their logs are failed closure attempts (Sept 15).
+3. **The seam, equivalently (all machine-certified in-corpus):**
+   tailF ⟺ the even-exponent statement ⟺ (climb ⟹ tailF) ⟺
+   (direct existence ⟺ physical Happy forcing). The crown needs
+   MahlerSharp + WorldtraceScaledCompression (or CAP(185), or the
+   climb). NO branch has any of them.
+
+**THE MATHS SKILL:** invoked from the skill bag (MATHS Berserker +
+prove-that-shit), the chain honored: success contract frozen (the S094
+council record's target), approach registry, one round, honest labels.
+
+**THE S095 DELIVERIES (Kernel `MonolithGate/MahlerRider406.lean`,
+24 theorems, zero hypotheses, CI job `kernel-406rider`):**
+
+1. **THE GLOBAL PIN** (`rider_global_pin`): every rider rides from
+   depth ZERO. The eventual form (∃S₀ ∀s≥S₀: 3^(s+1) ∣ D a u s) is
+   EQUIVALENT to the all-depths form — the coherent tower (the green
+   `c_stable`, through the new cumulative `c_diff_dvd`) pulls the
+   divisibility back through the entry depth. The late-entry illusion
+   dies: a rider cannot appear late on the diagonal.
+2. **THE RIDER-CLASS COLLAPSE** (`rider_class_unique`,
+   `rider_eq_of_same_head`, `rider_universe_at_most_six`): at every
+   depth s, all same-head riders are ONE residue class mod 3^(s+1)
+   (2·c_s invertible, the green c_not_three). Two same-head riders
+   are pinned at every depth, hence EQUAL. The admissible heads are
+   exactly six (a ∈ {1,2,4,5,7,8}) — **THE ENTIRE ADMISSIBLE RIDER
+   UNIVERSE HAS AT MOST SIX ELEMENTS.**
+3. **THE SHARPENED SOCKET** (`mahler_sharp_iff_no_rider`,
+   `mahler_sharp_iff_no_six_family_rider`): MahlerSharp ⟺ "no
+   admissible rider, FROM DEPTH ZERO" — a pure ∀-divisibility
+   statement: for every admissible (a,u) there EXISTS a depth where
+   the cofactor divisibility FAILS. No S₀, no eventual clause, no
+   p-adic object.
+4. **THE SIX-FAMILY PIN** (`rider_depth_zero/one/two`,
+   `rider_c_mod81_pin`, `rider_six_family_pin`): the explicit
+   congruence ladder — u ≡ a (mod 3); u ≡ 4a (mod 9) (c₁ = 7);
+   u ≡ 11(2a−9) (mod 27) (c₂ = 9709 ≡ 16 mod 27); 32u ≡ 2a−9
+   (mod 81) at EVERY depth s ≥ 3 (the green c_mod81, uniform in s).
+   Specialized: **the entire rider universe lives in the six depth-2
+   classes u mod 27 ∈ {4, 26, 16, 11, 1, 23}** (and mod 81:
+   {58, 53, 43, 38, 28, 23}).
+5. **THE TWO-METHOD STREAM RECEIPT** (`rider_stream406.py` +
+   `rider_stream406_output.txt`): the six streams û(a) computed to
+   depth 40+ TWO independent ways — the ladder (m·(2c_s)⁻¹ mod
+   3^(s+1)) and the diagonal (m·(2L)⁻¹ where L is the frozen diagonal
+   evaluated by the log series Σ(−1)^(n+1)3^(n−1)/n) — agreeing at
+   every depth; the tower-limit identification L = lim c_s
+   re-derived at every depth; the S092/S094 pins (L ≡ 7, 16, 16, 178
+   mod 9/27/81/243) re-derived from the SERIES; and **THE FINITE
+   KILL: no rider u < 3^41 at ANY head** (heads 1,2 killed below
+   3^42; heads 4,5,7,8 below 3^41; 3^41 ≈ 3.6×10¹⁹). NOTE: the six
+   streams are three antipodal pairs (û(−m) = −û(m): 58+23 = 81,
+   53+28 = 81, 43+38 = 81 mod 81) — the socket is THREE streams and
+   their negatives.
+
+**THE IDENTIFICATION (mathematical, receipt-verified):** the frozen
+diagonal L = lim c_s is the 3-adic number log(4)/3 (the series
+Σ(−1)^(n+1)3^(n−1)/n is log(1+3)/3; all four pinned residues match).
+The rider streams are û(a) = (2a−9)/(2L) = 3(2a−9)/(2·log 4). The
+socket — kill six (three antipodal) explicit 3-adic streams' eventual
+termination, each pinned to a computable residue at every depth.
+
+**THE HONEST BOUNDARY (unchanged in strength, sharper in form):** the
+six streams' non-termination is NOT proven — it is exactly the
+remaining content of MahlerSharp (classically the p-adic
+transcendence family — FORBIDDEN by the boss's law; the corpus needs
+its own proof). The other sockets (WorldtraceScaledCompression,
+CAP(185), the climb) stand as named. What S095 changed: the socket's
+form — from "no (a,u) rides an infinite diagonal" to "six explicit
+computable streams, one per head, at most six riders in existence,
+none below 3^41, each pinned at every depth."
+
+The engine never stops; it never lies. In English, always.

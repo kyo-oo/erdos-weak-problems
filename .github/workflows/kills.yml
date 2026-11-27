@@ -3003,3 +3003,49 @@ jobs:
         name: kernel406capk-log
         path: kernel406capk.log
         retention-days: 30
+  kernel-406rider:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2; then
+            if elan toolchain install leanprover/lean4:v4.33.0-rc2 2>/dev/null || true; then break; fi
+          fi
+          echo "ELAN_INSTALL_RETRY attempt=$i failed; sleeping 20s"
+          sleep 20
+        done
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        for i in 1 2 3; do lake update && break; echo "LAKE_UPDATE_RETRY attempt=$i"; sleep 15; done
+        for i in 1 2 3; do lake exe cache get && break; echo "CACHE_GET_RETRY attempt=$i"; sleep 15; done
+      shell: bash
+    - name: "Kernel 406rider - THE RIDER-CLASS COLLAPSE (S095, BOSS order 'I WANT HYPOTHESIS PROVEN PERIOD': the council's named periodicity-obstruction engine built): (1) THE GLOBAL PIN rider_global_pin - every rider rides from depth ZERO (the late-entry illusion dies: eventual cofactor divisibility is divisibility at every depth, pulled back through the coherent tower c_stable); (2) THE RIDER-CLASS COLLAPSE rider_class_unique + rider_eq_of_same_head - at every depth all same-head riders are ONE residue class mod 3^(s+1) (2c_s invertible via the green c_not_three), so AT MOST ONE RIDER PER HEAD and the entire admissible rider universe has AT MOST SIX ELEMENTS (heads 1,2,4,5,7,8); (3) THE SHARPENED SOCKET mahler_sharp_iff_no_rider + six_head_iff + mahler_sharp_iff_no_six_family_rider - MahlerSharp is EQUIVALENT to 'no admissible rider from depth zero', a pure forall-divisibility statement with no S0, no eventual clause, no p-adic object; (4) THE SIX-FAMILY PIN rider_depth_zero/one/two + rider_c_mod81_pin + rider_six_family_pin - the explicit congruence ladder u=a mod 3, u=4a mod 9, u=11(2a-9) mod 27, 32u=2a-9 mod 81 (uniform s>=3 via the green c_mod81): the entire rider universe lives in the six depth-2 classes u mod 27 in {4,26,16,11,1,23}; plus the two-method receipt rider_stream406.py: the six streams computed to depth 40+ (ladder method vs the frozen diagonal's log-series method, agreeing at every depth), the tower-limit identification L=lim c_s re-derived at every depth, the S092/S094 pins (7/16/16/178) re-derived, and THE FINITE KILL: no rider u < 3^41 at ANY head"
+      run: |
+        set -euo pipefail
+        : > kernel406rider.log
+        set +e
+        timeout 5400 lake build MonolithGate.MahlerRider406 2>&1 | tee -a kernel406rider.log
+        RC=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "RIDER406_BUILD_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406rider.log; then echo "RIDER406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406rider.log | head -60; exit 1; fi
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake env lean MonolithGate/MahlerRider406.lean 2>&1 | tee -a kernel406rider.log
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406rider.log; then echo "RIDER406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406rider.log | head -60; exit 1; fi
+        for sym in "MahlerRider406.three_dvd_of_not_dvd_mul" "MahlerRider406.pow_three_cancel" "MahlerRider406.three_pow_succ_gt" "MahlerRider406.int_pow_three_cast" "MahlerRider406.c_le_succ" "MahlerRider406.c_mono" "MahlerRider406.c_diff_dvd" "MahlerRider406.rider_global_pin" "MahlerRider406.two_mul_c_not_dvd_three" "MahlerRider406.rider_class_unique" "MahlerRider406.rider_eq_of_same_head" "MahlerRider406.chain_of_riderGE" "MahlerRider406.mahler_sharp_iff_no_rider" "MahlerRider406.six_head_iff" "MahlerRider406.mahler_sharp_iff_no_six_family_rider" "MahlerRider406.c_one" "MahlerRider406.c_two" "MahlerRider406.rider_depth_zero" "MahlerRider406.rider_depth_one" "MahlerRider406.rider_depth_two" "MahlerRider406.c_int_mod81" "MahlerRider406.rider_c_mod81_pin" "MahlerRider406.rider_six_family_pin" "MahlerRider406.rider_universe_at_most_six"; do
+          if grep -qE "'$sym' (does not depend on any axioms|depends on axioms)" kernel406rider.log; then echo "RECEIPT_OK $sym"; else echo "RIDER406_RECEIPT_MISSING $sym"; exit 1; fi
+        done
+        grep -qF "ERDOS406_MAHLER_RIDER_GREEN" kernel406rider.log
+        python3 problem406-ternary-powers/rider_stream406.py 2>&1 | tee -a kernel406rider.log
+        grep -qF "FINITE KILL LANDED" kernel406rider.log
+        echo ERDOS_406_RIDER_GREEN=1
+      shell: bash
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel406rider-log
+        path: kernel406rider.log
+        retention-days: 30
