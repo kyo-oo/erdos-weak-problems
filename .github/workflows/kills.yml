@@ -2807,3 +2807,47 @@ jobs:
           windowfire406.log
           rss-windowfire406.log
         retention-days: 30
+
+  # THE HC UNIVERSE (S092 Mission A, BOSS order: COPY THE ERDOS PROBLEM
+  # REPO'S LATEST BRANCH ENTIRELY, EVERY LEAN FILES MUST BE USED TO PROOF):
+  # the complete merged mathematical universe from kyo-oo/HC-PROOF main
+  # (Cardinal Worlds + GST V2 Graph Ontological Universe), vendored verbatim
+  # as the HCUniverse library — 181 modules, 436 namespaced import rewrites,
+  # declarations byte-identical, toolchain EXACT (the universe's own pin:
+  # Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2, identical to the campaign pin).
+  # The boss's own comparator certifies the source branch 0 errors / 0
+  # sorries; this kernel re-certifies the ENTIRE universe inside the
+  # campaign with one whole-library build.
+  kernel-hc-universe:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        lake update
+        lake exe cache get
+      shell: bash
+    - name: "Kernel HC-Universe — THE COMPLETE VENDORED UNIVERSE (S092 Mission A, BOSS order COPY THE ERDOS PROBLEM REPO'S LATEST BRANCH ENTIRELY): the whole HCUniverse library in one build — the 173 root modules of kyo-oo/HC-PROOF main (the Cardinal Worlds: CardinalWorlds/V2/PrefixClassifier; the GST V2 graph ontological universe: GSTGraphV2* 60+ modules; the four-power direct existence chain: GSTFourPower*; the tailF chamber: GSTTailFProof/GSTTailFFourthDimension/GSTTailFInfiniteRead; the boundary: MonolithBoundary; the coherent cosmology; the Hodge/Lefschetz crown: GSTUniversalLefschetz*/GSTHodgeAssault/GSTClayOfficial/GSTTransferBridge/GSTGeometricRealizationStage2*; the tactic core: GSTTactic) PLUS the 8 waves/ modules their imports require (GSTWaveCohomology V1/V2, GSTNCohomology V1/V2, GSTVortexSingularity V1/V2, CardinalWorldsPostulateLaw V1/V2) — every module of the boss's latest branch, namespaced under HCUniverse, verified by GitHub CI"
+      run: |
+        set -euo pipefail
+        : > hcuniverse.log
+        set +e
+        timeout 9000 lake build HCUniverse 2>&1 | tee -a hcuniverse.log
+        RC=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "HC_UNIVERSE_BUILD_FAILED_OR_TIMEOUT_RC=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' hcuniverse.log; then echo "HC_UNIVERSE_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' hcuniverse.log | head -60; exit 1; fi
+        echo "HC UNIVERSE MODULES BUILT:"
+        grep -cE '(Built|Replayed) HCUniverse\.' hcuniverse.log || true
+        echo HC_UNIVERSE_GREEN=1
+      shell: bash
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: hcuniverse-log
+        path: hcuniverse.log
+        retention-days: 30
