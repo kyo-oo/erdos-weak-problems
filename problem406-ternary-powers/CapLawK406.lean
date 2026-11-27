@@ -70,7 +70,8 @@ classical methods.
 
 namespace CapLawK406
 
-open Arsenal.CardinalWorlds
+-- (the r4 receipt: Arsenal/CardinalWorlds.lean declares everything at ROOT —
+-- no namespace to open; `v2r`, `ternaryLog3` resolve directly)
 
 /-! ## §0 The engine — self-contained `v2r` theory -/
 
@@ -124,7 +125,7 @@ theorem three_pow_mod_eight (d : Nat) :
       rw [he, Nat.pow_succ 3 (2 * e), Nat.pow_mul, h9]
       ring
     rw [hpow, Nat.mul_mod, nine_pow_mod_eight]
-    decide
+    -- (the r4 receipt: the rw chain closes the goal; no `decide` needed)
 
 /-- Every power of three is odd. -/
 theorem three_pow_odd (i : Nat) : 3^i % 2 = 1 := by
@@ -139,17 +140,23 @@ theorem v2r_two_pow_mul_odd (t : Nat) (m : Nat) (hm : m % 2 = 1) :
     v2r (2^t * m) = t := by
   induction t with
   | zero =>
-    rw [Nat.pow_zero, Nat.mul_one]
+    rw [Nat.pow_zero, Nat.one_mul]
     exact v2r_eq_zero_of_odd hm
   | succ t ih =>
-    have hp : 2^(t + 1) = 2 * 2^t := Nat.pow_succ 2 t
+    have hp : 2^(t + 1) = 2 * 2^t := pow_succ 2 t
     have hmul : 2^(t + 1) * m = 2 * (2^t * m) := by rw [hp]; ring
     have hne : ¬ 2^(t + 1) * m = 0 := by
       have hm1 : 1 ≤ m := by omega
-      have h2 : 2 ≤ 2^(t + 1) := by rw [hp]; omega
+      have h2 : 2 ≤ 2^(t + 1) := by
+        rw [hp]
+        have h1t : (0:Nat) < 2^t := by positivity
+        omega
       omega
-    have heven : (2^(t + 1) * m) % 2 = 0 := by rw [hmul]; omega
-    have hdiv : (2^(t + 1) * m) / 2 = 2^t * m := by rw [hmul]; omega
+    have heven : (2^(t + 1) * m) % 2 = 0 := by
+      rw [hmul, Nat.mul_mod]
+      norm_num
+    have hdiv : (2^(t + 1) * m) / 2 = 2^t * m := by
+      rw [hmul, Nat.two_mul_div_two]
     rw [v2r.eq_def (2^(t + 1) * m), if_neg hne, if_pos heven, hdiv, ih]
     omega
 
@@ -158,7 +165,7 @@ an odd number. -/
 theorem exists_two_pow_decomp (n : Nat) (hn : 0 < n) :
     ∃ t m : Nat, n = 2^t * m ∧ m % 2 = 1 := by
   induction n using Nat.strong_induction_on with
-  | ind n ih =>
+  | h n ih =>
     rcases Nat.mod_two_eq_zero_or_one n with h | h
     · have hn2 : 2 ≤ n := by omega
       have hlt : n / 2 < n := Nat.div_lt_self (by omega) (by omega)
@@ -178,7 +185,6 @@ theorem v2r_mul (a b : Nat) (ha : 0 < a) (hb : 0 < b) :
   obtain ⟨tb, mb, hbeq, hmb⟩ := exists_two_pow_decomp b hb
   have hodd : ma * mb % 2 = 1 := by
     rw [Nat.mul_mod, hma, hmb]
-    rfl
   have hprod : a * b = 2^(ta + tb) * (ma * mb) := by
     have hpt : 2^ta * 2^tb = 2^(ta + tb) := (Nat.pow_add 2 ta tb).symm
     rw [haeq, hbeq]
@@ -258,10 +264,12 @@ theorem cap_pair (a b : Nat) (h : b < a) :
 $(1 + 3^x)(1 + 3^y)$ has $v_2 \le 4$. -/
 theorem v2r_product_four (x y : Nat) :
     v2r ((1 + 3^x) * (1 + 3^y)) ≤ 4 := by
-  have hxo : (3 : Nat)^x % 2 = 1 := three_pow_odd x
-  have hyo : (3 : Nat)^y % 2 = 1 := three_pow_odd y
-  have hx : 0 < 1 + 3^x := by omega
-  have hy : 0 < 1 + 3^y := by omega
+  have hx : 0 < 1 + 3^x := by
+    have h3 : (0:Nat) < 3^x := by positivity
+    omega
+  have hy : 0 < 1 + 3^y := by
+    have h3 : (0:Nat) < 3^y := by positivity
+    omega
   rw [v2r_mul _ _ hx hy]
   have vx := v2r_one_add_three_pow x
   have vy := v2r_one_add_three_pow y
