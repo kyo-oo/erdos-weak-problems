@@ -1,3 +1,5 @@
+import Mathlib
+
 /-
   GSTLawStackRound32.lean — THE INPUT-AXIS DECOMPOSITION (Round 32)
 
@@ -44,7 +46,7 @@ weight-(2p-1) Hodge structure of level ≤ 1. -/
 structure TwoLevel where
   carrier : Type
   [addCommGroup : AddCommGroup carrier]
-  [moduleZ : Module ℤ carrier]
+  [m[moduleZ : Module ℤ carrier]
   C : Module.End ℤ carrier
   C_sq : C * C = -(1 : Module.End ℤ carrier)
 

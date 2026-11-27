@@ -1,3 +1,5 @@
+import Mathlib
+
 -- GSTLawStackRound41.lean — DRAFT-NOT-COMPILED (the unregistered research-only
 -- face per §13; no workflow path matches, no CI fires; ledger-108 per-part
 -- labels: every part below is a [Shape record] — the statement shapes of the

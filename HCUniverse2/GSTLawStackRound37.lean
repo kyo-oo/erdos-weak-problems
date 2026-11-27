@@ -1,3 +1,5 @@
+import Mathlib
+
 /-
   GSTLawStackRound37.lean -- ROUND 37, THE GALOIS-CLOSURE DESCENT STRIKE
   (the non-Galois CM shapes of R2' at the committed census: CLOSED)
