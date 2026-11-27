@@ -20,46 +20,37 @@ methods, no external inputs):
 EQUIVALENT to the cut word `omegaCutWord σ u` being digit-two-free,
 where `K = 3^σ * u` is the three-free decomposition.  The whole Erdős
 #406 problem becomes ONE question: which exponents have a clean cut
-word?  (The dust chambers study exactly this object; the two languages
-are now interchangeable by theorem.)
+word?
 
 ## §2 THE CORRECTED FRONTIER (the accounting repair)
 
 The sharp frontier's row-family accounting carried a stale cell: class
-`64 mod 81` was listed among the five uncovered row classes, but the
-green cascade level two (`GSTClimbInfiniteFamily.dust_fire_row_four`,
+`64 mod 81` was listed among the uncovered row classes, but the green
+cascade level two (`GSTClimbInfiniteFamily.dust_fire_row_four`,
 CI-certified) kills every exponent `K ≡ 64 mod 81` unconditionally at
-row four.  The corrected reduction law: the full verdict needs the
-sharp-frontier fire premise only for exponents with `K % 81 ≠ 64` —
-the row family shrinks from five cells to four `{1, 10, 28, 37}`.
+row four.  The honest accounting: the true 3-free frontier (the
+docstring's five-class row list missed twenty-seven classes) is
+thirty-two mod-81 classes; the green cascade cuts it to twenty-two;
+and the mathematical survivor target (verified dual-method, stable
+from row four on) is the EIGHT cells {1, 4, 10, 13, 28, 31, 37, 40}.
 
-## §3 THE MAHLER DIAGONAL TRAJECTORY LAW (the hypothesis, sharpened
-into pure divisibility geometry)
+## §3 THE MAHLER DIAGONAL TRAJECTORY LAW
 
 Let `c s = (4^(3^s) − 1) / 3^(s+1)` be the LTE tower coefficient and
-`D a u s = 2u·c s − 2a + 9` the Mahler witness cofactor (so the Mahler
-witness is `3^(s+1) · D a u s`, exactly).  Then:
-
-* the tower step law: `c (s+1) − c s = 3^(s+1) · E` with `E` a
-  three-adic unit — the step valuation is EXACTLY `s+1`, sharpening
-  the green stability law `c_stable`;
-* the trajectory dichotomy: for every `(a, u)` either the valuation of
-  `D a u s` is EVENTUALLY CONSTANT (the fracture case — the lock fails
-  at an explicit precision `t+2`), or `D a u s` rides the EXACT
-  DIAGONAL `v₃ = s+1` forever;
-* THE EQUIVALENCE: `MahlerSharp` (the named hypothesis input of the
-  crown chain) is EQUIVALENT to "no admissible `(a, u)` rides the
-  exact diagonal forever" — a statement about an infinite explicit
-  divisibility trajectory, with no p-adic analysis object anywhere.
-
-The honest boundary, restated in its most elementary form: the one
-remaining hypothesis of the #406 crown chain is exactly the
-non-existence of an infinite exact-diagonal trajectory.
+`D a u s = 2u·c s − 2a + 9` the Mahler witness cofactor (the Mahler
+witness is `3^(s+1) · D a u s`, exactly).  Then the tower step law
+(`c (s+1) − c s = 3^(s+1) · E` with `E` a three-adic unit — the step
+valuation is EXACTLY `s+1`), the trajectory dichotomy (every `(a, u)`
+either fractures at an eventually-constant valuation or rides the
+EXACT DIAGONAL `v₃ = s+1` forever — no third trajectory), and THE
+EQUIVALENCE: `MahlerSharp` is EQUIVALENT to "no admissible `(a, u)`
+rides the exact diagonal forever" — a pure infinite divisibility
+trajectory statement, no p-adic analysis object anywhere.
 -/
 
 namespace MahlerDiagonal406
 
-open GSTGraphV2OmegaWaveLaw (omegaCutWord)
+open GSTGraphV2OmegaWaveLaw (omegaCutWord omega_cut_factor)
 open GSTCanonicalSevenAxisBridge (digit3)
 
 set_option maxHeartbeats 20000000
@@ -92,14 +83,16 @@ theorem cancel_pow_three {s : Nat} {x y : ℤ}
 theorem unit_product {u : Nat} {E : ℤ} (hu : ¬ 3 ∣ u) (hE : ¬ (3:ℤ) ∣ E) :
     (2 * (u:ℤ) * E) % 3 ≠ 0 := by
   have hu3 : (u:ℤ) % 3 ≠ 0 := coe_not_three_dvd hu
-  have hE3m : E % 3 ≠ 0 := fun hz => hE (Int.dvd_iff_emod_eq_zero.mpr hz)
+  have hE3m : E % 3 ≠ 0 := by
+    intro hz
+    exact hE (Int.dvd_iff_emod_eq_zero.mpr hz)
   have hvals : (u:ℤ) % 3 = 1 ∨ (u:ℤ) % 3 = 2 := by
-    have h1 := Int.emod_lt_of_pos (u:ℤ) (by norm_num : (0:ℤ) < 3)
-    have h2 := Int.emod_nonneg (u:ℤ) (by norm_num)
+    have h1 : (u:ℤ) % 3 < 3 := Int.emod_lt_of_pos _ (by norm_num)
+    have h2 : (0:ℤ) ≤ (u:ℤ) % 3 := Int.emod_nonneg _ (by norm_num)
     omega
   have hvalsE : E % 3 = 1 ∨ E % 3 = 2 := by
-    have h1 := Int.emod_lt_of_pos E (by norm_num : (0:ℤ) < 3)
-    have h2 := Int.emod_nonneg E (by norm_num)
+    have h1 : E % 3 < 3 := Int.emod_lt_of_pos _ (by norm_num)
+    have h2 : (0:ℤ) ≤ E % 3 := Int.emod_nonneg _ (by norm_num)
     omega
   rcases hvals with hu1 | hu1 <;> rcases hvalsE with hE1 | hE1 <;>
     rw [show 2 * (u:ℤ) * E = 2 * ((u:ℤ) * E) from by ring,
@@ -116,22 +109,28 @@ theorem digit_shift_below (σ W p : Nat) (hp : 1 ≤ p) (hpσ : p ≤ σ) :
     (pow_dvd_pow 3 (by omega))
   have hkpow : k = 3^(σ+1-p) := by
     have h1 : 3^p * 3^(σ+1-p) = 3^(σ+1) := by
-      rw [← Nat.pow_add]; congr 1; omega
-    exact Nat.eq_of_mul_eq_mul_left (by positivity) (hk.symm.trans h1)
+      have h2 := Nat.pow_add 3 p (σ+1-p)
+      rw [← h2]
+      congr 1
+      omega
+    exact Nat.eq_of_mul_eq_mul_left (by positivity) (hk.symm.trans h1.symm)
   have hsplit : 1 + 3^(σ+1) * W = 1 + 3^p * (k * W) := by rw [hk]; ring
   have hdiv2 : (1 + 3^p * (k * W)) / 3^p = k * W := by
     rw [Nat.add_mul_div_left _ _ (by positivity : (0:Nat) < 3^p)]
     have h1lt : 1 / 3^p = 0 := Nat.div_eq_of_lt (by
-      have h3 : (3:Nat)^1 ≤ 3^p := pow_le_pow_left (by omega) hp
-      have : (3:Nat) ≤ 3^p := by simpa using h3
-      omega)
+      obtain ⟨p', rfl⟩ : ∃ p', p = p' + 1 := ⟨p - 1, by omega⟩
+      have h3p : (1:Nat) < 3^(p'+1) := by
+        rw [Nat.pow_succ]
+        have : (1:Nat) ≤ 3^p' := by positivity
+        omega
+      exact h3p)
     rw [h1lt, Nat.zero_add]
   have hthree : (3:Nat) ∣ k * W := by
-    refine ⟨3^(σ-p), ?_⟩
-    rw [hkpow]
+    rw [Nat.dvd_iff_mod_eq_zero, hkpow]
     have hs : (σ+1-p) = (σ-p)+1 := by omega
     rw [hs, Nat.pow_succ]
-    ring
+    have heq : 3 ^ (σ - p) * 3 * W = 3 * (3 ^ (σ - p) * W) := by ring
+    rw [heq, Nat.mul_mod_right]
   rw [hsplit, hdiv2, Nat.dvd_iff_mod_eq_zero.mp hthree]
 
 /-- Digits above the cut: position `σ+1+j` of `1 + 3^(σ+1)·W` is
@@ -141,30 +140,33 @@ theorem digit_shift_at (σ W j : Nat) :
   unfold digit3
   have hqpos : (0:Nat) < 3^j := by positivity
   have hqmod : W % 3^j < 3^j := Nat.mod_lt _ hqpos
-  have hsplit : W = 3^j * (W / 3^j) + W % 3^j := Nat.div_add_mod W (3^j)
+  have hsplit : W = 3^j * (W / 3^j) + W % 3^j :=
+    (Nat.div_add_mod W (3^j)).symm
+  have hpow : (3:Nat)^(σ+1) * 3^j = 3^(σ+1+j) := by
+    have h := Nat.pow_add 3 (σ+1) j
+    rw [← h]
+    congr 1
+    omega
   have hmul : 3^(σ+1) * W
       = 3^(σ+1+j) * (W / 3^j) + 3^(σ+1) * (W % 3^j) := by
-    rw [hsplit]
-    have hpe : 3^(σ+1) * (3^j * (W / 3^j)) = 3^(σ+1+j) * (W / 3^j) := by
-      rw [← Nat.pow_add]; congr 1; omega
-    rw [hpe]; ring
+    rw [hsplit, Nat.mul_assoc, hpow]
+    ring
   have hlt : 1 + 3^(σ+1) * (W % 3^j) < 3^(σ+1+j) := by
     have h1 : 3^(σ+1) * (W % 3^j) ≤ 3^(σ+1) * (3^j - 1) :=
-      Nat.mul_le_mul_left _ hqmod
-    have h3 : 3^(σ+1) * 3^j = 3^(σ+1+j) := by
-      rw [← Nat.pow_add]; congr 1; omega
+      Nat.mul_le_mul_left _ (by omega)
     have h4 : 3^(σ+1) * (3^j - 1) + 1 < 3^(σ+1) * 3^j := by
       have hpos : (0:Nat) < 3^(σ+1) := by positivity
       have hltj : 3^j - 1 < 3^j := by omega
-      have := Nat.mul_lt_mul_of_pos_left hltj hpos
+      have hm := Nat.mul_lt_mul_of_pos_left hltj hpos
       omega
+    rw [hpow] at h4
     omega
   have hdiv : (1 + 3^(σ+1) * (W % 3^j) + 3^(σ+1+j) * (W / 3^j)) / 3^(σ+1+j)
       = W / 3^j := by
     have h5 : 1 + 3^(σ+1) * (W % 3^j) + 3^(σ+1+j) * (W / 3^j)
-        = 3^(σ+1+j) * (W / 3^j) + (1 + 3^(σ+1) * (W % 3^j)) := by ring
+        = (1 + 3^(σ+1) * (W % 3^j)) + 3^(σ+1+j) * (W / 3^j) := by ring
     rw [h5, Nat.add_mul_div_left _ _ (by positivity : (0:Nat) < 3^(σ+1+j)),
-      Nat.div_eq_of_lt hlt, Nat.add_zero]
+      Nat.div_eq_of_lt hlt, Nat.zero_add]
   have h6 : 1 + (3^(σ+1+j) * (W / 3^j) + 3^(σ+1) * (W % 3^j))
       = 1 + 3^(σ+1) * (W % 3^j) + 3^(σ+1+j) * (W / 3^j) := by ring
   rw [hmul, h6, hdiv]
@@ -210,8 +212,12 @@ theorem no_cantorian_iff_no_clean_cutword :
   constructor
   · intro hnc σ u hu hK
     by_contra hclean
+    have htrue : noTernaryTwo (omegaCutWord σ u) = true := by
+      cases h : noTernaryTwo (omegaCutWord σ u) with
+      | true => rfl
+      | false => exact absurd h hclean
     exact hnc ⟨3^σ * u, hK,
-      (cantorian_iff_cutword_clean (3^σ*u) σ u rfl).mpr hclean⟩
+      (cantorian_iff_cutword_clean (3^σ*u) σ u rfl).mpr htrue⟩
   · intro hcut hK
     obtain ⟨K, hK8, hcand⟩ := hK
     obtain ⟨σ, u, hσu, hu⟩ :=
@@ -223,19 +229,59 @@ theorem no_cantorian_iff_no_clean_cutword :
 
 /-! ## §2 THE CORRECTED FRONTIER — the cascade credit -/
 
+/-- The cascade case tree: a sharp-frontier exponent either lies in
+one of the green cascade's three kill families (and fires
+unconditionally there) or the fire premise applies. -/
+theorem fire_of_frontier_or_cascade
+    (hsharp : ∀ K : Nat, 8 ≤ K →
+      WindowFire406.erdos_406_sharp_frontier_class K →
+      K % 9 ≠ 7 →
+      (K % 27 ≠ 19 ∧ K % 27 ≠ 22 ∧ K % 27 ≠ 25) →
+      (K % 81 ≠ 55 ∧ K % 81 ≠ 58 ∧ K % 81 ≠ 64 ∧
+        K % 81 ≠ 67 ∧ K % 81 ≠ 73 ∧ K % 81 ≠ 76) →
+      ∃ p : Nat, 1 ≤ p ∧ digit3 (4 ^ K) p = 2)
+    (K : Nat) (hK : 8 ≤ K)
+    (hfront : WindowFire406.erdos_406_sharp_frontier_class K) :
+    K % 9 = 7 ∨ K % 27 = 19 ∨ K % 27 = 22 ∨ K % 27 = 25 ∨
+      K % 81 = 55 ∨ K % 81 = 58 ∨ K % 81 = 64 ∨ K % 81 = 67 ∨
+      K % 81 = 73 ∨ K % 81 = 76 ∨
+      ∃ p : Nat, 1 ≤ p ∧ digit3 (4 ^ K) p = 2 := by
+  by_cases h9 : K % 9 = 7
+  · exact Or.inl h9
+  · by_cases h19 : K % 27 = 19
+    · exact Or.inr (Or.inl h19)
+    · by_cases h22 : K % 27 = 22
+      · exact Or.inr (Or.inr (Or.inl h22))
+      · by_cases h25 : K % 27 = 25
+        · exact Or.inr (Or.inr (Or.inr (Or.inl h25)))
+        · by_cases h55 : K % 81 = 55
+          · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h55))))
+          · by_cases h58 : K % 81 = 58
+            · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h58)))))
+            · by_cases h64 : K % 81 = 64
+              · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+                  (Or.inl h64))))))
+              · by_cases h67 : K % 81 = 67
+                · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+                    (Or.inr (Or.inl h67)))))))
+                · by_cases h73 : K % 81 = 73
+                  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+                      (Or.inr (Or.inr (Or.inl h73))))))))
+                  · by_cases h76 : K % 81 = 76
+                    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+                        (Or.inr (Or.inr (Or.inr h76))))))))
+                    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
+                        (Or.inr (Or.inr (Or.inr (Or.inr
+                          (hsharp K hK hfront h9 ⟨h19, h22, h25⟩
+                            ⟨h55, h58, h64, h67, h73, h76⟩)))))))))
+
 /-- **THE CORRECTED SHARP REDUCTION LAW (the full cascade credit).**  The
 full even-exponent verdict needs the sharp-frontier fire premise only
 OUTSIDE the green cascade's three unconditional kill families: class 7
-mod 9 (row two, `dust_fire_row_two`), classes 19, 22, 25 mod 27 (row
-three, `dust_fire_row_three`) and classes 55, 58, 64, 67, 73, 76 mod 81
-(row four, `dust_fire_row_four`) — all CI-certified in
+mod 9 (row two), classes 19, 22, 25 mod 27 (row three) and classes
+55, 58, 64, 67, 73, 76 mod 81 (row four) — all CI-certified in
 `GSTClimbInfiniteFamily`, none credited in the frontier definition's
-accounting.  The honest accounting repair: the true 3-free frontier
-(the docstring's five-class row list missed twenty-seven classes) is
-thirty-two mod-81 classes; the green cascade cuts it to twenty-two;
-class 64 — the stale cell the campaign carried — is dead at row four;
-and the mathematical survivor target (verified dual-method, stable
-from row four on) is the EIGHT cells {1, 4, 10, 13, 28, 31, 37, 40}. -/
+accounting. -/
 theorem even_conjecture_of_sharp_frontier_minus_cascade
     (hsharp : ∀ K : Nat, 8 ≤ K →
       WindowFire406.erdos_406_sharp_frontier_class K →
@@ -247,42 +293,30 @@ theorem even_conjecture_of_sharp_frontier_minus_cascade
     ∀ K : Nat, 8 ≤ K → noTernaryTwo (4 ^ K) = false := by
   refine WindowFire406.erdos_406_even_conjecture_of_sharp_frontier_fires ?_
   intro K hK hfront
-  by_cases h9 : K % 9 = 7
-  · exact ⟨2, by omega, GSTClimbInfiniteFamily.dust_fire_row_two K h9⟩
-  · by_cases h27 : K % 27 = 19 ∨ K % 27 = 22 ∨ K % 27 = 25
-    · obtain h19 | h22 | h25 := h27
-      · exact ⟨3, by omega,
-          GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inl h19)⟩
-      · exact ⟨3, by omega,
-          GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inl h22))⟩
-      · exact ⟨3, by omega,
-          GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inr h25))⟩
-    · push_neg at h27
-      obtain ⟨h19, h22, h25⟩ := h27
-      by_cases h81 : K % 81 = 55 ∨ K % 81 = 58 ∨ K % 81 = 64 ∨
-          K % 81 = 67 ∨ K % 81 = 73 ∨ K % 81 = 76
-      · obtain h55 | h58 | h64 | h67 | h73 | h76 := h81
-        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-            (Or.inl h55)⟩
-        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-            (Or.inr (Or.inl h58))⟩
-        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-            (Or.inr (Or.inr (Or.inl h64)))⟩
-        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-            (Or.inr (Or.inr (Or.inr (Or.inl h67))))⟩
-        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-            (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h73)))))⟩
-        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-            (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h76)))))⟩
-      · push_neg at h81
-        obtain ⟨h55, h58, h64, h67, h73, h76⟩ := h81
-        exact hsharp K hK hfront h9 ⟨h19, h22, h25⟩
-          ⟨h55, h58, h64, h67, h73, h76⟩
+  rcases fire_of_frontier_or_cascade hsharp K hK hfront with
+    h7 | h19 | h22 | h25 | h55 | h58 | h64 | h67 | h73 | h76 | hfire
+  · exact ⟨2, by omega, GSTClimbInfiniteFamily.dust_fire_row_two K h7⟩
+  · exact ⟨3, by omega,
+      GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inl h19)⟩
+  · exact ⟨3, by omega,
+      GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inl h22))⟩
+  · exact ⟨3, by omega,
+      GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inr h25))⟩
+  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+      (Or.inl h55)⟩
+  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+      (Or.inr (Or.inl h58))⟩
+  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+      (Or.inr (Or.inr (Or.inl h64)))⟩
+  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+      (Or.inr (Or.inr (Or.inr (Or.inl h67))))⟩
+  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+      (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h73)))))⟩
+  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+      (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h76)))))⟩
+  · exact hfire
 
-/-- **The corrected full-verdict equivalence (the cascade credit).**  The
-universal statement (every `2^n`, `n ≥ 9`, owns its ternary digit two) is
-equivalent to the sharp-frontier fire premise restricted outside the
-cascade's three kill families. -/
+/-- **The corrected full-verdict equivalence (the cascade credit).** -/
 theorem full_verdict_iff_sharp_frontier_minus_cascade :
     (∀ n : Nat, 9 ≤ n → noTernaryTwo (2 ^ n) = false) ↔
       (∀ K : Nat, 8 ≤ K →
@@ -297,8 +331,30 @@ theorem full_verdict_iff_sharp_frontier_minus_cascade :
     exact WindowFire406.erdos_406_full_verdict_iff_sharp_frontier_fires.mp
       hverdict K hK hfront
   · intro hsharp
-    exact even_conjecture_of_sharp_frontier_minus_cascade
-      (fun K hK hfront h9 h27 h81 => hsharp K hK hfront h9 h27 h81)
+    refine WindowFire406.erdos_406_full_verdict_iff_sharp_frontier_fires.mpr ?_
+    intro K hK hfront
+    rcases fire_of_frontier_or_cascade hsharp K hK hfront with
+      h7 | h19 | h22 | h25 | h55 | h58 | h64 | h67 | h73 | h76 | hfire
+    · exact ⟨2, by omega, GSTClimbInfiniteFamily.dust_fire_row_two K h7⟩
+    · exact ⟨3, by omega,
+        GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inl h19)⟩
+    · exact ⟨3, by omega,
+        GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inl h22))⟩
+    · exact ⟨3, by omega,
+        GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inr h25))⟩
+    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+        (Or.inl h55)⟩
+    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+        (Or.inr (Or.inl h58))⟩
+    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+        (Or.inr (Or.inr (Or.inl h64)))⟩
+    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+        (Or.inr (Or.inr (Or.inr (Or.inl h67))))⟩
+    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+        (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h73)))))⟩
+    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+        (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h76)))))⟩
+    · exact hfire
 
 /-! ## §3 THE MAHLER DIAGONAL TRAJECTORY LAW -/
 
@@ -325,8 +381,8 @@ theorem c_not_three (n : Nat) : ¬ 3 ∣ GSTTowerFire.c n := by
         exact ⟨m * (GSTTowerFire.c n * GSTTowerFire.c n
           + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n)),
           by rw [hm]; ring⟩
-      rw [hstep, Nat.add_mod, (Nat.dvd_iff_mod_eq_zero _ _).mp hcorr,
-        Nat.zero_add]
+      rw [hstep, Nat.add_mod, (Nat.dvd_iff_mod_eq_zero _ _).mp hcorr] at hdiv
+      omega
 
 /-- **THE TOWER STEP LAW.**  The step of the tower coefficient carries
 exactly `s+1` factors of three: `c (s+1) − c s = 3^(s+1) * E` with `E`
@@ -340,9 +396,7 @@ theorem c_step_unit (s : Nat) :
         * (((GSTTowerFire.c s : ℤ) * (GSTTowerFire.c s : ℤ))
           + (3:ℤ)^s * ((GSTTowerFire.c s : ℤ) * (GSTTowerFire.c s : ℤ)
             * (GSTTowerFire.c s : ℤ))) := by
-    have h := GSTTowerFire.c_succ_eq s
-    push_cast at h ⊢
-    exact h
+    exact_mod_cast GSTTowerFire.c_succ_eq s
   refine ⟨(GSTTowerFire.c s : ℤ) * (GSTTowerFire.c s : ℤ)
       + (3:ℤ)^s * ((GSTTowerFire.c s : ℤ) * (GSTTowerFire.c s : ℤ)
         * (GSTTowerFire.c s : ℤ)), ?_, ?_⟩
@@ -353,13 +407,13 @@ theorem c_step_unit (s : Nat) :
     · rw [c_zero] at hdvd
       norm_num at hdvd
     · have h3s : ((3:ℤ)^(s'+1)) % 3 = 0 := by
+        refine Int.dvd_iff_emod_eq_zero.mp ⟨(3:ℤ)^s', ?_⟩
         rw [pow_succ]
-        exact Int.mul_emod_left _ _
+        ring
       have h3term : ((3:ℤ)^(s'+1) * ((GSTTowerFire.c (s'+1) : ℤ)
           * (GSTTowerFire.c (s'+1) : ℤ) * (GSTTowerFire.c (s'+1) : ℤ))) % 3 = 0 := by
         rw [Int.mul_emod _ _ 3, h3s, Int.zero_mul, Int.zero_emod]
-      rw [Int.add_emod, h3term, Int.zero_add,
-        Int.mul_emod _ _ 3] at hdvd
+      rw [Int.add_emod, h3term, Int.add_zero, Int.mul_emod _ _ 3] at hdvd
       have hlt : (GSTTowerFire.c (s'+1) : ℤ) % 3 < 3 :=
         Int.emod_lt_of_pos _ (by norm_num)
       have hge : (0:ℤ) ≤ (GSTTowerFire.c (s'+1) : ℤ) % 3 :=
@@ -394,16 +448,16 @@ theorem D_odd (a u s : Nat) : D a u s % 2 = 1 := by
   have hr : 2 * (u:ℤ) * (GSTTowerFire.c s : ℤ) - 2 * (a:ℤ) + 9
       = 2 * ((u:ℤ) * (GSTTowerFire.c s : ℤ) - (a:ℤ) + 4) + 1 := by ring
   have h0 : (2 * ((u:ℤ) * (GSTTowerFire.c s : ℤ) - (a:ℤ) + 4)) % 2 = 0 := by
-    rw [Int.dvd_iff_emod_eq_zero]
-    exact ⟨_, rfl⟩
+    refine Int.dvd_iff_emod_eq_zero.mp ⟨(u:ℤ) * (GSTTowerFire.c s : ℤ) - (a:ℤ) + 4, ?_⟩
+    ring
   rw [hr, Int.add_emod, h0, Int.zero_add]
   norm_num
 
 theorem D_ne_zero (a u s : Nat) : D a u s ≠ 0 := by
   intro h
-  have h1 := D_odd a u s
-  rw [h] at h1
-  norm_num at h1
+  have h1 : D a u s % 2 = 1 := D_odd a u s
+  rw [h, Int.zero_emod] at h1
+  exact absurd h1 (by norm_num)
 
 /-- The cofactor step identity. -/
 theorem D_step (a u s : Nat) :
@@ -423,25 +477,32 @@ theorem step_above (a u s : Nat) (hu : ¬ 3 ∣ u)
   have hB : D a u (s+1)
       = (3:ℤ)^(s+1) * (3 * dhat + 2 * (u:ℤ) * E) := by
     have hst := D_step a u s
-    rw [hst, hE, hd, pow_succ_three]
-    ring
+    rw [hE] at hst
+    have hd' : D a u s = 3 * ((3:ℤ)^(s+1) * dhat) := by
+      rw [hd, pow_succ_three]
+      ring
+    linear_combination hst + hd'
   have hBmod : (3 * dhat + 2 * (u:ℤ) * E) % 3 ≠ 0 := by
     have hu3 : (2 * (u:ℤ) * E) % 3 ≠ 0 := unit_product hu hE3
     have h30 : (3 * dhat) % 3 = 0 := by
-      rw [Int.dvd_iff_emod_eq_zero]
-      exact ⟨dhat, rfl⟩
-    rw [Int.add_emod, h30, Int.zero_add]
-    exact hu3
+      refine Int.dvd_iff_emod_eq_zero.mp ⟨dhat, ?_⟩
+      ring
+    intro hcon
+    rw [Int.add_emod, h30, Int.zero_add] at hcon
+    have hlt : (2 * (u:ℤ) * E) % 3 < 3 := Int.emod_lt_of_pos _ (by norm_num)
+    have hge : (0:ℤ) ≤ (2 * (u:ℤ) * E) % 3 := Int.emod_nonneg _ (by norm_num)
+    omega
   refine ⟨⟨_, hB⟩, ?_⟩
   intro hdvd
   obtain ⟨k, hk⟩ := hdvd
   rw [hB] at hk
   have hsplit : (3:ℤ)^(s+2) = (3:ℤ)^(s+1) * 3 := by rw [pow_succ_three]; ring
-  have hcan : (3:ℤ)^(s+1) * (3 * k) = (3:ℤ)^(s+1) * (3 * dhat + 2 * (u:ℤ) * E) := by
-    rw [← hk, hsplit]
-    ring
-  have h3B : (3:ℤ) ∣ (3 * dhat + 2 * (u:ℤ) * E) := ⟨k, by
-    rw [← cancel_pow_three hcan]; ring⟩
+  rw [hsplit] at hk
+  have hcan : (3:ℤ)^(s+1) * (3 * k)
+      = (3:ℤ)^(s+1) * (3 * dhat + 2 * (u:ℤ) * E) := by
+    linear_combination hk
+  have h3B : (3:ℤ) ∣ (3 * dhat + 2 * (u:ℤ) * E) :=
+    ⟨k, cancel_pow_three hcan⟩
   exact hBmod (Int.dvd_iff_emod_eq_zero.mp h3B)
 
 /-- **The frozen step law.**  Below the diagonal the valuation freezes:
@@ -452,14 +513,15 @@ theorem step_frozen (a u s t : Nat) (hu : ¬ 3 ∣ u) (hle : t ≤ s)
     (3:ℤ)^t ∣ D a u (s+1) ∧ ¬ (3:ℤ)^(t+1) ∣ D a u (s+1) := by
   obtain ⟨E, hE, hE3⟩ := c_step_unit s
   have hstep : D a u (s+1) = D a u s + 2 * (u:ℤ) * ((3:ℤ)^(s+1) * E) := by
-    rw [D_step a u s, hE]
-    ring
+    have hst := D_step a u s
+    rw [hE] at hst
+    linear_combination hst
   have hmid : (3:ℤ)^(t+1) ∣ 2 * (u:ℤ) * ((3:ℤ)^(s+1) * E) := by
     have hp : (3:ℤ)^(t+1) ∣ (3:ℤ)^(s+1) := pow_dvd_pow 3 (by omega)
     exact hp.trans ⟨2 * (u:ℤ) * E, by ring⟩
   have hmidt : (3:ℤ)^t ∣ 2 * (u:ℤ) * ((3:ℤ)^(s+1) * E) :=
     (pow_dvd_pow 3 (by omega : t ≤ t+1)).trans hmid
-  refine ⟨h0.add hmidt, ?_⟩
+  refine ⟨by rw [hstep]; exact h0.add hmidt, ?_⟩
   intro hdvd
   apply h1
   have hminus : D a u (s+1) - 2 * (u:ℤ) * ((3:ℤ)^(s+1) * E) = D a u s := by
@@ -502,15 +564,15 @@ theorem exists_val : ∀ (n : Nat) (x : ℤ), x.natAbs = n → x ≠ 0 →
         intro yc
         rw [yc] at hy
         simp at hy
-        exact hx0 hy.symm
+        exact hx0 hy
       have hny : y.natAbs < n := by
         have habs : (3 * y).natAbs = 3 * y.natAbs := by
           rw [Int.natAbs_mul]
           norm_num
-        rw [← hy, habs, ← hx]
         have hypos : 0 < y.natAbs := Int.natAbs_pos.mpr hy0
+        rw [← hx, hy, habs]
         omega
-      obtain ⟨t, ht0, ht1⟩ := ih y.natAbs rfl hy0
+      obtain ⟨t, ht0, ht1⟩ := ih y.natAbs hny hy0
       refine ⟨t+1, ?_, ?_⟩
       · rw [hy, pow_succ_three]
         exact mul_dvd_mul_left 3 ht0
@@ -564,19 +626,21 @@ theorem fracture_of_frozen (a u : Nat)
   intro hdvd
   obtain ⟨k, hk⟩ := hdvd
   rw [W_eq] at hk
-  have hsplit : (3:ℤ)^(max S S₀ + t + 2)
+  have hsplit : (3:ℤ)^(max S S₀ + (t+2))
       = (3:ℤ)^(max S S₀ + 1) * (3:ℤ)^(t+1) := by
-    rw [← Nat.pow_add]; congr 1; omega
+    have hp := pow_add (3:ℤ) (max S S₀ + 1) (t + 1)
+    rw [← hp]
+    congr 1
+    omega
+  rw [hsplit] at hk
   have hcan : (3:ℤ)^(max S S₀ + 1) * ((3:ℤ)^(t+1) * k)
       = (3:ℤ)^(max S S₀ + 1) * D a u (max S S₀) := by
-    rw [← hk, hsplit]; ring
+    linear_combination hk
   exact (hf (max S S₀) (le_max_right _ _)).2
-    ⟨k, cancel_pow_three hcan⟩
+    ⟨k, (cancel_pow_three hcan).symm⟩
 
 /-- **THE DIAGONAL CHAIN FROM THE LOCK.**  If the pair `(a, u)` receives
-the relative lock (the Mahler hypothesis family's divisibility), then
-the cofactor rides the exact diagonal forever: for all sufficiently
-large `s`, `D a u s` carries exactly `s+1` factors of three. -/
+the relative lock, then the cofactor rides the exact diagonal forever. -/
 theorem diagonal_chain_of_lock (a u : Nat) (hu : ¬ 3 ∣ u)
     (hlock : ∀ q : Nat, ∃ S : Nat, ∀ s : Nat, S ≤ s →
       (3:ℤ)^(s+q) ∣ W a u s) :
@@ -608,7 +672,10 @@ theorem lock_of_diagonal_chain (a u : Nat)
       have h1 : (3:ℤ)^(q') ∣ (3:ℤ)^(s+1) := pow_dvd_pow 3 (by omega)
       exact h1.trans (hS₀ s (le_trans (le_max_left _ _) hs))
     have hsplit : (3:ℤ)^(s + (q'+1)) = (3:ℤ)^(s+1) * (3:ℤ)^(q') := by
-      rw [← Nat.pow_add]; congr 1; omega
+      have hp := pow_add (3:ℤ) (s + 1) q'
+      rw [← hp]
+      congr 1
+      omega
     rw [hsplit]
     exact mul_dvd_mul_left _ hd
 
@@ -636,6 +703,7 @@ theorem mahler_sharp_iff_no_diagonal_chain :
 
 #print axioms cantorian_iff_cutword_clean
 #print axioms no_cantorian_iff_no_clean_cutword
+#print axioms fire_of_frontier_or_cascade
 #print axioms even_conjecture_of_sharp_frontier_minus_cascade
 #print axioms full_verdict_iff_sharp_frontier_minus_cascade
 #print axioms c_not_three
