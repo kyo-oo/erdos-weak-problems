@@ -156,12 +156,9 @@ theorem digit_shift_at (σ W j : Nat) :
     have hm : 3^(σ+1) * (3^j - 1) < 3^(σ+1) * 3^j :=
       Nat.mul_lt_mul_of_pos_left hltj hpos
     rw [hpow] at hm
-    have hgap : 3^(σ+1) * (3^j - 1) + 3^(σ+1) = 3^(σ+1+j) := by
+    have hgap : 3^(σ+1) * (3^j - 1) + 3^(σ+1) * 1 = 3^(σ+1+j) := by
       have hsub : (3^j - 1) + 1 = 3^j := Nat.sub_add_cancel (by omega)
-      have h1' : 3^(σ+1) * (3^j - 1) + 3^(σ+1) * 1
-          = 3^(σ+1) * ((3^j - 1) + 1) :=
-        (Nat.mul_add (3^(σ+1)) (3^j - 1) 1).symm
-      rw [h1', hsub]
+      rw [← Nat.mul_add (3^(σ+1)) (3^j - 1) 1, hsub]
       exact hpow
     have h2 : (2:Nat) ≤ 3^(σ+1) := by
       rw [Nat.pow_succ]
