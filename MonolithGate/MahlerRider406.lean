@@ -159,6 +159,7 @@ theorem nat_eq_zero_of_dvd_of_lt {a b : Nat} (h : a ∣ b) (hlt : b < a) :
 theorem int_pow_three_cast (t : Nat) :
     ((3^(t+1) : ℕ) : ℤ) = (3:ℤ)^(t+1) := by
   push_cast
+  rfl
 
 /-- An integer power of three dividing a natural cast divides the
 natural number. -/
@@ -266,13 +267,10 @@ theorem rider_global_pin (a u : Nat)
 theorem two_mul_c_not_dvd_three (s : Nat) :
     ¬ (3:ℤ) ∣ (2 * (GSTTowerFire.c s : ℤ)) := by
   intro h
-  rw [Int.dvd_iff_emod_eq_zero] at h
-  rw [Int.mul_emod] at h
-  have h2 : (2:ℤ) % 3 = 2 := by norm_num
-  rw [h2] at h
-  rcases mul_eq_zero.mp h with hz | hX
-  · norm_num at hz
-  · exact coe_not_three_dvd (c_not_three s) hX
+  have hcs : (3:ℤ) ∣ (GSTTowerFire.c s : ℤ) :=
+    three_dvd_of_not_dvd_mul 2 _ (by norm_num) h
+  rw [Int.dvd_iff_emod_eq_zero] at hcs
+  exact coe_not_three_dvd (c_not_three s) hcs
 
 /-- **THE CLASS COLLAPSE.**  At every depth `s`, all same-head riders
 are congruent modulo `3^(s+1)`: the cofactor divisibility pins `u` to a
@@ -513,7 +511,7 @@ theorem rider_six_family_pin (a u : Nat) (ha : a < 9) (hA : ¬ 3 ∣ a)
     have h54 : (27:ℤ) ∣ (54:ℤ) := ⟨2, by norm_num⟩
     rw [show ((u:ℤ) - 1) = ((u:ℤ) - 55) + 54 from by ring]
     exact hd2.add h54
-  · refine Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl ⟨rfl, ?_⟩)))))
+  · refine Or.inr (Or.inr (Or.inr (Or.inr (Or.inr ⟨rfl, ?_⟩))))
     have heq : ((u:ℤ) - 11 * (2 * ((8:Nat):ℤ) - 9)) = ((u:ℤ) - 77) := by
       norm_num
     rw [heq] at hd2
@@ -528,7 +526,7 @@ MOST SIX ELEMENTS (at most one `u` per head, one head family each). -/
 theorem rider_universe_at_most_six (a u₁ u₂ : Nat)
     (h₁ : a < 9 ∧ ¬ 3 ∣ a ∧ ¬ 3 ∣ u₁ ∧ RiderGE a u₁)
     (h₂ : a < 9 ∧ ¬ 3 ∣ a ∧ ¬ 3 ∣ u₂ ∧ RiderGE a u₂) : u₁ = u₂ :=
-  rider_eq_of_same_head a u₁ u₂ h₁.2.2.1 h₂.2.2.1
+  rider_eq_of_same_head a u₁ u₂ h₁.2.2.2 h₂.2.2.2
 
 /-! ## Receipts -/
 

@@ -146,17 +146,14 @@ theorem v2r_two_pow_mul_odd (t : Nat) (m : Nat) (hm : m % 2 = 1) :
     have hp : 2^(t + 1) = 2^t * 2 := pow_succ 2 t
     have hmul : 2^(t + 1) * m = 2 * (2^t * m) := by rw [hp]; ring
     have hne : ¬ 2^(t + 1) * m = 0 := by
-      have hm1 : 1 ≤ m := by omega
-      have h2 : 2 ≤ 2^(t + 1) := by
-        rw [hp]
-        have h1t : (0:Nat) < 2^t := by positivity
-        omega
-      omega
+      have hm1 : (0:Nat) < m := by omega
+      have h2 : (0:Nat) < 2^(t + 1) := Nat.pow_pos (by decide)
+      exact ne_of_gt (Nat.mul_pos h2 hm1)
     have heven : (2^(t + 1) * m) % 2 = 0 := by
       rw [hmul, Nat.mul_mod]
       norm_num
     have hdiv : (2^(t + 1) * m) / 2 = 2^t * m := by
-      rw [hmul, Nat.two_mul_div_two]
+      rw [hmul, Nat.mul_div_cancel_left _ (by decide)]
     rw [v2r.eq_def (2^(t + 1) * m), if_neg hne, if_pos heven, hdiv, ih]
     omega
 
