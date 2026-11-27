@@ -28,16 +28,14 @@ NEW laws that no single source file contains:
   depth: the all-ones middle-third placement is impossible for every
   integer core. The dust shape is dead on arrival.
 * §4 THE DIAGONAL-TO-TOWER FIRE — `tower_digit_two_of_diagonal_fire`: a
-  diagonal fire at depth `k₀ ≤ s+1` is a ternary digit two of the tower
-  `4^(3^s·core)` at the NAMED row `s + k₀` — through the repo's own
+  diagonal fire at depth `k0 ≤ s+1` is a ternary digit two of the tower
+  `4^(3^s·core)` at the NAMED row `s + k0` — through the repo's own
   window law and the frozen-diagonal stabilization.
 * §5 THE TOWER VERDICT — `tower_verdict_of_mahler`: under Mahler
   sharpness, every tower `3^s·core` EITHER owns its digit two outright
   (at a named row, when the cut reaches the core's minimal fire depth)
   OR carries its dodge band intact (the mission board's tower-primitive
-  domain, when the cut is below the fire depth). The tower family's
-  entire remaining content is the ONE named Mahler input plus the
-  mission board's own primitive for the below-fire cuts.
+  domain, when the cut is below the fire depth).
 
 Every theorem carries `#print axioms` receipts. No classical results are
 used — only the campaign's own green chambers, composed.
@@ -60,24 +58,21 @@ theorem digit_two_of_mid_range (X j : Nat)
   have hp : 3^(j+1) = 3 * 3^j := by rw [Nat.pow_succ]
   have hlt : X % 3^(j+1) < 3 * 3^j := by
     rw [← hp]; exact Nat.mod_lt _ (Nat.pow_pos (by decide))
-  set R := X % 3^(j+1) with hRdef
-  -- R / 3^j = 2: squeezed by the third bounds
-  have hRj : R / 3^j = 2 := by
-    have hge : 2 ≤ R / 3^j := by
-      have h1 : 2 * 3^j ≤ R := hlo
-      have h2 : (2 * 3^j) / 3^j ≤ R / 3^j :=
-        Nat.div_le_div_right h1
+  have hRj : (X % 3^(j+1)) / 3^j = 2 := by
+    have hge : 2 ≤ (X % 3^(j+1)) / 3^j := by
+      have h2 : (2 * 3^j) / 3^j ≤ (X % 3^(j+1)) / 3^j :=
+        Nat.div_le_div_right hlo
       rw [Nat.mul_div_cancel _ (Nat.pow_pos (by decide))] at h2
       exact h2
-    have hlt3 : R / 3^j < 3 := by
+    have hlt3 : (X % 3^(j+1)) / 3^j < 3 := by
       rw [Nat.div_lt_iff_lt_mul (Nat.pow_pos (by decide))]
       omega
     omega
-  -- X = R + 3^j * (3 * Q) with Q = X / 3^(j+1)
   obtain ⟨Q, hQ⟩ := Nat.div_add_mod X (3^(j+1))
-  have hX : X = R + 3^j * (3 * Q) := by
-    rw [hQ, hRdef, hp]; ring
-  have hdiv : X / 3^j = R / 3^j + 3 * Q := by
+  have hX : X = (X % 3^(j+1)) + 3^j * (3 * Q) := by
+    rw [hQ, hp]; ring
+  have hdiv : X / 3^j
+      = (X % 3^(j+1)) / 3^j + 3 * Q := by
     rw [hX, Nat.add_mul_div_left _ _ (Nat.pow_pos (by decide))]
   rw [hdiv, hRj, Nat.add_mod, Nat.mul_mod_right,
     Nat.mod_mod, Nat.mod_self, Nat.zero_add, Nat.mod_mod]
@@ -90,24 +85,24 @@ satisfy the exact cut factorization `4^(3^n) = 1 + 3^(n+1) * X`, and the
 factor `3^(n+1)` is positive, so the quotient is unique. -/
 theorem c_eq_omegaCutWord (n : Nat) :
     GSTTowerFire.c n = omegaCutWord n 1 := by
-  have h1 : 4^(3^n * 1) = 1 + 3^(n+1) * GSTTowerFire.c n :=
-    GSTTowerFire.four_pow_three_pow_eq n
+  have h1 : 4^(3^n * 1) = 1 + 3^(n+1) * GSTTowerFire.c n := by
+    rw [Nat.mul_one]
+    exact GSTTowerFire.four_pow_three_pow_eq n
   have h2 : 4^(3^n * 1) = 1 + 3^(n+1) * omegaCutWord n 1 :=
-    omega_cut_factor n 1
+    GSTGraphV2OmegaWaveLaw.omega_cut_factor n 1
   have hEq : 3^(n+1) * GSTTowerFire.c n
-      = 3^(n+1) * omegaCutWord n 1 := by
-    have h := h1.symm.trans h2
-    exact Nat.add_right_cancel h
+      = 3^(n+1) * omegaCutWord n 1 :=
+    Nat.add_left_cancel (h1.symm.trans h2)
   exact Nat.eq_of_mul_eq_mul_left (Nat.pow_pos (by decide)) hEq
 
 /-- The three-free shape condition in divisibility form. -/
 theorem not_three_dvd_of_shape (core : Nat)
     (hfree : core % 3 = 1 ∨ core % 3 = 2) : ¬ 3 ∣ core := by
   intro hd
-  have hmod : core % 3 = 0 := Nat.mod_eq_of_dvd hd
+  have hmod : core % 3 = 0 := (Nat.dvd_iff_mod_eq_zero.mp hd)
   rcases hfree with h | h
-  · rw [hmod] at h; norm_num at h
-  · rw [hmod] at h; norm_num at h
+  · rw [hmod] at h; exact absurd h (by decide)
+  · rw [hmod] at h; exact absurd h (by decide)
 
 /-! ## §2 The bridge — the dust shape IS the ghost ray -/
 
@@ -134,7 +129,7 @@ theorem ghost_of_dust_shape (core : Nat)
 
 /-- **THE MAHLER DUST FRACTURE.**  Under the Mahler sharpness input, no
 three-free core can carry the full dust shape: either a sheet window
-fires, or the diagonal FIRES at a named depth `k₀` — the middle-third
+fires, or the diagonal FIRES at a named depth `k` — the middle-third
 placement that the ghost ray demands at every depth is impossible at
 some depth for every integer core. -/
 theorem mahler_dust_fracture (H : GSTWorldtraceMahler.MahlerSharp)
@@ -171,43 +166,43 @@ theorem mahler_dust_fracture_c (H : GSTWorldtraceMahler.MahlerSharp)
 /-! ## §4 The diagonal-to-tower fire — the named row -/
 
 /-- **THE MIXED-COEFFICIENT TRIT TRANSFER.**  If the diagonal fires at
-depth `k₀` (in the `c (k₀-1)` coefficient form) and `k₀ ≤ s+1`, then the
+depth `k0` (in the `c (k0-1)` coefficient form) and `k0 ≤ s+1`, then the
 frozen diagonal at cut `s` carries the same top-third fire: the
 coefficient's trits are frozen below the cut. -/
-theorem c_trit_fire_transfer (s k₀ : Nat) (core : Nat)
-    (hk : k₀ ≤ s + 1)
-    (hfire : 2 * 3^(k₀-1) ≤ (GSTTowerFire.c (k₀-1) * core) % 3^k₀) :
-    2 * 3^(k₀-1) ≤ (lteCoeff s * core) % 3^k₀ := by
-  have hc : GSTTowerFire.c (k₀-1) = lteCoeff (k₀-1) :=
-    GSTGhostRay.c_eq_lteCoeff (k₀-1)
-  have hstab : lteCoeff s % 3^((k₀-1)+1)
-      = lteCoeff (k₀-1) % 3^((k₀-1)+1) :=
-    GSTDiagonalRead.lteCoeff_stable (k₀-1) s (by omega)
-  have hmod : (lteCoeff s * core) % 3^k₀
-      = (lteCoeff (k₀-1) * core) % 3^k₀ := by
-    have hE : 3^((k₀-1)+1) = 3^k₀ := by
-      rw [show (k₀-1)+1 = k₀ from by omega]
-    rw [hE] at hstab
+theorem c_trit_fire_transfer (s k0 core : Nat)
+    (hk : k0 ≤ s + 1)
+    (hfire : 2 * 3^(k0-1) ≤ (GSTTowerFire.c (k0-1) * core) % 3^k0) :
+    2 * 3^(k0-1) ≤ (core * lteCoeff s) % 3^k0 := by
+  have hc : GSTTowerFire.c (k0-1) = lteCoeff (k0-1) :=
+    GSTGhostRay.c_eq_lteCoeff (k0-1)
+  have hstab : lteCoeff s % 3^((k0-1)+1)
+      = lteCoeff (k0-1) % 3^((k0-1)+1) :=
+    GSTDiagonalRead.lteCoeff_stable (k0-1) s (by omega)
+  have hE : 3^((k0-1)+1) = 3^k0 := by
+    congr 1; omega
+  rw [hE] at hstab
+  have hmod : (core * lteCoeff s) % 3^k0
+      = (core * lteCoeff (k0-1)) % 3^k0 := by
     rw [Nat.mul_mod, Nat.mul_mod, hstab]
-  rw [hmod, ← hc]
+  rw [hmod, ← hc, Nat.mul_comm core (GSTTowerFire.c (k0-1))]
   exact hfire
 
-/-- **THE DIAGONAL-TO-TOWER FIRE.**  A diagonal fire at depth `k₀ ≤ s+1`
+/-- **THE DIAGONAL-TO-TOWER FIRE.**  A diagonal fire at depth `k0 ≤ s+1`
 is a ternary digit two of the tower `4^(3^s·core)` at the NAMED row
-`s + k₀`: the window law reads the frozen diagonal's top-third fire
+`s + k0`: the window law reads the frozen diagonal's top-third fire
 directly into the power's digit stream. -/
-theorem tower_digit_two_of_diagonal_fire (s k₀ : Nat) (core : Nat)
-    (hk : k₀ ≤ s + 1)
-    (hfire : 2 * 3^(k₀-1) ≤ (GSTTowerFire.c (k₀-1) * core) % 3^k₀) :
-    digit3 (4^(3^s * core)) (s + k₀) = 2 := by
-  have hlo : 2 * 3^(k₀-1) ≤ (lteCoeff s * core) % 3^k₀ :=
-    c_trit_fire_transfer s k₀ core hk hfire
-  have htrit : (lteCoeff s * core) / 3^(k₀-1) % 3 = 2 := by
-    refine digit_two_of_mid_range (lteCoeff s * core) (k₀-1) ?_
-    rw [show (k₀-1)+1 = k₀ from by omega] at *
+theorem tower_digit_two_of_diagonal_fire (s k0 core : Nat)
+    (hk : k0 ≤ s + 1)
+    (hfire : 2 * 3^(k0-1) ≤ (GSTTowerFire.c (k0-1) * core) % 3^k0) :
+    digit3 (4^(3^s * core)) (s + k0) = 2 := by
+  have hlo : 2 * 3^(k0-1) ≤ (core * lteCoeff s) % 3^k0 :=
+    c_trit_fire_transfer s k0 core hk hfire
+  have htrit : (core * lteCoeff s) / 3^(k0-1) % 3 = 2 := by
+    refine digit_two_of_mid_range (core * lteCoeff s) (k0-1) ?_
+    rw [show (k0-1)+1 = k0 from by omega] at hlo
     exact hlo
-  have hwin := GSTDiagonalRead.diagonal_window_law s core (k₀-1) (by omega)
-  have hrow : s + k₀ = s + 1 + (k₀-1) := by omega
+  have hwin := GSTDiagonalRead.diagonal_window_law s core (k0-1) (by omega)
+  have hrow : s + k0 = s + 1 + (k0-1) := by omega
   rw [hrow, hwin]
   exact htrit
 
@@ -230,28 +225,25 @@ theorem tower_verdict_of_mahler (H : GSTWorldtraceMahler.MahlerSharp)
     (∀ k : Nat, 3 ≤ k → k ≤ s + 1 →
       (GSTTowerFire.c (k-1) * core) % 3^k < 2 * 3^(k-1)) := by
   obtain ⟨k, hk3, hfire⟩ := mahler_dust_fracture_c H core hfree hwin
-  -- the minimal fire depth, by well-ordering
   have hex : ∃ m : Nat, 3 ≤ m ∧
       2 * 3^(m-1) ≤ (GSTTowerFire.c (m-1) * core) % 3^m :=
     ⟨k, hk3, hfire⟩
-  obtain ⟨k₀, hk₀⟩ := Nat.find hex
-  have hk₀3 : 3 ≤ k₀ := hk₀.1
-  have hk₀fire : 2 * 3^(k₀-1)
-      ≤ (GSTTowerFire.c (k₀-1) * core) % 3^k₀ := hk₀.2
-  by_cases hle : k₀ ≤ s + 1
-  · exact Or.inl ⟨s + k₀,
-      tower_digit_two_of_diagonal_fire s k₀ core hle hk₀fire⟩
+  obtain ⟨kf, hkf⟩ := Nat.find hex
+  have hkf3 : 3 ≤ kf := hkf.1
+  have hkffire : 2 * 3^(kf-1)
+      ≤ (GSTTowerFire.c (kf-1) * core) % 3^kf := hkf.2
+  by_cases hle : kf ≤ s + 1
+  · exact Or.inl ⟨s + kf,
+      tower_digit_two_of_diagonal_fire s kf core hle hkffire⟩
   · refine Or.inr ?_
     intro k hk3' hks
-    have hlt : k < k₀ := by omega
+    have hlt : k < kf := by omega
     have hnf : ¬ (3 ≤ k ∧
         2 * 3^(k-1) ≤ (GSTTowerFire.c (k-1) * core) % 3^k) :=
       Nat.find_min hex hlt
-    have hres : (GSTTowerFire.c (k-1) * core) % 3^k < 2 * 3^(k-1) := by
-      by_contra hc
-      push_neg at hc
-      exact hnf ⟨hk3', hc⟩
-    exact hres
+    by_contra hc
+    push_neg at hc
+    exact hnf ⟨hk3', hc⟩
 
 /-! ## §6 The honest record — the reduction law -/
 
