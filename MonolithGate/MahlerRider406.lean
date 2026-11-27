@@ -96,17 +96,22 @@ theorem three_dvd_of_not_dvd_mul (x y : ℤ) (hx : ¬ (3:ℤ) ∣ x)
 
 /-- Cancellation of a three-coprime factor from a full power:
 if `3^(s+1) ∣ x·y` and `3 ∤ x`, then `3^(s+1) ∣ y`. -/
-theorem pow_three_cancel (s : Nat) {x y : ℤ} (hx : ¬ (3:ℤ) ∣ x)
-    (h : (3:ℤ)^(s+1) ∣ x * y) : (3:ℤ)^(s+1) ∣ y := by
+theorem pow_three_cancel_aux : ∀ (s : Nat) (x y : ℤ), ¬ (3:ℤ) ∣ x →
+    (3:ℤ)^(s+1) ∣ x * y → (3:ℤ)^(s+1) ∣ y := by
+  intro s
   induction s with
   | zero =>
-      rw [show (3:ℤ)^(0+1) = 3 from by norm_num] at h ⊢
+      intro x y hx h
+      rw [show (3:ℤ)^(0+1) = 3 from by norm_num] at h
       exact three_dvd_of_not_dvd_mul x y hx h
   | succ s ih =>
+      intro x y hx h
       have h1 : (3:ℤ)^(s+1) ∣ x * y := (pow_dvd_pow 3 (by omega)).trans h
-      have h2 : (3:ℤ)^(s+1) ∣ y := ih h1
+      have h2 : (3:ℤ)^(s+1) ∣ y := ih x y hx h1
       obtain ⟨k, hk⟩ := h
       obtain ⟨j, hj⟩ := h2
+      have hpow : (3:ℤ)^((s+1)+1) = 3 * (3:ℤ)^(s+1) := by rw [pow_succ]
+      rw [hpow] at hk
       have hcan : (3:ℤ)^(s+1) * (x * j) = (3:ℤ)^(s+1) * (3 * k) := by
         linear_combination hk - x * hj
       have hxj : x * j = 3 * k :=
@@ -114,8 +119,13 @@ theorem pow_three_cancel (s : Nat) {x y : ℤ} (hx : ¬ (3:ℤ) ∣ x)
       have hj3 : (3:ℤ) ∣ j := three_dvd_of_not_dvd_mul x j hx ⟨k, hxj⟩
       obtain ⟨m, hm⟩ := hj3
       refine ⟨m, ?_⟩
-      rw [hj, hm, Nat.pow_succ]
+      rw [hj, hm, hpow]
       ring
+
+/-- The packaged form of the cancellation law. -/
+theorem pow_three_cancel (s : Nat) {x y : ℤ} (hx : ¬ (3:ℤ) ∣ x)
+    (h : (3:ℤ)^(s+1) ∣ x * y) : (3:ℤ)^(s+1) ∣ y :=
+  pow_three_cancel_aux s x y hx h
 
 /-- Every natural number is smaller than the next power of three. -/
 theorem three_pow_succ_gt (n : Nat) : n < 3^(n+1) := by
@@ -126,6 +136,16 @@ theorem three_pow_succ_gt (n : Nat) : n < 3^(n+1) := by
       rw [Nat.pow_succ]
       omega
 
+/-- A natural number divisible by a larger natural number is zero. -/
+theorem nat_eq_zero_of_dvd_of_lt {a b : Nat} (h : a ∣ b) (hlt : b < a) :
+    b = 0 := by
+  obtain ⟨k, hk⟩ := h
+  rcases Nat.eq_zero_or_pos k with hk0 | hkpos
+  · rw [hk0, Nat.mul_zero] at hk; exact hk
+  · have hle : a ≤ a * k := Nat.le_mul_of_pos_right a hkpos
+    rw [← hk] at hle
+    exact absurd hle (Nat.not_le.mpr hlt)
+
 /-- The cast of a power of three is the power of the cast. -/
 theorem int_pow_three_cast (t : Nat) : ((3^(t+1) : ℕ) : ℤ) = (3:ℤ)^(t+1) := by
   induction t with
@@ -134,6 +154,27 @@ theorem int_pow_three_cast (t : Nat) : ((3^(t+1) : ℕ) : ℤ) = (3:ℤ)^(t+1) :
       rw [Nat.pow_succ 3 (t+1), Nat.pow_succ (3:ℤ) (t+1)]
       push_cast
       rw [ih]
+
+/-- An integer power of three dividing a natural cast divides the
+natural number. -/
+theorem int_pow_dvd_nat_cast {s n : Nat}
+    (h : (3:ℤ)^(s+1) ∣ ((n : ℕ) : ℤ)) : 3^(s+1) ∣ n := by
+  obtain ⟨k, hk⟩ := h
+  have hp : (0:ℤ) < (3:ℤ)^(s+1) := by positivity
+  have hn : (0:ℤ) ≤ ((n : ℕ) : ℤ) := by exact_mod_cast Nat.zero_le n
+  have hk0 : (0:ℤ) ≤ k := by
+    by_contra hc
+    push_neg at hc
+    have hneg : (3:ℤ)^(s+1) * k < 0 := Int.mul_neg_of_pos_of_neg hp hc
+    rw [← hk] at hneg
+    omega
+  have hkN : k = ((k.natAbs : ℕ) : ℤ) := by
+    have hna := Int.natAbs_of_nonneg hk0
+    exact hna.symm
+  rw [hkN] at hk
+  rw [(int_pow_three_cast s).symm] at hk
+  push_cast at hk
+  exact ⟨k.natAbs, Int.natCast_inj.mp hk⟩
 
 /-! ## §1 The tower's cumulative stabilization and the GLOBAL PIN -/
 
@@ -169,7 +210,7 @@ theorem c_diff_dvd (t s : Nat) (hts : t ≤ s) :
   linear_combination hds' - hdt'
 
 /-- The rider, in its eventual form: the cofactor divisibility holds
-from some depth `S₀` onward. -/
+at every depth. -/
 def RiderGE (a u : Nat) : Prop :=
   ∀ s : Nat, (3:ℤ)^(s+1) ∣ D a u s
 
@@ -234,25 +275,22 @@ theorem rider_eq_of_same_head (a u₁ u₂ : Nat)
   · have hcoesub : ((u₁ - u₂ : ℕ) : ℤ) = (u₁:ℤ) - (u₂:ℤ) := by
       push_cast
       omega
-    have hnat : 3^((u₁ - u₂)+1) ∣ (u₁ - u₂) := by
-      have hd : (3:ℤ)^((u₁ - u₂)+1) ∣ ((u₁:ℤ) - (u₂:ℤ)) :=
-        rider_class_unique a u₁ u₂ (u₁ - u₂) (h1 _) (h2 _)
-      rw [← hcoesub] at hd
-      exact Int.coe_nat_dvd.mp hd
+    have hd : (3:ℤ)^((u₁ - u₂)+1) ∣ ((u₁ - u₂ : ℕ) : ℤ) := by
+      rw [hcoesub]
+      exact rider_class_unique a u₁ u₂ (u₁ - u₂) (h1 _) (h2 _)
+    have hnat : 3^((u₁ - u₂)+1) ∣ (u₁ - u₂) := int_pow_dvd_nat_cast hd
     have hlt : (u₁ - u₂) < 3^((u₁ - u₂)+1) := three_pow_succ_gt _
-    have hz : u₁ - u₂ = 0 := Nat.eq_zero_of_dvd_of_lt hnat hlt
+    have hz : u₁ - u₂ = 0 := nat_eq_zero_of_dvd_of_lt hnat hlt
     omega
-  · have hle' : u₁ ≤ u₂ := by omega
-    have hcoesub : ((u₂ - u₁ : ℕ) : ℤ) = (u₂:ℤ) - (u₁:ℤ) := by
+  · have hcoesub : ((u₂ - u₁ : ℕ) : ℤ) = (u₂:ℤ) - (u₁:ℤ) := by
       push_cast
       omega
-    have hnat : 3^((u₂ - u₁)+1) ∣ (u₂ - u₁) := by
-      have hd : (3:ℤ)^((u₂ - u₁)+1) ∣ ((u₂:ℤ) - (u₁:ℤ)) :=
-        rider_class_unique a u₂ u₁ (u₂ - u₁) (h2 _) (h1 _)
-      rw [← hcoesub] at hd
-      exact Int.coe_nat_dvd.mp hd
+    have hd : (3:ℤ)^((u₂ - u₁)+1) ∣ ((u₂ - u₁ : ℕ) : ℤ) := by
+      rw [hcoesub]
+      exact rider_class_unique a u₂ u₁ (u₂ - u₁) (h2 _) (h1 _)
+    have hnat : 3^((u₂ - u₁)+1) ∣ (u₂ - u₁) := int_pow_dvd_nat_cast hd
     have hlt : (u₂ - u₁) < 3^((u₂ - u₁)+1) := three_pow_succ_gt _
-    have hz : u₂ - u₁ = 0 := Nat.eq_zero_of_dvd_of_lt hnat hlt
+    have hz : u₂ - u₁ = 0 := nat_eq_zero_of_dvd_of_lt hnat hlt
     omega
 
 /-! ## §3 The sharpened socket -/
@@ -266,10 +304,12 @@ theorem chain_of_riderGE (a u : Nat) (hu : ¬ 3 ∣ u) (h : RiderGE a u) :
   · exact hchain
   · exfalso
     obtain ⟨S₀, t, hf⟩ := hfroz
+    have hmS : S₀ ≤ max S₀ t := le_max_left _ _
+    have hmt : t ≤ max S₀ t := le_max_right _ _
     have hGE : (3:ℤ)^((max S₀ t)+1) ∣ D a u (max S₀ t) :=
-      h (max S₀ t) (le_max_left _ _)
+      h (max S₀ t) hmS
     have hF : ¬ (3:ℤ)^(t+1) ∣ D a u (max S₀ t) :=
-      (hf (max S₀ t) (le_max_right _ _)).2
+      (hf (max S₀ t) hmS).2
     exact hF ((pow_dvd_pow 3 (by omega)).trans hGE)
 
 /-- **THE SHARPENED SOCKET.**  `MahlerSharp` — the one remaining named
@@ -469,9 +509,12 @@ theorem rider_universe_at_most_six (a u₁ u₂ : Nat)
 /-! ## Receipts -/
 
 #print axioms three_dvd_of_not_dvd_mul
+#print axioms pow_three_cancel_aux
 #print axioms pow_three_cancel
 #print axioms three_pow_succ_gt
+#print axioms nat_eq_zero_of_dvd_of_lt
 #print axioms int_pow_three_cast
+#print axioms int_pow_dvd_nat_cast
 #print axioms c_le_succ
 #print axioms c_mono
 #print axioms c_diff_dvd
