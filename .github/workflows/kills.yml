@@ -2835,11 +2835,17 @@ jobs:
     - name: Install Lean Mathlib
       run: |
         set -euo pipefail
-        curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2; then
+            if elan toolchain install leanprover/lean4:v4.33.0-rc2 2>/dev/null || true; then break; fi
+          fi
+          echo "ELAN_INSTALL_RETRY attempt=$i failed; sleeping 20s"
+          sleep 20
+        done
         echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
         export PATH="$HOME/.elan/bin:$PATH"
-        lake update
-        lake exe cache get
+        for i in 1 2 3; do lake update && break; echo "LAKE_UPDATE_RETRY attempt=$i"; sleep 15; done
+        for i in 1 2 3; do lake exe cache get && break; echo "CACHE_GET_RETRY attempt=$i"; sleep 15; done
       shell: bash
     - name: "Kernel HC-Universe — THE COMPLETE VENDORED UNIVERSE (S092 Mission A round 2, BOSS order COPY THE ERDOS PROBLEM REPO'S LATEST BRANCH ENTIRELY, EVERY LEAN FILE MUST BE USED TO PROVE): the whole HCUniverse library in one build — all 182 proof-side modules of kyo-oo/HC-PROOF main (the 173 root modules: the Cardinal Worlds CardinalWorlds/V2/PrefixClassifier, the GST V2 graph ontological universe GSTGraphV2* 60+, the four-power direct existence chain GSTFourPower*, the tailF chamber GSTTailF*, the boundary MonolithBoundary, the coherent cosmology, the Hodge/Lefschetz crown GSTUniversalLefschetz*/GSTHodgeAssault/GSTClayOfficial/GSTTransferBridge/GSTGeometricRealizationStage2*, the tactic core GSTTactic, the two ComparatorSmoke markers; the 8 waves/ modules GSTWaveCohomology/GSTNCohomology/GSTVortexSingularity/CardinalWorldsPostulateLaw V1+V2; and the questions/deepmind_problem_406/Solution comparator-solution module) — round-2 first-exposure repairs included: the congrArg/Nat.add_assoc repair at GSTGraphV2CanonicalInfiniteCycle:292 and the ComparatorSmoke comment-header repairs; every proof-side module of the boss's latest branch, namespaced under HCUniverse, verified by GitHub CI"
       run: |
@@ -2895,7 +2901,7 @@ jobs:
         lake env lean MonolithGate/MahlerBridge406.lean 2>&1 | tee -a mahler406.log
         if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' mahler406.log; then echo "MAHLER406_NEGATIVE_GATE_TRIPPED"; grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' mahler406.log; exit 1; fi
         for sym in "MahlerBridge406.c_eq_omegaCutWord" "MahlerBridge406.ghost_of_dust_shape" "MahlerBridge406.mahler_dust_fracture" "MahlerBridge406.mahler_dust_fracture_c" "MahlerBridge406.c_trit_fire_transfer" "MahlerBridge406.tower_digit_two_of_diagonal_fire" "MahlerBridge406.tower_verdict_of_mahler" "MahlerBridge406.mahler_fracture_record"; do
-          if grep -qF "'$sym' does not depend on any axioms" mahler406.log; then :; elif grep -qF "$sym :" mahler406.log; then echo "RECEIPT_OK $sym"; else echo "MAHLER406_RECEIPT_MISSING $sym"; exit 1; fi
+          if grep -qE "'$sym' (does not depend on any axioms|depends on axioms)" mahler406.log; then echo "RECEIPT_OK $sym"; else echo "MAHLER406_RECEIPT_MISSING $sym"; exit 1; fi
         done
         grep -qF "ERDOS406_MAHLER_BRIDGE_GREEN" mahler406.log
         echo ERDOS_406_MAHLER_BRIDGE_GREEN=1
