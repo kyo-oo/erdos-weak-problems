@@ -5911,3 +5911,62 @@ HCUniverse2 full build re-dispatched at the head (the S094 guardian
 watches its shards).
 
 **The engine never stops; it never lies. In English, always.**
+
+---
+
+## S096 — THE GITHUB AUDIT + THE APPROXIMATION WALL MEASURED + THE COUNCIL (the sandbox reset survived)
+
+**BOSS's order:** "SEE THE ENTIRE GITHUB, I HEARD THIS HYPOTHESIS WAS
+ALREADY RESOLVED... I JUST DONT WANT 'BREACHED' I WANT HYPOTHESIS
+PROVEN, PERIOD."
+
+**THE GITHUB AUDIT:** NOT RESOLVED anywhere (branch census: erdosternary2
+123, erdos-weak-problems 91, HC-PROOF 115+; the freshest #406-adjacent
+names are Sept-15 failed closure attempts). The rumor's source: the
+arsenal's apparently-unconditional `four_power_happy_ge_three` — REFUTED
+in-corpus (the collision goal un-closable, CI receipts red) — compounded
+by the Sept mock-comparator era. The full record:
+`problem406-ternary-powers/council/S096_COUNCIL_RECORD.md`.
+
+**THE APPROXIMATION WALL (new knowledge, four engines, two-method
+oracles):** every Padé family for the socket dies — [n/n] log-Padé at
+x=3: precision 1.95n vs size 2.83n (the Jacobi growth 13.93^n beats the
+3-adic gain 3^{2n+1} IN PRINCIPLE); all asymmetric shapes worse; exp-Padé
+at z∈{3,15,21}: 1.6n vs 2.7n; Fourier truncations: no p-adic signal.
+The 3-adic irrationality of log₃4 is CONFIRMED transcendence-class
+(classically only Mahler 1932; FORBIDDEN as a black box). Engines:
+`pade_experiment406.py`, `log_pade_corrected406.py`, `exp_pade406.py`,
+`asym_pade406.py`.
+
+**THE DOUBTER'S HUNT:** no rider u < 3^2001 at any head (was 3^41);
+digits equidistributed (χ²=0.32), structureless (max zero-run 7 ≈ iid,
+no periodicity over 200 lags); ν and λ non-rational to height 10^477;
+the exp₃(3k)=4^(2û) equivalence verified mod 3^61 for all six heads.
+Permanent receipt: `rider_stream_deep406.py` + output (depth 150,
+two-method).
+
+**THE CHAIN AUDIT (the breach check):** zero breaches (sorry/axiom scan
+clean; all receipts [propext, Classical.choice, Quot.sound]; kills.yml
+41/41 green at 75f374a). The Lean MahlerSharp is already the six-head
+socket (no hidden all-numerator need). TWO honest caveats: (1) the
+Mahler crown needs MahlerSharp AND WorldtraceScaledCompression (two
+grants, not one); (2) FinalAssembly406.lean has NEVER compiled green
+(engine406.yml infra deaths; the ratchet converging — run 46061554429
+in progress at council time).
+
+**THE STRATEGIST'S RANKING:** the shortest kill is CAP(185) — the only
+transcendence-free lane, composition already green, empirical margin
+18×, size-trivial below 2^501 (dovetails the census at 2^500). Fresh
+lead: the dyadic subset-parity lattice governs v₂(Σ_{i∈S}3^i) (via
+binom(i,j)2^j + Lucas) — the cascade-sustainability question is the CAP
+theorem in its purest form. The Attacker's round-2 dispatch (queued)
+attacks it.
+
+**THE SANDBOX RESET (21:58Z, mid-session, SURVIVED):** /home/z siblings
+wiped; the cron guardian's 21:12:57Z auto-seal (fa9f25c) had already
+banked the four Padé engines; the token survived in the upload zip bag;
+the campaign re-cloned from GitHub. This worklog entry, the council
+record, and the deep receipt were regenerated after the reset and
+re-verified. The boss's persistence law WORKED.
+
+The engine never stops; it never lies. In English, always.

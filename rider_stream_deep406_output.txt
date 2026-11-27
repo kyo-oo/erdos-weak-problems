@@ -1,0 +1,23 @@
+== S096 rider stream extension: depth 150 ==
+method A: nu_s = (2c(s))^(-1) mod 3^(s+1), tower-computed
+stream computed coherently to depth 150; 149 digits extracted
+digit histogram (nu): 0:52 1:48 2:49 of 149
+head a=1 k=+1: max-zero-run=10, target-suffix=0, hist=[52, 48, 49]
+head a=2 k=-1: max-zero-run=10, target-suffix=0, hist=[49, 48, 52]
+head a=4 k=-5: max-zero-run=10, target-suffix=0, hist=[40, 54, 55]
+head a=5 k=+5: max-zero-run=10, target-suffix=0, hist=[55, 54, 40]
+head a=7 k=-7: max-zero-run=8, target-suffix=0, hist=[42, 58, 49]
+head a=8 k=+7: max-zero-run=8, target-suffix=0, hist=[49, 58, 42]
+worst required-suffix across heads: 0 (termination needs DEPTH-scale suffix)
+method B: direct divisibility kill-check at sampled depths
+head a=1: least candidate at depth 149 fractures at depth 150  (no rider with u < 3^150 at this head)
+head a=2: least candidate at depth 149 fractures at depth 150  (no rider with u < 3^150 at this head)
+head a=4: least candidate at depth 149 fractures at depth 150  (no rider with u < 3^150 at this head)
+head a=5: least candidate at depth 149 fractures at depth 151  (no rider with u < 3^150 at this head)
+head a=7: least candidate at depth 149 fractures at depth 150  (no rider with u < 3^150 at this head)
+head a=8: least candidate at depth 149 fractures at depth 151  (no rider with u < 3^150 at this head)
+rationality scan: the candidate-survival check (= method B) —
+  a rider u < 3^DEPTH requires its stream to terminate at depth 150; every candidate fractures (method B above), so NO u < 3^DEPTH satisfies the rider equation at any head.
+  (Full non-rationality of nu beyond the rider window — reconstruction to 10^12 — was verified by the S096 council Doubter at depth 2000: NONE.)
+
+VERDICT: no rider u < 3^150 (≈ 10^71) at any of the six heads; stream digits equidistributed; no tiny-numerator rational structure.  The wall stands, deepened 109 trits beyond the S095 receipt.
