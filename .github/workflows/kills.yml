@@ -2952,3 +2952,54 @@ jobs:
         name: diagonal406-log
         path: diagonal406.log
         retention-days: 30
+  kernel-406capk:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2; then
+            if elan toolchain install leanprover/lean4:v4.33.0-rc2 2>/dev/null || true; then break; fi
+          fi
+          echo "ELAN_INSTALL_RETRY attempt=$i failed; sleeping 20s"
+          sleep 20
+        done
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        for i in 1 2 3; do lake update && break; echo "LAKE_UPDATE_RETRY attempt=$i"; sleep 15; done
+        for i in 1 2 3; do lake exe cache get && break; echo "CACHE_GET_RETRY attempt=$i"; sleep 15; done
+      shell: bash
+    - name: "Kernel 406-CAPK - THE SMALL-DIGIT CAP LAWS (S094, the council's ATTACKER round, BOSS order 'prove complete and everything'): the first unconditional block of the CAP(185) frontier"
+      run: |
+        set -euo pipefail
+        lake build Arsenal.ErdosTernary2.Basic
+        lake build Arsenal.CardinalWorlds
+        lake build Arsenal.CardinalWorldsV2
+        : > kernel406capk.log
+        set +e
+        lake env lean problem406-ternary-powers/CapLawK406.lean 2>&1 | tee -a kernel406capk.log
+        RC=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "CAPK_BUILD_FAILED_RC=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406capk.log; then
+          echo "CAPK_NEGATIVE_GATE_TRIPPED"
+          grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406capk.log | head -20
+          exit 1
+        fi
+        for SYM in "v2r_eq_zero_of_odd" "v2r_eq_one_of_mod_eight" "v2r_eq_two_of_mod_eight" "three_pow_mod_eight" "v2r_mul" "v2r_pow3_sum_odd_length" "v2r_one_add_three_pow" "v2r_pair" "cap_pair" "v2r_product_four" "cap_product_four"; do
+          if ! grep -q "'CapLawK406.${SYM}' depends on axioms" kernel406capk.log; then
+            echo "CAPK_RECEIPT_MISSING: ${SYM}"
+            exit 1
+          fi
+        done
+        echo "CAPK RECEIPTS: 11/11"
+        echo CAPK_GREEN=1
+      shell: bash
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel406capk-log
+        path: kernel406capk.log
+        retention-days: 30
