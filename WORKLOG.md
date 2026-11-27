@@ -5742,3 +5742,35 @@ pushing, the 8-hour cron guardian armed (job 552614), the token vault
 restored from the zip bag (Drive id 1ZCY5hbZyId7AWeBD-o0yOiRFlxGmKnW-).
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S094 — THE DOUBTER'S EARTHQUAKE (the +10 excess at M=37)
+
+**THE FINDING (verified three ways):** the v₂* curve extended past the
+campaign's table — at **M = 37 the extremal 2-adic valuation jumps to
+47, excess +10** (the campaign's ceiling belief was +4 at M=31, held
+through M=34, dead at M=37 — the L91 boundary law, three levels past
+the table's end). The witness: 22 digits, Σ = 667,799,382,246,031,360
+= 2^47 × 4745 — verified by MITM reconstruction, direct evaluation,
+and the odd-part check; t=48 fails (the jump is exact).
+
+**THE KILLS:** every cap constant C ≤ 9 is REFUTED. The buggy first
+reading (+14 at M=42, a stale-modulus bug) was CAUGHT by the two-method
+verification law and re-run clean: the true curve holds 47 through
+M=44 (excess decaying +10 → +3).
+
+**THE SURVIVORS:** CAP(185) — alive with 18× headroom (max excess +10
+vs the kill threshold +185); the rider margin −22.7 at M=44 (the
+conjecture's truth empirically comfortable). The curve and the full
+report: council/S094_DOUBTER_FRONTIER.md + council/S094_v2star_recomputed.json.
+
+**THE STRATEGIC CONSEQUENCE:** the cap lane is the weaker leg (the jump
+excesses 1, 3, 2, 2, 4, 10 trend up — the block constructions improve).
+The main line for the HFTAIL kill: **the Mahler diagonal lane** — the
+non-periodicity of the frozen diagonal (L ≡ 7 mod 9, 16 mod 27, 16 mod
+81, 178 mod 243, ...) — the S093 kernel's equivalence
+(mahler_sharp_iff_no_diagonal_chain) already reduced the whole problem
+to it.
+
+The engine never stops; it never lies. In English, always.
