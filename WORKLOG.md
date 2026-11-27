@@ -5879,3 +5879,35 @@ computable streams, one per head, at most six riders in existence,
 none below 3^41, each pinned at every depth."
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S095 — THE GREEN SEAL (the repair war's end)
+
+**Run 46061554446 at 38fe061 — 41/41 JOBS GREEN, RUN-LEVEL SUCCESS.**
+Both new kernels sealed:
+
+- **kernel-406rider: GREEN** — the S095 kernel (27 theorems, zero
+  hypotheses, all receipts `[propext, Classical.choice, Quot.sound]`):
+  THE GLOBAL PIN, THE RIDER-CLASS COLLAPSE (at most one rider per
+  head, at most six riders in the universe), THE SHARPENED SOCKET
+  (MahlerSharp ⟺ no admissible rider from depth zero), THE SIX-FAMILY
+  PIN (the rider universe lives in six depth-2 classes
+  u mod 27 ∈ {4,26,16,11,1,23}) + the depth-3+ uniform mod-81 law +
+  the two-method stream receipt gate (the six streams, depth 40+,
+  ladder vs log-series cross-checked, FINITE KILL: no rider u < 3^41
+  at ANY head).
+- **kernel-406capk: GREEN** — S094's CAP kernel (the odd-popcount law,
+  the exact pair law, the product-quadruple law, the cap forms) — its
+  first-ever green run after three repair waves (the root-namespace
+  lesson, the pow_succ flavor, the strong_induction case name, the
+  nested rcases).
+
+**THE REPAIR WAR LEDGER (S095):** rider errors 14 → 6 → 4 → 0;
+capk errors 7 → 4 → 2 → 0; the corpus's own battle-tested idioms
+(the ErdosTernary2 v2r recursion at :1202) closed the last seams.
+Superseded queued runs cancelled to unblock the fleet; the
+HCUniverse2 full build re-dispatched at the head (the S094 guardian
+watches its shards).
+
+**The engine never stops; it never lies. In English, always.**
