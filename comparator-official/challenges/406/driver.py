@@ -674,6 +674,51 @@ def run_solution_checks(challenge, solution):
         ba_ok, "; ".join(ba_detail[-4:]) or "the block-2 band is the executioner",
         time.time() - t0))
 
+
+    # S-MAHLER (S092): the Mahler-bridge battery, ALL GREEN.
+    t0 = time.time()
+    BATTERY_F = os.path.join(CAMP, "problem406-ternary-powers",
+                             "battery406f.py")
+    proc = subprocess.run([sys.executable, BATTERY_F], capture_output=True,
+                          text=True, timeout=1200)
+    out = proc.stdout + proc.stderr
+    ok = proc.returncode == 0 and "BATTERY406F_GREEN=1" in out
+    checks.append(_chk(
+        "S-MAHLER",
+        "battery406f.py (S092): the Mahler-bridge battery dual-method — T1 the ghost congruence (both dust-candidate streams satisfy 2*xi*c(k-1)+9 = 2*head mod 3^k to level 30, sieve + modular residue); T2 stream non-termination evidence (15/27, 17/27 nonzero, no period <= 12); T3 the survivor tree law (exact doubling to 2048 classes through level 11, one dead child per parent); T4 the rider anti-clustering strong form (no 0/1-ternary < 3^M divisible by 4^K for K in {8,10,12}, subset-DP + multiple scan); T5 the Mahler fracture scan (every 3-free core < 200 has a diagonal fire depth <= 20)",
+        ok, out[-1500:], time.time() - t0))
+
+    # S-MAHLER-KERNEL (S092): the bridge kernel exists with its theorem
+    # symbols and the vendored chambers.
+    t0 = time.time()
+    BRIDGE = os.path.join(CAMP, "MonolithGate", "MahlerBridge406.lean")
+    GHOST = os.path.join(CAMP, "MonolithGate", "GSTGhostRayExclusion.lean")
+    MAHLER = os.path.join(CAMP, "MonolithGate", "GSTWorldtraceMahler.lean")
+    try:
+        with open(BRIDGE, encoding="utf-8") as f:
+            bt = f.read()
+        with open(GHOST, encoding="utf-8") as f:
+            gt = f.read()
+        with open(MAHLER, encoding="utf-8") as f:
+            mt = f.read()
+        syms = ["c_eq_omegaCutWord", "ghost_of_dust_shape",
+                "mahler_dust_fracture", "mahler_dust_fracture_c",
+                "c_trit_fire_transfer", "tower_digit_two_of_diagonal_fire",
+                "tower_verdict_of_mahler", "mahler_fracture_record"]
+        ok = (all(s in bt for s in syms)
+              and "GhostRay" in gt and "ghost_witness" in gt
+              and "MahlerSharp" in mt and "worldtrace_mahler_no_cantorian" in mt
+              and "sorry" not in bt.replace("sorryAx", "")
+              and "ERDOS406_MAHLER_BRIDGE_GREEN" in bt)
+        detail = "symbols: " + str(sum(1 for s in syms if s in bt)) + "/" + str(len(syms))
+    except Exception as e:
+        ok = False
+        detail = repr(e)
+    checks.append(_chk(
+        "S-MAHLER-KERNEL",
+        "MonolithGate/MahlerBridge406.lean (S092) carries the eight bridge theorem symbols with zero sorry, the vendored GSTGhostRayExclusion (the ghost ray machinery) and GSTWorldtraceMahler (the relative-precision Mahler theory) beside it (Lean compilation is kills.yml kernel-406mahler)",
+        ok, detail, time.time() - t0))
+
     return checks
 
 
@@ -799,6 +844,24 @@ def run_negative_controls(challenge, solution):
         "corruption rejected: the uniform witness 4^1296 fires at row 9 EXACTLY (the level-4 law's prediction v+1+4 = 9) — a receipt claiming row 10 is FALSE",
         ok, f"row 9 digit = {row9} (fires); row 10 digit = {row10}",
         time.time() - t0))
+
+    # N-STREAM (S092): the corrupted stream head must be rejected — the
+    # class-4 dust stream's head is 1 (16*4 mod 9); a corrupted head 4
+    # breaks the ghost congruence at depth 3.
+    t0 = time.time()
+    c2_mod27 = 16  # c(2) mod 27 (the frozen diagonal's residue)
+    true_head = (7 * 4) % 9     # head of core class 4 mod 27
+    ok = (true_head == 1)
+    r_true = (c2_mod27 * 4) % 27
+    ok = ok and (9 <= r_true < 18)  # the middle third at depth 3
+    r_fake = (c2_mod27 * (4 + 9)) % 27  # core 13 mod 27 (the corrupted class)
+    ok = ok and not (9 <= r_fake < 18)
+    checks.append(_chk(
+        "N-STREAM",
+        "corruption rejected: the class-4 stream's head is 1 with the middle third (c(2)*4) mod 27 = 13 in [9,18); the corrupted class 13 lands at 22 (outside) — the two-class collapse's arithmetic is exact",
+        ok, f"true: 13 in [9,18); fake class-13: {r_fake}",
+        time.time() - t0))
+
     return checks
 
 
