@@ -5630,3 +5630,28 @@ kernel-decide walk) with its proven cure (the linear certificate / native
 pipeline per the S089 laws).
 
 The engine never stops; it never lies. In English, always.
+
+**THE TERMINAL MEASUREMENT (run 45914489318, c3097fc):** the 170-minute window
+ended in a HARD RUNNER KILL at ~133 minutes — no artifact, the always() steps
+skipped (the upload never ran), the job's own step-6 failure with steps 7/8/16
+"skipped": the 16 GB hosted runner's OOM cliff took the whole box mid-elaboration
+(the RSS telemetry banked in run 45901579365 showed a stable 13.7 GB plateau at
+the 103-minute mark; the final phase of WorldtraceLevelNine406's elaboration —
+its 478 kernel decides on 59049-structures — stampeded past the 15.5 GB guard's
+20-second poll window and hit the cliff between polls; an OOM stampede cannot be
+out-polled).
+
+**THE HONEST VERDICT OF THE ROUND:** the threshold/budget ladder is measured
+INSUFFICIENT — WorldtraceLevelNine406's elaboration, as written, does not fit a
+16 GB hosted runner. THE NAMED NEXT FRONT (the campaign's only remaining red
+lane): the module's content repair — the TailAssault406B disease family (the
+long single-process kernel-decide walk) with its two proven cures: the LINEAR
+CERTIFICATE (dbf0092's indexedRows pattern: replace the big kernel decide with
+a position-indexed linear certificate + a pure-logic bridge, statement
+byte-identical) or the NATIVE PIPELINE (the S089m/w laws: closed-term
+native_decide, IR-compiled GMP runtime = milliseconds, axiom profiles honestly
+carrying Lean.ofReduceBool). The module's own receipts (wt_quintic_mod59049,
+dust_fire_row_nine, no22_of_cascade_eight, cantorian_dust_mod_19683) and the
+FinalAssembly406 chain ride directly on this repair.
+
+The engine never stops; it never lies. In English, always.
