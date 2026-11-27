@@ -114,8 +114,7 @@ theorem digit_shift_below (σ W p : Nat) (hp : 1 ≤ p) (hpσ : p ≤ σ) :
       congr 1
       omega
     have h3p : (0:Nat) < 3^p := by positivity
-    exact Nat.eq_of_mul_eq_mul_left (ne_of_gt h3p)
-      (hk.symm.trans h1.symm)
+    exact Nat.eq_of_mul_eq_mul_left h3p (hk.symm.trans h1.symm)
   have hsplit : 1 + 3^(σ+1) * W = 1 + 3^p * (k * W) := by rw [hk]; ring
   have hdiv2 : (1 + 3^p * (k * W)) / 3^p = k * W := by
     rw [Nat.add_mul_div_left _ _ (by positivity : (0:Nat) < 3^p)]
@@ -123,7 +122,7 @@ theorem digit_shift_below (σ W p : Nat) (hp : 1 ≤ p) (hpσ : p ≤ σ) :
       obtain ⟨p', rfl⟩ : ∃ p', p = p' + 1 := ⟨p - 1, by omega⟩
       have h3p : (1:Nat) < 3^(p'+1) := by
         rw [Nat.pow_succ]
-        have : (1:Nat) ≤ 3^p' := by positivity
+        have hpos : (0:Nat) < 3^p' := by positivity
         omega
       exact h3p)
     rw [h1lt, Nat.zero_add]
@@ -144,24 +143,19 @@ theorem digit_shift_at (σ W j : Nat) :
   have hqmod : W % 3^j < 3^j := Nat.mod_lt _ hqpos
   have hsplit : W = 3^j * (W / 3^j) + W % 3^j :=
     (Nat.div_add_mod W (3^j)).symm
-  have hpow : (3:Nat)^(σ+1) * 3^j = 3^(σ+1+j) := by
-    have h := Nat.pow_add 3 (σ+1) j
-    rw [← h]
-    congr 1
-    omega
+  have hpow : (3:Nat)^(σ+1) * 3^j = 3^(σ+1+j) :=
+    (Nat.pow_add 3 (σ+1) j).symm
   have hmul : 3^(σ+1) * W
       = 3^(σ+1+j) * (W / 3^j) + 3^(σ+1) * (W % 3^j) := by
     linear_combination (3:Nat)^(σ+1) * hsplit + hpow * (W / 3^j)
   have hlt : 1 + 3^(σ+1) * (W % 3^j) < 3^(σ+1+j) := by
     have h1 : 3^(σ+1) * (W % 3^j) ≤ 3^(σ+1) * (3^j - 1) :=
       Nat.mul_le_mul_left _ (by omega)
-    have h4 : 3^(σ+1) * (3^j - 1) + 1 < 3^(σ+1+j) := by
-      have hpos : (0:Nat) < 3^(σ+1) := by positivity
-      have hltj : 3^j - 1 < 3^j := by omega
-      have hm : 3^(σ+1) * (3^j - 1) < 3^(σ+1) * 3^j :=
-        Nat.mul_lt_mul_of_pos_left hltj hpos
-      rw [← hpow]
-      omega
+    have hpos : (0:Nat) < 3^(σ+1) := by positivity
+    have hltj : 3^j - 1 < 3^j := by omega
+    have hm : 3^(σ+1) * (3^j - 1) < 3^(σ+1) * 3^j :=
+      Nat.mul_lt_mul_of_pos_left hltj hpos
+    rw [← hpow] at hm
     omega
   have hdiv : (1 + 3^(σ+1) * (W % 3^j) + 3^(σ+1+j) * (W / 3^j)) / 3^(σ+1+j)
       = W / 3^j := by
@@ -342,8 +336,9 @@ theorem c_not_three (n : Nat) : ¬ 3 ∣ GSTTowerFire.c n := by
           + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n)),
           by rw [hm]; ring⟩
       have hcorr0 : (3^(n+1) * (GSTTowerFire.c n * GSTTowerFire.c n
-          + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n))) % 3 = 0 :=
-        (Nat.dvd_iff_mod_eq_zero _ _).mp hcorr
+          + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n))) % 3 = 0 := by
+        rw [Nat.dvd_iff_mod_eq_zero]
+        exact hcorr
       rw [hstep, Nat.add_mod, hcorr0] at hdiv
       omega
 
@@ -545,7 +540,7 @@ theorem exists_val : ∀ (n : Nat) (x : ℤ), x.natAbs = n → x ≠ 0 →
         obtain ⟨k, hk⟩ := hdvd
         refine ⟨k, ?_⟩
         have hring : 3 * ((3:ℤ)^(t+1) * k) = 3 * y := by
-          rw [← hk]; ring
+          linear_combination -hk
         exact Int.eq_of_mul_eq_mul_left (by norm_num) hring
     · exact ⟨0, one_dvd x, by simpa using h3⟩
 
