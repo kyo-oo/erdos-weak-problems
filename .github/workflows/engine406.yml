@@ -122,7 +122,7 @@ jobs:
         # cascade rebuilds the chain through GSTWorldtraceArithmetic; the
         # ~85 upstream closure modules stay banked (the ratchet).
         if [ -d .lake/build ]; then
-          find .lake/build -type f \( -name 'GSTTheAct.*' -o -name 'GSTDiagonalRead.*' -o -name 'GSTClimbInfiniteFamily.*' -o -name 'WorldtraceLevelNine406.*' \) -delete || true
+          find .lake/build -type f \( -name 'GSTTheAct.*' -o -name 'GSTDiagonalRead.*' -o -name 'GSTClimbInfiniteFamily.*' -o -name 'WorldtraceLevelNine406.*' -o -name 'WorldtraceLevelNine406A.*' -o -name 'WorldtraceLevelNine406B.*' -o -name 'WorldtraceLevelNine406C.*' \) -delete || true
         fi
         set +e
         # RSS guard: any single runaway lean past 13 GB dies cleanly
@@ -146,7 +146,7 @@ jobs:
         # the serial law is implemented instead by the per-chamber
         # dependency-ordered incremental ladder - each chamber builds ALONE,
         # peak RSS = the single-chamber max.
-        ( for m in GSTClimbTruthValue GSTTheAct GSTDiagonalRead GSTClimbInfiniteFamily GSTTheActConstruction GSTBladeWave GSTTowerFire GSTWorldtraceArithmetic WorldtraceLevelNine406; do
+        ( for m in GSTClimbTruthValue GSTTheAct GSTDiagonalRead GSTClimbInfiniteFamily GSTTheActConstruction GSTBladeWave GSTTowerFire GSTWorldtraceArithmetic WorldtraceLevelNine406A WorldtraceLevelNine406B WorldtraceLevelNine406C WorldtraceLevelNine406; do
             echo "ENGINE406_CHAMBER_BEGIN file=$m"
             stdbuf -oL -eL lake build MonolithGate.$m 2>&1 | tee -a engine406.log
             RC=${PIPESTATUS[0]}
