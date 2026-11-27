@@ -2809,15 +2809,25 @@ jobs:
         retention-days: 30
 
   # THE HC UNIVERSE (S092 Mission A, BOSS order: COPY THE ERDOS PROBLEM
-  # REPO'S LATEST BRANCH ENTIRELY, EVERY LEAN FILES MUST BE USED TO PROOF):
+  # REPO'S LATEST BRANCH ENTIRELY, EVERY LEAN FILE MUST BE USED TO PROVE):
   # the complete merged mathematical universe from kyo-oo/HC-PROOF main
-  # (Cardinal Worlds + GST V2 Graph Ontological Universe), vendored verbatim
-  # as the HCUniverse library — 181 modules, 436 namespaced import rewrites,
-  # declarations byte-identical, toolchain EXACT (the universe's own pin:
-  # Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2, identical to the campaign pin).
-  # The boss's own comparator certifies the source branch 0 errors / 0
-  # sorries; this kernel re-certifies the ENTIRE universe inside the
-  # campaign with one whole-library build.
+  # (Cardinal Worlds + GST V2 Graph Ontological Universe) — ALL 183 Lean
+  # files of the boss's latest branch: the 182 proof-side modules of the
+  # HCUniverse library (173 root + 8 waves/ + the questions/ Solution
+  # comparator module) + the challenge-side question file vendored verbatim
+  # at questions/deepmind_problem_406/Challenge.lean (its sorry is the
+  # intentional question side of the boss's own comparator; a question is
+  # not a proof, so it stays out of the kernel-built library, exactly as
+  # the boss's own CI keeps it). Round 2 repairs (first exposure: the
+  # boss's comparator only builds HCProof's closure, so 7 of these modules
+  # had never been compiled anywhere): the congr-2/omega associativity bug
+  # at GSTGraphV2CanonicalInfiniteCycle:292 (congr 2 split (a+L)+M = a+(L+M)
+  # into the unprovable a+L = a — rewritten as congrArg over
+  # Nat.add_assoc) and the two parse-dead ComparatorSmoke markers (12-deep
+  # unclosed comment headers — closed). Toolchain EXACT (the universe's own
+  # pin: Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2, identical to the campaign
+  # pin). One whole-library build re-certifies the ENTIRE universe inside
+  # the campaign.
   kernel-hc-universe:
     runs-on: ubuntu-24.04
     steps:
@@ -2831,7 +2841,7 @@ jobs:
         lake update
         lake exe cache get
       shell: bash
-    - name: "Kernel HC-Universe — THE COMPLETE VENDORED UNIVERSE (S092 Mission A, BOSS order COPY THE ERDOS PROBLEM REPO'S LATEST BRANCH ENTIRELY): the whole HCUniverse library in one build — the 173 root modules of kyo-oo/HC-PROOF main (the Cardinal Worlds: CardinalWorlds/V2/PrefixClassifier; the GST V2 graph ontological universe: GSTGraphV2* 60+ modules; the four-power direct existence chain: GSTFourPower*; the tailF chamber: GSTTailFProof/GSTTailFFourthDimension/GSTTailFInfiniteRead; the boundary: MonolithBoundary; the coherent cosmology; the Hodge/Lefschetz crown: GSTUniversalLefschetz*/GSTHodgeAssault/GSTClayOfficial/GSTTransferBridge/GSTGeometricRealizationStage2*; the tactic core: GSTTactic) PLUS the 8 waves/ modules their imports require (GSTWaveCohomology V1/V2, GSTNCohomology V1/V2, GSTVortexSingularity V1/V2, CardinalWorldsPostulateLaw V1/V2) — every module of the boss's latest branch, namespaced under HCUniverse, verified by GitHub CI"
+    - name: "Kernel HC-Universe — THE COMPLETE VENDORED UNIVERSE (S092 Mission A round 2, BOSS order COPY THE ERDOS PROBLEM REPO'S LATEST BRANCH ENTIRELY, EVERY LEAN FILE MUST BE USED TO PROVE): the whole HCUniverse library in one build — all 182 proof-side modules of kyo-oo/HC-PROOF main (the 173 root modules: the Cardinal Worlds CardinalWorlds/V2/PrefixClassifier, the GST V2 graph ontological universe GSTGraphV2* 60+, the four-power direct existence chain GSTFourPower*, the tailF chamber GSTTailF*, the boundary MonolithBoundary, the coherent cosmology, the Hodge/Lefschetz crown GSTUniversalLefschetz*/GSTHodgeAssault/GSTClayOfficial/GSTTransferBridge/GSTGeometricRealizationStage2*, the tactic core GSTTactic, the two ComparatorSmoke markers; the 8 waves/ modules GSTWaveCohomology/GSTNCohomology/GSTVortexSingularity/CardinalWorldsPostulateLaw V1+V2; and the questions/deepmind_problem_406/Solution comparator-solution module) — round-2 first-exposure repairs included: the congrArg/Nat.add_assoc repair at GSTGraphV2CanonicalInfiniteCycle:292 and the ComparatorSmoke comment-header repairs; every proof-side module of the boss's latest branch, namespaced under HCUniverse, verified by GitHub CI"
       run: |
         set -euo pipefail
         : > hcuniverse.log

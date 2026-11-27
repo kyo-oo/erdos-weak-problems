@@ -64,16 +64,25 @@ name = "KernelChamber406"
 globs = ["KernelChamber406.+"]
 
 # THE HC UNIVERSE (S092, BOSS order: COPY THE ERDOS PROBLEM REPO'S LATEST
-# BRANCH ENTIRELY): the complete merged mathematical universe from
-# kyo-oo/HC-PROOF main (Cardinal Worlds + GST V2 Graph Ontological Universe,
-# sealed at the S092 vendoring). Every Lean file of the boss's latest branch,
-# vendored verbatim with namespaced imports: 181 modules — the 173 root
-# files plus the 8 waves/ files their imports require (the boss's own
-# HCUniverse lib roots); the 2-file questions/ comparator harness is
-# excluded (challenge-side sorry, imported by nothing). Folder HCUniverse/
-# per the campaign convention (lib name = folder name, glob Name.+ like
-# Arsenal/Monolith/MonolithGate). Toolchain: the universe's own pin
-# (Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2) — identical to the campaign pin.
+# BRANCH ENTIRELY, EVERY LEAN FILE MUST BE USED TO PROVE): the complete
+# merged mathematical universe from kyo-oo/HC-PROOF main — ALL 183 Lean
+# files of the boss's latest branch: the 182 proof-side modules here under
+# HCUniverse/ (the 173 root files + the 8 waves/ files + the
+# questions/deepmind_problem_406/Solution comparator-solution module,
+# imports namespaced HCUniverse.*) plus the challenge-side question file
+# at questions/deepmind_problem_406/Challenge.lean (vendored verbatim
+# OUTSIDE the proof lib: its sorry is the intentional question side of the
+# boss's own comparator harness — a question, not a proof; the boss's own
+# CI never builds it either). Round-2 first-exposure repairs, each in a
+# module the source repo's comparator never compiled (it only builds
+# HCProof's import closure): GSTGraphV2CanonicalInfiniteCycle:292's
+# congr-2/omega associativity step (which split (a+L)+M = a+(L+M) into the
+# unprovable a+L = a) rewritten as congrArg over Nat.add_assoc; the two
+# ComparatorSmoke markers' 12-deep unclosed comment headers closed (the
+# files were parse-dead, which killed lake's whole-lib import scan with
+# "some modules have bad imports"). Toolchain: the universe's own pin
+# (Lean v4.33.0-rc2 + Mathlib v4.33.0-rc2, rev 51e6992) — identical to
+# the campaign pin.
 [[lean_lib]]
 name = "HCUniverse"
 globs = ["HCUniverse.+"]

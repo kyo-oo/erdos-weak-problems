@@ -288,8 +288,7 @@ theorem isCoupledPeriod_add
     _ = coupledOrbit A initial ((a+L)+M) :=
           (coupledOrbit_add_exact A initial (a+L) M).symm
     _ = coupledOrbit A initial (a+(L+M)) := by
-          congr 2
-          omega
+          exact congrArg (coupledOrbit A initial) (Nat.add_assoc a L M)
 
 /-- Every natural multiple of a period remains a period. -/
 theorem isCoupledPeriod_nsmul
