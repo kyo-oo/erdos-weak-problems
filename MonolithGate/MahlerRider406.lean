@@ -142,8 +142,10 @@ theorem nat_eq_zero_of_dvd_of_lt {a b : Nat} (h : a ∣ b) (hlt : b < a) :
   obtain ⟨k, hk⟩ := h
   rcases Nat.eq_zero_or_pos k with hk0 | hkpos
   · rw [hk0, Nat.mul_zero] at hk; exact hk
-  · have hle : a ≤ a * k := Nat.le_mul_of_pos_right a hkpos
+  · have hle : a * 1 ≤ a * k := Nat.mul_le_mul_left a hkpos
     rw [← hk] at hle
+    have h1 : a * 1 = a := by ring
+    rw [h1] at hle
     exact absurd hle (Nat.not_le.mpr hlt)
 
 /-- The cast of a power of three is the power of the cast. -/
