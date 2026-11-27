@@ -78,8 +78,9 @@ theorem digit_two_of_mid_range (X j : Nat)
   have hRj : (X % 3^(j+1)) / 3^j = 2 := by omega
   have hpos : (0:Nat) < 3^j := Nat.pow_pos (by decide)
   have hdiv : X / 3^j
-      = (X % 3^(j+1)) / 3^j + 3 * (X / 3^(j+1)) :=
-    Nat.add_mul_div_left (X % 3^(j+1)) (3 * (X / 3^(j+1))) hpos
+      = (X % 3^(j+1)) / 3^j + 3 * (X / 3^(j+1)) := by
+    conv_lhs => rw [hX]
+    exact Nat.add_mul_div_left (X % 3^(j+1)) (3 * (X / 3^(j+1))) hpos
   rw [hdiv, hRj]
   omega
 
