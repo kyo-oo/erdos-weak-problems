@@ -83,9 +83,9 @@ theorem four_power_happy_all_from_eight
   obtain ⟨p, hp3, hHappy⟩ :=
     GSTInfiniteFourPowerNavigation.four_power_happy_ge_three hClimb K hK
   refine ⟨p, by omega, ?_⟩
-  simpa [GSTCanonicalTailStateIso.HappyCell,
-    GSTCanonicalTailStateIso.carry4,
-    GSTCanonicalTailStateIso.digit3] using hHappy
+  simpa [GSTCanonicalTailStateIso.HappyCell, GSTCanonicalTailStateIso.carry4,
+    GSTCanonicalTailStateIso.digit3, GSTU2DEventTransport.HappyCell,
+    GSTCanonicalSevenAxisBridge.carry4, GSTCanonicalSevenAxisBridge.digit3] using hHappy
 
 /-- Full exception-aware Graph-V2 four-power forcing theorem. -/
 theorem four_power_graph_forcing
@@ -134,7 +134,6 @@ theorem four_power_closed_interface_crown
 #check four_power_creation_master
 #check four_power_direct_existence
 #check four_power_closed_interface_crown
-#print axioms GSTInfiniteFourPowerNavigation.power_three_step_collision
 #print axioms GSTInfiniteFourPowerNavigation.four_power_happy_ge_three
 #print axioms four_power_happy_propagates
 #print axioms four_power_happy_base_5
