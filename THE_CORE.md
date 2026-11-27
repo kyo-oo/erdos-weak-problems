@@ -2095,3 +2095,17 @@ classes), the BlockLaw depth-4/5 band credit into the tower accounting
 (green in the separate problem406 library, not yet vendored), and the
 entropy law (the CAP lane: any explicit cap C ≤ 185 closes #406
 outright — the Strategist's Route 1).
+
+**THE S093 FINAL VERDICT (the CI war, 8 repair rounds):** run 46020327538
+at 8b35f61 — **39/39 JOBS GREEN, RUN-LEVEL SUCCESS** — the first fully
+green board carrying BOTH new kernels: kernel-406diagonal (the round
+module: all 18 theorem symbols, every receipt constructive-clean
+[propext, Classical.choice, Quot.sound], zero sorryAx, the green marker
+surfaced) and kernel-hc-universe (the COMPLETE vendored universe — all
+183 files of the boss's latest branch building green with the two
+documented first-exposure repairs). The repair ledger: 23 → 14 → 5 →
+3 → 3 → 2 → 3 → 1 → 0 errors across eight rounds (the elaboration-order
+metavariable trap ×2, the Nat/Int pow_add split, the truncated-subtraction
+ring hazard, the Dvd witness orientation ×3, the positivity 1 ≤ x trap
+×2, the parser juxtaposition-precedence, the rewriter global-touch
+hazard, the strict-gap omega certificate, and the *1 normalization).

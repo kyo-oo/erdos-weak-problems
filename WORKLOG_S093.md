@@ -35,3 +35,8 @@ Run 45980776238 (fcd7074): 37/38 green — kernel-406mahler GREEN (the
 receipt fix verified), kernel-hc-universe red on the two first-exposure
 defects (repaired this round — the next run carries them). The new
 kernel-406diagonal's first exposure: the next run.
+
+## THE FINAL VERDICT
+Run 46020327538 at 8b35f61: **39/39 JOBS GREEN, RUN-LEVEL SUCCESS**.
+kernel-406diagonal GREEN (18/18 receipts, zero sorryAx), kernel-hc-universe
+GREEN (183/183 files). The S093 round is fully certified.
