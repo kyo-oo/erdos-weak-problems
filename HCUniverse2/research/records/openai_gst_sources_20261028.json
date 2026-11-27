@@ -1,0 +1,118 @@
+{
+  "upstream_repository": "openai/math",
+  "upstream_commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+  "base_hc_commit": "f8d557bb840134cac00a3fb4267aa5bb611501f2",
+  "external_theorems_added_as_axioms": 0,
+  "records": [
+    {
+      "id": "cm-hodge",
+      "title": "The rational Hodge conjecture for CM abelian varieties",
+      "scope": "All dimensions and codimensions on complex CM abelian varieties. Original-X source coverage outside this class is not provided.",
+      "application": "conditional source theorem; no theorem is imported as an axiom",
+      "items": [
+        {
+          "label": "01-introduction.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/The-rational-Hodge-conjecture-for-CM-abelian-varieties-October-6-2026/build/sections/01-introduction.tex",
+          "git_blob_sha": "59602fc8c2d93900eb6e2d8640d9eb8a976c2556"
+        },
+        {
+          "label": "03-surface.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/The-rational-Hodge-conjecture-for-CM-abelian-varieties-October-6-2026/build/sections/03-surface.tex",
+          "git_blob_sha": "bd030ababfca7a735ef04f9113db901886a4e79a"
+        },
+        {
+          "label": "06-assembly.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/The-rational-Hodge-conjecture-for-CM-abelian-varieties-October-6-2026/build/sections/06-assembly.tex",
+          "git_blob_sha": "9a6a3ace17738704e43dca1fdf967a3b8fddd726"
+        },
+        {
+          "label": "Challenge.lean",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/ComparatorChallenges/HodgeConjectureCMAbelianVarieties/Challenge.lean",
+          "git_blob_sha": "8e99b5004f788c5522ffaa972bdfd46d930135d8"
+        },
+        {
+          "label": "upstream selected formal conclusion",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/ComparatorChallenges/HodgeConjectureCMAbelianVarieties/Solution.lean",
+          "git_blob_sha": "e9855a415328438d063f5f3f132473bf919595e3"
+        }
+      ],
+      "checked": "2026-10-28",
+      "upstream_commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+      "review": "Source authentication and selected theorem/proof extraction; not an independent audit of the entire upstream proof"
+    },
+    {
+      "id": "smooth-four-space",
+      "title": "Smooth isometric immersions of closed surfaces into Euclidean four-space",
+      "scope": "Closed smooth real Riemannian surfaces; immersion into R4, no orientability assumption.",
+      "application": "method inspiration only: approximate construction and exact correction are separate obligations",
+      "items": [
+        {
+          "label": "exact-correction.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/Smooth-isometric-immersions-of-closed-surfaces-into-Euclidean-four-space-September-23-2026/build/exact-correction.tex",
+          "git_blob_sha": "f55e04d217d61b0886defccd00e915f8b9380e4e"
+        }
+      ],
+      "checked": "2026-10-28",
+      "upstream_commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+      "review": "Source authentication and selected theorem/proof extraction; not an independent audit of the entire upstream proof"
+    },
+    {
+      "id": "projection-moments",
+      "title": "Projection moments, positive cap domination, and Riesz estimates on the sphere",
+      "scope": "Real orthogonal projections, random frame densities and affine-height factors.",
+      "application": "scope comparison only; no implication to canonical algebraic cycle images",
+      "items": [
+        {
+          "label": "projection.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/Projection-moments-positive-cap-domination-and-Riesz-estimates-on-the-sphere-September-27-2026/build/sections/projection.tex",
+          "git_blob_sha": "75728c5e3fa70a283ebb600b9393b993bfdd69f8"
+        }
+      ],
+      "checked": "2026-10-28",
+      "upstream_commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+      "review": "Source authentication and selected theorem/proof extraction; not an independent audit of the entire upstream proof"
+    },
+    {
+      "id": "petty-projection",
+      "title": "Petty's projection-volume conjecture in dimensions at least four",
+      "scope": "Convex bodies in real dimension at least four; sharp normalized projection-volume lower bound with ellipsoid equality.",
+      "application": "scope comparison only; no projection-body estimate is used as a Chow existence theorem",
+      "items": [
+        {
+          "label": "01_introduction.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/Pettys-projection-volume-conjecture-in-dimensions-at-least-four-September-24-2026/build/latex/sections/01_introduction.tex",
+          "git_blob_sha": "9a16c910eb53f85dfa1caf968e40cd2e3c13bda4"
+        },
+        {
+          "label": "upstream selected formal conclusion",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/OAI/Geometry/ProjectionBodies/Main.lean",
+          "git_blob_sha": "ea4c5cc4c021e62cc1f8a7c37e9f97ac18549dd0"
+        }
+      ],
+      "checked": "2026-10-28",
+      "upstream_commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+      "review": "Source authentication and selected theorem/proof extraction; not an independent audit of the entire upstream proof"
+    },
+    {
+      "id": "smooth-three-space-obstruction",
+      "title": "A Smooth Metric with No Local Isometric Immersion into Three-Space",
+      "scope": "Smooth positive-definite real surface metric with no smooth immersion near the distinguished point; local smooth realization is not determined by the full Taylor jet.",
+      "application": "scope comparison only; no general smooth projector or algebraic realization follows",
+      "items": [
+        {
+          "label": "main.tex",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/preprints/A-Smooth-Metric-with-No-Local-Isometric-Immersion-into-Three-Space-September-24-2026/build/main.tex",
+          "git_blob_sha": "25eaea9aa10176cddcb1959f31c823d0b76872e9"
+        },
+        {
+          "label": "upstream selected formal conclusion",
+          "path": "https://github.com/openai/math/blob/7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a/lean/OAI/Geometry/IsometricImmersion/Main.lean",
+          "git_blob_sha": "745a1f8562954cf3b5bc1272be8e6384d8abe13b"
+        }
+      ],
+      "checked": "2026-10-28",
+      "upstream_commit": "7ef5c0cc5ca4b0e072b7a050fca09ab24bc6fa3a",
+      "review": "Source authentication and selected theorem/proof extraction; not an independent audit of the entire upstream proof"
+    }
+  ]
+}

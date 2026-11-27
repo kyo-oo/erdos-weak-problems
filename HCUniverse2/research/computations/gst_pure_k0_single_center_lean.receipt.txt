@@ -1,0 +1,37 @@
+GST pure K0 single-center construction — revision-matched Lean receipt
+Code revision: 77077d430c2572bb21bafabfd9fff69a7fa42b88
+Workflow: GST Pinned Universal Hodge Geometric Integration
+Run: https://github.com/kyo-oo/HC-PROOF/actions/runs/39397085626
+Job: 118542479616; conclusion: success
+Build completed successfully (8967 jobs).
+Artifact ID: 12251689993
+Artifact ZIP SHA256: ed87fd6a8dda5bf8d8e23b1ef9bd72663c44e225736de88801a556c142b04f18
+Full build log SHA256: 1ffa79e919cafc2272784022707628cd4ca128d6a0291e214935789a0ac76658
+Lean source SHA256: 83e288e526c9bf87bd1bb0738e64b256252cd3e367419f76b22b368bcd90e87c
+Full Lean build log checked: no sorryAx and no declaration-uses-sorry warning.
+New exact computation: 96 cases; CI/local output bytes identical.
+Computation output SHA256: 3f83cddb992b9e5f384e97d463047cb571522cb908721a242af7f26795181d7e
+
+Exact new printed axiom receipts:
+
+'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.chernFromCharacter_pure_leading' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.one_center_class_from_pure_character' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.one_center_detects_pure_native_source' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+'GSTUniversalResolvedSupportHodge.GSTNativeSmoothIncidenceCenter.one_center_exceptional_feedback' depends on axioms: [propext,
+ Classical.choice,
+ Quot.sound]
+
+Formal scope: universal Newton recursion, pure leading Chern term, full twist
+class formula, nonzero one-center readout and positive-sign exceptional feedback.
+Scheme evaluation kernels, Bertini, generic quotients and canonical cycle-class
+instantiations are separate geometric inputs; this receipt does not certify
+a native K0 source for every prescribed Hodge residual.

@@ -1,0 +1,250 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\title{Physical Navigation and the original GST wave: an exact Chow polynomial return on arbitrary original varieties with twelve divisor channels}
+\date{11 November 2026}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\begin{document}
+\maketitle
+
+\section{Immutable original input, and the author's ACTUAL GST operators}
+
+Fix an arbitrary smooth connected projective complex original variety
+$X$ of dimension $d\ge2$, rational Hodge codimension $p$ with
+$1\le p\le d-1$, and a \emph{prescribed} rational $(p,p)$ class
+$\alpha\in W_p(X)$. The output sought for the GST hypothesis is
+a genuine rational algebraic cycle on this same original $X$
+representing all of $\alpha$. The present theorem produces its
+entire original-GST twelve-channel algebraic projection and proves
+the exact limit of that output. It does \emph{not} assume that
+$\alpha$ has a Chow lift.
+
+Use precisely the original owner's Wave-I $12$-state
+$V_{\mathrm{GST}}=\mathbb Q^{\mathrm{Fin}(4)\times\mathrm{Fin}(3)}$.
+Let $U$ be the owner's carry/trit shuffle,
+$J$ the signed CM mirror ($J^2=-I$),
+$M$ the owner's genuine SURVIVE source, and
+$C=[J,M]=JM-MJ$ the original curvature.
+The original arithmetic predicate $\operatorname{Navigation}(R)$
+determines the original physical charge
+$b_R=\mathbf1_{\operatorname{Navigation}(R)}\in\{0,1\}$.
+Define the owner's actual physical fold with direct SURVIVE strength one:
+\[
+F_R=U+J+M+b_R[J,M].
+\]
+No auxiliary Hodge basis is inserted into this original GST definition.
+
+The owner's original mixed seed $v\in V_{\mathrm{GST}}$
+has value one at $(0,0)$ and $(0,1)$ and zero
+at all other original cells. Let
+\[
+K_R=[v,F_Rv,\ldots,F_R^{11}v]\in M_{12}(\mathbb Q).
+\]
+
+\section{True original-$X$ Chow landing of the full twelve-state GST wave}
+
+Assume $X$ has Picard rank $\rho(X)\ge12$.
+This is an explicit \emph{condition on the original variety},
+not a condition equivalent to the rational Hodge conjecture.
+Choose actual rational divisors $D_i$ forming a rational basis
+of $NS(X)_\mathbb Q$, and an ample divisor $h$.
+The Hodge-index intersection matrix
+$G_{ij}=\deg_X(D_iD_jh^{d-2})$ is rational nondegenerate.
+
+For each $p$ form genuine rational Chow cycles
+\[
+Z_i=D_ih^{p-1}\in CH^p(X)_\mathbb Q,\qquad
+Y_i=\sum_j(G^{-1})_{ij}D_jh^{d-p-1}
+  \in CH^{d-p}(X)_\mathbb Q.
+\]
+They satisfy $\deg_X(Y_iZ_j)=\delta_{ij}$
+as an equality of rational intersection degrees.
+Select the twelve original GST cell labels as
+the first twelve indices. Define the \emph{actual original-$X$
+algebraic landing}
+\[
+\iota_X^N:V_{\mathrm{GST}}\hookrightarrow CH^p(X)_\mathbb Q,
+\quad
+u\mapsto\sum_{i=0}^{11}u_iZ_i.
+\]
+It is injective, since pairing with $Y_i$ retrieves $u_i$.
+Its canonical rational Betti realization
+$\iota_X^H=cl_X^p\circ\iota_X^N$
+is also injective by the same intersection pairing.
+The two maps are genuinely defined from known algebraic cycles;
+there is no abstract replacement for the canonical rational Betti map.
+
+Let
+$E_{ij}=pr_1^*Y_i\cdot pr_2^*Z_j
+\in CH^d(X\times X)_\mathbb Q$.
+As proved in the companion full-Chow source derivation,
+the refined correspondence composition is exactly the
+rational matrix-unit multiplication.
+For each original physical Navigation state define
+the \emph{genuine algebraic self-correspondence}
+\[
+\boxed{
+\Gamma_R=\sum_{i,j=0}^{11}
+(F_R)_{ji}\,E_{ij}\in CH^d(X\times X)_\mathbb Q.
+}
+\]
+Denote the resulting push-pull Chow endomorphism by
+$N_R$, its \emph{canonical} Betti endomorphism by $T_R$.
+The exact actual-original-$X$ commuting diagram is
+\[
+\boxed{
+N_R\circ\iota_X^N=\iota_X^N\circ F_R,\quad
+T_R\circ\iota_X^H=\iota_X^H\circ F_R,\quad
+cl_X^p\circ N_R=T_R\circ cl_X^p.
+}
+\]
+These are equalities of actual rational Chow and rational
+singular Betti actions, with the middle equality established
+by the projection formula, not by postulating source algebraicity.
+The original seed
+$Z_{\mathrm{seed}}=\iota_X^N(v)$
+is a genuine original-$X$ algebraic cycle.
+
+\section{A new exact universal PHYSICAL two-state Krylov theorem}
+
+The exact original-source matrix calculation, reconstructed from
+the owner's 4-by-3 carry/trit and actual SURVIVE formulas,
+has returned the following \emph{integer determinants}:
+\[
+\boxed{
+\begin{aligned}
+\det K_R&=-1149656584000
+ &&\text{if }\neg\operatorname{Navigation}(R),\\
+\det K_R&=-445265540949
+ &&\text{if }\operatorname{Navigation}(R).
+\end{aligned}
+}
+\]
+Both values are nonzero. Thus $K_R$ is rationally invertible
+for \emph{every} arithmetic $R$ with the true Navigation gate,
+without a separately supplied off-resonance premise.
+The finite complete state reduction to $\{0,1\}$ is proved
+by the definition of the actual Navigation charge;
+the two constant exact 12-by-12 determinants can be
+certified independently by rational matrix arithmetic.
+The committed Wolfram script verifies all twelve columns
+of the inverse in each of the two physical states.
+
+\begin{theorem}[Prescribed-$\alpha$ original-$X$ GST polynomial Chow return]
+For every $(X,p,\alpha,R)$ as above with $\rho(X)\ge12$,
+the following expression is a \emph{genuine} rational
+algebraic cycle on the SAME original $X$:
+\[
+x_i(\alpha)=\int_X \alpha\cup cl_X(Y_i)\in\mathbb Q,\quad
+x(\alpha)=(x_0,\ldots,x_{11})^t,\qquad
+c_R(\alpha)=K_R^{-1}x(\alpha),
+\]
+\[
+\boxed{
+Z_{\alpha,R}^{\mathrm{GST}}=
+\sum_{k=0}^{11}\bigl(c_R(\alpha)\bigr)_k
+     N_R^k(Z_{\mathrm{seed}})
+\in CH^p(X)_\mathbb Q.
+}
+\]
+It has the EXACT canonical rational Betti cycle class
+\[
+\boxed{
+cl_X^p(Z_{\alpha,R}^{\mathrm{GST}})
+=\sum_{i=0}^{11}x_i(\alpha)\,cl_X^p(Z_i)
+=:\Pi_{\mathrm{GST},X,p}^H(\alpha).
+}
+\]
+More strongly, in the original rational CHOW group itself,
+\[
+Z_{\alpha,R}^{\mathrm{GST}}
+=\sum_{i=0}^{11}x_i(\alpha)Z_i.
+\]
+Neither equality assumes an algebraic lift of the
+prescribed $\alpha$. The constructed cycle is independent
+of $R$ in the Chow group, although its twelve-orbit
+polynomial presentation depends nontrivially on the
+true Navigation state.
+\end{theorem}
+
+\begin{proof}
+Repeated true Chow functoriality gives
+$N_R^kZ_{\mathrm{seed}}=
+\iota_X^N(F_R^k v)$.
+Therefore the entire expression is
+\[
+\iota_X^N\left(
+\sum_{k=0}^{11}(K_R^{-1}x(\alpha))_k F_R^k v
+\right)
+=\iota_X^N(K_R K_R^{-1}x(\alpha))
+=\iota_X^N(x(\alpha))
+=\sum_i x_i(\alpha)Z_i.
+\]
+Everything is an identity of actual rational algebraic
+cycles, since each step uses a true $\Gamma_R$ push-pull.
+Applying the canonical cycle class yields the Betti formula.
+\end{proof}
+
+\section{New geometric HANKEL detector from ACTUAL Chow cycles}
+
+The formal GST hypothesis's scalar Hankel gate should
+not be satisfied by choosing an arbitrary unsupported
+Hodge functional. Here it has an explicit genuine
+original-$X$ \emph{Chow cycle} as its detector.
+
+Let $e_{11}=(0,\ldots,0,1)^t$ and define the rational
+row $w_R^t=e_{11}^t K_R^{-1}$. Construct the ACTUAL
+complementary algebraic cycle on original $X$
+\[
+\boxed{
+Y_{\mathrm{Hankel},R}:=\sum_{i=0}^{11}
+(w_R)_i Y_i\in CH^{d-p}(X)_\mathbb Q.
+}
+\]
+Its genuine Betti pairing is the rational functional
+$\ell_R(\beta)=\int_X\beta\cup cl_X(Y_{\mathrm{Hankel},R})$.
+Because $w_R^t K_R=e_{11}^t$, for all $0\le k<12$,
+\[
+\ell_R(T_R^k cl_X(Z_{\mathrm{seed}}))
+=\delta_{k,11}.
+\]
+Thus the $12$-by-$12$ GST Hankel matrix
+\[
+H_{ab}=\ell_R(T_R^{a+b}cl_X(Z_{\mathrm{seed}})),
+\qquad 0\le a,b<12,
+\]
+is anti-triangular, with every anti-diagonal entry one,
+hence
+\[
+\boxed{\det(H)=(-1)^{12\cdot11/2}=1.}
+\]
+This is an exact all-Navigation-states rank+determinant
+result with \emph{a true algebraic original-$X$ detector},
+not just an existential rational readout.
+
+\section{Prescribed primitive residual and the universal status}
+
+The rational class
+\[
+\alpha_{\mathrm{new-res}}=
+\alpha-cl_X(Z_{\alpha,R}^{\mathrm{GST}})
+\]
+has zero pairing against the twelve true algebraic
+complementary cycles $Y_i$.
+The newly proved construction solves the genuine source
+problem on the twelve-dimensional divisor-Lefschetz
+submotive, on arbitrary original varieties with
+$\rho(X)\ge12$. It does NOT prove
+$\alpha_{\mathrm{new-res}}=0$ in a higher middle Hodge
+weight. The finite-wave equivalence does not imply
+that a general original $X$ has Picard rank at least
+twelve, nor that all rational Hodge classes
+lie in this algebraic submotive.
+
+The owner-goal remains to construct from \emph{a
+prescribed higher-primitive residual} an actual original-$X$
+algebraic source beyond these divisor-matrix units,
+with independently proved canonical Betti pairing.
+The present theorem does not hide that universal
+existence step in an assumed landing map.
+\end{document}

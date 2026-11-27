@@ -1,0 +1,302 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\title{GST N-cohomology world-holes on original X: a single physical-Navigation Chow fold via rational spectral CRT}
+\date{11 November 2026}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\begin{document}
+\maketitle
+
+\section{The actual arbitrary original-X geometry}
+
+Fix any smooth connected projective complex variety $X$,
+$1\le p\le d-1$, and any prescribed rational Hodge class
+$\alpha\in W_p(X)$.
+The preceding general original-X divisor-monomial rank theorem
+constructs an explicitly computable integer
+\[
+t=t_p(X)=\operatorname{rank}_{\mathbb Q}
+\left(\deg_X(D^\nu D^\mu)\right)
+\]
+and ACTUAL original-$X$ algebraic rational cycles
+\[
+Z_0,\ldots,Z_{t-1}\in CH^p(X)_{\mathbb Q},\qquad
+Y_0,\ldots,Y_{t-1}\in CH^{d-p}(X)_{\mathbb Q}
+\]
+such that $\deg_X(Y_iZ_j)=\delta_{ij}$, for ALL $X$
+with no Hodge surjectivity assumption. In fact
+$t\ge\rho(X)\ge1$.
+
+Their true product Chow correspondences
+$E_{ij}=pr_1^*Y_i\cdot pr_2^*Z_j\in CH^d(X\times X)_{\mathbb Q}$
+give a faithful algebra homomorphism
+\[
+\Phi_{X,p}:M_t(\mathbb Q)\hookrightarrow
+CH^d(X\times X)_{\mathbb Q},\qquad
+F\longmapsto\sum_{i,j}F_{ji}E_{ij},
+\]
+with image identity $\Pi_p=\sum_iE_{ii}$.
+This is a representation by true rational Chow cycles
+and true refined correspondence composition,
+not an arbitrary Hodge-basis operator.
+
+\section{Integrating the author's ACTUAL N independent 12-wave holes}
+
+Write uniquely $t=12h+s$ with integers
+$h=\lfloor t/12\rfloor$ and $0\le s<12$.
+The integer $h$ denotes the number of FULL original
+12-cell GST N-cohomology wave holes that can be
+represented by the currently constructed actual
+original-$X$ algebraic source channels. The residual
+$s$ is the number of remaining genuine algebraic
+cycle channels. No infinite formal sum is treated
+as a Chow cycle.
+
+For EVERY hole $i=0,\ldots,h-1$ independently choose
+a true original arithmetic state $R_i\in\mathbb N$;
+its binary charge is the owner's existing
+$b_i=\mathbf1_{\operatorname{Navigation}(R_i)}$.
+Use exactly the owner's original Wave-I operators
+\[
+F_i=U+J+M+b_i[J,M]\in M_{12}(\mathbb Q).
+\]
+The original mixed seed $v$ has one at true
+$(0,0)$ and $(0,1)$ and zero elsewhere.
+
+Define the **single global** $t$-dimensional
+native GST N-hole source operator
+\[
+\boxed{
+T_t=
+\bigoplus_{i=0}^{h-1}
+\left(F_i+20i\,I_{12}\right)
+\ \oplus\
+\bigoplus_{j=0}^{s-1}[20(h+j)] .
+}
+\]
+Its ONE rational seed is
+\[
+v_t=(\underbrace{v,\ldots,v}_{h\text{ true GST holes}},
+\underbrace{1,\ldots,1}_{s\text{ residual source channels}})^t.
+\]
+When $h=0$, $s=t$ and the source is the
+finite diagonal rational navigation frame.
+
+\begin{theorem}[ALL finite genuine original-X source channels, ONE Chow fold]
+For every original $(X,p)$, every full-rank divisor-monomial
+source extraction, every arbitrary choice of the $h$
+physical arithmetic states $R_i$, and every $t\ge1$
+constructed above, the matrix $T_t$ has a \emph{cyclic}
+single rational seed $v_t$:
+\[
+\boxed{
+K_t=[v_t,T_tv_t,\ldots,T_t^{t-1}v_t]
+\in GL_t(\mathbb Q).
+}
+\]
+Therefore the ACTUAL rational Chow correspondence
+\[
+\boxed{
+\Gamma_{X,p,\mathbf R}=\Phi_{X,p}(T_t)
+\in CH^d(X\times X)_{\mathbb Q}
+}
+\]
+with actual Chow seed
+$Z_{\mathrm{seed}}=\sum_i(v_t)_iZ_i$
+has an orbit spanning the full $t$-dimensional
+divisor-monomial source sector.
+Every original true GST N-hole follows the
+author's exact $U/J/M/[J,M]$ physical law,
+and the entire independent-$h$ system
+is controlled by ONE genuine algebraic
+correspondence on the SAME ORIGINAL X.
+
+No arbitrary Hodge-to-Chow preimage is input.
+\end{theorem}
+
+\begin{proof}
+For either physically possible original Navigation value
+$b_i\in\{0,1\}$, independent exact rational computation
+from the true owner 4-by-3 cell formulas gives
+\[
+\det[v,F_iv,\ldots,F_i^{11}v]=
+\begin{cases}
+-1149656584000,&b_i=0,\\
+-445265540949,&b_i=1.
+\end{cases}
+\]
+Both are nonzero integers; thus every block has
+degree-twelve minimal polynomial on its original seed.
+Adding the scalar $20i$ preserves cyclicity, since
+the translated Krylov vectors are related by
+an invertible upper-triangular binomial transform
+with diagonal coefficients one.
+
+From the actual permutations, original signed CM mirror,
+SURVIVE diagonal and curvature commutator, the row
+absolute-sum norms of both actual physical folds
+satisfy $\|F_i\|_\infty\le6$;
+in fact exact cell computations give value $4$
+for both states, so the bound $6$ is conservative.
+Every complex eigenvalue of $F_i$ therefore
+has modulus at most $6$.
+The spectra of $F_i+20i\,I$ lie in disjoint
+closed radius-$6$ discs centered at $20i$:
+the center separation is $20>2\cdot6$.
+Each residual one-dimensional block has eigenvalue
+$20(h+j)$, separated from all other centers by
+at least $20$, and separated from the last full
+wave block's eigenvalues by at least $20-6>0$.
+Therefore the characteristic/minimal polynomials
+of all blocks are PAIRWISE COPRIME over $\mathbb Q$.
+
+On each twelve-cell block the chosen original
+mixed seed is cyclic. On each residual scalar
+block the chosen seed coefficient is one.
+Hence the annihilator of the \emph{single direct-sum
+seed} is the intersection of pairwise-coprime
+principal annihilator ideals. By the polynomial
+Chinese remainder theorem it equals their PRODUCT.
+The product degree is $12h+s=t$.
+Thus the single global orbit has dimension $t$,
+and its $t$-step Krylov matrix is rationally invertible.
+
+Finally the actual full-Chow matrix-unit identities
+give $N_{\Gamma}^kv_t$ on actual Chow cycles
+identically to $T_t^kv_t$ in the rational source coordinates,
+and the actual canonical Betti class map preserves them.
+This proves the theorem as a scheme-theoretic
+Chow correspondence statement, independently of
+the universal rational Hodge conjecture.
+\end{proof}
+
+\section{Arbitrary prescribed $\alpha$: ONE polynomial actual-Chow output}
+
+Fix the input $\alpha\in W_p(X)$ without knowing
+any representative in $CH^p(X)_{\mathbb Q}$.
+Use the actual complementary Chow cycles
+$Y_i$ as canonical rational Betti readouts:
+\[
+x_i(\alpha)=\int_X\alpha\cup cl_X(Y_i)\in\mathbb Q.
+\]
+Let $x(\alpha)$ be their $t$-component column
+and solve the \emph{explicit rational} system
+$c(\alpha)=K_t^{-1}x(\alpha)$.
+The rational algebraic cycle
+\[
+\boxed{
+Z_{\alpha,\mathbf R}^{\mathrm{GST},N}
+=
+\sum_{k=0}^{t-1}c_k(\alpha)
+N_{\Gamma_{X,p,\mathbf R}}^k(Z_{\mathrm{seed}})
+\in CH^p(X)_{\mathbb Q}
+}
+\]
+is genuinely constructed by iterating ONE actual
+original-$X$ rational Chow correspondence and
+ONE genuine original-$X$ Chow seed.
+The exact matrix identity $K_tK_t^{-1}=I_t$
+proves the stronger actual-CHOW equality
+\[
+Z_{\alpha,\mathbf R}^{\mathrm{GST},N}
+=\sum_{i=0}^{t-1}x_i(\alpha)Z_i.
+\]
+Hence its canonical rational Betti class is
+\[
+\boxed{
+cl_X^p(Z_{\alpha,\mathbf R}^{\mathrm{GST},N})
+=\Pi_{p,\mathrm{mon}}^H(\alpha),
+}
+\]
+the computed projection of the \emph{prescribed}
+target onto the ACTUAL algebraic monomial source sector.
+
+This is the owner's $F$-function as a genuinely
+constructive algebraic-cycle return on the
+entire available source sector; the original
+navigation and N-cohomology wave laws explicitly
+determine the ONE polynomial orbit presentation.
+
+\section{One physical GST geometric Hankel certificate for ALL N-holes}
+
+Let $\ell_{\mathbf R}$ be the last-row dual
+to the genuine $t$-step Krylov matrix:
+$w^t=e_{t-1}^tK_t^{-1}$.
+Construct the \emph{actual} complementary Chow cycle
+\[
+\boxed{
+Y_{\mathrm{Hankel}}=\sum_iw_iY_i
+\in CH^{d-p}(X)_{\mathbb Q}.
+}
+\]
+The canonical Betti cup/integration detector
+$\lambda(\beta)=\int_X\beta\,cl_X(Y_{\mathrm{Hankel}})$
+satisfies
+$\lambda(T_t^kv_t)=\delta_{k,t-1}$
+for $0\le k<t$.
+Thus the $t$-by-$t$ single-fold
+GST Hankel matrix
+$H_{ij}=\lambda(T_t^{i+j}v_t)$
+is anti-triangular with all anti-diagonal
+entries one, yielding
+\[
+\boxed{
+\det H=(-1)^{t(t-1)/2}\ne0.
+}
+\]
+The detector exists as a **TRUE original-X
+algebraic Chow cycle**, not an unsupported
+abstract Hodge linear functional. This is
+one original-X physical GST orbit and
+one geometric rational detector for every
+finite genuine source dimension $t$.
+
+\section{Exact finite computational discrimination}
+
+The committed Wolfram computation reconstructs
+the owner's original 4-by-3 rational wave matrices
+and checks, entirely with exact integers/rationals:
+\[
+\operatorname{rank}K_{16}=16
+\quad(h=1,s=4;\ b_0=0),
+\]
+\[
+\operatorname{rank}K_{25}=25
+\quad(h=2,s=1;\ b_0=0,b_1=1).
+\]
+Both physical wave matrices have maximum
+row absolute-sum norm exactly $4$.
+These are finite verification cases of the
+uniform spectral-CRT proof, not the justification
+for the infinite family of $t$.
+
+\section{Scope of the full GST-to-Hodge hypothesis}
+
+The source dimension $t_p(X)$ is the
+\emph{rank of the divisor-monomial intersection
+matrix}; we have NOT proved
+$t_p(X)=\dim_\mathbb Q W_p(X)$ on arbitrary X.
+When that equality does hold, the constructed
+original Chow fold provides a genuine complete
+rational Hodge orbit in that weight.
+On general X, the rational Hodge class residual
+\[
+\alpha_{\mathrm{res}}
+=\alpha-\Pi_{p,\mathrm{mon}}^H(\alpha)
+\]
+may have directions not reached by any
+currently supplied algebraic source.
+
+The higher primitive universal Hodge source-birth
+problem is precisely to construct independently,
+from prescribed residual $\alpha_{\mathrm{res}}$,
+a NEW genuine original-$X$ algebraic cycle with
+nonzero canonical pairing, not to add more
+spectral shifts to the already complete source sector.
+
+This theorem does not say that all cardinally
+indexed GST worlds become one finite Chow cycle,
+nor that arbitrary native N-cohomology hole
+coordinates are automatically canonical
+rational Hodge classes on the original X.
+\end{document}

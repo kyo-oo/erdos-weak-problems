@@ -1,0 +1,151 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\title{GST all-dimensional causal fold: direct test of the binary Hodge preservation and break criterion}
+\date{23 October 2026}
+\begin{document}
+\maketitle
+\section{The actual spatial criterion}
+GST General Space begins dimensionless. Projective, singular, causal and Hodge geometries arise through realizations and folds. The proposed universal binary test claims that a Hodge break under some fold disproves the rational Hodge conjecture, while absence of any break proves it. We test these implications on genuine algebraic geometries in all emergent dimensions, without assuming the conjecture.
+
+For smooth projective complex Y define three different predicates:
+\[
+ P(Y): H^m(Y,\mathbb Q)\text{ is pure of weight }m,\qquad
+ R(Y,\alpha,p):\alpha\in H^{2p}(Y,\mathbb Q)\cap H^{p,p}(Y),\qquad
+ C(Y,\alpha,p):\exists Z\in CH^p(Y)_{\mathbb Q},\
+       \mathrm{cl}^{can}_Y(Z)=\alpha.                       \tag{1}
+\]
+The classical conjecture requires $R\Rightarrow C$ for all Y,p,alpha; preservation of P or of R under geometric changes is a distinct question.
+
+\section{A genuine all-original-X all-emergent-N fold family}
+Let X be any nonempty smooth projective complex original world, let n be any natural number, and let $\tau$ belong to the complex upper half-plane. Define
+\[
+ Y_{\tau,n}=X\times E_i\times E_\tau\times(\mathbb P^1)^n,\qquad
+ E_\tau=\mathbb C/(\mathbb Z+\tau\mathbb Z).
+                                                               \tag{2}
+\]
+The marked underlying smooth manifold is fixed while the realized complex structure varies. All resulting worlds are smooth projective of dimension $\dim_{\mathbb C}X+2+n$, pure in every cohomological degree and have the IDENTICAL whole Hodge polynomial
+\[
+ \boxed{\mathcal H_{Y_{\tau,n}}(u,v)=\mathcal H_X(u,v)
+               (1+u)^2(1+v)^2(1+uv)^n.}                    \tag{3}
+\]
+
+\section{The complete rational Hodge condition from actual geometry}
+Choose marked real coordinates $x_1,y_1,x_2,y_2$ with
+$dz_1=dx_1+i\,dy_1$ and $dz_2=dx_2+\tau\,dy_2$.
+A general rational degree-two cohomology class of the elliptic product is
+\[
+ \alpha=a\,dx_1dy_1+b\,dx_1dx_2+c\,dx_1dy_2+
+        d\,dy_1dx_2+e\,dy_1dy_2+f\,dx_2dy_2.                \tag{4}
+\]
+Here juxtaposition denotes exterior product.
+The coefficient of the ordered real volume form in
+$\alpha\wedge dz_1\wedge dz_2$ is $-i\tau b+ic+\tau d-e$.
+Since $\alpha$ is real, this exterior product vanishes if and only if $\alpha$ has type $(1,1)$:
+\[
+ \boxed{\alpha\in H^{1,1}\ \Longleftrightarrow\
+                 -i\tau b+ic+\tau d-e=0.}                 \tag{5}
+\]
+
+\begin{theorem}[Exact full rational Hodge fiber ranks]
+For $\tau=i$, equation (5) becomes $b=e,\ c=-d$.
+The rational $(1,1)$ fiber therefore has dimension FOUR.
+For $\tau=\sqrt2\,i$, equation (5) becomes
+$\sqrt2 b-e=0,\ c+\sqrt2d=0$. Irrationality of
+$\sqrt2$ over $\mathbb Q$ forces $b=c=d=e=0$,
+so the rational $(1,1)$ fiber has dimension TWO.
+Both actual smooth projective surfaces nevertheless have
+$h^{2,0}=1,h^{1,1}=4,h^{0,2}=1$ and pure Hodge structures.
+\end{theorem}
+
+\section{All surviving rational Hodge classes have genuine divisors}
+In $E_i\times E_i$ the factor divisors, diagonal and
+graph of the complex multiplication automorphism $z\mapsto iz$ are actual algebraic divisors. In the coefficient basis (4) their canonical Betti classes are exactly
+\[
+ (0,0,0,0,0,1),\ (1,0,0,0,0,0),\
+ (1,0,-1,1,0,1),\ (1,1,0,0,1,1).                         \tag{6}
+\]
+They have rational rank four and all obey $b=e,c=-d$,
+hence span ALL rational Hodge classes on this surface.
+In $E_i\times E_{\sqrt2 i}$ the two factor divisors span
+the whole two-dimensional rational Hodge fiber.
+Thus this change of rational Hodge class status does NOT
+refute the conjecture: both actual surfaces have explicit algebraic representatives for all their rational $(1,1)$ classes.
+
+\section{Arbitrarily high dimension AND codimension}
+For EVERY nonempty smooth projective original X, each $p\ge1$,
+and every $n\ge p-1$, let $h_j=c_1(\mathcal O_{\mathbb P^1}(1))$
+and take the marked nonzero Kunneth class
+\[
+ \beta_{\tau,p,n}=
+  \operatorname{pr}_{E_i\times E_\tau}^*
+  \bigl((dx_1-dx_2)\wedge(dy_1-dy_2)\bigr)
+    \smile\prod_{j=1}^{p-1}h_j
+       \in H^{2p}(Y_{\tau,n},\mathbb Q).                    \tag{7}
+\]
+\begin{theorem}[Universal-in-X,p,N marked Hodge-type break]
+For all X,p,n above, $\beta_{i,p,n}$ is of type $(p,p)$,
+represented by the ACTUAL external product of the algebraic
+diagonal divisor with the projective hyperplane cycles.
+For $\tau=\sqrt2\,i$, this SAME topological rational class
+is NOT of type $(p,p)$: its elliptic $(2,0)+(0,2)$
+part is nonzero, and the Kunneth product with nonzero
+Tate classes cannot erase it. The complete realized
+Hodge structures remain pure and their Hodge
+polynomials remain identical as in (3).
+\end{theorem}
+The proof is a direct pure-Hodge Kunneth decomposition.
+The claim concerns the specified class sector on
+products with arbitrary X, NOT surjectivity of cycle maps
+on all higher-degree Hodge classes of those products.
+
+\section{Real topology folds may separately break purity}
+For a finite GST causal graph with $V$ vertices, $E$ edges and
+$c$ connected components, actual gluing of projective elliptic
+curves at nodes gives singular projective $C_\Gamma$.
+The normalization exact sequence of mixed Hodge structures gives
+\[
+ \dim_{\mathbb Q}\operatorname{Gr}_0^W H^1
+      (X\times C_\Gamma,\mathbb Q)=E-V+c.                  \tag{8}
+\]
+If this number is positive, the actual topology fold creates
+mixed-weight $H^1$ and breaks whole-Hodge purity.
+The folded space is SINGULAR, so (8) cannot itself be a
+counterexample to the smooth-projective rational Hodge conjecture.
+
+\section{Mathbox adversarial audit of the binary inference rule}
+There are three distinct meanings of Hodge break:
+(1) a marked rational class moves out of type $(p,p)$
+under a smooth projective deformation, as in (7);
+(2) the pure Hodge decomposition itself becomes impure,
+which cannot happen inside smooth projective complex geometry;
+(3) a topology fold creates mixed weights, as in (8),
+but the result is outside the smooth-projective domain.
+
+Thus the proposed binary decision rule is NOT VALID
+if its break means only type change or purity failure.
+A type-breaking class is not a rational Hodge class on the
+new world and hence is not an HC counterexample.
+The absence of purity breaking is already true of all
+smooth projective varieties and does not itself supply
+canonical algebraic representatives of rational Hodge classes.
+This is an audit of the proposed PROOF TEST,
+not a refutation of the rational Hodge conjecture.
+
+A truly positive geometry-to-algebraicity theorem is available
+in codimension one for arbitrary X of ALL dimensions:
+the holomorphic exponential sequence
+$0\to\mathbb Z(1)\to\mathcal O_X
+\to\mathcal O_X^\times\to1$ implies
+\[
+ H^2(X,\mathbb Z)\cap H^{1,1}(X)
+  =\operatorname{im}[c_1:\operatorname{Pic}(X)
+                         \to H^2(X,\mathbb Z)]              \tag{9}
+\]
+with standard torsion conventions. Rationalizing gives all-X
+Hodge algebraicity in degree two. Higher codimension needs a
+genuinely new geometry-to-algebraic-realization theorem;
+neither pure Hodge conservation nor the all-N topology fold
+equation alone proves that theorem.
+\end{document}

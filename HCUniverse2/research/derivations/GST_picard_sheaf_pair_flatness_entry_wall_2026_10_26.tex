@@ -1,0 +1,287 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollary}[lemma]{Corollary}
+\newtheorem{definition}[lemma]{Definition}
+\newtheorem{remark}[lemma]{Remark}
+\newcommand{\WR}{W_R}
+\newcommand{\WI}{W_I}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\KA}{A}
+\newcommand{\KAd}{\widehat{A}}
+
+\title{GST Picard--Sheaf Flatness of the Pair Channel: the Entry Wall of the
+Monodromy Mechanism (Lemma W8) --- Round 15-b}
+\author{GST Hodge campaign, cycle 4 follow-up (SKILL V6 MODE B, ULTRA)}
+\date{2026-10-26}
+
+\begin{document}
+\maketitle
+
+\section*{Scope box (read first)}
+
+\textbf{Claimed here:} Lemma W8 (every holomorphic pure pair on the
+discriminator has a FLAT determinant-of-cohomology difference line bundle on
+the dual fourfold); the monodromy observable $\Psi_{\mathrm{pair}}$;
+Corollaries W8.1 (the entry-test extension) and W8.2 (the FM-closure
+consistency at the entry layer). \textbf{NOT claimed:} any decision of the
+dichotomy bit; any computation of a monodromy representation; any rigidity;
+any exhaustiveness; any sheaf-level statement on the dual side beyond the
+committed WIT status; any resolution of the campaign contract. This strike
+\textbf{DETERMINES NO BIT}; it opens the registry's named NO-route reopen
+mechanism (Picard--sheaf monodromy / determinant-of-cohomology rigidity) with
+a certified entry wall and its observable, and records the mechanism's live-or-dead
+conditions. Labels W8/W8.1/W8.2 extend the committed W-frame; no committed
+label is reused.
+
+\section{Setting and inputs}
+
+$\KA$ is the committed nonsplit $\mathbb{Q}(i)$-Weil principally polarized
+fourfold discriminator (NS-rank one, $\theta$ the polarization class,
+$\WR,\WI$ the Weil classes; committed constants
+$\int\theta^4=24$, $\int \WR^2 = \int \WI^2 = 8$, $\int \WR\WI = 0$, all
+$\int \WR\,\theta^j = 0$). $\KAd$ is the dual abelian fourfold.
+A \emph{holomorphic pure pair at scale $m\ge 1$} is the committed
+pair-form input: actual holomorphic vector bundles $E_\pm$ on $\KA$ with
+equal ranks and
+\[
+\ch(E_+) - \ch(E_-) \;=\; m\,\WR
+\]
+\emph{purely at grade 2}: the grade-0, grade-1, grade-3 and grade-4
+components of the difference all vanish. (By the committed W6 table the
+members then have equal $c_1 \in \mathbb{Z}\theta$, equal $c_3$ --- the
+$c_3$-shift $-m\,c_1\wedge \WR$ dies by the W0 annihilation
+$\theta^j \wedge \WR = 0$ as a class --- a $c_2$-difference $-m\,\WR$,
+and Weil charges differing by exactly $-8m$.) The existence of one such
+pair at any scale is equivalent to the vertex bit $S = W_\Q$ (the committed
+W2/W1 equivalence, M3-normalized). Both polarities remain armed; the
+registry reopen menu names, for the NO route, ``a non-additive, FM-closed
+rigidity mechanism (refined Brill--Noether-type data, Picard--sheaf
+monodromy, determinant-of-cohomology rigidity)''. This strike opens that
+mechanism's entry layer.
+
+\paragraph{Committed inputs used.} The pair definition and the W6 table
+(kernel-green, run 40139821467 @ c6a2778); the W0 class annihilation
+(kernel-green, same run); the W5 cohomological FM normalization
+(kernel-green, same run; the exact dual-basis convention, coefficient 1,
+both round trips the identity); the W4 difference-Euler corridor
+(kernel-green, same run).
+
+\paragraph{External leaves (declared, standard strength; not certified
+here).}
+\begin{itemize}
+\item[P1] \emph{Determinant--K-theory identity:} for $\xi \in K^0(X)$
+represented by a perfect complex, $\det(\xi) \in \Pic(X)$ is defined and
+satisfies $c_1(\det \xi) = \ch_1(\xi)$. (Standard: on vector bundles
+$c_1(\det E) = c_1(E) = \ch_1(E)$; $\det$ is a group homomorphism
+$K^0 \to \Pic$ and $\ch_1$ is additive.)
+\item[P2] \emph{GRR for the Poincar\'e family on an abelian variety:}
+with $\mathcal{P}$ the normalized Poincar\'e bundle on $\KA\times\KAd$ and
+$p_{\KAd}$ the projection,
+$\ch(Rp_{\KAd *}(p_\KA^*F\otimes \mathcal{P}))\cdot \mathrm{td}(\KAd)
+= p_{\KAd *}(\ch(F)\, e^{c_1(\mathcal{P})}\,\mathrm{td}(\KA)\,
+\mathrm{td}(\KAd))$; and $\mathrm{td}(\KA) = \mathrm{td}(\KAd) = 1$
+because the tangent bundle of an abelian variety is holomorphically
+trivial (all its Chern classes vanish). Hence
+$\ch(\widehat{\Phi}(F)) = p_{\KAd *}(\ch(F)\, e^{c_1(\mathcal{P})})$.
+\item[P3] \emph{The cohomological FM grade reflection,} extended to all
+grades by the same committed construction: with the exact dual-basis
+convention $c_1(\mathcal{P}) = \sum_{p=0}^{7} u_p \otimes \widehat u_p$,
+the component of $\ch(\widehat\Phi(F))$ in $H^{2(4-k)}(\KAd)$ is the
+pairing of $\ch_k(F)$ against $c_1(\mathcal{P})^{\,8-2k}/(8-2k)!$
+(the pushforward along the first factor). At $k=2$ this is exactly the
+committed kernel-green W5 transform; at $k=3$ it gives
+$\ch_1(\widehat\Phi(F)) = \mathrm{fm}_3(\ch_3(F))$, a degree-6 to
+degree-2 word map of the same exterior model (census check: dimensions
+$28 \to 28$, both sides $=\binom{8}{6}=\binom{8}{2}$).
+\item[P4] \emph{Duality bookkeeping:} $\Pic^0(\KAd) \cong
+\widehat{\widehat{A}} \cong \KA$ canonically (standard).
+\end{itemize}
+
+\section{Lemma W8 and its consequences}
+
+\begin{lemma}[W8: Picard--sheaf flatness of the pair channel]
+\label{lem:W8}
+Let $(E_+,E_-)$ be a holomorphic pure pair on the discriminator $\KA$ at any
+scale $m\ge 1$ (any rank $r\ge 1$). Write
+\[
+\lambda(F) \;:=\; \det\bigl(Rp_{\KAd *}(p_\KA^*F\otimes \mathcal{P})\bigr)
+\;\in\; \Pic(\KAd)
+\]
+for the determinant-of-cohomology line bundle, and
+\[
+L_{\mathrm{pair}} \;:=\; \lambda(E_+)\otimes \lambda(E_-)^{-1}\;\in\;\Pic(\KAd).
+\]
+Then
+\[
+c_1\bigl(L_{\mathrm{pair}}\bigr) \;=\; 0.
+\]
+Since $L_{\mathrm{pair}}$ is a line bundle, all higher Chern classes vanish,
+and $c_1 = 0$ means $L_{\mathrm{pair}} \in \Pic^0(\KAd)$: the pair's
+determinant-of-cohomology difference is a FLAT line bundle on the dual
+fourfold.
+\end{lemma}
+
+\begin{proof}
+Let $\xi_{\mathrm{pair}} := [E_+] - [E_-] \in K^0(\KA)$. The perfect-complex
+determinant is a group homomorphism $\det : K^0(\KAd) \to \Pic(\KAd)$ (leaf
+P1), and the FM transform is exact, so
+$[\widehat\Phi(\xi_{\mathrm{pair}})] = [\widehat\Phi(E_+)] -
+[\widehat\Phi(E_-)]$ in $K^0(\KAd)$ and therefore
+\[
+L_{\mathrm{pair}}
+= \det\bigl(\widehat\Phi(\xi_{\mathrm{pair}})\bigr).
+\]
+Using leaf P1 for the first equality and leaf P3 (the grade bookkeeping of
+leaf P2: the grade-1 component of the transform receives exactly the
+grade-3 component of the input, $k=3 \mapsto 4-k=1$) for the second,
+\[
+c_1(L_{\mathrm{pair}})
+= \ch_1\bigl(\widehat\Phi(\xi_{\mathrm{pair}})\bigr)
+= \mathrm{fm}_3\bigl(\ch_3(\xi_{\mathrm{pair}})\bigr).
+\]
+By the pair definition, $\ch(\xi_{\mathrm{pair}}) = m\,\WR$ purely at
+grade 2, so $\ch_3(\xi_{\mathrm{pair}}) = 0$. Linearity of $\mathrm{fm}_3$
+gives $c_1(L_{\mathrm{pair}}) = \mathrm{fm}_3(0) = 0$.
+\end{proof}
+
+\begin{remark}[Where the walls sit inside the proof]
+The proof consumes the pair definition's grade-3 purity and nothing else
+from the wall system; the W6 equal-$c_3$ table and the W0 corridor are the
+certified \emph{mechanism} showing that purity at grade 3 is compatible
+with actual Chern data (the $c_3$-shift $-m\,c_1\wedge\WR$ dies by W0 in
+the ring). No NS-rank input enters the proof of W8 itself: the flatness is
+a formal consequence of pair purity $+$ abelianness $+$ the determinant
+identity, and therefore holds word-for-word on every abelian fourfold,
+including the split worlds (the wall is world-uniform as a necessary
+condition --- the standard consistency-probe pattern; it kills nothing by
+itself). The fourfold bookkeeping certified here is the $k\mapsto 4-k$
+reflection; on an $n$-dimensional abelian variety the same construction
+reads $k\mapsto n-k$ (declared, not certified here).
+\end{remark}
+
+\begin{definition}[the monodromy observable]
+\label{def:Psi}
+For a holomorphic pure pair $(E_+,E_-)$ on $\KA$,
+\[
+\Psi_{\mathrm{pair}}(E_+,E_-) \;\in\; \Pic^0(\KAd) \cong \KA
+\]
+is the point of the double-dual (leaf P4) representing the flat line
+$L_{\mathrm{pair}}$. $\Psi_{\mathrm{pair}}$ is defined for every
+holomorphic pure pair; it is the entry observable of the Picard--sheaf
+monodromy mechanism. $\Psi_{\mathrm{pair}}$ is NOT claimed to be
+non-additive here; whether the observable (together with the monodromy
+representations of the per-fiber virtual objects
+$R\Gamma(E_\pm\otimes P)$, $P\in\Pic^0(\KA)$) constrains the charge data
+$(m,q)$ beyond the additive profile is exactly the mechanism's open
+question (see \S\ref{sec:live-or-dead}).
+\end{definition}
+
+\begin{corollary}[W8.1: the entry-test extension]
+\label{cor:W81}
+Any claimed holomorphic pure pair on the discriminator --- equivalently any
+claimed W-charged surface output (the committed W2/W1 equivalence) --- must
+now clear one further entry test beyond the committed list
+($\chi$-corridor blindness, no cohomological band, the W6 table, the End-mass
+bound, FM-closure): it must exhibit its flat line
+$L_{\mathrm{pair}}\in\Pic^0(\KAd)$ and the monodromy representation of the
+per-fiber virtual FM objects. The flatness $c_1 = 0$ is a new necessary
+condition, certified at the model layer for the grade bookkeeping and at
+leaf strength for the scheme layers P1/P2.
+\end{corollary}
+
+\begin{corollary}[W8.2: the FM-closure consistency at the entry layer]
+\label{cor:W82}
+The entry layer passes the W5 duality requirement at the K-theoretic level:
+the dual-side difference $\widehat\Phi(\xi_{\mathrm{pair}})$ has
+$\ch = m\,\mathrm{fm}_2(\WR) = m\,\widehat\WR$-dual (the committed W5
+normalization, kernel-green, coefficient exactly 1) at grade 2 and
+vanishing grades $0,1,3,4$ (grade 4 by the equal-rank input) --- the same
+purity shape on $\KAd$ --- so the
+double-dual layer's flatness holds identically, and the mechanism is
+duality-symmetric at the level where it is defined. No WIT-per-point claim
+is made: the per-fiber FM of a pair is a complex with cancelling Euler by
+the committed W4 corridor (the difference-Euler vanishes against every
+$P\in\Pic^0$), and that remains its certified status.
+\end{corollary}
+
+\section{Live-or-dead conditions for the mechanism}
+\label{sec:live-or-dead}
+
+The registry reopen rule requires each armed mechanism to carry its own
+closure conditions. For the Picard--sheaf monodromy mechanism:
+
+\begin{itemize}
+\item \textbf{LIVE} (a non-additive FM-closed wall exists): if the monodromy
+representations of the per-fiber virtual objects
+$R\Gamma(E_\pm\otimes P)$ as $P$ winds around $\Pic^0(\KA)$, together with
+the flat position $\Psi_{\mathrm{pair}}$, impose a constraint on the charge
+data $(m,q)$ that the additive profile does not compute --- and that
+constraint is incompatible with one of the two strata --- then the mechanism
+separates the strata and the NO route reopens with a certified wall.
+\item \textbf{DEAD} (the mechanism closes): if both strata are realized by
+monodromy-consistent data (the analog of the additive-completeness
+consistency), the mechanism dies and the registry row records the closure,
+exactly as the six NO-route attack lines of cycle 4 died.
+\end{itemize}
+
+Neither outcome is claimed here. The certified content of this round is the
+entry wall (W8), the observable, the entry-test extension, and the
+duality consistency --- the mechanism's first certified step from bare menu
+item to armed route.
+
+\section{Verification layer}
+
+\texttt{research/experiments/task15a\_picard\_flatness\_checks.py}
+(committed alongside this dossier). Bounds: pure Python, exact
+\texttt{Fraction} arithmetic throughout, no floats, zero tolerance, every
+check ASSERTS; the committed 16-letter exterior model conventions imported
+verbatim from the audited task13d certificate (parity-exact Weil
+construction, $\theta$, the exact dual-basis Poincar\'e class, the Newton
+conductor machinery, the committed instance data); largest enumeration
+$\le 2^{16}$ monomial operations; runtime $< 1$\,s. It verifies:
+(1) the committed constants re-asserted (periods, W0 annihilations ---
+the inherited-artifact gate re-run per ledger 084);
+(2) the general-grade FM bookkeeping: the $\mathrm{fm}_k$ map
+($k=1,2,3$) by the identical committed construction
+$c_1(\mathcal{P})^{8-2k}/(8-2k)!$, with the $k=2$ case verified IDENTICAL
+to the committed W5 transform on $\WR,\WI$ (coefficient 1, round trips);
+(3) the $k=3$ census: degree-6 words map to degree-2 words
+($28 \to 28$; the map asserted non-empty on all 28 basis words --- no
+silent skips), non-vacuity asserted ($\mathrm{fm}_3(\theta^3)\ne 0$),
+and the composite $\widehat{\mathrm{fm}}_1\circ \mathrm{fm}_3$ asserted
+uniform on the 28-word basis with constant of modulus 1 (the
+normalization constant of the committed convention at grade 3, recorded
+by the script, not fitted);
+(4) the pair grade-3 purity re-derived on ALL committed instances (the
+four W6 table instances, the carrier instance, and the committed
+detector-probe instance $c_2(E_-)=\WR$, $r=6$, $m=2$) through the
+conductor machinery: $\ch_3(E_+) - \ch_3(E_-) = 0$ (the difference is
+$c_2$-side independent) and the $c_3$-shift
+$-m\,c_1\wedge\WR$ dying by W0 in the ring when $c_1\in\mathbb{Z}\theta$;
+(5) the flatness composites $\mathrm{fm}_3(\ch_3\text{-difference}) = 0$
+on all the same instances (the W8 identity at the model layer);
+(6) the duality face: $\mathrm{fm}_2(m\,\WR) = m\,\widehat\WR$-dual exact
+(linearity, coefficient $m$, W5-consistent) for W8.2.
+
+The scheme-level steps (leaves P1, P2, P4 and the perfect-complex
+determinant theory) are declared external leaves at standard strength and
+are NOT claimed as certified; the model layer certified here is the same
+layer as the committed W5/W6 certificates (kernel-green run 40139821467 @
+c6a2778), and no new Lean file is introduced by this round (the kernel
+content of W8's model layer --- pair purity at grade 3 --- is already
+asserted inside the committed walls certificate; this is receipt-cited, not
+re-certified).
+
+\section{Provenance}
+
+Builds on: the cycle-4 strike-1 walls (W0/W4/W5/W6, kernel-green run
+40139821467 @ c6a2778, audit-closed 14-b-3) and the cycle-4 strike-2
+decision attempt (W7, the funnel, the additive-completeness theorem;
+audit-closed 14-b-3); the round 15-a terminal-state exactness repair
+(ledger 085, commit 26214ce). The registry NO-route reopen item
+``Picard--sheaf monodromy / determinant-of-cohomology rigidity'' is the
+executed route. Research-only round: no .lean, no .yml, no workflow fires.
+
+\end{document}

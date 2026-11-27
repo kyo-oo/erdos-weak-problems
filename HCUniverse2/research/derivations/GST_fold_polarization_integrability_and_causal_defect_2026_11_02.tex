@@ -1,0 +1,284 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\CH}{\operatorname{CH}}
+\title{GST folds: constructive polarization, integrability, and causal defects}
+\author{Research continuation; self-reviewed hand mathematics}
+\date{2 November 2026}
+\begin{document}
+\maketitle
+
+\section{Contract and relation to the existing branch}
+Start with an arbitrary original smooth projective complex $X$, an integer
+$0\leq p\leq\dim X$, and a prescribed rational Hodge class
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$.
+The unconditional target remains an independently constructed
+$Z_\alpha\in\CH^p(X)_\Q$ with canonical Betti class $\alpha$.
+The owner's additional thought experiment assumes this conclusion for all
+$X$ temporarily. Results using that assumption are labelled conditional;
+they cannot prove the assumption.
+Initial checkout: \texttt{c6b8180}. Before publication the branch was fetched
+and reconciled through \texttt{05a2758}, including its Round 50--51 records
+and Round 51 Lean source. No conclusion is based on their titles alone.
+
+General Space has no dimension field in \texttt{GSTGeneralSpace.lean}.
+Actual local Krull dimension is an observation in
+\texttt{GSTGeneralSpaceSchemeDimensionObservation.lean}. The higher-cell
+index in \texttt{GSTGraphV2UnboundedHigherCausality.lean} is a coherence
+index, not automatically a variety's dimension. Here we construct actual
+fold operators and test realization, rather than identifying these indices.
+The nearest prior fold calculations already distinguish marked Hodge-type
+drift, loss of purity outside the smooth-projective domain, and failure of
+algebraic realization. We retain that distinction.
+
+\section{A polarization can be constructed from an integral rotation}
+\begin{theorem}[Averaged polarization]
+Let $\Lambda\simeq\Z^{2s}$ and $J\in\operatorname{End}_{\Z}(\Lambda)$
+with $J^2=-1$. Choose any positive definite integral symmetric bilinear
+form $b$ on $\Lambda$. On $V=\Lambda\otimes\R$ define
+\[
+ g_J(x,y)=b(x,y)+b(Jx,Jy),\qquad
+ E_J(x,y)=g_J(Jx,y).
+ \tag{1}
+\]
+Then $g_J$ is positive definite and $J$-invariant. The integral form
+$E_J$ is alternating, $J$-invariant, and
+\[
+ E_J(x,Jx)=g_J(x,x)>0\quad(x\ne0).                 \tag{2}
+\]
+Thus the constant complex structure $J$ on $V/\Lambda$ has an explicit
+Riemann form and defines a projective complex torus.
+\end{theorem}
+\begin{proof}
+The equality $J^2=-1$ gives
+$g_J(Jx,Jy)=b(Jx,Jy)+b(-x,-y)=g_J(x,y)$.
+Consequently $g_J(Jx,y)=-g_J(x,Jy)$, proving alternation using symmetry.
+Positivity follows from $g_J(x,x)=b(x,x)+b(Jx,Jx)$; the first summand
+is positive for $x\ne0$, and the second is nonnegative.
+All lattice values are integral. Constant $J$ is integrable, and (2)
+is our symplectic positivity convention. Milne uses the opposite sign,
+so his Riemann form is $-E_J$, with $(-E_J)(Jx,x)>0$.
+The projectivity implication is Milne, \emph{Abelian Varieties}, v2.00,
+Chapter I, Theorems 2.8--2.9 (author-hosted version checked 2 November 2026).
+\end{proof}
+
+In a lattice basis with $b(x,y)=x^Ty$, the executable formula is
+\[
+ G=I+J^TJ,\qquad E=J^TG=-GJ,\qquad
+ E^T=-E,\quad J^TEJ=E,\quad EJ=G>0.              \tag{3}
+\]
+This proves \emph{existence of a chosen polarization}; it does not claim
+that a preassigned geometric class $\theta$ becomes positive. In that
+precise sense it strengthens, rather than contradicts, Round 31's
+remark that its lattice skeleton did not supply a polarization.
+
+\begin{theorem}[Exact geometric range of the constant integral fold]
+The complex torus just constructed is isomorphic, as an unpolarized
+complex torus and hence as an abelian variety, to $E_i^s$, where
+$E_i=\C/(\Z+i\Z)$. In particular its rational Hodge algebra is generated
+by actual divisor classes. This constructs algebraic representatives
+of every rational Hodge class on this folded realization, in every
+codimension, without assuming the Hodge conjecture.
+\end{theorem}
+\begin{proof}
+The action $i\cdot v=Jv$ makes $\Lambda$ a finite torsion-free
+$\Z[i]$-module: if $zv=0$ and $z\ne0$, then
+$z\bar z\,v=0$, so $v=0$. The Gaussian integers are a PID, whence
+$\Lambda\simeq\Z[i]^s$. A Gaussian basis is a complex-linear lattice
+isomorphism, giving the asserted torus isomorphism.
+
+For completeness the divisor span is explicit. On $E_i^s$ take the $s$
+coordinate point divisors $D_j$, and, for each $j<k$, take
+\[
+ A_{jk}=(z_j-z_k)^*[0]-D_j-D_k,\qquad
+ B_{jk}=(z_j-i z_k)^*[0]-D_j-D_k.                 \tag{4}
+\]
+The notation means pullback along the indicated algebraic homomorphism
+to $E_i$. Their $s^2$ real $(1,1)$ matrices span all Hermitian matrices:
+diagonal units, real symmetric off-diagonal units, and imaginary
+skew off-diagonal units. They are rational integral cohomology classes;
+after complexification they span $H^{1,1}$.
+Every basis monomial $u_{i_1}\cdots u_{i_p}
+\bar u_{j_1}\cdots\bar u_{j_p}$ is, up to its exterior sign, a product
+of $p$ elements $u_i\bar u_j$ of $H^{1,1}$.
+Thus products of (4) span all of $H^{p,p}$ over $\C$.
+The rational kernel of the Hodge charge operator complexifies to
+$H^{p,p}$, since $J$ is rational and the zero-charge condition is
+defined over $\Q$. Hence exact rational linear elimination expresses
+each rational Hodge target in rational divisor products. Their actual
+Chow product is the required representative on this torus.
+This is also the known elliptic-power theorem recorded by Milne,
+\emph{Shimura varieties and moduli}, p. 519, Step 1, not a novelty claim.
+\end{proof}
+
+The existing \texttt{GSTCMFiniteGeometricDegreeDescent.lean} already
+provides native divisor-word construction and rational coefficient
+descent. The argument above supplies its geometric character expansion
+\emph{at this actual torus}, not for an arbitrary original $X$.
+
+\section{The universal rotation exists after doubling, but changes realization}
+For any abelian group $H$ define
+\[
+ J_H(x,y)=(-y,x),\qquad (x,y)\in H\oplus H.       \tag{5}
+\]
+It satisfies $J_H^2=-1$, without an even-rank hypothesis on $H$.
+Moreover
+\[
+ (J_H-1)(y-x,-x-y)=2(x,y).                       \tag{6}
+\]
+For a rational vector space, $(J_H-1)^{-1}=-(J_H+1)/2$.
+Over $\Z^r$, the equation $(J_H-1)(u,v)=(x,y)$ has a solution iff
+each coordinate of $x+y$ is even; then
+$u=(y-x)/2$, $v=-(x+y)/2$. Its cokernel is $(\Z/2)^r$.
+This is a uniform constructive deck on doubled cohomology, not a
+construction of a deck compatible with the original geometric Hodge
+decomposition. On a connected original $X$, $H^0(X,\Q)=\Q$ cannot
+itself admit a rational operator squaring to $-1$.
+
+For the prescribed $\alpha$, choose integral coordinates $a=m\alpha$
+on the free Betti lattice. On the actual auxiliary torus $E_i^{r+1}$
+the two homomorphisms $f_\pm(z)=z_0\pm\sum a_jz_j$ construct divisors
+$D_\pm=f_\pm^*[0]$ with exact Hermitian matrix difference
+\[
+ (e_0+a)(e_0+a)^*-(e_0-a)(e_0-a)^*
+       =2(e_0a^*+ae_0^*).                       \tag{7}
+\]
+This is a real target-dependent algebraic source in the folded space.
+It encodes \emph{every} rational Betti vector, even a non-Hodge one.
+No natural Chow return from this auxiliary torus to $X$ is supplied
+by (5)--(7); assigning such a return by its desired value would insert
+the missing original-X source. Thus source birth on the new torus is
+not source birth on the original variety.
+
+There is also a genuine algebraic realization of (5) for \emph{every}
+original $X$ without changing weights: take $Y=X\sqcup X$ and the
+signed swap correspondence, whose matrix of graph cycles is
+$\left(\begin{smallmatrix}0&-\Delta_X\\\Delta_X&0\end{smallmatrix}\right)$.
+Its action on both $\CH^p(Y)_\Q$ and $H^{2p}(Y,\Q)$ is (5), and these
+actions commute with the canonical cycle map. The inclusion
+$\alpha\mapsto(\alpha,0)$ has the actual component projection as return.
+Consequently
+\[
+ (\alpha,0)\text{ is algebraic on }Y
+       \quad\Longleftrightarrow\quad
+ \alpha\text{ is algebraic on }X.                \tag{7a}
+\]
+This all-$X$ construction closes the bare operator-existence question,
+while retaining the source problem exactly. Here $J$ is a degree-zero
+endomorphism of the \emph{existing} Hodge structure, so its eigenvalues
+$\pm i$ can occur within a single $(p,p)$ piece. Reinterpreting those
+eigenspaces as $(1,0)$ and $(0,1)$ would change the realization and
+weight; it is not the original complex geometry of $X\sqcup X$.
+
+\section{A positive fold equation need not be integrable}
+On the real four-torus with periodic coordinates $x_1,\ldots,x_4$, set
+$f(x_1)=2+\sin(2\pi x_1)>0$ and define
+\[
+ J_f\partial_1=\partial_2,\quad J_f\partial_2=-\partial_1,
+ \quad J_f\partial_3=f\partial_4,\quad
+ J_f\partial_4=-f^{-1}\partial_3.                \tag{8}
+\]
+It obeys $J_f^2=-1$ and is compatible with the closed symplectic form
+$\omega=dx_1\wedge dx_2+dx_3\wedge dx_4$. Indeed for a real vector $v$,
+\[
+ \omega(v,J_fv)=v_1^2+v_2^2+fv_3^2+f^{-1}v_4^2>0
+       \quad(v\ne0).                           \tag{9}
+\]
+For the convention
+$N_J(U,V)=[JU,JV]-J[JU,V]-J[U,JV]-[U,V]$, direct brackets give
+\[
+ N_{J_f}(\partial_1,\partial_3)
+       ={f'\over f}\partial_3.                 \tag{10}
+\]
+At $x_1=0$ the coefficient is $\pi\ne0$.
+Thus even the fold square equation plus positive symplectic geometry
+does not force integrability, let alone a projective Hodge structure.
+More precisely, within this entire ansatz on a connected periodic
+$x_1$-circle, integrability holds if and only if $f$ is constant.
+Necessity follows from (10) and $f>0$; sufficiency follows because
+constant coefficients give zero brackets. For constant $f$, the complex
+coordinates are $x_1+i x_2$ and $x_3+i x_4/f$, giving the actual
+projective torus $E_i\times E_{i/f}$. An external deformation parameter
+is not a spatial coordinate: this statement does not forbid varying
+constant $f$ between different integrable worlds.
+This is an actual compact smooth almost-Kaehler realization; it is not
+a complex-projective Hodge-conjecture counterexample. For every original
+$X$, the product almost-complex structure on $X\times T^4$ retains this
+nonzero component. Additional constant blocks give every larger
+stabilized dimension without curing it.
+
+\section{Causal defect transport, including cancellation}
+Let $J,K,L$ be complex-structure operators on successive real vector
+spaces, and let $T,S$ be successive real linear maps. Define
+\[
+ \mathcal D_{J,K}(T)=KT-TJ.
+\]
+Then
+\[
+ \mathcal D_{J,L}(ST)
+ =\mathcal D_{K,L}(S)T+S\mathcal D_{J,K}(T).      \tag{11}
+\]
+Its iterated form for a causal word $T_n\cdots T_1$ is
+\[
+ J_nT_n\cdots T_1-T_n\cdots T_1J_0
+ =\sum_{j=1}^n T_n\cdots T_{j+1}
+       (J_jT_j-T_jJ_{j-1})T_{j-1}\cdots T_1.     \tag{12}
+\]
+The empty word has zero defect. Vanishing per edge implies vanishing
+for every finite path. Conversely endpoint vanishing does not force
+per-edge vanishing: for $J=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$
+and $T=\operatorname{diag}(1,-1)$, $JT-TJ\ne0$ but $T^2=1$.
+For weight-one realizations this is exactly the Hodge-morphism
+condition. In arbitrary cohomological degree one must use the full
+Hodge charge/filtration operator, not identify its Weil operator with
+a weight-one $J$. The purely algebraic defect formula still applies.
+
+If the owner assumes universal rational Hodge algebraicity, then
+Hodge classes obtained under admissible smooth projective operations
+have algebraic representatives by that assumption. A marked class
+leaving Hodge type under a real fold does not contradict it. Conversely
+the absence of drift in (12) is type preservation, not by itself
+surjectivity of the canonical cycle-class map.
+
+\section{A constructed native cycle, beyond the Round 51 shape record}
+Given an actual cycle-compatible path realization $P$ and a native seed
+$Z_0$, define $Z_{n+1}=P_{\rm native}(\gamma_n)Z_n$.
+Naturality, by induction, proves
+\[
+ \operatorname{cl}(Z_n)=P_{\rm Betti}(\gamma_{n-1})\cdots
+       P_{\rm Betti}(\gamma_0)\operatorname{cl}(Z_0).       \tag{13}
+\]
+The new \texttt{nativeCycleTower} gives the actual expression for $Z_n$;
+\texttt{nativeCycleTower\_class} proves (13).
+\texttt{rides\_always\_gives} in \texttt{GSTLawStackRound51.lean} previously only paired
+two supplied propositions in its explicitly labelled shape record.
+The added \texttt{GSTLawStackRound51Actual.rides\_always\_gives\_constructively}
+uses (13), with no unrelated transport proposition. The existing native
+realization and seed remain explicit inputs, not free source coverage.
+
+Coverage of the address ladder $(2p,p,p)$ does not imply coverage of all
+class vectors at those addresses. Already on $\mathbb P^1\times\mathbb P^1$,
+the two independent divisor classes have the same address $(2,1,1)$.
+Tate stabilization of the first does not produce the second. This is
+compatible with Round 51's stated open reachability/realization face;
+it prevents reading address-orbit coverage as an original-X source theorem.
+
+\section{Evidence and exact proof boundary}
+\texttt{GSTFoldRotation.lean}, \texttt{GSTFoldPolarization.lean},
+\texttt{GSTCausalFoldDefect.lean}, and
+\texttt{GSTVariableFoldIntegrability.lean} contain algebraic proof drafts.
+The torus realization, divisor geometry, and vector-field interpretation
+are hand-level results, not instantiated scheme/analytic Lean proofs.
+Wolfram and an independent Python implementation test exact matrices,
+exterior algebras, integral doors, and the variable-fold brackets.
+No finite table proves the universal theorems; proofs are above.
+No Lean compilation, full semantic review of the repository, or
+unconditional original-X Hodge-conjecture solution is asserted.
+\end{document}

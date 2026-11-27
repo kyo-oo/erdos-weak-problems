@@ -1,0 +1,200 @@
+{
+  "task_id": "W2-C",
+  "battery": "gst_twelve_point_krylov_z3_battery_20261116",
+  "claim": "Krylov matrix of Twave (= N12 = F12 ownerSource 1) on seed12 has det = -1149656584000 != 0; the twelve orbit vectors span the 12-dimensional Hodge fiber WaveSignal12",
+  "z3_version": "5.4.1",
+  "timestamp": "2026-11-16T14:19:40.295200+00:00",
+  "method_a_det": {
+    "bareiss_det_K": -1149656584000,
+    "bareiss_det_K_transpose": -1149656584000,
+    "fraction_gaussian_det_K": "-1149656584000",
+    "canonical_constant": -1149656584000,
+    "agrees": true
+  },
+  "method_b_kernel_unsat": true,
+  "method_b_identity_checks": {
+    "adj_mul_K_queries": 144,
+    "adj_mul_K_unsat": 144,
+    "K_mul_adj_queries": 144,
+    "K_mul_adj_unsat": 144,
+    "python_exact_precheck": true
+  },
+  "method_c_mod_p": {
+    "3": {
+      "det_mod_p": 2,
+      "expected": 2,
+      "agree": true,
+      "divides_det": false,
+      "z3_kernel_unsat": true,
+      "z3_kernel_verdict": "unsat"
+    },
+    "5": {
+      "det_mod_p": 0,
+      "expected": 0,
+      "agree": true,
+      "divides_det": true
+    },
+    "7": {
+      "det_mod_p": 6,
+      "expected": 6,
+      "agree": true,
+      "divides_det": false,
+      "z3_kernel_unsat": true,
+      "z3_kernel_verdict": "unsat"
+    },
+    "11": {
+      "det_mod_p": 10,
+      "expected": 10,
+      "agree": true,
+      "divides_det": false,
+      "z3_kernel_unsat": true,
+      "z3_kernel_verdict": "unsat"
+    },
+    "13": {
+      "det_mod_p": 11,
+      "expected": 11,
+      "agree": true,
+      "divides_det": false,
+      "z3_kernel_unsat": true,
+      "z3_kernel_verdict": "unsat"
+    },
+    "17": {
+      "det_mod_p": 11,
+      "expected": 11,
+      "agree": true,
+      "divides_det": false
+    },
+    "19": {
+      "det_mod_p": 16,
+      "expected": 16,
+      "agree": true,
+      "divides_det": false
+    },
+    "23": {
+      "det_mod_p": 10,
+      "expected": 10,
+      "agree": true,
+      "divides_det": false
+    },
+    "29": {
+      "det_mod_p": 7,
+      "expected": 7,
+      "agree": true,
+      "divides_det": false
+    },
+    "31": {
+      "det_mod_p": 29,
+      "expected": 29,
+      "agree": true,
+      "divides_det": false
+    },
+    "37": {
+      "det_mod_p": 16,
+      "expected": 16,
+      "agree": true,
+      "divides_det": false
+    },
+    "41": {
+      "det_mod_p": 8,
+      "expected": 8,
+      "agree": true,
+      "divides_det": false
+    }
+  },
+  "method_c_z3_kernel_primes": [
+    3,
+    7,
+    11,
+    13
+  ],
+  "method_c_excluded_primes_dividing_det": [
+    5
+  ],
+  "method_c_divisor_prime_witnesses": {
+    "5": {
+      "witness": [
+        0,
+        0,
+        1,
+        1,
+        3,
+        3,
+        1,
+        1,
+        4,
+        3,
+        1,
+        0
+      ],
+      "z3_verdict": "sat",
+      "certifies": "5 | det (v_5(det) = 3), exhibited nonzero mod-5 annihilator of K^T"
+    }
+  },
+  "canonical_det_factorization": "(-1) * 2^6 * 5^3 * 149^2 * 6473^1",
+  "method_d_agreement": {
+    "twave_vs_semantic_operator": true,
+    "owner_source_table": true,
+    "seed_tables": true,
+    "orbit_route_matvec_vs_semantic": true,
+    "orbit_route_matvec_vs_matrix_power": true,
+    "orbit_vs_lean_kvec_table": true,
+    "orbit_vs_lean_cvec_table": true,
+    "eleven_step_lemma_data": true
+  },
+  "supplementary_certificate": {
+    "certRowOf_times_K_transpose_equals_identity": true,
+    "owner_source_null_and_max_cell_certificates": true
+  },
+  "total_z3_queries": 294,
+  "z3_core_queries": 293,
+  "z3_core_all_unsat": true,
+  "z3_divisor_witness_queries": 1,
+  "z3_divisor_witnesses_all_sat": true,
+  "z3_verdict_histogram": {
+    "unsat": 293,
+    "sat": 1
+  },
+  "all_unsat": true,
+  "overall_pass": true,
+  "discrepancies": [],
+  "data_sources": {
+    "operator_matrix_T": [
+      "GSTHypothesisSpanningCompilerFace.lean:63-77 (Twave, explicit)",
+      "GSTHypothesisSpanningCompilerFace.lean:81-93 (Twave_bridge)",
+      "GSTHypothesisSpanningProof.lean:117-127 (N12, N12_val)",
+      "GSTHypothesisComplete.lean:541-564 (U12, J12, M12, F12)",
+      "GSTHypothesisComplete.lean:512-534 (shuffleCell, mirrorCell, cmSign)",
+      "GST2DMixedEmergence.lean:49-51 (surviveI), :34 (twoI), :9-17 (digits)",
+      "GSTHypothesisSpanningProof.lean:67-84 (ownerSource + decided values)"
+    ],
+    "seed": [
+      "GSTHypothesisComplete.lean:555-558 (seed12 = e_(0,0) + e_(0,1))",
+      "GSTHypothesisSpanningCompilerFace.lean:98 (coordSeed)",
+      "GSTGraphV2CMWaveFusion.lean:139-141 (seed)"
+    ],
+    "krylov_convention": [
+      "GSTGraphV2CMWaveFusion.lean:175-176 (orbitMatrix s k = orbit k s: rows = cells, columns = orbit steps)",
+      "GSTHypothesisSpanningCompilerFace.lean:101-106 (C 0 = coordSeed, C (n+1) = Twave.mulVec (C n))",
+      "GSTHypothesisSpanningProof.lean:138-141 (worldOrbit recursion)"
+    ],
+    "krylov_tables": [
+      "GSTHypothesisSpanningProof.lean:147-161 (Kvec)",
+      "GSTHypothesisSpanningCompilerFace.lean:109-123 (Cvec)"
+    ],
+    "step_lemmas": [
+      "GSTHypothesisSpanningProof.lean:203-333 (N12_Kvec_step_0..10 : N12 (Kvec k) = Kvec (k+1))",
+      "GSTHypothesisSpanningProof.lean:336-391 (orbit_val_0..11)"
+    ],
+    "cell_certificates": [
+      "GSTHypothesisSpanningProof.lean:70 (ownerSource_null : ownerSource nullCell = 0)",
+      "GSTHypothesisSpanningProof.lean:71 (ownerSource_max : ownerSource maxCell = 2)"
+    ],
+    "determinant_constant": [
+      "GSTHypothesisSpanningProof.lean:33-35 (Krylov determinant -1149656584000 of the records)"
+    ],
+    "spanning_certificate": [
+      "GSTHypothesisSpanningProof.lean:420-444 (certRowOf, eCell_eq_cert)",
+      "GSTHypothesisSpanningProof.lean:463-468 (span_range_worldOrbit_eq_top)"
+    ]
+  }
+}

@@ -1,0 +1,67 @@
+import HCUniverse2.GSTExactSequenceTorsion
+import HCUniverse2.GSTLawStackRound29
+import HCUniverse2.GSTCubicNilpotentDressing
+import HCUniverse2.GSTFiniteSourceCorrection
+import HCUniverse2.GSTClassicalHodgeFiniteSourceCorrection
+import HCUniverse2.GSTClassicalHodgeCMNativeRationalDescent
+import HCUniverse2.GSTSplitBoundaryProjection
+import HCUniverse2.GSTComplexTangentProjectionChainObstruction
+import HCUniverse2.GSTOrderedNilpotentDressing
+import HCUniverse2.GSTFiniteGroupCocycleAveraging
+import HCUniverse2.GSTTargetWordRecovery
+import HCUniverse2.GSTClassicalHodgeWordSourceRecovery
+import HCUniverse2.GSTFilteredK0SourceConservation
+import HCUniverse2.GSTIntegralProjectionCorrection
+import HCUniverse2.GSTNilpotentProjectionConjugacy
+import HCUniverse2.GSTSpectralBoundaryDefect
+import HCUniverse2.GSTTorsionLineConservation
+import HCUniverse2.GSTConnectedSpectralHodgeRigidity
+import HCUniverse2.GSTSingularBranchExtraction
+
+/-!
+# OpenAI/GST source-correction integration entry point, 2026-10-28
+
+Proof drafts; compilation is left to the owner. No external paper theorem
+is silently installed as an axiom. The source manifest and derivation record
+the distinction between mathematical source results, method inspiration,
+and conditional canonical-geometry adapters.
+
+This module collects the actual strengthened statements, including the
+Round-29 torsion theorem that previously concluded only `True`.
+-/
+
+#check GSTExactSequenceTorsion.product_annihilates
+#check GSTLawStackRound29.uniform_kill_of_five_term
+#check GSTLawStackRound29.ConcentrationCriterion.mixed_injective
+#check GSTLawStackRound29.EquivariantEnvelope.dressing_add
+#check GSTCubicNilpotentDressing.dressing2_add
+#check GSTCubicNilpotentDressing.CubicCommutingRealization.unitLift
+#check GSTCubicNilpotentDressing.no_nonzero_scale_area_coboundary
+#check GSTFiniteSourceCorrection.exact_of_polynomial_annihilator
+#check GSTClassicalHodgeFiniteSourceCorrection.SourceSystem.exact_originalX_cycle_of_polynomial
+#check GSTClassicalHodgeCMNativeRationalDescent.nativeCycleFromCrossCarrierCoefficients_spec
+#check GSTSplitBoundaryProjection.repaired_type_iff_correction_has_type
+#check GSTComplexTangentProjectionChainObstruction.closed_and_type_fixed_iff_zero
+
+-- Further-depth continuation: arbitrary ordered nilpotent depth, finite
+-- holonomy primitives, word identities and the full generalized blind sector.
+#check GSTOrderedNilpotentDressing.unitOfNilpotent
+#check GSTOrderedNilpotentDressing.ordered_gauge_defect
+#check GSTFiniteGroupCocycleAveraging.rational_averaging
+#check GSTFiniteGroupCocycleAveraging.correct_extension_product
+#check GSTTargetWordRecovery.every_weighted_frame_singular
+#check GSTTargetWordRecovery.integral_fourth_order_identity
+#check GSTClassicalHodgeWordSourceRecovery.originalX_fourth_order_recovery
+#check GSTFiniteSourceCorrection.generalized_fixed_mode_forbids_certificate
+#check GSTFilteredK0SourceConservation.finite_filtered_source_character_zero
+
+-- Integral projection correction and the singular-branch continuation.
+#check GSTIntegralProjectionCorrection.corrected_idempotent
+#check GSTIntegralProjectionCorrection.corrected_at_nilpotence_exponent
+#check GSTNilpotentProjectionConjugacy.bridgeUnit_conjugates
+#check GSTSpectralBoundaryDefect.anti_square_exact_defect
+#check GSTSpectralBoundaryDefect.anti_square_in_boundary_ideal
+#check GSTTorsionLineConservation.torsion_line_principal_push_zero
+#check GSTConnectedSpectralHodgeRigidity.connected_anti_isotropic_zero
+#check GSTSingularBranchExtraction.extracted_stratum
+#check GSTFilteredK0SourceConservation.localized_source_zero_if_support_zero

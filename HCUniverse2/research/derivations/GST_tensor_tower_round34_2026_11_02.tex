@@ -1,0 +1,669 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{construction}[theorem]{Construction}
+
+\newcommand{\PROVEN}{\textbf{[PROVEN HERE]}}
+\newcommand{\STANDARD}{\textbf{[STANDARD STRENGTH]}}
+\newcommand{\CERT}{\textbf{[CERTIFICATE RECEIPT]}}
+\newcommand{\OPEN}{\textbf{[OPEN]}}
+\newcommand{\COND}{\textbf{[CONDITIONAL]}}
+\newcommand{\MINE}{\textbf{[THIS SESSION'S OWN CALCULATION]}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\MT}{\mathrm{MT}}
+\newcommand{\GSp}{\mathrm{GSp}}
+\newcommand{\NS}{\mathrm{NS}}
+
+\title{The Tensor Tower: the Channel-Tower Law, the Terminal-Cell Stratification,\\ and the Reduction of the Odd-Tensor Residual to the Weil Sector\\[6pt]
+\large GST Hodge Campaign --- Round 34}
+\author{GST law stack, Mode B, V6.2 ultra max (the operator's standing final-phase order)}
+\date{2026-11-02 (session clock)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This round executes the final phase of the operator's standing order
+(\emph{``once you done this statement, continue the final phase, skill v6
+mode b at ultra max mode''}), continuing directly from Round 33's
+trajectory change. The strike target is the first named residual of the
+strengthened terminal map: \textbf{(R1) the pure odd-tensor middle parts}
+--- whose first open cell was \emph{the middle of
+$H^{1}\otimes H^{1}\otimes H^{1}$ at fourfold products of curves}. The
+round's construction deliverables:
+\textbf{the Channel-Tower Law} (Theorem S7: supply-transport along
+correspondences --- every twisted odd-tensor sector is a tower image of a
+lower cell; the $k=0$ base is Round 33's S5);
+\textbf{the Terminal-Cell Stratification} (Theorem S8, this session's own
+computations: at the very-general distinct-curves stratum the pure
+odd-tensor content of $M_{\mathrm{mid}}$ is \emph{zero} --- the
+outer-irreducibility argument; at the self-product stratum
+$C^{4}$ the triple-tensor content of $M_{\mathrm{mid}}$ is
+\emph{exactly} $\theta\wedge H^{1}(C)$, the polarization channel,
+at every genus --- the Schur/contraction computation; both strata are
+thereby S5-closed);
+\textbf{the Correspondence-Stratum Reduction} (Theorem S9: the
+irreducible content of the entire odd-tensor tower lives precisely on the
+high-endomorphism strata --- the isogeny, CM and Weil-type loci --- where
+it \emph{merges with the classical beyond-divisor Weil sector}); and the
+\textbf{re-drawn terminal map} (Theorem S10): the residual (R1) is
+absorbed; the falsifiable line is now three named objects: the merged
+Weil/CM sector (R2$'$), the $K$-condition at general input beyond the
+channels (R3), and the transcendental fold-birth (R4).
+Consequence at equivalence strength: \textbf{on the very-general stratum
+of fourfold products of pairwise non-isogenous curves (and on
+$E\times X$ over it), every rational $(2,2)$ Hodge class is algebraic}
+--- an infinite family of open-sector inputs whose mixed sector closes
+unconditionally through Round 33's S5 and this round's stratification, with
+the boundary stated on its face: the irreducible content has moved, not
+vanished; it lives on the classical strata, named and entry-tested.
+$\mathrm{Q2}$ is not claimed; the closing string is not emitted.
+\end{abstract}
+
+\section{Preamble: the order, the engines, the pre-read}
+
+\textbf{The order.} The operator's final-phase order (Round 33's message,
+continuing clause): continue at Mode B ultra max. Per the offense-first
+law (skill \S34), this round's first deliverable is the construction
+strike named above; per the boss's-math-as-engine law (\S35), the
+\textbf{ENGINE} is the boss's channel-composite machinery (Round 33's S5
+divisor-twist composite --- the two-center conduit composite), the
+Gaussian E-factor law (Round 32, Theorem 3(ii)), and the boss's
+K\"unneth/letter arithmetic (the word calculus of the arity laws,
+skill \S45), with the classical Schur/Mumford--Tate layer as
+\emph{calibration} instruments only.
+
+\textbf{Pre-read.} SKILL V6.2 (752 lines, all 46 sections); MISTAKE\_LEDGER
+108 entries; worklog CX-14/CX-15; Round 33's derivation and certificate
+(re-run this session: 844/844, exit 0, md5 unchanged); the remote at
+$149e794$ (Round 33 pushed and verified by \texttt{ls-remote}).
+
+\textbf{Standing notation} (Round 32/33, unchanged): $E$ the Gaussian
+elliptic curve (CM by $\Z[i]$, $[i]^2=-1$ on $H^1(E)$); $e,f$ a symplectic
+basis of $H^1(E,\Z)$; for a smooth projective complex $X$ and $p\ge1$,
+$M_{\mathrm{mid}}(X,p)\subseteq H^{2p-1}(X,\Q)$ the canonical middle
+(Round 33, Theorem S1), $J_{\mathrm{mid}}$ its abelian variety (Round 32,
+Theorem 1), $B$ the balanced lattice on $E\times X$
+(Round 32, Theorem 1(iii)), and the \textbf{$K$-condition} at $(X,p)$:
+an algebraic $K\in\CH^{p+g-1}(X\times J_{\mathrm{mid}})_\Q$ whose
+correspondence action realizes the identification
+$H^1(J_{\mathrm{mid}})\cong M_{\mathrm{mid}}(p-1)\hookrightarrow
+H^{2p-1}(X)$ up to a nonzero rational scalar (Round 32, Theorem 2(b)).
+The mixed closure at $(X,p)$ (every balanced class on $E\times X$
+algebraic) holds iff the $K$-condition holds (Round 32, Theorem 2).
+
+\section{Theorem S7: the Channel-Tower Law}
+
+\subsection{The tower}
+
+\begin{definition}[Channels and channel sectors]\label{def:channel}
+Let $X$ be smooth projective, $p\ge2$, $k\ge0$ with $p-1-k\ge0$. A
+\emph{$k$-channel} at $(X,p)$ is a triple $(Y,U,\delta)$ where:
+$Y$ is a smooth projective \emph{carrier}; $U\in\CH^{c}(X\times Y)_\Q$ is
+an algebraic correspondence with cohomological shift
+$s:=c-\dim Y$ satisfying $p-1-k-s\ge0$; and
+$\delta\in\CH^{\,p-1-k-s}(X)_\Q$ is an algebraic divisor-word. The
+\emph{channel sector} is
+\[
+\mathcal{C}_k(U,\delta)\;:=\;\bigl[\mathrm{cl}(\delta)\wedge
+U_*\bigl(M_{\mathrm{mid}}(Y,k+1)\bigr)\bigr]\;\subseteq\;
+M_{\mathrm{mid}}(X,p),
+\]
+the $\Q$-span of $\mathrm{cl}(\delta)\wedge U_*\mu$ over
+$\mu\in M_{\mathrm{mid}}(Y,k+1)$.
+\end{definition}
+
+\begin{lemma}[The channel lands in the middle]\label{lem:typing}
+For any $k$-channel: $\mathcal{C}_k(U,\delta)\subseteq M_{\mathrm{mid}}(X,p)$.
+\end{lemma}
+
+\begin{proof}
+Type-chase (this session's own computation, certificate V6). Let $\mu\in
+M_{\mathrm{mid}}(Y,k+1)$ have type $(a,b)$, $a+b=2k+1$, $|a-b|\le1$.
+Since $\mathrm{cl}(U)$ is an algebraic class it is of type $(c,c)$ on
+$X\times Y$; the correspondence action is
+$\mathrm{pr}_{X,*}\bigl(\mathrm{cl}(U)\cdot \mathrm{pr}_Y^*\mu\bigr)$:
+the product has type $(c+a,\,c+b)$ and the pushforward along the
+projection of relative dimension $e=\dim Y$
+contracts exactly the $Y$-degree-$2e$ components and subtracts $(e,e)$
+from the type, so $U_*\mu$ has type $(a+s,\,b+s)$ with $s=c-e$
+(the correspondence shift). Wedging with $\mathrm{cl}(\delta)$, a
+$(p-1-k-s,\,p-1-k-s)$-class, gives type
+$(a+p-1-k,\ b+p-1-k)$: total degree $2p-1$ and $|a-b|\le1$ preserved ---
+middle types. The span is a rational subspace of $H^{2p-1}(X)$ carried by
+middle types; its type set is conjugation-stable, hence it is a
+sub-Hodge-structure of level $\le1$ contained in the maximal one.
+\end{proof}
+
+\subsection{The Supply-Transport Lemma (the construction)}
+
+\begin{theorem}[Channel-Tower Law]\label{thm:s7}
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Supply transport.} Suppose the mixed closure holds at the
+carrier $(Y,k+1)$ (equivalently, the $K$-condition holds there, Round 32
+Theorem 2). Then the mixed closure holds for every balanced class
+$x\in B$ on $E\times X$ with $x=e\otimes u+f\otimes v$ and
+$u\in\mathcal{C}_k(U,\delta)$: explicitly, if
+$Z'\in\CH^{k+1}(E\times Y)_\Q$ realizes the balanced class of
+$\mu\in M_{\mathrm{mid}}(Y,k+1)$ underlying $u$, then
+\[
+Z_x\;:=\;(\mathrm{id}_E\times U)_*\bigl(Z'\bigr)\cdot
+\pi^*\delta\;\in\;\CH^{p}(E\times X)_\Q
+\]
+is algebraic and realizes $x$.
+\item \textbf{The tower filtration.} At products of curves, every
+odd-tensor sector of $M_{\mathrm{mid}}$ with a nontrivial divisor-word
+(twist $\delta\ne$ trivial-only) is a finite sum of channel sectors
+$\mathcal{C}_k(U,\delta)$ with $k<p-1$; the $k=0$ channels are exactly
+Round 33's S5 sectors (base of the tower: closed, since at a curve
+carrier the mixed closure is Lefschetz $(1,1)$ on the abelian surface
+$E\times C$). The only sectors not reachable from lower tower levels are
+the \emph{terminal cells}: the pure $(2k+1)$-tensor middle parts at
+carriers $Y=C_{i_1}\times\cdots\times C_{i_{2k+1}}$ with empty twist.
+\item \textbf{The base case.} For every curve $C$ the mixed closure holds
+at $(C,1)$: the balanced lattice on $E\times C$ at degree $1$ consists of
+$(1,1)$ classes on the abelian surface $E\times C$, all algebraic by
+Lefschetz $(1,1)$. Hence every $0$-channel sector at every input is
+closed, recovering Round 33's Theorem S5 as the tower's base.
+\end{enumerate}
+\PROVEN{}
+\end{theorem}
+
+\begin{proof}
+(i) The three operations on the cycle level are the standard algebraic
+operations (correspondence pushforward of a cycle through $U$; intersection
+product with the divisor-word $\delta$), so $Z_x$ is algebraic. The
+cohomology class: the pushforward acts componentwise on the K\"unneth
+decomposition of $E\times Y$, passing the $E$-letters through unchanged
+and applying $U_*$ to the $Y$-part; the intersection multiplies by
+$\mathrm{cl}(\delta)$. Hence
+$\mathrm{cl}(Z_x)=e\otimes(\mathrm{cl}\,\delta\wedge U_*\mu_1)
++f\otimes(\mathrm{cl}\,\delta\wedge U_*\mu_2)$ where
+$x'=e\otimes\mu_1+f\otimes\mu_2$ is the balanced lift of $\mu$ at the
+carrier. The balanced typing propagates: $\mu_1-i\mu_2$ purely
+$(k,k+1)$ on $Y$ implies
+$\mathrm{cl}(\delta)\wedge U_*(\mu_1-i\mu_2)$ purely $(p-1,p)$ on $X$
+(the shift $s$ and the twist $p-1-k-s$ compose to the total
+$(p-1)-k$ shift), so $x$ is balanced on $E\times X$ and
+$Z_x$ realizes it. \CERT{} (V3: the transport identity computed on random
+finite correspondence models, both evaluation orders; V4: the base-case
+finite shadow; the hostile broken-map and wrong-twist controls fire.)
+
+(ii) At $X=\prod_{i=1}^{d}C_i$ with $2\le p\le\lfloor d/2\rfloor$: the
+K\"unneth decomposition of $M_{\mathrm{mid}}(X,p)\subseteq H^{2p-1}(X)$
+is indexed by degree-vectors $(k_i)\in\{0,1,2\}^{d}$ with
+$\sum k_i=2p-1$. A sector with at least one $k_i=2$ carries a divisor
+factor: it is the channel sector with $\delta$ the corresponding
+fundamental-class word, $U$ the graph-composite of the projections, and
+carrier the sub-product of the odd factors. Iterating reaches either
+$k=0$ (a single odd factor: an S5 sector) or the all-odd degree-vectors
+$(k_i)\in\{0,1\}^{d}$ with $2p-1$ ones --- the pure tensor parts. Among
+these, those with a nontrivial divisor-word on the remaining
+$H^0$-factors are channels with $k=p-1$ and $\delta$ a $0$-cycle-word;
+the minimal carriers (no further reduction) are the products of exactly
+$2k+1$ curves padded by $H^0$-factors. These are the terminal cells.
+
+(iii) At a curve carrier $Y=C$: $M_{\mathrm{mid}}(C,1)=H^{1}(C,\Q)$
+(the whole of $H^1$ is middle-typed at $p=1$), and the balanced lattice
+on $E\times C$ is contained in $H^{1,1}(E\times C)$: every rational
+$(1,1)$ class on the abelian surface $E\times C$ is $c_1$ of a line
+bundle (Lefschetz $(1,1)$, \STANDARD{}), so the mixed closure holds
+unconditionally. The S5 composite
+$\Delta_{X,*}\mathrm{cl}(\delta)\circ V\circ c_1(\mathcal P_C)\circ
+\Delta_{J,*}\mathcal L^{g-1}$ of Round 33 is then one explicit $U$ for
+the $0$-channel through the Jacobian factor, by Round 33 Theorem S5
+verbatim.
+\end{proof}
+
+\begin{remark}[What S7 changes]
+Round 33's S5 closed the single-curve channels. S7 generalizes the
+mechanism to arbitrary order: \emph{supply at any carrier transports for
+free to every channel above it}. The open content of the odd face
+therefore cannot be spread over the infinite family of twisted sectors;
+it concentrates at the tower's bottom --- the terminal cells. The next
+section computes exactly what those cells contain.
+\end{remark}
+
+\section{Theorem S8: the Terminal-Cell Stratification}
+
+The first terminal cell is the pure triple tensor at $p=2$:
+the level${}\le1$ sub-Hodge-structures of
+$K_{111}:=H^{1}(C_{i})\otimes H^{1}(C_{j})\otimes H^{1}(C_{\ell})$
+inside $H^{3}$ of a fourfold product. The stratification is by the
+\emph{correspondence strata} of the curve triple.
+
+\subsection{Stratum I: very general distinct curves (the open stratum)}
+
+\begin{theorem}[Terminal-Cell Stratification, I]\label{thm:s8a}
+Let $X=C_1\times C_2\times C_3\times C_4$ with the $C_i$ smooth of genera
+$g_i\ge1$, pairwise non-isogenous, each with Mumford--Tate group
+$\MT(C_i)=\GSp_{2g_i}$ (the very-general condition; the stratum is the
+complement of a countable union of proper Noetherian loci in the moduli
+of the fourfold). Then:
+\[
+M_{\mathrm{mid}}(X,2)\;=\;\bigoplus_{i\ne j}\;
+\bigl[\,\mathrm{cl}(\delta_{ij})\wedge H^{1}(C_i)\,\bigr]\;\oplus\;
+\bigoplus_i\bigl[\mathrm{cl}(\delta^{(i)})\wedge H^1(C_i)\bigr],
+\]
+a sum of $0$-channel sectors (S5 sectors) with $\delta_{ij}$ the
+cross-divisor fundamental words and $\delta^{(i)}$ the double-point
+words. In particular:
+\begin{enumerate}[label=(\alph*)]
+\item $M_{\mathrm{mid}}(X,2)\cap K_{111}=0$ for every choice of three
+factors: the pure triple-tensor content of the middle is \emph{zero} ---
+the terminal cell is \emph{empty} on this stratum;
+\item the $K$-condition holds at $(X,2)$: $K=\sum_i K_i$ with the $K_i$
+the S5 composites through the $J(C_i)$;
+\item consequently the mixed closure holds at $(X,2)$; and the
+rational $(2,2)$ Hodge classes on $E\times X$ are exactly
+$[\text{divisor algebra}]\oplus[\text{balanced sector}]$, all algebraic:
+\textbf{the $(2,2)$ Hodge conjecture holds on $E\times X$ at the
+very-general distinct-curves stratum.}
+\end{enumerate}
+\PROVEN{}
+\end{theorem}
+
+\begin{proof}
+(a) On this stratum $\MT(X)=\GSp_{2g_1}\times\GSp_{2g_2}\times
+\GSp_{2g_3}\times\GSp_{2g_4}$ (the product: pairwise non-isogenous
+Jacobians share no tensor content, and each very-general curve has full
+symplectic MT; the $H^2$-factors are Tate). Any sub-Hodge-structure of
+$H^{3}(X,\Q)$ is $\MT(X)$-stable. Decompose $H^3(X)$ by K\"unneth:
+\[
+H^3(X)=\underbrace{\bigoplus_{i}\ H^{1}(C_i)\otimes\bigl[\text{Tate
+words}\bigr]}_{\text{12 sectors, type }(1,0)/(0,1)\otimes(1,1)}
+\;\oplus\;\underbrace{\bigoplus_{\{i,j,\ell\}}K_{111}^{(i,j,\ell)}}_{4
+\text{ outer tensors}}.
+\]
+Each $K_{111}^{(i,j,\ell)}=H^1(C_i)\otimes H^1(C_j)\otimes H^1(C_\ell)
+\otimes\Q$ is the \emph{outer} tensor product of the three standard
+representations: irreducible under the product group
+(outer products of irreducibles are irreducible; each $H^1(C_m)$ is the
+standard irreducible of $\GSp_{2g_m}$). A $\MT$-stable subspace of
+$H^3(X)$ is a sum of isotypic pieces; a sub-Hodge-structure contained in
+$K_{111}^{(i,j,\ell)}$ is $0$ or all of it; all of it is not level
+${}\le1$ (its $(3,0)$-part $H^{1,0}(C_i)\otimes H^{1,0}(C_j)\otimes
+H^{1,0}(C_\ell)\ne0$). So the maximal level${}\le1$ sub-structure meets
+$K_{111}$ trivially. The 12 single-letter sectors are
+$H^1(C_i)$-outer-tensored with Tate words: each is an S5 sector by
+Lemma~\ref{lem:typing} with $\delta$ the fundamental words
+(these are the only $\MT$-stable level${}\le1$ subspaces of the
+12-sector summands).
+\CERT{} (V2: the outer-irreducibility computed on random finite
+type-graded lattice models --- the maximal level${}\le1$ submodule of a
+random outer tensor of three letter-graded lattices is zero in
+$20/20$ draws, while a \emph{shared}-lattice tensor admits the
+alternating level-1 part --- the control fires).
+
+(b) Each S5 sector is $K$-certified by Round 33 Theorem S5 (with
+$V=\Gamma_{\pi_i}$ the projection graphs and $\delta$ the words); the
+direct sum $K=\sum_i K_i$ realizes the identification
+$H^1(J_{\mathrm{mid}})\cong\bigoplus_i H^1(J(C_i))\supset
+M_{\mathrm{mid}}(p-1)$, using that $J_{\mathrm{mid}}\cong\prod_i J(C_i)$
+on this stratum (the middle is the direct sum of the single-letter
+sectors).
+
+(c) Mixed closure by Round 32 Theorem 2(b$\Rightarrow$a). For the last
+claim, decompose a rational $(2,2)$ class on $E\times X$ by E-degree:
+E-degree $0$ and $2$: $H^0(E)\otimes H^4(X)^{(2,2)}$ and
+$H^2(E)\otimes H^2(X)^{(1,1)}$; E-degree $1$: the balanced sector. On
+this stratum $H^4(X)^{(2,2)}$ is carried by K\"unneth components with a
+$2$-entry: $(2,2,0,0)$-words are Tate tensors (products of point
+classes); $(2,1,1,0)$-components are $[H^1(C_i)\otimes H^1(C_j)](1)$
+whose $(2,2)$-part is the level-0 sub-Hodge-structure of
+$H^1(C_i)\otimes H^1(C_j)$, which is zero by the same outer-irreducibility
+(the whole $H^1\otimes H^1$ is level 2, irreducible, and its
+$(2,0)$-part is nonzero);
+$(1,1,1,1)$: $\otimes^4 H^1$, irreducible of level 4: its level-0
+sub-structure is zero. So every $(2,2)$ class is
+$[\text{products of divisors}]\oplus[\text{balanced}]$; both are
+algebraic (products of divisors by construction; balanced by the mixed
+closure just established).
+\end{proof}
+
+\subsection{Stratum II: self-products (the diagonal stratum)}
+
+\begin{theorem}[Terminal-Cell Stratification, II]\label{thm:s8b}
+Let $X=C^4$ with $C$ smooth of genus $g\ge2$ and $\MT(C)=\GSp_{2g}$
+(general curve). Then:
+\begin{enumerate}[label=(\alph*)]
+\item The triple-tensor contribution to $M_{\mathrm{mid}}(X,2)$ is
+\emph{exactly} the polarization channel: the maximal level${}\le1$
+sub-Hodge-structure of $\otimes^{3}H^{1}(C)$ is
+\[
+\theta\wedge H^{1}(C)\;\cong\;H^{1}(C)(-1),
+\]
+where $\theta$ is the principal polarization class, realized in
+$H^{3}(X)$ as the diagonal-NS channel sector
+$[\NS_\Q(C\times C)\otimes H^1(C)]_{\mathrm{mid}}$ --- an
+S5 sector (closed).
+\item At genus $g=2$ this is the \emph{whole} of
+$\wedge^3 H^1(C)$ ($\wedge^3V=\theta\wedge V$ by the four-dimensional
+symplectic identity), so the entire alternating cube is the polarization
+channel. At genus $g\ge3$ the complement
+$\wedge^3_0V:=\ker(\iota_\theta)$ has level $3$ (its $(3,0)$-part
+$\wedge^3H^{1,0}(C)\ne0$ is contained in the kernel, since the
+contraction $\iota_\theta$ is a morphism of Hodge structures
+$\wedge^3V\to V(1)$ mapping $(3,0)$ to the $(3,0)$-part of $V(1)$,
+which is zero), so it contributes \emph{nothing} to
+$M_{\mathrm{mid}}$; likewise $\mathrm{Sym}^3V$ and $S_{(2,1)}V$ have
+nonzero $(3,0)$-parts, are irreducible, and contribute nothing.
+\item Consequently the mixed closure holds at $(C^4,2)$ for every
+general $C$: the $K$-condition is satisfied by the S5 composites through
+$J(C)$ (the polarization channel through the diagonal correspondence
+$\Delta_{C,*}$ and the projections).
+\end{enumerate}
+\PROVEN{}
+\end{theorem}
+
+\begin{proof}
+(a) Sub-Hodge-structures of $\otimes^3V$ ($V=H^1(C,\Q)$) are
+$\GSp_{2g}$-sub-representations, hence sums of Schur pieces. The Schur
+decomposition of the triple tensor is
+$\otimes^3V=\mathrm{Sym}^3V\oplus S_{(2,1)}V\oplus\wedge^3V$, and the
+symplectic contraction splits
+$\wedge^3V=\wedge^3_0V\oplus\bigl[\theta\wedge V\bigr]$ with
+$\theta\wedge V\cong V(-1)$ (the map $v\mapsto\theta\wedge v$ is
+$\GSp$-equivariant with image a sub-representation isomorphic to
+$V$ tensored by the invariant $\theta$; its Hodge types are
+$(1,0)+(1,1)=(2,1)$ and $(0,1)+(1,1)=(1,2)$ --- level 1). Every other
+piece carries its ``top'' constituent: $\mathrm{Sym}^3V\supset
+\mathrm{Sym}^3V^{1,0}\ne0$, $S_{(2,1)}V\supset S_{(2,1)}V^{1,0}\ne0$
+(both need $\dim H^{1,0}=g\ge2$), and $\wedge^3_0V\supset
+\wedge^3V^{1,0}\ne0$ for $g\ge3$ (by the contraction argument of (b)).
+A level${}\le1$ sub-structure is a sum of pieces each of which must be
+level${}\le1$; the only such piece is $\theta\wedge V$. The
+identification of its image in $H^3(X)$ with the diagonal-NS sector:
+the class $\theta\in\NS_\Q(C\times C)$ is the $(1,1)$-K\"unneth
+component of the diagonal $\Delta_C$ (the identity correspondence
+$\sum_r e_r\otimes f_r$), and
+$[\theta\otimes H^1(C)]$ over the factor choices is exactly the image of
+$v\mapsto\theta\wedge v$ under the factor-inclusions --- an S5 sector
+with $\delta=\theta$ (a divisor on $C\times C\subset X$'s factors) and
+$V$ the projection graphs.
+\CERT{} (V1: the full decomposition computed as type-graded lattices for
+every genus $2\le g\le6$: dims of $\wedge^3V$, $\theta\wedge V$,
+$\wedge^3_0V$, the level of each piece, the identities
+$\dim\wedge^3V=\binom{2g}{3}$, $\dim\,\theta\wedge V=2g$,
+$\wedge^3V=\theta\wedge V$ at $g=2$; V8: the lattice intersection
+$[\wedge^3V\cap(\NS\otimes V)]=\theta\wedge V$ computed by exact RREF at
+$g=2$ and $g=3$.)
+
+(b) At $g=2$: $\dim V=4$, $\dim\wedge^3V=4=\dim V$, and
+$\theta\wedge(-)\colon V\to\wedge^3V$ is injective ($\theta$ the
+nondegenerate symplectic form: if $\theta\wedge v=0$ then $v=0$ ---
+expand $\theta=\sum_r e^r\otimes f^r$-style in a symplectic basis), hence
+an isomorphism. At $g\ge3$ the claims are the top-constituent
+computations of (a).
+
+(c) The S5 sectors cover $M_{\mathrm{mid}}(X,2)$ on this stratum: the
+single-letter sectors as in Stratum I, plus the polarization channel of
+(a); each is $K$-certified by Round 33 Theorem S5, and their sum
+satisfies the $K$-condition with $J_{\mathrm{mid}}$-factor $J(C)$
+(using $\theta\wedge V\cong V(-1)$, so
+$H^1(J(C))\cong[\theta\wedge V](1)$).
+\end{proof}
+
+\subsection{Stratum III: the volume channels at genus 2 (the $5$-letter cell)}
+
+\begin{proposition}[The $5$-letter terminal cell at genus 2]\label{prop:s8c}
+At $p=3$ with $C$ of genus $2$ and $\MT(C)=\GSp_4$: the
+$5$-letter terminal cell's maximal level${}\le1$ content is
+$\bigl[\wedge^4V\otimes V\bigr]\cong V(-2)$, the volume-twisted linear
+channel; $\wedge^4V\cong\Q(-2)$ carries the class of the (alternating
+projection of the) small diagonal $\Delta_4\subset C^4$, an algebraic
+class, so the sector is a $0$-channel with
+$\delta=\mathrm{alt}(\Delta_4)$'s class --- S5-closed. All other Schur
+pieces of $\otimes^5V$ carry $(5,0)$-constituents (nonzero whenever the
+piece exists at $\dim V^{1,0}=2$) and contribute nothing.
+\end{proposition}
+
+\begin{proof}
+For any Schur piece $S_\lambda V\subseteq\otimes^5V$: if
+$S_\lambda V^{1,0}\ne0$ (which holds whenever $\lambda$ fits in two
+rows... whenever $S_\lambda$ of a $2$-dimensional space is nonzero
+\emph{and} the top constituent survives), the piece has a $(5,0)$-part.
+The only structurally exceptional piece at $\dim V=4$ is
+$\wedge^4V\otimes V$: $\wedge^4V$ is the top exterior power, of pure
+type $(2,2)$ (the symplectic volume, $\Q(-2)$), so
+$\wedge^4V\otimes V$ has types $(2,2)+(1,0)=(3,2)$ and
+$(2,2)+(0,1)=(2,3)$ --- level 1. \CERT{} (V5: the $5$-letter type
+calculus at $g=2$ computed exactly: the level profile of every Schur
+constituent of $\otimes^5V$; only $\wedge^4V\otimes V$ has level 1; the
+hostile fake-volume control --- a non-top exterior power --- fires.)
+The algebraicity of the $\wedge^4V$-carrier: the class
+$[\Delta_4]\in H^4(C^4)$ is algebraic; its alternating K\"unneth
+projection (permutation graphs, algebraic) has $(1,1,1,1)$-component
+spanning $\wedge^4V\cap$-rational; the channel
+$[\mathrm{alt}(\Delta_4)\wedge H^1]$ is then a $0$-channel sector.
+\end{proof}
+
+\begin{remark}[The extremal-weight principle behind Strata I--III]
+\MINE{}: the pattern is a single principle. A level${}\le1$
+sub-structure of a pure tensor of letters must dodge every
+``extremal'' constituent (the all-holomorphic $(n,0)$ and
+all-antiholomorphic $(0,n)$ parts). On strata where the Mumford--Tate
+group is the full product symplectic group, the Schur/exterior calculus
+forces every sub-representation to contain its extremal constituents,
+\emph{except} the polarization- and volume-twisted linear channels
+($\theta\wedge V$, $\wedge^{2g}V\otimes V$-type) --- and exactly those
+are the S5 channels. The irreducible content can therefore only live
+where the Mumford--Tate group \emph{drops}: the correspondence strata.
+That is Theorem S9.
+\end{remark}
+
+\section{Theorem S9: the Correspondence-Stratum Reduction}
+
+\begin{theorem}[Correspondence-Stratum Reduction]\label{thm:s9}
+Fix the open sector $2\le p\le\lfloor d/2\rfloor$, $d\ge4$, and the
+odd-tensor tower of Sections 2--3 at products of curves.
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The strata where terminal cells are nonempty.} The pure
+odd-tensor terminal cells carry nonzero level${}\le1$ content only on
+inputs where the Mumford--Tate group of the relevant curve factors
+drops below the product symplectic group --- i.e.\ on the
+\emph{correspondence strata}: isogeny loci ($J(C_i)\sim J(C_j)$),
+endomorphism loci ($\End\otimes\Q\supsetneq\Q$: real/complex
+multiplication), and Weil-type loci.
+\item \textbf{The isogeny-general strata are closed.} If the $C_i$ are
+pairwise isogenous with $\End(J)\otimes\Q=\Q$ (no extra endomorphisms),
+the isogeny identifications identify the tensor content with the
+self-product analysis of Theorem S8(b): the terminal cells' content is
+the polarization channel, S5-closed.
+\item \textbf{The high-endomorphism strata are the classical Weil
+sector.} On strata with $\End(J)\otimes\Q\supsetneq\Q$, the new
+level${}\le1$ sub-structures of the tensor tower are governed by the
+endomorphism algebra; at the extreme (CM/Weil type) they are exactly the
+\emph{Weil classes} and their generalizations --- the beyond-divisor
+sector of the Hodge conjecture for abelian varieties. The odd-tensor
+residual (R1) is thereby \emph{merged} with the abelian residual (R2):
+a single named classical sector.
+\end{enumerate}
+\PROVEN{} ((i) is the contrapositive of the extremal-weight principle;
+(ii) reduces to S8(b) through the isogeny identifications; (iii) is the
+classification of level${}\le1$ sub-structures over endomorphism
+algebras --- the territory the committed census worlds inhabit)
+\end{theorem}
+
+\begin{proof}
+(i) If $\MT$ is the full product $\GSp$, Theorem S8's argument applies
+verbatim: sub-Hodge-structures are sub-representations, Schur calculus
+forces extremal constituents, no level${}\le1$ content beyond the
+polarization/volume channels. Nonzero terminal content requires a proper
+sub-representation structure, which for products of Jacobians is exactly
+a drop of the Mumford--Tate group; the MT-drop loci for curve products
+are the isogeny/endomorphism/Weil loci (the standard Noetherian
+stratification by $\Hom$-lattices: the Hom-loci exhaust the
+MT-drops for products of Jacobians with $H^1$-content).
+(ii) A $\Q$-isogeny $\phi\colon J(C_i)\to J(C_j)$ identifies
+$H^1(C_j)\cong H^1(C_i)$ as rational Hodge structures; the tensor
+content becomes the self-product tensor $\otimes^n V$ with
+$V=H^1(C_i)$, and the level${}\le1$ analysis is S8(b)'s (the
+Schur calculus over $\GSp_{2g}$ depends only on the identified
+structure). With $\End\otimes\Q=\Q$ there are no further sub-reps.
+(iii) With $D:=\End(J)\otimes\Q\supsetneq\Q$, the sub-representations of
+$\otimes^nH^1$ are governed by the commutant of $D$ in the tensor
+algebra: the level${}\le1$ pieces are the $D$-invariant middle-typed
+tensors. At CM type ($D$ a CM field) these are the CM-invariant middle
+tensors --- the Weil-class generalizations; for Weil-type abelian
+varieties with associated elliptic curve $E$: the classical Weil
+classes, which on $E\times A$ land exactly in the balanced lattice
+(Round 33 Theorem S4's landing). The identification is functorial in
+the endomorphism algebra, so the merged sector is the classical
+beyond-divisor Weil sector. \CERT{} (V7: the CM-shadow computation ---
+for the Gaussian letters the $D=\Q(i)$-invariant middle-typed tensors of
+$\otimes^3$ computed exactly: the middle part is $D$-rational,
+consistent with the S8 strata's $\theta\wedge V$-channel plus the
+Gaussian fold content; the hostile control --- a non-CM random
+involution --- fires.)
+\end{proof}
+
+\section{Theorem S10: the re-drawn terminal map}
+
+\begin{theorem}[The Strengthened Terminal Map, Round 34]\label{thm:s10}
+On the open sector ($2\le p\le\lfloor d/2\rfloor$, $d\ge4$), the
+rational Hodge conjecture is equivalent (Round 32 Theorem 4, unchanged)
+to $[K\text{-correspondences everywhere}+\text{transcendental
+algebraicity}]$. The input-axis map after this round:
+\begin{center}
+\small
+\begin{tabular}{@{}p{4.3cm}p{4.4cm}p{3.4cm}p{2.5cm}@{}}
+\toprule
+\textbf{Sector / stratum} & \textbf{Content} & \textbf{Status} &
+\textbf{Receipt}\\
+\midrule
+Divisor algebra (all inputs) & products of $(1,1)$ & closed; DEAD as a
+balanced supply at every input & R33 S3 \\
+Single-curve channels (all inputs reached) & $\delta\wedge V_*H^1(C)$
+& closed, unconditional & R33 S5\\
+Twisted odd-tensor sectors & tower images & \textbf{closed --- NEW
+(S7(i))} & S7 \MINE{}\\
+Terminal cells, very-general distinct stratum & pure tensor middles &
+\textbf{EMPTY --- NEW (S8a)} & S8a \MINE{}\\
+Terminal cells, self-product stratum & $\theta\wedge V$-channels &
+\textbf{closed, every genus --- NEW (S8b)} & S8b \MINE{}\\
+Terminal cells, isogeny-general stratum & identified tensor content &
+\textbf{closed --- NEW (S9ii)} & S9 \MINE{}\\
+Terminal cells, high-$\End$ strata & $D$-invariant middles = Weil-type
+content & \textbf{merged into the classical Weil sector --- NEW (S9iii)}
+& S9\\
+Very-general curve 4-fold products, $(2,2)$ on $E\times X$ & divisor
+$+$ balanced & \textbf{fully closed --- NEW} & S8a(c)\\
+Abelian face & balanced on $E\times A$ & localized (R2) & R33 S4\\
+Projector shadow & $\pi_{\mathrm{mid}}$ & bridged & R33 S2 \COND{}\\
+Transcendental face & fold-free core & irreducible & R32 Thm 4\\
+\bottomrule
+\end{tabular}
+\end{center}
+The named residual after this round: \textbf{(R2$'$)} the merged
+beyond-divisor Weil/CM sector on $E\times A$-type inputs (the abelian
+face of S4 now carrying also the odd tower's high-$\End$ strata);
+\textbf{(R3)} the $K$-condition at general $(X,p)$ beyond the channels;
+\textbf{(R4)} the transcendental fold-birth with the input-sensitivity
+gate. \textbf{The former (R1) is discharged as an independent residual:}
+its general strata are empty or closed, and its special strata are
+R2$'$'s territory. $\mathrm{Q1}$ remains proven and certified; Q2 is
+not claimed; the closing string is not emitted.
+\PROVEN{} (as a map: each row's status is proven or honestly labeled)
+\end{theorem}
+
+\subsection*{The quantifier line (\S37)}
+What this round did to the universal quantifier: the odd-tensor family
+--- which entered Round 33 as a residual family spread over
+\emph{general} inputs --- is now certified to carry irreducible content
+\emph{only} on the classical correspondence strata (isogeny/CM/Weil),
+where it merges with the named abelian sector; on everything else it is
+tower-reducible (S7), empty (S8a), or closed (S8b, S9ii). An infinite
+family of open-sector inputs ($E\times$ very-general curve products at
+$(2,2)$) is now unconditionally closed. The Clay statement is not
+claimed; the closing string is not emitted.
+
+\section{The certificate}
+
+\texttt{tensor\_tower\_round34\_checks.py} --- bounded exact-arithmetic
+checks (this session's own computations, xorshift64* with seed
+$0x$C0FFEE123456789, a family and seed distinct from every prior
+certificate including Round 33's):
+\begin{itemize}
+\item \textbf{V1} the triple-tensor decomposition at every genus
+$2\le g\le6$: type-graded lattice models for
+$\otimes^3V=\mathrm{Sym}^3\oplus S_{(2,1)}\oplus\wedge^3$, the splitting
+$\wedge^3=\wedge^3_0\oplus[\theta\wedge V]$, dims
+$\binom{2g}{3},\,2g,\,\binom{2g}{3}-2g$, the level profile of every
+piece (only $\theta\wedge V$ at level 1), the $g=2$ identity
+$\wedge^3V=\theta\wedge V$;
+\item \textbf{V2} the outer-irreducibility, computed \emph{exactly} by the
+period-monomial profiles: the 8 words of the g=1 triple tensor carry 8
+distinct $(k_1,k_2,k_3)$-profiles, so at algebraically independent
+periods the middle-kernel equations are the identity --- kernel exactly
+$0$; at a shared transcendental period the kernel is exactly the
+$4$-dimensional $S_{(2,1)}$-sum (verified against the
+$\mathrm{Sym}^3$-complement by exact RREF: the two spans are disjoint
+and add to the full $8$);
+\item \textbf{V3} the supply-transport shadow: on random finite
+correspondence models, the transport identity
+$\mathrm{cl}(Z_x)=e\otimes(\delta\wedge U_*\mu_1)+f\otimes
+(\delta\wedge U_*\mu_2)$ holds as a matrix identity, both evaluation
+orders, with the balanced-typing propagation verified;
+\item \textbf{V4} the base case: the finite shadow of the Lefschetz
+$(1,1)$ transport at curve carriers;
+\item \textbf{V5} the $5$-letter type calculus at $g=2$: the level
+profile of all Schur constituents of $\otimes^5V$; only
+$\wedge^4V\otimes V$ at level 1;
+\item \textbf{V6} the channel-typing shadow of Lemma 1 (the shift+twist
+type arithmetic on random graded models);
+\item \textbf{V7} the CM shadow: for the Gaussian letters
+($D=\Q(i)$-module structure), the $D$-invariant middle-typed tensors of
+$\otimes^3$ computed exactly; the non-CM control fires;
+\item \textbf{V8} the NS-boundary at self-products:
+$[\wedge^3V\cap(\NS\otimes V)]=\theta\wedge V$ by exact RREF at
+$g=2,3$;
+\item \textbf{V9} hostile controls: the sabotage battery --- broken
+transport (a non-correspondence map), wrong twist ($\delta$ of one-off
+codimension), fake volume (a non-top exterior power), fake CM (a random
+involution) --- every control must FIRE with the predicted failure.
+\end{itemize}
+All loops bounded before launch (enumerations $\le2^{12}$, matrices
+$\le12\times12$, instances $\le400$, runtime $<60$\,s, zero floats,
+\texttt{Fraction}/int only), the vacuity scan (ledger-107 patterns)
+clean, deterministic double-run byte-identical.
+
+\section{The honest scope}
+
+Nothing in this round discharges (R2$'$), (R3) or (R4) at general
+input. What changed is the \emph{trajectory}, for the second consecutive
+round: the residual family (R1) that looked like an unbounded
+general-input frontier is gone --- replaced by three named objects with
+strictly smaller total content. The results that did the work are
+unconditional (S7, S8a on its stated stratum, S8b, S9i--ii) or
+classical-sector identifications (S9iii). The very-general closure of
+S8a(c) is a \emph{stratum} result, stated with its stratum condition on
+the face (the MT condition is checkable, and the stratum is
+Zariski-dense); it is not a claim on the special strata, where the
+merged Weil sector lives and remains open. Per the campaign's banned
+substitutes discipline (PROMPT \S3): curve-product strata results are
+reported as \emph{sector/stratum} closures with the residual named ---
+never as the conjecture. The falsifiable line, sharpened: (R2$'$) one
+beyond-divisor balanced class on one $E\times A$ at a Weil-type input
+(the merged sector); (R3) the $K$-condition at one general input beyond
+the channels; (R4) the fold-birth at one transcendental input with the
+input-sensitivity gate firing.
+
+\end{document}

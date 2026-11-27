@@ -1,0 +1,221 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\cl}{\operatorname{cl}}
+\begin{document}
+\section*{GST exact diagonal separability threshold}
+Let Y be any smooth projective complex n-fold.
+Under the rational topological Chern character define
+\[
+ W_Y=\operatorname{ch}^{-1}
+    \left(\bigoplus_{p=0}^{n}
+     (H^{2p}(Y,\Q)\cap H^{p,p}(Y))\right)
+       \subset K^0_{\mathrm{top}}(Y)_\Q,
+\]
+and let A_Y be the image of rational
+algebraic K_0(Y) inside W_Y.
+The genuine rational Euler form is
+\[
+ e(U,V)=\int_Y \operatorname{ch}(U^\vee)
+                \operatorname{ch}(V)\operatorname{td}(T_Y).
+\]
+This form is nondegenerate on W_Y.
+Indeed the ordinary Poincare pairing is
+nondegenerate on the rational Hodge
+(whole-degree) sector by Hodge-Riemann and
+hard Lefschetz, and dualizing together with
+multiplication by the invertible algebraic
+Todd character preserve that property.
+
+\begin{theorem}[Full algebraicity iff finite algebraic Euler coevaluation]
+The following statements are equivalent:
+\begin{enumerate}
+\item Every rational (p,p) Hodge class on Y in every
+codimension p is the canonical Betti class of
+a genuine rational algebraic cycle on Y.
+\item There are finite genuine algebraic
+K-classes E_1,...,E_s,F_1,...,F_s on Y such that
+for every U in W_Y one has the actual
+topological K-theory equality
+\[
+ \boxed{U=\sum_{i=1}^s e(E_i,U)F_i.}
+\]
+\item The algebraic diagonal kernel
+[O_{\Delta_Y}] has the same action on
+every U in W_Y as a finite sum of
+genuine separable algebraic kernels
+\(\sum_i E_i^\vee\boxtimes F_i\).
+\end{enumerate}
+\end{theorem}
+\noindent Proof.
+The rational algebraic Chern-character map identifies
+algebraic K_0(Y)_Q with the direct sum CH^p(Y)_Q;
+canonical Betti realization identifies its image
+with the algebraic Hodge subspace A_Y.
+Thus (1) is equivalent to A_Y=W_Y.
+
+Assume A_Y=W_Y and choose genuine algebraic
+classes F_j whose rational topological images
+form a Q-basis of W_Y. Since e is nondegenerate
+on W_Y, their Euler Gram matrix with a
+possibly distinct algebraic basis is invertible.
+Rational inversion provides algebraic
+Euler-dual E_i satisfying
+e(E_i,F_j)=KroneckerDelta(i,j).
+The displayed finite coevaluation reconstructs
+every U in W_Y, proving (2).
+
+Conversely each F_i in (2) is algebraic,
+so every U in W_Y belongs to A_Y.
+Thus (2) implies A_Y=W_Y and hence (1).
+
+The Fourier--Mukai action of the genuine
+external algebraic kernel E_i^vee box F_i
+is U -> e(E_i,U)F_i, by actual proper
+projection and Euler multiplicativity.
+The diagonal structure sheaf has identity
+action, so (2) and (3) are equivalent.
+No exactness statement at the level
+of derived functors is claimed:
+the theorem is rational K-theory action.
+\hfill QED
+
+\begin{corollary}[GST residual diagonal equivalence]
+Suppose a GST finite-frame projector
+P is a sum of genuinely separable
+algebraic kernels, and put Q=O_Delta-P.
+Then Q has the same action on the
+rational Hodge K-sector W_Y as some
+finite separable algebraic kernel
+if and only if every rational Hodge
+class on Y is algebraic.
+\end{corollary}
+\noindent Proof.
+A separable replacement S of Q makes
+S+P a separable replacement of the
+diagonal identity. The theorem then
+implies A_Y=W_Y. Conversely when
+A_Y=W_Y use the finite coevaluation for
+the diagonal and subtract P.
+
+\section*{Quotient action and quadratic detector}
+For the actual Hodge quotient D_Y=W_Y/A_Y,
+each genuine separable algebraic
+kernel acts as ZERO since its output is
+a sum of algebraic F_i classes.
+The diagonal kernel acts as IDENTITY.
+Therefore the GST residual kernel Q
+acts as identity on D_Y. If D_Y is
+nonzero, no separable replacement can
+agree with Q on all Hodge inputs.
+This does not produce a nonalgebraic
+Hodge class on any actual variety;
+it identifies the exact algebraicity
+input needed for the replacement.
+
+For a rational primitive Hodge fiber with
+positive Hodge-Riemann pairing (V,q)
+and algebraic subspace A,
+the statement that every nonzero r has
+some algebraic z with q(r,z) nonzero
+is equivalent to A=V.
+If A is proper, a nonzero r in A-perp
+has q(r,r)>0 while all its algebraic
+one-legged readouts vanish.
+Thus the positive quadratic GST Euler
+detector and an algebraic one-legged
+source are mathematically distinct
+claims: asserting their universal
+equivalence already proves the
+primitive Hodge conjecture.
+
+\section*{Exact Wolfram self-checks}
+An exact rational symmetric Gram matrix
+[[2,1,0],[1,3,1],[0,1,4]]
+was inverted. Its determinant is 18,
+and its Euler dual coevaluation was
+exactly the 3x3 identity; the input
+(2,-3,5) was reconstructed. A rational
+two-dimensional source subspace of this
+three-dimensional space cannot supply
+the full coevaluation. A separate exact
+example with Gram diag(2,3,5) and
+algebraic source frame (e1,e2)
+had residual e3 with positive quadratic
+norm 5 but algebraic linear readouts
+both zero. These tests concern
+finite rational algebra, NOT actual
+counterexamples to the Hodge conjecture.
+The general mathematical proof above
+uses rational Euler nondegeneracy.
+
+
+\section*{Sharp finite-length GST residual-source theorem}
+Let W_Y have rational dimension n.
+Suppose an ACTUAL algebraic Euler frame
+C_1,...,C_t in W_Y has invertible Euler Gram
+matrix G_ij=e(C_i,C_j), t<=n.
+Its genuine algebraic separable projector P
+is idempotent, rank t on W_Y; hence the
+GST residual diagonal operator
+Q=O_Delta-P has rank n-t on W_Y.
+
+\begin{theorem}[Exact minimal number of algebraic Euler legs]
+An algebraic separable kernel with exactly
+the same rational Hodge action as Q
+exists if and only if the full rational
+Hodge conjecture holds for Y.
+If it exists, every such decomposition
+contains at least n-t rank-one algebraic
+external-kernel terms, and one with exactly
+n-t terms can be constructed.
+\end{theorem}
+\noindent Proof.
+An external kernel with two genuine
+algebraic legs has action of rational
+rank at most one, so a sum of s such
+kernels has rank at most s.
+The rank of Q is n-t, proving
+s>=n-t. If Q has an actual separable
+algebraic realization, adding the
+known separable projector P gives
+a separable realization of the identity,
+so all W_Y is algebraic by the
+preceding equivalence theorem.
+Conversely if all W_Y is algebraic,
+then the Euler nondegeneracy gives a
+full algebraic basis adapted to the
+image of P and a dual basis adapted to
+the complementary image of Q. Exactly
+n-t dual algebraic pairs reconstruct
+the operator Q. This is a genuine
+finite-rank sharp bound, not a claim
+that the missing complementary
+algebraic objects have been born.
+
+An independent Wolfram exact rational
+check used Euler matrix
+[[2,1,0],[1,3,1],[0,1,4]]
+with algebraic frames of dimensions
+t=1,2,3. The corresponding residual
+ranks were exactly 2,1,0;
+P and Q were idempotent in each case.
+
+\section*{Research verdict}
+The categorical separability criterion
+is proved under the genuine stated
+rational Chow/K-theory comparison.
+It is an equivalence, not an unconditional
+proof of Hodge algebraicity. Consequently
+the previously proposed universal
+quadratic-Euler-to-one-leg law is
+not justified by diagonal positivity
+alone. This source-type issue is
+now precisely formulated without
+postulating an algebraic representative.
+No Lean proof or independent refereeing
+is claimed for this LaTeX-first work.
+\end{document}

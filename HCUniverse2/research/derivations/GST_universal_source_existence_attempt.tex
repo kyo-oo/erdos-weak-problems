@@ -1,0 +1,493 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs,hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Hd}{\operatorname{Hdg}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Span}{\operatorname{span}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{GST universal source-existence attempt:\\
+diagonal contraction and the one-sided source test}
+\author{GST Hodge construction program}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\noindent\textbf{Proof verdict.}
+The requested theorem is universal existence of actual cycles for the
+canonical cycle-class map on every original smooth projective complex
+variety. This note does \emph{not} prove that theorem.
+It tests the new proposed forcing step from native diagonal,
+duality, positive residual index, world closure, and formal alteration
+trace identities to a one-sided native source. The explicit algebra
+below disproves that inference from those specified abstract properties.
+It is not a variety, not a canonical Chow theory, and not a counterexample
+to the rational Hodge conjecture. It does not assert that all geometric
+hypotheses of all GST theorems hold in the model.
+
+\section{The exact theorem we tried to derive}
+On the primitive middle rational Hodge space \(V_X\), use the established
+positive form
+\[
+ Q_X(u,v)=(-1)^p\int_X uv,\qquad \dim X=2p.
+\]
+For a known actual native frame, let \(r\) be the prescribed orthogonal
+residual. The previous blowup-world construction gives an actual
+rational algebraic perfect-kernel class \(\mathscr Q\) and topological
+pure-middle packets \(A_r,A_{Jr}\) satisfying
+\[
+ T_{\mathscr Q}A_r=A_r,\qquad
+ -\chi_{Y\times Y}(A_r\boxtimes A_{Jr},\mathscr Q)=Q_X(r,r)>0.
+ \tag{1}
+\]
+The desired new forcing assertion is
+\[
+ r\ne0\quad\Longrightarrow\quad
+ \exists E\in K_0^{\rm alg}(Y)_{\Q}:
+             \chi_Y(A_r,E)\ne0.                              \tag{U}
+\]
+The existing native Chow return converts such an \(E\) to an actual
+cycle on the same original \(X\), with nonzero residual period.
+Repeated rank increase would then terminate in finite dimension.
+For a source-existence proof, (U) itself must be proved:
+neither a factorization hypothesis nor a positive number is its proof.
+
+The earlier derivation gives a correct constructor if an actual
+one-sided factorization is supplied. We do not rename that conditional
+constructor as an unconditional theorem. We now ask whether diagonal
+contraction, duality and positivity force its missing input.
+
+\section{An exact contraction theorem}
+\begin{theorem}[Invariant tensor contraction preserves the source sector]
+Let a rational vector space \(W\) have a linear involution \(g\) and
+a nondegenerate symmetric bilinear form \(B\), with
+\(B(gu,gv)=B(u,v)\). For \(n\geq0\), put
+\[
+ N_n=\{t\in W^{\otimes n}:g^{\otimes n}t=t\},\qquad N_0=\Q.
+\]
+Every finite expression formed from elements of the \(N_n\), rational
+linear combinations, tensor products, permutations and contractions
+by \(B\) has its \(m\)-leg output in \(N_m\).
+This remains true when equivariant linear maps of arbitrary finite
+arity are admitted as world-birth operations. In particular, if
+\(gr=-r\), then every one-leg output \(z\) satisfies \(B(r,z)=0\).
+\end{theorem}
+\begin{proof}
+Tensor products and permutations commute with the diagonal involution.
+Invariance of \(B\) says precisely that contraction intertwines the
+involutions on its input and output. An equivariant map sends fixed
+vectors to fixed vectors. Induction on an expression proves the first
+two assertions, without any bound on its finite arity or length.
+For \(z\in N_1\),
+\[
+ B(r,z)=B(gr,gz)=B(-r,z)=-B(r,z),
+\]
+so \(B(r,z)=0\) over \(\Q\).
+\end{proof}
+
+The theorem allows \emph{all} invariant tensors, not just tensors
+decomposable into known one-leg sources. It is therefore stronger than
+a test of one selected finite frame. Numerical coefficients depending
+on a prescribed target do not change the output space. Inserting a
+nonnative target vector into a contraction, however, is not an
+operation on native inputs; native preservation cannot be applied to it.
+
+\section{A nonzero unital polarized graded test model}
+For any \(a,b\in\Q_{>0}\), define the commutative graded algebra
+\[
+ H=\Q[h,s,r]/(h^5,hs,hr,sr,s^2-ah^4,r^2-bh^4),
+ \quad \deg h=1,\quad\deg s=\deg r=2.                         \tag{2}
+\]
+Its basis and trace are
+\[
+ (1,h,h^2,h^3,h^4,s,r),\qquad
+ \int h^4=1,\quad \int 1=\int h=\int h^2=\int h^3=\int s=\int r=0.
+ \tag{3}
+\]
+Here degrees are codimensions. Give degree \(k\) the formal Tate
+Hodge type \((k,k)\). Define \(B(u,v)=\int uv\).
+
+\begin{lemma}
+Equations (2)--(3) define a seven-dimensional graded Frobenius
+algebra with Hard Lefschetz for \(h\) and positive primitive-middle
+Hodge--Riemann form.
+\end{lemma}
+\begin{proof}
+To see directly that the proposed basis has no hidden relation, define
+multiplication on its seven-dimensional span by
+\(h^ih^j=h^{i+j}\) for \(i+j\leq4\), zero otherwise,
+\(1s=s,1r=r,s^2=ah^4,r^2=bh^4\), and zero for every other
+product involving \(s\) or \(r\).
+Associativity for three \(h\)-powers is truncated polynomial
+associativity. With one primitive factor and two positive \(h\)-powers
+both associations vanish. With two primitive factors and a positive
+\(h\)-power, the only potentially nonzero inner product is a multiple
+of \(h^4\), whose further product vanishes. With three primitive
+factors both associations vanish. The unit cases are immediate.
+This algebra satisfies the displayed relations, and those relations
+reduce every monomial to the seven displayed elements. Thus (2) is
+exactly this algebra.
+
+On the \(h\)-chain, the matrix of \(B\) is the five-by-five
+antidiagonal identity; its determinant is \(1\).
+The remaining blocks are \(a,b\), so \(\det B=ab\ne0\).
+The Lefschetz maps \(h^4:H^0\to H^4\) and
+\(h^2:H^1\to H^3\) are isomorphisms, and the middle map is the
+identity. The primitive middle space is
+\[
+ P^2=\ker(h:H^2\to H^3)=\Q s\oplus\Q r,\qquad
+ B|_{P^2}=\begin{pmatrix}a&0\\0&b\end{pmatrix}>0.
+\]
+The primitive degree-zero form is \(\int h^4=1>0\);
+the other primitive spaces in lower degree vanish.
+These verify the even Tate Lefschetz and primitive sign conventions
+of formal complex dimension four.
+\end{proof}
+
+Let \(g(h)=h,g(s)=s,g(r)=-r\). It is a trace-preserving graded
+algebra automorphism. Define admissible tensors by the \(N_n\) of
+Theorem 1, using this \(g\). The full one-leg sector is
+\[
+ A=N_1=\Q\{1,h,h^2,h^3,h^4,s\},\qquad
+ A\cap P^2=\Q s.                                             \tag{4}
+\]
+It includes unit, ample class, top class and a nonzero primitive
+class. Its restricted pairing is itself nondegenerate.
+All formal rational Hodge classes belong to \(H\), including \(r\);
+equation (4) still omits \(r\).
+
+\section{The diagonal and positive residual survive}
+The coevaluation tensor for \(B\) is
+\[
+ \Delta_B=\sum_{i=0}^4 h^i\otimes h^{4-i}
+                  +\frac{s\otimes s}{a}+\frac{r\otimes r}{b}
+                  \in N_2.                                  \tag{5}
+\]
+For \(C=\sum_i u_i\otimes v_i\), set
+\[
+ T_C(x)=\sum_i B(x,u_i)v_i.
+\]
+Then \(T_{\Delta_B}=\id_H\). The residual kernel
+\[
+ K=\frac{r\otimes r}{b}\in N_2
+\]
+satisfies
+\[
+ T_K^2=T_K,\quad T_K(r)=r,\quad T_K(A)=0,\quad
+ \tr T_K=1,\quad
+ (B\otimes B)(r\otimes r,K)=b>0.                              \tag{6}
+\]
+Thus an admissible projector onto a rational Tate residual exists
+even though every admissible one-leg output annihilates that residual.
+
+To check the exact sign of the established pure-middle Euler law,
+take the \(p=2,M=5,J=\id\) convention on \(P^2\). Use
+\(\chi=B\), the signed kernel \(\mathscr K=-K\), and
+\[
+ T^{\rm E}_C=-T_C,\qquad
+ C\star_{\rm E}D=-C\star_BD .
+\]
+Here \(T_{C\star_BD}=T_C T_D\); the convention determines the
+convolution. Then
+\[
+ \mathscr K\star_{\rm E}\mathscr K=\mathscr K,\quad
+ T^{\rm E}_{\mathscr K}r=r,\quad
+ -\chi_{\rm prod}(r\boxtimes r,\mathscr K)=b>0,\quad
+ \chi(r,z)=0\quad(z\in A).                                  \tag{7}
+\]
+This matches the signs in (1). The model retains the positive doubled
+test; it invalidates extraction of a one-leg source from that test.
+
+There are six invariant and one anti-invariant basis vectors.
+Consequently
+\[
+ \dim N_2=6^2+1^2=37,\qquad \dim(A\otimes A)=36.
+\]
+In fact \(N_2=(A\otimes A)\oplus\Q(r\otimes r)\).
+The residual kernel lies exactly in the additional summand.
+No one-sided factorization through \(A\) can reproduce its pairing
+on \(r\otimes r\): each such expression is zero there, while (6)
+is \(b\).
+
+\section{Testing the other proposed forcing operations}
+\paragraph{Native lifting.}
+Every invariant two-leg kernel acts equivariantly and hence preserves
+\(A\). Take the source carrier to be \(A\) and its realization the
+inclusion \(c:A\hookrightarrow H\). Its native lift is simply the
+restriction \(T|_A\); thus \(c(T|_A)=Tc\).
+The class-to-defect block vanishes exactly as required by the GST
+native-lifting theorem. For \(K\), this native lift is zero while its
+ambient action on \(r\) is the identity.
+
+Choose the \(B\)-orthogonal range retraction. Then the supported
+extension of \(\id_A\) is the projection
+\(P_A=\id_H-T_K\), rather than \(\id_H\). Both extensions agree on
+\(A\). Equality on native inputs cannot identify them on \(r\).
+This is exactly the extension freedom in
+\texttt{supportedAmbientOperator\_id} and
+\texttt{ambientNatural\_core\_decomposition}.
+
+\paragraph{World closure and semantic reflection.}
+Take roots in the invariant sectors and every birth map equivariant.
+Theorem 1 proves invariant-sector stability at every finite stage,
+including every finite arity. Hence semantic reflection applied to
+the stable predicate \emph{lies in the invariant sector} preserves it.
+It does not supply a world-generation premise for a noninvariant
+one-leg vector. This does not negate any GST theorem which separately
+assumes an actual surjective geometric assembly.
+
+\paragraph{Degree and complete-alteration equations.}
+For every positive integer \(e\), set \(H'=H^{\oplus e}\), with
+diagonal involution and orthogonal direct-sum form. Define
+\[
+ f^*x=(x,\ldots,x),\qquad f_*(x_1,\ldots,x_e)=\sum_i x_i.
+\]
+Then
+\[
+ f_*f^*=e\,\id,\qquad B'(f^*x,f^*y)=eB(x,y),\qquad
+ B'(f^*r,z')=0\quad(z'\in(H')^g).                            \tag{8}
+\]
+The last equality follows componentwise. In particular
+\(B'(f^*r,f^*r)=eb>0\).
+These are only the \emph{formal linear trace identities} of the
+alteration argument; no actual morphism or geometric alteration is
+being modeled. They show that the identities alone do not supply
+a new source. Any geometry-specific forcing theorem needs more
+than (8).
+
+\section{An actual geometric check already inside GST}
+There is also a genuine geometric test of the stronger idea
+that an algebraic perfect diagonal automatically has finite separated
+algebraic factors. Let \(C\) be a smooth projective curve of genus
+\(g\geq1\), and on \(C\times C\) write
+\[
+ A=[\{c\}\times C],\quad B=[C\times\{c\}],\quad
+ D=[\Delta_C]-A-B.
+\]
+The repository's existing all-genus curve intersection input gives
+\[
+ A^2=B^2=0,\ AB=1,\quad
+ \Delta_C A=\Delta_C B=1,\quad \Delta_C^2=2-2g.
+\]
+Direct expansion yields
+\[
+ D A=D B=0,\qquad D^2=D\Delta_C=-2g\ne0.                     \tag{9}
+\]
+For any \(E,F\in K_0^{\rm alg}(C)_\Q\),
+\[
+ \operatorname{ch}_1(E\boxtimes F)=
+ \operatorname{rk}(F)\operatorname{pr}_1^*\operatorname{ch}_1(E)
+ +\operatorname{rk}(E)\operatorname{pr}_2^*\operatorname{ch}_1(F).
+\]
+In rational Betti cohomology this lies in \(\Q A+\Q B\), since
+\(H^2(C,\Q)\) is generated by a point.
+The sequence
+\(0\to\mathcal O(-\Delta_C)\to\mathcal O\to\mathcal O_{\Delta_C}\to0\)
+gives \(\operatorname{ch}_1(\mathcal O_{\Delta_C})=[\Delta_C]\).
+If \([\mathcal O_{\Delta_C}]\) were a finite rational sum of external
+\(K\)-products, its degree-one character would lie in
+\(\Q A+\Q B\). Pairing with \(D\) contradicts (9).
+
+This example excludes whole-diagonal separated \(K\)-factorization.
+It does \emph{not} exclude the weaker factorization only on the
+middle Hodge testing block used in the previous note. In particular
+it is not a Hodge counterexample: \(D\) itself is an actual divisor.
+The point is to distinguish two mathematically different constructors.
+
+
+\section{Atomic scheme-level surgery: a genuine non-split source}
+\noindent\textbf{Additional exact geometric test (21 October 2026).}
+The invariant-sector model above exposes an algebraic logical mistake:
+a nonzero doubled diagonal test does not generate a one-legged source.
+We can strengthen that diagnosis with an actual smooth projective
+complex variety and then exhibit the missing geometric input
+\emph{as an independently constructed perfect-complex source}.
+This test concerns a definite class of GST recipes; it neither assumes
+nor proves universal Hodge algebraicity.
+
+Let \(C\) be a smooth connected projective curve of genus
+\(g\geq1\), and put \(X=C\times C\).
+In \(\CH^1(X)_\Q\) take the actual fiber divisors
+\(A=\{c\}\times C\), \(B=C\times\{c\}\), the ample
+product polarization \(H=A+B\), and the internal graph
+\[
+  \delta=[\Delta_C],\qquad D=\delta-A-B.
+\]
+Write \(U\cdot V=\deg(U\cap V)=\int_X\cl(U)\smile\cl(V)\)
+for the \emph{numerical intersection of two Chow divisors}.
+In particular, equalities to integers below are not being asserted
+as equations of zero-cycles in \(\CH^2(X)_\Q\).
+The normal bundle \(N_{\Delta_C/X}=T_C\) gives
+\(\delta\cdot\delta=\deg T_C=2-2g\), and intersection with
+either fiber gives one. Consequently
+\[
+ A^2=B^2=0,\quad AB=1,\quad
+ \delta A=\delta B=1,\quad
+ H^2=2,\quad HD=0,\quad D^2=-2g.                  \tag{10}
+\]
+These are \emph{numerical intersection degrees of genuine Chow classes}
+on \(X\), not abstract Frobenius-algebra coordinates or claimed
+rational equivalences of arbitrary zero-cycles. In particular
+\(D\) is a nonzero algebraic primitive rational Hodge class,
+with positive signed primitive norm \(2g\).
+
+\begin{theorem}[Polarization--Chern--self-diagonal closure cannot birth \(D\)]
+\label{th:tautological-no-go}
+Consider the class of recipes starting with
+\(\mathcal O_X,\mathcal O_X(H)\), and \(T_X\), and closed under finite
+direct sums/differences in rational algebraic \(K_0\), tensor
+products, duals, Adams operations and exterior powers of
+honest vector-bundle expressions. Also allow algebraic
+self-correspondence kernels \((\Delta_X)_*F\) built from the
+same such \(F\) and applied to objects already in the recipe.
+Every resulting one-legged \(K\)-class \(E\) satisfies
+\[
+       \cl(\ch_1(E))\in\Q h,\qquad
+       \int_X\cl(\ch_1(E))\smile d=0,                \tag{11}
+       \quad h=\cl(H),\quad d=\cl(D).
+\]
+No recipe in this class produces a class with
+\(\ch_1(E)=D\), despite \(D\) being algebraic.
+This holds at every finite operator-word length.
+\end{theorem}
+\begin{proof}
+The initial characters have degree-one pieces
+\[
+ \cl(\ch_1(\mathcal O_X))=0,\qquad
+ \cl(\ch_1(\mathcal O_X(H)))=h,\qquad
+ \cl(\ch_1(T_X))=(2-2g)h .
+\]
+For any vector bundles (and by additivity for virtual classes),
+\[
+ \ch_1(E\oplus F)=\ch_1(E)+\ch_1(F),\qquad
+ \ch_1(E\otimes F)=\rk(E)\ch_1(F)+\rk(F)\ch_1(E),
+\]
+\[
+ \ch_1(E^\vee)=-\ch_1(E),\qquad
+ \ch_1(\psi^kE)=k\ch_1(E),\qquad
+ c_1(\wedge^kE)=\binom{\rk(E)-1}{k-1}c_1(E)
+\]
+for genuine rank-\(\rk(E)\) bundles where the exterior power
+is defined. Each operation preserves the one-dimensional
+\(\Q h\) first-character span \emph{after canonical Betti realization}.
+For arbitrary \(C\), the equation
+\(c_1(T_C)=(2-2g)[c]\) need NOT hold in
+\(\CH^1(C)_\Q\): a degree-zero Picard-class difference can
+survive rational equivalence while vanishing in Betti cohomology.
+Only the Betti/numerical identity is used in this theorem.
+For \(\Delta_X:X\to X\times X\), the projection formula gives
+\[
+ T_{(\Delta_X)_*F}(G)
+  =(p_2)_*\bigl(p_1^*G\otimes(\Delta_X)_*F\bigr)
+  =F\otimes G,                                      \tag{12}
+\]
+so the allowed self-diagonal kernels preserve it as well.
+The diagonal self-intersection complex involves
+\(\lambda_{-1}T_X^\vee\), and introduces no extra generator
+beyond the stated characteristic operations.
+Equation (10) proves (11).
+If \(\cl(\ch_1(E))=d\), pairing with \(d\) would give
+\(0=\int_X d^2=-2g\), contrary to \(g>0\).
+Thus equality \(\ch_1(E)=D\) in Chow is also impossible.
+\end{proof}
+
+\begin{theorem}[Exact independent native repair by an internal graph]
+\label{th:graph-repair}
+Let \(L_D=\mathcal O_X(D)\) be the \emph{genuine} algebraic
+line bundle of the internal diagonal-minus-fibers divisor.
+The rational virtual perfect-complex class
+\[
+       \boxed{E_D=\tfrac12([L_D]-[L_D^{-1}])
+               \in K_0^{\rm alg}(X)_\Q}
+\]
+has complete rational Chern character
+\[
+                  \ch(E_D)=D\in\CH^1(X)_\Q,
+          \qquad -\int_X \ch_1(E_D)D=2g>0.           \tag{13}
+\]
+It therefore provides the algebraic one-leg source that
+the entire restricted characteristic/self-diagonal recipe cannot.
+\end{theorem}
+\begin{proof}
+Since \(\dim X=2\), the Chern-character expansions stop at
+degree two:
+\[
+ \ch(L_D)=1+D+\frac{D^2}{2},\qquad
+ \ch(L_D^{-1})=1-D+\frac{D^2}{2}.
+\]
+Their half-difference is precisely \(D\), with both rank and
+degree-two characters zero. It is a rational combination
+of actual line bundles, not a choice of target cycle.
+Its numerical period is (10). This also correctly distinguishes
+the diagonal \(\Delta_X\subset X\times X\), acting as the
+identity/tensor kernel in (12), from the \emph{internal}
+graph \(\Delta_C\subset C\times C=X\) supplying new geometry.
+\end{proof}
+
+At \(g=0\) the numerical graph norm is zero and no separating
+period is obtained; for every \(g>0\) it is \(2g\).
+The exact uniform intersection identities and genus-zero boundary
+are kernel-checked in
+\texttt{GSTPrimitiveProductTowerStabilization.lean}, beginning
+with \texttt{curvePair\_tautological\_graph\_period\_zero} and
+\texttt{curvePair\_internalGraph\_native\_period\_nonzero}.
+The actual scheme-level interpretation relies on the displayed
+curve normal-bundle and projective intersection identities.
+A full arbitrary-\(X\) source-generation assertion is not
+deduced from this family: it proves the need for genuinely
+\emph{new geometry}, and provides an explicit successful non-split
+test while eliminating an entire otherwise endlessly recycled
+operator class.
+
+\section{Source pins and executed checks}
+All repository sources below were read at
+\texttt{ae27ee80ae6c3448bd856a6b75bafd5f73543192}:
+\begin{itemize}
+\item \texttt{GSTClassicalHodgeNativeOperatorCohomologyRealization.lean}:\\
+supported identity and ambient-extension decomposition.
+\item \texttt{GSTClassicalHodgeKernelStableOperatorAlgebra.lean}:\\
+native lift iff the class-to-defect block vanishes.
+\item \texttt{GSTGraphV2OmniversalCore.lean}:\\
+closure iff every seed-containing stable semantics holds.
+\item \texttt{GSTGraphV2SelfExpandingCosmology.lean}:\\
+generated-world theorem with actual assembly premises.
+\item \texttt{GSTPrimitiveProductTowerStabilization.lean}:\\
+the exact all-genus signed curve Gram.
+\item The two previous derivations of native residual Euler kernels
+and one-sided native factor extraction.
+\end{itemize}
+The exact Python script uses rational arithmetic at \(a=3,b=5\).
+It checks all \(7^3=343\) basis associativity triples, all
+\(7^2=49\) multiplication/automorphism pairs, nondegenerate pairing
+with determinant \(15\), all three even Hard Lefschetz ranks,
+primitive Gram \(\operatorname{diag}(3,5)\), projector identities,
+invariant tensor dimensions and the signed doubled index \(-5\).
+Trilinearity reduces associativity at this specialization to those
+343 cases. Uniformity for all positive \(a,b\) is proved above,
+not inferred from this specialization.
+
+A separate Wolfram symbolic evaluation checks the primitive
+contraction, inverse Gram, convolution sign, positive doubled index
+\(b\), and (9) for symbolic \(a,b,g\). One preliminary evaluation
+had a vector-flattening shape error; the corrected recorded evaluation
+has no such messages. The computations verify the explicit models
+and identities; they do not establish any canonical-cycle comparison
+or universal geometric source existence.
+All mathematical review here is self-review, not independent review.
+No new Lean proof or compilation is claimed.
+
+\medskip
+\noindent\textbf{Remaining exact construction.}
+A proof of (U) still needs a genuine algebraic object whose one-sided
+residual period is nonzero. The contraction theorem proved here identifies
+why diagonal duality, positive trace, native lifting and the formal
+closure/degree identities cannot substitute for that object.
+The original all-\(X\) construction goal remains unproved.
+\end{document}
+

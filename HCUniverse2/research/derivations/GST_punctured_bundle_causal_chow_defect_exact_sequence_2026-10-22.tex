@@ -1,0 +1,303 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\title{GST: Algebraic punctured-causal folds, exact Euler defect sequence,
+and constructive original-$X$ return}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We execute a new source-existence route downstream of the compact causal
+Hopf bifurcation: use the \emph{genuine smooth quasi-projective algebraic
+precursor} $U=E\setminus0_X$ of the compact Hopf fold, rather than
+postulating a Chow theory on the nonalgebraic Hopf quotient.
+For arbitrary smooth projective complex original $X$, arbitrary algebraic
+bundle $E$ and every codimension $p$, the canonical algebraic Chow
+localization sequence and rational Betti Gysin sequence combine into an
+exact Euler-defect sequence for the true rational Hodge algebraicity
+obstruction. We construct an explicit original-$X$ correction from any
+genuinely algebraic prescribed class upstairs when the lower-codimension
+defect vanishes; in rank $r=p$ the correction is purely scalar and always
+algebraic. We prove that the first possible nonzero rational Hodge defect
+cannot be hidden by a punctured causal fold. This is a completed
+all-original-$X$ structural theorem and a direct geometric source test,
+not a surjectivity assumption or a universal Hodge-conjecture proof.
+\end{abstract}
+
+\section{Geometry and exact source/target contract}
+Let $X$ be a connected smooth projective complex variety of dimension
+$d$, $p\ge0$, and let $\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+Let $E$ be any algebraic vector bundle of rank $r\ge1$. Write
+\[
+ V=\mathrm{Tot}(E),\quad i:X\hookrightarrow V\text{ zero section},
+ \quad U=V\setminus i(X),\quad
+ \rho:U\longrightarrow X,\quad
+ e=c_r(E)\in CH^r(X)_{\mathbb Q}.
+\]
+For the compact Hopf realization, require $r\ge2$ and choose
+$0<q<1$; then $\mathcal H_E=U/q^{\mathbb Z}$
+is compact complex and smoothly $S(E)\times S^1$.
+The open $U$ itself is a real smooth quasi-projective algebraic
+variety with a canonical Chow group and a canonical rational
+Betti cycle-class map. Its analytic deformation retract is
+$S(E)$. All statements below use actual algebraic sources on
+$X$ or $U$, not Chow classes on the nonalgebraic Hopf manifold.
+
+Define the rational Hodge space, actual algebraic image, and defect
+\[
+ H_X^p=H^{2p}(X,\mathbb Q)\cap H^{p,p}(X),\qquad
+ A_X^p=\mathrm{cl}^{\mathrm{can}}_X(CH^p(X)_{\mathbb Q}),
+ \qquad D_X^p=H_X^p/A_X^p,
+\]
+with groups in negative codimension equal to zero. Define the
+\emph{inherited} open-world defect
+\[
+ D^p_{\mathrm{inh}}(U)
+ =
+ \frac{\rho^*H_X^p}
+      {\mathrm{cl}^{\mathrm{can}}_U(CH^p(U)_{\mathbb Q})}
+ \subseteq
+ \frac{\mathrm{im}\rho^*:H^{2p}(X,\mathbb Q)\to
+                 H^{2p}(U,\mathbb Q)}
+      {\mathrm{cl}^{\mathrm{can}}_U(CH^p(U)_{\mathbb Q})}.
+ \tag{1}
+\]
+The quotient is well-defined because every algebraic codimension-$p$
+cycle on $U$ lifts from $X$ by Chow localization and because
+every actual class on $X$ is Hodge of type $(p,p)$.
+No pure Hodge structure is asserted on the entire open $U$.
+
+\section{The full arbitrary-$X$ algebraic-topological paired localization}
+\begin{theorem}[GST paired causal localization]
+For every $X,E,p$ as above there are exact sequences
+\[
+ CH^{p-r}(X)_{\mathbb Q}
+   \xrightarrow{\, e\cdot\,}
+ CH^p(X)_{\mathbb Q}
+   \xrightarrow{\rho^*}
+ CH^p(U)_{\mathbb Q}\longrightarrow0,                    \tag{2}
+\]
+and
+\[
+ H^{2p-2r}(X,\mathbb Q)
+   \xrightarrow{\,\mathrm{cl}(e)\smile\,}
+ H^{2p}(X,\mathbb Q)
+   \xrightarrow{\rho^*}
+ H^{2p}(U,\mathbb Q).                                     \tag{3}
+\]
+Moreover,
+\[
+ \boxed{\mathrm{cl}^{\mathrm{can}}_U(CH^p(U)_{\mathbb Q})
+       =\rho^*A_X^p\subseteq\rho^*H_X^p.}                 \tag{4}
+\]
+\end{theorem}
+\begin{proof}
+The closed-open localization sequence for the zero section
+$i:X\hookrightarrow V$ and $j:U\hookrightarrow V$ is
+$CH^{p-r}(X)\xrightarrow{i_*}CH^p(V)
+ \xrightarrow{j^*}CH^p(U)\to0$.
+By homotopy invariance, $\pi_V^*:CH^p(X)\simeq CH^p(V)$,
+and the self-intersection identity $i^*i_*\beta=e\cdot\beta$
+identifies $i_*$ with multiplication by $e$, giving (2).
+Topologically, $U$ retracts onto the oriented unit-sphere
+bundle $S(E)$; its real oriented Euler class equals the Betti
+top Chern class $\mathrm{cl}(e)$. Its sphere-bundle Gysin
+long exact sequence supplies (3). Canonical cycle-class naturality
+and the surjectivity of $CH^p(X)\to CH^p(U)$ prove (4).
+\end{proof}
+
+\section{Exact algebraicity-defect causal sequence}
+\begin{theorem}[Universal GST Euler-defect sequence]\label{thm:defect}
+The actual top Chern class $e$ induces a well-defined rational map
+$D_X^{p-r}\xrightarrow{e\cdot}D_X^p$, and the sequence
+\[
+ \boxed{
+ D_X^{p-r}\xrightarrow{e\cdot}D_X^p
+ \xrightarrow{\rho^*}D_{\mathrm{inh}}^p(U)
+ \longrightarrow0
+ }                                                          \tag{5}
+\]
+is exact for every connected smooth projective complex $X$,
+every algebraic rank-$r$ bundle $E$ and every integer $p\ge0$.
+Equivalently,
+\[
+ \boxed{D_{\mathrm{inh}}^p(U)\cong
+              D_X^p/(c_r(E)\cdot D_X^{p-r}).}                \tag{6}
+\]
+\end{theorem}
+\begin{proof}
+As $e$ is algebraic of Hodge type $(r,r)$, multiplication by
+$\mathrm{cl}(e)$ sends $H_X^{p-r}$ into $H_X^p$ and
+$A_X^{p-r}$ into $A_X^p$, inducing the left map on defect quotients.
+Equation (4) makes the second map surjective by definition.
+
+For exactness in the middle, suppose a rational Hodge class
+$\alpha\in H_X^p$ maps into the algebraic image upstairs.
+Equation (4) furnishes an actual $Z\in CH^p(X)_{\mathbb Q}$
+such that
+$\rho^*\alpha=\rho^*\mathrm{cl}^{\mathrm{can}}_X(Z)$.
+By the true Betti Gysin kernel (3) there is some rational
+$\gamma\in H^{2p-2r}(X,\mathbb Q)$ with
+\[
+ \alpha-\mathrm{cl}^{\mathrm{can}}_X(Z)
+         =\mathrm{cl}^{\mathrm{can}}_X(e)\smile\gamma.       \tag{7}
+\]
+The left side is a rational Hodge class of type $(p,p)$.
+The map $\mathrm{cl}(e)\smile-$ is a morphism of polarizable
+pure rational Hodge structures after the Tate twist $(-r)$.
+Its image is a rational Hodge substructure, and the category of
+polarizable pure rational Hodge structures is semisimple.
+Thus every rational Hodge class in this image has a
+\emph{rational Hodge preimage}
+$\gamma_{\mathrm{Hdg}}\in H_X^{p-r}$ with the same image
+as $\gamma$. Equation (7) now gives
+$[\alpha]=e\cdot[\gamma_{\mathrm{Hdg}}]$ in $D_X^p$.
+The converse is immediate by Gysin exactness and (2).
+This proves (5) and (6) without positing a cycle for $\alpha$.
+\end{proof}
+
+\begin{corollary}[First-defect survival under every punctured fold]
+Fix an original $X$. Suppose $p$ is the least codimension
+with $D_X^p\ne0$. Then for every algebraic bundle $E$ of
+rank $r\ge1$,
+\[
+  \boxed{D_X^p\xrightarrow{\ \sim\ }D_{\mathrm{inh}}^p(U).}
+                                                               \tag{8}
+\]
+More generally the same isomorphism holds whenever
+$D_X^{p-r}=0$, including all $r>p$ and $r=p$ since
+$D_X^0=0$ on connected $X$.
+\end{corollary}
+\begin{proof}
+For $r>0$, the index $p-r<p$. By minimality the left
+defect in (5) vanishes, and surjectivity becomes an
+isomorphism. When $r=p$, $D_X^0=0$ because the rational
+degree-zero fundamental cycle represents the degree-zero
+rational Hodge class. The convention for negative indices
+handles $r>p$.
+\end{proof}
+
+\section{Constructive original-$X$ cycle return from an open source}
+\begin{theorem}[Exact defect-zero algebraic correction]\label{thm:return}
+Assume $D_X^{p-r}=0$. Suppose a bona fide algebraic
+$\Gamma_U\in CH^p(U)_{\mathbb Q}$ has been constructed
+\emph{independently} and satisfies
+\[
+ \mathrm{cl}^{\mathrm{can}}_U(\Gamma_U)=\rho^*\alpha.
+                                                               \tag{9}
+\]
+Then one can construct an actual
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$
+with $\mathrm{cl}^{\mathrm{can}}_X(Z_\alpha)=\alpha$
+by the following explicit correction.
+Choose any algebraic Chow lift $W\in CH^p(X)_{\mathbb Q}$
+of $\Gamma_U$ using (2).
+Find a rational Hodge class $\gamma_{\mathrm{Hdg}}
+ \in H_X^{p-r}$ with
+\[
+ \alpha-\mathrm{cl}^{\mathrm{can}}_X(W)
+  =\mathrm{cl}^{\mathrm{can}}_X(e)\smile\gamma_{\mathrm{Hdg}}.
+                                                               \tag{10}
+\]
+Since $D_X^{p-r}=0$, choose any actual
+$B\in CH^{p-r}(X)_{\mathbb Q}$ with
+$\mathrm{cl}^{\mathrm{can}}_X(B)=\gamma_{\mathrm{Hdg}}$.
+Then
+\[
+ \boxed{Z_\alpha=W+e\cdot B,\qquad
+          \mathrm{cl}^{\mathrm{can}}_X(Z_\alpha)=\alpha.}   \tag{11}
+\]
+In the particularly important rank-matched case $r=p\ge1$,
+the correction is purely rational:
+$Z_\alpha=W+\lambda\,c_p(E)$, with $\lambda\in\mathbb Q$.
+If $c_p(E)\ne0$ in Betti cohomology, any rational dual functional
+$\ell$ with $\ell(\mathrm{cl}(c_p(E)))\ne0$ yields
+\[
+ \lambda=\frac{\ell(\alpha-\mathrm{cl}(W))}
+                {\ell(\mathrm{cl}(c_p(E)))}.                \tag{12}
+\]
+If the top Chern class vanishes, $W$ already represents $\alpha$.
+\end{theorem}
+\begin{proof}
+Surjectivity in Chow localization (2) produces $W$.
+Betti Gysin exactness and the Hodge-preimage argument in the proof
+of Theorem \ref{thm:defect} give (10). Since the assumed lower
+defect is zero, $\gamma_{\mathrm{Hdg}}$ is a canonical Betti cycle
+class of some algebraic $B$. The Chow product $eB$ is an
+actual original-$X$ codimension-$p$ cycle and naturality gives
+(11). For $r=p$, $H_X^0=\mathbb Q$, so $\gamma_{\mathrm{Hdg}}$
+is the scalar multiple $\lambda$ of the unit fundamental class.
+The rational functional formula (12) determines it exactly.
+\end{proof}
+
+\paragraph{Anti-circularity acceptance check.}
+The existence of $\Gamma_U$ in (9) is the \emph{source-birth}
+input to be constructed; it is NOT produced by the Gysin sequence.
+When $D_X^{p-r}=0$, Theorem \ref{thm:return} proves
+that a universally available construction of such $\Gamma_U$
+would itself establish universal algebraicity on $X$ in
+codimension $p$. The exact correction is new usable geometry,
+but it cannot supply an absent algebraic $\Gamma_U$ by
+topological injectivity or the absence of pure weight-one
+Hodge structure on the compact Hopf quotient.
+
+\section{Direct attempted source factory and decisive result}
+Attempt: start from arbitrary rational Hodge $\alpha$, use the
+actual algebraic punctured causal bundle $U$, then invoke
+the existence of a pure Hodge class or a rational topological
+$K$-theory representative to obtain a Chow cycle upstairs.
+The latter implication fails at its required \emph{algebraic
+source type}. Homotopy invariance/localization explicitly
+shows that \emph{every} algebraic cycle on $U$ comes from a
+Chow class on $X$; the only ambiguity is an Euler multiple
+from lower codimension. Thus puncturing and subsequent
+$S^1$-topology of the Hopf quotient supply no unconditional
+new algebraic cycle in the first missing Hodge codimension.
+This is a theorem about this punctured-bundle construction,
+not an impossibility result for other GST geometric births.
+
+The original all-$X$, all-$p$ target remains the independent
+algebraic birth of $\Gamma_U$ in (9), or of an equivalent
+non-split geometric source on the original $X$. Genuine
+scheme-level incidence, Hilbert, moduli or specialization
+geometry would have to furnish its canonical Betti class
+without selecting an original algebraic preimage.
+
+\section{Removal of connectedness and componentwise universal quantifiers}
+For any \emph{nonempty}, not necessarily connected, smooth projective
+complex $X$, its finitely many connected components
+$X=\coprod_{a=1}^N X_a$ are smooth projective, and the vector
+bundle and punctured realization decompose as
+$E=\coprod_a E|_{X_a}$, $U=\coprod_a U_a$.
+For each codimension $p$, both $CH^p$ and rational singular
+cohomology are finite direct sums across components.
+The rational Hodge subspaces, canonical algebraic images and
+defect groups therefore decompose componentwise:
+\[
+  D_X^p\simeq\bigoplus_{a=1}^N D_{X_a}^p,\qquad
+  D_{\mathrm{inh}}^p(U)\simeq
+    \bigoplus_{a=1}^N D_{\mathrm{inh}}^p(U_a).
+\]
+Applying Theorems \ref{thm:defect} and \ref{thm:return}
+componentwise proves the same exact defect sequence and
+corrected cycle construction for arbitrary nonempty smooth
+projective $X$, without imposing connectedness.
+In rank $r=p$, the scalar correction may have a separate
+$\lambda_a\in\mathbb Q$ on each connected component;
+a single global scalar must not be imposed artificially.
+
+\section{Finite exact verification and evidence boundary}
+The accompanying stateless Wolfram script checks $1485$
+finite projective-space degree/rank instances, $d=0,\ldots,8$,
+$r=2,\ldots,7$, all $k=0,\ldots,r$, all $p=0,\ldots,d$,
+and $81$ rational matrix quotient models. Both assertions
+passed. These finite arithmetic checks do not replace the
+uniform Chow localization, pure-Hodge strictness and Gysin proof.
+The mathematics is a self-reviewed LaTeX derivation; no claim
+is made that the analytic, Chow and Hodge structure theorems
+have been kernel-formalized in Lean.
+\end{document}

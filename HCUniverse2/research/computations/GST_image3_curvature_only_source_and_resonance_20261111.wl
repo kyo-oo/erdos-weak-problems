@@ -1,0 +1,42 @@
+Module[{cells,idx,sh,mir,sgn,surv,u,j,m,c,seed,kry,tcurv,
+ tsource,rowBound,detCurv,curvTrace,offs,two,twov,rank24,det24,phi,altDet,
+ resonanceOffDiag,clean},
+cells=Flatten[Table[{i,k},{i,0,3},{k,0,2}],1];
+idx[a_]:=First[FirstPosition[cells,a]];
+sh[{i_,k_}]:={Quotient[i+4*k,3],Mod[i+4*k,3]};
+mir[{i_,k_}]:={3-i,2-k};
+sgn[{i_,k_}]:=If[MemberQ[{0,1,3,4,5,9},i+4*k],1,-1];
+surv[{i_,k_}]:=Module[{p=Mod[Quotient[i,2]+2*k,3],q},q=Mod[Mod[i,2]+2*p,3];Boole[k==2]Boole[p==2]+Boole[p==2]Boole[q==2]];
+u=Table[Boole[z==idx[sh[cells[[i]]]]],{i,12},{z,12}];
+j=Table[sgn[cells[[i]]]*Boole[z==idx[mir[cells[[i]]]]],{i,12},{z,12}];
+m=DiagonalMatrix[surv/@cells];c=j.m-m.j;
+seed=Boole[MemberQ[{{0,0},{0,1}},#]]&/@cells;
+kry[t_,v_,r_]:=Transpose[NestList[t.#&,v,r-1]];
+tcurv=u+j+c;tsource=u+j+m;
+rowBound=Max[Total[Abs[tcurv],{2}]];
+detCurv=Det[kry[tcurv,seed,12]];
+two=KroneckerProduct[IdentityMatrix[2],tcurv]+KroneckerProduct[DiagonalMatrix[{0,10}],IdentityMatrix[12]];
+twov=Join[seed,seed];
+rank24=MatrixRank[kry[two,twov,24]];
+det24=Det[kry[two,twov,24]];
+phi[b_]:=u+j+b*c;
+altDet=Factor[Det[kry[phi[b],seed,12]]];
+resonanceOffDiag=(u+j+a*m+b*c)[[12,1]];
+clean=<|"originalJSquare"->(j.j==-IdentityMatrix[12]),
+"originalU5"->(MatrixPower[u,5]==IdentityMatrix[12]),
+"originalCMCurvatureAntiCommutesJ"->(j.c+c.j==ConstantArray[0,{12,12}]),
+"originalCMCurvatureRank"->MatrixRank[c],
+"newCurvatureOnlyRank"->MatrixRank[kry[tcurv,seed,12]],
+"newCurvatureOnlyDeterminant"->detCurv,
+"newCurvatureOnlyMaxAbsoluteRowSum"->rowBound,
+"twoIndependentOriginalHolesRank"->rank24,
+"twoIndependentOriginalHolesDetNonzero"->(det24!=0),
+"curvatureOnlyDetPolynomial"->altDet,
+"maxCellNullCellCoupling"->resonanceOffDiag,
+"maxCellSelfCoupling"->(u+j+a*m+b*c)[[12,12]],
+"resonanceBhalfUniversalCouplingZero"->(Simplify[resonanceOffDiag/.b->1/2]===0),
+"allPassed"->(detCurv==1386205893&&rowBound<=4&&rank24==24&&det24!=0&&
+ j.c+c.j==ConstantArray[0,{12,12}]&&
+ Simplify[resonanceOffDiag/.b->1/2]===0)|>;
+Print[clean];clean
+]

@@ -1,0 +1,73 @@
+================================================================================================
+V0 -- THE W-MODEL (the hyperoctahedral census universe)
+================================================================================================
+  ok    1  |W| = 384 == 384 (the hyperoctahedral bound 16*24)
+  ok    2  W closes as a group (GCtx built: 384 elements)
+  ok    3  rho0 = (04)(15)(26)(37): (4, 5, 6, 7, 0, 1, 2, 3)
+  ok    4  rho0 central in W
+  ok    5  rho0 fixed-point-free involution
+  ok    6  the W multiplication law comp[a][b] = (f_b XOR (f_a∘s_b), s_a∘s_b) holds on 120 random pairs (wperm-verified)
+  ok    7  the flip kernel |(C2)^4| = 16
+  ok    8  rho0 = the 1111 flip
+================================================================================================
+V1 -- THE OCTIC CENSUS (the structure-theorem enumeration)
+================================================================================================
+  ok    9  transitive quartic classes: 5 == 5 (the classical count)
+  ok   10  quartic orders [4, 4, 8, 12, 24] == [4, 4, 8, 12, 24] (C4, V4, D4, A4, S4)
+  ok   11  subspaces of F2^4: 67 == 67 (the Gaussian-binomial count)
+  ok   12  subspaces containing 1111: 16 == 16 (= subspaces of F2^4/1111: 2^(3 choose <=3) = 16)
+  ok   13  the census found 114 distinct octic (G, rho0) worlds
+  [census] orders present: [8, 16, 24, 32, 48, 64, 96, 128, 192, 384]
+  ok   14  every census world: transitive, |G| = |K||T|, rho0 central fpf involution (114 worlds)
+  ok   15  census split: 56 sub-24 worlds (the R37 octic sector) + 58 order>=24 worlds (THE ROUND-41 BOUNDARY)
+  [census] order>=24 boundary multiset: [24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 24, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 32, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 48, 64, 64, 64, 64, 64, 64, 96, 128, 192, 192, 192, 384]
+  ok   16  boundary orders distinct-set: [24, 32, 48, 64, 96, 128, 192, 384]
+  ok   17  boundary orders within the structure-theorem prediction {24,32,48,64,96,128,192,384}: [24, 32, 48, 64, 96, 128, 192, 384]
+  ok   18  order-24 worlds have |T| in {12} (A4-only) and order-48 in {24} (S4-only)
+  ok   19  every transitive quartic T is 2-generated (the census sweep's completeness premise)
+================================================================================================
+V2/V3 -- THE DESCENT MODEL + THE LAW BATTERY AT EVERY BOUNDARY WORLD
+================================================================================================
+  ok   20  the conjugacy reduction: 58 boundary worlds -> 24 class representatives (W-conjugacy)
+  ok   21  the conjugacy-invariance receipt: a W-conjugate world pair gives identical dimension tables
+  ok   22  the exterior sign cocycle law holds at every boundary class representative (degree 2)
+  ok   23  THE EXCEPTIONAL-CLASS LAW: 2 intermediate-orbit primitive types, each with surplus EXACTLY [0, 2, 0, 0] -- TWO degree-4 Hodge classes beyond the divisor-product ring, the boundary census's discovery (the CM-side one-source leaf analogue); every non-exceptional type: surplus = 0 at every degree (124 entries in the |G| <= 96 battery; the |G| > 96 classes: orbit-count + two-algorithm + classifier laws; the product battery outside the disclosed bound)
+  ok   24  two-algorithm dimension agreement: 145/145 bounded checks (orbit-count law == exact RREF of the equivariance system)
+  ok   25  primitive type-orbits found: 33 (the binomial law domain)
+  ok   26  quadratic-inducible type-orbits found: 2 (the split law domain)
+  ok   27  deeper-induced type-orbits found: 2 (the product-world law domain: NS >= g)
+  ok   28  binomial row at primitive r00-T0-K2-G48: [4, 6, 4, 1] == [4, 6, 4, 1] (C(4,p))
+  ok   29  binomial row at primitive r01-T0-K2-G48: [4, 6, 4, 1] == [4, 6, 4, 1] (C(4,p))
+  ok   30  binomial row at primitive r02-T0-K8-G192: [4, 6, 4, 1] == [4, 6, 4, 1] (C(4,p))
+  ok   31  THE NEW PRIMITIVE SHAPES at the order>=24 worlds: [(4, 8, 4, 1)] -- NS = g = 4, palindrome, top = 1 (the intermediate-orbit rows; two-algorithm certified; the boundary census's discovery)
+  ok   32  the binomial primitive row persists at the boundary census: 31 orbits
+  ok   33  split row at quadratic-inducible r00-T0-K2-G48: [16, 36, 16, 1] == [16, 36, 16, 1] (C(4,p)^2)
+  ok   34  split row at quadratic-inducible r14-T2-K2-G24: [16, 36, 16, 1] == [16, 36, 16, 1] (C(4,p)^2)
+  ok   35  product-world row at deeper-induced r05-T1-K4-G32: NS = 8 >= g = 4 (row [8, 18, 8, 1])
+  ok   36  product-world row at deeper-induced r05-T1-K4-G32: NS = 8 >= g = 4 (row [8, 18, 8, 1])
+  ok   37  the mixed-orbit kill has live content at 8/8 sampled representatives (balanced words failing purity)
+================================================================================================
+V4 -- THE E x A EXTENSION FRAMES (the GENUINE joint-world model, bounded: 6 base worlds)
+================================================================================================
+  ok   38  the E-frame world: rho_E = (01) central fpf (the Gaussian letter)
+  ok   39  the E x A disjoint-frame tensor law COMPUTED at 8 joint 10-letter worlds: dim Hdg_2(E x A) = 1 + NS(A) at every disjoint frame (1 coupled frames outside the bound, disclosed)
+  ok   40  the E x A joint surplus at degree 4: 8/8 frames, surplus = 0 (products of the joint divisor basis span the joint pure words)
+================================================================================================
+V5 -- THE G-LAW FAMILY LAYER (the g-uniformity receipts)
+================================================================================================
+  ok   41  the g=2 binomial rows: 2 primitive quartic type-orbits, all == [2, 1] (C(2,p))
+  ok   42  the g=3 binomial rows: 2 primitive sextic type-orbits, all == [3, 3, 1] (C(3,p))
+  ok   43  the g=4 binomial rows: 31 generic-orbit primitive octic type-orbits == [4, 6, 4, 1] (C(4,p)) -- the G-UNIFORM FAMILY LAW at the generic types; the 2 intermediate-orbit types carry the exceptional row (the discovery)
+================================================================================================
+V6 -- THE HOSTILE BATTERY (every control FIRES)
+================================================================================================
+  ok   44  H1 census complement-deletion at world 0: the mutated set fails transitivity/order
+  ok   45  H2 basis-generator deletion: the span STRICTLY drops 6 -> 3 and the surplus FIRES (3 > 0)
+  ok   46  H3 the sign-cocycle flip: a single sign mutation breaks the cocycle law (detected)
+  ok   47  H4 the type-validity battery: 3/4 violation directions rejected at the canary world (double-letter, missing-pair, duplicate)
+  ok   48  H5 the unbalanced word (0, 1) is not purity-stable (rejected by the filter)
+  ok   49  H6 garbage liveness: the 2-element garbage world has no central fpf involution (rejected)
+  ok   50  the mechanical vacuity scan: 0 hits (patterns: [])
+================================================================================================
+SUMMARY: 50 checks, 0 failures
+================================================================================================

@@ -1,0 +1,69 @@
+================================================================================================
+A -- THE BITMASK COCYCLE ENGINE + THE SHAPIRO LAW
+================================================================================================
+  [    0.0s] the Shapiro law at m = 4, 5, 6, 7
+  ok(1) m=4: the transitive T-classes: 5 == 5 (the classical count)
+  [    0.0s] m=4 Shapiro done (5 groups so far)
+  ok(2) m=5: the transitive T-classes: 5 == 5 (the classical count)
+  [    0.2s] m=5 Shapiro done (10 groups so far)
+  ok(3) m=6: the transitive T-classes: 16 == 16 (the classical count)
+  [   39.3s] m=6 Shapiro done (26 groups so far)
+  ok(4) m=7: the transitive T-classes: 7 == 7 (the classical count; the distinct-orders key at m=7, disclosed)
+  [   82.9s] m=7 Shapiro done (33 groups so far)
+  ok(5) THE SHAPIRO LAW: dim H^1(T; F2[Omega]) = dim Hom(Stab_T(omega), C2) at EVERY transitive T of degrees 4-7 (33 groups; the bitmask linear-algebra engine vs the stabilizer-hom computation; exact F2 arithmetic)
+  [   82.9s] the brute cross-check of the cocycle engine
+  ok(6) the cocycle engine CROSS-CHECKED against the brute generator-value sweep at 9 transitive T of degrees 4-5 with |T| <= 60 (IDENTICAL H^1 dimensions)
+  [   83.2s] A done
+================================================================================================
+B -- THE DEGREE-12 CENSUS (m = 6)
+================================================================================================
+  ok(7) the transitive sextic classes: 16 == 16
+  [  121.5s] the subspaces of F2^6 containing 111111
+  ok(8) the subspaces of F2^6 containing <111111>: 374 == 374 (the subspaces of F2^5: 1+31+155+155+31+1)
+  [  168.2s] the K-lattices at every sextic T
+  [K-lat] |T|=720: 3 T-stable subspaces containing 111111
+  [K-lat] |T|=72: 4 T-stable subspaces containing 111111
+  [K-lat] |T|=48: 5 T-stable subspaces containing 111111
+  [K-lat] |T|=24: 5 T-stable subspaces containing 111111
+  [K-lat] |T|=360: 3 T-stable subspaces containing 111111
+  [K-lat] |T|=36: 4 T-stable subspaces containing 111111
+  [K-lat] |T|=36: 4 T-stable subspaces containing 111111
+  [K-lat] |T|=18: 4 T-stable subspaces containing 111111
+  [K-lat] |T|=24: 5 T-stable subspaces containing 111111
+  [K-lat] |T|=120: 3 T-stable subspaces containing 111111
+  [K-lat] |T|=24: 5 T-stable subspaces containing 111111
+  [K-lat] |T|=60: 3 T-stable subspaces containing 111111
+  [K-lat] |T|=12: 5 T-stable subspaces containing 111111
+  [K-lat] |T|=12: 6 T-stable subspaces containing 111111
+  [K-lat] |T|=6: 6 T-stable subspaces containing 111111
+  [K-lat] |T|=6: 10 T-stable subspaces containing 111111
+  [  169.0s] the H^1 census at every sextic (T, K)
+  ok(9) THE DEGREE-12 H^1 CENSUS: 75 (T, K) pairs enumerated (the K-lattice complete: 374 candidates filtered by generator-stability at every T; equivalent to the full group stability -- the subgroup closure law); the H^1 dimension computed at every pair
+  [H1] the nonzero H^1 rows at degree 12: [(720, 32, 2, 1), (72, 2, 32, 2), (72, 32, 2, 2), (48, 8, 8, 3), (48, 16, 4, 1), (48, 2, 32, 1), (48, 32, 2, 2), (24, 8, 8, 3), (24, 16, 4, 2), (24, 2, 32, 1), (24, 32, 2, 1), (36, 2, 32, 2), (36, 32, 2, 2), (36, 2, 32, 1), (36, 32, 2, 1), (18, 2, 32, 1), (18, 32, 2, 1), (24, 8, 8, 2), (24, 16, 4, 1), (24, 2, 32, 1), (24, 32, 2, 1), (120, 2, 32, 1), (120, 32, 2, 1), (24, 8, 8, 2), (24, 16, 4, 1), (24, 2, 32, 1), (24, 32, 2, 1), (60, 2, 32, 1), (12, 8, 8, 2), (12, 16, 4, 2), (12, 2, 32, 1), (12, 8, 8, 2), (12, 2, 32, 2), (12, 32, 2, 2), (6, 8, 8, 1), (6, 2, 32, 1), (6, 32, 2, 1), (6, 8, 8, 1), (6, 8, 8, 1), (6, 8, 8, 1), (6, 2, 32, 1), (6, 32, 2, 1)]
+  [  169.2s] B census done
+================================================================================================
+B2/C2/D -- THE TRANSVERSAL SECTOR (the uniform leaf anatomy)
+================================================================================================
+  ok(10) THE PARITY WALL: the transversal words have size m; balance requires 2p = m; at every ODD m (degrees 10, 14, 18, ...) the sector is EMPTY by parity -- the degree-10 rigidity is this wall, and the wall is UNIFORM on the whole odd degree axis (verified at m = 5, 7; the theorem is uniform in m)
+  ok(11) the m=4 sector receipt: the balanced transversals number C(4,2) = 6 of 2^4 = 16; the pure filter at the 16 exceptional degree-8 types leaves the 2-element complement orbit (the leaf file's anatomy -- the sector's degree-8 instance)
+  [  169.2s] the degree-12 representative worlds + the transversal sector
+  ok(12) THE DEGREE-12 REPRESENTATIVE WORLDS: 24 worlds built (|G| <= 192, from the (T,K) pairs with |T| <= 24 and dim M <= 8; the first 3 cocycles per pair -- bounded sampling, DISCLOSED)
+  [sector12] |G|=192 Phi=(0, 1, 2, 3, 4, 5): dims=[12, 51, 88, 51, 12, 1] tr-pure=8 tr-basis-dim=8 tr-product-dim=8 dim3=88 span3=88
+  [sector12] |G|=192 Phi=(0, 1, 2, 3, 4, 11): dims=[6, 15, 20, 15, 6, 1] tr-pure=0 tr-basis-dim=0 tr-product-dim=0 dim3=20 span3=20
+  [sector12] |G|=192 Phi=(0, 1, 2, 3, 4, 5): dims=[6, 15, 20, 15, 6, 1] tr-pure=0 tr-basis-dim=0 tr-product-dim=0 dim3=20 span3=20
+  [sector12] |G|=192 Phi=(0, 1, 2, 3, 4, 5): dims=[6, 15, 20, 15, 6, 1] tr-pure=0 tr-basis-dim=0 tr-product-dim=0 dim3=20 span3=-1
+  [sector12] |G|=48 Phi=(0, 1, 2, 3, 4, 5): dims=[36, 225, 400, 225, 36, 1] tr-pure=20 tr-basis-dim=20 tr-product-dim=20 dim3=400 span3=-1
+  [sector12] |G|=48 Phi=(0, 1, 2, 3, 4, 11): dims=[6, 15, 20, 15, 6, 1] tr-pure=0 tr-basis-dim=0 tr-product-dim=0 dim3=20 span3=-1
+  [sector12] |G|=48 Phi=(0, 1, 2, 3, 4, 5): dims=[12, 51, 88, 51, 12, 1] tr-pure=8 tr-basis-dim=8 tr-product-dim=8 dim3=88 span3=-1
+  [sector12] |G|=48 Phi=(0, 1, 2, 3, 4, 11): dims=[6, 15, 20, 15, 6, 1] tr-pure=0 tr-basis-dim=0 tr-product-dim=0 dim3=20 span3=-1
+  ok(13) THE TRANSVERSAL SECTOR AT DEGREE 12: measured at 8 representative (world, type) pairs -- the sector's pure-word count, the basis-system dimension, the divisor-product presence, the full dims and span rows (exact arithmetic)
+  ok(14) THE SECTOR-BASIS LAW: at every measured type with an empty transversal sector, the transversal basis-system dimension is 0 (the sector's absence forces the basis absence -- the structural consistency of the measurement)
+  [sector12] nonempty sector: 3/8 types; leaf-analogue deficit (basis > product-presence): 0; orphan (zero product presence): 0
+  ok(15) THE DEGREE-12 SECTOR VERDICT (measured, honest): nonempty sector at 3/8 types; the leaf-analogue deficit at 0; the orphan pattern (zero product presence, the degree-8 leaf's signature) at 0 -- the counts are consistent (deficit/orphan are subcounts of the nonempty sector) and the rows above are the data
+  [  658.7s] B2 done
+================================================================================================
+C -- THE DEGREE-14 CENSUS (m = 7)
+================================================================================================
+  [  658.7s] the septic T-classes (the prime-degree fast sweep)
+  ok(16) the transitive septic classes: 7 == 7 with orders [7, 14, 21, 42, 168, 2520, 5040] (the classical list: C7, D7, F21, F42, PSL(3,2), A7, S7)
+  [  699.2s] the T-stable sublattices of F2^7 containing 1111111 (the join-lattice engine)

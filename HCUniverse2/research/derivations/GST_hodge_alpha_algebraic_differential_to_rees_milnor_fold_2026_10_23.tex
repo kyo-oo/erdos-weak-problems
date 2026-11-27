@@ -1,0 +1,399 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Direct Higher-Primitive Attack:
+Algebraic Hodge Descent, Nonlinear Rees Logarithms,
+and Genuine K-Symbol Cycle Birth}
+\date{23 October 2026}
+\begin{document}\maketitle
+
+\section{Input and unconditionally constructed algebraic differential data}
+Let X be ANY smooth projective complex d-fold,
+let 2<=p<=d and let alpha be a PRESCRIBED rational
+Hodge (p,p) class in H^(2p)(X,Q).
+We accept the established GST Hodge-pure dimensional
+fold theorem. The target remains a genuine
+original-X rational CHOW cycle of codimension p
+with canonical Betti class alpha.
+
+Take any finite Zariski AFFINE cover U_i of X.
+Their finite intersections are affine because
+X is separated.
+
+\begin{theorem}[Every prescribed rational Hodge class produces FINITE algebraic differential cocycle data on original X]
+There exist finitely many genuinely ALGEBRAIC
+forms
+\[
+ \boxed{
+ \omega_\alpha=\{
+ \omega^{a,b}_{i_0\dots i_a}\},\qquad
+ a+b=2p,\quad b\ge p,\quad
+ \omega^{a,b}_{i_0\dots i_a}
+ \in\Gamma(U_{i_0\dots i_a},\Omega_X^b)
+ }                                                     \tag{1}
+\]
+satisfying the actual Cech--de Rham
+differential equation
+\[
+ \boxed{D\omega_\alpha
+         =(\delta+(-1)^a d)\omega_\alpha=0.}      \tag{2}
+\]
+Their class under the canonical algebraic
+de Rham-to-Betti comparison is alpha.
+No codimension-p Chow cycle, algebraic
+K0 class, or polynomial center for alpha
+is inserted as an input.
+\end{theorem}
+\begin{proof}
+For projective smooth X the actual algebraic
+Hodge-to-de Rham spectral sequence degenerates
+at E1. The image of the filtered hypercohomology
+$\mathbb H^{2p}(X,\Omega_X^{\ge p})$ is
+$F^pH^{2p}_{dR}(X)$.
+The prescribed pure (p,p) alpha lies in F^p
+after rational Betti comparison; choose
+a filtered hypercohomology lift.
+Since affine intersections have no higher
+coherent cohomology, the finite Cech-de Rham
+total complex computes the filtered algebraic
+hypercohomology. A finite total cocycle gives
+exactly the forms in (1) satisfying (2)
+and maps to alpha.
+This constructs true algebraic differential
+source data from alpha, although these data
+are not assumed to define an algebraic CYCLE.
+\end{proof}
+
+\section{SAME polynomial fold equations generate the algebraic log wedge}
+On any original-X coordinate chart with an ACTUAL
+smooth codimension-p algebraic fold center
+$Z=V(z_1,\dots,z_p)$, the nonlinear
+Rees deformation is the true algebraic scheme
+\[
+ R[t,u_1,\dots,u_p]/(t u_i-z_i).
+\]
+On the open chart where all log denominators
+are invertible, its differential identities are
+\[
+ \boxed{dz_i=t\,du_i+u_i\,dt,\qquad
+ d\log z_i=d\log t+d\log u_i.}                  \tag{3}
+\]
+
+\begin{theorem}[All-codimension EXACT logarithmic fold residue]
+For EVERY p>=1, the very same Rees
+fold equations yield the actual algebraic
+p-form identity
+\[
+ \boxed{
+ \begin{aligned}
+ \bigwedge_{i=1}^p d\log z_i
+  &=\bigwedge_{i=1}^p d\log u_i\\
+  &\quad+d\log t\wedge
+   \sum_{j=1}^p(-1)^{j-1}
+     \bigwedge_{i\ne j}d\log u_i .
+ \end{aligned}}                                         \tag{4}
+\]
+Consequently the logarithmic residue on
+the fold boundary t=0, in this log chart, is
+\[
+ \boxed{\operatorname{Res}_{t=0}
+   \bigwedge_{i=1}^p d\log z_i
+    =\sum_{j=1}^p(-1)^{j-1}
+       \bigwedge_{i\ne j}d\log u_i.}             \tag{5}
+\]
+The order in each omitted wedge is increasing.
+\end{theorem}
+\begin{proof}
+Insert (3) in the exterior product.
+All terms with two copies of dlog t vanish.
+The no-dlog-t term is the full u-wedge.
+A term with dlog t in position j incurs
+the sign (-1)^(j-1) when moved to the front.
+Its coefficient is the logarithmic residue.
+This proof holds in the full exterior algebra
+for every p, not only tested dimensions.
+\end{proof}
+
+\section{Actual cycle multiplication from algebraic local K-symbol residues}
+For a genuine algebraic regular center
+Z with local parameters z_1,...,z_p,
+the Milnor K-symbol
+\[
+ \boxed{\{z_1,\dots,z_p\}\in
+              K_p^M(\mathbb C(X))}
+                                                               \tag{6}
+\]
+has logarithmic differential
+$\bigwedge_i dz_i/z_i$.
+The successive tame residues along the
+regular ordered flag defined by the
+z_i yield the unit multiplicity in
+the terminal K0 at the generic point of Z.
+This is the algebraic local intersection
+multiplicity one, not a Hodge operator
+being called a cycle.
+
+\begin{theorem}[The polynomial fold creates a genuine Chow cycle from its K-residue center]
+For any smooth complete-intersection center
+Z of codimension p>=2, its true Milnor
+symbol data and its normal Rees algebra
+are built from the SAME regular equations
+z_i=0. The residue has unit fundamental
+multiplicity, and the actual blowup
+$b:\widetilde X\to X$ with exceptional
+divisor E constructs
+\[
+ \boxed{(-1)^{p-1}b_*[E]^p=[Z]
+                             \in CH^p(X).}       \tag{7}
+\]
+The canonical Betti class of this genuine
+original-X Chow cycle is the algebraic
+fundamental class of Z.
+\end{theorem}
+\begin{proof}
+The iterated local valuation residues of
+an ordered regular-parameter symbol have
+terminal value 1. The Chow fundamental
+cycle of the regular complete intersection
+therefore has generic multiplicity one.
+For the Rees blowup, the exact normal-bundle
+self-intersection formula gives
+$E^p=(-1)^{p-1}j_*(\zeta^{p-1})$,
+where $q:E=P_Z(N)\to Z$ and
+$q_*\zeta^{p-1}=1$.
+Push forward along $b\circ j=i\circ q$
+to obtain (7) in ACTUAL Chow.
+\end{proof}
+
+\section{Adversarial direct alpha-to-polynomial-center construction}
+We now attempt the requested arbitrary-X bridge:
+the unconditionally constructed
+algebraic differential cocycle (1)
+must give genuinely new algebraic
+local K-symbol residues (6), not merely
+an algebraic differential form.
+The first candidate puts an alpha-selected
+algebraic form into the graph/zero section
+of a FIXED algebraic vector bundle V
+and Rees-folds its zero locus.
+
+\begin{theorem}[Universal fixed-bundle zero-locus obstruction]
+For EVERY smooth projective original X,
+every algebraic rank-r vector bundle V and
+ANY alpha-dependent algebraic section
+$s_\alpha\in H^0(X,V)$ with regular
+codimension-r zero scheme,
+the TRUE Chow and canonical Betti classes obey
+\[
+ \boxed{
+ [Z(s_\alpha)]_{CH}=c_r^{CH}(V),
+ \qquad
+ \mathrm{cl}^{can}_X[Z(s_\alpha)]
+        =c_r^{Betti}(V),
+ }                                                     \tag{8}
+\]
+INDEPENDENT of alpha.
+For nonregular sections, the localized
+top-Chern cycle pushed to X is likewise
+$c_r(V)$. Thus the alpha-dependent
+algebraic differential cocycle,
+merely used as a variable section of
+a fixed bundle followed by polynomial
+Rees folding, does NOT generate new
+Hodge-dependent native Chow directions.
+\end{theorem}
+\begin{proof}
+The refined Gysin intersection of
+the graph of a section of V and the
+zero section computes the localized
+Euler/top Chern class.
+A regular section gives its
+fundamental zero-scheme cycle; its
+Chow class is c_r(V) cap [X].
+For nonregular sections, proper
+pushforward of the localized
+top Chern class still equals
+c_r(V) cap [X].
+The bundle V is fixed,
+so its Chow and Betti Chern
+classes cannot vary with alpha.
+This applies to the actual graph
+and to its normal-cone Rees fold.
+\end{proof}
+
+\section{ALL-X geometric source-visibility theorem for higher primitive Hodge inputs}
+The same algebraic fold construction admits a
+quantitative ORIGINAL-X test of whether a born
+center can detect the prescribed primitive
+Hodge class. This is a typed calculation about
+the actual center and its normal geometry,
+not a new hypothesis added to alpha.
+
+Let $i:Z\hookrightarrow X$ be ANY smooth
+codimension-c algebraic fold center.
+Write $N=N_{Z/X}$, with algebraic normal
+projection $\pi:N\to Z$. The total
+normal-cone Rees family maps naturally
+to the ORIGINAL X.
+
+\begin{theorem}[True special-fiber alpha restriction and native source pairing]
+For EVERY original X,p,alpha and every
+actual smooth regular center Z, the
+true algebraic de Rham pullback of the
+alpha-selected cocycle to the t=0
+normal world is
+\[
+ \boxed{
+ \alpha|_N=\pi^*(i^*\alpha).
+ }                                                     \tag{10}
+\]
+This holds at the cohomology level under
+the canonical algebraic de Rham/Betti
+comparison and already at the level of
+the ordinary functorial pullback of
+Cech differential cocycles.
+If $\dim_{\mathbb C}Z<p$, then
+\[
+ \boxed{\alpha|_N=0\quad
+                \text{for EVERY }\alpha\in H^{2p}(X).}
+                                                               \tag{11}
+\]
+In particular additional projective
+normal directions of ANY dimension
+do not alter the NATURAL pullback
+$\pi_m^*i^*\alpha$ to
+$Y_m=P_Z(N\oplus O^{m+1})$;
+if $i^*\alpha=0$, this
+particular transported target is zero
+for EVERY m>=0.
+
+If $p\le d/2$ and
+$\beta\in CH^{p-c}(Z)_{\mathbb Q}$
+is any genuine algebraic source on Z,
+then its true original-X pushforward
+$i_*\beta\in CH^p(X)_{\mathbb Q}$
+has the exact polarized target coupling
+\[
+ \boxed{
+ \int_X\alpha\,
+          \mathrm{cl}^{can}_X(i_*\beta)\,
+          h^{d-2p}
+ =\int_Z i^*\alpha\,
+          \mathrm{cl}^{can}_Z(\beta)\,
+          (i^*h)^{d-2p}.
+ }                                                     \tag{12}
+\]
+Thus centers with $i^*\alpha=0$
+give identically ZERO such source
+couplings, even though the fold itself
+has arbitrarily many algebraic
+exceptional and projective classes.
+\end{theorem}
+\begin{proof}
+The actual inclusion of the normal
+fiber N in the Rees deformation,
+followed by the structure morphism
+to X, factors as $N\xrightarrow{\pi}
+Z\xrightarrow{i}X$. Functorial
+pullback of algebraic differential
+cocycles and the algebraic
+de Rham-to-Betti comparison give
+(10) identically. The vector bundle
+N is homotopy equivalent to Z,
+so its rational Betti cohomology
+is $\pi^*H^*(Z)$; dimension
+forces $H^{2p}(Z)=0$ when
+$\dim Z<p$, proving (11).
+The projective normal projection
+likewise factors through Z.
+
+For (12), use the ACTUAL proper
+algebraic pushforward cycle-class
+comparison and the Gysin
+projection formula:
+$\alpha\smile i_*\mathrm{cl}(\beta)
+=i_*(i^*\alpha\smile\mathrm{cl}(\beta))$.
+Multiply by the ample class power
+and integrate over X and Z,
+respectively. All degrees match
+because $\dim Z=d-c$ and
+$\deg_{\rm codim}
+(i^*\alpha\,\beta\,h_Z^{d-2p})
+=p+(p-c)+(d-2p)=d-c$.
+This is an exact all-X calculation.
+\end{proof}
+
+\begin{corollary}[Primitive Hodge sources cannot be born from ONLY ample-power centers]
+Suppose $p\le d/2$ and alpha is
+a prescribed NONZERO rational primitive
+Hodge $(p,p)$ class,
+$h^{d-2p+1}\smile\alpha=0$.
+For ANY algebraic source of the pure
+ample-complete-intersection
+form $z=c\,h^p$,
+its actual polarized pairing is
+\[
+ \boxed{
+ \int_X \alpha\,\mathrm{cl}^{can}(z)\,
+         h^{d-2p}
+     =c\int_X\alpha\,h^{d-p}=0.
+ }                                                     \tag{13}
+\]
+A nonzero primitive alpha itself has
+strictly nonzero primitive self-pairing
+by the true Hodge--Riemann relations,
+so a system of fold centers whose
+native original-X Chow outputs
+remain within $\mathbb Q h^p$
+cannot generate its source direction,
+regardless of the number or size
+of the additional fold dimensions.
+The obstruction is SPECIFIC to those
+ample-power source classes, not to
+all nonabelian algebraic centers.
+\end{corollary}
+\begin{proof}
+Since $p\ge1$,
+$h^{d-p}=h^{p-1}h^{d-2p+1}$.
+The primitive relation therefore
+annihilates the integral in (13).
+The strict primitive Hodge--Riemann
+pairing for alpha rules out
+alpha itself being a rational
+multiple of $h^p$.
+The statement concerns the TRUE
+canonical Chow image of the
+specified fold sources, and does
+not require any postulated
+target cycle.
+\end{proof}
+
+\section{Exact outcome of this arbitrary-X route}
+We have produced an ACTUAL finite algebraic
+differential source from EVERY rational
+Hodge alpha without a supplied Chow class;
+we have translated the SAME nonlinear
+dimension fold to an ALL-p algebraic
+logarithmic residue and local K-symbol;
+and we have proved (8), a direct
+countertest to the tempting source
+construction using only variable
+forms in a fixed bundle.
+
+The positive missing arrow is precisely
+an INDEPENDENT construction from the
+alpha-indexed filtered algebraic
+differential cocycle to a NEW
+algebraic vector bundle/regular ideal
+whose logarithmic K-residue has
+canonical Betti class alpha.
+Equation (8) rules out one
+specific fixed-bundle implementation,
+not the GST geometric program.
+Nothing here equates purity
+of a Hodge decomposition with an
+actual original-X Chow class
+without such a source construction.
+\end{document}

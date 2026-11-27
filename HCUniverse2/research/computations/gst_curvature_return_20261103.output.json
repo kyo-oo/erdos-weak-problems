@@ -1,0 +1,199 @@
+{
+  "arithmetic": {
+    "all_passed": true,
+    "assertions": 21,
+    "boundary_rows": [
+      [
+        4,
+        2,
+        2,
+        true
+      ],
+      [
+        4,
+        2,
+        3,
+        false
+      ],
+      [
+        4,
+        1,
+        1,
+        true
+      ],
+      [
+        4,
+        1,
+        2,
+        false
+      ]
+    ],
+    "checks": [
+      "raw_degree_six",
+      "normalized_retraction",
+      "idempotent_projector",
+      "remainder_return_zero",
+      "split_ranks",
+      "composite_degree_thirty",
+      "normalized_composition",
+      "cycle_pullback_comparison",
+      "cycle_transfer_comparison",
+      "source_image_(1, 0)",
+      "source_image_(0, 1)",
+      "source_image_(1, 1)",
+      "source_image_(0, 0)",
+      "boundary_solutions_same_betti",
+      "boundary_solutions_distinct_cycles",
+      "nonzero_nullifier_has_no_transfer",
+      "degree_zero_is_not_a_retraction",
+      "boundary_threshold_(4, 2, 2)",
+      "boundary_threshold_(4, 2, 3)",
+      "boundary_threshold_(4, 1, 1)",
+      "boundary_threshold_(4, 1, 2)"
+    ],
+    "composite_raw_transfer": [
+      [
+        "20",
+        "-10",
+        "10",
+        "0"
+      ],
+      [
+        "-15",
+        "15",
+        "15",
+        "0"
+      ]
+    ],
+    "cycle_image_rows": [
+      [
+        [
+          1,
+          0
+        ],
+        true,
+        true
+      ],
+      [
+        [
+          0,
+          1
+        ],
+        false,
+        false
+      ],
+      [
+        [
+          1,
+          1
+        ],
+        false,
+        false
+      ],
+      [
+        [
+          0,
+          0
+        ],
+        true,
+        true
+      ]
+    ],
+    "nullifier_rank_pair": [
+      0,
+      1
+    ],
+    "projector": [
+      [
+        "2/3",
+        "-1/3",
+        "1/3"
+      ],
+      [
+        "-1/2",
+        "1/2",
+        "1/2"
+      ],
+      [
+        "1/6",
+        "1/6",
+        "5/6"
+      ]
+    ],
+    "returned_boundary_cycles": [
+      [
+        [
+          "2"
+        ],
+        [
+          "0"
+        ]
+      ],
+      [
+        [
+          "2"
+        ],
+        [
+          "1"
+        ]
+      ]
+    ],
+    "scope": "One exact non-diagonal split-transfer fixture, a degree-thirty composition, a deficient source-image fixture with distinct nullhomologous cycles, the nonzero-nullifier incompatibility, and four projective-space boundary controls. No universal source-existence or geometric theorem is tested."
+  },
+  "static": {
+    "import_acyclic": true,
+    "new_theorems": {
+      "GSTCausalFoldDefect.lean": [
+        "boundary_combination_return",
+        "boundary_solution_difference_nullhomologous",
+        "foldReturn_projector_idempotent",
+        "foldReturn_remainder_killed",
+        "foldTransfer_composite",
+        "fold_cycle_image_iff",
+        "fold_pullback_injective",
+        "normalizedFoldReturn_composite",
+        "normalizedFoldReturn_pullback",
+        "projective_fold_nullifier_zero",
+        "projective_fold_retains_nonzero",
+        "transferred_cycle_class"
+      ],
+      "GSTSpatialFoldResearch.lean": []
+    },
+    "parsed_import_nodes": 748,
+    "scope": "Lexical/import checks, not Lean compilation or repository-wide semantic proof review",
+    "tex_environments_balanced": true,
+    "theorem_count": 12,
+    "unchanged_lexical_anomalies": [
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "ComparatorSmokeChallenge.lean"
+      },
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "ComparatorSmokeSolution.lean"
+      },
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "GSTLawStackRound40.lean"
+      }
+    ]
+  },
+  "status": "completed",
+  "wolfram_comparison": {
+    "all_shared_tables_match": true,
+    "assertions": 21,
+    "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "raw_roundtrip_verified": true,
+    "shared_keys": [
+      "projector",
+      "composite_raw_transfer",
+      "cycle_image_rows",
+      "returned_boundary_cycles",
+      "nullifier_rank_pair",
+      "boundary_rows"
+    ]
+  }
+}

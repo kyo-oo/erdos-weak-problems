@@ -1,0 +1,502 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[margin=1in]{geometry}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{corollary}[definition]{Corollary}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{remark}[definition]{Remark}
+
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\GST}{\mathrm{GST}}
+\newcommand{\Alg}{\mathcal{A}}
+\newcommand{\Hdg}{\mathcal{H}}
+\newcommand{\Orb}{\mathcal{O}}
+\newcommand{\Addr}{\operatorname{Addr}}
+\newcommand{\Span}{\operatorname{Span}}
+\newcommand{\Tr}{\operatorname{Tr}}
+
+\title{GST Plane Realization Law and the Omniversal No-Ghost Strike}
+\author{HC-PROOF mathematics note}
+\date{5 October 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This note isolates the exact geometric law required by the current GST Hodge
+architecture.  The ambient GST universe is dimension-free and has no intrinsic
+Euclidean metric.  A finite ``plane'' is therefore treated only as an
+observation chart for one branch of the limitless state universe.  The new
+mathematical object is a \emph{common carrier class}: one cohomology class on
+an intrinsic strict-correspondence carrier which is simultaneously the left
+pullback of the source state and the right pullback of the GST branch target.
+From this common class the strict Betti relation is derived, not postulated.
+Finite trace and point-cycle compatibility then convert the relation into a
+genuine cycle-class-natural correspondence action.  Applied to the sheet
+selected by a hypothetical omniversal separator ghost, a single realized
+branch constructs that sheet as an actual algebraic cycle class and yields an
+immediate contradiction.  No finite global rank, $4\times 3$ chart, twelve
+sheet bound, all-target fan, or pre-existing algebraicity of the target sheet
+is used.
+\end{abstract}
+
+\section{Classical target and the ghost normal form}
+
+Let $X/\C$ be smooth projective and fix $p\ge 0$.  Put
+\[
+  \Hdg_p := H^{2p}(X,\Q)\cap H^{p,p}(X),
+  \qquad
+  \Alg_p := \im\bigl(\cl_p: Z^p(X)_{\Q}\to H^{2p}(X,\Q)\bigr).
+\]
+The rational Hodge conjecture in weight $p$ is
+\[
+  \Alg_p = \Hdg_p.
+\]
+Choose a rational basis $(e_i)_{i\in I_p}$ of $\Hdg_p$.
+
+\begin{definition}[Basis separator]
+A basis separator at $j\in I_p$ is a rational linear functional
+\[
+  S:H^{2p}(X,\Q)\longrightarrow \Q
+\]
+such that
+\[
+  S(\cl_p Z)=0\quad\text{for every }Z\in Z^p(X)_{\Q},
+  \qquad
+  S(e_j)\ne 0.
+\]
+\end{definition}
+
+The current formalization proves that failure of the Stage--2G Hodge target is
+equivalent to existence of such a separator.  It also sends $S$ to a completed
+limitless probe $\Gamma_S$ satisfying
+\[
+ \langle \Addr_p(\alpha),\Gamma_S\rangle=S(\alpha),
+ \qquad
+ \Gamma_S\ne0,
+\]
+while every verified native geometric program state pairs to zero with
+$\Gamma_S$.
+
+\section{The limitless branch selected by a ghost}
+
+Let $a\in\Hdg_p$ be a nonzero genuine algebraic Hodge seed,
+\[
+  a=\cl_p(Z_a),\qquad a\ne0.
+\]
+Choose a live coordinate $i\in I_p$ and write
+\[
+  c:=a_i\ne0.
+\]
+For the sheet $j$ detected by the ghost, the rank-one GST branch satisfies
+\[
+  E_{ij}(a)=c\,e_j. \tag{2.1}
+\]
+This is an internal statement in the unrestricted Hodge multiplicity fiber;
+there is no finite global bound on $I_p$.
+
+\begin{definition}[Ghost-adaptive branch]
+The ghost-adaptive branch attached to $(a,i,j)$ is the GST causal event
+\[
+   a\rightsquigarrow \beta_j,
+   \qquad
+   \beta_j:=E_{ij}(a)=c\,e_j.
+\]
+\end{definition}
+
+The three historical GST sectors may give different causal presentations of
+the same state $\beta_j$.  The argument below needs only one sector in which
+the branch admits a genuine geometric realization.
+
+\section{Planes are observation charts, not dimensions}
+
+A GST plane is not an affine or Euclidean plane.  It is a finite observation
+chart of a branch in a dimension-free state universe.  Accordingly no metric,
+angle, Euclidean dimension, or rectangular shape is used in the derivation.
+The only data retained are incidence, branch source and target, survival of a
+nonzero coefficient, and coherence under recoordination.
+
+If $\Pi$ and $\Pi'$ are two finite charts of the same live packet, a
+recoordination equivalence changes only the presentation.  The intrinsic Hodge
+sheet and native state represented by the packet remain unchanged.  Thus any
+geometric law obtained from the intrinsic carrier is chart-independent.
+
+\section{The common-carrier formulation of the missing law}
+
+Let
+\[
+  X \xleftarrow{\,\ell\,} K \xrightarrow{\,r\,} X
+\]
+be a strict bi-finite algebraic correspondence.  Its analytification produces
+one intrinsic carrier cohomology group
+\[
+  H^{2p}(K_{\mathrm{an}},\Q)
+\]
+and canonical pullbacks
+\[
+  \ell^*,r^*:H^{2p}(X,\Q)\longrightarrow H^{2p}(K_{\mathrm{an}},\Q).
+\]
+
+\begin{definition}[Common plane class]
+A \emph{common plane class} for the GST branch
+$a\rightsquigarrow\beta_j$ is a class
+\[
+  \omega\in H^{2p}(K_{\mathrm{an}},\Q)
+\]
+with
+\[
+  \ell^*(a)=\omega, \tag{4.1}
+\]
+\[
+  r^*(\beta_j)=\omega. \tag{4.2}
+\]
+\end{definition}
+
+Geometrically, $\omega$ is the branch itself viewed on the intrinsic carrier:
+the source and target are two faces of one carrier state.  This is the formal
+counterpart of observing one GST branch through a finite plane without making
+the plane ontological.
+
+\begin{theorem}[GST Plane Realization Law]
+Assume the ghost-adaptive branch $a\rightsquigarrow\beta_j$ admits a strict
+bi-finite carrier $K$ and a common plane class $\omega$.  Then the intrinsic
+Betti relation holds:
+\[
+  \ell^*(a)=r^*(\beta_j). \tag{PR}
+\]
+\end{theorem}
+
+\begin{proof}
+By the source-face law (4.1),
+\[
+  \ell^*(a)=\omega.
+\]
+By the target-face law (4.2),
+\[
+  r^*(\beta_j)=\omega.
+\]
+Therefore
+\[
+  \ell^*(a)=\omega=r^*(\beta_j),
+\]
+which is exactly (PR).
+\end{proof}
+
+\begin{remark}[Where the genuinely new geometry lives]
+The theorem above does not claim that every abstract GST event automatically
+produces an algebraic correspondence.  The genuine remaining geometric
+existence problem is to construct, for the ghost-adaptive branch, a strict
+carrier $K$ and common class $\omega$ from GST branch/plane/coherence geometry
+without using a prior algebraic cycle representing $e_j$.  Once those data are
+constructed, the relation (PR) is a theorem rather than an operator-action
+axiom.
+\end{remark}
+
+\section{Finite trace converts relation into action}
+
+Assume the right leg has a nonzero finite Betti trace
+\[
+  T_r:H^{2p}(K_{\mathrm{an}},\Q)\longrightarrow H^{2p}(X,\Q)
+\]
+normalized so that
+\[
+  T_r\circ r^*=\operatorname{id}. \tag{5.1}
+\]
+Define the strict push--pull
+\[
+  K_*:=T_r\circ\ell^*.
+\]
+
+\begin{lemma}[Relation determines the target]
+Under (PR) and (5.1),
+\[
+  K_*(a)=\beta_j=c\,e_j.
+\]
+\end{lemma}
+
+\begin{proof}
+Using (PR),
+\[
+  K_*(a)
+  =T_r\ell^*(a)
+  =T_r r^*(\beta_j)
+  =\beta_j.
+\]
+Equation (2.1) gives $\beta_j=c e_j$.
+\end{proof}
+
+This is the key noncircular point: the operator identity is derived from the
+common-carrier relation and right-trace injectivity/right-inversion.  It is not
+stored as an independent action equation.
+
+\section{Native realization and normalization}
+
+Assume point-cycle compatibility for the strict correspondence, hence the
+exact native/cohomological square
+\[
+  \cl_p(K_{\mathrm{cyc}}Z)=K_*(\cl_p Z) \tag{6.1}
+\]
+for every native cycle $Z$.
+
+Apply (6.1) to the source cycle $Z_a$:
+\[
+ \cl_p(K_{\mathrm{cyc}}Z_a)
+ =K_*(a)
+ =c e_j.
+\]
+Since $c\ne0$, define
+\[
+  Z_j:=c^{-1}K_{\mathrm{cyc}}Z_a.
+\]
+Then
+\[
+\begin{aligned}
+  \cl_p(Z_j)
+  &=c^{-1}\cl_p(K_{\mathrm{cyc}}Z_a)\\
+  &=c^{-1}(c e_j)\\
+  &=e_j.
+\end{aligned}
+\tag{6.2}
+\]
+
+\begin{proposition}[Plane strike constructs the detected sheet]
+A surviving native source together with one ghost-adaptive common-class plane
+realization produces a genuine native cycle $Z_j$ with
+\[
+  \cl_p(Z_j)=e_j.
+\]
+\end{proposition}
+
+\section{Ghost extinction}
+
+Let $S$ be the basis separator that selected $j$.  Since $Z_j$ is a genuine
+native cycle,
+\[
+  S(\cl_p Z_j)=0. \tag{7.1}
+\]
+Using (6.2),
+\[
+  S(e_j)=0. \tag{7.2}
+\]
+But the separator definition gives
+\[
+  S(e_j)\ne0. \tag{7.3}
+\]
+Thus
+\[
+  \bot.
+\]
+
+\begin{theorem}[Ghost-adaptive GST plane strike]
+Let $E$ be an omniversal separator ghost.  Suppose there exists
+\begin{enumerate}[label=(\roman*)]
+  \item one nonzero synchronized native/Hodge seed $a=\cl_p(Z_a)$ in the
+        ghost's weight;
+  \item one live source coordinate $i$ of $a$ with coefficient $c\ne0$;
+  \item one GST branch $a\rightsquigarrow E_{ij}(a)=c e_j$ to the sheet $j$
+        detected by $E$;
+  \item one strict bi-finite carrier of that branch with finite right trace and
+        point-cycle compatibility;
+  \item one common plane class $\omega$ satisfying the source-face and
+        target-face equations (4.1)--(4.2).
+\end{enumerate}
+Then $E$ is impossible.
+\end{theorem}
+
+\begin{proof}
+The Plane Realization Law gives the intrinsic Betti relation.  The finite trace
+derives the target action.  Native/cohomological naturality and normalization
+construct $Z_j$ with $\cl_p(Z_j)=e_j$.  The separator simultaneously annihilates
+$\cl_p(Z_j)$ and detects $e_j$, contradiction.
+\end{proof}
+
+\section{Global no-ghost theorem}
+
+\begin{definition}[Ghost-adaptive plane completeness]
+GST is \emph{ghost-adaptively plane complete} for $(X,H)$ if every hypothetical
+omniversal separator ghost admits the five data in the preceding theorem.
+\end{definition}
+
+\begin{theorem}[Omniversal no-ghost consequence]
+Ghost-adaptive plane completeness implies
+\[
+  \operatorname{IsEmpty}(\text{OmniversalSeparatorGhost}).
+\]
+Consequently the Stage--2G rational Hodge statement holds.
+\end{theorem}
+
+\begin{proof}
+If a ghost $E$ existed, ghost-adaptive plane completeness would provide one
+plane strike for $E$.  The preceding theorem gives a contradiction.  Therefore
+no ghost exists.  The already established equivalence
+\[
+  \text{Stage--2G Hodge}
+  \iff
+  \text{no omniversal separator ghost}
+\]
+then gives the Hodge statement.
+\end{proof}
+
+\section{Mirror sectors and recoordination}
+
+The proof does not require a separate realization for every historical sector.
+If the same branch state $\beta_j$ is presented in GST$+$, ALT$-$, or NULL,
+any one sector admitting a strict common-class realization suffices.  A stronger
+mirror-complete theorem may assert that recoordination or sector reflection
+preserves the common carrier class.  Such a theorem would make geometric
+realizability sector-independent, but it is an upgrade of the existence law,
+not a replacement for the no-ghost target.
+
+Likewise a finite rectangular observation shape is never a global rank bound.
+The intrinsic multiplicity index $j\in I_p$ lives in the unrestricted fibered
+address universe.  Equal-cardinality finite charts only re-present the active
+packet, and recoordination preserves its intrinsic sheet.
+
+\section{A carrier constructed before choosing the target}
+
+Let $f:X\to X$ be an actual finite native endomorphism whose transported
+point map is continuous for the specified analytification.  Its transposed
+graph is a strict carrier
+\[
+  K_f=\{(f(x),x):x\in X\},\qquad \ell=f,\quad r=\operatorname{id}.
+\]
+This carrier uses neither a target sheet nor an algebraic representative of
+that sheet.  The analytic map $s(x)=(f(x),x)$ is inverse to the right carrier
+projection in \emph{both} directions.  For the second direction, a carrier
+point comes from a genuine scheme point of the transposed graph; its first
+coordinate is therefore $f$ of its second coordinate.  This is an actual
+carrier-coherence proof, rather than a stored coherence premise.
+
+\begin{theorem}[Exact native graph carrier]
+The section induces a degree-one right Betti trace $T=s^*$.  At every degree,
+\[
+  T r^*=\operatorname{id},\qquad r^*T=\operatorname{id},
+  \qquad \operatorname{id}-r^*T=0,
+  \qquad T\ell^*=f^*.
+\]
+Consequently the carrier transfer obstruction is identically zero and
+\[
+  \ell^*(a)=r^*(\beta)\quad\Longleftrightarrow\quad f^*(a)=\beta.
+\]
+\end{theorem}
+
+\begin{proof}
+Apply the singular-chain functor, its cochain dual and cohomology to the two
+inverse identities for $r$ and $s$.  They give the two inverse identities for
+$r^*$ and $s^*$.  The carrier residual therefore vanishes.  Moreover
+$\ell\circ s=f$, so cohomological functoriality gives $s^*\ell^*=f^*$.
+Applying $s^*$ to a proposed face equality proves its forward implication;
+the inverse identity $r^*s^*=\operatorname{id}$ proves the converse.
+\end{proof}
+
+This construction proves geometric carrier coherence for the native graph
+family.  To realize the specified GST branch by this family, one must still
+construct a finite native $f$ and compute $f^*(a)=c e_j$, and prove its native
+point-incidence compatibility.  Neither statement follows from the graph
+inverse identities, and neither is assumed as a new completeness law here.
+
+\begin{theorem}[Detected mismatch for every compatible carrier]
+For a hypothetical basis separator $S$, every strict carrier $K$ with finite
+trace and native point-cycle compatibility satisfies
+\[
+  S\bigl(K_*a-c e_j\bigr)=-c\,S(e_j)\ne0.
+\]
+This conclusion requires no common-plane packet or target-cycle construction.
+\end{theorem}
+
+\begin{proof}
+Native point compatibility extends by the compact point normal form to
+$K_*\cl(Z_a)=\cl(K_{\mathrm{cyc}}Z_a)$.  The separator kills the right side,
+so $S(K_*a)=0$.  The GST branch computation gives $E_{ij}(a)=c e_j$.
+Subtract and apply linearity.  The product is nonzero because the selected
+source coordinate is live and the separator detects the selected sheet.
+\end{proof}
+
+Thus zero carrier residual does not establish the prescribed target action.
+The strengthened Lean packet-emptiness proof now uses this exact mismatch
+directly, without passing through the Hodge conclusion or the normalized
+target-cycle construction.  The unconditional Branch-Packet Plane Realization
+Law remains a construction to be proved; the graph-carrier theorem above is
+not a proof of that universal law.
+
+\section{Noncircularity audit}
+
+The following facts are explicitly \emph{not} assumed in the Plane Realization
+Law:
+\begin{enumerate}[label=(\alph*)]
+  \item no cycle $Z_j$ with $\cl_p(Z_j)=e_j$ is assumed;
+  \item no surjectivity of the cycle-class map is assumed;
+  \item no cohomological operator equation $K_*(a)=c e_j$ is assumed;
+  \item no global matrix-unit correspondence family is assumed;
+  \item no finite global Hodge rank is assumed.
+\end{enumerate}
+The new geometric existence datum is instead the common carrier state $\omega$.
+The action equation and target cycle are derived from it.
+
+\section{Lean translation map}
+
+The intended Lean translation is direct:
+\[
+\begin{array}{rcl}
+  a &\leftrightarrow& \texttt{NativeHodgeOrbitSeed.hodge},\\
+  Z_a &\leftrightarrow& \texttt{NativeHodgeOrbitSeed.cycle},\\
+  e_j &\leftrightarrow& \texttt{classicalHodgeBasis ... E.sheet},\\
+  K &\leftrightarrow& \texttt{SchemeBiFiniteClosedCorrespondence},\\
+  \omega &\leftrightarrow& \texttt{CarrierCohomology ... K (2*p)},\\
+  \ell^* &\leftrightarrow& \texttt{leftCohomologyPullback},\\
+  r^* &\leftrightarrow& \texttt{rightCohomologyPullback},\\
+  (PR) &\leftrightarrow& \texttt{BettiRelated},\\
+  T_r &\leftrightarrow& \texttt{RightFiniteBettiTrace},\\
+  \cl(K_{\mathrm{cyc}}Z_a)=K_*(a)
+    &\leftrightarrow& \texttt{RealizedCorrespondenceExpr.cycleClass_natural}.
+\end{array}
+\]
+The Lean file accompanying this note introduces a common-class plane packet,
+derives a \texttt{StrictRelationEdgePacket} from its two face equations, and
+then reuses the existing omniversal ghost-plane strike and branch-closure
+machinery.
+
+\section{Final theorem spine}
+
+The mathematical proof reduces to the following chain:
+\[
+\boxed{
+\begin{array}{c}
+\neg\mathrm{Hodge}\\
+\Downarrow\\
+\text{nonzero omniversal separator ghost }E\\
+\Downarrow\\
+\text{surviving native seed }a=\cl(Z_a)\\
+\Downarrow\\
+\text{GST branch }a\rightsquigarrow c e_j,\;c\ne0\\
+\Downarrow\\
+\text{common-class plane realization }(K,\omega)\\
+\Downarrow\\
+\ell^*a=r^*(c e_j)\\
+\Downarrow\\
+K_*a=c e_j\\
+\Downarrow\\
+\exists Z_j,\;\cl(Z_j)=e_j\\
+\Downarrow\\
+S(e_j)=0\text{ and }S(e_j)\ne0\\
+\Downarrow\\
+\bot\\
+\Downarrow\\
+\mathrm{Hodge}.
+\end{array}}
+\]
+
+The sole new geometric construction problem is therefore sharply isolated:
+construct the strict carrier and common class for the ghost-adaptive GST branch
+from the dimension-free branch/plane/coherence geometry, without using a prior
+cycle representative of the target sheet.
+
+\end{document}

@@ -1,0 +1,222 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\title{Original-X GST source expansion by all divisor monomials and exact Chow rank minors}
+\date{11 November 2026}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\begin{document}
+\maketitle
+
+\section{Immutable input and genuine construction on arbitrary original X}
+
+Let $X$ be \emph{any} smooth connected projective variety over $\mathbb C$
+of dimension $d\ge2$, and let $1\le p\le d-1$.
+Take an actual rational divisor basis
+$D_1,\ldots,D_\rho\in CH^1(X)_{\mathbb Q}$
+for the Neron--Severi group, $\rho=\rho(X)\ge1$.
+This is independent of an arbitrary prescribed rational Hodge class
+$\alpha\in W_p(X)$: we do not choose any cycle representing $\alpha$.
+
+Let $I_p=\{\mu\in\mathbb N^\rho:|\mu|=p\}$ and
+$I_{d-p}=\{\nu\in\mathbb N^\rho:|\nu|=d-p\}$.
+These are FINITE indexing sets of genuinely constructed
+codimension-$p$ and codimension-$(d-p)$ Chow monomials:
+\[
+Z_\mu=D_1^{\mu_1}\cdots D_\rho^{\mu_\rho}
+\in CH^p(X)_{\mathbb Q},
+\qquad
+Y_\nu^{\mathrm{raw}}=D_1^{\nu_1}\cdots D_\rho^{\nu_\rho}
+\in CH^{d-p}(X)_{\mathbb Q}.
+\]
+Define the actual rational \emph{intersection matrix}
+\[
+B_{\nu\mu}:=\deg_X(Y_\nu^{\mathrm{raw}}\cdot Z_\mu)
+=\int_X cl_X(Y_\nu^{\mathrm{raw}})\cup cl_X(Z_\mu)
+\in\mathbb Q.
+\]
+The equality uses the standard compatibility of rational Chow degree
+with canonical rational Betti integration. Let
+$t=t_p(X)=\operatorname{rank}_{\mathbb Q}B$.
+
+\begin{theorem}[Unconditional original-X rank-adaptive algebraic GST source birth]
+For every original $(X,p)$ above there exist \emph{actual}
+rational Chow classes
+\[
+Z_0,\ldots,Z_{t-1}\in CH^p(X)_{\mathbb Q},\qquad
+Y_0,\ldots,Y_{t-1}\in CH^{d-p}(X)_{\mathbb Q}
+\]
+with $\deg_X(Y_iZ_j)=\delta_{ij}$.
+Consequently:
+\begin{enumerate}
+\item the $t$ rational Betti Hodge classes $cl_X(Z_i)$ are linearly independent;
+\item genuine codimension-$d$ correspondences
+$E_{ij}=pr_1^*Y_i\cdot pr_2^*Z_j$
+form a full rational Chow matrix-unit subalgebra on the SAME original $X$;
+\item for every rational matrix $F\in M_t(\mathbb Q)$,
+$\Gamma_F=\sum_{i,j}F_{ji}E_{ij}$ is a genuine rational original-$X$
+Chow correspondence with canonical Betti action agreeing with $F$
+on the constructed algebraic $t$-channel sector;
+\item for every prescribed \emph{arbitrary} rational Hodge
+$\alpha\in W_p(X)$, the explicit true Chow cycle
+\[
+\boxed{Z_{\alpha,\mathrm{mon}}
+=\sum_{i=0}^{t-1}
+\left(\int_X\alpha\cup cl_X(Y_i)\right)Z_i}
+\]
+has the genuine canonical Betti class
+\[
+cl_X(Z_{\alpha,\mathrm{mon}})
+=\Pi_{\mathrm{mon},X,p}^H\alpha,
+\quad
+\Pi_{\mathrm{mon},X,p}^H(\beta)
+=\sum_i\left(\int_X\beta\cup cl_X(Y_i)\right)cl_X(Z_i).
+\]
+\end{enumerate}
+The projection is idempotent and has image the
+$t$-dimensional algebraic source sector, WITHOUT
+assuming the universal Hodge conjecture.
+\end{theorem}
+
+\begin{proof}
+Since $B$ is a finite rational matrix of rank $t$, field
+linear algebra supplies selected rows $\nu_0,\ldots,\nu_{t-1}$
+and columns $\mu_0,\ldots,\mu_{t-1}$ whose square
+intersection minor $C_{ij}=B_{\nu_i,\mu_j}$ has
+$\det C\ne0$. Define $Z_j=Z_{\mu_j}$ and
+\[
+Y_i=\sum_{k=0}^{t-1}(C^{-1})_{ik}
+Y_{\nu_k}^{\mathrm{raw}}\in CH^{d-p}(X)_{\mathbb Q}.
+\]
+Then $\deg_X(Y_iZ_j)=(C^{-1}C)_{ij}=\delta_{ij}$.
+These are actual finite rational combinations of
+genuine divisor monomials on original $X$.
+The canonical Betti intersection equality and
+the projection formula imply all claims (1)--(4),
+and the true Chow composition gives
+$E_{ij}\circ E_{k\ell}=\delta_{i\ell}E_{kj}$.
+No element of $W_p(X)$ is postulated to be algebraic.
+\end{proof}
+
+\section{Strict new source rank beyond the previously fixed-ample construction}
+
+Fix an ample $h\in NS(X)_\mathbb Q$. For
+$1\le p\le d-1$ the $\rho$ codimension-$p$
+cycles $D_i h^{p-1}$ and the $\rho$
+complementary cycles $D_i h^{d-p-1}$ have
+the nondegenerate Hodge-index Gram matrix
+$\deg(D_iD_j h^{d-2})$.
+Each is a linear combination of the monomial source lists above.
+Therefore the FULL actual monomial intersection rank satisfies
+\[
+\boxed{t_p(X)\ge\rho(X)}
+\qquad(1\le p\le d-1).
+\]
+The inequality can be STRICT, so the new algebraic
+GST source has more genuinely independent geometric
+channels than the Picard rank, without any target-cycle
+surjectivity hypothesis.
+
+\section{Native GST U/J/M/curvature correspondence at every original-X weight}
+
+If $t_p(X)\ge12$, label twelve of the newly
+constructed dual source pairs by the
+owner's ACTUAL GST Wave-I cells
+$(i,k)\in\mathrm{Fin}(4)\times\mathrm{Fin}(3)$.
+Choose any original arithmetic Navigation state $R$.
+Using the owner's same physical source
+\[
+F_R=U+J+M+\mathbf1_{\operatorname{Navigation}(R)}[J,M],
+\]
+define
+\[
+\boxed{
+\Gamma_{R,X,p}
+=\sum_{i,j=0}^{11}(F_R)_{ji}
+ \,pr_1^*Y_i\cdot pr_2^*Z_j
+\in CH^d(X\times X)_{\mathbb Q}.
+}
+\]
+This is a \emph{true} original-$X$ rational
+Chow correspondence regardless of the original
+Picard rank (which may be as small as TWO).
+The original GST wave/Chow intertwining,
+canonical Betti naturality, nonzero Krylov
+determinant in BOTH true Navigation states,
+and finite rational polynomial original-$X$
+source return are then exactly the statements
+proved in
+\texttt{GST\_originalX\_physical\_navigation\_GST\_wave\_polynomial\_return\_2026\_11\_11.tex},
+with the monomial sources substituted for
+the previous fixed-h basis.
+
+In particular for an arbitrary prescribed alpha,
+the exact inverse-$K_R$ polynomial in the true
+GST fold constructs the actual Chow representative
+of the new twelve-source projection, and its
+Hankel detector is a genuine rational linear
+combination of complementary monomial cycles.
+
+\section{A sharp example discriminating Picard rank from source rank}
+
+Let the smooth projective original variety be
+\[
+X_n=\mathbb P^n\times\mathbb P^n,\quad d=2n,\quad p=n.
+\]
+It has $\rho(X_n)=2$ with divisor classes $H_1,H_2$.
+The $n+1$ ACTUAL algebraic source monomials
+\[
+Z_i=H_1^i H_2^{n-i},\quad i=0,\ldots,n
+\]
+pair with the same complementary monomials by
+\[
+\deg(Z_iZ_j)=\delta_{i+j,n}.
+\]
+Thus the genuine complementary intersection
+matrix is anti-diagonal, with
+\[
+t_n(X_n)=n+1,\qquad
+\det B=(-1)^{n(n+1)/2}\ne0.
+\]
+For $n=11$, the same original $X_{11}$ has
+**Picard rank two but twelve independent
+middle-degree algebraic Chow/Betti directions**.
+The owner's original $12$-cell balanced $U/J/M/[J,M]$
+therefore has a genuinely constructed original-$X$
+Chow correspondence at $p=11$,
+even though the old $\rho(X)\ge12$ condition FAILS.
+
+Wolfram exact integer computations independently
+verified the intersection matrix and ranks for
+$n=1,2,3,4,5,11,12,15$.
+This example does not substitute a special-family
+proof for the universal goal; it demonstrates a
+strict improvement in the general all-original-$X$
+rank-minor theorem above.
+
+\section{Precisely what this DOES NOT force}
+
+The rank $t_p(X)$ is the rank of a selected
+intersection pairing of \emph{known actual
+algebraic divisor products}. It is a guaranteed
+dimension of a subspace of the genuine algebraic
+image $A_p(X)$, and is NOT universally
+$\dim_\mathbb Q W_p(X)$.
+
+In particular the residual
+$\alpha-cl_X(Z_{\alpha,\mathrm{mon}})$
+is annihilated by the $t$ constructed
+dual detectors $Y_i$ but need not be
+annihilated by every raw divisor monomial:
+those remaining raw detectors may be
+linearly dependent only when restricted to
+the divisor-product source span, not on all
+of $W_p(X)$. This essential distinction
+prevents a circular promotion of numerical
+matrix rank into universal Hodge surjectivity.
+
+The exact unresolved universal source-birth
+question remains an actual codimension-$p$
+algebraic cycle with independent coupling
+to the prescribed residual on arbitrary X,
+especially for higher primitive Hodge classes.
+\end{document}

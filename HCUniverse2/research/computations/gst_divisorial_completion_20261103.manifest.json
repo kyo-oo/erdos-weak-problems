@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-DIVISORIAL-COMPLETION-20261103",
+  "repository": {
+    "commit": "e40e328b80d3ede78202234054891b1e56edf0b3",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_divisorial_completion_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64"
+  },
+  "mathematics": {
+    "assertion_tested": "Five rectangular curvature matrices plus zero handles; one rational Hodge-correction fixture with a non-Hodge rational lift, denominator-three boundary and degree-six return; five smooth-ample restriction controls in the quadric middle-coordinate model and a singular-boundary line-return control. No finite fixture proves source existence, weight degeneration, GAGA or the universal Hodge claim.",
+    "coefficient_domain": "Q and exact Gaussian rational splitting; Fraction elimination versus Wolfram exact linear algebra",
+    "conventions": "Column vectors. Curvature pure space has both vertical coefficients in ker L. Boundary line denominator N and generic transfer degree d are distinct.",
+    "inputs": [
+      "research/experiments/gst_divisorial_completion_checks.py",
+      "research/derivations/GST_curvature_exact_sequence_divisorial_completion_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_divisorial_completion_wolfram_20261103.wl",
+      "research/computations/gst_divisorial_completion_wolfram_20261103.output.json",
+      "research/experiments/gst_divisorial_completion_run.py",
+      "GSTCausalFoldDefect.lean",
+      "GSTSpatialFoldResearch.lean",
+      "research/experiments/gst_curvature_return_checks.py",
+      "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+      "research/derivations/GST_curvature_projective_retraction_boundary_2026_11_03.tex",
+      "research/records/gst_divisorial_completion_sources_20261103.json"
+    ],
+    "bounds": {
+      "curvature_matrices": 5,
+      "zero_handle_control": 1,
+      "hodge_lift_fixture": "one 4 by 7 Gysin-coordinate map, with rational lift outside the designated type subspace",
+      "line_denominator": 3,
+      "generic_degree": 6,
+      "ample_targets": 5,
+      "quadric_control": "two middle ruling coordinates; geometric return is a hand proof"
+    },
+    "non_claims": [
+      "No finite computation proves algebraic existence, weight degeneration or GAGA",
+      "No Lean compilation or CI dispatch",
+      "No universal prescribed-alpha nullifying open",
+      "No independent referee or historical novelty claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T13:54:42.549049+00:00",
+    "runtime_seconds": 1.9442111289999957,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_divisorial_completion_20261103.output.json",
+      "sha256": "c6ab9f0d5c7e8f5bd4b1f610dc9143cef657cc99cc5131f5f1f923fc153800d5",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Fraction kernel/rank and rational inverse versus Wolfram NullSpace/MatrixRank/Inverse",
+    "All six shared tables agree with complete reparsed remote raw output",
+    "Zero/full-rank curvature, non-Hodge raw lift, each omitted-denominator failure, primitive survival controls",
+    "Changed Lean proof-escape scan, import graph and LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Geometry remains a self-reviewed hand proof",
+    "Lean drafts uncompiled",
+    "Provider global-symbol diagnostics retained; all 41 actual assertions passed",
+    "Remote runtime and process exit status not exposed",
+    "Universal source construction unresolved"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_divisorial_completion_checks.py",
+      "sha256": "158d0d40463c7f0952c71462d36d7a34850fb4648e48149000d2196219d9da3c",
+      "sha256_after": "158d0d40463c7f0952c71462d36d7a34850fb4648e48149000d2196219d9da3c"
+    },
+    {
+      "path": "research/derivations/GST_curvature_exact_sequence_divisorial_completion_2026_11_03.tex",
+      "sha256": "a8a8a29879ecb6a16e8ebfa5e59f3e8181abd787c09139e25e7826271c93e70d",
+      "sha256_after": "a8a8a29879ecb6a16e8ebfa5e59f3e8181abd787c09139e25e7826271c93e70d"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_divisorial_completion_wolfram_20261103.wl",
+      "sha256": "8d979cd15a7f8b910300d00eed0a3b7d92b092373e0866dce72c825cccc3784b",
+      "sha256_after": "8d979cd15a7f8b910300d00eed0a3b7d92b092373e0866dce72c825cccc3784b"
+    },
+    {
+      "path": "research/computations/gst_divisorial_completion_wolfram_20261103.output.json",
+      "sha256": "9c96440c7a819dd7cf7a41fb5575d1646b90a0ca8a7319fd6683c8ac88a6db77",
+      "sha256_after": "9c96440c7a819dd7cf7a41fb5575d1646b90a0ca8a7319fd6683c8ac88a6db77"
+    },
+    {
+      "path": "research/experiments/gst_divisorial_completion_run.py",
+      "sha256": "86a5b00e33bd842de3e80de55063193f01b6652bd9784174a1ce53fc0c448237",
+      "sha256_after": "86a5b00e33bd842de3e80de55063193f01b6652bd9784174a1ce53fc0c448237"
+    },
+    {
+      "path": "GSTCausalFoldDefect.lean",
+      "sha256": "89b31f88eaeb90a06160685a24dbf1f48f631d1597005fbc0d0760cec3f5c81a",
+      "sha256_after": "89b31f88eaeb90a06160685a24dbf1f48f631d1597005fbc0d0760cec3f5c81a"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "d7542d724b45c7551373b4180d8e3daebd7827267cadf3680dbdfbc988fb4e46",
+      "sha256_after": "d7542d724b45c7551373b4180d8e3daebd7827267cadf3680dbdfbc988fb4e46"
+    },
+    {
+      "path": "research/experiments/gst_curvature_return_checks.py",
+      "sha256": "d4e050fed61f047ce1b8d3bae1e3c2c86342738460070d74cc91223dc24d22f4",
+      "sha256_after": "d4e050fed61f047ce1b8d3bae1e3c2c86342738460070d74cc91223dc24d22f4"
+    },
+    {
+      "path": "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+      "sha256": "eaf521312071399efdb76fe1f95f9e0251b95bb0d260b2a3a33a2c2c7548beda",
+      "sha256_after": "eaf521312071399efdb76fe1f95f9e0251b95bb0d260b2a3a33a2c2c7548beda"
+    },
+    {
+      "path": "research/derivations/GST_curvature_projective_retraction_boundary_2026_11_03.tex",
+      "sha256": "9cc924970766ead86558bfb93e2523cbdc5439fb8c4f2702148d9e6cef86c18b",
+      "sha256_after": "9cc924970766ead86558bfb93e2523cbdc5439fb8c4f2702148d9e6cef86c18b"
+    },
+    {
+      "path": "research/records/gst_divisorial_completion_sources_20261103.json",
+      "sha256": "7dc1190d54f7a1ab3f0413ae95adadd8ee2b0ed497f2bcd58472f21e924c9832",
+      "sha256_after": "7dc1190d54f7a1ab3f0413ae95adadd8ee2b0ed497f2bcd58472f21e924c9832"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_divisorial_completion_checks.py",
+    "research/derivations/GST_curvature_exact_sequence_divisorial_completion_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_divisorial_completion_wolfram_20261103.wl",
+    "research/computations/gst_divisorial_completion_wolfram_20261103.output.json",
+    "research/experiments/gst_divisorial_completion_run.py",
+    "GSTCausalFoldDefect.lean",
+    "GSTSpatialFoldResearch.lean",
+    "research/experiments/gst_curvature_return_checks.py",
+    "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+    "research/derivations/GST_curvature_projective_retraction_boundary_2026_11_03.tex",
+    "research/records/gst_divisorial_completion_sources_20261103.json"
+  ],
+  "declared_results": [
+    "research/computations/gst_divisorial_completion_20261103.output.json"
+  ]
+}

@@ -1,0 +1,174 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.81in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\PD}{\operatorname{PD}}
+\newcommand{\Mass}{\mathbf M}
+\newcommand{\vol}{\operatorname{Vol}}
+\title{GST exact three-sector geometry on arbitrary original X: prescribed-alpha survival, balanced topological carriers, harmonic positive-world transport and strict primitive calibration gap}
+\date{13 November 2026}
+\begin{document}\maketitle
+
+\noindent\textbf{Fixed objective.}
+Given EVERY smooth projective complex variety \(X\), EVERY \(p\), and EVERY prescribed rational \((p,p)\) Hodge class \(\alpha\), produce an actual \(Z_\alpha\in CH^p(X)_\Q\) with canonical rational Betti class \(\alpha\), without assuming such a cycle on any source world. The calculations below directly continue the alpha-first \emph{original-X smooth determinantal carrier} theorem in \texttt{GST\_20261113\_alpha\_first\_ThomPorteous\_Nworld\_survival\_calibration\_attack.tex}; they are not a replacement special example. Here the owner three sectors are implemented as creation, destruction and the null-cancelled hyperplane carrier, with the original \(N\)-cohomology channels retained as internal weights. This is a candidate geometric interpretation, NOT a claim that the owner's original wave \(U,J,M,[J,M]\) has already been transported into scheme-theoretic Chow.
+
+\section{Exactly balanced creation, destruction, and survivor for ALL \(p\)}
+Let \(X\) be smooth projective complex of dimension \(d\), \(1\le p\le d\), \(h=c_1(L)\) ample, and \(\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)\) prescribed. Construct, WITHOUT an algebraic target representative, a smooth complex rank \(r\ge\max(p,d)\) bundle \(E_\alpha\) and integer \(m>0\) with \(\operatorname{ch}(E_\alpha)=r+m\alpha\); write
+\[
+\gamma=c_p(E_\alpha)=(-1)^{p-1}(p-1)!\,m\alpha,\qquad
+A=\binom rp.
+\]
+For any \(M\ge1\), the topological Thom--Porteous pseudocycles \(D_{jM}\) on the SAME original \(X\), \(1\le j\le p+1\), have exact rational Betti class
+\[
+\operatorname{PD}[D_{jM}]=\gamma + A(jM)^ph^p,                    \tag{1}
+\]
+since the lower rational Chern classes of \(E_\alpha\) vanish. Each \([D_{jM}]\) is an integer homology cycle constructed from a generic smooth complex-linear bundle morphism; it is not asserted to be a complex algebraic cycle. Define
+\[
+\lambda_j=(-1)^{j-1}\binom{p+1}{j},\qquad
+P_M=\sum_{\substack{1\le j\le p+1\\j\ {\rm odd}}}\binom{p+1}{j}[D_{jM}],\qquad
+N_M=\sum_{\substack{1\le j\le p+1\\j\ {\rm even}}}\binom{p+1}{j}[D_{jM}],
+\]
+and the positive integer
+\[
+B_p=\sum_{j\ {\rm odd}}\binom{p+1}{j}j^p
+=\sum_{j\ {\rm even}}\binom{p+1}{j}j^p.                         \tag{2}
+\]
+The equality in (2) is exact: \(\sum_{j=1}^{p+1}(-1)^{j-1}\binom{p+1}{j}j^p=0\).
+
+\begin{theorem}[ALL-\(p\), ALL-\(X\), exact tri-sector source law]
+\[
+\boxed{
+\begin{aligned}
+\operatorname{PD}P_M&=2^p\gamma+A B_p M^p h^p,\\
+\operatorname{PD}N_M&=(2^p-1)\gamma+A B_p M^p h^p,\\
+\operatorname{PD}(P_M-N_M)&=\gamma=(-1)^{p-1}(p-1)!\,m\alpha.
+\end{aligned}}
+\tag{3}
+\]
+Thus the \emph{null} hyperplane source \(A B_pM^ph^p\) is exactly identical in both worlds, while the survivor is exactly the prescribed rational Hodge \(\alpha\) up to a known, nonzero integer scalar. The theorem constructs actual original-X integer pseudocycles and holds for every \(M\), without any supplied Chow class.
+\end{theorem}
+\begin{proof}
+For \(p\ge1\), the binomial theorem gives
+\(\sum_{j\ {\rm odd}}\binom{p+1}j=2^p\) and
+\(\sum_{j\ {\rm even},\,j\ge1}\binom{p+1}j=2^p-1\).
+The \((p+1)\)-st finite difference of the degree-\(p\) polynomial \(t^p\), including \(t=0\), is zero; the \(t=0\) term vanishes because \(p\ge1\). Hence the two weighted \(p\)-th moments agree. Insert (1) into the two sums. No asymptotic or finite sample is used.
+\end{proof}
+
+\begin{proposition}[Exact primitive volume balance]
+Let \(q=d-p\) and \(\omega\) be a K\"ahler form with class \(h\), and \(\Omega_q=\omega^q/q!\). If \(\int_X\alpha h^q=0\), as holds for every Lefschetz-primitive class with \(2p\le d\), then
+\[
+\boxed{P_M(\Omega_q)=N_M(\Omega_q)=
+A B_p M^p\int_X\frac{h^d}{q!}.}                              \tag{4}
+\]
+This is an exact equality of the actual geometric periods of the integral homology carriers, not an assertion that the carriers themselves are calibrated.
+\end{proposition}
+\begin{proof}
+Pair (3) with \(h^q/q!\). The \(\gamma\)-contribution is zero by \(\gamma\propto\alpha\). If \(h^{d-2p+1}\alpha=0\) in the primitive range \(2p\le d\), then \(h^{d-p}\alpha=0\) by multiplying with \(h^{p-1}\), hence the period vanishes.
+\end{proof}
+
+\noindent\textbf{Literal three-root two-dimensional coding in \(p=2\).}
+\[
+P_M=3D_M+D_{3M},\quad N_M=3D_{2M},\quad
+\operatorname{PD}(P_M-N_M)=\gamma=-m\alpha,
+\]
+\[
+\operatorname{PD}P_M=4\gamma+12\binom r2M^2h^2,\qquad
+\operatorname{PD}N_M=3\gamma+12\binom r2M^2h^2.
+\]
+The original physical root sectors can be assigned the signed \(P\), \(N\), and shared null class; this is a \emph{proposed typed geometric realization} and not a theorem asserting their original operator action on Chow.
+
+\section{An absolute calibration no-go THAT IS SPECIFIC TO PRIMITIVE SOURCES}
+The repository modules \texttt{GSTNIntegralCalibrationGap.lean},
+\texttt{GSTNCurrentCalibrationCompatibility.lean} and
+\texttt{GSTUniversalExternalProductCurrentSurgery.lean} test vanishing
+single-current \emph{absolute} K\"ahler calibration defect. On a nonzero primitive class this requirement can be ruled out uniformly, even WITHOUT considering algebraicity.
+
+\begin{theorem}[Strict quantitative fixed-class gap for one signed current]
+Let \(0\ne\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)\) with
+\(\int_X\alpha\,h^{d-p}=0\). Let \(a\) be its REAL harmonic representative and \(q=d-p\). For every closed real finite-mass \(2q\)-current \(T\) representing the Poincar\'e dual of \(\alpha\), set
+\(\delta_{\rm signed}(T)=\Mass(T)-T(\Omega_q)\).
+Then
+\[
+\boxed{\delta_{\rm signed}(T)=\Mass(T)\ge
+\frac{\int_Xa\wedge *a}{\|*a\|_{\mathrm{comass},\infty}}>0.}   \tag{5}
+\]
+In particular no fixed-nonzero-primitive-class sequence of \emph{signed} integral (or real) currents can have this single-current absolute defect tend to zero. The result does NOT disprove algebraicity; differences of genuine algebraic cycles may have zero ample degree and still be nonzero.
+\end{theorem}
+\begin{proof}
+Its closed class fixes \(T(\Omega_q)=\int_X\alpha h^q/q!=0\).
+For the smooth real \(2q\)-form \(\beta=*a\),
+\[
+T(\beta)=\int_X\alpha\wedge *a=\int_X a\wedge *a=\|a\|_{L^2}^2>0.
+\]
+The defining comass duality for the geometric mass of a current gives
+\(|T(\beta)|\le\Mass(T)\|\beta\|_{\mathrm{comass},\infty}\).
+The denominator is positive and finite on compact \(X\). The constant is uniform over ALL currents in the prescribed class.
+\end{proof}
+\noindent\textbf{Consequent change of proof mechanism:} positive creation and destruction must be calibrated separately; their SIGNED difference need not and generally cannot be calibrated by a single oriented K\"ahler form.
+
+\section{Alpha-sensitive positive worlds on the EXACT SAME original \(X\)}
+The three-world topological source law (3) has genuinely integral current carriers, but not necessarily complex tangents. Conversely, Hodge purity supplies smooth positive currents with the very same individual cohomology classes, but they are diffuse, not necessarily integer rectifiable.
+
+\begin{theorem}[Exact simultaneous positive-current realization at all sufficiently large \(M\)]
+Assume \(\alpha\) is a rational Hodge class. Let \(g\) be the real closed \((p,p)\) harmonic form representing \(\gamma\) and put \(C_M=A B_pM^p\). For all sufficiently large \(M\), the smooth closed \((p,p)\)-forms
+\[
+\boxed{R_M^+=2^p g+C_M\omega^p,\qquad
+R_M^-=(2^p-1)g+C_M\omega^p}                                \tag{6}
+\]
+are strictly positive in the complex-current sense, represent exactly the real Betti classes of \(P_M\) and \(N_M\), and satisfy
+\[
+[R_M^+-R_M^-]=[g]=\gamma.                                    \tag{7}
+\]
+If \(\int_X\alpha h^q=0\), their K\"ahler trace masses agree exactly, by (4). The objects \(R_M^\pm\) are genuine positive CLOSED currents on the original \(X\); their diffuse smooth densities do NOT make them integral rectifiable \(2q\)-cycles or algebraic subvarieties.
+\end{theorem}
+\begin{proof}
+K\"ahler positivity is strict for \(\omega^p\): on the compact unit bundle of decomposable complex \(p\)-planes it has a uniform positive lower bound, and \(g\) has a uniform finite bound. In the finite-dimensional cone of strongly positive \((p,p)\)-forms, \(\omega^p\) is interior; choosing \(C_M>2^p K(g,\omega)\) makes both expressions positive. Their closedness and precise cohomology are immediate from harmonicity of \(g\) and (3). The exact primitive period balance is (4). For \(p\ge1\), a nonzero smooth \((p,p)\)-form defines a diffuse \(2q\)-current whose mass density is absolutely continuous with respect to \(2d\)-dimensional volume; it is not a concentrated integer rectifiable \(2q\)-current merely by virtue of positivity.
+\end{proof}
+
+\section{Constructed geometric boundary transport between the two source types}
+Let \(\mathcal P_M,\mathcal N_M\) denote the de Rham currents Poincar\'e dual to the actual topological determinantal cycles \(P_M,N_M\). Define closed degree-\(2p\) currents
+\(D_M^+=\mathcal P_M-R_M^+\) and
+\(D_M^-=\mathcal N_M-R_M^-\).
+By (3) and (6), each has ZERO de Rham cohomology class. Let \(G\) be the Green operator for the Hodge Laplacian on differential-form currents, \(\delta=d^*\), with the harmless choice of a fixed K\"ahler metric.
+
+\begin{theorem}[Exact two-sided original-X GST boundary correction]
+The explicit degree-\((2p-1)\) distributional currents
+\[
+\boxed{B_M^\pm=\delta G D_M^\pm}
+\]
+satisfy
+\[
+\boxed{dB_M^+=\mathcal P_M-R_M^+,\qquad
+dB_M^-=\mathcal N_M-R_M^-.}                                \tag{8}
+\]
+Hence BOTH source worlds are moved, in their exact real homology classes, from genuine integer-rectifiable determinant geometry to positive Hodge-type geometric currents, with survivor class \(\gamma\) preserved identically.
+\end{theorem}
+\begin{proof}
+The Hodge decomposition extends to distributional currents on the compact smooth manifold:
+\(D=H D+d\delta GD+\delta dGD\).
+Because \(D_M^\pm\) are closed, \(dGD=GdD=0\); because their de Rham classes vanish, their harmonic projections \(HD=0\). Thus \(D_M^\pm=d(\delta GD_M^\pm)\).
+\end{proof}
+
+\noindent\textbf{Crucial typed fact:} the boundary currents \(B_M^\pm\) are REAL and not guaranteed integral, or positive, or algebraic. Thus this genuinely constructed geometric homotopy does NOT automatically produce a positive \emph{integral rectifiable} limit, which is the type needed for an analytic cycle theorem and Chow.
+
+\section{Executed algebraization attack and precise theorem interface}
+One natural experiment is to couple the two worlds by replacing the independent high-twist determinant maps with maps agreeing away from an ample divisor \(H\). The explicit attempted maps \(\phi_{jM}=s^{jM}\phi_0\) for a section \(s\) of \(L\) share a smooth nonalgebraic carrier away from \(H\), but are rank-deficient throughout \(H\), so the expected-codimension Thom--Porteous hypothesis fails there; smoothing destroys pointwise complex analyticity. This is an actual tested geometry change, not a proof of new Chow sources. A second, independent approach constructed (6)--(8), removing the \emph{positivity} obstruction while preserving both precise topological classes, but it does not remove the \emph{quantized rectifiability} obstruction.
+
+\begin{proposition}[What would actually output the original-X algebraic cycle]
+If for some \(M\) the two prescribed, integral homology classes \([P_M],[N_M]\) admit positive closed \emph{integer rectifiable} currents \(A_M^+,A_M^-\) with those exact classes and with zero individual K\"ahler calibration defects, then their supports are positive holomorphic chains (by the classical rectifiable-positive-current theorem); projective algebraization gives actual algebraic codimension-\(p\) cycles \(Z_M^\pm\). The \emph{actual original-X} rational Chow class
+\[
+\boxed{Z_\alpha=\frac{(-1)^{p-1}}{(p-1)!\,m}(Z_M^+-Z_M^-)}
+\]
+has \(\mathrm{cl}_X^{\mathrm{can}}(Z_\alpha)=\alpha\).
+\end{proposition}
+\noindent\textbf{No circular promotion.} The last geometric input is not asserted or renamed a theorem: for arbitrary \(X,p,\alpha\) constructing those positive \emph{integer rectifiable} representatives is at least as strong as original Chow algebraicity. More precisely, (3)--(8) show that finite creation/destruction/survival, real positive-current realization and an explicit real homological Green-transport are ALL universally available. What is not derived is a source-sensitive \emph{integral} rectifiable and complex-tangent realization of the same two carriers, or an equivalent native algebraic \(K_0\) jump. Existing GST \texttt{GSTNIntegralCalibrationGap.lean} has a finite arithmetic warning; this proof adds an all-original-\(X\) geometric primitive gap and a two-sided repair.
+
+\section{Exact independent symbolic checks}
+For \(p=1,\dots,12\), Mathematica computes the exact positive and negative moment equality, the binomial source multiplicities \(2^p,2^p-1\), and residual 1. The checked shared positive volume moments begin \(B_1=2,B_2=12,B_3=112,B_4=1440,B_5=23616,B_6=471296,B_7=11085824,B_8=300349440\). These are exact integer checks; the universal argument is the displayed binomial/finite-difference proof, not extrapolation. The exact reproducible source is the companion Mathematica \texttt{.wl} in \texttt{research/computations}.
+
+\noindent\textbf{Audit scope:} All results concern arbitrary original \(X\), original prescribed \(\alpha\), actual topological integer currents and real positive currents. No global universal Chow source has been produced in this derivation, so the rational Hodge conjecture and \texttt{NativeGSTSingleFoldOrbitLaw} are not claimed proved; there is no new Lean kernel verification. The proof intentionally preserves the distinction between an analytic \((p,p)\) form, positive closed current, integer rectifiable complex cycle, and Chow class.
+\end{document}

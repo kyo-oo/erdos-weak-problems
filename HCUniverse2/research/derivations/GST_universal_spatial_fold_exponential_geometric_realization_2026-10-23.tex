@@ -1,0 +1,1161 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Universal Spatial Fold: Exponential Causal-Chern Geometry and a Genuine Algebraic-Realization Dichotomy}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+The mathematical object is the entire emergent-dimensional folded space,
+not a finite family of numerical examples and not the purity of its
+Hodge numbers alone. We derive, on EVERY original smooth projective
+complex X and for EVERY rational cohomological grade p, an actual
+topological complex projective-space fold whose full Segre pushforward
+spectrum is the exponential of a prescribed rational class alpha.
+This is an unconditional universal fold-existence and fold-recovery theorem.
+We then prove that a compatible algebraic realization of this
+specific spatial fold gives an actual canonical rational Chow cycle
+on the ORIGINAL X. A two-fold plus/minus variant turns this into
+an exact geometric algebraizability equivalence: the existence of
+two algebraic spatial folds with one prescribed full Chern-character
+comparison is equivalent, class-by-class, to classical rational
+Hodge algebraicity. This gives a mathematically typed proof/disproof
+criterion formulated in terms of the geometry and topology of the
+whole fold. It does not replace an algebraic-realization existence
+theorem with a purity assumption.
+\end{abstract}
+
+\section{Original-X target and spatial ontology}
+Fix ANY nonempty smooth projective complex X of dimension d,
+a grade 1<=p<=d, and an arbitrary rational Hodge class
+\[
+ \alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X).
+\]
+The input consists only of actual X, p, alpha and the existing
+dimensionless GST carrier. The target of the eventual
+algebraic realization is a genuine cycle
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+$\operatorname{cl}_X^{can}(Z_\alpha)=\alpha$.
+The GST space itself has no metric, intrinsic complex dimension
+or fixed topology; complex dimension, a tautological line
+and the projective geometry of each fold enter through
+an actual realization. We do NOT turn a higher causal cell
+index into a projective dimension.
+
+\section{Actual topological spatial fold exists without any algebraic witness}
+\begin{lemma}[Pure rational topological bundle creation, all X and p]
+For every finite CW complex X and every rational class
+$\alpha\in H^{2p}(X,\mathbb Q)$ there exist an integer
+$m>0$, an honest finite-rank complex \emph{topological}
+vector bundle E on X of rank r>=p+1, and a rational equality
+\[
+ \boxed{\operatorname{ch}_{top}(E)=r+m\alpha.}          \tag{1}
+\]
+All strictly positive Chern-character components other
+than grade p vanish. No integrable complex or algebraic
+bundle structure is asserted.
+\end{lemma}
+\begin{proof}
+Rational topological K-theory gives the isomorphism
+$\operatorname{ch}:K^0(X)\otimes\mathbb Q
+ \longrightarrow H^{even}(X,\mathbb Q)$.
+Choose a virtual rational class v mapping to alpha and
+multiply by a positive integer m to obtain an integral
+K-class represented by $[E_0]-[F_0]$.
+Since X is compact, F_0 admits a finite-dimensional
+complementary complex bundle F_0' satisfying
+$F_0\oplus F_0'\cong\underline{\mathbb C}^{N}$
+as topological bundles (embed F_0 into a trivial Hermitian
+bundle and take its orthogonal complement).
+Then $E=E_0\oplus F_0'$ is an honest bundle with
+$[E]-[\underline{\mathbb C}^{N}]=m v$ in K-theory.
+Consequently $\operatorname{ch}(E)=\operatorname{rk}(E)+m\alpha$.
+Add trivial summands to ensure r>=p+1 without changing
+any positive Chern-character component.
+A smooth projective X has finite CW homotopy type.
+\end{proof}
+
+Let $\pi:Y=P_X(E)\to X$ be the genuine locally trivial
+topological bundle of 1-dimensional \emph{quotients} of E,
+with fiber $\mathbb{CP}^{r-1}$, and let
+$\xi=c_1(O_Y(1))\in H^2(Y,\mathbb Z)$.
+The orientation of the projective fiber defines the
+Gysin map $\pi_*:H^{2r-2+2k}(Y,\mathbb Q)
+   \longrightarrow H^{2k}(X,\mathbb Q)$.
+The quotient convention has the projective ring equation
+$\xi^r-c_1(E)\xi^{r-1}+\cdots+(-1)^r c_r(E)=0$.
+It holds in topology without holomorphicity.
+
+\begin{theorem}[ALL-DIMENSION GST SPATIAL EXPONENTIAL FOLD LAW]
+For every arbitrary original X, prescribed p, alpha, rank r,
+and actual topological projective fold just constructed,
+in the finite cohomology ring $H^{even}(X,\mathbb Q)[[t]]$,
+\[
+ \boxed{
+ \mathcal S_E(t):=\sum_{k\ge0}
+       \pi_*(\xi^{r-1+k})t^k
+   =\frac{1}{c(E,-t)}
+   =\exp\!\bigl(m(p-1)!\,\alpha\,t^p\bigr).
+ }                                                        \tag{2}
+\]
+Here $c(E,-t)=\sum_{j\ge0}(-1)^j c_j(E)t^j$.
+The equation is valid at EVERY finite fiber rank and
+EVERY original cohomology grade; power series truncate
+automatically beyond the dimension of X.
+In particular,
+\[
+ \boxed{
+   \pi_*(\xi^{r-1+p})=m(p-1)!\alpha, \qquad
+   \pi_*(\xi^{r-1+kp})=
+       \frac{\bigl(m(p-1)!\bigr)^k}{k!}\alpha^k,
+ }                                                        \tag{3}
+\]
+for $k>=0$ with $kp<=d$, and all remaining positive-degree
+fold-pushforward components not divisible by p vanish.
+\end{theorem}
+\begin{proof}
+By the topological projective-bundle theorem for quotient
+lines, pushforward of $\xi^{r-1+k}$ is the kth complete
+symmetric polynomial in the Chern roots $x_i$ of E.
+The splitting principle gives
+\[
+ \mathcal S_E(t)=\prod_{i=1}^r (1-x_i t)^{-1}.
+\]
+Hence, in rational cohomology,
+\[
+ \log\mathcal S_E(t)=\sum_{\ell\ge1}
+     \frac{\sum_i x_i^\ell}{\ell}t^\ell
+ =\sum_{\ell\ge1}(\ell-1)!
+       \operatorname{ch}_\ell(E)t^\ell.                    \tag{4}
+\]
+Substituting (1) annihilates every positive component
+except $\ell=p$ and yields (2).
+Coefficient extraction from the exact formal exponential
+proves (3), including the $k=0$ constant fiber integral.
+There is no approximation, numerical cut-off, conjectural
+Hodge input or algebraic-source assumption in this proof.
+\end{proof}
+
+
+\section{The SAME alpha-selected bundle produces an original-world geometric degeneracy center}
+A crucial geometric consequence of the entire fold law is a
+literal target-selected source located on the ORIGINAL
+$X$, not only a characteristic class upstairs on its
+spatial projective bundle. The construction uses the
+SAME honest topological $E_\alpha$ from (1); it does
+not start with a supplied algebraic Chow cycle, a CM
+test variety, or an independently selected incidence component.
+The input is exactly $(X,p,\alpha)$.
+
+\begin{theorem}[All original $X,p,\alpha$: simultaneous genuine topological incidence and spatial-fold return]
+Let $X$ be ANY connected smooth projective complex
+$d$-fold, $1\le p\le d$, and
+$\alpha\in H^{2p}(X,\mathbb Q)$ arbitrary.
+Choose the honest finite-rank COMPLEX TOPOLOGICAL
+bundle $E_\alpha$ supplied by (1),
+with
+$\operatorname{ch}(E_\alpha)
+=r+m\alpha$ and $r\ge p+1$.
+Let $s=r-p+1$.
+
+There exists an actual smooth complex vector-bundle
+homomorphism over ORIGINAL $X$
+\[
+ \boxed{
+ \Phi_\alpha:\underline{\mathbb C}^{\,s}
+                    \longrightarrow E_\alpha
+ }
+\]
+whose rank-determinantal degeneracy locus
+\[
+ \boxed{
+ D_\alpha^{\rm sm}=
+ \{x\in X:\operatorname{rank}_{\mathbb C}
+                         (\Phi_{\alpha,x})<s\}
+ }                                                        \tag{18}
+\]
+is a compact, properly Whitney-stratified,
+cooriented REAL codimension-$2p$
+topological pseudocycle, with top stratum
+smooth, or is empty; a NONZERO corresponding
+Chern class forces nonemptiness, while
+zero Chern class need not force emptiness.
+The deeper rank-drop
+strata have REAL codimension at least
+$4(p+1)$ in X whenever nonempty.
+
+Its honest topological
+fundamental class on the SAME ORIGINAL
+smooth real $2d$-manifold satisfies
+\[
+ \boxed{
+ \operatorname{PD}_X[D_\alpha^{\rm sm}]
+   =c_p^{top}(E_\alpha)
+   =(-1)^{p-1}m(p-1)!\,\alpha .
+ }                                                       \tag{19}
+\]
+On the actual whole topological projective
+spatial fold $Y_\alpha=P_X(E_\alpha)$,
+$\pi:Y_\alpha\to X$ and
+$\xi=c_1(O_{Y_\alpha}(1))$,
+the TWO independent actual geometric
+returns from the SAME $E_\alpha$ agree:
+\[
+ \boxed{
+ \frac{(-1)^{p-1}}{m(p-1)!}
+    \operatorname{PD}_X[D_\alpha^{\rm sm}]
+   =\frac{1}{m(p-1)!}
+        \pi_*(\xi^{r-1+p})
+   =\alpha .
+ }                                                       \tag{20}
+\]
+This is a completed full quantified
+original-$X$ TOPOLOGICAL geometric
+construction (and an honest incidence
+geometry with equations in local smooth
+complex bundle frames), NOT a claim that
+the smooth determinantal locus is
+holomorphic or a complex algebraic
+subvariety on $X$.
+
+For a primitive rational Hodge
+$\alpha$, this construction applies
+without assuming its algebraicity:
+it produces actual geometry with
+the prescribed ORIGINAL-X Betti
+fundamental class, even when that
+class is orthogonal to all currently
+known native Chow sources.
+\end{theorem}
+\begin{proof}
+The bundle $E_\alpha$ is smoothable
+over the original compact smooth
+complex manifold X. Choose a
+Hermitian metric, smooth bundle
+connections and finitely many
+global smooth generating sections
+using a partition of unity.
+The space of smooth maps
+$\operatorname{Hom}_{C^\infty}
+(\underline{\mathbb C}^s,E_\alpha)$
+has a residual subset of sections
+transverse to EACH rank stratum in
+the bundle
+$\operatorname{Hom}_\mathbb C
+(\mathbb C^s,E_{\alpha,x})$.
+Choose any such actual smooth
+complex-linear bundle map
+$\Phi_\alpha$; no holomorphic
+structures have been selected.
+
+The rank-$(s-1)$ determinantal
+stratum in the fiber
+$\operatorname{Hom}_\mathbb C
+(\mathbb C^s,\mathbb C^r)$ has
+complex codimension
+$(r-s+1)(s-(s-1))=p$.
+The rank-$\le s-2$ stratum has
+complex codimension
+$(r-s+2)(s-(s-2))=2(p+1)$.
+Transversality produces the
+stated REAL codimensions and
+canonical complex orientations
+of the normal strata. Their
+closures form an oriented
+Whitney-stratified
+pseudocycle with singular
+part of codimension at least
+$2p+4$ relative to its
+dimension, so it has an
+unambiguous fundamental
+homology class. The
+topological Thom--Porteous
+formula applied to
+$\Phi_\alpha:
+\underline{\mathbb C}^s\to E_\alpha$
+identifies its Poincare dual with
+\[
+ c_{r-s+1}
+     (E_\alpha-\underline{\mathbb C}^s)
+       =c_p(E_\alpha).
+\]
+(The formula is an equality
+of ordinary integral
+cohomology classes for the
+generic complex-bundle
+degeneracy construction,
+not an assertion that the
+chosen smooth sections
+are algebraic.)
+
+Use the splitting-principle
+identity
+\[
+ \log c(E_\alpha,t)
+   =\sum_{j\ge1}
+     (-1)^{j-1}(j-1)!
+         \operatorname{ch}_j(E_\alpha)t^j
+   =(-1)^{p-1}m(p-1)!\alpha\,t^p .
+\]
+The $t^p$ coefficient is
+$c_p(E_\alpha)=
+(-1)^{p-1}m(p-1)!\alpha$.
+This proves (19). The true
+topological projective-bundle
+pushforward equation (3) gives
+$\pi_*\xi^{r-1+p}
+=m(p-1)!\alpha$ on the SAME X.
+Combine these two exact geometric
+identities to obtain (20).
+No rational Chow cycle was
+provided in any construction
+step.
+\end{proof}
+
+\begin{theorem}[Exact SAME-INCIDENCE integrability and algebraic Rees landing]
+For the actual original-$X$ smooth
+matrix $\Phi_\alpha$ of the
+preceding theorem, suppose there
+exists a genuine integrable
+$(0,1)$-operator
+$\bar\partial_{E_\alpha}$ on
+the SAME underlying topological
+bundle and that the SAME smooth
+homomorphism is holomorphic:
+\[
+ \boxed{
+ \bar\partial_{E_\alpha}^{\,2}=0,
+ \qquad
+ \bar\partial_{E_\alpha}
+                \Phi_\alpha=0 .
+ }                                                        \tag{21}
+\]
+Assume its determinantal scheme
+has expected pure codimension p.
+Then the very same local
+$r\times s$ minors defining
+$D_\alpha^{\rm sm}$ become
+holomorphic determinantal
+equations in suitable local
+frames, hence by projective
+GAGA they define a genuine
+algebraic codimension-p
+subscheme $D_\alpha^{alg}$
+of ORIGINAL X. Its real
+Chow source and canonical
+Betti return satisfy
+\[
+ \boxed{
+ [D_\alpha^{alg}]_{CH}
+       =c_p^{CH}(E_\alpha^{alg})
+                 \in CH^p(X)_{\mathbb Q},
+ \quad
+ \mathrm{cl}^{can}_X
+   \left(
+   \frac{(-1)^{p-1}[D_\alpha^{alg}]}
+                    {m(p-1)!}
+   \right)=\alpha .
+ }                                                        \tag{22}
+\]
+This gives a complete, explicit
+ALPHA-SELECTED determinantal
+scheme and genuine original-$X$
+Chow return whenever the same
+fold's integrability equations
+(21) are solved. The algebraic
+Rees deformation of the
+determinantal ideal then creates
+the normal-cone geometry from
+THE SAME MINOR EQUATIONS, not
+an independently chosen center.
+
+Condition (21) is a genuine
+mathematical restriction on the
+SAME $\alpha$-determined smooth
+geometry, not a property
+inferred from Hodge purity.
+It is sufficient for this
+construction, and it is NOT
+asserted to follow for all
+primitive rational Hodge
+classes from the existing
+topological fold laws.
+\end{theorem}
+\begin{proof}
+By Koszul--Malgrange,
+$\bar\partial_{E_\alpha}^2=0$
+is a holomorphic bundle
+structure; GAGA algebraizes
+it over projective X.
+The equation
+$\bar\partial_{E_\alpha}
+\Phi_\alpha=0$ makes the
+smooth bundle map a
+holomorphic morphism
+$\mathcal O_X^s\to E_\alpha^{hol}$.
+Projective GAGA identifies
+this morphism with an actual
+algebraic vector-bundle map,
+whose rank-drop ideal is
+generated by its algebraic
+maximal minors. The expected
+codimension hypothesis lets
+the actual algebraic
+Thom--Porteous formula compute
+the scheme fundamental Chow
+class as $c_p(E_\alpha^{alg})$.
+Canonical Betti
+Chern comparison and (19)
+give (22).
+
+The ideal of maximal minors
+is an honest coherent
+algebraic ideal on X. The
+Rees algebra
+$\bigoplus_{k\ge0}I^k$ and
+the deformation-to-normal-cone
+algebra $\mathcal O_X[t,I/t]$
+therefore produce bona fide
+algebraic blowup/normal-cone
+folds from precisely the same
+alpha-selected matrix.
+The incidence-scheme source
+already exists on X; the
+Rees construction packages
+it with born algebraic
+dimensions and genuine
+Chow pushforward.
+No assertion about smooth
+regular-sequence center
+geometry is made if the
+determinantal ideal has
+non-lci singularities:
+the Thom--Porteous Chow
+formula remains valid in
+expected codimension, while
+the simple exceptional power
+$(-1)^{p-1}b_*E^p=[D]$
+must only be invoked when
+its hypotheses on regular
+centers are satisfied.
+\end{proof}
+
+
+
+\begin{theorem}[Ample-global-generation removal of the extra holomorphic-map hypothesis: exact original-$X$ two-center algebraic fold]
+Fix ANY original smooth projective
+complex $d$-fold $X$, $1\le p\le d$,
+prescribed rational Hodge class
+$\alpha$, and the SAME rank-$r$
+topological bundle $E_\alpha$
+of (1), with
+$\operatorname{ch}_{top}(E_\alpha)
+=r+m\alpha$.
+Assume ONLY that this SAME
+bundle admits an integrable
+complex structure
+$\bar\partial_{E_\alpha}^2=0$;
+do not assume that any
+previously selected smooth
+determinantal map is holomorphic.
+Let $\mathcal E_\alpha$ be the
+resulting ACTUAL algebraic
+rank-$r$ bundle on original X,
+let $H$ be an actual very
+ample algebraic line bundle,
+and set $h=c_1^{CH}(H)$.
+For every sufficiently large
+integer $k$, the ACTUAL
+algebraic bundle
+\[
+ \mathcal E_{\alpha,k}
+       =\mathcal E_\alpha\otimes H^k
+\]
+is globally generated. There
+exist $s=r-p+1$ actual global
+ALGEBRAIC sections inducing
+a generic algebraic map
+\[
+ \phi_{\alpha,k}:
+   \mathcal O_X^{\oplus s}
+           \longrightarrow\mathcal E_{\alpha,k}
+\]
+whose rank-drop determinantal
+scheme $D_{\alpha,k}$
+has pure expected codimension
+$p$. Its genuine Chow
+fundamental class is
+\[
+ \boxed{
+ [D_{\alpha,k}]_{CH}
+          =c_p^{CH}(\mathcal E_{\alpha,k})
+       \in CH^p(X).
+ }                                                    \tag{23}
+\]
+Choose any actual codimension-$p$
+complete intersection of p divisors
+in $|H|$ and denote its Chow
+class $[H^p]_{CH}=h^p$.
+Then the TWO ACTUAL algebraic
+geometric centers create the
+SIGNED original-$X$ Chow class
+\[
+ \boxed{
+ Z_\alpha^{\mathrm{two\text{-}center}}
+ =\frac{(-1)^{p-1}}{m(p-1)!}
+   \left([D_{\alpha,k}]
+     -\binom rp\,k^p[H^p]_{CH}\right)
+          \in CH^p(X)_{\mathbb Q},
+ }                                                    \tag{24}
+\]
+and this has EXACT canonical
+rational Betti class
+\[
+ \boxed{
+  \operatorname{cl}^{can}_X
+       (Z_\alpha^{\mathrm{two\text{-}center}})
+          =\alpha .
+ }                                                    \tag{25}
+\]
+Every born algebraic scheme
+and correction here is given
+by explicit global section
+minors on ORIGINAL X and a
+complete-intersection
+hyperplane scheme. The SAME
+minors define a true
+algebraic deformation-to-normal-cone
+Rees fold. This is a genuine
+same-source geom\-etry-to-Chow
+constructor requiring only the
+single specified integrable
+holomorphic structure on
+$E_\alpha$; it requires NO
+independent holomorphicity
+assumption on the original
+arbitrary smooth map.
+The theorem does NOT claim
+the integrable structure on
+$E_\alpha$ exists for every
+primitive Hodge alpha.
+\end{theorem}
+\begin{proof}
+The integrable $(0,1)$-structure
+and projective GAGA construct
+the actual algebraic
+$\mathcal E_\alpha$.
+For ample H and $k\gg0$,
+Serre's global-generation theorem
+makes $\mathcal E_\alpha\otimes H^k$
+globally generated. Choose finitely
+many global generators and take
+s generic constant-linear
+combinations. The parameterized
+evaluation to the fibers of
+$\operatorname{Hom}(\mathbb C^s,
+\mathcal E_{\alpha,k,x})$ is
+surjective at every x, so
+the generic degeneracy map
+is transverse to the rank
+strata. Its first rank drop
+has expected complex codim
+$r-s+1=p$ and its deeper
+rank drop codimension at least
+$2(p+1)>p$ whenever present.
+By the standard determinantal
+expected-codimension theorem
+(and algebraic Thom--Porteous),
+its pure fundamental Chow
+cycle is the exact
+algebraic $p$th Chern class
+$c_p(\mathcal E_{\alpha,k})$.
+This proves (23), including
+if the determinantal scheme
+has singular deeper strata.
+
+In the ACTUAL Betti cohomology
+of original X, the pure
+Chern-character equation
+$\operatorname{ch}(E_\alpha)
+=r+m\alpha$ implies
+\[
+ \operatorname{cl}^{can}
+   c_j^{CH}(\mathcal E_\alpha)=0
+               \qquad(1\le j<p),
+\quad
+ \operatorname{cl}^{can}
+   c_p^{CH}(\mathcal E_\alpha)
+ =(-1)^{p-1}(p-1)!m\alpha .
+\]
+The exact splitting-principle
+Chern-root shift for a rank-r
+bundle and an algebraic line L
+with $\ell=c_1(L)$ gives
+\[
+ \boxed{
+ c_p(\mathcal E_\alpha\otimes L)
+ =\sum_{j=0}^{p}
+    \binom{r-j}{p-j}
+         c_j(\mathcal E_\alpha)
+         \ell^{p-j}
+       \quad\text{in actual Chow}.
+ }                                                    \tag{26}
+\]
+Take L=H^k, so $\ell=k h$.
+Under the CANONICAL rational
+Betti map, all terms with
+$1\le j<p$ vanish, leaving
+\[
+ \operatorname{cl}^{can}
+   [D_{\alpha,k}]
+ =(-1)^{p-1}(p-1)!m\alpha
+    +\binom rp k^p\,
+       \operatorname{cl}^{can}(h^p).
+\]
+Equation (24) subtracts the
+TRUE algebraic hyperplane
+complete intersection and
+divides by the exact nonzero
+integer normalization.
+Thus (25) holds on original X.
+
+Importantly the identities
+$c_j(\mathcal E_\alpha)=0$
+for j<p were used ONLY in
+rational Betti cohomology,
+NOT asserted in original-X
+Chow: those Chow classes
+can be homologically trivial
+but nonzero. Our correction
+eliminates their Betti
+contributions without making
+a false Chow identity.
+The determinantal ideal is
+ACTUAL algebraic and defines
+the finite Rees algebra
+$\mathcal O_X[t,I/t]$, whose
+proper normal-cone/blowup
+geometry exists whether
+or not the scheme is lci.
+We do NOT apply a
+regular-center exceptional
+power formula to a possibly
+non-lci degeneracy scheme.
+This closes the typed
+geometric and algebraic
+return under the SINGLE
+integrability input.
+\end{proof}
+
+
+\section{The actual complex-geometric return, not a purity assertion}
+\begin{theorem}[Compatible ALGEBRAIC realization gives original-X cycle]
+Suppose the actual topological fold $Y=P_X(E)$ admits
+a compatible smooth projective algebraic realization
+$Y^{alg}$, a projective morphism $\pi^{alg}:Y^{alg}\to X$,
+an isomorphism of topological bundles over X
+$Y^{alg,an}\cong P_X(E)$ preserving fiber orientation,
+and a genuine algebraic line bundle L on $Y^{alg}$
+whose first Betti Chern class corresponds to $\xi$.
+Then the actual original-X Chow cycle
+\[
+ \boxed{
+ Z_\alpha=
+  \frac{1}{m(p-1)!}\,
+  \pi^{alg}_*\!\left(c_1(L)^{r-1+p}\cap[Y^{alg}]\right)
+   \in CH^p(X)_{\mathbb Q}
+ }                                                        \tag{5}
+\]
+has EXACT canonical rational Betti class alpha:
+\[
+ \boxed{\operatorname{cl}_X^{can}(Z_\alpha)=\alpha.}     \tag{6}
+\]
+\end{theorem}
+\begin{proof}
+L is a genuine algebraic line bundle, so its Chern
+power is a true algebraic Chow class on the smooth
+projective total space. The projective proper
+pushforward is a genuine Chow operation, producing
+an original-X cycle of codimension p.
+Naturality of the canonical Betti cycle-class map
+under proper algebraic pushforward, plus the preserved
+topological tautological class and (3), gives
+$\operatorname{cl}_X^{can}(Z_\alpha)
+=(m(p-1)!)^{-1}\pi_*\xi^{r-1+p}=\alpha$.
+Nothing was assumed about an original-X cycle
+representing alpha before constructing Z_alpha.
+\end{proof}
+The hypothesis is \emph{geometric}: the complete
+topological projective fold becomes an algebraic
+complex-geometric spatial realization WITH compatible
+tautological line and proper algebraic base return.
+Merely observing unchanged Hodge numbers does not supply
+those typed pieces. The actual existence of this
+realization for every Hodge alpha is a substantive
+mathematical claim to be proved or disproved, not a
+definition silently inserted into (5).
+
+\section{A mathematically exact universal proof/disproof dichotomy}
+An honest \emph{single} topological E in (1) always
+exists. For a full necessary-and-sufficient geometric
+test, use TWO genuine spatial folds rather than assume
+a chosen topological E admits algebraic realization.
+
+\begin{theorem}[PAIR-FOLD GST GEOMETRIC BIFURCATION, iff]
+For every original smooth projective complex X,
+each p and each rational Hodge alpha, the following
+statements are mathematically equivalent:
+
+(A) There exists a genuine original-X algebraic
+$Z\in CH^p(X)_{\mathbb Q}$ with canonical
+$\operatorname{cl}^{can}_X(Z)=\alpha$.
+
+(B) There exist an integer $m>0$ and two honest algebraic
+vector bundles $E_+,E_-$ on the original X, and their
+two actual algebraic projective-space folds
+$\pi_\pm:Y_\pm=\mathbb P_X(E_\pm)\to X$
+(with tautological algebraic classes $\xi_\pm$),
+such that the exact all-degree geometrical equation holds:
+\[
+ \boxed{
+ \frac{\displaystyle\sum_{k\ge0}
+      (\pi_+)_*(\xi_+^{r_+-1+k})t^k}
+      {\displaystyle\sum_{k\ge0}
+      (\pi_-)_*(\xi_-^{r_--1+k})t^k}
+ =\exp\!\left(m(p-1)!\,\alpha\,t^p\right)
+ \quad\text{in }H^{even}(X,\mathbb Q)[[t]].
+ }                                                        \tag{7}
+\]
+Both denominators have constant term 1, so the ratio
+is intrinsically well-defined. The ranks $r_\pm$
+may be increased by adding trivial summands.
+In (B) it is enough to require the entire ratio
+through positive cohomological degree d.
+
+Moreover if (B) holds, an explicit original-X algebraic
+representative is
+\[
+ \boxed{
+ Z=\frac1m\left[
+ \operatorname{ch}_p^{CH}(E_+)
+   -\operatorname{ch}_p^{CH}(E_-)\right],
+ }                                                        \tag{8}
+\]
+where the algebraic Chern character is a rational
+Chow class; equivalently it is the $t^p$
+coefficient of the logarithm of the algebraic
+Segre-series quotient, divided by $m(p-1)!$.
+\end{theorem}
+\begin{proof}
+(B) implies (A): apply the logarithm to both sides
+of (7). Equation (4) for each algebraic bundle,
+now equally valid in the actual Chow ring, gives
+\[
+ (\log\mathcal S_{E_+}-\log\mathcal S_{E_-})_{t^p}
+ =(p-1)!\bigl(\operatorname{ch}_p(E_+)
+                    -\operatorname{ch}_p(E_-)\bigr)
+ =m(p-1)!\alpha
+\]
+under the canonical rational cycle-class map.
+Divide by $m(p-1)!$ to obtain (8).
+
+(A) implies (B): use the rational algebraic
+Chern-character isomorphism for smooth projective X,
+\[
+ \operatorname{ch}^{CH}:K_0^{alg}(X)_{\mathbb Q}
+          \overset{\sim}{\longrightarrow}
+          \bigoplus_{j=0}^d CH^j(X)_{\mathbb Q}.
+\]
+Select an algebraic rational K0 class v whose ENTIRE
+Chow Chern character is concentrated in grade p
+and equal to Z. Clear denominators by some m>0.
+Because algebraic K0 is the group completion of
+actual algebraic vector bundles on smooth X,
+write $m v=[E_+]-[E_-]$ for honest algebraic
+bundles. The topological Betti Chern character
+of this difference is $m\alpha$ and all other
+positive components vanish. The splitting-principle
+identity (4) applied to both projective bundles
+then proves (7) for all grades simultaneously.
+\end{proof}
+
+\begin{corollary}[Exact geometric reformulation of the all-X target]
+The universal rational Hodge conjecture is
+mathematically equivalent to:
+for ALL original smooth projective X, ALL p and
+ALL rational (p,p) alpha, the paired compatible
+ALGEBRAIC spatial projective folds in (7) exist.
+The topological paired folds exist for EVERY
+rational alpha by rational topological K-theory;
+what must be established in the all-X theorem
+is their compatible projective-algebraic realization.
+A genuine counterexample would be an original
+smooth projective Hodge alpha for which NO such
+algebraic realization pair is possible.
+\end{corollary}
+
+\section{The geometric FOLD INTEGRABILITY equation: a precise all-X local-to-global target}
+
+It is possible to state the exact geometric realization
+criterion as a differential equation on the ORIGINAL X,
+not as an unspecified Chow-source existence postulate.
+For a smooth complex topological bundle E over original X
+let $\bar\partial_E$ be a smooth $(0,1)$ connection:
+\[
+ \bar\partial_E:
+ \mathcal A^{0,q}(X,E)\longrightarrow
+ \mathcal A^{0,q+1}(X,E),\qquad
+ \bar\partial_E(f\,s)=\bar\partial f\otimes s+
+             f\,\bar\partial_Es.
+\]
+Its integrability obstruction is the actual curvature
+component $F_{\bar\partial_E}^{0,2}
+ =\bar\partial_E^2$.
+
+\begin{theorem}[One-fold pure-class integrability implies explicit original-X algebraicity]
+Given the honest topological E_alpha constructed in (1),
+suppose that this SAME smooth bundle admits a
+$(0,1)$-operator satisfying the exact equation
+\[
+ \boxed{\bar\partial_{E_\alpha}^{\,2}=0.}          \tag{8}
+\]
+Then it acquires a holomorphic bundle structure,
+which is algebraic on projective X by GAGA.
+The prescribed original rational Hodge class is
+the canonical Betti image of the actual
+algebraic Chern cycle
+\[
+ \boxed{
+ Z_\alpha=\frac{(-1)^{p-1}}{m(p-1)!}\,
+             c_p^{CH}(E_\alpha)
+       \in CH^p(X)_{\mathbb Q}.
+ }                                                        \tag{9}
+\]
+\end{theorem}
+\begin{proof}
+Koszul--Malgrange integrability identifies an operator
+$\bar\partial_E$ with $\bar\partial_E^2=0$ as a
+holomorphic vector-bundle structure. By GAGA
+it comes from a genuine algebraic vector bundle
+on projective X.
+For any complex bundle the identity
+\[
+ \log c(E,t)=\sum_{j\ge1}(-1)^{j-1}
+                    (j-1)!\operatorname{ch}_j(E)t^j
+                                                               \tag{10}
+\]
+holds rationally by the splitting principle.
+By (1), all positive Chern-character components
+except degree p vanish, hence
+$c_p(E)=(-1)^{p-1}(p-1)!m\alpha$.
+The algebraic $c_p^{CH}(E)$ has precisely
+this canonical Betti class. Equation (9)
+therefore returns alpha on the ORIGINAL X.
+\end{proof}
+
+\begin{theorem}[TWO-FOLD integrability iff, for all original X]
+For any arbitrary original smooth projective X,
+any p and any rational Hodge alpha, the
+following are equivalent:
+
+(1) alpha has a genuine original-X rational Chow
+cycle representative.
+
+(2) There exist m>0, two honest smooth complex
+topological bundles E_+,E_- over X, and
+two genuine $(0,1)$-operators $\bar\partial_+$,
+$\bar\partial_-$ such that
+\[
+ \boxed{
+ \operatorname{ch}_{top}(E_+)
+  -\operatorname{ch}_{top}(E_-)=m\alpha
+ \quad\text{in ALL even cohomological grades},
+ \qquad
+ \bar\partial_+^2=\bar\partial_-^2=0.
+ }                                                        \tag{11}
+\]
+The zero-degree rank difference is zero in (11);
+the ranks may be equalized by adding trivial
+summands and increased arbitrarily, realizing
+the same equation at arbitrarily high spatial
+projective-fiber dimension.
+The explicit reconstructed original-X Chow
+cycle is
+\[
+ \boxed{
+ Z_\alpha=\frac{
+ \operatorname{ch}^{CH}_p(E_+)
+ -\operatorname{ch}^{CH}_p(E_-)}{m}.}              \tag{12}
+\]
+\end{theorem}
+\begin{proof}
+(2) implies (1) by Koszul--Malgrange, GAGA,
+algebraic Chern-character operations and their
+Betti comparison; equation (12) is exact.
+For (1) implies (2), the rational algebraic
+Chern-character isomorphism supplies a genuine
+rational K0 class with only pth Chow component
+equal to the given original-X cycle Z.
+Multiply by m to express it as a difference
+of two honest algebraic vector bundles.
+Their algebraic holomorphic structures have
+square-zero $(0,1)$ connections and the
+full rational Chern character difference is
+$m\,\operatorname{cl}_X^{can}(Z)=m\alpha$.
+Add the same trivial summands to each to
+equalize ranks and allow any further
+finite projective-fiber dimension.
+\end{proof}
+
+Equation (11) is the exact requested
+\emph{two-outcome spatial geometry test}:
+a proof direction is a construction of
+integrable $(0,1)$ realizations for the
+topologically existing pure-class folds
+for ALL (X,p,alpha);
+a disproof direction is a theorem showing
+that at least one actual rational Hodge
+class on some smooth projective original X
+admits NO compatible integrable pair
+satisfying (11). Neither direction
+confuses a harmless change of marked Hodge
+type with the fundamental obstruction
+to geometric algebraic realization.
+
+\section{UNCONDITIONAL HOLomorphic emergent realization after a Stein affine-world fold}
+
+The integrability condition is generally difficult
+\emph{on the compact original X}. The GST picture
+permits a different whole-space fold that changes
+noncompact topology at infinity without changing
+the homotopy type or the original rational cohomology.
+For ANY smooth projective complex X,
+take an actual Jouanolou affine-space torsor
+\[
+  q:J(X)\longrightarrow X,\qquad
+  \text{fibers } \mathbb A_{\mathbb C}^N,\quad
+  J(X)\text{ smooth affine algebraic.}              \tag{13}
+\]
+This fold has a concrete all-X scheme equation:
+choose any projective embedding $X\hookrightarrow\mathbb P^N$,
+and write $D=(\mathbb P^N)^\vee$ for its dual hyperplane space.
+Then
+\[
+ \boxed{
+ J_N(X)=\{(x,H)\in X\times D:\ x\notin H\}.
+ }                                                        \tag{13a}
+\]
+The incidence hypersurface $\{x\in H\}$ is the zero locus
+of a section of the ample product line
+$O_X(1)\boxtimes O_D(1)$; its complement $J_N(X)$ is
+therefore a genuine AFFINE algebraic scheme.
+For each $x$, the fiber is the complement of one hyperplane
+in $D=\mathbb P^N$, hence is $\mathbb A^N$.
+Consequently $J_N(X)$ is a Zariski locally trivial
+affine-space torsor over X, smooth of complex
+dimension $d+N$. By replacing the projective
+embedding with a higher-dimensional embedding,
+N can be arbitrarily large. This is an explicit
+all-dimensional scheme constructor, not merely
+an abstract existence invocation.
+
+There are two complementary exact Hodge signatures.
+Because q is an algebraic affine-space bundle,
+$q^*$ is a full isomorphism of ordinary cohomology MHS.
+If $\mathcal H_{ord}$ records the $(a,b)$ Hodge
+multiplicities of ordinary cohomology,
+while $E_c$ is the compactly supported
+Hodge--Deligne polynomial, then
+\[
+ \boxed{
+  \mathcal H_{ord}(J_N(X);u,v)=\mathcal H_{ord}(X;u,v),
+  \qquad
+  E_c(J_N(X);u,v)=(uv)^N E_c(X;u,v).
+ }                                                        \tag{13b}
+\]
+The compact-support formula follows by Zariski local
+triviality and $E_c(\mathbb A^N;u,v)=(uv)^N$;
+ordinary-cohomology preservation is the
+cohomological $\mathbb A^1$-homotopy invariance.
+Thus unlimited new realized complex dimensions
+preserve the WHOLE ordinary rational Hodge
+structure but shift the compact-support
+Hodge spectrum by exactly N Tate units.
+
+\begin{theorem}[All-original-X unlimited-depth STEIN--OKA causal realization]
+For every original X, every p and every rational alpha,
+the constructed honest topological E_alpha admits a
+\emph{genuine holomorphic} realization after the
+Jouanolou causal spatial fold: there exists a
+holomorphic vector bundle H_alpha over the Stein
+complex manifold $J(X)^{an}$ with underlying
+topological class $q^*E_\alpha$.
+Consequently the holomorphic projective bundle
+\[
+  \widehat\pi:
+  \mathbb P_{J(X)^{an}}(H_\alpha)
+   \longrightarrow J(X)^{an}                      \tag{14}
+\]
+and its genuine holomorphic tautological
+line bundle exist for every arbitrary X, alpha,
+every p and arbitrarily large emergent ranks.
+Their ENTIRE topological fold return satisfies
+\[
+ \boxed{
+ \sum_{k\ge0}\widehat\pi_*
+   (\widehat\xi^{r-1+k})t^k
+   =\exp\bigl(m(p-1)!\,q^*\alpha\,t^p\bigr).
+ }                                                        \tag{15}
+\]
+Moreover $q^*:H^j(X,\mathbb Q)
+ \to H^j(J(X),\mathbb Q)$ is an isomorphism
+of rational mixed Hodge structures:
+the ordinary cohomology Hodge structures of
+J(X) are pure, and identified with the
+original pure Hodge structures of X.
+\end{theorem}
+\begin{proof}
+An affine-space torsor is Zariski locally
+trivial, analytically locally trivial with
+contractible fiber, hence a homotopy
+equivalence on the underlying complex spaces.
+The morphism q is algebraic, and rational
+cohomological homotopy invariance for an
+algebraic affine-space bundle supplies
+the MHS isomorphism.
+Since J(X) is a smooth affine complex
+algebraic variety, its analytification
+is Stein. The Oka--Grauert principle
+identifies holomorphic vector bundles
+up to isomorphism with topological complex
+vector bundles on any Stein manifold.
+Apply it to $q^*E_\alpha$. Its resulting
+holomorphic projectivization and tautological
+holomorphic line exist by standard
+holomorphic bundle geometry.
+Chern character, the projective-bundle
+formula and ordinary cohomological pullback
+are topological and natural. Pulling
+equation (2) to J(X) gives (15).
+\end{proof}
+
+This theorem is a \emph{strictly positive}
+all-X existence result: the actual
+infinite-depth-compatible analytic complex
+fold exists and the entire pure original-X
+cohomological Hodge structure survives the
+affine-space world change.
+
+\begin{theorem}[Exact ALgebraic realization detection on the Stein fold]
+For an arbitrary rational Hodge alpha,
+the following class-by-class are equivalent:
+
+(i) alpha is the canonical class of an
+original-X rational Chow cycle.
+
+(ii) There exist m>0 and two actual
+ALGEBRAIC vector bundles A_+,A_- over the
+algebraic Jouanolou affine variety J(X)
+whose entire rational Betti Chern-character
+difference is
+\[
+  \boxed{\mathrm{ch}_{Betti}(A_+)-\mathrm{ch}_{Betti}(A_-)
+      =m q^*\alpha \quad\text{(all degrees).}}    \tag{16}
+\]
+In this case, using the true rational Chow
+homotopy-invariance isomorphism
+$q^*:CH^p(X)_{\mathbb Q}\simeq
+ CH^p(J(X))_{\mathbb Q}$,
+the actual original cycle is
+\[
+ \boxed{
+ Z_\alpha=(q^*)^{-1}
+    \left(\frac{\mathrm{ch}^{CH}_p(A_+)
+                   -\mathrm{ch}^{CH}_p(A_-)}{m}\right).
+ }                                                        \tag{17}
+\]
+\end{theorem}
+\begin{proof}
+If (ii) holds, the displayed difference
+is an actual algebraic rational Chow class
+on J(X), and its rational Betti class
+is precisely $m q^*\alpha$.
+Affine-bundle Chow homotopy invariance
+gives the unique original-X Chow source
+in (17). Canonical cycle-class
+naturality and injectivity of q^* on
+rational cohomology verify exactly alpha.
+Conversely (i) supplies an original
+cycle Z, and the rational algebraic
+K0--Chow Chern-character isomorphism
+over smooth X constructs an algebraic
+virtual bundle on X with Chern character
+concentrated in codimension p and equal
+to Z. Clear denominators, express it
+as a difference of honest algebraic
+bundles, then pull back to J(X) to
+produce A_+,A_- satisfying (16).
+\end{proof}
+
+The decisive geometry is therefore NOT
+whether the ordinary Hodge cohomology
+survives the infinite-depth affine fold:
+it DOES survive, and a full holomorphic
+lift of the complex topological bundle
+always exists on the Stein realization.
+The potentially decisive invariant is
+whether those holomorphic folds can be
+selected with algebraic transition
+functions and algebraic Chern sources,
+compatible with the fold-to-original-X
+Chow return. The latter is a concrete
+geometry-of-realization theorem with
+an exact iff, not an unverified appeal
+to purity or a finite sampling
+exercise.
+
+\section{Relation to current GST repository laws and distinct novelty}
+The prior 2026-10-20 \emph{all-grade topological K-source
+packet} derived a pure-middle virtual class on a
+blowup and an algebraization obstruction injection;
+the 2026-10-22 \emph{projective Chow-residue}
+manuscript derived actual zero-section return from
+already algebraic projective folds; and the
+2026-10-17 Adams-purification record isolates the
+$p$th Chern component of an existing algebraic K0
+class. Those achievements are all honored and
+are NOT relabelled as new source existence.
+
+This theorem instead supplies a specific new
+\emph{actual topological spatial realization}
+P(E_alpha) WITH INTRINSIC ENTIRE GENERATING-SERIES
+\(\mathcal S_{E_\alpha}(t)=
+ \exp(m(p-1)!\alpha t^p)\), and a direct geometric
+pushforward of the prescribed original-X alpha.
+It then writes a fully typed, source-producing
+algebraic realization condition and an exact
+necessary-and-sufficient PAIR-FOLD theorem.
+It does not assume Hodge purity forces
+projective algebraizability, because that
+would replace the desired geometric theorem
+by the desired conclusion itself.
+
+\section{Mathematical verification contract}
+The equalities are proved for all X, all p and
+all ranks by rational K-theory, the topological
+projective-bundle theorem and the splitting
+principle. The full-degree coefficient identity
+can be independently checked using exact
+symbolic rational arithmetic, including nontrivial
+higher multiples kp and p=1 boundary behavior.
+Finite computations check the formulas, not
+the all-X algebraic-realization condition.
+The direct constructive implication is equation
+(5); the exact binary all-X geometric
+criterion is equation (7). These are mathematical
+objects and proved implications, not visual
+simulations.
+\end{document}

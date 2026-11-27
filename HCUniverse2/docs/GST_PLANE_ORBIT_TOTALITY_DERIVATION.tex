@@ -1,0 +1,265 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[a4paper,margin=1in]{geometry}
+\newtheorem{lemma}{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\pair}[2]{\left\langle #1,#2\right\rangle}
+\title{GST Plane / Native-Orbit Totality: Green-Machinery Derivation}
+\date{}
+\begin{document}
+\maketitle
+
+\section{Target and contradiction setup}
+
+Fix the repository's smooth projective carrier $V$, Hodge/Betti datum $H$, and
+a geometric realization package $G$ whenever a theorem explicitly requires it.
+The target is
+\[
+  \operatorname{IsEmpty}(\operatorname{OmniversalSeparatorGhost}(G)).
+\]
+By \texttt{hodge\_iff\_no\_omniversalSeparatorGhost}, this gives the exact
+Stage--2G Hodge statement.
+
+Assume toward contradiction
+\[
+ E:\operatorname{OmniversalSeparatorGhost}(G).
+\]
+Put
+\[
+ p:=E.\mathrm{weight},\qquad j:=E.\mathrm{sheet},
+ \qquad \ell:=E.\mathrm{separator.detector},
+\]
+and
+\[
+ g:=\operatorname{separatorFiberedProbe}(p,\ell).
+\]
+
+\section{Green obstruction package}
+
+By \texttt{basisSeparator\_ghost\_ne\_zero},
+\[
+ g\neq0. \tag{G1}
+\]
+
+By \texttt{basisSeparator\_ghost\_detects\_sheet},
+for the detected Hodge basis vector $e_{p,j}$,
+\[
+ \pair{\operatorname{Addr}(e_{p,j})}{g}\neq0,
+ \qquad\text{equivalently}\qquad \ell(e_{p,j})\neq0. \tag{G2}
+\]
+
+By \texttt{omniversalSeparatorProbe\_supported\_on\_weight},
+\[
+ g(s)=0\qquad(s.1\neq p). \tag{G3}
+\]
+
+By \texttt{basisSeparator\_kills\_every\_program\_cycle} and
+\texttt{omniversalSeparatorProbe\_kills\_nativeProgramAddress}, every
+verified native/program branch is annihilated:
+\[
+ \ell\!\left(P_{\mathrm{coh}}(\operatorname{cl}Z)\right)=0
+\]
+for every genuine native source $Z$, and for each root-to-$p$ program,
+\[
+ \pair{\operatorname{nativeProgramFiberedAddress}(G,P)}{g}=0. \tag{G4}
+\]
+
+\section{The actual native observation problem}
+
+The previous per-sheet localized-$L^2$ route is not used. Work instead with
+the genuine weight-$p$ program orbit
+\[
+  \mathcal O_p:=\operatorname{geometricProgramOrbitModule}(G,p).
+\]
+By \texttt{geometricProgramOrbitModule\_le\_cycleClass\_range},
+\[
+  \mathcal O_p\subseteq \operatorname{range}(\operatorname{cl}_p).
+  \tag{6}
+\]
+Hence the separator detector annihilates the entire genuine orbit:
+\[
+  \ell|_{\mathcal O_p}=0. \tag{7}
+\]
+
+The completed probe is supported only at weight $p$, and
+\texttt{fiberedPairing\_nondegenerate\_right} says
+\[
+ (\forall a,\ \langle a,g\rangle=0)\Longrightarrow g=0. \tag{8}
+\]
+Thus no-ghost reduces exactly to showing that compact addresses of actual
+native/program observations at weight $p$ separate the weight-$p$ multiplicity
+fiber. Equivalently,
+\[
+ \operatorname{span}_{\mathbb Q}
+ \{\operatorname{Addr}(a):a\in\mathcal O_p\}
+ =
+ \operatorname{Addr}(H^{p,p}_{\mathbb Q}). \tag{9}
+\]
+
+The repository already proves that the three presentations
+\[
+\texttt{GeometricGSTPlaneCompleteness}
+\Longleftrightarrow
+\texttt{GradedGeometricOrbitModuleCyclic}
+\Longleftrightarrow
+\texttt{OmniversalNativeOrbitPairingTotal}
+\tag{10}
+\]
+are equivalent, by \texttt{geometricPlane\_iff\_gradedOrbitCyclic},
+\texttt{nativeOrbitPairingTotal\_iff\_gradedOrbitCyclic}, and
+\texttt{geometricPlane\_iff\_nativeOrbitPairingTotal}.  Plane, orbit cyclicity
+and pairing totality are therefore one statement, not three assumptions.
+
+\section{The unconditional intrinsic GST plane}
+
+The green theorem \texttt{gst\_plane\_completeness} is unconditional. For every
+nonzero Hodge state $\alpha$, one fixed live source coordinate fires to every
+target matrix-unit state $E_{ij}\alpha$, and the finite branch collapse
+reconstructs $\alpha$.
+
+The Lefschetz crown sharpens this to
+\[
+ E_{ij}\alpha=\lambda^{-1}L^{(2)}_{ij}\alpha,
+ \qquad \lambda\neq0, \tag{11}
+\]
+by \texttt{fixedSource\_target\_is\_normalized\_L2} and
+\texttt{twoSlotScalar\_ne\_zero}. Thus the internal GST world has the full
+finite read/write algebra needed to separate multiplicity coordinates.
+
+The remaining issue is only whether enough of those observations are outputs
+of genuine native/program geometry.
+
+\section{The per-sheet $L^2$ shortcut is circular}
+
+The green theorem
+\texttt{bareLefschetz\_nativePointLifts\_iff\_targetBasis\_algebraic}
+proves, from one live algebraic source with nonzero source coordinate,
+\[
+\texttt{HasNativePointLifts}(\texttt{ambientTwoStepLefschetz}(i,j))
+\Longleftrightarrow
+e_{p,j}\in \operatorname{pointCycleClassSpan}_p. \tag{12}
+\]
+For the sheet selected by a minimal ghost,
+\texttt{minimalGhost\_bareLefschetz\_has\_no\_nativePointLifts} states that
+such a lift cannot exist while the ghost survives.
+
+Therefore the previous draft's per-sheet native localized-$L^2$ equation was
+target algebraicity in disguise and is removed.
+
+\section{Multiplicity labels cannot simply be forgotten}
+
+The fibered-native pullback has a multiplicity face and a genuine native-cycle
+face. Recoordination and exact code projectors act on the multiplicity face.
+But the green theorem
+\[
+ \texttt{multiplicityMatrixUnit\_not\_descend\_native} \tag{13}
+\]
+and, more strongly,
+\[
+ \texttt{tensorWord\_descends\_native\_iff\_zero} \tag{14}
+\]
+show that a nontrivial multiplicity matrix unit cannot be turned into an
+ordinary native-cycle operator merely by forgetting its label.
+
+\section{The valid finite test-family mechanism}
+
+The handwritten global-branch strategy is already implemented on the
+linear-algebra side.
+
+\texttt{RecoordinationArsenalCrown} gives exact finite live-support
+recoordination and code-sector isolation.
+\texttt{LefschetzTomography} gives an injective triangular moment transform.
+\texttt{CoordinatewiseSeedAssembly} gives finite hyperplane avoidance.
+Finally \texttt{GradedProgramSpectralSaturation} proves that for an actual
+\texttt{GradedProgramSpectralFamily} $S$,
+\[
+ (\forall r,\ \texttt{CoordinateVisible}(S,r))
+ \Longrightarrow
+ e_{p,S(r)}\in\mathcal O_p. \tag{15}
+\]
+
+Thus one does not need a geometric $E_{ij}$ for each sheet. It is enough to
+construct a finite family of genuine native/program observations whose
+coordinate matrix is injective.
+
+Write those genuine observation addresses as $a_t$ and put
+\[
+ M_{t,r}:=[e_{p,r}]a_t. \tag{16}
+\]
+The ghost kills every genuine observation, hence
+\[
+ \sum_r M_{t,r}g(p,r)=0 \qquad(\forall t). \tag{17}
+\]
+If
+\[
+ \ker M=0, \tag{18}
+\]
+then $g(p,r)=0$ for every active coordinate. Since the ghost is supported only
+at weight $p$, this yields $g=0$, contradicting
+\texttt{basisSeparator\_ghost\_ne\_zero}.
+
+Equation (18) is the exact finite observation form of native-orbit separation.
+
+\section{The limitless failure orbit}
+
+The green theorem
+\texttt{not\_hodge\_yields\_full\_limitless\_cosmic\_orbit} produces one
+nonzero finite pure GST source whose limitless matrix-unit orbit reaches every
+natural weight:
+\[
+ \forall q\in\mathbb N,\qquad E_{r,q}(A)\neq0. \tag{19}
+\]
+The theorem \texttt{failure\_orbit\_address\_is\_transfer\_generator}
+identifies every such output with a nonzero multiple of the canonical transfer
+direction.
+
+This proves weight-totality of the failure shadow, but not same-weight
+multiplicity separation: \texttt{forgetMultiplicityToGST} deliberately sends
+all sheets over the same weight to the same transfer direction. Therefore the
+matrix (16) must be formed before multiplicity is forgotten.
+
+\section{The weak spine alone cannot imply totality}
+
+The repository supplies an internal semantic check.
+\texttt{zeroCycleClassSpine} constructs a geometric spine over the zero
+cycle-class Stage--2G copy, while
+\texttt{spine\_laws\_do\_not\_force\_hodge} proves that a nontrivial Hodge
+fiber can coexist with all weak-spine fields while Hodge fails.
+
+If native-orbit pairing totality followed from those spine fields alone,
+applying it to that zero-cycle-class spine and then using
+\texttt{hodge\_of\_nativeOrbitPairingTotal} would prove Hodge in the
+countermodel, contradiction. Hence
+\[
+ \boxed{\text{native observation separation must use stronger genuine
+ geometry than the weak spine fields alone.}} \tag{20}
+\]
+
+\section{No-ghost endgame}
+
+Once genuine geometric constructors supply the injective observation matrix
+(18), every remaining arrow is already green:
+\[
+E\Longrightarrow g\neq0
+\Longrightarrow M g_p=0
+\Longrightarrow g_p=0
+\Longrightarrow g=0,
+\]
+contradiction. Hence
+\[
+ \operatorname{IsEmpty}(\operatorname{OmniversalSeparatorGhost}(G)).
+\]
+Then \texttt{hodge\_iff\_no\_omniversalSeparatorGhost} gives
+\[
+ \operatorname{BigradedBettiHodgeStatement}(V,H),
+\]
+and the exact-Clay equivalences give the literal finite rational algebraic-cycle
+representation.
+
+The mathematical construction to finish is therefore uniquely fixed: derive
+the full-rank finite observation matrix (18) from the union of already-sound
+projective, principal-cut, strict-correspondence, transpose and hyper-event
+constructors. This is branch separation, not a new Hodge target and not a
+per-sheet $E_{ij}$ realization premise.
+
+\end{document}

@@ -1,0 +1,337 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\id}{\mathrm{id}}
+\newcommand{\real}{\mathrm{real}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{GST semantic reflection, reverse existence, and native factor extraction}
+\author{Mathbox: exact-source investigation and mathematical application}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+A full-text index of all 701 Lean files locates three precise GST laws
+that avoid separately prescribing an input/output pair: impredicative
+semantic reflection, reverse ontological existence, and automatic
+native linear lifting. We audit their exact hypotheses and apply them
+to the established native residual Euler kernel. We prove its action
+on the true algebraicity quotient is the identity, and derive an
+explicit one-sided factor-extraction formula turning a suitable
+native factorization of its quadratic test into a linear native
+detector. A global version reconstructs actual cycles on the original
+variety. Universal existence of the factorization is not proved.
+\end{abstract}
+
+\section{Pinned scope}
+The base is commit
+\texttt{7afae18a0027ca4ad2a572401839d73d0f0ef54e}
+on \texttt{research/gpt6-native-point-primitive-span-20261017}.
+All 701 tracked Lean files were retrieved with their exact blob
+identifiers and indexed. This is full-text search coverage, not
+a claim that every proof in every file was read in depth or compiled.
+The source index records every file, blob, line count, and recognized
+declaration header. Nested comments and strings were excluded
+from declaration matching; the index is not a Lean elaborator.
+
+The original goal remains: every rational Hodge class on every
+original smooth projective complex $X$ is the canonical Betti class
+of a rational algebraic cycle on that same $X$.
+The following laws are valid in their stated domains; no
+contradiction to them is alleged.
+
+\section{Semantic reflection}
+The exact theorem is
+\texttt{GSTGraphV2OmniversalCore.OmniversalGraph.}\\
+\texttt{closure\_iff\_every\_stable\_semantics}.
+For any typed event graph $G$, seed predicate $S$, and node $y$,
+\[
+ \boxed{y\in\operatorname{Cl}_G(S)
+ \iff
+ \forall P,\quad
+ (P\text{ is event-stable and }S\subseteq P)\Longrightarrow P(y).}
+                                                               \tag{1}
+\]
+It is assembled in \texttt{omniversal\_semantic\_reflection\_crown}.
+The graph may have any node type; it is not confined to arithmetic,
+fixed coordinates, or a chosen finite Hodge rank.
+\begin{proof}
+If a seed reaches $y$, propagate $P$ along its actual event path.
+Conversely choose $P=\operatorname{Cl}_G(S)$ itself.
+It contains $S$ and is event-stable by path concatenation.
+The universally quantified assertion then puts $y$ in the closure.
+\end{proof}
+
+The genuine geometric specialization already occurs in
+\texttt{GSTClassicalHodgeBranchPacketPlaneRealization.lean}:
+\texttt{nativeFiniteGraphClosure\_semanticCompleteness}.
+Its events are certified actual finite scheme graphs, with targets
+computed from their genuine Betti actions.
+The companion theorem
+\texttt{nativeFiniteGraph\_algebraicity\_is\_eventStable}
+proves that
+\[
+ P_{\mathrm{alg}}(u)
+   \iff \exists Z\in\CH^p(X)_\Q,\quad \cl(Z)=u                 \tag{2}
+\]
+is event-stable. Reflection tests this predicate as well as every
+other stable predicate. It does not omit native semantics.
+
+\section{Reverse ontological existence}
+The exact source is
+\texttt{GSTClassicalHodgeOntologicalWindowReverseExistence.lean}.
+For physical cells $0\le C<4$, $0\le d<3$, the actual density table is
+\[
+ \rho(C,d)=
+ \begin{pmatrix}
+ -54&-21&84\\
+ -21&0&-33\\
+ 0&-54&0\\
+ -33&0&42
+ \end{pmatrix}_{C,d}.
+\]
+The two Happy cells $(0,2)$ and $(3,2)$ are precisely the positive
+entries. For the actual reverse ontological finite weighted sum,
+\[
+ \boxed{\Omega>0\Longrightarrow
+    \text{some actual physical cell of the window is Happy}.}    \tag{3}
+\]
+\begin{proof}
+With no Happy cell every density is nonpositive.
+The weights, powers of $7$ and $3$, are nonnegative.
+The sum is therefore nonpositive, contradicting $\Omega>0$.
+\end{proof}
+This extracts a witness without a preselected location. A geometric
+application must construct the physical window and prove what the
+extracted cell certifies. A positive Euler index alone does not
+define that geometric decoding. The finite-factor extraction below
+uses the same reverse-existence logic on actual algebraic factors.
+
+\section{Automatic native lifting}
+The closest literal match to the question about old input/output
+packages is in
+\texttt{GSTClassicalHodgeKernelStableOperatorAlgebra.lean}:
+\texttt{cohomologyNativeRealizable\_iff\_classToDefectBlock\_zero}.
+For the rational cycle-class map $c:C\to H$, put
+$A=\im(c)$, $D=H/A$, and let $\pi:H\to D$. Then
+\[
+ \boxed{\exists U:C\to C\text{ linear},\quad cU=Tc
+             \iff \pi T|_A=0.}                               \tag{4}
+\]
+\begin{proof}
+If $cU=Tc$, then $T(cz)=c(Uz)\in A$.
+Conversely choose a rational linear section $s:A\to C$
+of $c:C\to A$. Under $T(A)\subseteq A$, define
+$U=s\circ T|_A\circ c$. Then $cU=Tc$.
+The actual section and formula occur in
+\texttt{GSTClassicalHodgeRangeLiftedSpectralOperator.lean}.
+\end{proof}
+Thus a native linear partner need not be separately supplied.
+This is a linear lifting theorem, not a claim that every lift
+is induced by an algebraic correspondence. It retains the
+condition that $T$ preserve the actual cycle-class range.
+
+The recursive theorem
+\texttt{generated\_worlds\_have\_native\_cycles} extends the
+construction across changing state and law types. Its proof
+uses actual geometric assembly at every certified birth,
+complete roots, and a proof that the requested world is generated.
+The separate state-closure theorem in
+\texttt{GSTClassicalHodgeSelfExpandingClosure.lean} decodes
+genuine Hodge-state algebraicity to an actual cycle.
+
+\section{Applying the law to the current residual kernel}
+Use the preceding derivation
+\texttt{GST\_native\_residual\_Euler\_kernel\_and\_alteration.tex}.
+Let $\dim Y=2M$ and let $C_i$ be the actual algebraic pure-middle
+$K$-classes of a known native frame. Set
+$\Gamma_i=\ch_M(C_i)$ and $G_{ij}=\chi_Y(C_i,C_j)$.
+The actual residual kernel is
+\[
+ \mathscr Q=\mathcal O_\Delta-
+       \sum_{i,j}(G^{-1})_{ji}C_i^\vee\boxtimes C_j.
+\]
+\begin{proposition}[Native block and true quotient action]
+For $A_Y=\im(\cl:\CH^M(Y)_\Q\to\Hdg^M(Y)_\Q)$ and
+$D_Y=\Hdg^M(Y)_\Q/A_Y$,
+\[
+ \boxed{\pi_{D_Y}T_{\mathscr Q}|_{A_Y}=0,\qquad
+        \overline T_{\mathscr Q}=\id_{D_Y}.}                    \tag{5}
+\]
+\end{proposition}
+\begin{proof}
+Every middle algebraic cycle has an algebraic pure-middle rational
+$K$-lift. The actual kernel preserves algebraicity and pure-middle
+character, proving the first identity.
+For every middle Hodge class $\beta$,
+\[
+ T_{\mathscr Q}\beta-\beta
+ \in\operatorname{span}_\Q\{\cl(\Gamma_i)\}\subseteq A_Y.
+\]
+The second identity follows on passing to the quotient.
+This is precisely the injective-defect case of the repository's
+\texttt{nonzero\_defect\_survives\_injective\_dynamics}.
+\end{proof}
+Equation (4) constructs its native linear lift, while (5)
+computes the true quotient action. This describes the present
+kernel, not every possible GST geometric birth.
+
+\section{Extract an actual native factor}
+For $\dim X=2p$, let $r$ be the primitive residual, $Q$ its
+positive rational form, and $Jr=(-1)^p r$. The established
+normalized topological packets satisfy
+\[
+ -\chi_{Y\times Y}(A_r\boxtimes A_{Jr},\mathscr Q)=Q(r,r).         \tag{6}
+\]
+Suppose actual algebraic pure-middle classes $E_i$ and rational
+coefficients $a_i$ give a one-sided factorization of this test:
+\[
+ \chi_{Y\times Y}(A_r\boxtimes A_{Jr},\mathscr Q)
+       =\sum_i a_i\,\chi_Y(A_r,\real E_i)\,\ell_i(Jr).            \tag{7}
+\]
+The $\ell_i$ are independently specified rational linear functionals.
+An external-product decomposition gives
+$\ell_i(y)=\chi_Y(A_y,F_i)$.
+The second factors may be topological; algebraicity is required
+on the output leg $E_i$.
+
+\begin{theorem}[One-sided native factor extraction]
+Under the actual factorization (7), construct
+\[
+ \boxed{E_r=-\sum_i a_i\ell_i(Jr)E_i
+                    \in K_0^{\mathrm{alg}}(Y)_\Q.}              \tag{8}
+\]
+Then
+\[
+ \boxed{\chi_Y(A_r,\real E_r)=Q(r,r)>0\quad(r\ne0).}              \tag{9}
+\]
+At least one actual output factor has a nonzero linear residual period.
+\end{theorem}
+\begin{proof}
+Pair (8) with $A_r$ and use bilinearity, (7), and (6).
+If all output-factor periods vanished, (7) would be zero,
+contrary to $Q(r,r)>0$. Rational coefficients preserve the
+actual rational algebraic $K$-group; no native lift of $r$
+is used in the formula.
+\end{proof}
+
+For a complete alteration $f:X'\to X$ of degree $e>0$,
+the same construction on $Y'$ gives index $eQ(r,r)$.
+Let $\mathfrak a'$ be the established actual Chow return
+and inverse native normalization. With
+$\sigma=(-1)^{M+p+1}$, the original-$X$ detector is
+\[
+ \boxed{Z_r=\frac{\sigma}{e}
+      f_*\left[\mathfrak a'(\ch_M E'_r)\right]_p,\qquad
+          Q(r,\cl Z_r)=Q(r,r)>0.}                             \tag{10}
+\]
+This is substitution into the previously proved exact
+original-$X$ index-return formula.
+
+Existence of (7) with actual algebraic output factors remains
+a geometric requirement. An arithmetic decomposition of the
+number $Q(r,r)$ does not supply those factors.
+
+\section{Global factorization and the prescribed cycle}
+For arbitrary $d=\dim X$, use the established middle blowup
+world, full rational Hodge packet $\mathcal H_X$, perfect
+pairing $P_X$, and actual Chow return $\mathfrak a$.
+Put $\epsilon=(-1)^{M+1}$ and
+$z_i=\mathfrak a(\ch_M E_i)$.
+The normal-free Euler and diagonal laws give
+\[
+ \chi_Y(A_x,\real E_i)=\epsilon P_X(x,\cl z_i),\qquad
+ \chi_{Y\times Y}(A_x\boxtimes A_y,\mathcal O_\Delta)
+       =-P_X(x,y).                                             \tag{11}
+\]
+Suppose a finite one-sided factorization holds for all
+$x,y\in\mathcal H_X$:
+\[
+ -P_X(x,y)=\sum_i a_i\chi_Y(A_x,\real E_i)\ell_i(y).              \tag{12}
+\]
+\begin{theorem}[Exact original-$X$ cycle]
+Under (12), every prescribed packet $y$ has the actual cycle
+\[
+ \boxed{Z_y=-\epsilon\sum_i a_i\ell_i(y)z_i,\qquad
+                         \cl(Z_y)=y.}                         \tag{13}
+\]
+\end{theorem}
+\begin{proof}
+Equations (11)--(12) imply, for every $x$,
+\[
+ P_X(x,\cl Z_y)
+   =-\sum_i a_i\ell_i(y)\chi_Y(A_x,\real E_i)=P_X(x,y).
+\]
+Perfectness of $P_X$ proves the equality of classes.
+\end{proof}
+Only equality on the Hodge testing block is required.
+A decomposition of the entire diagonal into external products
+in $K_0$ is not asserted.
+
+Uniform existence of (12) is equivalent to algebraicity
+of all of $\mathcal H_X$: (13) proves one direction.
+Conversely, for a native basis $v_i$ with Gram
+$p_{ij}=P_X(v_i,v_j)$ and actual normalized lifts,
+the native two-sided coefficients $a_{ij}=-(p^{-1})_{ij}$
+give (12). This is an exact geometric construction target,
+not a weaker unconditional theorem already proved by (13).
+
+\section{Checking the actual tensor theorem}
+The full-source search found no universal theorem establishing (12).
+In particular
+\texttt{GSTClassicalHodgeFiberedNativeTensorArsenal.lean}
+proves commuting actions on a labelled multiplicity/native-point
+carrier. Its
+\texttt{tensorWord\_descends\_native\_iff\_zero}
+determines descent through the native face with two labels.
+\texttt{GSTClassicalHodgeCoherentNativeDescent.lean} characterizes
+finite tensor-block descent by equality of native column sums,
+with an additional kernel condition after cycle class.
+Neither statement asserts (12). The word \emph{tensor}
+does not identify these distinct mathematical objects.
+
+\section{Executed checks and an actual native example}
+Wolfram checked (1) for all $512$ directed graphs on three
+labelled nodes, including loops, and all $8$ seed subsets:
+$4096$ graph--seed cases, no failures.
+It verified all twelve physical density entries and the five
+native-lift/quotient identities in the accompanying script.
+
+For $Q=\operatorname{diag}(3,5,7)$, the full-coordinate factor
+coefficients $-Q^{-1}$ recover the target exactly.
+A proper two-column frame has residual energy
+$105(a-b+c)^2/71$, while every bilinear tensor formed solely
+from its residual-annihilated source periods vanishes on
+the residual. The one-sided coefficient system for factoring the
+full form through that frame has coefficient rank $6$ and
+augmented rank $7$, so no choice of its six rational coefficients
+works. This excludes only the selected frame, not other native
+sources. It is a rational linear test, not a variety or a
+Hodge counterexample.
+
+For the independently native K3 diagonal source $D$ with
+norm $21$, $p=2$, $M=5$, and $C_D=A_D$, its native line satisfies
+\[
+ \chi_{Y\times Y}(A_{aD}\boxtimes A_{bD},\mathcal O_\Delta)
+  =-21ab
+  =-\frac1{21}\chi_Y(A_{aD},C_D)\chi_Y(A_{bD},C_D).
+\]
+Formula (8) gives $E_{aD}=aC_D$ and index $21a^2$.
+The factor-extraction construction is therefore executed on
+an independently established actual native source.
+
+These are exact consistency checks; the general identities
+are proved in the text.
+The findings are the precise GST laws, their exact application
+(5), and constructions (8)--(13) under their stated factorization.
+The universal geometric factorization and original all-$X$
+goal are not established.
+Review is self-review. No new Lean implementation or
+compilation is claimed.
+\end{document}

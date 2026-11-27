@@ -1,0 +1,118 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-CONNECTED-ARBITRARY-RANK-20261020",
+  "repository": {
+    "commit": "21046ba9acb036a9102b979bfeda826e9ab1b0e5",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "research/computations/gst_second_blowup_primitive_plane.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      }
+    ],
+    "hardware": "x86_64; Linux-6.18.55-x86_64-with-glibc2.39; host CPU model unrecorded"
+  },
+  "mathematics": {
+    "assertion_tested": "Full second-world cup/intersection matrices m=1..12; complete fourfold matrix-unit algebra; every binary tensor dual pair through arity 6; full connected r-center cup/source/Gram/inverse for r=1..16",
+    "coefficient_domain": "Q, exact Fraction arithmetic",
+    "conventions": "Exceptional lines convention xi^2+3h xi+2h^2=0; q_*xi=1; all cycle grades are complex codimensions; proper blowup exceptional sign (-1)^(codimension-1)",
+    "inputs": [
+      "research/computations/gst_second_blowup_primitive_plane.py",
+      "GSTQuadricPrimitiveRulingGeometry.lean",
+      "research/computations/gst_interacting_births_wolfram.wl",
+      "research/computations/gst_interacting_births_wolfram.output.txt"
+    ],
+    "bounds": {
+      "m_inclusive": [
+        1,
+        12
+      ],
+      "connected_births_inclusive": [
+        1,
+        16
+      ],
+      "tensor_arity_inclusive": [
+        0,
+        6
+      ],
+      "tensor_dual_pairs": 5461,
+      "fourfold_matrix_unit_products": 16,
+      "timeout_seconds": 30
+    },
+    "non_claims": [
+      "No rational Hodge counterexample",
+      "No construction of a native representative on every arbitrary original X",
+      "No finite scan promoted to an unrestricted theorem"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T07:30:32.907288+00:00",
+    "runtime_seconds": 1.3044134520005173,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": 1,
+      "max_threads": 1
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_second_blowup_primitive_plane.output.json",
+      "sha256": "433b6e94f41e121e0ab9f3b2446a3be3f756e3613798b1fe25cbe7e80e67f42a",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Complete ambient Gram is nonsingular and full cup kernel has dimension two for every visited m",
+    "Signed primitive Gram is positive definite and full readout-source matrix is identity",
+    "All 16 products of the four genuine-source matrix units satisfy the Kronecker law",
+    "Every visited connected r-birth cup kernel has dimension r+1 and is spanned by the explicitly constructed source frame",
+    "Full connected primitive Gram equals the closed block formula and its computed rational inverse multiplies to identity",
+    "Positive Schur factor agrees exactly with the stated degree-four numerator in every visited r",
+    "All pinned input bytes unchanged during execution"
+  ],
+  "result": "The recorded exact finite assertions passed; unrestricted and geometric conclusions have separate proof/review scope.",
+  "residual_risks": [
+    "Very ampleness, disjoint centers, canonical cycle comparison and unrestricted geometric conclusions require the recorded mathematical derivation",
+    "Finite dimension, arity and rank checks are not the unrestricted theorem; Lean separately proves the scalar Schur identity and complete all-r coordinate recovery",
+    "No target-sensitive center on an arbitrary original X is constructed"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/gst_second_blowup_primitive_plane.py",
+      "sha256": "a259a0d5ba981bc7e5a3152bdd8bfce819533fdab4f4f3b9220428acb20b77dd",
+      "sha256_after": "a259a0d5ba981bc7e5a3152bdd8bfce819533fdab4f4f3b9220428acb20b77dd"
+    },
+    {
+      "path": "GSTQuadricPrimitiveRulingGeometry.lean",
+      "sha256": "5ba7e8e0e788bb291e02a9c89f2c9bc5eed53387ed9b6fbc98beec845652872a",
+      "sha256_after": "5ba7e8e0e788bb291e02a9c89f2c9bc5eed53387ed9b6fbc98beec845652872a"
+    },
+    {
+      "path": "research/computations/gst_interacting_births_wolfram.wl",
+      "sha256": "4fce89f9ccaa3fb8d8836e1f9057d1f0a8794625e6a84f741006893bae3ec562",
+      "sha256_after": "4fce89f9ccaa3fb8d8836e1f9057d1f0a8794625e6a84f741006893bae3ec562"
+    },
+    {
+      "path": "research/computations/gst_interacting_births_wolfram.output.txt",
+      "sha256": "5033270775b8fdad3902f21352b8d90d82031a2b1892cfb7b27c0f6d85b685a0",
+      "sha256_after": "5033270775b8fdad3902f21352b8d90d82031a2b1892cfb7b27c0f6d85b685a0"
+    }
+  ],
+  "declared_results": [
+    "research/computations/gst_second_blowup_primitive_plane.output.json"
+  ]
+}

@@ -1,0 +1,183 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\m}{\mathfrak m}
+\title{Complete finite reduction of mixed-degree GST curvature folds}
+\author{Hand mathematics before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{Target and precise category}
+Start at \texttt{fde04bf40c9482f6818521a04df3700b2edb4210} with arbitrary
+smooth projective complex $X$, positive codimension $p$, and prescribed
+$\alpha\in\operatorname{Hdg}^p(X)_\Q$. The universal target is a rational
+Chow cycle on this original $X$ with canonical Betti class $\alpha$.
+Work componentwise on connected $X$. Put
+\[
+ A=\bigoplus_{q=0}^{n}\operatorname{Hdg}^q(X)_\Q,\qquad
+ \m=A_{>0},\qquad \m^{n+1}=0,\qquad A/\m=\Q.
+\]
+The weight grading $q$ means actual cohomological degree $2q$.
+Let $\alpha_i\in A_{p_i}$, $p_i\geq1$, be any finite list, including
+the prescribed input. On the actual product of rational homotopy-fiber
+torsors over $X$, retain the previously constructed model
+\[
+ B=H^*(X,\R)\otimes\Lambda(u_i,v_i),\quad
+ |u_i|=|v_i|=2p_i-1,\quad du_i=\alpha_i,\quad dv_i=0.                 \tag{1}
+\]
+Its conjugate generators $\beta_i=u_i+iv_i$ have specified type
+$(p_i,p_i-1)$. This is the model filtration, not a claimed compact complex
+realization of a higher rational torsor.
+
+Allowed changes are homogeneous invertible matrices over $A$, applied
+to both the $u$ and $v$ lists. Entry $M_{ji}$ has weight $p_j-p_i$;
+negative weights are zero. They preserve (1), conjugation, and the model
+filtration. This is a precise operation category. The theorem below does
+not classify arbitrary nonlinear changes involving products of odd handles.
+
+\section{A terminating algorithm and the sharp minimum}
+Set $I=(\alpha_1,\ldots,\alpha_r)\subset A$ and
+\[
+ \mu_q=\dim_\Q(I/\m I)_q,\qquad \mu=\sum_q\mu_q.                  \tag{2}
+\]
+These are ideal generators, not the dimension of $I$ and not the rank of
+the original curvature list as a rational vector space.
+
+\begin{theorem}[Complete mixed-degree curvature normal form]
+Every list in (1) can be transformed by finitely many allowed changes to
+exactly $\mu_q$ nonzero curvature handles of weight $q$, and
+$r_q-\mu_q$ zero-curvature handle pairs of that weight, where
+$r_q=\#\{i:p_i=q\}$. No allowed change can leave fewer nonzero curvature
+handles, in any weight. Two minimal generating lists for the same ideal
+are related by a homogeneous invertible matrix. The active curvatures are
+not claimed to be a canonical ordered basis.
+\end{theorem}
+\begin{proof}
+Process weights in ascending order. At weight $q$, form the subspace
+$L_q=\sum_{s<q}A_{q-s}I_s$. It is computed from already processed lower
+weights and equals $(\m I)_q$. The images of the original weight-$q$
+curvatures span $I_q/L_q$: all other contributions to $I_q$ have smaller
+curvature weight. Choose from those images a basis by rational Gaussian
+elimination. Its size is $\mu_q$. An invertible rational change within
+weight $q$ makes every remaining curvature lie in $L_q$. Express each
+such remainder as a homogeneous $A$-linear combination of the retained
+lower-weight curvatures. This is possible inductively because lower-weight
+curvatures already generate $I$ below $q$. Subtract that combination from
+the corresponding $u$ and $v$ generators. This exposes a closed pair.
+The diagonal changes are invertible over $\Q$ and all other changes are
+strictly triangular in weight. Therefore the entire matrix is invertible.
+The procedure ends after the finitely many listed weights.
+
+For any allowed presentation, the surviving curvature generators must
+span $I/\m I$. A zero-curvature row contributes zero there. Its weight-$q$
+part thus requires at least $\mu_q$ active rows. This proves optimality.
+
+If $a$ and $b$ are minimal lists generating $I$, write $b=Ma$ with
+homogeneous entries. Their images are bases of $I/\m I$, so every
+equal-weight diagonal block of $M$ is an invertible rational matrix.
+The matrix is block triangular in weight; its inverse is the finite
+triangular substitution. Thus it is an allowed change. No choice of
+division by a positive-degree class has been made.
+\end{proof}
+
+Equivalently, the standard nilpotent-ideal argument is constructive here.
+If a submodule $J\subset I$ maps onto $I/\m I$, then
+$I=J+\m I=J+\m^2I=\cdots=J+\m^{n+1}I=J$.
+This supplies a finite bound on propagation; it does not require a
+Noetherian completion, a regular sequence, or a nonzero determinant of
+an intersection matrix.
+
+\section{Full cohomology factor and actual higher torsors}
+\begin{theorem}[Complete split of every redundant pair]
+There is a conjugation-compatible filtered DGA isomorphism over the base
+\[
+ B\cong B_{\min}\otimes
+ \Lambda\bigl(w_{q,j},z_{q,j}:1\leq j\leq r_q-\mu_q\bigr),
+ \quad dw_{q,j}=dz_{q,j}=0,\quad |w_{q,j}|=|z_{q,j}|=2q-1.            \tag{3}
+\]
+Consequently the full Betti polynomial satisfies
+\[
+ P_B(t)=P_{B_{\min}}(t)\prod_q(1+t^{2q-1})^{2(r_q-\mu_q)}.           \tag{4}
+\]
+The same substitution is an equivalence over $X$ of the actual rational
+topological torsor constructions, after choices of classifying maps and
+homotopies. It is not a new principal elliptic quotient in higher degree.
+\end{theorem}
+\begin{proof}
+Every row subtraction sends $u_j$ to $u_j-\sum_i a_i u_i$ and $v_j$ to
+$v_j-\sum_i a_i v_i$. Its inverse adds the same expression; the unchanged
+rows make the row operator square zero. Even closed coefficients ensure
+the chain equation and the absence of an extra sign. Hodge types agree
+because $a_i$ has type $(p_j-p_i,p_j-p_i)$. For a zero curvature row,
+both generators have zero differential and their conjugate combinations
+are pure. Splitting exterior generators proves (3); the field Kunneth
+formula proves (4) in every degree, including an empty list.
+
+For actual torsors, use the path-space construction from the preceding
+derivation. Multiplication by a base class is implemented by a cup-product
+map of Eilenberg--Mac Lane spaces. Subtract the corresponding cup paths
+from the target nullhomotopy, retaining every source path. Adding them
+is the inverse up to the chosen homotopies. Equal-weight rational changes
+are invertible maps of rational Eilenberg--Mac Lane groups. A zero
+classifying class has a chosen nullhomotopy and hence a product fiber.
+These constructions require no nilpotence hypothesis on $\pi_1(X)$.
+\end{proof}
+The coefficient algebra in (2) is the rational Hodge subalgebra, whereas
+$B_{\min}$ retains \emph{all} of $H^*(X,\R)$, including odd and off-diagonal
+classes. Formula (4) is not obtained by discarding the rest of the base.
+
+\section{The prescribed input cannot be erased by its own cup births}
+\begin{theorem}[Exact single-target conservation under cup amplification]
+Take $\alpha\ne0$ and any finite list containing $\alpha$ whose other
+curvatures are homogeneous multiples $b_i\alpha$, with $b_i\in A$.
+Then $I=(\alpha)$ and $\mu_p=1$, $\mu_q=0$ for $q\ne p$.
+Exactly one curvature handle remains; every other pair splits as in (3).
+If $\alpha=0$, all pairs are closed. This holds for every original $X$.
+\end{theorem}
+\begin{proof}
+The image of $\alpha$ generates $I/\m I$. It is nonzero: otherwise
+$\alpha=b\alpha$ for some $b\in\m$. Since $b^{n+1}=0$,
+$1-b$ has the explicit inverse $1+b+\cdots+b^n$, forcing $\alpha=0$.
+The normal-form theorem proves both the sharp lower bound and its
+attainment. Thus arbitrarily many mixed-degree births do not dilute the
+prescribed input into zero curvature.
+\end{proof}
+
+This executes an alpha-dependent construction: form the actual torsor for
+$\alpha$, add all chosen cup births, carry out every elimination, and
+compute the final canonical base transgression, which is still $\alpha$.
+It closes this precise erasure recipe. It does not refute Hodge algebraicity
+or rule out another geometric constructor. For $p=1$ an integral multiple
+of $\alpha$ is the Chern class of a line bundle and returns its actual
+Chow divisor divided by that multiple. In higher degree (1)--(4) alone
+do not provide a canonical Chow lift. In particular the ideal algebra
+does not assume its Hodge coefficients to be algebraic cycles.
+
+\section{Hostile checks: syzygies are not extra removable handles}
+In $A=\Q[x,y]/(x^2,y^2)$ with curvatures $(x,y)$, one has $\mu_1=2$.
+The element $y u_1-x u_2$ is closed, since $yx-xy=0$, but all its
+coefficients lie in $\m$. It cannot be a row of an invertible homogeneous
+matrix: that row vanishes modulo $\m$. Thus a closed syzygy is not a
+split free handle. Similarly on $\mathbb P^2$, $h^2u$ is closed for
+$du=h$, but $\mu_1=1$ and the curved handle cannot disappear. Nilpotent
+annihilators must not be divided out.
+
+For $(h,h^2,h^3)$ on $\mathbb P^3$, the theorem gives one active pair,
+two closed pairs of degrees three and five, and
+\[
+ P_B(t)=(1+t)(1+t^7)(1+t^3)^2(1+t^5)^2.
+\]
+For $(x,y,xy)$ on $\mathbb P^1\times\mathbb P^1$, it gives two active
+pairs and one closed degree-three pair. These are checks of the universal
+graded proof, not a replacement special-family objective.
+
+\section{Proof status and formalization boundary}
+The finite normal-form, optimality, and cohomology arguments are hand
+proofs, with author adversarial self-review. Lean additions encode the
+explicit finite simultaneous row clearing, invariant span, nilpotent
+fixed-point test, and the nonunit syzygy guard. They do not formalize the
+geometric comparison or the complete graded ideal theorem. Compilation
+is left to the owner; no kernel receipt or universal Chow proof is claimed.
+\end{document}

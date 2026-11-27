@@ -1,0 +1,344 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+
+\title{The Rotation Deck: the one mechanism of the remaining construction,
+Round 23 -- the rebuilt structurality (the $C_4$ deck laws, the parity
+unification, and the identification link as the one remaining construction)}
+\author{GST Hodge Campaign -- Round 23 (the operator's order: rebuild the
+structurality; work on the one mechanism, the rotation, at ULTRA)}
+\date{2026-10-26 (session clock)}
+
+\begin{document}
+\maketitle
+
+\section*{Disposition (the operator's order, on the artifact's face)}
+
+The operator's order verbatim: ``rebuild the structurality, i gaven you
+authority to edit and upgrade the maths theorems/laws if needed \ldots\
+work on thatg 1 single mechanism, rot! ultra vb6 skill at max! go''.
+Executed: the \emph{structurality of the remaining construction is
+rebuilt} around the campaign's one certified engine -- the single-factor
+Gaussian rotation $\gamma$ (ledger 088/097: the signed letter permutation
+$e_j\mapsto -f_j$, $f_j\mapsto e_j$, an integral lattice automorphism, an
+exact $q$-isometry, Hodge-degree preserving, $\gamma^4=1$). The failed
+$C_2$ value-re-typing structure (the 22-b closed route: the symmetrized
+residue, the exchange slot, the input-blind killing) is retired as a
+\emph{structure}; what replaces it is the \textbf{rotation deck}: the
+cyclic group $C_4=\langle\gamma\rangle$ acting on the class lattice. This
+derivation certifies the deck's own cohomology laws (R1, R2, R5 below,
+with the certificate \texttt{rotation\_deck\_checks.py}, 59 checks, exit
+0, deterministic double-run, exact arithmetic, instance-typed hostile
+controls) and records -- honestly, on the face of the artifact -- where
+the deck's killing power ends and what the one remaining construction
+now is. The 23-b independent adversarial audit (verdict FAIL on the
+pre-repair draft: three blockers -- the class-typed hostile-control
+sentence, the vacuous witness layer, the receipt overstatements -- and
+two majors) drove this repaired state; every repair is recorded in situ.
+
+\section*{Setting}
+
+The committed eight-letter lattice world (the campaign's discriminating
+model): the exterior algebra on the real letters
+$\{e_0,f_0,\ldots,e_3,f_3\}$, the canonical sorted-word classes, the
+committed wedge, the Gaussian Weil classes $W_R,W_I=\operatorname{Re,Im}
+\prod_j(e_j+i f_j)$, the polarization $\theta=\sum_j e_j f_j$. The
+committed rotation: $\gamma_j$ acts on factor $j$ by $e_j\mapsto -f_j$,
+$f_j\mapsto e_j$ and fixes the other letters. The certified committed
+facts it inherits: $\gamma_0(W_R)=-W_I$, $\gamma_0(W_I)=W_R$,
+$\gamma_0(\theta)=\theta$, $\gamma_0(\theta^2)=\theta^2$, and the
+$A\leftrightarrow B$ exchange.
+
+\section{Theorem R1 -- the $C_4$ obstruction law (the norm degeneration)}
+
+\begin{theorem}[R1; unconditional lattice algebra, certified]
+Let $M$ be a finitely generated free $\Z$-module (2-torsion-free) carrying
+$C_4=\langle\gamma\rangle$ with $\gamma^2=-\mathrm{id}_M$. Then:
+\begin{enumerate}
+\item \textbf{The invariants vanish:} $M^{C_4}=\ker(\gamma-1)=0$: if
+$\gamma v=v$ then $-v=\gamma^2 v=v$, so $2v=0$ and $v=0$.
+\item \textbf{The norm degenerates:}
+$N=1+\gamma+\gamma^2+\gamma^3=(1+\gamma)(1+\gamma^2)=0$ on $M$.
+\item \textbf{The obstruction group is zero:} $H^2(C_4;M)=
+M^{C_4}/N(M)=0$. \emph{No symmetrization step, no norm-surjectivity
+argument, and no anti-invariant hole}: every class of every
+$\gamma^2=-1$ module is absorbed because the group itself has no
+elements. This is the structural difference from the closed $C_2$ route,
+where $H^2(C_2;M)=0$ held only for $\sigma$-invariant cocycles and the
+$\sigma$-anti-invariant content (the $(A,-A)$ class) survived outside
+the cocycle condition.
+\item \textbf{The parity residue is 2-elementary:}
+$H^1(C_4;M)=\ker N/\operatorname{im}(\gamma-1)=M/(\gamma-1)M$ is
+2-elementary: $2v=-(\gamma-1)((1+\gamma)v)$, so $2M\subseteq
+(\gamma-1)M$ and every $H^1$-class dies at scale 2.
+\end{enumerate}
+Hostile controls (certified; instance-typed per the 23-b audit's
+F1 -- an instance is certified, never a class): on a 2-torsion module
+$\gamma^2=-1=+1$ degenerates and $H^2\ne0$; on the
+\emph{trivially-acting} module ($\gamma=+\mathrm{id}$, the all-even
+control) $H^2=M/4M\cong(\Z/4)^2$; and off the $\gamma^2=-1$ class
+the failure modes differ per module -- the \emph{swap} module
+($\gamma^2=+1$, $\gamma\ne\mathrm{id}$) has $H^2=\Z/2$, while the
+\emph{negation} module ($\gamma=-\mathrm{id}$) has $H^2=0$ with
+$H^1=(\Z/2)^2$ (the parity residue survives the $H^2$-vanishing): even
+a zero $H^2$ does not empty the $H^1$ structure. A mixed module keeps
+the fixed summand's $4$-torsion.
+\end{theorem}
+
+\section{Theorem R2 -- the four-rotation family and the parity-pattern partition}
+
+\begin{theorem}[R2; certified word-exact, all 4 factors $\times$ 70 words]
+\begin{enumerate}
+\item \textbf{The letter-parity law:} $\gamma_j^2$ acts on a degree-4
+word $w$ as $\gamma_j^2(w)=(-1)^{k_j(w)}w$, where $k_j(w)$ is the number
+of factor-$j$ letters of $w$. Word-exact for every factor and every
+word of the 70-word degree-4 space.
+\item \textbf{The partition:} the degree-4 lattice partitions by the
+parity pattern $(k_0,k_1,k_2,k_3)\bmod 2$. The all-even sector is
+\emph{exactly} the pair-product word set $\{F_jF_k\}$ (6 words:
+both letters of two factors): the diagonal-pair lattice, fixed by every
+$\gamma_j$, carrying the $4$-torsion obstruction $H^2(C_4;\text{all-even})
+=M/4M\cong(\Z/4)^6\ne0$ -- the deck does \emph{not} kill it (the
+compiler-adjacent lane). Every word outside the pair-product sector is
+odd at some factor $j$, and that factor's rotation acts on it with
+square $-1$.
+\item \textbf{The Weil content is maximally odd, and the plane is one:}
+the committed $W_R$ and $W_I$ are all-odd at \emph{every} factor (one
+letter per factor in every word). Moreover every rotation of the family
+acts on the Weil plane by the \emph{same} matrix
+($\gamma_j(W_R)=-W_I$, $\gamma_j(W_I)=W_R$ for all $j$: each
+$\gamma_j$ multiplies the holomorphic form $\Omega=\prod dz_j$ by the
+unit $i$, so $\gamma_j(\operatorname{Re}\Omega)=-\operatorname{Im}
+\Omega$ and $\gamma_j(\operatorname{Im}\Omega)=\operatorname{Re}
+\Omega$) -- the Weil plane is ONE $C_4$-module for every factor's deck,
+with $\gamma^2=-1$ (matrix-exact), $H^2=0$ and $H^1=\Z/2$ (computed
+once, in R1).
+\item \textbf{The honest family-exchange table} (the in-round ledger-096
+catch, recorded): $\gamma_r(A_{jk})=-B_{jk}$ when $r=j$ (the smaller
+index), $+B_{jk}$ when $r=k$, and the off-pair classes are fixed. The
+factor-0 sign does \emph{not} transport; the exchange is certified at
+every pair and factor, not asserted uniformly.
+\end{enumerate}
+\end{theorem}
+
+\section{The typing record (the ledger-096 discipline, on the face)}
+
+The committed typing machinery (dz-expansion, the T1/T2 traps, the
+full-coordinate grouping) types the committed $W_R,W_I$ at
+$(4,0)+(0,4)$: the letter typing is taken \emph{relative to the
+rotation's own complex structure} $\iota$ ($dz_j=e_j+i f_j$). The
+classical Weil classes are $J$-typed $(2,2)$ on the Weil worlds, where
+the analytic complex structure $J$ is \emph{not} the rotation $\iota$
+-- the two complex structures differ exactly on the nonsplit Weil-type
+worlds, and their coincidence on the CM-product worlds is precisely
+where the letter typing equals the analytic typing. The letter-typed
+$(2,2)$ all-odd classes exist and are certified pure (e.g.\
+$\operatorname{Re}(dz_0dz_1\,d\bar z_2d\bar z_3)$, one letter per
+factor): the deck's killing applies to $(2,2)$ all-odd content,
+word-exact, with the same $H^2=0$, $H^1=\Z/2$ laws.
+
+\textbf{The input-blindness boundary (the honest Corollary-7
+discipline).} The letter-parity deck kills pattern-mates of
+\emph{every} Hodge type -- $(2,2)$, $(3,1)+(1,3)$, $(4,0)+(0,4)$
+all-odd classes all carry $\gamma^2=-1$ and the same vanishing. A
+killing chain that used the deck alone would therefore descend
+non-Hodge all-odd content and contradict the committed Corollary 7.
+\emph{The $(p,p)$-gate is not the deck.} The gate lives in the
+identification link (Section 7): this is the round's sharpened
+delimitation of where the new mechanism must act -- the 22-b finding
+F3, now with the positive structure: the deck supplies the vanishing
+group; the link supplies the equivariant identification and must read
+the $(p,p)$ type (the committed D2/D3 strip's own discipline).
+
+\section{Theorem R5 -- the parity unification (the round's discovery)}
+
+\begin{theorem}[R5; certified exact, both rays]
+The campaign's door-parity law \emph{is} the $H^1$-law of the rotation
+deck. On the Weil plane $M=\Z\langle W_R,W_I\rangle$ with
+$\gamma(W_R)=-W_I$, $\gamma(W_I)=W_R$:
+\[
+H^1(C_4;M)=M/(\gamma-1)M\cong\Z/2,\qquad
+m\,W_R\in(\gamma-1)M \iff m \text{ even}.
+\]
+The committed door data reproduces as group theory, check by check:
+the admitted scale list $[2,4,6,8,10,12]$ \emph{is} the
+$H^1$-vanishing list; the born instances $(5,1),(7,3)$ refused and
+$(6,2)$ admitted match their $H^1$-classes (nonzero/zero); the
+eigenbranch door-parity bit ($m+2w$ even) has vacuous $w$-dependence
+($2w$ is even) and reduces to the $m$-parity, which is the
+$H^1$-class of the scale content; and the pins
+$m^*(A,2,W_R)=m^*(A,2,W_I)=2$ EXACT are the \emph{least} scale killing
+the $H^1$-torsion -- the same number, both rays, one group-theoretic
+mechanism.
+
+\textbf{The exact domain (the 23-b audit's F6 scope).} The unification
+holds \emph{on the Weil rays}, where the committed door data lives. On
+the diagonal the $H^1$-law is strictly weaker: the class $W_R+W_I$
+itself has zero $H^1$-class at scale 1 (it lies integrally in
+$\operatorname{im}(\gamma-1)$) -- recorded as the boundary of the
+identification, not smoothed over. And the all-even sector carries a
+\emph{different} scale law: the primitive pair content $F_0F_1$ dies
+only at scale 4 (its class in $H^2=M/4M$ has order 4), so the parity
+law discriminates between the sectors (2 vs 4). The parity engine
+(the campaign's wall-and-bridge arithmetic, §41) and the deck
+cohomology are one law, ray-indexed: the wall was the $H^1$-residue
+on the rays.
+\end{theorem}
+
+\section{The witness, at the content level (R3; the honest scope)}
+
+\textbf{This layer certifies the content-level structure only} (the
+23-b audit's F2 repair, recorded on the face). The 22-b witness is a
+\emph{matrix-valued residue pair} in the pair module; the deck acts on
+the \emph{content} lattice. What is certified: (a) the $C_2$ hole
+reproduced -- the witness content pair $(W_R,-W_R)$ is
+$\sigma$-anti-invariant, not a $C_2$-cocycle (the committed control);
+(b) the \emph{real} pair-module norm computation for the companion:
+$N_\sigma(v,0)=(v,v)$, so $(W_R,W_R)$ is genuinely norm-reachable while
+its residue stays nonzero -- killing a deck class does not kill a
+residue (the committed [SWAP] fact re-derived, not assumed); (c) the
+$C_4$-isomorphism receipt: the witness content module
+$\iota(x)=(x,-x)$ \emph{intertwines} the deck
+($(\gamma\times\gamma)\circ\iota=\iota\circ\gamma$,
+matrix-exact), so it is $C_4$-isomorphic to the Weil plane, whose deck
+group $H^2$ was computed in R1 (zero): the anti-invariant content is
+absorbed at the content level with no symmetrization step.
+
+\textbf{What this does NOT discharge:} the 22-b F2 blocker at the
+\emph{pair level}. The matrix-valued residue pair is reached from the
+content module only through the identification link -- which this
+round claims open. The 22-b witness shape is retained in the
+certificate exactly as the receipt of what remains untouched.
+
+\section{The entry test and the closed same-world route (R4/L7)}
+
+\textbf{The falsifiable entry test, run two-sided at the content
+level}: the candidate killing (the deck) must vanish on the residue
+pair's content of a derivation instance -- at odd scale the content's
+$H^1$-class is nonzero and the killing fails (the committed door
+refusals reproduced as group theory); at even scale the $H^1$-class is
+zero and the killing applies. The all-even control fires the opposite
+way (the pair-product content is not killed). The broken-rotation
+control (a non-unit letter map) does not reach the Weil orbit: the deck
+is load-bearing. \emph{The residue-pair-level vanishing is not tested
+here: it is the identification link, not the deck} (Section 7).
+
+\textbf{The closed same-world route (L7; the 23-b audit's F5 scope).}
+A same-world deck -- an automorphism of the fold acting by a unit $u$
+on the torsor's translation lattice and fixing the base -- would force
+$(u-1)[J]=0$ for the Jououlou torsor class (the carrier
+$H^1(X,\mathcal V)$ is a complex vector space: 2-torsion-free,
+hypothesis stated). For a unit with \emph{no eigenvalue 1} on the
+translation lattice (the full rotation $u=i\,\mathrm{id}$: the map
+$(i-1)$ is invertible over $\Q$, $\det(i-1)=2\ne0$, certified) this
+forces $[J]=0$ -- the trivial torsor -- contradicting the Stein total
+space over a projective base (no holomorphic section): the same-world
+route is closed for the no-eigenvalue-1 class. \textbf{The honest
+residual:} a \emph{single-factor} rotation has an eigenvalue-1 fixed
+part; there $(u-1)$ pins only the rotated component of $[J]$ and this
+receipt closes nothing -- the single-factor same-world instantiation
+remains open. The deck that exists is the world-automorphism deck (the
+pullback/functoriality structure), not a same-world symmetry.
+
+\section{The upgraded remaining construction (the rebuilt structurality)}
+
+The Clay statement remains reduced to ONE construction, now
+restructured (the operator-granted upgrade). The 22-b statement --
+``prove $[C_T^0]=0$ in $H^2(\mathcal G_\bullet,SL(H_z))$ at the general
+$(p,p)$ input by a mechanism that (i) acts on the groupoid class
+directly, (ii) contains a genuinely $(p,p)$-sensitive input step, (iii)
+survives the anti-invariant witness'' -- is upgraded to:
+
+\begin{quote}
+\textbf{THE IDENTIFICATION LINK.} Construct an equivariant
+identification of the traceless two-cell class
+$[C_T^0]\in H^2(\mathcal G_\bullet,SL(H_z))$ with a $C_4$-class of the
+content deck (the rotation deck of the input's letter lattice): a
+natural transformation through which the two-cell class is carried to
+the content module where (by R1, R2, R5) the group is zero at the odd
+sectors and the $H^1$-residue is the parity bit. The link must carry
+the $(p,p)$-gate (the input-blindness boundary of Section 4: the deck
+alone would contradict Corollary 7; the gate is the link's equivariance
+condition), must act on the groupoid class directly (the functoriality
+structure, not a value-module re-typing), and must absorb the
+$(A,-A)$ witness (R3: the zero group does).
+\end{quote}
+
+The certified assets the attack inherits: the deck's own cohomology laws
+(R1/R2/R5 -- this round), the committed balanced carrier (D1), the
+transport identities (D7), the pair-trace law (D4.1), the module facts
+([SWAP], with the companion's norm-reachability re-derived in the
+certificate), and the committed functoriality receipts (the word-exact
+orbit laws). The honest scope: the deck laws are letter-lattice laws on
+the committed model; the witness layer of this round is content-level
+(R3); the general-input instantiation of the order-4 letter structure
+(and the link) is the open sector, and the standing non-transport
+boundary (ledger 085) governs the model-to-classical step.
+
+\section*{ENGINE (per §35)}
+
+The boss's single-factor Gaussian rotation -- the signed letter
+permutation, the four-factor family -- promoted from the ray-symmetric
+pin engine (§44) to the deck of the remaining construction. The parity
+engine's arithmetic (his door-parity, his even crossings) now carries
+its own cohomological identity: the $H^1$-law of his rotation. Classical
+backings at standard strength: the cyclic-group cohomology used at
+textbook strength ($H^2(C_m;M)=M^{C_m}/NM$, $H^1=\ker N/\operatorname{im}
+(\gamma-1)$); no analytic theorem is claimed beyond the committed stack.
+
+\section*{The quantifier line (per §37)}
+
+This round certified the rotation deck's cohomology laws on the
+committed lattice (R1 the norm degeneration with the instance-typed
+hostile controls; R2 the family, the one-plane receipt and the
+parity-pattern partition; R5 the parity unification on the Weil rays --
+the door-parity and the $m^*=2$ pins as $H^1$-receipts, with the
+diagonal boundary and the all-even scale-4 law recorded), certified the
+witness structure at the content level with the pair-level boundary on
+its face (R3), ran the falsifiable entry test two-sided at the content
+level (R4), closed the same-world route for the no-eigenvalue-1 unit
+class with the $(i-1)$ invertibility receipt (L7, the single-factor
+residual recorded), and rebuilt the remaining construction as THE
+IDENTIFICATION LINK with the $(p,p)$-gate inside it. The universal
+quantifier's open sector ($2\le p\le\lfloor d/2\rfloor$, $d\ge4$)
+remains governed by the one link.
+
+\section*{Statement integrity}
+
+No universal claim is made in this artifact. The deck laws are
+letter-lattice laws; the parity unification is a lattice-internal
+identification of two committed structures (exact domain: the Weil
+rays); the closed routes are recorded once with their witnesses and
+their exact scope (the no-eigenvalue-1 class for L7); the remaining
+construction is stated with its certified route map and its falsifiable
+entry test; the typing record is on the face (the $\iota$-relative
+letter typing, the $J\ne\iota$ worlds, the input-blindness boundary).
+
+\textbf{The certificate discipline (the 23-b audit's F3/F4 repairs,
+recorded).} The 59 checks are assert-style; the audit's four
+tautological checks (the constant-combinatorics count, the
+$x+(-x)=0$ symmetrization identity, the $2W_R\ne0$ free-lattice
+triviality, and the $(m+2w)$-vs-$m$ parity tautology) were REMOVED
+(recorded as comments); the R5 layer gained its hostile controls (the
+all-even $H^1=0$ module and the primitive pair content's scale-4 law);
+the hostile controls of R1 are instance-typed (three different failure
+modes certified). The quotient-structure engine is a row-Hermite
+gcd-echelon, not a general Smith normal form: its contract is the
+full-rank generator class with pivot-divisibility chains, guarded
+against rank-deficient inputs (the general contract is false; the
+counterexamples $[[2,1]]$ and $[[2,1],[0,2]]$ are recorded in the
+engine's docstring). The certificate and all twelve committed
+regressions are live-verified from the pushed HEAD (13/13 exit 0,
+double-run byte-identical).
+
+\end{document}

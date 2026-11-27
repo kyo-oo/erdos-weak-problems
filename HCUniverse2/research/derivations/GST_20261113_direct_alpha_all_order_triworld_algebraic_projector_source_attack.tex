@@ -1,0 +1,91 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{Direct original-\(X\) GST source-equation attack: all-order three-world idempotent transport and global Chow-class birth}
+\date{2026-11-13}
+\begin{document}\maketitle
+
+\section{Owner's immutable all-varieties target and source equations}
+Let \(X\) be an \emph{arbitrary} smooth projective connected complex variety, \(p\) any codimension and \(\alpha\) an arbitrary \emph{prescribed} rational \((p,p)\) Hodge class. We seek \(Z_\alpha\in CH^p(X)_{\mathbb Q}\) with \(\mathrm{cl}^{\mathrm{can}}(Z_\alpha)=\alpha\).
+The existing owner derivation \texttt{research/derivations/GST\_direct\_alpha\_finite\_polynomial\_curvature\_source\_equations\_2026\_10\_23.tex} starts from the actual affine Jouanolou torsor \(q:J\to X\) and a closed global algebraic \(2p\)-form \(\eta_\alpha\) representing \(q^*\alpha\). It requires regular algebraic projectors \(P_+,P_-\in\mathrm{Mat}_r(\mathcal O(J))\), a positive integer \(\mu\), and a regular algebraic \(2p-1\) form \(B\), with
+\[
+P_\pm^2=P_\pm,\qquad
+\Omega_p(P_+)-\Omega_p(P_-)=\mu\eta_\alpha+dB,\qquad
+\Omega_p(P)=\frac1{p!}\mathrm{Tr}\big(P(dP)^{2p}\big).
+\tag{1}
+\]
+Any solution returns a genuine Chow cycle with canonical Betti class \(\alpha\) via algebraic K theory and the Chow Chern character. The owner's three-root wave, N-hole and self-expanding worlds motivate finding \(P_\pm\) by repeated creation/destruction/carry transformations. The present test directly examines whether \emph{unbounded} formal projector transport actually changes the algebraic source class in (1). It is an all-\(X\), all-\(p\), all-rank result; unlike the earlier first-order tangent theorem, it treats every formal order simultaneously.
+
+\section{All-order idempotent transport}
+
+\begin{theorem}[Exact finite and formal conjugacy for triadic projector transport]
+Let \(R\) be any commutative unital \(\mathbb Q\)-algebra, and \(P(t)\in\mathrm{Mat}_r(R[[t]])\) satisfy \(P(t)^2=P(t)\).
+Set \(P_0=P(0)\), and
+\[
+ U(t)=P(t)P_0+(I-P(t))(I-P_0).
+ \tag{2}
+\]
+Then \(U(0)=I\), \(U(t)\in GL_r(R[[t]])\), and
+\[
+\boxed{P(t)=U(t)P_0U(t)^{-1}.}\tag{3}
+\]
+The same assertion holds over \(R[t]/(t^N)\) for every \(N\ge1\) and for any \(t\)-adically complete commutative coefficient algebra. In particular, the algebraic projective module \(\operatorname{im}P(t)\) is isomorphic to the base-changed module \(\operatorname{im}P_0\), at every finite order and in the completed limit.
+\end{theorem}
+\begin{proof}
+Since both matrices are idempotent,
+\[
+U(t)P_0=P(t)P_0=P(t)U(t).
+\]
+The constant term is \(P_0^2+(I-P_0)^2=P_0+I-P_0=I\), so the matrix \(U(t)\equiv I\bmod t\) is invertible by the formal geometric series, over \(R[[t]]\) and over every nilpotent quotient \(R[t]/(t^N)\). Multiplication by \(U^{-1}\) yields (3). Taking images, \(U\) restricts to an isomorphism between the corresponding finite projective summands. No assumption of a small finite number of causal steps is made.
+\end{proof}
+
+\begin{corollary}[All-order source-charge obstruction for continuous GST world travel]
+For every actual \(X,p,\alpha\) above, let \(P_\pm(t)\) be any two finite-rank formal or nilpotent-order families of regular algebraic idempotents on the actual affine Jouanolou world \(J\). Their source difference in relative algebraic \(K_0\) is the base change of
+\([P_+(0)]-[P_-(0)]\).
+Consequently its algebraic Chern character and every canonical Betti-degree-\(2p\) period are constant under this transport. No sequence of formal GST+/ALT-/NULL idempotent transformations, with arbitrarily many stages but no non-formal change of algebraic \(K_0\) component, can change the \(K_0\) source class from an initial pair which fails the prescribed class equation (1) into a pair that solves it.
+\end{corollary}
+\begin{proof}
+Apply the previous theorem independently to the plus and minus families. Isomorphic projective modules have identical algebraic \(K_0\) and Chern-character classes. The comparison to canonical Betti cohomology is functorial. The same holds for any finite composition, for nilpotent truncations, and for the completed family. This says nothing about a \emph{discontinuous/non-formal} algebraic construction in a different \(K_0\) class, whose existence remains a separate question.
+\end{proof}
+
+\section{Actual triple-world gluing: a second all-order test}
+The original three-sector model also suggests using three algebraic gluing patches and strictly upper-triangular (creation/destruction/carry) transition functions. We test precisely that genuinely noncommutative possibility. Allow arbitrary finite rank and any number of N-hole sectors, but assume each structure-group transition is \emph{unipotent}, with a global filtration by subbundles whose associated graded pieces are algebraic line bundles \(L_i\) on the original \(X\).
+
+\begin{theorem}[Unipotent carry/gluing does not change the algebraic Chern source]
+Let \(E\) be a holomorphic-algebraic vector bundle on arbitrary smooth projective \(X\) with a finite filtration by algebraic subbundles \(0=E_0\subset E_1\subset\cdots\subset E_r=E\), and \(E_i/E_{i-1}\cong L_i\). Then
+\[
+\boxed{[E]=\sum_i[L_i]\in K_0^{alg}(X),\qquad
+\operatorname{ch}_p(E)=\frac1{p!}\sum_i c_1(L_i)^p\in CH^p(X)_{\mathbb Q}.}
+\tag{4}
+\]
+For unipotent transitions where every \(L_i\) is trivial,
+\(\operatorname{ch}_p(E)=0\) for every \(p>0\).
+These statements hold for all formal and arbitrary-arity triadic cocycle connections compatible with such a finite algebraic filtration. A noncommuting unipotent GST curvature is not sufficient to produce a new positive-degree Chow class.
+\end{theorem}
+\begin{proof}
+Each exact sequence \(0\to E_{i-1}\to E_i\to L_i\to0\) gives \([E_i]=[E_{i-1}]+[L_i]\) in algebraic \(K_0\). Sum and apply the additive Chow Chern character. For all \(L_i=\mathcal O_X\), the result is \([E]=r[\mathcal O_X]\), whose strictly positive-degree Chern characters vanish. Nontrivial extension or connection curvature does not alter this class.
+\end{proof}
+
+\section{Falsifiable comparison with the canonical prescribed target}
+These two universal theorems are \emph{direct tests} of the source-existence proof route, not counterexamples to the Hodge conjecture. Their hypotheses are about a certain proposed creation/destruction/carry mechanism. They show the source equation (1) cannot be forced simply by formal wave evolution of a fixed algebraic projector or by a tower of unipotent extensions with trivial graded bundles.
+
+The first indispensable new geometric input for a successful source birth is therefore an \(\alpha\)-dependent \emph{actual change of global algebraic projective-module class}; a nonformal jump, algebraic patching with nontrivial graded objects, or a genuinely new nonseparable original-\(X\) correspondence may supply it. The present proof does not assume those objects or pretend to construct them. It also does not assert that the three-root ontology itself is inadequate: it identifies precisely where a smooth/truncated/carry-only implementation leaves the native source image unchanged.
+
+\section{Exact independent computation}
+Wolfram evaluated on \(R=\mathbb Q[t]\), \(P_0=\mathrm{diag}(1,0)\), \(g(t)=\begin{psmallmatrix}1&t\\ t&1+t^2\end{psmallmatrix}\) with \(\det g=1\). The exact projector is
+\[
+P(t)=gP_0g^{-1}=
+\begin{pmatrix}1+t^2&-t\\t+t^3&-t^2\end{pmatrix}.
+\]
+The universal matrix \(U=P(t)P_0+(I-P(t))(I-P_0)\) has
+\[
+\det U=1+t^2,\quad U(0)=I,\quad UP_0-PU=0,\quad
+UP_0U^{-1}-P=0.
+\]
+These exact symbolic checks corroborate the universal proof; they do not constitute its generality argument.
+
+\noindent\textbf{Source dependency:} all-\(N\) GST channel and self-expanding birth theorems from the owner Lean modules, the 2026-10-23 alpha-dependent finite polynomial source equations, and standard algebraic \(K_0\) exact-sequence/Chern-character functoriality. No Lean kernel check was run or is claimed. The universal rational Hodge conjecture does not follow from (3)--(4), and is not claimed here.
+\end{document}

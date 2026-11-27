@@ -1,0 +1,176 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-CURVATURE-REALIZATION-RETURN-20261103",
+  "repository": {
+    "commit": "6c78f4d57fcad0e2309cc0bba3417952a58f4d5b",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_curvature_return_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64"
+  },
+  "mathematics": {
+    "assertion_tested": "One exact non-diagonal split-transfer fixture, a degree-thirty composition, a deficient source-image fixture with distinct nullhomologous cycles, the nonzero-nullifier incompatibility, and four projective-space boundary controls. No universal source-existence or geometric theorem is tested.",
+    "coefficient_domain": "Q, exact Fraction arithmetic versus exact Wolfram matrices",
+    "conventions": "Column vectors; raw transfer composed with pullback equals d times identity. A returned homologically trivial difference need not be zero as a cycle.",
+    "inputs": [
+      "research/experiments/gst_curvature_return_checks.py",
+      "research/derivations/GST_curvature_projective_retraction_boundary_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_curvature_return_wolfram_20261103.wl",
+      "research/computations/gst_curvature_return_wolfram_20261103.output.json",
+      "research/experiments/gst_curvature_return_run.py",
+      "GSTCausalFoldDefect.lean",
+      "GSTSpatialFoldResearch.lean",
+      "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+      "research/derivations/GST_projective_fold_algebraization_2026_11_03.tex"
+    ],
+    "bounds": {
+      "transfer_fixtures": 1,
+      "composite_degree": 30,
+      "source_image_targets": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "boundary_controls": 4,
+      "nullifier_control": "one degree-2p nullifying cohomology map; no numerical variety realization"
+    },
+    "non_claims": [
+      "No computational proof of projective geometry or support purity",
+      "No Lean compilation or CI dispatch",
+      "No universal prescribed-alpha boundary construction",
+      "No independent referee or global novelty claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T12:46:50.477992+00:00",
+    "runtime_seconds": 3.515646353000193,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_curvature_return_20261103.output.json",
+      "sha256": "10e0f3870bc35f3829f788ab6c391237cf3ac400ec08814add1f05b25052ce88",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Independent Fraction elimination versus Wolfram MatrixRank",
+    "All six shared exact result tables agree with reparsed remote raw output",
+    "Nonzero-degree and source-image failure controls; unequal-cycle equal-class control",
+    "Changed Lean proof-escape scan, import graph and LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Geometric arguments remain self-reviewed hand proofs",
+    "Lean drafts uncompiled",
+    "Remote runtime and process exit status are not exposed",
+    "The universal source-existence implication remains unresolved"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_curvature_return_checks.py",
+      "sha256": "d4e050fed61f047ce1b8d3bae1e3c2c86342738460070d74cc91223dc24d22f4",
+      "sha256_after": "d4e050fed61f047ce1b8d3bae1e3c2c86342738460070d74cc91223dc24d22f4"
+    },
+    {
+      "path": "research/derivations/GST_curvature_projective_retraction_boundary_2026_11_03.tex",
+      "sha256": "9cc924970766ead86558bfb93e2523cbdc5439fb8c4f2702148d9e6cef86c18b",
+      "sha256_after": "9cc924970766ead86558bfb93e2523cbdc5439fb8c4f2702148d9e6cef86c18b"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_curvature_return_wolfram_20261103.wl",
+      "sha256": "063ba13c831c234ee565ebb054f77ee55f0374af76d5a22667e6c033702d599a",
+      "sha256_after": "063ba13c831c234ee565ebb054f77ee55f0374af76d5a22667e6c033702d599a"
+    },
+    {
+      "path": "research/computations/gst_curvature_return_wolfram_20261103.output.json",
+      "sha256": "07c8f1e4145717a75706fbc3c73c8a38b81b8f76c591a9a4b8c017b34376d277",
+      "sha256_after": "07c8f1e4145717a75706fbc3c73c8a38b81b8f76c591a9a4b8c017b34376d277"
+    },
+    {
+      "path": "research/experiments/gst_curvature_return_run.py",
+      "sha256": "b7b39f6c0f82f18dd490bd49d9b96aaa8a566d98c65c23e1d133a555b3c24693",
+      "sha256_after": "b7b39f6c0f82f18dd490bd49d9b96aaa8a566d98c65c23e1d133a555b3c24693"
+    },
+    {
+      "path": "GSTCausalFoldDefect.lean",
+      "sha256": "9aa86b5621d313f491d87ec6c59ccee754e6a7caacb9ce2fe1ad216a9ac10f50",
+      "sha256_after": "9aa86b5621d313f491d87ec6c59ccee754e6a7caacb9ce2fe1ad216a9ac10f50"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "700cfa60de40bab270ce9bda4bfde68880b950e5a26297cc9950c3cb22c4f5c4",
+      "sha256_after": "700cfa60de40bab270ce9bda4bfde68880b950e5a26297cc9950c3cb22c4f5c4"
+    },
+    {
+      "path": "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+      "sha256": "eaf521312071399efdb76fe1f95f9e0251b95bb0d260b2a3a33a2c2c7548beda",
+      "sha256_after": "eaf521312071399efdb76fe1f95f9e0251b95bb0d260b2a3a33a2c2c7548beda"
+    },
+    {
+      "path": "research/derivations/GST_projective_fold_algebraization_2026_11_03.tex",
+      "sha256": "aeff8be0dd9258c97871f5efb4c58de5f2ebbcec8d80897ec02e792ebccff9bb",
+      "sha256_after": "aeff8be0dd9258c97871f5efb4c58de5f2ebbcec8d80897ec02e792ebccff9bb"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_curvature_return_checks.py",
+    "research/derivations/GST_curvature_projective_retraction_boundary_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_curvature_return_wolfram_20261103.wl",
+    "research/computations/gst_curvature_return_wolfram_20261103.output.json",
+    "research/experiments/gst_curvature_return_run.py",
+    "GSTCausalFoldDefect.lean",
+    "GSTSpatialFoldResearch.lean",
+    "research/derivations/GST_whole_space_central_causal_fold_2026_11_03.tex",
+    "research/derivations/GST_projective_fold_algebraization_2026_11_03.tex"
+  ],
+  "declared_results": [
+    "research/computations/gst_curvature_return_20261103.output.json"
+  ]
+}

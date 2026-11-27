@@ -1,0 +1,234 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+
+\title{The Integrability Strike: the single-door theorem at the vertex\\
+{\large Round 18 --- the trajectory plan's Strike 2 (SKILL V6.1 MODE B; the owner's causal-fold laws as construction engines)}}
+\date{2026-10-28}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Sources (all committed, cited not relabeled).}
+The descent stack of 2026-10-23 (\emph{GST universal affine causal flatness descent}):
+the descent theorem (holomorphic $E$ on $X$ $\iff$ the Oka realization $H_\alpha=q^*E_\alpha$
+on the Stein fold admits a holomorphic relative connection with $F^{vert}_\nabla=0$
+$\iff$ transport $T$ with the exact two-cell law $C_T\equiv\mathrm{id}$);
+the determinant lemma (for Hodge $\alpha$ the determinant line always descends);
+the traceless theorem (scalar vertical curvature $\Rightarrow$ a flat connection is
+\emph{constructed} by the explicit scalar correction); the line-bundle compiler
+(divisor-generated $\alpha$ $\Rightarrow$ an unconditional flat line-filtered pair,
+the Lagrange moment weights); the compiler corollary ($\alpha$ outside the divisor
+algebra admits no line-filtered flat pair).
+The two-center records of 2026-10-24: the determinantal formula
+$[D_{(\alpha,k)}]=c_p^{CH}(E_\alpha^{alg}\otimes H^k)$,
+$Z_\alpha=\frac{(-1)^{p-1}}{m(p-1)!}\bigl([D_{(\alpha,k)}]-\binom{r}{p}k^p[H^p]\bigr)$,
+$\mathrm{cl}^{can}(Z_\alpha)=\alpha$ exactly, conditional \emph{only} on the SAME-$E_\alpha$
+integrability; the second equation ($\bar\partial_E\Phi=0$) already removed
+(Serre ample twist + generic algebraic sections).
+Round 17 (B1--B4): the W-dead total law; the sign-birth channel and the typed bridge;
+the monodromy wall with the transitive kill; the involution-typed $m{:}1\to2$ door;
+the funnel bypass and the E1--E4 entry checklist.
+
+\section{The integrability input's anatomy (the reduction)}
+
+\begin{theorem}[I1: the traceless two-cell reduction]\label{thm:i1}
+Let $X$ be a smooth projective complex variety, $1\le p\le d$, $\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$
+rational Hodge, and let $E_\alpha$ be the prescribed exact carrier
+($\mathrm{ch}(E_\alpha)=r+m\alpha$ pure, $r\ge\max(p+1,d+1)$, the Theorem-A parameters).
+Then the following are equivalent:
+\begin{enumerate}
+\item $(\bar\partial_{E_\alpha})^2=0$ on the SAME $E_\alpha$ (the owner's integrability input);
+\item the determinant-normalized traceless two-cell defect
+$[C_T^0]\in H^2(G_\bullet,\mathrm{SL}(H_\alpha))$ of the Oka transport on the SAME fold
+is holomorphically trivial.
+\end{enumerate}
+The trace part is never an obstruction: the determinant lemma strips it exactly once
+(an explicit scalar renormalization on the universal cover of each affine fiber;
+the residue is the $\mathrm{SL}_r$-class), and the scalar-curvature case is
+constructively flat by the traceless theorem's correction identity.
+\end{theorem}
+
+\begin{proof}
+Koszul--Malgrange identifies (1) with a holomorphic structure on $E_\alpha$; the descent
+theorem identifies that with a flat vertical connection on $H_\alpha$, equivalently with
+a transport trivializing the two-cell. Write $C_T$ for the defect
+$C_T(v,w,z)=T(v{+}w,z)^{-1}T(w,z{+}v)T(v,z)$; it obeys the nonabelian $2$-cocycle law
+identically (associativity), so $[C_T]$ is a well-defined class. The determinant lemma
+supplies a holomorphic scalar renormalization after which $\det T$ is the flat
+determinant transport; then $\det C_T\equiv1$, i.e.\ the defect lands in
+$\mathrm{SL}_r$: this is $C_T^0$. A further scalar renormalization changes $\det C_T$
+only by the coboundary $\mu(v)\mu(w)/\mu(v{+}w)$ (certified exact), so the abelianized
+class is well defined and trivial for Hodge $\alpha$; the residue $[C_T^0]$ is the
+complete obstruction, and its triviality is exactly (2). If the vertical curvature is
+scalar, $F^{vert}=\eta\,\mathrm{Id}$, the correction
+$\nabla'=\nabla-\frac1r\theta\,\mathrm{Id}$ with $d_{vert}\theta=r\eta$ --- which exists
+and is exact precisely under this matching condition (certified both directions) ---
+constructs the flat connection, consistent with (2) being the only content.
+\end{proof}
+
+\begin{remark}
+The owner's demand \emph{``}construct $(\bar\partial_E)^2=0$ on the SAME prescribed
+$E_\alpha$ from the causal-fold laws alone\emph{''} is thereby converted from an analytic
+PDE into ONE named finite condition on ONE named object: the triviality of the
+traceless two-cell class of the SAME fold transport. No second equation remains
+(the two-center record removed $\bar\partial_E\Phi=0$).
+\end{remark}
+
+\section{The divisor-sector birth (the unconditional quantifier chunk)}
+
+\begin{theorem}[I2: the compiler sector theorem, all worlds]\label{thm:i2}
+For EVERY smooth projective $X$, every $p$, and every rational Hodge
+$\alpha\in A^p_{\mathrm{div}}(X)_\mathbb Q$ in the divisor-generated subalgebra,
+the line-bundle compiler class $\mathcal K_\alpha$ (the Lagrange moment weights,
+eq.~(24) of the descent derivation) is an actual algebraic $K^0$ combination of
+tensor-power line bundles, its pullback pair carries the tautological flat relative
+connections (no two-cell obstruction: each line is translation-flat), and
+\[
+Z_\alpha=\mathrm{ch}^{CH}_p(\mathcal K_\alpha)\in CH^p(X)_\mathbb Q,
+\qquad \mathrm{cl}^{can}_X(Z_\alpha)=\alpha \ \text{exactly},
+\]
+with $\mathrm{ch}_j(\mathcal K_\alpha)=0$ for every $j\ne p$ (rank zero included).
+Consequently $m^*(X,p,\alpha)>0$ for every divisor-generated $\alpha$: the universal
+law FS$_\forall$ is certified unconditionally on the entire divisor-generated Hodge
+sector of every input world.
+\end{theorem}
+
+\begin{proof}
+The moment system $\sum_k w^{(d,e)}_k k^j=e!\,\delta_{je}$ ($0\le j\le d$) has unique
+rational weights (the invertible rational Vandermonde on nodes $0,\dots,d$; certified
+for $d=0..8$, all $e$, with the closed forms $w^{(d,1)}_0=-H_d$,
+$w^{(d,1)}_k=(-1)^{k+1}\binom dk/k$). The exponential identity
+$\sum_{\mathbf k}\prod_i w^{(d,e_i)}_{k_i}\exp(\sum_i k_i\lambda_i)=\prod_i\lambda_i^{e_i}$
+in $H^{even}(X,\mathbb Q)$ (each off-grade moment dies) gives the entire pure Chern
+character; clearing denominators and splitting signs gives actual algebraic bundles
+$E_\pm$; on the fold, each tensor line $L^{\otimes k}$ pulls back with its canonical
+translation-flat relative connection, so the pair $(H_+,H_-)$ satisfies the flat descent
+theorem's hypothesis unconditionally; descent, projective GAGA, and the Chern-character
+normalization produce $Z_\alpha$ with the exact canonical Betti class $\alpha$.
+\end{proof}
+
+\begin{corollary}[I2.1: the exact boundary at the discriminator]\label{cor:i21}
+On the test world ($NS(A)=\mathbb Z\,\theta$, rank one), the compiler's range in
+codimension $2$ is exactly $\mathbb Q\,\theta^2$ --- the W-dead sector (B1's law:
+$\langle W_R,\theta^2\rangle=0$ by W0, certified at class level). No line-filtered
+flat pair carries any Weil content: every line-bundle $K^0$ class on the test world
+has $\mathrm{ch}_2\in\mathbb Q\,\theta^2$ (all $c_1$'s are $\theta$-multiples;
+$\mathrm{ch}_2=\frac12\sum a_ik_i^2\,\theta^2$). The charged directions
+($W_R$, the born components) are outside the compiler's reach: they require the
+nonabelian door of Theorem~\ref{thm:i3}.
+\end{corollary}
+
+\section{The involution two-cell: the single door}
+
+\begin{theorem}[I3: the single-door theorem]\label{thm:i3}
+At the discriminator test world, for the Weil direction ($\alpha=W_R$ at carrier scale
+$m$, the SAME exact carrier $E_\alpha$, $\mathrm{ch}=r+mW_R$, $c_2(E_\alpha)=-mW_R$ by
+Newton), consider:
+\begin{enumerate}
+\item[(i)] $(\bar\partial_{E_\alpha})^2=0$ on the SAME carrier;
+\item[(ii)] the traceless two-cell $[C_T^0]$ trivializes;
+\item[(iii)] the involution eigenbranches glue: the two-cell defect of the
+involution-typed branch geometry lies in the $\iota$-centralizer $=$ the block-diagonal
+algebra (certified: the commutant of $\iota=\mathrm{diag}(1_a,-1_b)$ is exactly
+block-diagonal, dimension $a^2+b^2$), its abelian part is the single determinant link
+$\det A\cdot\det B=1$ pairing the branches, and both eigenbranch $\mathrm{SL}$-cells
+die;
+\item[(iv)] the born eigensheaf difference $\Xi_{(+,-)}$ of the owner's Theorem-A
+pattern at the involution split descends to an actual algebraic $K^0$ class on $A$ with
+$\mathrm{ch}^{CH}_2(\Xi_{(+,-)})=[D_1]-[D_2]$ and charge
+$q(\Xi_{(+,-)})=q(D_1)-q(D_2)=2q(B)=16w$ (the D-identity at the involution pattern;
+$(+,-)/(-,+)$ attain $\pm16w$, the equal-sign patterns give $0$);
+\item[(v)] the two-center determinantal output
+$Z_{W_R}=\frac{-1}{m}\bigl([D_{(\alpha,k)}]-\binom r2k^2[H^2]\bigr)$ is an actual
+rational Chow cycle with $\mathrm{cl}^{can}(Z_{W_R})=W_R$ exactly and
+$q(Z_{W_R})=\langle W_R,W_R\rangle=8$.
+\end{enumerate}
+Then (i)$\iff$(ii)$\iff$(iii) (Theorem~\ref{thm:i1} and the eigenblock structure),
+(i)$\Rightarrow$(v) (the two-center machine: Koszul--Malgrange, projective GAGA, Serre
+twist, generic sections, Thom--Porteous, the splitting-principle twist identity
+$c_2(E\otimes H^k)=c_2(E)+(r-1)k\,h\,c_1(E)+\binom r2k^2h^2$ certified exact), and
+(iii)$\Rightarrow$(iv) (the glued eigenbundles descend; their $K^0$ difference is
+$\Xi_{(+,-)}$ with the born-charge bookkeeping). Each of (i), (iv), (v) fires the
+vertex YES: a W-charged surface exists (respectively the two-center output, the
+eigensheaf's charged grade-2 Chow cycle, the born component), and the funnel theorem
+with the round-15-a polarity applies ($W_R$ algebraic on the discriminator; the
+transport gap to HC remains unclaimed).
+Every other route to the vertex is certified dead: the trace cell (strippable,
+Theorem~\ref{thm:i1}); the transitive monodromy (B3: all $32$ transitive subgroups of
+$S_2..S_5$ force constant charges, W-dead with B1); the line-filtered route
+(Corollary~\ref{cor:i21}); the six funnel families (B4: $q=0$-only image; the born
+charge $16\ne0$ lies outside).
+\end{theorem}
+
+\begin{proof}[Proof sketch (the load-bearing steps)]
+(i)$\iff$(ii) is Theorem~\ref{thm:i1}. For (ii)$\iff$(iii): the involution-typed
+branch geometry of the two-center construction prescribes the local monodromy
+$\iota$ (the $m{:}1\to2$ discriminant split, B3's only door); a transport defect
+conjugated into the branch monodromy commutes with $\iota$, hence is block-diagonal
+(the commutant certification); the determinant link leaves exactly the pair of
+eigenbranch $\mathrm{SL}$-cells, and the total traceless cell is trivial iff both die.
+(iii)$\Rightarrow$(iv): the glued eigenbranch transports descend by the descent
+theorem to eigenbundles $E^\pm$ on $A$; GAGA algebraizes them; the $K^0$ difference
+carries the involution pattern's grade-2 content, and the owner's Theorem-A law at
+$\sigma=(+,-)$ with the support filtration gives $\mathrm{ch}_2=[D_1]-[D_2]$, the
+D-identity the charge $16w$ (certified exact on the committed splits).
+(i)$\Rightarrow$(v): the two-center record's machine run on the integrable carrier;
+the twist identity and both output forms (single-center corrected, pair form
+correction-free $[D_+]-[D_-]=-mW_R$) are certified exact on the committed lattice
+for every carrier instance and every $k$: $Z_{W_R}=W_R$ identically.
+The deaths are the cited committed results. The E1--E4 checklist is the door's entry
+test: the conditions any crossing must satisfy (grade-3 $c_1$-matching purity, W8
+FM-flatness, the W9 phase circle, the $8m$ charge normalization), re-verified on the
+born pair instances.
+\end{proof}
+
+\begin{remark}[Scope discipline]
+DETERMINES NO BIT. The door's crossing --- the involution eigenbranch coherence on the
+SAME carrier --- is the vertex bit itself, retained as the owner's quantifier (round 17's
+discipline). The sufficiency chain (i)/(iii)/(iv)/(v) $\Rightarrow$ vertex-YES is
+certified; the necessity direction (vertex-YES $\Rightarrow$ (i)) carries the committed
+K-torsion gap label (registry R1: expectation, not a claim). No conditional landing is
+claimed as a resolution (M1--M8); no source-existence postulate is inserted
+(anti-circularity): the door is a \emph{reduction} of the owner's own demand, not a new
+axiom. The two-center output (v) is certified as an \emph{identity} on the committed
+model --- its actuality is exactly the door.
+\end{remark}
+
+\section{The quantifier line and the next arm}
+
+FS$_\forall$: the divisor-generated sector of \emph{every} world is now certified
+unconditionally (Theorem~\ref{thm:i2}) --- the campaign's first full-sector quantifier
+advance, executed by the owner's fold calculus (the compiler) as construction engine.
+The charged directions reduce, world by world, to the single involution door
+(Theorem~\ref{thm:i3}); the per-world bit is the door crossing. Round 19's transport
+sweep runs the door along the certified T-edges with the per-world sign-detection
+program (B2's world-portable law); the E1--E4 checklist is the entry test at every
+world.
+
+\section{Verification}
+
+Certificate script \texttt{research/experiments/task18a\_integrability\_strike\_checks.py}
+(bounded: exact \texttt{Fraction}/int arithmetic, the parity-exact Weil construction, no
+complex numbers, no floats, zero tolerance, every comparison asserted; deterministic;
+$<10$\,s). ALL GREEN: I1 (a)--(d) the traceless reduction's core; I2 (a)--(d) the moment
+system ($d=0..8$), the compiler purity on the test lattice ($5$ cases), the
+splitting-principle twist identity and both two-center output forms
+($Z_{W_R}=W_R$ exactly on every carrier instance and $k=0..3$), the sector boundary;
+I3 (a)--(g) the centralizer, the determinant link, the born eigensheaf bookkeeping
+(all five splits), the $S_2$ door shape, E1--E4 on the born pair instances (E1 purity,
+the W6 table, the charge split, the $8m$ normalization; E3 the FM normalization
+$\Phi(W_R)=\hat W_R$ exactly and the ghost-census pairing $8m$ at the born scales,
+added by the 18-b audit repair), the four-face chain consistency, the deaths (real
+asserts on the family faces after the 18-b repair).
+Three local pre-commit repairs were caught by the script's own asserts (the intended
+gate behavior): an integer-division float leak in the trace projection (the no-floats
+law), a compiler test case violating the homogeneous-degree-$p$ requirement, and a
+scalar-grade-0 handling in the twist product; the 18-b audit loop closed at PASS with
+two receipt-fidelity minors repaired in-round (the E3 label made real; the deaths
+asserts made real).
+
+\end{document}

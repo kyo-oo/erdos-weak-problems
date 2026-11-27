@@ -1,0 +1,141 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-SELECTED-BLOCK-EXCESS-INTEGRABILITY-20261103",
+  "repository": {
+    "commit": "feb0a99d1e08c4998a01f7239e5bb9e668851354",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_selected_block_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language remote kernel",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64; remote hardware not exposed"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact block coefficient/occurrence and power-sum identities, finite root-transitive package cancellation, nonzero-projector perturbation characteristic/discriminant, excluded parameter boundaries and traceless noncommuting obstruction.",
+    "coefficient_domain": "Z, Q and sparse quotient Q[x,y,z,e,t]/(x^2+yz-1)",
+    "conventions": "Monodromy acts on root labels, selector shells count first-block roots. Complete block packages are orbit-shell connected components. eta2 wedge eta1 = -eta1 wedge eta2.",
+    "inputs": [
+      "research/experiments/gst_selected_block_checks.py",
+      "research/experiments/gst_selected_block_wolfram_20261103.wl",
+      "research/computations/gst_selected_block_wolfram_20261103.output.json",
+      "research/derivations/GST_selected_block_excess_and_integrability_2026_11_03.tex",
+      "research/experiments/gst_selected_block_run.py"
+    ],
+    "bounds": {
+      "all_subgroups_of_S_n": [
+        1,
+        4
+      ],
+      "power_sum_degrees": [
+        1,
+        4
+      ],
+      "r_m": [
+        1,
+        6
+      ],
+      "selector": "all 0..r+m"
+    },
+    "non_claims": [
+      "No universal Hodge proof",
+      "No Lean changes or compilation",
+      "Finite checks do not prove scheme-level geometric statements",
+      "No global novelty or independent mathematical reviewer"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T01:58:57.407627+00:00",
+    "runtime_seconds": 0.26307971400001406,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_selected_block_20261103.independent.output.json",
+      "sha256": "62e6323ed23dbbd75dde403e05c23f327a374e422201174471a807570cd50e41",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Direct subset enumeration versus Wolfram binomial coefficients",
+    "Sparse quotient matrix arithmetic versus PolynomialReduce",
+    "All subgroups enumerated for n=1..4 (counts 1,2,6,30)",
+    "Remote output reparsed and all three shared tables matched",
+    "LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Hand geometric arguments are self-reviewed",
+    "Source constructor remains conditional on the stated selection input",
+    "Remote kernel process exit status and runtime not exposed"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_selected_block_checks.py",
+      "sha256": "cbb3c73aa5efcbe9253e3d80a1bb962d85d2103ef45c14aa5a8b2d598a351e3d",
+      "sha256_after": "cbb3c73aa5efcbe9253e3d80a1bb962d85d2103ef45c14aa5a8b2d598a351e3d"
+    },
+    {
+      "path": "research/experiments/gst_selected_block_wolfram_20261103.wl",
+      "sha256": "701a535295a0ce0234d73e6b0541c9f8d097304fe39b18848887135c6dc324e4",
+      "sha256_after": "701a535295a0ce0234d73e6b0541c9f8d097304fe39b18848887135c6dc324e4"
+    },
+    {
+      "path": "research/computations/gst_selected_block_wolfram_20261103.output.json",
+      "sha256": "fe3fd1cc753e3cba06d4d78dced2ab012a414d454f50928c5fcb6a68aa4a5fd5",
+      "sha256_after": "fe3fd1cc753e3cba06d4d78dced2ab012a414d454f50928c5fcb6a68aa4a5fd5"
+    },
+    {
+      "path": "research/derivations/GST_selected_block_excess_and_integrability_2026_11_03.tex",
+      "sha256": "9556d2dd8f5950895e9aa01e8c36e3ecbf8934022c914441de17192bf49f7e76",
+      "sha256_after": "9556d2dd8f5950895e9aa01e8c36e3ecbf8934022c914441de17192bf49f7e76"
+    },
+    {
+      "path": "research/experiments/gst_selected_block_run.py",
+      "sha256": "65b2dc189085ee93822f553d199bf9d5c35c3aa58aa695544b83853fd8950f18",
+      "sha256_after": "65b2dc189085ee93822f553d199bf9d5c35c3aa58aa695544b83853fd8950f18"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_selected_block_checks.py",
+    "research/experiments/gst_selected_block_wolfram_20261103.wl",
+    "research/computations/gst_selected_block_wolfram_20261103.output.json",
+    "research/derivations/GST_selected_block_excess_and_integrability_2026_11_03.tex",
+    "research/experiments/gst_selected_block_run.py"
+  ],
+  "declared_results": [
+    "research/computations/gst_selected_block_20261103.independent.output.json"
+  ],
+  "remote_evaluation": {
+    "input_sha256_before": "701a535295a0ce0234d73e6b0541c9f8d097304fe39b18848887135c6dc324e4",
+    "input_sha256_after": "701a535295a0ce0234d73e6b0541c9f8d097304fe39b18848887135c6dc324e4",
+    "started_at": "2026-11-03T01:57:54.732Z",
+    "finished_at": "2026-11-03T01:58:05.334Z",
+    "kernel_process_exit_status": null,
+    "kernel_runtime_seconds": null,
+    "assertion_count": 209
+  }
+}

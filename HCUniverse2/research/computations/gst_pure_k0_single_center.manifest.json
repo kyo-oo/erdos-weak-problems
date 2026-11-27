@@ -1,0 +1,130 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-PURE-K0-SINGLE-CENTER-20261020",
+  "repository": {
+    "commit": "77077d430c2572bb21bafabfd9fff69a7fa42b88",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "research/computations/gst_pure_k0_single_center.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      }
+    ],
+    "hardware": "x86_64; Linux-6.18.55-x86_64-with-glibc2.39; CPU model unrecorded"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact formal kernel-completion and lower-character purity; all-p formula implemented for p=1..12; Newton reconstruction, ambient subtraction, factorial/sign feedback and normalization in 96 visited cases; 300 dimension pairs",
+    "coefficient_domain": "Exact rational polynomials in independent h,z,f_1,...,f_p; no floating point",
+    "conventions": "Complex codimension p; primitive readout kills h multiples; codimension-p exceptional push has sign (-1)^(p-1); denominator M>0",
+    "inputs": [
+      "research/computations/gst_pure_k0_single_center.py",
+      "GSTUniversalResolvedSupportHodge.lean",
+      "research/computations/gst_pure_k0_single_center_wolfram.wl",
+      "research/computations/gst_pure_k0_single_center_wolfram.output.txt"
+    ],
+    "bounds": {
+      "codimensions_inclusive": [
+        1,
+        12
+      ],
+      "kernel_twists": [
+        2,
+        5
+      ],
+      "generation_twists": [
+        3,
+        7
+      ],
+      "denominator_factors": [
+        1,
+        6
+      ],
+      "formal_cases_visited": 96,
+      "dimensions_inclusive": [
+        1,
+        24
+      ],
+      "dimension_pairs_visited": 300,
+      "readout_values": [
+        "-3",
+        "1/7",
+        "5"
+      ],
+      "timeout_seconds": 30
+    },
+    "non_claims": [
+      "No native K0 source for every prescribed arbitrary-X Hodge residual is asserted",
+      "Finite coefficient computations do not construct algebraic schemes or instantiate canonical Betti maps",
+      "Smooth center inside original X is asserted only for n<=2p+1; outside this range the smooth incidence center lies over X"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T08:58:10.673548+00:00",
+    "runtime_seconds": 0.2655556260015146,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": 1,
+      "max_threads": 1
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_pure_k0_single_center.output.json",
+      "sha256": "3f83cddb992b9e5f384e97d463047cb571522cb908721a242af7f26795181d7e",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Arbitrary lower character symbols cancel through the actual evaluation-kernel K0 relation",
+    "Newton recurrence gives zero lower Chern coefficients and signed factorial leading term",
+    "A further positive twist adds exactly the hyperplane ambient term",
+    "Ambient subtraction and rational normalization return exactly z in every visited case",
+    "Both exceptional signs cancel in all three rational readouts per case",
+    "Independent Wolfram exponential calculation passed p=1..10",
+    "All declared input bytes unchanged during the run"
+  ],
+  "result": "Implementation and finite assertions verified in the stated range. Universal coefficient proof is separate Lean evidence; geometric construction and its scope are in the linked research record.",
+  "residual_risks": [
+    "Global generation, locally free resolutions, generic determinantal transversality, Bertini and canonical cycle-class comparison are geometric inputs not instantiated by Python",
+    "A prescribed Hodge residual still needs an independently native source; positive matrix-level spectral readout does not provide one"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/gst_pure_k0_single_center.py",
+      "sha256": "4b9c3e713470c5bea83a86673fead41dfe6696bb74a482c1384eff05843507e6",
+      "sha256_after": "4b9c3e713470c5bea83a86673fead41dfe6696bb74a482c1384eff05843507e6"
+    },
+    {
+      "path": "GSTUniversalResolvedSupportHodge.lean",
+      "sha256": "83e288e526c9bf87bd1bb0738e64b256252cd3e367419f76b22b368bcd90e87c",
+      "sha256_after": "83e288e526c9bf87bd1bb0738e64b256252cd3e367419f76b22b368bcd90e87c"
+    },
+    {
+      "path": "research/computations/gst_pure_k0_single_center_wolfram.wl",
+      "sha256": "ac42f35a3221fe5a428b472462dea4e9c91f10dd89e1aa66e81d82193e3dae24",
+      "sha256_after": "ac42f35a3221fe5a428b472462dea4e9c91f10dd89e1aa66e81d82193e3dae24"
+    },
+    {
+      "path": "research/computations/gst_pure_k0_single_center_wolfram.output.txt",
+      "sha256": "0fe83037e06efb144026fff24c28bf2cbf8e4d6495ba3aa21fdc0e9b21755ccc",
+      "sha256_after": "0fe83037e06efb144026fff24c28bf2cbf8e4d6495ba3aa21fdc0e9b21755ccc"
+    }
+  ],
+  "declared_results": [
+    "research/computations/gst_pure_k0_single_center.output.json"
+  ]
+}

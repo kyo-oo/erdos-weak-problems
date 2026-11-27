@@ -1,0 +1,1580 @@
+\documentclass[11pt]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\im}{\mathrm{im}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\title{GST universal original-\(X\) source birth from bounded relative Chow geometry:
+canonical specialization and polarized native-image gap}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\section{Immutable original-variety target, source types, and route difference}
+Take any smooth projective complex \(d\)-fold \(X\), every
+\(0\le p\le d\), and every
+\(
+\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X).
+\)
+The required output is an ACTUAL rational algebraic
+\(Z_\alpha\in\CH^p(X)_\Q\) with the GENUINE
+analytic fundamental-class comparison
+\[
+                 \cl_X^{\mathrm{can}} Z_\alpha=\alpha.
+                                                               \tag{1}
+\]
+The earlier GST K0/Euler, finite-degree return, and
+Chern--Segre results compile already-constructed actual
+algebraic source columns, but cannot manufacture an
+output outside the full image of the canonical class map.
+This attempt therefore changes the INPUT geometry:
+algebraic cycles are first constructed on OTHER
+nearby fibers of a genuinely smooth projective
+DEFORMATION FAMILY, not selected inside the
+pre-existing original-\(X\) Chow group.
+The new mathematical question is whether such
+geometrically born cycles can be transported to
+the original target without prior Chow preimage.
+
+\section{Actual original-X source from projective Chow limits}
+Let
+\[
+ \pi:\mathfrak X\to\Delta
+\]
+be any smooth projective analytic family over
+a sufficiently small complex disk, with
+\(\mathfrak X_0=X\), equipped with an honest
+relative projective embedding
+\(\mathfrak X\subset \mathbf P^N\times\Delta\).
+Choose the genuine Ehresmann/Gauss--Manin
+identification of the rational local systems
+near \(0\). Denote by \(\alpha_t\) the
+horizontal rational continuation of the
+given original class \(\alpha_0=\alpha\);
+it is not assumed algebraic on the central fiber.
+
+\begin{theorem}[Universal bounded Chow specialization as an actual original-X source constructor]
+Fix a codimension \(p\), a positive integer
+\(N_0\) and a nonnegative integer \(D\).
+Suppose there is a sequence \(t_j\to0\)
+of noncentral smooth fibers, and on EACH
+of those genuinely different original
+fibers two INDEPENDENTLY CONSTRUCTED
+effective algebraic codimension-\(p\)
+cycles \(A_j^+,A_j^-\), each of relative
+projective degree at most \(D\), such that
+\[
+ \boxed{
+ \cl_{\mathfrak X_{t_j}}^{\mathrm{can}}
+          \left(\frac{A_j^+-A_j^-}{N_0}\right)
+                         =\alpha_{t_j}.}          \tag{2}
+\]
+No rational Chow representative of \(\alpha_0\)
+on \(X\) is assumed.
+Then a pair of ACTUAL effective
+cycles \(A_0^\pm\) is CONSTRUCTED on
+the ORIGINAL \(X\), with
+degrees at most \(D\), and
+\[
+ \boxed{
+ Z_\alpha=\frac{A_0^+-A_0^-}{N_0}
+        \in\CH^p(X)_\Q,\qquad
+ \cl_X^{\mathrm{can}}(Z_\alpha)=\alpha.}           \tag{3}
+\]
+The construction is the genuine
+relative-Chow specialization of the
+two effective cycle sequences, not
+a supplied Hodge-to-Chow selection on \(X\).
+\end{theorem}
+\begin{proof}
+Relative Chow spaces of effective
+codimension-\(p\) cycles of each FIXED
+projective degree \(e\) are proper over
+the projective-family base. Their finite
+union over \(0\le e\le D\) remains proper.
+Take the fiber product of TWO such
+degree-bounded relative Chow spaces
+over \(\Delta\); this also is proper.
+The points \((t_j,A_j^+,A_j^-)\)
+therefore have an accumulation point
+\((0,A_0^+,A_0^-)\) in the central
+Chow fiber, after passing to a
+subsequence. Both \(A_0^\pm\) are
+genuine effective projective algebraic
+cycles on \(\mathfrak X_0=X\), of the
+claimed dimension and degree.
+
+In a smooth proper family, canonical
+Betti cycle classes of a
+continuous family of algebraic cycles
+are locally constant in the
+horizontal rational cohomology local
+system. Equivalently, under an
+Ehresmann trivialization,
+integration of closed smooth
+differential forms over the
+specializing algebraic cycle currents
+converges to integration over the
+limiting effective cycle.
+Consequently, under the local system
+identification,
+\(
+ \cl(A_j^\pm)\to\cl(A_0^\pm).
+\)
+But each signed combination in (2)
+has the same constant transported
+Betti class \(\alpha\).
+The rational cohomology lattice is
+finite-dimensional and its
+cohomology pairing with the
+limiting cycle is continuous.
+Thus
+\[
+ \cl_X^{can}(A_0^+-A_0^-)
+     =N_0\alpha.
+\]
+Dividing by \(N_0\) proves (3).
+Every map used in the construction
+is the ACTUAL Chow, analytic-cycle
+or Gauss--Manin comparison map of the
+stated original family.
+\end{proof}
+
+\begin{corollary}[Necessary algebraic-degree escape for a hypothetical missing target]
+If a given rational Hodge
+\(\alpha\in\Hdg^p(X)_\Q\)
+is NOT in
+\(\im(\cl_X^{can})\),
+then for every smooth projective
+family through \(X\), every positive
+integer \(N_0\), and every finite
+effective degree bound \(D\),
+there CANNOT exist a sequence
+of noncentral fibers approaching
+the original \(X\) satisfying
+(2) with those bounds.
+Thus along any genuine family of
+nearby algebraic realizations of
+the same horizontal Hodge class,
+at least the effective degree
+bound or the denominator bound
+must eventually escape ALL
+fixed finite bounds.
+\end{corollary}
+\begin{proof}
+Contraposition of the theorem,
+quantified over \(N_0,D\).
+This is a criterion for a
+hypothetical defect and does
+not assert the existence of
+any such defective variety.
+\end{proof}
+
+\section{STRONG bounded-complexity GST source locus theorem on arbitrary deformation bases}
+The preceding specialization
+constructs a cycle on
+the ORIGINAL \(X\)
+from a single
+accumulating family
+of independently
+algebraic sources
+on varying
+fibers.
+In fact
+projective Chow
+properness and
+the actual
+canonical
+cycle-class
+local constancy
+give a stronger
+geometric
+source-birth
+law.
+
+For fixed
+relative projective
+embedding, \(p,D,N_0\)
+and horizontal
+rational target
+\(\alpha_t\),
+let \(S_{D,N_0}(\alpha)\)
+be the set
+of nearby points
+\(t\in\Delta\)
+admitting
+effective algebraic
+cycles \(A_t^\pm\)
+on the true
+smooth projective
+fiber \(\mathfrak X_t\),
+each of degree
+\(\le D\),
+such that
+\[
+ \cl_{\mathfrak X_t}^{can}
+       ((A_t^+-A_t^-)/N_0)
+                    =\alpha_t.
+\]
+
+\begin{theorem}[A bounded native Chow source locus is closed analytic and either discrete or all of a small disk]
+The locus
+\[
+            \boxed{S_{D,N_0}(\alpha)
+                              \subset\Delta}
+                                                               \tag{3a}
+\]
+is a CLOSED analytic
+subset of the
+original smooth
+deformation disk.
+Consequently
+if this locus
+contains
+INFINITELY MANY
+distinct noncentral
+points accumulating
+at zero, it
+equals the
+entire connected
+disk after
+shrinking:
+\[
+ \boxed{
+  t_j\to0,\quad
+  t_j\in S_{D,N_0}(\alpha)
+   \quad\Longrightarrow\quad
+  S_{D,N_0}(\alpha)=\Delta .
+ }                                                       \tag{3b}
+\]
+In particular,
+the genuine
+original-\(X\)
+specialization
+cycle of (3)
+exists, and
+the SAME target
+has some
+bounded-degree
+geometric
+representative on
+every nearby
+smooth fiber.
+\end{theorem}
+\begin{proof}
+Take the proper
+finite-type
+relative Chow
+parameter space
+of PAIRS of
+effective
+codimension-\(p\)
+cycles with
+individual
+degrees \(\le D\);
+denote it
+\(\mathscr C\to\Delta\).
+Because
+\(\Delta\) is
+simply connected
+and the fibers
+\(\mathfrak X_t\)
+are smoothly
+proper, identify
+the rational
+cohomology local
+systems by
+Gauss--Manin.
+A point of
+\(\mathscr C\)
+represents two
+genuine algebraic
+cycles and has
+a canonical
+difference Betti
+class. The map
+from \(\mathscr C\)
+to the
+locally constant
+rational
+cohomology lattice
+taking this
+difference class
+is itself
+LOCALLY CONSTANT:
+it is the
+fundamental
+class of the
+universal Chow
+cycle,
+compatible with
+proper
+specialization.
+Thus the subset
+\(\mathscr C_\alpha\)
+of points
+whose difference
+class equals
+\(N_0\alpha_t\)
+is a union of
+connected
+components of
+\(\mathscr C\);
+it is closed
+analytic and
+its restriction
+to every compact
+subdisk remains
+proper.
+
+By the proper
+analytic image
+theorem, the
+image
+\(
+ S_{D,N_0}(\alpha)
+ =\pi_{\mathscr C}
+            (\mathscr C_\alpha)
+\)
+is closed
+analytic in
+the disk.
+A closed
+analytic subset
+of a
+connected
+one-dimensional
+complex disk
+is discrete
+unless it is
+the WHOLE disk.
+An infinite
+set of points
+accumulating at
+the interior
+point zero
+cannot be
+discrete, proving
+(3b). In
+particular zero
+belongs to
+the image;
+the corresponding
+fiber of
+\(\mathscr C_\alpha\)
+constructs
+the ACTUAL
+rational Chow
+cycle on the
+original \(X\).
+\end{proof}
+
+\begin{corollary}[Quantitative geometric meaning of a hypothetical original-X Hodge defect]
+If the
+canonical rational
+Hodge target
+\(\alpha\)
+is NOT algebraic
+on the original
+\(X\), then
+for EACH
+fixed pair
+of bounds
+\((D,N_0)\)
+there exists
+a genuine
+neighborhood
+\(U_{D,N_0}\)
+of the
+original fiber
+in the
+smooth deformation
+base with
+\[
+ \boxed{
+ U_{D,N_0}\cap
+         S_{D,N_0}(\alpha)=\varnothing.}
+                                                               \tag{3c}
+\]
+In particular,
+even if
+Noether--Lefschetz
+type
+special fibers
+with cycle
+representatives
+accumulate,
+their effective
+degrees or
+denominators
+cannot remain
+uniformly
+bounded.
+No actual
+nonalgebraic
+Hodge class
+is asserted
+to exist
+by this
+contrapositive.
+\end{corollary}
+
+\section{A stronger arbitrary-X specialization theorem WITHOUT supplied numerical bounds}
+Let \(\pi:\mathfrak X\to\Delta\) be ANY smooth projective
+complex disk family and \(\alpha_t\) a fixed horizontal
+rational \(2p\)-cohomology class, not assumed Hodge or
+algebraic on any fiber. Define the genuine algebraicity locus
+\[
+ \mathscr A(\alpha)=
+ \{t\in\Delta:\exists Z_t\in CH^p(\mathfrak X_t)_\Q,
+          \ \cl_{\mathfrak X_t}^{can}(Z_t)=\alpha_t\}.
+\]
+For integers \(D\ge0,N\ge1\), let
+\(S_{D,N}(\alpha)\) be the actual proper relative-Chow
+source locus of two effective cycles with degrees at most
+\(D\) and signed difference of Betti class \(N\alpha_t\).
+
+\begin{theorem}[Uncountable neighboring source fibers force an actual original-X cycle]
+For EVERY such smooth projective family the algebraicity
+locus satisfies the genuine geometric dichotomy
+\[
+ \boxed{\mathscr A(\alpha)\text{ is countable }
+                  \quad\text{OR}\quad \mathscr A(\alpha)=\Delta.}
+                                                               \tag{7}
+\]
+If the class has algebraic representatives on UNCOUNTABLY
+many distinct fibers, then some fixed pair \(D_*,N_*\)
+is automatically realized by the ACTUAL relative Chow
+geometry on EVERY fiber, including the specified original
+\(X=\mathfrak X_0\), and the resulting genuine effective
+cycles \(A_0^\pm\) give
+\[
+ \boxed{Z_{\alpha_0}=(A_0^+-A_0^-)/N_*\in CH^p(X)_\Q,
+                 \quad\cl_X^{can}(Z_{\alpha_0})=\alpha_0.}
+                                                               \tag{8}
+\]
+Unlike the preceding bounded theorem, NO bound on
+cycle degree or denominator is assumed as INPUT.
+\end{theorem}
+\begin{proof}
+Every rational algebraic cycle is a rational finite
+signed combination of actual integral effective
+cycles. Clearing its finitely many denominators
+gives a difference of two effective cycles divided
+by an integer \(N\). Both effective cycles have finite
+projective degrees, so the following equality of
+ACTUAL source loci holds:
+\[
+ \mathscr A(\alpha)=
+ \bigcup_{N=1}^{\infty}\ \bigcup_{D=0}^{\infty}
+                  S_{D,N}(\alpha).
+\]
+By the previously proved true relative-Chow
+properness and canonical Betti local constancy,
+each \(S_{D,N}\) is closed analytic in the disk.
+Every proper analytic subset of a connected
+one-dimensional complex disk is discrete and
+hence countable. A countable union of proper
+analytic subsets is countable. Thus, if
+\(\mathscr A(\alpha)\) is uncountable, at least one
+\(S_{D_*,N_*}\) must equal the WHOLE disk.
+The central relative Chow fiber actually contains
+\(A_0^\pm\), and its canonical Betti cycle class
+is the horizontal target \(N_*\alpha_0\).
+This constructs (8) on the original X.
+\end{proof}
+
+\begin{corollary}[Positive-measure and very-general geometric source birth]
+For any connected irreducible smooth complex analytic
+deformation base \(B\), the algebraicity locus of a
+fixed flat rational cohomology class is a COUNTABLE
+UNION of closed analytic subsets of \(B\). If it
+has POSITIVE smooth volume measure (or contains
+a point outside the countable union of all proper
+relative-Chow source analytic loci), at least one
+fixed bounded-Chow source locus is all of \(B\),
+and the class is algebraic on every fiber.
+\end{corollary}
+\begin{proof}
+A proper complex analytic subset of an irreducible
+complex manifold has smooth volume zero. Countably
+many such sets have volume zero. The only possible
+positive-measure Chow locus is the full base;
+the proper relative Chow family then supplies actual
+cycles on every original fiber.
+\end{proof}
+
+\section{Exact REAL isolated-Hodge-locus test on smooth projective elliptic products}
+The new theorem really eliminates the numerical BOUNDS.
+It does NOT create algebraic neighboring fibers out of
+an arbitrary original Hodge class. The following genuine
+projective family computes that missing hypothesis sharply.
+
+Let \(E_\tau=\C/(\mathbb Z+\tau\mathbb Z)\)
+with \(\Im\tau>0\). For \(t\) in a sufficiently
+small complex disk put
+\[
+ X_t=E_i\times E_{i+t}.
+\]
+This is an ACTUAL smooth projective family with marked
+Gauss--Manin rational one-forms \(dx_1,dy_1,dx_2,dy_2\).
+Choose the fixed INTEGRAL two-class
+\[
+ \boxed{\eta=dx_1\wedge dy_2-dy_1\wedge dx_2.}    \tag{9}
+\]
+At the central original \(X_0=E_i\times E_i\),
+the actual diagonal divisor \(\Delta_E\)
+has canonical class
+\[
+ \cl^{can}[\Delta_E]
+ =dx_1dy_1+dx_2dy_2-dx_1dy_2+dy_1dx_2.
+\]
+Therefore \(\eta=\cl^{can}([\{o\}\times E_i]
+ +[E_i\times\{o\}]-[\Delta_E])\) is GENUINELY
+algebraic on the ORIGINAL \(X_0\).
+
+On the varying fiber the holomorphic one-forms are
+\(\omega_1=dx_1+i\,dy_1\) and
+\(\omega_2=dx_2+(i+t)\,dy_2\).
+\begin{theorem}[An algebraic original class may have NO other nearby Hodge fiber]
+Under the actual horizontal transport, the
+EXACT exterior calculation yields
+\[
+ \boxed{\eta\wedge\omega_1\wedge\omega_2
+    =t\;dx_1\wedge dx_2\wedge dy_1\wedge dy_2.}  \tag{10}
+\]
+For REAL integral \(\eta\), Hodge type \((1,1)\)
+on the surface is equivalent to vanishing of this
+wedge (and its complex conjugate). Hence
+\[
+ \boxed{\eta_t\in H^{1,1}(X_t)
+                       \quad\Longleftrightarrow\quad t=0.}
+                                                               \tag{11}
+\]
+In particular the original class ALREADY has an
+ACTUAL algebraic representative, yet its horizontal
+continuation admits no algebraic representative
+on ANY noncentral nearby fiber: it is not even Hodge.
+Thus an argument asserting that EVERY arbitrary-X
+Hodge class has an accumulation of neighboring
+algebraic realizations is FALSE.
+This is a counterexample to that DEFORMATION
+PRESCRIPTION, not to the Hodge conjecture.
+\end{theorem}
+\begin{proof}
+At \(t=0\), expand the actual difference map
+\((z_1,z_2)\mapsto z_2-z_1\) to compute
+the stated diagonal divisor class.
+For \(t\ne0\), wedge the explicit two-forms
+with the two actual holomorphic one-forms.
+The only two nonrepeating wedge monomials
+sum to the coefficient \(t\), giving (10).
+The class is rational REAL, so vanishing of its
+\((0,2)\) part is equivalent to being type
+\((1,1)\); the \((0,2)\) coefficient is detected
+by wedging with \(\omega_1\wedge\omega_2\).
+Therefore the Hodge locus is exactly \(\{0\}\).
+\end{proof}
+
+\noindent\textbf{Independent Wolfram check.}
+The ordered alternating four-tensor computation in
+basis \((dx_1,dx_2,dy_1,dy_2)\)
+returned coefficient \(t\) EXACTLY,
+zero only at \(t=0\).
+Unlike a made-up Gram model, this is
+a genuine family of actual projective varieties.
+It establishes that a Hodge-preserving deformation
+is an additional geometric input, not something
+created by the GST Gram, Euler, Chern--Segre or
+source-inventory laws.
+
+\section{Hodge-locus acceptance and exact rejection of isotrivial pseudo-birth}
+The parameter-space
+route has TWO
+distinct
+necessary inputs:
+the horizontal
+class must retain
+its Hodge type,
+and ACTUAL
+Chow sources
+must occur
+on sufficiently
+many of those
+Hodge fibers.
+Neither input
+follows from
+the GST
+native-source
+Gram or Euler
+projector alone.
+
+\begin{theorem}[Necessary holomorphic Hodge-locus condition]
+For every
+smooth projective
+disk family
+and horizontal
+rational
+\(\alpha_t\in
+H^{2p}(\mathfrak X_t,\Q)\),
+its actual
+Hodge locus
+\[
+ \operatorname{HL}(\alpha)
+ =\{t:\alpha_t
+        \in H^{p,p}(\mathfrak X_t)\}
+\]
+is a CLOSED
+complex analytic
+subset of
+the disk,
+and hence
+is either
+discrete
+(countable)
+or the
+entire disk.
+The algebraicity
+locus of (7)
+satisfies
+\[
+ \boxed{
+ \mathscr A(\alpha)
+           \subseteq\operatorname{HL}(\alpha).}
+                                                               \tag{12}
+\]
+Thus an
+uncountable-fiber
+source construction
+necessarily
+requires
+the horizontal
+\(\alpha_t\)
+to be Hodge
+on ALL
+nearby fibers.
+\end{theorem}
+\begin{proof}
+The Hodge
+filtration
+\(F^p\)
+is a holomorphic
+subbundle
+of the
+cohomological
+flat bundle.
+The horizontal
+rational class
+defines a
+holomorphic
+section of
+the quotient
+bundle
+\(H^{2p}/F^p\).
+The zero locus
+of this
+holomorphic
+section is
+closed analytic.
+For a REAL
+rational
+cohomology class
+of total degree
+\(2p\),
+membership
+in \(F^p\)
+implies, by
+complex conjugation,
+membership
+in \(\overline F^p\),
+and the
+intersection
+is precisely
+\(H^{p,p}\).
+This proves
+analyticity.
+Any algebraic
+cycle has
+canonical
+Betti class
+of type
+\((p,p)\),
+giving (12).
+The
+classification
+of proper
+analytic
+subsets of
+a disk gives
+the dichotomy.
+\end{proof}
+
+\begin{lemma}[An isotrivial nearby-source family does not create a new source direction]
+If the
+projective
+family is
+ACTUALLY
+trivialized
+by algebraic
+isomorphisms
+\(\mathfrak X_t\simeq X\)
+that identify
+\(\alpha_t\)
+with a single
+\(\alpha\)
+under canonical
+Betti realization,
+then
+\[
+ \boxed{
+ \mathscr A(\alpha)=\Delta
+ \quad\Longleftrightarrow\quad
+ \alpha\in\im(
+     \cl_X^{can}:CH^p(X)_\Q\to H^{2p}(X,\Q)).
+ }                                                       \tag{13}
+\]
+If \(\alpha\)
+is not
+algebraic
+on \(X\),
+then
+\(\mathscr A(\alpha)=\varnothing\).
+Thus replacing
+the genuine
+nearby-birth
+question
+with the
+constant
+family
+does not
+prove any
+new
+original-\(X\)
+algebraicity.
+\end{lemma}
+\begin{proof}
+Any rational
+Chow class
+on a fiber
+pulls back
+along the
+specified
+algebraic
+trivialization
+to an
+actual rational
+Chow class
+on \(X\)
+with
+identical
+canonical
+Betti class.
+Conversely
+any algebraic
+cycle on \(X\)
+pushes
+forward
+to every
+fiber and
+preserves the
+class.
+This gives
+the exact
+equivalence
+(13).
+\end{proof}
+
+The ACTUAL
+elliptic
+product
+discriminator
+(9)--(11)
+exhibits
+a nontrivial
+family in
+which even
+the Hodge-locus
+condition
+fails.
+The
+isotrivial
+lemma shows
+that making
+the condition
+true by a
+constant
+family
+merely
+assumes
+algebraicity
+on the
+original
+\(X\).
+These two
+tests
+prevent
+the new
+uncountable-source
+transfer
+theorem
+from being
+mistaken
+for an
+input-free
+universal
+construction.
+
+\section{An actual finite geometric native source inventory on EVERY arbitrary original-X}
+No candidate Chow
+cycle representing
+the target alpha
+is used as input
+to this construction.
+Let \(X\subset\mathbf P^N\)
+be ANY genuine
+smooth projective
+\(d\)-fold, with
+its ACTUAL
+projective
+polarization,
+and fix \(p\).
+For each nonnegative
+integer \(D\)
+let
+\[
+ \mathcal C_{\le D}^{d-p}(X)
+ =\coprod_{e=0}^{D}
+    \operatorname{Chow}_{d-p,e}(X)
+\]
+be the genuine
+FINITE union
+of projective
+Chow schemes
+parameterizing
+effective algebraic
+codimension-\(p\)
+cycles of degree
+at most \(D\).
+It is of finite
+type and has
+finitely many
+connected components.
+
+\begin{theorem}[Every finite-degree GST native source stage is born from actual Chow components]
+For EVERY smooth
+projective complex
+\(X\), every \(p\),
+and every
+\(D\ge0\),
+choose one
+ACTUAL effective
+cycle \(Z_C\)
+from each nonempty
+connected component
+\(
+ C\subset
+ \mathcal C_{\le D}^{d-p}(X).
+\)
+There are finitely
+many such
+independently
+constructed
+original-\(X\)
+algebraic cycles.
+The rational
+linear map
+\[
+ \boxed{
+ \Phi_D:
+ \Q^{\pi_0(\mathcal C_{\le D})}
+  \longrightarrow
+ \Hdg^p(X)_\Q,
+ \quad
+ (a_C)\longmapsto
+      \sum_Ca_C\,
+                 \cl_X^{can}(Z_C)
+ }                                                       \tag{4a}
+\]
+has image EXACTLY
+the rational span
+of canonical
+cycle classes
+of ALL effective
+original-\(X\)
+algebraic cycles
+of degree at most
+\(D\).
+In particular
+every
+rational signed
+combination
+of such cycles
+has an ACTUAL
+representative
+expressed in
+this independently
+geometric finite
+source list.
+
+Furthermore,
+there exists
+SOME finite
+integer
+\(
+ D_*(X,p)
+\)
+such that
+\[
+ \boxed{
+ \im\Phi_{D_*}
+    =\im(\cl_X^{can}:
+              \CH^p(X)_\Q
+                    \to\Hdg^p(X)_\Q).
+ }                                                       \tag{4b}
+\]
+This produces
+a finite actual
+Chow-source
+spanning family
+for the ENTIRE
+original-\(X\)
+algebraic image
+without assuming
+the arbitrary
+Hodge target
+already has
+an algebraic
+preimage.
+It does NOT
+assert that
+this finite
+image equals
+the full rational
+Hodge space.
+\end{theorem}
+\begin{proof}
+Each fixed-degree
+Chow parameter
+space is
+projective finite
+type, so its
+finite union
+has finitely
+many connected
+components.
+The genuine
+canonical Betti
+cycle class
+is LOCALLY
+CONSTANT as
+a function of
+the corresponding
+algebraic cycles
+within a connected
+Chow component:
+it is constant
+along a continuous
+family of
+effective cycles
+under the
+cycle-current
+fundamental
+class comparison.
+A connected
+complex projective
+variety is
+topologically
+path connected,
+so all its
+points have
+the same
+cohomological
+cycle class.
+Therefore every
+effective cycle
+of degree
+\(\le D\)
+has EXACTLY
+the canonical
+class of one
+chosen representative
+\(Z_C\),
+proving (4a).
+
+For (4b), let
+\(A=\im(\cl_X^{can})\)
+inside the
+finite-dimensional
+rational Hodge
+space.
+Every Chow cycle
+is a finite
+rational linear
+combination of
+integral effective
+subvarieties,
+so the UNION of
+the nested finite
+spaces \(\im\Phi_D\)
+spans exactly A.
+Choose a finite
+rational basis
+of this
+finite-dimensional
+vector space,
+express each
+basis element
+as the cycle
+class of a
+finite signed
+rational
+combination of
+actual effective
+cycles, and take
+the maximum
+degree appearing
+in these
+finitely many
+presentations.
+Call the
+resulting finite
+maximum \(D_*\).
+Then \(\im\Phi_{D_*}=A\)
+by (4a).
+The proof does
+NOT use a basis
+of the whole
+Hodge target
+space, a prior
+algebraic
+representative of
+alpha, or a
+surjectivity
+assertion.
+\end{proof}
+
+\noindent\textbf{Direct GST compilation and limit of the theorem.}
+The actual
+\(Z_C\) may be
+fed into
+\texttt{GSTActualXHodgeResidualProjection}
+as its
+\texttt{sourceNativeCycles};
+rational
+independent
+columns can be
+selected by
+exact Gram
+elimination,
+and the
+native
+\texttt{projectNative}
+returns a
+genuine original-X
+cycle in their span.
+A full
+algebraic
+source image
+is thereby
+generated
+WITHOUT
+assuming an
+algebraic seed
+for the
+given Hodge
+alpha.
+Nevertheless
+finite dimensionality
+alone does
+not supply an
+EFFECTIVE bound
+for \(D_*\),
+nor prove
+\(\im\Phi_{D_*}
+=\Hdg^p(X)_\Q\).
+A plateau
+of finite-rank
+Chow stages
+is not a
+certificate of
+permanent Hodge
+completeness.
+The new
+bounded-family
+specialization
+theorem provides
+an independent
+cross-fiber
+mechanism for
+obtaining new
+original-X
+cycles rather
+than confusing
+growth in
+the old span
+with the
+missing universal
+algebraicity.
+
+\section{GST arbitrary-X primitive residual has a STRICT quantitative exclusion radius}
+Now suppose \(d=2p\), choose a genuine
+ample divisor \(h\) and the primitive
+rational \((p,p)\) Hodge sector
+\[
+ V=\Hdg_{\mathrm{prim}}^p(X)_\Q,\qquad
+ Q(r,s)=(-1)^p\int_Xr\,s.
+\]
+The genuine Hodge--Riemann pairing \(Q\)
+is positive definite on \(V_\R\).
+Let
+\(A_{\mathrm{alg}}\subset V\)
+be the ACTUAL rational
+primitive algebraic image
+\[
+ A_{\mathrm{alg}}=
+  \im(\cl^{can}_{X,p})\cap V.
+\]
+Importantly this is an INTERSECTION
+with the canonical Chow image,
+not the orthogonal projection of
+that image: the algebraicity of an
+arbitrary primitive cohomological
+projector is NOT assumed.
+Thus every \(z\in A_{\mathrm{alg}}\)
+is itself the genuine canonical
+Betti class of some ACTUAL
+primitive algebraic rational Chow
+combination on the original \(X\).
+
+For any \(r\in V\) let
+\(\pi_A r\) be its rational
+\(Q\)-orthogonal projection
+to \(A_{\mathrm{alg}}\), and
+set \(r_\perp=r-\pi_A r\).
+
+\begin{theorem}[Quantitative universal GST native-image exclusion radius]
+For every arbitrary original
+\(X\), every \(p\), every \(r\)
+and every algebraic native
+primitive class
+\(z\in A_{\mathrm{alg}}\),
+\[
+ \boxed{
+ Q(r-z,r-z)
+ =Q(r_\perp,r_\perp)
+       +Q(\pi_A r-z,\pi_A r-z)
+ \ \ge Q(r_\perp,r_\perp).}                       \tag{4}
+\]
+Thus if the full rational
+native residual \(r_\perp\ne0\),
+not even an INFINITE SEQUENCE
+of finite source combinations
+from the ORIGINAL algebraic
+Chow image can converge to
+\(r\) in polarized Hodge norm.
+Allowing infinitely many
+GST native Gram, Euler,
+Segre, Adams, kernel or
+finite-degree descent
+operations that retain
+the same original-X
+algebraic image cannot
+remove this strict
+positive exclusion radius.
+\end{theorem}
+\begin{proof}
+Orthogonality
+\(r_\perp\perp A_{\mathrm{alg}}\)
+kills the cross term in
+the expansion of
+\(r-z=r_\perp+(\pi_A r-z)\).
+Both remaining terms are
+nonnegative by positive
+definiteness. If
+\(r_\perp\ne0\), then
+\(Q(r_\perp,r_\perp)>0\),
+independently of how many
+algebraic sources are used,
+their denominators, or any
+limit of their finite rational
+linear combinations.
+This is the exact GST
+native-residual polarization
+law applied to the COMPLETE
+canonical image, not merely
+a chosen finite Gram frame.
+\end{proof}
+
+
+\section{GST genuine original-\(X\) Chow-motivic geometry: exact projector and native source-birth law}
+Here we strengthen the existing original-X scheme-level geometry rather
+than introducing another special family. The current
+\texttt{GSTPrimitiveAlgebraicMotiveProjector.lean} proves a native
+projector's COHOMOLOGICAL idempotence but explicitly does not assert
+its idempotence as a CHOW CORRESPONDENCE. The following gives the
+actual intersection-theoretic construction on every original X.
+
+Let X be ANY smooth projective complex variety of dimension d,
+let \(0\le2p\le d\), and let H be an actual ample algebraic divisor
+with canonical Betti class h. Choose any finite list of actual
+rational Chow cycles \(Z_i\in CH^p(X)_\Q\), such that their genuine
+canonical Betti classes \(z_i=\cl^{can}_X(Z_i)\) are linearly
+independent and primitive: \(h^{d-2p+1}z_i=0\).
+This includes the EMPTY list, which gives the zero projector.
+The genuine rational intersection Gram is
+\[
+ G_{ij}=\deg(Z_i\cdot Z_j\cdot H^{d-2p})
+       =\int_X z_i\smile z_j\smile h^{d-2p}.
+\]
+Hodge--Riemann implies that \((-1)^pG\) is positive definite,
+hence \(G^{-1}\) is rational. Set \(W_j=Z_j H^{d-2p}\),
+an actual codimension-(d-p) Chow cycle, and define
+\[
+ \boxed{\Pi^A_{X,p}=\sum_{i,j}(G^{-1})_{ij}
+        \, Z_i\times W_j\in CH^d(X\times X)_\Q.}    \tag{14}
+\]
+Correspondences here act from the SECOND factor to the FIRST.
+
+\begin{theorem}[Actual Chow idempotence and residual motive on EVERY original X]
+For every X,d,p and actual primitive source list as above,
+\[
+ \boxed{\Pi^A\circ\Pi^A=\Pi^A,\quad
+ R=[\Delta_X]-\Pi^A,\quad
+ R^2=R,\quad R\Pi^A=\Pi^AR=0}
+                                                               \tag{15}
+\]
+are literal equalities in the genuine rational CHOW correspondence
+ring \(CH^d(X\times X)_\Q\), not merely in Betti cohomology.
+The canonical Betti action of \(\Pi^A\) on \(H^{2p}(X,\Q)\)
+is exactly the Gram-orthogonal projector onto the actual primitive
+algebraic span \(\mathrm{span}_\Q(z_i)\); it acts by zero in
+other cohomological degrees. Thus \(\Pi^A\) and R give a
+genuine rational Chow-motive splitting
+\(h(X)_\Q=(X,\Pi^A)\oplus(X,R)\).
+A prescribed primitive Hodge residual lives in the ACTUAL
+complement motive, not in a freely invented vector-space carrier.
+\end{theorem}
+\begin{proof}
+For genuine algebraic rational cycles u,u' of codimension p
+and v,v' of codimension d-p, proper Gysin/projection formula
+gives the ACTUAL Chow composition identity
+\[
+ \boxed{(u\times v)\circ(u'\times v')
+  =\deg(v\cdot u')\,u\times v'
+       \quad\text{in } CH^d(X\times X)_\Q.}         \tag{16}
+\]
+Indeed composition is the proper pushforward under \(p_{13}\)
+of the intersection of the two pullbacks to \(X^3\);
+the middle-factor product is a true zero-cycle of degree
+\(\deg(vu')\). Using \(v=W_j,u'=Z_k\) and symmetry of G,
+\[
+ (\Pi^A)^2
+ =\sum_{i,l}(G^{-1}GG^{-1})_{il}Z_i\times W_l
+ =\Pi^A
+\]
+AS CHOW CYCLES. The actual diagonal is the unit in the Chow
+correspondence ring, yielding the three other identities.
+Applying the canonical Betti cycle-class map to (14), with the
+genuine push-pull projection formula, gives
+\[
+ (\Pi^A)_*\beta=\sum_{i,j}
+   (G^{-1})_{ij}
+   \left(\int_X\beta\,z_j\,h^{d-2p}\right)z_i,
+\]
+the rational Gram projection. Degree counting gives zero
+in cohomological degrees other than 2p. The Chow idempotents
+split the rational motive by the definition of an idempotent
+completion of the rational Chow correspondence category.
+\end{proof}
+
+\section{GST fresh native geometric rank-one birth AS CHOW, not just Hodge}
+Suppose actual scheme geometry independently provides a further
+primitive original-X rational Chow cycle V, and its canonical
+Betti class v is NOT in the old algebraic span. Define
+\[
+ b_i=\deg(Z_i V H^{d-2p}),\quad s=\deg(V^2H^{d-2p}),
+\quad
+ B=V-\sum_{i,j}Z_i(G^{-1})_{ij}b_j .
+\]
+Here B is a genuine original-X rational CHOW cycle, not
+a cohomological projection presumed to preserve Chow algebraicity.
+The true Schur complement satisfies
+\[
+ \boxed{\sigma=\deg(B^2H^{d-2p})
+          =s-b^tG^{-1}b,\qquad (-1)^p\sigma>0.}    \tag{17}
+\]
+The inequality is Hodge--Riemann on the nonzero primitive
+Betti class of B, so \(\sigma\ne0\).
+
+\begin{theorem}[Exact rank-one geometric original-X Chow-birth increment]
+The new actual correspondence
+\[
+ Q_B={B\times (BH^{d-2p})\over\sigma}
+                    \in CH^d(X\times X)_\Q
+\]
+is a CHOW idempotent satisfying
+\[
+ \boxed{Q_B^2=Q_B,\quad \Pi^AQ_B=Q_B\Pi^A=0,
+ \quad(\Pi^A+Q_B)^2=\Pi^A+Q_B.}                    \tag{18}
+\]
+Its genuine Betti action adds exactly the one-dimensional
+primitive source direction of B. The algebraic residual
+complement moves from \(R\) to the genuine Chow idempotent
+\(R-Q_B\). Nothing in the premise presupposes that the
+target Hodge class alpha is algebraic: V is an independently
+constructed genuine geometric source, whose independent
+existence is the exact source-birth challenge.
+\end{theorem}
+\begin{proof}
+By the ACTUAL algebraic intersection formula,
+\(\deg(B Z_i H^{d-2p})=0\) for each old source.
+The true Chow composition formula (16) therefore kills
+both cross-products of \(\Pi^A\) and \(Q_B\).
+It also gives \(Q_B^2=\sigma Q_B/\sigma=Q_B\).
+The remaining statements are exact ring identities,
+and the Betti rank increments because \(\sigma\ne0\).
+\end{proof}
+
+\section{The cofinal arbitrary-X algebraic Chow-motivic world tower}
+For every effective degree budget D, the earlier TRUE
+Chow parameter-space inventory constructs a finite-dimensional
+rational algebraic Betti image \(A_D^p\) from actual effective
+cycle representatives. Define the primitive part by genuine
+intersection, NOT by applying an unproved algebraic Lefschetz
+inverse to each generator:
+\[
+ P_D^p=A_D^p\cap
+       \ker(h^{d-2p+1}:H^{2p}(X,\Q)
+                        \to H^{2d-2p+2}(X,\Q)).      \tag{19}
+\]
+The space has an actual Chow basis: solve the rational linear
+primitive-kernel equations in the finite list of genuine cycles,
+then take the corresponding finite rational CHOW combinations.
+
+\begin{theorem}[Original-X actual motivic source tower, all p in the primitive range]
+For EVERY smooth projective X and \(0\le2p\le d\),
+there is a nested family of genuine rational CHOW projectors
+\(\Pi_D\in CH^d(X\times X)_\Q\) whose canonical Betti
+images are exactly the primitive source spaces \(P_D^p\).
+Choose bases compatibly as D increases and use (18) for each
+new independent ACTUAL primitive algebraic source.
+Every stage is CHOW-idempotent; every rank increase is a sum of
+genuine orthogonal rank-one Chow idempotents.
+There is a finite, not generally effectively bounded, degree D*
+after which the chosen projectors can stay LITERALLY CONSTANT AS CHOW
+CYCLES and their Betti range is exactly
+\[
+ \boxed{\operatorname{im}(\cl_X^{can})\cap
+                     H_{\rm prim}^{2p}(X,\Q).}     \tag{20}
+\]
+For a particular primitive rational Hodge alpha, its stable
+residual \(r=\alpha-(\Pi_{D_*})_*\alpha\) vanishes
+IF AND ONLY IF alpha already has a genuine original-X
+rational Chow representative.
+\end{theorem}
+\begin{proof}
+Every original-X rational cycle is a finite rational signed
+combination of genuine effective cycles, so every primitive
+algebraic Betti class occurs in some \(P_D^p\).
+The finite-dimensional primitive Hodge space forces the nested
+images to stabilize. The genuine Chow basis is constructed by
+rational linear kernel elimination from actual cycle generators.
+At each new independent class, (17)--(18) produce an actual
+Chow-idempotent rank-one birth. At stages with no new Betti class,
+retain the prior actual Chow projector unchanged. Thus after
+the last independent rank increase the Chow projector stabilizes.
+The Gram action (14) fixes precisely the algebraic primitive image,
+giving both implications of the residual equality.
+\end{proof}
+
+\noindent\textbf{GST evidence boundary.}
+This constructs a new literal original-X CHOW-MOTIVIC geometry,
+strengthening the cohomology-only projector currently proved in
+\texttt{GSTPrimitiveAlgebraicMotiveProjector.lean}; it also
+lifts the GST polarized Gram-surplus law from vector-space rank
+to explicit Chow-correspondence idempotence. It does NOT infer
+that a new independent source V must exist for every nonzero
+primitive rational Hodge residual; that substantive universal
+source-birth implication must be established from additional
+geometry, rather than from the algebraic projector itself.
+\section{Exact executed route outcome and the remaining universal source-birth condition}
+The updated derivation
+constructs an ACTUAL
+original-\(X\)
+Chow cycle
+from any
+uncountable
+set of nearby
+fiberwise
+algebraic
+representatives,
+with NO
+degree or
+denominator
+bound supplied
+as input.
+It does so
+by genuine
+relative Chow
+properness,
+analytic
+source-locus
+decomposition,
+and true
+canonical Betti
+specialization.
+It also
+constructs a
+finite geometric
+Chow source
+inventory for
+every degree
+bound on every
+actual original
+\(X\),
+independently
+of a target
+algebraic
+preimage.
+
+The source-birth
+requirement not
+provided by this
+construction is
+NOW EXACT:
+for every
+prescribed
+arbitrary
+\((X,p,\alpha)\),
+one must
+supply either
+a DIRECT
+original-\(X\)
+geometric source,
+or a
+NONTRIVIAL
+Hodge-preserving
+deformation
+through \(X\)
+with uncountably
+many
+independently
+constructed
+algebraic
+source fibers.
+The latter
+condition is
+strictly stronger
+than a
+Hodge type
+condition
+and cannot
+be asserted
+solely from
+projective
+Chow properness.
+
+The explicit
+actual
+elliptic
+surface
+family
+(9)--(11)
+proves that
+even an
+algebraic
+central
+target may
+have an
+ISOLATED
+relative
+Hodge locus,
+so this
+cross-fiber
+method cannot
+be a
+general-purpose
+input-free
+source
+constructor.
+A trivial
+family does
+not repair
+this:
+its
+source-bearing
+condition
+is exactly
+original-\(X\)
+algebraicity
+by the
+isotrivial
+lemma.
+The GST
+full native
+polarized
+residual
+inequality (4)
+also prevents
+accumulation
+of only
+OLD native
+image
+sources at
+a missing
+Hodge class.
+These are
+rigorous
+scope checks,
+not a
+false
+negative
+assertion
+about the
+Hodge
+conjecture.
+
+\section{Wolfram exact consistency test}
+For a rational positive
+definite Gram
+\(G=\operatorname{diag}(2,3,5)\),
+actual source-coordinate matrix
+\(
+C=\left(\begin{smallmatrix}1&1\\0&1\\0&0
+\end{smallmatrix}\right)
+\)
+and prescribed rational target
+\(r=(3,4,2)\), the true
+native projector
+\(
+P=C(C^tGC)^{-1}C^tG
+\)
+is the diagonal projector
+\(\operatorname{diag}(1,1,0)\).
+Wolfram computed the EXACT
+residual \(r_\perp=(0,0,2)\)
+with norm \(20\).
+For EVERY rational
+two-source combination
+\(C(z_1,z_2)^t\),
+the squared distance is
+\[
+ Q(r-Cz,r-Cz)=20+
+ 66-12z_1+2z_1^2-36z_2+
+               4z_1z_2+5z_2^2
+ \ge20 .
+\]
+This is an exact arithmetic
+discriminator for the full-image
+exclusion radius, NOT a
+hypothetical smooth projective
+variety or a Hodge counterexample.
+The general geometric proof
+uses Hodge--Riemann and
+original-X rational image.
+\end{document}

@@ -1,0 +1,552 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\title{Owner's GST infinite-control source construction: an ACTUAL twisted constant family, CM curvature monodromy, finite defect-energy spectral projector, and original-X source criterion}
+\date{12 November 2026}
+\begin{document}
+\maketitle
+
+\section{Original target; precisely what was required}
+Fix an ARBITRARY original smooth projective complex variety
+$X$ of dimension $d$, a codimension $p$, and a PRESCRIBED
+rational Hodge class $\alpha\in W_p(X)$.
+The original universal objective is an independently constructed
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+$\mathrm{cl}^{can}_X(Z_\alpha)=\alpha$.
+
+The owner's new request is to remove the condition that
+UNCOUTABLY many genuinely varying smooth-projective fibers
+already have ACTUAL cycles representing the same transported
+target. We therefore study a mathematically DISTINCT mechanism:
+make global monodromy from a TWISTED constant family using a
+real algebraic symmetry implementing the owner's original GST
+CM curvature, then use its INVARIANT cohomology rather than
+assuming cycles on neighboring fibers. An infinitely large
+group of world loops will reduce to finitely many rational
+constraints and a computable polynomial spectral projector.
+
+The original GST operators are exactly the author's
+4-by-3-cell $U,J,M,[J,M]$ fixed null/maximum pair at
+direct SURVIVE strength one. On that pair
+\[
+J=\begin{pmatrix}0&1\\-1&0\end{pmatrix},\quad
+M=\begin{pmatrix}0&0\\0&2\end{pmatrix},\quad
+\boxed{[J,M]=2\begin{pmatrix}0&1\\1&0\end{pmatrix}}.
+\]
+This operator statement already holds in the author's
+GSTImageThreeCurvatureResonance and was compared with the
+equal-area Hodge Star on
+$X=\mathbb P^1\times\mathbb P^1$ in the preceding derivation.
+
+\section{A genuine geometric construction: twist the constant family}
+
+Let the original smooth projective surface be
+$X=\mathbb P^1\times\mathbb P^1$ and let
+$\sigma:X\to X$ be the ACTUAL REGULAR ALGEBRAIC
+involution exchanging the two projective factors.
+It acts on genuine divisors $H_1,H_2$ by
+$\sigma^*H_1=H_2$, $\sigma^*H_2=H_1$.
+On the canonical rational Betti $H^2(X,\mathbb Q)$
+its matrix is exactly
+\[
+S=\begin{pmatrix}0&1\\1&0\end{pmatrix}
+=\tfrac12[J,M].
+\]
+The equality on the right means the owner's
+actual ORIGINAL GST fixed-pair CM curvature.
+It is not an arbitrary matrix identified with
+curvature by naming convention.
+
+Take the twofold finite ETale cover of the
+punctured affine line
+\[
+q:\widetilde B=\mathbb C^*\longrightarrow
+B=\mathbb C^*,\qquad q(t)=t^2,
+\]
+with deck involution $\tau(t)=-t$.
+The simultaneous algebraic $\mathbb Z/2$ action
+\[
+(x,t)\longmapsto(\sigma(x),-t)
+\]
+on the true constant projective family
+$X\times\widetilde B$ is FREE, since
+$t\ne0$ implies $t\ne-t$.
+Form its genuine geometric quotient
+\[
+\boxed{
+\mathcal Y=(X\times\mathbb C^*)/
+\langle(\sigma,t\mapsto-t)\rangle
+\ \longrightarrow\ B,\quad s=t^2 .
+}
+\tag{1}
+\]
+
+\begin{theorem}[Genuine twisted constant family driven by original GST curvature]
+The morphism (1) is smooth PROJECTIVE with each geometric
+fiber isomorphic to the ORIGINAL $X$. The monodromy
+of its rational degree-two Betti local system around
+the generator of $\pi_1(\mathbb C^*)$ is EXACTLY
+$\sigma^*=S=[J,M]/2$.
+Its globally flat rational cohomology classes at a chosen fiber
+are precisely
+\[
+H^2(X,\mathbb Q)^S
+=\mathbb Q\,([H_1]+[H_2]).
+\]
+Every prescribed GLOBAL FLAT rational $(1,1)$ class
+$\alpha=a([H_1]+[H_2])$ has the explicit actual ORIGINAL-X
+rational Chow cycle
+\[
+\boxed{Z_\alpha=a(H_1+H_2),\quad
+\mathrm{cl}^{can}_X(Z_\alpha)=\alpha.}
+\tag{2}
+\]
+No algebraic cycle on ANY neighboring fiber was input.
+\end{theorem}
+
+\begin{proof}
+The action is free and its quotient is descent along
+the finite etale Galois cover $q$; hence the
+resulting family is smooth with fiber $X$.
+The ample product bundle $\mathcal O_X(1,1)$
+has a natural factor-swap linearization and descends
+to a relatively ample line bundle under the finite cover.
+Thus the family is projective (not merely complex analytic).
+
+Following one loop $s=e^{2\pi i\theta}s_0$ lifts
+$t$ to a path ending at $-t_0$, which identifies
+the return fiber by $\sigma$. Consequently the
+monodromy equals its true Betti action $S$.
+A vector $(a,b)$ in the actual hyperplane-basis
+$H^2(X,\mathbb Q)$ is invariant iff $(b,a)=(a,b)$,
+equivalently $a=b$; hence the invariant subspace
+is the indicated algebraic line.
+The actual divisor $H_1+H_2$ supplies the
+original-X representative (2).
+\end{proof}
+
+\paragraph{Exact limitation.}
+The anti-invariant vector $H_1-H_2$ is itself
+algebraic ON EACH FIBER but is NOT a single-valued
+flat GLOBAL section of this twisted family.
+Therefore a family of this kind cannot replace
+the original requirement for arbitrary $\alpha$:
+for any non-invariant input it loses the input
+rather than producing its algebraic representative.
+It is an explicit successful construction in its
+quantified invariant sector.
+
+\section{Infinite GST world-loop control needs only finite witnesses}
+
+Let $V=H^{2p}(X,\mathbb Q)$ be the ACTUAL rational
+Betti cohomology of ANY original smooth projective $X$.
+It is finite dimensional, say $\dim_{\mathbb Q}V=n$.
+Let any cardinal-sized set $I$ index genuine
+monodromy operators $T_i\in GL_{\mathbb Q}(V)$
+arising from a smooth projective family through $X$.
+The operators act on the FULL Betti space $V$;
+they do NOT in general preserve the Hodge
+subspace $W_p(X)$, because the Hodge filtration
+varies under parallel transport.
+Write
+\[
+K_I=\{v\in V:T_i v=v\text{ for EVERY }i\in I\}
+=\bigcap_{i\in I}\ker(T_i-I).
+\]
+
+\begin{theorem}[Arbitrary-cardinal monodromy finite-control]
+There exist $m\le n-\dim_{\mathbb Q}K_I$
+indices $i_1,\ldots,i_m\in I$ such that
+\[
+\boxed{
+K_I=\bigcap_{j=1}^m\ker(T_{i_j}-I).
+}
+\tag{3}
+\]
+The same assertion holds after restricting
+these kernel equations to $W_p(X)$,
+with $m\le\dim W_p(X)$, even when
+$T_i(W_p)$ is not contained in $W_p$.
+\end{theorem}
+\begin{proof}
+Begin with $V_0=V$. If $V_0=K_I$, choose none.
+Otherwise select an $i_1$ such that
+$V_1=V_0\cap\ker(T_{i_1}-I)$ is a PROPER
+subspace of $V_0$; such an index exists,
+because otherwise $V_0\subseteq K_I$.
+At stage $j$, unless $V_j=K_I$, choose an
+index whose fixed kernel meets $V_j$
+properly and put $V_{j+1}$ equal to that
+intersection. The dimension decreases
+by at least one at every step, and every
+$V_j$ contains $K_I$. Hence after at
+most $n-\dim K_I$ steps equality holds.
+For restricted kernels in $W_p$, use the
+same argument on $W_p$ with linear maps
+$(T_i-I)|_{W_p}:W_p\to V$.
+\end{proof}
+
+\section{An EXACT rational polynomial infinity-control projector}
+Fix any rational basis of $V$ and the
+auxiliary positive-definite rational inner
+product given by the identity matrix.
+Use the FINITE monodromy witness
+$T_1,\ldots,T_m$ of (3).
+Put
+\[
+D_j=T_j-I_n,\qquad
+\boxed{
+R=\sum_{j=1}^m D_j^{\,t}D_j\in M_n(\mathbb Q).
+}
+\tag{4}
+\]
+For every real $x$, $x^tRx=\sum_j\|D_jx\|^2$;
+hence $R$ is real symmetric positive
+semidefinite and
+$\ker R=\bigcap_j\ker D_j=K_I$.
+This last equality is an EXACT linear
+identity, not a finite computation.
+
+Let $s=\dim_{\mathbb Q}\ker R$ and
+factor its characteristic polynomial
+over the rationals:
+\[
+\chi_R(z)=z^s q(z),\quad q(0)\ne0
+\]
+(the characteristic polynomial sign convention
+is irrelevant after normalizing).
+Because real symmetric $R$ is diagonalizable,
+the spectral theorem and Cayley-Hamilton imply
+\[
+\boxed{
+P_{\mathrm{GST},I}=\frac{q(R)}{q(0)}
+\in M_n(\mathbb Q),\qquad
+P_{\mathrm{GST},I}^2=P_{\mathrm{GST},I},
+\quad\operatorname{im}P_{\mathrm{GST},I}
+=K_I.
+}
+\tag{5}
+\]
+This is a FINITE rational polynomial, directly
+generated by all-world monodromy-defect energy
+and requiring no transcendental limit or
+degree bound. It is the original GST
+infinite-control F-function reinterpreted
+as an EXACT geometric monodromy spectral
+certificate: its admissible index set can
+have arbitrarily large cardinality, but
+its final field-computation remains finite.
+
+For any prescribed $\alpha\in W_p(X)$ that
+extends to a SINGLE-VALUED flat rational
+section across the family,
+every $T_i\alpha=\alpha$; hence
+\[
+\boxed{P_{\mathrm{GST},I}\alpha=\alpha.}
+\tag{6}
+\]
+Unlike naive iteration of algebraic native
+cycles, this obtains an α-sensitive
+cohomological CONSTRAINT directly from the
+ACTUAL varying topology of the family.
+
+\paragraph{Basis dependence.}
+The positive-definite auxiliary rational
+metric used in (4) changes the projector's
+matrix on vectors outside $K_I$.
+But the kernel, image, and identity on
+globally flat classes are intrinsic and
+do not depend on that choice. We do NOT
+identify this auxiliary metric with the
+differential-form Hodge Star.
+
+\section{A replacement for the uncountable fiber-cycle assumption}
+
+\begin{theorem}[Native monodromy returns original-X Chow without nearby cycles]
+Take arbitrary original $(X,p,\alpha)$.
+Assume a genuine smooth projective family
+through $X$ in which $\alpha$ is global flat.
+Let $K_I$ be its ACTUAL monodromy fixed space.
+Suppose independent geometry on the ORIGINAL X
+provides actual rational Chow cycles
+$Z_1,\ldots,Z_s\in CH^p(X)_{\mathbb Q}$
+whose canonical Betti classes span
+$W_p(X)\cap K_I$.
+Then a rational linear system using the
+finite projector (5) computes coefficients
+$c_1(\alpha),\ldots,c_s(\alpha)\in\mathbb Q$
+and returns
+\[
+\boxed{
+Z_\alpha=\sum_i c_i(\alpha)Z_i\in CH^p(X)_{\mathbb Q},
+\quad\mathrm{cl}^{can}_X(Z_\alpha)=\alpha.
+}
+\tag{7}
+\]
+No cycles whatsoever on neighboring fibers
+are required.
+\end{theorem}
+
+\begin{proof}
+Global flatness yields $\alpha\in K_I$,
+and the input says $\alpha\in W_p(X)$.
+Thus it lies in the stated span of known
+genuine original-X algebraic classes.
+Choose a rationally independent subfamily
+forming a basis and solve the corresponding
+finite rational coordinate linear system.
+The resulting finite rational Chow
+combination is actual original-X algebraic,
+and applying the CANONICAL cycle-class
+map gives precisely $\alpha$. Equation
+(5) furnishes the finite monodromy
+certificate of the fixed-space reduction;
+no unknown inverse to the full cycle-class
+map is input.
+\end{proof}
+
+For an application to avoid circularity,
+the bound on $W_p(X)\cap K_I$ must be
+INDEPENDENTLY proved from actual
+monodromy/vanishing-cycle geometry,
+rather than assumed to equal the old
+algebraic image by restating Hodge.
+For example a family with full
+Picard--Lefschetz reflection monodromy
+spanning a nondegenerate primitive
+cohomology sector can have its fixed
+sector equal to a known hyperplane
+power. The resulting invariant class is
+then algebraic with a genuine hyperplane
+cycle, even for $p>1$.
+The applicability of that geometric
+reflection spanning condition must be
+checked in the particular actual family.
+The SGA 7 XVIII classical Lefschetz-pencil
+monodromy theorems are one relevant
+reference, but are not a universal
+assertion about an arbitrary original X.
+
+\section{Two EXACT discriminating certificates}
+First, the actual twisted constant family
+has $S=\begin{psmallmatrix}0&1\\1&0\end{psmallmatrix}$.
+Formula (4) gives
+\[
+R=(S-I)^t(S-I)
+=\begin{pmatrix}2&-2\\-2&2\end{pmatrix}.
+\]
+Its nonzero eigenvalue is four.
+The zero-mode spectral polynomial yields
+\[
+\boxed{P_{\mathrm{GST}}=I-\tfrac14R
+ =\tfrac12(I+S)
+ =\tfrac12(I+[J,M]/2),}
+\tag{8}
+\]
+whose image is precisely the invariant
+Chow class of $H_1+H_2$.
+
+Second, take a RATIONAL five-dimensional
+test vector space with pairing
+$G=\operatorname{diag}(6,-2,-2,-2,-2)$.
+For each $i=2,3,4,5$, let $\delta_i$
+be the standard basis vector and set
+\[
+T_i(v)=v-
+  2\frac{\langle v,\delta_i\rangle_G}
+          {\langle\delta_i,\delta_i\rangle_G}
+    \delta_i .
+\]
+The exact rational reflections preserve G
+and their common fixed space is
+$\mathbb Q e_1$. Their defect energy is
+\[
+R=\operatorname{diag}(0,4,4,4,4),\quad
+\chi_R(z)=\pm z(z-4)^4,\quad
+\boxed{P_{\mathrm{GST}}=
+ \operatorname{diag}(1,0,0,0,0).}
+\tag{9}
+\]
+The finite exact Wolfram computation verifies
+all matrix properties, including
+$P^2=P$ and $(T_i-I)P=0$.
+This is an ABSTRACT polarized rational
+monodromy test of the certificate method.
+It is NOT claimed to arise from every
+smooth projective X or from an
+arbitrary Hodge variation.
+
+\section{Why the universally requested source law remains nontrivial}
+The construction removes the earlier
+UNCOUTABLY-MANY-ACTUAL-NEIGHBOR-FIBER-CYCLES
+premise on any family satisfying the
+independently checkable monodromy
+fixed-sector criterion.
+It does NOT say that a smooth projective
+family with sufficiently large monodromy
+and a globally flat extension of the
+ARBITRARY prescribed alpha always exists.
+
+On a genuinely constant family $X\times B$,
+the monodromy is $I$, the defect-energy
+matrix R is zero and the projector
+$P_{\mathrm{GST},I}$ is exactly the
+identity on ALL of $V$. It therefore
+gives NO reduction of the original
+Hodge existence problem.
+The algebraic isotrivial quotient above
+provides a true nontrivial geometric
+monodromy, but alpha must be FIXED by it.
+If one attempts to make monodromy
+destroy a desired alpha's primitive
+direction, alpha is no longer a global
+flat section; the source claim does not
+follow. An arbitrary non-invariant
+alpha cannot be replaced with
+$P_{\mathrm{GST}}\alpha$ because the
+latter is a DIFFERENT rational input.
+
+Thus the exact all-X universal
+source-birth requirement is still
+open after this route, and no new
+Hodge-to-Chow axiom has been inserted.
+
+
+\section{Induced-world invariant-defect conservation}
+An attempted stronger cardinal trick is to take a finite group
+\(G\), replace one Betti fiber \(V\) by \(V_G=\bigoplus_{g\in G}V\),
+and let \(G\) permute its copies. This makes the diagonal
+\((\alpha)_{g\in G}\) invariant for EVERY original
+\(\alpha\in V\), even when the original family had no
+monodromy-fixed alpha. However the corresponding genuine
+finite-world algebraic source is
+\(A_G=\bigoplus_{g\in G}A\), where \(A\subset V\)
+is the ORIGINAL canonical Chow class image.
+The invariants are exactly the diagonal copies:
+\[
+(V_G)^G\simeq V,\qquad (A_G)^G\simeq A,
+\qquad
+\boxed{(V_G)^G/(A_G)^G\simeq V/A.}
+\]
+Thus the original algebraicity defect survives
+this cardinal-world induction UNCHANGED.
+For an infinite regular index group G, a
+translation-invariant finitely supported tuple
+must be ZERO, so
+\((\bigoplus_G V)^G=0\).
+Replacing the direct sum by a product permits
+infinite diagonal tuples but no longer provides
+finite Chow cycles on a finite-type original X.
+
+The committed exact stress test
+\texttt{GST\_original\_native12\_cardinal\_induced\_worlds\_defect\_countermodel\_20261112.wl}
+reconstructs the owner's literal twelve-state native
+\(U,J,M,[J,M]\) in BOTH physical Navigation states.
+Its true native determinants are
+\(-1149656584000\) and \(-445265540949\).
+Embed that 12-dimensional native source in a
+13-dimensional ABSTRACT Betti vector space
+with one additional basis direction. All
+native cyclic and naturality tests pass.
+Two-world induction makes the thirteenth
+diagonal vector monodromy-invariant but
+still leaves it OUTSIDE the induced native
+image. This is a valid rational-model
+counterexample to the FORMAL proposed inference,
+not a geometric counterexample to Hodge.
+
+\section{Picard--Lefschetz source criterion in arbitrary middle codimension}
+Suppose a genuine smooth projective family through
+an arbitrary original X has a rational cohomology
+splitting \(V=U\oplus P\), with U spanned by
+INDEPENDENTLY CONSTRUCTED algebraic Chow
+classes on original X, and with a nondegenerate
+rational bilinear form B on P.
+Suppose genuine Picard--Lefschetz monodromy
+loops act as reflections along cycles
+\(\delta_i\in P\), whose rational span is all P:
+\[
+T_i(v)=v-2\,\frac{B(v,\delta_i)}
+{B(\delta_i,\delta_i)}\,\delta_i
+\quad (B(\delta_i,\delta_i)\ne0).
+\]
+If \(T_i(v)=v\) for all i, then
+\(B(v_P,\delta_i)=0\) for all i; nondegeneracy
+and spanning imply \(v_P=0\).
+Hence every globally flat prescribed rational
+Hodge input alpha belongs to U, has a
+genuine Chow representative from the
+known algebraic sources, and does NOT require
+uncountably many Chow cycles on neighboring fibers.
+This is a real higher-codimension source criterion
+whenever its Picard--Lefschetz spanning condition
+is independently established in the particular
+geometric family; it is NOT asserted for all
+arbitrary X.
+
+For context, classical irreducibility/spanning
+of vanishing cycles in Lefschetz pencils is
+treated in SGA 7 II, Expose XVIII, sections
+5--6 (https://grothendiecksga.com/read/sga7/en/18-introduction.html).
+The exact five-dimensional model from the
+committed Wolfram experiment has
+\(B=\mathrm{diag}(6,-2,-2,-2,-2)\),
+four reflections and joint fixed space
+\(\mathbb Q e_1\). The source/Betti projection
+is \(\mathrm{diag}(1,0,0,0,0)\).
+
+
+\section{Higher-codimension true geometric application: globally flat classes on cubic fourfolds}
+Let X be ANY smooth cubic fourfold in
+\(\mathbb P^5_{\mathbb C}\), and let U be
+the connected parameter space of ALL
+smooth cubic fourfolds. The tautological
+smooth projective family \(\mathcal X\to U\)
+has X as a genuine fiber.
+Its rational middle cohomology has
+the actual primitive orthogonal splitting
+\[
+H^4(X,\mathbb Q)
+=\mathbb Q\,h^2\oplus H^4_{\mathrm{prim}}(X,\mathbb Q),
+\]
+where h is the genuine hyperplane divisor.
+The nontrivial Picard--Lefschetz vanishing-cycle
+monodromy on the primitive sector is
+irreducible; its rational invariant subspace
+is zero. This follows from the standard
+global vanishing-cycle irreducibility theorem
+for a Lefschetz pencil, provided the
+usual nontriviality/condition-A hypotheses
+are checked. The relevant primary source
+is SGA 7 II, Expose XVIII, sections 5--6:
+https://grothendiecksga.com/read/sga7/en/18-introduction.html.
+
+Consequently, if the PRESCRIBED rational
+Hodge class \(\alpha\in W_2(X)\)
+extends as a GLOBAL flat section over U,
+then its primitive component is fixed
+by all monodromy loops and MUST be zero.
+There is an actual rational coefficient
+\(c\in\mathbb Q\) such that
+\[
+\boxed{\alpha=c\,\mathrm{cl}^{can}_X(h^2),
+\qquad Z_\alpha=c\,h^2\in CH^2(X)_{\mathbb Q}.}
+\]
+This is a genuine codimension-TWO original-X
+cycle return requiring NO algebraic cycle
+on any neighboring cubic fiber.
+It is a classical monodromy-based application
+of the new GST finite-control framework,
+not a new solution of Hodge on cubic fourfolds.
+
+The argument does not cover rational Hodge
+classes appearing only on SPECIAL cubic
+fourfolds and not invariant under all
+monodromy of the universal family.
+Those higher-primitive inputs are exactly
+where the independent geometric source
+construction is still needed.
+
+\end{document}

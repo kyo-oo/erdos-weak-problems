@@ -1,0 +1,85 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\title{GST N-cohomology: purity repair and a true CM finite cyclic correspondence}
+\date{13 November 2026}
+\begin{document}
+\maketitle
+\noindent\textbf{Original target.} Given arbitrary smooth projective complex \(X\), integer \(p\), and prescribed rational Hodge class \(\alpha\), construct an original-\(X\) algebraic cycle with canonical class exactly \(\alpha\), and a realized finite-left-fiber cyclic fold. The results here prove a general obstruction and a complete geometric model on a specific original \(X_0\), not this universal target.
+
+\begin{theorem}[Nodal N-cohomology weight obstruction]
+Let \(C_0\) be a rational projective nodal cubic. Then \(H^1(C_0,\Q)=\Q(0)\) has cohomological degree one and pure Hodge weight zero. A tensor product of \(r\ge1\) independent such loop channels, multiplied by Tate classes of total degree \(2j\), has cohomological degree \(r+2j\) but weight \(2j\). Under any cohomological realization that is a morphism of mixed Hodge structures of Hodge bidegree \((a,a)\), its image in the pure cohomology \(H^{r+2j+2a}(X,\Q)\) of an arbitrary smooth projective \(X\) is zero. Thus nodal-loop N-channels and Tate shifts alone do not generate a nonzero pure middle-degree original-\(X\) source.
+\end{theorem}
+\begin{proof}
+Normalize the nodal curve by \(\mathbb P^1\). The remaining \(H^1\) is the reduced zero-dimensional cohomology of the two branches of the node, so is \(\Q(0)\). Tensoring adds weights and degrees. Every Tate factor and every algebraic correspondence of bidegree \((a,a)\) shifts degree and Hodge weight equally. The invariant degree-minus-weight remains \(r>0\), while smooth projective \(H^k(X)\) has pure weight \(k\). Pure Hodge structures of different weights admit no nonzero morphisms. This constrains only such mixed-Hodge-compatible constructions, not arbitrary nonsplit geometric births.
+\end{proof}
+
+\begin{theorem}[Actual purity birth and original GST CM relation]
+The Legendre family \(E_\lambda:y^2=x(x-1)(x-\lambda)\) has discriminant \(\lambda^2(\lambda-1)^2\). Its fiber at \(\lambda=0\) is nodal with weight-zero \(H^1\); its fiber at \(\lambda=2\) is a smooth elliptic curve, isomorphic after \(u=x-1\) to
+\[
+ E:\quad y^2=u^3-u,\qquad j(E)=1728.
+\]
+The algebraic automorphism \(\iota(u,y)=(-u,iy)\) preserves \(E\), satisfies \(\iota^2=[-1]\), and induces a genuine rational cohomology operator \(J_E\) with \(J_E^2=-I\) on \(H^1(E,\Q)\).
+\end{theorem}
+\begin{proof}
+The discriminant vanishes precisely at \(0,1\). The smooth fiber has pure weight-one \(H^1\). Substituting \((-u,iy)\) into \(y^2=u^3-u\) multiplies both sides by \(-1\), and squaring the automorphism yields \((u,-y)\), the elliptic inversion. That inversion induces \(-I\) on degree-one cohomology. The Legendre \(j\)-formula gives \(j(2)=1728\). The deformation is a genuine change of geometric world, not a weight-incompatible map from nodal \(H^1\) to elliptic \(H^1\).
+\end{proof}
+
+\begin{theorem}[Independent CM-born primitive algebraic source]
+Let \(X_0=E\times E\), \(O\) the elliptic origin, \(F_1=E\times\{O\}\), \(F_2=\{O\}\times E\), \(\Delta\) the diagonal and \(\Gamma_\iota\) the graph of \(\iota\). These are genuine codimension-one original-\(X_0\) cycles. Their canonical intersection matrix is
+\[
+\mathcal G=\begin{pmatrix}
+0&1&1&1\\1&0&1&1\\1&1&0&2\\1&1&2&0
+\end{pmatrix},\qquad \det\mathcal G=-4.
+\]
+They span the entire rational \((1,1)\) Hodge fiber because \(h^{1,1}(X_0)=4\). The classes
+\[
+ S=\Delta-F_1-F_2,\qquad R=\Gamma_\iota-F_1-F_2
+\]
+are both genuinely algebraic, primitive for the ample \(F_1+F_2\), satisfy \(S\cdot R=0\), and \(S^2=R^2=-2\).
+\end{theorem}
+\begin{proof}
+Each elliptic curve on the abelian surface has self-intersection zero. Fibers meet each other and either graph once. The diagonal meets \(\Gamma_\iota\) in the fixed point scheme of \(\iota\), of degree \(\mathrm{Norm}_{\Q(i)/\Q}(1-i)=2\), giving the matrix. Its determinant is nonzero. The displayed primitive intersections follow by expanding the four algebraic classes.
+\end{proof}
+
+\begin{theorem}[One finite graph, one algebraic seed, exact cyclicity and moment determinant]
+Let \(f:X_0\to X_0\) be the genuinely finite algebraic map
+\(f(x,y)=([2]x,[3]\iota(y))\).
+Its graph is a genuine closed correspondence whose first projection is an isomorphism; the canonical Chow pushforward acts on the ordered rational Hodge-cycle basis \((F_1,F_2,S,R)\) by
+\[
+ T=f_*=\begin{pmatrix}4&0&0&0\\0&9&0&0\\0&0&0&-6\\0&0&6&0\end{pmatrix},
+ \quad \chi_T(t)=(t-4)(t-9)(t^2+36).
+\]
+A single actual algebraic seed \(Z_0=\Delta\) has coordinates \(v=(1,1,1,0)^t\) and complete Krylov matrix
+\[
+ K=[v,Tv,T^2v,T^3v]
+ =\begin{pmatrix}1&4&16&64\\1&9&81&729\\1&0&-36&0\\0&6&0&-216\end{pmatrix},
+ \qquad \boxed{\det K=182520\ne0}.
+\]
+An explicit actual rational algebraic detector divisor is
+\(W=\frac1{585}F_1-\frac1{260}F_2-\frac1{936}S\).
+The genuine Hankel matrix \(H_{ij}=\int_{X_0}T^{i+j}[\Delta]\smile[W]\), \(0\le i,j<4\), is
+\[
+ H=\begin{pmatrix}0&0&0&1\\0&0&1&13\\0&1&13&97\\1&13&97&793\end{pmatrix},
+ \qquad\boxed{\det H=1}.
+\]
+The same finite graph is cyclic on the one-dimensional weight-zero and top-degree rational Hodge spaces using the fundamental cycle and a point; zero higher fibers are vacuous.
+\end{theorem}
+\begin{proof}
+The isogeny \([n]\) pushes forward \(H^1(E)\) by \(n\), so \(([2],[3])_*\) scales the Kunneth \(H^1\otimes H^1\) component by \(6\), and the fiber classes by \(4,9\). The algebraic CM automorphism \((1,\iota)_*\) rotates \(S\mapsto R\), \(R\mapsto-S\), establishing \(T\). Its orbit on the diagonal yields the exact displayed integer matrix and nonzero determinant. The intersection matrix in the basis \((F_1,F_2,S,R)\) is
+\(\left(\begin{smallmatrix}0&1&0&0\\1&0&0&0\\0&0&-2&0\\0&0&0&-2\end{smallmatrix}\right)\).
+Thus pairing with the actual algebraic \(W\) gives the rational functional
+\(\ell=(-1/260,1/585,1/468,0)\), and
+\(\ell K=(0,0,0,1)\).
+Substitution gives the displayed anti-triangular Hankel matrix and determinant \(1\). These are canonical algebraic pushforwards and intersection pairings, not free linear maps.
+\end{proof}
+
+\noindent\textbf{Universal scope.} The weight-defect theorem applies to the original arbitrary \(X,p,\alpha\) input and rules out the nodal-plus-Tate mechanism. The elliptic smoothing is an independently realized, purity-repairing nonsplit world replacement and the product supplies a complete genuine CM source-and-fold model. This does not yet construct an \(\alpha\)-sensitive mixed algebraic incidence returning the prescribed rational Hodge class on an arbitrary original \(X\), and hence does not establish the universal GST single-fold hypothesis. The existing Lean formal correspondence certificate has not been newly compiled.
+
+\noindent\textbf{Exact computation.} Wolfram confirmed \(\operatorname{Disc}_x[x(x-1)(x-\lambda)]=\lambda^2(\lambda-1)^2\), \(j(2)=1728\), the automorphism and \(J^2=-I\), \(\det\mathcal G=-4\), \(\det K=182520\), the rational detector and \(\det H=1\). A separate SymPy checker supplies independent finite verification. The all-dimension purity claim follows from the Hodge-weight argument rather than finite sampling.
+
+\noindent\textbf{Research sources.} The original GST files \texttt{waves/GSTNCohomologyV3.lean}, \texttt{GSTGraphV2CMWaveFusion.lean}, \texttt{GSTGraphV2SelfExpandingCosmology.lean}; M. A. de Cataldo, \emph{Perverse sheaves and the topology of algebraic varieties} (mixed Hodge weight of nodal cubics); standard Legendre elliptic \(j\)-invariant formula.
+\end{document}

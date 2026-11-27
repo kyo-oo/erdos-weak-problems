@@ -1,0 +1,95 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=0.85in]{geometry}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\kerrel}{\operatorname{ker}}
+\title{GST arbitrary-original-X alpha-directed primitive carry, thimble survival and simultaneous-node localization}
+\author{Universal source-birth mathematics and proof audit}
+\date{13 November 2026}
+\begin{document}
+\maketitle
+\noindent\textbf{Exact problem.} Input an arbitrary smooth projective complex variety X of dimension d, codimension p, and prescribed rational (p,p) Hodge class alpha. Construct an actual Z in CH^p(X) over Q with canonical rational Betti class alpha, without an algebraic preimage assumed on any world. Our universal construction below is in rational Hodge cohomology and genuine relative homology. Its final conversion into an algebraic cycle is a separately identified geometric implication, not assumed solved. It uses the user's original GST three-root causal interpretation, not a replacement 12-cell arithmetic toy.
+
+\section{Alpha-dependent projective primitive carry}
+\begin{theorem}[Uniform projective carry and exact original-X return]
+Let h be the rational Betti class of an ample divisor on X. Suppose alpha is nonzero, rational Hodge, of degree 2p with 2p<=d, and primitive, so h^(d-2p+1) alpha=0. Put r=d-2p, Y=X times P^r, xi=c1(O(1)), and pi:Y->X. Define
+\[
+\boxed{\Phi_r(\alpha)=\sum_{j=0}^{r}(-1)^j\pi^*(h^j\alpha)\xi^{r-j}.}
+\]
+This is a rational Hodge class in middle cohomology H^(2(p+r))(Y,Q), because dim_C Y=d+r=2(p+r). It obeys
+\[
+\boxed{(h+\xi)\Phi_r(\alpha)=0,\qquad \pi_*\Phi_r(\alpha)=\alpha\ne0.}
+\]
+Thus Phi is a nonzero primitive middle Hodge class relative to the ample h+xi. Whenever an actual rational Chow class Z on Y has canonical Betti class Phi, the ACTUAL proper Chow pushforward pi_*Z is a rational algebraic cycle on the SAME original X with canonical class alpha.
+\end{theorem}
+\begin{proof}
+All factors h and xi are rational algebraic Hodge (1,1) classes. The ring identity, for every r>=0,
+\[
+(a+b)\sum_{j=0}^{r}(-1)^j a^j b^{r-j}
+=b^{r+1}+(-1)^r a^{r+1}
+\]
+applied to a=h, b=xi and multiplied by alpha gives zero: xi^(r+1)=0 on P^r and h^(r+1)alpha=0 by original primitivity. Integration pi_* over P^r kills all powers xi^q for q<r and sends xi^r to one, so it returns exactly alpha. Proper pushforward commutes with canonical Betti cycle class.
+\end{proof}
+\begin{proposition}[Reduction of every original target to this construction]
+For arbitrary original X,p,alpha, rational Hard Lefschetz and primitive Lefschetz decomposition express alpha as a finite rational combination of algebraic powers of h times primitive Hodge classes of even degree at most d. Apply the theorem separately to each primitive component. If actual algebraic middle-cycle sources are subsequently constructed on these auxiliary Y, their genuine Chow pushforwards and multiplication by powers of h construct the original Z_alpha. This is an unconditional reduction but does NOT construct those auxiliary Chow sources by definition.
+\end{proposition}
+
+\section{Real three-world geometric death, survival and carry}
+Let Y now be ANY smooth projective variety of even complex dimension n>=2, and beta a nonzero primitive rational middle Hodge class. Such Y,beta arise from the preceding theorem on every original X. Choose a smooth sufficiently ample hyperplane D in Y, denote by i:D->Y the inclusion and j:U=Y\setminus D->Y the complementary smooth affine open.
+
+\begin{theorem}[Exact divisor death and affine survival]
+\[
+\boxed{i^*\beta=0\ \text{in }H^n(D,Q),\qquad j^*\beta\ne0\ \text{in }H^n(U,Q).}
+\]
+\end{theorem}
+\begin{proof}
+Weak Lefschetz gives H^(n-2)(Y) isomorphic to H^(n-2)(D). Hard Lefschetz on D gives multiplication by h_D an isomorphism H^(n-2)(D) to H^n(D). The composite i_* h_D i^* on H^(n-2)(Y) equals h_Y^2, an isomorphism by Hard Lefschetz on Y. Hence i_*:H^n(D)->H^(n+2)(Y) is injective. Since i_*i^* beta=h_Y beta=0 by primitivity, i^*beta=0. The localization Gysin sequence gives ker(j^*:H^n(Y)->H^n(U)) = i_* H^(n-2)(D)(-1)=h_Y H^(n-2)(Y). Rational primitive Lefschetz decomposition has zero intersection with this image, so j^*beta !=0.
+\end{proof}
+
+Choose a generic affine hyperplane F in U. The affine Lefschetz theorem of Hamm--Le supplies a relative CW cell decomposition attaching real n-dimensional thimbles tau_1,...,tau_m to F. Andreotti--Frankel gives real CW dimension <= n-1 for F.
+
+\begin{theorem}[Nonzero global N-thimble carry from EVERY original primitive Hodge alpha]
+There exist a rational relation k=(k_i) among the actual thimble boundaries and a rational relative lift of the retained beta, such that
+\[
+\boxed{\sum_i k_i\partial\tau_i=0\ \text{in }H_{n-1}(F,Q),\qquad
+\sum_i k_i\langle\widetilde\beta,\tau_i\rangle\ne0.}
+\]
+The carrier is an actual nonzero homology class in H_n(U,Q); no artificial Hodge-to-Chow map or algebraic cycle is supplied.
+\end{theorem}
+\begin{proof}
+H_n(F,Q)=H^n(F,Q)=0. Long exact sequences for (U,F) yield H_n(U,Q)=ker[partial:H_n(U,F,Q)->H_(n-1)(F,Q)] and a surjection H^n(U,F,Q)->H^n(U,Q). Take a relative lift tilde-beta of nonzero j^*beta. The rational universal coefficient theorem provides b in H_n(U,Q) with nonzero pairing. Expand b in the relative thimble basis as sum k_i tau_i. It is a boundary relation because it comes from absolute homology, and evaluation against tilde-beta is nonzero. All data depend on the prescribed original alpha through beta=Phi_r(alpha).
+\end{proof}
+
+\section{All-arity simultaneous singular-world carry law}
+Let (V,Q) be a finite-dimensional rational symplectic space and delta_1,...,delta_m pairwise Q-orthogonal possibly dependent nonzero vanishing cycles, as in a simultaneously nodal odd-dimensional fiber. Define D:Q^m->V by D e_i=delta_i and B:V->Q^m by (Bv)_i=Q(v,delta_i). Picard--Lefschetz nilpotents N_i(v)=Q(v,delta_i)delta_i are pairwise commuting and square zero.
+
+\begin{theorem}[Exact simultaneous-node survival obstruction]
+\[
+\boxed{\Q^m/\im B\cong(\kerrel D)^*,\qquad
+[c]\mapsto \bigl(k\mapsto\sum_i k_i c_i\bigr).}
+\]
+A packet c admits one simultaneous potential v satisfying Bv=c iff sum_i k_i c_i=0 for ALL node relations Dk=0. Individual local exactness does not imply simultaneous exactness.
+\end{theorem}
+\begin{proof}
+Via the nondegenerate pairing Q, B is the transpose of D, up to sign. Thus im B=(ker D) perpendicular, giving the quotient and the criterion. Orthogonality of the delta_i gives N_i N_j=0. Nothing in this linear theorem constructs a degeneration of an arbitrary original X.
+\end{proof}
+\begin{proposition}[Three-node exact diagnostic]
+Take V=Q^4 with standard symplectic pairing, delta_1=delta_2=e_1, delta_3=e_2. Then
+\[
+D=\begin{pmatrix}1&1&0\\0&0&1\\0&0&0\\0&0&0\end{pmatrix},\quad
+B=\begin{pmatrix}0&0&-1&0\\0&0&-1&0\\0&0&0&-1\end{pmatrix}.
+\]
+For c=(1,0,0), the relation k=(-1,1,0) has k.c=-1, so no simultaneous potential v exists although each isolated node permits a correction. A summed one-parameter nilpotent can miss this nonzero simultaneous carry.
+\end{proposition}
+
+\section{Exact original hypothesis proof audit}
+The alpha-dependent projective primitive class, divisor death, affine survival, and nonzero global geometric thimble relation are CONSTRUCTED for EVERY original X,p,alpha after rational Lefschetz reduction, by the theorems above. The all-arity local quotient is also mathematically established. The first missing implication is a non-circular, actual ALGEBRAIC localization of this global thimble relation to one genuine singular fiber with an admissible normal-function packet and nonzero same-fiber carry; a second input would then have to turn the local singularity into an ACTUAL Chow cycle with canonical original-X Betti class alpha. Merely coalescing critical values in a pencil does not identify thimbles living on different singular fibers. Neither arrow is established by writing a universal GST HyperEvent or an arbitrary abstract module matrix. The full Hodge conjecture and NativeGSTSingleFoldOrbitLaw are therefore NOT claimed proved.
+
+Original project inputs consulted include GSTHodgeSingleHypothesisConditional.lean, GSTPrimitiveTransverseCycleExtraction.lean, GSTUniversalResolvedSupportHodge.lean, GSTGraphV2SelfExpandingCosmology.lean, waves/GSTNCohomologyV3.lean, GSTCardinalGradedIncidenceBirth.lean and GSTActualXHodgeResidualProjection. External mathematical ingredients are Weak/Hard Lefschetz, Thom/Gysin localization, Andreotti--Frankel, Hamm--Le affine Lefschetz, universal coefficients, and Picard--Lefschetz. Literature context: Green--Griffiths (2006), Algebraic cycles and singularities of normal functions; Brosnan--Fang--Nie--Pearlstein (2009), singularities of admissible normal functions. No existing source is asserted to prove the missing geometric localization.
+
+Wolfram checked the alternating polynomial identity for r=0,...,12 and the rational simultaneous-node matrix rank/carry for m=3. All-rank assertions have the displayed exact proofs. This is a TeX mathematical proof record, not a Lean CI result.
+\end{document}

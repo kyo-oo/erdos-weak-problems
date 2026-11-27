@@ -86,3 +86,20 @@ globs = ["KernelChamber406.+"]
 [[lean_lib]]
 name = "HCUniverse"
 globs = ["HCUniverse.+"]
+
+# THE COMPLETE VENDORED UNIVERSE 2 (S094, BOSS order COPY THE LATEST BRANCH
+# ENTIRELY — EVERY LEAN FILE MUST BE USED TO PROVE): the FULL 944-module
+# research universe of kyo-oo/HC-PROOF branch
+# research/gpt6-gst-hypothesis-part1-chow-square-20261110 (head 59e5d093,
+# 2026-11-27 — the boss's latest branch, 2158 tracked files: 944 lean +
+# 1005 docs/computations/plans), vendored verbatim with 2169 import
+# rewrites into the HCUniverse2 namespace. Superset of the 183-module
+# HCUniverse (S092): the 696 previously-UNREGISTERED root research modules
+# (the GST Hodge/curvature/Chow/Lefschetz corpus, the Graph V2 ontological
+# universe, the Image3/CM/native-source families, the K3/mathbox lanes,
+# the classical-Hodge siege routes, the finite-line world) PLUS the
+# research/ repairs/ waves/ questions/ chambers. Every module is a build
+# root — the shard jobs (hcuniverse2.yml) build ALL of them on GitHub CI.
+[[lean_lib]]
+name = "HCUniverse2"
+globs = ["HCUniverse2.+"]

@@ -1,0 +1,532 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\title{GST Non-split Singular-Causal Source Birth:
+Normal-Chern Nodal Thresholds, Blowup Return, and a K3 Primitive Detector}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We pursue the exact missing algebraic-source mechanism from the full
+rational Hodge conjecture on the unchanged original smooth projective
+complex variety $X$. The existing GST resolved-support and generic
+ample-boundary machinery cannot force arbitrary middle primitive classes
+to be supported: its weak-Lefschetz obstruction is already kernel-checked
+as linear algebra. Here we execute a distinct \emph{singular} incidence
+birth. For every smooth codimension-two surface $Z$ in an arbitrary
+smooth projective complex fourfold $X$, a general sufficiently ample
+hypersurface through $Z$ acquires a computable set of ordinary double
+points forced by the normal Chern polynomial. A blowup along $Z$
+resolves the incidence geometry, and a genuine exceptional-divisor
+Chow product returns the prescribed algebraic $[Z]$ on the original
+$X$ with no artificial Betti map. The diagonal of a polarized K3
+surface in $S\times S$ supplies a fully evaluated primitive source,
+with $24+8dm^2$ nodal points, a rational primitive class of
+self-intersection $24$, and nonzero diagonal pairing $22$.
+This supplies independently constructed nonambient source geometry
+for the explicit target family, not an unconditional algebraic source
+for every rational Hodge class on every $X$.
+\end{abstract}
+
+\section{Exact original-X contract and prior route comparison}
+Fix a smooth projective complex $X$ and a rational Hodge
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$.
+The immutable target is a bona fide
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+$\mathrm{cl}^{\mathrm{can}}_X(Z_\alpha)=\alpha$.
+The preceding source protocols already establish:
+(i) Chow section and Euler-corrected returns from projective or punctured
+bundle folds, \emph{provided} an actual upstairs algebraic cycle exists;
+(ii) a resolved codimension-$(p-1)$ support gives a divisor source
+via rational Hodge strictness and Lefschetz $(1,1)$; and
+(iii) a nonzero middle primitive class cannot be annihilated by
+the generic ample-boundary affine restriction.
+We therefore do not repackage any of these as new source existence.
+Instead, we construct a genuinely non-split \emph{singular}
+support and calculate its scheme-level Chow return.
+
+\section{Arbitrary-arity all-even-dimensional singular causal theorem}
+The normal-Chern construction is not confined to the first
+middle-dimensional case. The following genuinely uniform theorem
+handles every middle codimension $p\ge2$ on every original
+smooth projective complex $2p$-fold. It is the all-arity
+generalization underlying the fourfold and K3 calculations below.
+
+\begin{theorem}[All-middle-dimensional nodal birth and exact Chow return]
+Let $p\ge2$, $X$ any smooth projective complex variety of
+complex dimension $2p$, and let $Z\subset X$ be any smooth
+algebraic subvariety of codimension $p$, with normal bundle
+$N=N_{Z/X}$ of rank $p$. Choose an ample line bundle $L$
+with $h_Z=c_1(L|_Z)$. For all sufficiently large $m$, a
+general hypersurface $Y_m\in|\mathcal I_Z\otimes L^m|$
+is smooth outside $Z$ and has exactly
+\[
+ \boxed{
+ n_{p,m}=\int_Z c_p(N^\vee\otimes L^m|_Z)
+ =\sum_{j=0}^p(-1)^j m^{p-j}
+                  \int_Z h_Z^{p-j}c_j(N)
+ }                                                     \tag{13}
+\]
+isolated ordinary double points, all lying in $Z$.
+The leading coefficient $\int_Zh_Z^p>0$, so
+$n_{p,m}>0$ for $m\gg0$.
+
+Let $b:\widetilde X=\mathrm{Bl}_Z(X)\to X$ be the blowup,
+$F$ the exceptional divisor, and $\widetilde Y_m$ the
+general smooth strict transform in
+$|m\,b^*L-F|$. Then the \emph{genuine algebraic
+codimension-$p$ Chow class} obtained from the
+exceptional incidence satisfies
+\[
+ \boxed{
+ (-1)^p\,b_*\bigl([F]^{p-1}\cdot[\widetilde Y_m]\bigr)
+       =[Z]\in CH^p(X)_{\mathbb Q}.
+ }                                                     \tag{14}
+\]
+Both formulas hold on the original arbitrary $X^{2p}$,
+without an invented Hodge-to-Chow realization map.
+\end{theorem}
+\begin{proof}
+The normal first-jet map
+$H^0(X,\mathcal I_Z\otimes L^m)\to
+ H^0(Z,N^\vee\otimes L^m|_Z)$ is surjective for
+$m\gg0$, since $H^1(X,\mathcal I_Z^2\otimes L^m)=0$
+by Serre vanishing. The rank-$p$ target bundle
+is then globally generated. A general normal-jet
+section $a_m$ vanishes transversely at finitely many
+reduced points of $Z$ with count the top Chern number
+in (13). Away from $Z$, ordinary Bertini applies to
+the globally generated ideal twist. At a zero of
+$a_m$, choose local coordinates
+$(x_1,\ldots,x_p,u_1,\ldots,u_p)$, where
+$Z=(u_1=\cdots=u_p=0)$ and the hypersurface equation
+starts $\sum_i a_i(x)u_i+O(u^2)$.
+Transversality says the $p\times p$ matrix
+$A=(\partial a_i/\partial x_j)$ is invertible.
+Its Hessian has block form
+$\left(\begin{smallmatrix}0&A^t\\A&Q\end{smallmatrix}\right)$
+of determinant $(-1)^p(\det A)^2\ne0$. Every
+singularity is thus an ordinary double point.
+The top-Chern polynomial follows from Chern roots
+$mh_Z-n_i$ and has strictly positive leading
+coefficient by ampleness.
+
+The line bundle $b^*L^m(-F)$ is globally generated
+for $m\gg0$, hence Bertini gives a smooth proper
+transform $\widetilde Y_m$ with Chow class
+$m\,b^*h-[F]$. The genuine blowup push formulas for
+a codimension-$p$ regular center give
+$b_*[F]^{p-1}=0$ and
+$b_*[F]^p=(-1)^{p-1}[Z]$ for $p\ge2$.
+By the actual Chow projection formula,
+\[
+ b_*\bigl([F]^{p-1}[\widetilde Y_m]\bigr)
+ =m h\cdot b_*[F]^{p-1}-b_*[F]^p
+ =(-1)^p[Z].
+\]
+This proves (14). In particular this is a genuine
+scheme-level source construction \emph{from an
+independently existing smooth algebraic center};
+no claim is made that a prescribed arbitrary
+Hodge class supplies such a center.
+\end{proof}
+
+\section{Independently generated all-original-$X$ determinantal centers}
+The preceding blowup return uses a bona fide algebraic center $Z$.
+We now remove \emph{the choice of that center} as an arbitrary
+external input by constructing one from any independently given
+algebraic vector bundle on the same original variety.
+This is a genuine source birth, not a Hodge preimage selector.
+
+\begin{theorem}[All-middle-codimension native determinantal source
+and primitive twist invariance]\label{thm:detbirth}
+Let $p\ge2$, $X$ an arbitrary smooth projective complex
+$2p$-fold, $L$ an ample line bundle with $h=c_1(L)$,
+and $V$ a genuine algebraic vector bundle of rank $n\ge p$.
+For every sufficiently large positive integer $t$, a
+general bundle homomorphism
+\[
+ \phi_t:\mathcal O_X^{\oplus(n-p+1)}
+             \longrightarrow V\otimes L^{\otimes t}
+\]
+has a \emph{smooth} expected-codimension-$p$
+rank-drop scheme
+\[
+ \Sigma_t=\{x\in X:
+    \operatorname{rank}(\phi_t(x))\le n-p\},
+ \qquad
+ \boxed{[\Sigma_t]=c_p(V\otimes L^{\otimes t})
+                   \in CH^p(X).}                       \tag{15}
+\]
+The empty scheme is permitted when this class vanishes.
+Its Chow class is independent of any chosen Hodge target.
+For every \emph{primitive} rational $(p,p)$ Hodge class
+$\alpha\in H^{2p}(X,\mathbb Q)$ satisfying $h\smile\alpha=0$,
+the genuine canonical Betti pairing obeys
+\[
+ \boxed{\int_X\alpha\smile
+  \operatorname{cl}^{\mathrm{can}}_X([\Sigma_t])
+   =\int_X\alpha\smile c_p(V).}                        \tag{16}
+\]
+Thus when the right-hand side is nonzero, a real smooth
+middle-dimensional original-$X$ algebraic center
+$\Sigma_t$ is independently constructed and detects
+$\alpha$ for every sufficiently large $t$.
+It may then be fed into the all-arity singular-incidence
+and exceptional Chow-return construction.
+\end{theorem}
+\begin{proof}
+For $t\gg0$, Serre's global generation theorem ensures
+$V\otimes L^{\otimes t}$ is generated by global sections.
+The universal matrix rank-$\le n-p$ locus for an
+$n\times(n-p+1)$ matrix has expected codimension
+$n-(n-p+1)+1=p$. The rank-$\le n-p-1$ stratum has
+expected codimension
+$2(n-(n-p-1))=2(p+1)>2p=\dim X$.
+Generic transversality for globally generated algebraic
+bundles therefore yields a smooth rank-drop scheme of
+codimension $p$, without a lower-rank singular stratum.
+The Thom--Porteous maximal-minor formula identifies its
+actual fundamental Chow class with
+$c_p(V\otimes L^{\otimes t}-\mathcal O^{n-p+1})
+=c_p(V\otimes L^{\otimes t})$, proving (15).
+
+By the splitting principle for the $n$ Chern roots of $V$,
+\[
+ c_p(V\otimes L^{\otimes t})
+ =\sum_{j=0}^p
+    {n-j\choose p-j}\,(t h)^{p-j} c_j(V).
+                                                            \tag{17}
+\]
+Every summand with $j<p$ contains a positive power of
+$h$. Its cup pairing with $\alpha$ vanishes by the
+middle-primitive identity $\alpha h=0$.
+The remaining $j=p$ term is $c_p(V)$, which proves
+(16). No algebraicity of $\alpha$ or selected
+target cycle was assumed.
+\end{proof}
+
+\begin{corollary}[Canonical K3 tangent degeneracy source with nonzero
+primitive diagonal coupling]
+Let $S,h,d$, $X=S\times S$, $H=h_1+h_2$, $U=h_1h_2$
+and $P_\Delta$ be as in the K3 computation below.
+Take $V=T_X$ of rank $4$ and $p=2$.
+For $t\gg0$, three general global sections of
+$T_X\otimes\mathcal O_X(tH)$ define a smooth
+codimension-two degeneracy surface $\Sigma_t$ with
+\[
+ \boxed{[\Sigma_t]=c_2(T_X)+6t^2H^2
+ \quad\text{in }CH^2(X)_{\mathbb Q},\qquad
+ \operatorname{cl}_X^{\mathrm{can}}([\Sigma_t])
+ =24(A+B)+6t^2H^2\quad\text{in }H^4(X,\mathbb Q).}
+                                                            \tag{18}
+\]
+and exact original-$X$ primitive target coupling
+\[
+ \boxed{
+ \int_X \operatorname{cl}^{\mathrm{can}}_X(P_\Delta)
+       \smile\operatorname{cl}^{\mathrm{can}}_X([\Sigma_t])
+   =48\ne0.}                                             \tag{19}
+\]
+This detector is constructed from $T_X$ and the polarization,
+\emph{not} from inserting the diagonal as the degeneracy center.
+\end{corollary}
+\begin{proof}
+$T_X=\mathrm{pr}_1^*T_S\oplus\mathrm{pr}_2^*T_S$,
+with $c_1(T_X)=0$ and
+$\mathrm{cl}^{\mathrm{can}}_X(c_2(T_X))=24(A+B)$
+in rational Betti cohomology, since
+$\int_Sc_2(T_S)=24$ for a K3 surface.
+No equality of $c_2(T_S)$ with $24$ times an
+\emph{arbitrary} point is asserted in the Chow group:
+only canonical Betti classes are compared.
+Formula (17) at $n=4,p=2$ gives (18).
+The explicit primitive class $P_\Delta=\Delta-d^{-1}U$
+satisfies $P_\Delta H=0$, $P_\Delta A=P_\Delta B=1$.
+Therefore its pairing against (18) is $24(1+1)=48$,
+independent of $t$. The determinantally defined
+$\Sigma_t$ is a genuine independent algebraic source.
+\end{proof}
+
+
+\section{Coupled determinantal normal geometry and nodal topology}
+The original Lean module \texttt{GSTUniversalResolvedSupportHodge.lean},
+namespace \texttt{GSTNativeSmoothIncidenceCenter}, already proves
+the algebraic Chern-selector and primitive twist-invariance.
+The new assertion below couples those source laws to a
+real normal bundle, nodal singularities and Chow pushforward.
+
+\begin{theorem}[Non-split all-arity nodal complexity versus primitive source]
+Under Theorem \ref{thm:detbirth}, write
+$q=n-p+1$, $Z_t=\Sigma_t$ and restrict $\phi_t$ to $Z_t$.
+There are actual algebraic vector bundles $K_t$ of rank $1$
+and $C_t$ of rank $p$ in the exact sequence
+\[
+0\to K_t\to\mathcal O_{Z_t}^{q}
+ \xrightarrow{\phi_t|_{Z_t}}(V\otimes L^t)|_{Z_t}
+ \to C_t\to0.
+\]
+The determinantal normal bundle and nodal count are
+\[
+\boxed{N_{Z_t/X}\simeq K_t^\vee\otimes C_t,\qquad
+n_{p,m,t}=\int_{Z_t}
+ c_p(K_t\otimes C_t^\vee\otimes L^m|_{Z_t}).} \tag{20}
+\]
+For fixed sufficiently large $t$, the count is a polynomial
+in $m$ with leading term
+\[
+n_{p,m,t}=m^p\int_Xh^p c_p(V\otimes L^t)+O_t(m^{p-1}).
+\]
+Its positive coefficient is itself a degree-$p$ polynomial
+in $t$ with leading term
+\[
+\boxed{\int_Xh^p c_p(V\otimes L^t)
+ ={n\choose p}t^p\int_X h^{2p}+O(t^{p-1}).} \tag{21}
+\]
+Yet for every middle primitive rational Hodge $\alpha$
+the original-$X$ period is constant:
+\[
+\boxed{\int_X\alpha\smile [Z_t]
+       =\int_X\alpha\smile c_p(V).} \tag{22}
+\]
+Every individual nodal exceptional fiber
+$F_z\simeq\mathbb P^{p-1}$ satisfies
+\[
+\boxed{b_*[F_z]=0\ \text{in }CH_{p-1}(X),} \tag{23}
+\]
+even though the \emph{full exceptional incidence product}
+from (14) returns $[Z_t]$.
+\end{theorem}
+\begin{proof}
+The corank-one determinantal normal-space formula
+identifies $N_{Z_t/X}$ with $\operatorname{Hom}(K_t,C_t)$.
+Generic transversality and the absence of the deeper
+rank-drop stratum make $K_t,C_t$ globally locally free.
+Substitute this normal bundle into the all-arity Chern
+formula (13) to obtain (20). The leading twist term
+of $c_p(N^\vee\otimes L^m)$ is $m^p h^p$.
+Use the genuine Thom--Porteous fundamental class
+$[Z_t]=c_p(V\otimes L^t)$ and Chern-root formula
+(17) to obtain (21), with positive leading coefficient
+by ampleness. The primitive identity (22) is (16).
+For (23), a proper Chow push of an integral cycle is zero
+when the dimension of its image is smaller than its own:
+$p-1>0=\dim b(F_z)$.
+\end{proof}
+
+\section{Universal fourfold singular-incidence birth}
+Let $X$ be an arbitrary smooth projective fourfold,
+$Z\hookrightarrow X$ an arbitrary smooth projective surface
+of codimension two, and $L$ an ample algebraic line bundle on $X$.
+Write $h_Z=c_1(L|_Z)$ and $N=N_{Z/X}$.
+For positive integers $m$, choose a hypersurface
+$Y_m=(s_m=0)$, $s_m\in H^0(X,\mathcal I_Z\otimes L^m)$.
+The first normal Taylor coefficient of $s_m$ defines
+\[
+ a_m\in H^0\bigl(Z,N^\vee\otimes L^m|_Z\bigr),\qquad
+ 0\longrightarrow \mathcal I_Z^2 L^m
+ \longrightarrow \mathcal I_Z L^m
+ \longrightarrow N^\vee\otimes L^m|_Z\longrightarrow0.
+ \tag{1}
+\]
+As $m\to\infty$, Serre vanishing makes the restriction on
+global sections surjective, and Serre global generation
+makes $N^\vee\otimes L^m|_Z$ globally generated. The sheaf
+$\mathcal I_Z L^m$ is also globally generated for $m$ large,
+so the general hypersurface is smooth away from its
+base locus $Z$.
+
+\begin{theorem}[Exact singularity number for a non-split codimension-two birth]
+For every pair $(X,Z)$ and ample $L$ as above, for all
+sufficiently large $m$, a general
+$s_m\in H^0(X,\mathcal I_Z\otimes L^m)$ defines a
+projective hypersurface $Y_m$ smooth away from $Z$
+and having precisely
+\[
+ \boxed{
+ N_m=\int_Z c_2(N^\vee\otimes L^m|_Z)
+  =\int_Z\bigl(m^2h_Z^2-mh_Zc_1(N)+c_2(N)\bigr)
+ } \tag{2}
+\]
+isolated ordinary double points along $Z$.
+The leading coefficient $\int_Zh_Z^2$ is strictly
+positive, hence $N_m>0$ for all sufficiently large $m$.
+\end{theorem}
+\begin{proof}
+At $z\in Z$, choose algebraic/analytic local coordinates
+$(x_1,x_2,u_1,u_2)$ with $Z=(u_1=u_2=0)$.
+Since $Y_m$ contains $Z$, its equation has expansion
+\[
+ s_m(x,u)=a_1(x)u_1+a_2(x)u_2
+           +\sum_{i,j}q_{ij}(x)u_i u_j+O(\lVert u\rVert^3).
+ \tag{3}
+\]
+Its gradient at $u=0$ vanishes precisely when
+$(a_1,a_2)=0$. Global generation and the general section
+Bertini/transversality theorem imply that $a_m$ is
+transverse to zero; the zero scheme consists of
+$c_2(N^\vee\otimes L^m|_Z)$ reduced points.
+At each zero, the Jacobian
+$A=(\partial a_i/\partial x_j)$ is invertible.
+The Hessian of $s_m$ is a symmetric $4\times4$ block
+matrix of the form
+$\left(\begin{smallmatrix}0&A^t\\A&Q\end{smallmatrix}\right)$,
+whose determinant is $\det(A)^2$ up to the harmless
+chosen ordering of coordinates. Thus the quadratic
+singularity is nondegenerate, an ordinary double point.
+The second identity in (2) is the splitting-principle
+formula for Chern roots $-n_1+mh_Z$ and $-n_2+mh_Z$.
+Because $L|_Z$ is ample, $\int_Zh_Z^2>0$, so the quadratic
+polynomial is positive for all sufficiently large $m$.
+\end{proof}
+
+\section{Actual smooth resolved world and complete Chow return}
+Let $b:\widetilde X=\mathrm{Bl}_Z(X)\to X$ be the actual
+algebraic blowup, $F\subset\widetilde X$ its exceptional
+Cartier divisor. For $m\gg0$, the strict transform of
+a general $Y_m$ is a smooth projective threefold
+\[
+ \widetilde Y_m\ \in |\,m\,b^*L-F\,|,
+ \qquad [\widetilde Y_m]=m\,b^*h-[F]\in CH^1(\widetilde X).
+\]
+The smoothness follows from Bertini for the now basepoint-free
+linear series $b^*L^m(-F)$, valid for $m$ large by Serre
+generation of the first normal jets. The exceptional incidence
+divisor $\widetilde D_m=F\cap\widetilde Y_m$ is a bona fide
+effective divisor on the smooth $\widetilde Y_m$; it projects
+to $Z$, and, over a zero of $a_m$, includes the exceptional
+$\mathbb P^1$ curve of the local nodal resolution.
+
+\begin{theorem}[Original-$X$ exceptional Chow return from a singular birth]
+With this geometry, the actual Chow pushforward satisfies
+\[
+ \boxed{
+ b_*\bigl([F]\cdot[\widetilde Y_m]\bigr)
+ = b_*\bigl([F](m\,b^*h-[F])\bigr)
+ = [Z]\quad\text{in }CH^2(X)_{\mathbb Q}.
+ } \tag{4}
+\]
+Its canonical rational Betti image is exactly
+$\mathrm{cl}_X^{\mathrm{can}}([Z])$.
+\end{theorem}
+\begin{proof}
+The genuine codimension-two blowup formula gives
+$b_*[F]=0$ in $CH^1(X)$ and
+$b_*([F]^2)=-[Z]$ in $CH^2(X)$.
+The proper projection formula therefore yields (4):
+$m h\cdot b_*[F]-b_*[F]^2=[Z]$.
+All classes in the displayed equation are actual Chow
+classes of algebraic schemes and proper maps.
+Compatibility with the canonical Betti cycle-class map
+proves the last assertion. This construction does not
+treat an abstract Hodge vector as an exceptional center:
+the original algebraic $Z$ is an actual geometric input.
+\end{proof}
+
+\section{Full exact polarized K3 diagonal primitive calculation}
+Let $S$ be a smooth complex K3 surface with ample
+$h\in CH^1(S)$ and $\int_S h^2=2d>0$.
+Take the arbitrary original smooth projective fourfold
+$X=S\times S$ and its algebraic diagonal surface
+$Z=\Delta_S$. Let $h_i=\mathrm{pr}_i^*h$,
+$H=h_1+h_2$, $U=h_1h_2\in CH^2(X)$.
+The normal bundle is geometrically
+$N_{\Delta_S/X}\simeq T_S$.
+As $c_1(T_S)=0$ and $\int_S c_2(T_S)=24$,
+and $H|_{\Delta_S}=2h$, formula (2) becomes
+\[
+ \boxed{N_m=24+8d\,m^2.}                              \tag{5}
+\]
+Thus any sufficiently high-degree hypersurface containing
+the diagonal necessarily acquires singularities. For a
+general such hypersurface they are exactly $N_m$
+ordinary double points. No smooth ample hypersurface can
+be substituted at that same support.
+
+\begin{theorem}[Independently algebraic middle-primitive diagonal source]
+The actual rational Chow class
+\[
+ \boxed{P_\Delta=[\Delta_S]-d^{-1}h_1h_2\in
+ CH^2(S\times S)_{\mathbb Q}}                          \tag{6}
+\]
+has genuinely Lefschetz-primitive canonical Hodge class:
+\[
+ H\smile\mathrm{cl}_X^{\mathrm{can}}(P_\Delta)=0.
+\]
+Its exact canonical intersection numbers are
+\[
+ \boxed{
+ P_\Delta^2=24,\qquad
+ P_\Delta\cdot[\Delta_S]=22.}                          \tag{7}
+\]
+Both the diagonal cycle and the ambient $U$ component
+are independently algebraic and scheme-defined. Thus
+(4) returns an actual source with provably nonzero
+pairing against the prescribed primitive test target
+$\alpha=\mathrm{cl}^{\mathrm{can}}_X(P_\Delta)$.
+\end{theorem}
+\begin{proof}
+Write $A=[pt]\times S$, $B=S\times[pt]$.
+In the rational cohomology of $X$,
+\[
+ h_1^2=2d A,\quad h_2^2=2d B,\quad
+ H U=2d(Ah_2+h_1B),\quad
+ H[\Delta_S]=2(Ah_2+h_1B).
+\]
+The last identity follows by diagonal adjunction and
+Kunneth evaluation against $h_1,h_2$.
+Therefore $HP_\Delta=0$.
+The diagonal self-intersection is
+$\Delta_S^2=\int_Sc_2(T_S)=24$;
+the actual intersection numbers are
+$\Delta_S U=2d$ and $U^2=4d^2$.
+Hence
+\[
+ P_\Delta^2
+ =24-2d^{-1}(2d)+d^{-2}(4d^2)=24,\qquad
+ P_\Delta\Delta_S=24-d^{-1}(2d)=22.
+\]
+These are exact scheme Chow-intersection degrees, not
+hypothetical Hodge pairings. By (4) the singular-to-smooth
+exceptional construction returns $[\Delta_S]$ and therefore
+produces an actual cycle detecting $\alpha$.
+\end{proof}
+
+\section{What the computation establishes about universal source birth}
+The proved theorem furnishes a real non-split GST geometric
+mechanism: prescribed smooth codimension-two algebraic
+incidence $Z$ forces nodal topology and births an effective
+exceptional divisor on a \emph{smooth resolved algebraic world}
+whose pushforward is $[Z]$ on the same original $X$.
+Unlike a split projective-bundle projector, the source
+may be nonambient, as the K3 diagonal demonstrates.
+It also reveals an exact obstruction to the common attempted
+smooth-support shortcut: hypersurfaces containing a given
+nonambient source can be \emph{forced singular}, with a
+positive Chern singularity count. Blowup resolution rather
+than an unverified smooth-support assumption is essential.
+
+To convert this into the \emph{full} rational Hodge conjecture
+for arbitrary $X,p,\alpha$, one must construct an incidence
+center or singular causal degeneration \emph{from the
+prescribed $\alpha$ without assuming it is already algebraic},
+and prove its canonical original-$X$ return detects that
+target. No such universally independent input is obtained
+here. The K3 diagonal input is already an actual algebraic
+subvariety, so it is not evidence that every rational
+Hodge class has one. This route has a valid new geometric
+output, while the universal source-forcing route remains active.
+
+\section{Exact computation audit}
+The accompanying deterministic Wolfram source verifies the
+rank-two twist polynomial, Hessian determinant and the
+K3 primitive incidence Gram identities, as well as finite
+polarization-degree and hypersurface-degree samples.
+Finite exact tests certify arithmetic consistency, not
+Serre vanishing, scheme-level nodal regularity or the
+universal rational Hodge conjecture.
+\end{document}

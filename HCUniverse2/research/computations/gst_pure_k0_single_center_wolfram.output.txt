@@ -1,0 +1,11 @@
+Wolfram Language exact symbolic run, 2026-10-20.
+Input: gst_pure_k0_single_center_wolfram.wl
+Independent method: exponential of the Chern-character series.
+
+Out[1]= {{{1, True, True}, {2, True, True}, {3, True, True},
+{4, True, True}, {5, True, True}, {6, True, True}, {7, True, True},
+{8, True, True}, {9, True, True}, {10, True, True}}, True}
+
+Columns: codimension p; exact center class identity;
+exact free-symbol kernel-completion/purity identity.
+No warning or error message in this corrected execution.

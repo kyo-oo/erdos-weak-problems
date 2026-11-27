@@ -1,0 +1,504 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
+\newcommand{\KU}{\mathrm{KU}}
+\newcommand{\Perf}{\mathrm{Perf}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\ch}{\mathrm{ch}}
+\newcommand{\td}{\mathrm{td}}
+\newcommand{\real}{\mathrm{real}}
+\newcommand{\im}{\mathrm{im}}
+\newcommand{\id}{\mathrm{id}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{problem}[theorem]{Unresolved geometric problem}
+\title{GST native residual Euler kernels and complete-alteration transfer}
+\author{Mathbox: mathematical construction and source audit}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Starting from the established GST normal-free middle-world Euler law,
+we construct an actual rational algebraic perfect-kernel class that
+removes any finite native primitive frame. Its Euler pairing against
+a doubled prescribed topological class is exactly minus the positive
+squared residual. The construction works for every original variety
+in the stated middle-primitive range and survives every smooth
+complete alteration, with the exact degree factor. We derive a
+native-source-to-original-cycle formula for the remaining linear
+detector. The universal existence of that linear native source is
+not proved. In particular, a native kernel detecting a doubled
+topological input is not a native representative of the input.
+\end{abstract}
+
+\section{Scope, pinned input and conventions}
+The source revision is
+\texttt{c2479cac309ce2379c47e77b912f93183923e9b2}
+of \texttt{kyo-oo/HC-PROOF}. The established input is the
+normalization theorem in
+\texttt{GST\_middle\_Euler\_arithmetic\_normalization\_2026-10-20.tex}.
+No new Lean theorem or kernel compilation is claimed in this note.
+
+Let $X$ be a connected smooth projective complex variety of dimension
+$d$. Embed $X$ in $\mathbf P^{2M}$, increasing $M$ if necessary so
+$M\ge d+1$. Put
+\[
+ Y=\operatorname{Bl}_X\mathbf P^{2M},\qquad
+ j:E=\mathbf P_{\mathrm{lines}}(N)\hookrightarrow Y,\qquad
+ q:E\longrightarrow X,\qquad c=2M-d .
+\]
+Our convention is $\mathcal O_E(-1)\subset q^*N$,
+$\xi=c_1(\mathcal O_E(1))$, and $s(N)=c(N)^{-1}$.
+Set
+\[
+ \mathcal H_X=\bigoplus_{a=0}^d\Hdg^a(X)_\Q,\qquad
+ P_X(x,y)=\int_X[xy]_d,\qquad \epsilon=(-1)^{M+1}.
+\]
+The previously constructed finite native characteristic-class word
+$R=\sqrt{c(N)}$ satisfies $R^2s(N)=1$.
+The rational topological class $A_x=\widehat V_x\in\KU^0(Y)_\Q$
+is linear in $x$ and has
+\[
+ \ch(A_x)=I(Rx),\qquad
+ I(x)=\sum_{a=0}^d
+ j_*(\xi^{M-a-1}q^*x_a),\qquad
+ \chi_Y(A_x,A_y)=\epsilon P_X(x,y).                 \tag{1}
+\]
+The entire character is concentrated in codimension $M$.
+Consequently $A_x^\vee=(-1)^M A_x$ in rational topological $K$-theory.
+
+For the positive residual construction take $d=2p$, $p\ge1$, and
+an ample rational class $h$. Define
+\[
+ V=\ker(h:H^{2p}(X,\Q)\to H^{2p+2}(X,\Q))
+       \cap H^{p,p}(X),\qquad
+ Q(x,y)=(-1)^p\int_Xxy .
+\]
+The established primitive Hodge--Riemann form makes $Q$ positive
+definite on $V$. On this sector (1) becomes
+\[
+ \chi_Y(A_x,A_y)=\sigma Q(x,y),\qquad
+ \sigma=(-1)^{M+p+1},\qquad A_{Jx}=(-1)^p A_x,
+ \quad Jx=(-1)^p x.                                \tag{2}
+\]
+Positivity is used only on $V$, or on its injective alteration image.
+
+\section{Actual native lifts of a known primitive frame}
+Choose actual rational cycles $z_1,\ldots,z_t\in\CH^p(X)_\Q$
+whose classes $v_i=\cl(z_i)\in V$ are linearly independent.
+This is any already constructed native frame, not a basis assumed
+to cover all of $V$. Define actual middle Chow classes
+\[
+ \Gamma_i=I^{\CH}(R^{\CH}z_i)\in\CH^M(Y)_\Q .
+\]
+The rational algebraic Chern-character isomorphism for smooth $Y$
+gives classes $C_i\in K_0^{\mathrm{alg}}(Y)_\Q$ with
+$\ch_{\mathrm{alg}}(C_i)=\Gamma_i$ and all other character degrees zero.
+Hence
+\[
+ \real C_i=A_{v_i},\qquad C_i^\vee=(-1)^M C_i.
+\]
+These are genuine rational algebraic $K$-classes. Clearing finite
+denominators realizes them by bounded perfect complexes using finite
+direct sums and shifts; this does not assert that a rational class
+is literally one integral object without clearing denominators.
+
+Let
+\[
+ B_{ij}=Q(v_i,v_j),\qquad
+ G_{ij}=\chi_Y(C_i,C_j)=\sigma B_{ij}.                \tag{3}
+\]
+Independence and positivity imply $\det B>0$, so $G$ is invertible.
+For any prescribed $\alpha\in V$, define
+\[
+ q_i=Q(v_i,\alpha),\qquad
+ \alpha_0=\sum_jv_j(B^{-1}q)_j,\qquad
+ r=\alpha-\alpha_0.                                 \tag{4}
+\]
+These are rational classes; $Q(v_i,r)=0$.
+The actual cycle $\sum_j(B^{-1}q)_jz_j$ represents $\alpha_0$.
+No actual cycle representing $r$ is introduced.
+
+\section{Constructing the native residual kernel}
+Write $p_1,p_2:Y\times Y\to Y$ for the projections.
+For a rational algebraic perfect-kernel class $F$, put
+\[
+ T_F(U)=(p_2)_!\bigl(p_1^*U\cdot F\bigr).
+\]
+This is defined on algebraic $K_0$ and on topological $K$-theory;
+realization commutes with it. Tensor products and proper $K$-pushforward
+are used. The kernel $[\mathcal O_{\Delta_Y}]$ is the identity.
+
+\begin{theorem}[Actual finite-frame and residual kernels]
+The following are actual rational algebraic perfect-kernel classes:
+\[
+ \mathscr P=\sum_{i,j}(G^{-1})_{ji}\,C_i^\vee\boxtimes C_j,
+ \qquad
+ \boxed{\mathscr Q=[\mathcal O_{\Delta_Y}]-\mathscr P.} \tag{5}
+\]
+For convolution of kernels,
+\[
+ \mathscr P\star\mathscr P=\mathscr P,\qquad
+ \mathscr Q\star\mathscr Q=\mathscr Q,\qquad
+ \mathscr P\star\mathscr Q=\mathscr Q\star\mathscr P=0. \tag{6}
+\]
+On the prescribed middle classes,
+\[
+ T_{\mathscr P}(A_\alpha)=A_{\alpha_0},\qquad
+ \boxed{T_{\mathscr Q}(A_\alpha)=A_r.}                \tag{7}
+\]
+Moreover $T_{\mathscr Q}(C_i)=0$ in algebraic $K_0(Y)_\Q$.
+\end{theorem}
+\begin{proof}
+External product and proper pushforward give
+\[
+ T_{\mathscr P}(U)
+ =\sum_{i,j}(G^{-1})_{ji}\chi_Y(C_i,U)C_j.             \tag{8}
+\]
+This identity holds in the algebraic theory for algebraic $U$,
+and after realization for topological $U$.
+The convolution of two decomposable kernels contracts the middle
+factors by $\chi_Y(C_k,C_j)=G_{kj}$. Thus the coefficient matrix
+for the square is $G^{-1}GG^{-1}=G^{-1}$, proving the first
+identity in (6) at the level of kernel classes, not only on
+their cohomological actions. Subtracting from the identity kernel
+gives the remaining identities.
+
+For $U=A_\alpha$, the period column in (8) is $\sigma q$.
+Since $G^{-1}=\sigma B^{-1}$, (8) is precisely the first
+identity of (7). Linearity gives the second.
+For $U=C_k$, (8) gives
+$\sum_j(G^{-1}G)_{jk}C_j=C_k$, proving the final assertion.
+\end{proof}
+When $t=0$ use $\mathscr P=0$, $\mathscr Q=\mathcal O_\Delta$,
+$\alpha_0=0$. No inverse of a nonempty singular matrix is used.
+
+\section{A universal native quadratic detector}
+The next identity is a construction of a native kernel with a
+nonzero index. Its test object is topological and doubled.
+
+\begin{lemma}[Diagonal and frame contractions]
+For pure-middle rational topological classes $A,B$,
+\[
+ \chi_{Y\times Y}(A\boxtimes B,\mathcal O_\Delta)
+       =(-1)^M\chi_Y(A,B).                           \tag{9}
+\]
+If $u(A)_i=\chi_Y(C_i,A)$ and likewise for $B$, then
+\[
+ \chi_{Y\times Y}(A\boxtimes B,\mathscr Q)
+ =(-1)^M\left(\chi_Y(A,B)
+              -u(B)^TG^{-1}u(A)\right).             \tag{10}
+\]
+\end{lemma}
+\begin{proof}
+Grothendieck--Riemann--Roch for the diagonal gives the left side
+of (9) as $\int_Y\ch(A^\vee)\ch(B^\vee)\td(Y)$.
+Both characters have degree $M$, so only $\td_0=1$ contributes.
+The two duality signs cancel, leaving
+$\int_Y\ch(A)\ch(B)=(-1)^M\chi_Y(A,B)$.
+For (10), Euler pairing factors over external products.
+Since $C_i^\vee=(-1)^MC_i$ and the pure-middle Euler pairing
+is symmetric,
+\[
+ \chi_{Y\times Y}(A\boxtimes B,C_i^\vee\boxtimes C_j)
+       =(-1)^M u(A)_iu(B)_j.
+\]
+Sum with the coefficients in (5) and subtract from (9).
+\end{proof}
+
+\begin{theorem}[Exact residual-energy law]
+For every $\alpha\in V$ and every independently constructed
+native frame as above, the actual kernel (5) satisfies
+\[
+ \boxed{
+ -\chi_{Y\times Y}
+       (A_\alpha\boxtimes A_{J\alpha},\mathscr Q)
+       =Q(r,r)
+       =Q(\alpha,\alpha)-q^TB^{-1}q.}                \tag{11}
+\]
+This is strictly positive if and only if $r\ne0$.
+For the empty frame it holds for every nonzero $\alpha$ using
+only the actual diagonal kernel.
+\end{theorem}
+\begin{proof}
+In (10), $B=A_{J\alpha}=(-1)^p A_\alpha$,
+$u(A_\alpha)=\sigma q$, and $G^{-1}=\sigma B^{-1}$,
+where the matrix $B$ on the right is that of (3).
+Using $\sigma=(-1)^p\epsilon$, the bracket in (10) becomes
+\[
+ \epsilon\bigl(Q(\alpha,\alpha)-q^TB^{-1}q\bigr)
+       =\epsilon Q(r,r).
+\]
+Finally $(-1)^M\epsilon=-1$. Orthogonality in (4)
+proves the squared-residual expression, and positive
+definiteness gives strict positivity exactly when $r\ne0$.
+\end{proof}
+All quantities are rational; finite positive denominator clearing
+makes the nonzero index integral. Such clearing changes no
+algebraicity or nonvanishing assertion.
+
+\section{Complete alterations preserve the construction with exact degree}
+Let $f:X'\to X$ be any proper generically finite dominant morphism
+of connected smooth projective varieties, with $\deg f=e>0$.
+No flatness assumption is needed for operational Chow pullback
+between the smooth varieties. Projection gives
+\[
+ f_*f^*=e\,\id,\qquad
+ \int_{X'}f^*x\,f^*y=e\int_Xxy.                      \tag{12}
+\]
+In particular $f^*$ is injective. The form $(-1)^p\int_{X'}xy$
+is positive definite on $f^*V$, although $f^*V$ need not be
+primitive for any chosen polarization on $X'$.
+
+Choose one $M$ large enough to embed both varieties in
+$\mathbf P^{2M}$, and construct $Y'$ and the separately
+normalized classes $A'_x$ using the normal bundle of $X'$.
+Use the actual native frame $f^*z_i$. Its Gram matrices satisfy
+\[
+ B'=eB,\qquad G'=eG.
+\]
+The projection coefficients in (4) are unchanged because
+$(B')^{-1}q'=(eB)^{-1}(eq)=B^{-1}q$.
+Construct the actual kernel $\mathscr Q'$ by (5) on $Y'\times Y'$.
+
+\begin{theorem}[Blowup--alteration residual-index law]
+For every such complete alteration and every $\alpha\in V$,
+\[
+ \boxed{
+ -\chi_{Y'\times Y'}
+   (A'_{f^*\alpha}\boxtimes A'_{f^*J\alpha},\mathscr Q')
+       =e\,Q(r,r).}                                 \tag{13}
+\]
+Thus neither the change of normal bundle nor alteration degree
+destroys the residual detector. The result is exact for every
+positive degree, not a finite-degree experiment.
+\end{theorem}
+\begin{proof}
+Apply the proof of (11) on the positive subspace $f^*V$.
+Equations (12) scale both the total norm and the Schur term
+by $e$, leaving the projection coefficients unchanged.
+The normal bundles do not enter after the independent
+GST normalizations.
+\end{proof}
+
+\section{The exact remaining linear-source construction}
+For any actual middle Chow class $\Gamma$ on $Y'$, the established
+Chern--Segre returns are
+\[
+ T_a(\Gamma)=-q'_*\bigl((\xi')^{c'-1-a}j'^*\Gamma\bigr),\qquad
+ \mathcal R_a(\Gamma)=
+    \sum_{k=0}^{c'-1-a}c_k(N')T_{a+k}(\Gamma).
+\]
+Put
+\[
+ \mathfrak a'(\Gamma)
+ =(R'^{\CH})^{-1}
+    \sum_{b=0}^{2p}\mathcal R_{M-b}(\Gamma)
+       \in\bigoplus_b\CH^b(X')_\Q.                  \tag{14}
+\]
+Every operator in (14) is actual Chow geometry. The sum is graded.
+For an independently existing $F\in K_0^{\mathrm{alg}}(Y')_\Q$,
+use its actual Adams filter
+\[
+ E=\Pi_MF,\qquad
+ \Pi_M=\prod_{\substack{0\le k\le2M\\k\ne M}}
+             \frac{\psi^2-2^k}{2^M-2^k},\qquad
+ z'_E=[\mathfrak a'(\ch_M E)]_p.                    \tag{15}
+\]
+This processes a source already known to be algebraic.
+It does not apply an algebraic Adams operation to an unknown
+algebraic lift of a topological target.
+
+\begin{proposition}[Actual original-$X$ source returned from an altered world]
+For every $r\in V$, every such $f$, and every actual $E$ in (15),
+the actual rational cycle
+\[
+ \boxed{Z_E=e^{-1}f_*z'_E\in\CH^p(X)_\Q}
+\]
+satisfies
+\[
+ \boxed{
+ (-1)^p\int_Xr\,\cl(Z_E)
+   =\frac{(-1)^{M+p+1}}e
+       \chi_{Y'}(A'_{f^*r},\real E).}               \tag{16}
+\]
+\end{proposition}
+\begin{proof}
+Write $a'=\cl(\mathfrak a'(\ch_M E))$.
+The canonical blowup splitting says
+$\ch(\real E)=t\pi'^*H^M+I'(R'a')$.
+The ambient term is orthogonal to $I'(R'f^*r)$ since
+$H^M|_{X'}=0$ for $M>2p$.
+Equation (1) then gives
+\[
+ \chi_{Y'}(A'_{f^*r},\real E)
+      =\epsilon\int_{X'}f^*r\,a'_p .
+\]
+Projection and the definition of $Z_E$ yield (16).
+A nonzero right side therefore supplies a genuine new original-$X$
+cycle having nonzero residual period. Primitivity of that new
+cycle is not asserted without a further actual purification.
+\end{proof}
+
+Formula (16) proves the blowup--complete-alteration return.
+The unresolved input is an actual single-world algebraic $F$
+for which the right side is nonzero for an as yet undetected
+prescribed residual. Formula (13) supplies a doubled-world
+kernel test, which has different input types.
+
+\section{Why the quadratic construction is not yet a linear native source}
+By (7), contracting the native kernel with the prescribed input gives
+\[
+ T_{\mathscr Q}(A_\alpha)=A_r\in\KU^0(Y)_\Q .
+\]
+It belongs to algebraic $K_0$ if and only if the required residual
+has an algebraic lift under the established split normalization.
+The contraction uses $p_1^*A_\alpha$, which is topological unless
+its algebraicity has independently been proved.
+Applying a genuine algebraic kernel does not change this input type.
+
+On the other hand, for an actually algebraic input $D$,
+$T_{\mathscr Q}(D)$ is algebraic; its residual pairing can be
+nonzero only if $D$ already supplies a detected direction outside
+the chosen frame. The kernel annihilates its known frame exactly.
+
+The distinction survives tests on actual point objects.
+For any closed point $y\in Y$,
+\[
+ \chi_Y(C_i,\mathcal O_y)=\operatorname{rank}(C_i)=0,\qquad
+ T_{\mathscr Q}(\mathcal O_y)=\mathcal O_y,\qquad
+ \Pi_M[\mathcal O_y]=0.
+\]
+The last equality follows since $\mathcal O_y$ has only
+top-codimension $2M$ character and $M>0$.
+Thus a nonzero kernel action on genuine objects, even all point
+objects, does not supply a nonzero middle residual source.
+
+\begin{proposition}[Exact test of the native partial-trace candidate]
+For every actual algebraic input $D\in K_0^{\mathrm{alg}}(Y)_\Q$,
+$F_D=T_{\mathscr Q}(D)$ is an actual algebraic source and
+\[
+ \boxed{\chi_Y(A_r,\real F_D)=\chi_Y(A_r,\real D).}
+\]
+The same equality of residual periods holds after applying
+the actual middle Adams filter to both sources. In particular
+\[
+ \boxed{\chi_Y(A_r,\real(\Pi_MT_{\mathscr Q}(\mathcal O_Y)))=0.}
+\]
+The unfiltered unit partial trace does not improve the residual
+period of $\mathcal O_Y$.
+\end{proposition}
+\begin{proof}
+Equation (8) writes $T_{\mathscr P}(D)$ as a finite rational
+combination of the $C_i$. Each has zero pairing with $A_r$
+by (2) and $Q(r,v_i)=0$. Subtract from the identity action.
+The filtered difference is the same finite combination because
+$\Pi_MC_i=C_i$. Since $\Pi_M\mathcal O_Y=0$ for $M>0$,
+the filtered unit period is zero.
+For the unfiltered unit, the remaining period is exactly
+\[
+ \chi_Y(A_r,\mathcal O_Y)
+   =(-1)^M\int_Y I(Rr)\,\td_M(Y).
+\]
+This is a single existing characteristic-class period, not the
+positive quadratic form $Q(r,r)$.
+\end{proof}
+More generally, applying this residual kernel to a finite list
+of native inputs preserves every one of their residual periods.
+If those periods all vanish, the partial-trace construction
+supplies no new detector. A fixed single source gives a linear
+functional of $r$, whereas (11) is quadratic: substituting $-r$
+reverses the former and preserves the latter. Thus they cannot
+be identified as the same positive law on all nonzero residuals.
+
+\section{The exact universal obligation and the existing Lean inputs}
+For arbitrary dimension return to $\mathcal H_X$ in (1).
+The following is an exact algebraic-source obligation:
+\[
+ \begin{gathered}
+ \text{For every }0\ne x\in\mathcal H_X,\text{ construct }
+ F\in K_0^{\mathrm{alg}}(Y)_\Q\text{ such that}\\
+ \boxed{\chi_Y(A_x,\real(\Pi_MF))\ne0.}              \tag{17}
+ \end{gathered}
+\]
+This asks for actual independent source geometry; choosing
+$F=A_{Jx}$ in topological $K$-theory does not satisfy it.
+
+\begin{proposition}[Exact status of the universal source obligation]
+For a fixed original $X$, (17) is equivalent to all rational
+Hodge classes on $X$ being algebraic. Allowing smooth complete
+alterations and the return (14) does not weaken this implication.
+\end{proposition}
+\begin{proof}
+Let $\mathcal A_X$ be the total image of canonical rational Chow
+cycle classes. Actual returns (14) lie in $\mathcal A_X$.
+By (1), the linear Euler tests in (17) are precisely, up to
+the nonzero sign $\epsilon$, the functionals $P_X(x,a)$ for
+actual $a\in\mathcal A_X$. The full rational Hodge pairing
+$P_X$ is perfect by the established rational polarization.
+Consequently all nonzero $x$ being separated is equivalent to
+$\mathcal A_X^\perp=0$, hence to $\mathcal A_X=\mathcal H_X$
+by finite-dimensional duality. No nondegeneracy assumption
+on the restriction to $\mathcal A_X$ is used.
+
+Conversely, if all Hodge classes are algebraic, choose an
+algebraic packet $a$ with $P_X(x,a)\ne0$ and its actual native
+normalized lift. This gives (17).
+For alterations, projection gives
+$\int_{X'}f^*x\,a'=\int_Xx\,f_*a'$ with the understood graded
+complementary degrees. Every $f_*a'$ is still algebraic on $X$.
+The identity alteration supplies the converse.
+\end{proof}
+
+The pinned Lean declarations agree with this precise boundary:
+\begin{itemize}
+\item \texttt{NativeArsenalRepresentation.hodge\_action} supplies
+native matrix-unit actions. The global arsenal theorem takes
+this representation as an input; it does not construct it on all $X$.
+\item \texttt{FullGSTPlaneCompleteness} asks for an actual native
+program for every Hodge basis direction.
+\texttt{hodge\_of\_fullGSTPlane} consumes that hypothesis.
+\item \texttt{CMGSTNativeSheetProgram.basisPeriodExpansion}
+specifies that the actual transferred native-source periods span
+the requested basis direction.
+\texttt{CMGSTNativeBasisProgramSupply} asserts existence of
+these geometric packets for every direction.
+\item The intrinsic \texttt{gst\_plane\_completeness} theorem
+constructs coordinate/causal branches unconditionally.
+The same file expressly separates it from native geometric landing.
+\end{itemize}
+None of these compiled laws is contradicted by this note.
+Their native representation or source-supply inputs are exactly
+where a proof of (17) would have to enter.
+
+\section{Exact computation and self-review}
+The accompanying Wolfram script uses the exact rational form
+$Q=\operatorname{diag}(3,5,7)$ and independent frame columns
+$(1,1,0)^T,(0,1,1)^T$. It obtains
+\[
+ B=\begin{pmatrix}8&5\\5&12\end{pmatrix},\quad
+ \det B=71,\quad
+ Q(r,r)=\frac{105}{71}(a-b+c)^2 .
+\]
+It checks projector/convolution coefficients, residual orthogonality,
+the Schur identity, symbolic alteration scaling, and all 18 sign
+instances $1\le p\le6$, $2p+1\le M\le2p+3$.
+The $M=5$, primitive K3-diagonal norm $21$ discriminator gives
+doubled diagonal index $-21$, consistent with (11).
+These are exact finite/symbolic consistency checks; the proofs
+above establish the general identities.
+
+Self-review covered nonprimitive alteration pullbacks, the two
+independent duality signs, empty frames, dependence versus Gram
+invertibility, rational versus integral perfect objects, and the
+difference between a native kernel and a native target input.
+No independent agent review or new Lean compilation was performed.
+The new results are (5)--(13), the explicit actual return (16),
+and the exact partial-trace period identity.
+The universal native-source existence (17), and therefore the
+original all-$X$ Hodge goal, remain unresolved here.
+\end{document}

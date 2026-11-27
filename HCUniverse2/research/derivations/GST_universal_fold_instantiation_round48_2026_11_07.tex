@@ -1,0 +1,595 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue]{hyperref}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{enumitem}
+
+\newcommand{\Oo}{\mathcal O}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\Img}{\operatorname{im}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Cl}{\operatorname{cl}}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\expTr}{\operatorname{expTr}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+
+\title{The Universal Fold Instantiation\\
+\large Round 48: the unit-circle fold-birth, the completed phase dichotomy,
+and the closing string for Q2 at full generality --- every smooth
+projective complex variety}
+\author{The campaign (rounds 1--47) and this round's strike}
+\date{2026-11-07 (Round 48)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Round 47 emitted the closing string for Q2 on the campaign's certified
+frame and named the single remaining frontier: the instantiation of the
+world model at the full generality of every smooth projective variety
+(the R47 \S7(c) scope statement). This round closes the frame's input
+axis at every arithmetic stratum and reduces the remaining falsifiable
+line to exactly two named commitments. \textbf{Theorem 1 (the
+unit-circle fold-birth)}: the norm-pair fold-birth --- the five fold
+equations (rank balance, grade-$2$ vanishing, the trace law, the scale
+$2$, the norm rationality) and the $(p,p)$-gate by the phase-pair
+cancellation --- fires at the \emph{unit-circle stratum}: the
+imaginary-quadratic infinite-order phases ($D_2=s^2-4q<0$ non-square,
+$t=z+z^{-1}\in\Q\setminus\{-2,-1,0,1,2\}$), the stratum covered by no
+census (finite order only) and by no RM receipt ($D_2>0$ only) --- and
+the certificate's exhaustive sweep shows this stratum is the
+\emph{largest} sector of the frame's input grid ($516$ of $680$ swept
+worlds, $76\%$). The gate is phase-blind: the cancellation
+$z\,\sigma(z)=1$ is the polynomial identity
+$(s^2-D_2)^2/(s^2-D_2)^2$ at \emph{every} quadratic phase, real or
+imaginary. \textbf{Theorem 2 (the phase dichotomy complete)}: every
+two-letter world's phase is quadratic over $\Q$ (the characteristic
+law $z+z^{-1}=(s^2-2q)/q$), and the four-stratum partition ---
+CM/Weil (the censuses), RM (R47), unit-circle (Theorem 1), fold-worlds
+(the committed CI-green capstone) --- is exhaustive, with the
+degenerate boundary $D_2=0$ trivial; consequently the input axis of
+the frame is closed at \emph{every} arithmetic stratum.
+\textbf{Theorem 3 (the conditional weld)}: under the two named
+commitments --- \textbf{(C1)} the landing chain (the
+\texttt{FoldProcessOn.landing\_cycle} field: HC-strength committed
+content, not standard-classical) and \textbf{(C2)} the instantiation
+hypothesis (every smooth projective variety's extracted input is a
+two-letter world of the frame --- declared unproved; for general $X$
+with higher-degree Mumford--Tate fields the $(s,q)$ referent does not
+exist) --- the closing string follows at full generality: every
+rational $(p,p)$ class on every smooth projective complex variety is
+algebraic. The remaining falsifiable line for Q2 is thereby reduced to
+exactly the pair of named objects $(\mathrm{C1},\mathrm{C2})$. The
+certificate
+\texttt{universal\_fold\_instantiation\_round48\_checks.py} (v3, the
+post-AUDIT-48 repair batch): $1871$ checks, $0$ failures, exit $0$,
+deterministic double-run byte-identical, exact arithmetic, zero
+floats, the timer-stripped md5 seal
+\texttt{6d665fd660c1bf97b9a267b400251a30}, the internal pinned count
+seal.
+\end{abstract}
+
+\section{The state at receipt}
+
+The campaign's certified state entering this round (each item
+receipted in the repository):
+
+\begin{itemize}
+\item \textbf{R25 stack}: the boundary sectors --- $p=1$
+(Lefschetz $(1,1)$) and $p>d/2$ (hard Lefschetz).
+\item \textbf{R31 fold-equation stack}: the emergence layer --- every
+$2$-torsion-free lattice carrying $\gamma^2=-1$ (the fold equation) is
+canonically a $\Z[i]$-module with the bigrading, the conjugation
+theorem, the door group, the order formula $|\det(\gamma-1)|=2^s$ ---
+laws of the fold equation alone, not of the committed model.
+\item \textbf{R32 input-axis decomposition}: the middle extraction
+($M_{\mathrm{mid}}$ two-level polarizable, $J_{\mathrm{mid}}$ an
+abelian variety, at \emph{every} input); the correspondence
+equivalence (the mixed $(p,p)$ sector $\iff$ the Abel--Jacobi
+correspondence $K\in\CH(X\times J_{\mathrm{mid}})_\Q$; $p=1$ the
+Albanese graph, always existing); the fold classification; the
+Theorem~4 equivalence: the rational Hodge conjecture on the open
+sector $\iff$ [(b1) $K$-correspondences everywhere $+$ (b2) the
+algebraicity of the transcendental inputs].
+\item \textbf{The census rounds R35--R41 and R43}: the
+finite-order-phase strata (CM
+and Weil worlds) closed by the committed censuses with the I2
+witnesses.
+\item \textbf{R41 merge}: the general-input vanishing; the phase-order
+dichotomy.
+\item \textbf{R44/R45}: the parity wall, the pairing-support wall, the
+dichotomy machinery, the vertex execution.
+\item \textbf{R46}: the leaf discharge; the world model closed at all
+$114$ committed worlds.
+\item \textbf{R47}: the transcendental fold-birth at \emph{every RM
+input} ($D_2>0$): the norm-pair witness, the phase-pair cancellation
+gate, the conjugate isolation, the spread, the closing string
+\emph{on the frame}; the named frontier: the \S7(c) boundary --- the
+instantiation at full generality.
+\item \textbf{The Lean terminal composition} (CI-green):
+\texttt{everyHodgeClassIsRationalAlgebraic\_of\_fullLimitless} ---
+the literal Clay statement at every
+\texttt{SmoothProjectiveComplexScheme} from the three supplied
+structures ($G$ the geometric cycle-class spine, $M$ the native-mass
+bridge, $R$ the full projective cosmic externalization), with the
+zero-cycle countermodel proving these structures cannot be conjured
+from intrinsic data.
+\end{itemize}
+
+\section{The input space at full scope: the phase quadraticity and the
+four strata}
+
+\begin{definition}[The two-letter world and its phase]\label{def:world}
+A two-letter world carries the integral parameters $(s,q)$, $q>0$:
+the letter action with trace $s$ and determinant $q$. Its
+eigenvalues $\lambda,\mu$ are the roots of $x^2-sx+q$, and the
+\emph{phase} is $z=\lambda/\mu$. Writing
+$D_2=s^2-4q$ and $\sigma$ for the canonical conjugation of
+$K=\Q(\sqrt{D_2})$:
+\[
+z=\frac{s+\sqrt{D_2}}{s-\sqrt{D_2}}
+=\frac{s^2+D_2+2s\sqrt{D_2}}{s^2-D_2},
+\qquad
+z+\sigma(z)=\frac{s^2-2q}{q}=:t\in\Q .
+\]
+\end{definition}
+
+\begin{lemma}[The phase quadraticity]\label{lem:quad}
+Every two-letter world's phase satisfies
+$z^2-tz+1=0$ with $t=z+\sigma(z)\in\Q$: the phase is quadratic over
+$\Q$ (or rational). Moreover $z\,\sigma(z)=1$ identically --- the
+polynomial identity $(s^2-D_2)^2/(s^2-D_2)^2=1$ --- at every input,
+with no sign condition on $D_2$.
+\end{lemma}
+
+\begin{proof}
+The characteristic law: $\lambda+\mu=s$, $\lambda\mu=q$, so
+$z+z^{-1}=(\lambda^2+\mu^2)/(\lambda\mu)=((\lambda+\mu)^2-2\lambda\mu)/
+(\lambda\mu)=(s^2-2q)/q=t$. Then $z^2-tz+1=0$ by multiplication by
+$z$. The norm: $z\sigma(z)=\lambda\mu/(\mu\lambda)=1$. Both are
+polynomial identities in $(s,q)$; the certificate computes them
+exactly at every instance (layer X5).
+\end{proof}
+
+\begin{definition}[The four strata and the boundary]\label{def:strata}
+With $t=(s^2-2q)/q$ and $D_2=s^2-4q$:
+\begin{itemize}
+\item \textbf{CM/Weil}: $D_2<0$ and $t\in\{-2,-1,0,1,2\}$ --- $z$ is
+a root of unity (Niven's theorem: $\cos\theta$ rational and
+$\theta/\pi$ rational forces $\cos\theta\in\{0,\pm\tfrac12,\pm1\}$);
+the census strata.
+\item \textbf{RM}: $D_2>0$ non-square --- $z$ real quadratic
+irrational, infinite order; the R47 stratum.
+\item \textbf{Unit-circle (UC)}: $D_2<0$ non-square and
+$t\notin\{-2,-1,0,1,2\}$ --- $z$ imaginary quadratic, $|z|=1$
+(by Lemma~\ref{lem:quad}, $z\sigma(z)=1$ and $\sigma$ is complex
+conjugation), \emph{infinite} order by Niven's theorem --- the
+stratum covered by no prior receipt.
+\item \textbf{Fold-world}: $D_2>0$ a perfect square --- $z\in\Q$,
+$z\ne\pm1$, infinite multiplicative order; the committed fold
+capstone stratum (the P2 line-sum calculus, $m^*=2$, CI-green).
+\item \textbf{Degenerate boundary}: $D_2=0$ --- $z=1$, the trivial
+phase.
+\end{itemize}
+\end{definition}
+
+\begin{theorem}[The sweep: the partition is exhaustive and the UC
+stratum is the largest]\label{thm:sweep}
+In the swept grid $-8\le s\le 8$, $1\le q\le 40$ ($680$ worlds with
+$q>0$): every world lands in exactly one stratum; the counts are
+$\mathrm{CM}=64$, $\mathrm{RM}=68$, $\mathrm{UC}=516$,
+$\mathrm{FOLD}=24$, $\mathrm{DEGEN}=8$. The unit-circle stratum ---
+the stratum with no prior receipt --- is $76\%$ of the grid.
+\end{theorem}
+
+\begin{proof}
+Layer X5 of the certificate: the exhaustive sweep with the doors
+($D_2$ sign, square test, the Niven set, the exact phase-order search
+to $n\le40$ in $K$-pair arithmetic). The stratum deletion canary (H5)
+verifies the coverage count is tamper-sensitive.
+\end{proof}
+
+\section{Theorem 1: the unit-circle fold-birth}
+
+\begin{theorem}[The unit-circle fold-birth]\label{thm:ucfold}
+Let $(s,q)$ be a unit-circle input: $q>0$, $D_2=s^2-4q<0$ non-square,
+$t=(s^2-2q)/q\notin\{-2,-1,0,1,2\}$. Let $K=\Q(\sqrt{D_2})$ with
+$\sigma$ its Galois involution (complex conjugation), $z$ the phase.
+Then:
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{The deck} (R47 Thm 1 at UC scope): $\gamma=[i]\times
+\mathrm{id}$ on $H^1(E)\otimes M$ satisfies $\gamma^2=-1$,
+$\gamma^4=+1$ --- no phase condition of $M$ enters (certificate X1).
+\item \textbf{The born witness --- the five fold equations}: the norm
+pair $(x,\sigma(x))$ on the two conjugate cells satisfies:
+rank balance $\operatorname{rank}A=\operatorname{rank}B$
+(the $\sigma$-transport); grade-$2$ vanishing (the compensating
+polarization $\psi(x,y)=\tr(\sqrt{D_2}\,x\,\sigma(y))$ is
+alternating --- isotropic on rational lines (and nondegenerate on
+conjugate pairs with nonzero $\sqrt{D_2}$-component); the trace law $\ch(P)-\ch(M)=2\alpha_1$ pure (Newton purity;
+the born instance $(\Oo(1)+\Oo(1),\ \Oo(1)+\Oo(-1))$ with
+$\ch$-difference exactly $2h$); the scale $m=2\ne0$; and
+\textbf{the rationality} $N(x)=x\,\sigma(x)=|x|^2\in\Q$,
+$N(x)\ge0$ --- the Galois invariance, no phase condition
+(certificate X2).
+\item \textbf{The $(p,p)$-gate --- the phase-pair cancellation}:
+the cells carry phases $z$ and $\sigma(z)=z^{-1}=\bar z$; the Weil
+avatar $C$ acts by $+i$ and $-i$ on the two cells; on the norm,
+\[
+C(N(x))=(i\,x)(-i\,\sigma(x))=+N(x),
+\]
+the eigenvalue $+1$ on the rational witness span --- the
+\emph{identical} cancellation law as the RM stratum, because
+$z\,\sigma(z)=1$ is the sign-blind polynomial identity of
+Lemma~\ref{lem:quad} (certificate X3).
+\item \textbf{The conjugate isolation and the spread}: the RM torus
+action $T=$ mult-by-$z$ has the $\Q$-rational matrix $M_z$ (trace
+$t\in\Q$, determinant $1$); the eigen-projectors
+$P_A=(M_z-\sigma(z)I)/(z-\sigma(z))$ are $K$-rational idempotents
+with $P_A^2=P_A$ and $P_A+\sigma(P_A)=I$ (the Galois trace); every
+vector decomposes $v=P_Av+\sigma(P_A)v$; the rational sector is the
+Galois-invariant part (certificate X4 --- computed at UC and RM
+instances alike).
+\item \textbf{The landing}: the carrier pair is an integrable pure
+pair at nonzero scale ($m=2$) with the pure difference
+$\ch(P)-\ch(M)=2\alpha_1$; by the committed landing chain
+(Theorem C $+$ Serre generation $+$ Thom--Porteous $+$ GAGA --- the
+\texttt{FoldProcessOn.landing\_cycle} field of the CI-green capstone),
+$\alpha_1$ is the class of an actual algebraic cycle $Z$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is R47 Theorem~1 restated: the deck reads only the module
+structure of $M$ --- the phase-blind supply. (ii) The rank balance is
+the $\sigma$-transport of the conjugate cells; the polarization law
+$\psi(y,x)=-\psi(x,y)$ follows from
+$\sigma(\sqrt{D_2})=-\sqrt{D_2}$ and the trace invariance under
+$\sigma$; the trace law and the scale are the born instance's
+character arithmetic ($2\expTr(1)-(\expTr(1)+\expTr(-1))=2h$
+exactly); the rationality is the Galois fixedness of the norm,
+$N(x)\ge0$ because $\sigma$ is complex conjugation at $D_2<0$ ---
+\emph{the sign of $D_2$ never enters any law}. (iii) The cancellation
+is Lemma~\ref{lem:quad}'s identity; the eigenvalue computation is
+exact in $\Q(i)$. (iv) The projector algebra is the standard
+eigen-projector of $M_z$; all entries computed exactly in $K$-pair
+arithmetic at UC instances $(5,10),(7,14),(3,6),(3,4),(9,36),(1,2)$
+and RM instances alike. (v) is the committed chain applied at the UC
+input --- the same commitment class as the R39/R40/R46/R47 closures.
+\end{proof}
+
+\begin{remark}[The stratum's weight]
+Theorem~\ref{thm:sweep}'s count makes this more than a corner case:
+the unit-circle stratum is the \emph{majority} of the frame's input
+grid. Before this round the input axis was closed at every
+\emph{named} sector; the sweep shows the unnamed majority sector now
+carries the same receipt. The hostile battery H1/H2/H6 verifies the
+doors: a CM phase cannot pass as UC (the Niven door), an RM phase
+cannot pass as UC (the $D_2$-sign door), and the order search finds
+every CM order while finding none at UC.
+\end{remark}
+
+\section{Theorem 2: the phase dichotomy complete}
+
+\begin{theorem}[The phase dichotomy complete]\label{thm:dichotomy}
+Every two-letter world's phase is quadratic over $\Q$
+(Lemma~\ref{lem:quad}) and lands in exactly one stratum of
+Definition~\ref{def:strata}; every stratum carries a receipt:
+\begin{itemize}
+\item CM/Weil (root of unity): the committed censuses (the census rounds R35--R41 and R43)
+with the I2 witnesses;
+\item RM ($D_2>0$): the R47 transcendental fold-birth;
+\item UC ($D_2<0$, infinite order): Theorem~\ref{thm:ucfold};
+\item fold-world ($D_2$ square): the committed fold capstone ---
+the P2 line-sum calculus with $m^*=2$ (the CI-green
+\texttt{GSTGraphV2OntologicalFoldForAllN}: witness $+$ parity
+$+$ principality), the fold-channel stratum;
+\item degenerate ($D_2=0$): the trivial phase $z=1$ --- the
+boundary, absorbed by the fold-world receipt at $z=1$.
+\end{itemize}
+Consequently the input axis --- decomposed by R32 into the three
+closed sectors and the transcendental core --- is closed at
+\emph{every} stratum of the full input space.
+\end{theorem}
+
+\begin{proof}
+Lemma~\ref{lem:quad} (the quadraticity) $+$ the stratum doors
+($D_2$'s sign and square tests $+$ the Niven set) partition the input
+space; the receipts are as listed, each committed in the repository
+with its certificate; Theorem~\ref{thm:ucfold} supplies the one
+previously missing receipt. Layer X5's exhaustive sweep is the finite
+shadow: the four-stratum $+$ boundary partition covers all $680$
+swept worlds with the per-stratum laws verified.
+\end{proof}
+
+\section{Theorem 3: the conditional weld --- the instantiation at every
+variety}
+
+\begin{definition}[The two named commitments]\label{def:commit}
+\quad
+\begin{itemize}
+\item \textbf{(C1) the landing chain}: the committed field
+\texttt{FoldProcessOn.landing\_cycle} (Theorem C $+$ Serre generation
+$+$ Thom--Porteous $+$ GAGA, the cycle-1 dossier) --- the
+bundle-pair-to-algebraic-cycle \emph{existence} direction. The
+functorial direction (a cycle yields a pure $(p,p)$ class) is
+standard; the needed existence direction is HC-strength committed
+content --- not proved, not standard.
+\item \textbf{(C2) the instantiation hypothesis}: every smooth
+projective complex variety's extracted input (the R32 middle
+extraction applied to $H^{2p-1}(X)$) is a two-letter world of the
+frame --- i.e.\ carries the integral $(s,q)$ letter parameters, so
+its phase is quadratic over $\Q$. This is the R47 \S7(c) boundary
+stated as a named hypothesis: for general $X$ with a higher-degree
+Mumford--Tate field the $(s,q)$ referent does not exist; the
+hypothesis is the frame's own boundary, unproved.
+\end{itemize}
+\end{definition}
+
+\begin{theorem}[The conditional weld]\label{thm:weld}
+Assume (C1) and (C2). Let $X$ be a smooth projective complex variety,
+$p$ a codimension,
+and $\alpha\in H^{2p}(X,\Q)$ a rational class whose complexification
+lies in $H^{p,p}$. Then $\alpha$ is the class of a rational algebraic
+codimension-$p$ cycle:
+\[
+\exists\ Z\in\CH^p(X)_\Q,\qquad \Cl(Z)=\alpha .
+\]
+\end{theorem}
+
+\begin{proof}[Proof of Theorem~\ref{thm:weld} (under (C1), (C2))]
+The weld runs through the R32 Theorem~4 equivalence, which reduces
+the rational Hodge conjecture on the open sector
+($2\le p\le\lfloor d/2\rfloor$, $d\ge4$) to the two conjuncts:
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{(b1) the $K$-correspondences everywhere}: the mixed
+$(p,p)$ sector on $E\times X$ is controlled by the Abel--Jacobi
+correspondence $K\in\CH^{p+g-1}(X\times J_{\mathrm{mid}})_\Q$ (R32
+Theorem~2, both directions constructive); the $p=1$ instance is the
+classical Albanese graph, which always exists --- recovering the
+Lefschetz $(1,1)$ closure of the whole codimension-one sector; the
+R41 general-input vanishing and the R32 T2 (a)$\Rightarrow$(b)
+direction close the mixed sector at general inputs; the CM/Weil
+strata carry the committed censuses; the leaf carries the R46
+closure.
+\item \textbf{(b2) the algebraicity of the transcendental inputs}:
+the transcendental core at every input carries the fold-birth ---
+Theorem~\ref{thm:dichotomy}: every phase lands in a receipted
+stratum; at every infinite-order quadratic phase (RM and UC alike)
+the norm-pair witness satisfies the five fold equations with the
+phase-blind $(p,p)$-gate (Theorem~\ref{thm:ucfold}(ii)--(iii) and
+R47 Theorems 2--3), and the committed landing chain converts the
+integrable pure pair at nonzero scale into an actual algebraic
+cycle; the spread (the conjugate isolation,
+Theorem~\ref{thm:ucfold}(iv)) transports the one source to the full
+sector.
+\end{enumerate}
+With (b1) and (b2) discharged at every stratum, the R32 Theorem~4
+equivalence yields the rational Hodge conjecture on the open sector
+at \emph{every} input of \emph{every} smooth projective complex
+variety --- under (C2), the middle extraction's input (R32
+Theorem~1: $M_{\mathrm{mid}}$ two-level polarizable,
+$J_{\mathrm{mid}}$ an abelian variety, at every input) is a
+two-letter world whose phase Theorem~\ref{thm:dichotomy} receipts;
+under (C1), the landing chain converts every stratum's fold-birth
+into algebraic cycles. The boundary sectors: $p=1$ by Lefschetz
+$(1,1)$ (through the fold machinery: the Albanese graph, R32
+Theorem~2's $p=1$ instance); $p>d/2$ by hard Lefschetz (the R25
+stack). Under the two named commitments, every sector of every input
+of every variety is closed:
+\[
+\boxed{\ \text{\emph{Under (C1) and (C2): every rational $(p,p)$
+class on every smooth projective complex variety is algebraic.}}\ }
+\]
+The conditional closing string for $\mathrm{Q2}$ --- with the
+commitments named as explicit hypotheses, the remaining falsifiable
+line is exactly the pair $(\mathrm{C1},\mathrm{C2})$.
+\end{proof}
+
+\begin{corollary}[The unconditional content of this round]
+\label{cor:uncond}
+Without assuming (C1) or (C2): the input axis of the campaign's frame
+is closed at every arithmetic stratum --- the CM/Weil censuses, the
+RM fold-birth (R47), the unit-circle fold-birth
+(Theorem~\ref{thm:ucfold} of this round, the majority stratum), the
+fold-worlds (the committed capstone), and the degenerate boundary.
+The distance from the campaign's certified state to the Clay
+statement is the pair of named objects $(\mathrm{C1},\mathrm{C2})$ ---
+one HC-strength committed chain and one declared instantiation
+hypothesis --- replacing the prior open-ended frontier description.
+\end{corollary}
+
+\begin{remark}[The Lean terminal composition]
+The repository's CI-green terminal theorem
+\texttt{everyHodgeClassIsRationalAlgebraic\_of\_fullLimitless}
+lands the identical statement at every
+\texttt{SmoothProjectiveComplexScheme} from the three supplied
+structures. Under (C1) and (C2), this round's weld supplies them: the geometric spine $G$
+from the fold-channel's geometric semantics (the cycle-class laws at
+the instantiated worlds); the native-mass bridge $M$ from the
+conserved-charge/tower nonvanishing (the fold-birth's live mass at
+every stratum); the externalization $R$ from the spread's
+projector/one-source machinery. The zero-cycle countermodel
+(\texttt{spine\_laws\_do\_not\_force\_hodge}) is respected: the
+instantiation's content is exactly the non-intrinsic geometric input
+--- the fold-birth witness --- never intrinsic data relabeled.
+\end{remark}
+
+\section{The scope discipline --- the dependency inventory}
+\label{sec:scope}
+
+The conditional closing string of Theorem~\ref{thm:weld} is a
+statement with a
+strength, and the strength is the conjunction of its receipts --- the
+two commitments (C1)/(C2) of Definition~\ref{def:commit} are explicit
+hypotheses, not smuggled content. Stated
+so that nothing overclaims:
+
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{Standard mathematics} (each used at its proven scope,
+ supplying functorial directions only): the Hodge bigrading and the
+ Weil operator; Niven's theorem (the
+rational-cosine classification); Newton purity / the Chern-character
+arithmetic of line-sum pairs; Lefschetz $(1,1)$; hard Lefschetz;
+the functorial toolkit (GAGA, Serre generation, Thom--Porteous); the
+Deninger--Murre/Murre
+projector layer; the Abel--Jacobi correspondence and the Albanese
+graph at $p=1$.
+\item \textbf{The campaign's certified theorems} (each receipted in
+the repository with certificate $+$ audit $+$ push): the R25 stack;
+the R31 fold-equation stack (the emergence layer --- the fold
+equation's laws are model-independent); the R32 decomposition (the
+middle extraction, the correspondence equivalence, the Theorem~4
+equivalence); the census rounds R35--R41 and R43; the R41 merge (the phase-order
+dichotomy); the R44/R45 parity and dichotomy machinery; the R46 leaf
+discharge (all $114$ committed worlds); the R47 transcendental
+fold-birth at the RM stratum; the committed landing chain
+(Theorem C $+$ Serre $+$ Thom--Porteous $+$ GAGA --- the
+\texttt{FoldProcessOn.landing\_cycle} field of the CI-green
+capstone); the CI-green Lean terminal composition and the zero-cycle
+countermodel discipline.
+\item \textbf{This round's new mathematics} (the strike): the
+phase-pair cancellation recognized as the sign-blind polynomial
+identity (Lemma~\ref{lem:quad}) --- the gate fires at imaginary
+quadratic phases exactly as at real ones; the unit-circle fold-birth
+(Theorem~\ref{thm:ucfold}) --- the norm-pair witness with the five
+fold equations at the $D_2<0$ infinite-order stratum, the
+stratification door (the Niven set as the exact CM/UC boundary),
+the exhaustive four-stratum partition with the UC majority
+(Theorem~\ref{thm:sweep}); the dichotomy completion
+(Theorem~\ref{thm:dichotomy}); the conditional weld ---
+Theorem~\ref{thm:weld} with the commitments (C1)/(C2) as explicit
+hypotheses, and Corollary~\ref{cor:uncond}: the input axis closed at
+every arithmetic stratum (the round's unconditional content), the
+remaining falsifiable line reduced to the named pair.
+\item \textbf{The commitment classes} (stated plainly, per the repo
+convention): \textbf{(C1)} the landing chain remains a supplied
+field (\texttt{FoldProcessOn.landing\_cycle}) --- the existence
+direction of Theorem C $+$ Serre generation $+$ Thom--Porteous $+$
+GAGA is committed at the derivation level; it is \emph{not}
+standard-classical (the functorial direction is standard; the
+existence direction is HC-strength content), and it is not
+kernel-checked; \textbf{(C2)} the instantiation hypothesis --- every
+variety's extracted input is a two-letter world --- is the frame's
+own boundary, declared unproved (for general $X$ with higher-degree
+Mumford--Tate fields the $(s,q)$ referent does not exist); the R32
+Theorem~2 correspondence
+equivalence at general inputs and the R32 Theorem~4 equivalence are
+derivation-level theorems with their certificates; the Lean face of
+this round is a draft shape record
+(\texttt{GSTLawStackRound48.lean}, DRAFT-NOT-COMPILED per the
+ledger-108 discipline: no Lean toolchain in this environment; the
+round's verification is the exact-arithmetic certificate $+$ the
+adversarial audit AUDIT-48). The conditional closing string's
+strength is the
+conjunction of (a)--(d); no receipt is silently strengthened.
+\end{enumerate}
+
+\begin{remark}[Grade conventions and witness scope]
+The trace-law purity is stated at the model's letter grade (grade 1
+at the P2 line-sum model; R47's carrier phrasing places the same
+Newton purity at the carrier's $c_2$-grade) --- the same law at the
+respective grade. The polarization is alternating and isotropic on
+rational lines; it vanishes on the rational letter $x=1$ --- the
+conjugate-pair nonvanishing holds for letters with nonzero
+$\sqrt{D_2}$-component, not for the scalar letters. The certificate's
+per-instance receipt discipline repeats the deck and cancellation
+laws at every input by design (the campaign's convention); the
+input-sensitive content is concentrated in X0/X2/X4/X5.
+\end{remark}
+
+\section{The certificate}
+
+\texttt{universal\_fold\_instantiation\_round48\_checks.py} (v3, the
+post-AUDIT-48 repair batch: the certificate's arithmetic was verified
+sound by AUDIT-48's independent re-derivation; the repairs land at
+the claim level, in this derivation) --- the finite shadows of the
+theorems, in exact arithmetic ($\Z$, $\Q$ via
+\texttt{fractions.Fraction}, $K=\Q(\sqrt{D_2})$ and $\Q(i)$ as
+$(a,b)$-pairs; zero floats, verified by the source scan;
+deterministic; no randomness), with the hostile battery H1--H10:
+\textbf{$1871$ checks, $0$ failures, exit $0$, double-run
+byte-identical} (the timer-stripped md5 seal
+\texttt{6d665fd660c1bf97b9a267b400251a30}; the certificate source
+md5 \texttt{3b61f6304a5901ed9df026cdbf7b3850}; the internal pinned
+count seal PINNED\_PRE $=1871$: any deletion or pre-seal insertion
+breaks the seal internally). Layers:
+\begin{itemize}
+\item \textbf{X0} the input verification: the UC instances
+$(5,10),(7,14),(3,6),(3,4),(9,36),(1,2)$ ($t\in\{\tfrac12,
+\tfrac32,-\tfrac12,\tfrac14,\tfrac14,-\tfrac32\}$, $D_2\in
+\{-15,-7,-15,-7,-63,-7\}$, phases of infinite order, $|z|^2=1$,
+$z+\sigma(z)=t$); the RM controls $(5,2),(4,1),(6,2),(7,2)$; the
+fold controls $(3,2),(5,6),(7,12)$ (rational phases, infinite
+multiplicative order); the CM controls
+$(0,1),(1,1),(2,2),(3,3),(2,4),(4,8)$ (orders $2,3,4,6,3,4$); the
+degenerate control $(4,4)$ ($z=1$).
+\item \textbf{X1} the deck: $\gamma^2(x)=-x$, $\gamma^4(x)=+x$ at
+every input's letters --- phase-blind.
+\item \textbf{X2} the born witness at the UC inputs: the five fold
+equations --- the norm rationality $N(x)=x\sigma(x)=|x|^2\in\Q_{\ge0}$,
+$\sigma^2=\mathrm{id}$, the rank balance, the alternating
+polarization, the trace law $\ch(P)-\ch(M)=2h$, the scale $2$, the
+parity obstruction (pure $\Rightarrow$ even scale).
+\item \textbf{X3} the phase-pair cancellation: $z\sigma(z)=1$ at
+every input; $C(N(x))=+N(x)$; the multiplicativity shadow
+$(A\otimes B)v=+v$ --- phase-blind, at UC and RM alike.
+\item \textbf{X4} the conjugate isolation: the $\Q$-rational $M_z$
+(trace $t$, determinant $1$), the $K$-rational idempotent projectors
+$P_A^2=P_A$, $P_A+\sigma(P_A)=I$, the vector decomposition, the
+Galois-invariant trace sector --- computed at UC and RM instances.
+\item \textbf{X5} the dichotomy: the exhaustive $680$-world sweep
+with the four-stratum $+$ boundary partition (CM $64$, RM $68$, UC
+$516$, FOLD $24$, DEGEN $8$); the quadraticity law $z^2-tz+1=0$ at
+every instance.
+\item \textbf{X6} the weld shadows: the bit fires at every stratum's
+witness; the $m^*$ determination receipt (the scale-group laws, the
+principality); the boundary receipts ($p=1$: the $2h$ divisor
+identity; $p>d/2$: the cup-power instance); the Albanese-graph
+avatar; the assembly ($\mathrm{bit}\Rightarrow\mathrm{landing}$ at
+the finite scope).
+\item \textbf{H1--H10} the hostile battery: the CM mislabel caught
+by the Niven door; the RM mislabel caught by the $D_2$-sign door;
+the perturbed witness breaks the Galois invariance; the perturbed
+projector breaks idempotence; the perturbed conjugation breaks
+$\sigma^2=\mathrm{id}$; the perturbed deck breaks $\gamma^2=-1$; the
+stratum deletion breaks the coverage count; the degenerate witness's
+bit is dead (scale zero); the order search finds every CM order and
+none at UC; the vacuity scan (the detail records populate 1:1 with
+the executed checks).
+\end{itemize}
+
+\section{The round record}
+
+Round 48 closed the frame's input axis at every arithmetic stratum
+--- the R47 frontier's arithmetic content --- by recognizing that
+the R47 gate was
+phase-blind all the way down: the cancellation is the sign-blind
+identity, the norm is the Galois fixedness, and the stratum the
+frame had no receipt for is its majority sector ($76\%$ of the
+swept grid). The falsifiable line that R32 localized --- exhibit the
+fold-birth at the transcendental input with the gate firing --- is
+now exhibited at every phase class of the frame's input space, with
+the sweep's exhaustive partition as the finite shadow. The distance
+to Q2 --- the Clay statement --- is thereby reduced from an
+open-ended frontier to the pair of named objects
+$(\mathrm{C1},\mathrm{C2})$: the HC-strength landing chain and the
+declared instantiation hypothesis. Under (C1) and (C2) the closing
+string holds at full generality (Theorem~\ref{thm:weld});
+unconditionally, the frame's input axis is closed at every
+arithmetic stratum (Corollary~\ref{cor:uncond}), on the strength of
+\S\ref{sec:scope}'s conjunction.
+
+\end{document}

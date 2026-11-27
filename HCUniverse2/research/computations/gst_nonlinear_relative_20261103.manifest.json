@@ -1,0 +1,167 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-NONLINEAR-RELATIVE-FOLD-CLASSIFICATION-20261103",
+  "repository": {
+    "commit": "2e0324f1328409d68c25d85897435187d0a380b0",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python",
+    "research/experiments/gst_nonlinear_relative_checks.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Wolfram Language",
+        "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+      }
+    ],
+    "hardware": "x86_64"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact base-boundary intersections, nonlinear full chain maps and both inverses, all absolute degrees, one-handle cohomology-ring products and a complete Massey coset in the declared finite fixtures.",
+    "coefficient_domain": "Q, exact arithmetic",
+    "conventions": "Finite truncated polynomial base; paired odd handles have degrees 2p-1. The nonlinear differential is transported on the whole exterior algebra, including all Leibniz signs. Base marking is fixed.",
+    "inputs": [
+      "research/experiments/gst_nonlinear_relative_checks.py",
+      "research/derivations/GST_nonlinear_relative_fold_classification_2026_11_03.tex",
+      "research/experiments/openai_gst_upgrade_checks.py",
+      "research/experiments/gst_nonlinear_relative_wolfram_20261103.wl",
+      "research/computations/gst_nonlinear_relative_wolfram_20261103.output.json",
+      "research/experiments/gst_nonlinear_relative_run.py",
+      "research/experiments/gst_minimal_curvature_checks.py",
+      "research/experiments/gst_base_coupled_higher_fold_checks.py",
+      "research/derivations/GST_minimal_curvature_fold_normal_form_2026_11_03.tex",
+      "GSTGradedWorldAlgebra.lean",
+      "GSTSpatialFoldResearch.lean"
+    ],
+    "bounds": {
+      "kernel": "Nine explicit pure presentations, plus all five nonlinear parameters",
+      "nonlinear": "All 256 basis states for each lambda in -2,-1,0,1,2; six odd handles, base P1xP1",
+      "rings": "All products of every cohomology basis in five declared one-handle fixtures",
+      "secondary": "Complete degree-five Massey coset and degree-three indeterminacy for curvature xy on P1xP1"
+    },
+    "non_claims": [
+      "No Lean compilation or CI dispatch",
+      "Finite fixtures do not prove the arbitrary-X classification",
+      "No universal original-X Chow constructor",
+      "No global novelty search or historical-priority claim"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "none",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-11-03T11:25:25.540197+00:00",
+    "runtime_seconds": 4.17627957000002,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_nonlinear_relative_20261103.output.json",
+      "sha256": "2e87c1fbc100bda332ba48336d0392ccc7a8719e6a0fbaa8d3ef51aca56b8a75",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Sparse image intersections versus independent dense row ranks",
+    "All nonlinear basis states, inverse orders, chain equation, differential square and absolute degrees",
+    "Complete one-handle ring bases and all products, including annihilator summands",
+    "Nonzero Massey coset modulo its full indeterminacy",
+    "Independent Wolfram ordered-word/dense-matrix tables match Python bit-mask/sparse tables",
+    "Changed Lean proof-escape scan, acyclic import graph, LaTeX environment balance"
+  ],
+  "result": "implementation and finite assertion verified in the stated range",
+  "residual_risks": [
+    "Hand classification and geometric comparison have author self-review only",
+    "Lean drafts are uncompiled",
+    "Wolfram implementation independence is not independent proof review",
+    "The derived-fiber proof is not implemented by the finite computation"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/experiments/gst_nonlinear_relative_checks.py",
+      "sha256": "448f78b2b9544a3aea2039cc8516b04788325c21abe86833dbaba8dcfe355a32",
+      "sha256_after": "448f78b2b9544a3aea2039cc8516b04788325c21abe86833dbaba8dcfe355a32"
+    },
+    {
+      "path": "research/derivations/GST_nonlinear_relative_fold_classification_2026_11_03.tex",
+      "sha256": "ecead691eaa5afbb76480834424f108a5ce49d02766475612d39c8b3092901b2",
+      "sha256_after": "ecead691eaa5afbb76480834424f108a5ce49d02766475612d39c8b3092901b2"
+    },
+    {
+      "path": "research/experiments/openai_gst_upgrade_checks.py",
+      "sha256": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860",
+      "sha256_after": "9358b1aea59bad3eb8ca7356a7626936afb344ffc59bd64582dae04d83323860"
+    },
+    {
+      "path": "research/experiments/gst_nonlinear_relative_wolfram_20261103.wl",
+      "sha256": "ba7bde828be25648d08474f7a2e262cee441ccb563c4cc58339f4600026117fb",
+      "sha256_after": "ba7bde828be25648d08474f7a2e262cee441ccb563c4cc58339f4600026117fb"
+    },
+    {
+      "path": "research/computations/gst_nonlinear_relative_wolfram_20261103.output.json",
+      "sha256": "2149c6d40f975eead9891b568785b2b7f25ee2ac6477eea18d6768fcd4e848d6",
+      "sha256_after": "2149c6d40f975eead9891b568785b2b7f25ee2ac6477eea18d6768fcd4e848d6"
+    },
+    {
+      "path": "research/experiments/gst_nonlinear_relative_run.py",
+      "sha256": "084ea80e4f530591def9bd7e4f12312cdfb60c2a541662ee2db22e12dc47f80d",
+      "sha256_after": "084ea80e4f530591def9bd7e4f12312cdfb60c2a541662ee2db22e12dc47f80d"
+    },
+    {
+      "path": "research/experiments/gst_minimal_curvature_checks.py",
+      "sha256": "19c850e1ec93e40b054b1293189a1f929c8fab02107c7e96903d6ae1c59080b0",
+      "sha256_after": "19c850e1ec93e40b054b1293189a1f929c8fab02107c7e96903d6ae1c59080b0"
+    },
+    {
+      "path": "research/experiments/gst_base_coupled_higher_fold_checks.py",
+      "sha256": "383054bbb1b777c1a995ddf8062427f600a8f58f89f3efd27504f8318e314168",
+      "sha256_after": "383054bbb1b777c1a995ddf8062427f600a8f58f89f3efd27504f8318e314168"
+    },
+    {
+      "path": "research/derivations/GST_minimal_curvature_fold_normal_form_2026_11_03.tex",
+      "sha256": "03a5321fc67183b36b7eaad202abbb0ff3a4d92c243d2abd166ae4029a69348e",
+      "sha256_after": "03a5321fc67183b36b7eaad202abbb0ff3a4d92c243d2abd166ae4029a69348e"
+    },
+    {
+      "path": "GSTGradedWorldAlgebra.lean",
+      "sha256": "ff3eac89a9ff243b71036303541212530ac8bceb8a9a4e95bfa150b48d30a7e7",
+      "sha256_after": "ff3eac89a9ff243b71036303541212530ac8bceb8a9a4e95bfa150b48d30a7e7"
+    },
+    {
+      "path": "GSTSpatialFoldResearch.lean",
+      "sha256": "877155b241e9f9e8dc7af243145da1ed328153058424bbec24ea7b18e49ab045",
+      "sha256_after": "877155b241e9f9e8dc7af243145da1ed328153058424bbec24ea7b18e49ab045"
+    }
+  ],
+  "execution_artifacts": [
+    "research/experiments/gst_nonlinear_relative_checks.py",
+    "research/derivations/GST_nonlinear_relative_fold_classification_2026_11_03.tex",
+    "research/experiments/openai_gst_upgrade_checks.py",
+    "research/experiments/gst_nonlinear_relative_wolfram_20261103.wl",
+    "research/computations/gst_nonlinear_relative_wolfram_20261103.output.json",
+    "research/experiments/gst_nonlinear_relative_run.py",
+    "research/experiments/gst_minimal_curvature_checks.py",
+    "research/experiments/gst_base_coupled_higher_fold_checks.py",
+    "research/derivations/GST_minimal_curvature_fold_normal_form_2026_11_03.tex",
+    "GSTGradedWorldAlgebra.lean",
+    "GSTSpatialFoldResearch.lean"
+  ],
+  "declared_results": [
+    "research/computations/gst_nonlinear_relative_20261103.output.json"
+  ]
+}

@@ -1,0 +1,44 @@
+Inventory: 1350 files, 708 Lean files, 17013984 bytes
+source_sha256 GSTExactSequenceTorsion.lean 64f80ee3087dd9597c1df9ef655952f69dc00d75091b581495cfb3c232bc1ef2
+source_sha256 GSTLawStackRound29.lean a542efd41fc98b16f497311c7456682a0fce1c989a4c4d36da59f93777006f77
+source_sha256 GSTCubicNilpotentDressing.lean 0cffd6d6b981fa6fb1e1cd80e66d562982b98b3e471716adbd4ce88988ae0619
+source_sha256 GSTFiniteSourceCorrection.lean df1471dfe544e9f71d3b76030068f4003e0daee6a0d9d1b5c73da41351d00d0c
+source_sha256 GSTClassicalHodgeFiniteSourceCorrection.lean add7d6471a31429657089bef9ac175fedb26b83889e067d46ad34af1d63b4d61
+source_sha256 GSTSplitBoundaryProjection.lean 62295110d856a04327870f316df0a79258b65613f704674d3a6e470f683bbfc4
+source_sha256 GSTComplexTangentProjectionChainObstruction.lean e0010b57d24beffc3fde4fea4ff794f3e07588e5f961d20ea25f2de9c2a6227d
+source_sha256 GSTClassicalHodgeCMNativeRationalDescent.lean cf8f940c960eb5680019c2040033105240c88c00497c782ab547e776dc89c137
+source_sha256 GSTOpenAISourceCorrectionUpgrade.lean 45337e6ce462db0dc357b6a9237a84a3321f07c9e4c1b74b44dfdf418a457736
+area_cocycle_grid: 729
+batch_inventory_completed: 1
+boundary_projection_closed: 1
+boundary_projection_idempotent: 1
+cubic_integral_inverse_grid: 625
+cubic_matrix_grid: 625
+exact_cyclic_extension_kernel: 550
+exact_cyclic_product_bound: 3025
+finite_correction_operator_identity: 52
+fixed_mode_denominator_gate: 1
+heisenberg_six_parameter_grid: 729
+hostile_boundary_repair_does_not_preserve_type: 1
+hostile_dropping_all_hypotheses_is_detected: 1
+hostile_nilpotence_not_required: 1
+hostile_noncommuting_scale: 16
+hostile_old_linear_dressing_fails: 1
+hostile_scaled_area_not_symmetric: 16
+input_blob_read: 1350
+local_import_acyclic: 712
+no_added_proof_escape: 9
+no_truth_valued_stubs: 9
+noncommuting_source_witness: 1
+polynomial_annihilator_non_nilpotent: 1
+polynomial_exact_cycle: 1
+registered_roots_exist: 8
+sharp_sixteen_boundary: 1
+strict_cubic_extension: 1
+total_error_nilpotent: 1
+universal_commuting_cubic_quotient: 1
+universal_free_ring_defect_identity: 1
+universal_inverse_polynomial: 1
+Pre-existing lexical anomalies: [{"path": "ComparatorSmokeChallenge.lean", "error": "unterminated Lean block comment"}, {"path": "ComparatorSmokeSolution.lean", "error": "unterminated Lean block comment"}]
+PASS: 8472 exact algebra / finite / source-integrity checks
+Lean compilation: NOT RUN. Global Hodge existence and global novelty: NOT CLAIMED.

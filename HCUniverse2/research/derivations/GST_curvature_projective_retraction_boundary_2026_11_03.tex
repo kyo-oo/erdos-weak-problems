@@ -1,0 +1,230 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\cl}{\operatorname{cl}^{\rm can}}
+\title{Closing the curvature realization test: projective retractions and boundary sources}
+\author{Hand mathematics before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{Exact input and the distinction being tested}
+Start at commit \texttt{6c78f4d57fcad0e2309cc0bba3417952a58f4d5b}.
+The input is every connected smooth projective complex $n$-fold $X$,
+$1\le p\le n$, and a prescribed rational Hodge class
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$.
+The required final output remains a cycle $Z_\alpha\in\CH^p(X)_\Q$
+with $\cl_X Z_\alpha=\alpha$. Connected components are treated separately.
+
+The central-torus curvature/opposedness theorem and finite homogeneous
+curvature normal form are established in their stated categories in the
+earlier hand derivations. Their Lean counterparts are uncompiled drafts.
+The torsion principal-torus projective construction is also established.
+The question here is the remaining proposed passage from the higher
+prescribed-class nullhomotopy to actual projective geometry. It is tested
+without assuming a cycle for $\alpha$.
+
+Three routes are executed: an arbitrary smooth projective realization of
+the target-dependent homotopy fiber, a realization after finitely many
+projective folds/alterations, and an open realization with a high-codimension
+algebraic boundary. The first two have a uniform obstruction. The third
+has an explicit source formula and an exact boundary threshold, but no
+universal existence theorem for the required boundary is asserted.
+
+\section{Construct the return for every smooth projective surjective fold}
+\begin{theorem}[Actual projective return, without a torus hypothesis]\label{thm:return}
+Let $f:Y\to X$ be any surjective morphism of connected smooth projective
+complex varieties, $\dim Y=n+r$. Choose a very ample line $H$ on $Y$ and
+put $h=c_1^{\CH}(H)$. There is a positive integer $d$ such that
+\[
+ f_*(h^r)=d[X]\quad\hbox{in }\CH^0(X).
+\]
+The actual rational Chow operation and its canonical Betti comparison are
+\[
+ R_{\CH}(B)=d^{-1}f_*(h^r B),\qquad
+ R_B(b)=d^{-1}f_*(\cl(h)^r b).
+\]
+Both preserve codimension (respectively total cohomological degree), and
+\[
+ R_{\CH}f^*=\mathrm{id},\qquad R_B f^*=\mathrm{id},\qquad
+ \cl_X R_{\CH}=R_B\cl_Y.                         \tag{1}
+\]
+No smoothness, flatness, connectedness or constant dimension of the fibers
+is required. In particular $f^*$ is injective in every rational Betti degree.
+\end{theorem}
+\begin{proof}
+The generic fiber has dimension $r$. Its intersection with $r$ general
+hyperplanes from $H$ has positive finite degree $d$. Equivalently, intersect
+$Y$ with those hyperplanes; its dominant components give an actual effective
+multisection cycle of degree $d$, while components with smaller-dimensional
+image push to zero in dimension $n$. Thus $f_*(h^r)=d[X]$.
+For $r=0$ this is the positive generic degree of $f$.
+The general pullback on Chow rings is available because both varieties
+are smooth; it need not be a flat pullback. Its projection formula gives
+$f_*(h^r f^*B)=f_*(h^r)B=dB$. This proves the first identity.
+The canonical cycle map respects line Chern classes, products, proper
+pushforwards and this pullback. The topological projection formula and
+the comparison for $h^r$ give the Betti identity for every degree, not just
+algebraic classes. Dividing by the positive $d$ is legitimate over $\Q$.
+\end{proof}
+For the exact Chow input used above see the Stacks Project,
+Lemma 43.27.1, tag \href{https://stacks.math.columbia.edu/tag/0B2X}{0B2X},
+checked 3 November 2026: its hypotheses are nonsingular projective varieties
+and an arbitrary morphism, and its part (3) is precisely the required
+projection formula. The choice of $H$ and the return need not be canonical;
+the cycle-class map in (1) is canonical.
+
+\begin{corollary}[No hidden disappearance under projective operations]\label{cor:defect}
+For every such $f$ and prescribed $\alpha$,
+\[
+ \alpha\in\operatorname{im}\cl_X
+ \quad\Longleftrightarrow\quad
+ f^*\alpha\in\operatorname{im}\cl_Y.                \tag{2}
+\]
+Moreover the rational Hodge/cycle-image quotient for $X$ is a split
+summand of that for $Y$. The same holds under any finite composable
+sequence of these projective maps, using the composed returns.
+\end{corollary}
+\begin{proof}
+Pull back an actual cycle for the forward implication. For the reverse,
+apply $R_{\CH}$ to an actual cycle for $f^*\alpha$ and use (1).
+The maps in (1) preserve Hodge type after the displayed product and
+degree shift and preserve canonical cycle images. Hence they descend
+to the quotients and still compose to identity. Composing split injections
+and their reverse-order retractions proves the last assertion.
+\end{proof}
+This does not say a projective source on $Y$ cannot help construct a source
+on $X$. It says that restoring projectivity or preserving Hodge type alone
+has not supplied that source: its image must still be computed.
+
+\section{Execute the prescribed-alpha higher-curvature construction}
+Represent $\alpha$ by a classifying map $a_\alpha:X\to K(\Q,2p)$ and form
+its actual homotopy fiber $t:T_\alpha\to X$. The chosen nullhomotopy gives
+\[
+ t^*\alpha=0.                                      \tag{3}
+\]
+This construction depends on the prescribed $\alpha$, not on a fixed
+hyperplane class. Its rational cochain description adjoins a generator
+$u$ of degree $2p-1$ with $du=\eta_\alpha$. One may also adjoin the
+flat companion used by the paired GST model; (3) is unchanged.
+
+\begin{theorem}[The direct projective realization attempt is impossible]\label{thm:noproper}
+If $\alpha\ne0$, there is no surjective smooth-projective algebraic model
+$f:Y\to X$ of $t:T_\alpha\to X$, even at the level of rational cohomology
+compatible with the marked pullback from $X$. This remains true if finitely
+many projective surjections, blowups between smooth varieties, or smooth
+projective generically finite alterations over $X$ are inserted.
+\end{theorem}
+\begin{proof}
+Compatibility would give $f^*\alpha=0$ by (3). But (1) would then give
+$\alpha=R_B f^*\alpha=0$. The same contradiction applies to a composite.
+At the cochain level it is the already established GST marked-base
+boundary invariant: a retraction onto the closed base cannot kill a
+nonzero base class which is a boundary. The new point is that actual
+projective geometry constructs that retraction in all degrees, through
+the explicit multisection above.
+\end{proof}
+In particular the theorem applies even when $\alpha$ already is algebraic.
+It is an obstruction to this \emph{nullifying projective model}, not an
+obstruction to algebraicity or a Hodge-conjecture counterexample. For
+$p=1$ the punctured line bundle does kill $c_1(L)$, but it is open, not
+projective. The compact elliptic torsor with nonzero rational Chern class
+is likewise outside the smooth-projective category. These facts agree
+with the proved curvature theorem and do not contradict it.
+
+\section{Execute the boundary alternative and construct its actual cycle}
+\begin{lemma}[Exact top support threshold]\label{lem:support}
+Let $Y$ be smooth projective of complex dimension $m$ and $D\subset Y$
+a closed algebraic subset of complex codimension at least $p\ge1$.
+Write $D_1,\ldots,D_s$ for its irreducible codimension-$p$ components,
+and $j:U=Y\setminus D\hookrightarrow Y$. Then
+\[
+ \ker\bigl(j^*:H^{2p}(Y,\Q)\to H^{2p}(U,\Q)\bigr)
+ =\operatorname{span}_\Q\{\cl_Y[D_i]:1\le i\le s\}.       \tag{4}
+\]
+In particular the kernel is zero if $\operatorname{codim}_Y D>p$.
+\end{lemma}
+\begin{proof}
+The cohomology-with-supports exact sequence identifies the kernel with
+the image of $H_D^{2p}(Y,\Q)$. Remove the singular loci and pairwise
+intersections of the $D_i$, and all higher-codimension components. The
+removed algebraic set has complex codimension at least $p+1$ in $Y$.
+Support cohomology below degree $2p+2$ on that set vanishes. To justify
+the vanishing without a smoothness assumption on it, take a finite smooth
+algebraic stratification, use the tubular-neighborhood Thom isomorphism
+for each stratum (real codimension at least $2p+2$), and the exact
+support sequences inductively. Consequently that removal leaves
+$H_D^{2p}$ unchanged. The remaining $D_i$ are disjoint smooth connected
+dense opens. Their complex normal orientations give
+$H_D^{2p}\cong\bigoplus_i H^0(D_i^{\rm good},\Q)(-p)
+\cong\Q(-p)^s$. The maps to $Y$ send these Thom generators to exactly
+the canonical fundamental classes $\cl_Y[D_i]$.
+There may be relations in their images; no independence of those images
+or uniqueness of coefficients is asserted.
+\end{proof}
+
+\begin{theorem}[Actual boundary-to-original-X source formula]\label{thm:boundary}
+Let $f:Y\to X$ and $H,r,d$ be as in Theorem~\ref{thm:return}.
+Suppose an actual closed algebraic $D\subset Y$ of codimension at least
+$p$ has been constructed and $j^*f^*\alpha=0$. Then rational coefficients
+$b_i$ exist with $f^*\alpha=\sum_i b_i\cl_Y[D_i]$, and the actual cycle
+\[
+ \boxed{Z_\alpha={1\over d}\sum_i b_i\,
+                f_*(h^r\cdot[D_i])\in\CH^p(X)_\Q}       \tag{5}
+\]
+has $\cl_X Z_\alpha=\alpha$. The coefficients are obtainable from a
+finite rational linear system in the actual Betti classes of the boundary
+components. Their nonuniqueness does not change the returned Betti class;
+it is not asserted to leave the Chow class unchanged.
+If $\alpha\ne0$, such a $D$ must have a codimension-$p$ component.
+\end{theorem}
+\begin{proof}
+Use (4) on $f^*\alpha$. Then apply $R_B$ from (1) and canonical
+comparison to the displayed finite rational cycle combination. Multiplying
+by $h^r$ raises codimension to $p+r$; proper pushforward lowers it by $r$.
+If no $D_i$ exists, (4) and the injectivity in (1) force $\alpha=0$.
+\end{proof}
+
+This is a completed source extraction from \emph{actual} geometric boundary
+data, including singular or reducible $D$. It does not claim to have produced
+that data for every input. In fact its existence condition is exactly
+equivalent to $\alpha$ being algebraic: (5) proves one direction; for
+the other, take $Y=X$, $f=\mathrm{id}$ and $D$ the union of the supports
+of a rational cycle for $\alpha$. Thus the condition cannot be inserted
+as an independent GST source-birth law. This is consistent with the
+branch's exact Gysin-support/Chow-image theorem.
+
+The threshold is sharp. For $X=\mathbf P^n$, $\alpha=h^p$ and a linear
+subspace $D=\mathbf P^{n-p}$, projection from $D$ makes
+$X\setminus D$ an affine-space bundle over $\mathbf P^{p-1}$.
+Consequently $h^p$ restricts to zero and the codimension-$p$ boundary
+returns its actual class. A boundary of codimension $p+1$ could not do
+so by (4). This is a normalization check of (4), not a replacement of
+the arbitrary-$X$ research target by a special-family program.
+
+An ordinary smooth compactification of an open variety has a boundary
+divisor. For $p>1$ this has codimension $1<p$, so (4) cannot be applied
+by discarding its lower-codimension pieces. Their support classes involve
+higher cohomology of the boundary; those are not automatically fundamental
+cycle classes. This identifies the exact unsolved geometric implication
+in the open continuation rather than declaring all nullhomotopies algebraic.
+
+\section{Audit and checkpoint}
+The curvature theorem survives the audit at its stated family scope.
+The general projective retraction, the projective nullifier obstruction,
+and the boundary extraction formula are proved here at hand-proof level,
+by author self-review. New Lean drafts encode their algebraic consequences,
+not projective varieties, topology, purity or a canonical cycle map instance.
+
+The prescribed-input attempt genuinely executed was $T_\alpha$: it has
+the computed marked class (3), and its direct projective-realization route
+is ruled out by (1), including all finite projective compositions. The
+open route has the explicit positive source formula (5). No universal
+algebraic boundary realizing (3) is constructed. Its lower-codimension
+boundary continuation remains open and requires new geometry; the support
+equivalence is not counted as source-existence progress. The original
+all-$X$ canonical Chow theorem therefore remains unproved.
+\end{document}

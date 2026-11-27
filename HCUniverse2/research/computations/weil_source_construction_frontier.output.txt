@@ -1,0 +1,12 @@
+During evaluation of In[1]:= Wolfram version: 15.0.1 for Linux x86 (64-bit) (July 2, 2026)
+During evaluation of In[1]:= Normalized codimension-three Chern cycle: c3/2 + (c1^3*(-2 + r)*(-1 + r))/(6*r^2) - (c1*c2*(-2 + r))/(2*r)
+During evaluation of In[1]:= Chern identity residual: 0
+During evaluation of In[1]:= Line tensor normalization residual: 0
+During evaluation of In[1]:= Quadratic centralizer commutator: {{0, 0}, {0, 0}}
+During evaluation of In[1]:= Anti-K equations in the quadratic field: {{aa -> 0, bb -> 0}}
+During evaluation of In[1]:= Lower-left blocks vanish for every generator: True
+During evaluation of In[1]:= Polarization-generated span rank: 5
+During evaluation of In[1]:= Every generated vector has zero Weil coordinates: True
+During evaluation of In[1]:= Interpretation: arbitrary words and rational combinations preserve the five-dimensional ambient block; this is not a counterexample to Hodge.
+
+Out[1]= Null

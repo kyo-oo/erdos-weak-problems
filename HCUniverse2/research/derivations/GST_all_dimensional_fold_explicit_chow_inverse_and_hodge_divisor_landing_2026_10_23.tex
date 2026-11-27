@@ -1,0 +1,439 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Established Hodge Folding Laws: Explicit Algebraic Inverse, All-Dimensional Grade Monotonicity, and Constructed Original-World Hodge Cycles}
+\date{23 October 2026}
+\begin{document}\maketitle
+
+\section{Input is the already-established dimensional fold law}
+The GST realization framework includes a dimensionless source
+whose actual smooth projective realizations have rational pure
+Hodge decompositions. We TAKE THAT ESTABLISHED FACT AS INPUT.
+It is not a proposed experiment. The question in this
+manuscript is what genuine algebraic cycles the equations
+construct on the SAME arbitrary original smooth projective X.
+
+Let X be any connected smooth projective complex variety,
+of complex dimension d, with an actual VERY ample line bundle
+H and rational class h=c_1(H). For each p let
+\[
+ \operatorname{Hdg}^p(X)_{\mathbb Q}
+ =H^{2p}(X,\mathbb Q)\cap H^{p,p}(X),\qquad
+ A^p(X)=\operatorname{im}\bigl[
+ CH^p(X)_{\mathbb Q}\xrightarrow{\mathrm{cl}^{can}_X}
+ H^{2p}(X,\mathbb Q)\bigr].
+\]
+Fix a prescribed rational Hodge alpha before selecting a
+geometric representative.
+
+\section{A complete unconditional algebraic landing at every dual-divisor degree}
+\begin{theorem}[Actual original-X cycle from an arbitrary Hodge class of codimension d-1]
+For EVERY smooth projective complex d-fold X with d>=2
+and EVERY rational Hodge class
+$\alpha\in\operatorname{Hdg}^{d-1}(X)_{\mathbb Q}$,
+the following construction uses the input alpha
+and returns an actual original-X rational algebraic
+curve cycle with canonical Betti class alpha.
+
+The actual Hard Lefschetz isomorphism
+\[
+ L^{d-2}:H^2(X,\mathbb Q)
+           \overset{\sim}{\longrightarrow}
+           H^{2d-2}(X,\mathbb Q),\qquad
+ \beta=(L^{d-2})^{-1}\alpha                       \tag{1}
+\]
+is defined over Q, and since it is of Hodge bidegree
+(d-2,d-2), beta is rational of type (1,1).
+By the genuine Lefschetz (1,1) theorem there are
+m>0 and an actual algebraic line bundle M on X with
+$c_1^{Betti}(M)=m\beta$.
+Choose actual hyperplanes $H_1,\dots,H_{d-2}\in|H|$
+and let their products be interpreted as the true
+Chow intersection product on X. Then
+\[
+ \boxed{
+ Z_\alpha=
+ {1\over m}\,
+ c_1^{CH}(M)\cdot
+ c_1^{CH}(H)^{d-2}
+ \in CH^{d-1}(X)_{\mathbb Q},
+ \qquad \mathrm{cl}^{can}_X(Z_\alpha)=\alpha.
+ }                                                     \tag{2}
+\]
+This works for arbitrary X, with NO input Chow
+representative of alpha and no support-Gysin
+existence hypothesis. In d=1 the Hodge
+codimension-zero statement is given directly by
+the fundamental class.
+\end{theorem}
+\begin{proof}
+The usual Hard Lefschetz theorem for X asserts that
+multiplication by $h^{d-2}$ is an isomorphism from
+rational degree-two cohomology to rational degree
+$2d-2$; hence beta exists uniquely in rational Betti
+cohomology. Cup product by h has Hodge type (1,1)
+and the map respects pure Hodge decompositions
+with Tate shift (d-2,d-2). Inverting this rational
+Hodge isomorphism sends alpha of type (d-1,d-1)
+to beta of type (1,1). Lefschetz (1,1) gives an
+actual integral algebraic divisor class whose
+rational Betti image is beta, after clearing the
+integer m. The true canonical cycle-class map
+respects algebraic intersections. Hence
+$\mathrm{cl}^{can}(Z_\alpha)
+=h^{d-2}\beta=\alpha$.
+All operations take place on original X.
+\end{proof}
+
+\begin{corollary}[Actual algebraic source for the entire rational divisor-Lefschetz channel]
+For ANY original smooth projective X, any
+$0\le p\le d$, and any prescribed rational
+Hodge input alpha of the form
+\[
+ \boxed{\alpha=h^{p-1}\beta
+ \quad\text{for a rational }\beta\in H^{1,1}(X)
+ \cap H^2(X,\mathbb Q),\quad p\ge1,}             \tag{3}
+\]
+the actual original-X cycle
+$Z_\alpha=h^{p-1}D_\beta$
+with $D_\beta$ a rational algebraic divisor
+constructed via Lefschetz (1,1), has canonical
+Betti class alpha. For p=0 the class is a
+rational multiple of the fundamental class.
+The theorem above proves that for p=d-1
+THIS channel IS THE ENTIRE rational Hodge fiber.
+\end{corollary}
+
+\section{Actual alpha-sensitive Chow cycle and EXACT primitive residual for EVERY original X}
+The direct original-X divisor construction extends to
+a precise and CANONICAL algebraic partial source in
+EVERY dimension and codimension, without a supplied
+algebraic source family or any Gram rank condition.
+
+Let $s=\min(p,d-p)$, so $0\le s\le d/2$.
+Hard Lefschetz gives a rational Hodge isomorphism
+$L^{p-s}:H^{2s}(X,\mathbb Q)\simeq
+  H^{2p}(X,\mathbb Q)$.
+For the prescribed alpha put
+$\beta=(L^{p-s})^{-1}\alpha$.
+The actual rational Lefschetz primitive
+decomposition is UNIQUE:
+\[
+ \boxed{
+ \beta=\sum_{q=0}^{s}h^{s-q}\rho_q,\qquad
+ \rho_q\in PH^{2q}(X,\mathbb Q)
+      \cap H^{q,q}(X),\quad
+ PH^{2q}=\ker(L^{d-2q+1}).
+ }                                                       \tag{14}
+\]
+Hence on original X:
+\[
+ \boxed{
+ \alpha=\sum_{q=0}^{s}h^{p-q}\rho_q.
+ }                                                       \tag{15}
+\]
+
+\begin{theorem}[Universal prescribed-Hodge divisor-source extraction, all original X,p]
+For EVERY prescribed rational Hodge alpha,
+the primitive coefficient $\rho_0\in H^0(X,\mathbb Q)$
+is a rational scalar (componentwise for disconnected X),
+and $\rho_1\in H^2(X,\mathbb Q)\cap H^{1,1}(X)$
+is the Hodge class of an ACTUALLY CONSTRUCTIBLE
+rational algebraic divisor $D_{\rho_1}$ via the
+Lefschetz (1,1) theorem.
+The target-selected original-X Chow class
+\[
+ \boxed{
+ Z_{\alpha}^{\mathrm{Tate+div}}=
+  \rho_0\cdot c_1^{CH}(H)^p
+  +c_1^{CH}(H)^{p-1}\cdot D_{\rho_1}
+ \in CH^p(X)_\mathbb Q
+ }                                                       \tag{16}
+\]
+(with the second term omitted if $s=0$)
+has EXACT canonical rational Betti class
+\[
+ \boxed{
+ \operatorname{cl}^{can}_X
+     (Z_\alpha^{\mathrm{Tate+div}})
+      =h^p\rho_0+h^{p-1}\rho_1,\qquad
+ R_\alpha=
+ \alpha-\operatorname{cl}^{can}_X
+                 (Z_\alpha^{\mathrm{Tate+div}})
+ =\sum_{q=2}^{s}h^{p-q}\rho_q.
+ }                                                       \tag{17}
+\]
+The residual is Hodge, rational and lies in
+the entire HIGHER primitive sector, computed
+directly FROM alpha without any already-algebraic
+basis, nonzero period assumption, surrogate
+cycle-class map, or conditional source generator.
+If $s\le1$ the residual vanishes and (16)
+is a COMPLETE original-X algebraic representative.
+
+This proves the classical rational Hodge statement
+in ALL codimensions on every smooth projective
+variety of dimension d<=3, and in each
+codimension $p\in\{0,1,d-1,d\}$ in arbitrary
+dimension, by explicit native Chow cycles.
+\end{theorem}
+\begin{proof}
+Hard Lefschetz and primitive decomposition are
+rational statements because the ample class h
+is integral. Their exact Hodge decompositions
+respect rational Tate twists by powers of h.
+Consequently every uniquely selected primitive
+coefficient rho_q is rational and has
+pure Hodge type(q,q).
+For q=0 this is a rational multiple of
+the degree-zero unit; for q=1 the actual
+Lefschetz (1,1) theorem produces a rational
+Chow divisor $D_{\rho_1}$ with the correct
+canonical Betti class, without using a
+Chow source of alpha.
+Multiply these genuine Chow classes by
+the actual ample divisor powers to form (16).
+True multiplicativity of the canonical
+Betti cycle map proves (17) exactly.
+When $s\le1$ the sum for R_alpha is empty.
+For d<=3 and any p,
+$s=\min(p,d-p)\le1$, so the
+whole rational Hodge class is constructed.
+This is a COMPLETE geometric proof for
+those exact universally quantified sectors,
+not merely a computational observation.
+\end{proof}
+
+\begin{remark}[The established folding law is fully used]
+This extraction respects the FULL rational Hodge
+structure: it uses the actual rational
+Hard-Lefschetz primitive splitting,
+rather than replacing it by one cosmic
+address or numerical charge.
+It produces the maximal automatically
+divisor-generated piece of every prescribed
+alpha. It does not claim a nonzero
+primitive class rho_q, q>=2, is absent:
+such primitive Hodge classes CAN be genuinely
+algebraic, as the earlier Gr(2,5)
+Schubert construction already demonstrates.
+The remaining primitive pieces are an EXACT
+original-X geometric target for any additional
+GST source-creation law.
+\end{remark}
+
+\section{True all-dimensional projective GST fold and its algebraic inverse}
+Let E be any actual ALGEBRAIC rank-r bundle on original X,
+$r\ge1$, and let
+\[
+ \pi:Y=\mathbb P_X(\mathcal O\oplus E)\to X,
+ \qquad \xi=c_1^{CH}(\mathcal O_Y(1)).
+\]
+The projective fiber is P^r, the realized
+complex dimension is $\dim Y=d+r$.
+Use the quotient-line convention for xi; set
+\[
+ S_a(E)=\pi_*(\xi^{r+a})\in CH^a(X),\quad a\ge0,
+ \qquad S_0(E)=1,\qquad S_a(E)=0\ (a<0).
+                                                               \tag{4}
+\]
+These are the ACTUAL algebraic Segre pushforward
+coefficients. Their generating function is
+$\sum_{a\ge0}S_a(E)t^a=1/c(E,-t)$
+in the quotient convention, with the zero Chern
+root from the direct summand O.
+By true Leray--Hirsch and the projective-bundle
+Chow identity, EVERY rational Hodge class
+$\gamma\in\operatorname{Hdg}^p(Y)_{\mathbb Q}$
+has a UNIQUE decomposition
+\[
+ \boxed{\gamma=\sum_{i=0}^r
+       \xi^i\,\pi^*\alpha_i,\qquad
+    \alpha_i\in\operatorname{Hdg}^{p-i}(X)_{\mathbb Q}.}
+                                                               \tag{5}
+\]
+For indices outside range put $\alpha_i=0$.
+
+\begin{theorem}[ACTUAL finite original-X Chow coefficient extractor for an algebraic folded class]
+Let W be an ACTUAL rational codimension-p algebraic
+Chow cycle on Y. Its genuine canonical rational
+Betti class gamma has components alpha_i in (5).
+Construct actual rational Chow classes on X by
+descending induction:
+\[
+ \boxed{
+ B_r=\pi_*(\xi^{0}\cdot W),\qquad
+ B_j=\pi_*(\xi^{r-j}\cdot W)
+       -\sum_{i=j+1}^r S_{i-j}(E)\cdot B_i
+       \quad(j=r-1,\dots,0).
+ }                                                     \tag{6}
+\]
+Then EVERY B_j is a genuine original-X rational
+Chow class of codimension p-j satisfying
+\[
+ \boxed{\mathrm{cl}^{can}_X(B_j)=\alpha_j
+                    \quad(0\le j\le r).}         \tag{7}
+\]
+Thus not only the folded Hodge structure but
+EACH ENTIRE rational Hodge coefficient has an
+explicit actual algebraic RETURN whenever the
+whole folded class is algebraic. No source
+coefficient is lost by cancellation or higher
+fold dimensions.
+\end{theorem}
+\begin{proof}
+Apply proper Chow pushforward and the projection
+formula to the true projective-bundle Chow
+expansion $W=\sum_{i=0}^r \xi^i\pi^*Z_i$,
+which exists uniquely for all algebraic W.
+For every j,
+\[
+ \pi_*(\xi^{r-j}W)
+ =\sum_{i=j}^r S_{i-j}(E)\cdot Z_i,
+\]
+because $\pi_*(\xi^k)=0$ for $k<r$ and
+$\pi_*(\xi^{r+a})=S_a(E)$.
+When j=r the right side is Z_r, since S_0=1.
+Descending induction solves the upper-triangular
+unit-diagonal system and gives B_j=Z_j
+in ACTUAL Chow. Applying the canonical Betti
+cycle comparison proves precisely (7) and (5).
+The formula does NOT assume existence of an
+original-X representative for any alpha_j:
+it constructs each from the ACTUAL algebraic
+input W on the folded world.
+\end{proof}
+
+\begin{corollary}[Explicit one-source fold return and bidirectional algebraicity]
+For arbitrary rational $\alpha\in\operatorname{Hdg}^p(X)$
+and any 0<=k<=r define the actually realized folded
+rational Hodge class
+$\gamma_k=\pi^*\alpha\smile\xi^k$ on Y.
+Then the completely explicit algebraic Gysin return is
+\[
+ \boxed{\pi_*(\xi^{r-k}\smile\gamma_k)=\alpha.}
+                                                               \tag{8}
+\]
+If gamma_k has any ACTUAL algebraic cycle representative W
+on the folded smooth projective Y, the genuine original-X
+cycle $\pi_*(\xi^{r-k} W)$ has canonical class alpha.
+Conversely a true original-X cycle Z_alpha yields the
+actual folded cycle $\xi^k\pi^*Z_\alpha$.
+Thus for this whole projective fold sector,
+\[
+ \boxed{\gamma_k\ \text{algebraic}
+    \quad\Longleftrightarrow\quad
+       \alpha\ \text{algebraic}.}                \tag{9}
+\]
+This is a CONSTRUCTION and an exact equivalence,
+not a claim that preservation of purity
+creates W.
+\end{corollary}
+
+\section{The dimension-by-dimension carrier monotonicity law}
+Build a genuine GST tower of arbitrary finite depth
+\[
+ X_0=X,\quad X_j=\mathbb P_{X_{j-1}}
+                  (\mathcal O\oplus E_j),\quad
+    \operatorname{rank}E_j=r_j\ge1,
+\]
+with hyperplane classes xi_j and arbitrary
+integers 0<=k_j<=r_j.
+Transport a prescribed original rational Hodge
+alpha of codimension p by the TRUE typed formula
+\[
+ \alpha_n=\pi_{0,n}^*\alpha
+                       \smile\prod_{j=1}^n\xi_j^{k_j}.
+\]
+The new complex dimension, codimension, and
+complex dimension of a cycle representing this
+class are:
+\[
+ \begin{aligned}
+ d_n&=d+\sum_{j=1}^n r_j,\\
+ p_n&=p+\sum_{j=1}^n k_j,\\
+ \boxed{\delta_n:=d_n-p_n
+           =(d-p)+\sum_{j=1}^n(r_j-k_j)\ge d-p.}
+ \end{aligned}                                         \tag{10}
+\]
+
+\begin{theorem}[Exact all-depth GST carrier monotonicity and source reflection]
+For EVERY arbitrary original X,p,alpha and every
+finite tower of true algebraic projective folds:
+(i) alpha_n is rational of Hodge type (p_n,p_n)
+regardless of the depth, since each xi_j is
+an actual algebraic (1,1) class;
+(ii) the complex algebraic-cycle carrier
+dimension $\delta_n$ NEVER drops below the
+original carrier dimension d-p;
+(iii) alpha_n is algebraic if and ONLY if
+alpha is algebraic, with actual original-X
+cycle recovered by multiplying by
+$\prod_j\xi_j^{r_j-k_j}$ and iterated genuine
+proper Chow pushforward down the whole tower.
+
+In particular, whenever the original class
+has carrier dimension d-p>=2,
+these split projective dimension births
+can NEVER move it into the complete
+divisor-dual curve sector of carrier
+dimension 1 from Section 2,
+regardless of how large n or the
+ranks become.
+\end{theorem}
+\begin{proof}
+The Hodge-type statement is Kunneth and
+projective Leray--Hirsch; (10) proves the
+carrier monotonicity for arbitrary integer
+r_j,k_j. For (iii), apply the actual
+projective-fiber identity
+$\pi_{j*}\xi_j^{r_j}=1$
+and the proper projection formula at
+each stage, descending from j=n to j=1.
+For an ACTUAL algebraic W_n representing
+alpha_n, all xi_j are algebraic and so
+the iterated Chow pushforward is a genuine
+original-X Chow cycle whose canonical
+Betti class is alpha. Conversely
+pull an actual original-X representative
+forward to the projective tower by
+the stated algebraic intersection product.
+For d-p>=2 equation (10) implies
+$\delta_n>=2$ for all depths.
+This excludes only the claimed conversion
+through SPLIT projective folds to the
+already-solved curve sector. It makes
+no assertion that non-split GST
+realizations cannot contain different
+algebraic source-generating geometry.
+\end{proof}
+
+\section{Verified GST source-to-target meaning}
+The exact original-X construction (2)
+covers all Hodge curve classes for every
+smooth projective X and visibly uses
+the established Hodge structure.
+The finite inverse (6) turns any
+genuine source on a folded world
+into TRUE original-X algebraic cycles,
+one for EACH Hodge coefficient.
+The all-depth invariant (10) explains
+WHY increasing dimension alone cannot
+convert a prescribed higher-dimensional
+primitive residual into a divisor source:
+the realized carrier dimension does not
+decrease. This is a theorem about the
+WHOLE fold, not a statistical experiment.
+
+For the full arbitrary-p rational Hodge
+statement, nothing here licenses setting
+an unsupported source W_n equal to
+a closed Hodge class on X_n. Any
+non-split GST source-birth derivation
+must independently construct its actual
+algebraic carrier, after which (6)--(9)
+give the exact original-X return.
+\end{document}

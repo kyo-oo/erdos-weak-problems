@@ -1,0 +1,269 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\newcommand{\CH}{\operatorname{CH}}
+\title{GST spatial folds with extension data: periods, causal graphs, and original-$X$ return}
+\date{3 November 2026}
+\begin{document}\maketitle
+\section{Contract, re-read, and the changed mathematical move}
+Base revision: \texttt{6191cdc6bb5a3f94d422da4a39ccaa7f6e2008d7}.
+The input is every original smooth projective complex $X$, $0\leq p\leq\dim X$,
+and prescribed rational $(p,p)$ class $\alpha$. The intended output remains
+an independently constructed rational Chow cycle on $X$ of canonical class
+$\alpha$. The owner's provisional assumption of universal Hodge algebraicity
+is a thought experiment, never a premise discharged by the experiment.
+
+The dimensionless General Space root, scheme dimension observation,
+Graph V2 realization, N-cohomology V3, signed causal purity spectrum,
+Rounds 50--51, polarization/integrability, and complete-incidence return
+were inspected in their actual sources. This is targeted semantic review,
+not a claim that every proof in the branch has been read or checked.
+The older signed-fold calculus ALREADY has positive-gap open births and
+balanced compensation. The addition here is not another signature count:
+it computes extension-sensitive Hodge equations in actual smooth projective
+nearby worlds, constructs the successful graph divisors, and computes their
+canonical return for arbitrary original $X$.
+
+The four-birth monoid in Round 50 has no positive-gap generator, so its
+noncompensation theorem stays valid within that monoid. Neither that theorem
+nor a balanced signed signature decides a nearby fiber's Hodge filtration.
+In particular, a rational nonalgebraic $(p,p)$ class, if one exists, is still
+a Hodge class; it must not be called a non-Hodge structure.
+
+\section{An actual extension-sensitive two-handle fold}
+Let $E_\tau=\C/(\mathbb Z+\tau\mathbb Z)$, $\operatorname{Im}\tau>0$.
+Use marked rational cohomology $a,b$ with $\int_Ea\wedge b=1$ and
+$H^{1,0}=\C(a+\tau b)$. Set
+\[
+ v=Aa_1a_2+Ba_1b_2+Cb_1a_2+Db_1b_2,\qquad A,B,C,D\in\Q,
+ \quad \operatorname{vol}=a_1b_1a_2b_2.
+\]
+Juxtaposition denotes exterior cup product, in this fixed factor order.
+\begin{theorem}[Exact period equation, not a signature surrogate]
+On the actual projective surface $E_{\tau_1}\times E_{\tau_2}$,
+\[
+ v\in H^{1,1}\quad\Longleftrightarrow\quad
+ \Phi_v(\tau_1,\tau_2):=A\tau_1\tau_2-B\tau_1-C\tau_2+D=0. \tag{1}
+\]
+\end{theorem}
+\begin{proof}
+Expansion gives $v(a_1+\tau_1b_1)(a_2+\tau_2b_2)=-\Phi_v\operatorname{vol}$.
+The $(2,0)$ form detects the $(0,2)$ coefficient. Since $v$ is rational,
+complex conjugation also kills its $(2,0)$ coefficient. These are the only
+non-$(1,1)$ summands in this cross Kunneth block.
+\end{proof}
+
+Fix positive integers $n_1,n_2$ and complex constants $u_1,u_2$ and put
+$\tau_i=n_i z+u_i$ on an upper half-plane where both imaginary parts
+are positive. Equivalently $q_i=e^{2\pi i u_i}t^{n_i}$ for
+$t=e^{2\pi i z}$: these are genuine elliptic punctured-disk families.
+The parameter family here is analytic over the punctured disk; each fiber
+is an algebraic projective elliptic curve. No algebraic finite-type model
+of this entire period-parameter base is being asserted.
+The marked transformation under $z\mapsto z+1$ is $a_i\mapsto a_i+n_i b_i$,
+$b_i\mapsto b_i$. Consequently
+\[
+ T(A,B,C,D)=(A,B+n_2A,C+n_1A,D+n_1B+n_2C+n_1n_2A),\tag{2}
+\]
+and $N=\log T$ sends this vector to $(0,n_2A,n_1A,n_1B+n_2C)$.
+The sign of geometric monodromy can reverse if marking is transported in
+the opposite direction; its kernel and the following conclusions do not.
+The rank-two nilpotent weight filtration on each handle is
+$W_0=W_1=\Q b$, $W_2=\Q a+\Q b$. In the nilpotent orbit,
+$e^{-zN}F^1=\C(a+u b)$, so its graded types are $(0,0)$ and $(1,1)$.
+They have purity gaps $-1$ and $+1$ in degree one. Their product has a
+balanced grade, while the extension $u$ remains in the filtration.
+
+\begin{theorem}[Full-family Hodge equation and its extension obstruction]
+The flat rational vector $v$ has type $(1,1)$ for every $z$ in a nonempty
+open set if and only if
+\[
+ A=0,\qquad n_1B+n_2C=0,\qquad D=Bu_1+Cu_2.\tag{3}
+\]
+There is a nonzero such rational vector if and only if
+\[
+ \delta_{12}:=n_2u_1-n_1u_2\in\Q.\tag{4}
+\]
+When (4) holds its full-family space is the rational line spanned by
+\[
+ w_{12}=n_2a_1b_2-n_1b_1a_2+\delta_{12}b_1b_2.\tag{5}
+\]
+\end{theorem}
+\begin{proof}
+Substitution in (1) gives coefficients
+$An_1n_2$, $A(n_1u_2+n_2u_1)-n_1B-n_2C$,
+$Au_1u_2-Bu_1-Cu_2+D$. A polynomial vanishing on an open set has
+all three coefficients zero. Positivity of $n_i$ gives (3).
+If $B=0$, then $C=D=0$; otherwise (3) says
+$C=-n_1B/n_2$, $D=B\delta_{12}/n_2$, giving (4)--(5).
+The converse is direct substitution. A condition at a single $z$ can be
+weaker, for example at a CM point; the all-family quantifier is essential.
+\end{proof}
+
+The nonzero vector $a_1b_2-b_1a_2$ has identical balanced weight and
+trivial monodromy for $n_1=n_2=1$ regardless of the constants. But for
+$u_1=0,u_2=\sqrt2$ its period defect is $\sqrt2$, whereas for $u_2=0$
+it is zero. At $z=i$ in the former case there is in fact NO nonzero
+rational cross $(1,1)$ vector: the real and imaginary parts of (1) are
+$D-A-C\sqrt2=0$, $A\sqrt2-B-C=0$; irrationality forces all four
+coefficients to vanish. This is a test on actual smooth projective
+surfaces, not a hypothetical failure of a Hodge structure.
+
+\section{The successful fold supplies an explicit actual graph divisor}
+Assume (4), set $a=n_2/n_1>0$ and $b=u_2-a u_1\in\Q$. Choose a positive
+integer $L$ with $La,Lb\in\mathbb Z$. The complex-linear map
+$s\mapsto La\,s$ takes the lattice of $E_{\tau_1}$ into that of
+$E_{\tau_2}$: its two generator images are $La$ and
+$L\tau_2-Lb$. It therefore gives an actual algebraic isogeny $f$ of
+degree $d=L^2a$. Its graph is an actual divisor, not an assumed Chow
+preimage. Let $\eta_1=[\{0\}\times E_2]$ and
+$\eta_2=[E_1\times\{0\}]$. Then
+\[
+ G_f=[\Gamma_f]-d\eta_1-\eta_2,\qquad
+ \operatorname{cl}^{can}(G_f)=-\frac L{n_1}w_{12}.\tag{6}
+\]
+\begin{proof}
+Pullback of the marking is $f^*a_2=La\,a_1-Lb\,b_1$,
+$f^*b_2=L b_1$. Pair these with $a_1,b_1$ on the graph to obtain
+the four cross coefficients $A=0,B=-La,C=L,D=Lb$.
+The two factor coefficients are $d,1$, removed in (6). This proves
+the canonical Betti formula. Algebraicity of the lattice map is the
+checked complex-torus/elliptic-curve comparison, not Hodge conjecture.
+\end{proof}
+In particular $W=-n_1G_f/L$ is an explicitly constructed rational
+divisor with class $w_{12}$ and
+\[
+ \int w_{12}^2=-2n_1n_2\ne0.\tag{7}
+\]
+The extension condition can be made causal: put $s_i=u_i/n_i$.
+Then $s_i-s_k=(s_i-s_j)+(s_j-s_k)$, so rational compatible edges
+compose. Changing $z$ to $z+c$ changes $u_i$ to $u_i-n_i c$ and
+does not change $\delta_{ij}$. Integer marking shears only change the
+displayed coordinates of the same criterion. Thus topology/monodromy
+and Hodge-extension compatibility are distinct parts of the fold process.
+
+\section{An all-arity equation that always gives Hodge tensors}
+Now synchronize $m$ handles to the SAME varying $E_\tau$. In
+$V^{\otimes m}$ define $E,F,H$ by summing the usual $\mathfrak{sl}_2$
+operators over factors. For $\tau=x+iy$ the weight-one Hodge operator is
+\[
+ J_\tau=\frac1y\begin{pmatrix}-x&1\\-(x^2+y^2)&x\end{pmatrix},
+ \quad J_\tau(a+\tau b)=i(a+\tau b).
+\]
+Its induced tensor operator is a SUM over factors, not the tensor power
+of $J_\tau$. Three rational test operators are
+\[
+ Q_0=E-F,\quad Q_1=\tfrac12E-2F,\quad Q_2=-H+E-2F,
+ \tag{8}
+\]
+coming from $\tau=i,2i,1+i$. They span $\mathfrak{sl}_2$ since
+\[
+ E=(4Q_0-2Q_1)/3,\quad F=(Q_0-2Q_1)/3,
+ \quad H=2(Q_0+Q_1)/3-Q_2.\tag{9}
+\]
+\begin{theorem}[Three-test law, for every finite arity]
+A rational tensor is of charge zero for every $\tau$ if and only if
+all three operators (8) kill it. For $m=2r$ this is exactly the
+flat $(r,r)$ tensor space throughout the synchronized family. It is
+spanned by products of determinant pairings
+$[ij]=a_i b_j-b_i a_j$ over perfect matchings. For $m$ odd it is zero.
+For $m=2r$ its dimension is
+\[
+ C_r=\binom{2r}{r}-\binom{2r}{r-1}=\frac1{r+1}\binom{2r}{r}.\tag{10}
+\]
+\end{theorem}
+\begin{proof}
+The tensor charge has eigenvalue $i(s-t)$ on type $(s,t)$.
+Equations (8)--(9) show that the three kernels intersect in the
+$\mathfrak{sl}_2$-invariants, equivalently $\mathrm{SL}_2$-invariants.
+Every $J_\tau$ is a linear combination of $E,F,H$, proving the iff.
+The first fundamental theorem for $\mathrm{SL}_2$ gives determinant
+pairings as generators; restricting to multilinear degree forces a
+perfect matching. The center $-1$ rules out odd $m$. For even $m$,
+complete reducibility of finite-dimensional $\mathfrak{sl}_2$ modules
+gives the multiplicity of the trivial representation as the difference
+between weight-zero and weight-two multiplicities. In the tensor power
+these are the two binomial coefficients in (10).
+Noncrossing matchings give $C_r$ independent vectors: orient every arc
+from its smaller endpoint, order words lexicographically with $a<b$,
+and take the leading word of the product. Its $a/b$ word is Dyck, and
+the stack rule recovers the unique noncrossing matching. All other
+monomials are later, so distinct leading words give independence.
+This proves they are a basis. The empty matching at $r=0$ is the unit.
+\end{proof}
+
+For actual cycles use the cross diagonal divisor on factors $i,j$.
+When identifying its product with a tensor in factor order, retain the
+Koszul sign of the permutation from arc order to factor order. Ordinary
+commutative bracket coordinates obey
+$[12][34]-[13][24]+[14][23]=0$.
+The actual even-degree cross-divisor products instead obey the signed
+translation with PLUS between all three terms. A bracket polynomial
+identity must not be copied into the Chow ring without this sign dictionary.
+These constructed classes give every flat Hodge tensor of this block,
+not every Hodge class at an isolated CM fiber and not every arbitrary $X$.
+The determinant invariant theorem and elliptic-power phenomena are known;
+no global novelty claim is made for them or this synthesis.
+
+\section{Execute the prescribed original-$X$ source test}
+For the exact input $(X,p,\alpha)$, choose the actual synchronized
+two-handle fold $A=E\times E$, its constructed divisor $W$ with class
+$w=a_1b_2-b_1a_2$, and form the target-dependent rational Betti class
+$\beta_\alpha=\operatorname{pr}_X^*\alpha\,\operatorname{pr}_A^*w$.
+It is nonzero for $\alpha\ne0$, has type $(p+1,p+1)$ on the ACTUAL
+smooth projective space $X\times A$, and returns by the explicit equation
+\[
+ -\tfrac12(\operatorname{pr}_X)_*
+ (\beta_\alpha\,\operatorname{pr}_A^*w)=\alpha.\tag{11}
+\]
+For any actual $Z\in\CH^{p+1}(X\times A)_\Q$ representing this class,
+$-\tfrac12(\operatorname{pr}_X)_*(Z\cdot\operatorname{pr}_A^*W)$
+is an actual requested cycle on original $X$, by canonical pull--cup--push.
+Conversely an actual cycle for $\alpha$ external-products with $W$ to
+represent $\beta_\alpha$. Thus this candidate source is algebraic exactly
+when $\alpha$ is: tensoring does not lower the unknown codimension to one.
+For $r$ independent successful paired folds the return coefficient is
+$\prod_j(-2n_{2j-1}n_{2j})$, explicitly invertible in $\Q$.
+
+Using instead the irrational-shift pair above gives a non-Hodge
+$\alpha\boxtimes(a_1b_2-b_1a_2)$ for EVERY nonzero original Hodge
+$\alpha$, by direct Kunneth decomposition and (1). Both the preserving
+and breaking equations requested by the owner therefore occur in actual
+folded realizations over every original $X$. A class leaving Hodge type
+cannot falsify Hodge algebraicity, whose premise requires that type.
+Assuming universal Hodge makes the successful $\beta_\alpha$ algebraic
+and (11) returns the assumed conclusion; it is not an independent proof.
+
+\section{Source leaves, review and continuation}
+Andrew Sutherland, MIT 18.783, Lecture 17, 12 April 2017,
+Theorem 17.4 verifies the lattice-map/algebraic-isogeny arrow in (6):
+\url{https://math.mit.edu/classes/18.783/2017/LectureNotes17.pdf}.
+Kraft--Procesi, \emph{Classical Invariant Theory}, preliminary July 1996,
+Section 8.4, printed p.90, verifies determinant generation used above:
+\url{https://dmi.unibas.ch/fileadmin/user_upload/dmi/Personen/Kraft_Hanspeter/Classical_Invariant_Theory.pdf}.
+The source notation is $K[V^p]^{\mathrm{SL}(V)}$; take $K=\Q$,
+$\dim V=2$, and multilinear degree one in every copy, using the
+determinant identification $V\simeq V^*$. These are checked theorem
+translations, not novelty searches. Bloch--de Jong--Sertoz,
+\emph{Heights on curves and limits of Hodge structures}, 2023,
+Section 3.2 corroborates the dependence of a limiting filtration on
+smoothing data; the explicit rank-two filtration here is computed directly.
+The Speyer matching-note link failed acquisition, so it is not a verified
+external proof leaf. The matching argument is given above.
+
+Self-review: (1)--(11) have hand proofs in the stated domains. Lean files
+formalize algebraic equations and finite-coordinate operations, not the
+actual analytic family, scheme instances, invariant theory or canonical
+Chow comparison. The owner handles compilation. Finite Wolfram/Python
+checks test equations and tensor blocks, not universal Hodge algebraicity.
+This closes the synchronized auxiliary-handle recipe as an independent
+source constructor: its computed canonical return is faithful but does
+not birth $\alpha$ algebraically. A different future geometric route must
+construct a target-dependent selected/excess source on original $X$ or
+a genuine deformation of $X$ itself; the branch's unresolved selected
+incidence/excess route remains open and is not replaced by this diagnostic.
+\end{document}

@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\title{Native GST infinity control by geometric cycle complexity: exact original-X return and physical CM Jordan obstruction}
+\date{12 November 2026}
+\begin{document}\maketitle
+
+\section{Exact target and new native-control experiment}
+Fix arbitrary original smooth projective complex $X$, $p$ and a PRESCRIBED rational Hodge class $\alpha\in W_p(X)$.
+The full output required is an ACTUAL $Z_\alpha\in CH^p(X)_{\mathbb Q}$ with CANONICAL $\mathrm{cl}_X(Z_\alpha)=\alpha$.
+The owner's original GST fold is $F=U+J+M+b[J,M]$ with physical Navigation $b\in\{0,1\}$.
+The older cardinal-world specialization lemma assumed target-bearing cycles on uncountably many distinct fibers.
+We seek a DIFFERENT source-control condition which is more quantitative and uses only a convergent COUNTABLE sequence.
+
+Let $\pi:\mathcal X\to B$ be smooth projective over a smooth irreducible complex algebraic curve, with original $X=\mathcal X_{b_0}$ and a GLOBAL FLAT rational class $\alpha_b$ extending the original $\alpha$.
+Fix a relative projective embedding. An actual rational effective-difference presentation on fiber $b$ is
+\[
+Z_b=(P_b-Q_b)/m,\quad m\in\mathbb Z_{>0},\quad
+P_b,Q_b\text{ effective algebraic codimension-p cycles}.
+\]
+Define its TRUE geometric complexity
+\[
+\operatorname{complexity}(m,P_b,Q_b)=\max\{m,\deg P_b,\deg Q_b\}.
+\]
+This is an actual cycle-degree/denominator complexity, NOT an abstract wave norm.
+
+\begin{theorem}[Bounded-complexity native infinity-return theorem]
+Suppose there exist pairwise distinct $b_n\to b_0$ in the complex analytic topology and ACTUAL target-matching fiber cycles
+\[
+\mathrm{cl}_{\mathcal X_{b_n}}(P_n-Q_n)=m_n\alpha_{b_n}
+\]
+with a UNIFORM integer $C$ satisfying
+$m_n,\deg P_n,\deg Q_n\le C$ for EVERY n.
+Then the ORIGINAL $X$ admits a genuine rational Chow cycle
+\[
+\boxed{Z_\alpha\in CH^p(X)_{\mathbb Q},\qquad \mathrm{cl}_X(Z_\alpha)=\alpha.}
+\]
+Only COUNTABLY many input fibers are needed; no uncountable cardinal argument or geometric source on the original fiber is assumed.
+\end{theorem}
+\begin{proof}
+The triple $(m_n,\deg P_n,\deg Q_n)$ ranges over a FINITE set, so along some INFINITE subsequence tending to $b_0$ the profile is fixed $(m,r,s)$.
+The relative projective Chow pair parameter $\mathcal C_{r,s}=\operatorname{Chow}_{p,r}(\mathcal X/B)\times_B\operatorname{Chow}_{p,s}(\mathcal X/B)$ is proper finite type over $B$.
+The canonical rational Betti class of a relative algebraic-cycle pair is locally constant along each connected component of this parameter space in the Gauss--Manin local system.
+The subset with $\mathrm{cl}(P-Q)=m\alpha$ is consequently a UNION of full connected components, hence CLOSED (only finitely many components).
+Its image in $B$ is CLOSED by properness. That image contains all subsequence points, hence their analytic limit $b_0$.
+A point in its fiber over $b_0$ is an ACTUAL pair $(P_0,Q_0)$ on original $X$ with class $m\alpha$.
+The rational Chow cycle $(P_0-Q_0)/m$ gives the required canonical Betti class.
+\end{proof}
+
+\begin{corollary}[Exact degree/denominator complexity-escape dichotomy]
+Under the same smooth family and flat rational class, if $\alpha_{b_0}$ has NO original-$X$ Chow representative, then for ANY sequence $b_n\to b_0$ of distinct target-bearing actual algebraic fibers and ANY chosen rational effective-difference presentations,
+\[
+\boxed{\max\{m_n,\deg P_n,\deg Q_n\}\longrightarrow\infty.}
+\]
+In particular for every C, only FINITELY many such presentations may have complexity at most C.
+\end{corollary}
+\begin{proof}
+If the complexity did not tend to infinity, there would be an infinite subsequence bounded by some C; the preceding theorem would manufacture the forbidden original Chow cycle.
+\end{proof}
+
+\section{Manufactured CONSTANT family audit}
+For $\mathcal X=X\times B$, each fiber is ACTUALLY isomorphic to original X.
+Even ONE target-bearing Chow cycle on any fiber already transfers to original X by that isomorphism.
+Merely manufacturing arbitrary cardinal-many copies of X, with trivial or twisted topology, never supplies an unknown rational Hodge representative.
+The present theorem does NOT assert its cycle-producing input holds automatically in a constant family.
+
+\section{Exact ORIGINAL physical GST two-cell fold, infinity normalization and Jordan obstruction}
+The owner's genuine U-fixed null/maximum two-cell GST physical folds (direct SURVIVE strength one) are
+\[
+F_0=\begin{pmatrix}1&1\\-1&3\end{pmatrix},
+\qquad
+F_1=\begin{pmatrix}1&3\\1&3\end{pmatrix}.
+\]
+Set
+\[
+N_0=F_0-2I=\begin{pmatrix}-1&1\\-1&1\end{pmatrix},
+\qquad
+P_1=F_1/4=\tfrac14\begin{pmatrix}1&3\\1&3\end{pmatrix}.
+\]
+Then $N_0^2=0$, $N_0\neq0$, $P_1^2=P_1$ and $\mathrm{rank}(P_1)=1$.
+For every integer n at least one,
+\[
+\boxed{F_0^n=2^n\left(I+\tfrac n2N_0\right),\qquad
+F_1^n=4^nP_1.}
+\]
+These are universal formulas by the binomial identity for a square-zero nilpotent and the exact idempotence of $P_1$, not extrapolations from a finite experiment.
+For the true null seed $v=(1,0)$,
+\[
+F_0^nv=2^n(1-\tfrac n2,-\tfrac n2),\qquad
+F_1^nv=4^{n-1}(1,1).
+\]
+Thus the normalized Navigation-ON fold is STATIONARY after one iteration but has only ONE source direction, while the normalized Navigation-OFF fold is UNBOUNDED because of a nonzero Jordan nilpotent term.
+Infinite iteration of the EXISTING two-cell physical native fold does not simultaneously control complexity AND recover every rational target direction.
+This is a rigorous obstruction to THIS iteration recipe, not a refutation of the owner's full original twelve-cell GST construction.
+
+\section{New sufficient native geometric law and exact limitation}
+A GST-native source construction that actually produces target-matching EFFECTIVE algebraic cycle differences on moving fibers approaching the original X, with a UNIFORM bound on denominator and cycle degree, now implies full original-X source birth by the proved theorem.
+This replacement needs infinitely many (but not uncountably many) real source fibers.
+It is NOT proved that arbitrary original-X rational Hodge inputs generate those algebraic sources or their complexity bound from original U/J/M/Navigation/N-cohomology.
+In particular a manufactured constant family cannot make that algebraic-source existence requirement disappear.
+
+The mathematical theorem depends on genuine properness of relative Chow parameter spaces and the canonical local constancy of cycle classes; the original CM matrix powers were checked by independent exact Wolfram computations for n=1 through 15 and proved algebraically for all n.
+\end{document}

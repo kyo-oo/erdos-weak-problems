@@ -1,0 +1,1642 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\newtheorem{definition}{Definition}
+\title{GST Causal-Graph Double Folds: Emergent Cohomological Dimension,
+Hodge Charge, and Weight Defect}
+\author{Research derivation (self-review; not Lean-kernel verified)}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+A dimension-free GST world can admit geometric realization maps without
+assigning a dimension to the ambient causal ontology.  We make the user's
+intuition testable using genuine projective nodal curves obtained by causal
+identification of branches.  The dual graph of the identifications controls
+a new weight-zero cohomology sector, and two independent causal loops create
+\emph{rational diagonal Hodge-charge zero classes in even cohomological degree}
+whose weight is strictly lower than their degree.  This persists under
+arbitrarily many algebraic Tate dimension folds and survives stabilization
+by every original smooth projective variety.  It is a theorem about the
+mixed Hodge theory of singular realized worlds, \emph{not} a counterexample
+to the rational Hodge conjecture for smooth projective varieties.
+\end{abstract}
+
+\section{Exact GST-to-geometry types and two diagnostic invariants}
+The ontological source is the typed \texttt{GeneralSpace} of
+\texttt{GSTGeneralSpace.lean}: points and associative paths, without
+any built-in dimension or metric. The world-birth and event source is
+\texttt{GSTGraphV2SelfExpandingCosmology.lean}; higher coherence cells in
+\texttt{GSTGraphV2UnboundedHigherCausality.lean} have globular level $n$,
+which is \emph{not} the complex dimension of a variety. The present
+causal edge is realized by a specified algebraic gluing of branches.
+
+For a graded piece of a mixed Hodge structure in cohomological degree
+$k$, weight $w=p+q$, and Hodge bidegree $(p,q)$, define the
+\emph{two-coordinate causal fold readout}
+\[
+  \chi=p-q,\qquad \delta=w-k=p+q-k.
+\]
+The signed GST/Hodge charge $\chi$ diagnoses diagonality.
+The \emph{purity gap} $\delta$ diagnoses a distinct failure:
+smooth projective complex varieties have $\delta=0$ in every
+cohomological degree. Being diagonal $\chi=0$ without the correct
+weight $\delta=0$ is insufficient even to instantiate the ordinary
+degree-$2p$ rational Hodge-class target.
+
+\begin{proposition}[Tate fold preserves both readouts]
+An algebraic Tate shift by $j\geq0$ changes
+\[
+(k,p,q,w)\longmapsto(k+2j,p+j,q+j,w+2j),
+\]
+so $\chi$ and $\delta$ are both invariant under any finite succession
+of such dimension folds.
+\end{proposition}
+\begin{proof}
+Subtract the transformed coordinates:
+$(p+j)-(q+j)=p-q$ and $(w+2j)-(k+2j)=w-k$.
+Composition adds the shift indices.
+\end{proof}
+
+\section{GST CAUSAL HODGE GENESIS: topology and Hodge data are one fold output}
+The \emph{generative} construction is the datum
+\[
+\mathfrak F=(\Gamma,\mathcal R_\Gamma,\mathrm{mode},N).
+\]
+Here $\Gamma$ is a finite connected graph of certified causal
+identifications; $\mathcal R_\Gamma$ is its \emph{actual algebraic
+realization} as a projective nodal curve with rational normalization;
+$\mathrm{mode}$ selects the nodal fold itself or a specified smooth
+projective deformation of that realized world; and $N$ is any
+nonnegative Tate extension depth. None of $k,p,q,w$ is given as
+primitive data in this input. They are read off from the cohomology
+of the constructed world.
+
+Write $r=|V(\Gamma)|\ge1$, $e=|E(\Gamma)|$,
+$g=e-r+1$ and $A=t^2s^2uv$.
+The \textbf{GST causal Hodge genesis law} consists of the two outputs
+\[
+\boxed{\begin{aligned}
+\mathfrak G_N^{\rm fold}(\Gamma)&=
+ (1+g\,t+rA)\sum_{j=0}^N A^j,\\
+\mathfrak G_N^{\rm smooth}(\Gamma)&=
+ (1+g\,ts(u+v)+A)\sum_{j=0}^N A^j.
+\end{aligned}} \tag{G1}
+\]
+The second equation requires an \emph{actual} smoothing of the
+projective curve, not a formal substitution of Hodge labels.
+The full causal realization change is determined exactly by
+\[
+\boxed{
+\mathfrak G_N^{\rm smooth}-\mathfrak G_N^{\rm fold}
+  =[g\,t(s(u+v)-1)+(1-r)A]\sum_{j=0}^N A^j.
+} \tag{G2}
+\]
+For a one-component $g$-loop nodal curve ($r=1$), only the
+$g\,t(s(u+v)-1)$ term remains. This \emph{whole-world}
+transformation is not an endomorphism of a fixed smooth Hodge
+space: the causal node identifications and the deformation
+change the underlying topological realization, and the cohomology
+is computed anew.
+
+\begin{theorem}[Causal loop number forces Hodge genesis in all dimensions]
+Under the stated geometric realization and smoothing conditions, the
+same causal graph invariant $g=\dim_{\mathbb Q}\operatorname{coker}
+B_\Gamma$ has two different but causally related manifestations:
+\[
+\begin{aligned}
+&\operatorname{Gr}^W_{2j}H^{2j+1}
+ (C_\Gamma\times\mathbb P^N,\mathbb Q)
+ \cong\mathbb Q(-j)^g,\\
+&h^{j+1,j}(C_t\times\mathbb P^N)
+ =h^{j,j+1}(C_t\times\mathbb P^N)=g
+ \quad\text{in degree }2j+1
+\end{aligned}
+\]
+for every $0\le j\le N$. The first sector is mixed-Hodge
+weight $2j$; the second is the \emph{pure}, truly
+geometrically born Hodge sector at weight $2j+1$.
+The Hodge dimensions of the smooth world are thus
+\emph{outputs of the causal-graph topology and smoothing}
+rather than separately prescribed vector spaces.
+\end{theorem}
+\begin{proof}
+Graph incidence gives $\dim\operatorname{coker}B_\Gamma=g$;
+the normalization sequence identifies this with
+$H^1(C_\Gamma,\mathbb Q)$ of weight zero.
+The arithmetic genus of the nodal curve is $g$ by the
+dual-graph genus formula because its normalizations have genus zero.
+A projective flat smoothing therefore has smooth genus $g$,
+and consequently genuine $H^{1,0}$ and $H^{0,1}$ dimensions $g$.
+The projective bundle/Tate formula translates either conclusion
+through $j$ by degree $2j$ and bidegree $(j,j)$.
+Expanding the resulting cohomological generating functions gives
+(G1)--(G2).
+\end{proof}
+
+\paragraph{Why the older GST grading is insufficient by itself.}
+The cosmic diagonal $(j,j)$ and signed charge $\chi=0$
+describe the \emph{address} of a class, but the cohomology born
+from an actual causal fold has a second, independently emergent
+degree $k$. The derived pair
+\((\chi,\delta)=(p-q,p+q-k)\)
+can distinguish two fold histories of the same cosmic address.
+Crucially this extra index is \emph{calculated from a geometry},
+not imposed to keep Hodge theory artificially separate from GST.
+The companion Lean laws explicitly construct the nodal birth
+cells, the smooth left/right birth cells, and their unbounded
+Tate histories. The N-hole double tensor law models independent
+causal births without collapsing their multiplicities.
+
+\paragraph{Original-X integration criterion.}
+The immutable universal original-$X$ target is still:
+for each smooth projective complex $X$, $p$ and
+$\alpha\in H^{2p}(X,\mathbb Q)\cap H^{p,p}(X)$,
+construct independently
+\(Z_\alpha\in CH^p(X)_{\mathbb Q}\)
+with \(\mathrm{cl}^{\rm can}_X(Z_\alpha)=\alpha\).
+The generative causal Hodge law supplies a \emph{new world and
+new geometric Hodge classes}. A further compatible Chow-return
+on the original $X$ must be \emph{constructed}, not postulated.
+The new theorem is an upstream fold law usable to analyze that
+possibility; it neither changes the universal target nor assumes it.
+\medskip
+
+\section{General causal-graph source birth, not a label change}
+Let $\Gamma$ be a finite connected undirected multigraph with
+$r\geq1$ vertices, $e$ edges (loops and parallel edges allowed), and
+\[
+                  \beta=e-r+1\geq0.
+\]
+For each vertex take an independent copy of $\mathbb P^1_{\mathbb C}$.
+For each edge choose two distinct marked smooth points, one on each
+incident component (on the same component if a loop), and identify the
+two points transversely to form an ordinary node.  The resulting
+connected reduced projective nodal curve $C_\Gamma$ has normalization
+\(\widetilde C_\Gamma=\coprod_{i=1}^r\mathbb P^1\).
+The graph is the \emph{dual incidence graph of actual geometric
+identifications}, not an arbitrary linear operator on Hodge labels.
+
+\begin{theorem}[Causal graph cycles are emergent weight-zero holes]
+For such $C_\Gamma$,
+\[
+ H^0(C_\Gamma,\mathbb Q)=\mathbb Q(0),\qquad
+ H^1(C_\Gamma,\mathbb Q)\cong H^1(\Gamma,\mathbb Q)
+       \cong\mathbb Q(0)^\beta,\qquad
+ H^2(C_\Gamma,\mathbb Q)\cong\mathbb Q(-1)^r.
+\]
+The displayed $H^1$ is a pure weight-zero mixed Hodge summand in
+cohomological degree one. It is born exactly when the causal graph has
+a nontrivial cycle, not when it is a tree.
+\end{theorem}
+\begin{proof}
+For the normalization $\nu:\widetilde C_\Gamma\to C_\Gamma$,
+the difference of the two branch values at each node gives the exact
+constant-sheaf sequence
+\[
+0\to\mathbb Q_{C_\Gamma}\to
+\nu_*\mathbb Q_{\widetilde C_\Gamma}\to
+\bigoplus_{\mathrm{node}\in E(\Gamma)}\mathbb Q_{\mathrm{node}}\to0.
+\]
+Since the normalized components are rational,
+$H^1(\widetilde C_\Gamma,\mathbb Q)=0$.  The long exact sequence
+contains
+\[
+0\to\mathbb Q\xrightarrow{\Delta}\mathbb Q^r
+\xrightarrow{B_\Gamma}\mathbb Q^e
+\to H^1(C_\Gamma,\mathbb Q)\to0,
+\]
+where $B_\Gamma$ is the oriented edge--vertex incidence matrix.
+Connectedness makes $\operatorname{rank} B_\Gamma=r-1$ (a
+spanning-tree argument, valid with loops), so the cokernel has rank
+$e-r+1=\beta$.  This is also the graph cohomology $H^1(\Gamma,\mathbb Q)$.
+The normalization sequence is compatible with mixed Hodge structures:
+its graph quotient comes from weight-zero $H^0$ of points and
+components, hence has weight zero and type $(0,0)$.
+In degree two normalization gives $\mathbb Q(-1)^r$.
+\end{proof}
+
+\section{All-dimensional causal fold laws}
+For every integer $N\geq0$ put
+\[
+       Y_{\Gamma,N}=C_\Gamma\times\mathbb P^N.
+\]
+This is an \emph{actual} projective complex realized world with complex
+dimension $N+1$; it is singular when $\Gamma$ has any nodes.
+Write $\mathcal H(t;u,v,s)$ for the degree--Hodge--weight polynomial,
+where $t$ counts ordinary cohomological degree, $u^pv^q$ a Hodge
+bidegree on $\operatorname{Gr}^W_{p+q}$, and $s$ the weight.
+With $a=t^2s^2uv$, mixed-Hodge Kunneth yields the closed all-$N$ law
+\[
+\boxed{\quad
+  \mathcal H(Y_{\Gamma,N};t,u,v,s)
+  =(1+\beta t+r\,a)\sum_{j=0}^N a^j.
+ \quad} \tag{1}
+\]
+In particular, at each $0\leq j\leq N$,
+\[
+\boxed{\ \operatorname{Gr}^{W}_{2j}
+ H^{2j+1}(Y_{\Gamma,N},\mathbb Q)
+ \cong\mathbb Q(-j)^\beta,\quad
+ (p,q)=(j,j),\quad(\chi,\delta)=(0,-1).\ }\tag{2}
+\]
+Taking $t=-1,s=1$ gives independently the compact projective
+Hodge--Deligne polynomial
+$E(Y_{\Gamma,N};u,v)=(1-\beta+r\,uv)
+\sum_{j=0}^N(uv)^j$.
+
+\begin{theorem}[Two independent causal folds produce even-degree
+charge-zero, non-pure classes]
+Let $\Gamma_1,\Gamma_2$ be two connected finite multigraphs with
+cycle ranks $\beta_1,\beta_2>0$, and with all normalization components
+$\mathbb P^1$. Define
+$Z_N=C_{\Gamma_1}\times C_{\Gamma_2}\times\mathbb P^N$.
+For every $0\leq j\leq N$,
+\[
+\boxed{\quad
+\operatorname{Gr}^{W}_{2j} H^{2j+2}(Z_N,\mathbb Q)
+\cong
+ H^1(\Gamma_1,\mathbb Q)\otimes
+ H^1(\Gamma_2,\mathbb Q)(-j)
+\cong\mathbb Q(-j)^{\beta_1\beta_2}.
+\quad}\tag{3}
+\]
+Every nonzero class in this piece has
+\[
+    k=2j+2,\quad (p,q)=(j,j),\quad
+    w=2j,\quad\chi=0,\quad\delta=-2.
+\]
+Thus the causal fold has created a genuinely rational, diagonal,
+even-degree cohomological sector which the \emph{charge-only}
+test accepts but the purity test excludes from the usual
+smooth-projective Hodge conjecture.
+\end{theorem}
+\begin{proof}
+The rational mixed-Hodge Kunneth decomposition contains
+$H^1(C_{\Gamma_1})\otimes H^1(C_{\Gamma_2})
+\otimes H^{2j}(\mathbb P^N)$ in degree $2j+2$.
+Its weight is $0+0+2j=2j$, its type is $(j,j)$, and its rank is
+$\beta_1\beta_2$. All other degree-$2j+2$ summands of
+$C_{\Gamma_1}\times C_{\Gamma_2}\times\mathbb P^N$
+have weight $2j+1$ or $2j+2$: each normalized rational-curve
+factor contributes either $H^0$ of degree/weight $(0,0)$ or
+$H^2$ of degree/weight $(2,2)$, while a graph $H^1$ contributes
+$(1,0)$. Weight deficit $-2$ therefore occurs precisely in the
+two-graph $H^1\otimes H^1$ term. This establishes the equality
+of the weight graded piece, not merely a lower bound.
+\end{proof}
+
+\begin{corollary}[The phenomenon survives every arbitrary original $X$]
+For each nonempty connected smooth projective complex variety $X$,
+$X\times Z_N$ contains, in degree $2j+2$, the nonzero rational
+weight-$2j$ direct summand of (3), embedded through
+$H^0(X,\mathbb Q)=\mathbb Q$. Thus the causal-fold diagnostic works
+with arbitrary original $X$ and arbitrarily high additional emergent
+geometric dimension \emph{in a new singular world}. It neither
+modifies nor refutes algebraicity of a prescribed class on the
+untouched $X$.
+\end{corollary}
+\begin{proof}
+Apply mixed-Hodge Kunneth, taking the $H^0(X)$ summand.
+\end{proof}
+
+\section{Reverse fold: smoothing restores pure Hodge geometry and births a native diagonal}
+There is also a genuinely \emph{Hodge-preserving} outcome of
+changing the same realized topology.  Let $\Gamma$ be connected and
+all its normalization components rational, with cycle rank
+$g=\beta\geq1$. Choose a flat projective one-parameter smoothing
+$\mathscr C\to\Delta$ of the nodal curve $C_\Gamma$ whose general
+fiber $C_t$ is a smooth projective connected curve.
+The arithmetic genus formula for nodal curves gives
+$p_a(C_\Gamma)=\sum_v g(\widetilde C_v)+\beta=g$; constancy
+of arithmetic genus in the family gives $g(C_t)=g$.
+(The theorem below quantifies over such an actual smoothing, rather
+than declaring an abstract GST graph edge to be a smooth family.)
+
+\begin{theorem}[Actual smoothing and the pure causal Hodge birth]
+For every $N\geq0$, the smooth projective
+$S_{t,N}=C_t\times\mathbb P^N$ has
+\[
+\boxed{\quad
+\mathcal H(S_{t,N};t_0,u,v,s)=
+\bigl(1+g\,t_0s(u+v)+t_0^2s^2uv\bigr)
+\sum_{j=0}^{N}(t_0^2s^2uv)^j.
+\quad}\tag{4}
+\]
+The nodal central fiber instead has
+\[
+\mathcal H(C_\Gamma\times\mathbb P^N)
+=\bigl(1+g\,t_0+t_0^2s^2uv\bigr)
+\sum_{j=0}^{N}(t_0^2s^2uv)^j
+\]
+when $\Gamma$ has one irreducible normalization component;
+for general $r$ rational components its top-degree coefficient
+is $r\,t_0^2s^2uv$ as in (1).
+Consequently the smoothing creates a pure weight-$(2j+1)$
+$H^{2j+1}$ sector of dimension $2g$ and types
+$(j+1,j)$ and $(j,j+1)$, each multiplicity $g$.
+It does \emph{not} turn the former weight-$2j$ classes into
+degree-$(2j+1)$ Hodge classes by relabeling:
+the geometric topology and cohomology change.
+\end{theorem}
+\begin{proof}
+The smooth genus-$g$ curve has $H^0=\mathbb Q(0)$,
+$H^1$ pure of weight one and Hodge numbers
+$h^{1,0}=h^{0,1}=g$, and $H^2=\mathbb Q(-1)$.
+Apply Kunneth and the projective-space Tate decomposition;
+these prove (4) for all $N$ and all $j$.
+The central-fiber formula is (1), with the correct number of
+components $r$. For a nodal \emph{irreducible} rational curve
+$r=1$ and $g$ self-nodes, the displayed contrast is literal.
+\end{proof}
+
+\begin{theorem}[Native algebraic middle diagonal born in the smooth world]
+For each nonzero genus $g$ general fiber $C_t$, choose
+a closed complex point $o\in C_t(\mathbb C)$ and set
+\[
+ Z_t=[\Delta_{C_t}]-[C_t\times\{o\}]
+                   -[\{o\}\times C_t]
+ \in CH^1(C_t\times C_t)_{\mathbb Q}.
+\]
+Its genuine canonical Betti class is nonzero, rational and
+of pure type $(1,1)$, and lies in the
+$H^1(C_t)\otimes H^1(C_t)$ Kunneth summand.
+For every $0\leq j\leq N$ the actual algebraic cycle
+$Z_t\times h^j$ on
+$C_t\times C_t\times\mathbb P^N$
+has nonzero rational pure class of type $(j+1,j+1)$,
+weight and degree $2j+2$, hence $(\chi,\delta)=(0,0)$.
+\end{theorem}
+\begin{proof}
+The class of the diagonal acts as the identity on $H^1(C_t)$
+via the standard pull--cup--push correspondence.  The two
+fiber correction terms act trivially on $H^1$, so the
+$H^1\otimes H^1$ Kunneth component of $Z_t$ is the
+nonzero identity correspondence.  The remaining $H^0\otimes H^2$
+and $H^2\otimes H^0$ components are exactly removed by the
+two fiber cycles. Every term is a genuine algebraic divisor
+class on the smooth projective surface $C_t\times C_t$,
+so its canonical Betti class is rational and $(1,1)$.
+External cup product with the hyperplane cycle $h^j$
+proves the higher-dimensional statement.
+\end{proof}
+
+This supplies \emph{both directions} of the user's visual
+intuition on actual algebraic realizations:
+(a) irreversible nodal identification gives a nonpure
+charge-zero sector, while (b) smoothing and algebraic diagonal
+geometry gives a true rational algebraic diagonal sector.
+Neither operation produces a class representing an unknown
+rational Hodge target on the original unrelated variety $X$.
+
+A stateless exact Wolfram check of (4), its nodal comparison,
+and the pure Hodge-bidegree coefficients passed 144 parameter
+tuples ($g=1,\dots,4$, $N=0,\dots,7$, all $j\leq N$).
+This checks the stated polynomial identities, not
+the geometry of smoothing or the diagonal correspondence.
+
+\section{Independent charge leakage and exact interpretation}
+The two-channel invariant $(\chi,\delta)$ distinguishes:
+(i) holomorphic algebraic Tate folds: $(\chi,\delta)$ is preserved;
+(ii) topological nonholomorphic operators on fixed smooth
+manifolds: $\chi$ may leak while $\delta$ remains zero because
+cohomology stays pure in each fixed geometric realization;
+(iii) actual singular causal graph folds: the graph cycle creates
+$\delta=-1$, and two independent folds create
+$(\chi,\delta)=(0,-2)$ in even degree.
+The sign of $\delta$ is a genuine weight-vs-degree witness, not
+the label of an abstract GST cell.
+
+A tree has $\beta=0$ and contributes no new weight-zero graph
+cohomology, although it may still produce singular nodes.
+One causal cycle gives one new independent hole at all Tate levels.
+Two independent graph cycles multiply the rank rather than merely
+adding it: $\beta_1\beta_2$.
+This produces a dimension/causality equation testable on the
+\emph{realized space itself}, unlike redefining an abstract Hodge map.
+
+\section{Exact Wolfram finite checks; scope and unresolved bridge}
+A stateless Wolfram evaluation tested the edge--vertex incidence
+ranks of a 3-vertex tree $(e=2,\beta=0)$, a triangle
+$(e=3,\beta=1)$, a bouquet of three loops
+$(r=1,e=3,\beta=3)$ and a 4-vertex 5-edge graph
+$(e=5,\beta=2)$.  The computed matrix ranks were
+$2,2,0,3$, as the spanning-tree derivation predicts.
+
+The degree/weight/Hodge generating-function coefficients (1)--(2)
+were checked in 84 parameter pairs for $1\leq\beta\leq4$,
+$0\leq N\leq5$ and every $0\leq j\leq N$.
+For two independent rational-curve node families, equation (3)
+was checked in 324 parameter tuples
+$1\leq\beta_1,\beta_2\leq3$, $0\leq N\leq7$,
+$0\leq j\leq N$.
+All checks returned exact symbolic equality in Wolfram Language.
+These checks are consistency tests; the proofs above are uniform
+and do not rely on the finite bound. No new Lean code or GitHub
+Actions compiler run is claimed for the results of this paper.
+
+\paragraph{Critical nonclaim.}
+A singular projective world has a mixed Hodge structure, not the
+pure degree-$k$ Hodge structure assumed in the classical rational
+Hodge conjecture. A charge-zero class of weight $2j$ occurring in
+cohomological degree $2j+2$ \emph{does not become} a counterexample
+to rational algebraicity on smooth projective $X$.
+For an unconditional original-$X$ proof the independent missing
+map is a genuine cycle
+$Z_\alpha\in CH^p(X)_{\mathbb Q}$ with
+$\mathrm{cl}^{\mathrm{can}}_X(Z_\alpha)=\alpha$.
+The graph-fold weight law neither assumes nor constructs this map.
+It instead supplies a new, precise causal birth/dimensional purity
+discriminator for future GST realized operations.
+
+
+\section{Kernel-verified GST integration: the Hodge shape is born with its causal space}
+The causal-to-Hodge mathematical pipeline has now been upgraded
+\emph{in place} inside the original Lean GST modules:
+
+\begin{enumerate}
+\item \texttt{GSTGraphV2UnboundedHigherCausality.lean}:
+\texttt{AnchoredCausalLoops} is a family of distinct, nonidentity
+actual higher-causal $1$-cells with identical source and target.
+The signed incidence-gradient law
+\texttt{incidenceGradient\_zero} and exact
+\texttt{loopBasis\_reconstruct} follow from the typed
+higher-causal boundaries. It is a first-skeleton loop-coordinate
+model; existence of the graph realization as a nodal scheme and
+potential extra $2$-cell relations are independent geometric
+checks. The module does not assert all loop families exist
+for a given higher-causal cosmos.
+
+\item \texttt{waves/GSTNCohomologyV3.lean}:
+\texttt{doubleCausalHoleBasis\_channelCount} proves the
+multiplicative independent-index equation
+\[
+\#\bigl(\mathrm{Fin}(g)\times\mathrm{Fin}(h)\bigr)=gh,
+\]
+and basis reconstruction/coordinate uniqueness retains every
+pair of genuine N-hole channels. This is the source multiplicity
+side of equation (3), with the actual mixed-Hodge identification
+supplied by the normalization and Kunneth proof, not a free
+abstract Hodge map.
+
+\item \texttt{GSTGradedWorldAlgebra.lean}:
+\texttt{CausalHodgeCell} carries the \emph{three} causal-born
+indices $(k,p,q)$; weight $w=p+q$ and signed charge $\chi=p-q$
+are computed from the original unlimited cosmic address.
+The theorems \texttt{causalNodalLoopBirth\_signature},
+\texttt{causalDoubleLoopBirth\_signature}, and
+\texttt{causalSmoothBirth\_signatures} prove respectively
+\[
+(\chi,\delta)_{\rm nodal}=(0,-1),\quad
+(\chi,\delta)_{\rm double}=(0,-2),\quad
+(\chi,\delta)_{\rm smooth}=(\pm1,0).
+\]
+The theorem \texttt{CausalHodgeCell.purityGap\_tate}
+proves arbitrary-dimensional Tate transport preserves the
+purity gap. Thus Hodge grading is \emph{inside the mathematical
+causal-generation account}, not a post-processing interpretation
+of an unrelated non-Euclidean chart.
+\end{enumerate}
+
+These are Lean-certified \emph{algebraic, incidence and
+finite-coordinate consequences}, verified by the pinned
+GitHub Actions builds. The geometric equivalence between
+the higher-causal graph, the actual nodal complex scheme,
+its mixed-Hodge structure, the genuine smooth deformation,
+and its canonical Chow groups is a rigorous argument in
+this mathematical manuscript, not a Lean theorem in the
+present three modules. One must never silently identify
+the verified formal types with the canonical scheme realization.
+
+\paragraph{Additional Wolfram genesis checks.}
+Beyond the earlier 552 exact test tuples, the exact
+source now checks $216$ instances of the full general
+(G1)--(G2) polynomial identity ($1\le r\le4$, $0\le g\le5$,
+$0\le N\le8$), and $540$ coefficient-pair cases
+($1\le r\le3$, $0\le g\le4$, $0\le N\le7$, $0\le j\le N$).
+All $1308$ parameter tuples passed; each coefficient-pair
+case contains two exact comparisons. Finite computational
+verification remains distinct from the uniform mathematical
+proofs and kernel verification of the Lean declarations.
+
+
+\section{All-order GST causal emergence: dimensions and Hodge multiplicity born simultaneously}
+
+The user's spatial intuition has no privileged dimension two. A higher-order
+GST world birth can contain any finite number $m$ of independently
+realized causal-identification channels. Crucially, the \emph{actual
+cohomology and its Hodge/weight filtration} must be computed \emph{from}
+the resulting geometry, not chosen by an arbitrary Hodge-to-Chow map.
+
+Choose connected nodal curves $C_{\Gamma_i}$, $i=1,\ldots,m$,
+whose normalization consists of $r_i$ copies of $\mathbb P^1$,
+whose dual graph has incidence cycle rank
+$\beta_i=e_i-r_i+1$. Put
+\[
+ W_{m,N}=\prod_{i=1}^{m} C_{\Gamma_i}\times\mathbb P^N,
+ \qquad m,N\geq0.
+\]
+The empty product for $m=0$ is a point. This is a projective
+complex scheme of dimension $m+N$; for $m>0$ and actual nodes it
+is generally singular. Its entire rational graded mixed-Hodge
+polynomial is computed, not postulated:
+\[
+\boxed{\quad
+ \mathcal H_{m,N}(t,u,v,s)=
+   \left(\prod_{i=1}^{m}(1+\beta_i t+r_i t^2s^2uv)\right)
+   \sum_{j=0}^{N}(t^2s^2uv)^j.
+\quad} \tag{5}
+\]
+This is an \emph{all-order causal law}: it does not impose a
+maximum on the number of folded worlds or their emerged geometric
+dimension. The induced Hodge data come from the realization functor,
+the normalization exact sequence and K\"unneth.
+
+\begin{theorem}[Maximum causal purity deficit: Hodge genesis for every $m$]
+For each $m\geq0$, $N\geq0$ and $0\leq j\leq N$,
+\[
+\boxed{\quad
+\operatorname{Gr}^{W}_{2j}H^{m+2j}(W_{m,N},\mathbb Q)
+  \cong\mathbb Q(-j)^{\,\prod_{i=1}^{m}\beta_i}.
+\quad} \tag{6}
+\]
+In this summand the exact causal genesis signature is
+\[
+(k,p,q,w)=(m+2j,j,j,2j), \qquad
+\boxed{\chi=p-q=0,\quad \delta=w-k=-m.}  \tag{7}
+\]
+For $m>0$, the born classes are diagonal and rational but not
+pure of their cohomological degree. For $m=0$ this reduces to
+the genuine pure Tate class of $\mathbb P^N$.
+If any $\beta_i=0$, the maximal-deficit sector vanishes, as
+predicted by its \emph{actual} causal topology.
+\end{theorem}
+\begin{proof}
+For each nodal factor, the only nonzero rational cohomology
+groups are $H^0$ of degree/weight $(0,0)$,
+graph $H^1$ of degree/weight $(1,0)$ and
+$H^2$ of degree/weight $(2,2)$.
+Thus every nodal factor contributes a nonnegative purity
+deficit $k-w$ of at most one; the projective factor has
+deficit zero. Degree $m+2j$ with weight $2j$ requires
+total deficit exactly $m$, so \emph{every} one of the $m$
+nodal factors must contribute its graph $H^1$. The
+projective factor is then necessarily its degree-$2j$
+Tate class. Applying mixed-Hodge K\"unneth, the unique
+maximal-deficit piece is the product
+\[
+ \bigotimes_{i=1}^{m}H^1(\Gamma_i,\mathbb Q)
+    \otimes H^{2j}(\mathbb P^N,\mathbb Q),
+\]
+which is $\mathbb Q(-j)^{\prod_i\beta_i}$.
+For $m=0$, the empty tensor product is $\mathbb Q(0)$,
+and the same formula gives the standard Tate class.
+The weight/degree/charge signature follows directly.
+\end{proof}
+
+\paragraph{The higher-causal $2$-cell correction: not every edge loop survives.}
+The existing Lean \texttt{AnchoredCausalLoops} recognizes a family of
+distinct nonidentity closed causal $1$-cells. This is the
+correct \emph{candidate edge basis}, but its cardinality is not
+automatically the true first-cohomology rank when genuine
+higher-dimensional causal fillings are present.
+For a \emph{finite geometric cellular realization}
+with chain groups $C_2\xrightarrow{\partial_2} C_1
+\xrightarrow{\partial_1} C_0$, the globular/higher-causal
+coherence must yield $\partial_1\partial_2=0$, and
+the actual loop-space rank is
+\[
+\boxed{\quad
+ \dim_{\mathbb Q}H_1
+ =\dim C_1-\operatorname{rank}\partial_1
+           -\operatorname{rank}\partial_2.
+\quad} \tag{8}
+\]
+This formula holds because
+$H_1=\ker\partial_1/\operatorname{im}\partial_2$.
+When the cellular realization is an ordinary graph,
+$C_2=0$, giving the earlier incidence $\beta$.
+Adding genuine $2$-cell attachments can kill previously
+counted graph cycles; it must not be interpreted as
+new nodal-curve cohomology without a valid \emph{algebraic
+geometric} realization of that attachment. This is the
+higher-causal law needed to distinguish birth from
+homotopical cancellation at all dimensions.
+
+\paragraph{The rational algebraic geometry channel.}
+An actual smoothing of the nodal curve changes the
+weight-zero graph $H^1$ into a pure weight-one Hodge
+structure of a smooth genus-$g$ curve. On the
+smooth self-product, the explicitly constructed
+diagonal correspondence supplies a \emph{canonical}
+rational $(1,1)$ Chow class, rather than using an
+arbitrary linear Hodge projection. Thus the
+causal operation controls whether the geometry born
+at a fixed emerging cohomological degree is
+(i) pure with a genuine algebraic cycle,
+(ii) mixed with a nonzero purity gap, or
+(iii) annihilated by independently realized
+higher-dimensional causal relations.
+The law does not identify arbitrary GST higher cells
+with projective schemes: the realization is the
+critical typed source of the genuine Hodge structure.
+
+\paragraph{New Wolfram uniform discriminator.}
+The coefficient of
+$t^{m+2j}s^{2j}$ in (5) is
+$(\prod_i\beta_i)(uv)^j$.
+Exact symbolic checks passed all $126$ tuples
+$0\le m\le5$, $0\le N\le5$, $0\le j\le N$,
+with independent symbolic $\beta_i,r_i$.
+The argument above, rather than bounded testing,
+proves the equation for arbitrary finite $m,N$.
+
+
+\section{Higher-dimensional causal boundaries actually realize Hodge worlds:
+an all-$n$ simple-normal-crossing-to-Calabi--Yau fold}
+
+The prior graph-fold theorem was a one-dimensional realization of the
+user's intuition.  We now exhibit a \emph{single connected, genuinely
+algebraic family} in every higher dimension whose causal incidence
+has higher faces and whose smooth realization has a nontrivial
+pure Hodge decomposition.  It is not a collection of independently
+assigned Hodge vectors.
+
+Fix $n\ge2$. In $\mathbb P_{\mathbb C}^{n}$ with homogeneous
+coordinates $x_0,\ldots,x_n$, define the projective central world
+\[
+ Y_n=\bigl\{x_0x_1\cdots x_n=0\bigr\}
+    =H_0\cup\cdots\cup H_n.
+\]
+This is a proper simple normal-crossings divisor of dimension $n-1$.
+Every subset $I$ of $k+1$ coordinate hyperplanes intersects
+transversely in $\mathbb P^{\,n-k-1}$ for $0\le k\le n-1$;
+the intersection of all $n+1$ hyperplanes is empty.
+Hence its \emph{actual geometric dual complex}, recording nonempty
+intersections and higher coherent gluing, is precisely the
+boundary $\partial\Delta^n$ of the $n$-simplex.
+
+\begin{theorem}[All-dimensional higher-causal face cancellation]
+Let $C_k$ be the rational cellular chains generated by
+$k$-dimensional faces of $\partial\Delta^n$. For
+$0\le k\le n-1$,
+\[
+ \dim C_k=\binom{n+1}{k+1}.
+\]
+The signed incidence face boundary
+\[
+\partial_k[v_0,\ldots,v_k]
+ =\sum_{i=0}^{k}(-1)^i
+ [v_0,\ldots,\widehat v_i,\ldots,v_k]
+\]
+obeys $\partial_{k-1}\partial_k=0$ by pairwise cancellation
+of the two orders of removing vertices, and has exact rank
+\[
+\boxed{\quad\operatorname{rank}\partial_k
+ =\binom{n}{k},\quad1\le k\le n-1.\quad}\tag{9}
+\]
+Consequently its reduced rational cohomology has exactly one
+nonzero group:
+\[
+\boxed{\quad\widetilde H^k(\partial\Delta^n,\mathbb Q)
+ \cong\begin{cases}
+  \mathbb Q,&k=n-1,\\0,&k\ne n-1.
+ \end{cases}\quad}\tag{10}
+\]
+In particular, $2$-cells \emph{kill} all candidate
+first-cohomology loop classes in the tetrahedral $n=3$
+configuration; a new second-cohomology class is born
+from the unfilled top causal sphere.
+\end{theorem}
+\begin{proof}
+The augmented simplicial chain complex of the \emph{full}
+$n$-simplex is contractible by coning every face to a fixed
+vertex, so its reduced homology vanishes. Deleting only the
+top $n$-simplex generator leaves the boundary chain complex.
+Exactness in degrees $1,\ldots,n-2$, the rank-nullity
+recursion, and the rank-one boundary of the omitted top cell
+give the ranks $\binom nk$ (also obtained inductively from
+Pascal's identity). The remaining top cycle is the signed
+sum of the $n+1$ facets; no $n$-chain remains to fill it.
+This proves (9)--(10).
+\end{proof}
+
+\begin{theorem}[Higher causal topology is the actual weight-zero Hodge genesis]
+On the \emph{genuine} singular projective scheme $Y_n$,
+\[
+\boxed{\quad
+ \operatorname{Gr}^W_0 H^{n-1}(Y_n,\mathbb Q)
+ \cong H^{n-1}(\partial\Delta^n,\mathbb Q)
+ \cong\mathbb Q(0).
+ \quad}\tag{11}
+\]
+Its emerged weight-zero class is rational, of Hodge type
+$(0,0)$ and signed charge zero, but in cohomological degree
+$n-1$. Thus its purity gap is exactly $\delta=-(n-1)$.
+For every additional Tate depth $0\le j\le N$, this gives
+a canonical weight-$(2j)$ contribution of type $(j,j)$
+in $H^{n-1+2j}(Y_n\times\mathbb P^N,\mathbb Q)$.
+\end{theorem}
+\begin{proof}
+For a proper simple normal crossings variety, the
+simplicial normalization/descent complex consists of the
+smooth proper intersections $H_{i_0}\cap\cdots\cap H_{i_k}$.
+The weight-zero part of its rational mixed Hodge descent
+spectral sequence is the alternating restriction complex
+of the $H^0$ of these intersections. Every such intersection
+here is connected, so this is exactly the simplicial
+cochain complex of $\partial\Delta^n$. Strictness of weights
+and degeneration of the weight-zero row identify its
+cohomology with $\operatorname{Gr}^W_0 H^k(Y_n,\mathbb Q)$.
+Apply (10) and the Tate K\"unneth rule for $\mathbb P^N$.
+This proof uses the algebraic geometry of actual strata;
+abstract globular levels alone would not establish (11).
+\end{proof}
+
+\paragraph{The reverse causal fold is a smooth, pure Hodge birth.}
+Choose a homogeneous polynomial $G_{n+1}$ of degree $n+1$
+sufficiently general and form the \emph{same family}
+\[
+\boxed{\quad
+ \mathscr X_t=\bigl\{x_0\cdots x_n+tG_{n+1}(x)=0\bigr\}
+  \subset\mathbb P^n,\quad t\in\mathbb A^1.
+\quad}\tag{12}
+\]
+It is flat, with central fiber $Y_n$. General nonzero fibers
+$X_t$ are smooth degree-$(n+1)$ projective hypersurfaces
+of complex dimension $d=n-1$. Adjunction yields
+\[
+K_{X_t}\cong
+(K_{\mathbb P^n}\otimes\mathcal O_{\mathbb P^n}(n+1))|_{X_t}
+\cong\mathcal O_{X_t}.
+\]
+Consequently their middle cohomology has a \emph{genuine
+pure weight-$d$} Hodge summand
+\[
+\boxed{\quad h^{d,0}(X_t)=h^{0,d}(X_t)=1,\qquad d=n-1.\quad}\tag{13}
+\]
+Examples are a smooth plane cubic for $n=2$, quartic K3
+surface for $n=3$, and quintic Calabi--Yau threefold
+for $n=4$. This is the user's \emph{causality-to-Hodge
+geometric structure birth} as an actual family:
+the higher-face causal central world gives the
+mixed weight-zero dual-complex sector, while the
+smooth realization has nonzero pure holomorphic middle
+cohomology. We do \emph{not} claim that a single
+central weight-zero class canonically equals
+a holomorphic top form; the degeneration comparison
+requires its own limiting mixed Hodge machinery.
+
+There is also an independent, genuinely \emph{algebraic}
+source in the smooth world: the diagonal
+$\Delta_{X_t}\subset X_t\times X_t$ is a codimension-$d$
+cycle with canonical rational Betti class and acts
+as the identity on $H^d(X_t,\mathbb Q)$. In particular
+it acts nontrivially on the born $(d,0)$ Hodge line.
+This ties the new pure Hodge realization to an actual
+algebraic correspondence, without postulating a
+Hodge-to-Chow selector.
+
+\paragraph{Fully computable topology jump.}
+The complement of the union of coordinate hyperplanes
+in $\mathbb P^n$ is $(\mathbb C^\times)^n$. Its
+Hodge--Deligne polynomial is $(uv-1)^n$. Therefore
+\[
+\boxed{\quad
+ E(Y_n;u,v)=\sum_{k=0}^{n}(uv)^k-(uv-1)^n,
+ \qquad \chi(Y_n)=n+1.
+\quad}\tag{14}
+\]
+For the smooth degree-$d_0=n+1$ hypersurface $X_t$,
+the tangent normal exact sequence gives
+$c(TX_t)=(1+h)^{n+1}/(1+d_0h)$, whence
+\[
+\boxed{\quad
+ \chi(X_t)=d_0\sum_{k=0}^{n-1}
+  \binom{n+1}{k}(-d_0)^{n-1-k}.
+\quad}\tag{15}
+\]
+The exact pairs $(\chi(X_t),\chi(Y_n))$ for
+$n=2,3,4,5$ are $(0,3),(24,4),(-200,5),(2610,6)$.
+Wolfram exact rational/integer evaluation verified
+(9) for $n=2,\ldots,7$ and (14)--(15) for
+$n=2,\ldots,9$. These finite cases independently
+discriminate the geometric dimensional birth; the
+arguments establish all $n\ge2$.
+
+\paragraph{What GST has actually gained.}
+The all-$n$ causal \emph{face structure} directly
+controls which cohomology degree is born, which
+lower loops are killed, the associated weight-zero
+Hodge sector of an actual algebraic realization,
+and the transition to a smooth pure-Hodge
+geometric world. This is stronger than the earlier
+graph-loop and charge-only laws. It is a verified
+family-specific causal/Hodge construction, not an
+independent cycle for an arbitrary prescribed
+rational $(p,p)$ class on the original unrelated $X$.
+
+
+\section{The causal toric boundary determines a genuine Hodge period equation}
+
+The all-$n$ normal-crossing-to-smooth family can be made sufficiently
+explicit that the \emph{actual holomorphic middle-form period} is
+computed by a universal operator.  This goes beyond a dimension
+counter or a freely chosen pure-Hodge projection.
+
+Choose the Dwork-type deformation
+\[
+ F_t(x)=x_0x_1\cdots x_n+
+               t\sum_{i=0}^{n}x_i^{n+1},\qquad n\ge2.
+\]
+It is an instance of (12), and for generic sufficiently small nonzero
+$t$ defines a smooth Calabi--Yau hypersurface of dimension $n-1$.
+On the dense torus of $\mathbb P^n$, the defining equation factors
+as the coordinate hyperplane boundary monomial times
+\[
+ 1+tP(x),\qquad
+ P(x)=\sum_{i=0}^n\frac{x_i^{n+1}}{\prod_{r=0}^n x_r}.
+\]
+Since $P$ is homogeneous of degree zero, it is a genuine Laurent
+polynomial in any $n$ independent torus coordinates.
+
+\begin{theorem}[Causal toric fold to holomorphic period: exact all-$n$ equation]
+The normalized torus constant-term period
+\[
+ \Phi_n(t)=\operatorname{CT}_{(\mathbb C^\times)^n}
+       \frac{1}{1+tP}
+\]
+is a formal power series with nonzero constant term and explicit
+coefficients
+\[
+\boxed{\quad
+\Phi_n(t)=\sum_{k\ge0}
+ \frac{((n+1)k)!}{(k!)^{n+1}}\,(-t)^{(n+1)k}.
+\quad} \tag{16}
+\]
+Let $z=(-t)^{n+1}$, $\theta=z\frac{d}{dz}$, and write
+$\Phi_n(z)=\sum_{k\ge0}a_kz^k$.
+Then the all-dimensional Picard--Fuchs relation is
+\[
+\boxed{\quad
+\left[\theta^{\,n}
+ -(n+1)z\prod_{r=1}^{n}\bigl((n+1)\theta+r\bigr)
+ \right]\Phi_n(z)=0.
+\quad} \tag{17}
+\]
+The torus integral of the rational differential form
+$\Omega/F_t$ gives this constant-term period near the
+toric boundary; $\operatorname{Res}_{X_t}(\Omega/F_t)$ is
+the genuine holomorphic $(n-1,0)$ form on the smooth
+geometric fiber. With the usual residue/tube comparison,
+(16)--(17) govern a holomorphic middle-form period
+of the emergent smooth Hodge structure.
+
+For $n=2$ this is the cubic elliptic curve operator
+$\theta^2-3z(3\theta+1)(3\theta+2)$.
+For $n=3$ it is the quartic K3 operator
+$\theta^3-4z(4\theta+1)(4\theta+2)(4\theta+3)$.
+For $n=4$ it is the quintic threefold operator
+$\theta^4-5z\prod_{r=1}^4(5\theta+r)$.
+\end{theorem}
+\begin{proof}
+Expand the geometric series in $t$ and then expand
+$P^\ell$ multinomially. Choose $k_i$ occurrences of the
+$i$-th Laurent monomial, so $\sum_i k_i=\ell$.
+Its exponent on $x_i$ is $(n+1)k_i-\ell$. A
+simultaneous constant term in all torus coordinates
+requires all $(n+1)k_i-\ell=0$.
+Therefore $\ell=(n+1)k$ and
+$k_0=\cdots=k_n=k$.  The unique multinomial
+constant-term coefficient is
+$((n+1)k)!/(k!)^{n+1}$, proving (16) without any
+finite cutoff.
+
+For $k\ge1$ the coefficient satisfies
+\[
+\begin{split}
+k^n a_k
+&=(n+1)\left(\prod_{r=1}^{n}
+ ((n+1)(k-1)+r)\right)a_{k-1}.
+\end{split}
+\]
+Indeed, the ratio of factorials
+$a_k/a_{k-1}$ is
+$\prod_{r=1}^{n+1}((n+1)(k-1)+r)/k^{n+1}$;
+the last numerator factor is $(n+1)k$.
+Comparing coefficients of $z^k$ gives (17),
+including $k=0$ where both sides vanish.
+The nonzero constant-term torus period is represented
+analytically, for sufficiently small $t$, by integration
+of the convergent geometric series against the
+normalized logarithmic volume form
+$\prod_{i=1}^{n} dx_i/(2\pi i x_i)$.
+Poincar\'e residue supplies the holomorphic form
+on $X_t$; the standard residue/tube comparison
+identifies the corresponding smooth-fiber period
+up to the conventional normalization.
+\end{proof}
+
+\paragraph{GST interpretation of (17).}
+The signed incidence faces of the toric normal-crossing
+boundary dictate the dimension of the newly born
+cohomological sector.  The \emph{same} all-$n$
+causal/smoothing realization determines the Laurent
+polynomial, whose constant terms force the entire
+holomorphic period and its order-$n$ differential
+equation. The Hodge generator is therefore computed as
+a geometric output of the causal-dimensional deformation,
+not declared from an unrelated fixed Hodge space.
+Equation (17) does not claim that its holomorphic
+$(n-1,0)$ class is an algebraic $(p,p)$ cycle class;
+the actual smooth algebraic diagonal correspondence
+discussed above still detects its period and acts
+as identity on the middle cohomology.
+
+Exact Wolfram checks verified the factorial coefficient
+recurrence for $2\le n\le8$ and $1\le k\le12$
+($84$ independent integer identities). The mathematical
+proof of (16)--(17) is the general multinomial argument.
+
+
+\section{GST causal boundary to maximally unipotent Hodge-period monodromy:
+an exact all-dimensional logarithmic tower}
+
+The previous causal toric family already furnishes the exact
+Picard--Fuchs differential operator
+\[
+ L_n=\theta^n-(n+1)z\prod_{r=1}^{n}((n+1)\theta+r),
+ \qquad \theta=z\,d/dz,\qquad n\ge2.
+\]
+Here $d=n-1$ is the dimension of the smooth Calabi--Yau
+hypersurface, whereas the central $n$-simplex boundary
+$\partial\Delta^n$ is the actual causal dual complex of the
+simple-normal-crossing world. We now extract \emph{the entire
+logarithmic solution tower} rather than only its holomorphic period.
+
+For $\rho$ near $0$ define the rational functions
+\[
+ a_0(\rho)=1,\qquad
+ a_k(\rho)=\prod_{h=1}^{k}
+ \frac{(n+1)\prod_{r=1}^{n}((n+1)(h-1+\rho)+r)}
+ {(h+\rho)^n},
+ \quad k\ge1,
+\]
+and a convergent local Frobenius family (with chosen branch of
+$\log z$)
+\[
+ \mathcal F_n(z,\rho)=z^\rho
+ \sum_{k=0}^{\infty}a_k(\rho)z^k.
+\]
+The coefficient ratio tends in modulus to $(n+1)^{n+1}$ as
+$k\to\infty$, so these series converge locally for
+$|z|<(n+1)^{-(n+1)}$, uniformly in $\rho$ on compact neighborhoods
+of zero avoiding the negative integral poles.
+
+\begin{theorem}[Causal genesis forces a maximal Picard--Fuchs
+logarithmic tower in every dimension]
+For the specific operator $L_n$ and the series above,
+\[
+ \boxed{\quad L_n\mathcal F_n(z,\rho)=\rho^n z^\rho.\quad}
+ \tag{18}
+\]
+For each $0\le j<n$ the functions
+\[
+ \boxed{\quad
+ \psi_j(z)=\frac1{j!}
+  \left.\frac{\partial^j}{\partial\rho^j}
+  \mathcal F_n(z,\rho)\right|_{\rho=0}
+ \quad}\tag{19}
+\]
+are \emph{linearly independent actual solutions} of
+$L_n\psi_j=0$. Their leading logarithmic parts are
+$\psi_j(z)=(\log z)^j\Phi_n(z)/j!$ plus terms of lower
+logarithmic degree; in particular $\psi_0=\Phi_n$.
+
+Analytic continuation once anticlockwise around $z=0$
+acts on this $n$-dimensional Picard--Fuchs solution local
+system by
+\[
+\boxed{\quad
+ M\psi_j=\sum_{h=0}^{j}
+ \frac{(2\pi i)^{j-h}}{(j-h)!}\psi_h.
+\quad}\tag{20}
+\]
+Consequently $M$ is unipotent with exactly one Jordan block
+of size $n$, and for its logarithm
+$\mathcal N=\log M$,
+\[
+\boxed{\quad
+ \mathcal N^n=0,\qquad
+ \mathcal N^{n-1}\ne0,\qquad
+ \operatorname{rank}(\mathcal N^{n-1})=1.
+\quad}\tag{21}
+\]
+Thus the length $n$ of the analytic Hodge-period degeneration
+is governed by the \emph{emergent dimension} $d=n-1$.
+\end{theorem}
+\begin{proof}
+Applying $\theta$ to $z^{k+\rho}$ multiplies it by
+$k+\rho$. At exponent $z^{k+\rho}$ for $k\ge1$ the
+coefficient in $L_n\mathcal F_n$ is
+\[
+(k+\rho)^n a_k(\rho)-
+(n+1)\prod_{r=1}^{n}((n+1)(k-1+\rho)+r)
+a_{k-1}(\rho),
+\]
+which vanishes \emph{identically} by the defining product
+formula. The only remaining term is that for $k=0$,
+namely $\rho^n z^\rho$, proving (18).
+Differentiating this identity $j<n$ times at $\rho=0$
+gives zero, proving all the differential equations.
+At $\rho=0$, the product formula reduces to
+$a_k(0)=((n+1)k)!/(k!)^{n+1}$ and so $\psi_0$
+is the actual period series from equation (16).
+Since $\mathcal F_n$ contains $z^\rho=e^{\rho\log z}$
+and its analytic coefficient series has nonzero
+constant term, $\psi_j$ contains a new leading
+term $(\log z)^j/j!$; triangularity in powers
+of $\log z$ proves independence.
+A loop around zero changes $\log z$ to
+$\log z+2\pi i$, and therefore multiplies
+$\mathcal F_n$ by $e^{2\pi i\rho}$ while leaving
+each coefficient $a_k(\rho)$ unchanged.
+The Leibniz rule for the $\rho$ derivatives
+gives (20) exactly. Its matrix is
+$\exp(2\pi i J_n)$, where $J_n$ is the
+strict one-superdiagonal Jordan nilpotent.
+As $J_n^n=0$ but
+$J_n^{n-1}$ has a single nonzero entry,
+its logarithm
+$\mathcal N=2\pi i J_n$ obeys (21).
+\end{proof}
+
+\begin{corollary}[Exact topological and analytic causal extremal rank match]
+The actual normal-crossing central world $Y_n$
+has dual complex $\partial\Delta^n$. Therefore
+the two independently derived invariants satisfy
+\[
+\boxed{\quad
+ \dim_{\mathbb Q}\widetilde H^{n-1}
+    (\partial\Delta^n,\mathbb Q)
+ = \operatorname{rank}_{\mathbb C}\mathcal N^{n-1}
+ =1,\qquad n\ge2.
+\quad}\tag{22}
+\]
+\end{corollary}
+\begin{proof}
+The left side is one by the explicit signed-simplex
+boundary computation (10). The right side is one
+by the independent Frobenius and monodromy
+calculation (21). Both computations originate
+from the \emph{same concrete toric causal family}.
+\end{proof}
+
+\paragraph{Crucial geometric comparison and parameter convention.}
+Equation (22) is an exact numerical rank match, not yet
+a canonical isomorphism between integral vanishing cycles,
+the limiting mixed Hodge structure, and the top
+dual-complex class. Establishing such an identification
+requires an explicit degeneration/specialization theorem
+with its semistability and comparison hypotheses.
+Moreover $z=(-t)^{n+1}$ is a ramified period parameter
+on the chosen toric invariant family. A full loop of
+the original deformation parameter $t$ induces
+$n+1$ loops of $z$, so the corresponding period
+monodromy is $M_t=M_z^{n+1}$; its logarithm has
+the same maximal nilpotency index $n$, with
+$\log M_t=(n+1)\log M_z$.
+The full cohomology of a smooth fiber may be
+larger than the $n$-dimensional period subsystem:
+the theorem proves the operator's local-system
+monodromy, and does not silently assert it acts
+as one block on \emph{all} of primitive Betti cohomology.
+
+\paragraph{Exact independent computational tests.}
+The zero-parameter coefficients and Frobenius recurrence
+were checked with rational symbolic Wolfram arithmetic for
+$n=2,\dots,7$ (36 coefficient cases), and
+$n=2,\dots,6$ (25 parameter-dependent recurrence cases),
+respectively. The single Jordan block monodromy
+nilpotency was checked over the exact field
+$\mathbb Q(\pi i)$ for $n=2,\dots,7$:
+$(M-I)^n=0$ and $(M-I)^{n-1}\ne0$.
+All tests passed with corrected treatment of the
+identity-matrix term. The proof itself is the
+unbounded algebraic recurrence and logarithmic
+independence argument above, not a finite extrapolation.
+
+
+\section{Causal monodromy selects globally transported native algebraic Hodge sources}
+
+The emergent Hodge period is not the end of the causal story:
+global \emph{algebraic cycles} have a geometric constraint that
+can be read off from the same higher-causal monodromy.
+
+\begin{theorem}[Relative native cycle classes are causally invariant]
+Let $f:\mathscr X^\circ\to S^\circ$ be a smooth proper family
+of complex projective varieties over a connected complex base,
+and let $\mathscr Z\in CH^p(\mathscr X^\circ)_{\mathbb Q}$
+be a globally defined relative codimension-$p$ Chow cycle.
+For any basepoint $s$ its canonical rational Betti class
+\[
+ \alpha_s=\operatorname{cl}_{X_s}^{\rm can}
+   (\mathscr Z|_{X_s})\in H^{2p}(X_s,\mathbb Q)
+\]
+is invariant under the geometric Gauss--Manin monodromy:
+\[
+ \boxed{\quad T_\gamma(\alpha_s)=\alpha_s
+   \quad\text{for every }\gamma\in\pi_1(S^\circ,s).\quad}
+ \tag{23}
+\]
+\end{theorem}
+\begin{proof}
+The global cycle class $\operatorname{cl}_{\mathscr X^\circ}
+(\mathscr Z)\in H^{2p}(\mathscr X^\circ,\mathbb Q)$
+restricts to each smooth fiber's canonical cycle
+class, by naturality of algebraic cycle classes.
+Its restrictions define a locally constant section
+of the locally constant sheaf $R^{2p}f_*\mathbb Q$:
+locally trivialize the smooth proper family and
+observe that restricting the fixed global class
+is independent of the fiber point in a contractible
+base neighborhood. The local system section is
+single-valued globally, hence is invariant under
+analytic continuation along every loop.
+\end{proof}
+
+\begin{theorem}[Maximal causal Picard--Fuchs monodromy has precisely one
+invariant direction]
+For the rank-$n$ logarithmic Picard--Fuchs solution system
+of (18)--(21), the subspace invariant under a loop around
+the toric causal boundary is
+\[
+ \boxed{\quad\ker(M-I)=\ker\mathcal N
+   =\mathbb C\psi_0,\qquad\dim\ker(M-I)=1.\quad}
+ \tag{24}
+\]
+\end{theorem}
+\begin{proof}
+Write $\mathcal N=2\pi iJ_n$ in the Frobenius
+basis. Since
+\[
+ M-I=\exp(\mathcal N)-I
+   =\mathcal N\left(I+\frac{\mathcal N}{2!}
+         +\cdots+\frac{\mathcal N^{n-1}}{n!}\right),
+\]
+the second factor is invertible (a unipotent
+polynomial in nilpotent $\mathcal N$) and
+commutes with $\mathcal N$. Thus $\ker(M-I)
+=\ker\mathcal N$. By (20), $\mathcal N$ lowers
+$\psi_j$ to $2\pi i\psi_{j-1}$ for $j\ge1$,
+and kills $\psi_0$, so the kernel is
+exactly $\mathbb C\psi_0$.
+\end{proof}
+
+\begin{corollary}[Source selection in a certified geometric period factor]
+Suppose a monodromy-stable geometric rational Betti subsystem of a
+smooth family is \emph{identified by a supplied geometric comparison}
+with the rank-$n$ period local system above (or its dual).
+Then the complex span inside that subsystem of canonical
+classes of \emph{globally defined relative Chow cycles}
+has dimension at most one.
+This applies directly to degree $2p$ only when the subsystem
+is in that degree; in the Calabi--Yau middle degree $d=n-1$
+this requires $d=2p$.
+\end{corollary}
+\begin{proof}
+By (23), each global relative Chow class has fixed monodromy
+and hence belongs to $\ker(T-I)$.
+Under the supplied local-system identification,
+the fixed subspace has dimension one by (24).
+For the dual local system of a single unipotent
+Jordan block the same dimension statement holds.
+\end{proof}
+
+This is a \emph{native algebraic source restriction
+derived from actual causality}.
+It is neither a freely imposed Hodge label nor a
+proof that a fiberwise rational Hodge class not fixed by
+monodromy can never be algebraic: special-fiber Chow
+cycles need not extend as cycles over the entire
+punctured family. In particular, one must not
+replace \emph{global relative source} with
+\emph{arbitrary original-$X$ source}.
+The theorem isolates a concrete, falsifiable
+geometric source-birth mechanism: fiberwise
+algebraic classes not obtained by globally
+transported cycles are precisely the kind of
+extra sources a topology-changing GST operation
+would have to construct and compare canonically.
+
+
+\section{Complete causal-monodromy weight filtration from all $n$ folded dimensions}
+
+The monodromy logarithm yields not merely a single surviving
+direction, but a \emph{canonical filtration whose levels are forced
+by the emergent dimension}. Let $V_n$ denote the rank-$n$
+Picard--Fuchs local solution system from (19)--(21) and set
+$d=n-1$. In the normalized logarithmic basis
+$(\psi_0,\ldots,\psi_{n-1})$, the lowering operator
+$J_n=\mathcal N/(2\pi i)$ satisfies
+$J_n\psi_0=0$, $J_n\psi_j=\psi_{j-1}$ for $j\ge1$.
+
+\begin{theorem}[Exact all-$n$ causal monodromy filtration]
+For every $1\le k\le n$,
+\[
+\boxed{\quad
+ \ker\mathcal N^k
+ =\operatorname{span}_{\mathbb C}
+   \{\psi_0,\ldots,\psi_{k-1}\},
+ \qquad \dim\ker\mathcal N^k=k.
+\quad}\tag{25}
+\]
+Define
+\[
+ W_{2r}V_n=W_{2r+1}V_n
+    :=\ker \mathcal N^{r+1}
+       \quad (0\le r\le d),
+ \qquad W_{\ell}V_n=0\ \ (\ell<0),
+\]
+and $W_\ell V_n=V_n$ for $\ell\ge2d$.
+Then
+\[
+\boxed{\quad
+ \dim\operatorname{Gr}_{2r}^{W}V_n=1
+ \ (0\le r\le d),\qquad
+ \operatorname{Gr}_{2r+1}^{W}V_n=0,
+\quad}\tag{26}
+\]
+and $\mathcal N W_\ell\subseteq W_{\ell-2}$.
+For every $h\ge0$, the induced
+\[
+\boxed{\quad
+\mathcal N^h:
+ \operatorname{Gr}_{d+h}^{W}V_n
+ \overset{\sim}{\longrightarrow}
+ \operatorname{Gr}_{d-h}^{W}V_n
+\quad}\tag{27}
+\]
+is an isomorphism (with both sides zero when their
+indices fall outside the nonzero graded parity/range).
+Thus $W_\bullet$ is exactly the \emph{monodromy
+weight filtration centered at the emergent
+Calabi--Yau middle degree $d=n-1$} on this
+period local system.
+\end{theorem}
+\begin{proof}
+Repeated lowering gives
+$\mathcal N^k\psi_j=(2\pi i)^k\psi_{j-k}$
+for $j\ge k$, and zero for $j<k$,
+so its kernel has exactly the basis
+in (25). The filtration has one new independent
+basis vector at each even index, proving (26).
+Because $\mathcal N$ decreases the logarithmic
+basis index by one, it decreases this weight
+filtration by exactly two. To verify (27),
+for any pair of nonzero graded pieces write
+$d+h=2r$, $d-h=2(d-r)$, so $h=2r-d$ and
+$r-h=d-r$. The nonzero generator represented
+by $\psi_r$ maps to
+$(2\pi i)^h\psi_{d-r}$, a nonzero generator
+of the target one-dimensional graded piece.
+This proves the asserted isomorphisms and all
+boundary cases including $h=0$.
+\end{proof}
+
+\paragraph{Intrinsic causal significance.}
+The higher-dimensional causal incidence complex
+supplied the actual top sphere of the toric boundary,
+the Picard--Fuchs recurrence supplied the entire
+logarithmic period tower, and \emph{nilpotence itself}
+now produces the complete monodromy weight filtration:
+there is no freely assigned choice of Hodge grades
+in this construction. To identify its graded factors
+with the \emph{limiting mixed Hodge structure of the
+entire geometric middle cohomology} one still needs
+the actual degeneration comparison; the theorem is
+unconditional on the explicitly constructed rank-$n$
+period differential equation and its solution system.
+
+Exact Wolfram rank-nullity checks found the full
+staircase $(1,2,\ldots,n)$ for
+$\dim\ker J_n^k$, $1\le k\le n$ and $n=2,\ldots,9$.
+The all-dimensional theorem is proved above, not
+inferred from those eight numerical dimensions.
+
+
+\section{Uniform emergence in the presence of any original smooth projective $X$}
+
+The causal-dimensional Hodge mechanism is not restricted to the
+explicit Calabi--Yau factor as the \emph{entire} ambient world.
+
+\begin{corollary}[Universal original-$X$ stabilization of a genuinely born
+Hodge period]
+Let $X$ be any nonempty connected smooth projective complex
+variety, without assuming a form for its dimensions or Hodge
+numbers, and let $X_t$ be a smooth Dwork hypersurface from
+(12) in complex dimension $d=n-1$.
+Then the algebraic product world
+\[
+  \mathscr Y_{X,t}=X\times X_t
+\]
+is smooth projective, and the pulled-back genuine
+holomorphic form
+\[
+  \omega_{X,t}=\operatorname{pr}_{X_t}^*\omega_t
+\]
+defines a nonzero class of Hodge type $(d,0)$ inside
+$H^d(\mathscr Y_{X,t},\mathbb C)$.
+The scalar period of this class against a product cycle
+$\{x\}\times\Gamma_t$, where $x\in X(\mathbb C)$,
+obeys the same all-$n$ Picard--Fuchs equation
+$L_n\Phi_n=0$.
+Thus the explicit higher-causal Hodge-period genesis
+exists after stabilization by \emph{every} original $X$,
+with the same maximal logarithmic monodromy
+and monodromy-weight filtration.
+\end{corollary}
+\begin{proof}
+The K\"unneth map injects
+$H^0(X,\mathbb Q)\otimes H^d(X_t,\mathbb Q)$
+into $H^d(X\times X_t,\mathbb Q)$.
+The generator $1_X$ has type $(0,0)$
+and is invariant under all deformations of the second
+factor. The form $1_X\otimes\omega_t$
+is therefore nonzero and type $(d,0)$.
+Its product-cycle period is
+$\int_{\{x\}\times\Gamma_t}
+\operatorname{pr}_{X_t}^*\omega_t
+=\int_{\Gamma_t}\omega_t$, so the scalar period,
+differential equation and its analytic continuation
+are exactly those already established for $X_t$.
+All geometric constructions are algebraic on
+the stated smooth product.
+\end{proof}
+
+This is an \emph{arbitrary original-$X$ realization}
+of the user's causal-Hodge emergence mechanism,
+not an algebraic representative for an
+\emph{arbitrarily prescribed} original-$X$
+Hodge class $\alpha$. The latter source-birth
+claim is a logically stronger target, and the
+product cycle constructed here has its class
+in the independently specified auxiliary factor.
+
+
+\section{Causal monodromy correspondence amplification: invariant vectors versus invariant operators}
+
+The previous one-channel invariant-vector theorem is not a bound on
+monodromy-compatible algebraic correspondences.  This is the
+essential distinction between \emph{classes} and \emph{operations
+on the born Hodge structure}.  In the Dwork rank-$n$ Picard--Fuchs
+period subsystem of the same all-dimensional geometric causal
+degeneration, fix the rational model
+\[
+ V=\mathbb Q^n,\qquad
+ J e_0=0,\quad J e_i=e_{i-1}\quad(1\le i<n),\qquad
+ T=I+J.
+\]
+The actual complex analytic local monodromy is
+$\exp(2\pi iJ)$ on a suitable logarithmic period basis.
+The rational $T$ is a Jordan-equivalent model, not an
+assertion that this period basis is a canonical Betti
+$\mathbb Q$-basis.
+
+\begin{theorem}[Invariant correspondence amplification for all $n$]
+For every $n\ge1$,
+\[
+ \dim_{\mathbb Q}\ker(T-I)=1,\qquad
+ \dim_{\mathbb Q}\{A\in\operatorname{End}_{\mathbb Q}(V):
+              AT=TA\}=n,
+\]
+and more strongly,
+\[
+ \boxed{\operatorname{Cent}(T)=\mathbb Q[J]
+       =\operatorname{span}_{\mathbb Q}
+         \{I,J,J^2,\ldots,J^{n-1}\}.}\tag{C1}
+\]
+Consequently the rank-one monodromy-fixed class channel is
+compatible with an \emph{$n$-dimensional} space of abstract
+monodromy-invariant operators acting on the SAME born Hodge-period
+subsystem. Each power is a genuinely distinct operator, not
+a repeat of the fixed class.
+\end{theorem}
+\begin{proof}
+$Jv=0$ if and only if $v$ is a multiple of $e_0$.
+Any commuting endomorphism $A$ is determined by $A(e_{n-1})$
+because $e_{n-1}$ is cyclic:
+$\{J^k e_{n-1}:0\le k<n\}$ is a basis of $V$.
+Given an arbitrary $v=A(e_{n-1})$, there is a
+unique polynomial $P(J)$ of degree less than $n$
+with $P(J)e_{n-1}=v$.  The operators $A$ and $P(J)$
+commute with $J$ and agree on the cyclic generator,
+hence on the entire basis.  Conversely every polynomial
+in $J$ commutes with $T=I+J$.
+Independence of $I,J,\ldots,J^{n-1}$ follows by applying
+a vanishing linear combination to $e_{n-1}$.
+\end{proof}
+
+\begin{proposition}[Genuine algebraic diagonal realizes a full-rank invariant tensor]
+For any smooth projective complex fiber $Y_t$ of the
+explicit Dwork family, its genuine algebraic diagonal
+$\Delta_{Y_t}\subset Y_t\times Y_t$ has canonical rational
+Betti class of pure type $(d,d)$ and acts as the identity
+on $H^d(Y_t,\mathbb Q)$, $d=\dim_{\mathbb C}Y_t$.
+In particular its action on the Dwork monodromy-invariant
+period subvariation (when identified with a genuine rank-$n$
+Betti subsystem) has rank $n$, and
+\[
+        M\,\mathrm{Id}\,M^{-1}=\mathrm{Id}.
+\tag{C2}
+\]
+This is an actual geometric source of a full-rank
+\emph{invariant correspondence tensor}, despite the
+rank-one monodromy-fixed \emph{vector} dimension.
+\end{proposition}
+\begin{proof}
+The cycle of the diagonal is algebraic on every smooth
+fiber and over the smooth part of the family. The
+cycle-class naturality and the pull--cup--push identity
+give the identity action on every Betti cohomology degree.
+The identity commutes with each geometric monodromy
+transformation, and its restriction to a rank-$n$
+invariant subsystem remains the identity.
+\end{proof}
+
+\paragraph{Precise new original-$X$ realization.}
+For an arbitrary smooth projective connected original variety $X$,
+put $Z_t=X\times Y_t$.  The algebraic relative
+diagonal $\Delta_{Z_t}$ acts on
+$H^a(X,\mathbb Q)\otimes V_t$ as
+$\mathrm{Id}_{H^a(X)}\otimes\mathrm{Id}_{V_t}$,
+and this action commutes with $I\otimes M$.
+Thus the **whole** rank-$n$ causal Hodge-period system
+survives as a genuine algebraic correspondence operator
+over \emph{each arbitrary initial $X$}, rather than
+reducing its effect to a solitary invariant period vector.
+The new claim is about an operator on the born geometric
+cohomology, not an algebraic cycle representing a
+prescribed unknown $\alpha\in H^{2p}(X,\mathbb Q)$.
+
+\paragraph{Hodge-filtered source gate (the non-circular classification).}
+The full centralizer $\mathbb Q[J]$ is an algebraic
+\emph{linear-algebra} operator space; it is \emph{not}
+automatically spanned by genuine algebraic correspondences.
+On any fixed smooth projective fiber, the realizable
+operators belong to
+\[
+  \boxed{
+  \operatorname{Im}\!\left(
+    CH^{d}(Y_t\times Y_t)_{\mathbb Q}
+    \xrightarrow{\mathrm{cl}^{\mathrm{can}}}
+       \operatorname{End}_{\mathbb Q}H^{d}(Y_t,\mathbb Q)
+  \right)
+  \ \subseteq\ \operatorname{End}_{\mathrm{HS}}H^{d}(Y_t,\mathbb Q).
+  }\tag{C3}
+\]
+Here the cycle-to-endomorphism arrow denotes the
+correspondence action after projecting to the specified
+cohomological degree.  The rank-$n$ monodromy centralizer
+must additionally satisfy geometric cycle-class
+realizability.  The nilpotent logarithm $J$ generally
+does not preserve the Hodge decomposition on a
+fixed smooth fiber; commuting with monodromy does
+not assert $J$ is an algebraic correspondence.
+The relative diagonal gives the concrete element
+$I$ in the intersection for every smooth fiber.
+
+\paragraph{Why this matters for the user's GST spatial mechanism.}
+The causal fold does not merely produce isolated
+Hodge cells with labels. It produces an evolving
+\emph{cohomological local system}, full monodromy,
+its $n$-dimensional commuting algebra, and an
+actual algebraic correspondence acting across
+the entire emerged period subspace. The distinction
+between an invariant \emph{vector} and an invariant
+\emph{operator} is the missing higher-order
+causality invariant; the original-X source
+question now has an explicit, non-circular
+cycle-realization gate, not an assumed
+Hodge-to-Chow selector.
+
+
+\subsection{All-original-$X$ causal operator multiplication law}
+
+The preceding operator theorem admits an exact \emph{uniform
+original-$X$} extension, without assuming any algebraic
+representative of a Hodge class on $X$.
+Let $X$ be any smooth projective complex variety and
+fix a cohomological degree $a$ with finite rational Betti
+dimension
+$m=\dim_{\mathbb Q}H^a(X,\mathbb Q)$.
+For the independent auxiliary rank-$n$ Dwork
+local system $V_n$, write
+\[
+U_{X,n} = H^a(X,\mathbb Q)\otimes_{\mathbb Q}V_n,\qquad
+J_{X,n} = I_m\otimes J_n.
+\]
+If $m=0$ the statement reduces to the zero space.
+For every $m,n\ge 1$, the geometry of the product
+family with the fixed original $X$ gives the following exact
+cohomological causal amplification.
+
+\begin{theorem}[Original-$X$ causal monodromy commutant law]
+\[
+\boxed{
+\begin{aligned}
+\dim_{\mathbb Q}\ker J_{X,n} &=m,\\
+\operatorname{Cent}(J_{X,n})
+   &\cong M_m(\mathbb Q[J_n]),\\
+\dim_{\mathbb Q}\operatorname{Cent}(J_{X,n})
+   &=m^2n.
+\end{aligned}
+}\tag{C4}
+\]
+The genuine canonical algebraic diagonal
+$\Delta_{X\times Y_t}$ supplies an invariant
+correspondence acting as identity on the \emph{entire}
+rank-$mn$ tensor subsystem. This is a nonzero,
+full-rank original-$X$-uniform \emph{operator}
+realization of the causal dimension fold.
+\end{theorem}
+\begin{proof}
+Choose any rational basis of $H^a(X,\mathbb Q)$
+and write an endomorphism of $U_{X,n}$
+as an $m\times m$ block matrix with blocks
+$A_{ij}\in\operatorname{End}_{\mathbb Q}(V_n)$.
+The commutation equation with
+$I_m\otimes J_n$ is exactly
+$A_{ij}J_n=J_nA_{ij}$ for each pair $(i,j)$.
+The single-block centralizer theorem (C1) gives
+$A_{ij}\in\mathbb Q[J_n]$, with independent
+$n$ scalar parameters per block. Hence the
+centralizer has $m^2n$ rational dimensions.
+Since $\ker J_n$ has dimension one,
+$\ker (I_m\otimes J_n)$ has dimension $m$.
+For the geometric assertion, the relative
+diagonal is an actual cycle of codimension
+$\dim X+\dim Y_t$ on
+$(X\times Y_t)\times(X\times Y_t)$,
+and its canonical class acts by the identity
+under pull--cup--push, so it preserves
+every invariant Betti subsystem and has rank $mn$
+on the indicated tensor summand.
+\end{proof}
+
+\paragraph{Weight-filtration compatibilities inside the same causal birth.}
+On the limit mixed Hodge system the nilpotent
+logarithm has type $(-1,-1)$ after passing to the
+correct weight-graded pieces and satisfies
+\[
+N:\operatorname{Gr}^{W}_{w}V
+ \longrightarrow\operatorname{Gr}^{W}_{w-2}V(-1).
+\tag{C5}
+\]
+At the level of a born GST graded cell
+$(k,p,q)$ this is the exact compatible operation
+\[
+(k,p,q)\stackrel{N^r}{\longmapsto}(k,p-r,q-r),
+\qquad 0\le r\le\min(p,q).
+\tag{C6}
+\]
+Thus $k$ stays fixed, Hodge charge $p-q$ stays
+fixed, and the purity gap
+$(p+q)-k$ drops by precisely $2r$.
+By contrast, the previously verified Tate
+emergence fold sends $(k,p,q)$ to
+$(k+2j,p+j,q+j)$ and preserves the purity gap.
+These are two operators \emph{within one
+causally generated Hodge structure}, not an
+artificial dichotomy between GST and Hodge.
+The accompanying existing
+\texttt{GSTGradedWorldAlgebra.lean} is updated
+in place with \texttt{monodromyLower},
+\texttt{charge\_monodromyLower},
+\texttt{purityGap\_monodromyLower}, and
+\texttt{monodromyLower\_comp}.
+The abstract model does not assert a canonical
+limit-MHS type for an arbitrary un-realized GST world:
+that type comes from the actual proper degeneration.
+
+\paragraph{Algebraic-source precision.}
+The all-original-$X$ operator identity says
+that a \emph{single actual diagonal Chow source}
+has rank-$mn$ action; it does not say
+there are $m^2n$ independent algebraic
+correspondences. Algebraic correspondences form
+the subset satisfying genuine canonical Betti
+cycle-class and Hodge-morphism conditions
+(C3). In particular, an arbitrary prescribed
+$\alpha\in H^{p,p}(X,\mathbb Q)$ cannot be
+created from the identity operator without
+an actual one-legged Chow representative.
+This sharp separation follows \emph{inside}
+the causal-to-Hodge-to-cycle realization chain.
+
+\end{document}

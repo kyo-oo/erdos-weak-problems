@@ -1,0 +1,332 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=22mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Whole-Realization \(\omega\)-Causal Folds: Emergent-Dimension Hodge Genesis and the Canonical Algebraicity Channel}
+\date{23 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We take the owner's spatial hypothesis literally: GST General Space itself is dimensionless;
+a geometric world of dimension \(d\), its topology, causal maps, whole Hodge decomposition,
+and the genuine canonical algebraic cycle map occur only after realization.
+For every arbitrary smooth projective original \(X\), an unbounded causal tower
+of actual projective-bundle dimension births has an exact \emph{triple-spectrum}
+law: the full pure Hodge polynomial, entire rational \((p,p)\)-fiber polynomial,
+and genuine canonical algebraic-image polynomial all transform with the same
+positive causal fold factor. Their difference obeys an exact defect-transport
+equation. A hypothetical first missing original-\(X\) Hodge class survives each
+stage and injects into the algebraic direct-limit sector of the \(\omega\)-tower.
+For equal rank-one births the higher-degree defect coefficients have a
+precise binomial growth law. This is a new unlimited-emergent-dimension
+mathematical test of the \emph{whole} realization, not a proof that every
+rational Hodge class is algebraic. It identifies exactly which observable
+of the GST fold hypothesis can and cannot imply the classical conjecture.
+\end{abstract}
+
+\section{GST ontology, dimensional emergence, and the owner's hypothesis}
+The types in \texttt{GSTGeneralSpace.lean} define a General Space with points,
+composable paths, and identities but \emph{no intrinsic numerical dimension}.
+Its \texttt{Realization} and local scheme-dimension observation modules attach
+concrete dimension and topology only to an observed realization.
+In \texttt{GSTGraphV2UnboundedHigherCausality.lean}, an identity tower
+supplies globular cells at all natural levels; a higher-cell level is
+\emph{not} automatically the complex dimension of an actual projective variety.
+To move to Hodge theory one must furnish an actual certified smooth projective
+geometric realization and maps of the correct native Chow and rational Betti types.
+
+As in the owner's original experiment, \emph{assume temporarily}
+that the rational Hodge conjecture is true on every smooth projective
+complex realization: \(\operatorname{Hdg}^p_{\mathbb Q}(X)=
+\operatorname{im}\operatorname{cl}^{can}_{X,p}\).
+Use the assumption to predict the effects of arbitrary folds and then
+\emph{remove} it before asking whether the derived equations imply it.
+Never reinsert that assumption as a premise of the final conclusion.
+
+For any smooth projective (possibly disconnected) complex \(X\) of
+dimension \(d\), the realized \emph{full} pure Hodge polynomial is
+\[
+ \mathcal H_X(u,v)=\sum_{a,b=0}^d h^{a,b}(X)\,u^av^b.
+\]
+The actual rational diagonal Hodge-fiber, canonical algebraic image
+and canonical defect \emph{retain multiplicity}:
+\[
+ F_{X,p}=H^{2p}(X,\mathbb Q)\cap H^{p,p}(X),\quad
+ A_{X,p}=\operatorname{im}\bigl[
+ CH^p(X)_{\mathbb Q}\xrightarrow{\mathrm{cl}^{can}_{X,p}}
+ H^{2p}(X,\mathbb Q)\bigr],\quad
+ D_{X,p}=F_{X,p}/A_{X,p}.
+ \tag{1}
+\]
+In contrast, \texttt{forgetMultiplicityToGST} collapses all \(p\)-fiber
+basis directions to one cosmic address, and cannot be substituted for (1).
+Define finite rational-coefficient polynomials
+\[
+ \mathcal F_X(t)=\sum_p(\dim_{\mathbb Q} F_{X,p})t^p,\quad
+ \mathcal A_X(t)=\sum_p(\dim_{\mathbb Q} A_{X,p})t^p,\quad
+ \mathcal D_X(t)=\mathcal F_X(t)-\mathcal A_X(t).
+ \tag{2}
+\]
+The precise rational Hodge conjecture is \(\mathcal D_X(t)=0\) for
+\emph{every} smooth projective \(X\), with the genuine canonical map.
+
+\section{All-\(N\) whole-world causal triple-spectrum theorem}
+\begin{theorem}[Full geometric Hodge/Chow/defect birth for all emergent dimensions]
+Let \(X_0=X\) be any smooth projective complex variety and let
+\(E_j\) be \emph{arbitrary actual algebraic} bundles of rank \(r_j\ge1\)
+on \(X_{j-1}\). Form the genuine geometric world births
+\[
+ X_j=\mathbb P_{X_{j-1}}(\mathcal O\oplus E_j),
+ \qquad d_j=d+\sum_{a=1}^jr_a,\qquad
+ P_r(t)=1+t+\cdots+t^r.
+\]
+For every finite causal depth \(n\), with no upper bound on \(n\)
+or on any rank, the \emph{simultaneous full-realization equations} are
+\[
+ \boxed{\mathcal H_{X_n}(u,v)=
+       \mathcal H_X(u,v)\prod_{j=1}^n P_{r_j}(uv)},              \tag{3}
+\]
+\[
+ \boxed{(\mathcal F_{X_n},\mathcal A_{X_n},\mathcal D_{X_n})(t)=
+  (\mathcal F_X,\mathcal A_X,\mathcal D_X)(t)
+           \prod_{j=1}^nP_{r_j}(t).}                          \tag{4}
+\]
+Thus all the born geometric worlds possess pure Hodge
+decompositions, while each rational algebraic class and each
+hypothetical rational nonalgebraic diagonal class has a
+separately controlled causal channel.
+\end{theorem}
+\begin{proof}
+For a projective bundle with relative dimension \(r_j\),
+Leray--Hirsch gives
+\(H^m(X_j,\mathbb Q)=
+ \bigoplus_{i=0}^{r_j}\xi_j^i\pi_j^* H^{m-2i}(X_{j-1},\mathbb Q)\).
+The tautological class \(\xi_j=c_1(\mathcal O(1))\) is algebraic
+of pure Hodge type \((1,1)\), so the decomposition is of
+pure rational Hodge structures. This gives (3) and the
+\(\mathcal F\)-equation in (4). The corresponding genuine
+Chow projective-bundle formula
+\(CH^p(X_j)_{\mathbb Q}=
+ \bigoplus_{i=0}^{r_j}\xi_j^i\pi_j^*CH^{p-i}(X_{j-1})_{\mathbb Q}\)
+commutes with the canonical Betti cycle-class map.
+It therefore gives \(\mathcal A_{X_j}=\mathcal A_{X_{j-1}}P_{r_j}\).
+Taking their difference proves the third equation and induction
+establishes arbitrary finite depth.
+\end{proof}
+
+\section{The \(\omega\)-causal survival theorem: unlimited finite births}
+\begin{theorem}[Canonical first-defect conservation through all finite and \(\omega\) depths]
+Suppose the rational defect \(D_{X,p_0}\ne0\) in the least such
+codimension \(p_0\), if one exists. For every \(n\ge0\),
+\[
+ \boxed{D_{X,p_0}\ \xrightarrow{\sim}\
+              D_{X_n,p_0}}                                   \tag{5}
+\]
+by the pullback class map. More generally the transition on
+\(D_{X_n,p}\to D_{X_{n+1},p}\) is split injective by the
+actual zero-section returns, so there is an injective
+canonical map
+\[
+ \boxed{
+ D_{X,p}\ \hookrightarrow\
+ \underset{n<\omega}{\operatorname{colim}}\ D_{X_n,p}.}         \tag{6}
+\]
+The direct limit is formed in rational vector spaces for a
+\emph{fixed codimension \(p\)}. It is not a claim that the
+direct-limit space itself is a finite-dimensional smooth
+projective variety or has a classical Hodge structure.
+\end{theorem}
+\begin{proof}
+The projective Chow and Hodge decompositions imply
+\(D_{X_{j},p}\cong
+ \bigoplus_{i=0}^{r_j}D_{X_{j-1},p-i}\),
+and the \(i=0\) inclusion is \(\pi_j^*\).
+Its genuine algebraic zero section
+\(s_j:X_{j-1}\to X_j\) satisfies
+\(s_j^*\pi_j^*=\mathrm{id}\) simultaneously on Chow and
+canonical Betti Hodge classes and therefore on defects.
+So every stage transition is split injective.
+For minimal \(p_0\), all \(i>0\) terms vanish, proving (5)
+inductively. A vector from \(D_{X,p}\) maps to zero in the
+direct limit only if it already vanishes after some
+\emph{finite} stage; injectivity at every such stage
+forces the original vector to be zero. This proves (6).
+\end{proof}
+
+\begin{corollary}[Exact high-dimension combinatorial amplification law]
+If each emerging projective relative dimension is one, put
+\(d_p(n)=\dim_{\mathbb Q}D_{X_n,p}\). Then
+\[
+ \boxed{d_p(n)=\sum_{k=0}^{\min(n,p)}
+           {n\choose k}\,d_{p-k}(0).}                        \tag{7}
+\]
+For the least \(p_0\) with \(d_{p_0}(0)>0\), and each
+fixed \(j\ge0\),
+\[
+ \boxed{d_{p_0+j}(n)=
+       \frac{d_{p_0}(0)}{j!}n^j+O(n^{j-1})}
+       \quad(n\to\infty),                                   \tag{8}
+\]
+with the \(j=0\) term exactly \(d_{p_0}(n)=d_{p_0}(0)\).
+The leading coefficient is \emph{strictly positive} if
+the hypothetical defect exists. A pure Hodge world can
+therefore have arbitrarily large higher-codimension
+canonical defect, even though none of its Hodge structure
+is impure.
+\end{corollary}
+\begin{proof}
+Equation (4) gives
+\(\mathcal D_{X_n}(t)=\mathcal D_X(t)(1+t)^n\),
+so the binomial theorem yields (7).
+If \(p_0\) is least, then only the terms
+\(d_{p_0},\ldots,d_{p_0+j}\) contribute to
+\(d_{p_0+j}(n)\); the coefficient
+\({n\choose j}d_{p_0}(0)\) has polynomial degree \(j\);
+each other term has degree at most \(j-1\).
+\end{proof}
+
+
+\section{New exact classical landing: GST causal saturation and a growth criterion}
+The previous theorem gives a direct way to express the
+classical Hodge conjecture \emph{entirely in terms of the
+emergent-dimensional fold spectra} without hiding it
+inside an assumed algebraicity statement.
+
+\begin{theorem}[Causal spectrum rigidity is equivalent to rational Hodge algebraicity]
+For every smooth projective complex original \(X\),
+let \(X^{[n]}=X\times(\mathbb P^1)^n\), a genuine
+smooth projective \(n\)-fold Tate birth in the GST
+realization category. The following assertions are equivalent:
+\[
+\begin{array}{ll}
+\mathrm{(I)}&
+\text{Every rational Hodge class on every smooth
+projective }X\text{ is algebraic};\\
+\mathrm{(II)}&
+\dim D_{X\times\mathbb P^1,p+1}
+  =\dim D_{X,p+1}
+\quad \text{for every }X,p\ge0;\\
+\mathrm{(III)}&
+\displaystyle\lim_{n\to\infty}
+ \frac{\dim D_{X^{[n]},p+1}}{n}=0
+\quad\text{for every }X,p\ge0;\\
+\mathrm{(IV)}&
+\dim D_{X^{[n]},p+1}\text{ remains bounded in }n
+\quad\text{for every }X,p\ge0.
+\end{array}                                                     \tag{9}
+\]
+In fact the exact \emph{causal source-capacity gradient} is
+\[
+ \boxed{
+  \dim D_{X\times\mathbb P^1,p+1}
+    -\dim D_{X,p+1}=\dim D_{X,p},}                              \tag{10}
+\]
+and the arbitrary-depth causal lower bound is
+\[
+ \boxed{
+  \dim D_{X^{[n]},p+1}\ \ge\
+         n\cdot\dim D_{X,p}\quad(n\ge0).}                       \tag{11}
+\]
+\end{theorem}
+\begin{proof}
+Apply the actual projective-bundle defect formula at relative
+dimension one:
+\(D_{X\times\mathbb P^1,p+1}
+ \cong D_{X,p+1}\oplus D_{X,p}\).
+Taking rational dimensions gives (10). If (II)
+holds for all \(X,p\), then (10) forces
+\(D_{X,p}=0\) for all \(X,p\), which is (I).
+Conversely (I) trivially implies (II), (III) and
+(IV). The coefficient of \(t^{p+1}\) in
+\(\mathcal D_X(t)(1+t)^n\) is
+\[
+ d_{p+1}(0)+n d_p(0)+
+      \sum_{k=2}^{p+1}{n\choose k}d_{p+1-k}(0).
+\]
+Every summand is nonnegative for \(n\in\mathbb N\);
+hence (11). Either (III) or (IV) then implies
+\(d_p(0)=0\) for all original \(X,p\), establishing
+(I) without any algebraic class chosen in the argument.
+\end{proof}
+
+\paragraph{Meaning of the criterion.}
+This gives an \emph{exact native landing equation} for the
+owner's dimensionless/cosmological intuition: an
+independently proved GST law of \emph{sublinear growth
+of the genuine algebraicity defect under arbitrary
+emergent \(\mathbb P^1\)-births} would imply the
+full rational Hodge conjecture for all original \(X\).
+Such a bound is \emph{not} proved by the existing
+GST causality or dimensionless ontology axioms:
+unbounded higher-cell availability and Hodge purity
+do not imply bounded defect. Equation (9) is a rigorous
+equivalent research target, not an assertion that
+causal saturation has already been established.
+
+\section{Assumed-true experiment, emerging Hodge structures, and final native bridge}
+Under the owner's \emph{temporary all-\(X\) true assumption},
+\(\mathcal D_X=0\), (3)--(8) imply that every projective
+causal birth has a pure Hodge realization and zero
+canonical algebraicity defect. The Hodge polynomial can
+change dramatically while the defect remains zero.
+The genuine topology-changing branched-cover world
+from the earlier GST derivation similarly births both
+anti-invariant algebraic \((p,p)\) classes and holomorphic
+off-diagonal pieces.
+
+Now remove the assumption. Equations (3)--(8) remain
+\emph{fully valid without it}. Pure Hodge structure of
+every born projective world is still guaranteed, but
+if \(\mathcal D_X\ne0\), equations (5)--(8) propagate,
+rather than contradict, the difference between pure
+diagonal Hodge classes and algebraic cycles.
+Therefore the implication
+\[
+  [\text{all GST geometric smooth-projective births are Hodge-pure}]
+   \Longrightarrow
+  [\text{all rational Hodge classes are algebraic}]
+                                                               \tag{9}
+\]
+does \emph{not} follow from these fold laws. The failure
+is a logic-of-realization issue, not a failure of GST's
+dimensionless or nonlinear causal ontology.
+
+The \emph{exact native classical landing} must convert
+the whole realized diagonal fiber to the canonical
+native image:
+\[
+ \boxed{\forall X,p:\quad
+       \operatorname{im}(\mathrm{cl}^{can}_{X,p})=
+       H^{2p}(X,\mathbb Q)\cap \ker_{\mathbb C} G_X .}          \tag{10}
+\]
+Equations (3)--(8) establish that this equality is a
+\emph{causally stable property}, rather than deriving
+its truth from the existence of Hodge-pure folds.
+In general this equality is precisely the classical
+rational Hodge conjecture. No use of the conjecture as a
+premise can certify the universal conclusion.
+The next truly new GST law would need an independent
+geometric mechanism in a non-split causal realization
+whose output is a \emph{genuine canonical algebraic
+cycle} for each original rational diagonal target.
+It must not identify pure charge zero with algebraic
+image by definition.
+
+\section{Verification scope}
+The accompanying Wolfram file checks the polynomial
+identities, the first-defect invariant and fixed-degree
+growth independently over a declared finite grid.
+That arithmetic does not verify the infinite-dimensional
+geometry, which is established by the split-injection
+proof above. The finite-causal-tower shadow is also a
+natural next Lean theorem in the existing
+\texttt{GSTGeneralSpaceCohomology.lean}; its formal
+model uses fixed abstract native/Hodge fibers and
+separate return/naturality inputs. These formal types
+must never be mistaken for a constructed functor from
+every GST globular cell to an arbitrary smooth projective
+complex geometry.
+
+\end{document}

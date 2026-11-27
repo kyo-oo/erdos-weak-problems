@@ -1,0 +1,70 @@
+(* GST whole-realization Hodge shape experiment: exact symbolic tests.
+   Mathematical derivation: research/derivations/GST_whole_space_emergent_hodge_causal_shape_fold_2026-10-21.tex
+   Tests finite N1..10 p0..N; topology folds N1..18; genuine
+   elliptic complex-shape variation; causal cocycle; fiber forgetfulness.
+   Symbolic finite verification is NOT the all-N proof or Hodge conjecture.
+*)
+ClearAll[n,p,r,w,tt,pr0,ca,ma,mb,ls,lt,qqS,qqC,
+   qqCases,cosmicCases,bOne,bTwo,bMatrix,hodOne,pairList,
+   hodTwo,etaVector,prj,shapeAnswer,gFrom,gMiddle,gTo,
+   mapFirst,mapSecond,cocycle];
+pr0[p_Integer?NonNegative,r_Integer]:=
+  Product[1-r^2/(4*j^2),{j,1,p}];
+cosmicCases=Flatten[Table[Module[{mm,cc},
+  mm=Table[If[0<=p+j<=n&&0<=p-j<=n,
+    Binomial[n,p+j]Binomial[n,p-j],0],{j,-p,p}];
+  cc=Table[pr0[p,2*j],{j,-p,p}];
+  TrueQ[Total[mm]==Binomial[2*n,2*p]&&
+        mm.cc==Binomial[n,p]^2&&
+        And@@(MemberQ[{0,1},#]&/@cc)]],
+  {n,1,10},{p,0,n}],1];
+ma={{1,0,0},{0,1,0},{0,0,1},{0,0,0}};
+mb={{1,1,1},{0,0,0},{0,0,0},{0,0,0}};
+ls={1,1,1};lt={1,1,1,1};
+bOne={{1,0,I,0},{0,1,0,I+tt}};
+bTwo={{1,0,-I,0},{0,1,0,-I+tt}};
+bMatrix=Transpose[Join[bOne,bTwo]];
+hodOne=FullSimplify[bMatrix.DiagonalMatrix[{I,I,-I,-I}].
+  Inverse[bMatrix],Assumptions->Element[tt,Reals]];
+pairList=Subsets[Range[4],{2}];
+hodTwo=Table[With[{u=pairList[[rr,1]],v=pairList[[rr,2]],
+   ii=pairList[[cc,1]],jj=pairList[[cc,2]]},
+   hodOne[[u,ii]]*KroneckerDelta[v,jj]-
+   hodOne[[v,ii]]*KroneckerDelta[u,jj]+
+   KroneckerDelta[u,ii]*hodOne[[v,jj]]-
+   KroneckerDelta[v,ii]*hodOne[[u,jj]]],
+   {rr,1,6},{cc,1,6}];
+etaVector={0,0,1,1,0,0};
+shapeAnswer=FullSimplify[hodTwo.etaVector,
+  Assumptions->Element[tt,Reals]];
+prj=FullSimplify[IdentityMatrix[6]+hodTwo.hodTwo/4,
+  Assumptions->Element[tt,Reals]];
+qqS[n_Integer?NonNegative]:=
+ Sum[w^j,{j,0,n}]+If[EvenQ[n],w^(n/2),0];
+qqC[n_Integer?Positive]:=1+w*qqS[n-1];
+qqCases=Table[TrueQ[FullSimplify[
+   Expand[qqS[n]-qqC[n]]==(-1)^n*w^Ceiling[n/2]]],{n,1,18}];
+gFrom=DiagonalMatrix[{0,2*I,-2*I}];
+gMiddle={{0,tt,0},{0,2*I,0},{0,0,-2*I}};
+gTo={{0,0,w},{0,2*I,0},{0,0,-2*I}};
+mapFirst={{1,tt,0},{0,1,tt},{0,0,1}};
+mapSecond={{1,0,w},{w,1,0},{0,0,1}};
+cocycle=FullSimplify[(gTo.mapSecond.mapFirst-
+    mapSecond.mapFirst.gFrom)-
+    ((gTo.mapSecond-mapSecond.gMiddle).mapFirst+
+       mapSecond.(gMiddle.mapFirst-mapFirst.gFrom))];
+allPass=And@@{
+  And@@cosmicCases,lt.ma==ls,lt.mb==ls,
+  MatrixRank[ma]==3,MatrixRank[mb]==1,
+  TrueQ[shapeAnswer=={0,0,tt,-tt,0,tt^2}],
+  TrueQ[FullSimplify[prj.prj==prj,
+       Assumptions->Element[tt,Reals]]],
+  And@@qqCases,cocycle==ConstantArray[0,{3,3}]};
+If[!TrueQ[allPass],Print["FAIL"];Abort[]];
+Print[<|"PASS"->True,"N1to10HodgeProjectorCases"->Length[cosmicCases],
+ "MultiplicityForgettingBaseSame"->(lt.ma==ls&&lt.mb==ls),
+ "DistinctNewFiberBirths"->{4-MatrixRank[ma],4-MatrixRank[mb]},
+ "ActualTorusHodgeGeneratorActingOnEta"->shapeAnswer,
+ "TrueHodgeProjectorIdempotent"->True,
+ "ActualQuadricTopologicalFoldN1to18"->And@@qqCases,
+ "ExactCausalCurvatureCocycle"->True|>];

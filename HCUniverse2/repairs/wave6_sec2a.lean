@@ -1,0 +1,285 @@
+/-
+STAGING FILE — GATE-L §2a (wave 6, W3-A) — THE POINT-ACTION LEMMAS.
+
+Splice target: the GATE-L module (`GSTFiniteLineCycleCorrespondence.lean`),
+inside namespace `GSTFiniteLineCycleCorrespondence`, AFTER the §1
+residue-degree receipt (i.e. after `finiteLineCycle_pointResidueWeight`,
+before the module's `end`) and BEFORE the §2b wave's lemmas (the sibling
+staging file `repairs/wave6_sec2b.lean` consumes
+`finiteLineCycle_apply_ideal` and `finiteLineCycle_genericPoint`; its
+`have hid'` bridge was written to accept EITHER the homogeneous-level or the
+toIdeal-level comap spelling — this file lands the homogeneous-level
+spelling of the §2a battle map).  This file is section text only: no
+imports, no namespace opens, no `end`, no `variable` lines (the lane binder
+discipline: every declaration re-binds its parameters at its head; the
+ambient preamble — `import Mathlib` (l. 1), `noncomputable section` (l. 33),
+the `open` block (l. 35-60) including `GSTSingularCohomologyMaps`,
+`GSTSphereCycleLegs`, `GSTFiniteLineWorldCarrier`, `GSTFiniteLinePointAlgebra`
+— is already in scope above the paste point).  NOTE: `MvPolynomial` is NOT
+open in the target module, so every variable is written `MvPolynomial.X` and
+every rename lemma is fully qualified (`MvPolynomial.rename_X`,
+`MvPolynomial.renameEquiv_apply`).
+
+THE FOUR LEMMAS (the ideal-level battle):
+
+* L1 `finiteLineCycle_apply_ideal` — the point action at the ideal level:
+  the cycle's application is the `comapFun` of `Proj.map` (the pin's
+  `Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean:34-37`),
+  so the applied point's homogeneous ideal IS the comap of the original
+  under the graded rotation.  Route: the show-bridge `rfl` at default
+  transparency (R1 — see the risk ledger below).
+* L2 `lineRotate_comap_genericIdeal` — the block-ideal permutation: the
+  comap of the j-th generic homogeneous ideal under the graded rotation is
+  the generic homogeneous ideal of the predecessor block `cyclicPred M j`
+  (the +2 index shift of `blockRot` moves every block index up by one, so
+  pulling back through it turns the j-th outside-block span into the
+  (j−1)-th one).
+* L3 `finiteLineCycle_genericPoint` — L1+L2+`projectiveSpectrum_ext`: the
+  cycle carries the j-th generic point to the predecessor's.
+* L3-inv `finiteLineCycle_genericPoint_inv` — the Inv-mirror through
+  `finiteLineCycleInv`/`lineRotateInvGraded` (the −2 index shift): the
+  Inv-cycle carries the j-th generic point to the successor's
+  (`cyclicSucc M j`).
+
+PROOF PROVENANCE (all corpus-verbatim, CI-green at HEAD ff48e2f):
+
+* the span route (`Ideal.span_le` + `rintro _ ⟨b, rfl⟩` over the
+  `lineGenericIdeal` generating range) is `mem_lineGenericIdeal_iff`
+  (GSTFiniteLinePointAlgebra.lean:384-392) and `eq_lineGenericPoint_of_le`
+  (GSTFiniteLinePointAlgebra.lean:903-914) verbatim;
+* the quotient-application bridge (`lineRotateHom_mk`, `lineRename_X`,
+  `lineRotateInvHom_mk`, `MvPolynomial.renameEquiv_apply`,
+  `MvPolynomial.rename_X`) is the carrier's own rotation descent
+  (GSTFiniteLineWorldCarrier.lean:213-216, 234-237, 314-316, 361-362);
+* the graded roundtrip chains (`← GradedRingHom.comp_apply` +
+  `lineRotateInvGraded_comp`/`lineRotateGraded_comp_inv` +
+  `GradedRingHom.id_apply`) are `lineRotateInvGraded_surjective`
+  (GSTFiniteLineWorldCarrier.lean:445-451) and its mirror verbatim;
+* the `HomogeneousIdeal.ext` + `toIdeal` descent
+  (`HomogeneousIdeal.toIdeal_comap`, `lineGenericHomogeneousIdeal_toIdeal`)
+  is `eq_lineGenericPoint_of_le`'s closing trio
+  (GSTFiniteLinePointAlgebra.lean:915-920);
+* the point equality is `eq_lineGenericPoint_of_le`'s
+  `refine projectiveSpectrum_ext ?_` (GSTFiniteLinePointAlgebra.lean:917),
+  and the term-mode `Eq.trans` composition avoids every re-elaborated rw
+  atom (the wave-5-D lesson: atoms on `.X`-typed goals die at implicit
+  transparency).
+
+RISK LEDGER:
+
+* R1 (L1 and its Inv-mirror): the whole equation is one defeq chain
+  `((Proj.map f hf) x).asHomogeneousIdeal ≡ x.asHomogeneousIdeal.comap f`
+  through the Scheme.Hom coercion (`CoeFun … where coe f := f.base`,
+  Mathlib/AlgebraicGeometry/Scheme.lean:108-109) into
+  `sheafedSpaceMap`'s base `TopCat.ofHom (comap f hf)`
+  (Functor.lean:100-104), the `ContinuousMap` coe into `comap`'s `toFun`
+  (Functor.lean:40-44) and `comapFun`'s first field `p.1.comap f`
+  (Functor.lean:34-37).  The pin's own `map_preimage_basicOpen := rfl`
+  (Functor.lean:160-161) and `Scheme.Hom.mem_preimage := .rfl`
+  (Scheme.lean:254) traverse the same chain, so the show-bridge `rfl` at
+  default transparency is the primary route.  CI-REPAIR FALLBACK (if the
+  kernel rejects the elaborated `rfl`): replace the show-bridge by
+    rw [show ((finiteLineCycle M) x).asHomogeneousIdeal
+        = x.asHomogeneousIdeal.comap (lineRotateGraded M) from rfl]
+  and if even that fails, add the simps lemma
+  `ProjectiveSpectrum.comapFun_asHomogeneousIdeal` (generated by the
+  `@[simps]` tag at Functor.lean:34) behind a relaxed-transparency bridge
+  (`set_option backward.isDefEq.respectTransparency false in` around a
+  `have : (finiteLineCycle M) x = ProjectiveSpectrum.comapFun
+  (lineRotateGraded M) (lineRotate_irrelevant_le M) x := rfl`).
+* R2 (L2 and its Inv-mirror): the block-ideal permutation bookkeeping.
+  Both directions are span/generator arguments — the ≥-direction is pure
+  generator arithmetic (`blockRot_sameBlock` + the one-point lemma
+  `blockRot_blockVarLeft` + `blockVarLeft_block`), the ≤-direction is the
+  mirror's generator arithmetic composed with the graded roundtrip
+  (`y = g (f y)` via `lineRotateInvGraded_comp`), so no elementwise
+  characterization of the generic ideal (no `mem_lineGenericIdeal_iff`,
+  no `blockProjQuotAt`) is needed anywhere — the only arithmetic beyond
+  the green corpus lemmas is the one-point split inside
+  `blockRot_blockVarLeft` (case `2*i+2 < 2*M` / `2*M ≤ 2*i+2`, both
+  `omega`-closed; in the second case `2*i.val+2 = 2*M` exactly since
+  `i.val < M`).
+-/
+
+/-! ## §2a The point-action lemmas (the ideal-level battle) -/
+
+/-- **THE ONE-POINT BLOCK ARITHMETIC** — rotating the even variable index of
+block `i` lands in block `cyclicSucc i`: `(blockRot M (blockVarLeft M i)).val / 2
+= (cyclicSucc M i).val`.  This is the only new arithmetic in §2a: the
+no-wrap/wrap case split (`2*i+2 < 2*M` vs `2*M ≤ 2*i+2`; in the wrap case
+`2*i+2 = 2*M` exactly since `i.val < M`, so both sides are `0`), everything
+else rides the green `blockRot`/`blockVarLeft` corpus lemmas. -/
+private theorem blockRot_blockVarLeft (M : ℕ) [NeZero M] (i : Fin M) :
+    (blockRot M (blockVarLeft M i)).val / 2 = (cyclicSucc M i).val := by
+  have hi : i.val < M := i.isLt
+  show (2 * i.val + 2) % (2 * M) / 2 = (i.val + 1) % M
+  rcases Nat.lt_or_ge (2 * i.val + 2) (2 * M) with h | h
+  · have hlt : i.val + 1 < M := by omega
+    rw [Nat.mod_eq_of_lt h, Nat.mod_eq_of_lt hlt]
+    omega
+  · have heq : 2 * i.val + 2 = 2 * M := by omega
+    have hiM : i.val + 1 = M := by omega
+    rw [heq, hiM, Nat.mod_self, Nat.mod_self]
+    omega
+
+/-- **THE SPAN RECEIPT (+2 SHIFT)** — every generator of the i-th generic
+ideal maps, under the graded rotation, into the `cyclicSucc i`-th one: the
+variable `X_b` (block `b/2 ≠ i`) rotates to `X_{blockRot b}` whose block is
+`(b/2 + 1) mod M ≠ cyclicSucc i`.  This is the ≥-direction of the block-ideal
+permutation, stated so that it can be re-indexed by either `cyclicPred` (for
+L2) or used directly (for the Inv-mirror's ≤-direction). -/
+private theorem lineGenericIdeal_le_comap_rotate (M : ℕ) [NeZero M] (i : Fin M) :
+    lineGenericIdeal M i ≤ (lineGenericIdeal M (cyclicSucc M i)).comap
+      (lineRotateGraded M) := by
+  rw [lineGenericIdeal, Ideal.span_le]
+  rintro _ ⟨b, rfl⟩
+  rw [Ideal.mem_comap]
+  show lineRotateHom M (lineQuotientMap M (MvPolynomial.X (b : Fin (2 * M)))) ∈
+      lineGenericIdeal M (cyclicSucc M i)
+  rw [lineRotateHom_mk, lineRename_X]
+  refine mem_lineGenericIdeal M (cyclicSucc M i) ?_
+  intro hcon
+  have h1 : (blockRot M (b : Fin (2 * M))).val / 2
+      = (blockRot M (blockVarLeft M i)).val / 2 := by
+    rw [blockRot_blockVarLeft M i]
+    exact hcon
+  exact b.2 ((blockRot_sameBlock M (b : Fin (2 * M)) (blockVarLeft M i)).mp h1).trans
+    (blockVarLeft_block M i)
+
+/-- **THE SPAN RECEIPT (−2 SHIFT)** — the Inv-mirror: every generator of the
+i-th generic ideal maps, under the inverse graded rotation, into the
+`cyclicPred i`-th one (the `blockRot.symm` index shift is `−1` at the block
+level, so the outside-block span pulls back to the predecessor's).  Route
+mirrors `lineGenericIdeal_le_comap_rotate` through the carrier's Inv descent
+(`lineRotateInvHom_mk` + the `renameEquiv`/`rename_X` pair) and folds the
+symmetric pair by `Equiv.symm_apply_apply` before the block comparison. -/
+private theorem lineGenericIdeal_le_comap_rotateInv (M : ℕ) [NeZero M] (i : Fin M) :
+    lineGenericIdeal M i ≤ (lineGenericIdeal M (cyclicPred M i)).comap
+      (lineRotateInvGraded M) := by
+  rw [lineGenericIdeal, Ideal.span_le]
+  rintro _ ⟨b, rfl⟩
+  rw [Ideal.mem_comap]
+  show lineRotateInvHom M (lineQuotientMap M (MvPolynomial.X (b : Fin (2 * M)))) ∈
+      lineGenericIdeal M (cyclicPred M i)
+  rw [lineRotateInvHom_mk, MvPolynomial.renameEquiv_apply, MvPolynomial.rename_X]
+  refine mem_lineGenericIdeal M (cyclicPred M i) ?_
+  intro hcon
+  have hF : (blockRot M (blockVarLeft M (cyclicPred M i))).val / 2 = i.val := by
+    have h := blockRot_blockVarLeft M (cyclicPred M i)
+    rw [cyclicSucc_cyclicPred M i] at h
+    exact h
+  have hQ : ((blockRot M).symm (b : Fin (2 * M))).val / 2
+      = (blockVarLeft M (cyclicPred M i)).val / 2 :=
+    hcon.trans (blockVarLeft_block M (cyclicPred M i)).symm
+  have hP := (blockRot_sameBlock M ((blockRot M).symm (b : Fin (2 * M)))
+    (blockVarLeft M (cyclicPred M i))).mpr hQ
+  rw [Equiv.apply_symm_apply (blockRot M) (b : Fin (2 * M))] at hP
+  exact b.2 (hP.trans hF)
+
+/-- **L1 — THE CYCLE'S POINT ACTION AT THE IDEAL LEVEL.**  Applying the
+M-cycle automorphism to a point takes the point's homogeneous ideal to its
+comap under the graded rotation: `finiteLineCycle M` is `Proj.map
+(lineRotateGraded M)` (carrier §4), and `Proj.map`'s underlying point
+function is the pin's `ProjectiveSpectrum.comapFun`
+(Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean:34-37), whose
+first field is exactly `p.1.comap f`.  The whole equation is definitionally
+the coercion chain `coe f := f.base` (Scheme.lean:108-109) →
+`sheafedSpaceMap`'s `TopCat.ofHom (comap f hf)` base (Functor.lean:100-104) →
+`comap`'s `toFun` (Functor.lean:40-44) → `comapFun` — the same chain the pin
+closes by `rfl` at `map_preimage_basicOpen` (Functor.lean:160-161) — so the
+proof is the show-bridge `rfl` at default transparency (the
+`finiteLineCycle` δ-unfolding is pre-empted by restating the goal at
+`Proj.map`, keeping the defeq burden inside the single `rfl` check). -/
+theorem finiteLineCycle_apply_ideal (M : ℕ) [NeZero M] (x : finiteLineScheme M) :
+    ((finiteLineCycle M) x).asHomogeneousIdeal = x.asHomogeneousIdeal.comap
+      (lineRotateGraded M) :=
+  show ((Proj.map (lineRotateGraded M) (lineRotate_irrelevant_le M)) x).asHomogeneousIdeal
+      = x.asHomogeneousIdeal.comap (lineRotateGraded M) from rfl
+
+/-- **L1's INV-MIRROR** — the same ideal-level receipt for the inverse cycle
+(`finiteLineCycleInv` is `Proj.map` of the inverse graded rotation, carrier
+§4 l. 520-522).  Consumed by `finiteLineCycle_genericPoint_inv` below. -/
+private theorem finiteLineCycleInv_apply_ideal (M : ℕ) [NeZero M]
+    (x : finiteLineScheme M) :
+    ((finiteLineCycleInv M) x).asHomogeneousIdeal = x.asHomogeneousIdeal.comap
+      (lineRotateInvGraded M) :=
+  show ((Proj.map (lineRotateInvGraded M) (lineRotate_inv_irrelevant_le M)) x).asHomogeneousIdeal
+      = x.asHomogeneousIdeal.comap (lineRotateInvGraded M) from rfl
+
+/-- **L2 — THE BLOCK-IDEAL PERMUTATION.**  The comap of the j-th generic
+homogeneous ideal under the graded rotation is the generic homogeneous ideal
+of the predecessor block: the rotation's variable action `X_b ↦ X_{blockRot
+b}` (the +2 index shift, one block up) pulls the outside-block-j span back
+to the outside-block-(cyclicPred j) span.  Both inclusions: ≥ is the span
+receipt `lineGenericIdeal_le_comap_rotate` re-indexed by `cyclicPred j`
+(`cyclicSucc (cyclicPred j) = j`), ≤ is elementwise — a member `y` (with
+`f y` in the j-th ideal) is `g (f y)` by the graded roundtrip, and the −2
+span receipt maps `f y`'s membership into the predecessor ideal. -/
+theorem lineRotate_comap_genericIdeal (M : ℕ) [NeZero M] (j : Fin M) :
+    (lineGenericHomogeneousIdeal M j).comap (lineRotateGraded M) =
+      lineGenericHomogeneousIdeal M (cyclicPred M j) := by
+  refine HomogeneousIdeal.ext ?_
+  rw [HomogeneousIdeal.toIdeal_comap, lineGenericHomogeneousIdeal_toIdeal,
+    lineGenericHomogeneousIdeal_toIdeal]
+  apply le_antisymm
+  · intro y hy
+    rw [Ideal.mem_comap] at hy
+    have hround : lineRotateInvGraded M (lineRotateGraded M y) = y := by
+      rw [← GradedRingHom.comp_apply, lineRotateInvGraded_comp,
+        GradedRingHom.id_apply]
+    rw [← hround]
+    exact Ideal.mem_comap.mp (lineGenericIdeal_le_comap_rotateInv M j hy)
+  · have h := lineGenericIdeal_le_comap_rotate M (cyclicPred M j)
+    rw [cyclicSucc_cyclicPred M j] at h
+    exact h
+
+/-- **L2's INV-MIRROR** — the comap of the j-th generic homogeneous ideal
+under the inverse graded rotation (the −2 index shift) is the generic
+homogeneous ideal of the successor block.  The two inclusions are the
+mirrors of L2's (the roundtrip now rides `lineRotateGraded_comp_inv`, and
+the re-indexing rides `cyclicPred (cyclicSucc j) = j`).  Consumed by
+`finiteLineCycle_genericPoint_inv` below. -/
+private theorem lineRotateInv_comap_genericIdeal (M : ℕ) [NeZero M] (j : Fin M) :
+    (lineGenericHomogeneousIdeal M j).comap (lineRotateInvGraded M) =
+      lineGenericHomogeneousIdeal M (cyclicSucc M j) := by
+  refine HomogeneousIdeal.ext ?_
+  rw [HomogeneousIdeal.toIdeal_comap, lineGenericHomogeneousIdeal_toIdeal,
+    lineGenericHomogeneousIdeal_toIdeal]
+  apply le_antisymm
+  · intro y hy
+    rw [Ideal.mem_comap] at hy
+    have hround : lineRotateGraded M (lineRotateInvGraded M y) = y := by
+      rw [← GradedRingHom.comp_apply, lineRotateGraded_comp_inv,
+        GradedRingHom.id_apply]
+    rw [← hround]
+    exact Ideal.mem_comap.mp (lineGenericIdeal_le_comap_rotate M j hy)
+  · have h := lineGenericIdeal_le_comap_rotateInv M (cyclicSucc M j)
+    rw [cyclicPred_cyclicSucc M j] at h
+    exact h
+
+/-- **L3 — THE CYCLE ACTS ON THE GENERIC POINTS BY THE CYCLIC
+PREDECESSOR.**  The point-action receipt: the cycle carries the j-th generic
+point to the `cyclicPred j`-th one.  Route: the ideal equality implies the
+point equality (`projectiveSpectrum_ext`,
+GSTFiniteLinePointAlgebra.lean:789-797), and the ideal equality is L1
+instantiated at `lineGenericPoint M j` composed with L2 — the composition is
+term-mode `Eq.trans` (the middle types close by the definitional field
+`lineGenericPoint`'s `asHomogeneousIdeal := lineGenericHomogeneousIdeal M j`,
+so no re-elaborated rw atom ever touches the `.X`-typed goal). -/
+theorem finiteLineCycle_genericPoint (M : ℕ) [NeZero M] (j : Fin M) :
+    finiteLineCycle M (lineGenericPoint M j) = lineGenericPoint M (cyclicPred M j) := by
+  have h1 := finiteLineCycle_apply_ideal M (lineGenericPoint M j)
+  have h2 := lineRotate_comap_genericIdeal M j
+  refine projectiveSpectrum_ext ?_
+  exact h1.trans h2
+
+/-- **L3's INV-MIRROR** — the Inv-cycle carries the j-th generic point to the
+`cyclicSucc j`-th one (the same route through `finiteLineCycleInv` /
+`lineRotateInvGraded`, the carrier's inverse machinery at §4 l. 415-425,
+520-522). -/
+theorem finiteLineCycle_genericPoint_inv (M : ℕ) [NeZero M] (j : Fin M) :
+    finiteLineCycleInv M (lineGenericPoint M j) = lineGenericPoint M (cyclicSucc M j) := by
+  have h1 := finiteLineCycleInv_apply_ideal M (lineGenericPoint M j)
+  have h2 := lineRotateInv_comap_genericIdeal M j
+  refine projectiveSpectrum_ext ?_
+  exact h1.trans h2

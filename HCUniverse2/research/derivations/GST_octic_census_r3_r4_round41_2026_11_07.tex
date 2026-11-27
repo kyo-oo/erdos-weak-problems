@@ -1,0 +1,150 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\title{Round 41: The Octic Order-$\geq 24$ Census and the R3/R4 Decisive Strikes}
+\author{GST Hodge Campaign --- research-only}
+\date{2026-11-07 (session clock)}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\begin{document}
+\maketitle
+
+\section{The structure theorem (the census engine)}
+
+Let $(G,\rho)$ be an octic CM world: $G$ transitive on the $8$ embedding
+letters, $\rho$ a central fixed-point-free involution (complex conjugation).
+Every such world is $S_8$-conjugate to one with
+$\rho=\rho_0=(04)(15)(26)(37)$, hence
+$G \subseteq W := C_{S_8}(\rho_0) \cong (C_2)^4 \rtimes S_4$, the
+hyperoctahedral group of order $384$: letters are $(i,e) \in \{0,\dots,3\}
+\times \{0,1\}$ and $(f,s) \in \mathbb{F}_2^4 \times S_4$ acts by
+\[
+(i,e) \mapsto (s(i),\, e \oplus f_i).
+\]
+Writing $\pi : W \to S_4$ for the pair map,
+\[
+T := \pi(G) \text{ (transitive quartic)}, \qquad
+K := G \cap (C_2)^4 \text{ ($T$-stable, } \rho_0 \in K),
+\]
+the quotient $G/K$ is a complement of $N' := (C_2)^4/K$ in $W_T/K$, and
+conversely every $(T,K,\text{complement})$ yields a world. Since every
+transitive quartic $T$ is $2$-generated, so is every complement; the
+generating-pair lift sweep is therefore \textbf{exhaustive}, and
+$|G| = |K| \cdot |T|$.
+
+\begin{theorem}[The census]
+The octic $(G,\rho_0)$-worlds number $114$, of which \textbf{$58$ have order
+$\geq 24$} (the Round-37 boundary), reducing to $24$ $W$-conjugacy classes,
+with orders exactly $\{24, 32, 48, 64, 96, 128, 192, 384\}$.
+\end{theorem}
+
+\section{The laws at the boundary}
+
+\begin{theorem}[Two-algorithm certification]
+At every boundary class representative, every type orbit, every degree
+$2p \leq 8$: the orbit-count law $\dim \operatorname{Hdg}^{2p} = \#P_\Phi(p)$
+agrees with the exact blockwise RREF of the equivariance system
+($145/145$ bounded checks).
+\end{theorem}
+
+\begin{theorem}[The descent calibrations extend]
+At the boundary worlds: the split law
+$\dim = \binom{4}{p}^2$ at every quadratic-inducible type (the
+\textbf{exhaustive block classifier}: subgroups $H' \supseteq H$ correspond
+to blocks containing the letter; the $128$-subset sweep is complete); the
+product-world rows $[8,18,8,1]$ at the deeper-induced types; the Rosati law
+$NS = g$ at every primitive type; the palindrome and top laws; the
+$E \times A$ disjoint-frame tensor law $\dim \operatorname{Hdg}_2(E \times A)
+= 1 + NS(A)$, computed at the genuine joint $10$-letter worlds.
+\end{theorem}
+
+\begin{theorem}[THE EXCEPTIONAL-CLASS LAW --- the round's discovery]
+At the intermediate-orbit primitive types (orbit sizes $4$--$6$) of the
+order-$24/48$ worlds, the dimension row is $[4,8,4,1]$ and the
+with-replacement divisor-product ring has rank $6$ in degree $4$:
+\[
+\operatorname{surplus} = [0,2,0,0] \quad \text{exactly}:
+\quad \text{\textbf{two Hodge classes in degree $4$ beyond the divisor ring}.}
+\]
+The Round-37 pairing-generation theorem does not extend past the census
+boundary; the boundary carries the CM-side analogue of the Weil one-source
+leaf (R38--R40): the algebraicity of the two exceptional classes is the new
+falsifiable line.
+\end{theorem}
+
+\section{The R3 strike: the general input}
+
+\begin{theorem}[The vanishing]
+The mixed $(p,p)$-supply on $E \times X$ at the general input --- the
+$(MT(E) \times GSp(M))$-invariant homomorphisms $T : H^1(E) \to M$ --- is
+zero: computed exactly (Fraction nullspace of the stacked equivariance
+system) at $h = 1, 2$ for both $E$-models. The mixed sector at the general
+input is $\{0\}$; the $K$-existence follows from the Round-32 Theorem-2
+equivalence's proven $(a) \Rightarrow (b)$ direction.
+\end{theorem}
+
+\begin{theorem}[The stratum sensitivity]
+At the CM-matched stratum ($E[i] \times$ the $\mathbb{Q}(i)^h$-world) the
+intertwiners number $2h$ exactly (the graph supply, algebraic); at the
+mismatched strata ($E[i]$ vs $\mathbb{Q}(\sqrt{-d})$, $d = 2,3,5$): zero.
+\end{theorem}
+
+\section{The R4 strike: the phase gate}
+
+\begin{theorem}[The Weil-operator gate]
+The two-level middle $M_\tau$ in the standard polarization has Weil matrix
+\[
+C(\tau) = \begin{pmatrix} is/D & -2i/D \\ 2iq/D & -is/D \end{pmatrix},
+\qquad D^2 = s^2 - 4q, \quad s = \tau + \bar\tau, \quad q = \tau\bar\tau,
+\]
+with $C^2 = -I$. The entries are rational exactly when $4q - s^2$ is a
+rational square (the Gaussian worlds); the CM worlds carry rational Weil
+operators in the adapted structures ($\left(\begin{smallmatrix} 0 & -d \\
+1 & 0\end{smallmatrix}\right) \in M_2(\mathbb{Q})$); the entries are
+nonconstant rational functions of $(s,q)$ --- \textbf{the transcendental
+inputs carry no rational Weil operator}.
+\end{theorem}
+
+\begin{theorem}[The phase-order dichotomy and the pinning]
+The fold-birth applicability locus is the finite-order-phase world (the
+exact orders $2, 3, 4, 6$ --- the Round-40 collar, including $\tau = 1+i$
+(order $4$) and $\tau = 3 + \sqrt{-3}$ (order $6$)); the phase
+$7 + 4\sqrt{3}$ has infinite order ($z^n \neq 1$, exact
+$\mathbb{Z}[\sqrt 3]$ arithmetic); $t^n - 1 \neq 0$ as a polynomial: the
+root-of-unity locus is a proper subvariety. Hence:
+\[
+\text{R4's irreducible content} = \text{the transcendental }(p,p)\text{-algebraicity},
+\]
+and R3's residue is the same face: \textbf{the input axis reduces to ONE
+irreducible core} (the Round-32 Theorem-4 equivalence's two named
+constructions now one).
+\end{theorem}
+
+\section{The certificates}
+
+\begin{enumerate}
+\item \texttt{octic\_census\_round41\_checks.py}: 50 checks, 0 failures,
+exit 0, deterministic double-run byte-identical (md5
+$d0b54dac4b95b6829b2ed6060edf3e82$); exact arithmetic, zero floats; the
+disclosed bounds: the product battery at $|G| \leq 96$, the RREF systems at
+$\leq 3000$ variables, the cocycle sweep generator-based above $|G| = 96$.
+\item \texttt{r3\_r4\_strike\_round41\_checks.py}: 33 checks, 0 failures,
+exit 0, byte-identical double-run (md5 $40128c51996cbbb28518dc9e4334ad1c$).
+\end{enumerate}
+
+The AUDIT-41 loop: PASS\_WITH\_REPAIRS\_REQUIRED $\to$ the F1 repair (the
+deeper-bucket law strengthened: the binomial row cannot be deeper-induced)
+$\to$ re-sealed green $\to$ the previously-surviving sabotage re-fired
+$\to$ CLOSED at PASS.
+
+\section*{The quantifier line}
+
+The octic order-$\geq 24$ CM-transport boundary is enumerated exhaustively
+and the descent laws certified at every world; the exceptional-class law
+measured exactly; the input axis's two named constructions struck decisively
+and merged into one irreducible core. The remaining falsifiable line: the
+transcendental face + the two exceptional-class leaves + the CM transport
+beyond degree 8. \textbf{Q2 not claimed; the closing string not emitted; the
+polarity split stands.}
+
+\end{document}

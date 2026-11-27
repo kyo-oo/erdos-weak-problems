@@ -1,0 +1,381 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\newcommand{\R}{\mathbb R}
+\newcommand{\rank}{\operatorname{rank}}
+\title{The requested GST whole-space experiment: causal central folds}
+\author{Actual GST module extension; mathematics before Lean drafts}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{The owner's experiment, retained in its stated order}
+Start with every original smooth projective complex $X$, of complex dimension
+$n$, and provisionally assume rational Hodge algebraicity on every smooth
+projective world in the experiment. General Space has no dimension, metric,
+or Euclidean-chart field. Realize spaces from causal data, observe their
+dimensions, compute their full cohomology, and decide from equations whether
+the whole realized Hodge structure survives or breaks. This work executes
+that experiment. It does not replace it with a selected algebraic-cycle
+source problem. Base: \texttt{ef1a452d5a91e5e8c8a740fbda5761faf4cb9e0a}.
+
+The exact existing GST inputs are:
+\begin{itemize}
+\item \texttt{GSTGeneralSpace.GeneralSpace}: typed points, paths, identity,
+composition; dimension is absent. The new word sector instantiates this
+actual structure, alongside the existing arithmetic Graph V2 sector.
+\item \texttt{schemeKrullDimensionChart\_observe} in
+\texttt{GSTGeneralSpaceSchemeDimensionObservation}: dimension belongs to a
+geometric observation. For the nonalgebraic worlds below use complex-manifold
+dimension, not a nonexistent scheme-dimension instance.
+\item \texttt{causalTwoBoundary\_zero} and
+\texttt{TwoSkeleton.firstHomology} in
+\texttt{GSTGraphV2UnboundedHigherCausality}: keep higher causal relations
+and the cycle/relation quotient. The extension below derives the actual
+central cocycle and associative multiplication, rather than inserting
+unrelated proposition-valued geometry fields.
+\item \texttt{manyCausalHoleBasis\_reconstruct} and
+\texttt{manyCausalHoleBasis\_channelCount} in
+\texttt{waves/GSTNCohomologyV3}: retain every channel. Its new curvature
+boundary measures which channel combinations are closed; a scalar total
+cannot replace this vector-valued condition.
+\item \texttt{CausalHodgeCell.purityGap} and
+\texttt{balancedCausalFold\_purity} in \texttt{GSTGradedWorldAlgebra}:
+these describe an already graded cell, not a theorem that an arbitrary
+new world has a pure decomposition. The new opposedness-defect readout
+retains precisely the modes for which such a decomposition fails.
+\item \texttt{causal\_path\_defect} and
+\texttt{word\_defect\_exact} in \texttt{GSTCausalFoldDefect}:
+endpoint cancellation and intermediate safety differ. The construction
+below realizes that distinction by actual dimensional fusion of spaces.
+\end{itemize}
+These are typed uses and extensions of the custom modules, not claims that
+their earlier arithmetic realizations already were these complex manifolds.
+
+\section{Construct the space directly from causal two-face data}
+Let $m,r\geq0$ and let $K\in M_{r\times m}(\mathbb Z)$.
+On $\R^{2m+2r}$ with coordinates $(x,y,s,t)$ put
+\[
+ B_K(x,y')_a=\sum_jK_{aj}x_j y'_j,
+\quad (x,y,s,t)(x',y',s',t')
+ =(x+x',y+y',s+s'+B_K(x,y'),t+t').                    \tag{1}
+\]
+Bilinearity gives
+\[
+ B(x,y')+B(x+x',y'')=B(x',y'')+B(x,y'+y''),            \tag{2}
+\]
+which proves associativity. The identity is zero and the inverse has
+coordinates $(-x,-y,-s+B_K(x,y),-t)$. Its commutator is central, with
+$s$-coordinate $B_K(x,y')-B_K(x',y)$.
+Thus the entries of $K$ are actual central causal commutators, not labels
+assigned to a preexisting Hodge class. Equation (2) is the coherence law.
+
+Integer coordinates form a discrete subgroup $\Gamma_K$. It is cocompact:
+first reduce $x,y$ modulo integers by left multiplication, then reduce
+$s,t$ modulo integers; all remaining coordinates lie in a bounded unit
+box. Define the actual compact manifold $Z_K=\Gamma_K\backslash G_K$.
+Its global invariant one-forms are
+\[
+ X_j=dx_j,\quad Y_j=dy_j,\quad
+ U_a=ds_a-\sum_jK_{aj}x_jdy_j,\quad V_a=dt_a,
+\quad dU_a=-\sum_jK_{aj}X_j\wedge Y_j.                \tag{3}
+\]
+In particular $d^2=0$ follows from the closed base forms and extends to the
+whole exterior algebra by the graded Leibniz rule.
+
+Give $Z_K$ the complex structure whose $(1,0)$ coframe is
+\[
+ \alpha_j=X_j+iY_j,\qquad\beta_a=U_a+iV_a.
+\]
+It is integrable, and this can be checked without postulating an
+integrability field: with $z_j=x_j+iy_j$, $w_a=s_a+it_a$, set locally
+\[
+ \zeta_a=w_a+\frac1{4i}\sum_jK_{aj}
+                   (z_j\bar z_j+\bar z_j^2/2).
+\]
+Direct differentiation gives
+$d\zeta_a=\beta_a+\sum_jK_{aj}(z_j+2\bar z_j)\,dz_j/(4i)$.
+Consequently $(z,\zeta)$ are local complex coordinates for the stated
+coframe; their real Jacobian is invertible. Left translations preserve
+the coframe type, so the lattice quotient is complex. The structure equation
+is $d\beta_a=-i\sum_jK_{aj}\alpha_j\wedge\bar\alpha_j/2$.
+Projection to $(x,y)$ is a holomorphic principal elliptic-torus bundle
+over $E_i^m$, with fiber $E_i^r$ and Chern pair $(-K,0)$.
+For $K=0$ this is exactly the projective torus $E_i^{m+r}$.
+For any original $X$ the world in the experiment is
+\[
+ W_K(X)=X\times Z_K,\qquad \dim_\C W_K=n+m+r.         \tag{4}
+\]
+These dimensions are observations of the constructed realizations.
+There is no finite upper bound on $m,r$ in the GST carrier.
+
+\section{The complete N-cohomology calculation, with all faces retained}
+Define the finite rational differential graded algebra
+\[
+ A_K=\left(\Lambda_\Q(X_1,Y_1,\ldots,X_m,Y_m,
+                         U_1,V_1,\ldots,U_r,V_r),d\right),       \tag{5}
+\]
+with (3) and every generator in degree one. Degree $k$ has exactly
+$\binom{2m+2r}{k}$ channels. Its differential $D_k$ is explicitly obtained
+by replacing each $U_a$ with its sum in (3), moving the wedge factors
+back to increasing order, and using the Leibniz sign for its position.
+
+\begin{theorem}[Full geometric cohomology, rather than a hole-count analogy]
+In every degree,
+\[
+ H^k(Z_K,\C)\simeq\ker(D_k\otimes\C)/\operatorname{im}(D_{k-1}\otimes\C),\qquad
+ b_k=\binom{2m+2r}{k}-\rank D_k-\rank D_{k-1}.         \tag{6}
+\]
+The complex identification is a cup-algebra isomorphism. The Betti numbers
+in (6) are the actual rational Betti dimensions, since matrix ranks are
+unchanged by scalar extension. On $W_K(X)$ the entire complex cohomology is
+$H^*(X,\C)\otimes H^*(A_K\otimes\C)$, with all multiplicities and signs.
+\end{theorem}
+\begin{proof}
+Here is a direct comparison for this family, so no unverified general
+nilmanifold comparison is being assumed. Average forms over the compact
+central torus acting on $Z_K$. Each translation is isotopic to identity;
+integrating the Cartan homotopy along that isotopy shows that averaging
+is chain homotopic to identity. Its image consists of forms invariant along
+the torus fibers. The connection coframe (3) identifies that complex with
+the base de Rham algebra of $T^{2m}$, with the exterior generators $U,V$
+and their displayed curvature differentials adjoined. Filter by their
+fiber degree. The inclusion of constant base forms induces an isomorphism
+on the base de Rham page, because constant forms compute the torus
+cohomology. The finite filtered-complex comparison proves that its
+extension (5) computes all cohomology over $\R$.
+
+Complexification gives the displayed cup-algebra identification. Universal
+coefficients identify the rational Betti numbers with these dimensions;
+the matrices in (5) are rational, so their ranks give those numbers exactly.
+The underlying manifold retains its canonical rational Betti structure.
+No claim that a bare channel labeling identifies its period lattice is
+needed here. Rank-nullity and $D_kD_{k-1}=0$ give (6). The product statement
+is Kunneth.
+\end{proof}
+
+For the Hodge filtration on de Rham cohomology it is useful to average
+coefficients in the invariant coframe over the whole compact quotient.
+This symmetrization commutes with $d$: the frame vector fields have
+zero divergence (the group is two-step nilpotent; its left and right
+translations have unit Jacobian), so the integral of a derivative is zero.
+It is a left inverse to inclusion of invariant forms and preserves every
+complex form type. By the just-proved cohomology isomorphism it induces
+the inverse on de Rham cohomology. Hence every filtered de Rham class has
+an invariant representative of the same filtration. This computes the
+actual filtration on cohomology. It is not a claim that all Dolbeault
+groups or every page of their spectral sequence have already been identified.
+
+\section{The experiment's exact preserving/breaking equation}
+Write $L_K:\C^r\to\C^m$, $(L_Kc)_j=\sum_a K_{aj}c_a$, and
+$\rho=\rank_\Q K=\rank_\C L_K$.
+
+\begin{theorem}[Whole-world opposedness defect]
+Let $F^1$ be the actual de Rham Hodge filtration on $H^1(W_K(X),\C)$.
+Then
+\[
+\begin{split}
+ b_1(W_K)&=b_1(X)+2m+2r-\rho,\\
+ \dim F^1H^1(W_K)&=h^{1,0}(X)+m+r-\rho,\\
+ F^1H^1(W_K)\cap\overline{F^1H^1(W_K)}&=0,\\
+ \dim\frac{H^1(W_K,\C)}{F^1+\overline{F^1}}&=\rho.    \tag{7}
+\end{split}
+Consequently the canonical whole-world pure-Hodge structure survives in
+this family exactly when $K=0$. For $K\ne0$ it already fails in degree
+one. This includes even $b_1$ cases; parity alone is not the criterion.
+\end{theorem}
+\begin{proof}
+Degree-one invariant classes have arbitrary coefficients on $X_j,Y_j,V_a$
+and $U$-coefficient $c\in\ker L_K$. There are no exact invariant
+one-forms. This gives $b_1(Z_K)=2m+2r-\rho$.
+A closed $(1,0)$ form has arbitrary $\alpha$ coefficients and a
+$\beta$ coefficient in $\ker L_K$. Symmetrization proves that these
+represent all of $F^1$, giving its dimension $m+r-\rho$.
+
+More precisely define the actual missing-mode map by sending the vertical
+coefficients $(c,d)$ on $U,V$ to $L_Kd$, and sending base coefficients to
+zero. It gives a short exact sequence
+\[
+ 0\longrightarrow F^1\oplus\overline{F^1}
+ \longrightarrow H^1(Z_K,\C)
+ \longrightarrow\operatorname{im} L_K\longrightarrow0.        \tag{8}
+\]
+Indeed the map is onto by choosing only $V$ coefficients. Its kernel has
+$L_Kc=L_Kd=0$. Such a pair has the explicit decomposition
+\[
+ c_+=(c-id)/2,\quad c_-=(c+id)/2,\qquad
+ (c,d)=(c_+,ic_+)+(c_-,-ic_-),                         \tag{9}
+\]
+with both $c_+,c_-$ in $\ker L_K$. Conversely a sum of these two closed
+pure types has $L_Kd=0$. Their intersection is zero, since both the sum
+and difference equations force both coefficients to vanish. The base
+types are independent as well. This proves (8).
+
+The original $X$ has its actual pure weight-one decomposition; Kunneth
+adds it without a defect. Equation (7) follows. If $\rho>0$, (8) is a
+failure of the opposedness equation required for a pure weight-one Hodge
+structure with this canonical filtration. If $\rho=0$, $K=0$ and (4) is
+the smooth projective $X\times E_i^{m+r}$, so the whole Hodge structure
+exists in every degree, with full polynomial
+\[
+ H_{W_0}(u,v)=H_X(u,v)(1+u)^{m+r}(1+v)^{m+r}.          \tag{10}
+\]
+This proves both directions, not only a necessary dimension count.
+\end{proof}
+In an even-dimensional first-Betti example, take $m=r=2$, $K=I_2$.
+Then $b_1(Z_K)=6$, $\dim F^1=2$, and the missing quotient has dimension
+two. Even Betti number has not hidden the failure. The statement concerns
+the geometric filtration; it does not forbid inventing a different abstract
+Hodge structure on an even-dimensional rational vector space.
+
+\section{Actual dimension folding, fusion, and complete rebirth}
+For two curvature worlds over the same $E_i^m$, form their actual fiber
+product and quotient by the antidiagonal central elliptic torus:
+\[
+ Z_K\star Z_L=(Z_K\times_{E_i^m}Z_L)/E_i^r\simeq Z_{K+L}.       \tag{11}
+\]
+The action is free and holomorphic. Locally the quotient adds the two
+vertical complex coordinates; the transition cocycles therefore add.
+The coordinate connections satisfy $U_{\rm sum}=U_K+U_L$, and the
+integer lattice maps by addition onto the sum lattice with antidiagonal
+kernel. This proves the global identification, including the lattice,
+not just a formal curvature equality. The dimensional process is
+$m+2r\to m+r$, or $n+m+2r\to n+m+r$ with original $X$ retained.
+This is an actual quotient fold of the space. No bijective cohomology
+transport between its changing topologies is presumed.
+The chronological word sector is realized in the action category of
+principal elliptic-torus torsors: an edge consists of a torsor to fuse with
+and the displayed isomorphism of its fusion with the next world.
+Composition fuses these acting torsors; the actual fusion associators
+give its higher coherence. It is not incorrectly identified with strict
+composition of the underlying unquotiented pull-push spans.
+
+For a finite causal word $(K_1,\ldots,K_l)$, its realized endpoint is
+$W_{K_{\rm tot}}$, $K_{\rm tot}=\sum_eK_e$. Equations (7) and (11) yield
+the requested complete decision equation
+\[
+ \boxed{\delta^1_{\rm fold}=\rank(\sum_eK_e),\qquad
+ \text{whole canonical Hodge structure}\iff\sum_eK_e=0.}        \tag{12}
+\]
+All intermediate worlds are safe precisely when every prefix sum is zero.
+For example the word $(K,-K)$ has an actually broken intermediate world
+and a fully restored projective endpoint $X\times E_i^{m+r}$.
+It restores the whole polynomial (10), not merely the type of one class.
+This is the geometric endpoint/prefix distinction anticipated by the
+existing GST causal defect laws. Associativity follows from (2) and
+addition of the transition cocycles; the higher relation has actual data.
+
+\begin{theorem}[Independent dimensions and fused dimensions differ]
+Independent worlds satisfy
+$Z_K\times Z_L\simeq Z_{\operatorname{diag}(K,L)}$ by their actual group
+and lattice coordinates. Thus their full Betti polynomials multiply and
+their opposedness defects add:
+\[
+ \delta^1(Z_K\times Z_L)=\rank K+\rank L.              \tag{15}
+\]
+In particular $Z_K\times Z_{-K}$ has defect $2\rank K$, whereas
+$Z_K\star Z_{-K}=E_i^{m+r}$ has defect zero. Opposite labels do not
+repair the whole structure by themselves; the actual quotient fold (11)
+does. For $m=r=1,K=(1)$, the independent product has complex dimension
+four, $b_1=6$, $\dim F^1=2$, and defect two. The shared-base fusion has
+complex dimension two, $b_1=4$, $\dim F^1=2$, and defect zero.
+\end{theorem}
+\begin{proof}
+The block-diagonal bilinear cocycle is the product cocycle, so (1), the
+lattice, and the complex coframe split into their two factors. Kunneth
+gives the full cohomology product, while (8) splits the missing-mode
+quotient as a direct sum. The fusion assertion follows from (11).
+\end{proof}
+This is where the existing full-product N-cohomology law is used: independent
+channel indices are multiplied before taking the graded direct sums.
+The actual differential remains in every channel. A balanced scalar
+signature from \texttt{balancedCausalFold\_purity} cannot substitute for
+this computed whole-space opposedness quotient.
+
+Under the owner's provisional universal-Hodge hypothesis, every rational
+Hodge class on every projective endpoint in (12) has an algebraic
+representative by that hypothesis. Nonzero-curvature worlds are compact
+complex but non-Kahler and nonprojective, as (7) proves. The experiment
+has genuinely left that category there. The original projective $X$
+does not lose its Hodge structure; its newly constructed whole-space
+realization $W_K$ is what changes. This distinction preserves the exact
+meaning of the owner's proposed topology change.
+
+\section{Closed all-dimensional spectrum for one central curvature handle}
+For $r=1$ let $t$ be the number of nonzero entries in the row $K$.
+The active curvature is a nondegenerate alternating form on $2t$ base
+directions. The remaining $2(m-t)$ base directions and $V$ are closed.
+With binomials zero outside their ranges, put
+\[
+ a_k(t)=\max\{\binom{2t}k-\binom{2t}{k-2},0\}
+       +\max\{\binom{2t}{k-1}-\binom{2t}{k+1},0\}.
+\]
+Then the full Betti polynomial is
+\[
+ P_{Z_K}(z)=(1+z)^{2(m-t)+1}
+                   \sum_{k=0}^{2t+1}a_k(t)z^k.        \tag{13}
+\]
+For $t=0$ it gives $(1+z)^{2m+2}$, including the two closed vertical
+directions. For $t>0$ it gives the broken worlds of (7).
+To prove (13), separate cochains without and with $U$. The differential
+is wedge multiplication by the active symplectic form on the latter.
+Its rank on $\Lambda^j\Q^{2t}$ is
+$\min\{\binom{2t}j,\binom{2t}{j+2}\}$. To check this explicitly, make
+the symplectic monomial basis orthonormal and let $L$ be wedge multiplication
+and $\Lambda=L^*$ contraction. Expanding on the four states
+$1,X_j,Y_j,X_jY_j$ for each pair gives
+$[\Lambda,L]|_{\Lambda^j}=(t-j)I$. Therefore
+$\|Lv\|^2=\|\Lambda v\|^2+(t-j)\|v\|^2$; $L$ is injective for $j<t$.
+Exterior duality gives surjectivity for $j\geq t-1$. This proves the
+rank formula in every degree. The cokernel without $U$ and kernel with $U$
+give the two terms $a_k(t)$. Tensor the closed directions to finish.
+
+The first-Betti defect does not determine the full N-cohomology:
+for $m=2,r=1$, the rows $(1,0)$ and $(1,1)$ both have $\rho=1$, but
+their complete Betti lists are respectively
+\[
+ (1,5,11,14,11,5,1),\qquad(1,5,9,10,9,5,1).            \tag{14}
+\]
+Thus distributing the causal curvature across emergent dimensions changes
+the higher cohomology even when the first-degree readout agrees. The
+full differential and every tensor coordinate, not just its rank or
+scalar mass, must remain in the GST state.
+
+\begin{theorem}[Both outcomes in every sufficiently large observed dimension]
+For every original $n$-dimensional $X$ and every $N\geq n+2$, the construction
+gives two actual complex $N$-dimensional worlds: one with the full projective
+Hodge structure and one with a canonical Hodge opposedness defect one.
+\end{theorem}
+\begin{proof}
+Take $r=1$, $m=N-n-1\geq1$. The choices $K=0$ and $K=(1,0,\ldots,0)$
+have the same observed dimension $n+m+r=N$, but ranks zero and one.
+Equations (7) and (10) prove the two asserted outcomes. These are different
+topologies, since their first Betti dimensions differ by one.
+\end{proof}
+
+\section{Audit, attribution, and implementation boundary}
+The experiment now has an actual construction, explicit full cochain
+complex, a geometric dimension-reducing fusion, and proved preserving,
+breaking and complete-restoration equations. It uses and extends the
+listed custom modules. The central extensions, torus bundles and
+symplectic exterior-algebra facts are established mathematical mechanisms;
+they are not renamed as newly invented GST facts. The branch contribution
+is this explicitly typed realization and its tested integration with GST
+causal history, full N-channel differential and opposedness equations.
+No historical-novelty assertion is made.
+
+The Lean changes formalize the actual central cocycle/associativity,
+the word General Space, vector-valued N-channel boundary, explicit
+decomposition (9), and dimension/defect readouts. They remain uncompiled
+at the owner's request. They do not pretend to contain the entire
+manifold/analytic comparison as Lean instances. Mathematical review is
+self-review; exact Python and Wolfram calculations independently test
+the exterior differential and ranks in their declared finite ranges.
+
+The result is a completed answer for this specified all-$X$, unbounded
+finite-dimensional family of folds under the requested provisional
+experiment. It is not a classification of all imaginable GST realizations
+or an unconditional deduction of the provisional Hodge hypothesis.
+\end{document}

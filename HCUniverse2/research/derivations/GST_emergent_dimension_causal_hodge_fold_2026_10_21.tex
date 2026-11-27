@@ -1,0 +1,808 @@
+\documentclass[11pt]{article}
+\usepackage[margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
+\newcommand{\cl}{\mathrm{cl}}
+\newtheorem{theorem}{Theorem}
+\title{GST emergent-dimensional causal folds: all-N geometric reconstruction and Hodge-type boundary}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\section{GST ontology versus actual complex geometry}
+The real source \texttt{GSTGeneralSpace.lean} defines a carrier
+and associative identity-composable paths with NO dimension or metric.
+The real source \texttt{GSTGradedWorldAlgebra.lean} defines
+\[
+ D(a,b)=a+b,\qquad Q(a,b)=a-b\quad (a,b\in\mathbb N).
+\]
+The actual signed charge \(Q\) is not automatically Hodge bidegree:
+a separate geometry realization must carry lattice coordinates
+to genuine Dolbeault \((a,b)\) cohomology. This is a TESTABLE bridge.
+\texttt{GSTGraphV2RecursiveStateCausality.lean} carries finite paths
+between different world-dependent states;
+\texttt{GSTGraphV2UnboundedHigherCausality.lean} provides
+higher globular coherence at every natural level.
+Their identity cells are causal levels, not literally
+smooth algebraic varieties of every complex dimension.
+
+For testing, ASSUME universal rational Hodge algebraicity
+on every smooth projective complex X. This is a
+hypothesis, not a step establishing the Hodge conjecture.
+
+\section{Charge conservation for the arbitrary-N Tate causal fold}
+For any \(j\ge0\) define
+\(T_j(a,b)=(a+j,b+j)\). Then identically
+\[
+ \boxed{D(T_j(a,b))=D(a,b)+2j,\quad
+ Q(T_j(a,b))=Q(a,b),\quad T_kT_j=T_{j+k}.} \tag{1}
+\]
+\begin{theorem}[Typed GST causal Hodge-charge conservation]
+Realize every primitive causal edge as an actual algebraic
+pullback, proper Gysin push, cup by algebraic cycle or
+algebraic correspondence between smooth projective complex
+varieties, with the correct cohomological and Tate twists.
+Then every homogeneous edge maps \(H^{a,b}\) into
+\(H^{a+j,b+j}\), for its appropriate integer shift j.
+All composable finite causal paths therefore PRESERVE
+the signed Hodge imbalance \(a-b\). Their actual
+Chow actions commute with the GENUINE canonical Betti class.
+\end{theorem}
+\begin{proof}
+Algebraic pullbacks preserve each Hodge bidegree,
+Gysin maps change both bidegrees by the same integer,
+and actual algebraic codimension-r cycles are type (r,r).
+All projective-bundle and blowup arrows are sums and
+compositions of these typed operators.
+Composition adds equal shifts, proving the assertion.
+Chow push-pull naturality yields the canonical class square.
+The result is independent of assuming the Hodge conjecture.
+\end{proof}
+
+\section{TRUE arbitrary-dimensional projective-world fold and its exact inverse}
+Let X be ANY smooth projective complex variety and
+E an ACTUAL rank-(N+1) algebraic vector bundle on X,
+for arbitrary finite N. Set
+\(Y_N=\mathbf P_X(E)\), with the quotient convention,
+projection \(\pi:Y_N\to X\), and
+\(\xi=c_1(\mathcal O_{\mathbf P(E)}(1))\).
+The true dimension is \(\dim_{\mathbb C}Y_N=\dim X+N\);
+by the projective-bundle theorem,
+\[
+ \boxed{H^{2p}(Y_N,\Q)
+ =\bigoplus_{i=0}^N\xi^i\pi^*H^{2(p-i)}(X,\Q)}
+                                                               \tag{2}
+\]
+and the EXACT same formula holds with \(H^{2p}\)
+replaced by the rational Chow group \(\CH^p\).
+The actual cycle-class comparison commutes with this splitting.
+
+Put \(s_k=\pi_*(\xi^{N+k})\) for \(k\ge0\).
+For genuine Chern classes \(c_k(E)\), the precise
+quotient-convention generating-series relation is
+\[
+ S(t)=\sum_{k\ge0}s_kt^k=\frac1{c_E(-t)},\qquad
+ c_E(t)=\sum_{k\ge0}c_k(E)t^k.
+\]
+For every actual \(\beta=\sum_{i=0}^N\xi^i\pi^*\alpha_i\)
+of cohomological degree 2p define causal
+downward measurements \(y_j=\pi_*(\xi^{N-j}\beta)\).
+The true Chern--Segre fold and recovery equations are
+\[
+ \boxed{y_j=\sum_{i=j}^Ns_{i-j}\alpha_i,\qquad
+ \alpha_j=\sum_{\ell=j}^N(-1)^{\ell-j}c_{\ell-j}(E)y_\ell.}
+                                                               \tag{3}
+\]
+All products are genuine cup or Chow products,
+so \(\deg\alpha_i=2(p-i)\) and \(\deg y_j=2(p-j)\).
+
+\begin{theorem}[Unbounded-N exact GST fold reconstruction and defect splitting]
+Equations (2)--(3) are mutually inverse for every finite N.
+In particular the actual diagonal rational Hodge spaces split as
+\[
+ \Hdg^p(Y_N)_\Q
+     =\bigoplus_{i=0}^N\xi^i\pi^*\Hdg^{p-i}(X)_\Q.
+\]
+Write \(A^p(X)=\cl_X^{can}(\CH^p(X)_\Q)\) and
+\(D^p(X)=\Hdg^p(X)_\Q/A^p(X)\).
+Then the ACTUAL arbitrary-X defect satisfies
+\[
+ \boxed{D^p(Y_N)\cong\bigoplus_{i=0}^ND^{p-i}(X).} \tag{4}
+\]
+Thus arbitrary projective elevation and Chern--Segre
+return DO NOT manufacture a missing original-X source.
+Under assumed universal Hodge, both sides are zero,
+but that is a consequence of the hypothesis.
+\end{theorem}
+\begin{proof}
+The projective-bundle push formula is
+\(\pi_*\xi^m=0\) for \(m<N\) and
+\(\pi_*\xi^{N+k}=s_k\). Applied termwise this gives
+the upper-triangular first equation (3).
+Since \(S(t)c_E(-t)=1\), convolution with
+\((-1)^jc_j(E)\) gives the displayed inverse for
+ALL N. The decomposition respects actual Hodge
+bidegree because \(\xi\) is type (1,1);
+it equally respects the algebraic Chow image.
+Quotienting their compatible direct sums proves (4).
+\end{proof}
+
+\noindent\textbf{Exact Wolfram N=3 check.}
+Writing \(s_1=c_1,s_2=c_1^2-c_2,
+s_3=c_1^3-2c_1c_2+c_3\), the fold matrix is
+\[
+ M=\begin{pmatrix}
+ 1&c_1&s_2&s_3\\0&1&c_1&s_2\\
+ 0&0&1&c_1\\0&0&0&1
+ \end{pmatrix},\qquad
+ M^{-1}=\begin{pmatrix}
+ 1&-c_1&c_2&-c_3\\
+ 0&1&-c_1&c_2\\0&0&1&-c_1\\0&0&0&1
+ \end{pmatrix}.
+\]
+Wolfram confirmed both exact products equal \(I_4\)
+and arbitrary formal layer coefficients are recovered.
+
+\section{Irreversible world birth: blowup causal decomposition and Hodge defect conservation}
+The actual GST
+\texttt{SelfExpandingCosmology.TwoSourceBirth}
+allows two independently
+realized parent/source cycle geometries to
+contribute to a newborn world.
+Its \texttt{SplitTwoSourceBirth} records
+reverse geometric retractions, and the Lean theorem
+\texttt{split_world_birth_hodge_complete_iff_sources}
+shows that any split-exact born world is Hodge-complete
+exactly when BOTH input worlds are Hodge-complete.
+The following is a bona fide geometric instantiation
+for arbitrary original X, not an abstract assumed
+surjective map.
+
+Let \(i:Z\hookrightarrow X\) be an ACTUAL smooth
+closed subscheme of codimension \(c\ge2\).
+Let \(b:Y=\operatorname{Bl}_Z X\to X\)
+be the genuine projective blowup with exceptional
+\(j:E=\mathbf P_Z(N_{Z/X})\hookrightarrow Y\),
+\(q:E\to Z\), and
+\(\zeta=c_1(\mathcal O_E(1))\).
+The ACTUAL Chow decomposition is
+\[
+ \boxed{
+ CH^p(Y)_\Q =
+ b^*CH^p(X)_\Q
+ \oplus
+ \bigoplus_{a=1}^{c-1}
+ j_*\bigl(\zeta^{a-1}q^*CH^{p-a}(Z)_\Q\bigr).
+ }                                                        \tag{4a}
+\]
+The actual rational Betti Hodge decomposition has
+the same direct-sum form with a
+Tate shift \((-a)\) on the center classes.
+
+\begin{theorem}[GST causal exceptional-world conservation of rational Hodge defect]
+For ANY smooth projective complex X and ANY
+ACTUAL smooth center Z of codimension \(c\ge2\),
+the original-X and exceptional-center classes
+give a split rational identity
+\[
+ \boxed{
+ D^p(Y)\cong D^p(X)\oplus
+       \bigoplus_{a=1}^{c-1}D^{p-a}(Z).
+ }                                                        \tag{4b}
+\]
+The algebraic blowup world may be topologically
+different from X, and can gain new Hodge directions,
+but no defect from the base disappears.
+If one ASSUMES the Hodge conjecture for every X
+and every smooth center Z, all terms vanish and
+the new world is automatically Hodge-complete.
+An actual source-birth proof on arbitrary X,
+however, cannot simply assert these center classes
+are algebraic without independently constructing
+their cycles.
+\end{theorem}
+\begin{proof}
+The genuine Chow blowup decomposition is the
+actual blowup-Gysin formula with terms displayed
+in (4a). Rational cohomological blowup
+decomposition is induced by the SAME pull,
+exceptional Gysin, tautological classes and
+proper projections; it splits each rational
+Hodge (p,p) space as the base and
+\((p-a,p-a)\) exceptional-center classes.
+The canonical cycle-class map intertwines
+these two direct-sum decompositions, block by
+block. Passing to the cokernels of the
+componentwise maps gives (4b).
+The base defect is a direct summand; no
+equal-Hodge-degree algebraic operation on
+this world can erase it by mere recoordination.
+\end{proof}
+
+\section{Real Hodge-breaking fold on a smooth projective abelian surface}
+Take the ACTUAL \(A=E_i\times E_i\), where
+\(E_i=\mathbb C/(\mathbb Z+i\mathbb Z)\),
+with marked real forms \((dx_1,dx_2,dy_1,dy_2)\)
+and holomorphic
+\(\omega_1=dx_1+i\,dy_1,\ \omega_2=dx_2+i\,dy_2\).
+The rational class
+\[
+ \eta=dx_1\wedge dy_2-dy_1\wedge dx_2
+\]
+is the canonical Betti class of the
+algebraic signed divisor combination
+\([\{o\}\times E]+[E\times\{o\}]-[\Delta_E]\).
+
+Define the actual smooth involution
+\[
+ F(x_1,y_1;x_2,y_2)=(x_1,-y_1;x_2,y_2),
+ \qquad F^2=\mathrm{id}.
+\]
+It is a legal REAL/topological involution of the torus,
+but not holomorphic on its FIRST elliptic factor
+(and not an algebraic morphism of the product).
+
+\begin{theorem}[Exact non-Hodge class created by a non-Hodge-compatible GST recoordination]
+The genuine cohomological pullback is
+\(\eta'=F^*\eta=dx_1\wedge dy_2+dy_1\wedge dx_2\).
+In the SAME FIXED original Hodge decomposition,
+\[
+ \boxed{\eta\wedge\omega_1\wedge\omega_2=0,\qquad
+ \eta'\wedge\omega_1\wedge\omega_2
+ =-2i\;dx_1\wedge dx_2\wedge dy_1\wedge dy_2\ne0.}
+                                                               \tag{5}
+\]
+Hence \(\eta'\) is rational but NOT of Hodge type (1,1)
+on A. This is a concrete Hodge-breaking spatial fold,
+not a Hodge-conjecture counterexample: the resulting
+class lies outside the conjecture's hypothesis.
+\end{theorem}
+\begin{proof}
+The pullback changes the sign of \(dy_1\) alone.
+Direct expansion in the ordered integral 1-form
+basis gives the two wedge coefficients \(0,-2i\).
+For a rational real class on a complex surface,
+vanishing of the \((0,2)\) part is equivalent to
+vanishing of the wedge with its holomorphic (2,0)
+volume form. Reality then forces the (2,0) part
+to vanish as well. The second coefficient is
+nonzero, proving the assertion.
+\end{proof}
+
+\section{Universal all-N Hodge-instability on stabilized arbitrary X}
+The previous
+non-holomorphic
+test admits an
+EXACT all-varieties,
+all-dimensions
+stabilization.
+Write \(\eta\)
+and \(\eta'=F^*\eta\)
+for the actual
+rational cohomology
+classes on
+\(A=E_i^2\)
+from the
+previous section.
+The two genuine
+holomorphic
+one-forms
+give the
+stronger identity
+\[
+ \boxed{
+ \eta'
+  =\frac{\omega_1\wedge\omega_2-
+       \overline\omega_1\wedge\overline\omega_2}{2i}
+   \in H^{2,0}(A)\oplus H^{0,2}(A).
+ }                                                        \tag{5a}
+\]
+There is NO
+\((1,1)\) component
+at all.
+
+For ANY
+smooth projective
+complex variety X
+of ANY dimension d,
+ANY \(N\ge0\),
+and \(0\le j\le N\),
+define the
+ACTUAL smooth
+projective
+higher-dimensional
+world
+\[
+ Y_{X,N}=X\times A\times\mathbf P^N
+\]
+and its ACTUAL
+integral rational
+algebraic class
+\[
+ \gamma_{X,N,j}
+  =\pr_A^*\eta
+      \smile\pr_{\mathbf P^N}^*h^j
+  \in H^{2(j+1)}(Y_{X,N},\Q).
+\]
+It is type
+\((j+1,j+1)\)
+and has an
+EXPLICIT
+algebraic Chow
+representative:
+the genuine
+original divisor
+combination on A
+times \(j\)
+hyperplanes
+in the projective
+factor.
+Define the
+topological
+fold
+\(
+ \mathcal F_{X,N}
+ =\mathrm{id}_X\times F\times
+       \mathrm{id}_{\mathbf P^N}
+\).
+It is an
+ACTUAL smooth
+involution,
+but not
+an algebraic
+or holomorphic
+map of
+\(Y_{X,N}\).
+
+\begin{theorem}[For EVERY arbitrary X and N, a genuine stabilized topological fold births non-Hodge cohomology]
+For ALL smooth
+projective X,
+all \(N\ge0\)
+and all
+\(0\le j\le N\),
+the original
+\(\gamma_{X,N,j}\)
+is rational
+algebraic and
+pure type
+\((j+1,j+1)\),
+whereas
+\[
+ \boxed{
+ \mathcal F_{X,N}^*\gamma_{X,N,j}
+   \in H^{j+2,j}(Y_{X,N})
+       \oplus H^{j,j+2}(Y_{X,N})
+ }
+                                                               \tag{5b}
+\]
+has NONZERO
+components in
+BOTH displayed
+off-diagonal
+Hodge sectors,
+and ZERO
+diagonal
+\((j+1,j+1)\)
+component.
+In GST graded
+charge language,
+the originally
+zero charge
+splits into
+two nonzero
+charges \(+2\)
+and \(-2\),
+for every
+emergent N.
+No genuine
+algebraic/Tate
+fold can
+implement
+this change,
+because those
+preserve signed
+Hodge charge.
+\end{theorem}
+\begin{proof}
+Use the exact
+identity (5a),
+pull it back
+to the product,
+and cup with
+the projective
+hyperplane
+power of type
+\((j,j)\).
+The two
+resulting terms
+have bidegrees
+\((j+2,j)\)
+and
+\((j,j+2)\),
+with no
+diagonal
+term.
+Kunneth
+injectivity
+of the external
+product with
+nonzero
+\(h^j\in
+H^{2j}(\mathbf
+P^N,\Q)\)
+shows neither
+summand
+vanishes,
+for all
+\(0\le j\le N\).
+The original
+cycle is
+manifestly
+algebraic
+as the
+external product
+of actual
+divisors
+and hyperplanes.
+The topological
+fold acts
+non-holomorphically
+on just
+one elliptic
+factor,
+so it is
+outside
+the permitted
+algebraic
+Tate-causal
+edge class.
+\end{proof}
+
+\noindent\textbf{Interpretation under the user-proposed universal-Hodge assumption.}
+This theorem
+IS an exact
+all-original-X
+dimensionally
+stabilized
+non-Hodge
+BIRTH under
+topological
+recoordination.
+It does NOT
+make any
+rational Hodge
+class on a
+smooth projective
+world fail
+to be algebraic,
+because its
+post-fold
+class is
+NOT a
+Hodge
+\((p,p)\) class
+in that
+world.
+The
+hypothetical
+universal
+Hodge truth
+is perfectly
+consistent
+with both
+the all-N
+fold result
+and
+the Hodge-safe
+Chern--Segre
+reconstruction
+theorem.
+
+\section{Topology-changing pinched fold: born mixed weight on a projective curve}
+Let C be the actual nodal rational projective curve
+obtained by identifying two distinct points P,Q
+of \(\mathbf P^1\). The genuine normalization
+\(\nu:\mathbf P^1\to C\) gives
+\(0\to\Q_C\to\nu_*\Q_{\mathbf P^1}
+\to\Q_{\mathrm{node}}\to0\), with
+node map \((a,b)\mapsto a-b\).
+Its exact sheaf-cohomology sequence gives
+\[
+ \boxed{H^0(C,\Q)=\Q,\quad
+ H^1(C,\Q)=\Q(0),\quad H^2(C,\Q)=\Q(-1).}          \tag{6}
+\]
+Here \(H^1(C,\Q)\) has mixed-Hodge WEIGHT ZERO,
+not the pure weight ONE of \(H^1\) on a smooth
+projective curve. A topology-changing singular
+GST fold can therefore change Hodge-weight
+constraints by changing the realization CATEGORY.
+This is not a counterexample on a smooth projective X.
+
+\section{GST causal leakage operator: an exact equation deciding whether a fold births Hodge or non-Hodge structure}
+The previous
+examples can
+be unified by
+an ACTUAL
+linear
+operator on
+a genuine
+Hodge realization,
+rather than
+only by the
+abstract
+\(a+b,a-b\)
+cosmic coordinates.
+For a fixed
+smooth projective
+complex world
+and a fixed
+cohomological
+degree m, set
+\[
+ V_{\C}=H^m(X,\C)
+   =\bigoplus_{a+b=m}H^{a,b}(X),
+\quad
+ P_q=\sum_{a-b=q}
+        P^{a,b}.
+\]
+The canonical
+Hodge decomposition
+supplies the
+ACTUAL
+charge
+projectors
+\(P_q\).
+For any
+specified
+complex-linear
+cohomology
+operator
+\(F:V_{\C}\to V_{\C}\)
+induced by a
+genuine
+geometric
+recoordination,
+define the
+off-charge
+LEAKAGE:
+\[
+ \boxed{
+ \mathcal L_q(F)
+  :=\sum_{r\ne q}P_r F P_q.
+ }                                                        \tag{7}
+\]
+For an operator
+between worlds,
+use the
+source and
+target
+charge
+projectors
+respectively,
+with the
+correct
+cohomological
+and Tate
+degree shifts.
+
+\begin{theorem}[Exact causal-fold criterion, composition, and bidirectional charge rebirth]
+A homogeneous
+cohomology
+operator F
+preserves ALL
+Hodge signed
+charges if and
+only if
+\[
+ \boxed{
+       \mathcal L_q(F)=0
+                  \text{ for EVERY }q.
+ }                                                        \tag{8}
+\]
+Any finite
+composition of
+charge-preserving
+operators
+remains
+charge-preserving,
+independently
+of the number
+of GST causal
+higher-coherence
+levels.
+For every
+typed
+algebraic/Tate
+causal edge
+from the
+first theorem,
+(8) holds.
+
+For the
+genuine
+partial-conjugation
+involution F
+on
+\(A=E_i^2\),
+\[
+ \boxed{
+ \mathcal L_0(F^*)(\eta)=\eta'\ne0,
+ \qquad
+ (F^*)^2\eta=\eta,\qquad
+ (F^*)^2\eta'=\eta'.
+ }                                                        \tag{9}
+\]
+In particular
+a FIRST
+fold sends a
+rational
+algebraic
+Hodge class
+to a rational
+NON-Hodge
+class;
+the SECOND
+fold returns
+that class to
+the original
+Hodge sector.
+Charge leakage
+along individual
+events can
+cancel along
+an entire
+causal history.
+Thus a GST
+graph edge
+must carry
+its own
+Hodge-compatibility
+certificate;
+the mere
+existence of
+a higher
+coherence
+cell is not
+such a
+certificate.
+\end{theorem}
+\begin{proof}
+The mutually
+orthogonal
+projectors
+\(P_q\)
+sum to the
+identity.
+Thus
+\(F(P_qv)\)
+has charge q
+for EVERY v
+if and only if
+all its
+projections to
+different charge
+sectors vanish,
+which is
+exactly (8).
+If F and G
+each map
+every
+charge-q
+summand into
+the corresponding
+charge-q
+summand,
+so does
+\(G\circ F\);
+induction
+handles
+all finite
+causal paths.
+An algebraic
+Tate fold
+preserves the
+difference a-b
+by direct
+Hodge type
+calculation,
+giving zero
+leakage.
+For partial
+conjugation
+the original
+eta is of
+charge 0,
+while
+\(\eta'\)
+is the nonzero
+sum of
+the exact
+charge +2
+and -2
+forms (5a).
+Therefore
+\(\mathcal L_0(F^*)(\eta)
+=\eta'\).
+The genuine
+diffeomorphism F
+is an involution,
+so its
+cohomology
+pullback squares
+to the
+identity,
+proving the
+remaining
+equations.
+\end{proof}
+
+\noindent\textbf{What this operator does and does not prove.}
+Equation (8)
+is a complete
+DECISION
+CRITERION
+for Hodge
+charge
+compatibility
+of a GIVEN
+fully realized
+cohomology
+operator.
+It does
+NOT build
+the necessary
+geometric
+cohomology
+operator
+from
+the bare
+GST graph
+alone, nor
+show that
+a non-Hodge
+rational
+class is
+a Hodge
+conjecture
+counterexample.
+It gives
+an exact
+cross-world
+and causal
+matrix
+test for
+the user's
+new
+dimensional
+folding
+program.
+
+\section{Exact GST graph-causality realization contract}
+The source-file dictionary is:
+\texttt{GSTGeneralSpace.lean} = dimensionless carrier;
+\texttt{GSTGeneralSpaceSchemeDimensionObservation.lean}
+= dimension from scheme-local realizations;
+\texttt{GSTGradedWorldAlgebra.lean} = D and Q;
+\texttt{GSTGraphV2RecursiveStateCausality.lean}
+= composable world-dependent event histories;
+\texttt{GSTGraphV2UnboundedHigherCausality.lean}
+= globular higher coherence;
+\texttt{GSTGraphV2SelfExpandingCosmology.lean}
+= typed actual-source births and split defect transport;
+\texttt{GSTGeneralSpaceCohomology.lean}
+= no native-image escape by reversible compatible transport.
+
+An admissible Hodge-proving causal EDGE must carry
+its ACTUAL smooth-projective geometric map/correspondence,
+Chern--Segre/twist degree, canonical Chow action and
+proof of Hodge-bidegree compatibility.
+A topological nonholomorphic fold or singular pinch
+can change Hodge type or purity, but cannot certify
+an algebraic representative on original X.
+The exact next possible primitive source-birth event
+must be nontrivial on the defect quotient after
+actual original-X Chow return; equation (4)
+rules out ordinary projective-dimensional inflation alone.
+\end{document}

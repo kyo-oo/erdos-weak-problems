@@ -1,0 +1,66 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newcommand{\Q}{\mathbf Q}
+\newcommand{\PP}{\mathbf P}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\End}{\operatorname{End}}
+\title{GST: finite-projection geometry, universal extremal one-fold cyclicity, and ramified-fiber obstruction}
+\date{13 November 2026}
+\begin{document}\maketitle
+\noindent\textbf{Owner target.} For arbitrary original smooth projective complex \(X\), integer \(p\), and prescribed \(\alpha\in W_p(X):=H^{2p}(X,\Q)\cap H^{p,p}(X)\), construct \(Z_\alpha\in\CH^p(X)_\Q\) satisfying the canonical Betti equality \(\cl(Z_\alpha)=\alpha\). The full \texttt{NativeGSTSingleFoldOrbitLaw} additionally requires a genuinely realized, finite-left-fiber correspondence word with one cyclic native seed. The theorems below are fully proved for the stated scopes and do not assert this unrestricted target.
+
+\begin{theorem}[Universal finite projector]
+Let \(X/\mathbf C\) be smooth projective connected, \(\dim X=d\), and let \(L\) be sufficiently ample with \(h=c_1(L)\). There is a finite morphism \(\pi:X\to\PP^d\) with \(\pi^*\mathcal O(1)=L\). The scheme-theoretic correspondence \(\Gamma_h=X\times_{\PP^d}X\subset X\times X\) is finite over the first factor. Its normalized action on every \(H^{2p}(X,\Q)\) is
+\[
+\boxed{P_{h,p}(\alpha)=\frac{\pi^*\pi_*\alpha}{\delta}
+=\frac{\int_X\alpha\,h^{d-p}}{\int_Xh^d}\,h^p,\qquad P_{h,p}^2=P_{h,p},\quad \delta=\deg\pi.}
+\]
+In particular \(\operatorname{im}P_{h,p}\subset\Q h^p\) consists of genuine algebraic classes.
+\end{theorem}
+\begin{proof}
+Take \(d+1\) sufficiently general sections of a very ample \(L\) with no common zero. The map to \(\PP^d\) is proper with no positive-dimensional fiber, since \(L=\pi^*\mathcal O(1)\) is ample. Hence it is finite. The pullback of the diagonal is the closed fiber product; with proper scheme-theoretic multiplicities its cohomological correspondence action is \(\pi^*\pi_*\). Writing \(\pi_*\alpha=c t^p\) for \(t=c_1(\mathcal O(1))\), projection formula gives \(c=\int_X\alpha h^{d-p}\). As \(\int_Xh^d=\deg\pi\) and \(\pi_*\pi^*=\delta\), the formula and idempotence follow.
+\end{proof}
+
+\begin{proposition}[Exact ramification obstruction in the current point rule]
+The set-theoretic transition of \texttt{GSTClassicalHodgeFiniteClosedCorrespondence.lean} need not induce a canonical cohomology operator for an arbitrary finite correspondence, even when the underlying correspondence is a genuine closed subscheme finite over the first factor.
+\end{proposition}
+\begin{proof}
+Let \(X=\PP^1\) and \(\pi([u:v])=[u^2:v^2]\). The finite relation \(X\times_{\PP^1}X\) has local equation \(y^2=x^2\). The reduced geometric fiber above \(x=1\) contains \(y=\pm1\), while that above \(x=0\) contains only \(y=0\). The existing rule sums distinct fiber points and weights by the right residue degrees: its two outputs have degrees \(2\) and \(1\), respectively. But \([1]\) and \([0]\) have identical canonical Betti classes, so no linear map on \(H^2(\PP^1,\Q)\) can realize both values. The actual scheme fiber at \(x=0\) has length two, giving the correct \(2[0]\). Repair requires scheme lengths/flat intersection multiplicities, not more set-theoretic points.
+\end{proof}
+
+\begin{theorem}[Universal extremal Hodge cyclicity in the true finite-correspondence category]
+For every smooth projective connected \(X\) of dimension \(d\ge2\), the standard, multiplicity-corrected additive category of finite algebraic correspondences contains an actual rational finite correspondence \(T_p\) and native algebraic cycle \(z_p\) whose orbit spans the entire rational Hodge fiber \(W_p(X)\), for \(p=0,1,d-1,d\). For \(p=1,d-1\) the Hankel detector can be chosen algebraic and has nonzero determinant.
+\end{theorem}
+\begin{proof}
+For \(p=1\), put \(V=\mathrm{NS}(X)_\Q=W_1(X)\) and \(\rho=\dim V\). Fix ample \(h_0\), \(\delta_0=\int h_0^d\), and \(B(u,v)=\int_Xuv h_0^{d-2}\). The Hodge index theorem says \(B\) is nondegenerate, positive on \(h_0\) and negative definite on \(V_0=\{v:B(v,h_0)=0\}\). Choose rational basis \(v_1,\ldots,v_{\rho-1}\) of \(V_0\) and let \(h_1=h_0\), \(h_{i+1}=h_0+\varepsilon v_i\) for small nonzero rational \(\varepsilon\); after positive integer scaling each is very ample. The \(h_i\) form a basis of \(V\). Set \(\ell_h(w)=(\int_Xwh^{d-1})/(\int_Xh^d)\). For \(v\in V_0\), its derivative is
+\[
+ (D\ell)_{h_0}(v)(w)=\frac{d-1}{\delta_0}B(v,w),
+\]
+since the volume-denominator variation vanishes on \(V_0\). Therefore \(\ell_{h_i}\) form a basis of \(V^*\) for sufficiently small rational \(\varepsilon\). Theorem 1 supplies the actual finite correspondences \(P_i=P_{h_i,1}=h_i\otimes\ell_{h_i}\). By ampleness,
+\(c_{ij}=\ell_{h_i}(h_j)>0\). Their actual finite-correspondence compositions satisfy
+\[
+ \frac{P_iP_j}{c_{ij}}=h_i\otimes\ell_{h_j}.
+\]
+These rank-one maps linearly span \(\End_\Q(V)\). Choose their rational combination inducing \(T(h_i)=h_{i+1}\) for \(i<\rho\), \(T(h_\rho)=0\), and choose \(z=h_1\). The actual orbit is a basis.
+For \(p=d-1\), Hard Lefschetz gives a rational Hodge isomorphism \(h_0^{d-2}:W_1\to W_{d-1}\), hence all these classes are algebraic. The vectors \(u_i=h_i^{d-1}\) form a basis by differentiating at \(h_0\), and \(\ell_i(w)=\int_Xwh_i/\int_Xh_i^d\) form a dual-spanning family by the perfect pairing with \(W_1\). Again \(P_{h_i,d-1}=u_i\otimes\ell_i\) and all \(c_{ij}=\ell_i(u_j)>0\), so their finite compositions generate \(\End_\Q(W_{d-1})\), including a nilpotent cyclic shift with seed \(u_1\). The complementary Hodge fibers are algebraic, so choose dual algebraic cycles to define a terminal moment detector. Its Hankel matrix is anti-identity with determinant \((-1)^{\rho(\rho-1)/2}\). For \(p=0,d\), the identity graph with the fundamental/point class gives cyclicity. The proof uses \emph{scheme-theoretically correct finite correspondences}; the repository's old point-enumeration type needs Proposition 2's repair before this can be transferred to the exact Lean certificate.
+\end{proof}
+
+\begin{theorem}[One actual graph for every weight of arbitrary projective products]
+Let \(X=\prod_{i=1}^r\PP^{n_i}\), choose distinct primes \(m_i\), and let \(f=\prod f_i\) with \(f_i([x_0:\ldots:x_{n_i}])=[x_0^{m_i}:\ldots:x_{n_i}^{m_i}]\). For each \(p\), its single graph correspondence (automatically finite over the first factor) has a genuine cyclic seed \(z_p=\sum_{|a|=p}h^a\). Its nonzero Hankel determinant is
+\[
+\boxed{\det H_p=\prod_{a<b}(\lambda_b-\lambda_a)^2,\qquad
+\lambda_a=\prod_i m_i^{n_i-a_i},\quad 0\le a_i\le n_i,\quad \sum a_i=p.}
+\]
+\end{theorem}
+\begin{proof}
+The entire rational Hodge fiber has algebraic monomial basis \(h^a\). The proper pushforward obeys \(f_*h^a=\lambda_a h^a\), with all eigenvalues distinct by prime factorization. Thus the Krylov orbit of \(\sum_a h^a\) is an invertible Vandermonde system. Take the actual algebraic detector \(\ell(\beta)=\int_X\beta\,\sum_{|a|=p}h^{n-a}\). Then \(H_{ij}=\ell(f_*^{i+j}z_p)=\sum_a\lambda_a^{i+j}=V^\top V\), so \(\det H=(\det V)^2\).
+\end{proof}
+
+\noindent\textbf{Canonical source obstruction.} The universal finite-projector operator algebra sends all positive-length words into \(\Q\)-linear combinations of powers of algebraic ample classes. On \(D_p(X)=W_p(X)/\operatorname{im}(\CH^p(X)_\Q)\), such words act by zero, and the identity acts by scalars. Thus they cannot manufacture an algebraic representative for an unknown primitive middle Hodge class. The unrestricted alpha-dependent algebraic projector/surjectivity problem, and the original strict Lean formalization of ramified finite correspondences, are not proved here. Claiming the global GST hypothesis from these valid scoped results would be incorrect.
+
+\noindent\textbf{Reproducibility.} Wolfram exact arithmetic and an independent SymPy verifier tested 21 weight/family pairs for the prime-graph Hankel identity, the \(X=\PP^1\times\PP^1\) finite projection \(2\times2\) example (determinant \(-9/8\)), and the ramification difference (two reduced points versus one, scheme length two). General conclusions rest on the displayed proofs, not the finite test range.
+\end{document}

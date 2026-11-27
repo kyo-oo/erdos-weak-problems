@@ -1,0 +1,116 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-PRESCRIBED-RESIDUAL-SPECTRAL-SOURCE-20261020",
+  "repository": {
+    "commit": "782f4c9d180836afed481c477a8a4cb52eaec4d6",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "research/computations/gst_residual_defined_spectral_source_attempt.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      }
+    ],
+    "hardware": "x86_64; Linux-6.18.55-x86_64-with-glibc2.39; host CPU model unrecorded"
+  },
+  "mathematics": {
+    "assertion_tested": "Residual Hermitian symbol reconstructed from its (2,2) exterior tensor; exact spectral projectors with nonzero matrix detection; zero primitive ch2/c2 periods of constant image bundles and polarized twists; trace-free nonzero nilpotent integrability coefficient",
+    "coefficient_domain": "Q; exact Fraction matrices and eight-generator exterior products",
+    "conventions": "Spectral basis 12,13,14,23,24,34; complex exterior order z1,...,z4,bar(z1),...,bar(z4); real order u1,v1,...,u4,v4; polarization signs +,+,-,-; symbol normalized by nonzero scalar",
+    "inputs": [
+      "research/computations/gst_residual_defined_spectral_source_attempt.py"
+    ],
+    "bounds": {
+      "spectral_matrix_shape": [
+        6,
+        6
+      ],
+      "spectral_projector_products": 9,
+      "rank_twist_checks": 36,
+      "ranks": [
+        1,
+        2,
+        4,
+        6,
+        8,
+        12
+      ],
+      "twists": [
+        -7,
+        -1,
+        0,
+        1,
+        3,
+        11
+      ],
+      "basepoint_free_kernel_twists_inclusive": [
+        1,
+        24
+      ],
+      "nilpotent_trace_powers_inclusive": [
+        1,
+        12
+      ],
+      "timeout_seconds": 30
+    },
+    "non_claims": [
+      "No universal detecting algebraic source or center was constructed",
+      "No rational Hodge counterexample",
+      "No no-go for nonparallel geometric incidence or other component-changing constructions",
+      "The chosen nonintegrable connection does not rule out other integrable structures"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T08:20:15.492518+00:00",
+    "runtime_seconds": 0.04512265399989701,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": 1,
+      "max_threads": 1
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_residual_defined_spectral_source_attempt.output.json",
+      "sha256": "d0a1fc8fb91a2b3c66f8e8f1db1b32b64f14b3fccb99f41266ae4906b53bccec",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Exterior reconstruction gives the claimed Hermitian symbol without specifying its matrix by fiat",
+    "All nine projector products, their sum and trace ranks agree exactly",
+    "The matrix target readout is 2 but every tested native primitive bundle period is 0",
+    "The displayed target has primitive norm 8 and compatible polarization top degree 24",
+    "The full nilpotent obstruction coefficient is nonzero while each checked trace is zero; N squared zero is checked exactly",
+    "Script input bytes unchanged during execution"
+  ],
+  "result": "The exact assertions passed and refute this proposed spectral source constructor as a universal detector. The requested universal construction remains unproved.",
+  "residual_risks": [
+    "Triviality of constant image bundles, the geometric interpretation of the Weil chart and the basepoint-free exact sequence use the accompanying mathematical derivation",
+    "Finite checks of twists and words do not replace the structural Q[theta] and constant-frame arguments",
+    "No assertion about the native Chow image outside the tested constructor class"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/gst_residual_defined_spectral_source_attempt.py",
+      "sha256": "f184ef47a8306b00a6e0fd6440f3ddf6e65f8ee93ce49f46a98167e1cd92012e",
+      "sha256_after": "f184ef47a8306b00a6e0fd6440f3ddf6e65f8ee93ce49f46a98167e1cd92012e"
+    }
+  ],
+  "declared_results": [
+    "research/computations/gst_residual_defined_spectral_source_attempt.output.json"
+  ]
+}

@@ -1,0 +1,227 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\Ann}{\operatorname{Ann}}
+\newcommand{\im}{\operatorname{im}}
+\title{GST all-degree curvature memory: Poincare doubles and specialization}
+\author{Hand derivation before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+\section{Input, comparison and purpose}
+Starting checkpoint: \texttt{f96a12fe6c4617555a1495bd14c6ef2b06851c93}.
+Fix the original arbitrary connected smooth projective complex $n$-fold $X$,
+$1\le p\le n$, and the prescribed rational Hodge class $\alpha$.
+Put $A=H^*(X,\Q)$, $d=2n$, $s=2p-1$, and retain the \emph{entire}
+graded-commutative rational cup algebra, including odd classes.
+The previously constructed rational homotopy-fiber fold has full cochain
+model
+\[
+ B_\alpha=A\otimes\Lambda(u,v),\qquad |u|=|v|=s,
+ \quad du=\alpha,\quad dv=0.                                      \tag{1}
+\]
+Its topological input is chosen from this very $\alpha$; this is not an
+algebraic bundle constructed from a hypothetical Chow representative.
+The rational homotopy comparison and formality of the smooth projective
+base are the existing inputs, not new claims proved by matrix checks.
+This continuation computes every degree and the perfect multiplicative
+pairing of (1), and executes a new parameter-dependent curvature attempt.
+The universal Chow target remains the actual original-$X$ canonical cycle
+map; none of the cochains below is relabelled as an algebraic cycle.
+
+\section{Full cohomology ring, with odd base classes}
+Let $L_\alpha(a)=\alpha a$, $Q=A/\alpha A$ and $N=\Ann_A(\alpha)$.
+Write coefficients to the left of $u$ and $v$.
+\begin{theorem}[Complete paired-fold ring]\label{thm:ring}
+There is a canonical graded-algebra identification
+\[
+ H^*(B_\alpha)=\left(Q\ltimes Nu\right)\otimes\Lambda(v).           \tag{2}
+\]
+The $Nu$ ideal is square-zero and has degree shift $s$.
+For homogeneous representatives, multiplication before adjoining $v$ is
+\[
+ (a+bu)(c+eu)=ac+\bigl(ae+(-1)^{|c|}bc\bigr)u.                   \tag{3}
+\]
+The $v$ factor has the usual graded tensor sign.
+\end{theorem}
+\begin{proof}
+In the $u$ factor $d(bu)=(-1)^{|b|}b\alpha$. Thus cycles have $b\in N$
+and boundaries are exactly $\alpha A$ in the base component, with no
+$u$ component. The sign changes no kernel or image. Changing $a$ by
+$\alpha z$ changes its product with $eu$ by zero since $e\alpha=0$.
+The product of two $u$ terms vanishes since $u^2=0$. This proves (3),
+including odd coefficients; the closed exterior $v$ factor gives (2).
+No formality of $B_\alpha$ follows from this ring computation.
+\end{proof}
+
+\section{Poincare duality reconstructs the surviving half}
+Let $\int_A:A^d\to\Q$ be the actual trace of the original $X$.
+\begin{theorem}[Canonical duality double]\label{thm:double}
+The pairing
+\[
+ Q^i\times N^{d-i}\longrightarrow\Q,\qquad
+ ([a],b)\longmapsto\int_A ab                                  \tag{4}
+\]
+is well-defined and perfect. Consequently $H^*(A\otimes\Lambda(u))$
+is the graded trivial extension of $Q$ by its graded dual shifted to
+formal dimension $d+s$. The trace of $bu$ is $\int_A b$.
+The full paired fold (2) is a Poincare duality algebra of formal dimension
+\[
+                         D=d+2s=2n+4p-2.                       \tag{5}
+\]
+Its trace extracts the $uv$ coefficient and integrates it on original $X$.
+\end{theorem}
+\begin{proof}
+An element of $N$ annihilates every $\alpha z$, proving well-definedness.
+By graded commutativity and even $|\alpha|$, the adjoint of
+$L_\alpha:A^{i-2p}\to A^i$ under the original perfect pairings is
+$L_\alpha:A^{d-i}\to A^{d-i+2p}$, without a curvature sign.
+Its kernel is the annihilator of its image. Finite-dimensional perfect
+linear algebra therefore gives exactly (4), on both sides. The base
+quotient and shifted annihilator pair perfectly through the trace; the
+annihilator ideal is square-zero and the base-base trace in degree $d+s$
+is zero since $A^{>d}=0$. This is the graded trivial-extension pairing,
+with the signs already fixed by (3). Tensor with the perfect exterior
+pairing $1\cdot v=v$ to obtain dimension (5). In particular the first
+annihilator half is not lost data or an assumed collection of new free
+handles: it is precisely the dual of the surviving marked-base quotient.
+\end{proof}
+
+\section{Exact rank polynomial and first visible defect}
+For every integer $j$, set $a_j=\dim A^j$ and
+$r_j=\operatorname{rank}(L_\alpha:A^j\to A^{j+2p})$, using zero
+outside the actual range. Let $P_A(t)=\sum a_jt^j$ and
+$R_\alpha(t)=\sum r_jt^j$.
+\begin{theorem}[All-degree curvature profile]\label{thm:profile}
+\[
+ P_{B_\alpha}(t)=(1+t^s)
+ \left((1+t^s)P_A(t)-(t^{2p}+t^s)R_\alpha(t)\right).             \tag{6}
+\]
+Equivalently,
+\[
+ b_k=a_k+2a_{k-s}+a_{k-2s}
+      -r_{k-2p}-r_{k-s}-r_{k-s-2p}-r_{k-2s}.                   \tag{7}
+\]
+The rank polynomial satisfies
+$R_\alpha(t)=t^{d-2p}R_\alpha(t^{-1})$.
+The total Betti dimension and loss from the flat fold are
+\[
+ \dim H(B_\alpha)=4(\dim A-\operatorname{rank}L_\alpha),\quad
+ P_{B_0}-P_{B_\alpha}=t^s(1+t)(1+t^s)R_\alpha(t).              \tag{8}
+\]
+If $\alpha\ne0$, every degree $k<s$ is unchanged, while the first
+loss at degree $s=2p-1$ is exactly one. In particular every $p\ge2$
+fold is invisible to the degree-one defect alone.
+\end{theorem}
+\begin{proof}
+The quotient in degree $k$ has dimension $a_k-r_{k-2p}$; the shifted
+annihilator has dimension $a_{k-s}-r_{k-s}$. Multiply their sum by
+$1+t^s$. This proves (6)--(7), and evaluation at $1$ proves (8).
+The transpose computation in Theorem~\ref{thm:double} gives the rank
+symmetry. For connected $X$ and nonzero $\alpha$, $r_0=1$, so the
+nonnegative loss polynomial has its first coefficient at $s$, equal
+to one. These formulas include $\alpha=0$ and retain every odd base class.
+They concern Betti dimensions, not an assigned Hodge opposedness index
+in higher degree without a filtered comparison.
+\end{proof}
+
+\section{Execute a genuinely parameter-dependent attempt}
+Use $z$ for a new rational parameter, $T=\Q[z]$, and form the actual
+free cochain family
+\[
+ \mathcal B=A[z]\otimes\Lambda(u,v),\qquad du=z\alpha,\quad dv=0.
+                                                                    \tag{9}
+\]
+This is an algebraic family of DGAs, not an asserted family of projective
+varieties. It attempts to restore the flat world by switching off curvature
+while retaining its prescribed-input memory.
+\begin{theorem}[Specialization and first-order recovery]\label{thm:family}
+The cohomology over $T$ is
+\[
+ H(\mathcal B)=\left(A[z]/z\alpha A[z]\ \ltimes\ N[z]u\right)
+                      \otimes\Lambda(v).                         \tag{10}
+\]
+Its $z$-torsion is exactly
+\[
+ (\alpha A)\otimes T/(z)\otimes\Lambda(v),                          \tag{11}
+\]
+with the actual base degrees. Every such torsion class is killed by one
+power of $z$; no longer torsion tower occurs. Its total dimension is
+$2\operatorname{rank}L_\alpha$.
+The canonical specialization map fits, degree by degree, into
+\[
+ 0\to H^k(\mathcal B)\otimes_T\Q
+   \to H^k(B_0)
+   \to \operatorname{Tor}_1^T(H^{k+1}(\mathcal B),\Q)\to0.        \tag{12}
+\]
+Thus the special world gains $4\operatorname{rank}L_\alpha$ classes
+relative to the generic world: half from torsion, half from its adjacent
+Tor term. Merely substituting $z=0$ in generic cohomology loses these
+classes. The first Bockstein on the special world is the full derivation
+\[
+ \beta_1(u)=\alpha,\qquad\beta_1(v)=0,\qquad\beta_1(A)=0.        \tag{13}
+\]
+Its cohomology is $H(B_\alpha)$, and all subsequent differentials vanish.
+The actual prescribed $\alpha$, rather than only its numerical rank,
+is recovered by (13) with the original-base marking retained. More generally,
+two marked first-jet differentials coincide if and only if their full
+cup operators coincide: evaluate their first coefficient on each $au$.
+\end{theorem}
+\begin{proof}
+Multiplication by $z$ is injective on $A[z]$, so
+$\Ann_{A[z]}(z\alpha)=N[z]$. The same cycle/boundary calculation as
+Theorem~\ref{thm:ring} proves (10). The torsion subspace consists exactly
+of the constant image $\alpha A$ modulo $z\alpha A[z]$; a complement to
+$\alpha A$ in $A$ is free over $T$, and $N[z]u$ is free. This proves
+(11), independently of the complement chosen for the argument.
+For a finite free cochain complex over the PID $T$, diagonalize its
+boundary maps with compatible kernel bases: here those diagonal entries
+are already $z$ times the nonzero constant pivots of $L_\alpha$.
+Each resulting summand is a free zero-differential class or the two-term
+map $T\xrightarrow{z}T$ in consecutive degrees. For the free summands
+(12) is immediate; for a two-term summand the specialization differential
+is zero and its two classes are exactly the tensor and Tor terms. Direct
+sum proves (12) without an unjustified ordinary base-change assertion.
+Dividing $d(u)=z\alpha$ by $z$ modulo $z$ proves (13), with the full
+Leibniz signs. Each two-term block has only this first differential; the
+free blocks have none. Hence higher Bocksteins vanish.
+\end{proof}
+
+\section{A discriminating control and constructive disposition}
+For the actual smooth projective $X=\mathbb P^2\times\mathbb P^2$,
+$A=\Q[x,y]/(x^3,y^3)$, compare the two prescribed degree-four inputs
+$\alpha=x^2$ and $\alpha'=xy$. Both have one nonzero curvature handle,
+$p=2$, and unchanged degree-one cohomology. Their total multiplication
+ranks are respectively $3$ and $4$, so (8) gives full paired dimensions
+$24$ and $20$, both in formal dimension $14$. This control distinguishes
+a genuinely all-degree prediction from a repeated one-dimensional rank
+census. It is not a restriction of the general theorem to this family.
+Odd-base controls use actual exterior cohomology algebras of elliptic
+curves; their signs and duality are tested independently.
+
+For arbitrary original $(X,p,\alpha)$, (9) is an actual new source-search
+object chosen from $\alpha$ and its canonical specialization/first-order
+coupling is exactly (13). Its cohomology and specialization are now fully
+computed. It is a rational cochain deformation, not an independently
+constructed Chow class. Therefore it supplies the completed all-degree
+fold calculation and a precise algebraization discriminator: any claimed
+flat projective realization preserving this marked family would have to
+explain both its rank jump and its nonzero base boundary. The previous
+projective retraction theorem already excludes a compatible projective
+nullifier for nonzero $\alpha$; it is not used as a new source hypothesis.
+
+\section{Self-audit and implementation boundary}
+The ring calculation generalizes the preceding even-base result and checks
+all odd signs. The trace proof uses finite-dimensional Poincare duality,
+not a positivity claim about the new nonprojective world. The parameter
+family has free \emph{cochains}; its cohomology need not be flat, as (11)
+explicitly proves. The ordinary-specialization error is tested by the
+smallest two-term block. The formal dimension in (5) is a rational model
+observation, not the complex dimension of a newly invented variety.
+The Lean additions encode explicit cycle/boundary packets, the exact
+quotient readout and annihilator pairing, plus arithmetic and first-order
+specialization equations. The full geometric comparison, graded trivial
+extension and PID base-change proof remain hand proofs. No Lean compilation,
+independent referee or historical-priority claim is made.
+\end{document}

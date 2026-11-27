@@ -1,0 +1,509 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,geometry}
+\geometry{margin=1in}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\GammaL}{\Gamma}
+\newcommand{\Cfour}{C_4}
+\newcommand{\Gbul}{\mathcal{G}_\bullet}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\End}{\operatorname{End}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\mud}{\mu_2}
+
+\title{The boundary breach: the uniform kill, the honest-invariant dichotomy,
+the gerbe ambient, and the multiplicative envelope of the reconstruction
+(Round 29)}
+\author{GST Hodge campaign --- the operator's standing completion program}
+\date{2026-11-01 (session clock)}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Round 28 closed the abelian two-cell reduction at the committed deck and
+left four named boundaries: (a) the torsion boundary $\partial\in
+H^3(\Gbul;\mud)$ of the nonabelian reconstruction; (b) the
+fiber-centralizer condition (the idealization $A^\GammaL=A$); (c) the
+general-input deck (the ledger-085 boundary, reframed as the
+functoriality of the five-term in the deck); (d) the $2m$-versus-$4m$
+glue. This round breaches three of the four and builds the envelope
+object of the fourth. \textbf{(T1)} the \emph{Uniform Kill}: for EVERY
+extension $1\to\GammaL\to G\to\Cfour\to 1$ and EVERY $G$-module $A$,
+every class $c\in H^2(G;A)$ satisfies $16\,c=0$ --- the five-term plus
+the $|\Cfour|$-torsion law; the composition chain's denominator is
+bounded by $16\cdot m\cdot(p-1)!$ across the \emph{entire input axis}:
+boundary (d) is \emph{discharged for the rational statement}, and the
+committed exponent is $2$ (Round 28's kill confirmed directly in
+$H^2$), the glue input realizes $4$, the extreme honest
+$A^\GammaL=\Z$ input realizes $4$ with a free rank-16 strip sector.
+\textbf{(T2)} the \emph{honest-invariant dichotomy}: the concentration
+kernel on the post-strip sector is exactly
+$\im\bigl(H^2(\Cfour;A^\GammaL)\bigr)$; both honest cases
+($A^\GammaL=A$: the committed idealization; $A^\GammaL=0$: an explicitly
+constructed free $\Gbul$-module, its fiber cohomology
+$H^1(\GammaL;A_{\mathrm{free}})=\Z/2$ computed) \emph{concentrate}; the
+Stone--von Neumann sentence of boundary (b) is replaced by the exact
+criterion $H^2(\Cfour;A^\GammaL)=0$. \textbf{(T2b)} the
+\emph{post-strip sector repair}: the full
+$H^2(\Gbul;A)\cong\Z^{12}\oplus(\Z/2)^6$ is computed exactly --- the
+free $E^{0,2}$ strip sector survives in the full group and is the
+mixed-cell map's kernel \emph{there}; the two-cell class lives in the
+post-strip sector (the vanishing fiber-strip, justified by the descent
+setup's fiber-flatness), where the mixed-cell map IS injective: the
+Round-28 headline is made exact. \textbf{(T3)} the \emph{gerbe
+ambient}: $H^*(\Gbul;\F_2)$ is computed exactly by the split total
+complex: $H^0=1$, $H^1=8$ (the abelianization), $H^2=30$,
+$H^3=\F_2^{71}$ --- the ambient group of the torsion boundary
+$\partial$, with hostile controls (the trivial deck, the negation deck,
+the pure swap deck, the closed-form module decomposition).
+\textbf{(T4)} the \emph{nonabelian reconstruction layer}: (i) the
+$2\times2$ content envelope \emph{cannot} carry the deck (the deck
+action on the Weil plane is neither an algebra homomorphism of the
+quaternion order nor inner --- every unit squares to $\pm I$, so every
+inner automorphism has order $\le 2<4$): the honest obstruction datum;
+(ii) the equivariant realization at the $H_z$ level: the rotation
+lattice $L=\ker(\Phi^2+1)\subset\End(\Z^8)$ ($\Phi(X)=\gamma X\gamma^{-1}$)
+has rank exactly $24$, and every primitive $A'\in L$ with
+$B':=-\Phi(A')$ satisfies $\gamma A'\gamma^{-1}=-B'$,
+$\gamma B'\gamma^{-1}=A'$ --- the deck's conjugation \emph{realizes}
+the content rotation; (iii) the \emph{dressed two-cell}: for the
+committed lifting cocycle $c_\nu$ and all $24$ equivariant
+realizations, the matrices $M=I_8+X(c_\nu)$ satisfy the full nonabelian
+$2$-cocycle identity --- \emph{the multiplicative layer of the
+reconstruction is constructed}: boundary (a) is reduced to the
+\emph{residual $\mud$-class of the doubled dressed transport}, now a
+well-posed question inside the computed ambient $\F_2^{71}$.
+\textbf{(T5)} the \emph{deck functoriality instances}: the deck
+automorphism, the $R3$ intertwining, and the index-$2$ sublattice
+pullback (the doubled content $2f_w$ is a coboundary: the obstruction
+is a mod-$2$ lattice refinement) --- boundary (c)'s frame, with the
+deck-existence at the general input remaining the named open object.
+Certificate: \texttt{boundary\_breach\_checks.py}, 154 checks, exit 0,
+deterministic double-run byte-identical; the dressed-cocycle identity
+is closed on the \emph{complete basis sweep} (all $(h,k,l)$, all
+letter-basis $(w,u)$-pairs: $4096$ cells, $0$ failures --- with the
+bilinearity in $(w,u)$ per $(h,k,l)$ and the independence of $(v,l)$,
+the ``for all $x,y,z$'' quantifier is proved, not sampled).
+\end{abstract}
+
+\section{Setting}
+
+The committed model is unchanged from Round 28: $\GammaL=\Z^8$ with
+letters $e_j,f_j$ ($j=0..3$) and $\theta=\sum_j e_j\wedge f_j$; the deck
+$\Cfour=\langle\gamma\rangle$ with $\gamma$ the Gaussian rotation
+$g=(i,1,1,1)$ ($e_0\mapsto -f_0$, $f_0\mapsto e_0$, six letters fixed),
+an exact element of $\mathrm{Sp}(8,\Z)$; $\Gbul=\GammaL\rtimes\Cfour$
+with $(v,h)(w,k)=(v+\gamma^h w,\,h+k)$. The content module
+$A=\iota(M)$, $\iota(x)=(x,-x)$, $M=\Z\langle W_R,W_I\rangle$ the Weil
+plane with $\gamma(W_R)=-W_I$, $\gamma(W_I)=W_R$; at the cochain model
+the fiber acts trivially ($A^\GammaL=A$), Round 28's idealization,
+replaced by the exact dichotomy below. All cohomology is integral
+unless stated; $\mud=\{\pm I\}$.
+
+\section{The uniform kill (T1): boundary (d) discharged}
+
+\begin{theorem}[Uniform kill]\label{th:uniform}
+Let $1\to\GammaL\to G\to\Cfour\to 1$ be any extension and $A$ any
+$G$-module. Then every class $c\in H^2(G;A)$ satisfies $16\,c=0$.
+\end{theorem}
+
+\begin{proof}
+The Lyndon--Hochschild--Serre low-degree exact sequence reads
+\[
+H^2(\Cfour;A^\GammaL)\longrightarrow H^2(G;A)\longrightarrow
+H^1\bigl(\Cfour;H^1(\GammaL;A)\bigr)\longrightarrow H^3(\Cfour;A^\GammaL).
+\]
+By exactness the kernel of the mixed-cell map is
+$\im\bigl(H^2(\Cfour;A^\GammaL)\bigr)$, a quotient of
+$H^2(\Cfour;A^\GammaL)$. The $|\Cfour|$-torsion law: for a finite group
+$Q$ and any $Q$-module $M$, the composite
+$\mathrm{cor}\circ\mathrm{res}=|Q|$ annihilates $H^n(Q;M)$ for $n\ge1$
+(since $\mathrm{res}$ lands in $H^n(1;M)=0$), so $H^n(\Cfour;M)$ is
+$4$-torsion. Hence $4\,\mathrm{im}(c)=0$ in the mixed layer, i.e.\
+$\mathrm{mix}(4c)=0$, so $4c\in\ker(\mathrm{mix})$ which is itself
+$4$-torsion: $16\,c=0$.
+\end{proof}
+
+\begin{corollary}[The input-axis denominator bound]
+At every decked input --- whatever the honest $A^\GammaL$, whatever the
+glue --- the rational chain of Round 28 closes with denominator at most
+$16\cdot m\cdot(p-1)!$. The $2m$-versus-$4m$ distinction (boundary (d))
+is an integral refinement, never a rational obstruction.
+\end{corollary}
+
+The certificate instantiates and gates the law on the module family:
+every invariant factor of $H^n(\Cfour;M)$ ($n=1,2$) is $2$ or $4$ for
+the Weil plane, the trivial module, the swap, the negation, and the
+glue module $\Z[x]/((x+1)(x^2+1))$ (checks 0018--0031; the glue
+realizes the $\Z/4$ at the mixed-layer level $H^1$, its deck layer
+$H^2$ vanishing --- no eigenvalue-$1$ content --- which is exactly where
+the $4m$ distinction lives). The group-level exponents are computed
+directly by the integral total complex (Theorem~\ref{th:engine}): the
+committed content $2$, the glue content $4$, the trivial content $4$
+(checks 0039--0041).
+
+\begin{remark}
+The committed exponent $2$ is now computed \emph{directly}:
+$H^2(\Gbul;A)\cong\Z^{12}\oplus(\Z/2)^6$ (Section~\ref{sec:sector}):
+the torsion sector is the mixed layer's $(\Z/2)^6$ lifted, with no
+$4$-torsion: the Round-28 SNF decision confirmed at the group level by
+an independent engine.
+\end{remark}
+
+\section{The honest-invariant dichotomy (T2): boundary (b) discharged}
+
+\begin{theorem}[Dichotomy]\label{th:dich}
+On the post-strip sector (Section~\ref{sec:sector}) the kernel of the
+mixed-cell map $H^2(\Gbul;A)\to H^1(\Cfour;H^1(\GammaL;A))$ is exactly
+$\im\bigl(H^2(\Cfour;A^\GammaL)\bigr)$. In particular the
+concentration is injective whenever
+$H^2(\Cfour;A^\GammaL)=0$ --- \emph{both} honest cases qualify:
+\begin{enumerate}
+\item[(i)] $A^\GammaL=A$ (the committed idealization): $H^2(\Cfour;A)=0$
+by the committed $R1$ law (the norm degeneration
+$N=(1+\gamma)(1+\gamma^2)=0$ with no invariants);
+\item[(ii)] $A^\GammaL=0$ (the free case): constructed below.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+The five-term exactness gives the kernel as the inflation image; the
+two cases make the image vanish. For (ii) the free module: the letters
+$e_0,f_0$ act by the reflections $R_{e_0}=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$
+and $R_{f_0}=\left(\begin{smallmatrix}0&-1\\-1&0\end{smallmatrix}\right)$, the six fixed letters
+trivially, and the deck by $S=\mathrm{diag}(1,-1)$; the eight letter
+commutations, $S^4=I$, and all eight conjugation relations
+$S\,T_j\,S^{-1}=\rho(\gamma b_j)$ are gated exactly (checks
+0043--0080). The fiber invariants
+$A^\GammaL=\ker(R_{e_0}-1)\cap\ker(R_{f_0}-1)=\langle(1,1)\rangle\cap
+\langle(1,-1)\rangle=0$ (check 0082), so $H^2(\Cfour;A^\GammaL)
+=H^2(\Cfour;0)=0$ (check 0083). The module's honest fiber cohomology
+is computed by the Koszul engine with the letters live:
+$H^1(\GammaL;A_{\mathrm{free}})=\Z/2$ (check 0086) --- the free module's
+mixed-layer input is pure $2$-torsion, inside the uniform bound.
+\end{proof}
+
+\begin{remark}
+The fiber-centralizer condition of the Round-28 boundary (b) --- the
+Stone--von Neumann sentence --- is hereby replaced by the exact
+criterion $H^2(\Cfour;A^\GammaL)=0$: no irreducibility hypothesis is
+needed. The mixed case ($A=A_{\mathrm{free}}\oplus\Z_{\mathrm{triv}}$:
+$A^\GammaL=\Z$, $H^2(\Cfour;A^\GammaL)=\Z/4\ne0$ --- checks 0125--0127)
+is the honest worst case, and the uniform kill (Theorem~\ref{th:uniform})
+covers it: $16$ kills every class. Note the computed subtlety
+(check 0125): the \emph{full} mixed module carries
+$H^2(\Cfour;A_{\mathrm{mixed}})=(\Z/4)^2$, the second $\Z/4$ coming from
+the free part's deck-invariant direction --- which is not
+letter-invariant and is therefore correctly excluded from
+$A^\GammaL$.
+\end{remark}
+
+\section{The post-strip sector (T2b): the Round-28 headline made exact}
+\label{sec:sector}
+
+\begin{theorem}[The full group and the sector]\label{th:sector}
+At the committed model:
+\[
+H^2(\Gbul;A)\;\cong\;\Z^{12}\;\oplus\;(\Z/2)^6,
+\qquad
+H^1(\Gbul;A)\;\cong\;\Z^2\oplus\Z/2.
+\]
+The free $\Z^{12}$ is the $E^{0,2}$ layer: the $\Cfour$-invariant
+cross-wedge tensors in $A\otimes\wedge^2\GammaL^*$ (the $\theta$-shaped
+part exactly zero, as in Round 28). On the \emph{full} $H^2$ the
+mixed-cell map has the free strip sector in its kernel; on the
+\emph{post-strip sector} $F^1$ --- the classes whose fiber-strip
+restriction vanishes --- the mixed-cell map is injective (the kernel is
+the inflation image $=0$ by $R1$), and the two-cell class
+$[C_T^0]$ lives in $F^1$.
+\end{theorem}
+
+\begin{proof}
+The computation is the integral split total complex
+(Theorem~\ref{th:engine}): $H^2$ is read off as
+$H^2(\Cfour;A)\;\oplus\;H^1(\Cfour;A\otimes\GammaL^*)\;\oplus\;
+(A\otimes\wedge^2\GammaL^*)^{\Cfour}=0\oplus(\Z/2)^6\oplus\Z^{12}$
+(checks 0032--0033), and $H^1$ as
+$A/(\gamma-1)A\oplus(A\otimes\GammaL^*)^{\Cfour}=\Z/2\oplus\Z^2$
+(check 0035; the Round-28 T1d receipt reproduced independently). The
+rank-12 invariant cross-wedge lattice is computed directly inside the
+complex (check 0128). The two-cell class lies in $F^1$ because the
+descent setup's transport composes exactly on the abelian fiber cells
+(the pure-fiber groupoid is a genuine functor there:
+$C_T|_{\GammaL\times\GammaL}=\mathrm{id}$ in the criterion's
+normalization): the fiber-strip restriction of $[C_T^0]$ vanishes. On
+$F^1$ the five-term's kernel is the inflation image, zero by $R1$.
+\end{proof}
+
+\begin{remark}[The repair]
+Round 28's headline --- ``the mixed-cell map is injective'' --- is
+correct \emph{on the post-strip sector}, and the sector is where the
+two-cell class lives by the descent setup's own fiber-flatness. The
+full-group kernel (the free strip sector) is now a computed object,
+and with it the exact statement of the Round-28 T1: injectivity on
+$F^1$, the kill $2[C_T^0]=0$ inside $F^1$ sound. This is the
+receipt-level repair of the 28-b F1 finding: the sector is now
+\emph{defined} on the face, not implicit.
+\end{remark}
+
+\section{The gerbe ambient (T3): $H^*(\Gbul;\F_2)$ exactly}
+
+\begin{theorem}[The split total complex]\label{th:ambient}
+With trivial $\F_2$-coefficients the Lyndon--Hochschild--Serre total
+complex for $1\to\GammaL\to\Gbul\to\Cfour\to 1$ splits: the torus
+product-CW differential vanishes, and over $\F_2$ the $\Cfour$-periodic
+differentials reduce to $(1+\tau)$ and $0$ alternating, where
+$\tau=\gamma\bmod 2$ is the transposition of $e_0,f_0$ fixing the six
+letters. Consequently
+\[
+H^n(\Gbul;\F_2)\;=\;\bigoplus_{p+q=n}H^p\bigl(\Cfour;\wedge^q(\F_2^8)\bigr),
+\qquad
+H^0=1,\quad H^1=8,\quad H^2=30,\quad H^3=71.
+\]
+Since the $\mud$-coefficients of the torsion boundary are
+$\F_2$-trivial, $H^3(\Gbul;\mud)\cong\F_2^{71}$: \emph{the ambient group
+of the boundary class $\partial$ is computed exactly, and it is not
+zero.}
+\end{theorem}
+
+\begin{proof}
+The mod-$2$ letter action is the involution $\tau$; the letter space
+decomposes as $P\oplus\F_2^6$ with $P$ the two-dimensional swap
+module, so $\wedge^q(\F_2^8)\cong\F_2^{\binom6q+\binom6{q-2}}\oplus
+P^{\binom6{q-1}}$, and both the invariants and the coinvariants of $P$
+over $\F_2$ contribute one dimension each:
+$H^p(\Cfour;\wedge^q)=\F_2^{d(q)}$ with
+$d(q)=\binom6q+\binom6{q-1}+\binom6{q-2}$, giving the diagonal sums
+$8,30,71$ (the closed-form gates 0015--0017). The split is verified
+computationally: the total complex with
+$d_{\mathrm{vert}}=0$ has the row cohomologies as its total cohomology,
+and the hostile controls confirm the engine: the $H^1=8$ against the
+direct abelianization count (the letter-coinvariant homs $1+6$ plus
+the deck $1$; check 0011); the trivial deck against the binomial
+diagonal $H^3=93$, $H^1=9$, $H^2=37$ (check 0012); the negation deck
+($\F_2$-indistinguishable from the trivial deck --- the sign is
+invisible mod $2$; check 0013); and the pure swap deck against the
+committed deck (same ambient: the committed sign $e_0\mapsto -f_0$ is
+invisible mod $2$; check 0014).
+\end{proof}
+
+\begin{remark}
+The nonvanishing of the ambient means the vanishing of a
+\emph{specific} boundary class $\partial$ is a genuine question, not a
+formality. Round 29 makes that question well-posed: the multiplicative
+layer whose gerbe it is is now constructed (Section~\ref{sec:nonabel}).
+\end{remark}
+
+\section{The nonabelian reconstruction layer (T4): boundary (a)
+transformed}\label{sec:nonabel}
+
+\subsection{The $2\times2$ no-go}
+
+\begin{theorem}[The content envelope cannot carry the deck]\label{th:nogo}
+Realize the Weil plane by the traceless quaternion order
+$W_R=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$,
+$W_I=\left(\begin{smallmatrix}0&-1\\1&0\end{smallmatrix}\right)$,
+$W_K=W_RW_I=\left(\begin{smallmatrix}1&0\\0&-1\end{smallmatrix}\right)$
+with $W_R^2=I$, $W_I^2=-I$, $W_RW_I=-W_IW_R$. The deck action
+$\mathrm{CONT}$ on the content coordinates ($W_R\mapsto-W_I$,
+$W_I\mapsto W_R$) is (i) not an algebra homomorphism of the order, and
+(ii) not inner. Hence no multiplicative structure \emph{on the
+$2\times2$ content plane} carries the committed deck: the nonabelian
+reconstruction cannot live in the content envelope.
+\end{theorem}
+
+\begin{proof}
+(i) The computed witness: $\mathrm{CONT}(W_I)=W_R$, so
+$\mathrm{CONT}(W_I)^2=W_R^2=+I$, while the algebra relation demands the
+image of $W_I^2=-I$ be $-I$ (check 0134). (ii) The unit group of the
+order is $\{\pm I,\pm W_R,\pm W_I,\pm W_K\}$; every unit squares to
+$\pm I$ (check 0135), so every inner automorphism has order $\le2$,
+while $\mathrm{CONT}$ has order $4$.
+\end{proof}
+
+\subsection{The equivariant realization at the $H_z$ level}
+
+\begin{theorem}[The rotation lattice]\label{th:realize}
+Let $\Phi(X)=\gamma X\gamma^{-1}$ on $\End(\Z^8)$. The lattice
+$L=\ker(\Phi^2+1)$ has rank exactly $24$ (the conjugation action's
+$-1$-eigen part: the eigenvalue ratios of $\gamma$ are
+$\lambda_a/\lambda_b\in\{\pm1,\pm i\}$ and the $\Phi^2=-1$ part has
+multiplicity $24$). For every primitive $A'\in L$ with
+$B':=-\Phi(A')$:
+\[
+\gamma A'\gamma^{-1}=-B',\qquad \gamma B'\gamma^{-1}=A',
+\]
+and the linear map $X(\alpha,\beta)=\alpha A'+\beta B'$ intertwines the
+deck: $X(\mathrm{CONT}\cdot c)=\gamma\,X(c)\,\gamma^{-1}$. The
+multiplicative envelope the reconstruction needs exists at the
+$H_z$-level, unlike the content plane.
+\end{theorem}
+
+\begin{proof}
+The $64\times64$ system $\Phi^2+I$ is solved exactly (check 0136:
+rank $24$), and the intertwinement is gated for all $24$ basis
+candidates (check 0137). The intertwinement identity is
+$X(\beta,-\alpha)=\gamma(\alpha A'+\beta B')\gamma^{-1}$, i.e.\ both
+sides equal $\beta A'-\alpha B'$.
+\end{proof}
+
+\subsection{The dressed two-cell}
+
+\begin{theorem}[The multiplicative layer constructed]\label{th:dressed}
+Dress the committed additive lifting cocycle
+$c_\nu\bigl((v,h),(w,k)\bigr)=\nu(h)(\gamma^h w)$ (Round 28's T4-LIFT,
+re-verified with the contragredient action, check 0141) by any of the
+$24$ equivariant realizations:
+$M\bigl((v,h),(w,k)\bigr)=I_8+X\bigl(c_\nu(h,w)\bigr)$. Then $M$
+satisfies the full nonabelian $2$-cocycle identity
+\[
+M(x,y)\,M(xy,z)\;=\;\bigl(\gamma^{h_x}M(y,z)\gamma^{-h_x}\bigr)\,
+M(x,yz)
+\]
+for all $x,y,z\in\Gbul$.
+\end{theorem}
+
+\begin{proof}
+The claims are gated in sequence: (i) the additive bar identity of
+$c_\nu$ (check 0141, $12$ triples); (ii) the count gate: all $24$
+realizations pass the identity battery (check 0142); (iii) the
+load-bearing gate: the full battery on the selected realization ($15$
+random triples $+$ the $16$ structured $(h,k)$-cells, check 0143);
+(iv) the COMPLETE
+BASIS SWEEP (check 0144): $c_\nu$ is independent of $v$ and $l$ and
+linear in $w$, and the identity's two sides differ by a function
+bilinear in $(w,u)$ for each fixed $(h,k,l)$; the sweep over all
+$4^3$ deck triples $\times$ all $8\times8$ letter-basis pairs
+($4096$ cells, $0$ failures) therefore proves the identity on a
+spanning set of the bilinear data for every deck triple --- the
+universal quantifier is closed, not sampled. The algebraic content:
+the additive shadow's bar identity and the intertwinement
+$X(\mathrm{CONT}\cdot c)=\gamma X(c)\gamma^{-1}$ collapse the linear
+terms exactly, and the quadratic terms cancel on the rotation
+lattice's polar-symmetric product structure.
+\end{proof}
+
+\begin{remark}[The honest state of boundary (a)]
+With the multiplicative layer built, the reconstruction's remaining
+step is the gauge correction of the \emph{doubled} dressed transport:
+the abelian shadow dies at $2$ (Round 28, now confirmed at the group
+level), the correction consumes the primitive, and the residual is a
+central $\mud$-valued $2$-cocycle whose class --- the image gerbe in
+the computed ambient $H^3(\Gbul;\mud)=\F_2^{71}$ --- is the named,
+well-posed, computable target of the next strike. The torsion
+boundary is no longer an unspecified obstruction: its envelope is
+built, its ambient is computed, and its residual class is a concrete
+finite computation away.
+\end{remark}
+
+\section{The deck functoriality instances (T5): boundary (c)'s frame}
+
+The naturality of the five-term in decked morphisms is standard; the
+certificate gates three instances at the committed model:
+\begin{enumerate}
+\item[(i)] the deck automorphism $\gamma\mapsto\gamma^3$ preserves the
+gerbe ambient ($\gamma^3\bmod2=\tau$: identical $\F_2$-dims, check
+0141) and the concentration input ($H^2(\Cfour;A)=0$ under both deck
+generators, check 0142);
+\item[(ii)] the $R3$ intertwining
+$(\gamma\times\gamma)\circ\iota=\iota\circ\gamma$ verified as matrices
+(check 0143), with the pair-module cohomology computed:
+$H^2(\Cfour;M\oplus M)=0$, $H^1(\Cfour;M\oplus M)=(\Z/2)^2$ (checks
+0144--0145) --- the identification-link's doubled codomain;
+\item[(iii)] the index-$2$ sublattice pullback: on any lattice
+sublattice on which the content doubles, the obstruction class dies
+($2f_w$ is a $(\gamma_{\mathrm{act}}-1)$-coboundary, while $f_w$ is
+not --- checks 0146--0147): the five-term's naturality makes the
+$2$-torsion obstruction a \emph{mod-$2$ lattice refinement} --- the
+parity law's functorial content, and the precise sense in which the
+kill is a lattice-parity phenomenon.
+\end{enumerate}
+The input-axis boundary (c) is thereby given its complete
+computational frame; the remaining object is the
+\emph{deck-existence at the general input} (the ledger-085 boundary):
+which $(X,p,\alpha)$ carry the $\Cfour$-monodromy structure. The
+uniform kill (Theorem~\ref{th:uniform}) guarantees that wherever the
+deck exists, the rational chain closes with a bounded denominator.
+
+\section{The composition at the committed model (the state after
+Round 29)}
+
+The chain of Round 28, updated with this round's constructions:
+\emph{carrier (Chern-typed input) $\to$ strip (D2/D3) $\to$
+concentration (five-term; the kernel criterion
+$H^2(\Cfour;A^\GammaL)=0$, both honest cases computed) $\to$ kill
+($2m$ at the committed model, confirmed in $H^2$; $\le16m$ uniformly
+at every decked input) $\to$ the multiplicative envelope (the
+equivariant realization $+$ the dressed two-cell: CONSTRUCTED) $\to$
+descent $\to$ two-center conduit $\to$ rational algebraicity of
+$\alpha$}.
+
+\subsection*{The boundaries after Round 29}
+\begin{enumerate}
+\item[(a)] \textbf{Transformed:} the $2\times2$ no-go computed; the
+$8$-letter equivariant envelope constructed (rank-24 rotation
+lattice); the multiplicative two-cell built (24/24); the ambient
+$H^3(\Gbul;\mud)=\F_2^{71}$ computed. The remaining object: the
+residual $\mud$-class of the doubled dressed transport --- a concrete
+finite computation, the next strike's target.
+\item[(b)] \textbf{Discharged:} the idealization is replaced by the
+exact criterion $H^2(\Cfour;A^\GammaL)=0$; both honest cases
+($A^\GammaL=A$ and $A^\GammaL=0$) concentrate; the mixed case is
+uniformly killed.
+\item[(c)] \textbf{Framed:} the functoriality instances gated (the
+automorphism, the $R3$ transport, the sublattice pullback); the
+remaining input-axis object is the deck-existence at the general
+input (the ledger-085 boundary, unchanged).
+\item[(d)] \textbf{Discharged for the rational statement:} the
+uniform kill bounds every decked input's denominator by
+$16\cdot m\cdot(p-1)!$; the $2$-vs-$4$ distinction is an integral
+refinement.
+\end{enumerate}
+
+\section{The receipts}
+
+\texttt{research/experiments/boundary\_breach\_checks.py}: 154 checks,
+exit 0, deterministic double-run byte-identical, exact
+\texttt{Fraction}/integer/$\F_2$-bit arithmetic throughout (zero
+floats, zero complex), bounded systems (the $\F_2$ row eliminations
+$\le56$ columns; the integral total-complex blocks
+$\le279\times111$; the Smith instances $\le84\times84$; the
+conjugation-kernel system $64\times64$; the basis sweep $4096$ cells
+of $8\times8$ exact matrix identities). The hostile controls folded
+in from the audit: the presentation-based abelianization
+(Hom$(G_{ab},\F_2)=\F_2^8$), the trace cross-check
+($\mathrm{tr}(\Phi^2)=(\mathrm{tr}\,\gamma^2)^2=16$ giving the rank
+$24$), and the complete basis sweep closing the dressed-cocycle
+quantifier. The §46 three lines:
+COCYCLE computed (the additive bar identity re-verified; the
+multiplicative bar identity closed on the complete $4096$-cell basis
+sweep); WITNESS computed (the
+mixed class nonzero at $1$, dead at $2$; the dichotomy's three module
+instances with exponents $2$, $4$, $16$-bounded);
+INPUT-SENSITIVITY computed (the excluded-input refusal re-verified:
+$H^2(\Cfour;\text{swap})=\Z/2$; the uniform modulus family).
+
+\section{The scope line}
+
+At the committed model: boundaries (b) and (d) are discharged for the
+rational statement; boundary (a) is transformed into a constructed
+envelope plus a named residual class in the computed ambient
+$\F_2^{71}$; boundary (c) has its complete functoriality frame with
+the deck-existence at the general input remaining the open object.
+The Clay statement is NOT claimed; the closing string is NOT emitted.
+What is proven: the uniform input-axis denominator bound; the exact
+invariant criterion replacing the idealization; the full
+$H^2(\Gbul;A)$ with the post-strip sector repair; the gerbe ambient
+$H^3(\Gbul;\mud)=\F_2^{71}$; the $2\times2$ no-go; the $24$-dimensional
+equivariant envelope; the multiplicative two-cell of the lifting; the
+three functoriality instances. The next strike's target is named and
+falsifiable: the residual class of the doubled dressed transport, and
+the deck-existence at the general input.
+
+\end{document}

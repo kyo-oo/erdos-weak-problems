@@ -1,0 +1,75 @@
+{
+  "input_sha256": "f00ae19a018da18412105d280362cd92ac3de5734a002b978f6c426f6396ef34",
+  "started_at": "2026-11-03T04:47:40.779Z",
+  "observed_at": "2026-11-03T04:48:40.227Z",
+  "raw_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= \"{\\\"all_passed\\\":true,\\\"assertions\\\":3192,\\\"failures\\\":[],\\\"normal_form_cases\\\":972,\\\"histogram\\\":[1,104,624],\\\"nilpotent_fixed_point_cases\\\":2187,\\\"P3_spectrum\\\":[1,1,0,2,2,2,3,2,5,4,3,5,4,5,3,4,5,2,3,2,2,2,0,1,1],\\\"P1P1_spectrum\\\":[1,2,1,4,8,4,6,12,6,4,8,4,1,2,1],\\\"cohomology_runtime_seconds\\\":8.1109e-2,\\\"kernel_version\\\":\\\"15.0.1 for Linux x86 (64-bit) (July 2, 2026)\\\"}\""
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  },
+  "result": {
+    "all_passed": true,
+    "assertions": 3192,
+    "failures": [],
+    "normal_form_cases": 972,
+    "histogram": [
+      1,
+      104,
+      624
+    ],
+    "nilpotent_fixed_point_cases": 2187,
+    "P3_spectrum": [
+      1,
+      1,
+      0,
+      2,
+      2,
+      2,
+      3,
+      2,
+      5,
+      4,
+      3,
+      5,
+      4,
+      5,
+      3,
+      4,
+      5,
+      2,
+      3,
+      2,
+      2,
+      2,
+      0,
+      1,
+      1
+    ],
+    "P1P1_spectrum": [
+      1,
+      2,
+      1,
+      4,
+      8,
+      4,
+      6,
+      12,
+      6,
+      4,
+      8,
+      4,
+      1,
+      2,
+      1
+    ],
+    "cohomology_runtime_seconds": 0.081109,
+    "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)"
+  },
+  "remote_exit_status": null,
+  "scope": "Stateless Wolfram kernel exact finite audit; not a Lean build or universal Hodge proof; service exposes no process exit status."
+}

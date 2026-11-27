@@ -1,0 +1,60 @@
+import HCUniverse2.GSTImageThreeAdvancedGeometricSource
+import HCUniverse2.GSTImageThreeFiniteFieldSourceCertificates
+import HCUniverse2.GSTImageThreeNavigationOffSourceCertificates
+import HCUniverse2.GSTImageThreeIndependentNCohoSource
+import HCUniverse2.GSTImageThreePhysicalNavigationControl
+import HCUniverse2.GSTImageThreePhysicalNCohoFusion
+
+/-!
+# GST Image-3 advanced source proof checkpoint
+
+One Lean build target that kernel-checks:
+1. original 12-cell CM / SURVIVE / curvature resonance laws;
+2. exact second-order original fixed-pair source recurrence and
+   constructive two-step controllability off half-curvature;
+3. genuine original-X cycle-class operator naturality;
+4. actual five-atom closed-geometric-correspondence conditional compiler;
+5. exhaustive finite-field F11 and F13 native polynomial source factors;
+6. typed independent original NShape-hole CM recurrence and two-step coverage;
+7. actual physical GST Navigation=0/1 never reaches half-curvature and
+   preserves original canonical tail source transport.
+The half-curvature exact rank-11 determinant is independently established
+in the exact Wolfram certificate, not silently claimed as a Lean theorem.
+
+No unconditional algebraic Hodge coverage is claimed by importing
+these modules. The whole dependency root is checked in ONE lake build.
+-/
+
+namespace GSTImageThreeAdvancedResearchKernel
+
+#check GSTImageThreeCurvatureResonance.fixedPair_second_order_null
+#check GSTImageThreeCurvatureResonance.fixedPair_second_order_maximum
+#check GSTImageThreeCurvatureResonance.fixedPair_two_step_reconstruct
+#check GSTImageThreeCurvatureResonance.resonanceOrbitSpan_ne_top
+#check GSTImageThreeOriginalXCurvatureLanding.geometricCurvatureF_preserves_algebraic_range
+#check GSTImageThreeAdvancedGeometricSource.closedCurvatureWord_cycle
+#check GSTImageThreeAdvancedGeometricSource.closedCurvatureWord_betti
+#check GSTImageThreeAdvancedGeometricSource.closedCurvatureWord_algebraic_range_stable
+#check GSTImageThreeFiniteFieldSourceCertificates.originalCMSourceProductMod11_nonzero
+#check GSTImageThreeNavigationOffSourceCertificates.navigationOffProductMod19_nonzero
+#check GSTImageThreeNavigationOffSourceCertificates.navigationOffLeadingCoefficientsMod19_units
+#check GSTImageThreeFiniteFieldSourceCertificates.halfCurvatureP8Mod13_no_roots
+#check GSTImageThreeFiniteFieldSourceCertificates.halfCurvatureSpectralQuadratic_positive
+#check GSTImageThreeIndependentNCohoSource.holewise_two_step_reconstruct
+#check GSTImageThreePhysicalNavigationControl.physicalNavigationCharge_ne_half
+#check GSTImageThreePhysicalNavigationControl.physicalCurvature_two_step_reconstruct
+#check GSTImageThreePhysicalNCohoFusion.physicalHolewise_two_step_reconstruct
+#check GSTImageThreePhysicalNCohoFusion.physicalHolewise_pair_evolution
+#check GSTImageThreePhysicalNCohoFusion.physicalHolewise_canonicalTail
+
+#print axioms GSTImageThreeCurvatureResonance.fixedPair_second_order_null
+#print axioms GSTImageThreeCurvatureResonance.fixedPair_two_step_reconstruct
+#print axioms GSTImageThreeAdvancedGeometricSource.closedCurvatureWord_cycle
+#print axioms GSTImageThreeFiniteFieldSourceCertificates.originalCMSourceProductMod11_nonzero
+#print axioms GSTImageThreeNavigationOffSourceCertificates.navigationOffProductMod19_nonzero
+#print axioms GSTImageThreeFiniteFieldSourceCertificates.halfCurvatureP8Mod13_no_roots
+#print axioms GSTImageThreeIndependentNCohoSource.holewise_two_step_reconstruct
+#print axioms GSTImageThreePhysicalNavigationControl.physicalCurvature_two_step_reconstruct
+#print axioms GSTImageThreePhysicalNCohoFusion.physicalHolewise_two_step_reconstruct
+
+end GSTImageThreeAdvancedResearchKernel

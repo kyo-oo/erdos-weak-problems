@@ -1,0 +1,349 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\coker}{\operatorname{coker}}
+\newtheorem{theorem}{Theorem}
+\title{GST: An Arbitrary Original Variety as the Exact Middle Hodge Defect of a Rational Blowup}
+\author{Mathbox mathematics-first construction and proof audit}
+\date{20 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We construct a smooth projective rational variety of even complex dimension
+whose middle rational Hodge class faithfully carries any prescribed rational
+Hodge class on any original smooth projective complex variety. An explicit
+uniform Chern--Segre inverse returns actual algebraic middle cycles to actual
+algebraic cycles on the original variety. We prove a global equivalence:
+the rational Hodge conjecture on all smooth projective complex varieties
+is equivalent to the rational Hodge conjecture restricted to middle-degree
+classes of smooth projective rational varieties of even complex dimension.
+The latter statement is not proved here.
+\end{abstract}
+\section{GST rational world selection and the middle channel}
+Let $X$ be smooth projective complex of dimension $d$, and let
+$\alpha\in\Hdg^p(X)_{\Q}$ for $0\le p\le d$.
+Choose an embedding $X\hookrightarrow\mathbb P^{N_0}$ and an integer
+$M$ with $2M\ge N_0$, $M\ge p+1$, and $M\ge d-p+1$.
+The explicit choice $M=N_0+d+p+2$ works.
+Embed $X$ by a linear extension into $\mathbb P^{2M}$.
+Define
+\[
+ Y=\operatorname{Bl}_X(\mathbb P^{2M}),\qquad
+ c=2M-d,\qquad i=M-p.
+\]
+Then $1\le i\le c-1$, and $Y$ is a smooth projective
+rational variety of complex dimension $2M$.
+Let $j:E=\mathbb P(N_{X/\mathbb P^{2M}})\hookrightarrow Y$ and
+$q:E\to X$, with $\xi=c_1(\mathcal O_E(1))$.
+For every exceptional index $a=1,\dots,c-1$, define
+\[
+ I_a^{C}(z)=j_*(\xi^{a-1}q^*z),\qquad
+ I_a^{H}(\gamma)=j_*(\xi^{a-1}q^*\gamma).
+\]
+The first map raises codimension by $a$ and the second
+raises Hodge weight by $a$.
+Hence
+\[
+ \beta_\alpha=I_i^H(\alpha)
+   =j_*(\xi^{M-p-1}q^*\alpha)\in\Hdg^M(Y)_{\Q}.
+\]
+It has Betti degree $2M$, exactly the middle cohomological degree of $Y$.
+No claim that this class is primitive is needed or made.
+
+\section{Exact all-channel exceptional inversion}
+Let $N=N_{X/\mathbb P^{2M}}$ be the rank-$c$ normal bundle.
+Write $c_k=c_k(N)$, and fix projective-bundle Segre classes
+by $q_*(\xi^{c-1+r}q^*z)=s_r(N)z$.
+The total characteristic series satisfy
+\[
+ C(t)=\sum_{k\ge0}c_kt^k,\qquad
+ S(t)=\sum_{r\ge0}s_rt^r,\qquad C(t)S(t)=1.
+\]
+For each exceptional index $a$, define a true Chow/Gysin observable
+\[
+ T_a^C(W)=-q_*(\xi^{c-1-a}j^*W)
+       \in\CH^{M-a}(X)_{\Q}.
+\]
+Use the identical Betti operation for $T_a^H$.
+The exceptional normal line is $\mathcal O_E(-1)$, so
+$j^*j_*(v)=-\xi v$. By projective-bundle integration,
+\[
+ T_a^CI_b^C(z)=
+ \begin{cases}
+ 0&b<a,\\
+ s_{b-a}(N)z&b\ge a.
+ \end{cases}
+\]
+The same identity holds in rational Betti cohomology.
+Now define the Chern-corrected return
+\[
+ R_a^C(W)=\sum_{k=0}^{c-1-a}c_k(N)T_{a+k}^C(W),
+\qquad
+ R_a^H(\eta)=\sum_{k=0}^{c-1-a}c_k(N)T_{a+k}^H(\eta).
+\]
+The graded target of $R_a^C$ is $\CH^{M-a}(X)_{\Q}$
+because $T_{a+k}^C$ has codimension $M-a-k$.
+\begin{theorem}[Uniform Chow and Betti inverse]
+For all admissible $a,b$,
+\[
+ R_a^CI_b^C=\delta_{ab}\operatorname{id},
+ \qquad
+ R_a^HI_b^H=\delta_{ab}\operatorname{id}.
+\]
+Moreover $R_a^C$ and $R_a^H$ commute with canonical cycle
+class and they both annihilate ambient projective-space pullbacks.
+\end{theorem}
+\begin{proof}
+For $b<a$, every summand vanishes by projective-bundle dimension.
+For $b\ge a$, the coefficient of the input is
+\[
+ \sum_{k=0}^{b-a}c_ks_{b-a-k}=[t^{b-a}]C(t)S(t)
+  =\begin{cases}1&b=a,\\0&b>a.\end{cases}
+\]
+The same computation works on actual Chow groups and canonical
+rational Betti classes; it uses genuine Gysin, self-intersection,
+projection formula and pushforward operations.
+For ambient pullback, each $T_a$ has a fiber exponent strictly
+below $c-1$ and therefore vanishes.
+\end{proof}
+
+\section{Original-class algebraicity if and only if middle algebraicity}
+\begin{theorem}[Exact rational middle reduction]
+The following are equivalent for each $X,p,\alpha$:
+\[
+ \alpha\in\operatorname{im}(\cl_X^p)
+ \quad\Longleftrightarrow\quad
+ \beta_\alpha\in\operatorname{im}(\cl_Y^M).
+\]
+If $W\in\CH^M(Y)_{\Q}$ satisfies $\cl_Y^M(W)=\beta_\alpha$,
+then the explicit genuine original-variety cycle
+\[
+ Z_\alpha=R_i^C(W)\in\CH^p(X)_{\Q}
+\]
+satisfies $\cl_X^p(Z_\alpha)=\alpha$.
+\end{theorem}
+\begin{proof}
+If $\alpha=\cl_X^p(z)$, the algebraic exceptional lift $I_i^C(z)$
+represents $\beta_\alpha$. Conversely the naturality
+of the constructed Chern-corrected return gives
+\[
+ \cl_X^p(R_i^C W)=R_i^H(\cl_Y^M W)
+  =R_i^HI_i^H(\alpha)=\alpha.
+\]
+No preimage of $\alpha$ was used to construct the return.
+\end{proof}
+\begin{theorem}[Global reduction to rational middle Hodge classes]
+The full rational Hodge conjecture for all smooth projective complex
+varieties is equivalent to its restriction to rational middle
+Hodge classes on smooth projective rational varieties of even
+complex dimension.
+\end{theorem}
+\begin{proof}
+One direction is immediate. Conversely apply the explicit
+ambient construction to arbitrary original $X,p,\alpha$.
+The target $\beta_\alpha$ is in middle degree on smooth rational $Y$,
+so the restricted statement would make it algebraic.
+The preceding theorem returns a genuine representative on $X$.
+\end{proof}
+
+\section{A single rational middle world contains ALL original Hodge defects}
+The previous construction apparently depends on $p$ through $M$.
+In fact the full range of Hodge defects of the original $X$
+can be transferred \emph{simultaneously} to one and the same
+smooth rational blowup. This gives a stronger exact invariant.
+
+Fix a projective embedding $X\hookrightarrow\mathbb P^{N_0}$
+and take any integer
+\[
+ M\ge d+1,\qquad 2M\ge N_0.
+\]
+For example, $M=N_0+d+2$ works independently of $p$.
+Let $Y=\operatorname{Bl}_X\mathbb P^{2M}$, with
+$c=2M-d$. For every original codimension $p\in\{0,\dots,d\}$,
+the channel $i_p=M-p$ obeys
+\[
+ 1\le M-d\le i_p\le M\le c-1.
+\]
+Hence every original Hodge grade occurs as a different exceptional
+summand of the \emph{same} middle Hodge group of $Y$.
+
+Set the canonical graded rational Hodge defect
+\[
+ D_p(X)=\Hdg^p(X)_{\Q}/\operatorname{im}(\cl_X^p).
+\]
+The genuine blowup decomposition at degree $M$ is
+\[
+ \Hdg^M(Y)_{\Q}\simeq
+ \Hdg^M(\mathbb P^{2M})_{\Q}
+ \oplus\bigoplus_{i=1}^{c-1}\Hdg^{M-i}(X)_{\Q},
+\]
+and the parallel Chow decomposition is
+\[
+ \CH^M(Y)_{\Q}\simeq
+ \CH^M(\mathbb P^{2M})_{\Q}
+ \oplus\bigoplus_{i=1}^{c-1}\CH^{M-i}(X)_{\Q}.
+\]
+Any Chow/Hodge group with negative codimension is understood to be zero.
+For $M-i>d$ the groups vanish by the dimension of $X$.
+For $M-i<0$ they vanish by negative grading.
+The only nontrivial exceptional summands therefore have
+$i=i_p$ for unique $p=0,\ldots,d$.
+The ambient projective-space cycle-class map is surjective.
+
+\begin{theorem}[Exact total-defect compression into one rational middle world]
+For every smooth projective complex $X$ of dimension $d$, there
+is a smooth projective rational variety $Y$ of even complex
+dimension $2M$ and a CANONICAL (relative to its selected embedding)
+rational-vector-space isomorphism
+\[
+ \boxed{
+ D_M(Y)\ \cong\ \bigoplus_{p=0}^{d}D_p(X).}
+ \tag{5.1}
+\]
+Both directions are induced by explicit honest Chow/Betti operations:
+the forward map sends $[\alpha_p]$ to the exceptional channel
+$[I_{M-p}^{H}(\alpha_p)]$, and the inverse has components
+$[R_{M-p}^{H}(\beta)]$.
+In particular, $X$ satisfies the full rational Hodge conjecture
+in \emph{every} codimension if and only if this one rational $Y$
+satisfies it in its \emph{single middle codimension} $M$.
+\end{theorem}
+\begin{proof}
+The Hodge and Chow blowup decompositions are canonically
+compatible with the genuine cycle-class maps. The center
+summands of middle degree are indexed by the integers
+$p=M-i$ in $0,\dots,d$, and the one ambient projective-space
+summand has zero cokernel. Taking rational cokernels therefore
+produces exactly the displayed direct sum.
+Alternatively the all-channel identities of the previous section
+show that $R_{M-p}I_{M-q}=\delta_{pq}$ on both Chow and Hodge.
+Their induced maps on quotient defects are mutually inverse.
+There are no additional middle Hodge channels because the
+remaining shifted center degrees are outside $[0,d]$,
+and the ambient middle class is a projective hyperplane power.
+\end{proof}
+
+\begin{theorem}[Uniform dimension bound: a rational world of dimension $2d+2$]
+Every smooth projective complex variety $X$ of dimension $d$
+admits a closed embedding $X\hookrightarrow\mathbb P^{2d+2}$.
+For the single resulting rational smooth blowup
+\[
+ \boxed{Y_X=\operatorname{Bl}_X(\mathbb P^{2d+2}),}
+\]
+the complex dimension is exactly $2d+2$, the center normal
+rank is $c=d+2$, and its ONE middle Hodge defect satisfies
+\[
+ \boxed{
+ D_{d+1}(Y_X)\cong\bigoplus_{p=0}^d D_p(X).}
+ \tag{5.2}
+\]
+For each original codimension $p$ the explicit middle
+Hodge lift and its original-$X$ Chow return simplify to
+\[
+ \boxed{\beta_p=j_*(\xi^{d-p}q^*\alpha_p)
+       \in\Hdg^{d+1}(Y_X)_{\Q},}
+ \tag{5.3}
+\]
+and
+\[
+ \boxed{\mathcal R_p(W)=
+  -\sum_{k=0}^{p}c_k(N_{X/\mathbb P^{2d+2}})
+        \,q_*(\xi^{p-k}j^*W)
+       \in\CH^p(X)_{\Q}.}
+ \tag{5.4}
+\]
+These maps obey
+$\mathcal R_p^H(\beta_q)=\delta_{pq}\alpha_q$
+for distinct graded channels, with the zero interpretation
+when the degrees differ; the same holds in Chow.
+\end{theorem}
+\begin{proof}
+First choose any projective embedding $X\hookrightarrow\mathbb P^L$.
+If $L\le2d+2$, compose with a linear inclusion.
+If $L>2d+2$, the secant-and-tangent variety of $X$ has
+dimension at most $2d+1$; a general linear projection
+center of dimension $L-2d-3$ misses it, because the
+expected intersection dimension is
+$(L-2d-3)+(2d+1)-L=-2$.
+A linear projection with such a center is injective and
+immersive on $X$, hence a closed embedding since $X$
+is projective. This gives the stated embedding in
+$\mathbb P^{2d+2}$.
+Now set $M=d+1$ in the preceding all-channel theorem:
+$c=2M-d=d+2$ and $i_p=M-p=d+1-p$.
+The center channels $i=1,\ldots,d+1$ correspond
+exactly to $p=d,\ldots,0$; the ambient projective
+component is algebraic. This proves the direct-sum
+cokernel formula. The formula (5.3) is simply
+$I_{d+1-p}^H$, and substituting $c-1-i_p=p$
+in (3.5) gives (5.4). The previously proved
+Segre convolution identities supply both inverse laws.
+\end{proof}
+
+\begin{theorem}[The hard-defect concentration, with all easy endpoints removed]
+If $d\ge4$, the same one rational smooth middle world satisfies
+\[
+ \boxed{
+ D_M(Y)\cong\bigoplus_{p=2}^{d-2}D_p(X).}
+\]
+For $d\le3$, its middle Hodge defect is zero.
+For a fourfold $d=4$, the only possible remaining defect is
+$D_M(Y)\cong D_2(X)$, in the exceptional channel $i=M-2$.
+\end{theorem}
+\begin{proof}
+The previous theorem gives the sum from $p=0$ through $d$.
+The degree-zero and top-degree Hodge classes are classes
+of connected components and points. Rational $(1,1)$ classes
+are algebraic by the divisor/Hodge (1,1) theorem.
+For $d\ge2$, hard Lefschetz identifies
+$\Hdg^1(X)_{\Q}$ with $\Hdg^{d-1}(X)_{\Q}$
+via multiplication by $h^{d-2}$; algebraic
+divisors map to genuine algebraic cycles under this
+product. Consequently the four extreme defects
+$D_0,D_1,D_{d-1},D_d$ vanish (with overlapping
+indices interpreted only once when $d<3$).
+Removing these zero summands gives the claim.
+\end{proof}
+
+\paragraph{Research significance and falsification.}
+A genuine counterexample in \emph{any} codimension on the
+original $X$ would give a middle rational Hodge counterexample
+on the same rational $Y$. Conversely, constructing all middle
+algebraic sources on this one rational $Y$ would solve all
+codimensions on the original $X$ simultaneously.
+This does not show the middle defect vanishes; it computes
+its precise content. The result is stronger than an isolated
+one-target exceptional return and supplies an exact objective
+for GST's rational-cosmology source births.
+
+\section{Exact Wolfram check and limits}
+For four independent exceptional channels, set
+$s_1=-c_1$, $s_2=c_1^2-c_2$,
+$s_3=-c_1^3+2c_1c_2-c_3$.
+The exceptional-output matrix and Chern inverse are
+\[
+ S_4=\begin{pmatrix}
+ 1&s_1&s_2&s_3\\0&1&s_1&s_2\\0&0&1&s_1\\0&0&0&1
+ \end{pmatrix},\qquad
+ C_4=\begin{pmatrix}
+ 1&c_1&c_2&c_3\\0&1&c_1&c_2\\0&0&1&c_1\\0&0&0&1
+ \end{pmatrix}.
+\]
+Wolfram exact symbolic evaluation returned
+$C_4S_4=S_4C_4=I_4$ and $\det S_4=1$.
+This check is finite; the proof for all codimensions
+is the series identity $C(t)S(t)=1$.
+
+The theorem does not prove that the new middle Hodge class is
+algebraic. It does identify one concrete missing geometry:
+construct an actual $\CH^M(Y)_{\Q}$ representative of
+$j_*(\xi^{M-p-1}q^*\alpha)$ on the specified rational blowup
+without selecting an original-$X$ Hodge preimage.
+Likewise the formal rational-linear GST native operators
+must be matched with actual scheme-level Chow and Betti maps
+before treating this geometric reduction as Lean formalized.
+\end{document}

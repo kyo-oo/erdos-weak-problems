@@ -1,0 +1,190 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1in]{geometry}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\C}{\mathbb{C}}
+\title{The Deciadic Census, the Leaf Lattice, and the Core Assembly\\ \large Round 43 of the GST Hodge Campaign}
+\author{}
+\date{2026-11-07 (session clock)}
+\begin{document}
+\maketitle
+
+\section{The target}
+
+The campaign's remaining falsifiable line (Round 41's close): the transcendental
+$(p,p)$-algebraicity (the one irreducible core), the two exceptional-class
+leaves, and the CM transport beyond degree $8$. This round strikes all three:
+the degree-10 census (the CM transport at the next arity, per the
+family-transport law), the CM-side leaf's integral lattice, and the core's
+assembly receipt.
+
+\section{The structure theorem at degree 10}
+
+\begin{theorem}[The deciadic normal form]
+Every deciadic CM world $(G,\rho)$ --- $G$ transitive on the $10$ embedding
+letters, $\rho$ central fixed-point-free --- is $S_{10}$-conjugate to a world
+with $\rho = \rho_0 = (05)(16)(27)(38)(49)$, hence
+$G \subseteq W := C_{S_{10}}(\rho_0) \cong (\C_2)^5 \rtimes S_5$ (order
+$3840$). With $T := \pi(G)$ transitive on the $5$ pairs and
+$K := G \cap (\C_2)^5$ the $T$-stable flip-kernel ($\mathbf{1} \in K$):
+$G = K \cdot C_z$ for a complement $C_z$, and the complements of the abelian
+extension are the $1$-cocycles $z : T \to M := \F_2^5/K$,
+\[
+z(ab) \;=\; z(b) + (z(a) \circ b), \qquad z(e) = 0,
+\]
+up to $N'$-conjugacy the classes $H^1(T; M)$.
+\end{theorem}
+
+\begin{theorem}[The rigidity law]
+$M_0 := \F_2^5/\langle \mathbf{1} \rangle$ is the \emph{irreducible}
+$\Phi_5$-module over $\F_2$ under every transitive quintic $T$: the regular
+module $\F_2[C_5] \cong \F_2[x]/(x^5 - 1)$ splits as
+$\F_2 \oplus \F_{16}$ since $\Phi_5$ is irreducible over $\F_2$, and every
+transitive $T \le S_5$ contains the $5$-cycle. Hence the $T$-stable
+$K$-lattice is \emph{exactly} $\{\langle \rho_0\rangle,\ \F_2^5\}$: ten
+$(T,K)$ pairs total.
+\end{theorem}
+
+\begin{corollary}[The cohomological census]
+At every $(T, K)$: $\dim H^1(T; M) = 0$ (computed: $\dim Z^1 = \dim B^1 = 4$
+at $K = \langle\rho_0\rangle$; $0 = 0$ at $K = \F_2^5$). All $16$ worlds per
+pair are $N'$-translates of the single class; the census is
+\textbf{85 worlds in 10 invariant-signature classes}, orders
+$\{10, 20, 40, 120, 160, 240, 320, 640, 1920, 3840\}$, cross-checked against
+the degree-8-style pair-lift sweep at $6/6$ feasible $(T,K)$ pairs:
+identical world sets.
+\end{corollary}
+
+\section{The laws at the deciadic boundary}
+
+\begin{theorem}[The dimension law, two algorithms]
+At every world, every CM-type orbit, every $p \le 5$:
+$\dim \mathrm{Hdg}^{2p} = $ the count of pure balanced words, and the
+equivariance system's solution space (parametrized by the $U_0$-column
+$y : G \to \Q$ with the stabilizer conditions
+$y(j) = \mathrm{sgn}(h, U_0)\, y(j \circ h)$) has dimension equal to it.
+The sign character $\chi(h) = \mathrm{sgn}(h, U_0)$ is a homomorphism on
+$\mathrm{Stab}(U_0)$ (the induced permutations compose), so the components
+are consistent and the per-orbit dimension is $|G|/|\mathrm{Stab}|$.
+Certified: $935/935$ sparse-engine checks, $336/336$ dense-RREF
+cross-checks.
+\end{theorem}
+
+\begin{theorem}[The boundary laws]
+At the 85 worlds: $197$ primitive type-orbits, all with the binomial row
+$[\binom{5}{p}] = [5,10,10,5,1]$; $80$ quadratic-inducible orbits, all with
+the split row $[\binom{5}{p}^2]$; \textbf{the deeper-induced bucket is
+empty} (every transitive quintic $T$ acts primitively on the $5$ pairs: the
+only block systems on the $10$ letters are the $\rho_0$-pair fibers). The
+Rosati law ($\mathrm{NS} = g$ at primitive), the palindrome law, and
+$\mathrm{top} = 1$ hold at every orbit.
+\end{theorem}
+
+\begin{theorem}[The exceptional-class law at degree 10]
+The degree-8 phenomenon --- the intermediate-orbit primitive rows
+$[4,8,4,1]$ with surplus exactly $[0,2,0,0]$ --- \textbf{does not recur}:
+at the degree-10 boundary, the divisor-product surplus is $0$ at every
+measured type (the primitive battery and the split battery, the full
+$p$-range, the $|G| \le 96$ class representatives; the $|G| > 96$ worlds
+carry the two-algorithm shape law). The rigid $K$-lattice kills the
+intermediate-orbit structure: \emph{the CM-side leaf is a degree-8-specific
+phenomenon in the measured domain.}
+\end{theorem}
+
+\section{The leaf lattice}
+
+\begin{theorem}[The leaf's integral anatomy]
+At every one of the $16$ exceptional types of the degree-8 census (re-found
+exactly: $114$ worlds, $58$ boundary, surplus $[0,2,0,0]$ verified): the
+level-2 Hodge lattice $\Lambda_{\mathrm{full}}$ has rank $8$, the
+divisor-product lattice $\Lambda_{\mathrm{div}}$ has rank $6$, both are
+torsion-free, and the saturation index
+$[\Lambda_{\mathrm{full}} + \Lambda_{\mathrm{div}} :
+\Lambda_{\mathrm{full}}] = 1$ at every type. The quotient is a
+\textbf{free rank-2 lattice}: the two exceptional classes are lattice points
+of a clean free quotient --- no torsion obstruction, no saturation defect.
+The leaf's obstruction is purely the $\Q$-span: the classes lie outside
+$\Lambda_{\mathrm{div}} \otimes \Q$. The entry test for the algebraicity:
+exhibit algebraic cycles realizing the free rank-2 piece.
+\end{theorem}
+
+\section{The core assembly}
+
+\begin{theorem}[The assembly]
+The $R3$ vanishing extends to $h = 3, 4$ (both $E$-models, exact nullspace;
+with Round 41's $h = 1, 2$): the mixed $(p,p)$-supply at the general input
+is $\{0\}$ at every computed $h$. The K\"unneth pure-type decomposition at
+general $E$ (the even pieces: $H^0, H^2$ divisor-typed, tensor the certified
+Hodge classes of $X$; the odd pieces: the mixed supplies, vanishing) gives:
+\[
+H^{2p}(E \times X)^{(p,p)} \;=\;
+\mathrm{Hdg}^{2p}(X) \,\oplus\, \lambda_E \cdot \mathrm{Hdg}^{2p-2}(X),
+\qquad E \text{ general}.
+\]
+\end{theorem}
+
+\begin{corollary}[The core's exact content]
+The transcendental $(p,p)$-algebraicity on the committed sector assembles
+to: \textbf{(a)} the leaf algebraicity (the degree-8 free rank-2 leaf ---
+and only it: no leaf at degree 10 in the measured domain), and
+\textbf{(b)} the degree axis $\ge 12$ (the CM transport beyond degree 10).
+\end{corollary}
+
+\section{The certificates}
+
+\begin{enumerate}
+\item \texttt{deciadic\_census\_round43\_checks.py} --- \textbf{96 checks,
+0 failures, exit 0}, deterministic double-run byte-identical
+(\texttt{md5 2aced9a3583eff2b104b089391936e12}), $\sim$310\,s, exact
+arithmetic, zero floats, seed \texttt{0x43C0FFEE5BADF00D}. Disclosed
+bounds: the cocycle cap $4096$ (unbinding: $\dim Z^1 \le 4$); the
+pair-sweep cross-check at $|T| \le 24$ ($6/10$ pairs; the $A_5/S_5$-
+$\langle\rho_0\rangle$ pairs carried by the cohomology engine + the
+closure/centrality/cocycle receipts); the surplus battery at the
+$|G| \le 96$ class representatives; the dense-RREF cross-checks at
+$\le 3000$ variables; the canon conjugacy at $40$ small worlds (the bucket
+count is the invariant-signature count elsewhere; the law data computed at
+every world regardless).
+\end{enumerate}
+
+\section{The exact conclusion}
+
+\begin{itemize}
+\item \textbf{G1 (the degree-10 census)}: CLOSED --- the exhaustive
+cohomological census (85 worlds, the rigidity law, $H^1 = 0$, the
+two-algorithm dimension law at every world, the boundary laws, the
+pair-sweep cross-check).
+\item \textbf{G2 (the CM-side leaf)}: PINNED --- the free rank-2 lattice
+anatomy, no torsion, no saturation defect; the degree-8-specificity of the
+phenomenon established in the measured domain.
+\item \textbf{G3 (the transcendental core)}: ASSEMBLED --- the $R3$
+extension to $h = 3, 4$ + the K\"unneth decomposition reduce the core's
+content to the leaf algebraicity + the degree axis $\ge 12$.
+\item \textbf{G4 (the closing decision)}: per the standing law --- Q2 NOT
+claimed; the closing string NOT emitted; the polarity split stands. The
+reduction at maximum sharpness:
+$\mathrm{HC} = $ [the certified family closures R35--R41] $+$ [the degree-10
+closure (this round)] $+$ [the general input (closed R41)] $+$ [the degree-8
+free rank-2 leaf's algebraicity] $+$ [the degree axis $\ge 12$].
+\item \textbf{G5}: the dashboard live; this record pushed.
+\end{itemize}
+
+\section*{Quantifier line}
+
+The deciadic CM-transport boundary is enumerated exhaustively and its laws
+certified at every world; the exceptional-class law measured --- the
+degree-8 leaf does not recur; the leaf's integral anatomy pinned (free
+rank-2, torsion-free, saturated); the transcendental core assembled to the
+leaf + the degree axis. The remaining falsifiable line: \textbf{the degree-8
+leaf's algebraicity (the free rank-2 quotient) + the CM transport at degrees
+$\ge 12$ + the transcendental $(p,p)$-algebraicity at the strata beyond the
+committed censuses}. The campaign continues per the operator's standing
+no-stopping order.
+
+\end{document}

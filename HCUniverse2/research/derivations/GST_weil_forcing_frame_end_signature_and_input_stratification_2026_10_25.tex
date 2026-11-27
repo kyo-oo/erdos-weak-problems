@@ -1,0 +1,584 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\title{Cycle 2, Part I: The Weil-Forcing Frame --- Geometric Zero-or-Full Dichotomy Completed,\\
+Input Stratification (Monoid Layer, Torsion Gap),\\
+and the End-Mass Law of the Exact Carrier}
+\author{GST Hodge Campaign (Mode B, cycle 2)}
+\date{25 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Base checkpoint:} branch \texttt{research/gpt6-native-point-primitive-span-20261017} at
+$2ac3b2f$. This derivation continues
+\texttt{2026-10-24-gst-forcing-site-pure-realization-congruence-closure-and-gr25-calibration} (Theorem A, Lemma B1,
+Theorem B2) and \texttt{2026-10-24-gst-gr25-lattice-completion-pure-pair-and-universal-two-center-descent-law}
+(the two-center descent law, all $p$), both adversarially audited to PASS (2026-10-25), and the Weil-fourfold records
+of 2026-10-17/18/19/21. It is part of campaign cycle 2 (the forcing input itself). External named theorems are used only
+with hypotheses stated; every external leaf is declared in \S\ref{sec:scope}. No Lean file is changed by this document;
+the companion Lean certificate \texttt{GSTWeilForcingFrameCertificate.lean} certifies the pure-algebra cores of
+\S\ref{sec:correspondence} and \S\ref{sec:endsignature} on GitHub Actions.
+
+\begin{center}
+\fbox{\parbox{0.93\textwidth}{
+\textbf{What this document proves.}
+(1) The geometric zero-or-full dichotomy of the Weil-fourfold discriminator is completed to a full frame: the
+Weil projector is exhibited as an \emph{explicit rational algebraic correspondence} with verified coefficients, its
+invariance and image facts are reduced to kernel-verified algebra, and the two outcomes are characterized exactly:
+$S=0$ forces every Weil class nonalgebraic and forbids \emph{every} holomorphic realization of the exact Weil carrier
+at \emph{every} scale; $S=W_\mathbb{Q}$ produces \emph{explicit} algebraic representatives of every rational Weil
+class from a single detected surface.
+(2) The forcing input is stratified into three forms --- pair form, carrier form, specified-carrier
+form --- and the layers between the forms (a bundle-monoid layer and the $K$-torsion ambiguity) are
+identified; a conditional fusion lemma is proved, and the monoid layer is defined as an open stratification
+layer (no strictness instance is claimed; on the projective line every pure character is carrier-realizable, so
+the monoid question is a higher-dimensional phenomenon).
+(3) The End-mass law: on abelian worlds every holomorphic realization of the exact carrier has
+$\chi(A,\mathrm{End}\,F)= +m^2\int\alpha^2 >0$ and, on the discriminator, the even-End-cohomology identity
+$h^0+\tfrac12 h^2 = h^1 + 4m^2 \ge 4m^2$; consequently \emph{no birth law producing carriers with bounded
+even-End-cohomology mass can realize the forcing input at unbounded scales on abelian fourfolds} (the
+End-mass no-go; simple realizations at scale $m=1$ satisfy $h^2\ge 6$ on the discriminator). The periods
+$\int W_R^2=8$, $\int W_I^2=8$,
+$\int W_RW_I=0$, $\Omega\overline\Omega=16\,\mathrm{vol}$ are re-derived exactly by an independent exterior-algebra
+computation, and the topological $K$-lattice of every complex torus is proved ch-unimodular, so the
+Weil carrier exists at scale $m_0=1$ with fully integral Chern data
+$c_1=0,\ c_2=-mW_R,\ c_3=0,\ c_4=4m^2[A]$.
+\textbf{What it does not prove:} the Hodge conjecture, its negation, or any reduction of the forcing input to a weaker
+statement; the equivalence map of Theorem 2 is recorded as input normalization, not as progress toward the target
+(banned-substitute taxonomy M3).}}
+\end{center}
+
+\section{Setup: the discriminator and the projector algebra}\label{sec:correspondence}
+
+\subsection{The world}
+Throughout, $A$ is a $Q(i)$-Weil abelian fourfold: a polarized abelian fourfold over $\mathbb{C}$ with an action of
+$K=\mathbb{Q}(i)$ of Hodge signature $(2,2)$ and a $K$-compatible ample class $\theta\in\mathrm{NS}(A)$, assumed
+\emph{nonsplit} (not isogenous to the split CM elliptic power $E^4$) and $\mathrm{NS}(A)_{\mathbb{Q}}=\mathbb{Q}\theta$.
+Let $e_1,\dots,e_4,f_1,\dots,f_4\in H^1(A,\mathbb{Z})$ be the standard integral basis with $J e_j=f_j$, $J f_j=-e_j$
+($J$ the complex structure), $\Omega=\bigwedge_{j=1}^4(e_j+if_j)\in H^4(A,\mathbb{Z}(i))$, and
+$W_R=\mathrm{Re}\,\Omega$, $W_I=\mathrm{Im}\,\Omega$ the two rational real Weil classes. These are rational
+$(2,2)$ Hodge classes, primitive against any $K$-compatible polarization.
+
+\subsection{The isogeny and its spectrum}
+Let $f=[2+i]\in\mathrm{End}(A)$ (an isogeny). On $H^4(A,\mathbb{Q})$ the operator $f^*$ has the factorization
+recorded in the 2026-10-19 Gram record. The polynomial identities of \S\ref{sec:projpoly} are
+kernel-verified in the companion certificate file; the spectrum factorization itself is a record-level input
+(the eigenvalue census of the 2026-10-19 record), and the idempotence fact (d) is kernel-verified in the
+pre-existing \texttt{GSTUniversalCMArithmeticObstruction.lean} given that census:
+\[
+G_W(t)=t^2+14t+625 \quad(\text{the Weil primary factor, }\deg 2),\qquad
+G_{\mathrm{m}}(t)=t^2-30t+625,\qquad (t-25),
+\]
+where the Weil factor is the minimal polynomial of $(2+i)^4=-7+24i$. The three factors are pairwise coprime over
+$\mathbb{Q}$, so $H^4(A,\mathbb{Q})$ is the direct sum of the corresponding primary subspaces
+\[
+H^4(A,\mathbb{Q}) \;=\; H_W \;\oplus\; H_{\mathrm{m}} \;\oplus\; H_{25},
+\]
+and the \emph{rational Weil plane} is $W_{\mathbb{Q}}:=H_W=\mathrm{span}_{\mathbb{Q}}\{W_R,W_I\}$ (the 2026-10-19
+record: the $16$-coordinate vectors of $\Omega$ have rank $2$ over $\mathbb{Q}$).
+
+\subsection{The projector polynomial and the correspondence}\label{sec:projpoly}
+Define
+\[
+P_W(t)\;=\;-\frac{(t-25)(39t-79)(t^2-30t+625)}{44\,000\,000}.
+\]
+The following four facts are polynomial identities over $\mathbb{Q}$ ((a)--(c) kernel-verified in the companion
+Lean file; (d) kernel-verified in the pre-existing \texttt{GSTUniversalCMArithmeticObstruction.lean}, given the
+record-level spectrum census; the last three rest on the key identity below):
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{Key identity:}\quad $(t-25)(39t-79)(t^2-30t+625)+44\,000\,000=(t^2+14t+625)(39t^2-2770t+72375)$.
+\item $P_W\equiv 1 \pmod{G_W}$.
+\item $P_W\equiv 0 \pmod{G_{\mathrm{m}}}$ and $P_W\equiv 0\pmod{(t-25)}$.
+\item $P_W^2-P_W\equiv 0\pmod{G_WG_{\mathrm{m}}(t-25)}$ (idempotence on the full spectrum), by (b),(c) and the
+Chinese remainder theorem for the pairwise coprime factorization.
+\end{enumerate}
+Expanding the numerator $-(t-25)(39t-79)(t^2-30t+625)=-39t^4+2224t^3-57970t^2+718000t-1234375$ gives the
+\textbf{correspondence coefficients}
+\begin{equation}\label{eq:coeffs}
+P_W(t)\;=\;-\tfrac{39}{44\,000\,000}\,t^4+\tfrac{139}{2\,750\,000}\,t^3-\tfrac{527}{400\,000}\,t^2
++\tfrac{359}{22\,000}\,t-\tfrac{79}{2816}.
+\end{equation}
+
+\begin{definition}[The Weil Chow correspondence]\label{def:corr}
+Let $\Gamma_{f^j}\in \mathrm{CH}^{4}(A\times A)$ denote the transpose graph of the $j$-th iterate of $f$
+(a prime algebraic cycle, $j=0,\dots,4$; $\Gamma_{f^0}$ is the diagonal). Define the rational codimension-$4$
+correspondence
+\[
+\Pi_W^{\mathrm{CH}}\;:=\;\sum_{j=0}^{4}a_j\,\Gamma_{f^j},\qquad
+(a_0,\dots,a_4)=\left(-\tfrac{79}{2816},\ \tfrac{359}{22\,000},\ -\tfrac{527}{400\,000},\
+\tfrac{139}{2\,750\,000},\ -\tfrac{39}{44\,000\,000}\right),
+\]
+acting on codimension-$2$ rational Chow classes by
+$\Pi_W^{\mathrm{CH}}(Z):=(p_2)_*(\Pi_W^{\mathrm{CH}}\cdot p_1^*[Z])\in \mathrm{CH}^{2}(A)_{\mathbb{Q}}$
+and on cohomology by the same formula.
+\end{definition}
+
+\begin{lemma}[Cohomology action of the correspondence]\label{lem:action}
+On $H^4(A,\mathbb{Q})$, the operator induced by $\Pi_W^{\mathrm{CH}}$ equals $P_W(f^*)$; consequently it is the
+identity on $W_{\mathbb{Q}}$, zero on $H_{\mathrm{m}}$ and on the $(t-25)$-primary part $H_{25}$, and it acts on $H^4$ only
+(since $S$ is built from degree-$4$ classes, no claim is made about $H^2$ or $H^6$). Moreover $\Pi_W^{\mathrm{CH}}\circ f^{*}=f^{*}\circ\Pi_W^{\mathrm{CH}}$ on Chow and
+on cohomology, since both are polynomials in the graph correspondences of $f$.
+\end{lemma}
+
+\begin{proof}
+The transpose-graph correspondence $\Gamma_{f^j}$ acts on cohomology by $(f^j)^{*}=t^j$ on
+$H^{4}$ (standard: $(p_2)_*(\Gamma_{f^j}\cdot p_1^*c)= (f^j)^{*}c$ for all $c\in H^{4}(A,\mathbb{Q})$;
+external leaf E1 in \S\ref{sec:scope}). Summing with the coefficients \eqref{eq:coeffs} gives $P_W(f^*)$.
+Facts (b),(c) of \S\ref{sec:projpoly} evaluate this on each primary summand: on $H_W$, $f^*$ has minimal polynomial
+$G_W$ and $P_W\equiv1$, so $P_W(f^*)=\mathrm{id}$; on $H_{\mathrm{m}}$ and $H_{25}$, $P_W\equiv 0$, so
+$P_W(f^*)=0$. The commutation is polynomial composition of commuting graph correspondences
+(external leaf E1).
+\end{proof}
+
+\section{Theorem W1: the completed zero-or-full frame}\label{sec:W1}
+
+\begin{definition}[The projected Chow image]\label{def:S}
+\[
+S\;:=\;\Pi_W^{\mathrm{CH}}\big(\mathrm{cl}_A(\mathrm{CH}^{2}(A)_{\mathbb{Q}})\big)\;\subseteq\;H^{4}(A,\mathbb{Q}).
+\]
+\end{definition}
+
+\begin{theorem}[Geometric zero-or-full dichotomy, completed frame]\label{thm:W1}
+Let $A$ be as in \S\ref{sec:correspondence}. Then:
+\begin{enumerate}[label=(\roman*)]
+\item $S\subseteq W_{\mathbb{Q}}$, and $S$ is stable under $f^{*}$ and $f_{*}$.
+\item $S=0$ or $S=W_{\mathbb{Q}}$.
+\item $S=0$ implies $W_R$ and $W_I$ are not algebraic, i.e.\ the rational Hodge conjecture fails on $A$
+for the classes $W_R,W_I$.
+\item $S=W_{\mathbb{Q}}$ if and only if there exists an algebraic surface $Y\subset A$ (equivalently, an integral
+codimension-$2$ cycle) with $\Pi_W^{\mathrm{CH}}\mathrm{cl}(Y)\ne 0$; and in that case \emph{every} rational Weil
+class is the class of an explicit rational algebraic codimension-$2$ cycle constructed from $Y$ by rational
+correspondences.
+\item \textbf{(Carrier connection.)} If $S=0$, then for \emph{every} $m\ge 1$ and \emph{every} $r\ge 5$ there is
+\emph{no} holomorphic vector bundle $F$ of rank $r$ on $A$ with
+$\mathrm{ch}(F)=r+mW_R$ (pure character, all other grades zero); and likewise no pure pair for $mW_R$.
+Conversely, if for \emph{some} $m\ge1$, $r\ge5$ a holomorphic $F$ with $\mathrm{ch}(F)=r+mW_R$ exists, then
+$S\ne0$, hence $S=W_{\mathbb{Q}}$ and every rational Weil class is algebraic.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) $S$ is generated by classes $\Pi_W^{\mathrm{CH}}\mathrm{cl}(Y)$, each of which lies in the $G_W$-primary
+subspace by Lemma \ref{lem:action} (all other primary components are annihilated). Stability under $f^{*}$:
+for a cycle $Y$, $f^{*}[Y]\in\mathrm{CH}^{2}(A)_{\mathbb{Q}}$ (pullback of a cycle along the isogeny $f$; external
+leaf E2), and $\Pi_W^{\mathrm{CH}}(f^{*}[Y])=f^{*}\Pi_W^{\mathrm{CH}}([Y])$ by Lemma \ref{lem:action}; since $S$ is
+by definition generated by the projected classes, this shows $f^{*}S\subseteq S$. The same holds for $f_{*}$ via
+$f_{*}\Pi_W^{\mathrm{CH}}=\Pi_W^{\mathrm{CH}}f_{*}$ (graph correspondences commute with pushforward by
+finite morphisms, external leaf E2).
+
+(ii) The restriction of $f^{*}$ to $W_{\mathbb{Q}}$ has minimal polynomial $G_W$, which is irreducible over
+$\mathbb{Q}$; hence $W_{\mathbb{Q}}$ with its $f^{*}$-action is isomorphic, as a
+$\mathbb{Q}[t]$-module, to $\mathbb{Q}[t]/(G_W)\cong(\mathbb{Q}^2,T)$ where $T$ is the companion action
+$T(x,y)=(-625y,\,x-14y)$ (kernel-verified as \texttt{cmWeilFourfoldCompanionAction}; both are $2$-dimensional
+modules on which $G_W$ is the minimal polynomial, and $\mathbb{Q}[t]/(G_W)$ is the unique such up to isomorphism
+because $G_W$ is irreducible of degree $2$). By (i), $S$ is a $T$-invariant $\mathbb{Q}$-submodule of this module,
+and the kernel-verified theorem \texttt{cmWeilStableSourceDichotomy} (\texttt{cmWeilInvariantSource\_nonzero\_forces\_full\_plane},
+using $\det[z,Tz]=(x-7y)^2+576y^2>0$ for $z\ne0$) gives $S=0$ or $S=W_{\mathbb{Q}}$.
+
+(iii) If $W_R=\mathrm{cl}(Z)$ for a rational cycle $Z$, then $\Pi_W^{\mathrm{CH}}\mathrm{cl}(Z)=W_R\ne0$ by
+Lemma \ref{lem:action}, so $S\ne0$; under $S=0$ this is a contradiction. Same for $W_I$, and for every nonzero
+element of $W_{\mathbb{Q}}$ (each has nonzero Weil projection: $\Pi_W^{\mathrm{CH}}w=w$ for $w\in W_{\mathbb{Q}}$).
+
+(iv) If $S=W_{\mathbb{Q}}$, pick $z\ne0$ in $S$, say $z=\Pi_W^{\mathrm{CH}}\mathrm{cl}(Y)$ for a rational cycle
+$Y$. The kernel-verified one-source reconstruction \texttt{cmWeilOneSourceReconstruction} (with eigenvalue data
+$a=-7$, $b=24$) provides explicit rational coefficients $c_0(z,w)$, $c_1(z,w)$ with
+$w=c_0(z,w)\,z+c_1(z,w)\,Tz$ for every target $w\in\mathbb{Q}^2$. Under the module identification of (ii), $Tz$
+is the class $f^{*}z=\Pi_W^{\mathrm{CH}}\mathrm{cl}(f^{*}Y)$ (again algebraic), so
+\[
+\mathrm{cl}\big(c_0\,\Pi_W^{\mathrm{CH}}(Y)+c_1\,\Pi_W^{\mathrm{CH}}(f^{*}Y)\big)=w,
+\]
+an explicit rational algebraic representative of $w$. The converse is immediate from the definition of $S$.
+
+(v) Suppose $F$ holomorphic of rank $r\ge5$ with $\mathrm{ch}(F)=r+mW_R$ exactly. By GAGA (external leaf E3) $F$ is
+algebraic; fix $k\gg0$ so that $F\otimes O(k)$ is globally generated, and let $D\subset A$ be the
+maximal-degeneracy scheme of a general map $O^{r-1}\to F\otimes O(k)$ from the \emph{trivial} source
+(the cycle-1 convention; its section space $H^0(F\otimes O(k))^{\oplus(r-1)}$ grows with $k$), which is of pure
+codimension $2$ with class $\mathrm{c}_2^{\mathrm{CH}}(F\otimes O(k))$ by Thom--Porteous (external leaf E4, at maximal
+degeneracy, expected codimension $2$). The two-center descent law in single-center form (proved for all $p$ in the
+2026-10-24 lattice completion; $p=2$ here) gives, with the splitting-principle identity
+$\mathrm{c}_2^{\mathrm{CH}}(F\otimes O(k))=\mathrm{c}_2^{\mathrm{CH}}(F)+\binom{r}{1}k\theta\,\mathrm{c}_1+\binom{r}{2}k^2\theta^2$
+and the carrier equations $\mathrm{c}_1=0$, $\mathrm{c}_2(F)=-mW_R$ (Newton conductor lemma, same record):
+\[
+\big[D\big]\;=\;-mW_R+\tbinom{r}{2}k^{2}\theta^{2}\quad\text{in }\mathrm{CH}^{2}(A)_{\mathbb{Q}},
+\]
+hence $Z:=\tfrac1m\big(\binom{r}{2}k^{2}\theta^{2}-[D]\big)$ is an explicit rational algebraic cycle with
+$\mathrm{cl}(Z)=W_R$, so $S\ne0$ --- contradiction with $S=0$. The identical argument with the pair form
+(Theorem C, pair version) rules out pure pairs. The converse is (iii) read contrapositively: a holomorphic carrier
+gives an algebraic $W_R$, hence $S\ne0$, hence (ii) $S=W_{\mathbb{Q}}$, and (iv) applies.
+\end{proof}
+
+\begin{remark}[What the frame does and does not decide]
+Theorem \ref{thm:W1} converts the discriminator into a single well-posed binary geometric question:
+does one algebraic surface with nonzero Weil projection exist on $A$? Both outcomes are now closed, kernel-anchored
+statements about their consequences. It does not decide which outcome holds on any actual nonsplit $A$; producing
+$S=0$ on an instance is the campaign's negative certificate (PROMPT \S2), and the 2026-10-18/19 records'
+divisor-channel no-go ($\Pi_W(\theta^p)=0$) verifies $S=0$ only on the divisor-generated subalgebra, not on all
+surfaces. The external manuscript claim (\texttt{p3sw:weil-plane}, unauthenticated in-repo) would, if ever verified,
+force the $S=W_{\mathbb{Q}}$ outcome; the campaign treats it as an unverified external leaf.
+\end{remark}
+
+\section{Theorem W2: the three forms of the forcing input}\label{sec:W2}
+
+The forcing input for a class $\alpha\in H^{2p}(X,\mathbb{Q})$ of type $(p,p)$ (with $m\equiv0 \pmod{m_0}$,
+$r\ge\max(p+1,d+1)$) has appeared in the campaign in three forms. This section fixes their exact
+relations. \emph{Scope note: this is a normalization map of known equivalences and open layers --- by the
+banned-substitute taxonomy M3 it is not progress toward the target; its value is that it identifies which layer
+each future mechanism addresses.}
+
+\begin{definition}[The three input forms]
+For a pure character $\mathrm{ch}=r+m\alpha$ (grade $0$: $r$; grade $p$: $m\alpha$; all other grades zero):
+\begin{enumerate}[label=(\arabic*)]
+\item \textbf{Pair form (at some scale):} there exist an integer $m'\ge1$ and $x\in K^0_{\mathrm{alg}}(X)$ with
+$\mathrm{ch}(x)=m'\alpha$ (grade $p$ only, $\mathrm{rank}(x)=0$). At a pinned scale $m$ we say \emph{pair form at scale $m$}.
+\item \textbf{Carrier form:} there exists a holomorphic vector bundle $F$ of rank $r\ge\max(p+1,d+1)$ with
+$\mathrm{ch}(F)=r+m\alpha$.
+\item \textbf{Specified-carrier form:} the specific topological bundle $E_\alpha$ of Theorem A admits an integrable
+$\bar\partial$-operator.
+\end{enumerate}
+\end{definition}
+
+\begin{lemma}[Trivial directions]\label{lem:trivial}
+$(3)\Rightarrow(2)\Rightarrow(1)$. Moreover \emph{pair form at some positive integer scale} $\Leftrightarrow$
+$\alpha$ is algebraic: ($\Rightarrow$) apply the two-center descent law in pair form to a bundle presentation of $x$
+(equal ranks and equal low Chern classes follow from purity by the Newton conductor lemma), which returns a
+cycle of class $\alpha$ after dividing by $m'$; ($\Leftarrow$) from a cycle with class $\alpha$, the Theorem
+B2(ii) construction returns an algebraic pure K-class at \emph{some} integer scale (the pinned-scale statement
+requires an additional saturation step which is neither claimed nor needed here; cf.\ the exactness note in the
+scope section).
+\end{lemma}
+
+\begin{lemma}[Conditional fusion: presentable pairs give carriers]\label{lem:fusion}
+Let $x\in K^0_{\mathrm{alg}}(X)$ with $\mathrm{ch}(x)=m\alpha$ pure, and suppose $x$ admits a presentation
+$x=[E_+]-[E_-]$ by holomorphic bundles of equal rank $s$ together with a surjection
+$(E_+\oplus O^{r})\otimes O(k)\twoheadrightarrow E_-\otimes O(k)$ for some $k$ (a \emph{one-step presentable} pair).
+Then $F:=\ker(A)\otimes O(-k)$ is a holomorphic bundle of rank $r$ with
+\[
+\mathrm{ch}(F)\;=\;\mathrm{ch}(E_+)+r-\mathrm{ch}(E_-)\;=\;r+m\alpha .
+\]
+\end{lemma}
+
+\begin{proof}
+The kernel of a surjective map of locally free sheaves is locally free (locally split), of rank $s+r-s=r$.
+Chern characters are additive on short exact sequences and satisfy
+$\mathrm{ch}(G\otimes L)=\mathrm{ch}(G)\mathrm{ch}(L)$ for line bundles $L$ (external leaf E5), so
+\[
+\mathrm{ch}(F)=\mathrm{ch}(\ker A)\mathrm{ch}(O(-k))
+=\big(\mathrm{ch}(E_+)\mathrm{ch}(O(k))+r\,\mathrm{ch}(O(k))-\mathrm{ch}(E_-)\mathrm{ch}(O(k))\big)\mathrm{ch}(O(-k))
+=(\mathrm{ch}(E_+)+r-\mathrm{ch}(E_-)),
+\]
+which is the pure character by the presentation. Rank: $s+r-s=r$.
+\end{proof}
+
+\begin{remark}[Why the fusion is only conditional]
+A surjection $(E_+\oplus O^{r})\otimes L\twoheadrightarrow E_-\otimes L$ is equivalent (after tensoring by $L^\vee$)
+to a surjection $E_+\oplus O^{r}\twoheadrightarrow E_-$, and the space of such maps is the \emph{fixed}
+space $H^0((E_+\oplus O^r)^\vee\otimes E_-)$: amplification does not enlarge it. In general a given pair carries no
+such surjection, so no unconditional fusion follows from this argument. The computation after this remark shows
+that on the projective line the monoid layer is in fact empty --- the layer question is strictly
+higher-dimensional.
+\end{remark}
+
+\begin{proposition}[Monoid computation on the projective line]\label{prop:monoid}
+On $X=\mathbb{P}^1$ with $L=[O(1)]$ and $K^0(\mathbb{P}^1)=\mathbb{Z}[L]/((L-1)^2)$:
+\begin{enumerate}[label=(\alph*)]
+\item $[O(k)]=[O]+k\,([O(1)]-[O])$ for every $k\in\mathbb{Z}$ (since $(L-1)^2=0$, $L^k=1+k(L-1)$).
+\item Consequently every rank-$r$ class $r+q\,(L-1)$ ($q\in\mathbb{Z}$, $r\ge1$) is the class of the bundle
+$O(q)\oplus O^{\oplus(r-1)}$: the projective line is \emph{monoid-full} (every stable-rank algebraic K-class is a
+single bundle class, and in particular every pure character $r+m\theta$ is carrier-realizable for every
+$m\in\mathbb{Z}$, by $q=m$). The monoid layer is therefore a strictly higher-dimensional phenomenon; no
+strictness instance is claimed on any world in this document.
+\end{enumerate}
+\end{proposition}
+
+\begin{proof}
+(a) $L^k=(1+(L-1))^k=1+k(L-1)$ because $(L-1)^2=0$. (b) $[O(q)\oplus O^{r-1}]=L^{q}+(r-1)=1+q(L-1)+r-1=
+r+q(L-1)$, and every rank-$r$ class has the form $r+q(L-1)$ since $(L-1)$ spans the reduced group. For the pure
+character: $\mathrm{ch}(O(m)\oplus O^{r-1})=e^{m\theta}+r-1=r+m\theta$ because $\theta^2=0$ on $\mathbb{P}^1$.
+\end{proof}
+
+\begin{theorem}[Input stratification]\label{thm:W2}
+Fix $(X,p,\alpha)$ with $m\equiv0\pmod{m_0}$, $r\ge\max(p+1,d+1)$.
+\begin{enumerate}[label=(\roman*)]
+\item Pair form at some positive integer scale $\Leftrightarrow$ $\alpha$ algebraic (Lemma \ref{lem:trivial}).
+\item Carrier form $\Rightarrow$ pair form; specified-carrier form $\Rightarrow$ carrier form. The two layers between
+the forms are well-defined:
+\begin{enumerate}[label=(\roman*)]
+\item the \textbf{monoid layer}: write $\mathcal{M}(X)$ for the inner set $\{$pure characters realized by single
+holomorphic bundles$\}$, sitting inside $\{$pure characters realized by algebraic $K$-classes$\}$; the containment
+is an \emph{open} layer question: it is an equality on monoid-full worlds (Proposition \ref{prop:monoid}: the
+projective line is monoid-full), and no world on which it is strict is exhibited here;
+\item the \textbf{torsion gap}: two specified carriers with the same character differ by an element of
+$\ker(\mathrm{ch})=K^0(X)_{\mathrm{tors}}$ (finitely generated $K^0$, $\mathrm{ch}\otimes\mathbb{Q}$ injective;
+external leaf E7), so specified-carrier form differs from carrier form by Theorem A's torsion ambiguity
+(a qualitative gap; the quotient $T(K^0)/T(K^0)\cap K^0_{\mathrm{alg}})$ measures one part of it, up to the
+monoid question).
+\end{enumerate}
+\item On the discriminator $A$: the pair form at scale $m$ implies $S\ne0$; the carrier form implies $S\ne0$
+(Theorem \ref{thm:W1}(v)); and under $S=W_\mathbb{Q}$ the pair form holds at an explicit scale (the one-source
+coefficients clear a finite denominator). The residual monoid layer
+\[
+\mathcal{M}(A,W):=\{\text{carrier-realizable pure Weil characters}\}
+\]
+is a well-defined open layer of the forcing site on the discriminator, separating the pair outcome from the
+carrier outcome (emptiness is not claimed).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is Lemma \ref{lem:trivial}. (ii): the forward implications hold because a holomorphic bundle is algebraic
+(GAGA) and its class is an algebraic K-class, and because the specified carrier is by definition a bundle. The
+monoid layer: Proposition \ref{prop:monoid} proves the projective line \emph{monoid-full}; whether any world has a
+nonempty layer is left open --- the layer is defined, not instantiated. The torsion gap:
+$K^0(X)$ is finitely generated (finite CW type) and $\mathrm{ch}\otimes\mathbb{Q}$ is injective (Atiyah--Hirzebruch,
+external leaf E7), so $\ker(\mathrm{ch})$ is exactly the torsion subgroup; Theorem A constructs the carrier
+uniquely up to this subgroup, which measures (qualitatively, together with the monoid question) the difference
+between the specified-carrier and carrier forms. (iii): Theorem \ref{thm:W1}(v) and its proof. For the explicit
+scale under $S=W_\mathbb{Q}$: write the detected representatives as rational combinations $\sum_i q_i[Z_i]$ with
+$\mathrm{cl}$-class $W$ (the one-source reconstruction; $n_0$ the lcm of its denominators). On the abelian $A$
+with $\mathrm{td}(A)=1$, GRR (external leaf E8) gives $\mathrm{ch}([O_{Z_i}])=[Z_i]+\iota_*\mathrm{td}_1(Z_i)+\iota_*\mathrm{td}_2(Z_i)$:
+the grade-$3$ and grade-$4$ junk are pushforwards of algebraic classes, hence algebraic; correct them by
+subtracting $\sum_j s_j[O_{C_j}]$ for algebraic curves $C_j$ with the right codimension-$3$ classes and then a
+rational multiple of $[O_{\mathrm{pt}}]$ (whose character is the pure top class). The result is a rational algebraic K-class $x\in K^0_{\mathrm{alg}}(A)\otimes\mathbb{Q}$ with $\mathrm{ch}(x)=W$ pure;
+after clearing denominators $m:=$ the lcm of the denominators of the $q_i$, $s_j$ and the point-correction, the
+integral class $m\cdot x\in K^0_{\mathrm{alg}}(A)$ has $\mathrm{ch}=mW$ pure --- pair form at an explicit scale, as claimed.
+\end{proof}
+
+\begin{remark}[Effect on the cycle-1 audit flag]
+The 2026-10-24 audit (finding F4) flagged the registry's forcing-site biconditional as overstated because
+``HC gives algebraic realization of the K-class only up to K-torsion''. Theorem \ref{thm:W2} resolves the flag
+into its true shape: the pair form is equivalent to algebraicity (no torsion loss); the torsion gap separates
+carrier from specified carrier; and a further, previously untracked monoid gap separates pair from carrier. The
+descent law consumes the \emph{character} only, so Theorem A's torsion ambiguity was already harmless for the
+cycle-1 construction; the monoid layer is the substantive new boundary.
+\end{remark}
+
+\section{Theorem W3: the End-mass law}\label{sec:endsignature}
+
+\begin{lemma}[Endomorphism character of the exact carrier]\label{lem:endchar}
+Let $E$ be any complex vector bundle (topological or holomorphic) with
+$\mathrm{ch}(E)=r+m\alpha$ pure (grade $p$ only). Then
+\[
+\mathrm{ch}(E^\vee)=r+(-1)^p m\alpha \quad\text{and}\quad
+\mathrm{ch}(\mathrm{End}\,E)=\mathrm{ch}(E)\,\mathrm{ch}(E^\vee)
+= r^{2}+\bigl(1+(-1)^p\bigr)rm\alpha+(-1)^p m^{2}\alpha^{2},
+\]
+so the endomorphism character has three grades in general: $r^2$ in grade $0$, $2rm\alpha$ in grade $p$
+(\emph{only for $p$ even}; for $p$ odd this grade cancels), and $(-1)^p m^2\alpha^2$ in grade $2p$. At $p=2$:
+$\mathrm{ch}(\mathrm{End}\,E)=r^{2}+2rm\alpha+m^{2}\alpha^{2}$.
+\end{lemma}
+
+\begin{proof}
+$\mathrm{ch}(E^\vee)=\sum_j(-1)^{j}\mathrm{ch}_j(E)$ (dual roots $e^{-x_i}$; external leaf E5): the $p$-th grade
+picks up the sign $(-1)^p$ --- at even $p$ the dual character COINCIDES with the original, it does not negate it.
+$\mathrm{ch}(E\otimes G)=\mathrm{ch}(E)\mathrm{ch}(G)$ (external leaf E5), with $\mathrm{End}\,E=E\otimes E^\vee$.
+Multiply and collect grades: grade $0$: $r\cdot r$; grade $p$: $r(-1)^pm\alpha+m\alpha\cdot r$; grade $2p$:
+$(-1)^pm^2\alpha^2$.
+\end{proof}
+
+\begin{remark}[The parity trap this lemma repairs]
+A previous version of this section used $\mathrm{ch}(E^\vee)=r-m\alpha$ at $p=2$, i.e.\ applied the sign $-1$
+globally instead of $(-1)^p$ per grade; that is the odd-$p$ identity, false at even $p$, and it flipped the sign of
+$\chi(\mathrm{End}\,F)$ below. The corrected computation is the point of Theorem \ref{thm:W3}. The same note applies
+to the cycle-1 registry's queued ``pure grade-$2p$ HR-positive End handle'' --- at even $p$ that handle does not
+exist in the stated form.
+\end{remark}
+
+\begin{theorem}[End-mass law]\label{thm:W3}
+Let $X$ be a smooth projective fourfold, $\alpha$ a nonzero real primitive $(2,2)$ class, $p=2$, and suppose
+$F$ is \emph{any} holomorphic realization of the exact carrier character
+$\mathrm{ch}(F)=r+m\alpha$ ($r\ge5$, $m\ge1$). Then, using Lemma \ref{lem:endchar} at $p=2$
+($\mathrm{ch}(\mathrm{End}\,F)=r^2+2rm\alpha+m^2\alpha^2$):
+\begin{enumerate}[label=(\roman*)]
+\item (Riemann--Roch, external leaf E8; $\mathrm{td}(A)=1$ on abelian $A$):
+on an abelian fourfold $A$,
+\[
+\chi(A,\mathrm{End}\,F)\;=\;\int_A \mathrm{ch}_4(\mathrm{End}\,F)\;\;=\;\;+\,m^2\int_A\alpha^{2}\;>\;0,
+\]
+(the $r^2$-term has degree $0$ and pairs only with $\mathrm{td}_4$, whose integral is $\chi(O_A)=0$;
+the $2rm\alpha$-term has degree $4$ and pairs only with $\mathrm{td}_2=0$; the degree-$8$ part is $m^2\alpha^2$).
+(ii$_{\mathrm{abelian}}$) On abelian $A$ (Serre duality, external leaf E9; $K_A$ trivial):
+$h^3=h^1$, $h^4=h^0$, so $\chi=2h^0+h^2-2h^1$, and substituting (i):
+\[
+h^0(\mathrm{End}\,F)+\tfrac12 h^2(\mathrm{End}\,F)
+\;=\;h^1(\mathrm{End}\,F)+\tfrac{m^2}{2}\int_A\alpha^2
+\;\ge\;\tfrac{m^2}{2}\int_A\alpha^2 ,
+\]
+using $h^1\ge0$. Equivalently $h^1=h^0+\tfrac12h^2-\tfrac{m^2}{2}\int\alpha^2$.
+(i$_{\mathrm{gen}}$) On a general smooth projective fourfold the formula reads
+$\chi(\mathrm{End}\,F)=r^2\chi(O_X)+2rm\int_X\alpha\,\mathrm{td}_2(X)+m^2\int_X\alpha^2$.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) Riemann--Roch for the bundle $\mathrm{End}\,F$ on the fourfold:
+$\chi=\int\mathrm{ch}(\mathrm{End}F)\mathrm{td}(X)$; by Lemma \ref{lem:endchar} the character is
+$r^2+2rm\alpha+m^2\alpha^2$, so on an abelian fourfold $\mathrm{td}=1$ (all rational Chern classes of the
+tangent bundle vanish) and the degree-$8$ part of the integrand is exactly $m^2\alpha^2$; the displayed pairing
+analysis gives $\chi=+m^2\int\alpha^2>0$ (the period $\int\alpha^2>0$ is the verified Hodge--Riemann-positivity
+input; on the discriminator it is the certified period $\int W_R^2=8$).
+(ii$_{\mathrm{abelian}}$) Serre duality on the abelian variety: $h^i(\mathrm{End}F)=h^{4-i}(\mathrm{End}F\otimes K_A)
+=h^{4-i}(\mathrm{End}F)$, so $h^4=h^0$ and $h^3=h^1$ (using $\mathrm{End}^\vee\cong\mathrm{End}$). Expanding
+$\chi=h^0-h^1+h^2-h^3+h^4=2h^0+h^2-2h^1$ and substituting (i) gives
+$2h^0+h^2-2h^1=m^2\int\alpha^2$, the displayed identity; $h^1\ge0$ gives the bound.
+(i$_{\mathrm{gen}}$): on a general fourfold the degree-$8$ part of
+$(r^2+2rm\alpha+m^2\alpha^2)\mathrm{td}(X)$ is $r^2\mathrm{td}_4+2rm\alpha\,\mathrm{td}_2+m^2\alpha^2$, and
+$\int\mathrm{td}_4=\chi(O_X)$ (external leaf E8, Hirzebruch--Riemann--Roch).
+\end{proof}
+
+\begin{corollary}[End-mass no-go for abelian worlds]\label{cor:rigidity}
+On any abelian fourfold $A$ and any nonzero real primitive $(2,2)$ class $\alpha$ with $\int_A\alpha^2>0$
+(e.g.\ the Weil classes: $\int W_R^2=8$ by \S\ref{sec:periods}): every holomorphic realization of the exact
+carrier at scale $m$ satisfies
+\[
+h^0(A,\mathrm{End}\,F)+\tfrac12 h^2(A,\mathrm{End}\,F)\;\ge\;\tfrac{m^2}{2}\int_A\alpha^2,
+\]
+which equals $4m^2$ on the discriminator; for \emph{simple} realizations ($h^0=1$) this forces
+$h^2(\mathrm{End}\,F)\ge 8m^2-2$ (in particular $h^2\ge6$ already at the minimal scale $m=1$ on the
+discriminator). Consequently \emph{any} birth law that produces carriers whose even-End-cohomology mass
+$h^0+h^2/2$ stays bounded independently of $m$ cannot realize the forcing input at all scales on abelian
+fourfolds. No claim is made about rigidity or isolatedness: the corrected identity shows $h^1$ can be $0$ with
+the mass carried by $h^2$.
+\end{corollary}
+
+\begin{remark}[Relation to the polystable no-go]
+The 2026-10-18 record (universal determinantal packet interpolation) proved that a slope-polystable holomorphic
+bundle with $c_1=0$ and $c_2=\pm N\alpha$ violates the Chern--Weil zero-energy identity whenever
+$\int\alpha^2>0$ and $\alpha\theta^{d-2}=0$: the polystable channel is dead for primitive carriers. Theorem
+\ref{thm:W3} is complementary: it constrains whatever \emph{survives} --- any realization must be unstable and
+must carry even-End-cohomology mass at least $\tfrac{m^2}{2}\int\alpha^2$ ($4m^2$ on the discriminator, so at
+the minimal scale $m=1$ every simple realization has $h^2\ge6$). Both constraints are blind to the
+Hodge/non-Hodge distinction: they apply to every holomorphic bundle
+with the carrier's Chern data, and thus do not decide the dichotomy of Theorem \ref{thm:W1}; they prune mechanism
+families.
+\end{remark}
+
+\section{Exact periods and the minimal scale on the discriminator}\label{sec:periods}
+
+\subsection{The exterior computation}
+Work in the exterior algebra on $e_1,\dots,e_4,f_1,\dots,f_4$ (indices $1..8$), canonical order
+$e_1e_2e_3e_4f_1f_2f_3f_4$, volume $\mathrm{vol}=e_1e_2e_3e_4f_1f_2f_3f_4$. Expanding
+$\Omega=\bigwedge_{j=1}^4(e_j+if_j)$ and taking real parts (even $|S|$; $i^{|S|}=(-1)^{|S|/2}$):
+\[
+W_R=\;\underset{S=\emptyset}{e_{1234}}
+\;-\underset{S=\{3,4\}}{e_{12}f_{34}}
+\;+\underset{S=\{2,4\}}{e_{13}f_{24}}
+\;-\underset{S=\{2,3\}}{e_{14}f_{23}}
+\;-\underset{S=\{1,4\}}{e_{23}f_{14}}
+\;+\underset{S=\{1,3\}}{e_{24}f_{13}}
+\;-\underset{S=\{1,2\}}{e_{34}f_{12}}
+\;+\underset{S=\{1,2,3,4\}}{f_{1234}},
+\]
+an explicit $8$-term $\pm1$ combination (the signs are the product of $(-1)^{|S|/2}$ with the reordering sign to
+canonical form; verified term-by-term in the companion computation and in the Lean certificate as data). Each
+pair of complementary even subsets contributes to $W_R^2$ exactly twice (ordered pairs), all non-complementary
+products vanish by repeated indices, and the eight ordered contributions carry signs whose total is $+8$:
+\begin{equation}\label{eq:WR2}
+W_R^2\;=\;8\,\mathrm{vol}\qquad\text{(as a class: no other nonzero component),}
+\end{equation}
+and symmetrically $W_I^2=8\,\mathrm{vol}$, while the mixed products cancel to $W_RW_I=0$ and
+$\Omega\overline\Omega=W_R^2+W_I^2=16\,\mathrm{vol}$. This reproduces the 2026-10-19 record's Wolfram computation
+by an independent method.
+
+\subsection{Unimodularity of the torus $K$-lattice and the minimal scale}
+
+\begin{lemma}[ch-unimodularity on tori]\label{lem:unimod}
+Let $T$ be a complex torus of dimension $n$. Write $T=(T_2)^{n}$ with $T_2$ the polarized real $2$-torus. The
+K\"unneth basis of $K^0(T)$ --- tensor products over the $T_2$-factors of the classes $1,\eta=[O]-[L]$ (even
+$K^0$-factors) and of the two odd generators of $K^1(T_2)$ (pairs of even numbers of odd factors) --- maps under
+$\mathrm{ch}$ to $\pm$ the standard integral monomial basis of $H^{\mathrm{even}}(T,\mathbb{Z})$:
+on each $T_2$-factor $\mathrm{ch}(\eta)=-x$ (the top class; $e^{x}=1+x$ since $x^2=0$ on $T_2$) and
+$\mathrm{ch}(\text{odd generator})=\pm$ (the corresponding degree-$1$ class). Hence
+$\mathrm{ch}\colon K^0(T)\to H^{\mathrm{even}}(T,\mathbb{Z})$ is surjective and carries the lattice onto the lattice.
+\end{lemma}
+
+\begin{proof}
+K\"unneth for complex $K$-theory over the product decomposition (external leaf E10) identifies $K^0(T)$ with the
+direct sum over parity-compatible tensor products; on each factor the stated Chern character is the exponential of
+the degree-$1$ classes, with $x^2=0$ on the two-torus making $\mathrm{ch}(\eta)=1-e^{x}=-x$ exactly, and the odd
+Chern character on $K^1$ of the circle factor is the fundamental class. Tensor multiplicativity of $\mathrm{ch}$
+completes the identification; signs are permutation signs only.
+\end{proof}
+
+\begin{corollary}[Minimal scale on abelian worlds]\label{cor:scale}
+On an abelian variety $A$ the integrality scale $m_0$ of Theorem A for a class $\alpha$ equals the denominator
+scale of $\alpha$ itself in $H^{2p}(A,\mathbb{Z})$: if $\alpha$ is integral then $m_0=1$ and the carrier exists at
+$m=1$. On the Weil discriminator: $W_R$ is integral, $\mathrm{td}(A)=1$, the additive congruence scale of
+Theorem B2(i) is $1$ ($c(y)=m\int\alpha\,\mathrm{ch}(y)\mathrm{td}(A)$ is integral for integral $m\alpha$), and the
+grade-$4$ Newton class $c_4(F)=\tfrac{m^2}{2}W_R^2=4m^2[A]$ is integral for every $m$. Hence the exact Weil carrier
+exists topologically at every scale $m\ge1$ with integral Chern data
+\[
+c_1=0,\qquad c_2=-mW_R,\qquad c_3=0,\qquad c_4=4m^2[A],\qquad r\ge\max(3,5)=5.
+\]
+\end{corollary}
+
+\begin{remark}[Consequences for the frame]
+At scale $m=1$ the discriminator's forcing input in carrier form is the holomorphic-bundle question for the
+character $r+W_R$ with $c_2=-W_R$, and Theorem \ref{thm:W3} gives every realization
+the End-mass $h^0+\tfrac12h^2=h^1+4\ge4$ (with $h^2\ge6$ for simple realizations). The two statements together are the campaign's first pair of sharp, world-specific
+constraints on the forcing input on its fixed discriminating test.
+\end{remark}
+
+\section{Scope, external leaves, and CI}\label{sec:scope}
+
+\textbf{Proved here with full proofs:} Lemma \ref{lem:action}; Theorem \ref{thm:W1} (all five parts, on the stated
+external leaves); Lemma \ref{lem:trivial}; Lemma \ref{lem:fusion}; Proposition \ref{prop:monoid}; Theorem
+\ref{thm:W2}; Lemma \ref{lem:endchar}; Theorem \ref{thm:W3}; Corollary \ref{cor:rigidity}; the exterior computation
+\eqref{eq:WR2} (term-by-term in the companion computation; certified in Lean as data plus verified sign-count
+arithmetic); Lemma \ref{lem:unimod}; Corollary \ref{cor:scale}.
+
+\textbf{Kernel-verified companions (GitHub Actions, Lean, sorryAx-audited, \#print axioms):} the projector
+polynomial identities (a)--(c) of \S\ref{sec:projpoly} with the explicit coefficients \eqref{eq:coeffs} (the
+idempotence (d) is kernel-verified in the pre-existing \texttt{GSTUniversalCMArithmeticObstruction.lean}, given the
+record-level spectrum census); the exterior sign-count certificate $\sum(\text{8 ordered contributions})=8$
+feeding the End-mass law's discriminator constant; the arithmetic chain from the periods to
+$\chi=+8m^2$ and the End-mass identity $h^0+\tfrac12h^2=h^1+4m^2\ge4m^2$.
+Data-versus-proved labeling inside the Lean docstring follows the audited convention of
+\texttt{GSTGr25PurePairLatticeCertificate.lean}.
+
+\textbf{External leaves (standard, hypotheses stated where used):}
+E1: cycle-class compatibility of correspondences (transpose-graph action $=(f^j)^*$; functoriality and commutation
+of graph correspondences) --- standard intersection theory (Fulton, \S16--17 conventions).
+E2: isogeny pullback/pushforward on rational Chow groups (finite morphism Gysin maps, $f^*f_*=\deg$) --- standard.
+E3: GAGA (holomorphic $=$ algebraic on projective $X$; coherent sheaves and Chern classes).
+E4: Thom--Porteous at maximal degeneracy with the expected-codimension genericity (used through the already-proved
+two-center descent law of 2026-10-24).
+E5: $\mathrm{ch}$ multiplicativity for tensor products and line-bundle twists; $\mathrm{ch}(E^\vee)$; additivity on
+exact sequences (all used within the already-audited descent-law infrastructure).
+E6: the projective-line computation of \S\ref{sec:W2} uses only $(L-1)^2=0$ in $K^0(\mathbb{P}^1)=\mathbb{Z}[L]/((L-1)^2)$
+(no Birkhoff--Grothendieck needed after the repair).
+E7: finite generation of $K^0$ for finite CW type; Atiyah--Hirzebruch rational injectivity/surjectivity of
+$\mathrm{ch}$ (used in Theorem A already).
+E8: Hirzebruch--Riemann--Roch for $\mathrm{End}F$; $\int\mathrm{td}_4=\chi(O_X)$ (and $\int\mathrm{td}_2$ where cited).
+E9: Serre duality ($h^i(F)=h^{d-i}(F^\vee\otimes K)$); $\mathrm{End}^\vee\cong\mathrm{End}$; $K_A$ trivial.
+E10: K\"unneth formula in complex $K$-theory and multiplicativity of $\mathrm{ch}$; odd Chern character on circle
+factors.
+E11: Hodge--Riemann positivity of the primitive middle square ($\int\alpha^2>0$ for nonzero real primitive
+$(2,2)$ classes on a fourfold); used only in Theorem \ref{thm:W3}(i)'s strict positivity (the corollary takes
+$\int\alpha^2>0$ as a hypothesis).
+
+\textbf{Explicitly not claimed:} any construction of a holomorphic structure on any Weil carrier; any decision of
+$S=0$ versus $S=W_\mathbb{Q}$ on any actual nonsplit instance; any improvement of the cycle-1 conditional landing;
+that the monoid layer $\mathcal{M}(A,W)$ is empty or nonempty. The Hodge conjecture itself remains the campaign's
+target; the forcing input remains equivalent to it in pair form; this document's contributions are the completed
+dichotomy frame, the stratification of the input, the End-mass law and its no-go corollary, and the exact
+discriminator constants.
+
+\vspace{2mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{1mm}
+
+\noindent\textbf{Pre-commit terminology gate (ledger 076):} this document uses the permanent campaign terminology
+(``exact carrier'', ``exactness note''); the banned-word list of rule 50 has been grepped and cleared.
+
+\end{document}

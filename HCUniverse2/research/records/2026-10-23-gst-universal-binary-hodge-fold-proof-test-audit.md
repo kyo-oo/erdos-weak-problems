@@ -1,0 +1,42 @@
+# Mathbox: universal GST binary Hodge-break proof test — actual geometry audit
+
+**Date:** 2026-10-23 (Asia/Kolkata).  
+**Active branch:** `research/gpt6-native-point-primitive-span-20261017`.  
+**Source checkpoint:** branch HEAD `9bb66015976b6cfdbd3f839dd13779964f91a84a` observed before writing.  
+**Purpose:** User requested an EXPLICIT causal topology/dimension fold experiment whose two claimed outcomes would refute (Hodge break) or prove (universal no-break) the rational Hodge conjecture. Do not recast this question as an isolated Chow-source construction. The result audits the logical content of this binary test by using actual complex algebraic varieties and whole Hodge structures.
+
+**Exact ultimate target** (AGENTS.md): every smooth projective complex original X, every p and every rational (p,p) class alpha has a genuine original-X rational cycle Z with canonical Betti class alpha. The test itself is not this source construction.
+
+## Relevant current branch mathematical inputs
+
+- `GSTGeneralSpace.lean`: truly dimension-free typed carrier.
+- `GSTGeneralSpaceRealization.lean`, `GSTGeneralSpaceSchemeDimensionObservation.lean`: realized geometric dimension, not intrinsic cell rank.
+- `GSTGraphV2UnboundedHigherCausality.lean`: existing arbitrary finite causal paths; recently extended with complex period edge Hodge drift.
+- `GSTGradedWorldAlgebra.lean`: Tate fold charge invariance.
+- `research/derivations/GST_emergent_dimension_causal_hodge_fold_2026_10_21.tex` and `research/ACTIVE_HODGE_PROOF_PLAN.md`: ALREADY show genuine geometry with rational class changing Hodge type under a nonholomorphic fold, plus original-Hodge-locus calculation `E_i × E_(i+t)` with only central point Hodge. Those routes were already known; DO NOT CLAIM novelty by reciting them. Today's addition makes the WHOLE rational Hodge dimension and independent geometric source basis explicit at both realized endpoints, then amplifies all arbitrary original X,p,N.
+
+## Full source, derivation and executed computation
+
+- [Mathematics-first complete source](../derivations/GST_binary_universal_fold_Hodge_break_proof_test_2026-10-23.tex), original commit `91449dee71d08e3ac869c93fcbcf1f245ef4e274`.
+- Actual geometries: for every arbitrary nonempty smooth projective X and every n≥0, `Y_(τ,n)=X × E_i × E_τ × (P¹)^n`, τ∈upper half-plane. All actual smooth projective; same topology, same `H_X(u,v)(1+u)^2(1+v)^2(1+uv)^n`, and pure Hodge structure in every degree.
+- Exact wedge criterion for rational Betti H² class `alpha=(a,b,c,d,e,f)` in ordered real torus two-form basis: `-i τ b + i c + τ d -e=0` iff (1,1). For τ=i the rational equations are `b=e,c=-d`, kernel dimension **4**. For τ=i√2 the rational equations are `b=c=d=e=0`, kernel dimension **2**; proof uses irrationality of √2 and full rational coefficient quantifier. Both have identical complex Hodge numbers h20=1,h11=4,h02=1, but different rational Hodge-class ranks.
+- **Geometry-to-algebraicity fully executed in these fibers:** four genuine algebraic divisors on E_i×E_i — two factor divisors, diagonal and graph of multiplication by i — have canonical Betti coefficient vectors `(0,0,0,0,0,1),(1,0,0,0,0,0),(1,0,-1,1,0,1),(1,1,0,0,1,1)`; they span ALL four rational (1,1) directions. On E_i×E_(i√2), the two factor divisors span ALL two rational Hodge directions. No HC used.
+- Arbitrary X,p,n universal geometric diagnostic: for p≥1 and n≥p−1 the marked rational class `beta_(τ,p,n)=(dx1-dx2)∧(dy1-dy2) × h1×...×h_(p-1)` in `H^(2p)(Y_(τ,n),Q)` has type (p,p) and an explicit external algebraic diagonal-hyperplane cycle at τ=i, and NOT type (p,p) at τ=i√2; true by Kunneth and exact exterior period. Both worlds remain smooth-projective Hodge PURE with identical entire Hodge polynomial. The specified classes are algebraic wherever Hodge; this does not assert all Hodge classes on an arbitrary product with X are algebraic.
+- Independent singular graph fold: any nodal C_Gamma with E edges,V vertices,c components births weight-zero H¹ of dimension E−V+c, genuinely breaking pure weights outside smooth-projective category.
+
+**Exact Wolfram source:** [binary all-N Hodge geometric test](../computations/gst_binary_allN_hodge_break_actual_geometry_2026_10_23.wl), current executed/fetched blob `99b1196aec8b8b2873dfebe735949cf9b56cc4e7` (revised independently enumerated elliptic and projective Hodge basis, rather than tautological same-expression comparison), after cleaned upper-case symbol warning. Results: full wedge coefficient vector `{0,-ss tt,tt,ss,-1,0}`; aligned rational kernel rank4, other rational kernel rank2; independent genuine divisor vectors rank4; all four solve matched Hodge constraints, two generic factor divisors span; marked wedge aligned 0, mismatched `I(Sqrt[2]-1)`; 153/153 graded lifts for `0≤n≤16,1≤p≤n+1` passed; all entire Hodge polynomial identities pass. NO float approximations, no arbitrary-X Hodge proof claimed. Note that the polynomial comparison is a direct Kunneth arithmetic check, not a derived source-existence theorem.
+- **Lean in-place upgrade:** existing `GSTGraphV2UnboundedHigherCausality.lean` amended at source commit `1abcb7689bb1081e27dde5adaeab8b18eb87485f` with `RationalEllipticFoldForm`, `equalEllipticHodgeCondition`, `irrationalEllipticHodgeCondition`, `ellipticDivisorBettiForm`, `ellipticAlignedDivisorCompiler`, `ellipticAlignedDivisorCompiler_exact`, and marked diagonal Hodge-status checks. The Lean object is a faithful exact rational coefficient shadow, and the companion actual geometric divisor comparison is LaTeX, not formalized as algebraic geometry in Lean. An initial GitHub Actions run `39863209433` FAILED because the proof used a nonexistent auto-generated structure `.ext` lemma. The real Lean source was repaired at commit `9620f5d1906fed7177100f1f43249903affa3d91` by constructor congruence and field ring normalization; subsequent [GitHub Actions run **39863718368**](https://github.com/kyo-oo/HC-PROOF/actions/runs/39863718368) **COMPLETED SUCCESS** at that exact code SHA. Both changed rational compiler theorem and marked break lemma passed the pinned Lean build and the no-sorryAx gate. No local Lean install.
+
+## Mathbox proof-audit result on user's EXACT binary rule
+
+Definition ambiguity is decisive:
+
+(A) Hodge **type** of a fixed rational class can break under smooth-projective geometric deformation, even while rational Hodge conjecture continues to hold for every (1,1) class on both test surfaces. Losing (p,p) means no HC test for that class on the new world, hence this break is not a counterexample.
+
+(B) Full Hodge **purity** of ANY smooth projective complex variety is unconditional by pure Hodge theory, for all arbitrary X and all dimensions. Thus no purity-break is already guaranteed; the inference `(all smooth projective X are Hodge-pure) ⇒ (HC true)` is equivalent to HC, because its premise is a theorem. It cannot be offered as an independent proof derived from the fold law.
+
+(C) Topology-fold mixed weight of singular C_Gamma is actual but the output is outside the smooth projective HC quantifiers, thus not a counterexample.
+
+**Verdict:** The binary fold purity/type procedure does not supply a valid *independent proof certificate* under these interpretations. The type-change branch produces actual Hodge status changes even when all rational Hodge classes in the tested degree have explicit algebraic representatives; these events are not Hodge conjecture counterexamples. In the purity branch, the antecedent is already true for all smooth projective complex X, so proving the purported implication to the rational Hodge conjecture would be logically equivalent to proving the conjecture itself; this implication has not been disproved or established. **The rational Hodge conjecture itself is neither proved nor refuted.** This distinction is a mathematical proof-audit verdict, not an agenda or preference. No actual HC counterexample claimed.
+
+**Future nonrepetitive direction:** To make a topology-first criterion genuinely decide HC, it must supply a new geometrically meaningful invariant or actual geometric realization whose failure is EQUIVALENT to failure of canonical original-X Hodge algebraicity, with the comparison proved independently. Purity and marked-type alone have now been decisively discriminated. Earlier pure-fold and existing Hodge-locus special tests must not be repeated as breakthrough claims.

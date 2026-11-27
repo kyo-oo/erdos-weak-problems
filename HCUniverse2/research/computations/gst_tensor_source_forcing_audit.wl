@@ -1,0 +1,19 @@
+Module[{a,b,g,q,s,r,coev,k,sgn,curve,d,assumptions},
+ q=DiagonalMatrix[{a,b}];s={1,0};r={0,1};sgn=DiagonalMatrix[{1,-1}];
+ coev=Inverse[q];k={{0,0},{0,1/b}};
+ curve={{0,1,1},{1,0,1},{1,1,2-2g}};d={-1,-1,1};
+ assumptions=a>0&&b>0&&Element[g,Integers]&&g>=1;
+ FullSimplify[<|
+ "coevalActsAsIdentity"->coev.q,
+ "kernelInvariant"->sgn.k.Transpose[sgn]==k,
+ "kernelIdempotent"->k.q.k==k,
+ "kernelAction"->k.q,
+ "kernelTrace"->Tr[k.q],
+ "nativePeriod"->r.q.s,
+ "positiveResidualEnergy"->r.q.r,
+ "signedDoubledEulerIndex"->Flatten[KroneckerProduct[r,r]].KroneckerProduct[q,q].Flatten[-k],
+ "signedConvolutionIdempotent"->-((-k).q.(-k))==-k,
+ "curveDpairings"->d.curve,
+ "curveDsquare"->d.curve.d
+ |>,Assumptions->assumptions]
+]

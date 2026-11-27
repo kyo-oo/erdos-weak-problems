@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "claim_id": "DIRECT-SMOOTH-SECANT-SEED-CHARACTER-20261018",
+  "repository": {
+    "commit": "2a5c980af9066150017d7cdf273115aea0a49c88",
+    "dirty": true
+  },
+  "command": "timeout 120s python3 research/computations/secant_seed_character.py",
+  "environment": {
+    "software": [
+      "Python 3.12.14; standard-library Fraction and standalone sparse Laurent/exterior implementation"
+    ],
+    "hardware": "Linux container; hardware unreported"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact oriented Fourier-kernel GRR character, normalized degree-six Weil component and annihilator identities for the constructed genus-three seed.",
+    "coefficient_domain": "Q[d,d^-1,u,a,b]/(u^2+d); sparse exterior algebra over 6 and 12 generators; no floating point.",
+    "conventions": "Single-block order x1,x2,w1,w2,y1,y2; integrate y1*y2; a=-lambda on second factor; Fourier [3] contributes global minus; E duality acts by (-1)^j in codimension j.",
+    "inputs": [
+      "research/computations/secant_seed_character.py"
+    ],
+    "bounds": {
+      "single_pair_generators": 6,
+      "sixfold_generators": 12,
+      "max_exterior_degree": 12,
+      "normalized_character_coefficients": "j=0..6",
+      "symbolic_parameters": [
+        "d",
+        "u",
+        "a",
+        "b"
+      ],
+      "exclusions": [
+        "d=0"
+      ],
+      "geometric_regime": "d>0; actual smooth seed uses d=176400*d0 with d0 a positive integer",
+      "wall_time_cap_seconds": 120,
+      "cpu_memory_caps": "not additionally imposed"
+    },
+    "non_claims": [
+      "No sheaf existence is inferred from formal coefficients.",
+      "The smooth seed and coherent sheaf are constructed in the accompanying geometric proof, not by this script.",
+      "No deformation or all-period algebraicity theorem is implemented.",
+      "No canonical cycle-class formalization or all-varieties Hodge theorem is certified."
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-17T21:33:10.444792+00:00",
+    "runtime_seconds": 0.12181727499955741,
+    "exit_status": 0
+  },
+  "outputs": [
+    {
+      "path": "research/computations/secant_seed_character.output.txt",
+      "sha256": "ee0c5ad1f19b3d77fcf65e85109c383b23ca9dff0219cdad89e6c4a5a964491c"
+    }
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/secant_seed_character.py",
+      "sha256": "d2fa582b96732132e6f7ca4378fe5f4b4992c9930ab4ca5b88230d743389a0c6"
+    }
+  ],
+  "checks": [
+    "The one-pair Fourier integral matches its universal polynomial formula in a,b.",
+    "The actual GRR rank is 8d and the first character has the stated R/theta signs.",
+    "Both determinant forms are primitive and absorb the mixed normalization exponential.",
+    "The full degree-six normalized character equals the displayed theta-cube plus Weil formula.",
+    "The exceptional component is rational, has 32 terms, and its all-w coefficient is -(d+1)/(2d).",
+    "All ambient normalized coefficients P0,...,P6 are rational; P0=8d, P1=0 and P3 is the displayed factor."
+  ],
+  "result": "Exact symbolic identities verified; the explicit all-w coefficient proves nonvanishing for every d>0 by the separate elementary positivity argument.",
+  "residual_risks": [
+    "The exterior/quotient implementation is custom; its conventions are cross-checked by the oriented one-pair integral, known sheaf rank, the paper derivation and separate Lean scalar identities.",
+    "Version 1 does not machine-instrument the host; command uses GNU timeout for its stated wall bound.",
+    "Initial launch attempts failed because Sympy was unavailable. The final script has no Sympy dependency."
+  ]
+}

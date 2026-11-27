@@ -1,0 +1,370 @@
+{
+  "exact_checks": {
+    "all_passed": true,
+    "assertions": 7204,
+    "bounds": {
+      "kernel": "Nine explicit pure presentations, plus all five nonlinear parameters",
+      "nonlinear": "All 256 basis states for each lambda in -2,-1,0,1,2; six odd handles, base P1xP1",
+      "rings": "All products of every cohomology basis in five declared one-handle fixtures",
+      "secondary": "Complete degree-five Massey coset and degree-three indeterminacy for curvature xy on P1xP1"
+    },
+    "kernel_rows": [
+      {
+        "base": [
+          0
+        ],
+        "kernel_by_weight": [
+          0
+        ],
+        "kernel_dimension": 0,
+        "weights": []
+      },
+      {
+        "base": [
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          0
+        ],
+        "kernel_dimension": 0,
+        "weights": [
+          1
+        ]
+      },
+      {
+        "base": [
+          3
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1,
+          1
+        ],
+        "kernel_dimension": 3,
+        "weights": [
+          1
+        ]
+      },
+      {
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "weights": [
+          1
+        ]
+      },
+      {
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "weights": [
+          1
+        ]
+      },
+      {
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "weights": [
+          1
+        ]
+      },
+      {
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          0,
+          1
+        ],
+        "kernel_dimension": 1,
+        "weights": [
+          2
+        ]
+      },
+      {
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          2,
+          1
+        ],
+        "kernel_dimension": 3,
+        "weights": [
+          1,
+          1
+        ]
+      },
+      {
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "weights": [
+          1,
+          2
+        ]
+      }
+    ],
+    "massey": {
+      "contains_zero": false,
+      "degree": 5,
+      "indeterminacy": [
+        "x*v",
+        "y*v"
+      ],
+      "indeterminacy_dimension": 2,
+      "rank_with_representative": 3,
+      "representative": "-y*u"
+    },
+    "nonlinear_rows": [
+      {
+        "W_closed": false,
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "parameter": -2,
+        "states": 256,
+        "weights": [
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "W_closed": false,
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "parameter": -1,
+        "states": 256,
+        "weights": [
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "W_closed": true,
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "parameter": 0,
+        "states": 256,
+        "weights": [
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "W_closed": false,
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "parameter": 1,
+        "states": 256,
+        "weights": [
+          1,
+          1,
+          2
+        ]
+      },
+      {
+        "W_closed": false,
+        "base": [
+          1,
+          1
+        ],
+        "kernel_by_weight": [
+          0,
+          1,
+          1
+        ],
+        "kernel_dimension": 2,
+        "parameter": 2,
+        "states": 256,
+        "weights": [
+          1,
+          1,
+          2
+        ]
+      }
+    ],
+    "one_handle_rings": [
+      {
+        "annihilator_dimension": 1,
+        "base": [
+          0
+        ],
+        "cohomology_dimension": 4,
+        "p": 1,
+        "products": 16,
+        "quotient_dimension": 1
+      },
+      {
+        "annihilator_dimension": 2,
+        "base": [
+          1
+        ],
+        "cohomology_dimension": 8,
+        "p": 1,
+        "products": 64,
+        "quotient_dimension": 2
+      },
+      {
+        "annihilator_dimension": 1,
+        "base": [
+          3
+        ],
+        "cohomology_dimension": 4,
+        "p": 1,
+        "products": 16,
+        "quotient_dimension": 1
+      },
+      {
+        "annihilator_dimension": 2,
+        "base": [
+          1,
+          1
+        ],
+        "cohomology_dimension": 8,
+        "p": 1,
+        "products": 64,
+        "quotient_dimension": 2
+      },
+      {
+        "annihilator_dimension": 3,
+        "base": [
+          1,
+          1
+        ],
+        "cohomology_dimension": 12,
+        "p": 2,
+        "products": 144,
+        "quotient_dimension": 3
+      }
+    ],
+    "scope": "Finite exact evidence; no Lean execution, arbitrary-X proof by sampling, or universal Chow construction",
+    "unmarked_equal_spectrum": [
+      1,
+      1,
+      1,
+      2,
+      1,
+      1,
+      1
+    ]
+  },
+  "static": {
+    "import_acyclic": true,
+    "new_theorems": {
+      "GSTGradedWorldAlgebra.lean": [
+        "baseBoundaryModule_eq_bot_of_retraction",
+        "baseBoundaryModule_eq_curvatureRange",
+        "baseBoundaryModule_eq_of_chainEquiv",
+        "baseBoundaryModule_mono_of_chainMap",
+        "baseBoundaryModule_mono_two_steps",
+        "coupled_annihilator_cycle",
+        "coupled_base_boundary_iff",
+        "coupled_base_boundary_self",
+        "coupled_nonzero_u_not_boundary",
+        "mem_baseBoundaryModule_iff",
+        "nonzero_base_boundary_forbids_retraction",
+        "twoCurvature_base_boundary_iff",
+        "twoCurvature_shear_fixes_base"
+      ],
+      "GSTSpatialFoldResearch.lean": []
+    },
+    "parsed_import_nodes": 748,
+    "scope": "Lexical/import checks, not Lean compilation or a whole-repository semantic proof audit",
+    "tex_environments_balanced": true,
+    "theorem_count": 13,
+    "unchanged_lexical_anomalies": [
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "ComparatorSmokeChallenge.lean"
+      },
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "ComparatorSmokeSolution.lean"
+      },
+      {
+        "base_unchanged": true,
+        "error": "unterminated Lean block comment",
+        "path": "GSTLawStackRound40.lean"
+      }
+    ]
+  },
+  "status": "completed",
+  "wolfram_comparison": {
+    "all_shared_tables_match": true,
+    "assertions": 1318,
+    "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "raw_roundtrip_verified": true
+  }
+}

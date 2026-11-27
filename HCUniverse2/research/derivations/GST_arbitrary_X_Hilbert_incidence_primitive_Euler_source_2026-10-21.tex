@@ -1,0 +1,1578 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,mathrsfs,hyperref}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\td}{\operatorname{td}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\Sym}{\operatorname{Sym}}
+\newcommand{\Hilb}{\operatorname{Hilb}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\im}{\operatorname{im}}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST original-variety source surgery:\\
+Hilbert incidence, exact rational Euler extraction,\\
+and a genuine separable algebraic detector}
+\author{GST--Mathbox mathematical derivation and self-audit}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We directly attack two geometric gaps in the GST rational Hodge program:
+constructing a new actual rational algebraic source on the original
+arbitrary smooth projective complex variety, and replacing a nonzero
+two-ended Euler signal by a genuine one-ended algebraic detector.
+Our alternative to abstract diagonal contraction is the actual
+length-two Hilbert incidence blowup. We calculate all of its
+exceptional-twist algebraic \(K_0\) sources in closed form for
+arbitrary \(X\). On an \emph{arbitrary original smooth projective
+fourfold}, this yields two explicitly built rational algebraic
+perfect-complex sources whose universal FORMAL characteristic
+coefficient matrix has determinant \(-1/2\); the classes
+need not be geometrically independent after evaluation on a
+given fourfold. We form a target-sensitive algebraic source
+and a decomposable algebraic two-ended kernel, and prove that both
+have exactly the sum-of-squares Euler period for every target with
+nonzero tangent-characteristic readout. No algebraic representative
+of the target is chosen, and the construction is never asserted to
+span all rational Hodge classes: the universal source-existence
+quantifier cannot follow solely from tangent-characteristic periods.
+We additionally prove a finite polynomial cap on the entire
+incidence-twist Euler tower. A twisted Hilbert incidence operation
+recovers EVERY existing actual algebraic K-class on every
+original X; its Adams--Todd purification exactly returns
+the Chow class and genuine Betti fundamental class of EVERY
+algebraic subvariety. We prove the universal Hodge
+source theorem in codimensions 0, 1, d-1 and d,
+and verify the Euler source constructively on a nonzero
+primitive fourfold. This does not supply the full arbitrary
+primitive Hodge-to-Chow direction.
+\end{abstract}
+
+\section{Immutable target, source types, and the attempted new input}
+For the original smooth connected projective complex \(X\) of
+complex dimension \(d\), the goal for each \(p\) remains
+\[
+ \forall r\in \operatorname{Hdg}^{p}(X)_{\Q},\qquad
+ \exists Z_r\in\CH^p(X)_{\Q}:
+       \cl^{\rm can}_{X,p}(Z_r)=r.                    \tag{T}
+\]
+Here \(\cl^{\rm can}\) is the rational singular Betti class map from
+analytic fundamental cycles. The previously established GST
+normalized world construction gives a topological pure-middle
+packet with a nonzero quadratic residual index, but not a
+one-legged algebraic source detecting every residual. We therefore
+change the INPUT GEOMETRY, not merely the name of the kernel:
+use the universal length-two Hilbert incidence scheme.
+
+Put \(B=\operatorname{Bl}_{\Delta_X}(X\times X)\).
+The center is the genuine regular diagonal immersion, with
+normal bundle \(T_X\), conormal bundle \(\Omega_X^1\), exceptional
+Cartier divisor \(E\), blowup map \(b:B\to X\times X\), and
+\[
+              u=\operatorname{pr}_1\circ b:B\to X.
+\]
+For a smooth \(X\) of positive dimension, the blowup is the
+universal pointed length-two subscheme family over
+\(\Hilb^2(X)\); our proof uses only its explicit blowup geometry.
+For \(m\geq0\), define an actual algebraic perfect-complex
+class on the ORIGINAL \(X\):
+\[
+ \boxed{F_m:=u_![\mathcal O_B(-mE)]
+           \in K_0^{\rm alg}(X)_{\Q}.}              \tag{1.1}
+\]
+This is a proper pushforward of an actual algebraic line bundle.
+No prescribed Hodge representative or new semantic cycle-class map
+is passed as input. Because \(X\) is regular, the resulting bounded
+coherent derived pushforward determines a perfect \(K_0\)-class.
+
+\section{Exact arbitrary-\(X\) Hilbert-incidence computation}
+Let \(I_\Delta\subset\mathcal O_{X\times X}\) be the ideal of the
+diagonal. The Rees-algebra construction and the vanishing of higher
+direct images of \(\mathcal O_B(-mE)\) for \(m\geq0\) give
+\[
+ Rb_*\mathcal O_B(-mE)=I_\Delta^m.
+                                                               \tag{2.1}
+\]
+Here equality means equality in the derived category; the right
+side is concentrated in degree zero. Regularity of the diagonal gives
+the canonical associated graded ideal:
+\[
+ I_\Delta^k/I_\Delta^{k+1}
+       \simeq \Delta_*\Sym^k(\Omega_X^1),\qquad k\geq0.
+                                                               \tag{2.2}
+\]
+It follows in algebraic \(K_0(X\times X)\) that
+\[
+ [I_\Delta^m]=[\mathcal O_{X\times X}]
+       -\sum_{k=0}^{m-1}
+          [\Delta_*\Sym^k\Omega_X^1].              \tag{2.3}
+\]
+
+\begin{theorem}[Actual arbitrary-variety Hilbert source identity]
+For every smooth connected projective \(X/\mathbf C\)
+of \(d\geq1\) and all \(m\geq0\),
+\[
+ \boxed{
+ F_m=\chi(X,\mathcal O_X)[\mathcal O_X]
+       -\sum_{k=0}^{m-1}[\Sym^k\Omega_X^1]
+ \quad\text{in }K_0^{\rm alg}(X)_{\Q}.}            \tag{2.4}
+\]
+In particular,
+\[
+ F_{m+1}-F_m=-[\Sym^m\Omega_X^1].                  \tag{2.5}
+\]
+\end{theorem}
+\begin{proof}
+Push (2.3) along the first projection:
+\(
+ R\operatorname{pr}_{1*}\mathcal O_{X\times X}
+   =\mathcal O_X\otimes_{\mathbf C}^{\mathbf L}
+       R\Gamma(X,\mathcal O_X)
+\).
+Its \(K_0(X)\) class is \(\chi(X,\mathcal O_X)[\mathcal O_X]\).
+As \(\operatorname{pr}_1\circ\Delta=\mathrm{id}_X\),
+the derived pushforward of the \(k\)-th diagonal term is
+\([\Sym^k\Omega_X^1]\). Equation (2.1) then proves (2.4)
+and subtraction proves (2.5).
+\end{proof}
+
+This construction includes all exceptional powers of the genuine
+non-split diagonal blowup in one uniform formula. The output is not
+assumed algebraic; its algebraicity was established before evaluating
+any Hodge class.
+
+\section{Closed Chern-character formula with arbitrary tangent rank}
+Write \(x_1,\ldots,x_d\) for the formal Chern roots of \(T_X\).
+The rational Chow Chern-character generating series is
+\[
+ \sum_{k\geq0}z^k\ch(\Sym^k\Omega_X^1)
+     =\prod_{i=1}^{d}(1-ze^{-x_i})^{-1}.            \tag{3.1}
+\]
+Working in the Chow ring with rational coefficients and truncating
+by \emph{cohomological codimension}, the first terms are
+\[
+\begin{split}
+ \left[\text{right side of (3.1)}\right]_0
+     &=\frac1{(1-z)^d},\\
+ \left[\text{right side of (3.1)}\right]_1
+     &=-\frac{z}{(1-z)^{d+1}}c_1(T_X),\\
+ \left[\text{right side of (3.1)}\right]_2
+     &=\frac{z(1+z)}{2(1-z)^{d+2}}c_1(T_X)^2
+       -\frac{z}{(1-z)^{d+2}}c_2(T_X).
+                                                               \tag{3.2}
+\end{split}
+\]
+Therefore the rank, first and second Chern-character components of
+the actual sources are
+\[
+\begin{split}
+ \rk(F_m)
+    &=\chi(X,\mathcal O_X)-\binom{d+m-1}{d},\\
+ \ch_1(F_m)
+    &=\binom{d+m-1}{d+1}c_1(T_X),\\
+ \ch_2(F_m)
+    &=-\frac12\left\{\binom{d+m}{d+2}
+                  +\binom{d+m-1}{d+2}\right\}c_1(T_X)^2\\
+    &\hspace{12mm}+\binom{d+m}{d+2}c_2(T_X).
+                                                               \tag{3.3}
+\end{split}
+\]
+As usual the binomial coefficient is zero when its nonnegative
+upper argument is smaller than its lower argument.
+These formulas are valid in rational \emph{Chow}, not merely
+numerical or Betti cohomology, because (3.1) is the algebraic
+Chern-character splitting-principle identity.
+
+\begin{proof}[Proof of (3.2)--(3.3)]
+Expand the logarithm of (3.1) up to root degree two:
+\[
+ \log G(z)=-d\log(1-z)
+      -\frac{z}{1-z}\sum_i x_i
+      +\frac{z}{2(1-z)^2}\sum_i x_i^2
+      +O(x^3).
+\]
+Exponentiating and using
+\(\sum_i x_i^2=c_1^2-2c_2\) yields (3.2).
+Coefficient extraction from
+\([z^k](1-z)^{-N}=\binom{N+k-1}{N-1}\),
+and finite hockey-stick summation over \(0\leq k<m\)
+in (2.4), gives (3.3). No numerical or fixed-dimensional
+specialization enters this argument.
+\end{proof}
+
+\section{Constructing two ORIGINAL-fourfold algebraic sources}
+Now let \(d=4\), \(p=2\), with \emph{no special assumptions on \(X\)}
+beyond smooth connected projectivity. The first two genuine
+Hilbert-incidence differences are
+\[
+ \boxed{W_1:=F_2-F_1=-[\Omega_X^1],\qquad
+        W_2:=F_3-F_2=-[\Sym^2\Omega_X^1].}          \tag{4.1}
+\]
+They are explicit virtual algebraic vector bundles. For any
+algebraic \(K_0\) class \(W\), set
+\[
+ \Theta_2(W)
+    :=[\ch(W)\,\td(T_X)]_2\in\CH^2(X)_{\Q}.           \tag{4.2}
+\]
+The \emph{relative Todd normalization} of earlier GST finite-flat
+world formulas is not being replaced by 1: (4.2) retains the true
+Todd factor in the ORIGINAL fourfold HRR pairing.
+
+\begin{theorem}[Exact universal fourfold characteristic-coefficient detector law]
+For every smooth projective complex fourfold \(X\), the actual
+codimension-two rational algebraic Chow cycles
+\(Z_i=\Theta_2(W_i)\) satisfy
+\[
+ \boxed{
+ Z_1=-\frac13c_1(T_X)^2+\frac23c_2(T_X),\qquad
+ Z_2=-\frac{11}{6}c_1(T_X)^2+\frac{31}{6}c_2(T_X).
+ }                                                     \tag{4.3}
+\]
+The universal rational \(2\times2\) readout matrix
+\[
+ M=
+ \begin{pmatrix}
+ -1/3&2/3\\ -11/6&31/6
+ \end{pmatrix},
+ \qquad
+ \boxed{\det M=-\tfrac12\ne0}                         \tag{4.4}
+\]
+is independent of \(X\), \(\chi(\mathcal O_X)\), polarizations,
+finite-flat projections and prescribed Hodge classes.
+\end{theorem}
+\begin{proof}
+For \(d=4\), the first two cotangent characters are
+\[
+\begin{split}
+ \ch(\Omega_X^1)_{\le2}
+   &=4-c_1+\tfrac12(c_1^2-2c_2),\\
+ \ch(\Sym^2\Omega_X^1)_{\le2}
+   &=10-5c_1+\tfrac72 c_1^2-6c_2 .
+\end{split}
+\]
+The true Todd class begins
+\(
+ \td(T_X)=1+\frac12c_1+\frac1{12}(c_1^2+c_2)+\cdots.
+\)
+Multiply each displayed character by Todd, take degree two,
+and reverse sign according to (4.1):
+\[
+\begin{split}
+ [\ch(\Omega_X^1)\td(T_X)]_2
+     &=\tfrac13 c_1^2-\tfrac23 c_2,\\
+ [\ch(\Sym^2\Omega_X^1)\td(T_X)]_2
+     &=\tfrac{11}{6}c_1^2-\tfrac{31}{6}c_2.
+\end{split}
+\]
+This proves (4.3), and direct rational determinant arithmetic
+gives (4.4).
+\end{proof}
+
+\section{Genuine positive one-sided algebraic source from the two readouts}
+Let \(r\in H^{4}(X,\Q)\cap H^{2,2}(X)\) be an arbitrary
+\emph{prescribed} rational Hodge class. The rational topological
+Chern-character isomorphism provides a virtual
+\(A_r\in K^0_{\rm top}(X)_{\Q}\) whose entire character is \(r\)
+in codimension two. We do NOT assert \(A_r\) is algebraic.
+Its topological dual has the same rational character because
+the codimension is even:
+\[
+        \ch(A_r)=r,\qquad \ch(A_r^\vee)=r.             \tag{5.1}
+\]
+Let
+\[
+ a=\int_X r\,\cl(c_1^2),\qquad
+ b=\int_X r\,\cl(c_2),
+ \qquad
+ \delta_i=\int_Xr\,\cl(Z_i).                          \tag{5.2}
+\]
+All are rational numbers: \(r\) is rational and \(Z_i\)
+is an independently constructed rational algebraic cycle.
+Equations (4.3)--(4.4) give
+\[
+ \begin{pmatrix}\delta_1\\\delta_2\end{pmatrix}
+  =M\begin{pmatrix}a\\b\end{pmatrix},
+ \quad
+ \begin{pmatrix}a\\b\end{pmatrix}
+  =\begin{pmatrix}-31/3&4/3\\-11/3&2/3\end{pmatrix}
+     \begin{pmatrix}\delta_1\\\delta_2\end{pmatrix}. \tag{5.3}
+\]
+In particular \((\delta_1,\delta_2)\ne(0,0)\) exactly when
+\((a,b)\ne(0,0)\), with NO assumption that \(r\) has an
+algebraic preimage.
+
+\begin{theorem}[Explicit target-selected original-\(X\) Chow source]
+Define the following ACTUAL rational algebraic cycle:
+\[
+ \boxed{Z_r:=\delta_1 Z_1+\delta_2 Z_2
+                    \in\CH^2(X)_{\Q}.}             \tag{5.4}
+\]
+Then the genuine canonical Betti pairing obeys
+\[
+ \boxed{
+ \int_Xr\,\cl^{\rm can}(Z_r)
+     =\delta_1^2+\delta_2^2
+     =\frac{125a^2-698ab+977b^2}{36}.}             \tag{5.5}
+\]
+In particular this is strictly positive whenever
+\(r\) has nonzero period against \(c_1(T_X)^2\) or \(c_2(T_X)\).
+For a primitive middle class, the sign convention
+\(Q(r,z)=(-1)^2\int_Xrz=\int_Xrz\) agrees exactly.
+\end{theorem}
+\begin{proof}
+The native cycles \(Z_1,Z_2\) were constructed in (4.2)--(4.3)
+before \(r\) was specified. The target-dependent coefficients
+\(\delta_i\) are rational intersection numbers, not Chow
+witnesses. Bilinearity immediately gives the first identity
+of (5.5). Expanding the matrix \(M^TM\) gives the second.
+Because \(\det M=-1/2\), \(\delta\ne0\) for any
+nonzero \((a,b)\), and the rational sum of squares is positive.
+\end{proof}
+
+The actual corresponding perfect-complex source is also explicit:
+take \(E_r:=\delta_1W_1+\delta_2W_2\in K_0^{\rm alg}(X)_{\Q}\).
+Topological Hirzebruch--Riemann--Roch, using (5.1), gives
+\[
+ \boxed{\chi_X(A_r,E_r)
+     =\int_Xr\,\cl\bigl(\Theta_2(E_r)\bigr)
+     =\delta_1^2+\delta_2^2.}                      \tag{5.6}
+\]
+Thus a nonzero Euler pairing has been converted to an actual
+algebraic one-legged source, with no Hodge-to-Chow selector or
+full-rank algebraic-basis premise, in the explicitly tested sector.
+
+\section{An actually factorable TWO-ENDED Euler kernel}
+The preceding source also yields a concrete replacement
+two-ended test with a \emph{proved algebraic one-sided
+factorization}. On a smooth projective \(X\), rational algebraic
+Chern character is an isomorphism
+\(K_0^{\rm alg}(X)_{\Q}\simeq\bigoplus_j\CH^j(X)_{\Q}\).
+For an explicit construction of the pure-degree inverse, choose
+any algebraic rational class \(T_{\td}\) with
+\(\ch(T_{\td})=\td(T_X)\), and write
+\[
+ \Pi_2=\prod_{\substack{0\le j\le4\\j\ne2}}
+        \frac{\psi^2-2^j}{2^2-2^j},
+ \qquad
+ C_i=\Pi_2(T_{\td}\cdot W_i).                        \tag{6.1}
+\]
+All factors are actual rational algebraic \(K\)-theory operations;
+\(T_{\td}\) is constructed from the explicit algebraic tangent
+Todd word, not from the target \(r\). Under rational Chern
+character,
+\[
+            \ch(C_i)=Z_i\quad\text{pure codimension }2,
+            \qquad C_i^\vee=C_i\text{ in }K_0(X)_\Q. \tag{6.2}
+\]
+The last equality follows from injectivity of rational \(\ch\)
+and the even Adams duality sign.
+
+\begin{theorem}[Separable native quadratic detector with exact linear extraction]
+The genuine algebraic perfect-kernel class
+\[
+ \boxed{\mathscr K_{\rm Hilb}
+   := C_1^\vee\boxtimes C_1+C_2^\vee\boxtimes C_2
+      \in K_0^{\rm alg}(X\times X)_{\Q}}            \tag{6.3}
+\]
+has the exact topological Euler index
+\[
+ \boxed{
+ \chi_{X\times X}(A_r\boxtimes A_r,\mathscr K_{\rm Hilb})
+   =\delta_1^2+\delta_2^2.}                        \tag{6.4}
+\]
+Moreover the ACTUAL algebraic one-sided source
+\(
+ C_r=\delta_1C_1+\delta_2C_2
+\)
+satisfies
+\[
+ \boxed{\chi_X(A_r,C_r)=\delta_1^2+\delta_2^2.}     \tag{6.5}
+\]
+\end{theorem}
+\begin{proof}
+The algebraic K-classes \(C_i\) were independently constructed
+from \(T_X\) and the incidence blowup. By (5.1)--(5.2),
+\(\chi_X(A_r,C_i)=\int_Xr\,\cl(Z_i)=\delta_i\).
+Their pure-even rational character gives the same identity for
+\(C_i^\vee\). Multiplicativity of the Euler pairing on external
+products gives
+\[
+ \chi_{X\times X}(A_r\boxtimes A_r,C_i^\vee\boxtimes C_i)
+  =\chi_X(A_r,C_i^\vee)\chi_X(A_r,C_i)=\delta_i^2.
+\]
+Sum the two terms. Formula (6.5) follows by linearity.
+\end{proof}
+
+\noindent\textbf{Exact relation to the earlier GST detector.}
+The earlier algebraic residual kernel
+\(\mathscr Q=\mathcal O_{\Delta_Y}-\mathscr P\)
+has a positive \emph{unrestricted} doubled residual readout,
+but is not thereby decomposable into actual one-leg \(K_0\)
+sources. Kernel (6.3) is a \emph{different} actually
+factorable algebraic kernel built from the new explicitly
+constructed sources. Its positivity is a real theorem on
+the tested Chern-detected sector, not an asserted identity
+with \(\mathscr Q\).
+
+\section{A finite exact cap on the entire Hilbert-twist detector family}
+The method also yields a genuinely uniform arbitrary-dimensional
+result, with no repeated unbounded source-search arguments.
+
+\begin{theorem}[Polynomial Euler certificate in every dimension]
+For any smooth projective complex \(d\)-fold \(X\), any
+\(0\le p\le d\) and any rational \(r\in H^{2p}(X,\Q)\),
+take a rational topological \(A_r\) with pure Chern character
+\(r\). Set
+\(
+ I_m(r):=\chi_X(A_r,F_m)
+\)
+for integers \(m\ge0\). Then \(I_m(r)\) agrees with a
+polynomial in \(m\) of degree at most \(2d-p\).
+Consequently
+\[
+ I_m(r)=0\quad(0\le m\le 2d-p)
+ \quad\Longrightarrow\quad
+ I_m(r)=0\quad\text{for all }m\ge0.                 \tag{7.1}
+\]
+In the middle case \(d=2p\), at most \(3p+1\) consecutive
+values suffice for this complete family test.
+\end{theorem}
+\begin{proof}
+In (3.1), the degree-\(j\) part in Chern roots has the form
+\[
+       \frac{P_j(z)}{(1-z)^{d+j}},
+       \qquad \deg P_j\le j.
+\]
+This follows by expanding each exponential and collecting
+root-degree \(j\). Coefficient extraction shows
+\(\ch_j(\Sym^k\Omega_X^1)\) is polynomial in \(k\) of degree
+at most \(d+j-1\), for \(k\ge0\). By (2.4), the
+\(\ch_j(F_m)\) coefficients are therefore polynomial in
+\(m\) of degree at most \(d+j\). For pure \(\ch(A_r)=r\),
+HRR pairs \(r\) with degree-\((d-p)\) terms of
+\(\ch(F_m)\td(T_X)\), so \(j\le d-p\). Thus the total
+degree in \(m\) is bounded by
+\(d+(d-p)=2d-p\). A polynomial of degree at most that
+number vanishing at the indicated \(2d-p+1\) distinct
+integers is identically zero.
+\end{proof}
+This is a full mathematical classification of the dependence
+on exceptional twist \(m\); it is not a claim that the
+tested incidence sector equals the whole Hodge fiber.
+
+\section{Arbitrary even dimension: rank-free genuine Euler source extraction}
+We now upgrade the fourfold calculation to \emph{all complex even
+dimensions} using the full GST finite rational Adams projector,
+rather than presupposing a Chern source basis or orthonormal Gram
+matrix. Let \(X\) be an arbitrary smooth connected projective
+complex \(2p\)-fold, \(p\geq1\), and let \(r\) be any rational
+middle \((p,p)\) Hodge class. Define, for
+\(0\le m\le3p\), the actual Chow source and its signed readout
+\[
+ Z_m=[\ch(F_m)\td(T_X)]_p\in\CH^p(X)_\Q,\qquad
+ d_m=(-1)^p\int_X r\,\cl^{\rm can}(Z_m).
+                                                               \tag{8.1}
+\]
+These \(3p+1\) sources are genuinely \emph{constructed from
+Hilbert incidence geometry on the original \(X\)} by (1.1)--(2.4).
+No one of them was supplied by a desired Hodge preimage.
+
+\begin{theorem}[Finite all-\(2p\)-fold GST native source and Euler law]
+For arbitrary \(X,r,p\) as above, set
+\[
+ \boxed{Z_r^{\Hilb}:=\sum_{m=0}^{3p}d_mZ_m
+            \in\CH^p(X)_\Q.}                        \tag{8.2}
+\]
+Then
+\[
+ \boxed{
+ (-1)^p\int_X r\,\cl(Z_r^{\Hilb})
+     =\sum_{m=0}^{3p}d_m^2\geq0.}                   \tag{8.3}
+\]
+The sum is \(>0\) precisely when \(r\) has nonzero
+Euler pairing with at least ONE of the actual
+\(F_m\) for \(m\ge0\); checking the finite
+\(0\le m\le3p\) suffices for the complete
+exceptional-twist family. Consequently any primitive
+Hodge residual detected by this family has an
+explicit newly detected original-\(X\) algebraic cycle.
+\end{theorem}
+\begin{proof}
+The Chow classes \(Z_m\) are actually algebraic since
+\(F_m\in K_0^{\rm alg}(X)_\Q\) and the Todd class is a
+rational algebraic characteristic word. Their coefficients
+\(d_m\in\Q\) are the genuine rational canonical Betti
+periods of the specified \(r\); no native representative
+of \(r\) enters their construction. Bilinearity gives
+(8.3). The middle case of Theorem 7.1 bounds the
+polynomial \(m\mapsto\chi_X(A_r,F_m)\) by degree \(3p\).
+Its values agree with \(d_m\) by rational topological
+HRR and \(\ch(A_r^\vee)=(-1)^p r\).
+Hence a nonzero value at any \(m\ge0\) implies some
+nonzero value among the first \(3p+1\) integers.
+The converses and the strict sum-of-squares positivity
+are immediate.
+\end{proof}
+
+The result also has a genuinely geometric
+\emph{separable two-ended} Euler kernel in every
+even dimension. Take \(T_{\td}\in K_0^{\rm alg}(X)_\Q\)
+with the explicitly known character \(\td(T_X)\).
+Using only finite Adams operations on the actual \(K_0\)
+of the ORIGINAL \(X\), construct
+\[
+ \Pi_p=\prod_{\substack{0\le j\le2p\\j\ne p}}
+                 \frac{\psi^2-2^j}{2^p-2^j},
+ \qquad
+ C_m=\Pi_p(T_{\td}\cdot F_m).
+                                                               \tag{8.4}
+\]
+These satisfy \(\ch(C_m)=Z_m\) concentrated in degree
+\(p\), and \(C_m^\vee=(-1)^p C_m\) rationally. Let
+\(Jr=(-1)^p r\), as in GST primitive Hodge--Riemann
+normalization, and choose the rational topological packet
+\(A_{Jr}=(-1)^pA_r\).
+
+\begin{theorem}[All-even-dimensional one-sided extraction from an ACTUALLY factorable algebraic kernel]
+The constructed original-\(X\) algebraic kernel
+\[
+ \boxed{\mathscr K^{(p)}_X=
+    \sum_{m=0}^{3p}C_m^\vee\boxtimes C_m
+       \in K_0^{\rm alg}(X\times X)_\Q}             \tag{8.5}
+\]
+and the \emph{genuine algebraic one-legged source}
+\[
+ \boxed{C_r=\sum_{m=0}^{3p}d_m C_m
+                 \in K_0^{\rm alg}(X)_\Q}          \tag{8.6}
+\]
+have the exact equal Euler indices
+\[
+ \boxed{\chi_{X\times X}
+   (A_r\boxtimes A_{Jr},\mathscr K^{(p)}_X)
+      =\chi_X(A_r,C_r)
+      =\sum_{m=0}^{3p}d_m^2.}                     \tag{8.7}
+\]
+No abstract native factorization, prescribed Chow target,
+or nonzero determinant is assumed.
+\end{theorem}
+\begin{proof}
+Since \(\ch(C_m)=Z_m\) is pure degree \(p\),
+topological HRR yields
+\[
+ \chi_X(A_r,C_m)=(-1)^p\int_Xr\,\cl(Z_m)=d_m.
+\]
+Dualizing the \emph{source} multiplies its pure degree-\(p\)
+character by \((-1)^p\), giving
+\(\chi_X(A_r,C_m^\vee)=(-1)^p d_m\).
+On the other hand the GST companion \(Jr=(-1)^pr\)
+gives
+\(\chi_X(A_{Jr},C_m)=(-1)^p d_m\).
+Thus each external Euler product is
+\[
+ \chi_{X\times X}
+   (A_r\boxtimes A_{Jr},C_m^\vee\boxtimes C_m)
+     =[(-1)^p d_m][(-1)^p d_m]=d_m^2.
+\]
+Sum over the finite, explicitly prescribed set of
+\emph{actual algebraic perfect complexes}.
+The one-legged formula follows by linearity.
+No sign or source factor is borrowed from the
+old nonseparable residual kernel.
+\end{proof}
+
+\noindent\textbf{Uniform scope.} Equations (8.2)--(8.7)
+work for \emph{every original even-dimensional smooth
+projective complex \(X\)} and every rational middle
+Hodge target \(r\). They positively detect exactly
+the part of the Hodge fiber reached by the algebraic
+Hilbert-incidence/Todd sources. The strictly positive
+number in the unrelated GST full residual diagonal
+identity is \emph{not} substituted for this sum; the
+two statements have different kernels and different
+one-sided source content. A full all-varieties
+Hodge proof would require showing that these
+and/or independent non-characteristic algebraic
+constructors detect every nonzero primitive
+residual---a statement not established by the
+derived identities alone.
+
+\section{Native GST Chern--Segre return on the ORIGINAL arbitrary \(X\)}
+We now connect the independent Hilbert-incidence source directly
+to the already established all-grade GST normalized blowup
+and Chern--Segre algebraic return, for any original dimension
+\(d\), not just fourfolds. This section explicitly identifies
+the source degree and the nonzero coupling; it does not claim
+that a complementary-degree detector itself represents
+the original target.
+
+Fix an arbitrary smooth connected projective \(d\)-fold \(X\),
+\(p\in\{0,\ldots,d\}\), and a rational Hodge class
+\(\alpha\in\operatorname{Hdg}^p(X)_\Q\).
+Choose \(M\ge d+1\) and the actual projective embedding
+used in the existing GST construction, and set
+\[
+ Y=\operatorname{Bl}_X\mathbf P^{2M},\quad
+ q:\mathbf P(N_{X/\mathbf P^{2M}})\to X,\quad
+ j:\mathbf P(N)\hookrightarrow Y,\quad
+ R=\sqrt{c(N)}.                                      \tag{9.1}
+\]
+The proven normalized topological packet \(A_\alpha^Y\)
+has rational Chern character in pure codimension \(M\).
+For any actual \emph{algebraic} pure-middle class
+\(D\in K_0^{\rm alg}(Y)_\Q\), the GST Chern--Segre
+inversion on the true exceptional Chow summand produces
+\(
+ a_Y(D)\in\bigoplus_b\CH^b(X)_\Q
+\),
+built from \(j^*,q_*,c_k(N)\) and \(R^{-1}\), with the
+exact indexed trace relation
+\[
+ \chi_Y(A_\alpha^Y,\operatorname{real}D)
+    =\epsilon\int_X\alpha\,
+       \cl^{\rm can}\!\left([a_Y(D)]_{d-p}\right),
+ \qquad \epsilon=(-1)^{M+1}.                        \tag{9.2}
+\]
+This is the established general-grade formula in
+\texttt{GST\_native\_residual\_Euler\_kernel\_and\_alteration.tex};
+the center's characteristic-class normalization is retained,
+including the ambient pure-middle term that pairs trivially
+with the exceptional packet. It is \emph{not} obtained by
+identifying arbitrary topological sources with algebraic ones.
+
+Apply the actual Hilbert-incidence construction
+(1.1)--(8.4) to \(Y\), which is a smooth projective
+complex \(2M\)-fold. Let \(F_m^Y\) be its genuine Hilbert
+perfect-complex sources, \(T_{\td,Y}\) the rational
+algebraic Todd representative and
+\[
+ D_m^Y=\Pi_M\left(T_{\td,Y}\cdot F_m^Y\right),
+ \quad 0\le m\le3M,\qquad
+ \delta_m^Y(\alpha)
+    :=\chi_Y(A_\alpha^Y,\operatorname{real}D_m^Y).
+                                                               \tag{9.3}
+\]
+Every \(D_m^Y\) is genuinely algebraic, constructed from
+\(T_Y\), \(\Hilb^2(Y)\), blowup incidence, proper pushforward
+and finite Adams operations, without a prescribed Chow
+preimage of \(\alpha\). The numbers \(\delta_m^Y\in\Q\)
+are honest topological/algebraic Euler periods.
+
+\begin{theorem}[Finite actual original-\(X\) Hilbert-world return]
+For every original \(X,p,\alpha\) above, the explicitly
+constructed rational algebraic perfect-complex combination
+\[
+ E_\alpha^Y
+    :=\sum_{m=0}^{3M}\delta_m^Y(\alpha)D_m^Y
+            \in K_0^{\rm alg}(Y)_\Q                    \tag{9.4}
+\]
+has a genuine original-\(X\) rational algebraic cycle
+\[
+ \boxed{
+ Z_{\alpha,\Hilb}^{\,d-p}
+      :=\left[a_Y(E_\alpha^Y)\right]_{d-p}
+           \in\CH^{d-p}(X)_\Q.}                      \tag{9.5}
+\]
+Its \emph{canonical} Betti coupling is computed EXACTLY by
+\[
+ \boxed{
+ \int_X\alpha\,
+       \cl^{\rm can}(Z_{\alpha,\Hilb}^{\,d-p})
+      =(-1)^{M+1}\sum_{m=0}^{3M}
+                        \delta_m^Y(\alpha)^2.}      \tag{9.6}
+\]
+This nonzero ORIGINAL-\(X\) detector is supplied
+whenever at least one of the explicitly born Hilbert-world
+sources measures \(\alpha\) nontrivially. The finite bound
+\(3M+1\) is complete for all exceptional twists of the
+length-two Hilbert-incidence family.
+\end{theorem}
+\begin{proof}
+The algebraicity of (9.4) follows from the actual
+Hilbert-incidence source (2.4) on \(Y\) and the algebraic
+Todd/Adams operators in (8.4). The extraction
+\(a_Y\) is a rational linear combination of actual Chow
+Gysin operations and algebraic Chern and Segre classes,
+so (9.5) is an honest Chow cycle on the prescribed
+ORIGINAL \(X\). By linearity,
+\[
+ \chi_Y(A_\alpha^Y,\operatorname{real}E_\alpha^Y)
+   =\sum_{m=0}^{3M}\delta_m^Y(\alpha)
+       \chi_Y(A_\alpha^Y,\operatorname{real}D_m^Y)
+   =\sum_{m=0}^{3M}\delta_m^Y(\alpha)^2.
+\]
+Insert \(D=E_\alpha^Y\) into (9.2) and multiply by
+\(\epsilon^{-1}=\epsilon\) to obtain (9.6).
+The polynomial source cap from Theorem 7.1 with
+\(d_Y=2M,p_Y=M\) gives degree at most \(3M\)
+for the entire exceptional Hilbert-twist index
+sequence. Hence the displayed finite set detects
+every Hodge direction reachable by this \emph{particular}
+Hilbert-incidence family.
+\end{proof}
+
+\noindent\textbf{Type check.} Equation (9.5) produces a
+\emph{complementary codimension \(d-p\) detector}
+on the original \(X\), not a codimension-\(p\)
+representative of \(\alpha\). When \(d=2p\) the
+degrees agree. If \(\alpha\) is the residual to the
+FULL original-\(X\) algebraic span, (9.6) forces
+every \(\delta_m^Y\) to vanish; one cannot replace
+that logical fact by the positive unrestricted
+diagonal-index law. The theorem instead provides
+a tested, finite, actually geometric pathway for
+growing a \emph{finite existing native span}
+when the observed readout is nonzero.
+
+\section{Atomic upgrade: TWISTED universal incidence recovers EVERY algebraic \(K_0\) source}
+The preceding untwisted source has a fixed intrinsic tangent-Chern
+character. Its extension by arbitrary \emph{independently constructed
+algebraic} coefficients has a stronger universal assertion: not that
+every Hodge class becomes algebraic, but that the incidence algebra
+itself has NO missing algebraic \(K\)-theory directions.
+
+Let \(X\) be an arbitrary smooth projective complex variety,
+\(B=\operatorname{Bl}_{\Delta_X}(X\times X)\),
+\(b:B\to X\times X\), \(u=\operatorname{pr}_1b\),
+and \(D_{\mathrm{exc}}\) the Cartier exceptional divisor.
+For \(E\in K_0^{\mathrm{alg}}(X)_\Q\), define the actual
+coherent derived pushforward
+\[
+ {\mathcal F}_{m}(E)
+ =u_!\left(
+ \mathcal O_B(-mD_{\mathrm{exc}})
+ \otimes^{\mathbf L} b^*\operatorname{pr}_2^*E
+       \right)\in K_0^{\mathrm{alg}}(X)_\Q.
+                                                               \tag{10.1}
+\]
+Regularity of \(X\) means a bounded coherent output represents
+a perfect \(K\)-class on the ORIGINAL variety. Unlike the old
+\(F_m={\mathcal F}_m(\mathcal O_X)\), the coefficient \(E\)
+is a genuine geometric independent input, and may be a line bundle,
+an actual graph/ideal sheaf, a degeneracy complex or any algebraic
+perfect complex. No Hodge-to-Chow preimage is supplied.
+
+\begin{theorem}[All-original-\(X\) Hilbert-incidence full native source recovery]
+For all \(m\ge0\), every smooth projective \(X\), and every
+genuine algebraic perfect \(E\),
+\[
+ \boxed{
+ {\mathcal F}_m(E)
+  =\chi(X,E)[\mathcal O_X]
+    -\sum_{k=0}^{m-1}
+       [E\otimes\Sym^k\Omega_X^1]
+       \quad\text{in }K_0^{\mathrm{alg}}(X)_\Q .
+ }                                                       \tag{10.2}
+\]
+In particular, for every \(E\),
+\[
+ \boxed{\mathcal F_0(E)-\mathcal F_1(E)=E.}          \tag{10.3}
+\]
+Consequently \emph{every actually algebraic \(K_0(X)_\Q\)
+source} has an exact functorial representation as a DIFFERENCE
+of two genuine Hilbert-incidence pushforwards on the same
+original \(X\). It does not follow that every topological
+\(K\)-class or Hodge class is algebraic.
+\end{theorem}
+\begin{proof}
+The Rees blowup identities (2.1)--(2.3) give
+\(Rb_*\mathcal O_B(-mD_{\mathrm{exc}})=I_\Delta^m\).
+Use derived projection formula to obtain
+\[
+ \mathcal F_m(E)=
+ (R\operatorname{pr}_{1*})_!
+    (I_\Delta^m\otimes^{\mathbf L}\operatorname{pr}_2^*E).
+\]
+The diagonal graded terms
+\(\Delta_*\Sym^k\Omega_X^1\) become
+\(\Delta_*(\Sym^k\Omega_X^1\otimes E)\), whose
+first-projection pushforwards are
+\(E\otimes\Sym^k\Omega_X^1\).
+The remaining external input is
+\[
+ R\operatorname{pr}_{1*}\operatorname{pr}_2^*E
+ \simeq\mathcal O_X\otimes^{\mathbf L}_{\mathbf C}
+              R\Gamma(X,E),
+\]
+whose class is \(\chi(X,E)[\mathcal O_X]\).
+This proves (10.2); evaluate at \(m=0,1\)
+and subtract to obtain (10.3).
+\end{proof}
+
+The complete formal Chern-character generating series is
+\[
+ \boxed{
+ \sum_{m\ge0}\ch(\mathcal F_m(E))z^m
+   =\frac{\chi(X,E)}{1-z}
+   -\frac{z}{1-z}\ch(E)
+           \prod_{i=1}^{d}(1-ze^{-x_i})^{-1}.
+ }                                                       \tag{10.4}
+\]
+This identity holds in the \emph{rational algebraic Chow ring};
+it follows by swapping the finite sum in (10.2) and the
+formal \(z\)-series. It upgrades all previous tangent-tower
+formulas by the full independent algebraic Chern character
+of \(E\). No independent determinant, CM orbit or supplied
+Hodge basis is needed to prove this law.
+
+\begin{corollary}[Exact detection for every EXISTING native source]
+Let \(X\) be a smooth projective \(2p\)-fold,
+\(r\in H^{2p}(X,\Q)\cap H^{p,p}(X)\), and choose a
+rational topological \(A_r\) with \(\ch(A_r)=r\).
+For every existing algebraic \(E\),
+\[
+ \boxed{
+ \chi_X(A_r,\mathcal F_0(E)-\mathcal F_1(E))
+       =\chi_X(A_r,E).}                             \tag{10.5}
+\]
+The twisted incidence operation preserves all one-legged
+Euler periods, including those from non-characteristic
+graph or incidence sheaves. The statement assumes
+\emph{only the independent algebraicity of \(E\)},
+not algebraicity of the prescribed \(r\).
+\end{corollary}
+
+\section{Atomic upgrade: universal native Adams--Todd purification}
+Let \(X\) be any smooth projective \(d\)-fold. Under
+\(\ch:K_0^{\mathrm{alg}}(X)_\Q\cong
+\bigoplus_{j=0}^{d}\CH^j(X)_\Q\), the rational Adams
+operation \(\psi^2\) acts as multiplication by \(2^j\)
+on codimension \(j\). Therefore for every \(p\in[0,d]\)
+the \emph{explicit finite polynomial}
+\[
+ \boxed{
+ \Pi_p=\prod_{\substack{0\le j\le d\\j\ne p}}
+       \frac{\psi^2-2^j}{2^p-2^j}}
+                                                               \tag{11.1}
+\]
+acts as the genuine algebraic projection onto pure
+codimension \(p\). It has \(\Pi_p^2=\Pi_p\), and
+\[
+ \ch(\Pi_p E)=[\ch(E)]_p,\qquad
+ \Pi_p(E^\vee)=(-1)^p\Pi_p(E)
+ \quad\text{in }K_0(X)_\Q.                          \tag{11.2}
+\]
+The second identity follows from the pure degree-\(p\)
+rational Chern character and its injectivity, not from
+a claimed identity for the dual of arbitrary \(E\).
+
+Put \(T_{\td}\in K_0^{\mathrm{alg}}(X)_\Q\)
+for the actual rational Chern-character inverse of
+\(\td(T_X)\). Define the completed \emph{actual}
+algebraic perfect-complex purification
+\[
+ \boxed{\mathcal C_p(E)
+     :=\Pi_p(T_{\td}\cdot E).}                       \tag{11.3}
+\]
+It satisfies
+\[
+ \ch(\mathcal C_p(E))
+     =[\ch(E)\td(T_X)]_p
+       \in\CH^p(X)_\Q,                              \tag{11.4}
+\]
+with zero Chern characters in every other degree.
+
+\begin{theorem}[Universal actual-\(X\) Euler-preserving native purification]
+Let \(X\) be an arbitrary smooth projective
+complex \(2p\)-fold, \(r\) any rational middle Hodge
+class, \(A_r\in K^0_{\mathrm{top}}(X)_\Q\) a
+topological class with pure \(\ch(A_r)=r\),
+and \(E\in K_0^{\mathrm{alg}}(X)_\Q\)
+an \emph{independently given actual algebraic perfect complex}.
+Then
+\[
+ \boxed{
+  \chi_X(A_r,\operatorname{real}\mathcal C_p(E))
+   =\chi_X(A_r,\operatorname{real}E)
+   =(-1)^p\int_Xr\,\cl^{\mathrm{can}}
+      ([\ch(E)\td(T_X)]_p).
+ }                                                       \tag{11.5}
+\]
+In particular, every existing algebraic Euler detector
+has an explicit pure-middle, independently algebraic
+replacement with IDENTICAL measured coupling.
+\end{theorem}
+\begin{proof}
+Hirzebruch--Riemann--Roch gives
+\(
+ \chi_X(A_r,E)
+ =\int_X\ch(A_r^\vee)\ch(E)\td(T_X)
+ =(-1)^p\int_Xr[\ch(E)\td(T_X)]_p
+\).
+Only the degree \(p\) factor is visible since \(d=2p\).
+The Adams projection (11.4) preserves that factor
+and removes all the others, so it has the same
+Euler index. The native input \(E\) is genuinely
+algebraic, and every operation in (11.3) is
+an actual algebraic \(K_0\) operation.
+\end{proof}
+
+\begin{theorem}[Finite actually algebraic source family: exact native quadratic-to-linear extraction]
+For any finite list of actual perfect classes
+\(E_1,\ldots,E_s\in K_0^{\mathrm{alg}}(X)_\Q\),
+put \(C_i=\mathcal C_p(E_i)\),
+\(d_i=\chi_X(A_r,\operatorname{real}C_i)\),
+and \(C_r=\sum_i d_i C_i\). Then
+\[
+ \boxed{
+ C_r\in K_0^{\mathrm{alg}}(X)_\Q,\quad
+ \chi_X(A_r,\operatorname{real}C_r)=\sum_i d_i^2.
+ }                                                       \tag{11.6}
+\]
+Moreover the ACTUAL algebraic product kernel
+\[
+ \mathcal K_{\mathrm{sep}}=\sum_i C_i^\vee\boxtimes C_i
+             \in K_0^{\mathrm{alg}}(X\times X)_\Q
+\]
+obeys
+\[
+ \boxed{
+ \chi_{X\times X}
+   (A_r\boxtimes((-1)^pA_r),\operatorname{real}
+       \mathcal K_{\mathrm{sep}})
+       =\sum_i d_i^2 .}                             \tag{11.7}
+\]
+No Gram inverse, hidden topological-to-algebraic map,
+or assumption that the \(E_i\) are independent appears.
+\end{theorem}
+\begin{proof}
+The coefficients \(d_i\) are rational
+by HRR and rationality of \(r\).
+Equation (11.6) is immediate from bilinearity.
+By (11.2), \(C_i^\vee=(-1)^pC_i\)
+in rational algebraic \(K_0\).
+The first Euler factor against \(C_i^\vee\)
+is \((-1)^pd_i\); the second factor against
+\(C_i\) is also \((-1)^pd_i\).
+K\"unneth multiplicativity of the external Euler product
+therefore proves (11.7) termwise.
+The sign-twisted packet in (11.7) is a topological
+scalar multiple of \(A_r\); it must not be called
+the Hodge--Riemann Weil involution on arbitrary
+nonprimitive middle Hodge classes without a
+separate proof of that identification.
+\end{proof}
+
+\section{Completed all-codimension native Chow recovery via coherent subschemes}
+The twisted incidence identity admits a still more concrete
+geometric specialization that eliminates any free choice of a
+\(K_0\) basis on the \emph{algebraic} side. Let
+\(Z\subset X\) be a reduced integral closed subscheme of
+codimension \(p\), and take the literal coherent sheaf
+\(E_Z=[\mathcal O_Z]\in K_0^{\mathrm{alg}}(X)\).
+Since \(X\) is smooth and regular, \(\mathcal O_Z\) has a finite
+locally free resolution and is a valid algebraic perfect object,
+even if \(Z\) itself is singular. The topological \(K\)-class
+associated with a prescribed arbitrary Hodge target is
+\emph{not} used here.
+
+\begin{theorem}[GST Hilbert incidence constructs the PURE native class of every actual algebraic subvariety]
+For all smooth projective \(X\), all codimensions
+\(0\le p\le\dim X\) and all integral reduced
+codimension-\(p\) algebraic \(Z\subset X\),
+\[
+ \boxed{
+ \mathcal F_0([\mathcal O_Z])
+       -\mathcal F_1([\mathcal O_Z])
+       =[\mathcal O_Z]\in K_0^{\mathrm{alg}}(X),
+ }                                                       \tag{11.8}
+\]
+and the actual purified perfect-complex source
+\[
+ \boxed{
+ S_p(Z)=\Pi_p\!\left(
+    T_{\td}\cdot
+    (\mathcal F_0([\mathcal O_Z])
+       -\mathcal F_1([\mathcal O_Z]))
+                \right)
+ }                                                       \tag{11.9}
+\]
+has complete Chern character
+\[
+ \boxed{\ch S_p(Z)=[Z]\in\CH^p(X)_\Q,\quad
+               \ch_j S_p(Z)=0\ \ (j\ne p).}        \tag{11.10}
+\]
+Consequently, under the GENUINE canonical Betti
+cycle-class map,
+\[
+ \boxed{\cl^{\rm can}(\ch_p S_p(Z))
+    =\operatorname{PD}_{X^{an}}
+      \bigl([Z]^{an}_{2(d-p)}\bigr).}                \tag{11.11}
+\]
+\end{theorem}
+\begin{proof}
+Equation (11.8) is the scheme-level identity
+(10.3), with the exact coherent perfect input
+\([\mathcal O_Z]\).
+The codimension filtration property of rational
+algebraic \(K\)-theory states
+\[
+ \ch_j(\mathcal O_Z)=0\quad(j<p),\qquad
+ \ch_p(\mathcal O_Z)=[Z]\in\CH^p(X)_\Q.
+\]
+The latter is the leading-term cycle-class identity
+for a coherent sheaf of pure codimension \(p\), valid
+also for singular reduced integral \(Z\). In the
+smooth regular-embedding case it follows directly
+from the Koszul resolution:
+\[
+ \ch(\mathcal O_Z)=\prod_{i=1}^p(1-e^{-x_i})
+   =x_1\cdots x_p+
+       (\text{terms of codimension}>p).
+\]
+The general integral case follows by the codimension
+filtration and generic length (one for a reduced
+integral \(Z\)); no false global complete-intersection
+hypothesis is inserted. Multiplication by
+\(\td(T_X)\), whose degree-zero term is one, does
+not alter the first nonzero component:
+\(
+ [\ch(\mathcal O_Z)\td(T_X)]_p=[Z].
+\)
+The finite algebraic Adams projector (11.1)
+retains exactly that degree and annihilates
+all other degrees. Formula (11.11) is the defining
+genuine analytic-fundamental-class comparison.
+\end{proof}
+
+\begin{corollary}[Canonical rational Chow-to-algebraic-\(K_0\) splitting by actual incidence]
+The expression \(S_p\), extended \(\Q\)-linearly
+from integral subvarieties, is WELL-DEFINED
+on rational equivalence classes and supplies a
+linear map
+\[
+ \boxed{
+ S_p:\CH^p(X)_\Q\longrightarrow
+                 K_0^{\mathrm{alg}}(X)_\Q,
+ \qquad \ch\circ S_p:
+ Z\longmapsto(0,\ldots,0,Z,0,\ldots,0).}           \tag{11.12}
+\]
+In particular \([\ch S_p(Z)]_p=Z\) for
+EVERY rational algebraic cycle \(Z\).
+For a smooth projective \(2p\)-fold and pure middle
+topological \(A_r\), one has the exact canonical law
+\[
+ \boxed{
+ \chi_X(A_r,\operatorname{real}S_p(Z))
+   =(-1)^p\int_X r\,\cl^{\rm can}(Z).
+ }                                                       \tag{11.13}
+\]
+No extra native rank, a priori Chow basis,
+or arbitrary abstract cycle-class map is required.
+\end{corollary}
+\begin{proof}
+If two rational combinations of subvarieties
+are rationally equivalent in \(\CH^p\),
+their purified Chern characters agree
+by (11.10). Rational Chern character is
+injective on \(K_0^{\mathrm{alg}}(X)_\Q\)
+for regular \(X\), so the purified classes
+agree: the formula descends to Chow and
+is rational-linear. It splits
+\(\ch_p\) on the pure-\(p\) summand.
+For (11.13), \(\ch(A_r^\vee)=(-1)^p r\).
+Hirzebruch--Riemann--Roch, purity
+(11.10) and \(\td_0=1\) give the
+displayed equality directly.
+\end{proof}
+
+The Chern-character leading-term test for the
+local Koszul model was independently evaluated
+with Wolfram for complete-intersection
+codimensions \(p=1,\ldots,7\):
+in all seven cases every coefficient below
+degree \(p\) vanished and the degree-\(p\)
+coefficient was the exact product of the
+normal Chern roots. The general proof
+above uses the graded Koszul product and
+the codimension-filtration theorem, not
+finite computational extrapolation.
+
+The result COMPLETES the actual cycle-to-perfect-complex
+to incidence-source construction in \emph{all codimensions}.
+It is the forward algebraic construction
+\(\mathrm{CH}\to K_0^{\mathrm{alg}}\),
+not an inverse from every rational Hodge
+class to Chow. Using it in reverse without
+a new geometrically constructed subscheme
+would be an assumption of the missing Hodge implication.
+
+\section{Unconditional GST native source completion of the extreme Hodge grades}
+The genuine canonical cycle map, not an abstract
+\(H.\mathrm{cycleClass}\), gives an exact constructive
+existence theorem in a wide ALL-\(X\) sector.
+We include this theorem to complete the extreme
+codimension geometry without introducing rank inputs.
+
+\begin{theorem}[Every rational Hodge class in codimension \(0,1,d-1,d\) on every original \(X\)]
+Let \(X/\mathbf C\) be a connected smooth projective
+variety of dimension \(d\ge2\), with ample algebraic
+line bundle \(L\) and \(h=c_1(L)\).
+For each
+\(p\in\{0,1,d-1,d\}\) and every genuine rational
+Hodge class \(\alpha\) of codimension \(p\),
+there exists an ACTUAL rational algebraic cycle
+\(Z_\alpha\in\CH^p(X)_\Q\) whose canonical
+rational Betti class is exactly \(\alpha\).
+In codimension \(d-1\) it is explicitly of the form
+\[
+ \boxed{
+ \alpha=h^{d-2}\beta,\qquad
+ Z_\alpha=h^{d-2}\cdot D_\beta,\qquad
+ \cl^{\rm can}(D_\beta)=\beta\in H^{1,1}(X)\cap H^2(X,\Q).
+ }                                                       \tag{12.1}
+\]
+\end{theorem}
+\begin{proof}
+For \(p=0\), on a connected smooth projective
+variety \(H^0(X,\Q)=\Q\), represented by
+\(\Q[X]\). For \(p=d\), \(H^{2d}(X,\Q)=\Q\)
+is generated by the canonical Betti class of a
+closed algebraic point, so rational coefficients
+give every target.
+For \(p=1\), Lefschetz's integral \((1,1)\)
+theorem and clearing denominators give a
+rational algebraic divisor \(D_\alpha\)
+with \(\cl^{\rm can}D_\alpha=\alpha\).
+For \(p=d-1\), the rational hard Lefschetz
+isomorphism
+\(
+ h^{d-2}:H^2(X,\Q)\xrightarrow{\sim}
+ H^{2d-2}(X,\Q)
+\)
+is a morphism of rational Hodge structures
+up to the standard Tate shift.
+Consequently
+\(\beta=(h^{d-2})^{-1}\alpha\) is a
+rational \((1,1)\) class. Construct
+\(D_\beta\) by Lefschetz \((1,1)\)
+and multiply it by the ACTUAL ample
+algebraic cycle \(h^{d-2}\).
+Cycle-class multiplicativity proves (12.1).
+\end{proof}
+
+In particular the genuine rational Hodge conjecture
+is \emph{proved for all smooth projective complex
+varieties of dimension at most three} by these
+geometric constructions. On an arbitrary fourfold,
+the remaining codimension \(p=2\) is the
+genuinely higher-codimension middle problem.
+This is a direct all-varieties source theorem in
+the stated codimensions, not an extrapolation
+from special families.
+
+\begin{proposition}[Unconditional fourfold algebraic Lefschetz projection]
+Let \(X\) be any smooth projective complex fourfold
+and \(h=c_1(L)\) ample. Choose actual algebraic
+divisor classes \(D_1,\ldots,D_\rho\) whose
+canonical Betti classes form a rational basis
+of \(H^{1,1}(X)\cap H^2(X,\Q)\).
+The genuine intersection matrix
+\[
+ G_{ij}=\int_X h^2D_iD_j                       \tag{12.2}
+\]
+is nonsingular by the Hodge index theorem.
+For every rational Hodge \(\alpha\in H^4(X,\Q)\cap H^{2,2}\),
+put \(b_i=\int_X\alpha\,h\,\cl(D_i)\) and construct
+\[
+ \boxed{
+ Z_{\alpha,\mathrm{Lef}}
+      :=h\cdot\sum_{i,j}D_i(G^{-1})_{ij}b_j
+          \in\CH^2(X)_\Q.}                         \tag{12.3}
+\]
+Then \(r=\alpha-\cl^{\rm can}
+(Z_{\alpha,\mathrm{Lef}})\) is an ACTUAL
+rational primitive middle \((2,2)\) Hodge
+class, \emph{without any algebraicity assumption on \(r\)}.
+\end{proposition}
+\begin{proof}
+The Hodge index form \(\int h^2DD'\) is
+nondegenerate on the rational divisor-Hodge
+subspace, making (12.3) legal.
+For each \(k\),
+\[
+ \int_Xr\,h\,D_k
+   =b_k-\sum_{i,j}G_{kj}(G^{-1})_{ji}b_i=0.
+\]
+The rational Hodge part of \(H^6(X,\Q)\)
+is \(h^2\) times the divisor-Hodge part of \(H^2(X,\Q)\)
+by rational hard Lefschetz; the Poincar\'e
+pairing is nondegenerate.
+Therefore a rational Hodge \(h r\in H^6\)
+pairing to zero against every rational
+divisor-Hodge class must vanish:
+\(h r=0\). This is precisely primitiveness
+of the middle class \(r\).
+All classes and operations in (12.3)
+were original-\(X\) algebraic ones.
+\end{proof}
+
+\begin{theorem}[Unconditional all-dimension original-\(X\) algebraic removal of every nonprimitive codimension-two component]
+Let \(d\ge4\) and \(X\) be \emph{any} smooth connected
+projective complex \(d\)-fold, with actual ample \(h=c_1(L)\).
+Take actual algebraic divisor classes
+\(D_1,\ldots,D_\rho\) spanning
+\(\operatorname{Hdg}^{1}(X)_\Q\)
+under the genuine canonical Betti class map.
+For any arbitrary rational Hodge class
+\(\alpha\in\operatorname{Hdg}^{2}(X)_\Q\), define
+\[
+ G_{ij}=\int_X h^{d-2}\cl(D_i)\cl(D_j),
+ \qquad b_i=\int_X\alpha\,h^{d-3}\cl(D_i).
+                                                               \tag{12.4}
+\]
+The Hodge index theorem makes \(G\) nondegenerate.
+The \emph{explicitly constructed original-\(X\)}
+rational algebraic codimension-two cycle
+\[
+ \boxed{
+ Z_{\alpha,L}^{(2)}
+   =h\cdot\sum_{i,j=1}^{\rho}
+       D_i(G^{-1})_{ij}b_j\in\CH^2(X)_\Q
+ }                                                     \tag{12.5}
+\]
+has a residual
+\[
+ \boxed{
+ r_\alpha=\alpha-\cl^{\rm can}(Z_{\alpha,L}^{(2)}),
+ \qquad h^{d-3}r_\alpha=0.
+ }                                                     \tag{12.6}
+\]
+Thus EVERY \emph{nonprimitive Lefschetz Hodge component}
+in codimension two, in EVERY dimension \(d\ge4\),
+has been constructively converted to an actual algebraic
+cycle with the exact canonical Betti class,
+without any assumption on the primitive residual.
+\end{theorem}
+\begin{proof}
+For every \(k\),
+\[
+ \int_Xr_\alpha\,h^{d-3}\cl(D_k)
+    =b_k-\sum_{i,j}G_{kj}(G^{-1})_{ji}b_i=0.
+\]
+The class \(h^{d-3}r_\alpha\) lies in the
+rational \((d-1,d-1)\) Hodge sector
+of \(H^{2d-2}(X,\Q)\).
+Hard Lefschetz furnishes a unique rational
+\((1,1)\) class \(\beta\in H^2(X,\Q)\) with
+\(h^{d-3}r_\alpha=h^{d-2}\beta\).
+By Lefschetz \((1,1)\), \(\beta\) lies in
+the rational divisor span of the \(\cl(D_i)\).
+The displayed orthogonality equations say
+that \(\beta\) is perpendicular to this span
+under the NONDEGENERATE Hodge-index form
+\(G_{ij}\); hence \(\beta=0\).
+Therefore \(h^{d-3}r_\alpha=0\) as claimed.
+All coefficients are rational and every
+object in (12.5) is algebraic on the
+original variety. In \(d=4\) the theorem
+reduces exactly to (12.3).
+\end{proof}
+
+\noindent\textbf{Precise rank boundary for the former fourfold
+Hilbert claim.}
+The invertible rational coefficient matrix (4.4)
+is a statement about the universal formal
+polynomials \(c_1^2,c_2\), \emph{not a guarantee
+that their evaluations are independent in
+\(\CH^2(X)_\Q\) for every fourfold}.
+For instance, an abelian fourfold has
+\(c_1(T_X)=c_2(T_X)=0\),
+so BOTH constructed characteristic classes
+\(Z_1,Z_2\) vanish. On \(\mathbf P^4\),
+the two are nonzero but proportional multiples
+of the hyperplane square. The exact determinant
+(4.4) proves independent RECOVERY of two
+measured characteristic periods wherever
+those periods are genuinely independent;
+it does not manufacture geometric rank 2
+on all \(X\). The full twisted incidence
+construction (10.1)--(10.3) admits new
+independent algebraic inputs such as ample
+line bundles and non-tautological ideal sheaves,
+but the existence of inputs detecting any
+as-yet-unrepresented primitive Hodge target
+is precisely the distinct universal
+geometry claim still to be established.
+
+\section{Actual fourfold discriminator: a NONZERO primitive Hilbert Euler source}
+We validate the entire construction on a real algebraic fourfold
+with a genuinely nonzero primitive target, rather than a free
+numerical Gram test. Let
+\[
+ X=\mathbf P^2\times\mathbf P^2,\quad
+ x=c_1(\mathcal O_{\mathbf P^2}(1))\boxtimes1,\quad
+ y=1\boxtimes c_1(\mathcal O_{\mathbf P^2}(1)),
+ \qquad h=x+y.
+\]
+The genuine Chow ring is
+\(
+ \CH^*(X)_\Q=\Q[x,y]/(x^3,y^3)
+\),
+with \(\int_X x^2y^2=1\), and
+\[
+ c_1(T_X)=3(x+y),\qquad
+ c_2(T_X)=3x^2+9xy+3y^2.
+                                                               \tag{13.1}
+\]
+Consider the \emph{actual algebraic} primitive middle
+Hodge class
+\(
+ r=\cl^{\mathrm{can}}(x^2-xy+y^2)
+\).
+Because \(h(x^2-xy+y^2)=x^3+y^3=0\)
+in Chow, \(r\) is primitive without invoking a
+chosen abstract Hodge basis. Its numerical norm and
+tangent readouts are
+\[
+ \int_Xr^2=3,\qquad
+ \int_Xr\,c_1(T_X)^2=0,\qquad
+ \int_Xr\,c_2(T_X)=-3.                              \tag{13.2}
+\]
+The *actual* characteristic cycles (4.3) specialize to
+\[
+ Z_1=-x^2-y^2,\qquad
+ Z_2=-x^2+\frac{27}{2}xy-y^2,
+                                                               \tag{13.3}
+\]
+and therefore
+\[
+ \delta_1=-2,\qquad \delta_2=-\frac{31}{2}.
+\]
+The explicitly born, target-measured ORIGINAL-\(X\)
+algebraic cycle
+\[
+ \boxed{
+ Z_r=-2 Z_1-\frac{31}{2}Z_2
+    =\frac{35}{2}(x^2+y^2)-\frac{837}{4}xy
+       \in\CH^2(X)_\Q
+ }                                                      \tag{13.4}
+\]
+has the strictly positive exact Euler/Hodge readout
+\[
+ \boxed{\int_X r\,\cl(Z_r)
+             =4+\frac{961}{4}=\frac{977}{4}>0.}   \tag{13.5}
+\]
+Wolfram independently evaluated the Chow intersection
+multiplication, verified \(hr=0\), checked all
+characteristic coefficients and returned \(977/4\).
+Here the source's algebraicity is visible term by term,
+the target primitive condition is literal in the Chow ring,
+and the same original variety carries both.
+This verifies the pure-middle source mechanism on a
+nonzero primitive sector rather than merely checking
+a formal sign identity.
+
+The example does not replace the all-\(X\) quantifier:
+\(r\) itself is algebraic, and the new question concerns
+primitive rational Hodge residuals not already known to lie
+in the canonical image of Chow.
+The novel verified general mechanisms are (10.2), (10.3),
+(11.5), (11.6), and (11.7), with the genuine full all-\(X\)
+extreme-codimension theorem (12.1).
+
+\section{Original-variety discriminating stress test: nonsplit Weil fourfold}
+Let \(A\) be an ACTUAL smooth projective complex
+abelian fourfold of Weil type, with rational
+Neron--Severi rank one, generated in Betti
+cohomology by an ample algebraic \(\theta\).
+Let \(r\) be a nonzero rational primitive
+Weil \((2,2)\) Hodge class, so
+\(\theta\smile r=0\).
+This tests actual canonical Hodge
+periods on the ORIGINAL A; no
+nonalgebraic Chow class is presumed.
+
+Since the cotangent bundle of any abelian
+fourfold is algebraically trivial,
+\(
+ [\operatorname{Sym}^k\Omega_A^1]
+  =\binom{k+3}{3}[\mathcal O_A]
+\)
+in actual algebraic \(K_0(A)\).
+The fully twisted Hilbert-incidence
+construction of (10.2) therefore obeys
+the COMPLETE formula for EVERY actual
+algebraic line bundle L and every m>=0:
+\[
+ \boxed{\mathcal F_m(L)
+  =\chi(A,L)[\mathcal O_A]
+          -\binom{m+3}{4}[L].}                    \tag{14.1}
+\]
+If the genuine BETTI first Chern class
+of L equals \(\ell\theta\), then
+\[
+ \boxed{\cl(\ch_2\mathcal F_m(L))
+  =-\frac12\binom{m+3}{4}\ell^2\theta^2.}          \tag{14.2}
+\]
+Do not elevate this Betti equality
+to equality in CH^1: the Picard-zero
+part of L may be nontrivial as a Chow
+divisor even when it is Betti-trivial.
+
+For the fixed ACTUAL rational Hodge
+target r the linear detecting
+period VANISHES identically:
+\[
+ \boxed{\int_A r\smile
+            \cl(\ch_2\mathcal F_m(L))
+     =-\frac12\binom{m+3}{4}\ell^2
+           \int_A r\smile\theta^2=0.}             \tag{14.3}
+\]
+The same period vanishes for the
+entire finite rational Betti algebra
+obtained from these line-bundle
+Hilbert words by sums, tensor
+products, duals and Adams operations,
+since their character classes lie
+inside \(\Q[\theta]\).
+This is a no-go for THAT actual
+source-generation recipe, not for
+all algebraic perfect complexes on A
+and not a counterexample to Hodge.
+
+Wolfram independently checked the
+exact rational-binomial identity
+\(
+ \sum_{k=0}^{m-1}\binom{k+3}{3}
+        =\binom{m+3}{4}
+\)
+for m from zero through ten,
+and derived the symbolic degree-two
+coefficient in (14.2) exactly.
+The general formula follows
+from the binomial hockey-stick law
+and Chern-character multiplicativity.
+
+\noindent\textbf{Universality type repair.}
+The previous construction
+\(
+ \mathcal F_0(E)-\mathcal F_1(E)=E
+\)
+is a genuine identity for
+EVERY ALREADY ALGEBRAIC perfect
+input E. It is NOT a constructor
+of a detecting E from an arbitrary
+prescribed primitive Hodge class.
+Equation (14.3) exhibits the
+concrete gap on a genuine
+unrestricted-codimension-fourfold
+test: a missing source may require
+nondivisor higher-rank sheaf
+geometry that is absent from the
+line bundle Hilbert inputs.
+The rational Hodge conjecture
+itself is neither proved nor
+refuted by this restriction.
+
+\section{Adversarial audit: source birth versus universal surjectivity}
+No putative conclusion above inserts \(Z_r\) as input: it is
+explicitly given by tangent Chern classes on the original \(X\).
+The nonzero detector is proved exactly for targets with
+\((a,b)\ne(0,0)\). This condition is a verifiable measurement,
+not a universal existence axiom, and must not be silently removed.
+
+If the current known native frame already includes the two Chern
+sources, the polarized residual to that frame has \(a=b=0\);
+then (5.5) gives zero and the construction does NOT manufacture
+a missing new class. If the residual is defined against the
+\emph{full} algebraic cycle image, then all its periods against
+\(Z_1,Z_2\) vanish automatically. Thus the uniform nonzero
+quadratic index of the earlier GST residual diagonal cannot
+be substituted for the nonzero right side of (6.4).
+This checks precisely the two type/existence failures in the
+earlier program while preserving its correct quadratic identities.
+
+A possible independent geometric source outside this sector
+would have to be an actual algebraic subvariety or coherent sheaf
+whose Chern character is not generated by the same tangent
+Chern words. For example, an internal graph ideal sheaf on an
+actual product of positive-genus curves gives a genuinely new
+geometric codimension-one source; the graph is constructed as
+a subscheme, not obtained from arbitrary finite combinations
+of the tangent/Hilbert exceptional twists. This is a
+discriminating check of geometric independence, not a
+claim of arbitrary-\(X\) algebraicity.
+
+Finally, changing only differentials or non-split extension
+classes among pre-existing perfect objects cannot change their
+rational \(K_0\) classes:
+for every distinguished triangle \(U\to V\to W\),
+\([V]=[U]+[W]\) and \(\ch(V)=\ch(U)+\ch(W)\).
+A successful universal GST non-split birth must therefore
+introduce genuinely new perfect-object \(K_0\) data (or a new
+algebraic support), rather than merely a new extension
+differential between fixed components.
+
+\section{Exact Wolfram computations and independent algebra checks}
+The computations were carried out using the Wolfram
+\texttt{WolframLanguageEvaluator} in an exact rational
+stateless kernel, with symbols defined afresh each call.
+No public-web search and no local Lean work were performed.
+
+\begin{itemize}
+\item For the first three \(F_m\) on a surface (\(d=2\)), the
+symbolic rank/first-character/second-character coefficients
+were respectively
+\[
+\begin{array}{c|ccc}
+m&\rk F_m&\ch_1F_m&\ch_2F_m\\\hline
+1&\chi-1&0&0\\
+2&\chi-3&c_1&-\tfrac12c_1^2+c_2\\
+3&\chi-6&4c_1&-3c_1^2+5c_2.
+\end{array}
+\]
+For arbitrary \(m\) on a surface, exact summation gave
+\[
+ \ch_1F_m=\frac{(m-1)m(m+1)}6c_1,\quad
+ \ch_2F_m=-\frac{(m-1)m^2(m+1)}{24}c_1^2
+          +\frac{(m-1)m(m+1)(m+2)}{24}c_2.
+\]
+These are specializations of the UNIFORM proof (3.3).
+\item An independent exact weak-composition enumeration of
+symmetric powers for all \(1\le d\le5\) and \(0\le k\le4\)
+checked rank, \(\ch_1\) and \(\ch_2\) against (3.2):
+25 parameter pairs, 75 polynomial equalities, ALL TRUE,
+with zero failures. This finite check does not replace
+the generating-function proof.
+\item On a fourfold, exact substitution of the Todd components
+gave
+\[
+\begin{array}{c|cc}
+m&[\int r c_1^2]\ I_m&[\int r c_2]\ I_m\\\hline
+1&(\chi-1)/12&(\chi-1)/12\\
+2&(\chi-5)/12&(\chi+7)/12\\
+3&(\chi-27)/12&(\chi+69)/12
+\end{array}
+\]
+so the two first differences have coefficient matrix (4.4).
+The symbolic determinant is \(-1/2\), the inverse equals
+(5.3), and the quadratic detector matrix \(M^TM\)
+has principal minors \(125/36>0\), \(1/4>0\).
+\item For the purely algebraic consistency inputs \(a=3,b=5\)
+(not claimed to come from a particular \(X,r\)),
+the exact detector values are \(7/3,61/3\) and positive
+sum-of-squares \(3770/9\).
+\end{itemize}
+
+\noindent\textbf{Evidence classification.}
+Equations (2.4), (3.3), (4.3), (5.5), (6.4), and (7.1)
+have mathematical proofs above under their stated
+standard scheme, topological K-theory and GRR hypotheses.
+The Wolfram calculations check their exact rational algebra.
+Their canonical realization follows the actual cycle-class map
+from analytic fundamental classes, not a freely assigned
+Stage-2G linear map. The work has not been independently
+refereed or formalized in Lean in this round, because the
+user explicitly prioritized derivation first.
+The two universal Hodge-existence implications are not
+declared proved: the original arbitrary-\(X\) complete
+source-spanning statement requires geometry not furnished
+by tangent-Chern periods alone.
+\end{document}

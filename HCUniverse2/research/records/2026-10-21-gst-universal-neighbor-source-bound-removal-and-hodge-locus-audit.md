@@ -1,0 +1,30 @@
+# Arbitrary-X GST source construction: uncountably many fibers remove numerical bounds; genuine isolated Hodge locus blocks universal deformation shortcut
+
+**Date:** 2026-10-21 IST. **Owning exact theorem:** for every smooth projective complex X and every rational Hodge alpha in codimension p, construct an ACTUAL CH^p(X)_Q representative with true canonical Betti class alpha. **Base active-branch SHA:** `c3608a0c466ee94a084c6b0218fc3f55eb704c95`. **Main updated mathematical derivation:** [GST_arbitrary_X_bounded_Chow_specialization_source_birth_2026-10-21.tex](../derivations/GST_arbitrary_X_bounded_Chow_specialization_source_birth_2026-10-21.tex). This is not a replacement of the target with another special-family result.
+
+## 1. Exact original-X construction now WITHOUT supplied degree or denominator bounds
+
+On ANY smooth projective connected complex-disk family pi:𝔛→Δ with fixed horizontal rational 2p-class alpha_t, set the ACTUAL algebraicity locus A(alpha)={t: alpha_t has some genuine CH^p(𝔛_t)_Q representative}. By clearing denominators and decomposing finite algebraic cycles as signed effective cycles, A(alpha) is EXACTLY the union over all integers N≥1 and D≥0 of true proper relative-Chow source loci S_(D,N)(alpha), where a pair of effective cycles each of projective degree≤D has signed Betti class N alpha_t.
+
+Each fixed-(D,N) locus is a CLOSED analytic subset of the disk: the relevant pair of relative Chow schemes is proper; the genuine analytic fundamental-class map is locally constant in Gauss–Manin trivialization and fixes the target class; and the proper analytic image is analytic. On a connected 1D complex disk every proper closed analytic subset is discrete and countable. Therefore either **A(alpha) is countable or A(alpha) is the entire disk**. If alpha_t has actual algebraic representatives at UNCOUNTABLY MANY nearby fibers, some fixed finite (D*,N*) stratum must be the entire disk, even though NO degree or denominator bound was imposed at the start. The actual original-X effective pair A_0+,A_0- in the central proper Chow fiber is then constructed and Z_alpha=(A_0+−A_0-)/N* has EXACT canonical Betti class alpha. This is genuinely new bound removal inside this particular arbitrary-X construction; it does not assume a Chow preimage on the original X.
+
+A higher-dimensional variant: for connected irreducible smooth analytic deformation base, the same algebraicity locus is countable union of closed analytic sets. If it has positive ambient smooth measure, at least one such closed analytic locus is all of the base, so a genuine Chow representative exists on each fiber. One source at a point **very general relative to these specific countably many proper analytic Chow loci** has the same implication. The theorem does NOT claim arbitrary alpha has such neighboring sources.
+
+## 2. Decisive adversarial geometric test with an ACTUAL algebraic central target
+
+Consider the true smooth projective family X_t=E_i×E_(i+t), E_τ=ℂ/(ℤ+τℤ), Im(i+t)>0. Under marking let dx1,dy1,dx2,dy2 be integral 1-forms. Put eta=dx1∧dy2−dy1∧dx2. At t=0 the **actual complex diagonal** divisor Δ_E⊂E_i×E_i gives the integral canonical Betti identity eta=[{o}×E_i]+[E_i×{o}]−[Δ_E]. So eta is a known genuine ALGBRAIC original-X rational (1,1) class.
+
+On X_t, holomorphic forms are omega1=dx1+i dy1, omega2=dx2+(i+t)dy2. Exact exterior algebra gives
+
+`eta∧omega1∧omega2 = t dx1∧dx2∧dy1∧dy2`.
+
+For the REAL eta on a complex surface, being of type (1,1) is equivalent to this exterior wedge vanishing. Thus the Hodge locus of the FIXED HORIZONTAL class is EXACTLY {t=0}; at EVERY noncentral nearby fiber the class is not even Hodge and cannot come from an algebraic divisor. Wolfram independently computed coefficient t (no approximation) by full alternating four-index sum and verified it vanishes iff t=0. This directly refutes any suggestion that arbitrary-X Hodge class automatically has nearby algebraic representatives for specialization. It does not refute the Hodge conjecture—eta is already algebraic on X0—and it does not refute the correct bounded/unbounded Chow-specialization theorem.
+
+## 3. Correct GST law typing and what precisely changed
+
+- `GSTActualXHodgeResidualProjection.lean`: its native original-X source-cycle type is actual rational Chow cycles but the local H.cycleClass map is declared Stage2G and needs true canonical realization. The new constructions use the GENUINE canonical analytic Betti map throughout and could supply actual source columns if their independent hypotheses hold. They do not assume the target class lies in the old native image.
+- `GSTGraphV2SelfExpandingCosmology.lean`: actual finite-degree descent and blowup native-cycle blocks are source PRESERVING, not generators of the missing Chow class on X. The exact Hodge-locus discriminator shows arbitrary deformation is not itself an unconditional source operation.
+- GST polarized native-image residual Gram: gives strict positive distance from a missing class to the entire existing algebraic image. Wolfram earlier checked rational Gram diag(2,3,5) with residual norm20. This rules out source-free native-image approximation.
+- GST projective Chow/Segre original-X return: canonical class and Chow types work AFTER an independently created geometric cycle exists on a world. Relative Chow provides a new true cross-fiber source when the source locus is large enough.
+
+**Exact outcome:** A new unconditional *geometric transfer theorem* removes uniform numerical bounds if algebraic sources occur on uncountably many fibers (or on a positive-measure locus). A new exact genuinely algebraic family shows this occurrence may fail completely, even when the central Hodge class is already algebraic. Hence the remaining universal mathematical obligation is to independently birth cycles on arbitrary original X or establish adequate source-bearing Hodge-preserving families—neither currently follows from the cited GST laws. Do not relaunch further Cauchy node-count test programs. Mathematical self-review and Wolfram exact exterior calculation only; no new Lean modification or CI assertion.

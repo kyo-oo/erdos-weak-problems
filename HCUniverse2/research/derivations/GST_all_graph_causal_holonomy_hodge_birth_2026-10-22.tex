@@ -1,0 +1,228 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\title{GST All-Graph Causal Holonomy, Reciprocal-Fold Hodge Birth, and Unbounded Purity Gaps}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+We derive a genuinely geometric all-graph extension of the GST dimensionless-world and higher-causal-fold framework. Every original smooth projective complex variety X enters through B=X^m with its actual cyclic algebraic factor automorphisms. Twisted graph incidence, not an abstract Hodge-class operator, computes the emergent weight-defective cohomology. Multiple loops produce source sectors even with zero common holonomy invariants. Two reciprocal loops supply an exact full-target cohomological retraction, and arbitrarily deep causal tensor folds produce every negative purity gap. For finite cyclic holonomy, a smooth projective companion has an exact pure-Hodge polynomial. We distinguish this structure from any claimed construction of a previously unknown algebraic cycle on X.
+\end{abstract}
+
+\section{Geometric GST input: worlds before dimensions}
+Fix a connected smooth projective complex variety X, dim_C X=d, and an arbitrary integer m>=2. Let B=X^m, b=md, with algebraic cyclic factor permutation rho; on rational cohomology set T=rho^*. This is the actual realization of a causal world automorphism: no metric, dimension, cohomological degree or Hodge type is primitive in the underlying GST GeneralSpace, but a chosen algebraic realization produces them.
+
+Let Gamma be a finite connected graph with r vertices and e edges, loops and parallel edges permitted, and g=e-r+1 independent cycles. Assign to every oriented edge a an algebraic automorphism f_a of B, with inverse orientation having inverse f_a, and assume all f_a generate a finite group. For each vertex take B x P^1, choose different marked points for incident half-edges, and glue the two B-sections for each edge through f_a. Denote the resulting projective pinched scheme Y. It has complex dimension b+1; normalization consists of r disjoint B x P^1; double locus consists of e disjoint B. Projectivity follows by equipping an ample tensor-orbit bundle of the finite holonomy group with its group linearization, tensoring it with O_{P^1}(n), descending along marked sections, and using finite-surjective descent of ampleness. This is an actual topology-changing geometric realization.
+
+\section{Twisted incidence law in every Hodge degree}
+Write V_q=H^q(B,Q), a pure polarizable rational Hodge structure of weight q. Set C^0_q=V_q^{\oplus r}, C^1_q=V_q^{\oplus e}. The twisted graph coboundary is
+\[
+ (\delta_q x)_a = T_a x_{t(a)}-x_{s(a)}, \qquad T_a=f_a^*.
+ \tag{1}
+\]
+Its kernel K_q and cokernel C_q are genuine rational Hodge structures because each T_a comes from an algebraic automorphism.
+\begin{theorem}[All-graph causal mixed-Hodge birth]
+For every cohomological degree k,
+\[
+\boxed{\operatorname{Gr}_{k-1}^{W}H^k(Y,Q)=C_{k-1},\qquad
+\operatorname{Gr}_{k}^{W}H^k(Y,Q)=K_k\oplus V_{k-2}(-1)^{\oplus r}.}\tag{2}
+\]
+Here V_j=0 for j<0, and all other weight-graded pieces vanish. These are associated graded isomorphisms; a canonical splitting of the entire mixed Hodge structure is NOT asserted.
+\end{theorem}
+\begin{proof}
+For the normalization nu:tilde Y -> Y and disjoint double locus N, the rational constant-sheaf normalization sequence
+0 -> Q_Y -> nu_* Q_tildeY -> Q_N -> 0
+maps branch values to their twisted differences. Under Kunneth, H^q(tildeY)=V_q^{\oplus r} \oplus V_{q-2}(-1)^{\oplus r} and H^q(N)=V_q^{\oplus e}; the connecting map is delta_q on the first summand and zero on the second, because O(1) on P^1 restricts trivially to a marked point. Its long exact sequence gives
+0 -> C_{k-1} -> H^k(Y) -> K_k \oplus V_{k-2}(-1)^{\oplus r} -> 0.
+The first term is pure of weight k-1 and the last pure of weight k. Strictness of the mixed-Hodge weight filtration proves (2).
+\end{proof}
+
+\begin{theorem}[All-graph causal source amplification]
+The twisted spanning-tree gauge identifies K_q with the simultaneous fixed subspace V_q^{Hol(Gamma)} of the cycle holonomies. Rank-nullity yields
+\[
+\boxed{\dim C_q=(g-1)\dim V_q+\dim V_q^{Hol(Gamma)}.}\tag{3}
+\]
+Thus for any g>=2, at least (g-1)dim V_q independent weight-defective causal channels exist even if every common holonomy-fixed direction vanishes.
+\end{theorem}
+\begin{proof}
+The tree coordinates identify all kernel vertex vectors with a single vector fixed by each fundamental cycle holonomy. If beta_q=dim V_q and R_q=rank delta_q, then dim K_q=r beta_q-R_q and dim C_q=e beta_q-R_q. Subtraction gives dim C_q=(e-r) beta_q+dim K_q=(g-1)beta_q+dim K_q.
+\end{proof}
+
+\section{Exact all-dimension Hodge-generating equation}
+Define the degree/weight/Hodge polynomial P_B(t,s,u,v)=sum h^{p,q}(Gr^W_w H^k(B,Q))t^k s^w u^p v^q, and A=t^2 s^2 uv. Let P_K denote the Hodge polynomial of all holonomy-invariant cohomology. The exact sequence defining C_q implies its pure-Hodge Grothendieck class [C_q]=(g-1)[V_q]+[K_q]. Therefore
+\[
+\boxed{P_Y=(1+t)P_K+[rA+(g-1)t]P_B.}\tag{4}
+\]
+This recovers a tree of r rational components as (1+rA)P_B and the prior one-loop cyclic GST formula when g=r=1. For cyclic factor permutation of B=X^m, the exact graded Koszul-signed character average is
+\[
+\boxed{P_K=\frac1m\sum_{\ell\mid m}\varphi(\ell)
+\left[P_X((-1)^{\ell-1}t^\ell,s^\ell,u^\ell,v^\ell)\right]^{m/\ell}.}\tag{5}
+\]
+The signs are necessary when H^odd(X) is nonzero.
+
+\section{Reciprocal causal loops give a full-Hodge retraction}
+On a one-vertex graph take two loop holonomies T and T^{-1}, both induced by genuine algebraic automorphisms. Their first two incidence coordinates are
+\[
+ \Delta(v)=((T-I)v,(T^{-1}-I)v).
+\]
+Define R(a,b)=a+Tb. The exact identity
+\[
+\boxed{R\Delta=(T-I)+T(T^{-1}-I)=0}\tag{6}
+\]
+shows that R descends to a surjective Hodge map barR:C_q -> V_q. The insertion S(v)=[(v,0)] is a section,
+\[
+\boxed{\bar R S=I_{V_q}.}\tag{7}
+\]
+This survives any additional graph loops because R ignores their coordinates. It does not require a nonzero holonomy-invariant vector.
+
+For every original X, integer p and rational Hodge class alpha in H^{2p}(X,Q) intersect H^{p,p}(X), choose B=X^m and T=rho^*. The point-inclusion i:X -> B, x -> (x,x0,...,x0), satisfies i^* pr_1^*=id. Hence
+\[
+\boxed{\Hdg^p_Q(X)\xrightarrow{pr_1^*}V_{2p}
+ \xrightarrow{S}C_{2p}
+ \cong Gr^W_{2p}H^{2p+1}(Y,Q)}
+ \tag{8}
+\]
+is injective, with exact return i^* barR S pr_1^*(alpha)=alpha. The target alpha need NOT be algebraic, and no Hodge-to-Chow inverse has been postulated. This improves the earlier cyclic symmetrization by avoiding its averaging step.
+
+\section{All causal depths and exact purity signatures}
+Let D be a genuine irreducible nodal rational projective curve, whose H^1(D,Q)=Q(0) is in degree one and weight zero. For every h>=1 set
+Z_h=Y x D^{h-1}, an actual projective singular geometry of complex dimension md+h. Then
+\[
+\boxed{P_{Z_h}=P_Y(1+t+A)^{h-1}.}\tag{9}
+\]
+Mixed-Hodge Kunneth applied to the independent weight-zero graph holes gives for EVERY original-X rational Hodge class alpha
+\[
+\boxed{\Hdg^p_Q(X)\hookrightarrow
+Gr^W_{2p}H^{2p+h}(Z_h,Q),\quad
+(p',q')=(p,p),\ \chi=p'-q'=0,\ \delta=(p'+q')-(2p+h)=-h.}
+\tag{10}
+\]
+The causal depth h is unbounded. For even h the born rational diagonal sector lies in even cohomological degree but has the wrong purity weight for the classical smooth-projective Hodge target. Z_h legitimately has a mixed Hodge structure, not a counterexample to the Hodge conjecture on a smooth projective variety.
+
+\section{Smooth projective pure-Hodge companion for cyclic holonomy}
+Assume g>=1 and the g holonomies generate a finite cyclic group G. Choose a smooth projective genus-g curve C, and map its fundamental group generators a_i to the chosen holonomies, b_i to identity; this defines a surjection to G, hence a connected finite étale G-cover C' -> C. The free diagonal quotient S=(B x C')/G is genuinely smooth projective, of dimension b+1. It is a companion geometric realization, not an automatically established flat smoothing of the singular Y.
+
+For the nontrivial character line local systems of C' -> C, Riemann--Roch gives holomorphic one-form multiplicity g-1; the trivial character contributes g. Consequently the entire pure Hodge polynomial is
+\[
+\boxed{P_S=(1+A)P_K+ts(u+v)[(g-1)P_B+P_K].}\tag{11}
+\]
+Both source and smooth companion depend on the same B cohomology and finite cyclic holonomy, but different realized topologies; every smooth-fiber Hodge sector has weight equal to degree. A smoothness claim for Y, or a generic Hodge-surjectivity claim on X, is not inferred.
+
+\section{Adversarial geometric example: ZERO fixed classes, nonzero births}
+Let E be any elliptic curve and B=E x E. On V=H^1(B,Q)=Q^4 let S exchange factors and [-1] be simultaneous elliptic negation. The two distinct involutions f_1=S and f_2=[-1]S act as T_1=S and T_2=-S on V. Their common fixed subspace is 0. Yet the two-loop incidence matrix Delta:Q^4 -> Q^8 has rank 4, hence coker dimension 4. With P_\pm=(I \pm S)/2, define
+\[
+ R(a,b)=P_+a-P_-b,\quad
+ \Sigma(v)=(P_+v,-P_-v).
+\]
+Then R Delta=0 and R Sigma=I_4 by exact rational matrix identities. This uses different algebraic automorphisms, not duplicated identity loops. The generated group is C_2 x C_2, so formula (11), proved for cyclic G, is not applied to its smooth companion without extending the representation argument.
+
+
+\section{UPGRADE: smooth pure-Hodge companion for arbitrary FINITE holonomy}
+The preceding smooth-companion result is \emph{not restricted
+to cyclic monodromy}.  Let $G$ be \emph{any} finite group
+generated by the $g\ge1$ fundamental holonomies of $\Gamma$.
+Choose a smooth genus-$g$ curve $C$ and a surjection
+$\pi_1(C)\twoheadrightarrow G$ sending the first $g$
+standard generators to the holonomies and all their
+symplectic partners to the identity. The surface-group
+commutator relation is then satisfied even when $G$
+is noncommutative.  The associated connected unramified
+$G$-cover $C'\to C$ exists and is projective.  The
+free diagonal quotient $S=(B\times C')/G$ is
+smooth projective.
+
+\begin{theorem}[Finite-group equivariant differential birth]
+As complex representations of $G$,
+\[
+ \boxed{\quad H^{1,0}(C')\cong
+ \mathbf1\oplus(g-1)\mathbb C[G],\qquad
+ H^{0,1}(C')\cong
+ \mathbf1\oplus(g-1)\mathbb C[G].\quad}                \tag{16}
+\]
+Therefore equation (11) holds for \emph{every
+finite holonomy group}, not just a cyclic one:
+\[
+\boxed{\quad
+P_{S}=(1+A)P_K+ts(u+v)[(g-1)P_B+P_K].
+\quad}                                               \tag{17}
+\]
+This is a uniform pure-Hodge realization law
+valid even for the two distinct involutions in
+the adversarial example.
+\end{theorem}
+\begin{proof}
+Because $C'\to C$ is a free $G$-cover,
+Riemann--Hurwitz gives
+$g(C')=|G|(g-1)+1$.  Thus the trace of identity
+on $H^{1,0}(C')$ equals $1+(g-1)|G|$.
+For every nonidentity $\gamma\in G$,
+the holomorphic Lefschetz fixed-point formula
+for $\mathcal O_{C'}$ gives
+\[
+  0=L(\gamma,\mathcal O_{C'})
+   =\operatorname{tr}(\gamma|H^0(\mathcal O_{C'}))
+     -\operatorname{tr}(\gamma|H^1(\mathcal O_{C'})).
+\]
+The first trace is $1$, hence the second is $1$.
+Complex conjugation gives trace $1$ on
+$H^{1,0}(C')$ as well. The character
+$1+(g-1)\mathrm{reg}_G$ has exactly these
+values: $1+(g-1)|G|$ at the identity and $1$
+elsewhere. Equality of complex characters proves
+(16) for \emph{any} finite group.
+
+Now $H^0(C')$ and $H^2(C')$ are trivial
+$G$-representations, contributing $(1+A)P_K$.
+For any rational Hodge sector $V$ of $B$,
+the regular-representation isomorphism
+$(V\otimes\mathbb C[G])^G\cong V$ gives
+$g-1$ copies of its full Hodge multiplicities,
+and the trivial summand gives one invariant
+copy. Tensor with $(1,0)$ and $(0,1)$
+and add the degrees to derive (17).
+\end{proof}
+
+\paragraph{Concrete noncyclic all-Hodge-spectrum check.}
+For $B=E\times E$, take $G=\langle S,-S\rangle
+\cong C_2\times C_2$, with factor swap $S$
+and global elliptic inversion as above.
+Write $P_E=1+ts(u+v)+A$.  The complete
+$G$-invariant Hodge polynomial of $B$ is
+\[
+ P_K=1+2A+A^2,
+\]
+while $P_B=P_E^2$.  The g=2 graph pinching has
+$\operatorname{Gr}^W_1H^2$ Hodge polynomial
+$2u+2v$, and $\operatorname{Gr}^W_2H^2$
+polynomial $3uv$.  The genuinely smooth,
+projective $G$-cover companion instead has
+pure $H^2$ polynomial
+\[
+ \boxed{2u^2+7uv+2v^2.}
+\]
+Thus \emph{zero common fixed $H^1$ classes}
+does not prevent all-new pure bidegrees
+$(2,0),(1,1),(0,2)$ in a smooth realized
+world.  These are genuine geometry and
+complete Hodge-number outputs, not an
+algebraic-cycle constructor for arbitrary
+original rational $(p,p)$ targets.
+
+\section{Canonical cycle-class firewall: source labels versus output topology}
+Write A_p(B)=im(cl_B^{canonical}:CH^p(B)_Q -> H^{2p}(B,Q)). Algebraic holonomy maps preserve A_p(B); the reciprocal return R and injection S preserve the corresponding algebraic edge labels. Therefore
+\[
+\boxed{\gamma\in A_p(B)
+\iff
+S(\gamma)\in im(A_p(B)^2\to coker\Delta_{2p}).}
+\tag{12}
+\]
+The reverse direction applies R to algebraic edge labels and uses R Delta=0. Applying i^* to gamma=pr_1^*alpha yields the equivalence with algebraicity on the untouched original X. Importantly, an algebraic node-label is NOT automatically a codimension-(p+1) Chow cycle class in the ordinary cohomology of a singular ambient Y: cycle class for singular schemes requires the correct Chow/Borel--Moore or operational semantics. The topology births Hodge-labelled cohomology, not a new algebraic preimage for arbitrary alpha.
+
+\section{Executed exact computation and verification boundaries}
+Wolfram rational-matrix tests of cyclic shifts in dimensions m=2,...,7 and g=2,...,5 passed all 24/24 instances of (3). With elliptic X, m=2,...,4 and g=1,...,4, all 12/12 singular/smooth Hodge-polynomial pairs had nonnegative integer coefficients. At m=2,g=2, the cyclic singular fold has weight-one H^2 polynomial 3u+3v and the smooth companion has pure degree-two polynomial 3u^2+9uv+3v^2. A separate noncyclic two-involution calculation gives ker Delta=0, dim coker=4 and R Delta=0, R Sigma=I_4, all exact. These computations are finite checks; the equations above are derived uniformly under the geometric assumptions.
+
+Mathbox provenance: mathematically self-reviewed LaTeX derivation; scheme-level normalization/MHS, finite covers and Riemann--Roch are mathematical inputs, NOT claims of current Lean-kernel verification. No local Lean installation, no fabricated Hodge source and no public web search. The original all-X rational Hodge conjecture remains a separate exact target: producing an arbitrary original-X native rational Chow cycle with the genuine canonical Betti class is not a consequence of these causal sector equations.
+\end{document}

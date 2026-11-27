@@ -1,0 +1,966 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{remark}[theorem]{Remark}
+\title{GST Original-X Target Geometry: Exact Spatial-Tower Limit-to-Chow Extraction and Twisted-Determinantal Causal Angle Budget}
+\date{23 October 2026}
+\begin{document}\maketitle
+\begin{abstract}
+We attack the FIRST unproved arrow in the exact arbitrary-X,
+prescribed-rational-Hodge-class GST construction rather than
+relabel a fixed source or another descent equivalence as a proof.
+We prove (A) an all-dimension actual affine-fold tower theorem:
+a genuinely convergent sequence of CANONICAL Betti classes of
+algebraic cycles on ANY varying GST affine worlds yields a
+FINITE explicit rational Chow cycle on the original X,
+with NO uniform complexity, degree, denominator, mass,
+or ambient-dimensional bounds. Thus a mathematically
+established infinite-dimensional spatial-source convergence
+would suffice for the original rational Hodge target.
+We prove a quantitative uniform rational-annihilator
+separation theorem characterizing the precise obstruction
+to such convergence. We then construct (B) an exactly
+alpha-dependent high-positive-twist Chern geometry
+on ORIGINAL X with precisely TWO nonzero
+degree-p terms; all other Chern contributions cancel
+by an algebraic identity for EVERY twist integer.
+Its actual smooth determinantal cycle difference
+has EXACT canonical Betti target alpha.
+Finally we compute the sharp necessary Kähler-angle
+error budget for an asymptotically holomorphic
+source family to yield an integral calibrated return.
+A usual square-root angular estimate with mass
+growing as k^p only yields defect O(k^(p-1)),
+which does NOT force zero defect.
+The proved results identify the valid all-N
+experimental-to-mathematical extraction mechanism
+and a specific geometric estimate to improve,
+without silently assuming algebraic source birth.
+\end{abstract}
+
+\section{Source-to-target contract}
+Fix ANY smooth connected projective complex X,
+dimension d, and EVERY 1<=p<=d with a
+PRESCRIBED rational (p,p) Hodge
+$\alpha\in H^{2p}(X,\mathbb Q)$.
+Let $\mathrm{cl}^{can}_X:CH^p(X)_\mathbb Q
+\to H^{2p}(X,\mathbb Q)$ be the
+TRUE canonical Betti cycle-class map.
+The exact requested output is a genuine
+original-X rational Chow cycle Z with
+$\mathrm{cl}^{can}_X Z=\alpha$.
+Write
+\[
+ V_\mathbb Q=\mathrm{im}(\mathrm{cl}^{can}_X),
+ \qquad V_\mathbb R=V_\mathbb Q\otimes_\mathbb Q\mathbb R
+  \subset H^{2p}(X,\mathbb R).                    \tag{1}
+\]
+Because X is compact, $H^{2p}(X,\mathbb Q)$
+is finite dimensional. Thus
+$V_\mathbb R$ is a FINITE-DIMENSIONAL
+CLOSED real vector subspace.
+This closure observation uses no
+finite generation of CH itself.
+
+\section{A genuinely all-dimensional GST experiment-to-CHOW theorem}
+For every index n choose an ACTUAL
+algebraic Zariski locally trivial
+affine-space bundle q_n:J_n→X,
+with arbitrary varying finite fiber
+rank N_n (the ranks may tend
+to infinity). The Jouanolou
+incidence worlds already constructed
+in the branch are valid such J_n.
+For every n the ACTUAL maps
+\[
+ q_n^*:CH^p(X)_\mathbb Q
+ \overset{\sim}{\longrightarrow}
+ CH^p(J_n)_\mathbb Q,\quad
+ q_n^*:H^{2p}(X,\mathbb Q)
+ \overset{\sim}{\longrightarrow}
+ H^{2p}(J_n,\mathbb Q)                      \tag{2}
+\]
+are respectively Chow affine-bundle
+homotopy invariance and rational Betti
+homotopy invariance. Both are
+compatible with canonical cycle class.
+
+\begin{theorem}[FULL GST tower period-convergence forces FINITE exact original-X Chow source]
+For ANY X,p,alpha and any sequence
+of actual affine worlds q_n:J_n→X
+as above, suppose genuinely algebraic
+rational cycles
+\[
+ W_n\in CH^p(J_n)_\mathbb Q
+\]
+are CONSTRUCTED from the spatial
+geometry, without being supplied as
+preimages of alpha.
+Define their transported original
+Betti vectors
+\[
+ \beta_n=(q_n^*)^{-1}
+         \mathrm{cl}^{can}_{J_n}(W_n)
+       \in H^{2p}(X,\mathbb Q).                    \tag{3}
+\]
+If the actual mathematical spatial
+output satisfies the convergence
+\[
+ \boxed{\beta_n\longrightarrow\alpha
+        \text{ in }H^{2p}(X,\mathbb R),}     \tag{4}
+\]
+then some FINITE subsequence
+$n_1,\ldots,n_s$, with
+$s\le b_{2p}(X)$,
+and actual rational coefficients
+$c_1,\ldots,c_s\in\mathbb Q$
+satisfy the EXACT, NOT LIMIT,
+identity
+\[
+ \boxed{
+ \alpha=\sum_{j=1}^s c_j\beta_{n_j},
+ \quad
+ Z_\alpha=\sum_{j=1}^s c_j
+          (q_{n_j}^*)^{-1}W_{n_j}
+       \in CH^p(X)_\mathbb Q,
+ \quad\mathrm{cl}^{can}_X Z_\alpha=\alpha.
+ }                                                     \tag{5}
+\]
+There is NO degree, denominator,
+dimension, geometric mass, Chern
+rank or rate-of-convergence
+bound required on W_n.
+It is enough to prove convergence
+of canonical Betti classes
+in this finite-dimensional
+real topology.
+\end{theorem}
+\begin{proof}
+Let U_Q be the rational linear
+span of all transported beta_n
+inside the rational finite-dimensional
+Betti group H_Q.
+Its dimension s is at most b_(2p).
+Choose a finite rational basis
+beta_{n_1},...,beta_{n_s} of
+U_Q from the ACTUALLY constructed
+sequence. The beta_n all lie
+in U_R, which is closed,
+so their limit alpha lies in
+U_R. But alpha is itself
+a rational vector in H_Q.
+Extend the chosen rational
+basis of U_Q to a rational
+basis of H_Q. The coordinates
+of alpha in that extended
+basis are rational, and its
+membership in U_R forces all
+coordinates outside U_Q to
+be ZERO. Thus alpha belongs
+to U_Q and has a finite
+rational expansion as in (5).
+For each selected n_j,
+the inverse Chow
+homotopy-invariance map
+takes the actual algebraic W_nj
+to a genuine rational original-X
+Chow class. Canonical Betti
+naturality proves the
+last equality EXACTLY.
+No limiting CHOW operation,
+mass convergence, or uniform
+complexity is used.
+\end{proof}
+
+\begin{corollary}[WEAK current approximation across all dimensions is enough]
+If, instead of assuming (4),
+one establishes weak convergence
+of transported integration-current
+PERIODS against a finite basis
+of closed smooth complementary
+differential forms on original X
+to those of a current with
+Poincaré dual alpha, then (4)
+follows and the EXACT
+finite rational Chow extraction
+(5) applies.
+In particular, a mathematically
+proved all-N period convergence
+of actual algebraic spatial
+outputs constitutes a rigorous
+mathematical route to the
+user's target, not merely
+suggestive visualization.
+\end{corollary}
+\begin{proof}
+Poincaré duality identifies
+H^{2p}(X,R) with the dual
+of H^{2d-2p}(X,R).
+Integration on a finite
+basis of closed
+representatives supplies
+all finite-dimensional
+coordinates. Convergence
+of those finitely many
+coordinates is precisely
+the topology of
+H^{2p}(X,R).
+Then apply the theorem.
+\end{proof}
+
+\section{Finite CERTIFIED experiment implies exact original-X rational equality}
+Choose an integral basis $e_1,\ldots,e_b$ of the torsion-free
+lattice $H^{2p}(X,\mathbb Z)/\mathrm{torsion}$.
+Express the prescribed rational alpha as
+$\alpha=\sum_i(a_i/Q)e_i$ with positive integer Q and integer a_i.
+Let W be a GENUINE rational ALGEBRAIC codimension-p Chow
+cycle on an actual GST affine fold $q_N:J_N\to X$.
+Suppose mW is an INTEGRAL algebraic cycle for some m>0.
+By integral Betti naturality, the transported class
+\[
+ \beta=(q_N^*)^{-1}\mathrm{cl}^{can}_{J_N}(W)
+       =\sum_i (b_i/m)e_i,\quad b_i\in\mathbb Z .
+\]
+
+\begin{theorem}[One mathematically CERTIFIED finite experiment returns actual Chow]
+If exact arithmetic or certified interval computations prove
+\[
+ \boxed{\max_i |b_i/m-a_i/Q|<1/(Qm),}                 \tag{18}
+\]
+then $\beta=\alpha$ EXACTLY and
+\[
+ \boxed{Z_\alpha=(q_N^*)^{-1}W\in CH^p(X)_\mathbb Q,
+        \quad\mathrm{cl}^{can}_X(Z_\alpha)=\alpha.}  \tag{19}
+\]
+No convergence, degree, analytic mass or stable N condition is needed.
+\end{theorem}
+\begin{proof}
+Each coordinate difference equals $(Qb_i-ma_i)/(Qm)$.
+If nonzero its absolute value is at least 1/(Qm).
+The strict certified inequality makes every difference zero.
+Apply actual rational Chow homotopy invariance and canonical
+Betti naturality to the ACTUAL algebraic W.
+\end{proof}
+
+\begin{remark}
+This gives a precise way a FINITE mathematically certified GST
+experiment can establish the exact target at a specified X,p,alpha.
+It requires an actual algebraic spatial Chow output and rigorous
+integral Betti coordinate error enclosures. A smooth real
+degeneracy locus or a holomorphic nonalgebraic cycle does not
+meet that typed input. Universal resolution additionally
+requires such an output for every original X,p,alpha.
+\end{remark}
+
+\section{The exact flat-period no-approximation barrier}
+\begin{theorem}[A missing algebraic image yields a UNIFORM quantitative gap on every GST fold]
+Suppose a rational alpha
+does NOT lie in V_Q in (1).
+There is an actual rational
+complementary cohomology
+class $\psi\in H^{2d-2p}(X,\mathbb Q)$
+and a nonzero rational c such that
+\[
+ \boxed{
+ \int_X\alpha\smile\psi=c\ne0,
+ \qquad
+ \int_X\mathrm{cl}^{can}(Z)\smile\psi=0
+   \quad\forall Z\in CH^p(X)_\mathbb Q.
+ }                                                     \tag{6}
+\]
+Consequently for any fixed
+Euclidean norm on
+$H^{2p}(X,R)$ there exists
+an epsilon>0 such that
+for EVERY n and
+EVERY actual algebraic W
+on its arbitrary-rank
+fold J_n,
+\[
+ \boxed{
+ \big\|(q_n^*)^{-1}
+      \mathrm{cl}^{can}_{J_n}(W)
+        -\alpha\big\|\ge\varepsilon.
+ }                                                     \tag{7}
+\]
+Further, if $T_\alpha$ is
+ANY closed rational rectifiable
+current on original X with
+PD(T_alpha)=alpha and eta
+is a CLOSED smooth representative
+of psi, then EVERY genuine
+original-X algebraic cycle Z
+has the uniform SPATIAL
+flat-distance bound
+\[
+ \boxed{
+  {\cal F}([Z]-T_\alpha)
+     \ge {|c|\over
+                  \|\eta\|_{\mathrm{comass}}}>0 .
+ }                                                     \tag{8}
+\]
+This is a conditional
+separation certificate for
+an arbitrary hypothetical
+missing class. It makes
+NO assertion that any such
+rational Hodge class actually
+exists.
+\end{theorem}
+\begin{proof}
+V_Q is a proper rational
+subspace, so rational
+linear algebra supplies
+a rational nonzero linear
+functional L killing V_Q
+but with L(alpha)=c≠0.
+Poincaré duality over Q
+represents L by psi.
+Continuity of L gives
+$|L(alpha-beta)|=|c|$
+for every beta∈V_R,
+hence (7) by the
+dual norm inequality.
+Each beta from an algebraic
+cycle on any J_n lies in
+V_Q by the compatible
+isomorphisms (2).
+For (8), the flat norm
+of a normal current S
+dominates $|S(\eta)|$
+divided by the maximum
+of the comass of eta
+and d eta; d eta=0,
+so only the comass
+appears. Here
+$([Z]-T_\alpha)(\eta)
+=\int_X(\mathrm{cl}Z-\alpha)
+          \smile\psi=-c$.
+The rational-cycle
+flat norm can be taken
+on real currents,
+so rational
+multiplicities do not
+invalidate the bound.
+\end{proof}
+
+\begin{remark}[What a dimension-fold experiment MUST actually measure]
+Equations (4) and (7)
+provide opposing
+mathematical outcomes
+at the WHOLE spatial-tower
+level: source convergence
+of ACTUAL ALGEBRAIC cycles
+forces original-X Chow
+algebraicity, and a
+genuine failure of source
+algebraicity produces
+a positive separation
+certificate across EVERY
+affine dimensional fold.
+The fold topological
+invariance alone proves
+neither alternative.
+The discriminating
+observable is the
+canonical Betti period
+of the constructed
+source, not its mere
+analytic existence,
+Chern rank, ambient
+dimension or Hodge
+number invariance.
+\end{remark}
+
+\section{A HODGE-sensitive original-world smooth positive geometry, without topological K assumptions}
+The preceding K-theory sources
+exist even for non-Hodge
+rational cohomology.
+We now use the ACTUAL
+Hodge condition to produce
+a different target-specific
+geometric object DIRECTLY
+on the original X.
+
+Fix a smooth Kähler form
+omega on compact X
+representing its ample
+rational class h.
+Let eta_alpha be the
+unique REAL harmonic
+degree-2p representative
+of the prescribed rational
+(p,p) alpha in the
+Kähler metric. Kähler
+Hodge theory says eta_alpha
+is a closed real smooth
+form of PURE Hodge
+bidegree (p,p).
+
+\begin{theorem}[All-X target-sensitive signed POSITIVE smooth complex carrier]
+There exists an explicit
+finite real lambda>0,
+computable from the
+pointwise Kähler plane
+evaluations of eta_alpha,
+such that the two smooth
+closed (p,p) forms
+\[
+ \boxed{
+ \Theta_+=\eta_\alpha+
+                    \lambda\omega^p,\qquad
+ \Theta_-=\lambda\omega^p
+ }                                                     \tag{20}
+\]
+are STRICTLY WEAKLY
+POSITIVE at EVERY point
+of X. Their actual
+rational de Rham classes
+obey
+\[
+ \boxed{
+ [\Theta_+]-[\Theta_-]
+     =\alpha\ \text{in }H^{2p}(X,R).
+ }                                                     \tag{21}
+\]
+The rationality is a
+statement about these
+classes (choose rational
+lambda sufficiently large),
+not about the pointwise
+smooth coefficients.
+No algebraic cycle or
+holomorphic topological
+bundle structure is assumed.
+\end{theorem}
+\begin{proof}
+At each x, the set of
+oriented unitary complex
+p-planes in T_xX is
+compact. On each such
+plane the real form
+omega^p evaluates
+to the SAME strictly
+positive number p!.
+The real smooth function
+$\eta_\alpha(\Pi)$ on
+the compact Grassmannian
+bundle of complex p-planes
+over compact X has a
+finite lower bound -C.
+Choose any rational
+lambda>C/p!, with
+lambda>0. Then
+$\eta_\alpha+
+ \lambda\omega^p$
+evaluates strictly
+positively on EVERY
+complex p-plane, which
+is strict WEAK positivity
+of a real (p,p) form.
+The second form is
+strictly weakly positive
+since omega is Kähler.
+Both are closed
+because eta_alpha and
+omega are closed.
+Their difference is
+exactly eta_alpha,
+so (21) follows.
+\end{proof}
+
+\begin{theorem}[GEOMETRIC quantization barrier even for a known algebraic Hodge class]
+On the actual projective
+curve X=P1, p=1,
+normalize the Fubini--Study
+Kähler form omega
+to total integral one.
+As a positive closed
+zero-dimensional current,
+omega is a DIFFUSE smooth
+measure of total mass one.
+It is NOT the weak/flat
+limit of POSITIVE INTEGRAL
+algebraic zero-cycles whose
+homology classes equal
+one point (hence mass one):
+each such cycle is exactly
+ONE point, and the weak
+limit of Dirac point
+currents is again a
+Dirac point current.
+But omega IS a weak
+limit of POSITIVE
+RATIONAL algebraic cycles
+\[
+ \boxed{
+  Z_n=\frac1n
+     \sum_{j=1}^n [x_{n,j}],
+  \quad
+  \mathrm{cl}^{can}(Z_n)
+     =\mathrm{cl}^{can}([\mathrm{point}]),
+ }                                                     \tag{22}
+\]
+for points chosen so
+their empirical measures
+converge to omega.
+Thus even where Hodge
+algebraicity is ALREADY
+true, diffuse smooth
+positive geometry cannot
+be converted to integral
+analytic cycles merely
+by weak approximation
+with FIXED integral mass;
+unbounded rational
+denominators permit
+a different approximation
+mechanism.
+\end{theorem}
+\begin{proof}
+An effective integral
+zero-cycle of total
+degree one on P1 has
+one point with coefficient
+one. Since P1 is
+compact, every sequence
+of such points has a
+convergent subsequence,
+whose Dirac currents
+converge to a Dirac mass,
+not to smooth omega.
+For the converse,
+partition the compact
+round sphere into
+asymptotically fine
+measurable equal-area
+cells, choose one
+representative point
+from each, and form
+the empirical measures
+(22). Their weak
+convergence to omega
+follows from uniform
+continuity of each
+continuous test function.
+Every point is a
+genuine algebraic
+zero-cycle; (22) is
+therefore a rational
+algebraic cycle of
+degree one for every n.
+The underlying integral
+cycle n Z_n has mass n,
+so its integral-current
+masses are NOT uniformly
+bounded. This is exactly
+why the integer-current
+compactness theorem does
+not contradict diffuse
+weak convergence of the
+rational normalized
+cycles.
+\end{proof}
+
+\begin{corollary}[Uniform fixed-denominator spatial quantization gap]
+Keep X=P1 and the
+smooth normalized
+Fubini--Study probability
+current omega above.
+For every finite
+positive integer M,
+there is a
+STRICTLY POSITIVE
+constant epsilon_M
+such that for EVERY
+effective rational
+algebraic zero-cycle
+Z of degree one whose
+coefficient denominator
+divides SOME integer
+m with 1<=m<=M,
+its current has
+a weak probability
+metric distance
+at least epsilon_M
+from smooth omega.
+For instance this
+holds for the
+bounded-Lipschitz
+metric on probability
+measures of the
+round compact sphere:
+\[
+ \boxed{
+ \inf_{\substack{\deg Z=1,\ Z\ge0\\
+       mZ\in Z^1(X)_\mathbb Z,\
+       1\le m\le M}}
+  d_{\mathrm{BL}}([Z],\omega)
+                  =\epsilon_M>0.
+ }                                                     \tag{23}
+\]
+Thus denominators tending
+to infinity are NECESSARY
+for any such rational-cycle
+weak approximation of this
+smooth positive carrier.
+This is true EVEN THOUGH
+each rational source in
+(22) has exactly the
+correct algebraic Hodge
+cohomology class.
+\end{corollary}
+\begin{proof}
+Every positive effective
+zero-cycle Z with
+mZ integral and
+degree(Z)=1 consists
+of at most m atoms,
+since the positive
+integer multiplicities
+of mZ sum to m.
+Hence for m<=M all
+such cycles are
+probability measures
+with at most M atoms.
+The space of
+probability measures
+supported on at
+most M points is
+COMPACT in the
+weak topology:
+it is the continuous
+image of the compact
+space $X^M\times
+\Delta^{M-1}$,
+where $\Delta^{M-1}$
+is the closed
+probability simplex.
+The smooth Fubini--Study
+measure is non-atomic,
+so it lies outside
+this compact and
+therefore closed set.
+Any metric that
+metrizes weak
+convergence, including
+the bounded-Lipschitz
+metric, has a strictly
+positive distance
+from a point to a
+disjoint compact set.
+This proves (23).
+\end{proof}
+
+\begin{remark}[What this proves about the GST premise]
+The Hodge condition already
+constructs genuinely
+positive closed
+(p,p) spatial geometry
+on arbitrary original X,
+while non-Hodge rational
+classes cannot have
+a representative as a
+smooth pure (p,p) form.
+The further step to
+INTEGRAL algebraic
+codimension-p cycles
+is a geometric
+QUANTIZATION and
+source-complexification
+operation, not simply
+a positivity inequality.
+The exact period-closure
+and certified
+lattice-threshold
+theorems above provide
+two rigorous ways to
+recognize when an
+actual GST source
+construction performs
+that additional
+operation.
+\end{remark}
+
+\section{New alpha-dependent amplified spatial geometry on original X}
+Let L be an actual ample
+line bundle on original X,
+$h=c_1(L)$, and fix the
+prescribed rational class
+alpha. Rational topological
+K-theory provides m>0,
+r≥p and an honest
+complex topological bundle
+E_alpha of rank r with
+\[
+ \boxed{
+ \operatorname{ch}(E_\alpha)
+     =r+m\alpha
+ \ \text{with all other
+ positive Chern-character
+ components zero.}
+ }                                                     \tag{9}
+\]
+Consequently its rational
+Chern classes obey
+$c_j(E_\alpha)=0$ for 1≤j<p
+and
+$c_p(E_\alpha)=
+  (-1)^{p-1}(p-1)!m\alpha$.
+
+\begin{theorem}[EXACT two-term high-positive-twist Chern law for all X, alpha and twist k]
+For EVERY integer k≥0,
+let $E_{\alpha,k}=
+E_\alpha\otimes L^{\otimes k}$,
+and let
+$B_k=(L^{\otimes k})^{\oplus r}$
+be the honest algebraic
+reference bundle.
+Their true degree-p
+Chern classes satisfy the
+EXACT rational Betti identity
+\[
+ \boxed{
+ c_p(E_{\alpha,k})
+  ={r\choose p}k^p h^p
+      +(-1)^{p-1}(p-1)!m\alpha,
+ \qquad
+ c_p(B_k)={r\choose p}k^p h^p .
+ }                                                     \tag{10}
+\]
+Thus their difference is
+TARGET alpha and is
+independent of k:
+\[
+ \boxed{
+  {(-1)^{p-1}\over m(p-1)!}
+      \big(c_p(E_{\alpha,k})-
+               c_p(B_k)\big)=\alpha
+       \quad \forall k\ge0.
+ }                                                     \tag{11}
+\]
+Actual generic smooth
+rank-degeneracy loci of
+the two genuine original-X
+bundles provide signed
+REAL integral geometric
+cycles with exactly this
+original-X class for EVERY k.
+No original-X Chow preimage
+of alpha enters (9)--(11).
+\end{theorem}
+\begin{proof}
+By the splitting principle
+write x_i for the roots of E.
+The roots of E tensor L^k
+are x_i+kh. Thus
+\[
+ c_p(E\otimes L^k)
+  =\sum_{j=0}^p
+    {r-j\choose p-j}
+     (kh)^{p-j}c_j(E).
+                                                               \tag{12}
+\]
+Since c_0(E)=1 and
+all c_j(E)=0 for
+1≤j<p rationally,
+only j=0 and j=p
+survive, giving (10).
+The reference bundle
+has all r roots kh,
+giving binom(r,p)(kh)^p.
+Subtract and normalize
+to obtain (11).
+Topological Thom--Porteous
+gives smooth REAL
+degeneracy representatives.
+\end{proof}
+
+\section{Exact nonabelian integrability invariance under arbitrary ample twist}
+An arbitrarily large ample twist can
+change geometry and make actual
+SMOOTH determinant sections
+approximately complex,
+but cannot remove
+the original integrability
+obstruction of the bundle.
+
+\begin{theorem}[ALL-X holomorphic-integrability iff under every ample twist]
+Let E be ANY honest smooth
+complex topological bundle
+on projective X and L an
+actual holomorphic ample
+line bundle. For EVERY
+integer k, positive,
+zero or negative,
+\[
+ \boxed{
+ E\text{ admits an integrable
+ holomorphic bundle structure}
+ \quad\Longleftrightarrow\quad
+ E\otimes L^k\text{ admits one}.
+ }                                                     \tag{15}
+\]
+For a specified smooth
+(0,1)-connection D_E,
+the natural tensor
+(0,1)-connection satisfies
+the IDENTICAL curvature law
+\[
+ \boxed{
+ F^{0,2}_{D_E\otimes
+             \bar\partial_{L^k}}
+       =F^{0,2}_{D_E}
+                   \otimes\mathrm{id}_{L^k}.
+ }                                                     \tag{16}
+\]
+Thus mere large k does not
+force an originally
+nonintegrable fixed
+D_E to become integrable,
+even though its
+positive ambient Chern
+term in equation (10)
+grows like k^p.
+\end{theorem}
+\begin{proof}
+A genuine integrable
+holomorphic structure
+on E tensors with
+the given holomorphic
+structure on L^k.
+Conversely an integrable
+holomorphic structure
+on the SMOOTH tensor
+bundle E tensor L^k
+tensors with the actual
+holomorphic line L^{-k},
+producing an integrable
+holomorphic structure
+on the original smooth E.
+The (0,2)-curvature
+of a tensor product
+(0,1) connection is
+the sum of the two
+(0,2) curvatures,
+and the holomorphic
+line L^k has curvature
+component F^{0,2}=0.
+Equation (16) follows.
+\end{proof}
+
+\begin{corollary}[Actual original-X Chow return if this specific high twist algebraizes]
+For the prescribed
+E_alpha constructed
+in (9), if ANY one
+E_alpha tensor L^k
+has an honest
+integrable holomorphic
+bundle structure,
+then GAGA algebraizes
+E_alpha itself, and
+the exact original-X
+cycle
+\[
+ \boxed{
+ Z_\alpha=
+ {(-1)^{p-1}\over
+          m(p-1)!}\,
+          c_p^{CH}(E_\alpha)
+ }                                                     \tag{17}
+\]
+has canonical Betti class
+exactly alpha.
+The statement is a
+correct source RETURN
+from genuine integrable
+geometry; the theorem
+does NOT infer the
+required integrable
+structure from the
+Hodge condition.
+\end{corollary}
+
+\section{The needed ANGLE precision is much stronger than qualitative tangency}
+Let D_k be any family
+of integral real
+codimension-p geometric
+cycles on original X,
+such as generic
+determinantal loci from
+the preceding theorem.
+Let theta_k be a
+measurable maximum
+Kähler-angle distance
+of its positively
+oriented tangent
+planes from the
+complex calibrated
+Grassmannian, with
+theta_k small.
+The pointwise
+Wirtinger deficit
+satisfies
+\[
+ 0\le 1-\varphi(T_xD_k)
+        \le C\,\theta_k^2
+ \qquad\text{for
+ sufficiently small angles}.
+\]
+Thus
+\[
+ \boxed{
+ \Delta_\omega(D_k)
+ \le C\,\theta_k^2\,{\bf M}(D_k).
+ }                                                     \tag{13}
+\]
+If a geometric
+construction supplies
+M(D_k)=O(k^p), then
+theta_k=O(k^{-1/2})
+only yields
+$\Delta(D_k)=O(k^{p-1})$.
+For p≥2 this does NOT
+force Delta(D_k)→0;
+for p=1 it gives at
+best a bounded defect.
+To guarantee
+vanishing defect
+by this estimate
+alone one needs
+\[
+ \boxed{
+ \theta_k=o(k^{-p/2})
+   \text{ together with }
+ {\bf M}(D_k)=O(k^p).
+ }                                                     \tag{14}
+\]
+This is a deterministic
+GEOMETRIC ERROR-BUDGET
+calculation, not a claim
+that a particular
+approximately holomorphic
+construction attains
+the quoted scalings.
+It identifies why
+increasing the positive
+twist/complex dimension
+cannot be used as a
+proof merely from
+angles tending to zero:
+an increasing
+geometric mass can
+outweigh the
+pointwise improvement.
+To recover the fixed
+original-X signed alpha
+in (11) through
+two calibrated cycles,
+one must construct
+a genuinely stronger
+joint bound than
+the general estimate.
+\end{document}

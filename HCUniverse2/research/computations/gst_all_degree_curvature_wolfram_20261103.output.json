@@ -1,0 +1,621 @@
+{
+  "input_sha256": "53c3d315310a3502086fc663fd516b441392d30c9e9d191f50c6ca32fbc859c9",
+  "started_at": "2026-11-03T14:39:11.550Z",
+  "remote_runtime_seconds": null,
+  "remote_exit_status": null,
+  "result": {
+    "all_passed": true,
+    "assertions": 487,
+    "failures": [],
+    "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "tables": [
+      {
+        "name": "P1-flat",
+        "p": 1,
+        "formal_dimension": 4,
+        "base_betti": [
+          1,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          2,
+          2,
+          2,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          2,
+          2,
+          2,
+          1
+        ],
+        "total_betti": 8,
+        "torsion_count": 0,
+        "tensor_special": 8,
+        "tor_special": 0
+      },
+      {
+        "name": "P1-point",
+        "p": 1,
+        "formal_dimension": 4,
+        "base_betti": [
+          1,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "total_betti": 4,
+        "torsion_count": 2,
+        "tensor_special": 6,
+        "tor_special": 2
+      },
+      {
+        "name": "P2-h",
+        "p": 1,
+        "formal_dimension": 6,
+        "base_betti": [
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "total_betti": 4,
+        "torsion_count": 4,
+        "tensor_special": 8,
+        "tor_special": 4
+      },
+      {
+        "name": "P2-point",
+        "p": 2,
+        "formal_dimension": 10,
+        "base_betti": [
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          2,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          2,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        "total_betti": 8,
+        "torsion_count": 2,
+        "tensor_special": 10,
+        "tor_special": 2
+      },
+      {
+        "name": "P2xP2-square",
+        "p": 2,
+        "formal_dimension": 14,
+        "base_betti": [
+          1,
+          0,
+          2,
+          0,
+          3,
+          0,
+          2,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          0,
+          2,
+          1,
+          2,
+          3,
+          1,
+          4,
+          1,
+          3,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          0,
+          2,
+          1,
+          2,
+          3,
+          1,
+          4,
+          1,
+          3,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        "total_betti": 24,
+        "torsion_count": 6,
+        "tensor_special": 30,
+        "tor_special": 6
+      },
+      {
+        "name": "P2xP2-mixed",
+        "p": 2,
+        "formal_dimension": 14,
+        "base_betti": [
+          1,
+          0,
+          2,
+          0,
+          3,
+          0,
+          2,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          0,
+          2,
+          1,
+          2,
+          2,
+          0,
+          4,
+          0,
+          2,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          0,
+          2,
+          1,
+          2,
+          2,
+          0,
+          4,
+          0,
+          2,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        "total_betti": 20,
+        "torsion_count": 8,
+        "tensor_special": 28,
+        "tor_special": 8
+      },
+      {
+        "name": "P2xP2-rational",
+        "p": 2,
+        "formal_dimension": 14,
+        "base_betti": [
+          1,
+          0,
+          2,
+          0,
+          3,
+          0,
+          2,
+          0,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          0,
+          2,
+          1,
+          2,
+          2,
+          0,
+          4,
+          0,
+          2,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          0,
+          2,
+          1,
+          2,
+          2,
+          0,
+          4,
+          0,
+          2,
+          2,
+          1,
+          2,
+          0,
+          1
+        ],
+        "total_betti": 20,
+        "torsion_count": 8,
+        "tensor_special": 28,
+        "tor_special": 8
+      },
+      {
+        "name": "E-flat",
+        "p": 1,
+        "formal_dimension": 4,
+        "base_betti": [
+          1,
+          2,
+          1
+        ],
+        "cup_ranks": [
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          4,
+          6,
+          4,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          4,
+          6,
+          4,
+          1
+        ],
+        "total_betti": 16,
+        "torsion_count": 0,
+        "tensor_special": 16,
+        "tor_special": 0
+      },
+      {
+        "name": "E-point",
+        "p": 1,
+        "formal_dimension": 4,
+        "base_betti": [
+          1,
+          2,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          3,
+          4,
+          3,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          3,
+          4,
+          3,
+          1
+        ],
+        "total_betti": 12,
+        "torsion_count": 2,
+        "tensor_special": 14,
+        "tor_special": 2
+      },
+      {
+        "name": "P1xE-mixed",
+        "p": 1,
+        "formal_dimension": 6,
+        "base_betti": [
+          1,
+          2,
+          2,
+          2,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          3,
+          3,
+          2,
+          3,
+          3,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          3,
+          3,
+          2,
+          3,
+          3,
+          1
+        ],
+        "total_betti": 16,
+        "torsion_count": 8,
+        "tensor_special": 24,
+        "tor_special": 8
+      },
+      {
+        "name": "P1xE-top",
+        "p": 2,
+        "formal_dimension": 10,
+        "base_betti": [
+          1,
+          2,
+          2,
+          2,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          2,
+          2,
+          3,
+          4,
+          4,
+          4,
+          3,
+          2,
+          2,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          2,
+          2,
+          3,
+          4,
+          4,
+          4,
+          3,
+          2,
+          2,
+          1
+        ],
+        "total_betti": 28,
+        "torsion_count": 2,
+        "tensor_special": 30,
+        "tor_special": 2
+      },
+      {
+        "name": "ExE-symplectic",
+        "p": 1,
+        "formal_dimension": 6,
+        "base_betti": [
+          1,
+          4,
+          6,
+          4,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          4,
+          1,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          5,
+          9,
+          10,
+          9,
+          5,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          5,
+          9,
+          10,
+          9,
+          5,
+          1
+        ],
+        "total_betti": 40,
+        "torsion_count": 12,
+        "tensor_special": 52,
+        "tor_special": 12
+      },
+      {
+        "name": "ExE-top",
+        "p": 2,
+        "formal_dimension": 10,
+        "base_betti": [
+          1,
+          4,
+          6,
+          4,
+          1
+        ],
+        "cup_ranks": [
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "betti": [
+          1,
+          4,
+          6,
+          5,
+          8,
+          12,
+          8,
+          5,
+          6,
+          4,
+          1
+        ],
+        "pairing_ranks": [
+          1,
+          4,
+          6,
+          5,
+          8,
+          12,
+          8,
+          5,
+          6,
+          4,
+          1
+        ],
+        "total_betti": 60,
+        "torsion_count": 2,
+        "tensor_special": 62,
+        "tor_special": 2
+      }
+    ]
+  },
+  "raw_response": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= \"{\\\"all_passed\\\":true,\\\"assertions\\\":487,\\\"failures\\\":[],\\\"kernel_version\\\":\\\"15.0.1 for Linux x86 (64-bit) (July 2, 2026)\\\",\\\"tables\\\":[{\\\"name\\\":\\\"P1-flat\\\",\\\"p\\\":1,\\\"formal_dimension\\\":4,\\\"base_betti\\\":[1,0,1],\\\"cup_ranks\\\":[0,0,0],\\\"betti\\\":[1,2,2,2,1],\\\"pairing_ranks\\\":[1,2,2,2,1],\\\"total_betti\\\":8,\\\"torsion_count\\\":0,\\\"tensor_special\\\":8,\\\"tor_special\\\":0},{\\\"name\\\":\\\"P1-point\\\",\\\"p\\\":1,\\\"formal_dimension\\\":4,\\\"base_betti\\\":[1,0,1],\\\"cup_ranks\\\":[1,0,0],\\\"betti\\\":[1,1,0,1,1],\\\"pairing_ranks\\\":[1,1,0,1,1],\\\"total_betti\\\":4,\\\"torsion_count\\\":2,\\\"tensor_special\\\":6,\\\"tor_special\\\":2},{\\\"name\\\":\\\"P2-h\\\",\\\"p\\\":1,\\\"formal_dimension\\\":6,\\\"base_betti\\\":[1,0,1,0,1],\\\"cup_ranks\\\":[1,0,1,0,0],\\\"betti\\\":[1,1,0,0,0,1,1],\\\"pairing_ranks\\\":[1,1,0,0,0,1,1],\\\"total_betti\\\":4,\\\"torsion_count\\\":4,\\\"tensor_special\\\":8,\\\"tor_special\\\":4},{\\\"name\\\":\\\"P2-point\\\",\\\"p\\\":2,\\\"formal_dimension\\\":10,\\\"base_betti\\\":[1,0,1,0,1],\\\"cup_ranks\\\":[1,0,0,0,0],\\\"betti\\\":[1,0,1,1,0,2,0,1,1,0,1],\\\"pairing_ranks\\\":[1,0,1,1,0,2,0,1,1,0,1],\\\"total_betti\\\":8,\\\"torsion_count\\\":2,\\\"tensor_special\\\":10,\\\"tor_special\\\":2},{\\\"name\\\":\\\"P2xP2-square\\\",\\\"p\\\":2,\\\"formal_dimension\\\":14,\\\"base_betti\\\":[1,0,2,0,3,0,2,0,1],\\\"cup_ranks\\\":[1,0,1,0,1,0,0,0,0],\\\"betti\\\":[1,0,2,1,2,3,1,4,1,3,2,1,2,0,1],\\\"pairing_ranks\\\":[1,0,2,1,2,3,1,4,1,3,2,1,2,0,1],\\\"total_betti\\\":24,\\\"torsion_count\\\":6,\\\"tensor_special\\\":30,\\\"tor_special\\\":6},{\\\"name\\\":\\\"P2xP2-mixed\\\",\\\"p\\\":2,\\\"formal_dimension\\\":14,\\\"base_betti\\\":[1,0,2,0,3,0,2,0,1],\\\"cup_ranks\\\":[1,0,2,0,1,0,0,0,0],\\\"betti\\\":[1,0,2,1,2,2,0,4,0,2,2,1,2,0,1],\\\"pairing_ranks\\\":[1,0,2,1,2,2,0,4,0,2,2,1,2,0,1],\\\"total_betti\\\":20,\\\"torsion_count\\\":8,\\\"tensor_special\\\":28,\\\"tor_special\\\":8},{\\\"name\\\":\\\"P2xP2-rational\\\",\\\"p\\\":2,\\\"formal_dimension\\\":14,\\\"base_betti\\\":[1,0,2,0,3,0,2,0,1],\\\"cup_ranks\\\":[1,0,2,0,1,0,0,0,0],\\\"betti\\\":[1,0,2,1,2,2,0,4,0,2,2,1,2,0,1],\\\"pairing_ranks\\\":[1,0,2,1,2,2,0,4,0,2,2,1,2,0,1],\\\"total_betti\\\":20,\\\"torsion_count\\\":8,\\\"tensor_special\\\":28,\\\"tor_special\\\":8},{\\\"name\\\":\\\"E-flat\\\",\\\"p\\\":1,\\\"formal_dimension\\\":4,\\\"base_betti\\\":[1,2,1],\\\"cup_ranks\\\":[0,0,0],\\\"betti\\\":[1,4,6,4,1],\\\"pairing_ranks\\\":[1,4,6,4,1],\\\"total_betti\\\":16,\\\"torsion_count\\\":0,\\\"tensor_special\\\":16,\\\"tor_special\\\":0},{\\\"name\\\":\\\"E-point\\\",\\\"p\\\":1,\\\"formal_dimension\\\":4,\\\"base_betti\\\":[1,2,1],\\\"cup_ranks\\\":[1,0,0],\\\"betti\\\":[1,3,4,3,1],\\\"pairing_ranks\\\":[1,3,4,3,1],\\\"total_betti\\\":12,\\\"torsion_count\\\":2,\\\"tensor_special\\\":14,\\\"tor_special\\\":2},{\\\"name\\\":\\\"P1xE-mixed\\\",\\\"p\\\":1,\\\"formal_dimension\\\":6,\\\"base_betti\\\":[1,2,2,2,1],\\\"cup_ranks\\\":[1,2,1,0,0],\\\"betti\\\":[1,3,3,2,3,3,1],\\\"pairing_ranks\\\":[1,3,3,2,3,3,1],\\\"total_betti\\\":16,\\\"torsion_count\\\":8,\\\"tensor_special\\\":24,\\\"tor_special\\\":8},{\\\"name\\\":\\\"P1xE-top\\\",\\\"p\\\":2,\\\"formal_dimension\\\":10,\\\"base_betti\\\":[1,2,2,2,1],\\\"cup_ranks\\\":[1,0,0,0,0],\\\"betti\\\":[1,2,2,3,4,4,4,3,2,2,1],\\\"pairing_ranks\\\":[1,2,2,3,4,4,4,3,2,2,1],\\\"total_betti\\\":28,\\\"torsion_count\\\":2,\\\"tensor_special\\\":30,\\\"tor_special\\\":2},{\\\"name\\\":\\\"ExE-symplectic\\\",\\\"p\\\":1,\\\"formal_dimension\\\":6,\\\"base_betti\\\":[1,4,6,4,1],\\\"cup_ranks\\\":[1,4,1,0,0],\\\"betti\\\":[1,5,9,10,9,5,1],\\\"pairing_ranks\\\":[1,5,9,10,9,5,1],\\\"total_betti\\\":40,\\\"torsion_count\\\":12,\\\"tensor_special\\\":52,\\\"tor_special\\\":12},{\\\"name\\\":\\\"ExE-top\\\",\\\"p\\\":2,\\\"formal_dimension\\\":10,\\\"base_betti\\\":[1,4,6,4,1],\\\"cup_ranks\\\":[1,0,0,0,0],\\\"betti\\\":[1,4,6,5,8,12,8,5,6,4,1],\\\"pairing_ranks\\\":[1,4,6,5,8,12,8,5,6,4,1],\\\"total_betti\\\":60,\\\"torsion_count\\\":2,\\\"tensor_special\\\":62,\\\"tor_special\\\":2}]}\""
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  }
+}

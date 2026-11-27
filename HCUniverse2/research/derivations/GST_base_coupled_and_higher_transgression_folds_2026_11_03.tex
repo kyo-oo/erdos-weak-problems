@@ -1,0 +1,404 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\im}{\operatorname{im}}
+\title{Extending GST folds: coupling to the original base and higher transgression}
+\author{Mathematics before Lean; author self-review}
+\date{3 November 2026}
+\begin{document}\maketitle
+
+\section{The extension, quantifiers, and changes of category}
+The original input is an arbitrary smooth projective complex variety $X$,
+$1\leq p\leq\dim X$, and a prescribed rational Hodge class
+$\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X,\C)$. The final source target remains
+an actual rational cycle on this original $X$ with canonical Betti class
+$\alpha$. The starting checkpoint is
+\texttt{b2de3bdecf4467211702f5d5118577a014170333}.
+Work componentwise with connected $X$. For a disconnected smooth projective
+input the constructions and ranks are taken on each connected component,
+and the resulting cycles, when constructed, are summed on the original $X$.
+
+We extend the previous independent-factor construction in three directions.
+First, fold the spaces \emph{over $X$ itself}, using genuine holomorphic
+line bundles. All higher cohomology then sees the cup algebra of $X$.
+Second, allow non-square quotient folds and determine the largest dimension
+that can survive with zero curvature. Third, make the curvature the
+prescribed $\alpha$ in \emph{every codimension}, by an actual rational
+topological homotopy fiber. The third construction is a rational space with
+an explicitly specified filtered model, not a claim of a compact complex or
+algebraic realization. This distinction is essential to its precise theorem.
+No universal Hodge algebraicity premise is used in these constructions.
+
+\section{Actual compact complex folds coupled to every original base}
+Fix $q=e^{-2\pi}$ and $E=\C^*/q^{\mathbb Z}$, an elliptic curve with square
+period lattice. Given actual holomorphic line bundles $L_1,\ldots,L_r$ on
+$X$, define
+\[
+ P(\mathbf L)=\prod_X (L_a^\times/q^{\mathbb Z})\longrightarrow X.       \tag{1}
+\]
+The fiberwise action is free and properly discontinuous; local line-bundle
+trivializations identify (1) with a holomorphic principal $E^r$ bundle.
+It is compact, has complex dimension $n+r$, and is generally not a product.
+Choose Chern metrics whose curvature forms $c_a$ are harmonic representatives
+of $c_1(L_a)$. The $\partial\bar\partial$ lemma permits this choice.
+The invariant vertical complex forms $\beta_a=u_a+i v_a$ can be normalized
+so that $d u_a=c_a$ and $d v_a=0$, with $\beta_a$ of type $(1,0)$.
+The sign and common nonzero real scale in identifying a unitary connection
+with this coframe do not change the maps below; fix them by $d u_a=c_a$.
+Write
+\[
+ C:\Q^r\longrightarrow H^2(X,\Q),\quad e_a\longmapsto c_1(L_a),
+ \qquad\rho=\rk C.                                                   \tag{2}
+\]
+
+\begin{theorem}[Base-coupled whole-Hodge decision law]
+For every $X$ and every finite list $\mathbf L$, the actual filtration obeys
+\[
+\begin{split}
+ b_1(P)&=b_1(X)+2r-\rho,\\
+ \dim F^1H^1(P,\C)&=h^{1,0}(X)+r-\rho,\\
+ F^1H^1(P,\C)\cap\overline{F^1H^1(P,\C)}&=0,\\
+ \dim H^1(P,\C)/(F^1+\overline{F^1})&=\rho.                         \tag{3}
+\end{split}
+The canonical de Rham filtration is pure of the correct weight in every
+degree if and only if $C=0$. When $C=0$, $P$ is compact K\"ahler.
+\end{theorem}
+\begin{proof}
+Average over the compact fiber torus. Translation is isotopic to identity,
+so this computes de Rham cohomology and preserves type. The invariant complex
+is $\Omega^*(X)[u_a,v_a]$ with exterior odd generators and the displayed
+differentials. The low-degree Serre sequence, or its degree-one complex,
+gives $H^1(X)$ and the vertical coefficients $(s,t)$ with $Cs=0$.
+Closed holomorphic vertical coefficients are constant, since $X$ is compact.
+Their equation is $Cs=0$: necessity follows from curvature classes;
+sufficiency uses the harmonic representatives, whose zero class means their
+linear combination is the zero form. Thus the holomorphic contribution is
+$\ker C_\C$, in addition to base holomorphic one-forms. The pure parts are
+$(s-it)/2,(s+it)/2$ exactly as in the previous GST split law. They are both
+closed exactly when $Ct=0$. This proves (3) and zero intersection, including
+the base summand.
+
+If $C\ne0$, degree one already fails opposedness. If $C=0$, each line bundle
+has zero real Chern class and admits a unitary flat Chern connection. All
+$\beta_a$ are then closed and
+$\pi^*\omega_X+(i/2)\sum_a\beta_a\wedge\bar\beta_a$ is a closed positive
+$(1,1)$ form. Hence $P$ is compact K\"ahler and has its actual pure Hodge
+structure in every degree. Torsion integral Chern classes cause no exception.
+\end{proof}
+Purity here means the canonical Hodge filtration of the resulting manifold,
+not equality of its Betti polynomial with that of $X$ and not projectivity.
+The line bundles retain holomorphic $\operatorname{Pic}^0$ data even when (2)
+vanishes. It is therefore incorrect to identify every zero-curvature endpoint
+with $X\times E^r$.
+
+\section{Full coupled cohomology and its non-product ranks}
+The complete real cup algebra is computed by
+\[
+ B_C=\left(H^*(X,\R)\otimes\Lambda(u_1,v_1,\ldots,u_r,v_r),d\right),
+ \quad |u_a|=|v_a|=1,\quad du_a=c_a,\quad dv_a=0.                       \tag{4}
+\]
+This is a model statement, not just an equality of first Betti numbers.
+For completeness the relative formality argument is as follows. Put
+$d^c=i(\bar\partial-\partial)$. The $dd^c$ lemma makes both maps in
+$\Omega^*(X)\leftarrow\ker d^c\to H_{d^c}(X)$ quasi-isomorphisms of real
+DGAs, where the right-hand differential is zero: if $d^c a=0$, then
+$da\in\im d\cap\ker d^c=\im dd^c\subset\im d^c$.
+The harmonic $(1,1)$ forms lie in $\ker d^c$, and map to exactly $c_a$.
+Adjoin the same finitely many exterior generators to both arrows and filter
+by their number. On the first comparison page the original quasi-isomorphisms
+remain isomorphisms. The finite comparison proves (4). Averaging on the
+principal torus and its connection identifies the left model with all forms
+on $P$, as above. This argument establishes real cup cohomology; it does not
+claim a complete rational period-lattice or Dolbeault identification.
+
+For a single line, let $b_j=\dim H^j(X,\R)$ and
+$r_j=\rk(c\cup-:H^j(X,\R)\to H^{j+2}(X,\R))$, taking all out-of-range
+terms as zero. The two-row complex gives
+\[
+0\to\operatorname{coker}\mu_{k-2}\to
+H^k(H^*(X)\otimes\Lambda u)\to\ker\mu_{k-1}\to0.
+\]
+The remaining closed generator $v$ gives the complete formula
+\[
+ b_k(P(L))=b_k+2b_{k-1}+b_{k-2}-r_{k-1}-2r_{k-2}-r_{k-3}.             \tag{5}
+\]
+Thus a curvature rank by itself no longer determines the higher spectrum.
+On $X=\mathbb P^1\times\mathbb P^1$, the two curvatures $h_1$ and
+$h_1+h_2$ both give $(1,1,1,2,1,1,1)$; on $\mathbb P^2\times\mathbb P^1$
+the single classes $h_1$ and $h_2$ have different multiplication-rank lists,
+and (5) distinguishes their full total-space spectra. These are diagnostics
+of the uniform formula (4), not a restriction of its original-$X$ scope.
+
+\section{Non-square dimensional folds and the universal restoring quotient}
+An integer matrix $M\in M_{s\times r}(\mathbb Z)$ defines actual line bundles
+$N_b=\bigotimes_a L_a^{M_{ba}}$. If $M:\mathbb Z^r\to\mathbb Z^s$ is
+surjective, its fiber map $E^r\to E^s$ has connected kernel and produces an
+actual holomorphic quotient
+\[
+ P(\mathbf L)\longrightarrow P(\mathbf N),\qquad n+r\longrightarrow n+s.
+                                                                         \tag{6}
+\]
+The target curvature is $CM^t$, and (3) applies to it. This includes fusion:
+$P(\mathbf L)\star P(\mathbf T)=P(\mathbf L\otimes\mathbf T)$, where the
+fiber product has dimension $n+2r$ and the antidiagonal quotient $n+r$.
+Chronological histories tensor the actual line bundles, not only their
+Chern classes. Hence zero curvature restores purity, while complete
+holomorphic restoration to a trivial principal bundle requires the resulting
+\emph{elliptic torsor classes} to vanish. Trivial tensor product lines are
+sufficient, but not necessary: the line-to-torsor functor has a kernel,
+which we compute below. Triviality always means over $X$, with the specified
+principal action; it is not unmarked biholomorphism of the total manifolds.
+
+\begin{theorem}[Largest Hodge-restoring quotient in this fold category]
+Let
+$R=\ker(\mathbb Z^r\to H^2(X,\mathbb Z)/\mathrm{torsion})$.
+It is saturated of rank $r-\rho$. Choose an integral basis for $R$ as the
+rows of $M_R$. Then (6) with $M_R$ is a connected-fiber quotient of dimension
+$n+r-\rho$, and has its full canonical pure Hodge structure. Every
+zero-curvature integer-matrix quotient factors through it. In particular
+the minimum number of emergent complex dimensions which must be collapsed
+to restore purity in this category is exactly $\rho$.
+\end{theorem}
+\begin{proof}
+The target of the integral Chern map is torsion-free, so its kernel is
+saturated. Smith normal form, or extending a primitive sublattice basis,
+extends the rows of $M_R$ to a unimodular matrix. Thus $M_R$ is surjective
+on integer lattices and its torus kernel is connected. Its curvature is
+zero, so the first theorem applies. Every row of any zero-curvature $M$
+lies in $R$ and has a unique integral expansion in its basis. Thus
+$M=NM_R$ and the actual tensor-line construction factors accordingly.
+A surjective matrix has independent rows, so $s\leq\rk R=r-\rho$.
+Equality is achieved by $M_R$. The case $r=\rho$ has target $X$ and no
+vertical handles. If $\rho=0$, the identity fold is maximal.
+\end{proof}
+The category here consists of these integer-matrix principal-$E$ quotients.
+We do not assert an optimality theorem among all possible complex manifolds
+or all possible GST folds. This restriction defines the operation, not $X$.
+
+\section{A second restoration kernel invisible to curvature}
+Let $\mathcal E_X$ be the sheaf of holomorphic maps to $E$.
+The quotient defining $E$ gives the exact sequence of analytic sheaves
+\[
+0\longrightarrow\mathbb Z\xrightarrow{n\mapsto q^n}
+ \mathcal O_X^*\longrightarrow\mathcal E_X\longrightarrow0.           \tag{11}
+\]
+Local holomorphic lifting proves surjectivity, and the discrete kernel is
+exactly $q^{\mathbb Z}$. The class $\theta(L)\in H^1(X,\mathcal E_X)$
+is represented by the images of the line-bundle transition functions.
+Consequently
+\[
+ P(L)\text{ is a trivial principal }E\text{ bundle}
+ \quad\Longleftrightarrow\quad
+ L\in\im\bigl(H^1(X,\mathbb Z)\xrightarrow{q^{(-)}}\operatorname{Pic}(X)\bigr).
+                                                                         \tag{12}
+\]
+This proves precisely what holomorphic memory survives a curvature fold.
+For a list define the genuine integral relation subgroup
+\[
+ R_\theta=\{m\in\mathbb Z^r:\sum_a m_a\theta(L_a)=0\}.
+\]
+It need not be saturated, and is contained in $R$ above. Indeed a line in
+the image in (12) has transition functions in the contractible positive-real
+group, and so has zero integral topological Chern class. An integer-matrix
+quotient is a trivial principal bundle exactly when all its rows belong to
+$R_\theta$. Allowing possibly disconnected fiber kernels, the largest
+retained handle count for \emph{trivial principal} endpoints is
+$\rk R_\theta$, by choosing any integral basis. Requiring connected kernels
+is an extra primitive-lattice condition; do not replace $R_\theta$ by its
+saturation. In contrast $R$ is saturated and always gives the maximal
+\emph{Hodge-restoring} connected quotient proved above.
+
+\begin{theorem}[Hodge-preserving folds with persistent torsor memory]
+For every smooth projective $X$ with $h^{1,0}(X)>0$, there is a line
+$L\in\operatorname{Pic}^0(X)$ such that $P(L)$ has its full canonical pure
+Hodge structure but no quotient induced by a nonzero integer $[m]:E\to E$
+is a trivial principal bundle over $X$.
+\end{theorem}
+\begin{proof}
+$H^1(X,\mathbb Z)$ is finitely generated and hence its image in (12) is
+countable. Each multiplication-by-$m\ne0$ map on the positive-dimensional
+complex torus $\operatorname{Pic}^0(X)$ has finite fibers. The union of the
+preimages of that countable image, over nonzero integers $m$, is countable,
+whereas $\operatorname{Pic}^0(X)$ is uncountable. Choose $L$ outside it.
+Then $\theta(L^m)\ne0$ for every $m\ne0$ by (12). Its real Chern class
+is zero, so the explicit K\"ahler construction proves whole Hodge purity.
+\end{proof}
+This theorem concerns actual spaces over every such $X$, not a speculative
+counterexample to rational Hodge algebraicity. Its role is to preserve the
+correct holomorphic invariant in the extended folding method.
+
+\section{Target-sensitive curvature in every codimension}
+For $d=2p-1$, choose a classifying map
+$f_\alpha:X\to K(\Q,2p)$ representing the given rational class, and take
+its actual topological homotopy fiber $F_\alpha$. Adjoin an independent
+$K(\Q,d)$ factor. One can use simplicial abelian-group models for these
+Eilenberg--Mac Lane spaces; pullback of the contractible path object gives
+the principal $K(\Q,d)$ torsor representing $\alpha$. This is an actual
+space up to homotopy, determined by the prescribed input, even when no
+algebraic cycle for $\alpha$ is known. It need not have finite geometric
+dimension or be a compact manifold.
+
+Its real cohomology has the model
+\[
+ A_\alpha=H^*(X,\R)\otimes\Lambda(u,v),\quad |u|=|v|=d,
+ \quad du=\alpha,\quad dv=0.                                          \tag{7}
+\]
+The fiber has exterior cohomology on an odd generator; its transgression is
+the classifying class. The relative $dd^c$ formality argument above applies
+to the harmonic $(p,p)$ representative and proves (7), with the same finite
+fiber filtration. Equivalently, for the single torsor the Serre sequence has
+only two nonzero rows and its sole possible differential is cup with
+$\alpha$. The latter observation proves the additive dimensions without a
+multiplicative extension claim.
+
+For an arbitrary finite list $\boldsymbol\alpha$ of degree-$2p$ rational
+Hodge classes, use the product of their torsors over $X$ and one flat odd
+factor for each. Then
+\[
+ A_{\boldsymbol\alpha}=H^*(X,\R)\otimes\Lambda(u_a,v_a),\quad
+ |u_a|=|v_a|=d,\quad du_a=\alpha_a,\quad dv_a=0.                       \tag{8}
+\]
+This makes the prescribed higher Hodge classes themselves the curvature,
+whereas line bundles only permit degree-two curvature.
+
+Give (8) the explicitly defined conjugate bigrading with
+$\beta_a=u_a+i v_a$ of type $(p,p-1)$ and $\bar\beta_a$ of type $(p-1,p)$,
+and the usual Hodge bigrading on the base. The differential is the sum of
+operators of types $(1,0)$ and $(0,1)$, because $d\beta_a=d\bar\beta_a=
+\alpha_a$ has type $(p,p)$. This defines an actual filtered DGA with real
+conjugation. This filtration is \emph{specified by the model}; no canonical
+complex-geometric filtration on the topological space is asserted.
+
+\begin{theorem}[All-codimension first affected degree]
+Let $C_p:\Q^r\to H^{2p}(X,\Q)$ send $e_a$ to $\alpha_a$, and set
+$\rho_p=\rk C_p$. In degree $d=2p-1$, the filtered cohomology of (8) has
+\[
+ H^d(A_{\boldsymbol\alpha})/(F^p+\overline{F^p})
+       \simeq \im (C_p\otimes\C),\qquad \dim=\rho_p.                   \tag{9}
+\]
+Its full model Hodge structure is pure of the cohomological weight in every
+degree exactly when $C_p=0$. Quotient-fold relations and their maximal
+retained handle count are $\ker C_p$ and $r-\rho_p$.
+\end{theorem}
+\begin{proof}
+Below degree $d$, no new generators occur. At degree $d$ the only new
+terms are $u_a,v_a$ times base degree zero; boundaries are base boundaries,
+which vanish in this model. The closed vertical pairs are $(s,t)$ with
+$C_ps=0$. Since the base is pure of odd weight $d$, it is the direct sum
+of its $F^p$ and conjugate. The vertical pure parts are the two explicit
+halves $(s-it)/2,(s+it)/2$, closed precisely when $C_pt=0$.
+The quotient is therefore exactly $\im C_p$, proving (9), including
+zero or dependent input classes. Nonzero rank obstructs purity in degree
+$d$. If all classes vanish, the differential is zero and the exterior
+algebra on the displayed conjugate pure generators, tensored with the base,
+is pure in every degree. Linear changes of odd generators transform the
+classifying classes by the same matrix; principal abelian torsor addition
+realizes this operation up to homotopy. Kernel factorization is ordinary
+linear algebra over $\Q$. There is no claim of complex dimension $n+r$
+for these higher topological handles.
+\end{proof}
+
+\section{Full higher spectra and the actual source attempt}
+Put $r_j(\alpha)=\rk(\alpha\cup-:H^j(X)\to H^{j+2p}(X))$.
+For one higher torsor and its flat companion, the exact all-degree formula is
+\[
+ b_k(A_\alpha)=b_k+2b_{k-d}+b_{k-2d}
+ -r_{k-2p}(\alpha)-r_{k-d}(\alpha)
+ -r_{k-d-2p}(\alpha)-r_{k-2d}(\alpha).                              \tag{10}
+\]
+Indeed the cohomology without $v$ has dimension
+$b_k+b_{k-d}-r_{k-2p}-r_{k-d}$, by the same two-row kernel/cokernel
+sequence, and $v$ adds the degree-$d$ shift. Formula (5) is the $p=1$ case.
+No positive-dimensional space or missing generator is silently discarded.
+
+\subsection{Cup-coefficient folds across different emergent degrees}
+There is a further extension beyond scalar curvature matrices. Allow a
+finite list of different codimensions $p_i$, put $d_i=2p_i-1$, and use
+$du_i=\alpha_i$, $dv_i=0$. If $p_j\geq p_i$ and
+$a\in H^{2(p_j-p_i)}(X,\Q)\cap H^{p_j-p_i,p_j-p_i}$, set
+\[
+ u_j'=u_j-a u_i,\quad v_j'=v_j-a v_i,\quad
+ \alpha_j'=\alpha_j-a\alpha_i.                                       \tag{13}
+\]
+Both new generators have precisely degree $d_j$. The substitution is an
+invertible triangular change of the entire exterior algebra, with inverse
+given by adding $a$ times the unchanged $i$ generators. Since $a$ is closed
+and even, $du_j'=\alpha_j-a\alpha_i$ and $dv_j'=0$, with no omitted sign.
+Moreover $\beta_j'=\beta_j-a\beta_i$ retains type $(p_j,p_j-1)$.
+Thus (13) is a conjugation-compatible filtered DGA isomorphism. Its
+coefficient is a class on the original $X$, not a scalar or an independently
+adjoined coordinate. Whenever $\alpha_j=a\alpha_i$, an entire higher pair
+becomes closed and pure by this explicit invertible transformation.
+
+For example on $\mathbb P^3$, take $(\alpha_1,\alpha_2)=(h,h^2)$ in
+codimensions $(1,2)$. The degree-three generators become
+$u_2-hu_1,v_2-hv_1$, with zero differentials; the remaining degree-one
+curvature is $h$. This is a diagnostic of the all-$X$ graded substitution,
+not its definition. The underlying fiber equivalence can also be constructed
+directly, so no nilpotence assumption on $\pi_1(X)$ is needed. Choose pointed
+cup-product maps between Eilenberg--Mac Lane spaces, a representative
+$a(x)$, and set $f_j'=f_j-a\smile f_i$. In path-space models of the homotopy
+fibers, replace the nullhomotopy $\gamma_j$ by
+$\gamma_j-a(x)\smile\gamma_i$, retaining $\gamma_i$. Its endpoints are
+exactly $0$ and $f_j'(x)$; adding that same cup path is the inverse. For the
+independent flat odd factors use their corresponding cup maps. This gives
+an actual equivalence over $X$ with the cochain substitution (13), up to
+the chosen classifying homotopies. No claim of a dimension-reducing
+holomorphic map between compact manifolds is made for this higher operation.
+
+For this mixed-codimension model, whole model purity still holds exactly
+when all $\alpha_i$ vanish. To prove necessity, take the least $p$ with a
+nonzero curvature. All smaller-degree handles have zero differential and
+form a pure graded factor with the base. In degree $2p-1$ only the handles
+of that degree can introduce a new nonclosed term; higher ones have not
+appeared. The base-factor inclusion preserves the linear independence of
+the nonzero $\alpha_i$. The same two-part calculation gives defect equal
+to their rank. Sufficiency is the zero-differential tensor decomposition.
+This extends the decision law simultaneously across every finite list of
+codimensions, with the first affected degree computed rather than assumed.
+
+The construction starts from the actual arbitrary $(X,p,\alpha)$ and uses
+$\alpha$ in its classifying map. It provides a genuine new target-sensitive
+topological object with the exact transgression $du=\alpha$, and the
+pullback of $\alpha$ to $F_\alpha$ is zero. Opposite fusion uses torsor
+addition and returns the zero classifying map, so that the endpoint is
+homotopy equivalent to a trivial higher torsor over $X$. The surviving
+transgression history still records the original $\alpha$.
+
+For $p=1$, choose a positive integer $m$ making $m\alpha$ integral.
+The integral $(1,1)$ theorem constructs an actual holomorphic line bundle
+$L_\alpha$ with $c_1(L_\alpha)=m\alpha$; on projective $X$ this is algebraic.
+Thus (1) is an actual target-dependent complex fold, and
+$Z_\alpha=c_1^{\mathrm{CH}}(L_\alpha)/m$ has canonical Betti class $\alpha$.
+For $p>1$, (7) constructs a rational topological torsor, not a line bundle
+or a Chow cycle. Its fusion and full model purity do not manufacture such
+an object. The new calculation is (9)--(10), with actual target dependence;
+it is not an independent proof of higher algebraicity. The first unchecked
+source arrow is a cycle-bearing algebraic realization of this higher
+transgression with its computed canonical comparison. It is not supplied
+as a hypothesis in any claimed source-birth theorem here.
+
+\section{Proof audit and attribution boundary}
+Self-review checks: compactness and type of (1); torsion versus real Chern
+classes; actual degree-one filtration; sufficient K\"ahler form at zero
+curvature; finite relative-formality filtration; all cup-product degrees in
+(5) and (10); saturated integral relations and connected kernels; retained
+holomorphic gluing; degree $2p-1$ rather than degree one for higher handles;
+nullary and dependent curvatures; and the distinction between real cohomology,
+rational classifying data, model filtration, and actual algebraic cycles.
+
+The bundle, $dd^c$, transgression, and lattice mechanisms are standard inputs
+at their stated strengths, with their uses derived here. The combined
+base-coupled quotient and higher target-transgression construction extends
+the branch's previous central-fold implementation. No claim of worldwide
+historical priority is made without a literature comparison. The universal
+original-$X$ conjecture remains the owner; these theorems give general
+quantifiers for the specified new operations, not an assumed classification
+of every imaginable fold. Lean changes formalize their algebraic cores;
+the analytic and topological comparisons remain the hand proofs above.
+\end{document}

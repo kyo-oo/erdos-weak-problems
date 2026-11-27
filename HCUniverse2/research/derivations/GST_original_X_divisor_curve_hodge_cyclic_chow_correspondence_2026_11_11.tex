@@ -1,0 +1,584 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\title{GST single-fold hypothesis: unconditional original-$X$ Chow construction in divisor and curve weights}
+\date{11 November 2026}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\begin{document}
+\maketitle
+
+\section{The actual universal original-$X$ input and output}
+Let $X$ be any smooth connected projective variety over $\mathbb C$ of complex dimension $d\ge 2$, with ample integral divisor class $h\in CH^1(X)_{\mathbb Q}$.
+Let
+\[
+W_p(X)=H^{2p}(X,\mathbb Q)\cap H^{p,p}(X,\mathbb C),
+\qquad cl_X^p:CH^p(X)_{\mathbb Q}\longrightarrow W_p(X)
+\]
+be the genuine canonical Betti cycle class.
+No algebraic lift of an arbitrary prescribed Hodge class is used as input.
+
+\begin{theorem}[Unconditional original-$X$ GST orbit construction in the outer middle weights]
+For every such $X$ and each $p\in\{1,d-1\}$ there exist an \emph{actual rational codimension-$d$ algebraic Chow correspondence}
+$\Gamma_{X,p}\in CH^d(X\times X)_{\mathbb Q}$ and an actual
+$Z_{X,p}\in CH^p(X)_{\mathbb Q}$ such that:
+\begin{enumerate}
+\item $\Gamma_{X,p}$ acts by ordinary Chow push-pull $N_{\Gamma}$ and its canonical Betti action $T_\Gamma$ satisfies
+$cl_X^p(N_\Gamma z)=T_\Gamma(cl_X^p(z))$ for every $z$;
+\item $T_\Gamma$ preserves $W_p(X)$;
+\item the single orbit $\{cl_X^p(Z_{X,p}),T_\Gamma cl_X^p(Z_{X,p}),\ldots\}$ spans the entire rational Hodge fiber $W_p(X)$.
+\end{enumerate}
+In particular the \emph{actual original-$X$} GST
+\texttt{NativeGSTSingleFoldOrbitLaw} holds for these two weights when the
+abstract Stage-2G Hodge data are instantiated by canonical Betti/Hodge theory
+and correspondences are interpreted in full Chow intersection theory.
+This does not assert all weights of the hypothesis.
+\end{theorem}
+
+\begin{proof}
+Write $r=\rho(X)=\dim_{\mathbb Q}NS(X)_{\mathbb Q}\ge1$.
+By the Lefschetz $(1,1)$ theorem,
+\[
+NS(X)_{\mathbb Q}\xrightarrow{\sim}W_1(X).
+\]
+Choose actual rational divisors $D_0,\ldots,D_{r-1}$ whose
+canonical classes form a rational basis of $W_1(X)$.
+The intersection form
+\[
+G_{ij}=\int_X cl_X(D_i)\cup cl_X(D_j)\cup cl_X(h)^{d-2}
+\]
+is a nondegenerate rational matrix by the Hodge index theorem.
+Let $(g^{ij})=G^{-1}\in M_r(\mathbb Q)$.
+
+For $p=1$, define genuine algebraic cycle classes
+\[
+Z_i=D_i\in CH^1(X)_{\mathbb Q},\qquad
+Y_i=\sum_{j=0}^{r-1}g^{ij}\,D_jh^{d-2}
+  \in CH^{d-1}(X)_{\mathbb Q}.
+\]
+For $p=d-1$, instead define
+\[
+Z_i=D_ih^{d-2}\in CH^{d-1}(X)_{\mathbb Q},\qquad
+Y_i=\sum_{j=0}^{r-1}g^{ij}D_j\in CH^1(X)_{\mathbb Q}.
+\]
+In both cases the projection formula and the definition of $G$ give
+\[
+\deg_X(Y_i\cdot Z_j)
+=\int_X cl_X(Y_i)\cup cl_X(Z_j)=\delta_{ij}.
+\]
+For $p=d-1$, rational hard Lefschetz yields a rational Hodge
+isomorphism $L^{d-2}:W_1(X)\cong W_{d-1}(X)$;
+therefore the $cl_X(Z_i)$ form a basis also in this weight.
+The case $d=2$ has the same construction for both choices.
+
+For all $i,j$ the genuine codimension-$d$ product correspondence
+\[
+E_{ij}:=pr_1^*Y_i\cdot pr_2^*Z_j
+\in CH^d(X\times X)_{\mathbb Q}
+\]
+is defined \emph{scheme-theoretically}. Its rational Chow action is
+\[
+N_{E_{ij}}(z)
+=pr_{2*}\bigl(pr_1^*z\cdot E_{ij}\bigr)
+=\deg_X(z\cdot Y_i)\,Z_j.
+\]
+The corresponding canonical rational Betti action is
+$T_{E_{ij}}(\beta)=
+\bigl(\int_X\beta\cup cl_X(Y_i)\bigr)\,cl_X(Z_j)$.
+Proper Gysin functoriality and multiplicativity of the canonical
+cycle map give
+$cl_X\circ N_{E_{ij}}=T_{E_{ij}}\circ cl_X$,
+with \emph{no Hodge surjectivity assumption}.
+Thus the $T_{E_{ij}}$ restrict to the full rational Hodge fiber
+as the ordinary rational matrix units.
+
+Let $\sigma(i)=i+1\pmod r$ (where $\sigma(0)=0$ when $r=1$) and form
+\[
+\boxed{\Gamma_{X,p}=
+\sum_{i=0}^{r-1} E_{i,\sigma(i)}
+\in CH^d(X\times X)_{\mathbb Q},\qquad
+Z_{X,p}:=Z_0.}
+\]
+Then the EXACT original-$X$ Chow and Betti actions satisfy
+\[
+N_{\Gamma_{X,p}}(Z_j)=Z_{\sigma(j)},\qquad
+T_{\Gamma_{X,p}}(cl_X(Z_j))=cl_X(Z_{\sigma(j)}).
+\]
+It follows inductively that for $0\le k<r$,
+\[
+T_{\Gamma_{X,p}}^k(cl_X(Z_0))=cl_X(Z_k).
+\]
+These $r$ vectors form a basis of $W_p(X)$, proving all assertions.
+\end{proof}
+
+\section{Why this is a real geometric advance, not a circular formal selector}
+The input consists only of the \emph{actual algebraic divisors} whose
+existence is independently guaranteed by Lefschetz $(1,1)$.
+The complementary cycles $Y_i$ are explicit rational Chow expressions
+in $D_i$, $h$ and the computable intersection-matrix inverse;
+the correspondence $\Gamma$ is constructed directly in the original
+$CH^d(X\times X)_{\mathbb Q}$, and the canonical Betti square is
+proven by the projection formula.
+No arbitrary weight-$p$ Hodge vector is assumed to have a cycle lift.
+
+The proof crucially uses the \emph{special} fact that the Hodge fiber
+in weights $1,d-1$ is already algebraic by classical geometry.
+It does not supply new cycles for primitive $p$ with
+$2\le p\le d-2$, and no identity here can be extended to those
+weights without independent source geometry.
+
+\section{A concrete formalization bottleneck: non-finite product fibers}
+The repo's
+\texttt{FiniteClosedCorrespondence} is restricted to finite
+set-theoretic fibers of the left projection.
+A product correspondence $Y_i\times Z_j$, for instance on
+$X=\mathbb P^2$, $d=2,p=1$, and $Y_i=Z_j=$ a projective line,
+has positive-dimensional left fibers over the points of $Y_i$:
+each such fiber is the entire projective line $Z_j$.
+It therefore fails the \emph{datatype's} finite-fiber field.
+This does \emph{not} mean the codimension-$2$ algebraic cycle
+$Y_i\times Z_j$ does not exist: it is a perfectly valid Chow
+correspondence and is the correct operation for the theorem.
+Nor does it prove no other finite correspondence realizes the
+same cohomological action. It demonstrates that the existing
+finite-fiber type is too narrow to directly encode this
+explicit construction.
+
+A full formal API must implement $CH^d(X\times X)_{\mathbb Q}$
+and its refined pullback/intersection/pushforward on
+$CH^p(X)_{\mathbb Q}$, then certify the canonical Betti
+comparison. Until that layer is represented in Lean, the
+accompanying Lean file proves the complete finite rational
+matrix-unit and cyclic-action algebra with explicit native
+intersection readouts, while this section supplies the genuine
+scheme-theoretic construction.
+
+\section{Remaining universal GST hypothesis, precisely scoped}
+For an arbitrary prescribed
+$\alpha\in W_p(X)$ with $2\le p\le d-2$,
+the desired output is a genuine $Z_\alpha\in CH^p(X)_{\mathbb Q}$
+with $cl_X(Z_\alpha)=\alpha$.
+The above cyclic correspondence does not solve that middle-degree
+geometric source existence question; no rank certificate from a
+native wave model is substituted for it.
+
+\section{The owner's Part-1 two-birth seed: exact parity resonance and its universal rational repair}
+
+The original user-supplied source formula is
+$Z=Z_0+N(Z_0)$ followed by $N(Z)=NZ_0+N^2Z_0$.
+This is a valid equality of genuine Chow cycles once $N$ is the
+actual Chow correspondence constructed above. It does \emph{not}
+automatically preserve the full cyclic rank of $Z_0$.
+
+On the actual $r$-dimensional rational Hodge fiber of the preceding
+theorem, $T=T_\Gamma$ is the cyclic shift of a genuine algebraic
+basis $b_0,\ldots,b_{r-1}$. Thus $T^r=I$, and
+$b_0$ has a full $r$-dimensional orbit.
+For a rational coefficient $\lambda$ put
+\[
+Z_\lambda=Z_0+\lambda N Z_0\in CH^p(X)_{\mathbb Q},
+\quad b_\lambda=cl_X(Z_\lambda)=(I+\lambda T)b_0.
+\]
+The $r$ Krylov vectors of the new seed are the image under
+$I+\lambda T$ of the old basis-Krylov vectors, so
+\[
+\boxed{
+\det K_r(T,b_\lambda)
+=
+\bigl(1-(-\lambda)^r\bigr)\det K_r(T,b_0).
+}
+\]
+Indeed $\det(I+\lambda T)=\prod_{\zeta^r=1}
+(1+\lambda\zeta)=1-(-\lambda)^r$.
+
+At $\lambda=1$, this multiplier vanishes exactly when $r$ is even.
+For even $r$ the polynomial $1+x$ has
+$\gcd(1+x,x^r-1)=1+x$ and the new orbit has rank exactly $r-1$;
+for odd $r$ the orbit has rank exactly $r$.
+Applying $T$ once again to $b_\lambda$ does not repair the
+defect, because $T$ is invertible. This is the precise mathematical
+parity obstruction for the initial $N(Z_0+NZ_0)$ construction.
+
+At $\lambda=2$, by contrast,
+\[
+\det K_r(T,b_2)
+=\bigl(1-(-2)^r\bigr)\det K_r(T,b_0)\ne0
+\qquad (r\ge1).
+\]
+Thus the \emph{actual original-$X$ algebraic cycle}
+\[
+\boxed{Z_{\mathrm{safe}}=Z_0+2N Z_0}
+\]
+is a full native/Betti cyclic seed for \emph{every} Picard rank
+and every $X,p$ in the theorem.
+This correction is independent of unknown Hodge cycles or
+postulated surjectivity.
+
+There is also an explicit inverse witness in the genuine
+rational correspondence algebra:
+\[
+(I+2T)\sum_{k=0}^{r-1}(-2T)^k
+=I-(-2T)^r
+=\bigl(1-(-2)^r\bigr)I.
+\]
+Since the final scalar is nonzero in $\mathbb Q$,
+$I+2T$ is invertible by a finite rational word in the actual
+geometrically realized correspondence. Consequently the repaired
+seed does not merely have a nonzero tested determinant: it has
+a uniform exact finite-geometric inverse for all ranks.
+
+The exact independent Wolfram matrix check (see associated
+\texttt{GST\_original\_X\_cyclic\_seed\_parity\_resonance\_20261111.wl})
+verified $r=1,\ldots,10$, including the rank-$r-1$ even
+resonances and the repaired full ranks.
+The all-$r$ proof is the geometric-series identity above.
+
+\section{Every weight in dimensions at most three}
+For a connected smooth projective $X$ of complex dimension $d$,
+the original rational Hodge fibers in weights $p=0$ and $p=d$
+have dimension one, with actual algebraic generators $[X]$
+and a closed point $[x]$, respectively. The diagonal correspondence
+$\Delta_X$ and either generator realize a one-dimensional cyclic orbit.
+Weights $p>d$ have zero rational cohomology and the zero-cycle
+and diagonal trivially span their zero Hodge fiber.
+
+For $d=1$, every weight is outer. For $d=2$, the only middle
+weight is $p=1$. For $d=3$, the only middle weights are
+$p=1$ and $p=d-1=2$. Combining these elementary cases with
+the actual correspondence of the main theorem gives:
+
+\begin{theorem}[Full GST single-fold hypothesis in dimensions $d\le3$]
+For every connected smooth projective complex variety $X$ with
+$d\le3$ and every integer $p\ge0$, there exists a genuine
+original-$X$ rational Chow correspondence $\Gamma\in
+CH^d(X\times X)_{\mathbb Q}$ and genuine $Z\in CH^p(X)_{\mathbb Q}$
+whose canonical rational Betti orbit spans $W_p(X)$.
+This is an unconditional original-$X$ statement in every weight
+for these dimensions. It makes no claim about the higher middle
+weights of arbitrary-dimensional varieties.
+\end{theorem}
+
+\section{Formalization audit and hypothesis scope}
+The source finite-dimensional matrix-unit and cyclic-orbit algebra
+is implemented in
+\texttt{GSTOriginalXDivisorCurveCyclicChowFold.lean}, with
+its own exact-SHA GitHub Actions gate.
+The full refined Chow product/push-pull theorem is proved
+geometrically in the present manuscript and is not falsely
+ascribed to the repo's \texttt{FiniteClosedCorrespondence}
+type; a new full Chow-correspondence API is required to
+instantiate the exact existing Lean
+\texttt{RealizedCorrespondenceKrylovCertificate}
+with these positive-dimensional-fiber algebraic cycles.
+
+The middle-codimension universal target for every original $X$
+and prescribed $\alpha\in W_p(X)$, $2\le p\le d-2$,
+remains the source-existence question. The two-birth seed repair
+is an exact proof for the constructed low-weight sources,
+not a substitute for constructing an algebraic representative
+of a Hodge class in a genuinely unknown higher primitive fiber.
+
+
+\section{ALL original-$X$ Hodge weights: a genuine divisor-Lefschetz Chow submotive}
+
+The outer-weight theorem actually contains an unconditional
+higher-weight construction, without assuming that arbitrary higher
+Hodge classes are algebraic.
+
+\begin{theorem}[Universal rational Chow matrix-unit projector in every weight]
+Let $X$ be as above, $d\ge2$, and let
+$1\le p\le d-1$. Let $D_i$, $h$ and the
+nondegenerate divisor intersection matrix $G$ be as before.
+For every $i=0,\ldots,r-1$ construct \emph{genuine original-$X$}
+rational Chow cycles
+\[
+Z_i^{(p)}=D_i h^{p-1}\in CH^p(X)_{\mathbb Q},
+\qquad
+Y_i^{(p)}=\sum_j g^{ij}D_j h^{d-p-1}
+\in CH^{d-p}(X)_{\mathbb Q}.
+\]
+Then
+\[
+\deg_X\bigl(Z_j^{(p)}Y_i^{(p)}\bigr)=\delta_{ij}.
+\]
+The codimension-$d$ product correspondences
+\[
+E_{ij}^{(p)}=
+pr_1^*Y_i^{(p)}\cdot pr_2^*Z_j^{(p)}
+\in CH^d(X\times X)_{\mathbb Q}
+\]
+satisfy the EXACT Chow composition rule
+\[
+\boxed{
+E_{ij}^{(p)}\circ E_{k\ell}^{(p)}
+=\delta_{i\ell}\,E_{kj}^{(p)}.
+}
+\]
+Consequently
+\[
+\Pi_p=\sum_i E_{ii}^{(p)},\quad
+R_p=\Delta_X-\Pi_p,\quad
+\Gamma_p=\sum_i E_{i,\sigma(i)}^{(p)}
+\]
+are all genuine original-$X$ rational Chow correspondences,
+and in the \emph{Chow correspondence ring}, not merely after passing to Betti,
+\[
+\boxed{\Pi_p^2=\Pi_p,\quad R_p^2=R_p,\quad
+\Pi_p R_p=R_p\Pi_p=0,\quad \Gamma_p^r=\Pi_p.}
+\]
+The Betti image of $\Pi_p$ is EXACTLY the
+$r$-dimensional algebraic Lefschetz sector
+\[
+L^{p-1}NS(X)_{\mathbb Q}\subseteq W_p(X).
+\]
+This sector has dimension $r$ because the rational hard Lefschetz
+isomorphism $L^{d-2}:H^2\to H^{2d-2}$ implies
+$L^{p-1}$ is injective on $H^2$ whenever $p\le d-1$.
+The actual correspondence $\Gamma_p$ has a cyclic
+$r$-dimensional orbit on precisely this sector.
+\end{theorem}
+
+\begin{proof}
+All displayed $Z_i,Y_i,E_{ij}$ are finite algebraic
+intersections/products and genuine Chow cycles; their definition
+requires no prior higher-weight Hodge class representative.
+The complementary degrees add to $d$, and the exponent
+$(p-1)+(d-p-1)=d-2$ gives
+$\int Z_jY_i=\sum_m g^{im}G_{mj}=\delta_{ij}$.
+
+The refined Chow product on the triple product
+$X\times X\times X$ computes
+\[
+\begin{aligned}
+E_{ij}\circ E_{k\ell}
+&=pr_{13*}(pr_{12}^*E_{k\ell}\cdot pr_{23}^*E_{ij})\\
+&=pr_1^*Y_k\cdot
+  pr_3^*Z_j\cdot
+  \deg_X(Z_\ell\cdot Y_i)
+=\delta_{i\ell}E_{kj}.
+\end{aligned}
+\]
+This is an equality in Chow, using proper pushforward and
+the projection formula, with the middle 0-cycle pushed to
+$\operatorname{Spec}\mathbb C$ by its degree.
+It does \emph{not} assert that an arbitrary degree-zero 0-cycle
+on $X$ is rationally equivalent to zero.
+The matrix-unit identities imply all projector and
+cyclic identities by finite exact rational operations.
+
+To identify the Betti image, observe directly that
+$T_{\Pi_p}(\alpha)=
+\sum_i\bigl(\int_X\alpha\cup cl(Y_i)\bigr)cl(Z_i)$.
+Every output is in the displayed algebraic Lefschetz sector,
+while the Kronecker intersection formula makes it fix each
+$cl(Z_j)$, proving equality of image and sector.
+\end{proof}
+
+\section{Prescribed-$\alpha$ original-$X$ source, constructed without a lift hypothesis}
+
+Now take the exact immutable input:
+any original smooth connected projective complex $X$ of dimension
+$d\ge2$, any integer $p$ with $1\le p\le d-1$, and an
+ARBITRARY prescribed rational Hodge class
+$\alpha\in W_p(X)$.
+
+The honest alpha-selected intersection coefficients are
+\[
+c_i(\alpha)=\int_X\alpha\cup cl_X(Y_i^{(p)})\in\mathbb Q.
+\]
+\emph{Construct directly from actual original-$X$ divisors}
+the Chow cycle
+\[
+\boxed{
+Z_{\alpha,\mathrm{Lef}}
+=\sum_i c_i(\alpha)\,Z_i^{(p)}
+\in CH^p(X)_{\mathbb Q}.
+}
+\]
+This is a concrete rational algebraic cycle for every prescribed
+$\alpha$ in every weight, with the exact CANONICAL class
+\[
+\boxed{
+cl_X(Z_{\alpha,\mathrm{Lef}})
+=T_{\Pi_p}(\alpha).
+}
+\]
+The rational residual
+\[
+\alpha_{\mathrm{res}}=\alpha-cl_X(Z_{\alpha,\mathrm{Lef}})
+=(I-T_{\Pi_p})\alpha
+\]
+is a rational $(p,p)$ class satisfying
+\[
+\int_X\alpha_{\mathrm{res}}\cup cl_X(Y_i^{(p)})=0
+\quad\text{for every }i.
+\]
+
+This is not an input $Z_\alpha$ representing the unknown class:
+it is a NEW directly written Chow expression constructed from
+known divisors whose Betti class equals the \emph{explicitly computed
+Lefschetz component} of the arbitrary target.
+It is a canonical original-$X$ partial return relative to the
+chosen ample divisor and rational divisor basis, not a hypothetical
+source selector.
+
+For $p=1$ and $p=d-1$ the Lefschetz sector is the entire Hodge
+fiber by Lefschetz $(1,1)$ and hard Lefschetz, so
+$\alpha_{\mathrm{res}}=0$ UNCONDITIONALLY and the displayed cycle
+is the complete correct original-$X$ answer.
+For an unknown higher middle weight $\alpha_{\mathrm{res}}$
+can be nonzero, possibly algebraic or nonalgebraic.
+Nothing here assumes or proves that it vanishes.
+The residual, not the already constructed Lefschetz component,
+is the input to further genuine GST source-birth experiments.
+
+\section{A genuine Chow detector gives a nonzero GST Hankel moment}
+On the displayed $r$-dimensional algebraic Lefschetz sector,
+take the \emph{actual geometric complementary cycle}
+$Y_{r-1}^{(p)}$ as the rational detector
+\[
+\ell(x)=\int_X x\cup cl_X(Y_{r-1}^{(p)}).
+\]
+For the genuine cyclic fold $T=T_{\Gamma_p}$ and seed
+$v=cl_X(Z_0^{(p)})$, the Hankel moments satisfy
+\[
+M_{ij}=\ell(T^{i+j}v)
+=\delta_{(i+j)\bmod r,\;r-1},
+\qquad 0\le i,j<r.
+\]
+Since $0\le i+j\le2r-2$, the sole possible hit is
+$i+j=r-1$; the matrix is exactly the
+anti-diagonal reversal matrix. Therefore
+\[
+\boxed{\det M=(-1)^{r(r-1)/2}\ne0.}
+\]
+This constructs a \emph{geometric detector on the original X},
+not a freely chosen dual to an unknown Hodge basis.
+The moment is nondegenerate ON THE CONSTRUCTED ALGEBRAIC
+LEFSCHETZ SECTOR. When this sector equals $W_p(X)$
+(outer weights), it discharges the full GST Hankel gate;
+in other weights it does not certify the unknown residual sector.
+
+
+\section{Embedding the ORIGINAL twelve-cell GST $U,J,M,[J,M]$ into actual original-$X$ Chow}
+
+This is the first explicit comparison of the \emph{owner's genuine
+twelve-cell} GST matrices with \emph{actual} self-correspondences
+on a general original smooth projective $X$, rather than merely
+an abstract rational module mimicking its orbit.
+
+For the original divisor-Lefschetz sector of dimension
+$r=\rho(X)$, the preceding genuine Chow matrix units
+$E_{ij}^{(p)}$ give an algebra map
+\[
+\boxed{
+\Phi_{X,p}:M_r(\mathbb Q)\longrightarrow
+CH^d(X\times X)_{\mathbb Q},\qquad
+A\longmapsto\sum_{i,j=0}^{r-1} A_{ji}E_{ij}^{(p)}.
+}
+\]
+Here $M_r(\mathbb Q)$ carries ordinary matrix multiplication
+and $CH^d(X\times X)_{\mathbb Q}$ carries refined
+correspondence composition. The matrix-unit identity proves
+\[
+\Phi(A)\circ\Phi(B)=\Phi(AB),\qquad
+\Phi(I_r)=\Pi_p,
+\]
+and $\Phi$ is \emph{injective}: if $\Phi(A)=0$ as Chow,
+apply it to every true source class $Z_i$ and pair with
+the genuine complementary classes $Y_j$ to recover every
+matrix entry $A_{ji}=0$.
+Thus the complete rational endomorphism algebra of the
+r-dimensional divisor-Lefschetz motive occurs as
+an actual rational \emph{Chow correspondence} subalgebra.
+This is a unital subalgebra with unit $\Pi_p$ (not with
+unit $\Delta_X$ unless the complementary Chow motive is zero).
+
+Suppose the original $X$ has $\rho(X)\ge12$. Choose a
+rational divisor basis, with any distinguished first
+twelve indices identified with the actual GST carry/trit
+cells $(i,k)\in\operatorname{Fin}(4)\times\operatorname{Fin}(3)$.
+Extend the owner's exact $12\times12$ rational operators
+$U,J,M$ by zero to the remaining $r-12$ divisor-basis
+coordinates, denoting these matrices
+$\widehat U,\widehat J,\widehat M\in M_r(\mathbb Q)$.
+Define \emph{genuine original-$X$} Chow correspondences
+\[
+\Gamma_U=\Phi(\widehat U),\quad
+\Gamma_J=\Phi(\widehat J),\quad
+\Gamma_M=\Phi(\widehat M),
+\]
+each explicitly a finite rational sum of actual
+$pr_1^*Y_i\cdot pr_2^*Z_j$ product cycles on $X\times X$.
+
+The full original GST commutator is now a **true Chow algebra identity**:
+\[
+\Gamma_J\circ\Gamma_M-\Gamma_M\circ\Gamma_J
+=\Phi([\widehat J,\widehat M]).
+\]
+For all rational direct/curvature strengths $a,b$, the true
+algebraic correspondence
+\[
+\boxed{
+\Gamma_{a,b}=
+\Gamma_U+\Gamma_J+a\Gamma_M+
+b(\Gamma_J\circ\Gamma_M-\Gamma_M\circ\Gamma_J)
+=\Phi\bigl(\widehat{U+J+aM+b[J,M]}\bigr)
+}
+\]
+has the **same exact** 12-state action as the original
+GST $F_{a,b}$ on the embedded original-X Chow source
+basis $\{Z_0^{(p)},\ldots,Z_{11}^{(p)}\}$.
+Its actual canonical Betti realization acts by the
+same exact rational matrix on the twelve independent
+$cl_X(Z_i)$ and maps all remaining divisor-Lefschetz
+source basis classes to zero. It kills the
+$\Pi_p$-complement in rational cohomology.
+
+In particular for the owner's genuine seed
+\[
+Z_{\mathrm{GST}}=
+Z^{(p)}_{(0,0)}+Z^{(p)}_{(0,1)}
+\in CH^p(X)_{\mathbb Q},
+\]
+the twelve first genuine ORIGINAL-X rational Betti orbit
+vectors under balanced curvature
+$\Gamma_{1,1}$ have the exact previously checked determinant
+\[
+\boxed{
+\det\left[
+cl_X(Z_{\mathrm{GST}}),
+T_{\Gamma_{1,1}}cl_X(Z_{\mathrm{GST}}),
+\ldots,T_{\Gamma_{1,1}}^{11}cl_X(Z_{\mathrm{GST}})
+\right]_{\{cl(Z_0),\ldots,cl(Z_{11})\}}
+=-445265540949\ne0.
+}
+\]
+The determinant is the native exact integer source
+certificate already recorded in the project; now
+\emph{the entire matrix, not just its rank, has a constructed
+genuine rational Chow correspondence realization on original $X$}
+whenever $\rho(X)\ge12$.
+
+This is an unconditional original-$X$ geometric SOURCE-LANDING
+theorem at EVERY codimension $1\le p\le d-1$
+for varieties with at least twelve independent divisor classes.
+No Hodge-to-Chow inverse or arbitrarily prescribed middle-primitive
+cycle is assumed. It does NOT make the twelve-dimensional
+algebraic sector equal to the entire rational Hodge fiber
+when that fiber has additional algebraic or unknown Hodge
+directions. The canonical all-weight conjecture requires
+independently constructing further classes in the
+complement; embedding finite native waves by algebraic
+matrix units does not make that complement vanish.
+
+The narrower repository datatype
+$\texttt{FiniteClosedCorrespondence}$ requires
+finite left fibers and does not accept these ordinary
+positive-dimensional product-correspondence carriers
+in general. Consequently formalization of this genuine
+full-Chow algebra map is currently given
+by the mathematical proof here, while the matching
+rational module compiler and exact original Hodge source
+naturality are checked in Lean separately.
+
+\end{document}

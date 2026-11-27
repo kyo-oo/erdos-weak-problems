@@ -1,0 +1,421 @@
+\documentclass[11pt]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\cl}{\mathrm{cl}}
+\title{GST multiplicity-respecting native-cycle birth:
+a complete mass-calibration mechanism in positive-dimensional residual sectors}
+\date{22 October 2026}
+\begin{document}
+\maketitle
+
+\section{Actual GST source interfaces and the concrete problem}
+Fix a smooth projective complex variety X of dimension d and a
+codimension p, with an ACTUAL rational Betti cycle-class map
+\(c:\mathcal C^p(X)_\Q\to H^{2p}(X,\Q)\).
+The native cycle carrier \(\mathcal C^p(X)_\Q\) is the vector space
+of finite rational algebraic cycle PRESENTATIONS, not an
+assertion that two cycles with the same rational-equivalence
+class are the same formal cycle. The existing GST Lean files
+provide the following objects:
+
+* \texttt{GSTClassicalHodgeFiberedCosmology}: the unrestricted
+rational Hodge fiber \(F_p(X)\) with genuine multiplicity
+basis \(i\), and finite-support coordinates \(a=(a_i)\);
+* \texttt{GSTClassicalHodgeFiberedNativePullback}: the finite
+native codimension-p point presentation \(b=(b_Z)\);
+the two marginal maps and an explicit \texttt{glueMarginals}
+construction;
+* \texttt{GSTClassicalHodgeFiberedCycleClassDefect}:
+the true class discrepancy
+\[
+ \delta(\Phi)=c(N\Phi)-h(F\Phi).
+\]
+
+The EXACT algebraic combinatorial criterion for gluing
+the marginals into ONE GST fibered state is
+\[
+ \boxed{\epsilon_H(a)=\epsilon_N(b)},\qquad
+ \epsilon_H(a)=\sum_i a_i,\quad
+ \epsilon_N(b)=\sum_Z b_Z.                         \tag{1}
+\]
+The existing \texttt{exists_joint_marginals_iff}
+proves (1) is necessary and sufficient once a basis
+index and native point anchor exist. However this
+augmentation mass is NOT itself a Betti class, and
+its equality must not be silently assumed from
+cohomological agreement.
+
+We construct a NEW geometric calibration that
+makes (1) automatic for any candidate native cycle
+without changing its canonical Betti class.
+
+\section{The purely rational full-fiber calibration law}
+Let \(M_H\) be the finite Hodge sheet coordinate space,
+let \(M_N\) be the finite native cycle presentation space.
+Let \(\epsilon_H:M_H\to\Q\), \(\epsilon_N:M_N\to\Q\)
+be the ACTUAL marginal masses above, \(C:M_N\to B\)
+the native canonical rational Betti class, and
+\(U:M_H\to B\) the actual Hodge-coordinate reconstruction.
+
+\begin{theorem}[GST mass-gauge calibration and full-fibered exact landing]
+Suppose there exists a GENUINE finite native presentation
+\(\nu\in M_N\) such that
+\[
+ \boxed{C\nu=0,\qquad\epsilon_N(\nu)=1.}           \tag{2}
+\]
+For ALL Hodge multiplicity coordinates \(a\in M_H\)
+and ALL native finite presentations \(b\in M_N\),
+set the ACTUAL corrected native presentation
+\[
+ \boxed{
+ b^\sharp=b+\bigl(\epsilon_H(a)-\epsilon_N(b)\bigr)\nu .
+ }                                                        \tag{3}
+\]
+Then without further conditions,
+\[
+ \boxed{
+ \epsilon_N(b^\sharp)=\epsilon_H(a),\quad
+ Cb^\sharp=Cb.
+ }                                                        \tag{4}
+\]
+For any chosen actual GST basis-sheet/native-point anchor,
+the existing geometric \texttt{glueMarginals} operation
+therefore constructs a common-refinement state
+\(\Phi^\sharp=\mathrm{glueMarginals}(a,b^\sharp)\)
+with Hodge marginal a and native marginal \(b^\sharp\).
+Its ACTUAL classical Betti defect is
+\[
+ \boxed{\delta(\Phi^\sharp)=Cb-Ua.}               \tag{5}
+\]
+Consequently if \(Cb=Ua\), this is an explicit
+FULL-multiplicity, correctly typed GST zero-defect
+landing state for the Hodge class encoded by a.
+No Hodge-to-Chow selector or universal cycle
+representative is a premise: b is an actual
+independently supplied finite native presentation.
+The calibration removes the additional augmentation
+obstruction once an actual candidate is constructed.
+\end{theorem}
+\begin{proof}
+Apply the rational linear mass map to (3):
+\(\epsilon_N(b^\sharp)
+ =\epsilon_N(b)+(\epsilon_H(a)-\epsilon_N(b))\cdot1
+ =\epsilon_H(a)\).
+Apply the canonical Betti map and the null-class
+hypothesis in (2):
+\(Cb^\sharp=Cb+(\epsilon_H(a)-\epsilon_N(b))\cdot0=Cb\).
+The exact \texttt{glueMarginals_forgetPoint} and
+\texttt{glueMarginals_forgetMultiplicity}
+Lean laws give the claimed projections,
+with (4) supplying precisely their required
+mass-balance hypothesis. The genuine fibered Hodge
+and native class maps are obtained by applying
+the rational Hodge basis reconstruction and the
+actual native cycle realization to these marginals.
+Their difference is (5), by the existing definition
+\texttt{fiberedCycleClassDefect}.
+\end{proof}
+
+\section{Unconditional geometric mass gauge for every 1<=p<d}
+The main new geometry is that hypothesis (2) can be
+constructed WITHOUT knowing any rational Hodge class
+or its algebraic representative in the following
+full codimension range.
+
+\begin{theorem}[Actual original-X Chow-geometric mass gauge in every non-top positive codimension]
+Let X be any smooth projective geometrically
+INTEGRAL complex d-fold, and let
+\(1\le p<d\). Choose a sufficiently very ample
+line bundle H. Take p general divisors
+\(D_1,\ldots,D_p\) in \(|H|\), whose complete
+intersection \(W_1\subset X\) is an integral
+codimension-p variety of POSITIVE dimension.
+Independently take p general divisors
+\(D'_1,\ldots,D'_p\) in \(|2H|\) with integral
+complete intersection \(W_2\subset X\).
+Then the ACTUAL finite rational native cycle
+presentation
+\[
+ \boxed{
+ \nu=\frac{2^p[W_1]-[W_2]}{2^p-1}
+       \ \in\mathcal C^p(X)_\Q
+ }                                                        \tag{6}
+\]
+has
+\[
+ \boxed{\epsilon_N(\nu)=1,\qquad
+          \cl_X^{\rm can}(\nu)=0.}                \tag{7}
+\]
+In fact its class is ZERO in the rational CHOW
+group \(CH^p(X)_\Q\), even though its finite
+native cycle presentation is typically nonzero.
+Thus the GST mass-gauge premise (2) is supplied
+unconditionally by genuine algebraic geometry
+for every \(1\le p<d\) on any original integral X.
+\end{theorem}
+\begin{proof}
+Because p<d, generic successive Bertini hyperplane
+sections remain smooth AND integral down to positive
+dimension; choose H sufficiently ample and general.
+Both W_1 and W_2 are therefore SINGLE distinct
+integral codimension-p subvarieties, and their
+finite native point presentations have mass one each.
+For actual Cartier divisors, their intersection
+products in the rational Chow ring satisfy
+\[
+ [W_1]=c_1(H)^p,\qquad
+ [W_2]=c_1(2H)^p=2^p c_1(H)^p
+                       \quad\text{in }CH^p(X)_\Q .
+\]
+The rational Chow class of \(2^p W_1-W_2\) is
+therefore zero, and the true canonical Betti
+cycle-class map annihilates its finite cycle
+presentation. Its scalar coefficient mass is
+\((2^p-1)/(2^p-1)=1\); this denominator is
+nonzero exactly because p>=1.
+No rational Hodge alpha or source cycle for
+alpha was used anywhere in the construction.
+\end{proof}
+
+\section{New GST impossibility theorem: coefficient mass is NOT a Betti invariant}
+The unconditional
+actual geometric
+source from
+(6)--(7)
+also settles an
+important
+conceptual
+issue from
+the earlier
+GST mass
+semantics
+research.
+For the
+native finite
+presentation
+space
+\(M_N\)
+the
+coefficient mass
+\(\epsilon_N\)
+and the
+canonical
+Betti class
+\(C\)
+are
+TWO
+different
+linear
+measurements.
+They
+cannot
+be
+recovered
+from
+one
+another
+in
+the
+same
+world.
+
+\begin{theorem}[No universal linear Betti factorization of GST coefficient mass]
+On EVERY
+geometrically
+integral
+smooth
+projective
+complex d-fold X,
+at every
+codimension
+\(1\le p<d\),
+there exists
+NO rational
+linear
+functional
+\(
+ \operatorname{tr}:H^{2p}(X,\Q)\to\Q
+\)
+with
+\[
+ \boxed{
+ \epsilon_N(b)
+   =\operatorname{tr}(\cl_X^{can}(b))
+ \qquad\text{for EVERY actual native
+ finite cycle presentation }b.
+ }                                                        \tag{8}
+\]
+In particular
+the GST
+native raw
+coefficient mass
+is NOT the
+actual projective
+intersection-degree
+functional:
+a formal
+native mass
+one cycle
+can have
+zero
+Betti and
+Chow class
+on the same
+X.
+\end{theorem}
+\begin{proof}
+Take the
+ACTUAL
+\(\nu\)
+from
+(6).
+It is a
+genuine
+finite rational
+native
+cycle
+presentation
+with
+\(\epsilon_N(\nu)=1\)
+and
+\(C\nu=0\).
+If the
+postulated
+factorization
+existed,
+then
+\(1=\epsilon_N(\nu)
+=\operatorname{tr}(C\nu)
+=\operatorname{tr}(0)=0\),
+a contradiction
+in
+\(\Q\).
+The
+geometric
+existence of
+\(\nu\)
+for EVERY
+X,p
+in the
+given
+range
+was
+proved
+independently
+in the
+previous
+theorem,
+so the
+nonfactorization
+is
+unconditional
+in exactly
+that range.
+\end{proof}
+
+This
+makes
+precise why
+a topological
+or Hodge
+class
+equality
+cannot
+be
+deduced
+from
+a GST
+coefficient-mass
+identity
+alone,
+while the
+new
+mass-calibration
+construction
+is
+legitimate:
+it uses
+this
+independence
+to
+choose
+the
+mass
+WITHOUT
+modifying
+the
+canonical
+Betti
+class.
+
+\section{Exact exceptional boundaries and necessary nonclaims}
+The specified construction requires \(p<d\);
+at the top codimension p=d a generic complete
+intersection is zero-dimensional and generally
+SPLITS into many degree-one closed points.
+Its native coefficient augmentation is the
+top intersection DEGREE rather than one per
+complete intersection. Thus the same two-source
+recipe has zero augmentation after adjusting
+for Chow degree. Likewise at p=0 the denominator
+\(2^p-1\) vanishes. The geometric zero-defect
+calibration theorem above is NOT asserted
+unconditionally at those two boundaries.
+
+There is no contradiction with the genuine
+rational Hodge conjecture: producing a
+nullhomologous native mass-one cycle is NOT
+the same as producing a new native cycle whose
+Betti class equals an arbitrary prescribed
+rational Hodge alpha. This construction removes
+an independent, previously hidden coordinate
+obstruction from the full GST marginal lifting
+mechanism, leaving exactly the genuine Betti
+comparison as its meaningful condition.
+
+\section{Wolfram finite exact checks}
+For each p=1,...,12 set \(n_p=2^p\),
+the two actual source generator classes
+\((\cl W_1,\cl W_2)=(h^p,n_p h^p)\),
+and \(\nu=(n_p,-1)/(n_p-1)\).
+Take example native presentation
+\(b=(0,1/n_p)\) representing one copy of h^p
+but having mass 1/n_p, and target Hodge
+coordinate mass one. Then
+\[
+ b^\sharp=b+(1-1/n_p)\nu=(1,0),
+\]
+with exactly equal canonical Betti class and
+correct unit mass. Wolfram returned PASS in
+all twelve rational exact tests, including
+p=12 with denominator 4095. The ALL-p theorem
+follows from the symbolic rational identities
+and the ACTUAL Chow complete-intersection
+construction, not from finite sampling.
+
+\section{Lean commitments and integration}
+Edit the existing
+\texttt{GSTClassicalHodgeFiberedCycleClassDefect.lean}
+to add actual typed
+\texttt{massBalancedPresentation},
+\texttt{massBalancedPresentation_mass},
+\texttt{massBalancedPresentation_cycleClass},
+and the
+\texttt{gluedMassBalancedState_defect_zero_iff}
+theorem using the pre-existing genuine
+\texttt{glueMarginals} and the independent
+\texttt{fiberedCycleClassDefect} linear map.
+
+The formal Lean proof treats \(\nu\) as an ACTUAL
+finite presentation with properties (2);
+the unconditional geometric witness theorem in
+the preceding section is proved here in LaTeX
+and is NOT silently claimed Lean-kernel formalized
+until corresponding Chow complete-intersection
+theorems have been transported through the
+canonical Betti class interface.
+\end{document}

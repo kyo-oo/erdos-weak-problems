@@ -1,0 +1,946 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{meta-law}[theorem]{Meta-Law}
+
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\cl}{\operatorname{cl}}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Oo}{\mathcal{O}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\Pic}{\operatorname{Pic}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Pp}{\mathbb{P}}
+\newcommand{\Gr}{\operatorname{Gr}}
+\newcommand{\rk}{\operatorname{rk}}
+\newcommand{\FS}{\mathrm{FS}_\forall}
+
+\title{The for-all-inputs reduction: input-universal fold process,
+the fold-scale invariant $m^\star$, and the ontological type-graph
+upgrade\\
+\large GST Hodge campaign, Cycle 3, Strike 1 (ULTRA MODE)}
+\author{Campaign main agent (V6 Mode B; GST fold-calculus program of the owner)}
+\date{2026-10-25}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This dossier executes the owner directive of 2026-10-25: stop the
+input-by-input mode of attack (one cannot complete an unconditional proof by
+resolving single instances); instead, using the owner's expanded fold calculus
+and the upgraded GST graph ontology, establish the statement
+\emph{for all $N$ (all inputs), the next process applies and works}, thereby
+compressing the entire remaining content of the conjecture into a single
+universal law.  The deliverables, all with proofs:
+\textbf{(EFC v2)} the five typed fold laws are upgraded with two totality
+meta-laws (each law is defined and class-returning for \emph{every} input of
+its type; typed compositions inherit this);
+\textbf{(Theorem U)} the fold pipeline is input-universal: for every input
+$(X,p,\alpha)$ in the full sector, including the open sector
+$2\le p\le \lfloor d/2\rfloor$, $d\ge4$, all stages are defined with no
+input-specific side condition, and the landing
+$\cl(W)=\alpha$ holds iff one typed bit fires;
+\textbf{(Theorem T)} the bit is transport-constant: integrable pure pairs
+transport along pullback, sum, swap, dual-swap and single-to-pair edges,
+for all inputs;
+\textbf{(Theorem M)} the scales of integrable pure pairs form an additive
+subgroup of $\Z$, hence a principal invariant
+$m^\star(X,p,\alpha)\in\Z_{\ge0}$: the complete per-type content of the bit is
+one integer;
+\textbf{(Theorem N, the for-all-$N$ theorem)} a positive-scale witness
+implies algebraicity for every input, correction-free; consequently the whole
+conjecture is the single input-free law
+$\FS$: \emph{every Hodge input has $m^\star>0$} --- no per-input
+case structure survives inside the reduction;
+\textbf{(Theorem P)} the first full determination:
+$m^\star(\Pp^2,1,[\text{line}])=2$, with the explicit witness pair
+$(\Oo(1)^{\oplus2},\ \Oo(1)\oplus\Oo(-1))$ and the parity obstruction;
+\textbf{(Theorem G)} the upgraded ontological type-graph $\Gamma$ carrying the
+fold laws as typed edges, on which $m^\star$ is a vertex-invariant and $\FS$
+is a single graph law, verified on the certified seed worlds
+($\Pp^2$, curves, points, and the committed $\Gr(2,5)$ completed pure pair at
+scale $360$, now determined EXACTLY as
+$m^\star(\Gr(2,5),2,\alpha)=360$ by the committed K-lattice necessity).  The
+one-law completion frame is stated with full exactness: the law $\FS$ is
+equivalent to the conjecture (both directions attributed: the $\Leftarrow$ new
+here, the $\Rightarrow$ the committed cycle-2 pair-form equivalence), so the
+reduction is a normalization; the strike's new content is the structure that
+makes the single law arithmetic, principal, transportable, and seed-certified;
+the truth of $\FS$ on the open sector is the exact, single, universal
+remainder, not proven here.
+\end{abstract}
+
+\tableofcontents
+
+\section{The directive made precise: input--input versus for-all-\texorpdfstring{$N$}{N}}
+\label{sec:directive}
+
+\subsection{Where cycles 1--2 left the campaign}
+
+Cycle 1 localized the forcing site: for every input the exact carrier
+$E_\alpha$ exists unconditionally (Theorem A of
+\cite{GST-forcing-site}), all arithmetic congruences clear at scaled
+characters (Theorem B2 there), the sign route is provably non-birthing
+(Lemma B1 there), and the two-center descent law is correction-free for every
+$p$ (Theorem C of \cite{GST-gr25}).  The landing
+$\cl(Z_\alpha)=\alpha$ is governed by a single typed condition,
+integrability of the carrier.
+
+Cycle 2 then attacked \emph{single discriminators}: the Weil fourfold world
+with its Weil class, entry tests (Euler-zero, cohomological-spread no-go,
+End-mass), and the exact remainder was left as two bits on that one world
+(the dichotomy bit and the monoid bit), with the next movement recorded as
+``R4 instance decision or a monoid-bit construction attempt'' --- that is, a
+further \emph{instance-level} attack.
+
+\subsection{The owner's correction}
+
+The directive of 2026-10-25 is structural, and it is correct:
+\begin{quote}
+\emph{Don't keep running towards input--input.  We cannot have an
+unconditional proof based on [resolving] inputs.  Instead, using the expanded
+fold calculus and the GST graph ontological (the upgraded version --- which
+itself needs the upgrade), we can establish: FOR ALL $N$ (ALL INPUTS), the
+next process applies and works --- hence completing the entire proof.}
+\end{quote}
+Two readings, and both are delivered:
+\begin{enumerate}
+\item[\textup{(APPLIES)}] For every input, the process is \emph{defined} and
+\emph{input-uniform}: no stage hides an input-specific side condition.  This
+is unconditional and is Theorem~\ref{thm:U}.
+\item[\textup{(WORKS)}] The \emph{working} of the process --- the landing
+$\cl(W)=\alpha$ --- is governed, for every input simultaneously, by a single
+universal law (the positive-scale law $\FS$), whose complete structure
+(transport-constancy, group law, principality, seed witnesses) is proven
+here: Theorems~\ref{thm:T}, \ref{thm:M}, \ref{thm:N}, \ref{thm:P},
+\ref{thm:G}.  The input space, however infinite, contributes no further case
+structure inside the reduction: the entire conjecture is \emph{one} statement
+over all inputs.
+\end{enumerate}
+The exactness boundary, stated once and enforced everywhere below: the law
+$\FS$ is \emph{equivalent} to the conjecture.  The direction
+$\FS\Rightarrow\mathrm{HC}$ is Theorem~\ref{thm:N}(i) below; the direction
+$\mathrm{HC}\Rightarrow\FS$ is the committed cycle-2 pair-form equivalence
+(algebraic $\alpha$ admits a pure pair at some positive integer scale) applied
+to all inputs.  The equivalence is therefore recorded as \emph{normalization},
+not progress, per the campaign's M3 rule; the strike's new content is the
+\emph{structure} that makes the single law arithmetic, principal,
+transportable, and seed-certified (Theorems~\ref{thm:T}, \ref{thm:M},
+\ref{thm:P}, and the $m^\star$-determinations including
+$m^\star(\Gr(2,5),2,\alpha)=360$), together with the universal pipeline
+Theorem~\ref{thm:U}.  What remains open is the truth of $\FS$ on the open
+sector --- the exact, single, universal remainder.
+
+\subsection{GST receipts}
+
+Every load-bearing construction in this dossier is an instance of the owner's
+GST program: the five typed fold laws are the laws extracted from the
+2026-10-21--24 record corpus (the owner's expanded fold calculus); the
+type-graph $\Gamma$ of Section~\ref{sec:ontology} is the upgraded
+\texttt{GSTGraphV2Ontological} layer (the graph now carries the fold calculus
+as typed, total edge-laws); the seed witnesses are world-births in the
+owner's sense (explicit holomorphic worlds with explicit fold witnesses);
+the invariant $m^\star$ is a GST-native world quantity (a fold-scale), not an
+imported classical invariant.  Classical results are used as typed backings
+and are labeled as such in Section~\ref{sec:scope}.
+
+\section{EFC v2: the expanded fold calculus as a typed input-universal
+process algebra}
+\label{sec:efc}
+
+\subsection{Types}
+
+Fix the category of smooth complex projective varieties.  The typed data:
+\begin{itemize}
+\item $\mathrm{WORLD}(d)$: a smooth projective $X$ with $\dim X=d$ and a
+fixed ample class $H$;
+\item $\mathrm{CLASS}(p)$: rational even cohomology classes with graded
+components $\alpha=\alpha_p$ concentrated in degree $2p$ (the input sector
+below is: $\alpha\in \Hdg^{p,p}(X)\cap H^{2p}(X,\Q)$);
+\item $\mathrm{CHAR}(p,r,m)$: the \emph{pure character}
+$c=r+m\alpha$ with $r\ge1$, $m\in\Z_{>0}$: the component in every grade
+$\ne 0,p$ vanishes;
+\item $\mathrm{CARRIER}$: an exact topological vector bundle realizing a pure
+character (cycle-1 Theorem A: it exists for every input at scaled
+characters, with rank floor $r_0=\max(p+1,d+1)$);
+\item $\mathrm{PAIR}(p,r,m)$: a pair $E_\pm$ of exact bundles of equal rank
+$r$ with $\ch(E_+)-\ch(E_-)=m\alpha$ and all off-grade-$p$ components zero;
+\item $\mathrm{CYCLE}(p)$: rational algebraic cycles in $\CH^p(X)_\Q$.
+\end{itemize}
+A pair or carrier is \emph{integrable} when the bundle(s) carry holomorphic
+structures.  Integrability is the classical Koszul--Malgrange condition
+$(\bar\partial_E)^2=0$; it is a property of the bundle plus its operator,
+and is unchanged by re-presentation.
+
+\subsection{The five typed fold laws (owner's calculus, recalled)}
+\label{sec:five}
+
+The owner's expanded fold calculus, as formalized in the cycle-1 dossier from
+the record corpus, consists of the typed laws:
+\begin{enumerate}
+\item[\textup{L1}] \textbf{Spatial fold / Segre return}: for
+$\pi\colon\Pp(\mathcal E)\to X$ with $\rk\mathcal E=r$, rank-$r$ bundles over
+the total space return $\pi_*(\ch(\cdot))=\pi_*(\cdot)\cdot
+(1-e^{c_1(\mathcal O(1))})/(1-e^{-c_1(\mathcal O(1))})$-corrected sums
+\emph{and} the associated Segre/Schur classes; input type
+$(\mathrm{WORLD},\mathcal E)$; output type $\mathrm{CLASS}$ data on $X$.
+\item[\textup{L2}] \textbf{Determinantal return (Thom--Porteous)}: for
+$\sigma\colon\Oo^s\to\mathcal F\tensor L$ general with expected codimension,
+the fundamental class of the degeneracy center is the Porteous determinant
+$c_{p}(\mathcal F\tensor L)$-combination; input type
+$(\mathrm{WORLD},\mathcal F,L,s)$; output type $\mathrm{CYCLE}$ data.
+\item[\textup{L3}] \textbf{Rees birth}: for a bundle map on
+$X\times\A^1$, the Rees algebra births the limit bundle $b_*E^c$ with the
+signed fundamental-class return $b_*E^c=(-1)^{c-1}[Z]$ on the central fiber;
+input type $(\mathrm{WORLD},$ map data$)$; output type
+$\mathrm{CYCLE}$ data.
+\item[\textup{L4}] \textbf{Two-center landing}: the pair-form identity
+$[D_+]-[D_-]=(-1)^{p-1}(p-1)!\,m\,\alpha$ of Theorem C
+\cite{GST-gr25}; input type $\mathrm{PAIR}(p,r,m)$ \emph{integrable} plus
+generating twists; output type $\mathrm{CYCLE}(p)$ with
+$\cl(W)=\alpha$.
+\item[\textup{L5}] \textbf{Component birth}: at discriminant splits, the
+signed components $\sum\varepsilon_j[C_j]$ are born in $\CH^p(X)_\Q$ with the
+signed return; input type $(\mathrm{WORLD},$ degeneracy data$)$; output type
+$\mathrm{CYCLE}$ data.
+\end{enumerate}
+
+\subsection{The upgrade: two totality meta-laws}
+\label{sec:totality}
+
+The owner's directive is that the calculus be a \emph{process that applies to
+all inputs}.  This is formalized as two meta-laws, proved to the level of
+their classical backings.
+
+\begin{meta-law}[Input-uniform totality of each law]
+\label{law:MU1}
+Each law $\mathrm L\in\{\mathrm{L1},\dots,\mathrm{L5}\}$ is \emph{total on
+its input type}: for \emph{every} input of the prescribed type the output is
+defined, and the class-return identity of the law holds.  For L2 and L5 the
+input TYPE itself carries the general-position conditions (globally generated
+after a Serre twist, general sections, expected codimension); totality is
+totality ON THAT TYPE, not a side-condition-free assertion --- the generation
+and genericity requirements are folded into the type discipline, and the
+Serre generation step is input-uniform on projective worlds.  Moreover each
+law is \emph{grade-typed}: it either preserves the graded support of pure
+characters (the grade-preserving laws: pullback, dual, direct sum --- the
+transport edges of Theorem~\ref{thm:T}) or it is declared grade-mixing
+(Gysin/pushforward with Todd correction), in which case its output type is
+cycle-level, never carrier-level.  Tensor by a line bundle is NOT
+grade-preserving on pure characters and is excluded from the transport edges
+(see Remark~\ref{rem:notwist}).
+\end{meta-law}
+
+\begin{proof}[Proof (backings)]
+For L1: the projective-bundle/Schur formalism is defined for every smooth
+base and every exact bundle; the Segre return identity is the projective
+bundle theorem plus the Whitney sum, valid for all inputs of the type.  For
+L2: the input type includes the general-position condition; for every input
+OF THAT TYPE, Thom--Porteous applies and the determinantal formula is an
+identity (Fulton, \emph{Intersection Theory}, \S14.4).  For L3: the Rees algebra of any bundle map exists for all
+inputs of the type, and the central-fiber return follows from the deformation
+to the normal cone, valid for all inputs.  For L4: this is Theorem C of
+\cite{GST-gr25}, whose hypotheses (equal-rank integrable pure pair at scale
+$m\ne0$, generating twists, general sections, expected codimension) are
+exactly the type discipline of $\mathrm{PAIR}$ plus Serre generation
+(Serre: on projective $X$ every holomorphic $E$ becomes globally generated
+after a positive twist --- again input-uniform).  For L5: the signed
+component return at a discriminant split is the Porteous residue
+decomposition, valid for all inputs of the type.  The grade-typing is the
+splitting principle: pullback, dual and direct sum act on Chern roots by
+$e^{x_i}\mapsto e^{f^*x_i}$, $e^{-x_i}$, $\sum e^{x_i}+e^{y_j}$; each
+preserves the vanishing of off-grade components of a \emph{pure} character
+when applied to pure inputs of the same grade $p$ ($f^*$ is graded; the dual
+re-signs grades; direct sums add componentwise).  Line-tensor acts by
+$e^{x_i}\mapsto e^{x_i+\ell}$ and MIXES grades on pure characters
+($c_1$-cross-terms appear in every grade above $p$); it is therefore excluded
+from the transport edges, consistently with Remark~\ref{rem:notwist}.  Gysin
+maps compose with $\mathrm{td}$-correction and mix grades by GRR, which is
+why they are declared cycle-typed.
+\end{proof}
+
+\begin{meta-law}[Typed composition]
+\label{law:MU2}
+Total typed laws compose: if $\mathrm L$ (total on type $A$, output type
+$B$) is followed by $\mathrm L'$ (total on $B$), the composite is total on
+$A$.  The composite fold-process is therefore defined for every input of the
+initial type, and its class-return is the composite of the laws'
+class-returns.  This is a closure property of the typed process algebra, not
+a new geometric input.
+\end{meta-law}
+
+\begin{proof}
+Totality on types means: the output of the first law lies in the input type
+of the second for every input; the class-return identities compose by
+substitution.  No input-specific condition appears at any stage, so the
+composite is again input-uniform.
+\end{proof}
+
+\begin{remark}
+Meta-laws~\ref{law:MU1} and~\ref{law:MU2} are the precise content of the
+owner's phrase ``the next process applies'' --- for all $N$: the process
+algebra has no input-specific branch points.  What can remain per-input is
+only the \emph{bit} of Section~\ref{sec:pipeline}, and
+Theorems~\ref{thm:T}--\ref{thm:M} compress even that to one integer per
+fold-type.
+\end{remark}
+
+\section{The universal pipeline (Theorem U)}
+\label{sec:pipeline}
+
+\begin{definition}[The typed bit; the scale set]
+\label{def:bit}
+For an input $(X,p,\alpha)$ define the \emph{integrable-pair scale set}
+\[
+\Pi_I(X,p,\alpha)\;:=\;\bigl\{\,m\in\Z\;:\;
+\exists\ \text{an integrable pure pair } E_\pm \text{ at scale } m
+\,\bigr\},
+\]
+where an integrable pure pair at scale $m$ means: $E_\pm$ holomorphic, equal
+rank $r\ge1$, $\ch(E_+)-\ch(E_-)=m\alpha$ with all off-grade-$p$ components
+zero.  The \emph{typed bit} of the input is the statement
+$\Pi_I(X,p,\alpha)\ne\{0\}$.
+\end{definition}
+
+\begin{theorem}[Pipeline universality: for all $N$, the process applies]
+\label{thm:U}
+Let $X$ be smooth complex projective of dimension $d$, $1\le p\le d$, and
+$\alpha\in H^{2p}(X,\Q)$ rational (Hodge or not).  Then:
+\begin{enumerate}
+\item[\textup{(i)}] \textup{(APPLIES, unconditional)} The fold pipeline
+$\mathrm P(X,p,\alpha)$ is defined, with no input-specific side condition:
+\begin{itemize}
+\item[\textup{S1}] \emph{Topological pair}: there is an exact topological
+pure pair at a nonzero scale: by Theorem A \cite{GST-forcing-site} the exact
+carrier $E_\alpha$ with $\ch(E_\alpha)=r_0+m\alpha$ pure exists at rank
+$r_0=\max(p+1,d+1)$ and every scale $m$ divisible by the integrality scale
+$m_0$; pair it with the trivial side $\Oo^{r_0}$: the difference is $m\alpha$
+pure.
+\item[\textup{S2}] \emph{Arithmetic}: by Theorem B2 \cite{GST-forcing-site}
+every additive lattice congruence (RR/Schwarzenberger type) on an integrable
+realization is cleared along the scales $m\equiv0 \pmod N$ for an explicit
+$N=N(X,p,\alpha)$; the scale sector of the pipeline is the arithmetic
+progression $N\Z$ (a lattice condition with an explicit modulus, uniform in
+the input --- not an input-specific side condition).
+\item[\textup{S3}] \emph{Generation}: for any holomorphic realization,
+Serre generation supplies twists $L=\Oo(kH)$ making both sides globally
+generated; general sections $\sigma_\pm\colon\Oo^{s}\to E_\pm\tensor L$,
+$s=r-p+1$, have expected-codimension degeneracy centers
+$D_\pm=D_{s-1}(\sigma_\pm)$.
+\item[\textup{S4}] \emph{Fold}: by Theorem C \cite{GST-gr25}, in
+$\CH^p(X)_\Q$,
+\[
+[D_+]-[D_-]=(-1)^{p-1}(p-1)!\,m\,\alpha
+\qquad\text{CORRECTION-FREE, for every } p;
+\]
+\item[\textup{S5}] \emph{Landing}: $W:=\dfrac{(-1)^{p-1}}{(p-1)!\,m}
+\bigl([D_+]-[D_-]\bigr)\in\CH^p(X)_\Q$ satisfies $\cl(W)=\alpha$.
+\end{itemize}
+\item[\textup{(ii)}] \textup{(WORKS iff the bit)} the landing of
+$\mathrm P(X,p,\alpha)$ holds iff the typed bit of
+Definition~\ref{def:bit} fires: if $E_\pm$ is any integrable pure pair at
+scale $m\ne0$, then S3--S5 apply to it and produce $W$ with $\cl(W)=\alpha$
+(with the standing convention $r\ge p$: if the witness pair has rank
+$r<p$, augment both sides by $p-r$ trivial summands --- $E_\pm\oplus
+\Oo^{\oplus(p-r)}$ --- which changes neither the difference nor its purity
+nor integrability; so wlog $r\ge p$ and the section count $s=r-p+1\ge1$ of
+S3 is defined); conversely, if the pipeline's landing is produced from
+integrable inputs, the pair realizing S1 integrably is a witness of the bit.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) S1 is Theorem A verbatim (the carrier is exact: pure character, actual
+bundle; the trivial side is exact and pure).  S2 is Theorem B2(i) verbatim.
+S3 is Serre's theorem plus genericity of sections (the standard Bertini-type
+genericity inside the type; no condition on $\alpha$).  S4 is Theorem C
+verbatim, whose hypotheses are exactly S3's setup plus purity and integrality
+of the pair.  S5 is the definition of $W$ together with the cohomological
+reading of S4, since $\cl$ is $\Q$-linear and
+$\cl([D_\pm])$ are integral classes; the scalar
+$(-1)^{p-1}/((p-1)!\,m)$ is rational because $m\ne0$.  Every stage is
+$\forall$-quantified over its type with no input-specific branch.
+(ii) Given a witness pair, S3--S5 produce the cycle --- this direction uses
+nothing but the type discipline.  Conversely, if a landing $W$ with
+$\cl(W)=\alpha$ is produced by the pipeline, the pipeline's S1 input was an
+integrable pure pair at some nonzero scale, which is by definition a witness
+of the bit.  (Note the exactness discipline: the converse clause is a reading of the
+process, not a claim that algebraicity alone implies the bit; see
+Theorem~\ref{thm:N}(ii).)
+\end{proof}
+
+\begin{remark}
+Theorem~\ref{thm:U} is deliberately unconditional about existence of stages
+and deliberately single-pointed about what can fail: only integrability of
+the S1 pair.  This is the precise sense in which ``the process applies for
+all inputs'': the process is one total typed pipeline; the only
+input-indexed question left in the world is the bit of
+Definition~\ref{def:bit}.
+\end{remark}
+
+\section{Transport-constancy of the bit (Theorem T)}
+\label{sec:transport}
+
+\begin{theorem}[Transport laws]
+\label{thm:T}
+Integrable pure pairs transport as follows, for all inputs, with no
+side conditions beyond the types:
+\begin{enumerate}
+\item[\textup{T1}] \emph{(Pullback)} Let $f\colon X\to Y$ be holomorphic
+between smooth projective varieties and let $(Y,p,\beta)$ admit an
+integrable pure pair at scale $m$.  Then $(X,p,f^*\beta)$ admits an
+integrable pure pair at the same scale $m$: the pair
+$(f^*E_+,\ f^*E_-)$ is holomorphic (pullback of holomorphic is
+holomorphic), has equal ranks, and
+\[
+\ch(f^*E_+)-\ch(f^*E_-)=f^*(\ch(E_+)-\ch(E_-))=m\,f^*\beta ,
+\]
+which is pure: $f^*$ is graded, annihilates the off-grade zeros, and
+preserves rational $(p,p)$-type when $\beta$ is of $(p,p)$ type.
+\item[\textup{T2}] \emph{(Pair-sum)} If $(X,p,\alpha)$ admits integrable
+pure pairs at scales $m$ and $m'$, it admits one at scale $m+m'$: take
+$E_+\oplus E'_+$ versus $E_-\oplus E'_-$; ranks add equally; characters add;
+off-grade components add zero-to-zero; the scale adds.
+\item[\textup{T3}] \emph{(Swap; dual-swap)} Swapping the pair transports
+scale $m$ to $-m$.  The dual-swap $(E_-^\vee,\ E_+^\vee)$ is an integrable
+pure pair at scale $(-1)^{p+1}m$, because
+$\ch(E^\vee)_k=(-1)^k\ch_k(E)$ grade-wise.
+\item[\textup{T4}] \emph{(Single-to-pair)} If $E$ is an integrable single
+exact carrier with pure character $r+m\alpha$, then $(E,\Oo^{r})$ is an
+integrable pure pair at scale $m$.
+\item[\textup{T5}] \emph{(Scaling)} If a witness exists at scale $m$, a
+witness exists at scale $km$ for every integer $k\ge0$: iterate T2 (and T3
+for negatives).
+\end{enumerate}
+Consequently the scale set $\Pi_I$ is a transport-invariant of the
+fold-type: along a pullback edge $f\colon X\to Y$,
+\[
+\Pi_I(Y,p,\beta)\subseteq\Pi_I(X,p,f^*\beta).
+\]
+\end{theorem}
+
+\begin{proof}
+T1: holomorphic pullback is standard (the pullback operator on
+$\bar\partial$-structures composes; the pulled-back structure is integrable
+because $(\bar\partial_{f^*E})^2=f^*(\bar\partial_E)^2=0$).  The
+naturality $\ch(f^*E)=f^*\ch(E)$ is the functoriality of Chern classes.
+Grading: $f^*\colon H^{2k}(Y,\Q)\to H^{2k}(X,\Q)$, so off-grade components
+stay zero and grade $p$ maps to grade $p$; rational $(p,p)$ type pulls back
+to rational $(p,p)$ type for holomorphic $f$ (Hodge structures pull back).
+T2: direct sums of holomorphic bundles are holomorphic; $\ch$ is additive;
+the off-grade components of the summed difference are sums of zeros; the
+grade-$p$ component is $(m+m')\alpha$.  T3: swap is bookkeeping; for the
+dual-swap, the dual of a holomorphic bundle is holomorphic, and the graded
+dual character is $\ch_k(E^\vee)=(-1)^k\ch_k(E)$ (Chern roots negate), so
+the new difference has grade-$k$ component
+$(-1)^k(\ch_k(E_-)-\ch_k(E_+))=(-1)^k(-m\alpha\,\delta_{k,p})
+=(-1)^{p+1}m\alpha\,\delta_{k,p}$.
+T4: $\ch(\Oo^r)=r$, so the difference is exactly the pure character of $E$;
+both sides holomorphic.  T5: induction on $k$ with T2; T3 covers $k<0$.
+The transport-invariance clause is T1 restated.
+\end{proof}
+
+\begin{remark}[What is NOT claimed]
+\label{rem:notwist}
+Tensoring by a holomorphic line bundle is \emph{not} a scale-transport on
+pairs: the twisted difference acquires higher-grade terms
+$m\alpha\,c_1(L)^{j-p}$ (twist-mixing), so the twisted pair is generally not
+pure.  This is exactly the twist-cancellation phenomenon isolated in the
+cycle-1 lattice completion (Lemma T there): the pair \emph{form} is what
+cancels twists, and the pair form is the one retained here.  No false
+transport law is used anywhere below.
+\end{remark}
+
+\section{The fold-scale group and the invariant \texorpdfstring{$m^\star$}{m*}}
+\label{sec:group}
+
+\begin{theorem}[Fold-scale group; principality]
+\label{thm:M}
+For every input $(X,p,\alpha)$:
+\begin{enumerate}
+\item[\textup{(i)}] $\Pi_I(X,p,\alpha)$ is an additive subgroup of $\Z$:
+$0$ lies in it (the trivial pair $(E,E)$ for any holomorphic $E$, e.g.\
+$E=\Oo$); it is closed under $+$ (T2) and under negation (T3).
+\item[\textup{(ii)}] Hence either $\Pi_I=\{0\}$, or
+$\Pi_I=m^\star\Z$ for a unique
+\[
+m^\star=m^\star(X,p,\alpha)\;:=\;\min\bigl(\Pi_I\cap\Z_{>0}\bigr)\in\Z_{\ge0},
+\]
+the least positive scale; in the first case set $m^\star:=0$.  Every
+occurring scale is a multiple of $m^\star$, and $m^\star$ itself occurs.
+\item[\textup{(iii)}] $m^\star$ is the complete per-type content of the bit:
+the bit fires iff $m^\star>0$; and $m^\star$ is monotone along transport
+edges: for $f\colon X\to Y$,
+\[
+m^\star(X,p,f^*\beta)\ \big|\ m^\star(Y,p,\beta)
+\quad\text{whenever } m^\star(Y,p,\beta)>0 .
+\]
+\item[\textup{(iv)}] \emph{(Relation to the committed carrier-scale layer;
+symbol disambiguation)} Let $\Sigma(X,p,\alpha)$ denote the committed
+cycle-2 CARRIER scale monoid (scales of integrable single exact carriers with
+pure character $r+m\alpha$; its least element, when nonempty, is the
+committed symbol $m^\star_{\mathrm c}$ of cycle 2 --- a different quantity
+from the pair-scale generator $m^\star$ of this dossier).  By T4, every
+integrable single carrier at scale $m$ yields an integrable pure pair at the
+same scale, so $\Sigma$ embeds into the positive part of $\Pi_I$; therefore
+\[
+m^\star \ \big|\ m \quad\text{for every } m\in\Sigma,
+\qquad\text{in particular } m^\star \big| m^\star_{\mathrm c} .
+\]
+The inclusion direction matters and is stated exactly: a pure pair difference
+need not come from a single carrier (that is the committed open monoid layer
+of cycle 2, still open here); a single carrier always gives a pair (T4).
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) The trivial pair has zero difference, is integrable, and has equal ranks;
+closure laws are T2 and T3.  (ii) A nontrivial additive subgroup of $\Z$ is
+cyclic: take the least positive element $m^\star$ (well-ordering; the set is
+nonempty by T5 from any nonzero member); for any $s\in\Pi_I$, write
+$s=qm^\star+r$ with $0\le r<m^\star$; then
+$r=s-qm^\star\in\Pi_I$ by the group laws (T5 for the multiple, T2/T3 for the
+difference); minimality forces $r=0$.  Uniqueness of $m^\star$ is immediate.
+(iii) The bit is $\Pi_I\ne\{0\}$, i.e.\ $m^\star>0$ by (ii).  Monotonicity:
+T1 gives $\Pi_I(Y)\subseteq\Pi_I(X)$, so the least positive element of the
+right side divides every element of the left; with (ii),
+$m^\star(X)\mid s$ for all $s\in\Pi_I(Y)$, in particular
+$s=m^\star(Y)$.  (iv) T4 constructs the pair $(E,\Oo^{r})$ from any single
+carrier $E$ at scale $m$; the character difference is unchanged and pure, and
+both sides remain holomorphic, so $m$ lies in $\Pi_I$: this is the embedding
+of the committed carrier-scale monoid $\Sigma$ into the positive part of the
+pair-scale group.  The reverse need not hold (a pure pair difference need not
+come from a single carrier --- the committed open monoid layer), which is why
+the inclusion is stated in this direction only.  The divisibility clause
+follows: $m^\star$ divides every element of $\Pi_I$, hence every carrier
+scale, hence $m^\star_{\mathrm c}$ whenever the carrier monoid is nonempty.
+\end{proof}
+
+\begin{remark}
+$m^\star$ is a GST-native world quantity: it is defined purely by the owner's
+fold data (which pure characters of the world are carried by actual
+holomorphic fold-witnesses), it is transportable along the type-graph edges,
+and it is arithmetic (a nonnegative integer, principal by a group law).  The
+entire input-indexed content of the conjecture is henceforth carried by one
+such integer per input.
+\end{remark}
+
+\section{The for-all-\texorpdfstring{$N$}{N} theorem (Theorem N)}
+\label{sec:forallN}
+
+\begin{theorem}[For all inputs: witness $\Rightarrow$ algebraic;
+the collapse]
+\label{thm:N}
+\begin{enumerate}
+\item[\textup{(i)}] \emph{(For every input, correction-free)} If
+$m^\star(X,p,\alpha)>0$ then $\alpha$ is algebraic: take the witness pair at
+scale $m^\star$, run S3--S5 of Theorem~\ref{thm:U}, and obtain
+$W\in\CH^p(X)_\Q$ with
+\[
+\cl(W)=\frac{(-1)^{p-1}}{(p-1)!\,m^\star}
+\bigl((-1)^{p-1}(p-1)!\,m^\star\,\alpha\bigr)=\alpha .
+\]
+\item[\textup{(ii)}] \emph{(The equivalence; committed direction + here)}
+If $\alpha$ is algebraic then $m^\star(X,p,\alpha)>0$: by the committed
+cycle-2 pair-form equivalence (W2 there: the pair form holds at some positive
+integer scale iff $\alpha$ is algebraic; audit-closed at PASS through the
+9-a/9-b/9-c loop), an algebraic $\alpha$ admits an integrable pure pair at
+some positive scale, i.e.\ a nonzero element of $\Pi_I$, hence
+$m^\star>0$ by Theorem~\ref{thm:M}(ii).  Together with (i):
+\[
+\boxed{\;m^\star(X,p,\alpha)>0\iff \alpha\ \text{algebraic}.\;}
+\]
+The strike's contribution on this point is the \emph{refinement}: the
+positive side of the equivalence is not a bare existence statement but a
+principal scale group $m^\star\Z$ (Theorem~\ref{thm:M}), so the algebraicity
+content of the input is ONE nonnegative integer per fold-type, transportable
+along edges.  What remains open at the leaf level is the
+\emph{$m^\star$-pinning question} (leaf~E15, re-scoped): no
+presentation-independent characterization of $m^\star$ is known beyond the
+seed worlds and the transport edges of Theorem~\ref{thm:M}(iii).
+\item[\textup{(iii)}] \emph{(THE COLLAPSE)} Define the single universal law
+\[
+\boxed{\;\FS:\quad
+\text{for every smooth projective } X,\ 1\le p\le d,\
+\alpha\in\Hdg^{p,p}(X)\cap H^{2p}(X,\Q):\ \
+m^\star(X,p,\alpha)>0 .\;}
+\]
+Then the Hodge conjecture (every rational $(p,p)$ Hodge class on every
+smooth projective complex $X$ is a rational linear combination of classes of
+algebraic subvarieties) is \emph{equivalent} to $\FS$: the direction
+$\FS\Rightarrow\mathrm{HC}$ is (i) applied simultaneously to all inputs; the
+direction $\mathrm{HC}\Rightarrow\FS$ is (ii) applied simultaneously to all
+inputs.  Moreover, inside this reduction no per-input case structure survives:
+by Theorem~\ref{thm:M}(iii) the law $\FS$ is a statement about the fold-type
+graph (one integer per type, monotone along edges), and by
+Theorem~\ref{thm:U}(i) the process realizing the landing is one total typed
+pipeline with no input-specific branch.  The input space (all inputs, ``all
+$N$'') has been compressed into one universal law whose per-type content is a
+single principal integer.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) is Theorem~\ref{thm:U}(ii) specialized to the least positive scale,
+using Theorem~\ref{thm:M}(ii) (that $m^\star$ itself occurs as a scale).
+(ii): the committed W2 direction gives an integrable pure pair at some
+positive scale for algebraic $\alpha$; Theorem~\ref{thm:M}(ii) converts the
+nonzero scale group into $m^\star>0$.  (iii): both directions are (i) and
+(ii) applied to all inputs; the structural clauses are
+Theorem~\ref{thm:M}(iii) and Theorem~\ref{thm:U}(i) restated.
+\end{proof}
+
+\begin{remark}[M3 discipline]
+The collapse is an \emph{equivalence} with a single, input-free, universal
+law, and it is recorded as normalization (a restatement), not as progress:
+both directions are attributed ((i) here; (ii) the committed cycle-2 W2
+equivalence, audit-closed).  What the normalization adds --- and the only
+progress content claimed --- is structure: $\FS$ is arithmetic (the scale
+group), principal (one integer per fold-type, Theorem~\ref{thm:M}(ii)),
+transportable (Theorem~\ref{thm:M}(iii)), and seed-certified with exact
+determinations ($m^\star(\Pp^2,1,h)=2$;
+$m^\star(\Gr(2,5),2,\alpha)=360$).  The truth of $\FS$ on the open sector
+is the exact remainder, stated as one law; no per-input conditional is
+smuggled back in.
+\end{remark}
+
+\section{The seed sector: the bit is certified true on explicit worlds}
+\label{sec:seeds}
+
+\subsection{The \texorpdfstring{$\Pp^2$}{P2} determination}
+
+\begin{theorem}[$m^\star(\Pp^2,1,[\mathrm{line}])=2$; full determination]
+\label{thm:P}
+On $X=\Pp^2$ with $\alpha=h=c_1(\Oo(1))\in H^2(\Pp^2,\Q)$ and $p=1$:
+\begin{enumerate}
+\item[\textup{(i)}] \emph{(Witness)} The pair
+\[
+E_+=\Oo(1)\oplus\Oo(1),\qquad
+E_-=\Oo(1)\oplus\Oo(-1)
+\]
+is an integrable pure pair at scale $2$: ranks are equal ($2=2$) and
+\[
+\ch(E_+)-\ch(E_-)
+=2e^{h}-e^{h}-e^{-h}=e^{h}-e^{-h}=2\sinh(h)
+=2h+2\frac{h^3}{3!}+2\frac{h^5}{5!}+\cdots
+=2h\quad\text{on } \Pp^2\ (h^3=0),
+\]
+pure at grade $1$; the grade-2 term cancels because $\sinh$ is odd.
+\item[\textup{(ii)}] \emph{(Obstruction)} Every integrable pure pair on
+$\Pp^2$ with difference $m h$ has $m$ even.  Indeed let
+$c_1(E_\pm)=a_\pm h$ and $c_2(E_\pm)=k_\pm h^2$ with
+$a_\pm,k_\pm\in\Z$ (integrality of the Chern lattice of $\Pp^2$).
+Purity at grade $2$ means $\ch_2(E_+)=\ch_2(E_-)$, i.e.
+\[
+\frac{a_+^2-2k_+}{2}=\frac{a_-^2-2k_-}{2}
+\;\Longleftrightarrow\;
+(a_+-a_-)(a_++a_-)=2(k_+-k_-).
+\]
+The left side is $m\,(a_++a_-)$; the right side is even.  Since
+$a_++a_-\equiv a_+-a_-=m \pmod 2$, if $m$ were odd then $a_++a_-$ would be
+odd and the left side odd --- contradiction.  Hence $m$ is even.
+
+\item[\textup{(iii)}] Consequently $m^\star$ divides $2$, is positive by
+(i), and is even by (ii): $m^\star(\Pp^2,1,h)=2$ exactly.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+As stated: (i) is the displayed computation; the truncation is legitimate
+because $H^{2j}(\Pp^2,\Q)=0$ for $j\ge3$.  (ii) is the Chern-lattice
+argument; note it applies to \emph{arbitrary} holomorphic bundles, not only
+sums of line bundles: only integrality of $c_1$-and-$c_2$ coefficients enters.
+(iii) follows from Theorem~\ref{thm:M}(ii).
+\end{proof}
+
+\begin{remark}[Parity is load-bearing here]
+The parity obstruction in (ii) is the rank-independent form of the
+$x^2\equiv x\pmod 2$ argument: for sums of line bundles it reads
+$\sum a_i^2-\sum b_j^2=0\Rightarrow\sum a_i-\sum b_j$ even, since
+$x^2\equiv x \pmod 2$ termwise.  The Chern-lattice form above extends it to
+all holomorphic pairs on $\Pp^2$.  This is the same parity phenomenon that
+the cycle-1 m-congruence analysis flagged on $\Pp^2$ for single carriers at
+$p=1$; the pair form pins it as an exact $m^\star$-determination.
+\end{remark}
+
+\subsection{Curves, points, and the committed high-codimension seed}
+
+\begin{proposition}[Curve worlds have $m^\star=1$ on the point class]
+\label{prop:curve}
+Let $X$ be a smooth projective curve and $\alpha=[\mathrm{pt}]\in H^2(X,\Q)$
+($p=1$).  Then $m^\star(X,1,[\mathrm{pt}])=1$: for any line bundle $L$ of
+degree $1$ (such $L$ exist on every smooth projective curve), the pair
+$(L,\Oo)$ is an integrable pure pair at scale $1$ ($\ch$ of a line bundle on
+a curve truncates at grade $1$: $\ch(L)-\ch(\Oo)=c_1(L)=[\mathrm{pt}]$
+exactly, and no grade $\ge2$ exists on a curve), and positive scales are
+unconstrained.
+On a point ($d=0$) every input is trivially resolved and the sector is
+empty.
+\end{proposition}
+
+\begin{proof}
+Immediate from the truncation of $\exp$ at degree $\dim X=1$ and the
+vanishing of higher cohomology.
+\end{proof}
+
+\begin{theorem}[$\Gr(2,5)$ seed: the bit fires at high codimension]
+\label{thm:grseed}
+On the committed calibration world $\Gr(2,5)$ with
+$\alpha=\frac25h^2-s_2\in\Hdg^{2,2}$ ($p=2$), the completed pure pair
+$(E_+,E_-)$ of \cite{GST-gr25} --- equal ranks $2231=2231$, character
+difference exactly $360\,\alpha$, all grades $\ge3$ certified equal ---
+is an integrable pure pair at scale $360$.  Moreover the committed cycle-1
+K-lattice \emph{necessity} (an integral $K$-class with pure character
+$m\alpha$ exists iff $360\mid m$; proved in the cycle-1 derivation and
+verified by the 47/47 computational cross-check of the cycle-1 audit;
+explicitly NOT kernel-verified --- the certificate lists it in its Context
+section) applies to every integrable pure pair: the difference
+$[E_+]-[E_-]$ is an integral $K$-class with character $m\alpha$, so
+$360\mid m$.  By Theorem~\ref{thm:M}(ii) ($m^\star$ divides every scale
+and occurs itself), $m^\star\mid 360$ and $m^\star$ occurs; by the
+necessity $360\mid m^\star$.  Hence
+\[
+\boxed{\;m^\star(\Gr(2,5),2,\alpha)=360\ \text{exactly}.\;}
+\]
+The former leaf E16 is thereby \emph{closed} (no further lattice computation
+was needed: the committed necessity plus principality suffice).
+\end{theorem}
+
+\begin{proof}
+The pair is a pair of sums of actual holomorphic Schur bundles
+($S^\vee$, $\mathrm{Sym}^jS^\vee\tensor\Oo(i)$, $\Oo(i)$), hence integrable;
+the purity certificates are the kernel-verified statements of the committed
+Lean certificate \cite{GST-gr25} (CI-green, axiom-audited); the necessity
+$360\mid m$ for every integral pure character at scale $m$ is the committed
+minimality statement of the cycle-1 derivation (proved there in the .tex;
+cross-checked 47/47 in the cycle-1 audit; the certificate's kernel content is
+the purity/rank/period table, with minimality recorded in its Context
+commentary).  The scale-group consequences are Theorem~\ref{thm:M}.
+\end{proof}
+
+\begin{remark}[The resolved sector, stated with exactness]
+\label{rem:resolved}
+The \emph{bit-true} worlds certified so far: points (vacuous), curves
+(Proposition~\ref{prop:curve}), $\Pp^2$ (Theorem~\ref{thm:P}),
+$\Gr(2,5)$ (Theorem~\ref{thm:grseed}).  Separately, the
+\emph{conclusion-true} sector: all inputs with $p\in\{0,1,d-1,d\}$ and
+$d\le3$ resolved by committed in-repo results (Lefschetz $(1,1)$,
+boundary codimensions, divisor-generated subalgebra).  These two sectors are
+related but kept distinct for bookkeeping: on conclusion-true worlds the
+bit is TRUE (Theorem~\ref{thm:N}(ii): algebraicity implies $m^\star>0$ via
+the committed W2 direction); on bit-true worlds the conclusion holds by
+Theorem~\ref{thm:N}(i).  The two sectors carry different CERTIFICATE types
+(explicit pair witnesses versus conclusion-level results); neither is used to
+inflate the other.  The open sector $2\le p\le\lfloor d/2\rfloor$,
+$d\ge4$ is the exact remainder of $\FS$ (the truth of the law there).
+\end{remark}
+
+\section{The ontological type-graph upgrade (Theorem G)}
+\label{sec:ontology}
+
+\begin{definition}[The upgraded GST graph $\Gamma$]
+\label{def:gamma}
+The \emph{upgraded ontological type-graph} $\Gamma$ is the directed,
+typed graph:
+\begin{itemize}
+\item \emph{Vertices} (Hodge types): tuples
+$\bigl([X],p,[\alpha]\bigr)$ where $[X]$ is the smooth projective world up
+to isomorphism, $1\le p\le\dim X$, and $[\alpha]$ is the rational
+$(p,p)$-class data of a Hodge class, considered up to isomorphism of the
+world and up to the class-identification generated by the pullback transport
+edges below ($[\alpha]=[f^*\beta]$ when a transport edge connects them).
+\item \emph{Transport edges} (grade-preserving, witness-carrying, all from
+Theorem~\ref{thm:T}): pullback edges
+$([Y],p,[\beta])\to([X],p,[f^*\beta])$ for every holomorphic $f$;
+sum edges within a vertex (witness arithmetic); dual-swap loops; the
+single-to-pair inclusion; scaling loops.
+\item \emph{Process edges} (the five fold laws as typed edges with the
+totality meta-laws \ref{law:MU1}--\ref{law:MU2}): L1--L5 act as typed
+world-to-world and class-to-cycle edges; grade-mixing laws point only to
+cycle-level vertices.
+\item \emph{The vertex quantity} $m^\star\colon V(\Gamma)\to\Z_{\ge0}$
+(Theorem~\ref{thm:M}).
+\end{itemize}
+$\Gamma$ is exactly the upgrade of the GST graph ontological layer that the
+directive ordered: the graph now carries the owner's expanded fold calculus
+as its typed, total edge-laws, and the Hodge inputs are its vertices.
+\end{definition}
+
+\begin{theorem}[The graph reading; the single-law completion frame]
+\label{thm:G}
+\begin{enumerate}
+\item[\textup{(i)}] $m^\star$ is a vertex quantity, monotone along transport
+edges (Theorem~\ref{thm:M}(iii)), and the scale group is a vertex invariant:
+$\Pi_I$ depends only on the vertex, not on the presentation of the world or
+of the class.
+\item[\textup{(ii)}] The law $\FS$ is the single graph law: every Hodge-type
+vertex of $\Gamma$ has $m^\star>0$.  The Hodge conjecture follows from it
+(Theorem~\ref{thm:N}(iii)).
+\item[\textup{(iii)}] The law is verified on the certified seed vertices
+(points, curves, $\Pp^2$ with $m^\star=2$, $\Gr(2,5)$ with $m^\star\mid360$),
+and on those vertices every positive-scale multiple of $m^\star$ is a
+certified witness scale.
+\item[\textup{(iv)}] \emph{(Completion frame, with full exactness)} The campaign
+remainder is the truth of the single universal law $\FS$ on the open sector
+(an equivalence form of the conjecture by Theorem~\ref{thm:N}).  Its attack
+surface is now structured: (a) vertex certificates --- on a presented world,
+the committed bounded lattice method decides the \emph{character-envelope}
+scale structure (as it did on $\Gr(2,5)$, where the envelope determination
+plus the committed witness pair closed the value $m^\star=360$); producing
+an integrable pair witness at the determined scale is the per-world task,
+certified so far exactly on the seed worlds, and each certificate transports
+along all edges out of its vertex; (b) structural attacks on the law itself
+--- the group law (Theorem~\ref{thm:M}) and the transport monotonicity
+constrain $\FS$ to the transport-closure of the seed sector in $\Gamma$;
+which generators of that closure suffice to force the law is itself part of
+the open question, not a settled reduction.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) restates Theorem~\ref{thm:T}/\ref{thm:M}; (ii) restates
+Theorem~\ref{thm:N}(iii) in graph language; (iii) is
+Section~\ref{sec:seeds}; (iv) is the assembled state of the reduction with
+the exactness discipline of Remark~\ref{rem:resolved}.
+\end{proof}
+
+\section{GST and V6 Mode B receipts for this strike}
+\label{sec:receipts}
+
+\begin{itemize}
+\item \emph{GST laws used as the engine}: the five typed fold laws L1--L5
+(the owner's expanded fold calculus, from the 2026-10-21--24 record corpus);
+the upgraded \texttt{GSTGraphV2Ontological} layer (Definition~\ref{def:gamma}
+--- the graph carries the calculus as typed total edge-laws); world-birth
+language for the seed witnesses (explicit holomorphic worlds with explicit
+fold witnesses); the cycle-1/2 GST-native firewall discipline
+(NativeCycleRecoordination / CMNM closure-reaches-Hodge-iff-actual-cycle)
+preserved here as the M3 rule that the equivalence is attributed and recorded
+as normalization (Theorem~\ref{thm:N}).
+\item \emph{V6 Mode B with the five sub-skills}: this strike runs the Mode B
+campaign pipeline --- problem selection (the tractable core: the for-all-$N$
+reduction rather than an instance decision), prompt contract (the campaign
+PROMPT.md contract held: fixed target, no family switching, no
+diagnostics-as-progress), the research loop (this dossier + the registry
+update), adversarial audit (the independent audit loop of Phase 4 runs after
+the commit), and formalization (the companion Lean certificate
+kernel-checks the seed witness, the scale-group laws, and the abstract
+for-all-$N$ packaging).
+\item \emph{Classical backings, labeled}: Serre generation;
+functoriality/naturality of $\ch$; holomorphic pullback/dual/direct-sum;
+Thom--Porteous; Koszul--Malgrange; GAGA (via the committed Theorem C);
+integrality of the $\Pp^2$ Chern lattice; well-ordering/principal subgroups
+of $\Z$.  No external result is used beyond these standard facts, and none
+is used silently.
+\end{itemize}
+
+\section{Companion Lean certificate}
+\label{sec:lean}
+
+The companion file \texttt{GSTGraphV2OntologicalFoldForAllN.lean}
+(path-filtered workflow, CI-verified) kernel-checks the machine-checkable
+core of this dossier:
+\begin{itemize}
+\item the $\Pp^2$ seed witness: the grade-$0/2$ cancellation and the scale
+$2$ (the literal identity behind Theorem~\ref{thm:P}(i));
+\item the parity obstruction in the rank-$2$ line-sum form
+(Theorem~\ref{thm:P}(ii) witness-class case);
+\item the purity-preservation and scale-group laws of the abstract fold-pair
+calculus (Theorem~\ref{thm:M}(i) at the abstract level: zero, closure under
+sum and negation, multiples);
+\item the abstract universal pipeline with the for-all-$N$ packaging: on a
+type of inputs, the single universal bit implies the landing for every input
+(the $\Leftarrow$ direction of Theorem~\ref{thm:N}(iii) at the logical
+level), with the classical laws as clearly-labeled record fields per the repo
+convention;
+\item the principality theorem \texttt{scaleSet\_principal} (least positive
+scale divides every scale, by \texttt{Nat.find} well-ordering plus a
+\texttt{Nat.div\_add\_mod} descent) and the determination
+\texttt{p2\_mstar\_eq\_two} within the LINE-SUM pair calculus instance
+\texttt{P2PairCal} (pairs of sums of line bundles: the witness-pair
+arithmetic and the parity obstruction in their all-rank line-sum form).
+SCOPE: the extension of the parity obstruction to ALL holomorphic pairs on
+$\Pp^2$ via Chern-lattice integrality (Theorem~\ref{thm:P}(ii)) is
+derivation-level mathematics and is NOT kernel-checked in the certificate;
+\item capstone conjunctions with \texttt{\#print axioms} audit.
+\end{itemize}
+The certificate scopes exactly what it checks; nothing beyond is claimed.
+
+\section{Scope box}
+\label{sec:scope}
+
+\begin{itemize}
+\item \emph{Proven here (full proofs)}: Meta-laws~\ref{law:MU1}
+(to the level of the stated classical backings) and~\ref{law:MU2};
+Theorem~\ref{thm:U} (assembling committed Theorems A, B2, C and Serre);
+Theorem~\ref{thm:T} (T1--T5); Theorem~\ref{thm:M} (i)--(iv);
+Theorem~\ref{thm:N} (i)--(iii); Theorem~\ref{thm:P} (the full determination
+$m^\star(\Pp^2,1,h)=2$); Proposition~\ref{prop:curve};
+Theorem~\ref{thm:grseed} (from the committed certificate);
+Theorem~\ref{thm:G}.
+\item \emph{Committed inputs used, labeled}: Theorem A (exact carrier,
+cycle 1), Theorem B2 (congruence clearing, cycle 1), Theorem C
+(correction-free pair law, cycle 1 lattice completion), the $\Gr(2,5)$
+completed pure pair certificate (cycle 1, CI-green, kernel-verified), the
+cycle-2 character scale-monoid.
+\item \emph{Standard external inputs, named}: Serre generation; Chern
+functoriality; holomorphic pullback/dual/sum; the projective bundle theorem
+(Whitney sum); Thom--Porteous; the Rees algebra / deformation to the normal
+cone; Koszul--Malgrange; GAGA; $\Pp^2$ Chern-lattice integrality; principal
+subgroups of $\Z$ (well-ordering / $\texttt{Nat.find}$ in the companion).
+\item \emph{Explicitly NOT claimed}: the TRUTH of the law $\FS$ on the
+open sector (the single universal remainder --- $\FS$ is now an EQUIVALENCE
+form of the conjecture by Theorem~\ref{thm:N}(iii): $\Leftarrow$ new here,
+$\Rightarrow$ the committed cycle-2 W2 equivalence; the equivalence is
+normalization, not progress); leaf~E15 (re-scoped): the $m^\star$-pinning
+question --- no presentation-independent characterization of the least
+positive scale is claimed beyond the seed worlds and the transport edges;
+any CI claim about this \texttt{.tex} (the machine-checkable companion is
+the Lean certificate; GitHub Actions verifies that file).  Closed this
+strike: the former leaf E16 ($m^\star(\Gr(2,5),2,\alpha)=360$ exactly,
+by the committed K-lattice necessity plus principality).
+\item \emph{Discipline}: the equivalence $\mathrm{HC}\iff\FS$ is stated
+with both directions attributed and recorded as normalization (the campaign's
+M3 rule); the new content claimed is exactly the structure theorems
+(group law, principality, transport, seeds, the exact determinations
+$m^\star(\Pp^2,1,h)=2$ and $m^\star(\Gr(2,5),2,\alpha)=360$) and the
+universal pipeline; no banned terminology; statement integrity: the
+conjecture remains the target, the truth of $\FS$ on the open sector is its
+exact remainder in this frame.
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{GST-forcing-site}
+Campaign main agent, \emph{Forcing site: pure realization ladder, exactness
+closures, and the Gr(2,5) calibration carrier},
+\texttt{research/derivations/GST\_forcing\_site\_pure\_realization\_congruence\_closure\_calibration\_2026\_10\_24.tex}
+(commit 666e163, branch \texttt{research/gpt6-native-point-primitive-span-20261017}).
+\bibitem{GST-gr25}
+Campaign main agent, \emph{Gr(2,5) lattice completion, the completed pure
+pair, and the universal two-center descent law},
+\texttt{research/derivations/GST\_gr25\_pure\_pair\_lattice\_completion\_and\_universal\_two\_center\_descent\_law\_2026\_10\_24.tex}
+(commit 3ca08e7) with the companion certificate
+\texttt{GSTGr25PurePairLatticeCertificate.lean} (CI-green run 40088656807,
+axiom-audited).
+\bibitem{GST-carrier-verdict}
+Campaign main agent, \emph{Carrier-mechanism verdict: spread no-go and
+RR-invisibility} (cycle 2, strike 2), derivation and certificate of
+2026-10-25 (CI-green run 40114706009).
+\end{thebibliography}
+
+\end{document}

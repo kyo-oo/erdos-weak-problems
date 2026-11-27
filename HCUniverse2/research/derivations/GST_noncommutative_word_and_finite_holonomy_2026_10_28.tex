@@ -1,0 +1,236 @@
+\documentclass[11pt]{article}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\newcommand{\Q}{\mathbb Q}\newcommand{\Z}{\mathbb Z}
+\title{GST beyond one frame and commutative cubic dressing}
+\date{28 October 2026}
+\begin{document}\maketitle
+\paragraph{Contract.}
+Base: \texttt{417b4aa5a50280b655c31bd066f588e0c6330365}.
+The geometric input remains arbitrary original smooth projective complex
+$X$, codimension $p$, and prescribed rational Hodge $\alpha$. A successful
+universal source constructor must produce a cycle on this $X$ with its
+canonical Betti class. The results below remove specific algebraic
+restrictions of the preceding update. Actual geometric source operators,
+canonical comparisons, and finite holonomy are never inferred merely from
+these algebraic identities. Lean encodings are uncompiled proof drafts.
+
+\section{Word recovery can succeed where every scalar frame is singular}
+Let $V$ be a rational vector space of target Hodge classes and let
+$\mathrm{cl}:C\to W$ be the supplied cycle map, with $j:V\to W$ its
+cohomological inclusion. Suppose independently constructed source operations
+give maps $L_i:V\to C$ and linear $F_i:V\to V$ satisfying
+$\mathrm{cl}(L_i(v))=j(F_i v)$. The $L_i$ need not be linear.
+For a nonempty word $w=(i_1,\ldots,i_s)$ define
+\[
+ Z_w(\alpha)=L_{i_1}(F_{i_2}\cdots F_{i_s}\alpha).
+\]
+This does not require a native endomorphism on $C$ for the tail of the word;
+the tail is evaluated on the target Hodge fiber and then read into a solved
+source. Naturality gives its entire class.
+\begin{theorem}[Target-first word reconstruction]
+If a finite relation $\sum_w a_w F_w\alpha=\alpha$ holds, then
+$\sum_w a_w Z_w(\alpha)$ is an actual cycle with class $j(\alpha)$.
+An empty word is excluded: otherwise the purported construction would
+silently request the target's own cycle.
+\end{theorem}
+\begin{proof}
+Apply the cycle map and the displayed source identities, then linearity.
+Every resulting summand is $a_w j(F_w\alpha)$.
+\end{proof}
+Existing branch noncommutative frames already evaluate words on an algebraic
+spine. The distinction here is target-first source readout, no native tail
+operator, and the following explicit certificate rather than an assumed
+full-rank matrix of word outputs.
+
+Put
+\[
+ A=\begin{pmatrix}0&0&0\\0&0&-1\\0&1&0\end{pmatrix},\quad
+ B=\begin{pmatrix}0&0&1\\0&0&0\\-1&0&0\end{pmatrix},\quad
+ C=\begin{pmatrix}0&-1&0\\1&0&0\\0&0&0\end{pmatrix}.
+\]
+\begin{theorem}[Singular linear family, exact word identity]
+Over $\Q$ (and as polynomial matrix identities over $\Z$),
+\[
+ \det(xA+yB+zC)=0,\qquad A^2+B^2+C^2=-2I,
+ \qquad A^2B^2+A^2C^2+B^2C^2=I.
+\]
+Thus no fixed scalar combination gives an invertible global source frame,
+whereas three nonempty words recover every vector. The length-four formula
+has integer coefficients, eliminating the half in the shorter quadratic
+formula. No optimality of word length or denominator is asserted.
+\end{theorem}
+\begin{proof}
+The weighted matrix annihilates $(x,y,z)^t$; its determinant also expands
+identically to zero, including $(x,y,z)=0$.
+The squares are $\operatorname{diag}(0,-1,-1)$,
+$\operatorname{diag}(-1,0,-1)$ and
+$\operatorname{diag}(-1,-1,0)$.
+Their three pair products are the three coordinate projectors.
+All formulas follow without commuting $A,B,C$.
+\end{proof}
+For actual source operators obeying this word relation, the original-$X$
+cycle is, explicitly,
+$L_A(AB^2\alpha)+L_A(AC^2\alpha)+L_B(BC^2\alpha)$.
+Existence of such source geometry for arbitrary $X$ is not asserted.
+
+\section{The exact obstruction is larger than fixed vectors}
+Let $N=1-F$ be the preceding update's residual operator.
+\begin{theorem}[Generalized fixed-mode obstruction]
+Suppose $F^r\alpha=0$ for some finite $r$ and
+$q(N)\alpha=0$ for a rational polynomial with $q(1)\ne0$.
+Then $\alpha=0$.
+\end{theorem}
+\begin{proof}
+Induct on $r$. The case $r=0$ is immediate. For the successor, $F$ commutes
+with $q(N)$, so $F\alpha$ satisfies the same annihilator and has one shorter
+nilpotence length. Induction gives $F\alpha=0$. Consequently $N\alpha=\alpha$
+and $q(N)\alpha=q(1)\alpha=0$. Since $q(1)$ is nonzero, $\alpha=0$.
+\end{proof}
+In finite dimension, Fitting decomposition sharpens this: the largest
+subspace on which a fixed-$N$ polynomial certificate can work is the stable
+image of $F$, not necessarily its entire image. Indeed $V=\ker F^d\oplus
+\operatorname{im}F^d$ for stabilized $d$; $F$ is invertible on the second
+summand, whose residual minimal polynomial has no root at $1$. The theorem
+excludes the first summand. This is a hand-proof characterization; the Lean
+file encodes the universal generalized-mode obstruction without assuming
+finite dimension.
+For completeness choose $d$ with both kernels and images stabilized.
+If $x=F^dy$ also satisfies $F^dx=0$, then $F^{2d}y=0$; kernel stabilization
+gives $F^dy=0$, so $x=0$. Rank-nullity now makes the sum direct and exhaustive.
+Image stabilization makes $F$ bijective on the stable image. The characteristic
+polynomial of $N$ on that image annihilates it and has value
+$\det(1-N)=\det F\ne0$ at $1$, giving the required polynomial certificate.
+For example take $F=J_2(0)\oplus(2)\oplus(3)$.
+The spectral projector and inverse on the nonzero spectrum are
+\[
+ E=F^2(19I-5F)/36,\qquad L=F^2(65I-19F)/216,
+ \quad FL=LF=E.
+\]
+The first basis vector is in $\operatorname{im}F$ but lies in $\ker E$.
+Its source cycle can be obtained from the second vector; no fixed-$N$
+polynomial acting only on that first vector can recover it.
+The stronger distinction already occurs for $F=J_3(0)$:
+$e_2=Fe_3$ lies in the source image, $Fe_2=e_1\ne0$, and $F^2e_2=0$.
+It is not a fixed vector of $N=1-F$, so the old fixed-vector guard alone
+does not detect it. The generalized-mode theorem does.
+
+\section{Arbitrary nilpotent depth with no commutativity}
+In any associative unital ring define
+$x\star y=x+y+xy$. Then
+\[
+ 1+(x\star y)=(1+x)(1+y).
+\]
+\begin{theorem}[Ordered algebra-group dressing]
+The operation $\star$ is associative with identity zero. If $x^n=0$, set
+$S_n(x)=\sum_{k=0}^{n-1}(-x)^k$ and $x^{-\star}=S_n(x)-1$.
+Then $(1+x)S_n(x)=S_n(x)(1+x)=1$ and
+$x\star x^{-\star}=x^{-\star}\star x=0$.
+There is no commutativity, characteristic-zero, or cubic-depth restriction.
+For a nilpotent two-sided ideal all these coordinates stay in the ideal,
+so its coordinates form a group.
+\end{theorem}
+\begin{proof}
+Expand associativity in order; both sides are
+$x+y+z+xy+xz+yz+xyz$.
+The finite geometric series telescopes on each side, leaving
+$1-(-x)^n=1$. Subtracting one from the inverse gives the coordinate inverse.
+Closure and coordinate nilpotence follow from the two-sided ideal hypothesis.
+\end{proof}
+\begin{theorem}[Exact ordered gauge defect]
+Whenever $(1+c)S=1$,
+\[
+ (1+a)(1+b)S-1=(a+b+ab-c)S.
+\]
+Consequently the exact primitive equation is $a\star b=c$.
+An additive primitive $a+b=c$ leaves the explicit quadratic term $abS$;
+it cannot be declared a nonabelian primitive without that correction.
+\end{theorem}
+\begin{proof}
+Subtract $(1+c)S=1$ from $(1+a)(1+b)S$ and factor on the right.
+\end{proof}
+The preceding area obstruction is not contradicted: it prohibits an
+additive homomorphic parametrization, not the ordered group law itself.
+
+\section{Finite-group averaging: actual primitives with an explicit scale}
+Let $G$ be a finite group of order $m$, acting additively on an abelian
+group $M$. Let $c:G\times G\to M$ satisfy the actual cocycle equation
+\[
+ c(g,h)+c(gh,k)=g c(h,k)+c(g,hk).
+\]
+Define $S(g)=\sum_{k\in G}c(g,k)$.
+\begin{theorem}[Universal finite averaging]
+\[
+ S(g)+gS(h)-S(gh)=m c(g,h).
+\]
+For a rational module, $b=S/m$ therefore satisfies $\delta b=c$.
+For a normalized cocycle, $b(1)=0$. No commutative-group assumption on $G$
+or trivial-action assumption on $M$ is needed.
+\end{theorem}
+\begin{proof}
+Sum the cocycle equation over $k$. Left multiplication by $h$ permutes $G$,
+so $\sum_k c(g,hk)=S(g)$. The action preserves the sum. Rearrangement proves
+the integral identity; divide by $m\ne0$ over $\Q$.
+\end{proof}
+Suppose actual lifts $s_g$ in a possibly noncommutative group and an additive
+embedding $i:M\to E$ obey
+$s_gs_h=i(c(g,h))s_{gh}$ and
+$s_g i(v)=i(gv)s_g$. Then $\widetilde s_g=i(-b(g))s_g$ satisfies
+$\widetilde s_g\widetilde s_h=\widetilde s_{gh}$, by direct multiplication.
+This corrects an abelian extension layer, and can be repeated through
+a finite central filtration with rational vector-space quotients. Each
+layer must actually have this form. General $\mathrm{SL}$-valued transport,
+an infinite translation groupoid, or an unknown geometric deck does not
+satisfy these hypotheses merely by being traceless.
+Indeed $A=\left(\begin{smallmatrix}0&1\\1&0\end{smallmatrix}\right)$ is
+traceless and $A^2=I$; none of its powers vanish. Conjugation or adjoining
+zero blocks cannot turn it into a nilpotent operator.
+
+\begin{theorem}[Iteration through a rational central filtration]
+Let $1\to U\to E\to G\to1$ be an actual group extension with finite $G$.
+Suppose $U=U_1\supseteq\cdots\supseteq U_{r+1}=1$ is an $E$-invariant
+central filtration: $[U,U_j]\subseteq U_{j+1}$, and each $U_j/U_{j+1}$
+is an additive rational vector space with rational-linear conjugation action.
+Then the quotient map admits a group-theoretic section.
+\end{theorem}
+\begin{proof}
+Begin with the identity section in $E/U=G$. Given a section into $E/U_j$,
+choose lifts of its finitely many values into $E/U_{j+1}$.
+Their multiplication defect is a $2$-cocycle in $U_j/U_{j+1}$; associativity
+and injectivity of that kernel give its cocycle equation. Conjugation descends
+to a $G$-action because $U$ acts trivially on this central quotient.
+Finite averaging and the corrected-lift product formula remove this defect.
+This constructs the next section. Iterate for $j=1,\ldots,r$.
+This induction requires no commutativity of $U$, but does require every
+displayed rational central quotient. The Lean file formalizes the averaging
+and corrected-product step; no automatic geometric filtration is asserted.
+\end{proof}
+
+\section{Arbitrary-X source attempt and decisive geometric boundary}
+Attempt: take the prescribed $\alpha$'s carrier, correct finite holonomy
+layer by layer, and use the corrected unipotent object as a fresh Chern source.
+The averaging and ordered formulas solve the algebraic layers in their
+stated domain. But the proposed source has the following precise limitation.
+If on a genuine degree-$m$ finite cover $f:Y\to X$ its algebraic bundle
+has a filtration whose quotients are trivial, then
+$[f^*E]=\operatorname{rank}(E)[\mathcal O_Y]$ in algebraic $K_0(Y)$.
+Hence $f^*\operatorname{ch}_p(E)=0$ for every $p>0$.
+The canonical push-pull equation gives
+$m\operatorname{ch}_p(E)=f_*f^*\operatorname{ch}_p(E)=0$ in rational Chow,
+so $\operatorname{ch}_p(E)=0$ on the original $X$.
+More generally extensions do not change the sum of their graded $K_0$
+classes. Thus coherence correction can preserve a previously supplied
+source but cannot manufacture the prescribed nonzero primitive class from
+trivial graded pieces. Nontrivial graded sources, or a different support
+constructor, remain essential. This is a restriction on this executed
+constructor, not a refutation of GST or of the Hodge conjecture.
+
+\paragraph{Provenance.}
+These are complete hand arguments under the hypotheses displayed.
+Wolfram supplies exact symbolic/rational probes and full finite cocycle-space
+tests; their bounds and raw outputs are recorded separately. They do not
+verify arbitrary geometric realizations. The integration is new to the
+inspected branch; global novelty of standard algebra-group, averaging and
+Fitting mechanisms is not claimed. Review is self-review.
+\end{document}

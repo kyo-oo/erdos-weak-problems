@@ -1,0 +1,104 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\Hdg}{\operatorname{Hdg}}
+\newcommand{\cl}{\operatorname{cl}}
+\begin{document}
+\section*{GST: exact original-X Chow return and Hodge defect}
+Let X be any smooth connected projective complex d-fold. Choose
+a closed embedding X into P=P^{2M} with M>=d+1 and set
+Y=Bl_X P, E=P_lines(N), j:E to Y, q:E to X, c=rank(N)=2M-d,
+and xi=c_1(O_E(1)), with s(N)c(N)=1.
+
+\begin{theorem}[Canonical Hodge-defect decomposition]
+Put D^p(X)=Hdg^p(X)_Q / cl(CH^p(X)_Q).
+Then, in genuine rational Chow and Hodge cohomology,
+\[
+ CH^k(Y)_Q \cong CH^k(P)_Q\oplus
+          \bigoplus_{a=1}^{c-1}CH^{k-a}(X)_Q,
+\quad
+ (\gamma,(z_a))\mapsto b^*\gamma+
+ \sum_{a=1}^{c-1} j_*(\xi^{a-1}q^*z_a).
+\]
+The same isomorphism holds for rational Hodge classes,
+and the canonical cycle map commutes termwise. Hence
+\[
+ \boxed{D^M(Y)\cong\bigoplus_{p=0}^{d}D^p(X).}
+\]
+\end{theorem}
+\noindent Proof.
+Both decompositions follow from the actual Chow and
+rational Hodge blowup formulas for a regular immersion.
+Projective-space Hodge classes are algebraic. For p in [0,d],
+the exceptional index a=M-p satisfies
+1<=a<=2M-d-1 because M>=d+1. All other indices vanish
+by dimension. Taking cokernels proves the result.
+
+\begin{theorem}[Actual explicit Chern--Segre inverse]
+For Gamma in CH^k(Y)_Q and 1<=a<=c-1 put
+\[
+ v_a(\Gamma)=-q_*(\xi^{c-1-a}j^*\Gamma),\qquad
+ \boxed{P_a(\Gamma)=\sum_{t=a}^{c-1}c_{t-a}(N)v_t(\Gamma).}
+\]
+Then P_a is a genuine Chow operation
+with values in CH^{k-a}(X)_Q, and
+\[
+ \boxed{P_a(b^*\gamma+\sum_{t=1}^{c-1}
+       j_*(\xi^{t-1}q^*z_t))=z_a.}
+\]
+Its rational Hodge analogue commutes with canonical cycle class.
+\end{theorem}
+\noindent Proof.
+The Cartier self-intersection formula yields
+j^*j_*(xi^{t-1}q^*z)=-xi^t q^*z.
+The projective bundle identity gives
+q_*(xi^{c-1+s})=s_s(N) and vanishing for smaller
+nonnegative exponents. Ambient pullback terms vanish.
+Thus v_a=z_a+sum_{t>a}s_{t-a}(N)z_t.
+The unitriangular Segre matrix is inverted by the
+unitriangular Chern matrix because c(N)s(N)=1.
+This proves the exact formula in CH, and naturality
+proves the cohomological statement.
+
+\begin{corollary}[Explicit original-X descent of a genuine world source]
+For alpha in Hdg^p(X)_Q, let a=M-p and
+tildealpha=j_*(xi^{a-1}q^*alpha) in Hdg^M(Y)_Q.
+If an INDEPENDENTLY CONSTRUCTED Chow cycle Gamma on Y
+represents tildealpha, then the ACTUAL original-X cycle
+Z=P_a(Gamma) satisfies cl_X(Z)=alpha.
+Conversely cl_X(Z)=alpha produces Gamma via the
+algebraic exceptional inclusion. Thus this middle-world
+existence is EXACTLY EQUIVALENT to original-X algebraicity,
+not a weaker full-rank matrix hypothesis.
+\end{corollary}
+
+\section*{Actual fourfold}
+If d=4 and M=5 then c=6; since the standard
+Lefschetz results give D^0=D^1=D^3=D^4=0,
+\[
+ \boxed{D^5(Bl_X P^{10})\cong D^2(X),\qquad
+ P_3(\Gamma)=v_3+c_1(N)v_4+c_2(N)v_5.}
+\]
+This is a full actual-X Chow return, not a
+chosen Hodge-to-Chow inverse.
+
+\section*{Wolfram exact checks}
+The embedding index 1<=M-p<=2M-d-1 was checked for
+d=1,...,15, M=d+1,...,d+4, all p=0,...,d:
+60 complete cases, all true. The symbolic unitriangular
+Chern/Segre matrices were checked as exact inverses for
+c=2,...,8; all seven polynomial tests returned true.
+These tests validate arithmetic and signs but are
+not a substitute for the general proofs above.
+
+\section*{Scope}
+This is a complete actual-Chow retraction law and
+middle Hodge-defect identity. It does not construct an
+algebraic Gamma for every prescribed tildealpha;
+that assertion is equivalent to the original rational
+Hodge conjecture and cannot be inferred from the
+existence of the projective blowup itself.
+\end{document}

@@ -1,0 +1,428 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{corollary}{Corollary}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+
+\title{Cycle 2, Part II: The Carrier-Mechanism Verdict on the Discriminator ---\\
+Riemann--Roch Invisibility of the Weil Grade, the Cohomological-Spread No-Go,\\
+and the Exact Remainder of the Forcing Input}
+\author{GST Hodge Campaign (Mode B, cycle 2, strike 2)}
+\date{25 October 2026}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Base checkpoint:} branch \texttt{research/gpt6-native-point-primitive-span-20261017} at
+$93f9aaa$. This derivation continues, on the fixed discriminating test world, the cycle-2 strike-1 package
+(\texttt{GST\_weil\_forcing\_frame\_end\_signature\_and\_input\_stratification\_2026\_10\_25.tex}: the
+Weil-forcing frame W1, the input stratification W2, the End-mass law W3, all adversarially audited to
+PASS through the 9-a/9-b/9-c loop, CI-green at runs 40105212209, 40108110670, 40109050940). Strike 2
+answers the auditor-directed next-move constraint: a carrier-layer mechanism analysis compatible with the
+\emph{corrected} End-mass law (no deformability assumption). External named theorems are used only with
+hypotheses stated; every external leaf is declared in \S\ref{sec:scope}. The companion Lean certificate
+\texttt{GSTCarrierMechanismVerdictCertificate.lean} certifies the pure-algebra cores (the 48-pairing
+index-collision certificate, the $\theta^4$ surjection count, and the spread/invisibility arithmetic)
+on GitHub Actions.
+
+\begin{center}
+\fbox{\parbox{0.93\textwidth}{
+\textbf{What this document proves.}
+(1) \emph{The Euler-zero law and RR-invisibility.} For every exact carrier $F$ (i.e.\ an actual holomorphic
+bundle with $\mathrm{ch}(F)=r+m\alpha$ exactly, grades $0$ and $2p$ only) with $p<d$ on every abelian
+$d$-fold: $\chi(F)=0$. On the discriminator ($\alpha=W_R$, $\mathrm{NS}(A)=\mathbb{Z}\theta$) the stronger
+\emph{RR-invisibility of the Weil grade} holds: $\chi(F\otimes L)=\mathrm{rk}(F)\cdot k^4$ for every line
+bundle $L$ with $c_1(L)=k\theta$, $k\in\mathbb{Z}$ --- the $m$-grade contributes \emph{nothing} to any
+line-bundle-twist Euler characteristic (certified constants: $\int W_R\,\theta^2=0$ by the 48-pairing
+index-collision certificate, $\int\theta^4=24$ by the surjection count). Consequently every additive
+lattice invariant of the carrier in the Theorem-B2 clearing family is rank-only: \emph{the scale $m$ is
+arithmetically free}.
+(2) \emph{The cohomological-spread no-go.} For every exact carrier with $p<d$ on every abelian world and
+every $P\in\mathrm{Pic}^0(A)$: $\chi(F\otimes P)=0$; no such carrier is WIT$_j$ per point (a fortiori not
+IT$_j$) for any $j$;
+every twist $F\otimes P$ is either acyclic or has nonzero cohomology in at least two degrees. Conditional
+on Mukai's semi-homogeneous band theorem (leaf E14): \emph{no semi-homogeneous bundle is an exact carrier
+with $p<d$
+--- the Fourier-band birth family dies on abelian worlds.
+(3) \emph{The scale structure.} The set of realized carrier scales on any world is an additive submonoid of
+$\mathbb{Z}_{\ge1}$ (closed under direct sums and multiples): the carrier layer is one emptiness bit plus a
+least scale.
+(4) \emph{The End-twist table.} $\chi(\mathrm{End}\,F\otimes L)=r^2k^4+8m^2$: the Weil--End mass $8m^2$ is
+twist-constant (at $k=0$ this reproduces the certified End-mass $\chi=+8m^2$ of strike 1).
+(5) \emph{The exact remainder.} The distance from the audit-hardened strata (W1--W3 plus V1--V3) to the
+forcing input on the discriminator is exactly two bits --- the dichotomy bit $S=0$ vs $S=W_\mathbb{Q}$
+(Clay-strength, external to in-project methods) and the monoid bit $\mathcal{M}(A,W)$ --- with the
+entry tests (Euler-zero, no cohomological band, End-mass $\ge 4m^2$, $\mathbb{Q}[\theta]$-trapping) that
+any candidate construction must clear.
+\textbf{What it does not prove:} the Hodge conjecture or its negation; any construction of a holomorphic
+structure on any Weil carrier; any decision of the dichotomy; emptiness or nonemptiness of
+$\mathcal{M}(A,W)$; any rigidity claim; any exhaustiveness claim about mechanisms outside the typed corpus.
+The equivalence content of item (5) is recorded as input normalization (taxonomy M3), not as progress.}}
+\end{center}
+
+\section{Setup and standing hypotheses}\label{sec:setup}
+
+\paragraph{The discriminator.} Throughout, $(A,\theta)$ is the fixed nonsplit Weil-type abelian fourfold
+discriminator of the campaign (complex field, $K=\mathbb{Q}(i)$ acting, not split, Hodge signature $(2,2)$),
+with the standing periods and N\'eron--Severi rank verified in the cycle-2 strike-1 package (the model
+polarization $\theta=\sum_j e_j\wedge f_j$, principal in the model, is declared here and certified by the
+surjection count of Lemma \ref{lem:collision}):
+\begin{itemize}[itemsep=1pt]
+\item[(D1)] $\Omega=\bigwedge_{j=1}^4(e_j+i f_j)$ in the standard exterior model of
+$H^\bullet(A,\mathbb{Q})$ ($e_1,f_1,\dots,e_4,f_4$ a symplectic basis of $H^1$,
+$\int e_1f_1e_2f_2e_3f_3e_4f_4=1$), $W_R=\mathrm{Re}\,\Omega$, $W_I=\mathrm{Im}\,\Omega$;
+the periods $\int W_R^2=8$, $\int W_I^2=8$, $\int W_R W_I=0$ are kernel-certified
+(\texttt{GSTWeilForcingFrameCertificate.lean}, Part B).
+\item[(D2)] $\mathrm{NS}(A)=\mathbb{Z}\theta$ (rank one; the definition of the discriminator test world),
+$\theta=\sum_j e_j\wedge f_j$ the polarization; $c_1(\mathcal{O}(\Theta))=\theta$.
+\item[(D3)] $K_A$ is trivial and the tangent bundle $T_A$ is holomorphically trivial (translations), so
+$\mathrm{td}(T_A)=1$ exactly; every $\mathrm{td}_j$ with $j\ge1$ vanishes.
+\end{itemize}
+The \emph{exact carrier} terminology is the permanent campaign name (ledger 076): an actual holomorphic
+vector bundle $F$ with $\mathrm{ch}(F)=r+m\alpha$ \emph{exactly} --- every other Chern-character grade
+zero. The forcing input on the discriminator is an exact carrier with $\alpha=W_R$, $m\ge1$,
+$r\ge\max(p+1,d+1)=5$ (Theorem A rank floor). On arbitrary abelian $d$-folds we use the same
+definition with $\alpha\in H^{2p}$ and $p<d$.
+
+\paragraph{Leaf numbering.} External leaves continue the strike-1 numbering: E1--E11 are as declared in
+the strike-1 scope section (same conventions); this document adds E12--E14, declared in
+\S\ref{sec:scope}. Uses of E5 (Chern-character multiplicativity, duals, additivity), E8
+(Hirzebruch--Riemann--Roch) and E9 (Serre duality) below refer to the strike-1 statements with their
+conventions (the E8 usage scope here extends to $F$, $F\otimes L$, $\mathrm{End}F\otimes L$ and the
+GRR sketch of Remark \ref{rem:fmeuler}, as declared in \S\ref{sec:scope}).
+
+\paragraph{Companion-artifact labels.} The record, the Lean docstrings, and the campaign registry refer
+to the results of this document by the following labels: V1 $=$ the Euler-zero law and RR-invisibility
+(Theorem \ref{thm:eulerzero}, Theorem \ref{thm:invisible}, Corollary \ref{cor:mfree}); V2 $=$ the
+cohomological-spread no-go (Theorem \ref{thm:spread} and Corollary \ref{cor:semihom}); V3 $=$ the
+scale-monoid structure (Proposition \ref{prop:scale}); V4 $=$ the exact remainder
+(Theorem \ref{thm:remainder}); R1 $=$ the End-twist table (Remark \ref{rem:endtwist}); R2 $=$ the
+transform-side Euler (Remark \ref{rem:fmeuler}).
+
+\section{The Pic$^0$-class lemma and the Euler-zero law}\label{sec:pic0}
+
+\begin{lemma}[Pic$^0$ classes vanish; leaf E12]\label{lem:pic0}
+Let $A$ be an abelian variety and $P\in\mathrm{Pic}^0(A)$. Then $c_1(P)=0$ in $H^2(A,\mathbb{Z})$.
+Moreover $\ker\big(c_1:\mathrm{Pic}(A)\to H^2(A,\mathbb{Z})\big)=\mathrm{Pic}^0(A)$, and every line
+bundle $L$ on $A$ decomposes as $L\cong\mathcal{O}(k\Theta)\otimes P$ with $c_1(L)=k\theta$,
+$k\in\mathbb{Z}$, $P\in\mathrm{Pic}^0(A)$.
+\end{lemma}
+
+\begin{proof}
+The exponential sequence $0\to\mathbb{Z}\to\mathcal{O}_A\to\mathcal{O}_A^\ast\to1$ identifies
+$\mathrm{Pic}(A)=H^1(A,\mathcal{O}_A^\ast)$ with $c_1$ the connecting map to $H^2(A,\mathbb{Z})$, and on
+an abelian variety the identity component is the image of $H^1(A,\mathcal{O}_A)$
+(leaf E12): $\mathrm{Pic}^0(A)=\mathrm{im}\big(H^1(A,\mathcal{O}_A)\to H^1(A,\mathcal{O}_A^\ast)\big)$.
+Exactness of the long exact sequence gives
+$\mathrm{im}\big(H^1(\mathcal{O})\to H^1(\mathcal{O}^\ast)\big)=\ker\big(H^1(\mathcal{O}^\ast)\to
+H^2(\mathbb{Z})\big)$, so $c_1(P)=0$ for every $P\in\mathrm{Pic}^0(A)$ and
+$\mathrm{Pic}^0\subseteq\ker(c_1)$. Conversely, if $c_1(L)=0$ then the class of $L$ in
+$H^1(\mathcal{O}^\ast)/\mathrm{im}\,H^1(\mathcal{O})\cong\mathrm{im}(\delta)\subseteq H^2(\mathbb{Z})$ is
+zero, so $L\in\mathrm{im}\,H^1(\mathcal{O})=\mathrm{Pic}^0(A)$. The decomposition is then immediate from
+$\mathrm{NS}(A)=\mathrm{im}(c_1)=\mathbb{Z}\theta$ (D2): given $L$, write $c_1(L)=k\theta$ and take
+$P=L\otimes\mathcal{O}(k\Theta)^{\vee}\in\ker(c_1)=\mathrm{Pic}^0(A)$.
+\end{proof}
+
+\begin{theorem}[Euler-zero law]\label{thm:eulerzero}
+Let $A$ be an abelian $d$-fold and $F$ an exact carrier with $\mathrm{ch}(F)=r+m\alpha$,
+$\alpha\in H^{2p}(A)$, $p<d$. Then
+\[
+\chi(A,F)\;=\;0 .
+\]
+\end{theorem}
+
+\begin{proof}
+By Hirzebruch--Riemann--Roch (leaf E8) and $\mathrm{td}(T_A)=1$ (D3),
+$\chi(A,F)=\int_A\mathrm{ch}(F)\,\mathrm{td}(T_A)=\int_A \mathrm{ch}(F)$. The integrand has nonzero
+components only in degrees $0$ and $2p<2d$, so its degree-$2d$ component vanishes and the top-degree
+integral is $0$.
+\end{proof}
+
+\begin{remark}
+The same computation gives $\chi(\mathcal{O}_A)=0$ and, on the discriminator, $\chi(F)=0$ for every
+carrier at every scale and every rank: \emph{the Euler characteristic of the forcing input is pinned to
+zero}. This is a sharp entry test: any construction producing a carrier candidate with
+$\chi\neq0$ is refuted before any further analysis.
+\end{remark}
+
+\section{RR-invisibility of the Weil grade}\label{sec:invisible}
+
+\begin{lemma}[index collision]\label{lem:collision}
+In the exterior model (D1), $\int W_R\wedge\theta^j=0$ for every $j\ge1$; in particular
+$\int W_R\,\theta^2=0$. Moreover $\int\theta^4=24$.
+\end{lemma}
+
+\begin{proof}
+Expand $\Omega=\bigwedge_j(e_j+if_j)$: the monomials are indexed by subsets
+$S\subseteq\{1,2,3,4\}$ (choose $if_j$ for $j\in S$, $e_j$ otherwise), with coefficient
+$i^{|S|}$ and no reordering sign (indices written in order). $W_R=\mathrm{Re}\,\Omega$ keeps exactly the
+$|S|$ even monomials with signs $\mathrm{Re}(i^{|S|})\in\{+1,-1,+1\}$ for $|S|\in\{0,2,4\}$: eight
+monomials, each carrying \emph{exactly one} of $\{e_j,f_j\}$ for every index $j$. Now
+$\theta^j$ is a sum of words in the pair-blocks $(e_a\wedge f_a)_{a=1}^4$; a word involving $j$ distinct
+blocks contains both letters $e_a,f_a$ for each of its $j$ indices $a$. Wedging such a word with any
+$W_R$-monomial repeats a letter (the monomial contributes one of $e_a,f_a$, the word both), so the product
+is a scalar multiple of a repeated generator: it vanishes in the exterior algebra. Words with repeated
+blocks vanish on their own. For $j=2$ this kills all $8\times6=48$ ordered pairings --- this is the
+content of the kernel certificate \texttt{weil\_WR\_theta2\_collision} (48/48 duplicates, signs
+irrelevant). For $\theta^4$: the words are the $4^4=256$ four-letter words in the pair-block alphabet;
+the $24$ words with four distinct blocks are permutations of all four blocks, and since $2$-forms commute
+pairwise each reorders to the sorted volume generator with sign $+1$, while the remaining $232$ words
+repeat a block and vanish: $\theta^4=24\cdot\mathrm{vol}$, i.e.\ $\int\theta^4=24$ --- the content of
+the kernel certificate \texttt{theta4\_surjection\_count} ($24$ distinct $+\;232$ colliding $=256$).
+\end{proof}
+
+\begin{theorem}[RR-invisibility of the Weil grade]\label{thm:invisible}
+Let $F$ be an exact carrier on the discriminator, $\mathrm{ch}(F)=r+mW_R$, and let $L$ be any line bundle
+on $A$ with $c_1(L)=k\theta$ (Lemma \ref{lem:pic0}; every line bundle is of this form). Then
+\[
+\chi(A,F\otimes L)\;=\;r\cdot k^4\;=\;\mathrm{rk}(F)\cdot\chi(A,\mathcal{O}(k\Theta)) .
+\]
+In particular $\chi(A,F\otimes L)$ is independent of $m$.
+\end{theorem}
+
+\begin{proof}
+Write $L\cong\mathcal{O}(k\Theta)\otimes P$ (Lemma \ref{lem:pic0}). By E5 and Lemma \ref{lem:pic0},
+$\mathrm{ch}(F\otimes L)=\mathrm{ch}(F)\,e^{k\theta}\,e^{c_1(P)}=(r+mW_R)\,e^{k\theta}$. HRR (E8) with
+$\mathrm{td}=1$ (D3) integrates the degree-$8$ component:
+\[
+\chi=\int_A\Big(r\cdot\frac{k^4\theta^4}{24}\;+\;mW_R\cdot\frac{k^2\theta^2}{2}\Big)
+=\;r\,k^4\cdot\frac{24}{24}\;+\;\frac{mk^2}{2}\cdot 0\;=\;r\,k^4 ,
+\]
+using Lemma \ref{lem:collision}. Taking instead $F=\mathcal{O}_A^\oplus r$ (the same formula with $m=0$)
+gives $\chi(\mathcal{O}(k\Theta))=k^4$, whence the second form. The $k=0$ instance is Theorem
+\ref{thm:eulerzero}.
+\end{proof}
+
+\begin{corollary}[the scale is arithmetically free]\label{cor:mfree}
+On the discriminator, the complete family of line-bundle-twist Euler characteristics
+$\{L\mapsto\chi(F\otimes L)\}$ --- the additive lattice-invariant family of Theorem B2's clearing
+theorem --- depends only on the rank: every member is $r\cdot k^4$. Consequently no additive
+Riemann--Roch/Schwarzenberger-type congruence constrains the scale $m$: the arithmetic layer of the
+carrier form is rank-only, and the B2 clearing on the discriminator requires no scale beyond the
+$K$-lattice integrality already fixed at $m_0=1$ (strike 1).
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem \ref{thm:invisible}: the map $L\mapsto\chi(F\otimes L)$ factors through
+$c_1(L)=k\theta\mapsto rk^4$, which is independent of $m$. The congruence statement is the integrality of
+$\chi(F\otimes L)\in\mathbb{Z}$ for all $k$: the constraint reads $rk^4\in\mathbb{Z}$, which is
+satisfied for all $r\in\mathbb{Z}$ and involves no $m$. Scope note: no claim is made about non-additive
+invariants or Euler pairings $\chi(F\otimes G)$ with higher-rank $G$.
+\end{proof}
+
+\section{The cohomological-spread no-go}\label{sec:spread}
+
+\begin{definition}[single-band property]
+Fix $j\in\{0,\dots,d\}$. A coherent sheaf $G$ on an abelian $d$-fold $A$ is \emph{WIT$_j$ per point} if
+$H^i(A,G\otimes P)=0$ for all $i\ne j$ and \emph{all} $P\in\mathrm{Pic}^0(A)$. It is \emph{IT$_j$} if
+additionally the fiber dimensions are constant (locally-free transform); IT$_j$ implies WIT$_j$ per
+point. $G$ is \emph{acyclic at $P$} if $H^i(A,G\otimes P)=0$ for all $i$.
+\end{definition}
+
+\begin{theorem}[cohomological-spread no-go]\label{thm:spread}
+Let $A$ be an abelian $d$-fold and $F$ an exact carrier with $\mathrm{ch}(F)=r+m\alpha$, $p<d$,
+$r\ge1$. Then:
+\begin{enumerate}[itemsep=1pt,label=(\roman*)]
+\item $\chi(A,F\otimes P)=0$ for every $P\in\mathrm{Pic}^0(A)$.
+\item $F$ is not WIT$_j$ per point for any $j$; a fortiori not IT$_j$ for any $j$.
+\item For every $P\in\mathrm{Pic}^0(A)$: either $F\otimes P$ is acyclic, or $H^\bullet(A,F\otimes P)$
+is nonzero in at least two distinct degrees. In particular no translation-twist of the carrier is
+cohomologically concentrated in a single degree.
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}
+(i) By Lemma \ref{lem:pic0}, $c_1(P)=0$, so $\mathrm{ch}(F\otimes P)=\mathrm{ch}(F)$ by E5, and
+$\chi(A,F\otimes P)=\int_A\mathrm{ch}(F)=0$ exactly as in Theorem \ref{thm:eulerzero}.
+
+(ii) Suppose $F$ were WIT$_j$ per point. Then for every $P$,
+\[
+0=\chi(A,F\otimes P)=\sum_i(-1)^i h^i(A,F\otimes P)=(-1)^j\,h^j(A,F\otimes P),
+\]
+so $h^j(A,F\otimes P)=0$ for every $P$, and by the single-band hypothesis all other degrees vanish too:
+$F\otimes P$ is acyclic for every $P\in\mathrm{Pic}^0(A)$. Consider the Fourier--Mukai transform
+$R\widehat\Phi(F)=R\pi_{\hat A,*}(\pi_A^\ast F\otimes\mathcal{P})$ along the Poincar\'e bundle
+$\mathcal{P}$ on $A\times\hat A$. The fiber of $R\widehat\Phi(F)$ at a point $P\in\hat A$ is
+$R\Gamma(A,F\otimes P)$: by derived base change for the Tor-independent Cartesian square
+$\{P\}\to\hat A$ along the proper projection $\pi_{\hat A}$ (leaf E13),
+$(R\widehat\Phi(F))\otimes^{\mathbf{L}}k(P)\cong R\Gamma(A,F\otimes P)=0$ for every $P$. The transform of
+a perfect complex is perfect (leaf E13), and a perfect complex all of whose derived fibers vanish is zero
+(a perfect complex is locally a minimal complex of finite free modules; there the fiber
+differentials vanish by minimality, and acyclicity of every derived fiber then forces all terms to
+vanish by Nakayama).
+So $R\widehat\Phi(F)=0$, and the Fourier--Mukai equivalence (leaf E13) gives $F\cong0$ in
+$D^b(A)$ --- contradicting $\mathrm{rk}(F)=r\ge1$ (a locally free sheaf of positive rank is nonzero).
+
+(iii) If $H^\bullet(A,F\otimes P)$ is nonzero and concentrated in the single degree $i$, then
+$\chi(A,F\otimes P)=(-1)^i h^i\ne0$, contradicting (i).
+\end{proof}
+
+\begin{corollary}[the Fourier-band birth family dies; conditional on leaf E14]\label{cor:semihom}
+Assume leaf E14 (Mukai's semi-homogeneous band theorem: every semi-homogeneous vector bundle on an
+abelian variety is WIT$_j$ per point for some $j$; the standard statements give IT$_j$, from which the
+per-point form follows via IT$_j\Rightarrow$WIT$_j$ per point). Then no semi-homogeneous vector bundle on any
+abelian $d$-fold is an exact carrier with $p<d$. In particular, on the discriminator, the forcing input
+is not semi-homogeneous at any scale, any rank.
+\end{corollary}
+
+\begin{proof}
+Combine E14 with Theorem \ref{thm:spread}(ii).
+\end{proof}
+
+\begin{remark}[why this wall is mechanism-relevant]
+The natural ``controllable'' bundles on abelian varieties --- the ones with homogeneous deformation
+behavior and closed Fourier--Mukai orbits --- are precisely the semi-homogeneous ones, and every birth
+law that outputs a cohomological band (IT-type spectral constructions and transform-pure sources,
+both with locally free transforms,
+semihomogeneous component births) produces WIT$_j$-per-point objects (IT$_j$ implies WIT$_j$ per point;
+plain WIT alone does not). Theorem \ref{thm:spread} and
+Corollary \ref{cor:semihom} kill this entire family on abelian worlds in one stroke: the forcing input
+is \emph{forced to be cohomologically spread} --- a mechanism must build an object whose every
+translation-twist has either no cohomology at all or nonzero cohomology in at least two degrees, while carrying the
+full End-mass ($\ge4m^2$, strike 1) and vanishing Euler characteristic. No candidate in the typed
+corpus (the twelve killed routes of the 2026-10-25 armament dossiers, the $\mathbb{Q}[\theta]$-trapping
+no-go for line-bundle words, the semihomogeneous/IT band) survives all three walls simultaneously.
+\end{remark}
+
+\section{The scale structure of the carrier layer}\label{sec:scale}
+
+\begin{proposition}[one bit and a least scale]\label{prop:scale}
+Fix a world $X$, $p$, $\alpha$, and the rank floor $r\ge r_{\min}$. Let
+\[
+\Sigma\;=\{\,m\ge1:\ \text{an exact carrier }F\text{ with }\mathrm{ch}(F)=r+m\alpha\text{ exists for some }r\ge r_{\min}\,\}.
+\]
+Then $\Sigma$ is an additive submonoid of $\mathbb{Z}_{\ge1}$: if $m_1,m_2\in\Sigma$ with carriers
+$F_1,F_2$ of ranks $r_1,r_2$, then $F_1\oplus F_2$ is an exact carrier of scale $m_1+m_2$ and rank
+$r_1+r_2$; and $F^{\oplus k}$ exhibits $km\in\Sigma$ for every $k\ge1$ and $m\in\Sigma$. In particular,
+if $\Sigma\ne\varnothing$ it has a least element $m_\ast$, contains every multiple of $m_\ast$, and the
+carrier layer's emptiness is a single bit: \emph{nonempty at one scale iff nonempty at a cofinal set of
+scales}.
+\end{proposition}
+
+\begin{proof}
+Chern characters add on direct sums (E5): $\mathrm{ch}(F_1\oplus F_2)=r_1+r_2+(m_1+m_2)\alpha$, grades
+$0$ and $2p$ only, and the rank clears the floor. The rest is the semigroup arithmetic of
+$\mathbb{Z}_{\ge1}$: a nonempty subset has a least element; closure under sums and multiples is what was
+just shown.
+\end{proof}
+
+\begin{theorem}[the exact remainder; synthesis with M3 label]\label{thm:remainder}
+On the discriminator, the following are equivalent:
+\begin{enumerate}[itemsep=1pt,label=(\alph*)]
+\item the forcing input is realizable: an exact carrier $F$, $\mathrm{ch}(F)=r+mW_R$, exists
+($m\ge1$, $r\ge5$);
+\item $S=W_\mathbb{Q}$ \textup{(the dichotomy bit)} \textup{and} $\Sigma\ne\varnothing$
+\textup{(the monoid bit $\mathcal{M}(A,W)$)}.
+\end{enumerate}
+Under (b), every carrier automatically satisfies: the Euler-zero law
+(Theorem \ref{thm:eulerzero}), RR-invisibility (Theorem \ref{thm:invisible}), the spread no-go
+(Theorem \ref{thm:spread}), the End-mass law ($h^0+\tfrac12h^2=h^1+4m^2\ge4m^2$; simple:
+$h^2\ge8m^2-2$; strike 1), and integral Chern data $c_1=0,c_2=-mW_R,c_3=0,c_4=4m^2$ at $m_0=1$
+(strike 1). No claim is made that (a) or (b) holds.
+\end{theorem}
+
+\begin{proof}
+(a)$\Rightarrow$(b): a carrier has $c_2(F)=-mW_R\ne0$, an algebraic class (by the audited strike-1
+W1(v) route: GAGA (E3) presents $F$ algebraically and the Thom--Porteous degeneracy construction (E4)
+exhibits $c_2^{\mathrm{CH}}(F)$ as a rational combination of fundamental classes of algebraic subschemes), so $P_W\,c_2(F)=-mW_R\ne0$ and the projected Chow image $S$ is nonzero;
+$S$ is $T$-stable and the kernel dichotomy (strike 1, W1) forces $S=W_\mathbb{Q}$; and
+$m\in\Sigma$ by definition. (b)$\Rightarrow$(a): $\Sigma\ne\varnothing$ is exactly the existence
+statement. The automatic-satisfaction list is Theorems \ref{thm:eulerzero}, \ref{thm:invisible},
+\ref{thm:spread} and the strike-1 laws. \emph{Normalization label (M3):} the equivalence itself is input
+normalization --- the new proved content of this strike is the entry-test package
+(V1--V3) and the walls; the distance statement is bookkeeping of where the campaign stands, not a
+reduction claim.
+\end{proof}
+
+\section{Remarks: the End-twist table and the transform-side Euler}\label{sec:remarks}
+
+\begin{remark}[End-twist table]\label{rem:endtwist}
+Let $F$ be an exact carrier on the discriminator. By the corrected End-character (strike 1, per-grade
+duality): $\mathrm{ch}(\mathrm{End}\,F)=r^2+2rmW_R+m^2W_R^2$ with $W_R^2=8\,\mathrm{vol}$ (the
+kernel-certified period). For every $L$ with $c_1(L)=k\theta$:
+\[
+\chi\big(A,\mathrm{End}\,F\otimes L\big)\;=\;r^2k^4\;+\;8m^2 .
+\]
+Indeed $\mathrm{ch}(\mathrm{End}F\otimes L)=(r^2+2rmW_R+m^2W_R^2)e^{k\theta}$, and the degree-$8$
+component integrates to $r^2k^4\cdot\tfrac{24}{24}+\tfrac{2rmk^2}{2}\cdot0+m^2\cdot8$ by Lemma
+\ref{lem:collision}. At $k=0$ this reproduces the certified End-mass $\chi=+8m^2$; the Weil--End mass
+is \emph{twist-constant}, and the rank--rank mass $r^2k^4$ grows polynomially. The expression is even in
+$k$, consistent with Serre duality (E9: $h^i(\mathrm{End}F\otimes\mathcal{O}(k))=
+h^{4-i}(\mathrm{End}F\otimes\mathcal{O}(-k))$ via $\mathrm{End}^\vee\cong\mathrm{End}$, $K_A$ trivial);
+for $k\ne0$ no three-term mass identity is claimed (Serre pairs $+k$ with $-k$).
+\end{remark}
+
+\begin{remark}[the transform-side Euler sees only the rank]\label{rem:fmeuler}
+For every perfect $E\in D^b(A)$: $\chi\big(R\widehat\Phi(E)\big)=\mathrm{rk}(E)$. Sketch: GRR (E8) on
+$A\times\hat A$ with $\mathrm{td}=1$ gives
+$\chi=\int_{A\times\hat A}\mathrm{ch}(\pi_A^\ast E)\,e^{\eta}$, $\eta=c_1(\mathcal{P})$. By Lemma
+\ref{lem:pic0} applied to both factors (biduality, E12), $\eta$ restricts to zero on every slice
+$A\times\{P\}$ and $\{a\}\times\hat A$, so its K\"unneth decomposition is purely mixed
+($H^1\otimes H^1$). Bidegree bookkeeping then lets only the rank grade pair with $\eta^8/8!$:
+$\chi=\mathrm{rk}(E)\cdot\int\eta^8/8!$, and the standard normalization
+$R\widehat\Phi(\mathcal{O}_A)=\mathcal{O}_{\hat0}[-4]$ (E13) pins $\int\eta^8/8!=1$ at $g=4$
+($\chi(\mathcal{O}_{\hat0}[-4])=+1=\mathrm{rk}(\mathcal{O}_A)$). This is the transform-side face of
+RR-invisibility: the Fourier--Mukai Euler characteristic of the carrier is exactly $r$ --- the Weil
+grade $mW_R$ lives entirely in the positive-dimensional (non-Euler) structure of the transform sheaves,
+which is consistent with, and explains, the spread no-go: the transform cannot be a single shifted
+bundle carrying the Weil data in its Euler term.
+\end{remark}
+
+\section{Scope, external leaves, and kernel-verified companions}\label{sec:scope}
+
+\noindent\textbf{Kernel-verified companions (GitHub Actions, Lean, sorryAx-audited, \#print axioms):}
+the 48-pairing index-collision certificate ($\int W_R\theta^2=0$; every ordered
+$W_R$-monomial--$\theta^2$-word pairing dies by a repeated generator; signs irrelevant by vanishing) and
+the $\theta^4$ surjection count ($24$ distinct-index words $+\;232$ colliding $=256$, all surviving
+contributions $+1$ by $2$-form commutativity); the single-band kill arithmetic (a degree-concentrated
+cohomology with Euler characteristic $0$ is zero); the carrier twist-$\chi$ arithmetic
+$\chi=r\,(k^4\cdot24/24)+(mk^2/2)\cdot0=rk^4$; and the End-twist arithmetic
+$\chi=r^2k^4+8m^2$. The period $\int W_R^2=8$ is companion-certified in
+\texttt{GSTWeilForcingFrameCertificate.lean} and is used here as the strike-1 constant.
+
+\textbf{External leaves (standard, hypotheses stated where used).} E1--E11: the strike-1 leaf set,
+verbatim conventions (E3 GAGA; E5 Chern-character multiplicativity for tensor products and line-bundle
+twists, additivity on direct sums, $c_1(\mathcal{O}(\Theta))=\theta$; E8 Hirzebruch--Riemann--Roch with
+$\mathrm{td}(T_A)=1$ on abelian $A$; E9 Serre duality with $K_A$ trivial). New:
+\begin{itemize}[itemsep=1pt]
+\item[E12] the exponential sequence on an abelian variety, the identification
+$\mathrm{Pic}^0(A)=\mathrm{im}(H^1(\mathcal{O})\to H^1(\mathcal{O}^\ast))$, hence
+$c_1(P)=0$ for $P\in\mathrm{Pic}^0$ and $\ker(c_1)=\mathrm{Pic}^0$; the biduality identification of
+$a\in A$ with a degree-zero line bundle on $\hat A$ (used in Remark \ref{rem:fmeuler}).
+\item[E13] the Fourier--Mukai toolkit: the Poincar\'e bundle $\mathcal{P}$ with
+$R\widehat\Phi(\mathcal{O}_A)=\mathcal{O}_{\hat0}[-g]$ normalization; derived base change
+$(R\widehat\Phi F)\otimes^{\mathbf{L}}k(P)\cong R\Gamma(A,F\otimes P)$ for the Tor-independent
+point-square along the proper projection; preservation of perfectness; the Fourier--Mukai equivalence
+$R\widehat\Phi:D^b(A)\to D^b(\hat A)$ (Mukai).
+\item[E14] Mukai's semi-homogeneous band theorem: every semi-homogeneous vector bundle on an abelian
+variety is WIT$_j$ per point for some $j$ (the standard statements give IT$_j$; the per-point form
+follows via IT$_j\Rightarrow$WIT$_j$ per point; used only in Corollary \ref{cor:semihom}, which is
+conditional on this leaf).
+\end{itemize}
+
+\textbf{Explicitly not claimed:} any construction of a holomorphic structure on any Weil carrier; any
+decision of $S=0$ versus $S=W_\mathbb{Q}$ on any actual nonsplit instance; emptiness or nonemptiness of
+the monoid layer $\mathcal{M}(A,W)$; any rigidity claim (the corrected End-mass law permits $h^1=0$ with
+mass in $h^2$); any claim that the entry-test walls exhaust all conceivable mechanisms (they are
+necessary conditions; the typed corpus is enumerated, the space of conceivable constructions is not);
+any claim about non-additive invariants beyond the scoped family of Corollary \ref{cor:mfree}. The
+equivalence of Theorem \ref{thm:remainder} is input normalization (M3), recorded as such. The Hodge
+conjecture itself remains the campaign target; the forcing input remains equivalent to it in pair form;
+this document's contributions are the Euler-zero law, RR-invisibility, the cohomological-spread no-go,
+the semihomogeneous exclusion, the scale-monoid structure, and the End-twist table.
+
+\vspace{2mm}
+\noindent\rule{\textwidth}{0.4pt}
+\vspace{1mm}
+
+\noindent\textbf{Pre-commit terminology gate (ledger 076):} this document uses the permanent campaign
+terminology (``exact carrier''); the banned-word list of rule 50 has been grepped and cleared.
+
+\end{document}

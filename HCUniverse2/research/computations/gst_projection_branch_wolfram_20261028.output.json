@@ -1,0 +1,115 @@
+{
+  "claim_id": "GST-PROJECTION-SINGULAR-BRANCH-20261028",
+  "executed_at": "2026-10-28T12:13:26.210Z",
+  "input_sha256_before": "e1522aac6ee15103075cd1230570bb8de5723a323157d5e689d24cbbe7f7e474",
+  "kernel_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+  "kernel_runtime_seconds": 2.855375,
+  "kernel_process_exit_status": null,
+  "assertion_count": 61,
+  "finite_rows": [
+    {
+      "modulus": 2,
+      "matrix_count": 16,
+      "eligible_matrices": 14,
+      "defect_nilpotence_histogram": {
+        "1": 8,
+        "2": 6
+      },
+      "idempotent_count": 8,
+      "idempotent_pair_count": 64,
+      "nilpotent_difference_pair_count": 20
+    },
+    {
+      "modulus": 3,
+      "matrix_count": 81,
+      "eligible_matrices": 30,
+      "defect_nilpotence_histogram": {
+        "1": 14,
+        "2": 16
+      },
+      "idempotent_count": 14,
+      "idempotent_pair_count": 196,
+      "nilpotent_difference_pair_count": 62
+    },
+    {
+      "modulus": 4,
+      "matrix_count": 256,
+      "eligible_matrices": 224,
+      "defect_nilpotence_histogram": {
+        "1": 26,
+        "2": 126,
+        "3": 24,
+        "4": 48
+      },
+      "idempotent_count": 26,
+      "idempotent_pair_count": 676,
+      "nilpotent_difference_pair_count": 290
+    },
+    {
+      "modulus": 5,
+      "matrix_count": 625,
+      "eligible_matrices": 80,
+      "defect_nilpotence_histogram": {
+        "1": 32,
+        "2": 48
+      },
+      "idempotent_count": 32,
+      "idempotent_pair_count": 1024,
+      "nilpotent_difference_pair_count": 272
+    },
+    {
+      "modulus": 8,
+      "matrix_count": 4096,
+      "eligible_matrices": 3584,
+      "defect_nilpotence_histogram": {
+        "1": 98,
+        "2": 510,
+        "3": 1824,
+        "4": 384,
+        "6": 768
+      },
+      "idempotent_count": 98,
+      "idempotent_pair_count": 9604,
+      "nilpotent_difference_pair_count": 4610
+    },
+    {
+      "modulus": 9,
+      "matrix_count": 6561,
+      "eligible_matrices": 2430,
+      "defect_nilpotence_histogram": {
+        "1": 110,
+        "2": 1168,
+        "3": 288,
+        "4": 864
+      },
+      "idempotent_count": 110,
+      "idempotent_pair_count": 12100,
+      "nilpotent_difference_pair_count": 4862
+    }
+  ],
+  "raw_result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Out[1]= <|\"AllPassed\" -> True, \"KernelVersion\" -> \"15.0.1 for Linux x86 (64-bit) (July 2, 2026)\", \"RuntimeSeconds\" -> 2.855375, \"AssertionCount\" -> 61, \"Assertions\" -> {\"mod 2 defect\", \"mod 2 complement\", \"mod 2 nilpotence bound\", \"mod 2 every eligible correction\", \"mod 2 all intertwining\", \"mod 2 all bridge products\", \"mod 2 every bridge inverse\", \"mod 2 every conjugacy\", \"mod 3 defect\", \"mod 3 complement\", \"mod 3 nilpotence bound\", \"mod 3 every eligible correction\", \"mod 3 all intertwining\", \"mod 3 all bridge products\", \"mod 3 every bridge inverse\", \"mod 3 every conjugacy\", \"mod 4 defect\", \"mod 4 complement\", \"mod 4 nilpotence bound\", \"mod 4 every eligible correction\", \"mod 4 all intertwining\", \"mod 4 all bridge products\", \"mod 4 every bridge inverse\", \"mod 4 every conjugacy\", \"mod 5 defect\", \"mod 5 complement\", \"mod 5 nilpotence bound\", \"mod 5 every eligible correction\", \"mod 5 all intertwining\", \"mod 5 all bridge products\", \"mod 5 every bridge inverse\", \"mod 5 every conjugacy\", \"mod 8 defect\", \"mod 8 complement\", \"mod 8 nilpotence bound\", \"mod 8 every eligible correction\", \"mod 8 all intertwining\", \"mod 8 all bridge products\", \"mod 8 every bridge inverse\", \"mod 8 every conjugacy\", \"mod 9 defect\", \"mod 9 complement\", \"mod 9 nilpotence bound\", \"mod 9 every eligible correction\", \"mod 9 all intertwining\", \"mod 9 all bridge products\", \"mod 9 every bridge inverse\", \"mod 9 every conjugacy\", \"symbolic noncommuting four-dimensional exactification\", \"symbolic initial defect has fourth power zero\", \"generic correction is nonconstant\", \"universal boundary-defect polynomial\", \"ramification cokernel normal form\", \"ramification determinant simple\", \"quadratic companion\", \"three-twist extraction\", \"every reflected A1 through A12 pair\", \"exact exceptional extraction scales\", \"reduced cone singular ideal\", \"integral two-primary hostile control\", \"split-cover isotropic nonzero control\"}, \"FiniteRows\" -> {<|\"Modulus\" -> 2, \"MatrixCount\" -> 16, \"EligibleMatrices\" -> 14, \"DefectNilpotenceHistogram\" -> <|1 -> 8, 2 -> 6|>, \"IdempotentCount\" -> 8, \"IdempotentPairCount\" -> 64, \"NilpotentDifferencePairCount\" -> 20|>, <|\"Modulus\" -> 3, \"MatrixCount\" -> 81, \"EligibleMatrices\" -> 30, \"DefectNilpotenceHistogram\" -> <|1 -> 14, 2 -> 16|>, \"IdempotentCount\" -> 14, \"IdempotentPairCount\" -> 196, \"NilpotentDifferencePairCount\" -> 62|>, <|\"Modulus\" -> 4, \"MatrixCount\" -> 256, \"EligibleMatrices\" -> 224, \"DefectNilpotenceHistogram\" -> <|1 -> 26, 2 -> 126, 3 -> 24, 4 -> 48|>, \"IdempotentCount\" -> 26, \"IdempotentPairCount\" -> 676, \"NilpotentDifferencePairCount\" -> 290|>, <|\"Modulus\" -> 5, \"MatrixCount\" -> 625, \"EligibleMatrices\" -> 80, \"DefectNilpotenceHistogram\" -> <|1 -> 32, 2 -> 48|>, \"IdempotentCount\" -> 32, \"IdempotentPairCount\" -> 1024, \"NilpotentDifferencePairCount\" -> 272|>, <|\"Modulus\" -> 8, \"MatrixCount\" -> 4096, \"EligibleMatrices\" -> 3584, \"DefectNilpotenceHistogram\" -> <|1 -> 98, 2 -> 510, 3 -> 1824, 4 -> 384, 6 -> 768|>, \"IdempotentCount\" -> 98, \"IdempotentPairCount\" -> 9604, \"NilpotentDifferencePairCount\" -> 4610|>, <|\"Modulus\" -> 9, \"MatrixCount\" -> 6561, \"EligibleMatrices\" -> 2430, \"DefectNilpotenceHistogram\" -> <|1 -> 110, 2 -> 1168, 3 -> 288, 4 -> 864|>, \"IdempotentCount\" -> 110, \"IdempotentPairCount\" -> 12100, \"NilpotentDifferencePairCount\" -> 4862|>}, \"NumericApproximationUsed\" -> False|>"
+      }
+    ],
+    "structuredContent": null,
+    "isError": false
+  },
+  "failed_run": {
+    "source_sha256": "5ed6c1b3113062d05624e92ded791786cda595bca18daa79be0dd5959feddf0f",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "Out[1]= <|\"Failed\" -> \"reduced cone singular ideal\"|>"
+        }
+      ],
+      "structuredContent": null,
+      "isError": false
+    },
+    "minimal_probe_result": "GroebnerBasis[{2x,z,y},{x,y,z}] is {z,y,x}; polynomial reduction of x,y,z by that basis returns zero. Ordered-list comparison was the implementation defect.",
+    "disposition": "Fixed by exact ideal-membership reductions; entire final suite rerun."
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "schema": "mathbox-computation-audit-v1",
+  "claim": "Exact finite-model consistency checks for the native residual Euler kernel and complete-alteration formulas.",
+  "base_commit": "c2479cac309ce2379c47e77b912f93183923e9b2",
+  "engine": "Wolfram Language 15.0.1 for Linux x86 (64-bit), July 2, 2026",
+  "arithmetic": "Exact rational and polynomial symbolic arithmetic; no floating approximation.",
+  "inputs": {
+    "form": [
+      [
+        3,
+        0,
+        0
+      ],
+      [
+        0,
+        5,
+        0
+      ],
+      [
+        0,
+        0,
+        7
+      ]
+    ],
+    "frame_columns": [
+      [
+        1,
+        1,
+        0
+      ],
+      [
+        0,
+        1,
+        1
+      ]
+    ],
+    "target_symbols": [
+      "a",
+      "b",
+      "c"
+    ],
+    "degree_symbol": "e",
+    "degree_assumption": "e > 0",
+    "sign_range": "p=1..6, M=2p+1..2p+3",
+    "parity_cases": 18,
+    "random_sampling": false
+  },
+  "checks": {
+    "projector_and_schur": 8,
+    "alteration_scaling": 3,
+    "partial_trace_periods": 2,
+    "sign_instances": 18,
+    "full_frame_residual": 0,
+    "outside_frame_residual": "105/71",
+    "k3_m5_p2_diagonal_index": -21
+  },
+  "outcome": "All listed exact identity checks returned True; scalar outputs match the derivation.",
+  "scope_limit": "One dimension-three, rank-two source-frame model, symbolic targets and degree, plus 18 sign instances and the scalar norm-21 discriminator. This is not a geometric all-varieties computation or proof of universal algebraic-source existence.",
+  "artifacts": {
+    "code": "GST_native_residual_Euler_kernel_2026-10-20.wl",
+    "output": "GST_native_residual_Euler_kernel_2026-10-20.output.txt",
+    "derivation": "../derivations/GST_native_residual_Euler_kernel_and_alteration.tex"
+  },
+  "review": "Self-reviewed. Universal identities are established in the manuscript proofs. No independent agent audit or new Lean compilation."
+}

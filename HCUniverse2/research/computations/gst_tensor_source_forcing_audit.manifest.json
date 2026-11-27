@@ -1,0 +1,104 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-universal-source-existence-attempt-2026-10-21",
+  "repository": {
+    "commit": "ae27ee80ae6c3448bd856a6b75bafd5f73543192",
+    "dirty": true,
+    "note": "Remote source base; new artifacts executed in an isolated directory. Existing dirty local checkout was not used or modified."
+  },
+  "command": [
+    "python3",
+    "research/computations/gst_tensor_source_forcing_audit.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      },
+      {
+        "name": "Python fractions",
+        "version": "standard library"
+      }
+    ],
+    "hardware": "x86_64; Linux-6.18.55-x86_64-with-glibc2.39"
+  },
+  "mathematics": {
+    "assertion_tested": "Exact identities for the seven-dimensional rational involutive graded Frobenius model at a=3,b=5, with symbolic Q[g] curve intersection; not a universal geometric source-existence assertion.",
+    "coefficient_domain": "Q; Q[g] for the curve calculation",
+    "conventions": "Basis 1,h,h^2,h^3,h^4,s,r; codimensions 0,1,2,3,4,2,2; integral h^4=1; s^2=3h^4; r^2=5h^4; g(r)=-r; signed Euler kernel=-r tensor r/5.",
+    "inputs": [
+      {
+        "a": 3,
+        "b": 5,
+        "dimension": 7
+      }
+    ],
+    "bounds": {
+      "basis_associativity_triples": 343,
+      "basis_automorphism_pairs": 49,
+      "alteration_degrees": [
+        1,
+        2,
+        3,
+        7
+      ]
+    },
+    "non_claims": [
+      "No actual variety or canonical Chow comparison is modeled.",
+      "No counterexample to the Hodge conjecture.",
+      "No claim that all geometric GST source hypotheses hold in this model.",
+      "No universal algebraic-source existence theorem or Lean compilation."
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T21:01:52.684905+00:00",
+    "runtime_seconds": 0.04740269200010516,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": null,
+      "max_threads": null,
+      "wall_seconds": 30
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_tensor_source_forcing_audit.output.json",
+      "sha256": "30779fa56a2e32d174daec8c5ea177ea1f9aafb4cced76381bc0dc6fb5585b1e",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "All 343 basis associativity triples; trilinearity gives associativity at a=3,b=5.",
+    "All 49 basis automorphism pairs; unit, graded multiplication, Frobenius determinant, inverse pairing.",
+    "All nontrivial even Hard Lefschetz maps, primitive kernel and Gram.",
+    "Invariant tensor dimensions, residual projector, complete one-leg annihilation and signed Euler index.",
+    "Formal degree tests e=1,2,3,7; uniform all-e statement proved separately in the derivation.",
+    "Curve intersection identities in Q[g].",
+    "Separate Wolfram parameterized symbolic check; see recorded .wl and .wolfram.txt."
+  ],
+  "result": "implementation and finite assertion verified in the stated range; the proposed abstract forcing implication has a countermodel. No geometric Hodge conclusion.",
+  "residual_risks": [
+    "Model is not actual smooth projective geometry or a canonical Chow comparison.",
+    "Proof is self-reviewed, not independently reviewed.",
+    "Standalone Wolfram output has separate provenance and is not represented as this local process output."
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/gst_tensor_source_forcing_audit.py",
+      "sha256": "ac7e9b62bfa1050314a4c297e82ef1a4b85588737062a97baabd4d00493c4c78",
+      "sha256_after": "ac7e9b62bfa1050314a4c297e82ef1a4b85588737062a97baabd4d00493c4c78"
+    }
+  ],
+  "declared_results": [
+    "research/computations/gst_tensor_source_forcing_audit.output.json"
+  ]
+}

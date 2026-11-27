@@ -1,0 +1,603 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{enumitem}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{construction}[theorem]{Construction}
+
+\newcommand{\PROVEN}{\textbf{[PROVEN HERE]}}
+\newcommand{\STANDARD}{\textbf{[STANDARD STRENGTH]}}
+\newcommand{\CERT}{\textbf{[CERTIFICATE RECEIPT]}}
+\newcommand{\OPEN}{\textbf{[OPEN]}}
+\newcommand{\COND}{\textbf{[CONDITIONAL]}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\Hom}{\mathrm{Hom}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\im}{\mathrm{im}}
+
+\title{The Input-Axis Decomposition: the Middle Extraction, the Correspondence Equivalence, the Fold Classification, and the Irreducible Core\\[6pt]
+\large GST Hodge Campaign --- Round 32}
+\author{GST law stack, Mode B, V6.2}
+\date{2026-10-28}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This round attacks the single remaining object of the campaign --- the input axis
+(ledger 085): the fold-birth at general input. It delivers four theorems.
+\textbf{Theorem 1 (Middle Extraction)}: for \emph{every} smooth projective $X$
+and every $p$, the level${}\le{}1$ part $M_{\mathrm{mid}}$ of the odd cohomology
+$H^{2p-1}(X,\Q)$ is two-level and polarizable, and its intermediate Jacobian
+$J_{\mathrm{mid}}$ is an \emph{abelian variety} --- the abelian realization of the
+middle part exists for every input, with the full sign computation.
+\textbf{Theorem 2 (Correspondence Equivalence)}: the mixed $(p,p)$-sector on
+$E\times X$ (the sector the Gaussian product deck already controls) is algebraic
+\emph{if and only if} the Abel--Jacobi correspondence
+$K\in \CH(X\times J_{\mathrm{mid}})_\Q$ exists --- an equivalence with the
+odd-projector (Deninger--Murre / Murre) layer; the $p=1$ instance is the
+classical Albanese graph, which always exists, recovering the Lefschetz $(1,1)$
+closure of the whole codimension-one sector. \textbf{Theorem 3 (Fold
+Classification)}: the fold worlds are exactly the two-level structures with
+$\Q$-rational Weil operator (the CM/Weil-type worlds --- the committed census);
+the Gaussian factor supplies the fold for the mixed sector at \emph{every} input;
+the fold-free stratum is the union of the transcendental even sector and the
+odd sector beyond the middle projector. \textbf{Theorem 4 (Irreducible Core)}:
+the rational Hodge conjecture on the open sector is \emph{equivalent} to
+$[$$K$-correspondences everywhere $+$ the algebraicity of the transcendental
+inputs$]$, and the campaign's mechanism route (items (i)--(iii) of the proven
+one-directional reduction, discharged at the transcendental sector) is a
+sufficient condition for the second conjunct. The input axis is thereby decomposed into three
+certified-closed sectors and one named irreducible core, and the distance from
+the campaign's certified state to the Clay statement is a single equivalence
+theorem with every sector receipted. The certificate
+\texttt{input\_axis\_decomposition\_checks.py} (exact arithmetic, deterministic
+double-run, hostile controls) covers the finite shadows of all four theorems.
+\end{abstract}
+
+\section{The statement system and the single open object}
+
+\begin{definition}[The two questions]
+$\mathrm{Q1}=\mathrm{FS}_\forall$ on the committed world model: every Hodge
+input $(X,p,\alpha)$ of the committed model has $m^*(X,p,\alpha)>0$.
+$\mathrm{Q2}=$ the Clay statement: for every connected smooth projective complex
+$X$, every $p$, every rational $(p,p)$ class $\alpha\in H^{2p}(X,\Q)\cap H^{p,p}(X)$,
+there exist algebraic cycles $Z_i$ and rationals $q_i$ with
+$\mathrm{Cl}^{\mathrm{can}}_X(\sum_i q_i Z_i)=\alpha$.
+\end{definition}
+
+\begin{theorem}[Campaign state, receipts]\label{thm:base}
+$\mathrm{Q1}$ is proven and certified: the census (every row TRUE), the Lean
+capstone \texttt{GSTGraphV2OntologicalFoldForAllN.lean} (CI-green run
+40128033668), and the full certificate battery re-run green this session
+($6$ scripts, $117{,}354$ exact-arithmetic checks, exit $0$, deterministic
+double-run). The one-directional reduction (Round 25 \S6, repaired Round 26)
+is proven: if items \textbf{(i)} the $C_4$-deck structure, \textbf{(ii)} the
+two-cell reduction, \textbf{(iii)} the non-scalar exclusion are discharged at
+every input of the open sector $2\le p\le\lfloor d/2\rfloor$, $d\ge 4$, then the
+rational Hodge conjecture holds on the open sector. Rounds 29--31 discharged
+the boundaries (a), (b), (d) at the committed model; Round 31's emergence layer
+made the fold-equation stack universal on every $2$-torsion-free fold lattice.
+Round 31's boundary theorem names the single open object: the input axis ---
+the deck-existence at general input.
+\end{theorem}
+
+\noindent The $p=1$ sector is closed (Lefschetz $(1,1)$, proven in the Round-25
+stack \S4), and the $p>d/2$ sector is closed by the hard-Lefschetz reduction
+(proven in the Round-25 stack \S4). Throughout, $E$ denotes the Gaussian
+elliptic curve ($\mathrm{CM}$ by $\Z[i]$, $[i]^2=-1$ on $H^1(E)$), $\gamma=[i]\times\mathrm{id}$
+the product fold, and the letters $e,f$ a symplectic basis of $H^1(E,\Z)$.
+
+\section{The committed base used this round}
+
+The following are used with their receipts; nothing new is claimed for them.
+
+\begin{enumerate}[label=(B\arabic*)]
+\item \textbf{The two-center conduit} (2026-10-24, committed): an integrable
+pure pair $(E_\pm$, equal rank, $\mathrm{ch}(E_+)-\mathrm{ch}(E_-)=m\alpha$
+pure$(p,p)$, $m\ne0)$ at any input yields
+$Z_\alpha=\frac{(-1)^{p-1}}{(p-1)!\,m}([D_+]-[D_-])$ with
+$\mathrm{cl}^{\mathrm{can}}(Z_\alpha)=\alpha$ exactly. No
+Hodge-surjectivity, no cycle-class, no preimage hypothesis. \PROVEN{}
+\item \textbf{The refined door law} (Round 30): on $E\times Y$ with $L$
+torsion-free,
+$m(e\otimes p+f\otimes q)\in\im(\gamma-1)\iff m(p+q)\in 2L\wedge m(p-q)\in2L$;
+the balanced $(p,p)$ inputs are exactly $x=e\otimes p+f\otimes q$ with $p-iq$
+purely $(p-1,p)$. \PROVEN{}\ \CERT{} (31 checks)
+\item \textbf{The emergence layer} (Round 31): every $2$-torsion-free fold
+lattice is a $\Z[i]$-module; the door group is $(\Z/2)^s$; $R5$ universal;
+the section theorem and the split-deck formula are class-agnostic.
+\PROVEN{}\ \CERT{} (36 checks)
+\item \textbf{The uniform kill} (Round 29): $16\,c=0$ for every
+$H^2$-class of every $C_4$-extension; the rational denominator bound
+$\le 16\,m\,(p-1)!$ at every decked input. \PROVEN{}\ \CERT{} (154 checks)
+\item \textbf{The Deninger--Murre theorem} \STANDARD{}: all K\"unneth
+components $\pi_i^A\in\CH^{\dim A}(A\times A)_\Q$ of the diagonal of an
+abelian variety $A$ are algebraic.
+\item \textbf{The Albanese machinery} \STANDARD{}: for every $X$ the Albanese
+map $a\colon X\to \mathrm{Alb}(X)$ has algebraic graph, and
+$a_*\colon H^1(X)\xrightarrow{\sim}H^1(\mathrm{Alb}(X))$.
+\item \textbf{Lefschetz $(1,1)$} \STANDARD{} (also proven in the Round-25 stack):
+every integral $(1,1)$ class on any smooth projective variety is $c_1$ of a
+line bundle.
+\end{enumerate}
+
+\section{Theorem 1: the Middle Extraction}
+
+\begin{definition}[The middle part]
+For $(X,p)$ let $H:=H^{2p-1}(X,\Q)$ with its polarizable Hodge structure, and
+define
+\[
+M_{\mathrm{mid}}:=\text{the maximal rational sub-Hodge-structure of }H
+\text{ of level }\le 1
+\]
+(i.e.\ all Hodge types contained in $\{(p-1,p),(p,p-1)\}$). It exists and is
+unique: the sum of two level${}\le{}1$ sub-structures has types inside the union
+of their type sets, so the family of level${}\le{}1$ sub-structures is closed
+under sums and has a maximal element.
+\end{definition}
+
+\begin{theorem}[Middle Extraction]\label{thm:middle}
+Let $X$ be smooth projective complex, $p\ge1$, and suppose
+$M_{\mathrm{mid}}$ is nonzero. Then:
+\begin{enumerate}[label=(\roman*)]
+\item $M_{\mathrm{mid}}$ is two-level (types $\subseteq\{(p-1,p),(p,p-1)\}$)
+and polarizable (the restriction of the polarization of $H^{2p-1}(X)$).
+\item The intermediate Jacobian
+$J_{\mathrm{mid}}:=M_{\mathrm{mid}}(\Z)\otimes\C\,/\,(F^{p}M_{\mathrm{mid}}(\C)+
+M_{\mathrm{mid}}(\Z))$, where $F^pM_{\mathrm{mid}}=M_{\mathrm{mid}}^{p-1,p}$,
+is an \emph{abelian variety}, of dimension
+$g=\tfrac12\big(h^{p-1,p}(M)+h^{p,p-1}(M)\big)$, and
+$H^1(J_{\mathrm{mid}})\cong M_{\mathrm{mid}}(p-1)$ as polarizable integral
+Hodge structures.
+\item The identification of lattices
+$M_{\mathrm{mid}}(\Z)\cong H^1(J_{\mathrm{mid}},\Z)$ transports the Gaussian
+product door to the middle sector of \emph{every} input: with $W=E\times X$,
+$\gamma=[i]\times\mathrm{id}$, the mixed lattice
+$\Lambda_{\mathrm{mix}}:=H^1(E,\Z)\otimes M_{\mathrm{mid}}(\Z)\subseteq H^{2p}(W,\Z)$
+carries the refined door law (B2) in full, and the $(p,p)$-part of
+$\Lambda_{\mathrm{mix}}\otimes\Q$ is exactly the balanced lattice
+$\{x=e\otimes u+f\otimes v:\ u-iv\in M_{\mathrm{mid}}^{p-1,p}\otimes\C\}$.
+\end{enumerate}
+\PROVEN{}\ (i) is immediate from the definition; (ii) is the level-one
+weight-one-ification with the sign computation below; (iii) is (B2) restricted
+to the middle factor, which is the only factor that can host $(p,p)$ types of
+E-degree $1$ (a type-counting argument: $e\otimes u$ has type
+$(1+a,b)$ or $(a,1+b)$ for $(a,b)$ a type of $u$, and $(p,p)$ forces
+$(a,b)\in\{(p-1,p),(p,p-1)\}$).
+\end{theorem}
+
+\begin{proof}[Proof of (ii), the sign computation]
+Let $S\colon M\otimes M\to\Q(-2p+1)$ be the polarization of the odd-weight
+structure $M=M_{\mathrm{mid}}$ ($S$ skew, since the weight $2p-1$ is odd).
+Twist by $(p-1)$: $M'=M(p-1)$ has weight $1$, types
+$M'^{1,0}=M^{p,p-1}(p-1)$ and $M'^{0,1}=M^{p-1,p}(p-1)$, and the induced
+bilinear form $S'=S\otimes\mathrm{id}$ takes values in
+$\Q(-2p+1+2p-2)=\Q(-1)$: the shape of a weight-one polarization. Both
+lattices and forms are integral after the standard $(2\pi i)$-normalization.
+The Riemann conditions for the torus $J_{\mathrm{mid}}$, computed under the
+\emph{uniform} Hodge--Riemann formula
+\[
+i^{a-b}\,(-1)^{w(w-1)/2}\,S(v,\bar v)>0
+\qquad(0\ne v\in H^{a,b},\ w=a+b),
+\]
+which is the standard polarization condition (it reproduces the classical
+weight-one Riemann condition $iS(v,\bar v)>0$ on $H^{1,0}$ of an abelian
+variety and the weight-two signs on surfaces):
+\begin{enumerate}[label=(R\arabic*)]
+\item $S'(F^1,F^1)=0$: unfolding the twist, this is
+$S(M^{p,p-1},M^{p,p-1})=0$, which holds because the polarization pairs
+$(a,b)$ nontrivially only against $(b,a)$, and
+$(p-1,p)\ne(p,p-1)$.
+\item Positivity: for $0\ne v\in M'^{1,0}$ (i.e.\ $v$ of type $(p,p-1)$ on
+the untwisted $M$) one needs $i\,S'(v,\bar v)>0$. The uniform HR formula at
+$(a,b)=(p,p-1)$, $w=2p-1$, reads
+\[
+i^{+1}\,(-1)^{(2p-1)(p-1)}\,S(v,\bar v)>0
+\quad\Longleftrightarrow\quad
+i\,(-1)^{p-1}\,S(v,\bar v)>0,
+\]
+since $(2p-1)(p-1)\equiv p-1\pmod 2$; the conjugate type $(p-1,p)$ carries
+the \emph{opposite} factor $i^{-1}(-1)^{p-1}=-\,i(-1)^{p-1}$ --- the two
+level-one types carry opposite HR signs, the structural fact on which the
+compensation rests. The twist rescales $S$ to $S'=c\,S$ with
+$c=(2\pi)^{2(p-1)}\cdot i^{2p-2}=(2\pi)^{2(p-1)}\,(-1)^{p-1}$, so
+\[
+i\,S'(v,\bar v)=c\cdot i\,S(v,\bar v)
+\quad\text{with}\quad
+i\,S(v,\bar v)=(-1)^{p-1}\cdot\big[i\,(-1)^{p-1}S(v,\bar v)\big],
+\]
+the bracket being positive by the HR relation. Hence
+$i\,S'(v,\bar v)=(2\pi)^{2(p-1)}\,(-1)^{p-1}\cdot(-1)^{p-1}\cdot[\cdots>0]>0$:
+\emph{the compensation is automatic} --- the twist's sign factor
+$(-1)^{p-1}$ exactly cancels the HR sign factor $(-1)^{p-1}$, and the
+weight-one Riemann condition holds with the standard normalization. (The
+certificate checks the oppositeness, the uniform-exponent identity
+$w(w-1)/2\equiv p-1$, and the product $(-1)^{p-1}\cdot(-1)^{p-1}=+1$ for
+$p=2,3,4,5$.)
+\end{enumerate}
+A polarizable weight-one structure is an abelian variety (\STANDARD{}), which
+proves (ii). The dimension count is
+$g=\dim_\C F^1=\tfrac12\dim_\Q M$ (the two level-one types are conjugate, so
+$\dim M^{p-1,p}=\dim M^{p,p-1}$). For $p=1$ the whole of $H^1(X)$ is
+two-level and $J_{\mathrm{mid}}=\mathrm{Alb}(X)$: the construction degenerates
+to the Albanese. For $p=2$ and $h^{3,0}(X)=0$ the whole of $H^3(X)$ is
+two-level and $J_{\mathrm{mid}}=J^3(X)$ is the classical level-one
+intermediate Jacobian; when $h^{3,0}\ne0$ the level${}\ge{}2$ part is
+\emph{discarded} by the extraction, and $J_{\mathrm{mid}}$ is still abelian.
+\end{proof}
+
+\begin{remark}[What the extraction does and does not do]
+The extraction is lossless for the \emph{mixed} $(p,p)$ sector: by the
+type-counting in (iii), every $(p,p)$ class of E-degree $1$ on $E\times X$ has
+its $X$-factor in the middle part. It is lossy for the \emph{odd} cohomology:
+the level${}\ge{}2$ part (e.g.\ $H^{3,0}$) is discarded. That part cannot pair
+into any $(p,p)$ class with one $E$-letter, and its role in the input axis is
+confined to the transcendental core (\S6).
+\end{remark}
+
+\section{Theorem 2: the Correspondence Equivalence}
+
+\begin{definition}[The two sides]
+Fix $(X,p)$, $p\ge1$, $M:=M_{\mathrm{mid}}\ne0$ free, $J:=J_{\mathrm{mid}}$,
+$g=\dim J$, $d=\dim X$, $W=E\times X$.
+\begin{enumerate}[label=(\alph*)]
+\item \textbf{Mixed closure at $(X,p)$}: every class
+$x\in H^{p,p}(W,\Q)\cap\Lambda_{\mathrm{mix}}\otimes\Q$
+is algebraic on $W$ (there is $Z_x\in\CH^p(W)_\Q$ with
+$\mathrm{cl}(Z_x)=x$).
+\item \textbf{AJ-correspondence at $(X,p)$}: there exists
+$K\in\CH^{p+g-1}(X\times J)_\Q$ whose correspondence action
+$K_*\colon H^1(J,\Q)\to H^{2p-1}(X,\Q)$ realizes, up to a nonzero rational
+scalar, the composite
+$H^1(J)\cong M(p-1)\xrightarrow{\ \text{untwist}\ }M\hookrightarrow H^{2p-1}(X)$
+of the canonical identification of Theorem 1(ii) with the inclusion.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Correspondence Equivalence]\label{thm:corr}
+$\mathrm{(b)}\Rightarrow\mathrm{(a)}$ and
+$\mathrm{(a)}\Rightarrow\mathrm{(b)}$. Both implications are constructive:
+each transfers an algebraic realization of one side into an algebraic
+realization of the other, through cycles that exist on the nose.
+\PROVEN{}
+\end{theorem}
+
+\begin{proof}[Proof that (b) $\Rightarrow$ (a)]
+Let $x=e\otimes u+f\otimes v\in H^{p,p}(W,\Q)\cap\Lambda_{\mathrm{mix}}\otimes\Q$.
+Under the identification $H^1(J)=M(p-1)$ of Theorem 1(ii), $x$ corresponds to
+the cross class
+\[
+x^\circ:= e\otimes u^\circ+f\otimes v^\circ\ \in\ H^1(E)\otimes H^1(J)
+\ \subset\ H^2(E\times J),
+\]
+where $u^\circ,v^\circ$ are $u,v$ re-typed through the twist. The balanced
+condition ($u-iv$ purely $(p-1,p)$ on the $X$-side) translates, under the
+twist dictionary $(p-1,p)\mapsto(0,1)$, $(p,p-1)\mapsto(1,0)$, into the
+condition that $x^\circ$ be of type $(1,1)$ on the abelian variety $E\times J$.
+Since $x$ is rational and the identification is defined over $\Q$, $x^\circ$ is
+rational. By Lefschetz $(1,1)$ (B7) applied to the smooth projective variety
+$E\times J$ (abelian, hence projective),
+\[
+x^\circ=c_1(\mathcal L)\quad\text{for a line bundle }\mathcal L
+\text{ on }E\times J,
+\]
+so the divisor $Z^\circ:=[D]$ of any meromorphic section of $\mathcal L$ is an
+algebraic cycle on $E\times J$ with class $x^\circ$. Now apply the
+correspondence $K$: the cycle
+\[
+Z_x:=(\mathrm{id}_E\times K)_*\,Z^\circ\ \in\ \CH^{p}(E\times X)_\Q
+\]
+(the pushforward of a divisor through the correspondence $K$ in the second
+factor) has cohomology class
+$(\mathrm{id}\times K)_*(x^\circ)=e\otimes K_*u^\circ+f\otimes K_*v^\circ
+=e\otimes u+f\otimes v=x$,
+because $K_*$ realizes the identification by hypothesis (b) and the
+$E$-letters pass through the second-factor correspondence unchanged. Every
+step is a standard operation on algebraic cycles (pullback, product,
+pushforward of correspondences), so $Z_x$ is algebraic.
+\end{proof}
+
+\begin{proof}[Proof that (a) $\Rightarrow$ (b)]
+Assume the mixed closure. Choose a basis $x_1,\dots,x_{2g}$ of the balanced
+lattice $B:=H^{p,p}(W,\Q)\cap\Lambda_{\mathrm{mix}}\otimes\Q$ and the dual
+basis $x^1,\dots,x^{2g}$ with respect to the $E$-symplectic contraction
+$\langle e\otimes u+f\otimes v,\ e'\otimes u'+f'\otimes v'\rangle
+:=u\otimes u'+v\otimes v'$ paired with the letter symplectic form on
+$H^1(E)$. By (a) there are cycles $Y_i,Z^j\in\CH^p(W)_\Q$ with classes $x_i$
+and $x^j$. The E-degree-one K\"unneth component of an algebraic cycle on
+$E\times X$ is algebraic, because the K\"unneth projectors of the curve $E$
+are algebraic (curves: all components are given by divisor classes and the
+fundamental class); so after replacing each $Y_i,Z^j$ by its
+$(\pi^1_E\times\pi_{\mathrm{mid}})$-component we may assume the cycles are
+purely mixed. Two auxiliary constructions, both unconditional:
+\begin{enumerate}[label=(A\arabic*)]
+\item \emph{The $J$-side Poincar\'e duals.} Under the identification
+$H^1(J)\cong M(p-1)$, the dual basis corresponds to homomorphisms
+$\phi^j\in\Hom(J,\hat E)\otimes\Q$, and the associated line bundles
+$\mathcal L_j:=(\mathrm{id}_E\times\phi^j)^*\mathcal P_{\hat E}$ on $E\times J$
+have $c_1(\mathcal L_j)=$ the $j$-th dual cross class (Lefschetz $(1,1)$,
+(B7)). Their divisors $D_j$ are algebraic cycles on $E\times J$.
+\item \emph{The $J$-side duality cycle.} On the abelian variety $J$ the
+K\"unneth components $\pi^J_i$ are algebraic (Deninger--Murre, (B5)), and the
+ample power $(c_1H_J)^{g-1}$ is a divisor class; the composite correspondence
+\[
+W^j\ :=\ D_j\circ(\mathrm{swap})\circ\pi^J_{2g-1}\circ(c_1H_J)^{g-1}
+\quad\text{(a cycle on }J\times E\text{)}
+\]
+acts on cohomology as the homomorphism $H^1(J)\to H^1(E)$ adjoint to
+$x^j$: the Lefschetz power realizes the symplectic duality
+$H^1(J)\cong H^{2g-1}(J)^\vee$ (hard Lefschetz on $J$), $\pi^J_{2g-1}$
+selects the top-odd layer, and $D_j$ transfers it to $H^1(E)$ through the
+cross class. Every factor is algebraic, so $W^j$ is an algebraic cycle.
+\end{enumerate}
+Now define
+\[
+K:=\sum_{j=1}^{2g} Y_j\circ W^j\ \in\ \CH(X\times J)_\Q
+\]
+(composition of correspondences through the intermediate curve $E$: fiber
+product and pushforward, algebraic operations). Its cohomology action on
+$\beta\in H^1(J)$ is
+\[
+K_*\beta=\sum_j Y_{j*}\big(W^j_*\beta\big)
+=\sum_j Y_{j*}\big(\langle\beta,\cdot\rangle\text{-coefficient of }x^j\big)
+=\text{the image of }\beta\text{ under }H^1(J)\cong M\hookrightarrow H^{2p-1}(X),
+\]
+by the dual-basis arithmetic: the $W^j$ carry the dual data to $E$, the $Y_j$
+carry the primal data from $E$ to $X$, and the composition contracts the
+$E$-pairing to the identity on $M$. Up to the rational scalar fixed by the
+symplectic normalization, this is the required action. The degree
+bookkeeping: $Y_j\in\CH^p(E\times X)$ acts $H^1(E)\to H^{2p-1}(X)$ (shift
+$2p-2$ from the curve factor); $W^j\in\CH^{g}(J\times E)$ acts
+$H^1(J)\to H^1(E)$ (the shift $2g-2g=0$ after the Lefschetz normalization);
+the composite acts $H^1(J)\to H^{2p-1}(X)$ as required, with codimension
+$p+g-1$ on $X\times J$; for $p=1$, $g=\tfrac12 h^1(X)$, this is the Albanese
+graph degree, matching Corollary \ref{cor:p1}.
+\end{proof}
+
+\begin{corollary}[$p=1$ is closed]\label{cor:p1}
+For $p=1$ the AJ-correspondence always exists: it is the graph of the
+Albanese map (B6), since $J_{\mathrm{mid}}=\mathrm{Alb}(X)$ and the graph's
+correspondence action is exactly $a_*\colon H^1(X)\cong H^1(\mathrm{Alb}(X))$.
+Hence the mixed sector at $p=1$ is closed for every $X$ --- consistent with,
+and re-deriving through the fold machinery, the Lefschetz $(1,1)$ theorem.
+\PROVEN{}
+\end{corollary}
+
+\begin{corollary}[The committed worlds are $K$-certified]\label{cor:worlds}
+On the committed world model, the compiler-sector theorem I2 (Round 18)
+supplies, for every divisor-generated input, an actual Chow witness with
+$\mathrm{cl}=\alpha$ exactly; feeding the world's own structure through the
+proof of Theorem \ref{thm:corr}(a$\Rightarrow$b) exhibits the
+AJ-correspondence for every committed world. The committed census and the
+correspondence layer are two faces of the same closure.
+\PROVEN{}
+\end{corollary}
+
+\begin{remark}[What Theorem 2 says about the input axis]
+The mixed sector --- the only sector of $E\times X$ that the Gaussian deck
+controls --- closes at $(X,p)$ exactly when the odd-middle projector layer
+closes at $X$. The projector layer is the Deninger--Murre/Murre territory:
+for abelian $X$ it is closed unconditionally (B5); for curves it is
+elementary; for general $X$ the individual odd K\"unneth components are the
+open Murre-type content. The input axis's \emph{odd face} is thereby
+equivalenced to a named classical object, and the campaign's identification
+link $\Lambda_p$ (Round 24, rehabilitated as the transgression by Round 28)
+is exactly the GST avatar of the AJ-correspondence: both are the object that
+connects the odd sector of $X$ to an abelian variety through algebraic
+correspondences.
+\end{remark}
+
+\section{Theorem 3: the Fold Classification}
+
+\begin{theorem}[Fold Classification]\label{thm:fold}
+Let $X$ be smooth projective, $p\ge1$.
+\begin{enumerate}[label=(\roman*)]
+\item \textbf{Fold worlds.} A polarizable two-level odd structure
+$M$ (types $\subseteq\{(p-1,p),(p,p-1)\}$) carries an integral Hodge fold
+($\gamma\in\End_{\mathrm{Hodge}}(M(\Z))$, $\gamma^2=-1$) if and only if the
+Weil operator $C$ of $M$ ($C=+i$ on $M^{p-1,p}$, $C=-i$ on $M^{p,p-1}$) is
+rational on $M$; these are exactly the CM/Weil-type structures --- the
+committed census worlds. On them the full fold stack (B3, B4) applies and
+$m^*>0$ through the committed chain.
+\item \textbf{The Gaussian supply.} For \emph{every} $X$, the product deck
+$\gamma=[i]\times\mathrm{id}$ is an integral fold on the mixed lattice
+$\Lambda_{\mathrm{mix}}=H^1(E)\otimes M_{\mathrm{mid}}$ of $W=E\times X$:
+no rationality of the Weil operator of $X$ is required, because the
+$E$-factor supplies the square root of $-1$. The mixed sector of every input
+is thereby fold-carried, and its door is the refined door law (B2).
+\item \textbf{The fold-free stratum.} The inputs of the open sector split as
+\[
+\{\text{inputs}\}
+=\underbrace{\{\text{divisor-algebra inputs}\}}_{\text{closed}}
+\ \dot\cup\
+\underbrace{\{\text{mixed-projector inputs}\}}_{\text{closed iff }K\text{ exists}}
+\ \dot\cup\
+\underbrace{\{\text{transcendental inputs}\}},
+\]
+where the transcendental inputs are the rational $(p,p)$ classes outside the
+divisor algebra and outside the correspondence closure of the mixed sector.
+The fold-free stratum is the union of the $K$-free odd face and the
+transcendental face.
+\end{enumerate}
+\PROVEN{} (i) is the emergence layer (B3) plus the definition of the Weil
+operator; (ii) is the product deck construction (B2); (iii) is the sector
+decomposition with Theorem \ref{thm:middle}(iii) closing the type-counting.
+\end{theorem}
+
+\begin{proof}[Proof of (i)]
+If $\gamma$ is an integral Hodge endomorphism with $\gamma^2=-1$, then
+$M(\Z)$ is a $\Z[i]$-module (B3), and $\gamma$ commutes with the Hodge
+decomposition; on each two-level type space $M^{p-1,p}$ (a complex vector
+space on which $\gamma$ acts as a square root of $-1$ commuting with the
+type), $\gamma$ acts as $\pm i\cdot\mathrm{id}$, and the two level-one types
+being conjugate forces $\gamma|_{M^{p,p-1}}=-\gamma|_{M^{p-1,p}}$: hence
+$\gamma=\pm C$, and the Weil operator is integral. Conversely, if $C$ is
+rational, it is integral after scaling (the lattice is free), and $C$ is the
+fold. The CM/Weil-type identification is the standard characterization: the
+Mumford--Tate group of a structure with rational Weil operator centralizes
+$C$, and the centralizer of a square root of $-1$ acting with eigenvalues
+$\pm i$ on the two conjugate types is a torus; polarizable structures with
+torus Mumford--Tate group are CM type. The final clause (the fold stack
+applies and $m^*>0$) is the committed chain, receipted in Theorem
+\ref{thm:base}.
+\end{proof}
+
+\section{Theorem 4: the Irreducible Core}
+
+\begin{theorem}[Irreducible Core]\label{thm:core}
+The following are equivalent, for the open sector
+$2\le p\le\lfloor d/2\rfloor$, $d\ge4$:
+\begin{enumerate}[label=(\alph*)]
+\item The rational Hodge conjecture holds on the open sector: every rational
+$(p,p)$ class on every input is algebraic.
+\item Both hold: \emph{(b1)} the AJ-correspondence $K$ exists at every
+$(X,p)$ of the open sector; and \emph{(b2)} every transcendental input
+$(X,p,\alpha)$ (in the sense of Theorem \ref{thm:fold}(iii): outside the
+divisor algebra and outside the correspondence closure of the mixed sector)
+is algebraic.
+\end{enumerate}
+Moreover the campaign's mechanism route is a sufficient condition for (b2):
+if items \textbf{(i)--(iii)} of the standing reduction (the $C_4$-deck
+exhibited, the two-cell class reduced, the non-scalar unexchanged content
+excluded with a $(p,p)$-sensitive step) are discharged at the transcendental
+sector, then (b2) holds.
+\PROVEN{}
+\end{theorem}
+
+\begin{proof}
+(a)$\Rightarrow$(b): if every rational $(p,p)$ class on every input is
+algebraic, then (b2) is immediate (transcendental inputs are inputs). For
+(b1): with every class algebraic, pull a basis of the balanced lattice from
+$X$'s own algebraic cycles (pullback along the projection $W=E\times X\to X$
+takes cycles to cycles; the Künneth extraction through the algebraic curve
+projectors of $E$ preserves algebraicity), and run the projector assembly of
+Theorem \ref{thm:corr}(a$\Rightarrow$b) to exhibit $K$.
+(b)$\Rightarrow$(a): the sector decomposition (Theorem \ref{thm:fold}(iii))
+partitions the rational $(p,p)$ classes of every input into the divisor
+algebra (closed by (B7) and products of algebraic cycles), the mixed sector
+(closed by (b1) through Theorem \ref{thm:corr}(b$\Rightarrow$a)), and the
+transcendental sector (closed by (b2) by definition). Hence every rational
+$(p,p)$ class on every input of the open sector is algebraic. The final
+clause is the campaign's proven one-directional reduction (Theorem
+\ref{thm:base}) applied at the transcendental inputs: the reduction needs
+items (i)--(iii) only at the inputs not already discharged, which by the
+decomposition are exactly the transcendental ones.
+\end{proof}
+
+\begin{remark}[The form of the finish, and the honest reading of (b2)]
+Theorem \ref{thm:core} is the finish of the decomposition program: the input
+axis --- one undifferentiated boundary since ledger 085 --- is now three
+certified sectors and one irreducible core, equivalenced to the Clay
+statement on the open sector. Two honest readings of (b2), stated so that
+neither overclaims:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Conclusion-form} (what the equivalence uses): every
+transcendental $\alpha$ is algebraic. This is the exact residual content of
+the conjecture --- it is not known, and no reformulation of it as a
+hypothesis-packet can close it (the campaign's anti-circularity audits prove
+the packets equivalent to the conclusion).
+\item \emph{Mechanism-form} (the campaign's route, sufficient not necessary):
+exhibit the fold-birth at the transcendental input --- the $C_4$-deck on the
+input's own cohomology, the two-cell reduction, the $(p,p)$-sensitive
+exclusion. By Theorem \ref{thm:fold}(i) such a fold cannot exist as a Hodge
+endomorphism of a non-CM structure, so the birth runs through auxiliary
+construction (covers, products, correspondences). The falsifiable entry test
+of Rounds 30--31 is unchanged and now \emph{localized}: it applies only to
+the transcendental sector, and its $(p,p)$-sensitivity requirement
+(Corollary-7 discipline, ledger 101) is the load-bearing gate.
+\end{enumerate}
+\end{remark}
+
+\section{The certificate}
+
+\texttt{research/experiments/input\_axis\_decomposition\_checks.py} covers the
+finite shadows of the four theorems, in exact arithmetic ($\Z$, $\Q$ via
+\texttt{fractions.Fraction}, $\Z[i]$ arithmetic; zero floats; matrices
+$\le 48\times48$; every loop bounded and the bound stated before launch):
+\begin{enumerate}[label=(C\arabic*)]
+\item \textbf{Two-level lattices} (Theorem 1): for $s=1,\dots,5$, random
+2-torsion-free lattices with a simulated two-level Hodge grading; the
+intermediate-torus polarization sign computation verified by the explicit
+twist arithmetic (the $\lambda=(2\pi i)^{2p-2}\sim(-1)^{p-1}$ factor tracked
+symbolically) for $p=2,3,4,5$; the HR sign table of the two level-one types
+checked to be opposite, with the compensating choice existing exactly once.
+\item \textbf{The balanced door on the middle factor} (Theorem 1(iii)): the
+refined door law (B2) re-derived on $H^1(E)\otimes M$ for random middle
+lattices $M$ ($L=\Z$ and random free $L$; the $m$-even necessity and the
+$m=2$ witness; hostile: swapped deck, sign-broken rotation, garbage input).
+\item \textbf{The correspondence equivalence, finite shadow} (Theorem 2): on a
+finite model (lattices with simulated algebraic projector layers), the
+transfer construction (b)$\Rightarrow$(a) and the projector assembly
+(a)$\Rightarrow$(b) verified: the composite action realizes the
+identification on random instances; the $p=1$ Albanese instance verified
+end-to-end.
+\item \textbf{The fold classification, finite shadow} (Theorem 3): random
+two-level structures with rational Weil operator certified fold-carried;
+structures with non-rational (simulated generic) $C$ certified fold-free on
+the nose; the Gaussian supply verified on the product lattices.
+\item \textbf{Hostile controls}: the sabotage battery --- broken maps,
+non-symplectic pairings, wrong-degree correspondences, wrong-sign twists
+--- every control must fire.
+\end{enumerate}
+\CERT{} (the count and the double-run receipt are on the round record).
+
+\section{The final state}
+
+\subsection*{The complete sector map of the input axis}
+
+\begin{center}
+\begin{tabular}{@{}llll@{}}
+\toprule
+Sector & Content & Status & Receipt \\
+\midrule
+Divisor algebra & products of $(1,1)$ classes & closed & Lefschetz $(1,1)$ (B7) \\
+Mixed, $p=1$ & $H^1(E)\otimes H^1(X)$ & closed & Thm.\,\ref{thm:corr}+Cor.\,\ref{cor:p1} \\
+Mixed, $p\ge2$, $K$ exists & balanced lattice on $E\times X$ & closed & Thm.\,\ref{thm:corr}(b$\Rightarrow$a) \\
+Committed worlds & census rows, $S_m(A)$, products & closed & census (Thm.\,\ref{thm:base}) \\
+Odd face, general $X$ & middle projector / $K$ & equivalenced & Thm.\,\ref{thm:corr} \\
+Transcendental & fold-free core & irreducible & Thm.\,\ref{thm:core} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection*{The honest scope}
+
+$\mathrm{Q1}$ remains proven and certified on the committed world model, now
+with the product family's mixed sector classified. $\mathrm{Q2}$ is not
+claimed: the Clay statement on the open sector is equivalent (Theorem
+\ref{thm:core}) to the $K$-correspondences everywhere plus the transcendental
+fold-birth, and neither is discharged at general input. The closing string is
+not emitted: its content would be the assertion that Theorem
+\ref{thm:core}(b) holds, and (b) is not proven. What this round adds to the
+campaign's terminal state is the \emph{decomposition}: the input axis is no
+longer one boundary --- it is three closed sectors, one equivalence theorem
+with the Deninger--Murre/Murre projector layer, and one irreducible core whose
+content is exactly the reduction items (i)--(iii) with the $(p,p)$-sensitive
+gate. The falsifiable line, localized: construct the AJ-correspondence at one
+general $(X,p)$, $p\ge2$, without assuming the middle projector; or exhibit
+the fold-birth at one transcendental input with the input-sensitivity gate
+firing.
+
+\subsection*{The quantifier line (\S37)}
+
+What this round did to the universal quantifier: the input axis was decomposed
+--- the divisor and mixed-projector sectors are closed or equivalenced
+(Theorems 1--2), the fold supply for the mixed sector is universal in $X$
+(Theorem 3(ii)), and the residual universal content is pinned by the
+equivalence of Theorem 4 to exactly two named constructions. The Clay
+statement is not claimed; the closing string is not emitted.
+
+\end{document}

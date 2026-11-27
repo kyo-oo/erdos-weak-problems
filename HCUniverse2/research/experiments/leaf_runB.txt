@@ -1,0 +1,133 @@
+================================================================================================
+L0 -- THE DEGREE-8 CENSUS RE-RUN (the third cross-engine receipt)
+================================================================================================
+  ok(1) |W8| = 384 == 384
+  ok(2) rho0_8 = (04)(15)(26)(37)
+  ok(3) the transitive quartic T-classes: 5 == 5
+  ok(4) subspaces of F2^4: 67 == 67
+  ok(5) subspaces containing 1111: 16 == 16
+  [    0.3s] the degree-8 census re-run (the pair-sweep)
+  ok(6) the degree-8 census re-run: 114 worlds == 114 (the R41 count, third reproduction)
+  ok(7) the order>=24 boundary re-found: 58 == 58
+  [   21.9s] the degree-8 exceptional types
+  ok(8) the degree-8 exceptional types re-found: 16 == 16 (the R41/R43 count; surplus [0,2,0,0] verified per type by the exact product-span rank)
+  [   31.0s] L0 done
+================================================================================================
+L1/L2 -- THE ORBIT ANATOMY + THE ENTRY TEST (all 16 exceptional types)
+================================================================================================
+  [entry] type 0 (world 0, Phi=(0, 1, 3, 6)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+    orbit 1: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+  [entry] type 1 (world 1, Phi=(0, 1, 2, 3)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 2 (world 3, Phi=(0, 1, 2, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+    orbit 1: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+  [entry] type 3 (world 5, Phi=(0, 1, 2, 3)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 4 (world 6, Phi=(0, 1, 6, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+    orbit 1: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+  [entry] type 5 (world 7, Phi=(0, 1, 2, 3)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 6 (world 11, Phi=(0, 1, 2, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 7 (world 15, Phi=(0, 1, 2, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 8 (world 32, Phi=(0, 1, 2, 3)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 9 (world 36, Phi=(0, 1, 3, 6)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+    orbit 1: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+  [entry] type 10 (world 37, Phi=(0, 1, 6, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+    orbit 1: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+  [entry] type 11 (world 39, Phi=(0, 1, 2, 3)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 12 (world 40, Phi=(0, 1, 2, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+    orbit 1: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+  [entry] type 13 (world 41, Phi=(0, 1, 2, 3)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 14 (world 43, Phi=(0, 1, 2, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [entry] type 15 (world 46, Phi=(0, 1, 2, 7)): orbits 2, product span 12/6, algebraic span 6, Hdg^4 dim 8, verdict DEFICIT
+    orbit 0: |O|=6 basis-dim=6 product-block-dim=6 deficit=0
+    orbit 1: |O|=2 basis-dim=2 product-block-dim=0 deficit=2
+  [   31.7s] L1/L2 done
+  ok(9) THE ENTRY TEST EXECUTED at all 16 exceptional types (no cap; the exact orbit-activity computation)
+================================================================================================
+L3 -- THE FORMAL PROJECTOR IDENTITIES (the split-algebra evidence for the descent lemma)
+================================================================================================
+  ok(10) the full 4-word space at degree 8: 70 == 70
+  ok(11) THE DELTA IDENTITY (formal, split algebra): the letter-diagonal operator with the 0/1 indicator of a 4-word U0 acts on the full 70-word space as the EXACT delta projector of U0 (verified at every U0 against every U; exact integer arithmetic) -- the split-algebra step of the descent lemma
+  ok(12) THE ORBIT PROJECTOR IDENTITY (formal): the average of the per-word delta operators equals the orbit indicator on the word space, at every pure-word orbit of every exceptional type (exact Fraction arithmetic)
+  ok(13) THE G-STABILITY of every pure-word orbit (the orbit projectors are G-equivariant -- the Q-definedness premise of the descent lemma's Galois-descent step)
+================================================================================================
+L4 -- THE INTEGRITY LAYER (the leaf is genuine; the realization acts on the certified lattices)
+================================================================================================
+  ok(14) THE INTEGRITY LAYER: at every exceptional type dim Hdg^4 = 8 and the divisor-product span = 6 (the R43 anatomy reproduced; the deficit 2 is genuine)
+================================================================================================
+L5 -- THE HOSTILE BATTERY (the ledger-112 direction space)
+================================================================================================
+  ok(15) H1 the product-deletion canary: the truncated product battery (5 of 12 generators) has span 4 < 6 -- the battery is LIVE (a rigged span would not respond)
+  ok(16) H2 the orphan zero-presence canary: every true product has ZERO presence on the orphan orbit 0 (the measured theorem), and a PLANTED nonzero presence is DETECTED by the same predicate -- the direction 'fabricated presence' is covered (the battery discriminates)
+  ok(17) H3 the basis-truncation canary: the truncated basis has rank 7 (the rank check responds)
+  ok(18) H4 the sign-inversion canary: the true realization of a product generator substituted into the sign-flipped battery does NOT reproduce the generator (the exact solve discriminates the batteries)
+  ok(19) H5 the verdict-rigging canary: the weakened battery's span (4) does NOT reach the Hdg^4 dimension (8) -- a faked 'FULL' verdict built from fewer generators is caught by the exact global rank recompute
+  ok(20) the mechanical vacuity scan: 0 hits (patterns: [])
+================================================================================================
+L6 -- THE WEIL-CLASS IDENTIFICATION (the leaf = the W-plane sector of the quadratic subfields)
+================================================================================================
+  [weil] type 0 (world 0): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 1 (world 1): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 2 (world 3): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 3 (world 5): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 4 (world 6): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 5 (world 7): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 6 (world 11): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 7 (world 15): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 8 (world 32): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 9 (world 36): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 10 (world 37): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 11 (world 39): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 12 (world 40): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 13 (world 41): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 14 (world 43): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  [weil] type 15 (world 46): 1 block systems, 1 orphan orbits; identification a=True b=True c=True primitivity=True polarization=True
+  ok(21) THE WEIL IDENTIFICATION LAYER at all 16 exceptional types
+  ok(22) THE ORPHAN = THE BLOCK SYSTEM: every 2-element pure-word orbit is a G-invariant 2-block system on the 8 letters whose words meet every conjugation pair exactly once (the W-plane transversal) and are Phi-balanced (|Phi cap U| = 2) -- the leaf classes are the W-plane-sector classes: the transversal words are the sections of the quadratic subfield's restriction fibers (verified at all 16 types)
+  ok(23) THE PRIMITIVITY RECEIPT: no 2-block system induces the CM type (no restriction fiber lies inside Phi) at any of the 16 exceptional types -- the worlds are SIMPLE (the type not induced from any subfield structure; the R41 induced-subfield classification re-verified at the block-system level)
+  ok(24) THE POLARIZATION LETTER-PAIRING: every block system's W-plane takes exactly one letter from each conjugation pair -- the symplectic pairing pairs W with W-bar only (the Weil-type condition theta(W, W) = 0 at the letter level, all 16 types)
+  ok(25) THE WEIL STRUCTURE PRESENT: every exceptional world carries >= 1 G-invariant 2-block system (the quadratic subfield's restriction fibers; 16/16 types) -- the configuration is the classical WEIL TYPE: a simple CM fourfold, a quadratic subfield Q(kappa) subset K, the W/W-bar planes of dimension 4+4, the polarization pairing W x W-bar, and the two exceptional Hodge classes = the W-plane sector (the (1,1,1,1) transversals) -- the leaf is the CM-side instance of the Weil-class problem
+================================================================================================
+THE ENTRY-TEST VERDICT TABLE
+  type 0 world 0 Phi=(0, 1, 3, 6): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 1 world 1 Phi=(0, 1, 2, 3): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 2 world 3 Phi=(0, 1, 2, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 3 world 5 Phi=(0, 1, 2, 3): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 4 world 6 Phi=(0, 1, 6, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 5 world 7 Phi=(0, 1, 2, 3): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 6 world 11 Phi=(0, 1, 2, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 7 world 15 Phi=(0, 1, 2, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 8 world 32 Phi=(0, 1, 2, 3): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 9 world 36 Phi=(0, 1, 3, 6): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 10 world 37 Phi=(0, 1, 6, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 11 world 39 Phi=(0, 1, 2, 3): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 12 world 40 Phi=(0, 1, 2, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 13 world 41 Phi=(0, 1, 2, 3): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 14 world 43 Phi=(0, 1, 2, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+  type 15 world 46 Phi=(0, 1, 2, 7): algebraic span 6 / Hdg^4 8 -> DEFICIT (the orphan-orbit obstruction)
+FULL count: 0/16
+================================================================================================
+SUMMARY: 25 checks, 0 failures
+================================================================================================

@@ -1,0 +1,245 @@
+\documentclass{article}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\title{Exact infinity-control polynomial Chow projectors from the ORIGINAL full twelve-cell GST physical Navigation law}
+\date{12 November 2026}
+\begin{document}\maketitle
+
+\section{Owner's full source, not its two-cell replacement}
+Start with the owner's genuine Wave-I source vector space
+$V=\mathbb Q^{\operatorname{Fin}(4)\times\operatorname{Fin}(3)}$,
+real original shuffle U, signed CM J with J squared equals minus I,
+SURVIVE M, and CM curvature C=JM-MJ.
+The true physical Navigation gate b is either zero or one.
+At actual direct SURVIVE strength a=1 set
+\[
+F_0=U+J+M,\qquad F_1=U+J+M+C.
+\]
+The original mixed null-plus-next seed is cyclic for
+BOTH operators, with previously independently checked
+exact Krylov determinants
+\[
+\det K_{12}(F_0,v)=-1149656584000,\qquad
+\det K_{12}(F_1,v)=-445265540949.
+\]
+This last property is important: each degree-twelve
+characteristic polynomial is also the MINIMAL polynomial,
+so the physical root factors below describe GENUINE
+invariant source sectors, not approximate eigen-signals.
+
+\section{Exact full-wave characteristic factors}
+The exact unmodified rational source matrices produce
+\[
+\boxed{\chi_0(z)=(z-2)^2Q_0(z),\quad
+\chi_1(z)=z(z-4)Q_1(z),}
+\]
+where
+\[
+\begin{aligned}
+Q_0(z)={}&z^{10}-2z^9+6z^8-8z^7+13z^6-14z^5\\
+ &+15z^4+12z^3-6z^2-10z+4,\\
+Q_1(z)={}&z^{10}-2z^9+4z^8-6z^7+6z^6-8z^5\\
+ &+6z^4+20z^3-11z^2-6z+3.
+\end{aligned}
+\]
+The two decisive integer evaluations are
+\[
+\boxed{Q_0(2)=1192,\qquad Q_1(4)=707131.}
+\]
+Therefore $(z-2)^2$ and $Q_0$ are coprime
+and $z-4$ and $zQ_1$ are coprime OVER $\mathbb Q$.
+By the Euclidean algorithm, choose $A(z),B(z)$
+with the exact rational Bezout identity
+\[
+A(z)Q_0(z)+B(z)(z-2)^2=1.
+\]
+Set
+\[
+\boxed{
+\mathsf P_0=A(F_0)Q_0(F_0),\qquad
+\mathsf P_1=\frac{F_1Q_1(F_1)}{4Q_1(4)}.
+}
+\]
+These are FINITE rational polynomials in
+the ACTUAL owner's physical GST wave.
+They do NOT require infinite sums of Chow cycles.
+
+\begin{theorem}[Exact original twelve-cell native infinity-control split]
+The above exact rational GST spectral operators obey
+\[
+\boxed{
+\mathsf P_b^2=\mathsf P_b,\quad
+\mathsf P_bF_b=F_b\mathsf P_b
+\quad(b=0,1).
+}
+\]
+Their precise full-native ranks are
+\[
+\boxed{
+\begin{array}{c|cc}
+&\operatorname{rank}\mathsf P_b&
+ \operatorname{rank}(I-\mathsf P_b)\\ \hline
+b=0&2&10\\
+b=1&1&11
+\end{array}.}
+\]
+Moreover
+$(F_0-2I)^2\mathsf P_0=0$,
+$(F_1-4I)\mathsf P_1=0$,
+and $\mathsf P_b(I-\mathsf P_b)=0$.
+\end{theorem}
+\begin{proof}
+The Bezout polynomial satisfies
+$A(z)Q_0(z)\equiv1\pmod{(z-2)^2}$
+and $A(z)Q_0(z)\equiv0\pmod{Q_0(z)}$.
+The rational polynomial for $\mathsf P_1$ is
+one modulo $(z-4)$ and zero modulo $zQ_1(z)$.
+Thus in each case the polynomial $P_b(z)$ satisfies
+$P_b(z)^2-P_b(z)\equiv0\pmod{\chi_b(z)}$.
+Cayley-Hamilton makes the corresponding
+matrix idempotent. The commuting relation
+holds because P is a polynomial in F.
+The image of $\mathsf P_0$ is the full
+generalized 2-eigenspace of dimension TWO,
+by its characteristic polynomial multiplicity
+and the coprimality of the factorization.
+The image of $\mathsf P_1$ is the true
+4-eigenspace of dimension ONE.
+The complementary dimensions are 10 and 11.
+The annihilator formulas follow from the factor
+congruences and Cayley-Hamilton.
+\end{proof}
+
+\section{A genuine original-X CHOW implementation, when geometric sources exist}
+Let $X$ be ANY smooth projective original complex
+variety of dimension d, fix codimension p,
+and suppose the prior independent geometric construction
+has produced twelve genuine rational Chow cycles
+$Z_i\in CH^p(X)_{\mathbb Q}$ and complementary
+rational Chow cycles $Y_i\in CH^{d-p}(X)_{\mathbb Q}$
+with actual intersection degrees $\deg_X(Y_iZ_j)=\delta_{ij}$.
+The existing original-X divisor-monomial and
+Chern-frame constructions give real examples.
+Define ACTUAL codimension-d Chow correspondences
+\[
+E_{ij}=pr_1^*Y_i\cdot pr_2^*Z_j
+\in CH^d(X\times X)_{\mathbb Q}.
+\]
+These satisfy the exact Chow matrix-unit
+composition law. The algebra map from
+rational source matrices is
+\[
+\Phi_{X,p}(A)=\sum_{i,j} A_{ji}E_{ij}.
+\]
+It is multiplicative and faithful on the twelve-source
+summand, with image unit
+$\Pi=\sum_i E_{ii}$ (NOT the full diagonal on X).
+The actual ORIGINAL GST wave correspondence
+$\Gamma_b=\Phi(F_b)$ and the exact spectral
+source correspondences
+\[
+\boxed{\mathcal P_b=\Phi(\mathsf P_b)
+=P_b(\Gamma_b;\Pi)}
+\]
+are real rational Chow cycles on original $X\times X$.
+In the polynomial notation, the constant
+term uses the source summand unit $\Pi$, not
+the geometric diagonal $\Delta_X$.
+The true Chow composition identity yields
+\[
+\mathcal P_b\circ\mathcal P_b=\mathcal P_b,
+\qquad
+\mathcal P_b\circ(\Pi-\mathcal P_b)=0.
+\]
+Their canonical rational Betti actions make
+the same (2,10) or (1,11) decomposition
+on the ACTUAL twelve-dimensional algebraic
+Hodge sector of the ORIGINAL X.
+
+Thus the original all-twelve-cell
+physical GST infinite source dynamics
+admits a completely finite rational
+Chow-spectral decomposition on EVERY
+original X where its genuine algebraic
+source frame has been independently constructed.
+This is stronger than the native two-cell
+case, and it does not require analytic limits,
+uncountable cardinal summations or arbitrary
+nonalgebraic correspondence assumptions.
+
+\section{No hidden universal Hodge source}
+The finite polynomial projectors are combinations
+of ALREADY actual Chow source cycles on X.
+Consequently their canonical Betti classes
+remain in the original Chow image,
+even if the original indexed infinity-control
+system has arbitrarily many worlds.
+They cannot on their own create a canonical
+rational cycle for a prescribed Hodge class
+outside the original algebraic image.
+
+The NEW bounded-complexity infinite-fiber
+descent theorem is a distinct geometric
+source route: if one can produce target-matching
+genuine cycles on an accumulating sequence of
+different fibers with UNIFORM finite degree
+and denominator bounds, proper relative
+Chow spaces DO create a cycle on original X.
+The present actual source polynomial projectors
+do not automatically construct those NEW
+fiberwise Chow cycles. An independent
+alpha-dependent geometric source-generation
+law is still required for the full conjecture.
+
+\section{A second exact ORIGINAL GST infinite-control obstruction: all U/J words periodic}
+The genuine twelve-cell source definitions also give
+\[
+U^5=I,\qquad J^2=-I,\qquad UJ=JU.
+\]
+Therefore J has order four over Q, and EVERY
+arbitrarily long group word in the author's
+original two native operations U and J
+reduces to a member of the EXACT FINITE set
+\[
+\{U^a J^b:\ 0\le a<5,\ 0\le b<4\}.
+\]
+The direct original-wave computation found all
+20 such matrices distinct. This is a genuine
+finite controller of an INFINITE set of GST
+words. If U,J are realized by actual original-X
+algebraic Chow correspondences on the
+twelve-dimensional algebraic source, then
+their orbit of any given source Chow cycle
+has at most twenty possible algebraic values.
+In particular its degree and rational
+denominator presentations can be bounded
+by the maximum among those twenty
+actual finite cycles.
+
+However the natural group-AVERAGING projector
+over these native words is IDENTICALLY ZERO:
+\[
+\boxed{
+\frac1{20}\sum_{a=0}^4\sum_{b=0}^3 U^aJ^b
+=\frac1{20}\left(\sum_a U^a\right)
+ (I+J+J^2+J^3)=0,
+}
+\]
+because J squared is minus I.
+The original U/J native subgroup has
+NO nonzero invariant vectors at all.
+The existing SURVIVE M and curvature
+[J,M] break this periodic group structure
+and enable the original full 12-cell
+cyclic source, but they introduce the
+genuine spectral growth investigated above.
+Thus bounded native group orbit and
+full source cyclicity are competing
+features of this particular GST mechanism,
+not an automatic source-birth theorem.
+This is an exact ALL-word argument
+confirmed independently by the original
+Wolfram matrix reconstruction, not a
+finite sample pretending to prove infinity.
+
+\end{document}

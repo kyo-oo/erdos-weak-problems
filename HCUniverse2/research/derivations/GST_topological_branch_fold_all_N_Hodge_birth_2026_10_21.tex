@@ -1,0 +1,970 @@
+\documentclass[11pt]{article}
+\usepackage[margin=23mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\OO}{\mathcal O}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\Hdg}{\mathrm{Hdg}}
+\newcommand{\pr}{\operatorname{pr}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\title{GST topology-first branch folds: actual all-dimensional Hodge-cycle birth\\
+on arbitrary smooth projective spaces, exact middle self-intersection and causal source splitting}
+\date{21 October 2026}
+\begin{document}
+\maketitle
+
+\section{User's actual hypothesis: first CHANGE THE SHAPE OF THE SPACE}
+The research hypothesis is that GST General Space has NO intrinsic
+geometric dimension; an N-dimensional complex projective world is
+an emergent REALIZATION, not the ontology.
+The previous Chern--Segre projective-bundle calculation
+and nonholomorphic torus recoordination are NOT the
+topological-change construction requested: they respectively
+leave the old defect as a split summand or violate complex
+Hodge compatibility on the fixed real manifold.
+
+Instead begin with an ACTUAL arbitrary smooth projective X,
+change the topology of its underlying space by an algebraic
+BRANCH fold, and directly construct the Hodge structures
+that are BORN on the new shape.
+Both sides stay genuine smooth projective complex varieties.
+We may temporarily assume the rational Hodge conjecture is
+true for ALL smooth projective varieties, as the user requests,
+but the constructions below do NOT use that assumption.
+They produce actual Chow cycles independently and certify
+their canonical Betti classes.
+
+\section{Genuine arbitrary-X even-dimensional branch world}
+Let X be ANY smooth projective complex variety of dimension
+\(2p\), with \(p\ge1\), and choose a very ample
+actual rational Chow divisor \(H\), \(h=\cl_X^{can}(H)\).
+Let \(m\ge1\) be an integer large enough that a generic
+tuple of p sections of \(\OO_X(mH)\) cuts a smooth,
+nonempty complete intersection
+\[
+ W=V(s_1,\dots,s_p)\subset X,\qquad
+ \dim W=p,\qquad
+ [W]=m^pH^p,\quad
+ N_{W/X}\simeq\OO_W(mH)^{\oplus p}.
+                                                               \tag{1}
+\]
+Take \(k\gg m\) so that \(L=\OO_X(kH)\) and
+\(\OO_X((2k-m)H)\) have the needed global sections,
+restrictions and Bertini freedom.
+Choose \(A\in H^0(X,L)\) generally.
+Choose \(G_j\in H^0(X,\OO_X((2k-m)H))\) generally,
+and form the ACTUAL algebraic section
+\[
+ \boxed{
+ F=A^2+\sum_{j=1}^p s_jG_j
+            \in H^0(X,L^{\otimes2}).
+ }                                                        \tag{2}
+\]
+The zero divisor \(B=(F=0)\in|2kH|\)
+is GENERICALLY smooth even with the imposed square
+restriction along W: away from W the varying summands
+have no common base point; along W, B meets W in
+\(A|_W=0\), a divisor of dimension p-1.
+At those points the p normal derivatives \(G_j|_W\)
+may be chosen never to vanish simultaneously, because
+p generic basepoint-free sections on a
+(p-1)-dimensional variety have empty common zero locus.
+The normal gradient of F is therefore nonzero on
+the entire B∩W, and ordinary Bertini works off W.
+This proves the existence of an ACTUAL smooth B.
+
+Define the smooth projective double-cover world
+\[
+ \boxed{
+ \pi:Y=\underline{\operatorname{Spec}}_X
+       (\OO_X\oplus L^{-1})\longrightarrow X,\qquad
+                  w^2=F,
+ }                                                        \tag{3}
+\]
+with deck involution \(\tau(w)=-w\).
+Since B is smooth, so is Y. The algebraic cover is
+finite flat of degree 2 and projective.
+This is an ACTUAL new geometry, not a coordinate
+re-labeling on the old cohomology group.
+
+\section{Two source sheets and a genuinely new rational Hodge class}
+On the true inverse image of W, (2) reduces to
+\(w^2=A^2\). Thus the algebraic scheme \(\pi^{-1}(W)\)
+has TWO codimension-p irreducible components,
+each ISOMORPHIC to W:
+\[
+ Z_+=\{s_1=\dots=s_p=0,\ w=A\},\qquad
+ Z_-=\{s_1=\dots=s_p=0,\ w=-A\}.
+\]
+They meet over the divisor \(A|_W=0\), but their
+fundamental cycles are distinct.
+The ACTUAL Chow equality and deck symmetry are
+\[
+ \boxed{
+ \pi^*[W]=[Z_+]+[Z_-],\quad
+ \tau_*[Z_+]=[Z_-],\quad
+ \Delta=[Z_+]-[Z_-]\in CH^p(Y)_{\Q},
+ \quad\tau_*\Delta=-\Delta.
+ }                                                        \tag{4}
+\]
+Every object is constructed from actual sections
+on the ORIGINAL X. No Hodge-to-Chow selector or
+unknown Hodge-class representative is a field
+in the construction.
+
+\section{The all-p middle intersection birth LAW}
+Write \(t=h|_W\) and view \(Z_+\) as the graph
+of the actual section \(A|_W\) inside the
+total space of \(L\).
+This total space has normal bundle of the graph
+over W equal (noncanonically but exactly in K-theory)
+to
+\(N_{W/X}\oplus L|_W
+ =\OO_W(mH)^{\oplus p}\oplus\OO_W(kH)\).
+The cover Y is the smooth hypersurface
+\(w^2-F=0\) in that line-bundle total space.
+Differentiating its equation gives a globally
+surjective morphism
+\[
+ \bigl(\OO_W(mH)^{\oplus p}\oplus\OO_W(kH)\bigr)
+       \xrightarrow{(-G_1,\dots,-G_p,\,2A)}
+     \OO_W(2kH)
+\]
+because at A=0 not all G_j vanish.
+Therefore the ACTUAL normal-bundle sequence is
+\[
+ 0\to N_{Z_+/Y}\to
+      \OO_W(mH)^{\oplus p}\oplus\OO_W(kH)
+     \to\OO_W(2kH)\to0.
+                                                               \tag{5}
+\]
+It has rank p and true rational Chern polynomial
+\[
+ \boxed{
+ c_t(N_{Z_+/Y})=
+             \frac{(1+mt)^p(1+kt)}{1+2kt}.
+ }                                                        \tag{6}
+\]
+The use of the symbol t here is formal
+and may be read as \(h|_W\);
+the formula truncates automatically in dimension p.
+
+\begin{theorem}[EVERY smooth projective even-dimensional X admits an actual topology-folded NEW algebraic middle Hodge direction]
+With X of complex dimension \(2p\), any p>=1,
+and the bona fide smooth branch world Y above,
+the actual anti-deck Chow class
+\(\Delta=Z_+-Z_-\) has nonzero middle Betti class
+\(\delta=\cl_Y^{can}(\Delta)\in
+ H^{2p}(Y,\Q)\cap H^{p,p}(Y)\).
+Its ACTUAL signed intersection is the
+closed-form all-dimensional identity
+\[
+ \boxed{
+ \int_Y\delta\smile\delta
+   =2\,m^p(m-2k)^p\,\int_Xh^{2p}.
+ }                                                        \tag{7}
+\]
+In particular, if \(2k>m\),
+\[
+ \boxed{
+ (-1)^p\int_Y\delta^2
+   =2[m(2k-m)]^p\,\deg_H(X)>0.
+ }                                                        \tag{8}
+\]
+The new rational algebraic Hodge class is
+ANTI-invariant under the deck involution,
+whereas EVERY pullback from X is invariant.
+Thus \(\delta\) is NOT in \(\pi^*H^{2p}(X,\Q)\).
+Since finite degree-2 \(\pi_*\pi^*=2\mathrm{id}\)
+makes pullback injective,
+\[
+ \boxed{b_{2p}(Y)\ge b_{2p}(X)+1.}              \tag{9}
+\]
+Consequently Y does NOT have the same rational
+cohomology, nor the same homeomorphism type, as X.
+This is a topological shape fold producing a
+genuinely new rational algebraic \((p,p)\) direction,
+for EVERY original smooth projective complex
+even-dimensional X, not merely a chosen quadric or K3.
+\end{theorem}
+\begin{proof}
+The actual top Chern class of the normal bundle is
+the scheme-theoretic self-intersection of
+\(Z_+\subset Y\):
+\[
+ \begin{split}
+  \int_Y[Z_+]^2
+    &=\int_W c_p(N_{Z_+/Y})\\
+    &=\deg_H(W)
+       [t^p]\frac{(1+mt)^p(1+kt)}{1+2kt}.
+ \end{split}
+\]
+The elementary EXACT identity
+\[
+ \frac{1+kt}{1+2kt}
+   =\frac12\left(1+\frac1{1+2kt}\right)
+\]
+and binomial expansion give
+\[
+ \boxed{
+ [t^p]\frac{(1+mt)^p(1+kt)}{1+2kt}
+        =\frac{m^p+(m-2k)^p}{2}.
+ }                                                        \tag{10}
+\]
+Since \([W]=m^pH^p\), one has
+\(\int_W h^p=m^p\int_Xh^{2p}\).
+Write \(P=\pi^*[W]=Z_++Z_-\), so that
+\(\Delta=2Z_+-P\). Using the ACTUAL Chow
+pullback/pushforward formulas:
+\[
+ \int_Y Z_+P=\int_X[W]^2,\qquad
+ \int_Y P^2=2\int_X[W]^2.
+\]
+Therefore
+\[
+ \begin{split}
+  \int_Y\Delta^2
+    &=4\int_YZ_+^2
+       -4\int_XW^2+2\int_XW^2\\
+    &=4\int_YZ_+^2
+       -2m^{2p}\int_Xh^{2p}\\
+    &=2m^p(m-2k)^p\int_Xh^{2p}.
+ \end{split}
+\]
+This is an ACTUAL intersection calculation of
+genuine algebraic cycles, not a formal
+abstract Hodge cohomology model.
+The signed norm is nonzero as soon as \(2k\ne m\)
+(and positive for \(2k>m\)).
+Thus the canonical Betti class \(\delta\ne0\).
+The deck involution exchanges the genuine
+sheets, so \(\delta\) is anti-invariant, while
+\(\pi^*\beta\) is invariant for all \(\beta\).
+Over \(\Q\), a nonzero anti-invariant vector
+cannot belong to the invariant image.
+Injection of \(\pi^*\) follows from
+\(\pi_*\pi^*=2\,\mathrm{id}\).
+This yields (9), proving actual topology change.
+\end{proof}
+
+\section{True GST causal born-sector equations: the deck parity splits Hodge and Chow}
+A GENUINE
+branched double
+cover is not
+a reversible
+coordinate change
+of X.
+Nevertheless
+its deck
+involution
+provides an
+ACTUAL
+involution of
+the new
+smooth
+projective
+world Y.
+Thus it
+splits the
+actual
+rational
+Chow and
+Hodge spaces
+into parity
+sectors.
+Define
+\[
+ P_\pm^{CH}
+  =\frac12(1\pm\tau_*)
+ \quad\hbox{on }CH^p(Y)_\Q,
+ \qquad
+ P_\pm^{H}
+  =\frac12(1\pm\tau^*)
+ \quad\hbox{on }H^{2p}(Y,\Q).
+\]
+The canonical
+Betti map is
+ACTUALLY
+equivariant.
+
+\begin{theorem}[New original-X topology creates a new anti-invariant Hodge/Chow sector]
+For every
+smooth
+projective
+double-cover
+branch world
+\(\pi:Y\to X\)
+of the above
+type,
+the ACTUAL
+finite quotient
+push-pull
+identities are
+\[
+ \boxed{
+ \pi_*\pi^*=2\,\mathrm{id},
+ \qquad
+ \pi^*\pi_*=
+       \mathrm{id}+\tau_*
+       \quad\text{on rational Chow.}
+ }                                                        \tag{9a}
+\]
+The same
+identities
+hold on
+rational Betti
+cohomology.
+Therefore
+the plus
+sectors are
+exactly
+old-X
+geometry:
+\[
+ \boxed{
+  CH^p(Y)_\Q^+
+       =\pi^*CH^p(X)_\Q,\quad
+  H^{2p}(Y,\Q)^+
+       =\pi^*H^{2p}(X,\Q).
+ }                                                        \tag{9b}
+\]
+Let
+\(
+ A^p(T)
+  =\operatorname{im}(
+   \cl_T^{can}:CH^p(T)_\Q
+       \to\Hdg^p(T)_\Q)
+\)
+and
+\(
+ D^p(T)=\Hdg^p(T)_\Q/A^p(T)
+\).
+Then the
+ACTUAL
+born-sector
+Hodge defect
+splits as
+\[
+ \boxed{
+ D^p(Y)\cong
+   D^p(X)\oplus
+   \frac{\Hdg^p(Y)_\Q^-}
+        {A^p(Y)^-}.
+ }                                                        \tag{9c}
+\]
+The new
+\(\delta=\cl_Y^{can}(\Delta)\)
+is an
+EXPLICIT
+nonzero member
+of
+\(A^p(Y)^-\):
+the novel
+algebraic
+middle-Hodge
+sector born
+from changed
+topology.
+\end{theorem}
+\begin{proof}
+The deck
+group has
+order two,
+and the
+cycle-theoretic
+fiber product
+\(Y\times_XY\)
+has
+fundamental
+correspondence
+\(\Delta_Y+\Gamma_\tau\).
+The true
+finite-flat
+intersection,
+proper
+pushforward
+and
+projection
+formula
+give (9a).
+At
+ramification
+points,
+cycle
+multiplicities
+automatically
+count the
+two sheets;
+the identities
+are rational
+Chow statements,
+not assertions
+that the
+cover is
+topologically
+unramified.
+The identical
+cohomological
+correspondence
+identities
+follow through
+the canonical
+cycle-class
+realization.
+Since two
+is invertible
+in \(\Q\),
+the invariant
+space of the
+involution is
+exactly the
+image of
+\(\pi^*\),
+and pullback
+is injective.
+All these
+maps preserve
+genuine Hodge
+type because
+they are
+algebraic
+Gysin/correspondence
+maps.
+Taking the
+even/odd
+decompositions
+of the
+Hodge and
+canonical
+algebraic
+images and
+quotienting
+proves (9c).
+The cycle
+\(\Delta\)
+from (4)
+is anti-invariant
+and has
+nonzero
+Betti norm
+(7), so its
+class is
+an
+independently
+constructed
+member of
+the new
+anti-invariant
+algebraic
+sector.
+\end{proof}
+
+\noindent\textbf{Consequences for the user's assumed universal Hodge truth.}
+If the rational
+Hodge conjecture
+holds on every
+smooth
+projective
+space,
+then the
+old defect
+and
+the born
+anti-defect
+in (9c)
+must both
+vanish.
+The branch
+fold itself
+still gives
+a new
+anti-Hodge
+direction,
+but one
+with an
+EXPLICIT
+algebraic
+cycle witness.
+Thus actual
+new topology
+and complete
+algebraicity
+can coexist
+for every
+emergent
+dimension;
+there is no
+need to
+invalidate
+the user's
+initial
+assumption
+to test the
+spatial
+mechanism.
+
+\section{The SAME topology fold creates both NEW diagonal and NEW holomorphic off-diagonal Hodge shapes}
+The user-requested
+question is
+about the
+WHOLE Hodge
+structure
+emerging from
+altered
+space topology,
+not only
+one rational
+diagonal
+cycle.
+Our actual
+smooth
+double cover
+also gives
+an exact
+universal
+formula for
+holomorphic
+top forms.
+
+For any
+smooth
+projective
+even-dimensional
+original X
+as in
+the preceding
+theorem,
+the actual
+double-cover
+algebra structure
+and ramification
+canonical bundle
+are
+\[
+ \pi_*\OO_Y
+      =\OO_X\oplus L^{-1},
+ \qquad
+ K_Y=\pi^*(K_X\otimes L),
+ \qquad
+ L=\OO_X(kH).
+                                                               \tag{9d}
+\]
+The first
+summand of
+\(\pi_*\OO_Y\)
+is deck
+invariant,
+and the
+second
+is
+deck
+anti-invariant.
+
+\begin{theorem}[For EVERY original smooth projective even-dimensional X, the fold births new holomorphic top forms alongside its algebraic middle Hodge cycle]
+For EVERY
+original
+smooth
+projective
+complex
+\(2p\)-fold X
+and all
+sufficiently
+large k
+in the
+square-restricted
+smooth
+branched-fold
+construction,
+the new
+smooth
+projective
+Y has
+\[
+ \boxed{
+ h^{2p,0}(Y)
+   =h^0(X,K_X)
+      +h^0(X,K_X\otimes L).
+ }                                                        \tag{9e}
+\]
+The second
+term is
+strictly
+positive
+for
+\(k\gg0\),
+so
+\[
+ \boxed{
+    h^{2p,0}(Y)>h^{2p,0}(X).
+ }                                                        \tag{9f}
+\]
+At the
+SAME TIME
+the
+ACTUAL
+new
+middle
+rational
+algebraic
+\((p,p)\)
+class
+\(\delta\)
+from (7)
+has
+nonzero
+signed
+intersection
+(8).
+
+Therefore,
+for EVERY
+smooth
+projective
+even-dimensional
+original X,
+an explicit
+topology-changing
+smooth-projective
+branch fold
+can simultaneously
+CREATE
+a new
+HOLomorphic
+off-diagonal
+Hodge
+sector
+and
+an
+independent
+rational
+ALGEBRAIC
+diagonal
+middle
+Hodge
+class.
+This is
+a change
+in the
+emergent
+Hodge
+SHAPE of
+the
+new
+space,
+without
+transforming
+a preexisting
+rational
+Hodge
+class into
+a non-Hodge
+class
+by a
+nonholomorphic
+recoordination.
+\end{theorem}
+\begin{proof}
+The
+actual
+degree-two
+cover
+\(\pi\)
+is finite,
+with
+\(\pi_*\OO_Y
+=\OO_X\oplus L^{-1}\).
+The true
+double-cover
+ramification
+formula
+is
+\(K_Y=\pi^*(K_X\otimes L)\).
+Apply
+the
+finite
+projection
+formula:
+\[
+ \pi_*K_Y
+  =(K_X\otimes L)\otimes
+           (\OO_X\oplus L^{-1})
+  =(K_X\otimes L)\oplus K_X.
+\]
+Taking
+global
+sections
+gives (9e)
+exactly.
+Since
+H is
+ample,
+asymptotic
+Riemann--Roch
+and
+Serre
+vanishing
+give
+\(h^0(X,K_X+kH)
+\sim\frac{k^{2p}}{(2p)!}\int_Xh^{2p}>0\)
+for all
+sufficiently
+large k.
+This
+establishes
+strict
+growth
+in
+holomorphic
+top
+forms.
+The
+independent
+middle
+rational
+algebraic
+class
+is
+already
+constructed
+by
+(4)--(8)
+for this
+same
+smooth
+branched
+cover.
+\end{proof}
+
+\section{All original dimensions n and ARBITRARILY large emergent N}
+The theorem above works on an original even
+dimensional variety, without any stabilization.
+For EVERY initial original smooth projective
+X of dimension n (odd OR even), choose any
+integer \(q\ge1\) such that \(2q\ge n\).
+Make the ACTUAL algebraic dimensional elevation
+\[
+ T=X\times\mathbf P^{2q-n},\qquad
+ \dim_\C T=2q.
+\]
+Choose an actual very ample \(H_X\) on X and
+put \(H_T=\pr_X^*H_X+
+          \pr_{\mathbf P}^*h\).
+Its top self-intersection is
+\[
+ \boxed{
+ \int_T H_T^{2q}
+   =\binom{2q}{n}\deg_{H_X}(X).
+ }                                                        \tag{11}
+\]
+Apply the SAME genuine branch-fold construction
+to this actual even-dimensional T, with p=q,
+generic q smooth divisor cuts and any sufficiently
+large k relative to m.
+Write \(\Delta_{X,q}\) for the actual two-sheet
+anti-invariant middle Chow class on its smooth
+projective double-cover world
+\(\pi:Y_{X,q}\to T\).
+
+\begin{corollary}[EVERY n and EVERY attainable emergent fold index q has an explicit newly born Hodge cycle]
+For every nonempty smooth projective original X
+of arbitrary dimension n, every q>=1 with 2q>=n,
+and sufficiently large integers m,k with 2k>m,
+the actual smooth projective folded world
+\(Y_{X,q}\) of complex dimension 2q has an
+ACTUAL rational middle \((q,q)\) algebraic
+cycle \(\Delta_{X,q}\) whose
+all-dimensional exact intersection is
+\[
+ \boxed{
+ (-1)^q\int_{Y_{X,q}}\Delta_{X,q}^2
+  =2[m(2k-m)]^q
+       \binom{2q}{n}\deg_{H_X}(X)
+  >0.
+ }                                                        \tag{12}
+\]
+It is NEW relative to the elevated base T:
+\(\tau_*\Delta=-\Delta\), and
+\(b_{2q}(Y_{X,q})>b_{2q}(T)\).
+This constructs an actual algebraic Hodge
+direction BORN from a topology/branch fold for
+ARBITRARILY LARGE q and EVERY initial X.
+It does not assert a rational Chow representative
+for a prescribed primitive Hodge class on the
+UNFOLDED original X.
+\end{corollary}
+\begin{proof}
+Kunneth and the binomial theorem give (11).
+Every hypothesis of the even-dimensional
+branch-fold theorem applies to T,
+including smoothness of a general complete
+intersection and the existence of a smooth
+square-restricted branch divisor after
+taking k sufficiently large.
+Substitute (11) into (8) with p=q to obtain
+the exact coefficient (12).
+The anti-invariant Betti class remains nonzero
+and independent from the pulled-back middle
+cohomology; hence the topological jump.
+\end{proof}
+
+\section{A concrete Calabi--Yau shape-birth family for EVERY even n}
+On \(X=\mathbf P^{2p}\) choose \(H=\OO(1)\),
+m=1 and k=2p+1, so the smooth branch divisor
+B has degree \(2k=4p+2\). The genuine double
+cover has canonical class
+\[
+ K_Y=\pi^*(K_{\mathbf P^{2p}}\otimes\OO(k))
+     =\OO_Y,
+\]
+so \(H^{2p,0}(Y)\ne0\).
+The construction also produces the explicit
+ANTI-invariant rational ALGEBRAIC \((p,p)\)
+middle class \(\Delta\), with
+\[
+ \boxed{
+ \Delta^2=2(-4p-1)^p,\quad
+ (-1)^p\Delta^2=2(4p+1)^p.
+ }                                                        \tag{13}
+\]
+Both off-diagonal holomorphic top forms
+AND an explicit diagonal algebraic
+middle sector are born from the altered
+smooth projective geometry.
+The first instances are
+\[
+\begin{array}{c|r|r}
+p & \dim_\C Y=2p & \Delta^2\\\hline
+1&2&-10\\
+2&4&162\\
+3&6&-4394\\
+4&8&167042\\
+5&10&-8168202
+\end{array}
+\]
+and follow from one closed formula, not
+from independent guesses for each dimension.
+
+For a true general smooth double cover
+branched along \(B\subset X\) the
+topological Euler characteristic has the
+genuine finite-cover/branch formula
+\[
+ \boxed{\chi_{\rm top}(Y)
+          =2\chi_{\rm top}(X)-\chi_{\rm top}(B).}
+                                                               \tag{14}
+\]
+For \(X=\mathbf P^n\) and branch degree
+\(d=2(n+1)\), the actual smooth hypersurface
+Euler characteristic is
+\[
+ \chi_{\rm top}(B)
+    =d\sum_{j=0}^{n-1}
+             \binom{n+1}{j}(-d)^{n-1-j}.
+                                                               \tag{15}
+\]
+Thus the topology has a second independent
+exact all-n diagnostic, alongside the
+new anti-invariant middle Hodge cycle.
+For n=1,2,3,4 this gives double-cover Euler
+numbers \(0,24,-296,5910\), respectively.
+The middle anti-cycle construction (13)
+uses even n, while the Euler formula works
+for all positive n.
+
+\section{Exact causal GST law: an irreversible branch birth with a certified nonambient source}
+The abstract higher-causal GST identity towers
+are NOT algebraic topological transformations.
+This construction supplies a fully typed
+REALIZATION event:
+\[
+ \boxed{
+ (X,H,W,L,A,G_1,\dots,G_p)
+ \xrightarrow{\rm smooth\ algebraic\ branched\ birth}
+ (Y,\tau,Z_+,Z_-,\Delta).
+ }                                                        \tag{16}
+\]
+This event changes the WHOLE algebraic topology,
+rather than preserving the old cohomology via
+a split projective bundle.
+The newly born deck anti-invariant sector is
+\[
+ H^{2p}(Y,\Q)^{-}
+   =\ker(1+\tau^*).
+\]
+The ACTUAL anti-invariant Chow source \(\Delta\)
+satisfies
+\[
+ \boxed{
+ \frac{1-\tau_*}{2}(\Delta)=\Delta,\quad
+ \pi_*\Delta=0,\quad
+ \cl_Y^{can}(\Delta)\in
+       H^{2p}(Y,\Q)^-\cap H^{p,p}(Y),
+ \quad\Delta^2\ne0.
+ }                                                        \tag{17}
+\]
+In contrast with ordinary projective elevation,
+a smooth branched birth need NOT split all its
+cohomology into old cohomology and already
+identified complete lower-dimensional centers;
+the branch geometry supplies independent
+anti-invariant classes.
+The newly born algebraic direction is
+constructed by source sheet DIFFERENCE, and
+the intersection law (7) detects its nonzero
+Betti realization without an invented
+source-to-Hodge surjectivity axiom.
+
+To use the GST Graph V2 higher-causality layer
+honestly, record this event as a new-world
+birth with the CERTIFIED data (3)--(5),
+true Chow cycle transport and canonical
+Betti comparison. The ordinary
+\texttt{GSTGradedWorldAlgebra}
+Tate shift and the causal charge constraints
+hold for algebraic maps, but the branch
+world gains MORE Hodge directions with
+the SAME charge zero, which cannot be
+detected by charge conservation alone.
+The topological Euler difference and the
+anti-invariant intersection form are the
+additional invariants.
+
+\section{Precisely what the Hodge-conjecture assumption tells us}
+Now make the user's explicit hypothesis:
+assume the rational Hodge conjecture is
+TRUE on EVERY smooth projective complex world.
+Then both X and Y are covered by it, and
+every rational diagonal Hodge class born
+in the deck anti-invariant sector must have
+an actual algebraic Chow representative.
+This is logically CONSISTENT with the
+new formula (7), which gives such a
+representative \(\Delta\) independently.
+The hypothesis does not force a
+contradictory intersection equation:
+the sign in (8) matches the positivity
+expected for primitive middle Hodge geometry.
+The existence of a new algebraic Hodge
+direction on Y also does not imply that
+a previously inaccessible rational Hodge
+class on the ORIGINAL X becomes algebraic.
+The pushforward of our new anti-source
+is identically ZERO, \(\pi_*\Delta=0\).
+A possible universal Hodge proof by these
+folds would require a separate
+*target-sensitive* new-world algebraic source
+whose Chow pushforward to X has canonical
+Betti class equal to the prescribed alpha.
+The present construction proves actual
+new Hodge shapes on ALL dimensions, rather
+than wrongly asserting this additional step.
+
+This is an actual all-N, all-original-X
+GEOMETRIC HODGE BIRTH result, not a
+fixed-complex-structure non-holomorphic
+recoordination and not a speculative
+contradiction.
+\end{document}

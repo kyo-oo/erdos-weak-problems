@@ -1,0 +1,2167 @@
+[
+  {
+    "file": "CardinalWorlds.lean",
+    "classification": "Foundation",
+    "lines": 1251,
+    "declarations": 112,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "CardinalWorldsPrefixClassifier.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 154,
+    "declarations": 8,
+    "imports": [
+      "Mathlib",
+      "CardinalWorldsV2",
+      "GSTFourPowerExponentTritObstruction"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "CardinalWorldsV2.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 158,
+    "declarations": 13,
+    "imports": [
+      "Mathlib",
+      "CardinalWorlds"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "ComparatorSmokeChallenge.lean",
+    "classification": "Verification fixture",
+    "lines": 19,
+    "declarations": 1,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "ComparatorSmokeSolution.lean",
+    "classification": "Verification fixture",
+    "lines": 19,
+    "declarations": 1,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GST2DMixedEmergence.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 243,
+    "declarations": 25,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GST2DMixedEmergenceUpgrade.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 91,
+    "declarations": 6,
+    "imports": [
+      "Mathlib",
+      "GST2DMixedEmergence"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTAnalyticAbsorption.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 412,
+    "declarations": 31,
+    "imports": [
+      "Mathlib",
+      "HodgeDeRhamBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTAnalyticAbsorptionV2.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 125,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "GSTAnalyticAbsorption",
+      "HodgeDeRhamBridgeV2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTBladeWave.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 322,
+    "declarations": 16,
+    "imports": [
+      "Mathlib",
+      "GSTTheActConstruction"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTCanonicalCarryDynamics.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 71,
+    "declarations": 6,
+    "imports": [
+      "GSTCanonicalTailStateIso"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTCanonicalSevenAxisBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 185,
+    "declarations": 17,
+    "imports": [
+      "GSTU2DExactCrossingCharge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTCanonicalTailLTE.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 91,
+    "declarations": 6,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTCanonicalTailStateIso.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 138,
+    "declarations": 13,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTClayOfficial.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 287,
+    "declarations": 12,
+    "imports": [
+      "Mathlib",
+      "GSTCanonicalSevenAxisBridge",
+      "waves.GSTWaveCohomology",
+      "GSTLefschetzCrown",
+      "GSTHodgeAssault"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTClayOfficialV2.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 115,
+    "declarations": 6,
+    "imports": [
+      "Mathlib",
+      "GSTClayOfficial",
+      "GSTHodgeAssaultV2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTClimbInfiniteFamily.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 1223,
+    "declarations": 67,
+    "imports": [
+      "Mathlib",
+      "GSTTheAct",
+      "GSTDiagonalRead",
+      "GSTFourPowerHappyProvider",
+      "GSTCanonicalTailLTE",
+      "GSTCanonicalTailStateIso",
+      "GSTFourPowerDirectAdditionCarry"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTClimbTruthValue.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 218,
+    "declarations": 14,
+    "imports": [
+      "Mathlib",
+      "GSTInfiniteFourPowerNavigation",
+      "GSTTailFProof"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTCoherentCosmology.lean",
+    "classification": "Cohomology/observation",
+    "lines": 407,
+    "declarations": 41,
+    "imports": [
+      "waves.GSTWaveCohomology",
+      "waves.CardinalWorldsPostulateLaw",
+      "GSTGraphV2Ontological",
+      "GSTTailFFourthDimension",
+      "GSTClimbInfiniteFamily"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTDiagonalRead.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 501,
+    "declarations": 30,
+    "imports": [
+      "Mathlib",
+      "GSTCanonicalTailLTE",
+      "GSTCanonicalTailStateIso",
+      "GSTTheAct"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTDimensionFreeHodgeDiagonal.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 248,
+    "declarations": 15,
+    "imports": [
+      "Mathlib",
+      "GSTUniversalAddressBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFinalPrefixOneStep6Infinite.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 315,
+    "declarations": 17,
+    "imports": [
+      "GSTGraphV2InfiniteControllerBridge",
+      "GSTPerfectPowerTailNavigation",
+      "GSTGraphV2HandwrittenOmegaUBlock",
+      "GSTU2DSharpCrossingBlock"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFinalPurePowerResidueTransplant.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 418,
+    "declarations": 30,
+    "imports": [
+      "GSTGraphV2InfiniteControl",
+      "GSTGraphV2HandwrittenExponentialLTE"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffineBadState.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 160,
+    "declarations": 10,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerAffineExponentPeel"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffineChannelAutomaton.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 261,
+    "declarations": 20,
+    "imports": [
+      "GSTFourPowerAffineBadState"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffineClassifierBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 140,
+    "declarations": 12,
+    "imports": [
+      "GSTFourPowerAffineChannelAutomaton"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffineExponentPeel.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 180,
+    "declarations": 18,
+    "imports": [
+      "GSTFourPowerAffineOrbit"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffineOrbit.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 118,
+    "declarations": 10,
+    "imports": [
+      "GSTFourPowerDirectResidue",
+      "GSTCanonicalTailStateIso"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffinePeelClassifier.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 178,
+    "declarations": 15,
+    "imports": [
+      "GSTFourPowerAffineClassifierBridge",
+      "GSTFourPowerAffineExponentPeel"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerAffineTwoTritClassifier.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 149,
+    "declarations": 9,
+    "imports": [
+      "GSTFourPowerAffinePeelClassifier"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectAdditionCarry.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 235,
+    "declarations": 20,
+    "imports": [
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectChat2Application.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 224,
+    "declarations": 14,
+    "imports": [
+      "GSTFourPowerAffineTwoTritClassifier",
+      "GSTFourPowerDirectFailedRelocationState",
+      "GSTFourPowerDirectCreationMaster"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectCreationMaster.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 130,
+    "declarations": 5,
+    "imports": [
+      "GSTFourPowerOntologicalAdapter",
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectAdditionCarry"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectExistence.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 202,
+    "declarations": 15,
+    "imports": [
+      "GSTFourPowerDirectResidue",
+      "GSTFourPowerDirectResidue27",
+      "GSTFourPowerDirectResidue81",
+      "GSTFourPowerExponentTritObstruction"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectExistenceFromHappy.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 193,
+    "declarations": 7,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerExactExponentPeriod",
+      "GSTFourPowerDirectAdditionCarry",
+      "GSTFourPowerDirectNo22",
+      "GSTFourPowerNo22Magnitude",
+      "GSTFourPowerAffinePeelClassifier",
+      "GSTFourPowerDirectFailedRelocationState",
+      "GSTFourPowerDirectHappyBridge",
+      "GSTFourPowerDirectCreationMaster",
+      "GSTInfiniteFourPowerNavigation"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectExistenceNoAxiom.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 110,
+    "declarations": 5,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectAdditionCarry",
+      "GSTCanonicalTailStateIso",
+      "GSTFourPowerDirectHappyBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectExistenceProviderPipeline.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 293,
+    "declarations": 24,
+    "imports": [
+      "GSTFourPowerDirectExistenceNoAxiom",
+      "GSTFourPowerDirectCreationMaster",
+      "GSTFourPowerOntologicalAdapter",
+      "GSTFourPowerDirectChat2Application",
+      "GSTFourPowerHappyProvider"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectFailedRelocationState.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 214,
+    "declarations": 7,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectNo22"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectHappyBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 200,
+    "declarations": 10,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectAdditionCarry",
+      "GSTCanonicalTailStateIso",
+      "GSTFourPowerAffineTwoTritClassifier",
+      "GSTFourPowerDirectCreationMaster"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectNo22.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 143,
+    "declarations": 6,
+    "imports": [
+      "GSTFourPowerDirectAdditionCarry"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectResidue.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 333,
+    "declarations": 17,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectResidue27.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 165,
+    "declarations": 3,
+    "imports": [
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerDirectResidue81.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 127,
+    "declarations": 5,
+    "imports": [
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerExactExponentPeriod.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 126,
+    "declarations": 3,
+    "imports": [
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerExponentTritObstruction.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 270,
+    "declarations": 14,
+    "imports": [
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerHappyProvider.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 277,
+    "declarations": 17,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectHappyBridge",
+      "GSTFourPowerDirectResidue",
+      "GSTFourPowerDirectResidue27",
+      "GSTFourPowerDirectResidue81",
+      "GSTFourPowerExponentTritObstruction",
+      "GSTFourPowerAffineTwoTritClassifier",
+      "GSTFourPowerAffinePeelClassifier",
+      "GSTFourPowerDirectFailedRelocationState",
+      "GSTFourPowerDirectChat2Application"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerNo22Magnitude.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 135,
+    "declarations": 7,
+    "imports": [
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerOntologicalAdapter.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 97,
+    "declarations": 6,
+    "imports": [
+      "GSTCanonicalCarryDynamics"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTFourPowerThirdWave.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 240,
+    "declarations": 13,
+    "imports": [
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerExponentTritObstruction"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 295,
+    "declarations": 19,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2B.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 227,
+    "declarations": 13,
+    "imports": [
+      "Mathlib",
+      "GSTGeometricRealizationStage2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2C.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 291,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic",
+      "GSTGeometricRealizationStage2B"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2D.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 250,
+    "declarations": 13,
+    "imports": [
+      "Mathlib",
+      "Mathlib.AlgebraicGeometry.AlgebraicCycle.Basic",
+      "GSTGeometricRealizationStage2C"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2E.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 240,
+    "declarations": 13,
+    "imports": [
+      "Mathlib",
+      "GSTProjectiveOverC",
+      "GSTGeometricRealizationStage2D"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2F.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 286,
+    "declarations": 20,
+    "imports": [
+      "Mathlib",
+      "Mathlib.AlgebraicTopology.SingularHomology.Basic",
+      "Mathlib.CategoryTheory.Abelian.Ext",
+      "GSTGeometricRealizationStage2E"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGeometricRealizationStage2G.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 361,
+    "declarations": 22,
+    "imports": [
+      "Mathlib",
+      "Mathlib.LinearAlgebra.TensorProduct.Basic",
+      "Mathlib.Algebra.Module.Submodule.RestrictScalars",
+      "Mathlib.Order.SupIndep",
+      "GSTGeometricRealizationStage2F"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGhostRayExclusion.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 309,
+    "declarations": 13,
+    "imports": [
+      "Mathlib",
+      "GSTTowerFire",
+      "GSTDiagonalRead",
+      "GSTTheAct",
+      "GSTClimbInfiniteFamily"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGlobalPureHodgeCosmology.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 280,
+    "declarations": 18,
+    "imports": [
+      "Mathlib",
+      "GSTDimensionFreeHodgeDiagonal"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGradedWorldAlgebra.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 255,
+    "declarations": 16,
+    "imports": [
+      "Mathlib",
+      "GSTWorldCosmology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2BlockScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 91,
+    "declarations": 2,
+    "imports": [
+      "GSTGraphV2FluxScratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalDescentOntology.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 276,
+    "declarations": 14,
+    "imports": [
+      "GSTGraphV2DescentOntology",
+      "GSTPrefixOneSeedCore",
+      "GSTGraphV2PerfectPowerBlockProbe"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalEscape.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 520,
+    "declarations": 24,
+    "imports": [
+      "GSTGraphV2CanonicalRenormalization",
+      "GSTGraphV2InfiniteControllerBridge",
+      "GSTFinalPrefixOneStep6Infinite",
+      "GSTGraphV2CanonicalDescentOntology",
+      "GSTGraphV2HandwrittenAnchoredCocycle"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalEscapeProbe.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 130,
+    "declarations": 1,
+    "imports": [
+      "GSTGraphV2CanonicalInfiniteCycle",
+      "GSTGraphV2CanonicalDescentOntology",
+      "GSTGraphV2CanonicalRenormalization",
+      "GSTGraphV2CanonicalPhaseSteering",
+      "GSTGraphV2CanonicalSheetTranslation"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalInfiniteCycle.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 343,
+    "declarations": 16,
+    "imports": [
+      "GSTGraphV2CanonicalSignedPrefixBridge",
+      "GSTInfiniteCoupledLedger"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalNWave.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 181,
+    "declarations": 11,
+    "imports": [
+      "GSTGraphV2CanonicalEscape",
+      "GSTGraphV2CanonicalSheetTranslation",
+      "GSTGraphV2CanonicalPhaseWaveProbe"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalPhaseSteering.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 215,
+    "declarations": 12,
+    "imports": [
+      "GSTGraphV2CanonicalRenormalization",
+      "GSTGraphV2CanonicalDescentOntology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalPhaseWaveProbe.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 190,
+    "declarations": 10,
+    "imports": [
+      "GSTGraphV2CanonicalPhaseSteering"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalRenormalization.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 309,
+    "declarations": 12,
+    "imports": [
+      "GSTGraphV2SeededPrefix",
+      "GSTPrefixOneSeedCore"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalSheetTranslation.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 161,
+    "declarations": 8,
+    "imports": [
+      "GSTGraphV2CanonicalPhaseSteering"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalSignedPrefixBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 112,
+    "declarations": 4,
+    "imports": [
+      "GSTGraphV2CanonicalEscape",
+      "GSTGraphV2CanonicalTerminalExtinctionProbe"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalTerminalExtinctionProbe.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 344,
+    "declarations": 11,
+    "imports": [
+      "GSTGraphV2HandwrittenAnchoredCocycle",
+      "GSTInfiniteBadTransport"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CanonicalTransparentBridgeProbe.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 25,
+    "declarations": 1,
+    "imports": [
+      "GSTGraphV2TransparentWidthThree"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CoupledUFlux.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 232,
+    "declarations": 20,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2CoupledUPhysicalBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 205,
+    "declarations": 13,
+    "imports": [
+      "GSTGraphV2CoupledUFlux"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2DescentOntology.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 261,
+    "declarations": 15,
+    "imports": [
+      "GSTGraphV2InfiniteControllerBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2FluxScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 176,
+    "declarations": 14,
+    "imports": [
+      "GSTGraphV2Scratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2FourPowerCanonicalParentObstruction.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 75,
+    "declarations": 3,
+    "imports": [
+      "GSTGraphV2FourPowerResidueObstruction",
+      "GSTGraphV2CanonicalEscape",
+      "GSTGraphV2CanonicalPhaseWaveProbe",
+      "GSTGraphV2PerfectPowerAncestry"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2FourPowerForcingBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 88,
+    "declarations": 6,
+    "imports": [
+      "GSTFourPowerOntologicalAdapter",
+      "GSTFourPowerDirectHappyBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2FourPowerRelocation.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 317,
+    "declarations": 18,
+    "imports": [
+      "GSTGraphV2NonlocalCascade",
+      "GSTGraphV2CanonicalEscape",
+      "GSTGraphV2CanonicalInfiniteCycle",
+      "GSTGraphV2CanonicalTerminalExtinctionProbe",
+      "GSTFinalPurePowerResidueTransplant"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2FourPowerRelocationClosure.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 137,
+    "declarations": 9,
+    "imports": [
+      "GSTGraphV2FourPowerRelocation",
+      "GSTInfiniteFourPowerNavigation",
+      "GSTGraphV2FourPowerForcingBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2FourPowerResidueObstruction.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 209,
+    "declarations": 7,
+    "imports": [
+      "GSTGraphV2FourPowerRelocation"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2HandwrittenAnchoredCocycle.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 329,
+    "declarations": 14,
+    "imports": [
+      "GSTGraphV2HandwrittenExponentialLTE",
+      "GSTGraphV2UnifiedVerticalTelescope"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2HandwrittenExponentialCascade.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 259,
+    "declarations": 24,
+    "imports": [
+      "GSTGraphV2HandwrittenOmegaUBlock"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2HandwrittenExponentialLTE.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 222,
+    "declarations": 11,
+    "imports": [
+      "GSTGraphV2HandwrittenExponentialCascade"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2HandwrittenOmegaUBlock.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 208,
+    "declarations": 16,
+    "imports": [
+      "GSTGraphV2PerfectPowerBlockProbe"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2InfiniteBigNDichotomyScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 211,
+    "declarations": 12,
+    "imports": [
+      "GSTGraphV2InfiniteControlScratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2InfiniteControl.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 310,
+    "declarations": 21,
+    "imports": [
+      "GSTCanonicalSevenAxisBridge",
+      "GSTU2DAtomicBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2InfiniteControlScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 574,
+    "declarations": 61,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2InfiniteControllerBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 249,
+    "declarations": 12,
+    "imports": [
+      "GSTInfiniteGateTransport",
+      "GSTInfiniteCoupledLedger",
+      "GSTGraphV2UnifiedVerticalTelescope",
+      "GSTU2DEventTransport"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2NonEuclidean.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 222,
+    "declarations": 20,
+    "imports": [
+      "GSTGraphV2InfiniteControl",
+      "GSTGraphV2HandwrittenExponentialCascade"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2NonEuclideanLaws.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 219,
+    "declarations": 15,
+    "imports": [
+      "GSTGraphV2NonEuclidean"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2NonlocalCascade.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 132,
+    "declarations": 4,
+    "imports": [
+      "GSTGraphV2InfiniteControl"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2OmegaWaveLaw.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 3155,
+    "declarations": 148,
+    "imports": [
+      "GSTInfiniteFourPowerNavigation",
+      "GSTFourPowerDirectResidue",
+      "GSTGraphV2HandwrittenOmegaUBlock",
+      "GSTGraphV2InfiniteControllerBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2Ontological.lean",
+    "classification": "Foundation",
+    "lines": 433,
+    "declarations": 24,
+    "imports": [
+      "GSTGraphV2InfiniteControl"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2PerfectPowerAncestry.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 112,
+    "declarations": 5,
+    "imports": [
+      "GSTGraphV2InfiniteControl"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2PerfectPowerBlockCollision.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 214,
+    "declarations": 10,
+    "imports": [
+      "GSTGraphV2PerfectPowerBlockProbe",
+      "GSTU2DPureDivergence83",
+      "GSTGraphV2CanonicalDescentOntology",
+      "GSTGraphV2CanonicalSignedPrefixBridge",
+      "GSTGraphV2CanonicalInfiniteCycle",
+      "GSTGraphV2CanonicalNWave"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2PerfectPowerBlockProbe.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 302,
+    "declarations": 17,
+    "imports": [
+      "GSTGraphV2PerfectPowerAncestry",
+      "GSTU2DCanonicalPhaseDensity",
+      "GSTGraphV2UnifiedPowerRectangle",
+      "GSTGraphV2UnifiedVerticalTelescope"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2PhysicalSignedKernelTelescopeScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 146,
+    "declarations": 12,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2PowerThreeWaveObservation.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 174,
+    "declarations": 3,
+    "imports": [
+      "GSTGraphV2PerfectPowerBlockProbe",
+      "GSTGraphV2UnifiedVerticalTelescope",
+      "GSTFinalPurePowerResidueTransplant"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2Production.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 399,
+    "declarations": 38,
+    "imports": [
+      "GSTGraphV2HandwrittenAnchoredCocycle",
+      "GSTU2DCanonicalPhaseDensity",
+      "GSTU2DPureDivergence83"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2ProductionLaws.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 370,
+    "declarations": 19,
+    "imports": [
+      "GSTGraphV2Production",
+      "GSTGraphV2HandwrittenExponentialLTE"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2ScaleEquivariance.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 609,
+    "declarations": 34,
+    "imports": [
+      "Mathlib",
+      "GSTGraphV2CanonicalNWave",
+      "GSTGraphV2Ontological"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2Scratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 254,
+    "declarations": 17,
+    "imports": [
+      "InformationRegenerationScratch",
+      "InformationBadTraceScratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2SeededPrefix.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 181,
+    "declarations": 14,
+    "imports": [
+      "GSTGraphV2InfiniteControl"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2SixAdicOntologicalGeometry.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 127,
+    "declarations": 14,
+    "imports": [
+      "GSTGraphV2NonEuclidean"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2SixAdicOntologicalGeometryLaws.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 344,
+    "declarations": 31,
+    "imports": [
+      "GSTGraphV2SixAdicOntologicalGeometry"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2SixAdicOntologicalGeometryTest.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 39,
+    "declarations": 0,
+    "imports": [
+      "GSTGraphV2SixAdicOntologicalGeometryLaws"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2SixAdicSynchronizedShadows.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 279,
+    "declarations": 14,
+    "imports": [
+      "GSTGraphV2SixAdicOntologicalGeometryLaws"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2SixAdicUnitIsometry.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 199,
+    "declarations": 12,
+    "imports": [
+      "GSTGraphV2SixAdicOntologicalGeometryLaws"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2TransparentWidthThree.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 138,
+    "declarations": 6,
+    "imports": [
+      "GSTGraphV2PerfectPowerBlockProbe",
+      "GSTGraphV2UnifiedVerticalTelescope",
+      "GSTFinalPurePowerResidueTransplant"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2UnifiedPowerRectangle.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 285,
+    "declarations": 18,
+    "imports": [
+      "GSTGraphV2InfiniteControl",
+      "GSTGraphV2CoupledUPhysicalBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTGraphV2UnifiedVerticalTelescope.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 214,
+    "declarations": 9,
+    "imports": [
+      "GSTGraphV2UnifiedPowerRectangle"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTHodgeAssault.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 499,
+    "declarations": 23,
+    "imports": [
+      "Mathlib",
+      "GSTCanonicalSevenAxisBridge",
+      "waves.GSTWaveCohomology",
+      "GSTAnalyticAbsorption",
+      "GSTCoherentCosmology",
+      "GSTLefschetzCrown"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTHodgeAssaultV2.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 199,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "GSTHodgeAssault"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTInfiniteBadTransport.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 196,
+    "declarations": 13,
+    "imports": [
+      "GSTInfiniteCollision"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTInfiniteCollision.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 309,
+    "declarations": 25,
+    "imports": [
+      "GSTV2InfiniteCore"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTInfiniteCoupledLedger.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 247,
+    "declarations": 13,
+    "imports": [
+      "GSTInfiniteBadTransport"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTInfiniteFourPowerNavigation.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 263,
+    "declarations": 17,
+    "imports": [
+      "GSTTactic",
+      "GSTGraphV2PerfectPowerBlockProbe",
+      "GSTGraphV2UnifiedVerticalTelescope",
+      "GSTGraphV2SixAdicSynchronizedShadows",
+      "GSTFinalPurePowerResidueTransplant",
+      "GSTFourPowerOntologicalAdapter"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTInfiniteGateTransport.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 141,
+    "declarations": 9,
+    "imports": [
+      "GSTInfiniteBadTransport"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTInfiniteWorldClassification.lean",
+    "classification": "Cohomology/observation",
+    "lines": 215,
+    "declarations": 15,
+    "imports": [
+      "Mathlib",
+      "GSTCoherentCosmology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTLefschetzCrown.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 1419,
+    "declarations": 79,
+    "imports": [
+      "Mathlib",
+      "GSTCanonicalSevenAxisBridge",
+      "waves.GSTWaveCohomology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTLefschetzCrownV2.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 202,
+    "declarations": 19,
+    "imports": [
+      "Mathlib",
+      "GSTLefschetzCrown"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTLefschetzPoincareReciprocity.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 180,
+    "declarations": 9,
+    "imports": [
+      "Mathlib",
+      "GSTUniversalLefschetzCausalGeometry"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTPerfectPowerTailNavigation.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 146,
+    "declarations": 10,
+    "imports": [
+      "GSTCanonicalTailStateIso",
+      "GSTCanonicalTailLTE"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTPrefixOneOntologicalEscape.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 187,
+    "declarations": 12,
+    "imports": [
+      "GSTPerfectPowerTailNavigation",
+      "GSTFourPowerOntologicalAdapter",
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectCreationMaster",
+      "GSTFourPowerDirectHappyBridge",
+      "GSTFourPowerDirectFailedRelocationState",
+      "GSTFourPowerDirectExistenceProviderPipeline",
+      "GSTFourPowerDirectExistenceFromHappy",
+      "GSTFourPowerThirdWave",
+      "GSTGraphV2OmegaWaveLaw"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTPrefixOneSeedCore.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 161,
+    "declarations": 11,
+    "imports": [
+      "GSTPrefixOneOntologicalEscape",
+      "GSTSeedOneShift",
+      "GSTCanonicalTailLTE"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTProjectiveOverC.lean",
+    "classification": "Stage 2 theorem",
+    "lines": 134,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic",
+      "Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion",
+      "Mathlib.AlgebraicGeometry.Morphisms.Smooth",
+      "Mathlib.RingTheory.MvPolynomial.Homogeneous"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTPureHodgeLefschetzKernel.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 173,
+    "declarations": 7,
+    "imports": [
+      "Mathlib",
+      "GSTUniversalLefschetzKernel",
+      "GSTGlobalPureHodgeCosmology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTRadixWorldDynamics.lean",
+    "classification": "Address/chart calculus",
+    "lines": 269,
+    "declarations": 25,
+    "imports": [
+      "Mathlib",
+      "GST2DMixedEmergenceUpgrade",
+      "GSTWorldCosmology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTSeedOneShift.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 125,
+    "declarations": 10,
+    "imports": [
+      "GSTCanonicalTailStateIso"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTSquarePureHodgeDuality.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 177,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "GSTGlobalPureHodgeCosmology",
+      "GSTWorldPoincareDuality"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTactic.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 160,
+    "declarations": 17,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTailFFourthDimension.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 2416,
+    "declarations": 151,
+    "imports": [
+      "GSTGraphV2OmegaWaveLaw",
+      "MonolithBoundary"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTailFInfiniteRead.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 397,
+    "declarations": 12,
+    "imports": [
+      "GSTTailFFourthDimension",
+      "GSTGraphV2OmegaWaveLaw"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTailFOneLane.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 369,
+    "declarations": 11,
+    "imports": [
+      "GSTTailFFourthDimension",
+      "GSTGraphV2OmegaWaveLaw"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTailFProof.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 466,
+    "declarations": 24,
+    "imports": [
+      "GSTTailFFourthDimension",
+      "GSTGraphV2Ontological",
+      "GSTGraphV2PowerThreeWaveObservation",
+      "MonolithBoundary",
+      "GSTFourPowerDirectExistence",
+      "GSTFourPowerDirectExistenceFromHappy"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTheAct.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 215,
+    "declarations": 14,
+    "imports": [
+      "Mathlib",
+      "GSTInfiniteFourPowerNavigation",
+      "GSTTailFProof",
+      "GSTClimbTruthValue",
+      "GSTCanonicalTailLTE",
+      "GSTFinalPurePowerResidueTransplant"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTheActConstruction.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 619,
+    "declarations": 29,
+    "imports": [
+      "Mathlib",
+      "GSTClimbInfiniteFamily",
+      "GSTCanonicalTailLTE"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTowerAxis.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 253,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "GSTClimbInfiniteFamily",
+      "GSTTowerFire"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTowerFire.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 297,
+    "declarations": 21,
+    "imports": [
+      "Mathlib",
+      "GSTBladeWave"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTransferBridge.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 716,
+    "declarations": 41,
+    "imports": [
+      "Mathlib",
+      "GSTCanonicalSevenAxisBridge",
+      "waves.GSTWaveCohomology",
+      "GSTLefschetzCrown",
+      "GSTHodgeAssault",
+      "GSTClayOfficial"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTransferBridgeV2.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 181,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "GSTTransferBridge",
+      "GSTHodgeAssaultV2",
+      "GSTClayOfficialV2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTTruncatedWorldCohomologyRing.lean",
+    "classification": "Cohomology/observation",
+    "lines": 370,
+    "declarations": 40,
+    "imports": [
+      "Mathlib",
+      "Mathlib.RingTheory.MvPolynomial.Ideal",
+      "GSTUniversalLefschetzCosmology",
+      "GSTGradedWorldAlgebra"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DAtomicBridge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 228,
+    "declarations": 8,
+    "imports": [
+      "GSTGraphV2CoupledUPhysicalBridge",
+      "GST2DMixedEmergence"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DCanonicalPhaseDensity.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 324,
+    "declarations": 17,
+    "imports": [
+      "GSTGraphV2InfiniteControl"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DCanonicalShiftedTerminalProbe.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 89,
+    "declarations": 3,
+    "imports": [
+      "GSTU2DPureDivergence83"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DEventTransport.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 182,
+    "declarations": 13,
+    "imports": [
+      "GSTU2DAtomicBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DExactCrossingCharge.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 369,
+    "declarations": 21,
+    "imports": [
+      "GSTU2DEventTransport"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DPureDivergence83.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 413,
+    "declarations": 21,
+    "imports": [
+      "GSTGraphV2InfiniteControl"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTU2DSharpCrossingBlock.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 329,
+    "declarations": 11,
+    "imports": [
+      "GSTU2DExactCrossingCharge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTUniversalAddressBridge.lean",
+    "classification": "Address/chart calculus",
+    "lines": 301,
+    "declarations": 26,
+    "imports": [
+      "Mathlib",
+      "GSTWorldRecoordinationGroupoid"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTUniversalLefschetzCausalGeometry.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 226,
+    "declarations": 13,
+    "imports": [
+      "Mathlib",
+      "GSTUniversalLefschetzKernel"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTUniversalLefschetzCosmology.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 344,
+    "declarations": 34,
+    "imports": [
+      "Mathlib",
+      "Mathlib.RingTheory.Nilpotent.Basic",
+      "GSTUniversalLefschetzDynamics",
+      "GSTWorldPoincareDuality"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTUniversalLefschetzDynamics.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 251,
+    "declarations": 15,
+    "imports": [
+      "Mathlib",
+      "GSTGradedWorldAlgebra",
+      "GSTWorldCrownBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTUniversalLefschetzKernel.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 278,
+    "declarations": 12,
+    "imports": [
+      "Mathlib",
+      "GSTUniversalLefschetzPathFormula"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTUniversalLefschetzPathFormula.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 221,
+    "declarations": 10,
+    "imports": [
+      "Mathlib",
+      "GSTTruncatedWorldCohomologyRing"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTV2InfiniteCore.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 162,
+    "declarations": 16,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTWorldCosmology.lean",
+    "classification": "Foundation",
+    "lines": 247,
+    "declarations": 22,
+    "imports": [
+      "Mathlib",
+      "waves.GSTWaveCohomology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTWorldCrownBridge.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 172,
+    "declarations": 9,
+    "imports": [
+      "Mathlib",
+      "GSTWorldCosmology",
+      "GSTLefschetzCrown"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTWorldPoincareDuality.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 284,
+    "declarations": 21,
+    "imports": [
+      "Mathlib",
+      "GSTGradedWorldAlgebra"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTWorldRecoordinationGroupoid.lean",
+    "classification": "Address/chart calculus",
+    "lines": 355,
+    "declarations": 30,
+    "imports": [
+      "Mathlib",
+      "GSTRadixWorldDynamics",
+      "GSTGradedWorldAlgebra"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTWorldtraceArithmetic.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 1347,
+    "declarations": 53,
+    "imports": [
+      "Mathlib",
+      "GSTTowerFire",
+      "GSTTheActConstruction",
+      "GSTFourPowerDirectResidue"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "GSTWorldtraceMahlerRelativePrecision.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 296,
+    "declarations": 24,
+    "imports": [
+      "MonolithBoundary",
+      "GSTGhostRayExclusion",
+      "GSTClimbInfiniteFamily",
+      "GSTTheAct"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "HCProof.lean",
+    "classification": "Verification fixture",
+    "lines": 528,
+    "declarations": 0,
+    "imports": [
+      "GSTCoherentCosmology",
+      "GSTInfiniteWorldClassification",
+      "GST2DMixedEmergenceUpgrade",
+      "CardinalWorlds",
+      "CardinalWorldsV2",
+      "CardinalWorldsPrefixClassifier",
+      "MonolithBoundary",
+      "GSTGraphV2Ontological",
+      "GSTGraphV2ScaleEquivariance",
+      "GSTGraphV2OmegaWaveLaw",
+      "GSTGraphV2SixAdicSynchronizedShadows",
+      "GSTGraphV2ProductionLaws",
+      "GSTWorldtraceArithmetic",
+      "GSTTailFFourthDimension",
+      "GSTTheAct",
+      "GSTBladeWave",
+      "GSTTowerAxis",
+      "GSTTowerFire",
+      "GSTDiagonalRead",
+      "GSTGhostRayExclusion",
+      "GSTClimbInfiniteFamily",
+      "GSTTheActConstruction",
+      "GSTWorldtraceMahlerRelativePrecision",
+      "GSTWorldCosmology",
+      "GSTUniversalLefschetzCosmology",
+      "GSTUniversalLefschetzPathFormula",
+      "GSTUniversalLefschetzKernel",
+      "GSTUniversalLefschetzCausalGeometry",
+      "GSTLefschetzPoincareReciprocity",
+      "GSTTruncatedWorldCohomologyRing",
+      "GSTRadixWorldDynamics",
+      "GSTGradedWorldAlgebra",
+      "GSTWorldRecoordinationGroupoid",
+      "GSTUniversalAddressBridge",
+      "GSTDimensionFreeHodgeDiagonal",
+      "GSTGlobalPureHodgeCosmology",
+      "GSTPureHodgeLefschetzKernel",
+      "GSTSquarePureHodgeDuality",
+      "GSTUniversalLefschetzDynamics",
+      "GSTWorldPoincareDuality",
+      "GSTWorldCrownBridge",
+      "HodgeDeRhamBridge",
+      "HodgeDeRhamBridgeV2",
+      "GSTAnalyticAbsorption",
+      "GSTAnalyticAbsorptionV2",
+      "GSTLefschetzCrown",
+      "GSTLefschetzCrownV2",
+      "GSTHodgeAssault",
+      "GSTHodgeAssaultV2",
+      "GSTClayOfficial",
+      "GSTClayOfficialV2",
+      "GSTTransferBridge",
+      "GSTTransferBridgeV2",
+      "GSTGeometricRealizationStage2",
+      "GSTGeometricRealizationStage2B",
+      "GSTGeometricRealizationStage2C",
+      "GSTGeometricRealizationStage2D",
+      "GSTProjectiveOverC",
+      "GSTGeometricRealizationStage2E",
+      "GSTGeometricRealizationStage2F",
+      "GSTGeometricRealizationStage2G",
+      "waves.GSTWaveCohomology",
+      "waves.GSTWaveCohomologyV2",
+      "waves.GSTNCohomology",
+      "waves.GSTNCohomologyV2",
+      "waves.GSTVortexSingularity",
+      "waves.GSTVortexSingularityV2",
+      "waves.CardinalWorldsPostulateLaw",
+      "waves.CardinalWorldsPostulateLawV2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "HodgeDeRhamBridge.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 346,
+    "declarations": 27,
+    "imports": [
+      "GSTGraphV2SixAdicSynchronizedShadows",
+      "GSTGraphV2Ontological",
+      "GSTWorldtraceArithmetic",
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "HodgeDeRhamBridgeV2.lean",
+    "classification": "Hodge/operator/geometry",
+    "lines": 114,
+    "declarations": 10,
+    "imports": [
+      "Mathlib",
+      "HodgeDeRhamBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "InformationBadTraceScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 57,
+    "declarations": 3,
+    "imports": [
+      "InformationDescentScratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "InformationDescentScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 284,
+    "declarations": 22,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "InformationGeometryScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 171,
+    "declarations": 9,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "InformationRegenerationScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 128,
+    "declarations": 9,
+    "imports": [
+      "InformationStateScratch",
+      "InformationBadTraceScratch",
+      "OriginTransducerScratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "InformationStateScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 137,
+    "declarations": 5,
+    "imports": [
+      "InformationDescentScratch",
+      "InformationGeometryScratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "MonolithBoundary.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 86,
+    "declarations": 5,
+    "imports": [
+      "CardinalWorlds",
+      "GSTGraphV2OmegaWaveLaw"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "OriginTransducerScratch.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 170,
+    "declarations": 9,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "questions/deepmind_problem_406/Challenge.lean",
+    "classification": "Verification fixture",
+    "lines": 25,
+    "declarations": 2,
+    "imports": [
+      "Mathlib"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "questions/deepmind_problem_406/Solution.lean",
+    "classification": "Verification fixture",
+    "lines": 57,
+    "declarations": 3,
+    "imports": [
+      "MonolithBoundary"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/CardinalWorldsPostulateLaw.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 238,
+    "declarations": 13,
+    "imports": [
+      "CardinalWorlds",
+      "GSTV2InfiniteCore",
+      "GSTGraphV2InfiniteControl",
+      "GSTInfiniteCoupledLedger"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/CardinalWorldsPostulateLawV2.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 168,
+    "declarations": 15,
+    "imports": [
+      "Mathlib",
+      "waves.CardinalWorldsPostulateLaw"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/GSTNCohomology.lean",
+    "classification": "Cohomology/observation",
+    "lines": 373,
+    "declarations": 26,
+    "imports": [
+      "waves.GSTWaveCohomology",
+      "GST2DMixedEmergence",
+      "GSTGraphV2OmegaWaveLaw",
+      "GSTTailFFourthDimension"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/GSTNCohomologyV2.lean",
+    "classification": "Cohomology/observation",
+    "lines": 205,
+    "declarations": 16,
+    "imports": [
+      "Mathlib",
+      "waves.GSTNCohomology",
+      "waves.GSTWaveCohomologyV2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/GSTVortexSingularity.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 355,
+    "declarations": 22,
+    "imports": [
+      "waves.GSTNCohomology",
+      "GST2DMixedEmergence",
+      "GSTGraphV2OmegaWaveLaw",
+      "GSTGraphV2NonEuclideanLaws",
+      "GSTTailFFourthDimension",
+      "GSTGraphV2Scratch"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/GSTVortexSingularityV2.lean",
+    "classification": "Local physical or already-unbounded theorem",
+    "lines": 166,
+    "declarations": 12,
+    "imports": [
+      "Mathlib",
+      "waves.GSTVortexSingularity",
+      "waves.GSTNCohomologyV2"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/GSTWaveCohomology.lean",
+    "classification": "Cohomology/observation",
+    "lines": 478,
+    "declarations": 36,
+    "imports": [
+      "GST2DMixedEmergence",
+      "GSTGraphV2NonEuclideanLaws",
+      "GSTGraphV2OmegaWaveLaw",
+      "GSTCanonicalSevenAxisBridge"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  },
+  {
+    "file": "waves/GSTWaveCohomologyV2.lean",
+    "classification": "Cohomology/observation",
+    "lines": 172,
+    "declarations": 11,
+    "imports": [
+      "Mathlib",
+      "waves.GSTWaveCohomology"
+    ],
+    "status": "inventoried; retain exact API; migrate where universal carrier is relevant"
+  }
+]

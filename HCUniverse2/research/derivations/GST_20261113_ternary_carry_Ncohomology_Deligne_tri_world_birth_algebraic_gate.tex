@@ -1,0 +1,382 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=0.9in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools,enumitem}
+\usepackage[T1]{fontenc}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\C}{\mathbb C}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\A}{\mathsf A}
+\newcommand{\W}{\mathsf W}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\HD}{H_{\mathcal D}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\rk}{\operatorname{rank}}
+\title{GST three-world carry, N-cohomology, and a universal filtered-cochain birth:\\
+exact theorems and the algebraic source test}
+\author{Research derivation on the owner-defined GST graph}
+\date{13 November 2026; research branch \texttt{research/gpt6-native-point-primitive-span-20261017}}
+\begin{document}\maketitle
+\begin{abstract}
+This note executes a source-existence attempt beginning with the user-required
+arbitrary input: smooth projective complex \(X\), integer \(p\), and a specified
+rational \((p,p)\) class \(\alpha\). It \emph{does not} replace the owner GST graph
+with a 12-state matrix. It proves: (a) a base-three weighted
+creation/destruction/carry/SURVIVE identity from the original GST microscopic
+law; (b) its independent-channel N-cohomology lift; (c) a constructive
+\emph{all-\(X\), all-\(p\)} analytic/Deligne three-carrier birth
+\( (z_\alpha,\omega_\alpha,\eta_\alpha)\) without an algebraic preimage;
+(d) an exact quotient describing when this born class is realized by a
+genuine original-\(X\) algebraic cycle; (e) an all-\(p\) Thom--Porteous
+obstruction to attempts that alter only the wave matrix between fixed
+algebraic bundles; and (f) the full original-\(X\) Chow birth for \(p=1\)
+(and, by hard Lefschetz, \(p=d-1\)).
+The universal target of \texttt{NativeGSTSingleFoldOrbitLaw} is
+\emph{not claimed}; in higher primitive weights the algebraic regulator
+source construction remains a substantive independent obligation.
+\end{abstract}
+
+\section{Authoritative native GST objects and target}
+
+Owner source files, read on the pinned branch:
+\texttt{GST2DMixedEmergence.lean};
+\texttt{GSTGraphV2InformationRecovery.lean};
+\texttt{GSTGraphV2OmniversalCore.lean};
+\texttt{GSTGraphV2OmniversalHyperEvents.lean};
+\texttt{GSTGraphV2SelfExpandingCosmology.lean};
+\texttt{GSTGraphV2CMWaveFusion.lean};
+\texttt{waves/GSTNCohomologyV3.lean};
+\texttt{GSTCardinalGradedIncidenceBirth.lean};
+\texttt{GSTHodgeSingleHypothesisConditional.lean}.
+The fundamental ontology is an arbitrary node carrier, sectors
+\(\{\mathrm{NULL},\mathrm{ALT}^{-},\mathrm{GST}^{+}\}\) and certified typed
+events. Independent world births have world-dependent state and law types.
+N-cohomology has genuine independent hole coordinates, not fabricated Hodge
+representatives. Its many-world tensor basis has independent product
+indices but a single decomposable tensor has tensor rank one. The physical
+12-cell x4/base3 \((C,d)\) state is a \emph{realization}, not the definition
+of the omniversal graph.
+
+Required theorem contract, unchanged:
+\[
+\forall X/\C\text{ smooth projective},\;\forall p\ge0,\;
+\forall\alpha\in\W_p(X)=H^{2p}(X,\Q)\cap H^{p,p}(X),\
+\exists Z_\alpha\in\CH^p(X)_\Q:\ \cl_X^{\mathrm{can}}(Z_\alpha)=\alpha.
+\]
+The \texttt{NativeGSTSingleFoldOrbitLaw} further asks for a genuine
+finite-left-fiber original-\(X\) correspondence word and one
+cyclic original-\(X\) native seed. The current \texttt{Generated} graph
+constructor does not itself supply those actual Chow objects.
+
+\section{Base-three carry and the original microscopic SURVIVE law}
+
+Use the owner's literal definitions
+\[
+ d_{t+1}=(c_t+4d_t)\bmod3,\qquad
+ c_{t+1}=\lfloor(c_t+4d_t)/3\rfloor,
+ \quad 0\le c_t<4,\quad 0\le d_t<3.
+\]
+Define the \emph{source} \(\mathcal S_t=\operatorname{surviveI}(c_t,d_t)\in\{0,1,2\}\),
+the \emph{BIG1 information potential}
+\(I_t=\operatorname{infoPotential}(d_t)\), and
+\(C_t=\operatorname{carryPotential}(c_t)\).
+The exact owner theorem \texttt{mixed\_cell\_emergence} is
+\begin{equation}\label{eq:cell}
+D_t:=\operatorname{mixedDensity}(c_t,d_t)
+=I_{t+1}-I_t+7(C_t-3C_{t+1})+56\mathcal S_t.
+\end{equation}
+
+\begin{theorem}[Base-three weighted triadic conservation]\label{th:weighted}
+For \emph{every} valid causal history of length \(N\ge1\), the
+\(\mathrm{GST}^{+}\) survival weight is the following exact integer:
+\begin{align}\label{eq:weighted}
+56\sum_{t=0}^{N-1}3^t\mathcal S_t
+={}&\sum_{t=0}^{N-1}3^tD_t
++I_0-3^{N-1}I_N
++2\sum_{t=1}^{N-1}3^{t-1}I_t\nonumber\\
+&-7(C_0-3^NC_N).
+\end{align}
+It is nonnegative and zero exactly when \(\mathcal S_t=0\)
+for every \(t<N\).
+\end{theorem}
+\begin{proof}
+Multiply \eqref{eq:cell} by \(3^t\) and sum. Both
+\[
+\sum_{t=0}^{N-1}3^t(C_t-3C_{t+1})=C_0-3^NC_N
+\]
+and
+\[
+\sum_{t=0}^{N-1}3^t(I_{t+1}-I_t)
+=-I_0+3^{N-1}I_N-2\sum_{t=1}^{N-1}3^{t-1}I_t
+\]
+are exact telescoping identities. Rearrange.
+Since the microscopic SURVIVE incidence is \(0,1,2\),
+positivity and its equality condition follow.
+\end{proof}
+
+\begin{proposition}[Survival without new directions]
+The genuine owner state \((c,d)=(3,2)\) is fixed by the
+shuffle and has \(\mathcal S_t=2\). Hence
+\[
+\sum_{t=0}^{N-1}3^t\mathcal S_t=3^N-1
+\]
+for every \(N\), even though the causal orbit occupies \emph{only
+one physical cell}. Therefore arbitrary SURVIVE charge does not imply
+a new independent cohomological or Chow direction by itself.
+\end{proposition}
+\begin{proof}
+The owner files prove \texttt{max\_information\_fixed}
+and \texttt{source\_on\_positive\_fixed}. The formula is a geometric series.
+\end{proof}
+
+\section{Full independent N-cohomology and multiworld synthesis}
+
+Let \(H\) be any finite index of independent actual N-hole channels,
+using \texttt{independentHoleBasis} as the delta basis \(e_i\).
+For each channel \(i\) run its own valid physical history and put
+\[
+M_N=\sum_{i\in H}\Bigl(\sum_{t=0}^{N-1}3^t\mathcal S_{i,t}\Bigr)e_i
+ \in\Q^H.
+\]
+\begin{theorem}[Independent multichannel survival]
+The \(i\)-th coordinate of \(M_N\) obeys the exact
+identity \eqref{eq:weighted} for its own history; there is no channel
+collapse. In particular \(M_N=0\) iff every SURVIVE
+incidence in every channel is zero.
+For two worlds with \(r,s\) independent holes a single pure tensor
+of amplitudes has matrix rank at most one; two independently born
+pure tensors can have rank two, e.g.
+\[
+(1,0)\otimes(1,0)+(0,1)\otimes(0,1)
+=\begin{pmatrix}1&0\\0&1\end{pmatrix}.
+\]
+\end{theorem}
+\begin{proof}
+Coordinate independence is the exact owner
+\texttt{independentHoleBasis\_reconstruct}.
+Apply Theorem \ref{th:weighted} separately per channel.
+The rank claim is the elementary \(2\times2\) minor identity and
+is already reflected by \texttt{doubleCausalHoleTensor\_minor\_zero}
+and \texttt{twoChannelDiagonal\_not\_one\_tensor}.
+The theorem proves \emph{cohomological channel birth} and
+does not identify any \(e_i\) with a Chow class on an arbitrary \(X\).
+\end{proof}
+
+\section{Universal \(\alpha\)-sensitive three-world analytic birth}
+
+Fix arbitrary \(X,p,\alpha\) from Section 1; now \emph{do not}
+assume \(\alpha\) has a native Chow representative.
+Use the standard Tate twist \(\Q(p)=(2\pi i)^p\Q\).
+Let \(C^\bullet_{\Q(p)}\) be a singular rational cochain model and
+\(A^\bullet\) a complex comparison model for the analytic de Rham complex.
+Let \(F^pA^\bullet\) be its Hodge-filtration subcomplex.
+The rational Deligne complex is represented by the homotopy fiber
+\[
+\mathsf D^\bullet_p(X)=\operatorname{Cone}
+\Bigl[
+C^\bullet_{\Q(p)}\oplus F^pA^\bullet
+\xrightarrow{\ (\mathrm{cmp},-\mathrm{inc})\ }
+A^\bullet
+\Bigr][-1].
+\]
+Up to harmless cone sign convention, a degree-\(2p\)
+cochain is a three-world packet
+\((z,\omega,\eta)\) with
+\[
+z\in C^{2p}_{\Q(p)},\qquad
+\omega\in F^pA^{2p},\qquad
+\eta\in A^{2p-1},
+\]
+and the closure equations are
+\begin{equation}\label{eq:Deligne}
+dz=0,\quad d\omega=0,\quad
+d\eta=\omega-\mathrm{cmp}(z).
+\end{equation}
+The \(\Q(p)\)-world stores the exact rational lattice;
+the filtered holomorphic world stores the Hodge type;
+the third correction world carries the difference and closes it.
+These are **proposed typed realizations** of the owner's three-sector
+universe, not a claim that the sector labels themselves imply
+Deligne geometry.
+
+\begin{theorem}[Universal rational Hodge-to-Deligne three-world birth]
+For every arbitrary \(X,p,\alpha\) in the original target,
+there exists a triple \((z_\alpha,\omega_\alpha,\eta_\alpha)\)
+satisfying \eqref{eq:Deligne}, whose Deligne class
+\[
+\widetilde\alpha\in \HD^{2p}(X,\Q(p))
+\]
+maps to exactly \(\alpha\in\W_p(X)\).
+No target Chow cycle is used as input.
+\end{theorem}
+\begin{proof}
+Represent \(\alpha\) by a rational closed singular cocycle \(z_\alpha\).
+Since \(\alpha\) has Hodge type \((p,p)\), it belongs to \(F^p\),
+so choose a closed filtered de Rham representative \(\omega_\alpha\)
+of the \emph{same} complex comparison class.
+Then \(\omega_\alpha-\mathrm{cmp}(z_\alpha)\) is exact in the common
+complex, and there exists \(\eta_\alpha\) with the third identity
+of \eqref{eq:Deligne}. The cone differential squares to zero and
+the three equations say the packet is a cocycle. Its edge map
+returns \([z_\alpha]=\alpha\). This is an \emph{actual universal
+cochain-level construction}, not a claim of algebraic K-theory lifting.
+\end{proof}
+
+\begin{proposition}[Exact all-degree algebraic-return obstruction]
+Let
+\[
+E_p(X)=\HD^{2p}(X,\Q(p)),\quad
+J_p(X)=\ker(E_p(X)\xrightarrow{\operatorname{edge}}\W_p(X)),
+\quad B_p(X)=\im(\cl_{\mathcal D}:\CH^p(X)_\Q\to E_p(X))
+\]
+and \(\A_p(X)=\im(\cl_X:\CH^p(X)_\Q\to\W_p(X))\).
+Then there is a canonical isomorphism
+\begin{equation}\label{eq:defect}
+\boxed{\frac{E_p(X)}{J_p(X)+B_p(X)}
+\ \cong\ \frac{\W_p(X)}{\A_p(X)}.}
+\end{equation}
+Here \(J_p(X)\) is the intermediate-Jacobian contribution
+\(H^{2p-1}(X,\C)/(F^pH^{2p-1}+H^{2p-1}(X,\Q(p)))\).
+Thus the born packet \(\widetilde\alpha\) becomes an
+original-\(X\) Chow source exactly when its class in the quotient
+on the left vanishes; no hyper-event arithmetic alone proves this.
+\end{proposition}
+\begin{proof}
+The standard Deligne exact sequence is
+\(0\to J_p\to E_p\xrightarrow{\operatorname{edge}}\W_p\to0\).
+The Deligne cycle-class map projects to the canonical Betti
+cycle-class map. Since \(E_p\to\W_p\) is surjective, passing to
+the quotient by \(J_p+B_p\) gives precisely \(\W_p/\A_p\)
+by the first isomorphism theorem. In particular, no
+surjectivity of \(\CH^p\to E_p\) was asserted; it would be
+stronger than the rational Hodge conjecture and is unnecessary.
+\end{proof}
+
+\begin{corollary}[Unconditional original-\(X\) algebraic birth in codimension one]
+For \(p=1\), every packet \(\widetilde\alpha\) is represented
+by an actual original-\(X\) algebraic divisor.
+Consequently the same is true for \(p=d-1\) by hard Lefschetz
+and algebraic hyperplane products, and for \(p=0,d\).
+\end{corollary}
+\begin{proof}
+The exponential sequence
+\(0\to\Z(1)\to\mathcal O_X\xrightarrow{\exp}\mathcal O_X^*\to1\)
+gives \(\HD^2(X,\Z(1))\cong H^1(X,\mathcal O_X^*)
+=\operatorname{Pic}_{an}(X)\). After clearing rational
+denominators, the rational Hodge \((1,1)\) condition
+annihilates the exponential obstruction \(H^2(X,\mathcal O_X)\),
+so an analytic line bundle exists. Projective GAGA
+identifies it with an algebraic line bundle, and
+\(c_1\) equals the prescribed class. For \(d-1\), use
+\(L^{d-2}:H^2(X,\Q)\xrightarrow\sim H^{2d-2}(X,\Q)\)
+on Hodge classes, followed by multiplying the divisor
+representative with the algebraic ample class.
+\end{proof}
+
+\section{Direct geometric algebraization attempt and its fixed-bundle obstruction}
+
+Take an actual original-\(X\) ample line bundle \(L\) with
+\(h=c_1(L)\), let \(m\) be sufficiently positive, and choose an
+\(\alpha\)-dependent algebraic rank-loss map
+\[
+\phi_\alpha:L^{-m}\oplus L^{-m}\longrightarrow
+\mathcal O_X^{p+1}.
+\]
+A common GST triadic interpretation would regard the kernel,
+cokernel and rank-drop region as creation, destruction and
+survival channels.
+
+\begin{theorem}[All-\(p\) rigid determinantal source class]
+If the rank-at-most-one degeneracy locus
+\(Z_\alpha=D_1(\phi_\alpha)\) has expected codimension \(p\),
+its canonical Chow class is
+\[
+\boxed{[Z_\alpha]=(p+1)m^p h^p\in\CH^p(X).}
+\]
+It does not depend on \(\alpha\), on the rank-loss matrix entries,
+or on the number of ternary/N-hole propagation steps that merely
+modify \(\phi_\alpha\) while preserving its underlying bundles.
+\end{theorem}
+\begin{proof}
+Apply Thom--Porteous to the expected-rank degeneracy
+of \(E=L^{-m}\oplus L^{-m}\), rank 2, and
+\(F=\mathcal O_X^{p+1}\), rank \(p+1\). Since the rank bound
+is 1, the determinantal formula is the single Chern class
+\([D_1]=c_p(F-E)\). Its total Chern class is
+\[
+c(F-E)=\frac{c(F)}{c(E)}
+=\frac{1}{(1-mh)^2}
+=\sum_{q\ge0}(q+1)m^qh^q.
+\]
+The coefficient of degree p gives the formula.
+\end{proof}
+
+\begin{proposition}[Return of separable cross-world births]
+For any smooth projective auxiliary worlds \(Y_i\) and actual
+algebraic classes \(a_j\in\CH^\bullet(X)\), \(b_j\in
+\CH^\bullet(\prod_iY_i)\), any separable source
+\(Z=\sum_j\operatorname{pr}_X^*a_j\cdot
+\operatorname{pr}_Y^*b_j\) returns by pushforward with any
+algebraic \(c\) on the auxiliary factor as
+\[
+(\operatorname{pr}_X)_*(Z\cdot\operatorname{pr}_Y^*c)
+=\sum_j\Bigl(\int_Y b_jc\Bigr)a_j.
+\]
+No original-\(X\) source outside the span of the supplied \(a_j\)
+is born. A genuine nonseparable mixed incidence or an
+independently constructed new original-\(X\) K-class is necessary
+to escape this \emph{particular} mechanism.
+\end{proposition}
+\begin{proof}
+Apply bilinearity, the projection formula and pushforward
+of exterior products; all integrals are rational degrees of
+actual zero-cycles.
+\end{proof}
+
+\section{Executed experiments, verdict, next candidate}
+
+The original 12-cell table and its 5-step SURVIVE weights were
+evaluated from the literal \texttt{microOutput}, \texttt{surviveI},
+\texttt{nextCarry} and \texttt{outDigit} definitions. The symbolic
+base-three weighted carry identity was checked through N=8
+with independent symbols and proved for all N by telescoping.
+Wolfram also checked: a one-tensor N-hole matrix has rank 1,
+two separated tensors can have rank 2; the cone-correction
+matrix identity \(d\eta=\omega-z\); and Thom--Porteous coefficient
+\((p+1)m^p\) for p=1 through 8 (proved for all p by binomial series).
+No Lean file has been modified and no CI run is claimed.
+
+\noindent\textbf{Decision.}
+The user's proposed three-world travel \emph{does}
+construct a genuine \(\alpha\)-dependent cohomological source
+in every codimension, exactly as \eqref{eq:Deligne};
+N-cohomology preserves independent channels, and the original
+ternary carry has a rigorous survival charge.
+The projective-algebraic output
+\(Z_\alpha\in\CH^p(X)_\Q\) for arbitrary higher primitive
+\(\alpha\) is not obtained: it requires triviality of the
+specific coset of \(\widetilde\alpha\) in
+\(E_p/(J_p+B_p)\), equivalently the rational Hodge source
+assertion for that \(\alpha\). This is the precise algebraic
+test, \emph{not} an assumption inserted into \texttt{Birth}.
+
+The next genuinely different geometric route is to seek
+\(\alpha\)-dependent \emph{nonseparable} algebraic incidence
+on \(X\times Y_\alpha\) whose pushforward pairs nontrivially
+with the \(B_p(X)\)-orthogonal component of \(\alpha\);
+fixed-bundle degeneracy alone is ruled out by Theorem 5.1.
+
+\noindent\textbf{Sources checked.}
+Owner Lean source files listed in Section 1; standard Deligne
+cohomology exact sequence as in Haus--Quick,
+\emph{Doc. Math.} 29 (2024), 457--509, equation (1.1),
+and the Deligne--Beilinson cohomology source
+\texttt{https://openscience.ub.uni-mainz.de/server/api/core/bitstreams/a8abfbbe-7936-4a32-b629-e8e1aaa060ea/content}.
+Thom--Porteous formula: Fulton,
+\emph{Intersection Theory}, Theorem 14.4, and the
+standard equivalent rank-formula expositions.
+\end{document}

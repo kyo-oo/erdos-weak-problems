@@ -1,0 +1,1 @@
+Out[1]= <|"ChernInterpolationPolynomialErrors_p1to8" -> {0, 0, 0, 0, 0, 0, 0, 0}, "SharpTwoCenterEnergyError" -> 0, "EquationDrivenOriginalCenterPeriodError" -> 0, "EquationDrivenCenterAmpleDegreeError" -> 0, "EquationDrivenCenterPlaneIntersection" -> 0|>

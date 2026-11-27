@@ -1,0 +1,207 @@
+\documentclass[11pt]{article}
+\usepackage[margin=25mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\mathrm{CH}}
+\newcommand{\cl}{\mathrm{cl}}
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\pr}{\mathrm{pr}}
+\title{GST N-wave/CM curvature connected-source birth:\\a single native fold constructed without an algebraic Hodge basis}
+\date{10 November 2026}
+\begin{document}\maketitle
+
+\section{Input, target, and relation to the owner's existing GST}
+Fix \emph{any prescribed} smooth projective complex variety $X$ of dimension $d$, $0\le p\le d$, and a prescribed rational $(p,p)$ Hodge class $\alpha$. Put
+\[
+W=W_p(X):=H^{2p}(X,\Q)\cap H^{p,p}(X,\mathbb C),\qquad
+A=\CH^p(X)_\Q,\qquad c=\cl_X^{\rm can}:A\to W,\quad n=\dim_\Q W.
+\]
+For $n=0$ the zero native cycle represents the only target. If $n\ge1$, the actual universally available original-$X$ algebraic seed $z_*=h^p\in A$, with $h$ ample, has $c(z_*)\ne0$ since $\int_Xh^d>0$.
+The prior repository modules \texttt{GSTGraphV2WaveNShapeCompiler} and \texttt{GSTHodgeWaveAllNHoleReadout} produce distinct rational N-wave spectral addresses
+\(\lambda_i=2+10\,\operatorname{channel}(i)\). \texttt{GSTGraphV2NativeCurvatureBirth} and \texttt{GSTGraphV2CMInfiniteCurvatureBridge} give a genuine native commutator only \emph{after} original-$X$ realization. \texttt{GSTHodgeWaveCurvatureCyclicAugmentation} constructs a cyclic native fold after receiving a full geometric native source frame. The theorem below instead constructs that frame \emph{from one native algebraic seed and a mixing pair of native correspondence operators}, with no supplied target Chow basis or alpha-to-cycle map. This is genuinely distinct from the preexisting frame-inversion route.
+
+\section{New exact universal-input operator criterion}
+Assume two \emph{actual rational algebraic correspondences} $\Gamma_T,\Gamma_S\in\CH^d(X\times X)_\Q$, with their true Chow push--pull maps $N_T,N_S:A\to A$ and canonical Betti maps $T,S:W\to W$, satisfying the automatic geometric naturality
+\[
+ c(N_Tz)=Tc(z),\qquad c(N_Sz)=Sc(z)\quad(z\in A).
+\]
+The key source-existence test has three \emph{operator} requirements, none supplying an algebraic source for an unknown Hodge direction:
+\begin{enumerate}
+\item $T$ has $n$ \emph{pairwise distinct rational} eigenvalues $\lambda_i$, with rational Hodge eigenbasis $e_1,\ldots,e_n$ (not assumed algebraic).
+\item Write $S(e_i)=\sum_j s_{ji}e_j$ and $K=[T,S]$. The directed graph on the \emph{information-address labels} $i$ with edges $i\to j$ iff $K_{ji}\ne0$ is \emph{strongly connected} (for $n=1$ connectivity is vacuous).
+\item Both operators are induced by actual algebraic correspondences on the \emph{same original $X$}, not just by GST formal signal matrices, topological folds, or an arbitrary cohomology operation.
+\end{enumerate}
+The eigenaddresses are dimensionless GST Wave-II channels, not spatial dimensions. This operator criterion is a \emph{testable new sufficient route}, not asserted for every X by any previous law.
+
+\begin{theorem}[GST connected-curvature original-$X$ source-birth theorem]
+Under these conditions, for every prescribed $\alpha\in W$, there is a \emph{constructively specified finite} rational Chow cycle $Z_\alpha\in\CH^p(X)_\Q$ with $c(Z_\alpha)=\alpha$. Moreover one can assemble, from rational polynomials and finite compositions of only the two \emph{actual} correspondences $\Gamma_T,\Gamma_S$, one actual rational Chow correspondence $\Gamma_{\rm cyclic}\in\CH^d(X\times X)_\Q$ and one actual algebraic seed whose entire Betti orbit forms a basis of W. Its single-fold GST Hankel determinant is $\pm1$ in the eigenaddress normalization.
+\end{theorem}
+\begin{proof}
+All calculations are over Q, and none of the $e_i$ is initially asserted algebraic. For each eigenaddress define the rational \emph{spectral projector polynomial}
+\[
+ q_i(t)=\prod_{j\ne i}\frac{t-\lambda_j}{\lambda_i-\lambda_j}\in\Q[t],
+ \qquad P_i=q_i(T),\quad\widehat P_i=q_i(N_T).
+\]
+The rational diagonal wave spectrum gives $P_ie_j=\delta_{ij}e_j$. Since $N_T$ is a genuine native cycle operator, $\widehat P_i$ is a rational finite sum of actual iterates of the same algebraic correspondence and thus
+\[
+ \boxed{c(\widehat P_i z)=P_i c(z).}
+ \tag{1}
+\]
+Write $c(z_*)=\sum_i a_ie_i$. Since $c(z_*)\ne0$, choose $i_0$ with $a_{i_0}\ne0$ and define the actual algebraic seed
+\[
+ \boxed{z_{i_0}=a_{i_0}^{-1}\widehat P_{i_0}z_*.}
+ \tag{2}
+\]
+By (1), $c(z_{i_0})=e_{i_0}$. Here $a_{i_0}$ is a rational Betti coordinate of a \emph{known} algebraic class, not an unknown algebraic Hodge target.
+
+For any edge $i\to j$, distinctness of eigenvalues gives
+\[
+ \boxed{P_j[T,S]P_i=(\lambda_j-\lambda_i)s_{ji}\,E_{ji},}
+ \quad E_{ji}(e_k)=\delta_{ik}e_j.
+ \tag{3}
+\]
+Thus the nonzero curvature edge is \emph{equivalent} to $s_{ji}\ne0$. From a source $z_i$ with $c(z_i)=e_i$ define
+\[
+ \boxed{z_j=(s_{ji})^{-1}\widehat P_j N_Sz_i\in A.}
+ \tag{4}
+\]
+Equation (1) and canonical naturality imply $c(z_j)=e_j$. For \emph{every} target address $j$, choose a directed path from $i_0$ to $j$; strong connectedness makes it exist, and repeated (4) constructs $z_j$ as a genuine Chow cycle. Therefore \emph{for every} prescribed rational Hodge class
+\[
+ \alpha=\sum_j b_j(\alpha)e_j
+ \quad\Longrightarrow\quad
+ \boxed{Z_\alpha=\sum_j b_j(\alpha)z_j,\quad c(Z_\alpha)=\alpha.}
+ \tag{5}
+\]
+Every source on the right is built only from $h^p$ and the two original-$X$ correspondence operators, and all coefficients are rational.
+
+For a directed path $\pi=(i=i_0,i_1,\ldots,i_m=j)$ define
+\[
+ R_\pi=P_{i_m}S P_{i_{m-1}}\cdots S P_{i_0}
+ =\gamma_\pi E_{ji},\quad
+ \gamma_\pi=\prod_{r=0}^{m-1}s_{i_{r+1},i_r}\ne0.
+ \tag{6}
+\]
+This identity follows inductively from one-dimensional eigenspaces. Its algebraic Chow lift $\widehat R_\pi$ is the \emph{same finite rational word} in actual correspondence operators. Therefore
+\(\widehat E_{ji}:=\gamma_\pi^{-1}\widehat R_\pi\)
+acts as the rank-one matrix unit $E_{ji}$ on W; this matrix unit is an \emph{output} of the GST curvature graph, not assumed in the input.
+Choose a path $\pi_i$ from each $i$ to $i+1$, taking $n+1$ to mean $1$, and let
+\[
+ \boxed{N_{\rm cyclic}=\sum_{i=1}^n \widehat E_{i+1,i},
+ \qquad F=\sum_{i=1}^n E_{i+1,i}.} \tag{7}
+\]
+A finite rational sum/composition of genuine rational Chow correspondences is again a genuine Chow correspondence on $X\times X$. Its native action and Betti action obey the exact commuting square. Choose the actual native seed $z_1$ obtained by a directed path from $i_0$ to $1$. Then
+\(c(N_{\rm cyclic}^k z_1)=e_{1+k\bmod n}\).
+With $\ell:W\to\Q$ the rational functional $\ell(e_i)=\delta_{i1}$, the moments are
+\[
+ M_{ab}=\ell(F^{a+b}e_1)=
+ \begin{cases}1&a+b\equiv0\pmod n,\\0&\text{otherwise},\end{cases}
+ \qquad0\le a,b<n.
+\]
+Thus $\det M=(-1)^{(n-1)(n-2)/2}\ne0$ for $n\ge2$, and $M=(1)$ for $n=1$. This is exactly one native GST cyclic fold on the full Hodge fiber.
+\end{proof}
+
+\begin{proposition}[Curvature rank is not connectivity]
+The condition $\det[T,S]\ne0$ does \emph{not} imply the hypothesis above; likewise nonvanishing of $[T,S]$ alone does not imply a complete orbit.
+\end{proposition}
+\begin{proof}
+On $W=\Q^4$ set $T=\operatorname{diag}(2,12,22,32)$ and
+\[
+ S_{\rm split}=\begin{pmatrix}
+ 0&1&0&0\\1&0&0&0\\0&0&0&1\\0&0&1&0
+ \end{pmatrix}.
+\]
+Then $\det[T,S_{\rm split}]=10000\ne0$, yet both operators preserve $\Q e_1+\Q e_2$ and $\Q e_3+\Q e_4$. A seed in the first sector cannot construct the second. In contrast the connected nearest-neighbor mixing
+\[
+ S_{\rm path}=\sum_{i=1}^{n-1}(E_{i+1,i}+E_{i,i+1})
+\]
+has a strongly connected curvature graph for every n, even when $[T,S_{\rm path}]$ has deficient rank (all odd $n>1$). The connected-source theorem applies with $S_{\rm path}$ after genuine geometric realization; an invertible commutator is neither necessary nor sufficient.
+\end{proof}
+
+\section{Direct GST information-space compiler and remaining geometric arrow}
+On the preexisting actual GST N-hole quotient
+\(C_s=\Q^{\mathrm{Fin}(s.\mathrm{holes})}\), take the already verified channel fold
+\(T_s v(i)=(2+\operatorname{channelShift}_s(i))v(i)\).
+The coefficients are distinct. Define the NEW nearest-neighbor \emph{information} coupling $B_s$ by
+\[
+ (B_s v)_i=
+ \sum_{j:\,|i-j|=1}v_j,
+ \qquad
+ ( [T_s,B_s]v)_i=\sum_{|i-j|=1}(\lambda_i-\lambda_j)v_j.
+ \tag{8}
+\]
+The right side is the exact GST spectral-curvature graph: each adjacent edge has nonzero coefficient, and the whole index path is connected.
+Using the existing right inverse \texttt{holeReadoutLift} of \texttt{holeReadout}, define a fully explicit \emph{formal information} lift
+\[
+ \mathcal B_s u=
+ \operatorname{holeReadoutLift}\bigl(B_s(\operatorname{holeReadout}u)\bigr).
+ \tag{9}
+\]
+The already proved GST identity \texttt{holeReadout\_lift} gives
+\(\operatorname{holeReadout}(\mathcal B_su)
+=B_s(\operatorname{holeReadout}u)\) exactly. This is a genuine new GST all-N signal construction, not a Hodge-algebraic claim.
+
+The theorem's universal original-X realization test is now \emph{precisely} whether there are two actual Chow correspondences on each prescribed $X$ whose canonical restriction to the rational Hodge fiber realizes $T_s$ and the \emph{connected} $B_s$ curvature. Neither the 12-cell source, the all-N formal channels, the infinite GST curvature tower nor the existing native compiler alone constructs those correspondences for arbitrary X. The geometric correspondence construction must not be replaced by an abstract equivariant isomorphism or an assumed Hodge basis of cycles.
+
+For all dimensions, no exceptional Picard-rank or CM-only stratum is inserted: $n$ is an observed Hodge-rank/number of channels. The all-N formal information compiler works uniformly; its canonical original-X algebraic realization is the active research question.
+
+\section{Exact computational certificate and scope}
+The committed Wolfram source \texttt{research/computations/gst_connected_curvature_spectral_birth_20261110.wl} checks the literal rational Lagrange projectors, connected paths, explicit synthesized one-fold shift and Hankel determinant for n=1,...,8, plus the connected-versus-block-split n=4 full-rank-commutator discriminator. These finite computations are \emph{checks} of equations (1)--(8), not a demonstration of universal Chow realization.
+
+\section{Full twelve-cell information curvature: no quotient-only substitution}
+The first coefficient operator (8) acts on the N-hole \emph{readout quotient}, whose
+kernel on the genuine twelve-cell signal carrier has dimension $11n$.
+To prevent quotient completeness from being passed off as full GST information
+completeness, construct an additional fold directly on
+\(\mathscr S_s=(\Q^{12})^n\), retaining EVERY original carry/trit cell.
+
+Let $T_0$ be the \emph{actual} original twelve-cell combined GST
+$U+J+M$ wave matrix, let \(D=\operatorname{diag}(10\operatorname{channel}(i))\),
+and let \(A_n\) be the nearest-neighbor adjacency matrix on N-hole labels.
+The preexisting shifted wave operator and the NEW full-cell source-preserving
+cross-hole coupling are exactly
+\[
+ \mathcal T_s=I_n\otimes T_0+D\otimes I_{12},\qquad
+ \mathcal B_s=A_n\otimes I_{12}.
+\]
+These are exact rational linear maps of the original \emph{all-cell} GST
+signal carrier, with no new physical dimension assumed. The exact
+noncommutative curvature equation is
+\[
+ \boxed{
+ [\mathcal T_s,\mathcal B_s]
+   =[D,A_n]\otimes I_{12}.
+ }\tag{10}
+\]
+Proof: the term $I_n\otimes T_0$ commutes with $A_n\otimes I_{12}$,
+while the scalar-shift term contributes precisely the commutator on
+the index factor. In coordinates,
+\[
+ ([\mathcal T_s,\mathcal B_s]u)_i(c)
+ =\sum_{j:|i-j|=1}10
+   (\operatorname{channel}(i)-\operatorname{channel}(j))u_j(c).
+\]
+Every original cell $c$ survives this operator and every information
+edge has nonzero rational weight. Because the original wave readout is
+linear, it induces exactly (8) on the N-hole quotient.
+
+The quotient-section coupling (9) \emph{kills} all $11n$ invisible
+directions, whereas $\mathcal B_s$ does not. An explicit detector-kernel
+state (nonzero equal entries in the two fixed cells, zero elsewhere)
+has vanishing readout but nonzero full-cell neighbor image. Wolfram
+independently checked (10) for a fully symbolic $3\times3$ base
+matrix and four unevenly shifted channels, obtaining a zero
+$12\times12$ difference and full curvature rank twelve. The equation
+holds for arbitrary $T_0$, arbitrary N and arbitrary injective GST
+channel shifts by the Kronecker-product proof.
+
+The full-cell operator still preserves the original fixed-cell versus
+five-cycle decomposition when paired only with U, J, and diagonal M;
+thus (10) does NOT establish irreducibility on all $12n$ coordinates.
+That issue is a different internal GST mixing requirement from the
+all-original-X Chow correspondence realization. Neither is silently
+identified with the Hodge conjecture.
+
+\end{document}

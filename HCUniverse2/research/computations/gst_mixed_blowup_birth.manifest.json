@@ -1,0 +1,112 @@
+{
+  "schema_version": 2,
+  "claim_id": "GST-MIXED-EXCEPTIONAL-UNIT-20261020",
+  "repository": {
+    "commit": "21046ba9acb036a9102b979bfeda826e9ab1b0e5",
+    "dirty": true
+  },
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "research/computations/gst_mixed_blowup_birth.py"
+  ],
+  "environment": {
+    "software": [
+      {
+        "name": "Python",
+        "version": "3.12.14"
+      }
+    ],
+    "hardware": "x86_64; Linux-6.18.55-x86_64-with-glibc2.39; host CPU model unrecorded"
+  },
+  "mathematics": {
+    "assertion_tested": "Complete rational first-world Gram, ample cup and mixed exceptional push for m=1..12; top-supported perfect character and Todd convolution; all words of arity 0..6 over m=1,2,3",
+    "coefficient_domain": "Q, exact Fraction arithmetic",
+    "conventions": "Exceptional lines convention xi^2+3h xi+2h^2=0; q_*xi=1; all cycle grades are complex codimensions; proper blowup exceptional sign (-1)^(codimension-1)",
+    "inputs": [
+      "research/computations/gst_mixed_blowup_birth.py",
+      "GSTQuadricPrimitiveRulingGeometry.lean",
+      "GSTUniversalResolvedSupportHodge.lean"
+    ],
+    "bounds": {
+      "m_inclusive": [
+        1,
+        12
+      ],
+      "cup_parameters": [
+        "3",
+        "7/2",
+        "4",
+        "9"
+      ],
+      "projector_grid_points": 1500,
+      "word_arity_inclusive": [
+        0,
+        6
+      ],
+      "words_visited": 1093,
+      "timeout_seconds": 30
+    },
+    "non_claims": [
+      "No rational Hodge counterexample",
+      "No construction of a native representative on every arbitrary original X",
+      "No finite scan promoted to an unrestricted theorem"
+    ]
+  },
+  "randomness": {
+    "used": false,
+    "generator": "not used",
+    "seed": null
+  },
+  "run": {
+    "started_at": "2026-10-20T07:30:30.694512+00:00",
+    "runtime_seconds": 2.189710861000094,
+    "exit_status": 0,
+    "status": "completed",
+    "resource_limits": {
+      "memory_bytes": null,
+      "cpu_seconds": null,
+      "max_cores": 1,
+      "max_threads": 1
+    }
+  },
+  "outputs": [
+    {
+      "path": "research/computations/gst_mixed_blowup_birth.output.json",
+      "sha256": "ae28676229574262a7bc7e378b3117ee4cd586eef3c7d01581484a8aab29e455",
+      "kind": "result"
+    }
+  ],
+  "checks": [
+    "Gram determinant and signed primitive norm agree in every visited dimension",
+    "Old push is zero; new mixed push is minus one; normalized detector is one",
+    "Entire integral projector matrix is idempotent; exact ample cup minor is (k-1)(k-2)",
+    "Full convolution verifies top-support and Todd cancellation for the specified perfect source",
+    "Every enumerated finite mixed word has normalized unit readout",
+    "All pinned input bytes unchanged during execution"
+  ],
+  "result": "The recorded exact finite assertions passed; unrestricted and geometric conclusions have separate proof/review scope.",
+  "residual_risks": [
+    "The Chow/Betti blowup dictionary is a geometric argument, not scheme construction by this Python script",
+    "Finite dimensions and words do not themselves prove unrestricted claims; separate Lean statements cover the unit and word identities"
+  ],
+  "input_artifacts": [
+    {
+      "path": "research/computations/gst_mixed_blowup_birth.py",
+      "sha256": "5ad44706d1de893ec2f15bfba3978da2fce9bf07972fede487cfae4d7e491ecd",
+      "sha256_after": "5ad44706d1de893ec2f15bfba3978da2fce9bf07972fede487cfae4d7e491ecd"
+    },
+    {
+      "path": "GSTQuadricPrimitiveRulingGeometry.lean",
+      "sha256": "5ba7e8e0e788bb291e02a9c89f2c9bc5eed53387ed9b6fbc98beec845652872a",
+      "sha256_after": "5ba7e8e0e788bb291e02a9c89f2c9bc5eed53387ed9b6fbc98beec845652872a"
+    },
+    {
+      "path": "GSTUniversalResolvedSupportHodge.lean",
+      "sha256": "860a5890303a5a8a54e684de1c4aa7a473847afe020f7f15f34c824612bff42e",
+      "sha256_after": "860a5890303a5a8a54e684de1c4aa7a473847afe020f7f15f34c824612bff42e"
+    }
+  ],
+  "declared_results": [
+    "research/computations/gst_mixed_blowup_birth.output.json"
+  ]
+}

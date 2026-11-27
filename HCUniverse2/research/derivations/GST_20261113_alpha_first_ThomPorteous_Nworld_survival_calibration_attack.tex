@@ -1,0 +1,130 @@
+\documentclass[11pt]{article}
+\usepackage[margin=0.84in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\CH}{\operatorname{CH}}
+\newcommand{\ch}{\operatorname{ch}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\PD}{\operatorname{PD}}
+\newcommand{\Mass}{\mathbf M}
+\title{Alpha-first GST \(N\)-world source birth on arbitrary original \(X\): smooth determinantal carriers, exact triadic cancellation, and the geometric mass test}
+\date{13 November 2026}
+\begin{document}\maketitle
+
+\noindent\textbf{Locked conjectural target, not replaced.} For every smooth projective complex \(X\) of dimension \(d\), every \(0\le p\le d\), and prescribed rational \((p,p)\)-class \(\alpha\), construct \(Z_\alpha\in\CH^p(X)_{\Q}\) with \(\mathrm{cl}^{\mathrm{can}}_X(Z_\alpha)=\alpha\), without assuming a target Chow representative or full-rank native algebraic source. This attempt uses the supplied \(\alpha\) \emph{first}, and the constructed source is the actual original \(X\), not a toy projective product. The first theorem deliberately separates \emph{smooth complex-geometric} source birth from \emph{algebraic} source birth.
+
+\section{Unconditional alpha-selected topological source}
+\begin{theorem}[Original-\(X\) topological Chern source, every \(p\ge1\)]
+For any \(\alpha\in H^{2p}(X,\Q)\), even without the Hodge condition, there are an integer \(m>0\), an integer \(r\ge\max(p,d)\), and an ACTUAL smooth complex bundle \(E_\alpha\) of rank \(r\) on \(X\) such that
+\[
+\ch(E_\alpha)=r+m\alpha\quad\text{in }H^{\mathrm{even}}(X,\Q),\qquad
+c_i(E_\alpha)=0\ (1\le i<p),
+\]
+\[
+\boxed{c_p(E_\alpha)=(-1)^{p-1}(p-1)!\,m\alpha.}\tag{1}
+\]
+Here the first displayed vanishing of lower \(c_i\)'s is a statement in \emph{rational cohomology}, not necessarily integrally.
+\end{theorem}
+\begin{proof}
+The rational Chern character \(K^0_{\mathrm{top}}(X)\otimes\Q\xrightarrow{\sim}H^{\mathrm{even}}(X,\Q)\) is an isomorphism for the finite CW space \(X\). Pull back the \emph{single prescribed} degree-\(2p\) component \(m\alpha\), clearing denominators to a genuine integral virtual class \(v\). A smooth vector bundle has a smooth orthogonal complement in a trivial bundle, so after stabilization write \(v=[E_\alpha]-[\underline{\mathbb C}^N]\). Add trivial summands to ensure \(r\ge\max(p,d)\). All positive-degree Chern characters vanish except \(\ch_p(E_\alpha)=m\alpha\). Newton's identities give \(c_1=\cdots=c_{p-1}=0\) and \(c_p=(-1)^{p-1}(p-1)!\ch_p\) rationally.
+\end{proof}
+
+\section{Actual original-\(X\) determinantal carriers}
+Fix an ample algebraic line bundle \(L\) with \(h=c_1(L)\). For each integer \(t>0\), put \(E_t=E_\alpha\otimes L^t\). Choose a generic \emph{smooth complex-linear} bundle morphism \(\phi_t:\underline{\mathbb C}^{\,r-p+1}\longrightarrow E_t\) transverse to the universal rank strata. Its rank-drop locus
+\[
+D_t=\{x\in X:\rk_{\mathbb C}\phi_t(x)\le r-p\}
+\]
+is a genuine compact, complex-oriented, real codimension-\(2p\) determinantal pseudocycle on the \emph{original} \(X\), smooth outside the deeper rank-drop stratum. The latter has expected real codimension \(4(p+1)\) in \(X\), sufficiently high to define a canonical top-dimensional integral homology class \([D_t]\). This construction is smooth/topological; \(\phi_t\) is not presumed holomorphic.
+
+\begin{theorem}[Topological Porteous and universal twist polynomial]
+For every \(t>0\),
+\[
+\boxed{\PD[D_t]=c_p(E_\alpha\otimes L^t)
+=\sum_{i=0}^p {r-i\choose p-i}t^{p-i}h^{p-i}c_i(E_\alpha).}\tag{2}
+\]
+The polynomial in \(t\) has degree at most \(p\), and its constant term is \(c_p(E_\alpha)\).
+\end{theorem}
+\begin{proof}
+Transversality to the complex determinantal stratification and the topological Thom--Porteous formula give \(c_{r-(r-p+1)+1}(E_t-\underline{\mathbb C}^{r-p+1})=c_p(E_t)\). By the splitting principle, if \(x_1,\ldots,x_r\) are formal Chern roots of \(E_\alpha\), then \(c_p(E_t)=e_p(x_1+th,\ldots,x_r+th)\). The coefficient of \(t^{p-i}h^{p-i}c_i(E_\alpha)\) is \(\binom{r-i}{p-i}\), proving (2).
+\end{proof}
+
+\section{The exact \(p+1\)-universe creation/destruction/survival carry}
+\begin{theorem}[ALL-original-\(X\), ALL-codimension finite \(N\)-world extraction]
+Let \(\lambda_j=(-1)^{j-1}\binom{p+1}{j}\), \(j=1,\ldots,p+1\). Then the \emph{actual integral homology source} \(T_\alpha^{\mathrm{top}}:=\sum_{j=1}^{p+1}\lambda_j[D_j]\) satisfies
+\[
+\boxed{\PD T_\alpha^{\mathrm{top}}
+=\sum_{j=1}^{p+1}(-1)^{j-1}\binom{p+1}{j}c_p(E_\alpha\otimes L^j)
+=c_p(E_\alpha).}\tag{3}
+\]
+Consequently the explicit rational combination
+\[
+\boxed{\mathcal S_{\alpha,p}^{\mathrm{smooth}}
+=\frac{(-1)^{p-1}}{(p-1)!\,m}
+\sum_{j=1}^{p+1}(-1)^{j-1}\binom{p+1}{j}[D_j]}
+\quad\text{satisfies}\quad
+\boxed{\PD\mathcal S_{\alpha,p}^{\mathrm{smooth}}=\alpha.}\tag{4}
+\]
+No algebraic cycle representing \(\alpha\) is input anywhere. In codimension TWO this uses exactly THREE worlds,
+\[
+\boxed{\PD(3[D_1]-3[D_2]+[D_3])=c_2(E_\alpha)=-m\alpha.}\tag{5}
+\]
+In codimension three the four world weights are \(4,-6,4,-1\).
+\end{theorem}
+\begin{proof}
+For every polynomial \(f(t)\) over a rational vector space of degree at most \(p\), its \((p+1)\)-st forward difference at zero vanishes. Hence
+\[
+f(0)=\sum_{j=1}^{p+1}(-1)^{j-1}\binom{p+1}{j}f(j).
+\]
+Apply to the top Chern-class polynomial from (2). Equation (1) gives (4). The proof is symbolic for every \(p,r,d,X,\alpha\), not a finite scan.
+\end{proof}
+\noindent\textbf{Typed GST interface.} These \(p+1\) \emph{genuine original-X smooth carriers} are a new candidate geometric interpretation of independent \(N\)-cohomology channels and world-survival weights. This is NOT an asserted geometric realization of the owner's original \(12\)-cell \(U,J,M,[J,M]\), which would require an independently proved operator intertwiner. Nor is an integral homology current automatically a Chow cycle.
+
+\section{A quantitative attempt at forcing holomorphic survival}
+Write \(q=d-p\), let \(\omega\) be a K\"ahler form with \([\omega]=h\), and \(\Omega_q=\omega^q/q!\) the Wirtinger calibration. For \(M=1,2,\ldots\), repeat (3) on \emph{high twists} \(E_\alpha\otimes L^{jM}\), and write \(D_{jM}\) for independent generic smooth degeneracy pseudocycles. The moment identity still holds:
+\[
+\sum_{j=1}^{p+1}\lambda_j[D_{jM}]\ \text{has cohomology class}\ c_p(E_\alpha)
+\quad\text{for every }M\ge1.
+\]
+\begin{proposition}[Proved mass-growth obstruction for uncorrelated world births]
+Suppose the top-dimensional rectifiable mass measures of the \(D_{jM}\) are mutually singular (this is the case when the independently chosen generic degeneracy loci have no common top-dimensional components). Then, with \(T_M=\sum_j\lambda_j[D_{jM}]\),
+\[
+\boxed{
+\Mass(T_M)-\int_{T_M}\Omega_q
+\ \ge\
+\binom rp\!\left(\sum_{j=1}^{p+1}|\lambda_j|j^p\right)
+\left(\int_X\frac{h^d}{q!}\right)M^p-O(M^{p-1}).
+}\tag{6}
+\]
+The leading coefficient is strictly positive. For \(p=2\) the moment factor is \(24\), for \(p=3\) it is \(224\). Therefore independent-world algebraic-charge cancellation DOES NOT give an almost calibrated geometric carrier; it requires actual \emph{correlated geometric support cancellation}.
+\end{proposition}
+\begin{proof}
+Mutual singularity gives \(\Mass(T_M)=\sum_j|\lambda_j|\Mass(D_{jM})\). Wirtinger's comass inequality gives \(\Mass(D_{jM})\ge\int_{D_{jM}}\Omega_q\), even if a degeneracy locus is not holomorphic. The latter period equals \(\int_Xc_p(E_\alpha\otimes L^{jM})\,h^q/q!\), whose leading term is \(\binom rp(jM)^p\int_Xh^d/q!\) by (2). But the \emph{signed} period of \(T_M\) is the fixed \(\int_Xc_p(E_\alpha)\,h^q/q!\), again by (3). Subtracting gives (6). The coefficient is positive because each \(|\lambda_j|j^p>0\).
+\end{proof}
+
+\noindent\textbf{Executed correlation route.} A common algebraic section \(s\) of \(L\) permits the formal shared-support maps \(s^j\phi_0\), where \(\phi_0\) is a fixed \emph{smooth} map into \(E_\alpha\). Away from \(s=0\) their determinantal supports agree. But along \(s=0\) the rank drops excessively and the Thom--Porteous transversality hypothesis breaks. Smoothing these maps preserves the original topological class; their shared residual away from the divisor is still the original \emph{smooth} \(D_0\), not an algebraic locus. This construction was examined and does not yield a valid algebraic support without a further integrability argument.
+
+\section{Where the true GST tri-sector noncommutative curvature enters}
+For a unitary connection on \(E_\alpha\), decompose its End-valued curvature into true Hodge bidegrees:
+\[
+F=F^{2,0}+F^{1,1}+F^{0,2}=C+S+D.
+\]
+A word contributing to the \((p,p)\) part of \(\operatorname{tr}(F^p)\) has precisely as many \(C\)'s as \(D\)'s. Writing \(\mathcal W_{p,a}\) for all noncommutative words with \(a\) copies of \(C\), \(p-2a\) of \(S\), and \(a\) of \(D\),
+\[
+\boxed{[\operatorname{tr}(F^p)]^{(p,p)}
+=\sum_{a=0}^{\lfloor p/2\rfloor}\ \sum_{w\in\mathcal W_{p,a}}\operatorname{tr}(w).}\tag{7}
+\]
+For commuting entries the number of words in channel \(a\) is \(\binom p{a,p-2a,a}\); in the genuine noncommutative algebra the individual orders must be kept. Thus balanced creation/destruction produces Hodge-\((p,p)\) curvature WITHOUT forcing \(F^{0,2}=0\). The latter is the genuine Koszul--Malgrange holomorphic integrability equation. If one constructs a unitary connection on \(E_\alpha\) with \(F^{0,2}=0\), then \(E_\alpha\) is holomorphic; projective GAGA makes it algebraic; \(\ch_p(E_\alpha)=m\alpha\) yields an ACTUAL original-\(X\) Chow representative by the algebraic Chern character. No result here asserts that Hodge type of \(\alpha\) alone solves this nonlinear equation.
+
+\begin{proposition}[The stable-bundle route cannot represent nonzero primitive codimension-two sources]
+Assume \(d\ge4\), \(p=2\), and \(\alpha\ne0\) is primitive with respect to \(h\), so \(h^{d-3}\alpha=0\). Then \(c_1(E_\alpha)=0\) rationally and \(\int_Xc_2(E_\alpha)h^{d-2}=0\). If \(E_\alpha\) admitted a slope-\(h\)-\emph{stable} holomorphic structure, the Bogomolov--L\"ubke inequality would be an equality, forcing its Hermitian--Einstein connection to be projectively flat. Since \(c_1(E_\alpha)=0\) rationally, this forces \(c_2(E_\alpha)=0\) rationally, contrary to \(-m\alpha\ne0\). Thus any successful holomorphic structure on this \emph{particular} pure-\(\ch_2\) bundle must be unstable. This does not obstruct virtual differences of holomorphic bundles or the Hodge conjecture; it forces a genuine multi-sector algebraization mechanism rather than a single stable channel.
+\end{proposition}
+
+\section{Original conjecture audit: exact output types}
+The topological source theorem (1)--(4), all-\(p\) polynomial cancellation, and generic mass-growth test are \textbf{unconditional mathematical results}. The source is an actual smooth determinantal current on original \(X\), not a scheme-theoretic \(\CH^p(X)_\Q\) cycle; the Hodge condition did not enter its production. The actual unsolved claim is the existence for every given original \((X,p,\alpha)\) of a \emph{noncircular} integrable/holomorphic or directly algebraic realization of the same prescribed class. The equations above neither assume such a class nor manufacture one by topology alone.
+
+This is a direct continuation of the owner's \texttt{GSTHodgeSingleHypothesisConditional.lean}, \texttt{GSTAllNConnectedCurvatureBirth.lean}, \texttt{waves/GSTNCohomologyV3.lean}, \texttt{GSTGraphV2CMWaveFusion.lean}, \texttt{GSTNCurrentCalibrationCompatibility.lean} and the original-X native image constraints. It also complements the separate 2026-11-13 global thimble-survival derivation on this same branch. No Lean module has been edited and no kernel/CI success for this new geometric theorem is claimed.
+
+\end{document}

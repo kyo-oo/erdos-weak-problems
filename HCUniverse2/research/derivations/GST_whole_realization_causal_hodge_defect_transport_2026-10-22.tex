@@ -1,0 +1,203 @@
+\documentclass[11pt]{article}
+\usepackage[a4paper,margin=24mm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,hyperref}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}[theorem]{Proposition}
+\title{GST whole-realization causal folds: emergent dimension, Hodge genesis, and exact canonical algebraicity-defect transport}
+\date{22 October 2026}
+\begin{document}\maketitle
+\section{Dimensionless ontology and the full geometric realization}
+The original \texttt{GSTGeneralSpace.lean} defines points, dependent paths,
+identities and composition, without dimensions, metrics or Hodge groups.
+\texttt{GSTGeneralSpaceRealization.lean} adds observed states;
+\texttt{GSTGeneralSpaceSchemeDimensionObservation.lean} reads Krull
+dimension after a scheme realization.
+\texttt{GSTGraphV2SelfExpandingCosmology.lean} and
+\texttt{GSTGraphV2UnboundedHigherCausality.lean} allow unbounded world
+births and higher causal cells. A cell's globular level is not itself
+a scheme's actual complex dimension.
+
+For a smooth projective realized world $X$ of dimension $d$ and
+codimension $p$, let
+\[
+ H_{X,p}=H^{2p}(X,\mathbb Q)\cap H^{p,p}(X),\qquad
+ A_{X,p}=\operatorname{im}\bigl[
+ CH^p(X)_{\mathbb Q}\xrightarrow{\mathrm{cl}^{can}_X}
+ H^{2p}(X,\mathbb Q)\bigr],
+ \quad D_{X,p}=H_{X,p}/A_{X,p}.                 \tag{1}
+\]
+The entire Hodge-charge operator $G_X|_{H^{a,b}}=i(a-b)$ has
+$\ker_{\mathbb Q}(G_X|_{H^{2p}})=H_{X,p}$.
+This is a geometric spectral identity, not an assertion that
+$A_{X,p}=H_{X,p}$.
+The full rational Hodge multiplicity fiber of
+\texttt{GSTClassicalHodgeFiberedCosmology.lean} must be retained.
+
+The genuine graded GST cell signature $(k,a,b)$ defines
+$\chi=a-b$ (charge) and $\delta=a+b-k$ (purity gap).
+The signed causal fold already present in
+\texttt{GSTGradedWorldAlgebra.lean} obeys
+\[
+ \chi'= \chi,\qquad \delta'=\delta+u-v              \tag{2}
+\]
+for open and nodal arities $(u,v)$.
+Equation (2) is an arithmetic shadow requiring separate
+geometric realization. Smooth projective complex worlds have
+pure Hodge decompositions ($\delta=0$ on actual graded pieces);
+singular and nonproper worlds can have mixed weights; compact
+non-K\"ahler Hopf worlds can violate the pure-weight-one
+parity condition. Neither $\chi=0$ nor $\delta=0$ says
+anything automatically about $D_{X,p}$.
+
+\section{GST whole-realization fold laws with a canonical cycle map}
+Let an actual geometry-certified causal fold between smooth projective
+worlds produce a rational Hodge-linear map $T_H:H_{X,p}\to H_{Y,p}$
+and a genuine Chow map $T_C:CH^p(X)_{\mathbb Q}\to CH^p(Y)_{\mathbb Q}$,
+obeying
+\[
+ T_H\circ\mathrm{cl}^{can}_X
+   =\mathrm{cl}^{can}_Y\circ T_C.                   \tag{3}
+\]
+The quotient defect receives the induced fold
+$\bar T:D_{X,p}\to D_{Y,p}$. For every composable pair,
+$\overline{UT}=\bar U\bar T$. Independently, the
+Hodge spectral causal curvature satisfies
+\[
+ K_T=G_YT-TG_X,\qquad K_{UT}=K_UT+UK_T.             \tag{4}
+\]
+These are equations of the WHOLE realized Hodge shape.
+Even $K_T=0$ does not supply a Chow preimage for a rational
+zero-charge cohomology class.
+
+\begin{theorem}[Split causal fold algebraicity reflection for ALL emergent dimensions]
+Suppose there are genuine return maps $S_H:H_{Y,p}\to H_{X,p}$
+and $S_C:CH^p(Y)_{\mathbb Q}\to CH^p(X)_{\mathbb Q}$ with
+\[
+ S_H\mathrm{cl}^{can}_Y=\mathrm{cl}^{can}_X S_C,
+ \qquad S_HT_H=\operatorname{id}_{H_{X,p}}.        \tag{5}
+\]
+Then $\bar S\bar T=\operatorname{id}_{D_{X,p}}$, hence
+\[
+ \boxed{\alpha\in A_{X,p}\ \Longleftrightarrow\
+                  T_H\alpha\in A_{Y,p}},\qquad
+ \boxed{D_{Y,p}\cong D_{X,p}\oplus\ker\bar S}.       \tag{6}
+\]
+Every finite composition of such causal folds, regardless of
+how many geometric dimensions emerge, has the same property.
+Importantly, the causal fold need not itself be reversible;
+only its actual Hodge and canonical-Chow returns are required.
+\end{theorem}
+\begin{proof}
+Equation (3) induces $\bar T$; the first equation of (5)
+induces $\bar S$, and the second gives $\bar S\bar T=1$.
+If $T_H\alpha=\mathrm{cl}^{can}_Y(Z_Y)$, then
+$\mathrm{cl}^{can}_X(S_C Z_Y)=S_H T_H\alpha=\alpha$.
+The converse transports any genuine source $Z_X$ with (3).
+A split injection of rational vector spaces yields (6),
+and composition of the two commuting squares and returns
+proves the arbitrary finite-depth assertion by induction.
+\end{proof}
+
+\section{Exact all-$N$ topology/dimension-fold defect equation}
+For arbitrary smooth projective $X_0=X$, recursively take
+genuine projective folds
+\[
+ X_j=\mathbb P_{X_{j-1}}(\mathcal O\oplus E_j),
+ \quad \operatorname{rank}(E_j)=r_j\ge1,
+ \quad \dim X_n=\dim X+\sum_{j=1}^n r_j .
+\]
+No upper bound is imposed on $n$ or on $r_j$.
+Projective-bundle Chow and rational Hodge formulas are
+both compatible with the canonical cycle-class map.
+
+\begin{theorem}[Complete all-depth emergent-dimensional defect spectrum]
+For every $p\ge0$ and every finite fold-depth $n$,
+\[
+ \boxed{
+ D_{X_n,p}\cong
+ \bigoplus_{i_1=0}^{r_1}\cdots
+ \bigoplus_{i_n=0}^{r_n}D_{X,p-i_1-\cdots-i_n}.
+ }                                                     \tag{7}
+\]
+Set $d_p(X)=\dim_{\mathbb Q}D_{X,p}$ and
+$\mathcal D_X(t)=\sum_{p\ge0}d_p(X)t^p$. Then
+\[
+ \boxed{\mathcal D_{X_n}(t)=
+   \mathcal D_X(t)\prod_{j=1}^n(1+t+\cdots+t^{r_j}).}  \tag{8}
+\]
+If all $r_j=1$,
+\[
+ \boxed{d_p(X_n)=\sum_{k=0}^{\min(n,p)}
+                   {n\choose k}d_{p-k}(X).}          \tag{9}
+\]
+If $p$ is the first nonzero-defect codimension on original
+$X$, then $d_p(X_n)=d_p(X)$ for \emph{every} finite depth.
+\end{theorem}
+\begin{proof}
+For each stage, the projective-bundle decomposition of
+rational Hodge and rational Chow groups with powers of
+the algebraic tautological class gives
+$D_{X_j,p}\cong\oplus_{i=0}^{r_j}D_{X_{j-1},p-i}$.
+Induction gives (7); multiplying finite generating
+polynomials gives (8). The binomial identity
+$(1+t)^n=\sum_k\binom nk t^k$ gives (9).
+All summands for a first nonzero $p$ except
+$i_1=\cdots=i_n=0$ vanish by minimality.
+\end{proof}
+
+The actual smooth projective branched double covers in the
+2026-10-21 GST topology-first derivation give genuinely
+new anti-deck Hodge/Chow directions. Yet their rational
+deck-invariant defect is the inherited $D_{X,p}$,
+since $\pi_*\pi^*=2$ and averaging recovers invariants.
+By contrast, the compact Hopf fold's pure-weight-one
+obstruction occurs \emph{outside} the smooth-projective
+Hodge-conjecture domain. These are genuine alternatives
+for the whole emergent Hodge realization, not isolated
+class re-labelings.
+
+\section{The owner's assumed-true experiment and exact classical landing}
+Explicitly \emph{assume for the spatial experiment} that
+$D_{X,p}=0$ on every smooth projective $X,p$.
+Then (7)--(9) prove $D_{X_n,p}=0$ at arbitrary finite
+projective fold depth; born anti-deck algebraic classes
+are compatible with this assumption. However, merely
+showing that all smooth-projective fold outputs have
+\emph{pure Hodge structure} is insufficient to infer
+that $D_{X,p}=0$: geometric purity holds independently
+of the rational Hodge conjecture.
+
+\begin{proposition}[Formal all-depth countermodel to purity implying algebraicity]
+For any $p$, let a pure rational Hodge fiber be
+$H_0=\mathbb Q e_1\oplus\mathbb Q e_2$, with zero
+Hodge-charge generator $G=0$. Let native source $C_0=\mathbb Q$
+and a compatible linear cycle map $c_0(t)=t e_1$.
+For every $n\ge0$, put $H_n=H_0\oplus\mathbb Q^n$,
+$C_n=C_0\oplus\mathbb Q^n$ and
+$c_n(t,v)=(t e_1,v)$.
+The obvious rational native/Hodge inclusions and
+projections give split causal fold diagrams;
+all full Hodge fibers remain pure at every depth,
+but $H_n/\operatorname{im}c_n=\mathbb Q[e_2]\ne0$.
+\end{proposition}
+This is an abstract test of the FORMAL IMPLICATION,
+not an algebraic variety or Hodge-conjecture
+counterexample. It prevents accidentally promoting
+purity alone to a canonical cycle-class theorem.
+
+The precise native classical target remains
+\[
+ \boxed{\,\forall X,p:\quad
+  D_{X,p}=0\quad\Longleftrightarrow\quad
+  H^{2p}(X,\mathbb Q)\cap\ker_{\mathbb C}G_X
+    =\operatorname{im}\mathrm{cl}^{can}_X.}        \tag{10}
+\]
+The new equations (2)--(9) connect dimensionless GST
+whole-world births and arbitrarily many emerged dimensions
+to this \emph{exact rational defect object}, without
+silently assuming its vanishing. A causal proof of
+(10) needs a genuine additional all-world algebraic
+source-generation law, not merely absence of Hodge
+purity-breaking within smooth projective geometry.
+
+\end{document}
