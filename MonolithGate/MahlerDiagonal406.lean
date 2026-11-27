@@ -113,7 +113,9 @@ theorem digit_shift_below (σ W p : Nat) (hp : 1 ≤ p) (hpσ : p ≤ σ) :
       rw [← h2]
       congr 1
       omega
-    exact Nat.eq_of_mul_eq_mul_left (by positivity) (hk.symm.trans h1.symm)
+    have h3p : (0:Nat) < 3^p := by positivity
+    exact Nat.eq_of_mul_eq_mul_left (ne_of_gt h3p)
+      (hk.symm.trans h1.symm)
   have hsplit : 1 + 3^(σ+1) * W = 1 + 3^p * (k * W) := by rw [hk]; ring
   have hdiv2 : (1 + 3^p * (k * W)) / 3^p = k * W := by
     rw [Nat.add_mul_div_left _ _ (by positivity : (0:Nat) < 3^p)]
@@ -149,17 +151,17 @@ theorem digit_shift_at (σ W j : Nat) :
     omega
   have hmul : 3^(σ+1) * W
       = 3^(σ+1+j) * (W / 3^j) + 3^(σ+1) * (W % 3^j) := by
-    rw [hsplit, Nat.mul_assoc, hpow]
-    ring
+    linear_combination (3:Nat)^(σ+1) * hsplit + hpow * (W / 3^j)
   have hlt : 1 + 3^(σ+1) * (W % 3^j) < 3^(σ+1+j) := by
     have h1 : 3^(σ+1) * (W % 3^j) ≤ 3^(σ+1) * (3^j - 1) :=
       Nat.mul_le_mul_left _ (by omega)
-    have h4 : 3^(σ+1) * (3^j - 1) + 1 < 3^(σ+1) * 3^j := by
+    have h4 : 3^(σ+1) * (3^j - 1) + 1 < 3^(σ+1+j) := by
       have hpos : (0:Nat) < 3^(σ+1) := by positivity
       have hltj : 3^j - 1 < 3^j := by omega
-      have hm := Nat.mul_lt_mul_of_pos_left hltj hpos
+      have hm : 3^(σ+1) * (3^j - 1) < 3^(σ+1) * 3^j :=
+        Nat.mul_lt_mul_of_pos_left hltj hpos
+      rw [← hpow]
       omega
-    rw [hpow] at h4
     omega
   have hdiv : (1 + 3^(σ+1) * (W % 3^j) + 3^(σ+1+j) * (W / 3^j)) / 3^(σ+1+j)
       = W / 3^j := by
@@ -242,38 +244,38 @@ theorem fire_of_frontier_or_cascade
       ∃ p : Nat, 1 ≤ p ∧ digit3 (4 ^ K) p = 2)
     (K : Nat) (hK : 8 ≤ K)
     (hfront : WindowFire406.erdos_406_sharp_frontier_class K) :
-    K % 9 = 7 ∨ K % 27 = 19 ∨ K % 27 = 22 ∨ K % 27 = 25 ∨
-      K % 81 = 55 ∨ K % 81 = 58 ∨ K % 81 = 64 ∨ K % 81 = 67 ∨
-      K % 81 = 73 ∨ K % 81 = 76 ∨
-      ∃ p : Nat, 1 ≤ p ∧ digit3 (4 ^ K) p = 2 := by
+    ∃ p : Nat, 1 ≤ p ∧ digit3 (4 ^ K) p = 2 := by
   by_cases h9 : K % 9 = 7
-  · exact Or.inl h9
-  · by_cases h19 : K % 27 = 19
-    · exact Or.inr (Or.inl h19)
-    · by_cases h22 : K % 27 = 22
-      · exact Or.inr (Or.inr (Or.inl h22))
-      · by_cases h25 : K % 27 = 25
-        · exact Or.inr (Or.inr (Or.inr (Or.inl h25)))
-        · by_cases h55 : K % 81 = 55
-          · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h55))))
-          · by_cases h58 : K % 81 = 58
-            · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h58)))))
-            · by_cases h64 : K % 81 = 64
-              · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
-                  (Or.inl h64))))))
-              · by_cases h67 : K % 81 = 67
-                · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
-                    (Or.inr (Or.inl h67)))))))
-                · by_cases h73 : K % 81 = 73
-                  · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
-                      (Or.inr (Or.inr (Or.inl h73))))))))
-                  · by_cases h76 : K % 81 = 76
-                    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
-                        (Or.inr (Or.inr (Or.inr h76))))))))
-                    · exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr
-                        (Or.inr (Or.inr (Or.inr (Or.inr
-                          (hsharp K hK hfront h9 ⟨h19, h22, h25⟩
-                            ⟨h55, h58, h64, h67, h73, h76⟩)))))))))
+  · exact ⟨2, by omega, GSTClimbInfiniteFamily.dust_fire_row_two K h9⟩
+  · by_cases h3 : K % 27 = 19 ∨ K % 27 = 22 ∨ K % 27 = 25
+    · rcases h3 with h19 | h22 | h25
+      · exact ⟨3, by omega,
+          GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inl h19)⟩
+      · exact ⟨3, by omega,
+          GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inl h22))⟩
+      · exact ⟨3, by omega,
+          GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inr h25))⟩
+    · push_neg at h3
+      obtain ⟨h19, h22, h25⟩ := h3
+      by_cases h4 : K % 81 = 55 ∨ K % 81 = 58 ∨ K % 81 = 64 ∨
+          K % 81 = 67 ∨ K % 81 = 73 ∨ K % 81 = 76
+      · rcases h4 with h55 | h58 | h64 | h67 | h73 | h76
+        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+            (Or.inl h55)⟩
+        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+            (Or.inr (Or.inl h58))⟩
+        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+            (Or.inr (Or.inr (Or.inl h64)))⟩
+        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+            (Or.inr (Or.inr (Or.inr (Or.inl h67))))⟩
+        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+            (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h73)))))⟩
+        · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
+            (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h76)))))⟩
+      · push_neg at h4
+        obtain ⟨h55, h58, h64, h67, h73, h76⟩ := h4
+        exact hsharp K hK hfront h9 ⟨h19, h22, h25⟩
+          ⟨h55, h58, h64, h67, h73, h76⟩
 
 /-- **THE CORRECTED SHARP REDUCTION LAW (the full cascade credit).**  The
 full even-exponent verdict needs the sharp-frontier fire premise only
@@ -293,28 +295,7 @@ theorem even_conjecture_of_sharp_frontier_minus_cascade
     ∀ K : Nat, 8 ≤ K → noTernaryTwo (4 ^ K) = false := by
   refine WindowFire406.erdos_406_even_conjecture_of_sharp_frontier_fires ?_
   intro K hK hfront
-  rcases fire_of_frontier_or_cascade hsharp K hK hfront with
-    h7 | h19 | h22 | h25 | h55 | h58 | h64 | h67 | h73 | h76 | hfire
-  · exact ⟨2, by omega, GSTClimbInfiniteFamily.dust_fire_row_two K h7⟩
-  · exact ⟨3, by omega,
-      GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inl h19)⟩
-  · exact ⟨3, by omega,
-      GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inl h22))⟩
-  · exact ⟨3, by omega,
-      GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inr h25))⟩
-  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-      (Or.inl h55)⟩
-  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-      (Or.inr (Or.inl h58))⟩
-  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-      (Or.inr (Or.inr (Or.inl h64)))⟩
-  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-      (Or.inr (Or.inr (Or.inr (Or.inl h67))))⟩
-  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-      (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h73)))))⟩
-  · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-      (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h76)))))⟩
-  · exact hfire
+  exact fire_of_frontier_or_cascade hsharp K hK hfront
 
 /-- **The corrected full-verdict equivalence (the cascade credit).** -/
 theorem full_verdict_iff_sharp_frontier_minus_cascade :
@@ -333,28 +314,7 @@ theorem full_verdict_iff_sharp_frontier_minus_cascade :
   · intro hsharp
     refine WindowFire406.erdos_406_full_verdict_iff_sharp_frontier_fires.mpr ?_
     intro K hK hfront
-    rcases fire_of_frontier_or_cascade hsharp K hK hfront with
-      h7 | h19 | h22 | h25 | h55 | h58 | h64 | h67 | h73 | h76 | hfire
-    · exact ⟨2, by omega, GSTClimbInfiniteFamily.dust_fire_row_two K h7⟩
-    · exact ⟨3, by omega,
-        GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inl h19)⟩
-    · exact ⟨3, by omega,
-        GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inl h22))⟩
-    · exact ⟨3, by omega,
-        GSTClimbInfiniteFamily.dust_fire_row_three K (Or.inr (Or.inr h25))⟩
-    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-        (Or.inl h55)⟩
-    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-        (Or.inr (Or.inl h58))⟩
-    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-        (Or.inr (Or.inr (Or.inl h64)))⟩
-    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-        (Or.inr (Or.inr (Or.inr (Or.inl h67))))⟩
-    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-        (Or.inr (Or.inr (Or.inr (Or.inr (Or.inl h73)))))⟩
-    · exact ⟨4, by omega, GSTClimbInfiniteFamily.dust_fire_row_four K
-        (Or.inr (Or.inr (Or.inr (Or.inr (Or.inr h76)))))⟩
-    · exact hfire
+    exact fire_of_frontier_or_cascade hsharp K hK hfront
 
 /-! ## §3 THE MAHLER DIAGONAL TRAJECTORY LAW -/
 
@@ -381,7 +341,10 @@ theorem c_not_three (n : Nat) : ¬ 3 ∣ GSTTowerFire.c n := by
         exact ⟨m * (GSTTowerFire.c n * GSTTowerFire.c n
           + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n)),
           by rw [hm]; ring⟩
-      rw [hstep, Nat.add_mod, (Nat.dvd_iff_mod_eq_zero _ _).mp hcorr] at hdiv
+      have hcorr0 : (3^(n+1) * (GSTTowerFire.c n * GSTTowerFire.c n
+          + 3^n * (GSTTowerFire.c n * GSTTowerFire.c n * GSTTowerFire.c n))) % 3 = 0 :=
+        (Nat.dvd_iff_mod_eq_zero _ _).mp hcorr
+      rw [hstep, Nat.add_mod, hcorr0] at hdiv
       omega
 
 /-- **THE TOWER STEP LAW.**  The step of the tower coefficient carries
@@ -500,9 +463,9 @@ theorem step_above (a u s : Nat) (hu : ¬ 3 ∣ u)
   rw [hsplit] at hk
   have hcan : (3:ℤ)^(s+1) * (3 * k)
       = (3:ℤ)^(s+1) * (3 * dhat + 2 * (u:ℤ) * E) := by
-    linear_combination hk
+    linear_combination -hk
   have h3B : (3:ℤ) ∣ (3 * dhat + 2 * (u:ℤ) * E) :=
-    ⟨k, cancel_pow_three hcan⟩
+    ⟨k, (cancel_pow_three hcan).symm⟩
   exact hBmod (Int.dvd_iff_emod_eq_zero.mp h3B)
 
 /-- **The frozen step law.**  Below the diagonal the valuation freezes:
@@ -572,7 +535,7 @@ theorem exists_val : ∀ (n : Nat) (x : ℤ), x.natAbs = n → x ≠ 0 →
         have hypos : 0 < y.natAbs := Int.natAbs_pos.mpr hy0
         rw [← hx, hy, habs]
         omega
-      obtain ⟨t, ht0, ht1⟩ := ih y.natAbs hny hy0
+      obtain ⟨t, ht0, ht1⟩ := ih y.natAbs hny y rfl hy0
       refine ⟨t+1, ?_, ?_⟩
       · rw [hy, pow_succ_three]
         exact mul_dvd_mul_left 3 ht0
@@ -635,7 +598,7 @@ theorem fracture_of_frozen (a u : Nat)
   rw [hsplit] at hk
   have hcan : (3:ℤ)^(max S S₀ + 1) * ((3:ℤ)^(t+1) * k)
       = (3:ℤ)^(max S S₀ + 1) * D a u (max S S₀) := by
-    linear_combination hk
+    linear_combination -hk
   exact (hf (max S S₀) (le_max_right _ _)).2
     ⟨k, (cancel_pow_three hcan).symm⟩
 
