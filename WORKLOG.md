@@ -5602,3 +5602,31 @@ starts warm at the tail — the ratchet converges. All 8 + 11 receipt gates and
 both negative gates are byte-identical to the fleet versions.
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## S091 — THE ENGINE LANE: THE MEASUREMENT CHAIN (round record)
+
+BOSS's order: the last two red fleet jobs die. Round executed as S091 (this session)
+in parallel with the S090 v6 windowfire session (convergent, coordinated by push):
+
+| push | verdict |
+|---|---|
+| 7994a83 (S091 transplant) | engine/final REMOVED from the 37-job pool; dedicated engine406.yml carrier born: the redundant 9-file re-elaboration loop deleted (its receipts already surface in the lake build output — proven in four artifact logs), the receipt-force law (the receipt-target modules' oleans deleted pre-build so warm caches cannot starve the gates), the zram shield, the 7200s budget wrapper, the chain-cache ratchet. First attempt (run 45878012533): the full closure banked GREEN with zero errors ("[8792/8793] Built GSTWorldtraceArithmetic (718s)"), LevelNine reaped at the 5400s line — the ratchet engaged. |
+| d85be14 (budget 7200) | run 45890285030: "error: unknown short option '-j'" (S091 fix 2's flag — killed in 2 min). |
+| c57bfb8 (parallel session) | the flag-free per-chamber serial ladder + the 13 GB RSS guard (their fold). |
+| dbf0092 (parallel session) | THE BASE BOMB DEFUSED: TailAssault406B's quadratic kernel decide → the linear certificate. |
+| 84f98c2 (S091 fix 5) | run 45890966440: the ladder's first complete pass — 8/9 chambers GREEN (the defused bomb works, GSTWorldtraceArithmetic green in the ladder), and LevelNine's FIRST TRUE FIRST-EXPOSURE DEFECT surfaced: the 128-case Or assembly's last case (Or.inl h127 → bare h127, the innermost disjunct). FIXED. |
+| 967686c (S091 fix 6) | run 45896152381: THE FIX PROVEN — zero type errors; the elaboration climbed 12.5 → 13.2 GB and the 13 GB guard struck LEGITIMATE work. The guard raised 13.0 → 15.5 GB (just below the OOM cliff; zram absorbs spikes). |
+| c3097fc (S091 fix 7) | run 45901579365: the guard held (zero strikes), the RSS telemetry showed a STABLE 13.7 GB plateau for 40+ minutes, and the 7200s budget reaped a CLEAN elaboration at 103 min (rc=143, zero errors). THE MEASUREMENT: LevelNine's fixed elaboration is a long clean single-process kernel-decide run needing >103 min. The budget raised 7200 → 10200s, timeout-minutes 300. Run 45914489318 in flight. |
+
+**THE STATE AT RECORD TIME:** the fleet is ALL 36 JOBS GREEN twice (runs 45892357567,
+45896152360); the engine pair is the last red pair on the campaign; its chain is
+green through module 8792 + the fixed LevelNine elaborating clean; the remaining
+unknown is a single duration (LevelNine's total elaboration time vs the 170-min
+window). THE NAMED NEXT FRONT (if the window still falls short): the module's
+content repair — the TailAssault406B disease family (the long single-process
+kernel-decide walk) with its proven cure (the linear certificate / native
+pipeline per the S089 laws).
+
+The engine never stops; it never lies. In English, always.
