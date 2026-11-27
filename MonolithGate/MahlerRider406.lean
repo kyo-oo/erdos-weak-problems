@@ -21,10 +21,10 @@ no external inputs):
 
 Every rider rides from depth ZERO: if `3^(s+1) ∣ D a u s` holds for all
 `s ≥ S₀`, then it holds for EVERY `s` — including all `s < S₀`.  The
-coherent tower (the green stabilization law `c_stable`, through the
-cumulative form `c_diff_dvd`) pulls the divisibility back through the
-entry depth.  A rider cannot appear late: the trajectory either rides
-the whole diagonal or never rides it.
+coherent tower (the green stabilization law `GSTGhostRay.c_stable`,
+through the cumulative form `c_diff_dvd`) pulls the divisibility back
+through the entry depth.  A rider cannot appear late: the trajectory
+either rides the whole diagonal or never rides it.
 
 ## §2 THE RIDER-CLASS COLLAPSE (at most ONE rider per head)
 
@@ -61,11 +61,17 @@ against the independent log-series evaluation of the frozen diagonal)
 must be shown NON-TERMINATING — equivalently, no admissible rider
 exists.  The socket is now six explicit streams, machine-checked at
 every depth.
+
+NOTE (the r3 receipt's lesson): the tower constant is referenced by
+its FULL name `GSTTowerFire.c` throughout — a root-level `c` exists in
+the imported universe (`ErdosTernary2.lean`), so the short name is
+ambiguous; and the stabilization law lives at `GSTGhostRay.c_stable`
+(the file `GSTGhostRayExclusion.lean` carries the namespace
+`GSTGhostRay`).
 -/
 
 namespace MahlerRider406
 
-open GSTTowerFire (c c_zero c_mod81)
 open MahlerDiagonal406 (D trajectory_dichotomy diagonal_chain_of_lock
   mahler_sharp_iff_no_diagonal_chain c_not_three coe_not_three_dvd)
 
@@ -110,7 +116,8 @@ theorem pow_three_cancel_aux : ∀ (s : Nat) (x y : ℤ), ¬ (3:ℤ) ∣ x →
       have h2 : (3:ℤ)^(s+1) ∣ y := ih x y hx h1
       obtain ⟨k, hk⟩ := h
       obtain ⟨j, hj⟩ := h2
-      have hpow : (3:ℤ)^((s+1)+1) = 3 * (3:ℤ)^(s+1) := by rw [pow_succ]
+      have hpow : (3:ℤ)^((s+1)+1) = 3 * (3:ℤ)^(s+1) :=
+        pow_succ (3:ℤ) (s+1)
       rw [hpow] at hk
       have hcan : (3:ℤ)^(s+1) * (x * j) = (3:ℤ)^(s+1) * (3 * k) := by
         linear_combination hk - x * hj
@@ -149,11 +156,12 @@ theorem nat_eq_zero_of_dvd_of_lt {a b : Nat} (h : a ∣ b) (hlt : b < a) :
     exact absurd hle (Nat.not_le.mpr hlt)
 
 /-- The cast of a power of three is the power of the cast. -/
-theorem int_pow_three_cast (t : Nat) : ((3^(t+1) : ℕ) : ℤ) = (3:ℤ)^(t+1) := by
+theorem int_pow_three_cast (t : Nat) :
+    ((3^(t+1) : ℕ) : ℤ) = (3:ℤ)^(t+1) := by
   induction t with
   | zero => norm_num
   | succ t ih =>
-      rw [Nat.pow_succ 3 (t+1), Nat.pow_succ (3:ℤ) (t+1)]
+      rw [Nat.pow_succ 3 (t+1), pow_succ (3:ℤ) (t+1)]
       push_cast
       rw [ih]
 
@@ -175,44 +183,57 @@ theorem int_pow_dvd_nat_cast {s n : Nat}
     exact hna.symm
   rw [hkN] at hk
   rw [(int_pow_three_cast s).symm] at hk
-  push_cast at hk
-  exact ⟨k.natAbs, Int.natCast_inj.mp hk⟩
+  exact ⟨k.natAbs, by exact_mod_cast hk⟩
 
 /-! ## §1 The tower's cumulative stabilization and the GLOBAL PIN -/
 
 /-- The tower coefficient is monotone. -/
-theorem c_le_succ (n : Nat) : c n ≤ c (n+1) := by
+theorem c_le_succ (n : Nat) : GSTTowerFire.c n ≤ GSTTowerFire.c (n+1) := by
   have h := GSTTowerFire.c_succ_eq n
-  have hp : 0 < 3^(n+1) * (c n * c n + 3^n * (c n * c n * c n)) := by
-    positivity
   omega
 
 /-- Monotonicity, iterated. -/
-theorem c_mono (t s : Nat) (hts : t ≤ s) : c t ≤ c s := by
-  induction hts with
-  | refl => le_refl _
-  | step s hts ih => exact le_trans ih (c_le_succ s)
+theorem c_mono (t s : Nat) (hts : t ≤ s) :
+    GSTTowerFire.c t ≤ GSTTowerFire.c s := by
+  have key : ∀ s : Nat, t ≤ s → GSTTowerFire.c t ≤ GSTTowerFire.c s := by
+    intro s
+    induction s with
+    | zero =>
+        intro ht0
+        have ht : t = 0 := by omega
+        rw [ht]
+        exact le_refl _
+    | succ s ih =>
+        intro hts'
+        rcases Nat.lt_or_ge t (s+1) with hlt | hge
+        · exact le_trans (ih (by omega)) (c_le_succ s)
+        · have hte : t = s + 1 := by omega
+          rw [hte]
+          exact le_refl _
+  exact key s hts
 
 /-- **THE CUMULATIVE STABILIZATION.**  For `t ≤ s`, the tower
 coefficients agree modulo `3^(t+1)`, as an integer divisibility. -/
 theorem c_diff_dvd (t s : Nat) (hts : t ≤ s) :
-    (3:ℤ)^(t+1) ∣ ((c s : ℤ) - (c t : ℤ)) := by
-  have hst := GSTGhostRayExclusion.c_stable t s hts
-  have hds := Nat.div_add_mod (c s) (3^(t+1))
-  have hdt := Nat.div_add_mod (c t) (3^(t+1))
+    (3:ℤ)^(t+1) ∣ ((GSTTowerFire.c s : ℤ) - (GSTTowerFire.c t : ℤ)) := by
+  have hst := GSTGhostRay.c_stable t s hts
+  have hds := Nat.div_add_mod (GSTTowerFire.c s) (3^(t+1))
+  have hdt := Nat.div_add_mod (GSTTowerFire.c t) (3^(t+1))
   rw [hst] at hds
-  refine ⟨((c s / 3^(t+1) : ℕ) : ℤ) - ((c t / 3^(t+1) : ℕ) : ℤ), ?_⟩
-  have hds' : (c s : ℤ) = ((3^(t+1) : ℕ) : ℤ) * ((c s / 3^(t+1) : ℕ) : ℤ)
-      + ((c t % 3^(t+1) : ℕ) : ℤ) := by
+  refine ⟨((GSTTowerFire.c s / 3^(t+1) : ℕ) : ℤ)
+      - ((GSTTowerFire.c t / 3^(t+1) : ℕ) : ℤ), ?_⟩
+  have hds' : (GSTTowerFire.c s : ℤ)
+      = ((3^(t+1) : ℕ) : ℤ) * ((GSTTowerFire.c s / 3^(t+1) : ℕ) : ℤ)
+      + ((GSTTowerFire.c t % 3^(t+1) : ℕ) : ℤ) := by
     exact_mod_cast hds
-  have hdt' : (c t : ℤ) = ((3^(t+1) : ℕ) : ℤ) * ((c t / 3^(t+1) : ℕ) : ℤ)
-      + ((c t % 3^(t+1) : ℕ) : ℤ) := by
+  have hdt' : (GSTTowerFire.c t : ℤ)
+      = ((3^(t+1) : ℕ) : ℤ) * ((GSTTowerFire.c t / 3^(t+1) : ℕ) : ℤ)
+      + ((GSTTowerFire.c t % 3^(t+1) : ℕ) : ℤ) := by
     exact_mod_cast hdt
   rw [int_pow_three_cast t] at hds' hdt'
   linear_combination hds' - hdt'
 
-/-- The rider, in its eventual form: the cofactor divisibility holds
-at every depth. -/
+/-- The rider: the cofactor divisibility holds at every depth. -/
 def RiderGE (a u : Nat) : Prop :=
   ∀ s : Nat, (3:ℤ)^(s+1) ∣ D a u s
 
@@ -228,15 +249,18 @@ theorem rider_global_pin (a u : Nat)
   have hgeS : S₀ ≤ max S₀ t := le_max_left _ _
   have hget : t ≤ max S₀ t := le_max_right _ _
   have hDs : (3:ℤ)^((max S₀ t)+1) ∣ D a u (max S₀ t) := hS₀ _ hgeS
-  have hcd : (3:ℤ)^(t+1) ∣ ((c (max S₀ t) : ℤ) - (c t : ℤ)) :=
+  have hcd : (3:ℤ)^(t+1)
+      ∣ ((GSTTowerFire.c (max S₀ t) : ℤ) - (GSTTowerFire.c t : ℤ)) :=
     c_diff_dvd t (max S₀ t) hget
   have hDt_eq : D a u t
       = D a u (max S₀ t)
-        - 2 * (u:ℤ) * ((c (max S₀ t) : ℤ) - (c t : ℤ)) := by
+        - 2 * (u:ℤ) * ((GSTTowerFire.c (max S₀ t) : ℤ)
+          - (GSTTowerFire.c t : ℤ)) := by
     unfold D
     ring
   have hmul : (3:ℤ)^(t+1)
-      ∣ 2 * (u:ℤ) * ((c (max S₀ t) : ℤ) - (c t : ℤ)) :=
+      ∣ 2 * (u:ℤ) * ((GSTTowerFire.c (max S₀ t) : ℤ)
+        - (GSTTowerFire.c t : ℤ)) :=
     hcd.mul_left _
   have hDs' : (3:ℤ)^(t+1) ∣ D a u (max S₀ t) :=
     (pow_dvd_pow 3 (by omega)).trans hDs
@@ -247,7 +271,7 @@ theorem rider_global_pin (a u : Nat)
 
 /-- The factor `2 * c s` is coprime to three. -/
 theorem two_mul_c_not_dvd_three (s : Nat) :
-    ¬ (3:ℤ) ∣ (2 * (c s : ℤ)) := by
+    ¬ (3:ℤ) ∣ (2 * (GSTTowerFire.c s : ℤ)) := by
   intro h
   rw [Int.dvd_iff_emod_eq_zero, Int.mul_emod] at h
   norm_num at h
@@ -263,7 +287,7 @@ theorem rider_class_unique (a u₁ u₂ s : Nat)
     (3:ℤ)^(s+1) ∣ ((u₁:ℤ) - (u₂:ℤ)) := by
   have hdiff : (3:ℤ)^(s+1) ∣ D a u₁ s - D a u₂ s := h1.sub h2
   have hEq : D a u₁ s - D a u₂ s
-      = (2 * (c s : ℤ)) * ((u₁:ℤ) - (u₂:ℤ)) := by
+      = (2 * (GSTTowerFire.c s : ℤ)) * ((u₁:ℤ) - (u₂:ℤ)) := by
     unfold D
     ring
   rw [hEq] at hdiff
@@ -360,9 +384,9 @@ theorem mahler_sharp_iff_no_six_family_rider :
 
 /-! ## §4 The depth pins — the six-family congruence ladder -/
 
-theorem c_one : c 1 = 7 := by decide
+theorem c_one : GSTTowerFire.c 1 = 7 := by decide
 
-theorem c_two : c 2 = 9709 := by decide
+theorem c_two : GSTTowerFire.c 2 = 9709 := by decide
 
 /-- **DEPTH 0.**  A rider satisfies `u ≡ a (mod 3)`. -/
 theorem rider_depth_zero (a u : Nat) (h : RiderGE a u) :
@@ -371,7 +395,7 @@ theorem rider_depth_zero (a u : Nat) (h : RiderGE a u) :
   rw [show (3:ℤ)^(0+1) = 3 from by norm_num] at hD
   have hDeq : D a u 0 = 2 * ((u:ℤ) - (a:ℤ)) + 9 := by
     unfold D
-    rw [c_zero]
+    rw [GSTTowerFire.c_zero]
     push_cast
     ring
   obtain ⟨k, hk⟩ := hD
@@ -417,13 +441,14 @@ theorem rider_depth_two (a u : Nat) (h : RiderGE a u) :
 
 /-- The tower coefficient's fourth-power congruence, as divisibility. -/
 theorem c_int_mod81 (s : Nat) (hs : 3 ≤ s) :
-    (3:ℤ)^(3+1) ∣ ((c s : ℤ) - 16) := by
-  have hc := c_mod81 s hs
-  have hdm := Nat.div_add_mod (c s) 81
+    (3:ℤ)^(3+1) ∣ ((GSTTowerFire.c s : ℤ) - 16) := by
+  have hc := GSTTowerFire.c_mod81 s hs
+  have hdm := Nat.div_add_mod (GSTTowerFire.c s) 81
   rw [hc] at hdm
-  refine ⟨((c s / 81 : ℕ) : ℤ), ?_⟩
+  refine ⟨((GSTTowerFire.c s / 81 : ℕ) : ℤ), ?_⟩
   have hcast : ((81 : ℕ) : ℤ) = (3:ℤ)^(3+1) := by norm_num
-  have hdm' : (c s : ℤ) = ((81 : ℕ) : ℤ) * ((c s / 81 : ℕ) : ℤ) + 16 := by
+  have hdm' : (GSTTowerFire.c s : ℤ)
+      = ((81 : ℕ) : ℤ) * ((GSTTowerFire.c s / 81 : ℕ) : ℤ) + 16 := by
     exact_mod_cast hdm
   rw [hcast] at hdm'
   linear_combination hdm'
@@ -442,7 +467,7 @@ theorem rider_c_mod81_pin (a u s : Nat) (hs : 3 ≤ s) (h : RiderGE a u) :
   obtain ⟨w, hw⟩ := hcs
   refine ⟨k - 2 * (u:ℤ) * w, ?_⟩
   have hId : (32:ℤ) * (u:ℤ) - (2 * (a:ℤ) - 9)
-      = D a u s - 2 * (u:ℤ) * ((c s : ℤ) - 16) := by
+      = D a u s - 2 * (u:ℤ) * ((GSTTowerFire.c s : ℤ) - 16) := by
     unfold D
     ring
   rw [hId, hk, hw]
