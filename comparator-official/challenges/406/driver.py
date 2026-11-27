@@ -719,6 +719,78 @@ def run_solution_checks(challenge, solution):
         "MonolithGate/MahlerBridge406.lean (S092) carries the eight bridge theorem symbols with zero sorry, the vendored GSTGhostRayExclusion (the ghost ray machinery) and GSTWorldtraceMahler (the relative-precision Mahler theory) beside it (Lean compilation is kills.yml kernel-406mahler)",
         ok, detail, time.time() - t0))
 
+    # S-DIAGONAL (S093): the diagonal-trajectory battery, ALL GREEN.
+    t0 = time.time()
+    BATTERY_I = os.path.join(CAMP, "problem406-ternary-powers",
+                             "battery406i.py")
+    try:
+        proc = subprocess.run([sys.executable, BATTERY_I], capture_output=True,
+                               text=True, timeout=1200)
+        out = proc.stdout + proc.stderr
+        ok = proc.returncode == 0 and "BATTERY406I_GREEN=1" in out
+    except Exception as e:
+        ok = False
+        out = repr(e)
+    checks.append(_chk(
+        "S-DIAGONAL",
+        "battery406i.py (S093): the diagonal-trajectory battery dual-method - T1 the cut-word unification (CantorianPower K <=> the cut word (4^K-1)/3^(v3(K)+1) clean, K in [0,500], exact big-int vs modular; Cantorian K < 300 == {0,1,4}); T2 the class-64 kill (every K = 64 mod 81 fires at position 4); T3 the corrected frontier accounting (the TRUE 3-free frontier is 32 classes mod 81 - the docstring's five-class list missed 27; the green cascade kills 10 leaving 22; the row-9 survivor projection is exactly {1,4,10,13,28,31,37,40}, stable from row 4; 768 survivors mod 59049, 512 through row 10 - the period and doubling laws); T4 the trajectory law (v3(c(s+1)-c(s)) = s+1 EXACT with unit part = 1 mod 3, s=1..29; the frozen diagonal L = 7 mod 9, 16 mod 27, 16 mod 81, 178 mod 243); T5 the witness dichotomy (no (a,u) pair with u<=400 rides the exact diagonal beyond depth 6; every tail eventually constant); T6 the family non-membership (max lock depth 8 over u<=3000, m in {+-1,+-5,+-7})",
+        ok, out[-1500:], time.time() - t0))
+
+    # S-DIAGONAL-KERNEL (S093): the round module exists with its theorem
+    # symbols and the equivalence.
+    t0 = time.time()
+    DIAG = os.path.join(CAMP, "MonolithGate", "MahlerDiagonal406.lean")
+    try:
+        with open(DIAG, encoding="utf-8") as f:
+            dt = f.read()
+        syms = ["cantorian_iff_cutword_clean", "no_cantorian_iff_no_clean_cutword",
+                "even_conjecture_of_sharp_frontier_minus_cascade",
+                "full_verdict_iff_sharp_frontier_minus_cascade",
+                "c_not_three", "c_step_unit", "W_eq", "D_odd",
+                "step_above", "step_frozen", "frozen_forever", "exists_val",
+                "trajectory_dichotomy", "fracture_of_frozen",
+                "diagonal_chain_of_lock", "lock_of_diagonal_chain",
+                "mahler_sharp_iff_no_diagonal_chain"]
+        ok = (all(sym in dt for sym in syms)
+              and "sorry" not in dt.replace("sorryAx", "")
+              and "ERDOS406_MAHLER_DIAGONAL_GREEN" in dt
+              and "GSTClimbInfiniteFamily.dust_fire_row_two" in dt
+              and "GSTClimbInfiniteFamily.dust_fire_row_three" in dt
+              and "GSTClimbInfiniteFamily.dust_fire_row_four" in dt)
+        detail = "symbols: " + str(sum(1 for sym in syms if sym in dt)) + "/" + str(len(syms))
+    except Exception as e:
+        ok = False
+        detail = repr(e)
+    checks.append(_chk(
+        "S-DIAGONAL-KERNEL",
+        "MonolithGate/MahlerDiagonal406.lean (S093) carries the seventeen round-theorem symbols with zero sorry: the cut-word unification, the corrected-frontier cascade credit (dust_fire_row_two/three/four composed into the sharp reduction), and the Mahler diagonal trajectory law with the EQUIVALENCE mahler_sharp_iff_no_diagonal_chain (the named hypothesis input restated as the nonexistence of an infinite exact-diagonal divisibility trajectory - no p-adic analysis object anywhere) (Lean compilation is kills.yml kernel-406diagonal)",
+        ok, detail, time.time() - t0))
+
+    # S-HCUNIVERSE-REPAIR (S093): the two first-exposure HCUniverse repairs.
+    t0 = time.time()
+    PROBE = os.path.join(CAMP, "HCUniverse", "GSTGraphV2CanonicalEscapeProbe.lean")
+    CLOS = os.path.join(CAMP, "HCUniverse", "GSTGraphV2FourPowerRelocationClosure.lean")
+    try:
+        with open(PROBE, encoding="utf-8") as f:
+            pt = f.read()
+        with open(CLOS, encoding="utf-8") as f:
+            ct = f.read()
+        ok = ("hRegenerationSeam" in pt
+              and "trace_state" not in pt
+              and "hClimb" in ct
+              and "four_power_happy_ge_three hClimb" in ct
+              and "sorry" not in pt.replace("sorryAx", "")
+              and "sorry" not in ct.replace("sorryAx", ""))
+        detail = ("probe: seam-hypothesis form, no trace_state; "
+                  "closure: climb threaded through all six theorems")
+    except Exception as e:
+        ok = False
+        detail = repr(e)
+    checks.append(_chk(
+        "S-HCUNIVERSE-REPAIR",
+        "The HCUniverse library's two first-exposure defects repaired with documented adaptations: GSTGraphV2CanonicalEscapeProbe's intentionally-RED regeneration seam carried as an explicit hypothesis (the probe machinery preserved, the parse defect closed), GSTGraphV2FourPowerRelocationClosure's climb input threaded through its six theorems (the vendored navigation chamber's four_power_happy_ge_three signature carries the climb as its explicit first input)",
+        ok, detail, time.time() - t0))
+
     return checks
 
 

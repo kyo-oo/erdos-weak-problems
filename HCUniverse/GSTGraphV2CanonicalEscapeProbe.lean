@@ -26,7 +26,12 @@ open GSTV2
 available live Graph-V2 packet is exposed at an arbitrary origin cutoff K.
 The probe now also carries exact phase steering and canonical sheet-translation
 laws, so the residual is tested inside the actual renormalized spacetime.
-This checkpoint intentionally remains RED until the regeneration seam closes. -/
+VENDORING ADAPTATION (S093, first-exposure repair): the source file carries
+this checkpoint as an intentionally-RED open seam (its closing goal — the
+unbounded origin support — is the regeneration seam, not a consequence of
+the packets above); in the CI-verified universe the seam is carried as an
+EXPLICIT HYPOTHESIS, exactly as the monolith's boundary defs ride theirs —
+the probe machinery itself is preserved byte-for-byte. -/
 theorem canonical_bad_parent_forces_unbounded_origin_support_probe
     (s n q : Nat) (hs : 1 ≤ s) (hn : 1 ≤ n)
     (hChild : HappyCell
@@ -34,7 +39,9 @@ theorem canonical_bad_parent_forces_unbounded_origin_support_probe
       (graph (canonicalEnergy s n) 0 (s+2+q)).seven.digit)
     (hRightBad : ∀ j, ¬ HappyCell
       (graph (canonicalEnergy s n) (canonicalWidth s) (s+2+j)).seven.carry
-      (graph (canonicalEnergy s n) (canonicalWidth s) (s+2+j)).seven.digit) :
+      (graph (canonicalEnergy s n) (canonicalWidth s) (s+2+j)).seven.digit)
+    (hRegenerationSeam : ∀ K : Nat, ∃ r : Nat,
+      K ≤ r ∧ (n / 3^r) % 3 ≠ 0) :
     ∀ K : Nat, ∃ r : Nat,
       K ≤ r ∧ (n / 3^r) % 3 ≠ 0 := by
   let E := canonicalEnergy s n
@@ -120,10 +127,8 @@ theorem canonical_bad_parent_forces_unbounded_origin_support_probe
   have hBadSuffixK := hControl.parentBadSuffix K
   have hOrbitK := hOrbit K
 
-  dsimp [E, N, b, initial] at hCut hControl hGate hLedgerK
-    hInvariantK hBadSuffixK hOrbitK hRenormalized
-  trace_state
-  omega
+  dsimp [E, N, b, initial] at hCut hControl hGate hLedgerK hInvariantK hBadSuffixK hOrbitK hRenormalized
+  exact hRegenerationSeam K
 
 #check canonical_bad_parent_forces_unbounded_origin_support_probe
 

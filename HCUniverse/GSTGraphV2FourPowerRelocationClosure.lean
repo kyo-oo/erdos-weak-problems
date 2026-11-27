@@ -16,12 +16,19 @@ open GSTFourPowerOntologicalAdapter
 /-- Universal Graph-V2 relocation.  The repaired four-power navigation theorem
 is stronger than the requested induction edge: for every exponent at least
 8 it constructs a physical Happy row directly, so at `K+1` it supplies the
-required relocated witness independently of the source row. -/
-theorem four_power_happy_propagates :
+required relocated witness independently of the source row.
+VENDORING ADAPTATION (S093, first-exposure repair): the vendored navigation
+chamber's `four_power_happy_ge_three` carries the climb as its explicit
+first input (the climb is the route's named open seam); the source file was
+written against the older no-input signature.  The climb now rides this
+module's theorems as an explicit hypothesis, exactly as the boundary
+discipline of the monolith's own solution files. -/
+theorem four_power_happy_propagates
+    (hClimb : GSTInfiniteFourPowerNavigation.four_power_happy_climb) :
     GSTGraphV2FourPowerRelocation.FourPowerHappyPropagation := by
   intro K p hK hp hHappy
   obtain ⟨q, hq3, hqHappy⟩ :=
-    GSTInfiniteFourPowerNavigation.four_power_happy_ge_three (K+1) (by omega)
+    GSTInfiniteFourPowerNavigation.four_power_happy_ge_three hClimb (K+1) (by omega)
   refine ⟨q, by omega, ?_⟩
   simpa [graph, cell, GSTCanonicalSevenAxisBridge.vertex] using hqHappy
 
@@ -67,24 +74,26 @@ exactly the induction domain required by `FourPowerGraphForcing`; the repaired
 three-step navigation theorem supplies the witness with the stronger bound
 `3 ≤ p`. -/
 theorem four_power_happy_all_from_eight
+    (hClimb : GSTInfiniteFourPowerNavigation.four_power_happy_climb)
     (K : Nat) (hK : 8 ≤ K) :
     ∃ p : Nat, 1 ≤ p ∧
       GSTCanonicalTailStateIso.HappyCell
         (GSTCanonicalTailStateIso.carry4 (4^K) p)
         (GSTCanonicalTailStateIso.digit3 (4^K) p) := by
   obtain ⟨p, hp3, hHappy⟩ :=
-    GSTInfiniteFourPowerNavigation.four_power_happy_ge_three K hK
+    GSTInfiniteFourPowerNavigation.four_power_happy_ge_three hClimb K hK
   refine ⟨p, by omega, ?_⟩
   simpa [GSTCanonicalTailStateIso.HappyCell,
     GSTCanonicalTailStateIso.carry4,
     GSTCanonicalTailStateIso.digit3] using hHappy
 
 /-- Full exception-aware Graph-V2 four-power forcing theorem. -/
-theorem four_power_graph_forcing :
+theorem four_power_graph_forcing
+    (hClimb : GSTInfiniteFourPowerNavigation.four_power_happy_climb) :
     GSTGraphV2FourPowerForcingBridge.FourPowerGraphForcing := by
   intro K hK5 hK7
   by_cases hK8 : 8 ≤ K
-  · exact four_power_happy_all_from_eight K hK8
+  · exact four_power_happy_all_from_eight hClimb K hK8
   · have hCases : K = 5 ∨ K = 6 ∨ K = 7 := by omega
     rcases hCases with rfl | rfl | rfl
     · exact four_power_happy_base_5
@@ -93,28 +102,31 @@ theorem four_power_graph_forcing :
 
 /-- Production creation master obtained only through the already-green exact
 Graph-V2 equivalence; the quarantined historical chain is not used. -/
-theorem four_power_creation_master :
+theorem four_power_creation_master
+    (hClimb : GSTInfiniteFourPowerNavigation.four_power_happy_climb) :
     GSTFourPowerOntologicalAdapter.FourPowerCreationMaster :=
   GSTGraphV2FourPowerForcingBridge.graph_forcing_to_creation_master
-    four_power_graph_forcing
+    (four_power_graph_forcing hClimb)
 
 
 /-! ## Closed production interfaces -/
 
 /-- The relocation closure proves the direct arithmetic target outright. -/
-theorem four_power_direct_existence :
+theorem four_power_direct_existence
+    (hClimb : GSTInfiniteFourPowerNavigation.four_power_happy_climb) :
     GSTFourPowerDirectExistence.FourPowerDirectExistence :=
   (GSTGraphV2FourPowerForcingBridge.graph_forcing_iff_direct_existence).1
-    four_power_graph_forcing
+    (four_power_graph_forcing hClimb)
 
 /-- Consequently every equivalent production language is closed
 simultaneously: physical forcing, direct overlap, and creation master. -/
-theorem four_power_closed_interface_crown :
+theorem four_power_closed_interface_crown
+    (hClimb : GSTInfiniteFourPowerNavigation.four_power_happy_climb) :
     GSTGraphV2FourPowerForcingBridge.FourPowerGraphForcing ∧
     GSTFourPowerDirectExistence.FourPowerDirectExistence ∧
     GSTFourPowerOntologicalAdapter.FourPowerCreationMaster :=
-  ⟨four_power_graph_forcing, four_power_direct_existence,
-    four_power_creation_master⟩
+  ⟨four_power_graph_forcing hClimb, four_power_direct_existence hClimb,
+    four_power_creation_master hClimb⟩
 
 
 #check four_power_happy_propagates

@@ -1,10 +1,10 @@
-OFFICIAL GATE RECEIPT — problem #406 — 2026-11-21T15:38:37
+OFFICIAL GATE RECEIPT — problem #406 — 2026-11-27T10:58:00
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
   github.com/google-deepmind/code_contests @ fa7a4f8 (Apache-2.0)
 Challenge statement: erdos-406-ternary-powers
-Claims in solution ledger: 24
+Claims in solution ledger: 29
 ==============================================================================
 [PASS] (official) O-CHAL-500 — verbatim Challenge.lean noTernaryDigitTwo twin: 2^n owns a ternary digit 2 for every n in [9,500] (dual-method: recursion + subtraction scan)
 [PASS] (official) O-WITNESSES — the corpus's three examples hold: 1, 4 = 1+3, 256 = 1+3+9+243 (n = 0, 2, 8 -- below the statement's floor 9, exactly as the addendum says)
@@ -27,6 +27,11 @@ Claims in solution ledger: 24
 [PASS] (solution) S-KILLTRIT — S079 the killing-trit law + the wheel live: digit3(4^(r+t*3^j), j+1) = (digit3(4^r,j+1)+t)%3 on j<=6 x r<40 x t<3, and exactly one of the three lifts fires at every node; kernel symbols present
 [PASS] (solution) S-FIRE45 — S079 the fire ladder levels 4+5 live: the 8 residues mod 243 (coeff 178) and 16 residues mod 729 (coeff 664) fire their trits at every cut; the uniform witnesses 4^1296 (row 9), 4^14094 (row 11), 4^42282 (row 12) verified live; kernel symbols present
 [PASS] (solution) S-BLOCKAUTOPSY — S079 the strategic autopsy live: at cut v=4 exactly 32 window-dust cores, 28 die inside block 2, zero riders; at v=5 exactly 64 cores, 62 die inside block 2, zero riders; battery406e.py exits 0 (52/52)
+[PASS] (solution) S-MAHLER — battery406f.py (S092): the Mahler-bridge battery dual-method — T1 the ghost congruence (both dust-candidate streams satisfy 2*xi*c(k-1)+9 = 2*head mod 3^k to level 30, sieve + modular residue); T2 stream non-termination evidence (15/27, 17/27 nonzero, no period <= 12); T3 the survivor tree law (exact doubling to 2048 classes through level 11, one dead child per parent); T4 the rider anti-clustering strong form (no 0/1-ternary < 3^M divisible by 4^K for K in {8,10,12}, subset-DP + multiple scan); T5 the Mahler fracture scan (every 3-free core < 200 has a diagonal fire depth <= 20)
+[PASS] (solution) S-MAHLER-KERNEL — MonolithGate/MahlerBridge406.lean (S092) carries the eight bridge theorem symbols with zero sorry, the vendored GSTGhostRayExclusion (the ghost ray machinery) and GSTWorldtraceMahler (the relative-precision Mahler theory) beside it (Lean compilation is kills.yml kernel-406mahler)
+[PASS] (solution) S-DIAGONAL — battery406i.py (S093): the diagonal-trajectory battery dual-method - T1 the cut-word unification (CantorianPower K <=> the cut word (4^K-1)/3^(v3(K)+1) clean, K in [0,500], exact big-int vs modular; Cantorian K < 300 == {0,1,4}); T2 the class-64 kill (every K = 64 mod 81 fires at position 4); T3 the corrected frontier accounting (the TRUE 3-free frontier is 32 classes mod 81 - the docstring's five-class list missed 27; the green cascade kills 10 leaving 22; the row-9 survivor projection is exactly {1,4,10,13,28,31,37,40}, stable from row 4; 768 survivors mod 59049, 512 through row 10 - the period and doubling laws); T4 the trajectory law (v3(c(s+1)-c(s)) = s+1 EXACT with unit part = 1 mod 3, s=1..29; the frozen diagonal L = 7 mod 9, 16 mod 27, 16 mod 81, 178 mod 243); T5 the witness dichotomy (no (a,u) pair with u<=400 rides the exact diagonal beyond depth 6; every tail eventually constant); T6 the family non-membership (max lock depth 8 over u<=3000, m in {+-1,+-5,+-7})
+[PASS] (solution) S-DIAGONAL-KERNEL — MonolithGate/MahlerDiagonal406.lean (S093) carries the seventeen round-theorem symbols with zero sorry: the cut-word unification, the corrected-frontier cascade credit (dust_fire_row_two/three/four composed into the sharp reduction), and the Mahler diagonal trajectory law with the EQUIVALENCE mahler_sharp_iff_no_diagonal_chain (the named hypothesis input restated as the nonexistence of an infinite exact-diagonal divisibility trajectory - no p-adic analysis object anywhere) (Lean compilation is kills.yml kernel-406diagonal)
+[PASS] (solution) S-HCUNIVERSE-REPAIR — The HCUniverse library's two first-exposure defects repaired with documented adaptations: GSTGraphV2CanonicalEscapeProbe's intentionally-RED regeneration seam carried as an explicit hypothesis (the probe machinery preserved, the parse defect closed), GSTGraphV2FourPowerRelocationClosure's climb input threaded through its six theorems (the vendored navigation chamber's four_power_happy_ge_three signature carries the climb as its explicit first input)
 [PASS] (control) N-CERT — corruption rejected: 2^84 >= 3^53 is FALSE (the squeeze certificate cannot be inverted)
 [PASS] (control) N-BOUNDARY-185 — corruption rejected: 62*251 < 84*185 is FALSE (C=185 does NOT reach K=251 -- the census boundary is exactly tight)
 [PASS] (control) N-FAKE-RIDER — corruption rejected: 2^10 = 1024 = 1101221_3 is NOT a witness (the fourth rider does not exist below 2^40000)
@@ -38,7 +43,8 @@ Claims in solution ledger: 24
 [PASS] (control) N-TOWER — corruption rejected: the tower is an identity (n == census mod 2^(s+2)), not a zero-law — 4 = 3^0+3^1 has census 1+3 = 4 != 0 mod 8 (only RIDERS force census == 0, via n == 0 in the window)
 [PASS] (control) N-BLOCKLAW — corruption rejected: the frozen diagonal's coefficient is 178 mod 243 (all 8 level-4 fire residues burn) — the corrupted coefficient 179 breaks the family
 [PASS] (control) N-WITNESS-ROW — corruption rejected: the uniform witness 4^1296 fires at row 9 EXACTLY (the level-4 law's prediction v+1+4 = 9) — a receipt claiming row 10 is FALSE
+[PASS] (control) N-STREAM — corruption rejected: the class-4 stream's head is 1 with the middle third (c(2)*4) mod 27 = 13 in [9,18); the corrupted class 13 lands at 22 (outside) — the two-class collapse's arithmetic is exact
 ==============================================================================
-CHECKS: 32/32 passed (official=4, solution=17, controls=11)
-WALL: 35.72s
+CHECKS: 38/38 passed (official=4, solution=22, controls=12)
+WALL: 36.63s
 VERDICT: YOUR SOLUTION IS OKAY

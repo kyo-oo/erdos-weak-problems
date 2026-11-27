@@ -2005,3 +2005,93 @@ level 30, the stream non-termination evidence (15/27, 17/27 nonzero, no
 period ≤ 12), the survivor tree law (exact doubling, one dead child per
 parent, through level 11), the rider anti-clustering strong form, the
 fracture scan; the kernel symbol check; the N-STREAM negative control).
+
+---
+
+## §23. S093 — THE DIAGONAL TRAJECTORY ROUND (the war-council round: the cut-word unification minted, the frontier accounting repaired, and the Mahler hypothesis restated in its most elementary form)
+
+**BOSS's orders (all executed):** the bag re-recovered (on disk, token
+live, English only — the tongue law); the hypothesis (#406's named
+hTailF-family input) assaulted with the full engine (MATHS v2 +
+prove-that-shit, the war council dispatched — one Strategist delivered,
+the Attacker/Doubter duties absorbed by the main line after their
+timeouts); GitHub CI the only Lean judge; the user's own laws only.
+
+**THE WAR COUNCIL'S VERDICTS (the Strategist's map + the main line's
+dual-method verification):**
+
+1. **THE CUT-WORD UNIFICATION WAS MISSING.** `CantorianPower K ⟺
+   C(K) = (4^K−1)/3^(v₃(K)+1) is 0/1-ternary` — a one-line consequence
+   of `omega_cut_factor` that the campaign had never minted. The whole
+   problem is now ONE question: which exponents have a clean cut word?
+2. **THE FRONTIER ACCOUNTING WAS WRONG.** The docstring's "five
+   row-family classes {1,10,28,37,64} mod 81" missed TWENTY-SEVEN
+   classes: the true 3-free frontier (¬covered ∧ ¬omega ∧ ¬window) is
+   THIRTY-TWO classes mod 81. The green cascade (rows 2–4,
+   `dust_fire_row_two/three/four` — CI-certified, never credited in
+   the frontier def) kills ten of them (class 64 dead at row four);
+   twenty-two remain; and the mathematical survivor target — verified
+   dual-method, stable from row four — is the EIGHT cells
+   {1,4,10,13,28,31,37,40} (256 survivors mod 19683, 768 mod 59049 =
+   the period law, 512 through row 10 = exact doubling; the other
+   fourteen cascade-cut classes die at rows 5–9, the deeper cascade's
+   domain). The tower accounting {0,12,21,27,36,39,48,63,75} verified
+   correct.
+3. **THE HYPOTHESIS, SHARPENED.** The main line derived and verified
+   (dual-method, s = 1..29): the TOWER STEP LAW `v₃(c(s+1)−c(s)) = s+1`
+   EXACTLY with unit part `e(s) ≡ 1 mod 3` (sharpening the green
+   `c_stable`, which never gave the exact valuation); the frozen
+   diagonal `L ≡ 7 mod 9, 16 mod 27, 16 mod 81, 178 mod 243`; the
+   TRAJECTORY DICHOTOMY (every (a,u): eventually-constant valuation —
+   the fracture case — OR the exact diagonal `v₃(D a u s) = s+1`
+   forever; no third trajectory exists); and THE EQUIVALENCE:
+   **MahlerSharp ⟺ no admissible (a,u) rides the exact diagonal
+   forever.** The one remaining named hypothesis input of the crown
+   chain is now a pure infinite divisibility trajectory statement — no
+   p-adic analysis object anywhere. The π-point lane (S078), the dust
+   streams (S084/S090) and MahlerSharp (S092) confirmed ONE object
+   (the Strategist: the three streams are exactly (2a−9)/(2L)).
+
+**THE ROUND'S KERNEL (kernel-406diagonal, `MahlerDiagonal406.lean`,
+seventeen theorems, zero sorry):** §1 the cut-word unification
+(`cantorian_iff_cutword_clean` + `no_cantorian_iff_no_clean_cutword`);
+§2 the corrected frontier (the cascade's three kill families composed
+into the sharp reduction — `even_conjecture_of_sharp_frontier_minus_cascade`
++ the full-verdict iff); §3 the trajectory law (the tower unit law
+`c_not_three`, the step law `c_step_unit`, the witness factorization
+`W_eq`, `step_above`/`step_frozen`/`frozen_forever`, the valuation
+existence, the dichotomy, the fracture-from-freeze, the
+chain-lock equivalence both directions, and
+`mahler_sharp_iff_no_diagonal_chain`).
+
+**THE CI REPAIRS:** the mahler kernel's receipt loop re-armed with the
+proven `-E` alternation pattern (the old `grep -qF "$sym :"` could
+never match the receipt format — round 6's log showed ALL TWELVE
+theorems green with clean receipts, only the grep was dead) — verified:
+run 45980776238, 37/38 green, kernel-406mahler GREEN. The
+kernel-hc-universe install hardened with a 5× elan/network retry. The
+HCUniverse library's FIRST full build exposed two defects (the source
+repo's comparator only built HCProof's closure): the EscapeProbe's
+intentionally-RED regeneration seam (now carried as an explicit
+hypothesis, the boundary discipline, machinery preserved byte-for-byte)
+and the RelocationClosure's climb-input drift (the vendored navigation
+chamber's `four_power_happy_ge_three` signature carries the climb as
+its explicit first input; the climb now threads all six theorems).
+
+**THE OFFICIAL COMPARATOR: 38/38 PASS — "YOUR SOLUTION IS OKAY"**
+(extended from 35/35 with S-DIAGONAL, S-DIAGONAL-KERNEL,
+S-HCUNIVERSE-REPAIR; battery406i.py 20/20 ALL GREEN, dual-method,
+NO-OOM compliant).
+
+**THE HONEST BOUNDARY (the law: no dressing):** the #406 residual is
+unchanged in shape — MahlerSharp (now: no infinite exact-diagonal
+trajectory) + the compression (CantorianPower K → the ghost ray; the
+u-jump lane) — but its statement is now maximally elementary, the
+frontier map is now honest (32→22 row classes credited green, the
+8-cell target named), and the whole problem is the cleanliness of the
+cut-word family. The named next lanes: the deeper cascade credit
+(rows 5–9, the WorldtraceLevel chambers — the fourteen out-of-projection
+classes), the BlockLaw depth-4/5 band credit into the tower accounting
+(green in the separate problem406 library, not yet vendored), and the
+entropy law (the CAP lane: any explicit cap C ≤ 185 closes #406
+outright — the Strategist's Route 1).
