@@ -1,0 +1,16 @@
+  M  t*(M)  excess  sparse*  dense*    N(M-2)   N(M-1)    N(M)  N(M+1)  N(M+2)
+  8      8      +0        8       4         5        5       4       1       1
+ 10      8      -2        8       8         7        1       1       1       1
+ 12     11      -1       10      11         4        2       1       1       1
+ 14     11      -3       10      11         1        1       1       1       1
+ 16     16      +0       16      15         4        4       3       1       1
+ 18     16      -2       16      15         5        1       1       1       1
+ 20     17      -3       17      17         1        1       1       1       1
+ 22     19      -3       18      19         1        1       1       1       1
+
+THE READING: N(t) at the deep end (t >= M) is the number of subsets
+whose FULL moment congruence holds at depth t — the lattice survivors.
+The counting baseline predicts N(t) ~ 2^(M-t); measured deviations are
+the fluctuation signature the sustainability bound must control.
+
+BATTERY406K: ALL GREEN

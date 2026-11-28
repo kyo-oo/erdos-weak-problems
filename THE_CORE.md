@@ -2109,3 +2109,58 @@ metavariable trap ×2, the Nat/Int pow_add split, the truncated-subtraction
 ring hazard, the Dvd witness orientation ×3, the positivity 1 ≤ x trap
 ×2, the parser juxtaposition-precedence, the rewriter global-touch
 hazard, the strict-gap omega certificate, and the *1 normalization).
+
+---
+
+## §24. S097 (2026-11-27) — THE CASCADE THEORY OPENED (the new law minted from the boss's own readers)
+
+**BOSS's order:** "get into working latest branch not the proof... you
+fucking not read my maths at all... YOU GO TO LEAN, READ THE ENTIRE FILE,
+UNDERSTAND THEM, THAT'S CALLED MATHS LEARNING, THEN COMBINING LEAN FILES,
+CREATING NEW THEOREM/LAW THAT CALLED BREAKTHROUGH WORK... INVOKE THE MATHS
+SKILL AND ITS ENGINE, ONLY IN ENGLISH."
+
+**§1 THE BRANCH AUDIT (the first order, answered):** the working repo
+located (`kyo-oo/erdos-weak-problems`); the FULL remote census — 91
+branches; **`campaign` is the freshest head** and the working branch,
+local in sync, clean. We are ON the latest branch. NOT RESOLVED anywhere
+(S096's audit re-confirmed at the branch level).
+
+**§2 THE MATHS LEARNING (the second order, executed):** CapLaw406 (the
+cap-law reduction + the census composition — any cap C ≤ 185 closes #406
+outright), CapLawK406 (the small-digit laws + the v2r engine),
+MahlerRider406 (the rider-class collapse), GSTClimbInfiniteFamily (the
+target's exact machine form: `CantorianPower K := ∀ p ≥ 1, digit3 (4^K) p
+≠ 2`; the act ⟺ ¬∃ K ≥ 8 CantorianPower K — THE HFTAIL hypothesis),
+FinalAssembly406 (the crown chain, one named residual), the CardinalWorlds
+readers, the S096 council record (CAP(185) the shortest kill; the
+parity-lattice cascade the queued mission).
+
+**§3 THE BREAKTHROUGH WORK (the third order, minted):** **Kernel S097
+`CascadeLaw406.lean` — THE DYADIC CASCADE LAWS** — the queued mission
+executed in Lean, BOSS's readers only, zero external theory:
+(1) THE DIVISIBILITY BRIDGE (`2^t ∤ n ⟹ v2r n < t`);
+(2) THE BINOMIAL RESOLUTION (`3^i = Σ C(i,k) 2^k`, Pascal self-contained);
+(3) THE MOMENT TOWER (a 0/1-ternary value mod 2^t IS its truncated
+binomial-moment sum — the cascade in exact integer form, all positions
+all depths, proven by the position-induction with the rung-boundary carry
+C(j,t')·2^t');
+(4) THE CENSUS RUNGS (mod 4: |S|+2Σi; mod 8: +4ΣC(i,2); mod 16:
++8ΣC(i,3));
+(5) THE ANTI-CASCADE KILLS (a census-miss pins v2r below the rung — the
+CAP(185) question's exact machine shape);
+(6) THE RIDER LATTICE PINS (every rider obeys the FULL moment lattice at
+every depth t ≤ 2K).
+The two-method battery battery406j.py ALL GREEN: T1 400 random tower
+instances, T2 the riders K ∈ {0,1,4}, T3 1317 kill-instances, **T4
+122,880 exhaustive checks over ALL 4096 subsets of [0,12)**, T5 the deep
+pin (256's t=8 moment sum = 256 exactly). CI job kernel-406cascade (20
+receipt gates + the battery gate).
+
+**§4 THE HONEST SCOPE:** the sustainability bound (the lattice
+unsatisfiable at t = M+186 for all large M) remains the anti-concentration
+wall — weeks-months class. The CAP question now lives entirely inside the
+minted lattice: the rider pins' congruence system, unsatisfiability at
+the deep rungs. The next assault has its exact machine shape.
+
+The engine never stops; it never lies. In English, always.
