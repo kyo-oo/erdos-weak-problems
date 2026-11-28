@@ -3003,6 +3003,58 @@ jobs:
         name: kernel406capk-log
         path: kernel406capk.log
         retention-days: 30
+  kernel-406cascade:
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@v5
+    - name: Install Lean Mathlib
+      run: |
+        set -euo pipefail
+        for i in 1 2 3 4 5; do
+          if curl -sSf https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh | sh -s -- -y --default-toolchain leanprover/lean4:v4.33.0-rc2; then
+            if elan toolchain install leanprover/lean4:v4.33.0-rc2 2>/dev/null || true; then break; fi
+          fi
+          echo "ELAN_INSTALL_RETRY attempt=$i failed; sleeping 20s"
+          sleep 20
+        done
+        echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+        export PATH="$HOME/.elan/bin:$PATH"
+        for i in 1 2 3; do lake update && break; echo "LAKE_UPDATE_RETRY attempt=$i"; sleep 15; done
+        for i in 1 2 3; do lake exe cache get && break; echo "CACHE_GET_RETRY attempt=$i"; sleep 15; done
+      shell: bash
+    - name: "Kernel 406-cascade - THE DYADIC CASCADE LAWS (S097, BOSS order 'READ MY MATHS, COMBINE THE LEAN FILES, CREATE THE NEW THEOREM/LAW': the S096 council's queued ATTACKER mission - the parity-lattice cascade theory opened in Lean): (1) THE BINOMIAL RESOLUTION three_pow_eq_sum_choose - 3^i is EXACTLY its dyadic binomial-moment sum (Pascal, self-contained); (2) THE MOMENT TOWER moment_tower - a 0/1-ternary value mod 2^t IS its truncated binomial-moment sum, all positions all depths (the parity-lattice cascade in exact integer form); (3) THE CENSUS RUNGS bridge/list_bridge two/three/four - mod 4: |S|+2*SUM(i); mod 8: +4*SUM C(i,2); mod 16: +8*SUM C(i,3); (4) THE ANTI-CASCADE KILLS census_kill_two/three/four + anti_cascade_kill - a census-miss pins v2r strictly below the rung (the CAP question's exact machine shape); (5) THE RIDER LATTICE PINS rider_moment_pin + rider_census_pin_two/three/four - every rider obeys the FULL moment lattice at every depth t <= 2K; plus the two-method receipt battery406j.py (T1 400 random tower instances, T3 1317 kill-instances, T4 122880 exhaustive checks over ALL subsets of [0,12), T5 the deep pin) ALL GREEN"
+      run: |
+        set -euo pipefail
+        lake build Arsenal.ErdosTernary2.Basic
+        lake build Arsenal.CardinalWorlds
+        lake build Arsenal.CardinalWorldsV2
+        : > kernel406cascade.log
+        set +e
+        lake env lean problem406-ternary-powers/CascadeLaw406.lean 2>&1 | tee -a kernel406cascade.log
+        RC=${PIPESTATUS[0]}
+        set -e
+        if [ "$RC" -ne 0 ]; then echo "CASCADE_BUILD_FAILED_RC=$RC"; exit 1; fi
+        if grep -qE 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406cascade.log; then
+          echo "CASCADE_NEGATIVE_GATE_TRIPPED"
+          grep -E 'error[:(]|sorryAx|unknown identifier|unsolved goals|declaration uses .sorry.' kernel406cascade.log | head -20
+          exit 1
+        fi
+        python3 problem406-ternary-powers/battery406j.py
+        for SYM in "v2r_lt_of_not_two_pow_dvd" "sum_range_succ_first" "three_pow_eq_sum_choose" "three_pow_mod_two" "three_pow_mod_two_pow" "moment_tower" "bridge_two" "bridge_three" "bridge_four" "list_bridge_two" "list_bridge_three" "list_bridge_four" "anti_cascade_kill" "census_kill_two" "census_kill_three" "census_kill_four" "rider_moment_pin" "rider_census_pin_two" "rider_census_pin_three" "rider_census_pin_four"; do
+          if ! grep -q "'CascadeLaw406.${SYM}' depends on axioms" kernel406cascade.log; then
+            echo "CASCADE_RECEIPT_MISSING: ${SYM}"
+            exit 1
+          fi
+        done
+        echo "CASCADE RECEIPTS: 20/20"
+        echo CASCADE_GREEN=1
+      shell: bash
+    - if: always()
+      uses: actions/upload-artifact@v4
+      with:
+        name: kernel406cascade-log
+        path: kernel406cascade.log
+        retention-days: 30
   kernel-406rider:
     runs-on: ubuntu-24.04
     steps:

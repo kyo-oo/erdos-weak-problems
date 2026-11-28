@@ -1,0 +1,7 @@
+T1 MOMENT TOWER: 400/400 random instances GREEN (two-method)
+T2 RIDER PINS: 4 rung-checks GREEN on riders K in {0,1,4}
+T3 CENSUS KILLS: 1317 kill-instances GREEN (two-method v2)
+T4 EXHAUSTIVE: 122880 checks GREEN over ALL 4096 subsets of [0,12)
+T5 DEEP PIN: 256's t=8 moment sum = 256 = 1 * 2^8 GREEN
+
+BATTERY406J: ALL GREEN
