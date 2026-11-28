@@ -1,4 +1,4 @@
-OFFICIAL GATE RECEIPT — problem #107 — 2026-11-24T20:05:41
+OFFICIAL GATE RECEIPT — problem #107 — 2026-11-28T05:59:00
 ==============================================================================
 OFFICIAL SOURCES (fresh GitHub clones, 2026-11-17):
   github.com/google-deepmind/funsearch @ cc53f27 (Apache-2.0)
@@ -24,5 +24,5 @@ Claims in solution ledger: 16
 [PASS] (control) S-F5-W81 — THEOREM f(5)=9: the F8 reduction (146 convex-5-free 8-types, exhaustive two-code over the complete 6405 bank) + the saturated F8 storm (0 convex-5-free children) + the census battery (250,922 hull<=4 types, 0 convex-5-free, mirror-closed census 316,802) + heredity => every 9-point GP set contains a convex 5; F8 nonempty => f(5)>=9
 ==============================================================================
 CHECKS: 16/16 passed (official=2, solution=9, controls=5)
-WALL: 44.69s
+WALL: 44.63s
 VERDICT: YOUR SOLUTION IS OKAY

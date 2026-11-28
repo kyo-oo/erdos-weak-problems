@@ -1,0 +1,13 @@
+W97_61B_engine.py — W97-61B receipts (the n<=6 coverage theorem)
+wall=1.1s
+THEOREM W97-COVERAGE-6: covered 102/156, c-floor 1/20, uncovered primes 26
+PASS: 8  FAIL: 0
+PASS :: census-two-code :: [1, 2, 4, 11, 34, 156] (numpy canonicalization + the W78 pure-python cross-check)
+PASS :: coverage-n5-counted :: covered=30 total=34 uncovered_primes=4 c_floor=1/16
+PASS :: c-floor-n5 :: min c(T) = 1/16 over 30 covered graphs
+PASS :: coverage-n6-counted :: covered=102 total=156 uncovered_primes=26 c_floor=1/20
+PASS :: c-floor-n6 :: min c(T) = 1/20 over 102 covered graphs
+PASS :: canon-method2-spot :: 40/40 self-canonical (adj_canon_key agrees)
+PASS :: coverage-determinism :: 156/156 identical on re-run
+PASS :: negative-control-broken-bank :: broken-bank covered=0 < true covered=102 (the gate discriminates)
+W97_61B_ENGINE_GREEN=1

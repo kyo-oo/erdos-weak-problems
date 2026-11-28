@@ -1,0 +1,18 @@
+==============================================================================
+W97_107A RECEIPTS — THE UPPER-SIDE SHARPENING ENGINE (U-TER FRONT)
+seed=20260497  elapsed=419.2s  python=3.12.16
+==============================================================================
+PASS S0.1-LABELS-DP-BRUTE :: 60 sets, DP == brute (cup,cap ending labels)
+PASS S0.2-ENDPOINT-DP-BRUTE :: 40 sets, exact-endpoint DP == brute (cups and caps)
+PASS S0.3-CPLX :: 700 shared-endpoint cup+cap pairs, ALL convex by BOTH hull codes
+PASS S0.4-SCORE-EQ :: 160 sets: max(g+h) == max convex subset + 2 (two-code convexity)
+FAIL S0.5-PEND :: REFUTED: 72 certified counterexamples to the pendant-sandwich convexity hypothesis (of 72 sandwich unions tested, both hull codes agree) — the TV lane must NOT build on PEND
+PASS S1-LABEL-SUM :: 1704 random + 9 structured no-convex-n sets; slack census: n=4: max(cup+cap)-n=2; n=5: max(cup+cap)-n=2; n=6: max(cup+cap)-n=3
+PASS S2-HILO-CENSUS :: n=5,N=8: hi=3<=4, low-low=5<=6, sum=8<=TVbudget=10; n=6,N=16: hi=2<=15, low-low=14<=20, sum=16<=TVbudget=35; n=7,N=32: hi=2<=56, low-low=30<=70, sum=32<=TVbudget=126 [census only — no claim on the charges]
+PASS S3.TV-INSTANCE-n5 :: 300 random 11-point sets, convex-5 always (two codes); TV(5)=11
+PASS S3.TV-INSTANCE-n6 :: 40 random 36-point sets, convex-6 always (two codes); TV(6)=36
+PASS S4-CLASS-CENSUS :: n=5: L-MLT(b) violations=0, classes with i+j>=n+2: 2, max(i+j)=7; n=6: L-MLT(b) violations=0, classes with i+j>=n+2: 3, max(i+j)=8; n=7: L-MLT(b) violations=0, classes with i+j>=n+2: 4, max(i+j)=9
+PASS S5-NEG-CONTROLS :: corruptions rejected; order-invariance of labels
+PASS S6-BINOM-TABLE :: n=4: ES=7, TV=4 (gain 3), UBIS=16; n=5: ES=21, TV=11 (gain 10), UBIS=64; n=6: ES=71, TV=36 (gain 35), UBIS=244; n=7: ES=253, TV=127 (gain 126), UBIS=914; n=8: ES=925, TV=463 (gain 462), UBIS=3420; n=9: ES=3433, TV=1717 (gain 1716), UBIS=12856; n=10: ES=12871, TV=6436 (gain 6435), UBIS=48604; n=11: ES=48621, TV=24311 (gain 24310), UBIS=184738; n=12: ES=184757, TV=92379 (gain 92378), UBIS=705412
+------------------------------------------------------------------------------
+VERDICT: RED  (11/12)
