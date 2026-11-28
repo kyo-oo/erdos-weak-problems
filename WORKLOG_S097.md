@@ -134,3 +134,46 @@ deep rungs. The next assault has its exact machine shape.
 | FinalAssembly406 | first green compile (the ratchet converges) | infra |
 
 The engine never stops; it never lies. In English, always.
+
+---
+
+## §6 THE CI WAR RECORD (the receipt-decode loop — four waves to green)
+
+The kernel's first exposure: 17 errors. The ledger: **17 → 3 → 1 → 0** across
+four repair waves, every fix receipt-decoded from the CI logs (the S095
+discipline). Run 46091762756 at 4cd68cb: **kernel-406cascade GREEN —
+CASCADE RECEIPTS: 20/20, every theorem's axiom print
+[propext, Classical.choice, Quot.sound] (the classical three ONLY, zero
+sorryAx), the battery gate ALL GREEN inside CI itself.**
+
+**THE NEW LESSONS (minted from the receipts):**
+
+- **L94 (THE TRAVERSAL-ORDER REWRITE TRAP):** an unpinned rewrite whose
+  pattern matches MULTIPLE subterms instantiates on the FIRST match in
+  traversal order — `rw [sum_range_succ_first]` on a goal carrying
+  `range (i+1)` sums before the target `range (i+2)` sum rewrote the
+  WRONG sum and left `simp` with "no progress". PIN THE INSTANTIATION:
+  every ambiguous call site now passes (f, n) explicitly.
+- **L95 (THE LEFT-TO-RIGHT ELABORATION OMEGA TRAP):** a `(by omega)`
+  passed as a lemma argument elaborates BEFORE the expected type is
+  unified — it sees `?m ≤ ?n` with metavariables and fails with a
+  ?m/?n counterexample EVEN under a `have` ascription (the `simpa using`
+  variant blocks propagation completely). THE KILL: prove the bound
+  from scratch (two `pow_succ` peels + `Nat.pow_pos` + omega) — zero
+  lemma-argument lotteries.
+- **L96 (THE DOUBLE-MUL_MOD RE-MATCH TRAP):** `rw [Nat.add_mod]` twice
+  on `(x + y) % m` re-matches its OWN output (still an `(a+b) % m`
+  shape), producing the `% m % m` doubling. The same for unpinned
+  `Nat.mul_mod` on `(S % X) * 3`. PIN THE ARGUMENTS or state the
+  instantiated equation as a `have`.
+- **L97 (THE RECEIPT-PATTERN LAW):** when a rewrite fails, the receipt
+  PRINTS the lemma's true pattern (e.g. `Nat.add_mul_mod_self_left :
+  (?x + ?y * ?z) % ?y` — the modulus is the product's LEFT factor).
+  Reshape the term to the printed pattern; never guess the statement.
+
+**THE FINAL STATE:** the parity-lattice cascade theory is OPEN IN LEAN —
+the binomial resolution, the moment tower (all positions, all depths),
+the census rungs, the anti-cascade kills, the rider lattice pins —
+machine-checked, unconditional, the boss's readers only. The CAP(185)
+question now lives inside the minted lattice. The engine never stops;
+it never lies. In English, always.
