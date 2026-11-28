@@ -1,0 +1,95 @@
+
+===== W97_107B_audit.py stage quick 2026-11-28 00:41:45 =====
+[    0.0s] A1: ES package arithmetic re-derivation (fresh code)
+[    0.0s] PASS A1-BINOM — U-table n=3..8 = [3, 7, 21, 71, 253, 925] (two binomial codes agree: True)
+[    0.0s] PASS A1-UBIS — U-BIS values G(n)+1 n=3..7 = [4, 16, 64, 244, 914] (doc: 4,16,64,244,914); double-sum identity 1+sum C(i+j-2,i-1) = C(2n-2,n-1)-2n+3 verified n=3..14 two codes: True
+[    0.0s] PASS A1-DOMINANCE — U-BIS bound >= ES bound at every n=3..40 (U-BIS is the weaker instrument, as the doc states)
+[    0.0s] PASS A1-GAPS — gap(n)=U/L n=3..10 = [1.0, 1.4, 2.33, 4.18, 7.67, 14.23, 26.61, 50.08] (doc S5b: 1.00,1.40,2.33,4.18,7.67,14.23,26.61,50.08)
+[    0.0s] PASS A1-CENTRALBINOM — C(2m,m)^2 (2m+1) <= 16^m and C(2m,m)(2m+1) >= 4^m, m=0..30, two codes (the S5 gap law)
+[    0.0s] A6: Lean static audit of the #107 kernels
+[    0.0s]   DM107_Official.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=True
+[    0.0s]   DM107_Proof_A.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=True
+[    0.0s]   DM107_Proof_B.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=True
+[    0.0s]   DM107_Proof_C.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=True
+[    0.0s]   DM107_Proof_D.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=False
+[    0.0s]   Erdos107.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=True
+[    0.0s]   Erdos107S060.lean: real-sorry=0 axiom-decls=0 kills.yml-wired=True
+[    0.0s]   DM_107.lean: real-sorry=5 axiom-decls=0 kills.yml-wired=False
+[    0.0s] PASS A6-SORRYSCAN — real-code scan (Lean comments stripped): the campaign's OWN 7 files (Official, Proof_A/B/C/D, Erdos107, Erdos107S060) carry zero sorry/admit/native_decide and zero axiom declarations; DM_107.lean's 5 sorries are the VENDORED upstream statements (see A6-VENDORED)
+[    0.0s] PASS A6-VENDORED — DM_107.lean (vendored FC statement, byte-identical twin of deepmind-comparator/DM_107.lean) carries exactly 5 upstream sorries (the open core erdos_107 + the 4 solved variants nonempty/ersz/su/hmpt — the campaign's discharge targets, NOT campaign claims)
+[    0.0s] PASS A6-AXIOMLINES — every headline theorem of every #107 kernel has its #print axioms receipt line in-file
+[    0.0s] PASS A6-CIWIRING — kills.yml wires Official (kernel-fc), A (kernel-dm-w82), B (kernel-107dm-b), C (kernel-dm-w85), Erdos107 (kernel-107k); DM107_Proof_D.lean is wired to NO CI job (defect D-W97-3)
+[    0.0s] PASS A6-OFFICIALMATCH — the official predicate cardSet/f is BYTE-IDENTICAL across the vendored FC statement (DM_107.lean), the spec file (DM107_Official.lean) and the proof kernels A and B (regex-extracted and compared); the vendored twin deepmind-comparator/DM_107.lean is sha256-identical to problem107-happy-ending/DM_107.lean
+[    0.0s] A7: doc-vs-receipt drift scan (the W81-style hunt)
+[    0.0s] PASS A7-DRIFT-1 — ES_PACKAGE_PROOF.md header says '10/10 GREEN' (present: True) while receipts107es.txt says 16/16 PASS (present: True) — STALE COUNT (defect D-W97-1, cosmetic underclaim: the receipts are STRONGER than the header)
+[    0.0s] PASS A7-DRIFT-2 — ALLN_PROOF.md section-7 trailer claims 'receipts107alln.txt (this lane, S1–S9 all GREEN)' (present: True) but the raw receipts say TOTAL: 8/13 PASS / ALLN_ENGINE_GREEN=0 (present: True) — OVERCLAIM (defect D-W97-2; the header discloses the 8/13 honestly, the trailer does not)
+[    0.0s] PASS A7-DRIFT-3 — F5_CERTIFICATE.md: 'Census: 316,802 ... Mirror closure: OK (every type's mirror present)'; receipts107f9.txt certifies mirror closure at census 316,799 (self-mirror 825, identified 158,812) — the final 316,802 = 316,799 + 3 post-closure storm recoveries (defect D-W97-4: closure wording covers a state the receipts certified 3 types earlier)
+[    0.0s] FAIL A7-ARTIFACTS — missing artifacts referenced by the docs/engines: ['engine107f5_cache/f9/f9_census.jsonl', 'engine107f9', 'WORKLOG_W84_107B.md'] (f9_census.jsonl is cited by F5_CERTIFICATE.md and 4 scripts; the C binary engine107f9 is cited by engine107f5v4.py; WORKLOG_W84_107B.md is cited by DM107_Proof_D.lean's header) — defect D-W97-5 (reproducibility)
+[    0.0s] PASS A7-CENSUSFORM — the n=9 census survives in reduced form census_types_n9.jsonl (ck/chi/hull, 316,802 lines) — the driver's check consumes this file; the coordinate realizations (f9_census.jsonl) are the missing piece
+[    0.0s] PASS A7-RERUNS — engine re-runs this wave: engine107es --verify 16/16 (receipts byte-identical); engine107loweralln RED-as-documented (only delta: wall times + S4 hit counts — the S4 stage is wall-clock-bounded, not count-bounded); verify107lower ALL PASS (delta: wall_s only); engine107alln 'all' all-green stage receipts (deltas: randomized counts only); official_gate.py 107 16/16 VERDICT OKAY (delta: timestamp+wall only; NOTE: requires pip install absl-py — on a bare python3 it fails REJECTED)
+[    0.0s] STAGE quick SUMMARY: 15/16 PASS
+
+===== W97_107B_audit.py stage a2 2026-11-28 00:41:48 =====
+[    0.0s] A2: INDEPENDENT X_n construction n=3..10 (fresh code, exact Fractions)
+[   25.1s]   n=3: size 2=2^1, clusters ok, GP=True, no-convex-3=True, transversals 1 convex=False
+[   25.1s]   n=4: size 4=2^2, clusters ok, GP=True, no-convex-4=True, transversals 2 convex=True
+[   25.1s]   n=5: size 8=2^3, clusters ok, GP=True, no-convex-5=True, transversals 9 convex=True
+[   25.1s]   n=6: size 16=2^4, clusters ok, GP=True, no-convex-6=True, transversals 200 convex=True
+[   25.1s]   n=7: size 32=2^5, clusters ok, GP=True, no-convex-7=True, transversals 200 convex=True
+[   25.1s]   n=8: size 64=2^6, clusters ok, GP=True, no-convex-8=True, transversals 200 convex=True
+[   25.1s]   n=9: size 128=2^7, clusters ok, GP=True, no-convex-9=True, transversals 200 convex=True
+[   25.1s]   n=10: size 256=2^8, clusters ok, GP=True, no-convex-10=True, transversals 200 convex=True
+[   25.1s] PASS A2-SIZES — |X_n| = 2^(n-2) and cluster sizes C(m,i) and point-distinctness hold for n=3..10 (fresh construction)
+[   25.1s] PASS A2-GP — X_n is in general position (exact orientation scan, no banked engine), n=3..10
+[   25.1s] PASS A2-NOCONVEXN — no n points in convex position: EXHAUSTIVE both-code subset scan n<=6 (2,1,56,8008 subsets), randomized+greedy hillclimb n=7..10 (fresh code)
+[   25.1s] FAIL A2-WITNESS — the (n-1)-transversal convex witness: ALL transversals convex n<=5 (1,2,9,76), 200 random transversals each n=6..10
+[   25.1s] PASS A2-LEMMAE — Lemma E fresh: E(a,b) sizes C(a+b-4,a-2), GP, all pairwise slopes in (0,delta], max cup = a-1, max cap = b-1 (own DP + brute cross-check) for (a,b) in {33,34,43,44,35,53,45,54,55}
+[   25.1s] STAGE a2 SUMMARY: 4/5 PASS
+
+===== W97_107B_audit.py stage a2 2026-11-28 00:42:23 =====
+[    0.0s] A2: INDEPENDENT X_n construction n=3..10 (fresh code, exact Fractions)
+[   24.9s]   n=3: size 2=2^1, clusters ok, GP=True, no-convex-3=True, transversals 1 convex=True
+[   24.9s]   n=4: size 4=2^2, clusters ok, GP=True, no-convex-4=True, transversals 2 convex=True
+[   24.9s]   n=5: size 8=2^3, clusters ok, GP=True, no-convex-5=True, transversals 9 convex=True
+[   24.9s]   n=6: size 16=2^4, clusters ok, GP=True, no-convex-6=True, transversals 200 convex=True
+[   24.9s]   n=7: size 32=2^5, clusters ok, GP=True, no-convex-7=True, transversals 200 convex=True
+[   24.9s]   n=8: size 64=2^6, clusters ok, GP=True, no-convex-8=True, transversals 200 convex=True
+[   24.9s]   n=9: size 128=2^7, clusters ok, GP=True, no-convex-9=True, transversals 200 convex=True
+[   24.9s]   n=10: size 256=2^8, clusters ok, GP=True, no-convex-10=True, transversals 200 convex=True
+[   24.9s] PASS A2-SIZES — |X_n| = 2^(n-2) and cluster sizes C(m,i) and point-distinctness hold for n=3..10 (fresh construction)
+[   24.9s] PASS A2-GP — X_n is in general position (exact orientation scan, no banked engine), n=3..10
+[   24.9s] PASS A2-NOCONVEXN — no n points in convex position: EXHAUSTIVE both-code subset scan n<=6 (2,1,56,8008 subsets), randomized+greedy hillclimb n=7..10 (fresh code)
+[   24.9s] PASS A2-WITNESS — the (n-1)-transversal convex witness: ALL transversals convex n<=5 (1,2,9,76), 200 random transversals each n=6..10
+[   24.9s] PASS A2-LEMMAE — Lemma E fresh: E(a,b) sizes C(a+b-4,a-2), GP, all pairwise slopes in (0,delta], max cup = a-1, max cap = b-1 (own DP + brute cross-check) for (a,b) in {33,34,43,44,35,53,45,54,55}
+[   24.9s] STAGE a2 SUMMARY: 5/5 PASS
+
+===== W97_107B_audit.py stage a3 2026-11-28 00:42:48 =====
+[    0.0s] A3: slope-separation algebra (ES_SANDWICH_ALLN section 1), exact
+[    0.2s]   n=3: max_intra=0.000000<=s=0.031250, min_|inter|=inf, clean=1/(1+38rho)=0.9988, verts=1
+[    0.2s]   n=4: max_intra=0.015625<=s=0.020833, min_|inter|=1.9998, clean=1/(1+38rho)=0.9994, verts=1
+[    0.2s]   n=5: max_intra=0.012835<=s=0.015625, min_|inter|=1.4999, clean=1/(1+38rho)=0.9996, verts=3
+[    0.2s]   n=6: max_intra=0.010436<=s=0.012500, min_|inter|=1.3333, clean=1/(1+38rho)=0.9997, verts=3
+[    0.2s]   n=7: max_intra=0.008715<=s=0.010417, min_|inter|=1.25, clean=1/(1+38rho)=0.9998, verts=9
+[    0.2s]   n=8: max_intra=0.007473<=s=0.008929, min_|inter|=1.2, clean=1/(1+38rho)=0.9998, verts=9
+[    0.2s]   n=9: max_intra=0.006539<=s=0.007812, min_|inter|=1.1666, clean=1/(1+38rho)=0.9998, verts=29
+[    0.2s]   n=10: max_intra=0.005812<=s=0.006944, min_|inter|=1.1428, clean=1/(1+38rho)=0.9999, verts=29
+[    0.2s] PASS A3-SEPARATION — the load-bearing law measured fresh: intra <= s < 1/2 < 1/(1+38rho) <= |inter| (vertical pairs counted separately) at every n=3..10
+[    0.2s] PASS A3-ALGEBRA — the section-1 display re-derived exactly: (1-(19/6)srho/d)(1+38rho)-(1+(19/4)rho/d) = rho[38-19/(4d)-19s/(6d)-361srho/(3d)] (identity holds), bracket at worst case = 33.1509 > 33, and the slope ratio >= 1/(1+38rho) (all exact Fractions)
+[    0.2s] STAGE a3 SUMMARY: 2/2 PASS
+
+===== W97_107B_audit.py stage a4 2026-11-28 00:42:53 =====
+[    0.0s] A4: F5 lane part 1 — the 6405 bank by MY OWN two coordinate codes
+[    7.4s] PASS A4-BANK — bank loads with 6405 reflection-distinguished 8-point types (6405)
+[    7.4s] FAIL A4-F8 — F8 recount by own codes: 146 convex-5-free 8-types (doc: 146), all hull-3: False
+[    7.4s] PASS A4-HULLCENSUS — bank hull census {3: 2296, 4: 2862, 5: 1081, 6: 156, 7: 9, 8: 1} (doc receipts: {3: 2296, 4: 2862, 5: 1081, 6: 156, 7: 9, 8: 1})
+[    7.4s] FAIL A4-CONTROLS — own-code negative controls: square convex, square+center not, triangle+interior not, planted 5th hull vertex gives convex 5, collinear triple flagged
+[    7.4s] STAGE a4 SUMMARY: 2/4 PASS
+
+===== W97_107B_audit.py stage a4 2026-11-28 00:47:09 =====
+[    0.0s] A4: F5 lane part 1 — the 6405 bank by MY OWN two coordinate codes
+[    8.5s] PASS A4-BANK — bank loads with 6405 reflection-distinguished 8-point types (6405)
+[    8.5s] PASS A4-F8 — F8 recount by own coordinate codes (gift-wrap + monotone chain): 146 convex-5-free 8-types (doc: 146); SET EQUALITY with the banked chi-methods A/B: True
+[    8.5s] FAIL A4-F8-HULLCLAIM — F5_CERTIFICATE.md's '(F8 ... all hull-3)' is FALSE: the true F8 hull histogram is {3: 119, 4: 27} — 27 of the 146 F8 types have hull 4 (verified by 3 codes: monotone chain, gift-wrap, pure extremality; the claim is also hard-coded, uncomputed, in driver.py's S-F5-W81 detail string). NOT load-bearing: f8_battery.py provably enumerated all 146 parents without a hull filter — defect D-W97-6)
+[    8.5s] PASS A4-HULLCENSUS — bank hull census {3: 2296, 4: 2862, 5: 1081, 6: 156, 7: 9, 8: 1} (doc receipts: {3: 2296, 4: 2862, 5: 1081, 6: 156, 7: 9, 8: 1})
+[    8.5s] PASS A4-CONTROLS — own-code negative controls: square convex, square+center not, triangle+interior not, planted 5th hull vertex gives convex 5, collinear triple flagged
+[    8.5s] STAGE a4 SUMMARY: 4/5 PASS
