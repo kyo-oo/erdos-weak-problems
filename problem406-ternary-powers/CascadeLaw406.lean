@@ -262,19 +262,20 @@ theorem three_pow_mod_two_pow (i t : Nat) :
           have hcarry : 3 * (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k)
               = (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k)
                   + 2 * (∑ k ∈ Finset.range (t'' + 1), Nat.choose j k * 2 ^ k)
-                  + Nat.choose j (t'' + 1) * 2 ^ (t'' + 1 + 1) := by
+                  + 2 ^ (t'' + 1 + 1) * Nat.choose j (t'' + 1) := by
             rw [hApeel, Nat.pow_succ]
             ring
-          have h4 : 4 ≤ 2 ^ (t'' + 1 + 1) := by
-            simpa using Nat.pow_le_pow_of_le (by decide : 1 < (2:Nat)) (by omega)
+          have h4 : 4 ≤ 2 ^ (t'' + 1 + 1) :=
+            Nat.pow_le_pow_of_le (by decide : 1 < (2:Nat)) (by omega)
           have h3mod : 3 % 2 ^ (t'' + 1 + 1) = 3 :=
             Nat.mod_eq_of_lt (Nat.lt_of_lt_of_le (by decide : 3 < 4) h4)
           have hlhs : 3 ^ (j + 1) % 2 ^ (t'' + 1 + 1)
               = (3 * (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k))
                   % 2 ^ (t'' + 1 + 1) := by
-            rw [Nat.pow_succ, Nat.mul_mod, ih, h3mod,
+            rw [Nat.pow_succ, Nat.mul_mod (3 ^ j) 3 (2 ^ (t'' + 1 + 1)), ih, h3mod,
               Nat.mul_comm 3 (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k),
-              Nat.mul_mod, h3mod]
+              Nat.mul_mod (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k) 3
+                (2 ^ (t'' + 1 + 1)), h3mod]
           rw [hRewrite, hlhs, hcarry, Nat.add_mul_mod_self_left]
 
 /-- **THE MOMENT TOWER.**  For every position list `S` and every depth
