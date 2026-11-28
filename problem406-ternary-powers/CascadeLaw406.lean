@@ -265,8 +265,13 @@ theorem three_pow_mod_two_pow (i t : Nat) :
                   + 2 ^ (t'' + 1 + 1) * Nat.choose j (t'' + 1) := by
             rw [hApeel, Nat.pow_succ]
             ring
-          have h4 : 4 ≤ 2 ^ (t'' + 1 + 1) :=
-            Nat.pow_le_pow_of_le (by decide : 1 < (2:Nat)) (by omega)
+          have h4 : 4 ≤ 2 ^ (t'' + 1 + 1) := by
+            have hpow : 2 ^ (t'' + 1 + 1) = 4 * 2 ^ t'' := by
+              rw [Nat.pow_succ, Nat.pow_succ]
+              ring
+            have hpos : 0 < 2 ^ t'' := Nat.pow_pos (by decide : 0 < (2:Nat))
+            rw [hpow]
+            omega
           have h3mod : 3 % 2 ^ (t'' + 1 + 1) = 3 :=
             Nat.mod_eq_of_lt (Nat.lt_of_lt_of_le (by decide : 3 < 4) h4)
           have hlhs : 3 ^ (j + 1) % 2 ^ (t'' + 1 + 1)
