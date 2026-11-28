@@ -163,16 +163,17 @@ theorem three_pow_eq_sum_choose (i : Nat) :
           = Nat.choose (i + 1) 0 * 2 ^ 0
               + ∑ k ∈ Finset.range (i + 1),
                   Nat.choose (i + 1) (k + 1) * 2 ^ (k + 1) := by
-            rw [sum_range_succ_first]
+            rw [sum_range_succ_first (fun k => Nat.choose (i + 1) k * 2 ^ k) (i + 1)]
       _ = 1 + (∑ k ∈ Finset.range (i + 1), Nat.choose i (k + 1) * 2 ^ (k + 1))
               + (∑ k ∈ Finset.range (i + 1), Nat.choose i k * 2 ^ (k + 1)) := by
             rw [hzero, Finset.sum_congr rfl hpascal, Finset.sum_add_distrib]
+            ring
       _ = 1 + (∑ k ∈ Finset.range (i + 1), Nat.choose i (k + 1) * 2 ^ (k + 1))
               + 2 * (∑ k ∈ Finset.range (i + 1), Nat.choose i k * 2 ^ k) := by
             rw [Finset.sum_congr rfl hshift, ← Finset.mul_sum]
       _ = (∑ k ∈ Finset.range (i + 2), Nat.choose i k * 2 ^ k)
               + 2 * (∑ k ∈ Finset.range (i + 1), Nat.choose i k * 2 ^ k) := by
-            rw [sum_range_succ_first]
+            rw [sum_range_succ_first (fun k => Nat.choose i k * 2 ^ k) (i + 1)]
             simp only [Nat.choose_zero_right, Nat.pow_zero, Nat.one_mul]
       _ = (∑ k ∈ Finset.range (i + 1), Nat.choose i k * 2 ^ k)
               + 2 * (∑ k ∈ Finset.range (i + 1), Nat.choose i k * 2 ^ k) := by
@@ -186,18 +187,18 @@ theorem three_pow_eq_sum_choose (i : Nat) :
 theorem three_pow_mod_two (i : Nat) : 3 ^ i % 2 = 1 := by
   induction i with
   | zero => rfl
-  | succ i ih => rw [Nat.pow_succ, Nat.mul_mod, ih]; norm_num
+  | succ i ih => rw [Nat.pow_succ, Nat.mul_mod, ih]
 
 /-- **THE PER-POSITION TOWER.**  For every position `i` and depth `t`:
 `3^i ≡ Σ_{k<t} C(i,k) 2^k (mod 2^t)` — the truncated binomial resolution. -/
 theorem three_pow_mod_two_pow (i t : Nat) :
     3 ^ i % 2 ^ t = (∑ k ∈ Finset.range t, Nat.choose i k * 2 ^ k) % 2 ^ t := by
   rcases t with _ | t
-  · simp
+  · simp [Nat.mod_one]
   · rcases t with _ | t''
     · rw [Finset.sum_range_succ, Finset.range_zero, Finset.sum_empty,
-        Nat.add_zero, Nat.choose_zero_right, Nat.pow_zero, Nat.one_mul,
-        three_pow_mod_two]
+        Nat.zero_add, Nat.choose_zero_right, Nat.pow_zero, Nat.one_mul,
+        Nat.pow_one, three_pow_mod_two]
       norm_num
     · -- the deep case: depth t'' + 1 + 1 ≥ 2, induction on the position
       suffices h : ∀ j : Nat, 3 ^ j % 2 ^ (t'' + 1 + 1)
@@ -213,11 +214,13 @@ theorem three_pow_mod_two_pow (i t : Nat) :
             rcases Nat.eq_zero_or_pos k with h0 | h0
             · rw [h0, Nat.choose_zero_right, Nat.pow_zero, Nat.one_mul,
                 if_pos rfl]
-            · rw [Nat.choose_eq_zero_of_lt h0, Nat.zero_mul, if_neg h0]
+            · rw [Nat.choose_eq_zero_of_lt h0, Nat.zero_mul,
+                if_neg (by omega : ¬ k = 0)]
           rw [Finset.sum_congr rfl hvan]
           have hsum : (∑ k ∈ Finset.range (t'' + 1 + 1),
               (if k = 0 then 1 else 0)) = 1 := by
-            rw [sum_range_succ_first]
+            rw [sum_range_succ_first (fun k => if k = 0 then (1:Nat) else 0)
+              (t'' + 1)]
             simp
           rw [hsum]
           simp only [Nat.pow_zero]
@@ -226,7 +229,8 @@ theorem three_pow_mod_two_pow (i t : Nat) :
           have hA : ∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose (j + 1) k * 2 ^ k
               = 1 + (∑ k ∈ Finset.range (t'' + 1), Nat.choose j (k + 1) * 2 ^ (k + 1))
                   + 2 * (∑ k ∈ Finset.range (t'' + 1), Nat.choose j k * 2 ^ k) := by
-            rw [sum_range_succ_first]
+            rw [sum_range_succ_first
+              (fun k => Nat.choose (j + 1) k * 2 ^ k) (t'' + 1)]
             simp only [Nat.choose_zero_right, Nat.pow_zero, Nat.one_mul]
             have hpascal : ∀ k ∈ Finset.range (t'' + 1),
                 Nat.choose (j + 1) (k + 1) * 2 ^ (k + 1)
@@ -242,13 +246,14 @@ theorem three_pow_mod_two_pow (i t : Nat) :
               ring
             rw [Finset.sum_congr rfl hpascal, Finset.sum_add_distrib,
               Finset.sum_congr rfl hshift, ← Finset.mul_sum]
+            ring
           have hApeel : ∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k
               = (∑ k ∈ Finset.range (t'' + 1), Nat.choose j k * 2 ^ k)
                   + Nat.choose j (t'' + 1) * 2 ^ (t'' + 1) := by
             rw [Finset.sum_range_succ]
           have hAfirst : (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k)
               = 1 + (∑ k ∈ Finset.range (t'' + 1), Nat.choose j (k + 1) * 2 ^ (k + 1)) := by
-            rw [sum_range_succ_first]
+            rw [sum_range_succ_first (fun k => Nat.choose j k * 2 ^ k) (t'' + 1)]
             simp only [Nat.choose_zero_right, Nat.pow_zero, Nat.one_mul]
           have hRewrite : (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose (j + 1) k * 2 ^ k)
               = (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k)
@@ -260,9 +265,10 @@ theorem three_pow_mod_two_pow (i t : Nat) :
                   + Nat.choose j (t'' + 1) * 2 ^ (t'' + 1 + 1) := by
             rw [hApeel, Nat.pow_succ]
             ring
-          have h4 : 4 ≤ 2 ^ (t'' + 1 + 1) :=
-            Nat.pow_le_pow_of_le (by decide : 1 < (2:Nat)) (by omega)
-          have h3mod : 3 % 2 ^ (t'' + 1 + 1) = 3 := by omega
+          have h4 : 4 ≤ 2 ^ (t'' + 1 + 1) := by
+            simpa using Nat.pow_le_pow_of_le (by decide : 1 < (2:Nat)) (by omega)
+          have h3mod : 3 % 2 ^ (t'' + 1 + 1) = 3 :=
+            Nat.mod_eq_of_lt (Nat.lt_of_lt_of_le (by decide : 3 < 4) h4)
           have hlhs : 3 ^ (j + 1) % 2 ^ (t'' + 1 + 1)
               = (3 * (∑ k ∈ Finset.range (t'' + 1 + 1), Nat.choose j k * 2 ^ k))
                   % 2 ^ (t'' + 1 + 1) := by
@@ -284,7 +290,17 @@ theorem moment_tower (l : List Nat) (t : Nat) :
   | nil => simp
   | cons a l ih =>
       simp only [List.map_cons, List.sum_cons]
-      rw [Nat.add_mod, Nat.add_mod, three_pow_mod_two_pow, ih]
+      have h1 : (3 ^ a + (List.map (fun i => 3 ^ i) l).sum) % 2 ^ t
+          = (3 ^ a % 2 ^ t + (List.map (fun i => 3 ^ i) l).sum % 2 ^ t) % 2 ^ t :=
+        Nat.add_mod _ _ _
+      have h2 : ((∑ k ∈ Finset.range t, Nat.choose a k * 2 ^ k)
+            + (List.map (fun i => ∑ k ∈ Finset.range t, Nat.choose i k * 2 ^ k) l).sum)
+            % 2 ^ t
+          = ((∑ k ∈ Finset.range t, Nat.choose a k * 2 ^ k) % 2 ^ t
+            + (List.map (fun i => ∑ k ∈ Finset.range t, Nat.choose i k * 2 ^ k) l).sum
+                % 2 ^ t) % 2 ^ t :=
+        Nat.add_mod _ _ _
+      rw [h1, h2, three_pow_mod_two_pow, ih]
 
 /-! ## §3 The census rungs — the tower unfolded at depths 2, 3, 4 -/
 
@@ -294,7 +310,7 @@ theorem bridge_two (i : Nat) :
   rw [Finset.sum_range_succ, Finset.sum_range_succ, Finset.range_zero,
     Finset.sum_empty, Nat.zero_add, Nat.choose_zero_right,
     Nat.choose_one_right]
-  norm_num
+  ring
 
 /-- **THE MOD-EIGHT RUNG** (single position). -/
 theorem bridge_three (i : Nat) :
@@ -303,7 +319,7 @@ theorem bridge_three (i : Nat) :
   rw [Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,
     Finset.range_zero, Finset.sum_empty, Nat.zero_add,
     Nat.choose_zero_right, Nat.choose_one_right]
-  norm_num
+  ring
 
 /-- **THE MOD-SIXTEEN RUNG** (single position). -/
 theorem bridge_four (i : Nat) :
@@ -312,7 +328,7 @@ theorem bridge_four (i : Nat) :
   rw [Finset.sum_range_succ, Finset.sum_range_succ, Finset.sum_range_succ,
     Finset.sum_range_succ, Finset.range_zero, Finset.sum_empty,
     Nat.zero_add, Nat.choose_zero_right, Nat.choose_one_right]
-  norm_num
+  ring
 
 /-- The mod-4 census rung, list form. -/
 theorem list_bridge_two (l : List Nat) :
@@ -426,7 +442,7 @@ theorem rider_census_pin_two (K : Nat) (l : List Nat)
     (hl : (l.map (fun i => 3 ^ i)).sum = 4 ^ K) (hK : 1 ≤ K) :
     (l.length + 2 * l.sum) % 4 = 0 := by
   have hpin := rider_moment_pin K l hl 2 (by omega)
-  rw [← list_bridge_two] at hpin
+  rw [list_bridge_two] at hpin
   exact hpin
 
 /-- **THE MOD-EIGHT RIDER PIN.**  Every rider `K ≥ 2` obeys
@@ -435,7 +451,7 @@ theorem rider_census_pin_three (K : Nat) (l : List Nat)
     (hl : (l.map (fun i => 3 ^ i)).sum = 4 ^ K) (hK : 2 ≤ K) :
     (l.length + 2 * l.sum + 4 * (l.map (fun i => Nat.choose i 2)).sum) % 8 = 0 := by
   have hpin := rider_moment_pin K l hl 3 (by omega)
-  rw [← list_bridge_three] at hpin
+  rw [list_bridge_three] at hpin
   exact hpin
 
 /-- **THE MOD-SIXTEEN RIDER PIN.**  Every rider `K ≥ 2` obeys
@@ -445,7 +461,7 @@ theorem rider_census_pin_four (K : Nat) (l : List Nat)
     (l.length + 2 * l.sum + 4 * (l.map (fun i => Nat.choose i 2)).sum
         + 8 * (l.map (fun i => Nat.choose i 3)).sum) % 16 = 0 := by
   have hpin := rider_moment_pin K l hl 4 (by omega)
-  rw [← list_bridge_four] at hpin
+  rw [list_bridge_four] at hpin
   exact hpin
 
 /-! ## §6 The receipts -/
